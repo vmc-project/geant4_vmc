@@ -1,4 +1,4 @@
-// $Id: Ex01MCApplication.cxx,v 1.7 2003/09/27 09:32:47 brun Exp $
+// $Id: Ex01MCApplication.cxx,v 1.8 2003/12/18 13:26:46 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -253,8 +253,9 @@ void Ex01MCApplication::ConstructVolumes()
   expHall[0] = 300.;
   expHall[1] = 100.;
   expHall[2] = 100.;
-  gGeoManager->Volume("EXPH","BOX", fImedAr, expHall, 3);
- 
+  TGeoVolume *top = gGeoManager->Volume("EXPH","BOX", fImedAr, expHall, 3);
+  gGeoManager->SetTopVolume(top);
+   
   //------------------------------ a tracker tube
 
   Double_t trackerTube[3];
@@ -295,7 +296,10 @@ void Ex01MCApplication::ConstructVolumes()
     posZ = 0.;
     gGeoManager->Node("LAYB", i ,"CALB", posX, posY, posZ, 0, kFALSE, ubuf);
   }  
-  
+
+  // close geometry
+  gGeoManager->CloseGeometry();
+    
   // notify VMC about Root geometry
   gMC->SetRootGeometry();
 }
