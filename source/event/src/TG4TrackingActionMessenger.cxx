@@ -1,4 +1,4 @@
-// $Id: TG4TrackingActionMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4TrackingActionMessenger.cxx,v 1.2 2002/12/18 09:35:31 brun Exp $
 // Category: event
 //
 // Author: I. Hrivnacova
@@ -13,11 +13,13 @@
 
 #include <G4UIdirectory.hh>
 #include <G4UIcmdWithAnInteger.hh>
+#include <G4UIcmdWithABool.hh>
 
 //_____________________________________________________________________________
 TG4TrackingActionMessenger::TG4TrackingActionMessenger(
                                TG4TrackingAction* trackingAction)
-  :fTrackingAction(trackingAction)
+  : G4UImessenger(),
+    fTrackingAction(trackingAction)
 {
 // 
   fTrackingDirectory = new G4UIdirectory("/mcTracking/");
@@ -37,10 +39,22 @@ TG4TrackingActionMessenger::TG4TrackingActionMessenger(
   fNewVerboseTrackCmd->SetParameterName("NewVerboseLevelTrackID", false);
   fNewVerboseTrackCmd->SetRange("NewVerboseLevelTrackID >= 0");
   fNewVerboseTrackCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+
+  fSaveSecondariesCmd = new G4UIcmdWithABool("/mcTracking/saveSecondaries", this);
+  fSaveSecondariesCmd->SetGuidance("Option to save secondaries in the stack");
+  fSaveSecondariesCmd->SetParameterName("SaveSecondaries", false);
+  fSaveSecondariesCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 }
 
 //_____________________________________________________________________________
-TG4TrackingActionMessenger::TG4TrackingActionMessenger() {
+TG4TrackingActionMessenger::TG4TrackingActionMessenger() 
+  : G4UImessenger(),
+    fTrackingAction(0),
+    fTrackingDirectory(0),
+    fNewVerboseCmd(0),
+    fNewVerboseTrackCmd(0),
+    fSaveSecondariesCmd(0)    
+{
 //
 }
 
@@ -58,6 +72,7 @@ TG4TrackingActionMessenger::~TG4TrackingActionMessenger() {
   delete fTrackingDirectory;
   delete fNewVerboseCmd;
   delete fNewVerboseTrackCmd;
+  delete fSaveSecondariesCmd;
 }
 
 // operators
@@ -91,5 +106,9 @@ void TG4TrackingActionMessenger::SetNewValue(G4UIcommand* command,
   else if(command == fNewVerboseTrackCmd) { 
     fTrackingAction
       ->SetNewVerboseTrackID(fNewVerboseTrackCmd->GetNewIntValue(newValue)); 
+  }   
+  else if(command == fSaveSecondariesCmd) { 
+    fTrackingAction
+      ->SetSaveSecondaries(fSaveSecondariesCmd->GetNewBoolValue(newValue)); 
   }   
 }
