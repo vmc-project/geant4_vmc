@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.1 2003/07/22 06:46:57 brun Exp $
+# $Id: Makefile,v 1.2 2003/10/03 10:51:51 brun Exp $
 #
 # Makefile for building all examples
 
@@ -13,6 +13,9 @@ default:
 
 includes:
 	@for dir in $(SUBDIRS); do (cd $$dir && $(MAKE) make_includes); done;
+	
+static:
+	@for dir in $(SUBDIRS); do (cd $$dir && $(MAKE) static); done;
 
 clean:
 	@for dir in $(SUBDIRS); do (cd $$dir && $(MAKE) clean); done;

@@ -1,4 +1,4 @@
-# $Id: MakeMacros,v 1.4 2002/11/13 13:36:08 brun Exp $
+# $Id: MakeMacros,v 1.5 2003/10/03 10:51:51 brun Exp $
 
 ############################   MACROS   #######################################
 
@@ -31,7 +31,16 @@ $(ALIBRARY):
 		@echo "Generating $@"
 		@[ -d $(dir $@) ] || mkdir -p $(dir $@)
 		@rm -f $@
-		@ar rv $@ $^
+		@-rm -rf tmp
+		@mkdir tmp
+		@cd tmp ; find $(BINDIR) -name '*.o' -exec ln -s {} . \;
+                ifeq ($(PLATFORM),aix)
+		  @ar rv $@ $^
+                else
+		  @cd tmp; ar rv $@ $(notdir $^) ;\:
+                endif
+		@chmod 555 $@
+		@-rm -rf tmp
 		
 make_includes:
 	@echo "Making includes ..."

@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.9 2003/09/26 10:22:07 brun Exp $
+# $Id: Makefile,v 1.10 2003/10/03 10:51:51 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
@@ -151,12 +151,15 @@ ALIBRARY	= $(LIBDIR)/lib$(PACKAGE).a
 default:	depend convertors $(SLIBRARY)
 all:		default includes
 includes:       clean_includes make_includes convertors_includes
+static: 	convertors_static $(ALIBRARY) 
 
 convertors:    
 		@for dir in $(CONDIR); do (cd $$dir && $(MAKE)); done;
 
 convertors_includes:    
 		@for dir in $(CONDIR); do (cd $$dir && $(MAKE) includes); done;
+convertors_static:    
+		@for dir in $(CONDIR); do (cd $$dir && $(MAKE) static); done;
 
 
 $(LIBDIR)/lib$(PACKAGE).$(SL):  $(OBJS)
