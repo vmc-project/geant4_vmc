@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.cxx,v 1.2 2003/02/26 13:39:32 brun Exp $
+// $Id: TG4TrackingAction.cxx,v 1.3 2003/03/07 17:21:49 brun Exp $
 // Category: event
 //
 // Author: I.Hrivnacova
@@ -400,7 +400,7 @@ void TG4TrackingAction::TrackToStack(const G4Track* track)
   
   G4int ntr;
   // create particle 
-  gMC->GetStack()->SetTrack(1, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
+  gMC->GetStack()->PushTrack(1, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
                             polX, polY, polZ, mcProcess, ntr, weight, status);  
                    
 }

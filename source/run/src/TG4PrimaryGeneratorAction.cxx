@@ -1,4 +1,4 @@
-// $Id: TG4PrimaryGeneratorAction.cxx,v 1.2 2002/09/04 15:02:45 ivana Exp $
+// $Id: TG4PrimaryGeneratorAction.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -67,7 +67,7 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
   for (G4int i=0; i<nofParticles; i++) {    
   
     // get the particle from the stack
-    TParticle* particle = stack->GetPrimaryForTracking(i);
+    TParticle* particle = stack->PopPrimaryForTracking(i);
     
     if (particle) {
       // only particles that didn't die (decay) in primary generator
