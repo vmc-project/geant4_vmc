@@ -1,6 +1,6 @@
-// $Id: g3Config.C,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+// $Id: g3Config.C,v 1.2 2002/10/05 07:28:54 brun Exp $
 //
-// Configuration macro for Geant3 VirtualMC for Example01 
+// Configuration macro for Geant3 VirtualMC for Example02 
 
 void Config()
 {

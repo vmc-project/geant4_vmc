@@ -1,6 +1,6 @@
-// $Id: $
+// $Id: g4Config.C,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
-// Configuration macro for Geant4 VirtualMC for Example01
+// Configuration macro for Geant4 VirtualMC for Example02
 
 void Config()
 {
