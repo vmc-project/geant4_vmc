@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.cxx,v 1.2 2002/07/31 16:06:01 ivana Exp $
+// $Id: TG4DetConstruction.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -81,16 +81,16 @@ void TG4DetConstruction::CreateMagneticField()
   
     case kMCApplicationField:
       fMagneticField = new TG4MagneticField();
-      G4cout << "kMCApplicationField" << endl;
+      G4cout << "kMCApplicationField" << G4endl;
       break;
 
     case kUniformField:
       fMagneticField = new TG4UniformMagneticField();
-      G4cout << "kUniformField" << endl;
+      G4cout << "kUniformField" << G4endl;
       break;
       
     case kNoField:
-      G4cout << "kNoField" << endl;
+      G4cout << "kNoField" << G4endl;
       ;;
   }  
 }
