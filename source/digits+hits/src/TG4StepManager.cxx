@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4StepManager.cxx,v 1.2 2003/01/08 08:27:38 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -189,7 +189,6 @@ void TG4StepManager::StopEvent()
   fTrack->SetTrackStatus(fKillTrackAndSecondaries);
           //StopTrack();   // cannot be used as it keeps secondaries
   G4UImanager::GetUIpointer()->ApplyCommand("/event/abort");
-  G4UImanager::GetUIpointer()->ApplyCommand("/alStacking/clearStack");
 }
 
 //_____________________________________________________________________________
