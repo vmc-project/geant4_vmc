@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.cxx,v 1.5 2003/09/23 14:22:56 brun Exp $
+// $Id: TG4TrackingAction.cxx,v 1.6 2003/12/18 13:28:08 brun Exp $
 // Category: event
 //
 // Author: I.Hrivnacova
@@ -267,6 +267,11 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
 // Called by G4 kernel before starting tracking.
 // ---
 
+  // finish previous primary track first
+  if (track->GetParentID() == 0) {  
+    FinishPrimaryTrack();
+  }  
+
   // set step manager status
   TG4StepManager* stepManager = TG4StepManager::Instance();
   stepManager->SetStep((G4Track*)track, kVertex);
@@ -275,10 +280,7 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
   SetTrackInformation(track);
 
   if (track->GetParentID() == 0) {  
-    // finish previous primary track
-    FinishPrimaryTrack();
     fPrimaryTrackID = track->GetTrackID();
-    
     // begin this primary track
     TVirtualMCApplication::Instance()->BeginPrimary();
   }
@@ -333,6 +335,12 @@ void TG4TrackingAction::FinishPrimaryTrack()
 
   if (fPrimaryTrackID>0) {
 
+    // set special step manager status
+    // not in both stepping, vertex stage
+    TG4StepManager* stepManager = TG4StepManager::Instance();
+    G4Track* noTrack = 0;
+    stepManager->SetStep(noTrack, kVertex);
+   
     // verbose
     Verbose();
 
