@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.3 2002/10/17 15:18:40 brun Exp $
+// $Id: TGeant4.cxx,v 1.4 2003/07/22 06:36:32 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -388,6 +388,20 @@ void TGeant4::SetProcess(const char* flagName, Int_t flagValue) {
 }  
  
 //_____________________________________________________________________________
+void TGeant4::DefineParticle(Int_t pdg, const char* name, TMCParticleType type, 
+                          Double_t mass, Double_t charge, Double_t lifetime) {
+//
+  fPhysicsManager->DefineParticle(pdg, name, type, mass, charge, lifetime);
+}  			
+			
+//_____________________________________________________________________________
+void TGeant4::DefineIon(const char* name, Int_t Z, Int_t A, 
+                        Int_t Q, Double_t excEnergy, Double_t mass) {
+//  
+  fPhysicsManager->DefineIon(name, Z, A, Q, excEnergy, mass);
+}  
+
+//_____________________________________________________________________________
 Double_t TGeant4::Xsec(char* reac, Double_t energy, Int_t part, Int_t mate) {
 //
   return fPhysicsManager->Xsec(reac, energy, part, mate);
@@ -406,10 +420,35 @@ Int_t TGeant4::PDGFromId(Int_t mcID) const {
 }  
 
 //_____________________________________________________________________________
-void TGeant4::DefineParticles() { 
+TString   TGeant4::ParticleName(Int_t pdg) const {
 //
-  fPhysicsManager->DefineParticles();
+  return fPhysicsManager->ParticleName(pdg);
 }  
+	  
+//_____________________________________________________________________________
+Double_t  TGeant4::ParticleMass(Int_t pdg) const {	  
+//
+  return fPhysicsManager->ParticleMass(pdg);
+}  
+	  
+//_____________________________________________________________________________
+Double_t  TGeant4::ParticleCharge(Int_t pdg) const {	  
+//
+  return fPhysicsManager->ParticleCharge(pdg);
+}  
+	  
+//_____________________________________________________________________________
+Double_t  TGeant4::ParticleLifeTime(Int_t pdg) const {	  
+//
+  return fPhysicsManager->ParticleLifeTime(pdg);
+}  
+	  
+//_____________________________________________________________________________
+TMCParticleType TGeant4::ParticleMCType(Int_t pdg) const {
+//
+  return fPhysicsManager->ParticleMCType(pdg);
+}  
+	  
 
 // methods for step management
 // ------------------------------------------------

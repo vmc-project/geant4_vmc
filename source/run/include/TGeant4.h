@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.2 2003/01/08 08:27:38 brun Exp $
+// $Id: TGeant4.h,v 1.3 2003/07/22 06:36:31 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -128,12 +128,22 @@ class TGeant4: public TVirtualMC
     // set methods
     virtual void SetCut(const char* cutName, Double_t cutValue);
     virtual void SetProcess(const char* flagName, Int_t flagValue);
+    virtual void DefineParticle(Int_t pdg, const char* name, TMCParticleType type, 
+                        Double_t mass, Double_t charge, Double_t lifetime);
+    virtual void DefineIon(const char* name, Int_t Z, Int_t A,  
+                        Int_t Q, Double_t excEnergy, Double_t mass);
     virtual Double_t Xsec(char* reac, Double_t energy, Int_t part, Int_t mate);
 
         // particle table usage         
     virtual Int_t IdFromPDG(Int_t pdgID) const;
     virtual Int_t PDGFromId(Int_t mcID) const;
-    virtual void  DefineParticles();       
+
+        // get methods
+    virtual TString   ParticleName(Int_t pdg) const;	  
+    virtual Double_t  ParticleMass(Int_t pdg) const;	  
+    virtual Double_t  ParticleCharge(Int_t pdg) const;	  
+    virtual Double_t  ParticleLifeTime(Int_t pdg) const;	  
+    virtual TMCParticleType ParticleMCType(Int_t pdg) const;
 
     //
     // methods for step management
