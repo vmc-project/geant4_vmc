@@ -1,4 +1,4 @@
-// $Id: Ex02TrackerHit.cxx,v 1.1.1.1 2002/06/16 15:57:36 hristov Exp $
+// $Id: Ex02TrackerHit.cxx,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -18,6 +18,10 @@ using namespace std;
 
 //_____________________________________________________________________________
 Ex02TrackerHit::Ex02TrackerHit() 
+  : fTrackID(-1),
+    fChamberNb(-1),
+    fEdep(0.),
+    fPos()
 {}
 
 //_____________________________________________________________________________
