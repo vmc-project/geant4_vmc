@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.6 2003/12/18 13:27:24 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.7 2004/05/19 19:44:12 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -216,13 +216,16 @@ void TG4StepManager::StopTrack()
 //                       // secondaries.
 // ---
 
-#ifdef MCDEBUG
-  CheckTrack();
-#endif  
-  
-  fTrack->SetTrackStatus(fStopAndKill);
-  // fTrack->SetTrackStatus(fStopButAlive);
-  // fTrack->SetTrackStatus(fKillTrackAndSecondaries);
+  if (fTrack) {
+    fTrack->SetTrackStatus(fStopAndKill);
+    // fTrack->SetTrackStatus(fStopButAlive);
+    // fTrack->SetTrackStatus(fKillTrackAndSecondaries);
+  }
+  else {
+    G4String text = "TG4StepManager::StopTrack(): \n";
+    text = text + "    There is no current track to be stopped.";
+    TG4Globals::Warning(text);
+  }    
 }
 
 //_____________________________________________________________________________
@@ -231,13 +234,24 @@ void TG4StepManager::StopEvent()
 // Aborts the current event processing.
 // ---
 
-#ifdef MCDEBUG
-  CheckTrack();
-#endif  
-  
-  fTrack->SetTrackStatus(fKillTrackAndSecondaries);
-          //StopTrack();   // cannot be used as it keeps secondaries
+  if (fTrack) {
+    fTrack->SetTrackStatus(fKillTrackAndSecondaries);
+            //StopTrack();   // cannot be used as it keeps secondaries
+  }
+  	    
   G4UImanager::GetUIpointer()->ApplyCommand("/event/abort");
+}
+
+//_____________________________________________________________________________
+void TG4StepManager::StopRun()
+{
+// Aborts the current event processing.
+// ---
+
+  TG4SDServices::Instance()->SetIsStopRun(true);
+
+  StopEvent();
+  G4UImanager::GetUIpointer()->ApplyCommand("/run/abort");
 }
 
 //_____________________________________________________________________________

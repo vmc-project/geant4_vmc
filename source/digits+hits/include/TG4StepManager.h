@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.h,v 1.2 2003/01/08 08:27:38 brun Exp $
+// $Id: TG4StepManager.h,v 1.3 2003/12/18 13:27:24 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -45,6 +45,7 @@ class TG4StepManager
     // methods
     void StopTrack();
     void StopEvent();
+    void StopRun();
     
     // set methods
     void SetStep(G4Step* step, TG4StepStatus status);    // G4 specific
