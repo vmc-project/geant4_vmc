@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.10 2004/11/02 16:58:31 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.11 2004/11/10 11:39:27 brun Exp $
 // Category: digits+hits
 //
 // Class TG4StepManager
@@ -294,6 +294,16 @@ void TG4StepManager::SetUserDecay(Int_t pdg)
 
   TG4Globals::Exception(
     "TG4StepManager::SetUserDecay(..) is not yet implemented.");
+}
+
+//_____________________________________________________________________________
+void TG4StepManager::ForceDecayTime(Float_t time)
+{
+/// Force decay time.                                                        \n
+/// Not yet implemented.
+
+  TG4Globals::Exception(
+    "TG4StepManager::ForceDecayTime(..) is not yet implemented.");
 }
 
 //_____________________________________________________________________________

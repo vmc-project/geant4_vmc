@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsListMessenger.h,v 1.1 2003/06/03 17:14:16 brun Exp $
+// $Id: TG4PhysicsListMessenger.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsListMessenger
@@ -52,6 +52,7 @@ class TG4PhysicsListMessenger: public G4UImessenger
     G4UIcmdWithABool*  fSetOpticalCmd;        //setOptical command   
     G4UIcmdWithABool*  fSetSpecialCutsCmd;    //setSpecialCuts command   
     G4UIcmdWithABool*  fSetSpecialControlsCmd;//setSpecialControls command 
+    G4UIcmdWithABool*  fSetStepLimiterCmd;    //setStepLimiter command 
     G4UIcmdWithADouble*       fRangeCutCmd;   //rangeCut command  
     G4UIcmdWithoutParameter*  fProcessActivationCmd; //.
                                               //setProcessActivation command    

@@ -1,4 +1,4 @@
-// $Id: TGeant4.icc,v 1.7 2004/10/12 07:47:11 brun Exp $
+// $Id: TGeant4.icc,v 1.8 2004/11/10 11:39:28 brun Exp $
 // Category: run
 
 #include "TG4StepManager.h" 
@@ -50,10 +50,19 @@ inline void TGeant4::SetMaxNStep(Int_t number)
 //_____________________________________________________________________________
 inline void TGeant4::SetUserDecay(Int_t number)
 { 
-/// Set user decay specified by decay number
+/// Set user decay specified by decay number                                 \n
 /// Not yet implemented.
 
   fStepManager->SetUserDecay(number); 
+} 
+
+//_____________________________________________________________________________
+inline void TGeant4::ForceDecayTime(Float_t time)
+{ 
+/// Force decay time.                                                        \n
+/// Not yet implemented.
+
+  fStepManager->ForceDecayTime(time); 
 } 
 
 //_____________________________________________________________________________

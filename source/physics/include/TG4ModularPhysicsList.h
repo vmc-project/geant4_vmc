@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.h,v 1.2 2003/06/03 17:15:49 brun Exp $
+// $Id: TG4ModularPhysicsList.h,v 1.3 2004/11/10 11:39:28 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4ModularPhysicsList
@@ -32,6 +32,7 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
   
     // methods
     virtual void Configure();
+    virtual void ConstructProcess();
     virtual void SetCuts();
     virtual void VerboseLevel(G4int level);
     void PrintAllProcesses() const;
@@ -46,16 +47,13 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
     void SetOpticalPhysics(G4bool value);
     void SetSpecialCutsPhysics(G4bool value);
     void SetSpecialControlsPhysics(G4bool value);
+    void SetStepLimiterPhysics(G4bool value);
     
   protected:
     TG4ModularPhysicsList(const TG4ModularPhysicsList& right);
 
     // operators
     TG4ModularPhysicsList& operator=(const TG4ModularPhysicsList& right);
-
-    // methods
-    virtual void ConstructParticle();
-    virtual void ConstructProcess();
 
     // static data members
     static const G4double  fgkDefaultCutValue; //default cut value
@@ -67,9 +65,9 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
     G4bool  fSetHadronPhysics;      //hadron physics control
     G4bool  fSetOpticalPhysics;     //optical physics control
     G4bool  fSetSpecialCutsPhysics; //special cuts process control 
-                                    //(under development)                  
     G4bool  fSetSpecialControlsPhysics;//special controls process control
-                                    //(under development)
+    G4bool  fSetStepLimiterPhysics; //step limiter process control
+
   private:
     // methods
     void SetProcessActivation(G4ProcessManager* processManager,
@@ -106,6 +104,11 @@ inline void TG4ModularPhysicsList::SetSpecialCutsPhysics(G4bool value) {
 inline void TG4ModularPhysicsList::SetSpecialControlsPhysics(G4bool value) { 
   /// Switch on/off special controls = process controls defined via VMC
   fSetSpecialControlsPhysics = value; 
+}
+
+inline void TG4ModularPhysicsList::SetStepLimiterPhysics(G4bool value) { 
+  /// Switch on/off step limiter
+  fSetStepLimiterPhysics = value; 
 }
 
 #endif //TG4_MODULAR_PHYSICS_LIST_H

@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.9 2004/10/12 07:47:11 brun Exp $
+// $Id: TGeant4.h,v 1.10 2004/11/10 11:39:28 brun Exp $
 /// \ingroup run
 //
 /// \class TGeant4
@@ -162,7 +162,8 @@ class TGeant4: public TVirtualMC
     // set methods
     virtual void SetMaxStep(Double_t);
     virtual void SetMaxNStep(Int_t);
-    virtual void SetUserDecay(Int_t);  //NEW
+    virtual void SetUserDecay(Int_t);     //NEW
+    virtual void ForceDecayTime(Float_t); //NEW
 
     // get methods
          // tracking volume(s) 

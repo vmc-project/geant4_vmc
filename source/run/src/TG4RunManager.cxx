@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.cxx,v 1.7 2004/08/17 08:53:00 brun Exp $
+// $Id: TG4RunManager.cxx,v 1.8 2004/11/10 11:39:28 brun Exp $
 // Category: run
 //
 // Class TG4RunManager
@@ -405,7 +405,6 @@ void TG4RunManager::UseG3Defaults()
 {
 /// Control G3 defaults usage.
 
-  TG4GeometryManager::Instance()->UseG3TrackingMediaLimits();
   TG4G3PhysicsManager::Instance()->SetG3DefaultCuts();
   TG4G3PhysicsManager::Instance()->SetG3DefaultControls();
 }

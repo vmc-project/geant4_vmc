@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryManager.h,v 1.2 2004/06/18 13:51:11 brun Exp $
+// $Id: TG4RootGeometryManager.h,v 1.3 2004/11/10 11:39:27 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4RootGeometryManager
@@ -30,8 +30,8 @@ class TG4RootGeometryManager : public TG4Verbose
   public:
     TG4RootGeometryManager(TG4GeometryServices* geometryServices,
                            TG4IntMap* mediumMap, 
-			   TG4StringVector* mediumNameVector,
-                           G4bool useG3TMLimits);
+			   TG4StringVector* mediumNameVector);
+
     // --> protected
     // TG4RootGeometryManager();
     // TG4RootGeometryManager(const TG4RootGeometryManager& right);
@@ -70,9 +70,7 @@ class TG4RootGeometryManager : public TG4Verbose
     TG4intMap         fMediumIdMap;      // map of medium IDs
     TG4StringVector*  fMediumNameVector; // vector of material names sorted in
                                          // the order of medias in G3Med
-    G4int   fMediumCounter;   //global medium counter
-    G4bool  fUseG3TMLimits;   //if true: G3 limits are passed to G4 
-                                         //(in development)
+    G4int             fMediumCounter;    //global medium counter
 };
 
 #endif //TG4_ROOT_GEOMETRY_MANAGER_H

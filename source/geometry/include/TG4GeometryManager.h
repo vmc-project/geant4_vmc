@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.h,v 1.2 2003/07/22 06:36:58 brun Exp $
+// $Id: TG4GeometryManager.h,v 1.3 2004/11/10 11:39:27 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryManager
@@ -124,7 +124,6 @@ class TG4GeometryManager : public TG4Verbose
     void SetUserLimits(const TG4G3CutVector& cuts,
                        const TG4G3ControlVector& controls) const;
     void ReadG3Geometry(G4String filePath);
-    void UseG3TrackingMediaLimits();
     void ClearG3Tables();       
     void ClearG3TablesFinal();
     void OpenOutFile(G4String filePath);
@@ -164,8 +163,6 @@ class TG4GeometryManager : public TG4Verbose
     G4int            fMediumCounter;   //global medium counter
     G4int            fMaterialCounter; //global material counter
     G4int            fMatrixCounter;   //global matrix counter
-    G4bool           fUseG3TMLimits;   //if true: G3 limits are passed to G4 
-                                       //(in development)
     G4bool           fWriteGeometry;   //if true: geometry parameters are written
                                        //in a file (ASCII) 
     G4bool           fVMCGeometry;     //true if geometry is built using VMC calls

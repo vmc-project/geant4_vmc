@@ -1,4 +1,4 @@
-// $Id: TG4G3PhysicsManager.cxx,v 1.2 2002/12/03 15:06:04 brun Exp $
+// $Id: TG4G3PhysicsManager.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: physics
 //
 // Class TG4G3PhysicsManager
@@ -329,7 +329,7 @@ G4bool TG4G3PhysicsManager::CheckCutWithTheVector(G4String name,
   if (cut !=kNoG3Cuts) {
     // get tolerance from TG4G3CutVector in G3 units
     G4double tolerance = TG4G3CutVector::Tolerance()/ TG4G3Units::Energy();
-    if (abs(value - (*fCutVector)[cut]) > tolerance) {
+    if (std::abs(value - (*fCutVector)[cut]) > tolerance) {
       SwitchIsCutVector(cut);      
       return true;
     }  

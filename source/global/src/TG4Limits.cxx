@@ -1,4 +1,4 @@
-// $Id: TG4Limits.cxx,v 1.2 2002/12/03 15:07:32 brun Exp $
+// $Id: TG4Limits.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: global
 //
 // Class TG4Limits
@@ -11,8 +11,7 @@
 
 #include <globals.hh>
 
-const G4double TG4Limits::fgkDefaultMaxStep = DBL_MAX;
-G4int          TG4Limits::fgCounter = 0;
+G4int  TG4Limits::fgCounter = 0;
 
 //_____________________________________________________________________________
 TG4Limits::TG4Limits(const TG4G3CutVector& cuts, 
@@ -50,22 +49,18 @@ TG4Limits::TG4Limits(const G4String& name,
 }
 
 //_____________________________________________________________________________
-TG4Limits::TG4Limits(const G4String& name, const G4UserLimits& right )
-  : G4UserLimits(right),              
-    // default values of G4UserLimits data members are set: 
-    // fMaxStep (DBL_MAX), fMaxTrack(DBL_MAX),fMaxTime(DBL_MAX),
-    // fMinEkine(0.), fMinRange(0.)
-    fName(name),
+TG4Limits::TG4Limits(const G4UserLimits& g4Limits, 
+                     const TG4G3CutVector& cuts, 
+                     const TG4G3ControlVector& controls )
+  : G4UserLimits(g4Limits),              
+    fName(""),
     fIsCut(false),
     fIsControl(false),
-    fCutVector(),
+    fCutVector(cuts),
     fControlVector()
 {
 //
-  SetG3DefaultCuts();
-  SetG3DefaultControls();
-
-  Initialize(fCutVector, fControlVector);
+  Initialize(cuts, controls);
 }
 
 //_____________________________________________________________________________
@@ -79,8 +74,6 @@ TG4Limits::TG4Limits()
     fIsControl(false) 
 {
 //
-  fMaxStep = fgkDefaultMaxStep;
-  
   ++fgCounter;
 }
 
@@ -132,7 +125,6 @@ void TG4Limits::Initialize(const TG4G3CutVector& cuts,
 {			 
 /// Initialization.
 
-  fMaxStep = fgkDefaultMaxStep;
   fMaxTime = cuts[kTOFMAX];
 
   fControlVector.Update(controls);

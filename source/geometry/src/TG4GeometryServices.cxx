@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.6 2004/03/26 11:04:39 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.7 2004/11/10 11:39:28 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryServices
@@ -125,7 +125,8 @@ G4bool TG4GeometryServices::CompareElement(G4double a, G4double z,
   else  
     ax = G3Ele.GetEle(z)->GetA()/TG4G3Units::AtomicWeight();
 
-  if (abs(ax - ae) < fgkAZTolerance && abs(z  - ze) < fgkAZTolerance) 
+  if ( std::abs(ax - ae) < fgkAZTolerance && 
+       std::abs(z  - ze) < fgkAZTolerance ) 
     return true;
   else  
     return false;   
@@ -142,7 +143,7 @@ G4bool TG4GeometryServices::CompareMaterial(G4int nofElements, G4double density,
   G4int ne = material->GetNumberOfElements();
   
   // density percentual difference
-  G4double diff = abs(density - dm)/(density + dm)*2.;
+  G4double diff = std::abs(density - dm)/(density + dm)*2.;
   
   if (nofElements == ne && diff < fgkDensityTolerance) 
     return true;
@@ -483,7 +484,28 @@ G4bool TG4GeometryServices::IsSpecialControls()  const
 //_____________________________________________________________________________
 TG4Limits* TG4GeometryServices::GetLimits(G4UserLimits* limits) const
 {
-/// Check and converts the type of the given limits.
+/// Check and convert the type of the given limits.
+
+  if (!limits) return 0;
+  
+  TG4Limits* tg4Limits = dynamic_cast<TG4Limits*> (limits);
+  if ( !tg4Limits ) {
+    TG4Globals::Exception(
+      "TG4GeometryServices::GetLimits: Wrong limits type"); 
+    return 0;
+  }  
+
+  return tg4Limits;
+}        
+
+//_____________________________________________________________________________
+TG4Limits* TG4GeometryServices::GetLimits(
+                                   G4UserLimits* limits,
+                                   const TG4G3CutVector& cuts,
+                                   const TG4G3ControlVector& controls) const
+{
+/// Check and convert the type of the given limits;
+/// create TG4Limits object if it does not yet exist
 
   if (!limits) return 0;
   
@@ -495,9 +517,8 @@ TG4Limits* TG4GeometryServices::GetLimits(G4UserLimits* limits) const
   G4UserLimits* g4Limits = dynamic_cast<G4UserLimits*> (limits);
 
   if (g4Limits) {
-     TG4Limits* tg4Limits = new TG4Limits("g3defaults", *limits);
-    //delete limits;   
-             // CHECK
+    TG4Limits* tg4Limits = new TG4Limits(*limits, cuts, controls);
+    delete limits;   
     return tg4Limits;
   }  
  
@@ -666,8 +687,8 @@ G4Material* TG4GeometryServices::FindMaterial(G4double* a, G4double* z,
 
 	G4double we = (material->GetFractionVector())[ie];
     
-        if (!CompareElement(a[ie], z[ie], material->GetElement(ie)) ||
-	    abs(weight[ie] - we) > fgkAZTolerance) {
+        if ( !CompareElement(a[ie], z[ie], material->GetElement(ie)) ||
+	     std::abs(weight[ie] - we) > fgkAZTolerance ) {
 
           equal = false;
 	  break;		

@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.h,v 1.5 2004/10/12 07:47:11 brun Exp $
+// $Id: TG4StepManager.h,v 1.6 2004/11/10 11:39:27 brun Exp $
 /// \ingroup digits_hits
 //
 /// \class TG4StepManager
@@ -53,7 +53,8 @@ class TG4StepManager
     void SetSteppingManager(G4SteppingManager* manager); // G4 specific
     void SetMaxStep(Double_t step);
     void SetMaxNStep(Int_t maxNofSteps);  //??
-    void SetUserDecay(Int_t pdg);  //NEW
+    void SetUserDecay(Int_t pdg);      //NEW
+    void ForceDecayTime(Float_t pdg);  //NEW
     
     // get methods
     G4Track* GetTrack() const;                            // G4 specific

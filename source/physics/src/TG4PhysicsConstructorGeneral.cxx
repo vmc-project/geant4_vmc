@@ -1,18 +1,15 @@
-// $Id: TG4PhysicsConstructorGeneral.cxx,v 1.3 2003/12/18 13:27:46 brun Exp $
+// $Id: TG4PhysicsConstructorGeneral.cxx,v 1.4 2004/11/10 11:39:28 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsConstructorGeneral
-// ------------------------------
+// ----------------------------------
 // See the class description in the header file.
-// According to ExN04IonPhysics.cc,v 1.1.2.1 2001/06/28 19:07:37 gunter Exp 
-// GEANT4 tag Name: geant4-06-00
 //
 // Author: I. Hrivnacova
 
 #include "TG4PhysicsConstructorGeneral.h"
 #include "TG4ProcessControlMap.h"
 #include "TG4ProcessMCMap.h"
-#include "TG4G3Control.h"
 #include "TG4ExtDecayer.h"
 
 #include <TVirtualMCDecayer.h>

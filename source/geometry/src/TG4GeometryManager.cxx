@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.7 2004/11/02 16:58:31 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.8 2004/11/10 11:39:28 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -53,7 +53,6 @@ TG4GeometryManager::TG4GeometryManager()
     fMediumCounter(0),
     fMaterialCounter(0),
     fMatrixCounter(0),
-    fUseG3TMLimits(false),
     fWriteGeometry(true),
     fVMCGeometry(true)
 {
@@ -268,7 +267,7 @@ void TG4GeometryManager::Medium(Int_t& kmed, const char *name, Int_t nmat,
 /// assigning corresponding parameters to G4 objects:
 /// - NTMED is stored as a second material index;
 /// - ISVOL is used for builing G3SensVolVector;
-/// - STEMAX is passed in TG4Limits (if fUseG3TMLimits is set true);
+/// - STEMAX is passed in G4UserLimits
 /// - !! The other parameters (IFIELD, FIELDM, TMAXFD, DEEMAX, EPSIL, STMIN)
 /// are ignored by Geant4.
 ///
@@ -309,7 +308,7 @@ void TG4GeometryManager::Medium(Int_t& kmed, const char *name, Int_t nmat,
 /// assigning corresponding parameters to G4 objects:
 /// - NTMED is stored as a second material index;
 /// - ISVOL is used for builing G3SensVolVector;
-/// - STEMAX is passed in TG4Limits (if fUseG3TMLimits is set true);
+/// - STEMAX is passed in G4UserLimits
 /// - !! The other parameters (IFIELD, FIELDM, TMAXFD, DEEMAX, EPSIL, STMIN)
 /// are ignored by Geant4.
 ///
@@ -343,8 +342,9 @@ void TG4GeometryManager::Medium(Int_t& kmed, const char *name, Int_t nmat,
         stemax, deemax, epsil, stmin, 0, 0);
 
   G4gstmed(kmed, name, nmat, isvol, ifield, fieldm, tmaxfd, stemax, deemax, 
-       epsil, stmin, 0, fUseG3TMLimits);
-     // !! instead of the nbuf argument the bool fIsG3Default is passed
+       epsil, stmin, 0, stemax > 0.);
+     // instead of the nbuf argument the bool is passed
+     // in order to pass stemax into G4UserLimits
 
   // generate new unique name  
   G4String newName 
@@ -859,7 +859,7 @@ void TG4GeometryManager::SetRootGeometry()
 /// Convert Root geometry to G4 geometry objects.
 
   TG4RootGeometryManager rootGeometryManager( fGeometryServices, 
-			     &fMediumMap, &fMediumNameVector, fUseG3TMLimits);
+			                     &fMediumMap, &fMediumNameVector);
 			      
   rootGeometryManager.ImportRootGeometry();
   
@@ -947,7 +947,7 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
     G4int mediumIndex = fGeometryServices->GetMediumId(lv); 
     G3MedTableEntry* medium = G3Med.get(mediumIndex);   
     G4UserLimits* limits = medium->GetLimits();
-    tg4Limits = fGeometryServices->GetLimits(limits);
+    tg4Limits = fGeometryServices->GetLimits(limits, cuts, controls);
 
     // get tracking medium name
     G4String name = fMediumNameVector[mediumIndex-1];
@@ -990,26 +990,6 @@ void TG4GeometryManager::ReadG3Geometry(G4String filePath)
     G4cout << "Call list file read completed. Build geometry" << G4endl;
   }  
 }
-
- 
-//_____________________________________________________________________________
-void TG4GeometryManager::UseG3TrackingMediaLimits()
-{
-/// Set fUseG3TMLimits option.                                              \n
-/// !! This method has to be called only before starting
-/// creating geometry.
-
-  if (fMediumCounter == 0) {
-    fUseG3TMLimits = true;
-  }
-  else {
-    G4String text = "TG4GeometryManager::UseG3TMLimits: \n";
-    text = text + "    It is too late to set G3 defaults. \n";
-    text = text + "    Some media has been already processed.";
-    TG4Globals::Exception(text);
-  }
-}
-
  
 //_____________________________________________________________________________
 void TG4GeometryManager::ClearG3Tables()

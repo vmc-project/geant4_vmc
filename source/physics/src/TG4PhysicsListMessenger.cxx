@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsListMessenger.cxx,v 1.1 2003/06/03 17:14:16 brun Exp $
+// $Id: TG4PhysicsListMessenger.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsListMessenger
@@ -61,6 +61,12 @@ TG4PhysicsListMessenger::TG4PhysicsListMessenger(
   fSetSpecialControlsCmd->SetParameterName("SpecialFlagsControl", false);
   fSetSpecialControlsCmd->AvailableForStates(G4State_PreInit);
 
+  fSetStepLimiterCmd
+     = new G4UIcmdWithABool("/mcPhysics/setStepLimiter", this);
+  fSetStepLimiterCmd->SetGuidance("Set step limiter process.");
+  fSetStepLimiterCmd->SetParameterName("StepLimiterControl", false);
+  fSetStepLimiterCmd->AvailableForStates(G4State_PreInit);
+
   fRangeCutCmd
      = new G4UIcmdWithADouble("/mcPhysics/rangeCut", this);
   fRangeCutCmd->SetGuidance("Sets the global cut in range (in mm)");
@@ -89,6 +95,7 @@ TG4PhysicsListMessenger::~TG4PhysicsListMessenger() {
   delete fSetOpticalCmd;
   delete fSetSpecialCutsCmd;
   delete fSetSpecialControlsCmd;
+  delete fSetStepLimiterCmd;
   delete fRangeCutCmd;
 }
 
@@ -142,6 +149,11 @@ void TG4PhysicsListMessenger::SetNewValue(G4UIcommand* command,
     fPhysicsList
       ->SetSpecialControlsPhysics(
           fSetSpecialControlsCmd->GetNewBoolValue(newValue)); 
+  }    
+  else if (command == fSetStepLimiterCmd) {
+    fPhysicsList
+      ->SetStepLimiterPhysics(
+          fSetStepLimiterCmd->GetNewBoolValue(newValue)); 
   }    
   else if (command == fRangeCutCmd) {
     fPhysicsList

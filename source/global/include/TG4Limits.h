@@ -1,4 +1,4 @@
-// $Id: TG4Limits.h,v 1.2 2002/12/03 15:05:38 brun Exp $
+// $Id: TG4Limits.h,v 1.3 2004/11/10 11:39:28 brun Exp $
 /// \ingroup global
 //
 /// \class TG4Limits
@@ -25,10 +25,14 @@ class G4VProcess;
 class TG4Limits: public G4UserLimits
 {
   public:
-    TG4Limits(const TG4G3CutVector& cuts, const TG4G3ControlVector& controls);
+    TG4Limits(const TG4G3CutVector& cuts, 
+              const TG4G3ControlVector& controls);
     TG4Limits(const G4String& name,
-              const TG4G3CutVector& cuts, const TG4G3ControlVector& controls);
-    TG4Limits(const G4String& name, const G4UserLimits& right);
+              const TG4G3CutVector& cuts, 
+	      const TG4G3ControlVector& controls);
+    TG4Limits(const G4UserLimits& g4Limits,
+              const TG4G3CutVector& cuts, 
+	      const TG4G3ControlVector& controls);
     TG4Limits(const TG4Limits& right);
     virtual ~TG4Limits();
     
@@ -74,8 +78,7 @@ class TG4Limits: public G4UserLimits
                     const TG4G3ControlVector& controls);
   
     // static data members
-    static const G4double  fgkDefaultMaxStep; // default max step value
-    static G4int           fgCounter;         // counter 
+    static G4int  fgCounter;           // counter 
 
     // data members
     G4String            fName;         //name

@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.8 2004/06/18 13:51:49 brun Exp $
+// $Id: TG4PhysicsManager.cxx,v 1.9 2004/11/10 11:39:28 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsManager
@@ -234,13 +234,14 @@ void TG4PhysicsManager::GstparCut(G4int itmed, TG4G3Cut par, G4double parval)
 
   // get/create user limits
   TG4Limits* limits 
-    = TG4GeometryServices::Instance()->GetLimits(medium->GetLimits());
+    = TG4GeometryServices::Instance()
+      ->GetLimits(medium->GetLimits(),
+                  *fG3PhysicsManager->GetCutVector(),
+                  *fG3PhysicsManager->GetControlVector());
     
   if (!limits) {
     limits = new TG4Limits(*fG3PhysicsManager->GetCutVector(),
                            *fG3PhysicsManager->GetControlVector());
-    medium->SetLimits(limits);
-
     if (VerboseLevel() > 1) {
       G4cout << "TG4PhysicsManager::GstparCut: new TG4Limits() for medium " 
              << itmed << " has been created." << G4endl;  
@@ -250,6 +251,9 @@ void TG4PhysicsManager::GstparCut(G4int itmed, TG4G3Cut par, G4double parval)
   // add units
   if (par == kTOFMAX) parval *= TG4G3Units::Time();
   else                parval *= TG4G3Units::Energy();
+
+  // set new limits object to medium
+  medium->SetLimits(limits);
 
   // set parameter
   limits->SetG3Cut(par, parval);
@@ -274,18 +278,23 @@ void TG4PhysicsManager::GstparControl(G4int itmed, TG4G3Control par,
 
   // get/create user limits
   TG4Limits* limits 
-    = TG4GeometryServices::Instance()->GetLimits(medium->GetLimits());
+    = TG4GeometryServices::Instance()
+      ->GetLimits(medium->GetLimits(),
+                  *fG3PhysicsManager->GetCutVector(),
+                  *fG3PhysicsManager->GetControlVector());
 
   if (!limits) {
     limits = new TG4Limits(*fG3PhysicsManager->GetCutVector(),
                            *fG3PhysicsManager->GetControlVector());
-    medium->SetLimits(limits);
 
     if (VerboseLevel() > 1) {
       G4cout << "TG4PhysicsManager::GstparControl: new TG4Limits() for medium" 
              << itmed << " has been created." << G4endl;  
     }	     
-  }	   
+  }			   
+    
+  // set new limits object to medium
+  medium->SetLimits(limits);
   
   // set parameter
   limits->SetG3Control(par, parval);

@@ -1,4 +1,4 @@
-// $Id: TG4SpecialControls.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $ //
+// $Id: TG4SpecialControls.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $ //
 // Category: physics
 //
 // Class TG4VSpecialControls
@@ -228,7 +228,7 @@ G4VParticleChange* TG4SpecialControls::PostStepDoIt(
     
   // processManager->DumpInfo();      	
   aParticleChange.Initialize(track);
-  aParticleChange.SetStatusChange(fAlive);
+  aParticleChange.ProposeTrackStatus(fAlive);
   return &aParticleChange;
 }
 

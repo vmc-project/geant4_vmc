@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryManager.cxx,v 1.3 2004/07/09 16:56:31 brun Exp $
+// $Id: TG4RootGeometryManager.cxx,v 1.4 2004/11/10 11:39:28 brun Exp $
 // Category: geometry
 //
 // Class TG4RootGeometryManager
@@ -25,16 +25,14 @@
 TG4RootGeometryManager::TG4RootGeometryManager(
                                        TG4GeometryServices* geometryServices,
                                        TG4IntMap* mediumMap,  
-                                       TG4StringVector* mediumNameVector,
-                                       G4bool useG3TMLimits) 
+                                       TG4StringVector* mediumNameVector) 
   : TG4Verbose("rootGeometryManager"),
     fConvertor(),
     fGeometryServices(geometryServices),
     fMediumMap(mediumMap),
     fMediumIdMap(),
     fMediumNameVector(mediumNameVector),
-    fMediumCounter(0),
-    fUseG3TMLimits(useG3TMLimits)
+    fMediumCounter(0)
 {
 //
 }
@@ -46,8 +44,7 @@ TG4RootGeometryManager::TG4RootGeometryManager()
     fGeometryServices(0),
     fMediumMap(0),
     fMediumNameVector(0),
-    fMediumCounter(0),
-    fUseG3TMLimits(false)
+    fMediumCounter(0)
 {
 //
 }
@@ -131,7 +128,7 @@ void TG4RootGeometryManager::Medium(Int_t& kmed, const char *name,
 /// assigning corresponding parameters to G4 objects:
 /// - NTMED is stored as a second material index;
 /// - ISVOL is used for builing G3SensVolVector;
-/// - STEMAX is passed in TG4Limits (if fUseG3TMLimits is set true);
+/// - STEMAX is passed in G4UserLimits
 /// - !! The other parameters (IFIELD, FIELDM, TMAXFD, DEEMAX, EPSIL, STMIN)
 /// are ignored by Geant4.                                                   \n
 /// In difference from TG4GeometryManager::Medium the material is passed
@@ -160,8 +157,9 @@ void TG4RootGeometryManager::Medium(Int_t& kmed, const char *name,
   kmed = ++fMediumCounter;
 
   Gstmed(kmed, name, material, isvol, ifield, fieldm, tmaxfd, stemax, deemax, 
-       epsil, stmin, 0, fUseG3TMLimits);
-     // !! instead of the nbuf argument the bool fIsG3Default is passed
+       epsil, stmin, 0, stemax > 0.);
+     // instead of the nbuf argument the bool is passed
+     // in order to pass stemax into G4UserLimits
 
   // generate new unique name  
   G4String newName 

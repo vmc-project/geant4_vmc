@@ -1,4 +1,4 @@
-// $Id: TG4SpecialCuts.cxx,v 1.2 2003/06/03 17:11:56 brun Exp $
+// $Id: TG4SpecialCuts.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: physics
 //
 // Class TG4SpecialCuts
@@ -179,8 +179,8 @@ G4VParticleChange* TG4SpecialCuts::PostStepDoIt(const G4Track& track,
 /// Kill the current particle, if requested by G4UserLimits.
  
   aParticleChange.Initialize(track);
-  aParticleChange.SetEnergyChange(0.) ;
-  aParticleChange.SetLocalEnergyDeposit(track.GetKineticEnergy()) ;
-  aParticleChange.SetStatusChange(fStopAndKill);
+  aParticleChange.ProposeEnergy(0.);
+  aParticleChange.ProposeLocalEnergyDeposit(track.GetKineticEnergy()) ;
+  aParticleChange.ProposeTrackStatus(fStopAndKill);
   return &aParticleChange;
 }

@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.cxx,v 1.2 2003/06/03 17:15:49 brun Exp $
+// $Id: TG4ModularPhysicsList.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: physics
 //
 // Class TG4ModularPhysicsList
@@ -16,6 +16,7 @@
 #include "TG4PhysicsConstructorOptical.h"
 #include "TG4PhysicsConstructorSpecialCuts.h"
 #include "TG4PhysicsConstructorSpecialControls.h"
+#include "TG4PhysicsConstructorStepLimiter.h"
 #include "TG4GeometryServices.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4G3ControlVector.h"
@@ -43,7 +44,8 @@ TG4ModularPhysicsList::TG4ModularPhysicsList()
     fSetHadronPhysics(false),
     fSetOpticalPhysics(false),
     fSetSpecialCutsPhysics(false),
-    fSetSpecialControlsPhysics(false)
+    fSetSpecialControlsPhysics(false),
+    fSetStepLimiterPhysics(true)
 {
 //
   defaultCutValue = fgkDefaultCutValue;
@@ -109,25 +111,13 @@ void TG4ModularPhysicsList::SetProcessActivation(G4ProcessManager* processManage
 //
 
 //_____________________________________________________________________________
-void TG4ModularPhysicsList::ConstructParticle()
+void TG4ModularPhysicsList::ConstructProcess()
 {
-/// In this method, static member functions should be called
-/// for all particles which you want to use.
-/// This ensures that objects of these particle types will be
-/// created in the program. 
+/// Construct all processes.
 
   // lock physics manager
   TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
   g3PhysicsManager->Lock();  
-  
-  // create particles for registered physics
-  G4VModularPhysicsList::ConstructParticle();
-}
-
-//_____________________________________________________________________________
-void TG4ModularPhysicsList::ConstructProcess()
-{
-/// Construct all processes.
 
   // create processes for registered physics
   G4VModularPhysicsList::ConstructProcess();
@@ -177,6 +167,9 @@ void TG4ModularPhysicsList::Configure()
 
   if (fSetSpecialControlsPhysics) 
     RegisterPhysics(new TG4PhysicsConstructorSpecialControls(verboseLevel));
+
+  if (fSetStepLimiterPhysics) 
+    RegisterPhysics(new TG4PhysicsConstructorStepLimiter(verboseLevel));
 
   // warn about not allowed combinations
   if (fSetMuonPhysics && !fSetEMPhysics) {

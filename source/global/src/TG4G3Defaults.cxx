@@ -1,4 +1,4 @@
-// $Id: TG4G3Defaults.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4G3Defaults.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
 // Category: global
 //
 // Class TG4G3Defaults
@@ -112,7 +112,7 @@ G4bool TG4G3Defaults::IsDefaultCut(TG4G3Cut cut, G4double value) const
 {
 /// Test if the parameter value is equal to the G3 default value.
 
-  if (abs(value*GeV - CutValue(cut)) > TG4G3CutVector::Tolerance()) 
+  if (std::abs(value*GeV - CutValue(cut)) > TG4G3CutVector::Tolerance()) 
     return false;
   else  
     return true;

@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.h,v 1.3 2004/03/26 11:04:39 brun Exp $
+// $Id: TG4GeometryServices.h,v 1.4 2004/11/10 11:39:27 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryServices
@@ -21,6 +21,7 @@
 class TG4IntMap;
 class TG4NameMap;
 class TG4Limits;
+class TG4G3CutVector;
 class TG4G3ControlVector;
 
 class G4Material;
@@ -74,6 +75,9 @@ class TG4GeometryServices : public TG4Verbose
     char GetSeparator() const;
 
     TG4Limits* GetLimits(G4UserLimits* limits) const;
+    TG4Limits* GetLimits(G4UserLimits* limits,
+                         const TG4G3CutVector& cuts,
+                         const TG4G3ControlVector& controls) const;
     const G4String& GetMapSecond(const G4String& name);
 
     G4LogicalVolume* FindLogicalVolume(const G4String& name, 

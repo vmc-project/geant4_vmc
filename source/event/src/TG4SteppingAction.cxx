@@ -1,4 +1,4 @@
-// $Id: TG4SteppingAction.cxx,v 1.4 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4SteppingAction.cxx,v 1.5 2004/11/10 11:39:27 brun Exp $
 // Category: event
 //
 // Class TG4SteppingAction
@@ -182,7 +182,7 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
     = step->GetPostStepPoint()->GetPosition();
 
   if (position.mag()    > TVirtualMCApplication::Instance()->TrackingRmax() ||
-      abs(position.z()) > TVirtualMCApplication::Instance()->TrackingZmax()) {
+      std::abs(position.z()) > TVirtualMCApplication::Instance()->TrackingZmax()) {
  
     // print looping info
     if (fLoopVerboseLevel > 0) {
