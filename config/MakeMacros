@@ -1,4 +1,4 @@
-# $Id:  $
+# $Id: MakeMacros,v 1.3 2002/11/12 13:31:01 brun Exp $
 
 ############################   MACROS   #######################################
 
@@ -32,6 +32,12 @@ $(ALIBRARY):
 		@[ -d $(dir $@) ] || mkdir -p $(dir $@)
 		@rm -f $@
 		@ar rv $@ $^
+		
+includes:
+	@echo "Making includes ..."
+	@rm -rf $(TOPDIR)/include
+	@[ -d $(TOPDIR)/include ] || mkdir -p $(TOPDIR)/include
+	@cp -p $(HEADERS) $(TOPDIR)/include
 
 clean:
 	@rm -rf $(TOCLEAN)
@@ -45,4 +51,10 @@ depend:
 $(BINDIR)/Make-depend:
 		@[ -d $(dir $@) ] || mkdir -p $(dir $@)
 		@cp $(TOPDIR)/config/Makedepend $@
+		
+dist:
+	@$(MAKEDIST)
+
+distsrc:
+	@$(MAKEDISTSRC)
 

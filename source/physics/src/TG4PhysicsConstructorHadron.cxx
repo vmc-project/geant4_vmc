@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorHadron.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4PhysicsConstructorHadron.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -1200,7 +1200,8 @@ void TG4PhysicsConstructorHadron::ConstructProcess()
   }  
 
   if (VerboseLevel() > 0) {
-     G4cout << "### Hadron physics constructed." << G4endl;
+     if (fSetEM)     G4cout << "### EM physics for hadrons constructed." << G4endl;
+     if (fSetHadron) G4cout << "### Hadron physics for hadrons constructed." << G4endl;
   }   
 }
 

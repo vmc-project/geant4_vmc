@@ -1,4 +1,4 @@
-// $Id: TG4RunMessenger.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4RunMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -26,23 +26,26 @@ TG4RunMessenger::TG4RunMessenger(TG4RunManager* runManager)
 
   fRootCmd = new G4UIcmdWithoutParameter("/mcControl/root", this);
   fRootCmd->SetGuidance("Switch to Root interactive shell.");
-  fRootCmd->AvailableForStates(PreInit, Init, Idle, GeomClosed, EventProc);
+  fRootCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle, 
+                               G4State_GeomClosed, G4State_EventProc);
 
   fRootMacroCmd = new G4UIcmdWithAString("/mcControl/rootMacro", this);
   fRootMacroCmd->SetGuidance("Process Root macro with given name (from file name.C)");
   fRootMacroCmd->SetParameterName("macroName", true);
-  fRootMacroCmd->AvailableForStates(PreInit, Init, Idle, GeomClosed, EventProc);
+  fRootMacroCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle, 
+                                    G4State_GeomClosed, G4State_EventProc);
 
   fRootCommandCmd = new TG4UICmdWithAComplexString("/mcControl/rootCmd", this);
   fRootCommandCmd->SetGuidance("Process Root command");
   fRootCommandCmd->SetParameterName("command", false);
   fRootCommandCmd->SetDefaultValue(" ");
-  fRootCommandCmd->AvailableForStates(PreInit, Init, Idle, GeomClosed, EventProc);
+  fRootCommandCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle, 
+                                      G4State_GeomClosed, G4State_EventProc);
 
   fG3DefaultsCmd = new G4UIcmdWithoutParameter("/mcControl/g3Defaults", this);
   fG3DefaultsCmd->SetGuidance("Set G3 default parameters (cut values,");
   fG3DefaultsCmd->SetGuidance("tracking media max step values, ...)");
-  fG3DefaultsCmd->AvailableForStates(PreInit);
+  fG3DefaultsCmd->AvailableForStates(G4State_PreInit);
 }
 
 //_____________________________________________________________________________

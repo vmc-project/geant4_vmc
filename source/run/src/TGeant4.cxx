@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.2 2002/09/06 15:17:44 ivana Exp $
+// $Id: TGeant4.cxx,v 1.2 2002/10/17 10:03:28 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -28,30 +28,30 @@ TGeant4::TGeant4(const char* name, const char* title,
   // create run manager
   fRunManager = new TG4RunManager(configuration, argc, argv);
   // add verbose level
-  //G4cout << "TG4RunManager has been created." << endl;
+  //G4cout << "TG4RunManager has been created." << G4endl;
 
   // create geometry manager
   fGeometryManager = new TG4GeometryManager();
   // add verbose level
-  //G4cout << "TG4GeometryManager has been created." << endl;
+  //G4cout << "TG4GeometryManager has been created." << G4endl;
   
   // create sensitive detectors manager
   fSDManager = new TG4SDManager(configuration->GetSDConstruction());
   // add verbose level
-  //G4cout << "TG4SDManager has been created." << endl;
+  //G4cout << "TG4SDManager has been created." << G4endl;
   
   // create physics manager  
   fPhysicsManager = new TG4PhysicsManager(configuration->GetPhysicsList());
   // add verbose level
-  //G4cout << "TG4GeometryManager has been created." << endl;
+  //G4cout << "TG4GeometryManager has been created." << G4endl;
   
   // create step manager 
   fStepManager = new TG4StepManager();
   // add verbose level
-  //G4cout << "TG4StepManager has been created." << endl;
+  //G4cout << "TG4StepManager has been created." << G4endl;
 
 #ifdef MCDEBUG
-  G4cout << "Debug mode is switched on." << endl;
+  G4cout << "Debug mode is switched on." << G4endl;
 #endif    
   
 #ifdef G4VIS_USE
@@ -70,30 +70,30 @@ TGeant4::TGeant4(const char* name, const char* title,
   // create run manager
   fRunManager = new TG4RunManager(configuration);
   // add verbose level
-  //G4cout << "TG4RunManager has been created." << endl;
+  //G4cout << "TG4RunManager has been created." << G4endl;
 
   // create geometry manager
   fGeometryManager = new TG4GeometryManager();
   // add verbose level
-  //G4cout << "TG4GeometryManager has been created." << endl;
+  //G4cout << "TG4GeometryManager has been created." << G4endl;
   
   // create sensitive detectors manager
   fSDManager = new TG4SDManager(configuration->GetSDConstruction());
   // add verbose level
-  //G4cout << "TG4SDManager has been created." << endl;
+  //G4cout << "TG4SDManager has been created." << G4endl;
   
   // create physics manager  
   fPhysicsManager = new TG4PhysicsManager(configuration->GetPhysicsList());
   // add verbose level
-  //G4cout << "TG4GeometryManager has been created." << endl;
+  //G4cout << "TG4GeometryManager has been created." << G4endl;
   
   // create step manager 
   fStepManager = new TG4StepManager();
   // add verbose level
-  //G4cout << "TG4StepManager has been created." << endl;
+  //G4cout << "TG4StepManager has been created." << G4endl;
   
 #ifdef MCDEBUG
-  G4cout << "Debug mode is switched on." << endl;
+  G4cout << "Debug mode is switched on." << G4endl;
 #endif    
   
 #ifdef G4VIS_USE

@@ -1,4 +1,4 @@
-// $Id: TG4TrackingActionMessenger.cxx,v 1.1.1.1 2002/06/16 15:57:34 hristov Exp $
+// $Id: TG4TrackingActionMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: event
 //
 // Author: I. Hrivnacova
@@ -29,14 +29,14 @@ TG4TrackingActionMessenger::TG4TrackingActionMessenger(
   fNewVerboseCmd->SetGuidance("(/TG4Tracking/newVerboseTrack)\n starts tracking");
   fNewVerboseCmd->SetParameterName("NewVerboseLevel", false);
   fNewVerboseCmd->SetRange("NewVerboseLevel >= 0 && NewVerboseLevel <= 5");
-  fNewVerboseCmd->AvailableForStates(PreInit, Init, Idle);
+  fNewVerboseCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
   fNewVerboseTrackCmd = new G4UIcmdWithAnInteger("/mcTracking/newVerboseTrack", this);
   fNewVerboseTrackCmd->SetGuidance("Set the track ID for which the new verbose level");
   fNewVerboseTrackCmd->SetGuidance("(/TG4Tracking/newVerbose) will be applied.");
   fNewVerboseTrackCmd->SetParameterName("NewVerboseLevelTrackID", false);
   fNewVerboseTrackCmd->SetRange("NewVerboseLevelTrackID >= 0");
-  fNewVerboseTrackCmd->AvailableForStates(PreInit, Init, Idle);
+  fNewVerboseTrackCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 }
 
 //_____________________________________________________________________________

@@ -1,4 +1,4 @@
-$Id: README,v 1.3 2002/09/06 15:06:16 ivana Exp $
+$Id: README,v 1.3 2002/11/12 13:31:01 brun Exp $
 -----------------------------------------------------------------
 
 Geant4 VMC - Virtual MC implementation for Geant4
@@ -21,7 +21,6 @@ Environment:
   ROOTSYS  - path to Root installation
   CLHEP_BASE_DIR - path to CLHEP installation		    
   G4INSTALL - path to the Geant4 installation
-  G4SYSTEM  - specifies platform and compiler
   G4*       - Geant4 environment variables used for selection
               graphics drivers and UIs have the same meaning as
               for Geant4; 
@@ -49,6 +48,15 @@ Compilation:
   cd geant4_vmc/source
   gmake
 
+  Compilation targets:
+  gmake      builds library
+  includes   builds the directory geant4_vmc/include with all header files
+  all        builds both library and includes
+  clean      removes tmp, includes
+  cleanall   removes lib, tmp, includes
+  dist       creates tar file with distribution of source + binary files
+  distsrc    creates tar file with distribution of source
+
   Note about G4 environment:
   By default, Geant4 VMC supports only the following
   graphics drivers: OpenGL (OGLIX, OGLSX, OGLSXm).
@@ -58,8 +66,7 @@ Compilation:
   line in the main Makefile (geant4_vmc/source/Makefile).
   Be aware that not all options were tested with Geant4 VMC 
   and even though a correct behaviour is expected, 
-  it is not guaranteed.
-   
+  it is not guaranteed.   
 
 Examples
 ============
