@@ -1,13 +1,13 @@
-$Id: $
+$Id: history,v 1.1 2002/10/08 13:27:30 brun Exp $
 -----------------------------------------------------------------
      
 Tags (history):
 ===============
 
-  8/10/2002:  
+  12/10/2002:  
   v0-1:
     The first released version;
-    tested with Geant4 4.1 + patch01, Root 3.03/06.
+    tested with Geant4 4.1 + patch01, Root 3.03/09.
      
   20/09/2002:   
   First revision:
