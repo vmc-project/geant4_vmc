@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryConvertor.h,v 1.4 2004/03/26 11:03:36 brun Exp $
+// $Id: TG4RootGeometryConvertor.h,v 1.5 2004/05/05 13:27:32 brun Exp $
 //
 // Author: I. Hrivnacova, 8.1.2003
 //
@@ -51,7 +51,7 @@ class TG4RootGeometryConvertor
 
     // get methods
     char  GetSeparator() const;
-    const TGeoMedium* GetMedium(const G4LogicalVolume* lv) const;   
+    G4int GetMediumId(G4LogicalVolume* lv) const;   
     const G4Material* GetMaterial(const TGeoMaterial*) const;
    
   protected:  
@@ -72,6 +72,8 @@ class TG4RootGeometryConvertor
     void ProcessDaughters(G4LogicalVolume* motherLV, const TGeoVolume* mother);
     void ProcessPositions();
     
+    const TGeoMedium* GetMedium(G4LogicalVolume* lv) const;   
+
     // static data members
     static const char  fgDefaultSeparator;
 

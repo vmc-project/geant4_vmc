@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryConvertor.cxx,v 1.4 2004/03/26 11:03:36 brun Exp $
+// $Id: TG4RootGeometryConvertor.cxx,v 1.5 2004/05/05 13:27:32 brun Exp $
 //
 // Author: I. Hrivnacova, 8.1.2003 
 //
@@ -16,6 +16,8 @@
 #include <TGeoNode.h>
 #include <TGeoMatrix.h>
 #include <TGeoManager.h>
+#include <TGeoCompositeShape.h>
+#include <TGeoBoolNode.h>
 
 #include <globals.hh>
 #include <G4VSolid.hh>
@@ -207,6 +209,17 @@ TG4RootGeometryConvertor::CreateLV(const TGeoVolume* volume)
    // Convert shape
    G4VSolid* solid 
      = fShapeConvertor->Convert(volume->GetShape());
+     
+   // Check if material is defined
+   if ( !volume->GetMedium() ||
+        (volume->GetMedium() && !volume->GetMedium()->GetMaterial())) {
+
+     G4String text = "TG4RootGeometryConvertor:: CreateLV:\n";
+     text = text + "    No medium/material found for ";
+     text = text + volume->GetName();
+     text = text + " TGeo volume";  
+     G4Exception(text);
+   } 
     
    // Convert material
    G4Material* material
@@ -240,27 +253,46 @@ void TG4RootGeometryConvertor::CreatePlacements(const TGeoVolume* mother,
 
     // Convert transformation
     node->cd();
-    TGeoMatrix* matrix = node->GetMatrix();
-    const G4double* translation = matrix->GetTranslation();
-    const G4double* rotation = matrix->GetRotationMatrix();
-    const G4double* scale = matrix->GetScale();
-     
-    G4Translate3D translate3D(translation[0] * TG4TGeoUnits::Length(),
-                              translation[1] * TG4TGeoUnits::Length(), 
-	 		      translation[2] * TG4TGeoUnits::Length());
-    G3toG4RotationMatrix g3g4Rotation;
-    g3g4Rotation.SetRotationMatrixByRow(
-                      G4ThreeVector(rotation[0], rotation[1], rotation[2]),
-                      G4ThreeVector(rotation[3], rotation[4], rotation[5]),
-                      G4ThreeVector(rotation[6], rotation[7], rotation[8]));
-    G4Rotate3D rotate3D(g3g4Rotation);
-    G4Scale3D scale3D(scale[0], scale[1], scale[2]);
  
-    G4Transform3D transform3D = translate3D * (rotate3D) * scale3D;
+    // If Boolean shape, take into account eventuel 
+    // displacement of the left constituent
+    HepTransform3D transform3D;
+    if (node->GetVolume()->GetShape()->IsComposite()) {
+      TGeoCompositeShape* composite 
+        = (TGeoCompositeShape*)node->GetVolume()->GetShape();
+      TGeoMatrix* leftMatrix = composite->GetBoolNode()->GetLeftMatrix();    
+   
+      HepTransform3D t1 = fShapeConvertor->Convert(leftMatrix);  
+      HepTransform3D t2 = fShapeConvertor->Convert(node->GetMatrix());
+   
+      transform3D = t2 * t1;
+ 
+      // If constituents are composite shapes,
+      // the displacement have to take into account the transformation
+      // of left constituent not passed to the solid
+  
+      TGeoShape* shapeA = composite->GetBoolNode()->GetLeftShape();
 
+      while (shapeA->IsComposite()) { 
+        TGeoBoolNode* boolNodeAC 
+          = ((TGeoCompositeShape*)shapeA)->GetBoolNode();
+      
+        TGeoShape* shapeAC = boolNodeAC->GetLeftShape();
+            // left component of the shape A 
+
+        TGeoMatrix* matrixAC = boolNodeAC->GetLeftMatrix();
+        G4Transform3D transformAC = fShapeConvertor->Convert(matrixAC);
+    
+        transform3D = transform3D * transformAC;
+     
+        shapeA = shapeAC;
+      }
+    }  
+    else {
+      transform3D = fShapeConvertor->Convert(node->GetMatrix());
+    }  
+  
     // Place this node
-    //G4ReflectionFactory::Instance()
-    //  ->Place(transform3D, G4String(node->GetName()), dLV, mLV, false, i);
     G4ReflectionFactory::Instance()
       ->Place(transform3D, G4String(daughter->GetName()), dLV, mLV, false, i);
   }    	
@@ -371,6 +403,7 @@ void TG4RootGeometryConvertor::ProcessDaughters(G4LogicalVolume* motherLV,
 // ---
 
   for (G4int i=0; i<mother->GetNdaughters(); i++) {
+  
     const TGeoNode* dNode = mother->GetNode(i);
     const TGeoVolume* daughter = dNode->GetVolume();
 
@@ -409,6 +442,22 @@ void TG4RootGeometryConvertor::ProcessPositions()
   }    	
 }
 
+//_____________________________________________________________________________
+const TGeoMedium* 
+TG4RootGeometryConvertor::GetMedium(G4LogicalVolume* lv) const
+{
+// Returns TGeo medium associated with the TGeo volume
+// corresponding to specified G4LogicalVolume
+// 
+
+  MediumMapIterator it = fMediumMap.find(lv);
+      
+  if (it != fMediumMap.end())
+    return (*it).second;
+  else
+    return 0;
+}
+
 //
 // public methods
 //
@@ -425,37 +474,49 @@ TG4RootGeometryConvertor::Convert(const TGeoVolume* world)
  
   // Create the top logical volume 
   G4LogicalVolume* worldLV = CreateLV(world);
-  
+
   // Process daughters
   ProcessDaughters(worldLV, world);
-  
+
   // Set unique names to volumes
   SetUniqueNames();
 
   // Process daughters
   ProcessPositions();
- 
+
   // Place the top volume
   return new G4PVPlacement(0, G4ThreeVector(), G4String(world->GetName()),
                            worldLV, 0, false, 0);  
 }
 
 //_____________________________________________________________________________
-const TGeoMedium* 
-TG4RootGeometryConvertor::GetMedium(const G4LogicalVolume* lv) const
+G4int 
+TG4RootGeometryConvertor::GetMediumId(G4LogicalVolume* lv) const
 {
-// Returns TGeo medium associated with the TGeo volume
+// Returns TGeo medium Id associated with the TGeo volume
 // corresponding to specified G4LogicalVolume
-// 
+// ---
 
-  MediumMapIterator it = fMediumMap.find(lv);
-      
-  if (it != fMediumMap.end())
-    return (*it).second;
-  else
-    return 0;
-}
+  // Get constituent logical volume if lv is reflected volume
+  //
+  G4LogicalVolume* constituentLV = lv;
+  if (G4ReflectionFactory::Instance()->IsReflected(lv)) {
+    constituentLV 
+      = G4ReflectionFactory::Instance()->GetConstituentLV(lv);
+  } 
 
+  const TGeoMedium* medium = GetMedium(constituentLV);
+  if (!medium) {
+    G4String text = "TG4RootGeometryConvertor:: GetMediumId:\n";
+    text = text + "    No medium found for ";
+    text = text + lv->GetName();
+    text = text + " logical volume";  
+    G4Exception(text);
+  } 
+  
+  return medium->GetId();
+}   
+  
 //_____________________________________________________________________________
 const G4Material* 
 TG4RootGeometryConvertor::GetMaterial(const TGeoMaterial* material) const
