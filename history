@@ -1,8 +1,14 @@
-$Id: history,v 1.1 2002/10/08 13:27:30 brun Exp $
+$Id: history,v 1.2 2002/10/12 14:51:17 brun Exp $
 -----------------------------------------------------------------
      
 Tags (history):
 ===============
+
+  18/12/2002:
+  v0-2:
+    Update for new Geant4 version; 
+    a few corrections (mainly in makefiles).
+    Tested with Geant4 5.0, Root 3.04/01.
 
   12/10/2002:  
   v0-1:
