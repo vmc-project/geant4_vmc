@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: $
+# $Id: makedist.sh,v 1.1 2002/10/08 08:34:48 brun Exp $
 # -------------------------------------------------------------------------
 # Script to produce source and optionally binary distribution of geant4_vmc.
 # Called by main Makefile.
@@ -17,12 +17,13 @@ CURDIR=`pwd`
 # gmake is called from geant4_vmc/source
 cd ../..
 
-MAKELIB=$1
+MAKELIB=
 VERSION=`cat geant4_vmc/config/version_number`
 MACHINE=`uname`
 OSREL=`uname -r`
-if [ "$MAKELIB" = "lib" ] ; then  
+if [ "$1" = "lib" ] ; then  
   TYPE=$MACHINE.$OSREL.
+  MAKELIB=geant4_vmc/$1
 else   
   TYPE=""
 fi  
@@ -42,8 +43,8 @@ else
    EXCLUDE="--exclude CVS"
 fi
 
-$TAR $TARFILE $EXCLUDE geant4_vmc/README geant4_vmc/config  geant4_vmc/"source" \
-   geant4_vmc/examples geant4_vmc/$MAKELIB
+$TAR $TARFILE $EXCLUDE geant4_vmc/README geant4_vmc/"history" geant4_vmc/config  \
+   geant4_vmc/"source" geant4_vmc/examples $MAKELIB
 cd $CURDIR
 
 exit 0
