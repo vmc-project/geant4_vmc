@@ -1,4 +1,4 @@
-// $Id: TG4Globals.h,v 1.1 2002/06/20 11:56:10 hristov Exp $
+// $Id: TG4Globals.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -45,6 +45,7 @@ class TG4Globals
     static void AppendNumberToString(G4String& string, G4int number);
     static G4bool Compare(G4bool activation, TG4G3ControlValue controlValue);
     static void PrintStars(G4bool emptyLineFirst);
+    static G4String Help();
 
   protected:
     TG4Globals();  

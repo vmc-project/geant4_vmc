@@ -1,4 +1,4 @@
-// $Id: TG4Globals.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4Globals.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -100,3 +100,12 @@ void TG4Globals::PrintStars(G4bool emptyLineFirst)
   if (!emptyLineFirst) G4cout << G4endl;
 }
 
+//_____________________________________________________________________________
+G4String TG4Globals::Help()
+{
+// Returns VMC mailing list address.
+// ---
+  
+  return G4String("vmc@root.cern.ch");
+}  
+  
