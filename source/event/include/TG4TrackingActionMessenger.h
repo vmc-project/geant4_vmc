@@ -1,4 +1,4 @@
-// $Id: TG4TrackingActionMessenger.h,v 1.1 2002/06/20 11:54:18 hristov Exp $
+// $Id: TG4TrackingActionMessenger.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: event
 //
 // Author: I. Hrivnacova
@@ -17,6 +17,7 @@ class TG4TrackingAction;
 
 class G4UIdirectory;
 class G4UIcmdWithAnInteger;
+class G4UIcmdWithABool;
 
 class TG4TrackingActionMessenger: public G4UImessenger
 {
@@ -44,6 +45,7 @@ class TG4TrackingActionMessenger: public G4UImessenger
     G4UIdirectory*         fTrackingDirectory; //command directory
     G4UIcmdWithAnInteger*  fNewVerboseCmd;     //command: newVerbose
     G4UIcmdWithAnInteger*  fNewVerboseTrackCmd;//command: newVerboseTrack
+    G4UIcmdWithABool*      fSaveSecondariesCmd;//command: saveSecondaries
 };
 
 #endif //TG4_TRACKING_ACTION_MESSENGER_H

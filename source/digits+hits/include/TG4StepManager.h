@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.h,v 1.1 2002/06/20 11:53:25 hristov Exp $
+// $Id: TG4StepManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -77,7 +77,10 @@ class TG4StepManager
         // tracking particle 
         // dynamic properties
     void TrackPosition(TLorentzVector& position) const;
+    void TrackPosition(Double_t& x, Double_t& y, Double_t& z) const;
     void TrackMomentum(TLorentzVector& momentum) const;
+    void TrackMomentum(Double_t& px, Double_t& py, Double_t&pz, 
+                       Double_t& etot) const;
     void TrackVertexPosition(TLorentzVector& position) const;
     void TrackVertexMomentum(TLorentzVector& momentum) const;
     Double_t TrackStep() const;  

@@ -1,4 +1,4 @@
-// $Id: Ex01MCApplication.cxx,v 1.3 2002/09/11 17:02:36 ivana Exp $
+// $Id: Ex01MCApplication.cxx,v 1.3 2003/02/04 17:55:34 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -17,6 +17,8 @@
 #include <TLorentzVector.h>
 
 #include <iostream>
+
+using namespace std;
 
 ClassImp(Ex01MCApplication)
 
@@ -57,6 +59,8 @@ Ex01MCApplication::~Ex01MCApplication()
   //
   
   delete fStack;
+  delete gMC;
+  gMC = 0;
 }
 
 //
@@ -251,7 +255,7 @@ void Ex01MCApplication::GeneratePrimaries()
  Int_t ntr;
  
  // Option: to be tracked
- Int_t done = 0; 
+ Int_t toBeDone = 1; 
  
  // Geantino
  Int_t pdg  = 0;
@@ -275,21 +279,21 @@ void Ex01MCApplication::GeneratePrimaries()
  e  = 1.;
 
  // Add particle to stack 
- fStack->SetTrack(done, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
+ fStack->SetTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
                   kPPrimary, ntr, 1., 0);
 
  // Change direction and add particle to stack 
  px = 1.; 
  py = 0.1; 
  pz = 0.; 
- fStack->SetTrack(done, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz,
+ fStack->SetTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz,
                   kPPrimary, ntr, 1., 0);
 
  // Change direction and add particle to stack 
  px = 1.; 
  py = 0.; 
  pz = 0.1; 
- fStack->SetTrack(done, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz,
+ fStack->SetTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz,
                   kPPrimary, ntr, 1., 0);
 }
 

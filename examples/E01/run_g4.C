@@ -1,4 +1,4 @@
-// $Id: run_g4.C,v 1.1.1.1 2002/06/16 15:57:36 hristov Exp $
+// $Id: run_g4.C,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Macro for running Example01 with Geant4. 
 
@@ -20,4 +20,6 @@
 
   appl->InitMC("g4Config.C");
   appl->RunMC(1);
+  
+  delete appl;
 }  

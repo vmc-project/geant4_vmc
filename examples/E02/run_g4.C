@@ -1,4 +1,4 @@
-// $Id: run_g4.C,v 1.1.1.1 2002/06/16 15:57:36 hristov Exp $
+// $Id: run_g4.C,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Macro for running Example02 with Geant4. 
 
@@ -24,4 +24,6 @@
  ((TGeant4*)gMC)->ProcessGeantMacro("g4vis.in");
   
   appl->RunMC(5);
+
+  delete appl;
 }  

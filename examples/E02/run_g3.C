@@ -1,4 +1,4 @@
-// $Id: run_g3.C,v 1.2 2002/08/29 10:12:26 ivana Exp $
+// $Id: run_g3.C,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Macro for running Example02 with Geant3 
 
@@ -20,4 +20,6 @@
 
   appl->InitMC("g3Config.C");
   appl->RunMC(5);
+
+  delete appl;
 }  

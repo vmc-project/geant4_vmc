@@ -1,4 +1,4 @@
-// $Id: Ex02RootManager.h,v 1.1 2002/06/20 11:52:35 hristov Exp $
+// $Id: Ex02RootManager.h,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Geant4 novice ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -23,7 +23,7 @@ enum FileMode { kRead, kWrite};
 class Ex02RootManager : public TObject
 {
   public:
-    Ex02RootManager(FileMode fileMode);
+    Ex02RootManager(const char* projectName, FileMode fileMode);
     Ex02RootManager();
     virtual ~Ex02RootManager();     
   

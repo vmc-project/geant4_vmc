@@ -1,4 +1,4 @@
-// $Id: TG4TrackInformation.h,v 1.1 2002/06/20 11:54:18 hristov Exp $
+// $Id: TG4TrackInformation.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: event
 //
 // Author: I. Hrivnacova
@@ -42,8 +42,8 @@ class TG4TrackInformation : public G4VUserTrackInformation
 
   private:
     // data members
-    G4int  fTrackParticleID; //the index of track particle in AliRoot stack
-    G4int  fParentParticleID;//the index of parent track in AliRoot stack
+    G4int  fTrackParticleID; //the index of track particle in VMC stack
+    G4int  fParentParticleID;//the index of parent track in VMC stack
 };
 
 // inline methods

@@ -1,4 +1,4 @@
-// $Id: TG4VRunConfiguration.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4VRunConfiguration.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -9,13 +9,13 @@
 
 #include "TG4VRunConfiguration.h"
 #include "TG4SDConstruction.h"
-#include "TG4ModularPhysicsList.h"
 #include "TG4TrackingAction.h"
 #include "TG4SteppingAction.h"
 #include "TG4Globals.h"
 
 #include <G4VUserDetectorConstruction.hh>
 #include <G4VUserPrimaryGeneratorAction.hh>
+#include <G4VUserPhysicsList.hh>
 #include <G4UserRunAction.hh>
 #include <G4UserEventAction.hh>
 #include <G4UserStackingAction.hh>
@@ -87,7 +87,7 @@ void TG4VRunConfiguration::ConfigureRunManager(G4RunManager* runManager)
 }
 
 //_____________________________________________________________________________
-TG4ModularPhysicsList* TG4VRunConfiguration::GetPhysicsList() const
+G4VUserPhysicsList* TG4VRunConfiguration::GetPhysicsList() const
 {
 // Returns the modular physics list.
 // ---

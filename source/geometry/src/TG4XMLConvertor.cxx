@@ -1,4 +1,4 @@
-// $Id: TG4XMLConvertor.cxx,v 1.4 2002/08/02 12:49:08 ivana Exp $
+// $Id: TG4XMLConvertor.cxx,v 1.2 2003/01/29 11:23:37 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova, 27.07.2000 
@@ -10,7 +10,7 @@
 #include "TG4XMLConvertor.h"
 #include "TG4Polycone.h"
 #include "TG4Polyhedra.h"
-#include "TG4G3Units.h"
+#include "TG4XMLUnits.h"
 
 #include <G4PVReplica.hh>
 #include <G4Material.hh>
@@ -27,6 +27,11 @@
 
 #include <g4std/iostream>
 #include <g4std/iomanip>
+#if __GNUC__ >= 3
+#include <sstream>
+#else
+#include <g4std/strstream>
+#endif
 
 const G4int TG4XMLConvertor::fgkMaxVolumeNameLength   = 20;
 const G4int TG4XMLConvertor::fgkMaxMaterialNameLength = 20;
@@ -52,6 +57,23 @@ TG4XMLConvertor::~TG4XMLConvertor() {
 }
 
 // private methods
+
+//_____________________________________________________________________________
+void TG4XMLConvertor::Append(G4String& s, G4int a) const
+{
+// Appends number to string.
+// ---
+
+#if __GNUC__ >= 3
+  G4std::ostringstream tmpStream;
+#else  
+  G4std::strstream tmpStream;
+#endif
+
+  tmpStream << a;  
+
+  s.append(tmpStream.str());
+}
 
 //_____________________________________________________________________________
 void TG4XMLConvertor::CutName(G4String& name) const
@@ -99,9 +121,9 @@ void TG4XMLConvertor::WriteBox(G4String lvName, const G4Box* box,
 // ---
 
   // get parameters
-  G4double x = box->GetXHalfLength()/TG4G3Units::Length()*2.;
-  G4double y = box->GetYHalfLength()/TG4G3Units::Length()*2.;
-  G4double z = box->GetZHalfLength()/TG4G3Units::Length()*2.;
+  G4double x = box->GetXHalfLength()/TG4XMLUnits::Length()*2.;
+  G4double y = box->GetYHalfLength()/TG4XMLUnits::Length()*2.;
+  G4double z = box->GetZHalfLength()/TG4XMLUnits::Length()*2.;
 
   // compose element string template
   G4String quota = "\"";
@@ -129,11 +151,11 @@ void TG4XMLConvertor::WriteTubs(G4String lvName, const G4Tubs* tubs,
 // ---
 
   // get parameters
-  G4double rmin = tubs->GetInnerRadius()/TG4G3Units::Length();
-  G4double rmax = tubs->GetOuterRadius()/TG4G3Units::Length();
-  G4double hz   = tubs->GetZHalfLength()/TG4G3Units::Length()*2.;
-  G4double sphi = tubs->GetStartPhiAngle()/TG4G3Units::Angle();
-  G4double dphi = tubs->GetDeltaPhiAngle()/TG4G3Units::Angle();
+  G4double rmin = tubs->GetInnerRadius()/TG4XMLUnits::Length();
+  G4double rmax = tubs->GetOuterRadius()/TG4XMLUnits::Length();
+  G4double hz   = tubs->GetZHalfLength()/TG4XMLUnits::Length()*2.;
+  G4double sphi = tubs->GetStartPhiAngle()/TG4XMLUnits::Angle();
+  G4double dphi = tubs->GetDeltaPhiAngle()/TG4XMLUnits::Angle();
 
   // compose element string template
   G4String quota = "\"";
@@ -166,13 +188,13 @@ void TG4XMLConvertor::WriteCons(G4String lvName, const G4Cons* cons,
 // ---
 
   // get parameters
-  G4double rmin1 = cons->GetInnerRadiusMinusZ()/TG4G3Units::Length();
-  G4double rmax1 = cons->GetOuterRadiusMinusZ()/TG4G3Units::Length();
-  G4double rmin2 = cons->GetInnerRadiusPlusZ()/TG4G3Units::Length();
-  G4double rmax2 = cons->GetOuterRadiusPlusZ()/TG4G3Units::Length();
-  G4double hz   = cons->GetZHalfLength()/TG4G3Units::Length()*2.;
-  G4double sphi = cons->GetStartPhiAngle()/TG4G3Units::Angle();
-  G4double dphi = cons->GetDeltaPhiAngle()/TG4G3Units::Angle();
+  G4double rmin1 = cons->GetInnerRadiusMinusZ()/TG4XMLUnits::Length();
+  G4double rmax1 = cons->GetOuterRadiusMinusZ()/TG4XMLUnits::Length();
+  G4double rmin2 = cons->GetInnerRadiusPlusZ()/TG4XMLUnits::Length();
+  G4double rmax2 = cons->GetOuterRadiusPlusZ()/TG4XMLUnits::Length();
+  G4double hz   = cons->GetZHalfLength()/TG4XMLUnits::Length()*2.;
+  G4double sphi = cons->GetStartPhiAngle()/TG4XMLUnits::Angle();
+  G4double dphi = cons->GetDeltaPhiAngle()/TG4XMLUnits::Angle();
 
   // compose element string template
   G4String quota = "\"";
@@ -207,11 +229,11 @@ void TG4XMLConvertor::WriteTrd(G4String lvName, const G4Trd* trd,
 // ---
 
   // get parameters
-  G4double x1 = trd->GetXHalfLength1()/TG4G3Units::Length()*2;
-  G4double x2 = trd->GetXHalfLength2()/TG4G3Units::Length()*2;
-  G4double y1 = trd->GetYHalfLength1()/TG4G3Units::Length()*2;
-  G4double y2 = trd->GetYHalfLength2()/TG4G3Units::Length()*2;
-  G4double hz = trd->GetZHalfLength()/TG4G3Units::Length()*2;
+  G4double x1 = trd->GetXHalfLength1()/TG4XMLUnits::Length()*2;
+  G4double x2 = trd->GetXHalfLength2()/TG4XMLUnits::Length()*2;
+  G4double y1 = trd->GetYHalfLength1()/TG4XMLUnits::Length()*2;
+  G4double y2 = trd->GetYHalfLength2()/TG4XMLUnits::Length()*2;
+  G4double hz = trd->GetZHalfLength()/TG4XMLUnits::Length()*2;
 
   // compose element string template
   G4String quota = "\"";
@@ -241,15 +263,15 @@ void TG4XMLConvertor::WriteTrap(G4String lvName, const G4Trap* trap,
 // ---
 
   // get parameters
-  G4double dz = trap->GetZHalfLength()/TG4G3Units::Length()*2.;
+  G4double dz = trap->GetZHalfLength()/TG4XMLUnits::Length()*2.;
   G4ThreeVector symAxis = trap->GetSymAxis();
-  G4double y1 = trap->GetYHalfLength1()/TG4G3Units::Length()*2.;
-  G4double x1 = trap->GetXHalfLength1()/TG4G3Units::Length()*2.;
-  G4double x2 = trap->GetXHalfLength2()/TG4G3Units::Length()*2.;
+  G4double y1 = trap->GetYHalfLength1()/TG4XMLUnits::Length()*2.;
+  G4double x1 = trap->GetXHalfLength1()/TG4XMLUnits::Length()*2.;
+  G4double x2 = trap->GetXHalfLength2()/TG4XMLUnits::Length()*2.;
   G4double tanAlpha1 = trap->GetTanAlpha1();
-  G4double y2 = trap->GetYHalfLength2()/TG4G3Units::Length()*2.;
-  G4double x3 = trap->GetXHalfLength3()/TG4G3Units::Length()*2.;
-  G4double x4 = trap->GetXHalfLength4()/TG4G3Units::Length()*2.;
+  G4double y2 = trap->GetYHalfLength2()/TG4XMLUnits::Length()*2.;
+  G4double x3 = trap->GetXHalfLength3()/TG4XMLUnits::Length()*2.;
+  G4double x4 = trap->GetXHalfLength4()/TG4XMLUnits::Length()*2.;
   G4double tanAlpha2 = trap->GetTanAlpha2();
 
   // ordering of parameters in XML element
@@ -303,9 +325,9 @@ void TG4XMLConvertor::WritePara(G4String lvName, const G4Para* para,
 // ---
 
   // get parameters
-  G4double dx = para->GetXHalfLength()/TG4G3Units::Length()*2.;
-  G4double dy = para->GetYHalfLength()/TG4G3Units::Length()*2.;
-  G4double dz = para->GetZHalfLength()/TG4G3Units::Length()*2.;
+  G4double dx = para->GetXHalfLength()/TG4XMLUnits::Length()*2.;
+  G4double dy = para->GetYHalfLength()/TG4XMLUnits::Length()*2.;
+  G4double dz = para->GetZHalfLength()/TG4XMLUnits::Length()*2.;
   G4double tanAlpha     = para->GetTanAlpha();
   G4ThreeVector symAxis = para->GetSymAxis();
   
@@ -355,8 +377,8 @@ void TG4XMLConvertor::WritePolycone(G4String lvName, const G4Polycone* polycone,
 // ---
 
   // get profile parameters
-  G4double sphi = polycone->GetStartPhi()/TG4G3Units::Angle();
-  G4double ephi = polycone->GetEndPhi()/TG4G3Units::Angle();
+  G4double sphi = polycone->GetStartPhi()/TG4XMLUnits::Angle();
+  G4double ephi = polycone->GetEndPhi()/TG4XMLUnits::Angle();
   
   // get polycone Z planes parameters
   TG4Polycone historicalPolycone = TG4Polycone(*polycone);
@@ -389,9 +411,9 @@ void TG4XMLConvertor::WritePolycone(G4String lvName, const G4Polycone* polycone,
   for (G4int i=0; i<nofZPlanes; i++) {
   
     // set units
-    G4double rmin = rminArray[i]/TG4G3Units::Length();
-    G4double rmax = rmaxArray[i]/TG4G3Units::Length();
-    G4double z    = zArray[i]/TG4G3Units::Length();
+    G4double rmin = rminArray[i]/TG4XMLUnits::Length();
+    G4double rmax = rmaxArray[i]/TG4XMLUnits::Length();
+    G4double z    = zArray[i]/TG4XMLUnits::Length();
 
     fOutFile << indention << element5
              << G4std::setw(fNW) << G4std::setprecision(fNP) << rmin << "; "
@@ -415,8 +437,8 @@ void TG4XMLConvertor::WritePolyhedra(G4String lvName, const G4Polyhedra* polyhed
 
   // get parameters
   G4int nofSides = polyhedra->GetNumSide();
-  G4double sphi = polyhedra->GetStartPhi()/TG4G3Units::Angle();
-  G4double ephi = polyhedra->GetEndPhi()/TG4G3Units::Angle();
+  G4double sphi = polyhedra->GetStartPhi()/TG4XMLUnits::Angle();
+  G4double ephi = polyhedra->GetEndPhi()/TG4XMLUnits::Angle();
   
   // get polyhedra Z planes parameters
   TG4Polyhedra historicalPolyhedra = TG4Polyhedra(*polyhedra);
@@ -453,7 +475,7 @@ void TG4XMLConvertor::WritePolyhedra(G4String lvName, const G4Polyhedra* polyhed
   G4int i;
   for (i=0; i<nofZPlanes; i++) {  
     // set units    
-    G4double rmin = rminArray[i]/TG4G3Units::Length();
+    G4double rmin = rminArray[i]/TG4XMLUnits::Length();
     if (i>0) fOutFile << "; ";
     fOutFile << G4std::setw(fNW) << G4std::setprecision(fNP) << rmin;
   };
@@ -462,7 +484,7 @@ void TG4XMLConvertor::WritePolyhedra(G4String lvName, const G4Polyhedra* polyhed
   fOutFile << indention << element6;
   for (i=0; i<nofZPlanes; i++) {  
     // set units
-    G4double rmax = rmaxArray[i]/TG4G3Units::Length();
+    G4double rmax = rmaxArray[i]/TG4XMLUnits::Length();
     if (i>0) fOutFile << "; ";
     fOutFile << G4std::setw(fNW) << G4std::setprecision(fNP) << rmax;
   };
@@ -471,7 +493,7 @@ void TG4XMLConvertor::WritePolyhedra(G4String lvName, const G4Polyhedra* polyhed
   fOutFile << indention << element7;
   for (i=0; i<nofZPlanes; i++) {  
     // set units
-    G4double z = zArray[i]/TG4G3Units::Length();
+    G4double z = zArray[i]/TG4XMLUnits::Length();
     if (i>0) fOutFile << "; ";
     fOutFile << G4std::setw(fNW) << G4std::setprecision(fNP) << z;
   };
@@ -727,7 +749,7 @@ void TG4XMLConvertor::WriteRotation(const G4RotationMatrix* rotation)
   G4double zy = rotation->zy();
   G4double zz = rotation->zz();
   G4String id = "RM";
-  TG4Globals::AppendNumberToString(id, ++fRotationCounter);
+  Append(id, ++fRotationCounter);
  
   // compose element string template
   G4String quota = "\"\n";
@@ -766,9 +788,9 @@ void TG4XMLConvertor::WritePosition(G4String lvName, G4ThreeVector position)
 // ---
 
   // get parameters
-  G4double x = position.x()/TG4G3Units::Length();
-  G4double y = position.y()/TG4G3Units::Length();
-  G4double z = position.z()/TG4G3Units::Length();
+  G4double x = position.x()/TG4XMLUnits::Length();
+  G4double y = position.y()/TG4XMLUnits::Length();
+  G4double z = position.z()/TG4XMLUnits::Length();
 
   // compose element string template
   G4String element1 = "<posXYZ      volume=\"#####################   X_Y_Z=\"";
@@ -800,9 +822,9 @@ void TG4XMLConvertor::WritePositionWithRotation(
   if (isReflected) zscale = -1.;
 
   // get parameters
-  G4double x = position.x()/TG4G3Units::Length();
-  G4double y = position.y()/TG4G3Units::Length();
-  G4double z = position.z()/TG4G3Units::Length();
+  G4double x = position.x()/TG4XMLUnits::Length();
+  G4double y = position.y()/TG4XMLUnits::Length();
+  G4double z = position.z()/TG4XMLUnits::Length();
   G4double xx = rotation->xx();
   G4double xy = rotation->xy();
   G4double xz = rotation->xz() * zscale;
@@ -818,12 +840,13 @@ void TG4XMLConvertor::WritePositionWithRotation(
   G4int i=0;
   while (i<fRotations.size() && fRotations[i] != rotation) i++; 
   if (i==fRotations.size()) {
-    G4String text = "TG4XMLConvertor::WritePositionWithRotation: ";
-    text = text + "    Unknown rotation - fatal error.";    
-    TG4Globals::Exception(text);
+    G4cerr << "    TG4XMLConvertor::WritePositionWithRotation: " << G4endl;
+    G4cerr << "    Unknown rotation - fatal error." << G4endl;   
+    G4cerr << "*** Exception: Aborting execution ***" << G4endl;   
+    exit(1);
   }  
   G4String id = "RM";
-  TG4Globals::AppendNumberToString(id, i); 
+  Append(id, i); 
 */  
 
   // compose element string template
@@ -887,15 +910,15 @@ void TG4XMLConvertor::WriteReplica(G4String lvName, G4PVReplica* pvr)
   }  
 
   // set units
-  G4double value0 = offset;
+  G4double value0 = - width*(nReplicas-1)*0.5 + offset;
   G4double dValue = width;
   if (axis != kPhi) {
-    value0 = value0/TG4G3Units::Length();
-    dValue = dValue/TG4G3Units::Length();
+    value0 = value0/TG4XMLUnits::Length();
+    dValue = dValue/TG4XMLUnits::Length();
   }  
   else  {
-    value0 = value0/TG4G3Units::Angle();
-    dValue = dValue/TG4G3Units::Angle();
+    value0 = value0/TG4XMLUnits::Angle();
+    dValue = dValue/TG4XMLUnits::Angle();
   }  
   
   // set tag and attributes names

@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorIon.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4PhysicsConstructorIon.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -331,10 +331,6 @@ void TG4PhysicsConstructorIon::ConstructProcess()
     ConstructHadProcessForTriton();
     ConstructHadProcessForAlpha();
     ConstructHadProcessForHe3();
-
-    if (VerboseLevel() > 1) {
-      G4cout << "### Ion EM physics constructed." << G4endl;
-    }  
   }  
 
   if (fSetEM) {
@@ -344,13 +340,10 @@ void TG4PhysicsConstructorIon::ConstructProcess()
     ConstructEMProcessForTriton();
     ConstructEMProcessForAlpha();
     ConstructEMProcessForHe3();
-
-    if (VerboseLevel() > 1) {
-      G4cout << "### Ion hadron physics constructed." << G4endl;
-    }  
   }  
 
   if (VerboseLevel() > 0) {
-    G4cout << "### Ion physics constructed." << G4endl;
+    if (fSetEM)     G4cout << "### EM physics for ions constructed." << G4endl;
+    if (fSetHadron) G4cout << "### Hadron physics for ions constructed." << G4endl;
   }  
 }

@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
+// $Id: TG4PhysicsManager.h,v 1.2 2002/12/03 15:06:51 brun Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -31,14 +31,12 @@ class TG4G3ProcessMap;
 
 class G4ParticleDefinition;
 class G4VProcess;
-class TG4ModularPhysicsList;
-
-class TVirtualMCDecayer;
+class G4VUserPhysicsList;
 
 class TG4PhysicsManager : public TG4Verbose
 {
   public:
-    TG4PhysicsManager(TG4ModularPhysicsList* physicsList);
+    TG4PhysicsManager(G4VUserPhysicsList* physicsList);
     // --> protected
     // TG4PhysicsManager();
     // TG4PhysicsManager(const TG4PhysicsManager& right);
@@ -70,16 +68,10 @@ class TG4PhysicsManager : public TG4Verbose
     TMCProcess GetOpBoundaryStatus(const G4VProcess* process);
 
     // set methods
-    void SetPhysicsList(TG4ModularPhysicsList* physicsList);
-    void SetEMPhysics(G4bool value);
-    void SetMuonPhysics(G4bool value);
-    void SetHadronPhysics(G4bool value);
-    void SetOpticalPhysics(G4bool value);
-    void SetSpecialCutsPhysics(G4bool value);
-    void SetSpecialControlsPhysics(G4bool value);
+    void SetPhysicsList(G4VUserPhysicsList* physicsList);
     
     // get methods
-    TG4ModularPhysicsList* GetPhysicsList() const; 
+    G4VUserPhysicsList* GetPhysicsList() const; 
    
   protected:
     TG4PhysicsManager();
@@ -102,19 +94,11 @@ class TG4PhysicsManager : public TG4Verbose
     TG4PhysicsMessenger    fMessenger;        //messenger
     TG4ParticlesManager*   fParticlesManager; //particles manager
     TG4G3PhysicsManager*   fG3PhysicsManager; //G3 physics manager
-    TG4ModularPhysicsList* fPhysicsList; //physics list
+    G4VUserPhysicsList*    fPhysicsList; //physics list
     TG4ProcessMCMap        fProcessMCMap;//the mapping between G4 process names
                                          //and TMCProcess codes
     TG4ProcessControlMap   fProcessControlMap; //the mapping between G4 processes
                                          //and G3 process controls
-    G4bool  fSetEMPhysics;          //electromagnetic physics control
-    G4bool  fSetMuonPhysics;        //muon physics control
-    G4bool  fSetHadronPhysics;      //hadron physics control
-    G4bool  fSetOpticalPhysics;     //optical physics control
-    G4bool  fSetSpecialCutsPhysics; //special cuts process control 
-                                    //(under development)                  
-    G4bool  fSetSpecialControlsPhysics;//special controls process control
-                                    //(under development)
 };
 
 // inline methods
@@ -122,28 +106,10 @@ class TG4PhysicsManager : public TG4Verbose
 inline TG4PhysicsManager* TG4PhysicsManager::Instance() 
 { return fgInstance; }
 
-inline void TG4PhysicsManager::SetPhysicsList(TG4ModularPhysicsList* physicsList)
+inline void TG4PhysicsManager::SetPhysicsList(G4VUserPhysicsList* physicsList)
 { fPhysicsList = physicsList; }
 
-inline void TG4PhysicsManager::SetEMPhysics(G4bool value)
-{ fSetEMPhysics = value; }
-
-inline void TG4PhysicsManager::SetMuonPhysics(G4bool value)
-{ fSetMuonPhysics = value; }
-
-inline void TG4PhysicsManager::SetHadronPhysics(G4bool value)
-{ fSetHadronPhysics = value; }
-
-inline void TG4PhysicsManager::SetOpticalPhysics(G4bool value)
-{ fSetOpticalPhysics = value; }
-
-inline void TG4PhysicsManager::SetSpecialCutsPhysics(G4bool value)
-{ fSetSpecialCutsPhysics = value; }
-
-inline void TG4PhysicsManager::SetSpecialControlsPhysics(G4bool value)
-{ fSetSpecialControlsPhysics = value; }
-
-inline TG4ModularPhysicsList* TG4PhysicsManager::GetPhysicsList() const
+inline G4VUserPhysicsList* TG4PhysicsManager::GetPhysicsList() const
 { return fPhysicsList; }
 
 #endif //TG4_PHYSICS_MANAGER_H

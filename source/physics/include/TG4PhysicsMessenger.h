@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsMessenger.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
+// $Id: TG4PhysicsMessenger.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -45,15 +45,6 @@ class TG4PhysicsMessenger: public G4UImessenger
     TG4PhysicsManager* fPhysicsManager;       //associated class
     G4UIdirectory*     fDirectory;            //command directory
     
-    G4UIcmdWithABool*  fSetEMCmd;             //setEM command   
-    G4UIcmdWithABool*  fSetMuonCmd;           //setMuon command   
-    G4UIcmdWithABool*  fSetHadronCmd;         //setHadron command   
-    G4UIcmdWithABool*  fSetOpticalCmd;        //setOptical command   
-    G4UIcmdWithABool*  fSetSpecialCutsCmd;    //setSpecialCuts command   
-    G4UIcmdWithABool*  fSetSpecialControlsCmd;//setSpecialControls command 
-    G4UIcmdWithADouble*       fRangeCutCmd;   //rangeCut command  
-    G4UIcmdWithoutParameter*  fProcessActivationCmd; //.
-                                              //setProcessActivation command    
     G4UIcmdWithoutParameter*  fPrintProcessMCMapCmd; //.
                                               //printProcessMCMap command
     G4UIcmdWithoutParameter*  fPrintProcessControlMapCmd; //.

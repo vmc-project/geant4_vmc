@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.h,v 1.1 2002/06/20 11:55:24 hristov Exp $
+// $Id: TG4DetConstruction.h,v 1.2 2002/10/10 13:17:21 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -13,6 +13,7 @@
 
 #include "TG4Verbose.h"
 #include "TG4DetConstructionMessenger.h"
+#include "TG4XMLGeometryGenerator.h"
 #include "TG4MagneticFieldType.h"
 
 #include <G4VUserDetectorConstruction.hh>
@@ -20,6 +21,7 @@
 #include <g4std/vector>
 
 class G4VPhysicalVolume;
+class G4LogicalVolume;
 class G4MagneticField;
 
 class TG4DetConstruction : public G4VUserDetectorConstruction,
@@ -33,7 +35,6 @@ class TG4DetConstruction : public G4VUserDetectorConstruction,
 
     // methods
     virtual G4VPhysicalVolume* Construct();
-    virtual void GenerateXMLGeometry() const;
     virtual void PrintMaterials() const;
 
     // set methods
@@ -56,6 +57,7 @@ class TG4DetConstruction : public G4VUserDetectorConstruction,
     TG4DetConstructionMessenger  fMessenger;        //messenger
     TG4MagneticFieldType         fMagneticFieldType;//magnetic field type
     G4MagneticField*             fMagneticField;    //magnetic field
+    TG4XMLGeometryGenerator      fXMLGeometryGenerator; 
     G4bool             fReadGeometry;     //option applied to all modules
     G4bool             fWriteGeometry;    //option applied to all modules     
 };

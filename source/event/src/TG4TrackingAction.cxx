@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.cxx,v 1.1.1.1 2002/06/16 15:57:34 hristov Exp $
+// $Id: TG4TrackingAction.cxx,v 1.2 2003/02/26 13:39:32 brun Exp $
 // Category: event
 //
 // Author: I.Hrivnacova
@@ -34,6 +34,7 @@ TG4TrackingAction::TG4TrackingAction()
     fMessenger(this),
     fPrimaryTrackID(0),
     fSavePrimaries(false),
+    fSaveSecondaries(true),
     fNewVerboseLevel(0),
     fNewVerboseTrackID(-1),
     fTrackCounter(0)
@@ -97,7 +98,12 @@ void TG4TrackingAction::SetTrackInformation(const G4Track* track)
     trackIndex = trackID-1; 
   } 
   else { 
-    trackIndex = gMC->GetStack()->GetNtrack();
+    if (fSaveSecondaries)
+      trackIndex = gMC->GetStack()->GetNtrack();
+    else   
+      trackIndex = fTrackCounter++;
+          // if secondaries are not stacked in MC stack
+          // use own counter for setting track index
   }
   
   // set track index to track information
@@ -242,7 +248,10 @@ void TG4TrackingAction::PrepareNewEvent()
 // Called by G4 kernel at the beginning of event.
 // ---
 
-  fTrackCounter = 0;
+  if (fSaveSecondaries)
+    fTrackCounter = 0;
+  else  
+    fTrackCounter = gMC->GetStack()->GetNtrack();
 
   // set g4 stepping manager pointer
   TG4StepManager* stepManager = TG4StepManager::Instance();
@@ -259,7 +268,6 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
   TG4StepManager* stepManager = TG4StepManager::Instance();
   stepManager->SetStep((G4Track*)track, kVertex);
   
-
   // set track information
   SetTrackInformation(track);
 
@@ -273,7 +281,7 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
   }
   else { 
     // save secondary particles info 
-    TrackToStack(track);
+    if (fSaveSecondaries) TrackToStack(track);
   }
   
   // verbose
@@ -283,8 +291,6 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
       G4UImanager::GetUIpointer()->ApplyCommand(command);
   }    
 
-  // OFF MC
-  // move this line at the end of block
   // MC application pre track action
   TVirtualMCApplication::Instance()->PreTrack();
 
@@ -293,10 +299,6 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
 
   // Let sensitive detector process vertex step
   UserProcessHits(track);
-
-  // OFF MC
-  // TVirtualMCApplication::Instance()->PreTrack();
-
 }
 
 //_____________________________________________________________________________
@@ -305,17 +307,12 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
 // Called by G4 kernel after finishing tracking.
 // ---
 
-  // OFF MC
-  // TVirtualMCApplication::Instance()->PostTrack();
-
   // counter
-  fTrackCounter++;
+  if (fSaveSecondaries) fTrackCounter++;
   
   // set parent track particle index to the secondary tracks 
   SetParentToTrackInformation(track);
       
-  // OFF MC
-  // move this line at the beginning of block
   // MC application post track action
   TVirtualMCApplication::Instance()->PostTrack();
 

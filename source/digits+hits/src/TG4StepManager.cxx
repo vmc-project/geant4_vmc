@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.2 2002/09/06 15:12:08 ivana Exp $
+// $Id: TG4StepManager.cxx,v 1.3 2003/02/26 13:38:42 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -8,6 +8,7 @@
 // See the class description in the header file.
 
 #include "TG4StepManager.h"
+#include "TG4SteppingAction.h"
 #include "TG4GeometryServices.h"
 #include "TG4SDServices.h"
 #include "TG4ParticlesManager.h"
@@ -189,7 +190,6 @@ void TG4StepManager::StopEvent()
   fTrack->SetTrackStatus(fKillTrackAndSecondaries);
           //StopTrack();   // cannot be used as it keeps secondaries
   G4UImanager::GetUIpointer()->ApplyCommand("/event/abort");
-  G4UImanager::GetUIpointer()->ApplyCommand("/alStacking/clearStack");
 }
 
 //_____________________________________________________________________________
@@ -218,11 +218,10 @@ void TG4StepManager::SetMaxStep(Double_t step)
 //_____________________________________________________________________________
 void TG4StepManager::SetMaxNStep(Int_t maxNofSteps)
 {
-// Not yet implemented.
+// Sets maximum number of steps.
 // ---
 
-  TG4Globals::Warning(
-    "TG4StepManager::SetMaxNStep(..) is not yet implemented.");
+  TG4SteppingAction::Instance()->SetMaxNofSteps(maxNofSteps);
 }
 
 //_____________________________________________________________________________
@@ -603,9 +602,7 @@ Int_t TG4StepManager::GetMaxNStep() const
 // Not yet implemented.
 // ---
 
-  TG4Globals::Warning(
-    "Method GetMaxNStep is not yet implemented in TG4StepManager.");
-  return 0; 
+  return TG4SteppingAction::Instance()->GetMaxNofSteps(); 
 }
 
 //_____________________________________________________________________________
@@ -630,6 +627,32 @@ void TG4StepManager::TrackPosition(TLorentzVector& position) const
   time /= TG4G3Units::Time();
     
   SetTLorentzVector(positionVector, time, position);
+}
+
+//_____________________________________________________________________________
+void TG4StepManager::TrackPosition(Double_t& x, Double_t& y, Double_t& z) const
+{ 
+// Current particle position (in the world reference frame)
+// and the local time since the current track is created
+// (position of the PostStepPoint).
+// ---
+
+#ifdef MCDEBUG
+  CheckTrack();
+#endif
+
+  // get position
+  // check if this is == to PostStepPoint position !!
+  G4ThreeVector positionVector = fTrack->GetPosition();
+  positionVector *= 1./(TG4G3Units::Length());   
+     
+  // local time   
+  G4double time = fTrack->GetLocalTime();
+  time /= TG4G3Units::Time();
+    
+  x = positionVector.x();
+  y = positionVector.y();
+  z = positionVector.z();
 }
 
 //_____________________________________________________________________________
@@ -664,6 +687,28 @@ void TG4StepManager::TrackMomentum(TLorentzVector& momentum) const
   energy /= TG4G3Units::Energy();  
 
   SetTLorentzVector(momentumVector, energy, momentum);
+}
+
+//_____________________________________________________________________________
+void TG4StepManager::TrackMomentum(Double_t& px, Double_t& py, Double_t&pz,
+                                   Double_t& etot) const
+{  
+// Current particle "momentum" (px, py, pz, Etot).
+// ---
+
+#ifdef MCDEBUG
+  CheckTrack();
+#endif
+
+  G4ThreeVector momentumVector = fTrack->GetMomentum(); 
+  momentumVector *= 1./(TG4G3Units::Energy());   
+
+  px = momentumVector.x();
+  py = momentumVector.y();
+  pz = momentumVector.z();
+
+  etot = fTrack->GetDynamicParticle()->GetTotalEnergy();
+  etot /= TG4G3Units::Energy();  
 }
 
 //_____________________________________________________________________________

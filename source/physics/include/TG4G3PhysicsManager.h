@@ -1,4 +1,4 @@
-// $Id: TG4G3PhysicsManager.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
+// $Id: TG4G3PhysicsManager.h,v 1.2 2002/12/03 15:06:04 brun Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -12,8 +12,7 @@
 // These special cuts/controls are activated 
 // by registering their physics constructors
 // (TG4PhysicsConstructorSpecialCuts, G4PhysicsConstructorSpecialControl)
-// to the modular physics list (TG4ModularPhysicsList)
-// by physics manager (TG4PhysicsManager).
+// to the physics list.
 
 #ifndef TG4_G3_PHYSICS_MANAGER_H
 #define TG4_G3_PHYSICS_MANAGER_H
@@ -54,11 +53,6 @@ class TG4G3PhysicsManager
     G4bool CheckControlWithTheVector(
              G4String name, G4double value, 
 	     TG4G3Control& control, TG4G3ControlValue& controlValue); 
-    G4bool CheckCutWithG3Defaults(
-             G4String name, G4double value, TG4G3Cut& cut); 
-    G4bool CheckControlWithG3Defaults(
-             G4String name, G4double value, 
-	     TG4G3Control& control, TG4G3ControlValue& controlValue); 
 
     // set methods
     void SetCut(TG4G3Cut cut, G4double cutValue);
@@ -84,6 +78,12 @@ class TG4G3PhysicsManager
     TG4G3PhysicsManager& operator=(const TG4G3PhysicsManager& right);
 
   private:
+    // methods
+    G4bool CheckCutWithG3Defaults(
+             G4String name, G4double value, TG4G3Cut& cut); 
+    G4bool CheckControlWithG3Defaults(
+             G4String name, G4double value, 
+	     TG4G3Control& control, TG4G3ControlValue& controlValue); 
     // set methods
     void SwitchIsCutVector(TG4G3Cut cut);
     void SwitchIsControlVector(TG4G3Control control);

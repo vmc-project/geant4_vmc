@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4GeometryServices.cxx,v 1.3 2003/01/29 11:25:23 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -412,6 +412,26 @@ TG4GeometryServices::PrintLogicalVolumeStore() const
 }  
 
 //_____________________________________________________________________________
+void TG4GeometryServices::PrintElementTable() const
+{
+// Prints the G4 element table.
+// ---
+
+  const G4ElementTable* elementTable = G4Element::GetElementTable();
+
+  G4cout << "Element table: " << G4endl;
+
+  for (G4int i=0; i<G4int(elementTable->size()); i++) {
+  
+    G4Element* element = (*elementTable)[i];
+    G4cout << "  " << G4std::setw(5)  << i
+           << "th element:"
+	   << "  " << element
+	   << G4endl;
+  }	   
+}
+
+//_____________________________________________________________________________
 Int_t TG4GeometryServices::NofG3Volumes() const
 {
 // Returns the total number of logical volumes corresponding
@@ -484,12 +504,20 @@ TG4Limits* TG4GeometryServices::GetLimits(G4UserLimits* limits) const
   
   TG4Limits* tg4Limits = dynamic_cast<TG4Limits*> (limits);
 
-  if (!tg4Limits) {
-    G4Exception("TG4GeometryServices::GetLimits: Wrong limits type.");
-    return 0;
+  if (tg4Limits) return tg4Limits;
+
+
+  G4UserLimits* g4Limits = dynamic_cast<G4UserLimits*> (limits);
+
+  if (g4Limits) {
+     TG4Limits* tg4Limits = new TG4Limits("g3defaults", *limits);
+    //delete limits;   
+             // CHECK
+    return tg4Limits;
   }  
-  else 
-    return tg4Limits;  
+ 
+  TG4Globals::Exception("TG4GeometryServices::GetLimits: Wrong limits type."); 
+  return 0;
 }        
 
 //_____________________________________________________________________________

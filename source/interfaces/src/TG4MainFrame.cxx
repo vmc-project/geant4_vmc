@@ -1,4 +1,4 @@
-// $Id: TG4MainFrame.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4MainFrame.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: interfaces
 //
 // Author: D. Adamova
@@ -75,7 +75,7 @@ TG4MainFrame::TG4MainFrame(const TGWindow* p, UInt_t w, UInt_t h)
    fmaterialsFrames = new TG4MaterialsFrames( fTab, this);
 
 //----->Window name and final mapping
-   SetWindowName("ALICE Geant4 Browser");
+   SetWindowName("Geant4 VMC Browser");
    MapSubwindows();
    Resize(GetDefaultSize());
  
@@ -176,7 +176,7 @@ Bool_t TG4MainFrame::ProcessMessage(Long_t msg, Long_t parm1, Long_t parm2)
 G4String editortxt =
 "\n**********************************************"
 "\n**********************************************"
-"\nWelcome to ALICE Geant4 Geometry Browser. \n"
+"\nWelcome to Geant4 VMC Geometry Browser. \n"
 "Clicking with the right button on a volume icon\n" 
 "will produce the volume's image. "
 "\n\n**********************************************"

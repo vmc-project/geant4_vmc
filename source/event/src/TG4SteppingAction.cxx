@@ -1,4 +1,4 @@
-// $Id: TG4SteppingAction.cxx,v 1.2 2002/09/06 15:14:47 ivana Exp $
+// $Id: TG4SteppingAction.cxx,v 1.2 2002/11/22 13:28:57 brun Exp $
 // Category: event
 //
 // Author: I.Hrivnacova
@@ -17,15 +17,23 @@
 
 #include <TVirtualMCApplication.h>
 
+// static data members
+TG4SteppingAction* TG4SteppingAction::fgInstance = 0;
+
 //_____________________________________________________________________________
 TG4SteppingAction::TG4SteppingAction() 
   : fMessenger(this),
     fMaxNofSteps(kMaxNofSteps),
-    fStandardVerboseLevel(0),
+    fStandardVerboseLevel(-1),
     fLoopVerboseLevel(1),
     fLoopStepCounter(0)
  {
 //
+  if (fgInstance) { 
+    TG4Globals::Exception("TG4SteppingAction constructed twice."); 
+  }
+
+  fgInstance = this;
 }
 
 //_____________________________________________________________________________
@@ -118,42 +126,51 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
 // ---
  
   G4Track* track = step->GetTrack();  
-
-  // reset parameters at beginning of tracking
   G4int stepNumber = track->GetCurrentStepNumber();
-  if (stepNumber == 1) { 
-    fStandardVerboseLevel = fpSteppingManager->GetverboseLevel();
-    fLoopStepCounter = 0;
-  }  
-  else if (fLoopStepCounter) {
+
+  // stop track if maximum number of steps has been reached
+  // 
+  if (fLoopStepCounter) {    
+     if (stepNumber == 1 ) { 
+        // reset parameters at beginning of tracking
+        fpSteppingManager->SetVerboseLevel(fStandardVerboseLevel);
+        fLoopStepCounter = 0;
+  	        // necessary in case particle has reached fMaxNofSteps
+	        // but has stopped before processing kMaxNofLoopSteps
+     }	
+     else {
       // count steps after detecting looping track
       fLoopStepCounter++;
       if (fLoopStepCounter == kMaxNofLoopSteps) {
 
-        // stop the looping track
-        track->SetTrackStatus(fStopAndKill);      
+         // stop the looping track
+         track->SetTrackStatus(fStopAndKill); 
 
-        // reset back parameters
-        fpSteppingManager->SetVerboseLevel(fStandardVerboseLevel);
-        fLoopStepCounter = 0;
-      } 
-    }  
-    else if (stepNumber> fMaxNofSteps) { 
-      
-       // print looping info
-       if (fLoopVerboseLevel > 0) {
-          G4cout << "*** Particle reached max step number ("
-	         << fMaxNofSteps << "). ***" << G4endl;
-	  if (fStandardVerboseLevel == 0) PrintTrackInfo(track);
-       }	
-
-       // set loop verbose level 
-       fpSteppingManager->SetVerboseLevel(fLoopVerboseLevel);
-      
-       // start looping counter
-       fLoopStepCounter++;
+         // reset parameters back
+         fpSteppingManager->SetVerboseLevel(fStandardVerboseLevel);
+         fLoopStepCounter = 0;
+      }          
     }
+  }    
+  else if (stepNumber> fMaxNofSteps) { 
       
+    // print looping info
+    if (fLoopVerboseLevel > 0) {
+       G4cout << "*** Particle reached max step number ("
+	      << fMaxNofSteps << "). ***" << G4endl;
+	  if (fStandardVerboseLevel == 0) PrintTrackInfo(track);
+    }	
+   
+    // keep standard verbose level
+    if (fStandardVerboseLevel<0) 
+      fStandardVerboseLevel = fpSteppingManager->GetverboseLevel();
+
+    // set loop verbose level 
+    fpSteppingManager->SetVerboseLevel(fLoopVerboseLevel);
+      
+    // start looping counter
+    fLoopStepCounter++;
+  }
 
   // stop track if a user defined tracking region
   // has been reached

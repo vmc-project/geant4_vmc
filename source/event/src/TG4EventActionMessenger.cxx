@@ -1,4 +1,4 @@
-// $Id: TG4EventActionMessenger.cxx,v 1.1.1.1 2002/06/16 15:57:34 hristov Exp $
+// $Id: TG4EventActionMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: event
 //
 // Author: I. Hrivnacova
@@ -29,7 +29,7 @@ TG4EventActionMessenger::TG4EventActionMessenger(TG4EventAction* eventAction)
   fDrawTracksCmd->SetParameterName("Choice", true);
   fDrawTracksCmd->SetDefaultValue("CHARGED");
   fDrawTracksCmd->SetCandidates("NONE CHARGED ALL");
-  fDrawTracksCmd->AvailableForStates(Idle);
+  fDrawTracksCmd->AvailableForStates(G4State_Idle);
 }
 
 //_____________________________________________________________________________

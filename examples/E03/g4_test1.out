@@ -1,0 +1,155 @@
+Loading Geant4 granular libraries ...
+Loading Geant4 granular libraries ... finished
+**********************************************
+ Geant4 version $Name: geant4-05-00 $
+                                (13-Dec-2002)
+             Copyright : Geant4 Collaboration
+**********************************************
+Visualization Manager instantiating...
+Visualization Manager initialising...
+Registering graphics systems...
+Geant4 has been created.
+SetNewValueToAll  
+
+phot:  Total cross sections from Sandia parametrisation. 
+MuonMinusCaptureAtRest is created 
+kMCApplicationField
+
+------------------------------------------------------------
+---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of LiquidArgon ] 
+------------------------------------------------------------
+G4ggclos: setting top-level VolTableEntry
+Instantiated 6 volume table entries 
+                      4 positions.
+
+compt:  Total cross sections from a parametrisation. Good description from 10 KeV to (100/Z) GeV. 
+       Scattered gamma energy according Klein-Nishina.
+        PhysicsTables from 1 keV to 100 GeV in 80 bins. 
+
+conv:  Total cross sections from a parametrisation. Good description from 1.5 MeV to 100 GeV for all Z. 
+        e+e- energies according Bethe-Heitler
+        PhysicsTables from 1.022 MeV to 100 GeV in 100 bins. 
+
+eBrem:  Total cross sections from a NEW parametrisation based on the EEDL data library. 
+ Good description from 1 KeV to 100 GeV.
+        log scale extrapolation above 100 GeV 
+        Gamma energy sampled from a parametrised formula.
+        PhysicsTables from 1 keV to 100 TeV in 100 bins. 
+
+eIoni:  delta cross sections from Moller+Bhabha. Good description from 1 KeV to 100 GeV.
+        delta ray energy sampled from  differential Xsection.
+        PhysicsTables from 1 keV to 100 TeV in 100 bins. 
+
+msc:   Tables of transport mean free paths.
+          New model of MSC , computes the lateral 
+          displacement of the particle , too.
+        PhysicsTables from 100 eV  to 100 TeV in 100 bins. 
+
+annihil:  Total cross section from Heilter formula(annihilation into 2 photons).
+        gamma energies sampled according Heitler
+        PhysicsTables from 10 keV to 10 TeV in 100 bins. 
+
+annihil:  Total cross section from Heilter formula(annihilation into 2 photons).
+        gamma energies sampled according Heitler
+        PhysicsTables from 10 keV to 10 TeV in 100 bins. 
+
+hIoni:    Knock-on electron cross sections . 
+         Good description above the mean excitation energy.
+         delta ray energy sampled from  differential Xsection.
+        PhysicsTables from 1 keV to 100 TeV in 100 bins. 
+
+msc:   Tables of transport mean free paths.
+          New model of MSC , computes the lateral 
+          displacement of the particle , too.
+        PhysicsTables from 100 eV  to 100 TeV in 100 bins. 
+
+MuIoni:    Knock-on electron cross sections . 
+         Good description above the mean excitation energy.
+         delta ray energy sampled from  differential Xsection.
+        PhysicsTables from 1 keV to 1000 PeV in 150 bins. 
+
+MuBrems:  theoretical cross section 
+          Good description up to 1000 PeV.
+    PhysicsTables from 1 keV to 1000 PeV in 150 bins. 
+
+MuPairProd:  theoretical cross sections 
+          Good description up to 1000 PeV.
+    PhysicsTables from 1 keV to 1000 PeV in 150 bins. 
+
+msc:   Tables of transport mean free paths.
+          New model of MSC , computes the lateral 
+          displacement of the particle , too.
+        PhysicsTables from 100 eV  to 100 TeV in 100 bins. 
+============= The cut Energy ==============================
+                            gamma              e-    
+Cut in range       
+                 Al           1 mm            1 mm 
+        LiquidArgon           1 mm            1 mm 
+               Lead           1 mm            1 mm 
+              Water           1 mm            1 mm 
+       Scintillator           1 mm            1 mm 
+             Quartz           1 mm            1 mm 
+                Air           1 mm            1 mm 
+             Vacuum           1 mm            1 mm 
+Cut in energy
+                 Al        6.89 keV         597 keV
+        LiquidArgon        6.18 keV         343 keV
+               Lead         101 keV        1.38 MeV
+              Water         2.9 keV         347 keV
+       Scintillator        2.37 keV         356 keV
+             Quartz        5.52 keV         534 keV
+                Air         990 eV          990 eV 
+             Vacuum         990 eV          990 eV 
+===================================================
+WRLD is not found in /
+CALO is not found in /
+CELL is not found in /
+LAYE is not found in /
+ABSO is not found in /
+GAPX is not found in /
+
+### No special controls in user limits are set.
+
+**********************************************
+    GEANT4 Geometry statistics: 
+              6 logical volumes
+              5 physical volumes
+              8 materials
+              8 user limits
+              6 sensitive detectors
+**********************************************
+
+1 OpenGLImmediateX scene handlers extanct.
+Got standard cmap
+Window name: viewer-0 (OpenGLImmediateX)
+WARNING: objects with visibility flag set to "false" will not be drawn!
+  "/vis/viewer/set/culling global false" to Draw such objects.
+  Also see other "/vis/viewer/set" commands.
+Your "world" has no vis attributes or is marked as visible.
+  For a better view of the contents, mark the world as invisible, e.g.,
+  myWorldLogicalVol -> SetVisAttributes (G4VisAttributes::Invisible);
+G4Scene::AddWorldIfEmpty: The scene was empty,
+   "world" has been added.
+### Run 0 start.
+
+---> Begin of event: 1
+   Absorber: total energy (MeV): 912.94509       total track length (cm):  53.72465
+   Gap:      total energy (MeV): 12.408297       total track length (cm):  5.3321387
+
+---> Begin of event: 2
+   Absorber: total energy (MeV): 910.24325       total track length (cm):  52.682108
+   Gap:      total energy (MeV): 24.671305       total track length (cm):  11.555347
+
+---> Begin of event: 3
+   Absorber: total energy (MeV): 927.33284       total track length (cm):  54.235525
+   Gap:      total energy (MeV): 22.520334       total track length (cm):  9.9400337
+
+---> Begin of event: 4
+   Absorber: total energy (MeV): 916.74928       total track length (cm):  53.266153
+   Gap:      total energy (MeV): 26.06015       total track length (cm):  13.065587
+
+---> Begin of event: 5
+   Absorber: total energy (MeV): 932.63065       total track length (cm):  53.151345
+   Gap:      total energy (MeV): 16.990456       total track length (cm):  7.767847
+Time of this run:   User=0.88s Real=1.29s Sys=0.09s
+Number of events processed: 5

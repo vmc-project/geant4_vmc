@@ -1,4 +1,4 @@
-// $Id: TGeant4.icc,v 1.1 2002/06/20 11:58:25 hristov Exp $
+// $Id: TGeant4.icc,v 1.2 2003/01/08 08:27:38 brun Exp $
 // Category: run
 
 #include "TG4StepManager.h" 
@@ -116,9 +116,22 @@ inline void TGeant4::TrackPosition(TLorentzVector& position) const
 } 
 
 //_____________________________________________________________________________
+inline void TGeant4::TrackPosition(Double_t& x, Double_t& y, Double_t& z) const
+{ 
+  fStepManager->TrackPosition(x, y, z); 
+} 
+
+//_____________________________________________________________________________
 inline void TGeant4::TrackMomentum(TLorentzVector& momentum) const
 { 
   fStepManager->TrackMomentum(momentum); 
+} 
+
+//_____________________________________________________________________________
+inline void TGeant4::TrackMomentum(Double_t& px, Double_t& py, Double_t& pz,
+                                   Double_t& etot) const
+{ 
+  fStepManager->TrackMomentum(px, py, pz, etot); 
 } 
 
 //_____________________________________________________________________________

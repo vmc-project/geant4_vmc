@@ -1,4 +1,4 @@
-# $Id:  $
+# $Id: MakeRules,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 
 ############################   RULES   #######################################
 
@@ -12,6 +12,21 @@ else
 	$(CXX) $(filter-out -O%, $(CXXFLAGS)) -c $*Cint.cxx -o $*Cint.o
 endif
 
+# Remove optimisation for TG4PhysicsConstructorHadron
+#
+ifeq ($(PLATFORM),Linux)
+  #COMPILER := $(shell g++ -v 2>&1 | grep version | grep egcs)
+  #ifeq ($(findstring 1.1,$(COMPILER)),1.1)
+    $(BINDIR)/%TG4PhysicsConstructorHadron.o : %TG4PhysicsConstructorHadron.cxx
+	@echo $*TG4PhysicsConstructorHadron.cxx
+      ifeq ($(CXXVERBOSE),)
+	@$(CXX) $(filter-out -O% , $(CXXFLAGS)) -c $*TG4PhysicsConstructorHadron.cxx -o $(BINDIR)/$*TG4PhysicsConstructorHadron.o
+      else
+	$(CXX) $(filter-out -O% , $(CXXFLAGS)) -c $*TG4PhysicsConstructorHadron.cxx -o $(BINDIR)/$*TG4PhysicsConstructorHadron.o
+      endif
+  #endif
+endif      
+
 $(BINDIR)/%.o : %.cxx
 	@echo $*.cxx
 	@[ -d $(dir $(BINDIR)) ] || mkdir -p $(dir $(BINDIR))
@@ -21,8 +36,4 @@ ifeq ($(CXXVERBOSE),)
 else
 	$(CXX) $(CXXFLAGS) -c $*.cxx -o $(BINDIR)/$*.o
 endif
-
-
-
-
 

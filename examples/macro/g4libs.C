@@ -1,4 +1,4 @@
-// $Id: g4libs.C,v 1.1.1.1 2002/06/16 15:57:36 hristov Exp $
+// $Id: g4libs.C,v 1.2 2002/11/22 13:28:34 brun Exp $
 //
 // Macro for loading Geant4 and Geant4 VMC libraries
 
@@ -33,9 +33,15 @@ void g4libs_graphics()
 // ---
   
   // Graphics configuration
-  Bool_t isXm = !isSet("G4UI_NONE") && 
-                (isSet("G4VIS_BUILD_OPENGLXM_DRIVER") ||
-		 isSet("G4UI_BUILD_XM_SESSION"));
+  Bool_t isXt = isSet("G4VIS_BUILD_OPACS_DRIVER") ||
+                isSet("G4VIS_BUILD_OPENGLXM_DRIVER") ||
+                isSet("G4VIS_BUILD_OIX_DRIVER") ||
+		isSet("G4UI_BUILD_XM_SESSION") ||
+		isSet("G4UI_BUILD_XAW_SESSION") ||
+		isSet("G4UI_BUILD_WO_SESSION");
+  Bool_t isXm = isSet("G4VIS_BUILD_OPENGLXM_DRIVER") ||
+  		isSet("G4UI_BUILD_XM_SESSION");
+  Bool_t isXaw = isSet("G4UI_BUILD_XAW_SESSION");
   Bool_t isGAG = !isSet("G4UI_NONE") && isSet("G4UI_USE_GAG");
   Bool_t isDAWN = !isSet("G4VIS_NONE");
   Bool_t isOpenGL = !isSet("G4VIS_NONE") &&
@@ -46,9 +52,14 @@ void g4libs_graphics()
 
   // Geant4 interfaces
   //
-  if (isXm) {
+  if (isXt) {
     gSystem->Load("libXt");
+  }
+  if (isXm) {
     gSystem->Load("libXm");
+  }
+  if (isXaw) {
+    gSystem->Load("libXaw");
   }
   gSystem->Load("libG4UIcommon");
   gSystem->Load("libG4UIbasic");
@@ -111,6 +122,7 @@ void g4libs_granular()
   gSystem->Load("libG4brep"); 
   gSystem->Load("libG4specsolids"); 
   gSystem->Load("libG4stepinterface");
+  gSystem->Load("libG4geombias");
   
   // particles  
   gSystem->Load("libG4partman");
@@ -143,12 +155,12 @@ void g4libs_granular()
   gSystem->Load("libG4hadronic_diffstring");  
   gSystem->Load("libG4hadronic_stringfrag");
   gSystem->Load("libG4hadronic_HE_gen");  
-  gSystem->Load("libG4hadronic_kinetic");   
   gSystem->Load("libG4hadronic_qgstring");
   gSystem->Load("libG4hadronic_HE");  
   gSystem->Load("libG4hadronic_LE");  
   gSystem->Load("libG4hadronic_deex");
   gSystem->Load("libG4hadronic_preequ");  
+  gSystem->Load("libG4hadronic_kinetic");   
   gSystem->Load("libG4hadronic_stop");
   gSystem->Load("libG4hadronic_neu");   
   gSystem->Load("libG4hadronic_iso");   
@@ -217,7 +229,7 @@ void g4libs_global()
   g4libs_graphics();
  
   // geant4 mc
-  gSystem->Load("libgeant4_vmc");
+  gSystem->Load("libgeant4vmc");
 
   cout << "Loading Geant4 global libraries ... finished" << endl;
 }

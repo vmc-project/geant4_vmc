@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4RunManager.cxx,v 1.2 2002/11/22 13:29:39 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -23,6 +23,7 @@
 #include <G4UIterminal.hh>
 #include <G4UItcsh.hh> 
 #include <G4UIXm.hh>
+#include <G4UIXaw.hh>
 #ifdef G4UI_USE_WO
 #include <G4UIWo.hh>
 #endif
@@ -153,8 +154,8 @@ TG4RunManager::TG4RunManager(const TG4RunManager& right)
 TG4RunManager::~TG4RunManager() {
 //  
   delete fRunConfiguration;
-  delete fRunManager;
   delete fGeantUISession;
+  delete fRunManager;
   if (fRootUIOwner) delete fRootUISession;
 }
 

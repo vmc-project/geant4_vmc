@@ -1,4 +1,4 @@
-// $Id: TG4Limits.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4Limits.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -47,6 +47,25 @@ TG4Limits::TG4Limits(const G4String& name,
 {
 //
   Initialize(cuts, controls);
+}
+
+//_____________________________________________________________________________
+TG4Limits::TG4Limits(const G4String& name, const G4UserLimits& right )
+  : G4UserLimits(right),              
+    // default values of G4UserLimits data members are set: 
+    // fMaxStep (DBL_MAX), fMaxTrack(DBL_MAX),fMaxTime(DBL_MAX),
+    // fMinEkine(0.), fMinRange(0.)
+    fName(name),
+    fIsCut(false),
+    fIsControl(false),
+    fCutVector(),
+    fControlVector()
+{
+//
+  SetG3DefaultCuts();
+  SetG3DefaultControls();
+
+  Initialize(fCutVector, fControlVector);
 }
 
 //_____________________________________________________________________________

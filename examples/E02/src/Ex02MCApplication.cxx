@@ -1,4 +1,4 @@
-// $Id: Ex02MCApplication.cxx,v 1.1.1.1 2002/06/16 15:57:36 hristov Exp $
+// $Id: Ex02MCApplication.cxx,v 1.3 2003/02/26 13:38:16 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -26,7 +26,7 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title,
     fDetConstruction(),
     fTrackerSD("Tracker Chamber"),
     fFieldB(0),
-    fRootManager(fileMode)
+    fRootManager("example02", fileMode)
 {
 // Standard constructor
 // ---
@@ -62,6 +62,8 @@ Ex02MCApplication::~Ex02MCApplication()
   
   delete fStack;
   delete fFieldB;
+  delete gMC;
+  gMC = 0;
 }
 
 //
@@ -151,7 +153,7 @@ void Ex02MCApplication::GeneratePrimaries()
  Int_t ntr;
  
  // Option: to be tracked
- Int_t done = 0; 
+ Int_t toBeDone = 1; 
  
  // Particle type
  //Int_t pdg  = 0;    // geantino
@@ -180,7 +182,7 @@ void Ex02MCApplication::GeneratePrimaries()
  pz = sqrt(e*e - mass*mass); 
 
  // Add particle to stack 
- fStack->SetTrack(done, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
+ fStack->SetTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
                   kPPrimary, ntr, 1., 0);
 }
 

@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4GeometryManager.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: V. Berejnoi, I. Hrivnacova
@@ -566,7 +566,7 @@ void  TG4GeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
   if (!medium) {
     G4String text = "TG4GeometryManager::SetCerenkov: \n";
     text = text + "    Medium not found."; 
-    G4Exception(text);
+    TG4Globals::Exception(text);
   }  
   G4Material* material = medium->GetMaterial();
   

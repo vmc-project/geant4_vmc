@@ -1,4 +1,4 @@
-// $Id: TG4VRunConfiguration.h,v 1.1 2002/06/20 11:58:25 hristov Exp $
+// $Id: TG4VRunConfiguration.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -16,10 +16,10 @@
 class TG4TrackingAction;
 class TG4SteppingAction;
 class TG4SDConstruction;
-class TG4ModularPhysicsList;
 
 class G4VUserDetectorConstruction;
 class G4VUserPrimaryGeneratorAction;
+class G4VUserPhysicsList;
 class G4UserRunAction;
 class G4UserEventAction;
 class G4UserStackingAction;
@@ -37,7 +37,7 @@ class TG4VRunConfiguration
     void ConfigureRunManager(G4RunManager* runManager);
 
     // get methods
-    TG4ModularPhysicsList* GetPhysicsList() const;
+    G4VUserPhysicsList* GetPhysicsList() const;
     TG4SDConstruction* GetSDConstruction() const;
 
   protected:
@@ -53,7 +53,7 @@ class TG4VRunConfiguration
     G4VUserDetectorConstruction*    fDetectorConstruction; //det construction
     TG4SDConstruction*              fSDConstruction;       //sensitive detectors 
                                                            //construction
-    TG4ModularPhysicsList*          fPhysicsList;          //physics list
+    G4VUserPhysicsList*             fPhysicsList;          //physics list
     G4VUserPrimaryGeneratorAction*  fPrimaryGenerator;     //primary generator
     G4UserRunAction*                fRunAction;            //run action
     G4UserEventAction*              fEventAction;          //event action
