@@ -1,4 +1,4 @@
-# $Id: Makefile.icc,v 1.1.1.1 2002/08/30 15:14:17 alibrary Exp $
+# $Id: Makefile.icc,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 
 # Linux (with icc) platform dependent definitions
 
@@ -38,9 +38,6 @@ LDFLAGS       = $(OPT)
 SHLD	      = $(LD)
 SOFLAGS       = -Wl,-soname,$(notdir $@) -shared 
 SHLIB         = 
-
-LIBS          = $(ROOTLIBS) 
-LIBNOVER      = `find /lib -name 'libNoVersion*.so' | xargs --replace basename {} .so | sed -e 's/lib/ -l/'`
 
 # Graphics
 #  
