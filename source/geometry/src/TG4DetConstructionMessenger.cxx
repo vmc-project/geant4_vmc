@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4DetConstructionMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -67,8 +67,12 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fPrintMaterialsCmd->AvailableForStates(PreInit, Init, Idle);   
 
   fGenerateXMLCmd 
-    = new G4UIcmdWithoutParameter("/mcDet/generateXML", this);
-  fGenerateXMLCmd->SetGuidance("Generate geometry XML file.");
+    = new G4UIcmdWithAString("/mcDet/generateXML", this);
+  fGenerateXMLCmd->SetGuidance("Generate geometry XML file");
+  fGenerateXMLCmd->SetGuidance("starting from a logical volume specified by name;");
+  fGenerateXMLCmd->SetGuidance("if no name is given - the whole world is processed.");
+  fGenerateXMLCmd->SetParameterName("lvName", true);
+  fGenerateXMLCmd->SetDefaultValue("");
   fGenerateXMLCmd->AvailableForStates(Idle);   
 }
 
@@ -146,7 +150,10 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
   else if (command == fPrintMaterialsCmd) {
     fDetConstruction->PrintMaterials();
   }    
-  else if (command == fGenerateXMLCmd) {
-    fDetConstruction->GenerateXMLGeometry();
+  else if (command == fGenerateXMLCmd) {    
+    if (newValues == "") 
+     fDetConstruction->GenerateXMLGeometry();
+    else 
+     fDetConstruction->GenerateXMLGeometry(newValues);
   }    
 }
