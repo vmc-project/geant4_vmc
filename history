@@ -1,8 +1,27 @@
-$Id: history,v 1.5 2003/03/13 21:38:10 brun Exp $
+$Id: history,v 1.6 2003/06/03 18:53:12 brun Exp $
 -----------------------------------------------------------------
      
 Tags (history):
 ===============
+  21/07/2003:
+  v1-0:
+    Convertors:
+    Added new directory with geometry convertors:
+    - roottog4 - convertor from Root to G4 (still in development);
+    - g4toxml - convertor from G4 to XML (AGDD) - separated from
+                geant4_vmc
+
+    Geant4_vmc:
+    Updated for changes in TVirtualMCStack;
+    modifications to support geometry defined via TGeo
+    using roottog4 convertor.
+    
+    Examples:
+    In E01 added new functions for building geometry via TGeo
+    as an alternative to old way via VMC;
+    update for changes in TVirtualStack.  
+    
+    Tested with Geant4 5.2, Root 3.05/06.
 
   03/06/2003:
   v0-5:
