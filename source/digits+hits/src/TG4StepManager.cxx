@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.4 2003/06/03 17:06:54 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.5 2003/09/23 14:22:56 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -25,6 +25,7 @@
 #include <G4VProcess.hh>
 #include <G4ProcessManager.hh>
 #include <G4ProcessVector.hh>
+#include <G4VTouchable.hh>
 
 #include <TLorentzVector.h>
 
@@ -35,6 +36,7 @@ TG4StepManager::TG4StepManager()
   : fTrack(0),
     fStep(0),
     fStepStatus(kNormalStep),
+    fTouchableHistory(0),
     fSteppingManager(0)
 {
 // 
@@ -44,6 +46,8 @@ TG4StepManager::TG4StepManager()
   }
       
   fgInstance = this;  
+  
+  fTouchableHistory = new G4TouchableHistory();
 }
 
 //_____________________________________________________________________________
@@ -56,6 +60,7 @@ TG4StepManager::TG4StepManager(const TG4StepManager& right) {
 //_____________________________________________________________________________
 TG4StepManager::~TG4StepManager() {
 //
+  delete fTouchableHistory;
 }
 
 // operators
@@ -72,7 +77,9 @@ TG4StepManager& TG4StepManager::operator=(const TG4StepManager& right)
   return *this;  
 }    
           
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 void TG4StepManager::CheckTrack() const
@@ -130,28 +137,69 @@ G4VPhysicalVolume* TG4StepManager::GetCurrentOffPhysicalVolume(G4int off) const
 // of the current volume.
 // ---
  
-  G4VPhysicalVolume* physVolume = GetCurrentPhysicalVolume(); 
+  // Get current touchable
+  //
+  const G4VTouchable* touchable; 
+  if (fStepStatus == kNormalStep) {
 
-  G4VPhysicalVolume* mother = physVolume; 
+#ifdef MCDEBUG
+    CheckStep("GetCurrentOffPhysicalVolume");
+#endif    
 
-  Int_t level = off;
-  while (level > 0) { 
-    if (mother) mother = mother->GetMother();
-    level--;
-  }
+    touchable = fStep->GetPreStepPoint()->GetTouchable();
+  }  
+  else if (fStepStatus == kBoundary) {
+
+#ifdef MCDEBUG
+    CheckStep("GetCurrentOffPhysicalVolume");
+#endif 
+
+    touchable = fStep->GetPostStepPoint()->GetTouchable();
+  }  
+  else {
+
+#ifdef MCDEBUG
+    CheckTrack();
+#endif 
+    const G4ThreeVector& position = fTrack->GetPosition();
+    //const G4ThreeVector& direction = fTrack->GetMomentumDirection();
+    G4Navigator* navigator =
+      G4TransportationManager::GetTransportationManager()->
+        GetNavigatorForTracking();
     
-  if (!mother) {
-    G4String text = "TG4StepManager::CurrentVolOff: \n";
+    navigator->LocateGlobalPointAndUpdateTouchable(
+                     position, fTouchableHistory);
+
+    touchable = fTouchableHistory;
+  }   
+    
+  // Check touchable depth
+  //
+  if (touchable->GetHistoryDepth() < off) {
+    G4String text = "TG4StepManager::GetCurrentOffPhysicalVolume: \n";
     text = text + "    Volume ";
-    text = text + physVolume->GetName();
+    text = text + touchable->GetVolume()->GetName();
     text = text + " has not defined mother in the required level.";
-    TG4Globals::Warning(text);
+    TG4Globals::Warning(text);    
+    return 0;
   }  
 
-  return mother;  
+  if (off == 0)
+    return touchable->GetVolume();
+  
+  // Get the off-th mother
+  // 
+  G4int index = touchable->GetHistoryDepth() - off;
+        // in the touchable history volumes are ordered
+	// from top volume up to mother volume;
+	// the touchable volume is not in the history
+  
+  return touchable->GetHistory()->GetVolume(index); 
 }     
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4StepManager::StopTrack()

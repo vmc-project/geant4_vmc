@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4StepManager.h,v 1.2 2003/01/08 08:27:38 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -27,6 +27,7 @@
 class G4Track;
 class G4SteppingManager;
 class G4VPhysicalVolume;
+class G4VTouchable;
 
 class TLorentzVector;
 
@@ -134,6 +135,7 @@ class TG4StepManager
     TG4StepStatus       fStepStatus;      //step status that decides whether
                                           //track properties will be returned
 					  //from PreStepPoint or PostStepPoint
+    G4VTouchable*       fTouchableHistory;//touchable history buffer 					  
     G4SteppingManager*  fSteppingManager; //G4SteppingManager
 };
 
