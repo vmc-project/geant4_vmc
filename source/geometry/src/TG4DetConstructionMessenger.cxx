@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.cxx,v 1.3 2002/12/18 09:35:31 brun Exp $
+// $Id: TG4DetConstructionMessenger.cxx,v 1.4 2003/01/29 11:23:05 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -10,6 +10,7 @@
 #include "TG4DetConstructionMessenger.h"
 #include "TG4DetConstruction.h"
 #include "TG4MagneticFieldType.h"
+#include "TG4GeometryServices.h"
 #include "TG4Globals.h"
 
 #include <G4UIdirectory.hh>
@@ -37,6 +38,13 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fFieldTypeCmd->SetCandidates("MCApplication Uniform None");   
   fFieldTypeCmd->SetDefaultValue("MCApplication");
   fFieldTypeCmd->AvailableForStates(G4State_PreInit);
+
+  fSeparatorCmd = new G4UIcmdWithAString("/mcDet/volNameSeparator", this);
+  guidance =   "Override the default value of the volume name separator:\n";
+  guidance = guidance + "  in roottog4 (in g3tog4 this is not yet available) \n";
+  fSeparatorCmd->SetGuidance(guidance);
+  fSeparatorCmd->SetParameterName("VolNameSeparator", true);
+  fSeparatorCmd->AvailableForStates(G4State_PreInit);
 
   fUniformFieldValueCmd 
     = new G4UIcmdWithADoubleAndUnit("/mcDet/uniformFieldValue", this);
@@ -86,6 +94,7 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger() {
 //
   delete fDirectory;
   delete fFieldTypeCmd;
+  delete fSeparatorCmd;
   delete fUniformFieldValueCmd;
   delete fSetReadGeometryCmd;
   delete fSetWriteGeometryCmd;
@@ -124,6 +133,10 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
       fDetConstruction->SetFieldType(kUniformField); 
     if (newValues == "None") 
       fDetConstruction->SetFieldType(kNoField); 
+  }
+  else if( command == fSeparatorCmd ) { 
+    char separator = newValues(0);
+    TG4GeometryServices::Instance()->SetSeparator(separator);
   }
   if (command == fUniformFieldValueCmd) {  
     fDetConstruction

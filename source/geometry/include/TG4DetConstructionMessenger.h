@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.h,v 1.2 2002/10/10 13:17:55 brun Exp $
+// $Id: TG4DetConstructionMessenger.h,v 1.3 2003/01/29 11:23:05 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -48,6 +48,7 @@ class TG4DetConstructionMessenger: public G4UImessenger
     
     // commands data members
     G4UIcmdWithAString*         fFieldTypeCmd;        //command: fieldType
+    G4UIcmdWithAString*         fSeparatorCmd;        //command: volumeNameSeparator
     G4UIcmdWithADoubleAndUnit*  fUniformFieldValueCmd;//command: uniformFieldValue
     G4UIcmdWithABool*           fSetReadGeometryCmd;  //command: readGeometry   
     G4UIcmdWithABool*           fSetWriteGeometryCmd; //command: writeGeometry    
