@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4GeometryServices.cxx,v 1.2 2002/12/03 15:05:16 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -496,7 +496,7 @@ TG4Limits* TG4GeometryServices::GetLimits(G4UserLimits* limits) const
     return tg4Limits;
   }  
  
-  G4Exception("TG4GeometryServices::GetLimits: Wrong limits type."); 
+  TG4Globals::Exception("TG4GeometryServices::GetLimits: Wrong limits type."); 
   return 0;
 }        
 
