@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.2 2002/12/03 15:06:51 brun Exp $
+// $Id: TG4PhysicsManager.cxx,v 1.3 2003/02/26 13:40:30 brun Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -11,14 +11,6 @@
 #include "TG4ModularPhysicsList.h"
 #include "TG4ParticlesManager.h"
 #include "TG4G3PhysicsManager.h"
-#include "TG4PhysicsConstructorGeneral.h"
-#include "TG4PhysicsConstructorEM.h"
-#include "TG4PhysicsConstructorMuon.h"
-#include "TG4PhysicsConstructorHadron.h"
-#include "TG4PhysicsConstructorIon.h"
-#include "TG4PhysicsConstructorOptical.h"
-#include "TG4PhysicsConstructorSpecialCuts.h"
-#include "TG4PhysicsConstructorSpecialControls.h"
 #include "TG4GeometryServices.h"
 #include "TG4G3Cut.h"
 #include "TG4G3Control.h"
@@ -26,6 +18,7 @@
 #include "TG4Limits.h"
 
 #include <G4ParticleDefinition.hh>
+#include <G4VUserPhysicsList.hh>
 #include <G4OpBoundaryProcess.hh>
 #include <G4VProcess.hh>
 #include <G3MedTable.hh>
@@ -35,17 +28,10 @@
 TG4PhysicsManager* TG4PhysicsManager::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4PhysicsManager::TG4PhysicsManager(TG4ModularPhysicsList* physicsList)
+TG4PhysicsManager::TG4PhysicsManager(G4VUserPhysicsList* physicsList)
   : TG4Verbose("physicsManager"),
     fMessenger(this),
-    fPhysicsList(physicsList),
-    fSetEMPhysics(true),
-    fSetMuonPhysics(true),
-    fSetHadronPhysics(false),
-    fSetOpticalPhysics(false),
-    fSetSpecialCutsPhysics(false),
-    fSetSpecialControlsPhysics(false)
-
+    fPhysicsList(physicsList)
 { 
 //
   if (fgInstance) {
@@ -363,54 +349,14 @@ void TG4PhysicsManager::CreatePhysicsConstructors()
 // and registeres them in the modular physics list.
 // ---
 
-  // general physics
-  fPhysicsList->RegisterPhysics(
-                    new TG4PhysicsConstructorGeneral(VerboseLevel()));
+  TG4ModularPhysicsList* tg4PhysicsList 
+    = dynamic_cast<TG4ModularPhysicsList*>(fPhysicsList);
 
-  // electromagnetic physics
-  if (fSetEMPhysics) 
-    fPhysicsList->RegisterPhysics(
-                    new TG4PhysicsConstructorEM(VerboseLevel()));
+  if (!tg4PhysicsList) return;
+    // interactive selection of physics constructors
+    // not available
 
-  // muon physics
-  if (fSetMuonPhysics && fSetEMPhysics)      
-    fPhysicsList->RegisterPhysics(
-                    new TG4PhysicsConstructorMuon(VerboseLevel()));
-
-  // hadron physics
-  if (fSetEMPhysics || fSetHadronPhysics) { 
-    fPhysicsList->RegisterPhysics(
-                    new TG4PhysicsConstructorIon(
-    		           VerboseLevel(), fSetEMPhysics, fSetHadronPhysics));
-    fPhysicsList->RegisterPhysics(
-                    new TG4PhysicsConstructorHadron(
-		           VerboseLevel(), fSetEMPhysics, fSetHadronPhysics));
-  }  
-
-  // optical physics
-  if (fSetOpticalPhysics) 
-    fPhysicsList->RegisterPhysics(
-                    new TG4PhysicsConstructorOptical(VerboseLevel()));
-
-  // special processes
-  if (fSetSpecialCutsPhysics) 
-    fPhysicsList->RegisterPhysics(
-                    new TG4PhysicsConstructorSpecialCuts(VerboseLevel()));
-
-  if (fSetSpecialControlsPhysics) 
-    fPhysicsList->RegisterPhysics(
-                    new TG4PhysicsConstructorSpecialControls(VerboseLevel()));
-
-  // warn about not allowed combinations
-  if (fSetMuonPhysics && !fSetEMPhysics) {
-    G4String text = "TG4PhysicsManager::CreatePhysicsConstructors:\n";
-    text = text + "    Muon physics cannot be constructed without EM physics.\n";
-    text = text + "    SetMuon control was ignored.";
-    TG4Globals::Warning(text);     
-  }
-
-         // all created physics constructors are deleted
-	 // in the TG4ModularPhysicsList destructor
+  tg4PhysicsList->Configure();
 }    
 
 //_____________________________________________________________________________
@@ -550,7 +496,11 @@ void TG4PhysicsManager::SetProcessActivation()
 // to the setup in TG4G3PhysicsManager::fControlVector.
 // ---
 
-  fPhysicsList->SetProcessActivation();
+  TG4ModularPhysicsList* tg4PhysicsList 
+    = dynamic_cast<TG4ModularPhysicsList*>(fPhysicsList);
+
+  if (tg4PhysicsList)
+    tg4PhysicsList->SetProcessActivation();
 }       
 
 
@@ -572,26 +522,25 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus(const G4VProcess* process)
 // status.
 // ---
  
+ /*
   TG4Globals::Warning(
      "TG4PhysicsManager::GetOpBoundaryStatus: Not yet available.");
   return kPNoProcess;
  
-/*
   if (!process) return kPNoProcess;
+*/
 
 #ifdef MCDEBUG
-  G4OpBoundaryProcess* opBoundary
-    = dynamic_cast<G4OpBoundaryProcess*>(process);
+  const G4OpBoundaryProcess* opBoundary
+    = dynamic_cast<const G4OpBoundaryProcess*>(process);
     
-  if (!opBoundary) 
+  if (!opBoundary) {
     TG4Globals::Exception(
       "TG4PhysicsManager::GetOpBoundaryStatus: Wrong process type.");
     return kPNoProcess;
   }
-  
-  return opBoundary;  
 #else
-  G4OpBoundaryProcess* opBoundary = (G4OpBoundaryProcess*)process;
+  const G4OpBoundaryProcess* opBoundary = (const G4OpBoundaryProcess*)process;
 #endif  
 
   switch (opBoundary->GetStatus()) {
@@ -623,6 +572,5 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus(const G4VProcess* process)
   
   // should not happen
   return kPNoProcess;
-*/
 }
 
