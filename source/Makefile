@@ -1,4 +1,4 @@
-# $Id:  $
+# $Id: Makefile,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
@@ -46,7 +46,11 @@ OBJS	:= $(CXXOBJ) $(GDICTO)
 
 # Make include list
 #
-INCDIR  := $(patsubst %,-I%/include,$(GDIRS)) -I$(G4INSTALL)/include \
+ifndef G4INCLUDE
+  G4INCLUDE := $(G4INSTALL)/include
+endif  
+
+INCDIR  := $(patsubst %,-I%/include,$(GDIRS)) -I$(G4INCLUDE) \
 	   -I$(CLHEP_BASE_DIR)/include \
 	   -I$(G4INSTALL)/source/interfaces/common/include
 
