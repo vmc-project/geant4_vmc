@@ -1,4 +1,4 @@
-// $Id: TG4VerboseMessenger.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4VerboseMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -31,7 +31,7 @@ TG4VerboseMessenger::TG4VerboseMessenger(const G4String& directoryName)
   G4String guidance("Set a given verbose level to all verbose instances.");
   fGlobalVerboseCmd->SetGuidance(guidance);
   fGlobalVerboseCmd->SetParameterName("GlobalVerbose", false);
-  fGlobalVerboseCmd->AvailableForStates(PreInit, Init, Idle);
+  fGlobalVerboseCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 }
 
 
@@ -56,7 +56,7 @@ void TG4VerboseMessenger::AddCommand(TG4VVerbose* verbose,
   parameterName.insert(0,cmdName);
   cmd->SetParameterName(parameterName, false);
   
-  cmd->AvailableForStates(PreInit, Init, Idle);
+  cmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 }
 
 //_____________________________________________________________________________
