@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4ModularPhysicsList.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -8,6 +8,14 @@
 // See the class description in the header file.
 
 #include "TG4ModularPhysicsList.h"
+#include "TG4PhysicsConstructorGeneral.h"
+#include "TG4PhysicsConstructorEM.h"
+#include "TG4PhysicsConstructorMuon.h"
+#include "TG4PhysicsConstructorHadron.h"
+#include "TG4PhysicsConstructorIon.h"
+#include "TG4PhysicsConstructorOptical.h"
+#include "TG4PhysicsConstructorSpecialCuts.h"
+#include "TG4PhysicsConstructorSpecialControls.h"
 #include "TG4GeometryServices.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4G3ControlVector.h"
@@ -28,7 +36,15 @@ const G4double TG4ModularPhysicsList::fgkDefaultCutValue = 1.0 * mm;
 //_____________________________________________________________________________
 TG4ModularPhysicsList::TG4ModularPhysicsList()
   : G4VModularPhysicsList(),
-    TG4Verbose("physicsList") {
+    TG4Verbose("physicsList"),
+    fMessenger(this),
+    fSetEMPhysics(true),
+    fSetMuonPhysics(true),
+    fSetHadronPhysics(false),
+    fSetOpticalPhysics(false),
+    fSetSpecialCutsPhysics(false),
+    fSetSpecialControlsPhysics(false)
+{
 //
   defaultCutValue = fgkDefaultCutValue;
 
@@ -37,7 +53,8 @@ TG4ModularPhysicsList::TG4ModularPhysicsList()
 
 //_____________________________________________________________________________
 TG4ModularPhysicsList::TG4ModularPhysicsList(const TG4ModularPhysicsList& right)
-  : TG4Verbose("physicsList") {
+  : TG4Verbose("physicsList"),
+    fMessenger(this) {
 //
   TG4Globals::Exception("TG4ModularPhysicsList is protected from copying.");
 }
@@ -66,9 +83,8 @@ TG4ModularPhysicsList::operator=(const TG4ModularPhysicsList &right)
 // private methods
 
 //_____________________________________________________________________________
-void TG4ModularPhysicsList::SetProcessActivation(
-                                      G4ProcessManager* processManager,
-                                      G4int  processId, G4bool activation)
+void TG4ModularPhysicsList::SetProcessActivation(G4ProcessManager* processManager,
+                                          G4int  processId, G4bool activation)
 {				      
 // Sets process activation for the given process.
 // ---
@@ -121,6 +137,57 @@ void TG4ModularPhysicsList::ConstructProcess()
 // public methods
 
 //_____________________________________________________________________________
+void TG4ModularPhysicsList::Configure()
+{
+// Creates the selected physics constructors
+// and registeres them in the modular physics list.
+// ---
+
+  Int_t verboseLevel = TG4VVerbose::VerboseLevel();
+
+  // general physics
+  RegisterPhysics(new TG4PhysicsConstructorGeneral(verboseLevel));
+
+  // electromagnetic physics
+  if (fSetEMPhysics)  
+    RegisterPhysics(new TG4PhysicsConstructorEM(verboseLevel));
+
+  // muon physics
+  if (fSetMuonPhysics && fSetEMPhysics)      
+    RegisterPhysics(new TG4PhysicsConstructorMuon(verboseLevel));
+
+  // hadron physics
+  if (fSetEMPhysics || fSetHadronPhysics) { 
+    RegisterPhysics(new TG4PhysicsConstructorIon(
+    		           verboseLevel, fSetEMPhysics, fSetHadronPhysics));
+    RegisterPhysics(new TG4PhysicsConstructorHadron(
+		           verboseLevel, fSetEMPhysics, fSetHadronPhysics));
+  }  
+
+  // optical physics
+  if (fSetOpticalPhysics) 
+    RegisterPhysics(new TG4PhysicsConstructorOptical(verboseLevel));
+
+  // special processes
+  if (fSetSpecialCutsPhysics) 
+    RegisterPhysics(new TG4PhysicsConstructorSpecialCuts(verboseLevel));
+
+  if (fSetSpecialControlsPhysics) 
+    RegisterPhysics(new TG4PhysicsConstructorSpecialControls(verboseLevel));
+
+  // warn about not allowed combinations
+  if (fSetMuonPhysics && !fSetEMPhysics) {
+    G4String text = "TG4PhysicsManager::CreatePhysicsConstructors:\n";
+    text = text + "    Muon physics cannot be constructed without EM physics.\n";
+    text = text + "    SetMuon control was ignored.";
+    TG4Globals::Warning(text);     
+  }
+
+         // all created physics constructors are deleted
+	 // in the base class destructor
+}    
+
+//_____________________________________________________________________________
 void TG4ModularPhysicsList::SetCuts()
 {
 // Sets the default cut value for all particle types
@@ -154,8 +221,6 @@ void TG4ModularPhysicsList::SetCuts()
   SetCutValue(cut, "proton");
   SetCutValue(cut, "anti_proton");
   
-  SetCutValueForOthers(cut);
-
   if (verboseLevel>0) {
     DumpCutValuesTable();
   }
