@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: TG4ShapeConvertor.cxx,v 1.1 2003/07/22 06:46:58 brun Exp $
 //
 // Author: I. Hrivnacova, 8.1.2003 
 //
@@ -345,7 +345,17 @@ G4VSolid* TG4ShapeConvertor::CreatePolycone(const TGeoPcon* pcon) const
   sphi  *= TG4TGeoUnits::Angle();
   dphi  *= TG4TGeoUnits::Angle();
 
-  return new G4Polycone(name, sphi, dphi, nz, dz, rmin, rmax);
+  G4Polycone* g4Polycone
+    = new G4Polycone(name, sphi, dphi, nz, dz, rmin, rmax);
+    
+  // put back original parameters
+  for (G4int j=0; j<nz; j++) {
+    dz[j]   /= TG4TGeoUnits::Length();
+    rmin[j] /= TG4TGeoUnits::Length();
+    rmax[j] /= TG4TGeoUnits::Length();
+  }  
+
+  return g4Polycone;
 }
 
 //_____________________________________________________________________________
@@ -373,7 +383,17 @@ G4VSolid* TG4ShapeConvertor::CreatePolyhedra(const TGeoPgon* pgon) const
   sphi  *= TG4TGeoUnits::Angle();
   dphi  *= TG4TGeoUnits::Angle();
 
-  return new G4Polyhedra(name, sphi, dphi, ns, nz, dz, rmin, rmax);
+  G4Polyhedra* g4Polyhedra
+    = new G4Polyhedra(name, sphi, dphi, ns, nz, dz, rmin, rmax);
+    
+  // put back original parameters
+  for (G4int j=0; j<nz; j++) {
+    dz[j]   /= TG4TGeoUnits::Length();
+    rmin[j] /= TG4TGeoUnits::Length();
+    rmax[j] /= TG4TGeoUnits::Length();
+  }  
+
+  return g4Polyhedra;   
 }
 
 //_____________________________________________________________________________
@@ -405,7 +425,7 @@ G4VSolid* TG4ShapeConvertor::CreateSphere(const TGeoSphere* sphere) const
   // get values
   G4String name(sphere->GetName());
   G4double rmin = sphere->GetRmin();
-  G4double rmax = sphere->GetRmin();
+  G4double rmax = sphere->GetRmax();
   G4double the1 = sphere->GetTheta1();
   G4double the2 = sphere->GetTheta2();
   G4double dthe = the2 - the1;
@@ -494,14 +514,14 @@ G4VSolid* TG4ShapeConvertor::Convert(const TGeoShape* shape) const
     return CreatePara(para);
   }  
 
-  const TGeoPcon* pcon = dynamic_cast<const TGeoPcon*>(shape);
-  if (pcon) {
-    return CreatePolycone(pcon);
-  }  
-
   const TGeoPgon* pgon = dynamic_cast<const TGeoPgon*>(shape);
   if (pgon) {
     return CreatePolyhedra(pgon);
+  }  
+
+  const TGeoPcon* pcon = dynamic_cast<const TGeoPcon*>(shape);
+  if (pcon) {
+    return CreatePolycone(pcon);
   }  
 
   const TGeoEltu* eltu = dynamic_cast<const TGeoEltu*>(shape);
