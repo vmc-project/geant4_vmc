@@ -1,8 +1,24 @@
-$Id: history,v 1.13 2004/10/05 10:55:35 brun Exp $
+$Id: history,v 1.14 2005/01/05 08:06:57 brun Exp $
 -----------------------------------------------------------------
      
 Tags (history):
 ===============
+  29/03/2005
+  v1-6:
+    Geant4 VMC:
+      - Added possibility to use VGM for geometry conversion and
+        export to XML as an alternative to geant4_vmc/convertors;
+        use of VGM is optional, handled by the environment variable USE_VGM.
+        If USE_VGM is set, the VGM is used for all geometry conversions
+        by default, old roottog4 convertor can be selected via command:
+        /mcDet/useVGM false
+        old g4toxml convertor is disabled.
+      - Fixed setting cuts and G3 controls via special cuts and
+        special control processes.
+      
+    Tested with Geant4 7.0, Root 4.03/02, VGM 2.03
+ 
+
   04/01/2005
   v1-5:
     Geant4 VMC:

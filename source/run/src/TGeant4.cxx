@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.10 2004/11/10 11:39:28 brun Exp $
+// $Id: TGeant4.cxx,v 1.11 2005/02/08 11:18:31 brun Exp $
 // Category: run
 //
 // Class TGeant4
@@ -22,7 +22,7 @@ ClassImp(TGeant4)
 //_____________________________________________________________________________
 TGeant4::TGeant4(const char* name, const char* title,
                  TG4VRunConfiguration* configuration, int argc, char** argv)
-  : TVirtualMC(name, title, true),
+  : TVirtualMC(name, title),
     fVisManager(0)
 {
   // create run manager
@@ -64,7 +64,7 @@ TGeant4::TGeant4(const char* name, const char* title,
 //_____________________________________________________________________________
 TGeant4::TGeant4(const char* name, const char* title,
                  TG4VRunConfiguration* configuration)
-  : TVirtualMC(name, title, true),
+  : TVirtualMC(name, title),
     fVisManager(0)
 {
   // create run manager
