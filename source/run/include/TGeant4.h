@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.10 2004/11/10 11:39:28 brun Exp $
+// $Id: TGeant4.h,v 1.11 2005/01/05 08:04:58 brun Exp $
 /// \ingroup run
 //
 /// \class TGeant4
@@ -38,6 +38,9 @@ class TGeant4: public TVirtualMC
     // methods for building/management of geometry
     // ------------------------------------------------
     //
+
+    // info about supporting geometry defined via Root
+    virtual Bool_t IsRootGeometrySupported() const;
 
     // functions from GBASE 
     virtual void  FinishGeometry(); 

@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.9 2004/10/12 07:47:11 brun Exp $
+// $Id: TGeant4.cxx,v 1.10 2004/11/10 11:39:28 brun Exp $
 // Category: run
 //
 // Class TGeant4
@@ -145,6 +145,14 @@ TGeant4& TGeant4::operator=(const TGeant4& right)
 //
 // methods for building/management of geometry
 // 
+
+//_____________________________________________________________________________
+Bool_t TGeant4::IsRootGeometrySupported() const
+{
+/// Returns info about supporting geometry defined via Root
+
+  return fGeometryManager->IsRootGeometrySupported();
+}  
 
 //_____________________________________________________________________________
 void TGeant4::FinishGeometry() 

@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.9 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.10 2005/02/02 14:16:21 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -144,6 +144,14 @@ void TG4GeometryManager::FillMediumMap()
 //
 // public methods - TVirtualMC implementation
 //
+
+//_____________________________________________________________________________
+Bool_t TG4GeometryManager::IsRootGeometrySupported() const
+{
+/// Returns info about supporting geometry defined via Root
+
+  return true;
+}  
 
 //_____________________________________________________________________________
 void TG4GeometryManager::Material(Int_t& kmat, const char* name, Double_t a, 
@@ -967,9 +975,11 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
       tg4Limits = fGeometryServices->FindLimits(name, true);  
       if (!tg4Limits) 
         tg4Limits = new TG4Limits(name, cuts, controls); 
-      medium->SetLimits(tg4Limits);  
     }
     
+    // set new limits back to medium
+    medium->SetLimits(tg4Limits);
+
     // limit max step for low density materials (< AIR)
     if (lv->GetMaterial()->GetDensity() < fgLimitDensity ) 
       tg4Limits->SetMaxAllowedStep(fgMaxStep);

@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.h,v 1.4 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4GeometryManager.h,v 1.5 2005/02/02 14:16:21 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryManager
@@ -42,6 +42,9 @@ class TG4GeometryManager : public TG4Verbose
     //
     // methods (from the base class)
     
+    // info about supporting geometry defined via Root
+    virtual Bool_t IsRootGeometrySupported() const;
+
     // detector composition
     void  Material(Int_t& kmat, const char* name, Double_t a, 
                      Double_t z, Double_t dens, Double_t radl, Double_t absl,
