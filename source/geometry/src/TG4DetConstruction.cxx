@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.cxx,v 1.3 2002/10/10 13:17:21 brun Exp $
+// $Id: TG4DetConstruction.cxx,v 1.4 2003/01/29 11:22:32 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -132,12 +132,15 @@ G4VPhysicalVolume* TG4DetConstruction::Construct()
     if (fWriteGeometry) pGeometryManager->CloseOutFile();
   }  
   
-  // construct G4 geometry
-  pGeometryManager->CreateG4Geometry();
+  if (pGeometryManager->IsVMCGeometry()) {
+  
+    // construct G4 geometry
+    pGeometryManager->CreateG4Geometry();
 
-  // reset TG4GeometryManager 
-  pGeometryManager->ClearG3Tables();
-     
+    // reset TG4GeometryManager 
+    pGeometryManager->ClearG3Tables();
+  }  
+
   return TG4GeometryServices::Instance()->GetWorld();      
 }
 

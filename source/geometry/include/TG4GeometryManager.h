@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.h,v 1.1 2002/06/20 11:55:24 hristov Exp $
+// $Id: TG4GeometryManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: V. Berejnoi, I. Hrivnacova
@@ -111,6 +111,9 @@ class TG4GeometryManager : public TG4Verbose
     void WriteEuclid(const char* fileName, const char* topVolName, 
                          Int_t number, Int_t nlevel); //new
 		               
+    // set geometry from Root (built via TGeo)
+    void SetRootGeometry();                   
+    
     // end of methods
     // 
 
@@ -126,7 +129,8 @@ class TG4GeometryManager : public TG4Verbose
     void ClearG3TablesFinal();
     void OpenOutFile(G4String filePath);
     void CloseOutFile();
-    
+    G4bool IsVMCGeometry() const;
+   
     // set methods
     void SetWriteGeometry(G4bool writeGeometry);
     void SetMapSecond(const G4String& name);
@@ -142,7 +146,7 @@ class TG4GeometryManager : public TG4Verbose
     void FillMediumMap();
         
     // static data members
-    static TG4GeometryManager*   fgInstance;     //this instance
+    static TG4GeometryManager*  fgInstance;     //this instance
     static const G4double       fgLimitDensity; //material density limit
                                                 //for setting max allowed step 
     static const G4double       fgMaxStep;      //max allowed step in materials 
@@ -163,12 +167,17 @@ class TG4GeometryManager : public TG4Verbose
     G4bool           fUseG3TMLimits;   //if true: G3 limits are passed to G4 
                                        //(in development)
     G4bool           fWriteGeometry;   //if true: geometry parameters are written
-                                       //in a file (ASCII)  
+                                       //in a file (ASCII) 
+    G4bool           fVMCGeometry;     //true if geometry is built using VMC calls
+                                       //(false if geometry is built by conversion)				        
 };
 
 // inline methods
 inline TG4GeometryManager* TG4GeometryManager::Instance()
 { return fgInstance; }
+
+inline G4bool TG4GeometryManager::IsVMCGeometry() const
+{ return fVMCGeometry; }
 
 #endif //TG4_GEOMETRY_MANAGER_H
 

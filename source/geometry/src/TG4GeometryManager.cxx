@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4GeometryManager.cxx,v 1.2 2003/01/29 11:25:23 brun Exp $
 // Category: geometry
 //
 // Author: V. Berejnoi, I. Hrivnacova
@@ -20,6 +20,8 @@
 #include "TG4G3ControlVector.h"
 #include "TG4Globals.h"
 
+#include "TG4RootGeometryConvertor.h"
+
 #include <G3toG4.hh> 
 #include <G3toG4MANY.hh>
 #include <G3toG4BuildTree.hh>
@@ -35,6 +37,9 @@
 #include <G4Material.hh>
 #include <G4MaterialPropertiesTable.hh>
 #include <G4Element.hh> 
+#include <G4ReflectionFactory.hh>
+
+#include <TGeoManager.h>
 
 // extern global method from g3tog4
 void G3CLRead(G4String &, char *);
@@ -50,7 +55,8 @@ TG4GeometryManager::TG4GeometryManager()
     fMaterialCounter(0),
     fMatrixCounter(0),
     fUseG3TMLimits(false),
-    fWriteGeometry(true)
+    fWriteGeometry(true),
+    fVMCGeometry(true)
 {
 //
   if (fgInstance) {
@@ -128,7 +134,11 @@ void TG4GeometryManager::FillMediumMap()
     G4String name  = ((*lvStore)[i])->GetName();
     
     G4String g3Name(name);
-    if (name.find("_refl")) g3Name = g3Name.substr(0, g3Name.find("_refl"));
+    
+    // Filter out the reflected volumesname extension
+    // added by reflection factory 
+    G4String ext = G4ReflectionFactory::Instance()->GetVolumesNameExtension();
+    if (name.find(ext)) g3Name = g3Name.substr(0, g3Name.find(ext));
 
     G4int mediumID = G3Vol.GetVTE(g3Name)->GetNmed();
     fMediumMap.Add(name, mediumID);     
@@ -144,7 +154,6 @@ void TG4GeometryManager::FillMediumMap()
 //
 //=============================================================================
 
- 
 //_____________________________________________________________________________
 void TG4GeometryManager::Material(Int_t& kmat, const char* name, Double_t a, 
           Double_t z, Double_t dens, Double_t radl, Double_t absl, Float_t* buf, 
@@ -265,9 +274,8 @@ void TG4GeometryManager::Mixture(Int_t& kmat, const char *name, Double_t *a,
      }	      
      G3Mat.put(kmat, material);	    
    }  
-   else {
+   else 
      G4gsmixt(kmat, namein, a, z, dens, nlmat, wmat);
-   }  
      
     // save the original material name
     fMaterialNameVector.push_back(namein);  
@@ -408,7 +416,7 @@ void TG4GeometryManager::Ggclos()
 
   if (fWriteGeometry) fOutputManager->WriteGgclos();
 
-  G4ggclos();    
+  G4ggclos();        
 } 
  
 
@@ -887,6 +895,36 @@ void TG4GeometryManager::WriteEuclid(const char* fileName,
     "TG4GeometryManager::WriteEuclid(..) is not yet implemented.");
 }
 
+//_____________________________________________________________________________
+void TG4GeometryManager::SetRootGeometry()
+{
+// Converts Root geometry to G4 geometry objects.
+// ---
+
+  // Check Root manager
+  if (!gGeoManager) {
+    TG4Globals::Exception(
+      "TG4GeometryManager::SetRootGeometry: Root geometry manager not found.");
+  }    
+
+  // Get Root top volume
+  TGeoVolume* top = (TGeoVolume*)gGeoManager->GetListOfVolumes()->First();
+  if (!top) {
+    TG4Globals::Exception(
+      "TG4GeometryManager::SetRootGeometry: Root top volume not found.");
+  }    
+
+  // Close Root geometry
+  gGeoManager->SetTopVolume(top);
+  gGeoManager->CloseGeometry();  
+
+  // Convert Root geometry to G4
+  TG4RootGeometryConvertor convertor;
+  G4VPhysicalVolume* g4World = convertor.Convert(gGeoManager->GetTopVolume());
+  fGeometryServices->SetWorld(g4World);
+  fVMCGeometry = false;
+}                   
+ 
  
 //=============================================================================
 //
@@ -954,32 +992,41 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
     G4LogicalVolume* lv = (*lvStore)[i];
  
     // get limits from G3Med
-    G4int mediumIndex = fGeometryServices->GetMediumId(lv);    
-    G4UserLimits* limits = G3Med.get(mediumIndex)->GetLimits();
-    TG4Limits* tg4Limits = fGeometryServices->GetLimits(limits);
+    TG4Limits* tg4Limits = 0;
 
-    // get tracking medium name
-    G4String name = fMediumNameVector[mediumIndex-1];
+    if (fVMCGeometry) {    
+      G4int mediumIndex = fGeometryServices->GetMediumId(lv); 
+      G3MedTableEntry* medium = G3Med.get(mediumIndex);   
+      G4UserLimits* limits = medium->GetLimits();
+      tg4Limits = fGeometryServices->GetLimits(limits);
+
+      // get tracking medium name
+      G4String name = fMediumNameVector[mediumIndex-1];
     
-    if (tg4Limits) 
-      tg4Limits->SetName(name);
-    else {
-      tg4Limits = fGeometryServices->FindLimits(name, true);  
-      if (!tg4Limits) 
-        tg4Limits = new TG4Limits(name, cuts, controls); 
+      if (tg4Limits) 
+        tg4Limits->SetName(name);
+      else {
+        tg4Limits = fGeometryServices->FindLimits(name, true);  
+        if (!tg4Limits) 
+          tg4Limits = new TG4Limits(name, cuts, controls); 
+	medium->SetLimits(tg4Limits);  
+      }
     }
+    else {
+      G4String name = lv->GetMaterial()->GetName();
+      tg4Limits = new TG4Limits(name, cuts, controls); 
+    }        
     
     // limit max step for low density materials (< AIR)
     if (lv->GetMaterial()->GetDensity() < fgLimitDensity ) 
       tg4Limits->SetMaxAllowedStep(fgMaxStep);
-    
+      
     // update controls in limits according to the setup 
     // in the passed vector
     tg4Limits->Update(controls);
 
     // set limits to logical volume
     lv->SetUserLimits(tg4Limits);
-    //NO TG4 lv->SetUserLimits(0);
   } 
 }
 
