@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.h,v 1.5 2004/04/26 17:05:55 brun Exp $
+// $Id: TG4DetConstruction.h,v 1.6 2004/11/10 11:39:27 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4DetConstruction
@@ -16,6 +16,10 @@
 #include "TG4MagneticFieldType.h"
 #include "TG4AGDDGeometryGenerator.h"
 #include "TG4GDMLGeometryGenerator.h"
+
+#ifdef USE_VGM
+#include "TG4XmlVGMMessenger.h"
+#endif    
 
 #include <G4VUserDetectorConstruction.hh>
 #include <globals.hh>
@@ -43,6 +47,9 @@ class TG4DetConstruction : public G4VUserDetectorConstruction,
     void SetUniformFieldValue(G4double fieldValue);
     void SetReadGeometry(G4bool readGeometry);
     void SetWriteGeometry(G4bool writeGeometry);
+#ifdef USE_VGM
+    void SetUseVGM(G4bool useVGM) { fUseVGM = useVGM; }
+#endif    
     
   protected:
     TG4DetConstruction(const TG4DetConstruction& right);
@@ -56,8 +63,14 @@ class TG4DetConstruction : public G4VUserDetectorConstruction,
 
     // data members
     TG4DetConstructionMessenger  fMessenger;        //messenger
+#ifdef USE_VGM
+    G4bool                       fUseVGM;           //option to use VGM
+    TG4XmlVGMMessenger           fAGDDMessenger;    //XML messenger
+    TG4XmlVGMMessenger           fGDMLMessenger;    //XML messenger
+#else    
     TG4AGDDGeometryGenerator     fAGDDGeometryGenerator; // AGDD convertor 
     TG4GDMLGeometryGenerator     fGDMLGeometryGenerator; // GDML convertor
+#endif
     TG4MagneticFieldType         fMagneticFieldType;//magnetic field type
     G4MagneticField*             fMagneticField;    //magnetic field
     G4bool             fReadGeometry;     // option for reading geometry 

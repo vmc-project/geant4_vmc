@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryManager.h,v 1.3 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4RootGeometryManager.h,v 1.4 2005/01/05 08:04:58 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4RootGeometryManager
@@ -14,6 +14,10 @@
 #include <Rtypes.h>
 
 #include <globals.hh>
+
+#ifdef USE_VGM
+#include <Geant4GM/volumes/Factory.h>
+#endif
 
 #include "TG4Globals.h"
 #include "TG4Verbose.h"
@@ -42,6 +46,11 @@ class TG4RootGeometryManager : public TG4Verbose
     // import geometry from Root (built via TGeo)
     void ImportRootGeometry();                   
     
+#ifdef USE_VGM
+    // set methods
+    void SetUseVGM(Bool_t useVGM) { fUseVGM = useVGM; }
+#endif    
+
   protected:
     TG4RootGeometryManager();
     TG4RootGeometryManager(const TG4RootGeometryManager& right);
@@ -63,8 +72,12 @@ class TG4RootGeometryManager : public TG4Verbose
     void ConvertRootMedias();
     void FillMediumMap();
         
-    // static data members
+    // data members
     TG4RootGeometryConvertor fConvertor;       // roottog4 convertor
+#ifdef USE_VGM
+    Bool_t                   fUseVGM;          // if true use VGM
+    Geant4GM::Factory*       fG4Factory;       // Geant4 VGM Factory
+#endif    
     TG4GeometryServices*     fGeometryServices;// geometry services
     TG4IntMap*        fMediumMap;        // map of volumes names to medias IDs
     TG4intMap         fMediumIdMap;      // map of medium IDs

@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.h,v 1.4 2004/03/26 11:04:04 brun Exp $
+// $Id: TG4DetConstructionMessenger.h,v 1.5 2004/11/10 11:39:27 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4DetConstructionMessenger
@@ -53,6 +53,9 @@ class TG4DetConstructionMessenger: public G4UImessenger
     G4UIcmdWithABool*           fSetReadGeometryCmd;  //command: readGeometry   
     G4UIcmdWithABool*           fSetWriteGeometryCmd; //command: writeGeometry    
     G4UIcmdWithoutParameter*    fPrintMaterialsCmd;   //command: printMatrials     
+#ifdef USE_VGM
+    G4UIcmdWithABool*           fUseVGMCmd;           //command: useVGM    
+#endif
 };
 
 #endif //TG4_DET_CONSTRUCTION_MESSENGER_H

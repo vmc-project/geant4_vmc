@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.11 2004/03/04 16:46:57 brun Exp $
+# $Id: Makefile,v 1.12 2004/07/30 12:30:24 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
@@ -75,6 +75,15 @@ INCDIR  := $(patsubst %,-I%/include,$(GDIRS)) \
 	   -I$(CLHEP_BASE_DIR)/include \
 	   -I$(G4INSTALL)/source/interfaces/common/include
 
+ifneq ($(USE_VGM),)
+INCDIR  += -I$(VGM_INSTALL)/packages/VGM/include \
+	   -I$(VGM_INSTALL)/packages/ClhepVGM/include \
+	   -I$(VGM_INSTALL)/packages/BaseVGM/include \
+	   -I$(VGM_INSTALL)/packages/Geant4GM/include \
+	   -I$(VGM_INSTALL)/packages/RootGM/include \
+	   -I$(VGM_INSTALL)/packages/XmlVGM/include
+endif
+
 # C++ compilation flags
 #
 CXXFLAGS := $(CXXOPTS) $(G4MCDEFS) -I. $(INCDIR) -I$(ROOT_INCDIR) 
@@ -84,6 +93,13 @@ CXXFLAGS := $(CXXOPTS) $(G4MCDEFS) -I. $(INCDIR) -I$(ROOT_INCDIR)
 ifdef G4DEBUG
   CXXFLAGS += -DMCDEBUG
 endif
+
+# Use VGM flag 
+#
+ifneq ($(USE_VGM),)
+  CXXFLAGS += -DUSE_VGM
+endif
+
 
 ######################## Supported Geant4 VIS, UI #############################
 #
@@ -169,6 +185,10 @@ convertors_includes:
 convertors_static:    
 		@for dir in $(CONDIR); do (cd $$dir && $(MAKE) static); done;
 
+ifneq ($(USE_VGM),)
+vgm:
+		@for dir in $(VGM_INSTALL/packages); do (cd $$dir && $(MAKE)); done;
+endif
 
 $(LIBDIR)/lib$(PACKAGE).$(SL):  $(OBJS)
 $(LIBDIR)/lib$(PACKAGE).a:      $(OBJS)

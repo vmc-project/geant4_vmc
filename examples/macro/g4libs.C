@@ -1,4 +1,4 @@
-// $Id: g4libs.C,v 1.5 2003/12/18 13:27:04 brun Exp $
+// $Id: g4libs.C,v 1.6 2005/01/25 08:42:25 brun Exp $
 //
 // Macro for loading Geant4 and Geant4 VMC libraries
 
@@ -26,6 +26,18 @@ Bool_t isSet(const char* variable)
   return false;
 }  
 
+void vgmlibs()
+{ 
+  if (isSet("USE_VGM")) { 
+    cout << "Loading VGM libraries ... " << endl;
+    gSystem->Load("libClhepVGM");
+    gSystem->Load("libBaseVGM");
+    gSystem->Load("libGeant4GM");
+    gSystem->Load("libRootGM");
+    gSystem->Load("libXmlVGM");
+  }  
+}
+  
 void g4libs_graphics(Bool_t granular = true) 
 {
 // Loads G4 graphics libraries, 
@@ -223,12 +235,17 @@ void g4libs_granular()
   // interfaces and graphics
   g4libs_graphics();
   
-  // geant4 VMC
+  // geant4 VMC convertors
   gSystem->Load("libroottog4");
   gSystem->Load("libg4toxml");
+  
+  // VGM libraries
+  vgmlibs();
+    
+  // Geant4 VMC library
   gSystem->Load("libgeant4vmc");
 
-  cout << "Loading Geant4 granular libraries ... finished" << endl;
+  cout << "Loading libraries ... finished" << endl;
 }
 
 void g4libs_global()
@@ -262,11 +279,16 @@ void g4libs_global()
   // interfaces and graphics
   g4libs_graphics(false);
  
-  // geant4 VMC
+  // geant4 VMC convertors
   gSystem->Load("libroottog4");
   gSystem->Load("libg4toxml");
+  
+  // VGM libraries
+  vgmlibs();
+
+  // geant4 VMC
   gSystem->Load("libgeant4vmc");
 
-  cout << "Loading Geant4 global libraries ... finished" << endl;
+  cout << "Loading libraries ... finished" << endl;
 }
 

@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.h,v 1.3 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4GeometryManager.h,v 1.4 2005/01/05 08:04:58 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryManager
@@ -133,6 +133,9 @@ class TG4GeometryManager : public TG4Verbose
     // set methods
     void SetWriteGeometry(G4bool writeGeometry);
     void SetMapSecond(const G4String& name);
+#ifdef USE_VGM
+    void SetUseVGM(G4bool useVGM) { fUseVGM = useVGM; }
+#endif    
      
   protected:
     TG4GeometryManager(const TG4GeometryManager& right);
@@ -167,6 +170,9 @@ class TG4GeometryManager : public TG4Verbose
                                        //in a file (ASCII) 
     G4bool           fVMCGeometry;     //true if geometry is built using VMC calls
                                        //(false if geometry is built by conversion)				        
+#ifdef USE_VGM
+    G4bool           fUseVGM;          //option to use VGM
+#endif    
 };
 
 // inline methods

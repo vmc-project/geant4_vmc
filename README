@@ -1,7 +1,6 @@
-$Id: README,v 1.5 2004/03/04 16:46:57 brun Exp $
------------------------------------------------------------------
+$Id: README,v 1.6 2004/07/30 12:25:14 brun Exp $
 
-Geant4 VMC - Virtual MC implementation for Geant4
+Geant4 VMC - VirtualMC implementation for Geant4
 =================================================
 
 Files:
@@ -15,9 +14,11 @@ Files:
    
 Environment:
 ------------
-  Geant4 VMC requires Root, CLHEP and Geant4 installations.
-  The paths to these installations are defined using the
-  standard environment variables (ROOTSYS, G4INSTALL):
+  Geant4 VMC requires the Root, CLHEP, Geant4 installations
+  and optionally the VGM in case geometry is defined via
+  Root TGeo.
+  The paths to these installations are defined using their
+  standard environment variables:
 
   ROOTSYS  - path to Root installation
   CLHEP_BASE_DIR - path to CLHEP installation		    
@@ -30,19 +31,23 @@ Environment:
 	      
 	      Note: To build Geant4 shared libraries (required) 
 	            G4LIB_BUILD_SHARED has to be set.
+
+  VGM_INSTALL - path to VGM (optional)		    
+  USE_VGM     - this environment variable has to be set (eg. to 1)
+                to include VGM dependent code in compilation
  
   It is important to install Geant4 VMC with the same environment
   setting as Geant4.
 
   The load paths to shared libraries for Root, CLHEP, Geant4, Geant4 VMC
-  has to be added to the environment variable  
+  and optionally VGM has to be added to the environment variable  
   LD_LIBRARY_PATH - on Linux, Solaris, SGI, Alpha/OSF;
   SHLIB_PATH - on HP-UX.
     
- 
 Compilation:
 ------------
-  Geant4 VMC requires Root, CLHEP and Geant4 installation.
+  Geant4 VMC requires Root, CLHEP and Geant4 installation,
+  and, in case geometry is defined via Root TGeo, VGM installation.
   Instructions for these installations can be found in their
   own documentation, they are not provided in this README. 
 

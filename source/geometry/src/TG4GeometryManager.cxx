@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.8 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.9 2005/01/05 08:04:58 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -53,8 +53,11 @@ TG4GeometryManager::TG4GeometryManager()
     fMediumCounter(0),
     fMaterialCounter(0),
     fMatrixCounter(0),
-    fWriteGeometry(true),
+    fWriteGeometry(false),
     fVMCGeometry(true)
+#ifdef USE_VGM
+    ,fUseVGM(true)
+#endif    
 {
 //
   if (fgInstance) {
@@ -860,7 +863,13 @@ void TG4GeometryManager::SetRootGeometry()
 
   TG4RootGeometryManager rootGeometryManager( fGeometryServices, 
 			                     &fMediumMap, &fMediumNameVector);
-			      
+					     
+  rootGeometryManager.VerboseLevel(VerboseLevel());			      
+  			      
+ #ifdef USE_VGM
+  rootGeometryManager.SetUseVGM(fUseVGM);
+#endif
+
   rootGeometryManager.ImportRootGeometry();
   
   fVMCGeometry = false;
