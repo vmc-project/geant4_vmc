@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.h,v 1.2 2002/12/03 15:06:51 brun Exp $
+// $Id: TG4PhysicsManager.h,v 1.3 2003/06/03 17:11:25 brun Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -22,6 +22,8 @@
 
 #include <Rtypes.h>
 #include <TMCProcess.h>
+#include <TMCParticleType.h>
+#include <TString.h>
 
 #include <globals.hh>
 
@@ -51,19 +53,30 @@ class TG4PhysicsManager : public TG4Verbose
     // set methods
     void SetCut(const char* cutName, Float_t cutValue);
     void SetProcess(const char* controlName, Int_t controlValue);
+    void DefineParticle(Int_t pdg, const char* name, TMCParticleType type, 
+                 Double_t mass, Double_t charge, Double_t lifetime);
+    void DefineIon(const char* name, Int_t Z, Int_t A,  
+                 Int_t Q, Double_t excEnergy, Double_t mass);
     Float_t Xsec(char* reac, Float_t energy, Int_t part, Int_t mate);
      
         // particle table usage         
     Int_t IdFromPDG(Int_t pdgID) const;
     Int_t PDGFromId(Int_t mcID) const;
-    void  DefineParticles();      
     
+        // get methods
+    TString   ParticleName(Int_t pdg) const;	  
+    Double_t  ParticleMass(Int_t pdg) const;	  
+    Double_t  ParticleCharge(Int_t pdg) const;	  
+    Double_t  ParticleLifeTime(Int_t pdg) const;	  
+    TMCParticleType ParticleMCType(Int_t pdg) const;
+
     //
     // methods for Geant4 only 
     //
 
-    void CreatePhysicsConstructors();
-    void SetProcessActivation();  
+    void  DefineParticles();      
+    void  CreatePhysicsConstructors();
+    void  SetProcessActivation();  
     TMCProcess GetMCProcess(const G4VProcess* process);
     TMCProcess GetOpBoundaryStatus(const G4VProcess* process);
 
@@ -86,6 +99,7 @@ class TG4PhysicsManager : public TG4Verbose
     void GstparCut(G4int itmed, TG4G3Cut par, G4double parval);
     void GstparControl(G4int itmed, TG4G3Control control, 
                        TG4G3ControlValue parval);
+    G4ParticleDefinition* GetParticleDefinition(G4int pdgEncoding) const;
 
     // static data members
     static TG4PhysicsManager*  fgInstance; //this instance

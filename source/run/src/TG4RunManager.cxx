@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.cxx,v 1.2 2002/11/22 13:29:39 brun Exp $
+// $Id: TG4RunManager.cxx,v 1.3 2003/06/03 17:12:23 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -34,6 +34,7 @@
 #include <TROOT.h> 
 #include <TRint.h>
 #include <TCint.h> 
+#include <TVirtualMCApplication.h>
 
 TG4RunManager* TG4RunManager::fgInstance = 0;
 
@@ -273,12 +274,17 @@ void TG4RunManager::Initialize()
   TG4SDManager::Instance()->Initialize();
 }
 
+#include <G4ParticleTable.hh>
+#include <G4IonTable.hh>
 //_____________________________________________________________________________
 void TG4RunManager::LateInitialize()
 {
-// Finishes initialization of G4 after the AliRoot initialization
+// Finishes initialization of G4 after the G4Run initialization
 // is finished. 
 // ---
+
+  // define particles 
+  TG4PhysicsManager::Instance()->DefineParticles();
 
   // set user limits
   TG4GeometryManager::Instance()
@@ -298,6 +304,9 @@ void TG4RunManager::LateInitialize()
   if (VerboseLevel() > 2) {
     TG4GeometryServices::Instance()->PrintLogicalVolumeStore();  
   }
+  
+  // dump ion table
+  G4ParticleTable::GetParticleTable()->GetIonTable()->DumpTable();
 }
 
 //_____________________________________________________________________________

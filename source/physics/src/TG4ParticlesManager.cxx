@@ -1,4 +1,4 @@
-// $Id: TG4ParticlesManager.cxx,v 1.2 2002/09/06 15:16:04 ivana Exp $
+// $Id: TG4ParticlesManager.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -22,7 +22,7 @@ TG4ParticlesManager* TG4ParticlesManager::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4ParticlesManager::TG4ParticlesManager()
-  : TG4Verbose("particlesMananger") { 
+  : TG4Verbose("particlesManager") { 
 //
   if (fgInstance) {
     TG4Globals::Exception(
@@ -59,11 +59,12 @@ TG4ParticlesManager::operator=(const TG4ParticlesManager& right)
   return *this;  
 }    
           
+//
 // private methods
-
+//
 
 //_____________________________________________________________________________
-G4int TG4ParticlesManager::GetPDGEncoding(G4ParticleDefinition* particle)
+G4int TG4ParticlesManager::GetPDGEncoding(G4ParticleDefinition* particle) const
 {
 // Returns the PDG code of particle;
 // if standard PDG code is not defined the TDatabasePDG
@@ -103,9 +104,8 @@ G4int TG4ParticlesManager::GetPDGEncoding(G4ParticleDefinition* particle)
   return pdgEncoding;  
 }  
      
-
 //_____________________________________________________________________________
-G4int TG4ParticlesManager::GetPDGEncoding(G4String particleName)
+G4int TG4ParticlesManager::GetPDGEncoding(G4String particleName) const
 {
 // Returns the PDG code of particle sepcified by name.
 // ---
@@ -124,11 +124,60 @@ G4int TG4ParticlesManager::GetPDGEncoding(G4String particleName)
   return GetPDGEncoding(particle);
 }  
   
+//_____________________________________________________________________________
+G4int TG4ParticlesManager::GetPDGIonEncoding(G4int Z, G4int A, G4int iso) const
+{
+// Use ENDF-6 mapping for ions = 10000*z+10*a+iso
+// and add 10 000 000.
+// ---
+
+  return 10000000 + 10000*Z + 10*A + iso;
+}  
+  
+//_____________________________________________________________________________
+void  TG4ParticlesManager::AddParticlesToPdgDatabase() const
+{
+// Taken from TGeant3
+//
+// Use ENDF-6 mapping for ions = 10000*z+10*a+iso
+// and add 1 000 000
+// and numbers above 5 000 000 for special applications
+// ---
+
+  const Int_t kion=10000000;
+  const Int_t kspe=50000000;
+
+  const Double_t kGeV=0.9314943228;
+  const Double_t kHslash = 1.0545726663e-27;
+  const Double_t kErgGeV = 1/1.6021773349e-3;
+  const Double_t kHshGeV = kHslash*kErgGeV;
+  const Double_t kYearsToSec = 3600*24*365.25;
+
+  TDatabasePDG *pdgDB = TDatabasePDG::Instance();
+
+  pdgDB->AddParticle("Deuteron","Deuteron",2*kGeV+8.071e-3,kTRUE,
+		     0,3,"Ion",kion+10020);
+		     
+  pdgDB->AddParticle("Triton","Triton",3*kGeV+14.931e-3,kFALSE,
+		     kHshGeV/(12.33*kYearsToSec),3,"Ion",kion+10030);
+
+  pdgDB->AddParticle("Alpha","Alpha",4*kGeV+2.424e-3,kTRUE,
+		     kHshGeV/(12.33*kYearsToSec),6,"Ion",kion+20040);
+
+  pdgDB->AddParticle("HE3","HE3",3*kGeV+14.931e-3,kFALSE,
+		     0,6,"Ion",kion+20030);
+
+  pdgDB->AddParticle("Cherenkov","Cherenkov",0,kFALSE,
+		     0,0,"Special",kspe+50);
+
+  pdgDB->AddParticle("FeedbackPhoton","FeedbackPhoton",0,kFALSE,
+		     0,0,"Special",kspe+51);
+}		     
 
 //_____________________________________________________________________________
 void  TG4ParticlesManager::MapParticles()
 {
-  // map G4 particle names to TDatabasePDG names
+  // Map G4 particle names to TDatabasePDG names
   // (the map is built only for particles that have not
   //  defined standard PDG encoding)
   
@@ -151,8 +200,7 @@ void  TG4ParticlesManager::MapParticles()
   fParticlePDGMap.Add("geantino", GetPDGEncoding("geantino"));
   fParticlePDGMap.Add("chargedgeantino", GetPDGEncoding("chargedgeantino"));
 
-  // add verbose
-  if (VerboseLevel() > 0) {
+  if (VerboseLevel() > 1) {
     G4cout << "Particle maps have been filled." << G4endl;
   }  
   if (VerboseLevel() > 1) {
@@ -161,10 +209,149 @@ void  TG4ParticlesManager::MapParticles()
   }  
 }    
 
-// public methods
+//_____________________________________________________________________________
+G4int TG4ParticlesManager::AddIonToPdgDatabase(
+                              const G4String& name,
+                              G4ParticleDefinition* particleDefinition,
+                              G4int Q)
+{
+// Adds the ion in TDatabasePDG and the maps
+// and returns its generated PDG code.
+// ---
+
+  // Check if ion
+  if (particleDefinition->GetPDGEncoding() != 0 || 
+      particleDefinition->GetParticleType() != "nucleus") {
+    
+      G4String text = "TG4ParticlesManager::AddIonToPdgDatabase: \n";
+      text = text + "    Added particle is not ion."; 
+      TG4Globals::Exception(text);
+  }    
+
+  TParticlePDG* particlePDG 
+    = TDatabasePDG::Instance()->GetParticle(name);
+
+  if (particlePDG) {
+     // Ion was already added
+     return particlePDG->PdgCode();     
+  }
+  else {
+    // Define PDG encoding
+    G4int a = particleDefinition->GetBaryonNumber();
+    G4int z = G4int(particleDefinition->GetPDGCharge()/eplus);
+    G4int pdg = GetPDGIonEncoding(z, a, 0);
+    
+    // Find isomer number which is not yet used
+    while (TDatabasePDG::Instance()->GetParticle(pdg) &&
+           pdg < GetPDGIonEncoding(z, a+1, 0)-1 ) 
+      pdg++;
+
+    if (TDatabasePDG::Instance()->GetParticle(pdg)) {
+      G4String text = "TG4ParticlesManager::AddIonToPdgDatabase: \n";
+      text = text + "    All isomer numbers are already used."; 
+      TG4Globals::Exception(text);
+    }
+ 	   
+    // Define unique ion name
+    G4String uniqueIonName 
+      = UniqueIonName(particleDefinition->GetParticleName(), Q);
+
+    if (VerboseLevel() > 1) {
+       G4cout << "Adding ion to TDatabasePDG " << G4endl;
+       G4cout << "   Unique ion name: " << uniqueIonName << G4endl;
+       G4cout << "   PDG:             " << pdg << G4endl;
+    }    	   
+
+    // Add ion to TDatabasePDG
+    TDatabasePDG::Instance()
+      ->AddParticle(name, uniqueIonName, 
+                    particleDefinition->GetPDGMass()/TG4G3Units::Energy(), 
+		    particleDefinition->GetPDGStable(), 
+		    particleDefinition->GetPDGWidth()/TG4G3Units::Energy(), 
+		    Q*3, "Ion", pdg); 		    
+		    
+    // Add ion to PDG map
+    fParticlePDGMap.Add(uniqueIonName, pdg);  
+
+    // Add ion to name map
+    // if name in PDG is different from unique name
+    if (name != uniqueIonName)
+       fParticleNameMap.Add(uniqueIonName, name); 
+    return pdg;    
+  }		
+}
+
 
 //_____________________________________________________________________________
-G4int TG4ParticlesManager::GetPDGEncodingFast(G4ParticleDefinition* particle)
+G4String TG4ParticlesManager::UniqueIonName(const G4String& g4IonName, 
+                                            G4int Q) const
+{
+// Construct unique name by adding [Q] to G4 ion name.
+// Eg. Al[0.] -> Al[0.][13]
+// ---
+
+  G4String newName = g4IonName;
+  newName = newName + "[";
+  TG4Globals::AppendNumberToString(newName, Q);
+  newName = newName + "]";
+  
+  return newName;  
+}
+
+//_____________________________________________________________________________
+G4String TG4ParticlesManager::CutUniqueIonName(const G4String& uniqueIonName) const
+{
+// Construct G4 ion name from unique name by cutting [Q].
+// Eg. Al[0.][13] -> Al[0.] 
+// ---
+
+  G4String newName(uniqueIonName);  
+  return newName(0, newName.find_first_of(']')+1);
+}
+
+//
+// public methods
+//
+
+//_____________________________________________________________________________
+void TG4ParticlesManager::DefineParticles()
+{
+// Adds particles with standard PDG = 0 to TDatabasePDG
+// and maps them to G4 particles objects.
+// ---
+
+  AddParticlesToPdgDatabase();
+  MapParticles();
+}  
+ 
+//_____________________________________________________________________________
+void TG4ParticlesManager::AddIon(const G4String& name, G4int Z, G4int A, G4int Q, 
+                                 G4double excEnergy)
+{
+// Adds the ion with specified characteristics.
+// ---
+
+  // Get G4 ion particle definition
+  // (Ion is created if it does not yet exist)
+  G4ParticleDefinition* particleDefinition
+    = G4ParticleTable::GetParticleTable()->GetIon(Z, A, excEnergy);
+  
+  if (!particleDefinition) {
+    G4cerr << "Z, A, excEnergy [keV]: " 
+           << Z << " " << A << " " << excEnergy/keV << G4endl;
+    G4String text = 
+      "TG4ParticlesManager::AddIon:\n";
+    text = text + "   G4ParticleTable::FindParticle() failed.";
+    TG4Globals::Exception(text);
+  }	
+  
+  // Add ion to TDatabasePDG
+  AddIonToPdgDatabase(name, particleDefinition, Q);
+}
+
+//_____________________________________________________________________________
+G4int TG4ParticlesManager::GetPDGEncodingFast(G4ParticleDefinition* particle,
+                                              G4int Q)
 {
 // Returns the PDG code of particle;
 // if standard PDG code is not defined the preregistred
@@ -173,29 +360,31 @@ G4int TG4ParticlesManager::GetPDGEncodingFast(G4ParticleDefinition* particle)
 
   // get PDG encoding from G4 particle definition
   G4int pdgEncoding = particle->GetPDGEncoding();
+  
+  if (pdgEncoding) return pdgEncoding;
 
-  // use fParticlePDGMap if standard/ENDF-6 PDG code is not defined
-  if (pdgEncoding == 0) {
-      G4String name = particle->GetParticleName();
-      pdgEncoding = fParticlePDGMap.GetSecond(name, false);
-  }
+  // use fParticlePDGMap 
+  // if standard/ENDF-6 PDG code is not defined
+  G4String name = particle->GetParticleName();
+  pdgEncoding = fParticlePDGMap.GetSecond(name, false);
 
-  // if a nucleus - add it to PDG table 
-  if (pdgEncoding == 0 && particle->GetParticleType() == "nucleus") {
+  if (pdgEncoding) return pdgEncoding;
 
-    // use ENDF-6 mapping 10000*z+10*a+iso + 10000000 for nuclei
-    G4int a = particle->GetBaryonNumber();
-    G4int z = G4int(particle->GetPDGCharge()/eplus);          
-    pdgEncoding = 10000000 + 10000*z + 10*a;
+  // if a nucles
+  if (particle->GetParticleType() == "nucleus") {
 
-    // add nucleus to PDG database
-    TDatabasePDG::Instance()
-      ->AddParticle(particle->GetParticleName(), particle->GetParticleName(),
-                    particle->GetPDGMass(), particle->GetPDGStable(), particle->GetPDGWidth(),
-                    z, "Ion", pdgEncoding);  
+     // Check if nucleus has already PDG defined
+     // in fParticlePDGMap 
+     G4String uniqueIonName 
+       = UniqueIonName(particle->GetParticleName(), Q);
+     pdgEncoding = fParticlePDGMap.GetSecond(uniqueIonName, false);
 
-    // add nucleus to PDG map
-    fParticlePDGMap.Add(particle->GetParticleName(), pdgEncoding);
+     if (pdgEncoding) return pdgEncoding;
+
+     // Add nucleus in database 
+     // (It has not yet been defind)
+     pdgEncoding = AddIonToPdgDatabase(uniqueIonName, particle, Q);
+     if (pdgEncoding) return pdgEncoding;
   }  
 
   if (pdgEncoding == 0 && 
@@ -238,10 +427,9 @@ TParticle* TG4ParticlesManager::GetParticle(const TClonesArray* particles,
 
 //_____________________________________________________________________________
 G4ParticleDefinition* TG4ParticlesManager::GetParticleDefinition(
-                               const TParticle* particle) const
+                               const TParticle* particle, G4bool warn) const
 {
 // Returns G4 particle definition for given TParticle
-// TO DO: replace with using particles name map    
 // ---
 
   // get particle definition from G4ParticleTable
@@ -257,10 +445,38 @@ G4ParticleDefinition* TG4ParticlesManager::GetParticleDefinition(
       particleDefinition = particleTable->FindParticle("geantino");
   }	
   
-  if (particleDefinition==0) {
-    G4cout << "pdgEncoding: " << pdgEncoding << G4endl;
+  if (particleDefinition==0 && warn) {
+    G4cerr << "pdgEncoding: " << pdgEncoding << G4endl;
     G4String text = 
       "TG4ParticlesManager::GetParticleDefinition:\n";
+    text = text + "   G4ParticleTable::FindParticle() failed.";
+    TG4Globals::Warning(text);
+  }	
+  
+  return particleDefinition;
+}
+
+
+//_____________________________________________________________________________
+G4ParticleDefinition* TG4ParticlesManager::GetIonParticleDefinition(
+                               const TParticle* particle, G4bool warn) const
+{
+// Returns G4 particle definition for given ion specified by TParticle.
+// ---
+
+  // Find ion by name
+  G4String ionName = CutUniqueIonName(particle->GetTitle());
+            // Use GetTitle() rather that GetName() as the title is always
+            // set equal to UniqueIonName
+  
+  G4ParticleDefinition* particleDefinition
+    = G4ParticleTable::GetParticleTable()->FindParticle(ionName);
+  
+  if (particleDefinition==0 && warn) {
+    G4cerr << particle->GetName() 
+           << "  pdgEncoding: " << particle->GetPdgCode() << G4endl;
+    G4String text = 
+      "TG4ParticlesManager::GetIonDefinition:\n";
     text = text + "   G4ParticleTable::FindParticle() failed.";
     TG4Globals::Warning(text);
   }	
@@ -318,4 +534,3 @@ G4ThreeVector TG4ParticlesManager::GetParticleMomentum(
 		     particle->Pz()*TG4G3Units::Energy());
   return momentum;
 }
-

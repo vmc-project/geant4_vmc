@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.3 2003/02/26 13:40:30 brun Exp $
+// $Id: TG4PhysicsManager.cxx,v 1.4 2003/06/03 17:11:25 brun Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -24,6 +24,7 @@
 #include <G3MedTable.hh>
 
 #include <TDatabasePDG.h>
+#include <TVirtualMCApplication.h>
 
 TG4PhysicsManager* TG4PhysicsManager::fgInstance = 0;
 
@@ -289,6 +290,25 @@ void TG4PhysicsManager::GstparControl(G4int itmed, TG4G3Control par,
   limits->SetG3Control(par, parval);
 }
 
+//_____________________________________________________________________________
+G4ParticleDefinition* 
+TG4PhysicsManager::GetParticleDefinition(G4int pdgEncoding) const
+{
+// Returns G4 particle definition for given PDG encoding.
+// ---
+
+  G4ParticleDefinition* particleDefinition
+    = G4ParticleTable::GetParticleTable()->FindParticle(pdgEncoding);
+    
+  if (!particleDefinition) {
+    G4cerr << "PDG code: " << G4endl;
+    TG4Globals::Warning(
+      "TG4ParticlesManager::GetParticleDefinition: Particle not found.");
+  }  
+    
+  return particleDefinition;    
+}
+
 // public methods
 
 //_____________________________________________________________________________
@@ -343,23 +363,6 @@ void  TG4PhysicsManager::Gstpar(Int_t itmed, const char *param, Float_t parval)
 } 
  
 //_____________________________________________________________________________
-void TG4PhysicsManager::CreatePhysicsConstructors()
-{
-// Creates the selected physics constructors
-// and registeres them in the modular physics list.
-// ---
-
-  TG4ModularPhysicsList* tg4PhysicsList 
-    = dynamic_cast<TG4ModularPhysicsList*>(fPhysicsList);
-
-  if (!tg4PhysicsList) return;
-    // interactive selection of physics constructors
-    // not available
-
-  tg4PhysicsList->Configure();
-}    
-
-//_____________________________________________________________________________
 void TG4PhysicsManager::SetCut(const char* cutName, Float_t cutValue)
 {
 // Sets the specified cut.
@@ -406,6 +409,59 @@ void TG4PhysicsManager::SetProcess(const char* controlName, Int_t value)
 }  
 
 //_____________________________________________________________________________
+void TG4PhysicsManager::DefineParticle(Int_t pdg, const char* name, 
+                           TMCParticleType type, Double_t mass, Double_t charge, 
+			   Double_t lifetime)
+{
+// Only checks if particle with specified pdg is available in Geant4;
+// if not gives exception.
+// ---
+
+   // Check if particle is available in Geant4
+  G4ParticleTable* particleTable 
+    = G4ParticleTable::GetParticleTable();                        
+  G4ParticleDefinition* particleDefinition = 0;      
+  if (pdg != 0) 
+     particleDefinition = particleTable->FindParticle(pdg);
+  else {
+     G4String particleName(name);
+     if (name == "Rootino")	
+         particleDefinition = particleTable->FindParticle("geantino");
+  }	
+  
+  if (particleDefinition) { 
+     if (VerboseLevel() > 0) {    
+       G4cout << "TG4PhysicsManager::DefineParticle (PDG = " 
+              << pdg << ", " << name << "): " << G4endl;
+       G4cout << "   This particle is in Geant4 defined as " 
+	      <<  particleDefinition->GetParticleName() << G4endl;
+     }	      
+  }	    
+  else { 
+     G4cerr << "TG4PhysicsManager::DefineParticle (PDG = " 
+            << pdg << ", " << name << "): " << G4endl;
+     G4cerr << "   Particle with this PDG does not exist in Geant4." << G4endl
+	    << "   Ask " << TG4Globals::Help() 
+	    << " to include this particle in Geant4 VMC." << G4endl;
+     TG4Globals::Exception(); 	    
+  }
+}
+
+//_____________________________________________________________________________
+void TG4PhysicsManager::DefineIon(const char* name, Int_t Z, Int_t A,  
+                           Int_t Q, Double_t excEnergy, Double_t mass)
+{
+// Keep user defined ion properties in order to be able to use
+// them later as a primary particle.
+// ---
+
+  // add unit
+  excEnergy *= TG4G3Units::Energy();
+  
+  fParticlesManager->AddIon(name, Z, A, Q, excEnergy);
+}			   
+
+//_____________________________________________________________________________
 Float_t TG4PhysicsManager::Xsec(char* ch, Float_t p1, Int_t i1, Int_t i2)
 {
 // Not yet implemented -> gives exception.
@@ -438,55 +494,105 @@ Int_t TG4PhysicsManager::PDGFromId(Int_t mcID) const
 }  
 
 //_____________________________________________________________________________
+TString  TG4PhysicsManager::ParticleName(Int_t pdg) const
+{
+// Returns name of G4 particle specified by pdg.
+// ---
+
+  G4ParticleDefinition* particle = GetParticleDefinition(pdg);
+  
+  if (particle)
+    return TString(particle->GetParticleName());
+  else
+    return TString();
+}	  
+
+//_____________________________________________________________________________
+Double_t  TG4PhysicsManager::ParticleMass(Int_t pdg) const	  
+{
+// Returns mass of G4 particle specified by pdg.
+// ---
+
+  G4ParticleDefinition* particle = GetParticleDefinition(pdg);
+  
+  if (particle)
+    return particle->GetPDGMass()/TG4G3Units::Energy();
+  else
+    return 0.;
+}	  
+
+//_____________________________________________________________________________
+Double_t  TG4PhysicsManager::ParticleCharge(Int_t pdg) const	  
+{
+// Returns charge (in e units) of G4 particle specified by pdg.
+// ---
+
+  G4ParticleDefinition* particle = GetParticleDefinition(pdg);
+  
+  if (particle)
+    return particle->GetPDGCharge()/TG4G3Units::Charge();
+  else
+    return 0.;
+}	  
+
+//_____________________________________________________________________________
+Double_t  TG4PhysicsManager::ParticleLifeTime(Int_t pdg) const  
+{
+// Returns life time of G4 particle specified by pdg.
+// ---
+
+  G4ParticleDefinition* particle = GetParticleDefinition(pdg);
+  
+  if (particle)
+    return particle->GetPDGLifeTime();
+  else
+    return 0.;
+}	  
+
+//_____________________________________________________________________________
+TMCParticleType TG4PhysicsManager::ParticleMCType(Int_t pdg) const
+{
+// Returns MC type of G4 particle specified by pdg.
+// ---
+
+  G4ParticleDefinition* particle = GetParticleDefinition(pdg);
+  
+  if (particle) {
+    TG4Globals::Warning(
+      "TG4PhysicsManager::ParticleMCType: Not yet implemented.");
+    return kPTUndefined;
+  }  
+  else
+    return kPTUndefined;
+}	  
+
+//_____________________________________________________________________________
 void  TG4PhysicsManager::DefineParticles()
 {
-  // ======
-  // Taken from TGeant3
-  //
-  // Use ENDF-6 mapping for ions = 10000*z+10*a+iso
-  // and add 1 000 000
-  // and numbers above 5 000 000 for special applications
-  //
+// Adds particles with standard PDG = 0 
+// and user defined particles to TDatabasePDG
+// and maps them to G4 particles objects.
+// ---
 
-  const Int_t kion=10000000;
-  const Int_t kspe=50000000;
+  fParticlesManager->DefineParticles();
+  TVirtualMCApplication::Instance()->AddParticles();
+}    
 
-  const Double_t kGeV=0.9314943228;
-  const Double_t kHslash = 1.0545726663e-27;
-  const Double_t kErgGeV = 1/1.6021773349e-3;
-  const Double_t kHshGeV = kHslash*kErgGeV;
-  const Double_t kYearsToSec = 3600*24*365.25;
+//_____________________________________________________________________________
+void TG4PhysicsManager::CreatePhysicsConstructors()
+{
+// Creates the selected physics constructors
+// and registeres them in the modular physics list.
+// ---
 
-  TDatabasePDG *pdgDB = TDatabasePDG::Instance();
+  TG4ModularPhysicsList* tg4PhysicsList 
+    = dynamic_cast<TG4ModularPhysicsList*>(fPhysicsList);
 
-  pdgDB->AddParticle("Deuteron","Deuteron",2*kGeV+8.071e-3,kTRUE,
-		     0,1,"Ion",kion+10020);
-		     
-  pdgDB->AddParticle("Triton","Triton",3*kGeV+14.931e-3,kFALSE,
-		     kHshGeV/(12.33*kYearsToSec),1,"Ion",kion+10030);
+  if (!tg4PhysicsList) return;
+    // interactive selection of physics constructors
+    // not available
 
-  pdgDB->AddParticle("Alpha","Alpha",4*kGeV+2.424e-3,kTRUE,
-		     kHshGeV/(12.33*kYearsToSec),2,"Ion",kion+20040);
-
-  pdgDB->AddParticle("HE3","HE3",3*kGeV+14.931e-3,kFALSE,
-		     0,2,"Ion",kion+20030);
-
-  pdgDB->AddParticle("Cherenkov","Cherenkov",0,kFALSE,
-		     0,0,"Special",kspe+50);
-
-  pdgDB->AddParticle("FeedbackPhoton","FeedbackPhoton",0,kFALSE,
-		     0,0,"Special",kspe+51);
-
-
-  // To do: define the PDG database extension
-  // in a common part.
-  //
-  // TVirtualMC::ExtendPDGDatabase(); 
-  //
-  // end of "common" implementation
-  // ======
-
-  fParticlesManager->MapParticles();
+  tg4PhysicsList->Configure();
 }    
 
 //_____________________________________________________________________________

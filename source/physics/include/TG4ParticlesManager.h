@@ -1,4 +1,4 @@
-// $Id: TG4ParticlesManager.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
+// $Id: TG4ParticlesManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -39,16 +39,20 @@ class TG4ParticlesManager : public TG4Verbose
     static TG4ParticlesManager* Instance();
         
     // methods
-    void MapParticles();
+    void DefineParticles();
+    void AddIon(const G4String& name, G4int Z, G4int A, G4int Q, 
+                G4double excEnergy);
 
     // get methods
          // for G4 particle types   
-    G4int GetPDGEncodingFast(G4ParticleDefinition* particle);
+    G4int GetPDGEncodingFast(G4ParticleDefinition* particle, G4int Q);
 
          // for Root particle types;
     TParticle* GetParticle(const TClonesArray* particles, G4int index) const;
     G4ParticleDefinition* GetParticleDefinition(
-                           const TParticle* particle) const;
+                           const TParticle* particle, G4bool warn = true) const;
+    G4ParticleDefinition* GetIonParticleDefinition(
+                           const TParticle* particle, G4bool warn = true) const;
     G4DynamicParticle* CreateDynamicParticle(
                            const TParticle* particle) const;
     G4ThreeVector GetParticlePosition(
@@ -64,8 +68,15 @@ class TG4ParticlesManager : public TG4Verbose
 
   private:
     // methods
-    G4int GetPDGEncoding(G4ParticleDefinition* particle);
-    G4int GetPDGEncoding(G4String particleName);
+    G4int GetPDGEncoding(G4ParticleDefinition* particle) const;
+    G4int GetPDGEncoding(G4String particleName) const;
+    G4int GetPDGIonEncoding(G4int Z, G4int A, G4int iso) const;
+    void  AddParticlesToPdgDatabase() const;
+    void  MapParticles();
+    G4int AddIonToPdgDatabase(const G4String& name,
+              G4ParticleDefinition* particleDefinition, G4int Q);    
+    G4String  UniqueIonName(const G4String& g4IonName, G4int Q) const;
+    G4String  CutUniqueIonName(const G4String& uniqueIonName) const;
 
     // static data members
     static TG4ParticlesManager*  fgInstance; //this instance
