@@ -1,4 +1,4 @@
-// $Id: TG4ParticlesManager.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4ParticlesManager.cxx,v 1.2 2003/09/23 14:24:29 brun Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -247,9 +247,10 @@ G4int TG4ParticlesManager::AddIonToPdgDatabase(
       pdg++;
 
     if (TDatabasePDG::Instance()->GetParticle(pdg)) {
-      G4String text = "TG4ParticlesManager::AddIonToPdgDatabase: \n";
-      text = text + "    All isomer numbers are already used."; 
-      TG4Globals::Exception(text);
+      //G4String text = "TG4ParticlesManager::AddIonToPdgDatabase: \n";
+      //text = text + "    All isomer numbers are already used."; 
+      // TG4Globals::Exception(text);
+      return pdg-1;
     }
  	   
     // Define unique ion name
