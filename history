@@ -1,8 +1,23 @@
-$Id: history,v 1.4 2003/01/29 16:35:12 brun Exp $
+$Id: history,v 1.5 2003/03/13 21:38:10 brun Exp $
 -----------------------------------------------------------------
      
 Tags (history):
 ===============
+
+  03/06/2003:
+  v0-5:
+    geant4_vmc:
+    Enabled a user defined physics list:
+    TG4VRunConfiguration can be overriden by a user own
+    class instantiating a user own physics list
+    (derived from G4VUserPhysicsList). 
+    Update for Geant4 5.1.
+
+    Examples:
+    Corrected deleting of MC application
+    (to avoid warning from deleting static G4 objects when exiting Root)
+    
+    Tested with Geant4 5.1, Root 3.05/04.
 
   13/03/2003:
   v0-4:
