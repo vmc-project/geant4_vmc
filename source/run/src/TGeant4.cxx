@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.2 2002/09/06 15:17:44 ivana Exp $
+// $Id: TGeant4.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -16,6 +16,8 @@
 #include "TG4VisManager.h"
 #include "TG4RunManager.h"
 #include "TG4Globals.h"
+
+using namespace std;
 
 ClassImp(TGeant4)
 
