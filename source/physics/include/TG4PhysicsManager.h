@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.h,v 1.3 2003/06/03 17:11:25 brun Exp $
+// $Id: TG4PhysicsManager.h,v 1.4 2003/09/23 14:24:29 brun Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -51,11 +51,11 @@ class TG4PhysicsManager : public TG4Verbose
     void Gstpar(Int_t itmed, const char *param, Float_t parval); 
 
     // set methods
-    void SetCut(const char* cutName, Float_t cutValue);
-    void SetProcess(const char* controlName, Int_t controlValue);
-    void DefineParticle(Int_t pdg, const char* name, TMCParticleType type, 
+    Bool_t SetCut(const char* cutName, Float_t cutValue);
+    Bool_t SetProcess(const char* controlName, Int_t controlValue);
+    Bool_t DefineParticle(Int_t pdg, const char* name, TMCParticleType type, 
                  Double_t mass, Double_t charge, Double_t lifetime);
-    void DefineIon(const char* name, Int_t Z, Int_t A,  
+    Bool_t DefineIon(const char* name, Int_t Z, Int_t A,  
                  Int_t Q, Double_t excEnergy, Double_t mass);
     Float_t Xsec(char* reac, Float_t energy, Int_t part, Int_t mate);
      

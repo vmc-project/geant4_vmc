@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.5 2003/09/23 14:24:29 brun Exp $
+// $Id: TG4PhysicsManager.cxx,v 1.6 2004/04/26 17:06:47 brun Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -363,7 +363,7 @@ void  TG4PhysicsManager::Gstpar(Int_t itmed, const char *param, Float_t parval)
 } 
  
 //_____________________________________________________________________________
-void TG4PhysicsManager::SetCut(const char* cutName, Float_t cutValue)
+Bool_t TG4PhysicsManager::SetCut(const char* cutName, Float_t cutValue)
 {
 // Sets the specified cut.
 // ---
@@ -376,18 +376,20 @@ void TG4PhysicsManager::SetCut(const char* cutName, Float_t cutValue)
     text = text + "    Parameter " + cutName;
     text = text + " is not implemented.";
     TG4Globals::Warning(text);
-    return;
+    return false;
   }  
   
   // add units
   if (g3Cut == kTOFMAX) cutValue *= TG4G3Units::Time();
   else                  cutValue *= TG4G3Units::Energy();
 
-  fG3PhysicsManager->SetCut(g3Cut, cutValue);    
+  fG3PhysicsManager->SetCut(g3Cut, cutValue); 
+  
+  return true;   
 }  
   
 //_____________________________________________________________________________
-void TG4PhysicsManager::SetProcess(const char* controlName, Int_t value)
+Bool_t TG4PhysicsManager::SetProcess(const char* controlName, Int_t value)
 {
 // Sets the specified process control.
 // ---
@@ -399,17 +401,20 @@ void TG4PhysicsManager::SetProcess(const char* controlName, Int_t value)
     TG4G3ControlValue controlValue 
       = TG4G3ControlVector::GetControlValue(value, control);
     fG3PhysicsManager->SetProcess(control, controlValue);
+    
+    return true;
   }  
   else {   
     G4String text = "TG4PhysicsManager::SetProcess:\n";
     text = text + "    Parameter " + controlName;
     text = text + " is not implemented.";
     TG4Globals::Warning(text);
+    return false;
   }  
 }  
 
 //_____________________________________________________________________________
-void TG4PhysicsManager::DefineParticle(Int_t pdg, const char* name, 
+Bool_t TG4PhysicsManager::DefineParticle(Int_t pdg, const char* name, 
                            TMCParticleType type, Double_t mass, Double_t charge, 
 			   Double_t lifetime)
 {
@@ -435,6 +440,8 @@ void TG4PhysicsManager::DefineParticle(Int_t pdg, const char* name,
               << pdg << ", " << name << "): " << G4endl;
        G4cout << "   This particle is in Geant4 defined as " 
 	      <<  particleDefinition->GetParticleName() << G4endl;
+	      
+       return true;	      
      }	      
   }	    
   else { 
@@ -443,13 +450,14 @@ void TG4PhysicsManager::DefineParticle(Int_t pdg, const char* name,
      G4cerr << "   Particle with this PDG does not exist in Geant4." << G4endl
 	    << "   Ask " << TG4Globals::Help() 
 	    << " to include this particle in Geant4 VMC." << G4endl;
-     TG4Globals::Exception(); 	    
+     TG4Globals::Exception();
+     return false;      	    
   }
 }
 
 //_____________________________________________________________________________
-void TG4PhysicsManager::DefineIon(const char* name, Int_t Z, Int_t A,  
-                           Int_t Q, Double_t excEnergy, Double_t mass)
+Bool_t TG4PhysicsManager::DefineIon(const char* name, Int_t Z, Int_t A,  
+                                    Int_t Q, Double_t excEnergy, Double_t mass)
 {
 // Keep user defined ion properties in order to be able to use
 // them later as a primary particle.
@@ -459,6 +467,8 @@ void TG4PhysicsManager::DefineIon(const char* name, Int_t Z, Int_t A,
   excEnergy *= TG4G3Units::Energy();
   
   fParticlesManager->AddIon(name, Z, A, Q, excEnergy);
+    
+  return true;
 }			   
 
 //_____________________________________________________________________________

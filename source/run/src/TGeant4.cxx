@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.5 2003/09/23 14:24:52 brun Exp $
+// $Id: TGeant4.cxx,v 1.6 2004/05/28 13:50:14 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -376,29 +376,29 @@ void TGeant4::Gstpar(Int_t itmed, const char *param, Double_t parval) {
 }    
 
 //_____________________________________________________________________________
-void TGeant4::SetCut(const char* cutName, Double_t cutValue) { 
+Bool_t TGeant4::SetCut(const char* cutName, Double_t cutValue) { 
 //
-  fPhysicsManager->SetCut(cutName, cutValue);
+  return fPhysicsManager->SetCut(cutName, cutValue);
 }  
 
 //_____________________________________________________________________________
-void TGeant4::SetProcess(const char* flagName, Int_t flagValue) {
+Bool_t TGeant4::SetProcess(const char* flagName, Int_t flagValue) {
 //
-  fPhysicsManager->SetProcess(flagName, flagValue);
+  return fPhysicsManager->SetProcess(flagName, flagValue);
 }  
  
 //_____________________________________________________________________________
-void TGeant4::DefineParticle(Int_t pdg, const char* name, TMCParticleType type, 
+Bool_t TGeant4::DefineParticle(Int_t pdg, const char* name, TMCParticleType type, 
                           Double_t mass, Double_t charge, Double_t lifetime) {
 //
-  fPhysicsManager->DefineParticle(pdg, name, type, mass, charge, lifetime);
+  return fPhysicsManager->DefineParticle(pdg, name, type, mass, charge, lifetime);
 }  			
 			
 //_____________________________________________________________________________
-void TGeant4::DefineIon(const char* name, Int_t Z, Int_t A, 
+Bool_t TGeant4::DefineIon(const char* name, Int_t Z, Int_t A, 
                         Int_t Q, Double_t excEnergy, Double_t mass) {
 //  
-  fPhysicsManager->DefineIon(name, Z, A, Q, excEnergy, mass);
+  return fPhysicsManager->DefineIon(name, Z, A, Q, excEnergy, mass);
 }  
 
 //_____________________________________________________________________________

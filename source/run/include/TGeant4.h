@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.4 2003/09/23 14:24:52 brun Exp $
+// $Id: TGeant4.h,v 1.5 2004/05/28 13:50:14 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -126,11 +126,11 @@ class TGeant4: public TVirtualMC
     virtual void Gstpar(Int_t itmed, const char *param, Double_t parval); 
 
     // set methods
-    virtual void SetCut(const char* cutName, Double_t cutValue);
-    virtual void SetProcess(const char* flagName, Int_t flagValue);
-    virtual void DefineParticle(Int_t pdg, const char* name, TMCParticleType type, 
+    virtual Bool_t SetCut(const char* cutName, Double_t cutValue);
+    virtual Bool_t SetProcess(const char* flagName, Int_t flagValue);
+    virtual Bool_t DefineParticle(Int_t pdg, const char* name, TMCParticleType type, 
                         Double_t mass, Double_t charge, Double_t lifetime);
-    virtual void DefineIon(const char* name, Int_t Z, Int_t A,  
+    virtual Bool_t DefineIon(const char* name, Int_t Z, Int_t A,  
                         Int_t Q, Double_t excEnergy, Double_t mass);
     virtual Double_t Xsec(char* reac, Double_t energy, Int_t part, Int_t mate);
 
