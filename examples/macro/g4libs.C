@@ -1,4 +1,4 @@
-// $Id: g4libs.C,v 1.4 2003/07/22 06:39:07 brun Exp $
+// $Id: g4libs.C,v 1.5 2003/12/18 13:27:04 brun Exp $
 //
 // Macro for loading Geant4 and Geant4 VMC libraries
 
@@ -26,7 +26,7 @@ Bool_t isSet(const char* variable)
   return false;
 }  
 
-void g4libs_graphics() 
+void g4libs_graphics(Bool_t granular = true) 
 {
 // Loads G4 graphics libraries, 
 // external packages: graphics drivers, .. used by G4
@@ -61,8 +61,14 @@ void g4libs_graphics()
   if (isXaw) {
     gSystem->Load("libXaw");
   }
-  gSystem->Load("libG4UIcommon");
-  gSystem->Load("libG4UIbasic");
+  
+  if (granular) {
+    gSystem->Load("libG4UIcommon");
+    gSystem->Load("libG4UIbasic");
+  }
+  else
+   gSystem->Load("libG4interfaces");
+   
   if (isGAG) 
     gSystem->Load("libG4UIGAG");
 
@@ -199,7 +205,8 @@ void g4libs_granular()
   gSystem->Load("libG4detector");   
 
   // parameterisation
-  gSystem->Load("libG4parmodels");
+  gSystem->Load("libG4gflash");
+  gSystem->Load("libG4trdmodels");
 
   // event
   gSystem->Load("libG4event");  
@@ -253,7 +260,7 @@ void g4libs_global()
   gSystem->Load("libG3toG4");
 
   // interfaces and graphics
-  g4libs_graphics();
+  g4libs_graphics(false);
  
   // geant4 VMC
   gSystem->Load("libroottog4");
