@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.2 2003/01/08 08:27:38 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.3 2003/02/26 13:38:42 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -8,6 +8,7 @@
 // See the class description in the header file.
 
 #include "TG4StepManager.h"
+#include "TG4SteppingAction.h"
 #include "TG4GeometryServices.h"
 #include "TG4SDServices.h"
 #include "TG4ParticlesManager.h"
@@ -217,11 +218,10 @@ void TG4StepManager::SetMaxStep(Double_t step)
 //_____________________________________________________________________________
 void TG4StepManager::SetMaxNStep(Int_t maxNofSteps)
 {
-// Not yet implemented.
+// Sets maximum number of steps.
 // ---
 
-  TG4Globals::Warning(
-    "TG4StepManager::SetMaxNStep(..) is not yet implemented.");
+  TG4SteppingAction::Instance()->SetMaxNofSteps(maxNofSteps);
 }
 
 //_____________________________________________________________________________
@@ -602,9 +602,7 @@ Int_t TG4StepManager::GetMaxNStep() const
 // Not yet implemented.
 // ---
 
-  TG4Globals::Warning(
-    "Method GetMaxNStep is not yet implemented in TG4StepManager.");
-  return 0; 
+  return TG4SteppingAction::Instance()->GetMaxNofSteps(); 
 }
 
 //_____________________________________________________________________________
