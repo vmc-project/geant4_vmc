@@ -1,4 +1,4 @@
-// $Id: g4libs.C,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+// $Id: g4libs.C,v 1.2 2002/11/22 13:28:34 brun Exp $
 //
 // Macro for loading Geant4 and Geant4 VMC libraries
 
@@ -122,6 +122,7 @@ void g4libs_granular()
   gSystem->Load("libG4brep"); 
   gSystem->Load("libG4specsolids"); 
   gSystem->Load("libG4stepinterface");
+  gSystem->Load("libG4geombias");
   
   // particles  
   gSystem->Load("libG4partman");
@@ -154,12 +155,12 @@ void g4libs_granular()
   gSystem->Load("libG4hadronic_diffstring");  
   gSystem->Load("libG4hadronic_stringfrag");
   gSystem->Load("libG4hadronic_HE_gen");  
-  gSystem->Load("libG4hadronic_kinetic");   
   gSystem->Load("libG4hadronic_qgstring");
   gSystem->Load("libG4hadronic_HE");  
   gSystem->Load("libG4hadronic_LE");  
   gSystem->Load("libG4hadronic_deex");
   gSystem->Load("libG4hadronic_preequ");  
+  gSystem->Load("libG4hadronic_kinetic");   
   gSystem->Load("libG4hadronic_stop");
   gSystem->Load("libG4hadronic_neu");   
   gSystem->Load("libG4hadronic_iso");   
