@@ -1,8 +1,27 @@
-$Id: history,v 1.9 2003/12/18 13:29:06 brun Exp $
+$Id: history,v 1.10 2004/04/26 17:08:23 brun Exp $
 -----------------------------------------------------------------
      
 Tags (history):
 ===============
+  27/07/2004:
+  v1-4:
+    Geant4_vmc:
+      Updated for modifications in TVirtualMC;
+      corrections in Gmtod(), Gdtom() functions 
+
+    Convertors
+    g4toxml:
+      AGDD convertor now generates full AGDD document,
+      the TOP.xml file is not needed anymore.
+    roottog4:
+      Added support for composite shapes;
+      Added support for divisions in reflected mothers; 
+      Corrections in mapping tracking media Ids to G4 logical volumes
+    
+    Platform names have been changed according to root-config --arch;
+    this changes also the target lib and tmp directories names.
+    Tested with Geant4 6.2, Root 4.00/07
+
   26/04/2004
   v1-3:
     Convertors:
