@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: Ex03PrimaryGenerator.cxx,v 1.1 2003/03/17 14:56:51 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
@@ -95,7 +95,7 @@ void Ex03PrimaryGenerator::GeneratePrimary(const TVector3& origin)
  }  
 
  // Add particle to stack 
- fStack->SetTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
+ fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
                   kPPrimary, ntr, 1., 0);
 }
 

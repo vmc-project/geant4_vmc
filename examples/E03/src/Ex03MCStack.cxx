@@ -1,4 +1,4 @@
-// $Id: Ex03MCStack.cxx,v 1.2 2003/02/04 17:55:35 brun Exp $
+// $Id: Ex03MCStack.cxx,v 1.1 2003/03/17 14:56:51 brun Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -49,7 +49,7 @@ Ex03MCStack::~Ex03MCStack()
 // public methods
 
 //_____________________________________________________________________________
-void  Ex03MCStack::SetTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
+void  Ex03MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
   	                 Double_t px, Double_t py, Double_t pz, Double_t e,
   		         Double_t vx, Double_t vy, Double_t vz, Double_t tof,
 		         Double_t polx, Double_t poly, Double_t polz,
@@ -82,7 +82,7 @@ void  Ex03MCStack::SetTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
 }			 
 
 //_____________________________________________________________________________
-TParticle* Ex03MCStack::GetNextTrack(Int_t& itrack)
+TParticle* Ex03MCStack::PopNextTrack(Int_t& itrack)
 {
 // Gets next particle for tracking from the stack.
 // ---
@@ -102,7 +102,7 @@ TParticle* Ex03MCStack::GetNextTrack(Int_t& itrack)
 }    
 
 //_____________________________________________________________________________
-TParticle* Ex03MCStack::GetPrimaryForTracking(Int_t i)
+TParticle* Ex03MCStack::PopPrimaryForTracking(Int_t i)
 {
 // Returns i-th particle in fParticles.
 // ---
@@ -166,7 +166,21 @@ Int_t  Ex03MCStack::GetNprimary() const
 }  
 
 //_____________________________________________________________________________
-Int_t  Ex03MCStack::CurrentTrack() const 
+TParticle*  Ex03MCStack::GetCurrentTrack() const 
+{
+// Returns the current track parent ID.
+// ---
+
+  TParticle* current = GetParticle(fCurrentTrack);
+
+  if (!current)    
+    Warning("GetCurrentTrack", "Current track not found in the stack");
+
+  return current;
+}  
+
+//_____________________________________________________________________________
+Int_t  Ex03MCStack::GetCurrentTrackNumber() const 
 {
 // Returns the current track ID.
 // ---
@@ -175,19 +189,17 @@ Int_t  Ex03MCStack::CurrentTrack() const
 }  
 
 //_____________________________________________________________________________
-Int_t  Ex03MCStack::CurrentTrackParent() const 
+Int_t  Ex03MCStack::GetCurrentParentTrackNumber() const 
 {
 // Returns the current track parent ID.
 // ---
 
-  TParticle* current = (TParticle*)fParticles->At(fCurrentTrack);
+  TParticle* current = GetCurrentTrack();
 
   if (current) 
     return current->GetFirstMother();
-  else {
-    Warning("CurrentTrackParent", "Current track not found in the stack");
+  else 
     return -1;
-  }  
 }  
 
 //_____________________________________________________________________________

@@ -1,4 +1,4 @@
-// $Id: Ex02TrackerSD.cxx,v 1.1.1.1 2002/06/16 15:57:36 hristov Exp $
+// $Id: Ex02TrackerSD.cxx,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -91,7 +91,7 @@ Bool_t Ex02TrackerSD::ProcessHits()
   Ex02TrackerHit* newHit = AddHit();
 
   // Track ID
-  newHit->SetTrackID  (gMC->GetStack()->CurrentTrack());
+  newHit->SetTrackID  (gMC->GetStack()->GetCurrentTrackNumber());
 
   // Chamber no
   newHit->SetChamberNb(copyNo);

@@ -2,13 +2,13 @@ Loading Geant3 library ...
 Loading Geant3 library ... finished
 --- Init MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   281100383    10C1405F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   281821975    10CC4317 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   276648345   281100383
-                                        HEX    107D5199    10C1405F
-                                        HEX    FFBC0F86           0
-                              relative adrs    -4452474           0
+          with Store/Table at absolute adrs   277379969   281821975
+                                        HEX    10887B81    10CC4317
+                                        HEX    FFBC36B6           0
+                              relative adrs    -4442442           0
           with     1 Str. in     2 Links in   5300 Low words in 3999970 words.
           This store has a fence of   16 words.
 
@@ -25,14 +25,19 @@ Loading Geant3 library ... finished
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
 Geant3 has been created.
 --- Construct geometry 
+===> Geometry, default geometry created
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of LiquidArgon ] 
 ------------------------------------------------------------
-
- MZLINK.  Initialize Link Area  /GCHVIR/  for Store  0 NL/NS=     4     1
-
- MZLINK.  Initialize Link Area  /GCDINA/  for Store  0 NL/NS=     4     4
+Top volume is WRLD. Master volume is WRLD
+List of materials :
+Fixing runtime shapes...
+Counting nodes...
+Voxelizing...
+Building caches for nodes and matrices...
+### 42 nodes/ 7 volume UID's in default geometry
+----------------modeler ready----------------
 --- Init geometry 
 
  Calculating cross section tables, see gphysi.dat for more information

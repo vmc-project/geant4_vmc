@@ -1,4 +1,4 @@
-// $Id: Ex02MCApplication.cxx,v 1.3 2003/02/26 13:38:16 brun Exp $
+// $Id: Ex02MCApplication.cxx,v 1.4 2003/06/03 17:05:49 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -182,7 +182,7 @@ void Ex02MCApplication::GeneratePrimaries()
  pz = sqrt(e*e - mass*mass); 
 
  // Add particle to stack 
- fStack->SetTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
+ fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
                   kPPrimary, ntr, 1., 0);
 }
 
