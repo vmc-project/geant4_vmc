@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryConvertor.h,v 1.3 2003/12/19 14:39:43 brun Exp $
+// $Id: TG4RootGeometryConvertor.h,v 1.4 2004/03/26 11:03:36 brun Exp $
 //
 // Author: I. Hrivnacova, 8.1.2003
 //
@@ -16,9 +16,12 @@
 
 class TGeoVolume;
 class TGeoPatternFinder;
+class TGeoMaterial;
+class TGeoMedium;
 
 class G4VPhysicalVolume;
 class G4LogicalVolume;
+class G4Material;
 
 class TG4MaterialConvertor;
 class TG4ShapeConvertor;
@@ -29,6 +32,10 @@ class TG4RootGeometryConvertor
     typedef std::map<const TGeoVolume*, G4LogicalVolume*,  
                      std::less<const TGeoVolume*> > VolumesMap;
     typedef VolumesMap::const_iterator  VolumesMapIterator;	       
+
+    typedef std::map<const G4LogicalVolume*, const TGeoMedium*,   
+                     std::less<const G4LogicalVolume*> > MediumMap;
+    typedef MediumMap::const_iterator  MediumMapIterator;	       
 
   public:
     TG4RootGeometryConvertor();
@@ -43,8 +50,10 @@ class TG4RootGeometryConvertor
     void SetSeparator(char separator);
 
     // get methods
-    char GetSeparator() const;
-    
+    char  GetSeparator() const;
+    const TGeoMedium* GetMedium(const G4LogicalVolume* lv) const;   
+    const G4Material* GetMaterial(const TGeoMaterial*) const;
+   
   protected:  
     TG4RootGeometryConvertor(const TG4RootGeometryConvertor& right);
 
@@ -70,6 +79,7 @@ class TG4RootGeometryConvertor
     TG4MaterialConvertor* fMaterialConvertor;
     TG4ShapeConvertor*    fShapeConvertor;
     VolumesMap            fVolumesMap;
+    MediumMap             fMediumMap;
     char                  fSeparator;
 };
 

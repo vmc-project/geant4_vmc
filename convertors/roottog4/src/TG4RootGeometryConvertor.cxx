@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryConvertor.cxx,v 1.3 2003/12/19 14:39:43 brun Exp $
+// $Id: TG4RootGeometryConvertor.cxx,v 1.4 2004/03/26 11:03:36 brun Exp $
 //
 // Author: I. Hrivnacova, 8.1.2003 
 //
@@ -40,6 +40,7 @@ TG4RootGeometryConvertor::TG4RootGeometryConvertor()
   : fMaterialConvertor(0),
     fShapeConvertor(0),
     fVolumesMap(),
+    fMediumMap(),
     fSeparator(fgDefaultSeparator)
 {
 //
@@ -217,6 +218,9 @@ TG4RootGeometryConvertor::CreateLV(const TGeoVolume* volume)
  
    fVolumesMap[volume] = lv;
    
+   // Map TGeo medium 
+   fMediumMap[lv] = volume->GetMedium();
+   
    return lv;
 }     
 
@@ -319,8 +323,15 @@ void TG4RootGeometryConvertor::CreateDivision(const TGeoVolume* mother,
   }  
   
   // Place this node
+
+  //G4ReflectionFactory::Instance()
+  //  ->Divide(G4String(daughter->GetName()), dLV, mLV, 
+  //           axis, ndiv, width, offset);
+              // not yet available in Geant4 6.1
+
   new G4PVDivision(G4String(daughter->GetName()), dLV, mLV, 
                    axis, ndiv, width, offset);
+  
 }
 
 //_____________________________________________________________________________
@@ -429,3 +440,29 @@ TG4RootGeometryConvertor::Convert(const TGeoVolume* world)
                            worldLV, 0, false, 0);  
 }
 
+//_____________________________________________________________________________
+const TGeoMedium* 
+TG4RootGeometryConvertor::GetMedium(const G4LogicalVolume* lv) const
+{
+// Returns TGeo medium associated with the TGeo volume
+// corresponding to specified G4LogicalVolume
+// 
+
+  MediumMapIterator it = fMediumMap.find(lv);
+      
+  if (it != fMediumMap.end())
+    return (*it).second;
+  else
+    return 0;
+}
+
+//_____________________________________________________________________________
+const G4Material* 
+TG4RootGeometryConvertor::GetMaterial(const TGeoMaterial* material) const
+{
+// Returns G4Material corresponding to specified TGeoMaterial.
+// ---
+
+  return fMaterialConvertor->GetMaterial(material);
+}  
+    
