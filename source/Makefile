@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.6 2002/11/12 14:51:39 brun Exp $
+# $Id: Makefile,v 1.7 2002/11/13 13:36:41 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
@@ -11,6 +11,7 @@ endif
 TOPDIR  = $(shell pwd)/..
 BINDIR  = $(TOPDIR)/tmp/tgt_$(PLATFORM)
 LIBDIR  = $(TOPDIR)/lib/tgt_$(PLATFORM)
+CONDIR  = $(TOPDIR)/convertors
 
 include ../config/Makefile.$(PLATFORM)
 
@@ -59,7 +60,10 @@ ifndef G4INCLUDE
   G4INCLUDE := $(G4INSTALL)/include
 endif  
 
-INCDIR  := $(patsubst %,-I%/include,$(GDIRS)) -I$(G4INCLUDE) \
+INCDIR  := $(patsubst %,-I%/include,$(GDIRS)) \
+	   -I../convertors/roottog4/include \
+	   -I../convertors/g4toxml/include \
+	   -I$(G4INCLUDE) \
 	   -I$(CLHEP_BASE_DIR)/include \
 	   -I$(G4INSTALL)/source/interfaces/common/include
 
@@ -144,8 +148,11 @@ DEPINC 		+= -I. -I$(ROOTSYS)/include $(INCDIR)
 SLIBRARY	= $(LIBDIR)/lib$(PACKAGE).$(SL)
 ALIBRARY	= $(LIBDIR)/lib$(PACKAGE).a
 
-default:	depend $(SLIBRARY)
+default:	depend convertors $(SLIBRARY)
 all:		default includes
+
+convertors:    
+		@for dir in $(CONDIR); do (cd $$dir && $(MAKE)); done;:
 
 
 $(LIBDIR)/lib$(PACKAGE).$(SL):  $(OBJS)
