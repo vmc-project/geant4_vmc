@@ -1,4 +1,4 @@
-// $Id: TG4NameMap.h,v 1.1 2002/06/20 11:56:10 hristov Exp $
+// $Id: TG4NameMap.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -31,7 +31,7 @@ class TG4NameMap
     // methods
     G4bool Add(const G4String& first, const G4String& second);  
     G4bool AddName(const G4String& name);  
-    const G4String& GetSecond(const G4String& name);
+    const G4String& GetSecond(const G4String& name) const;
     void PrintAll() const;
     void Clear();
 

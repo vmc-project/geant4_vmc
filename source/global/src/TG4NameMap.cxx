@@ -1,4 +1,4 @@
-// $Id: TG4NameMap.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4NameMap.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -79,12 +79,12 @@ G4bool TG4NameMap::AddName(const G4String& name)
 }
 
 //_____________________________________________________________________________
-const G4String& TG4NameMap::GetSecond(const G4String& name)
+const G4String& TG4NameMap::GetSecond(const G4String& name) const
 {
 // Gets second name associated with given name.
 // ---
 
-  MapIterator i = fMap.find(name);
+  MapConstIterator i = fMap.find(name);
   if (i == fMap.end()) 
     return fgUndefined;
   else                 
