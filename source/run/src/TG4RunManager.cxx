@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.cxx,v 1.4 2003/09/23 14:24:29 brun Exp $
+// $Id: TG4RunManager.cxx,v 1.5 2003/12/18 13:28:08 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -138,7 +138,8 @@ TG4RunManager::TG4RunManager(TG4VRunConfiguration* runConfiguration)
 //_____________________________________________________________________________
 TG4RunManager::TG4RunManager()
   : TG4Verbose("runManager"),
-    fMessenger(this) {
+    fMessenger(this)
+{
 //
 }
 
@@ -316,12 +317,17 @@ void TG4RunManager::ProcessEvent()
 }
     
 //_____________________________________________________________________________
-void TG4RunManager::ProcessRun(G4int nofEvents)
+Bool_t TG4RunManager::ProcessRun(G4int nofEvents)
 {
 // Processes Geant4 run.
 // ---
 
   fRunManager->BeamOn(nofEvents); 
+
+  G4bool result = ! TG4SDServices::Instance()->GetIsStopRun();
+  TG4SDServices::Instance()->SetIsStopRun(false);
+  
+  return result;
 }
     
 //_____________________________________________________________________________

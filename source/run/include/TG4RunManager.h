@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.h,v 1.1 2002/06/20 11:58:25 hristov Exp $
+// $Id: TG4RunManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -44,7 +44,7 @@ class TG4RunManager : public TG4Verbose
     void Initialize();
     void LateInitialize();
     void ProcessEvent();
-    void ProcessRun(G4int nofEvents);
+    Bool_t ProcessRun(G4int nofEvents);
 
     // get methods
     Int_t CurrentEvent() const;
