@@ -1,4 +1,4 @@
-# $Id: MakeMacros,v 1.2 2002/10/08 08:34:48 brun Exp $
+# $Id: MakeMacros,v 1.3 2002/11/12 13:31:01 brun Exp $
 
 ############################   MACROS   #######################################
 
@@ -35,6 +35,7 @@ $(ALIBRARY):
 		
 includes:
 	@echo "Making includes ..."
+	@rm -rf $(TOPDIR)/include
 	@[ -d $(TOPDIR)/include ] || mkdir -p $(TOPDIR)/include
 	@cp -p $(HEADERS) $(TOPDIR)/include
 
