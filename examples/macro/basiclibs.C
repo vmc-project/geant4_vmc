@@ -1,10 +1,11 @@
-// $Id: run_g3.C,v 1.2 2002/08/29 10:12:26 ivana Exp $
+// $Id: basiclibs.C,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Macro for loading basic libraries used with both Geant3 and Geant4
 
 void basiclibs()
 {
-  gSystem->Load("libMC");
+  gSystem->Load("libGeom");
+  gSystem->Load("libVMC");
   gSystem->Load("libPhysics");
   gSystem->Load("libEG"); 
   gSystem->Load("libEGPythia6");
