@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.2 2002/12/03 15:05:16 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.3 2003/01/29 11:25:23 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -410,6 +410,26 @@ TG4GeometryServices::PrintLogicalVolumeStore() const
     }    	    
   }
 }  
+
+//_____________________________________________________________________________
+void TG4GeometryServices::PrintElementTable() const
+{
+// Prints the G4 element table.
+// ---
+
+  const G4ElementTable* elementTable = G4Element::GetElementTable();
+
+  G4cout << "Element table: " << G4endl;
+
+  for (G4int i=0; i<G4int(elementTable->size()); i++) {
+  
+    G4Element* element = (*elementTable)[i];
+    G4cout << "  " << G4std::setw(5)  << i
+           << "th element:"
+	   << "  " << element
+	   << G4endl;
+  }	   
+}
 
 //_____________________________________________________________________________
 Int_t TG4GeometryServices::NofG3Volumes() const

@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.h,v 1.1 2002/06/20 11:55:24 hristov Exp $
+// $Id: TG4GeometryServices.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -58,6 +58,7 @@ class TG4GeometryServices : public TG4Verbose
     void PrintVolumeLimits(const G4String& volumeName) const;
     void PrintStatistics(G4bool open, G4bool close) const;
     void PrintLogicalVolumeStore() const;
+    void PrintElementTable() const;
 
     // set methods
     void SetWorld(G4VPhysicalVolume* world);
