@@ -1,11 +1,11 @@
-// $Id: $
+// $Id: TG4GunParticle.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: event
-//
-// Author: I. Hrivnacova
 //
 // Class TG4GunParticle
 // --------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4GunParticle.h"
 
@@ -68,7 +68,9 @@ TG4GunParticle::~TG4GunParticle() {
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4GunParticle& TG4GunParticle::operator=(const TG4GunParticle& right)
@@ -109,13 +111,14 @@ G4int TG4GunParticle::operator!=(const TG4GunParticle& right) const
   return returnValue;
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4GunParticle::Print() const
 {
-// Prints particle properties.
-// ---
+/// Print particle properties.
 
   G4cout << "    particle name: ";
   G4cout << fParticleDefinition->GetParticleName() << G4endl;
@@ -132,8 +135,7 @@ void TG4GunParticle::Print() const
 //_____________________________________________________________________________
 void TG4GunParticle::SetKineticEnergy(G4double kinEnergy)
 {
-// Sets kinetic energy.
-// ---
+/// Set kinetic energy.
 
   G4double mass = fParticleDefinition->GetPDGMass();
   G4double energy = kinEnergy + mass;
@@ -144,8 +146,7 @@ void TG4GunParticle::SetKineticEnergy(G4double kinEnergy)
 //_____________________________________________________________________________
 G4double TG4GunParticle::GetKineticEnergy() const
 {
-// Gets kinetic energy.
-// ---
+/// Get kinetic energy.
 
   G4double mass = fParticleDefinition->GetPDGMass();
   G4double energy 

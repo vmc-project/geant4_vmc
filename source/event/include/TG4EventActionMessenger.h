@@ -1,11 +1,11 @@
-// $Id: TG4EventActionMessenger.h,v 1.1 2002/06/20 11:54:18 hristov Exp $
-// Category: event
+// $Id: TG4EventActionMessenger.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup event
 //
-// Author: I. Hrivnacova
-//
-// Class TG4EventActionMessenger
-// -----------------------------
-// Messenger class that defines commands for TG4EventAction.
+/// \class TG4EventActionMessenger
+/// 
+/// Messenger class that defines commands for TG4EventAction.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_EVENT_ACTION_MESSENGER_H
 #define TG4_EVENT_ACTION_MESSENGER_H 

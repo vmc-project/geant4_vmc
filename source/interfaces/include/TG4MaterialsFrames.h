@@ -1,14 +1,11 @@
-// $Id: TG4MaterialsFrames.h,v 1.1 2002/06/20 11:56:58 hristov Exp $
-// Category: interfaces
+// $Id: TG4MaterialsFrames.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup interfaces
 //
-// Author: D. Adamova
-//
-//======================================================
-//
-//------------TG4MaterialsFrames.h--------------------------------//
-//---------Frames for the the display of materials properties---//
-//
-//=======================================================
+/// \class TG4MaterialsFrames
+///
+/// Frames for the the display of materials properties
+///
+/// Author: D. Adamova
 
 #ifndef TG4_MATERIALSFRAMES_H
 #define TG4_MATERIALSFRAMES_H

@@ -1,7 +1,5 @@
-// $Id: TG4GuiVolume.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4GuiVolume.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: interfaces
-//
-// Author: D. Adamova
 //
 //==================================================================
 //
@@ -9,8 +7,8 @@
 //----Creating link for Logical Volume Tree in AG4 Geometry----//
 //
 //===================================================================
- 
- 
+//
+// Author: D. Adamova
  
 #include "TG4GuiVolume.h"
 #include "TG4Globals.h"
@@ -20,7 +18,7 @@ ClassImp(TG4GuiVolume)
 
 TG4GuiVolume::TG4GuiVolume(const char* name, G4LogicalVolume* lvolume)
 {
-// Constructor
+/// Constructor
     fItem   = 0;
     fLogicalVolume = lvolume; 
     
@@ -32,7 +30,7 @@ TG4GuiVolume::TG4GuiVolume(const char* name, G4LogicalVolume* lvolume)
 
 TG4GuiVolume::TG4GuiVolume(const TG4GuiVolume& gv) 
 {
-// Dummy copy constructor 
+/// Dummy copy constructor 
   TG4Globals::Exception(
     "Attempt to use TG4GuiVolume copy constructor.");
 }
@@ -50,7 +48,7 @@ TG4GuiVolume& TG4GuiVolume::operator=(const TG4GuiVolume& gv)
 
 const char* TG4GuiVolume::GetName() const
 {
-// Returns the gui/logical volume name
+/// Returns the gui/logical volume name
    
   G4String lName = fLogicalVolume->GetName();
   return lName; 
@@ -58,7 +56,7 @@ const char* TG4GuiVolume::GetName() const
 
 TGListTreeItem* TG4GuiVolume::GetItem() const
 {
-// Returns ListTree item
+/// Returns ListTree item
 
     return fItem;
     
@@ -66,7 +64,7 @@ TGListTreeItem* TG4GuiVolume::GetItem() const
 
 G4LogicalVolume* TG4GuiVolume::GetLogicalVolume() const
 {
-// Returns logical volume
+/// Returns logical volume
 
   return fLogicalVolume;
 

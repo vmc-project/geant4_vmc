@@ -1,11 +1,11 @@
-// $Id: TG4RootGeometryManager.cxx,v 1.2 2004/06/18 13:51:11 brun Exp $
+// $Id: TG4RootGeometryManager.cxx,v 1.3 2004/07/09 16:56:31 brun Exp $
 // Category: geometry
-//
-// Author: I. Hrivnacova,  4.5.2004
 //
 // Class TG4RootGeometryManager
 // ----------------------------
 // Class for importing Root TGeo geometry in Geant4 VMC.
+//
+// Author: I. Hrivnacova,  4.5.2004
 
 #include <TGeoManager.h>
 #include <TGeoMedium.h>
@@ -95,10 +95,9 @@ void TG4RootGeometryManager::Gstmed(G4int itmed, G4String,
               G4double stemax, G4double, G4double,
               G4double, G4double*, G4int useG3TMLimits)
 {
-// Fills G3Med table with a medium with specified properties.
-// In difference from G4gstmed in g3tog4 the material is passed
-// directly via G4Material* and not nmat index.
-// ---
+/// Fill G3Med table with a medium with specified properties.               \n
+/// In difference from G4gstmed in g3tog4 the material is passed
+/// directly via G4Material* and not nmat index.
 
   // NB. there is the possibility for redundancy in the mag field
   //     and user limits objects. Who cares.
@@ -128,15 +127,15 @@ void TG4RootGeometryManager::Medium(Int_t& kmed, const char *name,
           Double_t stemax, Double_t deemax, Double_t epsil, 
           Double_t stmin, Double_t* ubuf, Int_t nbuf)
 { 
-// Creates a temporary "medium" that is used for 
-// assigning corresponding parameters to G4 objects:
-// NTMED is stored as a second material index;
-// ISVOL is used for builing G3SensVolVector;
-// STEMAX is passed in TG4Limits (if fUseG3TMLimits is set true);
-// !! The other parameters (IFIELD, FIELDM, TMAXFD, DEEMAX, EPSIL, STMIN)
-// are ignored by Geant4.
-// In difference from TG4GeometryManager::Medium the material is passed
-// directly via G4Material* and not nmat index.
+/// Create a temporary "medium" that is used for 
+/// assigning corresponding parameters to G4 objects:
+/// - NTMED is stored as a second material index;
+/// - ISVOL is used for builing G3SensVolVector;
+/// - STEMAX is passed in TG4Limits (if fUseG3TMLimits is set true);
+/// - !! The other parameters (IFIELD, FIELDM, TMAXFD, DEEMAX, EPSIL, STMIN)
+/// are ignored by Geant4.                                                   \n
+/// In difference from TG4GeometryManager::Medium the material is passed
+/// directly via G4Material* and not nmat index.
 
 //  Geant3 desription:
 //  ==================
@@ -155,7 +154,6 @@ void TG4RootGeometryManager::Medium(Int_t& kmed, const char *name,
 //  IFIELD = 0 if no magnetic field; IFIELD = -1 if user decision in GUSWIM;
 //  IFIELD = 1 if tracking performed with GRKUTA; IFIELD = 2 if tracking
 //  performed with GHELIX; IFIELD = 3 if tracking performed with GHELX3.  
-// ---
 
   G4String namein = fGeometryServices->CutMaterialName(name);
 
@@ -184,9 +182,8 @@ void TG4RootGeometryManager::Medium(Int_t& kmed, const char *name,
 //_____________________________________________________________________________
 void TG4RootGeometryManager::ConvertRootGeometry()
 {
-// Converts Root geometry to G4 geometry objects
-// using roottog4 convertor.
-// ---
+/// Convert Root geometry to G4 geometry objects
+/// using roottog4 convertor.
 
   // Check Root manager
   if (!gGeoManager) {
@@ -214,8 +211,7 @@ void TG4RootGeometryManager::ConvertRootGeometry()
 //_____________________________________________________________________________
 void TG4RootGeometryManager::ConvertRootMedias()
 {
-// Converts medias from TGeo into temporary objects in G3MedTable.
-// ---
+/// Convert medias from TGeo into temporary objects in G3MedTable.
 
   TIter next(gGeoManager->GetListOfMedia());
   TGeoMedium* medium;
@@ -240,7 +236,7 @@ void TG4RootGeometryManager::ConvertRootMedias()
     // fMediumIdMap[medium->GetId()] = kmed;
     
     // Reset the new Id to the TGeoMedium
-    // to make it retrievable from user MC application
+    // to make it retrievable from user VMC application
     // (will not be needed when TVirtualMC::MediumId(const char* name)
     //  is available)
     medium->SetId(kmed); 
@@ -250,8 +246,7 @@ void TG4RootGeometryManager::ConvertRootMedias()
 //_____________________________________________________________________________
 void TG4RootGeometryManager::FillMediumMap()
 {
-// Maps tracking medium IDs to volumes names
-// ---
+/// Map tracking medium IDs to volumes names
 
   static G4int done = 0;
   
@@ -283,9 +278,8 @@ void TG4RootGeometryManager::FillMediumMap()
 //_____________________________________________________________________________
 void TG4RootGeometryManager::ImportRootGeometry()
 {
-// Converts Root geometry to G4 geometry objects
-// and Root medias to Geant4 VMC objects.
-// ---
+/// Convert Root geometry to G4 geometry objects
+/// and Root medias to Geant4 VMC objects.
 
   // Convert Root geometry
   ConvertRootGeometry();

@@ -1,7 +1,11 @@
-// $Id: TG4SDServices.cxx,v 1.3 2004/05/28 13:48:43 brun Exp $
+// $Id: TG4SDServices.cxx,v 1.4 2004/10/12 07:47:11 brun Exp $
 // Category: digits+hits
 //
+// Class TG4SDServices
+// --------------------
 // See the class description in the header file.
+//
+// Author: I.Hrivnacova
 
 #include "TG4SDServices.h"
 #include "TG4SensitiveDetector.h"
@@ -41,7 +45,9 @@ TG4SDServices::~TG4SDServices(){
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4SDServices& TG4SDServices::operator=(const TG4SDServices& right)
@@ -56,13 +62,14 @@ TG4SDServices& TG4SDServices::operator=(const TG4SDServices& right)
 }    
           
 
+//
 // public methods 
+//
 
 //_____________________________________________________________________________
 void TG4SDServices::PrintStatistics(G4bool open, G4bool close) const
 {
-// Print G4 SD statistics
-// ---
+/// Print G4 SD statistics
   
   if (open)  TG4Globals::PrintStars(true);
      
@@ -75,10 +82,9 @@ void TG4SDServices::PrintStatistics(G4bool open, G4bool close) const
 //_____________________________________________________________________________
 G4int TG4SDServices::GetVolumeID(const G4String& volName) const
 { 
-// Returns the sensitive detector identifier.
-// !! Gives exception in case logical volume is not associated with 
-// a sensitive detector.
-// ---
+/// Return the sensitive detector identifier.
+/// !! Give exception in case logical volume is not associated with 
+/// a sensitive detector.
 
   G4String g4VolName 
     = TG4GeometryServices::Instance()->CutName(volName);
@@ -104,9 +110,8 @@ G4int TG4SDServices::GetVolumeID(const G4String& volName) const
 //_____________________________________________________________________________
 G4int TG4SDServices::GetVolumeID(G4LogicalVolume* logicalVolume) const 
 {
-// Returns the sensitive detector ID of the specified
-// logical volume.
-// ---
+/// Return the sensitive detector ID of the specified
+/// logical volume.
  
   G4VSensitiveDetector* sd
     = logicalVolume->GetSensitiveDetector();
@@ -125,10 +130,9 @@ G4int TG4SDServices::GetVolumeID(G4LogicalVolume* logicalVolume) const
 //_____________________________________________________________________________
 G4String TG4SDServices::GetVolumeName(G4int volumeId) const
 {
-// Returns the name of the sensitive detector with the given identifier.
-// Gives a warning in case logical volume is not associated with 
-// a sensitive detector.
-// ---
+/// Return the name of the sensitive detector with the given identifier.
+/// Give a warning in case logical volume is not associated with 
+/// a sensitive detector.
 
   G4LogicalVolumeStore* pLVStore = G4LogicalVolumeStore::GetInstance();
   
@@ -150,9 +154,8 @@ G4String TG4SDServices::GetVolumeName(G4int volumeId) const
 //_____________________________________________________________________________
 G4LogicalVolume* TG4SDServices::GetLogicalVolume(G4int volumeId) const 
 {
-// Finds the first logical volume with specified volumeId 
-// (sensitive detector ID) in G4LogicalVolumeStore.
-// ---
+/// Find the first logical volume with specified volumeId 
+/// (sensitive detector ID) in G4LogicalVolumeStore.
 
   G4LogicalVolumeStore* pLVStore = G4LogicalVolumeStore::GetInstance();
   
@@ -170,8 +173,7 @@ G4LogicalVolume* TG4SDServices::GetLogicalVolume(G4int volumeId) const
 //_____________________________________________________________________________
 Int_t TG4SDServices::GetMediumId(G4int volumeId)  const
 {
-// Return the material number for a given volume id
-// ---
+/// Return the material number for a given volume id
 
   return TG4GeometryServices::Instance()
             ->GetMediumId(GetLogicalVolume(volumeId));	       	         
@@ -181,8 +183,7 @@ Int_t TG4SDServices::GetMediumId(G4int volumeId)  const
 //_____________________________________________________________________________
 Int_t TG4SDServices::NofSensitiveDetectors() const
 {
-// Returns the total number of sensitive detectors.
-// ---
+/// Return the total number of sensitive detectors.
 
   return TG4SensitiveDetector::GetTotalNofSensitiveDetectors();
 }
@@ -191,8 +192,7 @@ Int_t TG4SDServices::NofSensitiveDetectors() const
 TG4SensitiveDetector* TG4SDServices::GetSensitiveDetector(
                                          G4VSensitiveDetector* sd) const
 {
-// Checks and converts type of the sensitive detector.
-// ---
+/// Check and converts type of the sensitive detector.
 
   if (!sd) return 0;
   
@@ -210,8 +210,7 @@ TG4SensitiveDetector* TG4SDServices::GetSensitiveDetector(
 //_____________________________________________________________________________
 Int_t TG4SDServices::NofVolDaughters(const char* volName) const
 {
-// Returns number of daughter of the volume specified by name
-// ---
+/// Return number of daughter of the volume specified by name
   
   G4int volId = GetVolumeID(volName);
   G4LogicalVolume* lv = GetLogicalVolume(volId);
@@ -224,8 +223,7 @@ Int_t TG4SDServices::NofVolDaughters(const char* volName) const
 //_____________________________________________________________________________
 const char*  TG4SDServices::VolDaughterName(const char* volName, Int_t i) const
 {
-// Returns the name of the i-th daughter of the volume specified by name.
-// 
+/// Return the name of the i-th daughter of the volume specified by name.
 
   G4int volId = GetVolumeID(volName);
   G4LogicalVolume* lv = GetLogicalVolume(volId);
@@ -251,8 +249,7 @@ const char*  TG4SDServices::VolDaughterName(const char* volName, Int_t i) const
 //_____________________________________________________________________________
 Int_t  TG4SDServices::VolDaughterCopyNo(const char* volName, Int_t i) const
 {
-// Returns the copyNo of the i-th daughter of the volume specified by name.
-// 
+/// Return the copyNo of the i-th daughter of the volume specified by name.
 
   G4int volId = GetVolumeID(volName);
   G4LogicalVolume* lv = GetLogicalVolume(volId);

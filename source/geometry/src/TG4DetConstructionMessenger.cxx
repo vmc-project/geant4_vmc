@@ -1,11 +1,11 @@
-// $Id: TG4DetConstructionMessenger.cxx,v 1.5 2004/03/26 11:04:04 brun Exp $
+// $Id: TG4DetConstructionMessenger.cxx,v 1.6 2004/04/26 17:05:55 brun Exp $
 // Category: geometry
-//
-// Author: I. Hrivnacova
 //
 // Class TG4DetConstructionMessenger
 // ------------------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4DetConstructionMessenger.h"
 #include "TG4DetConstruction.h"
@@ -32,7 +32,7 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
 
   fFieldTypeCmd = new G4UIcmdWithAString("/mcDet/fieldType", this);
   G4String guidance =   "Select type of magnetic field:\n";
-  guidance = guidance + "  MCApplication:  field defined by MC application (default)\n";
+  guidance = guidance + "  MCApplication:  field defined by VMC application (default)\n";
   guidance = guidance + "  Uniform:        uniform magnetic field\n";
   guidance = guidance + "  None:           no magnetic field";
   fFieldTypeCmd->SetGuidance(guidance);
@@ -103,7 +103,9 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger() {
   delete fPrintMaterialsCmd;
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4DetConstructionMessenger& 
@@ -119,14 +121,15 @@ TG4DetConstructionMessenger::operator=(
   return *this;  
 }    
           
+//
 // public methods
+//
   
 //_____________________________________________________________________________
 void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command, 
                                                G4String newValues)
 {
-// Applies command to the associated object.
-// ---
+/// Apply command to the associated object.
 
   if( command == fFieldTypeCmd ) { 
     if (newValues == "MCApplication") 

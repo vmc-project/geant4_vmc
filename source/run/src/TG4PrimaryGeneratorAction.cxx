@@ -1,11 +1,11 @@
-// $Id: TG4PrimaryGeneratorAction.cxx,v 1.2 2003/07/22 06:36:09 brun Exp $
+// $Id: TG4PrimaryGeneratorAction.cxx,v 1.3 2003/09/23 14:24:29 brun Exp $
 // Category: run
-//
-// Author: I. Hrivnacova
 //
 // Class TG4PrimaryGeneratorAction
 // -------------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4PrimaryGeneratorAction.h"
 #include "TG4ParticlesManager.h"
@@ -32,19 +32,20 @@ TG4PrimaryGeneratorAction::~TG4PrimaryGeneratorAction() {
 //
 }
 
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
 {
-// Creates a new G4PrimaryVertex objects for each TParticle
-// in in the MC stack.
-// ---
+/// Create a new G4PrimaryVertex objects for each TParticle
+/// in the VMC stack.
   
   TVirtualMCStack* stack = gMC->GetStack();  
   if (!stack) {
     G4String text = "TG4PrimaryGeneratorAction::TransformPrimaries:\n";
-    text = text + "   No MC stack is defined.";
+    text = text + "   No VMC stack is defined.";
     TG4Globals::Exception(text);
   }  
     
@@ -155,18 +156,19 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
   }
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
 {
-// Generates primary particles by the selected generator.
-// ---
+/// Generate primary particles by the selected generator.
 
   // Begin of event
   TVirtualMCApplication::Instance()->BeginEvent();
 
-  // Generate primaries and fill the MC stack
+  // Generate primaries and fill the VMC stack
   TVirtualMCApplication::Instance()->GeneratePrimaries();
   
   // Transform Root particle objects to G4 objects

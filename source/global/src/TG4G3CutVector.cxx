@@ -1,11 +1,11 @@
-// $Id: TG4G3CutVector.cxx,v 1.2 2002/10/05 07:32:08 brun Exp $
+// $Id: TG4G3CutVector.cxx,v 1.3 2003/12/18 13:28:08 brun Exp $
 // Category: global
-//
-// Author: I. Hrivnacova
 //
 // Class TG4G3CutVector
 // --------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4G3CutVector.h"
 #include "TG4G3Defaults.h"
@@ -50,7 +50,9 @@ TG4G3CutVector::~TG4G3CutVector() {
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4G3CutVector& TG4G3CutVector::operator=(const TG4G3CutVector& right)
@@ -79,13 +81,14 @@ G4double TG4G3CutVector::operator[](G4int index) const
   }    
 }  
 
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 void TG4G3CutVector::FillCutNameVector()
 {
-// Defines fCutNameVector.
-// ---
+/// Define fCutNameVector.
 
   fgCutNameVector.push_back("CUTGAM");
   fgCutNameVector.push_back("CUTELE");
@@ -101,13 +104,14 @@ void TG4G3CutVector::FillCutNameVector()
   fgCutNameVector.push_back("NONE");
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 TG4G3Cut TG4G3CutVector::GetCut(const G4String& cutName)
 {
-// Retrieves corresponding TG4G3Cut constant from the cutName.
-// ---
+/// Retrieve corresponding TG4G3Cut constant from the cutName.
 
   if      (cutName == fgCutNameVector[kCUTGAM]) return kCUTGAM; 
   else if (cutName == fgCutNameVector[kCUTELE]) return kCUTELE;
@@ -126,8 +130,7 @@ TG4G3Cut TG4G3CutVector::GetCut(const G4String& cutName)
 //_____________________________________________________________________________
 const G4String& TG4G3CutVector::GetCutName(TG4G3Cut cut)
 {
-// Returns name of a specified cut.
-// ---
+/// Return name of a specified cut.
 
   // fill name vector
   if (fgCutNameVector.size() == 0) TG4G3CutVector::FillCutNameVector(); 
@@ -138,8 +141,7 @@ const G4String& TG4G3CutVector::GetCutName(TG4G3Cut cut)
 //_____________________________________________________________________________
 void TG4G3CutVector::SetCut(TG4G3Cut cut, G4double cutValue)
 {
-// Sets the cutValue for the specified cut.
-// ---
+/// Set the cutValue for the specified cut.
 
   if (cut>=kNoG3Cuts) {
     TG4Globals::Exception(
@@ -152,8 +154,7 @@ void TG4G3CutVector::SetCut(TG4G3Cut cut, G4double cutValue)
 //_____________________________________________________________________________
 void TG4G3CutVector::SetG3Defaults()
 {
-// Sets G3 default values for all cuts.
-// ---
+/// Set G3 default values for all cuts.
 
   for (G4int i=0; i<kNoG3Cuts; i++)
     fCutVector[i] = TG4G3Defaults::Instance()->CutValue(i);
@@ -162,10 +163,9 @@ void TG4G3CutVector::SetG3Defaults()
 //_____________________________________________________________________________
 G4bool TG4G3CutVector::Update(const TG4G3CutVector& vector)
 {
-// Update only those values that have not yet been set ( =0.)
-// with given vector. 
-// Returns true if some value was modified.
-// ---
+/// Update only those values that have not yet been set ( =0.)
+/// with given vector. 
+/// Return true if some value was modified.
 
   G4bool result = false;
 
@@ -181,8 +181,7 @@ G4bool TG4G3CutVector::Update(const TG4G3CutVector& vector)
 //_____________________________________________________________________________
 G4String TG4G3CutVector::Format() const
 {
-// Formats the output into a string.
-// ---
+/// Format the output into a string.
 
 #if __GNUC__ >= 3
   std::ostringstream tmpStream;
@@ -219,8 +218,7 @@ G4String TG4G3CutVector::Format() const
 //_____________________________________________________________________________
 void TG4G3CutVector::Print() const
 {
-// Prints the cuts.
-// ---
+/// Print the cuts.
 
   G4cout << Format();
 }	   
@@ -228,11 +226,10 @@ void TG4G3CutVector::Print() const
 //_____________________________________________________________________________
 G4double TG4G3CutVector::GetMinEkineForGamma(const G4Track& track) const
 {
-// Returns the cut value for gamma.
-// (Cut is not applied for "opticalphoton" 
-//  as it is treated in G4 as a particle different 
-//  from "gamma" in G4.)
-// ---
+/// Return the cut value for gamma.
+/// (Cut is not applied for "opticalphoton" 
+///  as it is treated in G4 as a particle different 
+///  from "gamma" in G4.)
 
   const G4VProcess* kpCreatorProcess = track.GetCreatorProcess();
   G4String processName = "";
@@ -254,8 +251,7 @@ G4double TG4G3CutVector::GetMinEkineForGamma(const G4Track& track) const
 //_____________________________________________________________________________
 G4double TG4G3CutVector::GetMinEkineForElectron(const G4Track& track) const
 {
-// Returns the cut value for e-. 
-// ---
+/// Return the cut value for e-. 
 
   const G4VProcess* kpCreatorProcess = track.GetCreatorProcess();
   G4String processName = "";
@@ -291,8 +287,7 @@ G4double TG4G3CutVector::GetMinEkineForElectron(const G4Track& track) const
 //_____________________________________________________________________________
 G4double TG4G3CutVector::GetMinEkineForEplus(const G4Track& track) const
 {
-// Returns the cut value for e+. 
-// ---
+/// Return the cut value for e+. 
 
   const G4VProcess* kpCreatorProcess = track.GetCreatorProcess();
   G4String processName = "";
@@ -309,8 +304,7 @@ G4double TG4G3CutVector::GetMinEkineForEplus(const G4Track& track) const
 //_____________________________________________________________________________
 G4double TG4G3CutVector::GetMinEkineForChargedHadron(const G4Track& track) const
 {
-// Returns the cut value for charged hadron.
-// ---
+/// Return the cut value for charged hadron.
 
   return fCutVector[kCUTHAD];
 }
@@ -318,8 +312,7 @@ G4double TG4G3CutVector::GetMinEkineForChargedHadron(const G4Track& track) const
 //_____________________________________________________________________________
 G4double TG4G3CutVector::GetMinEkineForNeutralHadron(const G4Track& track) const
 {
-// Returns the cut value for neutral hadron.
-// ---
+/// Return the cut value for neutral hadron.
 
   return fCutVector[kCUTNEU];
 }
@@ -327,8 +320,7 @@ G4double TG4G3CutVector::GetMinEkineForNeutralHadron(const G4Track& track) const
 //_____________________________________________________________________________
 G4double TG4G3CutVector::GetMinEkineForMuon(const G4Track& track) const
 {
-// Returns the cut value for neutral muon.
-// ---
+/// Return the cut value for neutral muon.
 
   return fCutVector[kCUTMUO];
 }
@@ -336,16 +328,14 @@ G4double TG4G3CutVector::GetMinEkineForMuon(const G4Track& track) const
 //_____________________________________________________________________________
 G4double TG4G3CutVector::GetMinEkineForOther(const G4Track& track) const
 {
-// Returns 0.
-// ---
+/// Return 0.
 
   return 0.;
 }
 //_____________________________________________________________________________
 G4bool TG4G3CutVector::IsCut() const
 {
-// Returns true if any of cuts is set.
-// ---
+/// Return true if any of cuts is set.
 
   for (G4int i=0; i<kNoG3Cuts; i++) 
     if (fCutVector[i] > fgkTolerance )  return true;

@@ -1,13 +1,13 @@
-// $Id: TG4Globals.h,v 1.3 2003/12/18 13:28:08 brun Exp $
-// Category: global
-//
-// Author: I. Hrivnacova
-//
-// Class TG4Globals
-// ----------------
-// Class provides the basic types and functions of general use. 
-// It is protected from instantiating (only static data members
-// and static methods are defined).
+// $Id: TG4Globals.h,v 1.4 2004/06/18 13:51:29 brun Exp $
+/// \ingroup global
+
+/// \class TG4Globals
+///
+/// Class provides the basic types and functions of general use. 
+/// It is protected from instantiating (only static data members
+/// and static methods are defined).
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_GLOBALS_H
 #define TG4_GLOBALS_H

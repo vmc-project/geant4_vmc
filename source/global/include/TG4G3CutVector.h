@@ -1,12 +1,12 @@
-// $Id: TG4G3CutVector.h,v 1.1 2002/06/20 11:56:10 hristov Exp $
-// Category: global
+// $Id: TG4G3CutVector.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup global
 //
-// Author: I. Hrivnacova
-//
-// Class TG4G3CutVector
-// --------------------
-// Vector of kinetic energy cut values with
-// convenient set/get methods.
+/// \class TG4G3CutVector
+/// 
+/// Vector of kinetic energy cut values with
+/// convenient set/get methods.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_G3_CUT_VECTOR_H
 #define TG4_G3_CUT_VECTOR_H
@@ -69,11 +69,15 @@ class TG4G3CutVector
 
 // inline methods
 
-inline G4double TG4G3CutVector::Tolerance()
-{ return fgkTolerance; }
+inline G4double TG4G3CutVector::Tolerance() { 
+  /// Return tolerance for comparing cuts
+  return fgkTolerance; 
+}
 
-inline void TG4G3CutVector::SetDeltaRaysOn(G4bool value)
-{ fDeltaRaysOn = value; }
+inline void TG4G3CutVector::SetDeltaRaysOn(G4bool value) { 
+  /// Return delta rays process control
+  fDeltaRaysOn = value; 
+}
 
 #endif //TG4_CUT_VECTOR_H
 

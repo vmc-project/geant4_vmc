@@ -1,11 +1,11 @@
-// $Id: TG4SpecialControls.cxx,v 1.2 2002/09/06 15:12:08 ivana Exp $ //
+// $Id: TG4SpecialControls.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $ //
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4VSpecialControls
 // -------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4SpecialControls.h"
 #include "TG4GeometryServices.h"
@@ -41,7 +41,9 @@ TG4SpecialControls::~TG4SpecialControls() {
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4SpecialControls& TG4SpecialControls::operator=(
@@ -56,13 +58,14 @@ TG4SpecialControls& TG4SpecialControls::operator=(
   return *this;  
 } 
 
+//
 // private methods   
+//
 
 //_____________________________________________________________________________
 void TG4SpecialControls::Reset()
 {
-// Resets the buffers to the initial state.
-// ---
+/// Reset the buffers to the initial state.
     			
   fSwitchControls = kUnswitch;
 
@@ -71,16 +74,17 @@ void TG4SpecialControls::Reset()
   fSwitchedControls.clear();
 }
 
+//
 // public methods   
+//
           
 //_____________________________________________________________________________
 G4double TG4SpecialControls::PostStepGetPhysicalInteractionLength(
                            const G4Track& track, G4double previousStepSize,
 			   G4ForceCondition* condition)
 {
-// Returns the Step-size (actual length) which is allowed 
+/// Return the Step-size (actual length) which is allowed 
 // by this process.
-// ---
 
   *condition = NotForced;
 
@@ -155,9 +159,8 @@ G4double TG4SpecialControls::PostStepGetPhysicalInteractionLength(
 G4VParticleChange* TG4SpecialControls::PostStepDoIt(
                       const G4Track& track, const G4Step& step)
 {
-// Changes processes activation of the current track
-// according to the current user limits.
-// ---
+/// Change processes activation of the current track
+/// according to the current user limits.
 
   G4ProcessManager* processManager
     = track.GetDefinition()->GetProcessManager();

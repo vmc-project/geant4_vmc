@@ -1,12 +1,12 @@
-// $Id: TG4SpecialCutsForOther.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
-// Category: physics
+// $Id: TG4SpecialCutsForOther.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup physics
 //
-// Author: I. Hrivnacova
-//
-// Class TG4SpecialCutsForOther
-// ----------------------------
-// Special process that activates the kinetic energy cuts
-// for other (than specified in TParticleWSP) particles.
+/// \class TG4SpecialCutsForOther
+/// 
+/// Special process that activates the kinetic energy cuts
+/// for other (than specified in TParticleWSP) particles.
+///
+/// Author: I. Hrivnacova
  
 #ifndef TG4_SPECIAL_CUTS_FOR_OTHER_H
 #define TG4_SPECIAL_CUTS_FOR_OTHER_H

@@ -1,13 +1,13 @@
-// $Id: TG4PhysicsConstructorMuon.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4PhysicsConstructorMuon.cxx,v 1.2 2003/12/18 13:27:46 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4PhysicsConstructorMuon
 // -----------------------------
 // See the class description in the header file.
 // According to ExN04MuonPhysics.cc,v 1.2.2.1 2001/06/28 19:07:37 gunter Exp 
 // GEANT4 tag Name: geant4-06-00
+//
+// Author: I. Hrivnacova
 
 #include "TG4PhysicsConstructorMuon.h"
 #include "TG4ProcessControlMap.h"
@@ -49,13 +49,14 @@ TG4PhysicsConstructorMuon::~TG4PhysicsConstructorMuon() {
 //
 }
 
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 void TG4PhysicsConstructorMuon::ConstructProcessForMuonPlus()
 {
-// Constructs electromagnetic processes for mu+.
-// ---
+/// Constructs electromagnetic processes for mu+.
   
   // add processes
   G4ProcessManager* pManager = G4MuonPlus::MuonPlus()->GetProcessManager();
@@ -83,8 +84,7 @@ void TG4PhysicsConstructorMuon::ConstructProcessForMuonPlus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorMuon::ConstructProcessForMuonMinus()
 {
-// Constructs electromagnetic processes for mu-.
-// ---
+/// Constructs electromagnetic processes for mu-.
   
   // add processes & set ordering
   G4ProcessManager* pManager = G4MuonMinus::MuonMinus()->GetProcessManager();
@@ -115,8 +115,7 @@ void TG4PhysicsConstructorMuon::ConstructProcessForMuonMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorMuon::ConstructProcessForTauPlus()
 {
-// Constructs electromagnetic processes for tau+.
-// ---
+/// Constructs electromagnetic processes for tau+.
   
   // add processes
   G4ProcessManager* pManager = G4TauPlus::TauPlus()->GetProcessManager();
@@ -138,8 +137,7 @@ void TG4PhysicsConstructorMuon::ConstructProcessForTauPlus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorMuon::ConstructProcessForTauMinus()
 {
-// Constructs electromagnetic processes for tau-.
-// ---
+/// Constructs electromagnetic processes for tau-.
   
   // add processes
   G4ProcessManager* pManager = G4TauMinus::TauMinus()->GetProcessManager();
@@ -157,14 +155,14 @@ void TG4PhysicsConstructorMuon::ConstructProcessForTauMinus()
   mcMap->Add(&fTauMinusIonisation, kPEnergyLoss); 
 }  
 
-
+//
 // protected methods
+//
 
 //_____________________________________________________________________________
 void TG4PhysicsConstructorMuon::ConstructParticle()
 {
-// Instantiates particles.
-// ---
+/// Instantiate particles.
 
   // Mu
   G4MuonPlus::MuonPlusDefinition();
@@ -182,8 +180,7 @@ void TG4PhysicsConstructorMuon::ConstructParticle()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorMuon::ConstructProcess()
 {
-// Constructs electromagnetic processes for muons.
-// ---
+/// Construct electromagnetic processes for muons.
 
   ConstructProcessForMuonPlus();
   ConstructProcessForMuonMinus();

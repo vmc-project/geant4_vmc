@@ -1,12 +1,13 @@
-// $Id: TG4VerboseMessenger.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: global
+// $Id: TG4VerboseMessenger.h,v 1.2 2003/12/18 13:28:08 brun Exp $
+/// \ingroup global
 //
-// Author: I. Hrivnacova
-//
-// Class TG4VerboseMessenger
-// ------------------
-// Messenger class that defines commands for 
-// the verbose classes.
+/// \class TG4VerboseMessenger
+/// 
+/// Messenger class that defines commands for 
+/// the verbose classes.
+///
+/// Author: I. Hrivnacova
+
 
 #ifndef TG4_VERBOSE_MESSENGER_H
 #define TG4_VERBOSE_MESSENGER_H 

@@ -1,18 +1,18 @@
-// $Id: TG4G3PhysicsManager.h,v 1.2 2002/12/03 15:06:04 brun Exp $
-// Category: physics
+// $Id: TG4G3PhysicsManager.h,v 1.3 2003/06/03 18:52:36 brun Exp $
+/// \ingroup physics
 //
-// Author: I. Hrivnacova
-//
-// Class TG4G3PhysicsManager
-// -------------------------
-// This class provides a Geant3 way control
-// to Geant4 physics. 
-// The G3 cuts and process controls are
-// stored in fCutVector and fControlVector vectors.
-// These special cuts/controls are activated 
-// by registering their physics constructors
-// (TG4PhysicsConstructorSpecialCuts, G4PhysicsConstructorSpecialControl)
-// to the physics list.
+/// \class TG4G3PhysicsManager
+/// 
+/// This class provides a Geant3 way control
+/// to Geant4 physics. 
+/// The G3 cuts and process controls are
+/// stored in fCutVector and fControlVector vectors.
+/// These special cuts/controls are activated 
+/// by registering their physics constructors
+/// (TG4PhysicsConstructorSpecialCuts, TG4PhysicsConstructorSpecialControl)
+/// to the physics list.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_G3_PHYSICS_MANAGER_H
 #define TG4_G3_PHYSICS_MANAGER_H
@@ -102,23 +102,36 @@ class TG4G3PhysicsManager
 
 // inline methods
 
-inline TG4G3PhysicsManager* TG4G3PhysicsManager::Instance() 
-{ return fgInstance; }
+inline TG4G3PhysicsManager* TG4G3PhysicsManager::Instance() { 
+  /// Return this instance
+  return fgInstance; 
+}
 
-inline void TG4G3PhysicsManager::Lock() 
-{ fLock = true; }
+inline void TG4G3PhysicsManager::Lock()  { 
+  /// Lock - the cut/control vectors cannot be modified 
+  /// after calling this function 
+  fLock = true; 
+}
 
-inline TG4G3CutVector* TG4G3PhysicsManager::GetCutVector() const
-{ return fCutVector; }
+inline TG4G3CutVector* TG4G3PhysicsManager::GetCutVector() const { 
+  /// Return the vector of cut values
+  return fCutVector; 
+}
 
-inline TG4G3ControlVector* TG4G3PhysicsManager::GetControlVector() const
-{ return fControlVector; }
+inline TG4G3ControlVector* TG4G3PhysicsManager::GetControlVector() const { 
+  /// Return the vector of control values
+  return fControlVector; 
+}
 
-inline TG4boolVector* TG4G3PhysicsManager::GetIsCutVector() const
-{ return fIsCutVector; }
+inline TG4boolVector* TG4G3PhysicsManager::GetIsCutVector() const { 
+  /// Return the vector of boolean info which cuts are set
+  return fIsCutVector; 
+}
 
-inline TG4boolVector* TG4G3PhysicsManager::GetIsControlVector() const
-{ return fIsControlVector; }
+inline TG4boolVector* TG4G3PhysicsManager::GetIsControlVector() const { 
+  /// Return the vector of boolean info which controls are set
+  return fIsControlVector; 
+}
 
 #endif //TG4_PHYSICS_MANAGER_H
 

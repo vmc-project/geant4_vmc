@@ -1,11 +1,11 @@
-// $Id: TG4VerboseMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4VerboseMessenger.cxx,v 1.2 2002/12/18 09:35:31 brun Exp $
 // Category: global
-//
-// Author: I. Hrivnacova
 //
 // Class TG4VerboseMessenger
 // ------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4VerboseMessenger.h"
 #include "TG4VVerbose.h"
@@ -34,31 +34,6 @@ TG4VerboseMessenger::TG4VerboseMessenger(const G4String& directoryName)
   fGlobalVerboseCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 }
 
-
-//_____________________________________________________________________________
-void TG4VerboseMessenger::AddCommand(TG4VVerbose* verbose, 
-                                     const G4String& cmdName)
-{
-//
-//--
-
-  G4UIcmdWithAnInteger* cmd 
-    = new G4UIcmdWithAnInteger(G4String(fkDirectoryName + cmdName), this);
-
-  fVerboseVector.push_back(verbose);
-  fCommandVector.push_back(cmd);
-
-  G4String guidance("Set  verbose level.");
-  guidance.insert(4,cmdName);
-  cmd->SetGuidance(guidance);
-
-  G4String parameterName("Verbose");
-  parameterName.insert(0,cmdName);
-  cmd->SetParameterName(parameterName, false);
-  
-  cmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
-}
-
 //_____________________________________________________________________________
 TG4VerboseMessenger::TG4VerboseMessenger(){
 //
@@ -81,7 +56,9 @@ TG4VerboseMessenger::~TG4VerboseMessenger() {
     delete fCommandVector[i];
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4VerboseMessenger& TG4VerboseMessenger::operator=(const TG4VerboseMessenger& right)
@@ -94,13 +71,14 @@ TG4VerboseMessenger& TG4VerboseMessenger::operator=(const TG4VerboseMessenger& r
   return *this;  
 }    
           
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 void TG4VerboseMessenger::SetNewValueToAll(const G4String value) const
 {
-// Sets the value to all registered verbose instances.
-// ---
+/// Set the value to all registered verbose instances.
    
    G4UIcommandTree* cmdTree
      = G4UImanager::GetUIpointer()->GetTree()->GetTree(fkDirectoryName);
@@ -113,13 +91,38 @@ void TG4VerboseMessenger::SetNewValueToAll(const G4String value) const
    }  
 }
 
+//
 // public methods
+//
+
+//_____________________________________________________________________________
+void TG4VerboseMessenger::AddCommand(TG4VVerbose* verbose, 
+                                     const G4String& cmdName)
+{
+/// Add the command specified by cmdName and associate verbose object.
+//--
+
+  G4UIcmdWithAnInteger* cmd 
+    = new G4UIcmdWithAnInteger(G4String(fkDirectoryName + cmdName), this);
+
+  fVerboseVector.push_back(verbose);
+  fCommandVector.push_back(cmd);
+
+  G4String guidance("Set  verbose level.");
+  guidance.insert(4,cmdName);
+  cmd->SetGuidance(guidance);
+
+  G4String parameterName("Verbose");
+  parameterName.insert(0,cmdName);
+  cmd->SetParameterName(parameterName, false);
+  
+  cmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+}
 
 //_____________________________________________________________________________
 void TG4VerboseMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
 { 
-// Applies command to the associated object.
-// ---
+/// Apply command to the associated object.
 
   if (command == fGlobalVerboseCmd) {
     G4cout << "SetNewValueToAll  " << G4endl;

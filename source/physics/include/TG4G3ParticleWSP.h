@@ -1,12 +1,12 @@
-// $Id: TG4G3ParticleWSP.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
-// Category: physics
+// $Id: TG4G3ParticleWSP.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup physics
 //
-// Author: I. Hrivnacova
-//
-// Enum TG4G3ParticleWSP
-// ---------------------
-// The particles types which a special process (cuts, controls)
-// is applicable for.
+/// \enum TG4G3ParticleWSP
+/// 
+/// The particles types which a special process (cuts, controls)
+/// is applicable for.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_G3_PARTICLE_WSP_H
 #define TG4_G3_PARTICLE_WSP_H

@@ -1,11 +1,11 @@
-// $Id: TG4DetConstructionMessenger.h,v 1.3 2003/01/29 11:23:05 brun Exp $
-// Category: geometry
+// $Id: TG4DetConstructionMessenger.h,v 1.4 2004/03/26 11:04:04 brun Exp $
+/// \ingroup geometry
 //
-// Author: I. Hrivnacova
-//
-// Class TG4DetConstructionMessenger
-// ---------------------------------
-// Messenger class that defines commands for TG4DetConstruction.
+/// \class TG4DetConstructionMessenger
+/// 
+/// Messenger class that defines commands for TG4DetConstruction.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_DET_CONSTRUCTION_MESSENGER_H
 #define TG4_DET_CONSTRUCTION_MESSENGER_H

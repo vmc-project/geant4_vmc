@@ -1,11 +1,11 @@
-// $Id: TG4PhysicsConstructorSpecialControls.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4PhysicsConstructorSpecialControls.cxx,v 1.2 2003/06/03 18:52:36 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4PhysicsConstructorSpecialControls
 // ------------------------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4PhysicsConstructorSpecialControls.h"
 #include "TG4SpecialControls.h"
@@ -36,21 +36,21 @@ TG4PhysicsConstructorSpecialControls::~TG4PhysicsConstructorSpecialControls() {
 //
 }
 
+//
 // protected methods
+//
 
 //_____________________________________________________________________________
 void TG4PhysicsConstructorSpecialControls::ConstructParticle()
 {
-// The particles are constructed in the physics list.
-// ---
+/// The particles are constructed in the physics list.
 }
 
 //_____________________________________________________________________________
 void TG4PhysicsConstructorSpecialControls::ConstructProcess()
 {
-// Adds TG4SpecialControls "process" that activates
-// the control process controls defined in TG4Limits.
-// ---
+/// Add TG4SpecialControls "process" that activates
+/// the control process controls defined in TG4Limits.
 
   TG4G3PhysicsManager* g3PhysicsManager 
     = TG4G3PhysicsManager::Instance();

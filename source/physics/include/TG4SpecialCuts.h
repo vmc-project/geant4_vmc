@@ -1,7 +1,11 @@
-// $Id: TG4SpecialCuts.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
-// Category: physics
+// $Id: TG4SpecialCuts.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup physics
 //
-// Special process that activates kinetic energy cuts
+/// \class TG4SpecialCuts
+///
+/// Special process that activates kinetic energy cuts
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_SPECIAL_CUTS_H
 #define TG4_SPECIAL_CUTS_H

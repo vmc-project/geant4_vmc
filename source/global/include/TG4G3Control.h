@@ -1,17 +1,17 @@
-// $Id: TG4G3Control.h,v 1.1 2002/06/20 11:56:10 hristov Exp $
-// Category: global
+// $Id: TG4G3Control.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup global
 //
-// Author: I. Hrivnacova
-//
-// Enum TG4G3Cut
-// -------------
-// Enumeration for G3 types of physics processes controls.
-// The G4 physics processes and particles which the process
-// control is applied to are indicated in the comments.
-// The process control is mapped to the physics processes
-// (using TG4ProcessControlMap) at the moment of process creating
-// by the physics constructor; the physics contructor type
-// is indicated by the "Physics:" comment.
+/// \enum TG4G3Control
+/// 
+/// Enumeration for G3 types of physics processes controls.
+/// The G4 physics processes and particles which the process
+/// control is applied to are indicated in the comments.
+/// The process control is mapped to the physics processes
+/// (using TG4ProcessControlMap) at the moment of process creating
+/// by the physics constructor; the physics contructor type
+/// is indicated by the "Physics:" comment.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_G3_CONTROL_H
 #define TG4_G3_CONTROL_H

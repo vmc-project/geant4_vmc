@@ -1,11 +1,11 @@
-// $Id: TG4RunAction.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4RunAction.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: run
-//
-// Author: I. Hrivnacova
 //
 // Class TG4RunAction
 // ------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include <G4Timer.hh>
    // in order to avoid the odd dependency for the
@@ -40,7 +40,9 @@ TG4RunAction::~TG4RunAction() {
   delete fTimer;
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4RunAction& TG4RunAction::operator=(const TG4RunAction &right)
@@ -60,8 +62,7 @@ TG4RunAction& TG4RunAction::operator=(const TG4RunAction &right)
 //_____________________________________________________________________________
 void TG4RunAction::BeginOfRunAction(const G4Run* run)
 {
-// Called by G4 kernel at the beginning of run.
-// ---
+/// Called by G4 kernel at the beginning of run.
 
   fRunID++;
   
@@ -80,8 +81,7 @@ void TG4RunAction::BeginOfRunAction(const G4Run* run)
 //_____________________________________________________________________________
 void TG4RunAction::EndOfRunAction(const G4Run* run)
 {
-// Called by G4 kernel at the end of run.
-// ---
+/// Called by G4 kernel at the end of run.
 
   fTimer->Stop();
 

@@ -1,10 +1,14 @@
-// $Id: TG4SensitiveDetector.h,v 1.1 2002/06/20 11:53:25 hristov Exp $
-// Category: digits+hits
+// $Id: TG4SensitiveDetector.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup digits_hits
 //
-// This class adds integer identifier data member to G4VSensitiveDetector.
-// It also takes care of setting step status (kBoundary, kNormalStep)
-// and passing G4Step to TG4StepManager and for calling a user application
-// stepping function.
+/// \class TG4SensitiveDetector
+///
+/// This class adds integer identifier data member to G4VSensitiveDetector.
+/// It also takes care of setting step status (kBoundary, kNormalStep)
+/// and passing G4Step to TG4StepManager and for calling a user application
+/// stepping function.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_SENSITIVE_DETECTOR_H
 #define TG4_SENSITIVE_DETECTOR_H
@@ -52,11 +56,15 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
 
 // inline methods
 
-inline G4int TG4SensitiveDetector::GetTotalNofSensitiveDetectors()
-{ return fgSDCounter; }
+inline G4int TG4SensitiveDetector::GetTotalNofSensitiveDetectors() { 
+  /// Returns the total number of sensitive detectors.
+  return fgSDCounter; 
+}
 
-inline G4int TG4SensitiveDetector::GetID() const
-{ return fID; }
+inline G4int TG4SensitiveDetector::GetID() const { 
+  /// Returns sensitive detector ID.
+  return fID; 
+}
 
 #endif //TG4V_SENSITIVE_DETECTOR_H
 

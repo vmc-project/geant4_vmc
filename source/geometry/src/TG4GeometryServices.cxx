@@ -1,11 +1,11 @@
-// $Id: TG4GeometryServices.cxx,v 1.5 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.6 2004/03/26 11:04:39 brun Exp $
 // Category: geometry
-//
-// Author: I. Hrivnacova
 //
 // Class TG4GeometryServices
 // -------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4GeometryServices.h"
 #include "TG4Limits.h"
@@ -72,11 +72,9 @@ TG4GeometryServices::~TG4GeometryServices() {
 //
 }
 
-//=============================================================================
 //
 // operators
 //
-//=============================================================================
 
 //_____________________________________________________________________________
 TG4GeometryServices& 
@@ -91,19 +89,16 @@ TG4GeometryServices::operator=(const TG4GeometryServices& right)
   return *this;  
 }    
           
-//=============================================================================
 //
 // private methods
 //
-//=============================================================================
 
 //_____________________________________________________________________________
 G4bool TG4GeometryServices::IsG3Volume(const G4String& lvName) const
 {
-// Returns true if the logical volume of given volumeName
-// was not created by Gsposp method with a generic name 
-// (name_copyNo).
-// ---
+/// Return true if the logical volume of given volumeName
+/// was not created by Gsposp method with a generic name 
+/// (name_copyNo).
 
   if (lvName.contains(fSeparator))
     return false;  
@@ -115,9 +110,8 @@ G4bool TG4GeometryServices::IsG3Volume(const G4String& lvName) const
 G4bool TG4GeometryServices::CompareElement(G4double a, G4double z, 
                                            const G4Element* element) const
 {
-// Compares given parameters with those of a given element,
-// returns true if they are equal, false otherwise.
-// ---
+/// Compare given parameters with those of a given element,
+/// return true if they are equal, false otherwise.
 
   G4double ae = element->GetA()/TG4G3Units::AtomicWeight();
   G4double ze = element->GetZ();
@@ -141,9 +135,8 @@ G4bool TG4GeometryServices::CompareElement(G4double a, G4double z,
 G4bool TG4GeometryServices::CompareMaterial(G4int nofElements, G4double density, 
                                             const G4Material* material) const
 {
-// Compares given density with those of a given material,
-// returns true if they are equal, false otherwise.
-// ---
+/// Compare given density with those of a given material,
+/// return true if they are equal, false otherwise.
 
   G4double dm = material->GetDensity()/TG4G3Units::MassDensity();
   G4int ne = material->GetNumberOfElements();
@@ -161,11 +154,10 @@ G4bool TG4GeometryServices::CompareMaterial(G4int nofElements, G4double density,
 G4double* TG4GeometryServices::ConvertAtomWeight(G4int nmat,  
                                                  G4double* a, G4double* wmat) const
 {
-// In case of proportions given in atom counts (nmat<0),
-// the wmat[i] are converted to weight fractions.
-// (From g3tog4 G4gsmixt.)
-// The new array has to be delete by client.
-// ---
+/// In case of proportions given in atom counts (nmat<0),
+/// the wmat[i] are converted to weight fractions.
+/// (From g3tog4 G4gsmixt.)                                                  \n
+/// The new array has to be deleted by client.
  
   G4double* weight = new G4double[abs(nmat)];
   
@@ -192,19 +184,16 @@ G4double* TG4GeometryServices::ConvertAtomWeight(G4int nmat,
   return weight;  
 }
 
-//=============================================================================
 //
 // public methods
 //
-//=============================================================================
 
 //_____________________________________________________________________________
 G4double* TG4GeometryServices::CreateG4doubleArray(Float_t* array, 
                G4int size) const
 {
-// Converts Float_t* array to G4double*,
-// !! The new array has to be deleted by user.
-// ---
+/// Convert Float_t* array to G4double*.                                    \n
+/// !! The new array has to be deleted by user.
 
   G4double* doubleArray;
   if (size>0) {
@@ -220,8 +209,7 @@ G4double* TG4GeometryServices::CreateG4doubleArray(Float_t* array,
 //_____________________________________________________________________________
 G4String TG4GeometryServices::CutName(const char* name) const
 {
-// Removes spaces after the name if present.
-// ---
+/// Remove spaces after the name if present.
 
   G4String cutName = name;
   G4int i = cutName.length();
@@ -233,8 +221,7 @@ G4String TG4GeometryServices::CutName(const char* name) const
 //_____________________________________________________________________________
 G4String TG4GeometryServices::CutMaterialName(const char* name) const
 {
-// Removes the $ with precedent spaces at the name if present.
-// ---
+/// Remove the $ with precedent spaces at the name if present.
 
   G4String cutName = name;
   cutName = cutName.substr(0,cutName.find('$'));
@@ -245,9 +232,8 @@ G4String TG4GeometryServices::CutMaterialName(const char* name) const
 //_____________________________________________________________________________
 G4String  TG4GeometryServices::G4ToG3VolumeName(const G4String& name) const
 {
-// Cuts _copyNo extension added to logical volume name in case 
-// the logical volume was created by Gsposp method.
-// ---
+/// Cut _copyNo extension added to logical volume name in case 
+/// the logical volume was created by Gsposp method.
 
   G4String cutName = name;
   if (cutName.contains(fSeparator)) 
@@ -261,9 +247,9 @@ G4String  TG4GeometryServices::GenerateLimitsName(G4int id,
                                        const G4String& medName,
                                        const G4String& matName) const
 {
-// Generate unique name for user limits composed from the tracking medium id,
-// name and its material name.
-//
+/// Generate unique name for user limits composed from the tracking medium id,
+/// name and its material name.
+
   G4String name = "";
   TG4Globals::AppendNumberToString(name, id);
   name = name + "__med_" + medName + "__mat_" + matName;
@@ -276,8 +262,7 @@ G4Material* TG4GeometryServices::MixMaterials(G4String name, G4double density,
                                     const TG4StringVector& matNames, 
 				    const TG4doubleVector& matWeights)
 {
-// Creates a mixture of selected materials
-// ---
+/// Create a mixture of selected materials.
 
   // number of materials to be mixed  
   G4int nofMaterials = matNames.size();
@@ -314,8 +299,7 @@ G4Material* TG4GeometryServices::MixMaterials(G4String name, G4double density,
 //_____________________________________________________________________________
 void TG4GeometryServices::PrintNameMap() const
 {
-// Prints the map of volumes names to second names.
-// ---
+/// Print the map of volumes names to second names.
 
   fNameMap->PrintAll();
 }
@@ -323,8 +307,7 @@ void TG4GeometryServices::PrintNameMap() const
 //_____________________________________________________________________________
 void TG4GeometryServices::PrintLimits(const G4String& name) const
 {
-// Finds the limits with the specified name and prints them.
-// ---
+/// Find the limits with the specified name and prints them.
 
   TG4Limits* limits = FindLimits(name, true);
   
@@ -334,9 +317,8 @@ void TG4GeometryServices::PrintLimits(const G4String& name) const
 //_____________________________________________________________________________
 void TG4GeometryServices::PrintVolumeLimits(const G4String& volumeName) const
 {
-// Finds a logical volume with the specified name and prints
-// its limits.
-// ---
+/// Find a logical volume with the specified name and prints
+/// its limits.
 
   G4LogicalVolume* lv = FindLogicalVolume(volumeName, false);
   
@@ -353,8 +335,7 @@ void TG4GeometryServices::PrintVolumeLimits(const G4String& volumeName) const
 //_____________________________________________________________________________
 void TG4GeometryServices::PrintStatistics(G4bool open, G4bool close) const
 {
-// Print G4 geometry statistics
-// ---
+/// Print G4 geometry statistics.
   
 
   if (open)  TG4Globals::PrintStars(true);
@@ -379,8 +360,7 @@ void TG4GeometryServices::PrintStatistics(G4bool open, G4bool close) const
 void 
 TG4GeometryServices::PrintLogicalVolumeStore() const
 {
-// Prints all logical volumes and their daughters.
-// ---
+/// Print all logical volumes and their daughters.
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
   
@@ -415,8 +395,7 @@ TG4GeometryServices::PrintLogicalVolumeStore() const
 //_____________________________________________________________________________
 void TG4GeometryServices::PrintElementTable() const
 {
-// Prints the G4 element table.
-// ---
+/// Print the G4 element table.
 
   const G4ElementTable* elementTable = G4Element::GetElementTable();
 
@@ -433,13 +412,22 @@ void TG4GeometryServices::PrintElementTable() const
 }
 
 //_____________________________________________________________________________
+void TG4GeometryServices::SetSeparator(char separator) 
+{ 
+/// Set the volumes name separator that will be
+/// applied in both roottog4 and g3tog4 
+
+  fSeparator = separator; 
+  gSeparator = separator; 
+}
+
+//_____________________________________________________________________________
 Int_t TG4GeometryServices::NofG3Volumes() const
 {
-// Returns the total number of logical volumes corresponding
-// to G3 volumes. (
-// The logical volume that were created by Gsposp method 
-// with a generic name (name_copyNo) are NOT included.
-// ---
+/// Return the total number of logical volumes corresponding
+/// to G3 volumes. 
+/// The logical volumes that were created by Gsposp method 
+/// with a generic name (name_copyNo) are NOT included.
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
 
@@ -455,8 +443,7 @@ Int_t TG4GeometryServices::NofG3Volumes() const
 //_____________________________________________________________________________
 Int_t TG4GeometryServices::NofG4LogicalVolumes() const
 {
-// Returns the total number of logical volumes in the geometry.
-// ---
+/// Return the total number of logical volumes in the geometry.
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
   return lvStore->size();
@@ -465,8 +452,7 @@ Int_t TG4GeometryServices::NofG4LogicalVolumes() const
 //_____________________________________________________________________________
 Int_t TG4GeometryServices::NofG4PhysicalVolumes() const
 {
-// Returns the total number of physical volumes in the geometry.
-// ---
+/// Return the total number of physical volumes in the geometry.
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
 
@@ -482,8 +468,7 @@ Int_t TG4GeometryServices::NofG4PhysicalVolumes() const
 //______________________________________________________________________________
 G4bool TG4GeometryServices::IsSpecialControls()  const
 {
-// Returns true if a process control in some limits instance is set. 
-// ---
+/// Return true if a process control in some limits instance is set. 
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
 
@@ -498,8 +483,7 @@ G4bool TG4GeometryServices::IsSpecialControls()  const
 //_____________________________________________________________________________
 TG4Limits* TG4GeometryServices::GetLimits(G4UserLimits* limits) const
 {
-// Checks and converts type of the given limits.
-// ---
+/// Check and converts the type of the given limits.
 
   if (!limits) return 0;
   
@@ -524,9 +508,8 @@ TG4Limits* TG4GeometryServices::GetLimits(G4UserLimits* limits) const
 //_____________________________________________________________________________
 const G4String& TG4GeometryServices::GetMapSecond(const G4String& name)
 { 
-// Returns the second string associated with the name in
-// the name map.
-// ---
+/// Return the second string associated with the name in
+/// the name map.
 
   return fNameMap->GetSecond(name); 
 }
@@ -535,8 +518,7 @@ const G4String& TG4GeometryServices::GetMapSecond(const G4String& name)
 G4LogicalVolume* 
 TG4GeometryServices::FindLogicalVolume(const G4String& name, G4bool silent) const
 {
-// Finds a logical volume with the specified name in G4LogicalVolumeStore.
-// ---
+/// Find a logical volume with the specified name in G4LogicalVolumeStore.
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
   
@@ -557,8 +539,7 @@ TG4GeometryServices::FindLogicalVolume(const G4String& name, G4bool silent) cons
 TG4Limits* 
 TG4GeometryServices::FindLimits(const G4String& name, G4bool silent) const
 {
-// Finds limits with the specified name.
-// ---
+/// Find limits with the specified name.
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
   
@@ -579,9 +560,8 @@ TG4GeometryServices::FindLimits(const G4String& name, G4bool silent) const
 //_____________________________________________________________________________
 G4int TG4GeometryServices::GetMediumId(G4LogicalVolume* lv) const
 {
-// Returns the second index for materials (having its origin in
-// G4 tracking media concept)
-// ---
+/// Return the second index for materials (having its origin in
+/// G4 tracking media concept)
 
   return fMediumMap->GetSecond(lv->GetName());
 }  
@@ -589,9 +569,8 @@ G4int TG4GeometryServices::GetMediumId(G4LogicalVolume* lv) const
 //_____________________________________________________________________________
 G4double TG4GeometryServices::GetEffA(G4Material* material) const
 {
-// Returns A or effective A=sum(pi*Ai) (if compound/mixture)
-// of given material.
-// ---
+/// Return A or the effective A=sum(pi*Ai) (if compound/mixture)
+/// of the given material.
 
   G4double a = 0.;
   G4int nofElements = material->GetNumberOfElements();
@@ -617,9 +596,8 @@ G4double TG4GeometryServices::GetEffA(G4Material* material) const
 //_____________________________________________________________________________
 G4double TG4GeometryServices::GetEffZ(G4Material* material) const
 {
-// Returns Z or effective Z=sum(pi*Zi) (if compound/mixture)
-// of given material.
-// ---
+/// Return Z or the effective Z=sum(pi*Zi) (if compound/mixture)
+/// of the given material.
 
   G4double z = 0.;
   G4int nofElements = material->GetNumberOfElements();
@@ -645,9 +623,8 @@ G4double TG4GeometryServices::GetEffZ(G4Material* material) const
 G4Material* TG4GeometryServices::FindMaterial(G4double a, G4double z, 
                                              G4double density) const
 {
-// Finds material in G4MaterialTable with specified parameters,
-// returns 0 if not found.
-// ---
+/// Find the material in G4MaterialTable with specified parameters,
+/// return 0 if not found.
 
   const G4MaterialTable* kpMatTable = G4Material::GetMaterialTable();    
   
@@ -669,9 +646,8 @@ G4Material* TG4GeometryServices::FindMaterial(G4double* a, G4double* z,
                                               G4double density, 
                                               G4int nmat, G4double* wmat) const
 {					      
-// Finds material in G4MaterialTable with specified parameters,
-// returns 0 if not found.
-// ---
+/// Find the material in G4MaterialTable with specified parameters,
+/// return 0 if not found.
 
   G4double* weight = ConvertAtomWeight(nmat, a, wmat);
 

@@ -1,13 +1,13 @@
-// $Id: TG4PhysicsConstructorIon.cxx,v 1.2 2002/11/22 13:29:22 brun Exp $
+// $Id: TG4PhysicsConstructorIon.cxx,v 1.3 2003/12/18 13:27:46 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4PhysicsConstructorIon
 // ------------------------------
 // See the class description in the header file.
 // According to ExN04IonPhysics.cc,v 1.1.2.1 2001/06/28 19:07:37 gunter Exp 
 // GEANT4 tag Name: geant4-06-00
+//
+// Author: I. Hrivnacova
 
 #include "TG4PhysicsConstructorIon.h"
 #include "TG4ProcessControlMap.h"
@@ -50,7 +50,9 @@ TG4PhysicsConstructorIon::~TG4PhysicsConstructorIon() {
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4PhysicsConstructorIon& 
@@ -65,14 +67,14 @@ TG4PhysicsConstructorIon::operator=(const TG4PhysicsConstructorIon &right)
   return *this;
 }
 
-
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 void TG4PhysicsConstructorIon::ConstructHadProcessForGenericIon()
 {
-// Constructs electromagnetic processes for generic ion.
-// ---
+/// Construct electromagnetic processes for generic ion.
 
   // add process
   G4ProcessManager* pManager = G4GenericIon::GenericIon()->GetProcessManager();
@@ -90,8 +92,7 @@ void TG4PhysicsConstructorIon::ConstructHadProcessForGenericIon()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorIon::ConstructHadProcessForDeuteron()
 {
-// Constructs electromagnetic processes for deuteron.
-// ---
+/// Construct electromagnetic processes for deuteron.
 
   // add process
   G4ProcessManager* pManager = G4Deuteron::Deuteron()->GetProcessManager();
@@ -113,8 +114,7 @@ void TG4PhysicsConstructorIon::ConstructHadProcessForDeuteron()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorIon::ConstructHadProcessForTriton()
 {
-// Constructs electromagnetic processes for triton.
-// ---
+/// Construct electromagnetic processes for triton.
 
   // add process
   G4ProcessManager* pManager = G4Triton::Triton()->GetProcessManager();
@@ -136,8 +136,7 @@ void TG4PhysicsConstructorIon::ConstructHadProcessForTriton()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorIon::ConstructHadProcessForAlpha()
 {
-// Constructs electromagnetic processes for alpha.
-// ---
+/// Construct electromagnetic processes for alpha.
 
   // add process
   G4ProcessManager* pManager = G4Alpha::Alpha()->GetProcessManager();
@@ -159,8 +158,7 @@ void TG4PhysicsConstructorIon::ConstructHadProcessForAlpha()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorIon::ConstructHadProcessForHe3()
 {
-// Constructs electromagnetic processes for He3.
-// ---
+/// Construct electromagnetic processes for He3.
 
   // add process
   G4ProcessManager* pManager = G4He3::He3()->GetProcessManager();
@@ -170,8 +168,7 @@ void TG4PhysicsConstructorIon::ConstructHadProcessForHe3()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorIon::ConstructEMProcessForGenericIon()
 {
-// Constructs electromagnetic processes for generic ion.
-// ---
+/// Construct electromagnetic processes for generic ion.
 
   // add process
   G4ProcessManager* pManager = G4GenericIon::GenericIon()->GetProcessManager();
@@ -192,8 +189,7 @@ void TG4PhysicsConstructorIon::ConstructEMProcessForGenericIon()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorIon::ConstructEMProcessForDeuteron()
 {
-// Constructs electromagnetic processes for deuteron.
-// ---
+/// Construct electromagnetic processes for deuteron.
 
   // add process
   G4ProcessManager* pManager = G4Deuteron::Deuteron()->GetProcessManager();
@@ -214,8 +210,7 @@ void TG4PhysicsConstructorIon::ConstructEMProcessForDeuteron()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorIon::ConstructEMProcessForTriton()
 {
-// Constructs electromagnetic processes for triton.
-// ---
+/// Construct electromagnetic processes for triton.
 
   // add process
   G4ProcessManager* pManager = G4Triton::Triton()->GetProcessManager();
@@ -236,8 +231,7 @@ void TG4PhysicsConstructorIon::ConstructEMProcessForTriton()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorIon::ConstructEMProcessForAlpha()
 {
-// Constructs electromagnetic processes for alpha.
-// ---
+/// Construct electromagnetic processes for alpha.
 
   // add process
   G4ProcessManager* pManager = G4Alpha::Alpha()->GetProcessManager();
@@ -258,8 +252,7 @@ void TG4PhysicsConstructorIon::ConstructEMProcessForAlpha()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorIon::ConstructEMProcessForHe3()
 {
-// Constructs electromagnetic processes for He3.
-// ---
+/// Construct electromagnetic processes for He3.
 
   // add process
   G4ProcessManager* pManager = G4He3::He3()->GetProcessManager();
@@ -277,14 +270,14 @@ void TG4PhysicsConstructorIon::ConstructEMProcessForHe3()
   mcMap->Add(&fHe3Ionisation, kPEnergyLoss); 
 }
 
-
+//
 // protected methods
+//
 
 //_____________________________________________________________________________
 void TG4PhysicsConstructorIon::ConstructParticle()
 {
-// Instantiates particles.
-// ---
+/// Instantiate particles.
 
   //  Construct light ions
   G4IonConstructor pConstructor;
@@ -294,8 +287,7 @@ void TG4PhysicsConstructorIon::ConstructParticle()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorIon::ConstructProcess()
 {
-// Constructs electromagnetic processes for e+.
-// ---
+/// Construct processes for ions.
 
   if (fSetHadron) {
     // Elastic Process

@@ -1,12 +1,12 @@
-// $Id: TG4G3Units.h,v 1.1 2002/06/20 11:56:10 hristov Exp $
-// Category: global
+// $Id: TG4G3Units.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup global
 //
-// Author: I. Hrivnacova
-//
-// Class TG4G3Units
-// ----------------
-// Class defines the G3 default units of physical quantities; 
-// all physical quantities returned by MC are expressed in these units.
+/// \class TG4G3Units
+/// 
+/// Class defines the G3 default units of physical quantities; 
+/// all physical quantities returned by VMC are expressed in these units.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_G3_UNITS_H
 #define TG4_G3_UNITS_H
@@ -50,14 +50,51 @@ class TG4G3Units
 
 // inline methods
 
-inline G4double TG4G3Units::Length() { return fgkLength; }
-inline G4double TG4G3Units::Angle()  { return fgkAngle; }
-inline G4double TG4G3Units::Time()   { return fgkTime; }
-inline G4double TG4G3Units::Charge() { return fgkCharge; }
-inline G4double TG4G3Units::Energy() { return fgkEnergy; }
-inline G4double TG4G3Units::Mass()   { return fgkMass; }
-inline G4double TG4G3Units::MassDensity()  { return fgkMassDensity; }
-inline G4double TG4G3Units::AtomicWeight() { return fgkAtomicWeight; }
-inline G4double TG4G3Units::Field()  { return fgkField; }
+inline G4double TG4G3Units::Length() { 
+  /// Return G3 length unit
+  return fgkLength; 
+}
+
+inline G4double TG4G3Units::Angle() { 
+  /// Return G3 angle unit
+  return fgkAngle; 
+}
+
+inline G4double TG4G3Units::Time() { 
+  /// Return G3 time unit
+  return fgkTime; 
+}
+
+inline G4double TG4G3Units::Charge() { 
+  /// Return G3 chanrge unit
+  return fgkCharge; 
+}
+
+inline G4double TG4G3Units::Energy() { 
+  /// Return G3 energy unit
+  return fgkEnergy; 
+}
+
+inline G4double TG4G3Units::Mass() { 
+  /// Return G3 mass unit
+  return fgkMass; 
+}
+
+inline G4double TG4G3Units::MassDensity()  
+{ 
+  /// Return G3 mass density unit
+  return fgkMassDensity; 
+}
+
+inline G4double TG4G3Units::AtomicWeight() { 
+  /// Return G3 atomic weight unit
+  return fgkAtomicWeight; 
+}
+
+inline G4double TG4G3Units::Field() 
+{ 
+  /// Return G3 magnetic field unit
+  return fgkField; 
+}
 
 #endif //TG4_G3_UNITS_H

@@ -1,13 +1,12 @@
-// $Id: TG4PhysicsConstructorEM.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: physics
+// $Id: TG4PhysicsConstructorEM.h,v 1.2 2003/12/18 13:27:45 brun Exp $
+/// \ingroup physics
 //
-// Author: I. Hrivnacova
-//
-// Class TG4PhysicsConstructorEM
-// -----------------------------
-// Constructor of electromagnetic physics.
-// According to the corresponding part of:
-// ExN04PhysicsList.hh, GEANT4 tag Name: geant4-06-00
+/// \class TG4PhysicsConstructorEM
+/// 
+/// Constructor of electromagnetic physics.
+/// According to ExN04EMPhysics, GEANT4 tag Name: geant4-06-00
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_PHYSICS_CONSTRUCTOR_EM_H
 #define TG4_PHYSICS_CONSTRUCTOR_EM_H

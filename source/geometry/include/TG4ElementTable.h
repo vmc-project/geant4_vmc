@@ -1,13 +1,13 @@
-// $Id: TG4ElementTable.h,v 1.1 2002/06/20 11:55:24 hristov Exp $
-// Category: geometry
+// $Id: TG4ElementTable.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup geometry
 //
-// Author: I. Hrivnacova 
-//
-// Class TG4ElementTable
-// ---------------------
-// Singleton class that builds the default element table
-// Currently defined elements: up to Z=47 (to be continued).
-// Not used.
+/// \class TG4ElementTable
+/// 
+/// Singleton class that builds the default element table
+/// Currently defined elements: up to Z=47 (to be continued).
+/// Not used.
+///
+/// Author: I. Hrivnacova 
 
 #ifndef TG4_ELEMENT_TABLE_H
 #define TG4_ELEMENT_TABLE_H

@@ -1,11 +1,11 @@
-// $Id: TG4RunMessenger.h,v 1.1 2002/06/20 11:58:25 hristov Exp $
-// Category: run
+// $Id: TG4RunMessenger.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup run
 //
-// Author: I. Hrivnacova
-//
-// Class TG4RunMessenger
-// ---------------------
-// Messenger class that defines commands for TG4RunManager
+/// \class TG4RunMessenger
+/// 
+/// Messenger class that defines commands for TG4RunManager
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_RUN_MESSENGER_H
 #define TG4_RUN_MESSENGER_H 

@@ -1,12 +1,11 @@
-// $Id: TG4ExtDecayer.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4ExtDecayer.cxx,v 1.2 2003/09/23 14:22:56 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4ExtDecayer
 // -------------------
 // See the class description in the header file.
-
+//
+// Author: I. Hrivnacova
 
 #include "TG4ExtDecayer.h"
 #include "TG4ParticlesManager.h"
@@ -50,8 +49,9 @@ TG4ExtDecayer::~TG4ExtDecayer() {
   delete fDecayProductsArray;
 }
 
-
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4ExtDecayer& TG4ExtDecayer::operator=(const TG4ExtDecayer& right)
@@ -65,11 +65,15 @@ TG4ExtDecayer& TG4ExtDecayer::operator=(const TG4ExtDecayer& right)
   return *this;  
 } 
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 G4DecayProducts* TG4ExtDecayer::ImportDecayProducts(const G4Track& track)
 {
+/// Import decay products
+
   // check if external decayer is defined
   if (!fExternalDecayer) {
      G4cerr << "TG4ExtDecayer::ImportDecayProducts: " << G4endl

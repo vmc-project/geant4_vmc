@@ -1,11 +1,11 @@
-// $Id: TG4EventActionMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4EventActionMessenger.cxx,v 1.2 2002/12/18 09:35:31 brun Exp $
 // Category: event
-//
-// Author: I. Hrivnacova
 //
 // Class TG4EventActionMessenger
 // -----------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4EventActionMessenger.h"
 #include "TG4EventAction.h"
@@ -51,7 +51,9 @@ TG4EventActionMessenger::~TG4EventActionMessenger() {
   delete fDrawTracksCmd;
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4EventActionMessenger& 
@@ -65,14 +67,15 @@ TG4EventActionMessenger::operator=(const TG4EventActionMessenger &right)
   return *this;
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4EventActionMessenger::SetNewValue(G4UIcommand* command, 
        G4String newValue)
 { 
-// Applies command to the associated object.
-// ---
+/// Apply command to the associated object.
 
   if(command == fDrawTracksCmd)
   { 

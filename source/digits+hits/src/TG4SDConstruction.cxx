@@ -1,4 +1,4 @@
-// $Id: TG4SDConstruction.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4SDConstruction.cxx,v 1.2 2004/07/09 16:56:08 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -35,8 +35,7 @@ TG4SDConstruction::~TG4SDConstruction(){
 //_____________________________________________________________________________
 void TG4SDConstruction::CreateSD(G4LogicalVolume* lv) const
 { 
-// Creates/retrieves a sensitive detector for the logical volume.
-// ---
+/// Create/retrieve a sensitive detector for the logical volume.
 
   TG4GeometryServices* geometryServices = TG4GeometryServices::Instance();
   G4SDManager* pSDManager = G4SDManager::GetSDMpointer();
@@ -71,13 +70,12 @@ void TG4SDConstruction::CreateSD(G4LogicalVolume* lv) const
 //_____________________________________________________________________________
 void TG4SDConstruction::Construct()
 { 
-// Creates sensitive detectors and initialize the MC application.
-// Sensitive detectors are set to all logical volumes
-// ---
+/// Create sensitive detectors and initialize the VMC application.
+/// Sensitive detectors are set to all logical volumes
   
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
   
-  // OFF MC - comment next line
+  // OFF VMC - comment next line
   for (G4int i=0; i<G4int(lvStore->size()); i++) CreateSD((*lvStore)[i]);
   
   TVirtualMCApplication::Instance()->InitGeometry();

@@ -1,12 +1,12 @@
-// $Id: TG4ProcessMCMap.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: physics
+// $Id: TG4ProcessMCMap.h,v 1.2 2003/12/18 13:27:46 brun Exp $
+/// \ingroup physics
 //
-// Author: I. Hrivnacova
-//
-// Class TG4ProcessMCMap
-// ---------------------
-// Singleton map container for associated pairs
-// of G4 process name and TMCProcess code.
+/// \class TG4ProcessMCMap
+/// 
+/// Singleton map container for associated pairs
+/// of G4 process name and TMCProcess code.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_PROCESS_MC_MAP_H
 #define TG4_PROCESS_MC_MAP_H
@@ -65,7 +65,9 @@ class TG4ProcessMCMap
 
 // inline methods
 
-inline TG4ProcessMCMap* TG4ProcessMCMap::Instance() 
-{ return fgInstance; }
+inline TG4ProcessMCMap* TG4ProcessMCMap::Instance() { 
+  /// Return this instance
+  return fgInstance; 
+}
 
 #endif //TG4_PROCESS_MC_MAP_H

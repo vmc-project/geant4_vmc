@@ -1,13 +1,13 @@
-// $Id: TG4Limits.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: global
+// $Id: TG4Limits.h,v 1.2 2002/12/03 15:05:38 brun Exp $
+/// \ingroup global
 //
-// Author: I. Hrivnacova
-//
-// Class TG4Limits
-// ---------------
-// G4UserLimits derived class extended with the
-// vectors of kinetic energy cuts and control process flags
-// data members.
+/// \class TG4Limits
+/// 
+/// G4UserLimits derived class extended with the
+/// vectors of kinetic energy cuts and control process flags
+/// data members.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_LIMITS_H
 #define TG4_LIMITS_H
@@ -81,32 +81,46 @@ class TG4Limits: public G4UserLimits
     G4String            fName;         //name
     G4bool              fIsCut;        //true if any cut value is set
     G4bool              fIsControl;    //true if any control value is set
-    TG4G3CutVector      fCutVector;    //TG4CutVector
-    TG4G3ControlVector  fControlVector;//TG4ControlVector
+    TG4G3CutVector      fCutVector;    //the vector of G3 cut values
+    TG4G3ControlVector  fControlVector;//the vector of G3 control values 
 };
 
 // inline methods
 
-inline G4int TG4Limits::GetNofLimits()
-{ return fgCounter; }
+inline G4int TG4Limits::GetNofLimits() { 
+  /// Return the total number of all TG4Limits objects
+  return fgCounter; 
+}
 
-inline G4bool TG4Limits::IsCut() const  
-{ return fIsCut; }
+inline G4bool TG4Limits::IsCut() const  { 
+  /// Return true if any cut value is set
+  return fIsCut; 
+}
 
-inline G4bool TG4Limits::IsControl() const 
-{ return fIsControl; }
+inline G4bool TG4Limits::IsControl() const  { 
+  /// Return true if any control value is set
+  return fIsControl; 
+}
 
-inline void TG4Limits::SetName(const G4String& name) 
-{ fName = name; }
+inline void TG4Limits::SetName(const G4String& name) { 
+  /// Set name
+  fName = name; 
+}
 
-inline G4String TG4Limits::GetName() const
-{ return fName; }
+inline G4String TG4Limits::GetName() const { 
+  /// Return name
+  return fName; 
+}
 
-inline const TG4G3CutVector* TG4Limits::GetCutVector() const
-{ return &fCutVector; }
+inline const TG4G3CutVector* TG4Limits::GetCutVector() const { 
+  /// Return the vector of G3 cut values
+  return &fCutVector; 
+}
 
-inline const TG4G3ControlVector* TG4Limits::GetControlVector() const
-{ return &fControlVector; }
+inline const TG4G3ControlVector* TG4Limits::GetControlVector() const { 
+  /// Return the vector of G3 control values
+  return &fControlVector; 
+}
 
 #endif //TG4_USER_LIMITS_H
 

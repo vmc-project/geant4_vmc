@@ -1,11 +1,11 @@
-// $Id: TG4PhysicsConstructorSpecialControls.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
-// Category: physics
+// $Id: TG4PhysicsConstructorSpecialControls.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup physics
 //
-// Author: I. Hrivnacova
-//
-// Class TG4TG4PhysicsConstructorSpecialControls
-// ---------------------------------------------
-// Constructor of special controls of physics processes.
+/// \class TG4PhysicsConstructorSpecialControls
+/// 
+/// Constructor of special controls of physics processes.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_PHYSICS_CONSTRUCTOR_SPECIAL_CONTROLS_H
 #define TG4_PHYSICS_CONSTRUCTOR_SPECIAL_CONTROLS_H

@@ -1,11 +1,12 @@
-// $Id: TG4RootGeometryManager.h,v 1.1 2004/05/05 13:32:02 brun Exp $
-// Category: geometry
+// $Id: TG4RootGeometryManager.h,v 1.2 2004/06/18 13:51:11 brun Exp $
+/// \ingroup geometry
 //
-// Author: I. Hrivnacova
-//
-// Class TG4RootGeometryManager
-// ------------------------
-// Class for importing Root TGeo geometry in Geant4 VMC.
+/// \class TG4RootGeometryManager
+/// 
+/// Class for importing Root TGeo geometry in Geant4 VMC
+/// using the roottog4 convertor.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_ROOT_GEOMETRY_MANAGER_H
 #define TG4_ROOT_GEOMETRY_MANAGER_H

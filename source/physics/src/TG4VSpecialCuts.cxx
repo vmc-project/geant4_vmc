@@ -1,11 +1,11 @@
-// $Id: TG4VSpecialCuts.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4VSpecialCuts.cxx,v 1.2 2003/06/03 17:11:56 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4VSpecialCuts
 // ---------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4VSpecialCuts.h"
 #include "TG4G3CutVector.h"
@@ -38,7 +38,9 @@ TG4VSpecialCuts::~TG4VSpecialCuts() {
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4VSpecialCuts& TG4VSpecialCuts::operator=(const TG4VSpecialCuts& right)
@@ -52,16 +54,17 @@ TG4VSpecialCuts& TG4VSpecialCuts::operator=(const TG4VSpecialCuts& right)
   return *this;  
 }    
           
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
                            const G4Track& track, G4double previousStepSize,
 			   G4ForceCondition* condition)
 {
-// Returns the Step-size (actual length) which is allowed 
-// by this process.
-// ---
+/// Return the Step-size (actual length) which is allowed 
+/// by this process.
 
   // set condition
   *condition = NotForced;
@@ -139,8 +142,7 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
 G4VParticleChange* TG4VSpecialCuts::PostStepDoIt(const G4Track& track, 
                                                  const G4Step& step)
 {
-// Kills the current particle, if requested by G4UserLimits.
-// ---
+/// Kill the current particle, if requested by G4UserLimits.
  
   aParticleChange.Initialize(track);
   aParticleChange.SetEnergyChange(0.) ;

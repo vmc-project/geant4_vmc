@@ -1,11 +1,11 @@
-// $Id: TG4EventAction.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: event
+// $Id: TG4EventAction.h,v 1.2 2003/12/18 13:28:08 brun Exp $
+/// \ingroup event
 //
-// Author: I. Hrivnacova
-//
-// Class TG4EventAction
-// --------------------
-// Class that defines actions at the beginning and the end of event.
+/// \class TG4EventAction
+/// 
+/// Class that defines actions at the beginning and the end of event.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_EVENT_ACTION_H
 #define TG4_EVENT_ACTION_H 
@@ -57,11 +57,15 @@ class TG4EventAction : public G4UserEventAction,
 
 // inline methods
 
-inline void TG4EventAction::SetDrawFlag(G4String drawFlag)
-{ fDrawFlag = drawFlag; }
+inline void TG4EventAction::SetDrawFlag(G4String drawFlag) { 
+  /// Set control for drawing event: "CHARGED" (default), "ALL"
+  fDrawFlag = drawFlag; 
+}
 
-inline G4String TG4EventAction::GetDrawFlag() const
-{ return fDrawFlag; }
+inline G4String TG4EventAction::GetDrawFlag() const {   
+  /// Return control for drawing event
+  return fDrawFlag;
+}
 
 #endif //TG4_EVENT_ACTION_H
 

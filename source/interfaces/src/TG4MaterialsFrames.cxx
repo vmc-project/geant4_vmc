@@ -1,7 +1,5 @@
-// $Id: TG4MaterialsFrames.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4MaterialsFrames.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: interfaces
-//
-// Author: D. Adamova
 //
 //========================================================
 //
@@ -9,6 +7,8 @@
 //--------- Frames for the the display of materials properties---//
 //
 //========================================================= 
+//
+// Author: D. Adamova
  
 #include "TG4MaterialsFrames.h" 
 #include "TG4Globals.h"
@@ -28,8 +28,8 @@
 
 TG4MaterialsFrames::TG4MaterialsFrames( TGTab* Tab, TGMainFrame* ActionFrame )
 { 
-//---> creates the materials properties display frame
-//---> and plunges it into the main frame
+///---> creates the materials properties display frame
+///---> and plunges it into the main frame
    TGCompositeFrame* parent = Tab->AddTab("Materials Properties");
    fCapFrame = new TGCompositeFrame(parent, 60, 20, kHorizontalFrame);
    ULong_t back= TGFrame::GetBlackPixel(); 
@@ -96,7 +96,7 @@ TG4MaterialsFrames::TG4MaterialsFrames( TGTab* Tab, TGMainFrame* ActionFrame )
 
 TG4MaterialsFrames::TG4MaterialsFrames(const TG4MaterialsFrames& mf) 
 {
-// Dummy copy constructor 
+/// Dummy copy constructor 
   TG4Globals::Exception(
     "Attempt to use TG4MaterialsFrames copy constructor.");
 }
@@ -114,7 +114,7 @@ TG4MaterialsFrames& TG4MaterialsFrames::operator=(const TG4MaterialsFrames& mf)
 
 TG4MaterialsFrames::~TG4MaterialsFrames()
 {
-  //---> liquidator
+  ///---> liquidator
   
    G4cout << "\n Now in  TG4MaterialsFrames destructor \n"<< G4endl;
    delete fMatSubframe1;
@@ -136,7 +136,7 @@ TG4MaterialsFrames::~TG4MaterialsFrames()
 
 void TG4MaterialsFrames::SetMaterialsComboEntries()
 {
-//---> puts names of materials into the combo box entries
+///---> puts names of materials into the combo box entries
 
    const G4MaterialTable* lComboEntries = G4Material::GetMaterialTable();
 
@@ -156,7 +156,7 @@ void TG4MaterialsFrames::SetMaterialsComboEntries()
 void TG4MaterialsFrames::AddMaterialName( const char* name, Int_t index) const
 {
   
-//-----> adds a material name to the combo box  
+///-----> adds a material name to the combo box  
 
    fMaterialsCombo->AddEntry( name, index);
    fMaterialsCombo->Select(index);
@@ -166,9 +166,9 @@ void TG4MaterialsFrames::AddMaterialName( const char* name, Int_t index) const
 void TG4MaterialsFrames::DisplayMaterialCharacteristics( int qmat)
 {
   
-//---> shows informations about materials listed in G4MaterialTable
-//---> qmat eq 0 means clicking in the MaterialsFrames ComboBox
-//---> qmat gt 0 means clicking in the VolumesFrames ComboBox
+///---> shows informations about materials listed in G4MaterialTable
+///---> qmat eq 0 means clicking in the MaterialsFrames ComboBox
+///---> qmat gt 0 means clicking in the VolumesFrames ComboBox
 
    const G4MaterialTable* lComboEntries = G4Material::GetMaterialTable();
    G4int ientr = lComboEntries->size();

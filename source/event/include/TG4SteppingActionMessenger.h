@@ -1,11 +1,11 @@
-// $Id: TG4SteppingActionMessenger.h,v 1.1 2002/06/20 11:54:18 hristov Exp $
-// Category: event
+// $Id: TG4SteppingActionMessenger.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup event
 //
-// Author: I. Hrivnacova
-//
-// Class TG4SteppingActionMessenger
-// --------------------------------
-// Messenger class that defines commands for TG4SteppingAction.
+/// \class TG4SteppingActionMessenger
+/// 
+/// Messenger class that defines commands for TG4SteppingAction.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_STEPPING_ACTION_MESSENGER_H
 #define TG4_STEPPING_ACTION_MESSENGER_H 

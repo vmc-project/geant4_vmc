@@ -1,12 +1,12 @@
-// $Id: TG4ParticlesManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: physics
+// $Id: TG4ParticlesManager.h,v 1.2 2003/09/23 14:24:29 brun Exp $
+/// \ingroup physics
 //
-// Author: I. Hrivnacova
-//
-// Class TG4ParticlesManager
-// -------------------------
-// This class provides mapping between TDatabasePDG
-// and Geant4 particles. 
+/// \class TG4ParticlesManager
+/// 
+/// This class provides mapping between TDatabasePDG
+/// and Geant4 particles. 
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_PARTICLES_MANAGER_H
 #define TG4_PARTICLES_MANAGER_H
@@ -90,8 +90,10 @@ class TG4ParticlesManager : public TG4Verbose
 
 // inline methods
 
-inline TG4ParticlesManager* TG4ParticlesManager::Instance() 
-{ return fgInstance; }
+inline TG4ParticlesManager* TG4ParticlesManager::Instance() { 
+  /// Return this instance
+  return fgInstance; 
+}
 
 #endif //TG4_PARTICLES_MANAGER_H
 

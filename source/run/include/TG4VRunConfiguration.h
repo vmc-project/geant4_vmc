@@ -1,14 +1,14 @@
-// $Id: TG4VRunConfiguration.h,v 1.2 2003/06/03 17:12:12 brun Exp $
-// Category: run
+// $Id: TG4VRunConfiguration.h,v 1.3 2004/08/17 08:52:23 brun Exp $
+/// \ingroup run
+//
+/// \class TG4VRunConfiguration
+/// 
+/// Abstract base class that takes care of creating  all user defined classes 
+/// that will be initialized and managed by Geant4 kernel (G4RunManager).
+/// It has two pure virtual methods CreateUserConfiguration(), 
+/// IsSpecialStacking() that have to be implemented by a derived class.
 //
 // Author: I. Hrivnacova
-//
-// Class TG4VRunConfiguration
-// --------------------------
-// Abstract class that takes care of creating  all user defined classes 
-// that will be initialized and managed by Geant4 kernel (G4RunManager).
-// It has one pure virtual method CreateUserConfiguration()
-// that has to be be implemented by a derived class.
 
 #ifndef TG4V_RUN_CONFIGURATION_H
 #define TG4V_RUN_CONFIGURATION_H

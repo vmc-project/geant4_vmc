@@ -1,15 +1,15 @@
-// $Id: TG4VSpecialCuts.h,v 1.1 2002/06/20 11:57:46 hristov Exp $
-// Category: physics
+// $Id: TG4VSpecialCuts.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup physics
 //
-// Author: I. Hrivnacova
-//
-// Class TG4VSpecialCuts
-// ---------------------
-// Abstract base class for a special process that activates 
-// kinetic energy cuts.
-// The pure virtual functions GetMinEkine have to be implemented
-// by derived classes specific for each particle type
-// (see TG4G3ParticleWSP.h).
+/// \class TG4VSpecialCuts
+/// 
+/// Abstract base class for a special process that activates 
+/// kinetic energy cuts.                                                     \n
+/// The pure virtual functions GetMinEkine have to be implemented
+/// by derived classes specific for each particle type
+/// (see TG4G3ParticleWSP.h).
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_V_SPECIAL_CUTS_H
 #define TG4_V_SPECIAL_CUTS_H

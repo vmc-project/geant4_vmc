@@ -1,14 +1,14 @@
-// $Id: TG4NameMap.h,v 1.2 2003/09/23 14:23:40 brun Exp $
-// Category: global
+// $Id: TG4NameMap.h,v 1.3 2003/12/18 13:28:08 brun Exp $
+/// \ingroup global
 //
-// Author: I. Hrivnacova
-//
-// Class TG4NameMap
-// ----------------
-// The map container for associated names. 
-// The names can be added into map either in pairs (Add() method)
-// or standalone - then they are paired with the fSecond data member 
-// (AddName() method)
+/// \class TG4NameMap
+/// 
+/// The map container for associated names. 
+/// The names can be added into map either in pairs (Add() method)
+/// or standalone - then they are paired with the fSecond data member 
+/// (AddName() method)
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_NAME_MAP_H
 #define TG4_NAME_MAP_H
@@ -54,7 +54,10 @@ class TG4NameMap
 };
 
 // inline methods
-inline void TG4NameMap::SetSecond(const G4String& secondName)
-{ fSecond = secondName; }
+
+inline void TG4NameMap::SetSecond(const G4String& secondName) { 
+  /// Set the current second
+  fSecond = secondName; 
+}
 
 #endif //TG4_NAME_MAP_H

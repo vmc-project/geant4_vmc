@@ -1,15 +1,15 @@
-// $Id: TG4ExtDecayer.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
-// Category: physics
+// $Id: TG4ExtDecayer.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup physics
 //
-// Author: I. Hrivnacova
-//
-// Class TG4ExtDecayer
-// -------------------
-// TG4ExtDecayer class implements the G4VExtDecayer abstract class
-// with the TVirtualMCDecayer.
-// In case a particle has not defined any decay channel
-// and has not pre-assigned decay products,
-// the external decayer is called.
+/// \class TG4ExtDecayer
+/// 
+/// TG4ExtDecayer class implements the G4VExtDecayer abstract class
+/// with the TVirtualMCDecayer.
+/// In case a particle has not defined any decay channel
+/// and has not pre-assigned decay products,
+/// the external decayer is called.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_EXT_DECAYER_H
 #define TG4_EXT_DECAYER_H

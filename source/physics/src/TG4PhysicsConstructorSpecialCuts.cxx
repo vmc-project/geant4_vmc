@@ -1,11 +1,11 @@
-// $Id: TG4PhysicsConstructorSpecialCuts.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4PhysicsConstructorSpecialCuts.cxx,v 1.2 2003/06/03 18:52:36 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4PhysicsConstructorSpecialCuts
 // --------------------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4PhysicsConstructorSpecialCuts.h"
 #include "TG4G3PhysicsManager.h"
@@ -42,22 +42,22 @@ TG4PhysicsConstructorSpecialCuts::~TG4PhysicsConstructorSpecialCuts() {
 //
 }
 
+//
 // protected methods
+//
 
 //_____________________________________________________________________________
 void TG4PhysicsConstructorSpecialCuts::ConstructParticle()
 {
-// The particles are constructed in the physics list.
-// ---
+/// The particles are constructed in the physics list.
 }
 
 //_____________________________________________________________________________
 void TG4PhysicsConstructorSpecialCuts::ConstructProcess()
 {
-// Adds TG4SpecialCuts "process" that activates
-// the kinetic energy cuts defined in 
-// the vector of cuts (PhysicsManager::fCutVector) or in TG4Limits.
-// ---
+/// Add TG4SpecialCuts "process" that activates
+/// the kinetic energy cuts defined in 
+/// the vector of cuts (PhysicsManager::fCutVector) or in TG4Limits.
 
   TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
 

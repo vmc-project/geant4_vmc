@@ -1,12 +1,12 @@
-// $Id: TG4PrimaryGeneratorAction.h,v 1.1 2002/06/20 11:58:25 hristov Exp $
-// Category: run
+// $Id: TG4PrimaryGeneratorAction.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup run
 //
-// Author: I. Hrivnacova
-//
-// Class TG4PrimaryGeneratorAction
-// -------------------------------
-// Class that defines primary generator action
-// using TVirtualMCStack and TVirtualMCApplication.
+/// \class TG4PrimaryGeneratorAction
+/// 
+/// Class that defines primary generator action
+/// using TVirtualMCStack and TVirtualMCApplication.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_PRIMARY_GENERATOR_ACTION_H
 #define TG4_PRIMARY_GENERATOR_ACTION_H

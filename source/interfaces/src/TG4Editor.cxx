@@ -1,7 +1,6 @@
-// $Id: TG4Editor.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4Editor.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: interfaces
 //
-// Author: D. Adamova
 //========================================================
 //
 //---------------TG4Editor.cxx---------------------------//
@@ -9,6 +8,8 @@
 //-----------AG4 Geometry Browser------------------------//
 //
 //=========================================================
+//
+// Author: D. Adamova
 
 #include "TG4Editor.h"
 #include "TG4Globals.h"
@@ -23,7 +24,7 @@ ClassImp(TG4Editor)
 TG4Editor::TG4Editor(const TGWindow* main, UInt_t w, UInt_t h) :
     TGTransientFrame(gClient->GetRoot(), main, w, h)
 {
-   // Create an editor 
+   /// Create an editor 
 
    fEdit = new TGTextEdit(this, w, h, kSunkenFrame | kDoubleBorder);
    fL1 = new TGLayoutHints(kLHintsExpandX | kLHintsExpandY, 3, 3, 3, 3);
@@ -53,7 +54,7 @@ TG4Editor::TG4Editor(const TGWindow* main, UInt_t w, UInt_t h) :
 TG4Editor::TG4Editor(const TG4Editor& ge) :
      TGTransientFrame( (const TGTransientFrame&) ge)
 {
-// Dummy copy constructor 
+/// Dummy copy constructor 
   TG4Globals::Exception(
     "Attempt to use TG4Editor copy constructor.");
 }
@@ -72,7 +73,7 @@ TG4Editor& TG4Editor::operator=(const TG4Editor& ge)
 
 TG4Editor::~TG4Editor()
 {
-   // Delete editor accessories
+   /// Delete editor accessories
 
    delete fEdit;
    delete fOK;
@@ -82,7 +83,7 @@ TG4Editor::~TG4Editor()
 
 void TG4Editor::SetTitle()
 {   
-// Set title in editor window.
+/// Set title in editor window.
 
    TGText* txt = GetEditor()->GetText();
    Bool_t untitled = !strlen(txt->GetFileName()) ? kTRUE : kFALSE;
@@ -99,7 +100,7 @@ void TG4Editor::SetTitle()
 
 void TG4Editor::Popup()
 {
-   // Show editor.
+   /// Show editor.
 
    MapWindow();
    fClient->WaitFor(this);
@@ -107,21 +108,21 @@ void TG4Editor::Popup()
 
 void TG4Editor::LoadBuffer(const char* buffer) 
 {
-   // Load a text buffer in the editor.
+   /// Load a text buffer in the editor.
 
    fEdit->LoadBuffer(buffer);
 }
 
 void TG4Editor::CloseWindow()
 {
-   // Called when closed via window manager action.
+   /// Called when closed via window manager action.
 
    delete this;
 }
 
 Bool_t TG4Editor::ProcessMessage(Long_t msg, Long_t, Long_t)
 {
-   // Process Help Menu.
+   /// Process Help Menu.
    
 
    switch (GET_MSG(msg)) {

@@ -1,11 +1,11 @@
-// $Id: TG4IntMap.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: global
+// $Id: TG4IntMap.h,v 1.2 2003/12/18 13:28:08 brun Exp $
+/// \ingroup global
 //
-// Author: I. Hrivnacova
-//
-// Class TG4IntMap
-// ---------------
-// The map container for integer numbers associated with names.
+/// \class TG4IntMap
+/// 
+/// The map container for integer numbers associated with names.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_INT_MAP_H
 #define TG4_INT_MAP_H

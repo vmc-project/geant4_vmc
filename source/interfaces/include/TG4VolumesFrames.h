@@ -1,14 +1,11 @@
-// $Id: TG4VolumesFrames.h,v 1.1 2002/06/20 11:56:58 hristov Exp $
-// Category: interfaces
+// $Id: TG4VolumesFrames.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup interfaces
 //
-// Author: D. Adamova
-//
-//======================================================
-//
-//------------TG4VolumesFrames.h--------------------------------//
-//---------Frames for the the display of volumes properties---//
-//
-//=======================================================
+/// \class TG4VolumesFrames
+///
+/// Frames for the display of volumes properties
+///
+/// Author: D. Adamova
 
 #ifndef TG4_VOLUMESFRAMES_H
 #define TG4_VOLUMESFRAMES_H

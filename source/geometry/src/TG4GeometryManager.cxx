@@ -1,7 +1,5 @@
-// $Id: TG4GeometryManager.cxx,v 1.6 2004/10/12 07:47:11 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.7 2004/11/02 16:58:31 brun Exp $
 // Category: geometry
-//
-// Author: V. Berejnoi, I. Hrivnacova
 //
 // Class TG4GeometryManager
 // ------------------------
@@ -10,6 +8,8 @@
 // by V. Berejnoi, 25.2.1999;
 // materials, tracking media support 
 // added by I.Hrivnacova, 27.5.1999.
+//
+// Author: V. Berejnoi, I. Hrivnacova
 
 #include "TG4GeometryManager.h"
 #include "TG4RootGeometryManager.h"
@@ -91,12 +91,9 @@ TG4GeometryManager::~TG4GeometryManager() {
   delete fGeometryServices;
 }
 
-//=============================================================================
 //
 // operators
 //
-//=============================================================================
-
 
 //_____________________________________________________________________________
 TG4GeometryManager& 
@@ -111,18 +108,14 @@ TG4GeometryManager::operator=(const TG4GeometryManager& right)
   return *this;  
 }    
           
-
-//=============================================================================
 //
 // private methods
 //
-//=============================================================================
  
 //_____________________________________________________________________________
 void TG4GeometryManager::FillMediumMap()
 {
-// Maps G3 tracking medium IDs to volumes names.
-// ---
+/// Map G3 tracking medium IDs to volumes names.
 
 
   static G4int done = 0;
@@ -146,22 +139,17 @@ void TG4GeometryManager::FillMediumMap()
   done = lvStore->size();
 }    
 
-//=============================================================================
 //
 // public methods - TVirtualMC implementation
 //
-//=============================================================================
 
 //_____________________________________________________________________________
 void TG4GeometryManager::Material(Int_t& kmat, const char* name, Double_t a, 
           Double_t z, Double_t dens, Double_t radl, Double_t absl, Float_t* buf, 
           Int_t nwbuf)
 {
-// Creates G4Material.
-// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate
-// Comment: 
-// absl - this parameter is ignored by GEANT3, too
-// ---
+/// Create material.                                                         \n
+/// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate.
 
     G4double* bufin = fGeometryServices->CreateG4doubleArray(buf, nwbuf); 
     Material(kmat, name, a, z, dens, radl, absl, bufin, nwbuf);
@@ -174,11 +162,8 @@ void TG4GeometryManager::Material(Int_t& kmat, const char* name, Double_t a,
           Double_t z, Double_t dens, Double_t radl, Double_t absl, Double_t* buf, 
           Int_t nwbuf)
 {
-// Creates G4Material.
-// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate
-// Comment: 
-// absl - this parameter is ignored by GEANT3, too
-// ---
+/// Create material.                                                         \n
+/// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate
 
     kmat = ++fMaterialCounter;
     G4String namein = fGeometryServices->CutMaterialName(name);
@@ -217,11 +202,8 @@ void TG4GeometryManager::Material(Int_t& kmat, const char* name, Double_t a,
 void TG4GeometryManager::Mixture(Int_t& kmat, const char *name, Float_t *a, 
           Float_t *z, Double_t dens, Int_t nlmat, Float_t *wmat)
 { 
-// Creates G4Material composed of more elements.
-// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate
-// Comment: 
-// absl - this parameter is ignored by GEANT3, too
-// ---
+/// Create material composed of more elements.                            \n
+/// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate
 
    G4double* ain = fGeometryServices->CreateG4doubleArray(a, abs(nlmat)); 
    G4double* zin = fGeometryServices->CreateG4doubleArray(z, abs(nlmat)); 
@@ -247,11 +229,8 @@ void TG4GeometryManager::Mixture(Int_t& kmat, const char *name, Float_t *a,
 void TG4GeometryManager::Mixture(Int_t& kmat, const char *name, Double_t *a, 
           Double_t *z, Double_t dens, Int_t nlmat, Double_t *wmat)
 { 
-// Creates G4Material composed of more elements.
-// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate
-// Comment: 
-// absl - this parameter is ignored by GEANT3, too
-// ---
+/// Create material composed of more elements.                            \n
+/// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate
 
    G4String namein = fGeometryServices->CutMaterialName(name);
 
@@ -285,33 +264,33 @@ void TG4GeometryManager::Medium(Int_t& kmed, const char *name, Int_t nmat,
           Double_t stemax, Double_t deemax, Double_t epsil, 
           Double_t stmin, Float_t* ubuf, Int_t nbuf)
 { 
-// Creates a temporary "medium" that is used for 
-// assigning corresponding parameters to G4 objects:
-// NTMED is stored as a second material index;
-// ISVOL is used for builing G3SensVolVector;
-// STEMAX is passed in TG4Limits (if fUseG3TMLimits is set true);
-// !! The other parameters (IFIELD, FIELDM, TMAXFD, DEEMAX, EPSIL, STMIN)
-// are ignored by Geant4.
-// ---
-
-//  Geant3 desription:
-//  ==================
-//  NTMED  Tracking medium number
-//  NAME   Tracking medium name
-//  NMAT   Material number
-//  ISVOL  Sensitive volume flag
-//  IFIELD Magnetic field
-//  FIELDM Max. field value (Kilogauss)
-//  TMAXFD Max. angle due to field (deg/step)
-//  STEMAX Max. step allowed
-//  DEEMAX Max. fraction of energy lost in a step
-//  EPSIL  Tracking precision (cm)
-//  STMIN  Min. step due to continuos processes (cm)
-//
-//  IFIELD = 0 if no magnetic field; IFIELD = -1 if user decision in GUSWIM;
-//  IFIELD = 1 if tracking performed with GRKUTA; IFIELD = 2 if tracking
-//  performed with GHELIX; IFIELD = 3 if tracking performed with GHELX3.  
-// ---
+/// Create a temporary "medium" that is used for 
+/// assigning corresponding parameters to G4 objects:
+/// - NTMED is stored as a second material index;
+/// - ISVOL is used for builing G3SensVolVector;
+/// - STEMAX is passed in TG4Limits (if fUseG3TMLimits is set true);
+/// - !! The other parameters (IFIELD, FIELDM, TMAXFD, DEEMAX, EPSIL, STMIN)
+/// are ignored by Geant4.
+///
+///  Geant3 desription:                                                      \n
+///  ==================
+///  - NTMED  Tracking medium number
+///  - NAME   Tracking medium name
+///  - NMAT   Material number
+///  - ISVOL  Sensitive volume flag
+///  - IFIELD Magnetic field
+///  - FIELDM Max. field value (Kilogauss)
+///  - TMAXFD Max. angle due to field (deg/step)
+///  - STEMAX Max. step allowed
+///  - DEEMAX Max. fraction of energy lost in a step
+///  - EPSIL  Tracking precision (cm)
+///  - STMIN  Min. step due to continuos processes (cm)
+///
+///  - IFIELD = 0 if no magnetic field; 
+///  - IFIELD = -1 if user decision in GUSWIM;
+///  - IFIELD = 1 if tracking performed with GRKUTA; 
+///  - IFIELD = 2 if tracking performed with GHELIX; 
+///  - IFIELD = 3 if tracking performed with GHELX3.  
 
   G4double* bufin = fGeometryServices->CreateG4doubleArray(ubuf, nbuf); 
   Medium(kmed, name, nmat, isvol, ifield, fieldm, tmaxfd, stemax, deemax, epsil, 
@@ -326,33 +305,33 @@ void TG4GeometryManager::Medium(Int_t& kmed, const char *name, Int_t nmat,
           Double_t stemax, Double_t deemax, Double_t epsil, 
           Double_t stmin, Double_t* ubuf, Int_t nbuf)
 { 
-// Creates a temporary "medium" that is used for 
-// assigning corresponding parameters to G4 objects:
-// NTMED is stored as a second material index;
-// ISVOL is used for builing G3SensVolVector;
-// STEMAX is passed in TG4Limits (if fUseG3TMLimits is set true);
-// !! The other parameters (IFIELD, FIELDM, TMAXFD, DEEMAX, EPSIL, STMIN)
-// are ignored by Geant4.
-// ---
-
-//  Geant3 desription:
-//  ==================
-//  NTMED  Tracking medium number
-//  NAME   Tracking medium name
-//  NMAT   Material number
-//  ISVOL  Sensitive volume flag
-//  IFIELD Magnetic field
-//  FIELDM Max. field value (Kilogauss)
-//  TMAXFD Max. angle due to field (deg/step)
-//  STEMAX Max. step allowed
-//  DEEMAX Max. fraction of energy lost in a step
-//  EPSIL  Tracking precision (cm)
-//  STMIN  Min. step due to continuos processes (cm)
-//
-//  IFIELD = 0 if no magnetic field; IFIELD = -1 if user decision in GUSWIM;
-//  IFIELD = 1 if tracking performed with GRKUTA; IFIELD = 2 if tracking
-//  performed with GHELIX; IFIELD = 3 if tracking performed with GHELX3.  
-// ---
+/// Create a temporary "medium" that is used for 
+/// assigning corresponding parameters to G4 objects:
+/// - NTMED is stored as a second material index;
+/// - ISVOL is used for builing G3SensVolVector;
+/// - STEMAX is passed in TG4Limits (if fUseG3TMLimits is set true);
+/// - !! The other parameters (IFIELD, FIELDM, TMAXFD, DEEMAX, EPSIL, STMIN)
+/// are ignored by Geant4.
+///
+///  Geant3 desription:                                                      \n
+///  ==================
+///  - NTMED  Tracking medium number
+///  - NAME   Tracking medium name
+///  - NMAT   Material number
+///  - ISVOL  Sensitive volume flag
+///  - IFIELD Magnetic field
+///  - FIELDM Max. field value (Kilogauss)
+///  - TMAXFD Max. angle due to field (deg/step)
+///  - STEMAX Max. step allowed
+///  - DEEMAX Max. fraction of energy lost in a step
+///  - EPSIL  Tracking precision (cm)
+///  - STMIN  Min. step due to continuos processes (cm)
+///
+///  - IFIELD = 0 if no magnetic field; 
+///  - IFIELD = -1 if user decision in GUSWIM;
+///  - IFIELD = 1 if tracking performed with GRKUTA; 
+///  - IFIELD = 2 if tracking performed with GHELIX; 
+///  - IFIELD = 3 if tracking performed with GHELX3.  
 
   G4String namein = fGeometryServices->CutMaterialName(name);
 
@@ -388,8 +367,7 @@ void TG4GeometryManager::Medium(Int_t& kmed, const char *name, Int_t nmat,
 void TG4GeometryManager::Matrix(Int_t& krot, Double_t thetaX, Double_t phiX, 
            Double_t thetaY, Double_t phiY, Double_t thetaZ, Double_t phiZ)
 {
-// Creates G4RotationMatrix.
-// ---
+/// Create rotation matrix.
 
   krot = ++fMatrixCounter;
 
@@ -404,13 +382,12 @@ void TG4GeometryManager::Matrix(Int_t& krot, Double_t thetaX, Double_t phiX,
 //_____________________________________________________________________________
 void TG4GeometryManager::Ggclos() 
 {
-// Sets the top VTE in temporary G3 volume table.
-// Close geometry output file (if fWriteGeometry is set true).
-//
-//  Geant3 desription:
-//  ==================
-// close out the geometry
-// ---
+/// Set the top VTE in temporary G3 volume table.
+/// Close geometry output file (if fWriteGeometry is set true).
+///
+///  Geant3 desription:                                                      \n
+///  ==================                                                      \n
+///  close out the geometry
 
   if (fWriteGeometry) fOutputManager->WriteGgclos();
 
@@ -423,10 +400,7 @@ void TG4GeometryManager::Gfmate(Int_t imat, char *name, Float_t &a,
           Float_t &z, Float_t &dens, Float_t &radl, Float_t &absl,
           Float_t* ubuf, Int_t& nbuf) 
 { 
-//  Geant3 desription:
-//  ==================
-// Return parameters for material IMAT 
-// ---
+/// Return parameters for material specified by material number imat 
 
   G4double da, dz, ddens, dradl, dabsl;  
   Gfmate(imat, name, da, dz, ddens, dradl, dabsl, 0, nbuf);
@@ -444,10 +418,7 @@ void TG4GeometryManager::Gfmate(Int_t imat, char *name, Double_t &a,
           Double_t &z, Double_t &dens, Double_t &radl, Double_t &absl,
           Double_t* ubuf, Int_t& nbuf) 
 { 
-//  Geant3 desription:
-//  ==================
-// Return parameters for material IMAT 
-// ---
+///  Return parameters for material specified by material number imat 
 
   G4Material* material = G3Mat.get(imat);
   
@@ -481,9 +452,8 @@ void TG4GeometryManager::Gfmate(Int_t imat, char *name, Double_t &a,
 void  TG4GeometryManager::Gstpar(Int_t itmed, const char *param, 
            Double_t parval) 
 { 
-// Write token to the output file only,
-// the method is performed by TG4PhysicsManager.
-// ---
+/// Write token to the output file only,
+/// the method is performed by TG4PhysicsManager.
 
   if (fWriteGeometry) 
     fOutputManager->WriteGstpar(itmed, param, parval); 
@@ -495,24 +465,23 @@ void  TG4GeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
                              Float_t* ppckov, Float_t* absco, Float_t* effic, 
 			     Float_t* rindex)
 {
-//
-//  Geant3 desription:
-//  ==================
-//
-//    Stores the tables for UV photon tracking in medium ITMED 
-//    Please note that it is the user's responsability to 
-//    provide all the coefficients:
-//
-//
-//       ITMED       Tracking medium number
-//       NPCKOV      Number of bins of each table
-//       PPCKOV      Value of photon momentum (in GeV)
-//       ABSCO       Absorbtion coefficients 
-//                   dielectric: absorbtion length in cm
-//                   metals    : absorbtion fraction (0<=x<=1)
-//       EFFIC       Detection efficiency for UV photons 
-//       RINDEX      Refraction index (if=0 metal)
-// ---
+///
+///  Geant3 desription:                                                     \n
+///  ==================
+///
+///    Stores the tables for UV photon tracking in medium ITMED 
+///    Please note that it is the user's responsability to 
+///    provide all the coefficients:
+///
+///
+///     - ITMED       Tracking medium number
+///     - NPCKOV      Number of bins of each table
+///     - PPCKOV      Value of photon momentum (in GeV)
+///     - ABSCO       Absorbtion coefficients 
+///                   dielectric: absorbtion length in cm
+///                   metals    : absorbtion fraction (0<=x<=1)
+///     - EFFIC       Detection efficiency for UV photons 
+///     - RINDEX      Refraction index (if=0 metal)
 
   G4double* ppckovDbl = fGeometryServices->CreateG4doubleArray(ppckov, npckov); 
   G4double* abscoDbl  = fGeometryServices->CreateG4doubleArray(absco, npckov); 
@@ -532,24 +501,23 @@ void  TG4GeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
                              Double_t* ppckov, Double_t* absco, Double_t* effic, 
 			     Double_t* rindex)
 {
-//
-//  Geant3 desription:
-//  ==================
-//
-//    Stores the tables for UV photon tracking in medium ITMED 
-//    Please note that it is the user's responsability to 
-//    provide all the coefficients:
-//
-//
-//       ITMED       Tracking medium number
-//       NPCKOV      Number of bins of each table
-//       PPCKOV      Value of photon momentum (in GeV)
-//       ABSCO       Absorbtion coefficients 
-//                   dielectric: absorbtion length in cm
-//                   metals    : absorbtion fraction (0<=x<=1)
-//       EFFIC       Detection efficiency for UV photons 
-//       RINDEX      Refraction index (if=0 metal)
-// ---
+///
+///  Geant3 desription:                                                     \n
+///  ==================
+///
+///    Stores the tables for UV photon tracking in medium ITMED 
+///    Please note that it is the user's responsability to 
+///    provide all the coefficients:
+///
+///
+///     - ITMED       Tracking medium number
+///     - NPCKOV      Number of bins of each table
+///     - PPCKOV      Value of photon momentum (in GeV)
+///     - ABSCO       Absorbtion coefficients 
+///                   dielectric: absorbtion length in cm
+///                   metals    : absorbtion fraction (0<=x<=1)
+///     - EFFIC       Detection efficiency for UV photons 
+///     - RINDEX      Refraction index (if=0 metal)
 
   // add units
   G4int i;
@@ -593,15 +561,15 @@ void  TG4GeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
 void  TG4GeometryManager::Gsdvn(const char *name, const char *mother, 
            Int_t ndiv, Int_t iaxis) 
 { 
-//  Geant3 desription:
-//  ==================
-//  NAME   Volume name
-//  MOTHER Mother volume name
-//  NDIV   Number of divisions
-//  IAXIS  Axis value
-//
-//  X,Y,Z of CAXIS will be translated to 1,2,3 for IAXIS.
-//  It divides a previously defined volume.
+///  Geant3 desription:                                                     \n
+///  ==================
+///  - NAME   Volume name
+///  - MOTHER Mother volume name
+///  - NDIV   Number of divisions
+///  - IAXIS  Axis value
+///
+///  - X,Y,Z of CAXIS will be translated to 1,2,3 for IAXIS.                \n
+///  It divides a previously defined volume.
 //  ---
 
     // write token to the output file
@@ -620,12 +588,11 @@ void  TG4GeometryManager::Gsdvn(const char *name, const char *mother,
 void  TG4GeometryManager::Gsdvn2(const char *name, const char *mother, 
            Int_t ndiv, Int_t iaxis, Double_t c0i, Int_t numed) 
 { 
-//  Geant3 desription:
-//  ==================
-//  DIVIDES MOTHER INTO NDIV DIVISIONS CALLED NAME
-//  ALONG AXIS IAXIS STARTING AT COORDINATE VALUE C0.
-//  THE NEW VOLUME CREATED WILL BE MEDIUM NUMBER NUMED.
-// ---
+///  Geant3 desription:                                                       \n
+///  ==================                                                       \n
+///  Divides mother into ndiv divisions called name
+///  along axis iaxis starting at coordinate value c0.
+///  The new volume created will be medium number numed.
 
     // write token to the output file
     if (fWriteGeometry) 
@@ -643,16 +610,15 @@ void  TG4GeometryManager::Gsdvn2(const char *name, const char *mother,
 void  TG4GeometryManager::Gsdvt(const char *name, const char *mother, 
            Double_t step, Int_t iaxis, Int_t numed, Int_t ndvmx)
 { 
-//  Geant3 desription:
-//  ==================
-//       Divides MOTHER into divisions called NAME along
-//       axis IAXIS in steps of STEP. If not exactly divisible 
-//       will make as many as possible and will centre them 
-//       with respect to the mother. Divisions will have medium 
-//       number NUMED. If NUMED is 0, NUMED of MOTHER is taken.
-//       NDVMX is the expected maximum number of divisions
-//          (If 0, no protection tests are performed) 
-// ---
+///  Geant3 desription:                                                       \n
+///  ==================                                                       \n
+///  Divides MOTHER into divisions called NAME along
+///  axis IAXIS in steps of STEP. If not exactly divisible 
+///  will make as many as possible and will centre them 
+///  with respect to the mother. Divisions will have medium 
+///  number NUMED. If NUMED is 0, NUMED of MOTHER is taken.
+///  NDVMX is the expected maximum number of divisions
+///  (If 0, no protection tests are performed) 
 
     // write token to the output file
     if (fWriteGeometry) 
@@ -670,18 +636,17 @@ void  TG4GeometryManager::Gsdvt(const char *name, const char *mother,
 void  TG4GeometryManager::Gsdvt2(const char *name, const char *mother, 
            Double_t step, Int_t iaxis, Double_t c0, Int_t numed, Int_t ndvmx)
 { 
-//  Geant3 desription:
-//  ==================
-// Create a new volume by dividing an existing one
-//                                                                    
-//           Divides MOTHER into divisions called NAME along          
-//            axis IAXIS starting at coordinate value C0 with step    
-//            size STEP.                                              
-//           The new volume created will have medium number NUMED.    
-//           If NUMED is 0, NUMED of mother is taken.                 
-//           NDVMX is the expected maximum number of divisions        
-//             (If 0, no protection tests are performed)              
-// ---
+///  Geant3 desription:                                                      \n
+///  ==================                                                      \n
+///  Create a new volume by dividing an existing one
+///                                                                    
+///  Divides MOTHER into divisions called NAME along          
+///  axis IAXIS starting at coordinate value C0 with step    
+///  size STEP.                                                              \n       
+///  The new volume created will have medium number NUMED.    
+///  If NUMED is 0, NUMED of mother is taken.                                \n               
+///  NDVMX is the expected maximum number of divisions        
+///  (If 0, no protection tests are performed)              
 
     // write token to the output file
     if (fWriteGeometry) 
@@ -698,22 +663,21 @@ void  TG4GeometryManager::Gsdvt2(const char *name, const char *mother,
 //_____________________________________________________________________________
 void  TG4GeometryManager::Gsord(const char *name, Int_t iax) 
 { 
-// No corresponding action in G4.
-//
-//  Geant3 desription:
-//  ==================
-//    Flags volume CHNAME whose contents will have to be ordered 
-//    along axis IAX, by setting the search flag to -IAX
-//           IAX = 1    X axis 
-//           IAX = 2    Y axis 
-//           IAX = 3    Z axis 
-//           IAX = 4    Rxy (static ordering only  -> GTMEDI)
-//           IAX = 14   Rxy (also dynamic ordering -> GTNEXT)
-//           IAX = 5    Rxyz (static ordering only -> GTMEDI)
-//           IAX = 15   Rxyz (also dynamic ordering -> GTNEXT)
-//           IAX = 6    PHI   (PHI=0 => X axis)
-//           IAX = 7    THETA (THETA=0 => Z axis)
-// ---
+/// No corresponding action in G4.
+///
+///  Geant3 desription:                                                      \n
+///  ==================                                                      \n
+///    Flags volume CHNAME whose contents will have to be ordered 
+///    along axis IAX, by setting the search flag to -IAX
+///    -       IAX = 1    X axis 
+///    -       IAX = 2    Y axis 
+///    -       IAX = 3    Z axis 
+///    -       IAX = 4    Rxy (static ordering only  -> GTMEDI)
+///    -       IAX = 14   Rxy (also dynamic ordering -> GTNEXT)
+///    -       IAX = 5    Rxyz (static ordering only -> GTMEDI)
+///    -       IAX = 15   Rxyz (also dynamic ordering -> GTNEXT)
+///    -       IAX = 6    PHI   (PHI=0 => X axis)
+///    -       IAX = 7    THETA (THETA=0 => Z axis)
 
   TG4Globals::Warning("TG4GeometryManager::Gsord: dummy method.");
 } 
@@ -724,20 +688,20 @@ void  TG4GeometryManager::Gspos(const char *vname, Int_t num,
           const char *vmoth, Double_t x, Double_t y, Double_t z, Int_t irot, 
           const char *vonly) 
 { 
-//  Geant3 desription:
-//  ==================
-// Position a volume into an existing one
-//
-//  NAME   Volume name
-//  NUMBER Copy number of the volume
-//  MOTHER Mother volume name
-//  X      X coord. of the volume in mother ref. sys.
-//  Y      Y coord. of the volume in mother ref. sys.
-//  Z      Z coord. of the volume in mother ref. sys.
-//  IROT   Rotation matrix number w.r.t. mother ref. sys.
-//  ONLY   ONLY/MANY flag
-//
-//  It positions a previously defined volume in the mother.
+///  Geant3 desription:                                                      \n
+///  ==================                                                      \n
+///  Position a volume into an existing one
+///
+///  -  NAME   Volume name
+///  -  NUMBER Copy number of the volume
+///  -  MOTHER Mother volume name
+///  -  X      X coord. of the volume in mother ref. sys.
+///  -  Y      Y coord. of the volume in mother ref. sys.
+///  -  Z      Z coord. of the volume in mother ref. sys.
+///  -  IROT   Rotation matrix number w.r.t. mother ref. sys.
+///  -  ONLY   ONLY/MANY flag
+///
+///  It positions a previously defined volume in the mother.
 // ---  
 
    // write token to the output file
@@ -757,11 +721,10 @@ void  TG4GeometryManager::Gsposp(const char *name, Int_t nr,
            const char *mother, Double_t x, Double_t y, Double_t z, Int_t irot, 
            const char *konly, Double_t *upar, Int_t np ) 
 { 
-//  Geant3 desription:
-//  ==================
-//      Place a copy of generic volume NAME with user number
-//      NR inside MOTHER, with its parameters UPAR(1..NP)
-// ---
+///  Geant3 desription:                                                      \n
+///  ==================                                                      \n
+///  Place a copy of generic volume NAME with user number
+///  NR inside MOTHER, with its parameters UPAR(1..NP)
 
    // write token to the output file
    if (fWriteGeometry) 
@@ -781,8 +744,7 @@ void  TG4GeometryManager::Gsposp(const char *name, Int_t nr,
            const char *mother, Double_t x, Double_t y, Double_t z, Int_t irot, 
            const char *konly, Float_t *upar, Int_t np ) 
 { 
-// Single precision interface.
-// ---
+/// Single precision interface.
 
    //TG4Globals::Warning("TG4GeometryManager::Gsposp in single precision.");
 
@@ -796,9 +758,9 @@ void  TG4GeometryManager::Gsposp(const char *name, Int_t nr,
 void  TG4GeometryManager::Gsbool(const char* onlyVolName, 
                                  const char* manyVolName)
 { 
-// Helps for resolving MANY.
-// Specifies the ONLY volume that overlaps with the 
-// specified MANY and has to be substracted.
+/// Help for resolving MANY.
+/// Specify the ONLY volume that overlaps with the 
+/// specified MANY and has to be substracted.
 // ---  
 
    // write token to the output file
@@ -813,15 +775,15 @@ void  TG4GeometryManager::Gsbool(const char* onlyVolName,
 Int_t TG4GeometryManager::Gsvolu(const char *name, const char *shape, 
           Int_t nmed, Double_t *upar, Int_t npar) 
 { 
-//  Geant3 desription:
-//  ==================
-//  NAME   Volume name
-//  SHAPE  Volume type
-//  NUMED  Tracking medium number
-//  NPAR   Number of shape parameters
-//  UPAR   Vector containing shape parameters
-//
-//  It creates a new volume in the JVOLUM data structure.
+///  Geant3 desription:                                                     \n
+///  ==================                                                     \n
+///  - NAME   Volume name
+///  - SHAPE  Volume type
+///  - NUMED  Tracking medium number
+///  - NPAR   Number of shape parameters
+///  - UPAR   Vector containing shape parameters
+///
+///  It creates a new volume in the JVOLUM data structure.
 // ---  
 
   // write token to the output file
@@ -842,8 +804,7 @@ Int_t TG4GeometryManager::Gsvolu(const char *name, const char *shape,
 Int_t TG4GeometryManager::Gsvolu(const char *name, const char *shape, 
           Int_t nmed, Float_t *upar, Int_t npar) 
 { 
-// Single precision interface.
-// ---
+/// Single precision interface.
 
   //TG4Globals::Warning("TG4GeometryManager::Gsvolu in single precision.");
 
@@ -862,32 +823,31 @@ Int_t TG4GeometryManager::Gsvolu(const char *name, const char *shape,
 void TG4GeometryManager::WriteEuclid(const char* fileName, 
           const char* topVolName, Int_t number, Int_t nlevel)
 {
-//  Geant3 desription:
-//  ==================
-//
-//     ******************************************************************
-//     *                                                                *
-//     *  Write out the geometry of the detector in EUCLID file format  *
-//     *                                                                *
-//     *       filnam : will be with the extension .euc                 *
-//     *       topvol : volume name of the starting node                *
-//     *       number : copy number of topvol (relevant for gsposp)     *
-//     *       nlevel : number of  levels in the tree structure         *
-//     *                to be written out, starting from topvol         *
-//     *                                                                *
-//     *       Author : M. Maire                                        *
-//     *                                                                *
-//     ******************************************************************
-//
-//     File filnam.tme is written out with the definitions of tracking
-//     medias and materials.
-//     As to restore original numbers for materials and medias, program
-//     searches in the file euc_medi.dat and comparing main parameters of
-//     the mat. defined inside geant and the one in file recognizes them
-//     and is able to take number from file. If for any material or medium,
-//     this procedure fails, ordering starts from 1.
-//     Arrays IOTMED and IOMATE are used for this procedure
-// ---
+///  Geant3 desription:                                                     \n
+///  ==================                                                     \n
+///
+///     ******************************************************************  \n
+///     *                                                                *  \n
+///     *  Write out the geometry of the detector in EUCLID file format  *  \n
+///     *                                                                *  \n
+///     *       filnam : will be with the extension .euc                 *  \n
+///     *       topvol : volume name of the starting node                *  \n
+///     *       number : copy number of topvol (relevant for gsposp)     *  \n
+///     *       nlevel : number of  levels in the tree structure         *  \n
+///     *                to be written out, starting from topvol         *  \n
+///     *                                                                *  \n
+///     *       Author : M. Maire                                        *  \n
+///     *                                                                *  \n
+///     ******************************************************************  \n
+///
+///     File filnam.tme is written out with the definitions of tracking
+///     medias and materials.                                               \n
+///     As to restore original numbers for materials and medias, program
+///     searches in the file euc_medi.dat and comparing main parameters of
+///     the mat. defined inside geant and the one in file recognizes them
+///     and is able to take number from file. If for any material or medium,
+///     this procedure fails, ordering starts from 1.
+///     Arrays IOTMED and IOMATE are used for this procedure
 
   TG4Globals::Warning(
     "TG4GeometryManager::WriteEuclid(..) is not yet implemented.");
@@ -896,8 +856,7 @@ void TG4GeometryManager::WriteEuclid(const char* fileName,
 //_____________________________________________________________________________
 void TG4GeometryManager::SetRootGeometry()
 {
-// Converts Root geometry to G4 geometry objects.
-// ---
+/// Convert Root geometry to G4 geometry objects.
 
   TG4RootGeometryManager rootGeometryManager( fGeometryServices, 
 			     &fMediumMap, &fMediumNameVector, fUseG3TMLimits);
@@ -907,20 +866,15 @@ void TG4GeometryManager::SetRootGeometry()
   fVMCGeometry = false;
 }                   
  
- 
-//=============================================================================
 //
 // public methods - Geant4 only
 //
-//=============================================================================
-
  
 //_____________________________________________________________________________
 G4VPhysicalVolume* TG4GeometryManager::CreateG4Geometry()
 {
-// Creates G4 geometry objects according to the G3VolTable 
-// and returns the world physical volume.
-// ---
+/// Create G4 geometry objects according to the G3VolTable 
+/// and returns the world physical volume.
 
   // set the first entry in the G3Vol table
   Ggclos();
@@ -981,8 +935,7 @@ G4VPhysicalVolume* TG4GeometryManager::CreateG4Geometry()
 void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
                                const TG4G3ControlVector& controls) const
 {
-// Sets user limits defined in G3MedTable for all logical volumes.
-// ---
+/// Set user limits defined in G3MedTable for all logical volumes.
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
 
@@ -1024,8 +977,7 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
 //_____________________________________________________________________________
 void TG4GeometryManager::ReadG3Geometry(G4String filePath)
 {
-// Processes g3calls.dat file and fills G3 tables.
-// ---
+/// Process g3calls.dat file and fills G3 tables.
 
   // verbose
   if (VerboseLevel() > 0) {
@@ -1043,10 +995,9 @@ void TG4GeometryManager::ReadG3Geometry(G4String filePath)
 //_____________________________________________________________________________
 void TG4GeometryManager::UseG3TrackingMediaLimits()
 {
-// Sets fUseG3TMLimits option.
-// !! This method has to be called only before starting
-// creating geometry.
-// ---
+/// Set fUseG3TMLimits option.                                              \n
+/// !! This method has to be called only before starting
+/// creating geometry.
 
   if (fMediumCounter == 0) {
     fUseG3TMLimits = true;
@@ -1063,10 +1014,9 @@ void TG4GeometryManager::UseG3TrackingMediaLimits()
 //_____________________________________________________________________________
 void TG4GeometryManager::ClearG3Tables()
 { 
-// Clears G3 volumes, materials, rotations(?) tables
-// and sensitive volumes vector.
-// The top volume is kept in the vol table.
-// ---
+/// Clear G3 volumes, materials, rotations(?) tables
+/// and sensitive volumes vector.
+/// The top volume is kept in the vol table.
 
   // clear volume table 
   // but keep the top volume in the table 
@@ -1089,9 +1039,8 @@ void TG4GeometryManager::ClearG3Tables()
 //_____________________________________________________________________________
 void TG4GeometryManager::ClearG3TablesFinal()
 {
-// Clears G3 medias and volumes tables
-// (the top volume is removed from the vol table)
-// ---
+/// Clear G3 medias and volumes tables
+/// (the top volume is removed from the vol table)
 
   G3Mat.Clear();
   G3Med.Clear();
@@ -1102,8 +1051,7 @@ void TG4GeometryManager::ClearG3TablesFinal()
 //_____________________________________________________________________________
 void TG4GeometryManager::OpenOutFile(G4String filePath)
 { 
-// Opens output file.
-// ---
+/// Open output file.
 
   fOutputManager->OpenFile(filePath);
 }
@@ -1112,8 +1060,7 @@ void TG4GeometryManager::OpenOutFile(G4String filePath)
 //_____________________________________________________________________________
 void TG4GeometryManager::CloseOutFile()
 { 
-// Closes output file.
-// ---
+/// Close output file.
 
   fOutputManager->CloseFile();
 }
@@ -1122,8 +1069,7 @@ void TG4GeometryManager::CloseOutFile()
 //_____________________________________________________________________________
 void TG4GeometryManager::SetWriteGeometry(G4bool writeGeometry)
 { 
-// Controls geometry output.
-// ---
+/// Control geometry output.
 
   fWriteGeometry = writeGeometry; 
 }
@@ -1132,8 +1078,7 @@ void TG4GeometryManager::SetWriteGeometry(G4bool writeGeometry)
 //_____________________________________________________________________________
 void TG4GeometryManager::SetMapSecond(const G4String& name)
 {
-// Sets the second name for the map of volumes names.
-// ---
+/// Set the second name for the map of volumes names.
 
   fNameMap.SetSecond(name);
 }

@@ -1,12 +1,12 @@
-// $Id: TG4GeometryManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: geometry
+// $Id: TG4GeometryManager.h,v 1.2 2003/07/22 06:36:58 brun Exp $
+/// \ingroup geometry
 //
-// Author: V. Berejnoi, I. Hrivnacova
-//
-// Class TG4GeometryManager
-// ------------------------
-// Geant4 implementation of the MonteCarlo interface methods                    
-// for building Geant4 geometry and access to it.
+/// \class TG4GeometryManager
+/// 
+/// Geant4 implementation of the TVirtualMC interface methods                    
+/// for building geometry and access to it.
+///
+/// Author: V. Berejnoi, I. Hrivnacova
 
 #ifndef TG4_GEOMETRY_MANAGER_H
 #define TG4_GEOMETRY_MANAGER_H
@@ -173,11 +173,17 @@ class TG4GeometryManager : public TG4Verbose
 };
 
 // inline methods
-inline TG4GeometryManager* TG4GeometryManager::Instance()
-{ return fgInstance; }
 
-inline G4bool TG4GeometryManager::IsVMCGeometry() const
-{ return fVMCGeometry; }
+inline TG4GeometryManager* TG4GeometryManager::Instance() { 
+  /// Return this instance
+  return fgInstance; 
+}
+
+inline G4bool TG4GeometryManager::IsVMCGeometry() const { 
+  /// Return true if geometry is built using VMC calls,
+  /// false if geometry is built by conversion
+  return fVMCGeometry; 
+}
 
 #endif //TG4_GEOMETRY_MANAGER_H
 

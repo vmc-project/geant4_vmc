@@ -1,10 +1,14 @@
-// $Id: TG4SDServices.h,v 1.2 2004/05/28 13:48:43 brun Exp $
-// Category: digits+hits
+// $Id: TG4SDServices.h,v 1.3 2004/10/12 07:47:11 brun Exp $
+/// \ingroup digits_hits
 //
-// Sensitive detectors services
-// The class provides service methods for accessing to Geant4 geometry,
-// namely using TVirtualMC volumes identifiers
-// (implemented via TG4SensitiveDetector instances).
+/// \class TG4SDServices
+///
+/// Sensitive detectors services
+/// The class provides service methods for accessing to Geant4 geometry,
+/// namely using TVirtualMC volumes identifiers
+/// (implemented via TG4SensitiveDetector instances).
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_SD_SERVICES_H
 #define TG4_SD_SERVICES_H
@@ -67,14 +71,20 @@ class TG4SDServices
 
 // inline methods
 
-inline TG4SDServices* TG4SDServices::Instance() 
-{ return fgInstance; }
+inline TG4SDServices* TG4SDServices::Instance() { 
+  /// Returns this instance.
+  return fgInstance; 
+}
 
-inline void TG4SDServices::SetIsStopRun(G4bool isStopRun)
-{ fIsStopRun = isStopRun; }
+inline void TG4SDServices::SetIsStopRun(G4bool isStopRun) { 
+  /// Sets flag for notifying about stopping run by a user.
+  fIsStopRun = isStopRun; 
+}
 
-inline G4bool TG4SDServices::GetIsStopRun() const
-{ return fIsStopRun; }
+inline G4bool TG4SDServices::GetIsStopRun() const { 
+  /// Returns flag for notifying about stopping run by a user.
+  return fIsStopRun; 
+}
 
 #endif //TG4_SD_SERVICES_H
 

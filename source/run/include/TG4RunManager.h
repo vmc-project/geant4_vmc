@@ -1,14 +1,14 @@
-// $Id: TG4RunManager.h,v 1.2 2004/05/28 13:49:53 brun Exp $
-// Category: run
+// $Id: TG4RunManager.h,v 1.3 2004/08/17 08:53:00 brun Exp $
+/// \ingroup run
 //
-// Author: I. Hrivnacova
-//
-// Class TG4RunManager
-// -------------------
-// Geant4 implementation of the MonteCarlo interface methods                    
-// for access to Geant4 at run level.
-// It provides also methods for switching between Geant4 and
-// Root UIs.
+/// \class TG4RunManager
+/// 
+/// Geant4 implementation of the TVirtualMC interface methods                    
+/// for access to Geant4 at run level.
+/// It provides also methods for switching between Geant4 and
+/// Root UIs.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_RUN_MANAGER_H
 #define TG4_RUN_MANAGER_H
@@ -93,8 +93,11 @@ class TG4RunManager : public TG4Verbose
 };
 
 // inline methods
-inline TG4RunManager* TG4RunManager::Instance() 
-{ return fgInstance; }
+
+inline TG4RunManager* TG4RunManager::Instance() { 
+  /// Return this instance
+  return fgInstance; 
+}
 
 #endif //TG4_RUN_MANAGER_H
 

@@ -1,7 +1,5 @@
-// $Id: TG4UniformMagneticField.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4UniformMagneticField.cxx,v 1.2 2003/02/28 16:33:29 brun Exp $
 // Category: geometry
-//
-// Author: I. Hrivnacova
 //
 // Class TG4UniformMagneticField
 // -----------------------------
@@ -9,6 +7,8 @@
 // According to:
 // Id: ExN02MagneticField.cc,v 1.1 1999/01/07 16:05:49 gunter Exp 
 // GEANT4 tag Name: geant4-00-01
+//
+// Author: I. Hrivnacova
 
 #include "TG4UniformMagneticField.h"
 
@@ -49,7 +49,9 @@ TG4UniformMagneticField::~TG4UniformMagneticField() {
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4UniformMagneticField& 
@@ -64,13 +66,14 @@ TG4UniformMagneticField::operator=(const TG4UniformMagneticField& right)
   return *this;
 }  
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4UniformMagneticField::SetFieldValue(G4double fieldValue)
 {
-// Sets the value of the Global Field to fieldValue along Z.
-// ---
+/// Set the value of the global field to fieldValue along Z.
 
   G4UniformMagField::SetFieldValue(G4ThreeVector(0,0,fieldValue));
 }
@@ -78,8 +81,7 @@ void TG4UniformMagneticField::SetFieldValue(G4double fieldValue)
 //_____________________________________________________________________________
 void TG4UniformMagneticField::SetFieldValue(G4ThreeVector fieldVector)
 {
-// Sets the value of the Global Field.
-// ---
+/// Set the value of the global field.
 
   // Find the Field Manager for the global field
   G4FieldManager* fieldMgr= GetGlobalFieldManager();
@@ -99,8 +101,7 @@ void TG4UniformMagneticField::SetFieldValue(G4ThreeVector fieldVector)
 //_____________________________________________________________________________
 G4FieldManager*  TG4UniformMagneticField::GetGlobalFieldManager() const
 {
-// Utility method
-// ---
+/// Utility method
 
   return G4TransportationManager::GetTransportationManager()
            ->GetFieldManager();

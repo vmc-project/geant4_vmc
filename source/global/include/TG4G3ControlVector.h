@@ -1,12 +1,12 @@
-// $Id: TG4G3ControlVector.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: global
+// $Id: TG4G3ControlVector.h,v 1.2 2003/12/18 13:28:08 brun Exp $
+/// \ingroup global
 //
-// Author: I. Hrivnacova
-//
-// Class TG4G3ControlVector
-// ------------------------
-// Vector of control process values
-// with convenient set/get methods.
+/// \class TG4G3ControlVector
+/// 
+/// Vector of control process values
+/// with convenient set/get methods.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_G3_CONTROL_VECTOR_H
 #define TG4_G3_CONTROL_VECTOR_H

@@ -1,11 +1,11 @@
-// $Id: TG4ProcessMCMap.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4ProcessMCMap.cxx,v 1.2 2003/12/18 13:27:46 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4ProcessMCMap
 // ---------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4ProcessMCMap.h"
 #include "TG4G3PhysicsManager.h"
@@ -40,7 +40,9 @@ TG4ProcessMCMap::~TG4ProcessMCMap() {
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4ProcessMCMap& TG4ProcessMCMap::operator=(const TG4ProcessMCMap& right)
@@ -54,13 +56,14 @@ TG4ProcessMCMap& TG4ProcessMCMap::operator=(const TG4ProcessMCMap& right)
   return *this;  
 }    
           
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 G4bool TG4ProcessMCMap::IsDefined(const G4String& processName)
 {
-// Returns true if the first is already in the map.
-// ---
+/// Return true if the first is already in the map.
 
   if (fMap.find(processName) == fMap.end()) 
     return false;
@@ -68,13 +71,14 @@ G4bool TG4ProcessMCMap::IsDefined(const G4String& processName)
     return true;
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 G4bool TG4ProcessMCMap::Add(G4VProcess* process, TMCProcess mcProcess)
 {  
-// Adds the pair to the map.
-// ---
+/// Add the pair to the map.
 
   if (!process) return false;
 
@@ -84,8 +88,7 @@ G4bool TG4ProcessMCMap::Add(G4VProcess* process, TMCProcess mcProcess)
 //_____________________________________________________________________________
 G4bool TG4ProcessMCMap::Add(G4String processName, TMCProcess mcProcess)
 {  
-// Adds the pair to the map.
-// ---
+/// Add the pair to the map.
 
   if (!IsDefined(processName)) {
     // insert into map 
@@ -99,8 +102,7 @@ G4bool TG4ProcessMCMap::Add(G4String processName, TMCProcess mcProcess)
 //_____________________________________________________________________________
 void TG4ProcessMCMap::PrintAll() const
 {
-// Dumps all map.
-// ---
+/// Dump the whole map.
 
   if (fMap.size()) {
     G4cout << "Dump of TG4ProcessMCMap - " << fMap.size() << " entries:" << G4endl;
@@ -119,8 +121,7 @@ void TG4ProcessMCMap::PrintAll() const
 //_____________________________________________________________________________
 void TG4ProcessMCMap::Clear() 
 {
-// Clears the map.
-// ---
+/// Clear the map.
 
   fMap.clear();
 }  
@@ -128,8 +129,7 @@ void TG4ProcessMCMap::Clear()
 //_____________________________________________________________________________
 TMCProcess TG4ProcessMCMap::GetMCProcess(const G4VProcess* process)
 {
-// Returns TMCProcess code for the process with a given name.
-// ---
+/// Return TMCProcess code for the process with a given name.
 
   if (!process) return kPNoProcess;
   
@@ -139,8 +139,7 @@ TMCProcess TG4ProcessMCMap::GetMCProcess(const G4VProcess* process)
 //_____________________________________________________________________________
 TMCProcess TG4ProcessMCMap::GetMCProcess(const G4String& processName)
 {
-// Returns TMCProcess code for the process with a given name.
-// ---
+/// Return TMCProcess code for the process with a given name.
 
   MapIterator i = fMap.find(processName);
   if (i == fMap.end()) 
@@ -152,8 +151,7 @@ TMCProcess TG4ProcessMCMap::GetMCProcess(const G4String& processName)
 //_____________________________________________________________________________
 G4String TG4ProcessMCMap::GetMCProcessName(const G4VProcess* process)
 {
-// Returns TMCProcess code for the process with a given name.
-// ---
+/// Return TMCProcess code for the process with a given name.
 
   if (!process) return TMCProcessName[kPNoProcess];
 
@@ -163,8 +161,7 @@ G4String TG4ProcessMCMap::GetMCProcessName(const G4VProcess* process)
 //_____________________________________________________________________________
 G4String TG4ProcessMCMap::GetMCProcessName(const G4String& processName)
 {
-// Returns TMCProcess code for the process with a given name.
-// ---
+/// Return TMCProcess code for the process with a given name.
 
   return TMCProcessName[GetMCProcess(processName)];
 }  

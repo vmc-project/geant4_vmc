@@ -1,11 +1,11 @@
-// $Id: TG4ElementTable.cxx,v 1.1.1.1 2002/06/16 15:57:34 hristov Exp $
+// $Id: TG4ElementTable.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
-//
-// Author: I. Hrivnacova, 27.07.2000 
 //
 // Class TG4ElementTable 
 // ---------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova, 27.07.2000 
 
 #include "TG4ElementTable.h"
 #include "TG4Globals.h"
@@ -34,7 +34,9 @@ TG4ElementTable::~TG4ElementTable(){
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4ElementTable& TG4ElementTable::operator=(const TG4ElementTable& right)
@@ -48,13 +50,14 @@ TG4ElementTable& TG4ElementTable::operator=(const TG4ElementTable& right)
   return *this;  
 }    
           
+//
 // static methods
+//
   
 //_____________________________________________________________________________
 TG4ElementTable* TG4ElementTable::Instance() 
 {
-// singleton access method
-// ---
+/// Singleton access method
 
   if (fgInstance == 0 ) {
     fgInstance = new TG4ElementTable();
@@ -63,13 +66,14 @@ TG4ElementTable* TG4ElementTable::Instance()
   return fgInstance;
 }
 
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 void TG4ElementTable::Construct() const 
 { 
-// construct element table
-// ---
+/// Construct element table
 
   // new G4Element(name, symbol, z, a);
   // check names

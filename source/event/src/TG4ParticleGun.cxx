@@ -1,11 +1,11 @@
-// $Id: TG4ParticleGun.cxx,v 1.7.6.1 2002/06/11 12:29:41 hristov Exp $
+// $Id: TG4ParticleGun.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: event
-//
-// Author: I. Hrivnacova
 //
 // Class TG4ParticleGun
 // --------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4ParticleGun.h"
 #include "TG4ParticleGunMessenger.h"
@@ -42,7 +42,9 @@ TG4ParticleGun::~TG4ParticleGun() {
   Reset();
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4ParticleGun& TG4ParticleGun::operator=(const TG4ParticleGun& right)
@@ -65,13 +67,14 @@ TG4ParticleGun& TG4ParticleGun::operator=(const TG4ParticleGun& right)
   return *this;  
 }
   
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4ParticleGun::AddParticle(TG4GunParticle* particle)
 { 
-// Adds particle.
-// ---
+/// Add particle.
 
   fGunParticleVector.push_back(particle); 
 }
@@ -79,8 +82,7 @@ void TG4ParticleGun::AddParticle(TG4GunParticle* particle)
 //_____________________________________________________________________________
 void TG4ParticleGun::RemoveParticle(G4int iParticle)
 { 
-// Removes particle.
-// ---
+/// Remove particle.
 
   GunParticleIterator it = fGunParticleVector.begin();
   it += iParticle;
@@ -93,8 +95,7 @@ void TG4ParticleGun::RemoveParticle(G4int iParticle)
 //_____________________________________________________________________________
 void TG4ParticleGun::GeneratePrimaryVertex(G4Event* event)
 {
-// Generates primary vertices.
-// ---
+/// Generate primary vertices.
 
   G4PrimaryVertex* previousVertex = 0;
   G4ThreeVector previousPosition = G4ThreeVector(); 
@@ -165,8 +166,7 @@ void TG4ParticleGun::GeneratePrimaryVertex(G4Event* event)
 //_____________________________________________________________________________
 void TG4ParticleGun::Reset()
 { 
-// Resets the particle gun.
-// ---
+/// Reset the particle gun.
 
   GunParticleIterator it;
   for (it = fGunParticleVector.begin(); it != fGunParticleVector.end(); it++)
@@ -178,8 +178,7 @@ void TG4ParticleGun::Reset()
 //_____________________________________________________________________________
 void TG4ParticleGun::List()
 {
-// Lists the particle gun.
-// ---
+/// List the particle gun.
 
   G4cout << "Particle Gun: " << G4endl;
 

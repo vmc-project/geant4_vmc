@@ -1,11 +1,11 @@
-// $Id: TG4RunMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4RunMessenger.cxx,v 1.2 2002/12/18 09:35:32 brun Exp $
 // Category: run
-//
-// Author: I. Hrivnacova
 //
 // Class TG4RunMessenger
 // ---------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4RunMessenger.h"
 #include "TG4RunManager.h"
@@ -69,7 +69,9 @@ TG4RunMessenger::~TG4RunMessenger() {
   delete fG3DefaultsCmd;
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4RunMessenger& TG4RunMessenger::operator=(const TG4RunMessenger& right)
@@ -82,13 +84,14 @@ TG4RunMessenger& TG4RunMessenger::operator=(const TG4RunMessenger& right)
   return *this;  
 }    
           
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4RunMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
 { 
-// Applies command to the associated object.
-// ---
+/// Apply command to the associated object.
 
   if (command == fRootCmd) {
     fRunManager->StartRootUI(); 

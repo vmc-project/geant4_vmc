@@ -1,11 +1,11 @@
-// $Id: TG4G3Cut.h,v 1.1 2002/06/20 11:56:10 hristov Exp $
-// Category: global
+// $Id: TG4G3Cut.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup global
 //
-// Author: I. Hrivnacova
-//
-// Enum TG4G3Cut
-// -------------
-// Enumeration for G3 types of kinetic energy cuts.
+/// \enum TG4G3Cut
+/// 
+/// Enumeration for G3 types of kinetic energy cuts.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_G3_CUT_H
 #define TG4_G3_CUT_H

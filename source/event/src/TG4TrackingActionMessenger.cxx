@@ -1,11 +1,11 @@
-// $Id: TG4TrackingActionMessenger.cxx,v 1.2 2002/12/18 09:35:31 brun Exp $
+// $Id: TG4TrackingActionMessenger.cxx,v 1.3 2003/02/26 13:39:32 brun Exp $
 // Category: event
-//
-// Author: I. Hrivnacova
 //
 // Class TG4TrackingActionMessenger
 // --------------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
  
 #include "TG4TrackingActionMessenger.h"
 #include "TG4TrackingAction.h"
@@ -75,7 +75,9 @@ TG4TrackingActionMessenger::~TG4TrackingActionMessenger() {
   delete fSaveSecondariesCmd;
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4TrackingActionMessenger& 
@@ -90,14 +92,15 @@ TG4TrackingActionMessenger::operator=(const TG4TrackingActionMessenger &right)
   return *this;
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4TrackingActionMessenger::SetNewValue(G4UIcommand* command, 
        G4String newValue)
 { 
-// Applies command to the associated object.
-// ---
+/// Apply command to the associated object.
 
   if(command == fNewVerboseCmd) { 
     fTrackingAction

@@ -1,13 +1,13 @@
-// $Id: TG4PhysicsConstructorHadron.cxx,v 1.2 2002/11/22 13:29:22 brun Exp $
+// $Id: TG4PhysicsConstructorHadron.cxx,v 1.3 2003/12/18 13:27:46 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4PhysicsConstructorHadron
 // ---------------------------------
 // See the class description in the header file.
 // According to ExN04HadronPhysics.cc,v 1.1.2.1 2001/06/28 19:07:37 gunter Exp
 // GEANT4 tag Name: geant4-06-00
+//
+// Author: I. Hrivnacova
 
 #include "TG4PhysicsConstructorHadron.h"
 #include "TG4ProcessControlMap.h"
@@ -55,7 +55,9 @@ TG4PhysicsConstructorHadron::~TG4PhysicsConstructorHadron() {
     delete fOtherProcesses[i];
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4PhysicsConstructorHadron& 
@@ -70,14 +72,14 @@ TG4PhysicsConstructorHadron::operator=(const TG4PhysicsConstructorHadron &right)
   return *this;
 }
 
-
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructEMProcessForPionPlus()
 {
-// Construct processes for pi+.
-// ---
+/// Construct processes for pi+.
 
   // add process
   G4ProcessManager* pManager = G4PionPlus::PionPlus()->GetProcessManager();
@@ -103,8 +105,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForPionPlus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructEMProcessForPionMinus()
 {
-// Construct processes for pi-.
-// ---
+/// Construct processes for pi-.
 
   // add process & set ordering
   G4ProcessManager* pManager = G4PionMinus::PionMinus()->GetProcessManager();
@@ -129,8 +130,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForPionMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructEMProcessForKaonPlus()
 {
-// Construct processes for K+.
-// ---
+/// Construct processes for K+.
 
   // add process
   G4ProcessManager* pManager = G4KaonPlus::KaonPlus()->GetProcessManager();
@@ -156,8 +156,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForKaonPlus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructEMProcessForKaonMinus()
 {
-// Construct processes for K-.
-// ---
+/// Construct processes for K-.
 
   // add process & set ordering
   G4ProcessManager* pManager = G4KaonMinus::KaonMinus()->GetProcessManager();
@@ -182,8 +181,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForKaonMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructEMProcessForProton()
 {
-// Construct processes for proton.
-// ---
+/// Construct processes for proton.
 
   // add process
   G4ProcessManager* pManager = G4Proton::Proton()->GetProcessManager();
@@ -209,8 +207,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForProton()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructEMProcessForAntiProton()
 {
-// Construct processes for anti-proton.
-// ---
+/// Construct processes for anti-proton.
 
   // add process & set ordering
   G4ProcessManager* pManager = G4AntiProton::AntiProton()->GetProcessManager();
@@ -237,8 +234,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForAntiProton()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructEMProcessForSigmaMinus()
 {
-// Construct processes for Sigma-.
-// ---
+/// Construct processes for Sigma-.
 
   // add process & set ordering
   G4ProcessManager* pManager = G4SigmaMinus::SigmaMinus()->GetProcessManager();
@@ -263,8 +259,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForSigmaMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructEMProcessForAntiSigmaMinus()
 {
-// Construct processes for anti-Sigma-.
-// ---
+/// Construct processes for anti-Sigma-.
 
   // add process & set ordering
   G4ProcessManager* pManager 
@@ -290,8 +285,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForAntiSigmaMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructEMProcessForSigmaPlus()
 {
-// Construct processes for Sigma+.
-// ---
+/// Construct processes for Sigma+.
 
   // add process & set ordering
   G4ProcessManager* pManager = G4SigmaPlus::SigmaPlus()->GetProcessManager();
@@ -316,8 +310,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForSigmaPlus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructEMProcessForAntiSigmaPlus()
 {
-// Construct processes for anti-Sigma+.
-// ---
+/// Construct processes for anti-Sigma+.
 
   // add process & set ordering
   G4ProcessManager* pManager 
@@ -343,8 +336,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForAntiSigmaPlus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructEMProcessForXiMinus()
 {
-// Construct processes for Xi-.
-// ---
+/// Construct processes for Xi-.
 
   // add process & set ordering
   G4ProcessManager* pManager = G4XiMinus::XiMinus()->GetProcessManager();
@@ -369,8 +361,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForXiMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructEMProcessForAntiXiMinus()
 {
-// Construct processes for anti-Xi-.
-// ---
+/// Construct processes for anti-Xi-.
 
   // add process & set ordering
   G4ProcessManager* pManager 
@@ -396,8 +387,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForAntiXiMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructEMProcessForOmegaMinus()
 {
-// Construct processes for Omega-.
-// ---
+/// Construct processes for Omega-.
 
   // add process & set ordering
   G4ProcessManager* pManager = G4OmegaMinus::OmegaMinus()->GetProcessManager();
@@ -422,8 +412,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForOmegaMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructEMProcessForAntiOmegaMinus()
 {
-// Construct processes for pi+.
-// ---
+/// Construct processes for pi+.
 
   // add process & set ordering
   G4ProcessManager* pManager 
@@ -449,8 +438,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForAntiOmegaMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructEMProcessForOther()
 {
-// Construct processes for other hadrons.
-// ---
+/// Construct processes for other hadrons.
 
   theParticleIterator->reset();
   while( (*theParticleIterator)() ){
@@ -496,8 +484,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForOther()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForPionPlus()
 {
-// Construct processes for pi+.
-// ---
+/// Construct processes for pi+.
 
   // theo model
   fPreEquilib = new G4PreCompoundModel(&fHandler);
@@ -533,8 +520,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForPionPlus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForPionMinus()
 {
-// Construct processes for pi-.
-// ---
+/// Construct processes for pi-.
 
   // add process & set ordering
   G4ProcessManager* pManager = G4PionMinus::PionMinus()->GetProcessManager();
@@ -561,8 +547,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForPionMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForKaonPlus()
 {
-// Construct processes for K+.
-// ---
+/// Construct processes for K+.
 
   // add process
   G4ProcessManager* pManager = G4KaonPlus::KaonPlus()->GetProcessManager();
@@ -586,8 +571,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForKaonPlus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForKaonMinus()
 {
-// Construct processes for K-.
-// ---
+/// Construct processes for K-.
 
   // add process & set ordering
   G4ProcessManager* pManager = G4KaonMinus::KaonMinus()->GetProcessManager();
@@ -615,8 +599,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForKaonMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForKaonZeroLong()
 {
-// Construct processes for K0L.
-// ---
+/// Construct processes for K0L.
 
   // add process
   G4ProcessManager* pManager 
@@ -641,8 +624,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForKaonZeroLong()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForKaonZeroShort()
 {
-// Construct processes for K0S.
-// ---
+/// Construct processes for K0S.
 
   // add process
   G4ProcessManager* pManager 
@@ -667,8 +649,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForKaonZeroShort()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForProton()
 {
-// Construct processes for proton.
-// ---
+/// Construct processes for proton.
 
   // add process
   G4ProcessManager* pManager = G4Proton::Proton()->GetProcessManager();
@@ -692,8 +673,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForProton()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiProton()
 {
-// Construct processes for anti-proton.
-// ---
+/// Construct processes for anti-proton.
 
   // add process & set ordering
   G4ProcessManager* pManager = G4AntiProton::AntiProton()->GetProcessManager();
@@ -721,8 +701,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiProton()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForNeutron()
 {
-// Construct processes for neutron.
-// ---
+/// Construct processes for neutron.
 
   // add process
   G4ProcessManager* pManager = G4Neutron::Neutron()->GetProcessManager();
@@ -754,8 +733,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForNeutron()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiNeutron()
 {
-// Construct processes for anti-neutron.
-// ---
+/// Construct processes for anti-neutron.
 
   // add process
   G4ProcessManager* pManager = G4AntiNeutron::AntiNeutron()->GetProcessManager();
@@ -783,8 +761,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiNeutron()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForLambda()
 {
-// Construct processes for Lambda.
-// ---
+/// Construct processes for Lambda.
 
   // add process
   G4ProcessManager* pManager = G4Lambda::Lambda()->GetProcessManager();
@@ -808,8 +785,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForLambda()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiLambda()
 {
-// Construct processes for anti-Lambda.
-// ---
+/// Construct processes for anti-Lambda.
 
   // add process
   G4ProcessManager* pManager = G4AntiLambda::AntiLambda()->GetProcessManager();
@@ -833,8 +809,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiLambda()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForSigmaMinus()
 {
-// Construct processes for Sigma-.
-// ---
+/// Construct processes for Sigma-.
 
   // add process & set ordering
   G4ProcessManager* pManager = G4SigmaMinus::SigmaMinus()->GetProcessManager();
@@ -858,8 +833,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForSigmaMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiSigmaMinus()
 {
-// Construct processes for anti-Sigma-.
-// ---
+/// Construct processes for anti-Sigma-.
 
   // add process & set ordering
   G4ProcessManager* pManager 
@@ -884,8 +858,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiSigmaMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForSigmaPlus()
 {
-// Construct processes for Sigma+.
-// ---
+/// Construct processes for Sigma+.
 
   // add process & set ordering
   G4ProcessManager* pManager = G4SigmaPlus::SigmaPlus()->GetProcessManager();
@@ -909,8 +882,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForSigmaPlus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiSigmaPlus()
 {
-// Construct processes for anti-Sigma+.
-// ---
+/// Construct processes for anti-Sigma+.
 
   // add process & set ordering
   G4ProcessManager* pManager 
@@ -935,8 +907,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiSigmaPlus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForXiMinus()
 {
-// Construct processes for Xi-.
-// ---
+/// Construct processes for Xi-.
 
   // add process & set ordering
   G4ProcessManager* pManager = G4XiMinus::XiMinus()->GetProcessManager();
@@ -960,8 +931,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForXiMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiXiMinus()
 {
-// Construct processes for anti-Xi-.
-// ---
+/// Construct processes for anti-Xi-.
 
   // add process & set ordering
   G4ProcessManager* pManager 
@@ -986,8 +956,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiXiMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForXiZero()
 {
-// Construct processes for Xi0.
-// ---
+/// Construct processes for Xi0.
 
   // add process
   G4ProcessManager* pManager = G4XiZero::XiZero()->GetProcessManager();
@@ -1011,8 +980,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForXiZero()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiXiZero()
 {
-// Construct processes for anti-Xi0.
-// ---
+/// Construct processes for anti-Xi0.
 
   // add process
   G4ProcessManager* pManager = G4AntiXiZero::AntiXiZero()->GetProcessManager();
@@ -1036,8 +1004,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiXiZero()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForOmegaMinus()
 {
-// Construct processes for Omega-.
-// ---
+/// Construct processes for Omega-.
 
   // add process & set ordering
   G4ProcessManager* pManager = G4OmegaMinus::OmegaMinus()->GetProcessManager();
@@ -1061,8 +1028,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForOmegaMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiOmegaMinus()
 {
-// Construct processes for pi+.
-// ---
+/// Construct processes for pi+.
 
   // add process & set ordering
   G4ProcessManager* pManager 
@@ -1090,8 +1056,7 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiOmegaMinus()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructParticle()
 {
-// Construct all hadrons.
-// ---
+/// Construct all hadrons.
 
   //  Construct all mesons
   G4MesonConstructor pMesonConstructor;
@@ -1109,8 +1074,7 @@ void TG4PhysicsConstructorHadron::ConstructParticle()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorHadron::ConstructProcess()
 {
-// Construct all hadronic processes.
-// ---
+/// Construct all hadronic processes.
 
   G4cout << G4endl;
   G4cout << "###" << G4endl;

@@ -1,11 +1,11 @@
-// $Id: TG4Verbose.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4Verbose.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
-//
-// Author: I. Hrivnacova
 //
 // Class TG4Verbose
 // -------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4Verbose.h"
 #include "TG4Globals.h"
@@ -56,8 +56,7 @@ TG4Verbose::~TG4Verbose() {
 //_____________________________________________________________________________
 TG4VerboseMessenger* TG4Verbose::CreateMessenger() 
 {
-// Creates static messenger if it does not yet exists.
-// ---
+/// Create static messenger if it does not yet exists.
 
   if (!fgMessenger)
     fgMessenger = new TG4VerboseMessenger(fgkDirectoryName);

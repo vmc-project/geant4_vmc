@@ -1,7 +1,11 @@
-// $Id: TG4SensitiveDetector.cxx,v 1.1.1.1 2002/06/16 15:57:34 hristov Exp $ //
+// $Id: TG4SensitiveDetector.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $ //
 // Category: digits+hits
 //
+// Class TG4SensitiveDetector
+// ---------------------------
 // See the class description in the header file.
+//
+// Author: I.Hrivnacova
 
 #include "TG4SensitiveDetector.h"
 #include "TG4StepManager.h"
@@ -72,14 +76,15 @@ TG4SensitiveDetector& TG4SensitiveDetector::operator=(
   return *this;
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4SensitiveDetector::UserProcessHits(const G4Track* track, 
                                            const G4Step* step)
 {
-// Calls MC application stepping function.
-// ---
+/// Call VMC application stepping function.
 
   TVirtualMCApplication::Instance()->Stepping();
 }
@@ -87,8 +92,7 @@ void TG4SensitiveDetector::UserProcessHits(const G4Track* track,
 //_____________________________________________________________________________
 G4bool TG4SensitiveDetector::ProcessHits(G4Step* step, G4TouchableHistory*)
 {
-// Calls user defined sensitive detector.
-// ---
+/// Call user defined sensitive detector.
 
   // let user sensitive detector process normal step
   fStepManager->SetStep(step, kNormalStep);
@@ -100,9 +104,8 @@ G4bool TG4SensitiveDetector::ProcessHits(G4Step* step, G4TouchableHistory*)
 //_____________________________________________________________________________
 G4bool TG4SensitiveDetector::ProcessHitsOnBoundary(G4Step* step)
 {
-// Calls user defined sensitive detector 
-// when crossing a geometrical boundary.
-// ---
+/// Call user defined sensitive detector 
+/// when crossing a geometrical boundary.
 
   // let user sensitive detector process boundary step
   fStepManager->SetStep(step, kBoundary);

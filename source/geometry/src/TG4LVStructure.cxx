@@ -1,11 +1,11 @@
-// $Id: TG4LVStructure.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4LVStructure.cxx,v 1.2 2003/12/18 13:28:08 brun Exp $
 // Category: geometry
-//
-// Author: I. Hrivnacova
 //
 // Class TG4LVStructure
 // --------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4LVStructure.h"
 #include "TG4Globals.h"
@@ -52,14 +52,13 @@ TG4LVStructure::TG4LVStructure() {
 TG4LVStructure::~TG4LVStructure() {
 //
 
-
   ClearAndDestroy(&fStructures);
-  
-  
   fLogicalVolumes.resize(0);
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4LVStructure& TG4LVStructure::operator=(const TG4LVStructure &right)
@@ -99,13 +98,14 @@ G4int TG4LVStructure::operator==(const TG4LVStructure &right) const
   return false;
 }
 
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 TG4LVStructure* TG4LVStructure::FindSubDirectory(const G4String& subDir) const
 {
-// Finds the subdirectory.
-// ---
+/// Find the subdirectory.
 
   for( G4int i=0; i<G4int(fStructures.size()); i++ ) {
     if (subDir == fStructures[i]->fDirName) return fStructures[i];
@@ -116,8 +116,7 @@ TG4LVStructure* TG4LVStructure::FindSubDirectory(const G4String& subDir) const
 //_____________________________________________________________________________
 G4String TG4LVStructure::ExtractDirName(const G4String& name) const
 {
-// Extracts the directory name from the path.
-// ---
+/// Extracts the directory name from the path.
 
   G4String subDir = name;
   G4int i = name.first('/');
@@ -128,10 +127,9 @@ G4String TG4LVStructure::ExtractDirName(const G4String& name) const
 //_____________________________________________________________________________
 void TG4LVStructure::ClearAndDestroy(LVStructuresVector* structures) 
 {
-// Clears the structures vectors and deletes all contained 
-// elements.
-// (According to geant4.3.2/source/global/STLInterface/g4rw/tpordvec.icc.)
-// ---
+/// Clears the structures vectors and deletes all contained 
+/// elements.
+/// (According to geant4.3.2/source/global/STLInterface/g4rw/tpordvec.icc.)
 
   std::set<TG4LVStructure*,std::greater<TG4LVStructure*> > tmp;
   for (size_t sz=0; sz<structures->size(); sz++)
@@ -151,14 +149,15 @@ void TG4LVStructure::ClearAndDestroy(LVStructuresVector* structures)
   structures->resize(0);
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4LVStructure::AddNewVolume(G4LogicalVolume* lv, 
                                   const G4String& treeStructure)
 {
-// Adds new logical volume to the structure.
-// ---
+/// Add new logical volume to the structure.
 
   G4String remainingPath = treeStructure;
   remainingPath.remove(0, fPathName.length());  
@@ -191,9 +190,8 @@ void TG4LVStructure::AddNewVolume(G4LogicalVolume* lv,
 //_____________________________________________________________________________
 G4LogicalVolume* TG4LVStructure::GetVolume(const G4String& lvName) const
 {
-// Returns logical volume of lvName if present in the structure,
-// returns 0 otherwise.
-// ---
+/// Return logical volume of lvName if present in the structure,
+/// returns 0 otherwise.
 
   for (G4int i=0; i<G4int(fLogicalVolumes.size()); i++) {
     G4LogicalVolume* targetLV = fLogicalVolumes[i];
@@ -205,8 +203,7 @@ G4LogicalVolume* TG4LVStructure::GetVolume(const G4String& lvName) const
 //_____________________________________________________________________________
 G4LogicalVolume* TG4LVStructure::FindVolume(const G4String& name) const
 {
-// Finds logical volume of given name in all structure tree.
-// ---
+/// Find logical volume of given name in all structure tree.
 
   G4String path = name;
   path.remove(0, fPathName.length());
@@ -239,8 +236,7 @@ G4LogicalVolume* TG4LVStructure::FindVolume(const G4String& name) const
 //_____________________________________________________________________________
 void TG4LVStructure::ListTree() const
 {
-// Prints LV tree structure.
-// ---
+/// Print LV tree structure.
 
   for (G4int i=0; i<G4int(fLogicalVolumes.size()); i++) {
     G4LogicalVolume* lv = fLogicalVolumes[i];
@@ -254,9 +250,8 @@ void TG4LVStructure::ListTree() const
 //_____________________________________________________________________________
 void TG4LVStructure::ListTreeLong() const
 {
-// Prints LV tree structure with number of
-// daughters (physical volume), indicates Boolean solid.
-// ---
+/// Print LV tree structure with number of
+/// daughters (physical volume), indicates Boolean solid.
 
   for (G4int i=0; i<G4int(fLogicalVolumes.size()); i++) {
     G4LogicalVolume* lv = fLogicalVolumes[i];
@@ -276,8 +271,7 @@ void TG4LVStructure::ListTreeLong() const
 //_____________________________________________________________________________
 void TG4LVStructure::SetVerboseLevel(G4int verbose) 
 {
-// Sets verbose level.
-// ---
+/// Set verbose level.
 
   fVerboseLevel = verbose;  
   for (G4int i=0; i<G4int(fStructures.size()); i++) { 
@@ -289,9 +283,8 @@ void TG4LVStructure::SetVerboseLevel(G4int verbose)
 //_____________________________________________________________________________
 void TG4LVStructure::SetTreeVisibility(G4bool visibility)       
 {
-// Sets visibility to all logical volumes in the structure 
-// tree.
-// ---
+/// Set visibility to all logical volumes in the structure 
+/// tree.
 
   for (G4int i=0; i<G4int(fLogicalVolumes.size()); i++) {
     G4LogicalVolume* lv = fLogicalVolumes[i];
@@ -318,9 +311,8 @@ void TG4LVStructure::SetTreeVisibility(G4bool visibility)
 //_____________________________________________________________________________
 void TG4LVStructure::SetTreeColour(const G4String& colName)
 {
-// Sets colour specified  by name to all logical volumes
-// in the structure tree.
-// ---
+/// Set colour specified  by name to all logical volumes
+/// in the structure tree.
 
   for (G4int i=0; i<G4int(fLogicalVolumes.size()); i++) {
     G4LogicalVolume* lv = fLogicalVolumes[i];

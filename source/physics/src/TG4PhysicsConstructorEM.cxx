@@ -1,13 +1,13 @@
-// $Id: TG4PhysicsConstructorEM.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4PhysicsConstructorEM.cxx,v 1.2 2003/12/18 13:27:46 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4PhysicsConstructorEM
 // -----------------------------
 // See the class description in the header file.
 // According to ExN04EMPhysics.cc,v 1.1.2.1 2001/06/28 19:07:37 gunter Exp 
 // GEANT4 tag Name: geant4-06-00
+//
+// Author: I. Hrivnacova
 
 #include "TG4PhysicsConstructorEM.h"
 #include "TG4ProcessControlMap.h"
@@ -39,13 +39,14 @@ TG4PhysicsConstructorEM::~TG4PhysicsConstructorEM() {
 //
 }
 
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 void TG4PhysicsConstructorEM::ConstructProcessForGamma()
 {
-// Constructs electromagnetic processes for gamma.
-// ---
+/// Construct electromagnetic processes for gamma.
   
   // add processes
   G4ProcessManager* pManager = G4Gamma::Gamma()->GetProcessManager();
@@ -70,8 +71,7 @@ void TG4PhysicsConstructorEM::ConstructProcessForGamma()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorEM::ConstructProcessForElectron()
 {
-// Constructs electromagnetic processes for e-.
-// ---
+/// Construct electromagnetic processes for e-.
 
   // add process
   G4ProcessManager* pManager = G4Electron::Electron()->GetProcessManager();
@@ -95,8 +95,7 @@ void TG4PhysicsConstructorEM::ConstructProcessForElectron()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorEM::ConstructProcessForPositron()
 {
-// Constructs electromagnetic processes for e+.
-// ---
+/// Construct electromagnetic processes for e+.
   
   // add processes
   G4ProcessManager * pManager = G4Positron::Positron()->GetProcessManager();
@@ -120,13 +119,14 @@ void TG4PhysicsConstructorEM::ConstructProcessForPositron()
   mcMap->Add(&fAnnihilation, kPAnnihilation); 
 }
 
+//
 // protected methods
+//
 
 //_____________________________________________________________________________
 void TG4PhysicsConstructorEM::ConstructParticle()
 {
-// Instantiates particles.
-// ---
+/// Instantiate particles.
 
   // gamma
   G4Gamma::GammaDefinition();
@@ -141,8 +141,7 @@ void TG4PhysicsConstructorEM::ConstructParticle()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorEM::ConstructProcess()
 {
-// Constructs electromagnetic processes for e+.
-// ---
+/// Construct electromagnetic processes for gamma, e-, e+, .
 
   ConstructProcessForGamma();
   ConstructProcessForElectron();

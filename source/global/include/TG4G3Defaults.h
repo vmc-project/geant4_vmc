@@ -1,12 +1,12 @@
-// $Id: TG4G3Defaults.h,v 1.1 2002/06/20 11:56:10 hristov Exp $
-// Category: global
+// $Id: TG4G3Defaults.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup global
 //
-// Author: I. Hrivnacova
-//
-// Class TG4G3Defaults
-// -------------------
-// Class stores the default G3 values of the kinetic energy cuts
-// for particles and the control process parameters.
+/// \class TG4G3Defaults
+/// 
+/// Class stores the default G3 values of the kinetic energy cuts
+/// for particles and the control process parameters.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_G3_DEFAULTS_H
 #define TG4_G3_DEFAULTS_H
@@ -54,7 +54,9 @@ class TG4G3Defaults
 
 // inline methods
 
-inline TG4G3Defaults* TG4G3Defaults::Instance() 
-{ return fgInstance; }
+inline TG4G3Defaults* TG4G3Defaults::Instance() { 
+  /// Return this instance
+  return fgInstance; 
+}
 
 #endif //ALI_G3_DEFAULTS_H

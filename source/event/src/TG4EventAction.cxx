@@ -1,11 +1,11 @@
-// $Id: TG4EventAction.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4EventAction.cxx,v 1.2 2003/12/18 13:28:08 brun Exp $
 // Category: event
-//
-// Author: I. Hrivnacova
 //
 // Class TG4EventAction
 // ---------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4EventAction.h"
 #include "TG4TrackingAction.h"
@@ -43,7 +43,9 @@ TG4EventAction::~TG4EventAction() {
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4EventAction& TG4EventAction::operator=(const TG4EventAction &right)
@@ -56,13 +58,14 @@ TG4EventAction& TG4EventAction::operator=(const TG4EventAction &right)
   return *this;
 }
 
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 void TG4EventAction::DisplayEvent(const G4Event* event) const
 {
-// Draws trajectories.
-// ---
+/// Draw trajectories.
 
   if (G4VVisManager::GetConcreteInstance()) {
 
@@ -96,13 +99,14 @@ void TG4EventAction::DisplayEvent(const G4Event* event) const
   }
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4EventAction::BeginOfEventAction(const G4Event* event)
 {
-// Called by G4 kernel at the beginning of event.
-// ---
+/// Called by G4 kernel at the beginning of event.
 
   // reset the tracks counters
   if (TG4TrackingAction::Instance()) 
@@ -117,8 +121,7 @@ void TG4EventAction::BeginOfEventAction(const G4Event* event)
 //_____________________________________________________________________________
 void TG4EventAction::EndOfEventAction(const G4Event* event)
 {
-// Called by G4 kernel at the end of event.
-// ---
+/// Called by G4 kernel at the end of event.
 
   // finish the last primary track of the current event
   TG4TrackingAction* trackingAction = TG4TrackingAction::Instance();

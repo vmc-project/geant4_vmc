@@ -1,11 +1,11 @@
-// $Id: TG4ParticlesManager.cxx,v 1.2 2003/09/23 14:24:29 brun Exp $
+// $Id: TG4ParticlesManager.cxx,v 1.3 2003/09/26 10:22:07 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4ParticlesManager
 // -------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4ParticlesManager.h"
 #include "TG4G3Units.h"
@@ -45,7 +45,9 @@ TG4ParticlesManager::~TG4ParticlesManager() {
 //
 }
 
+//
 // operators
+//
 
 TG4ParticlesManager& 
 TG4ParticlesManager::operator=(const TG4ParticlesManager& right)
@@ -66,10 +68,9 @@ TG4ParticlesManager::operator=(const TG4ParticlesManager& right)
 //_____________________________________________________________________________
 G4int TG4ParticlesManager::GetPDGEncoding(G4ParticleDefinition* particle) const
 {
-// Returns the PDG code of particle;
-// if standard PDG code is not defined the TDatabasePDG
-// is used.
-// ---
+/// Return the PDG code of particle;
+/// if standard PDG code is not defined the TDatabasePDG
+/// is used.
 
   // get PDG encoding from G4 particle definition
   G4int pdgEncoding = particle->GetPDGEncoding();
@@ -107,8 +108,7 @@ G4int TG4ParticlesManager::GetPDGEncoding(G4ParticleDefinition* particle) const
 //_____________________________________________________________________________
 G4int TG4ParticlesManager::GetPDGEncoding(G4String particleName) const
 {
-// Returns the PDG code of particle sepcified by name.
-// ---
+/// Return the PDG code of particle sepcified by name.
 
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
 
@@ -127,9 +127,8 @@ G4int TG4ParticlesManager::GetPDGEncoding(G4String particleName) const
 //_____________________________________________________________________________
 G4int TG4ParticlesManager::GetPDGIonEncoding(G4int Z, G4int A, G4int iso) const
 {
-// Use ENDF-6 mapping for ions = 10000*z+10*a+iso
-// and add 10 000 000.
-// ---
+/// Use ENDF-6 mapping for ions = 10000*z+10*a+iso
+/// and add 10 000 000.
 
   return 10000000 + 10000*Z + 10*A + iso;
 }  
@@ -137,12 +136,11 @@ G4int TG4ParticlesManager::GetPDGIonEncoding(G4int Z, G4int A, G4int iso) const
 //_____________________________________________________________________________
 void  TG4ParticlesManager::AddParticlesToPdgDatabase() const
 {
-// Taken from TGeant3
-//
-// Use ENDF-6 mapping for ions = 10000*z+10*a+iso
-// and add 1 000 000
-// and numbers above 5 000 000 for special applications
-// ---
+/// Taken from TGeant3
+///
+/// Use ENDF-6 mapping for ions = 10000*z+10*a+iso
+/// and add 1 000 000
+/// and numbers above 5 000 000 for special applications
 
   const Int_t kion=10000000;
   const Int_t kspe=50000000;
@@ -177,9 +175,9 @@ void  TG4ParticlesManager::AddParticlesToPdgDatabase() const
 //_____________________________________________________________________________
 void  TG4ParticlesManager::MapParticles()
 {
-  // Map G4 particle names to TDatabasePDG names
-  // (the map is built only for particles that have not
-  //  defined standard PDG encoding)
+/// Map G4 particle names to TDatabasePDG names
+/// (the map is built only for particles that have not
+///  defined standard PDG encoding)
   
   fParticleNameMap.Add("deuteron","Deuteron");
   fParticleNameMap.Add("triton",  "Triton");
@@ -215,9 +213,8 @@ G4int TG4ParticlesManager::AddIonToPdgDatabase(
                               G4ParticleDefinition* particleDefinition,
                               G4int Q)
 {
-// Adds the ion in TDatabasePDG and the maps
-// and returns its generated PDG code.
-// ---
+/// Add the ion in TDatabasePDG and the maps
+/// and return its generated PDG code.
 
   // Check if ion
   if (particleDefinition->GetPDGEncoding() != 0 || 
@@ -287,9 +284,8 @@ G4int TG4ParticlesManager::AddIonToPdgDatabase(
 G4String TG4ParticlesManager::UniqueIonName(const G4String& g4IonName, 
                                             G4int Q) const
 {
-// Construct unique name by adding [Q] to G4 ion name.
-// Eg. Al[0.] -> Al[0.][13]
-// ---
+/// Construct unique name by adding [Q] to G4 ion name.                      \n
+/// Eg. Al[0.] -> Al[0.][13]
 
   G4String newName = g4IonName;
   newName = newName + "[";
@@ -302,9 +298,8 @@ G4String TG4ParticlesManager::UniqueIonName(const G4String& g4IonName,
 //_____________________________________________________________________________
 G4String TG4ParticlesManager::CutUniqueIonName(const G4String& uniqueIonName) const
 {
-// Construct G4 ion name from unique name by cutting [Q].
-// Eg. Al[0.][13] -> Al[0.] 
-// ---
+/// Construct G4 ion name from unique name by cutting [Q].                    \n
+/// Eg. Al[0.][13] -> Al[0.] 
 
   G4String newName(uniqueIonName);  
   return newName(0, newName.find_first_of(']')+1);
@@ -317,9 +312,8 @@ G4String TG4ParticlesManager::CutUniqueIonName(const G4String& uniqueIonName) co
 //_____________________________________________________________________________
 void TG4ParticlesManager::DefineParticles()
 {
-// Adds particles with standard PDG = 0 to TDatabasePDG
-// and maps them to G4 particles objects.
-// ---
+/// Add particles with standard PDG = 0 to TDatabasePDG
+/// and map them to G4 particles objects.
 
   AddParticlesToPdgDatabase();
   MapParticles();
@@ -329,8 +323,7 @@ void TG4ParticlesManager::DefineParticles()
 void TG4ParticlesManager::AddIon(const G4String& name, G4int Z, G4int A, G4int Q, 
                                  G4double excEnergy)
 {
-// Adds the ion with specified characteristics.
-// ---
+/// Add the ion with specified characteristics.
 
   // Get G4 ion particle definition
   // (Ion is created if it does not yet exist)
@@ -354,10 +347,9 @@ void TG4ParticlesManager::AddIon(const G4String& name, G4int Z, G4int A, G4int Q
 G4int TG4ParticlesManager::GetPDGEncodingFast(G4ParticleDefinition* particle,
                                               G4int Q)
 {
-// Returns the PDG code of particle;
-// if standard PDG code is not defined the preregistred
-// fParticlePDGMap is used.
-// ---
+/// Return the PDG code of particle;
+/// if standard PDG code is not defined the preregistred
+/// fParticlePDGMap is used.
 
   // get PDG encoding from G4 particle definition
   G4int pdgEncoding = particle->GetPDGEncoding();
@@ -405,9 +397,8 @@ G4int TG4ParticlesManager::GetPDGEncodingFast(G4ParticleDefinition* particle,
 TParticle* TG4ParticlesManager::GetParticle(const TClonesArray* particles, 
                                             G4int index) const
 {
-// Retrives particle with given index from TClonesArray 
-// and checks type.
-// ---
+/// Retrive particle with given index from TClonesArray 
+/// and check type.
 
 #ifdef MCDEBUG
   TObject* particleTObject = particles->UncheckedAt(index);      
@@ -430,8 +421,7 @@ TParticle* TG4ParticlesManager::GetParticle(const TClonesArray* particles,
 G4ParticleDefinition* TG4ParticlesManager::GetParticleDefinition(
                                const TParticle* particle, G4bool warn) const
 {
-// Returns G4 particle definition for given TParticle
-// ---
+/// Return G4 particle definition for given TParticle
 
   // get particle definition from G4ParticleTable
   G4int pdgEncoding = particle->GetPdgCode();
@@ -462,8 +452,7 @@ G4ParticleDefinition* TG4ParticlesManager::GetParticleDefinition(
 G4ParticleDefinition* TG4ParticlesManager::GetIonParticleDefinition(
                                const TParticle* particle, G4bool warn) const
 {
-// Returns G4 particle definition for given ion specified by TParticle.
-// ---
+/// Return G4 particle definition for given ion specified by TParticle.
 
   // Find ion by name
   G4String ionName = CutUniqueIonName(particle->GetTitle());
@@ -490,8 +479,7 @@ G4ParticleDefinition* TG4ParticlesManager::GetIonParticleDefinition(
 G4DynamicParticle* TG4ParticlesManager::CreateDynamicParticle(
                                    const TParticle* particle) const
 { 
-// Creates G4DynamicParticle.
-// ---
+/// Create G4DynamicParticle.
 
   // get particle properties
   G4ParticleDefinition* particleDefinition 
@@ -512,8 +500,7 @@ G4DynamicParticle* TG4ParticlesManager::CreateDynamicParticle(
 G4ThreeVector TG4ParticlesManager::GetParticlePosition(
                                    const TParticle* particle) const 
 {
-// Returns particle vertex position.
-// ---
+/// Return particle vertex position.
 
   G4ThreeVector position 
      = G4ThreeVector(particle->Vx()*TG4G3Units::Length(),
@@ -527,8 +514,7 @@ G4ThreeVector TG4ParticlesManager::GetParticlePosition(
 G4ThreeVector TG4ParticlesManager::GetParticleMomentum(
                                    const TParticle* particle) const
 {
-// Returns particle momentum.
-// ---
+/// Return particle momentum.
   G4ThreeVector momentum 
      = G4ThreeVector(particle->Px()*TG4G3Units::Energy(),
                      particle->Py()*TG4G3Units::Energy(),

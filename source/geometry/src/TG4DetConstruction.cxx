@@ -1,11 +1,11 @@
-// $Id: TG4DetConstruction.cxx,v 1.5 2003/07/22 06:36:58 brun Exp $
+// $Id: TG4DetConstruction.cxx,v 1.6 2004/04/26 17:05:55 brun Exp $
 // Category: geometry
-//
-// Author: I. Hrivnacova
 //
 // Class TG4DetConstruction
 // ---------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4DetConstruction.h"
 #include "TG4GeometryManager.h"
@@ -53,7 +53,9 @@ TG4DetConstruction::~TG4DetConstruction() {
   delete TG4LVTree::Instance();
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4DetConstruction& 
@@ -74,8 +76,7 @@ TG4DetConstruction::operator=(const TG4DetConstruction& right)
 //_____________________________________________________________________________
 void TG4DetConstruction::CreateMagneticField()
 {
-// Creates standard magnetic field (defined by TVirtualMCApplication).
-// ---
+/// Create standard magnetic field (defined by TVirtualMCApplication).
 
   switch (fMagneticFieldType) {
   
@@ -102,7 +103,7 @@ void TG4DetConstruction::CreateMagneticField()
 //_____________________________________________________________________________
 G4VPhysicalVolume* TG4DetConstruction::Construct()
 { 
-// Constructs geometry using virtual MC application.
+/// Construct geometry using the VMC application.
 // --
 
   // create magnetic field
@@ -124,7 +125,7 @@ G4VPhysicalVolume* TG4DetConstruction::Construct()
       pGeometryManager->OpenOutFile("g3calls.dat");
     }  
         
-    // MC application construct geometry 
+    // VMC application construct geometry 
     TVirtualMCApplication::Instance()->ConstructGeometry();   
 
     // close output file      
@@ -146,8 +147,7 @@ G4VPhysicalVolume* TG4DetConstruction::Construct()
 //_____________________________________________________________________________
 void TG4DetConstruction::PrintMaterials() const
 {
-// Prints all materials.
-// ---
+/// Print all materials.
 
   const G4MaterialTable* matTable = G4Material::GetMaterialTable();
   G4cout << *matTable;
@@ -156,11 +156,10 @@ void TG4DetConstruction::PrintMaterials() const
 //_____________________________________________________________________________
 void TG4DetConstruction::SetFieldType(TG4MagneticFieldType fieldType)
 {
-// Selects from available magnetic field types:
-// field defined by TVirtualMCApplication, uniform magnetic field
-// or no magnetic field.
-// Applicable only when no field has been yet created (PreInit).
-// ---
+/// Select from available magnetic field types:
+/// field defined by TVirtualMCApplication, uniform magnetic field
+/// or no magnetic field.                                                    \n
+/// Applicable only when no field has been yet created (PreInit).
 
   if (fMagneticField) {
      G4String text = "TG4DetConstruction::SetFieldType :\n";
@@ -175,12 +174,11 @@ void TG4DetConstruction::SetFieldType(TG4MagneticFieldType fieldType)
 //_____________________________________________________________________________
 void TG4DetConstruction::SetUniformFieldValue(G4double fieldValue)
 {
-// Sets uniform magnetic field to specified value.
-// ---
+/// Set uniform magnetic field to specified value.
   
   if (!fMagneticField) {
      G4String text = "TG4DetConstruction::SetUniformMagField: \n";
-     text = text + "    Magnetic field is not defined.";
+     text = text + "    Magnetic field i not defined.";
      TG4Globals::Exception(text);
   }   
 

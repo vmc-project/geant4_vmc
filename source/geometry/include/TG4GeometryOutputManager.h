@@ -1,13 +1,13 @@
-// $Id: TG4GeometryOutputManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: geometry
+// $Id: TG4GeometryOutputManager.h,v 1.2 2003/12/18 13:28:08 brun Exp $
+/// \ingroup geometry
 //
-// Author: I. Hrivnacova
-//
-// Class TG4GeometryOutputManager
-// ------------------------------
-// This class provides methods for writing
-// tokens (ASCII form of Geant3 routines calls)
-// into the specified output file.
+/// \class TG4GeometryOutputManager
+/// 
+/// This class provides methods for writing
+/// tokens (ASCII form of Geant3 routines calls)
+/// into the specified output file.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_GEOMETRY_OUTPUT_MANAGER_H
 #define TG4_GEOMETRY_OUTPUT_MANAGER_H

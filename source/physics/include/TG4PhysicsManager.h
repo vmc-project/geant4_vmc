@@ -1,12 +1,12 @@
-// $Id: TG4PhysicsManager.h,v 1.4 2003/09/23 14:24:29 brun Exp $
-// Category: physics
+// $Id: TG4PhysicsManager.h,v 1.5 2004/06/08 10:27:50 brun Exp $
+/// \ingroup physics
 //
-// Author: I. Hrivnacova
-//
-// Class TG4PhysicsManager
-// -----------------------
-// Geant4 implementation of the MonteCarlo interface methods                    
-// for building Geant4 physics and access to it.
+/// \class TG4PhysicsManager
+/// 
+/// Geant4 implementation of the TVirtualMC interface methods                    
+/// for building Geant4 physics and access to it.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_PHYSICS_MANAGER_H
 #define TG4_PHYSICS_MANAGER_H
@@ -117,14 +117,20 @@ class TG4PhysicsManager : public TG4Verbose
 
 // inline methods
 
-inline TG4PhysicsManager* TG4PhysicsManager::Instance() 
-{ return fgInstance; }
+inline TG4PhysicsManager* TG4PhysicsManager::Instance() { 
+  /// Return this instance
+  return fgInstance; 
+}
 
-inline void TG4PhysicsManager::SetPhysicsList(G4VUserPhysicsList* physicsList)
-{ fPhysicsList = physicsList; }
+inline void TG4PhysicsManager::SetPhysicsList(G4VUserPhysicsList* physicsList) { 
+  /// Set the physics list
+  fPhysicsList = physicsList; 
+}
 
-inline G4VUserPhysicsList* TG4PhysicsManager::GetPhysicsList() const
-{ return fPhysicsList; }
+inline G4VUserPhysicsList* TG4PhysicsManager::GetPhysicsList() const { 
+  /// Return the physics list
+  return fPhysicsList; 
+}
 
 #endif //TG4_PHYSICS_MANAGER_H
 

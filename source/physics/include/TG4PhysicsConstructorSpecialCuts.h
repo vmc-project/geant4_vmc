@@ -1,11 +1,11 @@
-// $Id: TG4PhysicsConstructorSpecialCuts.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
-// Category: physics
+// $Id: TG4PhysicsConstructorSpecialCuts.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup physics
 //
-// Author: I. Hrivnacova
-//
-// Class TG4PhysicsConstructorSpecialCuts
-// --------------------------------------
-// Constructor of special cuts.
+/// \class TG4PhysicsConstructorSpecialCuts
+/// 
+/// Constructor of special cuts.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_PHYSICS_CONSTRUCTOR_SPECIAL_CUTS_H
 #define TG4_PHYSICS_CONSTRUCTOR_SPECIAL_CUTS_H

@@ -1,12 +1,12 @@
-// $Id: TG4LVTree.h,v 1.1 2002/06/20 11:55:24 hristov Exp $
-// Category: geometry
+// $Id: TG4LVTree.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup geometry
 //
-// Author: I. Hrivnacova
-//
-// Class TG4LVTree
-// ---------------------------
-// Class provides methods for browsing volumes trees, 
-// and setting their visualization attributes.
+/// \class TG4LVTree
+/// 
+/// Class provides methods for browsing volumes trees, 
+/// and setting their visualization attributes.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_LV_TREE_H
 #define TG4_LV_TREE_H
@@ -61,10 +61,10 @@ class TG4LVTree
     void Warn(const G4String& where) const;			       
 
     // static data members
-    static TG4LVTree* fgInstance;
+    static TG4LVTree* fgInstance;   // this instance
 
     // data members
-    TG4LVTreeMessenger  fMessenger; //messenger     
+    TG4LVTreeMessenger  fMessenger; // messenger     
 };
 
 // inline methods

@@ -1,12 +1,11 @@
-//
-// $Id: TG4MagneticField.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4MagneticField.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
-//
-// Author: I. Hrivnacova
 //
 // Class TG4ParticlesManager
 // -------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4MagneticField.h"
 #include "TG4G3Units.h"
@@ -31,11 +30,14 @@ TG4MagneticField::~TG4MagneticField() {
 //
 }
 
+//
+// public methods
+//
+
 //_____________________________________________________________________________
 void TG4MagneticField::GetFieldValue(const G4double point[3], G4double* bfield) const
 {
-// Returns the bfield values in the given point.
-// ---
+/// Return the bfield values in the given point.
 
   // Set units
   const G4double g3point[3] = { point[0] / TG4G3Units::Length(),

@@ -1,13 +1,13 @@
-// $Id: TG4VisManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: visualization
+// $Id: TG4VisManager.h,v 1.2 2003/12/18 14:24:02 brun Exp $
+/// \ingroup visualization
 //
-// Author: I. Hrivnacova, A. Gheata
-//
-// Class TG4VisManager
-// -------------------
-// G4VisManager derived class that takes care of registering
-// graphics system and provides Geant4 implementation of 
-// the MonteCarlo interface methods for visualization.
+/// \class TG4VisManager
+/// 
+/// G4VisManager derived class that takes care of registering
+/// graphics system and provides Geant4 implementation of 
+/// the TVirtualMC interface methods for visualization.
+///
+/// Author: I. Hrivnacova, A. Gheata
 
 #ifndef TG4_VIS_MANAGER_H
 #define TG4_VIS_MANAGER_H
@@ -98,12 +98,15 @@ class TG4VisManager: public G4VisManager
 
 // inline methods
 
-inline G4bool TG4VisManager::NeedSetColours()
-{ return fColourFlag; }
+inline G4bool TG4VisManager::NeedSetColours() { 
+  /// Return colour flag
+  return fColourFlag; 
+}
 
-inline void TG4VisManager::SetColourFlag(G4bool value)
-{ fColourFlag = value; }
-
+inline void TG4VisManager::SetColourFlag(G4bool value) { 
+  /// Set colour flag
+  fColourFlag = value; 
+}
 
 #endif //G4VIS_USE
 #endif //TG4_VIS_MANAGER_H

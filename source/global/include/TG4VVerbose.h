@@ -1,14 +1,14 @@
-// $Id: TG4VVerbose.h,v 1.1 2002/06/20 11:56:10 hristov Exp $
-// Category: global
+// $Id: TG4VVerbose.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup global
 //
-// Author: I. Hrivnacova
-//
-// Class TG4VVerbose
-// -----------------
-// Class defines the verbose level:
-// 0 - no output
-// 1 - minimal output (default)
-// 2 and more - more detailed output
+/// \class TG4VVerbose
+/// 
+/// Class defines the verbose level:
+/// - 0 - no output
+/// - 1 - minimal output (default)
+/// - 2 and more - more detailed output
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_V_VERBOSE_H
 #define TG4_V_VERBOSE_H
@@ -43,10 +43,14 @@ class TG4VVerbose
 
 // inline methods
 
-inline void TG4VVerbose::VerboseLevel(G4int level)
-{ fVerboseLevel =  level; }
+inline void TG4VVerbose::VerboseLevel(G4int level) { 
+  /// Set level of verbosity
+  fVerboseLevel =  level; 
+}
 
-inline G4int TG4VVerbose::VerboseLevel() const
-{ return fVerboseLevel; }
+inline G4int TG4VVerbose::VerboseLevel() const { 
+  /// Return level of verbosity
+  return fVerboseLevel; 
+}
 
 #endif //TG4_V_VERBOSE_H

@@ -1,11 +1,11 @@
-// $Id: TG4RunConfiguration.cxx,v 1.2 2002/07/31 16:09:52 ivana Exp $
+// $Id: TG4RunConfiguration.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: run
-//
-// Author: I. Hrivnacova
 //
 // Class TG4RunConfiguration
 // --------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4RunConfiguration.h"
 #include "TG4DetConstruction.h"
@@ -43,9 +43,8 @@ TG4RunConfiguration::~TG4RunConfiguration(){
 //_____________________________________________________________________________
 void TG4RunConfiguration::CreateUserConfiguration()
 {
-// Creates the mandatory Geant4 classes and 
-// the other user action classes. 
-// ---
+/// Create the mandatory Geant4 classes and 
+/// the other user action classes. 
 
   // create mandatory Geant4 classes
   fDetectorConstruction = new TG4DetConstruction();

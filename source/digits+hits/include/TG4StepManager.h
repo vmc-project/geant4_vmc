@@ -1,14 +1,14 @@
-// $Id: TG4StepManager.h,v 1.4 2004/05/28 13:49:09 brun Exp $
-// Category: digits+hits
+// $Id: TG4StepManager.h,v 1.5 2004/10/12 07:47:11 brun Exp $
+/// \ingroup digits_hits
 //
-// Author: I.Hrivnacova
-//
-// Class TG4StepManager
-// --------------------
-// Geant4 implementation of the MonteCarlo interface methods                    
-// for access to Geant4 at step level.
-// The public methods that do not implement TVirtualMC methods
-// are commented as G4 specific
+/// \class TG4StepManager
+/// 
+/// Geant4 implementation of the TVirtualMC interface methods                    
+/// for access to Geant4 at step level.
+/// The public methods that do not implement TVirtualMC methods
+/// are commented as G4 specific
+///
+/// Author: I.Hrivnacova
 
 #ifndef TG4_STEP_MANAGER_H
 #define TG4_STEP_MANAGER_H
@@ -145,26 +145,40 @@ class TG4StepManager
 
 // inline methods
 
-inline TG4StepManager* TG4StepManager::Instance() 
-{ return fgInstance; }
+inline TG4StepManager* TG4StepManager::Instance() { 
+  /// Return this instance.
+  return fgInstance;
+}
 
-inline void TG4StepManager::SetStep(G4Step* step, TG4StepStatus status)
-{ fTrack = step->GetTrack(); fStep = step; fStepStatus = status; }
+inline void TG4StepManager::SetStep(G4Step* step, TG4StepStatus status) { 
+  /// Set current step and step status. 
+  fTrack = step->GetTrack(); fStep = step; fStepStatus = status; 
+}
 
-inline void TG4StepManager::SetStep(G4Track* track, TG4StepStatus status)
-{ fTrack = track; fStep = 0; fStepStatus = status; }
+inline void TG4StepManager::SetStep(G4Track* track, TG4StepStatus status) { 
+  /// Set current track and step status. 
+  fTrack = track; fStep = 0; fStepStatus = status; 
+}
 
-inline void TG4StepManager::SetSteppingManager(G4SteppingManager* manager)
-{ fSteppingManager = manager; }
+inline void TG4StepManager::SetSteppingManager(G4SteppingManager* manager) { 
+  /// Set G4 stepping manger. 
+  fSteppingManager = manager; 
+}
 
-inline G4Track* TG4StepManager::GetTrack() const
-{ return fTrack; }
+inline G4Track* TG4StepManager::GetTrack() const { 
+  /// Return current track manger. 
+  return fTrack; 
+}
 
-inline G4Step* TG4StepManager::GetStep() const
-{ return fStep; }
+inline G4Step* TG4StepManager::GetStep() const { 
+  /// Return current step. 
+  return fStep; 
+}
 
-inline TG4StepStatus TG4StepManager::GetStepStatus() const
-{ return fStepStatus; }
+inline TG4StepStatus TG4StepManager::GetStepStatus() const { 
+  /// Return current step status. 
+  return fStepStatus; 
+}
 
 #endif //TG4_STEP_MANAGER_H
 

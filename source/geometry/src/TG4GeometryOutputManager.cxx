@@ -1,11 +1,11 @@
-// $Id: TG4GeometryOutputManager.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4GeometryOutputManager.cxx,v 1.2 2003/12/18 13:28:08 brun Exp $
 // Category: geometry
-//
-// Author: I. Hrivnacova 
 //
 // Class TG4GeometryOutputManager
 // ------------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova 
 
 #include "TG4GeometryOutputManager.h"
 #include <iostream>
@@ -22,13 +22,14 @@ TG4GeometryOutputManager::~TG4GeometryOutputManager() {
 //
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4GeometryOutputManager::OpenFile(G4String filePath)
 { 
-// Opens output files.
-// ---
+/// Open output files.
 
   if (VerboseLevel() > 0) {
     G4cout << "TG4GeometryOutputManager::OpenFile: " << filePath << G4endl;
@@ -51,8 +52,7 @@ void TG4GeometryOutputManager::OpenFile(G4String filePath)
 //_____________________________________________________________________________
 void TG4GeometryOutputManager::CloseFile()
 { 
-// Closes output files.
-// ---
+/// Close output files.
 
   fOutFile.close(); 
 }
@@ -63,12 +63,11 @@ void TG4GeometryOutputManager::WriteGsvolu(
               G4String vname, G4String shape, G4int nmed, G4double* Rpar,
               G4int npar)
 {
-// from fortran (g3routines.F)
-// write(fmt,'(A,I2,A)')'(a4,1x,a6,1x,a4,1x,a4,2i5,',max(npar,1),
-//>      '(1x,e16.8))'
-// write(lunlist,fmt) context, rname, name, shape, nmed, npar,
-//+      (par(k),k=1,npar)
-// ---
+/// From fortran (g3routines.F)                                             \n
+/// write(fmt,'(A,I2,A)')'(a4,1x,a6,1x,a4,1x,a4,2i5,',max(npar,1),          \n
+///>      '(1x,e16.8))'                                                     \n
+/// write(lunlist,fmt) context, rname, name, shape, nmed, npar,             \n
+///+      (par(k),k=1,npar)                                                 \n
 
   G4String context("----");
   G4String rname("GSVOLU");
@@ -89,11 +88,10 @@ void TG4GeometryOutputManager::WriteGspos(
              G4String vname, G4int num, G4String vmoth, G4double x,
              G4double y, G4double z, G4int irot, G4String vonly)
 {	     
-// from fortran (g3routines.F)
-// write(lunlist,
-//+      '(a4,1x,a6,1x,a4,i5,1x,a4,3(1x,e16.8),i5,1x,a4)')
-//+      context, rname, name, num, moth, x, y, z, irot, only
-// ---
+/// From fortran (g3routines.F)                                            \n
+/// write(lunlist,                                                         \n
+///+      '(a4,1x,a6,1x,a4,i5,1x,a4,3(1x,e16.8),i5,1x,a4)')                \n
+///+      context, rname, name, num, moth, x, y, z, irot, only             \n
 
   G4String context("----");
   G4String rname("GSPOS");
@@ -115,17 +113,16 @@ void TG4GeometryOutputManager::WriteGspos(
 void TG4GeometryOutputManager::WriteGsposp(
               G4String vname, G4int num, G4String vmoth, G4double x,
               G4double y, G4double z, G4int irot, G4String vonly,
-              G4double pars[], G4int npar)
+              G4double* pars, G4int npar)
 {
-// from fortran (g3routines.F)
-// write(fmt,'(A,A,I2,A)')
-//+      '(a4,1x,a6,1x,a4,i5,1x,a4,3(1x,e16.8),',       
-//+      'i5,1x,a4,i5,',max(npar,1),'(1x,e16.8))'
-// write(lunlist,fmt)
-//+      context, rname, name, num, moth, x, y, z, irot, only,
-//+      npar,
-//+      (par(k),k=1,npar)
-// ---
+/// From fortran (g3routines.F)                                             \n
+/// write(fmt,'(A,A,I2,A)')                                                 \n
+///+      '(a4,1x,a6,1x,a4,i5,1x,a4,3(1x,e16.8),',                          \n
+///+      'i5,1x,a4,i5,',max(npar,1),'(1x,e16.8))'                          \n
+/// write(lunlist,fmt)                                                      \n  
+///+      context, rname, name, num, moth, x, y, z, irot, only,             \n
+///+      npar,                                                             \n 
+///+      (par(k),k=1,npar)                                                 \n
 
   G4String context("----");
   G4String rname("GSPOSP");
@@ -151,12 +148,11 @@ void TG4GeometryOutputManager::WriteGsrotm(
               G4int irot, G4double theta1, G4double phi1,
               G4double theta2, G4double phi2, G4double theta3, G4double phi3)
 {
-// from fortran (g3routines.F)
-// write(lunlist,
-//+      '(a4,1x,a6,i5,6f11.5)')
-//+      context, rname, irot, theta1, phi1, theta2, phi2,
-//+      theta3, phi3
-// ---
+/// From fortran (g3routines.F)                                             \n
+/// write(lunlist,                                                          \n
+///+      '(a4,1x,a6,i5,6f11.5)')                                           \n
+///+      context, rname, irot, theta1, phi1, theta2, phi2,                 \n
+///+      theta3, phi3                                                      \n
   
   G4String context("----");
   G4String rname("GSROTM");
@@ -177,11 +173,10 @@ void TG4GeometryOutputManager::WriteGsrotm(
 void TG4GeometryOutputManager::WriteGsdvn(
               G4String vname, G4String vmoth, G4int ndiv, G4int iaxis)
 {
-// from fortran (g3routines.F)
-// write(lunlist,
-//+      '(a4,1x,a6,1x,a4,1x,a4,i5,i3)')
-//+      context, rname, name, moth, ndiv, iaxis
-// ---
+/// From fortran (g3routines.F)                                             \n
+/// write(lunlist,                                                          \n
+///+      '(a4,1x,a6,1x,a4,1x,a4,i5,i3)')                                   \n
+///+      context, rname, name, moth, ndiv, iaxis                           \n
 
   G4String context("----");
   G4String rname("GSDVN");
@@ -200,11 +195,10 @@ void TG4GeometryOutputManager::WriteGsdvn2(
                G4String vname, G4String vmoth, G4int ndiv, G4int iaxis,
                G4double c0, G4int numed)
 {
-// from fortran (g3routines.F)
-// write(lunlist,
-//+      '(a4,1x,a6,1x,a4,1x,a4,i5,i3,(1x,e16.8),i5)')
-//+      context, rname, name, moth, ndiv, iaxis, c0, numed
-// ---
+/// From fortran (g3routines.F)                                             \n
+/// write(lunlist,                                                          \n
+///+      '(a4,1x,a6,1x,a4,1x,a4,i5,i3,(1x,e16.8),i5)')                     \n
+///+      context, rname, name, moth, ndiv, iaxis, c0, numed                \n
 
   G4String context("----");
   G4String rname("GSDVN2");
@@ -225,11 +219,10 @@ void TG4GeometryOutputManager::WriteGsdvt(
              G4String vname, G4String vmoth, G4double step, G4int iaxis,
              G4int numed, G4int ndvmx) 
 {
-// from fortran (g3routines.F)
-// write(lunlist,
-// +    '(a4,1x,a6,1x,a4,1x,a4,(1x,e16.8),3i5)')
-// +    context, rname, name, moth, step, iaxis, numed, ndvmx
-// ---
+/// From fortran (g3routines.F)                                             \n
+/// write(lunlist,                                                          \n
+/// +    '(a4,1x,a6,1x,a4,1x,a4,(1x,e16.8),3i5)')                           \n
+/// +    context, rname, name, moth, step, iaxis, numed, ndvmx              \n
 
   G4String context("----");
   G4String rname("GSDVT");
@@ -250,11 +243,10 @@ void TG4GeometryOutputManager::WriteGsdvt2(
                G4String vname, G4String vmoth, G4double step, G4int iaxis,
                G4double c0, G4int numed, G4int ndvmx)
 {	       
-// from fortran (g3routines.F)
-// write(lunlist,
-//+      '(a4,1x,a6,1x,a4,1x,a4,(1x,e16.8),i3,(1x,e16.8),2i5)')
-//+      context, rname, name, moth, step, iaxis, c0, numed, ndvmx
-// ---
+/// From fortran (g3routines.F)                                             \n
+/// write(lunlist,                                                          \n
+///+      '(a4,1x,a6,1x,a4,1x,a4,(1x,e16.8),i3,(1x,e16.8),2i5)')            \n
+///+      context, rname, name, moth, step, iaxis, c0, numed, ndvmx         \n
 
   G4String context("----");
   G4String rname("GSDVT2");
@@ -276,12 +268,11 @@ void TG4GeometryOutputManager::WriteGsdvx(
              G4String name, G4String moth, G4int ndiv, G4int iaxis,
              G4double step, G4double c0, G4int numed, G4int ndvmx)
 {
-// from fortran (g3routines.F)
-// write(lunlist,
-// +     '(a4,1x,a6,1x,a4,1x,a4,i5,i3,2(1x,e16.8),2i5)')
-// +     context, rname, name, moth, ndiv, iaxis,step, c0,
-// +     numed, ndvmx
-// ---
+/// From fortran (g3routines.F)                                             \n
+/// write(lunlist,                                                          \n
+/// +     '(a4,1x,a6,1x,a4,1x,a4,i5,i3,2(1x,e16.8),2i5)')                   \n
+/// +     context, rname, name, moth, ndiv, iaxis,step, c0,                 \n
+/// +     numed, ndvmx
 
   G4String context("----");
   G4String rname("GSDVX");
@@ -304,14 +295,13 @@ void TG4GeometryOutputManager::WriteGsmate(
               G4int imate, G4String name, G4double ain, G4double zin,
               G4double densin, G4double radl, G4int nwbf, G4double* ubuf)
 {
-// from fortran (g3routines.F)
-// write(fmt,'(A,I3,A)')
-//+      '(a4,1x,a6,i5,1x,''"'',a,''"'',4(1x,e16.8),i3,',
-//+      max(nwbf,1),'(1x,e16.8))'
-// write(lunlist,fmt)
-//+      context, rname, imate, name, a, z, dens, radl,
-//+      nwbf, (ubf(k), k=1,nwbf)
-// ---
+/// From fortran (g3routines.F)                                             \n
+/// write(fmt,'(A,I3,A)')                                                   \n
+///+      '(a4,1x,a6,i5,1x,''"'',a,''"'',4(1x,e16.8),i3,',                  \n
+///+      max(nwbf,1),'(1x,e16.8))'                                         \n
+/// write(lunlist,fmt)                                                      \n
+///+      context, rname, imate, name, a, z, dens, radl,                    \n
+///+      nwbf, (ubf(k), k=1,nwbf)                                          \n
 
   G4String context("----");
   G4String rname("GSMATE");
@@ -335,19 +325,18 @@ void TG4GeometryOutputManager::WriteGsmixt(
               G4int imate, G4String name, G4double* a, G4double* z,
               G4double dens, G4int nlmat, G4double* wmat)
 {
-// from fortran (g3routines.F)
-// write(fmt,'(A,I3,A,I3,A,I3,A)')
-//+      '(a4,1x,a6,i5,1x,''"'',a,''"'',1x,e16.8,1x,i3,',
-//+      max(nlmata,1),
-//+      '(1x,e16.8),',max(nlmata,1),'(1x,e16.8),',
-//+      max(nlmata,1),'(1x,e16.8))'
-// write(lunlist,fmt)
-//+      context, rname, imate, name, dens,
-//+      nlmat, 
-//+      (a(k), k=1,abs(nlmat)),
-//+      (z(k), k=1,abs(nlmat)),
-//+      (wmat(k), k=1,abs(nlmat))
-// ---
+/// From fortran (g3routines.F)                                             \n
+/// write(fmt,'(A,I3,A,I3,A,I3,A)')                                         \n
+///+      '(a4,1x,a6,i5,1x,''"'',a,''"'',1x,e16.8,1x,i3,',                  \n
+///+      max(nlmata,1),                                                    \n
+///+      '(1x,e16.8),',max(nlmata,1),'(1x,e16.8),',                        \n
+///+      max(nlmata,1),'(1x,e16.8))'                                       \n
+/// write(lunlist,fmt)                                                      \n
+///+      context, rname, imate, name, dens,                                \n
+///+      nlmat,                                                            \n
+///+      (a(k), k=1,abs(nlmat)),                                           \n
+///+      (z(k), k=1,abs(nlmat)),                                           \n
+///+      (wmat(k), k=1,abs(nlmat))                                         \n
 
   G4String context("----");
   G4String rname("GSMIXT");
@@ -375,15 +364,14 @@ void TG4GeometryOutputManager::WriteGstmed(
               G4double stemax, G4double deemax, G4double epsil,
               G4double stmin, G4double* ubuf, G4int nwbuf)
 {
-// from fortran (g3routines.F)
-// write(fmt,'(A,I3,A)') 
-//>      '(a4,1x,a6,i5,1x,''"'',a,''"'',3i3,6(1x,e16.8),i3,',
-//>      max(nwbuf,1),'(1x,e16.8))'
-// write(lunlist,fmt)
-//+      context, rname, itmed, name, nmat, isvol, ifield, fieldm,
-//+      tmaxfd, stemax, deemax, epsil, stmin,
-//+      nwbuf, (ubuf(k),k=1,nwbuf)
-// ---
+/// From fortran (g3routines.F)                                             \n
+/// write(fmt,'(A,I3,A)')                                                   \n
+///>      '(a4,1x,a6,i5,1x,''"'',a,''"'',3i3,6(1x,e16.8),i3,',              \n
+///>      max(nwbuf,1),'(1x,e16.8))'                                        \n
+/// write(lunlist,fmt)                                                      \n
+///+      context, rname, itmed, name, nmat, isvol, ifield, fieldm,         \n
+///+      tmaxfd, stemax, deemax, epsil, stmin,                             \n
+///+      nwbuf, (ubuf(k),k=1,nwbuf)                                        \n
 
   G4String context("----");
   G4String rname("GSTMED");
@@ -411,11 +399,10 @@ void TG4GeometryOutputManager::WriteGstmed(
 void TG4GeometryOutputManager::WriteGstpar(
                G4int itmed, G4String param, G4double parval)
 {	       
-// from fortran (g3routines.F)
-// write(lunlist,
-//+     '(a4,1x,a6,i5,1x,a4,(1x,e16.8))')
-//+     context, rname, itmed, chpar, parval
-// ---
+/// From fortran (g3routines.F)                                             \n
+/// write(lunlist,                                                          \n
+///+     '(a4,1x,a6,i5,1x,a4,(1x,e16.8))')                                  \n
+///+     context, rname, itmed, chpar, parval                               \n
 
   G4String context("----");
   G4String rname("GSTPAR");
@@ -431,8 +418,7 @@ void TG4GeometryOutputManager::WriteGstpar(
 //_____________________________________________________________________________
 void TG4GeometryOutputManager::WriteGgclos()
 {
-// Writes GGCLOS token
-// ---
+/// Write GGCLOS token
 
   G4String context("----");
   G4String rname("GGCLOS");

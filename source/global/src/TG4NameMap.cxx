@@ -1,11 +1,11 @@
-// $Id: TG4NameMap.cxx,v 1.2 2003/09/23 14:23:40 brun Exp $
+// $Id: TG4NameMap.cxx,v 1.3 2003/12/18 13:28:08 brun Exp $
 // Category: global
-//
-// Author: I. Hrivnacova
 //
 // Class TG4NameMap
 // ----------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4NameMap.h"
 #include "TG4Globals.h"
@@ -32,7 +32,9 @@ TG4NameMap::~TG4NameMap() {
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4NameMap& TG4NameMap::operator=(const TG4NameMap& right)
@@ -45,14 +47,15 @@ TG4NameMap& TG4NameMap::operator=(const TG4NameMap& right)
   return *this;  
 }    
           
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 G4bool TG4NameMap::Add(const G4String& first, const G4String& second)
 {  
-// Adds names pair to the map.
-// fSecond is not used in this add method.
-// ---
+/// Add names pair to the map.
+/// fSecond is not used in this add method.
 
   if (GetSecond(first) == fgUndefined) {
     // insert into map 
@@ -66,8 +69,7 @@ G4bool TG4NameMap::Add(const G4String& first, const G4String& second)
 //_____________________________________________________________________________
 G4bool TG4NameMap::AddName(const G4String& name)
 {  
-// Adds name to the map.
-// ---
+/// Add name to the map.
 
   if (GetSecond(name) == fgUndefined) {
     // insert into map 
@@ -81,8 +83,7 @@ G4bool TG4NameMap::AddName(const G4String& name)
 //_____________________________________________________________________________
 const G4String& TG4NameMap::GetSecond(const G4String& name) const
 {
-// Gets second name associated with given name.
-// ---
+/// Get second name associated with given name.
 
   MapConstIterator i = fMap.find(name);
   if (i == fMap.end()) 
@@ -94,8 +95,7 @@ const G4String& TG4NameMap::GetSecond(const G4String& name) const
 //_____________________________________________________________________________
 void TG4NameMap::PrintAll() const
 {
-// Dumps all map.
-// ---
+/// Dump the whole map.
 
   if (fMap.size()) {
     G4cout << "Dump of TG4NameMap - " << fMap.size() << " entries:" << G4endl;
@@ -112,8 +112,7 @@ void TG4NameMap::PrintAll() const
 //_____________________________________________________________________________
 void TG4NameMap::Clear() 
 {
-// Clears the map.
-// ---
+/// Clear the map.
 
   fMap.clear();
   fSecond = "Undefined";

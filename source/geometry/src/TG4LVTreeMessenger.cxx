@@ -1,11 +1,11 @@
-// $Id: TG4LVTreeMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4LVTreeMessenger.cxx,v 1.2 2002/12/18 09:35:31 brun Exp $
 // Category: geometry
-//
-// Author: I. Hrivnacova
 //
 // Class TG4LVTreeMessenger
 // ------------------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4LVTreeMessenger.h"
 #include "TG4LVTree.h"
@@ -118,7 +118,9 @@ TG4LVTreeMessenger::~TG4LVTreeMessenger()
 #endif //G4VIS_USE
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4LVTreeMessenger& 
@@ -133,14 +135,15 @@ TG4LVTreeMessenger::operator=(const TG4LVTreeMessenger& right)
   return *this;  
 }    
           
+//
 // public methods
+//
   
 //_____________________________________________________________________________
 void TG4LVTreeMessenger::SetNewValue(G4UIcommand* command,
                                      G4String newValues)
 {
-// Applies command to the associated object.
-// ---
+/// Apply command to the associated object.
 
   G4String dirName = "/mcTree/"; 
   fDirectory = new G4UIdirectory(dirName);

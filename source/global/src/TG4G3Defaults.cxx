@@ -1,11 +1,11 @@
-// $Id: TG4G3Defaults.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4G3Defaults.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
-//
-// Author: I. Hrivnacova
 //
 // Class TG4G3Defaults
 // -------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4G3Defaults.h"
 #include "TG4Globals.h"
@@ -70,7 +70,9 @@ TG4G3Defaults::~TG4G3Defaults() {
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4G3Defaults& 
@@ -85,11 +87,14 @@ TG4G3Defaults::operator=(const TG4G3Defaults& right)
   return *this;  
 }    
           
+//
+// public methods
+//
+
 //_____________________________________________________________________________
 G4double TG4G3Defaults::CutValue(G4int g3Cut) const
 {
-// Returns the G3 default value for the specified cut.
-// ---
+/// Return the G3 default value for the specified cut.
 
   return fCutVector[g3Cut];
 }          
@@ -97,8 +102,7 @@ G4double TG4G3Defaults::CutValue(G4int g3Cut) const
 //_____________________________________________________________________________
 TG4G3ControlValue TG4G3Defaults::ControlValue(G4int control) const
 {
-// Returns the G3 default value for the specified control.
-// ---
+/// Return the G3 default value for the specified control.
 
   return fControlVector[control];
 }          
@@ -106,8 +110,7 @@ TG4G3ControlValue TG4G3Defaults::ControlValue(G4int control) const
 //_____________________________________________________________________________
 G4bool TG4G3Defaults::IsDefaultCut(TG4G3Cut cut, G4double value) const
 {
-// Tests if the parameter value is equal to the G3 default value.
-// ---
+/// Test if the parameter value is equal to the G3 default value.
 
   if (abs(value*GeV - CutValue(cut)) > TG4G3CutVector::Tolerance()) 
     return false;
@@ -119,8 +122,7 @@ G4bool TG4G3Defaults::IsDefaultCut(TG4G3Cut cut, G4double value) const
 G4bool TG4G3Defaults::IsDefaultControl(TG4G3Control control,
                                        TG4G3ControlValue value) const
 {
-// Tests if the parameter value is equal to the G3 default value.
-// ---
+/// Test if the parameter value is equal to the G3 default value.
 
   if (value == ControlValue(control)) 
     return true;

@@ -1,12 +1,11 @@
-// $Id: TG4MagneticFieldType.h,v 1.1 2002/06/20 11:55:24 hristov Exp $
-// Category: geometry
+// $Id: TG4MagneticFieldType.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup geometry
 //
-// Author: I. Hrivnacova
-//
-// Enum TG4MagneticFieldType
-// -------------------------
-// Enumeration type for distinguishing between detector
-// and structure modules.
+/// \enum TG4MagneticFieldType
+/// 
+/// Enumeration type for magnetic field types.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_MAGNETIC_FIELD_TYPE_H
 #define TG4_MAGNETIC_FIELD_TYPE_H

@@ -1,74 +1,100 @@
-// $Id: TGeant4.icc,v 1.6 2004/08/17 08:53:00 brun Exp $
+// $Id: TGeant4.icc,v 1.7 2004/10/12 07:47:11 brun Exp $
 // Category: run
 
 #include "TG4StepManager.h" 
 
+//
 // methods for step management
-// ------------------------------------------------
+//
 
 //_____________________________________________________________________________
 inline void TGeant4::StopTrack()
 { 
+/// Stop track
+  
   fStepManager->StopTrack(); 
 } 
 
 //_____________________________________________________________________________
 inline void TGeant4::StopEvent()   
 { 
+/// Aborts the current event processing.
+  
   fStepManager->StopEvent(); 
 } 
 
 //_____________________________________________________________________________
 inline void TGeant4::StopRun()   
 { 
+/// Aborts the current run processing.
+
   fStepManager->StopRun(); 
 } 
 
 //_____________________________________________________________________________
 inline void TGeant4::SetMaxStep(Double_t step)
 { 
+/// Sets the maximum step allowed in the current logical volume.
+
   fStepManager->SetMaxStep(step); 
 } 
 
 //_____________________________________________________________________________
 inline void TGeant4::SetMaxNStep(Int_t number)
 { 
-  fStepManager->SetMaxNStep(number); 
+/// Sets the maximum number of steps.
+
+ fStepManager->SetMaxNStep(number); 
 } 
 
 //_____________________________________________________________________________
 inline void TGeant4::SetUserDecay(Int_t number)
 { 
+/// Set user decay specified by decay number
+/// Not yet implemented.
+
   fStepManager->SetUserDecay(number); 
 } 
 
 //_____________________________________________________________________________
 inline Int_t TGeant4::CurrentVolID(Int_t& copyNo) const
 { 
+/// Return the current sensitive detector ID
+/// and the copy number of the current physical volume.
+
   return fStepManager->CurrentVolID(copyNo); 
 } 
 
 //_____________________________________________________________________________
 inline Int_t TGeant4::CurrentVolOffID(Int_t off, Int_t& copyNo) const
 { 
+/// Returns the off-th mother's of the current volume
+/// the sensitive detector ID and the copy number.
+
   return fStepManager->CurrentVolOffID(off, copyNo); 
 } 
 
 //_____________________________________________________________________________
 inline const char* TGeant4::CurrentVolName() const
 { 
+/// Returns the current physical volume name.
+
   return fStepManager->CurrentVolName(); 
 } 
 
 //_____________________________________________________________________________
 inline const char* TGeant4::CurrentVolOffName(Int_t off) const
 { 
+/// Returns the off-th mother's physical volume name.
+
   return fStepManager->CurrentVolOffName(off); 
 } 
 
 //_____________________________________________________________________________
 inline const char* TGeant4::CurrentVolPath()
 { 
+/// Returns the current volume path.
+
   return fStepManager->CurrentVolPath(); 
 } 
 
@@ -76,66 +102,99 @@ inline const char* TGeant4::CurrentVolPath()
 inline Int_t TGeant4::CurrentMaterial(Float_t &a, Float_t &z, 
                     Float_t &dens, Float_t &radl, Float_t &absl) const  
 { 
+/// Returns the parameters of the current material during transport;
+/// the return value is the number of elements in the mixture.
+
   return fStepManager->CurrentMaterial(a, z, dens, radl, absl); 
 } 
 
 //_____________________________________________________________________________
 inline void TGeant4::Gmtod(Float_t* xm, Float_t* xd, Int_t iflag)
 { 
+/// Transforms a position from the world reference frame
+/// to the current volume reference frame.
+
   fStepManager->Gmtod(xm, xd, iflag); 
 } 
 
 //_____________________________________________________________________________
 inline void TGeant4::Gmtod(Double_t* xm, Double_t* xd, Int_t iflag)
 { 
+/// Transforms a position from the world reference frame
+/// to the current volume reference frame.
+
   fStepManager->Gmtod(xm, xd, iflag); 
 } 
 
 //_____________________________________________________________________________
 inline void TGeant4::Gdtom(Float_t* xd, Float_t* xm, Int_t iflag)
 { 
+/// Transforms a position from the current volume reference frame
+/// to the world reference frame.
+
   fStepManager->Gdtom(xd, xm, iflag); 
 } 
     
 //_____________________________________________________________________________
 inline void TGeant4::Gdtom(Double_t* xd, Double_t* xm, Int_t iflag)
 { 
+/// Transforms a position from the current volume reference frame
+/// to the world reference frame.
+
   fStepManager->Gdtom(xd, xm, iflag); 
 } 
     
 //_____________________________________________________________________________
 inline Double_t TGeant4::MaxStep() const
 { 
+/// Returns the maximum step allowed in the current logical volume
+/// by user limits.
+
   return fStepManager->MaxStep(); 
 } 
 
 //_____________________________________________________________________________
 inline Int_t TGeant4::GetMaxNStep() const
 { 
+/// Returns the maximum number of steps.
+
   return fStepManager->GetMaxNStep(); 
 } 
 
 //_____________________________________________________________________________
 inline Int_t TGeant4::GetMedium() const
 { 
+/// Returns the second index of the current material (corresponding to
+/// G3 tracking medium index).
+
   return fStepManager->GetMedium(); 
 } 
 
 //_____________________________________________________________________________
 inline void TGeant4::TrackPosition(TLorentzVector& position) const
 { 
+/// The current particle position (in the world reference frame)
+/// and the local time since the current track is created
+/// (position of the PostStepPoint).
+
   fStepManager->TrackPosition(position); 
 } 
 
 //_____________________________________________________________________________
 inline void TGeant4::TrackPosition(Double_t& x, Double_t& y, Double_t& z) const
 { 
+/// The current particle position (in the world reference frame)
+/// and the local time since the current track is created
+/// (position of the PostStepPoint).
+
   fStepManager->TrackPosition(x, y, z); 
 } 
 
 //_____________________________________________________________________________
 inline void TGeant4::TrackMomentum(TLorentzVector& momentum) const
 { 
+/// The current particle "momentum" (px, py, pz, Etot).
+
   fStepManager->TrackMomentum(momentum); 
 } 
 
@@ -143,120 +202,172 @@ inline void TGeant4::TrackMomentum(TLorentzVector& momentum) const
 inline void TGeant4::TrackMomentum(Double_t& px, Double_t& py, Double_t& pz,
                                    Double_t& etot) const
 { 
+/// The current particle "momentum" (px, py, pz, Etot).
+
   fStepManager->TrackMomentum(px, py, pz, etot); 
 } 
 
 //_____________________________________________________________________________
 inline void TGeant4::TrackVertexPosition(TLorentzVector& position) const
 { 
+/// The vertex particle position (in the world reference frame)
+/// and the local time since the current track is created.
+
   fStepManager->TrackVertexPosition(position); 
 } 
 
 //_____________________________________________________________________________
 inline void TGeant4::TrackVertexMomentum(TLorentzVector& momentum) const
 { 
+/// The vertex particle "momentum" (px, py, pz, Ekin)                        \n
+/// to do: change Ekin -> Etot 
+
   fStepManager->TrackVertexMomentum(momentum); 
 } 
 
 //_____________________________________________________________________________
 inline Double_t TGeant4::TrackStep() const
 { 
+/// Returns the current step length.
+
   return fStepManager->TrackStep(); 
 } 
 
 //_____________________________________________________________________________
 inline Double_t TGeant4::TrackLength() const 
 { 
+/// Returns the length of the current track from its origin.
+
   return fStepManager->TrackLength(); 
 } 
 
 //_____________________________________________________________________________
 inline Double_t TGeant4::TrackTime() const
 { 
+/// Returns the local time since the current track is created.               \n
+/// Comment:
+/// in Geant4: there is also defined proper time as
+/// the proper time of the dynamical particle of the current track.
+
   return fStepManager->TrackTime(); 
 } 
 
 //_____________________________________________________________________________
 inline Double_t TGeant4::Edep() const
 { 
+/// Returns the total energy deposit in this step.
+
   return fStepManager->Edep(); 
 } 
 
 //_____________________________________________________________________________
 inline Int_t TGeant4::TrackPid() const
 { 
+/// Returns the current particle PDG encoding.
+
   return fStepManager->TrackPid(); 
 } 
 
 //_____________________________________________________________________________
 inline Double_t TGeant4::TrackCharge() const
 { 
+/// Returns the current particle charge.
+
   return fStepManager->TrackCharge(); 
 } 
 
 //_____________________________________________________________________________
 inline Double_t TGeant4::TrackMass() const
 { 
+/// Returns the current particle mass at rest.
+
   return fStepManager->TrackMass(); 
 } 
 
 //_____________________________________________________________________________
 inline Double_t TGeant4::Etot() const
 { 
+/// Returns the total energy of the current particle.
+
   return fStepManager->Etot(); 
 } 
 
 //_____________________________________________________________________________
 inline Bool_t  TGeant4::IsTrackInside() const
 {   
+/// Returns true if the particle does not cross a geometrical boundary
+/// and is not in the vertex.
+
   return fStepManager->IsTrackInside(); 
 } 
 
 //_____________________________________________________________________________
 inline Bool_t  TGeant4::IsTrackEntering() const
 {   
+/// Returns true if the particle crosses a geometrical boundary
+/// or is in the vertex.
+
   return fStepManager->IsTrackEntering(); 
 } 
 
 //_____________________________________________________________________________
 inline Bool_t  TGeant4::IsTrackExiting() const
 {   
+/// Returns true if the particle crosses a geometrical boundary.
+
   return fStepManager->IsTrackExiting(); 
 } 
 
 //_____________________________________________________________________________
 inline Bool_t  TGeant4::IsTrackOut() const
 {   
+/// Returns true if the particle crosses the world boundary
+/// at the post-step point.
+
   return fStepManager->IsTrackOut(); 
 } 
 
 //_____________________________________________________________________________
 inline Bool_t  TGeant4::IsTrackDisappeared() const
 {   
+/// Returns true if particle has disappeared 
+/// (due to any physical process)
+/// or has been killed, suspended or postponed to next event.
+
   return fStepManager->IsTrackDisappeared(); 
 } 
 
 //_____________________________________________________________________________
 inline Bool_t  TGeant4::IsTrackStop() const
 {  
+/// Returns true if the particle has stopped 
+/// or has been killed, suspended or postponed to the next event.
+
   return  fStepManager->IsTrackStop(); 
 } 
 
 //_____________________________________________________________________________
 inline Bool_t  TGeant4::IsTrackAlive() const
 {   
+/// Returns true if particle continues tracking.
+
   return fStepManager->IsTrackAlive(); 
 } 
 
 //_____________________________________________________________________________
 inline Bool_t TGeant4::IsNewTrack() const
 {
+/// Returns true when the track performs the first step.
+
   return fStepManager->IsNewTrack();
 }  
 
 //_____________________________________________________________________________
 inline Int_t TGeant4::NSecondaries() const
 { 
+/// Returns the number of secondary particles generated 
+/// in the current step.
+
   return fStepManager->NSecondaries(); 
 } 
 
@@ -264,17 +375,26 @@ inline Int_t TGeant4::NSecondaries() const
 inline void  TGeant4::GetSecondary(Int_t isec, Int_t& particleId, 
                          TLorentzVector& position, TLorentzVector& momentum)
 { 
+/// Fills the parameters (particle encoding, position, momentum)
+/// of the generated secondary particle which is specified by index.  
+
   fStepManager->GetSecondary(isec, particleId, position, momentum); 
 } 
 
 //_____________________________________________________________________________
 inline TMCProcess TGeant4::ProdProcess(Int_t isec) const 
 { 
+/// Returns the process that has produced the secondary particles specified 
+/// with isec index in the current step.
+
   return fStepManager->ProdProcess(isec); 
 } 
 
 //_____________________________________________________________________________
 inline Int_t TGeant4::StepProcesses(TArrayI &proc) const
 { 
+/// Fills the array of processes that were active in the current step
+/// and returns the number of them.
+
   return fStepManager->StepProcesses(proc); 
 } 

@@ -1,11 +1,11 @@
-// $Id: TG4SteppingActionMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4SteppingActionMessenger.cxx,v 1.2 2002/12/18 09:35:31 brun Exp $
 // Category: event
-//
-// Author: I. Hrivnacova
 //
 // Class TG4SteppingActionMessenger
 // --------------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4SteppingActionMessenger.h"
 #include "TG4SteppingAction.h"
@@ -55,7 +55,9 @@ TG4SteppingActionMessenger::~TG4SteppingActionMessenger() {
   delete fMaxNofStepsCmd;
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4SteppingActionMessenger& 
@@ -70,14 +72,15 @@ TG4SteppingActionMessenger::operator=(const TG4SteppingActionMessenger &right)
   return *this;
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4SteppingActionMessenger::SetNewValue(G4UIcommand* command, 
        G4String newValue)
 { 
-// Applies command to the associated object.
-// ---
+/// Apply command to the associated object.
 
   if(command == fLoopVerboseCmd) { 
     fSteppingAction

@@ -1,16 +1,16 @@
-// $Id: TG4ModularPhysicsList.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: physics
+// $Id: TG4ModularPhysicsList.h,v 1.2 2003/06/03 17:15:49 brun Exp $
+/// \ingroup physics
 //
-// Author: I. Hrivnacova
-//
-// Class TG4ModularPhysicsList
-// ---------------------------
-// The Geant4 VMC modular physics list.
-// The default physics processes and particles are created
-// using the G4VPhysicsCreator derived classes
-// and registered to this physics list in the function Configure().
-// User can override this function and instatiate his own
-// physics constructor classes.
+/// \class TG4ModularPhysicsList
+/// 
+/// The Geant4 VMC modular physics list.
+/// The default physics processes and particles are created
+/// using the G4VPhysicsCreator derived classes
+/// and registered to this physics list in the function Configure().
+/// User can override this function and instatiate his own
+/// physics constructor classes.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_MODULAR_PHYSICS_LIST_H
 #define TG4_MODULAR_PHYSICS_LIST_H
@@ -78,23 +78,35 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
 
 // inline functions
 
-inline void TG4ModularPhysicsList::SetEMPhysics(G4bool value)
-{ fSetEMPhysics = value; }
+inline void TG4ModularPhysicsList::SetEMPhysics(G4bool value) { 
+  /// Swith on/off EM physics
+  fSetEMPhysics = value; 
+}
 
-inline void TG4ModularPhysicsList::SetMuonPhysics(G4bool value)
-{ fSetMuonPhysics = value; }
+inline void TG4ModularPhysicsList::SetMuonPhysics(G4bool value) { 
+  /// Switch on/off muon physics
+  fSetMuonPhysics = value; 
+}
 
-inline void TG4ModularPhysicsList::SetHadronPhysics(G4bool value)
-{ fSetHadronPhysics = value; }
+inline void TG4ModularPhysicsList::SetHadronPhysics(G4bool value) { 
+  /// Switch on/off hadron physics
+  fSetHadronPhysics = value; 
+}
 
-inline void TG4ModularPhysicsList::SetOpticalPhysics(G4bool value)
-{ fSetOpticalPhysics = value; }
+inline void TG4ModularPhysicsList::SetOpticalPhysics(G4bool value) { 
+  /// Switch on/off optical physics
+  fSetOpticalPhysics = value; 
+}
 
-inline void TG4ModularPhysicsList::SetSpecialCutsPhysics(G4bool value)
-{ fSetSpecialCutsPhysics = value; }
+inline void TG4ModularPhysicsList::SetSpecialCutsPhysics(G4bool value) { 
+  /// Switch on/off special cuts = cuts in energy defined via VMC
+  fSetSpecialCutsPhysics = value; 
+}
 
-inline void TG4ModularPhysicsList::SetSpecialControlsPhysics(G4bool value)
-{ fSetSpecialControlsPhysics = value; }
+inline void TG4ModularPhysicsList::SetSpecialControlsPhysics(G4bool value) { 
+  /// Switch on/off special controls = process controls defined via VMC
+  fSetSpecialControlsPhysics = value; 
+}
 
 #endif //TG4_MODULAR_PHYSICS_LIST_H
 

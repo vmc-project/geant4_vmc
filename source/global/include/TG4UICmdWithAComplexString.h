@@ -1,13 +1,13 @@
-// $Id: TG4UICmdWithAComplexString.h,v 1.1 2002/06/20 11:56:10 hristov Exp $
-// Category: global
+// $Id: TG4UICmdWithAComplexString.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup global
 //
-// Author: I. Hrivnacova
-//
-// Class TG4UICmdWithAComplexString
-// --------------------------------
-// Concrete class of G4UIcommand. 
-// The command defined by this class takes up to three string values.
-// General information of G4UIcommand is given in G4UIcommand.hh.
+/// \class TG4UICmdWithAComplexString
+/// 
+/// Concrete class of G4UIcommand. 
+/// The command defined by this class takes up to three string values.
+/// General information of G4UIcommand is given in G4UIcommand.hh.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_UI_CMD_WITH_A_COMPLEX_STRING_H
 #define TG4_UI_CMD_WITH_A_COMPLEX_STRING_H

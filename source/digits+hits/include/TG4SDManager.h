@@ -1,12 +1,12 @@
-// $Id: TG4SDManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: digits+hits
+// $Id: TG4SDManager.h,v 1.2 2004/10/12 07:47:11 brun Exp $
+/// \ingroup digits_hits
 //
-// Author: I. Hrivnacova
-//
-// Class TG4SDManager
-// ------------------
-// Geant4 implementation of the MonteCarlo interface methods                    
-// for access to Geant4 geometry related with sensitive detectors.
+/// \class TG4SDManager
+/// 
+/// Geant4 implementation of the TVirtualMC interface methods                    
+/// for access to Geant4 geometry related with sensitive detectors.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_SD_MANAGER_H
 #define TG4_SD_MANAGER_H
@@ -64,11 +64,15 @@ class TG4SDManager
 
 // inline methods
 
-inline TG4SDManager* TG4SDManager::Instance() 
-{ return fgInstance; }
+inline TG4SDManager* TG4SDManager::Instance() { 
+  /// Return this instance
+  return fgInstance; 
+}
 
-inline TG4SDConstruction* TG4SDManager::GetSDConstruction() const
-{ return fSDConstruction; }
+inline TG4SDConstruction* TG4SDManager::GetSDConstruction() const { 
+  /// Return sensitive detctor construction
+  return fSDConstruction; 
+}
 
 #endif //TG4_SD_MANAGER_H
 

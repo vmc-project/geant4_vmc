@@ -1,14 +1,14 @@
-//  $Id: TG4UniformMagneticField.h,v 1.1 2002/06/20 11:55:24 hristov Exp $
-// Category: geometry
+// $Id: TG4UniformMagneticField.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup geometry
 //
-// Author: I. Hrivnacova
-//
-// Class TG4UniformMagneticField
-// -----------------------------
-// Uniform magnetic field.
-// According to:
-// Id: ExN02MagneticField.hh,v 1.1 1999/01/07 16:05:47 gunter Exp 
-// GEANT4 tag Name: geant4-00-01 
+/// \class TG4UniformMagneticField
+/// 
+/// Uniform magnetic field.                                                  \n
+/// According to:                                                            \n
+/// Id: ExN02MagneticField.hh,v 1.1 1999/01/07 16:05:47 gunter Exp           \n
+/// GEANT4 tag Name: geant4-00-01 
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_UNIFORM_MAGNETIC_FIELD_H
 #define TG4_UNIFORM_MAGNETIC_FIELD_H

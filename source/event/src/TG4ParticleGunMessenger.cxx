@@ -1,11 +1,11 @@
-// $Id: TG4ParticleGunMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4ParticleGunMessenger.cxx,v 1.2 2002/12/18 09:35:31 brun Exp $
 // Category: event
-//
-// Author: I. Hrivnacova
 //
 // Class TG4ParticleGunMessenger
 // -----------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4ParticleGunMessenger.h"
 #include "TG4ParticleGun.h"
@@ -25,7 +25,7 @@
 
 //_____________________________________________________________________________
 TG4ParticleGunMessenger::TG4ParticleGunMessenger(TG4ParticleGun* gun)
-  :fGun(gun)
+  : fGun(gun)
 {
 //
   fGunDirectory = new G4UIdirectory("/mcGun/");
@@ -174,7 +174,9 @@ TG4ParticleGunMessenger::~TG4ParticleGunMessenger() {
   delete fParticle;
 }
 
+//
 // operators
+//
 
 TG4ParticleGunMessenger& 
 TG4ParticleGunMessenger::operator=(const TG4ParticleGunMessenger &right)
@@ -187,14 +189,15 @@ TG4ParticleGunMessenger::operator=(const TG4ParticleGunMessenger &right)
   return *this;
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4ParticleGunMessenger::SetNewValue(G4UIcommand * command, 
        G4String newValues)
 {
-// Applies command to the associated object.
-// ---
+/// Apply command to the associated object.
 
   // Alice gun particle set commands
   if (command==fListAvailableCmd)
@@ -262,8 +265,7 @@ void TG4ParticleGunMessenger::SetNewValue(G4UIcommand * command,
 //_____________________________________________________________________________
 G4String TG4ParticleGunMessenger::GetCurrentValue(G4UIcommand * command)
 {
-// Returns current command parameters as string.
-// ---
+/// Return current command parameters as string.
 
   G4String curValue;
 

@@ -1,13 +1,11 @@
-// $Id: TG4GuiVolume.h,v 1.1 2002/06/20 11:56:58 hristov Exp $
-// Category: interfaces
+// $Id: TG4GuiVolume.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup interfaces
 //
-// Author: D. Adamova
-//================================================================
-// 
-//----------------TG4GuiVolume.h-------------------------------//
-//----Creating link for Logical Volume Tree in AG4 Geometry----//
-//
-//=================================================================
+/// \class TG4GuiVolume
+///
+/// Creating link for logical volume tree in geometry
+///
+/// Author: D. Adamova
 
 #ifndef TG4_GUI_VOLUME_H
 #define TG4_GUI_VOLUME_H
@@ -28,8 +26,7 @@ public:
     TGListTreeItem* GetItem() const;
     const char* GetName() const;
 
-//---> Inlines :
-    void  SetItem(TGListTreeItem* item) {fItem = item;}
+    void  SetItem(TGListTreeItem* item);
 
 //--------------------------------------------------------------------
 protected:
@@ -47,6 +44,11 @@ private:
     ClassDef(TG4GuiVolume,0)   
 };
 
-//
+// inline methods
+
+inline void TG4GuiVolume::SetItem(TGListTreeItem* item) {
+  /// Set current item
+  fItem = item;
+}
  
 #endif

@@ -1,11 +1,11 @@
-// $Id: TG4TrackingAction.cxx,v 1.6 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4TrackingAction.cxx,v 1.7 2004/05/28 13:49:32 brun Exp $
 // Category: event
-//
-// Author: I.Hrivnacova
 //
 // Class TG4TrackingAction
 // -----------------------
 // See the class description in the header file.
+//
+// Author: I.Hrivnacova
 
 #include "TG4TrackingAction.h"
 #include "TG4TrackInformation.h"
@@ -85,8 +85,8 @@ TG4TrackingAction::operator=(const TG4TrackingAction &right)
 //_____________________________________________________________________________
 void TG4TrackingAction::SetTrackInformation(const G4Track* track)
 {
-// Sets track index to track information
-// and sets the current track in stack.
+/// Set track index to track information
+/// and set the current track in stack.
 // --- 
 
   // track index in the particles array
@@ -94,7 +94,7 @@ void TG4TrackingAction::SetTrackInformation(const G4Track* track)
   G4int parentID = track->GetParentID();
   Int_t trackIndex;
   if (parentID == 0) { 
-    // in Virtual MC track numbering starts from 0
+    // in VMC track numbering starts from 0
     trackIndex = trackID-1; 
   } 
   else { 
@@ -102,7 +102,7 @@ void TG4TrackingAction::SetTrackInformation(const G4Track* track)
       trackIndex = gMC->GetStack()->GetNtrack();
     else   
       trackIndex = fTrackCounter++;
-          // if secondaries are not stacked in MC stack
+          // if secondaries are not stacked in VMC stack
           // use own counter for setting track index
   }
   
@@ -127,8 +127,7 @@ void TG4TrackingAction::SetTrackInformation(const G4Track* track)
 //_____________________________________________________________________________
 void TG4TrackingAction::SetParentToTrackInformation(const G4Track* track)
 {
-// Sets parent track particle index to the secondary tracks.
-// ---
+/// Set parent track particle index to the secondary tracks.
 
   G4TrackVector* secondaryTracks 
     = fpTrackingManager->GetSteppingManager()->GetSecondary();
@@ -168,8 +167,7 @@ TG4TrackInformation* TG4TrackingAction::GetTrackInformation(
                                            const G4Track* track,
                                            const G4String& method) const
 {
-// Returns user track information.
-// ---
+/// Return user track information.
  
 #ifdef MCDEBUG
   G4VUserTrackInformation* trackInfo = track->GetUserInformation();
@@ -192,10 +190,9 @@ TG4TrackInformation* TG4TrackingAction::GetTrackInformation(
 //_____________________________________________________________________________
 void TG4TrackingAction::UserProcessHits(const G4Track* track)
 {
-// Let sensitive detector process vertex step
-// (this ensures compatibility with G3 that
-// makes first step of zero length)
-// ---
+/// Let sensitive detector process the vertex step
+/// (this ensures compatibility with G3 that
+/// makes first step of zero length)
 
   TG4StepManager* stepManager = TG4StepManager::Instance();
   G4VPhysicalVolume* pv = stepManager->GetCurrentPhysicalVolume();
@@ -226,9 +223,8 @@ void TG4TrackingAction::UserProcessHits(const G4Track* track)
 //_____________________________________________________________________________
 void TG4TrackingAction::Verbose() const
 {
-// Print primary track ID with afrequence defined
-// by verbose level.
-// ---
+/// Print primary track ID with a frequence defined
+/// by verbose level.
 
   if (VerboseLevel() == 3) { 
     G4cout << "$$$ Primary track " << fPrimaryTrackID << G4endl;
@@ -248,8 +244,7 @@ void TG4TrackingAction::Verbose() const
 //_____________________________________________________________________________
 void TG4TrackingAction::PrepareNewEvent()
 {
-// Called by G4 kernel at the beginning of event.
-// ---
+/// Called by G4 kernel at the beginning of event.
 
   if (fSaveSecondaries)
     fTrackCounter = 0;
@@ -264,8 +259,7 @@ void TG4TrackingAction::PrepareNewEvent()
 //_____________________________________________________________________________
 void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
 {
-// Called by G4 kernel before starting tracking.
-// ---
+/// Called by G4 kernel before starting tracking.
 
   // finish previous primary track first
   if (track->GetParentID() == 0) {  
@@ -296,7 +290,7 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
       G4UImanager::GetUIpointer()->ApplyCommand(command);
   }    
 
-  // MC application pre track action
+  // VMC application pre track action
   TVirtualMCApplication::Instance()->PreTrack();
 
   // call pre-tracking action of derived class
@@ -309,8 +303,7 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
 //_____________________________________________________________________________
 void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
 {
-// Called by G4 kernel after finishing tracking.
-// ---
+/// Called by G4 kernel after finishing tracking.
 
   // counter
   if (fSaveSecondaries) fTrackCounter++;
@@ -318,7 +311,7 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
   // set parent track particle index to the secondary tracks 
   SetParentToTrackInformation(track);
       
-  // MC application post track action
+  // VMC application post track action
   TVirtualMCApplication::Instance()->PostTrack();
 
   // call post-tracking action of derived class
@@ -328,9 +321,9 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
 //_____________________________________________________________________________
 void TG4TrackingAction::FinishPrimaryTrack()
 {
-// Calls MC application to finish a primary track.
-// !! This method has to be also called from the EventAction::EndOfEventAction() 
-// for storing the last primary track of the current event.
+/// Call VMC application to finish a primary track.                          \n
+/// !! This method has to be also called from the EventAction::EndOfEventAction() 
+/// for storing the last primary track of the current event.
 // --- 
 
   if (fPrimaryTrackID>0) {
@@ -344,7 +337,7 @@ void TG4TrackingAction::FinishPrimaryTrack()
     // verbose
     Verbose();
 
-    // MC application finish primary track         
+    // VMC application finish primary track         
     TVirtualMCApplication::Instance()->FinishPrimary();
   }
   
@@ -354,8 +347,8 @@ void TG4TrackingAction::FinishPrimaryTrack()
 //_____________________________________________________________________________
 void TG4TrackingAction::TrackToStack(const G4Track* track)
 {
-// Get all needed parameters from G4track and pass them
-// to MC stack.
+/// Get all needed parameters from G4track and pass them
+/// to the VMC stack.
 // ----
 
   // parent particle index 
@@ -422,9 +415,8 @@ void TG4TrackingAction::TrackToStack(const G4Track* track)
 //_____________________________________________________________________________
 void TG4TrackingAction::SetNewVerboseLevel(G4int level)
 { 
-// Set the new verbose level that will be set when the track with 
-// specified track ID (fNewVerboseTrackID) starts tracking.
-// ---
+/// Set the new verbose level that will be set when the track with 
+/// specified track ID (fNewVerboseTrackID) starts tracking.
 
   fNewVerboseLevel = level;  
 }
@@ -432,9 +424,8 @@ void TG4TrackingAction::SetNewVerboseLevel(G4int level)
 //_____________________________________________________________________________
 void TG4TrackingAction::SetNewVerboseTrackID(G4int trackID)
 { 
-// Set the trackID for which the new verbose level (fNewVerboseLevel)
-// will be applied.
-// ---
+/// Set the trackID for which the new verbose level (fNewVerboseLevel)
+/// will be applied.
 
   fNewVerboseTrackID = trackID; 
 }

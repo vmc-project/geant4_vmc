@@ -1,13 +1,13 @@
-// $Id: TG4VPhysicsConstructor.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4VPhysicsConstructor.cxx,v 1.2 2003/12/18 13:27:46 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4VPhysicsConstructor
 // ------------------------------
 // See the class description in the header file.
 // According to ExN04IonPhysics.cc,v 1.1.2.1 2001/06/28 19:07:37 gunter Exp 
 // GEANT4 tag Name: geant4-06-00
+//
+// Author: I. Hrivnacova
 
 #include "TG4VPhysicsConstructor.h"
 #include "TG4Globals.h"
@@ -57,9 +57,8 @@ TG4VPhysicsConstructor::~TG4VPhysicsConstructor() {
 //_____________________________________________________________________________
 void TG4VPhysicsConstructor::VerboseLevel(G4int level)
 {
-// Sets the same value to G4VPhysicsConstructor verbose
-// level and TG4Verbose level.
-// ---
+/// Set the same value to G4VPhysicsConstructor verbose
+/// level and TG4Verbose level.
 
    TG4Verbose::VerboseLevel(level);
    
@@ -71,8 +70,7 @@ void TG4VPhysicsConstructor::VerboseLevel(G4int level)
 //_____________________________________________________________________________
 G4int TG4VPhysicsConstructor::VerboseLevel() const
 {
-// Returns TG4Verbose level value.
-// ---
+/// Return TG4Verbose level value.
 
    return TG4Verbose::VerboseLevel();
 }

@@ -1,11 +1,11 @@
-// $Id: TG4G3ControlVector.cxx,v 1.2 2002/10/05 07:31:27 brun Exp $
+// $Id: TG4G3ControlVector.cxx,v 1.3 2003/12/18 13:28:08 brun Exp $
 // Category: global
-//
-// Author: I. Hrivnacova
 //
 // Class TG4G3ControlVector 
 // ------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4G3ControlVector.h"
 #include "TG4G3CutVector.h"
@@ -48,7 +48,9 @@ TG4G3ControlVector::~TG4G3ControlVector() {
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4G3ControlVector& TG4G3ControlVector::operator=(
@@ -77,13 +79,14 @@ TG4G3ControlValue TG4G3ControlVector::operator[](G4int index) const
   }    
 }  
 
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 void TG4G3ControlVector::FillControlNameVector() 
 {
-// Defines fControlNameVector.
-// ---
+/// Define fControlNameVector.
 
   fgControlNameVector.push_back("PAIR");
   fgControlNameVector.push_back("COMP");
@@ -104,13 +107,14 @@ void TG4G3ControlVector::FillControlNameVector()
   fgControlNameVector.push_back("NONE");
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 TG4G3Control TG4G3ControlVector::GetControl(const G4String& controlName)
 {
-// Retrieves corresponding TG4G3Control constant from the controlName.
-// ---
+/// Retrieve corresponding TG4G3Control constant from the controlName.
 
   if      (controlName == fgControlNameVector[kPAIR]) return kPAIR;
   else if (controlName == fgControlNameVector[kCOMP]) return kCOMP;
@@ -130,8 +134,7 @@ TG4G3Control TG4G3ControlVector::GetControl(const G4String& controlName)
 //_____________________________________________________________________________
 const G4String& TG4G3ControlVector::GetControlName(TG4G3Control control)
 {
-// Returns name of a specified cut.
-// ---
+/// Return name of a specified cut.
 
   // fill name vector
   if (fgControlNameVector.size() == 0) 
@@ -144,9 +147,8 @@ const G4String& TG4G3ControlVector::GetControlName(TG4G3Control control)
 TG4G3ControlValue TG4G3ControlVector::GetControlValue(G4int value,
                                                       TG4G3Control control)
 {
-// Conversion G4int -> G3ControlValue,
-// special treatment for LOSS values 3,4,5.
-// ---
+/// Conversion G4int -> G3ControlValue,
+/// special treatment for LOSS values 3,4,5.
 
   switch (value) {
     case kInActivate: 
@@ -172,8 +174,7 @@ TG4G3ControlValue TG4G3ControlVector::GetControlValue(G4int value,
 TG4G3ControlValue TG4G3ControlVector::GetControlValue(G4double value, 
                                                       TG4G3Control control)
 {
-// Conversion G4double -> G3ControlValue
-// ---
+/// Conversion G4double -> G3ControlValue
 
   return TG4G3ControlVector::GetControlValue((G4int)value, control);
 }    
@@ -184,10 +185,9 @@ G4bool TG4G3ControlVector::SetControl(TG4G3Control control,
                                       TG4G3ControlValue controlValue,
 				      TG4G3CutVector& cuts)
 {
-// Sets the controlValue for the specified process control.
-// Modifies cuts if necessary.
-// Returns true if the control value was set.
-// ---
+/// Set the controlValue for the specified process control.
+/// Modify cuts if necessary.
+/// Return true if the control value was set.
 
   if (control == kDRAY)
     if (controlValue == kActivate &&
@@ -211,8 +211,7 @@ G4bool TG4G3ControlVector::SetControl(TG4G3Control control,
 //_____________________________________________________________________________
 void TG4G3ControlVector::SetG3Defaults()
 {
-// Sets G3 default values for all controls.
-// ---
+/// Set G3 default values for all controls.
 
   for (G4int i=0; i<=kNoG3Controls; i++) 
     fControlVector[i] = TG4G3Defaults::Instance()->ControlValue(i);
@@ -221,11 +220,10 @@ void TG4G3ControlVector::SetG3Defaults()
 //_____________________________________________________________________________
 G4bool TG4G3ControlVector::Update(const TG4G3ControlVector& vector)
 {
-// Unset value of DRAY (this information was passed to cut vector.)
-// Resets value of LOSS (the special controls process operates only with
-// activate/inactivate options.)
-// Returns true if some value was modified.
-// ---
+/// Unset value of DRAY (this information was passed to cut vector.)
+/// Reset value of LOSS (the special controls process operates only with
+/// activate/inactivate options.)
+/// Return true if some value was modified.
 
   G4bool result = false;
 
@@ -259,8 +257,7 @@ G4bool TG4G3ControlVector::Update(const TG4G3ControlVector& vector)
 //_____________________________________________________________________________
 G4String TG4G3ControlVector::Format() const
 {
-// Formats the output into a string.
-// ---
+/// Format the output into a string.
 
 #if __GNUC__ >= 3
   std::ostringstream tmpStream;
@@ -281,8 +278,7 @@ G4String TG4G3ControlVector::Format() const
 //_____________________________________________________________________________
 void TG4G3ControlVector::Print() const
 {
-// Prints the controls.
-// ---
+/// Print the controls.
 
   G4cout << Format();	     
 }	   
@@ -291,9 +287,8 @@ void TG4G3ControlVector::Print() const
 TG4G3ControlValue 
 TG4G3ControlVector::GetControlValue(G4VProcess* process) const 
 {
-// Returns the control value for the particle associated with
-// the specified process.
-// ---
+/// Return the control value for the particle associated with
+/// the specified process.
 
   TG4G3Control control 
     = TG4ProcessControlMap::Instance()->GetControl(process);
@@ -305,9 +300,8 @@ TG4G3ControlVector::GetControlValue(G4VProcess* process) const
 TG4G3ControlValue 
 TG4G3ControlVector::GetControlValue(TG4G3Control control) const 
 {
-// Returns the control value for the particle associated with
-// the specified process.
-// ---
+/// Return the control value for the particle associated with
+/// the specified process.
 
   return fControlVector[control];
 }
@@ -315,8 +309,7 @@ TG4G3ControlVector::GetControlValue(TG4G3Control control) const
 //_____________________________________________________________________________
 G4bool TG4G3ControlVector::IsControl() const
 {
-// Returns true if any of controls is set.
-// ---
+/// Return true if any of controls is set.
 
   for (G4int i=0; i<kNoG3Controls; i++) 
     if (fControlVector[i] != kUnset) return true;

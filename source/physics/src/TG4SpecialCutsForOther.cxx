@@ -1,4 +1,4 @@
-// $Id: TG4SpecialCutsForOther.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4SpecialCutsForOther.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -27,13 +27,15 @@ TG4SpecialCutsForOther::~TG4SpecialCutsForOther() {
 //
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 G4double TG4SpecialCutsForOther::GetMinEkine(const TG4Limits& limits,
                                             const G4Track& track) const
 {					     
-// Returns the min kinetic energy cut from limits.
+/// Return the min kinetic energy cut from limits.
 // --- 
 
   return limits.GetMinEkineForOther(track);

@@ -1,12 +1,12 @@
-// $Id: TG4PhysicsListMessenger.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: physics
+// $Id: TG4PhysicsListMessenger.h,v 1.1 2003/06/03 17:14:16 brun Exp $
+/// \ingroup physics
 //
-// Author: I. Hrivnacova
-//
-// Class TG4PhysicsListMessenger
-// -----------------------------
-// Messenger class that defines commands for the Geant4 VMC default 
-// physics list.
+/// \class TG4PhysicsListMessenger
+/// 
+/// Messenger class that defines commands for the Geant4 VMC default 
+/// physics list.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_PHYSICS_LIST_MESSENGER_H
 #define TG4_PHYSICS_LIST_MESSENGER_H 

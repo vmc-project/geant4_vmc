@@ -1,11 +1,11 @@
-// $Id: TG4ParticleGun.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: event
+// $Id: TG4ParticleGun.h,v 1.2 2003/12/18 13:28:08 brun Exp $
+/// \ingroup event
 //
-// Author: I. Hrivnacova
-//
-// Class TG4ParticleGun
-// --------------------
-// Particle gun that can be interactively composed by a user.
+/// \class TG4ParticleGun
+/// 
+/// Particle gun that can be interactively composed by a user.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_PARTICLE_GUN_H
 #define TG4_PARTICLE_GUN_H
@@ -55,8 +55,10 @@ class TG4ParticleGun : public G4VPrimaryGenerator,
 
 // inline methods
 
-inline G4int TG4ParticleGun::GetNofGunParticles() const
-{ return fGunParticleVector.size(); }
+inline G4int TG4ParticleGun::GetNofGunParticles() const { 
+  /// Returns the number of particles in the gun
+  return fGunParticleVector.size(); 
+}
 
 #endif //TG4_PARTICLE_GUN_H
 

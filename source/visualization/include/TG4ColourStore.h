@@ -1,11 +1,11 @@
-// $Id: TG4ColourStore.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: visualization
+// $Id: TG4ColourStore.h,v 1.2 2003/12/18 14:24:02 brun Exp $
+/// \ingroup visualization
 //
-// Author: I. Hrivnacova
-//
-// Class TG4ColourStore
-// --------------------
-// Singleton data type class - store for the predefined colours.
+/// \class TG4ColourStore
+/// 
+/// Singleton data type class - store for the predefined colours.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_COLOUR_STORE_H
 #define TG4_COLOUR_STORE_H
@@ -31,10 +31,6 @@ class TG4ColourStore
     // static methods
     static TG4ColourStore* Instance();
 
-    // modifiers
-    G4Colour AddColour(const G4String& name, 
-                       G4double red, G4double blue, G4double green);
-
     // get methods
     G4Colour GetColour(const G4String& name) const;
     G4Colour GetColour(const TColor& color) const;
@@ -53,7 +49,7 @@ class TG4ColourStore
     static TG4ColourStore*  fgInstance; //this instance
 
     // data members
-    ColourVector  fColours; //vector of AliColour
+    ColourVector  fColours; //vector of TColor
 };   
 
 #endif //TG4_COLOUR_STORE_H

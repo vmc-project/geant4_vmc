@@ -1,12 +1,12 @@
-// $Id: TG4PhysicsConstructorOptical.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4PhysicsConstructorOptical.cxx,v 1.2 2003/12/18 13:27:46 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4PhysicsConstructorOptical
 // ----------------------------------
 // See the class description in the header file.
 // According to ExN06PhysicsList (geant4 6.0)
+//
+// Author: I. Hrivnacova
 
 #include "TG4PhysicsConstructorOptical.h"
 #include "TG4ProcessControlMap.h"
@@ -50,13 +50,14 @@ TG4PhysicsConstructorOptical::~TG4PhysicsConstructorOptical() {
 //
 }
 
+//
 // protected methods
+//
 
 //_____________________________________________________________________________
 void TG4PhysicsConstructorOptical::ConstructParticle()
 {
-// Instantiates particles.
-// ---
+/// Instantiate particles.
 
   // optical photon
   G4OpticalPhoton::OpticalPhotonDefinition();
@@ -65,10 +66,9 @@ void TG4PhysicsConstructorOptical::ConstructParticle()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorOptical::ConstructProcess()
 {
-// Constructs optical processes.
-// According to ExN06PhysicsList.cc.
-// (geant4 1.1)
-// ---
+/// Construct optical processes.
+/// According to ExN06PhysicsList.cc.
+/// (geant4 1.1)
 
   fCerenkovProcess = new G4Cerenkov("Cerenkov");
   fScintillationProcess = new G4Scintillation("Scintillation");

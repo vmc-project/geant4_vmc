@@ -1,12 +1,12 @@
-// $Id: TG4SpecialCutsForElectron.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
-// Category: physics
+// $Id: TG4SpecialCutsForElectron.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup physics
 //
-// Author: I. Hrivnacova
-//
-// Class TG4SpecialCutsForElectron
-// -------------------------------
-// Special process that activates kinetic energy cuts
-// for e-.
+/// \class TG4SpecialCutsForElectron
+/// 
+/// Special process that activates kinetic energy cuts
+/// for e-.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_SPECIAL_CUTS_FOR_ELECTRON_H
 #define TG4_SPECIAL_CUTS_FOR_ELECTRON_H

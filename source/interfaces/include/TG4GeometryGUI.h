@@ -1,13 +1,11 @@
-// $Id: TG4GeometryGUI.h,v 1.1 2002/06/20 11:56:58 hristov Exp $
-// Category: interfaces
+// $Id: TG4GeometryGUI.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup interfaces
 //
-// Author: D. Adamova
-//==============================================================
-//
-//----------------TG4GeometryGUI.h--------------------------//
-//----------------AG4 Geometry Browser----------------------//
-//
-//===============================================================
+/// \class TG4GeometryGUI
+///
+/// Geant4 VMC Geometry Browser
+///
+/// Author: D. Adamova
 
 #ifndef TG4_GEOMETRY_GUI_H
 #define TG4_GEOMETRY_GUI_H

@@ -1,11 +1,11 @@
-// $Id: TG4PhysicsMessenger.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: physics
+// $Id: TG4PhysicsMessenger.h,v 1.2 2003/06/03 17:11:42 brun Exp $
+/// \ingroup physics
 //
-// Author: I. Hrivnacova
-//
-// Class TG4PhysicsMessenger
-// -------------------------
-// Messenger class that defines commands for the physics manager.
+/// \class TG4PhysicsMessenger
+/// 
+/// Messenger class that defines commands for the physics manager.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_PHYSICS_MESSENGER_H
 #define TG4_PHYSICS_MESSENGER_H 

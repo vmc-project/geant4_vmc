@@ -1,11 +1,11 @@
-// $Id: TG4LVTree.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4LVTree.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
-//
-// Author: I. Hrivnacova
 //
 // Class TG4LVTree
 // ---------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4LVTree.h"
 #include "TG4Globals.h"
@@ -27,8 +27,7 @@ TG4LVTree* TG4LVTree::fgInstance = 0;
 //_____________________________________________________________________________
 TG4LVTree* TG4LVTree::Instance() 
 {
-// Static singleton access method.
-// ---
+/// Static singleton access method.
 
   if (!fgInstance) new TG4LVTree();
   
@@ -40,7 +39,6 @@ TG4LVTree::TG4LVTree()
   : fMessenger(this) 
 {
 // Protected singleton constructor.
-// ---
 
   fgInstance = this;
 }
@@ -50,7 +48,6 @@ TG4LVTree::TG4LVTree(const TG4LVTree& right)
   : fMessenger(this)
 {
 // Protected singleton copy constructor.
-// ---
 //
   TG4Globals::Exception(
     "Attempt to copy TG4LVTree singleton.");
@@ -61,7 +58,9 @@ TG4LVTree::~TG4LVTree() {
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4LVTree& TG4LVTree::operator=(const TG4LVTree& right)
@@ -76,13 +75,15 @@ TG4LVTree& TG4LVTree::operator=(const TG4LVTree& right)
 
 }
 
+//
 // protected methods
+//
 
 //_____________________________________________________________________________
 void TG4LVTree::RegisterLogicalVolume(G4LogicalVolume* lv, const G4String& path,
 				      TG4LVStructure& lvStructure) const
 {
-// Registers logical volume lv in the structure.
+/// Register the logical volume lv in the structure.
 // ---        
 
   lvStructure.AddNewVolume(lv, path);
@@ -106,8 +107,7 @@ void TG4LVTree::RegisterLogicalVolume(G4LogicalVolume* lv, const G4String& path,
 //_____________________________________________________________________________
 void TG4LVTree::Warn(const G4String& where, const G4String& lvName) const			       
 {
-// Prints warning "volume not found".
-// ---
+/// Print warning "volume not found".
   
    G4String text("TG4LVTree::" + where + ": " + lvName + " volume not found.");
    TG4Globals::Warning(text);
@@ -116,20 +116,21 @@ void TG4LVTree::Warn(const G4String& where, const G4String& lvName) const
 //_____________________________________________________________________________
 void TG4LVTree::Warn(const G4String& where) const
 {			       
-// Prints warning "volume not specified".
-// ---
+/// Print warning "volume not specified".
   
    G4String text("TG4LVTree::" + where + ": " + " volume not specified.");
    TG4Globals::Warning(text);
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4LVTree::List(const G4String& lvName) const
 {
-// Lists logical volumes tree (daughters) of the logical volume 
-// with specified lvName.
+/// List logical volumes tree (daughters) of the logical volume 
+/// with specified lvName.
 // ---- 
 
   G4LogicalVolume* lv 
@@ -148,7 +149,7 @@ void TG4LVTree::List(const G4String& lvName) const
 //_____________________________________________________________________________
 void TG4LVTree::List(G4LogicalVolume* lv) const
 {
-// Lists logical volumes tree of the given lv.
+/// List logical volumes tree of the given lv.
 // ---- 
 
   if (!lv) {
@@ -162,8 +163,8 @@ void TG4LVTree::List(G4LogicalVolume* lv) const
 //_____________________________________________________________________________
 void TG4LVTree::ListLong(const G4String& lvName) const
 {
-// Lists logical volumes tree (daughters) of the logical volume 
-// with specified lvName with numbers of daughters (physical volumes).
+/// List logical volumes tree (daughters) of the logical volume 
+/// with specified lvName with numbers of daughters (physical volumes).
 // ---- 
 
   G4LogicalVolume* lv 
@@ -182,8 +183,8 @@ void TG4LVTree::ListLong(const G4String& lvName) const
 //_____________________________________________________________________________
 void TG4LVTree::ListLong(G4LogicalVolume* lv) const
 {
-// Lists logical volumes tree with numbers of daughters 
-// (physical volumes) of the given lv.
+/// List logical volumes tree with numbers of daughters 
+/// (physical volumes) of the given lv.
 // ---- 
 
   if (!lv) {
@@ -200,9 +201,8 @@ void TG4LVTree::ListLong(G4LogicalVolume* lv) const
 void TG4LVTree::SetLVTreeVisibility(G4LogicalVolume* lv, 
                                     G4bool visibility) const
 { 
-// Sets visibility to the logical volumes tree (daughters) of 
-// the logical volume lv.
-// ---
+/// Set visibility to the logical volumes tree (daughters) of 
+/// the logical volume lv.
 
   if (!lv) {
     Warn("SetLVTreeVisibility");
@@ -219,8 +219,7 @@ void TG4LVTree::SetLVTreeVisibility(G4LogicalVolume* lv,
 void TG4LVTree::SetVolumeVisibility(G4LogicalVolume* lv, 
                                     G4bool visibility) const
 { 
-// Sets visibility to the specified logical volume.
-// ---
+/// Set visibility to the specified logical volume.
 
   if (!lv) {
     Warn("SetVolumeVisibility");
@@ -246,9 +245,8 @@ void TG4LVTree::SetVolumeVisibility(G4LogicalVolume* lv,
 void TG4LVTree::SetLVTreeColour(G4LogicalVolume* lv, 
                                 const G4String& colName) const
 { 
-// Sets colour to the logical volumes tree (daughters) of 
-// the logical volume lv.
-// ---
+/// Set colour to the logical volumes tree (daughters) of 
+/// the logical volume lv.
 
   if (!lv) {
     Warn("SetLVTreeColour");
@@ -266,8 +264,7 @@ void TG4LVTree::SetLVTreeColour(G4LogicalVolume* lv,
 void TG4LVTree::SetVolumeColour(G4LogicalVolume* lv,
                                 const G4String& colName) const
 {
-// Sets colour to the specified logical volume.
-// ---
+/// Set colour to the specified logical volume.
 
   if (!lv) {
     Warn("SetVolumeColour");

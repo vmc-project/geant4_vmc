@@ -1,11 +1,11 @@
-// $Id: TG4RunManager.cxx,v 1.6 2004/05/28 13:49:53 brun Exp $
+// $Id: TG4RunManager.cxx,v 1.7 2004/08/17 08:53:00 brun Exp $
 // Category: run
-//
-// Author: I. Hrivnacova
 //
 // Class TG4RunManager
 // -------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4RunManager.h"
 #include "TG4VRunConfiguration.h"
@@ -161,7 +161,9 @@ TG4RunManager::~TG4RunManager() {
   if (fRootUIOwner) delete fRootUISession;
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4RunManager& TG4RunManager::operator=(const TG4RunManager& right)
@@ -175,13 +177,14 @@ TG4RunManager& TG4RunManager::operator=(const TG4RunManager& right)
   return *this;  
 }    
 
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 void TG4RunManager::CreateGeantUI()
 {
-// Creates interactive Geant4.
-// ---
+/// Create interactive Geant4.
 
   if (!fGeantUISession)
   {
@@ -226,8 +229,7 @@ void TG4RunManager::CreateGeantUI()
 //_____________________________________________________________________________
 void TG4RunManager::CreateRootUI()
 {
-// Creates interactive Root.
-// ---
+/// Create interactive Root.
 
   if (!fRootUISession) 
   {
@@ -242,8 +244,8 @@ void TG4RunManager::CreateRootUI()
 //_____________________________________________________________________________
 void TG4RunManager::FilterARGV(const G4String& arg)
 {
-// Filters out the option argument from the arguments list fARGV,
-// if present.
+/// Filter out the option argument from the arguments list fARGV,
+/// if present.
 
   if (fARGC == 1) return;
 
@@ -261,8 +263,7 @@ void TG4RunManager::FilterARGV(const G4String& arg)
 //_____________________________________________________________________________
 void TG4RunManager::Initialize()
 {
-// Initializes G4.
-// ---
+/// Initialize G4.
 
   // create physics constructor
   // (this operation has to precede the "Init" phase)
@@ -275,14 +276,11 @@ void TG4RunManager::Initialize()
   TG4SDManager::Instance()->Initialize();
 }
 
-#include <G4ParticleTable.hh>
-#include <G4IonTable.hh>
 //_____________________________________________________________________________
 void TG4RunManager::LateInitialize()
 {
-// Finishes initialization of G4 after the G4Run initialization
-// is finished. 
-// ---
+/// Finish initialization of G4 after the G4Run initialization
+/// is finished. 
 
   // define particles 
   TG4PhysicsManager::Instance()->DefineParticles();
@@ -310,8 +308,7 @@ void TG4RunManager::LateInitialize()
 //_____________________________________________________________________________
 void TG4RunManager::ProcessEvent()
 {
-// Not yet implemented.
-// ---
+/// Not yet implemented.
 
   TG4Globals::Warning("TG4RunManager::ProcessEvent(): is not yet implemented.");
 }
@@ -319,8 +316,7 @@ void TG4RunManager::ProcessEvent()
 //_____________________________________________________________________________
 Bool_t TG4RunManager::ProcessRun(G4int nofEvents)
 {
-// Processes Geant4 run.
-// ---
+/// Process Geant4 run.
 
   fRunManager->BeamOn(nofEvents); 
 
@@ -333,8 +329,7 @@ Bool_t TG4RunManager::ProcessRun(G4int nofEvents)
 //_____________________________________________________________________________
 void TG4RunManager::StartGeantUI()
 { 
-// Starts interactive/batch Geant4.
-// ---
+/// Start interactive/batch Geant4.
 
   if (!fGeantUISession) CreateGeantUI();
   if (fGeantUISession) {  
@@ -353,8 +348,7 @@ void TG4RunManager::StartGeantUI()
 //_____________________________________________________________________________
 void TG4RunManager::StartRootUI()
 {
-// Starts interactive Root.
-// ---
+/// Start interactive Root.
 
   if (!fRootUISession) CreateRootUI();
   if (fRootUISession) { 
@@ -367,8 +361,7 @@ void TG4RunManager::StartRootUI()
 //_____________________________________________________________________________
 void TG4RunManager::ProcessGeantMacro(G4String macroName)
 {
-// Processes Geant4 macro.
-// ---
+/// Process Geant4 macro.
 
   G4String command = "/control/execute " + macroName;
   ProcessGeantCommand(command);
@@ -377,8 +370,7 @@ void TG4RunManager::ProcessGeantMacro(G4String macroName)
 //_____________________________________________________________________________
 void TG4RunManager::ProcessRootMacro(G4String macroName)
 {
-// Processes Root macro.
-// ---
+/// Process Root macro.
 
   // load macro file
   G4String macroFile = macroName;
@@ -394,8 +386,7 @@ void TG4RunManager::ProcessRootMacro(G4String macroName)
 //_____________________________________________________________________________
 void TG4RunManager::ProcessGeantCommand(G4String command)
 {
-// Processes Geant4 command.
-// ---
+/// Process Geant4 command.
 
   G4UImanager* pUI = G4UImanager::GetUIpointer();  
   pUI->ApplyCommand(command);
@@ -404,8 +395,7 @@ void TG4RunManager::ProcessGeantCommand(G4String command)
 //_____________________________________________________________________________
 void TG4RunManager::ProcessRootCommand(G4String command)
 {
-// Processes Root command.
-// ---
+/// Process Root command.
 
   gInterpreter->ProcessLine(command);
 }
@@ -413,8 +403,7 @@ void TG4RunManager::ProcessRootCommand(G4String command)
 //_____________________________________________________________________________
 void TG4RunManager::UseG3Defaults() 
 {
-// Controls G3 defaults usage.
-// ---
+/// Control G3 defaults usage.
 
   TG4GeometryManager::Instance()->UseG3TrackingMediaLimits();
   TG4G3PhysicsManager::Instance()->SetG3DefaultCuts();
@@ -424,8 +413,7 @@ void TG4RunManager::UseG3Defaults()
 //_____________________________________________________________________________
 Int_t TG4RunManager::CurrentEvent() const
 {
-// Returns the number of the current event.
-// ---
+/// Return the number of the current event.
 
   G4int eventID = fRunManager->GetCurrentEvent()->GetEventID();
   return eventID;
@@ -434,8 +422,8 @@ Int_t TG4RunManager::CurrentEvent() const
 //_____________________________________________________________________________
 Bool_t  TG4RunManager::SecondariesAreOrdered() const 
 {
-//  Secondaries are ordered if the special stacking
-// (defined in TG4SpecialStackingAction) is activated.
+///  Secondaries are ordered if the special stacking
+/// (defined in TG4SpecialStackingAction) is activated.
 // ----
 
   return fRunConfiguration->IsSpecialStacking();

@@ -1,11 +1,11 @@
-// $Id: TG4ColourStore.cxx,v 1.1.1.1 2002/06/16 15:57:36 hristov Exp $
+// $Id: TG4ColourStore.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: visualization
-//
-// Author: I. Hrivnacova
 //
 // Class TG4ColourStore
 // --------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4ColourStore.h"
 #include "TG4Globals.h"
@@ -50,7 +50,9 @@ TG4ColourStore::~TG4ColourStore() {
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4ColourStore& TG4ColourStore::operator=(const TG4ColourStore& right)
@@ -64,14 +66,15 @@ TG4ColourStore& TG4ColourStore::operator=(const TG4ColourStore& right)
   return *this;  
 }    
 
+//
 // static methods
+//
   
 //_____________________________________________________________________________
 TG4ColourStore* TG4ColourStore::Instance() 
 {
-// Returns the singleton instance.
-// Creates the instance if it does not exist.
-// ---
+/// Return the singleton instance.
+/// Create the instance if it does not exist.
 
   if (fgInstance == 0 )
     fgInstance = new TG4ColourStore();
@@ -79,13 +82,14 @@ TG4ColourStore* TG4ColourStore::Instance()
   return fgInstance;
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 G4Colour TG4ColourStore::GetColour(const G4String& name) const
 {
-// Retrieves the colour by name.
-// ---
+/// Retrieve the colour by name.
 
   ColourConstIterator it;  
   for (it = fColours.begin(); it != fColours.end(); it++) 
@@ -99,8 +103,7 @@ G4Colour TG4ColourStore::GetColour(const G4String& name) const
 //_____________________________________________________________________________
 G4Colour TG4ColourStore::GetColour(const TColor& color) const
 {
-// Converts TColor to G4Colour.
-// ---
+/// Convert TColor to G4Colour.
 
   return G4Colour(color.GetRed(), color.GetBlue(), color.GetGreen());
 }
@@ -108,8 +111,7 @@ G4Colour TG4ColourStore::GetColour(const TColor& color) const
 //_____________________________________________________________________________
 G4String TG4ColourStore::GetColoursList() const
 {
-// Returns the list of all defined colours names.
-// ---
+/// Return the list of all defined colours names.
 
   G4String list = "";
   ColourConstIterator it;
@@ -125,9 +127,8 @@ G4String TG4ColourStore::GetColoursList() const
 //_____________________________________________________________________________
 G4String TG4ColourStore::GetColoursListWithCommas() const
 {
-// Returns the list of all defined colours names
-// with commas.
-// ---
+/// Return the list of all defined colours names
+/// with commas.
 
   G4String list = "";
   G4int i = 0;

@@ -1,13 +1,14 @@
-// $Id: TG4GeometryGUI.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4GeometryGUI.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: interfaces
 //
-// Author: D. Adamova
 //==============================================================
 //
 //----------------TG4GeometryGUI.cxx--------------------------//
 //----------------AG4 Geometry Browser----------------------//
 //
 //=================================================================
+//
+// Author: D. Adamova
 
   
 		 
@@ -31,7 +32,7 @@ ClassImp(TG4GeometryGUI)
 
 TG4GeometryGUI::TG4GeometryGUI()
 {
-//---> Constructor		 
+///---> Constructor		 
     fPanel   =   new TG4MainFrame(gClient->GetRoot(), 650, 500);
 
     G4cout << "\n***********************************************" << G4endl;
@@ -48,7 +49,7 @@ TG4GeometryGUI::TG4GeometryGUI()
  
 TG4GeometryGUI::TG4GeometryGUI(const TG4GeometryGUI& gg) 
 {
-// Dummy copy constructor 
+/// Dummy copy constructor 
   TG4Globals::Exception(
     "Attempt to use TG4GeometryGUI copy constructor.");
 }
@@ -65,7 +66,7 @@ TG4GeometryGUI& TG4GeometryGUI::operator=(const TG4GeometryGUI& gg)
 }    
 
 TG4GeometryGUI::~TG4GeometryGUI(){
-//---> liquidator
+///---> liquidator
 
   G4cout << "\n Now in TG4GeometryGUI destructor \n" << G4endl;
   delete fPanel;
@@ -75,7 +76,7 @@ TG4GeometryGUI::~TG4GeometryGUI(){
 
 void TG4GeometryGUI::ReadGeometryTree()
 {
-//--->Linking logical volumes to gui volumes
+///--->Linking logical volumes to gui volumes
 
 //  Icons for folders
     const TGPicture* kFolder     = gClient->GetPicture("folder_t.xpm");
@@ -106,7 +107,7 @@ void TG4GeometryGUI::ReadGeometryTree()
 void TG4GeometryGUI::RegisterLogicalVolume(G4LogicalVolume* lv,
                                            TGListTreeItem* itemv) 
 {
-//--->Filling  up gui volumes objArray  
+///--->Filling  up gui volumes objArray  
 
 TG4StringSet     lVolumeNames;     //set of names of solids  
 
@@ -170,8 +171,8 @@ TG4StringSet     lVolumeNames;     //set of names of solids
 
 void TG4GeometryGUI::ReadMaterials() const
 {
-//-----> Puts logical volumes and materials names 
-//-----> into ComboBoxes 
+///-----> Puts logical volumes and materials names 
+///-----> into ComboBoxes 
     TG4VolumesFrames* vFrame = fPanel->GetVolumesFrames();
     vFrame->SetVolumesComboEntries();
 

@@ -1,11 +1,11 @@
-// $Id: TG4PhysicsListMessenger.cxx,v 1.2 2002/12/18 09:35:32 brun Exp $
+// $Id: TG4PhysicsListMessenger.cxx,v 1.1 2003/06/03 17:14:16 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4PhysicsListMessenger
 // --------------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4PhysicsListMessenger.h"
 #include "TG4ModularPhysicsList.h"
@@ -92,7 +92,9 @@ TG4PhysicsListMessenger::~TG4PhysicsListMessenger() {
   delete fRangeCutCmd;
 }
 
+//
 // operators
+//
 
 //______________________________________________________________________________
 TG4PhysicsListMessenger& 
@@ -106,14 +108,15 @@ TG4PhysicsListMessenger::operator=(const TG4PhysicsListMessenger& right)
   return *this;  
 }    
           
+//
 // public methods
+//
 
 //______________________________________________________________________________
 void TG4PhysicsListMessenger::SetNewValue(G4UIcommand* command,
                                           G4String newValue)
 { 
-// Applies command to the associated object.
-// ---
+/// Apply command to the associated object.
 
   if (command == fSetEMCmd) {
     fPhysicsList

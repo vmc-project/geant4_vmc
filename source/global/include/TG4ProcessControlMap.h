@@ -1,12 +1,12 @@
-// $Id: TG4ProcessControlMap.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: global
+// $Id: TG4ProcessControlMap.h,v 1.2 2003/12/18 13:28:08 brun Exp $
+/// \ingroup global
 //
-// Author: I. Hrivnacova
-//
-// Class TG4ProcessControlMap
-// --------------------------
-// Singleton map container for associated pairs
-// G4 process name and TG4G3Control.
+/// \class TG4ProcessControlMap
+/// 
+/// Singleton map container for associated pairs
+/// G4 process name and TG4G3Control.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_PROCESS_CONTROL_MAP_H
 #define TG4_PROCESS_CONTROL_MAP_H
@@ -64,7 +64,9 @@ class TG4ProcessControlMap
 
 // inline methods
 
-inline TG4ProcessControlMap* TG4ProcessControlMap::Instance() 
-{ return fgInstance; }
+inline TG4ProcessControlMap* TG4ProcessControlMap::Instance() { 
+  /// Return this instance
+  return fgInstance; 
+}
 
 #endif //TG4_PROCESS_CONTROL_MAP_H

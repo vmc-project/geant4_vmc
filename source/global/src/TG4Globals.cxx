@@ -1,11 +1,11 @@
-// $Id: TG4Globals.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4Globals.cxx,v 1.2 2003/09/23 14:23:19 brun Exp $
 // Category: global
-//
-// Author: I. Hrivnacova
 //
 // Class TG4Globals
 // ----------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4Globals.h"
 
@@ -21,13 +21,14 @@ TG4Globals::~TG4Globals() {
 //
 }
   
-// static methods
+//
+// public static methods
+//
 
 //_____________________________________________________________________________
 void TG4Globals::Exception(const char* string)
 {
-// Prints error message end exits the program.
-// ---
+/// Print error message end exit the program.
 
   if (string)
   {  G4cerr << G4endl << "    " << string << G4endl; }
@@ -38,8 +39,7 @@ void TG4Globals::Exception(const char* string)
 //_____________________________________________________________________________
 void TG4Globals::Warning(const char* string)
 {
-// Prints warning message.
-// ---
+/// Print warning message.
 
   G4cerr << "++++  TG4Warning:  ++++" << G4endl;   
   if (string)
@@ -50,8 +50,7 @@ void TG4Globals::Warning(const char* string)
 //_____________________________________________________________________________
 void TG4Globals::AppendNumberToString(G4String& s, G4int a)
 {
-// Appends number to string.
-// ---
+/// Append number to string.
 
   const char* kpNumber="0123456789";
   G4String p=""; G4String q="";
@@ -69,10 +68,9 @@ void TG4Globals::AppendNumberToString(G4String& s, G4int a)
 //_____________________________________________________________________________
 G4bool TG4Globals::Compare(G4bool activation, TG4G3ControlValue controlValue)
 {
-// Compares the boolean value of the process activation
-// with the process control value.
-// Returns true if the values correspond, false otherwise.
-// ---
+/// Compare the boolean value of the process activation
+/// with the process control value.
+/// Return true if the values correspond, false otherwise.
 
   if (controlValue == kUnset) {
     TG4Globals::Warning(
@@ -89,8 +87,7 @@ G4bool TG4Globals::Compare(G4bool activation, TG4G3ControlValue controlValue)
 //_____________________________________________________________________________
 void TG4Globals::PrintStars(G4bool emptyLineFirst)
 {
-// Print stars.
-// ---
+/// Print stars.
   
 
   if (emptyLineFirst)  G4cout << G4endl;
@@ -103,8 +100,7 @@ void TG4Globals::PrintStars(G4bool emptyLineFirst)
 //_____________________________________________________________________________
 G4String TG4Globals::Help()
 {
-// Returns VMC mailing list address.
-// ---
+/// Return VMC mailing list address.
   
   return G4String("vmc@root.cern.ch");
 }  

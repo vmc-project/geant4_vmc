@@ -1,13 +1,13 @@
-// $Id: TG4PhysicsConstructorGeneral.cxx,v 1.2 2003/02/26 13:40:08 brun Exp $
+// $Id: TG4PhysicsConstructorGeneral.cxx,v 1.3 2003/12/18 13:27:46 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4PhysicsConstructorGeneral
 // ------------------------------
 // See the class description in the header file.
 // According to ExN04IonPhysics.cc,v 1.1.2.1 2001/06/28 19:07:37 gunter Exp 
 // GEANT4 tag Name: geant4-06-00
+//
+// Author: I. Hrivnacova
 
 #include "TG4PhysicsConstructorGeneral.h"
 #include "TG4ProcessControlMap.h"
@@ -42,13 +42,14 @@ TG4PhysicsConstructorGeneral::~TG4PhysicsConstructorGeneral() {
 //
 }
 
+//
 // protected methods
+//
 
 //_____________________________________________________________________________
 void TG4PhysicsConstructorGeneral::ConstructParticle()
 {
-// Instantiates particles.
-// ---
+/// Instantiate particles.
 
   // pseudo-particles
   G4Geantino::GeantinoDefinition();
@@ -58,8 +59,7 @@ void TG4PhysicsConstructorGeneral::ConstructParticle()
 //_____________________________________________________________________________
 void TG4PhysicsConstructorGeneral::ConstructProcess()
 {
-// Constructs electromagnetic processes for e+.
-// ---
+/// Construct electromagnetic processes for e+.
 
   // Set external decayer
   TVirtualMCDecayer* mcDecayer = gMC->GetDecayer(); 

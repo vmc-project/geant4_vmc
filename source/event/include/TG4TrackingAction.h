@@ -1,14 +1,14 @@
-// $Id: TG4TrackingAction.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: event
+// $Id: TG4TrackingAction.h,v 1.2 2003/02/26 13:39:32 brun Exp $
+/// \ingroup event
 //
-// Author: I.Hrivnacova
-//
-// Class TG4TrackingAction
-// -----------------------
-// Class that ensures calling sensitive detector
-// before track starts stepping.
-// It also takes care of setting step status (kVertex)
-// and passing G4Track to TG4StepManager.
+/// \class TG4TrackingAction
+/// 
+/// Class that ensures calling sensitive detector
+/// before track starts stepping.
+/// It also takes care of setting step status (kVertex)
+/// and passing G4Track to TG4StepManager.
+///
+/// Author: I.Hrivnacova
 
 #ifndef TG4_TRACKING_ACTION_H
 #define TG4_TRACKING_ACTION_H
@@ -36,8 +36,8 @@ class TG4TrackingAction : public G4UserTrackingAction,
 
     // methods
     virtual void PrepareNewEvent();
-    virtual void PreTrackingAction(const G4Track* aTrack) {;}
-    virtual void PostTrackingAction(const G4Track* aTrack) {;}
+    virtual void PreTrackingAction(const G4Track* aTrack);
+    virtual void PostTrackingAction(const G4Track* aTrack);
                   // the following methods should not
 		  // be overwritten in a derived class
     virtual void PreUserTrackingAction(const G4Track* aTrack);
@@ -88,22 +88,44 @@ class TG4TrackingAction : public G4UserTrackingAction,
 
 // inline methods
 
-inline TG4TrackingAction* TG4TrackingAction::Instance() 
-{ return fgInstance; }
+inline TG4TrackingAction* TG4TrackingAction::Instance() { 
+  /// Return this instance.
+  return fgInstance; 
+}
 
-inline void TG4TrackingAction::SetSavePrimaries(G4bool savePrimaries)
-{ fSavePrimaries = savePrimaries; }
+inline void TG4TrackingAction::PreTrackingAction(const G4Track* aTrack) {
+  /// Dummy pre-tracking action that can be overriden
+  /// in a user defined class
+}
 
-inline void TG4TrackingAction::SetSaveSecondaries(G4bool saveSecondaries)
-{ fSaveSecondaries = saveSecondaries; }
+inline void TG4TrackingAction::PostTrackingAction(const G4Track* aTrack) {
+  /// Dummy post-tracking action that can be overriden
+  /// in a user defined class
+}
 
-inline G4bool TG4TrackingAction::GetSavePrimaries() const
-{ return fSavePrimaries; }
+inline void TG4TrackingAction::SetSavePrimaries(G4bool savePrimaries) { 
+  /// Set control for saving primaries in the VMC stack
+  fSavePrimaries = savePrimaries; 
+}
 
-inline G4bool TG4TrackingAction::GetSaveSecondaries() const
-{ return fSaveSecondaries; }
+inline void TG4TrackingAction::SetSaveSecondaries(G4bool saveSecondaries) { 
+  /// Set control for saving secondaries in the VMC stack
+  fSaveSecondaries = saveSecondaries; 
+}
 
-inline G4int TG4TrackingAction::GetNofTracks() const
-{ return fTrackCounter; }
+inline G4bool TG4TrackingAction::GetSavePrimaries() const { 
+  /// Return control for saving primaries in the VMC stack
+  return fSavePrimaries; 
+}
+
+inline G4bool TG4TrackingAction::GetSaveSecondaries() const { 
+  /// Return control for saving secondaries in the VMC stack
+  return fSaveSecondaries; 
+}
+
+inline G4int TG4TrackingAction::GetNofTracks() const { 
+  /// Return track counter = current number of tracks (in event)  
+  return fTrackCounter; 
+}
 
 #endif //TG4_TRACKING_ACTION_H

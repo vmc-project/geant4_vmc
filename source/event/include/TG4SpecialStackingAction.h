@@ -1,22 +1,22 @@
-// $Id: $
-// Category: event
+// $Id: TG4SpecialStackingAction.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup event
 //
-// Author: I. Hrivnacova
-//
-// Class TG4SpecialStackingAction
-// ------------------------------
-// Class that defines a special stacking mechanism,
-// with which particles are popped from the stack in "families".
-// The primary particles are first reclassified into
-// the postpone stack, a new primary is transfered to the urgent 
-// stack only after all secondaries of its precedent primary
-// are tracked.
-// The secondary particles are classified into the waiting stack,
-// which is transfered to the urgent stack when the urgent stack
-// is empty. 
-// This ensures that all daughters of any particle are tracked
-// subsequently and get successive track IDs:
-// n, n+1, n+2, n+3, ..., n+m  
+/// \class TG4SpecialStackingAction
+/// 
+/// Class that defines a special stacking mechanism,
+/// with which particles are popped from the stack in "families".
+/// The primary particles are first reclassified into
+/// the postpone stack, a new primary is transfered to the urgent 
+/// stack only after all secondaries of its precedent primary
+/// are tracked.                                                             \n                      
+/// The secondary particles are classified into the waiting stack,
+/// which is transfered to the urgent stack when the urgent stack
+/// is empty.                                                                \n
+/// This ensures that all daughters of any particle are tracked
+/// subsequently and get successive track IDs:                               \n
+/// n, n+1, n+2, n+3, ..., n+m  
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_STACKING_ACTION_H
 #define TG4_STACKING_ACTION_H

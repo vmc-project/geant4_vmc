@@ -1,7 +1,5 @@
-// $Id: TG4VisManager.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4VisManager.cxx,v 1.2 2004/06/18 13:52:03 brun Exp $
 // Category: visualization
-//
-// Author: I. Hrivnacova, A. Gheata
 //
 // Class TG4VisManager
 // -------------------
@@ -33,6 +31,8 @@
 //   register the systems you want in your main(), e.g.:
 //   G4VisManager* myVisManager = new MyVisManager;
 //   myVisManager -> RegisterGraphicsSystem (new MyGraphicsSystem);
+//
+// Author: I. Hrivnacova, A. Gheata
 
 
 #ifdef G4VIS_USE
@@ -113,7 +113,9 @@ TG4VisManager::~TG4VisManager() {
 //
 }  
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4VisManager& TG4VisManager::operator=(const TG4VisManager& right) 
@@ -127,13 +129,14 @@ TG4VisManager& TG4VisManager::operator=(const TG4VisManager& right)
   return *this;  
 }    
           
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 void TG4VisManager::RegisterGraphicsSystems() 
 {
-// Registers the graphics systems.
-// ---
+/// Register the graphics systems.
 
   // all created graphics system instances are
   // deleted in G4VisManager::~G4VisManager()
@@ -190,17 +193,11 @@ void TG4VisManager::RegisterGraphicsSystems()
   }
 }
 
-//---------------------------------------------------------------
-// private methods
-//---------------------------------------------------------------
-
- 
 //_____________________________________________________________________________
 G4bool TG4VisManager::Contains(const LogicalVolumesVector& lvVector,
                                const G4LogicalVolume* lv) const
 {
-// Returns true if the vector contains specified logical volume.
-// ---
+/// Return true if the vector contains specified logical volume.
 
   LogicalVolumesVector::const_iterator i;
 
@@ -214,8 +211,7 @@ G4bool TG4VisManager::Contains(const LogicalVolumesVector& lvVector,
 G4bool TG4VisManager::Contains(const PhysicalVolumesVector& pvVector,
                                const G4VPhysicalVolume* pv) const
 {
-// Returns true if the vector contains specified physical volume.
-// ---
+/// Return true if the vector contains specified physical volume.
 
   PhysicalVolumesVector::const_iterator i;
 
@@ -228,11 +224,10 @@ G4bool TG4VisManager::Contains(const PhysicalVolumesVector& pvVector,
 //_____________________________________________________________________________
 LogicalVolumesVector TG4VisManager::GetLVList(G4String name)
 {
-// Get function returning the list of logical volumes
-// associated to NAME; G4 built clones of a G3 volume (identified 
-// with NAME_NUMBER will be added to the list)  
-//  NAME can be the name of a logical or physical volume
-// ---
+/// Get function returning the list of logical volumes
+/// associated to NAME; G4 built clones of a G3 volume (identified 
+/// with NAME_NUMBER will be added to the list)  
+///  NAME can be the name of a logical or physical volume
 
  LogicalVolumesVector lvList;
  G4LogicalVolumeStore* pLVStore = G4LogicalVolumeStore::GetInstance();
@@ -271,8 +266,7 @@ LogicalVolumesVector TG4VisManager::GetLVList(G4String name)
 //_____________________________________________________________________________
 PhysicalVolumesVector TG4VisManager::GetPVList(G4String name)
 {
-// Get function returning the physical volume pointer for NAME
-// ---
+/// Get function returning the physical volume pointer for NAME
 
   PhysicalVolumesVector pvList;
   G4PhysicalVolumeStore* pPVStore = G4PhysicalVolumeStore::GetInstance();
@@ -298,8 +292,7 @@ PhysicalVolumesVector TG4VisManager::GetPVList(G4String name)
 G4bool TG4VisManager::CaseInsensitiveEqual(const G4String string1,
 					   const G4String string2)
 {
-// Case insensitive comparison of 2 strings
-// ---
+/// Case insensitive comparison of 2 strings
 
   G4int i;
   if (string1 == string2) return true;
@@ -322,8 +315,7 @@ G4bool TG4VisManager::CaseInsensitiveEqual(const G4String string1,
 void TG4VisManager::SetAtt4Daughters(G4LogicalVolume* const lv, 
 				     const TG4G3Attribute att, const G4int val)
 {
-// Iterator for setting a visual attribute for all daughters
-// ---
+/// Iterator for setting a visual attribute for all daughters
 
   SetG4Attribute(lv,att,val);  
   
@@ -349,9 +341,8 @@ void TG4VisManager::SetAtt4Daughters(G4LogicalVolume* const lv,
 //_____________________________________________________________________________
 G4bool TG4VisManager::IsSharedVisAttributes(const G4LogicalVolume* pLV)
 {
-// Function seeking if the volume's visible attributes are shared with
-//  other volumes
-// ---
+/// Function seeking if the volume's visible attributes are shared with
+/// other volumes
 
   G4LogicalVolumeStore* pLVStore = G4LogicalVolumeStore::GetInstance();
   G4LogicalVolume* pLVCurrent = 0;
@@ -376,8 +367,8 @@ G4bool TG4VisManager::IsSharedVisAttributes(const G4LogicalVolume* pLV)
 void TG4VisManager::SetG4Attribute(G4LogicalVolume* const lv,
 				   const TG4G3Attribute att, const G4int val)
 {
-// Set the G4 attribute fo volume LV accordingly to the G3 description
-//  of (att- val)    
+/// Set the G4 attribute fo volume LV accordingly to the G3 description
+/// of (att- val)    
 // --
 
  if (!lv) return;
@@ -578,17 +569,15 @@ void TG4VisManager::SetG4Attribute(G4LogicalVolume* const lv,
  lv->SetVisAttributes(newVisAttributes);
 } 
   
-//-----------------------------------------------------------------
+//
 // functions for drawing
-//-----------------------------------------------------------------
-
+//
 
 //_____________________________________________________________________________
 void TG4VisManager::DrawOneSpec(const char* name)
 {
-// Function called when one double-clicks on a volume name
-// in a TPaveLabel drawn by Gdtree
-// ---
+/// Function called when one double-clicks on a volume name
+/// in a TPaveLabel drawn by Gdtree
 
  G4cout << "TG4VisManager::DrawOneSpec() Not yet implemented";
 }
@@ -597,8 +586,7 @@ void TG4VisManager::DrawOneSpec(const char* name)
 //_____________________________________________________________________________
 void TG4VisManager::SetColors()
 {
-// Function for setting default volume colours
-// ---
+/// Function for setting default volume colours
 
   G4LogicalVolumeStore* pLVStore = G4LogicalVolumeStore::GetInstance();
   const G4LogicalVolume* pLV = 0; 
@@ -677,16 +665,15 @@ void TG4VisManager::SetColors()
 //_____________________________________________________________________________
 void TG4VisManager::Gsatt(const char* name, const char* att, Int_t val)
 {
-// Geant3 description :
-//  
-//    NAME   Volume name
-//    IOPT   Name of the attribute to be set
-//    IVAL   Value to which the attribute is to be set
-//  
-//    name= "*" stands for all the volumes.
-//    iopt can be chosen among the following :
-//    kWORK, kSEEN, kLSTY, kLWID, kCOLO, kFILL, kSET, kDET, kDTYP
-// ---
+/// Geant3 description :
+///  
+///   - NAME   Volume name
+///   - IOPT   Name of the attribute to be set
+///   - IVAL   Value to which the attribute is to be set
+///  
+///   - name= "*" stands for all the volumes.
+///   - iopt can be chosen among the following :
+///     kWORK, kSEEN, kLSTY, kLWID, kCOLO, kFILL, kSET, kDET, kDTYP
 
  G4int ival = val;
  G4LogicalVolume* lv = 0; 
@@ -796,20 +783,19 @@ void TG4VisManager::Gsatt(const char* name, const char* att, Int_t val)
 void TG4VisManager::Gdraw(const char *name,Float_t theta, Float_t phi, Float_t psi,
 		    Float_t u0,Float_t v0,Float_t ul,Float_t vl)
 { 
-// Draw the physical volume NAME and all descendents;
-// Mandatory : the graphics system, scene and view must be
-//	initialized, e.g. "/vis~/create_view/new_graphics_system OGLSX";
-//	Any call of Gdraw() will use the current graphics system and
-//	the current window.
-// The result will be a centered view drawing of the designated volume,
-//	lights moving with camera, viewpoint direction given by theta/phi
-//	and rotation on the screen given by psi;
-// The u0, v0, ul, vl factors are ignored since the object will be 
-// 	automatically centered and will be confortable in the window
-//	at any viewing angle.
-//
-// check if G4 graphics is ready for drawing
-// ---
+/// Draw the physical volume NAME and all descendents;                       \n
+/// Mandatory : the graphics system, scene and view must be
+///	initialized, e.g. "/vis~/create_view/new_graphics_system OGLSX";
+///	Any call of Gdraw() will use the current graphics system and
+///	the current window.                                                  \n
+/// The result will be a centered view drawing of the designated volume,
+///	lights moving with camera, viewpoint direction given by theta/phi
+///	and rotation on the screen given by psi;                             \n
+/// The u0, v0, ul, vl factors are ignored since the object will be 
+/// 	automatically centered and will be confortable in the window
+///	at any viewing angle.
+///
+/// check if G4 graphics is ready for drawing
 
   G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
   if (!pVVisManager) { 

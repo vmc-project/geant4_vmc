@@ -1,11 +1,11 @@
-// $Id: TG4G3Units.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4G3Units.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
-//
-// Author: I. Hrivnacova
 //
 // Class TG4G3Units
 // ----------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4G3Units.h"
 

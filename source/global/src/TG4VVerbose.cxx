@@ -1,11 +1,11 @@
-// $Id: TG4VVerbose.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4VVerbose.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
-//
-// Author: I. Hrivnacova
 //
 // Class TG4Verbose
 // -------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4VVerbose.h"
 #include "TG4Globals.h"

@@ -1,11 +1,11 @@
-// $Id: TG4ModularPhysicsList.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4ModularPhysicsList.cxx,v 1.2 2003/06/03 17:15:49 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4ModularPhysicsList
 // ---------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4ModularPhysicsList.h"
 #include "TG4PhysicsConstructorGeneral.h"
@@ -66,7 +66,9 @@ TG4ModularPhysicsList::~TG4ModularPhysicsList() {
        // fExtDecayer is deleted in G4Decay destructor
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4ModularPhysicsList& 
@@ -80,14 +82,15 @@ TG4ModularPhysicsList::operator=(const TG4ModularPhysicsList &right)
   return *this;
 }
 
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 void TG4ModularPhysicsList::SetProcessActivation(G4ProcessManager* processManager,
                                           G4int  processId, G4bool activation)
 {				      
-// Sets process activation for the given process.
-// ---
+/// Set process activation for the given process.
 
   G4String strActivation = "activation";
   if (!activation) strActivation = "inactivation";
@@ -101,16 +104,17 @@ void TG4ModularPhysicsList::SetProcessActivation(G4ProcessManager* processManage
   processManager->SetProcessActivation(processId, activation);	
 }  
 
+//
 // protected methods
+//
 
 //_____________________________________________________________________________
 void TG4ModularPhysicsList::ConstructParticle()
 {
-// In this method, static member functions should be called
-// for all particles which you want to use.
-// This ensures that objects of these particle types will be
-// created in the program. 
-// ---
+/// In this method, static member functions should be called
+/// for all particles which you want to use.
+/// This ensures that objects of these particle types will be
+/// created in the program. 
 
   // lock physics manager
   TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
@@ -123,8 +127,7 @@ void TG4ModularPhysicsList::ConstructParticle()
 //_____________________________________________________________________________
 void TG4ModularPhysicsList::ConstructProcess()
 {
-// Constructs all processes.
-// ---
+/// Construct all processes.
 
   // create processes for registered physics
   G4VModularPhysicsList::ConstructProcess();
@@ -133,15 +136,15 @@ void TG4ModularPhysicsList::ConstructProcess()
   if (verboseLevel>1) DumpAllProcesses();
 }
 
-
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4ModularPhysicsList::Configure()
 {
-// Creates the selected physics constructors
-// and registeres them in the modular physics list.
-// ---
+/// Create the selected physics constructors
+/// and registeres them in the modular physics list.
 
   Int_t verboseLevel = TG4VVerbose::VerboseLevel();
 
@@ -190,11 +193,7 @@ void TG4ModularPhysicsList::Configure()
 //_____________________________________________________________________________
 void TG4ModularPhysicsList::SetCuts()
 {
-// Sets the default cut value for all particle types
-// other then e-/e+. 
-// The cut value for e-/e+ is high in oredr to supress
-// tracking of delta electrons.
-// ---
+/// Set the default cut value for all particle types.
 
   // SetCutsWithDefault();   
          // "G4VUserPhysicsList::SetCutsWithDefault" method sets 
@@ -230,9 +229,8 @@ void TG4ModularPhysicsList::SetCuts()
 //_____________________________________________________________________________
 void TG4ModularPhysicsList::VerboseLevel(G4int level) 
 {
-// Sets the specified level to both TG4Verbose and 
-// G4VModularPhysicsList.
-// ---
+/// Set the specified level to both TG4Verbose and 
+/// G4VModularPhysicsList.
 
   TG4VVerbose::VerboseLevel(level);
   SetVerboseLevel(level);
@@ -242,10 +240,10 @@ void TG4ModularPhysicsList::VerboseLevel(G4int level)
 //_____________________________________________________________________________
 void TG4ModularPhysicsList::SetRangeCut(G4double value)
 {
-// Resets the default cut to a given value.
-// !!! Should be used only in PreInit phase,
-// use SetDefaultCutValue() method of base class to reset
-// the cut value in later phases.
+/// Reset the default cut to a given value.                                 \n
+/// !!! Should be used only in PreInit phase,
+/// use SetDefaultCutValue() method of base class to reset
+/// the cut value in later phases.
 
   defaultCutValue = value;
 }  
@@ -253,9 +251,8 @@ void TG4ModularPhysicsList::SetRangeCut(G4double value)
 //_____________________________________________________________________________
 void TG4ModularPhysicsList::SetProcessActivation()
 {
-// (In)Activates built processes according
-// to the setup in TG4G3PhysicsManager::fControlVector.
-// ---
+/// (In)Activate built processes according
+/// to the setup in TG4G3PhysicsManager::fControlVector.
 
   TG4G3ControlVector* controlVector 
     = TG4G3PhysicsManager::Instance()->GetControlVector();
@@ -317,8 +314,7 @@ void TG4ModularPhysicsList::SetProcessActivation()
 //_____________________________________________________________________________
 void TG4ModularPhysicsList::PrintAllProcesses() const
 {
-// Prints all processes.
-// ---
+/// Print all processes.
 
   G4cout << "TG4ModularPhysicsList processes: " << G4endl;
   G4cout << "================================ " << G4endl;
@@ -335,8 +331,7 @@ void TG4ModularPhysicsList::PrintAllProcesses() const
 //_____________________________________________________________________________
 void TG4ModularPhysicsList::DumpAllProcesses() const
 {
-// Dumps all particles and their processes.
-// ---
+/// Dump all particles and their processes.
 
   G4cout << "TG4ModularPhysicsList particles and processes: " << G4endl;
   G4cout << "============================================== " << G4endl;

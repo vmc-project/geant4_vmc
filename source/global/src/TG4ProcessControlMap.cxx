@@ -1,11 +1,11 @@
-// $Id: TG4ProcessControlMap.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4ProcessControlMap.cxx,v 1.2 2003/12/18 13:28:08 brun Exp $
 // Category: global
-//
-// Author: I. Hrivnacova
 //
 // Class TG4ProcessControlMap
 // --------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4ProcessControlMap.h"
 #include "TG4G3ControlVector.h"
@@ -40,7 +40,9 @@ TG4ProcessControlMap::~TG4ProcessControlMap() {
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4ProcessControlMap& TG4ProcessControlMap::operator=(const TG4ProcessControlMap& right)
@@ -54,13 +56,14 @@ TG4ProcessControlMap& TG4ProcessControlMap::operator=(const TG4ProcessControlMap
   return *this;  
 }    
           
+//
 // private methods
+//
 
 //_____________________________________________________________________________
 G4bool TG4ProcessControlMap::IsDefined(const G4String& processName)
 {
-// Returns true if the first is already in the map.
-// ---
+/// Return true if the first is already in the map.
 
   if (fMap.find(processName) == fMap.end()) 
     return false;
@@ -68,13 +71,14 @@ G4bool TG4ProcessControlMap::IsDefined(const G4String& processName)
     return true;
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 G4bool TG4ProcessControlMap::Add(G4VProcess* process, TG4G3Control control)
 {  
-// Adds the pair to the map.
-// ---
+/// Add the pair to the map.
 
   if (!process) return false;
 
@@ -84,8 +88,7 @@ G4bool TG4ProcessControlMap::Add(G4VProcess* process, TG4G3Control control)
 //_____________________________________________________________________________
 G4bool TG4ProcessControlMap::Add(G4String processName, TG4G3Control control)
 {  
-// Adds the pair to the map.
-// ---
+/// Add the pair to the map.
 
   if (!IsDefined(processName)) {
     // insert into map 
@@ -99,8 +102,7 @@ G4bool TG4ProcessControlMap::Add(G4String processName, TG4G3Control control)
 //_____________________________________________________________________________
 void TG4ProcessControlMap::PrintAll() const
 {
-// Dumps all map.
-// ---
+/// Dump the whole map.
 
   if (fMap.size()) {
     G4cout << "Dump of TG4ProcessControlMap - " << fMap.size() << " entries:" << G4endl;
@@ -119,8 +121,7 @@ void TG4ProcessControlMap::PrintAll() const
 //_____________________________________________________________________________
 void TG4ProcessControlMap::Clear() 
 {
-// Clears the map.
-// ---
+/// Clear the map.
 
   fMap.clear();
 }  
@@ -129,8 +130,7 @@ void TG4ProcessControlMap::Clear()
 TG4G3Control 
 TG4ProcessControlMap::GetControl(const G4VProcess* process)
 {
-// Returns the G3 process control for the process with a given name.
-// ---
+/// Return the G3 process control for the process with a given name.
 
   if (!process) return kNoG3Controls;
 
@@ -141,8 +141,7 @@ TG4ProcessControlMap::GetControl(const G4VProcess* process)
 TG4G3Control 
 TG4ProcessControlMap::GetControl(const G4String& processName)
 {
-// Returns the G3 process control for the process with a given name.
-// ---
+/// Return the G3 process control for the process with a given name.
 
   MapIterator i = fMap.find(processName);
   if (i == fMap.end()) 
@@ -155,8 +154,7 @@ TG4ProcessControlMap::GetControl(const G4String& processName)
 const G4String& 
 TG4ProcessControlMap::GetControlName(const G4VProcess* process)
 {
-// Returns the G3 process control name for the process with a given name.
-// ---
+/// Return the G3 process control name for the process with a given name.
 
   if (!process) 
     return TG4G3ControlVector::GetControlName(kNoG3Controls);
@@ -168,8 +166,7 @@ TG4ProcessControlMap::GetControlName(const G4VProcess* process)
 const G4String& 
 TG4ProcessControlMap::GetControlName(const G4String& processName)
 {
-// Returns the G3 process control name for the process with a given name.
-// ---
+/// Return the G3 process control name for the process with a given name.
 
   return TG4G3ControlVector::GetControlName(GetControl(processName));
 }

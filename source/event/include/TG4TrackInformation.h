@@ -1,11 +1,11 @@
-// $Id: TG4TrackInformation.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: event
+// $Id: TG4TrackInformation.h,v 1.2 2003/02/26 13:39:04 brun Exp $
+/// \ingroup event
 //
-// Author: I. Hrivnacova
-//
-// Class TG4TrackInformation
-// -------------------------
-// Class with additional track information.
+/// \class TG4TrackInformation
+/// 
+/// Class with additional track information.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_TRACK_INFORMATION_H
 #define TG4_TRACK_INFORMATION_H

@@ -1,11 +1,11 @@
-// $Id: TG4SpecialStackingAction.cxx,v 1.11.6.2 2002/08/02 12:56:54 ivana Exp $
+// $Id: TG4SpecialStackingAction.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: event
-//
-// Author: I. Hrivnacova
 //
 // Class TG4SpecialStackingAction
 // -----------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4SpecialStackingAction.h"
 #include "TG4TrackingAction.h"
@@ -43,7 +43,9 @@ TG4SpecialStackingAction::~TG4SpecialStackingAction() {
 // 
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4SpecialStackingAction& 
@@ -57,14 +59,15 @@ TG4SpecialStackingAction::operator=(const TG4SpecialStackingAction &right)
   return *this;
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 G4ClassificationOfNewTrack 
 TG4SpecialStackingAction::ClassifyNewTrack(const G4Track* track)
 {
-// Classifies the new track.
-// ---
+/// Classify the new track.
 
   G4ClassificationOfNewTrack classification;
   if (fStage == 0) { 
@@ -104,8 +107,7 @@ TG4SpecialStackingAction::ClassifyNewTrack(const G4Track* track)
 //_____________________________________________________________________________
 void TG4SpecialStackingAction::NewStage()
 {
-// Called by G4 kernel at the new stage of stacking.
-// ---
+/// Called by G4 kernel at the new stage of stacking.
 
   fStage++;
   
@@ -124,8 +126,7 @@ void TG4SpecialStackingAction::NewStage()
 //_____________________________________________________________________________
 void TG4SpecialStackingAction::PrepareNewEvent()
 {
-// Called by G4 kernel at the beginning of event.
-// ---
+/// Called by G4 kernel at the beginning of event.
 
   fStage = 0;
   fTrackingAction = TG4TrackingAction::Instance();

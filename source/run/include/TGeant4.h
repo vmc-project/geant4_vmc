@@ -1,11 +1,11 @@
-// $Id: TGeant4.h,v 1.8 2004/08/17 08:53:00 brun Exp $
-// Category: run
+// $Id: TGeant4.h,v 1.9 2004/10/12 07:47:11 brun Exp $
+/// \ingroup run
 //
-// Author: I. Hrivnacova
-//
-// Class TGeant4
-// -------------
-// Geant4 implementation of the MonteCarlo interface.                      
+/// \class TGeant4
+/// 
+/// Implementation of the TVirtualMC interface for Geant4.                      
+///
+/// Author: I. Hrivnacova
 
 #ifndef TGEANT4_H
 #define TGEANT4_H
@@ -50,6 +50,7 @@ class TGeant4: public TVirtualMC
     virtual void  Gfmate(Int_t imat, char *name, Double_t &a, Double_t &z,  
   		         Double_t &dens, Double_t &radl, Double_t &absl,
 		         Double_t* ubuf, Int_t& nbuf);
+    virtual void  Gckmat(Int_t itmed, char* natmed);
 
 
     // detector composition
@@ -227,9 +228,8 @@ class TGeant4: public TVirtualMC
                         Double_t u0, Double_t v0, Double_t ul, Double_t vl);
 
     //
-    // NEW
     // Geant3 specific methods
-    // !!! need to be transformed to common interface
+    // !!! to be removed with move to TGeo
     //
     virtual void Gdopt(const char* name , const char* value);
     virtual void SetClipBox(const char *name, Double_t xmin, Double_t xmax,
@@ -237,15 +237,7 @@ class TGeant4: public TVirtualMC
     virtual void DefaultRange();
     virtual void Gdhead(Int_t isel, const char* name, Double_t chrsiz);   
     virtual void Gdman(Double_t u, Double_t v, const char* type);
-    virtual void SetColors();
-    virtual void Gtreve();
-    virtual void GtreveRoot();
-    virtual void Gckmat(Int_t itmed, char* natmed);
     virtual void InitLego();
-    virtual void Gfpart(Int_t ipart, char *name, Int_t& itrtyp,  
-		       Float_t& amass, Float_t& charge, Float_t& tlife);
-    virtual void Gspart(Int_t ipart, const char *name, Int_t itrtyp,  
-		       Double_t amass, Double_t charge, Double_t tlife); 
 
     //
     // methods for run control
@@ -282,7 +274,7 @@ class TGeant4: public TVirtualMC
     TG4VisManager*       fVisManager;      //visualization manager
     TG4RunManager*       fRunManager;      //run manager
 
-  ClassDef(TGeant4,0) // Geant4 implementation of the MonteCarlo interface 
+  ClassDef(TGeant4,0) // Geant4 implementation of the TVirtualMC interface 
 };
 
 #ifndef __CINT__

@@ -1,11 +1,11 @@
-// $Id: TG4VRunConfiguration.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4VRunConfiguration.cxx,v 1.2 2003/06/03 17:12:12 brun Exp $
 // Category: run
-//
-// Author: I. Hrivnacova
 //
 // Class TG4VRunConfiguration
 // --------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4VRunConfiguration.h"
 #include "TG4SDConstruction.h"
@@ -48,7 +48,9 @@ TG4VRunConfiguration::~TG4VRunConfiguration(){
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4VRunConfiguration& TG4VRunConfiguration::operator=(
@@ -62,13 +64,14 @@ TG4VRunConfiguration& TG4VRunConfiguration::operator=(
   return *this;  
 }    
           
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4VRunConfiguration::ConfigureRunManager(G4RunManager* runManager)
 {
-// Sets the user action classes to G4RunManager.
-// --- 
+/// Set the user action classes to G4RunManager.
 
   //if (!fDetectorConstruction || !fPhysicsList || !fPrimaryGenerator)
   //TG4Globals::Exception("Mandatory user classes are missing.");    
@@ -89,8 +92,7 @@ void TG4VRunConfiguration::ConfigureRunManager(G4RunManager* runManager)
 //_____________________________________________________________________________
 G4VUserPhysicsList* TG4VRunConfiguration::GetPhysicsList() const
 {
-// Returns the modular physics list.
-// ---
+/// Return the modular physics list.
   
   return fPhysicsList;
 }
@@ -98,8 +100,7 @@ G4VUserPhysicsList* TG4VRunConfiguration::GetPhysicsList() const
 //_____________________________________________________________________________
 TG4SDConstruction* TG4VRunConfiguration::GetSDConstruction() const
 {
-// Returns the sensitive detectors construction.
-// ---
+/// Return the sensitive detectors construction.
   
   return fSDConstruction;
 }

@@ -1,11 +1,11 @@
-// $Id: TG4SteppingAction.cxx,v 1.3 2003/06/03 17:06:15 brun Exp $
+// $Id: TG4SteppingAction.cxx,v 1.4 2003/12/18 13:28:08 brun Exp $
 // Category: event
-//
-// Author: I.Hrivnacova
 //
 // Class TG4SteppingAction
 // -----------------------
 // See the class description in the header file.
+//
+// Author: I.Hrivnacova
 
 #include "TG4SteppingAction.h"
 #include "TG4SensitiveDetector.h"
@@ -49,7 +49,9 @@ TG4SteppingAction::~TG4SteppingAction() {
 //
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4SteppingAction& 
@@ -63,16 +65,17 @@ TG4SteppingAction::operator=(const TG4SteppingAction &right)
   return *this;
 }
 
+//
 // protected methods
+//
 
 //_____________________________________________________________________________
 void TG4SteppingAction::PrintTrackInfo(const G4Track* track) const
 {
-// Prints the track info
-// - taken from private G4TrackingManager::Verbose()
-// and the standard header for verbose tracking
-// - taken from G4SteppingVerbose::TrackingStarted().
-// ---
+/// Print the track info, 
+/// taken from private G4TrackingManager::Verbose(), 
+/// and the standard header for verbose tracking, 
+/// taken from G4SteppingVerbose::TrackingStarted().
 
   // print track info
   G4cout << G4endl;
@@ -117,13 +120,14 @@ void TG4SteppingAction::PrintTrackInfo(const G4Track* track) const
 #endif
 }
 
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4SteppingAction::UserSteppingAction(const G4Step* step)
 {
-// Called by G4 kernel at the end of each step.
-// ---
+/// Called by G4 kernel at the end of each step.
  
   G4Track* track = step->GetTrack();  
   G4int stepNumber = track->GetCurrentStepNumber();

@@ -1,12 +1,12 @@
-// $Id: $
-// Category: event
+// $Id: TG4GunParticle.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup event
 //
-// Author: I. Hrivnacova
-//
-// Class TG4GunParticle
-// --------------------
-// Data type class that stores properties of a gun particle.
-// Used in AliParticleGun.
+/// \class TG4GunParticle
+/// 
+/// Data type class that stores properties of a gun particle.
+/// Used in TG4ParticleGun.
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_GUN_PARTICLE_H
 #define TG4_GUN_PARTICLE_H
@@ -72,41 +72,67 @@ class TG4GunParticle
 
 // inline methods
 
-inline void TG4GunParticle::SetParticleDefinition(G4ParticleDefinition* particleDef)
-{ fParticleDefinition = particleDef; }
+inline void 
+TG4GunParticle::SetParticleDefinition(G4ParticleDefinition* particleDef) { 
+  /// Set particle definition
+  fParticleDefinition = particleDef; 
+}
 
-inline void TG4GunParticle::SetMomentum(G4ParticleMomentum  momentum)
-{ fParticleMomentum = momentum; }
+inline void TG4GunParticle::SetMomentum(G4ParticleMomentum  momentum) { 
+  /// Set particle momentum
+  fParticleMomentum = momentum; 
+}
 
-inline void TG4GunParticle::SetPosition(G4ThreeVector position)
-{ fPosition = position; }
+inline void TG4GunParticle::SetPosition(G4ThreeVector position) { 
+  /// Set particle position
+  fPosition = position; 
+}
 
-inline void TG4GunParticle::SetTime(G4double time)
-{ fTime = time; }
+inline void TG4GunParticle::SetTime(G4double time) { 
+  /// Set particle time
+  fTime = time; 
+}
 
-inline void TG4GunParticle::SetPolarization(G4ThreeVector polarization)
-{ fPolarization = polarization; }
+inline void TG4GunParticle::SetPolarization(G4ThreeVector polarization) { 
+  /// Set particle polarization
+  fPolarization = polarization; 
+}
 
-inline void TG4GunParticle::SetMomentumDirection(G4ParticleMomentum  momentumDir)
-{ fParticleMomentum = fParticleMomentum.mag()*momentumDir.unit(); }
+inline void 
+TG4GunParticle::SetMomentumDirection(G4ParticleMomentum  momentumDir) { 
+  /// Set particle momentum direction (and keep momentum magnitude) 
+  fParticleMomentum = fParticleMomentum.mag()*momentumDir.unit(); 
+}
 
-inline G4ParticleDefinition* TG4GunParticle::GetParticleDefinition() const
-{ return fParticleDefinition; }
+inline G4ParticleDefinition* TG4GunParticle::GetParticleDefinition() const { 
+  /// Get particle definition
+  return fParticleDefinition; 
+}
 
-inline G4ParticleMomentum TG4GunParticle::GetMomentum() const
-{ return fParticleMomentum; }
+inline G4ParticleMomentum TG4GunParticle::GetMomentum() const { 
+  /// Get particle momentum
+  return fParticleMomentum; 
+}
 
-inline G4ThreeVector TG4GunParticle::GetPosition() const
-{ return fPosition; }
+inline G4ThreeVector TG4GunParticle::GetPosition() const { 
+  /// Get particle position
+  return fPosition; 
+}
 
-inline G4double TG4GunParticle::GetTime() const
-{ return fTime; }
+inline G4double TG4GunParticle::GetTime() const { 
+  /// Get particle time
+  return fTime; 
+}
 
-inline G4ThreeVector TG4GunParticle::GetPolarization() const
-{ return fPolarization; }
+inline G4ThreeVector TG4GunParticle::GetPolarization() const { 
+  /// Get particle polarization
+  return fPolarization; 
+}
 
-inline G4ParticleMomentum TG4GunParticle::GetMomentumDirection() const
-{ return fParticleMomentum.unit(); }
+inline G4ParticleMomentum TG4GunParticle::GetMomentumDirection() const { 
+  /// Set particle momentum direction (and keep momentum magnitude) 
+  return fParticleMomentum.unit(); 
+}
 
 #endif //TG4_GUN_PARTICLE_H   
    

@@ -1,7 +1,5 @@
-// $Id: TG4VolumesFrames.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4VolumesFrames.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: interfaces
-//
-// Author: D. Adamova
 //
 //========================================================
 //
@@ -9,6 +7,8 @@
 //--------- Frames for the the display of volumes properties---//
 //
 //========================================================= 
+//
+// Author: D. Adamova
  
 #include "TG4VolumesFrames.h"
 #include "TG4MaterialsFrames.h"
@@ -40,8 +40,8 @@
 TG4VolumesFrames::TG4VolumesFrames( TGTab* Tab, TG4MainFrame* ActionFrame)
   : fPanel(ActionFrame)
 { 
-//---> creates the volumes properties display frame
-//---> and plunges it into the main frame
+///---> creates the volumes properties display frame
+///---> and plunges it into the main frame
    TGCompositeFrame* parent = Tab->AddTab("Volumes Properties");
    fCapFrame = new TGCompositeFrame(parent, 60, 20, kHorizontalFrame);
    ULong_t back= TGFrame::GetBlackPixel(); 
@@ -164,7 +164,7 @@ TG4VolumesFrames::TG4VolumesFrames( TGTab* Tab, TG4MainFrame* ActionFrame)
 
 TG4VolumesFrames::TG4VolumesFrames(const TG4VolumesFrames& vf) 
 {
-// Dummy copy constructor 
+/// Dummy copy constructor 
   TG4Globals::Exception(
     "Attempt to use TG4VolumesFrames copy constructor.");
 }
@@ -182,7 +182,7 @@ TG4VolumesFrames& TG4VolumesFrames::operator=(const TG4VolumesFrames& vf)
 
 TG4VolumesFrames::~TG4VolumesFrames()
 {
-//---> liquidator 
+///---> liquidator 
 
    G4cout << "\n Now in  TG4VolumesFrames destructor \n" << G4endl;
    delete fVolSubframe1;
@@ -212,7 +212,7 @@ TG4VolumesFrames::~TG4VolumesFrames()
 
 void TG4VolumesFrames::SetVolumesComboEntries() 
 {
-//--->//---> puts names of lvolumes into the combo box entries
+///---> puts names of lvolumes into the combo box entries
 
     G4LogicalVolumeStore* lComboEntries = G4LogicalVolumeStore::GetInstance();
 
@@ -232,7 +232,7 @@ void TG4VolumesFrames::SetVolumesComboEntries()
 
 void TG4VolumesFrames::AddLogicalVolumeName( const char* name, Int_t index) const
 {
-//-----> adds an lvolume name to the combo box  
+///-----> adds an lvolume name to the combo box  
 
    fVolumesCombo->AddEntry( name, index);
    fVolumesCombo->Select(index);
@@ -241,7 +241,7 @@ void TG4VolumesFrames::AddLogicalVolumeName( const char* name, Int_t index) cons
 
 void TG4VolumesFrames::DisplayVolumeCharacteristics()
 {
-//-----> shows informations about a logical volume 
+///-----> shows informations about a logical volume 
 
    G4LogicalVolumeStore* lComboEntries = G4LogicalVolumeStore::GetInstance();
    G4int ientr = lComboEntries->size();
@@ -332,7 +332,7 @@ void TG4VolumesFrames::DisplayVolumeCharacteristics()
 
 void TG4VolumesFrames::DisplayUserLimits()
 {
-//-----> displays User Limits associated with the logical volume 
+///-----> displays User Limits associated with the logical volume 
 
   const char* cdisplay = fDisplBuffLimits->GetString();
   TG4Editor* ed = new TG4Editor( fCapFrame, 450, 300);
@@ -343,7 +343,7 @@ void TG4VolumesFrames::DisplayUserLimits()
 
 void TG4VolumesFrames::DisplayCuts()
 {
-//-----> displays Cuts associated with the logical volume 
+///-----> displays Cuts associated with the logical volume 
 
   const char* cdisplay = fDisplBuffCuts->GetString();
   TG4Editor* ed = new TG4Editor( fCapFrame, 450, 300);
@@ -354,7 +354,7 @@ void TG4VolumesFrames::DisplayCuts()
 
 void TG4VolumesFrames::DisplayControls()
 {
-//-----> displays Controls associated with the logical volume 
+///-----> displays Controls associated with the logical volume 
 
   const char* cdisplay = fDisplBuffControls->GetString();
   TG4Editor* ed = new TG4Editor( fCapFrame, 450, 300);
@@ -366,7 +366,7 @@ void TG4VolumesFrames::DisplayControls()
 //_______________________________________________________________________
 TString TG4VolumesFrames::GetLimitsDisplay(G4UserLimits* limits) const
 {
-// Returns text for the user limits display in a separate frame
+/// Returns text for the user limits display in a separate frame
 // ---
   G4String display;
   G4Track dummy;
@@ -396,11 +396,11 @@ TString TG4VolumesFrames::GetLimitsDisplay(G4UserLimits* limits) const
   return TString(tmp);
 
 }
-//===================inserted================================================
+
 //_______________________________________________________________________
 TString TG4VolumesFrames::GetCutsDisplay(G4UserLimits* limits) const
 {
-// Returns text for the cuts display in a separate frame
+/// Returns text for the cuts display in a separate frame
 // ---
   G4String display;
 
@@ -416,10 +416,11 @@ TString TG4VolumesFrames::GetCutsDisplay(G4UserLimits* limits) const
   return TString(tmp);
   
 }
+
 //_________________________________________________________________________
 TString TG4VolumesFrames::GetControlsDisplay(G4UserLimits* limits) const
 {
-// Returns text for the controls display in a separate frame
+/// Returns text for the controls display in a separate frame
  
  G4String display;
 
@@ -435,5 +436,3 @@ TString TG4VolumesFrames::GetControlsDisplay(G4UserLimits* limits) const
   return TString(tmp);
 
 }
-
-//================end of inserted==================================================  

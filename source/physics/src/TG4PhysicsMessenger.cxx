@@ -1,11 +1,11 @@
-// $Id: TG4PhysicsMessenger.cxx,v 1.2 2002/12/18 09:35:32 brun Exp $
+// $Id: TG4PhysicsMessenger.cxx,v 1.3 2003/06/03 17:11:42 brun Exp $
 // Category: physics
-//
-// Author: I. Hrivnacova
 //
 // Class TG4PhysicsMessenger
 // -------------------------
 // See the class description in the header file.
+//
+// Author: I. Hrivnacova
 
 #include "TG4PhysicsMessenger.h"
 #include "TG4GeometryServices.h"
@@ -80,7 +80,9 @@ TG4PhysicsMessenger::~TG4PhysicsMessenger() {
   delete fPrintGeneralControlsCmd;
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4PhysicsMessenger& TG4PhysicsMessenger::operator=(const TG4PhysicsMessenger& right)
@@ -93,13 +95,14 @@ TG4PhysicsMessenger& TG4PhysicsMessenger::operator=(const TG4PhysicsMessenger& r
   return *this;  
 }    
           
+//
 // public methods
+//
 
 //_____________________________________________________________________________
 void TG4PhysicsMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
 { 
-// Applies command to the associated object.
-// ---
+/// Apply command to the associated object.
 
   if (command == fPrintProcessMCMapCmd) {
     TG4ProcessMCMap::Instance()->PrintAll();

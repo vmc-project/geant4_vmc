@@ -1,16 +1,11 @@
-// $Id: TG4Editor.h,v 1.1 2002/06/20 11:56:58 hristov Exp $
-// Category: interfaces
+// $Id: TG4Editor.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+/// \ingroup interfaces
 //
-// Author: D. Adamova
-//========================================================
-//
-//---------------TG4Editor.cxx---------------------------//
-//------- A supplementary service class for--------------//
-//-----------AG4 Geometry Browser------------------------//
-//
-//=========================================================
-
-
+/// \class TG4Editor
+///
+/// A supplementary service class for Geant4 VMC Geometry Browser
+///
+/// Author: D. Adamova
 
 #ifndef TG4_EDITOR_H
 #define TG4_EDITOR_H
@@ -33,8 +28,7 @@ public:
    void   CloseWindow();
    Bool_t ProcessMessage(Long_t msg, Long_t parm1, Long_t parm2);
    
-//--->inline
-   TGTextEdit* GetEditor() const { return fEdit; }   
+   TGTextEdit* GetEditor() const;
 
 protected:
    TG4Editor(const TG4Editor& ge); 
@@ -49,5 +43,12 @@ private:
    
    ClassDef(TG4Editor,0)   // service Editor window for GUI
 };
+
+// inline methods
+
+inline TGTextEdit* TG4Editor::GetEditor() const { 
+  /// Return text editor widget
+  return fEdit; 
+}   
 
 #endif

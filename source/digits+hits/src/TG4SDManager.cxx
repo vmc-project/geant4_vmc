@@ -1,7 +1,11 @@
-// $Id: TG4SDManager.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4SDManager.cxx,v 1.2 2004/10/12 07:47:11 brun Exp $
 // Category: digits+hits
 //
+// Class TG4SDManager
+// -------------------
 // See the class description in the header file.
+//
+// Author: I.Hrivnacova
 
 #include "TG4SDManager.h"
 #include "TG4SDConstruction.h"
@@ -46,7 +50,9 @@ TG4SDManager::~TG4SDManager(){
   delete fSDServices;
 }
 
+//
 // operators
+//
 
 //_____________________________________________________________________________
 TG4SDManager& TG4SDManager::operator=(const TG4SDManager& right)
@@ -61,15 +67,16 @@ TG4SDManager& TG4SDManager::operator=(const TG4SDManager& right)
 }    
           
 
+//
 // public methods 
+//
 
 //_____________________________________________________________________________
 void TG4SDManager::Initialize() 
 {
-// Creates sensitive detectors,
-// sets second indexes for materials (corresponding to G3 tracking 
-// media) and clears remaing G3 tables.
-// ---
+/// Create sensitive detectors,
+/// sets second indexes for materials (corresponding to G3 tracking 
+/// media) and clear remaing G3 tables.
 
   fSDConstruction->Construct();
 }  
@@ -78,8 +85,7 @@ void TG4SDManager::Initialize()
 //_____________________________________________________________________________
 Int_t TG4SDManager::VolId(const Text_t* volName) const
 { 
-// Returns the sensitive detector identifier.
-// ---
+/// Return the volume ID = sensitive detector identifier.
 
   return fSDServices->GetVolumeID(volName);
 }
@@ -88,8 +94,8 @@ Int_t TG4SDManager::VolId(const Text_t* volName) const
 //_____________________________________________________________________________
 const char* TG4SDManager::VolName(Int_t id) const
 {
-// Returns the name of the sensitive detector with the given identifier.
-// ---
+/// Return the name of the volume specified by volume ID
+/// ( = sensitive detector name)
 
   return fSDServices->GetVolumeName(id);
 }
@@ -98,8 +104,8 @@ const char* TG4SDManager::VolName(Int_t id) const
 //_____________________________________________________________________________
 Int_t TG4SDManager::NofVolumes() const
 {
-// Returns the total number of sensitive detectors.
-// ---
+/// Return the total number of VMC volumes 
+/// ( = number of sensitive detectors).
 
   return fSDServices->NofSensitiveDetectors();
 }
@@ -108,8 +114,7 @@ Int_t TG4SDManager::NofVolumes() const
 //_____________________________________________________________________________
 Int_t TG4SDManager::NofVolDaughters(const char* volName) const
 {
-// Returns number of daughter of the volume specified by name
-// ---
+/// Return the number of daughters of the volume specified by name
   
   return fSDServices->NofVolDaughters(volName);  
 }
@@ -117,8 +122,8 @@ Int_t TG4SDManager::NofVolDaughters(const char* volName) const
 //_____________________________________________________________________________
 const char*  TG4SDManager::VolDaughterName(const char* volName, Int_t i) const
 {
-// Returns the name of the i-th daughter of the volume specified by name.
-// 
+/// Return the name of the i-th daughter of the volume specified by name.
+// --- 
 
   return fSDServices->VolDaughterName(volName, i);  
 }
@@ -126,7 +131,7 @@ const char*  TG4SDManager::VolDaughterName(const char* volName, Int_t i) const
 //_____________________________________________________________________________
 Int_t  TG4SDManager::VolDaughterCopyNo(const char* volName, Int_t i) const
 {
-// Returns the copyNo of the i-th daughter of the volume specified by name.
+/// Return the copyNo of the i-th daughter of the volume specified by name.
 // 
 
   return fSDServices->VolDaughterCopyNo(volName, i);  
@@ -136,8 +141,7 @@ Int_t  TG4SDManager::VolDaughterCopyNo(const char* volName, Int_t i) const
 //_____________________________________________________________________________
 Int_t TG4SDManager::VolId2Mate(Int_t volumeId)  const
 {
-// Return the material number for a given volume id
-// ---
+/// Return the material number for a given volume id
 
   return fSDServices->GetMediumId(volumeId);	       	         
 }

@@ -1,12 +1,12 @@
-// $Id: TG4LVStructure.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: geometry
+// $Id: TG4LVStructure.h,v 1.2 2003/12/18 13:28:08 brun Exp $
+/// \ingroup geometry
 //
-// Author: I. Hrivnacova
-//
-// Class TG4LVStructure
-// --------------------
-// Class that associates the name tree with logical volumes tree. 
-// Used for printing volumes trees.  
+/// \class TG4LVStructure
+/// 
+/// Class that associates the name tree with the logical volumes tree. 
+/// Used for printing volumes trees.  
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_LV_STRUCTURE_H
 #define TG4_LV_STRUCTURE_H

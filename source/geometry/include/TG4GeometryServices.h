@@ -1,12 +1,12 @@
-// $Id: TG4GeometryServices.h,v 1.2 2003/06/03 17:10:27 brun Exp $
-// Category: geometry
+// $Id: TG4GeometryServices.h,v 1.3 2004/03/26 11:04:39 brun Exp $
+/// \ingroup geometry
 //
-// Author: I. Hrivnacova
-//
-// Class TG4GeometryServices
-// -------------------------
-// The class provides service methods for accessing to Geant4 geometry,
-// namely using TVirtualMC volumes and materials identifiers. 
+/// \class TG4GeometryServices
+/// 
+/// The class provides service methods for accessing to Geant4 geometry,
+/// namely using VMC volumes and materials identifiers. 
+///
+/// Author: I. Hrivnacova
 
 #ifndef TG4_GEOMETRY_SERVICES_H
 #define TG4_GEOMETRY_SERVICES_H
@@ -118,20 +118,26 @@ class TG4GeometryServices : public TG4Verbose
 };
 
 // inline methods
-inline TG4GeometryServices* TG4GeometryServices::Instance()
-{ return fgInstance; }
 
-inline void TG4GeometryServices::SetWorld(G4VPhysicalVolume* world)
-{ fWorld = world; }
+inline TG4GeometryServices* TG4GeometryServices::Instance() { 
+  /// Return this instance
+  return fgInstance; 
+}
 
-inline void TG4GeometryServices::SetSeparator(char separator)
-{ fSeparator = separator; }
+inline void TG4GeometryServices::SetWorld(G4VPhysicalVolume* world) { 
+  /// Set the world physical volume
+  fWorld = world; 
+}
 
-inline G4VPhysicalVolume* TG4GeometryServices::GetWorld() const
-{ return fWorld; }
+inline G4VPhysicalVolume* TG4GeometryServices::GetWorld() const {
+  /// Set the world physical volume
+  return fWorld; 
+}
 
-inline char TG4GeometryServices::GetSeparator() const
-{ return fSeparator; }
+inline char TG4GeometryServices::GetSeparator() const {
+  /// Return the volumes name separator
+  return fSeparator; 
+}
 
 #endif //TG4_GEOMETRY_SERVICES_H
 
