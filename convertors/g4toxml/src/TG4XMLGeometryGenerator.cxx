@@ -1,4 +1,4 @@
-// $Id: TG4XMLGeometryGenerator.cxx,v 1.3 2003/01/29 16:33:09 brun Exp $
+// $Id: TG4XMLGeometryGenerator.cxx,v 1.1 2003/07/22 06:46:58 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova, 27.07.2000 
@@ -24,8 +24,8 @@
 #include <G4Navigator.hh>
 #include <globals.hh>
 
-#include <g4std/iomanip>
-#include <g4std/vector>
+#include <iomanip>
+#include <vector>
 
 #include <stdlib.h>
 
@@ -231,32 +231,24 @@ void TG4XMLGeometryGenerator::ProcessLogicalVolume(G4LogicalVolume* lv)
     compName.append("_comp");      
     G4int nd = lvd->GetNoDaughters(); 
     
-    G4bool isReflected = false;
-    if (dynamic_cast<G4ReflectedSolid*>(lvd->GetSolid())) 
-      isReflected = true;
- 
     G4PVPlacement* pvd = dynamic_cast<G4PVPlacement*>(vpvd);
     if (pvd) {
     
       // placement
       G4ThreeVector  position = vpvd->GetTranslation();
 
-      if (!vpvd->GetRotation() && !isReflected) {
+      if (!vpvd->GetRotation()) {
      	fConvertor->WritePosition(lvName, position);
         // if volume is not leaf node place its logical volume
         if (nd>0) 
     	  fConvertor->WritePosition(compName, position);
       }
       else {  
-        static G4RotationMatrix kIdentity;
         const G4RotationMatrix* kMatrix = vpvd->GetObjectRotation();      
-	if (!kMatrix)           kMatrix = &kIdentity;
 	
-  	fConvertor->WritePositionWithRotation(
-	                 lvName, position, kMatrix, isReflected);
+  	fConvertor->WritePositionWithRotation(lvName, position, kMatrix);
         if (nd>0) 
-      	   fConvertor->WritePositionWithRotation(
-	                    compName, position, kMatrix, isReflected);
+      	   fConvertor->WritePositionWithRotation(compName, position, kMatrix);
       }
     }
     else {
@@ -295,7 +287,7 @@ void TG4XMLGeometryGenerator::ProcessLogicalVolume(G4LogicalVolume* lv)
       // process lvd only if it was not yet processed
       ProcessLogicalVolume(lvd);
     }
-  }    
+  }      
 }  
 
 //_____________________________________________________________________________
@@ -448,7 +440,7 @@ void TG4XMLGeometryGenerator::OpenFile(G4String filePath)
 // Opens output file.
 // ---
 
-  fOutFile.open(filePath, G4std::ios::out); 
+  fOutFile.open(filePath, std::ios::out); 
   
   if (!fOutFile) {
     G4String text = "Cannot open ";
@@ -457,7 +449,7 @@ void TG4XMLGeometryGenerator::OpenFile(G4String filePath)
   }
   
   // use FORTRAN compatibility output
-  fOutFile.setf(G4std::ios::fixed, G4std::ios::floatfield);
+  fOutFile.setf(std::ios::fixed, std::ios::floatfield);
 }
 
 

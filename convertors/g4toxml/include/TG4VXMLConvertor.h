@@ -1,4 +1,4 @@
-// $Id: TG4VXMLConvertor.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4VXMLConvertor.h,v 1.1 2003/07/22 06:46:58 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova, 27.07.2000 
@@ -43,8 +43,7 @@ class TG4VXMLConvertor
     virtual void WritePosition(G4String lvName, G4ThreeVector position) = 0; 
     virtual void WritePositionWithRotation(
                                G4String lvName, G4ThreeVector position,
-                               const G4RotationMatrix* rotation, 
-			       G4bool isReflected) = 0; 
+                               const G4RotationMatrix* rotation) = 0; 
     virtual void WriteReplica(G4String lvName, G4PVReplica* pvr) = 0;			       
     virtual void WriteEmptyLine() = 0;
     virtual void IncreaseIndention() = 0;

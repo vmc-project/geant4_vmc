@@ -1,4 +1,4 @@
-// $Id: TG4XMLConvertor.h,v 1.2 2003/01/29 11:23:37 brun Exp $
+// $Id: TG4XMLConvertor.h,v 1.1 2003/07/22 06:46:58 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova, 27.07.2000 
@@ -15,8 +15,8 @@
 #include "TG4VXMLConvertor.h"
 
 #include <globals.hh>
-#include <g4std/fstream>
-#include <g4std/vector>
+#include <fstream>
+#include <vector>
 
 class G4Material;
 class G4VSolid;
@@ -33,10 +33,10 @@ class G4Polyhedra;
 
 class TG4XMLConvertor : public TG4VXMLConvertor
 {
-  typedef G4std::vector<const G4RotationMatrix*> RotationMatrixVector;
+  typedef std::vector<const G4RotationMatrix*> RotationMatrixVector;
 
   public:
-    TG4XMLConvertor(G4std::ofstream& outFile);
+    TG4XMLConvertor(std::ofstream& outFile);
     virtual ~TG4XMLConvertor();
 
     // methods
@@ -57,8 +57,7 @@ class TG4XMLConvertor : public TG4VXMLConvertor
     virtual void WritePosition(G4String lvName, G4ThreeVector position); 
     virtual void WritePositionWithRotation(
                                G4String lvName, G4ThreeVector position,
-   			       const G4RotationMatrix* rotation,
-			       G4bool isReflected); 
+   			       const G4RotationMatrix* rotation);
     virtual void WriteReplica(G4String lvName, G4PVReplica* pvr);			       
     virtual void WriteEmptyLine();
     virtual void IncreaseIndention();
@@ -76,16 +75,22 @@ class TG4XMLConvertor : public TG4VXMLConvertor
     void PutName(G4String& element, G4String name, G4String templ) const;
     
          // writing solids
-    void WriteBox (G4String lvName, const G4Box*  box,  G4String materialName); 
-    void WriteTubs(G4String lvName, const G4Tubs* tubs, G4String materialName); 
-    void WriteCons(G4String lvName, const G4Cons* cons, G4String materialName); 
-    void WriteTrd (G4String lvName, const G4Trd*  trd,  G4String materialName); 
-    void WriteTrap(G4String lvName, const G4Trap* trap, G4String materialName); 
-    void WritePara(G4String lvName, const G4Para* para, G4String materialName); 
+    void WriteBox (G4String lvName, const G4Box*  box,  G4String materialName, 
+                   G4bool isReflected); 
+    void WriteTubs(G4String lvName, const G4Tubs* tubs, G4String materialName, 
+                   G4bool isReflected); 
+    void WriteCons(G4String lvName, const G4Cons* cons, G4String materialName, 
+                   G4bool isReflected); 
+    void WriteTrd (G4String lvName, const G4Trd*  trd,  G4String materialName, 
+                   G4bool isReflected); 
+    void WriteTrap(G4String lvName, const G4Trap* trap, G4String materialName, 
+                   G4bool isReflected); 
+    void WritePara(G4String lvName, const G4Para* para, G4String materialName, 
+                   G4bool isReflected); 
     void WritePolycone(G4String lvName, const G4Polycone* polycone, 
-                   G4String materialName); 
+                   G4String materialName, G4bool isReflected); 
     void WritePolyhedra(G4String lvName, const G4Polyhedra* polyhedra, 
-                   G4String materialName); 
+                   G4String materialName, G4bool isReflected); 
   
     // static data members
     static const G4int fgkMaxVolumeNameLength;  //maximal volume name length
@@ -94,7 +99,7 @@ class TG4XMLConvertor : public TG4VXMLConvertor
     static const G4int fgkDefaultNumPrecision;  //default output numbers precision 
 
     // data members
-    G4std::ofstream&  fOutFile;          //output file
+    std::ofstream&    fOutFile;          //output file
     const G4String    fkBasicIndention;  //basic indention 
     G4String          fIndention;        //indention string
     G4int             fNW;               //output numbers width

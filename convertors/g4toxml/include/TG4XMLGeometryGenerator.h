@@ -1,4 +1,4 @@
-// $Id: TG4XMLGeometryGenerator.h,v 1.2 2003/01/29 11:24:04 brun Exp $
+// $Id: TG4XMLGeometryGenerator.h,v 1.1 2003/07/22 06:46:58 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova, 27.07.2000 
@@ -13,8 +13,8 @@
 #define TG4_XML_GEOMETRY_GENERATOR_H
 
 #include <globals.hh>
-#include <g4std/fstream>
-#include <g4std/set>
+#include <fstream>
+#include <set>
 
 #include "TG4XMLMessenger.h"
 
@@ -25,7 +25,7 @@ class G4LogicalVolume;
 class TG4XMLGeometryGenerator
 {
   public:
-    typedef G4std::set <G4String, G4std::less<G4String> > StringSet; 
+    typedef std::set <G4String, std::less<G4String> > StringSet; 
 
   public:
     TG4XMLGeometryGenerator();
@@ -73,7 +73,7 @@ class TG4XMLGeometryGenerator
     // data members
     TG4XMLMessenger    fMessenger; //messenger
     TG4VXMLConvertor*  fConvertor; //interface to XML convertor 
-    G4std::ofstream    fOutFile;   //output file
+    std::ofstream      fOutFile;   //output file
     StringSet          fMaterialNames;   //set of names of materials 
     StringSet          fVolumeNames;     //set of names of solids
     G4int              fVerboseLevel;    //level of verbosity

@@ -1,4 +1,4 @@
-// $Id: TG4XMLConvertor.cxx,v 1.1 2003/07/22 06:46:58 brun Exp $
+// $Id: TG4XMLConvertor.cxx,v 1.2 2003/10/10 15:46:03 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova, 27.07.2000 
@@ -25,12 +25,12 @@
 #include <G4Polycone.hh>
 #include <G4Polyhedra.hh>
 
-#include <g4std/iostream>
-#include <g4std/iomanip>
+#include <iostream>
+#include <iomanip>
 #if __GNUC__ >= 3
 #include <sstream>
 #else
-#include <g4std/strstream>
+#include <strstream>
 #endif
 
 const G4int TG4XMLConvertor::fgkMaxVolumeNameLength   = 20;
@@ -39,7 +39,7 @@ const G4int TG4XMLConvertor::fgkDefaultNumWidth = 7;
 const G4int TG4XMLConvertor::fgkDefaultNumPrecision = 4;
 
 //_____________________________________________________________________________
-TG4XMLConvertor::TG4XMLConvertor(G4std::ofstream& outFile) 
+TG4XMLConvertor::TG4XMLConvertor(std::ofstream& outFile) 
   : fOutFile(outFile),
     fkBasicIndention("   "),
     fIndention(fkBasicIndention),
@@ -65,9 +65,9 @@ void TG4XMLConvertor::Append(G4String& s, G4int a) const
 // ---
 
 #if __GNUC__ >= 3
-  G4std::ostringstream tmpStream;
+  std::ostringstream tmpStream;
 #else  
-  G4std::strstream tmpStream;
+  std::strstream tmpStream;
 #endif
 
   tmpStream << a;  
@@ -115,7 +115,7 @@ void TG4XMLConvertor::PutName(G4String& element, G4String name,
   
 //_____________________________________________________________________________
 void TG4XMLConvertor::WriteBox(G4String lvName, const G4Box* box, 
-                               G4String materialName)
+                               G4String materialName, G4bool)
 {
 // Writes G4box solid.
 // ---
@@ -137,15 +137,15 @@ void TG4XMLConvertor::WriteBox(G4String lvName, const G4Box* box,
   fOutFile << fkBasicIndention << element1 << G4endl  
            << indention        << element2 << G4endl
 	   << indention        << element3
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << x << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << y << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << z 
+           << std::setw(fNW) << std::setprecision(fNP) << x << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << y << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << z 
 	   << element4 << G4endl << G4endl;
 }
  
 //_____________________________________________________________________________
 void TG4XMLConvertor::WriteTubs(G4String lvName, const G4Tubs* tubs, 
-                                G4String materialName)
+                                G4String materialName, G4bool)
 {
 // Writes G4tubs solid.
 // ---
@@ -170,19 +170,19 @@ void TG4XMLConvertor::WriteTubs(G4String lvName, const G4Tubs* tubs,
   fOutFile << fkBasicIndention << element1 << G4endl
 	   << indention        << element2 << G4endl
 	   << indention        << element3
-           << G4std::setw(fNW)   << G4std::setprecision(fNP) << sphi << "; "
-           << G4std::setw(fNW)   << G4std::setprecision(fNP) << dphi
+           << std::setw(fNW)   << std::setprecision(fNP) << sphi << "; "
+           << std::setw(fNW)   << std::setprecision(fNP) << dphi
 	   << quota << G4endl 	   	   
 	   << indention        << element4
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << rmin << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << rmax << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << hz 
+           << std::setw(fNW) << std::setprecision(fNP) << rmin << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << rmax << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << hz 
 	   << element5 << G4endl << G4endl;
 }  
 
 //_____________________________________________________________________________
 void TG4XMLConvertor::WriteCons(G4String lvName, const G4Cons* cons, 
-                                G4String materialName)
+                                G4String materialName, G4bool isReflected)
 {
 // Writes G4cons solid.
 // ---
@@ -195,6 +195,16 @@ void TG4XMLConvertor::WriteCons(G4String lvName, const G4Cons* cons,
   G4double hz   = cons->GetZHalfLength()/TG4XMLUnits::Length()*2.;
   G4double sphi = cons->GetStartPhiAngle()/TG4XMLUnits::Angle();
   G4double dphi = cons->GetDeltaPhiAngle()/TG4XMLUnits::Angle();
+
+  // take into account reflection
+  if (isReflected) {
+    G4double tmp1 = rmin1;
+    G4double tmp2 = rmax1;
+    rmin1 = rmin2;
+    rmax1 = rmax2;
+    rmin2 = tmp1;
+    rmax2 = tmp2;
+  }  
 
   // compose element string template
   G4String quota = "\"";
@@ -209,21 +219,21 @@ void TG4XMLConvertor::WriteCons(G4String lvName, const G4Cons* cons,
   fOutFile << fkBasicIndention << element1 << G4endl
 	   << indention        << element2 << G4endl
 	   << indention        << element3
-           << G4std::setw(fNW)   << G4std::setprecision(fNP) << sphi << "; "
-           << G4std::setw(fNW)   << G4std::setprecision(fNP) << dphi
+           << std::setw(fNW)   << std::setprecision(fNP) << sphi << "; "
+           << std::setw(fNW)   << std::setprecision(fNP) << dphi
 	   << quota << G4endl 	   	   
 	   << indention        << element4
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << rmin1 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << rmin2 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << rmax1 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << rmax2 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << hz 
+           << std::setw(fNW) << std::setprecision(fNP) << rmin1 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << rmin2 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << rmax1 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << rmax2 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << hz 
 	   << element5 << G4endl << G4endl;
 }  
 
 //_____________________________________________________________________________
 void TG4XMLConvertor::WriteTrd(G4String lvName, const G4Trd* trd, 
-                               G4String materialName)
+                               G4String materialName, G4bool isReflected)
 {
 // Writes G4Trd solid.
 // ---
@@ -234,6 +244,16 @@ void TG4XMLConvertor::WriteTrd(G4String lvName, const G4Trd* trd,
   G4double y1 = trd->GetYHalfLength1()/TG4XMLUnits::Length()*2;
   G4double y2 = trd->GetYHalfLength2()/TG4XMLUnits::Length()*2;
   G4double hz = trd->GetZHalfLength()/TG4XMLUnits::Length()*2;
+
+  // take into account reflection
+  if (isReflected) {
+    G4double tmpx = x1;
+    G4double tmpy = y1;
+    x1 = x2;
+    y1 = y2;
+    x2 = tmpx;
+    y2 = tmpy;
+  }  
 
   // compose element string template
   G4String quota = "\"";
@@ -247,17 +267,17 @@ void TG4XMLConvertor::WriteTrd(G4String lvName, const G4Trd* trd,
   fOutFile << fkBasicIndention << element1 << G4endl
 	   << indention        << element2 << G4endl
 	   << indention        << element3
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << x1 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << x2 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << y1 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << y2 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << hz
+           << std::setw(fNW) << std::setprecision(fNP) << x1 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << x2 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << y1 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << y2 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << hz
 	   << element4 << G4endl << G4endl;
 }  
 
 //_____________________________________________________________________________
 void TG4XMLConvertor::WriteTrap(G4String lvName, const G4Trap* trap, 
-                                G4String materialName)
+                                G4String materialName, G4bool isReflected)
 {
 // Writes G4Trap solid.
 // ---
@@ -273,6 +293,22 @@ void TG4XMLConvertor::WriteTrap(G4String lvName, const G4Trap* trap,
   G4double x3 = trap->GetXHalfLength3()/TG4XMLUnits::Length()*2.;
   G4double x4 = trap->GetXHalfLength4()/TG4XMLUnits::Length()*2.;
   G4double tanAlpha2 = trap->GetTanAlpha2();
+
+  // take into account reflection
+  if (isReflected) {
+    G4double tmp1 = y1;
+    G4double tmp2 = x1;
+    G4double tmp3 = x2;
+    G4double tmp4 = tanAlpha1;
+    y1 = y2;
+    x1 = x3;
+    x2 = x4;
+    tanAlpha1 = tanAlpha2;
+    y2 = tmp1;
+    x3 = tmp2;
+    x4 = tmp3;
+    tanAlpha2 = tmp4;
+  }    
 
   // ordering of parameters in XML element
   // Xmumdpupd_Ymp_Z: 2x2 2x1 2x4 2x3 2y2 2y1 2dz
@@ -299,27 +335,27 @@ void TG4XMLConvertor::WriteTrap(G4String lvName, const G4Trap* trap,
   fOutFile << fkBasicIndention << element1 << G4endl
 	   << indention        << element2 << G4endl
 	   << indention        << element3
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << x2 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << x1 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << x4 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << x3 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << y2 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << y1 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << dz 
+           << std::setw(fNW) << std::setprecision(fNP) << x2 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << x1 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << x4 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << x3 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << y2 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << y1 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << dz 
 	   << quota << G4endl
            << indention       << element4
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << inc1 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << inc2 
+           << std::setw(fNW) << std::setprecision(fNP) << inc1 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << inc2 
 	   << quota << G4endl
 	   << indention       << element5
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << alpha1 << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << alpha2 
+           << std::setw(fNW) << std::setprecision(fNP) << alpha1 << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << alpha2 
 	   << element6 << G4endl << G4endl;
 }  
 
 //_____________________________________________________________________________
 void TG4XMLConvertor::WritePara(G4String lvName, const G4Para* para, 
-                                G4String materialName)
+                                G4String materialName, G4bool)
 {
 // Writes G4Para solid.
 // ---
@@ -354,24 +390,24 @@ void TG4XMLConvertor::WritePara(G4String lvName, const G4Para* para,
   fOutFile << fkBasicIndention << element1 << G4endl  
            << indention        << element2 << G4endl
 	   << indention        << element3
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << dx << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << dy << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << dz 
+           << std::setw(fNW) << std::setprecision(fNP) << dx << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << dy << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << dz 
 	   << quota << G4endl
 	   << indention        << element4
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << alpha 
+           << std::setw(fNW) << std::setprecision(fNP) << alpha 
 	   << quota << G4endl
 	   << indention        << element5
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << theta
+           << std::setw(fNW) << std::setprecision(fNP) << theta
 	   << quota << G4endl
 	   << indention        << element6
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << phi 	   
+           << std::setw(fNW) << std::setprecision(fNP) << phi 	   
 	   << element7 << G4endl << G4endl;
 }
  
 //_____________________________________________________________________________
 void TG4XMLConvertor::WritePolycone(G4String lvName, const G4Polycone* polycone, 
-                                    G4String materialName)
+                                    G4String materialName, G4bool isReflected)
 {
 // Writes G4Polycone solid.
 // ---
@@ -388,6 +424,13 @@ void TG4XMLConvertor::WritePolycone(G4String lvName, const G4Polycone* polycone,
   G4double* rmaxArray = historicalPolycone.GetRmax();
   G4double* zArray    = historicalPolycone.GetZ();
 
+  // take into account reflection
+  if (isReflected) {
+    for (G4int i=0; i<nofZPlanes; i++) {
+      zArray[i] = -zArray[i];
+    }
+  }    
+
   // compose element string template
   G4String quota = "\"";
   G4String element1 = "<pcon   name=\"" + lvName + quota; 
@@ -403,8 +446,8 @@ void TG4XMLConvertor::WritePolycone(G4String lvName, const G4Polycone* polycone,
   fOutFile << fkBasicIndention << element1 << G4endl
 	   << indention        << element2 << G4endl
 	   << indention        << element3
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << sphi << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << ephi-sphi
+           << std::setw(fNW) << std::setprecision(fNP) << sphi << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << ephi-sphi
 	   << element4 << G4endl;
 
   // write polyplane elements
@@ -416,9 +459,9 @@ void TG4XMLConvertor::WritePolycone(G4String lvName, const G4Polycone* polycone,
     G4double z    = zArray[i]/TG4XMLUnits::Length();
 
     fOutFile << indention << element5
-             << G4std::setw(fNW) << G4std::setprecision(fNP) << rmin << "; "
-             << G4std::setw(fNW) << G4std::setprecision(fNP) << rmax << "; " 
-             << G4std::setw(fNW) << G4std::setprecision(fNP) << z 
+             << std::setw(fNW) << std::setprecision(fNP) << rmin << "; "
+             << std::setw(fNW) << std::setprecision(fNP) << rmax << "; " 
+             << std::setw(fNW) << std::setprecision(fNP) << z 
 	     << element6
 	     << G4endl;
   }
@@ -430,7 +473,7 @@ void TG4XMLConvertor::WritePolycone(G4String lvName, const G4Polycone* polycone,
 
 //_____________________________________________________________________________
 void TG4XMLConvertor::WritePolyhedra(G4String lvName, const G4Polyhedra* polyhedra, 
-                                    G4String materialName)
+                                    G4String materialName, G4bool isReflected)
 {
 // Writes G4Polycone solid.
 // ---
@@ -448,6 +491,13 @@ void TG4XMLConvertor::WritePolyhedra(G4String lvName, const G4Polyhedra* polyhed
   G4double* rmaxArray = historicalPolyhedra.GetRmax();
   G4double* zArray    = historicalPolyhedra.GetZ();
 
+  // take into account reflection
+  if (isReflected) {
+    for (G4int i=0; i<nofZPlanes; i++) {
+      zArray[i] = -zArray[i];
+    }
+  }    
+
   // compose element string template
   G4String quota = "\"";
   G4String element1 = "<phedra name=\"" + lvName + quota; 
@@ -464,8 +514,8 @@ void TG4XMLConvertor::WritePolyhedra(G4String lvName, const G4Polyhedra* polyhed
   fOutFile << fkBasicIndention << element1 << G4endl
 	   << indention        << element2 << G4endl
 	   << indention        << element3
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << sphi << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << ephi-sphi
+           << std::setw(fNW) << std::setprecision(fNP) << sphi << "; "
+           << std::setw(fNW) << std::setprecision(fNP) << ephi-sphi
 	   << quota << G4endl
 	   << indention       << element4 
 	   << nofSides
@@ -477,7 +527,7 @@ void TG4XMLConvertor::WritePolyhedra(G4String lvName, const G4Polyhedra* polyhed
     // set units    
     G4double rmin = rminArray[i]/TG4XMLUnits::Length();
     if (i>0) fOutFile << "; ";
-    fOutFile << G4std::setw(fNW) << G4std::setprecision(fNP) << rmin;
+    fOutFile << std::setw(fNW) << std::setprecision(fNP) << rmin;
   };
   fOutFile << quota << G4endl;
 
@@ -486,7 +536,7 @@ void TG4XMLConvertor::WritePolyhedra(G4String lvName, const G4Polyhedra* polyhed
     // set units
     G4double rmax = rmaxArray[i]/TG4XMLUnits::Length();
     if (i>0) fOutFile << "; ";
-    fOutFile << G4std::setw(fNW) << G4std::setprecision(fNP) << rmax;
+    fOutFile << std::setw(fNW) << std::setprecision(fNP) << rmax;
   };
   fOutFile << quota << G4endl;
 
@@ -495,7 +545,7 @@ void TG4XMLConvertor::WritePolyhedra(G4String lvName, const G4Polyhedra* polyhed
     // set units
     G4double z = zArray[i]/TG4XMLUnits::Length();
     if (i>0) fOutFile << "; ";
-    fOutFile << G4std::setw(fNW) << G4std::setprecision(fNP) << z;
+    fOutFile << std::setw(fNW) << std::setprecision(fNP) << z;
   };
   fOutFile << element8 << G4endl << G4endl;
 }  
@@ -655,56 +705,59 @@ void TG4XMLConvertor::WriteSolid(G4String lvName, const G4VSolid* solid,
     = dynamic_cast<const G4ReflectedSolid*>(solid);
 
   const G4VSolid* consSolid;
-  if (reflSolid) 
+  G4bool isReflected = false;
+  if (reflSolid) { 
     consSolid = reflSolid->GetConstituentMovedSolid();
+    isReflected = true;
+  }  
   else  
     consSolid = solid;  
      
   const G4Box* box = dynamic_cast<const G4Box*>(consSolid);
   if (box) { 
-    WriteBox(lvName, box, materialName); 
+    WriteBox(lvName, box, materialName, isReflected); 
     return;
   }
   
   const G4Tubs* tubs = dynamic_cast<const G4Tubs*>(consSolid);
   if (tubs) { 
-    WriteTubs(lvName, tubs, materialName); 
+    WriteTubs(lvName, tubs, materialName, isReflected); 
     return;
   }
   
   const G4Cons* cons = dynamic_cast<const G4Cons*>(consSolid);
   if (cons) { 
-    WriteCons(lvName, cons, materialName); 
+    WriteCons(lvName, cons, materialName, isReflected); 
     return;
   }
   
   const G4Trd* trd = dynamic_cast<const G4Trd*>(consSolid);
   if (trd) { 
-    WriteTrd(lvName, trd, materialName); 
+    WriteTrd(lvName, trd, materialName, isReflected); 
     return;
   }
   
   const G4Trap* trap = dynamic_cast<const G4Trap*>(consSolid);
   if (trap) { 
-    WriteTrap(lvName, trap, materialName); 
+    WriteTrap(lvName, trap, materialName, isReflected); 
     return;
   }
   
   const G4Para* para = dynamic_cast<const G4Para*>(consSolid);
   if (para) { 
-    WritePara(lvName, para, materialName); 
+    WritePara(lvName, para, materialName, isReflected); 
     return;
   }
   
   const G4Polycone* polycone = dynamic_cast<const G4Polycone*>(consSolid);
   if (polycone) { 
-    WritePolycone(lvName, polycone, materialName); 
+    WritePolycone(lvName, polycone, materialName, isReflected); 
     return;
   }
   
   const G4Polyhedra* polyhedra = dynamic_cast<const G4Polyhedra*>(consSolid);
   if (polyhedra) { 
-    WritePolyhedra(lvName, polyhedra, materialName); 
+    WritePolyhedra(lvName, polyhedra, materialName, isReflected); 
     return;
   }
   
@@ -764,19 +817,19 @@ void TG4XMLConvertor::WriteRotation(const G4RotationMatrix* rotation)
   // write element
   fOutFile << fkBasicIndention
            << element1
-	   << G4std::setw(8) << G4std::setprecision(5) << xx << "; "  
-	   << G4std::setw(8) << G4std::setprecision(5) << xy << "; "  
-	   << G4std::setw(8) << G4std::setprecision(5) << xz << quota
+	   << std::setw(8) << std::setprecision(5) << xx << "; "  
+	   << std::setw(8) << std::setprecision(5) << xy << "; "  
+	   << std::setw(8) << std::setprecision(5) << xz << quota
            << fkBasicIndention
            << element2
-	   << G4std::setw(8) << G4std::setprecision(5) << yx << "; "  
-	   << G4std::setw(8) << G4std::setprecision(5) << yy << "; "  
-	   << G4std::setw(8) << G4std::setprecision(5) << yz << quota
+	   << std::setw(8) << std::setprecision(5) << yx << "; "  
+	   << std::setw(8) << std::setprecision(5) << yy << "; "  
+	   << std::setw(8) << std::setprecision(5) << yz << quota
 	   << fkBasicIndention
            << element3
-	   << G4std::setw(8) << G4std::setprecision(5) << zx << "; "  
-	   << G4std::setw(8) << G4std::setprecision(5) << zy << "; "  
-	   << G4std::setw(8) << G4std::setprecision(5) << zz 
+	   << std::setw(8) << std::setprecision(5) << zx << "; "  
+	   << std::setw(8) << std::setprecision(5) << zy << "; "  
+	   << std::setw(8) << std::setprecision(5) << zz 
 	   << element4 	   
            << G4endl;
 }  
@@ -802,9 +855,9 @@ void TG4XMLConvertor::WritePosition(G4String lvName, G4ThreeVector position)
   // write element
   fOutFile << fIndention
            << element1
-           << G4std::setw(fNW+1) << G4std::setprecision(fNP) << x << "; "
-           << G4std::setw(fNW+1) << G4std::setprecision(fNP) << y << "; "
-           << G4std::setw(fNW+1) << G4std::setprecision(fNP) << z
+           << std::setw(fNW+1) << std::setprecision(fNP) << x << "; "
+           << std::setw(fNW+1) << std::setprecision(fNP) << y << "; "
+           << std::setw(fNW+1) << std::setprecision(fNP) << z
 	   << element2
 	   << G4endl;
 }  
@@ -812,14 +865,10 @@ void TG4XMLConvertor::WritePosition(G4String lvName, G4ThreeVector position)
 //_____________________________________________________________________________
 void TG4XMLConvertor::WritePositionWithRotation(
                            G4String lvName, G4ThreeVector position, 
-			   const G4RotationMatrix* rotation,
-			   G4bool isReflected)
+			   const G4RotationMatrix* rotation)
 {
 // Writes position with rotation and reflection with a given solid name. 
 // ---
-
-  G4double zscale = 1.;
-  if (isReflected) zscale = -1.;
 
   // get parameters
   G4double x = position.x()/TG4XMLUnits::Length();
@@ -827,13 +876,13 @@ void TG4XMLConvertor::WritePositionWithRotation(
   G4double z = position.z()/TG4XMLUnits::Length();
   G4double xx = rotation->xx();
   G4double xy = rotation->xy();
-  G4double xz = rotation->xz() * zscale;
+  G4double xz = rotation->xz();
   G4double yx = rotation->yx();
   G4double yy = rotation->yy();
-  G4double yz = rotation->yz() * zscale;
+  G4double yz = rotation->yz();
   G4double zx = rotation->zx();
   G4double zy = rotation->zy();
-  G4double zz = rotation->zz() * zscale;
+  G4double zz = rotation->zz();
   
 /*
   // find rotation
@@ -862,24 +911,24 @@ void TG4XMLConvertor::WritePositionWithRotation(
   // write element
   fOutFile << fIndention
            << element1
-           << G4std::setw(fNW+1) << G4std::setprecision(fNP) << x << "; "
-           << G4std::setw(fNW+1) << G4std::setprecision(fNP) << y << "; "
-           << G4std::setw(fNW+1) << G4std::setprecision(fNP) << z << quota
+           << std::setw(fNW+1) << std::setprecision(fNP) << x << "; "
+           << std::setw(fNW+1) << std::setprecision(fNP) << y << "; "
+           << std::setw(fNW+1) << std::setprecision(fNP) << z << quota
 	   << fIndention
 	   << element2 
-	   << G4std::setw(8) << G4std::setprecision(5) << xx << "; "  
-	   << G4std::setw(8) << G4std::setprecision(5) << xy << "; "  
-	   << G4std::setw(8) << G4std::setprecision(5) << xz << "; " << G4endl
+	   << std::setw(8) << std::setprecision(5) << xx << "; "  
+	   << std::setw(8) << std::setprecision(5) << xy << "; "  
+	   << std::setw(8) << std::setprecision(5) << xz << "; " << G4endl
            << fIndention
            << element3
-	   << G4std::setw(8) << G4std::setprecision(5) << yx << "; "  
-	   << G4std::setw(8) << G4std::setprecision(5) << yy << "; "  
-	   << G4std::setw(8) << G4std::setprecision(5) << yz << "; " << G4endl
+	   << std::setw(8) << std::setprecision(5) << yx << "; "  
+	   << std::setw(8) << std::setprecision(5) << yy << "; "  
+	   << std::setw(8) << std::setprecision(5) << yz << "; " << G4endl
 	   << fIndention
            << element3
-	   << G4std::setw(8) << G4std::setprecision(5) << zx << "; "  
-	   << G4std::setw(8) << G4std::setprecision(5) << zy << "; "  
-	   << G4std::setw(8) << G4std::setprecision(5) << zz 
+	   << std::setw(8) << std::setprecision(5) << zx << "; "  
+	   << std::setw(8) << std::setprecision(5) << zy << "; "  
+	   << std::setw(8) << std::setprecision(5) << zz 
 	   << element4
 	   << G4endl;
 }  
@@ -938,11 +987,11 @@ void TG4XMLConvertor::WriteReplica(G4String lvName, G4PVReplica* pvr)
   // write element
   fOutFile << fIndention
            << element1
-           << G4std::setw(fNW+1) << G4std::setprecision(fNP) << nReplicas
+           << std::setw(fNW+1) << std::setprecision(fNP) << nReplicas
 	   << element2
-           << G4std::setw(fNW+1) << G4std::setprecision(fNP) << value0
+           << std::setw(fNW+1) << std::setprecision(fNP) << value0
 	   << element3	   
-           << G4std::setw(fNW+1) << G4std::setprecision(fNP) << dValue
+           << std::setw(fNW+1) << std::setprecision(fNP) << dValue
 	   << element4
 	   << G4endl;
 }  
