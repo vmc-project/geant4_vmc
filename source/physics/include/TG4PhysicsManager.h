@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
+// $Id: TG4PhysicsManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -32,8 +32,6 @@ class TG4G3ProcessMap;
 class G4ParticleDefinition;
 class G4VProcess;
 class TG4ModularPhysicsList;
-
-class TVirtualMCDecayer;
 
 class TG4PhysicsManager : public TG4Verbose
 {
