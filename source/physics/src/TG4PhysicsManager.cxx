@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.4 2003/06/03 17:11:25 brun Exp $
+// $Id: TG4PhysicsManager.cxx,v 1.5 2003/09/23 14:24:29 brun Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -671,6 +671,10 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus(const G4VProcess* process)
        return kPLightAbsorption;
        ;;
        
+    case NotAtBoundary:
+    case SameMaterial:
+    case StepTooSmall:
+    case NoRINDEX:
     case Undefined:
       return kPNoProcess;
       ;;
