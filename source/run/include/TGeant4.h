@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.1 2002/06/20 11:58:25 hristov Exp $
+// $Id: TGeant4.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -165,7 +165,10 @@ class TGeant4: public TVirtualMC
         // tracking particle 
         // dynamic properties
     virtual void    TrackPosition(TLorentzVector& position) const;
+    virtual void    TrackPosition(Double_t& x, Double_t& y, Double_t& z) const;
     virtual void    TrackMomentum(TLorentzVector& momentum) const;
+    virtual void    TrackMomentum(Double_t& px, Double_t& py, Double_t&pz,
+                                  Double_t& etot) const;
     virtual void    TrackVertexPosition(TLorentzVector& position) const;
     virtual void    TrackVertexMomentum(TLorentzVector& momentum) const;
     virtual Double_t TrackStep() const;
