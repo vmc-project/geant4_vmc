@@ -1,4 +1,4 @@
-// $Id: TG4VSpecialCuts.cxx,v 1.2 2002/09/06 15:12:08 ivana Exp $
+// $Id: TG4VSpecialCuts.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -106,10 +106,9 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
 
     // min remaining range
     G4double kinEnergy = track.GetKineticEnergy();
-    G4Material* material = track.GetMaterial();
+    const G4MaterialCutsCouple* couple = track.GetMaterialCutsCouple();
     G4double rangeNow 
-      = G4EnergyLossTables::GetRange(particle, kinEnergy, material);
-
+      = G4EnergyLossTables::GetRange(particle, kinEnergy, couple);
     temp = (rangeNow - limits->GetUserMinRange(track));
     if (temp < 0.) return minStep;
     if (proposedStep > temp) proposedStep = temp;
@@ -120,7 +119,7 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
     if (G4EnergyLossTables::GetDEDXTable(particle)) {
       G4double minEkine = GetMinEkine(*limits, track);
       G4double minR 
-        = G4EnergyLossTables::GetRange(particle, minEkine, material);
+        = G4EnergyLossTables::GetRange(particle, minEkine, couple);
       temp = rangeNow - minR;
       if (temp < 0.) return minStep;
       if (proposedStep > temp) proposedStep = temp;  
