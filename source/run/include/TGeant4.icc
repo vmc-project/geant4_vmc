@@ -1,4 +1,4 @@
-// $Id: TGeant4.icc,v 1.4 2004/05/28 13:50:14 brun Exp $
+// $Id: TGeant4.icc,v 1.5 2004/08/11 10:03:09 brun Exp $
 // Category: run
 
 #include "TG4StepManager.h" 
@@ -260,12 +260,6 @@ inline void  TGeant4::GetSecondary(Int_t isec, Int_t& particleId,
 { 
   fStepManager->GetSecondary(isec, particleId, position, momentum); 
 } 
-
-//_____________________________________________________________________________
-inline Bool_t  TGeant4::SecondariesAreOrdered() const
-{
-  return kTRUE;
-}  
 
 //_____________________________________________________________________________
 inline TMCProcess TGeant4::ProdProcess(Int_t isec) const 

@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.cxx,v 1.5 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4RunManager.cxx,v 1.6 2004/05/28 13:49:53 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -430,3 +430,14 @@ Int_t TG4RunManager::CurrentEvent() const
   G4int eventID = fRunManager->GetCurrentEvent()->GetEventID();
   return eventID;
 }
+
+//_____________________________________________________________________________
+Bool_t  TG4RunManager::SecondariesAreOrdered() const 
+{
+//  Secondaries are ordered if the special stacking
+// (defined in TG4SpecialStackingAction) is activated.
+// ----
+
+  return fRunConfiguration->IsSpecialStacking();
+}  
+

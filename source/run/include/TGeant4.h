@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.6 2004/06/08 10:27:50 brun Exp $
+// $Id: TGeant4.h,v 1.7 2004/08/11 10:03:09 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -210,8 +210,7 @@ class TGeant4: public TVirtualMC
     virtual void  GetSecondary(Int_t isec, Int_t& particleId, 
                     TLorentzVector& position, TLorentzVector& momentum);
     virtual TMCProcess ProdProcess(Int_t isec) const; 
-    virtual Int_t StepProcesses(TArrayI &proc) const;
-    virtual Bool_t SecondariesAreOrdered() const;
+    virtual Int_t  StepProcesses(TArrayI &proc) const;
   
     //
     // methods for visualization
@@ -261,6 +260,7 @@ class TGeant4: public TVirtualMC
 
         // get methods
     virtual Int_t   CurrentEvent() const; 
+    virtual Bool_t  SecondariesAreOrdered() const;
 
   protected:
     TGeant4();

@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.6 2004/05/28 13:50:14 brun Exp $
+// $Id: TGeant4.cxx,v 1.7 2004/06/08 10:27:50 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -557,6 +557,12 @@ Int_t TGeant4::CurrentEvent() const {
 //
   return fRunManager->CurrentEvent(); 
 } 
+
+//_____________________________________________________________________________
+Bool_t  TGeant4::SecondariesAreOrdered() const {
+//
+  return fRunManager->SecondariesAreOrdered();
+}  
 
 // Geant3 specific methods
 // !!! need to be transformed to common interface
