@@ -1,4 +1,4 @@
-// $Id: TG4VXMLGeometryGenerator.cxx,v 1.2 2003/12/18 13:25:11 brun Exp $
+// $Id: TG4VXMLGeometryGenerator.cxx,v 1.1 2004/04/26 17:05:04 brun Exp $
 //
 // Author: I. Hrivnacova, 27.07.2000 
 //
@@ -134,7 +134,7 @@ G4double TG4VXMLGeometryGenerator::Round(G4double number) const
 // convertor.
 
   G4double precision = fConvertor->GetNumPrecision();
-  return round(number*pow(10.,precision))/pow(10.,precision);
+  return fConvertor->Round(number*pow(10.,precision))/pow(10.,precision);
 }
 
 //_____________________________________________________________________________
