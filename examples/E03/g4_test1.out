@@ -1,10 +1,14 @@
 Loading Geant4 granular libraries ...
 Loading Geant4 granular libraries ... finished
-**********************************************
- Geant4 version $Name: geant4-06-00 $
-                                (12-December-2003)
-             Copyright : Geant4 Collaboration
-**********************************************
+
+*************************************************************
+ Geant4 version $Name: geant4-06-01 $   (25-March-2004)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303.
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+Debug mode is switched on.
 Visualization Manager instantiating...
 Visualization Manager initialising...
 Registering graphics systems...
@@ -12,7 +16,6 @@ Geant4 has been created.
 SetNewValueToAll  
 
 phot:  Total cross sections from Sandia parametrisation. 
-MuonMinusCaptureAtRest is created 
 kMCApplicationField
 
 ------------------------------------------------------------
@@ -124,7 +127,8 @@ MuIoni:   tables are built for  mu+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 0
-      Bether-Bloch model for E > 0.2 MeV parametrisation of Bragg peak below.
+      Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
+      radiative corrections for E > 1 GeV
 
 MuBrems:   tables are built for  mu+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -141,7 +145,8 @@ MuIoni:   tables are built for  mu-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 0
-      Bether-Bloch model for E > 0.2 MeV parametrisation of Bragg peak below.
+      Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
+      radiative corrections for E > 1 GeV
 
 msc:  Model variant of multiple scattering for pi-
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
@@ -182,23 +187,24 @@ Index : 3     used in the geometry : Yes     recalculation needed : No
 ### Run 0 start.
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 914.00673       total track length (cm):  53.907332
-   Gap:      total energy (MeV): 35.074681       total track length (cm):  17.554083
+   Absorber: total energy (MeV): 939.261       total track length (cm):  53.5138
+   Gap:      total energy (MeV): 27.8718       total track length (cm):  13.7613
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV): 941.87594       total track length (cm):  54.613292
-   Gap:      total energy (MeV): 15.925916       total track length (cm):  7.1756942
+   Absorber: total energy (MeV):  948.76       total track length (cm):  56.3228
+   Gap:      total energy (MeV):  20.104       total track length (cm):  8.89002
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 932.19447       total track length (cm):  53.803261
-   Gap:      total energy (MeV): 26.645481       total track length (cm):  13.298719
+   Absorber: total energy (MeV):  915.85       total track length (cm):  53.0199
+   Gap:      total energy (MeV): 27.1257       total track length (cm):  12.6321
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 905.44835       total track length (cm):  53.779306
-   Gap:      total energy (MeV): 21.321683       total track length (cm):  10.61547
+   Absorber: total energy (MeV): 923.325       total track length (cm):  55.6575
+   Gap:      total energy (MeV): 27.1683       total track length (cm):  12.8818
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 916.5593       total track length (cm):  53.762425
-   Gap:      total energy (MeV): 27.477687       total track length (cm):  13.079107
-Time of this run:   User=0.7s Real=1.44s Sys=0.04s
+   Absorber: total energy (MeV): 905.638       total track length (cm):  53.1908
+   Gap:      total energy (MeV): 41.7747       total track length (cm):  20.2865
+Time of this run:   User=0.75s Real=0.89s Sys=0.06s
 Number of events processed: 5
+disabling TCL support
