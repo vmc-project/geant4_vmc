@@ -1,4 +1,4 @@
-// $Id: TG4VRunConfiguration.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4VRunConfiguration.h,v 1.2 2003/06/03 17:12:12 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -12,6 +12,8 @@
 
 #ifndef TG4V_RUN_CONFIGURATION_H
 #define TG4V_RUN_CONFIGURATION_H
+
+#include <globals.hh>
 
 class TG4TrackingAction;
 class TG4SteppingAction;
@@ -37,8 +39,9 @@ class TG4VRunConfiguration
     void ConfigureRunManager(G4RunManager* runManager);
 
     // get methods
+    virtual G4bool      IsSpecialStacking() const = 0;
     G4VUserPhysicsList* GetPhysicsList() const;
-    TG4SDConstruction* GetSDConstruction() const;
+    TG4SDConstruction*  GetSDConstruction() const;
 
   protected:
     TG4VRunConfiguration(const TG4VRunConfiguration& right);

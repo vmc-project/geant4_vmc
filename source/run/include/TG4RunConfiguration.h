@@ -1,4 +1,4 @@
-// $Id: TG4RunConfiguration.h,v 1.1 2002/06/20 11:58:25 hristov Exp $
+// $Id: TG4RunConfiguration.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -31,6 +31,9 @@ class TG4RunConfiguration : public TG4VRunConfiguration
     TG4RunConfiguration(Bool_t specialStacking = false);
     virtual ~TG4RunConfiguration();
 
+    // get methods
+    virtual G4bool IsSpecialStacking() const;
+
   protected:
     // methods
     virtual void CreateUserConfiguration();
@@ -39,6 +42,11 @@ class TG4RunConfiguration : public TG4VRunConfiguration
     // data members
     Bool_t  fSpecialStacking;
 };
+
+// inline functions
+
+inline G4bool TG4RunConfiguration::IsSpecialStacking() const
+{ return fSpecialStacking; }
 
 #endif //TG4_RUN_CONFIGURATION_H
 
