@@ -1,4 +1,4 @@
-// $Id: TG4SteppingAction.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4SteppingAction.cxx,v 1.2 2002/11/22 13:28:57 brun Exp $
 // Category: event
 //
 // Author: I.Hrivnacova
@@ -17,6 +17,9 @@
 
 #include <TVirtualMCApplication.h>
 
+// static data members
+TG4SteppingAction* TG4SteppingAction::fgInstance = 0;
+
 //_____________________________________________________________________________
 TG4SteppingAction::TG4SteppingAction() 
   : fMessenger(this),
@@ -26,6 +29,11 @@ TG4SteppingAction::TG4SteppingAction()
     fLoopStepCounter(0)
  {
 //
+  if (fgInstance) { 
+    TG4Globals::Exception("TG4SteppingAction constructed twice."); 
+  }
+
+  fgInstance = this;
 }
 
 //_____________________________________________________________________________

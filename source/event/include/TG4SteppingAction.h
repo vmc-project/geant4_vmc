@@ -1,4 +1,4 @@
-// $Id: TG4SteppingAction.h,v 1.1 2002/06/20 11:54:18 hristov Exp $
+// $Id: TG4SteppingAction.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: event
 //
 // Author: I.Hrivnacova
@@ -36,6 +36,9 @@ class TG4SteppingAction : public G4UserSteppingAction
     // TG4SteppingAction(const TG4SteppingAction& right);
     virtual ~TG4SteppingAction();
    
+    // static access method
+    static TG4SteppingAction* Instance();
+
     // methods
     virtual void SteppingAction(const G4Step* step) {;}
                   // the following method should not
@@ -60,6 +63,9 @@ class TG4SteppingAction : public G4UserSteppingAction
     void PrintTrackInfo(const G4Track* track) const;
 
   private:
+    // static data members
+    static TG4SteppingAction*   fgInstance; //this instance
+
     // data members
     TG4SteppingActionMessenger  fMessenger; //messenger    
     G4int  fMaxNofSteps;          //max number of steps allowed
@@ -71,6 +77,9 @@ class TG4SteppingAction : public G4UserSteppingAction
 };
 
 // inline methods
+
+inline TG4SteppingAction* TG4SteppingAction::Instance() 
+{ return fgInstance; }
 
 inline void TG4SteppingAction::SetLoopVerboseLevel(G4int level)
 { fLoopVerboseLevel = level; }
