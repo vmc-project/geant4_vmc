@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.3 2002/10/08 08:34:48 brun Exp $
+# $Id: Makefile,v 1.4 2002/10/08 13:27:30 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
@@ -35,13 +35,18 @@ GDICTO   := $(patsubst %.cxx,$(BINDIR)/%.o,$(GDICT))
 CXXSRC	:= $(wildcard $(patsubst %,%/src/*.cxx,$(GDIRS))) 
 SRCS	:= $(CXXSRC)
 
-# C++ Headers
+# C++ Headers processed by CINT
 #
 HDRS	:= run/include/TG4VRunConfiguration.h \
 	   run/include/TG4RunConfiguration.h \
 	   run/include/TGeant4.h \
 	   $(wildcard interfaces/include/*.h) \
 	   geant4vmcLinkDef.h
+
+# C++ Headers copied to include
+#
+HEADERS	:= $(wildcard $(patsubst %,%/include/*.h,$(GDIRS)))
+HEADERS	+= $(wildcard $(patsubst %,%/include/*.icc,$(GDIRS)))
 
 # Objects
 #
