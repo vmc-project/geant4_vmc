@@ -1,4 +1,4 @@
-// $Id: Ex03DetectorConstruction.cxx,v 1.1 2003/03/17 14:56:51 brun Exp $
+// $Id: Ex03DetectorConstruction.cxx,v 1.2 2004/07/09 16:50:14 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
@@ -98,6 +98,8 @@ void Ex03DetectorConstruction::ConstructMaterials()
   Double_t tmaxfd = -20.;    // Maximum angle due to field deflection 
   Double_t deemax = -.3;     // Maximum fractional energy loss, DLS 
   Double_t stmin  = -.8;
+  
+  // stemax = 1.0;             // Maximum step limit
 
 //--------- Material definition ---------
 

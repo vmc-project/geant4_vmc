@@ -1,4 +1,4 @@
-// $Id: g3Config.C,v 1.2 2002/10/05 07:28:54 brun Exp $
+// $Id: g3Config.C,v 1.3 2003/02/26 13:36:44 brun Exp $
 //
 // Configuration macro for Geant3 VirtualMC for Example02 
 
@@ -9,7 +9,7 @@ void Config()
   
   cout << "Geant3 has been created." << endl;
 
-  geant3->SetHADR(0);
+  gMC->SetProcess("HADR",0);
 }
 
 

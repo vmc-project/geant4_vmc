@@ -24,7 +24,7 @@ Type ".x demos.C" to get a toolbar from which to execute the demos
 Type ".x demoshelp.C" to see the help window
 
 
-Processing run_g3.C...
+Processing run_g3.C("g3tgeoConfig.C")...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
@@ -51,11 +51,17 @@ Loading Geant3 libraries ... finished
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
 Geant3 has been created.
 Geometry will be defined via VMC
- GGCLOS: Start automatic volume ordering:
-
- MZLINK.  Initialize Link Area  /GCHVIR/  for Store  0 NL/NS=     4     1
-
- MZLINK.  Initialize Link Area  /GCDINA/  for Store  0 NL/NS=     4     4
+Geometry Geometry, default geometry created
+Top volume is EXPH. Master volume is EXPH
+List of materials :
+Fixing runtime shapes...
+ --- nothing to fix
+Counting nodes...
+Voxelizing...
+Building caches for nodes and matrices...
+--- node ID tracking disabled
+### 22 nodes/ 4 volume UID's in default geometry
+----------------modeler ready----------------
 
  Calculating cross section tables, see gphysi.dat for more information
 
@@ -68,8 +74,8 @@ Track -160 0 4.00002  in EXPH  ArgonGas
 Track -160 0 4.00002  in TRTU  Aluminium
 Track -39.9998 0 16  in TRTU  Aluminium
 Track -39.9998 0 16  in EXPH  ArgonGas
-Track 0.00016287 0 20  in EXPH  ArgonGas
-Track 0.00016287 0 20  in CALB  Lead
+Track 0.000159074 0 20  in EXPH  ArgonGas
+Track 0.000159074 0 20  in CALB  Lead
 Track 9.0002 0 20.9  in CALB  Lead
 Track 9.0002 0 20.9  in LAYB  Aluminium
 Track 11.0002 0 21.1  in LAYB  Aluminium
@@ -156,8 +162,8 @@ Track -159.865 4.01346 0  in EXPH  ArgonGas
 Track -159.865 4.01346 0  in TRTU  Aluminium
 Track -42.1144 15.7886 0  in TRTU  Aluminium
 Track -42.1144 15.7886 0  in EXPH  ArgonGas
-Track 0.00016019 20 0  in EXPH  ArgonGas
-Track 0.00016019 20 0  in CALB  Lead
+Track 0.000160153 20 0  in EXPH  ArgonGas
+Track 0.000160153 20 0  in CALB  Lead
 Track 9.0002 20.9 0  in CALB  Lead
 Track 9.0002 20.9 0  in LAYB  Aluminium
 Track 11.0002 21.1 0  in LAYB  Aluminium
@@ -244,8 +250,8 @@ Track -160 0 0  in EXPH  ArgonGas
 Track -160 0 0  in TRTU  Aluminium
 Track -39.9998 0 0  in TRTU  Aluminium
 Track -39.9998 0 0  in EXPH  ArgonGas
-Track 0.000167847 0 0  in EXPH  ArgonGas
-Track 0.000167847 0 0  in CALB  Lead
+Track 0.000160217 0 0  in EXPH  ArgonGas
+Track 0.000160217 0 0  in CALB  Lead
 Track 9.0002 0 0  in CALB  Lead
 Track 9.0002 0 0  in LAYB  Aluminium
 Track 11.0002 0 0  in LAYB  Aluminium

@@ -1,8 +1,9 @@
-// $Id: run_g3.C,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+// $Id: run_g3.C,v 1.1 2003/03/17 14:56:50 brun Exp $
 //
 // Macro for running Example03 with Geant3 
 
-void run_g3(const TString& testMacro = "test1.C") 
+void run_g3(const TString& configMacro = "g3Config.C",
+            const TString& testMacro = "test1.C") 
 {
   // Load basic libraries
   gROOT->LoadMacro("../macro/basiclibs.C");
@@ -17,5 +18,5 @@ void run_g3(const TString& testMacro = "test1.C")
 
   // Run test macro
   gROOT->LoadMacro(testMacro);
-  test("g3Config.C");
+  test(configMacro);
 }  

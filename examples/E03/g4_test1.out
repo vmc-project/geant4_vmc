@@ -1,8 +1,35 @@
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version   4.02/00    4 January 2005   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+FreeType Engine v2.1.3 used to render TrueType fonts.
+Compiled for linux with thread support.
+
+CINT/ROOT C/C++ Interpreter version 5.15.159, Nov 14 2004
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+
+Welcome to the ROOT tutorials
+
+
+Type ".x demos.C" to get a toolbar from which to execute the demos
+
+Type ".x demoshelp.C" to see the help window
+
+
+Processing run_g4.C("test1.C")...
 Loading Geant4 granular libraries ...
 Loading Geant4 granular libraries ... finished
 
 *************************************************************
- Geant4 version $Name: geant4-06-02 $   (25-June-2004)
+ Geant4 version $Name: geant4-07-00-cand-03 $   (17-December-2004)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -39,6 +66,7 @@ please use one of the available physics lists by use-case.
 ###
 
 ### EM physics for hadrons constructed.
+### Step limiter physics constructed.
 
 ### No special controls in user limits are set.
 
@@ -52,6 +80,7 @@ please use one of the available physics lists by use-case.
 **********************************************
 
 1 OpenGLImmediateX scene handlers extanct.
+disabling TCL support
 Got standard cmap
 Window name: viewer-0 (OpenGLImmediateX)
 WARNING: objects with visibility flag set to "false" will not be drawn!
@@ -62,6 +91,7 @@ Your "world" has no vis attributes or is marked as visible.
   myWorldLogicalVol -> SetVisAttributes (G4VisAttributes::Invisible);
 G4Scene::AddWorldIfEmpty: The scene was empty,
    "world" has been added.
+G4VUserPhysicsList::BuildPhysicsTable does not retrieve Cut Table but calculate 
 
 compt:  Total cross sections from a parametrisation. Good description from 10 KeV to (100/Z) GeV. 
        Scattered gamma energy according Klein-Nishina.
@@ -117,30 +147,39 @@ msc:  Model variant of multiple scattering for mu+
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
       Boundary algorithm is active with facrange= 0.199
 
-MuIoni:   tables are built for  mu+
+muIoni:   tables are built for  mu+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
       Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
       radiative corrections for E > 1 GeV
 
-MuBrems:   tables are built for  mu+
+muBrems:   tables are built for  mu+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
       Parametrised model 
 
-MuPairProd:   tables are built for  mu+
+muPairProd:   tables are built for  mu+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
       Parametrised model 
-### All dEdx and Range tables are built #####
 
-MuIoni:   tables are built for  mu-
+muIoni:   tables are built for  mu-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
       Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
       radiative corrections for E > 1 GeV
+
+muBrems:   tables are built for  mu-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Parametrised model 
+
+muPairProd:   tables are built for  mu-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Parametrised model 
 
 msc:  Model variant of multiple scattering for pi-
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
@@ -181,23 +220,26 @@ Index : 3     used in the geometry : Yes     recalculation needed : No
 ### Run 0 start.
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 918.401       total track length (cm):  52.6952
-   Gap:      total energy (MeV): 18.6364       total track length (cm):  8.16724
+   Absorber: total energy (MeV): 917.427       total track length (cm):   52.615
+   Gap:      total energy (MeV): 22.7248       total track length (cm):  10.9789
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV): 908.497       total track length (cm):  52.1281
-   Gap:      total energy (MeV): 36.7627       total track length (cm):  17.3132
+   Absorber: total energy (MeV): 925.741       total track length (cm):  55.0123
+   Gap:      total energy (MeV): 20.9933       total track length (cm):   9.2459
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 909.499       total track length (cm):  53.3975
-   Gap:      total energy (MeV): 33.7793       total track length (cm):  16.0238
+   Absorber: total energy (MeV): 927.516       total track length (cm):  52.6069
+   Gap:      total energy (MeV): 24.6634       total track length (cm):   11.774
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 937.773       total track length (cm):  55.6852
-   Gap:      total energy (MeV): 19.8655       total track length (cm):  9.24806
+   Absorber: total energy (MeV):  946.22       total track length (cm):  54.8778
+   Gap:      total energy (MeV): 13.6404       total track length (cm):   6.2586
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 926.061       total track length (cm):  53.8793
-   Gap:      total energy (MeV): 28.8874       total track length (cm):  14.7342
-Time of this run:   User=2.04s Real=2.16s Sys=0.03s
+   Absorber: total energy (MeV): 932.534       total track length (cm):  54.9035
+   Gap:      total energy (MeV): 9.61709       total track length (cm):  3.76786
+Time of this run:   User=2.13s Real=2.33s Sys=0.09s
 Number of events processed: 5
+
+This is the end of ROOT -- Goodbye
+

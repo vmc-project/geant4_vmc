@@ -24,7 +24,7 @@ Type ".x demos.C" to get a toolbar from which to execute the demos
 Type ".x demoshelp.C" to see the help window
 
 
-Processing run_g3.C("g3Config.C", "test1.C")...
+Processing run_g3.C("g3tgeoConfig.C", "test1.C")...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
@@ -50,15 +50,21 @@ Loading Geant3 libraries ... finished
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
 Geant3 has been created.
+Geometry Geometry, default geometry created
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of LiquidArgon ] 
 ------------------------------------------------------------
- GGCLOS: Start automatic volume ordering:
-
- MZLINK.  Initialize Link Area  /GCHVIR/  for Store  0 NL/NS=     4     1
-
- MZLINK.  Initialize Link Area  /GCDINA/  for Store  0 NL/NS=     4     4
+Top volume is WRLD. Master volume is WRLD
+List of materials :
+Fixing runtime shapes...
+ --- nothing to fix
+Counting nodes...
+Voxelizing...
+Building caches for nodes and matrices...
+--- node ID tracking disabled
+### 42 nodes/ 6 volume UID's in default geometry
+----------------modeler ready----------------
 
  Calculating cross section tables, see gphysi.dat for more information
 

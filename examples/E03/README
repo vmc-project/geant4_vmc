@@ -1,4 +1,4 @@
-$Id: $
+$Id: README,v 1.1 2003/03/17 14:56:50 brun Exp $
 -----------------------------------------------------------------
 
 Example03
@@ -27,8 +27,9 @@ Macros:
 
   For running example with G3:
   
-  run_g3.C    - macro for running example 
-  g3Config.C  - configuration macro
+  run_g3.C        - macro for running example 
+  g3Config.C      - configuration macro for G3 with native geometry (default)
+  g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry
 
   For running example with G4:
   
@@ -43,6 +44,19 @@ Macros:
   test2.C   - verbosity
   set_vis.C - setting visualization
 
-  To run the second test macro (test2.C),
-  execute macros run_g3.C/run_g4.C with a parameter = name of the test macro:
-  Eg. .x run_g3.C("test2.C")
+To run example 
+===============
+  The first line shows how to run the first test macro (test1.C),
+  the second line to run the second test macro (test2.C):
+  
+  With G3:
+  root[0] .x run_g3.C      
+  root[0] .x run_g3.C("g3Config.C", "test2.C")      
+  
+  With G3 + TGeo:
+  root[0] .x run_g3.C("g3tgeoConfig.C");  
+  root[0] .x run_g3.C("g3tgeoConfig.C", "test2.C")      
+  
+  With G4:
+  root[0] .x run_g4.C  
+  root[0] .x run_g4.C("test2.C")
