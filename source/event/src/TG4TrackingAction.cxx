@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.cxx,v 1.3 2003/03/07 17:21:49 brun Exp $
+// $Id: TG4TrackingAction.cxx,v 1.4 2003/07/22 06:36:09 brun Exp $
 // Category: event
 //
 // Author: I.Hrivnacova
@@ -132,6 +132,7 @@ void TG4TrackingAction::SetParentToTrackInformation(const G4Track* track)
 
   G4TrackVector* secondaryTracks 
     = fpTrackingManager->GetSteppingManager()->GetSecondary();
+
   if (secondaryTracks){
     G4int i;
     for (i=0; i<G4int(secondaryTracks->size()); i++) {
@@ -358,10 +359,13 @@ void TG4TrackingAction::TrackToStack(const G4Track* track)
       = GetTrackInformation(track,"SaveTrack")->GetParentParticleID();
   }
      
+  // Track charge
+  G4int charge = G4int(track->GetDynamicParticle()->GetCharge()/eplus);
+ 
   // PDG code
   G4int pdg 
     = TG4ParticlesManager::Instance()
-      ->GetPDGEncodingFast(track->GetDefinition());
+      ->GetPDGEncodingFast(track->GetDefinition(), charge);
 
   // track kinematics  
   G4ThreeVector momentum = track->GetMomentum(); 

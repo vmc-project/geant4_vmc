@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.3 2003/02/26 13:38:42 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.4 2003/06/03 17:06:54 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -843,12 +843,15 @@ Int_t TG4StepManager::TrackPid() const
 
   G4ParticleDefinition* particle
     = fTrack->GetDynamicParticle()->GetDefinition();
+  G4int charge 
+    = G4int(fTrack->GetDynamicParticle()->GetCharge()/eplus);
     
   // ask TG4ParticlesManager to get PDG encoding 
   // (in order to get PDG from extended TDatabasePDG
   // in case the standard PDG code is not defined)
   G4int pdgEncoding 
-    = TG4ParticlesManager::Instance()->GetPDGEncodingFast(particle);
+    = TG4ParticlesManager::Instance()
+      ->GetPDGEncodingFast(particle, charge);
 
   return pdgEncoding;
 }
