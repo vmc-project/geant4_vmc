@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryManager.cxx,v 1.1 2004/05/05 13:32:02 brun Exp $
+// $Id: TG4RootGeometryManager.cxx,v 1.2 2004/06/18 13:51:11 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova,  4.5.2004
@@ -237,7 +237,13 @@ void TG4RootGeometryManager::ConvertRootMedias()
     Medium(kmed, medium->GetName(), material, isvol, ifield, fieldm, tmaxfd,
            stemax, deemax, epsil, stmin, ubuf, 0);
 	   
-    fMediumIdMap[medium->GetId()] = kmed;
+    // fMediumIdMap[medium->GetId()] = kmed;
+    
+    // Reset the new Id to the TGeoMedium
+    // to make it retrievable from user MC application
+    // (will not be needed when TVirtualMC::MediumId(const char* name)
+    //  is available)
+    medium->SetId(kmed); 
   }  
 }    	         	            
     
@@ -256,18 +262,12 @@ void TG4RootGeometryManager::FillMediumMap()
     G4LogicalVolume* lv = (*lvStore)[i];
     G4String name  = lv->GetName();
     
-    G4String g3Name(name);
-    
-    // Filter out the reflected volumes name extension
-    // added by reflection factory 
-    G4String ext = G4ReflectionFactory::Instance()->GetVolumesNameExtension();
-    if (name.find(ext)) g3Name = g3Name.substr(0, g3Name.find(ext));
-
     // Get medium Id (in Root) from the convertor	 
     G4int mediumIdinRoot = fConvertor.GetMediumId(lv);
     
     // Get medium Id (in VMC) from the map	 
-    G4int mediumId =  fMediumIdMap[mediumIdinRoot];
+    // G4int mediumId =  fMediumIdMap[mediumIdinRoot];
+    G4int mediumId = mediumIdinRoot;
     
     // Map it to logical volume name
     fMediumMap->Add(name, mediumId);     
