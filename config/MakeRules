@@ -1,0 +1,28 @@
+# $Id:  $
+
+############################   RULES   #######################################
+
+.SUFFIXES: .cxx .h
+
+$(BINDIR)/%Cint.o : %Cint.cxx
+	@echo $*Cint.cxx
+ifeq ($(CXXVERBOSE),)
+	@$(CXX) $(filter-out -O%, $(CXXFLAGS)) -c $*Cint.cxx -o $*Cint.o
+else
+	$(CXX) $(filter-out -O%, $(CXXFLAGS)) -c $*Cint.cxx -o $*Cint.o
+endif
+
+$(BINDIR)/%.o : %.cxx
+	@echo $*.cxx
+	@[ -d $(dir $(BINDIR)) ] || mkdir -p $(dir $(BINDIR))
+	@[ -d $(dir $@) ] || mkdir -p $(dir $@)
+ifeq ($(CXXVERBOSE),)
+	@$(CXX) $(CXXFLAGS) -c $*.cxx -o $(BINDIR)/$*.o
+else
+	$(CXX) $(CXXFLAGS) -c $*.cxx -o $(BINDIR)/$*.o
+endif
+
+
+
+
+

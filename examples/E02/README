@@ -1,0 +1,39 @@
+$Id: README,v 1.2 2002/06/21 11:19:26 ivana Exp $
+-----------------------------------------------------------------
+
+Example02
+=========
+  Geant4 ExampleN02 adapted to Virtual Monte Carlo.
+
+  Demonstrates:
+    Geometry - parameterised volume (Gsposp)
+    Definition of sensitive volumes
+    Physics - hadronics processes off
+    Particles cuts 
+      - default G3 cuts, G4 cut in range: 1cm
+    Simple primary generator 
+      one proton with a fixed position and direction
+    Generating hits
+    Drawing geometry (both G3, G4) + trajectories (G4 only)
+    Storing hits, particles stack in Root file
+
+  See also description of in 
+    geant4/examples/novice/N02/README
+
+
+Macros:
+=======
+
+  For running example with G3:
+  
+  run_g3.C    - macro for running example 
+  g3Config.C  - configuration macro
+
+
+  For running example with G4:
+  
+  run_g4.C    - macro for running example 
+  g4Config.C  - configuration macro
+  g4config.in - Geant4 configuration macro (called from g4Config.C)
+  g4vis.in    - Geant4 macro for visualization settings (called from run_g4.C) 
+  
