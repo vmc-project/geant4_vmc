@@ -2,9 +2,9 @@ Loading Geant4 granular libraries ...
 Loading Geant4 granular libraries ... finished
 
 *************************************************************
- Geant4 version $Name: geant4-06-01 $   (25-March-2004)
+ Geant4 version $Name: geant4-06-02 $   (25-June-2004)
                       Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303.
+                      Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
 *************************************************************
 
@@ -39,12 +39,6 @@ please use one of the available physics lists by use-case.
 ###
 
 ### EM physics for hadrons constructed.
-WRLD is not found in /
-CALO is not found in /
-CELL is not found in /
-LAYE is not found in /
-ABSO is not found in /
-GAPX is not found in /
 
 ### No special controls in user limits are set.
 
@@ -112,8 +106,8 @@ annihil:  Total cross section from Heilter formula(annihilation into 2 photons).
 hIoni:   tables are built for  proton
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 0
-      Bether-Bloch model for Escaled > 2 MeV, parametrisation of Bragg peak below, Integral mode 0
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+      Bether-Bloch model for Escaled > 2 MeV, parametrisation of Bragg peak below, Integral mode 1
 
 msc:  Model variant of multiple scattering for proton
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
@@ -126,7 +120,7 @@ msc:  Model variant of multiple scattering for mu+
 MuIoni:   tables are built for  mu+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 0
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
       Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
       radiative corrections for E > 1 GeV
 
@@ -144,7 +138,7 @@ MuPairProd:   tables are built for  mu+
 MuIoni:   tables are built for  mu-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 0
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
       Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
       radiative corrections for E > 1 GeV
 
@@ -187,24 +181,23 @@ Index : 3     used in the geometry : Yes     recalculation needed : No
 ### Run 0 start.
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 939.261       total track length (cm):  53.5138
-   Gap:      total energy (MeV): 27.8718       total track length (cm):  13.7613
+   Absorber: total energy (MeV): 918.401       total track length (cm):  52.6952
+   Gap:      total energy (MeV): 18.6364       total track length (cm):  8.16724
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV):  948.76       total track length (cm):  56.3228
-   Gap:      total energy (MeV):  20.104       total track length (cm):  8.89002
+   Absorber: total energy (MeV): 908.497       total track length (cm):  52.1281
+   Gap:      total energy (MeV): 36.7627       total track length (cm):  17.3132
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV):  915.85       total track length (cm):  53.0199
-   Gap:      total energy (MeV): 27.1257       total track length (cm):  12.6321
+   Absorber: total energy (MeV): 909.499       total track length (cm):  53.3975
+   Gap:      total energy (MeV): 33.7793       total track length (cm):  16.0238
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 923.325       total track length (cm):  55.6575
-   Gap:      total energy (MeV): 27.1683       total track length (cm):  12.8818
+   Absorber: total energy (MeV): 937.773       total track length (cm):  55.6852
+   Gap:      total energy (MeV): 19.8655       total track length (cm):  9.24806
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 905.638       total track length (cm):  53.1908
-   Gap:      total energy (MeV): 41.7747       total track length (cm):  20.2865
-Time of this run:   User=0.75s Real=0.89s Sys=0.06s
+   Absorber: total energy (MeV): 926.061       total track length (cm):  53.8793
+   Gap:      total energy (MeV): 28.8874       total track length (cm):  14.7342
+Time of this run:   User=2.04s Real=2.16s Sys=0.03s
 Number of events processed: 5
-disabling TCL support

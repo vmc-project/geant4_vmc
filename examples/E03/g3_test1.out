@@ -1,14 +1,14 @@
-Loading Geant3 library ...
-Loading Geant3 library ... finished
+Loading Geant3 libraries ...
+Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   281821975    10CC4317 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   278630567    109B90A7 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   277379969   281821975
-                                        HEX    10887B81    10CC4317
-                                        HEX    FFBC36B6           0
-                              relative adrs    -4442442           0
-          with     1 Str. in     2 Links in   5300 Low words in 3999970 words.
+          with Store/Table at absolute adrs   278653117   278630567
+                                        HEX    109BE8BD    109B90A7
+                                        HEX        5662           0
+                              relative adrs       22114           0
+          with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
  MZLOGL.  Set Log Level 0 for store  0
@@ -16,47 +16,58 @@ Loading Geant3 library ... finished
 0*****  Correction Cradle Version  0.1100
 
  MZDIV.   Initialize Division  Constant  in Store  0
-          NW/NWMAX=   20003200000,  MODE/KIND=  1  2
+          NW/NWMAX=   20004000000,  MODE/KIND=  1  2
           Division 20 initialized.
 
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
 Geant3 has been created.
-===> Geometry, default geometry created
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of LiquidArgon ] 
 ------------------------------------------------------------
-Top volume is WRLD. Master volume is WRLD
-List of materials :
-Fixing runtime shapes...
-Counting nodes...
-Voxelizing...
-Building caches for nodes and matrices...
-### 42 nodes/ 7 volume UID's in default geometry
-----------------modeler ready----------------
+ GGCLOS: Start automatic volume ordering:
+
+ MZLINK.  Initialize Link Area  /GCHVIR/  for Store  0 NL/NS=     4     1
+
+ MZLINK.  Initialize Link Area  /GCDINA/  for Store  0 NL/NS=     4     4
 
  Calculating cross section tables, see gphysi.dat for more information
 
  Cross section calculation concluded successfully
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 910.411       total track length (cm):  41.5847
-   Gap:      total energy (MeV):   31.86       total track length (cm):  14.6227
+ **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =          0           0
+ GTREVE_ROOT : Transporting primary track No         20
+ GTREVE_ROOT : Transporting primary track No         10
+   Absorber: total energy (MeV): 927.074       total track length (cm):  40.5048
+   Gap:      total energy (MeV):  24.024       total track length (cm):  10.9235
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV): 911.359       total track length (cm):  38.5725
-   Gap:      total energy (MeV): 31.6918       total track length (cm):  13.1058
+ **** GTRIGI: IEVENT=      2 IDEVT=      2 Random Seeds =          0           0
+ GTREVE_ROOT : Transporting primary track No         20
+ GTREVE_ROOT : Transporting primary track No         10
+   Absorber: total energy (MeV):  922.45       total track length (cm):  41.6487
+   Gap:      total energy (MeV): 23.6542       total track length (cm):  10.0717
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 918.717       total track length (cm):  40.8633
-   Gap:      total energy (MeV): 39.4927       total track length (cm):  19.2142
+ **** GTRIGI: IEVENT=      3 IDEVT=      3 Random Seeds =          0           0
+ GTREVE_ROOT : Transporting primary track No         20
+ GTREVE_ROOT : Transporting primary track No         10
+   Absorber: total energy (MeV): 918.795       total track length (cm):  40.3354
+   Gap:      total energy (MeV): 26.4647       total track length (cm):  13.0019
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV):  927.31       total track length (cm):  41.4521
-   Gap:      total energy (MeV): 39.5938       total track length (cm):  19.5106
+ **** GTRIGI: IEVENT=      4 IDEVT=      4 Random Seeds =          0           0
+ GTREVE_ROOT : Transporting primary track No         20
+ GTREVE_ROOT : Transporting primary track No         10
+   Absorber: total energy (MeV):  949.38       total track length (cm):  42.2968
+   Gap:      total energy (MeV): 20.0642       total track length (cm):  7.19822
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV):  914.87       total track length (cm):  41.7818
-   Gap:      total energy (MeV): 29.3183       total track length (cm):   13.942
+ **** GTRIGI: IEVENT=      5 IDEVT=      5 Random Seeds =          0           0
+ GTREVE_ROOT : Transporting primary track No         20
+ GTREVE_ROOT : Transporting primary track No         10
+   Absorber: total energy (MeV): 915.975       total track length (cm):  40.1113
+   Gap:      total energy (MeV): 29.5236       total track length (cm):  13.8163
