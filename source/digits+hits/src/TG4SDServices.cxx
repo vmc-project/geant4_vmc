@@ -1,4 +1,4 @@
-// $Id: TG4SDServices.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4SDServices.cxx,v 1.2 2003/12/18 13:28:08 brun Exp $
 // Category: digits+hits
 //
 // See the class description in the header file.
@@ -17,14 +17,15 @@
 TG4SDServices* TG4SDServices::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4SDServices::TG4SDServices(){
+TG4SDServices::TG4SDServices()
+  : fIsStopRun(false) 
+{
 //
   if (fgInstance) {
     TG4Globals::Exception(
       "TG4SDServices: attempt to create two instances of singleton.");
-      
-  fgInstance = this;
   }
+  fgInstance = this;
 }
 
 //_____________________________________________________________________________
