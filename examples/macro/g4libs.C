@@ -1,4 +1,4 @@
-// $Id: g4libs.C,v 1.2 2002/11/22 13:28:34 brun Exp $
+// $Id: g4libs.C,v 1.3 2002/12/18 09:36:00 brun Exp $
 //
 // Macro for loading Geant4 and Geant4 VMC libraries
 
@@ -118,10 +118,8 @@ void g4libs_granular()
   gSystem->Load("libG4geometrymng");  
   gSystem->Load("libG4geomBoolean");  
   gSystem->Load("libG4csg");  
-  gSystem->Load("libG4step");
   gSystem->Load("libG4brep"); 
   gSystem->Load("libG4specsolids"); 
-  gSystem->Load("libG4stepinterface");
   gSystem->Load("libG4geombias");
   
   // particles  
@@ -191,7 +189,9 @@ void g4libs_granular()
   // interfaces and graphics
   g4libs_graphics();
   
-  // geant4 mc
+  // geant4 VMC
+  gSystem->Load("libroottog4");
+  gSystem->Load("libg4toxml");
   gSystem->Load("libgeant4vmc");
 
   cout << "Loading Geant4 granular libraries ... finished" << endl;
@@ -228,7 +228,9 @@ void g4libs_global()
   // interfaces and graphics
   g4libs_graphics();
  
-  // geant4 mc
+  // geant4 VMC
+  gSystem->Load("libroottog4");
+  gSystem->Load("libg4toxml");
   gSystem->Load("libgeant4vmc");
 
   cout << "Loading Geant4 global libraries ... finished" << endl;
