@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorHadron.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4PhysicsConstructorHadron.cxx,v 1.2 2002/11/22 13:29:22 brun Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -7,7 +7,7 @@
 // ---------------------------------
 // See the class description in the header file.
 // According to ExN04HadronPhysics.cc,v 1.1.2.1 2001/06/28 19:07:37 gunter Exp
-// GEANT4 tag Name: geant4-03-02
+// GEANT4 tag Name: geant4-06-00
 
 #include "TG4PhysicsConstructorHadron.h"
 #include "TG4ProcessControlMap.h"
@@ -499,14 +499,24 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForPionPlus()
 // Construct processes for pi+.
 // ---
 
+  // theo model
+  fPreEquilib = new G4PreCompoundModel(&fHandler);
+  fCascade.SetDeExcitation(fPreEquilib);  
+  fTheoModel.SetTransport(&fCascade);
+  fTheoModel.SetHighEnergyGenerator(&fStringModel);
+  fStringDecay = new G4ExcitedStringDecay(&fFragmentation);
+  fStringModel.SetFragmentationModel(fStringDecay);
+  fTheoModel.SetMinEnergy(15*GeV);
+  fTheoModel.SetMaxEnergy(100*TeV);
+
+  // PionPlus
   // add process
   G4ProcessManager* pManager = G4PionPlus::PionPlus()->GetProcessManager();
   pManager->AddDiscreteProcess(&fElasticProcess);
 
   fLEPionPlusModel = new G4LEPionPlusInelastic();
-  fHEPionPlusModel = new G4HEPionPlusInelastic();
   fPionPlusInelastic.RegisterMe(fLEPionPlusModel);
-  fPionPlusInelastic.RegisterMe(fHEPionPlusModel);
+  fPionPlusInelastic.RegisterMe(&fTheoModel);
   pManager->AddDiscreteProcess(&fPionPlusInelastic);
 
   // map to G3 controls
@@ -531,9 +541,8 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForPionMinus()
   pManager->AddDiscreteProcess(&fElasticProcess);
 
   fLEPionMinusModel = new G4LEPionMinusInelastic();
-  fHEPionMinusModel = new G4HEPionMinusInelastic();
   fPionMinusInelastic.RegisterMe(fLEPionMinusModel);
-  fPionMinusInelastic.RegisterMe(fHEPionMinusModel);
+  fPionMinusInelastic.RegisterMe(&fTheoModel);
   pManager->AddDiscreteProcess(&fPionMinusInelastic);
 
   pManager->AddRestProcess(&fPionMinusAbsorption, ordDefault);
@@ -725,13 +734,13 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForNeutron()
   fNeutronInelastic.RegisterMe(fHENeutronModel);
   pManager->AddDiscreteProcess(&fNeutronInelastic);
 
-  //fNeutronFissionModel = new G4LFission();
-  //fNeutronFission.RegisterMe(fNeutronFissionModel);
-  //pManager->AddDiscreteProcess(&NeutronFission);
+  fNeutronFissionModel = new G4LFission();
+  fNeutronFission.RegisterMe(fNeutronFissionModel);
+  pManager->AddDiscreteProcess(&fNeutronFission);
 
-  //fNeutronCaptureModel = new G4LCapture();
-  //fNeutronCapture.RegisterMe(fNeutronCaptureModel);
-  //pManager->AddDiscreteProcess(&fNeutronCapture);
+  fNeutronCaptureModel = new G4LCapture();
+  fNeutronCapture.RegisterMe(fNeutronCaptureModel);
+  pManager->AddDiscreteProcess(&fNeutronCapture);
 
   // map to G3 controls
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
@@ -1075,53 +1084,6 @@ void TG4PhysicsConstructorHadron::ConstructHadProcessForAntiOmegaMinus()
   mcMap->Add(&fAntiOmegaMinusInelastic, kPHInhelastic); 
 }
 
-//_____________________________________________________________________________
-void TG4PhysicsConstructorHadron::ConstructHadProcessForOther()
-{
-// Construct processes for other hadrons.
-// ---
-
-  theParticleIterator->reset();
-  while( (*theParticleIterator)() ){
-    G4ParticleDefinition* particle = theParticleIterator->value();
-    G4ProcessManager* pManager = particle->GetProcessManager();
-    G4int nofAlongStepProcesses 
-      = pManager->GetAlongStepProcessVector()->length();
-
-    if ( !particle->IsShortLived()       &&
-         particle->GetPDGCharge() != 0.0 &&
-         nofAlongStepProcesses == 1      && 
-         particle->GetParticleName() != "chargedgeantino") {
-	
-      // create processes
-      G4VProcess* aMultipleScattering = new G4MultipleScattering();
-      G4VProcess* anIonisation = new G4hIonisation();
-
-      // add processes
-      pManager->AddProcess(anIonisation, ordInActive, 2, 2);
-      pManager->AddProcess(aMultipleScattering);
-
-      // set ordering
-      pManager->SetProcessOrdering(aMultipleScattering, idxAlongStep, 1);
-      pManager->SetProcessOrdering(aMultipleScattering, idxPostStep, 1);
-
-      // map to G3 controls
-      TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
-      controlMap->Add(anIonisation, kLOSS); 
-      controlMap->Add(aMultipleScattering, kMULS); 
-
-      // map to TMCProcess codes
-      TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
-      mcMap->Add(anIonisation, kPEnergyLoss); 
-      mcMap->Add(aMultipleScattering, kPMultipleScattering); 
-      
-      // keep for deleting 
-      fOtherProcesses.push_back(aMultipleScattering);
-      fOtherProcesses.push_back(anIonisation);
-    }
-  }    
-}
-
 
 // protected methods
 
@@ -1149,7 +1111,20 @@ void TG4PhysicsConstructorHadron::ConstructProcess()
 {
 // Construct all hadronic processes.
 // ---
+
+  G4cout << G4endl;
+  G4cout << "###" << G4endl;
+  G4cout << "You are using the Geant4 VMC hadronics physics" << G4endl;
+  G4cout << "equivalent to ExN04HadronPhysics from Geant4 (version 6.0)" << G4endl; 
+  G4cout << "Note that this hadronic physics list is not optimized for any particular usage." << G4endl;
+  G4cout << "If you wish to have a starting point tailored for a particular area of work," << G4endl;
+  G4cout << "please use one of the available physics lists by use-case." << G4endl;
+  G4cout << " More information can also be found from the Geant4 HyperNews." << G4endl;
+  G4cout << "###" << G4endl;
+  G4cout << G4endl;
+
   if (fSetHadron) {
+
     // Elastic process
     fElasticModel = new G4LElastic();
     fElasticProcess.RegisterMe(fElasticModel);
@@ -1177,7 +1152,6 @@ void TG4PhysicsConstructorHadron::ConstructProcess()
     ConstructHadProcessForAntiXiZero();
     ConstructHadProcessForOmegaMinus();
     ConstructHadProcessForAntiOmegaMinus();
-    ConstructHadProcessForOther();
   }  
 
   if (fSetEM) {

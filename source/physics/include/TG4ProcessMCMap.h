@@ -1,4 +1,4 @@
-// $Id: TG4ProcessMCMap.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
+// $Id: TG4ProcessMCMap.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -11,7 +11,7 @@
 #ifndef TG4_PROCESS_MC_MAP_H
 #define TG4_PROCESS_MC_MAP_H
 
-#include <g4std/map>
+#include <map>
 #include <globals.hh>
 
 #include <Rtypes.h>
@@ -21,7 +21,7 @@ class G4VProcess;
 
 class TG4ProcessMCMap
 {
-  typedef G4std::map<G4String, TMCProcess, G4std::less<G4String> >  Map;
+  typedef std::map<G4String, TMCProcess, std::less<G4String> >  Map;
   typedef Map::iterator        MapIterator;
   typedef Map::const_iterator  MapConstIterator;
 

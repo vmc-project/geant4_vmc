@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorIon.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4PhysicsConstructorIon.cxx,v 1.2 2002/11/22 13:29:22 brun Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -7,7 +7,7 @@
 // ------------------------------
 // See the class description in the header file.
 // According to ExN04IonPhysics.cc,v 1.1.2.1 2001/06/28 19:07:37 gunter Exp 
-// GEANT4 tag Name: geant4-03-02
+// GEANT4 tag Name: geant4-06-00
 
 #include "TG4PhysicsConstructorIon.h"
 #include "TG4ProcessControlMap.h"
@@ -175,22 +175,18 @@ void TG4PhysicsConstructorIon::ConstructEMProcessForGenericIon()
 
   // add process
   G4ProcessManager* pManager = G4GenericIon::GenericIon()->GetProcessManager();
-  pManager->AddProcess(&fIonIonisation, ordInActive, 2, 2);
-  pManager->AddProcess(&fIonMultipleScattering);
-
-  // set ordering
-  pManager->SetProcessOrdering(&fIonMultipleScattering, idxAlongStep,  1);
-  pManager->SetProcessOrdering(&fIonMultipleScattering, idxPostStep,  1);
+  pManager->AddProcess(&fIonMultipleScattering, -1, 1, 1);
+  pManager->AddProcess(&fIonIonisation,         -1, 2, 2);
 
   // map to G3 controls
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
-  controlMap->Add(&fIonIonisation, kLOSS); 
   controlMap->Add(&fIonMultipleScattering, kMULS); 
+  controlMap->Add(&fIonIonisation, kLOSS); 
 
   // map to TMCProcess codes
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
-  mcMap->Add(&fIonIonisation, kPEnergyLoss); 
   mcMap->Add(&fIonMultipleScattering, kPMultipleScattering); 
+  mcMap->Add(&fIonIonisation, kPEnergyLoss); 
 }
 
 //_____________________________________________________________________________
@@ -201,13 +197,8 @@ void TG4PhysicsConstructorIon::ConstructEMProcessForDeuteron()
 
   // add process
   G4ProcessManager* pManager = G4Deuteron::Deuteron()->GetProcessManager();
-
-  pManager->AddProcess(&fDeuteronIonisation, ordInActive, 2, 2);
-  pManager->AddProcess(&fDeuteronMultipleScattering);
-
-  // set ordering
-  pManager->SetProcessOrdering(&fDeuteronMultipleScattering, idxAlongStep,  1);
-  pManager->SetProcessOrdering(&fDeuteronMultipleScattering, idxPostStep,  1);
+  pManager->AddProcess(&fDeuteronMultipleScattering, -1, 1, 1);
+  pManager->AddProcess(&fDeuteronIonisation,         -1, 2, 2);
 
   // map to G3 controls
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
@@ -228,23 +219,18 @@ void TG4PhysicsConstructorIon::ConstructEMProcessForTriton()
 
   // add process
   G4ProcessManager* pManager = G4Triton::Triton()->GetProcessManager();
-
-  pManager->AddProcess(&fTritonIonisation, ordInActive, 2, 2);
-  pManager->AddProcess(&fTritonMultipleScattering);
-
-  // set ordering
-  pManager->SetProcessOrdering(&fTritonMultipleScattering, idxAlongStep,  1);
-  pManager->SetProcessOrdering(&fTritonMultipleScattering, idxPostStep,  1);
+  pManager->AddProcess(&fTritonMultipleScattering, -1, 1, 1);
+  pManager->AddProcess(&fTritonIonisation,         -1, 2, 2);
 
   // map to G3 controls
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
-  controlMap->Add(&fTritonIonisation, kLOSS); 
   controlMap->Add(&fTritonMultipleScattering, kMULS); 
+  controlMap->Add(&fTritonIonisation, kLOSS); 
 
   // map to TMCProcess codes
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
-  mcMap->Add(&fTritonIonisation, kPEnergyLoss); 
   mcMap->Add(&fTritonMultipleScattering, kPMultipleScattering); 
+  mcMap->Add(&fTritonIonisation, kPEnergyLoss); 
 }
 
 //_____________________________________________________________________________
@@ -255,23 +241,18 @@ void TG4PhysicsConstructorIon::ConstructEMProcessForAlpha()
 
   // add process
   G4ProcessManager* pManager = G4Alpha::Alpha()->GetProcessManager();
-
-  pManager->AddProcess(&fAlphaIonisation, ordInActive, 2, 2);
-  pManager->AddProcess(&fAlphaMultipleScattering);
-
-  // set ordering
-  pManager->SetProcessOrdering(&fAlphaMultipleScattering, idxAlongStep,  1);
-  pManager->SetProcessOrdering(&fAlphaMultipleScattering, idxPostStep,  1);
+  pManager->AddProcess(&fAlphaMultipleScattering, -1, 1, 1);
+  pManager->AddProcess(&fAlphaIonisation,         -1, 2, 2);
 
   // map to G3 controls
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
-  controlMap->Add(&fAlphaIonisation, kLOSS); 
   controlMap->Add(&fAlphaMultipleScattering, kMULS); 
+  controlMap->Add(&fAlphaIonisation, kLOSS); 
 
   // map to TMCProcess codes
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
-  mcMap->Add(&fAlphaIonisation, kPEnergyLoss); 
   mcMap->Add(&fAlphaMultipleScattering, kPMultipleScattering); 
+  mcMap->Add(&fAlphaIonisation, kPEnergyLoss); 
 }
 
 //_____________________________________________________________________________
@@ -282,22 +263,18 @@ void TG4PhysicsConstructorIon::ConstructEMProcessForHe3()
 
   // add process
   G4ProcessManager* pManager = G4He3::He3()->GetProcessManager();
-  pManager->AddProcess(&fHe3Ionisation, ordInActive, 2, 2);
-  pManager->AddProcess(&fHe3MultipleScattering);
-
-  // set ordering
-  pManager->SetProcessOrdering(&fHe3MultipleScattering, idxAlongStep,  1);
-  pManager->SetProcessOrdering(&fHe3MultipleScattering, idxPostStep,  1);
+  pManager->AddProcess(&fHe3MultipleScattering, -1, 1, 1);
+  pManager->AddProcess(&fHe3Ionisation,         -1, 2, 2);
 
   // map to G3 controls
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
-  controlMap->Add(&fHe3Ionisation, kLOSS); 
   controlMap->Add(&fHe3MultipleScattering, kMULS); 
+  controlMap->Add(&fHe3Ionisation, kLOSS); 
 
   // map to TMCProcess codes
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
-  mcMap->Add(&fHe3Ionisation, kPEnergyLoss); 
   mcMap->Add(&fHe3MultipleScattering, kPMultipleScattering); 
+  mcMap->Add(&fHe3Ionisation, kPEnergyLoss); 
 }
 
 

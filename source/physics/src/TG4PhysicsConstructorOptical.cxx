@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorOptical.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4PhysicsConstructorOptical.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -6,7 +6,7 @@
 // Class TG4PhysicsConstructorOptical
 // ----------------------------------
 // See the class description in the header file.
-// According to ExN06PhysicsList (geant4 1.1)
+// According to ExN06PhysicsList (geant4 6.0)
 
 #include "TG4PhysicsConstructorOptical.h"
 #include "TG4ProcessControlMap.h"
@@ -15,20 +15,33 @@
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
 #include <G4Cerenkov.hh>
+#include <G4Scintillation.hh>
 #include <G4OpAbsorption.hh>
 #include <G4OpRayleigh.hh>
 #include <G4OpBoundaryProcess.hh>
 
 //_____________________________________________________________________________
 TG4PhysicsConstructorOptical::TG4PhysicsConstructorOptical(const G4String& name)
-  : TG4VPhysicsConstructor(name) {
+  : TG4VPhysicsConstructor(name),
+    fCerenkovProcess(0),
+    fScintillationProcess(0),
+    fAbsorptionProcess(0),
+    fRayleighScatteringProcess(0),
+    fBoundaryProcess(0) 
+{
 //
 }
 
 //_____________________________________________________________________________
 TG4PhysicsConstructorOptical::TG4PhysicsConstructorOptical(G4int verboseLevel,
 							   const G4String& name)
-  : TG4VPhysicsConstructor(name, verboseLevel) {
+  : TG4VPhysicsConstructor(name, verboseLevel),
+    fCerenkovProcess(0),
+    fScintillationProcess(0),
+    fAbsorptionProcess(0),
+    fRayleighScatteringProcess(0),
+    fBoundaryProcess(0) 
+{
 //
 }
 
@@ -57,60 +70,70 @@ void TG4PhysicsConstructorOptical::ConstructProcess()
 // (geant4 1.1)
 // ---
 
-  G4Cerenkov*     theCerenkovProcess = new G4Cerenkov("Cerenkov");
-  G4OpAbsorption* theAbsorptionProcess = new G4OpAbsorption();
-  G4OpRayleigh*   theRayleighScatteringProcess = new G4OpRayleigh();
-  G4OpBoundaryProcess* theBoundaryProcess = new G4OpBoundaryProcess();
+  fCerenkovProcess = new G4Cerenkov("Cerenkov");
+  fScintillationProcess = new G4Scintillation("Scintillation");
+  fAbsorptionProcess = new G4OpAbsorption();
+  fRayleighScatteringProcess = new G4OpRayleigh();
+  fBoundaryProcess = new G4OpBoundaryProcess();
 
-  theCerenkovProcess->DumpPhysicsTable();
-  //theAbsorptionProcess->DumpPhysicsTable();
-  //theRayleighScatteringProcess->DumpPhysicsTable();
+  //fCerenkovProcess->DumpPhysicsTable();
+  //fAbsorptionProcess->DumpPhysicsTable();
+  //fRayleighScatteringProcess->DumpPhysicsTable();
 
   // add verbose 
-  theCerenkovProcess->SetVerboseLevel(0);
-  theAbsorptionProcess->SetVerboseLevel(0);
-  theRayleighScatteringProcess->SetVerboseLevel(0);
-  theBoundaryProcess->SetVerboseLevel(0);
+  fCerenkovProcess->SetVerboseLevel(0);
+  fAbsorptionProcess->SetVerboseLevel(0);
+  fRayleighScatteringProcess->SetVerboseLevel(0);
+  fBoundaryProcess->SetVerboseLevel(0);
 
-  G4int maxNumPhotons = 300;
+  fCerenkovProcess->SetTrackSecondariesFirst(true);
+  fCerenkovProcess->SetMaxNumPhotonsPerStep(300);
 
-  theCerenkovProcess->SetTrackSecondariesFirst(true);
-  theCerenkovProcess->SetMaxNumPhotonsPerStep(maxNumPhotons);
+  fScintillationProcess->SetScintillationYieldFactor(1.);
+  fScintillationProcess->SetTrackSecondariesFirst(true);
 
   //G4OpticalSurfaceModel themodel = unified;   
   // model from GEANT3
   G4OpticalSurfaceModel themodel = glisur;
-  theBoundaryProcess->SetModel(themodel);
+  fBoundaryProcess->SetModel(themodel);
 
   theParticleIterator->reset();
   while( (*theParticleIterator)() ){
     G4ParticleDefinition* particle = theParticleIterator->value();
     G4ProcessManager* processManager = particle->GetProcessManager();
     G4String particleName = particle->GetParticleName();
-    if (theCerenkovProcess->IsApplicable(*particle)) {
-      processManager->AddContinuousProcess(theCerenkovProcess);
+    if (fCerenkovProcess->IsApplicable(*particle)) {
+      processManager->AddContinuousProcess(fCerenkovProcess);
+    }
+    if (fScintillationProcess->IsApplicable(*particle)) {
+      processManager->AddProcess(fScintillationProcess);
+      processManager->SetProcessOrderingToLast(fScintillationProcess, idxAtRest);
+      processManager->SetProcessOrderingToLast(fScintillationProcess, idxPostStep);
     }
     if (particleName == "opticalphoton") {
       G4cout << " AddDiscreteProcess to OpticalPhoton " << G4endl;
-      processManager->AddDiscreteProcess(theAbsorptionProcess);
-      processManager->AddDiscreteProcess(theRayleighScatteringProcess);
-      processManager->AddDiscreteProcess(theBoundaryProcess);
+      processManager->AddDiscreteProcess(fAbsorptionProcess);
+      processManager->AddDiscreteProcess(fRayleighScatteringProcess);
+      processManager->AddDiscreteProcess(fBoundaryProcess);
     }
   }
 
   // map to G3 controls
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
-  controlMap->Add(theCerenkovProcess, kCKOV); 
-  controlMap->Add(theAbsorptionProcess, kLABS); 
-  controlMap->Add(theRayleighScatteringProcess, kRAYL); 
-  controlMap->Add(theBoundaryProcess, kLABS); 
+  controlMap->Add(fCerenkovProcess, kCKOV); 
+  controlMap->Add(fScintillationProcess, kNoG3Controls); 
+  controlMap->Add(fAbsorptionProcess, kLABS); 
+  controlMap->Add(fRayleighScatteringProcess, kRAYL); 
+  controlMap->Add(fBoundaryProcess, kLABS); 
 
   // map to TMCProcess codes
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
-  mcMap->Add(theCerenkovProcess, kPCerenkov); 
-  mcMap->Add(theAbsorptionProcess, kPLightAbsorption); 
-  mcMap->Add(theRayleighScatteringProcess, kPRayleigh); 
-  mcMap->Add(theBoundaryProcess, kPLightScattering); 
+  mcMap->Add(fCerenkovProcess, kPCerenkov); 
+  //mcMap->Add(fScintillationProcess, kPScintillation); 
+  mcMap->Add(fScintillationProcess, kPNoProcess); 
+  mcMap->Add(fAbsorptionProcess, kPLightAbsorption); 
+  mcMap->Add(fRayleighScatteringProcess, kPRayleigh); 
+  mcMap->Add(fBoundaryProcess, kPLightScattering); 
 
   if (VerboseLevel() > 0) {
     G4cout << "### " << namePhysics << " physics constructed." << G4endl;

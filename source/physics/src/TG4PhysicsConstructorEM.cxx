@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorEM.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4PhysicsConstructorEM.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -7,7 +7,7 @@
 // -----------------------------
 // See the class description in the header file.
 // According to ExN04EMPhysics.cc,v 1.1.2.1 2001/06/28 19:07:37 gunter Exp 
-// GEANT4 tag Name: geant4-03-02
+// GEANT4 tag Name: geant4-06-00
 
 #include "TG4PhysicsConstructorEM.h"
 #include "TG4ProcessControlMap.h"
@@ -75,25 +75,21 @@ void TG4PhysicsConstructorEM::ConstructProcessForElectron()
 
   // add process
   G4ProcessManager* pManager = G4Electron::Electron()->GetProcessManager();
-  pManager->AddDiscreteProcess(&fElectronBremsStrahlung); 
-  pManager->AddProcess(&fElectronIonisation, ordInActive, 2, 2);
-  pManager->AddProcess(&fElectronMultipleScattering);
-
-  // set ordering
-  pManager->SetProcessOrdering(&fElectronMultipleScattering, idxAlongStep,  1);
-  pManager->SetProcessOrdering(&fElectronMultipleScattering, idxPostStep,  1);
+  pManager->AddProcess(&fElectronMultipleScattering, -1, 1, 1);
+  pManager->AddProcess(&fElectronIonisation,         -1, 2, 2);
+  pManager->AddProcess(&fElectronBremsStrahlung,     -1, 3, 3);  
 
   // map to G3 controls
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
-  controlMap->Add(&fElectronBremsStrahlung, kBREM); 
-  controlMap->Add(&fElectronIonisation, kLOSS); 
   controlMap->Add(&fElectronMultipleScattering, kMULS); 
+  controlMap->Add(&fElectronIonisation, kLOSS); 
+  controlMap->Add(&fElectronBremsStrahlung, kBREM); 
 
   // map to TMCProcess codes
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
-  mcMap->Add(&fElectronBremsStrahlung, kPBrem); 
   mcMap->Add(&fElectronMultipleScattering, kPMultipleScattering); 
   mcMap->Add(&fElectronIonisation, kPEnergyLoss); 
+  mcMap->Add(&fElectronBremsStrahlung, kPBrem); 
 }
 
 //_____________________________________________________________________________
@@ -104,29 +100,24 @@ void TG4PhysicsConstructorEM::ConstructProcessForPositron()
   
   // add processes
   G4ProcessManager * pManager = G4Positron::Positron()->GetProcessManager();
-  pManager->AddDiscreteProcess(&fPositronBremsStrahlung);
-  pManager->AddDiscreteProcess(&fAnnihilation);
-  pManager->AddRestProcess(&fAnnihilation);
-  pManager->AddProcess(&fPositronIonisation, ordInActive,2, 2);
-  pManager->AddProcess(&fPositronMultipleScattering);
-
-  // set ordering
-  pManager->SetProcessOrdering(&fPositronMultipleScattering, idxAlongStep,  1);
-  pManager->SetProcessOrdering(&fPositronMultipleScattering, idxPostStep,  1);
+  pManager->AddProcess(&fPositronMultipleScattering, -1, 1, 1);
+  pManager->AddProcess(&fPositronIonisation,         -1, 2, 2);
+  pManager->AddProcess(&fPositronBremsStrahlung,     -1, 3, 3);  
+  pManager->AddProcess(&fAnnihilation,                0,-1, 4);  
 
   // map to G3 controls
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
+  controlMap->Add(&fPositronMultipleScattering, kMULS); 
+  controlMap->Add(&fPositronIonisation, kLOSS); 
   controlMap->Add(&fPositronBremsStrahlung, kBREM); 
   controlMap->Add(&fAnnihilation, kANNI); 
-  controlMap->Add(&fPositronIonisation, kLOSS); 
-  controlMap->Add(&fPositronMultipleScattering, kMULS); 
 
   // map to TMCProcess codes
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
+  mcMap->Add(&fPositronMultipleScattering, kPMultipleScattering); 
+  mcMap->Add(&fPositronIonisation, kPEnergyLoss); 
   mcMap->Add(&fPositronBremsStrahlung, kPBrem); 
   mcMap->Add(&fAnnihilation, kPAnnihilation); 
-  mcMap->Add(&fPositronIonisation, kPEnergyLoss); 
-  mcMap->Add(&fPositronMultipleScattering, kPMultipleScattering); 
 }
 
 // protected methods

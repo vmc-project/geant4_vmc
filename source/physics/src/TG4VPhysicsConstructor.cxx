@@ -1,4 +1,4 @@
-// $Id: TG4VPhysicsConstructor.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4VPhysicsConstructor.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -7,7 +7,7 @@
 // ------------------------------
 // See the class description in the header file.
 // According to ExN04IonPhysics.cc,v 1.1.2.1 2001/06/28 19:07:37 gunter Exp 
-// GEANT4 tag Name: geant4-03-02
+// GEANT4 tag Name: geant4-06-00
 
 #include "TG4VPhysicsConstructor.h"
 #include "TG4Globals.h"

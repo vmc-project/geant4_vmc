@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorMuon.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4PhysicsConstructorMuon.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -7,7 +7,7 @@
 // -----------------------------
 // See the class description in the header file.
 // According to ExN04MuonPhysics.cc,v 1.2.2.1 2001/06/28 19:07:37 gunter Exp 
-// GEANT4 tag Name: geant4-03-02
+// GEANT4 tag Name: geant4-06-00
 
 #include "TG4PhysicsConstructorMuon.h"
 #include "TG4ProcessControlMap.h"
@@ -59,29 +59,25 @@ void TG4PhysicsConstructorMuon::ConstructProcessForMuonPlus()
   
   // add processes
   G4ProcessManager* pManager = G4MuonPlus::MuonPlus()->GetProcessManager();
-  pManager->AddProcess(&fMuPlusIonisation, ordInActive,2, 2);
-  pManager->AddDiscreteProcess(&fMuPlusBremsstrahlung);
-  pManager->AddDiscreteProcess(&fMuPlusPairProduction);
-  pManager->AddProcess(&fMuPlusMultipleScattering);
-
-  // set ordering
-  pManager->SetProcessOrdering(&fMuPlusMultipleScattering, idxAlongStep,  1);
-  pManager->SetProcessOrdering(&fMuPlusMultipleScattering, idxPostStep,  1);
+  pManager->AddProcess(&fMuPlusMultipleScattering,-1,  1, 1);
+  pManager->AddProcess(&fMuPlusIonisation,        -1,  2, 2);
+  pManager->AddProcess(&fMuPlusBremsstrahlung,    -1,  3, 3);
+  pManager->AddProcess(&fMuPlusPairProduction,    -1,  4, 4);
 
   // map to G3 controls
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
+  controlMap->Add(&fMuPlusMultipleScattering, kMULS); 
   controlMap->Add(&fMuPlusIonisation, kLOSS); 
   controlMap->Add(&fMuPlusBremsstrahlung, kBREM); 
   controlMap->Add(&fMuPlusPairProduction, kPAIR); 
-  controlMap->Add(&fMuPlusMultipleScattering, kMULS); 
 
 
   // map to TMCProcess codes
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
+  mcMap->Add(&fMuPlusMultipleScattering, kPMultipleScattering); 
   mcMap->Add(&fMuPlusIonisation, kPEnergyLoss); 
   mcMap->Add(&fMuPlusBremsstrahlung, kPBrem); 
   mcMap->Add(&fMuPlusPairProduction, kPPair); 
-  mcMap->Add(&fMuPlusMultipleScattering, kPMultipleScattering); 
 }  
 
 //_____________________________________________________________________________
@@ -92,30 +88,27 @@ void TG4PhysicsConstructorMuon::ConstructProcessForMuonMinus()
   
   // add processes & set ordering
   G4ProcessManager* pManager = G4MuonMinus::MuonMinus()->GetProcessManager();
-  pManager->AddProcess(&fMuMinusIonisation, ordInActive,2, 2);
-  pManager->AddDiscreteProcess(&fMuMinusBremsstrahlung);
-  pManager->AddDiscreteProcess(&fMuMinusPairProduction);
-  pManager->AddProcess(&fMuMinusMultipleScattering);
-
-  pManager->SetProcessOrdering(&fMuMinusMultipleScattering, idxAlongStep,  1);
-  pManager->SetProcessOrdering(&fMuMinusMultipleScattering, idxPostStep,  1);
+  pManager->AddProcess(&fMuMinusMultipleScattering,-1,  1, 1);
+  pManager->AddProcess(&fMuMinusIonisation,        -1,  2, 2);
+  pManager->AddProcess(&fMuMinusBremsstrahlung,    -1,  3, 3);
+  pManager->AddProcess(&fMuMinusPairProduction,    -1,  4, 4);
 
   pManager->AddRestProcess(&fMuMinusCaptureAtRest);
 
   // map to G3 controls
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
+  controlMap->Add(&fMuMinusMultipleScattering, kMULS); 
   controlMap->Add(&fMuMinusIonisation, kLOSS); 
   controlMap->Add(&fMuMinusBremsstrahlung, kBREM); 
   controlMap->Add(&fMuMinusPairProduction, kPAIR); 
-  controlMap->Add(&fMuMinusMultipleScattering, kMULS); 
   controlMap->Add(&fMuMinusCaptureAtRest, kMUNU); 
 
   // map to TMCProcess codes
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
+  mcMap->Add(&fMuMinusMultipleScattering, kPMultipleScattering); 
   mcMap->Add(&fMuMinusIonisation, kPEnergyLoss); 
   mcMap->Add(&fMuMinusBremsstrahlung, kPBrem); 
   mcMap->Add(&fMuMinusPairProduction, kPPair); 
-  mcMap->Add(&fMuMinusMultipleScattering, kPMultipleScattering); 
   mcMap->Add(&fMuMinusCaptureAtRest, kPMuonNuclear); 
 }  
 
@@ -127,23 +120,19 @@ void TG4PhysicsConstructorMuon::ConstructProcessForTauPlus()
   
   // add processes
   G4ProcessManager* pManager = G4TauPlus::TauPlus()->GetProcessManager();
-  pManager->AddProcess(&fTauPlusIonisation, ordInActive,2, 2);
-  pManager->AddProcess(&fTauPlusMultipleScattering);
-
-  // set ordering
-  pManager->SetProcessOrdering(&fTauPlusMultipleScattering, idxAlongStep,  1);
-  pManager->SetProcessOrdering(&fTauPlusMultipleScattering, idxPostStep,  1);
+  pManager->AddProcess(&fTauPlusMultipleScattering, -1, 1, 1);
+  pManager->AddProcess(&fTauPlusIonisation,         -1, 2, 2);
 
   // map to G3 controls
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
-  controlMap->Add(&fTauPlusIonisation, kLOSS); 
   controlMap->Add(&fTauPlusMultipleScattering, kMULS); 
+  controlMap->Add(&fTauPlusIonisation, kLOSS); 
 
 
   // map to TMCProcess codes
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
-  mcMap->Add(&fTauPlusIonisation, kPEnergyLoss); 
   mcMap->Add(&fTauPlusMultipleScattering, kPMultipleScattering); 
+  mcMap->Add(&fTauPlusIonisation, kPEnergyLoss); 
 }  
 
 //_____________________________________________________________________________
@@ -154,23 +143,18 @@ void TG4PhysicsConstructorMuon::ConstructProcessForTauMinus()
   
   // add processes
   G4ProcessManager* pManager = G4TauMinus::TauMinus()->GetProcessManager();
-  pManager->AddProcess(&fTauMinusIonisation, ordInActive,2, 2);
-  pManager->AddProcess(&fTauMinusMultipleScattering);
-
-  // set ordering
-  pManager->SetProcessOrdering(&fTauMinusMultipleScattering, idxAlongStep,  1);
-  pManager->SetProcessOrdering(&fTauMinusMultipleScattering, idxPostStep,  1);
+  pManager->AddProcess(&fTauMinusMultipleScattering, -1, 1, 1);
+  pManager->AddProcess(&fTauMinusIonisation,         -1, 2, 2);
 
   // map to G3 controls
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
-  controlMap->Add(&fTauMinusIonisation, kLOSS); 
   controlMap->Add(&fTauMinusMultipleScattering, kMULS); 
-
+  controlMap->Add(&fTauMinusIonisation, kLOSS); 
 
   // map to TMCProcess codes
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
-  mcMap->Add(&fTauMinusIonisation, kPEnergyLoss); 
   mcMap->Add(&fTauMinusMultipleScattering, kPMultipleScattering); 
+  mcMap->Add(&fTauMinusIonisation, kPEnergyLoss); 
 }  
 
 

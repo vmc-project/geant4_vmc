@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorIon.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
+// $Id: TG4PhysicsConstructorIon.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -6,7 +6,7 @@
 // Class TG4PhysicsConstructorIon
 // -----------------------------
 // Constructor of physics for ions.
-// According to ExN04IonPhysics.hh, GEANT4 tag Name: geant4-03-02
+// According to ExN04IonPhysics.hh, GEANT4 tag Name: geant4-06-00
 
 #ifndef TG4_PHYSICS_CONSTRUCTOR_ION_H
 #define TG4_PHYSICS_CONSTRUCTOR_ION_H

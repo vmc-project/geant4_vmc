@@ -1,4 +1,4 @@
-// $Id: TG4ProcessMCMap.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4ProcessMCMap.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -12,7 +12,7 @@
 #include "TG4Globals.h"
 
 #include <G4VProcess.hh>
-#include "g4std/iomanip"
+#include <iomanip>
 #include "globals.hh"
 
 TG4ProcessMCMap* TG4ProcessMCMap::fgInstance = 0;
@@ -108,7 +108,7 @@ void TG4ProcessMCMap::PrintAll() const
     for (MapConstIterator i=fMap.begin(); i != fMap.end(); i++) {
       G4String processName = (*i).first;
       TMCProcess mcProcess = (*i).second;
-      G4cout << "Map element " << G4std::setw(3) << counter++ << "   " 
+      G4cout << "Map element " << std::setw(3) << counter++ << "   " 
              << processName << "   " 
 	     << TMCProcessName[mcProcess]
 	     << G4endl;

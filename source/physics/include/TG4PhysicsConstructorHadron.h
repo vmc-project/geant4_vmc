@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorHadron.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
+// $Id: TG4PhysicsConstructorHadron.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -6,14 +6,14 @@
 // Class TG4PhysicsConstructorHadron
 // ---------------------------------
 // Constructor of hadron physics.
-// According to ExN04HadronPhysics.hh, GEANT4 tag Name: geant4-03-02
+// According to ExN04HadronPhysics.hh, GEANT4 tag Name: geant4-06-00
 
 #ifndef TG4_PHYSICS_CONSTRUCTOR_HADRON_H
 #define TG4_PHYSICS_CONSTRUCTOR_HADRON_H
 
 #include "TG4VPhysicsConstructor.h"
 
-#include <g4std/vector>
+#include <vector>
 #include <globals.hh>
 
 #include <G4MultipleScattering.hh>
@@ -120,9 +120,19 @@
 #include <G4KaonMinusAbsorptionAtRest.hh>
 #endif
 
+// quark gluon string model with chips afterburner.
+#include <G4TheoFSGenerator.hh>
+#include <G4ExcitationHandler.hh>
+#include <G4PreCompoundModel.hh>
+#include <G4GeneratorPrecompoundInterface.hh>
+#include <G4QGSModel.hh>
+#include <G4QGSParticipants.hh>
+#include <G4QGSMFragmentation.hh>
+#include <G4ExcitedStringDecay.hh>
+
 class TG4PhysicsConstructorHadron: public TG4VPhysicsConstructor
 {
-  typedef G4std::vector<G4VProcess*>  ProcessVector;
+  typedef std::vector<G4VProcess*>  ProcessVector;
 
   public:
     TG4PhysicsConstructorHadron(const G4String& name = "Hadron");
@@ -153,14 +163,12 @@ class TG4PhysicsConstructorHadron: public TG4VPhysicsConstructor
          // Pi + 
     G4PionPlusInelasticProcess fPionPlusInelastic;      //pi+ inel process
     G4LEPionPlusInelastic*     fLEPionPlusModel;        //pi+ LE inel model
-    G4HEPionPlusInelastic*     fHEPionPlusModel;        //pi+ HE inel model
     G4MultipleScattering       fPionPlusMult;           //pi+ msc
     G4hIonisation              fPionPlusIonisation;     //pi+ ionisation
 
          // Pi -
     G4PionMinusInelasticProcess  fPionMinusInelastic;   //pi- inel process
     G4LEPionMinusInelastic*      fLEPionMinusModel;     //pi- LE inel model
-    G4HEPionMinusInelastic*      fHEPionMinusModel;     //pi- HE inel model
     G4MultipleScattering         fPionMinusMult;        //pi- msc
     G4hIonisation                fPionMinusIonisation;  //pi- ionisation
 #ifdef TRIUMF_STOP_PIMINUS
@@ -168,6 +176,16 @@ class TG4PhysicsConstructorHadron: public TG4VPhysicsConstructor
 #else
     G4PiMinusAbsorptionAtRest    fPionMinusAbsorption;  //pi- absorption
 #endif
+
+         // Pi+ and Pi-
+   
+    G4TheoFSGenerator                fTheoModel;    // theo model
+    G4ExcitationHandler              fHandler;      // excitation handler
+    G4PreCompoundModel*              fPreEquilib;   // precompound model
+    G4GeneratorPrecompoundInterface  fCascade;      // cascade
+    G4QGSModel< G4QGSParticipants >  fStringModel;  // string model
+    G4QGSMFragmentation              fFragmentation;// fragmentation
+    G4ExcitedStringDecay *           fStringDecay;  // string decay
 
          // K + 
     G4KaonPlusInelasticProcess  fKaonPlusInelastic;     //kaon+ inel process
