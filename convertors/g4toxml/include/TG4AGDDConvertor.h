@@ -1,4 +1,4 @@
-// $Id: TG4AGDDConvertor.h,v 1.2 2003/12/18 13:25:11 brun Exp $
+// $Id: TG4AGDDConvertor.h,v 1.1 2004/04/26 17:05:04 brun Exp $
 //
 // Author: I. Hrivnacova, 27.07.2000 
 //
@@ -43,6 +43,7 @@ class TG4AGDDConvertor : public TG4VXMLConvertor
     virtual ~TG4AGDDConvertor();
 
     // methods
+    virtual void OpenDocument();
     virtual void OpenSection(const G4String& topVolume);
     virtual void OpenPositions() {} 
     virtual void OpenRotations() {}     
@@ -52,6 +53,7 @@ class TG4AGDDConvertor : public TG4VXMLConvertor
     virtual void OpenComposition(const G4String& name,
                                  const G4String& /*materialName*/);
 
+    virtual void CloseDocument();
     virtual void CloseSection(const G4String& /*topVolume*/);
     virtual void ClosePositions() {}
     virtual void CloseRotations() {}

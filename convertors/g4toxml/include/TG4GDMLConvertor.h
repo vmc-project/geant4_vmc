@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: TG4GDMLConvertor.h,v 1.1 2004/04/26 17:05:04 brun Exp $
 //
 // Author: I. Hrivnacova, 31.03.2004 
 //
@@ -42,6 +42,7 @@ class TG4GDMLConvertor : public TG4VXMLConvertor
     virtual ~TG4GDMLConvertor();
 
     // methods
+    virtual void OpenDocument();
     virtual void OpenSection(const G4String& topVolume);
     virtual void OpenPositions(); 
     virtual void OpenRotations();     
@@ -51,6 +52,7 @@ class TG4GDMLConvertor : public TG4VXMLConvertor
     virtual void OpenComposition(const G4String& name,
                                  const G4String& materialName);
 
+    virtual void CloseDocument();
     virtual void CloseSection(const G4String& topVolume);
     virtual void ClosePositions();
     virtual void CloseRotations();

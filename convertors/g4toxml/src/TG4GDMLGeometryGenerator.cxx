@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: TG4GDMLGeometryGenerator.cxx,v 1.1 2004/04/26 17:05:04 brun Exp $
 //
 // Author: I. Hrivnacova, 31.03.2004 
 //
@@ -72,11 +72,15 @@ void TG4GDMLGeometryGenerator::GenerateXMLGeometry(G4LogicalVolume* lv)
   // Set top volume name
   G4String topName = lv->GetName() + "_comp";
   
-  // Open XML file  
+  // Open XML file and document  
   OpenFile(fileName);
+  fConvertor->OpenDocument();
 
   // Generate volumes tree
   GenerateSection(lv);
+
+  // Close XML file and document  
+  fConvertor->CloseDocument();
   CloseFile();
   
   if (fVerboseLevel > 0) 

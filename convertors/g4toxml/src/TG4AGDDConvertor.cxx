@@ -1,4 +1,4 @@
-// $Id: TG4AGDDConvertor.cxx,v 1.3 2003/12/18 13:25:11 brun Exp $
+// $Id: TG4AGDDConvertor.cxx,v 1.1 2004/04/26 17:05:04 brun Exp $
 //
 // Author: I. Hrivnacova, 27.07.2000 
 //
@@ -615,6 +615,21 @@ void TG4AGDDConvertor::WriteNotSupportedSolid(G4String name,
 //
 
 //_____________________________________________________________________________
+void TG4AGDDConvertor::OpenDocument()
+{
+// Writes document opening.
+// Could be made customizable in future.
+// ---
+
+  // Opening xml document
+  fOutFile << "<?xml version=\"1.0\"?>" << G4endl
+           << "<!DOCTYPE AGDD SYSTEM \"AGDD.dtd\" >" << G4endl
+	   << G4endl
+	   << "<AGDD>" << G4endl
+	   << G4endl;
+}  
+
+//_____________________________________________________________________________
 void TG4AGDDConvertor::OpenSection(const G4String& topVolume)
 {
 // Writes section opening.
@@ -645,6 +660,11 @@ void TG4AGDDConvertor::OpenMaterials()
 // Writes materials opening.
 // ---
 			 
+  fOutFile << "<!-- materials are notgenerated --> "
+	   << G4endl 
+	   << G4endl;
+
+/*
   G4String element1 = "<materials  version = \"";
   G4String element2 = "            date    = \"";
   G4String element3 = "            author  = \"";
@@ -658,6 +678,7 @@ void TG4AGDDConvertor::OpenMaterials()
            << element3 << fAuthor  << quota << G4endl
            << element4 << fDtdVersion << quota
            << element5 << G4endl;
+*/
 }  
 
 //_____________________________________________________________________________
@@ -681,6 +702,19 @@ void TG4AGDDConvertor::OpenComposition(const G4String& name,
 }  
 
 //_____________________________________________________________________________
+void TG4AGDDConvertor::CloseDocument()
+{
+// Writes document closing.
+// ---
+
+  // define element
+  std::string element = "</AGDD>";
+
+  // write element
+  fOutFile << element << G4endl;
+}  
+
+//_____________________________________________________________________________
 void TG4AGDDConvertor::CloseSection(const G4String& /*topVolume*/)
 {
 // Writes section closing.
@@ -691,6 +725,7 @@ void TG4AGDDConvertor::CloseSection(const G4String& /*topVolume*/)
 
   // write element
   fOutFile << element
+	   << G4endl
 	   << G4endl;
 }  
 
@@ -700,12 +735,14 @@ void TG4AGDDConvertor::CloseMaterials()
 // Writes materials closing.
 // ---
 
+/*
   // define element
   G4String element = "</materials>";
 
   // write element
   fOutFile << element
 	   << G4endl;
+*/
 }  
 
 //_____________________________________________________________________________
@@ -853,7 +890,7 @@ void TG4AGDDConvertor::WritePosition(const G4String& name,
   SmartPut(fOutFile, fNW+1, fNP, z, "");
 
   fOutFile << element2
-	   << std::endl;
+	   << G4endl;
 }  
 
 //_____________________________________________________________________________
@@ -977,7 +1014,7 @@ void TG4AGDDConvertor::WritePositionWithRotation(
   SmartPut(fOutFile, 8, 5, xy, "; ");	   
   SmartPut(fOutFile, 8, 5, xz, "; ");	   
 
-  fOutFile << std::endl
+  fOutFile << G4endl
            << fIndention
            << element3;
 
@@ -985,7 +1022,7 @@ void TG4AGDDConvertor::WritePositionWithRotation(
   SmartPut(fOutFile, 8, 5, yy, "; ");	   
   SmartPut(fOutFile, 8, 5, yz, "; ");	   
 
-  fOutFile << std::endl
+  fOutFile << G4endl
 	   << fIndention
            << element3;
 
@@ -994,7 +1031,7 @@ void TG4AGDDConvertor::WritePositionWithRotation(
   SmartPut(fOutFile, 8, 5, zz, "");	   
 
   fOutFile << element4
-	   << std::endl;
+	   << G4endl;
 }  
 
 //_____________________________________________________________________________
