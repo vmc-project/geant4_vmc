@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4RunManager.cxx,v 1.2 2002/11/22 13:29:39 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -154,8 +154,8 @@ TG4RunManager::TG4RunManager(const TG4RunManager& right)
 TG4RunManager::~TG4RunManager() {
 //  
   delete fRunConfiguration;
-  delete fRunManager;
   delete fGeantUISession;
+  delete fRunManager;
   if (fRootUIOwner) delete fRootUISession;
 }
 
