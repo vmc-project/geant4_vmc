@@ -1,4 +1,4 @@
-// $Id: TG4Globals.h,v 1.2 2003/09/23 14:23:19 brun Exp $
+// $Id: TG4Globals.h,v 1.3 2003/12/18 13:28:08 brun Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -17,16 +17,18 @@
 #include <globals.hh>
 #include <vector>
 #include <set>
+#include <map>
 #include <G4RotationMatrix.hh>
 
 class G4Material;
 class G4Element;
 
 // basic types containers
-typedef std::vector<G4bool>   TG4boolVector;
-typedef std::vector<G4int>    TG4intVector;
-typedef std::vector<G4double> TG4doubleVector;
-typedef std::vector<G4String> TG4StringVector;
+typedef std::vector<G4bool>     TG4boolVector;
+typedef std::vector<G4int>      TG4intVector;
+typedef std::vector<G4double>   TG4doubleVector;
+typedef std::vector<G4String>   TG4StringVector;
+typedef std::map <G4int, G4int> TG4intMap;
 typedef std::set <G4String, std::less<G4String> > TG4StringSet; 
 
 class TG4Globals
