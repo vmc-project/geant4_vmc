@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.4 2004/03/26 11:05:05 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.5 2004/05/05 13:29:58 brun Exp $
 // Category: geometry
 //
 // Author: V. Berejnoi, I. Hrivnacova
@@ -744,7 +744,7 @@ void  TG4GeometryManager::Gspos(const char *vname, Int_t num,
    if (fWriteGeometry) 
      fOutputManager->WriteGspos(vname, num, vmoth, x, y, z, irot, vonly);
 
-   G4gspos(fGeometryServices->CutName(vname), num,
+   G4gspos(fGeometryServices->CutName(vname), num + 1,
            fGeometryServices->CutName(vmoth), x, y, z, irot, vonly);
 
    // register name in name map
@@ -767,7 +767,7 @@ void  TG4GeometryManager::Gsposp(const char *name, Int_t nr,
    if (fWriteGeometry) 
      fOutputManager->WriteGsposp(name, nr, mother, x, y, z, irot, konly, upar, np);
 
-   G4gsposp(fGeometryServices->CutName(name), nr, 
+   G4gsposp(fGeometryServices->CutName(name), nr + 1, 
             fGeometryServices->CutName(mother), x, y, z, irot, konly, 
              upar, np);
 
@@ -954,7 +954,7 @@ G4VPhysicalVolume* TG4GeometryManager::CreateG4Geometry()
   if (!fGeometryServices->GetWorld()) {
     G4VPhysicalVolume* world
        = new G4PVPlacement(0, G4ThreeVector(), first->GetName(), 
-                           first->GetLV(), 0, false, 0);
+                           first->GetLV(), 0, false, 1);
     fGeometryServices->SetWorld(world);			    
   }
 

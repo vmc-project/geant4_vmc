@@ -1,4 +1,4 @@
-// $Id: TG4SDServices.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4SDServices.h,v 1.2 2004/05/28 13:48:43 brun Exp $
 // Category: digits+hits
 //
 // Sensitive detectors services
@@ -46,6 +46,11 @@ class TG4SDServices
           // SDs
     Int_t NofSensitiveDetectors() const; 
     TG4SensitiveDetector* GetSensitiveDetector(G4VSensitiveDetector* sd) const;  
+
+          // Daughters
+    Int_t NofVolDaughters(const char* volName) const;
+    const char*  VolDaughterName(const char* volName, Int_t i) const;
+    Int_t        VolDaughterCopyNo(const char* volName, Int_t i) const;
 
   protected:
     TG4SDServices(const TG4SDServices& right);

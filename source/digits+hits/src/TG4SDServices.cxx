@@ -1,4 +1,4 @@
-// $Id: TG4SDServices.cxx,v 1.2 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4SDServices.cxx,v 1.3 2004/05/28 13:48:43 brun Exp $
 // Category: digits+hits
 //
 // See the class description in the header file.
@@ -206,5 +206,73 @@ TG4SensitiveDetector* TG4SDServices::GetSensitiveDetector(
   else 
     return tsd;  
 } 
+
+//_____________________________________________________________________________
+Int_t TG4SDServices::NofVolDaughters(const char* volName) const
+{
+// Returns number of daughter of the volume specified by name
+// ---
+  
+  G4int volId = GetVolumeID(volName);
+  G4LogicalVolume* lv = GetLogicalVolume(volId);
+  
+  if (!lv) return 0;
+  
+  return lv->GetNoDaughters();  
+}
+
+//_____________________________________________________________________________
+const char*  TG4SDServices::VolDaughterName(const char* volName, Int_t i) const
+{
+// Returns the name of the i-th daughter of the volume specified by name.
+// 
+
+  G4int volId = GetVolumeID(volName);
+  G4LogicalVolume* lv = GetLogicalVolume(volId);
+  
+  if (!lv) return "";
+
+  G4int nofDaughters = lv->GetNoDaughters();
+  if (i<0 || i>=nofDaughters) {
+     G4cerr << "Mother volume name: " << volName
+            << "  index: " << i << G4endl;
+     TG4Globals::Warning(
+      "TG4SDServices::VolDaughterName: Wrong index.");
+    return "";
+  }    
+ 
+  G4VPhysicalVolume* daughter = lv->GetDaughter(i);
+  G4String g4Name = daughter->GetLogicalVolume()->GetName();
+  
+  return TG4GeometryServices::Instance()->G4ToG3VolumeName(g4Name);
+  
+}
+
+//_____________________________________________________________________________
+Int_t  TG4SDServices::VolDaughterCopyNo(const char* volName, Int_t i) const
+{
+// Returns the copyNo of the i-th daughter of the volume specified by name.
+// 
+
+  G4int volId = GetVolumeID(volName);
+  G4LogicalVolume* lv = GetLogicalVolume(volId);
+
+  if (!lv) return 0;
+
+  G4int nofDaughters = lv->GetNoDaughters();
+  if (i<0 || i>=nofDaughters) {
+     G4cerr << "Mother volume name: " << volName
+            << "  index: " << i << G4endl;
+     TG4Globals::Warning(
+      "TG4SDServices::VolDaughterCopyNo: Wrong index.");
+    return 0;
+  }    
+ 
+  return lv->GetDaughter(i)->GetCopyNo();
+}
+
+ 
+
+
 
  

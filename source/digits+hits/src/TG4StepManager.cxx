@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.7 2004/05/19 19:44:12 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.8 2004/05/28 13:49:09 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -37,7 +37,8 @@ TG4StepManager::TG4StepManager()
     fStep(0),
     fStepStatus(kNormalStep),
     fTouchableHistory(0),
-    fSteppingManager(0)
+    fSteppingManager(0),
+    fVolPathBuffer()
 {
 // 
   if (fgInstance) {
@@ -131,14 +132,11 @@ void TG4StepManager::SetTLorentzVector(G4ThreeVector xyz, G4double t,
 }     				       
 
 //_____________________________________________________________________________
-G4VPhysicalVolume* TG4StepManager::GetCurrentOffPhysicalVolume(G4int off) const 
+const G4VTouchable* TG4StepManager::GetCurrentTouchable() const 
 {
-// Returns the physical volume of the off-th mother's
-// of the current volume.
+// Returns the current touchable.
 // ---
  
-  // Get current touchable
-  //
   const G4VTouchable* touchable; 
   if (fStepStatus == kNormalStep) {
 
@@ -173,6 +171,20 @@ G4VPhysicalVolume* TG4StepManager::GetCurrentOffPhysicalVolume(G4int off) const
     touchable = fTouchableHistory;
   }   
     
+  return touchable;
+}  
+
+//_____________________________________________________________________________
+G4VPhysicalVolume* TG4StepManager::GetCurrentOffPhysicalVolume(G4int off) const 
+{
+// Returns the physical volume of the off-th mother's
+// of the current volume.
+// ---
+ 
+  // Get current touchable
+  //
+  const G4VTouchable* touchable = GetCurrentTouchable(); 
+
   // Check touchable depth
   //
   if (touchable->GetHistoryDepth() < off) {
@@ -346,7 +358,7 @@ Int_t TG4StepManager::CurrentVolID(Int_t& copyNo) const
 // ---
 
   G4VPhysicalVolume* physVolume = GetCurrentPhysicalVolume(); 
-  copyNo = physVolume->GetCopyNo() + 1;
+  copyNo = physVolume->GetCopyNo();
 
   // sensitive detector ID
   TG4SDServices* sdServices = TG4SDServices::Instance();
@@ -365,14 +377,14 @@ Int_t TG4StepManager::CurrentVolOffID(Int_t off, Int_t&  copyNo) const
   G4VPhysicalVolume* mother = GetCurrentOffPhysicalVolume(off); 
 
   if (mother) {
-    copyNo = mother->GetCopyNo() + 1;
+    copyNo = mother->GetCopyNo();
 
     // sensitive detector ID
     TG4SDServices* sdServices = TG4SDServices::Instance();
     return sdServices->GetVolumeID(mother->GetLogicalVolume());
   }
   else {
-    copyNo = 0;
+    copyNo = -1;
     return 0;
   }  
 }
@@ -383,7 +395,8 @@ const char* TG4StepManager::CurrentVolName() const
 // Returns the current physical volume name.
 // ---
 
-  return GetCurrentPhysicalVolume()->GetName();
+  return  TG4GeometryServices::Instance()
+            ->G4ToG3VolumeName(GetCurrentPhysicalVolume()->GetName());
 }
 
 //_____________________________________________________________________________
@@ -396,10 +409,50 @@ const char* TG4StepManager::CurrentVolOffName(Int_t off) const
 
   G4VPhysicalVolume* mother = GetCurrentOffPhysicalVolume(off); 
 
-  if (mother) 
-    return mother->GetName();
+  if (mother) {
+    return TG4GeometryServices::Instance()
+             ->G4ToG3VolumeName(mother->GetName());
+  }	     
   else 
     return 0;
+}
+
+//_____________________________________________________________________________
+const char* TG4StepManager::CurrentVolPath()
+{ 
+// Returns the off-th mother's physical volume name.
+// ---
+
+  TG4GeometryServices* geometryServices = TG4GeometryServices::Instance();
+
+  // Get current touchable
+  const G4VTouchable* touchable = GetCurrentTouchable();
+  
+  // Check touchable depth
+  //
+  G4int depth = touchable->GetHistoryDepth();
+  
+  // Compose the path
+  //
+  fVolPathBuffer = "";
+  for (G4int i=0; i<depth; i++) {
+    G4VPhysicalVolume* physVolume = touchable->GetHistory()->GetVolume(i);
+    fVolPathBuffer += "/";
+    fVolPathBuffer 
+      += geometryServices->G4ToG3VolumeName(physVolume->GetName());
+    fVolPathBuffer += "_";
+    TG4Globals::AppendNumberToString(fVolPathBuffer, physVolume->GetCopyNo());
+  }     
+
+  // Add current volume to the path
+  G4VPhysicalVolume* curPhysVolume = GetCurrentPhysicalVolume(); 
+  fVolPathBuffer += "/";
+  fVolPathBuffer += geometryServices->G4ToG3VolumeName(curPhysVolume->GetName());
+  fVolPathBuffer += "_";
+  TG4Globals::AppendNumberToString(fVolPathBuffer, curPhysVolume->GetCopyNo());
+
+  return fVolPathBuffer.data(); 
+
 }
 
 //_____________________________________________________________________________

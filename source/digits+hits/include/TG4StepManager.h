@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.h,v 1.3 2003/12/18 13:27:24 brun Exp $
+// $Id: TG4StepManager.h,v 1.4 2004/05/28 13:49:09 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -66,6 +66,7 @@ class TG4StepManager
     Int_t CurrentVolOffID(Int_t off, Int_t& copyNo) const;
     const char* CurrentVolName() const;
     const char* CurrentVolOffName(Int_t off) const;
+    const char* CurrentVolPath();
     Int_t CurrentMaterial(Float_t &a, Float_t &z, Float_t &dens, 
                     Float_t &radl, Float_t &absl) const;
     void Gmtod(Double_t* xm, Double_t* xd, Int_t iflag);
@@ -125,6 +126,7 @@ class TG4StepManager
     void CheckSteppingManager() const;
     void SetTLorentzVector(G4ThreeVector xyz, G4double t, 
                            TLorentzVector& lv) const;    
+    const G4VTouchable* GetCurrentTouchable() const; 
     G4VPhysicalVolume* GetCurrentOffPhysicalVolume(G4int off) const;
 
     // static data members
@@ -138,6 +140,7 @@ class TG4StepManager
 					  //from PreStepPoint or PostStepPoint
     G4VTouchable*       fTouchableHistory;//touchable history buffer 					  
     G4SteppingManager*  fSteppingManager; //G4SteppingManager
+    G4String            fVolPathBuffer;   //buffer for current volume path
 };
 
 // inline methods

@@ -1,4 +1,4 @@
-// $Id: TGeant4.icc,v 1.5 2004/08/11 10:03:09 brun Exp $
+// $Id: TGeant4.icc,v 1.6 2004/08/17 08:53:00 brun Exp $
 // Category: run
 
 #include "TG4StepManager.h" 
@@ -64,6 +64,12 @@ inline const char* TGeant4::CurrentVolName() const
 inline const char* TGeant4::CurrentVolOffName(Int_t off) const
 { 
   return fStepManager->CurrentVolOffName(off); 
+} 
+
+//_____________________________________________________________________________
+inline const char* TGeant4::CurrentVolPath()
+{ 
+  return fStepManager->CurrentVolPath(); 
 } 
 
 //_____________________________________________________________________________

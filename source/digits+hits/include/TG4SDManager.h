@@ -1,4 +1,4 @@
-// $Id: TG4SDManager.h,v 1.1 2002/06/20 11:53:25 hristov Exp $
+// $Id: TG4SDManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: digits+hits
 //
 // Author: I. Hrivnacova
@@ -37,6 +37,9 @@ class TG4SDManager
     Int_t VolId(const Text_t* volName) const;                
     const char* VolName(Int_t id) const;
     Int_t NofVolumes() const; 
+    Int_t NofVolDaughters(const char* volName) const;
+    const char*  VolDaughterName(const char* volName, Int_t i) const;
+    Int_t        VolDaughterCopyNo(const char* volName, Int_t i) const;
     Int_t VolId2Mate(Int_t volumeId) const;
 
     // get methods

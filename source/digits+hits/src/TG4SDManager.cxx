@@ -1,4 +1,4 @@
-// $Id: TG4SDManager.cxx,v 1.1.1.1 2002/06/16 15:57:34 hristov Exp $
+// $Id: TG4SDManager.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: digits+hits
 //
 // See the class description in the header file.
@@ -105,6 +105,34 @@ Int_t TG4SDManager::NofVolumes() const
 }
 
 
+//_____________________________________________________________________________
+Int_t TG4SDManager::NofVolDaughters(const char* volName) const
+{
+// Returns number of daughter of the volume specified by name
+// ---
+  
+  return fSDServices->NofVolDaughters(volName);  
+}
+
+//_____________________________________________________________________________
+const char*  TG4SDManager::VolDaughterName(const char* volName, Int_t i) const
+{
+// Returns the name of the i-th daughter of the volume specified by name.
+// 
+
+  return fSDServices->VolDaughterName(volName, i);  
+}
+
+//_____________________________________________________________________________
+Int_t  TG4SDManager::VolDaughterCopyNo(const char* volName, Int_t i) const
+{
+// Returns the copyNo of the i-th daughter of the volume specified by name.
+// 
+
+  return fSDServices->VolDaughterCopyNo(volName, i);  
+}
+
+ 
 //_____________________________________________________________________________
 Int_t TG4SDManager::VolId2Mate(Int_t volumeId)  const
 {

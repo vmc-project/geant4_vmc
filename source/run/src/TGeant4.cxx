@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.7 2004/06/08 10:27:50 brun Exp $
+// $Id: TGeant4.cxx,v 1.8 2004/08/17 08:53:00 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -355,6 +355,24 @@ const char* TGeant4::VolName(Int_t id) const {
 Int_t TGeant4::NofVolumes() const {
 //
   return fSDManager->NofVolumes(); 
+} 
+
+//_____________________________________________________________________________
+Int_t TGeant4::NofVolDaughters(const char* volName) const {
+//
+  return fSDManager->NofVolDaughters(volName); 
+} 
+
+//_____________________________________________________________________________
+const char*  TGeant4::VolDaughterName(const char* volName, Int_t i) const {
+//
+  return fSDManager->VolDaughterName(volName, i); 
+} 
+
+//_____________________________________________________________________________
+Int_t  TGeant4::VolDaughterCopyNo(const char* volName, Int_t i) const {
+//
+  return fSDManager->VolDaughterCopyNo(volName, i); 
 } 
 
 //_____________________________________________________________________________

@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.7 2004/08/11 10:03:09 brun Exp $
+// $Id: TGeant4.h,v 1.8 2004/08/17 08:53:00 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -115,6 +115,9 @@ class TGeant4: public TVirtualMC
     virtual Int_t VolId(const Text_t* volName) const;
     virtual const char* VolName(Int_t id) const;
     virtual Int_t NofVolumes() const;
+    virtual Int_t NofVolDaughters(const char* volName) const;
+    virtual const char*  VolDaughterName(const char* volName, Int_t i) const;
+    virtual Int_t        VolDaughterCopyNo(const char* volName, Int_t i) const;
     virtual Int_t VolId2Mate(Int_t id) const;
 
     //
@@ -166,6 +169,7 @@ class TGeant4: public TVirtualMC
     virtual Int_t CurrentVolOffID(Int_t off, Int_t& copyNo) const;
     virtual const char* CurrentVolName() const;
     virtual const char* CurrentVolOffName(Int_t off) const;
+    virtual const char* CurrentVolPath();
     virtual Int_t CurrentMaterial(Float_t &a, Float_t &z, 
                     Float_t &dens, Float_t &radl, Float_t &absl) const;  
     virtual void  Gmtod(Float_t* xm, Float_t* xd, Int_t iflag);
