@@ -1,4 +1,4 @@
-// $Id: TG4XMLConvertor.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4XMLConvertor.cxx,v 1.2 2003/01/29 11:23:37 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova, 27.07.2000 
@@ -910,7 +910,7 @@ void TG4XMLConvertor::WriteReplica(G4String lvName, G4PVReplica* pvr)
   }  
 
   // set units
-  G4double value0 = offset;
+  G4double value0 = - width*(nReplicas-1)*0.5 + offset;
   G4double dValue = width;
   if (axis != kPhi) {
     value0 = value0/TG4XMLUnits::Length();
