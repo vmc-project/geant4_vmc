@@ -1,4 +1,4 @@
-// $Id: TG4SDServices.cxx,v 1.1.1.1 2002/06/16 15:57:34 hristov Exp $
+// $Id: TG4SDServices.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: digits+hits
 //
 // See the class description in the header file.
@@ -12,7 +12,7 @@
 #include <G4LogicalVolumeStore.hh>
 #include <G4LogicalVolume.hh>
 #include <G4Material.hh>
-#include <g4std/iomanip>
+#include <iomanip>
 
 TG4SDServices* TG4SDServices::fgInstance = 0;
 
@@ -65,7 +65,7 @@ void TG4SDServices::PrintStatistics(G4bool open, G4bool close) const
   
   if (open)  TG4Globals::PrintStars(true);
      
-   G4cout << "          " << G4std::setw(5) << NofSensitiveDetectors()  
+   G4cout << "          " << std::setw(5) << NofSensitiveDetectors()  
 	                  << " sensitive detectors" << G4endl;
 
   if (close) TG4Globals::PrintStars(false);

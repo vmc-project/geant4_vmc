@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.3 2003/01/29 11:25:23 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.4 2003/06/03 17:10:27 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -22,8 +22,8 @@
 #include <G4UserLimits.hh>
 #include <G3toG4.hh> 
 #include <G3EleTable.hh> 
-#include <g4std/vector>
-#include <g4std/iomanip>
+#include <vector>
+#include <iomanip>
 
 #include <math.h>
 
@@ -291,7 +291,7 @@ G4Material* TG4GeometryServices::MixMaterials(G4String name, G4double density,
   }  
 
   // fill vector of materials
-  G4std::vector<G4Material*> matVector;  
+  std::vector<G4Material*> matVector;  
   G4int im;
   for (im=0; im< nofMaterials; im++) {
     // material
@@ -359,16 +359,16 @@ void TG4GeometryServices::PrintStatistics(G4bool open, G4bool close) const
   if (open)  TG4Globals::PrintStars(true);
      
   G4cout << "    GEANT4 Geometry statistics: " << G4endl
-         << "          " << G4std::setw(5) << NofG4LogicalVolumes()  
+         << "          " << std::setw(5) << NofG4LogicalVolumes()  
 	                 << " logical volumes" << G4endl
 	 << "          " 
-	                 << G4std::setw(5) << NofG4PhysicalVolumes() 
+	                 << std::setw(5) << NofG4PhysicalVolumes() 
 	                 << " physical volumes" << G4endl
 	 << "          " 
-	                 << G4std::setw(5) << G4Material::GetNumberOfMaterials()
+	                 << std::setw(5) << G4Material::GetNumberOfMaterials()
 			 << " materials"        << G4endl
 	 << "          " 
-	                 << G4std::setw(5) << TG4Limits::GetNofLimits()
+	                 << std::setw(5) << TG4Limits::GetNofLimits()
 			 << " user limits"      << G4endl;
 
   if (close) TG4Globals::PrintStars(false);
@@ -390,16 +390,16 @@ TG4GeometryServices::PrintLogicalVolumeStore() const
     G4LogicalVolume* lv = (*lvStore)[i];
 
     G4cout << "Logical volume: " << G4endl;
-    G4cout << "  " << G4std::setw(5)  << i
+    G4cout << "  " << std::setw(5)  << i
            << "  " << lv
 	   << "  " << lv->GetName()
-	   << "  " << G4std::setw(5)  << lv->GetNoDaughters() << " daughters"
+	   << "  " << std::setw(5)  << lv->GetNoDaughters() << " daughters"
 	   << "  limits: " << lv->GetUserLimits()
 	   << G4endl;
 	   
     for (G4int j=0; j<lv->GetNoDaughters(); j++) {
       G4cout << "  Daughter: " 
-             << G4std::setw(5)  << j
+             << std::setw(5)  << j
              << "  " << lv->GetDaughter(j)
   	     << "  " << lv->GetDaughter(j)->GetName()
 	     << "  of LV: " << lv->GetDaughter(j)->GetLogicalVolume()
@@ -424,7 +424,7 @@ void TG4GeometryServices::PrintElementTable() const
   for (G4int i=0; i<G4int(elementTable->size()); i++) {
   
     G4Element* element = (*elementTable)[i];
-    G4cout << "  " << G4std::setw(5)  << i
+    G4cout << "  " << std::setw(5)  << i
            << "th element:"
 	   << "  " << element
 	   << G4endl;

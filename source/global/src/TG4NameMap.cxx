@@ -1,4 +1,4 @@
-// $Id: TG4NameMap.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4NameMap.cxx,v 1.2 2003/09/23 14:23:40 brun Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -10,7 +10,7 @@
 #include "TG4NameMap.h"
 #include "TG4Globals.h"
 
-#include "g4std/iomanip"
+#include "iomanip"
 #include "globals.hh"
 
 G4String TG4NameMap::fgUndefined = "Undefined";
@@ -103,7 +103,7 @@ void TG4NameMap::PrintAll() const
     for (MapConstIterator i=fMap.begin(); i != fMap.end(); i++) {
       const G4String& first  = (*i).first;
       const G4String& second = (*i).second;
-      G4cout << "Map element " << G4std::setw(3) << counter++ << "   " 
+      G4cout << "Map element " << std::setw(3) << counter++ << "   " 
              << first << "   " << second << G4endl;
     }
   }

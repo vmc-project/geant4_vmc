@@ -1,4 +1,4 @@
-// $Id: TG4GeometryOutputManager.h,v 1.1 2002/06/20 11:55:24 hristov Exp $
+// $Id: TG4GeometryOutputManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -16,7 +16,7 @@
 #include "TG4Globals.h"
 
 #include <globals.hh>
-#include <g4std/fstream>
+#include <fstream>
 
 class TG4GeometryOutputManager : public TG4Verbose
 {
@@ -74,7 +74,7 @@ class TG4GeometryOutputManager : public TG4Verbose
 
   private:
     // data members
-    G4std::ofstream  fOutFile; //output file
+    std::ofstream  fOutFile; //output file
 };
 
 #endif //TG4_GEOMETRY_OUTPUT_MANAGER_H

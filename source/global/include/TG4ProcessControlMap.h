@@ -1,4 +1,4 @@
-// $Id: TG4ProcessControlMap.h,v 1.1 2002/06/20 11:56:10 hristov Exp $
+// $Id: TG4ProcessControlMap.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -11,7 +11,7 @@
 #ifndef TG4_PROCESS_CONTROL_MAP_H
 #define TG4_PROCESS_CONTROL_MAP_H
 
-#include <g4std/map>
+#include <map>
 #include <globals.hh>
 
 #include "TG4G3Control.h"
@@ -20,7 +20,7 @@ class G4VProcess;
 
 class TG4ProcessControlMap
 {
-  typedef G4std::map<G4String, TG4G3Control, G4std::less<G4String> >  Map;
+  typedef std::map<G4String, TG4G3Control, std::less<G4String> >  Map;
   typedef Map::iterator       MapIterator;
   typedef Map::const_iterator MapConstIterator;
 

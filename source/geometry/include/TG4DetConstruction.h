@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.h,v 1.2 2002/10/10 13:17:21 brun Exp $
+// $Id: TG4DetConstruction.h,v 1.3 2003/01/29 11:22:32 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -18,7 +18,7 @@
 
 #include <G4VUserDetectorConstruction.hh>
 #include <globals.hh>
-#include <g4std/vector>
+#include <vector>
 
 class G4VPhysicalVolume;
 class G4LogicalVolume;

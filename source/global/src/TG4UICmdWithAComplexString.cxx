@@ -1,4 +1,4 @@
-// $Id: TG4UICmdWithAComplexString.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4UICmdWithAComplexString.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -9,7 +9,7 @@
 
 #include "TG4UICmdWithAComplexString.h"
 
-#include <g4std/strstream>
+#include <strstream>
 
 TG4UICmdWithAComplexString::TG4UICmdWithAComplexString(
                                  G4String commandPath, G4UImessenger* messenger)

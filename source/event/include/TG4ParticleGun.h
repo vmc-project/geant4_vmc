@@ -1,4 +1,4 @@
-// $Id: TG4ParticleGun.h,v 1.4 2001/11/29 16:31:16 ivana Exp $
+// $Id: TG4ParticleGun.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: event
 //
 // Author: I. Hrivnacova
@@ -15,7 +15,7 @@
 
 #include <G4VPrimaryGenerator.hh>
 #include <globals.hh>
-#include <g4std/vector>
+#include <vector>
 
 
 class TG4GunParticle;
@@ -25,7 +25,7 @@ class G4Event;
 class TG4ParticleGun : public G4VPrimaryGenerator,
                        public TG4Verbose
 {
-  typedef G4std::vector<TG4GunParticle*>    GunParticleVector;
+  typedef std::vector<TG4GunParticle*>      GunParticleVector;
   typedef GunParticleVector::iterator       GunParticleIterator;
   typedef GunParticleVector::const_iterator GunParticleConstIterator;
 

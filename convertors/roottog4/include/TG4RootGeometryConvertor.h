@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: TG4RootGeometryConvertor.h,v 1.1 2003/07/22 06:46:58 brun Exp $
 //
 // Author: I. Hrivnacova, 8.1.2003
 //
@@ -10,7 +10,7 @@
 #define TG4_ROOT_GEOMETRY_CONVERTOR_H
 
 #include "globals.hh"
-#include "g4std/map"
+#include "map"
 
 class TGeoVolume;
 
@@ -23,8 +23,8 @@ class TG4ShapeConvertor;
 class TG4RootGeometryConvertor
 {
   public:
-    typedef G4std::map<const TGeoVolume*, G4LogicalVolume*,  
-                       G4std::less<const TGeoVolume*> > VolumesMap;
+    typedef std::map<const TGeoVolume*, G4LogicalVolume*,  
+                     std::less<const TGeoVolume*> > VolumesMap;
     typedef VolumesMap::const_iterator  VolumesMapIterator;	       
 
   public:

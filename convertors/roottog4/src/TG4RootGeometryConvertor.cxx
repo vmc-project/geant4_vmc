@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: TG4RootGeometryConvertor.cxx,v 1.1 2003/07/22 06:46:58 brun Exp $
 //
 // Author: I. Hrivnacova, 8.1.2003 
 //
@@ -9,7 +9,7 @@
 #if __GNUC__ >= 3
 #include <sstream>
 #else
-#include <g4std/strstream>
+#include <strstream>
 #endif
 
 #include <TGeoVolume.h>
@@ -66,9 +66,9 @@ void TG4RootGeometryConvertor::Append(G4String& s, G4int a) const
 // ---
 
 #if __GNUC__ >= 3
-  G4std::ostringstream tmpStream;
+  std::ostringstream tmpStream;
 #else  
-  G4std::strstream tmpStream;
+  std::strstream tmpStream;
 #endif
 
   tmpStream << a;  

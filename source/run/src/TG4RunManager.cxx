@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.cxx,v 1.3 2003/06/03 17:12:23 brun Exp $
+// $Id: TG4RunManager.cxx,v 1.4 2003/09/23 14:24:29 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -304,9 +304,6 @@ void TG4RunManager::LateInitialize()
   if (VerboseLevel() > 2) {
     TG4GeometryServices::Instance()->PrintLogicalVolumeStore();  
   }
-  
-  // dump ion table
-  G4ParticleTable::GetParticleTable()->GetIonTable()->DumpTable();
 }
 
 //_____________________________________________________________________________

@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: TG4MaterialConvertor.h,v 1.1 2003/07/22 06:46:58 brun Exp $
 //
 // Author: I. Hrivnacova, 8.1.2003
 //
@@ -9,7 +9,7 @@
 #ifndef TG4_MATERIAL_CONVERTOR_H
 #define TG4_MATERIAL_CONVERTOR_H
 
-#include "g4std/map"
+#include "map"
 #include <globals.hh>
 
 class TGeoMaterial;
@@ -21,8 +21,8 @@ class G4Material;
 class TG4MaterialConvertor
 {
   public:
-    typedef G4std::map<const TGeoMaterial*, G4Material*,  
-                       G4std::less<const TGeoMaterial*> > MaterialsMap;
+    typedef std::map<const TGeoMaterial*, G4Material*,  
+                     std::less<const TGeoMaterial*> > MaterialsMap;
     typedef MaterialsMap::const_iterator  MaterialsMapIterator;	       
 
   public:

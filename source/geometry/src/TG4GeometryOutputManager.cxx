@@ -1,4 +1,4 @@
-// $Id: TG4GeometryOutputManager.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4GeometryOutputManager.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova 
@@ -8,8 +8,8 @@
 // See the class description in the header file.
 
 #include "TG4GeometryOutputManager.h"
-#include <g4std/iostream>
-#include <g4std/iomanip>
+#include <iostream>
+#include <iomanip>
 
 //_____________________________________________________________________________
 TG4GeometryOutputManager::TG4GeometryOutputManager()
@@ -35,7 +35,7 @@ void TG4GeometryOutputManager::OpenFile(G4String filePath)
   }  
   
   //fOutFile.open(filePath, ios::out, filebuf::openprot); 
-  fOutFile.open(filePath, G4std::ios::out); //, G4std::filebuf::openprot); 
+  fOutFile.open(filePath, std::ios::out); //, std::filebuf::openprot); 
   
   if (!fOutFile) {
     G4String text = "Cannot open ";
@@ -44,7 +44,7 @@ void TG4GeometryOutputManager::OpenFile(G4String filePath)
   }
   
   // use FORTRAN compatibility output
-  fOutFile << G4std::setiosflags(G4std::ios::showpoint | G4std::ios::uppercase);
+  fOutFile << std::setiosflags(std::ios::showpoint | std::ios::uppercase);
 }
 
 
@@ -77,10 +77,10 @@ void TG4GeometryOutputManager::WriteGsvolu(
           << rname   << space
 	  << vname    << space
 	  << shape
-	  << G4std::setw(5) << nmed  
-	  << G4std::setw(5) << npar;
+	  << std::setw(5) << nmed  
+	  << std::setw(5) << npar;
   for (G4int i=0; i<npar; i++)	      
-    fOutFile << space << G4std::setw(16) << G4std::setprecision(8) << Rpar[i];
+    fOutFile << space << std::setw(16) << std::setprecision(8) << Rpar[i];
   fOutFile << G4endl;   
 }
 
@@ -101,12 +101,12 @@ void TG4GeometryOutputManager::WriteGspos(
   fOutFile << context << space 
           << rname   << space
 	  << vname   << space
-	  << G4std::setw(5) << num << space 
+	  << std::setw(5) << num << space 
 	  << vmoth   << space
-          << G4std::setw(16) << G4std::setprecision(8) << x << space
-          << G4std::setw(16) << G4std::setprecision(8) << y << space
-          << G4std::setw(16) << G4std::setprecision(8) << z
-	  << G4std::setw(5) << irot << space
+          << std::setw(16) << std::setprecision(8) << x << space
+          << std::setw(16) << std::setprecision(8) << y << space
+          << std::setw(16) << std::setprecision(8) << z
+	  << std::setw(5) << irot << space
 	  << vonly 
 	  << G4endl;
 }	     
@@ -133,16 +133,16 @@ void TG4GeometryOutputManager::WriteGsposp(
   fOutFile << context << space 
           << rname   << space
 	  << vname   << space
-	  << G4std::setw(5) << num << space 
+	  << std::setw(5) << num << space 
 	  << vmoth   << space
-          << G4std::setw(16) << G4std::setprecision(8) << x << space
-          << G4std::setw(16) << G4std::setprecision(8) << y << space
-          << G4std::setw(16) << G4std::setprecision(8) << z
-	  << G4std::setw(5) << irot << space
+          << std::setw(16) << std::setprecision(8) << x << space
+          << std::setw(16) << std::setprecision(8) << y << space
+          << std::setw(16) << std::setprecision(8) << z
+	  << std::setw(5) << irot << space
 	  << vonly 
-	  << G4std::setw(5) << npar;
+	  << std::setw(5) << npar;
   for (G4int i=0; i<npar; i++)	      
-    fOutFile << space << G4std::setw(16) << G4std::setprecision(8) << pars[i];
+    fOutFile << space << std::setw(16) << std::setprecision(8) << pars[i];
   fOutFile << G4endl;
 }	      
 
@@ -163,13 +163,13 @@ void TG4GeometryOutputManager::WriteGsrotm(
   G4String space(" "); 
   fOutFile << context << space 
           << rname   << space
-	  << G4std::setw(5) << irot
-          << G4std::setw(11) << G4std::setprecision(5) << theta1
-          << G4std::setw(11) << G4std::setprecision(5) << phi1
-          << G4std::setw(11) << G4std::setprecision(5) << theta2
-          << G4std::setw(11) << G4std::setprecision(5) << phi2
-          << G4std::setw(11) << G4std::setprecision(5) << theta3
-          << G4std::setw(11) << G4std::setprecision(5) << phi3
+	  << std::setw(5) << irot
+          << std::setw(11) << std::setprecision(5) << theta1
+          << std::setw(11) << std::setprecision(5) << phi1
+          << std::setw(11) << std::setprecision(5) << theta2
+          << std::setw(11) << std::setprecision(5) << phi2
+          << std::setw(11) << std::setprecision(5) << theta3
+          << std::setw(11) << std::setprecision(5) << phi3
 	  << G4endl;
 }	  
 
@@ -190,8 +190,8 @@ void TG4GeometryOutputManager::WriteGsdvn(
           << rname   << space
 	  << vname    << space
 	  << vmoth   << space
-	  << G4std::setw(5) << ndiv  
-	  << G4std::setw(5) << iaxis
+	  << std::setw(5) << ndiv  
+	  << std::setw(5) << iaxis
           << G4endl;
 }	     
 
@@ -213,10 +213,10 @@ void TG4GeometryOutputManager::WriteGsdvn2(
           << rname   << space
 	  << vname    << space
 	  << vmoth   << space
-	  << G4std::setw(5) << ndiv  
-	  << G4std::setw(5) << iaxis << " "
-          << G4std::setw(16) << G4std::setprecision(8) << c0
-	  << G4std::setw(5) << numed
+	  << std::setw(5) << ndiv  
+	  << std::setw(5) << iaxis << " "
+          << std::setw(16) << std::setprecision(8) << c0
+	  << std::setw(5) << numed
 	  << G4endl;
 }	     
 
@@ -238,10 +238,10 @@ void TG4GeometryOutputManager::WriteGsdvt(
           << rname   << space
 	  << vname    << space
 	  << vmoth   << space
-          << G4std::setw(16) << G4std::setprecision(8) << step
-	  << G4std::setw(5) << iaxis
-	  << G4std::setw(5) << numed
-	  << G4std::setw(5) << ndvmx
+          << std::setw(16) << std::setprecision(8) << step
+	  << std::setw(5) << iaxis
+	  << std::setw(5) << numed
+	  << std::setw(5) << ndvmx
 	  << G4endl;
 }	     
 
@@ -263,11 +263,11 @@ void TG4GeometryOutputManager::WriteGsdvt2(
           << rname   << space
 	  << vname    << space
 	  << vmoth   << space
-          << G4std::setw(16) << G4std::setprecision(8) << step
-	  << G4std::setw(3) << iaxis << space
-          << G4std::setw(16) << G4std::setprecision(8) << c0
-	  << G4std::setw(5) << numed
-	  << G4std::setw(5) << ndvmx
+          << std::setw(16) << std::setprecision(8) << step
+	  << std::setw(3) << iaxis << space
+          << std::setw(16) << std::setprecision(8) << c0
+	  << std::setw(5) << numed
+	  << std::setw(5) << ndvmx
 	  << G4endl;
 }	     
 
@@ -290,12 +290,12 @@ void TG4GeometryOutputManager::WriteGsdvx(
           << rname   << space
 	  << name    << space
 	  << moth    << space
-	  << G4std::setw(5) << ndiv
-	  << G4std::setw(3) << iaxis << space
-          << G4std::setw(16) << G4std::setprecision(8) << step << space
-          << G4std::setw(16) << G4std::setprecision(8) << c0
-	  << G4std::setw(5) << numed
-	  << G4std::setw(5) << ndvmx
+	  << std::setw(5) << ndiv
+	  << std::setw(3) << iaxis << space
+          << std::setw(16) << std::setprecision(8) << step << space
+          << std::setw(16) << std::setprecision(8) << c0
+	  << std::setw(5) << numed
+	  << std::setw(5) << ndvmx
 	  << G4endl;
 }	     
 
@@ -318,15 +318,15 @@ void TG4GeometryOutputManager::WriteGsmate(
   G4String space(" "); 
   fOutFile << context << space 
           << rname   << space
-	  << G4std::setw(5) << imate << space 
+	  << std::setw(5) << imate << space 
 	  << '"' << name << '"' << space
-          << G4std::setw(16) << G4std::setprecision(8) << ain << space
-          << G4std::setw(16) << G4std::setprecision(8) << zin << space
-          << G4std::setw(16) << G4std::setprecision(8) << densin << space
-          << G4std::setw(16) << G4std::setprecision(8) << radl
-	  << G4std::setw(3) << nwbf;
+          << std::setw(16) << std::setprecision(8) << ain << space
+          << std::setw(16) << std::setprecision(8) << zin << space
+          << std::setw(16) << std::setprecision(8) << densin << space
+          << std::setw(16) << std::setprecision(8) << radl
+	  << std::setw(3) << nwbf;
   for (G4int i=0; i<nwbf; i++)	      
-    fOutFile << space << G4std::setw(16) << G4std::setprecision(8) << ubuf[i];
+    fOutFile << space << std::setw(16) << std::setprecision(8) << ubuf[i];
   fOutFile << G4endl;
 }	      
 
@@ -354,17 +354,17 @@ void TG4GeometryOutputManager::WriteGsmixt(
   G4String space(" "); 
   fOutFile << context << space 
           << rname   << space
-	  << G4std::setw(5) << imate << space 
+	  << std::setw(5) << imate << space 
 	  << '"' << name << '"' << space
-          << G4std::setw(16) << G4std::setprecision(8) << dens << space
-	  << G4std::setw(3) << nlmat;
+          << std::setw(16) << std::setprecision(8) << dens << space
+	  << std::setw(3) << nlmat;
   G4int i;	  
   for (i=0; i<abs(nlmat); i++)	      
-    fOutFile << space << G4std::setw(16) << G4std::setprecision(8) << a[i];
+    fOutFile << space << std::setw(16) << std::setprecision(8) << a[i];
   for (i=0; i<abs(nlmat); i++)	      
-    fOutFile << space << G4std::setw(16) << G4std::setprecision(8) << z[i];
+    fOutFile << space << std::setw(16) << std::setprecision(8) << z[i];
   for (i=0; i<abs(nlmat); i++)	      
-    fOutFile << space << G4std::setw(16) << G4std::setprecision(8) << wmat[i];
+    fOutFile << space << std::setw(16) << std::setprecision(8) << wmat[i];
   fOutFile << G4endl;
 }	      
 
@@ -390,20 +390,20 @@ void TG4GeometryOutputManager::WriteGstmed(
   G4String space(" "); 
   fOutFile << context << space 
           << rname   << space
-	  << G4std::setw(5) << itmed << space
+	  << std::setw(5) << itmed << space
 	  << '"' << name << '"' 
-	  << G4std::setw(3) << nmat
-	  << G4std::setw(3) << isvol
-	  << G4std::setw(3) << ifield << space
-          << G4std::setw(16) << G4std::setprecision(8) << fieldm << space
-          << G4std::setw(16) << G4std::setprecision(8) << tmaxfd << space
-          << G4std::setw(16) << G4std::setprecision(8) << stemax << space
-          << G4std::setw(16) << G4std::setprecision(8) << deemax << space
-          << G4std::setw(16) << G4std::setprecision(8) << epsil << space
-          << G4std::setw(16) << G4std::setprecision(8) << stmin << space
-	  << G4std::setw(3) << nwbuf;
+	  << std::setw(3) << nmat
+	  << std::setw(3) << isvol
+	  << std::setw(3) << ifield << space
+          << std::setw(16) << std::setprecision(8) << fieldm << space
+          << std::setw(16) << std::setprecision(8) << tmaxfd << space
+          << std::setw(16) << std::setprecision(8) << stemax << space
+          << std::setw(16) << std::setprecision(8) << deemax << space
+          << std::setw(16) << std::setprecision(8) << epsil << space
+          << std::setw(16) << std::setprecision(8) << stmin << space
+	  << std::setw(3) << nwbuf;
   for (G4int i=0; i<nwbuf; i++)	      
-    fOutFile << space << G4std::setw(16) << G4std::setprecision(8) << ubuf[i];
+    fOutFile << space << std::setw(16) << std::setprecision(8) << ubuf[i];
   fOutFile << G4endl;
 }	  
 
@@ -422,9 +422,9 @@ void TG4GeometryOutputManager::WriteGstpar(
   G4String space(" "); 
   fOutFile << context << space 
           << rname   << space
-	  << G4std::setw(5) << itmed << space 
+	  << std::setw(5) << itmed << space 
 	  << param   << space
-          << G4std::setw(16) << G4std::setprecision(8) << parval
+          << std::setw(16) << std::setprecision(8) << parval
           << G4endl;
 }	      
 

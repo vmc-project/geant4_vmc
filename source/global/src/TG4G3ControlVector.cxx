@@ -1,4 +1,4 @@
-// $Id: TG4G3ControlVector.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4G3ControlVector.cxx,v 1.2 2002/10/05 07:31:27 brun Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -18,7 +18,7 @@
 #if __GNUC__ >= 3
 #include <sstream>
 #else
-#include <g4std/strstream>
+#include <strstream>
 #endif
 
 #include <math.h>
@@ -263,9 +263,9 @@ G4String TG4G3ControlVector::Format() const
 // ---
 
 #if __GNUC__ >= 3
-  G4std::ostringstream tmpStream;
+  std::ostringstream tmpStream;
 #else  
-  G4std::strstream tmpStream;
+  std::strstream tmpStream;
 #endif
 
   tmpStream << "  G3 control vector:" << G4endl; 

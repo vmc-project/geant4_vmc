@@ -1,4 +1,4 @@
-// $Id: TG4LVStructure.h,v 1.1 2002/06/20 11:55:24 hristov Exp $
+// $Id: TG4LVStructure.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -12,14 +12,13 @@
 #define TG4_LV_STRUCTURE_H
 
 #include <globals.hh>
-//#include <g4rw/tpordvec.h>
-#include <g4std/vector>
+#include <vector>
 
 class G4LogicalVolume;
 class TG4LVStructure;
 
-typedef G4std::vector<TG4LVStructure*>  LVStructuresVector;
-typedef G4std::vector<G4LogicalVolume*> LogicalVolumesVector;
+typedef std::vector<TG4LVStructure*>  LVStructuresVector;
+typedef std::vector<G4LogicalVolume*> LogicalVolumesVector;
 
 class TG4LVStructure 
 {

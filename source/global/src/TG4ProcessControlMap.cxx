@@ -1,4 +1,4 @@
-// $Id: TG4ProcessControlMap.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4ProcessControlMap.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -12,7 +12,7 @@
 #include "TG4Globals.h"
 
 #include <G4VProcess.hh>
-#include "g4std/iomanip"
+#include "iomanip"
 #include "globals.hh"
 
 TG4ProcessControlMap* TG4ProcessControlMap::fgInstance = 0;
@@ -108,7 +108,7 @@ void TG4ProcessControlMap::PrintAll() const
     for (MapConstIterator i=fMap.begin(); i != fMap.end(); i++) {
       G4String processName = (*i).first;
       TG4G3Control control = (*i).second;
-      G4cout << "Map element " << G4std::setw(3) << counter++ << "   " 
+      G4cout << "Map element " << std::setw(3) << counter++ << "   " 
              << processName << "   " 
 	     << TG4G3ControlVector::GetControlName(control)
 	     << G4endl;

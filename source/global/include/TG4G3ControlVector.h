@@ -1,4 +1,4 @@
-// $Id: TG4G3ControlVector.h,v 1.1 2002/06/20 11:56:10 hristov Exp $
+// $Id: TG4G3ControlVector.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -14,7 +14,7 @@
 #include "TG4Globals.h"
 #include "TG4G3Control.h"
 
-#include <g4std/vector>
+#include <vector>
 
 class TG4G3CutVector;
 
@@ -22,7 +22,7 @@ class G4VProcess;
 
 class TG4G3ControlVector
 {
-  typedef G4std::vector<TG4G3ControlValue> TG4ControlValueVector;
+  typedef std::vector<TG4G3ControlValue> TG4ControlValueVector;
 
   public:
     TG4G3ControlVector();

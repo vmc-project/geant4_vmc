@@ -1,4 +1,4 @@
-// $Id: TG4EventAction.h,v 1.1 2002/06/20 11:54:18 hristov Exp $
+// $Id: TG4EventAction.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: event
 //
 // Author: I. Hrivnacova
@@ -13,12 +13,11 @@
 #include "TG4Verbose.h"
 #include "TG4EventActionMessenger.h"
 
+#include <TStopwatch.h>
+
 #include <G4UserEventAction.hh>
 #include <globals.hh>
 
-class G4Timer;
-    // in order to avoid the odd dependency for the
-    // times system function this declaration must be the first
 class G4Event;
 
 class TG4EventAction : public G4UserEventAction,
@@ -51,9 +50,9 @@ class TG4EventAction : public G4UserEventAction,
     void DisplayEvent(const G4Event* event) const;
   
     // data members
-    TG4EventActionMessenger   fMessenger;    //messenger
-    G4Timer*                  fTimer;        //G4Timer
-    G4String                  fDrawFlag;     //control drawing of the event
+    TG4EventActionMessenger   fMessenger; //messenger
+    TStopwatch                fTimer;     //timer
+    G4String                  fDrawFlag;  //control drawing of the event
 };
 
 // inline methods

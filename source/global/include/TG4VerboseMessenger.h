@@ -1,4 +1,4 @@
-// $Id: TG4VerboseMessenger.h,v 1.1 2002/06/20 11:56:10 hristov Exp $
+// $Id: TG4VerboseMessenger.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -13,7 +13,7 @@
 
 #include <G4UImessenger.hh>
 #include <globals.hh>
-#include <g4std/vector>
+#include <vector>
 
 class TG4VVerbose;
 
@@ -22,8 +22,8 @@ class G4UIcmdWithAnInteger;
 
 class TG4VerboseMessenger: public G4UImessenger
 {
-  typedef G4std::vector<TG4VVerbose*>           VerboseVector;
-  typedef G4std::vector<G4UIcmdWithAnInteger*>  CommandVector;
+  typedef std::vector<TG4VVerbose*>           VerboseVector;
+  typedef std::vector<G4UIcmdWithAnInteger*>  CommandVector;
 
   public:
     TG4VerboseMessenger(const G4String& directoryName);

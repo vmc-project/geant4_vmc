@@ -1,4 +1,4 @@
-// $Id: TG4EventAction.cxx,v 1.1.1.1 2002/06/16 15:57:34 hristov Exp $
+// $Id: TG4EventAction.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: event
 //
 // Author: I. Hrivnacova
@@ -6,10 +6,6 @@
 // Class TG4EventAction
 // ---------------------
 // See the class description in the header file.
-
-#include <G4Timer.hh>
-   // in order to avoid the odd dependency for the
-   // times system function this include must be the first
 
 #include "TG4EventAction.h"
 #include "TG4TrackingAction.h"
@@ -32,7 +28,6 @@ TG4EventAction::TG4EventAction()
     fDrawFlag("CHARGED")
 {
 //
-  fTimer = new G4Timer();
 }
 
 //_____________________________________________________________________________
@@ -46,7 +41,6 @@ TG4EventAction::TG4EventAction(const TG4EventAction& right)
 //_____________________________________________________________________________
 TG4EventAction::~TG4EventAction() {
 //
-  delete fTimer;
 }
 
 // operators
@@ -116,9 +110,8 @@ void TG4EventAction::BeginOfEventAction(const G4Event* event)
 
   if (VerboseLevel() > 0) {
     G4cout << ">>> Event " << event->GetEventID() << G4endl;
+    fTimer.Start();
   }  
-
-  fTimer->Start();
 }
 
 //_____________________________________________________________________________
@@ -159,7 +152,8 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
 
   if (VerboseLevel() > 1) {
     // print time
-    fTimer->Stop();
-    G4cout << "Time of this event: " << *fTimer << G4endl;
+    fTimer.Stop();
+    G4cout << "Time of this event: ";
+    fTimer.Print();
   }  
- }
+}

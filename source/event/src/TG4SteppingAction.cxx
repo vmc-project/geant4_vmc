@@ -1,4 +1,4 @@
-// $Id: TG4SteppingAction.cxx,v 1.2 2002/11/22 13:28:57 brun Exp $
+// $Id: TG4SteppingAction.cxx,v 1.3 2003/06/03 17:06:15 brun Exp $
 // Category: event
 //
 // Author: I.Hrivnacova
@@ -93,27 +93,27 @@ void TG4SteppingAction::PrintTrackInfo(const G4Track* track) const
       
   // print header    
 #ifdef G4_USE_G4BESTUNIT_FOR_VERBOSE
-    G4cout << G4std::setw( 5) << "Step#"  << " "
-           << G4std::setw( 8) << "X"      << "     "
-	   << G4std::setw( 8) << "Y"      << "     "  
-	   << G4std::setw( 8) << "Z"      << "     "
-	   << G4std::setw( 9) << "KineE"  << "     "
-	   << G4std::setw( 8) << "dE"     << "     "  
-	   << G4std::setw(12) << "StepLeng"   << " "  
-	   << G4std::setw(12) << "TrackLeng"  << " "
-	   << G4std::setw(12) << "NextVolume" << " "
-	   << G4std::setw( 8) << "ProcName"   << G4endl;	     
+    G4cout << std::setw( 5) << "Step#"  << " "
+           << std::setw( 8) << "X"      << "     "
+	   << std::setw( 8) << "Y"      << "     "  
+	   << std::setw( 8) << "Z"      << "     "
+	   << std::setw( 9) << "KineE"  << "     "
+	   << std::setw( 8) << "dE"     << "     "  
+	   << std::setw(12) << "StepLeng"   << " "  
+	   << std::setw(12) << "TrackLeng"  << " "
+	   << std::setw(12) << "NextVolume" << " "
+	   << std::setw( 8) << "ProcName"   << G4endl;	     
 #else
-    G4cout << G4std::setw( 5) << "Step#"      << " "
-	   << G4std::setw( 8) << "X(mm)"      << " "
-	   << G4std::setw( 8) << "Y(mm)"      << " "  
-	   << G4std::setw( 8) << "Z(mm)"      << " "
-	   << G4std::setw( 9) << "KinE(MeV)"  << " "
-	   << G4std::setw( 8) << "dE(MeV)"    << " "  
-	   << G4std::setw( 8) << "StepLeng"   << " "  
-	   << G4std::setw( 9) << "TrackLeng"  << " "
-	   << G4std::setw(11) << "NextVolume" << " "
-	   << G4std::setw( 8) << "ProcName"   << G4endl;	     
+    G4cout << std::setw( 5) << "Step#"      << " "
+	   << std::setw( 8) << "X(mm)"      << " "
+	   << std::setw( 8) << "Y(mm)"      << " "  
+	   << std::setw( 8) << "Z(mm)"      << " "
+	   << std::setw( 9) << "KinE(MeV)"  << " "
+	   << std::setw( 8) << "dE(MeV)"    << " "  
+	   << std::setw( 8) << "StepLeng"   << " "  
+	   << std::setw( 9) << "TrackLeng"  << " "
+	   << std::setw(11) << "NextVolume" << " "
+	   << std::setw( 8) << "ProcName"   << G4endl;	     
 #endif
 }
 

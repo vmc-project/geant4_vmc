@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.cxx,v 1.4 2003/07/22 06:36:09 brun Exp $
+// $Id: TG4TrackingAction.cxx,v 1.5 2003/09/23 14:22:56 brun Exp $
 // Category: event
 //
 // Author: I.Hrivnacova
@@ -203,7 +203,9 @@ void TG4TrackingAction::UserProcessHits(const G4Track* track)
   if (!pv) {
     G4String text = "TG4TrackingAction::PreUserTrackingAction: \n";
     text = text + "   Cannot locate track vertex."; 
-    TG4Globals::Exception(text);
+    //TG4Globals::Exception(text);
+    TG4Globals::Warning(text);
+    return;
   }  
   
 #ifdef MCDEBUG

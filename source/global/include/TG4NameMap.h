@@ -1,4 +1,4 @@
-// $Id: TG4NameMap.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4NameMap.h,v 1.2 2003/09/23 14:23:40 brun Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -13,12 +13,12 @@
 #ifndef TG4_NAME_MAP_H
 #define TG4_NAME_MAP_H
 
-#include <g4std/map>
+#include <map>
 #include <globals.hh>
 
 class TG4NameMap
 {
-  typedef G4std::map<G4String, G4String, G4std::less<G4String> >  Map;
+  typedef std::map<G4String, G4String, std::less<G4String> >  Map;
   typedef Map::iterator        MapIterator;
   typedef Map::const_iterator  MapConstIterator;
 

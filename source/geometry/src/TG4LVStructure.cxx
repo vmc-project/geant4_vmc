@@ -1,4 +1,4 @@
-// $Id: TG4LVStructure.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4LVStructure.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -18,7 +18,7 @@
 #endif //G4VIS_USE
 #include <G4LogicalVolume.hh>
 #include <G4BooleanSolid.hh>
-#include <g4std/set>
+#include <set>
 
 //_____________________________________________________________________________
 TG4LVStructure::TG4LVStructure(G4String path)
@@ -121,7 +121,7 @@ G4String TG4LVStructure::ExtractDirName(const G4String& name) const
 
   G4String subDir = name;
   G4int i = name.first('/');
-  if (i != G4int(G4std::string::npos)) subDir.remove(i+1);
+  if (i != G4int(std::string::npos)) subDir.remove(i+1);
   return subDir;
 }
 
@@ -133,7 +133,7 @@ void TG4LVStructure::ClearAndDestroy(LVStructuresVector* structures)
 // (According to geant4.3.2/source/global/STLInterface/g4rw/tpordvec.icc.)
 // ---
 
-  G4std::set<TG4LVStructure*,G4std::greater<TG4LVStructure*> > tmp;
+  std::set<TG4LVStructure*,std::greater<TG4LVStructure*> > tmp;
   for (size_t sz=0; sz<structures->size(); sz++)
     {
       TG4LVStructure* current;
@@ -142,7 +142,7 @@ void TG4LVStructure::ClearAndDestroy(LVStructuresVector* structures)
          tmp.insert(current);
     }
     
-  G4std::set<TG4LVStructure*, G4std::greater<TG4LVStructure*> >::iterator it;
+  std::set<TG4LVStructure*, std::greater<TG4LVStructure*> >::iterator it;
   for (it=tmp.begin(); it!=tmp.end(); it++)
     {
       delete *it;
@@ -210,7 +210,7 @@ G4LogicalVolume* TG4LVStructure::FindVolume(const G4String& name) const
 
   G4String path = name;
   path.remove(0, fPathName.length());
-  if (path.first('/') != G4int(G4std::string::npos)) { 
+  if (path.first('/') != G4int(std::string::npos)) { 
     // SD exists in sub-directory
     G4String subDir = ExtractDirName(path);
     TG4LVStructure* targetLVS = FindSubDirectory(subDir);
