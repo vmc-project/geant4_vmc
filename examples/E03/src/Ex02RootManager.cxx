@@ -1,4 +1,4 @@
-// $Id: Ex02RootManager.cxx,v 1.2 2003/02/26 13:37:13 brun Exp $
+// $Id: Ex02RootManager.cxx,v 1.1 2003/03/17 14:56:51 brun Exp $
 //
 // Geant4 novice ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -88,20 +88,6 @@ Ex02RootManager* Ex02RootManager::Instance()
 //
 // public methods
 //
-
-
-//_____________________________________________________________________________
-void  Ex02RootManager::Register(const char* name,  void* clonesAddress)
-{
-// Creates a branch of the given name and associates it with
-// the given address.
-// ---
-
-  if (!fTree->GetBranch(name)) 
-    fTree->Branch(name, clonesAddress, 32000, 99);
-  else  
-    fTree->GetBranch(name)->SetAddress(clonesAddress);
-}
 
 //_____________________________________________________________________________
 void  Ex02RootManager::Register(const char* name, const char* className, 

@@ -1,9 +1,9 @@
-// $Id: Ex03CalorimeterSD.cxx,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+// $Id: Ex03CalorimeterSD.cxx,v 1.1 2003/03/17 14:56:51 brun Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
 // Id: ExN03CalorimeterSD.cc,v 1.6 2002/01/09 17:24:12 ranjard Exp 
-// GEANT4 tag $Name: geant4-05-00 $
+// GEANT4 tag $Name:  $
 //
 // by Ivana Hrivnacova, 6.3.2003
 
@@ -141,7 +141,8 @@ void Ex03CalorimeterSD::Register()
 // Registers the hits collection in Root manager.
 // ---
   
-  Ex02RootManager::Instance()->Register("hits", &fCalCollection);
+  Ex02RootManager::Instance()
+    ->Register("hits", "TClonesArray", &fCalCollection);
 }
 
 //_____________________________________________________________________________

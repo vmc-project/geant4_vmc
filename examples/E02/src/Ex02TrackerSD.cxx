@@ -1,4 +1,4 @@
-// $Id: Ex02TrackerSD.cxx,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+// $Id: Ex02TrackerSD.cxx,v 1.2 2003/07/22 06:38:16 brun Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -129,7 +129,8 @@ void Ex02TrackerSD::Register()
 // Registers the hits collection in Root manager.
 // ---
   
-  Ex02RootManager::Instance()->Register("hits", &fTrackerCollection);
+  Ex02RootManager::Instance()
+    ->Register("hits", "TClonesArray", &fTrackerCollection);
 }
 
 //_____________________________________________________________________________
