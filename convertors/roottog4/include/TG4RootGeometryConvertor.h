@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryConvertor.h,v 1.1 2003/07/22 06:46:58 brun Exp $
+// $Id: TG4RootGeometryConvertor.h,v 1.2 2003/12/18 13:25:45 brun Exp $
 //
 // Author: I. Hrivnacova, 8.1.2003
 //
@@ -9,10 +9,13 @@
 #ifndef TG4_ROOT_GEOMETRY_CONVERTOR_H
 #define TG4_ROOT_GEOMETRY_CONVERTOR_H
 
-#include "globals.hh"
-#include "map"
+#include <map>
+
+#include <globals.hh>
+#include <geomdefs.hh>
 
 class TGeoVolume;
+class TGeoPatternFinder;
 
 class G4VPhysicalVolume;
 class G4LogicalVolume;
@@ -43,9 +46,15 @@ class TG4RootGeometryConvertor
     // methods
     void Append(G4String& string, G4int number) const;
     void SetUniqueName(G4LogicalVolume* lv, G4int number) const;
+    EAxis GetAxis(const TGeoPatternFinder* finder) const;
+    Int_t GetIAxis(EAxis axis) const;
+    Bool_t IsDivided(const TGeoVolume* volume);
     G4LogicalVolume* CreateLV(const TGeoVolume* volume);
-    void ProcessDaughters(G4LogicalVolume* motherLV, const TGeoVolume* mother);
+    void CreatePlacements(const TGeoVolume* volume, G4LogicalVolume* mLV);
+    void CreateDivision(const TGeoVolume* volume, G4LogicalVolume* mLV);
+    
     void SetUniqueNames();
+    void ProcessDaughters(G4LogicalVolume* motherLV, const TGeoVolume* mother);
     void ProcessPositions();
     
     // static data members

@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryConvertor.cxx,v 1.1 2003/07/22 06:46:58 brun Exp $
+// $Id: TG4RootGeometryConvertor.cxx,v 1.2 2003/12/18 13:25:45 brun Exp $
 //
 // Author: I. Hrivnacova, 8.1.2003 
 //
@@ -23,6 +23,7 @@
 #include <G4LogicalVolume.hh>
 #include <G4VPhysicalVolume.hh>
 #include <G4PVPlacement.hh>
+#include <G4PVDivision.hh>
 #include <G4Transform3D.hh>
 #include <G4ReflectionFactory.hh>
 #include <G3toG4RotationMatrix.hh>
@@ -91,6 +92,101 @@ void TG4RootGeometryConvertor::SetUniqueName(G4LogicalVolume* lv,
 }  
 
 //_____________________________________________________________________________
+Bool_t TG4RootGeometryConvertor::IsDivided(const TGeoVolume* mother)
+{
+// Returns true if the volume is divided
+// and can be processed via G4PVDivision.
+// ---
+
+  // Check if division is present
+  const TGeoPatternFinder* finder = mother->GetFinder();    
+  if (!finder) return false;
+    
+  // Get division axis
+  EAxis axis = GetAxis(finder);
+  if (axis == kUndefined) return false;
+  
+  // Volume can be processed via G4PVDivision
+  return true;
+}  
+
+//_____________________________________________________________________________
+EAxis TG4RootGeometryConvertor::GetAxis(const TGeoPatternFinder* finder) const
+{
+// Checks the finder concrete type and returns the division axis.
+// ---
+
+  const TGeoPatternX*  finderX 
+    = dynamic_cast<const TGeoPatternX*>(finder);
+  if (finderX) return kXAxis;
+
+  const TGeoPatternY*  finderY 
+    = dynamic_cast<const TGeoPatternY*>(finder);
+  if (finderY) return kYAxis;
+
+  const TGeoPatternZ*  finderZ 
+    = dynamic_cast<const TGeoPatternZ*>(finder);
+  if (finderZ) return kZAxis;
+
+  const TGeoPatternParaX*  finderParaX 
+    = dynamic_cast<const TGeoPatternParaX*>(finder);
+  if (finderParaX) return kXAxis;
+
+  const TGeoPatternParaY*  finderParaY 
+    = dynamic_cast<const TGeoPatternParaY*>(finder);
+  if (finderParaY) return kYAxis;
+
+  const TGeoPatternParaZ*  finderParaZ 
+    = dynamic_cast<const TGeoPatternParaZ*>(finder);
+  if (finderParaZ) return kZAxis;
+
+  const TGeoPatternTrapZ*  finderTrapZ 
+    = dynamic_cast<const TGeoPatternTrapZ*>(finder);
+  if (finderTrapZ) return kZAxis;
+
+  const TGeoPatternCylR* finderR 
+    = dynamic_cast<const TGeoPatternCylR*>(finder);
+  if (finderR) return kRho;
+
+  const TGeoPatternCylPhi* finderPhi 
+    = dynamic_cast<const TGeoPatternCylPhi*>(finder);
+  if (finderPhi) return kPhi;
+
+  const TGeoPatternSphR* finderSphR 
+    = dynamic_cast<const TGeoPatternSphR*>(finder);
+  if (finderSphR) return kRadial3D;
+
+  const TGeoPatternSphPhi* finderSphPhi 
+    = dynamic_cast<const TGeoPatternSphPhi*>(finder);
+  if (finderSphPhi) return kPhi;
+  
+  // Not available in G4
+  // sphTheta
+  // Honeycomb
+  
+  return  kUndefined;
+}
+
+//_____________________________________________________________________________
+Int_t TG4RootGeometryConvertor::GetIAxis(EAxis axis) const
+{
+// Converts G4 axis enum to Root axis number.
+// ---
+
+  switch (axis) {
+    case kXAxis: return 1;
+    case kYAxis: return 2;
+    case kZAxis: return 3;
+    case kRho:   return 1;
+    case kPhi:   return 2;
+    case kRadial3D:  return 1;
+    case kUndefined: return 0;
+  }
+  
+  return 0;
+}
+
+//_____________________________________________________________________________
 G4LogicalVolume* 
 TG4RootGeometryConvertor::CreateLV(const TGeoVolume* volume)
 {
@@ -102,8 +198,6 @@ TG4RootGeometryConvertor::CreateLV(const TGeoVolume* volume)
    if (it != fVolumesMap.end()) 
      return (*it).second;
    
-   //G4cout << "Create LV: " << volume->GetName() << G4endl;
-
    // Convert shape
    G4VSolid* solid 
      = fShapeConvertor->Convert(volume->GetShape());
@@ -122,33 +216,106 @@ TG4RootGeometryConvertor::CreateLV(const TGeoVolume* volume)
 }     
 
 //_____________________________________________________________________________
-void TG4RootGeometryConvertor::ProcessDaughters(G4LogicalVolume* motherLV, 
-                                                const TGeoVolume* mother)
+void TG4RootGeometryConvertor::CreatePlacements(const TGeoVolume* mother, 
+                                                G4LogicalVolume* mLV)
 {
-// Builds G4 geometry for the daughters of specified volume.
+// Builds G4 geometry for the daughters of the specified volume.
 // ---
 
   for (G4int i=0; i<mother->GetNdaughters(); i++) {
-    const TGeoNode* dNode = mother->GetNode(i);
-    const TGeoVolume* daughter = dNode->GetVolume();
-
-    VolumesMapIterator it = fVolumesMap.find(daughter);
+    const TGeoNode* node = mother->GetNode(i);
+    const TGeoVolume* daughter = node->GetVolume();
       
-    G4LogicalVolume* dLV = 0;
-    if (it == fVolumesMap.end()) {
-      // G4cout << "Process daughters: " << daughter->GetName() << G4endl;
+    VolumesMapIterator itd = fVolumesMap.find(daughter);
+    G4LogicalVolume* dLV = (*itd).second;
 
-      // Create logical volume 
-      G4LogicalVolume* dLV = CreateLV(daughter);
-      fVolumesMap[daughter] = dLV;
-    }
-    else
-      dLV = (*it).second;
+    // Convert transformation
+    node->cd();
+    TGeoMatrix* matrix = node->GetMatrix();
+    const G4double* translation = matrix->GetTranslation();
+    const G4double* rotation = matrix->GetRotationMatrix();
+    const G4double* scale = matrix->GetScale();
+     
+    G4Translate3D translate3D(translation[0] * TG4TGeoUnits::Length(),
+                              translation[1] * TG4TGeoUnits::Length(), 
+	 		      translation[2] * TG4TGeoUnits::Length());
+    G3toG4RotationMatrix g3g4Rotation;
+    g3g4Rotation.SetRotationMatrixByRow(
+                      G4ThreeVector(rotation[0], rotation[1], rotation[2]),
+                      G4ThreeVector(rotation[3], rotation[4], rotation[5]),
+                      G4ThreeVector(rotation[6], rotation[7], rotation[8]));
+    G4Rotate3D rotate3D(g3g4Rotation);
+    G4Scale3D scale3D(scale[0], scale[1], scale[2]);
+ 
+    G4Transform3D transform3D = translate3D * (rotate3D) * scale3D;
 
-    if (it == fVolumesMap.end())     
-      for (G4int j=0; j<daughter->GetNdaughters(); j++) 
-         ProcessDaughters(dLV, daughter); 
+    // Place this node
+    //G4ReflectionFactory::Instance()
+    //  ->Place(transform3D, G4String(node->GetName()), dLV, mLV, false, i);
+    G4ReflectionFactory::Instance()
+      ->Place(transform3D, G4String(daughter->GetName()), dLV, mLV, false, i);
+  }    	
+}
+
+//_____________________________________________________________________________
+void TG4RootGeometryConvertor::CreateDivision(const TGeoVolume* mother,
+                                              G4LogicalVolume* mLV)
+{
+// Creates G4 physical volume division for the specified mother
+// ---
+
+  // Get  pattern finder
+  const TGeoPatternFinder* finder = mother->GetFinder();    
+  TGeoPatternFinder* finderNonConst = mother->GetFinder();    
+  if (!finder) { 
+    // add warning
+    return;
   }  
+
+  // Get division axis
+  EAxis axis = GetAxis(finder);
+  if (axis == kUndefined) {
+    // add warning
+    return;
+  }
+
+  // Get the first division volume
+  TGeoNode* dNode = finderNonConst->GetNodeOffset(0);
+  TGeoVolume* daughter = dNode->GetVolume();
+
+  // Debug info
+  // daughter->InspectShape();
+   
+  VolumesMapIterator itd = fVolumesMap.find(daughter);
+  G4LogicalVolume* dLV = (*itd).second;
+  
+  // Debug info
+  //G4cout << "Mother solid: " << *mLV->GetSolid() << G4endl;
+  //G4cout << "Cell solid: " << *dLV->GetSolid() << G4endl;
+  
+  // Get division parameters
+  G4int ndiv = finderNonConst->GetNdiv();
+  G4double start = finder->GetStart();
+  Double_t xlo, xhi;
+  mother->GetShape()->GetAxisRange(GetIAxis(axis), xlo, xhi);
+  G4double offset = start - xlo; 
+  G4double width  = finder->GetStep();
+    
+  // Convert units
+  if (axis == kXAxis || axis == kYAxis || axis == kZAxis ||
+      axis == kRho   || axis == kRadial3D) { 
+    offset *= TG4TGeoUnits::Length();
+    width *= TG4TGeoUnits::Length();
+  }  
+
+  if (axis == kPhi) {
+    offset *= TG4TGeoUnits::Angle();
+    width *= TG4TGeoUnits::Angle();
+  }  
+  
+  // Place this node
+  new G4PVDivision(G4String(daughter->GetName()), dLV, mLV, 
+                   axis, ndiv, width, offset);
 }
 
 //_____________________________________________________________________________
@@ -181,49 +348,48 @@ void TG4RootGeometryConvertor::SetUniqueNames()
 }
 
 //_____________________________________________________________________________
-void TG4RootGeometryConvertor::ProcessPositions()
+void TG4RootGeometryConvertor::ProcessDaughters(G4LogicalVolume* motherLV, 
+                                                const TGeoVolume* mother)
 {
 // Builds G4 geometry for the daughters of specified volume.
+// ---
+
+  for (G4int i=0; i<mother->GetNdaughters(); i++) {
+    const TGeoNode* dNode = mother->GetNode(i);
+    const TGeoVolume* daughter = dNode->GetVolume();
+
+    VolumesMapIterator it = fVolumesMap.find(daughter);
+      
+    G4LogicalVolume* dLV = 0;
+    if (it == fVolumesMap.end()) {
+      // Create logical volume 
+      G4LogicalVolume* dLV = CreateLV(daughter);
+      fVolumesMap[daughter] = dLV;
+    }
+    else
+      dLV = (*it).second;
+
+    if (it == fVolumesMap.end())     
+      for (G4int j=0; j<daughter->GetNdaughters(); j++) 
+         ProcessDaughters(dLV, daughter); 
+  }  
+}
+
+//_____________________________________________________________________________
+void TG4RootGeometryConvertor::ProcessPositions()
+{
+// Builds G4 geometry for the daughters of all volumes.
 // ---
 
   VolumesMapIterator it;
   for (it = fVolumesMap.begin(); it != fVolumesMap.end(); it++) {
     const TGeoVolume* mother = (*it).first;
     G4LogicalVolume* mLV = (*it).second;
- 
-    for (G4int i=0; i<mother->GetNdaughters(); i++) {
-      const TGeoNode* node = mother->GetNode(i);
-      const TGeoVolume* daughter = node->GetVolume();
-      
-      VolumesMapIterator itd = fVolumesMap.find(daughter);
-      G4LogicalVolume* dLV = (*itd).second;
 
-      // Convert transformation
-      node->cd();
-      TGeoMatrix* matrix = node->GetMatrix();
-      const G4double* translation = matrix->GetTranslation();
-      const G4double* rotation = matrix->GetRotationMatrix();
-      const G4double* scale = matrix->GetScale();
-     
-      G4Translate3D translate3D(translation[0] * TG4TGeoUnits::Length(),
-                                translation[1] * TG4TGeoUnits::Length(), 
-	 		        translation[2] * TG4TGeoUnits::Length());
-      G3toG4RotationMatrix g3g4Rotation;
-      g3g4Rotation.SetRotationMatrixByRow(
-                      G4ThreeVector(rotation[0], rotation[1], rotation[2]),
-                      G4ThreeVector(rotation[3], rotation[4], rotation[5]),
-                      G4ThreeVector(rotation[6], rotation[7], rotation[8]));
-      G4Rotate3D rotate3D(g3g4Rotation);
-      G4Scale3D scale3D(scale[0], scale[1], scale[2]);
- 
-      G4Transform3D transform3D = translate3D * (rotate3D) * scale3D;
-
-      // Place this node
-      //G4ReflectionFactory::Instance()
-      //  ->Place(transform3D, G4String(node->GetName()), dLV, mLV, false, i);
-      G4ReflectionFactory::Instance()
-        ->Place(transform3D, G4String(daughter->GetName()), dLV, mLV, false, i);
-    }
+    if (IsDivided(mother))
+      CreateDivision(mother, mLV);
+    else 
+      CreatePlacements(mother, mLV);
   }    	
 }
 
