@@ -1,4 +1,4 @@
-// $Id: Ex03MCApplication.cxx,v 1.4 2003/09/27 09:32:48 brun Exp $
+// $Id: Ex03MCApplication.cxx,v 1.5 2003/12/18 13:26:46 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
@@ -177,7 +177,8 @@ void Ex03MCApplication::InitGeometry()
 // ---
   
   fVerbose.InitGeometry();
-
+  
+  fDetConstruction->SetCuts();
   fCalorimeterSD->Initialize();
 }
 

@@ -1,9 +1,9 @@
-// $Id: $
+// $Id: Ex03DetectorConstruction.h,v 1.1 2003/03/17 14:56:51 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
 // Id: ExN03DetectorConstruction.hh,v 1.5 2002/01/09 17:24:11 ranjard Exp 
-// GEANT4 tag $Name: geant4-05-00 $
+// GEANT4 tag $Name:  $
 //
 // by Ivana Hrivnacova, 6.3.2003
 
@@ -28,6 +28,7 @@ class Ex03DetectorConstruction : public TObject
   public:
      void ConstructMaterials();
      void ConstructGeometry();
+     void SetCuts();
      void PrintCalorParameters(); 
      //void UpdateGeometry();
      
@@ -54,7 +55,6 @@ class Ex03DetectorConstruction : public TObject
      Int_t   GetMediumId(const TString& mediumName) const;
      TString GetMediumName(Int_t mediumId) const;
      void  ComputeCalorParameters();
-     void  SetCuts();
 
      // data members  
      Int_t     fNbOfLayers;

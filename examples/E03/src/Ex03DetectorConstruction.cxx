@@ -1,9 +1,9 @@
-// $Id: $
+// $Id: Ex03DetectorConstruction.cxx,v 1.1 2003/03/17 14:56:51 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
 // Id: ExN03DetectorConstruction.cc,v 1.11 2002/01/09 17:24:12 ranjard Exp 
-// GEANT4 tag $Name: geant4-05-00 $
+// GEANT4 tag $Name:  $
 //
 // by Ivana Hrivnacova, 6.3.2003
  
@@ -79,61 +79,6 @@ void Ex03DetectorConstruction::ComputeCalorParameters()
   fWorldSizeX  = 1.2*fCalorThickness; 
   fWorldSizeYZ = 1.2*fCalorSizeYZ;
 }
-
-//_____________________________________________________________________________
-void Ex03DetectorConstruction::SetCuts()
-{
-// Sets cuts for e-, gamma equivalent to 1mm cut in G4.
-// ---
-
-  Int_t mediumId = GetMediumId("Al");
-  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 597.e-06);
-  gMC->Gstpar(mediumId, "DCUTE",  597.e-06);
-
-  mediumId = GetMediumId("LiquidArgon");
-  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 343.e-06);
-  gMC->Gstpar(mediumId, "DCUTE",  343.e-06);
-
-  mediumId = GetMediumId("Lead");
-  gMC->Gstpar(mediumId, "CUTGAM", 101.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  101.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 1.38e-03);
-  gMC->Gstpar(mediumId, "DCUTE",  1.38e-03);
-
-  mediumId = GetMediumId("Water");
-  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 347.e-03);
-  gMC->Gstpar(mediumId, "DCUTE",  347.e-03);
-
-  mediumId = GetMediumId("Scintillator");
-  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 356.e-03);
-  gMC->Gstpar(mediumId, "DCUTE",  356.e-03);
-
-  mediumId = GetMediumId("Quartz");
-  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 534.e-03);
-  gMC->Gstpar(mediumId, "DCUTE",  534.e-03);
-
-  mediumId = GetMediumId("Air");
-  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 10.e-06);
-  gMC->Gstpar(mediumId, "DCUTE",  10.e-06);
-
-  mediumId = GetMediumId("Vacuum");
-  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 10.e-06);
-  gMC->Gstpar(mediumId, "DCUTE",  10.e-06);
-}    
 
 //
 // public methods
@@ -303,9 +248,6 @@ void Ex03DetectorConstruction::ConstructMaterials()
   gMC->Medium(mediumId, name.Data(), imat, 0, ifield, fieldm, tmaxfd, stemax,
               deemax, epsil, stmin, ubuf, 0);
   fMediaIds[name] = mediumId;
-
-  // Set cuts equivalent to those in G4 example
-  SetCuts();
 }    
 
 //_____________________________________________________________________________
@@ -407,6 +349,61 @@ void Ex03DetectorConstruction::ConstructGeometry()
   
   PrintCalorParameters();
 }
+
+//_____________________________________________________________________________
+void Ex03DetectorConstruction::SetCuts()
+{
+// Sets cuts for e-, gamma equivalent to 1mm cut in G4.
+// ---
+
+  Int_t mediumId = GetMediumId("Al");
+  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
+  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
+  gMC->Gstpar(mediumId, "CUTELE", 597.e-06);
+  gMC->Gstpar(mediumId, "DCUTE",  597.e-06);
+
+  mediumId = GetMediumId("LiquidArgon");
+  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
+  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
+  gMC->Gstpar(mediumId, "CUTELE", 343.e-06);
+  gMC->Gstpar(mediumId, "DCUTE",  343.e-06);
+
+  mediumId = GetMediumId("Lead");
+  gMC->Gstpar(mediumId, "CUTGAM", 101.e-06);
+  gMC->Gstpar(mediumId, "BCUTE",  101.e-06);
+  gMC->Gstpar(mediumId, "CUTELE", 1.38e-03);
+  gMC->Gstpar(mediumId, "DCUTE",  1.38e-03);
+
+  mediumId = GetMediumId("Water");
+  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
+  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
+  gMC->Gstpar(mediumId, "CUTELE", 347.e-03);
+  gMC->Gstpar(mediumId, "DCUTE",  347.e-03);
+
+  mediumId = GetMediumId("Scintillator");
+  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
+  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
+  gMC->Gstpar(mediumId, "CUTELE", 356.e-03);
+  gMC->Gstpar(mediumId, "DCUTE",  356.e-03);
+
+  mediumId = GetMediumId("Quartz");
+  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
+  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
+  gMC->Gstpar(mediumId, "CUTELE", 534.e-03);
+  gMC->Gstpar(mediumId, "DCUTE",  534.e-03);
+
+  mediumId = GetMediumId("Air");
+  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
+  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
+  gMC->Gstpar(mediumId, "CUTELE", 10.e-06);
+  gMC->Gstpar(mediumId, "DCUTE",  10.e-06);
+
+  mediumId = GetMediumId("Vacuum");
+  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
+  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
+  gMC->Gstpar(mediumId, "CUTELE", 10.e-06);
+  gMC->Gstpar(mediumId, "DCUTE",  10.e-06);
+}    
 
 //_____________________________________________________________________________
 void Ex03DetectorConstruction::PrintCalorParameters()
