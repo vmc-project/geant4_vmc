@@ -1,4 +1,4 @@
-// $Id:  $
+// $Id: TG4RootGeometryManager.cxx,v 1.1 2004/05/05 13:32:02 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova,  4.5.2004
@@ -31,6 +31,7 @@ TG4RootGeometryManager::TG4RootGeometryManager(
     fConvertor(),
     fGeometryServices(geometryServices),
     fMediumMap(mediumMap),
+    fMediumIdMap(),
     fMediumNameVector(mediumNameVector),
     fMediumCounter(0),
     fUseG3TMLimits(useG3TMLimits)
@@ -172,8 +173,8 @@ void TG4RootGeometryManager::Medium(Int_t& kmed, const char *name,
   
   if (nbuf > 0) {  
     G4String medName = name;
-    G4String text
-      = "TG4RootGeometryManager: user defined parameters for medium ";
+    G4String text = "TG4RootGeometryManager: Medium: \n";
+    text = text + "    User defined parameters for medium ";
     text = text + medName;
     text = text + " are ignored by Geant4.";  
     TG4Globals::Warning(text);
@@ -235,14 +236,15 @@ void TG4RootGeometryManager::ConvertRootMedias()
     
     Medium(kmed, medium->GetName(), material, isvol, ifield, fieldm, tmaxfd,
            stemax, deemax, epsil, stmin, ubuf, 0);
-    medium->SetUniqueID(kmed);
+	   
+    fMediumIdMap[medium->GetId()] = kmed;
   }  
 }    	         	            
     
 //_____________________________________________________________________________
 void TG4RootGeometryManager::FillMediumMap()
 {
-// Maps G3 tracking medium IDs to volumes names
+// Maps tracking medium IDs to volumes names
 // ---
 
   static G4int done = 0;
@@ -261,17 +263,14 @@ void TG4RootGeometryManager::FillMediumMap()
     G4String ext = G4ReflectionFactory::Instance()->GetVolumesNameExtension();
     if (name.find(ext)) g3Name = g3Name.substr(0, g3Name.find(ext));
 
-    const TGeoMedium* medium = fConvertor.GetMedium(lv);
-    if (!medium) {
-      G4String text = "TG4RootGeometryManager::FillMediumMap :\n";
-      text = text + "    No medium found for ";
-      text = text + name;
-      text = text + " logical volume";  
-      TG4Globals::Exception(text);
-    }  
+    // Get medium Id (in Root) from the convertor	 
+    G4int mediumIdinRoot = fConvertor.GetMediumId(lv);
     
-    G4int mediumID = medium->GetUniqueID();
-    fMediumMap->Add(name, mediumID);     
+    // Get medium Id (in VMC) from the map	 
+    G4int mediumId =  fMediumIdMap[mediumIdinRoot];
+    
+    // Map it to logical volume name
+    fMediumMap->Add(name, mediumId);     
   }
   
   done = lvStore->size();

@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryManager.h,v 1.2 2003/07/22 06:36:58 brun Exp $
+// $Id: TG4RootGeometryManager.h,v 1.1 2004/05/05 13:32:02 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -16,11 +16,11 @@
 
 #include "TG4Globals.h"
 #include "TG4Verbose.h"
+#include "TG4IntMap.h"
 #include "TG4RootGeometryConvertor.h"
 
 class TG4GeometryServices;
 class TG4NameMap;
-class TG4IntMap;
 
 class G4VPhysicalVolume;
 
@@ -66,6 +66,7 @@ class TG4RootGeometryManager : public TG4Verbose
     TG4RootGeometryConvertor fConvertor;       // roottog4 convertor
     TG4GeometryServices*     fGeometryServices;// geometry services
     TG4IntMap*        fMediumMap;        // map of volumes names to medias IDs
+    TG4intMap         fMediumIdMap;      // map of medium IDs
     TG4StringVector*  fMediumNameVector; // vector of material names sorted in
                                          // the order of medias in G3Med
     G4int   fMediumCounter;   //global medium counter
