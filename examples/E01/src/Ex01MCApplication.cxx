@@ -1,4 +1,4 @@
-// $Id: Ex01MCApplication.cxx,v 1.8 2003/12/18 13:26:46 brun Exp $
+// $Id: Ex01MCApplication.cxx,v 1.9 2004/07/05 08:50:27 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -114,9 +114,9 @@ void Ex01MCApplication::ConstructMaterialsOld()
   Double_t tmaxfd = -20.;    // Maximum angle due to field deflection 
   Double_t deemax = -.3;     // Maximum fractional energy loss, DLS 
   Double_t stmin  = -.8;
-  fImedAr = 1;
-  fImedAl = 2;
-  fImedPb = 3;
+  fImedAr = 11;
+  fImedAl = 12;
+  fImedPb = 13;
   gMC->Medium(fImedAr, "ArgonGas",  imatAr, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0); 
   gMC->Medium(fImedAl, "Aluminium", imatAl, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0); 
   gMC->Medium(fImedPb, "Lead", imatLead, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0); 
@@ -174,9 +174,9 @@ void Ex01MCApplication::ConstructMaterials()
   Double_t tmaxfd = -20.;    // Maximum angle due to field deflection 
   Double_t deemax = -.3;     // Maximum fractional energy loss, DLS 
   Double_t stmin  = -.8;
-  fImedAr = 1;
-  fImedAl = 2;
-  fImedPb = 3;
+  fImedAr = 11;
+  fImedAl = 12;
+  fImedPb = 13;
   gGeoManager->Medium("ArgonGas", fImedAr, imatAr, 0, ifield, fieldm, tmaxfd, 
                       stemax, deemax, epsil, stmin); 
   gGeoManager->Medium("Aluminium", fImedAl, imatAl, 0, ifield, fieldm, tmaxfd,
@@ -315,7 +315,6 @@ void Ex01MCApplication::InitMC(const char* setup)
   // Initialize MC.
   //
 
-
   gROOT->LoadMacro(setup);
   gInterpreter->ProcessLine("Config()");
  
@@ -372,7 +371,14 @@ void Ex01MCApplication::InitGeometry()
   // Initialize geometry
   //
   
-  // Nothing needed in this example
+  if (gMC->IsRootGeometrySupported()) {
+    // If geometry is constructed via TGeo,
+    // the materials and tracking media indices
+    // can be changed by MC !!!
+    fImedAr = gGeoManager->GetMedium("ArgonGas")->GetId();
+    fImedAl = gGeoManager->GetMedium("Aluminium")->GetId();
+    fImedPb = gGeoManager->GetMedium("Lead")->GetId();
+  }  
 }
 
 //_____________________________________________________________________________
@@ -471,7 +477,13 @@ void Ex01MCApplication::Stepping()
   
   cout << "Track " 
        << position.X() << " " << position.Y() << " " << position.Z() 
-       << "  in " <<  gMC->CurrentVolName() << endl;
+       << "  in " <<  gMC->CurrentVolName() << "  ";
+       
+  if (gMC->GetMedium() == fImedAr) cout <<  "ArgonGas";      
+  if (gMC->GetMedium() == fImedAl) cout <<  "Aluminium";      
+  if (gMC->GetMedium() == fImedPb) cout <<  "Lead";      
+
+  cout << endl;
 }
 
 //_____________________________________________________________________________
