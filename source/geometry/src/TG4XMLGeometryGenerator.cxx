@@ -1,4 +1,4 @@
-// $Id: TG4XMLGeometryGenerator.cxx,v 1.4 2002/08/02 12:49:42 ivana Exp $
+// $Id: TG4XMLGeometryGenerator.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova, 27.07.2000 
@@ -9,7 +9,6 @@
 
 #include "TG4XMLGeometryGenerator.h"
 #include "TG4XMLConvertor.h"
-#include "TG4Globals.h"
 
 #include <G4Material.hh>
 #include <G4VSolid.hh>
@@ -20,20 +19,29 @@
 #include <G4PVReplica.hh>
 #include <G4ThreeVector.hh>
 #include <G4RotationMatrix.hh>
+#include <G4LogicalVolumeStore.hh>
+#include <G4TransportationManager.hh>
+#include <G4Navigator.hh>
+#include <globals.hh>
 
 #include <g4std/iomanip>
 #include <g4std/vector>
+
+#include <stdlib.h>
 
 TG4XMLGeometryGenerator* TG4XMLGeometryGenerator::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4XMLGeometryGenerator::TG4XMLGeometryGenerator()
-  : TG4Verbose("geometryGenerator") 
+  : fMessenger(this),
+    fVerboseLevel(1) 
 {
 //
   if (fgInstance) {
-    TG4Globals::Exception(
-      "TG4XMLGeometryGenerator: attempt to create two instances of singleton.");
+    G4cerr << "    TG4XMLGeometryGenerator::TG4XMLGeometryGenerator: " << G4endl;
+    G4cerr << "    Attempt to create two instances of singleton." << G4endl;
+    G4cerr << "*** Exception: Aborting execution ***" << G4endl;   
+    exit(1);
   }
 
   fConvertor = new TG4XMLConvertor(fOutFile);  
@@ -42,11 +50,13 @@ TG4XMLGeometryGenerator::TG4XMLGeometryGenerator()
 //_____________________________________________________________________________
 TG4XMLGeometryGenerator::TG4XMLGeometryGenerator(
                                        const TG4XMLGeometryGenerator& right) 
-  : TG4Verbose("geometryGenerator") 
+  : fMessenger(this),
+    fVerboseLevel(0)  
 {
 // 
-  TG4Globals::Exception(
-    "TG4XMLGeometryGenerator: attempt to copy singleton.");
+    G4cerr << "    Attempt to copy TG4XMLGeometryGenerator singleton." << G4endl;
+    G4cerr << "*** Exception: Aborting execution ***" << G4endl;   
+    exit(1);
 }
 
 //_____________________________________________________________________________
@@ -65,8 +75,9 @@ TG4XMLGeometryGenerator::operator=(const TG4XMLGeometryGenerator& right)
   // check assignement to self
   if (this == &right) return *this;
 
-  TG4Globals::Exception(
-    "Attempt to assign TG4XMLGeometryGenerator singleton.");
+  G4cerr << "    Attempt to assign TG4XMLGeometryGenerator singleton." << G4endl;
+  G4cerr << "*** Exception: Aborting execution ***" << G4endl;   
+  exit(1);
     
   return *this;  
 }    
@@ -103,7 +114,7 @@ void TG4XMLGeometryGenerator::ProcessSolids(G4LogicalVolume* lv)
   if (nofDaughters>0) 
     for (G4int i=0; i<nofDaughters; i++) {
 
-      if (VerboseLevel() > 1) {
+      if (fVerboseLevel > 1) {
         G4cout << "processing " << i << "th daughter of " 
                << lv->GetName() << G4endl;
       }
@@ -206,7 +217,7 @@ void TG4XMLGeometryGenerator::ProcessLogicalVolume(G4LogicalVolume* lv)
   G4int i;
   for (i=0; i<nofDaughters; i++) {
 
-    if (VerboseLevel() > 1) {
+    if (fVerboseLevel > 1) {
       G4cout << "processing " << i << "th daughter of " 
              << lv->GetName() << G4endl;
     }	     
@@ -258,11 +269,12 @@ void TG4XMLGeometryGenerator::ProcessLogicalVolume(G4LogicalVolume* lv)
       	  fConvertor->WriteReplica(compName, pvr);
       }
       else {
-        G4String text = "TG4XMLGeometryGenerator::ProcessLogicalVolume: \n";
-        text = text + "    Limitation: \n";
-        text = text + "    Other physical volumes than PVPlacement and PVReplica";
-        text = text + " are not implemented.";
-        TG4Globals::Exception(text);
+        G4cerr << "    TG4XMLGeometryGenerator::ProcessLogicalVolume: " << G4endl;
+        G4cerr << "    Limitation: " << G4endl;
+        G4cerr << "    Other physical volumes than PVPlacement and PVReplica"
+        G4cerr << " are not implemented.";
+        G4cerr << "*** Exception: Aborting execution ***" << G4endl;   
+        exit(1);
       }
     }  
   }  
@@ -287,6 +299,35 @@ void TG4XMLGeometryGenerator::ProcessLogicalVolume(G4LogicalVolume* lv)
 }  
 
 //_____________________________________________________________________________
+void TG4XMLGeometryGenerator::GenerateXMLGeometry(G4LogicalVolume* lv)  
+{
+// Generates XML geometry file starting from the specified logical volume.
+// ---
+
+  // filename
+  G4String fileName(lv->GetName());
+  fileName = fileName + ".xml";
+  
+  // set top volume name
+  G4String topName = lv->GetName() + "_comp";
+  
+  // generate XML  
+  OpenFile(fileName);
+
+  // generate materials 
+  // not implemented
+  // GenerateMaterials(version, "today", "Generated from G4", "v4", lv);
+
+  // generate volumes tree
+  GenerateSection("v6", lv->GetName(), "0", "today",
+                  "Generated from Geant4", topName, lv);
+  CloseFile();
+  
+  if (fVerboseLevel > 0) 
+    G4cout << "File " << fileName << " has been generated." << G4endl;
+}  
+
+//_____________________________________________________________________________
 void TG4XMLGeometryGenerator::ClearMaterialNames() 
 {
 // Clears the set of material names.
@@ -305,6 +346,41 @@ void TG4XMLGeometryGenerator::ClearVolumeNames()
 }  
 
 // public methods
+
+//_____________________________________________________________________________
+void TG4XMLGeometryGenerator::GenerateXMLGeometry()
+{
+// Generates XML geometry file from the top (world) volume.
+// ---
+
+  // Get world volume
+  G4VPhysicalVolume* world 
+    = G4TransportationManager::GetTransportationManager()
+      ->GetNavigatorForTracking()->GetWorldVolume();
+  GenerateXMLGeometry(world->GetLogicalVolume());
+}  
+
+//_____________________________________________________________________________
+void TG4XMLGeometryGenerator::GenerateXMLGeometry(const G4String& lvName) 
+{
+// Generates XML geometry file from the logical volume specified by name.
+// ---
+
+  // Find volume
+  G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
+
+  for (G4int i=0; i<G4int(lvStore->size()); i++) {
+    G4LogicalVolume* lv = (*lvStore)[i];
+    if (lv->GetName() == lvName) {
+      GenerateXMLGeometry(lv);
+      return;
+    }  
+  }
+
+  G4String text = "TG4XMLGeometryGenerator::GenerateXMLGeometry:\n"; 
+  text = text + "    Logical volume " + lvName + " does not exist.";
+  G4cerr << "Warning: " << text << G4endl;
+}  
 
 //_____________________________________________________________________________
 void TG4XMLGeometryGenerator::GenerateMaterials( 
@@ -377,7 +453,7 @@ void TG4XMLGeometryGenerator::OpenFile(G4String filePath)
   if (!fOutFile) {
     G4String text = "Cannot open ";
     text = text + filePath;
-    TG4Globals::Warning(text);  
+    G4cerr << "Warning: " << text << G4endl;  
   }
   
   // use FORTRAN compatibility output

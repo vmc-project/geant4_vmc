@@ -1,4 +1,4 @@
-// $Id: TG4XMLGeometryGenerator.h,v 1.2 2002/07/31 16:06:00 ivana Exp $
+// $Id: TG4XMLGeometryGenerator.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova, 27.07.2000 
@@ -12,18 +12,21 @@
 #ifndef TG4_XML_GEOMETRY_GENERATOR_H
 #define TG4_XML_GEOMETRY_GENERATOR_H
 
-#include "TG4Verbose.h"
-#include "TG4Globals.h"
-
 #include <globals.hh>
 #include <g4std/fstream>
+#include <g4std/set>
+
+#include "TG4XMLMessenger.h"
 
 class TG4VXMLConvertor;
 
 class G4LogicalVolume;
 
-class TG4XMLGeometryGenerator : public TG4Verbose
+class TG4XMLGeometryGenerator
 {
+  public:
+    typedef G4std::set <G4String, G4std::less<G4String> > StringSet; 
+
   public:
     TG4XMLGeometryGenerator();
     // --> protected
@@ -34,6 +37,8 @@ class TG4XMLGeometryGenerator : public TG4Verbose
     static TG4XMLGeometryGenerator* Instance();
 
     // methods
+    void GenerateXMLGeometry();
+    void GenerateXMLGeometry(const G4String& lvName);
     void GenerateMaterials(const G4String& version, const G4String& date,
             const G4String& author,  const G4String dtdVersion,
 	    G4LogicalVolume* lv);
@@ -43,6 +48,7 @@ class TG4XMLGeometryGenerator : public TG4Verbose
 	    G4LogicalVolume* lv);
     void OpenFile(G4String filePath);
     void CloseFile();
+    void SetVerboseLevel(G4int verboseLevel);
 
   protected:
     TG4XMLGeometryGenerator(const TG4XMLGeometryGenerator& right);
@@ -53,6 +59,7 @@ class TG4XMLGeometryGenerator : public TG4Verbose
   private:
     // methods
     void CutName(G4String& name) const;
+    void GenerateXMLGeometry(G4LogicalVolume* lv);
     void ProcessLogicalVolume(G4LogicalVolume* lv); 
     void ProcessMaterials(G4LogicalVolume* lv); 
     void ProcessSolids(G4LogicalVolume* lv); 
@@ -64,10 +71,12 @@ class TG4XMLGeometryGenerator : public TG4Verbose
     static TG4XMLGeometryGenerator*  fgInstance;     //this instance
 
     // data members
+    TG4XMLMessenger    fMessenger; //messenger
     TG4VXMLConvertor*  fConvertor; //interface to XML convertor 
     G4std::ofstream    fOutFile;   //output file
-    TG4StringSet       fMaterialNames;   //set of names of materials 
-    TG4StringSet       fVolumeNames;     //set of names of solids
+    StringSet          fMaterialNames;   //set of names of materials 
+    StringSet          fVolumeNames;     //set of names of solids
+    G4int              fVerboseLevel;    //level of verbosity
 };
 
 
@@ -75,5 +84,8 @@ class TG4XMLGeometryGenerator : public TG4Verbose
 inline TG4XMLGeometryGenerator* TG4XMLGeometryGenerator::Instance()
 { return fgInstance; }
 
-#endif //TG4_GEOMETRY_XML_MANAGER_H
+inline void TG4XMLGeometryGenerator::SetVerboseLevel(G4int verboseLevel)
+{ fVerboseLevel = verboseLevel; }
+
+#endif //TG4_XML_GEOMETRY_GENERATOR_H
 
