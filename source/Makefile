@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.5 2002/11/12 13:31:01 brun Exp $
+# $Id: Makefile,v 1.6 2002/11/12 14:51:39 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
@@ -145,6 +145,7 @@ SLIBRARY	= $(LIBDIR)/lib$(PACKAGE).$(SL)
 ALIBRARY	= $(LIBDIR)/lib$(PACKAGE).a
 
 default:	depend $(SLIBRARY)
+all:		default includes
 
 
 $(LIBDIR)/lib$(PACKAGE).$(SL):  $(OBJS)
