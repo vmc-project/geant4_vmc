@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: makedist.sh,v 1.1 2002/10/08 08:34:48 brun Exp $
+# $Id: makedist.sh,v 1.2 2002/12/18 16:49:24 brun Exp $
 # -------------------------------------------------------------------------
 # Script to produce source and optionally binary distribution of geant4_vmc.
 # Called by main Makefile.
@@ -44,7 +44,7 @@ else
 fi
 
 $TAR $TARFILE $EXCLUDE geant4_vmc/README geant4_vmc/"history" geant4_vmc/config  \
-   geant4_vmc/"source" geant4_vmc/examples $MAKELIB
+   geant4_vmc/"source" geant4_vmc/convertors geant4_vmc/examples $MAKELIB
 cd $CURDIR
 
 exit 0
