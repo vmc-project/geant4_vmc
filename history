@@ -1,8 +1,30 @@
-$Id: history,v 1.6 2003/06/03 18:53:12 brun Exp $
+$Id: history,v 1.7 2003/07/22 06:39:32 brun Exp $
 -----------------------------------------------------------------
      
 Tags (history):
 ===============
+  10/10/2003:
+  v1-1:
+    Geant4_vmc:
+    Implemented new functions from TVirtualMC
+    enabling user to define own particles and ions
+    + getter functions:
+    DefineParticle(..)
+    DefineIon(..)
+    ParticleName(..) const
+    ParticleMass(..) const	  
+    Double_t  ParticleCharge(..) const
+    Double_t  ParticleLifeTime(..) const
+    TMCParticleType ParticleMCType(..) const
+
+    Examples:
+    Update to changes in VMC:
+    removed functions TrackingRmax, TrackingZmax (not needed if default is used);
+    removed calls to gMC->DefineParticles() in InitMC 
+    (this function is going to be removed from TVirtualMC).  
+   
+    Tested with Geant4 5.2, Root 3.10/01.
+
   21/07/2003:
   v1-0:
     Convertors:
