@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4DetConstructionMessenger.h,v 1.2 2002/10/10 13:17:55 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -52,7 +52,6 @@ class TG4DetConstructionMessenger: public G4UImessenger
     G4UIcmdWithABool*           fSetReadGeometryCmd;  //command: readGeometry   
     G4UIcmdWithABool*           fSetWriteGeometryCmd; //command: writeGeometry    
     G4UIcmdWithoutParameter*    fPrintMaterialsCmd;   //command: printMatrials     
-    G4UIcmdWithAString*         fGenerateXMLCmd;      //command: generateXML
 };
 
 #endif //TG4_DET_CONSTRUCTION_MESSENGER_H

@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.cxx,v 1.2 2002/10/10 13:17:55 brun Exp $
+// $Id: TG4DetConstructionMessenger.cxx,v 1.3 2002/12/18 09:35:31 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -65,15 +65,6 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
     = new G4UIcmdWithoutParameter("/mcDet/printMaterials", this);
   fPrintMaterialsCmd->SetGuidance("Prints all materials.");
   fPrintMaterialsCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);   
-
-  fGenerateXMLCmd 
-    = new G4UIcmdWithAString("/mcDet/generateXML", this);
-  fGenerateXMLCmd->SetGuidance("Generate geometry XML file");
-  fGenerateXMLCmd->SetGuidance("starting from a logical volume specified by name;");
-  fGenerateXMLCmd->SetGuidance("if no name is given - the whole world is processed.");
-  fGenerateXMLCmd->SetParameterName("lvName", true);
-  fGenerateXMLCmd->SetDefaultValue("");
-  fGenerateXMLCmd->AvailableForStates(G4State_Idle);   
 }
 
 //_____________________________________________________________________________
@@ -99,7 +90,6 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger() {
   delete fSetReadGeometryCmd;
   delete fSetWriteGeometryCmd;
   delete fPrintMaterialsCmd;
-  delete fGenerateXMLCmd;
 }
 
 // operators
@@ -149,11 +139,5 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
   }    
   else if (command == fPrintMaterialsCmd) {
     fDetConstruction->PrintMaterials();
-  }    
-  else if (command == fGenerateXMLCmd) {    
-    if (newValues == "") 
-     fDetConstruction->GenerateXMLGeometry();
-    else 
-     fDetConstruction->GenerateXMLGeometry(newValues);
   }    
 }
