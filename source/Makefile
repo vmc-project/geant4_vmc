@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.4 2002/10/08 13:27:30 brun Exp $
+# $Id: Makefile,v 1.5 2002/11/12 13:31:01 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
@@ -156,8 +156,8 @@ $(DICT): 	$(HDRS)
 
 depend:		$(SRCS)
 
-TOCLEAN		= $(BINDIR)
-TOCLEANALL	= $(BINDIR) $(LIBDIR)
+TOCLEAN		= $(BINDIR) $(TOPDIR)/include
+TOCLEANALL	= $(BINDIR) $(TOPDIR)/include $(LIBDIR)
 
 MAKEDIST	= ../config/makedist.sh lib
 MAKEDISTSRC	= ../config/makedist.sh
