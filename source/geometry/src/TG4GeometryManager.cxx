@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.3 2003/07/22 06:36:58 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.4 2004/03/26 11:05:05 brun Exp $
 // Category: geometry
 //
 // Author: V. Berejnoi, I. Hrivnacova
@@ -12,6 +12,7 @@
 // added by I.Hrivnacova, 27.5.1999.
 
 #include "TG4GeometryManager.h"
+#include "TG4RootGeometryManager.h"
 #include "TG4GeometryOutputManager.h"
 #include "TG4GeometryServices.h"
 #include "TG4Limits.h"
@@ -19,8 +20,6 @@
 #include "TG4G3CutVector.h"
 #include "TG4G3ControlVector.h"
 #include "TG4Globals.h"
-
-#include "TG4RootGeometryConvertor.h"
 
 #include <G3toG4.hh> 
 #include <G3toG4MANY.hh>
@@ -146,7 +145,6 @@ void TG4GeometryManager::FillMediumMap()
   
   done = lvStore->size();
 }    
-
 
 //=============================================================================
 //
@@ -901,28 +899,11 @@ void TG4GeometryManager::SetRootGeometry()
 // Converts Root geometry to G4 geometry objects.
 // ---
 
-  // Check Root manager
-  if (!gGeoManager) {
-    TG4Globals::Exception(
-      "TG4GeometryManager::SetRootGeometry: Root geometry manager not found.");
-  }    
-
-  // Get Root top volume
-  TGeoVolume* top = (TGeoVolume*)gGeoManager->GetListOfVolumes()->First();
-  if (!top) {
-    TG4Globals::Exception(
-      "TG4GeometryManager::SetRootGeometry: Root top volume not found.");
-  }    
-
-  // Close Root geometry
-  gGeoManager->SetTopVolume(top);
-  gGeoManager->CloseGeometry();  
-
-  // Convert Root geometry to G4
-  TG4RootGeometryConvertor convertor;
-  convertor.SetSeparator(fGeometryServices->GetSeparator());
-  G4VPhysicalVolume* g4World = convertor.Convert(gGeoManager->GetTopVolume());
-  fGeometryServices->SetWorld(g4World);
+  TG4RootGeometryManager rootGeometryManager( fGeometryServices, 
+			     &fMediumMap, &fMediumNameVector, fUseG3TMLimits);
+			      
+  rootGeometryManager.ImportRootGeometry();
+  
   fVMCGeometry = false;
 }                   
  
@@ -1010,29 +991,22 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
  
     // get limits from G3Med
     TG4Limits* tg4Limits = 0;
+    G4int mediumIndex = fGeometryServices->GetMediumId(lv); 
+    G3MedTableEntry* medium = G3Med.get(mediumIndex);   
+    G4UserLimits* limits = medium->GetLimits();
+    tg4Limits = fGeometryServices->GetLimits(limits);
 
-    if (fVMCGeometry) {    
-      G4int mediumIndex = fGeometryServices->GetMediumId(lv); 
-      G3MedTableEntry* medium = G3Med.get(mediumIndex);   
-      G4UserLimits* limits = medium->GetLimits();
-      tg4Limits = fGeometryServices->GetLimits(limits);
-
-      // get tracking medium name
-      G4String name = fMediumNameVector[mediumIndex-1];
+    // get tracking medium name
+    G4String name = fMediumNameVector[mediumIndex-1];
     
-      if (tg4Limits) 
-        tg4Limits->SetName(name);
-      else {
-        tg4Limits = fGeometryServices->FindLimits(name, true);  
-        if (!tg4Limits) 
-          tg4Limits = new TG4Limits(name, cuts, controls); 
-	medium->SetLimits(tg4Limits);  
-      }
-    }
+    if (tg4Limits) 
+      tg4Limits->SetName(name);
     else {
-      G4String name = lv->GetMaterial()->GetName();
-      tg4Limits = new TG4Limits(name, cuts, controls); 
-    }        
+      tg4Limits = fGeometryServices->FindLimits(name, true);  
+      if (!tg4Limits) 
+        tg4Limits = new TG4Limits(name, cuts, controls); 
+      medium->SetLimits(tg4Limits);  
+    }
     
     // limit max step for low density materials (< AIR)
     if (lv->GetMaterial()->GetDensity() < fgLimitDensity ) 
