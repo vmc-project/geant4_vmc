@@ -1,4 +1,4 @@
-// $Id: Ex02MCApplication.cxx,v 1.6 2003/09/23 14:22:27 brun Exp $
+// $Id: Ex02MCApplication.cxx,v 1.7 2003/09/27 09:32:48 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -92,7 +92,6 @@ void Ex02MCApplication::InitMC(const char* setup)
   gInterpreter->ProcessLine("Config()");
  
   gMC->SetStack(fStack);
-  //gMC->DefineParticles();
   gMC->Init();
   gMC->BuildPhysics(); 
   

@@ -1,4 +1,4 @@
-// $Id: Ex01MCApplication.cxx,v 1.6 2003/09/23 14:22:27 brun Exp $
+// $Id: Ex01MCApplication.cxx,v 1.7 2003/09/27 09:32:47 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -107,8 +107,8 @@ void Ex01MCApplication::ConstructMaterialsOld()
   // Tracking medias
   //
 
-  Int_t ifield = 0;         // No magnetic field 
-  Double_t fieldm = 0.;     //
+  Int_t ifield = 0;          // No magnetic field
+  Double_t fieldm = 0.;      //
   Double_t epsil  = .001;    // Tracking precision, 
   Double_t stemax = -0.01;   // Maximum displacement for multiple scat 
   Double_t tmaxfd = -20.;    // Maximum angle due to field deflection 
@@ -316,7 +316,6 @@ void Ex01MCApplication::InitMC(const char* setup)
   gInterpreter->ProcessLine("Config()");
  
   gMC->SetStack(fStack);
-  //gMC->DefineParticles();
   gMC->Init();
   gMC->BuildPhysics();  
 }
