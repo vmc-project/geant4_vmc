@@ -1,16 +1,24 @@
-# $Id: Makefile,v 1.2 2002/10/08 13:27:30 brun Exp $
+# $Id: Makefile,v 1.3 2002/11/22 13:28:04 brun Exp $
 
 ############################### geant4vmc Makefile ###########################
 
 PACKAGE   = example01
 
-ifndef PLATFORM
-  PLATFORM = $(shell uname)
+ifeq ($(PLATFORM),)
+PLATFORM = $(shell root-config --arch)
 endif
 
 TOPDIR  = $(shell pwd)/../..
 BINDIR  = $(TOPDIR)/tmp/tgt_$(PLATFORM)/$(PACKAGE)
 LIBDIR  = $(TOPDIR)/lib/tgt_$(PLATFORM)
+
+ifeq ($(ROOTSYS),)
+ROOT_INCDIR = $(shell root-config --incdir)
+ROOT_BINDIR = $(shell root-config --prefix)/bin
+else
+ROOT_INCDIR = $(ROOTSYS)/include
+ROOT_BINDIR = $(ROOTSYS)/bin
+endif
 
 include $(TOPDIR)/config/Makefile.$(PLATFORM)
 
@@ -48,9 +56,9 @@ INCDIR  := -Iinclude
 
 # C++ compilation flags
 #
-CXXFLAGS := $(CXXOPTS) -I. $(INCDIR) -I$(ROOTSYS)/include 
+CXXFLAGS := $(CXXOPTS) -I. $(INCDIR) -I$(ROOT_INCDIR) 
 
-DEPINC 		+= -I. -I$(ROOTSYS)/include $(INCDIR)
+DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCDIR)
 
 ############################### Targets #######################################
 

@@ -1,4 +1,4 @@
-# $Id: MakeMacros,v 1.5 2003/10/03 10:51:51 brun Exp $
+# $Id: MakeMacros,v 1.6 2004/03/04 16:46:57 brun Exp $
 
 ############################   MACROS   #######################################
 
@@ -57,7 +57,7 @@ clean_includes:
 	@rm -rf $(TOPDIR)/include
 
 depend:
-		-@$(ROOTSYS)/bin/rmkdepend -f$(BINDIR)/Make-depend -p$(BINDIR)/ -- $(CXXFLAGS) $(DEPINC) -- $^ 2>/dev/null
+		-@$(ROOT_BINDIR)/rmkdepend -f$(BINDIR)/Make-depend -p$(BINDIR)/ -- $(CXXFLAGS) $(DEPINC) -- $^ 2>/dev/null
 
 $(BINDIR)/Make-depend:
 		@[ -d $(dir $@) ] || mkdir -p $(dir $@)

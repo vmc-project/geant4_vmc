@@ -1,16 +1,24 @@
-# $Id: Makefile,v 1.1 2003/07/22 06:46:57 brun Exp $
+# $Id: Makefile,v 1.2 2004/03/04 16:46:57 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
 PACKAGE   = g4toxml
 
-ifndef PLATFORM
-  PLATFORM = $(shell uname)
+ifeq ($(PLATFORM),)
+PLATFORM = $(shell root-config --arch)
 endif
 
 TOPDIR  = $(shell pwd)/../..
 BINDIR  = $(TOPDIR)/tmp/tgt_$(PLATFORM)/$(PACKAGE)
 LIBDIR  = $(TOPDIR)/lib/tgt_$(PLATFORM)
+
+ifeq ($(ROOTSYS),)
+ROOT_INCDIR = $(shell root-config --incdir)
+ROOT_BINDIR = $(shell root-config --prefix)/bin
+else
+ROOT_INCDIR = $(ROOTSYS)/include
+ROOT_BINDIR = $(ROOTSYS)/bin
+endif
 
 include $(TOPDIR)/config/Makefile.$(PLATFORM)
 
@@ -84,7 +92,7 @@ include $(G4INSTALL)/config/interactivity.gmk
 
 CXXFLAGS += $(CPPFLAGS)
 
-DEPINC 		+= -I. -I$(ROOTSYS)/include $(INCDIR)
+DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCDIR)
 
 ############################### Targets #######################################
 
