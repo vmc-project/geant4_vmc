@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.6 2004/04/26 17:06:47 brun Exp $
+// $Id: TG4PhysicsManager.cxx,v 1.7 2004/06/08 10:27:50 brun Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -440,9 +440,8 @@ Bool_t TG4PhysicsManager::DefineParticle(Int_t pdg, const char* name,
               << pdg << ", " << name << "): " << G4endl;
        G4cout << "   This particle is in Geant4 defined as " 
 	      <<  particleDefinition->GetParticleName() << G4endl;
-	      
-       return true;	      
      }	      
+     return true;	      
   }	    
   else { 
      G4cerr << "TG4PhysicsManager::DefineParticle (PDG = " 
