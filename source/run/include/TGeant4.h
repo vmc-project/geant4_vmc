@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TGeant4.h,v 1.2 2003/01/08 08:27:38 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -108,6 +108,9 @@ class TGeant4: public TVirtualMC
     virtual void WriteEuclid(const char* fileName, const char* topVol, 
                              Int_t number, Int_t nlevel);
 		               
+    // set geometry from Root (built via TGeo)
+    virtual void SetRootGeometry();                   
+    
     // get methods
     virtual Int_t VolId(const Text_t* volName) const;
     virtual const char* VolName(Int_t id) const;
@@ -245,7 +248,7 @@ class TGeant4: public TVirtualMC
     void ProcessGeantCommand(const char* commandPath);
 
         // get methods
-    virtual Int_t CurrentEvent() const; 
+    virtual Int_t   CurrentEvent() const; 
 
   protected:
     TGeant4();

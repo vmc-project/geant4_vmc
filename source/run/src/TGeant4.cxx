@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.2 2002/10/17 10:03:28 brun Exp $
+// $Id: TGeant4.cxx,v 1.3 2002/10/17 15:18:40 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -22,7 +22,7 @@ ClassImp(TGeant4)
 //_____________________________________________________________________________
 TGeant4::TGeant4(const char* name, const char* title,
                  TG4VRunConfiguration* configuration, int argc, char** argv)
-  : TVirtualMC(name, title),
+  : TVirtualMC(name, title, true),
     fVisManager(0)
 {
   // create run manager
@@ -64,7 +64,7 @@ TGeant4::TGeant4(const char* name, const char* title,
 //_____________________________________________________________________________
 TGeant4::TGeant4(const char* name, const char* title,
                  TG4VRunConfiguration* configuration)
-  : TVirtualMC(name, title),
+  : TVirtualMC(name, title, true),
     fVisManager(0)
 {
   // create run manager
@@ -333,6 +333,12 @@ void TGeant4::WriteEuclid(const char* fileName, const char* topVol,
   fGeometryManager->WriteEuclid(fileName, topVol, number, nlevel); 
 } 
 		               
+//_____________________________________________________________________________
+void TGeant4::SetRootGeometry() {                   
+//
+  fGeometryManager->SetRootGeometry();
+}
+
 //_____________________________________________________________________________
 Int_t TGeant4::VolId(const Text_t* volName) const {
 //
