@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.3 2003/07/22 06:36:31 brun Exp $
+// $Id: TGeant4.h,v 1.4 2003/09/23 14:24:52 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -153,6 +153,7 @@ class TGeant4: public TVirtualMC
     // action methods
     virtual void StopTrack();
     virtual void StopEvent();   
+    virtual void StopRun();   
 
     // set methods
     virtual void SetMaxStep(Double_t);
@@ -247,9 +248,9 @@ class TGeant4: public TVirtualMC
     // ------------------------------------------------
     //
 
-    virtual void Init();
-    virtual void ProcessEvent();
-    virtual void ProcessRun(Int_t nofEvents);
+    virtual void   Init();
+    virtual void   ProcessEvent();
+    virtual Bool_t ProcessRun(Int_t nofEvents);
 
         // UI control methods
     void StartGeantUI();	

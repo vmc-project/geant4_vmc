@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.4 2003/07/22 06:36:32 brun Exp $
+// $Id: TGeant4.cxx,v 1.5 2003/09/23 14:24:52 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -523,9 +523,9 @@ void TGeant4::ProcessEvent() {
 }  
 
 //_____________________________________________________________________________
-void TGeant4::ProcessRun(Int_t nofEvents) {
+Bool_t TGeant4::ProcessRun(Int_t nofEvents) {
 //
-  fRunManager->ProcessRun(nofEvents);
+  return fRunManager->ProcessRun(nofEvents);
 }  
 
 //_____________________________________________________________________________
