@@ -1,4 +1,4 @@
-// $Id: TG4VXMLConvertor.h,v 1.3 2004/04/26 17:05:04 brun Exp $
+// $Id: TG4VXMLConvertor.h,v 1.4 2004/07/09 17:16:37 brun Exp $
 //
 // Author: I. Hrivnacova, 27.07.2000 
 //
@@ -74,6 +74,9 @@ class TG4VXMLConvertor
     virtual void SetNumPrecision(G4int precision) = 0;
     virtual G4double GetNumWidth() const = 0;
     virtual G4double GetNumPrecision() const = 0;
+    
+    // helper function
+    virtual G4double Round(G4double x) const;
 };
 
 #endif //TG4_V_XML_CONVERTOR_H

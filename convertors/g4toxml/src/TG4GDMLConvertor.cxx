@@ -1,4 +1,4 @@
-// $Id: TG4GDMLConvertor.cxx,v 1.1 2004/04/26 17:05:04 brun Exp $
+// $Id: TG4GDMLConvertor.cxx,v 1.2 2004/07/09 17:17:00 brun Exp $
 //
 // Author: I. Hrivnacova, 31.03.2004
 //
@@ -162,7 +162,7 @@ std::ostream& TG4GDMLConvertor::SmartPut(std::ostream& out,
 // Help function to supress - sign in case the number == 0
 // within the given precision
 
-  if ( round(number*pow(10.,precision))/pow(10.,precision) == 0.0) {
+  if ( Round(number*pow(10.,precision))/pow(10.,precision) == 0.0) {
     number = 0.;
   }  
   

@@ -1,4 +1,4 @@
-// $Id: TG4AGDDConvertor.cxx,v 1.1 2004/04/26 17:05:04 brun Exp $
+// $Id: TG4AGDDConvertor.cxx,v 1.2 2004/07/09 17:16:37 brun Exp $
 //
 // Author: I. Hrivnacova, 27.07.2000 
 //
@@ -133,7 +133,7 @@ std::ostream& TG4AGDDConvertor::SmartPut(std::ostream& out,
 // within the given precision
 // ---
 
-  if ( round(number*pow(10.,precision))/pow(10.,precision) == 0.0) {
+  if ( Round(number*pow(10.,precision))/pow(10.,precision) == 0.0) {
     number = 0.;
   }  
   
