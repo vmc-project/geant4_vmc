@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryConvertor.cxx,v 1.2 2003/12/18 13:25:45 brun Exp $
+// $Id: TG4RootGeometryConvertor.cxx,v 1.3 2003/12/19 14:39:43 brun Exp $
 //
 // Author: I. Hrivnacova, 8.1.2003 
 //
@@ -33,10 +33,15 @@
 #include "TG4ShapeConvertor.h"
 #include "TG4TGeoUnits.h"
 
-const char TG4RootGeometryConvertor::fgSeparator = '@';
+const char TG4RootGeometryConvertor::fgDefaultSeparator = '@';
 
 //_____________________________________________________________________________
-TG4RootGeometryConvertor::TG4RootGeometryConvertor() {
+TG4RootGeometryConvertor::TG4RootGeometryConvertor() 
+  : fMaterialConvertor(0),
+    fShapeConvertor(0),
+    fVolumesMap(),
+    fSeparator(fgDefaultSeparator)
+{
 //
   fMaterialConvertor = new TG4MaterialConvertor();
   fShapeConvertor    = new TG4ShapeConvertor();
@@ -85,7 +90,7 @@ void TG4RootGeometryConvertor::SetUniqueName(G4LogicalVolume* lv,
 // ---
  
   G4String newName(lv->GetName());
-  newName.append('@'); 
+  newName.append(fSeparator); 
   Append(newName, number);
 	   
   lv->SetName(newName);
@@ -332,7 +337,7 @@ void TG4RootGeometryConvertor::SetUniqueNames()
     G4LogicalVolume* lv = (*it).second;
     G4String lvName(lv->GetName());
     
-    if (lvName.contains(fgSeparator)) continue;
+    if (lvName.contains(fSeparator)) continue;
      
     G4int counter = 0;
     VolumesMapIterator it2;
