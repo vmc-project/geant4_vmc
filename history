@@ -1,8 +1,21 @@
-$Id: history,v 1.7 2003/07/22 06:39:32 brun Exp $
+$Id: history,v 1.8 2003/10/10 15:46:41 brun Exp $
 -----------------------------------------------------------------
      
 Tags (history):
 ===============
+  18/12/2003:
+  v1-2:
+    Geant4_vmc:
+    Update to Geant4 6.0 (removal of g4std, G4std);
+    updated physics contructors according to novice examples in
+    Geant4 6.0. 
+
+    Convertors - g4toxml:
+    Corrected export of reflected volumes. 
+
+    Tested with Geant4 6.0, Root 3.10/01.
+    
+
   10/10/2003:
   v1-1:
     Geant4_vmc:
