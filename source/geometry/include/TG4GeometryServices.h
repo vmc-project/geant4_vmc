@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4GeometryServices.h,v 1.2 2003/06/03 17:10:27 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -62,6 +62,7 @@ class TG4GeometryServices : public TG4Verbose
 
     // set methods
     void SetWorld(G4VPhysicalVolume* world);
+    void SetSeparator(char separator);
 
     // get methods
            // volumes
@@ -70,6 +71,7 @@ class TG4GeometryServices : public TG4Verbose
     Int_t NofG4PhysicalVolumes() const; 
     G4bool IsSpecialControls() const;
     G4VPhysicalVolume* GetWorld() const;
+    char GetSeparator() const;
 
     TG4Limits* GetLimits(G4UserLimits* limits) const;
     const G4String& GetMapSecond(const G4String& name);
@@ -110,7 +112,9 @@ class TG4GeometryServices : public TG4Verbose
     // data members
     TG4IntMap*         fMediumMap; //map of volumes names to medias IDs
     TG4NameMap*        fNameMap;   //map of volumes names to modules names
-    G4VPhysicalVolume* fWorld;     //top pgysical volume (world)
+    G4VPhysicalVolume* fWorld;     //top physical volume (world)
+    char               fSeparator; //the volumes name separator (different
+                                   //in g3tog4 and roottog4)
 };
 
 // inline methods
@@ -120,8 +124,14 @@ inline TG4GeometryServices* TG4GeometryServices::Instance()
 inline void TG4GeometryServices::SetWorld(G4VPhysicalVolume* world)
 { fWorld = world; }
 
+inline void TG4GeometryServices::SetSeparator(char separator)
+{ fSeparator = separator; }
+
 inline G4VPhysicalVolume* TG4GeometryServices::GetWorld() const
 { return fWorld; }
+
+inline char TG4GeometryServices::GetSeparator() const
+{ return fSeparator; }
 
 #endif //TG4_GEOMETRY_SERVICES_H
 

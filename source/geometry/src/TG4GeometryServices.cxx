@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.4 2003/06/03 17:10:27 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.5 2003/12/18 13:28:08 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -37,7 +37,8 @@ TG4GeometryServices::TG4GeometryServices(TG4IntMap* mediumMap,
   : TG4Verbose("geometryServices"),
     fMediumMap(mediumMap),
     fNameMap(nameMap),
-    fWorld(0)				 
+    fWorld(0),
+    fSeparator(gSeparator)				 
 {
 //
   if (fgInstance) {
@@ -104,7 +105,7 @@ G4bool TG4GeometryServices::IsG3Volume(const G4String& lvName) const
 // (name_copyNo).
 // ---
 
-  if (lvName.contains(gSeparator))
+  if (lvName.contains(fSeparator))
     return false;  
   else
     return true;   
@@ -249,9 +250,9 @@ G4String  TG4GeometryServices::G4ToG3VolumeName(const G4String& name) const
 // ---
 
   G4String cutName = name;
-  if (cutName.contains(gSeparator)) 
-  cutName = cutName(0,cutName.first(gSeparator));
-  
+  if (cutName.contains(fSeparator)) 
+  cutName = cutName(0,cutName.first(fSeparator));
+ 
   return cutName;
 }
 
