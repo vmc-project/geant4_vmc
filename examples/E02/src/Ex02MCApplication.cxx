@@ -1,4 +1,4 @@
-// $Id: Ex02MCApplication.cxx,v 1.5 2003/07/22 06:38:16 brun Exp $
+// $Id: Ex02MCApplication.cxx,v 1.6 2003/09/23 14:22:27 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -258,24 +258,6 @@ void Ex02MCApplication::FinishEvent()
   fStack->Print();  
   fStack->Reset();
 } 
-
-//_____________________________________________________________________________
-Double_t Ex02MCApplication::TrackingRmax() const
-{ 
-// No limit
-// ---
-
-  return DBL_MAX; 
-}
-
-//_____________________________________________________________________________
-Double_t Ex02MCApplication::TrackingZmax() const
-{ 
-// No limit
-// ---
-
-  return DBL_MAX; 
-}
 
 //_____________________________________________________________________________
 void Ex02MCApplication::Field(const Double_t* x, Double_t* b) const

@@ -1,4 +1,4 @@
-// $Id: Ex01MCApplication.cxx,v 1.5 2003/07/22 06:37:48 brun Exp $
+// $Id: Ex01MCApplication.cxx,v 1.6 2003/09/23 14:22:27 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -500,26 +500,6 @@ void Ex01MCApplication::FinishEvent()
 
   // nothing to be done this example
 } 
-
-//_____________________________________________________________________________
-Double_t Ex01MCApplication::TrackingRmax() const
-{ 
-  //
-  // No limit
-  //
-
-  return DBL_MAX; 
-}
-
-//_____________________________________________________________________________
-Double_t Ex01MCApplication::TrackingZmax() const
-{ 
-  //
-  // No limit
-  //
-
-  return DBL_MAX; 
-}
 
 //_____________________________________________________________________________
 void Ex01MCApplication::Field(const Double_t* x, Double_t* b) const

@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: Ex03MCApplication.h,v 1.1 2003/03/17 14:56:51 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
@@ -48,9 +48,6 @@ class Ex03MCApplication : public TVirtualMCApplication
     virtual void PostTrack();
     virtual void FinishPrimary();
     virtual void FinishEvent();
-    
-    virtual Double_t TrackingRmax() const;
-    virtual Double_t TrackingZmax() const;
     virtual void Field(const Double_t* x, Double_t* b) const;
     
     // set methods

@@ -1,4 +1,4 @@
-// $Id: Ex02MCApplication.h,v 1.1 2002/06/20 11:52:35 hristov Exp $
+// $Id: Ex02MCApplication.h,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -45,9 +45,6 @@ class Ex02MCApplication : public TVirtualMCApplication
     virtual void PostTrack();
     virtual void FinishPrimary();
     virtual void FinishEvent();
-    
-    virtual Double_t TrackingRmax() const;
-    virtual Double_t TrackingZmax() const;
     virtual void Field(const Double_t* x, Double_t* b) const;
     
     void   ReadEvent(Int_t i);
