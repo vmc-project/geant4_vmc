@@ -1,4 +1,4 @@
-// $Id: TG4Polycone.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4Polycone.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova, 12.10.2000 
@@ -8,7 +8,10 @@
 // See the class description in the header file.
 
 #include "TG4Polycone.h"
-#include "TG4Globals.h"
+
+#include <globals.hh>
+
+#include <stdlib.h>
 
 //_____________________________________________________________________________
 TG4Polycone::TG4Polycone(const G4Polycone& rhs) 
@@ -31,9 +34,10 @@ void TG4Polycone::CheckOrigin()
 // ---
 
   if (!original_parameters) {
-    G4String text = "TG4Polycone::CheckOrigin: \n";
-    text = text + "    Polycone has not defined original parameters.";
-    TG4Globals::Exception(text);
+    G4cerr << "    TG4Polycone::CheckOrigin: " << G4endl;
+    G4cerr << "    Polycone has not defined original parameters.";
+    G4cerr << "*** Exception: Aborting execution ***" << G4endl;   
+    exit(1);
   }  
 }
 

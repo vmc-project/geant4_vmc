@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4DetConstructionMessenger.cxx,v 1.3 2002/12/18 09:35:31 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -36,7 +36,7 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fFieldTypeCmd->SetParameterName("FieldType", true);
   fFieldTypeCmd->SetCandidates("MCApplication Uniform None");   
   fFieldTypeCmd->SetDefaultValue("MCApplication");
-  fFieldTypeCmd->AvailableForStates(PreInit);
+  fFieldTypeCmd->AvailableForStates(G4State_PreInit);
 
   fUniformFieldValueCmd 
     = new G4UIcmdWithADoubleAndUnit("/mcDet/uniformFieldValue", this);
@@ -47,29 +47,24 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fUniformFieldValueCmd->SetParameterName("UniformFieldValue", false, false);
   fUniformFieldValueCmd->SetDefaultUnit("tesla");
   fUniformFieldValueCmd->SetUnitCategory("Magnetic flux density");
-  fUniformFieldValueCmd->AvailableForStates(Idle);  
+  fUniformFieldValueCmd->AvailableForStates(G4State_Idle);  
   
   fSetReadGeometryCmd 
     = new G4UIcmdWithABool("/mcDet/readGeometry", this);
   fSetReadGeometryCmd->SetGuidance("Read geometry from g3calls.dat files");
   fSetReadGeometryCmd->SetParameterName("readGeometry", false);
-  fSetReadGeometryCmd->AvailableForStates(PreInit);  
+  fSetReadGeometryCmd->AvailableForStates(G4State_PreInit);  
  
   fSetWriteGeometryCmd 
     = new G4UIcmdWithABool("/mcDet/writeGeometry", this);
   fSetWriteGeometryCmd->SetGuidance("Write geometry to g3calls.dat file");
   fSetWriteGeometryCmd->SetParameterName("writeGeometry", false);
-  fSetWriteGeometryCmd->AvailableForStates(PreInit);   
+  fSetWriteGeometryCmd->AvailableForStates(G4State_PreInit);   
 
   fPrintMaterialsCmd 
     = new G4UIcmdWithoutParameter("/mcDet/printMaterials", this);
   fPrintMaterialsCmd->SetGuidance("Prints all materials.");
-  fPrintMaterialsCmd->AvailableForStates(PreInit, Init, Idle);   
-
-  fGenerateXMLCmd 
-    = new G4UIcmdWithoutParameter("/mcDet/generateXML", this);
-  fGenerateXMLCmd->SetGuidance("Generate geometry XML file.");
-  fGenerateXMLCmd->AvailableForStates(Idle);   
+  fPrintMaterialsCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);   
 }
 
 //_____________________________________________________________________________
@@ -95,7 +90,6 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger() {
   delete fSetReadGeometryCmd;
   delete fSetWriteGeometryCmd;
   delete fPrintMaterialsCmd;
-  delete fGenerateXMLCmd;
 }
 
 // operators
@@ -145,8 +139,5 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
   }    
   else if (command == fPrintMaterialsCmd) {
     fDetConstruction->PrintMaterials();
-  }    
-  else if (command == fGenerateXMLCmd) {
-    fDetConstruction->GenerateXMLGeometry();
   }    
 }

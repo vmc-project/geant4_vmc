@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.2 2002/09/06 15:12:08 ivana Exp $
+// $Id: TG4StepManager.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -633,6 +633,32 @@ void TG4StepManager::TrackPosition(TLorentzVector& position) const
 }
 
 //_____________________________________________________________________________
+void TG4StepManager::TrackPosition(Double_t& x, Double_t& y, Double_t& z) const
+{ 
+// Current particle position (in the world reference frame)
+// and the local time since the current track is created
+// (position of the PostStepPoint).
+// ---
+
+#ifdef MCDEBUG
+  CheckTrack();
+#endif
+
+  // get position
+  // check if this is == to PostStepPoint position !!
+  G4ThreeVector positionVector = fTrack->GetPosition();
+  positionVector *= 1./(TG4G3Units::Length());   
+     
+  // local time   
+  G4double time = fTrack->GetLocalTime();
+  time /= TG4G3Units::Time();
+    
+  x = positionVector.x();
+  y = positionVector.y();
+  z = positionVector.z();
+}
+
+//_____________________________________________________________________________
 Int_t TG4StepManager::GetMedium() const
 {   
 // Returns the second index of the current material (corresponding to
@@ -664,6 +690,28 @@ void TG4StepManager::TrackMomentum(TLorentzVector& momentum) const
   energy /= TG4G3Units::Energy();  
 
   SetTLorentzVector(momentumVector, energy, momentum);
+}
+
+//_____________________________________________________________________________
+void TG4StepManager::TrackMomentum(Double_t& px, Double_t& py, Double_t&pz,
+                                   Double_t& etot) const
+{  
+// Current particle "momentum" (px, py, pz, Etot).
+// ---
+
+#ifdef MCDEBUG
+  CheckTrack();
+#endif
+
+  G4ThreeVector momentumVector = fTrack->GetMomentum(); 
+  momentumVector *= 1./(TG4G3Units::Energy());   
+
+  px = momentumVector.x();
+  py = momentumVector.y();
+  pz = momentumVector.z();
+
+  etot = fTrack->GetDynamicParticle()->GetTotalEnergy();
+  etot /= TG4G3Units::Energy();  
 }
 
 //_____________________________________________________________________________

@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: TG4ParticleGunMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: event
 //
 // Author: I. Hrivnacova
@@ -35,14 +35,14 @@ TG4ParticleGunMessenger::TG4ParticleGunMessenger(TG4ParticleGun* gun)
     = new G4UIcmdWithoutParameter("/mcGun/listAvailable", this);
   fListAvailableCmd->SetGuidance("List available particles.");
   fListAvailableCmd->SetGuidance(" Invoke G4ParticleTable.");
-  fListAvailableCmd->AvailableForStates(PreInit,Idle);
+  fListAvailableCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
   fListCurrentCmd 
     = new G4UIcmdWithoutParameter("/mcGun/listCurrent", this);
   fListCurrentCmd->SetGuidance("List current particle properties.");
   fListCurrentCmd
     ->SetGuidance("(Use addParticle to add this particle to the gun.");
-  fListCurrentCmd->AvailableForStates(PreInit,Idle);
+  fListCurrentCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
   fParticleCmd 
     = new G4UIcmdWithAString("/mcGun/particle", this);
@@ -58,7 +58,7 @@ TG4ParticleGunMessenger::TG4ParticleGunMessenger(TG4ParticleGun* gun)
     candidateList += " ";
   }
   fParticleCmd->SetCandidates(candidateList);
-  fParticleCmd->AvailableForStates(PreInit,Idle);
+  fParticleCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
   fMomentumCmd 
     = new G4UIcmdWith3VectorAndUnit("/mcGun/momentum", this);
@@ -67,7 +67,7 @@ TG4ParticleGunMessenger::TG4ParticleGunMessenger(TG4ParticleGun* gun)
   fMomentumCmd->SetDefaultUnit("MeV");
   fMomentumCmd->SetUnitCategory("Energy"); 
   fMomentumCmd->SetRange("Px != 0 || Py != 0 || Pz != 0");
-  fMomentumCmd->AvailableForStates(PreInit,Idle);
+  fMomentumCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
   fPositionCmd 
     = new G4UIcmdWith3VectorAndUnit("/mcGun/position", this);
@@ -75,7 +75,7 @@ TG4ParticleGunMessenger::TG4ParticleGunMessenger(TG4ParticleGun* gun)
   fPositionCmd->SetParameterName("X","Y","Z", true, true);
   fPositionCmd->SetDefaultUnit("cm");
   fPositionCmd->SetUnitCategory("Length");
-  fPositionCmd->AvailableForStates(PreInit,Idle);
+  fPositionCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
   fTimeCmd 
     = new G4UIcmdWithADoubleAndUnit("/mcGun/time", this);
@@ -83,7 +83,7 @@ TG4ParticleGunMessenger::TG4ParticleGunMessenger(TG4ParticleGun* gun)
   fTimeCmd->SetParameterName("t0", true, true);
   fTimeCmd->SetDefaultUnit("ns");
   fTimeCmd->SetUnitCategory("Time");
-  fTimeCmd->AvailableForStates(PreInit,Idle);
+  fTimeCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
   
   fPolarizationCmd 
     = new G4UIcmdWith3Vector("/mcGun/polarization", this);
@@ -91,7 +91,7 @@ TG4ParticleGunMessenger::TG4ParticleGunMessenger(TG4ParticleGun* gun)
   fPolarizationCmd->SetParameterName("Px","Py","Pz", true, true); 
   fPolarizationCmd
     ->SetRange("Px>=-1. && Px<=1. && Py>=-1. && Py<=1. && Pz>=-1. && Pz<=1.");
-  fPolarizationCmd->AvailableForStates(PreInit,Idle);
+  fPolarizationCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
   
   fDirectionCmd 
     = new G4UIcmdWith3Vector("/mcGun/direction", this);
@@ -99,7 +99,7 @@ TG4ParticleGunMessenger::TG4ParticleGunMessenger(TG4ParticleGun* gun)
   fDirectionCmd->SetGuidance("Direction needs not to be a unit vector.");
   fDirectionCmd->SetParameterName("Dx","Dy","Dz", true, true); 
   fDirectionCmd->SetRange("Dx != 0 || Dy != 0 || Dz != 0");
-  fDirectionCmd->AvailableForStates(PreInit,Idle);
+  fDirectionCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
   
   fKinEnergyCmd 
     = new G4UIcmdWithADoubleAndUnit("/mcGun/kinEnergy", this);
@@ -107,17 +107,17 @@ TG4ParticleGunMessenger::TG4ParticleGunMessenger(TG4ParticleGun* gun)
   fKinEnergyCmd->SetParameterName("KineticEnergy", true, true);
   fKinEnergyCmd->SetDefaultUnit("GeV");
   fKinEnergyCmd->SetUnitCategory("Energy");
-  fKinEnergyCmd->AvailableForStates(PreInit,Idle);
+  fKinEnergyCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
   fListCmd 
     = new G4UIcmdWithoutParameter("/mcGun/list",this);
   fListCmd->SetGuidance("List the Alice gun particles.");
-  fListCmd->AvailableForStates(PreInit,Idle);
+  fListCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
   fAddParticleCmd 
     = new G4UIcmdWithoutParameter("/mcGun/addParticle", this);
   fAddParticleCmd->SetGuidance("Add the particle to the Alice particle gun.");
-  fAddParticleCmd->AvailableForStates(PreInit,Idle);
+  fAddParticleCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
   fRemoveParticleCmd 
     = new G4UIcmdWithAnInteger("/mcGun/removeParticle", this);
@@ -125,12 +125,12 @@ TG4ParticleGunMessenger::TG4ParticleGunMessenger(TG4ParticleGun* gun)
     ->SetGuidance("Remove the i-th particle friom the Alice particle gun.");
   fRemoveParticleCmd->SetParameterName("iParticle", false);
   fRemoveParticleCmd->SetRange("iParticle>=0");
-  fRemoveParticleCmd->AvailableForStates(PreInit,Idle);
+  fRemoveParticleCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
   fResetCmd 
     = new G4UIcmdWithoutParameter("/mcGun/reset", this);
   fResetCmd->SetGuidance("ReSet the Alice particle gun.");
-  fResetCmd->AvailableForStates(PreInit,Idle);
+  fResetCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
   // Set initial value to TG4GunParticle
   fParticle = new TG4GunParticle();

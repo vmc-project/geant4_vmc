@@ -1,14 +1,18 @@
-# $Id:  $
+# $Id: Makefile,v 1.6 2002/11/12 14:51:39 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
 PACKAGE   = geant4vmc
 
-TOPDIR  = $(shell pwd)/..
-BINDIR  = $(TOPDIR)/tmp/tgt_$(G4SYSTEM)
-LIBDIR  = $(TOPDIR)/lib/tgt_$(G4SYSTEM)
+ifndef PLATFORM
+  PLATFORM = $(shell uname)
+endif
 
-include ../config/Makefile.$(G4SYSTEM)
+TOPDIR  = $(shell pwd)/..
+BINDIR  = $(TOPDIR)/tmp/tgt_$(PLATFORM)
+LIBDIR  = $(TOPDIR)/lib/tgt_$(PLATFORM)
+
+include ../config/Makefile.$(PLATFORM)
 
 ############################### Sources #######################################
 
@@ -31,13 +35,18 @@ GDICTO   := $(patsubst %.cxx,$(BINDIR)/%.o,$(GDICT))
 CXXSRC	:= $(wildcard $(patsubst %,%/src/*.cxx,$(GDIRS))) 
 SRCS	:= $(CXXSRC)
 
-# C++ Headers
+# C++ Headers processed by CINT
 #
 HDRS	:= run/include/TG4VRunConfiguration.h \
 	   run/include/TG4RunConfiguration.h \
 	   run/include/TGeant4.h \
 	   $(wildcard interfaces/include/*.h) \
 	   geant4vmcLinkDef.h
+
+# C++ Headers copied to include
+#
+HEADERS	:= $(wildcard $(patsubst %,%/include/*.h,$(GDIRS)))
+HEADERS	+= $(wildcard $(patsubst %,%/include/*.icc,$(GDIRS)))
 
 # Objects
 #
@@ -46,7 +55,11 @@ OBJS	:= $(CXXOBJ) $(GDICTO)
 
 # Make include list
 #
-INCDIR  := $(patsubst %,-I%/include,$(GDIRS)) -I$(G4INSTALL)/include \
+ifndef G4INCLUDE
+  G4INCLUDE := $(G4INSTALL)/include
+endif  
+
+INCDIR  := $(patsubst %,-I%/include,$(GDIRS)) -I$(G4INCLUDE) \
 	   -I$(CLHEP_BASE_DIR)/include \
 	   -I$(G4INSTALL)/source/interfaces/common/include
 
@@ -132,6 +145,7 @@ SLIBRARY	= $(LIBDIR)/lib$(PACKAGE).$(SL)
 ALIBRARY	= $(LIBDIR)/lib$(PACKAGE).a
 
 default:	depend $(SLIBRARY)
+all:		default includes
 
 
 $(LIBDIR)/lib$(PACKAGE).$(SL):  $(OBJS)
@@ -143,8 +157,11 @@ $(DICT): 	$(HDRS)
 
 depend:		$(SRCS)
 
-TOCLEAN		= $(BINDIR)
-TOCLEANALL	= $(BINDIR) $(LIBDIR)
+TOCLEAN		= $(BINDIR) $(TOPDIR)/include
+TOCLEANALL	= $(BINDIR) $(TOPDIR)/include $(LIBDIR)
+
+MAKEDIST	= ../config/makedist.sh lib
+MAKEDISTSRC	= ../config/makedist.sh
 
 include ../config/MakeMacros
 

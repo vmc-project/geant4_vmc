@@ -1,4 +1,4 @@
-// $Id: TG4ListTreeFrame.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4ListTreeFrame.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: interfaces
 //
 // Author: D. Adamova
@@ -166,7 +166,7 @@ void  TG4ListTreeFrame::DrawSelectedVolume(TGListTreeItem* item)
   };
      
   G4cout << "For logical volume   " << lName << "   "
-         << "the number of copies is :!   "  << icopy << endl;
+         << "the number of copies is :!   "  << icopy << G4endl;
 //------> looping over number of copies
    ii=0;	      
    while ( ii < icopy) { 

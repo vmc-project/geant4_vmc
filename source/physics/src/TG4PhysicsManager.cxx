@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.2 2002/09/06 15:12:08 ivana Exp $
+// $Id: TG4PhysicsManager.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -31,7 +31,6 @@
 #include <G3MedTable.hh>
 
 #include <TDatabasePDG.h>
-#include <TVirtualMCDecayer.h>
 
 TG4PhysicsManager* TG4PhysicsManager::fgInstance = 0;
 

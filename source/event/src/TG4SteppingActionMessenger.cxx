@@ -1,4 +1,4 @@
-// $Id: TG4SteppingActionMessenger.cxx,v 1.1.1.1 2002/06/16 15:57:34 hristov Exp $
+// $Id: TG4SteppingActionMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: event
 //
 // Author: I. Hrivnacova
@@ -25,14 +25,14 @@ TG4SteppingActionMessenger::TG4SteppingActionMessenger(
   fLoopVerboseCmd->SetParameterName("LoopVerboseLevel", true);
   fLoopVerboseCmd->SetDefaultValue(1);
   fLoopVerboseCmd->SetRange("LoopVerboseLevel >= 0 && LoopVerboseLevel <= 5");
-  fLoopVerboseCmd->AvailableForStates(Idle);
+  fLoopVerboseCmd->AvailableForStates(G4State_Idle);
 
   fMaxNofStepsCmd = new G4UIcmdWithAnInteger("/mcTracking/maxNofSteps", this);
   fMaxNofStepsCmd
     ->SetGuidance("Set maximum number of steps allowed.");
   fMaxNofStepsCmd->SetParameterName("MaxNofSteps", false);
   fMaxNofStepsCmd->SetRange("MaxNofSteps >= 0");
-  fMaxNofStepsCmd->AvailableForStates(Idle);
+  fMaxNofStepsCmd->AvailableForStates(G4State_Idle);
 }
 
 //_____________________________________________________________________________

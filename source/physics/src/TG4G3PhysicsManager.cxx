@@ -1,4 +1,4 @@
-// $Id: TG4G3PhysicsManager.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4G3PhysicsManager.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -82,6 +82,62 @@ TG4G3PhysicsManager::operator=(const TG4G3PhysicsManager& right)
 }    
           
 // private methods
+
+//_____________________________________________________________________________
+G4bool TG4G3PhysicsManager::CheckCutWithG3Defaults(G4String name, 
+                                 G4double value, TG4G3Cut& cut)
+{
+// Retrieves corresponding TG4G3Cut from the name and 
+// in case the value is different from the G3 default value
+// sets true the value of the SwitchCutVector element 
+// corresponding to this cut and returns true; 
+// returns false otherwise.
+// ---
+
+  // convert cut name -> TG4G3Cut
+  cut = TG4G3CutVector::GetCut(name);
+
+  // set switch vector element only if the value
+  // is different from G3 default
+  if (cut !=kNoG3Cuts) {
+    if (!fG3Defaults.IsDefaultCut(cut, value)) {
+      SwitchIsCutVector(cut);      
+      return true;
+    }  
+    else return false;  
+  }   	   	         
+  return false;
+}
+
+//_____________________________________________________________________________
+G4bool TG4G3PhysicsManager::CheckControlWithG3Defaults(G4String name, 
+                                 G4double value, TG4G3Control& control,
+                                 TG4G3ControlValue& controlValue)
+{
+// Retrieves corresponding TG4G3Control from the name and 
+// in case the value is different from the G3 default value
+// sets true the value of the SwitchControlVector element 
+// corresponding to this control and returns true; 
+// returns false otherwise.
+// ---
+
+  // convert control name -> TG4G3Control
+  control = TG4G3ControlVector::GetControl(name);
+
+  // convert double value -> TG4G3ControlValue
+  controlValue = TG4G3ControlVector::GetControlValue(value, control);
+
+  // set switch vector element only if the value
+  // is different from G3 default
+  if (control !=kNoG3Controls) {
+    if (!fG3Defaults.IsDefaultControl(control, controlValue)) {
+      SwitchIsControlVector(control);      
+      return true;
+    }  
+    else return false;  
+  }   	   	         
+  return false;
+}
 
 //_____________________________________________________________________________
 void TG4G3PhysicsManager::SetCut(TG4G3Cut cut, G4double cutValue)
@@ -316,62 +372,6 @@ G4bool TG4G3PhysicsManager::CheckControlWithTheVector(G4String name,
 }
 
 //_____________________________________________________________________________
-G4bool TG4G3PhysicsManager::CheckCutWithG3Defaults(G4String name, 
-                                 G4double value, TG4G3Cut& cut)
-{
-// Retrieves corresponding TG4G3Cut from the name and 
-// in case the value is different from the G3 default value
-// sets true the value of the SwitchCutVector element 
-// corresponding to this cut and returns true; 
-// returns false otherwise.
-// ---
-
-  // convert cut name -> TG4G3Cut
-  cut = TG4G3CutVector::GetCut(name);
-
-  // set switch vector element only if the value
-  // is different from G3 default
-  if (cut !=kNoG3Cuts) {
-    if (!fG3Defaults.IsDefaultCut(cut, value)) {
-      SwitchIsCutVector(cut);      
-      return true;
-    }  
-    else return false;  
-  }   	   	         
-  return false;
-}
-
-//_____________________________________________________________________________
-G4bool TG4G3PhysicsManager::CheckControlWithG3Defaults(G4String name, 
-                                 G4double value, TG4G3Control& control,
-                                 TG4G3ControlValue& controlValue)
-{
-// Retrieves corresponding TG4G3Control from the name and 
-// in case the value is different from the G3 default value
-// sets true the value of the SwitchControlVector element 
-// corresponding to this control and returns true; 
-// returns false otherwise.
-// ---
-
-  // convert control name -> TG4G3Control
-  control = TG4G3ControlVector::GetControl(name);
-
-  // convert double value -> TG4G3ControlValue
-  controlValue = TG4G3ControlVector::GetControlValue(value, control);
-
-  // set switch vector element only if the value
-  // is different from G3 default
-  if (control !=kNoG3Controls) {
-    if (!fG3Defaults.IsDefaultControl(control, controlValue)) {
-      SwitchIsControlVector(control);      
-      return true;
-    }  
-    else return false;  
-  }   	   	         
-  return false;
-}
-
-//_____________________________________________________________________________
 void TG4G3PhysicsManager::SetG3DefaultCuts() 
 {
 // Sets G3 default values of kinetic energy cuts.
@@ -379,6 +379,8 @@ void TG4G3PhysicsManager::SetG3DefaultCuts()
 
   CheckLock();
   fCutVector->SetG3Defaults();
+
+  for (G4int i=0; i<kNofParticlesWSP; i++) (*fIsCutVector)[i] = true;
 }
 
 //_____________________________________________________________________________
@@ -389,6 +391,8 @@ void TG4G3PhysicsManager::SetG3DefaultControls()
 
   CheckLock();
   fControlVector->SetG3Defaults();
+
+  for (G4int i=0; i<kNofParticlesWSP; i++) (*fIsControlVector)[i] = true;
 }  
 
 //_____________________________________________________________________________

@@ -1,4 +1,4 @@
-// $Id: TG4Limits.h,v 1.1 2002/06/20 11:56:10 hristov Exp $
+// $Id: TG4Limits.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: global
 //
 // Author: I. Hrivnacova
@@ -28,6 +28,7 @@ class TG4Limits: public G4UserLimits
     TG4Limits(const TG4G3CutVector& cuts, const TG4G3ControlVector& controls);
     TG4Limits(const G4String& name,
               const TG4G3CutVector& cuts, const TG4G3ControlVector& controls);
+    TG4Limits(const G4String& name, const G4UserLimits& right);
     TG4Limits(const TG4Limits& right);
     virtual ~TG4Limits();
     
