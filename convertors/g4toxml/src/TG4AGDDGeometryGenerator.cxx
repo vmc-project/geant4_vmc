@@ -1,4 +1,4 @@
-// $Id: TG4AGDDGeometryGenerator.cxx,v 1.2 2003/12/18 13:25:11 brun Exp $
+// $Id: TG4AGDDGeometryGenerator.cxx,v 1.1 2004/04/26 17:05:04 brun Exp $
 //
 // Author: I. Hrivnacova, 27.07.2000 
 // (redesigned  31.03.2004) 
@@ -75,15 +75,21 @@ void TG4AGDDGeometryGenerator::GenerateXMLGeometry(G4LogicalVolume* lv)
   // set top volume name
   G4String topName = lv->GetName() + "_comp";
   
-  // generate XML  
+  // Open XML file and document  
   OpenFile(fileName);
+  fConvertor->OpenDocument();
 
   // generate materials 
+  fConvertor->OpenMaterials();
   // not implemented
-  // GenerateMaterials(version, "today", "Generated from G4", "v4", lv);
+  // GenerateMaterials(lv);
+  fConvertor->CloseMaterials();  
 
   // generate volumes tree
   GenerateSection(lv);
+
+  // Close XML file and document  
+  fConvertor->CloseDocument();
   CloseFile();
   
   if (fVerboseLevel > 0) 
@@ -105,6 +111,9 @@ void TG4AGDDGeometryGenerator::GenerateSection(G4LogicalVolume* lv)
   // process solids
   GenerateSolids(lv);
     
+  // write top volume
+  ProcessTopVolume(lv);
+
   // process geometry tree
   ProcessLogicalVolume(lv);
   fConvertor->WriteEmptyLine();
@@ -113,6 +122,23 @@ void TG4AGDDGeometryGenerator::GenerateSection(G4LogicalVolume* lv)
   // close section
   fConvertor->CloseSection(lv->GetName());
 }   
+
+//_____________________________________________________________________________
+void TG4AGDDGeometryGenerator::ProcessTopVolume(G4LogicalVolume* lv) 
+{
+// Writes the top volume position.
+// ---
+  
+  // open composition
+  G4String volumeName = lv->GetName();
+  G4String name = volumeName;
+  name.append("_comp");
+
+  fConvertor->OpenComposition(volumeName, lv->GetMaterial()->GetName());
+  fConvertor->WritePosition(name, G4ThreeVector());
+  fConvertor->CloseComposition();	
+  fConvertor->WriteEmptyLine();
+}  
 
 //_____________________________________________________________________________
 void TG4AGDDGeometryGenerator::ProcessLogicalVolume(G4LogicalVolume* lv) 

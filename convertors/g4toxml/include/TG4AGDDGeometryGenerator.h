@@ -1,4 +1,4 @@
-// $Id: TG4AGDDGeometryGenerator.h,v 1.2 2003/12/18 13:25:11 brun Exp $
+// $Id: TG4AGDDGeometryGenerator.h,v 1.1 2004/04/26 17:05:04 brun Exp $
 //
 // Author: I. Hrivnacova, 27.07.2000 
 // (redesigned  31.03.2004) 
@@ -34,6 +34,7 @@ class TG4AGDDGeometryGenerator : public TG4VXMLGeometryGenerator
     //
     virtual void GenerateXMLGeometry(G4LogicalVolume* lv);
     virtual void GenerateSection(G4LogicalVolume* lv);
+    virtual void ProcessTopVolume(G4LogicalVolume* lv); 
     virtual void ProcessLogicalVolume(G4LogicalVolume* lv); 
 };
 
