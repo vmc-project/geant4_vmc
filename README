@@ -1,4 +1,4 @@
-$Id: README,v 1.4 2002/11/13 13:35:41 brun Exp $
+$Id: README,v 1.5 2004/03/04 16:46:57 brun Exp $
 -----------------------------------------------------------------
 
 Geant4 VMC - Virtual MC implementation for Geant4
@@ -6,10 +6,11 @@ Geant4 VMC - Virtual MC implementation for Geant4
 
 Files:
 ------
-  README   - this file
-  source   - structured source code
-  config   - general makefiles
-  examples - examples of usage Virtual MC
+  README     - this file
+  source     - structured source code
+  convertors - source code for g4toxml, roottog4 convertors
+  config     - general makefiles
+  examples   - examples of usage Virtual MC
 	      
    
 Environment:
