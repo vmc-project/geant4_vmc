@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: TG4MaterialConvertor.cxx,v 1.1 2003/07/22 06:46:58 brun Exp $
 //
 // Author: I. Hrivnacova, 8.1.2003 
 //
@@ -152,7 +152,7 @@ void TG4MaterialConvertor::Convert(const TList* materials)
 }
 
 //_____________________________________________________________________________
-G4Material* TG4MaterialConvertor::GetMaterial(TGeoMaterial* material) const
+G4Material* TG4MaterialConvertor::GetMaterial(const TGeoMaterial* material) const
 {
 // Returns G4 material corresponding to the specified Root material.
 // ---

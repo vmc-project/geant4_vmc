@@ -1,4 +1,4 @@
-// $Id: TG4MaterialConvertor.h,v 1.1 2003/07/22 06:46:58 brun Exp $
+// $Id: TG4MaterialConvertor.h,v 1.2 2003/12/18 13:25:45 brun Exp $
 //
 // Author: I. Hrivnacova, 8.1.2003
 //
@@ -35,7 +35,7 @@ class TG4MaterialConvertor
     void Convert(const TList* materials);
     
     // get methods
-    G4Material* GetMaterial(TGeoMaterial* material) const;
+    G4Material* GetMaterial(const TGeoMaterial* material) const;
     
   protected:  
     TG4MaterialConvertor(const TG4MaterialConvertor& right);
