@@ -1,8 +1,23 @@
-$Id: history,v 1.12 2004/08/17 08:51:15 brun Exp $
+$Id: history,v 1.13 2004/10/05 10:55:35 brun Exp $
 -----------------------------------------------------------------
      
 Tags (history):
 ===============
+  04/01/2005
+  v1-5:
+    Geant4 VMC:
+      Migration to Geant4 version 7.0;
+      correction in passing step limits defined in tracking media
+      to Geant4.
+      Doxygen documentation.
+
+    Examples:
+      Added test_suite.sh to test automatically all examples with
+      all MCs; added configuration macros for TGeant3TGeo.
+      
+    Tested with Geant4 7.0, Root 4.02/00
+ 
+
   05/10/2004
   v1-4:
     Geant4_vmc:
