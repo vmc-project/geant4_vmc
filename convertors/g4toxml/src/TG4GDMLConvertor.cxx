@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: TG4GDMLConvertor.cxx,v 1.1 2004/04/26 17:05:04 brun Exp $
 //
 // Author: I. Hrivnacova, 31.03.2004
 //
@@ -9,6 +9,7 @@
 #include <iostream>
 #include <iomanip>
 #include <math.h>
+#include <float.h>
 #if __GNUC__ >= 3
 #include <sstream>
 #else
@@ -684,20 +685,29 @@ void TG4GDMLConvertor::WriteSphere(G4String name, const G4Sphere* sphere,
 //
 
 //_____________________________________________________________________________
-void TG4GDMLConvertor::OpenSection(const G4String& topVolume)
+void TG4GDMLConvertor::OpenDocument()
 {
-// Writes section opening.
+// Writes document opening.
 // Could be made customizable in future.
 // ---
 			 
   fOutFile << "<?xml version=\"1.0\" encoding=\"UTF-8\"\?>" 
-           << G4endl
+           << std::endl
            << "<gdml xmlns:gdml=\"http://cern.ch/2001/Schemas/GDML\"" 
-	   << G4endl
+	   << std::endl
 	   << "      xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" 
-	   << G4endl
+	   << std::endl
 	   << "      xsi:noNamespaceSchemaLocation=\"gdml_1.0.xsd\">" 
-	   << G4endl;
+	   << std::endl;
+}  
+
+//_____________________________________________________________________________
+void TG4GDMLConvertor::OpenSection(const G4String& /*topVolume*/)
+{
+// Writes section opening.
+// ---
+
+  // nothing to be done in GDML			 
 }  
 
 //_____________________________________________________________________________
@@ -721,17 +731,7 @@ void TG4GDMLConvertor::OpenRotations()
 {
 // Rotations are written in the same element as positions.
 // The element is already open.
-// Temporary warning about different interpretation of the
-// rotation angles is written.
 // ---
-
-  G4String element1 = "<!-- The Euler angles (x convention) phi, theta, psi -->"; 
-  G4String element2 = "<!-- are generated instead of x, y, z  -->"; 
-
-  // write element
-  fOutFile << fIndention << element1 << G4endl;
-  fOutFile << fIndention << element2 << G4endl;
-
 }  
 
 //_____________________________________________________________________________
@@ -818,6 +818,15 @@ void TG4GDMLConvertor::OpenComposition(const G4String& name,
 }  
 
 //_____________________________________________________________________________
+void TG4GDMLConvertor::CloseDocument()
+{
+// Writes document closing.
+// ---
+
+   fOutFile << "</gdml>" << std::endl;
+}  
+
+//_____________________________________________________________________________
 void TG4GDMLConvertor::CloseSection(const G4String& topVolume)
 {
 // Writes section closing.
@@ -848,11 +857,6 @@ void TG4GDMLConvertor::CloseSection(const G4String& topVolume)
 	   << indention        << element4 << "/>" << G4endl
 	   << fIndention       << element5 << G4endl
 	   << G4endl;
-	   
-  // Close GDML file
-  //
- G4String element6 = "</gdml>";
- fOutFile << element6 << G4endl;
 }  
 
 //_____________________________________________________________________________
@@ -1179,11 +1183,27 @@ void TG4GDMLConvertor::WriteRotation(const G4String& name,
 // ---
 
   // Get parameters
-  // Writes Euler angles now;
-  // should be axis angles - to be clarified
-  G4double phi = rotation->getPhi()/ TG4XMLUnits::Angle();
-  G4double theta = rotation->getTheta()/ TG4XMLUnits::Angle();
-  G4double psi = rotation->getPsi()/ TG4XMLUnits::Angle();
+  double angleX;
+  double angleY;
+  double angleZ;
+  double cosb = sqrt(  rotation->xx()*rotation->xx()
+                     + rotation->yx()*rotation->yx() ); 
+  if (cosb > 16*FLT_EPSILON) {
+    angleX = atan2( rotation->zy(), rotation->zz());
+    angleY = atan2(-rotation->zx(), cosb);
+    angleZ = atan2( rotation->yx(), rotation->xx());
+  }
+  else{
+    angleX = atan2(-rotation->yz(), rotation->yy());
+    angleY = atan2(-rotation->zx(), cosb);
+    angleZ = 0.;
+  }
+
+  // Apply units
+  angleX /= TG4XMLUnits::Angle();
+  angleY /= TG4XMLUnits::Angle();
+  angleZ /= TG4XMLUnits::Angle();
+
 
   // Compose element string template
   G4String quota1 = "\"";
@@ -1199,9 +1219,9 @@ void TG4GDMLConvertor::WriteRotation(const G4String& name,
   // Write element
   fOutFile << fIndention << element1;
 
-  SmartPut(fOutFile, fNW+1, fNP, element2, phi, quota2);
-  SmartPut(fOutFile, fNW+1, fNP, element3, theta, quota2);
-  SmartPut(fOutFile, fNW+1, fNP, element4, psi, "");
+  SmartPut(fOutFile, fNW+1, fNP, element2, angleX, quota2);
+  SmartPut(fOutFile, fNW+1, fNP, element3, angleY, quota2);
+  SmartPut(fOutFile, fNW+1, fNP, element4, angleZ, "");
 
   fOutFile << element5 << G4endl;
 }  
