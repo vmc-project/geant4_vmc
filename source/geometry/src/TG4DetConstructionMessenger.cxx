@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.cxx,v 1.4 2003/01/29 11:23:05 brun Exp $
+// $Id: TG4DetConstructionMessenger.cxx,v 1.5 2004/03/26 11:04:04 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -22,7 +22,9 @@
 //_____________________________________________________________________________
 TG4DetConstructionMessenger::TG4DetConstructionMessenger(
                                    TG4DetConstruction* detConstruction)
-  : fDetConstruction(detConstruction)
+  : fDetConstruction(detConstruction),
+    fDirectory(0)
+    
 {
 //
   fDirectory = new G4UIdirectory("/mcDet/");

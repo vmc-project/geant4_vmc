@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.h,v 1.3 2003/01/29 11:22:32 brun Exp $
+// $Id: TG4DetConstruction.h,v 1.4 2003/12/18 13:28:08 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -13,8 +13,9 @@
 
 #include "TG4Verbose.h"
 #include "TG4DetConstructionMessenger.h"
-#include "TG4XMLGeometryGenerator.h"
 #include "TG4MagneticFieldType.h"
+#include "TG4AGDDGeometryGenerator.h"
+#include "TG4GDMLGeometryGenerator.h"
 
 #include <G4VUserDetectorConstruction.hh>
 #include <globals.hh>
@@ -55,9 +56,10 @@ class TG4DetConstruction : public G4VUserDetectorConstruction,
 
     // data members
     TG4DetConstructionMessenger  fMessenger;        //messenger
+    TG4AGDDGeometryGenerator     fAGDDGeometryGenerator; // AGDD convertor 
+    TG4GDMLGeometryGenerator     fGDMLGeometryGenerator; // GDML convertor
     TG4MagneticFieldType         fMagneticFieldType;//magnetic field type
     G4MagneticField*             fMagneticField;    //magnetic field
-    TG4XMLGeometryGenerator      fXMLGeometryGenerator; 
     G4bool             fReadGeometry;     //option applied to all modules
     G4bool             fWriteGeometry;    //option applied to all modules     
 };

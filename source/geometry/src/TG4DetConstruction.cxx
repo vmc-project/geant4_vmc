@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.cxx,v 1.4 2003/01/29 11:22:32 brun Exp $
+// $Id: TG4DetConstruction.cxx,v 1.5 2003/07/22 06:36:58 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -12,7 +12,6 @@
 #include "TG4GeometryServices.h"
 #include "TG4MagneticField.h"
 #include "TG4UniformMagneticField.h"
-#include "TG4XMLGeometryGenerator.h"
 #include "TG4LVTree.h"
 #include "TG4Globals.h"
 
