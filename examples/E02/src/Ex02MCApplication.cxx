@@ -1,4 +1,4 @@
-// $Id: Ex02MCApplication.cxx,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+// $Id: Ex02MCApplication.cxx,v 1.2 2003/02/04 17:55:35 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -26,7 +26,7 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title,
     fDetConstruction(),
     fTrackerSD("Tracker Chamber"),
     fFieldB(0),
-    fRootManager(fileMode)
+    fRootManager("example02", fileMode)
 {
 // Standard constructor
 // ---
