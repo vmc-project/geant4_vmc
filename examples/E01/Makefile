@@ -1,14 +1,18 @@
-# $Id:  $
+# $Id: Makefile,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 
 ############################### geant4vmc Makefile ###########################
 
 PACKAGE   = example01
 
-TOPDIR  = $(shell pwd)/../..
-BINDIR  = $(TOPDIR)/tmp/tgt_$(G4SYSTEM)/$(PACKAGE)
-LIBDIR  = $(TOPDIR)/lib/tgt_$(G4SYSTEM)
+ifndef PLATFORM
+  PLATFORM = $(shell uname)
+endif
 
-include $(TOPDIR)/config/Makefile.$(G4SYSTEM)
+TOPDIR  = $(shell pwd)/../..
+BINDIR  = $(TOPDIR)/tmp/tgt_$(PLATFORM)/$(PACKAGE)
+LIBDIR  = $(TOPDIR)/lib/tgt_$(PLATFORM)
+
+include $(TOPDIR)/config/Makefile.$(PLATFORM)
 
 ############################### Sources #######################################
 

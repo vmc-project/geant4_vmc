@@ -1,14 +1,18 @@
-# $Id:  $
+# $Id: Makefile,v 1.3 2002/10/08 08:34:48 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
 PACKAGE   = geant4vmc
 
-TOPDIR  = $(shell pwd)/..
-BINDIR  = $(TOPDIR)/tmp/tgt_$(G4SYSTEM)
-LIBDIR  = $(TOPDIR)/lib/tgt_$(G4SYSTEM)
+ifndef PLATFORM
+  PLATFORM = $(shell uname)
+endif
 
-include ../config/Makefile.$(G4SYSTEM)
+TOPDIR  = $(shell pwd)/..
+BINDIR  = $(TOPDIR)/tmp/tgt_$(PLATFORM)
+LIBDIR  = $(TOPDIR)/lib/tgt_$(PLATFORM)
+
+include ../config/Makefile.$(PLATFORM)
 
 ############################### Sources #######################################
 
@@ -46,7 +50,11 @@ OBJS	:= $(CXXOBJ) $(GDICTO)
 
 # Make include list
 #
-INCDIR  := $(patsubst %,-I%/include,$(GDIRS)) -I$(G4INSTALL)/include \
+ifndef G4INCLUDE
+  G4INCLUDE := $(G4INSTALL)/include
+endif  
+
+INCDIR  := $(patsubst %,-I%/include,$(GDIRS)) -I$(G4INCLUDE) \
 	   -I$(CLHEP_BASE_DIR)/include \
 	   -I$(G4INSTALL)/source/interfaces/common/include
 
@@ -145,6 +153,9 @@ depend:		$(SRCS)
 
 TOCLEAN		= $(BINDIR)
 TOCLEANALL	= $(BINDIR) $(LIBDIR)
+
+MAKEDIST	= ../config/makedist.sh lib
+MAKEDISTSRC	= ../config/makedist.sh
 
 include ../config/MakeMacros
 

@@ -1,4 +1,4 @@
-// $Id: Ex01MCApplication.cxx,v 1.3 2002/09/11 17:02:36 ivana Exp $
+// $Id: Ex01MCApplication.cxx,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -17,6 +17,8 @@
 #include <TLorentzVector.h>
 
 #include <iostream>
+
+using namespace std;
 
 ClassImp(Ex01MCApplication)
 

@@ -1,0 +1,16 @@
+$Id: history,v 1.1 2002/10/08 13:27:30 brun Exp $
+-----------------------------------------------------------------
+     
+Tags (history):
+===============
+
+  12/10/2002:  
+  v0-1:
+    The first released version;
+    tested with Geant4 4.1 + patch01, Root 3.03/09.
+     
+  20/09/2002:   
+  First revision:
+    Implementation of TVirtualMC interface (in Root) for Geant4;
+    source: AliRoot/TGeant4.
+    See previous history in AliRoot/AliGeant4/doc/history.
