@@ -1,5 +1,4 @@
-// $Id: TG4XMLMessenger.cxx,v 1.1 2003/01/29 11:27:38 brun Exp $
-// Category: geometry
+// $Id: TG4XMLMessenger.cxx,v 1.1 2003/07/22 06:46:58 brun Exp $
 //
 // Author: I. Hrivnacova
 //
@@ -8,26 +7,36 @@
 // See the class description in the header file.
 
 #include "TG4XMLMessenger.h"
-#include "TG4XMLGeometryGenerator.h"
+#include "TG4VXMLGeometryGenerator.h"
 
 #include <G4UIdirectory.hh>
 #include <G4UIcmdWithAString.hh>
 
+G4UIdirectory* TG4XMLMessenger::fgDirectory = 0;
+G4int  TG4XMLMessenger::fgCounter = 0;
+
 //_____________________________________________________________________________
-TG4XMLMessenger::TG4XMLMessenger(TG4XMLGeometryGenerator* geometryGenerator)
+TG4XMLMessenger::TG4XMLMessenger(TG4VXMLGeometryGenerator* geometryGenerator,
+                                 const G4String& xmlFormat)
   : fXMLGeometryGenerator(geometryGenerator)
 {
 //
-  fDirectory = new G4UIdirectory("/xml/");
-  fDirectory->SetGuidance("XML geometry generator control commands.");
+  if (!fgDirectory) {
+    fgDirectory = new G4UIdirectory("/xml/");
+    fgDirectory->SetGuidance("XML geometry generator control commands.");
+  }  
 
-  fGenerateXMLCmd = new G4UIcmdWithAString("/xml/generateXML", this);
+  G4String cmdName("/xml/generate");
+  cmdName = cmdName + xmlFormat;
+  fGenerateXMLCmd = new G4UIcmdWithAString(cmdName, this);
   fGenerateXMLCmd->SetGuidance("Generate geometry XML file");
   fGenerateXMLCmd->SetGuidance("starting from a logical volume specified by name;");
   fGenerateXMLCmd->SetGuidance("if no name is given - the whole world is processed.");
   fGenerateXMLCmd->SetParameterName("lvName", true);
   fGenerateXMLCmd->SetDefaultValue("");
-  fGenerateXMLCmd->AvailableForStates(G4State_Idle);   
+  fGenerateXMLCmd->AvailableForStates(G4State_Idle); 
+  
+  fgCounter++; 
 }
 
 //_____________________________________________________________________________
@@ -47,7 +56,11 @@ TG4XMLMessenger::TG4XMLMessenger(const TG4XMLMessenger& right)
 //_____________________________________________________________________________
 TG4XMLMessenger::~TG4XMLMessenger() {
 //
-  delete fDirectory;
+  fgCounter--;
+  if (fgCounter==0) {
+    delete fgDirectory;
+    fgDirectory = 0;
+  }  
   delete fGenerateXMLCmd;
 }
 

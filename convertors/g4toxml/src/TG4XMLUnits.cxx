@@ -1,5 +1,4 @@
-// $Id: TG4XMLUnits.cxx,v 1.1 2003/01/29 11:27:38 brun Exp $
-// Category: global
+// $Id: TG4XMLUnits.cxx,v 1.1 2003/07/22 06:46:58 brun Exp $
 //
 // Author: I. Hrivnacova
 //

@@ -1,5 +1,4 @@
-// $Id: TG4VXMLConvertor.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
-// Category: geometry
+// $Id: TG4VXMLConvertor.cxx,v 1.1 2003/07/22 06:46:58 brun Exp $
 //
 // Author: I. Hrivnacova, 27.07.2000 
 //

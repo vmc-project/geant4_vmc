@@ -1,16 +1,19 @@
-// $Id: TG4XMLConvertor.cxx,v 1.2 2003/10/10 15:46:03 brun Exp $
-// Category: geometry
+// $Id: TG4AGDDConvertor.cxx,v 1.3 2003/12/18 13:25:11 brun Exp $
 //
 // Author: I. Hrivnacova, 27.07.2000 
 //
-// Class TG4XMLConvertor 
-// ---------------------
+// Class TG4AGDDConvertor 
+// ----------------------
 // See the class description in the header file.
 
-#include "TG4XMLConvertor.h"
-#include "TG4Polycone.h"
-#include "TG4Polyhedra.h"
-#include "TG4XMLUnits.h"
+#include <iostream>
+#include <iomanip>
+#include <math.h>
+#if __GNUC__ >= 3
+#include <sstream>
+#else
+#include <strstream>
+#endif
 
 #include <G4PVReplica.hh>
 #include <G4Material.hh>
@@ -25,22 +28,27 @@
 #include <G4Polycone.hh>
 #include <G4Polyhedra.hh>
 
-#include <iostream>
-#include <iomanip>
-#if __GNUC__ >= 3
-#include <sstream>
-#else
-#include <strstream>
-#endif
+#include "TG4AGDDConvertor.h"
+#include "TG4Polycone.h"
+#include "TG4Polyhedra.h"
+#include "TG4XMLUnits.h"
 
-const G4int TG4XMLConvertor::fgkMaxVolumeNameLength   = 20;
-const G4int TG4XMLConvertor::fgkMaxMaterialNameLength = 20;
-const G4int TG4XMLConvertor::fgkDefaultNumWidth = 7;
-const G4int TG4XMLConvertor::fgkDefaultNumPrecision = 4;
+const G4int TG4AGDDConvertor::fgkMaxVolumeNameLength   = 20;
+const G4int TG4AGDDConvertor::fgkMaxMaterialNameLength = 20;
+const G4int TG4AGDDConvertor::fgkDefaultNumWidth = 7;
+const G4int TG4AGDDConvertor::fgkDefaultNumPrecision = 4;
 
 //_____________________________________________________________________________
-TG4XMLConvertor::TG4XMLConvertor(std::ofstream& outFile) 
+TG4AGDDConvertor::TG4AGDDConvertor(std::ofstream& outFile,
+                                 const G4String& version,
+		                 const G4String& date,
+                                 const G4String& author,
+				 const G4String dtdVersion) 
   : fOutFile(outFile),
+    fVersion(version),
+    fDate(date),
+    fAuthor(author),
+    fDtdVersion(dtdVersion),
     fkBasicIndention("   "),
     fIndention(fkBasicIndention),
     fNW(fgkDefaultNumWidth),
@@ -52,14 +60,16 @@ TG4XMLConvertor::TG4XMLConvertor(std::ofstream& outFile)
 }
 
 //_____________________________________________________________________________
-TG4XMLConvertor::~TG4XMLConvertor() {
+TG4AGDDConvertor::~TG4AGDDConvertor() {
 //
 }
 
+//
 // private methods
+//
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::Append(G4String& s, G4int a) const
+void TG4AGDDConvertor::Append(G4String& s, G4int a) const
 {
 // Appends number to string.
 // ---
@@ -76,7 +86,7 @@ void TG4XMLConvertor::Append(G4String& s, G4int a) const
 }
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::CutName(G4String& name) const
+void TG4AGDDConvertor::CutName(G4String& name) const
 {
 // Removes spaces after the name if present.
 // ---
@@ -86,7 +96,7 @@ void TG4XMLConvertor::CutName(G4String& name) const
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::CutName(G4String& name, G4int size) const
+void TG4AGDDConvertor::CutName(G4String& name, G4int size) const
 {
 // Cuts name to given size.
 // ---
@@ -95,7 +105,7 @@ void TG4XMLConvertor::CutName(G4String& name, G4int size) const
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::PutName(G4String& element, G4String name, 
+void TG4AGDDConvertor::PutName(G4String& element, G4String name, 
                               G4String templ) const
 {
 // Replaces given template in string element with a give name.
@@ -114,7 +124,27 @@ void TG4XMLConvertor::PutName(G4String& element, G4String name,
 }    
   
 //_____________________________________________________________________________
-void TG4XMLConvertor::WriteBox(G4String lvName, const G4Box* box, 
+std::ostream& TG4AGDDConvertor::SmartPut(std::ostream& out, 
+                                       G4int size, G4int precision,
+                                       G4double number, 
+				       const G4String& separator) const
+{
+// Help function to supress - sign in case the number == 0
+// within the given precision
+// ---
+
+  if ( round(number*pow(10.,precision))/pow(10.,precision) == 0.0) {
+    number = 0.;
+  }  
+  
+  out << std::setw(size) << std::setprecision(precision) 
+      << number << separator;
+  
+  return out;
+}
+
+//_____________________________________________________________________________
+void TG4AGDDConvertor::WriteBox(G4String lvName, const G4Box* box, 
                                G4String materialName, G4bool)
 {
 // Writes G4box solid.
@@ -144,7 +174,7 @@ void TG4XMLConvertor::WriteBox(G4String lvName, const G4Box* box,
 }
  
 //_____________________________________________________________________________
-void TG4XMLConvertor::WriteTubs(G4String lvName, const G4Tubs* tubs, 
+void TG4AGDDConvertor::WriteTubs(G4String lvName, const G4Tubs* tubs, 
                                 G4String materialName, G4bool)
 {
 // Writes G4tubs solid.
@@ -181,7 +211,7 @@ void TG4XMLConvertor::WriteTubs(G4String lvName, const G4Tubs* tubs,
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::WriteCons(G4String lvName, const G4Cons* cons, 
+void TG4AGDDConvertor::WriteCons(G4String lvName, const G4Cons* cons, 
                                 G4String materialName, G4bool isReflected)
 {
 // Writes G4cons solid.
@@ -232,7 +262,7 @@ void TG4XMLConvertor::WriteCons(G4String lvName, const G4Cons* cons,
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::WriteTrd(G4String lvName, const G4Trd* trd, 
+void TG4AGDDConvertor::WriteTrd(G4String lvName, const G4Trd* trd, 
                                G4String materialName, G4bool isReflected)
 {
 // Writes G4Trd solid.
@@ -276,7 +306,7 @@ void TG4XMLConvertor::WriteTrd(G4String lvName, const G4Trd* trd,
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::WriteTrap(G4String lvName, const G4Trap* trap, 
+void TG4AGDDConvertor::WriteTrap(G4String lvName, const G4Trap* trap, 
                                 G4String materialName, G4bool isReflected)
 {
 // Writes G4Trap solid.
@@ -294,32 +324,34 @@ void TG4XMLConvertor::WriteTrap(G4String lvName, const G4Trap* trap,
   G4double x4 = trap->GetXHalfLength4()/TG4XMLUnits::Length()*2.;
   G4double tanAlpha2 = trap->GetTanAlpha2();
 
-  // take into account reflection
-  if (isReflected) {
-    G4double tmp1 = y1;
-    G4double tmp2 = x1;
-    G4double tmp3 = x2;
-    G4double tmp4 = tanAlpha1;
-    y1 = y2;
-    x1 = x3;
-    x2 = x4;
-    tanAlpha1 = tanAlpha2;
-    y2 = tmp1;
-    x3 = tmp2;
-    x4 = tmp3;
-    tanAlpha2 = tmp4;
-  }    
-
   // ordering of parameters in XML element
   // Xmumdpupd_Ymp_Z: 2x2 2x1 2x4 2x3 2y2 2y1 2dz
   // inclination: atan(symAxis.x/symAxis.z), atan(symAxis.y/symAxis.z)
   // declination: alpha1, alpha2
 
   // get angles
-  G4double inc1 = atan(symAxis.x()/symAxis.z()) / deg;
-  G4double inc2 = atan(symAxis.y()/symAxis.z()) / deg;
-  G4double alpha1 = atan(tanAlpha1) / deg;
-  G4double alpha2 = atan(tanAlpha2) / deg;
+  G4double inc1 = atan(symAxis.x()/symAxis.z()) / TG4XMLUnits::Angle();
+  G4double inc2 = atan(symAxis.y()/symAxis.z()) / TG4XMLUnits::Angle();
+  G4double alpha1 = atan(tanAlpha1) / TG4XMLUnits::Angle();
+  G4double alpha2 = atan(tanAlpha2) / TG4XMLUnits::Angle();
+
+  // take into account reflection
+  if (isReflected) {
+    G4double tmp1 = y1;
+    G4double tmp2 = x1;
+    G4double tmp3 = x2;
+    G4double tmp4 = alpha1;
+    y1 = y2;
+    x1 = x3;
+    x2 = x4;
+    alpha1 = alpha2;
+    y2 = tmp1;
+    x3 = tmp2;
+    x4 = tmp3;
+    alpha2 = tmp4;
+    inc1 = -inc1;
+    inc2 = -inc2;
+  }    
 
   // compose element string template
   G4String quota = "\"";
@@ -354,8 +386,8 @@ void TG4XMLConvertor::WriteTrap(G4String lvName, const G4Trap* trap,
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::WritePara(G4String lvName, const G4Para* para, 
-                                G4String materialName, G4bool)
+void TG4AGDDConvertor::WritePara(G4String lvName, const G4Para* para, 
+                                G4String materialName, G4bool isReflected)
 {
 // Writes G4Para solid.
 // ---
@@ -367,13 +399,18 @@ void TG4XMLConvertor::WritePara(G4String lvName, const G4Para* para,
   G4double tanAlpha     = para->GetTanAlpha();
   G4ThreeVector symAxis = para->GetSymAxis();
   
-  G4double alpha = atan(tanAlpha) / deg;
-  G4double theta = acos(symAxis.z()) / deg;
+  G4double alpha = atan(tanAlpha) / TG4XMLUnits::Angle();
+  G4double theta = acos(symAxis.z()) / TG4XMLUnits::Angle();
   G4double phi;
   if (theta == 0.)
     phi = 0;
   else        
-    phi = atan(symAxis.y()/symAxis.x()) / deg;
+    phi = atan(symAxis.y()/symAxis.x()) / TG4XMLUnits::Angle();
+
+  // take into account reflection
+  if (isReflected) {
+   theta = 180. - theta; 
+  }    
 
   // compose element string template
   G4String quota = "\"";
@@ -406,7 +443,7 @@ void TG4XMLConvertor::WritePara(G4String lvName, const G4Para* para,
 }
  
 //_____________________________________________________________________________
-void TG4XMLConvertor::WritePolycone(G4String lvName, const G4Polycone* polycone, 
+void TG4AGDDConvertor::WritePolycone(G4String lvName, const G4Polycone* polycone, 
                                     G4String materialName, G4bool isReflected)
 {
 // Writes G4Polycone solid.
@@ -472,7 +509,7 @@ void TG4XMLConvertor::WritePolycone(G4String lvName, const G4Polycone* polycone,
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::WritePolyhedra(G4String lvName, const G4Polyhedra* polyhedra, 
+void TG4AGDDConvertor::WritePolyhedra(G4String lvName, const G4Polyhedra* polyhedra, 
                                     G4String materialName, G4bool isReflected)
 {
 // Writes G4Polycone solid.
@@ -550,15 +587,62 @@ void TG4XMLConvertor::WritePolyhedra(G4String lvName, const G4Polyhedra* polyhed
   fOutFile << element8 << G4endl << G4endl;
 }  
 
+//_____________________________________________________________________________
+void TG4AGDDConvertor::WriteNotSupportedSolid(G4String name, 
+                                  G4String materialName)
+{				   
+// Write a comment line with awarning
+// and then write a box element instead 
+// ---
 
+  // Compose comment
+  G4String element1 = "<!-- !!! unsupported shape  !!!  name= \""; 
+  G4String element2 = "\" -->";
+  G4String element3 = "<!-- dummy box is written instead  -->"; 
+  
+  // Write element with warning
+  fOutFile << fIndention << element1 << name << element2 << G4endl
+	   << fIndention << element3 << G4endl;
+	   
+  // Write dummy box element
+  G4Box box(name, 1., 1., 1.);
+  WriteBox(name, &box, materialName, false); 
+}  	   
+
+
+//
 // public methods
+//
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::OpenMaterials(const G4String& version, 
- 	                 const G4String& date, const G4String& author,
-                         const G4String dtdVersion)
+void TG4AGDDConvertor::OpenSection(const G4String& topVolume)
 {
 // Writes section opening.
+// ---
+			 
+  G4String element1 = "<section DTD_version = \"";
+  G4String element2 = "         name        = \"";
+  G4String element3 = "         version     = \"";
+  G4String element4 = "         date        = \"";
+  G4String element5 = "         author      = \"";
+  G4String element6 = "         top_volume  = \"";
+  G4String element7 = "  >";
+  G4String quota = "\"";   
+  
+  // write element
+  fOutFile << element1 << fDtdVersion << quota << G4endl
+           << element2 << topVolume   << quota << G4endl
+           << element3 << fVersion    << quota << G4endl
+           << element4 << fDate       << quota << G4endl
+           << element5 << fAuthor     << quota << G4endl
+           << element6 << topVolume   << quota
+           << element7 << G4endl;
+}  
+
+//_____________________________________________________________________________
+void TG4AGDDConvertor::OpenMaterials()
+{
+// Writes materials opening.
 // ---
 			 
   G4String element1 = "<materials  version = \"";
@@ -569,43 +653,16 @@ void TG4XMLConvertor::OpenMaterials(const G4String& version,
   G4String quota = "\"";   
   
   // write element
-  fOutFile << element1 << version << quota << G4endl
-           << element2 << date    << quota << G4endl
-           << element3 << author  << quota << G4endl
-           << element4 << dtdVersion << quota
+  fOutFile << element1 << fVersion << quota << G4endl
+           << element2 << fDate    << quota << G4endl
+           << element3 << fAuthor  << quota << G4endl
+           << element4 << fDtdVersion << quota
            << element5 << G4endl;
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::OpenSection(const G4String& versionDTD,
-                         const G4String& name, const G4String& version,
- 	                 const G4String& date, const G4String& author,
-                         const G4String& topVolume)
-{
-// Writes section opening.
-// ---
-			 
-  G4String element1 = "<section DTD_version = \"";
-  G4String element2 = "         name        = \"";
-  G4String element3 = "         version     = \"";
-  G4String element4 = "         date        = \"";
-  G4String element5 = "         author      = \"";
-  G4String element6 = "         topVolume   = \"";
-  G4String element7 = "  >";
-  G4String quota = "\"";   
-  
-  // write element
-  fOutFile << element1 << versionDTD << quota << G4endl
-           << element2 << name    << quota << G4endl
-           << element3 << version << quota << G4endl
-           << element4 << date    << quota << G4endl
-           << element5 << author  << quota << G4endl
-           << element6 << topVolume << quota
-           << element7 << G4endl;
-}  
-
-//_____________________________________________________________________________
-void TG4XMLConvertor::OpenComposition(const G4String& name)
+void TG4AGDDConvertor::OpenComposition(const G4String& name,
+                                       const G4String& /*materialName*/)
 {
 // Writes composition opening.
 // ---
@@ -624,21 +681,7 @@ void TG4XMLConvertor::OpenComposition(const G4String& name)
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::CloseMaterials()
-{
-// Writes materials closing.
-// ---
-
-  // define element
-  G4String element = "</materials>";
-
-  // write element
-  fOutFile << element
-	   << G4endl;
-}  
-
-//_____________________________________________________________________________
-void TG4XMLConvertor::CloseSection()
+void TG4AGDDConvertor::CloseSection(const G4String& /*topVolume*/)
 {
 // Writes section closing.
 // ---
@@ -652,7 +695,21 @@ void TG4XMLConvertor::CloseSection()
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::CloseComposition()
+void TG4AGDDConvertor::CloseMaterials()
+{
+// Writes materials closing.
+// ---
+
+  // define element
+  G4String element = "</materials>";
+
+  // write element
+  fOutFile << element
+	   << G4endl;
+}  
+
+//_____________________________________________________________________________
+void TG4AGDDConvertor::CloseComposition()
 {
 // Writes composition closing.
 // ---
@@ -670,7 +727,7 @@ void TG4XMLConvertor::CloseComposition()
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::WriteMaterial(const G4Material* material) 
+void TG4AGDDConvertor::WriteMaterial(const G4Material* material) 
 {
 // Writes G4Material. 
 // Not yet implemented, only XML comment element is written.
@@ -691,7 +748,7 @@ void TG4XMLConvertor::WriteMaterial(const G4Material* material)
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::WriteSolid(G4String lvName, const G4VSolid* solid, 
+void TG4AGDDConvertor::WriteSolid(G4String lvName, const G4VSolid* solid, 
                                  G4String materialName) 
 {
 // Finds G4Solid concrete type and calls writing function. 
@@ -699,7 +756,7 @@ void TG4XMLConvertor::WriteSolid(G4String lvName, const G4VSolid* solid,
 // ---
 
   // to be removed when materials are supported
-  materialName = "Hydrogen";
+  // materialName = "Hydrogen";
   
   const G4ReflectedSolid* reflSolid
     = dynamic_cast<const G4ReflectedSolid*>(solid);
@@ -764,19 +821,44 @@ void TG4XMLConvertor::WriteSolid(G4String lvName, const G4VSolid* solid,
   // write comment line in case of unsupported
   // shape
 
-  // only comment line
-  G4String element1 = "<!-- unsupported shape   name= \""; 
-  G4String element2 = "\" -->";
-  
-  // write element
-  fOutFile << fkBasicIndention
-           << element1 << lvName
-	   << element2
-           << G4endl;
+  // Not supported solid
+  WriteNotSupportedSolid(lvName, materialName);
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::WriteRotation(const G4RotationMatrix* rotation)
+void TG4AGDDConvertor::WritePosition(const G4String& name, 
+                                     G4ThreeVector position) 
+{
+// Writes position without rotation with a given solid name. 
+// ---
+
+  // get parameters
+  G4double x = position.x()/TG4XMLUnits::Length();
+  G4double y = position.y()/TG4XMLUnits::Length();
+  G4double z = position.z()/TG4XMLUnits::Length();
+
+  // compose element string template
+  G4String element1 = "<posXYZ      volume=\"#####################   X_Y_Z=\"";
+  G4String element2 = "\" />";
+  
+  // put solid name
+  PutName(element1, name, "#");
+  
+  // write element
+  fOutFile << fIndention
+           << element1;
+
+  SmartPut(fOutFile, fNW+1, fNP, x, "; ");
+  SmartPut(fOutFile, fNW+1, fNP, y, "; ");
+  SmartPut(fOutFile, fNW+1, fNP, z, "");
+
+  fOutFile << element2
+	   << std::endl;
+}  
+
+//_____________________________________________________________________________
+void TG4AGDDConvertor::WriteRotation(const G4String& /*name*/, 
+                                     const G4RotationMatrix* rotation)
 {
 // Writes G4RotationMatrix. 
 // Not yet implemented, only XML comment element is written.
@@ -835,35 +917,7 @@ void TG4XMLConvertor::WriteRotation(const G4RotationMatrix* rotation)
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::WritePosition(G4String lvName, G4ThreeVector position) 
-{
-// Writes position without rotation with a given solid name. 
-// ---
-
-  // get parameters
-  G4double x = position.x()/TG4XMLUnits::Length();
-  G4double y = position.y()/TG4XMLUnits::Length();
-  G4double z = position.z()/TG4XMLUnits::Length();
-
-  // compose element string template
-  G4String element1 = "<posXYZ      volume=\"#####################   X_Y_Z=\"";
-  G4String element2 = "\" />";
-  
-  // put solid name
-  PutName(element1, lvName, "#");
-  
-  // write element
-  fOutFile << fIndention
-           << element1
-           << std::setw(fNW+1) << std::setprecision(fNP) << x << "; "
-           << std::setw(fNW+1) << std::setprecision(fNP) << y << "; "
-           << std::setw(fNW+1) << std::setprecision(fNP) << z
-	   << element2
-	   << G4endl;
-}  
-
-//_____________________________________________________________________________
-void TG4XMLConvertor::WritePositionWithRotation(
+void TG4AGDDConvertor::WritePositionWithRotation(
                            G4String lvName, G4ThreeVector position, 
 			   const G4RotationMatrix* rotation)
 {
@@ -889,7 +943,7 @@ void TG4XMLConvertor::WritePositionWithRotation(
   G4int i=0;
   while (i<fRotations.size() && fRotations[i] != rotation) i++; 
   if (i==fRotations.size()) {
-    G4cerr << "    TG4XMLConvertor::WritePositionWithRotation: " << G4endl;
+    G4cerr << "    TG4AGDDConvertor::WritePositionWithRotation: " << G4endl;
     G4cerr << "    Unknown rotation - fatal error." << G4endl;   
     G4cerr << "*** Exception: Aborting execution ***" << G4endl;   
     exit(1);
@@ -910,43 +964,49 @@ void TG4XMLConvertor::WritePositionWithRotation(
   
   // write element
   fOutFile << fIndention
-           << element1
-           << std::setw(fNW+1) << std::setprecision(fNP) << x << "; "
-           << std::setw(fNW+1) << std::setprecision(fNP) << y << "; "
-           << std::setw(fNW+1) << std::setprecision(fNP) << z << quota
-	   << fIndention
-	   << element2 
-	   << std::setw(8) << std::setprecision(5) << xx << "; "  
-	   << std::setw(8) << std::setprecision(5) << xy << "; "  
-	   << std::setw(8) << std::setprecision(5) << xz << "; " << G4endl
+           << element1;
+
+  SmartPut(fOutFile, fNW+1, fNP, x, "; ");	   
+  SmartPut(fOutFile, fNW+1, fNP, y, "; ");	   
+  SmartPut(fOutFile, fNW+1, fNP, z, quota);	   
+
+  fOutFile << fIndention
+	   << element2; 
+	   
+  SmartPut(fOutFile, 8, 5, xx, "; ");	   
+  SmartPut(fOutFile, 8, 5, xy, "; ");	   
+  SmartPut(fOutFile, 8, 5, xz, "; ");	   
+
+  fOutFile << std::endl
            << fIndention
-           << element3
-	   << std::setw(8) << std::setprecision(5) << yx << "; "  
-	   << std::setw(8) << std::setprecision(5) << yy << "; "  
-	   << std::setw(8) << std::setprecision(5) << yz << "; " << G4endl
+           << element3;
+
+  SmartPut(fOutFile, 8, 5, yx, "; ");	   
+  SmartPut(fOutFile, 8, 5, yy, "; ");	   
+  SmartPut(fOutFile, 8, 5, yz, "; ");	   
+
+  fOutFile << std::endl
 	   << fIndention
-           << element3
-	   << std::setw(8) << std::setprecision(5) << zx << "; "  
-	   << std::setw(8) << std::setprecision(5) << zy << "; "  
-	   << std::setw(8) << std::setprecision(5) << zz 
-	   << element4
-	   << G4endl;
+           << element3;
+
+  SmartPut(fOutFile, 8, 5, zx, "; ");	   
+  SmartPut(fOutFile, 8, 5, zy, "; ");	   
+  SmartPut(fOutFile, 8, 5, zz, "");	   
+
+  fOutFile << element4
+	   << std::endl;
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::WriteReplica(G4String lvName, G4PVReplica* pvr) 
+void TG4AGDDConvertor::WriteMultiplePosition(
+                            const G4String& lvName,
+                            EAxis axis, G4int nofReplicas,
+			    G4double width, G4double offset)			       
+			     
 {
-// Writes position without rotation with a given solid name. 
+// Writes multiple position. 
 // ---
 
-  // get parameters
-  EAxis axis;
-  G4int nReplicas;
-  G4double width;
-  G4double offset;
-  G4bool consuming;
-  pvr->GetReplicationData(axis, nReplicas, width, offset, consuming);
-  
   G4String tag;
   switch (axis) {
     case kXAxis: tag = "X"; break;
@@ -959,7 +1019,7 @@ void TG4XMLConvertor::WriteReplica(G4String lvName, G4PVReplica* pvr)
   }  
 
   // set units
-  G4double value0 = - width*(nReplicas-1)*0.5 + offset;
+  G4double value0 = - width*(nofReplicas-1)*0.5 + offset;
   G4double dValue = width;
   if (axis != kPhi) {
     value0 = value0/TG4XMLUnits::Length();
@@ -987,7 +1047,7 @@ void TG4XMLConvertor::WriteReplica(G4String lvName, G4PVReplica* pvr)
   // write element
   fOutFile << fIndention
            << element1
-           << std::setw(fNW+1) << std::setprecision(fNP) << nReplicas
+           << std::setw(fNW+1) << std::setprecision(fNP) << nofReplicas
 	   << element2
            << std::setw(fNW+1) << std::setprecision(fNP) << value0
 	   << element3	   
@@ -997,7 +1057,7 @@ void TG4XMLConvertor::WriteReplica(G4String lvName, G4PVReplica* pvr)
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::WriteEmptyLine()
+void TG4AGDDConvertor::WriteEmptyLine()
 {
 // Writes empty line.
 // ---
@@ -1006,15 +1066,19 @@ void TG4XMLConvertor::WriteEmptyLine()
 }  
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::IncreaseIndention()
+void TG4AGDDConvertor::IncreaseIndention()
 {
-  // increase indention
+// Increase indention
+// ---
+
   fIndention.append(fkBasicIndention);	   
 }
 
 //_____________________________________________________________________________
-void TG4XMLConvertor::DecreaseIndention()
+void TG4AGDDConvertor::DecreaseIndention()
 {
-  // decrease indention
+// Decrease indention
+// ---
+  
   fIndention.replace(fIndention.find(fkBasicIndention), 3 , "");
 }
