@@ -1,4 +1,4 @@
-// $Id: TG4XMLGeometryGenerator.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4XMLGeometryGenerator.cxx,v 1.2 2003/01/29 11:24:05 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova, 27.07.2000 
@@ -271,7 +271,7 @@ void TG4XMLGeometryGenerator::ProcessLogicalVolume(G4LogicalVolume* lv)
       else {
         G4cerr << "    TG4XMLGeometryGenerator::ProcessLogicalVolume: " << G4endl;
         G4cerr << "    Limitation: " << G4endl;
-        G4cerr << "    Other physical volumes than PVPlacement and PVReplica"
+        G4cerr << "    Other physical volumes than PVPlacement and PVReplica";
         G4cerr << " are not implemented.";
         G4cerr << "*** Exception: Aborting execution ***" << G4endl;   
         exit(1);
