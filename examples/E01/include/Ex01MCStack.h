@@ -1,4 +1,4 @@
-// $Id: Ex01MCStack.h,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+// $Id: Ex01MCStack.h,v 1.2 2003/02/04 17:55:34 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -42,6 +42,7 @@ class Ex01MCStack : public TVirtualMCStack
     virtual Int_t  GetNtrack() const;
     virtual Int_t  GetNprimary() const;
     virtual Int_t  CurrentTrack() const;
+    virtual Int_t  CurrentTrackParent() const;
     
   private:
     // methods
@@ -53,7 +54,7 @@ class Ex01MCStack : public TVirtualMCStack
     Int_t                      fCurrentTrack;
     Int_t                      fNPrimary;
     
-    ClassDef(Ex01MCStack,1) // Extended TParticle
+    ClassDef(Ex01MCStack,1) // Ex01MCStack
 };
 
 #endif //Ex01_STACK_H   

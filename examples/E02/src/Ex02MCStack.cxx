@@ -1,6 +1,6 @@
-// $Id: Ex02MCStack.cxx,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+// $Id: Ex02MCStack.cxx,v 1.2 2003/02/04 17:55:35 brun Exp $
 //
-// Geant4 ExampleN01 adapted to Virtual Monte Carlo 
+// Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
 // Class Ex02MCStack
 // -----------------
@@ -183,6 +183,26 @@ Int_t  Ex02MCStack::CurrentTrack() const
 // ---
 
   return fCurrentTrack;
+}  
+
+//_____________________________________________________________________________
+Int_t  Ex02MCStack::CurrentTrackParent() const 
+{
+// Returns the current track parent ID.
+// ---
+
+  if (fCurrentTrack < 0 || fCurrentTrack >= fParticles->GetEntriesFast()) {
+    Warning("GetTrackParent", "Current track not in the stack."); 
+    return -1;
+  }  
+  
+  Ex02Particle* mother 
+    = ((Ex02Particle*)fParticles->At(fCurrentTrack))->GetMother();
+    
+  if (mother)
+    return  mother->GetID();
+  else
+    return -1;   
 }  
 
 //_____________________________________________________________________________
