@@ -1,14 +1,18 @@
-# $Id:  $
+# $Id: Makefile,v 1.2 2002/10/08 13:27:30 brun Exp $
 
 ############################### geant4vmc Makefile ###########################
 
 PACKAGE   = example01
 
-TOPDIR  = $(shell pwd)/../..
-BINDIR  = $(TOPDIR)/tmp/tgt_$(G4SYSTEM)/$(PACKAGE)
-LIBDIR  = $(TOPDIR)/lib/tgt_$(G4SYSTEM)
+ifndef PLATFORM
+  PLATFORM = $(shell uname)
+endif
 
-include $(TOPDIR)/config/Makefile.$(G4SYSTEM)
+TOPDIR  = $(shell pwd)/../..
+BINDIR  = $(TOPDIR)/tmp/tgt_$(PLATFORM)/$(PACKAGE)
+LIBDIR  = $(TOPDIR)/lib/tgt_$(PLATFORM)
+
+include $(TOPDIR)/config/Makefile.$(PLATFORM)
 
 ############################### Sources #######################################
 
@@ -29,7 +33,9 @@ SRCS	:= $(CXXSRC)
 
 # C++ Headers
 #
-HDRS	:= $(wildcard include/*.h) include/$(PACKAGE)LinkDef.h
+HDRS    := $(wildcard include/*.h)
+HDRS    := $(filter-out include/$(PACKAGE)LinkDef.h,$(HDRS))
+HDRS    += include/$(PACKAGE)LinkDef.h
 
 # Objects
 #

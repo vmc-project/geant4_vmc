@@ -1,4 +1,4 @@
-// $Id: TG4G3PhysicsManager.h,v 1.1 2002/06/20 11:57:45 hristov Exp $
+// $Id: TG4G3PhysicsManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -54,11 +54,6 @@ class TG4G3PhysicsManager
     G4bool CheckControlWithTheVector(
              G4String name, G4double value, 
 	     TG4G3Control& control, TG4G3ControlValue& controlValue); 
-    G4bool CheckCutWithG3Defaults(
-             G4String name, G4double value, TG4G3Cut& cut); 
-    G4bool CheckControlWithG3Defaults(
-             G4String name, G4double value, 
-	     TG4G3Control& control, TG4G3ControlValue& controlValue); 
 
     // set methods
     void SetCut(TG4G3Cut cut, G4double cutValue);
@@ -84,6 +79,12 @@ class TG4G3PhysicsManager
     TG4G3PhysicsManager& operator=(const TG4G3PhysicsManager& right);
 
   private:
+    // methods
+    G4bool CheckCutWithG3Defaults(
+             G4String name, G4double value, TG4G3Cut& cut); 
+    G4bool CheckControlWithG3Defaults(
+             G4String name, G4double value, 
+	     TG4G3Control& control, TG4G3ControlValue& controlValue); 
     // set methods
     void SwitchIsCutVector(TG4G3Cut cut);
     void SwitchIsControlVector(TG4G3Control control);

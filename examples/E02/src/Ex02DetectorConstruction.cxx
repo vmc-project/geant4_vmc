@@ -1,4 +1,4 @@
-// $Id: Ex02DetectorConstruction.cxx,v 1.1.1.1 2002/06/16 15:57:36 hristov Exp $
+// $Id: Ex02DetectorConstruction.cxx,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -13,7 +13,6 @@
 
 #include "Ex02DetectorConstruction.h"
 #include "Ex02ChamberParameterisation.h"
-//#include "ExN02MagneticField.h"
 
 ClassImp(Ex02DetectorConstruction)
 
@@ -259,10 +258,4 @@ void Ex02DetectorConstruction::SetTargetMaterial(const TString& materialName)
 void Ex02DetectorConstruction::SetChamberMaterial(const TString& materialName)
 {
   Warning("SetTargetMaterial", "Not available in virtual Monte Carlo");
-}
- 
-//_____________________________________________________________________________
-void Ex02DetectorConstruction::SetMagField(Double_t fieldValue)
-{
-  // to be done
 }

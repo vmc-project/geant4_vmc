@@ -1,4 +1,4 @@
-// $Id: TG4LVTreeMessenger.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4LVTreeMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -35,20 +35,20 @@ TG4LVTreeMessenger::TG4LVTreeMessenger(TG4LVTree* lvTree)
   fSetCurrentLVCmd = new G4UIcmdWithAString(commandPath, this);
   fSetCurrentLVCmd->SetGuidance("Set the current logical volume.");
   fSetCurrentLVCmd->SetParameterName("curVolume", false);
-  fSetCurrentLVCmd->AvailableForStates(PreInit,Idle);  
+  fSetCurrentLVCmd->AvailableForStates(G4State_PreInit, G4State_Idle);  
  
   commandPath = dirName + "list";
   fListCmd = new G4UIcmdWithoutParameter(commandPath, this);
   G4String guidance = "List LV tree of the current volume. ";
   fListCmd->SetGuidance(guidance);
-  fListCmd->AvailableForStates(PreInit,Idle);  
+  fListCmd->AvailableForStates(G4State_PreInit, G4State_Idle);  
  
   commandPath = dirName + "listLong";
   fListLongCmd = new G4UIcmdWithoutParameter(commandPath, this);
   guidance = "List LV tree of the current volume \n";
   guidance = guidance + "including number of its daughters.";
   fListLongCmd->SetGuidance(guidance);
-  fListLongCmd->AvailableForStates(PreInit,Idle);  
+  fListLongCmd->AvailableForStates(G4State_PreInit, G4State_Idle);  
  
 #ifdef G4VIS_USE
   commandPath = dirName + "setLVTreeVisibility";
@@ -56,14 +56,14 @@ TG4LVTreeMessenger::TG4LVTreeMessenger(TG4LVTree* lvTree)
   fSetLVTreeVisibilityCmd 
     ->SetGuidance("Make current volume tree visible/invisible.");
   fSetLVTreeVisibilityCmd->SetParameterName("lvtreeVisibility", false);
-  fSetLVTreeVisibilityCmd->AvailableForStates(PreInit,Idle);  
+  fSetLVTreeVisibilityCmd->AvailableForStates(G4State_PreInit, G4State_Idle);  
  
   commandPath = dirName + "setVolVisibility";
   fSetVolVisibilityCmd = new G4UIcmdWithABool(commandPath, this);
   fSetVolVisibilityCmd 
     ->SetGuidance("Make current volume visible/invisible.");
   fSetVolVisibilityCmd->SetParameterName("volVisibility", false);
-  fSetVolVisibilityCmd->AvailableForStates(PreInit,Idle);  
+  fSetVolVisibilityCmd->AvailableForStates(G4State_PreInit, G4State_Idle);  
  
   commandPath = dirName + "setLVTreeColour";
   fSetLVTreeColourCmd = new G4UIcmdWithAString(commandPath, this);
@@ -74,7 +74,7 @@ TG4LVTreeMessenger::TG4LVTreeMessenger(TG4LVTree* lvTree)
   fSetLVTreeColourCmd->SetParameterName("lvtreeColour", false);
   G4String candidatesList = TG4ColourStore::Instance()->GetColoursList();  
   fSetLVTreeColourCmd->SetCandidates(candidatesList);
-  fSetLVTreeColourCmd->AvailableForStates(PreInit,Idle);  
+  fSetLVTreeColourCmd->AvailableForStates(G4State_PreInit, G4State_Idle);  
 
   commandPath = dirName + "setVolColour";
   fSetVolColourCmd = new G4UIcmdWithAString(commandPath, this);
@@ -85,7 +85,7 @@ TG4LVTreeMessenger::TG4LVTreeMessenger(TG4LVTree* lvTree)
   fSetVolColourCmd->SetParameterName("volColour", false);
   candidatesList = TG4ColourStore::Instance()->GetColoursList();  
   fSetVolColourCmd->SetCandidates(candidatesList);
-  fSetVolColourCmd->AvailableForStates(PreInit,Idle);  
+  fSetVolColourCmd->AvailableForStates(G4State_PreInit, G4State_Idle);  
 #endif //G4VIS_USE
 }
 

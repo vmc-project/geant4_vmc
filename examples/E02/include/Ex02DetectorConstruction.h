@@ -1,4 +1,4 @@
-// $Id: Ex02DetectorConstruction.h,v 1.1 2002/06/20 11:52:35 hristov Exp $
+// $Id: Ex02DetectorConstruction.h,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -13,8 +13,6 @@
 #include <TObject.h>
 #include <TString.h>
 
-//#include "ExN02MagneticField.hh"
-
 class Ex02DetectorConstruction : public TObject
 {
   public:  
@@ -28,7 +26,6 @@ class Ex02DetectorConstruction : public TObject
      // set methods
      void SetTargetMaterial (const TString& name);
      void SetChamberMaterial(const TString& name);
-     void SetMagField(Double_t value);
 
      Double_t GetTrackerFullLength() {return fTrackerLength;};
      Double_t GetTargetFullLength()  {return fTargetLength;};

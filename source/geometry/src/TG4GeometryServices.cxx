@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4GeometryServices.cxx,v 1.2 2002/12/03 15:05:16 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -484,12 +484,20 @@ TG4Limits* TG4GeometryServices::GetLimits(G4UserLimits* limits) const
   
   TG4Limits* tg4Limits = dynamic_cast<TG4Limits*> (limits);
 
-  if (!tg4Limits) {
-    G4Exception("TG4GeometryServices::GetLimits: Wrong limits type.");
-    return 0;
+  if (tg4Limits) return tg4Limits;
+
+
+  G4UserLimits* g4Limits = dynamic_cast<G4UserLimits*> (limits);
+
+  if (g4Limits) {
+     TG4Limits* tg4Limits = new TG4Limits("g3defaults", *limits);
+    //delete limits;   
+             // CHECK
+    return tg4Limits;
   }  
-  else 
-    return tg4Limits;  
+ 
+  TG4Globals::Exception("TG4GeometryServices::GetLimits: Wrong limits type."); 
+  return 0;
 }        
 
 //_____________________________________________________________________________

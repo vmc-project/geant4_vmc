@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.2 2002/09/06 15:12:08 ivana Exp $
+// $Id: TG4PhysicsManager.cxx,v 1.2 2002/12/03 15:06:51 brun Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -31,7 +31,6 @@
 #include <G3MedTable.hh>
 
 #include <TDatabasePDG.h>
-#include <TVirtualMCDecayer.h>
 
 TG4PhysicsManager* TG4PhysicsManager::fgInstance = 0;
 
@@ -212,7 +211,7 @@ void TG4PhysicsManager::FillProcessMap()
   fProcessMCMap.Add("Rayleigh Scattering", kPRayleigh);
 
   // no mechanism is active, usually at the entrance of a new volume
-  fProcessMCMap.Add("Transportation", kPNull);
+  fProcessMCMap.Add("Transportation", kPTransportation);
 
   // particle has fallen below energy threshold and tracking stops
   // kPStop

@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorGeneral.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4PhysicsConstructorGeneral.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -89,6 +89,11 @@ void TG4PhysicsConstructorGeneral::ConstructProcess()
   // map to G3 controls
   TG4ProcessControlMap* processMap = TG4ProcessControlMap::Instance();
   processMap->Add(&fDecayProcess, kDCAY); 
+
+  // map to TMCProcess codes
+  TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
+  mcMap->Add("Decay", kPDecay); 
+  mcMap->Add("Transportation", kPTransportation); 
 
   if (VerboseLevel() > 0) {
     G4cout << "### General physics constructed." << G4endl;

@@ -1,0 +1,43 @@
+$Id: history,v 1.4 2003/01/29 16:35:12 brun Exp $
+-----------------------------------------------------------------
+     
+Tags (history):
+===============
+
+  13/03/2003:
+  v0-4:
+    geant4_vmc:
+    Saving secondary particles to MC stack made optional
+    (added /mcTracking/saveSecondaries command); 
+    a few corrections.
+    
+    Examples:
+    New example E03;    
+    Corrected implementation in the examples stack classes
+    - fixed meaning of the argument done (renamed toBeDone)
+    to be consistent with TGeant3 implementation;
+
+    Tested with Geant4 5.0, Root 3.05/03.
+
+  29/01/2003:
+  v0-3:
+    Update to changes in TVirtualMC;
+    the XML convertor classes made independent from Geant4 VMC.
+    Tested with Geant4 5.0, Root 3.05/00.
+
+  18/12/2002:
+  v0-2:
+    Update for new Geant4 version; 
+    a few corrections (mainly in makefiles).
+    Tested with Geant4 5.0, Root 3.04/01.
+
+  12/10/2002:  
+  v0-1:
+    The first released version;
+    tested with Geant4 4.1 + patch01, Root 3.03/09.
+     
+  20/09/2002:   
+  First revision:
+    Implementation of TVirtualMC interface (in Root) for Geant4;
+    source: AliRoot/TGeant4.
+    See previous history in AliRoot/AliGeant4/doc/history.

@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsMessenger.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4PhysicsMessenger.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -35,25 +35,25 @@ TG4PhysicsMessenger::TG4PhysicsMessenger(TG4PhysicsManager* physicsManager)
      = new G4UIcmdWithABool("/mcPhysics/setEM", this);
   fSetEMCmd->SetGuidance("Set electromagnetic physics.");
   fSetEMCmd->SetParameterName("EMControl", false);
-  fSetEMCmd->AvailableForStates(PreInit);
+  fSetEMCmd->AvailableForStates(G4State_PreInit);
 
   fSetMuonCmd
      = new G4UIcmdWithABool("/mcPhysics/setMuon", this);
   fSetMuonCmd->SetGuidance("Set muon physics.");
   fSetMuonCmd->SetParameterName("EMControl", false);
-  fSetMuonCmd->AvailableForStates(PreInit);
+  fSetMuonCmd->AvailableForStates(G4State_PreInit);
 
   fSetHadronCmd
      = new G4UIcmdWithABool("/mcPhysics/setHadron", this);
   fSetHadronCmd->SetGuidance("Set hadron physics.");
   fSetHadronCmd->SetParameterName("HadronControl", false);
-  fSetHadronCmd->AvailableForStates(PreInit);
+  fSetHadronCmd->AvailableForStates(G4State_PreInit);
 
   fSetOpticalCmd
      = new G4UIcmdWithABool("/mcPhysics/setOptical", this);
   fSetOpticalCmd->SetGuidance("Set Cerenkov and optical physics.");
   fSetOpticalCmd->SetParameterName("OpticalControl", false);
-  fSetOpticalCmd->AvailableForStates(PreInit);
+  fSetOpticalCmd->AvailableForStates(G4State_PreInit);
 
   fSetSpecialCutsCmd
      = new G4UIcmdWithABool("/mcPhysics/setSpecialCuts", this);
@@ -61,7 +61,7 @@ TG4PhysicsMessenger::TG4PhysicsMessenger(TG4PhysicsManager* physicsManager)
   fSetSpecialCutsCmd
     ->SetGuidance("!! Support for this option is under development.");
   fSetSpecialCutsCmd->SetParameterName("SpecialCutsControl", false);
-  fSetSpecialCutsCmd->AvailableForStates(PreInit);
+  fSetSpecialCutsCmd->AvailableForStates(G4State_PreInit);
 
   fSetSpecialControlsCmd
      = new G4UIcmdWithABool("/mcPhysics/setSpecialControls", this);
@@ -69,43 +69,43 @@ TG4PhysicsMessenger::TG4PhysicsMessenger(TG4PhysicsManager* physicsManager)
   fSetSpecialControlsCmd
     ->SetGuidance("!! Support for this option is under development.");
   fSetSpecialControlsCmd->SetParameterName("SpecialFlagsControl", false);
-  fSetSpecialControlsCmd->AvailableForStates(PreInit);
+  fSetSpecialControlsCmd->AvailableForStates(G4State_PreInit);
 
   fRangeCutCmd
      = new G4UIcmdWithADouble("/mcPhysics/rangeCut", this);
   fRangeCutCmd->SetGuidance("Sets the global cut in range (in mm)");
-  fRangeCutCmd->AvailableForStates(PreInit);
+  fRangeCutCmd->AvailableForStates(G4State_PreInit);
 
   fPrintProcessMCMapCmd
      = new G4UIcmdWithoutParameter("/mcPhysics/printProcessMCMap", this);
   fPrintProcessMCMapCmd
     ->SetGuidance("Prints mapping of G4 processes to G3 controls.");
-  fPrintProcessMCMapCmd->AvailableForStates(Idle);
+  fPrintProcessMCMapCmd->AvailableForStates(G4State_Idle);
 
   fPrintProcessControlMapCmd
      = new G4UIcmdWithoutParameter("/mcPhysics/printProcessControlMap", this);
   fPrintProcessControlMapCmd
     ->SetGuidance("Prints mapping of G4 processes to G3 controls.");
-  fPrintProcessControlMapCmd->AvailableForStates(Idle);
+  fPrintProcessControlMapCmd->AvailableForStates(G4State_Idle);
 
   fPrintVolumeLimitsCmd
      = new G4UIcmdWithAString("/mcPhysics/printVolumeLimits", this);
   fPrintVolumeLimitsCmd
     ->SetGuidance("Prints the limits set to the specified volume.");
   fPrintVolumeLimitsCmd->SetParameterName("PrintVolumeLimits", false);
-  fPrintVolumeLimitsCmd->AvailableForStates(Idle);
+  fPrintVolumeLimitsCmd->AvailableForStates(G4State_Idle);
 
   fPrintGeneralCutsCmd
      = new G4UIcmdWithoutParameter("/mcPhysics/printGeneralCuts", this);
   fPrintGeneralCutsCmd
     ->SetGuidance("Prints the general G3 cuts.");
-  fPrintGeneralCutsCmd->AvailableForStates(Idle);
+  fPrintGeneralCutsCmd->AvailableForStates(G4State_Idle);
 
   fPrintGeneralControlsCmd
      = new G4UIcmdWithoutParameter("/mcPhysics/printGeneralControls", this);
   fPrintGeneralControlsCmd
     ->SetGuidance("Prints the general G3 process controls.");
-  fPrintGeneralControlsCmd->AvailableForStates(Idle);
+  fPrintGeneralControlsCmd->AvailableForStates(G4State_Idle);
 }
 
 //_____________________________________________________________________________

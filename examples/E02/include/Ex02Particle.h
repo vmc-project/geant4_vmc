@@ -1,6 +1,6 @@
-// $Id: Ex02Particle.h,v 1.1 2002/06/20 11:52:35 hristov Exp $
+// $Id: Ex02Particle.h,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
-// Geant4 novice ExampleN01 adapted to Virtual Monte Carlo 
+// Geant4 novice ExampleN02 adapted to Virtual Monte Carlo 
 //
 // Class Ex02Particle
 // ------------------
@@ -50,6 +50,6 @@ class Ex02Particle : public TObject
     ClassDef(Ex02Particle,1) // Extended TParticle
 };
 
-#endif //Ex01_PARTICLE_H   
+#endif //EX02_PARTICLE_H   
    
 

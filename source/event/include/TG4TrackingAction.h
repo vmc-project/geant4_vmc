@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.h,v 1.1 2002/06/20 11:54:18 hristov Exp $
+// $Id: TG4TrackingAction.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: event
 //
 // Author: I.Hrivnacova
@@ -49,9 +49,11 @@ class TG4TrackingAction : public G4UserTrackingAction,
     void SetNewVerboseLevel(G4int level);
     void SetNewVerboseTrackID(G4int trackID);
     void SetSavePrimaries(G4bool savePrimaries);
+    void SetSaveSecondaries(G4bool saveSecondaries);
 
     // get methods
     G4bool GetSavePrimaries() const;
+    G4bool GetSaveSecondaries() const;
     G4int GetNofTracks() const;
 
   protected:
@@ -76,6 +78,7 @@ class TG4TrackingAction : public G4UserTrackingAction,
     TG4TrackingActionMessenger  fMessenger; //messenger
     G4int   fPrimaryTrackID;    //current primary track ID 
     G4bool  fSavePrimaries;     //control of saving primaries
+    G4bool  fSaveSecondaries;   //control of saving primaries
     G4int   fNewVerboseLevel;   //new /tracking/verbose level
     G4int   fNewVerboseTrackID; //track ID for which new /tracking/verbose level
                                 // is applied
@@ -91,8 +94,14 @@ inline TG4TrackingAction* TG4TrackingAction::Instance()
 inline void TG4TrackingAction::SetSavePrimaries(G4bool savePrimaries)
 { fSavePrimaries = savePrimaries; }
 
+inline void TG4TrackingAction::SetSaveSecondaries(G4bool saveSecondaries)
+{ fSaveSecondaries = saveSecondaries; }
+
 inline G4bool TG4TrackingAction::GetSavePrimaries() const
 { return fSavePrimaries; }
+
+inline G4bool TG4TrackingAction::GetSaveSecondaries() const
+{ return fSaveSecondaries; }
 
 inline G4int TG4TrackingAction::GetNofTracks() const
 { return fTrackCounter; }

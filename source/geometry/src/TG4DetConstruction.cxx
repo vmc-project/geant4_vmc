@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.cxx,v 1.2 2002/07/31 16:06:01 ivana Exp $
+// $Id: TG4DetConstruction.cxx,v 1.3 2002/10/10 13:17:21 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -17,6 +17,7 @@
 #include "TG4Globals.h"
 
 #include <G4VPhysicalVolume.hh>
+#include <G4LogicalVolume.hh>
 #include <G4Material.hh>
 
 #include <TVirtualMCApplication.h>
@@ -81,16 +82,16 @@ void TG4DetConstruction::CreateMagneticField()
   
     case kMCApplicationField:
       fMagneticField = new TG4MagneticField();
-      G4cout << "kMCApplicationField" << endl;
+      G4cout << "kMCApplicationField" << G4endl;
       break;
 
     case kUniformField:
       fMagneticField = new TG4UniformMagneticField();
-      G4cout << "kUniformField" << endl;
+      G4cout << "kUniformField" << G4endl;
       break;
       
     case kNoField:
-      G4cout << "kNoField" << endl;
+      G4cout << "kNoField" << G4endl;
       ;;
   }  
 }
@@ -136,43 +137,9 @@ G4VPhysicalVolume* TG4DetConstruction::Construct()
 
   // reset TG4GeometryManager 
   pGeometryManager->ClearG3Tables();
-
+     
   return TG4GeometryServices::Instance()->GetWorld();      
 }
-
-//_____________________________________________________________________________
-void TG4DetConstruction::GenerateXMLGeometry() const 
-{
-// Generates XML geometry file from the top volume.
-// ---
-
-  G4VPhysicalVolume* world = TG4GeometryServices::Instance()->GetWorld();
-
-  // filename
-  G4String fileName(world->GetName());
-  fileName = fileName + ".xml";
-  
-  // set top volume name
-  G4String topName = world->GetName() + "_comp";
-  
-  // generate XML  
-  TG4XMLGeometryGenerator xml;
-  xml.OpenFile(fileName);
-
-  // generate materials 
-  // not implemented
-  // xml.GenerateMaterials(version, "today", "Generated from G4",
-  //                       "v4", world->GetLogicalVolume());
-
-  // generate volumes tree
-  xml.GenerateSection("v6", world->GetName(), "0", "today",
-                      "Generated from Geant4",
-                      topName, world->GetLogicalVolume());
-  xml.CloseFile();
-  
-  if (VerboseLevel() > 0) 
-    G4cout << "File " << fileName << ".xml has been generated." << G4endl;
-}  
 
 //_____________________________________________________________________________
 void TG4DetConstruction::PrintMaterials() const

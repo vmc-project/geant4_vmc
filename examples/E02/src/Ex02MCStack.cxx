@@ -1,6 +1,6 @@
-// $Id: Ex02MCStack.cxx,v 1.1.1.1 2002/06/16 15:57:36 hristov Exp $
+// $Id: Ex02MCStack.cxx,v 1.2 2003/02/04 17:55:35 brun Exp $
 //
-// Geant4 ExampleN01 adapted to Virtual Monte Carlo 
+// Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
 // Class Ex02MCStack
 // -----------------
@@ -52,7 +52,7 @@ Ex02MCStack::~Ex02MCStack()
 // public methods
 
 //_____________________________________________________________________________
-void  Ex02MCStack::SetTrack(Int_t done, Int_t parent, Int_t pdg,
+void  Ex02MCStack::SetTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
   	                 Double_t px, Double_t py, Double_t pz, Double_t e,
   		         Double_t vx, Double_t vy, Double_t vz, Double_t tof,
 		         Double_t polx, Double_t poly, Double_t polz,
@@ -81,12 +81,12 @@ void  Ex02MCStack::SetTrack(Int_t done, Int_t parent, Int_t pdg,
   else
     fNPrimary++;  
 
-  Ex02Particle* particle = new Ex02Particle(++fCurrentTrack, particleDef, mother);
+  Ex02Particle* particle = new Ex02Particle(GetNtrack(), particleDef, mother);
   if (mother) mother->AddDaughter(particle);
 
   fParticles->Add(particle);
     
-  if (!done) fStack.push(particle);    
+  if (toBeDone) fStack.push(particle);  
 }			 
 
 //_____________________________________________________________________________
@@ -104,6 +104,8 @@ TParticle* Ex02MCStack::GetNextTrack(Int_t& itrack)
   if (!particle) return 0;  
   
   itrack = particle->GetID();
+  fCurrentTrack = itrack;
+
   return particle->GetParticle();
 }    
 
@@ -181,6 +183,26 @@ Int_t  Ex02MCStack::CurrentTrack() const
 // ---
 
   return fCurrentTrack;
+}  
+
+//_____________________________________________________________________________
+Int_t  Ex02MCStack::CurrentTrackParent() const 
+{
+// Returns the current track parent ID.
+// ---
+
+  if (fCurrentTrack < 0 || fCurrentTrack >= fParticles->GetEntriesFast()) {
+    Warning("GetTrackParent", "Current track not in the stack."); 
+    return -1;
+  }  
+  
+  Ex02Particle* mother 
+    = ((Ex02Particle*)fParticles->At(fCurrentTrack))->GetMother();
+    
+  if (mother)
+    return  mother->GetID();
+  else
+    return -1;   
 }  
 
 //_____________________________________________________________________________
