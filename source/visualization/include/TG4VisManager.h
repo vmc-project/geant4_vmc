@@ -1,4 +1,4 @@
-// $Id: TG4VisManager.h,v 1.1 2002/06/20 11:59:16 hristov Exp $
+// $Id: TG4VisManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: visualization
 //
 // Author: I. Hrivnacova, A. Gheata
@@ -16,12 +16,12 @@
 #include "TG4G3Attribute.h"
 
 #include <G4VisManager.hh>
-#include <g4std/vector>
+#include <vector>
 
 #include <Rtypes.h>
 
-typedef G4std::vector<G4LogicalVolume*>    LogicalVolumesVector;
-typedef G4std::vector<G4VPhysicalVolume*>  PhysicalVolumesVector;
+typedef std::vector<G4LogicalVolume*>    LogicalVolumesVector;
+typedef std::vector<G4VPhysicalVolume*>  PhysicalVolumesVector;
 
 class TG4VisManager: public G4VisManager 
 {

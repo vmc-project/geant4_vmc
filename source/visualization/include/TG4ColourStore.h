@@ -1,4 +1,4 @@
-// $Id: TG4ColourStore.h,v 1.1 2002/06/20 11:59:16 hristov Exp $
+// $Id: TG4ColourStore.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: visualization
 //
 // Author: I. Hrivnacova
@@ -12,13 +12,13 @@
 
 #include <G4Colour.hh>
 #include <globals.hh> 
-#include <g4std/vector>
+#include <vector>
 
 #include <TColor.h>
 
 class TG4ColourStore 
 {
-  typedef G4std::vector<TColor>        ColourVector;
+  typedef std::vector<TColor>          ColourVector;
   typedef ColourVector::iterator       ColourIterator;
   typedef ColourVector::const_iterator ColourConstIterator;
 
