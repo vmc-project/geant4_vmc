@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4TrackingAction.cxx,v 1.2 2003/02/26 13:39:32 brun Exp $
 // Category: event
 //
 // Author: I.Hrivnacova
@@ -98,8 +98,12 @@ void TG4TrackingAction::SetTrackInformation(const G4Track* track)
     trackIndex = trackID-1; 
   } 
   else { 
-    //trackIndex = gMC->GetStack()->GetNtrack();
-    trackIndex = fTrackCounter++;
+    if (fSaveSecondaries)
+      trackIndex = gMC->GetStack()->GetNtrack();
+    else   
+      trackIndex = fTrackCounter++;
+          // if secondaries are not stacked in MC stack
+          // use own counter for setting track index
   }
   
   // set track index to track information
@@ -244,7 +248,10 @@ void TG4TrackingAction::PrepareNewEvent()
 // Called by G4 kernel at the beginning of event.
 // ---
 
-  fTrackCounter = gMC->GetStack()->GetNtrack();
+  if (fSaveSecondaries)
+    fTrackCounter = 0;
+  else  
+    fTrackCounter = gMC->GetStack()->GetNtrack();
 
   // set g4 stepping manager pointer
   TG4StepManager* stepManager = TG4StepManager::Instance();
@@ -301,7 +308,7 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
 // ---
 
   // counter
-  //fTrackCounter++;
+  if (fSaveSecondaries) fTrackCounter++;
   
   // set parent track particle index to the secondary tracks 
   SetParentToTrackInformation(track);
