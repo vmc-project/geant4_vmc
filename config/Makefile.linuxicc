@@ -1,14 +1,12 @@
-# $Id: Makefile.icc,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+# $Id: Makefile.icc,v 1.2 2003/01/29 11:26:00 brun Exp $
 
 # Linux (with icc) platform dependent definitions
 
 # The compilers
 CXX       = icc 
-F77	      = ifc
-CC	      = icc
 
 # Global optimisation
-OPT       = -O
+OPT       = -O -ip
 
 # Shared library suffix
 SL	      = so
@@ -28,9 +26,9 @@ FOPT	      = $(OPT)
 # CERNLIB defines
 
 CLIBDEFS      = -DCERNLIB_LINUX -DCERNLIB_BLDLIB -DCERNLIB_CZ
-CLIBCXXOPTS   =
-CLIBCOPT      =
-CLIBFOPT      =
+CLIBCXXOPTS   = $(CLIBDEFS)
+CLIBCOPT      = $(CLIBDEFS)
+CLIBFOPT      = $(CLIBDEFS)
 
 LD            = icc
 LDFLAGS       = $(OPT)

@@ -1,4 +1,4 @@
-# $Id: Makefile.HP-UX,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+# $Id: Makefile.HP-UX,v 1.2 2003/01/29 11:26:00 brun Exp $
 
 # HP (with aCC) platform dependent definitions
 
