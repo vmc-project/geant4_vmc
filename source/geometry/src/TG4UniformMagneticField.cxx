@@ -1,4 +1,4 @@
-// $Id: TG4UniformMagneticField.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4UniformMagneticField.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -72,8 +72,7 @@ void TG4UniformMagneticField::SetFieldValue(G4double fieldValue)
 // Sets the value of the Global Field to fieldValue along Z.
 // ---
 
-  //G4UniformMagField::SetFieldValue(G4ThreeVector(0,0,fieldValue));
-  G4UniformMagField::SetFieldValue(G4ThreeVector(fieldValue,0, 0));
+  G4UniformMagField::SetFieldValue(G4ThreeVector(0,0,fieldValue));
 }
 
 //_____________________________________________________________________________
