@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.h,v 1.1 2002/06/20 11:55:24 hristov Exp $
+// $Id: TG4DetConstruction.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova
@@ -20,6 +20,7 @@
 #include <g4std/vector>
 
 class G4VPhysicalVolume;
+class G4LogicalVolume;
 class G4MagneticField;
 
 class TG4DetConstruction : public G4VUserDetectorConstruction,
@@ -34,6 +35,7 @@ class TG4DetConstruction : public G4VUserDetectorConstruction,
     // methods
     virtual G4VPhysicalVolume* Construct();
     virtual void GenerateXMLGeometry() const;
+    virtual void GenerateXMLGeometry(const G4String& lvName) const;
     virtual void PrintMaterials() const;
 
     // set methods
@@ -51,6 +53,7 @@ class TG4DetConstruction : public G4VUserDetectorConstruction,
   private:    
     // methods
     void CreateMagneticField();
+    void GenerateXMLGeometry(G4LogicalVolume* lv) const;
 
     // data members
     TG4DetConstructionMessenger  fMessenger;        //messenger
