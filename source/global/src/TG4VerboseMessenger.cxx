@@ -1,4 +1,4 @@
-// $Id: TG4VerboseMessenger.cxx,v 1.2 2002/12/18 09:35:31 brun Exp $
+// $Id: TG4VerboseMessenger.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: global
 //
 // Class TG4VerboseMessenger
@@ -11,6 +11,7 @@
 #include "TG4VVerbose.h"
 #include "TG4Globals.h"
 
+#include <G4UImanager.hh>
 #include <G4UIcmdWithAnInteger.hh>
 #include <G4UIdirectory.hh>
 #include <G4UImanager.hh>
@@ -96,8 +97,8 @@ void TG4VerboseMessenger::SetNewValueToAll(const G4String value) const
 //
 
 //_____________________________________________________________________________
-void TG4VerboseMessenger::AddCommand(TG4VVerbose* verbose, 
-                                     const G4String& cmdName)
+G4UIcommand* TG4VerboseMessenger::AddCommand(TG4VVerbose* verbose, 
+                                             const G4String& cmdName)
 {
 /// Add the command specified by cmdName and associate verbose object.
 //--
@@ -117,6 +118,30 @@ void TG4VerboseMessenger::AddCommand(TG4VVerbose* verbose,
   cmd->SetParameterName(parameterName, false);
   
   cmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  
+  return cmd;
+}
+
+//_____________________________________________________________________________
+void TG4VerboseMessenger::RemoveCommand(TG4VVerbose* verbose, 
+                                        G4UIcommand* command)
+{
+/// Remove the specified verbose and associate command
+//--
+
+  // Remove verbose from the array
+  VerboseVector::iterator pos1
+    = find(fVerboseVector.begin(), fVerboseVector.end(), verbose);
+  if (pos1 != fVerboseVector.end()) fVerboseVector.erase(pos1);
+
+  // Remove command from the array
+  CommandVector::iterator pos2
+    = find(fCommandVector.begin(), fCommandVector.end(), command);
+  if (pos2 != fCommandVector.end())  fCommandVector.erase(pos2);
+
+  // Delete command
+  // Command is automatically removed from UI manager
+  delete command;
 }
 
 //_____________________________________________________________________________
@@ -125,7 +150,6 @@ void TG4VerboseMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
 /// Apply command to the associated object.
 
   if (command == fGlobalVerboseCmd) {
-    G4cout << "SetNewValueToAll  " << G4endl;
     SetNewValueToAll(newValue); 
   }    
   for (G4int i=0; i<G4int(fCommandVector.size()); i++)  

@@ -1,4 +1,4 @@
-// $Id: TG4Verbose.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4Verbose.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
 // Category: global
 //
 // Class TG4Verbose
@@ -14,24 +14,31 @@
 
 // static data members
 const G4String       TG4Verbose::fgkDirectoryName = "/mcVerbose/";
+G4int                TG4Verbose::fgCounter = 0;
 TG4VerboseMessenger* TG4Verbose::fgMessenger = 0;
 
 //_____________________________________________________________________________
 TG4Verbose::TG4Verbose(const G4String& cmdName)
-  : TG4VVerbose() {
+  : TG4VVerbose(),
+    fCommand(0) 
+{
 //
   CreateMessenger();
   
-  fgMessenger->AddCommand(this, cmdName);  
+  fCommand = fgMessenger->AddCommand(this, cmdName);
+  
+  fgCounter++;  
 }
   
 //_____________________________________________________________________________
 TG4Verbose::TG4Verbose(const G4String& cmdName, G4int verboseLevel) 
-  : TG4VVerbose(verboseLevel) {
+  : TG4VVerbose(verboseLevel),
+    fCommand(0) 
+{
 // 
   CreateMessenger();
 
-  fgMessenger->AddCommand(this, cmdName);  
+  fCommand = fgMessenger->AddCommand(this, cmdName);  
 }
 
 //_____________________________________________________________________________
@@ -43,10 +50,18 @@ TG4Verbose::TG4Verbose()
 //_____________________________________________________________________________
 TG4Verbose::~TG4Verbose() {
 //
-  if (fgMessenger) {
+  fgCounter--;
+  
+  if (!fgMessenger) return;
+  
+  fgMessenger->RemoveCommand(this, fCommand);
+     // fCommand is deleted by fgMessenger
+  
+  if (fgCounter==0) {
     delete fgMessenger;
     fgMessenger = 0;
   }  
+  
 }
 
 //

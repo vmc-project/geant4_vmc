@@ -1,4 +1,4 @@
-// $Id: TG4RunConfiguration.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4RunConfiguration.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
 // Category: run
 //
 // Class TG4RunConfiguration
@@ -33,6 +33,8 @@ TG4RunConfiguration::TG4RunConfiguration(Bool_t specialStacking)
 //_____________________________________________________________________________
 TG4RunConfiguration::~TG4RunConfiguration(){
 //
+  delete fSDConstruction;
+         // other user action classes are deleted by G4 kernel
 }
 
 //

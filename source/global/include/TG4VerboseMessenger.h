@@ -1,4 +1,4 @@
-// $Id: TG4VerboseMessenger.h,v 1.2 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4VerboseMessenger.h,v 1.3 2004/11/10 11:39:28 brun Exp $
 /// \ingroup global
 //
 /// \class TG4VerboseMessenger
@@ -19,6 +19,7 @@
 class TG4VVerbose;
 
 class G4UIdirectory;
+class G4UIcommand;
 class G4UIcmdWithAnInteger;
 
 class TG4VerboseMessenger: public G4UImessenger
@@ -34,7 +35,8 @@ class TG4VerboseMessenger: public G4UImessenger
     virtual ~TG4VerboseMessenger();
    
     // methods 
-    virtual void AddCommand(TG4VVerbose* verbose, const G4String& cmdName);
+    G4UIcommand* AddCommand(TG4VVerbose* verbose, const G4String& cmdName);
+            void RemoveCommand(TG4VVerbose* verbose, G4UIcommand* command);
     virtual void SetNewValue(G4UIcommand* command, G4String string);
     
   protected:

@@ -1,4 +1,4 @@
-// $Id: TG4Verbose.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4Verbose.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup global
 //
 /// \class TG4Verbose
@@ -18,6 +18,8 @@
 
 #include <globals.hh>
 
+class G4UIcommand;
+
 class TG4Verbose : public TG4VVerbose
 {
   public:
@@ -34,7 +36,11 @@ class TG4Verbose : public TG4VVerbose
 
     // static data members
     static const G4String        fgkDirectoryName;// directory name
+    static G4int                 fgCounter;       // object counter
     static TG4VerboseMessenger*  fgMessenger;     // messenger
+    
+    // data members
+    G4UIcommand*                 fCommand;        // verbose command
 };     
 
 #endif //TG4_VERBOSE_H
