@@ -1,4 +1,4 @@
-// $Id: TG4G3PhysicsManager.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4G3PhysicsManager.h,v 1.2 2002/12/03 15:06:04 brun Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -12,8 +12,7 @@
 // These special cuts/controls are activated 
 // by registering their physics constructors
 // (TG4PhysicsConstructorSpecialCuts, G4PhysicsConstructorSpecialControl)
-// to the modular physics list (TG4ModularPhysicsList)
-// by physics manager (TG4PhysicsManager).
+// to the physics list.
 
 #ifndef TG4_G3_PHYSICS_MANAGER_H
 #define TG4_G3_PHYSICS_MANAGER_H

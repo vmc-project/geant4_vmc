@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorSpecialControls.cxx,v 1.1.1.1 2002/06/16 15:57:35 hristov Exp $
+// $Id: TG4PhysicsConstructorSpecialControls.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: physics
 //
 // Author: I. Hrivnacova
@@ -41,8 +41,7 @@ TG4PhysicsConstructorSpecialControls::~TG4PhysicsConstructorSpecialControls() {
 //_____________________________________________________________________________
 void TG4PhysicsConstructorSpecialControls::ConstructParticle()
 {
-// The particles are constructed in the 
-// TG4ModularPhysicsList.
+// The particles are constructed in the physics list.
 // ---
 }
 
