@@ -1,4 +1,4 @@
-// $Id: Ex01MCStack.cxx,v 1.1.1.1 2002/06/16 15:57:36 hristov Exp $
+// $Id: Ex01MCStack.cxx,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -61,7 +61,7 @@ Ex01Particle*  Ex01MCStack::GetParticle(Int_t id) const
 // public methods
 
 //_____________________________________________________________________________
-void  Ex01MCStack::SetTrack(Int_t done, Int_t parent, Int_t pdg,
+void  Ex01MCStack::SetTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
   	                 Double_t px, Double_t py, Double_t pz, Double_t e,
   		         Double_t vx, Double_t vy, Double_t vz, Double_t tof,
 		         Double_t polx, Double_t poly, Double_t polz,
@@ -90,11 +90,11 @@ void  Ex01MCStack::SetTrack(Int_t done, Int_t parent, Int_t pdg,
   else
     fNPrimary++;  
 
-  Ex01Particle* particle = new Ex01Particle(++fCurrentTrack, particleDef, mother);
+  Ex01Particle* particle = new Ex01Particle(GetNtrack(), particleDef, mother);
 
   fParticles->Add(particle);
     
-  if (!done) fStack.push(particle);    
+  if (toBeDone) fStack.push(particle);    
 }			 
 
 //_____________________________________________________________________________
@@ -112,6 +112,8 @@ TParticle* Ex01MCStack::GetNextTrack(Int_t& itrack)
   if (!particle) return 0;  
   
   itrack = particle->GetID();
+  fCurrentTrack = itrack;
+
   return particle->GetParticle();
 }    
 

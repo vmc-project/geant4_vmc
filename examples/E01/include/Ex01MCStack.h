@@ -1,4 +1,4 @@
-// $Id: Ex01MCStack.h,v 1.1 2002/06/20 11:52:02 hristov Exp $
+// $Id: Ex01MCStack.h,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -26,7 +26,7 @@ class Ex01MCStack : public TVirtualMCStack
     virtual ~Ex01MCStack();     
 
     // methods
-    virtual void  SetTrack(Int_t done, Int_t parent, Int_t pdg,
+    virtual void  SetTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
   	              Double_t px, Double_t py, Double_t pz, Double_t e,
   		      Double_t vx, Double_t vy, Double_t vz, Double_t tof,
 		      Double_t polx, Double_t poly, Double_t polz,
