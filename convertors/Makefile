@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+# $Id: Makefile,v 1.1 2003/07/22 06:46:57 brun Exp $
 #
 # Makefile for building all examples
 
@@ -9,8 +9,11 @@ SUBDIRS  = g4toxml roottog4
 .PHONY: default
 
 default:
-	@for dir in $(SUBDIRS); do (cd $$dir && $(MAKE)); done;:
+	@for dir in $(SUBDIRS); do (cd $$dir && $(MAKE)); done;
+
+includes:
+	@for dir in $(SUBDIRS); do (cd $$dir && $(MAKE) make_includes); done;
 
 clean:
-	@for dir in $(SUBDIRS); do (cd $$dir && $(MAKE) clean); done;:
+	@for dir in $(SUBDIRS); do (cd $$dir && $(MAKE) clean); done;
 

@@ -1,4 +1,4 @@
-# $Id: MakeMacros,v 1.3 2002/11/12 13:31:01 brun Exp $
+# $Id: MakeMacros,v 1.4 2002/11/13 13:36:08 brun Exp $
 
 ############################   MACROS   #######################################
 
@@ -33,9 +33,8 @@ $(ALIBRARY):
 		@rm -f $@
 		@ar rv $@ $^
 		
-includes:
+make_includes:
 	@echo "Making includes ..."
-	@rm -rf $(TOPDIR)/include
 	@[ -d $(TOPDIR)/include ] || mkdir -p $(TOPDIR)/include
 	@cp -p $(HEADERS) $(TOPDIR)/include
 
@@ -44,6 +43,9 @@ clean:
 
 cleanall:
 	@rm -rf $(TOCLEANALL)
+	
+clean_includes:
+	@rm -rf $(TOPDIR)/include
 
 depend:
 		-@$(ROOTSYS)/bin/rmkdepend -f$(BINDIR)/Make-depend -p$(BINDIR)/ -- $(CXXFLAGS) $(DEPINC) -- $^ 2>/dev/null

@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.8 2003/07/22 06:35:38 brun Exp $
+# $Id: Makefile,v 1.9 2003/09/26 10:22:07 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
@@ -77,6 +77,55 @@ ifdef G4DEBUG
   CXXFLAGS += -DMCDEBUG
 endif
 
+######################## Supported Geant4 VIS, UI #############################
+#
+# Supported Geant4 VIS, UI setting: 
+# OPENGLX, OPENGLXM, XM, TCSH
+#
+ifndef G4VIS_NONE
+  CPPFLAGS += -DG4VIS_USE
+ifdef G4VIS_USE_OPENGLX
+  G4VIS_USE_OPENGL = 1
+  CPPFLAGS += -DG4VIS_USE_OPENGLX
+  INC_X11   = 1
+endif
+ifdef G4VIS_USE_OPENGLXM
+  G4VIS_USE_OPENGL = 1
+  CPPFLAGS += -DG4VIS_USE_OPENGLXM
+  INC_XM    = 1
+endif
+ifdef G4VIS_USE_OPENGL
+  CPPFLAGS += -DG4VIS_USE_OPENGL
+  CPPFLAGS += -I$(G4INSTALL)/source/visualization/OpenGL/include
+  INC_GL    = 1
+endif
+  CPPFLAGS += -I$(G4INSTALL)/source/visualization/management/include
+  CPPFLAGS += -I$(G4INSTALL)/source/visualization/modeling/include
+endif #G4VIS_NONE
+
+ifndef G4UI_NONE
+  CPPFLAGS += -I$(G4INSTALL)/source/interfaces/basic/include
+  CPPFLAGS += -I$(G4INSTALL)/source/interfaces/common/include
+  CPPFLAGS += -I$(G4INSTALL)/source/interfaces/GAG/include
+  CPPFLAGS += -DG4UI_USE_TERMINAL
+ifdef G4UI_USE_TCSH
+  G4UI_USE  = 1
+  CPPFLAGS += -DG4UI_USE_TCSH
+endif
+endif #G4UI_NONE
+
+ifdef INC_GL
+  CPPFLAGS += $(OGLFLAGS)
+endif
+ifdef INC_XM
+  INC_X11   = 1
+  CPPFLAGS += $(XMFLAGS)
+endif
+ifdef INC_X11
+  CPPFLAGS += $(X11FLAGS)
+endif
+
+
 ######################## Full Geant4 VIS, UI ##################################
 #
 # Full Geant4 UI, VIS, interactivity setting.
@@ -85,9 +134,9 @@ endif
 # and even though a correct behaviour is expected,
 # it is not guaranteed. 
 # 
-include $(G4INSTALL)/config/G4UI_USE.gmk
-include $(G4INSTALL)/config/G4VIS_USE.gmk
-include $(G4INSTALL)/config/interactivity.gmk
+#include $(G4INSTALL)/config/G4UI_USE.gmk
+#include $(G4INSTALL)/config/G4VIS_USE.gmk
+#include $(G4INSTALL)/config/interactivity.gmk
 
 CXXFLAGS += $(CPPFLAGS)
 
@@ -101,9 +150,13 @@ ALIBRARY	= $(LIBDIR)/lib$(PACKAGE).a
 
 default:	depend convertors $(SLIBRARY)
 all:		default includes
+includes:       clean_includes make_includes convertors_includes
 
 convertors:    
-		@for dir in $(CONDIR); do (cd $$dir && $(MAKE)); done;:
+		@for dir in $(CONDIR); do (cd $$dir && $(MAKE)); done;
+
+convertors_includes:    
+		@for dir in $(CONDIR); do (cd $$dir && $(MAKE) includes); done;
 
 
 $(LIBDIR)/lib$(PACKAGE).$(SL):  $(OBJS)
