@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryConvertor.cxx,v 1.5 2004/05/05 13:27:32 brun Exp $
+// $Id: TG4RootGeometryConvertor.cxx,v 1.6 2004/06/18 13:50:38 brun Exp $
 //
 // Author: I. Hrivnacova, 8.1.2003 
 //
@@ -26,6 +26,7 @@
 #include <G4VPhysicalVolume.hh>
 #include <G4PVPlacement.hh>
 #include <G4PVDivision.hh>
+#include <G4PVDivisionFactory.hh>
 #include <G4Transform3D.hh>
 #include <G4ReflectionFactory.hh>
 #include <G3toG4RotationMatrix.hh>
@@ -355,14 +356,13 @@ void TG4RootGeometryConvertor::CreateDivision(const TGeoVolume* mother,
   }  
   
   // Place this node
+  G4PVDivisionFactory::GetInstance();
+  G4ReflectionFactory::Instance()
+    ->Divide(G4String(daughter->GetName()), dLV, mLV, 
+             axis, ndiv, width, offset);
 
-  //G4ReflectionFactory::Instance()
-  //  ->Divide(G4String(daughter->GetName()), dLV, mLV, 
-  //           axis, ndiv, width, offset);
-              // not yet available in Geant4 6.1
-
-  new G4PVDivision(G4String(daughter->GetName()), dLV, mLV, 
-                   axis, ndiv, width, offset);
+  //new G4PVDivision(G4String(daughter->GetName()), dLV, mLV, 
+  //                 axis, ndiv, width, offset);
   
 }
 
