@@ -1,0 +1,32 @@
+$Id: README,v 1.1 2002/06/21 11:17:36 ivana Exp $
+-----------------------------------------------------------------
+
+Example01
+=========
+  Geant4 ExampleN01 adapted to Virtual Monte Carlo.
+
+  Demonstrates:
+    Simple geometry (Gsvolu, Gspos)
+    Simple primary generator 
+      one geantino with a fixed position and direction
+    Access to particle in stepping
+
+  See also description of in 
+    geant4/examples/novice/N02/README
+
+
+Macros:
+=======
+
+  For running example with G3:
+  
+  run_g3.C    - macro for running example 
+  g3Config.C  - configuration macro
+
+
+  For running example with G4:
+  
+  run_g4.C    - macro for running example 
+  g4Config.C  - configuration macro
+  
+  

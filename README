@@ -1,0 +1,114 @@
+$Id: README,v 1.3 2002/09/06 15:06:16 ivana Exp $
+-----------------------------------------------------------------
+
+Geant4 VMC - Virtual MC implementation for Geant4
+=================================================
+
+Files:
+------
+  README   - this file
+  source   - structured source code
+  config   - general makefiles
+  examples - examples of usage Virtual MC
+	      
+   
+Environment:
+------------
+  Geant4 VMC requires Root, CLHEP and Geant4 installations.
+  The paths to these installations are defined using the
+  standard environment variables (ROOTSYS, G4INSTALL):
+
+  ROOTSYS  - path to Root installation
+  CLHEP_BASE_DIR - path to CLHEP installation		    
+  G4INSTALL - path to the Geant4 installation
+  G4SYSTEM  - specifies platform and compiler
+  G4*       - Geant4 environment variables used for selection
+              graphics drivers and UIs have the same meaning as
+              for Geant4; 
+	      Use Configure script in Geant4 to set G4 environment.
+              See Geant4 documentation for more details.
+	      
+	      Note: To build Geant4 shared libraries (required) 
+	            G4LIB_BUILD_SHARED has to be set.
+ 
+  It is important to install Geant4 VMC with the same environment
+  setting as Geant4.
+
+  The load paths to shared libraries for Root, CLHEP, Geant4, Geant4 VMC
+  has to be added to the environment variable  
+  LD_LIBRARY_PATH - on Linux, Solaris, SGI, Alpha/OSF;
+  SHLIB_PATH - on HP-UX.
+    
+ 
+Compilation:
+------------
+  Geant4 VMC requires Root, CLHEP and Geant4 installation.
+  Instructions for these installations can be found in their
+  own documentation, they are not provided in this README. 
+
+  cd geant4_vmc/source
+  gmake
+
+  Note about G4 environment:
+  By default, Geant4 VMC supports only the following
+  graphics drivers: OpenGL (OGLIX, OGLSX, OGLSXm).
+  In order to include other Geant4 graphics drivers or UIs in Geant4 VMC,
+  you can replace the block starting ## Supported Geant4 VIS, UI ## comment line
+  with uncommented block the  starting  with ## Full Geant4 VIS, UI ## comment
+  line in the main Makefile (geant4_vmc/source/Makefile).
+  Be aware that not all options were tested with Geant4 VMC 
+  and even though a correct behaviour is expected, 
+  it is not guaranteed.
+   
+
+Examples
+============
+  To build examples libraries:
+  cd geant4_vmc/examples
+  gmake  
+
+  To run examples:
+  cd geant4_vmc/examples/E01
+  root
+  root [0] .x run_g3.C   // to run with Geant3
+  root [0] .x run_g4.C   // to run with Geant4
+  
+  Note about Pythia6:
+  Both MC require to load libPythia6.so which is not
+  provided with Root by default. One can download it
+  from the Root Web site:
+  http://root.cern.ch/root/Install.html
+  (Or directly from: ftp://root.cern.ch/root/pythia/)
+  
+
+Root and Geant4 UI
+==================
+
+   I. Switching UI
+   
+   When running Geant4 with Virtual MC a user can switch between
+   Root UI and Geant4 UI:
+   
+   From Root to Geant4 UI:
+   root [0] ((TGeant4*)gMC)->StartGeantUI()                                            
+   
+   From Geant4 to Root UI:
+   PreInit> /mcControl/root                                                         
+   
+   
+   II. Calling macros
+   
+   Call Geant4 macro "myMacro.in" from Root:
+   root [0] ((TGeant4*)gMC)->ProcessGeantMacro("myMacro.in");
+
+   Call Root macro "myMacro.C" from Geant4:
+   PreInit> /mcControl/rootMacro myMacro
+                                    
+   
+   III. Calling commands
+   
+   Call Geant4 command from Root:
+   root [0] ((TGeant4*)gMC)->ProcessGeantCommand("/tracking/verbose 1");
+   
+   Call Root command from Geant4:
+   Idle> /mcControl/rootCmd TBrowser b;                                             

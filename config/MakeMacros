@@ -1,0 +1,48 @@
+# $Id:  $
+
+############################   MACROS   #######################################
+
+$(DICT):
+		@echo "Generating $@"
+		@[ -d $(dir $@) ] || mkdir -p $(dir $@)
+ifeq ($(CXXVERBOSE),)
+		@rootcint -f $@ -c $(CXXFLAGS) $^
+#		@rootcint -f $@ -c $(filter -I%,$(CXXFLAGS)) $(filter -D%,$(CXXFLAGS)) $^
+else
+		rootcint -f $@ -c $(CXXFLAGS) $^
+endif
+
+$(SLIBRARY):
+		@echo "Generating $@"
+		@[ -d $(dir $@) ] || mkdir -p $(dir $@)
+		@rm -f $@
+		@-rm -rf tmp
+		@mkdir tmp
+		@cd tmp ; find $(BINDIR) -name '*.o' -exec ln -s {} . \;
+                ifeq ($(PLATFORM),aix)
+		   @cd tmp; $(SHLD) -o $@ $(LIBS) -p 0 $(notdir $^)
+                else
+		   @cd tmp; $(SHLD) $(SOFLAGS) $(LDFLAGS) $(notdir $^) $(SHLIB) -o $@ ;\:
+                endif
+		@chmod 555 $@
+		@-rm -rf tmp
+
+$(ALIBRARY):	
+		@echo "Generating $@"
+		@[ -d $(dir $@) ] || mkdir -p $(dir $@)
+		@rm -f $@
+		@ar rv $@ $^
+
+clean:
+	@rm -rf $(TOCLEAN)
+
+cleanall:
+	@rm -rf $(TOCLEANALL)
+
+depend:
+		-@$(ROOTSYS)/bin/rmkdepend -f$(BINDIR)/Make-depend -p$(BINDIR)/ -- $(CXXFLAGS) $(DEPINC) -- $^ 2>/dev/null
+
+$(BINDIR)/Make-depend:
+		@[ -d $(dir $@) ] || mkdir -p $(dir $@)
+		@cp $(TOPDIR)/config/Makedepend $@
+

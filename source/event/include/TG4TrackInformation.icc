@@ -1,0 +1,38 @@
+// $Id: TG4TrackInformation.icc,v 1.1 2002/06/20 11:54:18 hristov Exp $
+// Category: event
+
+// inline operators
+
+extern G4Allocator<TG4TrackInformation> gAliTrackInfoAllocator;
+
+inline void* TG4TrackInformation::operator new(size_t) 
+{
+// Override "new" for "G4Allocator".
+// ---
+
+  void *trackInfo;
+  trackInfo = (void *) gAliTrackInfoAllocator.MallocSingle();
+  return trackInfo;
+}
+
+inline void TG4TrackInformation::operator delete(void *trackInfo)
+{ 
+// Override "delete" for "G4Allocator".
+// ---
+
+  gAliTrackInfoAllocator.FreeSingle((TG4TrackInformation *) trackInfo);
+}
+
+// inline methods
+
+inline void TG4TrackInformation::SetTrackParticleID(G4int trackParticleID)
+{ fTrackParticleID = trackParticleID; }
+
+inline void TG4TrackInformation::SetParentParticleID(G4int parentParticleID)
+{ fParentParticleID = parentParticleID; }
+
+inline G4int TG4TrackInformation::GetTrackParticleID() const
+{ return fTrackParticleID; }
+
+inline G4int TG4TrackInformation::GetParentParticleID() const
+{ return fParentParticleID; }

@@ -1,0 +1,8 @@
+# $Id: $
+#
+# Geant4 configuration macro for Example02
+# (called from Root macro Config.C)
+
+/mcPhysics/rangeCut 10.
+/mcVerbose/all 1
+#/tracking/verbose 1

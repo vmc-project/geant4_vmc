@@ -1,0 +1,335 @@
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version   3.03/06      18 July 2002   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+Compiled for linux.
+
+CINT/ROOT C/C++ Interpreter version 5.15.45, June 18 2002
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+
+Processing run_g3.C...
+Loading Geant3 library ...
+Loading Geant3 library ... finished
+
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   280485367    10B7DDF7 HEX
+
+ MZSTOR.  Initialize Store  0  in /GCBANK/
+          with Store/Table at absolute adrs   276033337   280485367
+                                        HEX    1073EF39    10B7DDF7
+                                        HEX    FFBC0F8E           0
+                              relative adrs    -4452466           0
+          with     1 Str. in     2 Links in   5300 Low words in 3999970 words.
+          This store has a fence of   16 words.
+
+ MZLOGL.  Set Log Level 0 for store  0
+1*****  GEANT Version  3.21/11 Released on 100298
+0*****  Correction Cradle Version  0.1100
+
+ MZDIV.   Initialize Division  Constant  in Store  0
+          NW/NWMAX=   20003200000,  MODE/KIND=  1  2
+          Division 20 initialized.
+
+ MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
+
+ MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+Geant3 has been created.
+ Ex01MCApplication::ConstructMaterials()
+
+ MZLINK.  Initialize Link Area  /GCHVIR/  for Store  0 NL/NS=     4     1
+
+ MZLINK.  Initialize Link Area  /GCDINA/  for Store  0 NL/NS=     4     4
+1***************************************************************************************************
+ *                                                                                                 *
+ *    G E A N T  Version 3.2111      DATE/TIME  20912/1846          R U N      1                   *
+ *                                                                                                 *
+ *      Data structure   Date   Time    GVERSN    ZVERSN                                           *
+ *                                                                                                 *
+ *           INIT        20912  1846    3.2111     3.77                                            *
+ *           KINE        20912  1846    3.2111     3.77                                            *
+ *           HITS        20912  1846    3.2111     3.77                                            *
+ *           DIGI        20912  1846    3.2111     3.77                                            *
+ *                                                                                                 *
+ *                                                                                                 *
+ *              Standard TPAR for this run are                                                     *
+ *                                                                                                 *
+ *  CUTGAM=  1.00 MeV  CUTELE=  1.00 MeV  CUTNEU= 10.00 MeV  CUTHAD= 10.00 MeV  CUTMUO= 10.00 MeV  *
+ *  BCUTE =  1.00 MeV  BCUTM =  1.00 MeV  DCUTE = 10.00 TeV  DCUTM = 10.00 TeV  PPCUTM= 10.00 MeV  *
+ *  IPAIR=  1.  ICOMP=  1.  IPHOT=  1.  IPFIS=  0.  IDRAY=  0.  IANNI=  1.  IBREM=  1.  IHADR=  1. *
+ *  IMUNU=  1.  IDCAY=  1.  ILOSS=  2.  IMULS=  1.  IRAYL=  0.  ILABS=  0.  ISYNC=  0.  ISTRA=  0. *
+ *                                                                                                 *
+ *                                                                                                 *
+ ***************************************************************************************************
+
+
+
+Starting new track
+Track -200 0 0  in EXPH
+Track -160 0 4.00002  in EXPH
+Track -160 0 4.00002  in TRTU
+Track -39.9998 0 16  in TRTU
+Track -39.9998 0 16  in EXPH
+Track 0.00016287 0 20  in EXPH
+Track 0.00016287 0 20  in CALB
+Track 9.0002 0 20.9  in CALB
+Track 9.0002 0 20.9  in LAYB
+Track 11.0002 0 21.1  in LAYB
+Track 11.0002 0 21.1  in CALB
+Track 19.0002 0 21.9  in CALB
+Track 19.0002 0 21.9  in LAYB
+Track 21.0002 0 22.1  in LAYB
+Track 21.0002 0 22.1  in CALB
+Track 29.0002 0 22.9  in CALB
+Track 29.0002 0 22.9  in LAYB
+Track 31.0002 0 23.1  in LAYB
+Track 31.0002 0 23.1  in CALB
+Track 39.0002 0 23.9  in CALB
+Track 39.0002 0 23.9  in LAYB
+Track 41.0002 0 24.1  in LAYB
+Track 41.0002 0 24.1  in CALB
+Track 49.0002 0 24.9  in CALB
+Track 49.0002 0 24.9  in LAYB
+Track 51.0002 0 25.1  in LAYB
+Track 51.0002 0 25.1  in CALB
+Track 59.0003 0 25.9  in CALB
+Track 59.0003 0 25.9  in LAYB
+Track 61.0003 0 26.1  in LAYB
+Track 61.0003 0 26.1  in CALB
+Track 69.0003 0 26.9  in CALB
+Track 69.0003 0 26.9  in LAYB
+Track 71.0003 0 27.1  in LAYB
+Track 71.0003 0 27.1  in CALB
+Track 79.0003 0 27.9  in CALB
+Track 79.0003 0 27.9  in LAYB
+Track 81.0003 0 28.1  in LAYB
+Track 81.0003 0 28.1  in CALB
+Track 89.0003 0 28.9  in CALB
+Track 89.0003 0 28.9  in LAYB
+Track 91.0003 0 29.1  in LAYB
+Track 91.0003 0 29.1  in CALB
+Track 99.0003 0 29.9  in CALB
+Track 99.0003 0 29.9  in LAYB
+Track 101 0 30.1  in LAYB
+Track 101 0 30.1  in CALB
+Track 109 0 30.9  in CALB
+Track 109 0 30.9  in LAYB
+Track 111 0 31.1  in LAYB
+Track 111 0 31.1  in CALB
+Track 119 0 31.9  in CALB
+Track 119 0 31.9  in LAYB
+Track 121 0 32.1  in LAYB
+Track 121 0 32.1  in CALB
+Track 129 0 32.9  in CALB
+Track 129 0 32.9  in LAYB
+Track 131 0 33.1  in LAYB
+Track 131 0 33.1  in CALB
+Track 139 0 33.9  in CALB
+Track 139 0 33.9  in LAYB
+Track 141 0 34.1  in LAYB
+Track 141 0 34.1  in CALB
+Track 149 0 34.9  in CALB
+Track 149 0 34.9  in LAYB
+Track 151 0 35.1  in LAYB
+Track 151 0 35.1  in CALB
+Track 159 0 35.9  in CALB
+Track 159 0 35.9  in LAYB
+Track 161 0 36.1  in LAYB
+Track 161 0 36.1  in CALB
+Track 169 0 36.9  in CALB
+Track 169 0 36.9  in LAYB
+Track 171 0 37.1  in LAYB
+Track 171 0 37.1  in CALB
+Track 179 0 37.9  in CALB
+Track 179 0 37.9  in LAYB
+Track 181 0 38.1  in LAYB
+Track 181 0 38.1  in CALB
+Track 189 0 38.9  in CALB
+Track 189 0 38.9  in LAYB
+Track 191 0 39.1  in LAYB
+Track 191 0 39.1  in CALB
+Track 200 0 40  in CALB
+Track 200 0 40  in EXPH
+Track 300 0 50  in EXPH
+
+Starting new track
+Track -200 0 0  in EXPH
+Track -159.865 4.01346 0  in EXPH
+Track -159.865 4.01346 0  in TRTU
+Track -42.1144 15.7886 0  in TRTU
+Track -42.1144 15.7886 0  in EXPH
+Track 0.00016019 20 0  in EXPH
+Track 0.00016019 20 0  in CALB
+Track 9.0002 20.9 0  in CALB
+Track 9.0002 20.9 0  in LAYB
+Track 11.0002 21.1 0  in LAYB
+Track 11.0002 21.1 0  in CALB
+Track 19.0002 21.9 0  in CALB
+Track 19.0002 21.9 0  in LAYB
+Track 21.0002 22.1 0  in LAYB
+Track 21.0002 22.1 0  in CALB
+Track 29.0002 22.9 0  in CALB
+Track 29.0002 22.9 0  in LAYB
+Track 31.0002 23.1 0  in LAYB
+Track 31.0002 23.1 0  in CALB
+Track 39.0002 23.9 0  in CALB
+Track 39.0002 23.9 0  in LAYB
+Track 41.0002 24.1 0  in LAYB
+Track 41.0002 24.1 0  in CALB
+Track 49.0002 24.9 0  in CALB
+Track 49.0002 24.9 0  in LAYB
+Track 51.0002 25.1 0  in LAYB
+Track 51.0002 25.1 0  in CALB
+Track 59.0003 25.9 0  in CALB
+Track 59.0003 25.9 0  in LAYB
+Track 61.0003 26.1 0  in LAYB
+Track 61.0003 26.1 0  in CALB
+Track 69.0003 26.9 0  in CALB
+Track 69.0003 26.9 0  in LAYB
+Track 71.0003 27.1 0  in LAYB
+Track 71.0003 27.1 0  in CALB
+Track 79.0003 27.9 0  in CALB
+Track 79.0003 27.9 0  in LAYB
+Track 81.0003 28.1 0  in LAYB
+Track 81.0003 28.1 0  in CALB
+Track 89.0003 28.9 0  in CALB
+Track 89.0003 28.9 0  in LAYB
+Track 91.0003 29.1 0  in LAYB
+Track 91.0003 29.1 0  in CALB
+Track 99.0003 29.9 0  in CALB
+Track 99.0003 29.9 0  in LAYB
+Track 101 30.1 0  in LAYB
+Track 101 30.1 0  in CALB
+Track 109 30.9 0  in CALB
+Track 109 30.9 0  in LAYB
+Track 111 31.1 0  in LAYB
+Track 111 31.1 0  in CALB
+Track 119 31.9 0  in CALB
+Track 119 31.9 0  in LAYB
+Track 121 32.1 0  in LAYB
+Track 121 32.1 0  in CALB
+Track 129 32.9 0  in CALB
+Track 129 32.9 0  in LAYB
+Track 131 33.1 0  in LAYB
+Track 131 33.1 0  in CALB
+Track 139 33.9 0  in CALB
+Track 139 33.9 0  in LAYB
+Track 141 34.1 0  in LAYB
+Track 141 34.1 0  in CALB
+Track 149 34.9 0  in CALB
+Track 149 34.9 0  in LAYB
+Track 151 35.1 0  in LAYB
+Track 151 35.1 0  in CALB
+Track 159 35.9 0  in CALB
+Track 159 35.9 0  in LAYB
+Track 161 36.1 0  in LAYB
+Track 161 36.1 0  in CALB
+Track 169 36.9 0  in CALB
+Track 169 36.9 0  in LAYB
+Track 171 37.1 0  in LAYB
+Track 171 37.1 0  in CALB
+Track 179 37.9 0  in CALB
+Track 179 37.9 0  in LAYB
+Track 181 38.1 0  in LAYB
+Track 181 38.1 0  in CALB
+Track 189 38.9 0  in CALB
+Track 189 38.9 0  in LAYB
+Track 191 39.1 0  in LAYB
+Track 191 39.1 0  in CALB
+Track 200 40 0  in CALB
+Track 200 40 0  in EXPH
+Track 300 50 0  in EXPH
+
+Starting new track
+Track -200 0 0  in EXPH
+Track -160 0 0  in EXPH
+Track -160 0 0  in TRTU
+Track -39.9998 0 0  in TRTU
+Track -39.9998 0 0  in EXPH
+Track 0.000167847 0 0  in EXPH
+Track 0.000167847 0 0  in CALB
+Track 9.0002 0 0  in CALB
+Track 9.0002 0 0  in LAYB
+Track 11.0002 0 0  in LAYB
+Track 11.0002 0 0  in CALB
+Track 19.0002 0 0  in CALB
+Track 19.0002 0 0  in LAYB
+Track 21.0002 0 0  in LAYB
+Track 21.0002 0 0  in CALB
+Track 29.0002 0 0  in CALB
+Track 29.0002 0 0  in LAYB
+Track 31.0002 0 0  in LAYB
+Track 31.0002 0 0  in CALB
+Track 39.0002 0 0  in CALB
+Track 39.0002 0 0  in LAYB
+Track 41.0002 0 0  in LAYB
+Track 41.0002 0 0  in CALB
+Track 49.0002 0 0  in CALB
+Track 49.0002 0 0  in LAYB
+Track 51.0002 0 0  in LAYB
+Track 51.0002 0 0  in CALB
+Track 59.0003 0 0  in CALB
+Track 59.0003 0 0  in LAYB
+Track 61.0003 0 0  in LAYB
+Track 61.0003 0 0  in CALB
+Track 69.0003 0 0  in CALB
+Track 69.0003 0 0  in LAYB
+Track 71.0003 0 0  in LAYB
+Track 71.0003 0 0  in CALB
+Track 79.0003 0 0  in CALB
+Track 79.0003 0 0  in LAYB
+Track 81.0003 0 0  in LAYB
+Track 81.0003 0 0  in CALB
+Track 89.0003 0 0  in CALB
+Track 89.0003 0 0  in LAYB
+Track 91.0003 0 0  in LAYB
+Track 91.0003 0 0  in CALB
+Track 99.0003 0 0  in CALB
+Track 99.0003 0 0  in LAYB
+Track 101 0 0  in LAYB
+Track 101 0 0  in CALB
+Track 109 0 0  in CALB
+Track 109 0 0  in LAYB
+Track 111 0 0  in LAYB
+Track 111 0 0  in CALB
+Track 119 0 0  in CALB
+Track 119 0 0  in LAYB
+Track 121 0 0  in LAYB
+Track 121 0 0  in CALB
+Track 129 0 0  in CALB
+Track 129 0 0  in LAYB
+Track 131 0 0  in LAYB
+Track 131 0 0  in CALB
+Track 139 0 0  in CALB
+Track 139 0 0  in LAYB
+Track 141 0 0  in LAYB
+Track 141 0 0  in CALB
+Track 149 0 0  in CALB
+Track 149 0 0  in LAYB
+Track 151 0 0  in LAYB
+Track 151 0 0  in CALB
+Track 159 0 0  in CALB
+Track 159 0 0  in LAYB
+Track 161 0 0  in LAYB
+Track 161 0 0  in CALB
+Track 169 0 0  in CALB
+Track 169 0 0  in LAYB
+Track 171 0 0  in LAYB
+Track 171 0 0  in CALB
+Track 179 0 0  in CALB
+Track 179 0 0  in LAYB
+Track 181 0 0  in LAYB
+Track 181 0 0  in CALB
+Track 189 0 0  in CALB
+Track 189 0 0  in LAYB
+Track 191 0 0  in LAYB
+Track 191 0 0  in CALB
+Track 200 0 0  in CALB
+Track 200 0 0  in EXPH
+Track 300 0 0  in EXPH
