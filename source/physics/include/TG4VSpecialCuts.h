@@ -1,4 +1,4 @@
-// $Id: TG4VSpecialCuts.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4VSpecialCuts.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4VSpecialCuts
@@ -20,6 +20,7 @@ class TG4G3CutVector;
 class TG4Limits;
 
 class G4Track;
+class G4LossTableManager;
 
 class TG4VSpecialCuts: public G4VProcess
 {
@@ -62,6 +63,10 @@ class TG4VSpecialCuts: public G4VProcess
     
     // operators
     TG4VSpecialCuts& operator = (const TG4VSpecialCuts& right);
+    
+  private:
+    G4LossTableManager*  fLossTableManager;
+
 };
 
 #endif //TG4_SPECIAL_CUTS_H

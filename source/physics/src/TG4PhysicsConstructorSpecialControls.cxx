@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorSpecialControls.cxx,v 1.2 2003/06/03 18:52:36 brun Exp $
+// $Id: TG4PhysicsConstructorSpecialControls.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsConstructorSpecialControls
@@ -11,15 +11,20 @@
 #include "TG4SpecialControls.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4G3ControlVector.h"
+#include "TG4ProcessMCMap.h"
 
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
 #include <G4VProcess.hh>
 
+#include <TMCProcess.h>
+
 //_____________________________________________________________________________
 TG4PhysicsConstructorSpecialControls::TG4PhysicsConstructorSpecialControls(
                                      const G4String& name)
-  : TG4VPhysicsConstructor(name) {
+  : TG4VPhysicsConstructor(name),
+    fSpecialControls("specialControls") 
+{
 //
 }
 
@@ -27,7 +32,9 @@ TG4PhysicsConstructorSpecialControls::TG4PhysicsConstructorSpecialControls(
 TG4PhysicsConstructorSpecialControls::TG4PhysicsConstructorSpecialControls(
 				     G4int verboseLevel, 
                                      const G4String& name)
-  : TG4VPhysicsConstructor(name, verboseLevel) {
+  : TG4VPhysicsConstructor(name, verboseLevel),
+    fSpecialControls("specialControls") 
+{
 //
 }
 
@@ -55,44 +62,25 @@ void TG4PhysicsConstructorSpecialControls::ConstructProcess()
   TG4G3PhysicsManager* g3PhysicsManager 
     = TG4G3PhysicsManager::Instance();
 
-  if (g3PhysicsManager->IsSpecialControls()) {
-    TG4boolVector* isControlVector 
-      = g3PhysicsManager->GetIsControlVector(); 
+  theParticleIterator->reset();
+  while ((*theParticleIterator)())
+  {
+    G4ParticleDefinition* particle = theParticleIterator->value();
+    TG4G3ParticleWSP particleWSP 
+      = g3PhysicsManager->GetG3ParticleWSP(particle);
 
-    theParticleIterator->reset();
-    while ((*theParticleIterator)())
-    {
-      G4ParticleDefinition* particle = theParticleIterator->value();
-      TG4G3ParticleWSP particleWSP 
-        = g3PhysicsManager->GetG3ParticleWSP(particle);
-      //G4String name;
-      //GetG3ParticleWSPName(particleWSP, name);
-
-      // special process is set in case
-      // the special control is set by TG4Limits    
-      if ((particleWSP !=kNofParticlesWSP) && 
-          ((*isControlVector)[particleWSP])) {
-        // check if process already exists
-	G4String processName = "specialControl";
-	G4VProcess* process = g3PhysicsManager->FindProcess(processName);
-	if (!process) {
-          process = new TG4SpecialControls(processName);
-	}  
-        //particle->GetProcessManager()->AddProcess(process, 0, -1, 1);
-        particle->GetProcessManager()->AddDiscreteProcess(process);
-      }
+    if ( particleWSP != kNofParticlesWSP ) {
+        // special process is created in any case
+        particle->GetProcessManager()->AddDiscreteProcess(&fSpecialControls);
     }
+  }  
 
-    if (VerboseLevel() > 0) {
-      G4cout << "### Special Controls constructed. " << G4endl;
-      G4cout << "    Special controls process is defined for: " << G4endl
-             << "    ";
-      for (G4int i=0; i<kNofParticlesWSP; i++) {
-        if ((*isControlVector)[i]) 
-	  G4cout << g3PhysicsManager->GetG3ParticleWSPName(i) << " ";
-      }  
-      G4cout << G4endl;
-    }  
-  }
+  // map to TMCProcess codes
+  TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
+  mcMap->Add(&fSpecialControls, kPNull);
+
+  if (VerboseLevel() > 0) {
+    G4cout << "### Special Controls constructed. " << G4endl;
+  }  
 }
 

@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4ModularPhysicsList.h,v 1.4 2005/01/05 08:04:58 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4ModularPhysicsList
@@ -72,6 +72,8 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
     // methods
     void SetProcessActivation(G4ProcessManager* processManager,
                               G4int processId, G4bool activation);
+    void SetSpecialControlsActivation();
+    void SetSpecialCutsActivation();
 };
 
 // inline functions

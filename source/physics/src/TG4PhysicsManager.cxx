@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.9 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsManager.cxx,v 1.10 2005/01/05 08:04:58 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsManager
@@ -348,6 +348,11 @@ void  TG4PhysicsManager::Gstpar(Int_t itmed, const char *param, Float_t parval)
 ///  - ITMED     tracking medium number 
 ///  - CHPAR     is a character string (variable name) 
 ///  - PARVAL    must be given as a floating point.
+
+  if (VerboseLevel() > 1) {
+    G4cout << "TG4PhysicsManager::Gstpar " 
+           << param << "  " << parval << G4endl;
+  }	   
 
   G4String name = TG4GeometryServices::Instance()->CutName(param); 
   TG4G3Cut cut;

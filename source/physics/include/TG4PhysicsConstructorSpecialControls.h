@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorSpecialControls.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4PhysicsConstructorSpecialControls.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorSpecialControls
@@ -11,6 +11,7 @@
 #define TG4_PHYSICS_CONSTRUCTOR_SPECIAL_CONTROLS_H
 
 #include "TG4VPhysicsConstructor.h"
+#include "TG4SpecialControls.h"
 
 #include <globals.hh>
 
@@ -29,6 +30,10 @@ class TG4PhysicsConstructorSpecialControls: public TG4VPhysicsConstructor
           // construct particle and physics
     virtual void ConstructParticle();
     virtual void ConstructProcess();
+
+  private:
+    // data members
+    TG4SpecialControls  fSpecialControls;
 };
 
 #endif //TG4_PHYSICS_CONSTRUCTOR_SPECIAL_CONTROLS_H

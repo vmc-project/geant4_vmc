@@ -1,4 +1,4 @@
-// $Id: TG4VSpecialCuts.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4VSpecialCuts.cxx,v 1.4 2005/01/05 08:04:58 brun Exp $
 // Category: physics
 //
 // Class TG4VSpecialCuts
@@ -14,10 +14,13 @@
 
 #include <G4UserLimits.hh>
 #include <G4EnergyLossTables.hh>
+#include <G4LossTableManager.hh>
 
 //_____________________________________________________________________________
 TG4VSpecialCuts::TG4VSpecialCuts(const G4String& processName)
-  : G4VProcess(processName) {
+  : G4VProcess(processName),
+    fLossTableManager(G4LossTableManager::Instance())
+{
 //
 }
 
@@ -110,23 +113,26 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
     // min remaining range
     G4double kinEnergy = track.GetKineticEnergy();
     const G4MaterialCutsCouple* couple = track.GetMaterialCutsCouple();
-    G4double rangeNow 
-      = G4EnergyLossTables::GetRange(particle, kinEnergy, couple);
-    temp = (rangeNow - limits->GetUserMinRange(track));
+    G4double rangeNow = fLossTableManager->GetRange(particle, kinEnergy, couple);
+    G4double rmin = limits->GetUserMinRange(track);
+    if (rmin > DBL_MIN) {
+      temp = rangeNow - rmin;
+      if (temp < 0.) return 0.;
+      if (proposedStep > temp) proposedStep = temp;
+    }	 
     if (temp < 0.) return minStep;
     if (proposedStep > temp) proposedStep = temp;
 
     // min kinetic energy (from limits)
     // the kin energy cut can be applied only in case
     // G4EnergyLossTables are defined for the particle    
-    if (G4EnergyLossTables::GetDEDXTable(particle)) {
-      G4double minEkine = GetMinEkine(*limits, track);
-      G4double minR 
-        = G4EnergyLossTables::GetRange(particle, minEkine, couple);
-      temp = rangeNow - minR;
-      if (temp < 0.) return minStep;
-      if (proposedStep > temp) proposedStep = temp;  
-    }
+    G4double minEkine = GetMinEkine(*limits, track);
+    if (minEkine > DBL_MIN) {
+         rmin = fLossTableManager->GetRange(particle, minEkine, couple);
+         temp = rangeNow - rmin;
+         if (temp < 0.) return 0.;
+         if (proposedStep > temp) proposedStep = temp;
+       }	 
   }
   else {  
     // min kinetic energy (from limits)
@@ -134,7 +140,6 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
     G4double minEkine = GetMinEkine(*limits, track);
     if (track.GetKineticEnergy() <= minEkine) return minStep;
   }
-    
   return proposedStep;
 }
 

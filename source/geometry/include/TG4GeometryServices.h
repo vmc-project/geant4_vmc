@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.h,v 1.4 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4GeometryServices.h,v 1.5 2005/01/05 08:04:58 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryServices
@@ -70,7 +70,6 @@ class TG4GeometryServices : public TG4Verbose
     Int_t NofG3Volumes() const; 
     Int_t NofG4LogicalVolumes() const; 
     Int_t NofG4PhysicalVolumes() const; 
-    G4bool IsSpecialControls() const;
     G4VPhysicalVolume* GetWorld() const;
     char GetSeparator() const;
 

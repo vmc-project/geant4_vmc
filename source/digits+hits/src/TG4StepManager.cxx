@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.11 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.12 2005/01/05 08:04:58 brun Exp $
 // Category: digits+hits
 //
 // Class TG4StepManager
@@ -1330,7 +1330,7 @@ Int_t TG4StepManager::StepProcesses(TArrayI& processes) const
   for (G4int i=0; i<nofAlongStep; i++) {
     G4VProcess* g4Process = (*processVector)[i];    
     // do not fill transportation along step process
-    if (g4Process->GetProcessName() != "Transportation")
+    if (g4Process && g4Process->GetProcessName() != "Transportation")
       processes[counter++] = physicsManager->GetMCProcess(g4Process);
   }
     

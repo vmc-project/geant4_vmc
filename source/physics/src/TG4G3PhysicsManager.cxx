@@ -1,4 +1,4 @@
-// $Id: TG4G3PhysicsManager.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4G3PhysicsManager.cxx,v 1.4 2005/01/05 08:04:58 brun Exp $
 // Category: physics
 //
 // Class TG4G3PhysicsManager
@@ -161,6 +161,9 @@ void TG4G3PhysicsManager::SetProcess(TG4G3Control control,
       SwitchIsCutVector(kDCUTM);
   }  
 
+  G4cout << "TG4G3PhysicsManager::SetProcess: "
+         << control << "  " << controlValue << G4endl;
+	 
   fControlVector->SetControl(control, controlValue, *fCutVector);
 } 
 
@@ -404,10 +407,23 @@ G4bool TG4G3PhysicsManager::IsSpecialCuts() const
 //_____________________________________________________________________________
 G4bool TG4G3PhysicsManager::IsSpecialControls() const
 {
-/// Return true if any special control value is set.
+/// Return true if any special control value is set
+/// (per tracking medium) and is different from its
+/// global value
 
   for (G4int i=0; i<kNofParticlesWSP; i++)
   {  if ((*fIsControlVector)[i]) return true; }
+
+  return false;
+}
+
+//_____________________________________________________________________________
+G4bool TG4G3PhysicsManager::IsGlobalSpecialControls() const
+{
+/// Return true if any global special control value is set
+
+  for (G4int i=0; i<kNofParticlesWSP; i++)
+  {  if ((*fControlVector)[i] != kUnset ) return true; }
 
   return false;
 }

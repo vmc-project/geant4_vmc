@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.7 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.8 2005/01/05 08:04:58 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryServices
@@ -465,21 +465,6 @@ Int_t TG4GeometryServices::NofG4PhysicalVolumes() const
   return counter;  
 }
 
-
-//______________________________________________________________________________
-G4bool TG4GeometryServices::IsSpecialControls()  const
-{
-/// Return true if a process control in some limits instance is set. 
-
-  G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-
-  for (G4int i=0; i<G4int(lvStore->size()); i++) {
-    TG4Limits* limits = GetLimits((*lvStore)[i]->GetUserLimits());
-    if (limits && limits->IsControl()) return true;
-  }
-  
-  return false;    
-}
 
 //_____________________________________________________________________________
 TG4Limits* TG4GeometryServices::GetLimits(G4UserLimits* limits) const

@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorSpecialCuts.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4PhysicsConstructorSpecialCuts.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorSpecialCuts
@@ -11,6 +11,7 @@
 #define TG4_PHYSICS_CONSTRUCTOR_SPECIAL_CUTS_H
 
 #include "TG4VPhysicsConstructor.h"
+#include "TG4SpecialCuts.h"
 
 #include <globals.hh>
 
@@ -27,6 +28,16 @@ class TG4PhysicsConstructorSpecialCuts: public TG4VPhysicsConstructor
           // construct particle and physics
     virtual void ConstructParticle();
     virtual void ConstructProcess();
+    
+  private:
+    // data members
+    TG4SpecialCutsForGamma          fSpecialCutsForGamma;
+    TG4SpecialCutsForElectron       fSpecialCutsForElectron;
+    TG4SpecialCutsForEplus          fSpecialCutsForEplus;
+    TG4SpecialCutsForChargedHadron  fSpecialCutsForChargedHadron;
+    TG4SpecialCutsForNeutralHadron  fSpecialCutsForNeutralHadron;
+    TG4SpecialCutsForMuon           fSpecialCutsForMuon;
+    TG4SpecialCutsForOther          fSpecialCutsForOther;
 };
 
 #endif //TG4_PHYSICS_CONSTRUCTOR_SPECIAL_CUTS_H
