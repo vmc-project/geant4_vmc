@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.8 2004/05/28 13:49:09 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.9 2004/10/12 07:47:11 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -358,7 +358,7 @@ Int_t TG4StepManager::CurrentVolID(Int_t& copyNo) const
 // ---
 
   G4VPhysicalVolume* physVolume = GetCurrentPhysicalVolume(); 
-  copyNo = physVolume->GetCopyNo();
+  copyNo = physVolume->GetCopyNo() + 1;
 
   // sensitive detector ID
   TG4SDServices* sdServices = TG4SDServices::Instance();
@@ -377,14 +377,14 @@ Int_t TG4StepManager::CurrentVolOffID(Int_t off, Int_t&  copyNo) const
   G4VPhysicalVolume* mother = GetCurrentOffPhysicalVolume(off); 
 
   if (mother) {
-    copyNo = mother->GetCopyNo();
+    copyNo = mother->GetCopyNo() + 1;
 
     // sensitive detector ID
     TG4SDServices* sdServices = TG4SDServices::Instance();
     return sdServices->GetVolumeID(mother->GetLogicalVolume());
   }
   else {
-    copyNo = -1;
+    copyNo = 0;
     return 0;
   }  
 }
