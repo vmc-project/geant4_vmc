@@ -1,4 +1,4 @@
-// $Id: TG4XMLConvertor.cxx,v 1.3 2003/02/28 16:33:51 brun Exp $
+// $Id: TG4XMLConvertor.cxx,v 1.1 2003/07/22 06:46:58 brun Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova, 27.07.2000 
@@ -171,7 +171,7 @@ void TG4XMLConvertor::WriteTubs(G4String lvName, const G4Tubs* tubs,
 	   << indention        << element2 << G4endl
 	   << indention        << element3
            << G4std::setw(fNW)   << G4std::setprecision(fNP) << sphi << "; "
-           << G4std::setw(fNW)   << G4std::setprecision(fNP) << sphi+dphi
+           << G4std::setw(fNW)   << G4std::setprecision(fNP) << dphi
 	   << quota << G4endl 	   	   
 	   << indention        << element4
            << G4std::setw(fNW) << G4std::setprecision(fNP) << rmin << "; "
@@ -210,7 +210,7 @@ void TG4XMLConvertor::WriteCons(G4String lvName, const G4Cons* cons,
 	   << indention        << element2 << G4endl
 	   << indention        << element3
            << G4std::setw(fNW)   << G4std::setprecision(fNP) << sphi << "; "
-           << G4std::setw(fNW)   << G4std::setprecision(fNP) << sphi+dphi
+           << G4std::setw(fNW)   << G4std::setprecision(fNP) << dphi
 	   << quota << G4endl 	   	   
 	   << indention        << element4
            << G4std::setw(fNW) << G4std::setprecision(fNP) << rmin1 << "; "
@@ -404,7 +404,7 @@ void TG4XMLConvertor::WritePolycone(G4String lvName, const G4Polycone* polycone,
 	   << indention        << element2 << G4endl
 	   << indention        << element3
            << G4std::setw(fNW) << G4std::setprecision(fNP) << sphi << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << ephi
+           << G4std::setw(fNW) << G4std::setprecision(fNP) << ephi-sphi
 	   << element4 << G4endl;
 
   // write polyplane elements
@@ -465,7 +465,7 @@ void TG4XMLConvertor::WritePolyhedra(G4String lvName, const G4Polyhedra* polyhed
 	   << indention        << element2 << G4endl
 	   << indention        << element3
            << G4std::setw(fNW) << G4std::setprecision(fNP) << sphi << "; "
-           << G4std::setw(fNW) << G4std::setprecision(fNP) << ephi
+           << G4std::setw(fNW) << G4std::setprecision(fNP) << ephi-sphi
 	   << quota << G4endl
 	   << indention       << element4 
 	   << nofSides
