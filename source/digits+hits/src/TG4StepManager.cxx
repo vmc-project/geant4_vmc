@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.5 2003/09/23 14:22:56 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.6 2003/12/18 13:27:24 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -499,6 +499,16 @@ void TG4StepManager::Gmtod(Double_t* xm, Double_t* xd, Int_t iflag)
 	
     affineTransform = navigator->GetGlobalToLocalTransform();
   }
+  else if (fStepStatus == kBoundary) {
+
+#ifdef MCDEBUG
+    CheckStep("Gmtod");
+#endif
+ 
+    affineTransform
+      = fStep->GetPostStepPoint()->GetTouchable()->GetHistory()
+        ->GetTopTransform();
+  }	
   else {
 
 #ifdef MCDEBUG
@@ -510,7 +520,9 @@ void TG4StepManager::Gmtod(Double_t* xm, Double_t* xd, Int_t iflag)
         ->GetTopTransform();
   }	
 
-  G4ThreeVector theGlobalPoint(xm[0],xm[1],xm[2]); 
+  G4ThreeVector theGlobalPoint(xm[0]* TG4G3Units::Length(),
+                               xm[1]* TG4G3Units::Length(),		       
+			       xm[2]* TG4G3Units::Length()); 
   G4ThreeVector theLocalPoint;
   if (iflag == 1) 
     theLocalPoint = affineTransform.TransformPoint(theGlobalPoint);
@@ -518,9 +530,9 @@ void TG4StepManager::Gmtod(Double_t* xm, Double_t* xd, Int_t iflag)
     // if ( iflag == 2)
     theLocalPoint = affineTransform.TransformAxis(theGlobalPoint);
 
-  xd[0] = theLocalPoint.x();
-  xd[1] = theLocalPoint.y();
-  xd[2] = theLocalPoint.z();
+  xd[0] = theLocalPoint.x()/TG4G3Units::Length();
+  xd[1] = theLocalPoint.y()/TG4G3Units::Length();
+  xd[2] = theLocalPoint.z()/TG4G3Units::Length();
 } 
  
 //_____________________________________________________________________________
@@ -587,20 +599,30 @@ void TG4StepManager::Gdtom(Double_t* xd, Double_t* xm, Int_t iflag)
 	
     affineTransform = navigator->GetLocalToGlobalTransform();
   }
+  else if (fStepStatus == kBoundary) {
+
+#ifdef MCDEBUG
+    CheckStep("Gdtom");
+#endif
+
+    affineTransform
+      = fStep->GetPostStepPoint()->GetTouchable()->GetHistory()
+        ->GetTopTransform().Inverse();
+  }	
   else {
 
 #ifdef MCDEBUG
     CheckStep("Gdtom");
 #endif
 
-    // check this
-     
     affineTransform
       = fStep->GetPreStepPoint()->GetTouchable()->GetHistory()
         ->GetTopTransform().Inverse();
   }	
-  
-  G4ThreeVector theLocalPoint(xd[0],xd[1],xd[2]); 
+
+  G4ThreeVector theLocalPoint(xd[0]*TG4G3Units::Length(),
+                              xd[1]*TG4G3Units::Length(),
+			      xd[2]*TG4G3Units::Length()); 
   G4ThreeVector theGlobalPoint;
   if(iflag == 1)
        theGlobalPoint = affineTransform.TransformPoint(theLocalPoint);
@@ -610,9 +632,9 @@ void TG4StepManager::Gdtom(Double_t* xd, Double_t* xm, Int_t iflag)
     TG4Globals::Warning(
       "TG4StepManager::Gdtom(...,iflag): iflag is not in 1..2");
 
-  xm[0] = theGlobalPoint.x();
-  xm[1] = theGlobalPoint.y();
-  xm[2] = theGlobalPoint.z();
+  xm[0] = theGlobalPoint.x()/TG4G3Units::Length();
+  xm[1] = theGlobalPoint.y()/TG4G3Units::Length();
+  xm[2] = theGlobalPoint.z()/TG4G3Units::Length();
 } 
  
 //_____________________________________________________________________________
