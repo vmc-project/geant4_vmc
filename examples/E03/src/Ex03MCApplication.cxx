@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: Ex03MCApplication.cxx,v 1.1 2003/03/17 14:56:51 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
@@ -85,6 +85,8 @@ Ex03MCApplication::~Ex03MCApplication()
   delete fCalorimeterSD;
   delete fPrimaryGenerator;
   delete fFieldB;
+  delete gMC;
+  gMC = 0;
 }
 
 //

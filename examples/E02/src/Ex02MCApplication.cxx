@@ -1,4 +1,4 @@
-// $Id: Ex02MCApplication.cxx,v 1.2 2003/02/04 17:55:35 brun Exp $
+// $Id: Ex02MCApplication.cxx,v 1.3 2003/02/26 13:38:16 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -62,6 +62,8 @@ Ex02MCApplication::~Ex02MCApplication()
   
   delete fStack;
   delete fFieldB;
+  delete gMC;
+  gMC = 0;
 }
 
 //

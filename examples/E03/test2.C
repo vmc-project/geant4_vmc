@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: test2.C,v 1.1 2003/03/17 14:56:50 brun Exp $
 //
 // Common macro for Example03: Verbosity
 
@@ -12,4 +12,6 @@ void test(const char* setup)
 
   appl->InitMC(setup);
   appl->RunMC(1);
+
+  delete appl;
 }
