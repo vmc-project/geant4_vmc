@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+# $Id: Makefile,v 1.2 2002/10/08 13:27:30 brun Exp $
 
 ############################### geant4vmc Makefile ###########################
 
@@ -33,7 +33,9 @@ SRCS	:= $(CXXSRC)
 
 # C++ Headers
 #
-HDRS	:= $(wildcard include/*.h) include/$(PACKAGE)LinkDef.h
+HDRS    := $(wildcard include/*.h)
+HDRS    := $(filter-out include/$(PACKAGE)LinkDef.h,$(HDRS))
+HDRS    += include/$(PACKAGE)LinkDef.h
 
 # Objects
 #
