@@ -1,4 +1,4 @@
-// $Id: TG4XMLConvertor.h,v 1.3 2002/07/31 16:06:00 ivana Exp $
+// $Id: TG4XMLConvertor.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
 // Category: geometry
 //
 // Author: I. Hrivnacova, 27.07.2000 
@@ -13,7 +13,6 @@
 #define TG4_XML_CONVERTOR_H
 
 #include "TG4VXMLConvertor.h"
-#include "TG4Globals.h"
 
 #include <globals.hh>
 #include <g4std/fstream>
@@ -71,6 +70,7 @@ class TG4XMLConvertor : public TG4VXMLConvertor
 
   private:
     //methods
+    void Append(G4String& string, G4int number) const;
     void CutName(G4String& name) const;
     void CutName(G4String& name, G4int size) const;
     void PutName(G4String& element, G4String name, G4String templ) const;
