@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.2 2003/01/29 11:25:23 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.3 2003/07/22 06:36:58 brun Exp $
 // Category: geometry
 //
 // Author: V. Berejnoi, I. Hrivnacova
@@ -920,6 +920,7 @@ void TG4GeometryManager::SetRootGeometry()
 
   // Convert Root geometry to G4
   TG4RootGeometryConvertor convertor;
+  convertor.SetSeparator(fGeometryServices->GetSeparator());
   G4VPhysicalVolume* g4World = convertor.Convert(gGeoManager->GetTopVolume());
   fGeometryServices->SetWorld(g4World);
   fVMCGeometry = false;
@@ -975,7 +976,23 @@ G4VPhysicalVolume* TG4GeometryManager::CreateG4Geometry()
                            first->GetLV(), 0, false, 0);
     fGeometryServices->SetWorld(world);			    
   }
-  return fGeometryServices->GetWorld();		      
+
+  // with g3tog4 the volume name separator cannot be customised
+  // by a user
+  if (fGeometryServices->GetSeparator() != gSeparator) {
+    
+    fGeometryServices->SetSeparator(gSeparator);
+    
+    G4String text = "TG4GeometryManager::CreateG4Geometry: \n";
+    text = text + "    The volume name separator cannot be overriden in G3toG4. \n";
+    text = text + "    Its value is reset to \'";
+    text = text + gSeparator;
+    text = text + "\'. \n";
+    text = text + "    The command /mcDet/volNameSeparator will have no effect.";
+    TG4Globals::Warning(text);
+  }
+
+  return fGeometryServices->GetWorld();
 }
 
  
