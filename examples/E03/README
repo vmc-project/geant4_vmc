@@ -1,0 +1,48 @@
+$Id: $
+-----------------------------------------------------------------
+
+Example03
+=========
+  Geant4 ExampleN03 adapted to Virtual Monte Carlo.
+
+  Demonstrates:
+    Geometry - divided volume (Gsdvn)
+    Definition of sensitive volumes
+    Physics - hadronics processes off
+    Particles cuts 
+      - G4 cut in range: 1mm
+        G3 cuts set to correspond to 1mm cut in range
+    Primary generator with randomized position (optional)
+      defined number of electrons with moving position and fixed direction
+    Calorimetry hits
+    Storing hits, particles stack in Root file
+    Drawing geometry (both G3, G4) + trajectories (G4 only)
+    Verbosity
+
+  See also description of in 
+    geant4/examples/novice/N03/README
+
+Macros:
+=======
+
+  For running example with G3:
+  
+  run_g3.C    - macro for running example 
+  g3Config.C  - configuration macro
+
+  For running example with G4:
+  
+  run_g4.C    - macro for running example 
+  g4Config.C  - configuration macro
+  g4config.in - Geant4 configuration macro (called from g4Config.C)
+  g4vis.in    - Geant4 macro for visualization settings (called from set_vis.C) 
+
+  Common macros (called by run_g3.C/run_g4.C):
+  
+  test1.C   - calorimetry (default)
+  test2.C   - verbosity
+  set_vis.C - setting visualization
+
+  To run the second test macro (test2.C),
+  execute macros run_g3.C/run_g4.C with a parameter = name of the test macro:
+  Eg. .x run_g3.C("test2.C")
