@@ -1,4 +1,4 @@
-// $Id: Ex01MCApplication.h,v 1.2 2002/08/29 09:41:49 ivana Exp $
+// $Id: Ex01MCApplication.h,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -46,7 +46,9 @@ class Ex01MCApplication : public TVirtualMCApplication
 
   private:
     // methods
+    void ConstructMaterialsOld();
     void ConstructMaterials();
+    void ConstructVolumesOld();
     void ConstructVolumes();
   
     // data members

@@ -1,4 +1,4 @@
-// $Id: Ex01MCApplication.cxx,v 1.3 2003/02/04 17:55:34 brun Exp $
+// $Id: Ex01MCApplication.cxx,v 1.4 2003/06/03 17:05:48 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -12,13 +12,11 @@
 #include "Ex01MCStack.h"
 
 #include <TROOT.h>
+#include <Riostream.h>
 #include <TInterpreter.h>
 #include <TVirtualMC.h>
 #include <TLorentzVector.h>
-
-#include <iostream>
-
-using namespace std;
+#include <TGeoManager.h>
 
 ClassImp(Ex01MCApplication)
 
@@ -68,7 +66,7 @@ Ex01MCApplication::~Ex01MCApplication()
 //
 
 //_____________________________________________________________________________
-void Ex01MCApplication::ConstructMaterials()
+void Ex01MCApplication::ConstructMaterialsOld()
 {
   //
   // Materials
@@ -80,7 +78,7 @@ void Ex01MCApplication::ConstructMaterials()
   Double_t radl;
   Double_t absl;
   Float_t* ubuf = 0;
-  
+
   a = 39.95;
   z = 18.;
   density = 1.782e-03;
@@ -88,7 +86,7 @@ void Ex01MCApplication::ConstructMaterials()
   absl = 0.1;
   Int_t imatAr = 1;
   gMC->Material(imatAr, "ArgonGas", a, z, density, radl, absl, ubuf, 0);
-  
+
   a = 26.98;
   z = 13.;
   density = 2.7;
@@ -126,7 +124,69 @@ void Ex01MCApplication::ConstructMaterials()
 
 
 //_____________________________________________________________________________
-void Ex01MCApplication::ConstructVolumes()
+void Ex01MCApplication::ConstructMaterials()
+{
+  //
+  // Materials
+  //
+
+  // Create Root geometry manager 
+  new TGeoManager("TGeo", "Root geometry manager");
+   
+  Double_t a;
+  Double_t z;
+  Double_t density;
+  Double_t radl;
+  Double_t absl;
+  
+  a = 39.95;
+  z = 18.;
+  density = 1.782e-03;
+  radl = 0.1;
+  absl = 0.1;
+  Int_t imatAr = 1;
+  gGeoManager->Material("ArgonGas", a, z, density, imatAr, radl, absl);
+
+  a = 26.98;
+  z = 13.;
+  density = 2.7;
+  radl = 0.1;
+  absl = 0.1;
+  Int_t imatAl = 2;
+  gGeoManager->Material("Aluminium", a, z, density, imatAl, radl, absl);
+  
+  a = 207.19;
+  z = 82.;
+  density = 11.35;
+  radl = 0.1;
+  absl = 0.1;
+  Int_t imatLead = 3;  
+  gGeoManager->Material("Lead", a, z, density, imatLead, radl, absl);  
+
+  //
+  // Tracking medias
+  //
+
+  Int_t ifield = 0;         // No magnetic field 
+  Double_t fieldm = 0.;     //
+  Double_t epsil  = .001;    // Tracking precision, 
+  Double_t stemax = -0.01;   // Maximum displacement for multiple scat 
+  Double_t tmaxfd = -20.;    // Maximum angle due to field deflection 
+  Double_t deemax = -.3;     // Maximum fractional energy loss, DLS 
+  Double_t stmin  = -.8;
+  fImedAr = 1;
+  fImedAl = 2;
+  fImedPb = 3;
+  gGeoManager->Medium("ArgonGas", fImedAr, imatAr, 0, ifield, fieldm, tmaxfd, 
+                      stemax, deemax, epsil, stmin); 
+  gGeoManager->Medium("Aluminium", fImedAl, imatAl, 0, ifield, fieldm, tmaxfd,
+                      stemax, deemax, epsil, stmin); 
+  gGeoManager->Medium("Lead", fImedPb, imatLead, 0, ifield, fieldm, tmaxfd,
+                      stemax, deemax, epsil, stmin); 
+}
+
+//_____________________________________________________________________________
+void Ex01MCApplication::ConstructVolumesOld()
 {
 
   //------------------------------ experimental hall (world volume)
@@ -180,6 +240,66 @@ void Ex01MCApplication::ConstructVolumes()
   }  
 }
 
+//_____________________________________________________________________________
+void Ex01MCApplication::ConstructVolumes()
+{
+
+  //------------------------------ experimental hall (world volume)
+  //------------------------------ beam line along x axis
+
+  Double_t* ubuf = 0;
+
+  Double_t expHall[3];
+  expHall[0] = 300.;
+  expHall[1] = 100.;
+  expHall[2] = 100.;
+  gGeoManager->Volume("EXPH","BOX", fImedAr, expHall, 3);
+ 
+  //------------------------------ a tracker tube
+
+  Double_t trackerTube[3];
+  trackerTube[0] = 0.;
+  trackerTube[1] = 60.;
+  trackerTube[2] = 50.;
+  gGeoManager->Volume("TRTU","TUBE", fImedAl, trackerTube, 3);
+
+  Double_t posX = -100.;
+  Double_t posY =  0.;
+  Double_t posZ =  0.;
+  gGeoManager->Node("TRTU", 1 ,"EXPH", posX, posY, posZ, 0, kFALSE, ubuf);
+  
+  //------------------------------ a calorimeter block
+
+  Double_t calBox[3];
+  calBox[0] = 100.;
+  calBox[1] = 50.;
+  calBox[2] = 50.;
+  gGeoManager->Volume("CALB","BOX", fImedPb, calBox, 3);
+
+  posX = 100.;
+  posY = 0.;
+  posZ = 0.;
+  gGeoManager->Node("CALB", 1 ,"EXPH", posX, posY, posZ, 0, kFALSE, ubuf);
+
+  //------------------------------ calorimeter layers
+ 
+  Double_t layerBox[3];
+  layerBox[0] = 1.;
+  layerBox[1] = 40.;
+  layerBox[2] = 40.;
+  gGeoManager->Volume("LAYB","BOX", fImedAl, layerBox, 3);
+
+  for (Int_t i=0; i<19; i++) {
+    posX = (i-9) * 10.;
+    posY = 0.;
+    posZ = 0.;
+    gGeoManager->Node("LAYB", i ,"CALB", posX, posY, posZ, 0, kFALSE, ubuf);
+  }  
+  
+  // notify VMC about Root geometry
+  gMC->SetRootGeometry();
+}
+
 //
 // public
 //
@@ -229,9 +349,17 @@ void Ex01MCApplication::ConstructGeometry()
   //
   // Construct geometry using TVirtualMC functions.
   //
-
-  ConstructMaterials();  
-  ConstructVolumes();  
+  
+  if (gMC->IsRootGeometrySupported()) {
+    cout << "Geometry will be defined via TGeo" << endl;
+    ConstructMaterials();  
+    ConstructVolumes(); 
+  }
+  else {   
+    cout << "Geometry will be defined via VMC" << endl;
+    ConstructMaterialsOld();  
+    ConstructVolumesOld(); 
+  }  
 }
 
 //_____________________________________________________________________________
@@ -279,21 +407,21 @@ void Ex01MCApplication::GeneratePrimaries()
  e  = 1.;
 
  // Add particle to stack 
- fStack->SetTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
+ fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
                   kPPrimary, ntr, 1., 0);
 
  // Change direction and add particle to stack 
  px = 1.; 
  py = 0.1; 
  pz = 0.; 
- fStack->SetTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz,
+ fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz,
                   kPPrimary, ntr, 1., 0);
 
  // Change direction and add particle to stack 
  px = 1.; 
  py = 0.; 
  pz = 0.1; 
- fStack->SetTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz,
+ fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz,
                   kPPrimary, ntr, 1., 0);
 }
 
