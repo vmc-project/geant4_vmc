@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.5 2004/05/28 13:50:14 brun Exp $
+// $Id: TGeant4.h,v 1.6 2004/06/08 10:27:50 brun Exp $
 // Category: run
 //
 // Author: I. Hrivnacova
@@ -211,6 +211,7 @@ class TGeant4: public TVirtualMC
                     TLorentzVector& position, TLorentzVector& momentum);
     virtual TMCProcess ProdProcess(Int_t isec) const; 
     virtual Int_t StepProcesses(TArrayI &proc) const;
+    virtual Bool_t SecondariesAreOrdered() const;
   
     //
     // methods for visualization
