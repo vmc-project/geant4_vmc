@@ -1,4 +1,4 @@
-// $Id: Ex02RootManager.cxx,v 1.1.1.1 2002/06/16 15:57:36 hristov Exp $
+// $Id: Ex02RootManager.cxx,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Geant4 novice ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -18,7 +18,7 @@ ClassImp(Ex02RootManager)
 Ex02RootManager* Ex02RootManager::fgInstance = 0;
 
 //_____________________________________________________________________________
-Ex02RootManager::Ex02RootManager(FileMode fileMode)
+Ex02RootManager::Ex02RootManager(const char* projectName, FileMode fileMode)
   : TObject()
 {
 //
@@ -27,15 +27,21 @@ Ex02RootManager::Ex02RootManager(FileMode fileMode)
     return;
   }  
 
+  TString fileName(projectName);
+  fileName += ".root";
+
+  TString treeTitle(projectName);
+  treeTitle += " tree";
+
   switch (fileMode) {
     case kRead:
-      fFile = new TFile("example02.root");
-      fTree = (TTree*) fFile->Get("example02");
+      fFile = new TFile(fileName);
+      fTree = (TTree*) fFile->Get(projectName);
       break;
       
     case kWrite:  
-      fFile = new TFile("example02.root", "recreate");
-      fTree = new TTree("example02", "example02 tree");
+      fFile = new TFile(fileName, "recreate");
+      fTree = new TTree(projectName, treeTitle);
       ;;  
   }
 
