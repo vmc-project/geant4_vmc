@@ -1,4 +1,4 @@
-// $Id: g4libs.C,v 1.3 2002/12/18 09:36:00 brun Exp $
+// $Id: g4libs.C,v 1.4 2003/07/22 06:39:07 brun Exp $
 //
 // Macro for loading Geant4 and Geant4 VMC libraries
 
@@ -68,16 +68,18 @@ void g4libs_graphics()
 
   // Geant4 visualization
   //
+  gSystem->Load("libG4modeling");
+  gSystem->Load("libG4vis_management");
+  gSystem->Load("libG4Tree");
+  gSystem->Load("libG4visHepRep");
+  gSystem->Load("libG4visXXX");
+  if (isDAWN)
+    gSystem->Load("libG4FR");
   if (isOpenGL) {
     gSystem->Load("libGLU");
     gSystem->Load("libGL");
-  }  
-  gSystem->Load("libG4modeling");
-  gSystem->Load("libG4vis_management");
-  if (isDAWN)
-    gSystem->Load("libG4FR");
-  if (isOpenGL)
     gSystem->Load("libG4OpenGL");
+  }  
   if (isVRML)
     gSystem->Load("libG4VRML");
   if (isRayTracer)
@@ -112,18 +114,20 @@ void g4libs_granular()
   gSystem->Load("libG4materials");
 
   // geometry
-  gSystem->Load("libG4geomver");
-  gSystem->Load("libG4volumes");
-  gSystem->Load("libG4magneticfield");
   gSystem->Load("libG4geometrymng");  
+  gSystem->Load("libG4magneticfield");
+  gSystem->Load("libG4volumes");
+  gSystem->Load("libG4navigation");
   gSystem->Load("libG4geomBoolean");  
   gSystem->Load("libG4csg");  
   gSystem->Load("libG4brep"); 
   gSystem->Load("libG4specsolids"); 
   gSystem->Load("libG4geombias");
+  gSystem->Load("libG4geomdivision");
   
   // particles  
   gSystem->Load("libG4partman");
+  gSystem->Load("libG4partutils");
   gSystem->Load("libG4bosons");   
   gSystem->Load("libG4baryons");  
   gSystem->Load("libG4ions");
@@ -137,42 +141,65 @@ void g4libs_granular()
   // processes
   gSystem->Load("libG4procman");
   gSystem->Load("libG4parameterisation");
+  gSystem->Load("libG4transportation");
+  gSystem->Load("libG4cuts");
   gSystem->Load("libG4decay");  
+     
   gSystem->Load("libG4emutils");  
   gSystem->Load("libG4emstandard");   
   gSystem->Load("libG4emlowenergy");  
   gSystem->Load("libG4muons");
   gSystem->Load("libG4xrays");
+  gSystem->Load("libG4optical");
+
   gSystem->Load("libG4hadronic_xsect");
+  gSystem->Load("libG4hadronic_stop");
+  gSystem->Load("libG4hadronic_util");
   gSystem->Load("libG4hadronic_mgt");   
   gSystem->Load("libG4hadronic_proc");
-  gSystem->Load("libG4hadronic_util");
-  gSystem->Load("libG4hadronic_man_gen");   
-  gSystem->Load("libG4hadronic_util_gen");
-  gSystem->Load("libG4hadronic_string_common");
-  gSystem->Load("libG4hadronic_diffstring");  
-  gSystem->Load("libG4hadronic_stringfrag");
-  gSystem->Load("libG4hadronic_HE_gen");  
+  gSystem->Load("libG4had_mod_man.so");
+  gSystem->Load("libG4had_im_r_matrix.so");
+  gSystem->Load("libG4had_string_man.so");
+  gSystem->Load("libG4had_string_diff.so");
+  gSystem->Load("libG4had_string_frag.so");
+  gSystem->Load("libG4had_mod_util.so");
   gSystem->Load("libG4hadronic_qgstring");
   gSystem->Load("libG4hadronic_HE");  
   gSystem->Load("libG4hadronic_LE");  
-  gSystem->Load("libG4hadronic_deex");
-  gSystem->Load("libG4hadronic_preequ");  
-  gSystem->Load("libG4hadronic_kinetic");   
-  gSystem->Load("libG4hadronic_stop");
-  gSystem->Load("libG4hadronic_neu");   
-  gSystem->Load("libG4hadronic_iso");   
-  gSystem->Load("libG4optical");
-  gSystem->Load("libG4photolepton_hadron");
-  gSystem->Load("libG4transportation");
+  gSystem->Load("libG4hadronic_deex_util"); 
+  gSystem->Load("libG4hadronic_bert_cascade.so");
+  gSystem->Load("libG4had_muon_nuclear.so");
+  gSystem->Load("libG4had_neu_hp.so");
+  gSystem->Load("libG4had_preequ_exciton.so");
+  gSystem->Load("libG4had_theo_max.so");
+  gSystem->Load("libG4hadronic_binary.so"); 
+  gSystem->Load("libG4hadronic_body_ci.so");
+  gSystem->Load("libG4hadronic_coherent_elastic.so"); 
+  gSystem->Load("libG4hadronic_deex_management.so");
+  gSystem->Load("libG4hadronic_deex_gem_evaporation.so");
+  gSystem->Load("libG4hadronic_deex_evaporation.so");
+  gSystem->Load("libG4hadronic_deex_fermi_breakup.so");
+  gSystem->Load("libG4hadronic_deex_fission.so");
+  gSystem->Load("libG4hadronic_deex_handler.so");
+  gSystem->Load("libG4hadronic_deex_multifragmentation.so");
+  gSystem->Load("libG4hadronic_deex_photon_evaporation.so");
+  gSystem->Load("libG4hadronic_hetcpp_evaporation.so");
+  gSystem->Load("libG4hadronic_hetcpp_utils.so");
+  gSystem->Load("libG4hadronic_interface_ci.so");
+  gSystem->Load("libG4hadronic_iso.so");
+  gSystem->Load("libG4hadronic_leading_particle.so");
+  gSystem->Load("libG4hadronic_radioactivedecay.so");
 
   // tracking
   gSystem->Load("libG4tracking");
 
-  // digits+hits  
+  // digits_hits  
   gSystem->Load("libG4hits");
   gSystem->Load("libG4digits");   
   gSystem->Load("libG4detector");   
+
+  // parameterisation
+  gSystem->Load("libG4parmodels");
 
   // event
   gSystem->Load("libG4event");  
@@ -219,7 +246,7 @@ void g4libs_global()
   gSystem->Load("libG4track");
   gSystem->Load("libG4processes");
   gSystem->Load("libG4tracking");
-  gSystem->Load("libG4digits+hits");
+  gSystem->Load("libG4digits_hits");
   gSystem->Load("libG4event");
   gSystem->Load("libG4readout");
   gSystem->Load("libG4run");
