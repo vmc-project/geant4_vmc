@@ -1,8 +1,24 @@
-$Id: history,v 1.8 2003/10/10 15:46:41 brun Exp $
+$Id: history,v 1.9 2003/12/18 13:29:06 brun Exp $
 -----------------------------------------------------------------
      
 Tags (history):
 ===============
+  26/04/2004
+  v1-3:
+    Convertors:
+    g4toxml:
+      Design updated to support two XML format: AGDD and GDML (new);
+      the command for XML file generation changed to 
+        /xml/generateAGDD [volName]
+        /xml/generateGDML [volName] 
+
+    roottog4:
+       Bug fixes in sphere (rmax); polycone and polyhedra solids
+       (do not modify original parameters of TGeo shapes).
+    
+    Tested with Geant4 6.1, Root 3.10/02 and Root 4.00/03.
+
+    
   18/12/2003:
   v1-2:
     Geant4_vmc:
