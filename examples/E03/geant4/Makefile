@@ -1,0 +1,168 @@
+# $Id: Makefile,v 1.7 2002/11/13 13:36:41 brun Exp $
+
+############################### geant4_vmc Makefile ###########################
+
+PACKAGE   = geant4e03
+
+ifeq ($(PLATFORM),)
+PLATFORM = $(shell root-config --arch)
+endif
+
+TOPDIR  = $(shell pwd)/../../..
+BINDIR  = $(TOPDIR)/tmp/tgt_$(PLATFORM)/$(PACKAGE)
+LIBDIR  = $(TOPDIR)/lib/tgt_$(PLATFORM)
+
+ifeq ($(ROOTSYS),)
+ROOT_INCDIR = $(shell root-config --incdir)
+ROOT_BINDIR = $(shell root-config --prefix)/bin
+else
+ROOT_INCDIR = $(ROOTSYS)/include
+ROOT_BINDIR = $(ROOTSYS)/bin
+endif
+
+include $(TOPDIR)/config/Makefile.$(PLATFORM)
+
+############################### Sources #######################################
+
+# Rules
+#
+include $(TOPDIR)/config/MakeRules
+
+# Dictionary
+#
+GDICT    := $(BINDIR)/$(PACKAGE)Cint.cxx
+GDICTH   := $(GDICT:.cxx=.h)
+GDICTO   := $(patsubst %.cxx,$(BINDIR)/%.o,$(GDICT))
+
+# Sources
+#
+CXXSRC	:= $(wildcard src/*.cxx) 
+SRCS	:= $(CXXSRC)
+
+# C++ Headers processed by CINT
+#
+HDRS	:= include/Ex03RunConfiguration.h \
+	   include/$(PACKAGE)LinkDef.h
+
+# Objects
+#
+CXXOBJ	:= $(patsubst %.cxx,$(BINDIR)/%.o,$(CXXSRC))
+OBJS	:= $(CXXOBJ) $(GDICTO)
+
+# Make include list
+#
+ifndef G4INCLUDE
+  G4INCLUDE := $(G4INSTALL)/include
+endif  
+
+INCDIR  := -Iinclude -I$(G4INCLUDE) \
+	   -I$(CLHEP_BASE_DIR)/include \
+	   -I$(G4INSTALL)/physics_lists/hadronic/LHEP_BERT/include \
+	   -I$(G4INSTALL)/physics_lists/hadronic/Packaging/include \
+	   -I$(TOPDIR)/include
+
+# C++ compilation flags
+#
+CXXFLAGS := $(CXXOPTS) $(G4MCDEFS) -I. $(INCDIR) -I$(ROOT_INCDIR) 
+
+# Debug option 
+#
+ifdef G4DEBUG
+  CXXFLAGS += -DMCDEBUG
+endif
+
+######################## Supported Geant4 VIS, UI #############################
+#
+# Supported Geant4 VIS, UI setting: 
+# OPENGLX, OPENGLXM, XM, TCSH
+#
+ifndef G4VIS_NONE
+  CPPFLAGS += -DG4VIS_USE
+ifdef G4VIS_USE_OPENGLX
+  G4VIS_USE_OPENGL = 1
+  CPPFLAGS += -DG4VIS_USE_OPENGLX
+  INC_X11   = 1
+endif
+ifdef G4VIS_USE_OPENGLXM
+  G4VIS_USE_OPENGL = 1
+  CPPFLAGS += -DG4VIS_USE_OPENGLXM
+  INC_XM    = 1
+endif
+ifdef G4VIS_USE_OPENGL
+  CPPFLAGS += -DG4VIS_USE_OPENGL
+  CPPFLAGS += -I$(G4INSTALL)/source/visualization/OpenGL/include
+  INC_GL    = 1
+endif
+  CPPFLAGS += -I$(G4INSTALL)/source/visualization/management/include
+  CPPFLAGS += -I$(G4INSTALL)/source/visualization/modeling/include
+endif #G4VIS_NONE
+
+ifndef G4UI_NONE
+  CPPFLAGS += -I$(G4INSTALL)/source/interfaces/basic/include
+  CPPFLAGS += -I$(G4INSTALL)/source/interfaces/common/include
+  CPPFLAGS += -I$(G4INSTALL)/source/interfaces/GAG/include
+  CPPFLAGS += -DG4UI_USE_TERMINAL
+ifdef G4UI_USE_TCSH
+  G4UI_USE  = 1
+  CPPFLAGS += -DG4UI_USE_TCSH
+endif
+endif #G4UI_NONE
+
+ifdef INC_GL
+  CPPFLAGS += $(OGLFLAGS)
+endif
+ifdef INC_XM
+  INC_X11   = 1
+  CPPFLAGS += $(XMFLAGS)
+endif
+ifdef INC_X11
+  CPPFLAGS += $(X11FLAGS)
+endif
+
+
+######################## Full Geant4 VIS, UI ##################################
+#
+# Full Geant4 UI, VIS, interactivity setting.
+# It enables to use all Geant4 graphics drivers and UIs,  
+# however not all these options were tested with Geant4 VMC
+# and even though a correct behaviour is expected,
+# it is not guaranteed. 
+# 
+#include $(G4INSTALL)/config/G4UI_USE.gmk
+#include $(G4INSTALL)/config/G4VIS_USE.gmk
+#include $(G4INSTALL)/config/interactivity.gmk
+
+CXXFLAGS += $(CPPFLAGS)
+
+DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCDIR)
+
+############################### Targets #######################################
+
+
+SLIBRARY	= $(LIBDIR)/lib$(PACKAGE).$(SL)
+ALIBRARY	= $(LIBDIR)/lib$(PACKAGE).a
+
+default:	depend $(SLIBRARY)
+all:		default includes
+
+
+$(LIBDIR)/lib$(PACKAGE).$(SL):  $(OBJS)
+$(LIBDIR)/lib$(PACKAGE).a:      $(OBJS)
+
+DICT:=	 	$(GDICT)
+
+$(DICT): 	$(HDRS)
+
+depend:		$(SRCS)
+
+TOCLEAN		= $(BINDIR) $(TOPDIR)/include
+TOCLEANALL	= $(BINDIR) $(TOPDIR)/include $(LIBDIR)
+
+MAKEDIST	= ../config/makedist.sh lib
+MAKEDISTSRC	= ../config/makedist.sh
+
+include $(TOPDIR)/config/MakeMacros
+
+############################### Dependencies ##################################
+
+-include $(BINDIR)/Make-depend

@@ -1,0 +1,20 @@
+# $Id: g4vis.in,v 1.1 2003/03/17 14:56:50 brun Exp $
+#
+# Geant4 configuration macro for Example06 
+# (settings after initialization)
+
+# Print material properties
+#
+/mcDet/printMaterials
+
+# Physics list setting
+# 
+/process/inactivate phot
+/process/inactivate conv
+/process/inactivate compt
+/process/inactivate Scintillation
+
+# Limit max number of Cerenkov photons per step
+# (Needed as Cerenkov process does not limit step itself)
+#
+/mcPhysics/setCerenkovMaxPhotons 5

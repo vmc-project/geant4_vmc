@@ -1,0 +1,44 @@
+$Id: $
+-----------------------------------------------------------------
+
+Example06
+=========
+  Geant4 ExampleN06 adapted to Virtual Monte Carlo.
+
+  Demonstrates:
+    Physics - Cherenkov and optical photon processes
+
+  See also description of in 
+    geant4/examples/novice/N06/README
+
+Macros:
+=======
+
+  For running example with G3:
+  
+  run_g3.C        - macro for running example 
+  g3Config.C      - configuration macro for G3 with native geometry (default)
+  g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry
+
+  For running example with G4:
+  
+  run_g4.C     - macro for running example 
+  g4Config.C   - configuration macro
+  g4config.in  - Geant4 configuration macro (called from g4Config.C)
+  g4config2.in - Geant4 configuration macro for setting after initializatio
+
+  Common macros (can be calleded by run_g3.C/run_g4.C):
+  
+  optPhoton.C  - test macro for polarized optical photon
+
+To run example 
+===============
+  
+  With G3:
+  root[0] .x run_g3.C      
+  
+  With G3 + TGeo:
+  root[0] .x run_g3.C("g3tgeoConfig.C");      
+  
+  With G4:
+  root[0] .x run_g4.C  

@@ -1,0 +1,16 @@
+# $Id: g4vis.in,v 1.1 2003/03/17 14:56:50 brun Exp $
+#
+# Geant4 macro for setting visualization for Example06
+
+/mcTree/setVolume TANK
+/mcTree/setVolColour Magenta
+/mcTree/setVolume BUBL
+/mcTree/setVolColour Yellow
+
+/vis/scene/create
+/vis/open OGLIX
+#/vis/open DAWNFILE
+/vis/viewer/flush
+/tracking/storeTrajectory 1
+/mcEvent/drawTracks ALL
+#/vis/scene/endOfEventAction accumulate
