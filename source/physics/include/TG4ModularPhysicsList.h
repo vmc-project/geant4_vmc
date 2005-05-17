@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.h,v 1.4 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4ModularPhysicsList.h,v 1.5 2005/03/29 10:39:53 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4ModularPhysicsList
@@ -20,6 +20,8 @@
 
 #include <G4VModularPhysicsList.hh>
 #include <globals.hh>
+
+class TG4PhysicsConstructorOptical;
 
 class TG4ModularPhysicsList: public G4VModularPhysicsList,
                              public TG4Verbose
@@ -48,6 +50,7 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
     void SetSpecialCutsPhysics(G4bool value);
     void SetSpecialControlsPhysics(G4bool value);
     void SetStepLimiterPhysics(G4bool value);
+    void SetMaxNumPhotonsPerStep(G4int maxNumPhotons);
     
   protected:
     TG4ModularPhysicsList(const TG4ModularPhysicsList& right);
@@ -59,7 +62,8 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
     static const G4double  fgkDefaultCutValue; //default cut value
 
     // data members
-    TG4PhysicsListMessenger  fMessenger; //messenger
+    TG4PhysicsListMessenger        fMessenger; //messenger
+    TG4PhysicsConstructorOptical*  fPhysicsConstructorOptical;
     G4bool  fSetEMPhysics;          //electromagnetic physics control
     G4bool  fSetMuonPhysics;        //muon physics control
     G4bool  fSetHadronPhysics;      //hadron physics control

@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.h,v 1.6 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4DetConstruction.h,v 1.7 2005/02/02 14:16:21 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4DetConstruction
@@ -40,7 +40,6 @@ class TG4DetConstruction : public G4VUserDetectorConstruction,
 
     // methods
     virtual G4VPhysicalVolume* Construct();
-    virtual void PrintMaterials() const;
 
     // set methods
     void SetFieldType(TG4MagneticFieldType fieldType);

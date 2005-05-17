@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorOptical.h,v 1.2 2003/12/18 13:27:46 brun Exp $
+// $Id: TG4PhysicsConstructorOptical.h,v 1.3 2004/11/10 11:39:28 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorOptical
@@ -29,6 +29,9 @@ class TG4PhysicsConstructorOptical: public TG4VPhysicsConstructor
                                  const G4String& name = "Optical");
     virtual ~TG4PhysicsConstructorOptical();
 
+    // set emthods
+    void SetMaxNumPhotonsPerStep(G4int maxNofPhotons);
+
   protected:
     // methods
           // construct particle and physics
@@ -36,11 +39,16 @@ class TG4PhysicsConstructorOptical: public TG4VPhysicsConstructor
     virtual void ConstructProcess();
 
   private:
+    static  const G4int  fgkDefaultMaxNumPhotonsPerStep;
+          
+  
     G4Cerenkov*          fCerenkovProcess;           // Cerenkov 
     G4Scintillation*     fScintillationProcess;      // scintillation
     G4OpAbsorption*      fAbsorptionProcess;         // absorption
     G4OpRayleigh*        fRayleighScatteringProcess; // Rayleigh
     G4OpBoundaryProcess* fBoundaryProcess;           // boundary process
+    G4int                fMaxNumPhotonsPerStep;      // max number of Cerenkov
+                                                     // photons per step
 };
 
 #endif //TG4_PHYSICS_CONSTRUCTOR_OPTICAL_H

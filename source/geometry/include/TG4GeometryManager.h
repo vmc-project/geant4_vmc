@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.h,v 1.5 2005/02/02 14:16:21 brun Exp $
+// $Id: TG4GeometryManager.h,v 1.6 2005/02/08 11:18:31 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryManager
@@ -15,10 +15,12 @@
 #include "TG4NameMap.h"
 #include "TG4IntMap.h"
 #include "TG4Globals.h"
+#include "TG4OpSurfaceMap.h"
 
 #include <globals.hh>
 
 #include <Rtypes.h>
+#include <TMCOptical.h>
 
 
 class TG4GeometryOutputManager;
@@ -27,6 +29,7 @@ class TG4G3CutVector;
 class TG4G3ControlVector;
 
 class G4VPhysicalVolume;
+class G4OpticalSurface;
 
 class TG4GeometryManager : public TG4Verbose
 {
@@ -84,6 +87,30 @@ class TG4GeometryManager : public TG4Verbose
     void  SetCerenkov(Int_t itmed, Int_t npckov, Double_t *ppckov,
 			 Double_t *absco, Double_t *effic, Double_t *rindex); 
 
+    // functions for definition of surfaces
+    // and material properties for optical physics
+    virtual void  DefineOpSurface(const char *name,
+                         TMCOpSurfaceModel model,
+			 TMCOpSurfaceType surfaceType,
+			 TMCOpSurfaceFinish surfaceFinish,
+			 Double_t sigmaAlpha);
+    virtual void  SetBorderSurface(const char *name,
+                         const char* vol1Name, int vol1CopyNo,
+                         const char* vol2Name, int vol2CopyNo,
+			 const char* opSurfaceName);
+    virtual void  SetSkinSurface(const char *name,
+                         const char* volName,
+			 const char* opSurfaceName);
+    virtual void  SetMaterialProperty(
+                         Int_t itmed, const char* propertyName, 
+			 Int_t np, Double_t* pp, Double_t* values);
+    virtual void  SetMaterialProperty(
+                         Int_t itmed, const char* propertyName,
+			 Double_t value);
+    virtual void  SetMaterialProperty(
+                         const char* surfaceName, const char* propertyName, 
+			 Int_t np, Double_t* pp, Double_t* values);
+    
     // functions from GGEOM 
     Int_t Gsvolu(const char *name, const char *shape, Int_t nmed,  
                          Double_t *upar, Int_t np); 
@@ -114,7 +141,7 @@ class TG4GeometryManager : public TG4Verbose
     void WriteEuclid(const char* fileName, const char* topVolName, 
                          Int_t number, Int_t nlevel); //new
 		               
-    // set geometry from Root (built via TGeo)
+     // set geometry from Root (built via TGeo)
     void SetRootGeometry();                   
     
     // end of methods
@@ -162,6 +189,7 @@ class TG4GeometryManager : public TG4Verbose
     TG4GeometryServices*        fGeometryServices;//geometry services
     TG4IntMap        fMediumMap;       //map of volumes names to medias IDs
     TG4NameMap       fNameMap;         //map of volumes names to modules names
+    TG4OpSurfaceMap  fOpSurfaceMap;    //map of optical surfaces names to their objects 
     TG4StringVector  fMaterialNameVector; // vector of material names sorted in the
                                           // the order of materials in G3Mat
     TG4StringVector  fMediumNameVector;   // vector of material names sorted in the

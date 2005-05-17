@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsListMessenger.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsListMessenger.h,v 1.3 2005/01/05 08:04:58 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsListMessenger
@@ -21,6 +21,7 @@ class G4UIcmdWithoutParameter;
 class G4UIcmdWithABool;
 class G4UIcmdWithADouble;
 class G4UIcmdWithAString;
+class G4UIcmdWithAnInteger;
 
 class TG4PhysicsListMessenger: public G4UImessenger
 {
@@ -55,7 +56,8 @@ class TG4PhysicsListMessenger: public G4UImessenger
     G4UIcmdWithABool*  fSetStepLimiterCmd;    //setStepLimiter command 
     G4UIcmdWithADouble*       fRangeCutCmd;   //rangeCut command  
     G4UIcmdWithoutParameter*  fProcessActivationCmd; //.
-                                              //setProcessActivation command    
-};
+                                              //setProcessActivation command
+    G4UIcmdWithAnInteger*     fSetCerenkovMaxPhotonsCmd; 					          
+};                                            //setCerenkovMaxPhotons command
 
 #endif //TG4_PHYSICS_LIST_MESSENGER_H

@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorEM.cxx,v 1.2 2003/12/18 13:27:46 brun Exp $
+// $Id: TG4PhysicsConstructorEM.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsConstructorEM
@@ -77,7 +77,7 @@ void TG4PhysicsConstructorEM::ConstructProcessForElectron()
   G4ProcessManager* pManager = G4Electron::Electron()->GetProcessManager();
   pManager->AddProcess(&fElectronMultipleScattering, -1, 1, 1);
   pManager->AddProcess(&fElectronIonisation,         -1, 2, 2);
-  pManager->AddProcess(&fElectronBremsStrahlung,     -1, 3, 3);  
+  pManager->AddProcess(&fElectronBremsStrahlung,     -1,-1, 3);  
 
   // map to G3 controls
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
@@ -101,7 +101,7 @@ void TG4PhysicsConstructorEM::ConstructProcessForPositron()
   G4ProcessManager * pManager = G4Positron::Positron()->GetProcessManager();
   pManager->AddProcess(&fPositronMultipleScattering, -1, 1, 1);
   pManager->AddProcess(&fPositronIonisation,         -1, 2, 2);
-  pManager->AddProcess(&fPositronBremsStrahlung,     -1, 3, 3);  
+  pManager->AddProcess(&fPositronBremsStrahlung,     -1,-1, 3);  
   pManager->AddProcess(&fAnnihilation,                0,-1, 4);  
 
   // map to G3 controls

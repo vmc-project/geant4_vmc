@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.11 2005/01/05 08:04:58 brun Exp $
+// $Id: TGeant4.h,v 1.12 2005/02/08 11:18:31 brun Exp $
 /// \ingroup run
 //
 /// \class TGeant4
@@ -12,6 +12,7 @@
 
 #include <TVirtualMC.h>
 #include <TMCProcess.h>
+#include <TMCOptical.h>
 #include <TArrayI.h>
 
 class TG4VRunConfiguration;
@@ -82,6 +83,31 @@ class TGeant4: public TVirtualMC
                      Float_t *absco, Float_t *effic, Float_t *rindex);
     virtual void  SetCerenkov(Int_t itmed, Int_t npckov, Double_t *ppckov,
                      Double_t *absco, Double_t *effic, Double_t *rindex);
+
+    // new (more general functions) for definition of surfaces
+    // and material properties for optical physics
+    virtual void  DefineOpSurface(const char *name,
+                         TMCOpSurfaceModel model,
+			 TMCOpSurfaceType surfaceType,
+			 TMCOpSurfaceFinish surfaceFinish,
+			 Double_t sigmaAlpha);
+    virtual void  SetBorderSurface(const char *name,
+                         const char* vol1Name, int vol1CopyNo,
+                         const char* vol2Name, int vol2CopyNo,
+			 const char* opSurfaceName);
+    virtual void  SetSkinSurface(const char *name,
+                         const char* volName,
+			 const char* opSurfaceName);
+    virtual void  SetMaterialProperty(
+                         Int_t itmed, const char* propertyName, 
+			 Int_t np, Double_t* pp, Double_t* values);
+    virtual void  SetMaterialProperty(
+                         Int_t itmed, const char* propertyName,
+			 Double_t value);
+    virtual void  SetMaterialProperty(
+                         const char* surfaceName, const char* propertyName, 
+			 Int_t np, Double_t* pp, Double_t* values);
+    
 
     // functions from GGEOM 
     virtual Int_t Gsvolu(const char *name, const char *shape, Int_t nmed,  

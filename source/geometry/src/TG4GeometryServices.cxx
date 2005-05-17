@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.8 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.9 2005/03/29 10:39:53 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryServices
@@ -17,6 +17,8 @@
 
 #include <G4LogicalVolumeStore.hh>
 #include <G4LogicalVolume.hh>
+#include <G4PhysicalVolumeStore.hh>
+#include <G4VPhysicalVolume.hh>
 #include <G4Material.hh>
 #include <G4Element.hh>
 #include <G4UserLimits.hh>
@@ -32,11 +34,14 @@ const G4double       TG4GeometryServices::fgkAZTolerance = 0.001;
 const G4double       TG4GeometryServices::fgkDensityTolerance = 0.005; 
 
 //_____________________________________________________________________________
-TG4GeometryServices::TG4GeometryServices(TG4IntMap* mediumMap, 
-                                         TG4NameMap* nameMap) 
+TG4GeometryServices::TG4GeometryServices(
+                        TG4IntMap* mediumMap, 
+                        TG4NameMap* nameMap,
+			TG4OpSurfaceMap* opSurfaceMap ) 
   : TG4Verbose("geometryServices"),
     fMediumMap(mediumMap),
     fNameMap(nameMap),
+    fOpSurfaceMap(opSurfaceMap),
     fWorld(0),
     fSeparator(gSeparator)				 
 {
@@ -208,6 +213,24 @@ G4double* TG4GeometryServices::CreateG4doubleArray(Float_t* array,
 }
 
 //_____________________________________________________________________________
+G4double* TG4GeometryServices::CreateG4doubleArray(Double_t* array, 
+               G4int size) const
+{
+/// Copy Double_t* array to G4double*.                                    \n
+/// !! The new array has to be deleted by user.
+
+  G4double* doubleArray;
+  if (size>0) {
+    doubleArray = new G4double[size]; 
+    for (G4int i=0; i<size; i++) doubleArray[i] = array[i];
+  }
+  else {
+    doubleArray = 0; 
+  }  
+  return doubleArray;
+}
+
+//_____________________________________________________________________________
 G4String TG4GeometryServices::CutName(const char* name) const
 {
 /// Remove spaces after the name if present.
@@ -256,6 +279,66 @@ G4String  TG4GeometryServices::GenerateLimitsName(G4int id,
   name = name + "__med_" + medName + "__mat_" + matName;
   
   return name;
+}
+
+//_____________________________________________________________________________
+G4OpticalSurfaceModel  
+TG4GeometryServices::SurfaceModel(TMCOpSurfaceModel model) const
+{
+/// Convert VMC enum to G4 enum
+
+  switch (model) {
+    case kGlisur:  return glisur;
+    case kUnified: return unified;
+    default:
+      G4String text;
+      text = "TG4GeometryServices::SurfaceModel: \n";
+      text = text + " Unknown optical surface model.";
+      TG4Globals::Warning(text);
+      return glisur;
+  }  
+}
+
+//_____________________________________________________________________________
+G4SurfaceType   
+TG4GeometryServices::SurfaceType(TMCOpSurfaceType surfType) const
+{
+/// Convert VMC enum to G4 enum
+
+  switch (surfType) {
+    case kDielectric_metal:      return dielectric_metal;     
+    case kDielectric_dielectric: return dielectric_dielectric;
+    case kFirsov:                return firsov;               
+    case kXray:                  return x_ray;
+    default:
+      G4String text;
+      text = "TG4GeometryServices::SurfaceType: \n";
+      text = text + " Unknown optical surface type.";
+      TG4Globals::Warning(text);
+      return dielectric_metal;
+  }  
+}
+
+//_____________________________________________________________________________
+G4OpticalSurfaceFinish 
+TG4GeometryServices::SurfaceFinish(TMCOpSurfaceFinish finish) const
+{
+/// Convert VMC enum to G4 enum
+
+  switch (finish) {
+    case kPolished:             return polished;           
+    case kPolishedfrontpainted: return polishedfrontpainted;
+    case kPolishedbackpainted:  return polishedbackpainted; 
+    case kGround:               return ground;              
+    case kGroundfrontpainted:   return groundfrontpainted;  
+    case kGroundbackpainted:    return groundbackpainted;       
+    default:
+      G4String text;
+      text = "TG4GeometryServices::SurfaceFinish: \n";
+      text = text + " Unknown optical surface finish.";
+      TG4Globals::Warning(text);
+      return polished;
+  }  
 }
 
 //_____________________________________________________________________________
@@ -413,6 +496,41 @@ void TG4GeometryServices::PrintElementTable() const
 }
 
 //_____________________________________________________________________________
+void TG4GeometryServices::PrintMaterials() const
+{
+/// Print all material, material properties tables
+
+  // Dump materials
+  const G4MaterialTable* matTable = G4Material::GetMaterialTable();
+  G4cout << *matTable;
+
+  // Dump material properties tables
+  // associated with materials
+  for (G4int i=0; i<G4int(matTable->size()); i++) {
+    if ( (*matTable)[i] &&
+         (*matTable)[i]->GetMaterialPropertiesTable() ) {
+	 
+      G4cout << (*matTable)[i]->GetName() 
+             << " material properties table: " << G4endl;
+      (*matTable)[i]->GetMaterialPropertiesTable()->DumpTable();
+    }  
+  }  
+
+  // Dump material properties tables
+  // associated with optical surfaces
+  TG4OpSurfaceMap::const_iterator it;
+  for ( it=fOpSurfaceMap->begin(); it!=fOpSurfaceMap->end(); it++) {
+    if ( it->second &&
+         it->second->GetMaterialPropertiesTable() ) {
+	 
+      G4cout << it->first 
+             << " optical surface material properties table: " << G4endl;
+      it->second->GetMaterialPropertiesTable()->DumpTable();
+    }  
+  }  
+}
+
+//_____________________________________________________________________________
 void TG4GeometryServices::SetSeparator(char separator) 
 { 
 /// Set the volumes name separator that will be
@@ -536,6 +654,33 @@ TG4GeometryServices::FindLogicalVolume(const G4String& name, G4bool silent) cons
   if (!silent) {
     G4String text = "TG4GeometryServices:: FindLogicalVolume:\n"; 
     text = text + "    Logical volume " + name + " does not exist.";
+    TG4Globals::Warning(text);
+  }
+  return 0;	       	         
+}  
+
+//_____________________________________________________________________________
+G4VPhysicalVolume* 
+TG4GeometryServices::FindPhysicalVolume(const G4String& name, G4int copyNo,
+                                        G4bool silent) const
+{
+/// Find a logical volume with the specified name in G4LogicalVolumeStore.
+
+  G4PhysicalVolumeStore* pvStore = G4PhysicalVolumeStore::GetInstance();
+  
+  for (G4int i=0; i<G4int(pvStore->size()); i++) {
+    G4VPhysicalVolume* pv = (*pvStore)[i];
+    G4cout << i << "th volume " 
+           << G4ToG3VolumeName(pv->GetName()) << "  " 
+           << pv->GetCopyNo() 
+	   << G4endl;
+    if ( G4ToG3VolumeName(pv->GetName()) == name &&
+         pv->GetCopyNo() == copyNo ) return pv;
+  }
+  
+  if (!silent) {
+    G4String text = "TG4GeometryServices:: FindPhysicalVolume:\n"; 
+    text = text + "    Physical volume " + name + " does not exist.";
     TG4Globals::Warning(text);
   }
   return 0;	       	         

@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryConvertor.cxx,v 1.6 2004/06/18 13:50:38 brun Exp $
+// $Id: TG4RootGeometryConvertor.cxx,v 1.7 2004/07/09 16:55:48 brun Exp $
 //
 // Author: I. Hrivnacova, 8.1.2003 
 //
@@ -248,6 +248,7 @@ void TG4RootGeometryConvertor::CreatePlacements(const TGeoVolume* mother,
   for (G4int i=0; i<mother->GetNdaughters(); i++) {
     const TGeoNode* node = mother->GetNode(i);
     const TGeoVolume* daughter = node->GetVolume();
+    G4int copyNo =  node->GetNumber();   
       
     VolumesMapIterator itd = fVolumesMap.find(daughter);
     G4LogicalVolume* dLV = (*itd).second;
@@ -295,7 +296,7 @@ void TG4RootGeometryConvertor::CreatePlacements(const TGeoVolume* mother,
   
     // Place this node
     G4ReflectionFactory::Instance()
-      ->Place(transform3D, G4String(daughter->GetName()), dLV, mLV, false, i);
+      ->Place(transform3D, G4String(daughter->GetName()), dLV, mLV, false, copyNo);
   }    	
 }
 

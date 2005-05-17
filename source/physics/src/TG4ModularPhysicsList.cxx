@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.cxx,v 1.4 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4ModularPhysicsList.cxx,v 1.5 2005/03/29 10:39:53 brun Exp $
 // Category: physics
 //
 // Class TG4ModularPhysicsList
@@ -39,6 +39,7 @@ TG4ModularPhysicsList::TG4ModularPhysicsList()
   : G4VModularPhysicsList(),
     TG4Verbose("physicsList"),
     fMessenger(this),
+    fPhysicsConstructorOptical(0),
     fSetEMPhysics(true),
     fSetMuonPhysics(true),
     fSetHadronPhysics(false),
@@ -239,26 +240,6 @@ void TG4ModularPhysicsList::SetSpecialCutsActivation()
 }
 
 //
-// protected methods
-//
-
-//_____________________________________________________________________________
-void TG4ModularPhysicsList::ConstructProcess()
-{
-/// Construct all processes.
-
-  // lock physics manager
-  TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
-  g3PhysicsManager->Lock();  
-
-  // create processes for registered physics
-  G4VModularPhysicsList::ConstructProcess();
-
-  // verbose
-  if (verboseLevel>1) DumpAllProcesses();
-}
-
-//
 // public methods
 //
 
@@ -290,8 +271,11 @@ void TG4ModularPhysicsList::Configure()
   }  
 
   // optical physics
-  if (fSetOpticalPhysics) 
-    RegisterPhysics(new TG4PhysicsConstructorOptical(verboseLevel));
+  if (fSetOpticalPhysics) {
+    fPhysicsConstructorOptical 
+      = new TG4PhysicsConstructorOptical(verboseLevel);
+    RegisterPhysics(fPhysicsConstructorOptical);
+  }  
 
   // special processes
   if (fSetSpecialCutsPhysics) 
@@ -314,6 +298,22 @@ void TG4ModularPhysicsList::Configure()
          // all created physics constructors are deleted
 	 // in the base class destructor
 }    
+
+//_____________________________________________________________________________
+void TG4ModularPhysicsList::ConstructProcess()
+{
+/// Construct all processes.
+
+  // lock physics manager
+  TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
+  g3PhysicsManager->Lock();  
+
+  // create processes for registered physics
+  G4VModularPhysicsList::ConstructProcess();
+
+  // verbose
+  if (verboseLevel>1) DumpAllProcesses();
+}
 
 //_____________________________________________________________________________
 void TG4ModularPhysicsList::SetCuts()
@@ -363,37 +363,6 @@ void TG4ModularPhysicsList::VerboseLevel(G4int level)
 
 
 //_____________________________________________________________________________
-void TG4ModularPhysicsList::SetRangeCut(G4double value)
-{
-/// Reset the default cut to a given value.                                 \n
-/// !!! Should be used only in PreInit phase,
-/// use SetDefaultCutValue() method of base class to reset
-/// the cut value in later phases.
-
-  defaultCutValue = value;
-}  
-
-//_____________________________________________________________________________
-void TG4ModularPhysicsList::SetProcessActivation()
-{
-/// (In)Activate built processes according
-/// to the setup in TG4G3PhysicsManager
-
-  if ( fSetSpecialControlsPhysics &&
-      (TG4G3PhysicsManager::Instance()->IsGlobalSpecialControls() ||
-       TG4G3PhysicsManager::Instance()->IsSpecialControls()) ) {
-       
-    SetSpecialControlsActivation();
-  }  
-       
-  if ( fSetSpecialCutsPhysics &&
-       TG4G3PhysicsManager::Instance()->IsSpecialCuts() ) {
-  
-    SetSpecialCutsActivation();
-  }  
-}
-
-//_____________________________________________________________________________
 void TG4ModularPhysicsList::PrintAllProcesses() const
 {
 /// Print all processes.
@@ -435,3 +404,48 @@ void TG4ModularPhysicsList::DumpAllProcesses() const
     G4cout << G4endl;  
   }  
 }
+//_____________________________________________________________________________
+void TG4ModularPhysicsList::SetRangeCut(G4double value)
+{
+/// Reset the default cut to a given value.                                 \n
+/// !!! Should be used only in PreInit phase,
+/// use SetDefaultCutValue() method of base class to reset
+/// the cut value in later phases.
+
+  defaultCutValue = value;
+}  
+
+//_____________________________________________________________________________
+void TG4ModularPhysicsList::SetProcessActivation()
+{
+/// (In)Activate built processes according
+/// to the setup in TG4G3PhysicsManager
+
+  if ( fSetSpecialControlsPhysics &&
+      (TG4G3PhysicsManager::Instance()->IsGlobalSpecialControls() ||
+       TG4G3PhysicsManager::Instance()->IsSpecialControls()) ) {
+       
+    SetSpecialControlsActivation();
+  }  
+       
+  if ( fSetSpecialCutsPhysics &&
+       TG4G3PhysicsManager::Instance()->IsSpecialCuts() ) {
+  
+    SetSpecialCutsActivation();
+  }  
+}
+
+//_____________________________________________________________________________
+void TG4ModularPhysicsList::SetMaxNumPhotonsPerStep(G4int maxNumPhotons)
+{
+/// Limit step to the specified maximum number of Cherenkov photons
+
+  if ( !fPhysicsConstructorOptical ) {
+    G4String text = "TG4ModularPhysicsList::SetMaxNumPhotonsPerStep: \n";
+    text = text + "    Optical physics is not activated.";
+    TG4Globals::Exception(text);
+  }  
+  
+  fPhysicsConstructorOptical->SetMaxNumPhotonsPerStep(maxNumPhotons); 
+}    
+

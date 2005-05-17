@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.h,v 1.5 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4GeometryServices.h,v 1.6 2005/03/29 10:39:53 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryServices
@@ -13,10 +13,14 @@
 
 #include "TG4Verbose.h"
 #include "TG4Globals.h"
+#include "TG4OpSurfaceMap.h"
 
 #include <globals.hh>
+#include <G4OpticalSurface.hh>
+#include <G4SurfaceProperty.hh>
 
 #include <Rtypes.h>
+#include <TMCOptical.h>
 
 class TG4IntMap;
 class TG4NameMap;
@@ -28,11 +32,14 @@ class G4Material;
 class G4LogicalVolume;
 class G4VPhysicalVolume;
 class G4UserLimits;
+class G4OpticalSurface;
 
 class TG4GeometryServices : public TG4Verbose
 {
   public:
-    TG4GeometryServices(TG4IntMap* mediumMap, TG4NameMap* nameMap);
+    TG4GeometryServices(TG4IntMap* mediumMap, 
+                        TG4NameMap* nameMap,
+			TG4OpSurfaceMap* opSurfaceMap);
     // --> protected
     // TG4GeometryServices();
     // TG4GeometryServices(const TG4GeometryServices& right);
@@ -44,11 +51,15 @@ class TG4GeometryServices : public TG4Verbose
     // methods
            // utilities  
     G4double* CreateG4doubleArray(Float_t* array, G4int size) const;
+    G4double* CreateG4doubleArray(Double_t* array, G4int size) const;
     G4String  CutName(const char* name) const;
     G4String  CutMaterialName(const char* name) const;
     G4String  G4ToG3VolumeName(const G4String& name) const;
     G4String  GenerateLimitsName(G4int id, const G4String& medName,
                                            const G4String& matName) const;
+    G4OpticalSurfaceModel  SurfaceModel(TMCOpSurfaceModel model) const; 					   
+    G4SurfaceType          SurfaceType(TMCOpSurfaceType surfType) const;
+    G4OpticalSurfaceFinish SurfaceFinish(TMCOpSurfaceFinish finish) const; 					   
 
     G4Material* MixMaterials(G4String name, G4double density,
                              const TG4StringVector& matNames, 
@@ -60,6 +71,7 @@ class TG4GeometryServices : public TG4Verbose
     void PrintStatistics(G4bool open, G4bool close) const;
     void PrintLogicalVolumeStore() const;
     void PrintElementTable() const;
+    void PrintMaterials() const;
 
     // set methods
     void SetWorld(G4VPhysicalVolume* world);
@@ -79,9 +91,11 @@ class TG4GeometryServices : public TG4Verbose
                          const TG4G3ControlVector& controls) const;
     const G4String& GetMapSecond(const G4String& name);
 
-    G4LogicalVolume* FindLogicalVolume(const G4String& name, 
+    G4LogicalVolume*   FindLogicalVolume(const G4String& name, 
                                        G4bool silent = false) const;
-    TG4Limits*       FindLimits(const G4String& name, 
+    G4VPhysicalVolume* FindPhysicalVolume(const G4String& name, G4int copyNo,
+                                       G4bool silent = false) const;
+    TG4Limits*         FindLimits(const G4String& name, 
                                        G4bool silent = false) const;
 
           // materials
@@ -115,6 +129,7 @@ class TG4GeometryServices : public TG4Verbose
     // data members
     TG4IntMap*         fMediumMap; //map of volumes names to medias IDs
     TG4NameMap*        fNameMap;   //map of volumes names to modules names
+    TG4OpSurfaceMap*   fOpSurfaceMap;//map of optical surfaces names to their objects 
     G4VPhysicalVolume* fWorld;     //top physical volume (world)
     char               fSeparator; //the volumes name separator (different
                                    //in g3tog4 and roottog4)

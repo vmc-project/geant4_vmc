@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorOptical.cxx,v 1.2 2003/12/18 13:27:46 brun Exp $
+// $Id: TG4PhysicsConstructorOptical.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsConstructorOptical
@@ -20,6 +20,8 @@
 #include <G4OpRayleigh.hh>
 #include <G4OpBoundaryProcess.hh>
 
+const G4int  TG4PhysicsConstructorOptical::fgkDefaultMaxNumPhotonsPerStep = 300;
+
 //_____________________________________________________________________________
 TG4PhysicsConstructorOptical::TG4PhysicsConstructorOptical(const G4String& name)
   : TG4VPhysicsConstructor(name),
@@ -27,7 +29,8 @@ TG4PhysicsConstructorOptical::TG4PhysicsConstructorOptical(const G4String& name)
     fScintillationProcess(0),
     fAbsorptionProcess(0),
     fRayleighScatteringProcess(0),
-    fBoundaryProcess(0) 
+    fBoundaryProcess(0),
+    fMaxNumPhotonsPerStep(fgkDefaultMaxNumPhotonsPerStep) 
 {
 //
 }
@@ -40,7 +43,8 @@ TG4PhysicsConstructorOptical::TG4PhysicsConstructorOptical(G4int verboseLevel,
     fScintillationProcess(0),
     fAbsorptionProcess(0),
     fRayleighScatteringProcess(0),
-    fBoundaryProcess(0) 
+    fBoundaryProcess(0), 
+    fMaxNumPhotonsPerStep(fgkDefaultMaxNumPhotonsPerStep) 
 {
 //
 }
@@ -81,20 +85,21 @@ void TG4PhysicsConstructorOptical::ConstructProcess()
   //fRayleighScatteringProcess->DumpPhysicsTable();
 
   // add verbose 
-  fCerenkovProcess->SetVerboseLevel(0);
-  fAbsorptionProcess->SetVerboseLevel(0);
-  fRayleighScatteringProcess->SetVerboseLevel(0);
-  fBoundaryProcess->SetVerboseLevel(0);
+  fCerenkovProcess->SetVerboseLevel(VerboseLevel());
+  fScintillationProcess->SetVerboseLevel(VerboseLevel());
+  fAbsorptionProcess->SetVerboseLevel(VerboseLevel());
+  fRayleighScatteringProcess->SetVerboseLevel(VerboseLevel());
+  fBoundaryProcess->SetVerboseLevel(VerboseLevel());
 
+  fCerenkovProcess->SetMaxNumPhotonsPerStep(fMaxNumPhotonsPerStep);
   fCerenkovProcess->SetTrackSecondariesFirst(true);
-  fCerenkovProcess->SetMaxNumPhotonsPerStep(300);
 
   fScintillationProcess->SetScintillationYieldFactor(1.);
   fScintillationProcess->SetTrackSecondariesFirst(true);
 
-  //G4OpticalSurfaceModel themodel = unified;   
+  G4OpticalSurfaceModel themodel = unified;   
   // model from GEANT3
-  G4OpticalSurfaceModel themodel = glisur;
+  // G4OpticalSurfaceModel themodel = glisur;
   fBoundaryProcess->SetModel(themodel);
 
   theParticleIterator->reset();
@@ -140,3 +145,13 @@ void TG4PhysicsConstructorOptical::ConstructProcess()
   }  
 }
 
+//_____________________________________________________________________________
+void TG4PhysicsConstructorOptical::SetMaxNumPhotonsPerStep(G4int maxNumPhotons)
+{
+/// Limit step to the specified maximum number of Cherenkov photons
+
+  fMaxNumPhotonsPerStep = maxNumPhotons;
+
+  if ( fCerenkovProcess ) 
+    fCerenkovProcess->SetMaxNumPhotonsPerStep(maxNumPhotons);
+}

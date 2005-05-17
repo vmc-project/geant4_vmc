@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.11 2005/02/08 11:18:31 brun Exp $
+// $Id: TGeant4.cxx,v 1.12 2005/04/01 20:59:27 brun Exp $
 // Category: run
 //
 // Class TGeant4
@@ -402,6 +402,71 @@ void TGeant4::SetCerenkov(Int_t itmed, Int_t npckov, Double_t *ppckov,
   fGeometryManager->SetCerenkov(itmed, npckov, ppckov, absco, effic, rindex);
 }  
 		     		  
+//_____________________________________________________________________________
+void  TGeant4::DefineOpSurface(const char *name,
+                         TMCOpSurfaceModel model,
+			 TMCOpSurfaceType surfaceType,
+			 TMCOpSurfaceFinish surfaceFinish,
+			 Double_t sigmaAlpha)
+{			 
+/// Define the optical surface
+
+  fGeometryManager->DefineOpSurface(
+                         name, model, surfaceType, surfaceFinish, sigmaAlpha);
+}			 
+			 
+//_____________________________________________________________________________
+void  TGeant4::SetBorderSurface(const char *name,
+                         const char* vol1Name, int vol1CopyNo,
+                         const char* vol2Name, int vol2CopyNo,
+			 const char* opSurfaceName)
+{			 
+/// Define the optical border surface
+
+  fGeometryManager->SetBorderSurface(name, 
+			 vol1Name, vol1CopyNo, vol2Name, vol2CopyNo, opSurfaceName);
+}			 
+			 
+//_____________________________________________________________________________
+void  TGeant4::SetSkinSurface(const char *name,
+                         const char* volName,
+			 const char* opSurfaceName)
+{			 
+/// Define the optical skin surface
+
+  fGeometryManager->SetSkinSurface(name, volName, opSurfaceName);
+}			 
+			 
+//_____________________________________________________________________________
+void  TGeant4::SetMaterialProperty(
+                         Int_t itmed, const char* propertyName, 
+			 Int_t np, Double_t* pp, Double_t* values)
+{			 
+/// Set the material property specified by propertyName to the tracking medium
+
+  fGeometryManager->SetMaterialProperty(itmed, propertyName, np, pp, values); 
+}			 
+			 
+//_____________________________________________________________________________
+void  TGeant4::SetMaterialProperty(
+                         Int_t itmed, const char* propertyName, 
+			 Double_t value)
+{			 
+/// Set the material property specified by propertyName to the tracking medium
+
+  fGeometryManager->SetMaterialProperty(itmed, propertyName, value); 
+}			 
+			 
+//_____________________________________________________________________________
+void  TGeant4::SetMaterialProperty(
+                         const char* surfaceName, const char* propertyName, 
+			 Int_t np, Double_t* pp, Double_t* values)
+{			 
+/// Set the material property specified by propertyName to the optical surface
+
+  fGeometryManager->SetMaterialProperty(surfaceName, propertyName, np, pp, values); 
+}			 
+    
 //_____________________________________________________________________________
 void TGeant4::WriteEuclid(const char* fileName, const char* topVol, 
                           Int_t number, Int_t nlevel) 

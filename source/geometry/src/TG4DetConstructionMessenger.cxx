@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.cxx,v 1.7 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4DetConstructionMessenger.cxx,v 1.8 2005/02/02 14:16:21 brun Exp $
 // Category: geometry
 //
 // Class TG4DetConstructionMessenger
@@ -168,7 +168,7 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
                          fSetWriteGeometryCmd->GetNewBoolValue(newValues));
   }    
   else if (command == fPrintMaterialsCmd) {
-    fDetConstruction->PrintMaterials();
+    TG4GeometryServices::Instance()->PrintMaterials();
   }    
 #ifdef USE_VGM
   else if (command == fUseVGMCmd) {

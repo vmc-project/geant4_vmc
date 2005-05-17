@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.10 2005/02/02 14:16:21 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.11 2005/02/08 11:18:31 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -35,6 +35,9 @@
 #include <G4PVPlacement.hh>
 #include <G4Material.hh>
 #include <G4MaterialPropertiesTable.hh>
+#include "G4LogicalBorderSurface.hh"
+#include "G4LogicalSkinSurface.hh"
+#include "G4OpticalSurface.hh"
 #include <G4Element.hh> 
 #include <G4ReflectionFactory.hh>
 
@@ -69,7 +72,7 @@ TG4GeometryManager::TG4GeometryManager()
     = new TG4GeometryOutputManager();
 
   fGeometryServices 
-    = new TG4GeometryServices(&fMediumMap, &fNameMap);
+    = new TG4GeometryServices(&fMediumMap, &fNameMap, &fOpSurfaceMap);
 
   fgInstance = this;
       
@@ -531,20 +534,14 @@ void  TG4GeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
 ///     - RINDEX      Refraction index (if=0 metal)
 
   // add units
+  // add units
+  G4double* ppckov2  = fGeometryServices->CreateG4doubleArray(ppckov, npckov); 
+  G4double* absco2  = fGeometryServices->CreateG4doubleArray(absco, npckov); 
   G4int i;
   for (i=0; i<npckov; i++) {
-    ppckov[i] = ppckov[i]*TG4G3Units::Energy();
-    absco[i]  = absco[i]*TG4G3Units::Length();
+    ppckov2[i] *= TG4G3Units::Energy();
+    absco2[i]  *= TG4G3Units::Length();
   }  
-
-  // create material properties table
-  G4MaterialPropertiesTable* table = new G4MaterialPropertiesTable(); 
-  table->AddProperty("ABSLENGTH", ppckov, absco, npckov);
-                    // used in G4OpAbsorption process
-  table->AddProperty("EFFICIENCY", ppckov, effic, npckov);
-                    // used in G4OpBoundary process
-  table->AddProperty("RINDEX", ppckov, rindex, npckov);
-                    // used in G4Cerenkov, G4OpRayleigh, G4OpBoundary
 
   // get material of medium from table
   G3MedTableEntry* medium = G3Med.get(itmed);
@@ -555,18 +552,263 @@ void  TG4GeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
   }  
   G4Material* material = medium->GetMaterial();
   
-  // set material properties table 
-  material->SetMaterialPropertiesTable(table);
+  // get materials properties table or create it if it does not yet
+  // exist
+  G4MaterialPropertiesTable* table
+    = material->GetMaterialPropertiesTable();
+  if (!table) {
+    table = new G4MaterialPropertiesTable(); 
+    material->SetMaterialPropertiesTable(table);
+  }  
+
+  // add material properties into the table 
+  table->AddProperty("ABSLENGTH", ppckov2, absco2, npckov);
+                    // used in G4OpAbsorption process
+  table->AddProperty("EFFICIENCY", ppckov2, effic, npckov);
+                    // used in G4OpBoundary process
+  table->AddProperty("RINDEX", ppckov2, rindex, npckov);
+                    // used in G4Cerenkov, G4OpRayleigh, G4OpBoundary
+
+  delete [] ppckov2;	   
+  delete [] absco2;	   
 
   // verbose
   if (VerboseLevel() > 0) {
     G4cout << "The tables for UV photon tracking set for "
            << material->GetName() << G4endl;
   }	   
-  for (i=0; i<npckov; i++)
-    G4cout << ppckov[i] << " " << rindex[i] << G4endl;
 }			 
 
+
+//_____________________________________________________________________________
+void TG4GeometryManager::DefineOpSurface(const char *name,
+                               TMCOpSurfaceModel model,
+			       TMCOpSurfaceType surfaceType,
+			       TMCOpSurfaceFinish surfaceFinish,
+			       Double_t sigmaAlpha)
+{
+/// Define the optical surface
+
+  G4OpticalSurface* surface = new G4OpticalSurface(name);
+  surface->SetModel(fGeometryServices->SurfaceModel(model));
+  surface->SetType(fGeometryServices->SurfaceType(surfaceType));
+  surface->SetFinish(fGeometryServices->SurfaceFinish(surfaceFinish));
+  surface->SetSigmaAlpha(sigmaAlpha);
+  
+  // Store the surface in the map
+  fOpSurfaceMap[name] = surface;
+}			       
+			       
+//_____________________________________________________________________________
+void TG4GeometryManager::SetBorderSurface(const char *name,
+                               const char* vol1Name, int vol1CopyNo,
+                               const char* vol2Name, int vol2CopyNo,
+			       const char* opSurfaceName)
+{
+/// Define the optical border surface
+
+  // Get physical volumes
+  G4VPhysicalVolume* pv1
+    = fGeometryServices->FindPhysicalVolume( vol1Name, vol1CopyNo, false); 
+  G4VPhysicalVolume* pv2
+    = fGeometryServices->FindPhysicalVolume( vol2Name, vol2CopyNo, false); 
+
+  if (!pv1 || !pv2) {
+    G4String text = "TG4GeometryManager::SetBorderSurface: \n";
+    text = text + "    Cannot find physical volume: ";
+    if (!pv1) text = text + G4String(vol1Name) + G4String(" ");
+    text = text + "    Cannot find physical volume: ";
+    if (!pv2) text = text + G4String(vol2Name);
+    TG4Globals::Exception(text);
+    return;
+  }  
+  
+  // Get the optical surface
+  TG4OpSurfaceMap::iterator it = fOpSurfaceMap.find(opSurfaceName);
+  if (it == fOpSurfaceMap.end()) {
+    G4String text = "TG4GeometryManager::SetBorderSurface: \n";
+    text = text + "    Cannot find optical surfaace: ";
+    text = text + G4String(opSurfaceName);
+    TG4Globals::Exception(text);
+    return;
+  }  
+  G4OpticalSurface* surface = (*it).second;
+  
+  // Create the border surface
+  new G4LogicalBorderSurface(name, pv1, pv2, surface);
+}
+			       
+//_____________________________________________________________________________
+void TG4GeometryManager::SetSkinSurface(const char *name,
+                         const char* volName,
+			 const char* opSurfaceName)
+{
+/// Define the optical skin surface
+
+  // Get logical volume
+  G4LogicalVolume* lv
+    = fGeometryServices->FindLogicalVolume(volName, false); 
+
+  if (!lv ) {
+    G4String text = "TG4GeometryManager::SetSkinSurface: \n";
+    text = text + "    Cannot find logical volume: ";
+    text = text + G4String(volName);
+    TG4Globals::Exception(text);
+    return;
+  }  
+  
+  // Get the optical surface
+  TG4OpSurfaceMap::iterator it = fOpSurfaceMap.find(opSurfaceName);
+  if (it == fOpSurfaceMap.end()) {
+    G4String text = "TG4GeometryManager::SetBorderSurface: \n";
+    text = text + "    Cannot find optical surfaace: ";
+    text = text + G4String(opSurfaceName);
+    TG4Globals::Exception(text);
+    return;
+  }  
+  G4OpticalSurface* surface = (*it).second;
+ 
+  // Create the skin surface
+  new G4LogicalSkinSurface(name, lv, surface);
+}
+			 
+//_____________________________________________________________________________
+void TG4GeometryManager::SetMaterialProperty(
+                            Int_t itmed, const char* propertyName, 
+			    Int_t np, Double_t* pp, Double_t* values)
+{
+/// Set the material property specified by propertyName to the tracking medium
+
+  // create material properties table
+  // get material of medium from table
+  G3MedTableEntry* medium = G3Med.get(itmed);
+  if (!medium) {
+    G4String text = "TG4GeometryManager::SetMaterialProperty: \n";
+    text = text + "    Medium not found."; 
+    TG4Globals::Exception(text);
+  }  
+  G4Material* material = medium->GetMaterial();
+  
+  // get materials properties table or create it if it does not yet
+  // exist
+  G4MaterialPropertiesTable* table
+    = material->GetMaterialPropertiesTable();
+  if (!table) {
+    table = new G4MaterialPropertiesTable(); 
+    material->SetMaterialPropertiesTable(table);
+  }  
+
+  // add units
+  G4double* pp2  = fGeometryServices->CreateG4doubleArray(pp, np); 
+  G4double* val2 = fGeometryServices->CreateG4doubleArray(values, np); 
+  G4int i;
+  for (i=0; i<np; i++) {
+    pp2[i] = pp2[i]*TG4G3Units::Energy();
+    val2[i]  = values[i];
+    if (G4String(propertyName) == "ABSLENGTH") 
+      val2[i]  = val2[i]*TG4G3Units::Length();
+  }  
+  table->AddProperty(propertyName, pp2, val2, np);
+
+  delete [] pp2;	   
+  delete [] val2;	   
+
+  // verbose
+  if (VerboseLevel() > 0) {
+    G4cout << "The material properties " << propertyName << " set for "
+           << material->GetName() << G4endl;
+  }  
+}
+			 
+//_____________________________________________________________________________
+void TG4GeometryManager::SetMaterialProperty(
+                            Int_t itmed, const char* propertyName, 
+			    Double_t value)
+{
+/// Set the material property specified by propertyName to the tracking medium
+
+  // create material properties table
+  // get material of medium from table
+  G3MedTableEntry* medium = G3Med.get(itmed);
+  if (!medium) {
+    G4String text = "TG4GeometryManager::SetMaterialProperty: \n";
+    text = text + "    Medium not found."; 
+    TG4Globals::Exception(text);
+  }  
+  G4Material* material = medium->GetMaterial();
+  
+  // get materials properties table or create it if it does not yet
+  // exist
+  G4MaterialPropertiesTable* table
+    = material->GetMaterialPropertiesTable();
+  if (!table) {
+    table = new G4MaterialPropertiesTable(); 
+    material->SetMaterialPropertiesTable(table);
+  }  
+
+  // add units
+  if ( G4String(propertyName) == "SCINTILLATIONYIELD") {
+       value  = value/TG4G3Units::Energy();
+  }  
+  if ( G4String(propertyName) == "FASTTIMECONSTANT" || 
+       G4String(propertyName) == "SLOWTIMECONSTANT" ) { 
+       value  = value*TG4G3Units::Time();
+  }  
+  table->AddConstProperty(propertyName, value);
+
+  // verbose
+  if (VerboseLevel() > 0) {
+    G4cout << "The material property " << propertyName << " set for "
+           << material->GetName() << G4endl;
+  }	   
+}
+			 
+//_____________________________________________________________________________
+void TG4GeometryManager::SetMaterialProperty(
+                            const char* surfaceName, const char* propertyName, 
+			    Int_t np, Double_t* pp, Double_t* values)
+{
+/// Set the material property specified by propertyName to the optical surface
+
+  // create material properties table
+  // get optical surface from the map
+  // Get the optical surface
+  TG4OpSurfaceMap::iterator it = fOpSurfaceMap.find(surfaceName);
+  if (it == fOpSurfaceMap.end()) {
+    G4String text = "TG4GeometryManager::SetMaterialProperty: \n";
+    text = text + "    Cannot find optical surfaace: ";
+    text = text + G4String(surfaceName);
+    TG4Globals::Exception(text);
+    return;
+  }  
+  G4OpticalSurface* surface = (*it).second;
+ 
+  // get materials properties table or create it if it does not yet
+  // exist
+  G4MaterialPropertiesTable* table
+    = surface->GetMaterialPropertiesTable();
+  if (!table) {
+    table = new G4MaterialPropertiesTable(); 
+    surface->SetMaterialPropertiesTable(table);
+  }  
+
+  // add units
+  G4double* pp2  = fGeometryServices->CreateG4doubleArray(pp, np); 
+  G4int i;
+  for (i=0; i<np; i++) {
+    pp2[i] = pp2[i]*TG4G3Units::Energy();
+  }  
+  table->AddProperty(propertyName, pp2, values, np);
+ 
+  delete [] pp2;  
+
+  // verbose
+  if (VerboseLevel() > 0) {
+    G4cout << "The material properties " << propertyName 
+           << " set for optical surface "
+           << surface->GetName() << G4endl;
+  }	   
+}			     
  
 //_____________________________________________________________________________
 void  TG4GeometryManager::Gsdvn(const char *name, const char *mother, 
@@ -719,7 +961,7 @@ void  TG4GeometryManager::Gspos(const char *vname, Int_t num,
    if (fWriteGeometry) 
      fOutputManager->WriteGspos(vname, num, vmoth, x, y, z, irot, vonly);
 
-   G4gspos(fGeometryServices->CutName(vname), num,
+   G4gspos(fGeometryServices->CutName(vname), ++num,
            fGeometryServices->CutName(vmoth), x, y, z, irot, vonly);
 
    // register name in name map
@@ -741,7 +983,7 @@ void  TG4GeometryManager::Gsposp(const char *name, Int_t nr,
    if (fWriteGeometry) 
      fOutputManager->WriteGsposp(name, nr, mother, x, y, z, irot, konly, upar, np);
 
-   G4gsposp(fGeometryServices->CutName(name), nr, 
+   G4gsposp(fGeometryServices->CutName(name), ++nr, 
             fGeometryServices->CutName(mother), x, y, z, irot, konly, 
              upar, np);
 
@@ -874,7 +1116,7 @@ void TG4GeometryManager::SetRootGeometry()
 					     
   rootGeometryManager.VerboseLevel(VerboseLevel());			      
   			      
- #ifdef USE_VGM
+#ifdef USE_VGM
   rootGeometryManager.SetUseVGM(fUseVGM);
 #endif
 
@@ -882,7 +1124,7 @@ void TG4GeometryManager::SetRootGeometry()
   
   fVMCGeometry = false;
 }                   
- 
+
 //
 // public methods - Geant4 only
 //

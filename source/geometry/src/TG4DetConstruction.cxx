@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.cxx,v 1.7 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4DetConstruction.cxx,v 1.8 2005/02/02 14:16:21 brun Exp $
 // Category: geometry
 //
 // Class TG4DetConstruction
@@ -165,16 +165,10 @@ G4VPhysicalVolume* TG4DetConstruction::Construct()
     pGeometryManager->ClearG3Tables();
   }  
 
+  // VMC application construct geometry for optical processes
+  TVirtualMCApplication::Instance()->ConstructOpGeometry();   
+
   return TG4GeometryServices::Instance()->GetWorld();      
-}
-
-//_____________________________________________________________________________
-void TG4DetConstruction::PrintMaterials() const
-{
-/// Print all materials.
-
-  const G4MaterialTable* matTable = G4Material::GetMaterialTable();
-  G4cout << *matTable;
 }
 
 //_____________________________________________________________________________

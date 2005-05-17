@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsListMessenger.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsListMessenger.cxx,v 1.3 2005/01/05 08:04:58 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsListMessenger
@@ -14,6 +14,7 @@
 #include <G4UIdirectory.hh>
 #include <G4UIcmdWithABool.hh>
 #include <G4UIcmdWithADouble.hh>
+#include <G4UIcmdWithAnInteger.hh>
 
 //______________________________________________________________________________
 TG4PhysicsListMessenger::TG4PhysicsListMessenger(
@@ -71,6 +72,13 @@ TG4PhysicsListMessenger::TG4PhysicsListMessenger(
      = new G4UIcmdWithADouble("/mcPhysics/rangeCut", this);
   fRangeCutCmd->SetGuidance("Sets the global cut in range (in mm)");
   fRangeCutCmd->AvailableForStates(G4State_PreInit);
+  
+  fSetCerenkovMaxPhotonsCmd 
+    = new G4UIcmdWithAnInteger("/mcPhysics/setCerenkovMaxPhotons",this);  
+  fSetCerenkovMaxPhotonsCmd->SetGuidance("Sets maximum number of photons per step");
+  fSetCerenkovMaxPhotonsCmd->SetParameterName("CerenkovMaxPhotons",false);
+  fSetCerenkovMaxPhotonsCmd->SetRange("CerenkovMaxPhotons>=0");
+  fSetCerenkovMaxPhotonsCmd->AvailableForStates(G4State_PreInit,G4State_Idle);  
 }
 
 //______________________________________________________________________________
@@ -97,6 +105,7 @@ TG4PhysicsListMessenger::~TG4PhysicsListMessenger() {
   delete fSetSpecialControlsCmd;
   delete fSetStepLimiterCmd;
   delete fRangeCutCmd;
+  delete fSetCerenkovMaxPhotonsCmd;
 }
 
 //
@@ -158,5 +167,10 @@ void TG4PhysicsListMessenger::SetNewValue(G4UIcommand* command,
   else if (command == fRangeCutCmd) {
     fPhysicsList
         ->SetRangeCut(fRangeCutCmd->GetNewDoubleValue(newValue));
+  }  
+  else if (command == fSetCerenkovMaxPhotonsCmd) {
+    fPhysicsList
+        ->SetMaxNumPhotonsPerStep(
+	     fSetCerenkovMaxPhotonsCmd->GetNewIntValue(newValue));
   }  
 }
