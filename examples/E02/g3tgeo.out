@@ -2,7 +2,7 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   4.02/00    4 January 2005   *
+  *   Version   4.04/02       16 May 2005   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
@@ -12,7 +12,7 @@
 FreeType Engine v2.1.3 used to render TrueType fonts.
 Compiled for linux with thread support.
 
-CINT/ROOT C/C++ Interpreter version 5.15.159, Nov 14 2004
+CINT/ROOT C/C++ Interpreter version 5.15.169, Mar 14 2005
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -28,11 +28,11 @@ Processing run_g3.C("g3tgeoConfig.C")...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   279726767    10AC4AAF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   279556855    10A9B2F7 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   279749317   279726767
-                                        HEX    10ACA2C5    10AC4AAF
+          with Store/Table at absolute adrs   279579405   279556855
+                                        HEX    10AA0B0D    10A9B2F7
                                         HEX        5662           0
                               relative adrs       22114           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -49,6 +49,7 @@ Loading Geant3 libraries ... finished
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+LoadAddress
 Geant3 has been created.
 Geometry Geometry, default geometry created
 Target is 5 cm of lead 
@@ -68,15 +69,15 @@ Building caches for nodes and matrices...
  Calculating cross section tables, see gphysi.dat for more information
 
  Cross section calculation concluded successfully
- **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =          0           0
+ **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =      65539           0
 
 -------->Hits Collection: in this event they are 9 hits in the tracker chambers: 
   trackID: 0  chamberNb: 0  energy deposit (keV): 96.4959  position (cm): (0.129251, 19.2887, -140.076)
   trackID: 0  chamberNb: 0  energy deposit (keV): 0.178953  position (cm): (0.129344, 19.3084, -140)
   trackID: 0  chamberNb: 1  energy deposit (keV): 104.712  position (cm): (0.228858, 45.6726, -60.1284)
-  trackID: 0  chamberNb: 1  energy deposit (keV): 9.60813  position (cm): (0.228983, 45.7249, -59.9998)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 9.60851  position (cm): (0.228983, 45.7249, -59.9998)
   trackID: 0  chamberNb: 2  energy deposit (keV): 124.883  position (cm): (0.311901, 85.0079, 19.8017)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 0.748194  position (cm): (0.312016, 85.1239, 20.0003)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 0.748194  position (cm): (0.312016, 85.1238, 20.0003)
   trackID: 0  chamberNb: 3  energy deposit (keV): 171.811  position (cm): (0.36573, 140.387, 99.6954)
   trackID: 0  chamberNb: 3  energy deposit (keV): 0.601323  position (cm): (0.365916, 140.636, 100)
   trackID: 0  chamberNb: 4  energy deposit (keV): 1.03088  position (cm): (0.402585, 196.8, 160.207)
@@ -88,11 +89,11 @@ TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.0
 Primary    
 Number of daughters: 0
 
- **** GTRIGI: IEVENT=      2 IDEVT=      2 Random Seeds =          0           0
+ **** GTRIGI: IEVENT=      2 IDEVT=      2 Random Seeds = 1167773427           0
 
 -------->Hits Collection: in this event they are 13 hits in the tracker chambers: 
   trackID: 0  chamberNb: 0  energy deposit (keV): 110.08  position (cm): (3.59251, 18.1746, -140.072)
-  trackID: 0  chamberNb: 0  energy deposit (keV): 0.094054  position (cm): (3.59517, 18.1924, -140)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.094054  position (cm): (3.59518, 18.1924, -140)
   trackID: 0  chamberNb: 1  energy deposit (keV): 107.118  position (cm): (6.59428, 43.5746, -60.1237)
   trackID: 0  chamberNb: 1  energy deposit (keV): 0.230266  position (cm): (6.59906, 43.6234, -59.9998)
   trackID: 0  chamberNb: 2  energy deposit (keV): 122.893  position (cm): (9.76998, 81.7682, 19.8083)
@@ -112,17 +113,17 @@ TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.0
 Primary    
 Number of daughters: 0
 
- **** GTRIGI: IEVENT=      3 IDEVT=      3 Random Seeds =          0           0
+ **** GTRIGI: IEVENT=      3 IDEVT=      3 Random Seeds = 1459487811           0
 
 -------->Hits Collection: in this event they are 8 hits in the tracker chambers: 
   trackID: 0  chamberNb: 0  energy deposit (keV): 91.1458  position (cm): (0.396123, 19.4497, -140.077)
-  trackID: 0  chamberNb: 0  energy deposit (keV): 0.832622  position (cm): (0.396475, 19.4697, -140)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.832624  position (cm): (0.396475, 19.4697, -140)
   trackID: 0  chamberNb: 1  energy deposit (keV): 126.093  position (cm): (0.766659, 46.0215, -60.1295)
   trackID: 0  chamberNb: 1  energy deposit (keV): 0.511105  position (cm): (0.767325, 46.0746, -59.9998)
   trackID: 0  chamberNb: 2  energy deposit (keV): 124.982  position (cm): (1.19745, 85.5675, 19.8004)
   trackID: 0  chamberNb: 2  energy deposit (keV): 0.304161  position (cm): (1.19809, 85.6848, 20.0003)
   trackID: 0  chamberNb: 3  energy deposit (keV): 147.463  position (cm): (1.4621, 141.233, 99.6932)
-  trackID: 0  chamberNb: 3  energy deposit (keV): 1.53741  position (cm): (1.4631, 141.485, 100)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 1.53742  position (cm): (1.4631, 141.485, 100)
 Ex02MCStack Info  
 Total number of particles:   1
 Number of primary particles: 1
@@ -131,12 +132,12 @@ TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.0
 Primary    
 Number of daughters: 0
 
- **** GTRIGI: IEVENT=      4 IDEVT=      4 Random Seeds =          0           0
+ **** GTRIGI: IEVENT=      4 IDEVT=      4 Random Seeds = 2046772635           0
 
 -------->Hits Collection: in this event they are 12 hits in the tracker chambers: 
   trackID: 0  chamberNb: 0  energy deposit (keV): 141.983  position (cm): (-1.41204, 18.2712, -140.073)
   trackID: 0  chamberNb: 0  energy deposit (keV): 0.183161  position (cm): (-1.41309, 18.2892, -140)
-  trackID: 0  chamberNb: 1  energy deposit (keV): 129.078  position (cm): (-2.57684, 43.8037, -60.1246)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 129.078  position (cm): (-2.57684, 43.8038, -60.1246)
   trackID: 0  chamberNb: 1  energy deposit (keV): 0.188381  position (cm): (-2.57864, 43.8531, -59.9998)
   trackID: 0  chamberNb: 2  energy deposit (keV): 112.856  position (cm): (-3.76497, 82.1277, 19.8071)
   trackID: 0  chamberNb: 2  energy deposit (keV): 0.178363  position (cm): (-3.76812, 82.2379, 20.0003)
@@ -145,7 +146,7 @@ Number of daughters: 0
   trackID: 0  chamberNb: 4  energy deposit (keV): 17.4492  position (cm): (-6.34117, 193.937, 162.765)
   trackID: 0  chamberNb: 4  energy deposit (keV): 10.6526  position (cm): (-6.36916, 195.371, 164.129)
   trackID: 0  chamberNb: 4  energy deposit (keV): 7.43606  position (cm): (-6.38299, 196.086, 164.805)
-  trackID: 0  chamberNb: 4  energy deposit (keV): 39.0123  position (cm): (-6.39684, 196.801, 165.48)
+  trackID: 0  chamberNb: 4  energy deposit (keV): 39.0123  position (cm): (-6.39684, 196.801, 165.479)
 Ex02MCStack Info  
 Total number of particles:   1
 Number of primary particles: 1
@@ -154,13 +155,13 @@ TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.0
 Primary    
 Number of daughters: 0
 
- **** GTRIGI: IEVENT=      5 IDEVT=      5 Random Seeds =          0           0
+ **** GTRIGI: IEVENT=      5 IDEVT=      5 Random Seeds = -933353501           0
 
 -------->Hits Collection: in this event they are 10 hits in the tracker chambers: 
   trackID: 0  chamberNb: 0  energy deposit (keV): 106.731  position (cm): (1.50651, 18.9296, -140.075)
   trackID: 0  chamberNb: 0  energy deposit (keV): 0.0715187  position (cm): (1.50767, 18.9488, -140)
   trackID: 0  chamberNb: 1  energy deposit (keV): 109.52  position (cm): (2.75392, 45.1247, -60.128)
-  trackID: 0  chamberNb: 1  energy deposit (keV): 0.0599556  position (cm): (2.75587, 45.1767, -59.9998)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 0.0599556  position (cm): (2.75587, 45.1766, -59.9998)
   trackID: 0  chamberNb: 2  energy deposit (keV): 92.5597  position (cm): (4.01536, 84.3416, 19.8016)
   trackID: 0  chamberNb: 2  energy deposit (keV): 0.171998  position (cm): (4.01864, 84.4574, 20.0003)
   trackID: 0  chamberNb: 3  energy deposit (keV): 256.203  position (cm): (5.40757, 139.655, 99.6948)

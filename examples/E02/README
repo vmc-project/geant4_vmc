@@ -1,4 +1,4 @@
-$Id: README,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+$Id: README,v 1.2 2005/01/05 08:05:30 brun Exp $
 -----------------------------------------------------------------
 
 Example02
@@ -14,7 +14,7 @@ Example02
     Simple primary generator 
       one proton with a fixed position and direction
     Generating hits
-    Drawing geometry (both G3, G4) + trajectories (G4 only)
+    Drawing geometry (G3, G3+TGeo, G4) + trajectories (G3+TGeo and G4)
     Storing hits, particles stack in Root file
 
   See also description of in 

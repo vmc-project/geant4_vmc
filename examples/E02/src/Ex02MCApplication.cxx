@@ -1,4 +1,4 @@
-// $Id: Ex02MCApplication.cxx,v 1.7 2003/09/27 09:32:48 brun Exp $
+// $Id: Ex02MCApplication.cxx,v 1.8 2003/12/18 13:26:46 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -15,6 +15,8 @@
 #include <TInterpreter.h>
 #include <TVirtualMC.h>
 #include <TPDGCode.h>
+#include <TGeoManager.h>
+#include <TVirtualGeoTrack.h>
 
 ClassImp(Ex02MCApplication)
 
@@ -245,10 +247,29 @@ void Ex02MCApplication::FinishEvent()
 // User actions after finishing of an event
 // ---
 
+  // Geant3
+  // (visualization functions interfaced via VMC)
   if (TString(gMC->GetName()) == "TGeant3") {
     // add scale (1.4)
     gMC->Gdraw("WRLD", 90., 180.);
   }  
+ 
+  // Geant3 + TGeo
+  // (use TGeo functions for visualization)
+  if ( TString(gMC->GetName()) == "TGeant3TGeo" && 
+       gGeoManager->GetListOfTracks() &&
+       gGeoManager->GetTrack(0) &&
+       ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
+       
+       gGeoManager->SetVisOption(0);	 
+       gGeoManager->SetTopVisible();
+       gGeoManager->DrawTracks("/*");  // this means all tracks
+          // Drawing G3 tracks via TGeo is available only
+	  // if geant3 is compile with -DCOLLECT_TRACK flag
+	  // (to be activated in geant3/TGeant3/TGeant3gu.cxx)
+  }    
+
+  // Geant4 visualization is activated via G4 macro (g4config.in)
  
   fRootManager.Fill();
 

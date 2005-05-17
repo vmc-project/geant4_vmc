@@ -1,4 +1,4 @@
-# $Id: $
+# $Id: g4config.in,v 1.1 2003/03/17 14:56:50 brun Exp $
 #
 # Geant4 configuration macro for Example03
 # (called from Root macro g4Config.C)
@@ -8,3 +8,5 @@
 /mcVerbose/physicsList 1
 
 /run/particle/applyCuts
+
+#/tracking/verbose 1

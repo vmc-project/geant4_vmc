@@ -1,4 +1,4 @@
-$Id: README,v 1.1 2003/03/17 14:56:50 brun Exp $
+$Id: README,v 1.2 2005/01/05 08:05:30 brun Exp $
 -----------------------------------------------------------------
 
 Example03
@@ -16,11 +16,30 @@ Example03
       defined number of electrons with moving position and fixed direction
     Calorimetry hits
     Storing hits, particles stack in Root file
-    Drawing geometry (both G3, G4) + trajectories (G4 only)
+    Drawing geometry (G3, G3+TGeo, G4) + trajectories (G3+TGeo and G4)
     Verbosity
+    User defined physics list (G4)
 
   See also description of in 
     geant4/examples/novice/N03/README
+
+Compilation:
+============
+  With G4:
+  An extra library with user defined physics list has to be build:
+  
+  cd E03/geant4
+  gmake
+
+  Use of user own defined physics list is demonstrated on
+  the LHEP_BERT hadronics physics list provided in Geant4;
+  to build its libraries:
+
+  cd $G4INSTALL/physics_lists/hadronic/Packaging
+  gmake
+  cd $G4INSTALL/physics_lists/hadronic/LHEP_BERT
+  gmake
+     
 
 Macros:
 =======
@@ -33,10 +52,11 @@ Macros:
 
   For running example with G4:
   
-  run_g4.C    - macro for running example 
-  g4Config.C  - configuration macro
-  g4config.in - Geant4 configuration macro (called from g4Config.C)
-  g4vis.in    - Geant4 macro for visualization settings (called from set_vis.C) 
+  run_g4.C     - macro for running example 
+  g4Config.C   - configuration macro
+  g4Config2.C  - configuration macro with user defined physics list (LHEP_BERT)
+  g4config.in  - Geant4 configuration macro (called from g4Config.C)
+  g4vis.in     - Geant4 macro for visualization settings (called from set_vis.C) 
 
   Common macros (called by run_g3.C/run_g4.C):
   
@@ -60,3 +80,7 @@ To run example
   With G4:
   root[0] .x run_g4.C  
   root[0] .x run_g4.C("test2.C")
+
+  With G4 with user defined physics list:
+  root[0] .x run_g4.C("g4Config2.C"); 
+  root[0] .x run_g4.C("g4Config2.C", "test2.C")

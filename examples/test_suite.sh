@@ -1,5 +1,5 @@
 #!/bin/sh 
-# $Id:  $
+# $Id: test_suite.sh,v 1.1 2005/01/05 10:00:17 brun Exp $
 #
 # Test all VMC examples and regenerate output files
 #
@@ -7,7 +7,7 @@
 
 CURDIR=`pwd`
 
-for EXAMPLE in E01 E02
+for EXAMPLE in E01 E02 E06
 do
   cd $CURDIR/$EXAMPLE
 

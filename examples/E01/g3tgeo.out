@@ -2,7 +2,7 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   4.02/00    4 January 2005   *
+  *   Version   4.04/02       16 May 2005   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
@@ -12,7 +12,7 @@
 FreeType Engine v2.1.3 used to render TrueType fonts.
 Compiled for linux with thread support.
 
-CINT/ROOT C/C++ Interpreter version 5.15.159, Nov 14 2004
+CINT/ROOT C/C++ Interpreter version 5.15.169, Mar 14 2005
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -28,11 +28,11 @@ Processing run_g3.C("g3tgeoConfig.C")...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   279726767    10AC4AAF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   279556855    10A9B2F7 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   279749317   279726767
-                                        HEX    10ACA2C5    10AC4AAF
+          with Store/Table at absolute adrs   279579405   279556855
+                                        HEX    10AA0B0D    10A9B2F7
                                         HEX        5662           0
                               relative adrs       22114           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -49,9 +49,10 @@ Loading Geant3 libraries ... finished
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+LoadAddress
 Geant3 has been created.
-Geometry will be defined via VMC
-Geometry Geometry, default geometry created
+Geometry will be defined via TGeo
+Geometry TGeo, Root geometry manager created
 Top volume is EXPH. Master volume is EXPH
 List of materials :
 Fixing runtime shapes...
@@ -60,13 +61,13 @@ Counting nodes...
 Voxelizing...
 Building caches for nodes and matrices...
 --- node ID tracking disabled
-### 22 nodes/ 4 volume UID's in default geometry
+### 22 nodes/ 4 volume UID's in Root geometry manager
 ----------------modeler ready----------------
 
  Calculating cross section tables, see gphysi.dat for more information
 
  Cross section calculation concluded successfully
- **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =          0           0
+ **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =      65539           0
 
 Starting new track
 Track -200 0 0  in EXPH  ArgonGas

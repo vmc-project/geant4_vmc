@@ -1,4 +1,4 @@
-// $Id: run_g4.C,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+// $Id: run_g4.C,v 1.1 2003/03/17 14:56:50 brun Exp $
 //
 // Macro for running Example03 with Geant4. 
 
@@ -15,8 +15,7 @@ void run_g4(const TString& testMacro = "test1.C")
   // Load this example library
   gSystem->Load("libexample03");
   
-  // test 1
+  // Run test macro
   gROOT->LoadMacro(testMacro);
   test("g4Config.C");
-  //test("g4Config2.C");  // special config for test3
 }  

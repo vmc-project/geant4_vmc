@@ -1,4 +1,4 @@
-// $Id: Ex03MCApplication.cxx,v 1.5 2003/12/18 13:26:46 brun Exp $
+// $Id: Ex03MCApplication.cxx,v 1.6 2004/07/09 16:50:14 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
@@ -15,6 +15,8 @@
 #include <TPDGCode.h>
 #include <TVector3.h>
 #include <Riostream.h>
+#include <TGeoManager.h>
+#include <TVirtualGeoTrack.h>
 
 #include "Ex03MCApplication.h"
 #include "Ex03MCStack.h"
@@ -205,6 +207,16 @@ void Ex03MCApplication::BeginEvent()
 
   fVerbose.BeginEvent();
 
+  // Clear TGeo tracks (if filled)
+  if (   TString(gMC->GetName()) == "TGeant3TGeo" && 
+         gGeoManager->GetListOfTracks() &&
+         gGeoManager->GetTrack(0) &&
+       ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
+       
+       gGeoManager->ClearTracks();	  
+       //if (gPad) gPad->Clear();	  
+  }    
+
   fEventNo++;
   if (fEventNo % fPrintModulo == 0) { 
     cout << "\n---> Begin of event: " << fEventNo << endl;
@@ -268,10 +280,32 @@ void Ex03MCApplication::FinishEvent()
 
   fVerbose.FinishEvent();
 
+  // Geant3
   if (TString(gMC->GetName()) == "TGeant3") {
     // add scale (1.4)
     gMC->Gdraw("WRLD", 30., 30., 0, 10., 10., .75, .75);
   }  
+
+  // Geant3 + TGeo
+  // (use TGeo functions for visualization)
+  if ( TString(gMC->GetName()) == "TGeant3TGeo") {
+  
+     // Draw volume 
+     gGeoManager->SetVisOption(0);	 
+     gGeoManager->SetTopVisible();
+     gGeoManager->GetTopVolume()->Draw();
+
+     // Draw tracks (if filled)
+     if ( gGeoManager->GetListOfTracks() &&
+          gGeoManager->GetTrack(0) &&
+        ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
+       
+       gGeoManager->DrawTracks("/*");  // this means all tracks
+          // Drawing G3 tracks via TGeo is available only
+	  // if geant3 is compile with -DCOLLECT_TRACK flag
+	  // (to be activated in geant3/TGeant3/TGeant3gu.cxx)
+    }	  
+  }    
  
   fRootManager.Fill();
 
