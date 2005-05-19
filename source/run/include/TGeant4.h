@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.12 2005/02/08 11:18:31 brun Exp $
+// $Id: TGeant4.h,v 1.13 2005/05/17 13:43:57 brun Exp $
 /// \ingroup run
 //
 /// \class TGeant4
@@ -87,9 +87,9 @@ class TGeant4: public TVirtualMC
     // new (more general functions) for definition of surfaces
     // and material properties for optical physics
     virtual void  DefineOpSurface(const char *name,
-                         TMCOpSurfaceModel model,
-			 TMCOpSurfaceType surfaceType,
-			 TMCOpSurfaceFinish surfaceFinish,
+                         EMCOpSurfaceModel model,
+			 EMCOpSurfaceType surfaceType,
+			 EMCOpSurfaceFinish surfaceFinish,
 			 Double_t sigmaAlpha);
     virtual void  SetBorderSurface(const char *name,
                          const char* vol1Name, int vol1CopyNo,

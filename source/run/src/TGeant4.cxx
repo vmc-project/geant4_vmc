@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.12 2005/04/01 20:59:27 brun Exp $
+// $Id: TGeant4.cxx,v 1.13 2005/05/17 13:43:57 brun Exp $
 // Category: run
 //
 // Class TGeant4
@@ -404,9 +404,9 @@ void TGeant4::SetCerenkov(Int_t itmed, Int_t npckov, Double_t *ppckov,
 		     		  
 //_____________________________________________________________________________
 void  TGeant4::DefineOpSurface(const char *name,
-                         TMCOpSurfaceModel model,
-			 TMCOpSurfaceType surfaceType,
-			 TMCOpSurfaceFinish surfaceFinish,
+                         EMCOpSurfaceModel model,
+			 EMCOpSurfaceType surfaceType,
+			 EMCOpSurfaceFinish surfaceFinish,
 			 Double_t sigmaAlpha)
 {			 
 /// Define the optical surface

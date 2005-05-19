@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.h,v 1.6 2005/03/29 10:39:53 brun Exp $
+// $Id: TG4GeometryServices.h,v 1.7 2005/05/17 13:43:57 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryServices
@@ -57,9 +57,9 @@ class TG4GeometryServices : public TG4Verbose
     G4String  G4ToG3VolumeName(const G4String& name) const;
     G4String  GenerateLimitsName(G4int id, const G4String& medName,
                                            const G4String& matName) const;
-    G4OpticalSurfaceModel  SurfaceModel(TMCOpSurfaceModel model) const; 					   
-    G4SurfaceType          SurfaceType(TMCOpSurfaceType surfType) const;
-    G4OpticalSurfaceFinish SurfaceFinish(TMCOpSurfaceFinish finish) const; 					   
+    G4OpticalSurfaceModel  SurfaceModel(EMCOpSurfaceModel model) const; 					   
+    G4SurfaceType          SurfaceType(EMCOpSurfaceType surfType) const;
+    G4OpticalSurfaceFinish SurfaceFinish(EMCOpSurfaceFinish finish) const; 					   
 
     G4Material* MixMaterials(G4String name, G4double density,
                              const TG4StringVector& matNames, 

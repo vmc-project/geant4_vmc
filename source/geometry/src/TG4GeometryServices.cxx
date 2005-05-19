@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.9 2005/03/29 10:39:53 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.10 2005/05/17 13:43:57 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryServices
@@ -283,7 +283,7 @@ G4String  TG4GeometryServices::GenerateLimitsName(G4int id,
 
 //_____________________________________________________________________________
 G4OpticalSurfaceModel  
-TG4GeometryServices::SurfaceModel(TMCOpSurfaceModel model) const
+TG4GeometryServices::SurfaceModel(EMCOpSurfaceModel model) const
 {
 /// Convert VMC enum to G4 enum
 
@@ -301,7 +301,7 @@ TG4GeometryServices::SurfaceModel(TMCOpSurfaceModel model) const
 
 //_____________________________________________________________________________
 G4SurfaceType   
-TG4GeometryServices::SurfaceType(TMCOpSurfaceType surfType) const
+TG4GeometryServices::SurfaceType(EMCOpSurfaceType surfType) const
 {
 /// Convert VMC enum to G4 enum
 
@@ -321,7 +321,7 @@ TG4GeometryServices::SurfaceType(TMCOpSurfaceType surfType) const
 
 //_____________________________________________________________________________
 G4OpticalSurfaceFinish 
-TG4GeometryServices::SurfaceFinish(TMCOpSurfaceFinish finish) const
+TG4GeometryServices::SurfaceFinish(EMCOpSurfaceFinish finish) const
 {
 /// Convert VMC enum to G4 enum
 

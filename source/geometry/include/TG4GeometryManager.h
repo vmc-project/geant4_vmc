@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.h,v 1.6 2005/02/08 11:18:31 brun Exp $
+// $Id: TG4GeometryManager.h,v 1.7 2005/05/17 13:43:57 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryManager
@@ -90,9 +90,9 @@ class TG4GeometryManager : public TG4Verbose
     // functions for definition of surfaces
     // and material properties for optical physics
     virtual void  DefineOpSurface(const char *name,
-                         TMCOpSurfaceModel model,
-			 TMCOpSurfaceType surfaceType,
-			 TMCOpSurfaceFinish surfaceFinish,
+                         EMCOpSurfaceModel model,
+			 EMCOpSurfaceType surfaceType,
+			 EMCOpSurfaceFinish surfaceFinish,
 			 Double_t sigmaAlpha);
     virtual void  SetBorderSurface(const char *name,
                          const char* vol1Name, int vol1CopyNo,

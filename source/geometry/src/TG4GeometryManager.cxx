@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.11 2005/02/08 11:18:31 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.12 2005/05/17 13:43:57 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -582,9 +582,9 @@ void  TG4GeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
 
 //_____________________________________________________________________________
 void TG4GeometryManager::DefineOpSurface(const char *name,
-                               TMCOpSurfaceModel model,
-			       TMCOpSurfaceType surfaceType,
-			       TMCOpSurfaceFinish surfaceFinish,
+                               EMCOpSurfaceModel model,
+			       EMCOpSurfaceType surfaceType,
+			       EMCOpSurfaceFinish surfaceFinish,
 			       Double_t sigmaAlpha)
 {
 /// Define the optical surface
