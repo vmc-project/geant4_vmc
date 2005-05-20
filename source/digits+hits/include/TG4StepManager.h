@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.h,v 1.6 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4StepManager.h,v 1.7 2005/01/05 08:04:58 brun Exp $
 /// \ingroup digits_hits
 //
 /// \class TG4StepManager
@@ -128,7 +128,8 @@ class TG4StepManager
     void SetTLorentzVector(G4ThreeVector xyz, G4double t, 
                            TLorentzVector& lv) const;    
     const G4VTouchable* GetCurrentTouchable() const; 
-    G4VPhysicalVolume* GetCurrentOffPhysicalVolume(G4int off) const;
+    G4VPhysicalVolume*  GetCurrentOffPhysicalVolume(
+                           G4int off, G4bool warn = false) const;
 
     // static data members
     static TG4StepManager*  fgInstance;   //this instance

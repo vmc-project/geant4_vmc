@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.12 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.13 2005/03/29 10:39:53 brun Exp $
 // Category: digits+hits
 //
 // Class TG4StepManager
@@ -138,7 +138,7 @@ const G4VTouchable* TG4StepManager::GetCurrentTouchable() const
   if (fStepStatus == kNormalStep) {
 
 #ifdef MCDEBUG
-    CheckStep("GetCurrentOffPhysicalVolume");
+    CheckStep("GetCurrentTouchable");
 #endif    
 
     touchable = fStep->GetPreStepPoint()->GetTouchable();
@@ -146,7 +146,7 @@ const G4VTouchable* TG4StepManager::GetCurrentTouchable() const
   else if (fStepStatus == kBoundary) {
 
 #ifdef MCDEBUG
-    CheckStep("GetCurrentOffPhysicalVolume");
+    CheckStep("GetCurrentTouchable");
 #endif 
 
     touchable = fStep->GetPostStepPoint()->GetTouchable();
@@ -172,7 +172,8 @@ const G4VTouchable* TG4StepManager::GetCurrentTouchable() const
 }  
 
 //_____________________________________________________________________________
-G4VPhysicalVolume* TG4StepManager::GetCurrentOffPhysicalVolume(G4int off) const 
+G4VPhysicalVolume* 
+TG4StepManager::GetCurrentOffPhysicalVolume(G4int off, G4bool warn) const 
 {
 /// Return the physical volume of the off-th mother's
 /// of the current volume.
@@ -184,11 +185,13 @@ G4VPhysicalVolume* TG4StepManager::GetCurrentOffPhysicalVolume(G4int off) const
   // Check touchable depth
   //
   if (touchable->GetHistoryDepth() < off) {
-    G4String text = "TG4StepManager::GetCurrentOffPhysicalVolume: \n";
-    text = text + "    Volume ";
-    text = text + touchable->GetVolume()->GetName();
-    text = text + " has not defined mother in the required level.";
-    TG4Globals::Warning(text);    
+    if (warn) {
+      G4String text = "TG4StepManager::GetCurrentOffPhysicalVolume: \n";
+      text = text + "    Volume ";
+      text = text + touchable->GetVolume()->GetName();
+      text = text + " has not defined mother in the required level.";
+      TG4Globals::Warning(text);  
+    }    
     return 0;
   }  
 
@@ -368,7 +371,11 @@ Int_t TG4StepManager::CurrentVolOffID(Int_t off, Int_t&  copyNo) const
 /// the sensitive detector ID and the copy number.
 
   if (off == 0) return CurrentVolID(copyNo);
+#ifdef MCDEBUG
+   G4VPhysicalVolume* mother = GetCurrentOffPhysicalVolume(off, true); 
+#else
    G4VPhysicalVolume* mother = GetCurrentOffPhysicalVolume(off); 
+#endif   
 
   if (mother) {
     copyNo = mother->GetCopyNo() + 1;
@@ -406,7 +413,7 @@ const char* TG4StepManager::CurrentVolOffName(Int_t off) const
              ->G4ToG3VolumeName(mother->GetName());
   }	     
   else 
-    return 0;
+    return "";
 }
 
 //_____________________________________________________________________________
