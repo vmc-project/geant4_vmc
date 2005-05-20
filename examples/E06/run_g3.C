@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: run_g3.C,v 1.1 2005/05/17 13:52:01 brun Exp $
 //
 // Macro for running Example06 with Geant3 
 
@@ -21,10 +21,6 @@ void run_g3(const TString& configMacro = "g3Config.C")
     
   appl->GetPrimaryGenerator()->SetNofPrimaries(100);  
   //appl->SetVerboseLevel(3);  
-
-  // Macro to run with primary = polarized optical photon
-  //gROOT->LoadMacro("optPhoton.C");
-  //optPhoton();  
 
   // Initialize MC
   appl->InitMC(configMacro);

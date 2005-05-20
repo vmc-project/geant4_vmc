@@ -1,7 +1,9 @@
-// $Id: $
+// $Id: optPhoton.C,v 1.1 2005/05/17 13:52:01 brun Exp $
 //
 // Test macro for polarized optical photon
 // (adapted optPhoton.mac)
+// (Note that Geant3 was not meant to use C photons as primary 
+// particles, so this macro cannot be used with G3.)
 
 void optPhoton()
 {
