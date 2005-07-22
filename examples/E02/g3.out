@@ -2,17 +2,17 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   4.04/02       16 May 2005   *
+  *   Version   5.02/00      28 June 2005   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-FreeType Engine v2.1.3 used to render TrueType fonts.
-Compiled for linux with thread support.
+FreeType Engine v2.1.9 used to render TrueType fonts.
+Compiled on 21 July 2005 for linux with thread support.
 
-CINT/ROOT C/C++ Interpreter version 5.15.169, Mar 14 2005
+CINT/ROOT C/C++ Interpreter version 5.16.1, Jun3 20 2005
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -28,11 +28,11 @@ Processing run_g3.C...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   279556855    10A9B2F7 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   279736239    10AC6FAF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   279579405   279556855
-                                        HEX    10AA0B0D    10A9B2F7
+          with Store/Table at absolute adrs   279758789   279736239
+                                        HEX    10ACC7C5    10AC6FAF
                                         HEX        5662           0
                               relative adrs       22114           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

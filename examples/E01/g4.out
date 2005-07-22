@@ -2,17 +2,17 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   4.04/02       16 May 2005   *
+  *   Version   5.02/00      28 June 2005   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-FreeType Engine v2.1.3 used to render TrueType fonts.
-Compiled for linux with thread support.
+FreeType Engine v2.1.9 used to render TrueType fonts.
+Compiled on 21 July 2005 for linux with thread support.
 
-CINT/ROOT C/C++ Interpreter version 5.15.169, Mar 14 2005
+CINT/ROOT C/C++ Interpreter version 5.16.1, Jun3 20 2005
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -30,7 +30,7 @@ Loading VGM libraries ...
 Loading libraries ... finished
 
 *************************************************************
- Geant4 version $Name: geant4-07-00-cand-03 $   (17-December-2004)
+ Geant4 version Name: geant4-07-01    (30-June-2005)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -41,22 +41,26 @@ Visualization Manager instantiating...
 Visualization Manager initialising...
 Registering graphics systems...
 Geant4 has been created.
-
-phot:  Total cross sections from Sandia parametrisation. 
 kMCApplicationField
 Geometry will be defined via TGeo
-Geometry TGeo, Root geometry manager created
-Top volume is EXPH. Master volume is EXPH
-List of materials :
-Fixing runtime shapes...
- --- nothing to fix
-Counting nodes...
-Voxelizing...
-Building caches for nodes and matrices...
+Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
+Info in <TGeoManager::SetTopVolume>: Top volume is EXPH. Master volume is EXPH
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoManager::BuildCache>: --- Maximum geometry depth is 2
+Info in <TGeoManager::CloseGeometry>: 22 nodes/ 4 volume UID's in Root geometry manager
+Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 --- node ID tracking disabled
-### 22 nodes/ 4 volume UID's in Root geometry manager
-----------------modeler ready----------------
 Converting Root geometry to Geant4 via VGM ... 
+
+---> warning from G4Element::GetElement(). The element: ARGON does not exist in the table. Return NULL pointer.
+
+---> warning from G4Element::GetElement(). The element: ALUMINIUM does not exist in the table. Return NULL pointer.
+
+---> warning from G4Element::GetElement(). The element: LEAD does not exist in the table. Return NULL pointer.
 ### General physics constructed.
 ### Electromagnetic physics constructed.
 ### Muon physics constructed.
@@ -83,15 +87,18 @@ please use one of the available physics lists by use-case.
               4 sensitive detectors
 **********************************************
 
-G4VUserPhysicsList::BuildPhysicsTable does not retrieve Cut Table but calculate 
 
-compt:  Total cross sections from a parametrisation. Good description from 10 KeV to (100/Z) GeV. 
-       Scattered gamma energy according Klein-Nishina.
-        PhysicsTables from 1 keV to 100 GeV in 80 bins. 
+phot:  Total cross sections from Sandia parametrisation. 
 
-conv:  Total cross sections from a parametrisation. Good description from 1.5 MeV to 100 GeV for all Z. 
-        e+e- energies according Bethe-Heitler
-        PhysicsTables from 1.022 MeV to 100 GeV in 100 bins. 
+compt:  Total cross sections has a good parametrisation from 10 KeV to (100/Z) GeV
+      Sampling according Klein-Nishina model
+      tables are built for  gamma
+      Lambda tables from 100 eV  to 100 GeV in 90 bins.
+
+conv:  Total cross sections has a good parametrisation from 1.5 MeV to 100 GeV for all Z;
+      sampling secondary e+e- according to the Bethe-Heitler model
+      tables are built for  gamma
+      Lambda tables from 1.022 MeV to 100 GeV in 100 bins.
 
 msc:  Model variant of multiple scattering for e-
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
@@ -100,8 +107,8 @@ msc:  Model variant of multiple scattering for e-
 eIoni:   tables are built for  e-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Step function: finalRange(mm)= 1, dRoverRange= 1, integral: 1
       Delta cross sections from Moller+Bhabha, good description from 1 KeV to 100 GeV.
+      Step function: finalRange(mm)= 1, dRoverRange= 1, integral: 1
 
 eBrem:   tables are built for  e-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -112,8 +119,8 @@ eBrem:   tables are built for  e-
 eIoni:   tables are built for  e+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Step function: finalRange(mm)= 1, dRoverRange= 1, integral: 1
       Delta cross sections from Moller+Bhabha, good description from 1 KeV to 100 GeV.
+      Step function: finalRange(mm)= 1, dRoverRange= 1, integral: 1
 
 eBrem:   tables are built for  e+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -121,19 +128,22 @@ eBrem:   tables are built for  e+
       Total cross sections from a parametrisation based on the EEDL data library. 
       Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
 
-annihil:  Total cross section from Heilter formula(annihilation into 2 photons).
-        gamma energies sampled according Heitler
-        PhysicsTables from 10 keV to 10 TeV in 100 bins. 
+annihil:       Heilter model of formula of annihilation into 2 photons
+      tables are built for  e+
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
 
 hIoni:   tables are built for  proton
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 2 MeV, ICRU49 parametrisation for protons below.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
-      Bether-Bloch model for Escaled > 2 MeV, parametrisation of Bragg peak below, Integral mode 1
 
 msc:  Model variant of multiple scattering for proton
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
       Boundary algorithm is active with facrange= 0.199
+
+msc:  Model variant of multiple scattering for GenericIon
 
 msc:  Model variant of multiple scattering for mu+
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
@@ -142,9 +152,9 @@ msc:  Model variant of multiple scattering for mu+
 muIoni:   tables are built for  mu+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
       Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
       radiative corrections for E > 1 GeV
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 muBrems:   tables are built for  mu+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -159,9 +169,9 @@ muPairProd:   tables are built for  mu+
 muIoni:   tables are built for  mu-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
       Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
       radiative corrections for E > 1 GeV
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 muBrems:   tables are built for  mu-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -470,7 +480,7 @@ Track 200 0 0  in EXPH  ArgonGas
 Track 300 0 0  in EXPH  ArgonGas
 
 >>> End of Event 0
-Time of this run:   User=0.06s Real=0.07s Sys=0.01s
+Time of this run:   User=0.06s Real=0.14s Sys=0s
 Number of events processed: 1
 
 This is the end of ROOT -- Goodbye

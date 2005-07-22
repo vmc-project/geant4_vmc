@@ -2,17 +2,17 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   4.04/02       16 May 2005   *
+  *   Version   5.02/00      28 June 2005   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-FreeType Engine v2.1.3 used to render TrueType fonts.
-Compiled for linux with thread support.
+FreeType Engine v2.1.9 used to render TrueType fonts.
+Compiled on 21 July 2005 for linux with thread support.
 
-CINT/ROOT C/C++ Interpreter version 5.15.169, Mar 14 2005
+CINT/ROOT C/C++ Interpreter version 5.16.1, Jun3 20 2005
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -28,11 +28,11 @@ Processing run_g3.C("g3tgeoConfig.C")...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   279556855    10A9B2F7 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   279736239    10AC6FAF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   279579405   279556855
-                                        HEX    10AA0B0D    10A9B2F7
+          with Store/Table at absolute adrs   279758789   279736239
+                                        HEX    10ACC7C5    10AC6FAF
                                         HEX        5662           0
                               relative adrs       22114           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -49,22 +49,21 @@ Loading Geant3 libraries ... finished
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
-LoadAddress
 Geant3 has been created.
-Geometry Geometry, default geometry created
+Info in <TGeoManager::TGeoManager>: Geometry Geometry, default geometry created
 Target is 5 cm of lead 
 There are 5 chambers in the tracker region. The chambers are 2 mm of Xenon gas
  The distance between chamber is 80 cm
-Top volume is WRLD. Master volume is WRLD
-List of materials :
-Fixing runtime shapes...
- --- nothing to fix
-Counting nodes...
-Voxelizing...
-Building caches for nodes and matrices...
+Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoManager::BuildCache>: --- Maximum geometry depth is 2
+Info in <TGeoManager::CloseGeometry>: 8 nodes/ 4 volume UID's in default geometry
+Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 --- node ID tracking disabled
-### 8 nodes/ 4 volume UID's in default geometry
-----------------modeler ready----------------
 
  Calculating cross section tables, see gphysi.dat for more information
 
