@@ -1,4 +1,4 @@
-// $Id: TG4Limits.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4Limits.cxx,v 1.4 2005/01/05 08:04:58 brun Exp $
 // Category: global
 //
 // Class TG4Limits
@@ -314,5 +314,5 @@ TG4G3ControlValue TG4Limits::GetControl(G4VProcess* process) const
   if (fIsControl)
     return fControlVector.GetControlValue(process);
   else 
-    return kUnset;
+    return kUnsetControlValue;
 }

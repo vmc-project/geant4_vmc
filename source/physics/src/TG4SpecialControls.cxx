@@ -1,4 +1,4 @@
-// $Id: TG4SpecialControls.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $ //
+// $Id: TG4SpecialControls.cxx,v 1.3 2005/01/05 08:04:58 brun Exp $ //
 // Category: physics
 //
 // Class TG4VSpecialControls
@@ -193,7 +193,8 @@ G4VParticleChange* TG4SpecialControls::PostStepDoIt(
       TG4G3ControlValue control = limits->GetControl((*processVector)[i]);
       G4bool activation = processManager->GetProcessActivation(i);
 
-      if (control != kUnset && ! TG4Globals::Compare(activation, control)) {
+      if (   control != kUnsetControlValue && 
+           ! TG4Globals::Compare(activation, control) ) {
 
         // store the current processes controls
         if (VerboseLevel() > 1) {

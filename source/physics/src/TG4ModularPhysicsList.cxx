@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.cxx,v 1.5 2005/03/29 10:39:53 brun Exp $
+// $Id: TG4ModularPhysicsList.cxx,v 1.6 2005/05/17 13:43:57 brun Exp $
 // Category: physics
 //
 // Class TG4ModularPhysicsList
@@ -143,7 +143,7 @@ void TG4ModularPhysicsList::SetSpecialControlsActivation()
 	 = controlVector->GetControlValue((*processVector)[i]);
       G4bool activation = processManager->GetProcessActivation(i);
       
-      if (control != kUnset) {
+      if (control != kUnsetControlValue) {
          if (!TG4Globals::Compare(activation, control)) {
 
           // set new process activation

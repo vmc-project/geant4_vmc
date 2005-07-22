@@ -1,4 +1,4 @@
-// $Id: TG4G3Control.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4G3Control.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup global
 //
 /// \enum TG4G3Control
@@ -157,7 +157,7 @@ enum TG4G3ControlValue
 //   RAYL:  only 0,1
 //   HADR:  may be > 2
 //
-  kUnset      = -1, 
+  kUnsetControlValue = -1, 
   kInActivate = 0, 
   kActivate   = 1,
   kActivate2  = 2   

@@ -1,4 +1,4 @@
-// $Id: TG4G3PhysicsManager.cxx,v 1.4 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4G3PhysicsManager.cxx,v 1.5 2005/03/29 10:39:53 brun Exp $
 // Category: physics
 //
 // Class TG4G3PhysicsManager
@@ -423,7 +423,7 @@ G4bool TG4G3PhysicsManager::IsGlobalSpecialControls() const
 /// Return true if any global special control value is set
 
   for (G4int i=0; i<kNofParticlesWSP; i++)
-  {  if ((*fControlVector)[i] != kUnset ) return true; }
+  {  if ((*fControlVector)[i] != kUnsetControlValue ) return true; }
 
   return false;
 }

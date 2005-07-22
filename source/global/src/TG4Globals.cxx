@@ -1,4 +1,4 @@
-// $Id: TG4Globals.cxx,v 1.2 2003/09/23 14:23:19 brun Exp $
+// $Id: TG4Globals.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: global
 //
 // Class TG4Globals
@@ -72,7 +72,7 @@ G4bool TG4Globals::Compare(G4bool activation, TG4G3ControlValue controlValue)
 /// with the process control value.
 /// Return true if the values correspond, false otherwise.
 
-  if (controlValue == kUnset) {
+  if (controlValue == kUnsetControlValue) {
     TG4Globals::Warning(
       "TG4SpecialControls::Compare: control value = kUnset.");
     return false;

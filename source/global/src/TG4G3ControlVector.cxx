@@ -1,4 +1,4 @@
-// $Id: TG4G3ControlVector.cxx,v 1.3 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4G3ControlVector.cxx,v 1.4 2004/11/10 11:39:28 brun Exp $
 // Category: global
 //
 // Class TG4G3ControlVector 
@@ -29,7 +29,8 @@ TG4StringVector TG4G3ControlVector::fgControlNameVector;
 TG4G3ControlVector::TG4G3ControlVector()
 {
   // initialize fControlVector 
-  for (G4int i=0; i<=kNoG3Controls; i++) fControlVector.push_back(kUnset); 
+  for (G4int i=0; i<=kNoG3Controls; i++) 
+    fControlVector.push_back(kUnsetControlValue); 
   
   // fill name vector
   if (fgControlNameVector.size() == 0) FillControlNameVector(); 
@@ -75,7 +76,7 @@ TG4G3ControlValue TG4G3ControlVector::operator[](G4int index) const
   else {
     TG4Globals::Exception(
       "TG4G3ControlVector::operator[]: index out of the vector scope");
-    return kUnset;  
+    return kUnsetControlValue;  
   }    
 }  
 
@@ -164,10 +165,10 @@ TG4G3ControlValue TG4G3ControlVector::GetControlValue(G4int value,
       if (control == kLOSS) 
         return kActivate;
       else
-        return kUnset;
+        return kUnsetControlValue;
       ;;	      	  
   }    
-  return kUnset;
+  return kUnsetControlValue;
 }    
 
 //_____________________________________________________________________________
@@ -227,8 +228,8 @@ G4bool TG4G3ControlVector::Update(const TG4G3ControlVector& vector)
 
   G4bool result = false;
 
-  if (fControlVector[kDRAY] != kUnset ) {
-      fControlVector[kDRAY] = kUnset;
+  if (fControlVector[kDRAY] != kUnsetControlValue ) {
+      fControlVector[kDRAY] = kUnsetControlValue;
        result = true;
   }
   
@@ -243,7 +244,7 @@ G4bool TG4G3ControlVector::Update(const TG4G3ControlVector& vector)
            // there is no need to distinguish 
 	   // kActivate, kActivate2 after Init phase
 
-  if (current == passed) current = kUnset;
+  if (current == passed) current = kUnsetControlValue;
            // if both kLOSS values will have the same effect
            // unset this control
 
@@ -312,7 +313,7 @@ G4bool TG4G3ControlVector::IsControl() const
 /// Return true if any of controls is set.
 
   for (G4int i=0; i<kNoG3Controls; i++) 
-    if (fControlVector[i] != kUnset) return true;
+    if (fControlVector[i] != kUnsetControlValue) return true;
     
   return false;  
 }  
