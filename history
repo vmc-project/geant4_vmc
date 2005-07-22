@@ -1,8 +1,22 @@
-$Id: history,v 1.14 2005/01/05 08:06:57 brun Exp $
+$Id: history,v 1.15 2005/04/01 20:59:27 brun Exp $
 -----------------------------------------------------------------
      
 Tags (history):
 ===============
+  22/07/2005
+  v1-7:
+    Geant4 VMC:
+     - Implemented new VMC functions for definition of surfaces
+       and material properties for optical physics
+     - Added possibility to define maximum number of optical photons
+       per step by user (command /mcPhysics/setCerenkovMaxPhotons)
+     
+    Examples:
+     - Added E06 example which demonstrates Cherenkov and optical photon 
+       processes
+
+    Tested with Geant4 7.0 and 7.1, Root 5.02/00, VGM 2.05
+
   29/03/2005
   v1-6:
     Geant4 VMC:
