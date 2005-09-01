@@ -1,7 +1,8 @@
-// $Id: TG4TrackingAction.h,v 1.2 2003/02/26 13:39:32 brun Exp $
+// $Id: TG4TrackingAction.h,v 1.3 2004/11/10 11:39:27 brun Exp $
 /// \ingroup event
 //
 /// \class TG4TrackingAction
+/// \brief Actions at the beginnig and at the end of track
 /// 
 /// Class that ensures calling sensitive detector
 /// before track starts stepping.

@@ -1,9 +1,8 @@
-// $Id: TG4RunAction.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4RunAction.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup run
 //
 /// \class TG4RunAction
-/// 
-/// Class that defines actions at the beginning and the end of run.
+/// \brief Actions at the beginning and the end of run.
 ///
 /// Author: I. Hrivnacova
 

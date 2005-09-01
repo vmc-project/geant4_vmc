@@ -1,10 +1,8 @@
-// $Id: TG4ParticlesManager.h,v 1.2 2003/09/23 14:24:29 brun Exp $
+// $Id: TG4ParticlesManager.h,v 1.3 2004/11/10 11:39:28 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4ParticlesManager
-/// 
-/// This class provides mapping between TDatabasePDG
-/// and Geant4 particles. 
+/// \brief Provides mapping between TDatabasePDG and Geant4 particles. 
 ///
 /// Author: I. Hrivnacova
 

@@ -1,9 +1,8 @@
-// $Id: TG4PhysicsConstructorSpecialControls.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsConstructorSpecialControls.h,v 1.3 2005/03/29 10:39:53 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorSpecialControls
-/// 
-/// Constructor of special controls of physics processes.
+/// \brief Constructor of special controls of physics processes.
 ///
 /// Author: I. Hrivnacova
 

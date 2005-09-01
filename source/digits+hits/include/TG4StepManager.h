@@ -1,10 +1,10 @@
-// $Id: TG4StepManager.h,v 1.7 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4StepManager.h,v 1.8 2005/05/20 21:46:56 brun Exp $
 /// \ingroup digits_hits
 //
 /// \class TG4StepManager
-/// 
-/// Geant4 implementation of the TVirtualMC interface methods                    
+/// \brief Geant4 implementation of the TVirtualMC interface methods                    
 /// for access to Geant4 at step level.
+///
 /// The public methods that do not implement TVirtualMC methods
 /// are commented as G4 specific
 ///

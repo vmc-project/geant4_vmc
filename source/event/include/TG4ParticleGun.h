@@ -1,9 +1,8 @@
-// $Id: TG4ParticleGun.h,v 1.2 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4ParticleGun.h,v 1.3 2004/11/10 11:39:27 brun Exp $
 /// \ingroup event
 //
 /// \class TG4ParticleGun
-/// 
-/// Particle gun that can be interactively composed by a user.
+/// \brief Particle gun that can be interactively composed by a user.
 ///
 /// Author: I. Hrivnacova
 

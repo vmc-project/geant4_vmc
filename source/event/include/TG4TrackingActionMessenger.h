@@ -1,9 +1,8 @@
-// $Id: TG4TrackingActionMessenger.h,v 1.2 2003/02/26 13:39:32 brun Exp $
+// $Id: TG4TrackingActionMessenger.h,v 1.3 2004/11/10 11:39:27 brun Exp $
 /// \ingroup event
 //
 /// \class TG4TrackingActionMessenger
-/// 
-/// Messenger class that defines commands for TG4TrackingAction.
+/// \brief Messenger class that defines commands for TG4TrackingAction.
 ///
 /// Author: I. Hrivnacova
  

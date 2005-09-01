@@ -1,9 +1,8 @@
-// $Id: TG4GeometryManager.h,v 1.7 2005/05/17 13:43:57 brun Exp $
+// $Id: TG4GeometryManager.h,v 1.8 2005/05/19 08:58:34 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryManager
-/// 
-/// Geant4 implementation of the TVirtualMC interface methods                    
+/// \brief Geant4 implementation of the TVirtualMC interface methods                    
 /// for building geometry and access to it.
 ///
 /// Author: V. Berejnoi, I. Hrivnacova
@@ -163,9 +162,6 @@ class TG4GeometryManager : public TG4Verbose
     // set methods
     void SetWriteGeometry(G4bool writeGeometry);
     void SetMapSecond(const G4String& name);
-#ifdef USE_VGM
-    void SetUseVGM(G4bool useVGM) { fUseVGM = useVGM; }
-#endif    
      
   protected:
     TG4GeometryManager(const TG4GeometryManager& right);
@@ -201,9 +197,6 @@ class TG4GeometryManager : public TG4Verbose
                                        //in a file (ASCII) 
     G4bool           fVMCGeometry;     //true if geometry is built using VMC calls
                                        //(false if geometry is built by conversion)				        
-#ifdef USE_VGM
-    G4bool           fUseVGM;          //option to use VGM
-#endif    
 };
 
 // inline methods

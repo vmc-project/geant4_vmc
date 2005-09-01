@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.cxx,v 1.8 2005/02/02 14:16:21 brun Exp $
+// $Id: TG4DetConstruction.cxx,v 1.9 2005/05/17 13:43:57 brun Exp $
 // Category: geometry
 //
 // Class TG4DetConstruction
@@ -31,12 +31,8 @@ TG4DetConstruction::TG4DetConstruction()
   : TG4Verbose("detConstruction"),
     fMessenger(this),
 #ifdef USE_VGM
-    fUseVGM(true),
     fAGDDMessenger("AGDD"),
     fGDMLMessenger("GDML"),
-#else
-    fAGDDGeometryGenerator(),
-    fGDMLGeometryGenerator(),
 #endif    
     fMagneticFieldType(kMCApplicationField), 
     fMagneticField(0), 
@@ -54,11 +50,12 @@ TG4DetConstruction::TG4DetConstruction(const TG4DetConstruction& right)
     fMessenger(this),
 #ifdef USE_VGM
     fAGDDMessenger("AGDD"),
-    fGDMLMessenger("GDML")
-#else
-    fAGDDGeometryGenerator(),
-    fGDMLGeometryGenerator()
+    fGDMLMessenger("GDML"),
 #endif    
+    fMagneticFieldType(kMCApplicationField), 
+    fMagneticField(0), 
+    fReadGeometry(false),
+    fWriteGeometry(false)
 {
 //
   TG4Globals::Exception("TG4DetConstruction is protected from copying.");  
@@ -131,10 +128,6 @@ G4VPhysicalVolume* TG4DetConstruction::Construct()
 
   // get geometry manager
   TG4GeometryManager* pGeometryManager = TG4GeometryManager::Instance();
-
-#ifdef USE_VGM
-  pGeometryManager->SetUseVGM(fUseVGM);
-#endif  
 
   if (fReadGeometry) {
 

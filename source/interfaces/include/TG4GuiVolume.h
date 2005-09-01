@@ -1,9 +1,8 @@
-// $Id: TG4GuiVolume.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4GuiVolume.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup interfaces
 //
 /// \class TG4GuiVolume
-///
-/// Creating link for logical volume tree in geometry
+/// \brief Creating link for logical volume tree in geometry
 ///
 /// Author: D. Adamova
 

@@ -1,9 +1,8 @@
-// $Id: TG4IntMap.h,v 1.2 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4IntMap.h,v 1.3 2004/11/10 11:39:28 brun Exp $
 /// \ingroup global
 //
 /// \class TG4IntMap
-/// 
-/// The map container for integer numbers associated with names.
+/// \brief The map container for integer numbers associated with names.
 ///
 /// Author: I. Hrivnacova
 

@@ -1,9 +1,8 @@
-// $Id: TG4PhysicsConstructorStepLimiter.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsConstructorStepLimiter.h,v 1.1 2005/01/05 08:04:58 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorStepLimiter
-/// 
-/// Constructor of step limiter physics.
+/// \brief Constructor of step limiter physics.
 ///
 /// Author: I. Hrivnacova
 

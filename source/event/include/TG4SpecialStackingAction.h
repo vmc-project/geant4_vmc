@@ -1,7 +1,8 @@
-// $Id: TG4SpecialStackingAction.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4SpecialStackingAction.h,v 1.2 2004/11/10 11:39:27 brun Exp $
 /// \ingroup event
 //
 /// \class TG4SpecialStackingAction
+/// \brief Defines a special stacking mechanism 
 /// 
 /// Class that defines a special stacking mechanism,
 /// with which particles are popped from the stack in "families".

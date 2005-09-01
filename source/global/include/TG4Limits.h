@@ -1,9 +1,10 @@
-// $Id: TG4Limits.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4Limits.h,v 1.4 2005/01/05 08:04:58 brun Exp $
 /// \ingroup global
 //
 /// \class TG4Limits
+/// \brief Extended G4UserLimits class.
 /// 
-/// G4UserLimits derived class extended with the
+/// Class extends G4UserLimits base class with the
 /// vectors of kinetic energy cuts and control process flags
 /// data members.
 ///

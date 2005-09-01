@@ -1,9 +1,9 @@
-// $Id: TG4PhysicsConstructorGeneral.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsConstructorGeneral.h,v 1.4 2005/01/05 08:04:58 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorGeneral
-/// 
-/// Constructor of general physics.
+/// \brief Constructor of general physics.
+///
 /// According to ExN04GeneralPhysics, GEANT4 tag Name: geant4-06-00
 ///
 /// Author: I. Hrivnacova

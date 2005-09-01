@@ -1,9 +1,9 @@
-// $Id: TG4PhysicsConstructorHadron.h,v 1.2 2003/12/18 13:27:46 brun Exp $
+// $Id: TG4PhysicsConstructorHadron.h,v 1.3 2004/11/10 11:39:28 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorHadron
-/// 
-/// Constructor of hadron physics.
+/// \brief Constructor of hadron physics.
+///
 /// According to ExN04HadronPhysics.hh, GEANT4 tag Name: geant4-06-00
 ///
 /// Author: I. Hrivnacova

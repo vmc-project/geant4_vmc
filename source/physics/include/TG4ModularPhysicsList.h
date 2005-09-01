@@ -1,9 +1,9 @@
-// $Id: TG4ModularPhysicsList.h,v 1.5 2005/03/29 10:39:53 brun Exp $
+// $Id: TG4ModularPhysicsList.h,v 1.6 2005/05/17 13:43:57 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4ModularPhysicsList
-/// 
-/// The Geant4 VMC modular physics list.
+/// \brief The Geant4 VMC modular physics list.
+///
 /// The default physics processes and particles are created
 /// using the G4VPhysicsCreator derived classes
 /// and registered to this physics list in the function Configure().

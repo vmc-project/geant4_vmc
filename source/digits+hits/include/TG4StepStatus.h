@@ -1,7 +1,8 @@
-// $Id: TG4StepStatus.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4StepStatus.h,v 1.2 2004/11/10 11:39:27 brun Exp $
 /// \ingroup digits_hits
 //
 /// \enum TG4StepStatus
+/// \brief Step status enumeration
 /// 
 /// In orded to take into account different stepping 
 /// mechanism in G3 and G4 three states of TG4StepManager
@@ -21,9 +22,9 @@
 #define TG4_STEP_STATUS_H
 
 enum TG4StepStatus { 
-  kVertex,     // in track vertex
-  kBoundary,   // when crossing geometrical boundary
-  kNormalStep  // in post step point
+  kVertex,     //< in track vertex
+  kBoundary,   //< when crossing geometrical boundary
+  kNormalStep  //< in post step point
 };
 
 #endif //TG4_STEP_STATUS_H

@@ -1,8 +1,7 @@
-// $Id: TG4G3Cut.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4G3Cut.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup global
 //
 /// \enum TG4G3Cut
-/// 
 /// Enumeration for G3 types of kinetic energy cuts.
 ///
 /// Author: I. Hrivnacova
@@ -12,43 +11,43 @@
 
 enum TG4G3Cut
 {
-  kCUTGAM, // gammas 
-               // G4 particles: "gamma"         
-               // G3 default value: 0.001 GeV
-  kCUTELE, // electrons        
-               // G4 particles: "e-"         
-               // ?? positrons
-               // G3 default value: 0.001 GeV
-  kCUTNEU, // neutral hadrons  
-               // G4 particles: of type "baryon", "meson", "nucleus"   
-	       //               with zero charge     
-               // G3 default value: 0.01 GeV
-  kCUTHAD, // charged hadrons  
-               // G4 particles: of type "baryon", "meson", "nucleus"        
-	       //               with non-zero charge     
-               // G3 default value: 0.01 GeV
-  kCUTMUO, // muons            
-               // G4 particles: "mu+", "mu-"         
-               // G3 default value: 0.01 GeV
-  kBCUTE,  // electron bremsstrahlung         
-               // G4 particles: "gamma"         
-               // G3 default value: CUTGAM
-  kBCUTM,  // muon and hadron bremsstrahlung  
-               // G4 particles: "gamma"         
-               // G3 default value: CUTGAM
-  kDCUTE,  // delta-rays by electrons 
-               // G4 particles: "e-"         
-               // G3 default value: 10**4
-  kDCUTM,  // delta-rays by muons        
-               // G4 particles: "e-"         
-               // G3 default value: 10**4
-  kPPCUTM, // direct pair production by muons 
-               // G4 particles: "e-", "e+"         
-               // G3 default value: 0.01 GeV
-  kTOFMAX, // time of flight cut in seconds
-               // G4 particles: all
-               // G3 default value: 0.01 GeV
-  kNoG3Cuts    
+  kCUTGAM, //< gammas 
+               //< G4 particles: "gamma"         
+               //< G3 default value: 0.001 GeV
+  kCUTELE, //< electrons        
+               //< G4 particles: "e-"         
+               //< ?? positrons
+               //< G3 default value: 0.001 GeV
+  kCUTNEU, //< neutral hadrons  
+               //< G4 particles: of type "baryon", "meson", "nucleus"   
+	       //<               with zero charge     
+               //< G3 default value: 0.01 GeV
+  kCUTHAD, //< charged hadrons  
+               //< G4 particles: of type "baryon", "meson", "nucleus"        
+	       //<               with non-zero charge     
+               //< G3 default value: 0.01 GeV
+  kCUTMUO, //< muons            
+               //< G4 particles: "mu+", "mu-"         
+               //< G3 default value: 0.01 GeV
+  kBCUTE,  //< electron bremsstrahlung         
+               //< G4 particles: "gamma"         
+               //< G3 default value: CUTGAM
+  kBCUTM,  //< muon and hadron bremsstrahlung  
+               //< G4 particles: "gamma"         
+               //< G3 default value: CUTGAM
+  kDCUTE,  //< delta-rays by electrons 
+               //< G4 particles: "e-"         
+               //< G3 default value: 10**4
+  kDCUTM,  //< delta-rays by muons        
+               //< G4 particles: "e-"         
+               //< G3 default value: 10**4
+  kPPCUTM, //< direct pair production by muons 
+               //< G4 particles: "e-", "e+"         
+               //< G3 default value: 0.01 GeV
+  kTOFMAX, //< time of flight cut in seconds
+               //< G4 particles: all
+               //< G3 default value: 0.01 GeV
+  kNoG3Cuts //< not valid value   
 };
 
 #endif //TG4_G3_CUT_H

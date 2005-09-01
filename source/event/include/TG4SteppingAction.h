@@ -1,7 +1,8 @@
-// $Id: TG4SteppingAction.h,v 1.2 2003/06/03 17:06:15 brun Exp $
+// $Id: TG4SteppingAction.h,v 1.3 2004/11/10 11:39:27 brun Exp $
 /// \ingroup event
 //
 /// \class TG4SteppingAction
+/// \brief Actions at each step
 /// 
 /// This class ensures the additional call to the sensitive detector
 /// when track crosses a geometrical boundary.

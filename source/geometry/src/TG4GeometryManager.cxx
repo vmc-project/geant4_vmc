@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.12 2005/05/17 13:43:57 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.13 2005/05/19 08:58:34 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -58,9 +58,6 @@ TG4GeometryManager::TG4GeometryManager()
     fMatrixCounter(0),
     fWriteGeometry(false),
     fVMCGeometry(true)
-#ifdef USE_VGM
-    ,fUseVGM(true)
-#endif    
 {
 //
   if (fgInstance) {
@@ -153,7 +150,11 @@ Bool_t TG4GeometryManager::IsRootGeometrySupported() const
 {
 /// Returns info about supporting geometry defined via Root
 
+#ifdef USE_VGM
   return true;
+#else
+  return false;
+#endif    
 }  
 
 //_____________________________________________________________________________
@@ -1111,18 +1112,20 @@ void TG4GeometryManager::SetRootGeometry()
 {
 /// Convert Root geometry to G4 geometry objects.
 
+#ifdef USE_VGM
   TG4RootGeometryManager rootGeometryManager( fGeometryServices, 
 			                     &fMediumMap, &fMediumNameVector);
 					     
   rootGeometryManager.VerboseLevel(VerboseLevel());			      
-  			      
-#ifdef USE_VGM
-  rootGeometryManager.SetUseVGM(fUseVGM);
-#endif
-
   rootGeometryManager.ImportRootGeometry();
   
   fVMCGeometry = false;
+#else
+  G4String text = "TG4GeometryManager::SetRootGeometry: \n";
+  text = text + "    Geant4 VMC has been installed without VGM. \n"; 
+  text = text + "    Root geometry is not supported."; 
+  TG4Globals::Exception(text);
+#endif
 }                   
 
 //

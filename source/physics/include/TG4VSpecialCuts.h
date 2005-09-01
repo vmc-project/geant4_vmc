@@ -1,10 +1,10 @@
-// $Id: TG4VSpecialCuts.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4VSpecialCuts.h,v 1.3 2005/03/29 10:39:53 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4VSpecialCuts
-/// 
-/// Abstract base class for a special process that activates 
-/// kinetic energy cuts.                                                     \n
+/// \brief Abstract base class for a special process that activates 
+/// kinetic energy cuts.                                                     
+///
 /// The pure virtual functions GetMinEkine have to be implemented
 /// by derived classes specific for each particle type
 /// (see TG4G3ParticleWSP.h).

@@ -1,9 +1,8 @@
-// $Id: $
+// $Id: TG4OpSurfaceMap.h,v 1.1 2005/05/17 14:55:13 brun Exp $
 /// \ingroup geometry
 //
-/// \class TG4OpSurfaceMap
-/// 
-/// The typedef for the map between optical surfaces names and their objects.
+/// \typedef TG4OpSurfaceMap
+/// \brief The map between optical surfaces names and their objects.
 ///
 /// Author: I. Hrivnacova
 

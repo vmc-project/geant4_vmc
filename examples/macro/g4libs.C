@@ -1,4 +1,4 @@
-// $Id: g4libs.C,v 1.6 2005/01/25 08:42:25 brun Exp $
+// $Id: g4libs.C,v 1.7 2005/02/02 14:16:21 brun Exp $
 //
 // Macro for loading Geant4 and Geant4 VMC libraries
 
@@ -235,10 +235,6 @@ void g4libs_granular()
   // interfaces and graphics
   g4libs_graphics();
   
-  // geant4 VMC convertors
-  gSystem->Load("libroottog4");
-  gSystem->Load("libg4toxml");
-  
   // VGM libraries
   vgmlibs();
     
@@ -279,10 +275,6 @@ void g4libs_global()
   // interfaces and graphics
   g4libs_graphics(false);
  
-  // geant4 VMC convertors
-  gSystem->Load("libroottog4");
-  gSystem->Load("libg4toxml");
-  
   // VGM libraries
   vgmlibs();
 

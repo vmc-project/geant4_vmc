@@ -1,8 +1,10 @@
-// $Id: TG4VRunConfiguration.h,v 1.3 2004/08/17 08:52:23 brun Exp $
+// $Id: TG4VRunConfiguration.h,v 1.4 2004/11/10 11:39:28 brun Exp $
 /// \ingroup run
 //
 /// \class TG4VRunConfiguration
-/// 
+/// \brief Abstract base class for creating Geant4 user action classes
+/// using VMC
+///
 /// Abstract base class that takes care of creating  all user defined classes 
 /// that will be initialized and managed by Geant4 kernel (G4RunManager).
 /// It has two pure virtual methods CreateUserConfiguration(), 

@@ -1,7 +1,9 @@
-// $Id: TG4VVerbose.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4VVerbose.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup global
 //
 /// \class TG4VVerbose
+/// \brief Abstract base class for defining the verbose level 
+/// in a common way
 /// 
 /// Class defines the verbose level:
 /// - 0 - no output

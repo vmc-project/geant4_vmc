@@ -1,9 +1,8 @@
-// $Id: TG4G3Attribute.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4G3Attribute.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup visualization
 //
 /// \enum TG4G3Attribute
-/// 
-/// Enumeration type for G3 visualization attributes.
+/// \brief Enumeration type for G3 visualization attributes.
 ///
 /// Author: A. Gheata
 

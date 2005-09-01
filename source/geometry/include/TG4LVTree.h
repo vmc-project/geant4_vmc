@@ -1,8 +1,9 @@
-// $Id: TG4LVTree.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4LVTree.h,v 1.2 2004/11/10 11:39:27 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4LVTree
-/// 
+/// \brief A simple logical volumes tree browser
+///
 /// Class provides methods for browsing volumes trees, 
 /// and setting their visualization attributes.
 ///

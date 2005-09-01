@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: TG4SpecialCuts.h,v 1.3 2005/03/29 10:39:53 brun Exp $
 //
 // Classes TG4pecialCutsFor*
 //
@@ -19,8 +19,7 @@ class G4Track;
 
 /// \ingroup physics
 /// \class TG4SpecialCutsForChargedHadron
-/// 
-/// Special process that activates kinetic energy cuts
+/// \brief Special process that activates kinetic energy cuts
 /// for charged hadrons.
 ///
 /// Author: I. Hrivnacova
@@ -41,8 +40,7 @@ class TG4SpecialCutsForChargedHadron: public TG4VSpecialCuts
 
 /// \ingroup physics
 /// \class TG4SpecialCutsForElectron
-/// 
-/// Special process that activates kinetic energy cuts
+/// \brief Special process that activates kinetic energy cuts
 /// for e-.
 ///
 /// Author: I. Hrivnacova
@@ -63,8 +61,7 @@ class TG4SpecialCutsForElectron: public TG4VSpecialCuts
 
 /// \ingroup physics
 /// \class TG4SpecialCutsForEplus
-/// 
-/// Special process that activates kinetic energy cuts
+/// \brief Special process that activates kinetic energy cuts
 /// for e+.
 ///
 /// Author: I. Hrivnacova
@@ -85,8 +82,7 @@ class TG4SpecialCutsForEplus: public TG4VSpecialCuts
 
 /// \ingroup physics
 /// \class TG4SpecialCutsForGamma
-/// 
-/// Special process that activates kinetic energy cuts
+/// \brief Special process that activates kinetic energy cuts
 /// for gamma.
 ///
 /// Author: I. Hrivnacova
@@ -107,8 +103,7 @@ class TG4SpecialCutsForGamma: public TG4VSpecialCuts
 
 /// \ingroup physics
 /// \class TG4SpecialCutsForMuon
-/// 
-/// Special process that activates kinetic energy cuts
+/// \brief Special process that activates kinetic energy cuts
 /// for muon.
 ///
 /// Author: I. Hrivnacova
@@ -129,8 +124,7 @@ class TG4SpecialCutsForMuon: public TG4VSpecialCuts
 
 /// \ingroup physics
 /// \class TG4SpecialCutsForNeutralHadron
-/// 
-/// Special process that activates kinetic energy cuts
+/// \brief Special process that activates kinetic energy cuts
 /// for neutral hadrons.
 ///
 /// Author: I. Hrivnacova
@@ -151,8 +145,7 @@ class TG4SpecialCutsForNeutralHadron: public TG4VSpecialCuts
 
 /// \ingroup physics
 /// \class TG4SpecialCutsForOther
-/// 
-/// Special process that activates the kinetic energy cuts
+/// \brief Special process that activates the kinetic energy cuts
 /// for other (than specified in TParticleWSP) particles.
 ///
 /// Author: I. Hrivnacova

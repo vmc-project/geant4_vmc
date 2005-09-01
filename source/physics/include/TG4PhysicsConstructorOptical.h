@@ -1,9 +1,9 @@
-// $Id: TG4PhysicsConstructorOptical.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsConstructorOptical.h,v 1.4 2005/05/17 13:43:57 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorOptical
-/// 
-/// Constructor of optical physics.
+/// \brief Constructor of optical physics.
+///
 /// According to ExN06PhysicsList (geant4 6.0)
 ///
 /// Author: I. Hrivnacova

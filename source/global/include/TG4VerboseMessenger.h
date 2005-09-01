@@ -1,10 +1,8 @@
-// $Id: TG4VerboseMessenger.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4VerboseMessenger.h,v 1.4 2005/01/28 12:29:38 brun Exp $
 /// \ingroup global
 //
 /// \class TG4VerboseMessenger
-/// 
-/// Messenger class that defines commands for 
-/// the verbose classes.
+/// \brief Messenger class that defines commands for the verbose classes.
 ///
 /// Author: I. Hrivnacova
 

@@ -1,10 +1,10 @@
-// $Id: TG4RunManager.h,v 1.3 2004/08/17 08:53:00 brun Exp $
+// $Id: TG4RunManager.h,v 1.4 2004/11/10 11:39:28 brun Exp $
 /// \ingroup run
 //
 /// \class TG4RunManager
-/// 
-/// Geant4 implementation of the TVirtualMC interface methods                    
+/// \brief Geant4 implementation of the TVirtualMC interface methods                    
 /// for access to Geant4 at run level.
+///
 /// It provides also methods for switching between Geant4 and
 /// Root UIs.
 ///

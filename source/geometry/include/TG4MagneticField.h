@@ -1,10 +1,8 @@
-//  $Id: TG4MagneticField.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+//  $Id: TG4MagneticField.h,v 1.2 2004/11/10 11:39:27 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4MagneticField
-/// 
-/// Class that defines the magnetic field using the TVirtualMCApplication 
-/// field map. 
+/// \brief The magnetic field defined by the TVirtualMCApplication field map. 
 ///
 /// Author: I. Hrivnacova
 

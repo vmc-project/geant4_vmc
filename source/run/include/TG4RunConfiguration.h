@@ -1,7 +1,8 @@
-// $Id: TG4RunConfiguration.h,v 1.2 2004/08/17 08:52:23 brun Exp $
+// $Id: TG4RunConfiguration.h,v 1.3 2004/11/10 11:39:28 brun Exp $
 /// \ingroup run
 //
 /// \class TG4RunConfiguration
+/// \brief Takes care of creating Geant4 user action classes using VMC
 /// 
 /// This class takes care of creating all Geant4 user defined mandatory
 /// and action classes that will be initialized and managed by Geant4

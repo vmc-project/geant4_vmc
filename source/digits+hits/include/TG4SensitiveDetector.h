@@ -1,7 +1,8 @@
-// $Id: TG4SensitiveDetector.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4SensitiveDetector.h,v 1.2 2004/11/10 11:39:27 brun Exp $
 /// \ingroup digits_hits
 //
 /// \class TG4SensitiveDetector
+/// \brief Sensitive detector common to all logical volumes
 ///
 /// This class adds integer identifier data member to G4VSensitiveDetector.
 /// It also takes care of setting step status (kBoundary, kNormalStep)

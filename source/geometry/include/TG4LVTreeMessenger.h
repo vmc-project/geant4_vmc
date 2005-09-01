@@ -1,9 +1,8 @@
-// $Id: TG4LVTreeMessenger.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4LVTreeMessenger.h,v 1.2 2004/11/10 11:39:27 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4LVTreeMessenger
-/// 
-/// Messenger class that defines commands for TG4LVTree.
+/// \brief The messenger class that defines commands for TG4LVTree.
 ///
 /// Author: I. Hrivnacova
 

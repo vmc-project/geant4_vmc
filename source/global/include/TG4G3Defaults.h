@@ -1,9 +1,10 @@
-// $Id: TG4G3Defaults.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4G3Defaults.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup global
 //
 /// \class TG4G3Defaults
+/// \brief Default G3 kinetic energy cuts and control process values
 /// 
-/// Class stores the default G3 values of the kinetic energy cuts
+/// Class provides the default G3 values of the kinetic energy cuts
 /// for particles and the control process parameters.
 ///
 /// Author: I. Hrivnacova

@@ -1,15 +1,14 @@
-// $Id: TG4SDConstruction.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4SDConstruction.h,v 1.2 2004/11/10 11:39:27 brun Exp $
 /// \ingroup digits_hits
 //
 /// \class TG4SDConstruction
+/// \brief Sensitive detector construction
 /// 
-/// Abstract class for construction of user sensitive detectors.
-/// It has one pure virtual method Construct()
-/// that has to be be implemented by a derived class.
-/// Constructed sensitive detectors have to inherit from 
+/// Class for construction of user sensitive detectors.
+/// Constructed sensitive detectors inherit from 
 /// TG4VSensitiveDetector (see TG4VSensitiveDetector.h description);
 /// all cloned logical volumes (which a single G3 volume correspond to)
-/// have to share the same sensitive detector instance.
+/// share the same sensitive detector instance.
 ///
 /// Author: I.Hrivnacova
 

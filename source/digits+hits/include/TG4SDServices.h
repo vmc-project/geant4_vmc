@@ -1,9 +1,9 @@
-// $Id: TG4SDServices.h,v 1.3 2004/10/12 07:47:11 brun Exp $
+// $Id: TG4SDServices.h,v 1.4 2004/11/10 11:39:27 brun Exp $
 /// \ingroup digits_hits
 //
 /// \class TG4SDServices
+/// \brief Sensitive detectors services
 ///
-/// Sensitive detectors services
 /// The class provides service methods for accessing to Geant4 geometry,
 /// namely using TVirtualMC volumes identifiers
 /// (implemented via TG4SensitiveDetector instances).

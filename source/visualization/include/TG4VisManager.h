@@ -1,8 +1,9 @@
-// $Id: TG4VisManager.h,v 1.2 2003/12/18 14:24:02 brun Exp $
+// $Id: TG4VisManager.h,v 1.3 2004/11/10 11:39:28 brun Exp $
 /// \ingroup visualization
 //
 /// \class TG4VisManager
-/// 
+/// \brief Visualization manager class
+///  
 /// G4VisManager derived class that takes care of registering
 /// graphics system and provides Geant4 implementation of 
 /// the TVirtualMC interface methods for visualization.

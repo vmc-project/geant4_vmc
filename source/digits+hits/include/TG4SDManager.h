@@ -1,9 +1,8 @@
-// $Id: TG4SDManager.h,v 1.2 2004/10/12 07:47:11 brun Exp $
+// $Id: TG4SDManager.h,v 1.3 2004/11/10 11:39:27 brun Exp $
 /// \ingroup digits_hits
 //
 /// \class TG4SDManager
-/// 
-/// Geant4 implementation of the TVirtualMC interface methods                    
+/// \brief Geant4 implementation of the TVirtualMC interface methods                    
 /// for access to Geant4 geometry related with sensitive detectors.
 ///
 /// Author: I. Hrivnacova

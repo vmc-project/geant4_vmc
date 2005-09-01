@@ -1,9 +1,8 @@
-// $Id: TG4EventAction.h,v 1.2 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4EventAction.h,v 1.3 2004/11/10 11:39:27 brun Exp $
 /// \ingroup event
 //
 /// \class TG4EventAction
-/// 
-/// Class that defines actions at the beginning and the end of event.
+/// \brief Actions at the beginning and the end of event.
 ///
 /// Author: I. Hrivnacova
 

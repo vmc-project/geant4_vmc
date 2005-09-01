@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryManager.cxx,v 1.5 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4RootGeometryManager.cxx,v 1.6 2005/02/02 14:16:21 brun Exp $
 // Category: geometry
 //
 // Class TG4RootGeometryManager
@@ -6,6 +6,8 @@
 // Class for importing Root TGeo geometry in Geant4 VMC.
 //
 // Author: I. Hrivnacova,  4.5.2004
+
+#ifdef USE_VGM
 
 #include <TGeoManager.h>
 #include <TGeoMedium.h>
@@ -15,10 +17,8 @@
 #include <G4Material.hh>
 #include <G4ReflectionFactory.hh>
 
-#ifdef USE_VGM
 #include <VGM/volumes/IVolume.h>
 #include <RootGM/volumes/Factory.h>
-#endif
 
 #include "TG4RootGeometryManager.h"
 #include "TG4GeometryServices.h"
@@ -32,11 +32,7 @@ TG4RootGeometryManager::TG4RootGeometryManager(
                                        TG4IntMap* mediumMap,  
                                        TG4StringVector* mediumNameVector) 
   : TG4Verbose("rootGeometryManager"),
-    fConvertor(),
-#ifdef USE_VGM
-    fUseVGM(true),
     fG4Factory(0),
-#endif
     fGeometryServices(geometryServices),
     fMediumMap(mediumMap),
     fMediumIdMap(),
@@ -49,11 +45,7 @@ TG4RootGeometryManager::TG4RootGeometryManager(
 //_____________________________________________________________________________
 TG4RootGeometryManager::TG4RootGeometryManager() 
   : TG4Verbose("rootGeometryManager"),
-    fConvertor(),
-#ifdef USE_VGM
-    fUseVGM(true),
     fG4Factory(0),
-#endif
     fGeometryServices(0),
     fMediumMap(0),
     fMediumNameVector(0),
@@ -74,9 +66,7 @@ TG4RootGeometryManager::TG4RootGeometryManager(const TG4RootGeometryManager& rig
 //_____________________________________________________________________________
 TG4RootGeometryManager::~TG4RootGeometryManager() {
 //
-#ifdef USE_VGM
   delete fG4Factory;
-#endif
 }
 
 //
@@ -220,37 +210,21 @@ void TG4RootGeometryManager::ConvertRootGeometry()
   if (!gGeoManager->IsClosed()) gGeoManager->CloseGeometry();  
 
   // Convert Root geometry to G4
-#ifdef USE_VGM
-  if (fUseVGM) {
-    if (VerboseLevel()>0)
-      G4cout << "Converting Root geometry to Geant4 via VGM ... " << G4endl;
+  if (VerboseLevel()>0)
+    G4cout << "Converting Root geometry to Geant4 via VGM ... " << G4endl;
   
-    // import Root geometry in VGM
-    RootGM::Factory rootFactory;
-    if (VerboseLevel()>1) rootFactory.SetDebug(1);
-    rootFactory.Import(top);
+  // import Root geometry in VGM
+  RootGM::Factory rootFactory;
+  if (VerboseLevel()>1) rootFactory.SetDebug(1);
+  rootFactory.Import(top);
     
-    // export Root VGM geometry in Geant4
-    fG4Factory = new Geant4GM::Factory();
-    if (VerboseLevel()>1) fG4Factory->SetDebug(1);
-    rootFactory.Export(fG4Factory);
+  // export Root VGM geometry in Geant4
+  fG4Factory = new Geant4GM::Factory();
+  if (VerboseLevel()>1) fG4Factory->SetDebug(1);
+  rootFactory.Export(fG4Factory);
     
-    G4VPhysicalVolume* g4World = fG4Factory->World();
-    fGeometryServices->SetWorld(g4World);
-  }
-  else {
-#endif    
-    if (VerboseLevel()>0) {
-      G4cout << "Converting Root geometry to Geant4 via Geant4 VMC convertor ... " 
-             << G4endl;
-    }	     
-  
-    fConvertor.SetSeparator(fGeometryServices->GetSeparator());
-    G4VPhysicalVolume* g4World = fConvertor.Convert(gGeoManager->GetTopVolume());
-    fGeometryServices->SetWorld(g4World);
-#ifdef USE_VGM
-  }  
-#endif    
+  G4VPhysicalVolume* g4World = fG4Factory->World();
+  fGeometryServices->SetWorld(g4World);
 }                   
  
 //_____________________________________________________________________________
@@ -273,18 +247,9 @@ void TG4RootGeometryManager::ConvertRootMedias()
     Double_t* ubuf  = 0;
     
     const G4Material* material = 0;
-#ifdef USE_VGM
-    if (fUseVGM) {
-      // Get material from G4MaterialTable via its name
-      G4String materialName = medium->GetMaterial()->GetName();
-      material = G4Material::GetMaterial(materialName);
-    }  
-    else {
-#endif    
-      material = fConvertor.GetMaterial(medium->GetMaterial());
-#ifdef USE_VGM
-    }
-#endif    
+    // Get material from G4MaterialTable via its name
+    G4String materialName = medium->GetMaterial()->GetName();
+    material = G4Material::GetMaterial(materialName);
     
     // Check material
     if (!material) {
@@ -312,52 +277,21 @@ void TG4RootGeometryManager::FillMediumMap()
 {
 /// Map tracking medium IDs to volumes names
 
-#ifdef USE_VGM
-  if (fUseVGM) {
-  
-    const VGM::VolumeStore& volumes = fG4Factory->Volumes();
-    for (G4int i=0; i<G4int(volumes.size()); i++) {
-      // Get medium name
-      VGM::IVolume* volume = volumes[i];
-      G4String name  = volume->Name();
-      G4String mediumName  = volume->MediumName();
+  const VGM::VolumeStore& volumes = fG4Factory->Volumes();
+  for (G4int i=0; i<G4int(volumes.size()); i++) {
+    // Get medium name
+    VGM::IVolume* volume = volumes[i];
+    G4String name  = volume->Name();
+    G4String mediumName  = volume->MediumName();
 
-      // Get TGeoMedium via name 
-      // (to get index defined via MC)
-      TGeoMedium* geoMedium = gGeoManager->GetMedium(mediumName.data());
-      G4int mediumId = geoMedium->GetId(); 
-     
-      // Map it to logical volume name
-      fMediumMap->Add(name, mediumId);     
-    }     
-  }
-  else {
-#endif    
-
-    static G4int done = 0;
-  
-    G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-
-    for (G4int i=done; i<G4int(lvStore->size()); i++) {
-
-      G4LogicalVolume* lv = (*lvStore)[i];
-      G4String name  = lv->GetName();
-    
-      // Get medium Id (in Root) from the convertor	 
-      G4int mediumIdinRoot = fConvertor.GetMediumId(lv);
-    
-      // Get medium Id (in VMC) from the map	 
-      // G4int mediumId =  fMediumIdMap[mediumIdinRoot];
-      G4int mediumId = mediumIdinRoot;
-    
-      // Map it to logical volume name
-      fMediumMap->Add(name, mediumId);     
-    }
-  
-    done = lvStore->size();
-#ifdef USE_VGM
-  }
-#endif    
+    // Get TGeoMedium via name 
+    // (to get index defined via MC)
+    TGeoMedium* geoMedium = gGeoManager->GetMedium(mediumName.data());
+    G4int mediumId = geoMedium->GetId(); 
+   
+    // Map it to logical volume name
+    fMediumMap->Add(name, mediumId);     
+  }     
 }    
 
 //
@@ -379,9 +313,9 @@ void TG4RootGeometryManager::ImportRootGeometry()
   // Fill medium map
   FillMediumMap();
   
-#ifdef USE_VGM
-  // Delete VGM objects
+  // Delete VGM objects  delete fG4Factory;
   delete fG4Factory;
   fG4Factory = 0;
-#endif    
-}                   
+} 
+
+#endif //USE_VGM   

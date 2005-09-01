@@ -1,7 +1,8 @@
-// $Id: TG4GeometryServices.h,v 1.7 2005/05/17 13:43:57 brun Exp $
+// $Id: TG4GeometryServices.h,v 1.8 2005/05/19 08:58:34 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryServices
+/// \brief Services for accessing to Geant4 geometry
 /// 
 /// The class provides service methods for accessing to Geant4 geometry,
 /// namely using VMC volumes and materials identifiers. 

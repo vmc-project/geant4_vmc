@@ -1,9 +1,8 @@
-// $Id: TG4VPhysicsConstructor.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4VPhysicsConstructor.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4VPhysicsConstructor
-/// 
-/// Abstract base class for physics constructors with verbose.
+/// \brief Abstract base class for physics constructors with verbose.
 ///
 /// Author: I. Hrivnacova
 

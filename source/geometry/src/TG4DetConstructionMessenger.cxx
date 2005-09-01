@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.cxx,v 1.8 2005/02/02 14:16:21 brun Exp $
+// $Id: TG4DetConstructionMessenger.cxx,v 1.9 2005/05/17 13:43:57 brun Exp $
 // Category: geometry
 //
 // Class TG4DetConstructionMessenger
@@ -75,15 +75,6 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
     = new G4UIcmdWithoutParameter("/mcDet/printMaterials", this);
   fPrintMaterialsCmd->SetGuidance("Prints all materials.");
   fPrintMaterialsCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);   
-
- #ifdef USE_VGM
- fUseVGMCmd 
-    = new G4UIcmdWithABool("/mcDet/useVGM", this);
-  fUseVGMCmd->SetGuidance("Use VGM for Root->Geant4 geometry conversion");
-  fUseVGMCmd->SetParameterName("writeGeometry", false);
-  fUseVGMCmd->AvailableForStates(G4State_PreInit);   
-#endif
-
 }
 
 //_____________________________________________________________________________
@@ -110,9 +101,6 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger() {
   delete fSetReadGeometryCmd;
   delete fSetWriteGeometryCmd;
   delete fPrintMaterialsCmd;
-#ifdef USE_VGM
-  delete fUseVGMCmd;
-#endif
 }
 
 //
@@ -170,10 +158,4 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
   else if (command == fPrintMaterialsCmd) {
     TG4GeometryServices::Instance()->PrintMaterials();
   }    
-#ifdef USE_VGM
-  else if (command == fUseVGMCmd) {
-    fDetConstruction->SetUseVGM(
-                         fUseVGMCmd->GetNewBoolValue(newValues));
-  }    
-#endif
 }

@@ -1,9 +1,9 @@
-// $Id: TG4GunParticle.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4GunParticle.h,v 1.2 2004/11/10 11:39:27 brun Exp $
 /// \ingroup event
 //
 /// \class TG4GunParticle
-/// 
-/// Data type class that stores properties of a gun particle.
+/// \brief Data type class that stores properties of a gun particle.
+///
 /// Used in TG4ParticleGun.
 ///
 /// Author: I. Hrivnacova

@@ -1,28 +1,24 @@
-// $Id: TG4RootGeometryManager.h,v 1.4 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4RootGeometryManager.h,v 1.5 2005/02/02 14:16:21 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4RootGeometryManager
-/// 
-/// Class for importing Root TGeo geometry in Geant4 VMC
-/// using the roottog4 convertor.
+/// \brief Class for importing Root TGeo geometry in Geant4 VMC using VGM
 ///
 /// Author: I. Hrivnacova
+
+#ifdef USE_VGM
 
 #ifndef TG4_ROOT_GEOMETRY_MANAGER_H
 #define TG4_ROOT_GEOMETRY_MANAGER_H
 
 #include <Rtypes.h>
-
 #include <globals.hh>
 
-#ifdef USE_VGM
 #include <Geant4GM/volumes/Factory.h>
-#endif
 
 #include "TG4Globals.h"
 #include "TG4Verbose.h"
 #include "TG4IntMap.h"
-#include "TG4RootGeometryConvertor.h"
 
 class TG4GeometryServices;
 class TG4NameMap;
@@ -45,11 +41,6 @@ class TG4RootGeometryManager : public TG4Verbose
     // methods 
     // import geometry from Root (built via TGeo)
     void ImportRootGeometry();                   
-    
-#ifdef USE_VGM
-    // set methods
-    void SetUseVGM(Bool_t useVGM) { fUseVGM = useVGM; }
-#endif    
 
   protected:
     TG4RootGeometryManager();
@@ -73,12 +64,8 @@ class TG4RootGeometryManager : public TG4Verbose
     void FillMediumMap();
         
     // data members
-    TG4RootGeometryConvertor fConvertor;       // roottog4 convertor
-#ifdef USE_VGM
-    Bool_t                   fUseVGM;          // if true use VGM
-    Geant4GM::Factory*       fG4Factory;       // Geant4 VGM Factory
-#endif    
-    TG4GeometryServices*     fGeometryServices;// geometry services
+    Geant4GM::Factory*    fG4Factory;       // Geant4 VGM Factory
+    TG4GeometryServices*  fGeometryServices;// geometry services
     TG4IntMap*        fMediumMap;        // map of volumes names to medias IDs
     TG4intMap         fMediumIdMap;      // map of medium IDs
     TG4StringVector*  fMediumNameVector; // vector of material names sorted in
@@ -87,4 +74,5 @@ class TG4RootGeometryManager : public TG4Verbose
 };
 
 #endif //TG4_ROOT_GEOMETRY_MANAGER_H
+#endif //USE_VGM
 

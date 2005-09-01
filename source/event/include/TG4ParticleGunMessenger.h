@@ -1,9 +1,8 @@
-// $Id: TG4ParticleGunMessenger.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4ParticleGunMessenger.h,v 1.2 2004/11/10 11:39:27 brun Exp $
 /// \ingroup event
 //
 /// \class TG4ParticleGunMessenger
-/// 
-/// Messenger class that defines commands for TG4ParticleGun.
+/// \brief Messenger class that defines commands for TG4ParticleGun.
 ///
 /// Author: I. Hrivnacova
 

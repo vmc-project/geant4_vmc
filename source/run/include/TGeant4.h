@@ -1,9 +1,8 @@
-// $Id: TGeant4.h,v 1.13 2005/05/17 13:43:57 brun Exp $
+// $Id: TGeant4.h,v 1.14 2005/05/19 08:58:34 brun Exp $
 /// \ingroup run
 //
 /// \class TGeant4
-/// 
-/// Implementation of the TVirtualMC interface for Geant4.                      
+/// \brief Implementation of the TVirtualMC interface for Geant4.                      
 ///
 /// Author: I. Hrivnacova
 

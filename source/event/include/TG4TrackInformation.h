@@ -1,9 +1,8 @@
-// $Id: TG4TrackInformation.h,v 1.2 2003/02/26 13:39:04 brun Exp $
+// $Id: TG4TrackInformation.h,v 1.3 2004/11/10 11:39:27 brun Exp $
 /// \ingroup event
 //
 /// \class TG4TrackInformation
-/// 
-/// Class with additional track information.
+/// \brief Defines additional track information.
 ///
 /// Author: I. Hrivnacova
 

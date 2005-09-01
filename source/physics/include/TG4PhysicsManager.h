@@ -1,9 +1,8 @@
-// $Id: TG4PhysicsManager.h,v 1.5 2004/06/08 10:27:50 brun Exp $
+// $Id: TG4PhysicsManager.h,v 1.6 2004/11/10 11:39:28 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsManager
-/// 
-/// Geant4 implementation of the TVirtualMC interface methods                    
+/// \brief Geant4 implementation of the TVirtualMC interface methods                    
 /// for building Geant4 physics and access to it.
 ///
 /// Author: I. Hrivnacova

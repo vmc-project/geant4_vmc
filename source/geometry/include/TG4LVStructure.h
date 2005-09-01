@@ -1,7 +1,8 @@
-// $Id: TG4LVStructure.h,v 1.2 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4LVStructure.h,v 1.3 2004/11/10 11:39:27 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4LVStructure
+/// \brief A helper class for LVTree
 /// 
 /// Class that associates the name tree with the logical volumes tree. 
 /// Used for printing volumes trees.  

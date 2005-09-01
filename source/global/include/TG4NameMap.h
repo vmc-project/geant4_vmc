@@ -1,9 +1,9 @@
-// $Id: TG4NameMap.h,v 1.3 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4NameMap.h,v 1.4 2004/11/10 11:39:28 brun Exp $
 /// \ingroup global
 //
 /// \class TG4NameMap
-/// 
-/// The map container for associated names. 
+/// \brief The map container for associated names. 
+///
 /// The names can be added into map either in pairs (Add() method)
 /// or standalone - then they are paired with the fSecond data member 
 /// (AddName() method)

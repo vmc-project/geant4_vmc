@@ -1,10 +1,10 @@
-// $Id: TG4G3Units.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4G3Units.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup global
 //
 /// \class TG4G3Units
-/// 
-/// Class defines the G3 default units of physical quantities; 
-/// all physical quantities returned by VMC are expressed in these units.
+/// \brief G3 default units of physical quantities; 
+///
+/// All physical quantities returned by VMC are expressed in these units.
 ///
 /// Author: I. Hrivnacova
 

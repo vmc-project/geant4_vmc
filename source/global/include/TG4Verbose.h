@@ -1,10 +1,12 @@
-// $Id: TG4Verbose.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4Verbose.h,v 1.3 2005/01/28 12:29:38 brun Exp $
 /// \ingroup global
 //
 /// \class TG4Verbose
+/// \brief Base class for defining the verbose level and 
+/// a common messenger 
 ///
-/// Class defines the verbose level
-/// and the static messenger (common for all instances).
+/// Class defines the verbose level and the static messenger 
+/// (common for all instances).                              
 /// Used as a base class for all Geant4 VMC verbose classes;
 /// enables to handle the standard output in a common way.
 ///

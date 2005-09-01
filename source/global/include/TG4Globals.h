@@ -1,7 +1,8 @@
-// $Id: TG4Globals.h,v 1.4 2004/06/18 13:51:29 brun Exp $
+// $Id: TG4Globals.h,v 1.5 2004/11/10 11:39:28 brun Exp $
 /// \ingroup global
 
 /// \class TG4Globals
+/// \brief Basic types and functions of general use.
 ///
 /// Class provides the basic types and functions of general use. 
 /// It is protected from instantiating (only static data members

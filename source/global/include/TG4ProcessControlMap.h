@@ -1,10 +1,11 @@
-// $Id: TG4ProcessControlMap.h,v 1.2 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4ProcessControlMap.h,v 1.3 2004/11/10 11:39:28 brun Exp $
 /// \ingroup global
 //
 /// \class TG4ProcessControlMap
-/// 
-/// Singleton map container for associated pairs
-/// G4 process name and TG4G3Control.
+/// \brief Maps G4 process names to TG4G3Control
+///
+/// Singleton map container for associated pairs G4 process name 
+/// and TG4G3Control.
 ///
 /// Author: I. Hrivnacova
 

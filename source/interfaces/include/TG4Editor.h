@@ -1,9 +1,8 @@
-// $Id: TG4Editor.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4Editor.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup interfaces
 //
 /// \class TG4Editor
-///
-/// A supplementary service class for Geant4 VMC Geometry Browser
+/// \brief A supplementary service class for Geant4 VMC Geometry Browser
 ///
 /// Author: D. Adamova
 

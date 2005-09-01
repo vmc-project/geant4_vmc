@@ -1,10 +1,9 @@
-// $Id: TG4G3PhysicsManager.h,v 1.4 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4G3PhysicsManager.h,v 1.5 2005/03/29 10:39:53 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4G3PhysicsManager
-/// 
-/// This class provides a Geant3 way control
-/// to Geant4 physics. 
+/// \brief Provides a Geant3 way control to Geant4 physics. 
+///
 /// The G3 cuts and process controls are
 /// stored in fCutVector and fControlVector vectors.
 /// These special cuts/controls are activated 

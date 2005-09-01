@@ -1,9 +1,8 @@
-// $Id: TG4PhysicsConstructorSpecialCuts.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsConstructorSpecialCuts.h,v 1.3 2005/03/29 10:39:53 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorSpecialCuts
-/// 
-/// Constructor of special cuts.
+/// \brief Constructor of special cuts.
 ///
 /// Author: I. Hrivnacova
 

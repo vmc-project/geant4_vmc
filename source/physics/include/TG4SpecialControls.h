@@ -1,9 +1,8 @@
-// $Id: TG4SpecialControls.h,v 1.2 2003/12/18 13:27:46 brun Exp $
+// $Id: TG4SpecialControls.h,v 1.3 2004/11/10 11:39:28 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4SpecialControls
-///
-/// Special process that applies the G3 process controls.
+/// \brief Special process that applies the G3 process controls.
 ///
 /// Author: I. Hrivnacova
 

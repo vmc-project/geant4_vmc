@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.12 2004/07/30 12:30:24 brun Exp $
+# $Id: Makefile,v 1.13 2005/02/02 14:16:21 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
@@ -11,7 +11,6 @@ endif
 TOPDIR  = $(shell pwd)/..
 BINDIR  = $(TOPDIR)/tmp/tgt_$(PLATFORM)
 LIBDIR  = $(TOPDIR)/lib/tgt_$(PLATFORM)
-CONDIR  = $(TOPDIR)/convertors
 
 ifeq ($(ROOTSYS),)
 ROOT_INCDIR = $(shell root-config --incdir)
@@ -69,8 +68,6 @@ ifndef G4INCLUDE
 endif  
 
 INCDIR  := $(patsubst %,-I%/include,$(GDIRS)) \
-	   -I../convertors/roottog4/include \
-	   -I../convertors/g4toxml/include \
 	   -I$(G4INCLUDE) \
 	   -I$(CLHEP_BASE_DIR)/include \
 	   -I$(G4INSTALL)/source/interfaces/common/include
@@ -172,18 +169,10 @@ DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCDIR)
 SLIBRARY	= $(LIBDIR)/lib$(PACKAGE).$(SL)
 ALIBRARY	= $(LIBDIR)/lib$(PACKAGE).a
 
-default:	depend convertors $(SLIBRARY)
+default:	depend $(SLIBRARY)
 all:		default includes
-includes:       clean_includes make_includes convertors_includes
-static: 	convertors_static $(ALIBRARY) 
-
-convertors:    
-		@for dir in $(CONDIR); do (cd $$dir && $(MAKE)); done;
-
-convertors_includes:    
-		@for dir in $(CONDIR); do (cd $$dir && $(MAKE) includes); done;
-convertors_static:    
-		@for dir in $(CONDIR); do (cd $$dir && $(MAKE) static); done;
+includes:       clean_includes make_includes
+static: 	$(ALIBRARY) 
 
 ifneq ($(USE_VGM),)
 vgm:

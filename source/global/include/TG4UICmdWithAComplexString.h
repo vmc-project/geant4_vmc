@@ -1,7 +1,8 @@
-// $Id: TG4UICmdWithAComplexString.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4UICmdWithAComplexString.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup global
 //
 /// \class TG4UICmdWithAComplexString
+/// \brief G4 command that takes up to three string values.
 /// 
 /// Concrete class of G4UIcommand. 
 /// The command defined by this class takes up to three string values.

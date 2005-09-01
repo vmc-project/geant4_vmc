@@ -1,7 +1,8 @@
-// $Id: TG4GeometryOutputManager.h,v 1.2 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4GeometryOutputManager.h,v 1.3 2004/11/10 11:39:27 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryOutputManager
+/// \brief Exports geometry into G3toG4 tokens format 
 /// 
 /// This class provides methods for writing
 /// tokens (ASCII form of Geant3 routines calls)

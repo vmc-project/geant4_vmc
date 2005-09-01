@@ -1,10 +1,10 @@
-// $Id: TG4XmlVGMMessenger.h,v 1.2 2004/04/26 17:05:04 brun Exp $
+// $Id: TG4XmlVGMMessenger.h,v 1.1 2005/02/02 14:16:21 brun Exp $
+/// \ingroup geometry
 //
-// Author: I. Hrivnacova
-//
-// Class TG4XmlVGMMessenger
-// ------------------------
-// Messenger class that defines commands for VGM XML Exporter
+/// \class TG4XmlVGMMessenger
+/// \brief Messenger class that defines commands for VGM XML Exporter
+///
+/// Author: I. Hrivnacova
 
 #ifdef USE_VGM
 

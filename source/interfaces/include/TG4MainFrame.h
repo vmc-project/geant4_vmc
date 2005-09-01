@@ -1,9 +1,8 @@
-// $Id: TG4MainFrame.h,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4MainFrame.h,v 1.2 2004/11/10 11:39:28 brun Exp $
 /// \ingroup interfaces
 //
 /// \class TG4MainFrame
-///
-/// Main Window for the Geant4 VMC Geometry Browser
+/// \brief Main Window for the Geant4 VMC Geometry Browser
 ///
 /// Author: D. Adamova
 

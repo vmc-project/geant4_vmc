@@ -1,8 +1,9 @@
-// $Id: TG4ProcessMCMap.h,v 1.2 2003/12/18 13:27:46 brun Exp $
+// $Id: TG4ProcessMCMap.h,v 1.3 2004/11/10 11:39:28 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4ProcessMCMap
-/// 
+/// \brief Maps G4 process names to TMCProcess code 
+///
 /// Singleton map container for associated pairs
 /// of G4 process name and TMCProcess code.
 ///
