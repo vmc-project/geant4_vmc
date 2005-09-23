@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: makedist.sh,v 1.2 2002/12/18 16:49:24 brun Exp $
+# $Id: makedist.sh,v 1.3 2003/07/22 13:26:43 brun Exp $
 # -------------------------------------------------------------------------
 # Script to produce source and optionally binary distribution of geant4_vmc.
 # Called by main Makefile.
@@ -8,7 +8,7 @@
 # $ROOTSYS/build/unix/makedist.sh
 # Author: Fons Rademakers, 29/2/2000
 #
-# Usage: makedist.sh [lib]
+# Usage: makedist.sh [gcc_version] [lib]
 #
 # By I.Hrivnacova, 7/10/2002
 
@@ -17,13 +17,23 @@ CURDIR=`pwd`
 # gmake is called from geant4_vmc/source
 cd ../..
 
-MAKELIB=
+if [ "x$1" = "xlib" ]; then
+   GCC_VERS=""
+   MAKELIB="geant4_vmc/lib"
+elif [ "x$2" = "xlib" ]; then
+   GCC_VERS=$1
+   MAKELIB="geant4_vmc/lib"
+else
+   GCC_VERS=$1
+fi
 VERSION=`cat geant4_vmc/config/version_number`
-MACHINE=`uname`
-OSREL=`uname -r`
-if [ "$1" = "lib" ] ; then  
-  TYPE=$MACHINE.$OSREL.
-  MAKELIB=geant4_vmc/$1
+MACHINE=`root-config --arch`
+if [ "x$MAKELIB" = "xgeant4_vmc/lib" ]; then
+   if [ "x$GCC_VERS" = "x" ]; then  
+      TYPE=$MACHINE.
+   else
+      TYPE=$MACHINE.$GCC_VERS.
+   fi
 else   
   TYPE=""
 fi  
@@ -44,7 +54,7 @@ else
 fi
 
 $TAR $TARFILE $EXCLUDE geant4_vmc/README geant4_vmc/"history" geant4_vmc/config  \
-   geant4_vmc/"source" geant4_vmc/convertors geant4_vmc/examples $MAKELIB
+   geant4_vmc/"source" geant4_vmc/examples $MAKELIB
 cd $CURDIR
 
 exit 0

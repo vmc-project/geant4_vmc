@@ -1,9 +1,10 @@
-# $Id: Makefile.Linux,v 1.1 2002/10/08 13:27:30 brun Exp $
+# $Id: Makefile.linux,v 1.1 2004/07/30 12:30:24 brun Exp $
 
 # Linux platform dependent definitions 
 
 # The compilers
 CXX   = g++ 
+CC    = gcc
 
 # Global optimisation
   ifndef G4NO_OPTIMISE

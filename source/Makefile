@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.13 2005/02/02 14:16:21 brun Exp $
+# $Id: Makefile,v 1.14 2005/09/01 10:04:32 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
@@ -21,6 +21,13 @@ ROOT_BINDIR = $(ROOTSYS)/bin
 endif
 
 include ../config/Makefile.$(PLATFORM)
+
+ifneq ($(findstring gcc,$(CC)),)
+GCC_MAJOR    := $(shell $(CC) -dumpversion 2>&1 | cut -d'.' -f1)
+GCC_MINOR    := $(shell $(CC) -dumpversion 2>&1 | cut -d'.' -f2)
+GCC_VERS     := gcc-$(GCC_MAJOR).$(GCC_MINOR)
+endif
+
 
 ############################### Sources #######################################
 
@@ -191,7 +198,7 @@ depend:		$(SRCS)
 TOCLEAN		= $(BINDIR) $(TOPDIR)/include
 TOCLEANALL	= $(BINDIR) $(TOPDIR)/include $(LIBDIR)
 
-MAKEDIST	= ../config/makedist.sh lib
+MAKEDIST	= ../config/makedist.sh $(GCC_VERS) lib
 MAKEDISTSRC	= ../config/makedist.sh
 
 include ../config/MakeMacros
