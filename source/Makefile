@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.14 2005/09/01 10:04:32 brun Exp $
+# $Id: Makefile,v 1.15 2005/09/23 12:41:03 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
@@ -176,8 +176,7 @@ DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCDIR)
 SLIBRARY	= $(LIBDIR)/lib$(PACKAGE).$(SL)
 ALIBRARY	= $(LIBDIR)/lib$(PACKAGE).a
 
-default:	depend $(SLIBRARY)
-all:		default includes
+default:	depend $(SLIBRARY) includes
 includes:       clean_includes make_includes
 static: 	$(ALIBRARY) 
 

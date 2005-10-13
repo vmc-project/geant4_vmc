@@ -1,5 +1,5 @@
 #!/bin/sh 
-# $Id: test_suite.sh,v 1.1 2005/01/05 10:00:17 brun Exp $
+# $Id: test_suite.sh,v 1.2 2005/05/17 13:44:25 brun Exp $
 #
 # Test all VMC examples and regenerate output files
 #
@@ -40,7 +40,11 @@ do
   
     # run G4
     echo "... Running example $EXAMPLE $TEST with G4" 
-    root.exe -q "run_g4.C(\"$TEST.C\")"  >& g4_$TEST.out
+    root.exe -q "run_g4.C(\"g4Config.C\", \"$TEST.C\")"  >& g4_$TEST.out
+
+    # run G4 + user physics list
+    echo "... Running example $EXAMPLE $TEST with G4 with user physics list" 
+    root.exe -q "run_g4.C(\"g4Config2.C\", \"$TEST.C\")"  >& g4pl_$TEST.out
   done  
 done
 

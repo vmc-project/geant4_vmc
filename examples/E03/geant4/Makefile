@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.7 2002/11/13 13:36:41 brun Exp $
+# $Id: Makefile,v 1.1 2005/05/17 13:52:01 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
@@ -61,6 +61,15 @@ INCDIR  := -Iinclude -I$(G4INCLUDE) \
 	   -I$(G4INSTALL)/physics_lists/hadronic/Packaging/include \
 	   -I$(TOPDIR)/include
 
+ifneq ($(USE_VGM),)
+INCDIR  += -I$(VGM_INSTALL)/packages/VGM/include \
+	   -I$(VGM_INSTALL)/packages/ClhepVGM/include \
+	   -I$(VGM_INSTALL)/packages/BaseVGM/include \
+	   -I$(VGM_INSTALL)/packages/Geant4GM/include \
+	   -I$(VGM_INSTALL)/packages/RootGM/include \
+	   -I$(VGM_INSTALL)/packages/XmlVGM/include
+endif
+
 # C++ compilation flags
 #
 CXXFLAGS := $(CXXOPTS) $(G4MCDEFS) -I. $(INCDIR) -I$(ROOT_INCDIR) 
@@ -69,6 +78,12 @@ CXXFLAGS := $(CXXOPTS) $(G4MCDEFS) -I. $(INCDIR) -I$(ROOT_INCDIR)
 #
 ifdef G4DEBUG
   CXXFLAGS += -DMCDEBUG
+endif
+
+# Use VGM flag 
+#
+ifneq ($(USE_VGM),)
+  CXXFLAGS += -DUSE_VGM
 endif
 
 ######################## Supported Geant4 VIS, UI #############################

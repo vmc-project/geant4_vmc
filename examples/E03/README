@@ -1,4 +1,4 @@
-$Id: README,v 1.2 2005/01/05 08:05:30 brun Exp $
+$Id: README,v 1.3 2005/05/17 13:44:26 brun Exp $
 -----------------------------------------------------------------
 
 Example03
@@ -79,7 +79,7 @@ To run example
   
   With G4:
   root[0] .x run_g4.C  
-  root[0] .x run_g4.C("test2.C")
+  root[0] .x run_g4.C("g4Config.C", "test2.C")
 
   With G4 with user defined physics list:
   root[0] .x run_g4.C("g4Config2.C"); 
