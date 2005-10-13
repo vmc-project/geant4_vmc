@@ -1,8 +1,9 @@
-// $Id: run_g4.C,v 1.1 2003/03/17 14:56:50 brun Exp $
+// $Id: run_g4.C,v 1.2 2005/05/17 13:44:26 brun Exp $
 //
 // Macro for running Example03 with Geant4. 
 
-void run_g4(const TString& testMacro = "test1.C")
+void run_g4(const TString& configMacro = "g4Config.C",
+            const TString& testMacro = "test1.C")
 {
   // Load basic libraries
   gROOT->LoadMacro("../macro/basiclibs.C");
@@ -17,5 +18,5 @@ void run_g4(const TString& testMacro = "test1.C")
   
   // Run test macro
   gROOT->LoadMacro(testMacro);
-  test("g4Config.C");
+  test(configMacro);
 }  
