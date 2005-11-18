@@ -1,4 +1,4 @@
-$Id: README,v 1.2 2003/06/03 21:17:17 brun Exp $
+$Id: README,v 1.3 2005/01/05 08:05:30 brun Exp $
 -----------------------------------------------------------------
 
 Example01
@@ -23,12 +23,13 @@ Macros:
   run_g3.C        - macro for running example 
   g3Config.C      - configuration macro for G3 with native geometry (default)
   g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry
-
+  test_g3.C       - macro for testing VMC geometry getters
 
   For running example with G4:
   
   run_g4.C    - macro for running example 
   g4Config.C  - configuration macro
+  test_g4.C   - macro for testing VMC geometry getters
   
 To run example:
 ===============

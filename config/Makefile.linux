@@ -1,4 +1,4 @@
-# $Id: Makefile.linux,v 1.1 2004/07/30 12:30:24 brun Exp $
+# $Id: Makefile.linux,v 1.2 2005/09/23 12:41:03 brun Exp $
 
 # Linux platform dependent definitions 
 
@@ -26,7 +26,7 @@ SL	  = so
 # starting from root.2.22 on Linux the flags -fno-rtti -fno-exceptions are
 # not necessary any more
 #
-CXXOPTS       = $(OPT) -Wall -fPIC -pipe -fno-for-scope 
+CXXOPTS       = $(OPT) -Wall -fPIC -pipe -fno-for-scope -Woverloaded-virtual
 
 # G4 defines
 

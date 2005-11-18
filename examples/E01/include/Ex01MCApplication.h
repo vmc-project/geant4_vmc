@@ -1,4 +1,4 @@
-// $Id: Ex01MCApplication.h,v 1.2 2003/07/22 06:37:48 brun Exp $
+// $Id: Ex01MCApplication.h,v 1.3 2003/09/27 09:32:47 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -28,6 +28,7 @@ class Ex01MCApplication : public TVirtualMCApplication
     void InitMC(const char *setup);
     void RunMC(Int_t nofEvents);
     void FinishRun();
+    void TestVMCGeometryGetters();
  
     virtual void ConstructGeometry();
     virtual void InitGeometry();

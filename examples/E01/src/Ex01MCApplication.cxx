@@ -1,4 +1,4 @@
-// $Id: Ex01MCApplication.cxx,v 1.9 2004/07/05 08:50:27 brun Exp $
+// $Id: Ex01MCApplication.cxx,v 1.10 2004/07/09 16:49:30 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -16,6 +16,7 @@
 #include <TInterpreter.h>
 #include <TVirtualMC.h>
 #include <TLorentzVector.h>
+#include <TArrayD.h>
 #include <TGeoManager.h>
 
 ClassImp(Ex01MCApplication)
@@ -346,6 +347,173 @@ void Ex01MCApplication::FinishRun()
 }
 
 //_____________________________________________________________________________
+void Ex01MCApplication::TestVMCGeometryGetters()
+{
+  //
+  // Test (new) VMC functions:
+  // GetTransform(), GetShape(), GetMaterial(), GetMedium() 
+  //
+
+  // Get transformation of 10th layer
+  //
+  TString volPath = "/EXPH_1/CALB_1/LAYB_9";
+  TGeoHMatrix matrix;
+  Bool_t result = gMC->GetTransformation(volPath, matrix);
+  if (result) {
+    cout << "Transformation for " << volPath.Data() << ": " << endl;
+    matrix.Print();
+  }
+  else {
+    cerr << "Volume path " << volPath.Data() << " not found" << endl;
+  }
+  cout << endl;
+ 
+  volPath = "/EXPH_1/CALB_1/LAYB_100";
+  result = gMC->GetTransformation(volPath, matrix);
+  if (result) {
+    cout << "Transformation for " << volPath.Data() << ": " << endl;
+    matrix.Print();
+  }
+  else {
+    cerr << "Volume path " << volPath.Data() << " not found" << endl;
+  }
+  cout << endl;
+
+  volPath = "/EXPH_1/CALB_1/LAYB_9";
+  result = gMC->GetTransformation(volPath, matrix);
+  if (result) {
+    cout << "Transformation for " << volPath.Data() << ": " << endl;
+    matrix.Print();
+  }
+  else {
+    cerr << "Volume path " << volPath.Data() << " not found" << endl;
+  }
+  cout << endl;
+
+
+  // Get shape
+  //
+  volPath = "/EXPH_1/CALB_1/LAYB_9";
+  TString shapeType;
+  TArrayD par;
+  result = gMC->GetShape(volPath, shapeType, par);
+  if (result) {
+    cout << "Shape for " << volPath.Data() << ": " << endl;
+    cout << shapeType.Data() << "  parameters: ";
+    for (Int_t ipar = 0; ipar < par.GetSize(); ipar++)
+      cout << par.At(ipar) << ",  ";
+    cout << endl;  
+  }
+  else {
+    cerr << "Volume path " << volPath.Data() << " not found" << endl;
+  }
+  cout << endl;
+
+  // Get material
+  //
+  TString volName = "LAYB";
+  TString matName;
+  Int_t imat;
+  Double_t a, z, density, radl, inter;
+  TArrayD mpar;
+  result = gMC->GetMaterial(volName, matName, imat, a, z, density,
+		            radl, inter, mpar);
+  if (result) {
+    cout << "Material for " << volName.Data() << " volume: " << endl;
+    cout << matName.Data() << "  " << imat 
+         << "  Aeff = " << a 
+	 << "  Zeff = " << z 
+	 << "  density = " << density 
+	 << "  radl = " << radl
+	 << "  inter = " << inter 
+	 << endl;
+    if ( mpar.GetSize() > 0 ) {
+      cout  << " User defined parameters: ";
+      for (Int_t ipar = 0; ipar < par.GetSize(); ipar++)
+        cout << mpar.At(ipar) << ",  ";
+      cout << endl; 
+    }   
+  }
+  else {
+    cerr << "Volume " << volName.Data() << " not found" << endl;
+  }
+  cout << endl;
+
+  // Get medium
+  //
+  TString medName;
+  Int_t imed, nmat, isvol, ifield;
+  Double_t fieldm, tmaxfd, stemax, deemax, epsil, stmin;
+  result = gMC->GetMedium(volName,
+                          medName, imed, nmat, isvol, ifield,
+		          fieldm, tmaxfd, stemax, deemax, epsil, stmin, mpar);
+  if (result) {
+    cout << "Medium for " << volName.Data() << " volume: " << endl;
+    cout << medName.Data() << "  " << imed 
+         << "  nmat = " << nmat
+	 << "  isvol = " << isvol 
+	 << "  ifield = " << ifield 
+	 << "  fieldm = " << fieldm
+	 << "  tmaxfd = " << tmaxfd 
+	 << "  stemax = " << stemax
+	 << "  deemax = " << deemax
+	 << "  epsil = " << epsil
+	 << "  stmin = " << stmin
+	 << endl;
+    if ( mpar.GetSize() > 0 ) {
+      cout  << " User defined parameters: ";
+      for (Int_t ipar = 0; ipar < par.GetSize(); ipar++)
+        cout << mpar.At(ipar) << ",  ";
+      cout << endl; 
+    }   
+  }
+  else {
+    cerr << "Volume " << volName.Data() << " not found" << endl;
+  }
+  cout << endl;
+
+  // Test getters non-existing position/volume
+  //
+  
+  // Transformation
+  volPath = "/EXPH_1/CALB_1/LAYB_100";
+  result = gMC->GetTransformation(volPath, matrix);
+  cout << "GetTransformation: Volume path " << volPath.Data(); 
+  if (!result) 
+    cout << " not found" << endl;
+  else 
+    cout << " found" << endl;
+  
+  // Shape
+  result = gMC->GetShape(volPath, shapeType, par);
+  cout << "GetShape: Volume path " << volPath.Data(); 
+  if (!result) 
+    cout << " not found" << endl;
+  else 
+    cout << " found" << endl;
+
+  // Material
+  volName = "XYZ";
+  result = gMC->GetMaterial(volName, matName, imat, a, z, density,
+		            radl, inter, mpar);
+  cout << "GetMaterial: Volume name " << volName.Data(); 
+  if (!result) 
+    cout << " not found" << endl;
+  else 
+    cout << " found" << endl;
+
+  // Medium
+  result = gMC->GetMedium(volName,
+                          medName, imed, nmat, isvol, ifield,
+		          fieldm, tmaxfd, stemax, deemax, epsil, stmin, mpar);
+  cout << "GetMedium: Volume name " << volName.Data(); 
+  if (!result) 
+    cout << " not found" << endl;
+  else 
+    cout << " found" << endl;
+ }  
+
+//_____________________________________________________________________________
 void Ex01MCApplication::ConstructGeometry()
 {    
   //
@@ -479,9 +647,9 @@ void Ex01MCApplication::Stepping()
        << position.X() << " " << position.Y() << " " << position.Z() 
        << "  in " <<  gMC->CurrentVolName() << "  ";
        
-  if (gMC->GetMedium() == fImedAr) cout <<  "ArgonGas";      
-  if (gMC->GetMedium() == fImedAl) cout <<  "Aluminium";      
-  if (gMC->GetMedium() == fImedPb) cout <<  "Lead";      
+  if (gMC->CurrentMedium() == fImedAr) cout <<  "ArgonGas";      
+  if (gMC->CurrentMedium() == fImedAl) cout <<  "Aluminium";	  
+  if (gMC->CurrentMedium() == fImedPb) cout <<  "Lead";      
 
   cout << endl;
 }

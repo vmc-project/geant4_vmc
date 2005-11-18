@@ -1,0 +1,99 @@
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version   5.06/00   30 October 2005   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+FreeType Engine v2.1.9 used to render TrueType fonts.
+Compiled on 16 November 2005 for linux with thread support.
+
+CINT/ROOT C/C++ Interpreter version 5.16.2, July 14 2005
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+
+Welcome to the ROOT tutorials
+
+
+Type ".x demos.C" to get a toolbar from which to execute the demos
+
+Type ".x demoshelp.C" to see the help window
+
+
+Processing test_g3.C...
+Note: File "/work/projects/vmc/dev/root/lib/libPhysics.so" already loaded
+Note: File "/work/projects/vmc/dev/root/lib/libEG.so" already loaded
+Loading Geant3 libraries ...
+Loading Geant3 libraries ... finished
+
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   279616207    10AA9ACF HEX
+
+ MZSTOR.  Initialize Store  0  in /GCBANK/
+          with Store/Table at absolute adrs   279638757   279616207
+                                        HEX    10AAF2E5    10AA9ACF
+                                        HEX        5662           0
+                              relative adrs       22114           0
+          with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
+          This store has a fence of   16 words.
+
+ MZLOGL.  Set Log Level 0 for store  0
+1*****  GEANT Version  3.21/11 Released on 100298
+0*****  Correction Cradle Version  0.1100
+
+ MZDIV.   Initialize Division  Constant  in Store  0
+          NW/NWMAX=   20004000000,  MODE/KIND=  1  2
+          Division 20 initialized.
+
+ MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
+
+ MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+Geant3 has been created.
+Geometry will be defined via VMC
+ GGCLOS: Start automatic volume ordering:
+
+ MZLINK.  Initialize Link Area  /GCHVIR/  for Store  0 NL/NS=     4     1
+
+ MZLINK.  Initialize Link Area  /GCDINA/  for Store  0 NL/NS=     4     4
+
+ Calculating cross section tables, see gphysi.dat for more information
+
+ Cross section calculation concluded successfully
+Transformation for /EXPH_1/CALB_1/LAYB_9: 
+matrix  - tr=1  rot=1  refl=0
+  1.000000    0.000000    0.000000    Tx = 100
+  0.000000    1.000000    0.000000    Ty = 0
+  0.000000    0.000000    1.000000    Tz = 0
+
+Volume path /EXPH_1/CALB_1/LAYB_100 not found
+ GLVOLU : Volume LAYB for Level   3 does not exist in Volume CALB
+
+Transformation for /EXPH_1/CALB_1/LAYB_9: 
+matrix  - tr=1  rot=1  refl=0
+  1.000000    0.000000    0.000000    Tx = 100
+  0.000000    1.000000    0.000000    Ty = 0
+  0.000000    0.000000    1.000000    Tz = 0
+
+Shape for /EXPH_1/CALB_1/LAYB_9: 
+BOX  parameters: 1,  40,  40,  
+
+Material for LAYB volume: 
+Aluminium  2  Aeff = 26.98  Zeff = 13  density = 2.7  radl = 8.8751  inter = 45.6209
+
+Medium for LAYB volume: 
+Aluminium  2  nmat = 2  isvol = 0  ifield = 0  fieldm = 0  tmaxfd = 20  stemax = 1e+10  deemax = 0.182866  epsil = 0.001  stmin = 0.0334543
+
+ GLVOLU : Volume LAYB for Level   3 does not exist in Volume CALB
+GetTransformation: Volume path /EXPH_1/CALB_1/LAYB_100 not found
+ GLVOLU : Volume LAYB for Level   3 does not exist in Volume CALB
+GetShape: Volume path /EXPH_1/CALB_1/LAYB_100 not found
+VolId: Volume XYZ not found
+GetMaterial: Volume name XYZ not found
+VolId: Volume XYZ not found
+GetMedium: Volume name XYZ not found
+
+This is the end of ROOT -- Goodbye
+

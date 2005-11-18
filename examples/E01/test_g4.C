@@ -1,6 +1,6 @@
 // $Id: run_g4.C,v 1.2 2003/06/03 17:05:48 brun Exp $
 //
-// Macro for running Example01 with Geant4. 
+// Macro for testing VMC getters with Geant4. 
 
 {
   // Load basic libraries
@@ -20,9 +20,9 @@
 
   // Initialize MC
   appl->InitMC("g4Config.C");
-
-  // Run MC
-  appl->RunMC(1);
+  
+  // Test VMC geometry getters
+  appl->TestVMCGeometryGetters();
   
   delete appl;
 }  
