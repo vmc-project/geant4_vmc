@@ -1,7 +1,8 @@
-// $Id: TGeant4.icc,v 1.8 2004/11/10 11:39:28 brun Exp $
+// $Id: TGeant4.icc,v 1.9 2005/01/05 08:04:58 brun Exp $
 // Category: run
 
 #include "TG4StepManager.h" 
+#include "TG4Globals.h" 
 
 //
 // methods for step management
@@ -118,6 +119,28 @@ inline Int_t TGeant4::CurrentMaterial(Float_t &a, Float_t &z,
 } 
 
 //_____________________________________________________________________________
+inline Int_t TGeant4::CurrentMedium() const
+{ 
+/// Returns the second index of the current material (corresponding to
+/// G3 tracking medium index).
+
+  return fStepManager->CurrentMedium(); 
+} 
+
+//_____________________________________________________________________________
+inline Int_t TGeant4::GetMedium() const
+{ 
+/// Returns the second index of the current material (corresponding to
+/// G3 tracking medium index).
+
+  G4String text = "TGeant4::GetMedium(): \n";
+  text = text + "    Deprecated function - use CurrentMedium() instead"; 
+  TG4Globals::Warning(text);
+
+  return CurrentMedium(); 
+} 
+
+//_____________________________________________________________________________
 inline void TGeant4::Gmtod(Float_t* xm, Float_t* xd, Int_t iflag)
 { 
 /// Transforms a position from the world reference frame
@@ -168,15 +191,6 @@ inline Int_t TGeant4::GetMaxNStep() const
 /// Returns the maximum number of steps.
 
   return fStepManager->GetMaxNStep(); 
-} 
-
-//_____________________________________________________________________________
-inline Int_t TGeant4::GetMedium() const
-{ 
-/// Returns the second index of the current material (corresponding to
-/// G3 tracking medium index).
-
-  return fStepManager->GetMedium(); 
 } 
 
 //_____________________________________________________________________________

@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.h,v 1.6 2005/05/17 13:43:57 brun Exp $
+// $Id: TG4ModularPhysicsList.h,v 1.7 2005/09/01 10:04:33 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4ModularPhysicsList
@@ -36,7 +36,8 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
     virtual void Configure();
     virtual void ConstructProcess();
     virtual void SetCuts();
-    virtual void VerboseLevel(G4int level);
+    virtual G4int VerboseLevel() const;
+    virtual void  VerboseLevel(G4int level);
     void PrintAllProcesses() const;
     void DumpAllProcesses() const;
 

@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.10 2005/05/17 13:43:57 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.11 2005/05/19 08:58:34 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryServices
@@ -24,9 +24,12 @@
 #include <G4UserLimits.hh>
 #include <G3toG4.hh> 
 #include <G3EleTable.hh> 
+
+#include <TGeoMatrix.h>
+#include "Riostream.h"
+
 #include <vector>
 #include <iomanip>
-
 #include <math.h>
 
 TG4GeometryServices* TG4GeometryServices::fgInstance = 0;
@@ -254,6 +257,27 @@ G4String TG4GeometryServices::CutMaterialName(const char* name) const
 }  
 
 //_____________________________________________________________________________
+G4String  TG4GeometryServices::CutVolumePath(const G4String& volumePath, 
+                      G4String& volName, G4int& copyNo) const
+{
+/// Extract the first volume name and copy number from the volumePath
+
+  G4String path(volumePath);
+  
+  G4int npos1 = path.find('/');
+  G4int npos2 = path.find('_');
+  G4int npos3 = path.find('/', 2);
+  if ( npos3<0 ) npos3 = path.length();
+  
+  volName = path(npos1+1, npos2-npos1-1 );
+  G4String copyNoStr = path(npos2+1, npos3-npos2 );
+  istringstream in(copyNoStr);
+  in >> copyNo;
+  
+  return path(npos3, path.length()-npos3);
+}
+
+//_____________________________________________________________________________
 G4String  TG4GeometryServices::G4ToG3VolumeName(const G4String& name) const
 {
 /// Cut _copyNo extension added to logical volume name in case 
@@ -340,6 +364,25 @@ TG4GeometryServices::SurfaceFinish(EMCOpSurfaceFinish finish) const
       return polished;
   }  
 }
+
+//_____________________________________________________________________________
+void  TG4GeometryServices::Convert(const HepTransform3D& transform, 
+                                   TGeoHMatrix& matrix) const
+{
+/// Convert CLHEP Transform3D in Root TGeoHMatrix
+
+  Double_t* translation = new Double_t[3];
+  Double_t* rotation = new Double_t[9];
+  for (G4int i=0; i<3; i++)
+    for (G4int j=0; j<3; j++) {
+      rotation[i*3+j] = transform(i, j);
+    translation[i] = transform(i, 3)/cm;
+  }
+  matrix.SetTranslation(translation);    
+  matrix.SetRotation(rotation);
+  delete [] translation;    
+  delete [] rotation;
+}      
 
 //_____________________________________________________________________________
 G4Material* TG4GeometryServices::MixMaterials(G4String name, G4double density, 
@@ -664,16 +707,17 @@ G4VPhysicalVolume*
 TG4GeometryServices::FindPhysicalVolume(const G4String& name, G4int copyNo,
                                         G4bool silent) const
 {
-/// Find a logical volume with the specified name in G4LogicalVolumeStore.
+/// Find a physical volume with the specified name and copyNo in 
+/// G4PhysicalVolumeStore.
 
   G4PhysicalVolumeStore* pvStore = G4PhysicalVolumeStore::GetInstance();
   
   for (G4int i=0; i<G4int(pvStore->size()); i++) {
     G4VPhysicalVolume* pv = (*pvStore)[i];
-    G4cout << i << "th volume " 
-           << G4ToG3VolumeName(pv->GetName()) << "  " 
-           << pv->GetCopyNo() 
-	   << G4endl;
+    //G4cout << i << "th volume " 
+    //       << G4ToG3VolumeName(pv->GetName()) << "  " 
+    //       << pv->GetCopyNo() 
+    //	     << G4endl;
     if ( G4ToG3VolumeName(pv->GetName()) == name &&
          pv->GetCopyNo() == copyNo ) return pv;
   }
@@ -685,6 +729,33 @@ TG4GeometryServices::FindPhysicalVolume(const G4String& name, G4int copyNo,
   }
   return 0;	       	         
 }  
+
+//_____________________________________________________________________________
+G4VPhysicalVolume* 
+TG4GeometryServices::FindDaughter(const G4String& name, G4int copyNo,
+                                  G4LogicalVolume* mlv, G4bool silent) const
+{
+/// Find daughter specified by name and copyNo in the given
+/// mother logical volume
+
+  for (G4int i=0; i<mlv->GetNoDaughters(); i++) {
+    G4VPhysicalVolume* dpv = mlv->GetDaughter(i);
+    if ( G4ToG3VolumeName(dpv->GetName()) == name &&
+         dpv->GetCopyNo() == copyNo ) return dpv;
+  }	 
+  
+  if (!silent) {
+    G4String text = "TG4GeometryServices:: FindDaughter:\n"; 
+    text = text + "    Physical volume " + name + " does not exist.";
+    TG4Globals::Warning(text);
+  }
+  return 0;	       	         
+}  
+	  
+        
+      
+
+				  
 
 //_____________________________________________________________________________
 TG4Limits* 

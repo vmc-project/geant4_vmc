@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.13 2005/03/29 10:39:53 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.14 2005/05/20 21:46:56 brun Exp $
 // Category: digits+hits
 //
 // Class TG4StepManager
@@ -491,6 +491,20 @@ Int_t TG4StepManager::CurrentMaterial(Float_t &a, Float_t &z, Float_t &dens,
 }
 
 //_____________________________________________________________________________
+Int_t TG4StepManager::CurrentMedium() const
+{   
+/// Return the second index of the current material (corresponding to
+/// G3 tracking medium index).
+
+  // current logical volume
+  G4LogicalVolume* curLV = GetCurrentPhysicalVolume()->GetLogicalVolume();
+
+  // medium index  
+  TG4GeometryServices* geometryServices = TG4GeometryServices::Instance();
+  return geometryServices->GetMediumId(curLV);
+}
+
+//_____________________________________________________________________________
 void TG4StepManager::Gmtod(Float_t* xm, Float_t* xd, Int_t iflag) 
 { 
 /// Transform a position from the world reference frame
@@ -779,20 +793,6 @@ void TG4StepManager::TrackPosition(Double_t& x, Double_t& y, Double_t& z) const
   x = positionVector.x();
   y = positionVector.y();
   z = positionVector.z();
-}
-
-//_____________________________________________________________________________
-Int_t TG4StepManager::GetMedium() const
-{   
-/// Return the second index of the current material (corresponding to
-/// G3 tracking medium index).
-
-  // current logical volume
-  G4LogicalVolume* curLV = GetCurrentPhysicalVolume()->GetLogicalVolume();
-
-  // medium index  
-  TG4GeometryServices* geometryServices = TG4GeometryServices::Instance();
-  return geometryServices->GetMediumId(curLV);
 }
 
 //_____________________________________________________________________________

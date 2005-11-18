@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.13 2005/05/17 13:43:57 brun Exp $
+// $Id: TGeant4.cxx,v 1.14 2005/05/19 08:58:34 brun Exp $
 // Category: run
 //
 // Class TGeant4
@@ -467,6 +467,56 @@ void  TGeant4::SetMaterialProperty(
   fGeometryManager->SetMaterialProperty(surfaceName, propertyName, np, pp, values); 
 }			 
     
+//_____________________________________________________________________________
+Bool_t TGeant4::GetTransformation(const TString& volumePath, 
+                         TGeoHMatrix& matrix)
+{			 
+/// Return the transformation matrix between the volume specified by
+/// the path volumePath and the top volume.
+
+  return fGeometryManager->GetTransformation(volumePath, matrix);
+}			 
+   
+//_____________________________________________________________________________
+Bool_t TGeant4::GetShape(const TString& volumePath, 
+                         TString& shapeType, TArrayD& par)
+{			 
+/// Return the name of the shape and its parameters for the volume
+/// specified by the volume name.
+
+  return fGeometryManager->GetShape(volumePath, shapeType, par);
+}  
+
+//_____________________________________________________________________________
+Bool_t TGeant4::GetMaterial(const TString& volumeName,
+	 	         TString& name, Int_t& imat,
+		         Double_t& a, Double_t& z, Double_t& density,
+		         Double_t& radl, Double_t& inter, TArrayD& par)
+{			 
+/// Return the material parameters for the volume specified by
+/// the volume name.
+
+  return fGeometryManager
+    ->GetMaterial(volumeName, name, imat, a, z, density, radl, inter, par);
+}				        
+		     
+//_____________________________________________________________________________
+Bool_t TGeant4::GetMedium(const TString& volumeName,
+                         TString& name, Int_t& imed,
+		         Int_t& nmat, Int_t& isvol, Int_t& ifield,
+		         Double_t& fieldm, Double_t& tmaxfd, Double_t& stemax,
+		         Double_t& deemax, Double_t& epsil, Double_t& stmin,
+		         TArrayD& par)
+{			 
+// Returns the medium parameters for the volume specified by the
+// volume name.
+
+  return fGeometryManager
+    ->GetMedium(volumeName, name, imed, nmat, isvol, ifield, 
+                fieldm, tmaxfd, stemax, deemax, epsil, stmin, par); 
+                 
+}				        
+
 //_____________________________________________________________________________
 void TGeant4::WriteEuclid(const char* fileName, const char* topVol, 
                           Int_t number, Int_t nlevel) 

@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.cxx,v 1.6 2005/05/17 13:43:57 brun Exp $
+// $Id: TG4ModularPhysicsList.cxx,v 1.7 2005/07/22 10:22:48 brun Exp $
 // Category: physics
 //
 // Class TG4ModularPhysicsList
@@ -350,6 +350,13 @@ void TG4ModularPhysicsList::SetCuts()
   }
 }
 
+//_____________________________________________________________________________
+G4int TG4ModularPhysicsList::VerboseLevel() const 
+{
+/// Return verbose level (via TG4VVerbose)
+
+  return TG4VVerbose::VerboseLevel();
+}
 
 //_____________________________________________________________________________
 void TG4ModularPhysicsList::VerboseLevel(G4int level) 

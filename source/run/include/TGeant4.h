@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.14 2005/05/19 08:58:34 brun Exp $
+// $Id: TGeant4.h,v 1.15 2005/09/01 10:04:33 brun Exp $
 /// \ingroup run
 //
 /// \class TGeant4
@@ -21,6 +21,10 @@ class TG4PhysicsManager;
 class TG4StepManager;
 class TG4VisManager;
 class TG4RunManager;
+
+class TGeoHMatrix;
+class TArrayD;
+class TString;
 
 class TGeant4: public TVirtualMC
 {
@@ -107,6 +111,21 @@ class TGeant4: public TVirtualMC
                          const char* surfaceName, const char* propertyName, 
 			 Int_t np, Double_t* pp, Double_t* values);
     
+    // functions for access to geometry
+    virtual Bool_t GetTransformation(const TString& volumePath, 
+                         TGeoHMatrix& matrix);
+    virtual Bool_t GetShape(const TString& volumePath, 
+                         TString& shapeType, TArrayD& par);
+    virtual Bool_t GetMaterial(const TString& volumeName,
+	 	         TString& name, Int_t& imat,
+		         Double_t& a, Double_t& z, Double_t& density,
+		         Double_t& radl, Double_t& inter, TArrayD& par);
+    virtual Bool_t GetMedium(const TString& volumeName,
+                         TString& name, Int_t& imed,
+		         Int_t& nmat, Int_t& isvol, Int_t& ifield,
+		         Double_t& fieldm, Double_t& tmaxfd, Double_t& stemax,
+		         Double_t& deemax, Double_t& epsil, Double_t& stmin,
+		         TArrayD& par);
 
     // functions from GGEOM 
     virtual Int_t Gsvolu(const char *name, const char *shape, Int_t nmed,  
@@ -202,6 +221,7 @@ class TGeant4: public TVirtualMC
     virtual const char* CurrentVolPath();
     virtual Int_t CurrentMaterial(Float_t &a, Float_t &z, 
                     Float_t &dens, Float_t &radl, Float_t &absl) const;  
+    virtual Int_t CurrentMedium() const;
     virtual void  Gmtod(Float_t* xm, Float_t* xd, Int_t iflag);
     virtual void  Gmtod(Double_t* xm, Double_t* xd, Int_t iflag);
     virtual void  Gdtom(Float_t* xd, Float_t* xm, Int_t iflag);

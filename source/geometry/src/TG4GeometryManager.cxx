@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.13 2005/05/19 08:58:34 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.14 2005/09/01 10:04:32 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -35,13 +35,33 @@
 #include <G4PVPlacement.hh>
 #include <G4Material.hh>
 #include <G4MaterialPropertiesTable.hh>
-#include "G4LogicalBorderSurface.hh"
-#include "G4LogicalSkinSurface.hh"
-#include "G4OpticalSurface.hh"
+#include <G4LogicalBorderSurface.hh>
+#include <G4LogicalSkinSurface.hh>
+#include <G4OpticalSurface.hh>
 #include <G4Element.hh> 
 #include <G4ReflectionFactory.hh>
+#include <G4ReflectedSolid.hh>
+#include <G4Box.hh>
+#include <G4Cons.hh>
+#include <G4EllipticalTube.hh>
+#include <G4Hype.hh>
+#include <G4Para.hh>
+#include <G4Polycone.hh>
+#include <G4Polyhedra.hh>
+#include <G4Sphere.hh>
+#include <G4Torus.hh>
+#include <G4Trap.hh>
+#include <G4Trd.hh>
+#include <G4Tubs.hh>
+#include <G4TwistedTrap.hh>
 
 #include <TGeoManager.h>
+#include <TGeoMatrix.h>
+#include <TArrayD.h>
+#include <TString.h>
+#include <Riostream.h>
+
+#include <math.h>
 
 // extern global method from g3tog4
 void G3CLRead(G4String &, char *);
@@ -240,8 +260,8 @@ void TG4GeometryManager::Mixture(Int_t& kmat, const char *name, Float_t *a,
 } 
 
 //_____________________________________________________________________________
-void TG4GeometryManager::Mixture(Int_t& kmat, const char *name, Double_t *a, 
-          Double_t *z, Double_t dens, Int_t nlmat, Double_t *wmat)
+void TG4GeometryManager::Mixture(Int_t& kmat, const char *name, Double_t* a, 
+          Double_t* z, Double_t dens, Int_t nlmat, Double_t* wmat)
 { 
 /// Create material composed of more elements.                            \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate
@@ -812,6 +832,489 @@ void TG4GeometryManager::SetMaterialProperty(
 }			     
  
 //_____________________________________________________________________________
+Bool_t TG4GeometryManager::GetTransformation(const TString& volumePath, 
+                              TGeoHMatrix& matrix)
+{			 
+/// Return the transformation matrix between the volume specified by
+/// the path volumePath and the first volume in the path.
+
+  G4String path = volumePath.Data();
+
+  G4String volName;
+  G4int copyNo; 
+  path = fGeometryServices->CutVolumePath(path, volName, copyNo);     
+
+  // Get the first volume
+  G4VPhysicalVolume* pvTop = 0;
+  if ( fGeometryServices->GetWorld()->GetName() == volName) {
+    // Check world volume first
+    pvTop = fGeometryServices->GetWorld();  
+  }	
+  else  
+    pvTop = fGeometryServices->FindPhysicalVolume(volName, copyNo, true);
+   
+  if ( !pvTop ) {
+    G4String text = "TG4GeometryManager::GetTransformation: \n";
+    text = text + "    Top volume in " + volumePath + " does not exist.";
+    TG4Globals::Warning(text);
+    return false;
+  }
+
+  // Calculate transformation
+  //
+  G4VPhysicalVolume* pvMother = pvTop;
+  HepTransform3D transform;
+  
+  while ( path.length() > 0 ) {
+    // Extract next volume name & copyNo
+    path = fGeometryServices->CutVolumePath(path, volName, copyNo);     
+  
+    // Find daughter
+    G4VPhysicalVolume* pvDaughter 
+      = fGeometryServices
+        ->FindDaughter(volName, copyNo, pvMother->GetLogicalVolume(), true);
+	
+    if ( !pvDaughter ) {
+      G4String text = "TG4GeometryManager: GetTransformation: \n";
+      text = text + "    Daughter volume " + volName;
+      text = text + " in " + volumePath + " does not exist.";
+      TG4Globals::Warning(text);
+      return false;
+    }
+    
+    transform = transform * HepTransform3D(*pvDaughter->GetObjectRotation(),
+                                            pvDaughter->GetObjectTranslation());
+    pvMother = pvDaughter; 
+  }   
+  
+  // put transform in TGeoHMatrix here
+  fGeometryServices->Convert(transform, matrix);
+  return true;
+}			 
+   
+//_____________________________________________________________________________
+Bool_t TG4GeometryManager::GetShape(const TString& volumePath, 
+                              TString& shapeType, TArrayD& par)
+{			 
+/// Return the name of the shape and its parameters for the volume
+/// specified by the volume name.
+
+   // Get volume & copyNo   
+   G4String path = volumePath.Data();
+   G4int last1 = path.rfind('/');
+   G4int last2 = path.rfind('_');
+   G4String volName = path(last1+1, last2-last1-1 );
+   G4String copyNoStr = path(last2+1, path.length()-last2 );
+   istringstream in(copyNoStr);
+   G4int copyNo;
+   in >> copyNo;
+
+   // Find physical volume
+   G4VPhysicalVolume* pv
+     = fGeometryServices->FindPhysicalVolume(volName, copyNo, true);
+   
+   if (!pv) {
+     G4String text = "TG4GeometryManager: GetShape: \n";
+     text = text + "    Physical volume " + volumePath + " does not exist.";
+     TG4Globals::Warning(text);
+     return false;
+   } 
+     
+   // Get solid
+   G4VSolid* solid = pv->GetLogicalVolume()->GetSolid();
+   
+   // Get constituent solid if reflected solid
+   Bool_t isReflected = false;
+   G4ReflectedSolid* reflSolid = dynamic_cast<G4ReflectedSolid*>(solid);
+   if ( reflSolid ) {
+     solid = reflSolid->GetConstituentMovedSolid();
+     isReflected = true;
+   }  
+   
+   Int_t npar;
+
+   if ( solid->GetEntityType() == "G4Box" ) {
+      shapeType = "BOX";
+      npar = 3;
+      par.Set(npar);
+      G4Box *box = (G4Box*)solid;
+      par.AddAt(box->GetXHalfLength()/cm, 0);
+      par.AddAt(box->GetYHalfLength()/cm, 1);
+      par.AddAt(box->GetZHalfLength()/cm, 2);
+      return kTRUE;
+   }
+      
+   if ( solid->GetEntityType() == "G4Cons" ) {
+      shapeType = "CONS";
+      npar = 7;
+      par.Set(npar);
+      G4Cons *cons = (G4Cons*)solid;
+      par.AddAt(cons->GetZHalfLength()/cm,       0);
+      if ( !isReflected) {
+        par.AddAt(cons->GetInnerRadiusMinusZ()/cm, 1);
+        par.AddAt(cons->GetOuterRadiusMinusZ()/cm, 2);
+        par.AddAt(cons->GetInnerRadiusPlusZ()/cm,  3);
+        par.AddAt(cons->GetOuterRadiusPlusZ()/cm,  4);
+      }
+      else {	
+        par.AddAt(cons->GetInnerRadiusPlusZ()/cm, 1);
+        par.AddAt(cons->GetOuterRadiusPlusZ()/cm, 2);
+        par.AddAt(cons->GetInnerRadiusMinusZ()/cm,  3);
+        par.AddAt(cons->GetOuterRadiusMinusZ()/cm,  4);
+      }	
+      par.AddAt(cons->GetStartPhiAngle()/deg,    5);
+      par.AddAt(cons->GetDeltaPhiAngle()/deg,    6);
+      return kTRUE;
+   }   
+   
+   if ( solid->GetEntityType() == "G4EllipticalTube" ) {
+      shapeType = "ELTU";
+      npar = 3;
+      par.Set(npar);
+      G4EllipticalTube *eltu = (G4EllipticalTube*)solid;
+      par.AddAt(eltu->GetDx()/cm, 0);
+      par.AddAt(eltu->GetDy()/cm, 1);
+      par.AddAt(eltu->GetDz()/cm, 2);
+      return kTRUE;
+   }   
+   
+   // Add to G3toG4, VGM
+   if ( solid->GetEntityType() == "G4Hype" ) {
+      shapeType = "HYPE";
+      npar = 5;
+      par.Set(npar);
+      G4Hype *hype = (G4Hype*)solid;
+      par.AddAt(hype->GetInnerRadius()/cm, 0);
+      par.AddAt(hype->GetOuterRadius()/cm, 1);
+      par.AddAt(hype->GetZHalfLength()/cm, 2);
+      par.AddAt(hype->GetInnerStereo(), 3);    // ?? unit
+      par.AddAt(hype->GetOuterStereo(), 4);    // ?? unit
+      return kTRUE;
+   }   
+
+   // Add G4Orb   
+
+   if ( solid->GetEntityType() == "G4Para" ) {
+      shapeType = "PARA";
+      npar = 6;
+      par.Set(npar);
+      G4Para *para = (G4Para*)solid;
+      par.AddAt(para->GetXHalfLength()/cm, 0);
+      par.AddAt(para->GetYHalfLength()/cm, 1);
+      par.AddAt(para->GetZHalfLength()/cm, 2);
+      par.AddAt(atan(para->GetTanAlpha())/deg,  3);
+      if ( !isReflected) 
+        par.AddAt(para->GetSymAxis().theta()/deg, 4);
+      else
+        par.AddAt((M_PI - para->GetSymAxis().theta())/deg, 4);
+      par.AddAt(para->GetSymAxis().phi()/deg,   5);
+      return kTRUE;
+   }   
+   
+   if ( solid->GetEntityType() == "G4Polycone" ) {
+      shapeType = "PCON";
+      G4Polycone *pcon = (G4Polycone*)solid;
+      Int_t nz = pcon->GetOriginalParameters()->Num_z_planes;
+      const Double_t* rmin = pcon->GetOriginalParameters()->Rmin;
+      const Double_t* rmax = pcon->GetOriginalParameters()->Rmax;
+      const Double_t* z = pcon->GetOriginalParameters()->Z_values;
+      npar = 3 + 3*nz;
+      par.Set(npar);
+      par.AddAt(pcon->GetStartPhi()/deg, 0);
+      par.AddAt((pcon->GetEndPhi() - pcon->GetStartPhi())/deg, 1);
+      par.AddAt(pcon->GetOriginalParameters()->Num_z_planes, 2);
+      for (Int_t i=0; i<nz; i++) {
+         if ( !isReflected ) 
+           par.AddAt(z[i]/cm,    3+3*i);
+	 else 
+           par.AddAt(- z[i]/cm,    3+3*i);
+         par.AddAt(rmin[i]/cm, 3+3*i+1);
+         par.AddAt(rmax[i]/cm, 3+3*i+2);
+      }   
+      return kTRUE; 
+   }   
+
+   if ( solid->GetEntityType() == "G4Polyhedra" ) {
+      shapeType = "PGON";
+      G4Polyhedra *pgon = (G4Polyhedra*)solid;
+      Int_t nz = pgon->GetOriginalParameters()->Num_z_planes;
+      const Double_t* rmin = pgon->GetOriginalParameters()->Rmin;
+      const Double_t* rmax = pgon->GetOriginalParameters()->Rmax;
+      const Double_t* z = pgon->GetOriginalParameters()->Z_values;
+      npar = 4 + 3*nz;
+      par.Set(npar);
+      par.AddAt(pgon->GetStartPhi()/deg,0);
+      par.AddAt((pgon->GetEndPhi() - pgon->GetStartPhi())/deg, 1);
+      par.AddAt(pgon->GetOriginalParameters()->numSide, 2);
+      par.AddAt(pgon->GetOriginalParameters()->Num_z_planes, 3);
+      for (Int_t i=0; i<nz; i++) {
+         if ( !isReflected ) 
+           par.AddAt(z[i]/cm,   4+3*i);
+	 else 
+           par.AddAt(- z[i]/cm, 4+3*i);
+         par.AddAt(rmin[i]/cm, 4+3*i+1);
+         par.AddAt(rmax[i]/cm, 4+3*i+2);
+      }   
+      return kTRUE; 
+   }   
+
+   if ( solid->GetEntityType() == "G4Sphere" ) {
+      shapeType = "SPHE";
+      npar = 6;
+      par.Set(npar);
+      G4Sphere *sphe = (G4Sphere*)solid;
+      par.AddAt(sphe->GetInsideRadius()/cm,     0);
+      par.AddAt(sphe->GetOuterRadius()/cm,      1);
+      if ( !isReflected ) 
+        par.AddAt(sphe->GetStartThetaAngle()/deg, 2);
+      else	
+        par.AddAt((M_PI - sphe->GetStartThetaAngle())/deg, 2);
+      par.AddAt(sphe->GetStartPhiAngle()/deg,   3);
+      par.AddAt(sphe->GetStartPhiAngle()/deg,   4);
+      par.AddAt(sphe->GetDeltaPhiAngle()/deg,   5);
+      return kTRUE;
+   }   
+
+   // Add G4Torus
+
+   if ( solid->GetEntityType() == "G4Trap" ) {
+      shapeType = "TRAP";
+      npar = 11;
+      par.Set(npar);
+      G4Trap *trap = (G4Trap*)solid;
+      par.AddAt(trap->GetZHalfLength()/cm,       0);
+      if (!isReflected ) { 
+        par.AddAt(trap->GetSymAxis().theta()/deg,  1);
+        par.AddAt(trap->GetSymAxis().phi()/deg,    2);
+        par.AddAt(trap->GetYHalfLength1()/cm,      3);
+        par.AddAt(trap->GetXHalfLength1()/cm,      4);
+        par.AddAt(trap->GetXHalfLength2()/cm,      5);
+        par.AddAt(atan(trap->GetTanAlpha1())/deg,  6);
+        par.AddAt(trap->GetYHalfLength2()/cm,      7);
+        par.AddAt(trap->GetXHalfLength3()/cm,      8);
+        par.AddAt(trap->GetXHalfLength4()/cm,      9);
+      }	
+      else {	
+        par.AddAt(-(trap->GetSymAxis().theta())/deg, 1);
+        par.AddAt(-(trap->GetSymAxis().phi())/deg,   2);
+        par.AddAt(trap->GetYHalfLength2()/cm,      3);
+        par.AddAt(trap->GetXHalfLength3()/cm,      4);
+        par.AddAt(trap->GetXHalfLength4()/cm,      5);
+        par.AddAt(atan(trap->GetTanAlpha2())/deg,  6);
+        par.AddAt(trap->GetYHalfLength1()/cm,      7);
+        par.AddAt(trap->GetXHalfLength1()/cm,      8);
+        par.AddAt(trap->GetXHalfLength2()/cm,      9);
+        par.AddAt(atan(trap->GetTanAlpha1())/deg, 10);
+      }	
+      return kTRUE;
+   }   
+
+   if ( solid->GetEntityType() == "G4Trd" ) {
+      shapeType = "TRD2";
+      npar = 5;
+      par.Set(npar);
+      G4Trd *trd2 = (G4Trd*)solid;
+      if ( !isReflected ) {
+        par.AddAt(trd2->GetXHalfLength1()/cm, 0);
+        par.AddAt(trd2->GetXHalfLength2()/cm, 1);
+        par.AddAt(trd2->GetYHalfLength1()/cm, 2);
+        par.AddAt(trd2->GetYHalfLength2()/cm, 3);
+      }
+      else {	
+        par.AddAt(trd2->GetXHalfLength2()/cm, 0);
+        par.AddAt(trd2->GetXHalfLength1()/cm, 1);
+        par.AddAt(trd2->GetYHalfLength2()/cm, 2);
+        par.AddAt(trd2->GetYHalfLength1()/cm, 3);
+      }
+      par.AddAt(trd2->GetZHalfLength()/cm,  4);
+      return kTRUE;
+   }   
+
+   if ( solid->GetEntityType() == "G4Tubs" ) {
+      shapeType = "TUBS";
+      npar = 5;
+      par.Set(npar);
+      G4Tubs *tubs = (G4Tubs*)solid;
+      par.AddAt(tubs->GetInnerRadius()/cm,    0);
+      par.AddAt(tubs->GetOuterRadius()/cm,    1);
+      par.AddAt(tubs->GetZHalfLength()/cm,    2);
+      par.AddAt(tubs->GetStartPhiAngle()/deg, 3);
+      par.AddAt(tubs->GetDeltaPhiAngle()/deg, 4);
+      return kTRUE;
+   }   
+
+   // To do: add to VGM
+   if ( solid->GetEntityType() == "G4TwistedTrap" ) {
+      shapeType = "GTRA";
+      npar = 12;
+      par.Set(npar);
+      G4TwistedTrap* trap = (G4TwistedTrap*)solid;
+      par.AddAt(trap->GetZHalfLength()/cm,          0);
+      if ( !isReflected ) {
+        par.AddAt(trap->GetPolarAngleTheta()/deg,   1);
+        par.AddAt(trap->GetAzimuthalAnglePhi()/deg, 2);
+        par.AddAt(trap->GetY1HalfLength()/cm,       3);
+        par.AddAt(trap->GetX1HalfLength()/cm,       4);
+        par.AddAt(trap->GetX2HalfLength()/cm,       5);
+        par.AddAt(trap->GetTiltAngleAlpha()/deg,    6);
+        par.AddAt(trap->GetY2HalfLength()/cm,       7);
+        par.AddAt(trap->GetX3HalfLength()/cm,       8);
+        par.AddAt(trap->GetX4HalfLength()/cm,       9);
+        par.AddAt(trap->GetTiltAngleAlpha()/deg,   10);
+      }
+      else {
+        par.AddAt(-trap->GetPolarAngleTheta()/deg,   1);
+        par.AddAt(-trap->GetAzimuthalAnglePhi()/deg, 2);
+        par.AddAt(trap->GetY2HalfLength()/cm,        3);
+        par.AddAt(trap->GetX3HalfLength()/cm,        4);
+        par.AddAt(trap->GetX4HalfLength()/cm,        5);
+        par.AddAt(trap->GetTiltAngleAlpha()/deg,     6);
+        par.AddAt(trap->GetY1HalfLength()/cm,        7);
+        par.AddAt(trap->GetX1HalfLength()/cm,        8);
+        par.AddAt(trap->GetX2HalfLength()/cm,        9);
+        par.AddAt(trap->GetTiltAngleAlpha()/deg,    10);
+      }
+      par.AddAt(trap->GetPhiTwist()/deg,            11);
+      return kTRUE;
+  }   
+
+  G4String text = "TG4GeometryManager: GetShape: ";
+  text = text + "Shape " + solid->GetEntityType() + " not implemented.";
+  TG4Globals::Warning(text);
+  return false;
+}  
+
+//_____________________________________________________________________________
+Bool_t TG4GeometryManager::GetMaterial(const TString& volumeName,
+	 	              TString& name, Int_t& imat,
+		              Double_t& a, Double_t& z, Double_t& density,
+		              Double_t& radl, Double_t& inter, TArrayD& par)
+{			 
+/// Return the material parameters for the volume specified by
+/// the volume name.
+
+  // Get volume
+  G4LogicalVolume* lv =
+    fGeometryServices->FindLogicalVolume(volumeName.Data(), true);
+  if ( !lv ) {
+    G4String text = "TG4GeometryManager: GetMaterial: \n";
+    text = text + "    Logical volume " + volumeName + " does not exist.";
+    TG4Globals::Warning(text);
+    return false;
+  }  
+
+  G4Material* material = lv->GetMaterial();
+  imat = material->GetIndex();
+  name = material->GetName();
+  a = fGeometryServices->GetEffA(material);
+  z = fGeometryServices->GetEffZ(material);
+    
+  density = material->GetDensity();
+  density /= TG4G3Units::MassDensity();
+
+  radl = material->GetRadlen();
+  radl /= TG4G3Units::Length();
+
+  // the following parameters are not defined in Geant4
+  inter = 0.; 
+  par.Set(0);
+  return true;
+}				        
+		     
+//_____________________________________________________________________________
+Bool_t TG4GeometryManager::GetMedium(const TString& volumeName,
+                              TString& name, Int_t& imed,
+		              Int_t& nmat, Int_t& isvol, Int_t& ifield,
+		              Double_t& fieldm, Double_t& tmaxfd, Double_t& stemax,
+		              Double_t& deemax, Double_t& epsil, Double_t& stmin,
+		              TArrayD& par)
+{			 
+// Returns the medium parameters for the volume specified by the
+// volume name.
+
+  // Get volume
+  G4LogicalVolume* lv =
+    fGeometryServices->FindLogicalVolume(volumeName.Data(), true);
+  if ( !lv ) {
+    G4String text = "TG4GeometryManager: GetMaterial: \n";
+    text = text + "    Logical volume " + volumeName + " does not exist.";
+    TG4Globals::Warning(text);
+    return false;
+  } 
+   
+  imed = fGeometryServices->GetMediumId(lv);
+  nmat = lv->GetMaterial()->GetIndex();
+  
+  TG4Limits* limits = fGeometryServices->GetLimits(lv->GetUserLimits());
+  if (limits) {
+    name = limits->GetName();
+    stemax = limits->GetMaxUserStep();
+  }  
+  else  
+    stemax = 0.; 
+
+  // the following parameters are not defined in Geant4
+  isvol = 0;
+  ifield = 0;
+  fieldm = 0; 
+  tmaxfd = 0.;
+  deemax = 0.;
+  epsil = 0.;
+  stmin = 0.;
+  par.Set(0);
+
+  return true;
+}				        
+
+//_____________________________________________________________________________
+Int_t TG4GeometryManager::Gsvolu(const char *name, const char *shape, 
+          Int_t nmed, Double_t* upar, Int_t npar) 
+{ 
+///  Geant3 desription:                                                     \n
+///  ==================                                                     \n
+///  - NAME   Volume name
+///  - SHAPE  Volume type
+///  - NUMED  Tracking medium number
+///  - NPAR   Number of shape parameters
+///  - UPAR   Vector containing shape parameters
+///
+///  It creates a new volume in the JVOLUM data structure.
+// ---  
+
+  // write token to the output file
+  if (fWriteGeometry) 
+    fOutputManager->WriteGsvolu(name, shape, nmed, upar, npar);    
+
+  G4gsvolu(fGeometryServices->CutName(name), 
+           fGeometryServices->CutName(shape), nmed, upar, npar);
+  
+  // register name in name map
+  fNameMap.AddName(fGeometryServices->CutName(name));
+
+  return 0;
+} 
+
+
+//_____________________________________________________________________________
+Int_t TG4GeometryManager::Gsvolu(const char *name, const char *shape, 
+          Int_t nmed, Float_t *upar, Int_t npar) 
+{ 
+/// Single precision interface.
+
+  //TG4Globals::Warning("TG4GeometryManager::Gsvolu in single precision.");
+
+  G4double* parin = fGeometryServices->CreateG4doubleArray(upar, npar); 
+
+  G4int result
+   = Gsvolu(name, shape, nmed, parin, npar);
+
+  delete [] parin;
+
+  return result;
+} 
+
+
+//_____________________________________________________________________________
 void  TG4GeometryManager::Gsdvn(const char *name, const char *mother, 
            Int_t ndiv, Int_t iaxis) 
 { 
@@ -973,7 +1476,7 @@ void  TG4GeometryManager::Gspos(const char *vname, Int_t num,
 //_____________________________________________________________________________
 void  TG4GeometryManager::Gsposp(const char *name, Int_t nr, 
            const char *mother, Double_t x, Double_t y, Double_t z, Int_t irot, 
-           const char *konly, Double_t *upar, Int_t np ) 
+           const char *konly, Double_t* upar, Int_t np ) 
 { 
 ///  Geant3 desription:                                                      \n
 ///  ==================                                                      \n
@@ -1025,54 +1528,6 @@ void  TG4GeometryManager::Gsbool(const char* onlyVolName,
 } 
  
  
-//_____________________________________________________________________________
-Int_t TG4GeometryManager::Gsvolu(const char *name, const char *shape, 
-          Int_t nmed, Double_t *upar, Int_t npar) 
-{ 
-///  Geant3 desription:                                                     \n
-///  ==================                                                     \n
-///  - NAME   Volume name
-///  - SHAPE  Volume type
-///  - NUMED  Tracking medium number
-///  - NPAR   Number of shape parameters
-///  - UPAR   Vector containing shape parameters
-///
-///  It creates a new volume in the JVOLUM data structure.
-// ---  
-
-  // write token to the output file
-  if (fWriteGeometry) 
-    fOutputManager->WriteGsvolu(name, shape, nmed, upar, npar);    
-
-  G4gsvolu(fGeometryServices->CutName(name), 
-           fGeometryServices->CutName(shape), nmed, upar, npar);
-  
-  // register name in name map
-  fNameMap.AddName(fGeometryServices->CutName(name));
-
-  return 0;
-} 
-
-
-//_____________________________________________________________________________
-Int_t TG4GeometryManager::Gsvolu(const char *name, const char *shape, 
-          Int_t nmed, Float_t *upar, Int_t npar) 
-{ 
-/// Single precision interface.
-
-  //TG4Globals::Warning("TG4GeometryManager::Gsvolu in single precision.");
-
-  G4double* parin = fGeometryServices->CreateG4doubleArray(upar, npar); 
-
-  G4int result
-   = Gsvolu(name, shape, nmed, parin, npar);
-
-  delete [] parin;
-
-  return result;
-} 
-
-
 //_____________________________________________________________________________
 void TG4GeometryManager::WriteEuclid(const char* fileName, 
           const char* topVolName, Int_t number, Int_t nlevel)

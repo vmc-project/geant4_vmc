@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.h,v 1.8 2005/05/20 21:46:56 brun Exp $
+// $Id: TG4StepManager.h,v 1.9 2005/09/01 10:04:32 brun Exp $
 /// \ingroup digits_hits
 //
 /// \class TG4StepManager
@@ -52,9 +52,9 @@ class TG4StepManager
     void SetStep(G4Track* track, TG4StepStatus status);  // G4 specific
     void SetSteppingManager(G4SteppingManager* manager); // G4 specific
     void SetMaxStep(Double_t step);
-    void SetMaxNStep(Int_t maxNofSteps);  //??
-    void SetUserDecay(Int_t pdg);      //NEW
-    void ForceDecayTime(Float_t pdg);  //NEW
+    void SetMaxNStep(Int_t maxNofSteps); 
+    void SetUserDecay(Int_t pdg);      // Not implemented
+    void ForceDecayTime(Float_t pdg);  // Not implemented
     
     // get methods
     G4Track* GetTrack() const;                            // G4 specific
@@ -70,13 +70,13 @@ class TG4StepManager
     const char* CurrentVolPath();
     Int_t CurrentMaterial(Float_t &a, Float_t &z, Float_t &dens, 
                     Float_t &radl, Float_t &absl) const;
+    Int_t CurrentMedium() const;
     void Gmtod(Double_t* xm, Double_t* xd, Int_t iflag);
     void Gmtod(Float_t* xm, Float_t* xd, Int_t iflag);
     void Gdtom(Double_t* xd, Double_t* xm, Int_t iflag);
     void Gdtom(Float_t* xd, Float_t* xm, Int_t iflag);
     Double_t MaxStep() const;
-    Int_t GetMaxNStep() const;  //??                       
-    Int_t GetMedium() const;
+    Int_t GetMaxNStep() const;
 
         // tracking particle 
         // dynamic properties

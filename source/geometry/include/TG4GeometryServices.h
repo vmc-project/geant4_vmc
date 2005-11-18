@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.h,v 1.8 2005/05/19 08:58:34 brun Exp $
+// $Id: TG4GeometryServices.h,v 1.9 2005/09/01 10:04:32 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryServices
@@ -19,6 +19,7 @@
 #include <globals.hh>
 #include <G4OpticalSurface.hh>
 #include <G4SurfaceProperty.hh>
+#include <G4Transform3D.hh>
 
 #include <Rtypes.h>
 #include <TMCOptical.h>
@@ -34,6 +35,8 @@ class G4LogicalVolume;
 class G4VPhysicalVolume;
 class G4UserLimits;
 class G4OpticalSurface;
+
+class TGeoHMatrix;
 
 class TG4GeometryServices : public TG4Verbose
 {
@@ -55,12 +58,15 @@ class TG4GeometryServices : public TG4Verbose
     G4double* CreateG4doubleArray(Double_t* array, G4int size) const;
     G4String  CutName(const char* name) const;
     G4String  CutMaterialName(const char* name) const;
+    G4String  CutVolumePath(const G4String& volumePath, 
+                            G4String& volName, G4int& copyNo) const; 
     G4String  G4ToG3VolumeName(const G4String& name) const;
     G4String  GenerateLimitsName(G4int id, const G4String& medName,
                                            const G4String& matName) const;
     G4OpticalSurfaceModel  SurfaceModel(EMCOpSurfaceModel model) const; 					   
     G4SurfaceType          SurfaceType(EMCOpSurfaceType surfType) const;
-    G4OpticalSurfaceFinish SurfaceFinish(EMCOpSurfaceFinish finish) const; 					   
+    G4OpticalSurfaceFinish SurfaceFinish(EMCOpSurfaceFinish finish) const; 
+    void  Convert(const G4Transform3D& transform, TGeoHMatrix& matrix) const;					   
 
     G4Material* MixMaterials(G4String name, G4double density,
                              const TG4StringVector& matNames, 
@@ -95,6 +101,9 @@ class TG4GeometryServices : public TG4Verbose
     G4LogicalVolume*   FindLogicalVolume(const G4String& name, 
                                        G4bool silent = false) const;
     G4VPhysicalVolume* FindPhysicalVolume(const G4String& name, G4int copyNo,
+                                       G4bool silent = false) const;
+    G4VPhysicalVolume* FindDaughter(const G4String& name, G4int copyNo,
+                                       G4LogicalVolume* mlv,
                                        G4bool silent = false) const;
     TG4Limits*         FindLimits(const G4String& name, 
                                        G4bool silent = false) const;

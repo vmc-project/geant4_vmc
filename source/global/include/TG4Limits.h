@@ -1,4 +1,4 @@
-// $Id: TG4Limits.h,v 1.4 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4Limits.h,v 1.5 2005/09/01 10:04:32 brun Exp $
 /// \ingroup global
 //
 /// \class TG4Limits
@@ -56,6 +56,7 @@ class TG4Limits: public G4UserLimits
 
     // get methods
     G4String GetName() const;
+    G4double GetMaxUserStep() const;
     const TG4G3CutVector* GetCutVector() const;
     const TG4G3ControlVector* GetControlVector() const;
     G4bool  IsCut() const;
@@ -114,6 +115,11 @@ inline void TG4Limits::SetName(const G4String& name) {
 inline G4String TG4Limits::GetName() const { 
   /// Return name
   return fName; 
+}
+
+inline G4double TG4Limits::GetMaxUserStep() const {
+  /// Return max step
+  return fMaxStep;
 }
 
 inline const TG4G3CutVector* TG4Limits::GetCutVector() const { 
