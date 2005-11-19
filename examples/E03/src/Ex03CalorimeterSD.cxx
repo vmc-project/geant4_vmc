@@ -1,4 +1,4 @@
-// $Id: Ex03CalorimeterSD.cxx,v 1.1 2003/03/17 14:56:51 brun Exp $
+// $Id: Ex03CalorimeterSD.cxx,v 1.2 2005/02/25 17:00:13 brun Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -146,7 +146,7 @@ void Ex03CalorimeterSD::Register()
 }
 
 //_____________________________________________________________________________
-void Ex03CalorimeterSD::Print() const
+void Ex03CalorimeterSD::Print(Option_t* /*option*/) const
 {
 // Prints the hits collection.
 // ---

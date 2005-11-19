@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: Ex03MCStack.cxx,v 1.1 2005/05/17 13:52:01 brun Exp $
 //
 // Geant4 ExampleN06 adapted to Virtual Monte Carlo 
 //
@@ -114,7 +114,7 @@ TParticle* Ex03MCStack::PopPrimaryForTracking(Int_t i)
 }     
 
 //_____________________________________________________________________________
-void Ex03MCStack::Print() const 
+void Ex03MCStack::Print(Option_t* /*option*/) const 
 {
 // Prints info for all particles.
 // ---

@@ -1,4 +1,4 @@
-// $Id: Ex02TrackerSD.h,v 1.1 2002/06/20 11:52:35 hristov Exp $
+// $Id: Ex02TrackerSD.h,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -27,7 +27,7 @@ class Ex02TrackerSD : public TNamed
     Bool_t  ProcessHits();
     void   EndOfEvent();
     void   Register();
-    void   Print() const;
+    virtual void  Print(Option_t* option = 0) const;
     
     // set methods
     void SetVerboseLevel(Int_t level) { fVerboseLevel = level; }

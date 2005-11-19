@@ -1,4 +1,4 @@
-// $Id: Ex02RootManager.cxx,v 1.1 2003/03/17 14:56:51 brun Exp $
+// $Id: Ex02RootManager.cxx,v 1.2 2005/02/25 17:00:13 brun Exp $
 //
 // Geant4 novice ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -113,7 +113,7 @@ void  Ex02RootManager::Fill()
 }  
 
 //_____________________________________________________________________________
-void Ex02RootManager:: Write()
+void Ex02RootManager:: WriteAll()
 {
 // Erites the tree in the file.
 // ---

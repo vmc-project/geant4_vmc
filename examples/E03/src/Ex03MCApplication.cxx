@@ -1,4 +1,4 @@
-// $Id: Ex03MCApplication.cxx,v 1.6 2004/07/09 16:50:14 brun Exp $
+// $Id: Ex03MCApplication.cxx,v 1.7 2005/05/17 13:44:26 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
@@ -146,7 +146,7 @@ void Ex03MCApplication::FinishRun()
 
   fVerbose.FinishRun();
 
-  fRootManager.Write();
+  fRootManager.WriteAll();
 }
 
 //_____________________________________________________________________________

@@ -1,4 +1,4 @@
-// $Id: Ex02Particle.cxx,v 1.1.1.1 2002/06/16 15:57:36 hristov Exp $
+// $Id: Ex02Particle.cxx,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Geant4 novice ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -80,7 +80,7 @@ void Ex02Particle::AddDaughter(Ex02Particle* particle)
 }  
 
 //_____________________________________________________________________________
-void Ex02Particle::Print() const
+void Ex02Particle::Print(Option_t* /*option*/) const
 {
 // Prints particle properties.
 // ---

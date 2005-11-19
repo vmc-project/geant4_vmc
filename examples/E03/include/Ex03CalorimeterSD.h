@@ -1,9 +1,9 @@
-// $Id: $
+// $Id: Ex03CalorimeterSD.h,v 1.1 2003/03/17 14:56:51 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
 // Id: ExN03CalorimeterSD.hh,v 1.4 2002/01/09 17:24:11 ranjard Exp 
-// GEANT4 tag $Name: geant4-05-00 $
+// GEANT4 tag $Name:  $
 //
 // by Ivana Hrivnacova, 6.3.2003
 
@@ -24,12 +24,12 @@ class Ex03CalorimeterSD : public TNamed
     virtual ~Ex03CalorimeterSD();
 
     // methods
-    void   Initialize();
+    void    Initialize();
     Bool_t  ProcessHits();
-    void   EndOfEvent();
-    void   Register();
-    void   Print() const;
-    void   PrintTotal() const;
+    void    EndOfEvent();
+    void    Register();
+    virtual void  Print(Option_t* option = "") const;
+    void    PrintTotal() const;
     
     // set methods
     void SetVerboseLevel(Int_t level) { fVerboseLevel = level; }

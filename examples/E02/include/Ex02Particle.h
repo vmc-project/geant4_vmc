@@ -1,4 +1,4 @@
-// $Id: Ex02Particle.h,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+// $Id: Ex02Particle.h,v 1.2 2003/02/26 13:36:44 brun Exp $
 //
 // Geant4 novice ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -30,7 +30,7 @@ class Ex02Particle : public TObject
     // methods
     void SetMother(Ex02Particle* particle);
     void AddDaughter(Ex02Particle* particle);
-    void Print() const;
+    virtual void Print(Option_t* option = "") const;
     void PrintDaughters() const;
 
     // get methods  

@@ -1,4 +1,4 @@
-// $Id: Ex02RootManager.h,v 1.1 2003/03/17 14:56:50 brun Exp $
+// $Id: Ex02RootManager.h,v 1.2 2005/02/25 17:00:13 brun Exp $
 //
 // Geant4 novice ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -33,7 +33,7 @@ class Ex02RootManager : public TObject
     // methods
     void  Register(const char* name, const char* className, void* objAddress);
     void  Fill();
-    void  Write();
+    void  WriteAll();
     void  ReadEvent(Int_t i);
     
   private:

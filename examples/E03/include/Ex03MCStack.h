@@ -1,4 +1,4 @@
-// $Id: Ex03MCStack.h,v 1.1 2003/03/17 14:56:51 brun Exp $
+// $Id: Ex03MCStack.h,v 1.2 2003/07/22 06:38:17 brun Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -35,7 +35,7 @@ class Ex03MCStack : public TVirtualMCStack
 		      Int_t is) ;
     virtual TParticle* PopNextTrack(Int_t& track);
     virtual TParticle* PopPrimaryForTracking(Int_t i); 
-    void Print() const;   
+    virtual void Print(Option_t* option = "") const;   
     void Reset();   
    
     // set methods

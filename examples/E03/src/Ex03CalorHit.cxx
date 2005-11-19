@@ -1,4 +1,4 @@
-// $Id: Ex03CalorHit.cxx,v 1.2 2002/12/03 15:04:44 brun Exp $
+// $Id: Ex03CalorHit.cxx,v 1.1 2003/03/17 14:56:51 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
@@ -27,13 +27,7 @@ Ex03CalorHit::~Ex03CalorHit()
 {}
 
 //_____________________________________________________________________________
-void Ex03CalorHit::Draw()
-{
-//
-}
-
-//_____________________________________________________________________________
-void Ex03CalorHit::Print(const Option_t* opt) const
+void Ex03CalorHit::Print(Option_t* /*option*/) const
 {
 // Prints hit info
 // ---

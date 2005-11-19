@@ -1,4 +1,4 @@
-// $Id: Ex02TrackerSD.cxx,v 1.2 2003/07/22 06:38:16 brun Exp $
+// $Id: Ex02TrackerSD.cxx,v 1.3 2005/02/25 17:00:13 brun Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -134,7 +134,7 @@ void Ex02TrackerSD::Register()
 }
 
 //_____________________________________________________________________________
-void Ex02TrackerSD::Print() const
+void Ex02TrackerSD::Print(const Option_t* /*option*/) const
 {
 // Prints the hits collection.
 // ---

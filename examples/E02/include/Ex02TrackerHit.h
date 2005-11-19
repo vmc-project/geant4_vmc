@@ -1,4 +1,4 @@
-// $Id: Ex02TrackerHit.h,v 1.1 2002/06/20 11:52:35 hristov Exp $
+// $Id: Ex02TrackerHit.h,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -21,7 +21,7 @@ class Ex02TrackerHit : public TObject
 
     // methods
     //void Draw();
-    void Print(const Option_t* opt = 0) const;
+    virtual void Print(Option_t* option = "") const;
 
     // set methods
     void SetTrackID  (Int_t track)  { fTrackID = track; };

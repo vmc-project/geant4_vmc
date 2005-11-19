@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: Ex03CalorHit.h,v 1.1 2003/03/17 14:56:50 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
@@ -20,8 +20,7 @@ class Ex03CalorHit : public TObject
     virtual ~Ex03CalorHit();
 
     // methods
-    void Draw();
-    void Print(const Option_t* opt = 0) const;
+    virtual void Print(Option_t* option = "") const;
     void AddAbs(Double_t de, Double_t dl) { fEdepAbs += de; fTrackLengthAbs += dl; }
     void AddGap(Double_t de, Double_t dl) { fEdepGap += de; fTrackLengthGap += dl; }
     void Reset();
