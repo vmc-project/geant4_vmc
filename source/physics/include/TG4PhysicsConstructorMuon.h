@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorMuon.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsConstructorMuon.h,v 1.4 2005/09/01 10:04:33 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorMuon
@@ -13,13 +13,14 @@
 
 #include "TG4VPhysicsConstructor.h"
 
-#include "G4MultipleScattering.hh"
-#include "G4MuBremsstrahlung.hh"
-#include "G4MuPairProduction.hh"
-#include "G4MuIonisation.hh"
-#include "G4MuonMinusCaptureAtRest.hh"
-#include "G4hIonisation.hh"
 #include <globals.hh>
+
+class G4MultipleScattering;
+class G4MuBremsstrahlung;
+class G4MuPairProduction;
+class G4MuIonisation;
+class G4MuonMinusCaptureAtRest;
+class G4hIonisation;
 
 class TG4PhysicsConstructorMuon: public TG4VPhysicsConstructor
 {
@@ -37,25 +38,25 @@ class TG4PhysicsConstructorMuon: public TG4VPhysicsConstructor
 
     // data members
           // mu+ physics
-   G4MultipleScattering   fMuPlusMultipleScattering;  //mu+ msc
-   G4MuBremsstrahlung     fMuPlusBremsstrahlung ;     //mu+ Bremsstrahlung
-   G4MuPairProduction     fMuPlusPairProduction;      //mu+ pair production
-   G4MuIonisation         fMuPlusIonisation;          //mu+ ionisation
+   G4MultipleScattering*   fMuPlusMultipleScattering;  //mu+ msc
+   G4MuBremsstrahlung*     fMuPlusBremsstrahlung ;     //mu+ Bremsstrahlung
+   G4MuPairProduction*     fMuPlusPairProduction;      //mu+ pair production
+   G4MuIonisation*         fMuPlusIonisation;          //mu+ ionisation
 
           // mu- physics
-   G4MultipleScattering   fMuMinusMultipleScattering; //mu- msc
-   G4MuBremsstrahlung     fMuMinusBremsstrahlung ;    //mu- Bremsstrahlung
-   G4MuPairProduction     fMuMinusPairProduction;     //mu- pair production
-   G4MuIonisation         fMuMinusIonisation;         //mu- ionisation
-   G4MuonMinusCaptureAtRest fMuMinusCaptureAtRest;    //mu- capture
+   G4MultipleScattering*   fMuMinusMultipleScattering; //mu- msc
+   G4MuBremsstrahlung*     fMuMinusBremsstrahlung ;    //mu- Bremsstrahlung
+   G4MuPairProduction*     fMuMinusPairProduction;     //mu- pair production
+   G4MuIonisation*         fMuMinusIonisation;         //mu- ionisation
+   G4MuonMinusCaptureAtRest* fMuMinusCaptureAtRest;    //mu- capture
 
           // tau+ physics
-   G4MultipleScattering   fTauPlusMultipleScattering; //tau+ msc
-   G4hIonisation          fTauPlusIonisation;         //tau+ ionisation
+   G4MultipleScattering*   fTauPlusMultipleScattering; //tau+ msc
+   G4hIonisation*          fTauPlusIonisation;         //tau+ ionisation
 
           // tau+ physics
-   G4MultipleScattering   fTauMinusMultipleScattering;//tau- msc
-   G4hIonisation          fTauMinusIonisation;        //tau- ionisation
+   G4MultipleScattering*   fTauMinusMultipleScattering;//tau- msc
+   G4hIonisation*          fTauMinusIonisation;        //tau- ionisation
     
   private:
     // methods

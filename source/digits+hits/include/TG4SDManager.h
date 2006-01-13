@@ -1,4 +1,4 @@
-// $Id: TG4SDManager.h,v 1.3 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4SDManager.h,v 1.4 2005/09/01 10:04:32 brun Exp $
 /// \ingroup digits_hits
 //
 /// \class TG4SDManager
@@ -20,9 +20,8 @@ class TG4SDConstruction;
 class TG4SDManager
 {
   public:
-    TG4SDManager(TG4SDConstruction* sdConstruction);
+    TG4SDManager();
     // --> protected
-    // TG4SDManager();
     // TG4SDManager(const TG4SDManager& right);
     virtual ~TG4SDManager();
 
@@ -45,7 +44,6 @@ class TG4SDManager
     TG4SDConstruction* GetSDConstruction() const;
 
   protected:
-    TG4SDManager();
     TG4SDManager(const TG4SDManager& right);
 
     // operators

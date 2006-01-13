@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorGeneral.h,v 1.4 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4PhysicsConstructorGeneral.h,v 1.5 2005/09/01 10:04:33 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorGeneral
@@ -12,9 +12,9 @@
 #define TG4_PHYSICS_CONSTRUCTOR_GENERAL_H
 
 #include "TG4VPhysicsConstructor.h"
-
-#include <G4Decay.hh>
 #include <globals.hh>
+
+class G4Decay;
 
 class TG4PhysicsConstructorGeneral: public TG4VPhysicsConstructor
 {
@@ -31,7 +31,7 @@ class TG4PhysicsConstructorGeneral: public TG4VPhysicsConstructor
     virtual void ConstructProcess();
 
     // data members
-    G4Decay fDecayProcess; // decay process
+    G4Decay* fDecayProcess; // decay process
 };
 
 #endif //TG4_PHYSICS_CONSTRUCTOR_GENERAL_H

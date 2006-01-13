@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.10 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4PhysicsManager.cxx,v 1.11 2005/03/29 10:39:53 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsManager
@@ -587,22 +587,6 @@ void  TG4PhysicsManager::DefineParticles()
 
   fParticlesManager->DefineParticles();
   TVirtualMCApplication::Instance()->AddParticles();
-}    
-
-//_____________________________________________________________________________
-void TG4PhysicsManager::CreatePhysicsConstructors()
-{
-/// Create the selected physics constructors
-/// and registeres them in the modular physics list.
-
-  TG4ModularPhysicsList* tg4PhysicsList 
-    = dynamic_cast<TG4ModularPhysicsList*>(fPhysicsList);
-
-  if (!tg4PhysicsList) return;
-    // interactive selection of physics constructors
-    // not available
-
-  tg4PhysicsList->Configure();
 }    
 
 //_____________________________________________________________________________

@@ -1,4 +1,4 @@
-// $Id: TG4VisManager.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4VisManager.h,v 1.4 2005/09/01 10:04:33 brun Exp $
 /// \ingroup visualization
 //
 /// \class TG4VisManager
@@ -56,6 +56,7 @@ class TG4VisManager: public G4VisManager
     // methods
     //--------
     void RegisterGraphicsSystems();
+    void RegisterModelFactories();
     G4bool NeedSetColours();
     void SetColourFlag(G4bool value);
     

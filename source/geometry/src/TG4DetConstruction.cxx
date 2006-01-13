@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.cxx,v 1.9 2005/05/17 13:43:57 brun Exp $
+// $Id: TG4DetConstruction.cxx,v 1.10 2005/09/01 10:04:32 brun Exp $
 // Category: geometry
 //
 // Class TG4DetConstruction
@@ -99,16 +99,19 @@ void TG4DetConstruction::CreateMagneticField()
   
     case kMCApplicationField:
       fMagneticField = new TG4MagneticField();
-      G4cout << "kMCApplicationField" << G4endl;
+      if ( VerboseLevel() > 1 )
+        G4cout << "kMCApplicationField" << G4endl;
       break;
 
     case kUniformField:
       fMagneticField = new TG4UniformMagneticField();
-      G4cout << "kUniformField" << G4endl;
+      if ( VerboseLevel() > 1 )
+        G4cout << "kUniformField" << G4endl;
       break;
       
     case kNoField:
-      G4cout << "kNoField" << G4endl;
+      if ( VerboseLevel() > 1 )
+        G4cout << "kNoField" << G4endl;
       ;;
   }  
 }

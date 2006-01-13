@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.14 2005/05/19 08:58:34 brun Exp $
+// $Id: TGeant4.cxx,v 1.15 2005/11/18 21:29:35 brun Exp $
 // Category: run
 //
 // Class TGeant4
@@ -8,7 +8,7 @@
 // Author: I. Hrivnacova
 
 #include "TGeant4.h"
-#include "TG4VRunConfiguration.h"
+#include "TG4RunConfiguration.h"
 #include "TG4GeometryManager.h" 
 #include "TG4SDManager.h" 
 #include "TG4PhysicsManager.h" 
@@ -21,7 +21,7 @@ ClassImp(TGeant4)
 
 //_____________________________________________________________________________
 TGeant4::TGeant4(const char* name, const char* title,
-                 TG4VRunConfiguration* configuration, int argc, char** argv)
+                 TG4RunConfiguration* configuration, int argc, char** argv)
   : TVirtualMC(name, title),
     fVisManager(0)
 {
@@ -36,7 +36,7 @@ TGeant4::TGeant4(const char* name, const char* title,
   //G4cout << "TG4GeometryManager has been created." << G4endl;
   
   // create sensitive detectors manager
-  fSDManager = new TG4SDManager(configuration->GetSDConstruction());
+  fSDManager = new TG4SDManager();
   // add verbose level
   //G4cout << "TG4SDManager has been created." << G4endl;
   
@@ -57,13 +57,12 @@ TGeant4::TGeant4(const char* name, const char* title,
 #ifdef G4VIS_USE
   // create visualization manager
   fVisManager = new TG4VisManager();
-  fVisManager->Initialize();
 #endif
 }
    
 //_____________________________________________________________________________
 TGeant4::TGeant4(const char* name, const char* title,
-                 TG4VRunConfiguration* configuration)
+                 TG4RunConfiguration* configuration)
   : TVirtualMC(name, title),
     fVisManager(0)
 {
@@ -78,7 +77,7 @@ TGeant4::TGeant4(const char* name, const char* title,
   //G4cout << "TG4GeometryManager has been created." << G4endl;
   
   // create sensitive detectors manager
-  fSDManager = new TG4SDManager(configuration->GetSDConstruction());
+  fSDManager = new TG4SDManager();
   // add verbose level
   //G4cout << "TG4SDManager has been created." << G4endl;
   
@@ -99,7 +98,6 @@ TGeant4::TGeant4(const char* name, const char* title,
 #ifdef G4VIS_USE
   // create visualization manager
   fVisManager = new TG4VisManager();
-  fVisManager->Initialize();
 #endif
 }
 

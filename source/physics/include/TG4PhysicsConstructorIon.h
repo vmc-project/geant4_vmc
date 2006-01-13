@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorIon.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsConstructorIon.h,v 1.4 2005/09/01 10:04:33 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorIon
@@ -13,17 +13,18 @@
 
 #include "TG4VPhysicsConstructor.h"
 
-#include <G4HadronElasticProcess.hh>
-#include <G4LElastic.hh>
-#include <G4DeuteronInelasticProcess.hh>
-#include <G4LEDeuteronInelastic.hh>
-#include <G4TritonInelasticProcess.hh>
-#include <G4LETritonInelastic.hh>
-#include <G4AlphaInelasticProcess.hh>
-#include <G4LEAlphaInelastic.hh>
-#include <G4hIonisation.hh>
-#include <G4MultipleScattering.hh>
 #include <globals.hh>
+
+class G4HadronElasticProcess;
+class G4LElastic;
+class G4DeuteronInelasticProcess;
+class G4LEDeuteronInelastic;
+class G4TritonInelasticProcess;
+class G4LETritonInelastic;
+class G4AlphaInelasticProcess;
+class G4LEAlphaInelastic;
+class G4hIonisation;
+class G4MultipleScattering;
 
 class TG4PhysicsConstructorIon: public TG4VPhysicsConstructor
 {
@@ -48,34 +49,34 @@ class TG4PhysicsConstructorIon: public TG4VPhysicsConstructor
 
     // data members
           // Elastic Process
-   G4HadronElasticProcess fElasticProcess;         //elastic process
-   G4LElastic*            fElasticModel;           //elastic model
+   G4HadronElasticProcess* fElasticProcess;         //elastic process
+   G4LElastic*             fElasticModel;           //elastic model
 
           // Generic Ion physics
-   G4MultipleScattering   fIonMultipleScattering;  //ion multiple scattering
-   G4hIonisation          fIonIonisation;          //ion ionisation
+   G4MultipleScattering*   fIonMultipleScattering;  //ion multiple scattering
+   G4hIonisation*          fIonIonisation;          //ion ionisation
 
           // Deuteron physics
-   G4MultipleScattering        fDeuteronMultipleScattering; //D msc
-   G4hIonisation               fDeuteronIonisation;//D ionisation
-   G4DeuteronInelasticProcess  fDeuteronProcess;   //D inelastic process
-   G4LEDeuteronInelastic*      fDeuteronModel;     //D LE inelastic model
+   G4MultipleScattering*        fDeuteronMultipleScattering; //D msc
+   G4hIonisation*               fDeuteronIonisation;//D ionisation
+   G4DeuteronInelasticProcess*  fDeuteronProcess;   //D inelastic process
+   G4LEDeuteronInelastic*       fDeuteronModel;     //D LE inelastic model
 
           // Triton physics
-   G4MultipleScattering        fTritonMultipleScattering; //T msc
-   G4hIonisation               fTritonIonisation;  //T ionisation
-   G4TritonInelasticProcess    fTritonProcess;     //T inelastic process
-   G4LETritonInelastic*        fTritonModel;       //T LE inelastic model
+   G4MultipleScattering*        fTritonMultipleScattering; //T msc
+   G4hIonisation*               fTritonIonisation;  //T ionisation
+   G4TritonInelasticProcess*    fTritonProcess;     //T inelastic process
+   G4LETritonInelastic*         fTritonModel;       //T LE inelastic model
   
          // Alpha physics
-   G4MultipleScattering        fAlphaMultipleScattering; //alpha msc
-   G4hIonisation               fAlphaIonisation;   //alpha ionisation
-   G4AlphaInelasticProcess     fAlphaProcess;      //alpha inelastic process
-   G4LEAlphaInelastic*         fAlphaModel;        //alpha LE inelastic model
+   G4MultipleScattering*        fAlphaMultipleScattering; //alpha msc
+   G4hIonisation*               fAlphaIonisation;   //alpha ionisation
+   G4AlphaInelasticProcess*     fAlphaProcess;      //alpha inelastic process
+   G4LEAlphaInelastic*          fAlphaModel;        //alpha LE inelastic model
 
         // He3 physics
-   G4MultipleScattering        fHe3MultipleScattering; //He3 msc
-   G4hIonisation               fHe3Ionisation;     //He3 ionisation
+   G4MultipleScattering*        fHe3MultipleScattering; //He3 msc
+   G4hIonisation*               fHe3Ionisation;     //He3 ionisation
     
   private:
     // methods

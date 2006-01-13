@@ -1,4 +1,4 @@
-// $Id: TG4SDManager.cxx,v 1.2 2004/10/12 07:47:11 brun Exp $
+// $Id: TG4SDManager.cxx,v 1.3 2004/11/10 11:39:27 brun Exp $
 // Category: digits+hits
 //
 // Class TG4SDManager
@@ -15,15 +15,20 @@
 TG4SDManager* TG4SDManager::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4SDManager::TG4SDManager(TG4SDConstruction* sdConstruction)
-  : fSDConstruction(sdConstruction) {
+TG4SDManager::TG4SDManager()
+  : fSDConstruction(0),
+    fSDServices(0)
+     
+{
 //
+
   if (fgInstance)
     TG4Globals::Exception(
       "TG4SDManager: attempt to create two instances of singleton.");
       
   fgInstance = this; 
   
+  fSDConstruction = new TG4SDConstruction();
   fSDServices = new TG4SDServices();
 }
 
@@ -36,17 +41,11 @@ TG4SDManager::TG4SDManager(const TG4SDManager& right) {
 
 
 //_____________________________________________________________________________
-TG4SDManager::TG4SDManager() {
-// 
-  TG4Globals::Exception(
-    "TG4SDManager has protected the default constructor.");
-}
-
-
-//_____________________________________________________________________________
-TG4SDManager::~TG4SDManager(){
+TG4SDManager::~TG4SDManager()
+{
 //
 
+  delete fSDConstruction;
   delete fSDServices;
 }
 

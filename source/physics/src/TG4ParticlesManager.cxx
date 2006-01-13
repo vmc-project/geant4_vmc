@@ -1,4 +1,4 @@
-// $Id: TG4ParticlesManager.cxx,v 1.4 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4ParticlesManager.cxx,v 1.5 2005/05/17 13:43:57 brun Exp $
 // Category: physics
 //
 // Class TG4ParticlesManager
@@ -108,18 +108,14 @@ G4int TG4ParticlesManager::GetPDGEncoding(G4ParticleDefinition* particle) const
 //_____________________________________________________________________________
 G4int TG4ParticlesManager::GetPDGEncoding(G4String particleName) const
 {
-/// Return the PDG code of particle sepcified by name.
+/// Return the PDG code of particle sepcified by name.                      \n
+/// If particle was not built in Geant4 physics, return -1 
 
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
 
   G4ParticleDefinition* particle = 0;  
   particle = particleTable->FindParticle(particleName);
-  if (!particle) {    
-    G4String text = "TG4ParticlesManager::GetPDGEncoding:\n";
-    text = text + "   G4ParticleTable::FindParticle() " + particleName;
-    text = text + " failed.";
-    TG4Globals::Exception(text);
-  }	
+  if (!particle) return -1;
 
   return GetPDGEncoding(particle);
 }  
@@ -189,14 +185,30 @@ void  TG4ParticlesManager::MapParticles()
   fParticleNameMap.Add("chargedgeantino", "Rootino");
   
   // map G4 particle names to TDatabasePDG encodings
-  fParticlePDGMap.Add("deuteron", GetPDGEncoding("deuteron"));
-  fParticlePDGMap.Add("triton", GetPDGEncoding("triton"));
-  fParticlePDGMap.Add("alpha", GetPDGEncoding("alpha"));
-  fParticlePDGMap.Add("He3", GetPDGEncoding("He3") );
-  fParticlePDGMap.Add("opticalphoton", GetPDGEncoding("opticalphoton"));
+  // (if present in built Geant4 physics)
+  
+  G4int pdg = GetPDGEncoding("deuteron");
+  if (pdg > 0 ) fParticlePDGMap.Add("deuteron", pdg);
+  
+  pdg = GetPDGEncoding("triton");
+  if (pdg > 0 ) fParticlePDGMap.Add("triton", pdg);
+  
+  pdg = GetPDGEncoding("alpha");
+  if (pdg > 0 ) fParticlePDGMap.Add("alpha", pdg);
+  
+  pdg = GetPDGEncoding("He3");
+  if (pdg > 0 ) fParticlePDGMap.Add("He3", pdg);
+
+  pdg = GetPDGEncoding("opticalphoton");
+  if (pdg > 0 ) fParticlePDGMap.Add("opticalphoton", pdg);
+ 
   // fParticlePDGMap.Add("???","FeedbackPhoton");
-  fParticlePDGMap.Add("geantino", GetPDGEncoding("geantino"));
-  fParticlePDGMap.Add("chargedgeantino", GetPDGEncoding("chargedgeantino"));
+  
+  pdg = GetPDGEncoding("geantino");
+  if (pdg > 0 ) fParticlePDGMap.Add("geantino", pdg);
+  
+  pdg = GetPDGEncoding("chargedgeantino");
+  if (pdg > 0 ) fParticlePDGMap.Add("chargedgeantino", pdg);
 
   if (VerboseLevel() > 1) {
     G4cout << "Particle maps have been filled." << G4endl;
@@ -433,7 +445,7 @@ G4ParticleDefinition* TG4ParticlesManager::GetParticleDefinition(
 
   if (!particleDefinition) {
     G4String name = particle->GetName();
-    if ( name == "Rootino" )	
+    if ( name == "Rootino" )
       particleDefinition = particleTable->FindParticle("geantino");
     if ( name == "Cherenkov" || name == "FeedbackPhoton" )	
       particleDefinition = particleTable->FindParticle("opticalphoton");

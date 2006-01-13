@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.15 2005/09/23 12:41:03 brun Exp $
+# $Id: Makefile,v 1.16 2005/10/13 08:42:29 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
@@ -52,8 +52,8 @@ SRCS	:= $(CXXSRC)
 
 # C++ Headers processed by CINT
 #
-HDRS	:= run/include/TG4VRunConfiguration.h \
-	   run/include/TG4RunConfiguration.h \
+HDRS	:= physics/include/TG4PhysicsListOptions.h \
+           run/include/TG4RunConfiguration.h \
 	   run/include/TGeant4.h \
 	   $(wildcard interfaces/include/*.h) \
 	   geant4vmcLinkDef.h

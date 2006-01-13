@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.14 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.15 2005/11/18 21:29:35 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -54,6 +54,7 @@
 #include <G4Trd.hh>
 #include <G4Tubs.hh>
 #include <G4TwistedTrap.hh>
+#include <G4Transform3D.hh>
 
 #include <TGeoManager.h>
 #include <TGeoMatrix.h>
@@ -863,7 +864,7 @@ Bool_t TG4GeometryManager::GetTransformation(const TString& volumePath,
   // Calculate transformation
   //
   G4VPhysicalVolume* pvMother = pvTop;
-  HepTransform3D transform;
+  G4Transform3D transform;
   
   while ( path.length() > 0 ) {
     // Extract next volume name & copyNo
@@ -882,7 +883,7 @@ Bool_t TG4GeometryManager::GetTransformation(const TString& volumePath,
       return false;
     }
     
-    transform = transform * HepTransform3D(*pvDaughter->GetObjectRotation(),
+    transform = transform * G4Transform3D(*pvDaughter->GetObjectRotation(),
                                             pvDaughter->GetObjectTranslation());
     pvMother = pvDaughter; 
   }   

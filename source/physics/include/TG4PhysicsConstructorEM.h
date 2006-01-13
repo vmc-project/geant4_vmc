@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorEM.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsConstructorEM.h,v 1.4 2005/09/01 10:04:33 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorEM
@@ -12,15 +12,15 @@
 #define TG4_PHYSICS_CONSTRUCTOR_EM_H
 
 #include "TG4VPhysicsConstructor.h"
-
-#include <G4PhotoElectricEffect.hh>
-#include <G4ComptonScattering.hh>
-#include <G4GammaConversion.hh>
-#include <G4MultipleScattering.hh>
-#include <G4eIonisation.hh>
-#include <G4eBremsstrahlung.hh>
-#include <G4eplusAnnihilation.hh>
 #include <globals.hh>
+
+class G4PhotoElectricEffect;
+class G4ComptonScattering;
+class G4GammaConversion;
+class G4MultipleScattering;
+class G4eIonisation;
+class G4eBremsstrahlung;
+class G4eplusAnnihilation;
 
 class TG4PhysicsConstructorEM: public TG4VPhysicsConstructor
 {
@@ -30,28 +30,27 @@ class TG4PhysicsConstructorEM: public TG4VPhysicsConstructor
                             const G4String& name = "EM");
     virtual ~TG4PhysicsConstructorEM();
 
-  protected:
     // methods
-          // construct particle and physics
     virtual void ConstructParticle();
     virtual void ConstructProcess();
 
+  protected:
     // data members
             // Gamma physics
-    G4PhotoElectricEffect fPhotoEffect;               //gamma photoeffect
-    G4ComptonScattering   fComptonEffect;             //Compton scattering
-    G4GammaConversion     fPairProduction;            //gamma pair production
+    G4PhotoElectricEffect* fPhotoEffect;               //gamma photoeffect
+    G4ComptonScattering*   fComptonEffect;             //Compton scattering
+    G4GammaConversion*     fPairProduction;            //gamma pair production
      
             // Electron physics
-    G4MultipleScattering  fElectronMultipleScattering;//e- multiple scattering
-    G4eIonisation         fElectronIonisation;        //e- ionization 
-    G4eBremsstrahlung     fElectronBremsStrahlung;    //e- Bremsstrahlung
+    G4MultipleScattering*  fElectronMultipleScattering;//e- multiple scattering
+    G4eIonisation*         fElectronIonisation;        //e- ionization 
+    G4eBremsstrahlung*     fElectronBremsStrahlung;    //e- Bremsstrahlung
   
             //Positron physics
-    G4MultipleScattering  fPositronMultipleScattering;//e+ multiple scattering
-    G4eIonisation         fPositronIonisation;        //e+ ionisation
-    G4eBremsstrahlung     fPositronBremsStrahlung;    //e+ Bremsstrahlung
-    G4eplusAnnihilation   fAnnihilation;              //e+ annihilation
+    G4MultipleScattering*  fPositronMultipleScattering;//e+ multiple scattering
+    G4eIonisation*         fPositronIonisation;        //e+ ionisation
+    G4eBremsstrahlung*     fPositronBremsStrahlung;    //e+ Bremsstrahlung
+    G4eplusAnnihilation*   fAnnihilation;              //e+ annihilation
     
   private:
     // methods

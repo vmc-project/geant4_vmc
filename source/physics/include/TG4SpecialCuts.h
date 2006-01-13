@@ -1,4 +1,4 @@
-// $Id: TG4SpecialCuts.h,v 1.3 2005/03/29 10:39:53 brun Exp $
+// $Id: TG4SpecialCuts.h,v 1.4 2005/09/01 10:04:33 brun Exp $
 //
 // Classes TG4pecialCutsFor*
 //
@@ -27,15 +27,13 @@ class G4Track;
 class TG4SpecialCutsForChargedHadron: public TG4VSpecialCuts
 {
   public:
-    TG4SpecialCutsForChargedHadron(const G4String& processName);
+    TG4SpecialCutsForChargedHadron(
+       const G4String& processName = "specialCutForChargedHadron");
     virtual ~TG4SpecialCutsForChargedHadron();
 
     // methods
     virtual G4double GetMinEkine(const TG4Limits& limits,
                                  const G4Track& track) const;
-			    
-  protected:
-    TG4SpecialCutsForChargedHadron();		   
 };
 
 /// \ingroup physics
@@ -48,15 +46,13 @@ class TG4SpecialCutsForChargedHadron: public TG4VSpecialCuts
 class TG4SpecialCutsForElectron: public TG4VSpecialCuts
 {
   public:
-    TG4SpecialCutsForElectron(const G4String& processName);
+    TG4SpecialCutsForElectron(
+       const G4String& processName = "specialCutForElectron");
     virtual ~TG4SpecialCutsForElectron();
 
     // methods
     virtual G4double GetMinEkine(const TG4Limits& limits,
                                  const G4Track& track) const;
-			    
-  protected:
-    TG4SpecialCutsForElectron();		   
 };
 
 /// \ingroup physics
@@ -69,15 +65,13 @@ class TG4SpecialCutsForElectron: public TG4VSpecialCuts
 class TG4SpecialCutsForEplus: public TG4VSpecialCuts
 {
   public:
-    TG4SpecialCutsForEplus(const G4String& processName);
+    TG4SpecialCutsForEplus(
+      const G4String& processName = "specialCutForEplus");
     virtual ~TG4SpecialCutsForEplus();
 
     // methods
     virtual G4double GetMinEkine(const TG4Limits& limits,
                                  const G4Track& track) const;
-			    
-  protected:
-    TG4SpecialCutsForEplus();		   
 };
 
 /// \ingroup physics
@@ -90,15 +84,13 @@ class TG4SpecialCutsForEplus: public TG4VSpecialCuts
 class TG4SpecialCutsForGamma: public TG4VSpecialCuts
 {
   public:
-    TG4SpecialCutsForGamma(const G4String& processName);
+    TG4SpecialCutsForGamma(
+       const G4String& processName = "specialCutForGamma");
     virtual ~TG4SpecialCutsForGamma();
 
     // methods
     virtual G4double GetMinEkine(const TG4Limits& limits,
                                  const G4Track& track) const;
-			    
-  protected:
-    TG4SpecialCutsForGamma();		   
 };
 
 /// \ingroup physics
@@ -111,15 +103,13 @@ class TG4SpecialCutsForGamma: public TG4VSpecialCuts
 class TG4SpecialCutsForMuon: public TG4VSpecialCuts
 {
   public:
-    TG4SpecialCutsForMuon(const G4String& processName);
+    TG4SpecialCutsForMuon(
+      const G4String& processName = "specialCutForMuon");
     virtual ~TG4SpecialCutsForMuon();
 
     // methods
     virtual G4double GetMinEkine(const TG4Limits& limits,
                                  const G4Track& track) const;
-			    
-  protected:
-    TG4SpecialCutsForMuon();		   
 };
 
 /// \ingroup physics
@@ -132,15 +122,13 @@ class TG4SpecialCutsForMuon: public TG4VSpecialCuts
 class TG4SpecialCutsForNeutralHadron: public TG4VSpecialCuts
 {
   public:
-    TG4SpecialCutsForNeutralHadron(const G4String& processName);
+    TG4SpecialCutsForNeutralHadron(
+       const G4String& processName = "specialCutForNeutralHadron");
     virtual ~TG4SpecialCutsForNeutralHadron();
 
     // methods
     virtual G4double GetMinEkine(const TG4Limits& limits,
                                  const G4Track& track) const;
-			    
-  protected:
-    TG4SpecialCutsForNeutralHadron();		   
 };
 
 /// \ingroup physics
@@ -153,15 +141,13 @@ class TG4SpecialCutsForNeutralHadron: public TG4VSpecialCuts
 class TG4SpecialCutsForOther: public TG4VSpecialCuts
 {
   public:
-    TG4SpecialCutsForOther(const G4String& processName);
+    TG4SpecialCutsForOther(
+       const G4String& processName = "specialCutForOther");
     virtual ~TG4SpecialCutsForOther();
 
     // methods
     virtual G4double GetMinEkine(const TG4Limits& limits,
                                  const G4Track& track) const;
-			    
-  protected:
-    TG4SpecialCutsForOther();		   
 };
 
 #endif //TG4_SPECIAL_CUTS_H

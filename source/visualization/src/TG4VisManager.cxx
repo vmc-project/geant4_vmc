@@ -1,4 +1,4 @@
-// $Id: TG4VisManager.cxx,v 1.2 2004/06/18 13:52:03 brun Exp $
+// $Id: TG4VisManager.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: visualization
 //
 // Class TG4VisManager
@@ -93,12 +93,16 @@
 #include "G4VRML2.hh"
 #endif
 
+#include "G4TrajectoryModelFactories.hh"
+
 //_____________________________________________________________________________
 TG4VisManager::TG4VisManager(G4int verboseLevel)
-  : fVerboseLevel(0) {
+  : G4VisManager(),
+    fColourFlag(true),
+    fVerboseLevel(verboseLevel) 
+{
 //  
-  fVerboseLevel = verboseLevel; 
-  fColourFlag = true;
+  Initialize();
 }
 
 //_____________________________________________________________________________
@@ -191,6 +195,13 @@ void TG4VisManager::RegisterGraphicsSystems()
 	 << G4endl;
     PrintAvailableGraphicsSystems();
   }
+}
+
+//_____________________________________________________________________________
+void TG4VisManager::RegisterModelFactories()
+{
+   RegisterModelFactory(new G4TrajectoryDrawByChargeFactory());
+   RegisterModelFactory(new G4TrajectoryDrawByParticleIDFactory());
 }
 
 //_____________________________________________________________________________

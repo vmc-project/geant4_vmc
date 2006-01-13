@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: TG4SpecialCuts.cxx,v 1.5 2005/03/29 10:39:53 brun Exp $
 //
 // Classes TG4pecialCutsFor*
 // --------------------------------------
@@ -18,14 +18,7 @@ TG4SpecialCutsForChargedHadron::TG4SpecialCutsForChargedHadron(
 					         const G4String& processName)
   : TG4VSpecialCuts(processName) 
 {
-/// Standard constructor
-}
-
-//_____________________________________________________________________________
-TG4SpecialCutsForChargedHadron::TG4SpecialCutsForChargedHadron()
-  : TG4VSpecialCuts()
-{
-/// Protected default constructor
+/// Standard and default constructor
 }
 
 //_____________________________________________________________________________
@@ -51,14 +44,7 @@ G4double TG4SpecialCutsForChargedHadron::GetMinEkine(const TG4Limits& limits,
 TG4SpecialCutsForElectron::TG4SpecialCutsForElectron(const G4String& processName)
   : TG4VSpecialCuts(processName)
 {
-/// Standard constructor
-}
-
-//_____________________________________________________________________________
-TG4SpecialCutsForElectron::TG4SpecialCutsForElectron() 
-  : TG4VSpecialCuts()
-{
-/// Protected default constructor
+/// Standard and default constructor
 }
 
 //_____________________________________________________________________________
@@ -83,14 +69,7 @@ G4double TG4SpecialCutsForElectron::GetMinEkine(const TG4Limits& limits,
 TG4SpecialCutsForEplus::TG4SpecialCutsForEplus(const G4String& processName)
   : TG4VSpecialCuts(processName) 
 {
-/// Standard constructor
-}
-
-//_____________________________________________________________________________
-TG4SpecialCutsForEplus::TG4SpecialCutsForEplus()
-  : TG4VSpecialCuts()
-{
-/// Protected default constructor
+/// Standard and default constructor
 }
 
 //_____________________________________________________________________________
@@ -115,14 +94,7 @@ G4double TG4SpecialCutsForEplus::GetMinEkine(const TG4Limits& limits,
 TG4SpecialCutsForGamma::TG4SpecialCutsForGamma(const G4String& processName)
   : TG4VSpecialCuts(processName)
 {
-/// Standard constructor
-}
-
-//_____________________________________________________________________________
-TG4SpecialCutsForGamma::TG4SpecialCutsForGamma() 
-  : TG4VSpecialCuts()
-{
-/// Protected default constructor
+/// Standard and default constructor
 }
 
 //_____________________________________________________________________________
@@ -147,14 +119,7 @@ G4double TG4SpecialCutsForGamma::GetMinEkine(const TG4Limits& limits,
 TG4SpecialCutsForMuon::TG4SpecialCutsForMuon(const G4String& processName)
   : TG4VSpecialCuts(processName) 
 {
-/// Standard constructor
-}
-
-//_____________________________________________________________________________
-TG4SpecialCutsForMuon::TG4SpecialCutsForMuon() 
-  : TG4VSpecialCuts()
-{
-/// Protected default constructor
+/// Standard and default constructor
 }
 
 //_____________________________________________________________________________
@@ -180,14 +145,7 @@ TG4SpecialCutsForNeutralHadron::TG4SpecialCutsForNeutralHadron(
                                               const G4String& processName)
   : TG4VSpecialCuts(processName)
 {
-/// Standard constructor
-}
-
-//_____________________________________________________________________________
-TG4SpecialCutsForNeutralHadron::TG4SpecialCutsForNeutralHadron()
-  : TG4VSpecialCuts()
-{
-// Protected default constructor
+/// Standard and default constructor
 }
 
 //_____________________________________________________________________________
@@ -212,13 +170,7 @@ G4double TG4SpecialCutsForNeutralHadron::GetMinEkine(const TG4Limits& limits,
 TG4SpecialCutsForOther::TG4SpecialCutsForOther(const G4String& processName)
   : TG4VSpecialCuts(processName)
 {
-/// Standard constructor
-}
-
-//_____________________________________________________________________________
-TG4SpecialCutsForOther::TG4SpecialCutsForOther()
-{
-// Protected default constructor
+/// Standard and default constructor
 }
 
 //_____________________________________________________________________________

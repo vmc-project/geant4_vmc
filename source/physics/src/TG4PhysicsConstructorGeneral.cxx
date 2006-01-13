@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorGeneral.cxx,v 1.4 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsConstructorGeneral.cxx,v 1.5 2005/01/05 08:04:58 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsConstructorGeneral
@@ -20,9 +20,13 @@
 #include <G4ChargedGeantino.hh>
 #include <G4Geantino.hh>
 
+#include <G4Decay.hh>
+
 //_____________________________________________________________________________
 TG4PhysicsConstructorGeneral::TG4PhysicsConstructorGeneral(const G4String& name)
-  : TG4VPhysicsConstructor(name) {
+  : TG4VPhysicsConstructor(name),
+    fDecayProcess(0)
+{
 //
 }
 
@@ -30,13 +34,17 @@ TG4PhysicsConstructorGeneral::TG4PhysicsConstructorGeneral(const G4String& name)
 TG4PhysicsConstructorGeneral::TG4PhysicsConstructorGeneral(
 						   G4int verboseLevel,
                                                    const G4String& name)
-  : TG4VPhysicsConstructor(name, verboseLevel) {
+  : TG4VPhysicsConstructor(name, verboseLevel), 
+    fDecayProcess(0)
+{
 //
 }
 
 //_____________________________________________________________________________
-TG4PhysicsConstructorGeneral::~TG4PhysicsConstructorGeneral() {
+TG4PhysicsConstructorGeneral::~TG4PhysicsConstructorGeneral() 
+{
 //
+  delete fDecayProcess;
 }
 
 //
@@ -58,13 +66,16 @@ void TG4PhysicsConstructorGeneral::ConstructProcess()
 {
 /// Construct electromagnetic processes for e+.
 
+  // Create process
+  fDecayProcess = new G4Decay();
+
   // Set external decayer
   TVirtualMCDecayer* mcDecayer = gMC->GetDecayer(); 
   if (mcDecayer) {
     TG4ExtDecayer* tg4Decayer = new TG4ExtDecayer(mcDecayer);
        // the tg4Decayer is deleted in G4Decay destructor
     tg4Decayer->VerboseLevel(VerboseLevel());   
-    fDecayProcess.SetExtDecayer(tg4Decayer);
+    fDecayProcess->SetExtDecayer(tg4Decayer);
     
     if (VerboseLevel() > 0) { 
       G4cout << "### External decayer is set" << G4endl;
@@ -75,21 +86,21 @@ void TG4PhysicsConstructorGeneral::ConstructProcess()
   while( (*theParticleIterator)() ){
     G4ParticleDefinition* particle = theParticleIterator->value();
     G4ProcessManager* pmanager = particle->GetProcessManager();
-    if (fDecayProcess.IsApplicable(*particle)) { 
-      pmanager ->AddProcess(&fDecayProcess);
+    if (fDecayProcess->IsApplicable(*particle)) { 
+      pmanager ->AddProcess(fDecayProcess);
       // set ordering for PostStepDoIt and AtRestDoIt
-      pmanager ->SetProcessOrdering(&fDecayProcess, idxPostStep);
-      pmanager ->SetProcessOrdering(&fDecayProcess, idxAtRest);
+      pmanager ->SetProcessOrdering(fDecayProcess, idxPostStep);
+      pmanager ->SetProcessOrdering(fDecayProcess, idxAtRest);
     }
   }
   
   // map to G3 controls
   TG4ProcessControlMap* processMap = TG4ProcessControlMap::Instance();
-  processMap->Add(&fDecayProcess, kDCAY); 
+  processMap->Add(fDecayProcess, kDCAY); 
 
   // map to TMCProcess codes
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
-  mcMap->Add("Decay", kPDecay); 
+  mcMap->Add(fDecayProcess, kPDecay); 
   mcMap->Add("Transportation", kPTransportation); 
 
   if (VerboseLevel() > 0) {

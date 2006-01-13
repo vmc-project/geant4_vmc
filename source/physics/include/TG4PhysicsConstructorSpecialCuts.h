@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorSpecialCuts.h,v 1.3 2005/03/29 10:39:53 brun Exp $
+// $Id: TG4PhysicsConstructorSpecialCuts.h,v 1.4 2005/09/01 10:04:33 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorSpecialCuts
@@ -10,9 +10,17 @@
 #define TG4_PHYSICS_CONSTRUCTOR_SPECIAL_CUTS_H
 
 #include "TG4VPhysicsConstructor.h"
-#include "TG4SpecialCuts.h"
 
 #include <globals.hh>
+
+class TG4SpecialCutsForGamma;
+class TG4SpecialCutsForElectron;
+class TG4SpecialCutsForEplus;
+class TG4SpecialCutsForChargedHadron;
+class TG4SpecialCutsForNeutralHadron;
+class TG4SpecialCutsForMuon;
+class TG4SpecialCutsForOther;
+
 
 class TG4PhysicsConstructorSpecialCuts: public TG4VPhysicsConstructor
 {
@@ -30,13 +38,13 @@ class TG4PhysicsConstructorSpecialCuts: public TG4VPhysicsConstructor
     
   private:
     // data members
-    TG4SpecialCutsForGamma          fSpecialCutsForGamma;
-    TG4SpecialCutsForElectron       fSpecialCutsForElectron;
-    TG4SpecialCutsForEplus          fSpecialCutsForEplus;
-    TG4SpecialCutsForChargedHadron  fSpecialCutsForChargedHadron;
-    TG4SpecialCutsForNeutralHadron  fSpecialCutsForNeutralHadron;
-    TG4SpecialCutsForMuon           fSpecialCutsForMuon;
-    TG4SpecialCutsForOther          fSpecialCutsForOther;
+    TG4SpecialCutsForGamma*          fSpecialCutsForGamma;
+    TG4SpecialCutsForElectron*       fSpecialCutsForElectron;
+    TG4SpecialCutsForEplus*          fSpecialCutsForEplus;
+    TG4SpecialCutsForChargedHadron*  fSpecialCutsForChargedHadron;
+    TG4SpecialCutsForNeutralHadron*  fSpecialCutsForNeutralHadron;
+    TG4SpecialCutsForMuon*           fSpecialCutsForMuon;
+    TG4SpecialCutsForOther*          fSpecialCutsForOther;
 };
 
 #endif //TG4_PHYSICS_CONSTRUCTOR_SPECIAL_CUTS_H

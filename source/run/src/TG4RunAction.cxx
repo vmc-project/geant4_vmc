@@ -1,4 +1,4 @@
-// $Id: TG4RunAction.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4RunAction.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
 // Category: run
 //
 // Class TG4RunAction
@@ -15,8 +15,6 @@
 #include "TG4Globals.h"
 
 #include <G4Run.hh>
-#include <G4VVisManager.hh>
-#include <G4UImanager.hh>
 
 //_____________________________________________________________________________
 TG4RunAction::TG4RunAction()
@@ -66,11 +64,6 @@ void TG4RunAction::BeginOfRunAction(const G4Run* run)
 
   fRunID++;
   
-  // notify graphics 
-  if (G4VVisManager::GetConcreteInstance()) {
-    G4UImanager::GetUIpointer()->ApplyCommand("/vis/scene/notifyHandlers");
-  } 
-
   if (VerboseLevel() > 0) {
     G4cout << "### Run " << run->GetRunID() << " start." << G4endl;
   }
@@ -84,11 +77,6 @@ void TG4RunAction::EndOfRunAction(const G4Run* run)
 /// Called by G4 kernel at the end of run.
 
   fTimer->Stop();
-
-  // update graphics 
-  if (G4VVisManager::GetConcreteInstance()) {
-     G4UImanager::GetUIpointer()->ApplyCommand("/vis/viewer/update");
-  }
 
   if (VerboseLevel() > 0) {
     G4cout << "Time of this run:   " << *fTimer << G4endl;

@@ -1,4 +1,4 @@
-// $Id: TG4UICmdWithAComplexString.cxx,v 1.2 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4UICmdWithAComplexString.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: global
 //
 // Class TG4UICmdWithAComplexString
@@ -9,7 +9,7 @@
 
 #include "TG4UICmdWithAComplexString.h"
 
-#include <strstream>
+#include <sstream>
 
 //_____________________________________________________________________________
 TG4UICmdWithAComplexString::TG4UICmdWithAComplexString(

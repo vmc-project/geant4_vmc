@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.cxx,v 1.7 2005/07/22 10:22:48 brun Exp $
+// $Id: TG4ModularPhysicsList.cxx,v 1.8 2005/11/18 21:29:35 brun Exp $
 // Category: physics
 //
 // Class TG4ModularPhysicsList
@@ -35,20 +35,30 @@
 const G4double TG4ModularPhysicsList::fgkDefaultCutValue = 1.0 * mm;
 
 //_____________________________________________________________________________
+TG4ModularPhysicsList::TG4ModularPhysicsList(const TG4PhysicsListOptions& options)
+  : G4VModularPhysicsList(),
+    TG4Verbose("physicsList"),
+    fMessenger(this),
+    fOptions(options)
+ {
+//
+  Configure();
+
+  defaultCutValue = fgkDefaultCutValue;
+
+  SetVerboseLevel(TG4VVerbose::VerboseLevel());
+}
+
+//_____________________________________________________________________________
 TG4ModularPhysicsList::TG4ModularPhysicsList()
   : G4VModularPhysicsList(),
     TG4Verbose("physicsList"),
     fMessenger(this),
-    fPhysicsConstructorOptical(0),
-    fSetEMPhysics(true),
-    fSetMuonPhysics(true),
-    fSetHadronPhysics(false),
-    fSetOpticalPhysics(false),
-    fSetSpecialCutsPhysics(false),
-    fSetSpecialControlsPhysics(false),
-    fSetStepLimiterPhysics(true)
-{
+    fOptions()
+ {
 //
+  Configure();
+
   defaultCutValue = fgkDefaultCutValue;
 
   SetVerboseLevel(TG4VVerbose::VerboseLevel());
@@ -88,6 +98,61 @@ TG4ModularPhysicsList::operator=(const TG4ModularPhysicsList &right)
 //
 // private methods
 //
+
+//_____________________________________________________________________________
+void TG4ModularPhysicsList::Configure()
+{
+/// Create the selected physics constructors
+/// and registeres them in the modular physics list.
+
+  Int_t verboseLevel = TG4VVerbose::VerboseLevel();
+
+  // general physics
+  RegisterPhysics(new TG4PhysicsConstructorGeneral(verboseLevel));
+
+  // electromagnetic physics
+  if ( fOptions.GetEMPhysics() )  
+    RegisterPhysics(new TG4PhysicsConstructorEM(verboseLevel));
+
+  // muon physics
+  if ( fOptions.GetMuonPhysics() && fOptions.GetEMPhysics() )      
+    RegisterPhysics(new TG4PhysicsConstructorMuon(verboseLevel));
+
+  // hadron physics
+  if ( fOptions.GetEMPhysics() ||  fOptions.GetHadronPhysics() ) { 
+    RegisterPhysics(new TG4PhysicsConstructorIon( verboseLevel, 
+		    fOptions.GetEMPhysics(), fOptions.GetHadronPhysics()));
+    RegisterPhysics(new TG4PhysicsConstructorHadron(verboseLevel, 
+		    fOptions.GetEMPhysics(), fOptions.GetHadronPhysics()));
+  }  
+
+  // optical physics
+  if ( fOptions.GetOpticalPhysics() ) {
+    fPhysicsConstructorOptical 
+      = new TG4PhysicsConstructorOptical(verboseLevel);
+    RegisterPhysics(fPhysicsConstructorOptical);
+  }  
+
+  // special processes
+  if ( fOptions.GetSpecialCutsPhysics() ) 
+    RegisterPhysics(new TG4PhysicsConstructorSpecialCuts(verboseLevel));
+
+  if ( fOptions.GetSpecialControlsPhysics() ) 
+    RegisterPhysics(new TG4PhysicsConstructorSpecialControls(verboseLevel));
+
+  if ( fOptions.GetStepLimiterPhysics() ) 
+    RegisterPhysics(new TG4PhysicsConstructorStepLimiter(verboseLevel));
+
+  // warn about not allowed combinations
+  if ( fOptions.GetMuonPhysics() && !fOptions.GetEMPhysics() ) {
+    G4String text = "TG4PhysicsManager::CreatePhysicsConstructors:\n";
+    text = text + "    Muon physics cannot be constructed without EM physics.\n";
+    text = text + "    SetMuon control was ignored.";
+    TG4Globals::Warning(text);     
+  }
+         // all created physics constructors are deleted
+	 // in the base class destructor
+}    
 
 //_____________________________________________________________________________
 void TG4ModularPhysicsList::SetProcessActivation(G4ProcessManager* processManager,
@@ -244,62 +309,6 @@ void TG4ModularPhysicsList::SetSpecialCutsActivation()
 //
 
 //_____________________________________________________________________________
-void TG4ModularPhysicsList::Configure()
-{
-/// Create the selected physics constructors
-/// and registeres them in the modular physics list.
-
-  Int_t verboseLevel = TG4VVerbose::VerboseLevel();
-
-  // general physics
-  RegisterPhysics(new TG4PhysicsConstructorGeneral(verboseLevel));
-
-  // electromagnetic physics
-  if (fSetEMPhysics)  
-    RegisterPhysics(new TG4PhysicsConstructorEM(verboseLevel));
-
-  // muon physics
-  if (fSetMuonPhysics && fSetEMPhysics)      
-    RegisterPhysics(new TG4PhysicsConstructorMuon(verboseLevel));
-
-  // hadron physics
-  if (fSetEMPhysics || fSetHadronPhysics) { 
-    RegisterPhysics(new TG4PhysicsConstructorIon(
-    		           verboseLevel, fSetEMPhysics, fSetHadronPhysics));
-    RegisterPhysics(new TG4PhysicsConstructorHadron(
-		           verboseLevel, fSetEMPhysics, fSetHadronPhysics));
-  }  
-
-  // optical physics
-  if (fSetOpticalPhysics) {
-    fPhysicsConstructorOptical 
-      = new TG4PhysicsConstructorOptical(verboseLevel);
-    RegisterPhysics(fPhysicsConstructorOptical);
-  }  
-
-  // special processes
-  if (fSetSpecialCutsPhysics) 
-    RegisterPhysics(new TG4PhysicsConstructorSpecialCuts(verboseLevel));
-
-  if (fSetSpecialControlsPhysics) 
-    RegisterPhysics(new TG4PhysicsConstructorSpecialControls(verboseLevel));
-
-  if (fSetStepLimiterPhysics) 
-    RegisterPhysics(new TG4PhysicsConstructorStepLimiter(verboseLevel));
-
-  // warn about not allowed combinations
-  if (fSetMuonPhysics && !fSetEMPhysics) {
-    G4String text = "TG4PhysicsManager::CreatePhysicsConstructors:\n";
-    text = text + "    Muon physics cannot be constructed without EM physics.\n";
-    text = text + "    SetMuon control was ignored.";
-    TG4Globals::Warning(text);     
-  }
-
-         // all created physics constructors are deleted
-	 // in the base class destructor
-}    
-
-//_____________________________________________________________________________
 void TG4ModularPhysicsList::ConstructProcess()
 {
 /// Construct all processes.
@@ -363,9 +372,16 @@ void TG4ModularPhysicsList::VerboseLevel(G4int level)
 {
 /// Set the specified level to both TG4Verbose and 
 /// G4VModularPhysicsList.
+/// The verbose level is also propagated to registered physics contructors.
 
   TG4VVerbose::VerboseLevel(level);
   SetVerboseLevel(level);
+  
+  G4PhysConstVector::iterator it;
+  for ( it = physicsVector->begin(); it != physicsVector->end(); ++it ) {
+    TG4Verbose* verbose = dynamic_cast<TG4Verbose*>(*it);
+    verbose->VerboseLevel(level);
+  }
 }
 
 
@@ -411,6 +427,7 @@ void TG4ModularPhysicsList::DumpAllProcesses() const
     G4cout << G4endl;  
   }  
 }
+
 //_____________________________________________________________________________
 void TG4ModularPhysicsList::SetRangeCut(G4double value)
 {
@@ -428,14 +445,14 @@ void TG4ModularPhysicsList::SetProcessActivation()
 /// (In)Activate built processes according
 /// to the setup in TG4G3PhysicsManager
 
-  if ( fSetSpecialControlsPhysics &&
+  if ( fOptions.GetSpecialControlsPhysics() &&
       (TG4G3PhysicsManager::Instance()->IsGlobalSpecialControls() ||
        TG4G3PhysicsManager::Instance()->IsSpecialControls()) ) {
        
     SetSpecialControlsActivation();
   }  
        
-  if ( fSetSpecialCutsPhysics &&
+  if ( fOptions.GetSpecialCutsPhysics() &&
        TG4G3PhysicsManager::Instance()->IsSpecialCuts() ) {
   
     SetSpecialCutsActivation();

@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.h,v 1.4 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4RunManager.h,v 1.5 2005/09/01 10:04:33 brun Exp $
 /// \ingroup run
 //
 /// \class TG4RunManager
@@ -20,7 +20,7 @@
 
 #include <Rtypes.h>
 
-class TG4VRunConfiguration;
+class TG4RunConfiguration;
 
 class G4RunManager;
 class G4UIsession;
@@ -30,8 +30,8 @@ class TApplication;
 class TG4RunManager : public TG4Verbose
 {
   public:
-    TG4RunManager(TG4VRunConfiguration* configuration, int argc, char** argv);
-    TG4RunManager(TG4VRunConfiguration* configuration);
+    TG4RunManager(TG4RunConfiguration* configuration, int argc, char** argv);
+    TG4RunManager(TG4RunConfiguration* configuration);
     // --> protected
     // TG4RunManager();
     // TG4RunManager(const TG4RunManager& right);
@@ -73,6 +73,7 @@ class TG4RunManager : public TG4Verbose
 
   private:
     // methods
+    void ConfigureRunManager();
     void CreateGeantUI();
     void CreateRootUI();
     void FilterARGV(const G4String& option);
@@ -84,7 +85,7 @@ class TG4RunManager : public TG4Verbose
     // data members    
     G4RunManager*         fRunManager;       //G4RunManager
     TG4RunMessenger       fMessenger;        //messenger
-    TG4VRunConfiguration* fRunConfiguration; //TG4VRunConfiguration
+    TG4RunConfiguration*  fRunConfiguration; //TG4RunConfiguration
     G4UIsession*          fGeantUISession;   //G4 UI 
     TApplication*         fRootUISession;    //Root UI 
     G4bool                fRootUIOwner;      //ownership of Root UI

@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: TG4PhysicsConstructorStepLimiter.cxx,v 1.1 2005/01/05 08:04:58 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsConstructorStepLimiter
@@ -15,11 +15,14 @@
 
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
+#include <G4StepLimiter.hh>
 
 //_____________________________________________________________________________
 TG4PhysicsConstructorStepLimiter::TG4PhysicsConstructorStepLimiter(
                                                    const G4String& name)
-  : TG4VPhysicsConstructor(name) {
+  : TG4VPhysicsConstructor(name),
+    fStepLimiterProcess(0) 
+{
 //
 }
 
@@ -27,13 +30,17 @@ TG4PhysicsConstructorStepLimiter::TG4PhysicsConstructorStepLimiter(
 TG4PhysicsConstructorStepLimiter::TG4PhysicsConstructorStepLimiter(
 						   G4int verboseLevel,
                                                    const G4String& name)
-  : TG4VPhysicsConstructor(name, verboseLevel) {
+  : TG4VPhysicsConstructor(name, verboseLevel), 
+    fStepLimiterProcess(0) 
+{
 //
 }
 
 //_____________________________________________________________________________
-TG4PhysicsConstructorStepLimiter::~TG4PhysicsConstructorStepLimiter() {
+TG4PhysicsConstructorStepLimiter::~TG4PhysicsConstructorStepLimiter() 
+{
 //
+  delete fStepLimiterProcess;
 }
 
 //
@@ -52,13 +59,15 @@ void TG4PhysicsConstructorStepLimiter::ConstructProcess()
 {
 /// Set step limiter process to all particles
 
+  fStepLimiterProcess = new G4StepLimiter();
+
   theParticleIterator->reset();
   while( (*theParticleIterator)() ){
 
     G4ParticleDefinition* particle = theParticleIterator->value();
     G4ProcessManager* pmanager = particle->GetProcessManager();
 
-    pmanager ->AddProcess(&fStepLimiterProcess, -1, -1, 6);
+    pmanager ->AddProcess(fStepLimiterProcess, -1, -1, 6);
   }
   
   // no G3 control for this process

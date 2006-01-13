@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.h,v 1.6 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsManager.h,v 1.7 2005/09/01 10:04:33 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsManager
@@ -74,7 +74,6 @@ class TG4PhysicsManager : public TG4Verbose
     //
 
     void  DefineParticles();      
-    void  CreatePhysicsConstructors();
     void  SetProcessActivation();  
     TMCProcess GetMCProcess(const G4VProcess* process);
     TMCProcess GetOpBoundaryStatus(const G4VProcess* process);

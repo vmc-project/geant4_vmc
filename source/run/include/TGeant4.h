@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.15 2005/09/01 10:04:33 brun Exp $
+// $Id: TGeant4.h,v 1.16 2005/11/18 21:29:35 brun Exp $
 /// \ingroup run
 //
 /// \class TGeant4
@@ -14,7 +14,7 @@
 #include <TMCOptical.h>
 #include <TArrayI.h>
 
-class TG4VRunConfiguration;
+class TG4RunConfiguration;
 class TG4GeometryManager;
 class TG4SDManager;
 class TG4PhysicsManager;
@@ -30,9 +30,9 @@ class TGeant4: public TVirtualMC
 {
   public:
     TGeant4(const char* name, const char* title,
-            TG4VRunConfiguration* configuration, int argc, char** argv);
+            TG4RunConfiguration* configuration, int argc, char** argv);
     TGeant4(const char* name, const char* title,
-            TG4VRunConfiguration* configuration);
+            TG4RunConfiguration* configuration);
     // --> protected
     // TGeant4();
     // TGeant4(const TGeant4& right);

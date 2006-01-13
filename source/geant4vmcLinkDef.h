@@ -1,4 +1,4 @@
-// $Id: geant4vmcLinkDef.h,v 1.1.1.1 2002/08/30 15:14:16 alibrary Exp $
+// $Id: geant4vmcLinkDef.h,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 
 #ifdef __CINT__
 
@@ -6,6 +6,7 @@
 #pragma link off all classes;
 #pragma link off all functions;
  
+
 #pragma link C++ class  TG4Editor+;
 #pragma link C++ class  TG4MainFrame+;
 #pragma link C++ class  TG4GeometryGUI+;
@@ -16,6 +17,6 @@
 
 #pragma link C++ class  TGeant4+;
 #pragma link C++ class  TG4RunConfiguration+;
-#pragma link C++ class  TG4VRunConfiguration+;
+#pragma link C++ class  TG4PhysicsListOptions+;
 
 #endif

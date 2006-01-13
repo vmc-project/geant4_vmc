@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.cxx,v 1.8 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4RunManager.cxx,v 1.9 2005/01/05 08:04:58 brun Exp $
 // Category: run
 //
 // Class TG4RunManager
@@ -8,7 +8,7 @@
 // Author: I. Hrivnacova
 
 #include "TG4RunManager.h"
-#include "TG4VRunConfiguration.h"
+#include "TG4RunConfiguration.h"
 #include "TG4Globals.h"
 #include "TG4GeometryManager.h"
 #include "TG4GeometryServices.h"
@@ -16,6 +16,15 @@
 #include "TG4SDServices.h"
 #include "TG4PhysicsManager.h"
 #include "TG4G3PhysicsManager.h"
+#include "TG4DetConstruction.h"
+#include "TG4SDConstruction.h"
+#include "TG4ModularPhysicsList.h"
+#include "TG4PrimaryGeneratorAction.h"
+#include "TG4RunAction.h"
+#include "TG4EventAction.h"
+#include "TG4TrackingAction.h"
+#include "TG4SteppingAction.h"
+#include "TG4SpecialStackingAction.h"
 
 #include <G4RunManager.hh>
 #include <G4UIsession.hh>
@@ -39,9 +48,10 @@
 TG4RunManager* TG4RunManager::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4RunManager::TG4RunManager(TG4VRunConfiguration* runConfiguration, 
+TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration, 
                              int argc, char** argv)		  
   : TG4Verbose("runManager"),
+    fRunManager(0),
     fMessenger(this),
     fRunConfiguration(runConfiguration),
     fGeantUISession(0),
@@ -63,16 +73,16 @@ TG4RunManager::TG4RunManager(TG4VRunConfiguration* runConfiguration,
       
   fgInstance = this;
   
-  // create and configure geant4 run manager
-  fRunManager =  new G4RunManager();
-  fRunConfiguration->ConfigureRunManager(fRunManager);
-
   if (VerboseLevel() > 1) {
     G4cout << "G4RunManager has been created." << G4endl;
   }  
   
   // filter out "-splash" from argument list
   FilterARGV("-splash");
+
+  // create and configure G4 run manager
+  fRunManager =  new G4RunManager();
+  ConfigureRunManager();
 
   // create geant4 UI
   CreateGeantUI();
@@ -84,8 +94,9 @@ TG4RunManager::TG4RunManager(TG4VRunConfiguration* runConfiguration,
 }
 
 //_____________________________________________________________________________
-TG4RunManager::TG4RunManager(TG4VRunConfiguration* runConfiguration)
+TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration)
   : TG4Verbose("runManager"),
+    fRunManager(0),
     fMessenger(this),
     fRunConfiguration(runConfiguration),
     fGeantUISession(0),
@@ -118,9 +129,9 @@ TG4RunManager::TG4RunManager(TG4VRunConfiguration* runConfiguration)
   // filter out "-splash" from argument list
   FilterARGV("-splash");
 
-  // create and configure geant4 run manager
+  // create and configure G4 run manager
   fRunManager =  new G4RunManager();
-  fRunConfiguration->ConfigureRunManager(fRunManager);
+  ConfigureRunManager();
 
   if (VerboseLevel() > 1) {
     G4cout << "G4RunManager has been created." << G4endl;
@@ -180,6 +191,38 @@ TG4RunManager& TG4RunManager::operator=(const TG4RunManager& right)
 //
 // private methods
 //
+
+//_____________________________________________________________________________
+void TG4RunManager::ConfigureRunManager()
+{
+/// Set the user action classes defined by TG4RunConfiguration to G4RunManager.
+
+  // set mandatory classes
+  //
+  fRunManager
+    ->SetUserInitialization(fRunConfiguration->CreateDetectorConstruction());
+  fRunManager
+    ->SetUserInitialization(fRunConfiguration->CreatePhysicsList());
+  fRunManager
+    ->SetUserAction(fRunConfiguration->CreatePrimaryGenerator());      
+
+  // user other action classes 
+  //
+  G4UserRunAction* runAction = fRunConfiguration->CreateRunAction();
+  if ( runAction ) fRunManager->SetUserAction(runAction);  
+
+  G4UserEventAction* eventAction = fRunConfiguration->CreateEventAction();
+  if ( eventAction ) fRunManager->SetUserAction(eventAction); 
+    
+  TG4TrackingAction* trackingAction = fRunConfiguration->CreateTrackingAction();
+  if ( trackingAction) fRunManager->SetUserAction(trackingAction); 
+    
+  TG4SteppingAction* steppingAction = fRunConfiguration->CreateSteppingAction();
+  if ( steppingAction) fRunManager->SetUserAction(steppingAction);
+
+  G4UserStackingAction* stackingAction = fRunConfiguration->CreateStackingAction(); 
+  if ( stackingAction) fRunManager->SetUserAction(stackingAction);
+}
 
 //_____________________________________________________________________________
 void TG4RunManager::CreateGeantUI()
@@ -265,11 +308,7 @@ void TG4RunManager::Initialize()
 {
 /// Initialize G4.
 
-  // create physics constructor
-  // (this operation has to precede the "Init" phase)
-  TG4PhysicsManager::Instance()->CreatePhysicsConstructors();
-
-  // initialize Geant4 
+  // initialize Geant4
   fRunManager->Initialize();
   
   // initialize SD manager

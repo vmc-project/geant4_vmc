@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsListMessenger.cxx,v 1.3 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4PhysicsListMessenger.cxx,v 1.4 2005/05/17 13:43:57 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsListMessenger
@@ -22,52 +22,6 @@ TG4PhysicsListMessenger::TG4PhysicsListMessenger(
   : fPhysicsList(physicsList)
 { 
 //
-  fSetEMCmd
-     = new G4UIcmdWithABool("/mcPhysics/setEM", this);
-  fSetEMCmd->SetGuidance("Set electromagnetic physics.");
-  fSetEMCmd->SetParameterName("EMControl", false);
-  fSetEMCmd->AvailableForStates(G4State_PreInit);
-
-  fSetMuonCmd
-     = new G4UIcmdWithABool("/mcPhysics/setMuon", this);
-  fSetMuonCmd->SetGuidance("Set muon physics.");
-  fSetMuonCmd->SetParameterName("EMControl", false);
-  fSetMuonCmd->AvailableForStates(G4State_PreInit);
-
-  fSetHadronCmd
-     = new G4UIcmdWithABool("/mcPhysics/setHadron", this);
-  fSetHadronCmd->SetGuidance("Set hadron physics.");
-  fSetHadronCmd->SetParameterName("HadronControl", false);
-  fSetHadronCmd->AvailableForStates(G4State_PreInit);
-
-  fSetOpticalCmd
-     = new G4UIcmdWithABool("/mcPhysics/setOptical", this);
-  fSetOpticalCmd->SetGuidance("Set Cerenkov and optical physics.");
-  fSetOpticalCmd->SetParameterName("OpticalControl", false);
-  fSetOpticalCmd->AvailableForStates(G4State_PreInit);
-
-  fSetSpecialCutsCmd
-     = new G4UIcmdWithABool("/mcPhysics/setSpecialCuts", this);
-  fSetSpecialCutsCmd->SetGuidance("Set special cuts process.");
-  fSetSpecialCutsCmd
-    ->SetGuidance("!! Support for this option is under development.");
-  fSetSpecialCutsCmd->SetParameterName("SpecialCutsControl", false);
-  fSetSpecialCutsCmd->AvailableForStates(G4State_PreInit);
-
-  fSetSpecialControlsCmd
-     = new G4UIcmdWithABool("/mcPhysics/setSpecialControls", this);
-  fSetSpecialControlsCmd->SetGuidance("Set special controls process.");
-  fSetSpecialControlsCmd
-    ->SetGuidance("!! Support for this option is under development.");
-  fSetSpecialControlsCmd->SetParameterName("SpecialFlagsControl", false);
-  fSetSpecialControlsCmd->AvailableForStates(G4State_PreInit);
-
-  fSetStepLimiterCmd
-     = new G4UIcmdWithABool("/mcPhysics/setStepLimiter", this);
-  fSetStepLimiterCmd->SetGuidance("Set step limiter process.");
-  fSetStepLimiterCmd->SetParameterName("StepLimiterControl", false);
-  fSetStepLimiterCmd->AvailableForStates(G4State_PreInit);
-
   fRangeCutCmd
      = new G4UIcmdWithADouble("/mcPhysics/rangeCut", this);
   fRangeCutCmd->SetGuidance("Sets the global cut in range (in mm)");
@@ -97,13 +51,6 @@ TG4PhysicsListMessenger::TG4PhysicsListMessenger(
 TG4PhysicsListMessenger::~TG4PhysicsListMessenger() {
 //
 
-  delete fSetEMCmd;
-  delete fSetMuonCmd;
-  delete fSetHadronCmd;
-  delete fSetOpticalCmd;
-  delete fSetSpecialCutsCmd;
-  delete fSetSpecialControlsCmd;
-  delete fSetStepLimiterCmd;
   delete fRangeCutCmd;
   delete fSetCerenkovMaxPhotonsCmd;
 }
@@ -134,37 +81,7 @@ void TG4PhysicsListMessenger::SetNewValue(G4UIcommand* command,
 { 
 /// Apply command to the associated object.
 
-  if (command == fSetEMCmd) {
-    fPhysicsList
-      ->SetEMPhysics(fSetEMCmd->GetNewBoolValue(newValue)); 
-  }    
-  if (command == fSetMuonCmd) {
-    fPhysicsList
-      ->SetMuonPhysics(fSetMuonCmd->GetNewBoolValue(newValue)); 
-  }    
-  else if (command == fSetHadronCmd) {
-    fPhysicsList
-      ->SetHadronPhysics(fSetHadronCmd->GetNewBoolValue(newValue)); 
-  }    
-  else if (command == fSetOpticalCmd) {
-    fPhysicsList
-      ->SetOpticalPhysics(fSetOpticalCmd->GetNewBoolValue(newValue)); 
-  }    
-  else if (command == fSetSpecialCutsCmd) {
-    fPhysicsList
-      ->SetSpecialCutsPhysics(fSetSpecialCutsCmd->GetNewBoolValue(newValue)); 
-  }    
-  else if (command == fSetSpecialControlsCmd) {
-    fPhysicsList
-      ->SetSpecialControlsPhysics(
-          fSetSpecialControlsCmd->GetNewBoolValue(newValue)); 
-  }    
-  else if (command == fSetStepLimiterCmd) {
-    fPhysicsList
-      ->SetStepLimiterPhysics(
-          fSetStepLimiterCmd->GetNewBoolValue(newValue)); 
-  }    
-  else if (command == fRangeCutCmd) {
+  if (command == fRangeCutCmd) {
     fPhysicsList
         ->SetRangeCut(fRangeCutCmd->GetNewDoubleValue(newValue));
   }  

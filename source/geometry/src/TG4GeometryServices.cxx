@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.11 2005/05/19 08:58:34 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.12 2005/11/18 21:29:35 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryServices
@@ -366,7 +366,7 @@ TG4GeometryServices::SurfaceFinish(EMCOpSurfaceFinish finish) const
 }
 
 //_____________________________________________________________________________
-void  TG4GeometryServices::Convert(const HepTransform3D& transform, 
+void  TG4GeometryServices::Convert(const G4Transform3D& transform, 
                                    TGeoHMatrix& matrix) const
 {
 /// Convert CLHEP Transform3D in Root TGeoHMatrix
