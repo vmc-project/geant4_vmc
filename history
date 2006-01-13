@@ -1,8 +1,22 @@
-$Id: history,v 1.15 2005/04/01 20:59:27 brun Exp $
+$Id: history,v 1.16 2005/07/22 13:13:03 brun Exp $
 -----------------------------------------------------------------
      
 Tags (history):
 ===============
+  12/01/2006
+  v1-8:
+    Geant4 VMC:
+      Migration to Geant4 8.0:
+      - TG4RunConfiguration now only provides functions for creating
+        user mandatory and action classes; ConfigureRunManager() function
+        is moved in TG4RunManager;
+        in a user derived class it now sufficient to override only the
+        TG4RunConfiguration::CreatePhysicsList() method.
+      - New way of selecting physics via TG4PhysicsListOptions
+      - Migration to CLHEP 2.0.2.2 
+
+    Tested with Geant4 8.0, CLHEP 1.9.2.2 and 2.0.2.2, Root 5.08/00, VGM 2.07
+
   22/07/2005
   v1-7:
     Geant4 VMC:
