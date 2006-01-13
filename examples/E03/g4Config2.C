@@ -1,4 +1,4 @@
-// $Id: g4Config.C,v 1.1 2003/03/17 14:56:50 brun Exp $
+// $Id: g4Config2.C,v 1.1 2005/05/17 13:52:01 brun Exp $
 //
 // Configuration macro for Geant4 VirtualMC for Example03
 
@@ -22,5 +22,5 @@ void Config()
   
   // Customise Geant4 setting
   // (verbose level, global range cut, ..)
-  geant4->ProcessGeantMacro("g4config.in");
+  geant4->ProcessGeantMacro("g4config2.in");
 }

@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: Ex06DetectorConstruction.cxx,v 1.1 2005/05/17 13:52:01 brun Exp $
 //
 // Geant4 ExampleN06 adapted to Virtual Monte Carlo 
 //
@@ -295,11 +295,9 @@ void Ex06DetectorConstruction::ConstructOpGeometry()
               4.00, 5.00, 6.00, 7.00, 8.00, 9.00, 8.00,
               7.00, 6.00, 5.00, 4.00 };
 
-  cout << "gMC->SetCerenkov " << endl;
   gMC->SetCerenkov(fImedWater, nEntries, photonEnergy,
                    absorption1, efficiency1, refractiveIndex1); 
                    
-  cout << "gMC->SetCerenkov done " << endl;
   gMC->SetMaterialProperty(fImedWater, 
                            "FASTCOMPONENT", nEntries, photonEnergy, scintilFast);
   gMC->SetMaterialProperty(fImedWater, 

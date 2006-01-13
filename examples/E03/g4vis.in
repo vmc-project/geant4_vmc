@@ -1,17 +1,18 @@
-# $Id: $
+# $Id: g4vis.in,v 1.1 2003/03/17 14:56:50 brun Exp $
 #
 # Geant4 macro for setting visualization for Example03
 # (called from Root macro set_vis.C)
 
-/mcTree/setVolume ABSO
-/mcTree/setVolColour Magenta
 /mcTree/setVolume GAPX
 /mcTree/setVolColour Yellow
+/mcTree/setVolume ABSO
+/mcTree/setVolColour Magenta
 
-/vis/scene/create
 /vis/open OGLIX
 #/vis/open DAWNFILE
+/vis/drawVolume
 /vis/viewer/flush
+
 /tracking/storeTrajectory 1
 /mcEvent/drawTracks ALL
 #/vis/scene/endOfEventAction accumulate

@@ -1,4 +1,4 @@
-// $Id: g4libs.C,v 1.7 2005/02/02 14:16:21 brun Exp $
+// $Id: g4libs.C,v 1.8 2005/09/01 10:04:32 brun Exp $
 //
 // Macro for loading Geant4 and Geant4 VMC libraries
 
@@ -218,7 +218,7 @@ void g4libs_granular()
 
   // parameterisation
   gSystem->Load("libG4gflash");
-  gSystem->Load("libG4trdmodels");
+  //gSystem->Load("libG4trdmodels");
 
   // event
   gSystem->Load("libG4event");  
