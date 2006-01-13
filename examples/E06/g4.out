@@ -2,7 +2,7 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.02/00      28 June 2005   *
+  *   Version   5.08/00  13 December 2005   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
@@ -10,19 +10,11 @@
   *******************************************
 
 FreeType Engine v2.1.9 used to render TrueType fonts.
-Compiled on 21 July 2005 for linux with thread support.
+Compiled on 20 December 2005 for linux with thread support.
 
-CINT/ROOT C/C++ Interpreter version 5.16.1, Jun3 20 2005
+CINT/ROOT C/C++ Interpreter version 5.16.5, November 30 2005
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
-
-Welcome to the ROOT tutorials
-
-
-Type ".x demos.C" to get a toolbar from which to execute the demos
-
-Type ".x demoshelp.C" to see the help window
-
 
 Processing run_g4.C...
 Loading Geant4 granular libraries ...
@@ -30,7 +22,7 @@ Loading VGM libraries ...
 Loading libraries ... finished
 
 *************************************************************
- Geant4 version Name: geant4-07-01    (30-June-2005)
+ Geant4 version Name: geant4-08-00    (16-December-2005)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -40,7 +32,23 @@ Debug mode is switched on.
 Visualization Manager instantiating...
 Visualization Manager initialising...
 Registering graphics systems...
-kMCApplicationField
+
+You have successfully chosen to use the following graphics systems.
+Current available graphics systems are:
+  ASCIITree (ATree)
+  DAWNFILE (DAWNFILE)
+  GAGTree (GAGTree)
+  G4HepRepFile (HepRepFile)
+  G4HepRep (HepRepXML)
+  RayTracer (RayTracer)
+  VRML1FILE (VRML1FILE)
+  VRML2FILE (VRML2FILE)
+  OpenGLImmediateX (OGLIX)
+  OpenGLStoredX (OGLSX)
+  OpenGLImmediateXm (OGLIXm)
+  OpenGLStoredXm (OGLSXm)
+
+Registering model factories...
 Geometry will be defined via TGeo
 Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
@@ -54,15 +62,7 @@ Info in <TGeoManager::CloseGeometry>: 3 nodes/ 3 volume UID's in Root geometry m
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 --- node ID tracking disabled
 Converting Root geometry to Geant4 via VGM ... 
-
----> warning from G4Element::GetElement(). The element: NITROGEN does not exist in the table. Return NULL pointer.
-
----> warning from G4Element::GetElement(). The element: OXYGEN does not exist in the table. Return NULL pointer.
-
----> warning from G4Element::GetElement(). The element: HYDROGEN does not exist in the table. Return NULL pointer.
-gMC->SetCerenkov 
 The tables for UV photon tracking set for Water
-gMC->SetCerenkov done 
 The material properties FASTCOMPONENT set for Water
 The material properties SLOWCOMPONENT set for Water
 The material property SCINTILLATIONYIELD set for Water
@@ -71,10 +71,6 @@ The material property FASTTIMECONSTANT set for Water
 The material property SLOWTIMECONSTANT set for Water
 The material property YIELDRATIO set for Water
 The tables for UV photon tracking set for Air
-0th volume TANK  1
-0th volume TANK  1
-1th volume BUBL  1
-2th volume WRLD  0
 The material properties RINDEX set for optical surface WaterSurface
 The material properties SPECULARLOBECONSTANT set for optical surface WaterSurface
 The material properties SPECULARSPIKECONSTANT set for optical surface WaterSurface
@@ -446,13 +442,13 @@ conv:  Total cross sections has a good parametrisation from 1.5 MeV to 100 GeV f
 
 msc:  Model variant of multiple scattering for e-
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
-      Boundary algorithm is active with facrange= 0.199
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
 
 eIoni:   tables are built for  e-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
       Delta cross sections from Moller+Bhabha, good description from 1 KeV to 100 GeV.
-      Step function: finalRange(mm)= 1, dRoverRange= 1, integral: 1
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 eBrem:   tables are built for  e-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -464,7 +460,7 @@ eIoni:   tables are built for  e+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
       Delta cross sections from Moller+Bhabha, good description from 1 KeV to 100 GeV.
-      Step function: finalRange(mm)= 1, dRoverRange= 1, integral: 1
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 eBrem:   tables are built for  e+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -485,13 +481,13 @@ hIoni:   tables are built for  proton
 
 msc:  Model variant of multiple scattering for proton
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
-      Boundary algorithm is active with facrange= 0.199
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
 
 msc:  Model variant of multiple scattering for GenericIon
 
 msc:  Model variant of multiple scattering for mu+
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
-      Boundary algorithm is active with facrange= 0.199
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
 
 muIoni:   tables are built for  mu+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -529,19 +525,10 @@ muPairProd:   tables are built for  mu-
 
 msc:  Model variant of multiple scattering for pi-
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
-      Boundary algorithm is active with facrange= 0.199
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 2018
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+Number of optical photons produced in this event : 1939
 G4SteppingManager::InvokeAtRestDoItProcs: No AtRestDoIt process is active. 
-Number of optical photons produced in this event : 2016
+Number of optical photons produced in this event : 2018
 
 Warning: G4MaterialPropertyVector::GetProperty
 ==> attempt to Retrieve Property below range
@@ -551,6 +538,8 @@ Warning: G4MaterialPropertyVector::GetProperty
 
 Warning: G4MaterialPropertyVector::GetProperty
 ==> attempt to Retrieve Property below range
+Number of optical photons produced in this event : 2082
+Number of optical photons produced in this event : 1976
 
 Warning: G4MaterialPropertyVector::GetProperty
 ==> attempt to Retrieve Property below range
@@ -560,104 +549,9 @@ Warning: G4MaterialPropertyVector::GetProperty
 
 Warning: G4MaterialPropertyVector::GetProperty
 ==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 2141
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 2157
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 2100
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 2014
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 2070
-Number of optical photons produced in this event : 1971
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 2042
-Number of optical photons produced in this event : 2085
-
-This is the end of ROOT -- Goodbye
-
+Number of optical photons produced in this event : 1993
+Number of optical photons produced in this event : 1973
+Number of optical photons produced in this event : 2001
+Number of optical photons produced in this event : 1990
+Number of optical photons produced in this event : 1991
+Number of optical photons produced in this event : 1947
