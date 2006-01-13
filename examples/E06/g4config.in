@@ -1,4 +1,4 @@
-# $Id: g4config.in,v 1.1 2003/03/17 14:56:50 brun Exp $
+# $Id: g4config.in,v 1.1 2005/05/17 13:52:01 brun Exp $
 #
 # Geant4 configuration macro for Example06
 # (called from Root macro g4Config.C)
@@ -12,6 +12,5 @@
 # Swith on optical physics
 #
 #/mcVerbose/physicsList 1
-/mcPhysics/setOptical 1
 
 

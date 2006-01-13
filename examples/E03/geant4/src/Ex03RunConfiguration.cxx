@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: Ex03RunConfiguration.cxx,v 1.1 2005/05/17 13:52:01 brun Exp $
 //
 // Author: I. Hrivnacova
 //
@@ -8,22 +8,12 @@
 
 #include "Ex03RunConfiguration.h"
 
-#include "TG4DetConstruction.h"
-#include "TG4SDConstruction.h"
-#include "TG4PrimaryGeneratorAction.h"
-#include "TG4RunAction.h"
-#include "TG4EventAction.h"
-#include "TG4TrackingAction.h"
-#include "TG4SteppingAction.h"
-
 #include <LHEP_BERT.hh>
 
 //_____________________________________________________________________________
 Ex03RunConfiguration::Ex03RunConfiguration()
-  : TG4VRunConfiguration() {
+  : TG4RunConfiguration(false) {
 //
-
-  CreateUserConfiguration();
 }
 
 //_____________________________________________________________________________
@@ -37,30 +27,9 @@ Ex03RunConfiguration::~Ex03RunConfiguration(){
 
 
 //_____________________________________________________________________________
-void Ex03RunConfiguration::CreateUserConfiguration()
+G4VUserPhysicsList*  Ex03RunConfiguration::CreatePhysicsList()
 {
-// Creates the mandatory Geant4 classes and 
-// the other user action classes. 
-// ---
+// Create LHEP_BERT physics list
 
-  // create mandatory Geant4 classes
-  fDetectorConstruction = new TG4DetConstruction();
-  fSDConstruction = new TG4SDConstruction();
-  fPhysicsList = new LHEP_BERT();
-  fPrimaryGenerator = new TG4PrimaryGeneratorAction();
-
-  // create the other user action classes
-  fRunAction  = new TG4RunAction();
-  fEventAction  = new TG4EventAction();
-  fTrackingAction = new TG4TrackingAction();
-  fSteppingAction = new TG4SteppingAction();
-}
-
-//_____________________________________________________________________________
-G4bool Ex03RunConfiguration::IsSpecialStacking() const
-{
-// Returns false as no special stacking mechanism is used.
-// ---
-
-  return false;
+  return new LHEP_BERT();
 }  
