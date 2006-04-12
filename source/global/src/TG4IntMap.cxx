@@ -1,4 +1,4 @@
-// $Id: TG4IntMap.cxx,v 1.2 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4IntMap.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: global
 //
 // Class TG4IntMap
@@ -96,6 +96,13 @@ G4int TG4IntMap::GetSecond(const G4String& name, G4bool warn)
     return (*i).second;
   }  
 }
+//_____________________________________________________________________________
+G4int TG4IntMap::GetSize() const
+{
+/// Get map size.
+
+  return fMap.size();
+}  
 
 //_____________________________________________________________________________
 void TG4IntMap::PrintAll() const

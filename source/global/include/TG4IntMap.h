@@ -1,4 +1,4 @@
-// $Id: TG4IntMap.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4IntMap.h,v 1.4 2005/09/01 10:04:32 brun Exp $
 /// \ingroup global
 //
 /// \class TG4IntMap
@@ -27,6 +27,7 @@ class TG4IntMap
     // methods
     G4bool Add(const G4String& first, G4int second);  
     G4int GetSecond(const G4String& name, G4bool warn = true);
+    G4int GetSize() const;
     void PrintAll() const;
     void Clear();
 
