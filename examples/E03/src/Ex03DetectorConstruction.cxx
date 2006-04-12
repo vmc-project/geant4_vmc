@@ -1,4 +1,4 @@
-// $Id: Ex03DetectorConstruction.cxx,v 1.2 2004/07/09 16:50:14 brun Exp $
+// $Id: Ex03DetectorConstruction.cxx,v 1.3 2005/01/05 08:05:31 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
@@ -358,49 +358,60 @@ void Ex03DetectorConstruction::SetCuts()
 // Sets cuts for e-, gamma equivalent to 1mm cut in G4.
 // ---
 
+  Bool_t idFromG4 = false;
+    // Set true if running with G4 native detector construction
+
   Int_t mediumId = GetMediumId("Al");
+  if ( idFromG4 ) mediumId = 0;
   gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 597.e-06);
   gMC->Gstpar(mediumId, "DCUTE",  597.e-06);
 
   mediumId = GetMediumId("LiquidArgon");
+  if ( idFromG4 ) mediumId = 1;
   gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 343.e-06);
   gMC->Gstpar(mediumId, "DCUTE",  343.e-06);
 
   mediumId = GetMediumId("Lead");
+  if ( idFromG4 ) mediumId = 2;
   gMC->Gstpar(mediumId, "CUTGAM", 101.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  101.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 1.38e-03);
   gMC->Gstpar(mediumId, "DCUTE",  1.38e-03);
 
   mediumId = GetMediumId("Water");
+  if ( idFromG4 ) mediumId = 3;
   gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 347.e-03);
   gMC->Gstpar(mediumId, "DCUTE",  347.e-03);
 
   mediumId = GetMediumId("Scintillator");
+  if ( idFromG4 ) mediumId = 4;
   gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 356.e-03);
   gMC->Gstpar(mediumId, "DCUTE",  356.e-03);
 
   mediumId = GetMediumId("Quartz");
+  if ( idFromG4 ) mediumId = 6;
   gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 534.e-03);
   gMC->Gstpar(mediumId, "DCUTE",  534.e-03);
 
   mediumId = GetMediumId("Air");
+  if ( idFromG4 ) mediumId = 7;
   gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 10.e-06);
   gMC->Gstpar(mediumId, "DCUTE",  10.e-06);
 
   mediumId = GetMediumId("Vacuum");
+  if ( idFromG4 ) mediumId = 11;
   gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 10.e-06);
