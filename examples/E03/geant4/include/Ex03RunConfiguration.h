@@ -1,4 +1,4 @@
-// $Id: Ex03RunConfiguration.h,v 1.1 2005/05/17 13:52:01 brun Exp $
+// $Id: Ex03RunConfiguration.h,v 1.2 2006/01/13 16:58:58 brun Exp $
 //
 // Author: I. Hrivnacova
 //
@@ -19,7 +19,10 @@ class Ex03RunConfiguration : public TG4RunConfiguration
     virtual ~Ex03RunConfiguration();
 
     // methods
-    virtual G4VUserPhysicsList*  CreatePhysicsList();
+    virtual G4VUserPhysicsList*            CreatePhysicsList();
+
+    //virtual G4VUserDetectorConstruction*   CreateDetectorConstruction();
+    //virtual G4VUserPrimaryGeneratorAction* CreatePrimaryGenerator();
 };
 
 #endif //EX03_RUN_CONFIGURATION_H
