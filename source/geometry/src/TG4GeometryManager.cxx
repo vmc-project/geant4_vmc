@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.15 2005/11/18 21:29:35 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.16 2006/01/13 16:59:38 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -31,6 +31,8 @@
 #include <G3MedTable.hh>
 #include <G3SensVolVector.hh>
 
+#include <G4TransportationManager.hh>
+#include <G4Navigator.hh>
 #include <G4LogicalVolumeStore.hh>
 #include <G4PVPlacement.hh>
 #include <G4Material.hh>
@@ -90,7 +92,7 @@ TG4GeometryManager::TG4GeometryManager()
     = new TG4GeometryOutputManager();
 
   fGeometryServices 
-    = new TG4GeometryServices(&fMediumMap, &fNameMap, &fOpSurfaceMap);
+    = new TG4GeometryServices(&fMediumMap, &fOpSurfaceMap);
 
   fgInstance = this;
       
@@ -136,7 +138,7 @@ TG4GeometryManager::operator=(const TG4GeometryManager& right)
 //
  
 //_____________________________________________________________________________
-void TG4GeometryManager::FillMediumMap()
+void TG4GeometryManager::FillMediumMapFromG3()
 {
 /// Map G3 tracking medium IDs to volumes names.
 
@@ -162,6 +164,45 @@ void TG4GeometryManager::FillMediumMap()
   done = lvStore->size();
 }    
 
+//_____________________________________________________________________________
+void TG4GeometryManager::FillMediumMapFromG4()
+{
+/// Map G4 material IDs as tracking medium (not existing in Geant4) IDs 
+/// to volumes names.
+
+  G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
+
+  for (G4int i=0; i<G4int(lvStore->size()); i++) {
+    G4String name  = ((*lvStore)[i])->GetName();
+    
+    G4String g3Name(name);
+    
+    // Filter out the reflected volumesname extension
+    // added by reflection factory 
+    G4String ext = G4ReflectionFactory::Instance()->GetVolumesNameExtension();
+    if (name.find(ext)) g3Name = g3Name.substr(0, g3Name.find(ext));
+
+    G4int mediumID = ((*lvStore)[i])->GetMaterial()->GetIndex();
+    fMediumMap.Add(name, mediumID);     
+  }
+}    
+
+//_____________________________________________________________________________
+void TG4GeometryManager::FillG3MedTableFromG4()
+{
+/// Convert medias from TGeo into temporary objects in G3MedTable.
+
+  const G4MaterialTable* materialTable = G4Material::GetMaterialTable();
+  
+  for (G4int i=0; i<G4int(materialTable->size()); i++) {
+    G4Material* material = (*materialTable)[i];
+    G3Med.put(i, material, 0, 0, 0);
+    
+    fMaterialNameVector.push_back(material->GetName());
+    fMediumNameVector.push_back(material->GetName());
+ } 
+}    	         	            
+    
 //
 // public methods - TVirtualMC implementation
 //
@@ -1288,9 +1329,6 @@ Int_t TG4GeometryManager::Gsvolu(const char *name, const char *shape,
 
   G4gsvolu(fGeometryServices->CutName(name), 
            fGeometryServices->CutName(shape), nmed, upar, npar);
-  
-  // register name in name map
-  fNameMap.AddName(fGeometryServices->CutName(name));
 
   return 0;
 } 
@@ -1336,9 +1374,6 @@ void  TG4GeometryManager::Gsdvn(const char *name, const char *mother,
 
     G4gsdvn(fGeometryServices->CutName(name), 
             fGeometryServices->CutName(mother), ndiv, iaxis);
-
-    // register name in name map
-    fNameMap.AddName(fGeometryServices->CutName(name));
 } 
  
  
@@ -1358,9 +1393,6 @@ void  TG4GeometryManager::Gsdvn2(const char *name, const char *mother,
 
     G4gsdvn2(fGeometryServices->CutName(name),
              fGeometryServices->CutName(mother), ndiv, iaxis, c0i, numed);
-
-    // register name in name map
-    fNameMap.AddName(fGeometryServices->CutName(name));
 } 
  
  
@@ -1384,9 +1416,6 @@ void  TG4GeometryManager::Gsdvt(const char *name, const char *mother,
 
     G4gsdvt(fGeometryServices->CutName(name), 
             fGeometryServices->CutName(mother), step, iaxis, numed, ndvmx);
-
-    // register name in name map
-    fNameMap.AddName(fGeometryServices->CutName(name));
 } 
  
  
@@ -1412,9 +1441,6 @@ void  TG4GeometryManager::Gsdvt2(const char *name, const char *mother,
 
     G4gsdvt2(fGeometryServices->CutName(name), 
              fGeometryServices->CutName(mother), step, iaxis, c0, numed, ndvmx);
-
-    // register name in name map
-    fNameMap.AddName(fGeometryServices->CutName(name));
 } 
  
  
@@ -1468,9 +1494,6 @@ void  TG4GeometryManager::Gspos(const char *vname, Int_t num,
 
    G4gspos(fGeometryServices->CutName(vname), ++num,
            fGeometryServices->CutName(vmoth), x, y, z, irot, vonly);
-
-   // register name in name map
-   fNameMap.AddName(fGeometryServices->CutName(vname));
 } 
  
  
@@ -1491,9 +1514,6 @@ void  TG4GeometryManager::Gsposp(const char *name, Int_t nr,
    G4gsposp(fGeometryServices->CutName(name), ++nr, 
             fGeometryServices->CutName(mother), x, y, z, irot, konly, 
              upar, np);
-
-   // register name in name map
-   fNameMap.AddName(fGeometryServices->CutName(name));
 } 
  
  
@@ -1605,7 +1625,7 @@ G4VPhysicalVolume* TG4GeometryManager::CreateG4Geometry()
   G3toG4BuildTree(first,0);  
   
   // fill medium map
-  FillMediumMap();
+  FillMediumMapFromG3();
 
   // print G3 volume table statistics
   G3Vol.VTEStat();
@@ -1714,8 +1734,7 @@ void TG4GeometryManager::ReadG3Geometry(G4String filePath)
 //_____________________________________________________________________________
 void TG4GeometryManager::ClearG3Tables()
 { 
-/// Clear G3 volumes, materials, rotations(?) tables
-/// and sensitive volumes vector.
+/// Clear G3 volumes table and sensitive volumes vector.
 /// The top volume is kept in the vol table.
 
   // clear volume table 
@@ -1730,8 +1749,7 @@ void TG4GeometryManager::ClearG3Tables()
   G3Vol.Clear();  
   G3Vol.PutVTE(keep);
   
-  // clear other tables
-  //G3Rot.Clear();
+  // clear sensitive volumes vector
   G3SensVol.clear(); 
 }
 
@@ -1739,12 +1757,29 @@ void TG4GeometryManager::ClearG3Tables()
 //_____________________________________________________________________________
 void TG4GeometryManager::ClearG3TablesFinal()
 {
-/// Clear G3 medias and volumes tables
+/// Clear G3 materials, medias and volumes tables
 /// (the top volume is removed from the vol table)
 
   G3Mat.Clear();
   G3Med.Clear();
   G3Vol.Clear();  
+}
+
+//_____________________________________________________________________________
+void TG4GeometryManager::FinishGeometry()
+{
+/// Fill medium map if geometry was defined directly via Geant4
+/// and pass world to geometry services
+
+  if ( G3Med.GetSize() == 0 ) {
+    FillG3MedTableFromG4();   
+    FillMediumMapFromG4();
+    
+    fGeometryServices->SetWorld(
+      G4TransportationManager::GetTransportationManager()
+        ->GetNavigatorForTracking()->GetWorldVolume());
+    
+  }  
 }
 
  
@@ -1775,10 +1810,3 @@ void TG4GeometryManager::SetWriteGeometry(G4bool writeGeometry)
 }
 
  
-//_____________________________________________________________________________
-void TG4GeometryManager::SetMapSecond(const G4String& name)
-{
-/// Set the second name for the map of volumes names.
-
-  fNameMap.SetSecond(name);
-}

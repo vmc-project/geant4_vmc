@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.h,v 1.9 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4GeometryServices.h,v 1.10 2005/11/18 21:29:35 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryServices
@@ -42,7 +42,6 @@ class TG4GeometryServices : public TG4Verbose
 {
   public:
     TG4GeometryServices(TG4IntMap* mediumMap, 
-                        TG4NameMap* nameMap,
 			TG4OpSurfaceMap* opSurfaceMap);
     // --> protected
     // TG4GeometryServices();
@@ -72,7 +71,6 @@ class TG4GeometryServices : public TG4Verbose
                              const TG4StringVector& matNames, 
 			     const TG4doubleVector& matWeights);
            // printing 
-    void PrintNameMap() const;
     void PrintLimits(const G4String& name) const;
     void PrintVolumeLimits(const G4String& volumeName) const;
     void PrintStatistics(G4bool open, G4bool close) const;
@@ -96,7 +94,6 @@ class TG4GeometryServices : public TG4Verbose
     TG4Limits* GetLimits(G4UserLimits* limits,
                          const TG4G3CutVector& cuts,
                          const TG4G3ControlVector& controls) const;
-    const G4String& GetMapSecond(const G4String& name);
 
     G4LogicalVolume*   FindLogicalVolume(const G4String& name, 
                                        G4bool silent = false) const;
@@ -138,7 +135,6 @@ class TG4GeometryServices : public TG4Verbose
  
     // data members
     TG4IntMap*         fMediumMap; //map of volumes names to medias IDs
-    TG4NameMap*        fNameMap;   //map of volumes names to modules names
     TG4OpSurfaceMap*   fOpSurfaceMap;//map of optical surfaces names to their objects 
     G4VPhysicalVolume* fWorld;     //top physical volume (world)
     char               fSeparator; //the volumes name separator (different

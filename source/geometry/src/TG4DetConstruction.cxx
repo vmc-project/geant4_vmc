@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.cxx,v 1.10 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4DetConstruction.cxx,v 1.11 2006/01/13 16:59:38 brun Exp $
 // Category: geometry
 //
 // Class TG4DetConstruction
@@ -12,17 +12,11 @@
 #include "TG4GeometryServices.h"
 #include "TG4MagneticField.h"
 #include "TG4UniformMagneticField.h"
-#include "TG4LVTree.h"
 #include "TG4Globals.h"
 
 #include <G4VPhysicalVolume.hh>
 #include <G4LogicalVolume.hh>
 #include <G4Material.hh>
-
-#ifdef USE_VGM
-#include <XmlVGM/AGDDExporter.h>
-#include <XmlVGM/GDMLExporter.h>
-#endif
 
 #include <TVirtualMCApplication.h>
 
@@ -30,28 +24,17 @@
 TG4DetConstruction::TG4DetConstruction()
   : TG4Verbose("detConstruction"),
     fMessenger(this),
-#ifdef USE_VGM
-    fAGDDMessenger("AGDD"),
-    fGDMLMessenger("GDML"),
-#endif    
     fMagneticFieldType(kMCApplicationField), 
     fMagneticField(0), 
     fReadGeometry(false),
     fWriteGeometry(false) {
 //
-
-  // instantiate LVtree browser
-  TG4LVTree::Instance();
 }
 
 //_____________________________________________________________________________
 TG4DetConstruction::TG4DetConstruction(const TG4DetConstruction& right)
   : TG4Verbose("detConstruction"),
     fMessenger(this),
-#ifdef USE_VGM
-    fAGDDMessenger("AGDD"),
-    fGDMLMessenger("GDML"),
-#endif    
     fMagneticFieldType(kMCApplicationField), 
     fMagneticField(0), 
     fReadGeometry(false),
@@ -65,9 +48,6 @@ TG4DetConstruction::TG4DetConstruction(const TG4DetConstruction& right)
 TG4DetConstruction::~TG4DetConstruction() {
 //   
   delete fMagneticField;
- 
-  // delete LVtree browser
-  delete TG4LVTree::Instance();
 }
 
 //

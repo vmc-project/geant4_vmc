@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.h,v 1.8 2005/05/17 13:43:57 brun Exp $
+// $Id: TG4DetConstruction.h,v 1.9 2005/09/01 10:04:32 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4DetConstruction
@@ -13,10 +13,6 @@
 #include "TG4Verbose.h"
 #include "TG4DetConstructionMessenger.h"
 #include "TG4MagneticFieldType.h"
-
-#ifdef USE_VGM
-#include "TG4XmlVGMMessenger.h"
-#endif    
 
 #include <G4VUserDetectorConstruction.hh>
 #include <globals.hh>
@@ -56,10 +52,6 @@ class TG4DetConstruction : public G4VUserDetectorConstruction,
 
     // data members
     TG4DetConstructionMessenger  fMessenger;        //messenger
-#ifdef USE_VGM
-    TG4XmlVGMMessenger           fAGDDMessenger;    //XML messenger
-    TG4XmlVGMMessenger           fGDMLMessenger;    //XML messenger
-#endif
     TG4MagneticFieldType         fMagneticFieldType;//magnetic field type
     G4MagneticField*             fMagneticField;    //magnetic field
     G4bool             fReadGeometry;     // option for reading geometry 

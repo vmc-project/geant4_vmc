@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.12 2005/11/18 21:29:35 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.13 2006/01/13 16:59:38 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryServices
@@ -39,11 +39,9 @@ const G4double       TG4GeometryServices::fgkDensityTolerance = 0.005;
 //_____________________________________________________________________________
 TG4GeometryServices::TG4GeometryServices(
                         TG4IntMap* mediumMap, 
-                        TG4NameMap* nameMap,
 			TG4OpSurfaceMap* opSurfaceMap ) 
   : TG4Verbose("geometryServices"),
     fMediumMap(mediumMap),
-    fNameMap(nameMap),
     fOpSurfaceMap(opSurfaceMap),
     fWorld(0),
     fSeparator(gSeparator)				 
@@ -424,14 +422,6 @@ G4Material* TG4GeometryServices::MixMaterials(G4String name, G4double density,
 }  
 
 //_____________________________________________________________________________
-void TG4GeometryServices::PrintNameMap() const
-{
-/// Print the map of volumes names to second names.
-
-  fNameMap->PrintAll();
-}
- 
-//_____________________________________________________________________________
 void TG4GeometryServices::PrintLimits(const G4String& name) const
 {
 /// Find the limits with the specified name and prints them.
@@ -671,15 +661,6 @@ TG4Limits* TG4GeometryServices::GetLimits(
   TG4Globals::Exception("TG4GeometryServices::GetLimits: Wrong limits type."); 
   return 0;
 }        
-
-//_____________________________________________________________________________
-const G4String& TG4GeometryServices::GetMapSecond(const G4String& name)
-{ 
-/// Return the second string associated with the name in
-/// the name map.
-
-  return fNameMap->GetSecond(name); 
-}
 
 //_____________________________________________________________________________
 G4LogicalVolume* 

@@ -1,4 +1,4 @@
-// $Id: TG4RunConfiguration.h,v 1.5 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4RunConfiguration.h,v 1.5 2006/01/13 16:59:39 brun Exp $
 /// \ingroup run
 //
 /// \class TG4RunConfiguration
@@ -23,6 +23,7 @@
 class TG4DetConstruction;
 class TG4TrackingAction;
 class TG4SteppingAction;
+class TG4VGMMessenger;
 
 class G4VUserDetectorConstruction;
 class G4VUserPrimaryGeneratorAction;
@@ -70,6 +71,10 @@ class TG4RunConfiguration
     Bool_t                 fSpecialStacking;
     G4VUserPhysicsList*    fPhysicsList;
     TG4PhysicsListOptions  fPhysicsListOptions;
+#ifdef USE_VGM
+    TG4VGMMessenger*       fAGDDMessenger;    //! XML messenger
+    TG4VGMMessenger*       fGDMLMessenger;    //! XML messenger
+#endif
 };
 
 #endif //TG4V_RUN_CONFIGURATION_H

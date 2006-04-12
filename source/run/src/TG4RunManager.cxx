@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.cxx,v 1.9 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4RunManager.cxx,v 1.10 2006/01/13 16:59:39 brun Exp $
 // Category: run
 //
 // Class TG4RunManager
@@ -310,6 +310,9 @@ void TG4RunManager::Initialize()
 
   // initialize Geant4
   fRunManager->Initialize();
+
+  // finish geometry
+  TG4GeometryManager::Instance()->FinishGeometry();
   
   // initialize SD manager
   TG4SDManager::Instance()->Initialize();
@@ -329,7 +332,7 @@ void TG4RunManager::LateInitialize()
     ->SetUserLimits(*TG4G3PhysicsManager::Instance()->GetCutVector(),
                     *TG4G3PhysicsManager::Instance()->GetControlVector());
 
-  // final clear of G3toG4 objects
+  // clear G3 tables
   TG4GeometryManager::Instance()->ClearG3TablesFinal();
       
   // activate/inactivate physics processes

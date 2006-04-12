@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.h,v 1.9 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4GeometryManager.h,v 1.10 2005/11/18 21:29:35 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryManager
@@ -11,7 +11,6 @@
 #define TG4_GEOMETRY_MANAGER_H
 
 #include "TG4Verbose.h"
-#include "TG4NameMap.h"
 #include "TG4IntMap.h"
 #include "TG4Globals.h"
 #include "TG4OpSurfaceMap.h"
@@ -170,6 +169,7 @@ class TG4GeometryManager : public TG4Verbose
     // methods for Geant4 only 
  
     G4VPhysicalVolume* CreateG4Geometry();
+    void FinishGeometry();
     void SetUserLimits(const TG4G3CutVector& cuts,
                        const TG4G3ControlVector& controls) const;
     void ReadG3Geometry(G4String filePath);
@@ -181,7 +181,6 @@ class TG4GeometryManager : public TG4Verbose
    
     // set methods
     void SetWriteGeometry(G4bool writeGeometry);
-    void SetMapSecond(const G4String& name);
      
   protected:
     TG4GeometryManager(const TG4GeometryManager& right);
@@ -191,7 +190,9 @@ class TG4GeometryManager : public TG4Verbose
 
   private:
     // methods
-    void FillMediumMap();
+    void FillMediumMapFromG3();
+    void FillMediumMapFromG4();
+    void FillG3MedTableFromG4();
         
     // static data members
     static TG4GeometryManager*  fgInstance;     //this instance
@@ -204,7 +205,6 @@ class TG4GeometryManager : public TG4Verbose
     TG4GeometryOutputManager*   fOutputManager;   //output manager 
     TG4GeometryServices*        fGeometryServices;//geometry services
     TG4IntMap        fMediumMap;       //map of volumes names to medias IDs
-    TG4NameMap       fNameMap;         //map of volumes names to modules names
     TG4OpSurfaceMap  fOpSurfaceMap;    //map of optical surfaces names to their objects 
     TG4StringVector  fMaterialNameVector; // vector of material names sorted in the
                                           // the order of materials in G3Mat
