@@ -1,4 +1,4 @@
-// $Id: TG4EventAction.cxx,v 1.2 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4EventAction.cxx,v 1.3 2004/11/10 11:39:27 brun Exp $
 // Category: event
 //
 // Class TG4EventAction
@@ -9,6 +9,7 @@
 
 #include "TG4EventAction.h"
 #include "TG4TrackingAction.h"
+#include "TG4ParticlesManager.h"
 #include "TG4Globals.h"
 
 #include <G4Event.hh>
@@ -16,10 +17,14 @@
 #include <G4Trajectory.hh>
 #include <G4VVisManager.hh>
 #include <G4UImanager.hh>
+#include <G4PrimaryVertex.hh>
+#include <G4PrimaryParticle.hh>
 
 #include <TVirtualMC.h>
 #include <TVirtualMCStack.h>
 #include <TVirtualMCApplication.h>
+
+#include <math.h>
 
 //_____________________________________________________________________________
 TG4EventAction::TG4EventAction()
@@ -99,6 +104,55 @@ void TG4EventAction::DisplayEvent(const G4Event* event) const
   }
 }
 
+//_____________________________________________________________________________
+void TG4EventAction::PrimaryToStack(const G4PrimaryVertex* vertex,
+                                    const G4PrimaryParticle* particle) const
+{
+/// Add primary particle to VMC stack
+
+  // Mother particle index 
+  G4int motherIndex = -1;
+     
+  // Track charge
+  G4int charge = G4int(particle->GetCharge()/eplus);
+ 
+  // PDG code
+  G4int pdg 
+    = TG4ParticlesManager::Instance()
+      ->GetPDGEncodingFast(particle->GetG4code(), charge);
+
+  // track kinematics  
+  G4ThreeVector momentum = particle->GetMomentum(); 
+  G4double px = momentum.x()/GeV;
+  G4double py = momentum.y()/GeV;
+  G4double pz = momentum.z()/GeV;
+  G4double mass = particle->GetMass();
+  G4double e = sqrt(momentum.mag()*momentum.mag() + mass*mass);
+
+  G4ThreeVector position = vertex->GetPosition(); 
+  G4double vx = position.x()/cm;
+  G4double vy = position.y()/cm;
+  G4double vz = position.z()/cm;
+  // time of production - check if ekvivalent with G4
+  G4double t = particle->GetProperTime();
+
+  G4ThreeVector polarization = particle->GetPolarization(); 
+  G4double polX = polarization.x();
+  G4double polY = polarization.y();
+  G4double polZ = polarization.z();
+
+  // production process
+  TMCProcess mcProcess = kPPrimary; 
+  
+  G4double weight = particle->GetWeight();
+  G4int status = 0;   
+  
+  G4int ntr;
+  // create particle 
+  gMC->GetStack()->PushTrack(1, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
+                            polX, polY, polZ, mcProcess, ntr, weight, status);  
+}                   
+
 //
 // public methods
 //
@@ -111,6 +165,21 @@ void TG4EventAction::BeginOfEventAction(const G4Event* event)
   // reset the tracks counters
   if (TG4TrackingAction::Instance()) 
     TG4TrackingAction::Instance()->PrepareNewEvent();   
+    
+  // fill primary particles in VMC stack if stack is empty
+  if ( gMC->GetStack()->GetNtrack() == 0 ) {
+    if (VerboseLevel() > 0)
+      G4cout << "Filling VMC stack with primaries" << G4endl;
+    
+    for (G4int iv=0; iv<event->GetNumberOfPrimaryVertex(); iv++) {
+      G4PrimaryVertex* vertex = event->GetPrimaryVertex(iv);
+      
+      for (G4int ip=0; ip<vertex->GetNumberOfParticle(); ip++) {
+        G4PrimaryParticle* particle = vertex->GetPrimary(ip);
+	PrimaryToStack(vertex, particle);
+      }	
+    }
+  }  
 
   if (VerboseLevel() > 0) {
     G4cout << ">>> Event " << event->GetEventID() << G4endl;
