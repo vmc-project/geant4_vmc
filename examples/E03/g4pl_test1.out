@@ -2,7 +2,7 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.08/00  13 December 2005   *
+  *   Version   5.11/06       1 June 2006   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
@@ -10,9 +10,9 @@
   *******************************************
 
 FreeType Engine v2.1.9 used to render TrueType fonts.
-Compiled on 20 December 2005 for linux with thread support.
+Compiled on 22 June 2006 for linux with thread support.
 
-CINT/ROOT C/C++ Interpreter version 5.16.5, November 30 2005
+CINT/ROOT C/C++ Interpreter version 5.16.12, May 16, 2006
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -22,22 +22,22 @@ Loading VGM libraries ...
 Loading libraries ... finished
 
 *************************************************************
- Geant4 version Name: geant4-08-00    (16-December-2005)
+ Geant4 version Name: geant4-08-01    (30-June-2006)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
 *************************************************************
 
 
-<<< Geant4 Physics List engine packaging library: PACK 5.0
-<<< Geant4 Physics List simulation engine: LHEP_BERT 3.0
+<<< Geant4 Physics List engine packaging library: PACK 5.1
+<<< Geant4 Physics List simulation engine: LHEP_BERT 3.1
 
 Debug mode is switched on.
 Visualization Manager instantiating...
 Visualization Manager initialising...
 Registering graphics systems...
 
-You have successfully chosen to use the following graphics systems.
+You have successfully registered the following graphics systems.
 Current available graphics systems are:
   ASCIITree (ATree)
   DAWNFILE (DAWNFILE)
@@ -53,6 +53,21 @@ Current available graphics systems are:
   OpenGLStoredXm (OGLSXm)
 
 Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  drawByCharge
+  drawByParticleID
+
+Registered models: 
+  None
+
+Registered filter factories:
+  None
+
+Registered filters:
+  None
+
 Geant4 has been created.
 
 ------------------------------------------------------------
@@ -71,12 +86,14 @@ Instantiated 6 volume table entries
               6 sensitive detectors
 **********************************************
 
-disabling TCL support
 Got standard cmap
 Window name: viewer-0 (OpenGLImmediateX)
 WARNING: objects with visibility flag set to "false" will not be drawn!
   "/vis/viewer/set/culling global false" to Draw such objects.
   Also see other "/vis/viewer/set" commands.
+WARNING: SceneHandler "scene-handler-0", to which viewer "viewer-0"
+  is attached, has no scene - "/vis/scene/create" and"/vis/sceneHandler/attach"
+  (or use compound command "/vis/drawVolume").
 WARNING: For systems which are not "auto-refresh" you will need to
   issue "/vis/viewer/refresh" or "/vis/viewer/flush".
 
@@ -136,13 +153,22 @@ hIoni:   tables are built for  proton
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 msc:  Model variant of multiple scattering for GenericIon
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
 
 ionIoni:   tables are built for  GenericIon
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
       Scaling relation is used to proton dE/dx and range
       Bether-Bloch model for Escaled > 2 MeV, ICRU49 parametrisation for alpha particles below.
+      Stopping Power data for 8 ion/material pairs are used.
       Step function: finalRange(mm)= 0.1, dRoverRange= 0.1, integral: 1
+
+hIoni:   tables are built for  anti_proton
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 2 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 msc:  Model variant of multiple scattering for mu+
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
@@ -182,31 +208,46 @@ muPairProd:   tables are built for  mu-
       Lambda tables from threshold to 100 TeV in 120 bins.
       Parametrised model 
 
+hIoni:   tables are built for  pi+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 0.297504 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
 msc:  Model variant of multiple scattering for pi-
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
       Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+hIoni:   tables are built for  pi-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 0.297504 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 ### Run 0 start.
 
 ---> Begin of event: 1
 G4VisManager: Using G4TrajectoryDrawByCharge as default trajectory model.
 See commands in /vis/modeling/trajectories/ for other options.
-   Absorber: total energy (MeV):  923.42       total track length (cm):  55.5201
-   Gap:      total energy (MeV): 29.3436       total track length (cm):  13.3806
+Trajectory drawing configuration will be based on imode value of 50
+   Absorber: total energy (MeV): 916.578       total track length (cm):  54.3809
+   Gap:      total energy (MeV):  24.214       total track length (cm):  11.2949
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV):  940.26       total track length (cm):  55.3967
-   Gap:      total energy (MeV): 19.9627       total track length (cm):   8.9607
+   Absorber: total energy (MeV):  922.73       total track length (cm):  56.0268
+   Gap:      total energy (MeV): 32.1111       total track length (cm):  16.4438
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 947.417       total track length (cm):  57.6738
-   Gap:      total energy (MeV): 19.4351       total track length (cm):  9.26007
+   Absorber: total energy (MeV): 936.715       total track length (cm):  57.4002
+   Gap:      total energy (MeV): 34.0767       total track length (cm):  15.2651
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 932.521       total track length (cm):  56.7991
-   Gap:      total energy (MeV): 25.0341       total track length (cm):  12.2695
+   Absorber: total energy (MeV): 907.194       total track length (cm):  53.5435
+   Gap:      total energy (MeV): 24.1905       total track length (cm):  11.5083
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 937.025       total track length (cm):  57.9698
-   Gap:      total energy (MeV):  22.319       total track length (cm):  10.8542
-Time of this run:   User=1.31s Real=1.76s Sys=0.04s
+   Absorber: total energy (MeV): 905.004       total track length (cm):  56.6759
+   Gap:      total energy (MeV): 21.8707       total track length (cm):  10.2047
+Time of this run:   User=0.42s Real=0.69s Sys=0.03s
 Number of events processed: 5

@@ -2,7 +2,7 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.08/00  13 December 2005   *
+  *   Version   5.11/06       1 June 2006   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
@@ -10,9 +10,9 @@
   *******************************************
 
 FreeType Engine v2.1.9 used to render TrueType fonts.
-Compiled on 20 December 2005 for linux with thread support.
+Compiled on 22 June 2006 for linux with thread support.
 
-CINT/ROOT C/C++ Interpreter version 5.16.5, November 30 2005
+CINT/ROOT C/C++ Interpreter version 5.16.12, May 16, 2006
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -22,7 +22,7 @@ Loading VGM libraries ...
 Loading libraries ... finished
 
 *************************************************************
- Geant4 version Name: geant4-08-00    (16-December-2005)
+ Geant4 version Name: geant4-08-01    (30-June-2006)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -33,7 +33,7 @@ Visualization Manager instantiating...
 Visualization Manager initialising...
 Registering graphics systems...
 
-You have successfully chosen to use the following graphics systems.
+You have successfully registered the following graphics systems.
 Current available graphics systems are:
   ASCIITree (ATree)
   DAWNFILE (DAWNFILE)
@@ -49,6 +49,21 @@ Current available graphics systems are:
   OpenGLStoredXm (OGLSXm)
 
 Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  drawByCharge
+  drawByParticleID
+
+Registered models: 
+  None
+
+Registered filter factories:
+  None
+
+Registered filters:
+  None
+
 Geometry will be defined via TGeo
 Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
@@ -60,7 +75,6 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::BuildCache>: --- Maximum geometry depth is 2
 Info in <TGeoManager::CloseGeometry>: 3 nodes/ 3 volume UID's in Root geometry manager
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
---- node ID tracking disabled
 Converting Root geometry to Geant4 via VGM ... 
 The tables for UV photon tracking set for Water
 The material properties FASTCOMPONENT set for Water
@@ -102,12 +116,12 @@ please use one of the available physics lists by use-case.
 ***** Table : Nb of materials = 2 *****
 
  Material:      Air     density:  1.290 mg/cm3  temperature: 273.15 K  pressure:   1.00 atm  RadLength: 285.113 m  
-   --->  Element: NITROGEN (N)   Z =  7.0   N =  14.0   A =  14.01 g/mole  fractionMass:  70.00 %  Abundance  72.72 %
-   --->  Element: OXYGEN (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole  fractionMass:  30.00 %  Abundance  27.28 %
+   --->  Element: NITROGEN (N)   Z =  7.0   N =  14.0   A =  14.01 g/mole  ElmMassFraction:  70.00 %  ElmAbundance  72.72 %
+   --->  Element: OXYGEN (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole  ElmMassFraction:  30.00 %  ElmAbundance  27.28 %
 
  Material:    Water     density:  1.000 g/cm3   temperature: 273.15 K  pressure:   1.00 atm  RadLength:  36.086 cm 
-   --->  Element: HYDROGEN (H)   Z =  1.0   N =   1.0   A =   1.01 g/mole  fractionMass:  11.21 %  Abundance  66.71 %
-   --->  Element: OXYGEN (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole  fractionMass:  88.79 %  Abundance  33.29 %
+   --->  Element: HYDROGEN (H)   Z =  1.0   N =   1.0   A =   1.01 g/mole  ElmMassFraction:  11.21 %  ElmAbundance  66.71 %
+   --->  Element: OXYGEN (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole  ElmMassFraction:  88.79 %  ElmAbundance  33.29 %
 
 Air material properties table: 
 ABSLENGTH
@@ -484,6 +498,14 @@ msc:  Model variant of multiple scattering for proton
       Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
 
 msc:  Model variant of multiple scattering for GenericIon
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+hIoni:   tables are built for  anti_proton
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 2 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 msc:  Model variant of multiple scattering for mu+
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
@@ -523,35 +545,76 @@ muPairProd:   tables are built for  mu-
       Lambda tables from threshold to 100 TeV in 120 bins.
       Parametrised model 
 
+hIoni:   tables are built for  pi+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 0.297504 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+hIoni:   tables are built for  pi-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 0.297504 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
 msc:  Model variant of multiple scattering for pi-
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
       Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
-Number of optical photons produced in this event : 1939
-G4SteppingManager::InvokeAtRestDoItProcs: No AtRestDoIt process is active. 
-Number of optical photons produced in this event : 2018
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 2082
-Number of optical photons produced in this event : 1976
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 1993
-Number of optical photons produced in this event : 1973
-Number of optical photons produced in this event : 2001
-Number of optical photons produced in this event : 1990
+Number of optical photons produced in this event : 1948
+Number of optical photons produced in this event : 1894
 Number of optical photons produced in this event : 1991
-Number of optical photons produced in this event : 1947
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+Number of optical photons produced in this event : 1929
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+Number of optical photons produced in this event : 1952
+Number of optical photons produced in this event : 1901
+G4SteppingManager::InvokeAtRestDoItProcs: No AtRestDoIt process is active. 
+Number of optical photons produced in this event : 1927
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+Number of optical photons produced in this event : 1857
+Number of optical photons produced in this event : 2007
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+Number of optical photons produced in this event : 1886
