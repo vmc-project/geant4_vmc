@@ -1,8 +1,18 @@
-$Id: history,v 1.16 2005/07/22 13:13:03 brun Exp $
+$Id: history,v 1.17 2006/01/13 17:01:33 brun Exp $
 -----------------------------------------------------------------
      
 Tags (history):
 ===============
+  06/07/2006
+  v1-9:
+    Geant4 VMC:
+      Added support for geometry and primary generator defined via Geant4;
+      user can now override also functions
+      TG4RunConfiguration::CreateDetectorConstruction();
+      TG4RunConfiguration::CreatePrimaryGenerator()
+
+    Tested with Geant4 8.1, CLHEP 2.0.2.3, Root 5.11/06, VGM 2.08
+
   12/01/2006
   v1-8:
     Geant4 VMC:
