@@ -1,4 +1,4 @@
-// $Id: TG4VisManager.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4VisManager.cxx,v 1.4 2006/01/13 16:59:39 brun Exp $
 // Category: visualization
 //
 // Class TG4VisManager
@@ -837,7 +837,8 @@ void TG4VisManager::Gdraw(const char *name,Float_t theta, Float_t phi, Float_t p
   G4VPhysicalVolume *pPV = 0;
 
   // clear the current scene if not empty
-  if (!fpScene->IsEmpty()) fpScene->Clear();
+  // if (!fpScene->IsEmpty()) fpScene->Clear();
+          // G4Scene::Clear() function not available since Geant4 8.1
 
   // create and add object's model list to the runtime-duration model 
   // list and draw it
