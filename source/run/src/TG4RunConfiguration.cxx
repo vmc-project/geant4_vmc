@@ -1,4 +1,4 @@
-// $Id: TG4RunConfiguration.cxx,v 1.4 2006/01/13 16:59:39 brun Exp $
+// $Id: TG4RunConfiguration.cxx,v 1.5 2006/04/12 10:37:24 brun Exp $
 // Category: run
 //
 // Class TG4RunConfiguration
@@ -19,6 +19,8 @@
 #include "TG4LVTree.h"
 #include "TG4Globals.h"
 
+#include <G4UImessenger.hh>
+
 #ifdef USE_VGM
 #include "TG4VGMMessenger.h"
 #include <XmlVGM/AGDDExporter.h>
@@ -30,27 +32,29 @@
 TG4RunConfiguration::TG4RunConfiguration(Bool_t specialStacking)
   : fSpecialStacking(specialStacking),
     fPhysicsList(0),
-    fPhysicsListOptions()
-#ifdef USE_VGM
-   ,fAGDDMessenger(new TG4VGMMessenger("AGDD")),
-    fGDMLMessenger(new TG4VGMMessenger("GDML"))
-#endif    
+    fPhysicsListOptions(),
+    fAGDDMessenger(0),
+    fGDMLMessenger(0)
     
 {
 //
   // instantiate LVtree browser
   TG4LVTree::Instance();
+
+#ifdef USE_VGM
+  // instantiate XML messengers
+  fAGDDMessenger = new TG4VGMMessenger("AGDD");
+  fGDMLMessenger = new TG4VGMMessenger("GDML");
+#endif    
 }
 
 //_____________________________________________________________________________
 TG4RunConfiguration::TG4RunConfiguration(const TG4RunConfiguration& right)
   : fSpecialStacking(false),
     fPhysicsList(0),
-    fPhysicsListOptions()
-#ifdef USE_VGM
-   ,fAGDDMessenger(0),
+    fPhysicsListOptions(),
+    fAGDDMessenger(0),
     fGDMLMessenger(0)
-#endif    
 {
 //
   TG4Globals::Exception("TG4RunConfiguration is protected from copying.");
@@ -59,13 +63,9 @@ TG4RunConfiguration::TG4RunConfiguration(const TG4RunConfiguration& right)
 //_____________________________________________________________________________
 TG4RunConfiguration::~TG4RunConfiguration(){
 //
-  // delete LVtree browser
   delete TG4LVTree::Instance();
-
-#ifdef USE_VGM
   delete fAGDDMessenger;
   delete fGDMLMessenger;
-#endif    
 }
 
 //
