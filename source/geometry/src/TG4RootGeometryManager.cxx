@@ -1,4 +1,4 @@
-// $Id: TG4RootGeometryManager.cxx,v 1.6 2005/02/02 14:16:21 brun Exp $
+// $Id: TG4RootGeometryManager.cxx,v 1.7 2005/09/01 10:04:32 brun Exp $
 // Category: geometry
 //
 // Class TG4RootGeometryManager
@@ -287,6 +287,15 @@ void TG4RootGeometryManager::FillMediumMap()
     // Get TGeoMedium via name 
     // (to get index defined via MC)
     TGeoMedium* geoMedium = gGeoManager->GetMedium(mediumName.data());
+    if ( ! geoMedium ) {
+      G4String text = "    TG4RootGeometryManager::FillMediumMap: \n";
+      text += "    Medium: ";
+      text += mediumName;
+      text += "  (of volume: ";
+      text += name; 
+      text += " not found in Root";
+      TG4Globals::Exception(text); 
+    }  
     G4int mediumId = geoMedium->GetId(); 
    
     // Map it to logical volume name
