@@ -1,4 +1,4 @@
-// $Id: TG4NameMap.cxx,v 1.3 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4NameMap.cxx,v 1.4 2004/11/10 11:39:28 brun Exp $
 // Category: global
 //
 // Class TG4NameMap
@@ -61,6 +61,7 @@ G4bool TG4NameMap::Add(const G4String& first, const G4String& second)
     // insert into map 
     // only in case it is not yet here
     fMap[first] = second;
+    fInverseMap[second] = first;
     return true;
   }
   return false;
@@ -75,17 +76,30 @@ G4bool TG4NameMap::AddName(const G4String& name)
     // insert into map 
     // only in case it is not yet here
     fMap[name] = fSecond;
+    fInverseMap[fSecond] = name;
     return true;
   }
   return false;
 }
 
 //_____________________________________________________________________________
-const G4String& TG4NameMap::GetSecond(const G4String& name) const
+const G4String& TG4NameMap::GetFirst(const G4String& second) const
 {
-/// Get second name associated with given name.
+/// Get first name associated with given second name.
 
-  MapConstIterator i = fMap.find(name);
+  MapConstIterator i = fInverseMap.find(second);
+  if (i == fInverseMap.end()) 
+    return fgUndefined;
+  else                 
+    return (*i).second;
+}
+
+//_____________________________________________________________________________
+const G4String& TG4NameMap::GetSecond(const G4String& first) const
+{
+/// Get second name associated with given first name.
+
+  MapConstIterator i = fMap.find(first);
   if (i == fMap.end()) 
     return fgUndefined;
   else                 
@@ -115,5 +129,6 @@ void TG4NameMap::Clear()
 /// Clear the map.
 
   fMap.clear();
-  fSecond = "Undefined";
+  fInverseMap.clear();
+  fSecond = fgUndefined;
 }  

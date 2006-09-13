@@ -1,4 +1,4 @@
-// $Id: TG4ParticlesManager.cxx,v 1.5 2005/05/17 13:43:57 brun Exp $
+// $Id: TG4ParticlesManager.cxx,v 1.6 2006/01/13 16:59:38 brun Exp $
 // Category: physics
 //
 // Class TG4ParticlesManager
@@ -444,11 +444,9 @@ G4ParticleDefinition* TG4ParticlesManager::GetParticleDefinition(
     particleDefinition = particleTable->FindParticle(pdgEncoding);
 
   if (!particleDefinition) {
-    G4String name = particle->GetName();
-    if ( name == "Rootino" )
-      particleDefinition = particleTable->FindParticle("geantino");
-    if ( name == "Cherenkov" || name == "FeedbackPhoton" )	
-      particleDefinition = particleTable->FindParticle("opticalphoton");
+    G4String rootName = particle->GetName();
+    G4String g4Name = fParticleNameMap.GetFirst(rootName);
+    particleDefinition = particleTable->FindParticle(g4Name);
   }    
   
   if (particleDefinition==0 && warn) {

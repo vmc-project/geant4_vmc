@@ -1,4 +1,4 @@
-// $Id: TG4Editor.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4Editor.h,v 1.3 2005/09/01 10:04:33 brun Exp $
 /// \ingroup interfaces
 //
 /// \class TG4Editor
@@ -29,12 +29,10 @@ public:
    
    TGTextEdit* GetEditor() const;
 
-protected:
+private:
    TG4Editor(const TG4Editor& ge); 
    TG4Editor& operator=(const TG4Editor& ge) ;
 
-   
-private:
    TGTextEdit*       fEdit;   // text edit widget
    TGTextButton*     fOK;     // OK button
    TGLayoutHints*    fL1;     // layout of TGTextEdit

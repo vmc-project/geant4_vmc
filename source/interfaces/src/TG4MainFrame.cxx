@@ -1,4 +1,4 @@
-// $Id: TG4MainFrame.cxx,v 1.2 2002/10/10 13:18:24 brun Exp $
+// $Id: TG4MainFrame.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: interfaces
 //
 //========================================================
@@ -81,25 +81,6 @@ TG4MainFrame::TG4MainFrame(const TGWindow* p, UInt_t w, UInt_t h)
  
    MapWindow();
    
-}
-
-TG4MainFrame::TG4MainFrame(const TG4MainFrame& mf)
-   : TGMainFrame( (const TGMainFrame&) mf)
-{
-/// Dummy copy constructor 
-  TG4Globals::Exception(
-    "Attempt to use TG4MainFrame copy constructor.");
-}
-
-TG4MainFrame& TG4MainFrame::operator=(const TG4MainFrame& mf)
-{
-  // check assignement to self
-  if (this == &mf) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4MainFrame singleton.");
-    
-  return *this;  
 }
 
 TG4MainFrame::~TG4MainFrame()

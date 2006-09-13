@@ -1,4 +1,4 @@
-// $Id: TG4MainFrame.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4MainFrame.h,v 1.3 2005/09/01 10:04:33 brun Exp $
 /// \ingroup interfaces
 //
 /// \class TG4MainFrame
@@ -36,13 +36,9 @@ public:
      Bool_t ProcessMessage(Long_t msg, Long_t parm1, Long_t parm2);
 //---------------------------------------------------------------------------
 
-protected:
-
+private:
     TG4MainFrame& operator=(const TG4MainFrame& mf);
     TG4MainFrame(const TG4MainFrame& mf); 		    
-//----------------------------------------------------
-
-private:
 
     TGMenuBar*          fMenuBar;          // main menu bar   
 

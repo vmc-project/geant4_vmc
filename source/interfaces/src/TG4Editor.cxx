@@ -1,4 +1,4 @@
-// $Id: TG4Editor.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4Editor.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
 // Category: interfaces
 //
 //========================================================
@@ -50,26 +50,6 @@ TG4Editor::TG4Editor(const TGWindow* main, UInt_t w, UInt_t h) :
    Move(ax, ay);
    SetWMPosition(ax, ay);
 }
-
-TG4Editor::TG4Editor(const TG4Editor& ge) :
-     TGTransientFrame( (const TGTransientFrame&) ge)
-{
-/// Dummy copy constructor 
-  TG4Globals::Exception(
-    "Attempt to use TG4Editor copy constructor.");
-}
-
-TG4Editor& TG4Editor::operator=(const TG4Editor& ge)
-{
-  // check assignement to self
-  if (this == &ge) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4Editor singleton.");
-    
-  return *this;  
-}    
-
 
 TG4Editor::~TG4Editor()
 {
