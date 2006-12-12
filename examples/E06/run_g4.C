@@ -1,8 +1,8 @@
-// $Id: $
+// $Id: run_g4.C,v 1.1 2005/05/17 13:52:01 brun Exp $
 //
 // Macro for running Example06 with Geant4. 
 
-void run_g4()
+void run_g4(const TString& configMacro = "g4Config.C") 
 {
   // Load basic libraries
   gROOT->LoadMacro("../macro/basiclibs.C");
@@ -27,13 +27,13 @@ void run_g4()
   //optPhoton();  
 
   // Initialize MC
-  appl->InitMC("g4Config.C");
+  appl->InitMC(configMacro);
   
   // Customise Geant4 setting after initialization:
   // Physics list
   ((TGeant4*)gMC)->ProcessGeantMacro("g4config2.in");
   // Visualization settings
-  //((TGeant4*)gMC)->ProcessGeantMacro("g4vis.in");
+  ((TGeant4*)gMC)->ProcessGeantMacro("g4vis.in");
 
   // Run MC
   appl->RunMC(10);

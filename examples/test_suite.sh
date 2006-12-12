@@ -1,71 +1,50 @@
 #!/bin/sh 
-# $Id: test_suite.sh,v 1.3 2005/10/13 08:42:29 brun Exp $
+# $Id: test_suite.sh,v 1.4 2005/11/18 21:34:44 brun Exp $
 #
-# Test all VMC examples and regenerate output files
+# Run tests for all VMC examples and regenerate output files
 #
 # by I. Hrivnacova, IPN Orsay
 
 CURDIR=`pwd`
-
-for EXAMPLE in E01
+  
+for EXAMPLE in E01 E02 E03 E06
 do
   cd $CURDIR/$EXAMPLE
 
-  # run G3 + native geometry
-  echo "... Running example $EXAMPLE with G3" 
-  root.exe -q "run_g3.C" >& g3.out
-  root.exe -q "test_g3.C" >& g3_test.out
-
-  # run G3 + TGeo geometry
-  echo "... Running example $EXAMPLE with G3 + TGeo" 
-  root.exe -q "run_g3.C(\"g3tgeoConfig.C\")" >& g3tgeo.out
-  root.exe -q "test_g3.C(\"g3tgeoConfig.C\")" >& g3tgeo_test.out
+  echo "... Example $EXAMPLE"
   
-  # run G4
-  echo "... Running example $EXAMPLE with G4" 
-  root.exe -q "run_g4.C"  >& g4.out
-  root.exe -q "test_g4.C"  >& g4_test.out
-done
-  
-for EXAMPLE in E02 E06
-do
-  cd $CURDIR/$EXAMPLE
+  echo "... Running test with G3, geometry via TGeo, TGeo navigation" 
+  root.exe -q "test_$EXAMPLE.C(\"g3tgeoConfig.C\", kFALSE)" >& test_g3_tgeo_tgeo.out   
 
-  # run G3 + native geometry
-  echo "... Running example $EXAMPLE with G3" 
-  root.exe -q "run_g3.C" >& g3.out
+  echo "... Running test with G3, geometry via VMC,  Native navigation" 
+  root.exe -q "test_$EXAMPLE.C(\"g3Config.C\", kTRUE)" >& test_g3_vmc_nat.out   
 
-  # run G3 + TGeo geometry
-  echo "... Running example $EXAMPLE with G3 + TGeo" 
-  root.exe -q "run_g3.C(\"g3tgeoConfig.C\")" >& g3tgeo.out
-  
-  # run G4
-  echo "... Running example $EXAMPLE with G4" 
-  root.exe -q "run_g4.C"  >& g4.out
-done
-  
-for EXAMPLE in E03
-do
-  for TEST in test1 test2
-  do
-    cd $CURDIR/$EXAMPLE
+  echo "... Running test with G3, geometry via VMC,  TGeo navigation" 
+  root.exe -q "test_$EXAMPLE.C(\"g3tgeoConfig.C\", kTRUE)" >& test_g3_vmc_tgeo.out   
 
-    # run G3 + native geometry
-    echo "... Running example $EXAMPLE $TEST with G3" 
-    root.exe -q "run_g3.C(\"g3Config.C\", \"$TEST.C\")" >& g3_$TEST.out
+  echo "... Running test with G4, geometry via TGeo, Native navigation" 
+  root.exe -q "test_$EXAMPLE.C(\"g4Config.C\", kFALSE)" >& test_g4_tgeo_nat.out   
 
-    # run G3 + TGeo geometry
-    echo "... Running example $EXAMPLE $TEST with G3 + TGeo" 
-    root.exe -q "run_g3.C(\"g3tgeoConfig.C\", \"$TEST.C\")" >& g3tgeo_$TEST.out
-  
-    # run G4
-    echo "... Running example $EXAMPLE $TEST with G4" 
-    root.exe -q "run_g4.C(\"g4Config.C\", \"$TEST.C\")"  >& g4_$TEST.out
+  echo "... Running test with G4, geometry via TGeo, TGeo navigation" 
+  root.exe -q "test_$EXAMPLE.C(\"g4tgeoConfig.C\", kFALSE)" >& test_g4_tgeo_tgeo.out   
 
-    # run G4 + user physics list
-    echo "... Running example $EXAMPLE $TEST with G4 with user physics list" 
-    root.exe -q "run_g4.C(\"g4Config2.C\", \"$TEST.C\")"  >& g4pl_$TEST.out
-  done  
-done
+  echo "... Running test with G4, geometry via VMC,  Native navigation" 
+  root.exe -q "test_$EXAMPLE.C(\"g4ConfigOld.C\", kTRUE)" >& test_g4_vmc_nat.out   
+
+  echo "... Running test with G4, geometry via VMC,  TGeo navigation" 
+  root.exe -q "test_$EXAMPLE.C(\"g4tgeoConfigOld.C\", kTRUE)" >& test_g4_vmc_tgeo.out   
+
+  # configuration available only in E03 example
+  if [ "$EXAMPLE" = "E03" ]; then 
+
+    echo "... Running test with G4, geometry via G4,   Native navigation" 
+    root.exe -q "test_$EXAMPLE.C(\"g4Config1.C\", kFALSE)" >& test_g4_g4_nat.out   
+
+    echo "... Running test with G4, geometry via TGeo, Native navigation, User physics list" 
+    root.exe -q "test_$EXAMPLE.C(\"g4Config2.C\", kFALSE)" >& test_g4_tgeo_nat_pl.out   
+  fi
+
+  echo " "
+done  
   
 cd $CURDIR

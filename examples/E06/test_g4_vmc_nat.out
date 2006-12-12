@@ -1,0 +1,618 @@
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version   5.13/07  21 November 2006   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+FreeType Engine v2.1.9 used to render TrueType fonts.
+Compiled on 12 December 2006 for linux with thread support.
+
+CINT/ROOT C/C++ Interpreter version 5.16.16, November 24, 2006
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+
+Processing test_E06.C("g4ConfigOld.C", kTRUE)...
+Loading Geant4 granular libraries ...
+Loading VGM libraries ... 
+Loading libraries ... finished
+
+*************************************************************
+ Geant4 version Name: geant4-08-01-patch-02    (10-November-2006)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+Debug mode is switched on.
+Visualization Manager instantiating...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Current available graphics systems are:
+  ASCIITree (ATree)
+  DAWNFILE (DAWNFILE)
+  GAGTree (GAGTree)
+  G4HepRepFile (HepRepFile)
+  G4HepRep (HepRepXML)
+  RayTracer (RayTracer)
+  VRML1FILE (VRML1FILE)
+  VRML2FILE (VRML2FILE)
+  OpenGLImmediateX (OGLIX)
+  OpenGLStoredX (OGLSX)
+  OpenGLImmediateXm (OGLIXm)
+  OpenGLStoredXm (OGLSXm)
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  drawByCharge
+  drawByParticleID
+
+Registered models: 
+  None
+
+Registered filter factories:
+  None
+
+Registered filters:
+  None
+
+***** COMMAND NOT FOUND </mcVerbose/geometryBuilder 1> *****
+***** Command ignored *****
+Geometry will be defined via VMC
+Air
+Water
+G4ggclos: setting top-level VolTableEntry
+Instantiated 3 volume table entries 
+                      2 positions.
+G4 Stat: instantiated 3 logical volumes 
+                      2 physical volumes
+The tables for UV photon tracking set for Water
+The material properties FASTCOMPONENT set for Water
+The material properties SLOWCOMPONENT set for Water
+The material property SCINTILLATIONYIELD set for Water
+The material property RESOLUTIONSCALE set for Water
+The material property FASTTIMECONSTANT set for Water
+The material property SLOWTIMECONSTANT set for Water
+The material property YIELDRATIO set for Water
+The tables for UV photon tracking set for Air
+The material properties RINDEX set for optical surface WaterSurface
+The material properties SPECULARLOBECONSTANT set for optical surface WaterSurface
+The material properties SPECULARSPIKECONSTANT set for optical surface WaterSurface
+The material properties BACKSCATTERCONSTANT set for optical surface WaterSurface
+The material properties REFLECTIVITY set for optical surface AirSurface
+The material properties EFFICIENCY set for optical surface AirSurface
+
+###
+You are using the Geant4 VMC hadronics physics
+equivalent to ExN04HadronPhysics from Geant4 (version 6.0)
+Note that this hadronic physics list is not optimized for any particular usage.
+If you wish to have a starting point tailored for a particular area of work,
+please use one of the available physics lists by use-case.
+ More information can also be found from the Geant4 HyperNews.
+###
+
+ AddDiscreteProcess to OpticalPhoton 
+
+**********************************************
+    GEANT4 Geometry statistics: 
+              3 logical volumes
+              2 physical volumes
+              2 materials
+              2 user limits
+              3 sensitive detectors
+**********************************************
+
+
+***** Table : Nb of materials = 2 *****
+
+ Material:      Air     density:  1.290 mg/cm3  temperature: 273.15 K  pressure:   1.00 atm  RadLength: 285.113 m  
+   --->  Element: Nitrogen (N)   Z =  7.0   N =  14.0   A =  14.01 g/mole  ElmMassFraction:  70.00 %  ElmAbundance  72.72 %
+   --->  Element: Oxygen (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole  ElmMassFraction:  30.00 %  ElmAbundance  27.28 %
+
+ Material:    Water     density:  1.000 g/cm3   temperature: 273.15 K  pressure:   1.00 atm  RadLength:  36.086 cm 
+   --->  Element: Hydrogen (H)   Z =  1.0   N =   1.0   A =   1.01 g/mole  ElmMassFraction:  11.21 %  ElmAbundance  66.71 %
+   --->  Element: Oxygen (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole  ElmMassFraction:  88.79 %  ElmAbundance  33.29 %
+
+Air material properties table: 
+ABSLENGTH
+MPV[0]: (2.034e-06, inf)
+MPV[1]: (2.068e-06, inf)
+MPV[2]: (2.103e-06, inf)
+MPV[3]: (2.139e-06, inf)
+MPV[4]: (2.177e-06, inf)
+MPV[5]: (2.216e-06, inf)
+MPV[6]: (2.256e-06, inf)
+MPV[7]: (2.298e-06, inf)
+MPV[8]: (2.341e-06, inf)
+MPV[9]: (2.386e-06, inf)
+MPV[10]: (2.433e-06, inf)
+MPV[11]: (2.481e-06, inf)
+MPV[12]: (2.532e-06, inf)
+MPV[13]: (2.585e-06, inf)
+MPV[14]: (2.64e-06, inf)
+MPV[15]: (2.697e-06, inf)
+MPV[16]: (2.757e-06, inf)
+MPV[17]: (2.82e-06, inf)
+MPV[18]: (2.885e-06, inf)
+MPV[19]: (2.954e-06, inf)
+MPV[20]: (3.026e-06, inf)
+MPV[21]: (3.102e-06, inf)
+MPV[22]: (3.181e-06, inf)
+MPV[23]: (3.265e-06, inf)
+MPV[24]: (3.353e-06, inf)
+MPV[25]: (3.446e-06, inf)
+MPV[26]: (3.545e-06, inf)
+MPV[27]: (3.649e-06, inf)
+MPV[28]: (3.76e-06, inf)
+MPV[29]: (3.877e-06, inf)
+MPV[30]: (4.002e-06, inf)
+MPV[31]: (4.136e-06, inf)
+ Done DumpVector of 32 entries 
+EFFICIENCY
+MPV[0]: (2.034e-06, 0)
+MPV[1]: (2.068e-06, 0)
+MPV[2]: (2.103e-06, 0)
+MPV[3]: (2.139e-06, 0)
+MPV[4]: (2.177e-06, 0)
+MPV[5]: (2.216e-06, 0)
+MPV[6]: (2.256e-06, 0)
+MPV[7]: (2.298e-06, 0)
+MPV[8]: (2.341e-06, 0)
+MPV[9]: (2.386e-06, 0)
+MPV[10]: (2.433e-06, 0)
+MPV[11]: (2.481e-06, 0)
+MPV[12]: (2.532e-06, 0)
+MPV[13]: (2.585e-06, 0)
+MPV[14]: (2.64e-06, 0)
+MPV[15]: (2.697e-06, 0)
+MPV[16]: (2.757e-06, 0)
+MPV[17]: (2.82e-06, 0)
+MPV[18]: (2.885e-06, 0)
+MPV[19]: (2.954e-06, 0)
+MPV[20]: (3.026e-06, 0)
+MPV[21]: (3.102e-06, 0)
+MPV[22]: (3.181e-06, 0)
+MPV[23]: (3.265e-06, 0)
+MPV[24]: (3.353e-06, 0)
+MPV[25]: (3.446e-06, 0)
+MPV[26]: (3.545e-06, 0)
+MPV[27]: (3.649e-06, 0)
+MPV[28]: (3.76e-06, 0)
+MPV[29]: (3.877e-06, 0)
+MPV[30]: (4.002e-06, 0)
+MPV[31]: (4.136e-06, 0)
+ Done DumpVector of 32 entries 
+FASTCOMPONENT
+NULL Material Property Vector Pointer.
+RAYLEIGH
+NULL Material Property Vector Pointer.
+RINDEX
+MPV[0]: (2.034e-06, 1)
+MPV[1]: (2.068e-06, 1)
+MPV[2]: (2.103e-06, 1)
+MPV[3]: (2.139e-06, 1)
+MPV[4]: (2.177e-06, 1)
+MPV[5]: (2.216e-06, 1)
+MPV[6]: (2.256e-06, 1)
+MPV[7]: (2.298e-06, 1)
+MPV[8]: (2.341e-06, 1)
+MPV[9]: (2.386e-06, 1)
+MPV[10]: (2.433e-06, 1)
+MPV[11]: (2.481e-06, 1)
+MPV[12]: (2.532e-06, 1)
+MPV[13]: (2.585e-06, 1)
+MPV[14]: (2.64e-06, 1)
+MPV[15]: (2.697e-06, 1)
+MPV[16]: (2.757e-06, 1)
+MPV[17]: (2.82e-06, 1)
+MPV[18]: (2.885e-06, 1)
+MPV[19]: (2.954e-06, 1)
+MPV[20]: (3.026e-06, 1)
+MPV[21]: (3.102e-06, 1)
+MPV[22]: (3.181e-06, 1)
+MPV[23]: (3.265e-06, 1)
+MPV[24]: (3.353e-06, 1)
+MPV[25]: (3.446e-06, 1)
+MPV[26]: (3.545e-06, 1)
+MPV[27]: (3.649e-06, 1)
+MPV[28]: (3.76e-06, 1)
+MPV[29]: (3.877e-06, 1)
+MPV[30]: (4.002e-06, 1)
+MPV[31]: (4.136e-06, 1)
+ Done DumpVector of 32 entries 
+SLOWCOMPONENT
+NULL Material Property Vector Pointer.
+Water material properties table: 
+ABSLENGTH
+MPV[0]: (2.034e-06, 3448)
+MPV[1]: (2.068e-06, 4082)
+MPV[2]: (2.103e-06, 6329)
+MPV[3]: (2.139e-06, 9174)
+MPV[4]: (2.177e-06, 12346)
+MPV[5]: (2.216e-06, 13889)
+MPV[6]: (2.256e-06, 15152)
+MPV[7]: (2.298e-06, 17241)
+MPV[8]: (2.341e-06, 18868)
+MPV[9]: (2.386e-06, 20000)
+MPV[10]: (2.433e-06, 26316)
+MPV[11]: (2.481e-06, 35714)
+MPV[12]: (2.532e-06, 45455)
+MPV[13]: (2.585e-06, 47619)
+MPV[14]: (2.64e-06, 52632)
+MPV[15]: (2.697e-06, 52632)
+MPV[16]: (2.757e-06, 55556)
+MPV[17]: (2.82e-06, 52632)
+MPV[18]: (2.885e-06, 52632)
+MPV[19]: (2.954e-06, 47619)
+MPV[20]: (3.026e-06, 45455)
+MPV[21]: (3.102e-06, 41667)
+MPV[22]: (3.181e-06, 37037)
+MPV[23]: (3.265e-06, 33333)
+MPV[24]: (3.353e-06, 30000)
+MPV[25]: (3.446e-06, 28500)
+MPV[26]: (3.545e-06, 27000)
+MPV[27]: (3.649e-06, 24500)
+MPV[28]: (3.76e-06, 22000)
+MPV[29]: (3.877e-06, 19500)
+MPV[30]: (4.002e-06, 17500)
+MPV[31]: (4.136e-06, 14500)
+ Done DumpVector of 32 entries 
+EFFICIENCY
+MPV[0]: (2.034e-06, 0)
+MPV[1]: (2.068e-06, 0)
+MPV[2]: (2.103e-06, 0)
+MPV[3]: (2.139e-06, 0)
+MPV[4]: (2.177e-06, 0)
+MPV[5]: (2.216e-06, 0)
+MPV[6]: (2.256e-06, 0)
+MPV[7]: (2.298e-06, 0)
+MPV[8]: (2.341e-06, 0)
+MPV[9]: (2.386e-06, 0)
+MPV[10]: (2.433e-06, 0)
+MPV[11]: (2.481e-06, 0)
+MPV[12]: (2.532e-06, 0)
+MPV[13]: (2.585e-06, 0)
+MPV[14]: (2.64e-06, 0)
+MPV[15]: (2.697e-06, 0)
+MPV[16]: (2.757e-06, 0)
+MPV[17]: (2.82e-06, 0)
+MPV[18]: (2.885e-06, 0)
+MPV[19]: (2.954e-06, 0)
+MPV[20]: (3.026e-06, 0)
+MPV[21]: (3.102e-06, 0)
+MPV[22]: (3.181e-06, 0)
+MPV[23]: (3.265e-06, 0)
+MPV[24]: (3.353e-06, 0)
+MPV[25]: (3.446e-06, 0)
+MPV[26]: (3.545e-06, 0)
+MPV[27]: (3.649e-06, 0)
+MPV[28]: (3.76e-06, 0)
+MPV[29]: (3.877e-06, 0)
+MPV[30]: (4.002e-06, 0)
+MPV[31]: (4.136e-06, 0)
+ Done DumpVector of 32 entries 
+FASTCOMPONENT
+MPV[0]: (2.034e-06, 1)
+MPV[1]: (2.068e-06, 1)
+MPV[2]: (2.103e-06, 1)
+MPV[3]: (2.139e-06, 1)
+MPV[4]: (2.177e-06, 1)
+MPV[5]: (2.216e-06, 1)
+MPV[6]: (2.256e-06, 1)
+MPV[7]: (2.298e-06, 1)
+MPV[8]: (2.341e-06, 1)
+MPV[9]: (2.386e-06, 1)
+MPV[10]: (2.433e-06, 1)
+MPV[11]: (2.481e-06, 1)
+MPV[12]: (2.532e-06, 1)
+MPV[13]: (2.585e-06, 1)
+MPV[14]: (2.64e-06, 1)
+MPV[15]: (2.697e-06, 1)
+MPV[16]: (2.757e-06, 1)
+MPV[17]: (2.82e-06, 1)
+MPV[18]: (2.885e-06, 1)
+MPV[19]: (2.954e-06, 1)
+MPV[20]: (3.026e-06, 1)
+MPV[21]: (3.102e-06, 1)
+MPV[22]: (3.181e-06, 1)
+MPV[23]: (3.265e-06, 1)
+MPV[24]: (3.353e-06, 1)
+MPV[25]: (3.446e-06, 1)
+MPV[26]: (3.545e-06, 1)
+MPV[27]: (3.649e-06, 1)
+MPV[28]: (3.76e-06, 1)
+MPV[29]: (3.877e-06, 1)
+MPV[30]: (4.002e-06, 1)
+MPV[31]: (4.136e-06, 1)
+ Done DumpVector of 32 entries 
+RAYLEIGH
+NULL Material Property Vector Pointer.
+RINDEX
+MPV[0]: (2.034e-06, 1.3435)
+MPV[1]: (2.068e-06, 1.344)
+MPV[2]: (2.103e-06, 1.3445)
+MPV[3]: (2.139e-06, 1.345)
+MPV[4]: (2.177e-06, 1.3455)
+MPV[5]: (2.216e-06, 1.346)
+MPV[6]: (2.256e-06, 1.3465)
+MPV[7]: (2.298e-06, 1.347)
+MPV[8]: (2.341e-06, 1.3475)
+MPV[9]: (2.386e-06, 1.348)
+MPV[10]: (2.433e-06, 1.3485)
+MPV[11]: (2.481e-06, 1.3492)
+MPV[12]: (2.532e-06, 1.35)
+MPV[13]: (2.585e-06, 1.3505)
+MPV[14]: (2.64e-06, 1.351)
+MPV[15]: (2.697e-06, 1.3518)
+MPV[16]: (2.757e-06, 1.3522)
+MPV[17]: (2.82e-06, 1.353)
+MPV[18]: (2.885e-06, 1.3535)
+MPV[19]: (2.954e-06, 1.354)
+MPV[20]: (3.026e-06, 1.3545)
+MPV[21]: (3.102e-06, 1.355)
+MPV[22]: (3.181e-06, 1.3555)
+MPV[23]: (3.265e-06, 1.356)
+MPV[24]: (3.353e-06, 1.3568)
+MPV[25]: (3.446e-06, 1.3572)
+MPV[26]: (3.545e-06, 1.358)
+MPV[27]: (3.649e-06, 1.3585)
+MPV[28]: (3.76e-06, 1.359)
+MPV[29]: (3.877e-06, 1.3595)
+MPV[30]: (4.002e-06, 1.36)
+MPV[31]: (4.136e-06, 1.3608)
+ Done DumpVector of 32 entries 
+SLOWCOMPONENT
+MPV[0]: (2.034e-06, 0.01)
+MPV[1]: (2.068e-06, 1)
+MPV[2]: (2.103e-06, 2)
+MPV[3]: (2.139e-06, 3)
+MPV[4]: (2.177e-06, 4)
+MPV[5]: (2.216e-06, 5)
+MPV[6]: (2.256e-06, 6)
+MPV[7]: (2.298e-06, 7)
+MPV[8]: (2.341e-06, 8)
+MPV[9]: (2.386e-06, 9)
+MPV[10]: (2.433e-06, 8)
+MPV[11]: (2.481e-06, 7)
+MPV[12]: (2.532e-06, 6)
+MPV[13]: (2.585e-06, 4)
+MPV[14]: (2.64e-06, 3)
+MPV[15]: (2.697e-06, 2)
+MPV[16]: (2.757e-06, 1)
+MPV[17]: (2.82e-06, 0.01)
+MPV[18]: (2.885e-06, 1)
+MPV[19]: (2.954e-06, 2)
+MPV[20]: (3.026e-06, 3)
+MPV[21]: (3.102e-06, 4)
+MPV[22]: (3.181e-06, 5)
+MPV[23]: (3.265e-06, 6)
+MPV[24]: (3.353e-06, 7)
+MPV[25]: (3.446e-06, 8)
+MPV[26]: (3.545e-06, 9)
+MPV[27]: (3.649e-06, 8)
+MPV[28]: (3.76e-06, 7)
+MPV[29]: (3.877e-06, 6)
+MPV[30]: (4.002e-06, 5)
+MPV[31]: (4.136e-06, 4)
+ Done DumpVector of 32 entries 
+FASTTIMECONSTANT
+1
+RESOLUTIONSCALE
+1
+SCINTILLATIONYIELD
+50
+SLOWTIMECONSTANT
+10
+YIELDRATIO
+0.8
+AirSurface optical surface material properties table: 
+EFFICIENCY
+MPV[0]: (2.038e-06, 0.8)
+MPV[1]: (4.144e-06, 1)
+ Done DumpVector of 2 entries 
+REFLECTIVITY
+MPV[0]: (2.038e-06, 0.3)
+MPV[1]: (4.144e-06, 0.5)
+ Done DumpVector of 2 entries 
+WaterSurface optical surface material properties table: 
+BACKSCATTERCONSTANT
+MPV[0]: (2.038e-06, 0.2)
+MPV[1]: (4.144e-06, 0.2)
+ Done DumpVector of 2 entries 
+RINDEX
+MPV[0]: (2.038e-06, 1.35)
+MPV[1]: (4.144e-06, 1.4)
+ Done DumpVector of 2 entries 
+SPECULARLOBECONSTANT
+MPV[0]: (2.038e-06, 0.3)
+MPV[1]: (4.144e-06, 0.3)
+ Done DumpVector of 2 entries 
+SPECULARSPIKECONSTANT
+MPV[0]: (2.038e-06, 0.2)
+MPV[1]: (4.144e-06, 0.2)
+ Done DumpVector of 2 entries 
+
+phot:  Total cross sections from Sandia parametrisation. 
+
+compt:  Total cross sections has a good parametrisation from 10 KeV to (100/Z) GeV
+      Sampling according Klein-Nishina model
+      tables are built for  gamma
+      Lambda tables from 100 eV  to 100 GeV in 90 bins.
+
+conv:  Total cross sections has a good parametrisation from 1.5 MeV to 100 GeV for all Z;
+      sampling secondary e+e- according to the Bethe-Heitler model
+      tables are built for  gamma
+      Lambda tables from 1.022 MeV to 100 GeV in 100 bins.
+
+msc:  Model variant of multiple scattering for e-
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+eIoni:   tables are built for  e-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Delta cross sections from Moller+Bhabha, good description from 1 KeV to 100 GeV.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+eBrem:   tables are built for  e-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Total cross sections from a parametrisation based on the EEDL data library. 
+      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
+
+eIoni:   tables are built for  e+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Delta cross sections from Moller+Bhabha, good description from 1 KeV to 100 GeV.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+eBrem:   tables are built for  e+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Total cross sections from a parametrisation based on the EEDL data library. 
+      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
+
+annihil:       Heilter model of formula of annihilation into 2 photons
+      tables are built for  e+
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
+
+hIoni:   tables are built for  proton
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 2 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+msc:  Model variant of multiple scattering for proton
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+msc:  Model variant of multiple scattering for GenericIon
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+hIoni:   tables are built for  anti_proton
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 2 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+msc:  Model variant of multiple scattering for mu+
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+muIoni:   tables are built for  mu+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
+      radiative corrections for E > 1 GeV
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+muBrems:   tables are built for  mu+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Parametrised model 
+
+muPairProd:   tables are built for  mu+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Parametrised model 
+
+muIoni:   tables are built for  mu-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
+      radiative corrections for E > 1 GeV
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+muBrems:   tables are built for  mu-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Parametrised model 
+
+muPairProd:   tables are built for  mu-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Parametrised model 
+
+hIoni:   tables are built for  pi+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 0.297504 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+hIoni:   tables are built for  pi-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 0.297504 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+msc:  Model variant of multiple scattering for pi-
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+Number of optical photons produced in this event : 1948
+Number of optical photons produced in this event : 1894
+Number of optical photons produced in this event : 1991
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+Number of optical photons produced in this event : 1929
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+Number of optical photons produced in this event : 1952
+Number of optical photons produced in this event : 1901
+G4SteppingManager::InvokeAtRestDoItProcs: No AtRestDoIt process is active. 
+Number of optical photons produced in this event : 1927
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+Number of optical photons produced in this event : 1857
+Number of optical photons produced in this event : 2007
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+Number of optical photons produced in this event : 1886

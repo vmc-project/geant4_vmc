@@ -1,4 +1,4 @@
-// $Id: Ex03MCApplication.cxx,v 1.7 2005/05/17 13:44:26 brun Exp $
+// $Id: Ex03MCApplication.cxx,v 1.8 2005/11/19 07:07:47 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
@@ -21,6 +21,7 @@
 #include "Ex03MCApplication.h"
 #include "Ex03MCStack.h"
 #include "Ex03PrimaryGenerator.h"
+#include "Ex03DetectorConstructionOld.h"
 
 ClassImp(Ex03MCApplication)
 
@@ -36,7 +37,8 @@ Ex03MCApplication::Ex03MCApplication(const char *name, const char *title,
     fCalorimeterSD(0),
     fPrimaryGenerator(0),
     fFieldB(0),
-    fRootManager("example03", fileMode)
+    fRootManager("example03", fileMode),
+    fOldGeometry(kFALSE)
 {
 // Standard constructor
 // ---
@@ -70,7 +72,8 @@ Ex03MCApplication::Ex03MCApplication()
     fCalorimeterSD(0),
     fPrimaryGenerator(0),
     fFieldB(0),
-    fRootManager()
+    fRootManager(),
+    fOldGeometry(kFALSE)
 {    
 // Default constructor
 // ---
@@ -168,8 +171,17 @@ void Ex03MCApplication::ConstructGeometry()
 
   fVerbose.ConstructGeometry();
 
-  fDetConstruction->ConstructMaterials();  
-  fDetConstruction->ConstructGeometry();  
+  if ( ! fOldGeometry ) {
+    fDetConstruction->ConstructMaterials();  
+    fDetConstruction->ConstructGeometry();  
+    //TGeoManager::Import("geometry.root");
+    //gMC->SetRootGeometry();
+  }
+  else {
+    Ex03DetectorConstructionOld detConstructionOld;
+    detConstructionOld.ConstructMaterials(); 
+    detConstructionOld.ConstructGeometry();
+  }    
 }
 
 //_____________________________________________________________________________
@@ -318,7 +330,7 @@ void Ex03MCApplication::FinishEvent()
 } 
 
 //_____________________________________________________________________________
-void Ex03MCApplication::Field(const Double_t* x, Double_t* b) const
+void Ex03MCApplication::Field(const Double_t* /*x*/, Double_t* b) const
 {
 // Uniform magnetic field
 // ---

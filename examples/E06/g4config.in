@@ -1,4 +1,4 @@
-# $Id: g4config.in,v 1.1 2005/05/17 13:52:01 brun Exp $
+# $Id: g4config.in,v 1.2 2006/01/13 16:58:58 brun Exp $
 #
 # Geant4 configuration macro for Example06
 # (called from Root macro g4Config.C)
@@ -7,10 +7,9 @@
 #
 /mcVerbose/all 0
 /mcVerbose/geometryManager 1
-#/tracking/verbose 1
+/mcVerbose/geometryBuilder 1
+/tracking/verbose 1
 
 # Swith on optical physics
 #
-#/mcVerbose/physicsList 1
-
-
+/mcVerbose/physicsList 1

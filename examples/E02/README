@@ -1,4 +1,4 @@
-$Id: README,v 1.2 2005/01/05 08:05:30 brun Exp $
+$Id: README,v 1.3 2005/05/17 13:44:25 brun Exp $
 -----------------------------------------------------------------
 
 Example02
@@ -33,19 +33,20 @@ Macros:
 
   For running example with G4:
   
-  run_g4.C    - macro for running example 
-  g4Config.C  - configuration macro
-  g4config.in - Geant4 configuration macro (called from g4Config.C)
-  g4vis.in    - Geant4 macro for visualization settings (called from run_g4.C) 
+  run_g4.C        - macro for running example 
+  g4Config.C      - configuration macro for G4 with native geometry navigation (default)
+  g4tgeoConfig.C  - configuration macro for G4 with TGeo geometry navigation
+  g4config.in     - macro for G4 configuration using G4 commands
+  g4vis.in        - macro for G4 visualization settings
   
 To run example:
 ===============
   
-  With G3:
-  root[0] .x run_g3.C  
-  
   With G3 + TGeo:
-  root[0] .x run_g3.C("g3tgeoConfig.C");  
+  root[0] .x run_g3.C
   
   With G4:
   root[0] .x run_g4.C  
+  
+  With G4 + TGeo navigation:
+  root[0] .x run_g4.C("g4tgeoConfig.C");  

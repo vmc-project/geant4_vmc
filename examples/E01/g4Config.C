@@ -1,12 +1,13 @@
-// $Id: $
+// $Id: g4Config.C,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 //
 // Configuration macro for Geant4 VMC for Example01
+// for geometry defined with Root and selected Geant4 native navigation
 
 void Config()
 {
-  // RunConfiguration for Geant4
+  // RunConfiguration for Geant4 
   TG4RunConfiguration* runConfiguration 
-    = new TG4RunConfiguration();
+    = new TG4RunConfiguration("geomRootToGeant4");
   
   // TGeant4
   TGeant4* geant4

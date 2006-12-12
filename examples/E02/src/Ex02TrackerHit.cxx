@@ -1,4 +1,4 @@
-// $Id: Ex02TrackerHit.cxx,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+// $Id: Ex02TrackerHit.cxx,v 1.2 2002/12/03 15:04:44 brun Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -47,7 +47,7 @@ void Ex02TrackerHit::Draw()
 */
 
 //_____________________________________________________________________________
-void Ex02TrackerHit::Print(const Option_t* opt) const
+void Ex02TrackerHit::Print(const Option_t* /*opt*/) const
 {
   cout << "  trackID: " << fTrackID 
        << "  chamberNb: " << fChamberNb

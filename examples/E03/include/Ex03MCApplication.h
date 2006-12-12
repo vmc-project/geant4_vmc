@@ -1,4 +1,4 @@
-// $Id: Ex03MCApplication.h,v 1.1 2003/03/17 14:56:51 brun Exp $
+// $Id: Ex03MCApplication.h,v 1.2 2003/09/27 09:32:48 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
@@ -59,6 +59,9 @@ class Ex03MCApplication : public TVirtualMCApplication
     Ex03DetectorConstruction* GetDetectorConstruction() const;
     Ex03CalorimeterSD*        GetCalorimeterSD() const;
     Ex03PrimaryGenerator*     GetPrimaryGenerator() const;
+
+    // method for tests
+    void SetOldGeometry(Bool_t oldGeometry = kTRUE);
  
   private:
     // methods
@@ -74,6 +77,7 @@ class Ex03MCApplication : public TVirtualMCApplication
     Ex03PrimaryGenerator*     fPrimaryGenerator;
     Double_t*                 fFieldB;
     Ex02RootManager           fRootManager;
+    Bool_t                    fOldGeometry;
 
   ClassDef(Ex03MCApplication,1)  //Interface to MonteCarlo application
 };
@@ -100,6 +104,9 @@ inline Ex03CalorimeterSD* Ex03MCApplication::GetCalorimeterSD() const
 
 inline Ex03PrimaryGenerator* Ex03MCApplication::GetPrimaryGenerator() const
 { return fPrimaryGenerator; }
+
+inline void Ex03MCApplication::SetOldGeometry(Bool_t oldGeometry)
+{ fOldGeometry = oldGeometry; }
 
 #endif //EX03_MC_APPLICATION_H
 

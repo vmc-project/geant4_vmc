@@ -1,0 +1,965 @@
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version   5.13/07  21 November 2006   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+FreeType Engine v2.1.9 used to render TrueType fonts.
+Compiled on 12 December 2006 for linux with thread support.
+
+CINT/ROOT C/C++ Interpreter version 5.16.16, November 24, 2006
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+
+Processing test_E03.C("g4tgeoConfigOld.C", kTRUE)...
+Loading Geant4 granular libraries ...
+Loading VGM libraries ... 
+Loading libraries ... finished
+Info in <TGeoManager::TGeoManager>: Geometry Geometry, default geometry created
+++++  TG4Warning:  ++++
+    TG4SDManager::MediumId:
+    Medium Air not found.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4SDManager::MediumId:
+    Medium Galactic not found.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4SDManager::MediumId:
+    Medium Galactic not found.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4SDManager::MediumId:
+    Medium Lead not found.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4SDManager::MediumId:
+    Medium liquidArgon not found.
++++++++++++++++++++++++
+
+Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoManager::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in default geometry
+Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
+
+------------------------------------------------------------
+---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
+------------------------------------------------------------
+Running TVirtualMCApplication::ConstructGeometry
+*************************************************************
+ Geant4 version Name: geant4-08-01-patch-02    (10-November-2006)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+Info in <TG4RootNavMgr::Initialize>: Creating G4 hierarchy ...
+Info in <TGeoManager::ConvertReflections>: Converting reflections in: Geometry - default geometry ...
+Info in <TGeoManager::ConvertReflections>: Done
+===> GEANT4 materials created and mapped to TGeo ones...
+===> GEANT4 logical volumes created and mapped to TGeo ones...
+===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
+### INFO: TG4RootDetectorConstruction::Construct() finished
+TG4PostDetConstruction::Initialize
+G4 Stat: instantiated 6 logical volumes 
+                      14 physical volumes
+++++  TG4Warning:  ++++
+    TG4MediumMap::AddMedium:
+    Medium with given ID=0 already exists.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4Medium::SetName:
+    Reseting name Aluminium to liquidArgon
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4Medium::SetMaterial:
+    Reseting material Aluminium to liquidArgon
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4MediumMap::AddMedium:
+    Medium with given ID=0 already exists.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4Medium::SetName:
+    Reseting name liquidArgon to Lead
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4Medium::SetMaterial:
+    Reseting material liquidArgon to Lead
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4MediumMap::AddMedium:
+    Medium with given ID=0 already exists.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4Medium::SetName:
+    Reseting name Lead to Water
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4Medium::SetMaterial:
+    Reseting material Lead to Water
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4MediumMap::AddMedium:
+    Medium with given ID=0 already exists.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4Medium::SetName:
+    Reseting name Water to Scintillator
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4Medium::SetMaterial:
+    Reseting material Water to Scintillator
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4MediumMap::AddMedium:
+    Medium with given ID=0 already exists.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4Medium::SetName:
+    Reseting name Scintillator to quartz
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4Medium::SetMaterial:
+    Reseting material Scintillator to quartz
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4MediumMap::AddMedium:
+    Medium with given ID=0 already exists.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4Medium::SetName:
+    Reseting name quartz to Air
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4Medium::SetMaterial:
+    Reseting material quartz to Air
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4MediumMap::AddMedium:
+    Medium with given ID=0 already exists.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4Medium::SetName:
+    Reseting name Air to Galactic
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4Medium::SetMaterial:
+    Reseting material Air to Galactic
++++++++++++++++++++++++
+
+Info in <TG4RootNavMgr::ConnectToG4>: ROOT detector construction class connected to G4RunManager
+Aluminium liquidArgon0x6878844liquidArgon Lead0x6878844Lead Water0x6878844Water Scintillator0x6878844Scintillator quartz0x6878844quartz Air0x6878844Air Galactic0x6878844Debug mode is switched on.
+Visualization Manager instantiating...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Current available graphics systems are:
+  ASCIITree (ATree)
+  DAWNFILE (DAWNFILE)
+  GAGTree (GAGTree)
+  G4HepRepFile (HepRepFile)
+  G4HepRep (HepRepXML)
+  RayTracer (RayTracer)
+  VRML1FILE (VRML1FILE)
+  VRML2FILE (VRML2FILE)
+  OpenGLImmediateX (OGLIX)
+  OpenGLStoredX (OGLSX)
+  OpenGLImmediateXm (OGLIXm)
+  OpenGLStoredXm (OGLSXm)
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  drawByCharge
+  drawByParticleID
+
+Registered models: 
+  None
+
+Registered filter factories:
+  None
+
+Registered filters:
+  None
+
+Geant4 has been created.
+### General physics constructed.
+### Electromagnetic physics constructed.
+### Muon physics constructed.
+### EM physics for ions constructed.
+
+###
+You are using the Geant4 VMC hadronics physics
+equivalent to ExN04HadronPhysics from Geant4 (version 6.0)
+Note that this hadronic physics list is not optimized for any particular usage.
+If you wish to have a starting point tailored for a particular area of work,
+please use one of the available physics lists by use-case.
+ More information can also be found from the Geant4 HyperNews.
+###
+
+### EM physics for hadrons constructed.
+### Step limiter physics constructed.
+++++  TG4Warning:  ++++
+    TG4SDManager::MediumId:
+    Medium Aluminium not found.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4SDManager::MediumId:
+    Medium liquidArgon not found.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4SDManager::MediumId:
+    Medium Lead not found.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4SDManager::MediumId:
+    Medium Water not found.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4SDManager::MediumId:
+    Medium Scintillator not found.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4SDManager::MediumId:
+    Medium quartz not found.
++++++++++++++++++++++++
+
+++++  TG4Warning:  ++++
+    TG4SDManager::MediumId:
+    Medium Air not found.
++++++++++++++++++++++++
+
+
+**********************************************
+    GEANT4 Geometry statistics: 
+              6 logical volumes
+             14 physical volumes
+              8 materials
+              1 user limits
+              6 sensitive detectors
+**********************************************
+
+--- Run MC for 1 events
+
+phot:  Total cross sections from Sandia parametrisation. 
+
+compt:  Total cross sections has a good parametrisation from 10 KeV to (100/Z) GeV
+      Sampling according Klein-Nishina model
+      tables are built for  gamma
+      Lambda tables from 100 eV  to 100 GeV in 90 bins.
+
+conv:  Total cross sections has a good parametrisation from 1.5 MeV to 100 GeV for all Z;
+      sampling secondary e+e- according to the Bethe-Heitler model
+      tables are built for  gamma
+      Lambda tables from 1.022 MeV to 100 GeV in 100 bins.
+
+msc:  Model variant of multiple scattering for e-
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+eIoni:   tables are built for  e-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Delta cross sections from Moller+Bhabha, good description from 1 KeV to 100 GeV.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+eBrem:   tables are built for  e-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Total cross sections from a parametrisation based on the EEDL data library. 
+      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
+
+eIoni:   tables are built for  e+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Delta cross sections from Moller+Bhabha, good description from 1 KeV to 100 GeV.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+eBrem:   tables are built for  e+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Total cross sections from a parametrisation based on the EEDL data library. 
+      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
+
+annihil:       Heilter model of formula of annihilation into 2 photons
+      tables are built for  e+
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
+
+hIoni:   tables are built for  proton
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 2 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+msc:  Model variant of multiple scattering for proton
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+msc:  Model variant of multiple scattering for GenericIon
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+hIoni:   tables are built for  anti_proton
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 2 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+msc:  Model variant of multiple scattering for mu+
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+muIoni:   tables are built for  mu+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
+      radiative corrections for E > 1 GeV
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+muBrems:   tables are built for  mu+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Parametrised model 
+
+muPairProd:   tables are built for  mu+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Parametrised model 
+
+muIoni:   tables are built for  mu-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
+      radiative corrections for E > 1 GeV
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+muBrems:   tables are built for  mu-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Parametrised model 
+
+muPairProd:   tables are built for  mu-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Parametrised model 
+
+hIoni:   tables are built for  pi+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 0.297504 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+hIoni:   tables are built for  pi-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 0.297504 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+msc:  Model variant of multiple scattering for pi-
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+========= Table of registered couples ==============================
+
+Index : 0     used in the geometry : Yes     recalculation needed : No 
+ Material : Aluminium
+ Range cuts        :  gamma 1 mm     e- 1 mm     e+ 1 mm 
+ Energy thresholds :  gamma 6.88731 keV    e- 596.68 keV    e+ 568.011 keV
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
+====================================================================
+
+### Run 0 start.
+--- Begin event 
+
+---> Begin of event: 1
+--- Generate primaries 
+--- Begin primary 
+
+****************************************************************************************************
+  Particle = e-     Track ID = 0     Parent ID = -1
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -9.000    0.000    0.000    50.0000    0.0000    0.000    0.000     WRLD  No active process
+#   1    -7.500    0.000    0.000    44.1235    5.8765    1.511    1.511     WRLD  Transportation
+#   2    -7.500    0.000    0.000    44.1235    0.0000    0.000    1.511     ABSO  Transportation
+#   3    -7.319   -0.016    0.005    43.5299    0.5839    0.182    1.693     ABSO  Bremstrahlung
+#   4    -7.054   -0.035    0.039    40.4848    1.2549    0.268    1.960     ABSO  Energy loss
+#   5    -6.771   -0.055    0.083    39.1854    1.2994    0.287    2.247     ABSO  Multiple scattering
+#   6    -6.692   -0.062    0.100    38.6960    0.2561    0.081    2.329     ABSO  Bremstrahlung
+#   7    -6.500   -0.077    0.146    37.9531    0.7429    0.198    2.527     ABSO  Transportation
+#   8    -6.500   -0.077    0.146    37.9531    0.0000    0.000    2.527     GAPX  Transportation
+#   9    -6.391   -0.087    0.176    37.4014    0.4038    0.114    2.641     GAPX  Bremstrahlung
+#  10    -6.248   -0.105    0.211    36.9073    0.4941    0.149    2.789     GAPX  Multiple scattering
+#  11    -6.105   -0.123    0.248    36.3166    0.5907    0.149    2.938     GAPX  Multiple scattering
+#  12    -6.034   -0.135    0.265    32.3162    0.2669    0.073    3.012     GAPX  Bremstrahlung
+#  13    -6.000   -0.143    0.273    32.0144    0.3018    0.036    3.048     GAPX  Transportation
+#  14    -6.000   -0.143    0.273    32.0144    0.0000    0.000    3.048     ABSO  Transportation
+#  15    -5.893   -0.167    0.291    31.2308    0.7241    0.112    3.160     ABSO  Bremstrahlung
+#  16    -5.605   -0.213    0.355    30.1773    1.0535    0.299    3.459     ABSO  Multiple scattering
+#  17    -5.319   -0.281    0.408    28.8705    1.3068    0.299    3.757     ABSO  Multiple scattering
+#  18    -5.023   -0.313    0.435    27.8404    1.0301    0.299    4.056     ABSO  Multiple scattering
+#  19    -5.017   -0.314    0.436    24.9726    0.0200    0.006    4.063     ABSO  Bremstrahlung
+#  20    -5.000   -0.316    0.438    24.9229    0.0497    0.017    4.080     ABSO  Transportation
+#  21    -5.000   -0.316    0.438    24.9229    0.0000    0.000    4.080     GAPX  Transportation
+#  22    -4.958   -0.324    0.443    23.9288    0.1372    0.043    4.123     GAPX  Energy loss
+#  23    -4.816   -0.352    0.456    23.4515    0.4772    0.146    4.269     GAPX  Multiple scattering
+#  24    -4.671   -0.363    0.464    22.7975    0.6540    0.146    4.415     GAPX  Multiple scattering
+#  25    -4.525   -0.376    0.467    22.0649    0.7326    0.146    4.561     GAPX  Multiple scattering
+#  26    -4.500   -0.370    0.462    21.9630    0.1019    0.027    4.588     GAPX  Transportation
+#  27    -4.500   -0.370    0.462    21.9630    0.0000    0.000    4.588     ABSO  Transportation
+#  28    -4.210   -0.330    0.410    20.8442    1.1189    0.298    4.886     ABSO  Multiple scattering
+#  29    -4.148   -0.316    0.391    20.0904    0.2442    0.066    4.952     ABSO  Bremstrahlung
+#  30    -4.141   -0.315    0.388    20.0407    0.0198    0.008    4.959     ABSO  Bremstrahlung
+#  31    -3.950   -0.286    0.323    10.8722    1.0021    0.205    5.164     ABSO  Bremstrahlung
+#  32    -3.685   -0.216    0.227     9.7831    1.0891    0.298    5.462     ABSO  Multiple scattering
+#  33    -3.500   -0.169    0.186     9.0937    0.6894    0.198    5.661     ABSO  Transportation
+#  34    -3.500   -0.169    0.186     9.0937    0.0000    0.000    5.661     GAPX  Transportation
+#  35    -3.361   -0.127    0.168     8.4389    0.6549    0.148    5.809     GAPX  Multiple scattering
+#  36    -3.220   -0.088    0.144     7.9143    0.5246    0.148    5.957     GAPX  Multiple scattering
+#  37    -3.095   -0.012    0.143     7.3708    0.5435    0.148    6.105     GAPX  Multiple scattering
+#  38    -3.000    0.038    0.137     6.9658    0.4050    0.109    6.214     GAPX  Transportation
+#  39    -3.000    0.038    0.137     6.9658    0.0000    0.000    6.214     ABSO  Transportation
+#  40    -2.894    0.096    0.096     6.5497    0.4160    0.129    6.343     ABSO  Multiple scattering
+#  41    -2.855    0.137   -0.020     6.0384    0.5114    0.129    6.472     ABSO  Multiple scattering
+#  42    -2.814    0.179   -0.129     5.5894    0.4490    0.129    6.601     ABSO  Multiple scattering
+#  43    -2.773    0.215   -0.244     5.2431    0.3463    0.129    6.730     ABSO  Multiple scattering
+#  44    -2.700    0.246   -0.342     4.8611    0.3821    0.129    6.859     ABSO  Multiple scattering
+#  45    -2.653    0.255   -0.458     4.4099    0.4512    0.129    6.988     ABSO  Multiple scattering
+#  46    -2.580    0.299   -0.552     4.0208    0.3891    0.129    7.117     ABSO  Multiple scattering
+#  47    -2.541    0.304   -0.675     3.5452    0.4756    0.129    7.246     ABSO  Multiple scattering
+#  48    -2.430    0.279   -0.735     3.0993    0.4458    0.129    7.375     ABSO  Multiple scattering
+#  49    -2.419    0.151   -0.733     2.7272    0.3721    0.129    7.504     ABSO  Multiple scattering
+#  50    -2.394    0.027   -0.707     2.2370    0.4902    0.129    7.633     ABSO  Multiple scattering
+#  51    -2.373   -0.046   -0.793     1.7317    0.5053    0.129    7.762     ABSO  Multiple scattering
+#  52    -2.379   -0.172   -0.799     1.3023    0.4294    0.129    7.891     ABSO  Multiple scattering
+#  53    -2.420   -0.293   -0.779     0.6841    0.6183    0.129    8.020     ABSO  Multiple scattering
+#  54    -2.474   -0.350   -0.725     0.0981    0.5859    0.123    8.143     ABSO  Energy loss
+#  55    -2.477   -0.348   -0.724    -0.0000    0.0981    0.007    8.149     ABSO  Energy loss
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 1     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -3.950   -0.286    0.323     8.1665    0.0000    0.000    0.000     ABSO  No active process
+#   1    -3.500   -0.230    0.111     8.1665    0.0000    0.500    0.500     ABSO  Transportation
+#   2    -3.500   -0.230    0.111     8.1665    0.0000    0.000    0.500     GAPX  Transportation
+#   3    -3.000   -0.169   -0.123     8.1665    0.0000    0.556    1.056     GAPX  Transportation
+#   4    -3.000   -0.169   -0.123     8.1665    0.0000    0.000    1.056     ABSO  Transportation
+#   5    -2.953   -0.164   -0.145     0.9572    0.0000    0.052    1.108     ABSO  Compton scattering
+#   6    -2.425    0.995   -5.000     0.9572    0.0000    5.019    6.127     ABSO  Transportation
+#   7    -2.425    0.995   -5.000     0.9572    0.0000    0.000    6.127     WRLD  Transportation
+#   8    -2.362    1.132   -5.575     0.2379    0.0000    0.595    6.722     WRLD  Compton scattering
+#   9    -1.795    1.135   -5.000     0.2379    0.0000    0.808    7.530     WRLD  Transportation
+#  10    -1.795    1.135   -5.000     0.2379    0.0000    0.000    7.530     GAPX  Transportation
+#  11    -1.500    1.136   -4.701     0.2379    0.0000    0.420    7.950     GAPX  Transportation
+#  12    -1.500    1.136   -4.701     0.2379    0.0000    0.000    7.950     ABSO  Transportation
+#  13    -0.738    1.139   -3.928     0.2321    0.0057    1.085    9.035     ABSO  Compton scattering
+#  14    -0.500    1.229   -3.751     0.2321    0.0000    0.310    9.345     ABSO  Transportation
+#  15    -0.500    1.229   -3.751     0.2321    0.0000    0.000    9.345     GAPX  Transportation
+#  16     0.000    1.416   -3.381     0.2321    0.0000    0.650    9.995     GAPX  Transportation
+#  17     0.000    1.416   -3.381     0.2321    0.0000    0.000    9.995     ABSO  Transportation
+#  18     0.715    1.684   -2.851     0.2301    0.0021    0.929   10.924     ABSO  Compton scattering
+#  19     1.000    1.766   -2.719     0.2301    0.0000    0.325   11.249     ABSO  Transportation
+#  20     1.000    1.766   -2.719     0.2301    0.0000    0.000   11.249     GAPX  Transportation
+#  21     1.500    1.910   -2.488     0.2301    0.0000    0.569   11.818     GAPX  Transportation
+#  22     1.500    1.910   -2.488     0.2301    0.0000    0.000   11.818     ABSO  Transportation
+#  23     2.500    2.199   -2.025     0.2301    0.0000    1.139   12.957     ABSO  Transportation
+#  24     2.500    2.199   -2.025     0.2301    0.0000    0.000   12.957     GAPX  Transportation
+#  25     3.000    2.343   -1.794     0.2301    0.0000    0.569   13.527     GAPX  Transportation
+#  26     3.000    2.343   -1.794     0.2301    0.0000    0.000   13.527     ABSO  Transportation
+#  27     4.000    2.632   -1.331     0.2301    0.0000    1.139   14.666     ABSO  Transportation
+#  28     4.000    2.632   -1.331     0.2301    0.0000    0.000   14.666     GAPX  Transportation
+#  29     4.500    2.776   -1.100     0.2301    0.0000    0.569   15.235     GAPX  Transportation
+#  30     4.500    2.776   -1.100     0.2301    0.0000    0.000   15.235     ABSO  Transportation
+#  31     5.500    3.064   -0.637     0.2301    0.0000    1.139   16.374     ABSO  Transportation
+#  32     5.500    3.064   -0.637     0.2301    0.0000    0.000   16.374     GAPX  Transportation
+#  33     5.854    3.167   -0.474     0.2181    0.0120    0.403   16.778     GAPX  Compton scattering
+#  34     6.000    3.301   -0.293     0.2181    0.0000    0.268   17.046     GAPX  Transportation
+#  35     6.000    3.301   -0.293     0.2181    0.0000    0.000   17.046     ABSO  Transportation
+#  36     7.000    4.224    0.942     0.2181    0.0000    1.838   18.884     ABSO  Transportation
+#  37     7.000    4.224    0.942     0.2181    0.0000    0.000   18.884     GAPX  Transportation
+#  38     7.500    4.685    1.560     0.2181    0.0000    0.919   19.803     GAPX  Transportation
+#  39     7.500    4.685    1.560     0.2181    0.0000    0.000   19.803     WRLD  Transportation
+#  40     8.449    5.561    2.733     0.1648    0.0532    1.745   21.547     WRLD  Compton scattering
+#  41     9.000    5.927    2.300     0.1648    0.0000    0.790   22.338     WRLD  Transportation
+
+****************************************************************************************************
+  Particle = e-     Track ID = 2     Parent ID = 1
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -2.362    1.132   -5.575     0.7194    0.0000    0.000    0.000     WRLD  No active process
+#   1    -2.363    1.132   -5.579     0.6978    0.0215    0.003    0.003     WRLD  Multiple scattering
+#   2    -2.344    1.133   -5.656     0.0929    0.6049    0.125    0.129     WRLD  Energy loss
+#   3    -2.344    1.132   -5.656    -0.0000    0.0929    0.006    0.135     WRLD  Energy loss
+
+****************************************************************************************************
+  Particle = e-     Track ID = 3     Parent ID = 1
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -2.953   -0.164   -0.145     7.2092    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.833   -0.141   -0.206     6.7399    0.4693    0.137    0.137     ABSO  Multiple scattering
+#   2    -2.714   -0.103   -0.261     6.2801    0.4598    0.137    0.273     ABSO  Multiple scattering
+#   3    -2.608   -0.031   -0.309     5.8341    0.4461    0.137    0.410     ABSO  Multiple scattering
+#   4    -2.485    0.021   -0.326     5.3228    0.5112    0.137    0.547     ABSO  Multiple scattering
+#   5    -2.363    0.061   -0.350     4.7806    0.5422    0.137    0.683     ABSO  Multiple scattering
+#   6    -2.241    0.103   -0.392     4.2913    0.4894    0.137    0.820     ABSO  Multiple scattering
+#   7    -2.221    0.147   -0.520     3.7042    0.5871    0.137    0.957     ABSO  Multiple scattering
+#   8    -2.213    0.236   -0.623     3.2717    0.4325    0.137    1.094     ABSO  Multiple scattering
+#   9    -2.173    0.313   -0.670     2.7404    0.3833    0.101    1.195     ABSO  Bremstrahlung
+#  10    -2.133    0.441   -0.681     2.1786    0.5618    0.137    1.332     ABSO  Multiple scattering
+#  11    -2.093    0.568   -0.647     1.7183    0.4603    0.137    1.468     ABSO  Multiple scattering
+#  12    -2.080    0.654   -0.587     1.2499    0.4683    0.137    1.605     ABSO  Multiple scattering
+#  13    -2.001    0.683   -0.531     0.7606    0.4894    0.137    1.742     ABSO  Multiple scattering
+#  14    -2.000    0.684   -0.529     0.7525    0.0081    0.003    1.744     ABSO  Transportation
+#  15    -2.000    0.684   -0.529     0.7525    0.0000    0.000    1.744     GAPX  Transportation
+#  16    -1.999    0.686   -0.526     0.7246    0.0278    0.004    1.748     GAPX  Multiple scattering
+#  17    -1.996    0.688   -0.524     0.7105    0.0141    0.004    1.752     GAPX  Multiple scattering
+#  18    -1.995    0.689   -0.521     0.6977    0.0128    0.004    1.755     GAPX  Multiple scattering
+#  19    -1.994    0.689   -0.518     0.6858    0.0119    0.004    1.759     GAPX  Multiple scattering
+#  20    -1.994    0.689   -0.514     0.6792    0.0066    0.004    1.763     GAPX  Multiple scattering
+#  21    -1.994    0.689   -0.510     0.6625    0.0167    0.004    1.767     GAPX  Multiple scattering
+#  22    -1.995    0.688   -0.507     0.6530    0.0095    0.004    1.770     GAPX  Multiple scattering
+#  23    -1.995    0.686   -0.504     0.6414    0.0116    0.004    1.774     GAPX  Multiple scattering
+#  24    -1.997    0.686   -0.501     0.6305    0.0109    0.004    1.778     GAPX  Multiple scattering
+#  25    -1.998    0.686   -0.497     0.6220    0.0085    0.004    1.781     GAPX  Multiple scattering
+#  26    -1.999    0.686   -0.494     0.5967    0.0252    0.004    1.785     GAPX  Multiple scattering
+#  27    -2.000    0.686   -0.493     0.5934    0.0034    0.001    1.786     GAPX  Transportation
+#  28    -2.000    0.686   -0.493     0.5934    0.0000    0.000    1.786     ABSO  Transportation
+#  29    -2.002    0.685   -0.492     0.5866    0.0067    0.003    1.789     ABSO  Multiple scattering
+#  30    -2.003    0.684   -0.490     0.5551    0.0315    0.003    1.791     ABSO  Multiple scattering
+#  31    -2.004    0.683   -0.488     0.5489    0.0062    0.003    1.794     ABSO  Multiple scattering
+#  32    -2.005    0.682   -0.485     0.5437    0.0052    0.003    1.796     ABSO  Multiple scattering
+#  33    -2.006    0.683   -0.483     0.5347    0.0090    0.003    1.799     ABSO  Multiple scattering
+#  34    -2.007    0.683   -0.481     0.5248    0.0099    0.003    1.801     ABSO  Multiple scattering
+#  35    -2.007    0.683   -0.479     0.5165    0.0082    0.003    1.804     ABSO  Multiple scattering
+#  36    -2.006    0.683   -0.476     0.5066    0.0099    0.003    1.807     ABSO  Multiple scattering
+#  37    -2.006    0.683   -0.474     0.4970    0.0097    0.003    1.809     ABSO  Multiple scattering
+#  38    -2.005    0.682   -0.471     0.4879    0.0090    0.003    1.812     ABSO  Multiple scattering
+#  39    -2.005    0.683   -0.469     0.4819    0.0060    0.003    1.814     ABSO  Multiple scattering
+#  40    -2.004    0.683   -0.467     0.4554    0.0265    0.003    1.817     ABSO  Multiple scattering
+#  41    -2.003    0.684   -0.464     0.4428    0.0127    0.003    1.819     ABSO  Multiple scattering
+#  42    -2.002    0.685   -0.462     0.4335    0.0093    0.003    1.822     ABSO  Multiple scattering
+#  43    -2.002    0.686   -0.460     0.4235    0.0099    0.003    1.824     ABSO  Multiple scattering
+#  44    -2.000    0.686   -0.458     0.4150    0.0085    0.003    1.827     ABSO  Multiple scattering
+#  45    -2.000    0.686   -0.458     0.4150    0.0000    0.000    1.827     ABSO  Transportation
+#  46    -2.000    0.686   -0.458     0.4150    0.0000    0.000    1.827     GAPX  Transportation
+#  47    -1.999    0.686   -0.456     0.4100    0.0050    0.001    1.829     GAPX  Multiple scattering
+#  48    -1.999    0.686   -0.455     0.4061    0.0038    0.001    1.830     GAPX  Multiple scattering
+#  49    -1.998    0.686   -0.454     0.4023    0.0038    0.001    1.832     GAPX  Multiple scattering
+#  50    -1.998    0.686   -0.452     0.3976    0.0047    0.001    1.833     GAPX  Multiple scattering
+#  51    -1.998    0.686   -0.451     0.3921    0.0055    0.001    1.835     GAPX  Multiple scattering
+#  52    -1.997    0.685   -0.450     0.3880    0.0040    0.001    1.836     GAPX  Multiple scattering
+#  53    -1.997    0.684   -0.449     0.3776    0.0104    0.001    1.838     GAPX  Multiple scattering
+#  54    -1.996    0.683   -0.448     0.3706    0.0070    0.001    1.839     GAPX  Multiple scattering
+#  55    -1.995    0.682   -0.447     0.3603    0.0103    0.001    1.840     GAPX  Multiple scattering
+#  56    -1.994    0.681   -0.446     0.3532    0.0071    0.001    1.842     GAPX  Multiple scattering
+#  57    -1.993    0.681   -0.445     0.3478    0.0053    0.001    1.843     GAPX  Multiple scattering
+#  58    -1.993    0.681   -0.444     0.3284    0.0195    0.001    1.845     GAPX  Multiple scattering
+#  59    -1.993    0.679   -0.443     0.2310    0.0974    0.001    1.846     GAPX  Multiple scattering
+#  60    -1.994    0.678   -0.442     0.2257    0.0053    0.001    1.848     GAPX  Multiple scattering
+#  61    -1.995    0.677   -0.442     0.2156    0.0101    0.001    1.849     GAPX  Multiple scattering
+#  62    -1.995    0.676   -0.443     0.2101    0.0054    0.001    1.851     GAPX  Multiple scattering
+#  63    -1.996    0.675   -0.443     0.2001    0.0100    0.001    1.852     GAPX  Multiple scattering
+#  64    -1.997    0.674   -0.443     0.1937    0.0063    0.001    1.854     GAPX  Multiple scattering
+#  65    -1.997    0.672   -0.443     0.1867    0.0070    0.001    1.855     GAPX  Multiple scattering
+#  66    -1.998    0.671   -0.444     0.1781    0.0086    0.001    1.857     GAPX  Multiple scattering
+#  67    -1.998    0.670   -0.444     0.1706    0.0076    0.001    1.858     GAPX  Multiple scattering
+#  68    -1.999    0.669   -0.444     0.1570    0.0030    0.001    1.859     GAPX  Bremstrahlung
+#  69    -1.999    0.669   -0.445     0.1498    0.0072    0.001    1.861     GAPX  Multiple scattering
+#  70    -2.000    0.669   -0.445     0.1435    0.0064    0.001    1.862     GAPX  Multiple scattering
+#  71    -2.000    0.669   -0.445     0.1434    0.0001    0.000    1.862     GAPX  Transportation
+#  72    -2.000    0.669   -0.445     0.1434    0.0000    0.000    1.862     ABSO  Transportation
+#  73    -2.000    0.668   -0.446     0.1423    0.0011    0.000    1.862     ABSO  Multiple scattering
+#  74    -2.000    0.668   -0.446     0.1414    0.0009    0.000    1.863     ABSO  Multiple scattering
+#  75    -2.001    0.668   -0.446     0.1396    0.0018    0.000    1.863     ABSO  Multiple scattering
+#  76    -2.001    0.668   -0.446     0.1379    0.0017    0.000    1.863     ABSO  Multiple scattering
+#  77    -2.001    0.668   -0.446     0.1364    0.0015    0.000    1.863     ABSO  Multiple scattering
+#  78    -2.001    0.668   -0.446     0.1351    0.0013    0.000    1.864     ABSO  Multiple scattering
+#  79    -2.001    0.667   -0.446     0.1342    0.0010    0.000    1.864     ABSO  Multiple scattering
+#  80    -2.001    0.667   -0.446     0.1325    0.0017    0.000    1.864     ABSO  Multiple scattering
+#  81    -2.001    0.667   -0.446     0.1299    0.0027    0.000    1.864     ABSO  Multiple scattering
+#  82    -2.002    0.667   -0.447     0.1290    0.0009    0.000    1.865     ABSO  Multiple scattering
+#  83    -2.002    0.667   -0.447     0.1274    0.0016    0.000    1.865     ABSO  Multiple scattering
+#  84    -2.002    0.667   -0.447     0.1258    0.0016    0.000    1.865     ABSO  Multiple scattering
+#  85    -2.002    0.667   -0.447     0.1222    0.0036    0.000    1.866     ABSO  Multiple scattering
+#  86    -2.002    0.667   -0.448     0.1218    0.0003    0.000    1.866     ABSO  Multiple scattering
+#  87    -2.002    0.667   -0.448     0.1006    0.0213    0.000    1.866     ABSO  Multiple scattering
+#  88    -2.002    0.667   -0.448     0.0977    0.0028    0.000    1.866     ABSO  Multiple scattering
+#  89    -2.002    0.667   -0.448     0.0960    0.0017    0.000    1.867     ABSO  Multiple scattering
+#  90    -2.002    0.667   -0.449     0.0948    0.0012    0.000    1.867     ABSO  Multiple scattering
+#  91    -2.002    0.667   -0.449     0.0931    0.0017    0.000    1.867     ABSO  Multiple scattering
+#  92    -2.002    0.667   -0.449     0.0908    0.0023    0.000    1.867     ABSO  Multiple scattering
+#  93    -2.002    0.667   -0.449     0.0882    0.0026    0.000    1.868     ABSO  Multiple scattering
+#  94    -2.001    0.667   -0.450     0.0855    0.0026    0.000    1.868     ABSO  Multiple scattering
+#  95    -2.001    0.667   -0.450     0.0835    0.0020    0.000    1.868     ABSO  Multiple scattering
+#  96    -2.002    0.667   -0.450     0.0821    0.0014    0.000    1.868     ABSO  Multiple scattering
+#  97    -2.002    0.667   -0.450     0.0765    0.0056    0.000    1.869     ABSO  Multiple scattering
+#  98    -2.002    0.667   -0.450     0.0732    0.0033    0.000    1.869     ABSO  Multiple scattering
+#  99    -2.002    0.667   -0.450     0.0713    0.0018    0.000    1.869     ABSO  Multiple scattering
+# 100    -2.002    0.668   -0.451     0.0699    0.0014    0.000    1.869     ABSO  Multiple scattering
+# 101    -2.002    0.668   -0.451     0.0679    0.0020    0.000    1.870     ABSO  Multiple scattering
+# 102    -2.003    0.668   -0.451     0.0657    0.0023    0.000    1.870     ABSO  Multiple scattering
+# 103    -2.003    0.668   -0.451     0.0627    0.0030    0.000    1.870     ABSO  Multiple scattering
+# 104    -2.003    0.668   -0.451     0.0588    0.0039    0.000    1.871     ABSO  Multiple scattering
+# 105    -2.003    0.668   -0.451     0.0554    0.0034    0.000    1.871     ABSO  Multiple scattering
+# 106    -2.003    0.668   -0.451     0.0528    0.0026    0.000    1.871     ABSO  Multiple scattering
+# 107    -2.003    0.668   -0.451     0.0501    0.0027    0.000    1.871     ABSO  Multiple scattering
+# 108    -2.003    0.669   -0.451     0.0453    0.0048    0.000    1.872     ABSO  Multiple scattering
+# 109    -2.003    0.669   -0.451     0.0416    0.0037    0.000    1.872     ABSO  Multiple scattering
+# 110    -2.004    0.669   -0.451    -0.0000    0.0416    0.002    1.873     ABSO  Energy loss
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 4     Parent ID = 3
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -1.999    0.669   -0.444     0.0106    0.0000    0.000    0.000     GAPX  No active process
+#   1    -2.000    0.670   -0.444     0.0106    0.0000    0.002    0.002     GAPX  Transportation
+#   2    -2.000    0.670   -0.444     0.0106    0.0000    0.000    0.002     ABSO  Transportation
+#   3    -2.003    0.672   -0.444     0.0000    0.0106    0.003    0.005     ABSO  Photoelectric effect
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 5     Parent ID = 3
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -2.173    0.313   -0.670     0.1480    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.139    0.906   -0.765     0.1136    0.0344    0.602    0.602     ABSO  Compton scattering
+#   2    -2.352    0.924   -0.657     0.0000    0.1136    0.239    0.840     ABSO  Photoelectric effect
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 6     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -4.141   -0.315    0.388     0.0299    0.0000    0.000    0.000     ABSO  No active process
+#   1    -3.872   -0.214    0.311     0.0000    0.0299    0.298    0.298     ABSO  Photoelectric effect
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 7     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -4.148   -0.316    0.391     0.5096    0.0000    0.000    0.000     ABSO  No active process
+#   1    -3.500   -0.161    0.169     0.5096    0.0000    0.702    0.702     ABSO  Transportation
+#   2    -3.500   -0.161    0.169     0.5096    0.0000    0.000    0.702     GAPX  Transportation
+#   3    -3.000   -0.041   -0.002     0.5096    0.0000    0.542    1.244     GAPX  Transportation
+#   4    -3.000   -0.041   -0.002     0.5096    0.0000    0.000    1.244     ABSO  Transportation
+#   5    -2.000    0.199   -0.343     0.5096    0.0000    1.084    2.328     ABSO  Transportation
+#   6    -2.000    0.199   -0.343     0.5096    0.0000    0.000    2.328     GAPX  Transportation
+#   7    -1.500    0.319   -0.514     0.5096    0.0000    0.542    2.870     GAPX  Transportation
+#   8    -1.500    0.319   -0.514     0.5096    0.0000    0.000    2.870     ABSO  Transportation
+#   9    -0.500    0.559   -0.856     0.5096    0.0000    1.084    3.954     ABSO  Transportation
+#  10    -0.500    0.559   -0.856     0.5096    0.0000    0.000    3.954     GAPX  Transportation
+#  11     0.000    0.679   -1.027     0.5096    0.0000    0.542    4.495     GAPX  Transportation
+#  12     0.000    0.679   -1.027     0.5096    0.0000    0.000    4.495     ABSO  Transportation
+#  13     0.421    0.780   -1.170     0.4903    0.0193    0.456    4.952     ABSO  Compton scattering
+#  14     1.000    1.060   -1.255     0.4903    0.0000    0.649    5.600     ABSO  Transportation
+#  15     1.000    1.060   -1.255     0.4903    0.0000    0.000    5.600     GAPX  Transportation
+#  16     1.500    1.302   -1.329     0.4903    0.0000    0.560    6.160     GAPX  Transportation
+#  17     1.500    1.302   -1.329     0.4903    0.0000    0.000    6.160     ABSO  Transportation
+#  18     2.500    1.786   -1.475     0.4903    0.0000    1.120    7.281     ABSO  Transportation
+#  19     2.500    1.786   -1.475     0.4903    0.0000    0.000    7.281     GAPX  Transportation
+#  20     3.000    2.027   -1.548     0.4903    0.0000    0.560    7.841     GAPX  Transportation
+#  21     3.000    2.027   -1.548     0.4903    0.0000    0.000    7.841     ABSO  Transportation
+#  22     4.000    2.511   -1.695     0.4903    0.0000    1.120    8.961     ABSO  Transportation
+#  23     4.000    2.511   -1.695     0.4903    0.0000    0.000    8.961     GAPX  Transportation
+#  24     4.500    2.753   -1.768     0.4903    0.0000    0.560    9.522     GAPX  Transportation
+#  25     4.500    2.753   -1.768     0.4903    0.0000    0.000    9.522     ABSO  Transportation
+#  26     5.355    3.166   -1.893     0.1770    0.3133    0.958   10.480     ABSO  Compton scattering
+#  27     5.238    3.049   -1.950     0.1216    0.0554    0.175   10.655     ABSO  Compton scattering
+#  28     4.686    5.000   -2.723     0.1216    0.0000    2.170   12.825     ABSO  Transportation
+#  29     4.686    5.000   -2.723     0.1216    0.0000    0.000   12.825     WRLD  Transportation
+#  30     4.649    5.129   -2.774     0.1018    0.0199    0.144   12.969     WRLD  Compton scattering
+#  31     4.572    5.000   -3.343     0.1018    0.0000    0.589   13.557     WRLD  Transportation
+#  32     4.572    5.000   -3.343     0.1018    0.0000    0.000   13.557     ABSO  Transportation
+#  33     4.500    4.878   -3.877     0.1018    0.0000    0.553   14.110     ABSO  Transportation
+#  34     4.500    4.878   -3.877     0.1018    0.0000    0.000   14.110     GAPX  Transportation
+#  35     4.349    4.623   -5.000     0.1018    0.0000    1.161   15.271     GAPX  Transportation
+#  36     4.349    4.623   -5.000     0.1018    0.0000    0.000   15.271     WRLD  Transportation
+#  37     4.301    4.544   -5.350     0.0863    0.0155    0.362   15.633     WRLD  Compton scattering
+#  38     4.669    5.699   -5.797     0.0651    0.0212    1.292   16.925     WRLD  Compton scattering
+#  39     4.445    4.897   -5.065     0.0640    0.0011    1.108   18.034     WRLD  Compton scattering
+#  40     4.441    4.645   -5.000     0.0640    0.0000    0.260   18.294     WRLD  Transportation
+#  41     4.441    4.645   -5.000     0.0640    0.0000    0.000   18.294     GAPX  Transportation
+#  42     4.432    4.136   -4.868     0.0000    0.0640    0.526   18.819     GAPX  Photoelectric effect
+
+****************************************************************************************************
+  Particle = e-     Track ID = 8     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -4.958   -0.324    0.443     0.8569    0.0000    0.000    0.000     GAPX  No active process
+#   1    -4.952   -0.319    0.440     0.8250    0.0319    0.008    0.008     GAPX  Multiple scattering
+#   2    -4.947   -0.315    0.437     0.8036    0.0214    0.008    0.017     GAPX  Multiple scattering
+#   3    -4.941   -0.310    0.433     0.7792    0.0245    0.008    0.025     GAPX  Multiple scattering
+#   4    -4.936   -0.305    0.430     0.7443    0.0349    0.008    0.033     GAPX  Multiple scattering
+#   5    -4.934   -0.298    0.427     0.7175    0.0268    0.008    0.042     GAPX  Multiple scattering
+#   6    -4.931   -0.293    0.421     0.6879    0.0296    0.008    0.050     GAPX  Multiple scattering
+#   7    -4.929   -0.289    0.414     0.6628    0.0251    0.008    0.059     GAPX  Multiple scattering
+#   8    -4.927   -0.285    0.408     0.6379    0.0249    0.008    0.067     GAPX  Multiple scattering
+#   9    -4.922   -0.284    0.401     0.5826    0.0553    0.008    0.075     GAPX  Multiple scattering
+#  10    -4.919   -0.285    0.394     0.5495    0.0331    0.008    0.084     GAPX  Multiple scattering
+#  11    -4.913   -0.289    0.390     0.4386    0.1109    0.008    0.092     GAPX  Multiple scattering
+#  12    -4.909   -0.293    0.384     0.4023    0.0363    0.008    0.100     GAPX  Multiple scattering
+#  13    -4.906   -0.298    0.380     0.3637    0.0386    0.008    0.109     GAPX  Multiple scattering
+#  14    -4.904   -0.301    0.373     0.3318    0.0319    0.008    0.117     GAPX  Multiple scattering
+#  15    -4.904   -0.302    0.365     0.2979    0.0340    0.008    0.125     GAPX  Multiple scattering
+#  16    -4.889   -0.304    0.350    -0.0000    0.2979    0.040    0.165     GAPX  Energy loss
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 9     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -5.017   -0.314    0.436     2.8478    0.0000    0.000    0.000     ABSO  No active process
+#   1    -5.000   -0.315    0.439     2.8478    0.0000    0.017    0.017     ABSO  Transportation
+#   2    -5.000   -0.315    0.439     2.8478    0.0000    0.000    0.017     GAPX  Transportation
+#   3    -4.500   -0.365    0.533     2.8478    0.0000    0.511    0.528     GAPX  Transportation
+#   4    -4.500   -0.365    0.533     2.8478    0.0000    0.000    0.528     ABSO  Transportation
+#   5    -3.500   -0.463    0.722     2.8478    0.0000    1.022    1.551     ABSO  Transportation
+#   6    -3.500   -0.463    0.722     2.8478    0.0000    0.000    1.551     GAPX  Transportation
+#   7    -3.000   -0.512    0.816     2.8478    0.0000    0.511    2.062     GAPX  Transportation
+#   8    -3.000   -0.512    0.816     2.8478    0.0000    0.000    2.062     ABSO  Transportation
+#   9    -2.000   -0.610    1.005     2.8478    0.0000    1.022    3.084     ABSO  Transportation
+#  10    -2.000   -0.610    1.005     2.8478    0.0000    0.000    3.084     GAPX  Transportation
+#  11    -1.500   -0.660    1.099     2.8478    0.0000    0.511    3.595     GAPX  Transportation
+#  12    -1.500   -0.660    1.099     2.8478    0.0000    0.000    3.595     ABSO  Transportation
+#  13    -0.500   -0.758    1.287     2.8478    0.0000    1.022    4.618     ABSO  Transportation
+#  14    -0.500   -0.758    1.287     2.8478    0.0000    0.000    4.618     GAPX  Transportation
+#  15     0.000   -0.807    1.382     2.8478    0.0000    0.511    5.129     GAPX  Transportation
+#  16     0.000   -0.807    1.382     2.8478    0.0000    0.000    5.129     ABSO  Transportation
+#  17     1.000   -0.906    1.570     2.8478    0.0000    1.022    6.151     ABSO  Transportation
+#  18     1.000   -0.906    1.570     2.8478    0.0000    0.000    6.151     GAPX  Transportation
+#  19     1.500   -0.955    1.665     2.8478    0.0000    0.511    6.663     GAPX  Transportation
+#  20     1.500   -0.955    1.665     2.8478    0.0000    0.000    6.663     ABSO  Transportation
+#  21     1.697   -0.974    1.702     1.4947    0.0000    0.202    6.864     ABSO  Compton scattering
+#  22     2.500   -0.604    2.161     1.4947    0.0000    0.996    7.860     ABSO  Transportation
+#  23     2.500   -0.604    2.161     1.4947    0.0000    0.000    7.860     GAPX  Transportation
+#  24     3.000   -0.374    2.447     1.4947    0.0000    0.620    8.481     GAPX  Transportation
+#  25     3.000   -0.374    2.447     1.4947    0.0000    0.000    8.481     ABSO  Transportation
+#  26     4.000    0.087    3.019     1.4947    0.0000    1.241    9.722     ABSO  Transportation
+#  27     4.000    0.087    3.019     1.4947    0.0000    0.000    9.722     GAPX  Transportation
+#  28     4.500    0.317    3.305     1.4947    0.0000    0.620   10.342     GAPX  Transportation
+#  29     4.500    0.317    3.305     1.4947    0.0000    0.000   10.342     ABSO  Transportation
+#  30     5.500    0.778    3.878     1.4947    0.0000    1.241   11.583     ABSO  Transportation
+#  31     5.500    0.778    3.878     1.4947    0.0000    0.000   11.583     GAPX  Transportation
+#  32     6.000    1.009    4.164     1.4947    0.0000    0.620   12.203     GAPX  Transportation
+#  33     6.000    1.009    4.164     1.4947    0.0000    0.000   12.203     ABSO  Transportation
+#  34     6.657    1.311    4.540     0.4159    0.0000    0.815   13.018     ABSO  Compton scattering
+#  35     6.577    1.072    5.000     0.4159    0.0000    0.525   13.543     ABSO  Transportation
+#  36     6.577    1.072    5.000     0.4159    0.0000    0.000   13.543     WRLD  Transportation
+#  37     6.404    0.553    6.000     0.4159    0.0000    1.140   14.683     WRLD  Transportation
+
+****************************************************************************************************
+  Particle = e-     Track ID = 10     Parent ID = 9
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0     6.657    1.311    4.540     1.0788    0.0000    0.000    0.000     ABSO  No active process
+#   1     6.744    1.435    4.616     0.3895    0.6893    0.170    0.170     ABSO  Energy loss
+#   2     6.737    1.427    4.617    -0.0000    0.3895    0.059    0.229     ABSO  Energy loss
+
+****************************************************************************************************
+  Particle = e-     Track ID = 11     Parent ID = 9
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0     1.697   -0.974    1.702     1.3530    0.0000    0.000    0.000     ABSO  No active process
+#   1     1.732   -0.983    1.690     1.2432    0.1098    0.039    0.039     ABSO  Multiple scattering
+#   2     1.761   -1.002    1.701     1.1290    0.1142    0.039    0.079     ABSO  Multiple scattering
+#   3     1.753   -1.027    1.730     1.0036    0.1254    0.039    0.118     ABSO  Multiple scattering
+#   4     1.752   -1.054    1.739     0.8673    0.1364    0.039    0.158     ABSO  Multiple scattering
+#   5     1.717   -1.065    1.749     0.6909    0.1763    0.039    0.197     ABSO  Multiple scattering
+#   6     1.679   -1.069    1.749     0.5574    0.1336    0.039    0.237     ABSO  Multiple scattering
+#   7     1.650   -1.071    1.724     0.3299    0.2275    0.039    0.276     ABSO  Multiple scattering
+#   8     1.631   -1.063    1.721     0.0849    0.2450    0.039    0.316     ABSO  Multiple scattering
+#   9     1.631   -1.061    1.720    -0.0000    0.0849    0.005    0.321     ABSO  Energy loss
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 12     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -5.893   -0.167    0.291     0.0595    0.0000    0.000    0.000     ABSO  No active process
+#   1    -5.000   -0.282    0.435     0.0595    0.0000    0.911    0.911     ABSO  Transportation
+#   2    -5.000   -0.282    0.435     0.0595    0.0000    0.000    0.911     GAPX  Transportation
+#   3    -4.500   -0.347    0.515     0.0595    0.0000    0.510    1.422     GAPX  Transportation
+#   4    -4.500   -0.347    0.515     0.0595    0.0000    0.000    1.422     ABSO  Transportation
+#   5    -4.451   -0.353    0.523     0.0533    0.0062    0.051    1.472     ABSO  Compton scattering
+#   6    -4.500   -0.659    0.584     0.0533    0.0000    0.316    1.789     ABSO  Transportation
+#   7    -4.500   -0.659    0.584     0.0533    0.0000    0.000    1.789     GAPX  Transportation
+#   8    -4.544   -0.929    0.638     0.0452    0.0081    0.278    2.067     GAPX  Compton scattering
+#   9    -4.584   -0.500    0.053     0.0000    0.0452    0.727    2.793     GAPX  Photoelectric effect
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 13     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.034   -0.135    0.265     3.7336    0.0000    0.000    0.000     GAPX  No active process
+#   1    -6.000   -0.143    0.273     3.7336    0.0000    0.037    0.037     GAPX  Transportation
+#   2    -6.000   -0.143    0.273     3.7336    0.0000    0.000    0.037     ABSO  Transportation
+#   3    -5.000   -0.390    0.526     3.7336    0.0000    1.060    1.097     ABSO  Transportation
+#   4    -5.000   -0.390    0.526     3.7336    0.0000    0.000    1.097     GAPX  Transportation
+#   5    -4.824   -0.433    0.570     2.7681    0.0000    0.186    1.283     GAPX  Compton scattering
+#   6    -4.500   -0.608    0.744     2.7681    0.0000    0.407    1.691     GAPX  Transportation
+#   7    -4.500   -0.608    0.744     2.7681    0.0000    0.000    1.691     ABSO  Transportation
+#   8    -3.500   -1.146    1.279     2.7681    0.0000    1.256    2.946     ABSO  Transportation
+#   9    -3.500   -1.146    1.279     2.7681    0.0000    0.000    2.946     GAPX  Transportation
+#  10    -3.000   -1.416    1.547     2.7681    0.0000    0.628    3.574     GAPX  Transportation
+#  11    -3.000   -1.416    1.547     2.7681    0.0000    0.000    3.574     ABSO  Transportation
+#  12    -2.000   -1.954    2.082     2.7681    0.0000    1.256    4.830     ABSO  Transportation
+#  13    -2.000   -1.954    2.082     2.7681    0.0000    0.000    4.830     GAPX  Transportation
+#  14    -1.500   -2.224    2.350     2.7681    0.0000    0.628    5.458     GAPX  Transportation
+#  15    -1.500   -2.224    2.350     2.7681    0.0000    0.000    5.458     ABSO  Transportation
+#  16    -0.500   -2.763    2.885     2.7681    0.0000    1.256    6.713     ABSO  Transportation
+#  17    -0.500   -2.763    2.885     2.7681    0.0000    0.000    6.713     GAPX  Transportation
+#  18     0.000   -3.032    3.153     2.7681    0.0000    0.628    7.341     GAPX  Transportation
+#  19     0.000   -3.032    3.153     2.7681    0.0000    0.000    7.341     ABSO  Transportation
+#  20     0.676   -3.396    3.515     0.7881    0.0000    0.849    8.191     ABSO  Compton scattering
+#  21     1.000   -3.120    4.160     0.7881    0.0000    0.773    8.964     ABSO  Transportation
+#  22     1.000   -3.120    4.160     0.7881    0.0000    0.000    8.964     GAPX  Transportation
+#  23     1.295   -2.869    4.748     0.6145    0.1736    0.704    9.667     GAPX  Compton scattering
+#  24     1.267   -2.843    5.000     0.6145    0.0000    0.255    9.922     GAPX  Transportation
+#  25     1.267   -2.843    5.000     0.6145    0.0000    0.000    9.922     WRLD  Transportation
+#  26     1.156   -2.738    6.000     0.6145    0.0000    1.012   10.934     WRLD  Transportation
+
+****************************************************************************************************
+  Particle = e-     Track ID = 14     Parent ID = 13
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0     0.676   -3.396    3.515     1.9800    0.0000    0.000    0.000     ABSO  No active process
+#   1     0.720   -3.434    3.545     1.7871    0.1929    0.065    0.065     ABSO  Multiple scattering
+#   2     0.764   -3.478    3.562     1.5604    0.2267    0.065    0.129     ABSO  Multiple scattering
+#   3     0.758   -3.530    3.536     1.3255    0.2349    0.065    0.194     ABSO  Multiple scattering
+#   4     0.776   -3.580    3.516     1.0742    0.2513    0.065    0.259     ABSO  Multiple scattering
+#   5     0.792   -3.629    3.490     0.8125    0.2617    0.065    0.324     ABSO  Multiple scattering
+#   6     0.799   -3.693    3.483     0.5003    0.3122    0.065    0.388     ABSO  Multiple scattering
+#   7     0.757   -3.702    3.464    -0.0000    0.5003    0.084    0.472     ABSO  Energy loss
+
+****************************************************************************************************
+  Particle = e-     Track ID = 15     Parent ID = 13
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -4.824   -0.433    0.570     0.9655    0.0000    0.000    0.000     GAPX  No active process
+#   1    -4.795   -0.419    0.558     0.8544    0.1111    0.035    0.035     GAPX  Multiple scattering
+#   2    -4.768   -0.405    0.543     0.7367    0.1177    0.035    0.070     GAPX  Multiple scattering
+#   3    -4.781   -0.403    0.514     0.5430    0.1937    0.035    0.105     GAPX  Multiple scattering
+#   4    -4.755   -0.416    0.523     0.4117    0.1314    0.035    0.141     GAPX  Multiple scattering
+#   5    -4.730   -0.416    0.526     0.2554    0.1563    0.035    0.176     GAPX  Multiple scattering
+#   6    -4.734   -0.420    0.542    -0.0000    0.2554    0.031    0.207     GAPX  Energy loss
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 16     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.391   -0.087    0.176     0.1478    0.0000    0.000    0.000     GAPX  No active process
+#   1    -6.000   -0.124    0.264     0.1478    0.0000    0.403    0.403     GAPX  Transportation
+#   2    -6.000   -0.124    0.264     0.1478    0.0000    0.000    0.403     ABSO  Transportation
+#   3    -5.000   -0.219    0.489     0.1478    0.0000    1.029    1.432     ABSO  Transportation
+#   4    -5.000   -0.219    0.489     0.1478    0.0000    0.000    1.432     GAPX  Transportation
+#   5    -4.500   -0.267    0.601     0.1478    0.0000    0.515    1.947     GAPX  Transportation
+#   6    -4.500   -0.267    0.601     0.1478    0.0000    0.000    1.947     ABSO  Transportation
+#   7    -3.500   -0.362    0.826     0.1478    0.0000    1.029    2.976     ABSO  Transportation
+#   8    -3.500   -0.362    0.826     0.1478    0.0000    0.000    2.976     GAPX  Transportation
+#   9    -3.000   -0.409    0.938     0.1478    0.0000    0.515    3.491     GAPX  Transportation
+#  10    -3.000   -0.409    0.938     0.1478    0.0000    0.000    3.491     ABSO  Transportation
+#  11    -2.713   -0.437    1.003     0.1138    0.0340    0.296    3.786     ABSO  Compton scattering
+#  12    -2.856   -0.349    1.590     0.1047    0.0091    0.611    4.397     ABSO  Compton scattering
+#  13    -2.000    0.178    2.645     0.1047    0.0000    1.458    5.855     ABSO  Transportation
+#  14    -2.000    0.178    2.645     0.1047    0.0000    0.000    5.855     GAPX  Transportation
+#  15    -1.533    0.465    3.220     0.0746    0.0301    0.794    6.649     GAPX  Compton scattering
+#  16    -2.000    0.129    2.864     0.0746    0.0000    0.677    7.326     GAPX  Transportation
+#  17    -2.000    0.129    2.864     0.0746    0.0000    0.000    7.326     ABSO  Transportation
+#  18    -3.000   -0.591    2.099     0.0746    0.0000    1.450    8.776     ABSO  Transportation
+#  19    -3.000   -0.591    2.099     0.0746    0.0000    0.000    8.776     GAPX  Transportation
+#  20    -3.197   -0.733    1.949     0.0704    0.0042    0.286    9.062     GAPX  Compton scattering
+#  21    -3.000   -1.418    1.067     0.0704    0.0000    1.134   10.195     GAPX  Transportation
+#  22    -3.000   -1.418    1.067     0.0704    0.0000    0.000   10.195     ABSO  Transportation
+#  23    -2.457   -3.310   -1.367     0.0677    0.0027    3.130   13.325     ABSO  Compton scattering
+#  24    -2.000   -3.666   -1.539     0.0677    0.0000    0.604   13.929     ABSO  Transportation
+#  25    -2.000   -3.666   -1.539     0.0677    0.0000    0.000   13.929     GAPX  Transportation
+#  26    -1.500   -4.056   -1.728     0.0677    0.0000    0.662   14.591     GAPX  Transportation
+#  27    -1.500   -4.056   -1.728     0.0677    0.0000    0.000   14.591     ABSO  Transportation
+#  28    -0.500   -4.836   -2.105     0.0677    0.0000    1.323   15.914     ABSO  Transportation
+#  29    -0.500   -4.836   -2.105     0.0677    0.0000    0.000   15.914     GAPX  Transportation
+#  30    -0.290   -5.000   -2.185     0.0677    0.0000    0.278   16.193     GAPX  Transportation
+#  31    -0.290   -5.000   -2.185     0.0677    0.0000    0.000   16.193     WRLD  Transportation
+#  32     0.182   -5.368   -2.363     0.0608    0.0069    0.624   16.817     WRLD  Compton scattering
+#  33    -0.556   -5.741   -4.852     0.0569    0.0039    2.622   19.439     WRLD  Compton scattering
+#  34    -1.319   -5.138   -5.166     0.0000    0.0569    1.023   20.462     WRLD  Photoelectric effect
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 17     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.692   -0.062    0.100     0.2333    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500   -0.076    0.136     0.2333    0.0000    0.196    0.196     ABSO  Transportation
+#   2    -6.500   -0.076    0.136     0.2333    0.0000    0.000    0.196     GAPX  Transportation
+#   3    -6.204   -0.099    0.193     0.1277    0.1056    0.302    0.498     GAPX  Compton scattering
+#   4    -6.500   -0.194    0.290     0.1277    0.0000    0.325    0.823     GAPX  Transportation
+#   5    -6.500   -0.194    0.290     0.1277    0.0000    0.000    0.823     ABSO  Transportation
+#   6    -7.500   -0.515    0.618     0.1277    0.0000    1.100    1.924     ABSO  Transportation
+#   7    -7.500   -0.515    0.618     0.1277    0.0000    0.000    1.924     WRLD  Transportation
+#   8    -9.000   -0.997    1.111     0.1277    0.0000    1.651    3.574     WRLD  Transportation
+
+****************************************************************************************************
+  Particle = e-     Track ID = 18     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -7.054   -0.035    0.039     1.7901    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.890   -0.156    0.082     0.7221    1.0680    0.222    0.222     ABSO  Energy loss
+#   2    -6.870   -0.202    0.115     0.0188    0.7034    0.129    0.351     ABSO  Energy loss
+#   3    -6.870   -0.202    0.115    -0.0000    0.0188    0.000    0.352     ABSO  Energy loss
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 19     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -7.319   -0.016    0.005     0.0098    0.0000    0.000    0.000     ABSO  No active process
+#   1    -7.301   -0.017    0.008     0.0000    0.0098    0.018    0.018     ABSO  Photoelectric effect
+--- Finish event 
+   Absorber: total energy (MeV):  32.929       total track length (cm):    8.227
+   Gap:      total energy (MeV):   8.973       total track length (cm):    2.031
+Time of this run:   User=0.02s Real=0.02s Sys=0s
+Number of events processed: 1
+--- Finish Run MC 

@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: Ex06MCApplication.cxx,v 1.1 2005/05/17 13:52:01 brun Exp $
 //
 // Geant4 ExampleN06 adapted to Virtual Monte Carlo 
 //
@@ -18,6 +18,7 @@
 #include "Ex06MCApplication.h"
 #include "Ex03MCStack.h"
 #include "Ex06DetectorConstruction.h"
+#include "Ex06DetectorConstructionOld.h"
 #include "Ex06PrimaryGenerator.h"
 
 ClassImp(Ex06MCApplication)
@@ -31,7 +32,8 @@ Ex06MCApplication::Ex06MCApplication(const char *name, const char *title)
     fStack(0),
     fDetConstruction(0),
     fPrimaryGenerator(0),
-    fCanvas(0)
+    fCanvas(0),
+    fOldGeometry(kFALSE)
 {
 // Standard constructor
 // ---
@@ -55,7 +57,8 @@ Ex06MCApplication::Ex06MCApplication()
     fStack(0),
     fDetConstruction(0),
     fPrimaryGenerator(0),
-    fCanvas(0)
+    fCanvas(0),
+    fOldGeometry(kFALSE)
 {    
 // Default constructor
 // ---
@@ -115,7 +118,25 @@ void Ex06MCApplication::ConstructGeometry()
 
   fVerbose.ConstructGeometry();
 
-  fDetConstruction->ConstructGeometry();  
+  // Cannot use Root geometry if not supported with 
+  // selected MC
+  if ( !fOldGeometry && ! gMC->IsRootGeometrySupported() ) {
+    cerr << "Selected MC does not support TGeo geometry"<< endl;
+    cerr << "Exiting program"<< endl;
+    exit(1);
+  } 
+
+  if ( ! fOldGeometry ) {
+    cout << "Geometry will be defined via TGeo" << endl;
+    fDetConstruction->ConstructMaterials();  
+    fDetConstruction->ConstructGeometry();  
+  }
+  else {
+    cout << "Geometry will be defined via VMC" << endl;
+    Ex06DetectorConstructionOld detConstructionOld;
+    detConstructionOld.ConstructMaterials(); 
+    detConstructionOld.ConstructGeometry();
+  }    
 }
 
 //_____________________________________________________________________________
@@ -239,7 +260,7 @@ void Ex06MCApplication::FinishEvent()
 } 
 
 //_____________________________________________________________________________
-void Ex06MCApplication::Field(const Double_t* x, Double_t* b) const
+void Ex06MCApplication::Field(const Double_t* /*x*/, Double_t* b) const
 {
 // Uniform magnetic field
 // ---

@@ -1,4 +1,4 @@
-// $Id: example02LinkDef.h,v 1.1 2002/06/20 11:52:35 hristov Exp $
+// $Id: example02LinkDef.h,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
 
 #ifdef __CINT__
 
@@ -11,6 +11,7 @@
 #pragma link C++ class  Ex02Particle+;
 #pragma link C++ class  Ex02ChamberParameterisation+;
 #pragma link C++ class  Ex02DetectorConstruction+;
+#pragma link C++ class  Ex02DetectorConstructionOld+;
 #pragma link C++ class  Ex02TrackerHit+;
 #pragma link C++ class  Ex02TrackerSD+;
 #pragma link C++ class  Ex02RootManager+;

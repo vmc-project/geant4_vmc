@@ -1,4 +1,4 @@
-// $Id: Ex01MCApplication.h,v 1.3 2003/09/27 09:32:47 brun Exp $
+// $Id: Ex01MCApplication.h,v 1.4 2005/11/18 21:34:44 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -28,7 +28,6 @@ class Ex01MCApplication : public TVirtualMCApplication
     void InitMC(const char *setup);
     void RunMC(Int_t nofEvents);
     void FinishRun();
-    void TestVMCGeometryGetters();
  
     virtual void ConstructGeometry();
     virtual void InitGeometry();
@@ -42,11 +41,13 @@ class Ex01MCApplication : public TVirtualMCApplication
     virtual void FinishEvent();
     virtual void Field(const Double_t* x, Double_t* b) const;
 
+    // methods for tests
+    void SetOldGeometry(Bool_t oldGeometry = kTRUE);
+    void TestVMCGeometryGetters();
+
   private:
     // methods
-    void ConstructMaterialsOld();
     void ConstructMaterials();
-    void ConstructVolumesOld();
     void ConstructVolumes();
   
     // data members
@@ -54,6 +55,7 @@ class Ex01MCApplication : public TVirtualMCApplication
     Int_t  fImedAr;
     Int_t  fImedAl;
     Int_t  fImedPb;
+    Bool_t fOldGeometry;
 
   ClassDef(Ex01MCApplication,1)  //Interface to MonteCarlo application
 };
@@ -62,6 +64,9 @@ class Ex01MCApplication : public TVirtualMCApplication
 
 inline Ex01MCApplication* Ex01MCApplication::Instance()
 { return (Ex01MCApplication*)(TVirtualMCApplication::Instance()); }
+
+inline void Ex01MCApplication::SetOldGeometry(Bool_t oldGeometry)
+{ fOldGeometry = oldGeometry; }
 
 #endif //EX01_MC_APPLICATION_H
 

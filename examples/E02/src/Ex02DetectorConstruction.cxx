@@ -1,4 +1,4 @@
-// $Id: Ex02DetectorConstruction.cxx,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+// $Id: Ex02DetectorConstruction.cxx,v 1.2 2002/12/03 15:04:17 brun Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -10,6 +10,7 @@
 #include <iostream>
 
 #include <TVirtualMC.h>
+#include <TGeoManager.h>
 
 #include "Ex02DetectorConstruction.h"
 #include "Ex02ChamberParameterisation.h"
@@ -32,6 +33,16 @@ Ex02DetectorConstruction::Ex02DetectorConstruction()
     fImedXe(0)
 {
   //fpMagField = new ExN02MagneticField();
+
+//--------- Sizes of the principal geometrical components (solids)  ---------
+  
+  fNofChambers = 5;
+  fChamberWidth =   20;
+  fChamberSpacing = 80;
+  
+  fTrackerLength = (fNofChambers+1)*fChamberSpacing; // Full length of Tracker
+  fTargetLength  = 5.0;                              // Full length of Target
+  fWorldLength= 1.2 *(fTargetLength+fTrackerLength);
 }
 
 //_____________________________________________________________________________
@@ -45,19 +56,21 @@ void Ex02DetectorConstruction::ConstructMaterials()
 {
 //--------- Material definition ---------
 
+  // Create Root geometry manager 
+  new TGeoManager("TGeo", "Root geometry manager");
+   
   Double_t a;
   Double_t z;
   Double_t density;
   Double_t radl;
   Double_t absl;
-  Float_t* ubuf = 0;
  
   Double_t a2[2] = { 14.01, 16.00};
   Double_t z2[2] = {  7.0,   8.0};
   Double_t w2[2] = {  0.7,   0.3};
   density = 1.29e-03;  
   Int_t imatAir = 1;
-  gMC->Mixture(imatAir, "Air", a2, z2, density, 2, w2); 
+  gGeoManager->Mixture("Air", a2, z2, density, 2, w2, imatAir); 
 
   a = 207.19;
   z = 82.;
@@ -65,7 +78,7 @@ void Ex02DetectorConstruction::ConstructMaterials()
   radl = 0.5612;
   absl = 0.1;
   Int_t imatPb = 2;  
-  gMC->Material(imatPb, "Lead", a, z, density, radl, absl, ubuf, 0);  
+  gGeoManager->Material("Lead", a, z, density, imatPb, radl, absl);  
 
   a = 131.29;
   z = 54.;
@@ -75,7 +88,7 @@ void Ex02DetectorConstruction::ConstructMaterials()
   radl =  1553.9; 
   absl = 0.1;
   Int_t imatXe = 3;
-  gMC->Material(imatXe, "XenonGas", a, z, density, radl, absl, ubuf, 0);
+  gGeoManager->Material("XenonGas", a, z, density, imatXe, radl, absl);
   
   //
   // Tracking medias
@@ -89,16 +102,14 @@ void Ex02DetectorConstruction::ConstructMaterials()
   Double_t deemax = -.3;     // Maximum fractional energy loss, DLS 
   Double_t stmin  = -.8;
   fImedAir = 1;
+  gGeoManager->Medium("Air", fImedAir, imatAir, 0, ifield, fieldm, tmaxfd, 
+                      stemax, deemax, epsil, stmin); 
   fImedPb = 2;
+  gGeoManager->Medium("Lead", fImedPb, imatPb, 0, ifield, fieldm, tmaxfd, 
+                      stemax, deemax, epsil, stmin); 
   fImedXe = 3;
-  gMC->Medium(fImedAir, "Air",  imatAir, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0); 
-  gMC->Medium(fImedPb, "Lead", imatPb, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0); 
-  gMC->Medium(fImedXe, "XenonGas", imatXe, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0); 
-
-  // Print all the materials defined.
-  //
-  //  G4cout << G4endl << "The materials defined are : " << G4endl << G4endl;
-  //  G4cout << *(G4Material::GetMaterialTable()) << G4endl;
+  gGeoManager->Medium("XenonGas", fImedXe, imatXe, 0, ifield, fieldm, tmaxfd,
+                      stemax, deemax, epsil, stmin); 
 }    
 
 //_____________________________________________________________________________
@@ -106,21 +117,14 @@ void Ex02DetectorConstruction::ConstructGeometry()
 {
 //--------- Sizes of the principal geometrical components (solids)  ---------
   
-  fNofChambers = 5;
-  fChamberWidth =   20;
-  fChamberSpacing = 80;
-  
-  fTrackerLength = (fNofChambers+1)*fChamberSpacing; // Full length of Tracker
-  fTargetLength  = 5.0;                              // Full length of Target
-  
   Int_t targetMater  = fImedPb;
   Int_t chamberMater = fImedXe;
-  
-  fWorldLength= 1.2 *(fTargetLength+fTrackerLength);
    
   Double_t targetSize  = 0.5*fTargetLength;    // Half length of the Target  
   Double_t trackerSize = 0.5*fTrackerLength;   // Half length of the Tracker
       
+  Double_t* ubuf = 0;
+
 //--------- Definitions of Solids, Logical Volumes, Physical Volumes ---------
   
   //------------------------------ 
@@ -133,7 +137,8 @@ void Ex02DetectorConstruction::ConstructGeometry()
   world[0] = halfWorldLength;
   world[1] = halfWorldLength;
   world[2] = halfWorldLength;
-  gMC->Gsvolu("WRLD", "BOX", fImedAir, world, 3);
+  TGeoVolume *top = gGeoManager->Volume("WRLD","BOX", fImedAir, world, 3);
+  gGeoManager->SetTopVolume(top);
 
   //------------------------------ 
   // Target
@@ -143,12 +148,12 @@ void Ex02DetectorConstruction::ConstructGeometry()
   target[0] = targetSize;
   target[1] = targetSize;
   target[2] = targetSize;
-  gMC->Gsvolu("TARG", "BOX", targetMater, target, 3);
+  gGeoManager->Volume("TARG", "BOX", targetMater, target, 3);
 
   Double_t posX =  0.;
   Double_t posY =  0.;
   Double_t posZ =  -(targetSize+trackerSize);
-  gMC->Gspos("TARG", 1 ,"WRLD", posX, posY, posZ, 0, "ONLY");
+  gGeoManager->Node("TARG", 1 ,"WRLD", posX, posY, posZ, 0, kTRUE, ubuf);
 
   cout << "Target is " << fTargetLength << " cm" 
        //<< " of " << TargetMater->GetName() 
@@ -163,12 +168,12 @@ void Ex02DetectorConstruction::ConstructGeometry()
   tracker[0] = trackerSize;
   tracker[1] = trackerSize;
   tracker[2] = trackerSize;
-  gMC->Gsvolu("TRAK", "BOX", fImedAir, tracker, 3);
+  gGeoManager->Volume("TRAK", "BOX", fImedAir, tracker, 3);
 
   posX = 0.;
   posY = 0.;
   posZ = 0.;
-  gMC->Gspos("TRAK", 1 ,"WRLD", posX, posY, posZ, 0, "ONLY");
+  gGeoManager->Node("TRAK", 1 ,"WRLD", posX, posY, posZ, 0, kTRUE, ubuf);
  
   //------------------------------ 
   // Tracker segments
@@ -182,7 +187,7 @@ void Ex02DetectorConstruction::ConstructGeometry()
   chamber[0] = -1;
   chamber[1] = -1;
   chamber[2] = -1;
-  gMC->Gsvolu("CHMB","BOX", chamberMater, chamber, 0);
+  gGeoManager->Volume("CHMB","BOX", chamberMater, chamber, 0);
 
   Double_t firstPosition = -trackerSize + 0.5*fChamberWidth;
   Double_t firstLength = fTrackerLength/10;
@@ -200,7 +205,8 @@ void Ex02DetectorConstruction::ConstructGeometry()
     Double_t dim[3];
     chamberParam->ComputeTransformation(i, pos);
     chamberParam->ComputeDimensions(i, dim);
-    gMC->Gsposp("CHMB", i ,"TRAK", pos[0], pos[1], pos[2], 0, "ONLY", dim, 3); 
+    gGeoManager->Node("CHMB", i ,"TRAK", pos[0], pos[1], pos[2], 0, 
+                      kTRUE, dim, 3); 
   }  
 
   cout << "There are " << fNofChambers 
@@ -212,6 +218,13 @@ void Ex02DetectorConstruction::ConstructGeometry()
        << fChamberSpacing << " cm" 
        << endl;
 	 
+
+  // close geometry
+  gGeoManager->CloseGeometry();
+    
+  // notify VMC about Root geometry
+  gMC->SetRootGeometry();
+
   //------------------------------------------------ 
   // Sensitive detectors
   //------------------------------------------------ 
@@ -249,13 +262,13 @@ void Ex02DetectorConstruction::ConstructGeometry()
 }
 
 //_____________________________________________________________________________
-void Ex02DetectorConstruction::SetTargetMaterial(const TString& materialName)
+void Ex02DetectorConstruction::SetTargetMaterial(const TString& /*materialName*/)
 {
   Warning("SetTargetMaterial", "Not available in virtual Monte Carlo");
 }
  
 //_____________________________________________________________________________
-void Ex02DetectorConstruction::SetChamberMaterial(const TString& materialName)
+void Ex02DetectorConstruction::SetChamberMaterial(const TString& /*materialName*/)
 {
   Warning("SetTargetMaterial", "Not available in virtual Monte Carlo");
 }

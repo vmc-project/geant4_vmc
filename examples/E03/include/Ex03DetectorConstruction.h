@@ -1,4 +1,4 @@
-// $Id: Ex03DetectorConstruction.h,v 1.1 2003/03/17 14:56:51 brun Exp $
+// $Id: Ex03DetectorConstruction.h,v 1.2 2004/07/09 16:50:14 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
@@ -52,8 +52,6 @@ class Ex03DetectorConstruction : public TObject
           
   private:      
      // methods
-     Int_t   GetMediumId(const TString& mediumName) const;
-     TString GetMediumName(Int_t mediumId) const;
      void  ComputeCalorParameters();
 
      // data members  
@@ -66,7 +64,6 @@ class Ex03DetectorConstruction : public TObject
      Double_t  fAbsorberThickness;
      Double_t  fGapThickness;
      
-     NameMap   fMediaIds; //!
      TString   fDefaultMaterial;
      TString   fAbsorberMaterial;
      TString   fGapMaterial;

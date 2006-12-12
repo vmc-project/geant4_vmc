@@ -1,4 +1,4 @@
-$Id: README,v 1.3 2005/05/17 13:44:26 brun Exp $
+$Id: README,v 1.4 2005/10/13 08:42:29 brun Exp $
 -----------------------------------------------------------------
 
 Example03
@@ -18,6 +18,7 @@ Example03
     Storing hits, particles stack in Root file
     Drawing geometry (G3, G3+TGeo, G4) + trajectories (G3+TGeo and G4)
     Verbosity
+    Geometry defined via Geant4 (G4)
     User defined physics list (G4)
 
   See also description of in 
@@ -47,40 +48,38 @@ Macros:
   For running example with G3:
   
   run_g3.C        - macro for running example 
-  g3Config.C      - configuration macro for G3 with native geometry (default)
-  g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry
+  g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry(default)
+  g3Config.C      - configuration macro for G3 with native geometry
 
   For running example with G4:
   
-  run_g4.C     - macro for running example 
-  g4Config.C   - configuration macro
-  g4Config2.C  - configuration macro with user defined physics list (LHEP_BERT)
-  g4config.in  - Geant4 configuration macro (called from g4Config.C)
-  g4vis.in     - Geant4 macro for visualization settings (called from set_vis.C) 
+  run_g4.C        - macro for running example 
+  g4Config.C      - configuration macro - G4 native geometry navigation (default)
+  g4Config1.C     - configuration macro - geometry defined via Geant4
+  g4Config2.C     - configuration macro - user defined physics list (LHEP_BERT)
+  g4tgeoConfig.C  - configuration macro - G4 with Tgeo navigation 
+  g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
+  g4config2.in  - macro for G4 configuration using G4 commands (called from g4Config2.C)
+  g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
 
-  Common macros (called by run_g3.C/run_g4.C):
+  Common macro (called by run_g3.C/run_g4.C):
   
-  test1.C   - calorimetry (default)
-  test2.C   - verbosity
   set_vis.C - setting visualization
 
 To run example 
 ===============
-  The first line shows how to run the first test macro (test1.C),
-  the second line to run the second test macro (test2.C):
-  
-  With G3:
-  root[0] .x run_g3.C      
-  root[0] .x run_g3.C("g3Config.C", "test2.C")      
   
   With G3 + TGeo:
-  root[0] .x run_g3.C("g3tgeoConfig.C");  
-  root[0] .x run_g3.C("g3tgeoConfig.C", "test2.C")      
+  root[0] .x run_g3.C
   
   With G4:
   root[0] .x run_g4.C  
-  root[0] .x run_g4.C("g4Config.C", "test2.C")
+
+  With G4 + TGeo navigation:
+  root[0] .x run_g4.C("g4tgeoConfig.C");   
+
+  With G4 with geometry defined via Geant4:
+  root[0] .x run_g4.C("g4Config1.C"); 
 
   With G4 with user defined physics list:
   root[0] .x run_g4.C("g4Config2.C"); 
-  root[0] .x run_g4.C("g4Config2.C", "test2.C")

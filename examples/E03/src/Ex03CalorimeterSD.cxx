@@ -1,4 +1,4 @@
-// $Id: Ex03CalorimeterSD.cxx,v 1.2 2005/02/25 17:00:13 brun Exp $
+// $Id: Ex03CalorimeterSD.cxx,v 1.3 2005/11/19 07:07:47 brun Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -32,9 +32,10 @@ Ex03CalorimeterSD::Ex03CalorimeterSD(const char* name,
     fVerboseLevel(1)
 {
   // Create hits collection and an empty hit for each layer
-  
+  // As the copy numbers may start from 0 or 1 (depending on
+  // geometry model, we create one more layer for this case.)
   fCalCollection = new TClonesArray("Ex03CalorHit", 500);
-  for (Int_t i=0; i<fDetector->GetNbOfLayers(); i++) 
+  for (Int_t i=0; i<fDetector->GetNbOfLayers()+1; i++) 
     new ((*fCalCollection)[i]) Ex03CalorHit();
 }
 
@@ -93,6 +94,12 @@ void Ex03CalorimeterSD::Initialize()
   
   fAbsorberVolId = gMC->VolId("ABSO");
   fGapVolId = gMC->VolId("GAPX");
+  
+  if ( fAbsorberVolId == 0 && fGapVolId == 0 ) {
+    // Volume names are different in N03 detector construction
+    fAbsorberVolId = gMC->VolId("Lead");  
+    fGapVolId = gMC->VolId("liquidArgon");
+  }  
 }
 
 //_____________________________________________________________________________
@@ -108,17 +115,23 @@ Bool_t Ex03CalorimeterSD::ProcessHits()
     return false;
 
   gMC->CurrentVolOffID(2, copyNo);
+  //cout << "Got copyNo "<< copyNo << " " << gMC->CurrentVolPath() << endl;
   
   Double_t edep = gMC->Edep();
 
   Double_t step = 0.;
   if (gMC->TrackCharge() != 0.) step = gMC->TrackStep();
   
+  if ( ! GetHit(copyNo) ) {
+    std::cerr << "No hit found for layer with copyNo = " << copyNo << endl;
+    return false;
+  }  
+  
   if (id == fAbsorberVolId)
-    GetHit(copyNo-1)->AddAbs(edep,step);
+    GetHit(copyNo)->AddAbs(edep,step);
     
   if (id == fGapVolId)
-    GetHit(copyNo-1)->AddGap(edep,step);
+    GetHit(copyNo)->AddGap(edep,step);
 
   return true;
 }

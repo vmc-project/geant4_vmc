@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.1 2005/05/17 13:52:01 brun Exp $
+# $Id: Makefile,v 1.2 2005/10/13 08:42:29 brun Exp $
 
 ############################### geant4_vmc Makefile ###########################
 
@@ -41,7 +41,8 @@ SRCS	:= $(CXXSRC)
 
 # C++ Headers processed by CINT
 #
-HDRS	:= include/Ex03RunConfiguration.h \
+HDRS	:= include/Ex03RunConfiguration1.h \
+	   include/Ex03RunConfiguration2.h \
 	   include/$(PACKAGE)LinkDef.h
 
 # Objects
@@ -59,6 +60,7 @@ INCDIR  := -Iinclude -I$(G4INCLUDE) \
 	   -I$(CLHEP_BASE_DIR)/include \
 	   -I$(G4INSTALL)/physics_lists/hadronic/LHEP_BERT/include \
 	   -I$(G4INSTALL)/physics_lists/hadronic/Packaging/include \
+	   -I$(G4INSTALL)/examples/novice/N03/include \
 	   -I$(TOPDIR)/include
 
 ifneq ($(USE_VGM),)

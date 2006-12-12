@@ -1,11 +1,13 @@
-// $Id: g4Config.C,v 1.1 2005/05/17 13:52:01 brun Exp $
+// $Id: g4Config.C,v 1.2 2006/01/13 16:58:58 brun Exp $
 //
-// Configuration macro for Geant4 VirtualMC for Example03
+// Configuration macro for Geant4 VirtualMC for Example06
+// for geometry defined with Root and selected Geant4 native navigation
 
 void Config()
 {
   // Default Geant4 VMC run configuration
-  TG4RunConfiguration* runConfiguration = new TG4RunConfiguration();
+  TG4RunConfiguration* runConfiguration 
+    = new TG4RunConfiguration("geomRootToGeant4");
   
   // Switch on optical physics (not activated by default)
   TG4PhysicsListOptions options;

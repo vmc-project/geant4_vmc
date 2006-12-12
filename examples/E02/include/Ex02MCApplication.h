@@ -1,4 +1,4 @@
-// $Id: Ex02MCApplication.h,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+// $Id: Ex02MCApplication.h,v 1.2 2003/09/27 09:32:48 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -49,6 +49,9 @@ class Ex02MCApplication : public TVirtualMCApplication
     
     void   ReadEvent(Int_t i);
 
+    // method for tests
+    void SetOldGeometry(Bool_t oldGeometry = kTRUE);
+
   private:
     // methods
     void RegisterStack();
@@ -59,6 +62,7 @@ class Ex02MCApplication : public TVirtualMCApplication
     Ex02TrackerSD            fTrackerSD;
     Double_t*                fFieldB;
     Ex02RootManager          fRootManager;
+    Bool_t                   fOldGeometry;
 
   ClassDef(Ex02MCApplication,1)  //Interface to MonteCarlo application
 };
@@ -67,6 +71,9 @@ class Ex02MCApplication : public TVirtualMCApplication
 
 inline Ex02MCApplication* Ex02MCApplication::Instance()
 { return (Ex02MCApplication*)(TVirtualMCApplication::Instance()); }
+
+inline void Ex02MCApplication::SetOldGeometry(Bool_t oldGeometry)
+{ fOldGeometry = oldGeometry; }
 
 #endif //EX02_MC_APPLICATION_H
 

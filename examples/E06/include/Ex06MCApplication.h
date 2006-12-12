@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: Ex06MCApplication.h,v 1.1 2005/05/17 13:52:01 brun Exp $
 //
 // Geant4 ExampleN06 adapted to Virtual Monte Carlo 
 //
@@ -53,6 +53,9 @@ class Ex06MCApplication : public TVirtualMCApplication
     // get methods
     Ex06PrimaryGenerator*  GetPrimaryGenerator() const;
  
+    // method for tests
+    void SetOldGeometry(Bool_t oldGeometry = kTRUE);
+
   private:
     // methods
     void RegisterStack();
@@ -65,6 +68,7 @@ class Ex06MCApplication : public TVirtualMCApplication
     Ex06DetectorConstruction* fDetConstruction;
     Ex06PrimaryGenerator*     fPrimaryGenerator;
     TCanvas*                  fCanvas;
+    Bool_t                    fOldGeometry;
 
   ClassDef(Ex06MCApplication,1)  //Interface to MonteCarlo application
 };
@@ -79,6 +83,9 @@ inline void  Ex06MCApplication::SetVerboseLevel(Int_t verboseLevel)
 
 inline Ex06PrimaryGenerator*  Ex06MCApplication::GetPrimaryGenerator() const
 { return fPrimaryGenerator; }
+
+inline void Ex06MCApplication::SetOldGeometry(Bool_t oldGeometry)
+{ fOldGeometry = oldGeometry; }
 
 #endif //EX06_MC_APPLICATION_H
 

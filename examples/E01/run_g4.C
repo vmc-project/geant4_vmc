@@ -1,7 +1,8 @@
-// $Id: run_g4.C,v 1.2 2003/06/03 17:05:48 brun Exp $
+// $Id: run_g4.C,v 1.3 2005/11/18 21:34:44 brun Exp $
 //
 // Macro for running Example01 with Geant4. 
 
+void run_g4(const TString& configMacro = "g4Config.C") 
 {
   // Load basic libraries
   gROOT->LoadMacro("../macro/basiclibs.C");
@@ -19,7 +20,7 @@
     = new Ex01MCApplication("Example01", "The example01 MC application");
 
   // Initialize MC
-  appl->InitMC("g4Config.C");
+  appl->InitMC(configMacro);
 
   // Run MC
   appl->RunMC(1);

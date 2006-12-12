@@ -1,4 +1,4 @@
-// $Id: Ex03DetectorConstruction.cxx,v 1.3 2005/01/05 08:05:31 brun Exp $
+// $Id: Ex03DetectorConstruction.cxx,v 1.4 2006/04/12 10:39:59 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
@@ -8,6 +8,7 @@
 // by Ivana Hrivnacova, 6.3.2003
  
 #include <Riostream.h>
+#include <TGeoManager.h>
 #include <TVirtualMC.h>
 
 #include "Ex03DetectorConstruction.h"
@@ -25,10 +26,9 @@ Ex03DetectorConstruction::Ex03DetectorConstruction()
     fLayerThickness(0.),
     fAbsorberThickness(0.),
     fGapThickness(0.),
-    fMediaIds(),
-    fDefaultMaterial("Vacuum"),
+    fDefaultMaterial("Galactic"),
     fAbsorberMaterial("Lead"),
-    fGapMaterial("LiquidArgon")
+    fGapMaterial("liquidArgon")
 {
    // default parameter values of the calorimeter (in cm)
    fAbsorberThickness = 1.;
@@ -48,24 +48,6 @@ Ex03DetectorConstruction::~Ex03DetectorConstruction()
 //
 // private methods
 //
-
-//_____________________________________________________________________________
-Int_t  Ex03DetectorConstruction::GetMediumId(const TString& mediumName) const
-{
-  NameMapIterator it = fMediaIds.find(mediumName.Data());
-  return (*it).second;
-}  
-
-//_____________________________________________________________________________
-TString  Ex03DetectorConstruction::GetMediumName(Int_t mediumId) const
-{
-  NameMapIterator it;
-  
-  for (it = fMediaIds.begin(); it != fMediaIds.end(); it++) 
-    if ((*it).second == mediumId) return (*it).first;
-
-  return TString();
-}  
 
 //_____________________________________________________________________________
 void Ex03DetectorConstruction::ComputeCalorParameters()
@@ -91,6 +73,9 @@ void Ex03DetectorConstruction::ConstructMaterials()
   // Tracking medias (defaut parameters)
   //
 
+  // Create Root geometry manager 
+  new TGeoManager("TGeo", "Root geometry manager");
+   
   Int_t ifield = 2;          // User defined magnetic field
   Double_t fieldm = 10.;     // Maximum field value (in kiloGauss)
   Double_t epsil  = .001;    // Tracking precision, 
@@ -109,36 +94,34 @@ void Ex03DetectorConstruction::ConstructMaterials()
   Double_t density;
   Double_t radl;
   Double_t absl;
-  Float_t* ubuf = 0;
  
 //
 // define simple materials
 //
 
-  name = "Al";
+  name = "Aluminium";
   a = 26.98;
   z = 13.;
   density = 2.700;
   radl = 8.893;
   absl = 0.1;   
   Int_t imat = 1;  
-  gMC->Material(imat, name.Data(), a, z, density, radl, absl, ubuf, 0);  
-  Int_t mediumId = 0;
-  gMC->Medium(mediumId, name.Data(),  imat, 0, ifield, fieldm, tmaxfd, stemax, 
-              deemax, epsil, stmin, ubuf, 0);
-  fMediaIds[name] = mediumId;
+  Int_t mediumId = 1;
+  gGeoManager->Material(name.Data(), a, z, density, imat, radl, absl);  
+  gGeoManager->Medium(name.Data(), mediumId, imat, 0, ifield, fieldm, tmaxfd, 
+                      stemax, deemax, epsil, stmin);
 
-  name = "LiquidArgon";
+  name = "liquidArgon";
   a = 39.95;
   z = 18.;
   density = 1.390;
   radl = 14.064;
   absl = 0.1;  
-  imat = 2;  
-  gMC->Material(imat, name.Data(), a, z, density, radl, absl, ubuf, 0);  
-  gMC->Medium(mediumId, name.Data(),  imat, 0, ifield, fieldm, tmaxfd, stemax,
-              deemax, epsil, stmin, ubuf, 0);
-  fMediaIds[name] = mediumId;
+  imat = 2; 
+  mediumId = 2; 
+  gGeoManager->Material(name.Data(), a, z, density, imat, radl, absl);  
+  gGeoManager->Medium(name.Data(),  mediumId, imat, 0, ifield, fieldm, tmaxfd, 
+                      stemax, deemax, epsil, stmin);
 
   name = "Lead";
   a = 207.19;
@@ -147,47 +130,59 @@ void Ex03DetectorConstruction::ConstructMaterials()
   radl = 0.5612;
   absl = 0.1;  
   imat = 3;  
-  gMC->Material(imat,name.Data() , a, z, density, radl, absl, ubuf, 0);  
-  gMC->Medium(mediumId, name.Data(), imat, 0, ifield, fieldm, tmaxfd, stemax,
-              deemax, epsil, stmin, ubuf, 0);
-  fMediaIds[name] = mediumId;
+  mediumId = 3; 
+  gGeoManager->Material(name.Data(), a, z, density, imat, radl, absl);  
+  gGeoManager->Medium(name.Data(), mediumId, imat, 0, ifield, fieldm, tmaxfd, 
+                      stemax, deemax, epsil, stmin);
 
 //
 // define a material from elements.   case 1: chemical molecule
 //
 
   name = "Water";
-  Double_t aw2[2] = { 1.01, 16.00};
-  Double_t zw2[2] = { 1.0,   8.0};
-  Double_t ww2[2] = { 2., 1.};
+  //Double_t aw2[2] = { 1.01, 16.00};
+  Int_t zw2[2] = { 1, 8 };
+  Int_t ww2[2] = { 2, 1 };
   density = 1.000;  
   imat = 4;
-  gMC->Mixture(imat, name.Data(), aw2, zw2, density, -2, ww2); 
-  gMC->Medium(mediumId, name.Data(), imat, 0, ifield, fieldm, tmaxfd, stemax,
-              deemax, epsil, stmin, ubuf, 0);
-  fMediaIds[name] = mediumId;
+  mediumId = 4; 
+  TGeoMixture* mixture = new TGeoMixture(name.Data(), 2, density);
+  mixture->DefineElement(0, zw2[0], ww2[0]);
+  mixture->DefineElement(1, zw2[1], ww2[1]);
+  mixture->SetUniqueID(imat);
+
+  gGeoManager->Medium(name.Data(), mediumId, imat, 0, ifield, fieldm, tmaxfd, 
+                      stemax, deemax, epsil, stmin);
 
   name = "Scintillator";
-  Double_t as2[2] = { 1.01, 12.01};
-  Double_t zs2[2] = { 1.0,   6.0};
-  Double_t ws2[2] = { 10., 9.};
+  //Double_t as2[2] = { 1.01, 12.01};
+  Int_t zs2[2] = {  1, 6 };
+  Int_t ws2[2] = { 10, 9 };
   density = 1.032;  
   imat = 5;
-  gMC->Mixture(imat, name.Data(), as2, zs2, density, -2, ws2); 
-  gMC->Medium(mediumId, name.Data(), imat, 0, ifield, fieldm, tmaxfd, stemax,
-              deemax, epsil, stmin, ubuf, 0);
-  fMediaIds[name] = mediumId;
+  mediumId = 5; 
+  mixture = new TGeoMixture(name.Data(), 2, density);
+  mixture->DefineElement(0, zs2[0], ws2[0]);
+  mixture->DefineElement(1, zs2[1], ws2[1]);
+  mixture->SetUniqueID(imat);
+  
+  gGeoManager->Medium(name.Data(), mediumId, imat, 0, ifield, fieldm, tmaxfd, 
+                      stemax, deemax, epsil, stmin);
 
-  name = "Quartz";
-  Double_t aq2[2] = { 28.09, 16.00};
-  Double_t zq2[2] = { 14.0,   8.0};
-  Double_t wq2[2] = { 1., 2.};
+  name = "quartz";
+  //Double_t aq2[2] = { 28.09, 16.00};
+  Int_t zq2[2] = { 14, 8 };
+  Int_t wq2[2] = {  1, 2 };
   density = 2.200;  
   imat = 6;
-  gMC->Mixture(imat, name.Data(), aq2, zq2, density, -2, wq2); 
-  gMC->Medium(mediumId, name.Data(), imat, 0, ifield, fieldm, tmaxfd, stemax,
-              deemax, epsil, stmin, ubuf, 0);
-  fMediaIds[name] = mediumId;
+  mediumId = 6; 
+  mixture = new TGeoMixture(name.Data(), 2, density);
+  mixture->DefineElement(0, zq2[0], wq2[0]);
+  mixture->DefineElement(1, zq2[1], wq2[1]);
+  mixture->SetUniqueID(imat);
+
+  gGeoManager->Medium(name.Data(), mediumId, imat, 0, ifield, fieldm, tmaxfd, 
+                      stemax, deemax, epsil, stmin);
 
 //
 // define a material from elements.   case 2: mixture by fractional mass
@@ -199,10 +194,10 @@ void Ex03DetectorConstruction::ConstructMaterials()
   Double_t wa2[2] = {  0.7,   0.3};
   density = 1.29e-03;  
   imat = 7;
-  gMC->Mixture(imat, name.Data(), aa2, za2, density, 2, wa2); 
-  gMC->Medium(mediumId, name.Data(), imat, 0, ifield, fieldm, tmaxfd, stemax,
-              deemax, epsil, stmin, ubuf, 0);
-  fMediaIds[name] = mediumId;
+  mediumId = 7; 
+  gGeoManager->Mixture(name.Data(), aa2, za2, density, 2, wa2, imat); 
+  gGeoManager->Medium(name.Data(), mediumId, imat, 0, ifield, fieldm, tmaxfd, 
+                      stemax, deemax, epsil, stmin);
 
 //
 // !! NOT SUPPORTED BY VMC
@@ -239,17 +234,17 @@ void Ex03DetectorConstruction::ConstructMaterials()
 //                                      kStateGas,temperature,pressure);
 //steam->AddMaterial(H2O, fractionmass=1.);
 
-  name = "Vacuum";
+  name = "Galactic";
   a = 1.e-16;
   z = 1.e-16;
   density = 1.e-16;
   radl = 1.e16; 
   absl = 1.e16;  //??
   imat = 8;  
-  gMC->Material(imat, name.Data(), a, z, density, radl, absl, ubuf, 0);  
-  gMC->Medium(mediumId, name.Data(), imat, 0, ifield, fieldm, tmaxfd, stemax,
-              deemax, epsil, stmin, ubuf, 0);
-  fMediaIds[name] = mediumId;
+  mediumId = 8; 
+  gGeoManager->Material(name.Data(), a, z, density, imat, radl, absl);  
+  gGeoManager->Medium(name.Data(), mediumId, imat, 0, ifield, fieldm, tmaxfd, 
+                      stemax, deemax, epsil, stmin);
 }    
 
 //_____________________________________________________________________________
@@ -258,6 +253,14 @@ void Ex03DetectorConstruction::ConstructGeometry()
   // Complete the Calor parameters definition 
   ComputeCalorParameters();
    
+  Double_t* ubuf = 0;
+  
+  // Media Ids
+  Int_t airMediumId = gGeoManager->GetMedium("Air")->GetId();
+  Int_t defaultMediumId = gGeoManager->GetMedium(fDefaultMaterial.Data())->GetId();
+  Int_t absorberMediumId = gGeoManager->GetMedium(fAbsorberMaterial.Data())->GetId();
+  Int_t gapMediumId = gGeoManager->GetMedium(fGapMaterial.Data())->GetId();
+
   //     
   // World
   //
@@ -266,7 +269,8 @@ void Ex03DetectorConstruction::ConstructGeometry()
   world[0] = fWorldSizeX/2.;
   world[1] = fWorldSizeYZ/2.;
   world[2] = fWorldSizeYZ/2.;
-  gMC->Gsvolu("WRLD", "BOX", GetMediumId("Air"), world, 3);
+  TGeoVolume *top = gGeoManager->Volume("WRLD", "BOX", airMediumId, world, 3);
+  gGeoManager->SetTopVolume(top);
 
   //                               
   // Calorimeter
@@ -277,16 +281,18 @@ void Ex03DetectorConstruction::ConstructGeometry()
     calo[0] = fCalorThickness/2.;
     calo[1] = fCalorSizeYZ/2.;
     calo[2] = fCalorSizeYZ/2.;
-    gMC->Gsvolu("CALO", "BOX", GetMediumId(fDefaultMaterial.Data()), calo, 3);
+    gGeoManager->Volume("CALO", "BOX", defaultMediumId, calo, 3);
 
     Double_t posX =  0.;
     Double_t posY =  0.;
     Double_t posZ =  0.;
-    gMC->Gspos("CALO", 1 ,"WRLD", posX, posY, posZ, 0, "ONLY");
+    gGeoManager->Node("CALO", 1 ,"WRLD", posX, posY, posZ, 0, kTRUE, ubuf);
   
     // Divide  calorimeter along X axis to place layers
     // 
-    gMC->Gsdvn("CELL", "CALO", fNbOfLayers, 1);
+    Double_t start =  - calo[0];
+    Double_t width = fCalorThickness/fNbOfLayers;
+    gGeoManager->Division("CELL", "CALO", 1, fNbOfLayers, start, width);
 
     //                                 
     // Layer
@@ -295,12 +301,12 @@ void Ex03DetectorConstruction::ConstructGeometry()
     layer[0] = fLayerThickness/2.;
     layer[1] = fCalorSizeYZ/2.;
     layer[2] = fCalorSizeYZ/2.;
-    gMC->Gsvolu("LAYE", "BOX", GetMediumId(fDefaultMaterial.Data()), layer, 3);
+    gGeoManager->Volume("LAYE", "BOX", defaultMediumId, layer, 3);
 
     posX =  0.;
     posY =  0.;
     posZ =  0.;
-    gMC->Gspos("LAYE", 1 ,"CELL", posX, posY, posZ, 0, "ONLY");
+    gGeoManager->Node("LAYE", 1 ,"CELL", posX, posY, posZ, 0, kTRUE, ubuf);
   }  
   
   //                               
@@ -313,12 +319,12 @@ void Ex03DetectorConstruction::ConstructGeometry()
     abso[0] = fAbsorberThickness/2;
     abso[1] = fCalorSizeYZ/2.;
     abso[2] = fCalorSizeYZ/2.;
-    gMC->Gsvolu("ABSO", "BOX", GetMediumId(fAbsorberMaterial.Data()), abso, 3);
+    gGeoManager->Volume("ABSO", "BOX", absorberMediumId, abso, 3);
 
     Double_t posX = -fGapThickness/2.;
     Double_t posY =  0.;
     Double_t posZ =  0.;
-    gMC->Gspos("ABSO", 1 ,"LAYE", posX, posY, posZ, 0, "ONLY");
+    gGeoManager->Node("ABSO", 1 ,"LAYE", posX, posY, posZ, 0, kTRUE, ubuf);
   }  
   
   //                                 
@@ -331,12 +337,12 @@ void Ex03DetectorConstruction::ConstructGeometry()
     gap[0] = fGapThickness/2;
     gap[1] = fCalorSizeYZ/2.;
     gap[2] = fCalorSizeYZ/2.;
-    gMC->Gsvolu("GAPX", "BOX", GetMediumId(fGapMaterial.Data()), gap, 3);
+    gGeoManager->Volume("GAPX", "BOX", gapMediumId, gap, 3);
 
     Double_t posX = fAbsorberThickness/2.;
     Double_t posY =  0.;
     Double_t posZ =  0.;
-    gMC->Gspos("GAPX", 1 ,"LAYE", posX, posY, posZ, 0, "ONLY");
+    gGeoManager->Node("GAPX", 1 ,"LAYE", posX, posY, posZ, 0, kTRUE, ubuf);
   } 
 
 /*   
@@ -348,6 +354,12 @@ void Ex03DetectorConstruction::ConstructGeometry()
   simpleBoxVisAtt->SetVisibility(true);
   logicCalor->SetVisAttributes(simpleBoxVisAtt);
 */
+
+  // close geometry
+  gGeoManager->CloseGeometry();
+    
+  // notify VMC about Root geometry
+  gMC->SetRootGeometry();
   
   PrintCalorParameters();
 }
@@ -358,60 +370,49 @@ void Ex03DetectorConstruction::SetCuts()
 // Sets cuts for e-, gamma equivalent to 1mm cut in G4.
 // ---
 
-  Bool_t idFromG4 = false;
-    // Set true if running with G4 native detector construction
-
-  Int_t mediumId = GetMediumId("Al");
-  if ( idFromG4 ) mediumId = 0;
+  Int_t mediumId = gMC->MediumId("Aluminium");
   gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 597.e-06);
   gMC->Gstpar(mediumId, "DCUTE",  597.e-06);
 
-  mediumId = GetMediumId("LiquidArgon");
-  if ( idFromG4 ) mediumId = 1;
+  mediumId = gMC->MediumId("liquidArgon");
   gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 343.e-06);
   gMC->Gstpar(mediumId, "DCUTE",  343.e-06);
 
-  mediumId = GetMediumId("Lead");
-  if ( idFromG4 ) mediumId = 2;
+  mediumId = gMC->MediumId("Lead");
   gMC->Gstpar(mediumId, "CUTGAM", 101.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  101.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 1.38e-03);
   gMC->Gstpar(mediumId, "DCUTE",  1.38e-03);
 
-  mediumId = GetMediumId("Water");
-  if ( idFromG4 ) mediumId = 3;
+  mediumId = gMC->MediumId("Water");
   gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 347.e-03);
   gMC->Gstpar(mediumId, "DCUTE",  347.e-03);
 
-  mediumId = GetMediumId("Scintillator");
-  if ( idFromG4 ) mediumId = 4;
+  mediumId = gMC->MediumId("Scintillator");
   gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 356.e-03);
   gMC->Gstpar(mediumId, "DCUTE",  356.e-03);
 
-  mediumId = GetMediumId("Quartz");
-  if ( idFromG4 ) mediumId = 6;
+  mediumId = gMC->MediumId("quartz");
   gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 534.e-03);
   gMC->Gstpar(mediumId, "DCUTE",  534.e-03);
 
-  mediumId = GetMediumId("Air");
-  if ( idFromG4 ) mediumId = 7;
+  mediumId = gMC->MediumId("Air");
   gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 10.e-06);
   gMC->Gstpar(mediumId, "DCUTE",  10.e-06);
 
-  mediumId = GetMediumId("Vacuum");
-  if ( idFromG4 ) mediumId = 11;
+  mediumId = gMC->MediumId("Galactic");
   gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
   gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
   gMC->Gstpar(mediumId, "CUTELE", 10.e-06);

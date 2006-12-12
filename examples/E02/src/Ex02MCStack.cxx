@@ -1,4 +1,4 @@
-// $Id: Ex02MCStack.cxx,v 1.4 2003/07/22 06:38:16 brun Exp $
+// $Id: Ex02MCStack.cxx,v 1.5 2005/11/19 07:07:47 brun Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -56,7 +56,7 @@ void  Ex02MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
   	                 Double_t px, Double_t py, Double_t pz, Double_t e,
   		         Double_t vx, Double_t vy, Double_t vz, Double_t tof,
 		         Double_t polx, Double_t poly, Double_t polz,
-		         TMCProcess mech, Int_t& ntr, Double_t weight,
+		         TMCProcess mech, Int_t& /*ntr*/, Double_t weight,
 		         Int_t is) 
 {
 // Creates a new particle with specified properties,

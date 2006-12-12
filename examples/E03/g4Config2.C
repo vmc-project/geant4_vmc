@@ -1,6 +1,8 @@
-// $Id: g4Config2.C,v 1.1 2005/05/17 13:52:01 brun Exp $
+// $Id: g4Config2.C,v 1.2 2006/01/13 16:58:17 brun Exp $
 //
 // Configuration macro for Geant4 VirtualMC for Example03
+// for geometry defined with Root and selected Geant4 native navigation
+// and a user defined physics list in a user run configuration
 
 void Config()
 {
@@ -12,7 +14,8 @@ void Config()
   gSystem->Load("libgeant4e03");
 
   // Run configuration with user physics list
-  Ex03RunConfiguration* runConfiguration = new Ex03RunConfiguration();
+  Ex03RunConfiguration2* runConfiguration 
+    = new Ex03RunConfiguration2("geomRootToGeant4");
   
   // TGeant4
   TGeant4* geant4

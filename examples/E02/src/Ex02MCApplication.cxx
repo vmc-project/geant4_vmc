@@ -1,4 +1,4 @@
-// $Id: Ex02MCApplication.cxx,v 1.9 2005/05/17 13:44:25 brun Exp $
+// $Id: Ex02MCApplication.cxx,v 1.10 2005/11/19 07:07:47 brun Exp $
 //
 // Geant4 ExampleN01 adapted to Virtual Monte Carlo 
 //
@@ -10,6 +10,7 @@
 
 #include "Ex02MCApplication.h"
 #include "Ex02MCStack.h"
+#include "Ex02DetectorConstructionOld.h"
 
 #include <TROOT.h>
 #include <TInterpreter.h>
@@ -17,6 +18,7 @@
 #include <TPDGCode.h>
 #include <TGeoManager.h>
 #include <TVirtualGeoTrack.h>
+#include <Riostream.h>
 
 ClassImp(Ex02MCApplication)
 
@@ -28,7 +30,8 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title,
     fDetConstruction(),
     fTrackerSD("Tracker Chamber"),
     fFieldB(0),
-    fRootManager("example02", fileMode)
+    fRootManager("example02", fileMode),
+    fOldGeometry(kFALSE)
 {
 // Standard constructor
 // ---
@@ -50,7 +53,8 @@ Ex02MCApplication::Ex02MCApplication()
     fDetConstruction(),
     fTrackerSD(),
     fFieldB(0),
-    fRootManager()
+    fRootManager(),
+    fOldGeometry(kFALSE)
 {    
 // Default constructor
 // ---
@@ -125,9 +129,26 @@ void Ex02MCApplication::ConstructGeometry()
 // Construct geometry using detector contruction class
 // ---
 
-  fDetConstruction.ConstructMaterials();  
-  fDetConstruction.ConstructGeometry();  
-}
+  // Cannot use Root geometry if not supported with 
+  // selected MC
+  if ( !fOldGeometry && ! gMC->IsRootGeometrySupported() ) {
+    cerr << "Selected MC does not support TGeo geometry"<< endl;
+    cerr << "Exiting program"<< endl;
+    exit(1);
+  } 
+
+  if ( ! fOldGeometry ) {
+    cout << "Geometry will be defined via TGeo" << endl;
+    fDetConstruction.ConstructMaterials();  
+    fDetConstruction.ConstructGeometry(); 
+  }
+  else {   
+    cout << "Geometry will be defined via VMC" << endl;
+    Ex02DetectorConstructionOld detConstructionOld;
+    detConstructionOld.ConstructMaterials();  
+    detConstructionOld.ConstructGeometry(); 
+  }  
+} 
 
 //_____________________________________________________________________________
 void Ex02MCApplication::InitGeometry()
@@ -280,7 +301,7 @@ void Ex02MCApplication::FinishEvent()
 } 
 
 //_____________________________________________________________________________
-void Ex02MCApplication::Field(const Double_t* x, Double_t* b) const
+void Ex02MCApplication::Field(const Double_t* /*x*/, Double_t* b) const
 {
 // Uniform magnetic field
 // ---
