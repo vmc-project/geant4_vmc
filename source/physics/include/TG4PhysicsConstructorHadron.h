@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorHadron.h,v 1.4 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4PhysicsConstructorHadron.h,v 1.5 2006/01/13 16:59:38 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorHadron
@@ -140,17 +140,9 @@ class TG4PhysicsConstructorHadron: public TG4VPhysicsConstructor
     TG4PhysicsConstructorHadron(G4int verboseLevel, 
                                 G4bool setEM, G4bool setHadron,
                                 const G4String& name = "Hadron");
-    // --> protected
-    // TG4PhysicsConstructorHadron(const TG4PhysicsConstructorHadron& right);
     virtual ~TG4PhysicsConstructorHadron();
 
   protected:
-    TG4PhysicsConstructorHadron(const TG4PhysicsConstructorHadron& right);
-    
-    // operators
-    TG4PhysicsConstructorHadron& operator=(
-                                const TG4PhysicsConstructorHadron& right);
-  
     // methods
           // construct particle and physics
     virtual void ConstructParticle();
@@ -328,6 +320,10 @@ class TG4PhysicsConstructorHadron: public TG4VPhysicsConstructor
     
 
   private:
+    TG4PhysicsConstructorHadron(const TG4PhysicsConstructorHadron& right);
+    TG4PhysicsConstructorHadron& operator=(
+                                const TG4PhysicsConstructorHadron& right);
+  
     // methods
 
     // EM processes

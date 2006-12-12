@@ -1,4 +1,4 @@
-// $Id: TG4RunAction.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4RunAction.cxx,v 1.3 2006/01/13 16:59:39 brun Exp $
 // Category: run
 //
 // Class TG4RunAction
@@ -18,7 +18,9 @@
 
 //_____________________________________________________________________________
 TG4RunAction::TG4RunAction()
-  : TG4Verbose("runAction"),
+  : G4UserRunAction(),
+    TG4Verbose("runAction"),
+    fTimer(0),
     fRunID(-1) 
 {
 //
@@ -26,31 +28,9 @@ TG4RunAction::TG4RunAction()
 }
 
 //_____________________________________________________________________________
-TG4RunAction::TG4RunAction(const TG4RunAction& right) 
-  : TG4Verbose("runAction") {
-//
-  TG4Globals::Exception("TG4RunAction is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4RunAction::~TG4RunAction() {
 //
   delete fTimer;
-}
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4RunAction& TG4RunAction::operator=(const TG4RunAction &right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-  
-  TG4Globals::Exception("TG4RunAction is protected from assigning.");
-
-  return *this;
 }
 
 //

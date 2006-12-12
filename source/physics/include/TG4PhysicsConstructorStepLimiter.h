@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorStepLimiter.h,v 1.2 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4PhysicsConstructorStepLimiter.h,v 1.3 2006/01/13 16:59:38 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorStepLimiter
@@ -31,6 +31,10 @@ class TG4PhysicsConstructorStepLimiter: public TG4VPhysicsConstructor
 
     // data members
     G4StepLimiter* fStepLimiterProcess; // step limiter process
+
+  private:
+    TG4PhysicsConstructorStepLimiter(const TG4PhysicsConstructorStepLimiter& right);
+    TG4PhysicsConstructorStepLimiter& operator=(const TG4PhysicsConstructorStepLimiter& right);  
 };
 
 #endif //TG4_PHYSICS_CONSTRUCTOR_STEP_LIMITER_H

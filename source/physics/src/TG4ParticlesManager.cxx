@@ -1,4 +1,4 @@
-// $Id: TG4ParticlesManager.cxx,v 1.6 2006/01/13 16:59:38 brun Exp $
+// $Id: TG4ParticlesManager.cxx,v 1.7 2006/09/13 06:26:12 brun Exp $
 // Category: physics
 //
 // Class TG4ParticlesManager
@@ -22,22 +22,19 @@ TG4ParticlesManager* TG4ParticlesManager::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4ParticlesManager::TG4ParticlesManager()
-  : TG4Verbose("particlesManager") { 
+  : TG4Verbose("particlesManager"),
+    fParticleNameMap(),
+    fParticlePDGMap()
+    
+{ 
 //
   if (fgInstance) {
     TG4Globals::Exception(
-      "TG4ParticlesManager: attempt to create two instances of singleton.");
+      "TG4ParticlesManager", "TG4ParticlesManager",
+      "Cannot create two instances of singleton.");
   }
       
   fgInstance = this;  
-}
-
-//_____________________________________________________________________________
-TG4ParticlesManager::TG4ParticlesManager(const TG4ParticlesManager& right) 
-  : TG4Verbose("particlesMananger") { 
-// 
-  TG4Globals::Exception(
-    "Attempt to copy TG4ParticlesManager singleton.");
 }
 
 //_____________________________________________________________________________
@@ -45,22 +42,6 @@ TG4ParticlesManager::~TG4ParticlesManager() {
 //
 }
 
-//
-// operators
-//
-
-TG4ParticlesManager& 
-TG4ParticlesManager::operator=(const TG4ParticlesManager& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4ParticlesManager singleton.");
-    
-  return *this;  
-}    
-          
 //
 // private methods
 //
@@ -82,20 +63,18 @@ G4int TG4ParticlesManager::GetPDGEncoding(G4ParticleDefinition* particle) const
     G4String g4name = particle->GetParticleName();
     G4String tname = fParticleNameMap.GetSecond(g4name);
     if (tname == "Undefined") {
-      G4String text = "TG4ParticlesManager::GetPDGEncoding: \n";
-      text = text + "    Particle " + g4name;
-      text = text + " was not found in the name map.";
-      TG4Globals::Exception(text);
+      TG4Globals::Exception(
+        "TG4ParticlesManager", "GetPDGEncoding",
+        "Particle " + TString(g4name) + " was not found in the name map.");
     }  
   
     // get particle from TDatabasePDG
     TDatabasePDG* pdgDB = TDatabasePDG::Instance();
     TParticlePDG* particle = pdgDB->GetParticle(tname);
     if (!particle) {
-      G4String text = "TG4ParticlesManager::GetPDGEncoding: \n";
-      text = text + "    Particle " + tname;
-      text = text + " was not found in TDatabasePDG.";
-      TG4Globals::Exception(text);
+      TG4Globals::Exception(
+        "TG4ParticlesManager", "GetPDGEncoding",
+        "Particle " +  TString(tname) + " was not found in TDatabasePDG.");
     }  
     
     // get PDG encoding
@@ -150,23 +129,23 @@ void  TG4ParticlesManager::AddParticlesToPdgDatabase() const
   TDatabasePDG *pdgDB = TDatabasePDG::Instance();
 
   pdgDB->AddParticle("Deuteron","Deuteron",2*kGeV+8.071e-3,kTRUE,
-		     0,3,"Ion",kion+10020);
-		     
+                     0,3,"Ion",kion+10020);
+                     
   pdgDB->AddParticle("Triton","Triton",3*kGeV+14.931e-3,kFALSE,
-		     kHshGeV/(12.33*kYearsToSec),3,"Ion",kion+10030);
+                     kHshGeV/(12.33*kYearsToSec),3,"Ion",kion+10030);
 
   pdgDB->AddParticle("Alpha","Alpha",4*kGeV+2.424e-3,kTRUE,
-		     kHshGeV/(12.33*kYearsToSec),6,"Ion",kion+20040);
+                     kHshGeV/(12.33*kYearsToSec),6,"Ion",kion+20040);
 
   pdgDB->AddParticle("HE3","HE3",3*kGeV+14.931e-3,kFALSE,
-		     0,6,"Ion",kion+20030);
+                     0,6,"Ion",kion+20030);
 
   pdgDB->AddParticle("Cherenkov","Cherenkov",0,kFALSE,
-		     0,0,"Special",kspe+50);
+                     0,0,"Special",kspe+50);
 
   pdgDB->AddParticle("FeedbackPhoton","FeedbackPhoton",0,kFALSE,
-		     0,0,"Special",kspe+51);
-}		     
+                     0,0,"Special",kspe+51);
+}                     
 
 //_____________________________________________________________________________
 void  TG4ParticlesManager::MapParticles()
@@ -232,9 +211,9 @@ G4int TG4ParticlesManager::AddIonToPdgDatabase(
   if (particleDefinition->GetPDGEncoding() != 0 || 
       particleDefinition->GetParticleType() != "nucleus") {
     
-      G4String text = "TG4ParticlesManager::AddIonToPdgDatabase: \n";
-      text = text + "    Added particle is not ion."; 
-      TG4Globals::Exception(text);
+      TG4Globals::Exception(
+        "TG4ParticlesManager", "AddIonToPdgDatabase", 
+        "Added particle is not ion."); 
   }    
 
   TParticlePDG* particlePDG 
@@ -261,7 +240,7 @@ G4int TG4ParticlesManager::AddIonToPdgDatabase(
       // TG4Globals::Exception(text);
       return pdg-1;
     }
- 	   
+            
     // Define unique ion name
     G4String uniqueIonName 
       = UniqueIonName(particleDefinition->GetParticleName(), Q);
@@ -270,16 +249,16 @@ G4int TG4ParticlesManager::AddIonToPdgDatabase(
        G4cout << "Adding ion to TDatabasePDG " << G4endl;
        G4cout << "   Unique ion name: " << uniqueIonName << G4endl;
        G4cout << "   PDG:             " << pdg << G4endl;
-    }    	   
+    }               
 
     // Add ion to TDatabasePDG
     TDatabasePDG::Instance()
       ->AddParticle(name, uniqueIonName, 
                     particleDefinition->GetPDGMass()/TG4G3Units::Energy(), 
-		    particleDefinition->GetPDGStable(), 
-		    particleDefinition->GetPDGWidth()/TG4G3Units::Energy(), 
-		    Q*3, "Ion", pdg); 		    
-		    
+                    particleDefinition->GetPDGStable(), 
+                    particleDefinition->GetPDGWidth()/TG4G3Units::Energy(), 
+                    Q*3, "Ion", pdg);                     
+                    
     // Add ion to PDG map
     fParticlePDGMap.Add(uniqueIonName, pdg);  
 
@@ -288,7 +267,7 @@ G4int TG4ParticlesManager::AddIonToPdgDatabase(
     if (name != uniqueIonName)
        fParticleNameMap.Add(uniqueIonName, name); 
     return pdg;    
-  }		
+  }                
 }
 
 
@@ -343,13 +322,18 @@ void TG4ParticlesManager::AddIon(const G4String& name, G4int Z, G4int A, G4int Q
     = G4ParticleTable::GetParticleTable()->GetIon(Z, A, excEnergy);
   
   if (!particleDefinition) {
-    G4cerr << "Z, A, excEnergy [keV]: " 
-           << Z << " " << A << " " << excEnergy/keV << G4endl;
-    G4String text = 
-      "TG4ParticlesManager::AddIon:\n";
-    text = text + "   G4ParticleTable::FindParticle() failed.";
-    TG4Globals::Exception(text);
-  }	
+    TString text = "Z, A, excEnergy [keV]: ";
+    text += Z;
+    text += " ";
+    text += A;
+    text += " ";
+    text += excEnergy/keV;
+    text += ".";
+    TG4Globals::Exception(
+      "TG4ParticlesManager", "AddIon",
+      text +  TG4Globals::Endl() + 
+      "G4ParticleTable::FindParticle() failed.");
+  }        
   
   // Add ion to TDatabasePDG
   AddIonToPdgDatabase(name, particleDefinition, Q);
@@ -396,9 +380,9 @@ G4int TG4ParticlesManager::GetPDGEncodingFast(G4ParticleDefinition* particle,
       particle->GetParticleName() != "geantino" && 
       particle->GetParticleName() != "chargedgeantino" ) {
     // unknown particle
-    G4String text = "TG4ParticlesManager::GetPDGEncodingFast: ";
-    text = text + particle->GetParticleName() + " is not defined.";
-    TG4Globals::Warning(text);
+    TG4Globals::Warning(
+      "TG4ParticlesManager", "GetPDGEncodingFast",
+      TString(particle->GetParticleName()) + " is not defined.");
   }      
 
   return pdgEncoding;  
@@ -418,9 +402,10 @@ TParticle* TG4ParticlesManager::GetParticle(const TClonesArray* particles,
     = dynamic_cast<TParticle*>(particleTObject);
 
   // check particle type
-  if (!particle) 
+  if (!particle) {
     TG4Globals::Exception(
-      "TG4ParticlesManager::GetParticle: Unknown particle type");
+      "TG4ParticlesManager", "GetParticle", "Unknown particle type");
+  }    
   
   return particle;          
 #else
@@ -450,12 +435,12 @@ G4ParticleDefinition* TG4ParticlesManager::GetParticleDefinition(
   }    
   
   if (particleDefinition==0 && warn) {
-    G4cerr << "pdgEncoding: " << pdgEncoding << G4endl;
-    G4String text = 
-      "TG4ParticlesManager::GetParticleDefinition:\n";
-    text = text + "   G4ParticleTable::FindParticle() failed.";
-    TG4Globals::Warning(text);
-  }	
+    G4String text = "pdgEncoding= ";
+    text +=  pdgEncoding;
+    TG4Globals::Warning(
+      "TG4ParticlesManager", "GetParticleDefinition",
+      "G4ParticleTable::FindParticle() for particle with " + text + " failed.");
+  }        
   
   return particleDefinition;
 }
@@ -475,13 +460,12 @@ G4ParticleDefinition* TG4ParticlesManager::GetIonParticleDefinition(
     = G4ParticleTable::GetParticleTable()->FindParticle(ionName);
   
   if (particleDefinition==0 && warn) {
-    G4cerr << particle->GetName() 
-           << "  pdgEncoding: " << particle->GetPdgCode() << G4endl;
-    G4String text = 
-      "TG4ParticlesManager::GetIonDefinition:\n";
-    text = text + "   G4ParticleTable::FindParticle() failed.";
-    TG4Globals::Warning(text);
-  }	
+    TString text = "pdgEncoding=";
+    text += particle->GetPdgCode();
+    TG4Globals::Warning(
+      "TG4ParticlesManager", "GetIonDefinition:",
+      "G4ParticleTable::FindParticle() for particle with " + text + " failed.");
+  }        
   
   return particleDefinition;
 }
@@ -517,11 +501,11 @@ G4ThreeVector TG4ParticlesManager::GetParticlePosition(
   G4ThreeVector position 
      = G4ThreeVector(particle->Vx()*TG4G3Units::Length(),
                      particle->Vy()*TG4G3Units::Length(),
-		     particle->Vz()*TG4G3Units::Length());
+                     particle->Vz()*TG4G3Units::Length());
   return position;
-}  		     
-			
-			
+}                       
+                        
+                        
 //_____________________________________________________________________________
 G4ThreeVector TG4ParticlesManager::GetParticleMomentum(
                                    const TParticle* particle) const
@@ -530,6 +514,6 @@ G4ThreeVector TG4ParticlesManager::GetParticleMomentum(
   G4ThreeVector momentum 
      = G4ThreeVector(particle->Px()*TG4G3Units::Energy(),
                      particle->Py()*TG4G3Units::Energy(),
-		     particle->Pz()*TG4G3Units::Energy());
+                     particle->Pz()*TG4G3Units::Energy());
   return momentum;
 }

@@ -1,4 +1,4 @@
-// $Id: TG4Verbose.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4Verbose.cxx,v 1.3 2005/01/28 12:29:38 brun Exp $
 // Category: global
 //
 // Class TG4Verbose
@@ -41,12 +41,6 @@ TG4Verbose::TG4Verbose(const G4String& cmdName, G4int verboseLevel)
   fCommand = fgMessenger->AddCommand(this, cmdName);  
 }
 
-//_____________________________________________________________________________
-TG4Verbose::TG4Verbose()
-  : TG4VVerbose() {
-//
-}
-  
 //_____________________________________________________________________________
 TG4Verbose::~TG4Verbose() {
 //

@@ -1,4 +1,4 @@
-// $Id: TG4EventAction.cxx,v 1.3 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4EventAction.cxx,v 1.4 2006/04/12 10:38:21 brun Exp $
 // Category: event
 //
 // Class TG4EventAction
@@ -30,37 +30,15 @@
 TG4EventAction::TG4EventAction()
   : TG4Verbose("eventAction"),
     fMessenger(this),
+    fTimer(),
     fDrawFlag("CHARGED")
 {
 //
 }
 
 //_____________________________________________________________________________
-TG4EventAction::TG4EventAction(const TG4EventAction& right)
-  : TG4Verbose(""),
-    fMessenger(this) {
-//
-  TG4Globals::Exception("TG4EventAction is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4EventAction::~TG4EventAction() {
 //
-}
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4EventAction& TG4EventAction::operator=(const TG4EventAction &right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-  
-  TG4Globals::Exception("TG4EventAction is protected from assigning.");
-
-  return *this;
 }
 
 //
@@ -92,14 +70,14 @@ void TG4EventAction::DisplayEvent(const G4Event* event) const
       G4Trajectory* trajectory = dynamic_cast<G4Trajectory*>(vtrajectory);
       if (!trajectory) {
         TG4Globals::Exception(
-	  "TG4EventAction::DisplayEvent: Unknown trajectory type.");
+          "TG4EventAction", "DisplayEvent", "Unknown trajectory type.");
       }
       if ( (fDrawFlag == "ALL") ||
           ((fDrawFlag == "CHARGED") && (trajectory->GetCharge() != 0.))){
-	 trajectory->DrawTrajectory(50); 
-	    // the argument number defines the size of the step points
-	    // use 2000 to make step points well visible
-      }	
+         trajectory->DrawTrajectory(50); 
+            // the argument number defines the size of the step points
+            // use 2000 to make step points well visible
+      }        
     }      
   }
 }
@@ -176,8 +154,8 @@ void TG4EventAction::BeginOfEventAction(const G4Event* event)
       
       for (G4int ip=0; ip<vertex->GetNumberOfParticle(); ip++) {
         G4PrimaryParticle* particle = vertex->GetPrimary(ip);
-	PrimaryToStack(vertex, particle);
-      }	
+        PrimaryToStack(vertex, particle);
+      }        
     }
   }  
 
@@ -213,8 +191,8 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
        G4int nofAllTracks = trackingAction->GetNofTracks();
        G4cout  << "    " << nofAllTracks << 
                   " all tracks processed." << G4endl;
-    }	  
-  }	       
+    }          
+  }               
 
   // display event
   DisplayEvent(event);

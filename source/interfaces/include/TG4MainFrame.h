@@ -1,4 +1,4 @@
-// $Id: TG4MainFrame.h,v 1.3 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4MainFrame.h,v 1.4 2006/09/13 06:26:11 brun Exp $
 /// \ingroup interfaces
 //
 /// \class TG4MainFrame
@@ -27,18 +27,18 @@ public:
     
     TG4MainFrame(const TGWindow *p, UInt_t w, UInt_t h);
     ~TG4MainFrame();
-		
+                
      TG4VolumesFrames* GetVolumesFrames() const;
      TG4MaterialsFrames* GetMaterialsFrames() const;
      TG4ListTreeFrame* GetListTreeFrame() const;
 
-     void CloseWindow();		    			    
+     void CloseWindow();                                                
      Bool_t ProcessMessage(Long_t msg, Long_t parm1, Long_t parm2);
 //---------------------------------------------------------------------------
 
 private:
+    TG4MainFrame(const TG4MainFrame& mf);                     
     TG4MainFrame& operator=(const TG4MainFrame& mf);
-    TG4MainFrame(const TG4MainFrame& mf); 		    
 
     TGMenuBar*          fMenuBar;          // main menu bar   
 
@@ -54,7 +54,7 @@ private:
     
     TG4VolumesFrames*   fvolumesFrames;   // service class for adding vols subframes 
     TG4MaterialsFrames* fmaterialsFrames; // service class for adding mats subframes 
-    TG4ListTreeFrame*   flistTreeFrame;	  // service class for volumes list tree		
+    TG4ListTreeFrame*   flistTreeFrame;          // service class for volumes list tree                
 
     ClassDef(TG4MainFrame,0)  // the main frame for the TG4 Browser  
   };

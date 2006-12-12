@@ -1,4 +1,4 @@
-// $Id: TG4ParticleGun.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4ParticleGun.cxx,v 1.2 2004/11/10 11:39:27 brun Exp $
 // Category: event
 //
 // Class TG4ParticleGun
@@ -21,7 +21,9 @@
 TG4ParticleGun::TG4ParticleGun() 
   : G4VPrimaryGenerator(),
     TG4Verbose("particleGun"),
-    fMessenger(this) {
+    fGunParticleVector(),
+    fMessenger(this) 
+{
 //
 }
 
@@ -29,6 +31,7 @@ TG4ParticleGun::TG4ParticleGun()
 TG4ParticleGun::TG4ParticleGun(const TG4ParticleGun& right)
   : G4VPrimaryGenerator(right),
     TG4Verbose("particleGun"),
+    fGunParticleVector(),
     fMessenger(this)
 {
   // copy stuff
@@ -110,8 +113,9 @@ void TG4ParticleGun::GeneratePrimaryVertex(G4Event* event)
       = particle->GetParticleDefinition();
     if (particleDefinition==0) {
       TG4Globals::Exception(
-        "TG4ParticleGun::GeneratePrimaryVertex: Unknown particle definition.");
-    }	
+        "TG4ParticleGun", "GeneratePrimaryVertex", 
+        "Unknown particle definition.");
+    }        
 
     G4ThreeVector position = particle->GetPosition(); 
     G4double time = particle->GetTime(); 
@@ -146,7 +150,7 @@ void TG4ParticleGun::GeneratePrimaryVertex(G4Event* event)
     primaryParticle->SetMass(mass);
     primaryParticle->SetPolarization(particle->GetPolarization().x(),
                                      particle->GetPolarization().y(),
-				     particle->GetPolarization().z());    
+                                     particle->GetPolarization().z());    
     
     vertex->SetPrimary(primaryParticle);
   }
@@ -156,8 +160,8 @@ void TG4ParticleGun::GeneratePrimaryVertex(G4Event* event)
     G4cout << "   " 
            << event->GetNumberOfPrimaryVertex()  << " of primary vertices,"
            << "   " << fGunParticleVector.size() << " of primary particles " 
-  	   << G4endl;  
-  }	   
+             << G4endl;  
+  }           
 
   // delete gun particles
   Reset();
@@ -189,7 +193,7 @@ void TG4ParticleGun::List()
     GunParticleIterator it;
     for (it = fGunParticleVector.begin(); 
          it != fGunParticleVector.end(); it++) {    
-	 
+         
       G4cout << i++ << " th particle properties: " << G4endl;
       G4cout << "============================" << G4endl;
       (*it)->Print();

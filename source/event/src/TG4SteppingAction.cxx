@@ -1,4 +1,4 @@
-// $Id: TG4SteppingAction.cxx,v 1.5 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4SteppingAction.cxx,v 1.6 2005/01/05 08:04:58 brun Exp $
 // Category: event
 //
 // Class TG4SteppingAction
@@ -22,7 +22,8 @@ TG4SteppingAction* TG4SteppingAction::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4SteppingAction::TG4SteppingAction() 
-  : fMessenger(this),
+  : G4UserSteppingAction(),
+    fMessenger(this),
     fMaxNofSteps(kMaxNofSteps),
     fStandardVerboseLevel(-1),
     fLoopVerboseLevel(1),
@@ -30,39 +31,17 @@ TG4SteppingAction::TG4SteppingAction()
  {
 //
   if (fgInstance) { 
-    TG4Globals::Exception("TG4SteppingAction constructed twice."); 
+    TG4Globals::Exception(
+      "TG4SteppingAction", "TG4SteppingAction", 
+      "Cannot create two instances of singleton.");
   }
 
   fgInstance = this;
 }
 
 //_____________________________________________________________________________
-TG4SteppingAction::TG4SteppingAction(const TG4SteppingAction& right)  
-  : fMessenger(this)
- {
-//
-  TG4Globals::Exception("TG4SteppingAction is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4SteppingAction::~TG4SteppingAction() {
 //
-}
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4SteppingAction& 
-TG4SteppingAction::operator=(const TG4SteppingAction &right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-  
-  TG4Globals::Exception("TG4SteppingAction is protected from assigning.");
-
-  return *this;
 }
 
 //
@@ -85,9 +64,9 @@ void TG4SteppingAction::PrintTrackInfo(const G4Track* track) const
   G4cout << "* G4Track Information: " 
          << "  Particle = " << track->GetDefinition()->GetParticleName() 
          << "," 
-	 << "   Track ID = " << track->GetTrackID() 
+         << "   Track ID = " << track->GetTrackID() 
          << "," 
-	 << "   Parent ID = " << track->GetParentID() 
+         << "   Parent ID = " << track->GetParentID() 
          << G4endl;
   G4cout << "*******************************************************"
          << "**************************************************"
@@ -98,25 +77,25 @@ void TG4SteppingAction::PrintTrackInfo(const G4Track* track) const
 #ifdef G4_USE_G4BESTUNIT_FOR_VERBOSE
     G4cout << std::setw( 5) << "Step#"  << " "
            << std::setw( 8) << "X"      << "     "
-	   << std::setw( 8) << "Y"      << "     "  
-	   << std::setw( 8) << "Z"      << "     "
-	   << std::setw( 9) << "KineE"  << "     "
-	   << std::setw( 8) << "dE"     << "     "  
-	   << std::setw(12) << "StepLeng"   << " "  
-	   << std::setw(12) << "TrackLeng"  << " "
-	   << std::setw(12) << "NextVolume" << " "
-	   << std::setw( 8) << "ProcName"   << G4endl;	     
+           << std::setw( 8) << "Y"      << "     "  
+           << std::setw( 8) << "Z"      << "     "
+           << std::setw( 9) << "KineE"  << "     "
+           << std::setw( 8) << "dE"     << "     "  
+           << std::setw(12) << "StepLeng"   << " "  
+           << std::setw(12) << "TrackLeng"  << " "
+           << std::setw(12) << "NextVolume" << " "
+           << std::setw( 8) << "ProcName"   << G4endl;             
 #else
     G4cout << std::setw( 5) << "Step#"      << " "
-	   << std::setw( 8) << "X(mm)"      << " "
-	   << std::setw( 8) << "Y(mm)"      << " "  
-	   << std::setw( 8) << "Z(mm)"      << " "
-	   << std::setw( 9) << "KinE(MeV)"  << " "
-	   << std::setw( 8) << "dE(MeV)"    << " "  
-	   << std::setw( 8) << "StepLeng"   << " "  
-	   << std::setw( 9) << "TrackLeng"  << " "
-	   << std::setw(11) << "NextVolume" << " "
-	   << std::setw( 8) << "ProcName"   << G4endl;	     
+           << std::setw( 8) << "X(mm)"      << " "
+           << std::setw( 8) << "Y(mm)"      << " "  
+           << std::setw( 8) << "Z(mm)"      << " "
+           << std::setw( 9) << "KinE(MeV)"  << " "
+           << std::setw( 8) << "dE(MeV)"    << " "  
+           << std::setw( 8) << "StepLeng"   << " "  
+           << std::setw( 9) << "TrackLeng"  << " "
+           << std::setw(11) << "NextVolume" << " "
+           << std::setw( 8) << "ProcName"   << G4endl;             
 #endif
 }
 
@@ -139,9 +118,9 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
         // reset parameters at beginning of tracking
         fpSteppingManager->SetVerboseLevel(fStandardVerboseLevel);
         fLoopStepCounter = 0;
-  	        // necessary in case particle has reached fMaxNofSteps
-	        // but has stopped before processing kMaxNofLoopSteps
-     }	
+                  // necessary in case particle has reached fMaxNofSteps
+                // but has stopped before processing kMaxNofLoopSteps
+     }        
      else {
       // count steps after detecting looping track
       fLoopStepCounter++;
@@ -161,9 +140,9 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
     // print looping info
     if (fLoopVerboseLevel > 0) {
        G4cout << "*** Particle reached max step number ("
-	      << fMaxNofSteps << "). ***" << G4endl;
-	  if (fStandardVerboseLevel == 0) PrintTrackInfo(track);
-    }	
+              << fMaxNofSteps << "). ***" << G4endl;
+          if (fStandardVerboseLevel == 0) PrintTrackInfo(track);
+    }        
    
     // keep standard verbose level
     if (fStandardVerboseLevel<0) 
@@ -211,8 +190,8 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
     TG4SensitiveDetector* tsd
       = TG4SDServices::Instance()
            ->GetSensitiveDetector(
-	        step->GetPostStepPoint()->GetPhysicalVolume()
-		    ->GetLogicalVolume()->GetSensitiveDetector());
+                step->GetPostStepPoint()->GetPhysicalVolume()
+                    ->GetLogicalVolume()->GetSensitiveDetector());
 
     if (tsd) tsd->ProcessHitsOnBoundary((G4Step*)step);
 #else

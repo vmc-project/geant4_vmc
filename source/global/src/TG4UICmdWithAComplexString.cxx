@@ -1,4 +1,4 @@
-// $Id: TG4UICmdWithAComplexString.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4UICmdWithAComplexString.cxx,v 1.4 2006/01/13 16:59:38 brun Exp $
 // Category: global
 //
 // Class TG4UICmdWithAComplexString
@@ -31,7 +31,7 @@ TG4UICmdWithAComplexString::TG4UICmdWithAComplexString(
 TG4UICmdWithAComplexString::~TG4UICmdWithAComplexString() {
 //
 }
-			       
+                               
 //
 // public methods
 //

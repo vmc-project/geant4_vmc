@@ -1,4 +1,4 @@
-// $Id: TG4SDConstruction.cxx,v 1.2 2004/07/09 16:56:08 brun Exp $
+// $Id: TG4SDConstruction.cxx,v 1.3 2004/11/10 11:39:27 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -50,17 +50,17 @@ void TG4SDConstruction::CreateSD(G4LogicalVolume* lv) const
   G4VSensitiveDetector* sd = 0; 
   sd = pSDManager->FindSensitiveDetector(sdName, false);
   if (!sd) {
-    TG4SensitiveDetector* newSD = new TG4SensitiveDetector(sdName);	
+    TG4SensitiveDetector* newSD = new TG4SensitiveDetector(sdName);        
     pSDManager->AddNewDetector(newSD);
 
     if (VerboseLevel() > 1) {
       G4cout << "Sensitive detector " << sdName << "(" 
              << newSD->GetID() << ") has been created." << G4endl;
     }
-    	     
+                 
     sd = newSD;  
-  }	
-  lv->SetSensitiveDetector(sd);	     
+  }        
+  lv->SetSensitiveDetector(sd);             
 }
 
 //

@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorSpecialControls.cxx,v 1.4 2005/03/29 10:39:53 brun Exp $
+// $Id: TG4PhysicsConstructorSpecialControls.cxx,v 1.5 2006/01/13 16:59:39 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsConstructorSpecialControls
@@ -31,7 +31,7 @@ TG4PhysicsConstructorSpecialControls::TG4PhysicsConstructorSpecialControls(
 
 //_____________________________________________________________________________
 TG4PhysicsConstructorSpecialControls::TG4PhysicsConstructorSpecialControls(
-				     G4int verboseLevel, 
+                                     G4int verboseLevel, 
                                      const G4String& name)
   : TG4VPhysicsConstructor(name, verboseLevel),
     fSpecialControls(0) 

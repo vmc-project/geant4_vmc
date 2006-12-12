@@ -1,4 +1,4 @@
-// $Id: TG4G3Defaults.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4G3Defaults.cxx,v 1.3 2005/01/05 08:04:58 brun Exp $
 // Category: global
 //
 // Class TG4G3Defaults
@@ -17,11 +17,15 @@
 TG4G3Defaults* TG4G3Defaults::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4G3Defaults::TG4G3Defaults() {
+TG4G3Defaults::TG4G3Defaults() 
+  : fCutVector(),
+    fControlVector()
+{
 //
   if (fgInstance) {
     TG4Globals::Exception(
-      "TG4G3Defaults: attempt to create two instances of singleton.");
+      "TG4G3Defaults", "TG4G3Defaults", 
+      "Cannot create two instances of singleton.");
   }
       
   fgInstance = this;  
@@ -59,34 +63,10 @@ TG4G3Defaults::TG4G3Defaults() {
 }
   
 //_____________________________________________________________________________
-TG4G3Defaults::TG4G3Defaults(const TG4G3Defaults& right) {
-// 
-  TG4Globals::Exception(
-    "Attempt to copy TG4G3Defaults singleton.");
-}
-
-//_____________________________________________________________________________
 TG4G3Defaults::~TG4G3Defaults() {
 //
 }
 
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4G3Defaults& 
-TG4G3Defaults::operator=(const TG4G3Defaults& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4G3Defaults singleton.");
-    
-  return *this;  
-}    
-          
 //
 // public methods
 //

@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.h,v 1.10 2005/11/18 21:29:35 brun Exp $
+// $Id: TG4GeometryServices.h,v 1.11 2006/04/12 10:37:23 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryServices
@@ -14,6 +14,7 @@
 
 #include "TG4Verbose.h"
 #include "TG4Globals.h"
+#include "TG4MediumMap.h"
 #include "TG4OpSurfaceMap.h"
 
 #include <globals.hh>
@@ -24,7 +25,9 @@
 #include <Rtypes.h>
 #include <TMCOptical.h>
 
-class TG4IntMap;
+#include <map>
+
+class TG4MediumMap;
 class TG4NameMap;
 class TG4Limits;
 class TG4G3CutVector;
@@ -41,11 +44,7 @@ class TGeoHMatrix;
 class TG4GeometryServices : public TG4Verbose
 {
   public:
-    TG4GeometryServices(TG4IntMap* mediumMap, 
-			TG4OpSurfaceMap* opSurfaceMap);
-    // --> protected
-    // TG4GeometryServices();
-    // TG4GeometryServices(const TG4GeometryServices& right);
+    TG4GeometryServices();
     virtual ~TG4GeometryServices();
 
     // static access method
@@ -60,21 +59,21 @@ class TG4GeometryServices : public TG4Verbose
     G4String  CutVolumePath(const G4String& volumePath, 
                             G4String& volName, G4int& copyNo) const; 
     G4String  G4ToG3VolumeName(const G4String& name) const;
-    G4String  GenerateLimitsName(G4int id, const G4String& medName,
-                                           const G4String& matName) const;
-    G4OpticalSurfaceModel  SurfaceModel(EMCOpSurfaceModel model) const; 					   
+
+    G4OpticalSurfaceModel  SurfaceModel(EMCOpSurfaceModel model) const;                                            
     G4SurfaceType          SurfaceType(EMCOpSurfaceType surfType) const;
     G4OpticalSurfaceFinish SurfaceFinish(EMCOpSurfaceFinish finish) const; 
-    void  Convert(const G4Transform3D& transform, TGeoHMatrix& matrix) const;					   
+    void  Convert(const G4Transform3D& transform, TGeoHMatrix& matrix) const;                                           
 
     G4Material* MixMaterials(G4String name, G4double density,
                              const TG4StringVector& matNames, 
-			     const TG4doubleVector& matWeights);
+                             const TG4doubleVector& matWeights);
            // printing 
     void PrintLimits(const G4String& name) const;
     void PrintVolumeLimits(const G4String& volumeName) const;
     void PrintStatistics(G4bool open, G4bool close) const;
     void PrintLogicalVolumeStore() const;
+    void PrintPhysicalVolumeStore() const;
     void PrintElementTable() const;
     void PrintMaterials() const;
 
@@ -113,11 +112,11 @@ class TG4GeometryServices : public TG4Verbose
     G4Material* FindMaterial(G4double* a, G4double* z, G4double density, 
                              G4int nmat, G4double* wmat) const;
 
-  protected:
-    TG4GeometryServices();
-    TG4GeometryServices(const TG4GeometryServices& right);
+    TG4MediumMap*    GetMediumMap() const;
+    TG4OpSurfaceMap* GetOpSurfaceMap() const;
 
-    // operators
+  protected:
+    TG4GeometryServices(const TG4GeometryServices& right);
     TG4GeometryServices& operator=(const TG4GeometryServices& right);
 
   private:
@@ -134,7 +133,7 @@ class TG4GeometryServices : public TG4Verbose
     static const G4double  fgkDensityTolerance;//density tolerance (percentual)
  
     // data members
-    TG4IntMap*         fMediumMap; //map of volumes names to medias IDs
+    TG4MediumMap*      fMediumMap; // map of madia
     TG4OpSurfaceMap*   fOpSurfaceMap;//map of optical surfaces names to their objects 
     G4VPhysicalVolume* fWorld;     //top physical volume (world)
     char               fSeparator; //the volumes name separator (different
@@ -162,6 +161,16 @@ inline char TG4GeometryServices::GetSeparator() const {
   /// Return the volumes name separator
   return fSeparator; 
 }
+
+inline TG4MediumMap* TG4GeometryServices::GetMediumMap() const {
+  /// Return the medium map
+  return fMediumMap;
+}  
+
+inline TG4OpSurfaceMap* TG4GeometryServices::GetOpSurfaceMap() const{
+  /// Return the medium map
+  return fOpSurfaceMap;
+}  
 
 #endif //TG4_GEOMETRY_SERVICES_H
 

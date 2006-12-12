@@ -1,4 +1,4 @@
-// $Id: TG4LVTree.h,v 1.2 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4LVTree.h,v 1.3 2005/09/01 10:04:32 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4LVTree
@@ -26,9 +26,6 @@ class G4Colour;
 class TG4LVTree
 {
   public:
-    // --> protected
-    // TG4LVTree();
-    // TG4LVTree(const TG4LVTree& right);
     virtual ~TG4LVTree();
 
     // static methods
@@ -47,19 +44,16 @@ class TG4LVTree
     void SetVolumeColour(G4LogicalVolume* lv, const G4String& colName) const;     
 #endif
 
-  protected:
+  private:
     TG4LVTree(); 
     TG4LVTree(const TG4LVTree& right);
-
-    // operators
     TG4LVTree& operator=(const TG4LVTree &right);
 
-  private:
     // methods
     void RegisterLogicalVolume(G4LogicalVolume* lv, const G4String& path, 
                                TG4LVStructure& lvStructure) const;
-    void Warn(const G4String& where, const G4String& lvName) const;			       
-    void Warn(const G4String& where) const;			       
+    void Warn(const G4String& where, const G4String& lvName) const;                               
+    void Warn(const G4String& where) const;                               
 
     // static data members
     static TG4LVTree* fgInstance;   // this instance

@@ -1,4 +1,4 @@
-// $Id: TG4ExtDecayer.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4ExtDecayer.h,v 1.3 2005/09/01 10:04:33 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4ExtDecayer
@@ -32,19 +32,14 @@ class TG4ExtDecayer : public G4VExtDecayer,
 {
   public:
     TG4ExtDecayer(TVirtualMCDecayer* externalDecayer);
-    // --> protected
-    //TG4ExtDecayer(const TG4ExtDecayer& right);
     virtual ~TG4ExtDecayer();
 
     virtual G4DecayProducts* ImportDecayProducts(const G4Track& track);
     
-  protected:  
+  private:
     TG4ExtDecayer(const TG4ExtDecayer& right);
-
-    // operators
     TG4ExtDecayer& operator=(const TG4ExtDecayer& right);
 
-  private:
     TG4ParticlesManager* fParticlesManager;  //particles manager 
     TVirtualMCDecayer*   fExternalDecayer;   //the external decayer
     TClonesArray*        fDecayProductsArray;//array of decay products

@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.h,v 1.9 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4StepManager.h,v 1.10 2005/11/18 21:29:35 brun Exp $
 /// \ingroup digits_hits
 //
 /// \class TG4StepManager
@@ -21,6 +21,7 @@
 #include <G4ThreeVector.hh>
 #include <globals.hh>
 
+#include <TString.h>
 #include <TArrayI.h>
 #include <TMCProcess.h>
 
@@ -34,9 +35,7 @@ class TLorentzVector;
 class TG4StepManager
 {
   public:
-    TG4StepManager();
-    // --> protected
-    // TG4StepManager(const TG4StepManager& right);
+    TG4StepManager(const TString& userGeometry);
     virtual ~TG4StepManager();
 
     // static access method
@@ -114,13 +113,10 @@ class TG4StepManager
     TMCProcess ProdProcess(Int_t isec) const; 
     Int_t StepProcesses(TArrayI &proc) const;
 
-  protected:
+  private:
     TG4StepManager(const TG4StepManager& right);
-
-    // operators
     TG4StepManager& operator=(const TG4StepManager& right);
 
-  private:
     // methods
     void CheckTrack() const;
     void CheckStep(const G4String& method) const;
@@ -139,10 +135,11 @@ class TG4StepManager
     G4Step*             fStep;            //current step
     TG4StepStatus       fStepStatus;      //step status that decides whether
                                           //track properties will be returned
-					  //from PreStepPoint or PostStepPoint
-    G4VTouchable*       fTouchableHistory;//touchable history buffer 					  
+                                          //from PreStepPoint or PostStepPoint
+    G4VTouchable*       fTouchableHistory;//touchable history buffer                                           
     G4SteppingManager*  fSteppingManager; //G4SteppingManager
     G4String            fVolPathBuffer;   //buffer for current volume path
+    G4int               fCopyNoOffset;    //volume copy number offset
 };
 
 // inline methods

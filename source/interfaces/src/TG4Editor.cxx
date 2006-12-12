@@ -1,4 +1,4 @@
-// $Id: TG4Editor.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4Editor.cxx,v 1.3 2006/09/13 06:26:12 brun Exp $
 // Category: interfaces
 //
 //========================================================
@@ -22,7 +22,11 @@
 ClassImp(TG4Editor)
 
 TG4Editor::TG4Editor(const TGWindow* main, UInt_t w, UInt_t h) :
-    TGTransientFrame(gClient->GetRoot(), main, w, h)
+    TGTransientFrame(gClient->GetRoot(), main, w, h),
+    fEdit(0),
+    fOK(0),
+    fL1(0),
+    fL2(0)
 {
    /// Create an editor 
 

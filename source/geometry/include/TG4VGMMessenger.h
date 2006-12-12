@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: TG4VGMMessenger.h,v 1.1 2006/04/12 11:15:32 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4VGMMessenger
@@ -27,25 +27,19 @@ class TG4VGMMessenger: public G4UImessenger
 {
   public:
     TG4VGMMessenger(const G4String& xmlFormat);
-    // --> protected
-    // TG4VGMMessenger();
-    // TG4VGMMessenger(const TG4VGMMessenger& right);
     virtual ~TG4VGMMessenger();
 
     // methods
     virtual void SetNewValue(G4UIcommand* command, G4String newValues);
     
-  protected:
+  private:
     TG4VGMMessenger();
     TG4VGMMessenger(const TG4VGMMessenger& right);
-
-    // operators
     TG4VGMMessenger& operator=(const TG4VGMMessenger &right);
-             
-  private:
+
     static G4UIdirectory*  fgDirectory;     // command directory
     static G4UIcmdWithoutParameter* fgGenerateRootCmd;// command: /xml/generateRoot
-    static G4int           fgCounter;	    // instances counter
+    static G4int           fgCounter;            // instances counter
     Geant4GM::Factory*     fG4Factory;      // Geant4 VGM Factory
     RootGM::Factory*       fRootFactory;    // Root VGM Factory
     XmlVGM::VExporter*     fXmlVGMExporter; // associated class

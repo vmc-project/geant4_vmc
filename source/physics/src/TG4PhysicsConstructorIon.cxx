@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorIon.cxx,v 1.4 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsConstructorIon.cxx,v 1.5 2006/01/13 16:59:39 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsConstructorIon
@@ -59,8 +59,8 @@ TG4PhysicsConstructorIon::TG4PhysicsConstructorIon(const G4String& name)
 //_____________________________________________________________________________
 TG4PhysicsConstructorIon::TG4PhysicsConstructorIon(G4int verboseLevel,
                                                    G4bool setEM,
-						   G4bool setHadron,
-						   const G4String& name)
+                                                   G4bool setHadron,
+                                                   const G4String& name)
   : TG4VPhysicsConstructor(name, verboseLevel),
     fElasticProcess(0),
     fElasticModel(0),
@@ -87,14 +87,6 @@ TG4PhysicsConstructorIon::TG4PhysicsConstructorIon(G4int verboseLevel,
 }
 
 //_____________________________________________________________________________
-TG4PhysicsConstructorIon::TG4PhysicsConstructorIon(
-                                     const TG4PhysicsConstructorIon& right)
-{
-//
-  TG4Globals::Exception("TG4PhysicsConstructorIon is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4PhysicsConstructorIon::~TG4PhysicsConstructorIon() 
 {
 //
@@ -116,23 +108,6 @@ TG4PhysicsConstructorIon::~TG4PhysicsConstructorIon()
   delete fAlphaModel;
   delete fHe3MultipleScattering;
   delete fHe3Ionisation;
-}
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4PhysicsConstructorIon& 
-TG4PhysicsConstructorIon::operator=(const TG4PhysicsConstructorIon &right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-  
-  TG4Globals::Exception(
-    "TG4PhysicsConstructorIon is protected from assigning.");
-
-  return *this;
 }
 
 //

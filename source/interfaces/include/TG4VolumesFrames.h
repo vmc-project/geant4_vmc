@@ -1,4 +1,4 @@
-// $Id: TG4VolumesFrames.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4VolumesFrames.h,v 1.3 2005/09/01 10:04:33 brun Exp $
 /// \ingroup interfaces
 //
 /// \class TG4VolumesFrames
@@ -34,12 +34,10 @@ public:
     void DisplayCuts();
     void DisplayControls();
 
-protected:
-
+private:
     TG4VolumesFrames(const TG4VolumesFrames& vf) ;
     TG4VolumesFrames& operator=(const TG4VolumesFrames& vf) ;
 
-private:
     TString GetLimitsDisplay(G4UserLimits* limits) const;
     TString GetCutsDisplay(G4UserLimits* limits) const;
     TString GetControlsDisplay(G4UserLimits* limits) const;

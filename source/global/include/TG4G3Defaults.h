@@ -1,4 +1,4 @@
-// $Id: TG4G3Defaults.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4G3Defaults.h,v 1.3 2005/09/01 10:04:32 brun Exp $
 /// \ingroup global
 //
 /// \class TG4G3Defaults
@@ -23,8 +23,6 @@ class TG4G3Defaults
 {
   public:
     TG4G3Defaults();      
-    // --> protected
-    // TG4G3Defaults(const TG4G3Defaults& right);
     virtual ~TG4G3Defaults();
 
     // static access methods
@@ -38,13 +36,10 @@ class TG4G3Defaults
     G4double CutValue(G4int cut) const;   
     TG4G3ControlValue ControlValue(G4int control) const; 
       
-  protected:
+  private:
     TG4G3Defaults(const TG4G3Defaults& right);      
-
-    // operators
     TG4G3Defaults& operator=(const TG4G3Defaults& right);
 
-  private:
     // static data members  
     static TG4G3Defaults*  fgInstance;      //this instance
     

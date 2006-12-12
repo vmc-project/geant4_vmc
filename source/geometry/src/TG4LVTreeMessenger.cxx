@@ -1,4 +1,4 @@
-// $Id: TG4LVTreeMessenger.cxx,v 1.2 2002/12/18 09:35:31 brun Exp $
+// $Id: TG4LVTreeMessenger.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: geometry
 //
 // Class TG4LVTreeMessenger
@@ -24,9 +24,23 @@
 //_____________________________________________________________________________
 TG4LVTreeMessenger::TG4LVTreeMessenger(TG4LVTree* lvTree)
  : fLVTree(lvTree),
-   fCurrentVolume(0)
+   fCurrentVolume(0),
+   fDirectory(0),
+   fSetCurrentLVCmd(0),
+   fListCmd(0),
+   fListLongCmd(0),
+   fListDaughtersCmd(0),
+   fListLongDaughtersCmd(0)
+#ifdef G4VIS_USE
+   , 
+   fSetLVTreeVisibilityCmd(0),
+   fSetVolVisibilityCmd(0),
+   fSetLVTreeColourCmd(0),
+   fSetVolColourCmd(0)
+#endif //G4VIS_USE
 {
-//
+/// Standard constructor
+
   G4String dirName = "/mcTree/"; 
   fDirectory = new G4UIdirectory(dirName);
   fDirectory->SetGuidance("LV tree control commands.");
@@ -90,19 +104,6 @@ TG4LVTreeMessenger::TG4LVTreeMessenger(TG4LVTree* lvTree)
 }
 
 //_____________________________________________________________________________
-TG4LVTreeMessenger::TG4LVTreeMessenger() {
-//
-}
-
-//_____________________________________________________________________________
-TG4LVTreeMessenger::TG4LVTreeMessenger(const TG4LVTreeMessenger& right)
-{
-//
-  TG4Globals::Exception(
-    "TG4LVTreeMessenger is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4LVTreeMessenger::~TG4LVTreeMessenger()
 {
 //
@@ -118,23 +119,6 @@ TG4LVTreeMessenger::~TG4LVTreeMessenger()
 #endif //G4VIS_USE
 }
 
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4LVTreeMessenger& 
-TG4LVTreeMessenger::operator=(const TG4LVTreeMessenger& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-     "TG4LVTreeMessenger is protected from assigning.");
-    
-  return *this;  
-}    
-          
 //
 // public methods
 //

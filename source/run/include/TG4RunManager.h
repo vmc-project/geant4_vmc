@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.h,v 1.5 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4RunManager.h,v 1.6 2006/01/13 16:59:39 brun Exp $
 /// \ingroup run
 //
 /// \class TG4RunManager
@@ -32,9 +32,6 @@ class TG4RunManager : public TG4Verbose
   public:
     TG4RunManager(TG4RunConfiguration* configuration, int argc, char** argv);
     TG4RunManager(TG4RunConfiguration* configuration);
-    // --> protected
-    // TG4RunManager();
-    // TG4RunManager(const TG4RunManager& right);
     virtual ~TG4RunManager();
 
     // static access method
@@ -61,17 +58,11 @@ class TG4RunManager : public TG4Verbose
     void ProcessRootCommand(G4String command);
     void UseG3Defaults();      
 
-
-  protected:
+  private:
     TG4RunManager();
     TG4RunManager(const TG4RunManager& right);
-
-    // operators
     TG4RunManager& operator=(const TG4RunManager& right);
-   
-    // data members    
 
-  private:
     // methods
     void ConfigureRunManager();
     void CreateGeantUI();

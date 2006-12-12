@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorIon.h,v 1.4 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4PhysicsConstructorIon.h,v 1.5 2006/01/13 16:59:38 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorIon
@@ -33,15 +33,9 @@ class TG4PhysicsConstructorIon: public TG4VPhysicsConstructor
     TG4PhysicsConstructorIon(G4int verboseLevel, 
                              G4bool setEM, G4bool setHadron,
                              const G4String& name = "Ion");
-    // --> protected
-    // TG4PhysicsConstructorIon(const TG4PhysicsConstructorIon& right);
     virtual ~TG4PhysicsConstructorIon();
 
   protected:
-    TG4PhysicsConstructorIon(const TG4PhysicsConstructorIon& right);
-    
-    // operators
-    TG4PhysicsConstructorIon& operator=(const TG4PhysicsConstructorIon& right);
     // methods
           // construct particle and physics
     virtual void ConstructParticle();
@@ -79,7 +73,8 @@ class TG4PhysicsConstructorIon: public TG4VPhysicsConstructor
    G4hIonisation*               fHe3Ionisation;     //He3 ionisation
     
   private:
-    // methods
+    TG4PhysicsConstructorIon(const TG4PhysicsConstructorIon& right);
+    TG4PhysicsConstructorIon& operator=(const TG4PhysicsConstructorIon& right);
 
     // Hadron processes
     void ConstructHadProcessForGenericIon();    

@@ -1,4 +1,4 @@
-// $Id: TG4G3Cut.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4G3Cut.h,v 1.3 2005/09/01 10:04:32 brun Exp $
 /// \ingroup global
 //
 /// \enum TG4G3Cut
@@ -20,11 +20,11 @@ enum TG4G3Cut
                //< G3 default value: 0.001 GeV
   kCUTNEU, //< neutral hadrons  
                //< G4 particles: of type "baryon", "meson", "nucleus"   
-	       //<               with zero charge     
+               //<               with zero charge     
                //< G3 default value: 0.01 GeV
   kCUTHAD, //< charged hadrons  
                //< G4 particles: of type "baryon", "meson", "nucleus"        
-	       //<               with non-zero charge     
+               //<               with non-zero charge     
                //< G3 default value: 0.01 GeV
   kCUTMUO, //< muons            
                //< G4 particles: "mu+", "mu-"         

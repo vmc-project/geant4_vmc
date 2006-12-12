@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorGeneral.h,v 1.5 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4PhysicsConstructorGeneral.h,v 1.6 2006/01/13 16:59:38 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorGeneral
@@ -32,6 +32,10 @@ class TG4PhysicsConstructorGeneral: public TG4VPhysicsConstructor
 
     // data members
     G4Decay* fDecayProcess; // decay process
+
+  private:
+    TG4PhysicsConstructorGeneral(const TG4PhysicsConstructorGeneral& right);
+    TG4PhysicsConstructorGeneral& operator=(const TG4PhysicsConstructorGeneral& right);
 };
 
 #endif //TG4_PHYSICS_CONSTRUCTOR_GENERAL_H

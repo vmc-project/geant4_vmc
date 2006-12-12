@@ -1,4 +1,4 @@
-// $Id: TG4RunMessenger.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4RunMessenger.h,v 1.3 2005/09/01 10:04:33 brun Exp $
 /// \ingroup run
 //
 /// \class TG4RunMessenger
@@ -23,22 +23,16 @@ class TG4RunMessenger: public G4UImessenger
 {
   public:
     TG4RunMessenger(TG4RunManager* runManager);
-    // protected
-    // TG4RunMessenger();
-    // TG4RunMessenger(const TG4RunMessenger& right);
     virtual ~TG4RunMessenger();
    
     // methods 
     virtual void SetNewValue(G4UIcommand* command, G4String string);
     
-  protected:
+  private:
     TG4RunMessenger();  
     TG4RunMessenger(const TG4RunMessenger& right);
-
-    // operators
     TG4RunMessenger& operator=(const TG4RunMessenger& right);
 
-  private:
     // data members
     TG4RunManager*  fRunManager; //associated class   
     G4UIdirectory*  fDirectory;  //command directory

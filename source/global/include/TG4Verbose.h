@@ -1,4 +1,4 @@
-// $Id: TG4Verbose.h,v 1.3 2005/01/28 12:29:38 brun Exp $
+// $Id: TG4Verbose.h,v 1.4 2005/09/01 10:04:32 brun Exp $
 /// \ingroup global
 //
 /// \class TG4Verbose
@@ -25,13 +25,14 @@ class G4UIcommand;
 class TG4Verbose : public TG4VVerbose
 {
   public:
-    // TG4Verbose(); --> private      
     TG4Verbose(const G4String& cmdName);
     TG4Verbose(const G4String& cmdName, G4int verboseLevel);      
     virtual ~TG4Verbose();
 
   private:
     TG4Verbose();
+    TG4Verbose(const TG4Verbose& right);
+    TG4Verbose& operator=(const TG4Verbose& right);
 
     // methods
     virtual TG4VerboseMessenger* CreateMessenger();    

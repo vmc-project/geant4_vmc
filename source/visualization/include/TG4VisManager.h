@@ -1,4 +1,4 @@
-// $Id: TG4VisManager.h,v 1.4 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4VisManager.h,v 1.5 2006/01/13 16:59:39 brun Exp $
 /// \ingroup visualization
 //
 /// \class TG4VisManager
@@ -30,8 +30,6 @@ class TG4VisManager: public G4VisManager
     TG4VisManager(G4int verboseLevel = 0);  
       // Controls initial verbose level of VisManager and VisMessenger.
       // Can be changed by /vis/set/verbose.
-    // --> protected  
-    // TG4VisManager(const TG4VisManager& right);
     virtual ~TG4VisManager();  
     
     //----------------------  
@@ -43,16 +41,13 @@ class TG4VisManager: public G4VisManager
     void Gsatt(const char* name, const char* att, Int_t val);
     void Gdraw(const char* name, Float_t theta , Float_t phi, 
                Float_t psi, Float_t u0, Float_t v0, Float_t ul, 
-	       Float_t vl);
+               Float_t vl);
     void SetColors();
 
-  protected:
+  private:
     TG4VisManager(const TG4VisManager& right);
-
-    // operators
     TG4VisManager& operator=(const TG4VisManager& right);
 
-  private:
     // methods
     //--------
     void RegisterGraphicsSystems();
@@ -69,8 +64,8 @@ class TG4VisManager: public G4VisManager
                     const G4VPhysicalVolume* pv) const;
 
     // Get the logical volume list corresponding to NAME
-    // 	Either a logical or physical volume name can be supplied
-    // Clones of G3VOLUME_NUMBER will be atached to the list	
+    //         Either a logical or physical volume name can be supplied
+    // Clones of G3VOLUME_NUMBER will be atached to the list        
     LogicalVolumesVector GetLVList(G4String name);
 
     // Get the physical volume list corresponding to NAME
@@ -78,19 +73,19 @@ class TG4VisManager: public G4VisManager
     
     // Case insensitive string comparison
     G4bool CaseInsensitiveEqual(const G4String string1,
-				const G4String string2);
+                                const G4String string2);
     
     // Return true if the vis. attributes pointer corresponding to the 
-    //	selected volume is shared by others. In this case, duplication
+    //        selected volume is shared by others. In this case, duplication
     //  of those is mandatory
     G4bool IsSharedVisAttributes(const G4LogicalVolume* pLV);
     
     // Set an attribute to a specific volume
     void SetG4Attribute(G4LogicalVolume* const lv, const TG4G3Attribute att,
-			const G4int val);
-    // Set an attribute to the tree coresponding to a volume			
+                        const G4int val);
+    // Set an attribute to the tree coresponding to a volume                        
     void SetAtt4Daughters(G4LogicalVolume* const lv, const TG4G3Attribute att,
-			const G4int val);			    
+                        const G4int val);                            
 
     //data members
     //------------

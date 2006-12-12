@@ -1,4 +1,4 @@
-// $Id: TG4VPhysicsConstructor.h,v 1.3 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4VPhysicsConstructor.h,v 1.4 2006/01/13 16:59:38 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4VPhysicsConstructor
@@ -18,9 +18,6 @@ class TG4VPhysicsConstructor: public G4VPhysicsConstructor,
                               public TG4Verbose
 {
   public:
-    // TG4VPhysicsConstructor(); --> protected
-    // TG4VPhysicsConstructor(const TG4VPhysicsConstructor& right);
-    //  --> protected
     TG4VPhysicsConstructor(const G4String& name);
     TG4VPhysicsConstructor(const G4String& name, G4int verboseLevel);
     virtual ~TG4VPhysicsConstructor();
@@ -31,12 +28,14 @@ class TG4VPhysicsConstructor: public G4VPhysicsConstructor,
     virtual void ConstructProcess() = 0;
 
   protected:
-    TG4VPhysicsConstructor();
-    TG4VPhysicsConstructor(const TG4VPhysicsConstructor& right);
-
     // overridden verbose methods
     virtual void  VerboseLevel(G4int level);
     virtual G4int VerboseLevel() const;
+
+  private:
+    TG4VPhysicsConstructor();
+    TG4VPhysicsConstructor(const TG4VPhysicsConstructor& right);
+
 };
 
 #endif //TG4_V_PHYSICS_CONSTRUCTOR_H

@@ -1,4 +1,4 @@
-// $Id: TG4G3PhysicsManager.cxx,v 1.5 2005/03/29 10:39:53 brun Exp $
+// $Id: TG4G3PhysicsManager.cxx,v 1.6 2005/07/22 10:22:48 brun Exp $
 // Category: physics
 //
 // Class TG4G3PhysicsManager
@@ -26,12 +26,14 @@ TG4G3PhysicsManager::TG4G3PhysicsManager()
     fControlVector(0),
     fIsCutVector(0),
     fIsControlVector(0),
+    fG3Defaults(),
     fLock(false)
 {
 // 
   if (fgInstance) {
     TG4Globals::Exception(
-      "TG4G3PhysicsManager: attempt to create two instances of singleton.");
+      "TG4G3PhysicsManager", "TG4G3PhysicsManager",
+      "Cannot create two instances of singleton.");
   }
       
   fgInstance = this;  
@@ -53,36 +55,12 @@ TG4G3PhysicsManager::TG4G3PhysicsManager()
 }
 
 //_____________________________________________________________________________
-TG4G3PhysicsManager::TG4G3PhysicsManager(const TG4G3PhysicsManager& right) {
-// 
-  TG4Globals::Exception(
-    "Attempt to copy TG4G3PhysicsManager singleton.");
-}
-
-//_____________________________________________________________________________
 TG4G3PhysicsManager::~TG4G3PhysicsManager() {
 //
 //  delete fIsCutVector;
   delete fIsControlVector;
 }
 
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4G3PhysicsManager& 
-TG4G3PhysicsManager::operator=(const TG4G3PhysicsManager& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4G3PhysicsManager singleton.");
-    
-  return *this;  
-}    
-          
 //
 // private methods
 //
@@ -108,7 +86,7 @@ G4bool TG4G3PhysicsManager::CheckCutWithG3Defaults(G4String name,
       return true;
     }  
     else return false;  
-  }   	   	         
+  }                               
   return false;
 }
 
@@ -137,7 +115,7 @@ G4bool TG4G3PhysicsManager::CheckControlWithG3Defaults(G4String name,
       return true;
     }  
     else return false;  
-  }   	   	         
+  }                               
   return false;
 }
 
@@ -163,7 +141,7 @@ void TG4G3PhysicsManager::SetProcess(TG4G3Control control,
 
   G4cout << "TG4G3PhysicsManager::SetProcess: "
          << control << "  " << controlValue << G4endl;
-	 
+         
   fControlVector->SetControl(control, controlValue, *fCutVector);
 } 
 
@@ -220,59 +198,59 @@ void TG4G3PhysicsManager::SwitchIsControlVector(TG4G3Control control)
     case kCOMP:
            // gamma
            (*fIsControlVector)[kGamma] = true; 
-	   break;
+           break;
     case kPHOT:
            // gamma
            (*fIsControlVector)[kGamma] = true; 
-	   break;
+           break;
     case kPFIS:
            // gamma
            (*fIsControlVector)[kGamma] = true; 
-	   break;
-    case kDRAY:	
+           break;
+    case kDRAY:        
            // all charged particles
            (*fIsControlVector)[kElectron] = true; 
            (*fIsControlVector)[kEplus] = true; 
            (*fIsControlVector)[kChargedHadron] = true; 
            (*fIsControlVector)[kMuon] = true; 
-	   break;
+           break;
     case kANNI:
-	   // e+ only
+           // e+ only
            (*fIsControlVector)[kEplus] = true; 
-	   break;
+           break;
     case kBREM:
-	   // e-/e+, muons
+           // e-/e+, muons
            (*fIsControlVector)[kElectron] = true; 
            (*fIsControlVector)[kEplus] = true; 
            (*fIsControlVector)[kMuon] = true; 
-	   break;
+           break;
     case kHADR:
-	   // hadrons
+           // hadrons
            (*fIsControlVector)[kNeutralHadron] = true; 
            (*fIsControlVector)[kChargedHadron] = true; 
-	   break;
+           break;
     case kMUNU:
            // muons
            (*fIsControlVector)[kMuon] = true; 
-	   break;
+           break;
     case kDCAY:
            // any
            (*fIsControlVector)[kAny] = true; 
-	   break;
+           break;
     case kLOSS:
            // all charged particles
            (*fIsControlVector)[kElectron] = true; 
            (*fIsControlVector)[kEplus] = true; 
            (*fIsControlVector)[kChargedHadron] = true; 
            (*fIsControlVector)[kMuon] = true; 
-	   break;
+           break;
     case kMULS:
            // all charged particles
            (*fIsControlVector)[kElectron] = true; 
            (*fIsControlVector)[kEplus] = true; 
            (*fIsControlVector)[kChargedHadron] = true; 
            (*fIsControlVector)[kMuon] = true; 
-	   break;
+           break;
     default:
           break;
   }
@@ -289,10 +267,10 @@ void TG4G3PhysicsManager::CheckLock()
 /// Prevent from modifying physics setup after the physics manager is locked.
 
   if (fLock) {
-    G4String text = "TG4PhysicsManager: \n";
-    text = text + "    It is too late to change physics setup. \n";
-    text = text + "    PhysicsManager has been already locked.";
-    TG4Globals::Exception(text);
+    TG4Globals::Exception( 
+      "TG4PhysicsManager", "CheckLock",
+      "It is too late to change physics setup." + TG4Globals::Endl() +
+      "PhysicsManager has been already locked.");
   }  
 }
 
@@ -337,14 +315,14 @@ G4bool TG4G3PhysicsManager::CheckCutWithTheVector(G4String name,
       return true;
     }  
     else return false;  
-  }   	   	         
+  }                               
   return false;
 }
 
 //_____________________________________________________________________________
 G4bool TG4G3PhysicsManager::CheckControlWithTheVector(G4String name, 
                                  G4double value, TG4G3Control& control,
-				 TG4G3ControlValue& controlValue)
+                                 TG4G3ControlValue& controlValue)
 {
 /// Retrieve corresponding TG4G3Control from the name and 
 /// in case the value is different from the value in controlVector
@@ -366,7 +344,7 @@ G4bool TG4G3PhysicsManager::CheckControlWithTheVector(G4String name,
       return true;
     }  
     else return false;  
-  }   	   	         
+  }                               
   return false;
 }
 
@@ -494,9 +472,8 @@ G4String TG4G3PhysicsManager::GetG3ParticleWSPName(G4int particleWSP) const
       return "NoSP";
       break;
     default:
-      G4String text = "TG4G3PhysicsManager::GetG3ParticleWSPName:\n";
-      text = text + "   Wrong particleWSP."; 
-      TG4Globals::Exception(text);
+      TG4Globals::Exception(
+        "TG4G3PhysicsManager", "GetG3ParticleWSPName", "Wrong particleWSP."); 
       return "";
   }
 }  

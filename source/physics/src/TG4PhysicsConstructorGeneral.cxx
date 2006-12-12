@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorGeneral.cxx,v 1.5 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4PhysicsConstructorGeneral.cxx,v 1.6 2006/01/13 16:59:38 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsConstructorGeneral
@@ -32,7 +32,7 @@ TG4PhysicsConstructorGeneral::TG4PhysicsConstructorGeneral(const G4String& name)
 
 //_____________________________________________________________________________
 TG4PhysicsConstructorGeneral::TG4PhysicsConstructorGeneral(
-						   G4int verboseLevel,
+                                                   G4int verboseLevel,
                                                    const G4String& name)
   : TG4VPhysicsConstructor(name, verboseLevel), 
     fDecayProcess(0)

@@ -1,4 +1,4 @@
-// $Id: TG4SteppingAction.h,v 1.3 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4SteppingAction.h,v 1.4 2005/09/01 10:04:32 brun Exp $
 /// \ingroup event
 //
 /// \class TG4SteppingAction
@@ -33,8 +33,6 @@ class TG4SteppingAction : public G4UserSteppingAction
 
   public:
     TG4SteppingAction();
-    // --> protected
-    // TG4SteppingAction(const TG4SteppingAction& right);
     virtual ~TG4SteppingAction();
    
     // static access method
@@ -43,7 +41,7 @@ class TG4SteppingAction : public G4UserSteppingAction
     // methods
     virtual void SteppingAction(const G4Step* step);
                   // the following method should not
-		  // be overwritten in a derived class
+                  // be overwritten in a derived class
     virtual void UserSteppingAction(const G4Step* step);
 
     // set methods
@@ -55,15 +53,13 @@ class TG4SteppingAction : public G4UserSteppingAction
     G4int GetMaxNofSteps() const;
 
   protected:
-    TG4SteppingAction(const TG4SteppingAction& right);
-
-    // operators
-    TG4SteppingAction& operator=(const TG4SteppingAction& right);
-    
     // methods
     void PrintTrackInfo(const G4Track* track) const;
 
   private:
+    TG4SteppingAction(const TG4SteppingAction& right);
+    TG4SteppingAction& operator=(const TG4SteppingAction& right);
+
     // static data members
     static TG4SteppingAction*   fgInstance; //this instance
 
@@ -84,7 +80,7 @@ inline TG4SteppingAction* TG4SteppingAction::Instance() {
   return fgInstance; 
 }
 
-inline void TG4SteppingAction::SteppingAction(const G4Step* step) {
+inline void TG4SteppingAction::SteppingAction(const G4Step* /*step*/) {
   /// Dummy stepping action that can be overriden
   /// in a user defined class
 }  

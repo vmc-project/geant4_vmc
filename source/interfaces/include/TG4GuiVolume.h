@@ -1,4 +1,4 @@
-// $Id: TG4GuiVolume.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4GuiVolume.h,v 1.3 2005/09/01 10:04:33 brun Exp $
 /// \ingroup interfaces
 //
 /// \class TG4GuiVolume
@@ -26,17 +26,11 @@ public:
     const char* GetName() const;
 
     void  SetItem(TGListTreeItem* item);
-
-//--------------------------------------------------------------------
-protected:
-    TG4GuiVolume(const TG4GuiVolume& gv) ;
-
-    // operators
-    TG4GuiVolume & operator=(const TG4GuiVolume& gv) ;
-    
-//---------------------------------------------------------------------    
     
 private:      
+    TG4GuiVolume(const TG4GuiVolume& gv) ;
+    TG4GuiVolume & operator=(const TG4GuiVolume& gv) ;
+
     G4LogicalVolume*  fLogicalVolume;    // geant logical volume 
     TGListTreeItem*   fItem; // current item
 

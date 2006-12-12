@@ -1,4 +1,4 @@
-// $Id: TG4MaterialsFrames.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4MaterialsFrames.h,v 1.3 2005/09/01 10:04:33 brun Exp $
 /// \ingroup interfaces
 //
 /// \class TG4MaterialsFrames
@@ -28,13 +28,10 @@ public:
     void DisplayMaterialCharacteristics( int qmat);
     void SetMaterialsComboEntries() ;
 
-protected:
-
+private:
     TG4MaterialsFrames(const TG4MaterialsFrames& mf) ;
     TG4MaterialsFrames& operator=(const TG4MaterialsFrames& mf) ;
 
-
-private:
     TGCompositeFrame*   fCapFrame; // the top frame for materials display
     TGCompositeFrame*   fMatSubframe1; // frame for the combo box
     TGCompositeFrame*   fMatSubframe2; // frame for the text entries

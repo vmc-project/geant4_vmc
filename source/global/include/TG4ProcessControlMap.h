@@ -1,4 +1,4 @@
-// $Id: TG4ProcessControlMap.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4ProcessControlMap.h,v 1.4 2005/09/01 10:04:32 brun Exp $
 /// \ingroup global
 //
 /// \class TG4ProcessControlMap
@@ -27,8 +27,6 @@ class TG4ProcessControlMap
 
   public:
     TG4ProcessControlMap();
-    // --> protected
-    // TG4ProcessControlMap(const TG4ProcessControlMap& right);
     virtual ~TG4ProcessControlMap();
 
     // static access method
@@ -46,13 +44,10 @@ class TG4ProcessControlMap
     const G4String& GetControlName(const G4VProcess* process);
     const G4String& GetControlName(const G4String& processName);
 
-  protected:
+  private:
     TG4ProcessControlMap(const TG4ProcessControlMap& right);
-
-    // operators
     TG4ProcessControlMap& operator=(const TG4ProcessControlMap& right);
   
-  private:
     // methods
     G4bool IsDefined(const G4String& processName);
 

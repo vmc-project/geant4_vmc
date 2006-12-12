@@ -1,4 +1,4 @@
-// $Id: TG4ParticlesManager.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4ParticlesManager.h,v 1.4 2005/09/01 10:04:33 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4ParticlesManager
@@ -29,8 +29,6 @@ class TG4ParticlesManager : public TG4Verbose
 {
   public:
     TG4ParticlesManager();
-    // --> protected
-    // TG4ParticlesManager(const TG4ParticlesManager& right);
     virtual ~TG4ParticlesManager();
 
     // static access method
@@ -58,13 +56,10 @@ class TG4ParticlesManager : public TG4Verbose
     G4ThreeVector GetParticleMomentum(
                            const TParticle* particle) const;        
     
-  protected:
+  private:
     TG4ParticlesManager(const TG4ParticlesManager& right);
-
-    // operators
     TG4ParticlesManager& operator=(const TG4ParticlesManager& right);
 
-  private:
     // methods
     G4int GetPDGEncoding(G4ParticleDefinition* particle) const;
     G4int GetPDGEncoding(G4String particleName) const;

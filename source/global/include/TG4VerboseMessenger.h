@@ -1,4 +1,4 @@
-// $Id: TG4VerboseMessenger.h,v 1.4 2005/01/28 12:29:38 brun Exp $
+// $Id: TG4VerboseMessenger.h,v 1.5 2005/09/01 10:04:32 brun Exp $
 /// \ingroup global
 //
 /// \class TG4VerboseMessenger
@@ -27,9 +27,6 @@ class TG4VerboseMessenger: public G4UImessenger
 
   public:
     TG4VerboseMessenger(const G4String& directoryName);
-    // --> protected   
-    // TG4VerboseMessenger();
-    // TG4VerboseMessenger(const TG4VerboseMessenger& right);
     virtual ~TG4VerboseMessenger();
    
     // methods 
@@ -37,14 +34,11 @@ class TG4VerboseMessenger: public G4UImessenger
             void RemoveCommand(TG4VVerbose* verbose, G4UIcommand* command);
     virtual void SetNewValue(G4UIcommand* command, G4String string);
     
-  protected:
+  private:
     TG4VerboseMessenger();  
     TG4VerboseMessenger(const TG4VerboseMessenger& right);
-
-    // operators
     TG4VerboseMessenger& operator=(const TG4VerboseMessenger& right);
 
-  private:
     // methods
     void SetNewValueToAll(const G4String value) const;
   

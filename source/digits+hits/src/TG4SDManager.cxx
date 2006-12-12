@@ -1,4 +1,4 @@
-// $Id: TG4SDManager.cxx,v 1.3 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4SDManager.cxx,v 1.4 2006/01/13 16:59:38 brun Exp $
 // Category: digits+hits
 //
 // Class TG4SDManager
@@ -10,6 +10,9 @@
 #include "TG4SDManager.h"
 #include "TG4SDConstruction.h"
 #include "TG4SDServices.h"
+#include "TG4GeometryServices.h"
+#include "TG4MediumMap.h"
+#include "TG4Medium.h"
 #include "TG4Globals.h"
 
 TG4SDManager* TG4SDManager::fgInstance = 0;
@@ -24,21 +27,14 @@ TG4SDManager::TG4SDManager()
 
   if (fgInstance)
     TG4Globals::Exception(
-      "TG4SDManager: attempt to create two instances of singleton.");
+      "TG4SDManager", "TG4SDManager", 
+      "Cannot create two instances of singleton.");
       
   fgInstance = this; 
   
   fSDConstruction = new TG4SDConstruction();
   fSDServices = new TG4SDServices();
 }
-
-//_____________________________________________________________________________
-TG4SDManager::TG4SDManager(const TG4SDManager& right) {
-// 
-  TG4Globals::Exception(
-    "Attempt to copy TG4SDManager singleton.");
-}
-
 
 //_____________________________________________________________________________
 TG4SDManager::~TG4SDManager()
@@ -48,23 +44,6 @@ TG4SDManager::~TG4SDManager()
   delete fSDConstruction;
   delete fSDServices;
 }
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4SDManager& TG4SDManager::operator=(const TG4SDManager& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4SDManager singleton.");
-    
-  return *this;  
-}    
-          
 
 //
 // public methods 
@@ -89,6 +68,24 @@ Int_t TG4SDManager::VolId(const Text_t* volName) const
   return fSDServices->GetVolumeID(volName);
 }
 
+
+//_____________________________________________________________________________
+Int_t TG4SDManager::MediumId(const Text_t* medName) const
+{
+// Returns the medium id for medium with given name
+
+  TG4MediumMap* mediumMap = TG4GeometryServices::Instance()->GetMediumMap();
+  TG4Medium* medium = mediumMap->GetMedium(G4String(medName), false);
+  
+  if ( ! medium ) {
+    TG4Globals::Warning(
+      "TG4SDManager", "MediumId", 
+      "Medium " + TString(medName) + " not found.");
+    return 0;
+  }    
+
+  return medium->GetID();
+}                   
 
 //_____________________________________________________________________________
 const char* TG4SDManager::VolName(Int_t id) const
@@ -142,6 +139,6 @@ Int_t TG4SDManager::VolId2Mate(Int_t volumeId)  const
 {
 /// Return the material number for a given volume id
 
-  return fSDServices->GetMediumId(volumeId);	       	         
+  return fSDServices->GetMediumId(volumeId);                                
 }
  

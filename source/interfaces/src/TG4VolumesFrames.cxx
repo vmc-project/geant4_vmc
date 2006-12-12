@@ -1,4 +1,4 @@
-// $Id: TG4VolumesFrames.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4VolumesFrames.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
 // Category: interfaces
 //
 //========================================================
@@ -38,7 +38,22 @@
  ClassImp(TG4VolumesFrames)
 
 TG4VolumesFrames::TG4VolumesFrames( TGTab* Tab, TG4MainFrame* ActionFrame)
-  : fPanel(ActionFrame)
+  : TObject(),
+    fPanel(ActionFrame),
+    fCapFrame(0), 
+    fVolSubframe1(0),
+    fVolSubframe2(0),
+    fGrFrame(0), 
+    fGrHFrame(0),
+    fbtsumm(0),
+    fbtcuts(0),
+    fbtcontrols(0),
+    fVolFrameLayout(0),
+    fVolumesCombo(0),
+    fComboLabel(0),  
+    fDisplBuffLimits(0), 
+    fDisplBuffCuts(0),
+    fDisplBuffControls(0)
 { 
 ///---> creates the volumes properties display frame
 ///---> and plunges it into the main frame
@@ -162,24 +177,6 @@ TG4VolumesFrames::TG4VolumesFrames( TGTab* Tab, TG4MainFrame* ActionFrame)
      parent->AddFrame(fCapFrame, fVolFrameLayout);
 }
 
-TG4VolumesFrames::TG4VolumesFrames(const TG4VolumesFrames& vf) 
-{
-/// Dummy copy constructor 
-  TG4Globals::Exception(
-    "Attempt to use TG4VolumesFrames copy constructor.");
-}
-
-TG4VolumesFrames& TG4VolumesFrames::operator=(const TG4VolumesFrames& vf)
-{
-  // check assignement to self
-  if (this == &vf) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign  singleton.");
-    
-  return *this;  
-}    
-
 TG4VolumesFrames::~TG4VolumesFrames()
 {
 ///---> liquidator 
@@ -221,12 +218,12 @@ void TG4VolumesFrames::SetVolumesComboEntries()
     
     for (int ii=0; ii < ig; ii++)
         { name = ((*lComboEntries )[ii])->GetName() ;
-	  AddLogicalVolumeName( name, ii+1);
-	};
-	
+          AddLogicalVolumeName( name, ii+1);
+        };
+        
     name = "  " ;
     AddLogicalVolumeName( name, ig+1);
-    	
+            
     
 }
 
@@ -276,7 +273,7 @@ void TG4VolumesFrames::DisplayVolumeCharacteristics()
      G4cout << lVolume->GetName() << "  " 
             << lVolume->GetSolid()->GetEntityType() << "  "
             << lvMaterial->GetName() << "  "
-  	    << lVolume->GetUserLimits()->GetType() <<  G4endl;
+              << lVolume->GetUserLimits()->GetType() <<  G4endl;
 
 //---> putting text in the text entries      
     char buff[100];
@@ -308,7 +305,7 @@ void TG4VolumesFrames::DisplayVolumeCharacteristics()
       for ( G4int ii=0; ii<3; ii++) {
         fVolTextBuff[ii]->Clear();          
         gClient->NeedRedraw(fVolTextEntry[ii]);
-	};
+        };
      fDisplBuffLimits->Clear(); 
      fDisplBuffLimits->AddText(0, "\n\n***  No volume specified, "
      "no limits displayed *** ");
@@ -337,7 +334,7 @@ void TG4VolumesFrames::DisplayUserLimits()
   const char* cdisplay = fDisplBuffLimits->GetString();
   TG4Editor* ed = new TG4Editor( fCapFrame, 450, 300);
                       ed->LoadBuffer(cdisplay);
-		      ed->Popup();      
+                      ed->Popup();      
 
 }
 
@@ -348,7 +345,7 @@ void TG4VolumesFrames::DisplayCuts()
   const char* cdisplay = fDisplBuffCuts->GetString();
   TG4Editor* ed = new TG4Editor( fCapFrame, 450, 300);
                       ed->LoadBuffer(cdisplay);
-		      ed->Popup();      
+                      ed->Popup();      
 
 }
 
@@ -359,7 +356,7 @@ void TG4VolumesFrames::DisplayControls()
   const char* cdisplay = fDisplBuffControls->GetString();
   TG4Editor* ed = new TG4Editor( fCapFrame, 450, 300);
                       ed->LoadBuffer(cdisplay);
-		      ed->Popup();      
+                      ed->Popup();      
 
 }
 
@@ -389,7 +386,7 @@ TString TG4VolumesFrames::GetLimitsDisplay(G4UserLimits* limits) const
   display += buff;
   
   display += "\n\n**************************************";
-  display += "\n**************************************\n\n";	     
+  display += "\n**************************************\n\n";             
 
   const char* tmp = display;
   

@@ -1,4 +1,4 @@
-// $Id: TG4IntMap.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4IntMap.cxx,v 1.4 2006/04/12 10:38:59 brun Exp $
 // Category: global
 //
 // Class TG4IntMap
@@ -14,36 +14,17 @@
 #include "globals.hh"
 
 //_____________________________________________________________________________
-TG4IntMap::TG4IntMap(){
+TG4IntMap::TG4IntMap()
+  : fMap()
+{
 //
 }
-
-//_____________________________________________________________________________
-TG4IntMap::TG4IntMap(const TG4IntMap& right) {
-//
-  TG4Globals::Exception("TG4IntMap is protected from copying.");
-}  
 
 //_____________________________________________________________________________
 TG4IntMap::~TG4IntMap() {
 //
 }
 
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4IntMap& TG4IntMap::operator=(const TG4IntMap& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception("TG4IntMap is protected from assigning.");
-    
-  return *this;  
-}    
-          
 //
 // private methods
 //
@@ -86,9 +67,8 @@ G4int TG4IntMap::GetSecond(const G4String& name, G4bool warn)
   MapIterator i = fMap.find(name);
   if (i == fMap.end()) {
     if (warn) {
-      G4String text = "   TG4IntMap::GetSecond: ";
-      text = text + name + " is not defined.";
-      TG4Globals::Warning(text);
+      TG4Globals::Warning(
+        "TG4IntMap", "GetSecond", TString(name) + " is not defined.");
     }  
     return 0;
   }  

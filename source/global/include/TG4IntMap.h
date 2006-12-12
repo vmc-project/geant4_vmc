@@ -1,4 +1,4 @@
-// $Id: TG4IntMap.h,v 1.4 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4IntMap.h,v 1.5 2006/04/12 10:38:59 brun Exp $
 /// \ingroup global
 //
 /// \class TG4IntMap
@@ -20,8 +20,6 @@ class TG4IntMap
 
   public:
     TG4IntMap();
-    // --> protected
-    // TG4IntMap(const TG4IntMap& right);
     virtual ~TG4IntMap();
 
     // methods
@@ -32,12 +30,12 @@ class TG4IntMap
     void Clear();
 
   protected:
-    TG4IntMap(const TG4IntMap& right);
-
-    // operators
-    TG4IntMap& operator=(const TG4IntMap& right);
   
   private:
+    TG4IntMap(const TG4IntMap& right);
+    TG4IntMap& operator=(const TG4IntMap& right);
+
+    // methods
     G4bool IsDefined(const G4String& first);
   
     // data members

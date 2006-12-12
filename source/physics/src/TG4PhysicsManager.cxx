@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.11 2005/03/29 10:39:53 brun Exp $
+// $Id: TG4PhysicsManager.cxx,v 1.12 2006/01/13 16:59:39 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsManager
@@ -12,6 +12,8 @@
 #include "TG4ParticlesManager.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4GeometryServices.h"
+#include "TG4MediumMap.h"
+#include "TG4Medium.h"
 #include "TG4G3Cut.h"
 #include "TG4G3Control.h"
 #include "TG4G3Units.h"
@@ -21,7 +23,6 @@
 #include <G4VUserPhysicsList.hh>
 #include <G4OpBoundaryProcess.hh>
 #include <G4VProcess.hh>
-#include <G3MedTable.hh>
 
 #include <TDatabasePDG.h>
 #include <TVirtualMCApplication.h>
@@ -32,12 +33,17 @@ TG4PhysicsManager* TG4PhysicsManager::fgInstance = 0;
 TG4PhysicsManager::TG4PhysicsManager(G4VUserPhysicsList* physicsList)
   : TG4Verbose("physicsManager"),
     fMessenger(this),
-    fPhysicsList(physicsList)
+    fParticlesManager(0),
+    fG3PhysicsManager(0),
+    fPhysicsList(physicsList),
+    fProcessMCMap(),
+    fProcessControlMap()
 { 
 //
   if (fgInstance) {
     TG4Globals::Exception(
-      "TG4PhysicsManager: attempt to create two instances of singleton.");
+      "TG4PhysicsManager", "TG4PhysicsManager",
+      "Cannot create two instances of singleton.");
   }
       
   fgInstance = this;  
@@ -53,45 +59,12 @@ TG4PhysicsManager::TG4PhysicsManager(G4VUserPhysicsList* physicsList)
 }
 
 //_____________________________________________________________________________
-TG4PhysicsManager::TG4PhysicsManager()
-  : TG4Verbose("physicsManager"),
-    fMessenger(this) {
-//
-}
-
-//_____________________________________________________________________________
-TG4PhysicsManager::TG4PhysicsManager(const TG4PhysicsManager& right) 
-  : TG4Verbose("physicsManager"),
-    fMessenger(this) {
-// 
-  TG4Globals::Exception(
-    "Attempt to copy TG4PhysicsManager singleton.");
-}
-
-//_____________________________________________________________________________
 TG4PhysicsManager::~TG4PhysicsManager() {
 //
   delete fParticlesManager;
   delete fG3PhysicsManager;
 }
 
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4PhysicsManager& 
-TG4PhysicsManager::operator=(const TG4PhysicsManager& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4PhysicsManager singleton.");
-    
-  return *this;  
-}    
-          
 //
 // private methods
 //
@@ -224,12 +197,17 @@ void TG4PhysicsManager::GstparCut(G4int itmed, TG4G3Cut par, G4double parval)
 /// It is applied to all logical volumes that use the specified 
 /// tracking medium.
 
-  // get medium from table
-  G3MedTableEntry* medium = G3Med.get(itmed);
-  if (!medium) {
-    G4String text = "TG4PhysicsManager::GstparCut: \n";
-    text = text + "    Medium not found."; 
-    G4Exception(text);
+  // get medium from the map
+  TG4Medium* medium 
+    = TG4GeometryServices::Instance()
+      ->GetMediumMap()->GetMedium(itmed);
+  if ( !medium ) {
+    //TG4GeometryServices::Instance()->GetMediumMap()->Print();
+    TString text = "mediumId=";
+    text += itmed;
+    TG4Globals::Exception(
+      "TG4PhysicsManager", "GstparCut", 
+      "Medium with " + text + " not found."); 
   }  
 
   // get/create user limits
@@ -245,8 +223,8 @@ void TG4PhysicsManager::GstparCut(G4int itmed, TG4G3Cut par, G4double parval)
     if (VerboseLevel() > 1) {
       G4cout << "TG4PhysicsManager::GstparCut: new TG4Limits() for medium " 
              << itmed << " has been created." << G4endl;  
-    }	     
-  }	   
+    }             
+  }           
 
   // add units
   if (par == kTOFMAX) parval *= TG4G3Units::Time();
@@ -268,12 +246,17 @@ void TG4PhysicsManager::GstparControl(G4int itmed, TG4G3Control par,
 /// It is applied to all logical volumes that use the specified 
 /// tracking medium.
 
-  // get medium from table
-  G3MedTableEntry* medium = G3Med.get(itmed);
-  if (!medium) {
-    G4String text = "TG4PhysicsManager::GstparControl: \n";
-    text = text + "    Medium not found."; 
-    G4Exception(text);
+  // get medium from the map
+  TG4Medium* medium 
+    = TG4GeometryServices::Instance()
+      ->GetMediumMap()->GetMedium(itmed);
+  if ( !medium ) {
+    //TG4GeometryServices::Instance()->GetMediumMap()->Print();
+    TString text = "mediumId=";
+    text += itmed;
+    TG4Globals::Exception(
+      "TG4PhysicsManager", "GstparControl", 
+      "Medium with " + text + " not found."); 
   }  
 
   // get/create user limits
@@ -290,8 +273,8 @@ void TG4PhysicsManager::GstparControl(G4int itmed, TG4G3Control par,
     if (VerboseLevel() > 1) {
       G4cout << "TG4PhysicsManager::GstparControl: new TG4Limits() for medium" 
              << itmed << " has been created." << G4endl;  
-    }	     
-  }			   
+    }             
+  }                           
     
   // set new limits object to medium
   medium->SetLimits(limits);
@@ -310,9 +293,11 @@ TG4PhysicsManager::GetParticleDefinition(G4int pdgEncoding) const
     = G4ParticleTable::GetParticleTable()->FindParticle(pdgEncoding);
     
   if (!particleDefinition) {
-    G4cerr << "PDG code: " << G4endl;
+    TString text = "PDG="; 
+    text += pdgEncoding;
     TG4Globals::Warning(
-      "TG4ParticlesManager::GetParticleDefinition: Particle not found.");
+      "TG4ParticlesManager", "GetParticleDefinition",
+      "Particle with " + text + " not found.");
   }  
     
   return particleDefinition;    
@@ -352,7 +337,7 @@ void  TG4PhysicsManager::Gstpar(Int_t itmed, const char *param, Float_t parval)
   if (VerboseLevel() > 1) {
     G4cout << "TG4PhysicsManager::Gstpar " 
            << param << "  " << parval << G4endl;
-  }	   
+  }           
 
   G4String name = TG4GeometryServices::Instance()->CutName(param); 
   TG4G3Cut cut;
@@ -369,11 +354,10 @@ void  TG4PhysicsManager::Gstpar(Int_t itmed, const char *param, Float_t parval)
       fG3PhysicsManager->Lock();
     } 
     else if (cut==kNoG3Cuts && control==kNoG3Controls) { 
-      G4String text = "TG4PhysicsManager::Gstpar:";
-      text = text + name;
-      text = text + " parameter is not yet implemented.";
-      TG4Globals::Warning(text);
-    }	
+      TG4Globals::Warning(
+        "TG4PhysicsManager", "Gstpar",
+        TString(name) + " parameter is not yet implemented.");
+    }        
   }   
 } 
  
@@ -386,10 +370,9 @@ Bool_t TG4PhysicsManager::SetCut(const char* cutName, Float_t cutValue)
   TG4G3Cut g3Cut = TG4G3CutVector::GetCut(cutName);
 
   if (g3Cut == kNoG3Cuts) {
-    G4String text = "TG4PhysicsManager::SetCut:\n";
-    text = text + "    Parameter " + cutName;
-    text = text + " is not implemented.";
-    TG4Globals::Warning(text);
+    TG4Globals::Warning(
+      "TG4PhysicsManager", "SetCut",
+      "Parameter " + TString(cutName) + " is not implemented.");
     return false;
   }  
   
@@ -418,18 +401,17 @@ Bool_t TG4PhysicsManager::SetProcess(const char* controlName, Int_t value)
     return true;
   }  
   else {   
-    G4String text = "TG4PhysicsManager::SetProcess:\n";
-    text = text + "    Parameter " + controlName;
-    text = text + " is not implemented.";
-    TG4Globals::Warning(text);
+    TG4Globals::Warning(
+      "TG4PhysicsManager", "SetProcess",
+      "Parameter " + TString(controlName) + " is not implemented.");
     return false;
   }  
 }  
 
 //_____________________________________________________________________________
 Bool_t TG4PhysicsManager::DefineParticle(Int_t pdg, const char* name, 
-                           TMCParticleType type, Double_t mass, Double_t charge, 
-			   Double_t lifetime)
+                           TMCParticleType /*type*/, Double_t /*mass*/, 
+                           Double_t /*charge*/, Double_t /*lifetime*/)
 {
 /// Only check if particle with specified pdg is available in Geant4;
 /// if not give exception.
@@ -442,33 +424,35 @@ Bool_t TG4PhysicsManager::DefineParticle(Int_t pdg, const char* name,
      particleDefinition = particleTable->FindParticle(pdg);
   else {
      G4String particleName(name);
-     if (name == "Rootino")	
+     if (name == "Rootino")        
          particleDefinition = particleTable->FindParticle("geantino");
-  }	
+  }        
   
   if (particleDefinition) { 
      if (VerboseLevel() > 0) {    
        G4cout << "TG4PhysicsManager::DefineParticle (PDG = " 
               << pdg << ", " << name << "): " << G4endl;
        G4cout << "   This particle is in Geant4 defined as " 
-	      <<  particleDefinition->GetParticleName() << G4endl;
-     }	      
-     return true;	      
-  }	    
+              <<  particleDefinition->GetParticleName() << G4endl;
+     }              
+     return true;              
+  }            
   else { 
-     G4cerr << "TG4PhysicsManager::DefineParticle (PDG = " 
-            << pdg << ", " << name << "): " << G4endl;
-     G4cerr << "   Particle with this PDG does not exist in Geant4." << G4endl
-	    << "   Ask " << TG4Globals::Help() 
-	    << " to include this particle in Geant4 VMC." << G4endl;
-     TG4Globals::Exception();
-     return false;      	    
+     TString text = "Particle with PDG=";
+     text += pdg;
+     text += ", name=" + TString(name) + " does not exist in Geant4.";
+     TG4Globals::Exception(
+       "TG4PhysicsManager", "DefineParticle",
+       text + TG4Globals::Endl() +
+       "Ask " + TString(TG4Globals::Help()) + 
+       " to include this particle in Geant4 VMC.");
+     return false;                  
   }
 }
 
 //_____________________________________________________________________________
 Bool_t TG4PhysicsManager::DefineIon(const char* name, Int_t Z, Int_t A,  
-                                    Int_t Q, Double_t excEnergy, Double_t mass)
+                                    Int_t Q, Double_t excEnergy, Double_t /*mass*/)
 {
 /// Keep user defined ion properties in order to be able to use
 /// them later as a primary particle.
@@ -479,15 +463,16 @@ Bool_t TG4PhysicsManager::DefineIon(const char* name, Int_t Z, Int_t A,
   fParticlesManager->AddIon(name, Z, A, Q, excEnergy);
     
   return true;
-}			   
+}                           
 
 //_____________________________________________________________________________
-Float_t TG4PhysicsManager::Xsec(char* ch, Float_t p1, Int_t i1, Int_t i2)
+Float_t TG4PhysicsManager::Xsec(char* /*ch*/, Float_t /*p1*/, 
+                                Int_t /*i1*/, Int_t /*i2*/)
 {
 /// Not yet implemented -> give exception.
 
   TG4Globals::Exception(
-    "TG4PhysicsManager::Xsec: not yet implemented.");
+    "TG4PhysicsManager", "Xsec", "Not yet implemented.");
 
   return 0.;
 }    
@@ -521,10 +506,10 @@ TString  TG4PhysicsManager::ParticleName(Int_t pdg) const
     return TString(particle->GetParticleName());
   else
     return TString();
-}	  
+}          
 
 //_____________________________________________________________________________
-Double_t  TG4PhysicsManager::ParticleMass(Int_t pdg) const	  
+Double_t  TG4PhysicsManager::ParticleMass(Int_t pdg) const          
 {
 /// Return mass of G4 particle specified by pdg.
 
@@ -534,10 +519,10 @@ Double_t  TG4PhysicsManager::ParticleMass(Int_t pdg) const
     return particle->GetPDGMass()/TG4G3Units::Energy();
   else
     return 0.;
-}	  
+}          
 
 //_____________________________________________________________________________
-Double_t  TG4PhysicsManager::ParticleCharge(Int_t pdg) const	  
+Double_t  TG4PhysicsManager::ParticleCharge(Int_t pdg) const          
 {
 /// Return charge (in e units) of G4 particle specified by pdg.
 
@@ -547,7 +532,7 @@ Double_t  TG4PhysicsManager::ParticleCharge(Int_t pdg) const
     return particle->GetPDGCharge()/TG4G3Units::Charge();
   else
     return 0.;
-}	  
+}          
 
 //_____________________________________________________________________________
 Double_t  TG4PhysicsManager::ParticleLifeTime(Int_t pdg) const  
@@ -560,7 +545,7 @@ Double_t  TG4PhysicsManager::ParticleLifeTime(Int_t pdg) const
     return particle->GetPDGLifeTime();
   else
     return 0.;
-}	  
+}          
 
 //_____________________________________________________________________________
 TMCParticleType TG4PhysicsManager::ParticleMCType(Int_t pdg) const
@@ -571,12 +556,12 @@ TMCParticleType TG4PhysicsManager::ParticleMCType(Int_t pdg) const
   
   if (particle) {
     TG4Globals::Warning(
-      "TG4PhysicsManager::ParticleMCType: Not yet implemented.");
+      "TG4PhysicsManager", "ParticleMCType", "Not yet implemented.");
     return kPTUndefined;
   }  
   else
     return kPTUndefined;
-}	  
+}          
 
 //_____________________________________________________________________________
 void  TG4PhysicsManager::DefineParticles()
@@ -625,7 +610,7 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus(const G4VProcess* process)
     
   if (!opBoundary) {
     TG4Globals::Exception(
-      "TG4PhysicsManager::GetOpBoundaryStatus: Wrong process type.");
+      "TG4PhysicsManager", "GetOpBoundaryStatus", "Wrong process type.");
     return kPNoProcess;
   }
 #else

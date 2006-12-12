@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.cxx,v 1.8 2005/11/18 21:29:35 brun Exp $
+// $Id: TG4ModularPhysicsList.cxx,v 1.9 2006/01/13 16:59:38 brun Exp $
 // Category: physics
 //
 // Class TG4ModularPhysicsList
@@ -39,6 +39,7 @@ TG4ModularPhysicsList::TG4ModularPhysicsList(const TG4PhysicsListOptions& option
   : G4VModularPhysicsList(),
     TG4Verbose("physicsList"),
     fMessenger(this),
+    fPhysicsConstructorOptical(0),
     fOptions(options)
  {
 //
@@ -54,6 +55,7 @@ TG4ModularPhysicsList::TG4ModularPhysicsList()
   : G4VModularPhysicsList(),
     TG4Verbose("physicsList"),
     fMessenger(this),
+    fPhysicsConstructorOptical(0),
     fOptions()
  {
 //
@@ -65,34 +67,10 @@ TG4ModularPhysicsList::TG4ModularPhysicsList()
 }
 
 //_____________________________________________________________________________
-TG4ModularPhysicsList::TG4ModularPhysicsList(const TG4ModularPhysicsList& right)
-  : TG4Verbose("physicsList"),
-    fMessenger(this) {
-//
-  TG4Globals::Exception("TG4ModularPhysicsList is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4ModularPhysicsList::~TG4ModularPhysicsList() {
 //
   //delete fExtDecayer;
        // fExtDecayer is deleted in G4Decay destructor
-}
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4ModularPhysicsList& 
-TG4ModularPhysicsList::operator=(const TG4ModularPhysicsList &right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-  
-  TG4Globals::Exception("TG4ModularPhysicsList is protected from assigning.");
-
-  return *this;
 }
 
 //
@@ -121,9 +99,9 @@ void TG4ModularPhysicsList::Configure()
   // hadron physics
   if ( fOptions.GetEMPhysics() ||  fOptions.GetHadronPhysics() ) { 
     RegisterPhysics(new TG4PhysicsConstructorIon( verboseLevel, 
-		    fOptions.GetEMPhysics(), fOptions.GetHadronPhysics()));
+                    fOptions.GetEMPhysics(), fOptions.GetHadronPhysics()));
     RegisterPhysics(new TG4PhysicsConstructorHadron(verboseLevel, 
-		    fOptions.GetEMPhysics(), fOptions.GetHadronPhysics()));
+                    fOptions.GetEMPhysics(), fOptions.GetHadronPhysics()));
   }  
 
   // optical physics
@@ -145,19 +123,20 @@ void TG4ModularPhysicsList::Configure()
 
   // warn about not allowed combinations
   if ( fOptions.GetMuonPhysics() && !fOptions.GetEMPhysics() ) {
-    G4String text = "TG4PhysicsManager::CreatePhysicsConstructors:\n";
-    text = text + "    Muon physics cannot be constructed without EM physics.\n";
-    text = text + "    SetMuon control was ignored.";
-    TG4Globals::Warning(text);     
+    TG4Globals::Warning(
+      "TG4PhysicsManager", "CreatePhysicsConstructors",
+      "Muon physics cannot be constructed without EM physics." +
+      TG4Globals::Endl() +
+      "SetMuon control was ignored.");
   }
          // all created physics constructors are deleted
-	 // in the base class destructor
+         // in the base class destructor
 }    
 
 //_____________________________________________________________________________
 void TG4ModularPhysicsList::SetProcessActivation(G4ProcessManager* processManager,
                                           G4int  processId, G4bool activation)
-{				      
+{                                      
 /// Set process activation for the given process.
 
   G4String strActivation = "Activate   ";
@@ -167,10 +146,10 @@ void TG4ModularPhysicsList::SetProcessActivation(G4ProcessManager* processManage
     G4cout << strActivation << " process " 
            << (*processManager->GetProcessList())[processId]->GetProcessName() 
            << " for " << processManager->GetParticleType()->GetParticleName() 
-	   << G4endl;
+           << G4endl;
   }
   
-  processManager->SetProcessActivation(processId, activation);	
+  processManager->SetProcessActivation(processId, activation);        
 }  
 
 //_____________________________________________________________________________
@@ -185,9 +164,9 @@ void TG4ModularPhysicsList::SetSpecialControlsActivation()
   TG4boolVector*    isControlVector = g3PhysicsManager->GetIsControlVector(); 
 
   if (!controlVector || !isControlVector) {
-    G4String text = "TG4ModularPhysicsList::SetSpecialControlsActivation: \n";
-    text = text + "    Vectors of processes controls is not set.";
-    TG4Globals::Exception(text);
+    TG4Globals::Exception(
+      "TG4ModularPhysicsList", "SetSpecialControlsActivation",
+      "Vectors of processes controls is not set.");
     return;
   }    
   
@@ -205,7 +184,7 @@ void TG4ModularPhysicsList::SetSpecialControlsActivation()
     for (G4int i=0; i<processVector->length(); i++) {
 
       TG4G3ControlValue control
-	 = controlVector->GetControlValue((*processVector)[i]);
+         = controlVector->GetControlValue((*processVector)[i]);
       G4bool activation = processManager->GetProcessActivation(i);
       
       if (control != kUnsetControlValue) {
@@ -214,12 +193,12 @@ void TG4ModularPhysicsList::SetSpecialControlsActivation()
           // set new process activation
           G4bool activate;
           if (control == kInActivate) activate = false; 
-	  else                        activate = true;
-	  
-	  SetProcessActivation(processManager, i, activate);         
+          else                        activate = true;
+          
+          SetProcessActivation(processManager, i, activate);         
         }
       }
-    }  	
+    }          
      
     // activate or inactivate the special controls processes according to 
     // setting in the isControl vector in G3 physics manager
@@ -240,9 +219,9 @@ void TG4ModularPhysicsList::SetSpecialControlsActivation()
       G4String processName = "specialControls";
       G4VProcess* process = g3PhysicsManager->FindProcess(processName);
       if (!process) {
-        G4String text = "TG4ModularPhysicsList::SetSpecialCutsActivation: \n";
-        text = text + "    The special control process for is not defined";
-        TG4Globals::Exception(text);
+        TG4Globals::Exception(
+          "TG4ModularPhysicsList", "SetSpecialCutsActivation",
+          "The special control process for is not defined.");
       }
        
       G4int index = processManager->GetProcessIndex(process);
@@ -261,9 +240,9 @@ void TG4ModularPhysicsList::SetSpecialCutsActivation()
   TG4boolVector* isCutVector = g3PhysicsManager->GetIsCutVector(); 
 
   if (!isCutVector) {
-    G4String text = "TG4ModularPhysicsList::SetSpecialCutsActivation: \n";
-    text = text + "    Vector of isCut booleans is not set.";
-    TG4Globals::Exception(text);
+    TG4Globals::Exception(
+      "TG4ModularPhysicsList", "SetSpecialCutsActivation",
+      "Vector of isCut booleans is not set.");
     return;
   }    
   
@@ -288,11 +267,9 @@ void TG4ModularPhysicsList::SetSpecialCutsActivation()
       G4String processName = "specialCutFor" + name;
       G4VProcess* process = g3PhysicsManager->FindProcess(processName);
       if (!process) {
-        G4String text = "TG4ModularPhysicsList::SetSpecialCutsActivation: \n";
-        text = text + "    The special cut process for ";
-	text = text + name;
-	text = text + " is not defined";
-        TG4Globals::Exception(text);
+        TG4Globals::Exception(
+          "TG4ModularPhysicsList", "SetSpecialCutsActivation",
+          "The special cut process for " + TString(name) + " is not defined");
       }
        
       // special process is activated in case
@@ -416,7 +393,7 @@ void TG4ModularPhysicsList::DumpAllProcesses() const
     // print particle name
     G4cout << "Particle: " 
            << theParticleIterator->value()->GetParticleName()
-	   << G4endl;
+           << G4endl;
 
     // dump particle processes
     G4ProcessVector* processVector 
@@ -465,9 +442,9 @@ void TG4ModularPhysicsList::SetMaxNumPhotonsPerStep(G4int maxNumPhotons)
 /// Limit step to the specified maximum number of Cherenkov photons
 
   if ( !fPhysicsConstructorOptical ) {
-    G4String text = "TG4ModularPhysicsList::SetMaxNumPhotonsPerStep: \n";
-    text = text + "    Optical physics is not activated.";
-    TG4Globals::Exception(text);
+    TG4Globals::Exception(
+      "TG4ModularPhysicsList", "SetMaxNumPhotonsPerStep",
+      "Optical physics is not activated.");
   }  
   
   fPhysicsConstructorOptical->SetMaxNumPhotonsPerStep(maxNumPhotons); 

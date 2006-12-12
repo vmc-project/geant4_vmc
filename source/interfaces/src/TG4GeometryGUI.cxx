@@ -1,4 +1,4 @@
-// $Id: TG4GeometryGUI.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4GeometryGUI.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
 // Category: interfaces
 //
 //==============================================================
@@ -11,7 +11,7 @@
 // Author: D. Adamova
 
   
-		 
+                 
 #include "TG4GeometryGUI.h"
 #include "TG4GuiVolume.h"
 #include "TG4MainFrame.h"
@@ -27,12 +27,14 @@
 #include <TObjArray.h>
 
 
-		 
+                 
 ClassImp(TG4GeometryGUI)    
 
 TG4GeometryGUI::TG4GeometryGUI()
+  : TObject(),
+    fPanel(0)
 {
-///---> Constructor		 
+///---> Constructor                 
     fPanel   =   new TG4MainFrame(gClient->GetRoot(), 650, 500);
 
     G4cout << "\n***********************************************" << G4endl;
@@ -47,24 +49,6 @@ TG4GeometryGUI::TG4GeometryGUI()
 
  }
  
-TG4GeometryGUI::TG4GeometryGUI(const TG4GeometryGUI& gg) 
-{
-/// Dummy copy constructor 
-  TG4Globals::Exception(
-    "Attempt to use TG4GeometryGUI copy constructor.");
-}
-
-TG4GeometryGUI& TG4GeometryGUI::operator=(const TG4GeometryGUI& gg)
-{
-  // check assignement to self
-  if (this == &gg) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4GeometryGUI singleton.");
-    
-  return *this;  
-}    
-
 TG4GeometryGUI::~TG4GeometryGUI(){
 ///---> liquidator
 
@@ -102,7 +86,7 @@ void TG4GeometryGUI::ReadGeometryTree()
 //    delete volume; ---> inactivated to get UserData  for the
 //                   ---> ListTree items in the MainFrame
  
-}	   
+}           
 
 void TG4GeometryGUI::RegisterLogicalVolume(G4LogicalVolume* lv,
                                            TGListTreeItem* itemv) 

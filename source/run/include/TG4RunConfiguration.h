@@ -1,4 +1,4 @@
-// $Id: TG4RunConfiguration.h,v 1.6 2006/04/12 10:37:24 brun Exp $
+// $Id: TG4RunConfiguration.h,v 1.7 2006/07/28 06:09:36 brun Exp $
 /// \ingroup run
 //
 /// \class TG4RunConfiguration
@@ -11,6 +11,14 @@
 /// The class can be extended in a user application by inheritence;
 /// this gives a user possibility to extend each Geant4 user defined class.
 ///
+/// In constructor user has to specify the geometry input
+/// and select geometry navigation via the following options:
+/// - geomVMCtoGeant4   - geometry defined via VMC, G4 native navigation
+/// - geomVMCtoRoot     - geometry defined via VMC, Root navigation
+/// - geomRoot          - geometry defined via Root, Root navigation
+/// - geomRootToGeant4  - geometry defined via Root, G4 native navigation
+/// - geomGeant4        - geometry defined via Geant4, G4 native navigation
+
 /// Author: I. Hrivnacova
 
 #ifndef TG4_RUN_CONFIGURATION_H
@@ -19,6 +27,7 @@
 #include "TG4PhysicsListOptions.h"
 
 #include <Rtypes.h>
+#include <TString.h>
 
 class TG4DetConstruction;
 class TG4TrackingAction;
@@ -36,10 +45,8 @@ class G4UImessenger;
 class TG4RunConfiguration 
 {
   public:
-    TG4RunConfiguration(Bool_t specialStacking = false);
-    
-    // --> protected
-    // TG4RunConfiguration(const TG4RunConfiguration& right);
+    TG4RunConfiguration(const TString& userGeometry,
+                        Bool_t specialStacking = false);
     virtual ~TG4RunConfiguration();
 
     // methods 
@@ -59,20 +66,21 @@ class TG4RunConfiguration
 
     // get methods
     G4VUserPhysicsList*  GetPhysicsList() const;
-    Bool_t IsSpecialStacking() const;
+    TString  GetUserGeometry() const;
+    Bool_t   IsSpecialStacking() const;
 
   protected:
-    TG4RunConfiguration(const TG4RunConfiguration& right);
-
-    // operators
-    TG4RunConfiguration& operator=(const TG4RunConfiguration& right);
-
     // data members
-    Bool_t                 fSpecialStacking;
-    G4VUserPhysicsList*    fPhysicsList;
-    TG4PhysicsListOptions  fPhysicsListOptions;
+    TString                fUserGeometry;     //  way of building geometry
+    Bool_t                 fSpecialStacking;  //  option to include special stacking
+    G4VUserPhysicsList*    fPhysicsList;      //  user physics list
+    TG4PhysicsListOptions  fPhysicsListOptions;// physics list options
     G4UImessenger*         fAGDDMessenger;    //! XML messenger
     G4UImessenger*         fGDMLMessenger;    //! XML messenger
+
+  private:
+    TG4RunConfiguration(const TG4RunConfiguration& right);
+    TG4RunConfiguration& operator=(const TG4RunConfiguration& right);
 };
 
 #endif //TG4V_RUN_CONFIGURATION_H

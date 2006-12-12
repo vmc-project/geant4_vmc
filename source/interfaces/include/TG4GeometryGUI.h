@@ -1,4 +1,4 @@
-// $Id: TG4GeometryGUI.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4GeometryGUI.h,v 1.3 2005/09/01 10:04:33 brun Exp $
 /// \ingroup interfaces
 //
 /// \class TG4GeometryGUI
@@ -26,12 +26,10 @@ public:
     void  RegisterLogicalVolume(G4LogicalVolume* lv, TGListTreeItem* itemv);
     void  ReadMaterials() const; 
 
-protected:
-
+ private:
     TG4GeometryGUI(const TG4GeometryGUI& gg) ;
     TG4GeometryGUI& operator=(const TG4GeometryGUI& gg) ;
 
- private:
     TG4MainFrame* fPanel;   // the main  panel
   
 

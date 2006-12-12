@@ -1,4 +1,4 @@
-// $Id: TG4SteppingActionMessenger.cxx,v 1.2 2002/12/18 09:35:31 brun Exp $
+// $Id: TG4SteppingActionMessenger.cxx,v 1.3 2004/11/10 11:39:27 brun Exp $
 // Category: event
 //
 // Class TG4SteppingActionMessenger
@@ -16,7 +16,10 @@
 //_____________________________________________________________________________
 TG4SteppingActionMessenger::TG4SteppingActionMessenger(
                                TG4SteppingAction* steppingAction)
-  :fSteppingAction(steppingAction)
+  : G4UImessenger(),
+    fSteppingAction(steppingAction),
+    fLoopVerboseCmd(0),
+    fMaxNofStepsCmd(0)
 {
 // 
   fLoopVerboseCmd = new G4UIcmdWithAnInteger("/mcTracking/loopVerbose", this);
@@ -36,40 +39,10 @@ TG4SteppingActionMessenger::TG4SteppingActionMessenger(
 }
 
 //_____________________________________________________________________________
-TG4SteppingActionMessenger::TG4SteppingActionMessenger() {
-//
-}
-
-//_____________________________________________________________________________
-TG4SteppingActionMessenger::TG4SteppingActionMessenger(
-                                 const TG4SteppingActionMessenger& right) {
-//				 
-  TG4Globals::Exception(
-    "TG4SteppingActionMessenger is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4SteppingActionMessenger::~TG4SteppingActionMessenger() {
 //
   delete fLoopVerboseCmd;
   delete fMaxNofStepsCmd;
-}
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4SteppingActionMessenger& 
-TG4SteppingActionMessenger::operator=(const TG4SteppingActionMessenger &right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-  
-  TG4Globals::Exception(
-    "TG4SteppingActionMessenger is protected from assigning.");
-
-  return *this;
 }
 
 //

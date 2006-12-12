@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.14 2005/05/20 21:46:56 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.15 2005/11/18 21:29:35 brun Exp $
 // Category: digits+hits
 //
 // Class TG4StepManager
@@ -32,30 +32,29 @@
 TG4StepManager* TG4StepManager::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4StepManager::TG4StepManager() 
+TG4StepManager::TG4StepManager(const TString& userGeometry) 
   : fTrack(0),
     fStep(0),
     fStepStatus(kNormalStep),
     fTouchableHistory(0),
     fSteppingManager(0),
-    fVolPathBuffer()
+    fVolPathBuffer(),
+    fCopyNoOffset(0)
 {
 // 
   if (fgInstance) {
     TG4Globals::Exception(
-      "TG4StepManager: attempt to create two instances of singleton.");
+      "TG4StepManager", "TG4StepManager", 
+      "Cannot create two instances of singleton.");
   }
       
   fgInstance = this;  
   
   fTouchableHistory = new G4TouchableHistory();
-}
-
-//_____________________________________________________________________________
-TG4StepManager::TG4StepManager(const TG4StepManager& right) {
-// 
-  TG4Globals::Exception(
-    "Attempt to copy TG4StepManager singleton.");
+  
+  /// Set offset for passing copyNo to 1;
+  /// as G3toG4 decrement copyNo passed by user by 1
+  if ( userGeometry == "VMCtoGeant4" ) fCopyNoOffset = 1;
 }
 
 //_____________________________________________________________________________
@@ -64,22 +63,6 @@ TG4StepManager::~TG4StepManager() {
   delete fTouchableHistory;
 }
 
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4StepManager& TG4StepManager::operator=(const TG4StepManager& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4StepManager singleton.");
-    
-  return *this;  
-}    
-          
 //
 // private methods
 //
@@ -90,7 +73,8 @@ void TG4StepManager::CheckTrack() const
 /// Give exception in case the track is not defined.
 
   if (!fTrack) 
-    TG4Globals::Exception("TG4StepManager: Track is not defined.");
+    TG4Globals::Exception(
+      "TG4StepManager", "CheckTrack", "Track is not defined.");
 }     
 
 
@@ -100,9 +84,8 @@ void TG4StepManager::CheckStep(const G4String& method) const
 /// Give exception in case the step is not defined.
 
   if (!fStep) {
-    G4String text = "TG4StepManager::";
-    text = text + method + ": Step is not defined.";
-    TG4Globals::Exception(text);
+    TG4Globals::Exception(
+      "TG4StepManager", method, "Step is not defined.");
   }
 }     
 
@@ -113,21 +96,23 @@ void TG4StepManager::CheckSteppingManager() const
 /// Give exception in case the step is not defined.
 
   if (!fSteppingManager) 
-    TG4Globals::Exception("TG4StepManager: Stepping manager is not defined.");
+    TG4Globals::Exception(
+      "TG4StepManager", "CheckSteppingManager", 
+      "Stepping manager is not defined.");
 }     
 
 
 //_____________________________________________________________________________
 void TG4StepManager::SetTLorentzVector(G4ThreeVector xyz, G4double t, 
-                                       TLorentzVector& lv) const				       
+                                       TLorentzVector& lv) const                                       
 {
 /// Fill TLorentzVector with G4ThreeVector and G4double.
 
-   lv[0] = xyz.x();  				       
-   lv[1] = xyz.y();  				       
-   lv[2] = xyz.z();  				       
+   lv[0] = xyz.x();                                         
+   lv[1] = xyz.y();                                         
+   lv[2] = xyz.z();                                         
    lv[3] = t;
-}     				       
+}                                            
 
 //_____________________________________________________________________________
 const G4VTouchable* TG4StepManager::GetCurrentTouchable() const 
@@ -186,11 +171,12 @@ TG4StepManager::GetCurrentOffPhysicalVolume(G4int off, G4bool warn) const
   //
   if (touchable->GetHistoryDepth() < off) {
     if (warn) {
-      G4String text = "TG4StepManager::GetCurrentOffPhysicalVolume: \n";
-      text = text + "    Volume ";
-      text = text + touchable->GetVolume()->GetName();
-      text = text + " has not defined mother in the required level.";
-      TG4Globals::Warning(text);  
+      TString text = "level=";
+      text += off;
+      TG4Globals::Warning(
+        "TG4StepManager", "GetCurrentOffPhysicalVolume", 
+        "Volume " + TString(touchable->GetVolume()->GetName()) +
+        " has not defined mother in " + text + ".");  
     }    
     return 0;
   }  
@@ -202,8 +188,8 @@ TG4StepManager::GetCurrentOffPhysicalVolume(G4int off, G4bool warn) const
   // 
   G4int index = touchable->GetHistoryDepth() - off;
         // in the touchable history volumes are ordered
-	// from top volume up to mother volume;
-	// the touchable volume is not in the history
+        // from top volume up to mother volume;
+        // the touchable volume is not in the history
   
   return touchable->GetHistory()->GetVolume(index); 
 }     
@@ -229,9 +215,9 @@ void TG4StepManager::StopTrack()
     // fTrack->SetTrackStatus(fKillTrackAndSecondaries);
   }
   else {
-    G4String text = "TG4StepManager::StopTrack(): \n";
-    text = text + "    There is no current track to be stopped.";
-    TG4Globals::Warning(text);
+    TG4Globals::Warning(
+      "TG4StepManager", "StopTrack()",
+      "There is no current track to be stopped.");
   }    
 }
 
@@ -244,7 +230,7 @@ void TG4StepManager::StopEvent()
     fTrack->SetTrackStatus(fKillTrackAndSecondaries);
             //StopTrack();   // cannot be used as it keeps secondaries
   }
-  	    
+              
   G4UImanager::GetUIpointer()->ApplyCommand("/event/abort");
 }
 
@@ -269,10 +255,8 @@ void TG4StepManager::SetMaxStep(Double_t step)
   
 #ifdef MCDEBUG
   if (!userLimits) {
-    G4String text = "TG4StepManager::SetMaxStep:\n";
-    text = text + "   User limits not defined.";
-    TG4Globals::Exception(text);
-    return;
+    TG4Globals::Exception(
+      "TG4StepManager", "SetMaxStep", "User limits not defined.");
   }
 #endif  
 
@@ -290,23 +274,23 @@ void TG4StepManager::SetMaxNStep(Int_t maxNofSteps)
 }
 
 //_____________________________________________________________________________
-void TG4StepManager::SetUserDecay(Int_t pdg)
+void TG4StepManager::SetUserDecay(Int_t /*pdg*/)
 {
 /// Set user decay.                                                          \n
 /// Not yet implemented.
 
   TG4Globals::Exception(
-    "TG4StepManager::SetUserDecay(..) is not yet implemented.");
+    "TG4StepManager", "SetUserDecay", "Not yet implemented.");
 }
 
 //_____________________________________________________________________________
-void TG4StepManager::ForceDecayTime(Float_t time)
+void TG4StepManager::ForceDecayTime(Float_t /*time*/)
 {
 /// Force decay time.                                                        \n
 /// Not yet implemented.
 
   TG4Globals::Exception(
-    "TG4StepManager::ForceDecayTime(..) is not yet implemented.");
+    "TG4StepManager", "ForceDecayTime", "Not yet implemented.");
 }
 
 //_____________________________________________________________________________
@@ -357,10 +341,10 @@ Int_t TG4StepManager::CurrentVolID(Int_t& copyNo) const
 /// and the copy number of the current physical volume.
 
   G4VPhysicalVolume* physVolume = GetCurrentPhysicalVolume(); 
-  copyNo = physVolume->GetCopyNo() + 1;
+  copyNo = physVolume->GetCopyNo() + fCopyNoOffset;
 
   // sensitive detector ID
-  TG4SDServices* sdServices = TG4SDServices::Instance();
+  TG4SDServices* sdServices = TG4SDServices::Instance();  
   return sdServices->GetVolumeID(physVolume->GetLogicalVolume());
 } 
 
@@ -378,7 +362,7 @@ Int_t TG4StepManager::CurrentVolOffID(Int_t off, Int_t&  copyNo) const
 #endif   
 
   if (mother) {
-    copyNo = mother->GetCopyNo() + 1;
+    copyNo = mother->GetCopyNo() + fCopyNoOffset;
 
     // sensitive detector ID
     TG4SDServices* sdServices = TG4SDServices::Instance();
@@ -411,7 +395,7 @@ const char* TG4StepManager::CurrentVolOffName(Int_t off) const
   if (mother) {
     return TG4GeometryServices::Instance()
              ->G4ToG3VolumeName(mother->GetName());
-  }	     
+  }             
   else 
     return "";
 }
@@ -464,14 +448,6 @@ Int_t TG4StepManager::CurrentMaterial(Float_t &a, Float_t &z, Float_t &dens,
     
   G4Material* material 
     = physVolume->GetLogicalVolume()->GetMaterial();
-
-#ifdef MCDEBUG
-  if (!material) {
-    TG4Globals::Exception(
-     "TG4StepManager::CurrentMaterial(..): material is not defined.");
-    return 0;
-  }
-#endif  
 
   G4int nofElements = material->GetNumberOfElements();
   TG4GeometryServices* geometryServices = TG4GeometryServices::Instance();
@@ -560,10 +536,12 @@ void TG4StepManager::Gmtod(Double_t* xm, Double_t* xd, Int_t iflag)
 
 #ifdef MCDEBUG
   if (iflag != 1 && iflag != 2) {
-      TG4Globals::Exception(
-        "TG4StepManager::Gmtod(..,iflag): iflag is not in 1..2");
-      return;	
-  }	
+      TString text = "iflag=";
+      text += iflag;
+      TG4Globals::Warning(
+        "TG4StepManager", "Gmtod", text + " is different from 1..2.");
+      return;        
+  }        
 #endif
 
   G4AffineTransform affineTransform;
@@ -572,7 +550,7 @@ void TG4StepManager::Gmtod(Double_t* xm, Double_t* xd, Int_t iflag)
     G4Navigator* navigator =
       G4TransportationManager::GetTransportationManager()->
         GetNavigatorForTracking();
-	
+        
     affineTransform = navigator->GetGlobalToLocalTransform();
   }
   else if (fStepStatus == kBoundary) {
@@ -584,7 +562,7 @@ void TG4StepManager::Gmtod(Double_t* xm, Double_t* xd, Int_t iflag)
     affineTransform
       = fStep->GetPostStepPoint()->GetTouchable()->GetHistory()
         ->GetTopTransform();
-  }	
+  }        
   else {
 
 #ifdef MCDEBUG
@@ -594,11 +572,11 @@ void TG4StepManager::Gmtod(Double_t* xm, Double_t* xd, Int_t iflag)
     affineTransform
       = fStep->GetPreStepPoint()->GetTouchable()->GetHistory()
         ->GetTopTransform();
-  }	
+  }        
 
   G4ThreeVector theGlobalPoint(xm[0]* TG4G3Units::Length(),
-                               xm[1]* TG4G3Units::Length(),		       
-			       xm[2]* TG4G3Units::Length()); 
+                               xm[1]* TG4G3Units::Length(),                       
+                               xm[2]* TG4G3Units::Length()); 
   G4ThreeVector theLocalPoint;
   if (iflag == 1) 
     theLocalPoint = affineTransform.TransformPoint(theGlobalPoint);
@@ -670,7 +648,7 @@ void TG4StepManager::Gdtom(Double_t* xd, Double_t* xm, Int_t iflag)
     G4Navigator* navigator =
       G4TransportationManager::GetTransportationManager()->
         GetNavigatorForTracking();
-	
+        
     affineTransform = navigator->GetLocalToGlobalTransform();
   }
   else if (fStepStatus == kBoundary) {
@@ -682,7 +660,7 @@ void TG4StepManager::Gdtom(Double_t* xd, Double_t* xm, Int_t iflag)
     affineTransform
       = fStep->GetPostStepPoint()->GetTouchable()->GetHistory()
         ->GetTopTransform().Inverse();
-  }	
+  }        
   else {
 
 #ifdef MCDEBUG
@@ -692,19 +670,22 @@ void TG4StepManager::Gdtom(Double_t* xd, Double_t* xm, Int_t iflag)
     affineTransform
       = fStep->GetPreStepPoint()->GetTouchable()->GetHistory()
         ->GetTopTransform().Inverse();
-  }	
+  }        
 
   G4ThreeVector theLocalPoint(xd[0]*TG4G3Units::Length(),
                               xd[1]*TG4G3Units::Length(),
-			      xd[2]*TG4G3Units::Length()); 
+                              xd[2]*TG4G3Units::Length()); 
   G4ThreeVector theGlobalPoint;
   if(iflag == 1)
        theGlobalPoint = affineTransform.TransformPoint(theLocalPoint);
   else if( iflag == 2)
        theGlobalPoint = affineTransform.TransformAxis(theLocalPoint);
-  else 
+  else {
+    TString text = "iflag=";
+    text += iflag;
     TG4Globals::Warning(
-      "TG4StepManager::Gdtom(...,iflag): iflag is not in 1..2");
+      "TG4StepManager", "Gdtom", text + " is different from 1..2.");
+  }    
 
   xm[0] = theGlobalPoint.x()/TG4G3Units::Length();
   xm[1] = theGlobalPoint.y()/TG4G3Units::Length();
@@ -726,9 +707,10 @@ Double_t TG4StepManager::MaxStep() const
 
   G4double maxStep;
   if (userLimits == 0) { 
-    G4String text = "User Limits are not defined for log volume ";
-    text = text + curLogVolume->GetName();
-    TG4Globals::Warning(text);
+    TG4Globals::Warning(
+      "TG4StepManager", "MaxStep",
+      "User Limits are not defined for the current logical volume " + 
+       TString(curLogVolume->GetName()) + ".");
     return FLT_MAX;
   }
   else { 
@@ -984,7 +966,7 @@ Double_t TG4StepManager::TrackCharge() const
   G4double charge
     = fTrack->GetDynamicParticle()->GetDefinition()
       ->GetPDGCharge();
-  charge /= TG4G3Units::Charge();	
+  charge /= TG4G3Units::Charge();        
   return charge;
 }
 
@@ -1000,7 +982,7 @@ Double_t TG4StepManager::TrackMass() const
   G4double mass
     = fTrack->GetDynamicParticle()->GetDefinition()
       ->GetPDGMass();
-  mass /= TG4G3Units::Mass();	
+  mass /= TG4G3Units::Mass();        
   return mass;
 }
 
@@ -1208,12 +1190,12 @@ void TG4StepManager::GetSecondary(Int_t index, Int_t& particleId,
 #ifdef MCDEBUG
   if (!secondaryTracks) {
     TG4Globals::Exception(
-      "TG4StepManager::GetSecondary(): secondary tracks vector is empty");
+      "TG4StepManager", "GetSecondary", "Secondary tracks vector is empty");
   }
   
   if (index >= nofSecondaries) {
     TG4Globals::Exception(
-      "TG4StepManager::GetSecondary(): wrong secondary track index.");
+      "TG4StepManager", "GetSecondary", "Wrong secondary track index.");
   }
 #endif
   
@@ -1237,7 +1219,7 @@ void TG4StepManager::GetSecondary(Int_t index, Int_t& particleId,
   SetTLorentzVector(positionVector, time, position);
 
   // momentum & energy
-  G4ThreeVector momentumVector = track->GetMomentum();	
+  G4ThreeVector momentumVector = track->GetMomentum();        
   G4double energy = track->GetDynamicParticle()->GetTotalEnergy();
   energy /= TG4G3Units::Energy();
   SetTLorentzVector(momentumVector, energy, momentum);
@@ -1262,14 +1244,14 @@ TMCProcess TG4StepManager::ProdProcess(Int_t isec) const
   // should never happen
   if (!secondaryTracks) {
     TG4Globals::Exception(
-      "TG4StepManager::ProdProcess(): secondary tracks vector is empty.");
+      "TG4StepManager", "ProdProcess", "Secondary tracks vector is empty.");
 
     return kPNoProcess;  
   }    
 
   if (isec >= nofSecondaries) {
     TG4Globals::Exception(
-      "TG4StepManager::GetSecondary(): wrong secondary track index.");
+      "TG4StepManager", "ProdProcess", "Wrong secondary track index.");
 
     return kPNoProcess;  
   }
@@ -1346,7 +1328,7 @@ Int_t TG4StepManager::StepProcesses(TArrayI& processes) const
   if (processes[counter-1] == kPLightScattering) {
      // add reflection/absorption as additional process
      processes[counter++] = physicsManager->GetOpBoundaryStatus(kpLastProcess);
-  }	
+  }        
     
   return counter;  
 }

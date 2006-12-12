@@ -1,4 +1,4 @@
-// $Id: TG4LVStructure.cxx,v 1.2 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4LVStructure.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: geometry
 //
 // Class TG4LVStructure
@@ -22,11 +22,14 @@
 
 //_____________________________________________________________________________
 TG4LVStructure::TG4LVStructure(G4String path)
-  : fPathName(path),
+  : fStructures(),
+    fLogicalVolumes(),
+    fPathName(path),
     fDirName(path),
     fVerboseLevel(0)
 {
-//
+/// Standard constructor
+
   G4int i = fDirName.length();
   if (i > 1) {
     fDirName.remove(i-1);
@@ -38,19 +41,22 @@ TG4LVStructure::TG4LVStructure(G4String path)
 
 //_____________________________________________________________________________
 TG4LVStructure::TG4LVStructure(const TG4LVStructure& right)
+  : fStructures(),
+    fLogicalVolumes(),
+    fPathName(),
+    fDirName(),
+    fVerboseLevel(0)
 {
+/// Copy constructor
+
   // copy stuff
   *this = right;
 }
 
 //_____________________________________________________________________________
-TG4LVStructure::TG4LVStructure() {
-//
-}
-
-//_____________________________________________________________________________
-TG4LVStructure::~TG4LVStructure() {
-//
+TG4LVStructure::~TG4LVStructure() 
+{
+/// Destructor
 
   ClearAndDestroy(&fStructures);
   fLogicalVolumes.resize(0);
@@ -213,8 +219,9 @@ G4LogicalVolume* TG4LVStructure::FindVolume(const G4String& name) const
     TG4LVStructure* targetLVS = FindSubDirectory(subDir);
     if (targetLVS == 0) {  
       // The subdirectory is not found
-      G4String text = subDir + " is not found in " + fPathName;
-      TG4Globals:: Warning(text);
+      TG4Globals:: Warning(
+        "TG4LVStructure", "FindVolume",
+        TString(subDir) + " is not found in " + TString(fPathName));
       return 0;
     }
     else { 
@@ -226,8 +233,9 @@ G4LogicalVolume* TG4LVStructure::FindVolume(const G4String& name) const
     G4LogicalVolume* targetLV = GetVolume(path);
     if (targetLV == 0) {  
       // The fLogicalVolumes is not found.
-      G4String text = path + " is not found in " + fPathName;
-      TG4Globals::Warning(text);
+      TG4Globals:: Warning(
+        "TG4LVStructure", "FindVolume",
+        TString(path) + " is not found in " + TString(fPathName));
     }
     return targetLV;
   }
@@ -257,7 +265,7 @@ void TG4LVStructure::ListTreeLong() const
     G4LogicalVolume* lv = fLogicalVolumes[i];
 
     G4cout << fPathName << lv->GetName() << " (" << lv->GetNoDaughters();
-	    
+            
     if (dynamic_cast<G4BooleanSolid*>(lv->GetSolid()))
       G4cout << ", B";
 

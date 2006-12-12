@@ -1,4 +1,4 @@
-// $Id: TG4LVTreeMessenger.h,v 1.2 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4LVTreeMessenger.h,v 1.3 2005/09/01 10:04:32 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4LVTreeMessenger
@@ -24,9 +24,6 @@ class TG4LVTreeMessenger: public G4UImessenger
 {
   public:
     TG4LVTreeMessenger(TG4LVTree* lvTree);
-    // --> protected   
-    // TG4LVTreeMessenger();
-    // TG4LVTreeMessenger(const TG4LVTreeMessenger& right);
     virtual ~TG4LVTreeMessenger();
 
     // methods
@@ -35,8 +32,6 @@ class TG4LVTreeMessenger: public G4UImessenger
   protected:
     TG4LVTreeMessenger();
     TG4LVTreeMessenger(const TG4LVTreeMessenger& right);
-
-    // operators
     TG4LVTreeMessenger& operator=(const TG4LVTreeMessenger &right);
              
   private:

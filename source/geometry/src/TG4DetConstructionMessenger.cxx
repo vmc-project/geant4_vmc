@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.cxx,v 1.9 2005/05/17 13:43:57 brun Exp $
+// $Id: TG4DetConstructionMessenger.cxx,v 1.10 2005/09/01 10:04:32 brun Exp $
 // Category: geometry
 //
 // Class TG4DetConstructionMessenger
@@ -9,6 +9,7 @@
 
 #include "TG4DetConstructionMessenger.h"
 #include "TG4DetConstruction.h"
+#include "TG4GeometryManager.h"
 #include "TG4MagneticFieldType.h"
 #include "TG4GeometryServices.h"
 #include "TG4Globals.h"
@@ -21,12 +22,19 @@
 
 //_____________________________________________________________________________
 TG4DetConstructionMessenger::TG4DetConstructionMessenger(
-                                   TG4DetConstruction* detConstruction)
-  : fDetConstruction(detConstruction),
-    fDirectory(0)
+                                   TG4GeometryManager* geometryManager)
+  : G4UImessenger(),
+    fGeometryManager(geometryManager),
+    fDirectory(0),
+    fFieldTypeCmd(0),
+    fSeparatorCmd(0),
+    fUniformFieldValueCmd(0),
+    fPrintMaterialsCmd(0),
+    fPrintVolumesCmd(0)
     
 {
-//
+/// Standard constructor
+
   fDirectory = new G4UIdirectory("/mcDet/");
   fDirectory->SetGuidance("Detector construction control commands.");
 
@@ -59,68 +67,30 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fUniformFieldValueCmd->SetUnitCategory("Magnetic flux density");
   fUniformFieldValueCmd->AvailableForStates(G4State_Idle);  
   
-  fSetReadGeometryCmd 
-    = new G4UIcmdWithABool("/mcDet/readGeometry", this);
-  fSetReadGeometryCmd->SetGuidance("Read geometry from g3calls.dat files");
-  fSetReadGeometryCmd->SetParameterName("readGeometry", false);
-  fSetReadGeometryCmd->AvailableForStates(G4State_PreInit);  
- 
-  fSetWriteGeometryCmd 
-    = new G4UIcmdWithABool("/mcDet/writeGeometry", this);
-  fSetWriteGeometryCmd->SetGuidance("Write geometry to g3calls.dat file");
-  fSetWriteGeometryCmd->SetParameterName("writeGeometry", false);
-  fSetWriteGeometryCmd->AvailableForStates(G4State_PreInit);   
-
   fPrintMaterialsCmd 
     = new G4UIcmdWithoutParameter("/mcDet/printMaterials", this);
   fPrintMaterialsCmd->SetGuidance("Prints all materials.");
   fPrintMaterialsCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);   
+
+  fPrintVolumesCmd 
+    = new G4UIcmdWithoutParameter("/mcDet/printVolumes", this);
+  fPrintMaterialsCmd->SetGuidance("Prints all volumes.");
+  fPrintMaterialsCmd->AvailableForStates(G4State_Idle);   
 }
 
 //_____________________________________________________________________________
-TG4DetConstructionMessenger::TG4DetConstructionMessenger() {
-//
-}
-
-//_____________________________________________________________________________
-TG4DetConstructionMessenger::TG4DetConstructionMessenger(
-                                const TG4DetConstructionMessenger& right)
+TG4DetConstructionMessenger::~TG4DetConstructionMessenger() 
 {
-//
-  TG4Globals::Exception(
-    "TG4DetConstructionMessenger is protected from copying.");
-}
+/// Destructor
 
-//_____________________________________________________________________________
-TG4DetConstructionMessenger::~TG4DetConstructionMessenger() {
-//
   delete fDirectory;
   delete fFieldTypeCmd;
   delete fSeparatorCmd;
   delete fUniformFieldValueCmd;
-  delete fSetReadGeometryCmd;
-  delete fSetWriteGeometryCmd;
   delete fPrintMaterialsCmd;
+  delete fPrintVolumesCmd;
 }
 
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4DetConstructionMessenger& 
-TG4DetConstructionMessenger::operator=(
-                                const TG4DetConstructionMessenger& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-     "TG4DetConstructionMessenger is protected from assigning.");
-    
-  return *this;  
-}    
-          
 //
 // public methods
 //
@@ -133,29 +103,24 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
 
   if( command == fFieldTypeCmd ) { 
     if (newValues == "MCApplication") 
-      fDetConstruction->SetFieldType(kMCApplicationField); 
+      fGeometryManager->SetFieldType(kMCApplicationField); 
     if (newValues == "Uniform") 
-      fDetConstruction->SetFieldType(kUniformField); 
+      fGeometryManager->SetFieldType(kUniformField); 
     if (newValues == "None") 
-      fDetConstruction->SetFieldType(kNoField); 
+      fGeometryManager->SetFieldType(kNoField); 
   }
   else if( command == fSeparatorCmd ) { 
     char separator = newValues(0);
     TG4GeometryServices::Instance()->SetSeparator(separator);
   }
   if (command == fUniformFieldValueCmd) {  
-    fDetConstruction
+    fGeometryManager
       ->SetUniformFieldValue(fUniformFieldValueCmd->GetNewDoubleValue(newValues)); 
   }
-  else if (command == fSetReadGeometryCmd) {
-    fDetConstruction->SetReadGeometry(
-                         fSetReadGeometryCmd->GetNewBoolValue(newValues));
-  }  
-  else if (command == fSetWriteGeometryCmd) {
-    fDetConstruction->SetWriteGeometry(
-                         fSetWriteGeometryCmd->GetNewBoolValue(newValues));
-  }    
   else if (command == fPrintMaterialsCmd) {
     TG4GeometryServices::Instance()->PrintMaterials();
+  }    
+  else if (command == fPrintVolumesCmd) {
+    TG4GeometryServices::Instance()->PrintLogicalVolumeStore();
   }    
 }

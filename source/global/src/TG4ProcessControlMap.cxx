@@ -1,4 +1,4 @@
-// $Id: TG4ProcessControlMap.cxx,v 1.2 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4ProcessControlMap.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: global
 //
 // Class TG4ProcessControlMap
@@ -18,44 +18,24 @@
 TG4ProcessControlMap* TG4ProcessControlMap::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4ProcessControlMap::TG4ProcessControlMap() {
+TG4ProcessControlMap::TG4ProcessControlMap() 
+  : fMap()
+{
 //
   if (fgInstance) {
     TG4Globals::Exception(
-      "TG4ProcessControlMap: attempt to create two instances of singleton.");
+      "TG4ProcessControlMap", "TG4ProcessControlMap",
+      "Cannot create two instances of singleton.");
   }
       
   fgInstance = this;  
 }
 
 //_____________________________________________________________________________
-TG4ProcessControlMap::TG4ProcessControlMap(const TG4ProcessControlMap& right) {
-//
-  TG4Globals::Exception(    
-    "Attempt to copy TG4ProcessControlMap singleton.");
-}  
-
-//_____________________________________________________________________________
 TG4ProcessControlMap::~TG4ProcessControlMap() {
 //
 }
 
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4ProcessControlMap& TG4ProcessControlMap::operator=(const TG4ProcessControlMap& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4ProcessControlMap singleton.");
-    
-  return *this;  
-}    
-          
 //
 // private methods
 //
@@ -112,8 +92,8 @@ void TG4ProcessControlMap::PrintAll() const
       TG4G3Control control = (*i).second;
       G4cout << "Map element " << std::setw(3) << counter++ << "   " 
              << processName << "   " 
-	     << TG4G3ControlVector::GetControlName(control)
-	     << G4endl;
+             << TG4G3ControlVector::GetControlName(control)
+             << G4endl;
     }
   }
 }
@@ -161,7 +141,7 @@ TG4ProcessControlMap::GetControlName(const G4VProcess* process)
 
   return GetControlName(process->GetProcessName());
 }
-	    
+            
 //_____________________________________________________________________________
 const G4String& 
 TG4ProcessControlMap::GetControlName(const G4String& processName)
@@ -170,4 +150,4 @@ TG4ProcessControlMap::GetControlName(const G4String& processName)
 
   return TG4G3ControlVector::GetControlName(GetControl(processName));
 }
-	    
+            

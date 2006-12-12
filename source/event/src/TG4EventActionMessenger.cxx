@@ -1,4 +1,4 @@
-// $Id: TG4EventActionMessenger.cxx,v 1.2 2002/12/18 09:35:31 brun Exp $
+// $Id: TG4EventActionMessenger.cxx,v 1.3 2004/11/10 11:39:27 brun Exp $
 // Category: event
 //
 // Class TG4EventActionMessenger
@@ -17,7 +17,10 @@
 
 //_____________________________________________________________________________
 TG4EventActionMessenger::TG4EventActionMessenger(TG4EventAction* eventAction)
-  :fEventAction(eventAction)
+  : G4UImessenger(),
+    fEventAction(eventAction),
+    fEventDirectory(0),
+    fDrawTracksCmd(0)
 { 
 //
   fEventDirectory = new G4UIdirectory("/mcEvent/");
@@ -33,38 +36,10 @@ TG4EventActionMessenger::TG4EventActionMessenger(TG4EventAction* eventAction)
 }
 
 //_____________________________________________________________________________
-TG4EventActionMessenger::TG4EventActionMessenger(){
-//
-}
-
-//_____________________________________________________________________________
-TG4EventActionMessenger::TG4EventActionMessenger(
-                                 const TG4EventActionMessenger& right) {
-//				 
-  TG4Globals::Exception("TG4EventActionMessenger is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4EventActionMessenger::~TG4EventActionMessenger() {
 //
   delete fEventDirectory;
   delete fDrawTracksCmd;
-}
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4EventActionMessenger& 
-TG4EventActionMessenger::operator=(const TG4EventActionMessenger &right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-  
-  TG4Globals::Exception("TG4EventActionMessenger is protected from assigning.");
-
-  return *this;
 }
 
 //

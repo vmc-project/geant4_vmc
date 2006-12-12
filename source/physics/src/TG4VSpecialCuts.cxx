@@ -1,4 +1,4 @@
-// $Id: TG4VSpecialCuts.cxx,v 1.4 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4VSpecialCuts.cxx,v 1.5 2005/03/29 10:39:53 brun Exp $
 // Category: physics
 //
 // Class TG4VSpecialCuts
@@ -25,46 +25,18 @@ TG4VSpecialCuts::TG4VSpecialCuts(const G4String& processName)
 }
 
 //_____________________________________________________________________________
-TG4VSpecialCuts::TG4VSpecialCuts() {
-//
-}
-
-//_____________________________________________________________________________
-TG4VSpecialCuts::TG4VSpecialCuts(const TG4VSpecialCuts& right) {
-// 
-  TG4Globals::Exception(
-    "TG4VSpecialCuts is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4VSpecialCuts::~TG4VSpecialCuts() {
 //
 }
 
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4VSpecialCuts& TG4VSpecialCuts::operator=(const TG4VSpecialCuts& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-    "TG4VSpecialCuts is protected from assigning.");
-    
-  return *this;  
-}    
-          
 //
 // public methods
 //
 
 //_____________________________________________________________________________
 G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
-                           const G4Track& track, G4double previousStepSize,
-			   G4ForceCondition* condition)
+                           const G4Track& track, G4double /*previousStepSize*/,
+                           G4ForceCondition* condition)
 {
 /// Return the Step-size (actual length) which is allowed 
 /// by this process.
@@ -82,11 +54,11 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
          ->GetLimits(track.GetVolume()->GetLogicalVolume()->GetUserLimits());
 
   if (!limits) {
-    G4String text = "TG4VSpecialCuts::PostStepGetPhysicalInteractionLength:\n";
-    text = text + "    " + track.GetVolume()->GetLogicalVolume()->GetName();
-    text = text + " has not limits.";
-    TG4Globals::Exception(text);
-  }  	  
+    TG4Globals::Exception(
+      "TG4VSpecialCuts", "PostStepGetPhysicalInteractionLength",
+      TString(track.GetVolume()->GetLogicalVolume()->GetName()) +
+      " has not limits.");
+  }            
 #else  
   TG4Limits* limits 
     = (TG4Limits*) track.GetVolume()->GetLogicalVolume()->GetUserLimits();
@@ -119,7 +91,7 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
       temp = rangeNow - rmin;
       if (temp < 0.) return 0.;
       if (proposedStep > temp) proposedStep = temp;
-    }	 
+    }         
     if (temp < 0.) return minStep;
     if (proposedStep > temp) proposedStep = temp;
 
@@ -132,7 +104,7 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
          temp = rangeNow - rmin;
          if (temp < 0.) return 0.;
          if (proposedStep > temp) proposedStep = temp;
-       }	 
+       }         
   }
   else {  
     // min kinetic energy (from limits)
@@ -145,7 +117,7 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
 
 //_____________________________________________________________________________
 G4VParticleChange* TG4VSpecialCuts::PostStepDoIt(const G4Track& track, 
-                                                 const G4Step& step)
+                                                 const G4Step& /*step*/)
 {
 /// Kill the current particle, if requested by G4UserLimits.
  

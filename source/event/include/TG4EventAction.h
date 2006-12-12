@@ -1,4 +1,4 @@
-// $Id: TG4EventAction.h,v 1.4 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4EventAction.h,v 1.5 2006/04/12 10:38:21 brun Exp $
 /// \ingroup event
 //
 /// \class TG4EventAction
@@ -26,8 +26,6 @@ class TG4EventAction : public G4UserEventAction,
 {
   public:
     TG4EventAction();
-    // --> protected
-    // TG4EventAction(const TG4EventAction& right);
     virtual ~TG4EventAction();
     
     // methods
@@ -40,13 +38,10 @@ class TG4EventAction : public G4UserEventAction,
     // get methods
     G4String GetDrawFlag() const;
     
-  protected:
+  private:
     TG4EventAction(const TG4EventAction& right);
-
-    // operators
     TG4EventAction& operator=(const TG4EventAction& right);
 
-  private:
     // methods 
     void DisplayEvent(const G4Event* event) const;
     void PrimaryToStack(const G4PrimaryVertex* vertex,

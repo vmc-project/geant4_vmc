@@ -1,4 +1,4 @@
-// $Id: TG4PrimaryGeneratorAction.cxx,v 1.3 2003/09/23 14:24:29 brun Exp $
+// $Id: TG4PrimaryGeneratorAction.cxx,v 1.4 2004/11/10 11:39:28 brun Exp $
 // Category: run
 //
 // Class TG4PrimaryGeneratorAction
@@ -44,16 +44,16 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
   
   TVirtualMCStack* stack = gMC->GetStack();  
   if (!stack) {
-    G4String text = "TG4PrimaryGeneratorAction::TransformPrimaries:\n";
-    text = text + "   No VMC stack is defined.";
-    TG4Globals::Exception(text);
+    TG4Globals::Exception(
+      "TG4PrimaryGeneratorAction", "TransformPrimaries",
+      "No VMC stack is defined.");
   }  
     
   G4int nofParticles = stack->GetNtrack();
   if (nofParticles <= 0) {
-    G4String text = "TG4PrimaryGeneratorAction::TransformPrimaries:\n";
-    text = text + "   No primary particles found on the stack.";
-    TG4Globals::Exception(text);
+    TG4Globals::Exception(
+      "TG4PrimaryGeneratorAction", "TransformPrimaries",
+      "No primary particles found on the stack.");
   }  
 
   if (VerboseLevel() > 1)
@@ -80,23 +80,22 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
 
       G4ParticleDefinition* particleDefinition
         = particlesManager->GetParticleDefinition(particle, false);
-      G4bool isIon = false;	
+      G4bool isIon = false;        
 
       if (!particleDefinition) {
         particleDefinition
           = particlesManager->GetIonParticleDefinition(particle, false);
-	if (particleDefinition) isIon = true;
-      }	  	  
+        if (particleDefinition) isIon = true;
+      }                    
             
-      if (!particleDefinition) {
-        G4cerr << particle->GetName() << "  " 
-	       << particle->GetTitle() 
-	       << " pdgEncoding: " << particle->GetPdgCode() << G4endl;
-        G4String text = 
-            "TG4PrimaryGeneratorAction::TransformPrimaries:\n";
-        text = text + "    G4ParticleTable::FindParticle() failed.";
-        TG4Globals::Exception(text);
-      }	
+      if (!particleDefinition) { 
+        TString text = "pdgEncoding=";
+        text += particle->GetPdgCode();
+        TG4Globals::Exception(
+         "TG4PrimaryGeneratorAction", "TransformPrimaries",
+         "G4ParticleTable::FindParticle() failed for " +
+         TString(particle->GetName()) + "  "  + text + "."); 
+      }        
 
       // Get/Create vertex
       G4ThreeVector position 
@@ -127,7 +126,7 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
         = particlesManager->GetParticleMomentum(particle);
       G4PrimaryParticle* primaryParticle 
         = new G4PrimaryParticle(particleDefinition, 
-	                        momentum.x(), momentum.y(), momentum.z());
+                                momentum.x(), momentum.y(), momentum.z());
  
       // Set mass
       primaryParticle->SetMass(particleDefinition->GetPDGMass());
@@ -143,7 +142,7 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
       particle->GetPolarisation(polarization);
       primaryParticle
         ->SetPolarization(polarization.X(), polarization.Y(), polarization.Z());  
-	
+        
       // Add primary particle to the vertex
       vertex->SetPrimary(primaryParticle);
 

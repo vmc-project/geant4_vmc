@@ -1,4 +1,4 @@
-// $Id: TG4TrackingActionMessenger.cxx,v 1.3 2003/02/26 13:39:32 brun Exp $
+// $Id: TG4TrackingActionMessenger.cxx,v 1.4 2004/11/10 11:39:27 brun Exp $
 // Category: event
 //
 // Class TG4TrackingActionMessenger
@@ -19,7 +19,11 @@
 TG4TrackingActionMessenger::TG4TrackingActionMessenger(
                                TG4TrackingAction* trackingAction)
   : G4UImessenger(),
-    fTrackingAction(trackingAction)
+    fTrackingAction(trackingAction),
+    fTrackingDirectory(0),
+    fNewVerboseCmd(0),
+    fNewVerboseTrackCmd(0),
+    fSaveSecondariesCmd(0)
 {
 // 
   fTrackingDirectory = new G4UIdirectory("/mcTracking/");
@@ -47,49 +51,12 @@ TG4TrackingActionMessenger::TG4TrackingActionMessenger(
 }
 
 //_____________________________________________________________________________
-TG4TrackingActionMessenger::TG4TrackingActionMessenger() 
-  : G4UImessenger(),
-    fTrackingAction(0),
-    fTrackingDirectory(0),
-    fNewVerboseCmd(0),
-    fNewVerboseTrackCmd(0),
-    fSaveSecondariesCmd(0)    
-{
-//
-}
-
-//_____________________________________________________________________________
-TG4TrackingActionMessenger::TG4TrackingActionMessenger(
-                                 const TG4TrackingActionMessenger& right) {
-//				 
-  TG4Globals::Exception(
-    "TG4TrackingActionMessenger is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4TrackingActionMessenger::~TG4TrackingActionMessenger() {
 //
   delete fTrackingDirectory;
   delete fNewVerboseCmd;
   delete fNewVerboseTrackCmd;
   delete fSaveSecondariesCmd;
-}
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4TrackingActionMessenger& 
-TG4TrackingActionMessenger::operator=(const TG4TrackingActionMessenger &right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-  
-  TG4Globals::Exception(
-    "TG4TrackingActionMessenger is protected from assigning.");
-
-  return *this;
 }
 
 //

@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.15 2005/11/18 21:29:35 brun Exp $
+// $Id: TGeant4.cxx,v 1.16 2006/01/13 16:59:39 brun Exp $
 // Category: run
 //
 // Class TGeant4
@@ -10,6 +10,7 @@
 #include "TGeant4.h"
 #include "TG4RunConfiguration.h"
 #include "TG4GeometryManager.h" 
+#include "TG4OpGeometryManager.h" 
 #include "TG4SDManager.h" 
 #include "TG4PhysicsManager.h" 
 #include "TG4StepManager.h" 
@@ -17,21 +18,25 @@
 #include "TG4RunManager.h"
 #include "TG4Globals.h"
 
+#include <TVirtualMCGeometry.h>
+
 ClassImp(TGeant4)
 
 //_____________________________________________________________________________
 TGeant4::TGeant4(const char* name, const char* title,
                  TG4RunConfiguration* configuration, int argc, char** argv)
   : TVirtualMC(name, title),
-    fVisManager(0)
+    fGeometryManager(0),
+    fSDManager(0),     
+    fPhysicsManager(0),
+    fStepManager(0),   
+    fVisManager(0),
+    fRunManager(0)
+    
 {
-  // create run manager
-  fRunManager = new TG4RunManager(configuration, argc, argv);
-  // add verbose level
-  //G4cout << "TG4RunManager has been created." << G4endl;
-
   // create geometry manager
-  fGeometryManager = new TG4GeometryManager();
+  TString userGeometry = configuration->GetUserGeometry();
+  fGeometryManager = new TG4GeometryManager(userGeometry);
   // add verbose level
   //G4cout << "TG4GeometryManager has been created." << G4endl;
   
@@ -46,9 +51,14 @@ TGeant4::TGeant4(const char* name, const char* title,
   //G4cout << "TG4GeometryManager has been created." << G4endl;
   
   // create step manager 
-  fStepManager = new TG4StepManager();
+  fStepManager = new TG4StepManager(userGeometry);
   // add verbose level
   //G4cout << "TG4StepManager has been created." << G4endl;
+
+  // create run manager
+  fRunManager = new TG4RunManager(configuration, argc, argv);
+  // add verbose level
+  //G4cout << "TG4RunManager has been created." << G4endl;
 
 #ifdef MCDEBUG
   G4cout << "Debug mode is switched on." << G4endl;
@@ -64,15 +74,16 @@ TGeant4::TGeant4(const char* name, const char* title,
 TGeant4::TGeant4(const char* name, const char* title,
                  TG4RunConfiguration* configuration)
   : TVirtualMC(name, title),
-    fVisManager(0)
+    fGeometryManager(0), 
+    fSDManager(0),     
+    fPhysicsManager(0),
+    fStepManager(0),   
+    fVisManager(0),
+    fRunManager(0)
 {
-  // create run manager
-  fRunManager = new TG4RunManager(configuration);
-  // add verbose level
-  //G4cout << "TG4RunManager has been created." << G4endl;
-
   // create geometry manager
-  fGeometryManager = new TG4GeometryManager();
+  TString userGeometry = configuration->GetUserGeometry();
+  fGeometryManager = new TG4GeometryManager(userGeometry);
   // add verbose level
   //G4cout << "TG4GeometryManager has been created." << G4endl;
   
@@ -87,10 +98,15 @@ TGeant4::TGeant4(const char* name, const char* title,
   //G4cout << "TG4GeometryManager has been created." << G4endl;
   
   // create step manager 
-  fStepManager = new TG4StepManager();
+  fStepManager = new TG4StepManager(userGeometry);
   // add verbose level
   //G4cout << "TG4StepManager has been created." << G4endl;
   
+  // create run manager
+  fRunManager = new TG4RunManager(configuration);
+  // add verbose level
+  //G4cout << "TG4RunManager has been created." << G4endl;
+
 #ifdef MCDEBUG
   G4cout << "Debug mode is switched on." << G4endl;
 #endif    
@@ -103,17 +119,6 @@ TGeant4::TGeant4(const char* name, const char* title,
 
     
 //_____________________________________________________________________________
-TGeant4::TGeant4() {
-//
-}
-
-//_____________________________________________________________________________
-TGeant4::TGeant4(const TGeant4& right) {
-// 
-  TG4Globals::Exception("TGeant4 is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TGeant4::~TGeant4() {
 //
   delete fRunManager;
@@ -125,22 +130,6 @@ TGeant4::~TGeant4() {
 }
 
 //
-// operators
-//
-
-//_____________________________________________________________________________
-TGeant4& TGeant4::operator=(const TGeant4& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception("TGeant4 is protected from assigning.");
-    
-  return *this;  
-}    
-          
-
-//
 // methods for building/management of geometry
 // 
 
@@ -149,7 +138,7 @@ Bool_t TGeant4::IsRootGeometrySupported() const
 {
 /// Returns info about supporting geometry defined via Root
 
-  return fGeometryManager->IsRootGeometrySupported();
+  return true;
 }  
 
 //_____________________________________________________________________________
@@ -158,38 +147,39 @@ void TGeant4::FinishGeometry()
 /// Sets the top VTE in temporary G3 volume table.
 /// Close geometry output file (if fWriteGeometry is set true).
 
-  fGeometryManager->Ggclos();
+  // Ggclos();
+  fGeometryManager->FinishGeometry();
 } 
 
 //_____________________________________________________________________________
 void TGeant4::Gfmate(Int_t imat, char *name, Float_t &a, Float_t &z,  
-  		         Float_t &dens, Float_t &radl, Float_t &absl,
-		         Float_t* ubuf, Int_t& nbuf) 
+                           Float_t &dens, Float_t &radl, Float_t &absl,
+                         Float_t* ubuf, Int_t& nbuf) 
 {
 /// Return parameters for material specified by material number imat 
 
-  fGeometryManager
+  fGeometryManager->GetOpManager()
     ->Gfmate(imat, name, a, z, dens, radl, absl, ubuf, nbuf);
 } 
 
 //_____________________________________________________________________________
 void TGeant4::Gfmate(Int_t imat, char *name, Double_t &a, Double_t &z,  
-  		         Double_t &dens, Double_t &radl, Double_t &absl,
-		         Double_t* ubuf, Int_t& nbuf) 
+                           Double_t &dens, Double_t &radl, Double_t &absl,
+                         Double_t* ubuf, Int_t& nbuf) 
 {
 /// Return parameters for material specified by material number imat 
 
-  fGeometryManager
+  fGeometryManager->GetOpManager()
     ->Gfmate(imat, name, a, z, dens, radl, absl, ubuf, nbuf);
 }
-  			 
+                           
 //_____________________________________________________________________________
-void TGeant4::Gckmat(Int_t itmed, char* natmed) 
+void TGeant4::Gckmat(Int_t /*itmed*/, char* /*natmed*/) 
 { 
 /// Function not implemented.
 /// Return warning.
 
-  TG4Globals:: Warning("TGeant4::Gckmat(..) is not implemented."); 
+  TG4Globals:: Warning("TGeant4", "Gckmat", "Not implemented."); 
 }
 
 //_____________________________________________________________________________
@@ -200,7 +190,7 @@ void TGeant4::Material(Int_t& kmat, const char* name, Double_t a,
 /// Create material.                                                       \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored.
 
-  fGeometryManager
+  fGeometryManager->GetMCGeometry()
     ->Material(kmat, name, a, z, dens, radl, absl, buf, nwbuf); 
 } 
 
@@ -212,10 +202,10 @@ void TGeant4::Material(Int_t& kmat, const char* name, Double_t a,
 /// Create material.                                                       \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored.
 
-  fGeometryManager
+  fGeometryManager->GetMCGeometry()
     ->Material(kmat, name, a, z, dens, radl, absl, buf, nwbuf); 
 }  
-		     
+                     
 //_____________________________________________________________________________
 void TGeant4::Mixture(Int_t& kmat, const char *name, Float_t *a, 
                      Float_t *z, Double_t dens, Int_t nlmat, Float_t *wmat) 
@@ -223,7 +213,7 @@ void TGeant4::Mixture(Int_t& kmat, const char *name, Float_t *a,
 /// Create material composed of more elements.                                                       \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored.
 
-   fGeometryManager
+   fGeometryManager->GetMCGeometry()
      ->Mixture(kmat, name, a, z, dens, nlmat, wmat); 
 } 
 
@@ -234,20 +224,20 @@ void TGeant4::Mixture(Int_t& kmat, const char *name, Double_t *a,
 /// Create material composed of more elements.                                                       \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored.
 
-   fGeometryManager
+   fGeometryManager->GetMCGeometry()
      ->Mixture(kmat, name, a, z, dens, nlmat, wmat); 
 }  
-		     
+                     
 //_____________________________________________________________________________
 void TGeant4::Medium(Int_t& kmed, const char *name, Int_t nmat, 
                      Int_t isvol, Int_t ifield, Double_t fieldm, Double_t tmaxfd, 
                      Double_t stemax, Double_t deemax, Double_t epsil, 
-		     Double_t stmin, Float_t* ubuf, Int_t nbuf) 
+                     Double_t stmin, Float_t* ubuf, Int_t nbuf) 
 { 
 /// Create a temporary "medium" that is used for 
 /// assigning corresponding parameters to G4 objects:
 
-  fGeometryManager
+  fGeometryManager->GetMCGeometry()
     ->Medium(kmed, name, nmat, isvol, ifield, fieldm, tmaxfd, stemax, deemax, 
         epsil, stmin, ubuf, nbuf);
 } 
@@ -256,25 +246,25 @@ void TGeant4::Medium(Int_t& kmed, const char *name, Int_t nmat,
 void TGeant4::Medium(Int_t& kmed, const char *name, Int_t nmat, 
                      Int_t isvol, Int_t ifield, Double_t fieldm, Double_t tmaxfd, 
                      Double_t stemax, Double_t deemax, Double_t epsil, 
-		     Double_t stmin, Double_t* ubuf, Int_t nbuf) 
+                     Double_t stmin, Double_t* ubuf, Int_t nbuf) 
 {
 /// Create a temporary "medium" that is used for 
 /// assigning corresponding parameters to G4 objects:
 
-  fGeometryManager
+  fGeometryManager->GetMCGeometry()
     ->Medium(kmed, name, nmat, isvol, ifield, fieldm, tmaxfd, stemax, deemax, 
         epsil, stmin, ubuf, nbuf);
 }  
-		     
+                     
 
 //_____________________________________________________________________________
 void TGeant4::Matrix(Int_t& krot, Double_t thetaX, Double_t phiX, 
                      Double_t thetaY, Double_t phiY, Double_t thetaZ, 
-		     Double_t phiZ) 
+                     Double_t phiZ) 
 {
 /// Create rotation matrix.
 
-  fGeometryManager
+  fGeometryManager->GetMCGeometry()
     ->Matrix(krot, thetaX, phiX, thetaY, phiY, thetaZ, phiZ); 
 } 
 
@@ -284,7 +274,8 @@ Int_t TGeant4::Gsvolu(const char *name, const char *shape, Int_t nmed,
 {
 /// Create volume
 
-  return fGeometryManager->Gsvolu(name, shape, nmed, upar, np); 
+  return fGeometryManager->GetMCGeometry()
+    ->Gsvolu(name, shape, nmed, upar, np); 
 }
  
 //_____________________________________________________________________________
@@ -293,7 +284,8 @@ Int_t TGeant4::Gsvolu(const char *name, const char *shape, Int_t nmed,
 {
 /// Create volume
 
-  return fGeometryManager->Gsvolu(name, shape, nmed, upar, np); 
+  return fGeometryManager->GetMCGeometry()
+    ->Gsvolu(name, shape, nmed, upar, np); 
 }
  
 //_____________________________________________________________________________
@@ -302,7 +294,8 @@ void TGeant4::Gsdvn(const char *name, const char *mother, Int_t ndiv,
 {
 /// Create divided volume
 
-  fGeometryManager->Gsdvn(name, mother, ndiv, iaxis); 
+  fGeometryManager->GetMCGeometry()
+    ->Gsdvn(name, mother, ndiv, iaxis); 
 } 
 
 //_____________________________________________________________________________
@@ -311,7 +304,8 @@ void TGeant4::Gsdvn2(const char *name, const char *mother, Int_t ndiv,
 {
 /// Create divided volume
 
-  fGeometryManager->Gsdvn2(name, mother, ndiv, iaxis, c0i, numed); 
+  fGeometryManager->GetMCGeometry()
+    ->Gsdvn2(name, mother, ndiv, iaxis, c0i, numed); 
 } 
 
 //_____________________________________________________________________________
@@ -320,7 +314,8 @@ void TGeant4::Gsdvt(const char *name, const char *mother, Double_t step,
 {
 /// Create divided volume
 
-  fGeometryManager->Gsdvt(name, mother, step, iaxis, numed, ndvmx); 
+  fGeometryManager->GetMCGeometry()
+    ->Gsdvt(name, mother, step, iaxis, numed, ndvmx); 
 } 
 
 //_____________________________________________________________________________
@@ -329,7 +324,8 @@ void TGeant4::Gsdvt2(const char *name, const char *mother, Double_t step,
 { 
 /// Create divided volume
 
-  fGeometryManager->Gsdvt2(name, mother, step, iaxis, c0, numed, ndvmx); 
+  fGeometryManager->GetMCGeometry()
+    ->Gsdvt2(name, mother, step, iaxis, c0, numed, ndvmx); 
 } 
 
 //_____________________________________________________________________________
@@ -337,7 +333,8 @@ void TGeant4::Gsord(const char *name, Int_t iax)
 {
 /// No corresponding action in G4.
 
-  fGeometryManager->Gsord(name, iax); 
+  fGeometryManager->GetMCGeometry()
+    ->Gsord(name, iax); 
 } 
 
 //_____________________________________________________________________________
@@ -347,7 +344,8 @@ void TGeant4::Gspos(const char *name, Int_t nr, const char *mother,
 {
 ///  Place a volume into an existing one
 
-  fGeometryManager->Gspos(name, nr, mother, x, y, z, irot, konly); 
+  fGeometryManager->GetMCGeometry()
+    ->Gspos(name, nr, mother, x, y, z, irot, konly); 
 } 
 
 //_____________________________________________________________________________
@@ -358,7 +356,8 @@ void TGeant4::Gsposp(const char *name, Int_t nr, const char *mother,
 ///  Place a copy of generic volume name with user number
 ///  nr inside mother, with its parameters upar(1..np)
 
-  fGeometryManager->Gsposp(name, nr, mother, x, y, z, irot, konly, upar, np); 
+  fGeometryManager->GetMCGeometry()
+    ->Gsposp(name, nr, mother, x, y, z, irot, konly, upar, np); 
 } 
 
 //_____________________________________________________________________________
@@ -369,7 +368,8 @@ void TGeant4::Gsposp(const char *name, Int_t nr, const char *mother,
 ///  Place a copy of generic volume name with user number
 ///  nr inside mother, with its parameters upar(1..np)
 
-  fGeometryManager->Gsposp(name, nr, mother, x, y, z, irot, konly, upar, np); 
+  fGeometryManager->GetMCGeometry()
+    ->Gsposp(name, nr, mother, x, y, z, irot, konly, upar, np); 
 } 
 
 //_____________________________________________________________________________
@@ -379,7 +379,8 @@ void TGeant4::Gsbool(const char* onlyVolName, const char* manyVolName)
 /// Specify the ONLY volume that overlaps with the 
 /// specified MANY and has to be substracted.
 
-  fGeometryManager->Gsbool(onlyVolName, manyVolName); 
+  fGeometryManager->GetMCGeometry()
+    ->Gsbool(onlyVolName, manyVolName); 
 } 
 
 //_____________________________________________________________________________
@@ -388,7 +389,8 @@ void TGeant4::SetCerenkov(Int_t itmed, Int_t npckov, Float_t *ppckov,
 {
 /// Set the tables for UV photon tracking in medium itmed 
 
-  fGeometryManager->SetCerenkov(itmed, npckov, ppckov, absco, effic, rindex);
+  fGeometryManager->GetOpManager()
+    ->SetCerenkov(itmed, npckov, ppckov, absco, effic, rindex);
 }  
     
 //_____________________________________________________________________________
@@ -397,140 +399,146 @@ void TGeant4::SetCerenkov(Int_t itmed, Int_t npckov, Double_t *ppckov,
 {
 /// Set the tables for UV photon tracking in medium itmed 
 
-  fGeometryManager->SetCerenkov(itmed, npckov, ppckov, absco, effic, rindex);
+  fGeometryManager->GetOpManager()
+    ->SetCerenkov(itmed, npckov, ppckov, absco, effic, rindex);
 }  
-		     		  
+                                       
 //_____________________________________________________________________________
 void  TGeant4::DefineOpSurface(const char *name,
                          EMCOpSurfaceModel model,
-			 EMCOpSurfaceType surfaceType,
-			 EMCOpSurfaceFinish surfaceFinish,
-			 Double_t sigmaAlpha)
-{			 
+                         EMCOpSurfaceType surfaceType,
+                         EMCOpSurfaceFinish surfaceFinish,
+                         Double_t sigmaAlpha)
+{                         
 /// Define the optical surface
 
-  fGeometryManager->DefineOpSurface(
-                         name, model, surfaceType, surfaceFinish, sigmaAlpha);
-}			 
-			 
+  fGeometryManager->GetOpManager()
+    ->DefineOpSurface(name, model, surfaceType, surfaceFinish, sigmaAlpha);
+}                         
+                         
 //_____________________________________________________________________________
 void  TGeant4::SetBorderSurface(const char *name,
                          const char* vol1Name, int vol1CopyNo,
                          const char* vol2Name, int vol2CopyNo,
-			 const char* opSurfaceName)
-{			 
+                         const char* opSurfaceName)
+{                         
 /// Define the optical border surface
 
-  fGeometryManager->SetBorderSurface(name, 
-			 vol1Name, vol1CopyNo, vol2Name, vol2CopyNo, opSurfaceName);
-}			 
-			 
+  fGeometryManager->GetOpManager()
+    ->SetBorderSurface(name, vol1Name, vol1CopyNo, vol2Name, vol2CopyNo, 
+                       opSurfaceName);
+}                         
+                         
 //_____________________________________________________________________________
 void  TGeant4::SetSkinSurface(const char *name,
                          const char* volName,
-			 const char* opSurfaceName)
-{			 
+                         const char* opSurfaceName)
+{                         
 /// Define the optical skin surface
 
-  fGeometryManager->SetSkinSurface(name, volName, opSurfaceName);
-}			 
-			 
+  fGeometryManager->GetOpManager()
+    ->SetSkinSurface(name, volName, opSurfaceName);
+}                         
+                         
 //_____________________________________________________________________________
 void  TGeant4::SetMaterialProperty(
                          Int_t itmed, const char* propertyName, 
-			 Int_t np, Double_t* pp, Double_t* values)
-{			 
+                         Int_t np, Double_t* pp, Double_t* values)
+{                         
 /// Set the material property specified by propertyName to the tracking medium
 
-  fGeometryManager->SetMaterialProperty(itmed, propertyName, np, pp, values); 
-}			 
-			 
+  fGeometryManager->GetOpManager()
+    ->SetMaterialProperty(itmed, propertyName, np, pp, values); 
+}                         
+                         
 //_____________________________________________________________________________
 void  TGeant4::SetMaterialProperty(
                          Int_t itmed, const char* propertyName, 
-			 Double_t value)
-{			 
+                         Double_t value)
+{                         
 /// Set the material property specified by propertyName to the tracking medium
 
-  fGeometryManager->SetMaterialProperty(itmed, propertyName, value); 
-}			 
-			 
+  fGeometryManager->GetOpManager()
+    ->SetMaterialProperty(itmed, propertyName, value); 
+}                         
+                         
 //_____________________________________________________________________________
 void  TGeant4::SetMaterialProperty(
                          const char* surfaceName, const char* propertyName, 
-			 Int_t np, Double_t* pp, Double_t* values)
-{			 
+                         Int_t np, Double_t* pp, Double_t* values)
+{                         
 /// Set the material property specified by propertyName to the optical surface
 
-  fGeometryManager->SetMaterialProperty(surfaceName, propertyName, np, pp, values); 
-}			 
+  fGeometryManager->GetOpManager()
+    ->SetMaterialProperty(surfaceName, propertyName, np, pp, values); 
+}                         
     
 //_____________________________________________________________________________
 Bool_t TGeant4::GetTransformation(const TString& volumePath, 
                          TGeoHMatrix& matrix)
-{			 
+{                         
 /// Return the transformation matrix between the volume specified by
 /// the path volumePath and the top volume.
 
-  return fGeometryManager->GetTransformation(volumePath, matrix);
-}			 
+  return fGeometryManager->GetMCGeometry()
+    ->GetTransformation(volumePath, matrix);
+}                         
    
 //_____________________________________________________________________________
 Bool_t TGeant4::GetShape(const TString& volumePath, 
                          TString& shapeType, TArrayD& par)
-{			 
+{                         
 /// Return the name of the shape and its parameters for the volume
 /// specified by the volume name.
 
-  return fGeometryManager->GetShape(volumePath, shapeType, par);
+  return fGeometryManager->GetMCGeometry()
+  ->GetShape(volumePath, shapeType, par);
 }  
 
 //_____________________________________________________________________________
 Bool_t TGeant4::GetMaterial(const TString& volumeName,
-	 	         TString& name, Int_t& imat,
-		         Double_t& a, Double_t& z, Double_t& density,
-		         Double_t& radl, Double_t& inter, TArrayD& par)
-{			 
+                          TString& name, Int_t& imat,
+                         Double_t& a, Double_t& z, Double_t& density,
+                         Double_t& radl, Double_t& inter, TArrayD& par)
+{                         
 /// Return the material parameters for the volume specified by
 /// the volume name.
 
-  return fGeometryManager
+  return fGeometryManager->GetMCGeometry()
     ->GetMaterial(volumeName, name, imat, a, z, density, radl, inter, par);
-}				        
-		     
+}                                        
+                     
 //_____________________________________________________________________________
 Bool_t TGeant4::GetMedium(const TString& volumeName,
                          TString& name, Int_t& imed,
-		         Int_t& nmat, Int_t& isvol, Int_t& ifield,
-		         Double_t& fieldm, Double_t& tmaxfd, Double_t& stemax,
-		         Double_t& deemax, Double_t& epsil, Double_t& stmin,
-		         TArrayD& par)
-{			 
-// Returns the medium parameters for the volume specified by the
-// volume name.
+                         Int_t& nmat, Int_t& isvol, Int_t& ifield,
+                         Double_t& fieldm, Double_t& tmaxfd, Double_t& stemax,
+                         Double_t& deemax, Double_t& epsil, Double_t& stmin,
+                         TArrayD& par)
+{                         
+/// Return the medium parameters for the volume specified by the
+/// volume name.
 
-  return fGeometryManager
+  return fGeometryManager->GetMCGeometry()
     ->GetMedium(volumeName, name, imed, nmat, isvol, ifield, 
                 fieldm, tmaxfd, stemax, deemax, epsil, stmin, par); 
                  
-}				        
+}                                        
 
 //_____________________________________________________________________________
-void TGeant4::WriteEuclid(const char* fileName, const char* topVol, 
-                          Int_t number, Int_t nlevel) 
+void TGeant4::WriteEuclid(const char* /*fileName*/, const char* /*topVol*/, 
+                          Int_t /*number*/, Int_t /*nlevel*/) 
 {
 /// Write out the geometry of the detector in EUCLID file format
 /// Not implemented
 
-   fGeometryManager->WriteEuclid(fileName, topVol, number, nlevel); 
+  TG4Globals:: Warning("TGeant4", "WriteEuclid", "Not implemented."); 
 } 
-		               
+                               
 //_____________________________________________________________________________
 void TGeant4::SetRootGeometry() 
 {                   
-/// Convert Root geometry to G4 geometry objects.
-
-  fGeometryManager->SetRootGeometry();
+/// Nothing has to be done here
 }
 
 //_____________________________________________________________________________
@@ -550,6 +558,14 @@ const char* TGeant4::VolName(Int_t id) const {
   return fSDManager->VolName(id); 
 }
  
+//_____________________________________________________________________________
+Int_t TGeant4::MediumId(const Text_t* volName) const 
+{
+/// Return the volume ID = sensitive detector identifier.
+
+  return fSDManager->MediumId(volName); 
+} 
+
 //_____________________________________________________________________________
 Int_t TGeant4::NofVolumes() const 
 {
@@ -600,7 +616,6 @@ void TGeant4::Gstpar(Int_t itmed, const char *param, Double_t parval)
 {
 /// Pass the tracking medium parameter to TG4Limits.
 
-  fGeometryManager->Gstpar(itmed, param, parval); 
   fPhysicsManager->Gstpar(itmed, param, parval); 
 }    
 
@@ -628,8 +643,8 @@ Bool_t TGeant4::DefineParticle(Int_t pdg, const char* name, TMCParticleType type
 /// if not gives exception.
 
   return fPhysicsManager->DefineParticle(pdg, name, type, mass, charge, lifetime);
-}  			
-			
+}                          
+                        
 //_____________________________________________________________________________
 Bool_t TGeant4::DefineIon(const char* name, Int_t Z, Int_t A, 
                         Int_t Q, Double_t excEnergy, Double_t mass) 
@@ -673,31 +688,31 @@ TString   TGeant4::ParticleName(Int_t pdg) const
 
   return fPhysicsManager->ParticleName(pdg);
 }  
-	  
+          
 //_____________________________________________________________________________
 Double_t  TGeant4::ParticleMass(Int_t pdg) const 
-{	  
+{          
 /// Return mass of G4 particle specified by pdg.
 
   return fPhysicsManager->ParticleMass(pdg);
 }  
-	  
+          
 //_____________________________________________________________________________
 Double_t  TGeant4::ParticleCharge(Int_t pdg) const 
-{	  
+{          
 /// Return charge (in e units) of G4 particle specified by pdg.
 
   return fPhysicsManager->ParticleCharge(pdg);
 }  
-	  
+          
 //_____________________________________________________________________________
 Double_t  TGeant4::ParticleLifeTime(Int_t pdg) const 
-{	  
+{          
 /// Return life time of G4 particle specified by pdg.
 
   return fPhysicsManager->ParticleLifeTime(pdg);
 }  
-	  
+          
 //_____________________________________________________________________________
 TMCParticleType TGeant4::ParticleMCType(Int_t pdg) const 
 {
@@ -705,7 +720,7 @@ TMCParticleType TGeant4::ParticleMCType(Int_t pdg) const
 
   return fPhysicsManager->ParticleMCType(pdg);
 }  
-	  
+          
 
 //
 // methods for step management
@@ -736,7 +751,7 @@ void TGeant4::Gsatt(const char* name, const char* att, Int_t val)
 //_____________________________________________________________________________
 void  TGeant4::Gdraw(const char* name, Double_t theta, Double_t phi, 
                         Double_t psi, Double_t u0, Double_t v0, 
-			Double_t ul, Double_t vl) 
+                        Double_t ul, Double_t vl) 
 {
 /// Draw the volume specified by name and all its daughters
 
@@ -749,7 +764,8 @@ void TGeant4::DrawOneSpec(const char* name)
 {
 /// Function not enabled in no visualization mode
 
-  TG4Globals:: Warning("TGeant4::DrawOneSpec(): no visualization available."); 
+  TG4Globals:: Warning(
+    "TGeant4", "DrawOneSpec", "No visualization available."); 
 } 
 
 //_____________________________________________________________________________
@@ -757,17 +773,19 @@ void TGeant4::Gsatt(const char* name, const char* att, Int_t val)
 {
 /// Function not enabled in no visualization mode
 
-  TG4Globals:: Warning("TGeant4::Gsatt(): no visualization available."); 
+  TG4Globals:: Warning(
+    "TGeant4", "Gsatt", "No visualization available."); 
 } 
 
 //_____________________________________________________________________________
 void TGeant4::Gdraw(const char* p1, Double_t theta, Double_t phi,
-		        Double_t psi, Double_t u0, Double_t v0,
-		        Double_t ul, Double_t vl) 
+                        Double_t psi, Double_t u0, Double_t v0,
+                        Double_t ul, Double_t vl) 
 {
 /// Function not enabled in no visualization mode
 
-  TG4Globals:: Warning("TGeant4::Gdraw(): no visualization available."); 
+  TG4Globals:: Warning(
+    "TGeant4", "Gdraw", "No visualization available."); 
 } 
 
 #endif //G4VIS_USE
@@ -864,22 +882,24 @@ Bool_t  TGeant4::SecondariesAreOrdered() const
 // ------------------------------------------------
     
 //_____________________________________________________________________________
-void TGeant4::Gdopt(const char* name, const char* value) 
+void TGeant4::Gdopt(const char* /*name*/, const char* /*value*/) 
 {
 /// Function not implemented.
 /// Return warning.
 
-  TG4Globals:: Warning("TGeant4::Gdopt(..) is not implemented."); 
+  TG4Globals:: Warning("TGeant4", "Gdopt", "Not implemented."); 
 }
 
 //_____________________________________________________________________________
-void TGeant4::SetClipBox(const char *name, Double_t xmin, Double_t xmax,
-		     Double_t ymin, Double_t ymax, Double_t zmin, Double_t zmax) 
+void TGeant4::SetClipBox(const char* /*name*/, 
+                     Double_t /*xmin*/, Double_t /*xmax*/,
+                     Double_t /*ymin*/, Double_t /*ymax*/, 
+                     Double_t /*zmin*/, Double_t /*zmax*/) 
 { 
 /// Function not implemented.
 /// Return warning.
 
-  TG4Globals:: Warning("TGeant4::SetClipBox(..) is not implemented."); 
+  TG4Globals:: Warning("TGeant4", "SetClipBox", "Not implemented."); 
 }
 
 //_____________________________________________________________________________
@@ -888,25 +908,25 @@ void TGeant4::DefaultRange()
 /// Function not implemented.
 /// Return warning.
 
-  TG4Globals:: Warning("TGeant4::DefaultRange() is not implemented."); 
+  TG4Globals:: Warning("TGeant4", "DefaultRange", "Not implemented."); 
 }
 
 //_____________________________________________________________________________
-void TGeant4::Gdhead(Int_t isel, const char* name, Double_t chrsiz) 
+void TGeant4::Gdhead(Int_t /*isel*/, const char* /*name*/, Double_t /*chrsiz*/) 
 { 
 /// Function not implemented.
 /// Return warning.
 
-  TG4Globals:: Warning("TGeant4::Gdhead(..) is not implemented."); 
+  TG4Globals:: Warning("TGeant4", "Gdhead", "Not implemented."); 
 }
 
 //_____________________________________________________________________________
-void TGeant4::Gdman(Double_t u, Double_t v, const char* type) 
+void TGeant4::Gdman(Double_t /*u*/, Double_t /*v*/, const char* /*type*/) 
 { 
 /// Function not implemented.
 /// Return warning.
 
-  TG4Globals:: Warning("TGeant4::Gdman(..) is not implemented."); 
+  TG4Globals:: Warning("TGeant4", "Gdman", "Not implemented."); 
 }
 //_____________________________________________________________________________
 void TGeant4::InitLego() 
@@ -914,5 +934,5 @@ void TGeant4::InitLego()
 /// Function not implemented.
 /// Return warning.
 
-  TG4Globals:: Warning("TGeant4::InitLego() is not implemented."); 
+  TG4Globals:: Warning("TGeant4", "InitLego", "Not implemented."); 
 }

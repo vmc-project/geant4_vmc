@@ -1,4 +1,4 @@
-// $Id: TG4LVTree.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4LVTree.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
 // Category: geometry
 //
 // Class TG4LVTree
@@ -44,35 +44,9 @@ TG4LVTree::TG4LVTree()
 }
 
 //_____________________________________________________________________________
-TG4LVTree::TG4LVTree(const TG4LVTree& right)
-  : fMessenger(this)
+TG4LVTree::~TG4LVTree() 
 {
-// Protected singleton copy constructor.
-//
-  TG4Globals::Exception(
-    "Attempt to copy TG4LVTree singleton.");
-}
-
-//_____________________________________________________________________________
-TG4LVTree::~TG4LVTree() {
-//
-}
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4LVTree& TG4LVTree::operator=(const TG4LVTree& right)
-{    
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4LVTree singleton.");
-    
-  return *this;  
-
+/// Destructor
 }
 
 //
@@ -81,7 +55,7 @@ TG4LVTree& TG4LVTree::operator=(const TG4LVTree& right)
 
 //_____________________________________________________________________________
 void TG4LVTree::RegisterLogicalVolume(G4LogicalVolume* lv, const G4String& path,
-				      TG4LVStructure& lvStructure) const
+                                      TG4LVStructure& lvStructure) const
 {
 /// Register the logical volume lv in the structure.
 // ---        
@@ -98,28 +72,28 @@ void TG4LVTree::RegisterLogicalVolume(G4LogicalVolume* lv, const G4String& path,
       if (currentName != lv->GetName() && currentName != previousName) { 
         G4String newPath = path + lv->GetName() +"/";
         RegisterLogicalVolume(lvd, newPath, lvStructure);
-	previousName = currentName;
+        previousName = currentName;
       }
     }
   }     
 }          
 
 //_____________________________________________________________________________
-void TG4LVTree::Warn(const G4String& where, const G4String& lvName) const			       
+void TG4LVTree::Warn(const G4String& where, const G4String& lvName) const                               
 {
 /// Print warning "volume not found".
   
-   G4String text("TG4LVTree::" + where + ": " + lvName + " volume not found.");
-   TG4Globals::Warning(text);
+   TG4Globals::Warning(
+     "TG4LVTree", where, TString(lvName) + " volume not found.");
 }
 
 //_____________________________________________________________________________
 void TG4LVTree::Warn(const G4String& where) const
-{			       
+{                               
 /// Print warning "volume not specified".
   
-   G4String text("TG4LVTree::" + where + ": " + " volume not specified.");
-   TG4Globals::Warning(text);
+   TG4Globals::Warning(
+     "TG4LVTree", where, "Volume not specified.");
 }
 
 //

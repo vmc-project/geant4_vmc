@@ -1,4 +1,4 @@
-// $Id: TG4G3CutVector.cxx,v 1.3 2003/12/18 13:28:08 brun Exp $
+// $Id: TG4G3CutVector.cxx,v 1.4 2004/11/10 11:39:28 brun Exp $
 // Category: global
 //
 // Class TG4G3CutVector
@@ -27,7 +27,8 @@ TG4StringVector TG4G3CutVector::fgCutNameVector;
 
 //_____________________________________________________________________________
 TG4G3CutVector::TG4G3CutVector()
-  : fDeltaRaysOn(true)
+  : fCutVector(),
+    fDeltaRaysOn(true)
 {
   // fill name vector
   if (fgCutNameVector.size() == 0) FillCutNameVector(); 
@@ -39,7 +40,8 @@ TG4G3CutVector::TG4G3CutVector()
 
 //_____________________________________________________________________________
 TG4G3CutVector::TG4G3CutVector(const TG4G3CutVector& right)
-  : fCutVector(right.fCutVector.size())
+  : fCutVector(right.fCutVector.size()),
+    fDeltaRaysOn(right.fDeltaRaysOn)
 {
   // copy stuff
   *this = right;
@@ -76,7 +78,7 @@ G4double TG4G3CutVector::operator[](G4int index) const
     return fCutVector[index];
   else {
     TG4Globals::Exception(
-      "TG4G3CutVector::operator[]: index out of the vector scope");
+      "TG4G3CutVector", "operator[]", "Index out of the vector scope");
     return 0.;  
   }    
 }  
@@ -145,10 +147,10 @@ void TG4G3CutVector::SetCut(TG4G3Cut cut, G4double cutValue)
 
   if (cut>=kNoG3Cuts) {
     TG4Globals::Exception(
-      "TG4G3CutVector::SetG3Cut: Inconsistent cut.");
+      "TG4G3CutVector", "SetG3Cut", "Inconsistent cut.");
   }
 
-  fCutVector[cut] = cutValue;	  
+  fCutVector[cut] = cutValue;          
 }
 
 //_____________________________________________________________________________
@@ -204,7 +206,7 @@ G4String TG4G3CutVector::Format() const
       tmpStream << fgkDCUTEOff/MeV << G4endl;
     else if (i == kDCUTM && !fDeltaRaysOn)
       tmpStream << fgkDCUTMOff/MeV << G4endl;
-    else	          
+    else                  
       tmpStream << fCutVector[i]/MeV << G4endl;
   }      
 
@@ -213,7 +215,7 @@ G4String TG4G3CutVector::Format() const
             << fCutVector[kTOFMAX]/s << G4endl;
 
   return tmpStream.str();
-}	   
+}           
 
 //_____________________________________________________________________________
 void TG4G3CutVector::Print() const
@@ -221,7 +223,7 @@ void TG4G3CutVector::Print() const
 /// Print the cuts.
 
   G4cout << Format();
-}	   
+}           
 
 //_____________________________________________________________________________
 G4double TG4G3CutVector::GetMinEkineForGamma(const G4Track& track) const
@@ -302,7 +304,7 @@ G4double TG4G3CutVector::GetMinEkineForEplus(const G4Track& track) const
 }
 
 //_____________________________________________________________________________
-G4double TG4G3CutVector::GetMinEkineForChargedHadron(const G4Track& track) const
+G4double TG4G3CutVector::GetMinEkineForChargedHadron(const G4Track& /*track*/) const
 {
 /// Return the cut value for charged hadron.
 
@@ -310,7 +312,7 @@ G4double TG4G3CutVector::GetMinEkineForChargedHadron(const G4Track& track) const
 }
 
 //_____________________________________________________________________________
-G4double TG4G3CutVector::GetMinEkineForNeutralHadron(const G4Track& track) const
+G4double TG4G3CutVector::GetMinEkineForNeutralHadron(const G4Track& /*track*/) const
 {
 /// Return the cut value for neutral hadron.
 
@@ -318,7 +320,7 @@ G4double TG4G3CutVector::GetMinEkineForNeutralHadron(const G4Track& track) const
 }
 
 //_____________________________________________________________________________
-G4double TG4G3CutVector::GetMinEkineForMuon(const G4Track& track) const
+G4double TG4G3CutVector::GetMinEkineForMuon(const G4Track& /*track*/) const
 {
 /// Return the cut value for neutral muon.
 
@@ -326,7 +328,7 @@ G4double TG4G3CutVector::GetMinEkineForMuon(const G4Track& track) const
 }
 
 //_____________________________________________________________________________
-G4double TG4G3CutVector::GetMinEkineForOther(const G4Track& track) const
+G4double TG4G3CutVector::GetMinEkineForOther(const G4Track& /*track*/) const
 {
 /// Return 0.
 

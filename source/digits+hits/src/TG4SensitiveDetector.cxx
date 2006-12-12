@@ -1,4 +1,4 @@
-// $Id: TG4SensitiveDetector.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $ //
+// $Id: TG4SensitiveDetector.cxx,v 1.2 2004/11/10 11:39:27 brun Exp $ //
 // Category: digits+hits
 //
 // Class TG4SensitiveDetector
@@ -17,10 +17,10 @@ G4int TG4SensitiveDetector::fgSDCounter = 0;
 //_____________________________________________________________________________
 TG4SensitiveDetector::TG4SensitiveDetector(G4String sdName)
   : G4VSensitiveDetector(sdName),
+    fID(++fgSDCounter),
     fStepManager(TG4StepManager::Instance())
 {
 //
-  fID = ++fgSDCounter;
 }
 
 //_____________________________________________________________________________
@@ -35,45 +35,8 @@ TG4SensitiveDetector::TG4SensitiveDetector(G4String sdName, G4int id)
 }
 
 //_____________________________________________________________________________
-TG4SensitiveDetector::TG4SensitiveDetector(
-                                    const TG4SensitiveDetector& right)
-  : G4VSensitiveDetector(right)
-{  				    
-//
-  // copy stuff
-  *this = right;
-
-  ++fgSDCounter;;
-}
-
-//_____________________________________________________________________________
-TG4SensitiveDetector::TG4SensitiveDetector()
-  : G4VSensitiveDetector("") 
-{
-//
-}
-
-//_____________________________________________________________________________
 TG4SensitiveDetector::~TG4SensitiveDetector() {
 //
-}
-
-// operators
-
-//_____________________________________________________________________________
-TG4SensitiveDetector& TG4SensitiveDetector::operator=(
-                                    const TG4SensitiveDetector &right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  // base class assignement
-  TG4SensitiveDetector::operator=(right);
-  
-  fID = right.fID;
-  fStepManager = right.fStepManager;
-  
-  return *this;
 }
 
 //
@@ -81,8 +44,8 @@ TG4SensitiveDetector& TG4SensitiveDetector::operator=(
 //
 
 //_____________________________________________________________________________
-void TG4SensitiveDetector::UserProcessHits(const G4Track* track, 
-                                           const G4Step* step)
+void TG4SensitiveDetector::UserProcessHits(const G4Track* /*track*/, 
+                                           const G4Step* /*step*/)
 {
 /// Call VMC application stepping function.
 

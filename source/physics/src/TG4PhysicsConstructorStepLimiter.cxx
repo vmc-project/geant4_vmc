@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorStepLimiter.cxx,v 1.1 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4PhysicsConstructorStepLimiter.cxx,v 1.2 2006/01/13 16:59:39 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsConstructorStepLimiter
@@ -28,7 +28,7 @@ TG4PhysicsConstructorStepLimiter::TG4PhysicsConstructorStepLimiter(
 
 //_____________________________________________________________________________
 TG4PhysicsConstructorStepLimiter::TG4PhysicsConstructorStepLimiter(
-						   G4int verboseLevel,
+                                                   G4int verboseLevel,
                                                    const G4String& name)
   : TG4VPhysicsConstructor(name, verboseLevel), 
     fStepLimiterProcess(0) 

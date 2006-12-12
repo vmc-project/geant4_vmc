@@ -1,4 +1,4 @@
-// $Id: TG4TrackingActionMessenger.h,v 1.3 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4TrackingActionMessenger.h,v 1.4 2005/09/01 10:04:32 brun Exp $
 /// \ingroup event
 //
 /// \class TG4TrackingActionMessenger
@@ -22,23 +22,17 @@ class TG4TrackingActionMessenger: public G4UImessenger
 {
   public:
     TG4TrackingActionMessenger(TG4TrackingAction* trackingAction);
-    // --> protected
-    // TG4TrackingActionMessenger();
-    // TG4TrackingActionMessenger(const TG4TrackingActionMessenger& right);
     virtual ~TG4TrackingActionMessenger();
    
     // methods 
     virtual void SetNewValue(G4UIcommand* command, G4String string);
     
-  protected:
+  private:
     TG4TrackingActionMessenger();
     TG4TrackingActionMessenger(const TG4TrackingActionMessenger& right);
-
-    // operators
     TG4TrackingActionMessenger& operator=(
-                            const TG4TrackingActionMessenger& right);
+                               const TG4TrackingActionMessenger& right);
 
-  private:
     // data members
     TG4TrackingAction*     fTrackingAction;    //associated class 
     G4UIdirectory*         fTrackingDirectory; //command directory

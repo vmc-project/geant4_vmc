@@ -1,4 +1,4 @@
-// $Id: TG4EventActionMessenger.h,v 1.2 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4EventActionMessenger.h,v 1.3 2005/09/01 10:04:32 brun Exp $
 /// \ingroup event
 //
 /// \class TG4EventActionMessenger
@@ -21,23 +21,17 @@ class TG4EventActionMessenger: public G4UImessenger
 {
   public:
     TG4EventActionMessenger(TG4EventAction* eventAction);
-    // --> protected
-    // TG4EventActionMessenger();
-    // TG4EventActionMessenger(const TG4EventActionMessenger& right);
     virtual ~TG4EventActionMessenger();
    
     // methods 
     virtual void SetNewValue(G4UIcommand* command, G4String string);
     
-  protected:
+  private:
     TG4EventActionMessenger();
     TG4EventActionMessenger(const TG4EventActionMessenger& right);
-
-    // operators
     TG4EventActionMessenger& operator=(
                             const TG4EventActionMessenger& right);
 
-  private:
     // data members
     TG4EventAction*        fEventAction;    //associated class
     G4UIdirectory*         fEventDirectory; //command directory

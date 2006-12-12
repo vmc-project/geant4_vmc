@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorHadron.cxx,v 1.4 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsConstructorHadron.cxx,v 1.5 2006/01/13 16:59:39 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsConstructorHadron
@@ -145,13 +145,13 @@ TG4PhysicsConstructorHadron::TG4PhysicsConstructorHadron(const G4String& name)
     fPionPlusIonisation(0),
     fPionMinusInelastic(0),
     fLEPionMinusModel(0),
-    fPionMinusMult(0),	 
+    fPionMinusMult(0),         
     fPionMinusIonisation(0),
     fPionMinusAbsorption(0),
     fTheoModel(0), 
     fHandler(0),
     fPreEquilib(0),
-    fCascade(0),	   
+    fCascade(0),           
     fStringModel(0),
     fFragmentation(0),
     fStringDecay(0),  
@@ -163,7 +163,7 @@ TG4PhysicsConstructorHadron::TG4PhysicsConstructorHadron(const G4String& name)
     fKaonMinusInelastic(0),
     fLEKaonMinusModel(0),  
     fHEKaonMinusModel(0),  
-    fKaonMinusMult(0),	
+    fKaonMinusMult(0),        
     fKaonMinusIonisation(0),
     fKaonMinusAbsorption(0),
     fKaonZeroLInelastic(0),
@@ -173,22 +173,22 @@ TG4PhysicsConstructorHadron::TG4PhysicsConstructorHadron(const G4String& name)
     fLEKaonZeroSModel(0),  
     fHEKaonZeroSModel(0),  
     fProtonInelastic(0),    
-    fLEProtonModel(0),	 
-    fHEProtonModel(0),	 
-    fProtonMult(0),	 
+    fLEProtonModel(0),         
+    fHEProtonModel(0),         
+    fProtonMult(0),         
     fProtonIonisation(0),   
     fAntiProtonInelastic(0),
     fLEAntiProtonModel(0),  
     fHEAntiProtonModel(0),  
-    fAntiProtonMult(0),	 
+    fAntiProtonMult(0),         
     fAntiProtonIonisation(0),
     fAntiProtonAnnihilation(0),
     fNeutronInelastic(0),    
-    fLENeutronModel(0),	  
-    fHENeutronModel(0),	  
-    fNeutronFission(0),	  
+    fLENeutronModel(0),          
+    fHENeutronModel(0),          
+    fNeutronFission(0),          
     fNeutronFissionModel(0),
-    fNeutronCapture(0),	  
+    fNeutronCapture(0),          
     fNeutronCaptureModel(0),
     fAntiNeutronInelastic(0),
     fLEAntiNeutronModel(0),
@@ -203,7 +203,7 @@ TG4PhysicsConstructorHadron::TG4PhysicsConstructorHadron(const G4String& name)
     fSigmaMinusInelastic(0),
     fLESigmaMinusModel(0),  
     fHESigmaMinusModel(0),  
-    fSigmaMinusMult(0),	 
+    fSigmaMinusMult(0),         
     fSigmaMinusIonisation(0),
     fAntiSigmaMinusInelastic(0),
     fLEAntiSigmaMinusModel(0),  
@@ -213,7 +213,7 @@ TG4PhysicsConstructorHadron::TG4PhysicsConstructorHadron(const G4String& name)
     fSigmaPlusInelastic(0),
     fLESigmaPlusModel(0),  
     fHESigmaPlusModel(0),  
-    fSigmaPlusMult(0),	
+    fSigmaPlusMult(0),        
     fSigmaPlusIonisation(0),
     fAntiSigmaPlusInelastic(0),
     fLEAntiSigmaPlusModel(0),  
@@ -239,23 +239,25 @@ TG4PhysicsConstructorHadron::TG4PhysicsConstructorHadron(const G4String& name)
     fOmegaMinusInelastic(0),  
     fLEOmegaMinusModel(0),    
     fHEOmegaMinusModel(0),    
-    fOmegaMinusMult(0),	   
+    fOmegaMinusMult(0),           
     fOmegaMinusIonisation(0), 
     fAntiOmegaMinusInelastic(0),
     fLEAntiOmegaMinusModel(0),  
     fHEAntiOmegaMinusModel(0),  
     fAntiOmegaMinusMult(0),     
-    fAntiOmegaMinusIonisation(0),
+    fAntiOmegaMinusIonisation(0), 
+    fOtherProcesses(),
     fSetEM(true),
-    fSetHadron(true) {
+    fSetHadron(true) 
+{
 //
 }
 
 //_____________________________________________________________________________
 TG4PhysicsConstructorHadron::TG4PhysicsConstructorHadron(G4int verboseLevel,
                                                          G4bool setEM, 
-							 G4bool setHadron,
-				                         const G4String& name)
+                                                         G4bool setHadron,
+                                                         const G4String& name)
   : TG4VPhysicsConstructor(name, verboseLevel),
     fElasticProcess(0),
     fElasticModel(0),
@@ -265,13 +267,13 @@ TG4PhysicsConstructorHadron::TG4PhysicsConstructorHadron(G4int verboseLevel,
     fPionPlusIonisation(0),
     fPionMinusInelastic(0),
     fLEPionMinusModel(0),
-    fPionMinusMult(0),	 
+    fPionMinusMult(0),         
     fPionMinusIonisation(0),
     fPionMinusAbsorption(0),
     fTheoModel(0), 
     fHandler(0),
     fPreEquilib(0),
-    fCascade(0),	   
+    fCascade(0),           
     fStringModel(0),
     fFragmentation(0),
     fStringDecay(0),  
@@ -283,7 +285,7 @@ TG4PhysicsConstructorHadron::TG4PhysicsConstructorHadron(G4int verboseLevel,
     fKaonMinusInelastic(0),
     fLEKaonMinusModel(0),  
     fHEKaonMinusModel(0),  
-    fKaonMinusMult(0),	
+    fKaonMinusMult(0),        
     fKaonMinusIonisation(0),
     fKaonMinusAbsorption(0),
     fKaonZeroLInelastic(0),
@@ -293,22 +295,22 @@ TG4PhysicsConstructorHadron::TG4PhysicsConstructorHadron(G4int verboseLevel,
     fLEKaonZeroSModel(0),  
     fHEKaonZeroSModel(0),  
     fProtonInelastic(0),    
-    fLEProtonModel(0),	 
-    fHEProtonModel(0),	 
-    fProtonMult(0),	 
+    fLEProtonModel(0),         
+    fHEProtonModel(0),         
+    fProtonMult(0),         
     fProtonIonisation(0),   
     fAntiProtonInelastic(0),
     fLEAntiProtonModel(0),  
     fHEAntiProtonModel(0),  
-    fAntiProtonMult(0),	 
+    fAntiProtonMult(0),         
     fAntiProtonIonisation(0),
     fAntiProtonAnnihilation(0),
     fNeutronInelastic(0),    
-    fLENeutronModel(0),	  
-    fHENeutronModel(0),	  
-    fNeutronFission(0),	  
+    fLENeutronModel(0),          
+    fHENeutronModel(0),          
+    fNeutronFission(0),          
     fNeutronFissionModel(0),
-    fNeutronCapture(0),	  
+    fNeutronCapture(0),          
     fNeutronCaptureModel(0),
     fAntiNeutronInelastic(0),
     fLEAntiNeutronModel(0),
@@ -323,7 +325,7 @@ TG4PhysicsConstructorHadron::TG4PhysicsConstructorHadron(G4int verboseLevel,
     fSigmaMinusInelastic(0),
     fLESigmaMinusModel(0),  
     fHESigmaMinusModel(0),  
-    fSigmaMinusMult(0),	 
+    fSigmaMinusMult(0),         
     fSigmaMinusIonisation(0),
     fAntiSigmaMinusInelastic(0),
     fLEAntiSigmaMinusModel(0),  
@@ -333,7 +335,7 @@ TG4PhysicsConstructorHadron::TG4PhysicsConstructorHadron(G4int verboseLevel,
     fSigmaPlusInelastic(0),
     fLESigmaPlusModel(0),  
     fHESigmaPlusModel(0),  
-    fSigmaPlusMult(0),	
+    fSigmaPlusMult(0),        
     fSigmaPlusIonisation(0),
     fAntiSigmaPlusInelastic(0),
     fLEAntiSigmaPlusModel(0),  
@@ -359,25 +361,17 @@ TG4PhysicsConstructorHadron::TG4PhysicsConstructorHadron(G4int verboseLevel,
     fOmegaMinusInelastic(0),  
     fLEOmegaMinusModel(0),    
     fHEOmegaMinusModel(0),    
-    fOmegaMinusMult(0),	   
+    fOmegaMinusMult(0),           
     fOmegaMinusIonisation(0), 
     fAntiOmegaMinusInelastic(0),
     fLEAntiOmegaMinusModel(0),  
     fHEAntiOmegaMinusModel(0),  
     fAntiOmegaMinusMult(0),     
     fAntiOmegaMinusIonisation(0),
+    fOtherProcesses(),
     fSetEM(setEM),
     fSetHadron(setHadron) {
 //
-}
-
-//_____________________________________________________________________________
-TG4PhysicsConstructorHadron::TG4PhysicsConstructorHadron(
-                                     const TG4PhysicsConstructorHadron& right)
-  : TG4VPhysicsConstructor(right)				     
-{
-//
-  TG4Globals::Exception("TG4PhysicsConstructorHadron is protected from copying.");
 }
 
 //_____________________________________________________________________________
@@ -392,13 +386,13 @@ TG4PhysicsConstructorHadron::~TG4PhysicsConstructorHadron()
   delete fPionPlusIonisation;
   delete fPionMinusInelastic;
   delete fLEPionMinusModel;
-  delete fPionMinusMult;	 
+  delete fPionMinusMult;         
   delete fPionMinusIonisation;
   delete fPionMinusAbsorption;
   delete fTheoModel; 
   delete fHandler;
   delete fPreEquilib;
-  delete fCascade;	   
+  delete fCascade;           
   delete fStringModel;
   delete fFragmentation;
   delete fStringDecay;  
@@ -410,7 +404,7 @@ TG4PhysicsConstructorHadron::~TG4PhysicsConstructorHadron()
   delete fKaonMinusInelastic;
   delete fLEKaonMinusModel;  
   delete fHEKaonMinusModel;  
-  delete fKaonMinusMult;	
+  delete fKaonMinusMult;        
   delete fKaonMinusIonisation;
   delete fKaonMinusAbsorption;
   delete fKaonZeroLInelastic;
@@ -420,22 +414,22 @@ TG4PhysicsConstructorHadron::~TG4PhysicsConstructorHadron()
   delete fLEKaonZeroSModel;  
   delete fHEKaonZeroSModel;  
   delete fProtonInelastic;    
-  delete fLEProtonModel;	 
-  delete fHEProtonModel;	 
-  delete fProtonMult;	 
+  delete fLEProtonModel;         
+  delete fHEProtonModel;         
+  delete fProtonMult;         
   delete fProtonIonisation;   
   delete fAntiProtonInelastic;
   delete fLEAntiProtonModel;  
   delete fHEAntiProtonModel;  
-  delete fAntiProtonMult;	 
+  delete fAntiProtonMult;         
   delete fAntiProtonIonisation;
   delete fAntiProtonAnnihilation;
   delete fNeutronInelastic;    
-  delete fLENeutronModel;	  
-  delete fHENeutronModel;	  
-  delete fNeutronFission;	  
+  delete fLENeutronModel;          
+  delete fHENeutronModel;          
+  delete fNeutronFission;          
   delete fNeutronFissionModel;
-  delete fNeutronCapture;	  
+  delete fNeutronCapture;          
   delete fNeutronCaptureModel;
   delete fAntiNeutronInelastic;
   delete fLEAntiNeutronModel;
@@ -450,7 +444,7 @@ TG4PhysicsConstructorHadron::~TG4PhysicsConstructorHadron()
   delete fSigmaMinusInelastic;
   delete fLESigmaMinusModel;  
   delete fHESigmaMinusModel;  
-  delete fSigmaMinusMult;	 
+  delete fSigmaMinusMult;         
   delete fSigmaMinusIonisation;
   delete fAntiSigmaMinusInelastic;
   delete fLEAntiSigmaMinusModel;  
@@ -460,7 +454,7 @@ TG4PhysicsConstructorHadron::~TG4PhysicsConstructorHadron()
   delete fSigmaPlusInelastic;
   delete fLESigmaPlusModel;  
   delete fHESigmaPlusModel;  
-  delete fSigmaPlusMult;	
+  delete fSigmaPlusMult;        
   delete fSigmaPlusIonisation;
   delete fAntiSigmaPlusInelastic;
   delete fLEAntiSigmaPlusModel;  
@@ -486,7 +480,7 @@ TG4PhysicsConstructorHadron::~TG4PhysicsConstructorHadron()
   delete fOmegaMinusInelastic;  
   delete fLEOmegaMinusModel;    
   delete fHEOmegaMinusModel;    
-  delete fOmegaMinusMult;	   
+  delete fOmegaMinusMult;           
   delete fOmegaMinusIonisation; 
   delete fAntiOmegaMinusInelastic;
   delete fLEAntiOmegaMinusModel;  
@@ -496,23 +490,6 @@ TG4PhysicsConstructorHadron::~TG4PhysicsConstructorHadron()
 
   for (G4int i=0; i<G4int(fOtherProcesses.size()); i++) 
     delete fOtherProcesses[i];
-}
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4PhysicsConstructorHadron& 
-TG4PhysicsConstructorHadron::operator=(const TG4PhysicsConstructorHadron &right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-  
-  TG4Globals::Exception(
-    "TG4PhysicsConstructorHadron is protected from assigning.");
-
-  return *this;
 }
 
 //
@@ -951,7 +928,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForOther()
          particle->GetPDGCharge() != 0.0 &&
          nofAlongStepProcesses == 1      && 
          particle->GetParticleName() != "chargedgeantino") {
-	
+        
       // create processes
       G4VProcess* aMultipleScattering = new G4MultipleScattering();
       G4VProcess* anIonisation = new G4hIonisation();

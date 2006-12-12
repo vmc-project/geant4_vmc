@@ -1,4 +1,4 @@
-// $Id: TG4ProcessMCMap.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4ProcessMCMap.h,v 1.4 2005/09/01 10:04:33 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4ProcessMCMap
@@ -28,8 +28,6 @@ class TG4ProcessMCMap
 
   public:
     TG4ProcessMCMap();
-    // --> protected
-    // TG4ProcessMCMap(const TG4ProcessMCMap& right);
     virtual ~TG4ProcessMCMap();
 
     // static access method
@@ -47,13 +45,10 @@ class TG4ProcessMCMap
     G4String    GetMCProcessName(const G4VProcess* process);
     G4String    GetMCProcessName(const G4String& processName);
 
-  protected:
+  private:
     TG4ProcessMCMap(const TG4ProcessMCMap& right);
-
-    // operators
     TG4ProcessMCMap& operator=(const TG4ProcessMCMap& right);
   
-  private:
     // methods
     G4bool IsDefined(const G4String& processName);
 

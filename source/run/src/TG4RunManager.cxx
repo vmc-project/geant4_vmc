@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.cxx,v 1.10 2006/01/13 16:59:39 brun Exp $
+// $Id: TG4RunManager.cxx,v 1.11 2006/04/12 10:37:24 brun Exp $
 // Category: run
 //
 // Class TG4RunManager
@@ -17,6 +17,7 @@
 #include "TG4PhysicsManager.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4DetConstruction.h"
+#include "TG4PostDetConstruction.h"
 #include "TG4SDConstruction.h"
 #include "TG4ModularPhysicsList.h"
 #include "TG4PrimaryGeneratorAction.h"
@@ -43,13 +44,15 @@
 #include <TROOT.h> 
 #include <TRint.h>
 #include <TCint.h> 
+#include <TGeoManager.h>
+#include <TG4RootNavMgr.h>
 #include <TVirtualMCApplication.h>
 
 TG4RunManager* TG4RunManager::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration, 
-                             int argc, char** argv)		  
+                             int argc, char** argv)                  
   : TG4Verbose("runManager"),
     fRunManager(0),
     fMessenger(this),
@@ -63,12 +66,14 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
 // 
   if (fgInstance) {
     TG4Globals::Exception(
-      "TG4RunManager: attempt to create two instances of singleton.");
+      "TG4RunManager", "TG4RunManager",
+      "Cannot create two instances of singleton.");
   }
       
   if (!fRunConfiguration) {
     TG4Globals::Exception(
-      "TG4RunManager: attempt to create instance without runConfiguration.");
+      "TG4RunManager", "TG4RunManager",
+      "Cannot create instance without runConfiguration.");
   }
       
   fgInstance = this;
@@ -81,7 +86,6 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
   FilterARGV("-splash");
 
   // create and configure G4 run manager
-  fRunManager =  new G4RunManager();
   ConfigureRunManager();
 
   // create geant4 UI
@@ -109,12 +113,14 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration)
 //
   if (fgInstance) {
     TG4Globals::Exception(
-      "TG4RunManager: attempt to create two instances of singleton.");
+      "TG4RunManager", "TG4RunManager",
+      "Cannot create two instances of singleton.");
   }
       
   if (!fRunConfiguration) {
     TG4Globals::Exception(
-      "TG4RunManager: attempt to create instance without runConfiguration.");
+      "TG4RunManager", "TG4RunManager",
+      "Cannot create instance without runConfiguration.");
   }
       
   fgInstance = this;
@@ -130,7 +136,6 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration)
   FilterARGV("-splash");
 
   // create and configure G4 run manager
-  fRunManager =  new G4RunManager();
   ConfigureRunManager();
 
   if (VerboseLevel() > 1) {
@@ -147,23 +152,6 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration)
 }
 
 //_____________________________________________________________________________
-TG4RunManager::TG4RunManager()
-  : TG4Verbose("runManager"),
-    fMessenger(this)
-{
-//
-}
-
-//_____________________________________________________________________________
-TG4RunManager::TG4RunManager(const TG4RunManager& right) 
-  : TG4Verbose("runManager"),
-    fMessenger(this) {
-// 
-  TG4Globals::Exception(
-    "Attempt to copy TG4RunManager singleton.");
-}
-
-//_____________________________________________________________________________
 TG4RunManager::~TG4RunManager() {
 //  
   delete fRunConfiguration;
@@ -171,22 +159,6 @@ TG4RunManager::~TG4RunManager() {
   delete fRunManager;
   if (fRootUIOwner) delete fRootUISession;
 }
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4RunManager& TG4RunManager::operator=(const TG4RunManager& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4RunManager singleton.");
-    
-  return *this;  
-}    
 
 //
 // private methods
@@ -197,16 +169,49 @@ void TG4RunManager::ConfigureRunManager()
 {
 /// Set the user action classes defined by TG4RunConfiguration to G4RunManager.
 
-  // set mandatory classes
+  // Geometry construction and navigator
   //
-  fRunManager
-    ->SetUserInitialization(fRunConfiguration->CreateDetectorConstruction());
+  TString userGeometry = fRunConfiguration->GetUserGeometry();
+    
+  // Root navigator
+  TG4RootNavMgr* rootNavMgr = 0;
+  if ( userGeometry == "VMCtoRoot" || userGeometry == "Root" ) {
+
+    // Construct geometry via VMC application
+    if ( TG4GeometryManager::Instance()->VerboseLevel() > 0) 
+      G4cout << "Running TVirtualMCApplication::ConstructGeometry"; 
+    TVirtualMCApplication::Instance()->ConstructGeometry();
+    
+    // Set top volume and close Root geometry if not yet done
+    if ( ! gGeoManager->IsClosed() ) {
+      TGeoVolume *top = (TGeoVolume*)gGeoManager->GetListOfVolumes()->First();
+      gGeoManager->SetTopVolume(top);
+      gGeoManager->CloseGeometry();  
+    }  
+    
+    // Pass geometry to G4Root navigator
+    rootNavMgr = TG4RootNavMgr::GetInstance(gGeoManager);
+  }  
+
+  // G4 run manager
+  fRunManager =  new G4RunManager();
+
+  if ( userGeometry != "VMCtoRoot" && userGeometry != "Root" ) 
+    fRunManager
+      ->SetUserInitialization(fRunConfiguration->CreateDetectorConstruction());
+  else {
+    rootNavMgr->Initialize(new TG4PostDetConstruction());
+    rootNavMgr->ConnectToG4();  
+  }  
+  
+  // Other mandatory classes
+  //  
   fRunManager
     ->SetUserInitialization(fRunConfiguration->CreatePhysicsList());
   fRunManager
     ->SetUserAction(fRunConfiguration->CreatePrimaryGenerator());      
 
-  // user other action classes 
+  // User other action classes 
   //
   G4UserRunAction* runAction = fRunConfiguration->CreateRunAction();
   if ( runAction ) fRunManager->SetUserAction(runAction);  
@@ -332,9 +337,6 @@ void TG4RunManager::LateInitialize()
     ->SetUserLimits(*TG4G3PhysicsManager::Instance()->GetCutVector(),
                     *TG4G3PhysicsManager::Instance()->GetControlVector());
 
-  // clear G3 tables
-  TG4GeometryManager::Instance()->ClearG3TablesFinal();
-      
   // activate/inactivate physics processes
   TG4PhysicsManager::Instance()->SetProcessActivation();
 
@@ -352,7 +354,8 @@ void TG4RunManager::ProcessEvent()
 {
 /// Not yet implemented.
 
-  TG4Globals::Warning("TG4RunManager::ProcessEvent(): is not yet implemented.");
+  TG4Globals::Warning(
+    "TG4RunManager", "ProcessEvent", "Not implemented.");
 }
     
 //_____________________________________________________________________________

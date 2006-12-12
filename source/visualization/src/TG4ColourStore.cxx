@@ -1,4 +1,4 @@
-// $Id: TG4ColourStore.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4ColourStore.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
 // Category: visualization
 //
 // Class TG4ColourStore
@@ -17,6 +17,7 @@ TG4ColourStore* TG4ColourStore::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4ColourStore::TG4ColourStore() 
+  : fColours()
 {
   // fill predefined colours 
   G4int id0 = 1000;
@@ -35,36 +36,13 @@ TG4ColourStore::TG4ColourStore()
   fColours.push_back(TColor(id0 + 11, 0.99, 0.99, 0.00, "Magenta"));    
   fColours.push_back(TColor(id0 + 12, 0.50, 0.99, 0.00, "Magenta2"));   
   fColours.push_back(TColor(id0 + 13, 0.99, 0.00, 0.50, "Brown"));
-  fColours.push_back(TColor(id0 + 14, 0.30, 0.30, 0.30, "Gray"));	
-}
-
-//_____________________________________________________________________________
-TG4ColourStore::TG4ColourStore(const TG4ColourStore& right) {
-// 
-  TG4Globals::Exception(
-    "Attempt to copy TG4ColourStore singleton.");
+  fColours.push_back(TColor(id0 + 14, 0.30, 0.30, 0.30, "Gray"));        
 }
 
 //_____________________________________________________________________________
 TG4ColourStore::~TG4ColourStore() {
 //
 }
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4ColourStore& TG4ColourStore::operator=(const TG4ColourStore& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4ColourStore singleton.");
-    
-  return *this;  
-}    
 
 //
 // static methods
@@ -95,8 +73,9 @@ G4Colour TG4ColourStore::GetColour(const G4String& name) const
   for (it = fColours.begin(); it != fColours.end(); it++) 
     if (name == (*it).GetName()) return GetColour(*it);
   
-  G4String text = "Colour " + name + " is not defined.";
-  TG4Globals::Exception(text);
+  TG4Globals::Exception(
+    "TG4ColourStore", "GetColour",
+    "Colour " + TString(name) + " is not defined.");
   return 0;
 }
     

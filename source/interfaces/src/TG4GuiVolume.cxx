@@ -1,4 +1,4 @@
-// $Id: TG4GuiVolume.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4GuiVolume.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
 // Category: interfaces
 //
 //==================================================================
@@ -17,6 +17,9 @@
 ClassImp(TG4GuiVolume)
 
 TG4GuiVolume::TG4GuiVolume(const char* name, G4LogicalVolume* lvolume)
+  : TObject(),
+    fLogicalVolume(0),
+    fItem(0)
 {
 /// Constructor
     fItem   = 0;
@@ -24,26 +27,11 @@ TG4GuiVolume::TG4GuiVolume(const char* name, G4LogicalVolume* lvolume)
     
     G4String lName = fLogicalVolume->GetName();
     
-    if ( lName != name ) TG4Globals::Exception(
-       "A wrong name assigned to the guiVolume in the ctor" );
-}
-
-TG4GuiVolume::TG4GuiVolume(const TG4GuiVolume& gv) 
-{
-/// Dummy copy constructor 
-  TG4Globals::Exception(
-    "Attempt to use TG4GuiVolume copy constructor.");
-}
-
-TG4GuiVolume& TG4GuiVolume::operator=(const TG4GuiVolume& gv)
-{
-  // check assignement to self
-  if (this == &gv) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4GuiVolume singleton.");
-    
-  return *this;  
+    if ( lName != name ) { 
+      TG4Globals::Exception(
+       "TG4GuiVolume", "TG4GuiVolume",
+       "A wrong name assigned to the guiVolume in the ctor");
+    }   
 }
 
 const char* TG4GuiVolume::GetName() const

@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorSpecialCuts.h,v 1.4 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4PhysicsConstructorSpecialCuts.h,v 1.5 2006/01/13 16:59:38 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorSpecialCuts
@@ -37,6 +37,9 @@ class TG4PhysicsConstructorSpecialCuts: public TG4VPhysicsConstructor
     virtual void ConstructProcess();
     
   private:
+    TG4PhysicsConstructorSpecialCuts(const TG4PhysicsConstructorSpecialCuts& right);
+    TG4PhysicsConstructorSpecialCuts& operator=(const TG4PhysicsConstructorSpecialCuts& right);
+
     // data members
     TG4SpecialCutsForGamma*          fSpecialCutsForGamma;
     TG4SpecialCutsForElectron*       fSpecialCutsForElectron;

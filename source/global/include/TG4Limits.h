@@ -1,4 +1,4 @@
-// $Id: TG4Limits.h,v 1.5 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4Limits.h,v 1.6 2005/11/18 21:29:35 brun Exp $
 /// \ingroup global
 //
 /// \class TG4Limits
@@ -30,10 +30,10 @@ class TG4Limits: public G4UserLimits
               const TG4G3ControlVector& controls);
     TG4Limits(const G4String& name,
               const TG4G3CutVector& cuts, 
-	      const TG4G3ControlVector& controls);
+              const TG4G3ControlVector& controls);
     TG4Limits(const G4UserLimits& g4Limits,
               const TG4G3CutVector& cuts, 
-	      const TG4G3ControlVector& controls);
+              const TG4G3ControlVector& controls);
     TG4Limits(const TG4Limits& right);
     virtual ~TG4Limits();
     
@@ -71,10 +71,9 @@ class TG4Limits: public G4UserLimits
     G4double GetMinEkineForOther(const G4Track& track) const;
     TG4G3ControlValue GetControl(G4VProcess* process) const; 
 
-  protected:
+  private:
     TG4Limits();
 
-  private:
     // methods
     void Initialize(const TG4G3CutVector& cuts, 
                     const TG4G3ControlVector& controls);

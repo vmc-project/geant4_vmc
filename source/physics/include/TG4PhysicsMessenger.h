@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsMessenger.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsMessenger.h,v 1.4 2005/09/01 10:04:33 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsMessenger
@@ -24,22 +24,16 @@ class TG4PhysicsMessenger: public G4UImessenger
 {
   public:
     TG4PhysicsMessenger(TG4PhysicsManager* physicsManager); 
-    // --> protected   
-    // TG4PhysicsMessenger();
-    // TG4PhysicsMessenger(const TG4PhysicsMessenger& right);
     virtual ~TG4PhysicsMessenger();
    
     // methods 
     virtual void SetNewValue(G4UIcommand* command, G4String string);
     
-  protected:
+  private:
     TG4PhysicsMessenger();  
     TG4PhysicsMessenger(const TG4PhysicsMessenger& right);
-
-    // operators
     TG4PhysicsMessenger& operator=(const TG4PhysicsMessenger& right);
 
-  private:
     // data members
     TG4PhysicsManager* fPhysicsManager;       //associated class
     G4UIdirectory*     fDirectory;            //command directory

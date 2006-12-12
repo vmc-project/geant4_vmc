@@ -1,4 +1,4 @@
-// $Id: TG4NameMap.cxx,v 1.4 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4NameMap.cxx,v 1.5 2006/09/13 06:26:11 brun Exp $
 // Category: global
 //
 // Class TG4NameMap
@@ -17,36 +17,18 @@ G4String TG4NameMap::fgUndefined = "Undefined";
 
 //_____________________________________________________________________________
 TG4NameMap::TG4NameMap() 
-  : fSecond(fgUndefined) {
+  : fMap(),
+    fInverseMap(),
+    fSecond(fgUndefined) 
+{
 //
 }
-
-//_____________________________________________________________________________
-TG4NameMap::TG4NameMap(const TG4NameMap& right) {
-//
-  TG4Globals::Exception("TG4NameMap is protected from copying.");
-}  
 
 //_____________________________________________________________________________
 TG4NameMap::~TG4NameMap() {
 //
 }
 
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4NameMap& TG4NameMap::operator=(const TG4NameMap& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception("TG4NameMap is protected from assigning.");
-    
-  return *this;  
-}    
-          
 //
 // public methods
 //

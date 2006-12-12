@@ -1,4 +1,4 @@
-// $Id: TG4G3Control.h,v 1.3 2005/07/22 10:22:48 brun Exp $
+// $Id: TG4G3Control.h,v 1.4 2005/09/01 10:04:32 brun Exp $
 /// \ingroup global
 //
 /// \enum TG4G3Control
@@ -21,122 +21,122 @@ enum TG4G3Control
              //< G3 default value: 1
              //< G4 processes: G4GammaConversion,
              //<               G4MuPairProduction/G4IMuPairProduction
-	     //<               G4LowEnergyGammaConversion
-	     //< Particles: gamma, mu
-	     //< Physics:   EM  
-	     
+             //<               G4LowEnergyGammaConversion
+             //< Particles: gamma, mu
+             //< Physics:   EM  
+             
   kCOMP, //< Compton scattering    
              //< G3 default value: 1
              //< G4 processes: G4ComptonScattering, 
-	     //<               G4LowEnergyCompton,
-	     //<               G4PolarizedComptonScattering
-	     //< Particles: gamma
-	     //< Physics:   EM  
-	     
+             //<               G4LowEnergyCompton,
+             //<               G4PolarizedComptonScattering
+             //< Particles: gamma
+             //< Physics:   EM  
+             
   kPHOT, //< photo electric effect 
              //< G3 default value: 1
              //< G4 processes: G4PhotoElectricEffect
-	     //<               G4LowEnergyPhotoElectric
-	     //< Particles: gamma
-	     //< Physics:   EM  
+             //<               G4LowEnergyPhotoElectric
+             //< Particles: gamma
+             //< Physics:   EM  
 
   kPFIS, //< photofission          
              //< G3 default value: 0
              //< G4 process: ??
-	     //
-	     //< Particles: gamma
-	     //< Physics:   ??  
-	     
+             //
+             //< Particles: gamma
+             //< Physics:   ??  
+             
   kDRAY, //< delta-ray              
              //< G3 default value: 2
-	     //< !! G4 treats delta rays in different way
+             //< !! G4 treats delta rays in different way
              //< G4 processes: G4eIonisation/G4IeIonization,
              //<               G4MuIonisation/G4IMuIonization, 
-	     //<               G4hIonisation/G4IhIonisation
-	     //< Particles: charged 
-	     //< Physics:   EM  
+             //<               G4hIonisation/G4IhIonisation
+             //< Particles: charged 
+             //< Physics:   EM  
 
   kANNI, //< annihilation          
              //< G3 default value: 1
              //< G4 processes: G4eplusAnnihilation/G4IeplusAnnihilation
-	     //< Particles: e+ 
-	     //< Physics:   EM  
-	     
+             //< Particles: e+ 
+             //< Physics:   EM  
+             
   kBREM, //< bremsstrahlung        
              //< G3 default value: 1
              //< G4 processes: G4eBremsstrahlung/G4IeBremsstrahlung,
-	     //<               G4MuBremsstrahlung/G4IMuBremsstrahlung,
-	     //<               G4LowEnergyBremstrahlung
-	     //<               
-	     //< Particles: e-/e+; mu+/mu- 
-	     //< Physics:   EM  
-	     
+             //<               G4MuBremsstrahlung/G4IMuBremsstrahlung,
+             //<               G4LowEnergyBremstrahlung
+             //<               
+             //< Particles: e-/e+; mu+/mu- 
+             //< Physics:   EM  
+             
   kHADR, //< hadronic process      
              //< G3 default value: 1
              //< G4 processes: all defined by TG4PhysicsConstructorHadron 
-	     //<               
-	     //< Particles: hadrons 
-	     //< Physics:   Hadron
-	     
+             //<               
+             //< Particles: hadrons 
+             //< Physics:   Hadron
+             
   kMUNU, //< muon nuclear interaction 
              //< G3 default value: 0
-	     //< G4 processes: G4MuNuclearInteraction,
-	     //<               G4MuonMinusCaptureAtRest
-	     //
-	     //< Particles: mu
-	     //< Physics:   Not set
-	     
+             //< G4 processes: G4MuNuclearInteraction,
+             //<               G4MuonMinusCaptureAtRest
+             //
+             //< Particles: mu
+             //< Physics:   Not set
+             
   kDCAY, //< decay                 
              //< G3 default value: 1
-	     //< G4 process: G4Decay
-	     //
-	     //< Particles: all which decay is applicable for
-	     //< Physics:   General
-	     
+             //< G4 process: G4Decay
+             //
+             //< Particles: all which decay is applicable for
+             //< Physics:   General
+             
   kLOSS, //< energy loss           
              //< G3 default value: 2
              //< G4 processes: G4eIonisation/G4IeIonization,
              //<               G4MuIonisation/G4IMuIonization, 
-	     //<               G4hIonisation/G4IhIonisation
-	     //
-	     //< Particles: charged 
-	     //< Physics:   EM  
-	     
+             //<               G4hIonisation/G4IhIonisation
+             //
+             //< Particles: charged 
+             //< Physics:   EM  
+             
   kMULS, //< multiple scattering   
              //< G3 default value: 1
-	     //< G4 process: G4MultipleScattering/G4IMultipleScattering
-	     //
-	     //< Particles: charged 
-	     //< Physics:   EM  
+             //< G4 process: G4MultipleScattering/G4IMultipleScattering
+             //
+             //< Particles: charged 
+             //< Physics:   EM  
 
   kCKOV, //< Cerenkov photon generation
              //< G3 default value: 0
-	     //< G4 process: G4Cerenkov
-	     //<            
-	     //< Particles: charged  
-	     //< Physics:   Optical  
-	   
+             //< G4 process: G4Cerenkov
+             //<            
+             //< Particles: charged  
+             //< Physics:   Optical  
+           
   kRAYL, //< Rayleigh scattering
-             //< G3 default value: 0	     
-	     //< G4 process: G4OpRayleigh
-	     //<            
-	     //< Particles: optical photon  
-	     //< Physics:   Optical  
-	     
+             //< G3 default value: 0             
+             //< G4 process: G4OpRayleigh
+             //<            
+             //< Particles: optical photon  
+             //< Physics:   Optical  
+             
   kLABS, //< light photon absorption
              //< it is turned on when Cerenkov process is turned on
-             //< G3 default value: 0	     
-	     //< G4 process: G4OpAbsorption, G4OpBoundaryProcess
-	     //
-	     //< Particles: optical photon  
-	     //< Physics:   Optical  
+             //< G3 default value: 0             
+             //< G4 process: G4OpAbsorption, G4OpBoundaryProcess
+             //
+             //< Particles: optical photon  
+             //< Physics:   Optical  
 
-  kSYNC, //< synchrotron radiation in magnetic field	   
-             //< G3 default value: 0	     
-	     //< G4 process: G4SynchrotronRadiation
-	     //
-	     //< Particles: ??
-	     //< Physics:   Not set  
+  kSYNC, //< synchrotron radiation in magnetic field           
+             //< G3 default value: 0             
+             //< G4 process: G4SynchrotronRadiation
+             //
+             //< Particles: ??
+             //< Physics:   Not set  
 
   kNoG3Controls
 };

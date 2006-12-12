@@ -1,4 +1,4 @@
-// $Id: TG4SpecialControls.cxx,v 1.3 2005/01/05 08:04:58 brun Exp $ //
+// $Id: TG4SpecialControls.cxx,v 1.4 2005/07/22 10:22:48 brun Exp $ //
 // Category: physics
 //
 // Class TG4VSpecialControls
@@ -20,6 +20,8 @@ TG4SpecialControls::TG4SpecialControls(const G4String& processName)
   : G4VProcess(processName),
     TG4Verbose("specialControls"),
     fSwitchControls(kUnswitch),
+    fSwitchedProcesses(),
+    fSwitchedControls(0),
     fLastTrackID(0) {
 //    
    verboseLevel = VerboseLevel();
@@ -29,34 +31,9 @@ TG4SpecialControls::TG4SpecialControls(const G4String& processName)
 }
 
 //_____________________________________________________________________________
-TG4SpecialControls::TG4SpecialControls(const TG4SpecialControls& right)     
-  : TG4Verbose("specialControls") {
-// 
-  TG4Globals::Exception(
-    "TG4SpecialControls is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4SpecialControls::~TG4SpecialControls() {
 //
 }
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4SpecialControls& TG4SpecialControls::operator=(
-                                          const TG4SpecialControls& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-    "TG4SpecialControls is protected from assigning.");
-    
-  return *this;  
-} 
 
 //
 // private methods   
@@ -66,7 +43,7 @@ TG4SpecialControls& TG4SpecialControls::operator=(
 void TG4SpecialControls::Reset()
 {
 /// Reset the buffers to the initial state.
-    			
+                            
   fSwitchControls = kUnswitch;
 
   // clear buffers
@@ -80,8 +57,8 @@ void TG4SpecialControls::Reset()
           
 //_____________________________________________________________________________
 G4double TG4SpecialControls::PostStepGetPhysicalInteractionLength(
-                           const G4Track& track, G4double previousStepSize,
-			   G4ForceCondition* condition)
+                           const G4Track& track, G4double /*previousStepSize*/,
+                           G4ForceCondition* condition)
 {
 /// Return the Step-size (actual length) which is allowed 
 // by this process.
@@ -111,10 +88,10 @@ G4double TG4SpecialControls::PostStepGetPhysicalInteractionLength(
          ->GetLimits(track.GetVolume()->GetLogicalVolume()->GetUserLimits()); 
 
   if (!limits) {
-    G4String text = "TG4VSpecialControls::PostStepGetPhysicalInteractionLength:\n";
-    text = text + "    " + track.GetVolume()->GetLogicalVolume()->GetName();
-    text = text + " has not limits.";
-    TG4Globals::Exception(text);
+    TG4Globals::Exception(
+      "TG4VSpecialControls", "PostStepGetPhysicalInteractionLength",
+      TString(track.GetVolume()->GetLogicalVolume()->GetName()) + 
+      " has not limits.");
   }  
 #else  
   TG4Limits* limits 
@@ -126,20 +103,20 @@ G4double TG4SpecialControls::PostStepGetPhysicalInteractionLength(
       if  (limits->IsControl()) {
         // particle is exiting a logical volume with special controls
         // and entering another logical volume with special controls 
-	proposedStep = minStep;
+        proposedStep = minStep;
         fSwitchControls = kReswitch;
         if (VerboseLevel() > 1) { 
-	  G4cout << "kReswitch" << G4endl;
-	}  
+          G4cout << "kReswitch" << G4endl;
+        }  
       }
       else {
         // particle is exiting a logical volume with special controls
         // and entering a logical volume without special controls 
-	proposedStep = minStep;
+        proposedStep = minStep;
         fSwitchControls = kUnswitch;
         if (VerboseLevel() > 1) { 
-	  G4cout << "kUnswitch" << G4endl;
-	}  
+          G4cout << "kUnswitch" << G4endl;
+        }  
       }
     }
   }
@@ -150,14 +127,14 @@ G4double TG4SpecialControls::PostStepGetPhysicalInteractionLength(
        fSwitchControls = kSwitch;
        if (VerboseLevel() > 1) { 
          G4cout << "kSwitch" << G4endl;
-       }	 
+       }         
   }  
   return proposedStep;
 }
 
 //_____________________________________________________________________________
 G4VParticleChange* TG4SpecialControls::PostStepDoIt(
-                      const G4Track& track, const G4Step& step)
+                      const G4Track& track, const G4Step& /*step*/)
 {
 /// Change processes activation of the current track
 /// according to the current user limits.
@@ -172,7 +149,7 @@ G4VParticleChange* TG4SpecialControls::PostStepDoIt(
     for (G4int i=0; i<fSwitchedProcesses.length(); i++) {
       if (VerboseLevel() > 1) {
         G4cout << "Reset process activation back in " 
-  	       << track.GetVolume()->GetName() 
+                 << track.GetVolume()->GetName() 
                << G4endl;
       }
       processManager
@@ -198,8 +175,8 @@ G4VParticleChange* TG4SpecialControls::PostStepDoIt(
 
         // store the current processes controls
         if (VerboseLevel() > 1) {
-	  G4cout << "Something goes to fSwitchedProcesses" << G4endl;
-	}  
+          G4cout << "Something goes to fSwitchedProcesses" << G4endl;
+        }  
         fSwitchedProcesses.insert((*processVector)[i]);
         fSwitchedControls.push_back(activation);
 
@@ -208,26 +185,26 @@ G4VParticleChange* TG4SpecialControls::PostStepDoIt(
           if (VerboseLevel() > 1) {
             G4cout << "Set process inactivation for " 
                    << (*processVector)[i]->GetProcessName() << " in " 
-    	           << track.GetVolume()->GetName() 
-	           << G4endl;
+                       << track.GetVolume()->GetName() 
+                   << G4endl;
           }
           processManager->SetProcessActivation(i,false);
         }  
         else {
-	  // ((control == kActivate) || (control == kActivate2)) 
+          // ((control == kActivate) || (control == kActivate2)) 
           if (VerboseLevel() > 1) {
             G4cout << "Set process activation for " 
                    << (*processVector)[i]->GetProcessName() << " in " 
-	           << track.GetVolume()->GetName() 
-	           << G4endl;
+                   << track.GetVolume()->GetName() 
+                   << G4endl;
           }
           processManager->SetProcessActivation(i,true);
         }
-      }	 
+      }         
     }
   }
     
-  // processManager->DumpInfo();      	
+  // processManager->DumpInfo();              
   aParticleChange.Initialize(track);
   aParticleChange.ProposeTrackStatus(fAlive);
   return &aParticleChange;

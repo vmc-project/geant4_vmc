@@ -1,4 +1,4 @@
-// $Id: TG4SDServices.h,v 1.4 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4SDServices.h,v 1.5 2005/09/01 10:04:32 brun Exp $
 /// \ingroup digits_hits
 //
 /// \class TG4SDServices
@@ -26,8 +26,6 @@ class TG4SDServices
 {
   public:
     TG4SDServices();
-    // --> protected
-    // TG4SDServices(const TG4SDServices& right);
     virtual ~TG4SDServices();
 
     // static methods
@@ -56,16 +54,13 @@ class TG4SDServices
     const char*  VolDaughterName(const char* volName, Int_t i) const;
     Int_t        VolDaughterCopyNo(const char* volName, Int_t i) const;
 
-  protected:
+  private:
     TG4SDServices(const TG4SDServices& right);
-
-    // operators
     TG4SDServices& operator=(const TG4SDServices& right);
-  
+
     // static data members
     static TG4SDServices* fgInstance;   //this instance
 
-  private:
     G4bool  fIsStopRun; // keeps info about run stopping by user  
 };
 

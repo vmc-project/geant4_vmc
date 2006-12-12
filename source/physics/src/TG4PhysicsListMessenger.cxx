@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsListMessenger.cxx,v 1.4 2005/05/17 13:43:57 brun Exp $
+// $Id: TG4PhysicsListMessenger.cxx,v 1.5 2006/01/13 16:59:39 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsListMessenger
@@ -19,7 +19,11 @@
 //______________________________________________________________________________
 TG4PhysicsListMessenger::TG4PhysicsListMessenger(
                                    TG4ModularPhysicsList* physicsList)
-  : fPhysicsList(physicsList)
+  : G4UImessenger(),
+    fPhysicsList(physicsList),
+    fRangeCutCmd(0),
+    fProcessActivationCmd(0),
+    fSetCerenkovMaxPhotonsCmd(0)
 { 
 //
   fRangeCutCmd
@@ -36,18 +40,6 @@ TG4PhysicsListMessenger::TG4PhysicsListMessenger(
 }
 
 //______________________________________________________________________________
-TG4PhysicsListMessenger::TG4PhysicsListMessenger(){
-//
-} 
-
-//______________________________________________________________________________
-TG4PhysicsListMessenger::TG4PhysicsListMessenger(
-                                   const TG4PhysicsListMessenger& right) {
-// 
-  TG4Globals::Exception("TG4PhysicsListMessenger is protected from copying.");
-}
-
-//______________________________________________________________________________
 TG4PhysicsListMessenger::~TG4PhysicsListMessenger() {
 //
 
@@ -55,22 +47,6 @@ TG4PhysicsListMessenger::~TG4PhysicsListMessenger() {
   delete fSetCerenkovMaxPhotonsCmd;
 }
 
-//
-// operators
-//
-
-//______________________________________________________________________________
-TG4PhysicsListMessenger& 
-TG4PhysicsListMessenger::operator=(const TG4PhysicsListMessenger& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception("TG4PhysicsListMessenger is protected from assigning.");
-    
-  return *this;  
-}    
-          
 //
 // public methods
 //
@@ -88,6 +64,6 @@ void TG4PhysicsListMessenger::SetNewValue(G4UIcommand* command,
   else if (command == fSetCerenkovMaxPhotonsCmd) {
     fPhysicsList
         ->SetMaxNumPhotonsPerStep(
-	     fSetCerenkovMaxPhotonsCmd->GetNewIntValue(newValue));
+             fSetCerenkovMaxPhotonsCmd->GetNewIntValue(newValue));
   }  
 }

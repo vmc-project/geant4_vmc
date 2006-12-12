@@ -1,4 +1,4 @@
-// $Id: TG4SpecialControls.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4SpecialControls.h,v 1.4 2005/09/01 10:04:33 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4SpecialControls
@@ -25,46 +25,41 @@ class TG4SpecialControls : public G4VProcess,
 
   public:     
     TG4SpecialControls(const G4String& processName ="specialControl" );
-    // --> protected
-    // TG4SpecialControls(const TG4SpecialControls& right);
     virtual ~TG4SpecialControls();
 
     // methods
 
     virtual G4double PostStepGetPhysicalInteractionLength(
                          const G4Track& track, G4double previousStepSize, 
-		         G4ForceCondition* condition);
+                         G4ForceCondition* condition);
 
     virtual G4VParticleChange* PostStepDoIt(const G4Track& track, 
                                    const G4Step& step);
 
     virtual G4double AlongStepGetPhysicalInteractionLength(
-                         const G4Track& track, G4double previousStepSize ,
-			 G4double currentMinimumStep, G4double& proposedSafety,
-                         G4GPILSelection* selection)
-			 { return -1.0; }
-
-    virtual G4VParticleChange* AlongStepDoIt(const G4Track& ,
-			           const G4Step& step)
-	                 { return 0; }
-
-    virtual G4double AtRestGetPhysicalInteractionLength(
-                         const G4Track& track, G4ForceCondition* condition)
+                         const G4Track& /*track*/, G4double /*previousStepSize*/,
+                         G4double /*currentMinimumStep*/, G4double& /*proposedSafety*/,
+                         G4GPILSelection* /*selection*/)
                          { return -1.0; }
 
-    virtual G4VParticleChange* AtRestDoIt(const G4Track& track,
-			           const G4Step& step)
+    virtual G4VParticleChange* AlongStepDoIt(
+                         const G4Track& /*track*/, const G4Step& /*step*/)
                          { return 0; }
 
-  protected:
-    TG4SpecialControls(const TG4SpecialControls& right);
-    
-    //operators
-    TG4SpecialControls& operator = (const TG4SpecialControls& right);
-    
+    virtual G4double AtRestGetPhysicalInteractionLength(
+                         const G4Track& /*track*/, G4ForceCondition* /*condition*/)
+                         { return -1.0; }
+
+    virtual G4VParticleChange* AtRestDoIt(
+                         const G4Track& /*track*/, const G4Step& /*step*/)
+                         { return 0; }
+
   private:  
+    TG4SpecialControls(const TG4SpecialControls& right);
+    TG4SpecialControls& operator = (const TG4SpecialControls& right);
+
     // methods
-    virtual void Reset();    			 
+    virtual void Reset();                             
     
     // data members
     Switch           fSwitchControls;    //directive passed from PostStepGetPIL

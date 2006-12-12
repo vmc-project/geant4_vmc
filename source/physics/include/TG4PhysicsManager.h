@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.h,v 1.7 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4PhysicsManager.h,v 1.8 2006/01/13 16:59:38 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsManager
@@ -38,9 +38,6 @@ class TG4PhysicsManager : public TG4Verbose
 {
   public:
     TG4PhysicsManager(G4VUserPhysicsList* physicsList);
-    // --> protected
-    // TG4PhysicsManager();
-    // TG4PhysicsManager(const TG4PhysicsManager& right);
     virtual ~TG4PhysicsManager();
 
     // static access method
@@ -63,10 +60,10 @@ class TG4PhysicsManager : public TG4Verbose
     Int_t PDGFromId(Int_t mcID) const;
     
         // get methods
-    TString   ParticleName(Int_t pdg) const;	  
-    Double_t  ParticleMass(Int_t pdg) const;	  
-    Double_t  ParticleCharge(Int_t pdg) const;	  
-    Double_t  ParticleLifeTime(Int_t pdg) const;	  
+    TString   ParticleName(Int_t pdg) const;          
+    Double_t  ParticleMass(Int_t pdg) const;          
+    Double_t  ParticleCharge(Int_t pdg) const;          
+    Double_t  ParticleLifeTime(Int_t pdg) const;          
     TMCParticleType ParticleMCType(Int_t pdg) const;
 
     //
@@ -84,14 +81,11 @@ class TG4PhysicsManager : public TG4Verbose
     // get methods
     G4VUserPhysicsList* GetPhysicsList() const; 
    
-  protected:
+  private:
     TG4PhysicsManager();
     TG4PhysicsManager(const TG4PhysicsManager& right);
-
-    // operators
     TG4PhysicsManager& operator=(const TG4PhysicsManager& right);
 
-  private:
     // methods
     void FillProcessMap();
     void GstparCut(G4int itmed, TG4G3Cut par, G4double parval);

@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.h,v 1.3 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4TrackingAction.h,v 1.4 2005/09/01 10:04:32 brun Exp $
 /// \ingroup event
 //
 /// \class TG4TrackingAction
@@ -28,8 +28,6 @@ class TG4TrackingAction : public G4UserTrackingAction,
 {
   public:
     TG4TrackingAction();
-    // --> protected
-    // TG4TrackingAction(const TG4TrackingAction& right);
     virtual ~TG4TrackingAction();
    
     // static access method
@@ -40,7 +38,7 @@ class TG4TrackingAction : public G4UserTrackingAction,
     virtual void PreTrackingAction(const G4Track* aTrack);
     virtual void PostTrackingAction(const G4Track* aTrack);
                   // the following methods should not
-		  // be overwritten in a derived class
+                  // be overwritten in a derived class
     virtual void PreUserTrackingAction(const G4Track* aTrack);
     virtual void PostUserTrackingAction(const G4Track* aTrack);
     void FinishPrimaryTrack();
@@ -57,13 +55,10 @@ class TG4TrackingAction : public G4UserTrackingAction,
     G4bool GetSaveSecondaries() const;
     G4int GetNofTracks() const;
 
-  protected:
+  private:
     TG4TrackingAction(const TG4TrackingAction& right);
-
-    // operators
     TG4TrackingAction& operator=(const TG4TrackingAction& right);
 
-  private:
     // methods
     void SetTrackInformation(const G4Track* aTrack);
     void SetParentToTrackInformation(const G4Track* aTrack);
@@ -94,12 +89,12 @@ inline TG4TrackingAction* TG4TrackingAction::Instance() {
   return fgInstance; 
 }
 
-inline void TG4TrackingAction::PreTrackingAction(const G4Track* aTrack) {
+inline void TG4TrackingAction::PreTrackingAction(const G4Track* /*aTrack*/) {
   /// Dummy pre-tracking action that can be overriden
   /// in a user defined class
 }
 
-inline void TG4TrackingAction::PostTrackingAction(const G4Track* aTrack) {
+inline void TG4TrackingAction::PostTrackingAction(const G4Track* /*aTrack*/) {
   /// Dummy post-tracking action that can be overriden
   /// in a user defined class
 }

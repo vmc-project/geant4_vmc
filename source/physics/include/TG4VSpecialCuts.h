@@ -1,4 +1,4 @@
-// $Id: TG4VSpecialCuts.h,v 1.3 2005/03/29 10:39:53 brun Exp $
+// $Id: TG4VSpecialCuts.h,v 1.4 2005/09/01 10:04:33 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4VSpecialCuts
@@ -26,8 +26,6 @@ class TG4VSpecialCuts: public G4VProcess
 {
   public:
     TG4VSpecialCuts(const G4String& processName);
-    // --> protected
-    // TG4VSpecialCuts();		   
     virtual ~TG4VSpecialCuts();
 
     // methods
@@ -40,31 +38,28 @@ class TG4VSpecialCuts: public G4VProcess
 
     virtual G4VParticleChange* PostStepDoIt(const G4Track& track, 
                          const G4Step& step);
-			    
+                            
     virtual G4double AlongStepGetPhysicalInteractionLength(
                          const G4Track&, G4double, G4double, G4double&,
                          G4GPILSelection*)
-			 { return -1.0; }
+                         { return -1.0; }
 
     virtual G4VParticleChange* AlongStepDoIt(const G4Track&, const G4Step&)
-			 { return 0; }
+                         { return 0; }
 
     virtual G4double AtRestGetPhysicalInteractionLength(const G4Track&,
-		         G4ForceCondition* )
-			 { return -1.0; }
-			    
+                         G4ForceCondition* )
+                         { return -1.0; }
+                            
     virtual G4VParticleChange* AtRestDoIt(
-			 const G4Track&, const G4Step&)
-			 { return 0; }
+                         const G4Track&, const G4Step&)
+                         { return 0; }
 
-  protected:
-    TG4VSpecialCuts();		   
-    TG4VSpecialCuts(const TG4VSpecialCuts& right);
-    
-    // operators
-    TG4VSpecialCuts& operator = (const TG4VSpecialCuts& right);
-    
   private:
+    TG4VSpecialCuts();                   
+    TG4VSpecialCuts(const TG4VSpecialCuts& right);
+    TG4VSpecialCuts& operator = (const TG4VSpecialCuts& right);
+
     G4LossTableManager*  fLossTableManager;
 
 };

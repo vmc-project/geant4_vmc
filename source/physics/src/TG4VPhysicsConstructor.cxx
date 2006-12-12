@@ -1,4 +1,4 @@
-// $Id: TG4VPhysicsConstructor.cxx,v 1.2 2003/12/18 13:27:46 brun Exp $
+// $Id: TG4VPhysicsConstructor.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: physics
 //
 // Class TG4VPhysicsConstructor
@@ -29,20 +29,6 @@ TG4VPhysicsConstructor::TG4VPhysicsConstructor(const G4String& name,
 {
 //
   VerboseLevel(verboseLevel);
-}
-
-//_____________________________________________________________________________
-TG4VPhysicsConstructor::TG4VPhysicsConstructor(
-                                     const TG4VPhysicsConstructor& right)    
-  : TG4Verbose("") {
-//
-  TG4Globals::Exception("TG4VPhysicsConstructor is protected from copying.");
-}
-
-//_____________________________________________________________________________
-TG4VPhysicsConstructor::TG4VPhysicsConstructor()  
-  : TG4Verbose("") {
-//
 }
 
 //_____________________________________________________________________________

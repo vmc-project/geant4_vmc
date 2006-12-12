@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.13 2006/01/13 16:59:38 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.14 2006/04/12 10:37:23 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryServices
@@ -8,6 +8,8 @@
 // Author: I. Hrivnacova
 
 #include "TG4GeometryServices.h"
+#include "TG4MediumMap.h"
+#include "TG4Medium.h"
 #include "TG4Limits.h"
 #include "TG4IntMap.h"
 #include "TG4NameMap.h"
@@ -37,64 +39,36 @@ const G4double       TG4GeometryServices::fgkAZTolerance = 0.001;
 const G4double       TG4GeometryServices::fgkDensityTolerance = 0.005; 
 
 //_____________________________________________________________________________
-TG4GeometryServices::TG4GeometryServices(
-                        TG4IntMap* mediumMap, 
-			TG4OpSurfaceMap* opSurfaceMap ) 
+TG4GeometryServices::TG4GeometryServices() 
   : TG4Verbose("geometryServices"),
-    fMediumMap(mediumMap),
-    fOpSurfaceMap(opSurfaceMap),
+    fMediumMap(0),
+    fOpSurfaceMap(0),
     fWorld(0),
-    fSeparator(gSeparator)				 
+    fSeparator(gSeparator)                                 
 {
-//
+/// Standard constructor
+
   if (fgInstance) {
     TG4Globals::Exception(
-      "TG4GeometryServices: attempt to create two instances of singleton.");
+      "TG4GeometryServices", "TG4GeometryServices",
+      "Cannot create two instances of singleton.");
   }
+
+  fMediumMap = new TG4MediumMap();
+  fOpSurfaceMap = new TG4OpSurfaceMap();
 
   fgInstance = this;
 }
 
 //_____________________________________________________________________________
-TG4GeometryServices::TG4GeometryServices()
-  : TG4Verbose("geometryServices") {
-// 
-  TG4Globals::Exception(
-    "TG4GeometryServices default constructor is protected.");
-}
-
-
-//_____________________________________________________________________________
-TG4GeometryServices::TG4GeometryServices(const TG4GeometryServices& right)  
-  : TG4Verbose("geometryServices")  {
-// 
-  TG4Globals::Exception(
-    "Attempt to copy TG4GeometryServices singleton.");
-}
-
-
-//_____________________________________________________________________________
-TG4GeometryServices::~TG4GeometryServices() {
-//
-}
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4GeometryServices& 
-TG4GeometryServices::operator=(const TG4GeometryServices& right)
+TG4GeometryServices::~TG4GeometryServices() 
 {
-  // check assignement to self
-  if (this == &right) return *this;
+/// Destructor
 
-  TG4Globals::Exception(
-    "Attempt to assign TG4GeometryServices singleton.");
-    
-  return *this;  
-}    
-          
+  delete fMediumMap;
+  delete fOpSurfaceMap;
+}
+
 //
 // private methods
 //
@@ -113,7 +87,7 @@ G4bool TG4GeometryServices::IsG3Volume(const G4String& lvName) const
 }
 
 //_____________________________________________________________________________
-G4bool TG4GeometryServices::CompareElement(G4double a, G4double z, 
+G4bool TG4GeometryServices::CompareElement(G4double /*a*/, G4double z, 
                                            const G4Element* element) const
 {
 /// Compare given parameters with those of a given element,
@@ -136,7 +110,7 @@ G4bool TG4GeometryServices::CompareElement(G4double a, G4double z,
     return true;
   else  
     return false;   
-}					     
+}                                             
 
 //_____________________________________________________________________________
 G4bool TG4GeometryServices::CompareMaterial(G4int nofElements, G4double density, 
@@ -153,9 +127,9 @@ G4bool TG4GeometryServices::CompareMaterial(G4int nofElements, G4double density,
   
   if (nofElements == ne && diff < fgkDensityTolerance) 
     return true;
-  else  	
+  else          
     return false;
-}					     
+}                                             
 
 //_____________________________________________________________________________
 G4double* TG4GeometryServices::ConvertAtomWeight(G4int nmat,  
@@ -175,10 +149,10 @@ G4double* TG4GeometryServices::ConvertAtomWeight(G4int nmat,
       // total molecular weight 
       aMol += wmat[i]*a[i]; 
     }  
-    if (aMol == 0.) {
-      G4String text = "TG4GeometryServices::ConvertAtomWeight:\n";
-      text = text + " Total molecular weight = 0";   
-      TG4Globals::Warning(text);
+    if ( aMol == 0. ) {
+      TG4Globals::Warning(
+        "TG4GeometryServices", "ConvertAtomWeight",
+        "Total molecular weight = 0.");   
     }         
     for (i=0; i<abs(nmat); i++) {
       // weight fractions
@@ -289,21 +263,6 @@ G4String  TG4GeometryServices::G4ToG3VolumeName(const G4String& name) const
 }
 
 //_____________________________________________________________________________
-G4String  TG4GeometryServices::GenerateLimitsName(G4int id, 
-                                       const G4String& medName,
-                                       const G4String& matName) const
-{
-/// Generate unique name for user limits composed from the tracking medium id,
-/// name and its material name.
-
-  G4String name = "";
-  TG4Globals::AppendNumberToString(name, id);
-  name = name + "__med_" + medName + "__mat_" + matName;
-  
-  return name;
-}
-
-//_____________________________________________________________________________
 G4OpticalSurfaceModel  
 TG4GeometryServices::SurfaceModel(EMCOpSurfaceModel model) const
 {
@@ -313,10 +272,9 @@ TG4GeometryServices::SurfaceModel(EMCOpSurfaceModel model) const
     case kGlisur:  return glisur;
     case kUnified: return unified;
     default:
-      G4String text;
-      text = "TG4GeometryServices::SurfaceModel: \n";
-      text = text + " Unknown optical surface model.";
-      TG4Globals::Warning(text);
+      TG4Globals::Warning(
+        "TG4GeometryServices", "SurfaceModel", 
+        "Unknown optical surface model, return Glisur.");
       return glisur;
   }  
 }
@@ -333,10 +291,9 @@ TG4GeometryServices::SurfaceType(EMCOpSurfaceType surfType) const
     case kFirsov:                return firsov;               
     case kXray:                  return x_ray;
     default:
-      G4String text;
-      text = "TG4GeometryServices::SurfaceType: \n";
-      text = text + " Unknown optical surface type.";
-      TG4Globals::Warning(text);
+      TG4Globals::Warning(
+        "TG4GeometryServices", "SurfaceType",
+        "Unknown optical surface type, return dielectric_metal.");
       return dielectric_metal;
   }  
 }
@@ -355,10 +312,9 @@ TG4GeometryServices::SurfaceFinish(EMCOpSurfaceFinish finish) const
     case kGroundfrontpainted:   return groundfrontpainted;  
     case kGroundbackpainted:    return groundbackpainted;       
     default:
-      G4String text;
-      text = "TG4GeometryServices::SurfaceFinish: \n";
-      text = text + " Unknown optical surface finish.";
-      TG4Globals::Warning(text);
+      TG4Globals::Warning(
+        "TG4GeometryServices", "SurfaceFinish",
+        "Unknown optical surface finish, return polished.");
       return polished;
   }  
 }
@@ -385,16 +341,16 @@ void  TG4GeometryServices::Convert(const G4Transform3D& transform,
 //_____________________________________________________________________________
 G4Material* TG4GeometryServices::MixMaterials(G4String name, G4double density, 
                                     const TG4StringVector& matNames, 
-				    const TG4doubleVector& matWeights)
+                                    const TG4doubleVector& matWeights)
 {
 /// Create a mixture of selected materials.
 
   // number of materials to be mixed  
   G4int nofMaterials = matNames.size();
-  if (nofMaterials != G4int(matWeights.size())) {
-    G4String text = "TG4GeometryServices::MixMaterials: ";
-    text = text +  "different number of material names and weigths.";
-    TG4Globals::Exception(text);
+  if ( nofMaterials != G4int(matWeights.size()) ) {
+    TG4Globals::Exception(
+      "TG4GeometryServices", "MixMaterials",
+      "Different number of material names and weigths.");
   } 
      
   if (VerboseLevel() > 1) {
@@ -459,16 +415,16 @@ void TG4GeometryServices::PrintStatistics(G4bool open, G4bool close) const
      
   G4cout << "    GEANT4 Geometry statistics: " << G4endl
          << "          " << std::setw(5) << NofG4LogicalVolumes()  
-	                 << " logical volumes" << G4endl
-	 << "          " 
-	                 << std::setw(5) << NofG4PhysicalVolumes() 
-	                 << " physical volumes" << G4endl
-	 << "          " 
-	                 << std::setw(5) << G4Material::GetNumberOfMaterials()
-			 << " materials"        << G4endl
-	 << "          " 
-	                 << std::setw(5) << TG4Limits::GetNofLimits()
-			 << " user limits"      << G4endl;
+                         << " logical volumes" << G4endl
+         << "          " 
+                         << std::setw(5) << NofG4PhysicalVolumes() 
+                         << " physical volumes" << G4endl
+         << "          " 
+                         << std::setw(5) << G4Material::GetNumberOfMaterials()
+                         << " materials"        << G4endl
+         << "          " 
+                         << std::setw(5) << TG4Limits::GetNofLimits()
+                         << " user limits"      << G4endl;
 
   if (close) TG4Globals::PrintStars(false);
 }
@@ -490,22 +446,40 @@ TG4GeometryServices::PrintLogicalVolumeStore() const
     G4cout << "Logical volume: " << G4endl;
     G4cout << "  " << std::setw(5)  << i
            << "  " << lv
-	   << "  " << lv->GetName()
-	   << "  " << std::setw(5)  << lv->GetNoDaughters() << " daughters"
-	   << "  limits: " << lv->GetUserLimits()
-	   << G4endl;
-	   
+           << "  " << lv->GetName()
+           << "  " << std::setw(5)  << lv->GetNoDaughters() << " daughters"
+           << "  limits: " << lv->GetUserLimits()
+           << G4endl;
+           
     for (G4int j=0; j<lv->GetNoDaughters(); j++) {
       G4cout << "  Daughter: " 
              << std::setw(5)  << j
              << "  " << lv->GetDaughter(j)
-  	     << "  " << lv->GetDaughter(j)->GetName()
-	     << "  of LV: " << lv->GetDaughter(j)->GetLogicalVolume()
-  	     << "  " << lv->GetDaughter(j)->GetLogicalVolume()->GetName()
-	     << "  copy no: " << lv->GetDaughter(j)->GetCopyNo()
+               << "  " << lv->GetDaughter(j)->GetName()
+             << "  of LV: " << lv->GetDaughter(j)->GetLogicalVolume()
+               << "  " << lv->GetDaughter(j)->GetLogicalVolume()->GetName()
+             << "  copy no: " << lv->GetDaughter(j)->GetCopyNo()
              << G4endl;
     
-    }    	    
+    }                
+  }
+}  
+
+//_____________________________________________________________________________
+void 
+TG4GeometryServices::PrintPhysicalVolumeStore() const
+{
+/// Print all physical volumes
+
+  G4PhysicalVolumeStore* pvStore = G4PhysicalVolumeStore::GetInstance();
+  
+  for (G4int i=0; i<G4int(pvStore->size()); i++) {
+    G4VPhysicalVolume* pv = (*pvStore)[i];
+    G4cout << i << "th volume name=" 
+               << pv->GetName() << "  g3name=" 
+               << G4ToG3VolumeName(pv->GetName()) << "  copyNo=" 
+               << pv->GetCopyNo() 
+               << G4endl;
   }
 }  
 
@@ -523,9 +497,9 @@ void TG4GeometryServices::PrintElementTable() const
     G4Element* element = (*elementTable)[i];
     G4cout << "  " << std::setw(5)  << i
            << "th element:"
-	   << "  " << element
-	   << G4endl;
-  }	   
+           << "  " << element
+           << G4endl;
+  }           
 }
 
 //_____________________________________________________________________________
@@ -542,7 +516,7 @@ void TG4GeometryServices::PrintMaterials() const
   for (G4int i=0; i<G4int(matTable->size()); i++) {
     if ( (*matTable)[i] &&
          (*matTable)[i]->GetMaterialPropertiesTable() ) {
-	 
+         
       G4cout << (*matTable)[i]->GetName() 
              << " material properties table: " << G4endl;
       (*matTable)[i]->GetMaterialPropertiesTable()->DumpTable();
@@ -555,7 +529,7 @@ void TG4GeometryServices::PrintMaterials() const
   for ( it=fOpSurfaceMap->begin(); it!=fOpSurfaceMap->end(); it++) {
     if ( it->second &&
          it->second->GetMaterialPropertiesTable() ) {
-	 
+         
       G4cout << it->first 
              << " optical surface material properties table: " << G4endl;
       it->second->GetMaterialPropertiesTable()->DumpTable();
@@ -627,7 +601,7 @@ TG4Limits* TG4GeometryServices::GetLimits(G4UserLimits* limits) const
   TG4Limits* tg4Limits = dynamic_cast<TG4Limits*> (limits);
   if ( !tg4Limits ) {
     TG4Globals::Exception(
-      "TG4GeometryServices::GetLimits: Wrong limits type"); 
+      "TG4GeometryServices", "GetLimits", "Wrong limits type"); 
     return 0;
   }  
 
@@ -649,7 +623,6 @@ TG4Limits* TG4GeometryServices::GetLimits(
 
   if (tg4Limits) return tg4Limits;
 
-
   G4UserLimits* g4Limits = dynamic_cast<G4UserLimits*> (limits);
 
   if (g4Limits) {
@@ -658,7 +631,8 @@ TG4Limits* TG4GeometryServices::GetLimits(
     return tg4Limits;
   }  
  
-  TG4Globals::Exception("TG4GeometryServices::GetLimits: Wrong limits type."); 
+  TG4Globals::Exception(
+    "TG4GeometryServices", "GetLimits", "Wrong limits type."); 
   return 0;
 }        
 
@@ -675,12 +649,12 @@ TG4GeometryServices::FindLogicalVolume(const G4String& name, G4bool silent) cons
     if (lv->GetName() == name) return lv;
   }
   
-  if (!silent) {
-    G4String text = "TG4GeometryServices:: FindLogicalVolume:\n"; 
-    text = text + "    Logical volume " + name + " does not exist.";
-    TG4Globals::Warning(text);
+  if ( ! silent ) {
+    TG4Globals::Warning(
+      "TG4GeometryServices", "FindLogicalVolume",
+      "Logical volume " + TString(name) + " not found.");
   }
-  return 0;	       	         
+  return 0;                                
 }  
 
 //_____________________________________________________________________________
@@ -696,19 +670,20 @@ TG4GeometryServices::FindPhysicalVolume(const G4String& name, G4int copyNo,
   for (G4int i=0; i<G4int(pvStore->size()); i++) {
     G4VPhysicalVolume* pv = (*pvStore)[i];
     //G4cout << i << "th volume " 
-    //       << G4ToG3VolumeName(pv->GetName()) << "  " 
-    //       << pv->GetCopyNo() 
-    //	     << G4endl;
+    //           << pv->GetName() << "  " 
+    //           << G4ToG3VolumeName(pv->GetName()) << "  " 
+    //           << pv->GetCopyNo() 
+    //           << G4endl;
     if ( G4ToG3VolumeName(pv->GetName()) == name &&
          pv->GetCopyNo() == copyNo ) return pv;
   }
   
-  if (!silent) {
-    G4String text = "TG4GeometryServices:: FindPhysicalVolume:\n"; 
-    text = text + "    Physical volume " + name + " does not exist.";
-    TG4Globals::Warning(text);
+  if ( ! silent ) {
+    TG4Globals::Warning(
+      "TG4GeometryServices", "FindPhysicalVolume", 
+      "Physical volume " + TString(name) + " not found.");
   }
-  return 0;	       	         
+  return 0;                                
 }  
 
 //_____________________________________________________________________________
@@ -723,20 +698,15 @@ TG4GeometryServices::FindDaughter(const G4String& name, G4int copyNo,
     G4VPhysicalVolume* dpv = mlv->GetDaughter(i);
     if ( G4ToG3VolumeName(dpv->GetName()) == name &&
          dpv->GetCopyNo() == copyNo ) return dpv;
-  }	 
+  }         
   
-  if (!silent) {
-    G4String text = "TG4GeometryServices:: FindDaughter:\n"; 
-    text = text + "    Physical volume " + name + " does not exist.";
-    TG4Globals::Warning(text);
+  if ( ! silent ) {
+    TG4Globals::Warning(
+      "TG4GeometryServices", "FindDaughter",
+      "Physical volume " + TString(name) + " not found.");
   }
-  return 0;	       	         
+  return 0;                                
 }  
-	  
-        
-      
-
-				  
 
 //_____________________________________________________________________________
 TG4Limits* 
@@ -753,11 +723,11 @@ TG4GeometryServices::FindLimits(const G4String& name, G4bool silent) const
   }
   
   if (!silent) {
-    G4String text = "TG4GeometryServices:: FindLimits:\n"; 
-    text = text + "    Logical volume " + name + " does not exist.";
-    TG4Globals::Warning(text);
+    TG4Globals::Warning(
+      "TG4GeometryServices", "FindLimits", 
+      "Logical volume " + TString(name) + " not found.");
   }
-  return 0;	       	         
+  return 0;                                
 }  
 
 //_____________________________________________________________________________
@@ -766,7 +736,15 @@ G4int TG4GeometryServices::GetMediumId(G4LogicalVolume* lv) const
 /// Return the second index for materials (having its origin in
 /// G4 tracking media concept)
 
-  return fMediumMap->GetSecond(lv->GetName());
+  TG4Medium* medium = fMediumMap->GetMedium(lv);
+  if ( ! medium ) {
+    TG4Globals::Exception(
+      "TG4GeometryServices", "GetMediumId", 
+      "Medium for given logical volume not defined.");
+    return 0;
+  }  
+
+  return medium->GetID();
 }  
 
 //_____________________________________________________________________________
@@ -778,10 +756,10 @@ G4double TG4GeometryServices::GetEffA(G4Material* material) const
   G4double a = 0.;
   G4int nofElements = material->GetNumberOfElements();
   if (nofElements > 1) {
-    G4String text = "Effective A for material mixture (";
-    text = text + material->GetName();
-    text = text + ") is used.";
-    //TG4Globals::Warning(text);
+    //TG4Globals::Warning(
+    //  "TG4GeometryServices", "GetEffA",
+    //  "Effective A for material mixture (" + TString(material->GetName()) +
+    //  ") is used.");
 
     for (G4int i=0; i<nofElements; i++) {
       G4double aOfElement = material->GetElement(i)->GetA();
@@ -805,10 +783,10 @@ G4double TG4GeometryServices::GetEffZ(G4Material* material) const
   G4double z = 0.;
   G4int nofElements = material->GetNumberOfElements();
   if (nofElements > 1) {
-    G4String text = "Effective Z for material mixture (";
-    text = text + material->GetName();
-    text = text + ") is used.";
-    //TG4Globals::Warning(text);
+    //TG4Globals::Warning(
+    //  "TG4GeometryServices", "GetEffZ",
+    //  "Effective Z for material mixture (" + TString(material->GetName()) +
+    //  ") is used.");
 
     for (G4int i=0; i<nofElements; i++) {
       G4double zOfElement = material->GetElement(i)->GetZ();
@@ -837,18 +815,18 @@ G4Material* TG4GeometryServices::FindMaterial(G4double a, G4double z,
     
     if (CompareElement(a, z, material->GetElement(0)) &&
         CompareMaterial(1, density, material))
-	
-	return material;
-  }	
+        
+        return material;
+  }        
     
   return 0;   
-}					     
+}                                             
 
 //_____________________________________________________________________________
 G4Material* TG4GeometryServices::FindMaterial(G4double* a, G4double* z,
                                               G4double density, 
                                               G4int nmat, G4double* wmat) const
-{					      
+{                                              
 /// Find the material in G4MaterialTable with specified parameters,
 /// return 0 if not found.
 
@@ -867,21 +845,21 @@ G4Material* TG4GeometryServices::FindMaterial(G4double* a, G4double* z,
       G4bool equal = true;
       for (G4int ie=0; ie<nm; ie++) { 
 
-	G4double we = (material->GetFractionVector())[ie];
+        G4double we = (material->GetFractionVector())[ie];
     
         if ( !CompareElement(a[ie], z[ie], material->GetElement(ie)) ||
-	     std::abs(weight[ie] - we) > fgkAZTolerance ) {
+             std::abs(weight[ie] - we) > fgkAZTolerance ) {
 
           equal = false;
-	  break;		
+          break;                
         }
       }
       if (equal) {
         found = material;
-	break;
-      }	
+        break;
+      }        
     }  
-  }  	 
+  }           
     
   delete [] weight;  
   return found;   

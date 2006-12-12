@@ -1,4 +1,4 @@
-// $Id: TG4ParticleGunMessenger.h,v 1.2 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4ParticleGunMessenger.h,v 1.3 2005/09/01 10:04:32 brun Exp $
 /// \ingroup event
 //
 /// \class TG4ParticleGunMessenger
@@ -28,24 +28,18 @@ class TG4ParticleGunMessenger: public G4UImessenger
 {
   public:
     TG4ParticleGunMessenger(TG4ParticleGun* gun);
-    // --> protected
-    // TG4ParticleGunMessenger();
-    // TG4ParticleGunMessenger(const TG4ParticleGunMessenger& right);
     virtual ~TG4ParticleGunMessenger();
 
     // methods
     virtual void SetNewValue(G4UIcommand* command, G4String newValues);
     virtual G4String GetCurrentValue(G4UIcommand* command);
 
-  protected:
+  private:
     TG4ParticleGunMessenger();
     TG4ParticleGunMessenger(const TG4ParticleGunMessenger& right);
-
-    // operators
     TG4ParticleGunMessenger& operator=(
                             const TG4ParticleGunMessenger& right);
 
-  private:
     // data members
     TG4ParticleGun*   fGun;           //associated class
     TG4GunParticle*   fParticle;      //current TG4GunParticle

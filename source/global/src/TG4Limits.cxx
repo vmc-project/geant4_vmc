@@ -1,4 +1,4 @@
-// $Id: TG4Limits.cxx,v 1.4 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4Limits.cxx,v 1.5 2005/07/22 10:22:48 brun Exp $
 // Category: global
 //
 // Class TG4Limits
@@ -71,7 +71,9 @@ TG4Limits::TG4Limits()
     // fMinEkine(0.), fMinRange(0.)
     fName(""),
     fIsCut(false),
-    fIsControl(false) 
+    fIsControl(false) ,
+    fCutVector(),
+    fControlVector()
 {
 //
   ++fgCounter;
@@ -79,12 +81,13 @@ TG4Limits::TG4Limits()
 
 //_____________________________________________________________________________
 TG4Limits::TG4Limits(const TG4Limits& right)
-  : G4UserLimits(right) 
+  : G4UserLimits(right), 
+    fName(right.fName),
+    fIsCut(right.fIsCut),
+    fIsControl(right.fIsControl) ,
+    fCutVector(right.fCutVector),
+    fControlVector(right.fControlVector)
 {
-//    
-  // copy stuff
-  *this = right;
-
   ++fgCounter;
 }  
 
@@ -122,7 +125,7 @@ TG4Limits& TG4Limits::operator=(const TG4Limits& right)
 //_____________________________________________________________________________
 void TG4Limits::Initialize(const TG4G3CutVector& cuts, 
                            const TG4G3ControlVector& controls)
-{			 
+{                         
 /// Initialization.
 
   fMaxTime = cuts[kTOFMAX];
@@ -142,7 +145,7 @@ void TG4Limits::Initialize(const TG4G3CutVector& cuts,
 //
 
 //_____________________________________________________________________________
-G4double TG4Limits::GetUserMinEkine(const G4Track& track)
+G4double TG4Limits::GetUserMinEkine(const G4Track& /*track*/)
 {
 /// Return the kinetic energy cut parameter.
 /// !! The cuts values defined if fCutVector are applied
@@ -186,7 +189,7 @@ void TG4Limits::SetG3DefaultCuts()
 
 //_____________________________________________________________________________
 G4bool TG4Limits::Update(const TG4G3ControlVector& controls)
-{		       
+{                       
 /// Update controls in a special way.
 /// Return true if some control in fControlVector is after update
 /// still set.

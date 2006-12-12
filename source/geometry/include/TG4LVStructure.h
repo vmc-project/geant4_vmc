@@ -1,4 +1,4 @@
-// $Id: TG4LVStructure.h,v 1.3 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4LVStructure.h,v 1.4 2005/09/01 10:04:32 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4LVStructure
@@ -26,8 +26,6 @@ class TG4LVStructure
   public:
     TG4LVStructure(G4String aPath);
     TG4LVStructure(const TG4LVStructure& right);
-    // --> protected 
-    // TG4LVStructure();
     virtual ~TG4LVStructure();
 
     // operators
@@ -50,10 +48,9 @@ class TG4LVStructure
     G4LogicalVolume* GetVolume(const G4String& name) const;
     G4LogicalVolume* FindVolume(const G4String& name) const;
 
-  protected:
+  private:
     TG4LVStructure(); 
 
-  private:
     // methods
     TG4LVStructure* FindSubDirectory(const G4String& subDir) const;
     G4String ExtractDirName(const G4String& path) const;
@@ -62,7 +59,7 @@ class TG4LVStructure
     // data members
     LVStructuresVector    fStructures;     //vector of contained structures
     LogicalVolumesVector  fLogicalVolumes; //vector of contained logical volumes
-				           //(parallel to fStructures)
+                                           //(parallel to fStructures)
     G4String  fPathName;     //full path name
     G4String  fDirName;      //directory name
     G4int     fVerboseLevel; //verbose level

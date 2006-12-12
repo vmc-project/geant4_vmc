@@ -1,4 +1,4 @@
-// $Id: TG4SpecialStackingAction.h,v 1.2 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4SpecialStackingAction.h,v 1.3 2005/09/01 10:04:32 brun Exp $
 /// \ingroup event
 //
 /// \class TG4SpecialStackingAction
@@ -37,8 +37,6 @@ class TG4SpecialStackingAction : public G4UserStackingAction,
 {
   public:
     TG4SpecialStackingAction();
-    // --> protected
-    // TG4SpecialStackingAction(const TG4SpecialStackingAction& right);
     virtual ~TG4SpecialStackingAction();
 
     // methods
@@ -46,13 +44,10 @@ class TG4SpecialStackingAction : public G4UserStackingAction,
     void NewStage();
     void PrepareNewEvent();
 
-  protected:
+  private:
     TG4SpecialStackingAction(const TG4SpecialStackingAction& right);
-
-    // operators
     TG4SpecialStackingAction& operator=(const TG4SpecialStackingAction& right);
 
-  private:
     // data members
     G4int               fStage;          //stage number
     TG4TrackingAction*  fTrackingAction; //the tracking action

@@ -1,4 +1,4 @@
-// $Id: TG4RunConfiguration.cxx,v 1.5 2006/04/12 10:37:24 brun Exp $
+// $Id: TG4RunConfiguration.cxx,v 1.6 2006/07/28 06:09:36 brun Exp $
 // Category: run
 //
 // Class TG4RunConfiguration
@@ -27,17 +27,32 @@
 #include <XmlVGM/GDMLExporter.h>
 #endif
 
-
 //_____________________________________________________________________________
-TG4RunConfiguration::TG4RunConfiguration(Bool_t specialStacking)
-  : fSpecialStacking(specialStacking),
+TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
+                                         Bool_t specialStacking)
+  : fUserGeometry(userGeometry),
+    fSpecialStacking(specialStacking),
     fPhysicsList(0),
     fPhysicsListOptions(),
     fAGDDMessenger(0),
     fGDMLMessenger(0)
     
 {
-//
+/// Standard constructor
+
+  if ( userGeometry != "geomVMCtoGeant4"  &&
+       userGeometry != "geomVMCtoRoot"    &&
+       userGeometry != "geomRoot"         &&
+       userGeometry != "geomRootToGeant4" &&
+       userGeometry != "geomGeant4" ) {
+       
+    TG4Globals::Exception(
+      "TG4RunConfiguration", "TG4RunConfiguration",
+      "User geometry " + userGeometry + " not recognized." + TG4Globals::Endl() +
+      "Available options:"                                 + TG4Globals::Endl() +
+      "geomVMCtoGeant4 geomVMCtoRoot geomRoot geomRootToGeant4 geomGeant4");
+  }  
+
   // instantiate LVtree browser
   TG4LVTree::Instance();
 
@@ -49,18 +64,6 @@ TG4RunConfiguration::TG4RunConfiguration(Bool_t specialStacking)
 }
 
 //_____________________________________________________________________________
-TG4RunConfiguration::TG4RunConfiguration(const TG4RunConfiguration& right)
-  : fSpecialStacking(false),
-    fPhysicsList(0),
-    fPhysicsListOptions(),
-    fAGDDMessenger(0),
-    fGDMLMessenger(0)
-{
-//
-  TG4Globals::Exception("TG4RunConfiguration is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4RunConfiguration::~TG4RunConfiguration(){
 //
   delete TG4LVTree::Instance();
@@ -68,22 +71,6 @@ TG4RunConfiguration::~TG4RunConfiguration(){
   delete fGDMLMessenger;
 }
 
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4RunConfiguration& TG4RunConfiguration::operator=(
-                                const TG4RunConfiguration& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-  
-  TG4Globals::Exception("TG4RunConfiguration is protected from assigning.");
-
-  return *this;  
-}    
-          
 //
 // public methods
 //
@@ -93,8 +80,11 @@ G4VUserDetectorConstruction* TG4RunConfiguration::CreateDetectorConstruction()
 {
 /// Create and return Geant4 VMC default detector construction
 
+  if ( fUserGeometry == "Root" ) return 0;
+   
   return new TG4DetConstruction();
 }  
+
 
 //_____________________________________________________________________________
 G4VUserPhysicsList* TG4RunConfiguration::CreatePhysicsList()
@@ -163,14 +153,34 @@ void TG4RunConfiguration::SetPhysicsListOptions(
 /// Set physics list options
 
   if ( fPhysicsList ) {
-    G4String text = "TG4RunConfiguration::SetPhysicsListOptions: \n";
-    text = text + "     Physics list already constructed.";  
-    text = text + "     Cannot set options for its building.";  
-    TG4Globals::Exception(text);
+    TG4Globals::Exception(
+      "TG4RunConfiguration", "SetPhysicsListOptions",
+      "Physics list is already constructed." + TG4Globals::Endl() +
+      "Cannot set options for its building.");  
   }
 
   fPhysicsListOptions = options;
-}     			      
+}                                   
+
+//_____________________________________________________________________________
+G4VUserPhysicsList* TG4RunConfiguration::GetPhysicsList() const
+{
+/// Return its physics list.
+  
+  return fPhysicsList;
+}
+
+//_____________________________________________________________________________
+TString TG4RunConfiguration::GetUserGeometry() const
+{
+/// Return the way user geometry is built
+
+  // strip out "geom"from the name
+  TString userGeometry = fUserGeometry;
+  userGeometry = userGeometry.Remove(0, 4);
+
+  return userGeometry;
+}  
 
 //_____________________________________________________________________________
 Bool_t TG4RunConfiguration::IsSpecialStacking() const
@@ -180,10 +190,3 @@ Bool_t TG4RunConfiguration::IsSpecialStacking() const
   return fSpecialStacking;
 }  
 
-//_____________________________________________________________________________
-G4VUserPhysicsList* TG4RunConfiguration::GetPhysicsList() const
-{
-/// Return its physics list.
-  
-  return fPhysicsList;
-}

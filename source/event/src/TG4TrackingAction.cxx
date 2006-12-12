@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.cxx,v 1.7 2004/05/28 13:49:32 brun Exp $
+// $Id: TG4TrackingAction.cxx,v 1.8 2004/11/10 11:39:27 brun Exp $
 // Category: event
 //
 // Class TG4TrackingAction
@@ -30,7 +30,8 @@ TG4TrackingAction* TG4TrackingAction::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4TrackingAction::TG4TrackingAction()     
-  : TG4Verbose("trackingAction",2),    
+  : G4UserTrackingAction(),
+    TG4Verbose("trackingAction",2),    
     fMessenger(this),
     fPrimaryTrackID(0),
     fSavePrimaries(false),
@@ -41,42 +42,18 @@ TG4TrackingAction::TG4TrackingAction()
 {
 //
   if (fgInstance) { 
-    TG4Globals::Exception("TG4TrackingAction constructed twice."); 
+    TG4Globals::Exception(
+      "TG4TrackingAction", "TG4TrackingAction", 
+      "Cannot create two instances of singleton.");
   }
 
   fgInstance = this;
 }
 
 //_____________________________________________________________________________
-TG4TrackingAction::TG4TrackingAction(const TG4TrackingAction& right)   
-  : TG4Verbose("trackingAction"),
-    fMessenger(this)
-{
-//
-  TG4Globals::Exception("TG4TrackingAction is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4TrackingAction::~TG4TrackingAction() {
 //
 }
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4TrackingAction& 
-TG4TrackingAction::operator=(const TG4TrackingAction &right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-  
-  TG4Globals::Exception("TG4TrackingAction is protected from assigning.");
-
-  return *this;
-}
-
 
 //
 // private methods
@@ -118,7 +95,7 @@ void TG4TrackingAction::SetTrackInformation(const G4Track* track)
         // G4Track object  
   }
   else
-    trackInfo->SetTrackParticleID(trackIndex);	
+    trackInfo->SetTrackParticleID(trackIndex);        
 
   // set current track number
   gMC->GetStack()->SetCurrentTrack(trackIndex);
@@ -139,15 +116,15 @@ void TG4TrackingAction::SetParentToTrackInformation(const G4Track* track)
 
       if (secondary->GetUserInformation()) {
         // this should never happen
-	G4String text = "TG4TrackingAction::PostTrackingAction:\n";
-	text = text + "    Inconsistent track information."; 
-        TG4Globals::Exception(text);
-      }	
+        TG4Globals::Exception(
+          "TG4TrackingAction", "PostTrackingAction",
+          "Inconsistent track information."); 
+      }        
       
       // get parent track index
       TG4TrackInformation* parentInfo
         = GetTrackInformation(track, "PostTrackingAction");
-	
+        
       G4int parentParticleID 
         = parentInfo->GetTrackParticleID();
 
@@ -157,7 +134,7 @@ void TG4TrackingAction::SetParentToTrackInformation(const G4Track* track)
       secondary->SetUserInformation(trackInfo);
         // the track information is deleted together with its
         // G4Track object  
-    } 	
+    }         
   }
       
 }
@@ -176,9 +153,8 @@ TG4TrackInformation* TG4TrackingAction::GetTrackInformation(
   TG4TrackInformation* tg4TrackInfo
     = dynamic_cast<TG4TrackInformation*>(trackInfo);
   if (!tg4TrackInfo) { 
-     G4String text = "TG4TrackingAction::" + method + ":\n";
-     text = text + "   Unknown track information type";
-     TG4Globals::Exception(text);
+     TG4Globals::Exception(
+       "TG4TrackingAction", method, "Unknown track information type");
   }
   
   return tg4TrackInfo;
@@ -198,10 +174,9 @@ void TG4TrackingAction::UserProcessHits(const G4Track* track)
   G4VPhysicalVolume* pv = stepManager->GetCurrentPhysicalVolume();
   
   if (!pv) {
-    G4String text = "TG4TrackingAction::PreUserTrackingAction: \n";
-    text = text + "   Cannot locate track vertex."; 
-    //TG4Globals::Exception(text);
-    TG4Globals::Warning(text);
+    // was exception
+    TG4Globals::Warning(
+      "TG4TrackingAction", "UserProcessHits", "Cannot locate track vertex."); 
     return;
   }  
   
@@ -209,7 +184,7 @@ void TG4TrackingAction::UserProcessHits(const G4Track* track)
   TG4SensitiveDetector* tsd
     = TG4SDServices::Instance()
          ->GetSensitiveDetector(
-	      pv->GetLogicalVolume()->GetSensitiveDetector());
+              pv->GetLogicalVolume()->GetSensitiveDetector());
 
   if (tsd) tsd->UserProcessHits((G4Track*)track, 0);
 #else

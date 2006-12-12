@@ -1,4 +1,4 @@
-// $Id: TG4NameMap.h,v 1.5 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4NameMap.h,v 1.6 2006/09/13 06:26:11 brun Exp $
 /// \ingroup global
 //
 /// \class TG4NameMap
@@ -24,8 +24,6 @@ class TG4NameMap
 
   public:
     TG4NameMap();
-    // --> protected
-    // TG4NameMap(const TG4NameMap& right);
     virtual ~TG4NameMap();
 
     // methods
@@ -39,13 +37,10 @@ class TG4NameMap
     // set methods
     void SetSecond(const G4String& name);
 
-  protected:
+  private:
     TG4NameMap(const TG4NameMap& right);
-
-    // operators
     TG4NameMap& operator=(const TG4NameMap& right);
   
-  private:
     // static data members
     static G4String fgUndefined;  //the value of undefined second
 

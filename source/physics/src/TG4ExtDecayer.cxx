@@ -1,4 +1,4 @@
-// $Id: TG4ExtDecayer.cxx,v 1.2 2003/09/23 14:22:56 brun Exp $
+// $Id: TG4ExtDecayer.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: physics
 //
 // Class TG4ExtDecayer
@@ -29,18 +29,12 @@
 TG4ExtDecayer::TG4ExtDecayer(TVirtualMCDecayer* externalDecayer)
   : G4VExtDecayer("TG4ExtDecayer"),
     TG4Verbose("extDecayer"),
-    fExternalDecayer(externalDecayer) {
+    fParticlesManager(TG4ParticlesManager::Instance()),
+    fExternalDecayer(externalDecayer),
+    fDecayProductsArray(0)
+{
 //
   fDecayProductsArray = new  TClonesArray("TParticle", 1000);
-  fParticlesManager = TG4ParticlesManager::Instance();
-}
-
-//_____________________________________________________________________________
-TG4ExtDecayer::TG4ExtDecayer(const TG4ExtDecayer& right)
-  : TG4Verbose("extDecayer") {
-// 
-  TG4Globals::Exception(
-    "TG4ExtDecayer is protected from copying.");
 }
 
 //_____________________________________________________________________________
@@ -48,22 +42,6 @@ TG4ExtDecayer::~TG4ExtDecayer() {
 //
   delete fDecayProductsArray;
 }
-
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4ExtDecayer& TG4ExtDecayer::operator=(const TG4ExtDecayer& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-    "TG4ExtDecayer is protected from assigning.");
-    
-  return *this;  
-} 
 
 //
 // public methods
@@ -77,7 +55,7 @@ G4DecayProducts* TG4ExtDecayer::ImportDecayProducts(const G4Track& track)
   // check if external decayer is defined
   if (!fExternalDecayer) {
      G4cerr << "TG4ExtDecayer::ImportDecayProducts: " << G4endl
-	    << " No fExternalDecayer is defined." << G4endl;
+            << " No fExternalDecayer is defined." << G4endl;
     return 0;
   }  
   
@@ -141,16 +119,16 @@ G4DecayProducts* TG4ExtDecayer::ImportDecayProducts(const G4Track& track)
         if (VerboseLevel()>1) {
           G4cout << "  G4 particle name: " 
                  << dynamicParticle->GetDefinition()->GetParticleName()
-	         << G4endl;
-	}	 
+                 << G4endl;
+        }         
 
         // add dynamicParticle to decayProducts
         decayProducts->PushProducts(dynamicParticle);
-	
-	counter++;
+        
+        counter++;
       }
     }       
-  }			     
+  }                             
   if (VerboseLevel()>1) {
     G4cout << "nofParticles for tracking: " <<  counter << G4endl;
   }  

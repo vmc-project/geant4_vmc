@@ -1,4 +1,4 @@
-// $Id: TG4GunParticle.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4GunParticle.cxx,v 1.2 2004/11/10 11:39:27 brun Exp $
 // Category: event
 //
 // Class TG4GunParticle
@@ -25,9 +25,9 @@ TG4GunParticle::TG4GunParticle()
 //_____________________________________________________________________________
 TG4GunParticle::TG4GunParticle(G4ParticleDefinition* particleDef,
                                G4ParticleMomentum momentum, 
-			       G4ThreeVector position, 
+                               G4ThreeVector position, 
                                G4double time, 
-			       G4ThreeVector polarization )
+                               G4ThreeVector polarization )
   : fParticleDefinition(particleDef),
     fParticleMomentum(momentum),
     fPosition(position),
@@ -40,11 +40,12 @@ TG4GunParticle::TG4GunParticle(G4ParticleDefinition* particleDef,
 //_____________________________________________________________________________
 TG4GunParticle::TG4GunParticle(G4ParticleDefinition* particleDef, 
                                G4ParticleMomentum momentumDir,
-			       G4double kinEnergy,
-		               G4ThreeVector position,
-			       G4double time, 
-		               G4ThreeVector polarization )
+                               G4double kinEnergy,
+                               G4ThreeVector position,
+                               G4double time, 
+                               G4ThreeVector polarization )
   : fParticleDefinition(particleDef),
+    fParticleMomentum(),
     fPosition(position),
     fTime(time),
     fPolarization(polarization)
@@ -57,10 +58,14 @@ TG4GunParticle::TG4GunParticle(G4ParticleDefinition* particleDef,
 }
 
 //_____________________________________________________________________________
-TG4GunParticle::TG4GunParticle(const TG4GunParticle& right) {
+TG4GunParticle::TG4GunParticle(const TG4GunParticle& right)   
+  : fParticleDefinition(right.fParticleDefinition),
+    fParticleMomentum(right.fParticleMomentum),
+    fPosition(right.fPosition), 
+    fTime(right.fTime),
+    fPolarization(right.fPolarization) 
+{
 //
-  // copy stuff
-  *this = right;
 }
 
 //_____________________________________________________________________________

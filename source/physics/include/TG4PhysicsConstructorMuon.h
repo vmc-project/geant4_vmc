@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorMuon.h,v 1.4 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4PhysicsConstructorMuon.h,v 1.5 2006/01/13 16:59:38 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorMuon
@@ -59,6 +59,9 @@ class TG4PhysicsConstructorMuon: public TG4VPhysicsConstructor
    G4hIonisation*          fTauMinusIonisation;        //tau- ionisation
     
   private:
+    TG4PhysicsConstructorMuon(const TG4PhysicsConstructorMuon& right);
+    TG4PhysicsConstructorMuon& operator=(const TG4PhysicsConstructorMuon& right);
+
     // methods
     void ConstructProcessForMuonPlus();    
     void ConstructProcessForMuonMinus();    

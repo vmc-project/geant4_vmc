@@ -1,4 +1,4 @@
-// $Id: TG4GunParticle.h,v 1.2 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4GunParticle.h,v 1.3 2005/09/01 10:04:32 brun Exp $
 /// \ingroup event
 //
 /// \class TG4GunParticle
@@ -24,13 +24,13 @@ class TG4GunParticle
     TG4GunParticle(G4ParticleDefinition* particleDef,
                    G4ParticleMomentum momentum, 
                    G4ThreeVector position,
-		   G4double time, 
-		   G4ThreeVector polarization );
+                   G4double time, 
+                   G4ThreeVector polarization );
     TG4GunParticle(G4ParticleDefinition* particleDef, 
                    G4ParticleMomentum momentumDir, 
                    G4double kinEnergy,
-		   G4ThreeVector position,
-		   G4double time, 
+                   G4ThreeVector position,
+                   G4double time, 
                    G4ThreeVector polarization );
     TG4GunParticle(const TG4GunParticle& right);
     ~TG4GunParticle();     

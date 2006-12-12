@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.16 2005/11/18 21:29:35 brun Exp $
+// $Id: TGeant4.h,v 1.17 2006/01/13 16:59:39 brun Exp $
 /// \ingroup run
 //
 /// \class TGeant4
@@ -33,9 +33,6 @@ class TGeant4: public TVirtualMC
             TG4RunConfiguration* configuration, int argc, char** argv);
     TGeant4(const char* name, const char* title,
             TG4RunConfiguration* configuration);
-    // --> protected
-    // TGeant4();
-    // TGeant4(const TGeant4& right);
     virtual ~TGeant4();
 
     //
@@ -52,11 +49,11 @@ class TGeant4: public TVirtualMC
 
     // functions from GCONS 
     virtual void  Gfmate(Int_t imat, char *name, Float_t &a, Float_t &z,  
-  		         Float_t &dens, Float_t &radl, Float_t &absl,
-		         Float_t* ubuf, Int_t& nbuf); 
+                           Float_t &dens, Float_t &radl, Float_t &absl,
+                         Float_t* ubuf, Int_t& nbuf); 
     virtual void  Gfmate(Int_t imat, char *name, Double_t &a, Double_t &z,  
-  		         Double_t &dens, Double_t &radl, Double_t &absl,
-		         Double_t* ubuf, Int_t& nbuf);
+                           Double_t &dens, Double_t &radl, Double_t &absl,
+                         Double_t* ubuf, Int_t& nbuf);
     virtual void  Gckmat(Int_t itmed, char* natmed);
 
 
@@ -74,14 +71,14 @@ class TGeant4: public TVirtualMC
     virtual void  Medium(Int_t& kmed, const char *name, Int_t nmat, 
                      Int_t isvol, Int_t ifield, Double_t fieldm, Double_t tmaxfd, 
                      Double_t stemax, Double_t deemax, Double_t epsil, 
-		     Double_t stmin, Float_t* ubuf, Int_t nbuf);
+                     Double_t stmin, Float_t* ubuf, Int_t nbuf);
     virtual void  Medium(Int_t& kmed, const char *name, Int_t nmat, 
                      Int_t isvol, Int_t ifield, Double_t fieldm, Double_t tmaxfd, 
                      Double_t stemax, Double_t deemax, Double_t epsil, 
-		     Double_t stmin, Double_t* ubuf, Int_t nbuf);
+                     Double_t stmin, Double_t* ubuf, Int_t nbuf);
     virtual void  Matrix(Int_t& krot, Double_t thetaX, Double_t phiX, 
                      Double_t thetaY, Double_t phiY, Double_t thetaZ, 
-		     Double_t phiZ);
+                     Double_t phiZ);
     virtual void  SetCerenkov(Int_t itmed, Int_t npckov, Float_t *ppckov,
                      Float_t *absco, Float_t *effic, Float_t *rindex);
     virtual void  SetCerenkov(Int_t itmed, Int_t npckov, Double_t *ppckov,
@@ -91,25 +88,25 @@ class TGeant4: public TVirtualMC
     // and material properties for optical physics
     virtual void  DefineOpSurface(const char *name,
                          EMCOpSurfaceModel model,
-			 EMCOpSurfaceType surfaceType,
-			 EMCOpSurfaceFinish surfaceFinish,
-			 Double_t sigmaAlpha);
+                         EMCOpSurfaceType surfaceType,
+                         EMCOpSurfaceFinish surfaceFinish,
+                         Double_t sigmaAlpha);
     virtual void  SetBorderSurface(const char *name,
                          const char* vol1Name, int vol1CopyNo,
                          const char* vol2Name, int vol2CopyNo,
-			 const char* opSurfaceName);
+                         const char* opSurfaceName);
     virtual void  SetSkinSurface(const char *name,
                          const char* volName,
-			 const char* opSurfaceName);
+                         const char* opSurfaceName);
     virtual void  SetMaterialProperty(
                          Int_t itmed, const char* propertyName, 
-			 Int_t np, Double_t* pp, Double_t* values);
+                         Int_t np, Double_t* pp, Double_t* values);
     virtual void  SetMaterialProperty(
                          Int_t itmed, const char* propertyName,
-			 Double_t value);
+                         Double_t value);
     virtual void  SetMaterialProperty(
                          const char* surfaceName, const char* propertyName, 
-			 Int_t np, Double_t* pp, Double_t* values);
+                         Int_t np, Double_t* pp, Double_t* values);
     
     // functions for access to geometry
     virtual Bool_t GetTransformation(const TString& volumePath, 
@@ -117,15 +114,15 @@ class TGeant4: public TVirtualMC
     virtual Bool_t GetShape(const TString& volumePath, 
                          TString& shapeType, TArrayD& par);
     virtual Bool_t GetMaterial(const TString& volumeName,
-	 	         TString& name, Int_t& imat,
-		         Double_t& a, Double_t& z, Double_t& density,
-		         Double_t& radl, Double_t& inter, TArrayD& par);
+                          TString& name, Int_t& imat,
+                         Double_t& a, Double_t& z, Double_t& density,
+                         Double_t& radl, Double_t& inter, TArrayD& par);
     virtual Bool_t GetMedium(const TString& volumeName,
                          TString& name, Int_t& imed,
-		         Int_t& nmat, Int_t& isvol, Int_t& ifield,
-		         Double_t& fieldm, Double_t& tmaxfd, Double_t& stemax,
-		         Double_t& deemax, Double_t& epsil, Double_t& stmin,
-		         TArrayD& par);
+                         Int_t& nmat, Int_t& isvol, Int_t& ifield,
+                         Double_t& fieldm, Double_t& tmaxfd, Double_t& stemax,
+                         Double_t& deemax, Double_t& epsil, Double_t& stmin,
+                         TArrayD& par);
 
     // functions from GGEOM 
     virtual Int_t Gsvolu(const char *name, const char *shape, Int_t nmed,  
@@ -152,16 +149,17 @@ class TGeant4: public TVirtualMC
                          const char *konly, Float_t *upar, Int_t np); 
     virtual void  Gsbool(const char* onlyVolName, const char* manyVolName);
     
-    // Euclid		       
+    // Euclid                       
     virtual void WriteEuclid(const char* fileName, const char* topVol, 
                              Int_t number, Int_t nlevel);
-		               
+                               
     // set geometry from Root (built via TGeo)
     virtual void SetRootGeometry();                   
     
     // get methods
     virtual Int_t VolId(const Text_t* volName) const;
     virtual const char* VolName(Int_t id) const;
+    virtual Int_t MediumId(const Text_t* medName) const;
     virtual Int_t NofVolumes() const;
     virtual Int_t NofVolDaughters(const char* volName) const;
     virtual const char*  VolDaughterName(const char* volName, Int_t i) const;
@@ -190,10 +188,10 @@ class TGeant4: public TVirtualMC
     virtual Int_t PDGFromId(Int_t mcID) const;
 
         // get methods
-    virtual TString   ParticleName(Int_t pdg) const;	  
-    virtual Double_t  ParticleMass(Int_t pdg) const;	  
-    virtual Double_t  ParticleCharge(Int_t pdg) const;	  
-    virtual Double_t  ParticleLifeTime(Int_t pdg) const;	  
+    virtual TString   ParticleName(Int_t pdg) const;          
+    virtual Double_t  ParticleMass(Int_t pdg) const;          
+    virtual Double_t  ParticleCharge(Int_t pdg) const;          
+    virtual Double_t  ParticleLifeTime(Int_t pdg) const;          
     virtual TMCParticleType ParticleMCType(Int_t pdg) const;
 
     //
@@ -282,7 +280,7 @@ class TGeant4: public TVirtualMC
     //
     virtual void Gdopt(const char* name , const char* value);
     virtual void SetClipBox(const char *name, Double_t xmin, Double_t xmax,
-		       Double_t ymin, Double_t ymax, Double_t zmin, Double_t zmax);
+                       Double_t ymin, Double_t ymax, Double_t zmin, Double_t zmax);
     virtual void DefaultRange();
     virtual void Gdhead(Int_t isel, const char* name, Double_t chrsiz);   
     virtual void Gdman(Double_t u, Double_t v, const char* type);
@@ -298,8 +296,8 @@ class TGeant4: public TVirtualMC
     virtual Bool_t ProcessRun(Int_t nofEvents);
 
         // UI control methods
-    void StartGeantUI();	
-    void StartRootUI();	
+    void StartGeantUI();        
+    void StartRootUI();        
     void ProcessGeantMacro(const char* macroName);
     void ProcessGeantCommand(const char* commandPath);
 
@@ -307,14 +305,11 @@ class TGeant4: public TVirtualMC
     virtual Int_t   CurrentEvent() const; 
     virtual Bool_t  SecondariesAreOrdered() const;
 
-  protected:
+  private:
     TGeant4();
     TGeant4(const TGeant4& right);
-
-    // operators
     TGeant4& operator=(const TGeant4& right);
 
-  private:
     // data members
     TG4GeometryManager*  fGeometryManager; //geometry manager
     TG4SDManager*        fSDManager;       //sensitive detectors manager

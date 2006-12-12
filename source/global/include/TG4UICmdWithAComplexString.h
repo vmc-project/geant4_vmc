@@ -1,4 +1,4 @@
-// $Id: TG4UICmdWithAComplexString.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4UICmdWithAComplexString.h,v 1.3 2005/09/01 10:04:32 brun Exp $
 /// \ingroup global
 //
 /// \class TG4UICmdWithAComplexString
@@ -19,7 +19,7 @@ class TG4UICmdWithAComplexString : public G4UIcommand
 {
   public:
     TG4UICmdWithAComplexString(G4String commandPath, G4UImessenger* messenger);
-    virtual ~TG4UICmdWithAComplexString();			       
+    virtual ~TG4UICmdWithAComplexString();                               
 
     // set methods
     void SetParameterName(G4String name, G4bool omittable);

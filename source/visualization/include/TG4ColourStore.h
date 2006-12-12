@@ -1,4 +1,4 @@
-// $Id: TG4ColourStore.h,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4ColourStore.h,v 1.4 2005/09/01 10:04:33 brun Exp $
 /// \ingroup visualization
 //
 /// \class TG4ColourStore
@@ -22,9 +22,6 @@ class TG4ColourStore
   typedef ColourVector::const_iterator ColourConstIterator;
 
   public:
-    // --> protected
-    // TG4ColourStore();
-    // TG4ColourStore(const TG4ColourStore& right);
     virtual ~TG4ColourStore();
     
     // static methods
@@ -36,14 +33,11 @@ class TG4ColourStore
     G4String GetColoursList() const;
     G4String GetColoursListWithCommas() const;
     
-  protected:
+  private:
     TG4ColourStore();  
     TG4ColourStore(const TG4ColourStore& right);
-
-    // operators
     TG4ColourStore& operator=(const TG4ColourStore& right);
 
-  private:
     // static data members
     static TG4ColourStore*  fgInstance; //this instance
 

@@ -1,4 +1,4 @@
-// $Id: TG4MaterialsFrames.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4MaterialsFrames.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
 // Category: interfaces
 //
 //========================================================
@@ -27,6 +27,13 @@
  ClassImp(TG4MaterialsFrames)
 
 TG4MaterialsFrames::TG4MaterialsFrames( TGTab* Tab, TGMainFrame* ActionFrame )
+  : TObject(),
+    fCapFrame(0),      
+    fMatSubframe1(0),  
+    fMatSubframe2(0),  
+    fMatFrameLayout(0),
+    fMaterialsCombo(0), 
+    fComboLabel(0)
 { 
 ///---> creates the materials properties display frame
 ///---> and plunges it into the main frame
@@ -94,24 +101,6 @@ TG4MaterialsFrames::TG4MaterialsFrames( TGTab* Tab, TGMainFrame* ActionFrame )
    
 }
 
-TG4MaterialsFrames::TG4MaterialsFrames(const TG4MaterialsFrames& mf) 
-{
-/// Dummy copy constructor 
-  TG4Globals::Exception(
-    "Attempt to use TG4MaterialsFrames copy constructor.");
-}
-
-TG4MaterialsFrames& TG4MaterialsFrames::operator=(const TG4MaterialsFrames& mf)
-{
-  // check assignement to self
-  if (this == &mf) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4MaterialsFrames singleton.");
-    
-  return *this;  
-}    
-
 TG4MaterialsFrames::~TG4MaterialsFrames()
 {
   ///---> liquidator
@@ -146,11 +135,11 @@ void TG4MaterialsFrames::SetMaterialsComboEntries()
     for (int ii=0; ii < ig; ii++)
         { name = ((*lComboEntries )[ii])->GetName() ;
           AddMaterialName( name, ii+1);
-	};
+        };
 
     name = "  " ;
     AddMaterialName( name, ig+1);
-    		   
+                       
 }
 
 void TG4MaterialsFrames::AddMaterialName( const char* name, Int_t index) const
@@ -189,13 +178,13 @@ void TG4MaterialsFrames::DisplayMaterialCharacteristics( int qmat)
      const G4ElementVector* allElements = lvMaterial->GetElementVector();
 
      G4cout << lvMaterial->GetName() << "  "
-	    << lvMaterial->GetNumberOfElements() << "  "
-	    << (*allElements )[0]->GetName() << "...  "
-	    << lvMaterial->GetDensity()/(g/cm3) << "(g/cm3)  "
-	    << lvMaterial->GetState() << "  "
-	    << lvMaterial->GetRadlen()/(cm) << "(cm)  "
-	    << G4endl;
-	  
+            << lvMaterial->GetNumberOfElements() << "  "
+            << (*allElements )[0]->GetName() << "...  "
+            << lvMaterial->GetDensity()/(g/cm3) << "(g/cm3)  "
+            << lvMaterial->GetState() << "  "
+            << lvMaterial->GetRadlen()/(cm) << "(cm)  "
+            << G4endl;
+          
    char buff[200];
    G4String line = " ";
    
@@ -264,7 +253,7 @@ void TG4MaterialsFrames::DisplayMaterialCharacteristics( int qmat)
       for ( G4int ii=0; ii<8; ii++) {
         fMatTextBuff[ii]->Clear();          
         gClient->NeedRedraw(fMatTextEntry[ii]);
-	};
+        };
      };      
    
 }

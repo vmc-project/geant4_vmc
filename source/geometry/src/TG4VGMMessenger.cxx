@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: TG4VGMMessenger.cxx,v 1.1 2006/04/12 11:15:32 brun Exp $
 //
 // Author: I. Hrivnacova
 //
@@ -28,11 +28,14 @@ G4int                    TG4VGMMessenger::fgCounter = 0;
 
 //_____________________________________________________________________________
 TG4VGMMessenger::TG4VGMMessenger(const G4String& xmlFormat)
-  : fG4Factory(new Geant4GM::Factory()),
+  : G4UImessenger(),
+    fG4Factory(new Geant4GM::Factory()),
     fRootFactory(0),
-    fXmlVGMExporter(0)
+    fXmlVGMExporter(0),
+    fGenerateXMLCmd()
 {
-//
+/// Standard constructor
+
   if (xmlFormat == "AGDD")
     fXmlVGMExporter = new XmlVGM::AGDDExporter(fG4Factory);
   if (xmlFormat == "GDML")
@@ -63,22 +66,9 @@ TG4VGMMessenger::TG4VGMMessenger(const G4String& xmlFormat)
 
 
 //_____________________________________________________________________________
-TG4VGMMessenger::TG4VGMMessenger() {
-//
-}
-
-//_____________________________________________________________________________
-TG4VGMMessenger::TG4VGMMessenger(const TG4VGMMessenger& right)
+TG4VGMMessenger::~TG4VGMMessenger() 
 {
-//
-  G4cerr << "    TG4VGMMessenger is protected from copying." << G4endl;
-  G4cerr << "*** Exception: Aborting execution ***" << G4endl;   
-  exit(1);
-}
-
-//_____________________________________________________________________________
-TG4VGMMessenger::~TG4VGMMessenger() {
-//
+/// Destructor
 
   delete fG4Factory;
   delete fRootFactory;
@@ -94,28 +84,13 @@ TG4VGMMessenger::~TG4VGMMessenger() {
   delete fGenerateXMLCmd;
 }
 
-// operators
-
-//_____________________________________________________________________________
-TG4VGMMessenger& 
-TG4VGMMessenger::operator=(const TG4VGMMessenger& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  G4cerr << "    TG4VGMMessenger is protected from assigning." << G4endl;
-  G4cerr << "*** Exception: Aborting execution ***" << G4endl;   
-  exit(1);
-    
-  return *this;  
-}    
 
 // public methods
   
 //_____________________________________________________________________________
 void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
 {
-// Applies command to the associated object.
+/// Applies command to the associated object.
 // ---
 
   if (!fG4Factory->Top()) {
@@ -138,7 +113,7 @@ void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
       fXmlVGMExporter->GenerateXMLGeometry();
     else 
       fXmlVGMExporter->GenerateXMLGeometry(newValues);
-  }	
+  }        
 }
 
 #endif //USE_VGM

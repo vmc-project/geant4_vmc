@@ -1,4 +1,4 @@
-// $Id: TGeant4.icc,v 1.9 2005/01/05 08:04:58 brun Exp $
+// $Id: TGeant4.icc,v 1.10 2005/11/18 21:29:35 brun Exp $
 // Category: run
 
 #include "TG4StepManager.h" 
@@ -133,9 +133,9 @@ inline Int_t TGeant4::GetMedium() const
 /// Returns the second index of the current material (corresponding to
 /// G3 tracking medium index).
 
-  G4String text = "TGeant4::GetMedium(): \n";
-  text = text + "    Deprecated function - use CurrentMedium() instead"; 
-  TG4Globals::Warning(text);
+  TG4Globals::Warning(
+    "TGeant4", "GetMedium",
+    "Deprecated function - use CurrentMedium() instead"); 
 
   return CurrentMedium(); 
 } 

@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsMessenger.cxx,v 1.3 2003/06/03 17:11:42 brun Exp $
+// $Id: TG4PhysicsMessenger.cxx,v 1.4 2004/11/10 11:39:28 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsMessenger
@@ -19,7 +19,14 @@
 
 //_____________________________________________________________________________
 TG4PhysicsMessenger::TG4PhysicsMessenger(TG4PhysicsManager* physicsManager)
-  : fPhysicsManager(physicsManager)
+  : G4UImessenger(),
+    fPhysicsManager(physicsManager),
+    fDirectory(0),         
+    fPrintProcessMCMapCmd(0),
+    fPrintProcessControlMapCmd(0),
+    fPrintVolumeLimitsCmd(0),
+    fPrintGeneralCutsCmd(0),
+    fPrintGeneralControlsCmd(0)
 { 
 //
   fDirectory = new G4UIdirectory("/mcPhysics/");
@@ -58,17 +65,6 @@ TG4PhysicsMessenger::TG4PhysicsMessenger(TG4PhysicsManager* physicsManager)
 }
 
 //_____________________________________________________________________________
-TG4PhysicsMessenger::TG4PhysicsMessenger(){
-//
-} 
-
-//_____________________________________________________________________________
-TG4PhysicsMessenger::TG4PhysicsMessenger(const TG4PhysicsMessenger& right) {
-// 
-  TG4Globals::Exception("TG4PhysicsMessenger is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4PhysicsMessenger::~TG4PhysicsMessenger() {
 //
 
@@ -80,21 +76,6 @@ TG4PhysicsMessenger::~TG4PhysicsMessenger() {
   delete fPrintGeneralControlsCmd;
 }
 
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4PhysicsMessenger& TG4PhysicsMessenger::operator=(const TG4PhysicsMessenger& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception("TG4PhysicsMessenger is protected from assigning.");
-    
-  return *this;  
-}    
-          
 //
 // public methods
 //

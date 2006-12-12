@@ -1,4 +1,4 @@
-// $Id: TG4MagneticField.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4MagneticField.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
 // Category: geometry
 //
 // Class TG4ParticlesManager
@@ -17,8 +17,10 @@
 
 //_____________________________________________________________________________
 TG4MagneticField::TG4MagneticField()
-  : G4MagneticField() {
-//
+  : G4MagneticField() 
+{
+/// Standard constructor
+
   G4FieldManager* fieldManager
      = G4TransportationManager::GetTransportationManager()->GetFieldManager();
   fieldManager->SetDetectorField(this);
@@ -26,8 +28,9 @@ TG4MagneticField::TG4MagneticField()
 }
 
 //_____________________________________________________________________________
-TG4MagneticField::~TG4MagneticField() {
-//
+TG4MagneticField::~TG4MagneticField() 
+{
+/// Destructor
 }
 
 //
@@ -42,7 +45,7 @@ void TG4MagneticField::GetFieldValue(const G4double point[3], G4double* bfield) 
   // Set units
   const G4double g3point[3] = { point[0] / TG4G3Units::Length(),
                                  point[1] / TG4G3Units::Length(),
-				 point[2] / TG4G3Units::Length() };
+                                 point[2] / TG4G3Units::Length() };
 
   TVirtualMCApplication::Instance()->Field(g3point, bfield);
   

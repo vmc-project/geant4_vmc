@@ -1,4 +1,4 @@
-// $Id: TG4G3ControlVector.cxx,v 1.4 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4G3ControlVector.cxx,v 1.5 2005/07/22 10:22:48 brun Exp $
 // Category: global
 //
 // Class TG4G3ControlVector 
@@ -27,6 +27,7 @@ TG4StringVector TG4G3ControlVector::fgControlNameVector;
 
 //_____________________________________________________________________________
 TG4G3ControlVector::TG4G3ControlVector()
+  : fControlVector()
 {
   // initialize fControlVector 
   for (G4int i=0; i<=kNoG3Controls; i++) 
@@ -75,7 +76,7 @@ TG4G3ControlValue TG4G3ControlVector::operator[](G4int index) const
     return fControlVector[index];
   else {
     TG4Globals::Exception(
-      "TG4G3ControlVector::operator[]: index out of the vector scope");
+      "TG4G3ControlVector", "operator[]", "Index out of the vector scope");
     return kUnsetControlValue;  
   }    
 }  
@@ -166,7 +167,7 @@ TG4G3ControlValue TG4G3ControlVector::GetControlValue(G4int value,
         return kActivate;
       else
         return kUnsetControlValue;
-      ;;	      	  
+      ;;                        
   }    
   return kUnsetControlValue;
 }    
@@ -184,7 +185,7 @@ TG4G3ControlValue TG4G3ControlVector::GetControlValue(G4double value,
 //_____________________________________________________________________________
 G4bool TG4G3ControlVector::SetControl(TG4G3Control control, 
                                       TG4G3ControlValue controlValue,
-				      TG4G3CutVector& cuts)
+                                      TG4G3CutVector& cuts)
 {
 /// Set the controlValue for the specified process control.
 /// Modify cuts if necessary.
@@ -194,7 +195,7 @@ G4bool TG4G3ControlVector::SetControl(TG4G3Control control,
     if (controlValue == kActivate &&
         GetControlValue(kLOSS) == kActivate2) {
       TG4Globals::Warning(
-        "TG4Limits::SetG3Control: Cannot set DRAY=1 when LOSS=2.");    
+        "TG4Limits", "SetG3Control", "Cannot set DRAY=1 when LOSS=2.");    
       return false;
     }
     else 
@@ -203,7 +204,7 @@ G4bool TG4G3ControlVector::SetControl(TG4G3Control control,
   if (control == kLOSS && controlValue == kActivate2) {
     SetControl(kDRAY, kInActivate, cuts);
     cuts.SetDeltaRaysOn(false);  
-  }	
+  }        
 
   fControlVector[control] = controlValue;
   return true;
@@ -242,7 +243,7 @@ G4bool TG4G3ControlVector::Update(const TG4G3ControlVector& vector)
   if (passed  == kActivate2) passed = kActivate;
   if (current == kActivate2) current = kActivate;
            // there is no need to distinguish 
-	   // kActivate, kActivate2 after Init phase
+           // kActivate, kActivate2 after Init phase
 
   if (current == passed) current = kUnsetControlValue;
            // if both kLOSS values will have the same effect
@@ -271,18 +272,18 @@ G4String TG4G3ControlVector::Format() const
     //if (i != kDRAY) {
       tmpStream << "    " << fgControlNameVector[i] 
                 << " control value: " << fControlVector[i] << G4endl; 
-    //}	     
+    //}             
     
   return tmpStream.str();  
-}	   
+}           
 
 //_____________________________________________________________________________
 void TG4G3ControlVector::Print() const
 {
 /// Print the controls.
 
-  G4cout << Format();	     
-}	   
+  G4cout << Format();             
+}           
 
 //_____________________________________________________________________________
 TG4G3ControlValue 

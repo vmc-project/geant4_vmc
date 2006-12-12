@@ -1,4 +1,4 @@
-// $Id: TG4ProcessMCMap.cxx,v 1.2 2003/12/18 13:27:46 brun Exp $
+// $Id: TG4ProcessMCMap.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: physics
 //
 // Class TG4ProcessMCMap
@@ -18,44 +18,24 @@
 TG4ProcessMCMap* TG4ProcessMCMap::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4ProcessMCMap::TG4ProcessMCMap() {
+TG4ProcessMCMap::TG4ProcessMCMap() 
+  : fMap()
+{
 //
   if (fgInstance) {
     TG4Globals::Exception(
-      "TG4ProcessMCMap: attempt to create two instances of singleton.");
+      "TG4ProcessMCMap", "TG4ProcessMCMap",
+      "Cannot create two instances of singleton.");
   }
       
   fgInstance = this;  
 }
 
 //_____________________________________________________________________________
-TG4ProcessMCMap::TG4ProcessMCMap(const TG4ProcessMCMap& right) {
-//
-  TG4Globals::Exception(    
-    "Attempt to copy TG4ProcessMCMap singleton.");
-}  
-
-//_____________________________________________________________________________
 TG4ProcessMCMap::~TG4ProcessMCMap() {
 //
 }
 
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4ProcessMCMap& TG4ProcessMCMap::operator=(const TG4ProcessMCMap& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception(
-    "Attempt to assign TG4ProcessMCMap singleton.");
-    
-  return *this;  
-}    
-          
 //
 // private methods
 //
@@ -112,8 +92,8 @@ void TG4ProcessMCMap::PrintAll() const
       TMCProcess mcProcess = (*i).second;
       G4cout << "Map element " << std::setw(3) << counter++ << "   " 
              << processName << "   " 
-	     << TMCProcessName[mcProcess]
-	     << G4endl;
+             << TMCProcessName[mcProcess]
+             << G4endl;
     }
   }
 }

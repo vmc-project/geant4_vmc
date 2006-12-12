@@ -1,4 +1,4 @@
-// $Id: TG4G3PhysicsManager.h,v 1.5 2005/03/29 10:39:53 brun Exp $
+// $Id: TG4G3PhysicsManager.h,v 1.6 2005/09/01 10:04:33 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4G3PhysicsManager
@@ -36,8 +36,6 @@ class TG4G3PhysicsManager
 {
   public:
     TG4G3PhysicsManager();
-    // --> protected
-    // TG4G3PhysicsManager(const TG4G3PhysicsManager& right);
     virtual ~TG4G3PhysicsManager();
         
     // static access method
@@ -51,7 +49,7 @@ class TG4G3PhysicsManager
              G4String name, G4double value, TG4G3Cut& cut);   
     G4bool CheckControlWithTheVector(
              G4String name, G4double value, 
-	     TG4G3Control& control, TG4G3ControlValue& controlValue); 
+             TG4G3Control& control, TG4G3ControlValue& controlValue); 
 
     // set methods
     void SetCut(TG4G3Cut cut, G4double cutValue);
@@ -71,19 +69,16 @@ class TG4G3PhysicsManager
     TG4G3ParticleWSP  GetG3ParticleWSP(G4ParticleDefinition* particle) const;
     G4String GetG3ParticleWSPName(G4int particleWSP) const;
     
-  protected:
+  private:
     TG4G3PhysicsManager(const TG4G3PhysicsManager& right);
-
-    // operators
     TG4G3PhysicsManager& operator=(const TG4G3PhysicsManager& right);
 
-  private:
     // methods
     G4bool CheckCutWithG3Defaults(
              G4String name, G4double value, TG4G3Cut& cut); 
     G4bool CheckControlWithG3Defaults(
              G4String name, G4double value, 
-	     TG4G3Control& control, TG4G3ControlValue& controlValue); 
+             TG4G3Control& control, TG4G3ControlValue& controlValue); 
     // set methods
     void SwitchIsCutVector(TG4G3Cut cut);
     void SwitchIsControlVector(TG4G3Control control);
@@ -96,7 +91,7 @@ class TG4G3PhysicsManager
     TG4G3ControlVector*  fControlVector;//TG4ControlVector
     TG4boolVector*    fIsCutVector;     //vector of booleans which cuts are set
     TG4boolVector*    fIsControlVector; //vector of booleans which controls are set
-    TG4G3Defaults     fG3Defaults;      // G3 default cuts/controls					  
+    TG4G3Defaults     fG3Defaults;      // G3 default cuts/controls                                          
     G4bool            fLock;  //if true: cut/control vectors cannot be modified
 };
 

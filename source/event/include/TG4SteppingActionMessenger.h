@@ -1,4 +1,4 @@
-// $Id: TG4SteppingActionMessenger.h,v 1.2 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4SteppingActionMessenger.h,v 1.3 2005/09/01 10:04:32 brun Exp $
 /// \ingroup event
 //
 /// \class TG4SteppingActionMessenger
@@ -21,23 +21,17 @@ class TG4SteppingActionMessenger: public G4UImessenger
 {
   public:
     TG4SteppingActionMessenger(TG4SteppingAction* steppingAction);
-    // --> protected
-    // TG4SteppingActionMessenger();
-    // TG4SteppingActionMessenger(const TG4SteppingActionMessenger& right);
     virtual ~TG4SteppingActionMessenger();
    
     // methods 
     virtual void SetNewValue(G4UIcommand* command, G4String string);
     
-  protected:
+  private:
     TG4SteppingActionMessenger();
     TG4SteppingActionMessenger(const TG4SteppingActionMessenger& right);
-
-    // operators
     TG4SteppingActionMessenger& operator=(
-                            const TG4SteppingActionMessenger& right);
+                               const TG4SteppingActionMessenger& right);
 
-  private:
     // data members
     TG4SteppingAction*     fSteppingAction; //associated class  
     G4UIcmdWithAnInteger*  fLoopVerboseCmd; //command: loopVerbose

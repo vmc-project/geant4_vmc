@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.h,v 1.8 2005/11/18 21:29:35 brun Exp $
+// $Id: TG4ModularPhysicsList.h,v 1.9 2006/01/13 16:59:38 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4ModularPhysicsList
@@ -30,8 +30,6 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
   public:
     TG4ModularPhysicsList(const TG4PhysicsListOptions& options);
     TG4ModularPhysicsList();
-    // --> protected
-    // TG4ModularPhysicsList(const TG4ModularPhysicsList& right);
     virtual ~TG4ModularPhysicsList();
   
     // methods
@@ -48,11 +46,6 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
     void SetMaxNumPhotonsPerStep(Int_t maxNumPhotons);
     
   protected:
-    TG4ModularPhysicsList(const TG4ModularPhysicsList& right);
-
-    // operators
-    TG4ModularPhysicsList& operator=(const TG4ModularPhysicsList& right);
-
     // static data members
     static const G4double  fgkDefaultCutValue; //default cut value
 
@@ -62,6 +55,9 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
     TG4PhysicsListOptions          fOptions;
 
   private:
+    TG4ModularPhysicsList(const TG4ModularPhysicsList& right);
+    TG4ModularPhysicsList& operator=(const TG4ModularPhysicsList& right);
+
     // methods
     void Configure();
     void SetProcessActivation(G4ProcessManager* processManager,

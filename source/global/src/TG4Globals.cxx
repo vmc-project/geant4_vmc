@@ -1,4 +1,4 @@
-// $Id: TG4Globals.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4Globals.cxx,v 1.4 2005/07/22 10:22:48 brun Exp $
 // Category: global
 //
 // Class TG4Globals
@@ -11,11 +11,8 @@
 
 #include <stdlib.h>
 
-//_____________________________________________________________________________
-TG4Globals::TG4Globals() {
-//
-}
-  
+const TString TG4Globals::fgkEndl = "x\n";
+
 //_____________________________________________________________________________
 TG4Globals::~TG4Globals() {
 //
@@ -26,25 +23,33 @@ TG4Globals::~TG4Globals() {
 //
 
 //_____________________________________________________________________________
-void TG4Globals::Exception(const char* string)
+void TG4Globals::Exception(const TString& className,const TString& methodName,
+                           const TString& text)
 {
 /// Print error message end exit the program.
 
-  if (string)
-  {  G4cerr << G4endl << "    " << string << G4endl; }
-  G4cerr << "*** TG4Exception: Aborting execution ***" << G4endl;   
+  TString newText = "x\n" + className + "::" + methodName + ":x\n";
+  newText += text + "\n";
+  newText += "*** TG4Exception: Aborting execution ***";
+  newText.ReplaceAll("x\n", "\n    ");
+  
+  G4cerr << newText.Data() << G4endl << G4endl;   
   exit(1);
 }
 
 //_____________________________________________________________________________
-void TG4Globals::Warning(const char* string)
+void TG4Globals::Warning(const TString& className,const TString& methodName,
+                         const TString& text)
 {
 /// Print warning message.
 
-  G4cerr << "++++  TG4Warning:  ++++" << G4endl;   
-  if (string)
-  {  G4cerr  << "    " << string << G4endl; }
-  G4cerr << "+++++++++++++++++++++++" << G4endl;   
+  TString newText = "++++  TG4Warning:  ++++x\n";
+  newText += className + "::" + methodName + ":x\n";
+  newText += text + "\n";
+  newText += "+++++++++++++++++++++++";
+  newText.ReplaceAll("x\n", "\n    ");
+  
+  G4cerr << newText.Data() << G4endl << G4endl;   
 }
 
 //_____________________________________________________________________________
@@ -74,7 +79,7 @@ G4bool TG4Globals::Compare(G4bool activation, TG4G3ControlValue controlValue)
 
   if (controlValue == kUnsetControlValue) {
     TG4Globals::Warning(
-      "TG4SpecialControls::Compare: control value = kUnset.");
+      "TG4Globals", "Compare", "Control value = kUnset.");
     return false;
   }    
 

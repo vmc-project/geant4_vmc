@@ -1,4 +1,4 @@
-// $Id: TG4ParticleGunMessenger.cxx,v 1.2 2002/12/18 09:35:31 brun Exp $
+// $Id: TG4ParticleGunMessenger.cxx,v 1.3 2004/11/10 11:39:27 brun Exp $
 // Category: event
 //
 // Class TG4ParticleGunMessenger
@@ -25,7 +25,24 @@
 
 //_____________________________________________________________________________
 TG4ParticleGunMessenger::TG4ParticleGunMessenger(TG4ParticleGun* gun)
-  : fGun(gun)
+  : G4UImessenger(),
+    fGun(gun),
+    fParticle(0),
+    fGunDirectory(0),
+    fListAvailableCmd(0),
+    fListCurrentCmd(0),
+    fParticleCmd(0),
+    fMomentumCmd(0),
+    fPositionCmd(0),
+    fTimeCmd(0),
+    fPolarizationCmd(0),
+    fDirectionCmd(0),
+    fKinEnergyCmd(0),
+    fListCmd(0),
+    fAddParticleCmd(0),
+    fRemoveParticleCmd(0),
+    fResetCmd(0)
+    
 {
 //
   fGunDirectory = new G4UIdirectory("/mcGun/");
@@ -144,18 +161,6 @@ TG4ParticleGunMessenger::TG4ParticleGunMessenger(TG4ParticleGun* gun)
 }
 
 //_____________________________________________________________________________
-TG4ParticleGunMessenger::TG4ParticleGunMessenger() {
-//
-}
-
-//_____________________________________________________________________________
-TG4ParticleGunMessenger::TG4ParticleGunMessenger(
-                                 const TG4ParticleGunMessenger& right) {
-//				 
-  TG4Globals::Exception("TG4ParticleGunMessenger is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4ParticleGunMessenger::~TG4ParticleGunMessenger() {
 //
   delete fListAvailableCmd;
@@ -172,21 +177,6 @@ TG4ParticleGunMessenger::~TG4ParticleGunMessenger() {
   delete fResetCmd;
   delete fGunDirectory;
   delete fParticle;
-}
-
-//
-// operators
-//
-
-TG4ParticleGunMessenger& 
-TG4ParticleGunMessenger::operator=(const TG4ParticleGunMessenger &right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-  
-  TG4Globals::Exception("TG4ParticleGunMessenger is protected from assigning.");
-
-  return *this;
 }
 
 //

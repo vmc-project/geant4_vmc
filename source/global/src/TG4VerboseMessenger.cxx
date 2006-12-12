@@ -1,4 +1,4 @@
-// $Id: TG4VerboseMessenger.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4VerboseMessenger.cxx,v 1.4 2005/01/28 12:29:38 brun Exp $
 // Category: global
 //
 // Class TG4VerboseMessenger
@@ -19,7 +19,11 @@
 
 //_____________________________________________________________________________
 TG4VerboseMessenger::TG4VerboseMessenger(const G4String& directoryName)
-  : fkDirectoryName(directoryName)
+  : fkDirectoryName(directoryName),
+    fDirectory(0),
+    fGlobalVerboseCmd(0),
+    fVerboseVector(),
+    fCommandVector()
 { 
 //
 
@@ -36,17 +40,6 @@ TG4VerboseMessenger::TG4VerboseMessenger(const G4String& directoryName)
 }
 
 //_____________________________________________________________________________
-TG4VerboseMessenger::TG4VerboseMessenger(){
-//
-} 
-
-//_____________________________________________________________________________
-TG4VerboseMessenger::TG4VerboseMessenger(const TG4VerboseMessenger& right) {
-// 
-  TG4Globals::Exception("TG4VerboseMessenger is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4VerboseMessenger::~TG4VerboseMessenger() {
 //
 
@@ -57,21 +50,6 @@ TG4VerboseMessenger::~TG4VerboseMessenger() {
     delete fCommandVector[i];
 }
 
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4VerboseMessenger& TG4VerboseMessenger::operator=(const TG4VerboseMessenger& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception("TG4VerboseMessenger is protected from assigning.");
-    
-  return *this;  
-}    
-          
 //
 // private methods
 //
@@ -88,7 +66,7 @@ void TG4VerboseMessenger::SetNewValueToAll(const G4String value) const
      if (cmdTree->GetCommand(i+1)->GetCommandName() != "all") {    
         // skip the first command in the tree ("all")
         cmdTree->GetCommand(i+1)->DoIt(value);     
-     }	
+     }        
    }  
 }
 

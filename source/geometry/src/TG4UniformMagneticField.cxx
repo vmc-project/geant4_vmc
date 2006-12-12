@@ -1,4 +1,4 @@
-// $Id: TG4UniformMagneticField.cxx,v 1.2 2003/02/28 16:33:29 brun Exp $
+// $Id: TG4UniformMagneticField.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: geometry
 //
 // Class TG4UniformMagneticField
@@ -21,7 +21,8 @@
 TG4UniformMagneticField::TG4UniformMagneticField()
   : G4UniformMagField(G4ThreeVector()) 
 {
-//
+/// Default constructor
+
   GetGlobalFieldManager()->SetDetectorField(this);
   GetGlobalFieldManager()->CreateChordFinder(this);
 }
@@ -30,7 +31,8 @@ TG4UniformMagneticField::TG4UniformMagneticField()
 TG4UniformMagneticField::TG4UniformMagneticField(G4ThreeVector fieldVector)
   : G4UniformMagField(fieldVector)
 {    
-//
+/// Constructor from given fieldVector
+
   GetGlobalFieldManager()->SetDetectorField(this);
   GetGlobalFieldManager()->CreateChordFinder(this);
 }
@@ -39,14 +41,16 @@ TG4UniformMagneticField::TG4UniformMagneticField(G4ThreeVector fieldVector)
 TG4UniformMagneticField::TG4UniformMagneticField(const TG4UniformMagneticField& right)
   : G4UniformMagField(right)
 {
-//  
+/// Copy constructor
+
   GetGlobalFieldManager()->SetDetectorField(this);
   GetGlobalFieldManager()->CreateChordFinder(this);
 }
 
 //_____________________________________________________________________________
-TG4UniformMagneticField::~TG4UniformMagneticField() {
-//
+TG4UniformMagneticField::~TG4UniformMagneticField() 
+{
+/// Destructor
 }
 
 //
@@ -56,7 +60,7 @@ TG4UniformMagneticField::~TG4UniformMagneticField() {
 //_____________________________________________________________________________
 TG4UniformMagneticField& 
 TG4UniformMagneticField::operator=(const TG4UniformMagneticField& right)
-{				  
+{                                  
   // check assignement to self
   if (this == &right) return *this;
 

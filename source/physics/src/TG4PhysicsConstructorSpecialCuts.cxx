@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorSpecialCuts.cxx,v 1.4 2005/03/29 10:39:53 brun Exp $
+// $Id: TG4PhysicsConstructorSpecialCuts.cxx,v 1.5 2006/01/13 16:59:39 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsConstructorSpecialCuts
@@ -38,7 +38,7 @@ TG4PhysicsConstructorSpecialCuts::TG4PhysicsConstructorSpecialCuts(
 //_____________________________________________________________________________
 TG4PhysicsConstructorSpecialCuts::TG4PhysicsConstructorSpecialCuts(
                                      G4int verboseLevel,
-				     const G4String& name)
+                                     const G4String& name)
   : TG4VPhysicsConstructor(name, verboseLevel),
     fSpecialCutsForGamma(0),
     fSpecialCutsForElectron(0),
@@ -113,28 +113,28 @@ void TG4PhysicsConstructorSpecialCuts::ConstructProcess()
       switch (particleWSP) {
         case kGamma:
           pManager->AddDiscreteProcess(fSpecialCutsForGamma);
-	      break;
+              break;
         case kElectron:
           pManager->AddDiscreteProcess(fSpecialCutsForElectron);
-	      break;
+              break;
         case kEplus:  
           pManager->AddDiscreteProcess(fSpecialCutsForEplus);
-	      break;
+              break;
         case kChargedHadron:  
           pManager->AddDiscreteProcess(fSpecialCutsForChargedHadron);
-	      break;
+              break;
         case kNeutralHadron:  
           pManager->AddDiscreteProcess(fSpecialCutsForNeutralHadron);
-	      break;
+              break;
         case kMuon:  
           pManager->AddDiscreteProcess(fSpecialCutsForMuon);
-	      break;
+              break;
         case kAny:
           pManager->AddDiscreteProcess(fSpecialCutsForOther);
-	      break;
+              break;
         case kNofParticlesWSP:
-	      // cannot happen
-	      break;
+              // cannot happen
+              break;
       }
     }    
   }

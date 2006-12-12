@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsListMessenger.h,v 1.5 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4PhysicsListMessenger.h,v 1.6 2006/01/13 16:59:38 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsListMessenger
@@ -26,22 +26,16 @@ class TG4PhysicsListMessenger: public G4UImessenger
 {
   public:
     TG4PhysicsListMessenger(TG4ModularPhysicsList* physicsList); 
-    // --> protected   
-    // TG4PhysicsListMessenger();
-    // TG4PhysicsListMessenger(const TG4PhysicsListMessenger& right);
     virtual ~TG4PhysicsListMessenger();
    
     // methods 
     virtual void SetNewValue(G4UIcommand* command, G4String string);
     
-  protected:
+  private:
     TG4PhysicsListMessenger();  
     TG4PhysicsListMessenger(const TG4PhysicsListMessenger& right);
-
-    // operators
     TG4PhysicsListMessenger& operator=(const TG4PhysicsListMessenger& right);
 
-  private:
     // data members
     TG4ModularPhysicsList*  fPhysicsList;     //associated class
 
@@ -49,7 +43,7 @@ class TG4PhysicsListMessenger: public G4UImessenger
     G4UIcmdWithADouble*       fRangeCutCmd;   //rangeCut command  
     G4UIcmdWithoutParameter*  fProcessActivationCmd; //.
                                               //setProcessActivation command
-    G4UIcmdWithAnInteger*     fSetCerenkovMaxPhotonsCmd; 					          
+    G4UIcmdWithAnInteger*     fSetCerenkovMaxPhotonsCmd;                                                   
 };                                            //setCerenkovMaxPhotons command
 
 #endif //TG4_PHYSICS_LIST_MESSENGER_H

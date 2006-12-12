@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorOptical.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PhysicsConstructorOptical.cxx,v 1.4 2005/05/17 13:43:57 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsConstructorOptical
@@ -37,7 +37,7 @@ TG4PhysicsConstructorOptical::TG4PhysicsConstructorOptical(const G4String& name)
 
 //_____________________________________________________________________________
 TG4PhysicsConstructorOptical::TG4PhysicsConstructorOptical(G4int verboseLevel,
-							   const G4String& name)
+                                                           const G4String& name)
   : TG4VPhysicsConstructor(name, verboseLevel),
     fCerenkovProcess(0),
     fScintillationProcess(0),

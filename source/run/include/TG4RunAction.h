@@ -1,4 +1,4 @@
-// $Id: TG4RunAction.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4RunAction.h,v 1.3 2005/09/01 10:04:33 brun Exp $
 /// \ingroup run
 //
 /// \class TG4RunAction
@@ -24,21 +24,16 @@ class TG4RunAction : public G4UserRunAction,
 {
   public:
     TG4RunAction();
-    // --> protected
-    // TG4RunAction(const TG4RunAction& right);
     virtual ~TG4RunAction();
 
     // methods
     virtual void BeginOfRunAction(const G4Run* run);
     virtual void EndOfRunAction(const G4Run* run);
 
-  protected:
+  private:
     TG4RunAction(const TG4RunAction& right);
-
-    // operators
     TG4RunAction& operator=(const TG4RunAction& right);
 
-  private:
     // data members
     G4Timer*  fTimer; //G4Timer
     G4int     fRunID; //run ID

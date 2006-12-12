@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorOptical.h,v 1.4 2005/05/17 13:43:57 brun Exp $
+// $Id: TG4PhysicsConstructorOptical.h,v 1.5 2005/09/01 10:04:33 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorOptical
@@ -39,6 +39,9 @@ class TG4PhysicsConstructorOptical: public TG4VPhysicsConstructor
     virtual void ConstructProcess();
 
   private:
+    TG4PhysicsConstructorOptical(const TG4PhysicsConstructorOptical& right);
+    TG4PhysicsConstructorOptical& operator=(const TG4PhysicsConstructorOptical& right);
+
     static  const G4int  fgkDefaultMaxNumPhotonsPerStep;
           
   

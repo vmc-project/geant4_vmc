@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorEM.h,v 1.4 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4PhysicsConstructorEM.h,v 1.5 2006/01/13 16:59:38 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsConstructorEM
@@ -53,6 +53,9 @@ class TG4PhysicsConstructorEM: public TG4VPhysicsConstructor
     G4eplusAnnihilation*   fAnnihilation;              //e+ annihilation
     
   private:
+    TG4PhysicsConstructorEM(const TG4PhysicsConstructorEM& right);
+    TG4PhysicsConstructorEM& operator=(const TG4PhysicsConstructorEM& right);
+
     // methods
     void ConstructProcessForGamma();    
     void ConstructProcessForElectron();    

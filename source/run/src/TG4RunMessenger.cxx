@@ -1,4 +1,4 @@
-// $Id: TG4RunMessenger.cxx,v 1.2 2002/12/18 09:35:32 brun Exp $
+// $Id: TG4RunMessenger.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
 // Category: run
 //
 // Class TG4RunMessenger
@@ -18,7 +18,13 @@
 
 //_____________________________________________________________________________
 TG4RunMessenger::TG4RunMessenger(TG4RunManager* runManager)
-  : fRunManager(runManager)
+  : G4UImessenger(),
+    fRunManager(runManager),
+    fDirectory(0),
+    fRootCmd(0),            
+    fRootMacroCmd(0),  
+    fRootCommandCmd(0),
+    fG3DefaultsCmd(0) 
 { 
 //
   fDirectory = new G4UIdirectory("/mcControl/");
@@ -49,17 +55,6 @@ TG4RunMessenger::TG4RunMessenger(TG4RunManager* runManager)
 }
 
 //_____________________________________________________________________________
-TG4RunMessenger::TG4RunMessenger(){
-//
-} 
-
-//_____________________________________________________________________________
-TG4RunMessenger::TG4RunMessenger(const TG4RunMessenger& right) {
-// 
-  TG4Globals::Exception("TG4RunMessenger is protected from copying.");
-}
-
-//_____________________________________________________________________________
 TG4RunMessenger::~TG4RunMessenger() {
 //
   delete fDirectory;
@@ -69,21 +64,6 @@ TG4RunMessenger::~TG4RunMessenger() {
   delete fG3DefaultsCmd;
 }
 
-//
-// operators
-//
-
-//_____________________________________________________________________________
-TG4RunMessenger& TG4RunMessenger::operator=(const TG4RunMessenger& right)
-{
-  // check assignement to self
-  if (this == &right) return *this;
-
-  TG4Globals::Exception("TG4RunMessenger is protected from assigning.");
-    
-  return *this;  
-}    
-          
 //
 // public methods
 //

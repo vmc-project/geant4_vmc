@@ -1,4 +1,4 @@
-// $Id: TG4SDManager.h,v 1.4 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4SDManager.h,v 1.5 2006/01/13 16:59:38 brun Exp $
 /// \ingroup digits_hits
 //
 /// \class TG4SDManager
@@ -21,8 +21,6 @@ class TG4SDManager
 {
   public:
     TG4SDManager();
-    // --> protected
-    // TG4SDManager(const TG4SDManager& right);
     virtual ~TG4SDManager();
 
     // static methods
@@ -34,6 +32,7 @@ class TG4SDManager
     // TVirtualMC methods
     Int_t VolId(const Text_t* volName) const;                
     const char* VolName(Int_t id) const;
+    Int_t MediumId(const Text_t* mediumName) const;
     Int_t NofVolumes() const; 
     Int_t NofVolDaughters(const char* volName) const;
     const char*  VolDaughterName(const char* volName, Int_t i) const;
@@ -43,10 +42,8 @@ class TG4SDManager
     // get methods
     TG4SDConstruction* GetSDConstruction() const;
 
-  protected:
+  private:
     TG4SDManager(const TG4SDManager& right);
-
-    // operators
     TG4SDManager& operator=(const TG4SDManager& right);
 
     // static data members

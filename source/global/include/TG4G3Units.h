@@ -1,4 +1,4 @@
-// $Id: TG4G3Units.h,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4G3Units.h,v 1.3 2005/09/01 10:04:32 brun Exp $
 /// \ingroup global
 //
 /// \class TG4G3Units
@@ -16,8 +16,6 @@
 class TG4G3Units
 {
   public:
-    // --> protected
-    // TG4G3Units();  
     virtual ~TG4G3Units();
 
     // static get methods
@@ -31,11 +29,9 @@ class TG4G3Units
     static G4double AtomicWeight();     
     static G4double Field(); 
       
-  protected:
-    TG4G3Units();      
-        // only static data members and methods
-
   private:
+    TG4G3Units();      
+
     // static data members  
     static const G4double fgkLength;       //G3 length unit 
     static const G4double fgkAngle;        //G3 angle unit 

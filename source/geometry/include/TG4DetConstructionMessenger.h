@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.h,v 1.6 2005/02/02 14:16:21 brun Exp $
+// $Id: TG4DetConstructionMessenger.h,v 1.7 2005/09/01 10:04:32 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4DetConstructionMessenger
@@ -12,7 +12,7 @@
 #include <G4UImessenger.hh>
 #include <globals.hh>
 
-class TG4DetConstruction;
+class TG4GeometryManager;
 
 class G4UIcommand;
 class G4UIdirectory;
@@ -24,34 +24,27 @@ class G4UIcmdWithADoubleAndUnit;
 class TG4DetConstructionMessenger: public G4UImessenger
 {
   public:
-    TG4DetConstructionMessenger(TG4DetConstruction* modulesComposition);
-    // --> protected
-    // TG4DetConstructionMessenger();
-    // TG4DetConstructionMessenger(const TG4DetConstructionMessenger& right);
+    TG4DetConstructionMessenger(TG4GeometryManager* geometryManager);
     virtual ~TG4DetConstructionMessenger();
 
     // methods
     virtual void SetNewValue(G4UIcommand* command, G4String newValues);
     
-  protected:
+  private:
     TG4DetConstructionMessenger();
     TG4DetConstructionMessenger(const TG4DetConstructionMessenger& right);
-
-    // operators
     TG4DetConstructionMessenger& operator=(
                                 const TG4DetConstructionMessenger &right);
-             
-  private:
-    TG4DetConstruction*  fDetConstruction; //associated class
+
+    TG4GeometryManager*  fGeometryManager; //associated class
     G4UIdirectory*       fDirectory;       //command directory
     
     // commands data members
     G4UIcmdWithAString*         fFieldTypeCmd;        //command: fieldType
     G4UIcmdWithAString*         fSeparatorCmd;        //command: volumeNameSeparator
     G4UIcmdWithADoubleAndUnit*  fUniformFieldValueCmd;//command: uniformFieldValue
-    G4UIcmdWithABool*           fSetReadGeometryCmd;  //command: readGeometry   
-    G4UIcmdWithABool*           fSetWriteGeometryCmd; //command: writeGeometry    
     G4UIcmdWithoutParameter*    fPrintMaterialsCmd;   //command: printMatrials     
+    G4UIcmdWithoutParameter*    fPrintVolumesCmd;     //command: printVolumes    
 };
 
 #endif //TG4_DET_CONSTRUCTION_MESSENGER_H
