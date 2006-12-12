@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.3 2005/05/17 13:44:25 brun Exp $
+# $Id: Makefile,v 1.4 2006/01/13 23:05:52 brun Exp $
 #
 # Makefile for building all examples
 
@@ -6,9 +6,11 @@ MAKEFLAGS= --no-print-directory
 
 SUBDIRS  = E01 E02 E03 E06
 
-ifdef G4INSTALL
+MAKE_GEANT4 := $(shell ls ../include/TG4RunConfiguration.h )
+ifeq ($(MAKE_GEANT4),../include/TG4RunConfiguration.h)
   SUBDIRS += E03/geant4
 endif
+
 
 .PHONY: default
 
