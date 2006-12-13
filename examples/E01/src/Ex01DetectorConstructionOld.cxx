@@ -1,4 +1,4 @@
-// $Id: Ex01DetectorConstructionOld.cxx,v 1.2 2002/12/03 15:04:17 brun Exp $
+// $Id: Ex01DetectorConstructionOld.cxx,v 1.1 2006/12/12 16:21:38 brun Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -82,6 +82,9 @@ void Ex01DetectorConstructionOld::ConstructMaterials()
   Double_t tmaxfd = -20.;    // Maximum angle due to field deflection 
   Double_t deemax = -.3;     // Maximum fractional energy loss, DLS 
   Double_t stmin  = -.8;
+  fImedAr = 1;
+  fImedAl = 2;
+  fImedPb = 3;
   gMC->Medium(fImedAr, "ArgonGas",  imatAr, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0); 
   gMC->Medium(fImedAl, "Aluminium", imatAl, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0); 
   gMC->Medium(fImedPb, "Lead", imatLead, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0); 

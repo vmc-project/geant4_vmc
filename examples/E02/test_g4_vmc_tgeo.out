@@ -10,7 +10,7 @@
   *******************************************
 
 FreeType Engine v2.1.9 used to render TrueType fonts.
-Compiled on 12 December 2006 for linux with thread support.
+Compiled on 13 December 2006 for linux with thread support.
 
 CINT/ROOT C/C++ Interpreter version 5.16.16, November 24, 2006
 Type ? for help. Commands must be C++ statements.
@@ -687,5 +687,5 @@ TParticle: e-             p: 0.000093 -0.000009 0.000009 Vertex: -2.979245e-03 1
 Mother:    proton  with ID: 0
 Number of daughters: 0
 
-Time of this run:   User=0.11s Real=0.11s Sys=0.01s
+Time of this run:   User=0.11s Real=0.12s Sys=0s
 Number of events processed: 5

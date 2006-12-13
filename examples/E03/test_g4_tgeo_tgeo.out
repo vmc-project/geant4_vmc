@@ -10,13 +10,13 @@
   *******************************************
 
 FreeType Engine v2.1.9 used to render TrueType fonts.
-Compiled on 12 December 2006 for linux with thread support.
+Compiled on 13 December 2006 for linux with thread support.
 
 CINT/ROOT C/C++ Interpreter version 5.16.16, November 24, 2006
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_E03.C("g4tgeoConfig.C", kFALSE)...
+Processing test_E03_1.C("g4tgeoConfig.C", kFALSE)...
 Loading Geant4 granular libraries ...
 Loading VGM libraries ... 
 Loading libraries ... finished
@@ -107,6 +107,305 @@ please use one of the available physics lists by use-case.
 
 ### EM physics for hadrons constructed.
 ### Step limiter physics constructed.
+
+**********************************************
+    GEANT4 Geometry statistics: 
+              6 logical volumes
+             14 physical volumes
+              8 materials
+              8 user limits
+              6 sensitive detectors
+**********************************************
+
+
+phot:  Total cross sections from Sandia parametrisation. 
+
+compt:  Total cross sections has a good parametrisation from 10 KeV to (100/Z) GeV
+      Sampling according Klein-Nishina model
+      tables are built for  gamma
+      Lambda tables from 100 eV  to 100 GeV in 90 bins.
+
+conv:  Total cross sections has a good parametrisation from 1.5 MeV to 100 GeV for all Z;
+      sampling secondary e+e- according to the Bethe-Heitler model
+      tables are built for  gamma
+      Lambda tables from 1.022 MeV to 100 GeV in 100 bins.
+
+msc:  Model variant of multiple scattering for e-
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+eIoni:   tables are built for  e-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Delta cross sections from Moller+Bhabha, good description from 1 KeV to 100 GeV.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+eBrem:   tables are built for  e-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Total cross sections from a parametrisation based on the EEDL data library. 
+      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
+
+eIoni:   tables are built for  e+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Delta cross sections from Moller+Bhabha, good description from 1 KeV to 100 GeV.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+eBrem:   tables are built for  e+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Total cross sections from a parametrisation based on the EEDL data library. 
+      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
+
+annihil:       Heilter model of formula of annihilation into 2 photons
+      tables are built for  e+
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
+
+hIoni:   tables are built for  proton
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 2 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+msc:  Model variant of multiple scattering for proton
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+msc:  Model variant of multiple scattering for GenericIon
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+hIoni:   tables are built for  anti_proton
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 2 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+msc:  Model variant of multiple scattering for mu+
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+muIoni:   tables are built for  mu+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
+      radiative corrections for E > 1 GeV
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+muBrems:   tables are built for  mu+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Parametrised model 
+
+muPairProd:   tables are built for  mu+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Parametrised model 
+
+muIoni:   tables are built for  mu-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
+      radiative corrections for E > 1 GeV
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+muBrems:   tables are built for  mu-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Parametrised model 
+
+muPairProd:   tables are built for  mu-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Parametrised model 
+
+hIoni:   tables are built for  pi+
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 0.297504 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+hIoni:   tables are built for  pi-
+      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
+      Lambda tables from threshold to 100 TeV in 120 bins.
+      Scaling relation is used to proton dE/dx and range
+      Bether-Bloch model for Escaled > 0.297504 MeV, ICRU49 parametrisation for protons below.
+      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
+
+msc:  Model variant of multiple scattering for pi-
+      Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+
+========= Table of registered couples ==============================
+
+Index : 0     used in the geometry : Yes     recalculation needed : No 
+ Material : Air
+ Range cuts        :  gamma 1 mm     e- 1 mm     e+ 1 mm 
+ Energy thresholds :  gamma 990 eV     e- 990 eV     e+ 990 eV 
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
+Index : 1     used in the geometry : Yes     recalculation needed : No 
+ Material : Galactic
+ Range cuts        :  gamma 1 mm     e- 1 mm     e+ 1 mm 
+ Energy thresholds :  gamma 990 eV     e- 990 eV     e+ 990 eV 
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
+Index : 2     used in the geometry : Yes     recalculation needed : No 
+ Material : Lead
+ Range cuts        :  gamma 1 mm     e- 1 mm     e+ 1 mm 
+ Energy thresholds :  gamma 100.511 keV    e- 1.37814 MeV    e+ 1.28002 MeV
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
+Index : 3     used in the geometry : Yes     recalculation needed : No 
+ Material : liquidArgon
+ Range cuts        :  gamma 1 mm     e- 1 mm     e+ 1 mm 
+ Energy thresholds :  gamma 6.17835 keV    e- 342.891 keV    e+ 334.551 keV
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
+====================================================================
+
+### Run 0 start.
+
+---> Begin of event: 1
+   Absorber: total energy (MeV): 908.542       total track length (cm):  53.5834
+   Gap:      total energy (MeV): 53.1432       total track length (cm):  26.0615
+
+---> Begin of event: 2
+   Absorber: total energy (MeV): 935.126       total track length (cm):  53.2126
+   Gap:      total energy (MeV): 20.9455       total track length (cm):  9.08779
+
+---> Begin of event: 3
+   Absorber: total energy (MeV): 912.428       total track length (cm):  53.2718
+   Gap:      total energy (MeV): 28.6377       total track length (cm):  14.0029
+
+---> Begin of event: 4
+   Absorber: total energy (MeV): 928.755       total track length (cm):   55.221
+   Gap:      total energy (MeV): 27.0563       total track length (cm):  13.2562
+
+---> Begin of event: 5
+   Absorber: total energy (MeV): 917.589       total track length (cm):  52.3619
+   Gap:      total energy (MeV): 33.7138       total track length (cm):  16.7049
+Time of this run:   User=0.82s Real=0.82s Sys=0.01s
+Number of events processed: 5
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version   5.13/07  21 November 2006   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+FreeType Engine v2.1.9 used to render TrueType fonts.
+Compiled on 13 December 2006 for linux with thread support.
+
+CINT/ROOT C/C++ Interpreter version 5.16.16, November 24, 2006
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+
+Processing test_E03_2.C("g4tgeoConfig.C", kFALSE)...
+Loading Geant4 granular libraries ...
+Loading VGM libraries ... 
+Loading libraries ... finished
+--- Init MC 
+--- Construct geometry 
+Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
+Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoManager::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in Root geometry manager
+Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
+
+------------------------------------------------------------
+---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
+------------------------------------------------------------
+Running TVirtualMCApplication::ConstructGeometry
+*************************************************************
+ Geant4 version Name: geant4-08-01-patch-02    (10-November-2006)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+Info in <TG4RootNavMgr::Initialize>: Creating G4 hierarchy ...
+Info in <TGeoManager::ConvertReflections>: Converting reflections in: TGeo - Root geometry manager ...
+Info in <TGeoManager::ConvertReflections>: Done
+===> GEANT4 materials created and mapped to TGeo ones...
+===> GEANT4 logical volumes created and mapped to TGeo ones...
+===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
+### INFO: TG4RootDetectorConstruction::Construct() finished
+TG4PostDetConstruction::Initialize
+G4 Stat: instantiated 6 logical volumes 
+                      14 physical volumes
+Info in <TG4RootNavMgr::ConnectToG4>: ROOT detector construction class connected to G4RunManager
+Debug mode is switched on.
+Visualization Manager instantiating...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Current available graphics systems are:
+  ASCIITree (ATree)
+  DAWNFILE (DAWNFILE)
+  GAGTree (GAGTree)
+  G4HepRepFile (HepRepFile)
+  G4HepRep (HepRepXML)
+  RayTracer (RayTracer)
+  VRML1FILE (VRML1FILE)
+  VRML2FILE (VRML2FILE)
+  OpenGLImmediateX (OGLIX)
+  OpenGLStoredX (OGLSX)
+  OpenGLImmediateXm (OGLIXm)
+  OpenGLStoredXm (OGLSXm)
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  drawByCharge
+  drawByParticleID
+
+Registered models: 
+  None
+
+Registered filter factories:
+  None
+
+Registered filters:
+  None
+
+Geant4 has been created.
+### General physics constructed.
+### Electromagnetic physics constructed.
+### Muon physics constructed.
+### EM physics for ions constructed.
+
+###
+You are using the Geant4 VMC hadronics physics
+equivalent to ExN04HadronPhysics from Geant4 (version 6.0)
+Note that this hadronic physics list is not optimized for any particular usage.
+If you wish to have a starting point tailored for a particular area of work,
+please use one of the available physics lists by use-case.
+ More information can also be found from the Geant4 HyperNews.
+###
+
+### EM physics for hadrons constructed.
+### Step limiter physics constructed.
+--- Init geometry 
 
 **********************************************
     GEANT4 Geometry statistics: 

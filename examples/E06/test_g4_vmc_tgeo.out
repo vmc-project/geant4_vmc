@@ -10,7 +10,7 @@
   *******************************************
 
 FreeType Engine v2.1.9 used to render TrueType fonts.
-Compiled on 12 December 2006 for linux with thread support.
+Compiled on 13 December 2006 for linux with thread support.
 
 CINT/ROOT C/C++ Interpreter version 5.16.16, November 24, 2006
 Type ? for help. Commands must be C++ statements.

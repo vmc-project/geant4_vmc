@@ -1,4 +1,4 @@
-// $Id: Ex06DetectorConstructionOld.cxx,v 1.2 2006/01/13 16:58:17 brun Exp $
+// $Id: Ex06DetectorConstructionOld.cxx,v 1.1 2006/12/12 16:21:39 brun Exp $
 //
 // Geant4 ExampleN06 adapted to Virtual Monte Carlo 
 //
@@ -65,6 +65,8 @@ void Ex06DetectorConstructionOld::ConstructMaterials()
   Double_t deemax = -.3;     // Maximum fractional energy loss, DLS 
   Double_t stmin  = -.8;
   Float_t* ubuf = 0;
+  fImedAir = 1;
+  fImedWater = 2;
   gMC->Medium(fImedAir, "Air", imatAir, 0, ifield, fieldm, tmaxfd, 
                       stemax, deemax, epsil, stmin, ubuf, 0); 
   gMC->Medium(fImedWater, "Water", imatWater, 0, ifield, fieldm, tmaxfd,

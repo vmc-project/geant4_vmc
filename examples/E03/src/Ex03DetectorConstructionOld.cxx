@@ -1,4 +1,4 @@
-// $Id: Ex03DetectorConstructionOld.cxx,v 1.4 2006/04/12 10:39:59 brun Exp $
+// $Id: Ex03DetectorConstructionOld.cxx,v 1.1 2006/12/12 16:21:38 brun Exp $
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //
@@ -104,7 +104,7 @@ void Ex03DetectorConstructionOld::ConstructMaterials()
   absl = 0.1;   
   Int_t imat = 1;  
   gMC->Material(imat, name.Data(), a, z, density, radl, absl, ubuf, 0);  
-  Int_t mediumId = 0;
+  Int_t mediumId = 1;
   gMC->Medium(mediumId, name.Data(),  imat, 0, ifield, fieldm, tmaxfd, stemax, 
               deemax, epsil, stmin, ubuf, 0);
 
@@ -114,7 +114,8 @@ void Ex03DetectorConstructionOld::ConstructMaterials()
   density = 1.390;
   radl = 14.064;
   absl = 0.1;  
-  imat = 2;  
+  imat = 2; 
+  mediumId = 2; 
   gMC->Material(imat, name.Data(), a, z, density, radl, absl, ubuf, 0);  
   gMC->Medium(mediumId, name.Data(),  imat, 0, ifield, fieldm, tmaxfd, stemax,
               deemax, epsil, stmin, ubuf, 0);
@@ -126,6 +127,7 @@ void Ex03DetectorConstructionOld::ConstructMaterials()
   radl = 0.5612;
   absl = 0.1;  
   imat = 3;  
+  mediumId = 3; 
   gMC->Material(imat,name.Data() , a, z, density, radl, absl, ubuf, 0);  
   gMC->Medium(mediumId, name.Data(), imat, 0, ifield, fieldm, tmaxfd, stemax,
               deemax, epsil, stmin, ubuf, 0);
@@ -140,6 +142,7 @@ void Ex03DetectorConstructionOld::ConstructMaterials()
   Double_t ww2[2] = { 2., 1.};
   density = 1.000;  
   imat = 4;
+  mediumId = 4; 
   gMC->Mixture(imat, name.Data(), aw2, zw2, density, -2, ww2); 
   gMC->Medium(mediumId, name.Data(), imat, 0, ifield, fieldm, tmaxfd, stemax,
               deemax, epsil, stmin, ubuf, 0);
@@ -150,6 +153,7 @@ void Ex03DetectorConstructionOld::ConstructMaterials()
   Double_t ws2[2] = { 10., 9.};
   density = 1.032;  
   imat = 5;
+  mediumId = 5; 
   gMC->Mixture(imat, name.Data(), as2, zs2, density, -2, ws2); 
   gMC->Medium(mediumId, name.Data(), imat, 0, ifield, fieldm, tmaxfd, stemax,
               deemax, epsil, stmin, ubuf, 0);
@@ -160,6 +164,7 @@ void Ex03DetectorConstructionOld::ConstructMaterials()
   Double_t wq2[2] = { 1., 2.};
   density = 2.200;  
   imat = 6;
+  mediumId = 6; 
   gMC->Mixture(imat, name.Data(), aq2, zq2, density, -2, wq2); 
   gMC->Medium(mediumId, name.Data(), imat, 0, ifield, fieldm, tmaxfd, stemax,
               deemax, epsil, stmin, ubuf, 0);
@@ -174,6 +179,7 @@ void Ex03DetectorConstructionOld::ConstructMaterials()
   Double_t wa2[2] = {  0.7,   0.3};
   density = 1.29e-03;  
   imat = 7;
+  mediumId = 7; 
   gMC->Mixture(imat, name.Data(), aa2, za2, density, 2, wa2); 
   gMC->Medium(mediumId, name.Data(), imat, 0, ifield, fieldm, tmaxfd, stemax,
               deemax, epsil, stmin, ubuf, 0);
@@ -220,6 +226,7 @@ void Ex03DetectorConstructionOld::ConstructMaterials()
   radl = 1.e16; 
   absl = 1.e16;  //??
   imat = 8;  
+  mediumId = 8; 
   gMC->Material(imat, name.Data(), a, z, density, radl, absl, ubuf, 0);  
   gMC->Medium(mediumId, name.Data(), imat, 0, ifield, fieldm, tmaxfd, stemax,
               deemax, epsil, stmin, ubuf, 0);

@@ -10,7 +10,7 @@
   *******************************************
 
 FreeType Engine v2.1.9 used to render TrueType fonts.
-Compiled on 12 December 2006 for linux with thread support.
+Compiled on 13 December 2006 for linux with thread support.
 
 CINT/ROOT C/C++ Interpreter version 5.16.16, November 24, 2006
 Type ? for help. Commands must be C++ statements.
@@ -50,38 +50,8 @@ Info in <TGeoManager::ConvertReflections>: Done
 TG4PostDetConstruction::Initialize
 G4 Stat: instantiated 4 logical volumes 
                       21 physical volumes
-++++  TG4Warning:  ++++
-    TG4MediumMap::AddMedium:
-    Medium with given ID=0 already exists.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4Medium::SetName:
-    Reseting name ArgonGas to Aluminium
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4Medium::SetMaterial:
-    Reseting material ArgonGas to Aluminium
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MediumMap::AddMedium:
-    Medium with given ID=0 already exists.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4Medium::SetName:
-    Reseting name Aluminium to Lead
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4Medium::SetMaterial:
-    Reseting material Aluminium to Lead
-+++++++++++++++++++++++
-
 Info in <TG4RootNavMgr::ConnectToG4>: ROOT detector construction class connected to G4RunManager
-ArgonGas Aluminium0x550e844Aluminium Lead0x550e844Debug mode is switched on.
+Debug mode is switched on.
 Visualization Manager instantiating...
 Visualization Manager initialising...
 Registering graphics systems...
@@ -134,23 +104,13 @@ please use one of the available physics lists by use-case.
 
 ### EM physics for hadrons constructed.
 ### Step limiter physics constructed.
-++++  TG4Warning:  ++++
-    TG4SDManager::MediumId:
-    Medium ArgonGas not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4SDManager::MediumId:
-    Medium Aluminium not found.
-+++++++++++++++++++++++
-
 
 **********************************************
     GEANT4 Geometry statistics: 
               4 logical volumes
              21 physical volumes
               3 materials
-              1 user limits
+              3 user limits
               4 sensitive detectors
 **********************************************
 
@@ -285,274 +245,288 @@ Index : 0     used in the geometry : Yes     recalculation needed : No
  Region(s) which use this couple : 
     DefaultRegionForTheWorld
 
+Index : 1     used in the geometry : Yes     recalculation needed : No 
+ Material : Aluminium
+ Range cuts        :  gamma 1 mm     e- 1 mm     e+ 1 mm 
+ Energy thresholds :  gamma 6.88731 keV    e- 596.68 keV    e+ 568.011 keV
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
+Index : 2     used in the geometry : Yes     recalculation needed : No 
+ Material : Lead
+ Range cuts        :  gamma 1 mm     e- 1 mm     e+ 1 mm 
+ Energy thresholds :  gamma 100.511 keV    e- 1.37814 MeV    e+ 1.28002 MeV
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
 ====================================================================
 
 ### Run 0 start.
 >>> Event 0
 
 Starting new track
-Track -200 0 0  in EXPH  ArgonGasAluminiumLead
-Track -160 0 4  in EXPH  ArgonGasAluminiumLead
-Track -160 0 4  in TRTU  ArgonGasAluminiumLead
-Track -40 0 16  in TRTU  ArgonGasAluminiumLead
-Track -40 0 16  in EXPH  ArgonGasAluminiumLead
-Track 0 0 20  in EXPH  ArgonGasAluminiumLead
-Track 0 0 20  in CALB  ArgonGasAluminiumLead
-Track 9 0 20.9  in CALB  ArgonGasAluminiumLead
-Track 9 0 20.9  in LAYB  ArgonGasAluminiumLead
-Track 11 0 21.1  in LAYB  ArgonGasAluminiumLead
-Track 11 0 21.1  in CALB  ArgonGasAluminiumLead
-Track 19 0 21.9  in CALB  ArgonGasAluminiumLead
-Track 19 0 21.9  in LAYB  ArgonGasAluminiumLead
-Track 21 0 22.1  in LAYB  ArgonGasAluminiumLead
-Track 21 0 22.1  in CALB  ArgonGasAluminiumLead
-Track 29 0 22.9  in CALB  ArgonGasAluminiumLead
-Track 29 0 22.9  in LAYB  ArgonGasAluminiumLead
-Track 31 0 23.1  in LAYB  ArgonGasAluminiumLead
-Track 31 0 23.1  in CALB  ArgonGasAluminiumLead
-Track 39 0 23.9  in CALB  ArgonGasAluminiumLead
-Track 39 0 23.9  in LAYB  ArgonGasAluminiumLead
-Track 41 0 24.1  in LAYB  ArgonGasAluminiumLead
-Track 41 0 24.1  in CALB  ArgonGasAluminiumLead
-Track 49 0 24.9  in CALB  ArgonGasAluminiumLead
-Track 49 0 24.9  in LAYB  ArgonGasAluminiumLead
-Track 51 0 25.1  in LAYB  ArgonGasAluminiumLead
-Track 51 0 25.1  in CALB  ArgonGasAluminiumLead
-Track 59 0 25.9  in CALB  ArgonGasAluminiumLead
-Track 59 0 25.9  in LAYB  ArgonGasAluminiumLead
-Track 61 0 26.1  in LAYB  ArgonGasAluminiumLead
-Track 61 0 26.1  in CALB  ArgonGasAluminiumLead
-Track 69 0 26.9  in CALB  ArgonGasAluminiumLead
-Track 69 0 26.9  in LAYB  ArgonGasAluminiumLead
-Track 71 0 27.1  in LAYB  ArgonGasAluminiumLead
-Track 71 0 27.1  in CALB  ArgonGasAluminiumLead
-Track 79 0 27.9  in CALB  ArgonGasAluminiumLead
-Track 79 0 27.9  in LAYB  ArgonGasAluminiumLead
-Track 81 0 28.1  in LAYB  ArgonGasAluminiumLead
-Track 81 0 28.1  in CALB  ArgonGasAluminiumLead
-Track 89 0 28.9  in CALB  ArgonGasAluminiumLead
-Track 89 0 28.9  in LAYB  ArgonGasAluminiumLead
-Track 91 0 29.1  in LAYB  ArgonGasAluminiumLead
-Track 91 0 29.1  in CALB  ArgonGasAluminiumLead
-Track 99 0 29.9  in CALB  ArgonGasAluminiumLead
-Track 99 0 29.9  in LAYB  ArgonGasAluminiumLead
-Track 101 0 30.1  in LAYB  ArgonGasAluminiumLead
-Track 101 0 30.1  in CALB  ArgonGasAluminiumLead
-Track 109 0 30.9  in CALB  ArgonGasAluminiumLead
-Track 109 0 30.9  in LAYB  ArgonGasAluminiumLead
-Track 111 0 31.1  in LAYB  ArgonGasAluminiumLead
-Track 111 0 31.1  in CALB  ArgonGasAluminiumLead
-Track 119 0 31.9  in CALB  ArgonGasAluminiumLead
-Track 119 0 31.9  in LAYB  ArgonGasAluminiumLead
-Track 121 0 32.1  in LAYB  ArgonGasAluminiumLead
-Track 121 0 32.1  in CALB  ArgonGasAluminiumLead
-Track 129 0 32.9  in CALB  ArgonGasAluminiumLead
-Track 129 0 32.9  in LAYB  ArgonGasAluminiumLead
-Track 131 0 33.1  in LAYB  ArgonGasAluminiumLead
-Track 131 0 33.1  in CALB  ArgonGasAluminiumLead
-Track 139 0 33.9  in CALB  ArgonGasAluminiumLead
-Track 139 0 33.9  in LAYB  ArgonGasAluminiumLead
-Track 141 0 34.1  in LAYB  ArgonGasAluminiumLead
-Track 141 0 34.1  in CALB  ArgonGasAluminiumLead
-Track 149 0 34.9  in CALB  ArgonGasAluminiumLead
-Track 149 0 34.9  in LAYB  ArgonGasAluminiumLead
-Track 151 0 35.1  in LAYB  ArgonGasAluminiumLead
-Track 151 0 35.1  in CALB  ArgonGasAluminiumLead
-Track 159 0 35.9  in CALB  ArgonGasAluminiumLead
-Track 159 0 35.9  in LAYB  ArgonGasAluminiumLead
-Track 161 0 36.1  in LAYB  ArgonGasAluminiumLead
-Track 161 0 36.1  in CALB  ArgonGasAluminiumLead
-Track 169 0 36.9  in CALB  ArgonGasAluminiumLead
-Track 169 0 36.9  in LAYB  ArgonGasAluminiumLead
-Track 171 0 37.1  in LAYB  ArgonGasAluminiumLead
-Track 171 0 37.1  in CALB  ArgonGasAluminiumLead
-Track 179 0 37.9  in CALB  ArgonGasAluminiumLead
-Track 179 0 37.9  in LAYB  ArgonGasAluminiumLead
-Track 181 0 38.1  in LAYB  ArgonGasAluminiumLead
-Track 181 0 38.1  in CALB  ArgonGasAluminiumLead
-Track 189 0 38.9  in CALB  ArgonGasAluminiumLead
-Track 189 0 38.9  in LAYB  ArgonGasAluminiumLead
-Track 191 0 39.1  in LAYB  ArgonGasAluminiumLead
-Track 191 0 39.1  in CALB  ArgonGasAluminiumLead
-Track 200 0 40  in CALB  ArgonGasAluminiumLead
-Track 200 0 40  in EXPH  ArgonGasAluminiumLead
-Track 300 0 50  in EXPH  ArgonGasAluminiumLead
+Track -200 0 0  in EXPH  ArgonGas
+Track -160 0 4  in EXPH  ArgonGas
+Track -160 0 4  in TRTU  Aluminium
+Track -40 0 16  in TRTU  Aluminium
+Track -40 0 16  in EXPH  ArgonGas
+Track 0 0 20  in EXPH  ArgonGas
+Track 0 0 20  in CALB  Lead
+Track 9 0 20.9  in CALB  Lead
+Track 9 0 20.9  in LAYB  Aluminium
+Track 11 0 21.1  in LAYB  Aluminium
+Track 11 0 21.1  in CALB  Lead
+Track 19 0 21.9  in CALB  Lead
+Track 19 0 21.9  in LAYB  Aluminium
+Track 21 0 22.1  in LAYB  Aluminium
+Track 21 0 22.1  in CALB  Lead
+Track 29 0 22.9  in CALB  Lead
+Track 29 0 22.9  in LAYB  Aluminium
+Track 31 0 23.1  in LAYB  Aluminium
+Track 31 0 23.1  in CALB  Lead
+Track 39 0 23.9  in CALB  Lead
+Track 39 0 23.9  in LAYB  Aluminium
+Track 41 0 24.1  in LAYB  Aluminium
+Track 41 0 24.1  in CALB  Lead
+Track 49 0 24.9  in CALB  Lead
+Track 49 0 24.9  in LAYB  Aluminium
+Track 51 0 25.1  in LAYB  Aluminium
+Track 51 0 25.1  in CALB  Lead
+Track 59 0 25.9  in CALB  Lead
+Track 59 0 25.9  in LAYB  Aluminium
+Track 61 0 26.1  in LAYB  Aluminium
+Track 61 0 26.1  in CALB  Lead
+Track 69 0 26.9  in CALB  Lead
+Track 69 0 26.9  in LAYB  Aluminium
+Track 71 0 27.1  in LAYB  Aluminium
+Track 71 0 27.1  in CALB  Lead
+Track 79 0 27.9  in CALB  Lead
+Track 79 0 27.9  in LAYB  Aluminium
+Track 81 0 28.1  in LAYB  Aluminium
+Track 81 0 28.1  in CALB  Lead
+Track 89 0 28.9  in CALB  Lead
+Track 89 0 28.9  in LAYB  Aluminium
+Track 91 0 29.1  in LAYB  Aluminium
+Track 91 0 29.1  in CALB  Lead
+Track 99 0 29.9  in CALB  Lead
+Track 99 0 29.9  in LAYB  Aluminium
+Track 101 0 30.1  in LAYB  Aluminium
+Track 101 0 30.1  in CALB  Lead
+Track 109 0 30.9  in CALB  Lead
+Track 109 0 30.9  in LAYB  Aluminium
+Track 111 0 31.1  in LAYB  Aluminium
+Track 111 0 31.1  in CALB  Lead
+Track 119 0 31.9  in CALB  Lead
+Track 119 0 31.9  in LAYB  Aluminium
+Track 121 0 32.1  in LAYB  Aluminium
+Track 121 0 32.1  in CALB  Lead
+Track 129 0 32.9  in CALB  Lead
+Track 129 0 32.9  in LAYB  Aluminium
+Track 131 0 33.1  in LAYB  Aluminium
+Track 131 0 33.1  in CALB  Lead
+Track 139 0 33.9  in CALB  Lead
+Track 139 0 33.9  in LAYB  Aluminium
+Track 141 0 34.1  in LAYB  Aluminium
+Track 141 0 34.1  in CALB  Lead
+Track 149 0 34.9  in CALB  Lead
+Track 149 0 34.9  in LAYB  Aluminium
+Track 151 0 35.1  in LAYB  Aluminium
+Track 151 0 35.1  in CALB  Lead
+Track 159 0 35.9  in CALB  Lead
+Track 159 0 35.9  in LAYB  Aluminium
+Track 161 0 36.1  in LAYB  Aluminium
+Track 161 0 36.1  in CALB  Lead
+Track 169 0 36.9  in CALB  Lead
+Track 169 0 36.9  in LAYB  Aluminium
+Track 171 0 37.1  in LAYB  Aluminium
+Track 171 0 37.1  in CALB  Lead
+Track 179 0 37.9  in CALB  Lead
+Track 179 0 37.9  in LAYB  Aluminium
+Track 181 0 38.1  in LAYB  Aluminium
+Track 181 0 38.1  in CALB  Lead
+Track 189 0 38.9  in CALB  Lead
+Track 189 0 38.9  in LAYB  Aluminium
+Track 191 0 39.1  in LAYB  Aluminium
+Track 191 0 39.1  in CALB  Lead
+Track 200 0 40  in CALB  Lead
+Track 200 0 40  in EXPH  ArgonGas
+Track 300 0 50  in EXPH  ArgonGas
 
 Starting new track
-Track -200 0 0  in EXPH  ArgonGasAluminiumLead
-Track -159.866 4.01344 0  in EXPH  ArgonGasAluminiumLead
-Track -159.866 4.01344 0  in TRTU  ArgonGasAluminiumLead
-Track -42.1146 15.7885 0  in TRTU  ArgonGasAluminiumLead
-Track -42.1146 15.7885 0  in EXPH  ArgonGasAluminiumLead
-Track 1.7053e-14 20 0  in EXPH  ArgonGasAluminiumLead
-Track 1.7053e-14 20 0  in CALB  ArgonGasAluminiumLead
-Track 9 20.9 0  in CALB  ArgonGasAluminiumLead
-Track 9 20.9 0  in LAYB  ArgonGasAluminiumLead
-Track 11 21.1 0  in LAYB  ArgonGasAluminiumLead
-Track 11 21.1 0  in CALB  ArgonGasAluminiumLead
-Track 19 21.9 0  in CALB  ArgonGasAluminiumLead
-Track 19 21.9 0  in LAYB  ArgonGasAluminiumLead
-Track 21 22.1 0  in LAYB  ArgonGasAluminiumLead
-Track 21 22.1 0  in CALB  ArgonGasAluminiumLead
-Track 29 22.9 0  in CALB  ArgonGasAluminiumLead
-Track 29 22.9 0  in LAYB  ArgonGasAluminiumLead
-Track 31 23.1 0  in LAYB  ArgonGasAluminiumLead
-Track 31 23.1 0  in CALB  ArgonGasAluminiumLead
-Track 39 23.9 0  in CALB  ArgonGasAluminiumLead
-Track 39 23.9 0  in LAYB  ArgonGasAluminiumLead
-Track 41 24.1 0  in LAYB  ArgonGasAluminiumLead
-Track 41 24.1 0  in CALB  ArgonGasAluminiumLead
-Track 49 24.9 0  in CALB  ArgonGasAluminiumLead
-Track 49 24.9 0  in LAYB  ArgonGasAluminiumLead
-Track 51 25.1 0  in LAYB  ArgonGasAluminiumLead
-Track 51 25.1 0  in CALB  ArgonGasAluminiumLead
-Track 59 25.9 0  in CALB  ArgonGasAluminiumLead
-Track 59 25.9 0  in LAYB  ArgonGasAluminiumLead
-Track 61 26.1 0  in LAYB  ArgonGasAluminiumLead
-Track 61 26.1 0  in CALB  ArgonGasAluminiumLead
-Track 69 26.9 0  in CALB  ArgonGasAluminiumLead
-Track 69 26.9 0  in LAYB  ArgonGasAluminiumLead
-Track 71 27.1 0  in LAYB  ArgonGasAluminiumLead
-Track 71 27.1 0  in CALB  ArgonGasAluminiumLead
-Track 79 27.9 0  in CALB  ArgonGasAluminiumLead
-Track 79 27.9 0  in LAYB  ArgonGasAluminiumLead
-Track 81 28.1 0  in LAYB  ArgonGasAluminiumLead
-Track 81 28.1 0  in CALB  ArgonGasAluminiumLead
-Track 89 28.9 0  in CALB  ArgonGasAluminiumLead
-Track 89 28.9 0  in LAYB  ArgonGasAluminiumLead
-Track 91 29.1 0  in LAYB  ArgonGasAluminiumLead
-Track 91 29.1 0  in CALB  ArgonGasAluminiumLead
-Track 99 29.9 0  in CALB  ArgonGasAluminiumLead
-Track 99 29.9 0  in LAYB  ArgonGasAluminiumLead
-Track 101 30.1 0  in LAYB  ArgonGasAluminiumLead
-Track 101 30.1 0  in CALB  ArgonGasAluminiumLead
-Track 109 30.9 0  in CALB  ArgonGasAluminiumLead
-Track 109 30.9 0  in LAYB  ArgonGasAluminiumLead
-Track 111 31.1 0  in LAYB  ArgonGasAluminiumLead
-Track 111 31.1 0  in CALB  ArgonGasAluminiumLead
-Track 119 31.9 0  in CALB  ArgonGasAluminiumLead
-Track 119 31.9 0  in LAYB  ArgonGasAluminiumLead
-Track 121 32.1 0  in LAYB  ArgonGasAluminiumLead
-Track 121 32.1 0  in CALB  ArgonGasAluminiumLead
-Track 129 32.9 0  in CALB  ArgonGasAluminiumLead
-Track 129 32.9 0  in LAYB  ArgonGasAluminiumLead
-Track 131 33.1 0  in LAYB  ArgonGasAluminiumLead
-Track 131 33.1 0  in CALB  ArgonGasAluminiumLead
-Track 139 33.9 0  in CALB  ArgonGasAluminiumLead
-Track 139 33.9 0  in LAYB  ArgonGasAluminiumLead
-Track 141 34.1 0  in LAYB  ArgonGasAluminiumLead
-Track 141 34.1 0  in CALB  ArgonGasAluminiumLead
-Track 149 34.9 0  in CALB  ArgonGasAluminiumLead
-Track 149 34.9 0  in LAYB  ArgonGasAluminiumLead
-Track 151 35.1 0  in LAYB  ArgonGasAluminiumLead
-Track 151 35.1 0  in CALB  ArgonGasAluminiumLead
-Track 159 35.9 0  in CALB  ArgonGasAluminiumLead
-Track 159 35.9 0  in LAYB  ArgonGasAluminiumLead
-Track 161 36.1 0  in LAYB  ArgonGasAluminiumLead
-Track 161 36.1 0  in CALB  ArgonGasAluminiumLead
-Track 169 36.9 0  in CALB  ArgonGasAluminiumLead
-Track 169 36.9 0  in LAYB  ArgonGasAluminiumLead
-Track 171 37.1 0  in LAYB  ArgonGasAluminiumLead
-Track 171 37.1 0  in CALB  ArgonGasAluminiumLead
-Track 179 37.9 0  in CALB  ArgonGasAluminiumLead
-Track 179 37.9 0  in LAYB  ArgonGasAluminiumLead
-Track 181 38.1 0  in LAYB  ArgonGasAluminiumLead
-Track 181 38.1 0  in CALB  ArgonGasAluminiumLead
-Track 189 38.9 0  in CALB  ArgonGasAluminiumLead
-Track 189 38.9 0  in LAYB  ArgonGasAluminiumLead
-Track 191 39.1 0  in LAYB  ArgonGasAluminiumLead
-Track 191 39.1 0  in CALB  ArgonGasAluminiumLead
-Track 200 40 0  in CALB  ArgonGasAluminiumLead
-Track 200 40 0  in EXPH  ArgonGasAluminiumLead
-Track 300 50 0  in EXPH  ArgonGasAluminiumLead
+Track -200 0 0  in EXPH  ArgonGas
+Track -159.866 4.01344 0  in EXPH  ArgonGas
+Track -159.866 4.01344 0  in TRTU  Aluminium
+Track -42.1146 15.7885 0  in TRTU  Aluminium
+Track -42.1146 15.7885 0  in EXPH  ArgonGas
+Track 1.7053e-14 20 0  in EXPH  ArgonGas
+Track 1.7053e-14 20 0  in CALB  Lead
+Track 9 20.9 0  in CALB  Lead
+Track 9 20.9 0  in LAYB  Aluminium
+Track 11 21.1 0  in LAYB  Aluminium
+Track 11 21.1 0  in CALB  Lead
+Track 19 21.9 0  in CALB  Lead
+Track 19 21.9 0  in LAYB  Aluminium
+Track 21 22.1 0  in LAYB  Aluminium
+Track 21 22.1 0  in CALB  Lead
+Track 29 22.9 0  in CALB  Lead
+Track 29 22.9 0  in LAYB  Aluminium
+Track 31 23.1 0  in LAYB  Aluminium
+Track 31 23.1 0  in CALB  Lead
+Track 39 23.9 0  in CALB  Lead
+Track 39 23.9 0  in LAYB  Aluminium
+Track 41 24.1 0  in LAYB  Aluminium
+Track 41 24.1 0  in CALB  Lead
+Track 49 24.9 0  in CALB  Lead
+Track 49 24.9 0  in LAYB  Aluminium
+Track 51 25.1 0  in LAYB  Aluminium
+Track 51 25.1 0  in CALB  Lead
+Track 59 25.9 0  in CALB  Lead
+Track 59 25.9 0  in LAYB  Aluminium
+Track 61 26.1 0  in LAYB  Aluminium
+Track 61 26.1 0  in CALB  Lead
+Track 69 26.9 0  in CALB  Lead
+Track 69 26.9 0  in LAYB  Aluminium
+Track 71 27.1 0  in LAYB  Aluminium
+Track 71 27.1 0  in CALB  Lead
+Track 79 27.9 0  in CALB  Lead
+Track 79 27.9 0  in LAYB  Aluminium
+Track 81 28.1 0  in LAYB  Aluminium
+Track 81 28.1 0  in CALB  Lead
+Track 89 28.9 0  in CALB  Lead
+Track 89 28.9 0  in LAYB  Aluminium
+Track 91 29.1 0  in LAYB  Aluminium
+Track 91 29.1 0  in CALB  Lead
+Track 99 29.9 0  in CALB  Lead
+Track 99 29.9 0  in LAYB  Aluminium
+Track 101 30.1 0  in LAYB  Aluminium
+Track 101 30.1 0  in CALB  Lead
+Track 109 30.9 0  in CALB  Lead
+Track 109 30.9 0  in LAYB  Aluminium
+Track 111 31.1 0  in LAYB  Aluminium
+Track 111 31.1 0  in CALB  Lead
+Track 119 31.9 0  in CALB  Lead
+Track 119 31.9 0  in LAYB  Aluminium
+Track 121 32.1 0  in LAYB  Aluminium
+Track 121 32.1 0  in CALB  Lead
+Track 129 32.9 0  in CALB  Lead
+Track 129 32.9 0  in LAYB  Aluminium
+Track 131 33.1 0  in LAYB  Aluminium
+Track 131 33.1 0  in CALB  Lead
+Track 139 33.9 0  in CALB  Lead
+Track 139 33.9 0  in LAYB  Aluminium
+Track 141 34.1 0  in LAYB  Aluminium
+Track 141 34.1 0  in CALB  Lead
+Track 149 34.9 0  in CALB  Lead
+Track 149 34.9 0  in LAYB  Aluminium
+Track 151 35.1 0  in LAYB  Aluminium
+Track 151 35.1 0  in CALB  Lead
+Track 159 35.9 0  in CALB  Lead
+Track 159 35.9 0  in LAYB  Aluminium
+Track 161 36.1 0  in LAYB  Aluminium
+Track 161 36.1 0  in CALB  Lead
+Track 169 36.9 0  in CALB  Lead
+Track 169 36.9 0  in LAYB  Aluminium
+Track 171 37.1 0  in LAYB  Aluminium
+Track 171 37.1 0  in CALB  Lead
+Track 179 37.9 0  in CALB  Lead
+Track 179 37.9 0  in LAYB  Aluminium
+Track 181 38.1 0  in LAYB  Aluminium
+Track 181 38.1 0  in CALB  Lead
+Track 189 38.9 0  in CALB  Lead
+Track 189 38.9 0  in LAYB  Aluminium
+Track 191 39.1 0  in LAYB  Aluminium
+Track 191 39.1 0  in CALB  Lead
+Track 200 40 0  in CALB  Lead
+Track 200 40 0  in EXPH  ArgonGas
+Track 300 50 0  in EXPH  ArgonGas
 
 Starting new track
-Track -200 0 0  in EXPH  ArgonGasAluminiumLead
-Track -160 0 0  in EXPH  ArgonGasAluminiumLead
-Track -160 0 0  in TRTU  ArgonGasAluminiumLead
-Track -40 0 0  in TRTU  ArgonGasAluminiumLead
-Track -40 0 0  in EXPH  ArgonGasAluminiumLead
-Track 5.68434e-15 0 0  in EXPH  ArgonGasAluminiumLead
-Track 5.68434e-15 0 0  in CALB  ArgonGasAluminiumLead
-Track 9 0 0  in CALB  ArgonGasAluminiumLead
-Track 9 0 0  in LAYB  ArgonGasAluminiumLead
-Track 11 0 0  in LAYB  ArgonGasAluminiumLead
-Track 11 0 0  in CALB  ArgonGasAluminiumLead
-Track 19 0 0  in CALB  ArgonGasAluminiumLead
-Track 19 0 0  in LAYB  ArgonGasAluminiumLead
-Track 21 0 0  in LAYB  ArgonGasAluminiumLead
-Track 21 0 0  in CALB  ArgonGasAluminiumLead
-Track 29 0 0  in CALB  ArgonGasAluminiumLead
-Track 29 0 0  in LAYB  ArgonGasAluminiumLead
-Track 31 0 0  in LAYB  ArgonGasAluminiumLead
-Track 31 0 0  in CALB  ArgonGasAluminiumLead
-Track 39 0 0  in CALB  ArgonGasAluminiumLead
-Track 39 0 0  in LAYB  ArgonGasAluminiumLead
-Track 41 0 0  in LAYB  ArgonGasAluminiumLead
-Track 41 0 0  in CALB  ArgonGasAluminiumLead
-Track 49 0 0  in CALB  ArgonGasAluminiumLead
-Track 49 0 0  in LAYB  ArgonGasAluminiumLead
-Track 51 0 0  in LAYB  ArgonGasAluminiumLead
-Track 51 0 0  in CALB  ArgonGasAluminiumLead
-Track 59 0 0  in CALB  ArgonGasAluminiumLead
-Track 59 0 0  in LAYB  ArgonGasAluminiumLead
-Track 61 0 0  in LAYB  ArgonGasAluminiumLead
-Track 61 0 0  in CALB  ArgonGasAluminiumLead
-Track 69 0 0  in CALB  ArgonGasAluminiumLead
-Track 69 0 0  in LAYB  ArgonGasAluminiumLead
-Track 71 0 0  in LAYB  ArgonGasAluminiumLead
-Track 71 0 0  in CALB  ArgonGasAluminiumLead
-Track 79 0 0  in CALB  ArgonGasAluminiumLead
-Track 79 0 0  in LAYB  ArgonGasAluminiumLead
-Track 81 0 0  in LAYB  ArgonGasAluminiumLead
-Track 81 0 0  in CALB  ArgonGasAluminiumLead
-Track 89 0 0  in CALB  ArgonGasAluminiumLead
-Track 89 0 0  in LAYB  ArgonGasAluminiumLead
-Track 91 0 0  in LAYB  ArgonGasAluminiumLead
-Track 91 0 0  in CALB  ArgonGasAluminiumLead
-Track 99 0 0  in CALB  ArgonGasAluminiumLead
-Track 99 0 0  in LAYB  ArgonGasAluminiumLead
-Track 101 0 0  in LAYB  ArgonGasAluminiumLead
-Track 101 0 0  in CALB  ArgonGasAluminiumLead
-Track 109 0 0  in CALB  ArgonGasAluminiumLead
-Track 109 0 0  in LAYB  ArgonGasAluminiumLead
-Track 111 0 0  in LAYB  ArgonGasAluminiumLead
-Track 111 0 0  in CALB  ArgonGasAluminiumLead
-Track 119 0 0  in CALB  ArgonGasAluminiumLead
-Track 119 0 0  in LAYB  ArgonGasAluminiumLead
-Track 121 0 0  in LAYB  ArgonGasAluminiumLead
-Track 121 0 0  in CALB  ArgonGasAluminiumLead
-Track 129 0 0  in CALB  ArgonGasAluminiumLead
-Track 129 0 0  in LAYB  ArgonGasAluminiumLead
-Track 131 0 0  in LAYB  ArgonGasAluminiumLead
-Track 131 0 0  in CALB  ArgonGasAluminiumLead
-Track 139 0 0  in CALB  ArgonGasAluminiumLead
-Track 139 0 0  in LAYB  ArgonGasAluminiumLead
-Track 141 0 0  in LAYB  ArgonGasAluminiumLead
-Track 141 0 0  in CALB  ArgonGasAluminiumLead
-Track 149 0 0  in CALB  ArgonGasAluminiumLead
-Track 149 0 0  in LAYB  ArgonGasAluminiumLead
-Track 151 0 0  in LAYB  ArgonGasAluminiumLead
-Track 151 0 0  in CALB  ArgonGasAluminiumLead
-Track 159 0 0  in CALB  ArgonGasAluminiumLead
-Track 159 0 0  in LAYB  ArgonGasAluminiumLead
-Track 161 0 0  in LAYB  ArgonGasAluminiumLead
-Track 161 0 0  in CALB  ArgonGasAluminiumLead
-Track 169 0 0  in CALB  ArgonGasAluminiumLead
-Track 169 0 0  in LAYB  ArgonGasAluminiumLead
-Track 171 0 0  in LAYB  ArgonGasAluminiumLead
-Track 171 0 0  in CALB  ArgonGasAluminiumLead
-Track 179 0 0  in CALB  ArgonGasAluminiumLead
-Track 179 0 0  in LAYB  ArgonGasAluminiumLead
-Track 181 0 0  in LAYB  ArgonGasAluminiumLead
-Track 181 0 0  in CALB  ArgonGasAluminiumLead
-Track 189 0 0  in CALB  ArgonGasAluminiumLead
-Track 189 0 0  in LAYB  ArgonGasAluminiumLead
-Track 191 0 0  in LAYB  ArgonGasAluminiumLead
-Track 191 0 0  in CALB  ArgonGasAluminiumLead
-Track 200 0 0  in CALB  ArgonGasAluminiumLead
-Track 200 0 0  in EXPH  ArgonGasAluminiumLead
-Track 300 0 0  in EXPH  ArgonGasAluminiumLead
+Track -200 0 0  in EXPH  ArgonGas
+Track -160 0 0  in EXPH  ArgonGas
+Track -160 0 0  in TRTU  Aluminium
+Track -40 0 0  in TRTU  Aluminium
+Track -40 0 0  in EXPH  ArgonGas
+Track 5.68434e-15 0 0  in EXPH  ArgonGas
+Track 5.68434e-15 0 0  in CALB  Lead
+Track 9 0 0  in CALB  Lead
+Track 9 0 0  in LAYB  Aluminium
+Track 11 0 0  in LAYB  Aluminium
+Track 11 0 0  in CALB  Lead
+Track 19 0 0  in CALB  Lead
+Track 19 0 0  in LAYB  Aluminium
+Track 21 0 0  in LAYB  Aluminium
+Track 21 0 0  in CALB  Lead
+Track 29 0 0  in CALB  Lead
+Track 29 0 0  in LAYB  Aluminium
+Track 31 0 0  in LAYB  Aluminium
+Track 31 0 0  in CALB  Lead
+Track 39 0 0  in CALB  Lead
+Track 39 0 0  in LAYB  Aluminium
+Track 41 0 0  in LAYB  Aluminium
+Track 41 0 0  in CALB  Lead
+Track 49 0 0  in CALB  Lead
+Track 49 0 0  in LAYB  Aluminium
+Track 51 0 0  in LAYB  Aluminium
+Track 51 0 0  in CALB  Lead
+Track 59 0 0  in CALB  Lead
+Track 59 0 0  in LAYB  Aluminium
+Track 61 0 0  in LAYB  Aluminium
+Track 61 0 0  in CALB  Lead
+Track 69 0 0  in CALB  Lead
+Track 69 0 0  in LAYB  Aluminium
+Track 71 0 0  in LAYB  Aluminium
+Track 71 0 0  in CALB  Lead
+Track 79 0 0  in CALB  Lead
+Track 79 0 0  in LAYB  Aluminium
+Track 81 0 0  in LAYB  Aluminium
+Track 81 0 0  in CALB  Lead
+Track 89 0 0  in CALB  Lead
+Track 89 0 0  in LAYB  Aluminium
+Track 91 0 0  in LAYB  Aluminium
+Track 91 0 0  in CALB  Lead
+Track 99 0 0  in CALB  Lead
+Track 99 0 0  in LAYB  Aluminium
+Track 101 0 0  in LAYB  Aluminium
+Track 101 0 0  in CALB  Lead
+Track 109 0 0  in CALB  Lead
+Track 109 0 0  in LAYB  Aluminium
+Track 111 0 0  in LAYB  Aluminium
+Track 111 0 0  in CALB  Lead
+Track 119 0 0  in CALB  Lead
+Track 119 0 0  in LAYB  Aluminium
+Track 121 0 0  in LAYB  Aluminium
+Track 121 0 0  in CALB  Lead
+Track 129 0 0  in CALB  Lead
+Track 129 0 0  in LAYB  Aluminium
+Track 131 0 0  in LAYB  Aluminium
+Track 131 0 0  in CALB  Lead
+Track 139 0 0  in CALB  Lead
+Track 139 0 0  in LAYB  Aluminium
+Track 141 0 0  in LAYB  Aluminium
+Track 141 0 0  in CALB  Lead
+Track 149 0 0  in CALB  Lead
+Track 149 0 0  in LAYB  Aluminium
+Track 151 0 0  in LAYB  Aluminium
+Track 151 0 0  in CALB  Lead
+Track 159 0 0  in CALB  Lead
+Track 159 0 0  in LAYB  Aluminium
+Track 161 0 0  in LAYB  Aluminium
+Track 161 0 0  in CALB  Lead
+Track 169 0 0  in CALB  Lead
+Track 169 0 0  in LAYB  Aluminium
+Track 171 0 0  in LAYB  Aluminium
+Track 171 0 0  in CALB  Lead
+Track 179 0 0  in CALB  Lead
+Track 179 0 0  in LAYB  Aluminium
+Track 181 0 0  in LAYB  Aluminium
+Track 181 0 0  in CALB  Lead
+Track 189 0 0  in CALB  Lead
+Track 189 0 0  in LAYB  Aluminium
+Track 191 0 0  in LAYB  Aluminium
+Track 191 0 0  in CALB  Lead
+Track 200 0 0  in CALB  Lead
+Track 200 0 0  in EXPH  ArgonGas
+Track 300 0 0  in EXPH  ArgonGas
 
 >>> End of Event 0
 Time of this run:   User=0.01s Real=0.01s Sys=0s
@@ -576,10 +550,10 @@ Shape for /EXPH_1/CALB_1/LAYB_9:
 BOX  parameters: 1,  40,  40,  
 
 Material for LAYB volume: 
-ArgonGas  1  Aeff = 39.95  Zeff = 18  density = 0.001782  radl = 10958  inter = 0.1
+Aluminium  2  Aeff = 26.98  Zeff = 13  density = 2.7  radl = 8.8751  inter = 0.1
 
 Medium for LAYB volume: 
-ArgonGas  0  nmat = 1  isvol = 0  ifield = 0  fieldm = 0  tmaxfd = -20  stemax = -0.01  deemax = -0.3  epsil = 0.001  stmin = -0.8
+Aluminium  2  nmat = 2  isvol = 0  ifield = 0  fieldm = 0  tmaxfd = -20  stemax = -0.01  deemax = -0.3  epsil = 0.001  stmin = -0.8
 
 Error in <TGeoManager::cd>: Path /EXPH_1/CALB_1/LAYB_100 not valid
 GetTransformation: Volume path /EXPH_1/CALB_1/LAYB_100 not found

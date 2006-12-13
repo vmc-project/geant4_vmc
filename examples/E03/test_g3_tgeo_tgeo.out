@@ -10,21 +10,21 @@
   *******************************************
 
 FreeType Engine v2.1.9 used to render TrueType fonts.
-Compiled on 12 December 2006 for linux with thread support.
+Compiled on 13 December 2006 for linux with thread support.
 
 CINT/ROOT C/C++ Interpreter version 5.16.16, November 24, 2006
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_E03.C("g3tgeoConfig.C", kFALSE)...
+Processing test_E03_1.C("g3tgeoConfig.C", kFALSE)...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766608967    2DB18647 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766574151    2DB0FE47 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766632005   766608967
-                                        HEX    2DB1E045    2DB18647
+          with Store/Table at absolute adrs   766597189   766574151
+                                        HEX    2DB15845    2DB0FE47
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -56,6 +56,112 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
+
+ Calculating cross section tables, see gphysi.dat for more information
+
+ Cross section calculation concluded successfully
+
+---> Begin of event: 1
+ **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
+ GTREVE_ROOT : Transporting primary track No         20
+ GTREVE_ROOT : Transporting primary track No         10
+--- Drawing       21 nodes with 5 visible levels
+<TCanvas::MakeDefCanvas>: created default TCanvas with name c1
+   Absorber: total energy (MeV): 887.922       total track length (cm):  40.0991
+   Gap:      total energy (MeV): 35.1757       total track length (cm):  15.8659
+
+---> Begin of event: 2
+ **** GTRIGI: IEVENT=      2 IDEVT=      2 Random Seeds =       4357           0
+ GTREVE_ROOT : Transporting primary track No         20
+ GTREVE_ROOT : Transporting primary track No         10
+--- Drawing       42 nodes with 6 visible levels
+   Absorber: total energy (MeV): 942.347       total track length (cm):  40.8473
+   Gap:      total energy (MeV): 29.2812       total track length (cm):  14.8421
+
+---> Begin of event: 3
+ **** GTRIGI: IEVENT=      3 IDEVT=      3 Random Seeds =       4357           0
+ GTREVE_ROOT : Transporting primary track No         20
+ GTREVE_ROOT : Transporting primary track No         10
+--- Drawing       42 nodes with 6 visible levels
+   Absorber: total energy (MeV): 938.532       total track length (cm):   42.193
+   Gap:      total energy (MeV):    26.9       total track length (cm):   12.712
+
+---> Begin of event: 4
+ **** GTRIGI: IEVENT=      4 IDEVT=      4 Random Seeds =       4357           0
+ GTREVE_ROOT : Transporting primary track No         20
+ GTREVE_ROOT : Transporting primary track No         10
+--- Drawing       42 nodes with 6 visible levels
+   Absorber: total energy (MeV): 938.964       total track length (cm):  40.7794
+   Gap:      total energy (MeV): 18.1992       total track length (cm):  7.30339
+
+---> Begin of event: 5
+ **** GTRIGI: IEVENT=      5 IDEVT=      5 Random Seeds =       4357           0
+ GTREVE_ROOT : Transporting primary track No         20
+ GTREVE_ROOT : Transporting primary track No         10
+--- Drawing       42 nodes with 6 visible levels
+   Absorber: total energy (MeV): 932.308       total track length (cm):  41.4086
+   Gap:      total energy (MeV): 32.0247       total track length (cm):  14.8179
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version   5.13/07  21 November 2006   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+FreeType Engine v2.1.9 used to render TrueType fonts.
+Compiled on 13 December 2006 for linux with thread support.
+
+CINT/ROOT C/C++ Interpreter version 5.16.16, November 24, 2006
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+
+Processing test_E03_2.C("g3tgeoConfig.C", kFALSE)...
+Loading Geant3 libraries ...
+Loading Geant3 libraries ... finished
+--- Init MC 
+
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766450247    2DAF1A47 HEX
+
+ MZSTOR.  Initialize Store  0  in /GCBANK/
+          with Store/Table at absolute adrs   766473285   766450247
+                                        HEX    2DAF7445    2DAF1A47
+                                        HEX        560A           0
+                              relative adrs       22026           0
+          with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
+          This store has a fence of   16 words.
+
+ MZLOGL.  Set Log Level 0 for store  0
+1*****  GEANT Version  3.21/11 Released on 100298
+0*****  Correction Cradle Version  0.1100
+
+ MZDIV.   Initialize Division  Constant  in Store  0
+          NW/NWMAX=   20004000000,  MODE/KIND=  1  2
+          Division 20 initialized.
+
+ MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
+
+ MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+Geant3 has been created.
+--- Construct geometry 
+Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
+Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoManager::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in Root geometry manager
+Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+
+------------------------------------------------------------
+---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
+------------------------------------------------------------
+--- Init geometry 
 
  Calculating cross section tables, see gphysi.dat for more information
 
