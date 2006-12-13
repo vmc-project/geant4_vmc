@@ -1,4 +1,4 @@
-// $Id: TG4MCGeometry.h,v 1.11 2006/04/12 10:37:23 brun Exp $
+// $Id: TG4MCGeometry.h,v 1.1 2006/12/12 16:21:15 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4MCGeometry
@@ -116,6 +116,8 @@ class TG4MCGeometry :  public TVirtualMCGeometry,
                              Double_t& fieldm, Double_t& tmaxfd, Double_t& stemax,
                              Double_t& deemax, Double_t& epsil, Double_t& stmin,
                              TArrayD& par);
+    virtual Int_t MediumId(const Text_t* mediumName) const;
+
     //
     // Not implemented functions from the base class
     // (these functions are implemented in SDmanager)
@@ -123,7 +125,6 @@ class TG4MCGeometry :  public TVirtualMCGeometry,
 
     virtual Int_t VolId(const Text_t* volName) const;
     virtual const char* VolName(Int_t id) const;
-    virtual Int_t MediumId(const Text_t* mediumName) const;
     virtual Int_t NofVolumes() const;
     virtual Int_t NofVolDaughters(const char* volName) const;
     virtual const char*  VolDaughterName(const char* volName, Int_t i) const;

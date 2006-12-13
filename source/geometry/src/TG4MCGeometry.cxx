@@ -1,4 +1,4 @@
-// $Id: TG4MCGeometry.cxx,v 1.17 2006/04/12 10:37:23 brun Exp $
+// $Id: TG4MCGeometry.cxx,v 1.1 2006/12/12 16:21:15 brun Exp $
 // Category: geometry
 //
 // Class TG4MCGeometry
@@ -963,6 +963,25 @@ Bool_t TG4MCGeometry::GetMedium(const TString& volumeName,
   return true;
 }                                        
 
+//_____________________________________________________________________________
+Int_t TG4MCGeometry::MediumId(const Text_t* mediumName) const
+{
+// Returns the medium id for medium with given name
+
+  TG4MediumMap* mediumMap = TG4GeometryServices::Instance()->GetMediumMap();
+  TG4Medium* medium = mediumMap->GetMedium(G4String(mediumName), false);
+  
+  if ( ! medium ) {
+    TG4Globals::Warning(
+      "TG4MCGeometry", "MediumId", 
+      "Medium " + TString(mediumName) + " not found.");
+    return 0;
+  }    
+
+  return medium->GetID();
+}                   
+
+
 //
 // Not implemented functions
 //
@@ -986,17 +1005,6 @@ const char* TG4MCGeometry::VolName(Int_t /*id*/) const
   TG4Globals::Exception(
     "TG4MCGeometry", "VolName", "Not implemented.");
   return "";
-}    
-
-
-//_____________________________________________________________________________
-Int_t TG4MCGeometry::MediumId(const Text_t* /*mediumName*/) const 
-{
-/// Not implemented here - not used for geometry building
-
-  TG4Globals::Exception(
-    "TG4MCGeometry", "Medium", "Not implemented.");
-  return 0;
 }    
 
 

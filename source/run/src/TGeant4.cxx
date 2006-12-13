@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.16 2006/01/13 16:59:39 brun Exp $
+// $Id: TGeant4.cxx,v 1.17 2006/12/12 16:21:16 brun Exp $
 // Category: run
 //
 // Class TGeant4
@@ -559,11 +559,12 @@ const char* TGeant4::VolName(Int_t id) const {
 }
  
 //_____________________________________________________________________________
-Int_t TGeant4::MediumId(const Text_t* volName) const 
+Int_t TGeant4::MediumId(const Text_t* medName) const 
 {
-/// Return the volume ID = sensitive detector identifier.
+/// Return the medium ID for medium with given name
 
-  return fSDManager->MediumId(volName); 
+  return fGeometryManager->GetMCGeometry()
+    ->MediumId(medName); 
 } 
 
 //_____________________________________________________________________________

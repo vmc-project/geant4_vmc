@@ -1,4 +1,4 @@
-// $Id: TG4SDManager.cxx,v 1.4 2006/01/13 16:59:38 brun Exp $
+// $Id: TG4SDManager.cxx,v 1.5 2006/12/12 16:21:15 brun Exp $
 // Category: digits+hits
 //
 // Class TG4SDManager
@@ -68,24 +68,6 @@ Int_t TG4SDManager::VolId(const Text_t* volName) const
   return fSDServices->GetVolumeID(volName);
 }
 
-
-//_____________________________________________________________________________
-Int_t TG4SDManager::MediumId(const Text_t* medName) const
-{
-// Returns the medium id for medium with given name
-
-  TG4MediumMap* mediumMap = TG4GeometryServices::Instance()->GetMediumMap();
-  TG4Medium* medium = mediumMap->GetMedium(G4String(medName), false);
-  
-  if ( ! medium ) {
-    TG4Globals::Warning(
-      "TG4SDManager", "MediumId", 
-      "Medium " + TString(medName) + " not found.");
-    return 0;
-  }    
-
-  return medium->GetID();
-}                   
 
 //_____________________________________________________________________________
 const char* TG4SDManager::VolName(Int_t id) const

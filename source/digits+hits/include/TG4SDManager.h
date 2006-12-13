@@ -1,4 +1,4 @@
-// $Id: TG4SDManager.h,v 1.5 2006/01/13 16:59:38 brun Exp $
+// $Id: TG4SDManager.h,v 1.6 2006/12/12 16:21:15 brun Exp $
 /// \ingroup digits_hits
 //
 /// \class TG4SDManager
@@ -32,7 +32,6 @@ class TG4SDManager
     // TVirtualMC methods
     Int_t VolId(const Text_t* volName) const;                
     const char* VolName(Int_t id) const;
-    Int_t MediumId(const Text_t* mediumName) const;
     Int_t NofVolumes() const; 
     Int_t NofVolDaughters(const char* volName) const;
     const char*  VolDaughterName(const char* volName, Int_t i) const;
