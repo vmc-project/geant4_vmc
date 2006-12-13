@@ -1,4 +1,4 @@
-// $Id: run_g4.C,v 1.3 2005/10/13 09:10:25 brun Exp $
+// $Id: test_E03.C,v 1.1 2006/12/12 16:21:38 brun Exp $
 //
 // Test macro:
 // running Example03
@@ -6,10 +6,9 @@
 // - configMacro: configuration macro loaded in initialization 
 // - oldGeometry: if true - geometry is defined via VMC, otherwise via TGeo
 // 
-// First run 5 events with 20 primaries and print the calorimeter hits;
-// secon run 1 primaray with switch on verbosity level.
+// Run 1 primary with verbosity level switched on .
 
-void test_E03(const TString& configMacro, Bool_t oldGeometry)
+void test_E03_2(const TString& configMacro, Bool_t oldGeometry)
 {
   // Load basic libraries
   gROOT->LoadMacro("../macro/basiclibs.C");
@@ -32,10 +31,11 @@ void test_E03(const TString& configMacro, Bool_t oldGeometry)
   gSystem->Load("libexample03");
  
   // MC application
-  Ex03MCApplication* appl 
+  Ex03MCApplication* appl
     =  new Ex03MCApplication("Example03", "The example03 MC application");
-  appl->GetPrimaryGenerator()->SetNofPrimaries(20);
+  appl->GetPrimaryGenerator()->SetNofPrimaries(1);
   appl->SetPrintModulo(1);
+  appl->SetVerboseLevel(3);
 
   // Set geometry defined via VMC
   appl->SetOldGeometry(oldGeometry);  
@@ -45,12 +45,6 @@ void test_E03(const TString& configMacro, Bool_t oldGeometry)
   // visualization setting
   // gROOT->LoadMacro("set_vis.C");
   // set_vis();
-
-  appl->RunMC(5);
-
-  // Reset number of primaries and verbose level
-  appl->GetPrimaryGenerator()->SetNofPrimaries(1);
-  appl->SetVerboseLevel(3);
 
   appl->RunMC(1);
 
