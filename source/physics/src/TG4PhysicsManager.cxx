@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.12 2006/01/13 16:59:39 brun Exp $
+// $Id: TG4PhysicsManager.cxx,v 1.13 2006/12/12 16:21:16 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsManager
@@ -205,9 +205,10 @@ void TG4PhysicsManager::GstparCut(G4int itmed, TG4G3Cut par, G4double parval)
     //TG4GeometryServices::Instance()->GetMediumMap()->Print();
     TString text = "mediumId=";
     text += itmed;
-    TG4Globals::Exception(
+    TG4Globals::Warning(
       "TG4PhysicsManager", "GstparCut", 
       "Medium with " + text + " not found."); 
+    return;   
   }  
 
   // get/create user limits
@@ -254,9 +255,10 @@ void TG4PhysicsManager::GstparControl(G4int itmed, TG4G3Control par,
     //TG4GeometryServices::Instance()->GetMediumMap()->Print();
     TString text = "mediumId=";
     text += itmed;
-    TG4Globals::Exception(
+    TG4Globals::Warning(
       "TG4PhysicsManager", "GstparControl", 
       "Medium with " + text + " not found."); 
+    return;  
   }  
 
   // get/create user limits

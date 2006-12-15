@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.cxx,v 1.8 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4TrackingAction.cxx,v 1.9 2006/12/12 16:21:15 brun Exp $
 // Category: event
 //
 // Class TG4TrackingAction
@@ -337,13 +337,9 @@ void TG4TrackingAction::TrackToStack(const G4Track* track)
       = GetTrackInformation(track,"SaveTrack")->GetParentParticleID();
   }
      
-  // Track charge
-  G4int charge = G4int(track->GetDynamicParticle()->GetCharge()/eplus);
- 
   // PDG code
   G4int pdg 
-    = TG4ParticlesManager::Instance()
-      ->GetPDGEncodingFast(track->GetDefinition(), charge);
+    = TG4ParticlesManager::Instance()->GetPDGEncoding(track->GetDefinition());
 
   // track kinematics  
   G4ThreeVector momentum = track->GetMomentum(); 
@@ -378,7 +374,13 @@ void TG4TrackingAction::TrackToStack(const G4Track* track)
   }  
   
   G4double weight = 1.;
-  G4int status = 0;   
+
+  // Track charge
+  // Store the dynamic particle charge (which in case of ion may
+  // be different from PDG charge) as status as there is no other 
+  // place where we can do it
+  G4int charge = G4int(track->GetDynamicParticle()->GetCharge()/eplus);
+  G4int status = charge;   
   
   G4int ntr;
   // create particle 

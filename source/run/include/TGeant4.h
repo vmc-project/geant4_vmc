@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.17 2006/01/13 16:59:39 brun Exp $
+// $Id: TGeant4.h,v 1.18 2006/12/12 16:21:16 brun Exp $
 /// \ingroup run
 //
 /// \class TGeant4
@@ -317,6 +317,9 @@ class TGeant4: public TVirtualMC
     TG4StepManager*      fStepManager;     //step manager
     TG4VisManager*       fVisManager;      //visualization manager
     TG4RunManager*       fRunManager;      //run manager
+    Int_t                fMediumCounter;   //global medium counter
+    Int_t                fMaterialCounter; //global material counter
+    Int_t                fMatrixCounter;   //global matrix counter
 
   ClassDef(TGeant4,0) // Geant4 implementation of the TVirtualMC interface 
 };

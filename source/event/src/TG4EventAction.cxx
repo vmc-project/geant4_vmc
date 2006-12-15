@@ -1,4 +1,4 @@
-// $Id: TG4EventAction.cxx,v 1.4 2006/04/12 10:38:21 brun Exp $
+// $Id: TG4EventAction.cxx,v 1.5 2006/12/12 16:21:15 brun Exp $
 // Category: event
 //
 // Class TG4EventAction
@@ -91,13 +91,10 @@ void TG4EventAction::PrimaryToStack(const G4PrimaryVertex* vertex,
   // Mother particle index 
   G4int motherIndex = -1;
      
-  // Track charge
-  G4int charge = G4int(particle->GetCharge()/eplus);
- 
   // PDG code
   G4int pdg 
     = TG4ParticlesManager::Instance()
-      ->GetPDGEncodingFast(particle->GetG4code(), charge);
+      ->GetPDGEncoding(particle->GetG4code());
 
   // track kinematics  
   G4ThreeVector momentum = particle->GetMomentum(); 
@@ -123,7 +120,13 @@ void TG4EventAction::PrimaryToStack(const G4PrimaryVertex* vertex,
   TMCProcess mcProcess = kPPrimary; 
   
   G4double weight = particle->GetWeight();
-  G4int status = 0;   
+
+  // Track charge
+  // Store the dynamic particle charge (which in case of ion may
+  // be different from PDG charge) as status as there is no other 
+  // place where we can do it
+  G4int charge = G4int(particle->GetCharge()/eplus);
+  G4int status = charge;   
   
   G4int ntr;
   // create particle 

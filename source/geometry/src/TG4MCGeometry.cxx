@@ -1,4 +1,4 @@
-// $Id: TG4MCGeometry.cxx,v 1.1 2006/12/12 16:21:15 brun Exp $
+// $Id: TG4MCGeometry.cxx,v 1.2 2006/12/13 14:21:35 brun Exp $
 // Category: geometry
 //
 // Class TG4MCGeometry
@@ -56,10 +56,7 @@ void G3CLRead(G4String &, char *);
 TG4MCGeometry::TG4MCGeometry()
   : TG4Verbose("g4MCGeometry"),
     fGeometryServices(0),
-    fMaterialNameVector(),
-    fMediumCounter(0),
-    fMaterialCounter(0),
-    fMatrixCounter(0)
+    fMaterialNameVector()
 {
 /// Standard constructor
 
@@ -103,7 +100,6 @@ void TG4MCGeometry::Material(Int_t& kmat, const char* name, Double_t a,
 /// Create material.                                                         \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate
 
-    kmat = ++fMaterialCounter;
     G4String namein = fGeometryServices->CutMaterialName(name);
 
     // create new material only if it does not yet exist
@@ -171,8 +167,6 @@ void TG4MCGeometry::Mixture(Int_t& kmat, const char *name, Double_t* a,
    G4String namein = fGeometryServices->CutMaterialName(name);
 
    G4cout << namein << G4endl;
-
-   kmat = ++fMaterialCounter;
 
    // create new material only if it does not yet exist
    G4Material* material 
@@ -269,8 +263,6 @@ void TG4MCGeometry::Medium(Int_t& kmed, const char *name, Int_t nmat,
 
   G4String namein = fGeometryServices->CutMaterialName(name);
 
-  kmed = ++fMediumCounter;
-
   G4gstmed(kmed, name, nmat, isvol, ifield, fieldm, tmaxfd, stemax, deemax, 
        epsil, stmin, 0, stemax > 0.);
      // instead of the nbuf argument the bool is passed
@@ -294,8 +286,6 @@ void TG4MCGeometry::Matrix(Int_t& krot, Double_t thetaX, Double_t phiX,
            Double_t thetaY, Double_t phiY, Double_t thetaZ, Double_t phiZ)
 {
 /// Create rotation matrix.
-
-  krot = ++fMatrixCounter;
 
   G4gsrotm(krot, thetaX, phiX, thetaY, phiY, thetaZ, phiZ);
 }
@@ -520,14 +510,6 @@ void  TG4MCGeometry::Gsbool(const char* onlyVolName,
    G4gsbool(onlyVolName, manyVolName);
 } 
  
-//_____________________________________________________________________________
-Bool_t TG4MCGeometry::IsGeometryDefined() const
-{
-/// Return true if geometry was defined via G3toG4
-
-  return ( fMaterialCounter > 0 );
-}                   
-
 //_____________________________________________________________________________
 Bool_t TG4MCGeometry::GetTransformation(const TString& volumePath, 
                               TGeoHMatrix& matrix)

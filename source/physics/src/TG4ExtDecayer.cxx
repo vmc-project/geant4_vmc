@@ -1,4 +1,4 @@
-// $Id: TG4ExtDecayer.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4ExtDecayer.cxx,v 1.4 2006/12/12 16:21:16 brun Exp $
 // Category: physics
 //
 // Class TG4ExtDecayer
@@ -73,9 +73,7 @@ G4DecayProducts* TG4ExtDecayer::ImportDecayProducts(const G4Track& track)
   // (in order to get PDG from extended TDatabasePDG
   // in case the standard PDG code is not defined)
   G4ParticleDefinition* particleDef = track.GetDefinition();
-  G4int charge = G4int(track.GetDynamicParticle()->GetCharge()/eplus);
-  G4int pdgEncoding 
-    = fParticlesManager->GetPDGEncodingFast(particleDef, charge);
+  G4int pdgEncoding = fParticlesManager->GetPDGEncoding(particleDef);
 
   // let TVirtualMCDecayer decay the particle
   // and import the decay products

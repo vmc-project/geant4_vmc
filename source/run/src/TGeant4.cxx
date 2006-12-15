@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.17 2006/12/12 16:21:16 brun Exp $
+// $Id: TGeant4.cxx,v 1.18 2006/12/13 14:21:36 brun Exp $
 // Category: run
 //
 // Class TGeant4
@@ -31,7 +31,10 @@ TGeant4::TGeant4(const char* name, const char* title,
     fPhysicsManager(0),
     fStepManager(0),   
     fVisManager(0),
-    fRunManager(0)
+    fRunManager(0),
+    fMediumCounter(0),
+    fMaterialCounter(0),
+    fMatrixCounter(0)
     
 {
   // create geometry manager
@@ -79,7 +82,10 @@ TGeant4::TGeant4(const char* name, const char* title,
     fPhysicsManager(0),
     fStepManager(0),   
     fVisManager(0),
-    fRunManager(0)
+    fRunManager(0),
+    fMediumCounter(0),
+    fMaterialCounter(0),
+    fMatrixCounter(0)
 {
   // create geometry manager
   TString userGeometry = configuration->GetUserGeometry();
@@ -190,6 +196,8 @@ void TGeant4::Material(Int_t& kmat, const char* name, Double_t a,
 /// Create material.                                                       \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored.
 
+  kmat = ++fMaterialCounter;
+
   fGeometryManager->GetMCGeometry()
     ->Material(kmat, name, a, z, dens, radl, absl, buf, nwbuf); 
 } 
@@ -202,6 +210,8 @@ void TGeant4::Material(Int_t& kmat, const char* name, Double_t a,
 /// Create material.                                                       \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored.
 
+  kmat = ++fMaterialCounter;
+
   fGeometryManager->GetMCGeometry()
     ->Material(kmat, name, a, z, dens, radl, absl, buf, nwbuf); 
 }  
@@ -213,6 +223,8 @@ void TGeant4::Mixture(Int_t& kmat, const char *name, Float_t *a,
 /// Create material composed of more elements.                                                       \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored.
 
+   kmat = ++fMaterialCounter;
+
    fGeometryManager->GetMCGeometry()
      ->Mixture(kmat, name, a, z, dens, nlmat, wmat); 
 } 
@@ -223,6 +235,8 @@ void TGeant4::Mixture(Int_t& kmat, const char *name, Double_t *a,
 {
 /// Create material composed of more elements.                                                       \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored.
+
+   kmat = ++fMaterialCounter;
 
    fGeometryManager->GetMCGeometry()
      ->Mixture(kmat, name, a, z, dens, nlmat, wmat); 
@@ -236,6 +250,8 @@ void TGeant4::Medium(Int_t& kmed, const char *name, Int_t nmat,
 { 
 /// Create a temporary "medium" that is used for 
 /// assigning corresponding parameters to G4 objects:
+
+  kmed = ++fMediumCounter;
 
   fGeometryManager->GetMCGeometry()
     ->Medium(kmed, name, nmat, isvol, ifield, fieldm, tmaxfd, stemax, deemax, 
@@ -251,6 +267,8 @@ void TGeant4::Medium(Int_t& kmed, const char *name, Int_t nmat,
 /// Create a temporary "medium" that is used for 
 /// assigning corresponding parameters to G4 objects:
 
+  kmed = ++fMediumCounter;
+
   fGeometryManager->GetMCGeometry()
     ->Medium(kmed, name, nmat, isvol, ifield, fieldm, tmaxfd, stemax, deemax, 
         epsil, stmin, ubuf, nbuf);
@@ -263,6 +281,8 @@ void TGeant4::Matrix(Int_t& krot, Double_t thetaX, Double_t phiX,
                      Double_t phiZ) 
 {
 /// Create rotation matrix.
+
+  krot = ++fMatrixCounter;
 
   fGeometryManager->GetMCGeometry()
     ->Matrix(krot, thetaX, phiX, thetaY, phiY, thetaZ, phiZ); 

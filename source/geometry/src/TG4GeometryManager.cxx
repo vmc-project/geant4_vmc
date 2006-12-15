@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.17 2006/04/12 10:37:23 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.18 2006/12/12 16:21:15 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -100,6 +100,7 @@ void TG4GeometryManager::CreateMCGeometry()
     
   if ( fUserGeometry == "VMCtoRoot" || 
        fUserGeometry == "Root") {
+    if ( !gGeoManager) new TGeoManager("TGeo", "Root geometry manager");    
     fMCGeometry = new TGeoMCGeometry();
   }  
 }    
@@ -404,9 +405,13 @@ void TG4GeometryManager::FillMediumMapFromRoot()
     }  
     
     if ( geoVolume && ! geoVolume->GetMedium() ) {
-      TG4Globals::Exception(
-        "TG4GeometryManager", "FillMediumMapFromRoot",
-        "Root volume " + TString(volName) + " has not medium defined."); 
+      if ( ! geoVolume->IsAssembly() ) {
+        TG4Globals::Exception(
+          "TG4GeometryManager", "FillMediumMapFromRoot",
+          "Root volume " + TString(volName) + " has not medium defined.");
+      }
+      else 
+        continue;   
     }  
     
     G4int mediumID = geoVolume->GetMedium()->GetId();
@@ -536,7 +541,9 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
   for (G4int i=0; i<G4int(lvStore->size()); i++) {
     G4LogicalVolume* lv = (*lvStore)[i];
     TG4Medium* medium 
-      = fGeometryServices->GetMediumMap()->GetMedium(lv);
+      = fGeometryServices->GetMediumMap()->GetMedium(lv, false);
+      
+    if ( !medium) continue;  
       
     // get limits if already exist
     TG4Limits* tg4Limits = 0;

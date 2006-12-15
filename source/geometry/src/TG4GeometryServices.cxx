@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.14 2006/04/12 10:37:23 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.15 2006/12/12 16:21:15 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryServices
@@ -736,13 +736,9 @@ G4int TG4GeometryServices::GetMediumId(G4LogicalVolume* lv) const
 /// Return the second index for materials (having its origin in
 /// G4 tracking media concept)
 
-  TG4Medium* medium = fMediumMap->GetMedium(lv);
-  if ( ! medium ) {
-    TG4Globals::Exception(
-      "TG4GeometryServices", "GetMediumId", 
-      "Medium for given logical volume not defined.");
-    return 0;
-  }  
+  TG4Medium* medium = fMediumMap->GetMedium(lv, false);
+
+  if ( ! medium ) return 0;
 
   return medium->GetID();
 }  

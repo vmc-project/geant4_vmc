@@ -1,4 +1,4 @@
-// $Id: TG4MCGeometry.h,v 1.1 2006/12/12 16:21:15 brun Exp $
+// $Id: TG4MCGeometry.h,v 1.2 2006/12/13 14:21:35 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4MCGeometry
@@ -98,9 +98,6 @@ class TG4MCGeometry :  public TVirtualMCGeometry,
     virtual void  Gsbool(const char* onlyVolName, const char* manyVolName);
         
                          
-    // Info is geometry is defined
-    Bool_t IsGeometryDefined() const;                         
-                               
     // functions for access to geometry
     virtual Bool_t GetTransformation(const TString& volumePath,
                          TGeoHMatrix& matrix);
@@ -139,9 +136,6 @@ class TG4MCGeometry :  public TVirtualMCGeometry,
     TG4GeometryServices*  fGeometryServices;//geometry services
     TG4StringVector  fMaterialNameVector; // vector of material names sorted in the
                                           // the order of materials in G3Mat
-    G4int            fMediumCounter;   //global medium counter
-    G4int            fMaterialCounter; //global material counter
-    G4int            fMatrixCounter;   //global matrix counter
 };
 
 #endif //TG4_VMC_GEOMETRY_MANAGER_H

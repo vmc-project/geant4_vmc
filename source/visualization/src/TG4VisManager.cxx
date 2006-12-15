@@ -1,4 +1,4 @@
-// $Id: TG4VisManager.cxx,v 1.5 2006/07/10 08:54:16 brun Exp $
+// $Id: TG4VisManager.cxx,v 1.6 2006/12/12 16:21:16 brun Exp $
 // Category: visualization
 //
 // Class TG4VisManager
@@ -747,7 +747,8 @@ void TG4VisManager::Gsatt(const char* name, const char* att, Int_t val)
 
 
 //_____________________________________________________________________________
-void TG4VisManager::Gdraw(const char *name,Float_t theta, Float_t phi, Float_t psi,
+void TG4VisManager::Gdraw(const char* /*name*/, 
+                    Float_t /*theta*/, Float_t /*phi*/, Float_t /*psi*/,
                     Float_t /*u0*/, Float_t /*v0*/, Float_t /*ul*/, Float_t /*vl*/)
 { 
 /// Draw the physical volume NAME and all descendents;                       \n
@@ -764,6 +765,7 @@ void TG4VisManager::Gdraw(const char *name,Float_t theta, Float_t phi, Float_t p
 ///
 /// check if G4 graphics is ready for drawing
 
+/*
   G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
   if (!pVVisManager) { 
     TG4Globals::Warning(
@@ -845,5 +847,8 @@ void TG4VisManager::Gdraw(const char *name,Float_t theta, Float_t phi, Float_t p
   else 
     TG4Globals::Warning(
       "TG4VisManager", "Gdraw", "Ignored - Failed to register volume"); 
+*/
+
+  TG4Globals::Warning("TG4VisManager", "Gdraw", "Not implemented");
 }
 #endif //G4VIS_USE

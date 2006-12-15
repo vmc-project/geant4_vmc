@@ -1,4 +1,4 @@
-// $Id: TG4PrimaryGeneratorAction.cxx,v 1.4 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4PrimaryGeneratorAction.cxx,v 1.5 2006/12/12 16:21:16 brun Exp $
 // Category: run
 //
 // Class TG4PrimaryGeneratorAction
@@ -14,6 +14,7 @@
 
 #include <G4Event.hh>
 #include <G4ParticleTable.hh>
+#include <G4IonTable.hh>
 #include <G4ParticleDefinition.hh>
 
 #include <TVirtualMC.h>
@@ -61,6 +62,8 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
            << nofParticles << " particles" << G4endl; 
      
 
+  TG4ParticlesManager* particlesManager = TG4ParticlesManager::Instance();
+
   G4PrimaryVertex* previousVertex = 0;
   G4ThreeVector previousPosition = G4ThreeVector(); 
   G4double previousTime = 0.; 
@@ -76,18 +79,9 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
 
       // Get particle definition from TG4ParticlesManager
       //
-      TG4ParticlesManager* particlesManager = TG4ParticlesManager::Instance();
-
       G4ParticleDefinition* particleDefinition
         = particlesManager->GetParticleDefinition(particle, false);
-      G4bool isIon = false;        
 
-      if (!particleDefinition) {
-        particleDefinition
-          = particlesManager->GetIonParticleDefinition(particle, false);
-        if (particleDefinition) isIon = true;
-      }                    
-            
       if (!particleDefinition) { 
         TString text = "pdgEncoding=";
         text += particle->GetPdgCode();
@@ -133,8 +127,12 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
 
       // Set charge
       G4double charge = particleDefinition->GetPDGCharge();
-      if (isIon) 
-        charge = particle->GetPDG()->Charge() * eplus/3.;
+      if ( G4IonTable::IsIon(particleDefinition) &&
+           particleDefinition->GetParticleName() != "proton" ) {
+        // Get dynamic charge defined by user
+        TG4UserIon* userIon = particlesManager->GetUserIon(particle->GetName());
+        if ( userIon ) charge = userIon->GetQ() * eplus;
+      }       
       primaryParticle->SetCharge(charge);
       
       // Set polarization

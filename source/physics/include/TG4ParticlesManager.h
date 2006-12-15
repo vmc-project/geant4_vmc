@@ -1,4 +1,4 @@
-// $Id: TG4ParticlesManager.h,v 1.4 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4ParticlesManager.h,v 1.5 2006/12/12 16:21:16 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4ParticlesManager
@@ -19,15 +19,38 @@
 
 #include <Rtypes.h>
 
+#include <map>
+
 class G4DynamicParticle;
 class G4ParticleDefinition;
 
 class TParticle;
 class TClonesArray;
 
+class TG4UserIon
+{
+  public:
+    TG4UserIon(const G4String& name, G4int pdgEncoding, G4int Q)
+      : fName(name), fPdgEncoding(pdgEncoding), fQ(Q) {}
+    ~TG4UserIon();
+    
+    // methods
+    G4String GetName() const        { return fName;        }
+    G4int    GetPdgEncoding() const { return fPdgEncoding; }
+    G4int    GetQ() const           { return fQ;           }
+    
+    // data members
+    G4String fName;        // ion name defined by user
+    G4int    fPdgEncoding; // PDG encoding
+    G4int    fQ;           // charge
+};      
+
+
 class TG4ParticlesManager : public TG4Verbose
 {
   public:
+    typedef std::map<G4String, TG4UserIon*>  UserIonMap;
+
     TG4ParticlesManager();
     virtual ~TG4ParticlesManager();
 
@@ -41,44 +64,37 @@ class TG4ParticlesManager : public TG4Verbose
 
     // get methods
          // for G4 particle types   
-    G4int GetPDGEncodingFast(G4ParticleDefinition* particle, G4int Q);
+    G4int GetPDGEncoding(G4ParticleDefinition* particle);
 
          // for Root particle types;
     TParticle* GetParticle(const TClonesArray* particles, G4int index) const;
     G4ParticleDefinition* GetParticleDefinition(
                            const TParticle* particle, G4bool warn = true) const;
-    G4ParticleDefinition* GetIonParticleDefinition(
-                           const TParticle* particle, G4bool warn = true) const;
+
     G4DynamicParticle* CreateDynamicParticle(
                            const TParticle* particle) const;
     G4ThreeVector GetParticlePosition(
                            const TParticle* particle) const;
     G4ThreeVector GetParticleMomentum(
                            const TParticle* particle) const;        
+    TG4UserIon*   GetUserIon(const G4String& ionName, G4bool warn = true) const;
     
   private:
     TG4ParticlesManager(const TG4ParticlesManager& right);
     TG4ParticlesManager& operator=(const TG4ParticlesManager& right);
 
     // methods
-    G4int GetPDGEncoding(G4ParticleDefinition* particle) const;
-    G4int GetPDGEncoding(G4String particleName) const;
-    G4int GetPDGIonEncoding(G4int Z, G4int A, G4int iso) const;
-    void  AddParticlesToPdgDatabase() const;
-    void  MapParticles();
-    G4int AddIonToPdgDatabase(const G4String& name,
-              G4ParticleDefinition* particleDefinition, G4int Q);    
-    G4String  UniqueIonName(const G4String& g4IonName, G4int Q) const;
-    G4String  CutUniqueIonName(const G4String& uniqueIonName) const;
+    // G4int GetPDGIonEncoding(G4int Z, G4int A, G4int iso) const;
+    void  AddIonToPdgDatabase(const G4String& name,
+                              G4ParticleDefinition* particleDefinition);    
 
     // static data members
     static TG4ParticlesManager*  fgInstance; //this instance
     
     // data members
-    TG4NameMap  fParticleNameMap;  //the mapping between G4 particle names
-                                   //and TDatabasePDG names 
-    TG4IntMap   fParticlePDGMap;   //the mapping between G4 particle names
-                                   //and TDatabasePDG codes
+    TG4NameMap  fParticleNameMap; // the mapping between G4 particle names
+                                  // and TDatabasePDG names for special particles
+    UserIonMap  fUserIonMap;      // user defined ions mappped by their names
 };
 
 // inline methods

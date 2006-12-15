@@ -1,4 +1,4 @@
-// $Id: TG4Medium.cxx,v 1.14 2006/04/12 10:37:23 brun Exp $
+// $Id: TG4Medium.cxx,v 1.1 2006/12/12 16:21:15 brun Exp $
 // Category: geometry
 //
 // Class TG4Medium
@@ -75,11 +75,10 @@ void TG4Medium::SetMaterial(G4Material* material)
 void TG4Medium::SetLimits(G4UserLimits* limits)
 {
 /// Set the given limits;
-/// give a warning if medium limits has been already defined
 
-  if ( fLimits && fLimits != limits ) {
-    TG4Globals::Warning(
-      "TG4Medium", "SetLimits", "Reseting medium limits");
-  }  
+  // if ( fLimits && fLimits != limits ) {
+  //  TG4Globals::Warning(
+  //    "TG4Medium", "SetLimits", "Reseting medium limits");
+  //}  
   fLimits = limits;
 }  
