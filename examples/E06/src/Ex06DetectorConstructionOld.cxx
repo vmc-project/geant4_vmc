@@ -1,4 +1,4 @@
-// $Id: Ex06DetectorConstructionOld.cxx,v 1.1 2006/12/12 16:21:39 brun Exp $
+// $Id: Ex06DetectorConstructionOld.cxx,v 1.2 2006/12/13 14:20:58 brun Exp $
 //
 // Geant4 ExampleN06 adapted to Virtual Monte Carlo 
 //
@@ -43,14 +43,14 @@ void Ex06DetectorConstructionOld::ConstructMaterials()
   Double_t z1[2] = {  7.0,   8.0};
   Double_t w1[2] = {  0.7,   0.3};
   Double_t density = 1.29e-03;  
-  Int_t imatAir = 1;
+  Int_t imatAir;
   gMC->Mixture(imatAir, "Air", a1, z1, density, 2, w1); 
 
   Double_t a2[2] = {  1.01, 16.00};
   Double_t z2[2] = {  1.0,   8.0};
   Double_t w2[2] = {  2.0,   1.0};
   density = 1.0;  
-  Int_t imatWater = 2;
+  Int_t imatWater;
   gMC->Mixture(imatWater, "Water", a2, z2, density, -2, w2); 
 
   //
@@ -65,8 +65,6 @@ void Ex06DetectorConstructionOld::ConstructMaterials()
   Double_t deemax = -.3;     // Maximum fractional energy loss, DLS 
   Double_t stmin  = -.8;
   Float_t* ubuf = 0;
-  fImedAir = 1;
-  fImedWater = 2;
   gMC->Medium(fImedAir, "Air", imatAir, 0, ifield, fieldm, tmaxfd, 
                       stemax, deemax, epsil, stmin, ubuf, 0); 
   gMC->Medium(fImedWater, "Water", imatWater, 0, ifield, fieldm, tmaxfd,

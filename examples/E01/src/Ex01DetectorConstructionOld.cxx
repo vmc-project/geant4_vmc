@@ -1,4 +1,4 @@
-// $Id: Ex01DetectorConstructionOld.cxx,v 1.1 2006/12/12 16:21:38 brun Exp $
+// $Id: Ex01DetectorConstructionOld.cxx,v 1.2 2006/12/13 14:20:58 brun Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -52,7 +52,7 @@ void Ex01DetectorConstructionOld::ConstructMaterials()
   density = 1.782e-03;
   radl = 0.1;
   absl = 0.1;
-  Int_t imatAr = 1;
+  Int_t imatAr;
   gMC->Material(imatAr, "ArgonGas", a, z, density, radl, absl, ubuf, 0);
 
   a = 26.98;
@@ -60,7 +60,7 @@ void Ex01DetectorConstructionOld::ConstructMaterials()
   density = 2.7;
   radl = 0.1;
   absl = 0.1;
-  Int_t imatAl = 2;
+  Int_t imatAl;
   gMC->Material(imatAl, "Aluminium", a, z, density, radl, absl, ubuf, 0);
   
   a = 207.19;
@@ -68,7 +68,7 @@ void Ex01DetectorConstructionOld::ConstructMaterials()
   density = 11.35;
   radl = 0.1;
   absl = 0.1;
-  Int_t imatLead = 3;  
+  Int_t imatLead;  
   gMC->Material(imatLead, "Lead", a, z, density, radl, absl, ubuf, 0);  
 
   //
@@ -82,9 +82,6 @@ void Ex01DetectorConstructionOld::ConstructMaterials()
   Double_t tmaxfd = -20.;    // Maximum angle due to field deflection 
   Double_t deemax = -.3;     // Maximum fractional energy loss, DLS 
   Double_t stmin  = -.8;
-  fImedAr = 1;
-  fImedAl = 2;
-  fImedPb = 3;
   gMC->Medium(fImedAr, "ArgonGas",  imatAr, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0); 
   gMC->Medium(fImedAl, "Aluminium", imatAl, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0); 
   gMC->Medium(fImedPb, "Lead", imatLead, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0); 
