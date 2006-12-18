@@ -1,0 +1,321 @@
+<html><head><title>Geant4 VMC</title></head><body bgcolor="white" text="black">
+<basefont face="verdana,arial,helvetica,sans-serif">
+
+ <table border="1" cellpadding="5" cellspacing="0" width="100%">
+   <tbody><tr bgcolor="#d0ffd0">
+       <td align="center" width="100%">
+        <font size="+3">
+	   <br> 
+           <b> Geant4 VMC </b><br>
+	   <br>
+         </font>
+      </td>
+   </tr>
+ </tbody></table>
+
+ <br>
+
+ <table align="center" width="80%">
+ <tbody><tr align="center">
+     <td><a href="#Implementation">   Implementation </a> </td>
+     <td><a href="#Documentation">    Source code documentation </a> </td>
+     <td><a href="#Geometry">         Geometry descriptions </a></td>
+ </tr>
+ </tbody></table>
+
+ <hr>
+
+ <a name="Implementation"></a> 
+ <h2> Implementation </h2>
+
+ <ul><li> <a href="#Impl_Introduction">         Introduction          </a>
+     </li><li> <a href="#Impl_Geometry">             Geometry definition and navigation </a>
+     </li><li> <a href="#Impl_Stacking">             Stacking of particles  </a>
+     </li><li> <a href="#Impl_OverridingDefaults">   User Geant4 classes,
+                                                user physics list      </a>
+     </li><li> <a href="#Impl_SpecialCuts">          Special cuts           </a>
+     </li><li> <a href="#Impl_Visualization">        Visualization          </a>
+     </li><li> <a href="#Impl_Geant4UI">             Geant4 UI              </a>
+ </li></ul>	 
+
+ <a name="Impl_Introduction"></a> 
+ <h3> Introduction </h3>
+
+ <p>
+ Geant4 VMC represents the realisation of the 
+ <a href="http://root.cern.ch/root/vmc/VirtualMC.html"> Virtual Monte Carlo</a>
+ (VMC) for 
+ <a href="http://wwwinfo.cern.ch/asd/geant4/geant4.html"> Geant4 </a>.
+ It can be also seen as a Geant4 application implemented via the VMC 
+ interfaces. It implements all Geant4 user mandatory classes and
+ user action classes, which provide the default Geant4 VMC behaviour.
+ 
+ <a name="Impl_Geometry"></a> 
+ </p><h3> Geometry definition and navigation </h3>
+
+ <p>
+ The VMC support two ways of geometry definition: <br>
+ <ul><li> via <a href="ftp://root.cern.ch/root/doc/chapter19.pdf">
+          Root geometry package (TGeo) </a> 
+     <li> via <a href="http://root.cern.ch/root/htmldoc/TVirtualMC.html"> 
+          TVirtualMC interface </a>  (historically the first way) 
+ </ul>          
+ The first (newer) way is recommended for new users, the way via VMC is kept for 
+ a backward compatibility.   
+ 
+ <p> 
+ Since the version 2.0, user can choose between Geant4 native navigation and
+ G4Root navigation, if geometry is define via TGeo. The choice of the
+ navigation is done via the option specified with creating TG4RunConfiguration
+ object (see examples for more details):
+ <ul><li> <font color="#00aa00" face="Courier"> 
+          geomVMCtoGeant4 </font>  - geometry defined via VMC, G4 native navigation
+     <li> <font color="#00aa00" face="Courier"> 
+          geomVMCtoRoot </font>     - geometry defined via VMC, Root navigation
+     <li> <font color="#00aa00" face="Courier"> 
+          geomRoot </font>          - geometry defined via Root, Root navigation
+     <li> <font color="#00aa00" face="Courier"> 
+          geomRootToGeant4 </font>  - geometry defined via Root, G4 native navigation
+     <li> <font color="#00aa00" face="Courier">
+          geomGeant4 </font>        - geometry defined via Geant4, G4 native navigation
+ </ul> 
+ 
+ <p>
+ Below we shortly comment the implementation of these options: 
+ <ul><li><font color="#00aa00" face="Courier"> 
+          geomVMCtoGeant4 </font>  <br>
+          The interfaces to functions for geometry definitions provided by VMC 
+          were strongly inspired by Geant3; the implementation of these functions
+          in Geant4 VMC is therefore made with use of the G3toG4 tool provided
+          by Geant4. <br>
+          
+     <li><font color="#00aa00" face="Courier"> 
+          geomVMCtoRoot </font> <br> 
+          The implementation of this option uses 
+          <a href="http://root.cern.ch/root/htmldoc/TGeoMCGeometry.html">
+          TGeoMCGeometry </a> class provided in the root/vmc package. The same class 
+          is used also by TGeant3TGeo and TFluka for supporting user geometry defined via
+          VMC.  
+
+     <li><font color="#00aa00" face="Courier"> 
+          geomRoot </font> <br> 
+          If geometry is defined via Root and G4Root navigation is selected,
+          Geant4 VMC only converts the parameters defined in TGeoMedium objects
+          to Geant4 objects.
+
+     <li><font color="#00aa00" face="Courier"> 
+          geomRootToGeant4 </font> <br>    
+          The geometry defined via TGeo is converted in Geant4  geometry
+          using the external
+          <a href="http://ivana.home.cern.ch/ivana/VGM.html">
+          Virtual Geometry Model </a> (VGM), which has replaced the old one-way 
+          converters from Geant4 VMC (G4toXML, RootToG4), removed from Geant4 VMC  
+          with the version 1.7. In the VGM, these convertors has been generalized
+          and improved.
+         
+     <li> <font color="#00aa00" face="Courier">
+          geomGeant4 </font> <br>
+          User Geant4 detector construction class can be passed to Geant4 VMC
+          via user defined run configuration class 
+          (see <a href="#Impl_OverridingDefaults"> below </a>).
+          If Geant4 VMC is built with VGM, geometry can be exported in Root 
+          using the built-in command:<br>
+          <font color="#aa0000"> /vgm/generateRoot </font> <br>
+          and reused in Geant3 or Fluka (when available) VMC simulation.
+ </ul>          
+          
+ </p><h4> "MANY" positions </h4>
+
+ <p>
+ As Geant4 does not support overlapping geometries, the positions with MANY option
+ are not allowed with Geant4 navigation. 
+
+ <p>
+ In case of <font face="Courier"> geomVMCtoGeant4 </font> option, user has a possibility  
+ to identify all ONLY volumes that overlap with the MANY ones  using TVirtualMC::Gsbool() 
+ function for each overlap.  This info is then used to perform automatically Boolean operations
+ on the concerned solids. The volume with a "MANY" position can have only this position
+ if Gsbool is used. <br>
+
+ <p>
+ In case of <font face="Courier"> geomRoottoGeant4 </font> option, the MANY option is 
+ ignored and if present in geometry, Gean4 geometry will be incorrect.
+ 
+ <p> 
+ There is no limitation on use of the MANY option with G4Root navigation
+ (options <font face="Courier"> geomVMCtoRoot, geomRoot </font>.
+
+ <a name="Impl_Stacking"></a> 
+ <h3> Stacking of particles </h3>
+
+ <p>
+ The user  <a href="http://root.cern.ch/root/htmldoc/TVirtualMCStack.html"> VMC stack </a> 
+ is used differently in Geant3 VMC and Geant4 VMC.
+ Geant3 VMC pops both primary and secondary particles as they are provided by 
+ TVirtualMCStack::PopNextTrack(), while Geant4 VMC pops only primary
+ particles using TVirtualMCStack::PopPrimaryForTracking()
+ from the VMC stack. Stacking of secondary particles is then handled by Geant4 
+ kernel and the user VMC stack only monitors this stacking.
+
+ </p><p>
+ The consequence of this is that the particles added to the VMC stack
+ in other than TVirtualMCApplication::GeneratePrimaries() functions
+ are ignored in Geant4 tracking.
+ 
+ </p><p>
+ The stack classes in the VMC examples provide the same stacking
+ mechanism for both Geant3 and Geant4 MCs and they are recommended to be used in
+ a user application. 
+ 
+ <a name="Impl_OverridingDefaults"></a> 
+ </p><h3> User Geant4 classes <br>
+          (physics list, detector construction, primary generator) </h3>
+
+ <p>
+ The default Geant4 VMC behaviour, defined by the Geant4 user mandatory classes 
+ and user action classes implemented in Geant4 VMC, can be customized by a user 
+ by providing his own class derived from TG4RunConfiguration. <br>
+ Such customization is recommended for including a user own physics list;
+ an example of including user own physics list is provided in the VMC 
+ example E03.
+ 
+ </p><p>
+ User has also the possibility to override detector
+ construction and/or primary generation action classes and use an existing 
+ Geant4 geometry/primary generator definition with VMC. Including of
+ user geometry construction is also demonstrated in the example E03.
+ 
+ 
+ </p><p>
+ In other cases, though the customisation is possible and allowed by the design,
+ it has not been tested and so it is not recommended especially for the novice users.
+ 
+ <a name="Impl_SpecialCuts"></a> 
+ </p><h3> Special cuts </h3>
+
+ <p>
+ By default, Geant3 defines cuts in kinetic energy while Geant4 cuts in range, 
+ the corresponding values of cuts in kinetic energy are then calculated for each material. 
+ The VMC provides a possibility for a user to define cuts in Geant3 way.
+ In order to activate these cuts in Geant4 VMC a user has to
+ switch on the special cuts process in his g4Config.C: <br>
+ 
+ </p><p>
+ <font color="#aa0000"> <i>
+ // Switch on special cuts (not activated by default) </i> </font><br>
+ <font color="#00aa00" face="Courier"> 
+ TG4PhysicsListOptions options;                               <br>
+ options.SetSpecialCutsPhysics(true);                         <br>
+ runConfiguration-&gt;SetPhysicsListOptions(options);            <br>
+ </font>
+ 
+ </p><p>
+ Analogically user can switch on/off other physics options.
+
+ </p><p>
+ In case, a user has registered his own physics list, 
+ he has a possibility to register the special cuts physics constructor
+ (class TG4PhysicsConstructorSpecialCuts) in his own modular physics list 
+ to get this functionality.
+ 
+ <a name="Impl_Visualization"></a> 
+ </p><h3> Visualization </h3>
+          
+ <p>
+ Geant4 VMC does not implement all TVirtualMC functions for visualization
+ satisfactorily. User can better set visualization options directly
+ using Geant4 visualization commands, as it is illustrated in the 
+ VMC examples in g4vis.in macro. 
+
+ </p><p>
+ By default, Geant4 VMC supports only this VIS/UI setting: <br>
+ <font color="#aa0000"> OPENGLX, OPENGLXM, XM, TCSH </font>.  <br>
+ In order to get supported all Geant4 visualization/UI drivers
+ user can customise the geant4_vmc/source/Makefile as described in the
+ comments in this file. All Geant4 graphics drivers and UIs
+ can be then used within Geant4 VMC, however not all these options were 
+ tested in this environment and even though a correct behaviour is expected,
+ it is not guaranteed. 
+ 
+ <a name="Impl_Geant4UI"></a> 
+ </p><h3> Geant4 UI </h3>
+          
+ <p>
+ The VMC interface provides a common denominator for all implemented MC's and
+ cannot cover all commands available in a Geant4 user session through Geant4 UI.
+ Switching between the Root UI and the Geant4 UI gives a user the possibility
+ of working with the native Geant4 UI when needed or desired.It is also possible to
+ process a foreign command or a foreign macro in both UIs: 
+ 
+ </p><ul><li> From Root to Geant4 UI: <br><br>
+
+     Switching UI: <br>
+     <font color="#00aa00" face="Courier">
+     root [0] ((TGeant4*)gMC)-&gt;StartGeantUI() </font> <br> <br> 
+   
+     Call Geant4 macro "myMacro.in" from Root: <br>
+     <font color="#00aa00" face="Courier">
+     root [0] ((TGeant4*)gMC)-&gt;ProcessGeantMacro("myMacro.in"); </font><br><br> 
+
+     Call Geant4 command from Root:            <br>
+     <font color="#00aa00" face="Courier">
+    root [0] ((TGeant4*)gMC)-&gt;ProcessGeantCommand("/tracking/verbose 1"); </font><br><br>
+
+     </li><li> From Geant4 to Root UI: <br><br> 
+
+     Switching UI: <br>
+     <font color="#aa0000" face="Courier">
+     PreInit&gt; /mcControl/root                 </font><br> <br>                                                        
+
+     Call Root macro "myMacro.C" from Geant4:  <br>
+     <font color="#aa0000" face="Courier">
+     PreInit&gt; /mcControl/rootMacro myMacro     </font><br> <br>
+                                     
+   
+     Call Root command from Geant4:            <br>
+     <font color="#aa0000" face="Courier">
+     Idle&gt; /mcControl/rootCmd TBrowser b;      </font><br> <br>                                             
+ </li></ul> 
+
+ <hr>
+
+ <a name="Documentation"></a> 
+ <h2> Source code documentation </h2>
+
+ <a href="http://ivana.home.cern.ch/ivana/g4vmc_html/index.html">
+ Source code documentation </a>
+ has been generated from the source code by 
+ <a href="http://www.stack.nl/%7Edimitri/doxygen//index.html">
+ Doxygen </a>.
+ <br><br>
+
+ <hr>
+
+ <a name="Geometry"></a> 
+ <h2> Geometry in XML </h2>
+
+ <p></p>
+ The VGM provides also the XML exporters which enable to generate XML files with 
+ geometry description in the AGDD or GDML formats. If Geant4 VMC is compiled with
+ USE_VGM option, geometry can be exported to XML using the built-in commands: <br>
+ <font color="#aa0000"> /vgm/generateAGDD [volumeName] </font> <br>
+ <font color="#aa0000"> /vgm/generateGDML [volumeName] </font> <br>
+ If volumeName is not specified, the whole geometry volume tree is exported.
+ 
+ <p>
+ The geometry can be then browsed and visualized using
+ <a href="http://hrivnac.home.cern.ch/hrivnac/Activities/Packages/GraXML">
+ GraXML tool </a>.
+ 
+ </p><hr>
+
+Contact: 
+<a href="mailto:vmc@root.cern.ch"> vmc@root.cern.ch </a> 
+<br><br>
+
+Page maintained by:
+<a href="mailto:Ivana.Hrivnacova@cern.ch">Ivana Hrivnacova</a> <br>
+<i> Last update: 18/12/2006 </i>
+
+<p></p>
+</body></html>

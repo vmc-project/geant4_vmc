@@ -2,7 +2,7 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.13/07  21 November 2006   *
+  *   Version   5.14/00  14 December 2006   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
@@ -10,18 +10,20 @@
   *******************************************
 
 FreeType Engine v2.1.9 used to render TrueType fonts.
-Compiled on 13 December 2006 for linux with thread support.
+Compiled on 16 December 2006 for linux with thread support.
 
 CINT/ROOT C/C++ Interpreter version 5.16.16, November 24, 2006
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E06.C("g4tgeoConfigOld.C", kTRUE)...
+Note: File "/work/packages/root/root_v5.14.00/lib/libEG.so" already loaded
+Note: File "/work/packages/root/root_v5.14.00/lib/libPhysics.so" already loaded
 Loading Geant4 granular libraries ...
 Loading VGM libraries ... 
 Loading libraries ... finished
+Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
 Geometry will be defined via VMC
-Info in <TGeoManager::TGeoManager>: Geometry Geometry, default geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
 Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
@@ -29,19 +31,19 @@ Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::BuildCache>: --- Maximum geometry depth set to 100
-Info in <TGeoManager::CloseGeometry>: 3 nodes/ 3 volume UID's in default geometry
+Info in <TGeoManager::CloseGeometry>: 3 nodes/ 3 volume UID's in Root geometry manager
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-08-01-patch-02    (10-November-2006)
+ Geant4 version Name: geant4-08-02    (15-December-2006)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
 *************************************************************
 
 Info in <TG4RootNavMgr::Initialize>: Creating G4 hierarchy ...
-Info in <TGeoManager::ConvertReflections>: Converting reflections in: Geometry - default geometry ...
+Info in <TGeoManager::ConvertReflections>: Converting reflections in: TGeo - Root geometry manager ...
 Info in <TGeoManager::ConvertReflections>: Done
 ===> GEANT4 materials created and mapped to TGeo ones...
 ===> GEANT4 logical volumes created and mapped to TGeo ones...
@@ -93,13 +95,7 @@ Registered model factories:
   drawByCharge
   drawByParticleID
 
-Registered models: 
-  None
-
 Registered filter factories:
-  None
-
-Registered filters:
   None
 
 ***** COMMAND NOT FOUND </mcVerbose/geometryBuilder 1> *****
@@ -456,6 +452,7 @@ MPV[1]: (4.144e-06, 0.2)
  Done DumpVector of 2 entries 
 
 phot:  Total cross sections from Sandia parametrisation. 
+      Sampling according PhotoElectric model
 
 compt:  Total cross sections has a good parametrisation from 10 KeV to (100/Z) GeV
       Sampling according Klein-Nishina model
@@ -463,7 +460,7 @@ compt:  Total cross sections has a good parametrisation from 10 KeV to (100/Z) G
       Lambda tables from 100 eV  to 100 GeV in 90 bins.
 
 conv:  Total cross sections has a good parametrisation from 1.5 MeV to 100 GeV for all Z;
-      sampling secondary e+e- according to the Bethe-Heitler model
+      sampling secondary e+e- according Bethe-Heitler model
       tables are built for  gamma
       Lambda tables from 1.022 MeV to 100 GeV in 100 bins.
 
@@ -495,7 +492,7 @@ eBrem:   tables are built for  e+
       Total cross sections from a parametrisation based on the EEDL data library. 
       Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
 
-annihil:       Heilter model of formula of annihilation into 2 photons
+annihil:       Sampling according eplus2gg model
       tables are built for  e+
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
 
@@ -575,6 +572,7 @@ hIoni:   tables are built for  pi-
 msc:  Model variant of multiple scattering for pi-
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
       Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+Number of optical photons produced in this event : 2077
 
 Warning: G4MaterialPropertyVector::GetProperty
 ==> attempt to Retrieve Property below range
@@ -584,14 +582,9 @@ Warning: G4MaterialPropertyVector::GetProperty
 
 Warning: G4MaterialPropertyVector::GetProperty
 ==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 1895
-Number of optical photons produced in this event : 1754
-Number of optical photons produced in this event : 1919
-Number of optical photons produced in this event : 1878
-Number of optical photons produced in this event : 1935
-G4SteppingManager::InvokeAtRestDoItProcs: No AtRestDoIt process is active. 
-Number of optical photons produced in this event : 1917
-Number of optical photons produced in this event : 1915
+Number of optical photons produced in this event : 2084
+Number of optical photons produced in this event : 1991
+Number of optical photons produced in this event : 2078
 
 Warning: G4MaterialPropertyVector::GetProperty
 ==> attempt to Retrieve Property below range
@@ -601,7 +594,7 @@ Warning: G4MaterialPropertyVector::GetProperty
 
 Warning: G4MaterialPropertyVector::GetProperty
 ==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 1865
+Number of optical photons produced in this event : 2122
 
 Warning: G4MaterialPropertyVector::GetProperty
 ==> attempt to Retrieve Property below range
@@ -611,8 +604,6 @@ Warning: G4MaterialPropertyVector::GetProperty
 
 Warning: G4MaterialPropertyVector::GetProperty
 ==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 1879
-G4SteppingManager::InvokeAtRestDoItProcs: No AtRestDoIt process is active. 
 
 Warning: G4MaterialPropertyVector::GetProperty
 ==> attempt to Retrieve Property below range
@@ -622,4 +613,44 @@ Warning: G4MaterialPropertyVector::GetProperty
 
 Warning: G4MaterialPropertyVector::GetProperty
 ==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 1875
+Number of optical photons produced in this event : 2075
+Number of optical photons produced in this event : 2076
+Number of optical photons produced in this event : 2022
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+Number of optical photons produced in this event : 1988
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+Number of optical photons produced in this event : 2067

@@ -1,4 +1,4 @@
-// $Id: g4libs.C,v 1.8 2005/09/01 10:04:32 brun Exp $
+// $Id: g4libs.C,v 1.9 2006/01/13 16:58:17 brun Exp $
 //
 // Macro for loading Geant4 and Geant4 VMC libraries
 
@@ -25,6 +25,14 @@ Bool_t isSet(const char* variable)
   
   return false;
 }  
+
+Bool_t isLibrary(const char* libName)
+{
+  if (TString(gSystem->DynamicPathName(libName, kTRUE)) != TString(""))
+    return kTRUE;
+  else  
+    return kFALSE;
+}    
 
 void vgmlibs()
 { 
@@ -238,6 +246,10 @@ void g4libs_granular()
   // VGM libraries
   vgmlibs();
     
+  // G4Root library (if available)
+  if ( isLibrary("libG4root") )
+    gSystem->Load("libG4root");
+
   // Geant4 VMC library
   gSystem->Load("libgeant4vmc");
 

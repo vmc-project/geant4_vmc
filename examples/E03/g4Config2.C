@@ -1,4 +1,4 @@
-// $Id: g4Config2.C,v 1.2 2006/01/13 16:58:17 brun Exp $
+// $Id: g4Config2.C,v 1.3 2006/12/12 16:21:38 brun Exp $
 //
 // Configuration macro for Geant4 VirtualMC for Example03
 // for geometry defined with Root and selected Geant4 native navigation
@@ -7,8 +7,8 @@
 void Config()
 {
   // Load library with a user physics list
-  gSystem->Load("$G4INSTALL/lib/plists/Linux-g++/libPackaging");
-  gSystem->Load("$G4INSTALL/lib/plists/Linux-g++/libLHEP_BERT");
+  gSystem->Load("libG4phys_builders");
+  gSystem->Load("libG4phys_lists");
 
   // Load library with a user run configuration
   gSystem->Load("libgeant4e03");

@@ -2,7 +2,7 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.13/07  21 November 2006   *
+  *   Version   5.14/00  14 December 2006   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
@@ -10,21 +10,23 @@
   *******************************************
 
 FreeType Engine v2.1.9 used to render TrueType fonts.
-Compiled on 13 December 2006 for linux with thread support.
+Compiled on 16 December 2006 for linux with thread support.
 
 CINT/ROOT C/C++ Interpreter version 5.16.16, November 24, 2006
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E03_1.C("g3tgeoConfig.C", kFALSE)...
+Note: File "/work/packages/root/root_v5.14.00/lib/libEG.so" already loaded
+Note: File "/work/packages/root/root_v5.14.00/lib/libPhysics.so" already loaded
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766574151    2DB0FE47 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    10138183      9AB247 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766597189   766574151
-                                        HEX    2DB15845    2DB0FE47
+          with Store/Table at absolute adrs    10161221    10138183
+                                        HEX      9B0C45      9AB247
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -105,7 +107,7 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.13/07  21 November 2006   *
+  *   Version   5.14/00  14 December 2006   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
@@ -113,22 +115,24 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
   *******************************************
 
 FreeType Engine v2.1.9 used to render TrueType fonts.
-Compiled on 13 December 2006 for linux with thread support.
+Compiled on 16 December 2006 for linux with thread support.
 
 CINT/ROOT C/C++ Interpreter version 5.16.16, November 24, 2006
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E03_2.C("g3tgeoConfig.C", kFALSE)...
+Note: File "/work/packages/root/root_v5.14.00/lib/libEG.so" already loaded
+Note: File "/work/packages/root/root_v5.14.00/lib/libPhysics.so" already loaded
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 --- Init MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766450247    2DAF1A47 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766437959    2DAEEA47 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766473285   766450247
-                                        HEX    2DAF7445    2DAF1A47
+          with Store/Table at absolute adrs   766460997   766437959
+                                        HEX    2DAF4445    2DAEEA47
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

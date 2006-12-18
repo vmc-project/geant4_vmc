@@ -1,4 +1,4 @@
-// $Id: TG4VSpecialCuts.cxx,v 1.5 2005/03/29 10:39:53 brun Exp $
+// $Id: TG4VSpecialCuts.cxx,v 1.6 2006/12/12 16:21:16 brun Exp $
 // Category: physics
 //
 // Class TG4VSpecialCuts
@@ -52,17 +52,12 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
   TG4Limits* limits 
      = TG4GeometryServices::Instance()
          ->GetLimits(track.GetVolume()->GetLogicalVolume()->GetUserLimits());
-
-  if (!limits) {
-    TG4Globals::Exception(
-      "TG4VSpecialCuts", "PostStepGetPhysicalInteractionLength",
-      TString(track.GetVolume()->GetLogicalVolume()->GetName()) +
-      " has not limits.");
-  }            
 #else  
   TG4Limits* limits 
     = (TG4Limits*) track.GetVolume()->GetLogicalVolume()->GetUserLimits();
 #endif    
+
+  if (!limits) return proposedStep;
 
   // max track length
   proposedStep 

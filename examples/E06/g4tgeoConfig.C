@@ -1,12 +1,10 @@
-// $Id: g4Config.C,v 1.2 2006/01/13 16:58:58 brun Exp $
+// $Id: g4tgeoConfig.C,v 1.1 2006/12/12 16:21:39 brun Exp $
 //
 // Configuration macro for Geant4 VirtualMC for Example03
 // for geometry defined with Root and selected G4Root navigation
 
 void Config()
 {
-  gSystem->Load("libG4root");
-
   // Default Geant4 VMC run configuration
   TG4RunConfiguration* runConfiguration 
     = new TG4RunConfiguration("geomRoot");

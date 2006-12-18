@@ -2,7 +2,7 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.13/07  21 November 2006   *
+  *   Version   5.14/00  14 December 2006   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
@@ -10,21 +10,23 @@
   *******************************************
 
 FreeType Engine v2.1.9 used to render TrueType fonts.
-Compiled on 12 December 2006 for linux with thread support.
+Compiled on 16 December 2006 for linux with thread support.
 
 CINT/ROOT C/C++ Interpreter version 5.16.16, November 24, 2006
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E06.C("g3tgeoConfig.C", kFALSE)...
+Note: File "/work/packages/root/root_v5.14.00/lib/libEG.so" already loaded
+Note: File "/work/packages/root/root_v5.14.00/lib/libPhysics.so" already loaded
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766631495    2DB1DE47 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    14512711      DD7247 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766654533   766631495
-                                        HEX    2DB23845    2DB1DE47
+          with Store/Table at absolute adrs    14535749    14512711
+                                        HEX      DDCC45      DD7247
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
