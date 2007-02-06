@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.cxx,v 1.12 2006/04/12 10:37:23 brun Exp $
+// $Id: TG4DetConstruction.cxx,v 1.13 2006/12/12 16:21:15 brun Exp $
 // Category: geometry
 //
 // Class TG4DetConstruction
@@ -13,8 +13,6 @@
 #include "TG4Globals.h"
 
 #include <G4VPhysicalVolume.hh>
-
-#include <TVirtualMCApplication.h>
 
 //_____________________________________________________________________________
 TG4DetConstruction::TG4DetConstruction()

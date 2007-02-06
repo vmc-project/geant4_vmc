@@ -1,4 +1,4 @@
-// $Id: TG4PrimaryGeneratorAction.cxx,v 1.5 2006/12/12 16:21:16 brun Exp $
+// $Id: TG4PrimaryGeneratorAction.cxx,v 1.6 2006/12/15 09:30:30 brun Exp $
 // Category: run
 //
 // Class TG4PrimaryGeneratorAction
@@ -9,6 +9,7 @@
 
 #include "TG4PrimaryGeneratorAction.h"
 #include "TG4ParticlesManager.h"
+#include "TG4StateManager.h"
 #include "TG4G3Units.h"
 #include "TG4Globals.h"
 
@@ -163,6 +164,7 @@ void TG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
 /// Generate primary particles by the selected generator.
 
   // Begin of event
+  TG4StateManager::Instance()->SetNewState(kInEvent);
   TVirtualMCApplication::Instance()->BeginEvent();
 
   // Generate primaries and fill the VMC stack

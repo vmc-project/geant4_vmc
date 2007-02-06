@@ -1,4 +1,4 @@
-// $Id: TG4RunConfiguration.h,v 1.7 2006/07/28 06:09:36 brun Exp $
+// $Id: TG4RunConfiguration.h,v 1.8 2006/12/12 16:21:16 brun Exp $
 /// \ingroup run
 //
 /// \class TG4RunConfiguration
@@ -79,6 +79,7 @@ class TG4RunConfiguration
     G4UImessenger*         fGDMLMessenger;    //! XML messenger
 
   private:
+    TG4RunConfiguration();
     TG4RunConfiguration(const TG4RunConfiguration& right);
     TG4RunConfiguration& operator=(const TG4RunConfiguration& right);
 };

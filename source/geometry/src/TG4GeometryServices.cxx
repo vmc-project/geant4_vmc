@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.15 2006/12/12 16:21:15 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.16 2006/12/15 09:30:29 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryServices
@@ -449,6 +449,7 @@ TG4GeometryServices::PrintLogicalVolumeStore() const
            << "  " << lv->GetName()
            << "  " << std::setw(5)  << lv->GetNoDaughters() << " daughters"
            << "  limits: " << lv->GetUserLimits()
+           << "  material: " << lv->GetMaterial()->GetName()
            << G4endl;
            
     for (G4int j=0; j<lv->GetNoDaughters(); j++) {

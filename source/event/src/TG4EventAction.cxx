@@ -1,4 +1,4 @@
-// $Id: TG4EventAction.cxx,v 1.5 2006/12/12 16:21:15 brun Exp $
+// $Id: TG4EventAction.cxx,v 1.6 2006/12/15 09:30:29 brun Exp $
 // Category: event
 //
 // Class TG4EventAction
@@ -10,6 +10,7 @@
 #include "TG4EventAction.h"
 #include "TG4TrackingAction.h"
 #include "TG4ParticlesManager.h"
+#include "TG4StateManager.h"
 #include "TG4Globals.h"
 
 #include <G4Event.hh>
@@ -200,8 +201,9 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
   // display event
   DisplayEvent(event);
 
-  // aliroot finish event
+  // VMC application finish event
   TVirtualMCApplication::Instance()->FinishEvent();    
+  TG4StateManager::Instance()->SetNewState(kNotInApplication);
 
   if (VerboseLevel() > 1) {
     // print time

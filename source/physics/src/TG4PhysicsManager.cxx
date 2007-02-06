@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.13 2006/12/12 16:21:16 brun Exp $
+// $Id: TG4PhysicsManager.cxx,v 1.14 2006/12/15 09:30:29 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsManager
@@ -11,6 +11,7 @@
 #include "TG4ModularPhysicsList.h"
 #include "TG4ParticlesManager.h"
 #include "TG4G3PhysicsManager.h"
+#include "TG4StateManager.h"
 #include "TG4GeometryServices.h"
 #include "TG4MediumMap.h"
 #include "TG4Medium.h"
@@ -573,7 +574,10 @@ void  TG4PhysicsManager::DefineParticles()
 /// and maps them to G4 particles objects.
 
   fParticlesManager->DefineParticles();
+
+  TG4StateManager::Instance()->SetNewState(kAddParticles);
   TVirtualMCApplication::Instance()->AddParticles();
+  TG4StateManager::Instance()->SetNewState(kNotInApplication);
 }    
 
 //_____________________________________________________________________________

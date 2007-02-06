@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.16 2006/12/12 16:21:15 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.17 2006/12/15 09:30:29 brun Exp $
 // Category: digits+hits
 //
 // Class TG4StepManager
@@ -328,9 +328,13 @@ G4VPhysicalVolume* TG4StepManager::GetCurrentPhysicalVolume() const
       G4TransportationManager::GetTransportationManager()->
         GetNavigatorForTracking();
     physVolume
-     = navigator->LocateGlobalPointAndSetup(position);  
+     = navigator->LocateGlobalPointAndSetup(position); 
+     
+    if ( ! physVolume ) {
+      G4cerr << "No physical volume found at track vertex: "
+             << position << G4endl; 
+    }         
   }   
-    
   return physVolume;
 }     
 
@@ -340,7 +344,12 @@ Int_t TG4StepManager::CurrentVolID(Int_t& copyNo) const
 /// Return the current sensitive detector ID
 /// and the copy number of the current physical volume.
 
-  G4VPhysicalVolume* physVolume = GetCurrentPhysicalVolume(); 
+  G4VPhysicalVolume* physVolume = GetCurrentPhysicalVolume();
+  if ( ! physVolume ) {
+    TG4Globals::Exception(
+      "TG4StepManager", "CurrentVolID", "No current physical volume found");
+    return 0;  
+  }
   copyNo = physVolume->GetCopyNo() + fCopyNoOffset;
 
   // sensitive detector ID

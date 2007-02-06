@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.cxx,v 1.11 2006/04/12 10:37:24 brun Exp $
+// $Id: TG4RunManager.cxx,v 1.12 2006/12/12 16:21:16 brun Exp $
 // Category: run
 //
 // Class TG4RunManager
@@ -16,6 +16,7 @@
 #include "TG4SDServices.h"
 #include "TG4PhysicsManager.h"
 #include "TG4G3PhysicsManager.h"
+#include "TG4StateManager.h"
 #include "TG4DetConstruction.h"
 #include "TG4PostDetConstruction.h"
 #include "TG4SDConstruction.h"
@@ -25,7 +26,6 @@
 #include "TG4EventAction.h"
 #include "TG4TrackingAction.h"
 #include "TG4SteppingAction.h"
-#include "TG4SpecialStackingAction.h"
 
 #include <G4RunManager.hh>
 #include <G4UIsession.hh>
@@ -180,7 +180,10 @@ void TG4RunManager::ConfigureRunManager()
     // Construct geometry via VMC application
     if ( TG4GeometryManager::Instance()->VerboseLevel() > 0) 
       G4cout << "Running TVirtualMCApplication::ConstructGeometry"; 
+
+    TG4StateManager::Instance()->SetNewState(kConstructGeometry);
     TVirtualMCApplication::Instance()->ConstructGeometry();
+    TG4StateManager::Instance()->SetNewState(kNotInApplication);
     
     // Set top volume and close Root geometry if not yet done
     if ( ! gGeoManager->IsClosed() ) {

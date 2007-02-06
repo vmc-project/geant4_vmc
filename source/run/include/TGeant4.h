@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.18 2006/12/12 16:21:16 brun Exp $
+// $Id: TGeant4.h,v 1.19 2006/12/15 09:30:30 brun Exp $
 /// \ingroup run
 //
 /// \class TGeant4
@@ -9,12 +9,18 @@
 #ifndef TGEANT4_H
 #define TGEANT4_H
 
+#include "TG4ApplicationState.h"
+
+#include <G4ApplicationState.hh>
+
 #include <TVirtualMC.h>
 #include <TMCProcess.h>
 #include <TMCOptical.h>
 #include <TArrayI.h>
+#include <TString.h>
 
 class TG4RunConfiguration;
+class TG4StateManager;
 class TG4GeometryManager;
 class TG4SDManager;
 class TG4PhysicsManager;
@@ -309,8 +315,19 @@ class TGeant4: public TVirtualMC
     TGeant4();
     TGeant4(const TGeant4& right);
     TGeant4& operator=(const TGeant4& right);
+    
+    // methods
+    Bool_t CheckApplicationState(const TString& methodName,
+                                 TG4ApplicationState requiredState,
+                                 Bool_t allowLater = false,
+                                 Bool_t allowSooner = false,
+                                 Bool_t allowJustAfter = false ) const;
+    Bool_t CheckG4ApplicationState(const TString& methodName,
+                                 G4ApplicationState requiredState,
+                                 Bool_t allowLater = false) const;
 
     // data members
+    TG4StateManager*     fStateManager;    //application state manager
     TG4GeometryManager*  fGeometryManager; //geometry manager
     TG4SDManager*        fSDManager;       //sensitive detectors manager
     TG4PhysicsManager*   fPhysicsManager;  //physics manager

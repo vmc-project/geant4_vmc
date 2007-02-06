@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.18 2006/12/13 14:21:36 brun Exp $
+// $Id: TGeant4.cxx,v 1.19 2006/12/15 09:30:30 brun Exp $
 // Category: run
 //
 // Class TGeant4
@@ -9,6 +9,7 @@
 
 #include "TGeant4.h"
 #include "TG4RunConfiguration.h"
+#include "TG4StateManager.h" 
 #include "TG4GeometryManager.h" 
 #include "TG4OpGeometryManager.h" 
 #include "TG4SDManager.h" 
@@ -18,6 +19,8 @@
 #include "TG4RunManager.h"
 #include "TG4Globals.h"
 
+#include <G4StateManager.hh>
+
 #include <TVirtualMCGeometry.h>
 
 ClassImp(TGeant4)
@@ -26,6 +29,7 @@ ClassImp(TGeant4)
 TGeant4::TGeant4(const char* name, const char* title,
                  TG4RunConfiguration* configuration, int argc, char** argv)
   : TVirtualMC(name, title),
+    fStateManager(0),
     fGeometryManager(0),
     fSDManager(0),     
     fPhysicsManager(0),
@@ -37,6 +41,12 @@ TGeant4::TGeant4(const char* name, const char* title,
     fMatrixCounter(0)
     
 {
+  // create state manager
+  fStateManager = new TG4StateManager();
+  fStateManager->SetNewState(kPreInit);
+  // add verbose level
+  //G4cout << "TG4StateManager has been created." << G4endl;
+  
   // create geometry manager
   TString userGeometry = configuration->GetUserGeometry();
   fGeometryManager = new TG4GeometryManager(userGeometry);
@@ -77,6 +87,7 @@ TGeant4::TGeant4(const char* name, const char* title,
 TGeant4::TGeant4(const char* name, const char* title,
                  TG4RunConfiguration* configuration)
   : TVirtualMC(name, title),
+    fStateManager(0),
     fGeometryManager(0), 
     fSDManager(0),     
     fPhysicsManager(0),
@@ -87,6 +98,11 @@ TGeant4::TGeant4(const char* name, const char* title,
     fMaterialCounter(0),
     fMatrixCounter(0)
 {
+  // create state manager
+  fStateManager = new TG4StateManager();
+  // add verbose level
+  //G4cout << "TG4StateManager has been created." << G4endl;
+  
   // create geometry manager
   TString userGeometry = configuration->GetUserGeometry();
   fGeometryManager = new TG4GeometryManager(userGeometry);
@@ -128,12 +144,105 @@ TGeant4::TGeant4(const char* name, const char* title,
 TGeant4::~TGeant4() {
 //
   delete fRunManager;
+  delete fStateManager;
   delete fGeometryManager;
   delete fSDManager;
   delete fPhysicsManager;
   delete fStepManager;
   // fVisManager is deleted with G4RunManager destructor
 }
+
+//
+// private methods
+// 
+
+//_____________________________________________________________________________
+Bool_t TGeant4::CheckApplicationState(const TString& methodName,
+                                    TG4ApplicationState requiredState,
+                                    Bool_t allowLater,
+                                    Bool_t allowSooner, 
+                                    Bool_t allowJustAfter) const
+{
+/// If current application state does not correspond to the requiredState,
+/// gives a warning and returnse false; returns true otherwise.
+/// (To be changed in exception later.)
+
+  TG4ApplicationState currentState = fStateManager->GetCurrentState();
+  TG4ApplicationState previousState = fStateManager->GetPreviousState();
+  if ( currentState != requiredState && 
+       ! ( allowLater && currentState > requiredState ||
+           allowLater && previousState >= requiredState ) && 
+       ! ( allowSooner && currentState < requiredState ||
+           allowSooner && previousState <= requiredState ) &&
+       ! ( allowJustAfter && previousState == requiredState ) ) {
+
+    TString message 
+      = TString("MC::") + methodName + 
+      + TString(" can be called only from VMCApplication::")
+      + TString(fStateManager->GetStateName(requiredState).c_str());
+    if ( allowLater ) 
+      message += TString(" or after");   
+    if ( allowSooner ) 
+      message += TString(" or before");   
+    if ( allowJustAfter ) 
+      message += TString(" or just after");   
+    message += TG4Globals::Endl() 
+             + TString("while detected in VMCApplication::")
+             + TString(fStateManager->GetStateName(currentState).c_str());
+    if ( currentState == kNotInApplication )         
+      message += TString(" after VMCApplication::")
+               + TString(fStateManager->GetStateName(previousState).c_str());
+
+    TG4Globals::Warning("TGeant4", methodName, message);
+    return false;
+  }
+  
+  return true;
+}       
+             
+
+//_____________________________________________________________________________
+Bool_t TGeant4::CheckG4ApplicationState(const TString& methodName,
+                                    G4ApplicationState requiredState,
+                                    Bool_t allowLater) const
+{
+/// If current application state does not correcpond to the requiredState,
+/// gives a warning and returnse false; returns true otherwise.
+/// (To be changed in exception later.)
+
+  G4ApplicationState currentState 
+    = G4StateManager::GetStateManager()->GetCurrentState();
+
+  if ( currentState != requiredState && 
+       ! ( allowLater && currentState > requiredState ) ) {
+
+    // States as strings
+    static std::vector<TString> g4StateNames;
+    g4StateNames.push_back("G4State_PreInit");
+    g4StateNames.push_back("G4State_Init"); 
+    g4StateNames.push_back("G4State_Idle"); 
+    g4StateNames.push_back("G4State_GeomClosed");
+    g4StateNames.push_back("G4State_EventProc");
+    g4StateNames.push_back("G4State_Quit"); 
+    g4StateNames.push_back("G4State_Abort");
+
+    TString message 
+      = TString("MC::") + methodName + 
+      + TString(" can be called only when Geant4 is in state ")
+      + g4StateNames[requiredState];
+    if ( allowLater ) 
+      message += TString(" or later");   
+    message += TG4Globals::Endl() 
+             + TString("while detected in state ") 
+             + g4StateNames[currentState];
+     
+    TG4Globals::Warning("TGeant4", methodName, message);
+    return false;
+  }
+  
+  return true;
+}       
+             
 
 //
 // methods for building/management of geometry
@@ -152,6 +261,8 @@ void TGeant4::FinishGeometry()
 {
 /// Sets the top VTE in temporary G3 volume table.
 /// Close geometry output file (if fWriteGeometry is set true).
+
+  if ( ! CheckApplicationState("FinishGeometry", kConstructGeometry ) ) return;
 
   // Ggclos();
   fGeometryManager->FinishGeometry();
@@ -196,6 +307,8 @@ void TGeant4::Material(Int_t& kmat, const char* name, Double_t a,
 /// Create material.                                                       \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored.
 
+  if ( ! CheckApplicationState("Material", kConstructGeometry ) ) return;
+
   kmat = ++fMaterialCounter;
 
   fGeometryManager->GetMCGeometry()
@@ -210,6 +323,8 @@ void TGeant4::Material(Int_t& kmat, const char* name, Double_t a,
 /// Create material.                                                       \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored.
 
+  if ( ! CheckApplicationState("Material", kConstructGeometry ) ) return;
+
   kmat = ++fMaterialCounter;
 
   fGeometryManager->GetMCGeometry()
@@ -223,6 +338,8 @@ void TGeant4::Mixture(Int_t& kmat, const char *name, Float_t *a,
 /// Create material composed of more elements.                                                       \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored.
 
+   if ( ! CheckApplicationState("Mixture", kConstructGeometry ) ) return;
+
    kmat = ++fMaterialCounter;
 
    fGeometryManager->GetMCGeometry()
@@ -235,6 +352,8 @@ void TGeant4::Mixture(Int_t& kmat, const char *name, Double_t *a,
 {
 /// Create material composed of more elements.                                                       \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored.
+
+   if ( ! CheckApplicationState("Mixture", kConstructGeometry ) ) return;
 
    kmat = ++fMaterialCounter;
 
@@ -250,6 +369,8 @@ void TGeant4::Medium(Int_t& kmed, const char *name, Int_t nmat,
 { 
 /// Create a temporary "medium" that is used for 
 /// assigning corresponding parameters to G4 objects:
+
+  if ( ! CheckApplicationState("Medium", kConstructGeometry ) ) return;
 
   kmed = ++fMediumCounter;
 
@@ -267,6 +388,8 @@ void TGeant4::Medium(Int_t& kmed, const char *name, Int_t nmat,
 /// Create a temporary "medium" that is used for 
 /// assigning corresponding parameters to G4 objects:
 
+  if ( ! CheckApplicationState("Medium", kConstructGeometry ) ) return;
+
   kmed = ++fMediumCounter;
 
   fGeometryManager->GetMCGeometry()
@@ -282,6 +405,8 @@ void TGeant4::Matrix(Int_t& krot, Double_t thetaX, Double_t phiX,
 {
 /// Create rotation matrix.
 
+  if ( ! CheckApplicationState("Matrix", kConstructGeometry ) ) return;
+
   krot = ++fMatrixCounter;
 
   fGeometryManager->GetMCGeometry()
@@ -294,6 +419,8 @@ Int_t TGeant4::Gsvolu(const char *name, const char *shape, Int_t nmed,
 {
 /// Create volume
 
+  if ( ! CheckApplicationState("Gsvolu", kConstructGeometry ) ) return 0;
+
   return fGeometryManager->GetMCGeometry()
     ->Gsvolu(name, shape, nmed, upar, np); 
 }
@@ -303,6 +430,8 @@ Int_t TGeant4::Gsvolu(const char *name, const char *shape, Int_t nmed,
                          Float_t *upar, Int_t np)  
 {
 /// Create volume
+
+  if ( ! CheckApplicationState("Gsvolu", kConstructGeometry ) ) return 0;
 
   return fGeometryManager->GetMCGeometry()
     ->Gsvolu(name, shape, nmed, upar, np); 
@@ -314,6 +443,8 @@ void TGeant4::Gsdvn(const char *name, const char *mother, Int_t ndiv,
 {
 /// Create divided volume
 
+  if ( ! CheckApplicationState("Gsdvn", kConstructGeometry ) ) return;
+
   fGeometryManager->GetMCGeometry()
     ->Gsdvn(name, mother, ndiv, iaxis); 
 } 
@@ -323,6 +454,8 @@ void TGeant4::Gsdvn2(const char *name, const char *mother, Int_t ndiv,
                          Int_t iaxis, Double_t c0i, Int_t numed)
 {
 /// Create divided volume
+
+  if ( ! CheckApplicationState("Gsdvn2", kConstructGeometry ) ) return;
 
   fGeometryManager->GetMCGeometry()
     ->Gsdvn2(name, mother, ndiv, iaxis, c0i, numed); 
@@ -334,6 +467,8 @@ void TGeant4::Gsdvt(const char *name, const char *mother, Double_t step,
 {
 /// Create divided volume
 
+  if ( ! CheckApplicationState("Gsdvt", kConstructGeometry ) ) return;
+
   fGeometryManager->GetMCGeometry()
     ->Gsdvt(name, mother, step, iaxis, numed, ndvmx); 
 } 
@@ -344,6 +479,8 @@ void TGeant4::Gsdvt2(const char *name, const char *mother, Double_t step,
 { 
 /// Create divided volume
 
+  if ( ! CheckApplicationState("Gsdvt2", kConstructGeometry ) ) return;
+
   fGeometryManager->GetMCGeometry()
     ->Gsdvt2(name, mother, step, iaxis, c0, numed, ndvmx); 
 } 
@@ -352,6 +489,8 @@ void TGeant4::Gsdvt2(const char *name, const char *mother, Double_t step,
 void TGeant4::Gsord(const char *name, Int_t iax) 
 {
 /// No corresponding action in G4.
+
+  if ( ! CheckApplicationState("Gsord", kConstructGeometry ) ) return;
 
   fGeometryManager->GetMCGeometry()
     ->Gsord(name, iax); 
@@ -363,6 +502,8 @@ void TGeant4::Gspos(const char *name, Int_t nr, const char *mother,
                         const char *konly) 
 {
 ///  Place a volume into an existing one
+
+  if ( ! CheckApplicationState("Gspos", kConstructGeometry ) ) return;
 
   fGeometryManager->GetMCGeometry()
     ->Gspos(name, nr, mother, x, y, z, irot, konly); 
@@ -376,6 +517,8 @@ void TGeant4::Gsposp(const char *name, Int_t nr, const char *mother,
 ///  Place a copy of generic volume name with user number
 ///  nr inside mother, with its parameters upar(1..np)
 
+  if ( ! CheckApplicationState("Gsposp", kConstructGeometry ) ) return;
+
   fGeometryManager->GetMCGeometry()
     ->Gsposp(name, nr, mother, x, y, z, irot, konly, upar, np); 
 } 
@@ -388,6 +531,8 @@ void TGeant4::Gsposp(const char *name, Int_t nr, const char *mother,
 ///  Place a copy of generic volume name with user number
 ///  nr inside mother, with its parameters upar(1..np)
 
+  if ( ! CheckApplicationState("Gsposp", kConstructGeometry ) ) return;
+
   fGeometryManager->GetMCGeometry()
     ->Gsposp(name, nr, mother, x, y, z, irot, konly, upar, np); 
 } 
@@ -399,6 +544,8 @@ void TGeant4::Gsbool(const char* onlyVolName, const char* manyVolName)
 /// Specify the ONLY volume that overlaps with the 
 /// specified MANY and has to be substracted.
 
+  if ( ! CheckApplicationState("Gsbool", kConstructGeometry ) ) return;
+
   fGeometryManager->GetMCGeometry()
     ->Gsbool(onlyVolName, manyVolName); 
 } 
@@ -409,6 +556,9 @@ void TGeant4::SetCerenkov(Int_t itmed, Int_t npckov, Float_t *ppckov,
 {
 /// Set the tables for UV photon tracking in medium itmed 
 
+  if ( ! CheckApplicationState("SetCerenkov", kConstructOpGeometry ) ) 
+    return;
+
   fGeometryManager->GetOpManager()
     ->SetCerenkov(itmed, npckov, ppckov, absco, effic, rindex);
 }  
@@ -418,6 +568,9 @@ void TGeant4::SetCerenkov(Int_t itmed, Int_t npckov, Double_t *ppckov,
                   Double_t *absco, Double_t *effic, Double_t *rindex) 
 {
 /// Set the tables for UV photon tracking in medium itmed 
+
+  if ( ! CheckApplicationState("SetCerenkov", kConstructOpGeometry ) ) 
+    return;
 
   fGeometryManager->GetOpManager()
     ->SetCerenkov(itmed, npckov, ppckov, absco, effic, rindex);
@@ -432,6 +585,9 @@ void  TGeant4::DefineOpSurface(const char *name,
 {                         
 /// Define the optical surface
 
+  if ( ! CheckApplicationState("DefineOpSurface", kConstructOpGeometry ) ) 
+    return;
+
   fGeometryManager->GetOpManager()
     ->DefineOpSurface(name, model, surfaceType, surfaceFinish, sigmaAlpha);
 }                         
@@ -443,6 +599,9 @@ void  TGeant4::SetBorderSurface(const char *name,
                          const char* opSurfaceName)
 {                         
 /// Define the optical border surface
+
+  if ( ! CheckApplicationState("SetBorderSurface", kConstructOpGeometry ) ) 
+    return;
 
   fGeometryManager->GetOpManager()
     ->SetBorderSurface(name, vol1Name, vol1CopyNo, vol2Name, vol2CopyNo, 
@@ -456,6 +615,9 @@ void  TGeant4::SetSkinSurface(const char *name,
 {                         
 /// Define the optical skin surface
 
+  if ( ! CheckApplicationState("SetSkinSurface", kConstructOpGeometry ) ) 
+    return;
+
   fGeometryManager->GetOpManager()
     ->SetSkinSurface(name, volName, opSurfaceName);
 }                         
@@ -466,6 +628,9 @@ void  TGeant4::SetMaterialProperty(
                          Int_t np, Double_t* pp, Double_t* values)
 {                         
 /// Set the material property specified by propertyName to the tracking medium
+
+  if ( ! CheckApplicationState("SetMaterialProperty", kConstructOpGeometry ) ) 
+    return;
 
   fGeometryManager->GetOpManager()
     ->SetMaterialProperty(itmed, propertyName, np, pp, values); 
@@ -478,6 +643,9 @@ void  TGeant4::SetMaterialProperty(
 {                         
 /// Set the material property specified by propertyName to the tracking medium
 
+  if ( ! CheckApplicationState("SetMaterialProperty", kConstructOpGeometry ) ) 
+    return;
+
   fGeometryManager->GetOpManager()
     ->SetMaterialProperty(itmed, propertyName, value); 
 }                         
@@ -489,6 +657,9 @@ void  TGeant4::SetMaterialProperty(
 {                         
 /// Set the material property specified by propertyName to the optical surface
 
+  if ( ! CheckApplicationState("SetMaterialProperty", kConstructOpGeometry ) ) 
+    return;
+
   fGeometryManager->GetOpManager()
     ->SetMaterialProperty(surfaceName, propertyName, np, pp, values); 
 }                         
@@ -497,8 +668,11 @@ void  TGeant4::SetMaterialProperty(
 Bool_t TGeant4::GetTransformation(const TString& volumePath, 
                          TGeoHMatrix& matrix)
 {                         
-/// Return the transformation matrix between the volume specified by
-/// the path volumePath and the top volume.
+/// Fill the transformation matrix between the volume specified by
+/// the path volumePath and the top volume; return false if the path is not found.
+
+  if ( ! CheckApplicationState("GetTransformation", kInitGeometry, true ) ) 
+    return false;
 
   return fGeometryManager->GetMCGeometry()
     ->GetTransformation(volumePath, matrix);
@@ -508,8 +682,11 @@ Bool_t TGeant4::GetTransformation(const TString& volumePath,
 Bool_t TGeant4::GetShape(const TString& volumePath, 
                          TString& shapeType, TArrayD& par)
 {                         
-/// Return the name of the shape and its parameters for the volume
-/// specified by the volume name.
+/// Fill the name of the shape and its parameters for the volume
+/// specified by the volume name; return false if the path is not found. 
+
+  if ( ! CheckApplicationState("GetShape", kInitGeometry, true ) ) 
+    return false;
 
   return fGeometryManager->GetMCGeometry()
   ->GetShape(volumePath, shapeType, par);
@@ -521,8 +698,11 @@ Bool_t TGeant4::GetMaterial(const TString& volumeName,
                          Double_t& a, Double_t& z, Double_t& density,
                          Double_t& radl, Double_t& inter, TArrayD& par)
 {                         
-/// Return the material parameters for the volume specified by
-/// the volume name.
+/// Fill the material parameters for the volume specified by
+/// the volume name; return false if the material is not found. 
+
+  if ( ! CheckApplicationState("GetMaterial", kInitGeometry, true ) ) 
+    return false;
 
   return fGeometryManager->GetMCGeometry()
     ->GetMaterial(volumeName, name, imat, a, z, density, radl, inter, par);
@@ -536,8 +716,11 @@ Bool_t TGeant4::GetMedium(const TString& volumeName,
                          Double_t& deemax, Double_t& epsil, Double_t& stmin,
                          TArrayD& par)
 {                         
-/// Return the medium parameters for the volume specified by the
-/// volume name.
+/// Fill the medium parameters for the volume specified by the
+/// volume name; return false if the material is not found.
+
+  if ( ! CheckApplicationState("GetMedium", kInitGeometry, true ) ) 
+    return false;
 
   return fGeometryManager->GetMCGeometry()
     ->GetMedium(volumeName, name, imed, nmat, isvol, ifield, 
@@ -566,6 +749,9 @@ Int_t TGeant4::VolId(const Text_t* volName) const
 {
 /// Return the volume ID = sensitive detector identifier.
 
+  if ( ! CheckApplicationState("VolId", kInitGeometry, true ) ) 
+    return 0;
+
   return fSDManager->VolId(volName); 
 } 
 
@@ -575,6 +761,9 @@ const char* TGeant4::VolName(Int_t id) const {
 /// Return the name of the volume specified by volume ID
 /// ( = sensitive detector name) 
 
+  if ( ! CheckApplicationState("VolName", kInitGeometry, true ) ) 
+    return "";
+
   return fSDManager->VolName(id); 
 }
  
@@ -582,6 +771,9 @@ const char* TGeant4::VolName(Int_t id) const {
 Int_t TGeant4::MediumId(const Text_t* medName) const 
 {
 /// Return the medium ID for medium with given name
+
+  if ( ! CheckApplicationState("MediumId", kInitGeometry, true ) ) 
+    return 0;
 
   return fGeometryManager->GetMCGeometry()
     ->MediumId(medName); 
@@ -593,6 +785,9 @@ Int_t TGeant4::NofVolumes() const
 /// Return the total number of VMC volumes 
 /// ( = number of sensitive detectors).
 
+  if ( ! CheckApplicationState("NofVolumes", kInitGeometry, true ) ) 
+    return 0;
+
   return fSDManager->NofVolumes(); 
 } 
 
@@ -600,6 +795,9 @@ Int_t TGeant4::NofVolumes() const
 Int_t TGeant4::NofVolDaughters(const char* volName) const 
 {
 /// Return the number of daughters of the volume specified by name
+
+  if ( ! CheckApplicationState("NofVolDaughters", kInitGeometry, true ) ) 
+    return 0;
 
   return fSDManager->NofVolDaughters(volName); 
 } 
@@ -609,6 +807,9 @@ const char*  TGeant4::VolDaughterName(const char* volName, Int_t i) const
 {
 /// Return the name of the i-th daughter of the volume specified by name.
 
+  if ( ! CheckApplicationState("VolDaughterName", kInitGeometry, true ) ) 
+    return "";
+
   return fSDManager->VolDaughterName(volName, i); 
 } 
 
@@ -617,6 +818,9 @@ Int_t  TGeant4::VolDaughterCopyNo(const char* volName, Int_t i) const
 {
 /// Return the copyNo of the i-th daughter of the volume specified by name.
 
+  if ( ! CheckApplicationState("VolDaughterCopyNo", kInitGeometry, true ) ) 
+    return 0;
+
   return fSDManager->VolDaughterCopyNo(volName, i); 
 } 
 
@@ -624,6 +828,9 @@ Int_t  TGeant4::VolDaughterCopyNo(const char* volName, Int_t i) const
 Int_t TGeant4::VolId2Mate(Int_t id) const 
 {
 /// Return the material number for a given volume id
+
+  if ( ! CheckApplicationState("VolId2Mate", kInitGeometry, true ) ) 
+    return 0;
 
   return fSDManager->VolId2Mate(id); 
 } 
@@ -637,6 +844,9 @@ void TGeant4::Gstpar(Int_t itmed, const char *param, Double_t parval)
 {
 /// Pass the tracking medium parameter to TG4Limits.
 
+  if ( ! CheckApplicationState("Gstpar", kInitGeometry, false, false, true ) ) 
+    return;
+
   fPhysicsManager->Gstpar(itmed, param, parval); 
 }    
 
@@ -645,6 +855,9 @@ Bool_t TGeant4::SetCut(const char* cutName, Double_t cutValue)
 { 
 /// Set cut specified by cutName.
 
+  if ( ! CheckApplicationState("SetCut", kInitGeometry, false, true ) ) 
+    return false;
+
   return fPhysicsManager->SetCut(cutName, cutValue);
 }  
 
@@ -652,6 +865,9 @@ Bool_t TGeant4::SetCut(const char* cutName, Double_t cutValue)
 Bool_t TGeant4::SetProcess(const char* flagName, Int_t flagValue) 
 {
 /// Set process control specified by flagName.
+
+  if ( ! CheckApplicationState("SetProcess", kInitGeometry, false, true  ) ) 
+    return false;
 
   return fPhysicsManager->SetProcess(flagName, flagValue);
 }  
@@ -663,6 +879,8 @@ Bool_t TGeant4::DefineParticle(Int_t pdg, const char* name, TMCParticleType type
 /// Only check if particle with specified pdg is available in Geant4;
 /// if not gives exception.
 
+  if ( ! CheckApplicationState("DefineParticle", kAddParticles ) ) return false;
+
   return fPhysicsManager->DefineParticle(pdg, name, type, mass, charge, lifetime);
 }                          
                         
@@ -673,6 +891,8 @@ Bool_t TGeant4::DefineIon(const char* name, Int_t Z, Int_t A,
 /// Keep user defined ion properties in order to be able to use
 /// them later as a primary particle.
  
+  if ( ! CheckApplicationState("DefineIon", kAddParticles ) ) return false;
+
   return fPhysicsManager->DefineIon(name, Z, A, Q, excEnergy, mass);
 }  
 
@@ -690,6 +910,8 @@ Int_t TGeant4::IdFromPDG(Int_t pdgID) const
 /// G4 does not use the integer particle identifiers
 /// Id <-> PDG is identity.
 
+  if ( ! CheckG4ApplicationState("IdFromPDG", G4State_Idle, true ) ) return 0;
+
   return fPhysicsManager->IdFromPDG(pdgID);
 }  
 
@@ -699,6 +921,8 @@ Int_t TGeant4::PDGFromId(Int_t mcID) const
 /// G4 does not use the integer particle identifiers
 /// Id <-> PDG is identity.
 
+  if ( ! CheckG4ApplicationState("PDGFromId", G4State_Idle, true ) ) return 0;
+
   return fPhysicsManager->PDGFromId(mcID);
 }  
 
@@ -706,6 +930,9 @@ Int_t TGeant4::PDGFromId(Int_t mcID) const
 TString   TGeant4::ParticleName(Int_t pdg) const 
 {
 /// Return name of G4 particle specified by pdg.
+
+  if ( ! CheckG4ApplicationState("ParticleName", G4State_Idle, true ) ) 
+    return 0;
 
   return fPhysicsManager->ParticleName(pdg);
 }  
@@ -715,6 +942,9 @@ Double_t  TGeant4::ParticleMass(Int_t pdg) const
 {          
 /// Return mass of G4 particle specified by pdg.
 
+  if ( ! CheckG4ApplicationState("ParticleName", G4State_Idle, true ) ) 
+    return 0;
+
   return fPhysicsManager->ParticleMass(pdg);
 }  
           
@@ -722,6 +952,9 @@ Double_t  TGeant4::ParticleMass(Int_t pdg) const
 Double_t  TGeant4::ParticleCharge(Int_t pdg) const 
 {          
 /// Return charge (in e units) of G4 particle specified by pdg.
+
+  if ( ! CheckG4ApplicationState("ParticleCharge", G4State_Idle, true ) ) 
+    return 0;
 
   return fPhysicsManager->ParticleCharge(pdg);
 }  
@@ -731,6 +964,9 @@ Double_t  TGeant4::ParticleLifeTime(Int_t pdg) const
 {          
 /// Return life time of G4 particle specified by pdg.
 
+  if ( ! CheckG4ApplicationState("ParticleLifeTime", G4State_Idle, true ) ) 
+    return 0;
+
   return fPhysicsManager->ParticleLifeTime(pdg);
 }  
           
@@ -738,6 +974,9 @@ Double_t  TGeant4::ParticleLifeTime(Int_t pdg) const
 TMCParticleType TGeant4::ParticleMCType(Int_t pdg) const 
 {
 /// Return VMC type of G4 particle specified by pdg.
+
+  if ( ! CheckG4ApplicationState("ParticleMCType", G4State_Idle, true ) ) 
+    return kPTUndefined;
 
   return fPhysicsManager->ParticleMCType(pdg);
 }  
@@ -885,6 +1124,8 @@ void TGeant4::ProcessGeantCommand(const char* command)
 Int_t TGeant4::CurrentEvent() const 
 {
 /// Return the number of the current event.
+
+  if ( ! CheckApplicationState("CurrentEvent", kInEvent ) ) return 0;
 
   return fRunManager->CurrentEvent(); 
 } 

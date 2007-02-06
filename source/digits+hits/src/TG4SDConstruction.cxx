@@ -1,4 +1,4 @@
-// $Id: TG4SDConstruction.cxx,v 1.3 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4SDConstruction.cxx,v 1.4 2006/12/12 16:21:15 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -10,6 +10,7 @@
 #include "TG4SDConstruction.h"
 #include "TG4SensitiveDetector.h"
 #include "TG4GeometryServices.h"
+#include "TG4StateManager.h"
 
 #include <G4SDManager.hh>
 #include <G4LogicalVolume.hh>
@@ -78,7 +79,9 @@ void TG4SDConstruction::Construct()
   // OFF VMC - comment next line
   for (G4int i=0; i<G4int(lvStore->size()); i++) CreateSD((*lvStore)[i]);
   
+  TG4StateManager::Instance()->SetNewState(kInitGeometry);
   TVirtualMCApplication::Instance()->InitGeometry();
+  TG4StateManager::Instance()->SetNewState(kNotInApplication);
 }
 
 

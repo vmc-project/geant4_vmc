@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.18 2006/12/12 16:21:15 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.19 2006/12/15 09:30:29 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -11,7 +11,7 @@
 #include "TG4GeometryServices.h"
 #include "TG4MCGeometry.h"
 #include "TG4OpGeometryManager.h"
-#include "TG4OpGeometryManager.h"
+#include "TG4StateManager.h"
 #include "TG4MediumMap.h"
 #include "TG4Medium.h"
 #include "TG4Limits.h"
@@ -224,7 +224,9 @@ void TG4GeometryManager::ConstructG4Geometry()
     if ( VerboseLevel() > 1 ) 
       G4cout << "Running TVirtualMCApplication::ConstructGeometry" << G4endl;
 
+    TG4StateManager::Instance()->SetNewState(kConstructGeometry);
     TVirtualMCApplication::Instance()->ConstructGeometry(); 
+    TG4StateManager::Instance()->SetNewState(kNotInApplication);
   }    
 
   // Build G4 geometry
@@ -507,7 +509,9 @@ void TG4GeometryManager::ConstructGeometry()
   FillMediumMap(); 
 
   // VMC application construct geometry for optical processes
+  TG4StateManager::Instance()->SetNewState(kConstructOpGeometry);
   TVirtualMCApplication::Instance()->ConstructOpGeometry();   
+  TG4StateManager::Instance()->SetNewState(kNotInApplication);
 
 }                   
 

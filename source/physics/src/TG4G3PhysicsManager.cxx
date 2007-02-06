@@ -1,4 +1,4 @@
-// $Id: TG4G3PhysicsManager.cxx,v 1.6 2005/07/22 10:22:48 brun Exp $
+// $Id: TG4G3PhysicsManager.cxx,v 1.7 2006/12/12 16:21:16 brun Exp $
 // Category: physics
 //
 // Class TG4G3PhysicsManager
@@ -139,9 +139,6 @@ void TG4G3PhysicsManager::SetProcess(TG4G3Control control,
       SwitchIsCutVector(kDCUTM);
   }  
 
-  G4cout << "TG4G3PhysicsManager::SetProcess: "
-         << control << "  " << controlValue << G4endl;
-         
   fControlVector->SetControl(control, controlValue, *fCutVector);
 } 
 
