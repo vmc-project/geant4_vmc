@@ -1,4 +1,4 @@
-// $Id: Ex02DetectorConstruction.cxx,v 1.2 2002/12/03 15:04:17 brun Exp $
+// $Id: Ex02DetectorConstruction.cxx,v 1.3 2006/12/12 16:21:38 brun Exp $
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //
@@ -211,7 +211,7 @@ void Ex02DetectorConstruction::ConstructGeometry()
 
   cout << "There are " << fNofChambers 
        << " chambers in the tracker region. "
-       << "The chambers are " << fChamberWidth/10. << " mm of " 
+       << "The chambers are " << fChamberWidth*10. << " mm of " 
        //<< ChamberMater->GetName() 
        << "Xenon gas"
        << "\n The distance between chamber is "
