@@ -1,4 +1,4 @@
-// $Id: g4libs.C,v 1.9 2006/01/13 16:58:17 brun Exp $
+// $Id: g4libs.C,v 1.10 2006/12/18 15:43:18 brun Exp $
 //
 // Macro for loading Geant4 and Geant4 VMC libraries
 
@@ -178,9 +178,9 @@ void g4libs_granular()
   gSystem->Load("libG4xrays");
   gSystem->Load("libG4optical");
 
+  gSystem->Load("libG4hadronic_util");
   gSystem->Load("libG4hadronic_xsect");
   gSystem->Load("libG4hadronic_stop");
-  gSystem->Load("libG4hadronic_util");
   gSystem->Load("libG4hadronic_mgt");   
   gSystem->Load("libG4hadronic_proc");
   gSystem->Load("libG4had_mod_man.so");
