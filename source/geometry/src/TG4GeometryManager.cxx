@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.19 2006/12/15 09:30:29 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.20 2007/02/06 11:06:34 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -41,6 +41,7 @@
 #include <TGeoMedium.h>
 #include <TGeoMCGeometry.h>
 #include <TVirtualMCApplication.h>
+#include <TList.h>
 
 #ifdef USE_VGM
 #include <Geant4GM/volumes/Factory.h>
