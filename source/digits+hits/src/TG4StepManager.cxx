@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.17 2006/12/15 09:30:29 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.18 2007/02/06 11:06:34 brun Exp $
 // Category: digits+hits
 //
 // Class TG4StepManager
@@ -1290,10 +1290,9 @@ Int_t TG4StepManager::StepProcesses(TArrayI& processes) const
 /// and returns the number of them.                                          \n
 /// TBD: Distinguish between kPDeltaRay and kPEnergyLoss
 
- if (fStepStatus == kVertex) {
-   G4int nofProcesses = 1;
+ if ( fStepStatus == kVertex || fStepStatus == kBoundary ) {
+   G4int nofProcesses = 0;
    processes.Set(nofProcesses);
-   processes[0] = kPNull;
    return nofProcesses;
  }  
    
