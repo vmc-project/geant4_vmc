@@ -1,4 +1,4 @@
-// $Id: TG4VSpecialCuts.cxx,v 1.6 2006/12/12 16:21:16 brun Exp $
+// $Id: TG4VSpecialCuts.cxx,v 1.7 2006/12/18 15:43:18 brun Exp $
 // Category: physics
 //
 // Class TG4VSpecialCuts
@@ -80,6 +80,13 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
     // min remaining range
     G4double kinEnergy = track.GetKineticEnergy();
     const G4MaterialCutsCouple* couple = track.GetMaterialCutsCouple();
+    if ( ! couple ) {
+      G4String text = "No material cuts couple defined for volume =  ";
+      text = text + track.GetVolume()->GetLogicalVolume()->GetName();
+      TG4Globals::Exception(
+        "TG4VSpecialCuts", "PostStepGetPhysicalInteractionLength", text);
+    }    
+    
     G4double rangeNow = fLossTableManager->GetRange(particle, kinEnergy, couple);
     G4double rmin = limits->GetUserMinRange(track);
     if (rmin > DBL_MIN) {
