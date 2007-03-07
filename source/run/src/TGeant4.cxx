@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.19 2006/12/15 09:30:30 brun Exp $
+// $Id: TGeant4.cxx,v 1.20 2007/02/06 11:06:34 brun Exp $
 // Category: run
 //
 // Class TGeant4
@@ -100,6 +100,7 @@ TGeant4::TGeant4(const char* name, const char* title,
 {
   // create state manager
   fStateManager = new TG4StateManager();
+  fStateManager->SetNewState(kPreInit);
   // add verbose level
   //G4cout << "TG4StateManager has been created." << G4endl;
   
