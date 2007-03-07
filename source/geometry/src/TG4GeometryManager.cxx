@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.20 2007/02/06 11:06:34 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.21 2007/02/19 16:26:37 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -399,6 +399,12 @@ void TG4GeometryManager::FillMediumMapFromRoot()
   for (G4int i=0; i<G4int(lvStore->size()); i++ ) {
     G4LogicalVolume* lv  = (*lvStore)[i];
     G4String volName =lv->GetName(); 
+
+    // Filter out the reflected volumes name extension
+    // added by reflection factory 
+    G4String ext = G4ReflectionFactory::Instance()->GetVolumesNameExtension();
+    if (volName.find(ext)) volName = volName.substr(0, volName.find(ext));
+    
     TGeoVolume* geoVolume = gGeoManager->GetVolume(volName.data());
     
     if ( ! geoVolume) {
