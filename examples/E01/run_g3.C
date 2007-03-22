@@ -1,8 +1,8 @@
-// $Id: run_g3.C,v 1.3 2003/06/03 17:05:48 brun Exp $
+// $Id: run_g3.C,v 1.4 2005/01/05 08:05:30 brun Exp $
 //
 // Macro for running Example01 with Geant3 
 
-void run_g3(const TString& configMacro = "g3Config.C") 
+void run_g3(const TString& configMacro = "g3tgeoConfig.C") 
 {
   // Load basic libraries
   gROOT->LoadMacro("../macro/basiclibs.C");
