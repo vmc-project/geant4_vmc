@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.h,v 1.11 2006/04/12 10:37:23 brun Exp $
+// $Id: TG4GeometryServices.h,v 1.12 2006/12/12 16:21:15 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryServices
@@ -76,6 +76,7 @@ class TG4GeometryServices : public TG4Verbose
     void PrintPhysicalVolumeStore() const;
     void PrintElementTable() const;
     void PrintMaterials() const;
+    void PrintMedia() const;
 
     // set methods
     void SetWorld(G4VPhysicalVolume* world);

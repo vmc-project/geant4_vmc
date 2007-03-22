@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.cxx,v 1.10 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4DetConstructionMessenger.cxx,v 1.11 2006/12/12 16:21:15 brun Exp $
 // Category: geometry
 //
 // Class TG4DetConstructionMessenger
@@ -72,6 +72,11 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fPrintMaterialsCmd->SetGuidance("Prints all materials.");
   fPrintMaterialsCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);   
 
+  fPrintMediaCmd 
+    = new G4UIcmdWithoutParameter("/mcDet/printMedia", this);
+  fPrintMediaCmd->SetGuidance("Prints all media.");
+  fPrintMediaCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);   
+
   fPrintVolumesCmd 
     = new G4UIcmdWithoutParameter("/mcDet/printVolumes", this);
   fPrintMaterialsCmd->SetGuidance("Prints all volumes.");
@@ -88,6 +93,7 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
   delete fSeparatorCmd;
   delete fUniformFieldValueCmd;
   delete fPrintMaterialsCmd;
+  delete fPrintMediaCmd;
   delete fPrintVolumesCmd;
 }
 
@@ -119,6 +125,9 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
   }
   else if (command == fPrintMaterialsCmd) {
     TG4GeometryServices::Instance()->PrintMaterials();
+  }    
+  else if (command == fPrintMediaCmd) {
+    TG4GeometryServices::Instance()->PrintMedia();
   }    
   else if (command == fPrintVolumesCmd) {
     TG4GeometryServices::Instance()->PrintLogicalVolumeStore();

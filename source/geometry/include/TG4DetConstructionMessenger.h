@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.h,v 1.7 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4DetConstructionMessenger.h,v 1.8 2006/12/12 16:21:15 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4DetConstructionMessenger
@@ -44,6 +44,7 @@ class TG4DetConstructionMessenger: public G4UImessenger
     G4UIcmdWithAString*         fSeparatorCmd;        //command: volumeNameSeparator
     G4UIcmdWithADoubleAndUnit*  fUniformFieldValueCmd;//command: uniformFieldValue
     G4UIcmdWithoutParameter*    fPrintMaterialsCmd;   //command: printMatrials     
+    G4UIcmdWithoutParameter*    fPrintMediaCmd;       //command: printMedia     
     G4UIcmdWithoutParameter*    fPrintVolumesCmd;     //command: printVolumes    
 };
 

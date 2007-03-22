@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.16 2006/12/15 09:30:29 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.17 2007/02/06 11:06:34 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryServices
@@ -443,6 +443,7 @@ TG4GeometryServices::PrintLogicalVolumeStore() const
   
     G4LogicalVolume* lv = (*lvStore)[i];
 
+    void* address = lv->GetMaterial();        
     G4cout << "Logical volume: " << G4endl;
     G4cout << "  " << std::setw(5)  << i
            << "  " << lv
@@ -450,9 +451,11 @@ TG4GeometryServices::PrintLogicalVolumeStore() const
            << "  " << std::setw(5)  << lv->GetNoDaughters() << " daughters"
            << "  limits: " << lv->GetUserLimits()
            << "  material: " << lv->GetMaterial()->GetName()
+           << "  " << address
            << G4endl;
            
     for (G4int j=0; j<lv->GetNoDaughters(); j++) {
+      void* addressd = lv->GetDaughter(j)->GetLogicalVolume()->GetMaterial();       
       G4cout << "  Daughter: " 
              << std::setw(5)  << j
              << "  " << lv->GetDaughter(j)
@@ -460,6 +463,8 @@ TG4GeometryServices::PrintLogicalVolumeStore() const
              << "  of LV: " << lv->GetDaughter(j)->GetLogicalVolume()
                << "  " << lv->GetDaughter(j)->GetLogicalVolume()->GetName()
              << "  copy no: " << lv->GetDaughter(j)->GetCopyNo()
+             << "  material:  " << lv->GetDaughter(j)->GetLogicalVolume()->GetMaterial()->GetName() 
+             << "  " << addressd
              << G4endl;
     
     }                
@@ -506,7 +511,7 @@ void TG4GeometryServices::PrintElementTable() const
 //_____________________________________________________________________________
 void TG4GeometryServices::PrintMaterials() const
 {
-/// Print all material, material properties tables
+/// Print all materials & material properties tables
 
   // Dump materials
   const G4MaterialTable* matTable = G4Material::GetMaterialTable();
@@ -536,6 +541,14 @@ void TG4GeometryServices::PrintMaterials() const
       it->second->GetMaterialPropertiesTable()->DumpTable();
     }  
   }  
+}
+
+//_____________________________________________________________________________
+void TG4GeometryServices::PrintMedia() const
+{
+/// Print all media from medium map
+
+  fMediumMap->Print();
 }
 
 //_____________________________________________________________________________

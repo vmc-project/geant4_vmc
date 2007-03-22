@@ -1,4 +1,4 @@
-// $Id: TG4Medium.cxx,v 1.1 2006/12/12 16:21:15 brun Exp $
+// $Id: TG4Medium.cxx,v 1.2 2006/12/15 09:30:29 brun Exp $
 // Category: geometry
 //
 // Class TG4Medium
@@ -8,10 +8,12 @@
 // Author: I. Hrivnacova
 
 #include "TG4Medium.h"
+#include "TG4Limits.h"
 #include "TG4Globals.h"
 
 #include <G4LogicalVolume.hh>
 #include <G4Material.hh>
+#include <G4UserLimits.hh>
 
 const G4String TG4Medium::fgkUndefinedName = "UndefinedMediumName";
 
@@ -39,6 +41,9 @@ void TG4Medium::Print() const
   G4cout << "ID = " << fID
          << "  name = "<< fName
          << "  limits = " << fLimits;
+ 
+  TG4Limits* limits =  dynamic_cast<TG4Limits*> (fLimits);
+  if (limits) limits->Print();
 }         
 
 //_____________________________________________________________________________
