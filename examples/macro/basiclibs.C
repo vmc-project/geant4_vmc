@@ -1,9 +1,11 @@
-// $Id: basiclibs.C,v 1.3 2006/01/13 16:58:17 brun Exp $
+// $Id: basiclibs.C,v 1.4 2006/12/18 15:43:18 brun Exp $
 //
 // Macro for loading basic libraries used with both Geant3 and Geant4
 
 void basiclibs()
 {
+  gSystem->Load("libRIO");
+  gSystem->Load("libTree");
   gSystem->Load("libGeom");
   gSystem->Load("libVMC");
   gSystem->Load("libEG");
