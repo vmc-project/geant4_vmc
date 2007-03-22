@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.20 2007/02/06 11:06:34 brun Exp $
+// $Id: TGeant4.cxx,v 1.21 2007/03/07 14:23:11 brun Exp $
 // Category: run
 //
 // Class TGeant4
@@ -38,7 +38,8 @@ TGeant4::TGeant4(const char* name, const char* title,
     fRunManager(0),
     fMediumCounter(0),
     fMaterialCounter(0),
-    fMatrixCounter(0)
+    fMatrixCounter(0),
+    fUserGeometry(configuration->GetUserGeometry())
     
 {
   // create state manager
@@ -48,8 +49,7 @@ TGeant4::TGeant4(const char* name, const char* title,
   //G4cout << "TG4StateManager has been created." << G4endl;
   
   // create geometry manager
-  TString userGeometry = configuration->GetUserGeometry();
-  fGeometryManager = new TG4GeometryManager(userGeometry);
+  fGeometryManager = new TG4GeometryManager(fUserGeometry);
   // add verbose level
   //G4cout << "TG4GeometryManager has been created." << G4endl;
   
@@ -64,7 +64,7 @@ TGeant4::TGeant4(const char* name, const char* title,
   //G4cout << "TG4GeometryManager has been created." << G4endl;
   
   // create step manager 
-  fStepManager = new TG4StepManager(userGeometry);
+  fStepManager = new TG4StepManager(fUserGeometry);
   // add verbose level
   //G4cout << "TG4StepManager has been created." << G4endl;
 
@@ -96,7 +96,8 @@ TGeant4::TGeant4(const char* name, const char* title,
     fRunManager(0),
     fMediumCounter(0),
     fMaterialCounter(0),
-    fMatrixCounter(0)
+    fMatrixCounter(0),
+    fUserGeometry(configuration->GetUserGeometry())
 {
   // create state manager
   fStateManager = new TG4StateManager();
@@ -105,8 +106,7 @@ TGeant4::TGeant4(const char* name, const char* title,
   //G4cout << "TG4StateManager has been created." << G4endl;
   
   // create geometry manager
-  TString userGeometry = configuration->GetUserGeometry();
-  fGeometryManager = new TG4GeometryManager(userGeometry);
+  fGeometryManager = new TG4GeometryManager(fUserGeometry);
   // add verbose level
   //G4cout << "TG4GeometryManager has been created." << G4endl;
   
@@ -121,7 +121,7 @@ TGeant4::TGeant4(const char* name, const char* title,
   //G4cout << "TG4GeometryManager has been created." << G4endl;
   
   // create step manager 
-  fStepManager = new TG4StepManager(userGeometry);
+  fStepManager = new TG4StepManager(fUserGeometry);
   // add verbose level
   //G4cout << "TG4StepManager has been created." << G4endl;
   
@@ -773,7 +773,11 @@ Int_t TGeant4::MediumId(const Text_t* medName) const
 {
 /// Return the medium ID for medium with given name
 
-  if ( ! CheckApplicationState("MediumId", kInitGeometry, true ) ) 
+  TG4ApplicationState requiredState = kConstructGeometry;
+  if ( fUserGeometry == "RootToGeant4" || fUserGeometry == "Geant4" ) 
+    requiredState = kInitGeometry;
+ 
+  if ( ! CheckApplicationState("MediumId", requiredState, true ) ) 
     return 0;
 
   return fGeometryManager->GetMCGeometry()

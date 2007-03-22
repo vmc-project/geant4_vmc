@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.19 2006/12/15 09:30:30 brun Exp $
+// $Id: TGeant4.h,v 1.20 2007/02/06 11:06:34 brun Exp $
 /// \ingroup run
 //
 /// \class TGeant4
@@ -337,6 +337,7 @@ class TGeant4: public TVirtualMC
     Int_t                fMediumCounter;   //global medium counter
     Int_t                fMaterialCounter; //global material counter
     Int_t                fMatrixCounter;   //global matrix counter
+    TString              fUserGeometry;    //user geometry
 
   ClassDef(TGeant4,0) // Geant4 implementation of the TVirtualMC interface 
 };
