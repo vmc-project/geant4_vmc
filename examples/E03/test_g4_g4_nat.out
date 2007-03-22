@@ -2,29 +2,28 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.14/00  14 December 2006   *
+  *   Version   5.15/04     19 March 2007   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-FreeType Engine v2.1.9 used to render TrueType fonts.
-Compiled on 16 December 2006 for linux with thread support.
+Compiled on 21 March 2007 for linux with thread support.
 
-CINT/ROOT C/C++ Interpreter version 5.16.16, November 24, 2006
+CINT/ROOT C/C++ Interpreter version 5.16.19, March 16, 2007
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E03_1.C("g4Config1.C", kFALSE)...
-Note: File "/work/packages/root/root_v5.14.00/lib/libEG.so" already loaded
-Note: File "/work/packages/root/root_v5.14.00/lib/libPhysics.so" already loaded
+Note: File "/work/projects/vmc/cvs/root/lib/libEG.so" already loaded
+Note: File "/work/projects/vmc/cvs/root/lib/libPhysics.so" already loaded
 Loading Geant4 granular libraries ...
 Loading VGM libraries ... 
 Loading libraries ... finished
 
 *************************************************************
- Geant4 version Name: geant4-08-02    (15-December-2006)
+ Geant4 version Name: geant4-08-02-patch-01    (23-February-2007)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -177,25 +176,27 @@ msc:  Model variant of multiple scattering for e-
 eIoni:   tables are built for  e-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Delta cross sections from Moller+Bhabha, good description from 1 KeV to 100 GeV.
+      Delta cross sections and sampling from MollerBhabha model
+      Good description from 1 KeV to 100 GeV.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 eBrem:   tables are built for  e-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Total cross sections from a parametrisation based on the EEDL data library. 
+      Total cross sections and sampling from StandBrem model (based on the EEDL data library) 
       Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
 
 eIoni:   tables are built for  e+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Delta cross sections from Moller+Bhabha, good description from 1 KeV to 100 GeV.
+      Delta cross sections and sampling from MollerBhabha model
+      Good description from 1 KeV to 100 GeV.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 eBrem:   tables are built for  e+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Total cross sections from a parametrisation based on the EEDL data library. 
+      Total cross sections and sampling from StandBrem model (based on the EEDL data library) 
       Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
 
 annihil:       Sampling according eplus2gg model
@@ -205,8 +206,9 @@ annihil:       Sampling according eplus2gg model
 hIoni:   tables are built for  proton
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Scaling relation is used to proton dE/dx and range
-      Bether-Bloch model for Escaled > 2 MeV, ICRU49 parametrisation for protons below.
+      Scaling relation is used from proton dE/dx and range.
+      Delta cross sections and sampling from BetheBloch model for scaled energy > 2 MeV
+      Parametrisation from Bragg for protons below.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 msc:  Model variant of multiple scattering for proton
@@ -219,8 +221,9 @@ msc:  Model variant of multiple scattering for GenericIon
 hIoni:   tables are built for  anti_proton
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Scaling relation is used to proton dE/dx and range
-      Bether-Bloch model for Escaled > 2 MeV, ICRU49 parametrisation for protons below.
+      Scaling relation is used from proton dE/dx and range.
+      Delta cross sections and sampling from BetheBloch model for scaled energy > 2 MeV
+      Parametrisation from Bragg for protons below.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 msc:  Model variant of multiple scattering for mu+
@@ -264,15 +267,17 @@ muPairProd:   tables are built for  mu-
 hIoni:   tables are built for  pi+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Scaling relation is used to proton dE/dx and range
-      Bether-Bloch model for Escaled > 0.297504 MeV, ICRU49 parametrisation for protons below.
+      Scaling relation is used from proton dE/dx and range.
+      Delta cross sections and sampling from BetheBloch model for scaled energy > 0.297504 MeV
+      Parametrisation from Bragg for protons below.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 hIoni:   tables are built for  pi-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Scaling relation is used to proton dE/dx and range
-      Bether-Bloch model for Escaled > 0.297504 MeV, ICRU49 parametrisation for protons below.
+      Scaling relation is used from proton dE/dx and range.
+      Delta cross sections and sampling from BetheBloch model for scaled energy > 0.297504 MeV
+      Parametrisation from Bragg for protons below.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 msc:  Model variant of multiple scattering for pi-
@@ -307,54 +312,53 @@ Index : 2     used in the geometry : Yes     recalculation needed : No
 ### Run 0 start.
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 921.264       total track length (cm):  53.6983
-   Gap:      total energy (MeV): 32.6293       total track length (cm):  15.6285
+   Absorber: total energy (MeV): 919.577       total track length (cm):  53.6521
+   Gap:      total energy (MeV): 25.6896       total track length (cm):  11.8045
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV): 923.166       total track length (cm):  52.7375
-   Gap:      total energy (MeV): 29.4027       total track length (cm):  13.3011
+   Absorber: total energy (MeV): 840.668       total track length (cm):  49.9548
+   Gap:      total energy (MeV):  57.331       total track length (cm):  27.9879
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 935.119       total track length (cm):  52.4749
-   Gap:      total energy (MeV): 23.5601       total track length (cm):  10.6324
+   Absorber: total energy (MeV): 929.217       total track length (cm):  53.0048
+   Gap:      total energy (MeV): 32.8908       total track length (cm):  15.4282
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 952.067       total track length (cm):  55.8359
-   Gap:      total energy (MeV): 14.6914       total track length (cm):  6.07601
+   Absorber: total energy (MeV):   939.6       total track length (cm):  54.5919
+   Gap:      total energy (MeV): 17.5547       total track length (cm):  8.49079
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 926.078       total track length (cm):  54.1131
-   Gap:      total energy (MeV): 21.2816       total track length (cm):  10.2476
-Time of this run:   User=0.77s Real=0.78s Sys=0.01s
+   Absorber: total energy (MeV): 899.177       total track length (cm):  52.4946
+   Gap:      total energy (MeV): 26.6268       total track length (cm):  11.9959
+Time of this run:   User=0.78s Real=0.78s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.14/00  14 December 2006   *
+  *   Version   5.15/04     19 March 2007   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-FreeType Engine v2.1.9 used to render TrueType fonts.
-Compiled on 16 December 2006 for linux with thread support.
+Compiled on 21 March 2007 for linux with thread support.
 
-CINT/ROOT C/C++ Interpreter version 5.16.16, November 24, 2006
+CINT/ROOT C/C++ Interpreter version 5.16.19, March 16, 2007
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E03_2.C("g4Config1.C", kFALSE)...
-Note: File "/work/packages/root/root_v5.14.00/lib/libEG.so" already loaded
-Note: File "/work/packages/root/root_v5.14.00/lib/libPhysics.so" already loaded
+Note: File "/work/projects/vmc/cvs/root/lib/libEG.so" already loaded
+Note: File "/work/projects/vmc/cvs/root/lib/libPhysics.so" already loaded
 Loading Geant4 granular libraries ...
 Loading VGM libraries ... 
 Loading libraries ... finished
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-08-02    (15-December-2006)
+ Geant4 version Name: geant4-08-02-patch-01    (23-February-2007)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -509,25 +513,27 @@ msc:  Model variant of multiple scattering for e-
 eIoni:   tables are built for  e-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Delta cross sections from Moller+Bhabha, good description from 1 KeV to 100 GeV.
+      Delta cross sections and sampling from MollerBhabha model
+      Good description from 1 KeV to 100 GeV.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 eBrem:   tables are built for  e-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Total cross sections from a parametrisation based on the EEDL data library. 
+      Total cross sections and sampling from StandBrem model (based on the EEDL data library) 
       Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
 
 eIoni:   tables are built for  e+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Delta cross sections from Moller+Bhabha, good description from 1 KeV to 100 GeV.
+      Delta cross sections and sampling from MollerBhabha model
+      Good description from 1 KeV to 100 GeV.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 eBrem:   tables are built for  e+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Total cross sections from a parametrisation based on the EEDL data library. 
+      Total cross sections and sampling from StandBrem model (based on the EEDL data library) 
       Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
 
 annihil:       Sampling according eplus2gg model
@@ -537,8 +543,9 @@ annihil:       Sampling according eplus2gg model
 hIoni:   tables are built for  proton
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Scaling relation is used to proton dE/dx and range
-      Bether-Bloch model for Escaled > 2 MeV, ICRU49 parametrisation for protons below.
+      Scaling relation is used from proton dE/dx and range.
+      Delta cross sections and sampling from BetheBloch model for scaled energy > 2 MeV
+      Parametrisation from Bragg for protons below.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 msc:  Model variant of multiple scattering for proton
@@ -551,8 +558,9 @@ msc:  Model variant of multiple scattering for GenericIon
 hIoni:   tables are built for  anti_proton
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Scaling relation is used to proton dE/dx and range
-      Bether-Bloch model for Escaled > 2 MeV, ICRU49 parametrisation for protons below.
+      Scaling relation is used from proton dE/dx and range.
+      Delta cross sections and sampling from BetheBloch model for scaled energy > 2 MeV
+      Parametrisation from Bragg for protons below.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 msc:  Model variant of multiple scattering for mu+
@@ -596,15 +604,17 @@ muPairProd:   tables are built for  mu-
 hIoni:   tables are built for  pi+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Scaling relation is used to proton dE/dx and range
-      Bether-Bloch model for Escaled > 0.297504 MeV, ICRU49 parametrisation for protons below.
+      Scaling relation is used from proton dE/dx and range.
+      Delta cross sections and sampling from BetheBloch model for scaled energy > 0.297504 MeV
+      Parametrisation from Bragg for protons below.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 hIoni:   tables are built for  pi-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
-      Scaling relation is used to proton dE/dx and range
-      Bether-Bloch model for Escaled > 0.297504 MeV, ICRU49 parametrisation for protons below.
+      Scaling relation is used from proton dE/dx and range.
+      Delta cross sections and sampling from BetheBloch model for scaled energy > 0.297504 MeV
+      Parametrisation from Bragg for protons below.
       Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
 
 msc:  Model variant of multiple scattering for pi-
@@ -647,371 +657,468 @@ Index : 2     used in the geometry : Yes     recalculation needed : No
   Particle = e-     Track ID = 0     Parent ID = -1
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -9.000    0.000    0.000    50.0000    0.0000    0.000    0.000     World  No active process
+#   0    -9.000    0.000    0.000    50.0000    0.0000    0.000    0.000     World  
 #   1    -7.500    0.000    0.000    50.0000    0.0000    1.500    1.500     World  Transportation
-#   2    -7.500    0.000    0.000    50.0000    0.0000    0.000    1.500     Lead  Transportation
-#   3    -7.482   -0.000    0.001    49.6602    0.2173    0.018    1.518     Lead  Bremstrahlung
-#   4    -7.456   -0.001   -0.001    47.6252    1.2040    0.025    1.544     Lead  Bremstrahlung
-#   5    -7.402   -0.002   -0.003    44.4222    0.8711    0.055    1.599     Lead  Bremstrahlung
-#   6    -7.387   -0.003   -0.003    44.1218    0.1453    0.015    1.614     Lead  Bremstrahlung
-#   7    -7.383   -0.004   -0.004    34.8862    0.0422    0.004    1.617     Lead  Bremstrahlung
-#   8    -7.382   -0.004   -0.004    33.3130    0.0057    0.001    1.618     Lead  Bremstrahlung
-#   9    -7.197   -0.053   -0.046    30.9666    2.2346    0.200    1.818     Lead  Bremstrahlung
-#  10    -7.106   -0.062   -0.059    28.6164    1.2614    0.093    1.910     Lead  Bremstrahlung
-#  11    -7.093   -0.066   -0.057    28.3355    0.1718    0.014    1.924     Lead  Bremstrahlung
-#  12    -7.055   -0.078   -0.058    27.5497    0.5102    0.040    1.964     Lead  Bremstrahlung
-#  13    -6.912   -0.130   -0.070    24.0743    3.0846    0.156    2.120     Lead  Bremstrahlung
-#  14    -6.829   -0.147   -0.089    17.9484    0.8915    0.088    2.208     Lead  Bremstrahlung
-#  15    -6.802   -0.145   -0.107    17.2317    0.3129    0.033    2.241     Lead  Bremstrahlung
-#  16    -6.751   -0.127   -0.164    15.5372    0.9242    0.081    2.322     Lead  Bremstrahlung
-#  17    -6.538   -0.097   -0.206     6.3620    3.8717    0.239    2.561     Lead  Bremstrahlung
-#  18    -6.506   -0.111   -0.206     5.9429    0.4192    0.041    2.602     Lead  Multiple scattering
-#  19    -6.500   -0.114   -0.206     5.8703    0.0725    0.007    2.609     Lead  Multiple scattering
-#  20    -6.500   -0.115   -0.207     5.8694    0.0009    0.000    2.609     Lead  Multiple scattering
-#  21    -6.500   -0.115   -0.207     5.8694    0.0000    0.000    2.609     Lead  Transportation
-#  22    -6.500   -0.115   -0.207     5.8694    0.0000    0.000    2.609     liquidArgon  Transportation
-#  23    -6.266   -0.167   -0.343     5.2678    0.6016    0.281    2.889     liquidArgon  Multiple scattering
-#  24    -6.020   -0.262   -0.392     4.8342    0.4335    0.281    3.170     liquidArgon  Multiple scattering
-#  25    -6.000   -0.270   -0.396     4.7953    0.0390    0.022    3.192     liquidArgon  Multiple scattering
-#  26    -6.000   -0.270   -0.396     4.7951    0.0002    0.000    3.192     liquidArgon  Multiple scattering
-#  27    -6.000   -0.270   -0.396     4.7951    0.0000    0.000    3.192     liquidArgon  Transportation
-#  28    -6.000   -0.270   -0.396     4.7951    0.0000    0.000    3.192     Lead  Transportation
-#  29    -5.991   -0.271   -0.398     4.6984    0.0967    0.010    3.202     Lead  Multiple scattering
-#  30    -5.989   -0.272   -0.397     4.5627    0.0173    0.002    3.204     Lead  Bremstrahlung
-#  31    -5.981   -0.273   -0.393     4.4599    0.1028    0.010    3.213     Lead  Multiple scattering
-#  32    -5.973   -0.269   -0.390     4.3740    0.0859    0.010    3.223     Lead  Multiple scattering
-#  33    -5.964   -0.267   -0.389     4.2498    0.1243    0.010    3.233     Lead  Multiple scattering
-#  34    -5.965   -0.259   -0.383     4.1306    0.1191    0.010    3.243     Lead  Multiple scattering
-#  35    -5.964   -0.250   -0.380     4.0574    0.0732    0.010    3.253     Lead  Multiple scattering
-#  36    -5.965   -0.243   -0.374     3.9682    0.0892    0.010    3.262     Lead  Multiple scattering
-#  37    -5.962   -0.236   -0.369     3.8604    0.1078    0.010    3.272     Lead  Multiple scattering
-#  38    -5.955   -0.229   -0.369     3.7561    0.1043    0.010    3.282     Lead  Multiple scattering
-#  39    -5.951   -0.219   -0.368     3.5673    0.1889    0.011    3.293     Lead  Multiple scattering
-#  40    -5.951   -0.223   -0.357     3.4378    0.1294    0.012    3.305     Lead  Multiple scattering
-#  41    -5.950   -0.227   -0.347     3.3237    0.1141    0.012    3.318     Lead  Multiple scattering
-#  42    -5.949   -0.237   -0.340     3.1838    0.1399    0.012    3.330     Lead  Multiple scattering
-#  43    -5.947   -0.240   -0.335     2.1797    0.0468    0.007    3.337     Lead  Bremstrahlung
-#  44    -5.937   -0.245   -0.333     2.0436    0.1361    0.013    3.350     Lead  Multiple scattering
-#  45    -5.925   -0.239   -0.336     1.8975    0.1461    0.016    3.366     Lead  Multiple scattering
-#  46    -5.917   -0.238   -0.324     1.6242    0.2734    0.019    3.385     Lead  Multiple scattering
-#  47    -5.910   -0.247   -0.315     1.3958    0.2284    0.021    3.405     Lead  Multiple scattering
-#  48    -5.919   -0.248   -0.326     1.0680    0.3277    0.022    3.428     Lead  Multiple scattering
-#  49    -5.930   -0.240   -0.329     0.2775    0.3821    0.034    3.462     Lead  Bremstrahlung
-#  50    -5.930   -0.239   -0.329    -0.0000    0.2775    0.013    3.475     Lead  Energy loss
+#   2    -7.500    0.000    0.000    50.0000    0.0000    0.000    1.500     Lead  
+#   3    -7.451    0.003    0.000    43.2238    0.7168    0.049    1.549     Lead  Bremstrahlung
+#   4    -7.411    0.003   -0.002    30.8097    0.4241    0.041    1.590     Lead  Bremstrahlung
+#   5    -7.391    0.008   -0.003    25.3568    0.3916    0.021    1.610     Lead  Bremstrahlung
+#   6    -7.373    0.012   -0.004    25.0307    0.1771    0.018    1.628     Lead  Bremstrahlung
+#   7    -7.370    0.012   -0.005    18.9539    0.0448    0.004    1.632     Lead  Bremstrahlung
+#   8    -7.369    0.013   -0.005    17.7703    0.0067    0.001    1.633     Lead  Bremstrahlung
+#   9    -7.170   -0.007   -0.070    15.1958    2.4642    0.224    1.857     Lead  Bremstrahlung
+#  10    -7.069   -0.012   -0.052    13.6141    1.4252    0.107    1.964     Lead  Bremstrahlung
+#  11    -7.055   -0.013   -0.049    11.9534    0.1919    0.015    1.978     Lead  Bremstrahlung
+#  12    -7.013   -0.012   -0.054    11.3739    0.4642    0.044    2.022     Lead  Bremstrahlung
+#  13    -6.944   -0.041   -0.035     9.3467    1.8478    0.082    2.104     Lead  Bremstrahlung
+#  14    -6.923   -0.059   -0.039     4.8471    0.2431    0.029    2.133     Lead  Bremstrahlung
+#  15    -6.880   -0.149    0.011     2.2072    2.6399    0.217    2.350     Lead  Energy loss
+#  16    -6.890   -0.157   -0.001     1.3237    0.1927    0.022    2.372     Lead  Bremstrahlung
+#  17    -6.888   -0.138   -0.012     0.1583    0.8964    0.073    2.444     Lead  Bremstrahlung
+#  18    -6.887   -0.138   -0.012    -0.0000    0.1583    0.006    2.450     Lead  Energy loss
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 1     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.930   -0.240   -0.329     0.4085    0.0000    0.000    0.000     Lead  No active process
-#   1    -5.938    0.154   -0.387     0.1763    0.2322    0.398    0.398     Lead  Compton scattering
-#   2    -5.988    0.078   -0.284     0.0000    0.1763    0.138    0.536     Lead  Photoelectric effect
+#   0    -6.888   -0.138   -0.012     0.2690    0.0000    0.000    0.000     Lead  
+#   1    -6.887   -0.138   -0.012     0.0000    0.2690    0.001    0.001     Lead  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 2     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.947   -0.240   -0.335     0.9573    0.0000    0.000    0.000     Lead  No active process
-#   1    -5.638   -1.790    0.664     0.0000    0.9573    1.870    1.870     Lead  Photoelectric effect
+#   0    -6.890   -0.157   -0.001     0.6908    0.0000    0.000    0.000     Lead  
+#   1    -6.500   -0.207   -0.458     0.6908    0.0000    0.603    0.603     Lead  Transportation
+#   2    -6.500   -0.207   -0.458     0.6908    0.0000    0.000    0.603     liquidArgon  
+#   3    -6.000   -0.270   -1.044     0.6908    0.0000    0.773    1.376     liquidArgon  Transportation
+#   4    -6.000   -0.270   -1.044     0.6908    0.0000    0.000    1.376     Lead  
+#   5    -5.690   -0.309   -1.408     0.4109    0.2798    0.480    1.856     Lead  Compton scattering
+#   6    -5.568   -0.049   -1.539     0.0000    0.4109    0.316    2.172     Lead  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 3     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.989   -0.272   -0.397     0.1184    0.0000    0.000    0.000     Lead  No active process
-#   1    -5.987   -0.272   -0.395     0.0000    0.1184    0.003    0.003     Lead  Photoelectric effect
+#   0    -6.923   -0.059   -0.039     4.2566    0.0000    0.000    0.000     Lead  
+#   1    -6.500   -0.249   -0.183     4.2566    0.0000    0.486    0.486     Lead  Transportation
+#   2    -6.500   -0.249   -0.183     4.2566    0.0000    0.000    0.486     liquidArgon  
+#   3    -6.000   -0.473   -0.353     4.2566    0.0000    0.574    1.059     liquidArgon  Transportation
+#   4    -6.000   -0.473   -0.353     4.2566    0.0000    0.000    1.059     Lead  
+#   5    -5.000   -0.921   -0.694     4.2566    0.0000    1.148    2.207     Lead  Transportation
+#   6    -5.000   -0.921   -0.694     4.2566    0.0000    0.000    2.207     liquidArgon  
+#   7    -4.500   -1.145   -0.864     4.2566    0.0000    0.574    2.781     liquidArgon  Transportation
+#   8    -4.500   -1.145   -0.864     4.2566    0.0000    0.000    2.781     Lead  
+#   9    -3.500   -1.594   -1.205     4.2566    0.0000    1.148    3.928     Lead  Transportation
+#  10    -3.500   -1.594   -1.205     4.2566    0.0000    0.000    3.928     liquidArgon  
+#  11    -3.000   -1.818   -1.375     4.2566    0.0000    0.574    4.502     liquidArgon  Transportation
+#  12    -3.000   -1.818   -1.375     4.2566    0.0000    0.000    4.502     Lead  
+#  13    -2.000   -2.266   -1.716     4.2566    0.0000    1.148    5.650     Lead  Transportation
+#  14    -2.000   -2.266   -1.716     4.2566    0.0000    0.000    5.650     liquidArgon  
+#  15    -1.500   -2.490   -1.886     4.2566    0.0000    0.574    6.223     liquidArgon  Transportation
+#  16    -1.500   -2.490   -1.886     4.2566    0.0000    0.000    6.223     Lead  
+#  17    -0.500   -2.939   -2.226     4.2566    0.0000    1.148    7.371     Lead  Transportation
+#  18    -0.500   -2.939   -2.226     4.2566    0.0000    0.000    7.371     liquidArgon  
+#  19     0.000   -3.163   -2.397     4.2566    0.0000    0.574    7.945     liquidArgon  Transportation
+#  20     0.000   -3.163   -2.397     4.2566    0.0000    0.000    7.945     Lead  
+#  21     1.000   -3.611   -2.737     4.2566    0.0000    1.148    9.092     Lead  Transportation
+#  22     1.000   -3.611   -2.737     4.2566    0.0000    0.000    9.092     liquidArgon  
+#  23     1.500   -3.835   -2.908     4.2566    0.0000    0.574    9.666     liquidArgon  Transportation
+#  24     1.500   -3.835   -2.908     4.2566    0.0000    0.000    9.666     Lead  
+#  25     2.500   -4.283   -3.248     4.2566    0.0000    1.148   10.814     Lead  Transportation
+#  26     2.500   -4.283   -3.248     4.2566    0.0000    0.000   10.814     liquidArgon  
+#  27     3.000   -4.508   -3.418     4.2566    0.0000    0.574   11.388     liquidArgon  Transportation
+#  28     3.000   -4.508   -3.418     4.2566    0.0000    0.000   11.388     Lead  
+#  29     3.922   -4.921   -3.732     0.0000    0.9792    1.058   12.445     Lead  Lepton pair production
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 4     Parent ID = 0
+  Particle = e+     Track ID = 4     Parent ID = 3
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.538   -0.097   -0.206     5.3034    0.0000    0.000    0.000     Lead  No active process
-#   1    -6.500   -0.151   -0.211     5.3034    0.0000    0.066    0.066     Lead  Transportation
-#   2    -6.500   -0.151   -0.211     5.3034    0.0000    0.000    0.066     liquidArgon  Transportation
-#   3    -6.000   -0.851   -0.278     5.3034    0.0000    0.863    0.929     liquidArgon  Transportation
-#   4    -6.000   -0.851   -0.278     5.3034    0.0000    0.000    0.929     Lead  Transportation
-#   5    -5.000   -2.251   -0.412     5.3034    0.0000    1.726    2.655     Lead  Transportation
-#   6    -5.000   -2.251   -0.412     5.3034    0.0000    0.000    2.655     liquidArgon  Transportation
-#   7    -4.500   -2.951   -0.479     5.3034    0.0000    0.863    3.517     liquidArgon  Transportation
-#   8    -4.500   -2.951   -0.479     5.3034    0.0000    0.000    3.517     Lead  Transportation
-#   9    -4.126   -3.475   -0.530     0.0000    1.2137    0.646    4.164     Lead  Lepton pair production
+#   0     3.922   -4.921   -3.732    -0.0000    0.0000    0.000    0.000     Lead  
+#   1     3.922   -4.921   -3.732    -0.0000    0.0000    0.000    0.000     Lead  Positron annihilation
 
 ****************************************************************************************************
-  Particle = e+     Track ID = 5     Parent ID = 4
+  Particle = gamma     Track ID = 5     Parent ID = 4
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.126   -3.475   -0.530     3.0678    0.0000    0.000    0.000     Lead  No active process
-#   1    -4.101   -3.503   -0.505     2.0431    0.6648    0.057    0.057     Lead  Bremstrahlung
-#   2    -4.145   -3.523   -0.508     0.4791    1.5640    0.145    0.202     Lead  Energy loss
-#   3    -4.144   -3.524   -0.510    -0.0000    0.4791    0.029    0.231     Lead  Energy loss
-#   4    -4.144   -3.524   -0.510    -0.0000    0.0000    0.000    0.231     Lead  Positron annihilation
+#   0     3.922   -4.921   -3.732     0.5110    0.0000    0.000    0.000     Lead  
+#   1     3.509   -3.626   -2.959     0.0000    0.5110    1.564    1.564     Lead  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 6     Parent ID = 5
+  Particle = gamma     Track ID = 6     Parent ID = 4
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.144   -3.524   -0.510     0.5110    0.0000    0.000    0.000     Lead  No active process
-#   1    -4.154   -3.523   -0.561     0.0000    0.5110    0.052    0.052     Lead  Photoelectric effect
+#   0     3.922   -4.921   -3.732     0.5110    0.0000    0.000    0.000     Lead  
+#   1     3.947   -5.000   -3.780     0.5110    0.0000    0.096    0.096     Lead  Transportation
+#   2     3.947   -5.000   -3.780     0.5110    0.0000    0.000    0.096     World  
+#   3     4.266   -6.000   -4.377     0.5110    0.0000    1.208    1.304     World  Transportation
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 7     Parent ID = 5
+  Particle = e-     Track ID = 7     Parent ID = 3
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.144   -3.524   -0.510     0.5110    0.0000    0.000    0.000     Lead  No active process
-#   1    -4.075   -3.529   -0.154     0.2817    0.2293    0.363    0.363     Lead  Compton scattering
-#   2    -3.805   -3.439   -0.151     0.0000    0.2817    0.285    0.649     Lead  Photoelectric effect
+#   0     3.922   -4.921   -3.732     2.2554    0.0000    0.000    0.000     Lead  
+#   1     3.940   -4.914   -3.736     1.9921    0.2633    0.026    0.026     Lead  Multiple scattering
+#   2     3.948   -4.914   -3.733     0.3563    0.0813    0.010    0.036     Lead  Bremstrahlung
+#   3     3.949   -4.915   -3.733    -0.0000    0.3563    0.019    0.055     Lead  Bremstrahlung
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 8     Parent ID = 5
+  Particle = gamma     Track ID = 8     Parent ID = 7
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.101   -3.503   -0.505     0.3599    0.0000    0.000    0.000     Lead  No active process
-#   1    -4.225   -4.150   -0.292     0.3466    0.0133    0.693    0.693     Lead  Compton scattering
-#   2    -4.233   -5.000   -0.263     0.3466    0.0000    0.850    1.543     Lead  Transportation
-#   3    -4.233   -5.000   -0.263     0.3466    0.0000    0.000    1.543     World  Transportation
-#   4    -4.242   -6.000   -0.230     0.3466    0.0000    1.001    2.543     World  Transportation
+#   0     3.948   -4.914   -3.733     1.5545    0.0000    0.000    0.000     Lead  
+#   1     3.979   -5.000   -3.720     1.5545    0.0000    0.092    0.092     Lead  Transportation
+#   2     3.979   -5.000   -3.720     1.5545    0.0000    0.000    0.092     World  
+#   3     4.337   -6.000   -3.563     1.5545    0.0000    1.074    1.166     World  Transportation
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 9     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.751   -0.127   -0.164     0.7702    0.0000    0.000    0.000     Lead  No active process
-#   1    -6.664   -0.089   -0.236     0.0000    0.7702    0.119    0.119     Lead  Photoelectric effect
+#   0    -6.944   -0.041   -0.035     0.1793    0.0000    0.000    0.000     Lead  
+#   1    -6.908   -0.072   -0.031     0.0000    0.1793    0.047    0.047     Lead  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 10     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.802   -0.145   -0.107     0.4038    0.0000    0.000    0.000     Lead  No active process
-#   1    -6.666   -0.116   -0.201     0.0000    0.4038    0.168    0.168     Lead  Photoelectric effect
+#   0    -7.013   -0.012   -0.054     0.1152    0.0000    0.000    0.000     Lead  
+#   1    -7.006   -0.013   -0.054     0.0000    0.1152    0.007    0.007     Lead  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 11     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.829   -0.147   -0.089     5.2344    0.0000    0.000    0.000     Lead  No active process
-#   1    -6.500   -0.108   -0.243     5.2344    0.0000    0.366    0.366     Lead  Transportation
-#   2    -6.500   -0.108   -0.243     5.2344    0.0000    0.000    0.366     liquidArgon  Transportation
-#   3    -6.000   -0.048   -0.475     5.2344    0.0000    0.555    0.920     liquidArgon  Transportation
-#   4    -6.000   -0.048   -0.475     5.2344    0.0000    0.000    0.920     Lead  Transportation
-#   5    -5.695   -0.011   -0.617     0.0000    0.0880    0.338    1.258     Lead  Photoelectric effect
+#   0    -7.055   -0.013   -0.049     1.4688    0.0000    0.000    0.000     Lead  
+#   1    -6.500   -0.028   -0.006     1.4688    0.0000    0.557    0.557     Lead  Transportation
+#   2    -6.500   -0.028   -0.006     1.4688    0.0000    0.000    0.557     liquidArgon  
+#   3    -6.000   -0.042    0.033     1.4688    0.0000    0.502    1.059     liquidArgon  Transportation
+#   4    -6.000   -0.042    0.033     1.4688    0.0000    0.000    1.059     Lead  
+#   5    -5.000   -0.069    0.110     1.4688    0.0000    1.003    2.062     Lead  Transportation
+#   6    -5.000   -0.069    0.110     1.4688    0.0000    0.000    2.062     liquidArgon  
+#   7    -4.500   -0.083    0.149     1.4688    0.0000    0.502    2.564     liquidArgon  Transportation
+#   8    -4.500   -0.083    0.149     1.4688    0.0000    0.000    2.564     Lead  
+#   9    -4.418   -0.085    0.155     0.2861    0.0000    0.082    2.646     Lead  Compton scattering
+#  10    -4.460   -0.158    0.174     0.0000    0.2861    0.086    2.732     Lead  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 12     Parent ID = 11
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.695   -0.011   -0.617     5.1463    0.0000    0.000    0.000     Lead  No active process
-#   1    -5.663   -0.028   -0.665     4.0636    0.7699    0.074    0.074     Lead  Bremstrahlung
-#   2    -5.680   -0.031   -0.717     2.7290    0.8042    0.073    0.147     Lead  Bremstrahlung
-#   3    -5.641   -0.036   -0.714     1.6917    0.6126    0.063    0.210     Lead  Bremstrahlung
-#   4    -5.634   -0.047   -0.713    -0.0000    1.6917    0.126    0.336     Lead  Energy loss
+#   0    -4.418   -0.085    0.155     1.1827    0.0000    0.000    0.000     Lead  
+#   1    -4.410   -0.094    0.164     0.7864    0.3963    0.028    0.028     Lead  Multiple scattering
+#   2    -4.412   -0.097    0.162    -0.0000    0.7864    0.055    0.083     Lead  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 13     Parent ID = 12
+  Particle = gamma     Track ID = 13     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.641   -0.036   -0.714     0.4247    0.0000    0.000    0.000     Lead  No active process
-#   1    -5.526   -0.287   -0.922     0.0000    0.0880    0.345    0.345     Lead  Photoelectric effect
+#   0    -7.069   -0.012   -0.052     0.1566    0.0000    0.000    0.000     Lead  
+#   1    -7.013   -0.020   -0.033     0.0000    0.1566    0.060    0.060     Lead  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 14     Parent ID = 13
+  Particle = gamma     Track ID = 14     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.526   -0.287   -0.922     0.3367    0.0000    0.000    0.000     Lead  No active process
-#   1    -5.526   -0.287   -0.923    -0.0000    0.3367    0.018    0.018     Lead  Energy loss
+#   0    -7.170   -0.007   -0.070     0.1103    0.0000    0.000    0.000     Lead  
+#   1    -7.152   -0.009   -0.073     0.0000    0.1103    0.019    0.019     Lead  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 15     Parent ID = 12
+  Particle = gamma     Track ID = 15     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.680   -0.031   -0.717     0.5303    0.0000    0.000    0.000     Lead  No active process
-#   1    -5.597   -0.076   -0.804     0.4307    0.0997    0.129    0.129     Lead  Compton scattering
-#   2    -5.382   -0.931   -1.343     0.0000    0.4307    1.033    1.162     Lead  Photoelectric effect
+#   0    -7.369    0.013   -0.005     1.1769    0.0000    0.000    0.000     Lead  
+#   1    -6.858    0.160   -0.027     0.2983    0.8786    0.532    0.532     Lead  Compton scattering
+#   2    -6.866    0.131    0.031     0.0000    0.2983    0.065    0.597     Lead  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 16     Parent ID = 12
+  Particle = gamma     Track ID = 16     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.663   -0.028   -0.665     0.3128    0.0000    0.000    0.000     Lead  No active process
-#   1    -5.612   -0.035   -0.770     0.0000    0.3128    0.117    0.117     Lead  Photoelectric effect
+#   0    -7.370    0.012   -0.005     6.0320    0.0000    0.000    0.000     Lead  
+#   1    -6.500    0.225   -0.090     6.0320    0.0000    0.899    0.899     Lead  Transportation
+#   2    -6.500    0.225   -0.090     6.0320    0.0000    0.000    0.899     liquidArgon  
+#   3    -6.000    0.347   -0.139     6.0320    0.0000    0.517    1.416     liquidArgon  Transportation
+#   4    -6.000    0.347   -0.139     6.0320    0.0000    0.000    1.416     Lead  
+#   5    -5.000    0.591   -0.237     6.0320    0.0000    1.034    2.450     Lead  Transportation
+#   6    -5.000    0.591   -0.237     6.0320    0.0000    0.000    2.450     liquidArgon  
+#   7    -4.500    0.713   -0.285     6.0320    0.0000    0.517    2.967     liquidArgon  Transportation
+#   8    -4.500    0.713   -0.285     6.0320    0.0000    0.000    2.967     Lead  
+#   9    -3.500    0.957   -0.383     6.0320    0.0000    1.034    4.001     Lead  Transportation
+#  10    -3.500    0.957   -0.383     6.0320    0.0000    0.000    4.001     liquidArgon  
+#  11    -3.000    1.079   -0.432     6.0320    0.0000    0.517    4.518     liquidArgon  Transportation
+#  12    -3.000    1.079   -0.432     6.0320    0.0000    0.000    4.518     Lead  
+#  13    -2.000    1.323   -0.530     6.0320    0.0000    1.034    5.552     Lead  Transportation
+#  14    -2.000    1.323   -0.530     6.0320    0.0000    0.000    5.552     liquidArgon  
+#  15    -1.500    1.445   -0.579     6.0320    0.0000    0.517    6.069     liquidArgon  Transportation
+#  16    -1.500    1.445   -0.579     6.0320    0.0000    0.000    6.069     Lead  
+#  17    -1.179    1.523   -0.611     0.0000    0.2229    0.332    6.401     Lead  Lepton pair production
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 17     Parent ID = 0
+  Particle = e+     Track ID = 17     Parent ID = 16
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.912   -0.130   -0.070     0.3908    0.0000    0.000    0.000     Lead  No active process
-#   1    -6.770   -0.150   -0.113     0.0000    0.3908    0.150    0.150     Lead  Photoelectric effect
+#   0    -1.179    1.523   -0.611     4.7870    0.0000    0.000    0.000     Lead  
+#   1    -1.126    1.550   -0.580     3.4539    1.3331    0.080    0.080     Lead  Multiple scattering
+#   2    -1.095    1.537   -0.543    -0.0000    3.4539    0.189    0.270     Lead  Energy loss
+#   3    -1.095    1.537   -0.543    -0.0000    0.0000    0.000    0.270     Lead  Positron annihilation
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 18     Parent ID = 0
+  Particle = gamma     Track ID = 18     Parent ID = 17
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.055   -0.078   -0.058     0.2756    0.0000    0.000    0.000     Lead  No active process
-#   1    -7.029   -0.082   -0.056     0.0000    0.2756    0.027    0.027     Lead  Photoelectric effect
+#   0    -1.095    1.537   -0.543     0.5110    0.0000    0.000    0.000     Lead  
+#   1    -1.025    1.605   -0.638     0.0000    0.5110    0.137    0.137     Lead  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 19     Parent ID = 0
+  Particle = gamma     Track ID = 19     Parent ID = 17
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.093   -0.066   -0.057     0.1091    0.0000    0.000    0.000     Lead  No active process
-#   1    -7.082   -0.071   -0.057     0.0000    0.1091    0.012    0.012     Lead  Photoelectric effect
+#   0    -1.095    1.537   -0.543     0.5110    0.0000    0.000    0.000     Lead  
+#   1    -1.500    1.150    0.001     0.5110    0.0000    0.781    0.781     Lead  Transportation
+#   2    -1.500    1.150    0.001     0.5110    0.0000    0.000    0.781     liquidArgon  
+#   3    -2.000    0.671    0.674     0.5110    0.0000    0.965    1.746     liquidArgon  Transportation
+#   4    -2.000    0.671    0.674     0.5110    0.0000    0.000    1.746     Lead  
+#   5    -2.596    0.100    1.476     0.2493    0.2617    1.150    2.897     Lead  Compton scattering
+#   6    -2.607    0.096    1.463     0.2448    0.0045    0.018    2.915     Lead  Compton scattering
+#   7    -2.657    0.097    1.408     0.0000    0.2448    0.074    2.989     Lead  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 20     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.106   -0.062   -0.059     1.0887    0.0000    0.000    0.000     Lead  No active process
-#   1    -6.578   -0.203   -0.023     0.0000    1.0887    0.548    0.548     Lead  Photoelectric effect
+#   0    -7.373    0.012   -0.004     0.1490    0.0000    0.000    0.000     Lead  
+#   1    -7.327    0.025   -0.009     0.0000    0.1490    0.049    0.049     Lead  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 21     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.197   -0.053   -0.046     0.1118    0.0000    0.000    0.000     Lead  No active process
-#   1    -7.182   -0.057   -0.048     0.0000    0.1118    0.016    0.016     Lead  Photoelectric effect
+#   0    -7.391    0.008   -0.003     5.0612    0.0000    0.000    0.000     Lead  
+#   1    -6.500    0.205   -0.024     5.0612    0.0000    0.912    0.912     Lead  Transportation
+#   2    -6.500    0.205   -0.024     5.0612    0.0000    0.000    0.912     liquidArgon  
+#   3    -6.000    0.315   -0.035     5.0612    0.0000    0.512    1.425     liquidArgon  Transportation
+#   4    -6.000    0.315   -0.035     5.0612    0.0000    0.000    1.425     Lead  
+#   5    -5.000    0.537   -0.059     5.0612    0.0000    1.024    2.449     Lead  Transportation
+#   6    -5.000    0.537   -0.059     5.0612    0.0000    0.000    2.449     liquidArgon  
+#   7    -4.500    0.647   -0.071     5.0612    0.0000    0.512    2.961     liquidArgon  Transportation
+#   8    -4.500    0.647   -0.071     5.0612    0.0000    0.000    2.961     Lead  
+#   9    -3.500    0.868   -0.094     5.0612    0.0000    1.024    3.986     Lead  Transportation
+#  10    -3.500    0.868   -0.094     5.0612    0.0000    0.000    3.986     liquidArgon  
+#  11    -3.000    0.979   -0.106     5.0612    0.0000    0.512    4.498     liquidArgon  Transportation
+#  12    -3.000    0.979   -0.106     5.0612    0.0000    0.000    4.498     Lead  
+#  13    -2.147    1.168   -0.126     0.5181    0.0000    0.873    5.371     Lead  Compton scattering
+#  14    -2.278    2.406   -0.438     0.4187    0.0994    1.284    6.655     Lead  Compton scattering
+#  15    -2.197    2.589   -0.391     0.2856    0.1332    0.206    6.861     Lead  Compton scattering
+#  16    -2.206    2.601   -0.368     0.2298    0.0558    0.027    6.888     Lead  Compton scattering
+#  17    -2.260    2.633   -0.362     0.0000    0.2298    0.063    6.951     Lead  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 22     Parent ID = 0
+  Particle = e-     Track ID = 22     Parent ID = 21
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.382   -0.004   -0.004     1.5675    0.0000    0.000    0.000     Lead  No active process
-#   1    -6.853   -0.042   -0.045     1.0649    0.5026    0.532    0.532     Lead  Compton scattering
-#   2    -6.500   -0.302   -0.076     1.0649    0.0000    0.440    0.972     Lead  Transportation
-#   3    -6.500   -0.302   -0.076     1.0649    0.0000    0.000    0.972     liquidArgon  Transportation
-#   4    -6.000   -0.670   -0.119     1.0649    0.0000    0.622    1.594     liquidArgon  Transportation
-#   5    -6.000   -0.670   -0.119     1.0649    0.0000    0.000    1.594     Lead  Transportation
-#   6    -5.000   -1.406   -0.207     1.0649    0.0000    1.245    2.839     Lead  Transportation
-#   7    -5.000   -1.406   -0.207     1.0649    0.0000    0.000    2.839     liquidArgon  Transportation
-#   8    -4.500   -1.775   -0.250     1.0649    0.0000    0.622    3.462     liquidArgon  Transportation
-#   9    -4.500   -1.775   -0.250     1.0649    0.0000    0.000    3.462     Lead  Transportation
-#  10    -3.500   -2.511   -0.338     1.0649    0.0000    1.245    4.707     Lead  Transportation
-#  11    -3.500   -2.511   -0.338     1.0649    0.0000    0.000    4.707     liquidArgon  Transportation
-#  12    -3.000   -2.879   -0.381     1.0649    0.0000    0.622    5.329     liquidArgon  Transportation
-#  13    -3.000   -2.879   -0.381     1.0649    0.0000    0.000    5.329     Lead  Transportation
-#  14    -2.000   -3.616   -0.469     1.0649    0.0000    1.245    6.574     Lead  Transportation
-#  15    -2.000   -3.616   -0.469     1.0649    0.0000    0.000    6.574     liquidArgon  Transportation
-#  16    -1.500   -3.984   -0.512     1.0649    0.0000    0.622    7.197     liquidArgon  Transportation
-#  17    -1.500   -3.984   -0.512     1.0649    0.0000    0.000    7.197     Lead  Transportation
-#  18    -0.966   -4.377   -0.559     0.2450    0.8199    0.665    7.861     Lead  Compton scattering
-#  19    -0.975   -4.345   -0.526     0.0000    0.2450    0.046    7.908     Lead  Photoelectric effect
+#   0    -2.147    1.168   -0.126     4.5431    0.0000    0.000    0.000     Lead  
+#   1    -2.113    1.167   -0.150     3.9831    0.5600    0.050    0.050     Lead  Multiple scattering
+#   2    -2.087    1.153   -0.148     3.0353    0.3843    0.033    0.083     Lead  Bremstrahlung
+#   3    -2.091    1.128   -0.157     2.4648    0.3667    0.033    0.116     Lead  Bremstrahlung
+#   4    -2.097    1.123   -0.160     1.9366    0.0859    0.009    0.125     Lead  Bremstrahlung
+#   5    -2.097    1.121   -0.161     1.2030    0.0267    0.003    0.128     Lead  Bremstrahlung
+#   6    -2.095    1.115   -0.157    -0.0000    1.2030    0.091    0.219     Lead  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 23     Parent ID = 0
+  Particle = gamma     Track ID = 23     Parent ID = 22
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.383   -0.004   -0.004     9.1934    0.0000    0.000    0.000     Lead  No active process
-#   1    -6.917   -0.048   -0.053     0.0000    0.0000    0.471    0.471     Lead  Lepton pair production
+#   0    -2.097    1.121   -0.161     0.7069    0.0000    0.000    0.000     Lead  
+#   1    -2.170   -0.443    0.655     0.2675    0.4395    1.766    1.766     Lead  Compton scattering
+#   2    -2.111   -0.424    0.672     0.0000    0.2675    0.064    1.830     Lead  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e+     Track ID = 24     Parent ID = 23
+  Particle = gamma     Track ID = 24     Parent ID = 22
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.917   -0.048   -0.053     5.6404    0.0000    0.000    0.000     Lead  No active process
-#   1    -6.822    0.010   -0.017     3.5351    2.1053    0.153    0.153     Lead  Multiple scattering
-#   2    -6.805   -0.046    0.048    -0.0000    1.5233    0.155    0.308     Lead  Positron annihilation
+#   0    -2.097    1.123   -0.160     0.4423    0.0000    0.000    0.000     Lead  
+#   1    -2.027    0.144   -0.335     0.3761    0.0662    0.998    0.998     Lead  Compton scattering
+#   2    -2.060    0.086   -0.373     0.0000    0.3761    0.076    1.074     Lead  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 25     Parent ID = 24
+  Particle = gamma     Track ID = 25     Parent ID = 22
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.805   -0.046    0.048     0.7797    0.0000    0.000    0.000     Lead  No active process
-#   1    -6.500   -1.360   -0.551     0.7797    0.0000    1.476    1.476     Lead  Transportation
-#   2    -6.500   -1.360   -0.551     0.7797    0.0000    0.000    1.476     liquidArgon  Transportation
-#   3    -6.000   -3.518   -1.536     0.7797    0.0000    2.424    3.900     liquidArgon  Transportation
-#   4    -6.000   -3.518   -1.536     0.7797    0.0000    0.000    3.900     Lead  Transportation
-#   5    -5.796   -4.399   -1.937     0.6585    0.1212    0.989    4.889     Lead  Compton scattering
-#   6    -5.586   -4.864   -1.917     0.0000    0.6585    0.511    5.401     Lead  Photoelectric effect
+#   0    -2.091    1.128   -0.157     0.2038    0.0000    0.000    0.000     Lead  
+#   1    -2.104    1.106   -0.167     0.0000    0.2038    0.027    0.027     Lead  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 26     Parent ID = 24
+  Particle = gamma     Track ID = 26     Parent ID = 22
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.805   -0.046    0.048     2.2541    0.0000    0.000    0.000     Lead  No active process
-#   1    -6.500   -0.121    0.258     2.2541    0.0000    0.378    0.378     Lead  Transportation
-#   2    -6.500   -0.121    0.258     2.2541    0.0000    0.000    0.378     liquidArgon  Transportation
-#   3    -6.000   -0.245    0.603     2.2541    0.0000    0.620    0.997     liquidArgon  Transportation
-#   4    -6.000   -0.245    0.603     2.2541    0.0000    0.000    0.997     Lead  Transportation
-#   5    -5.090   -0.470    1.231     1.7441    0.5100    1.128    2.126     Lead  Compton scattering
-#   6    -5.000   -0.508    1.256     1.7441    0.0000    0.101    2.227     Lead  Transportation
-#   7    -5.000   -0.508    1.256     1.7441    0.0000    0.000    2.227     liquidArgon  Transportation
-#   8    -4.500   -0.719    1.397     1.7441    0.0000    0.561    2.787     liquidArgon  Transportation
-#   9    -4.500   -0.719    1.397     1.7441    0.0000    0.000    2.787     Lead  Transportation
-#  10    -3.904   -0.971    1.564     1.3701    0.3740    0.668    3.455     Lead  Compton scattering
-#  11    -3.500   -1.400    1.749     1.3701    0.0000    0.618    4.073     Lead  Transportation
-#  12    -3.500   -1.400    1.749     1.3701    0.0000    0.000    4.073     liquidArgon  Transportation
-#  13    -3.000   -1.931    1.978     1.3701    0.0000    0.764    4.837     liquidArgon  Transportation
-#  14    -3.000   -1.931    1.978     1.3701    0.0000    0.000    4.837     Lead  Transportation
-#  15    -2.000   -2.992    2.436     1.3701    0.0000    1.529    6.366     Lead  Transportation
-#  16    -2.000   -2.992    2.436     1.3701    0.0000    0.000    6.366     liquidArgon  Transportation
-#  17    -1.500   -3.523    2.665     1.3701    0.0000    0.764    7.130     liquidArgon  Transportation
-#  18    -1.500   -3.523    2.665     1.3701    0.0000    0.000    7.130     Lead  Transportation
-#  19    -0.500   -4.585    3.122     1.3701    0.0000    1.529    8.659     Lead  Transportation
-#  20    -0.500   -4.585    3.122     1.3701    0.0000    0.000    8.659     liquidArgon  Transportation
-#  21    -0.109   -5.000    3.302     1.3701    0.0000    0.598    9.257     liquidArgon  Transportation
-#  22    -0.109   -5.000    3.302     1.3701    0.0000    0.000    9.257     World  Transportation
-#  23     0.833   -6.000    3.733     1.3701    0.0000    1.440   10.697     World  Transportation
+#   0    -2.087    1.153   -0.148     0.5635    0.0000    0.000    0.000     Lead  
+#   1    -2.074    1.124   -0.194     0.0000    0.5635    0.056    0.056     Lead  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 27     Parent ID = 23
+  Particle = gamma     Track ID = 27     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.917   -0.048   -0.053     2.5310    0.0000    0.000    0.000     Lead  No active process
-#   1    -6.894   -0.008   -0.062     1.0902    1.1088    0.100    0.100     Lead  Bremstrahlung
-#   2    -6.891   -0.006   -0.057    -0.0000    1.0902    0.081    0.181     Lead  Energy loss
+#   0    -7.411    0.003   -0.002    11.9900    0.0000    0.000    0.000     Lead  
+#   1    -6.500    0.153   -0.063    11.9900    0.0000    0.925    0.925     Lead  Transportation
+#   2    -6.500    0.153   -0.063    11.9900    0.0000    0.000    0.925     liquidArgon  
+#   3    -6.000    0.236   -0.096    11.9900    0.0000    0.508    1.433     liquidArgon  Transportation
+#   4    -6.000    0.236   -0.096    11.9900    0.0000    0.000    1.433     Lead  
+#   5    -5.000    0.401   -0.163    11.9900    0.0000    1.016    2.449     Lead  Transportation
+#   6    -5.000    0.401   -0.163    11.9900    0.0000    0.000    2.449     liquidArgon  
+#   7    -4.500    0.483   -0.196    11.9900    0.0000    0.508    2.956     liquidArgon  Transportation
+#   8    -4.500    0.483   -0.196    11.9900    0.0000    0.000    2.956     Lead  
+#   9    -3.989    0.568   -0.231     0.0000    0.0000    0.519    3.476     Lead  Lepton pair production
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 28     Parent ID = 27
+  Particle = e+     Track ID = 28     Parent ID = 27
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.894   -0.008   -0.062     0.3319    0.0000    0.000    0.000     Lead  No active process
-#   1    -6.707    0.133    0.259     0.0000    0.3319    0.398    0.398     Lead  Photoelectric effect
+#   0    -3.989    0.568   -0.231     8.9776    0.0000    0.000    0.000     Lead  
+#   1    -3.889    0.660   -0.239     7.1718    1.8058    0.156    0.156     Lead  Multiple scattering
+#   2    -3.874    0.659   -0.234     6.1472    0.6557    0.016    0.172     Lead  Bremstrahlung
+#   3    -3.850    0.661   -0.223     5.7348    0.2662    0.029    0.200     Lead  Bremstrahlung
+#   4    -3.829    0.664   -0.208     4.7724    0.2760    0.026    0.226     Lead  Bremstrahlung
+#   5    -3.797    0.644   -0.143     3.1271    1.0857    0.093    0.319     Lead  Bremstrahlung
+#   6    -3.784    0.587   -0.156     1.3243    0.9897    0.087    0.406     Lead  Bremstrahlung
+#   7    -3.779    0.579   -0.159     0.9139    0.0985    0.013    0.419     Lead  Bremstrahlung
+#   8    -3.772    0.576   -0.158    -0.0000    0.9139    0.066    0.486     Lead  Energy loss
+#   9    -3.772    0.576   -0.158    -0.0000    0.0000    0.000    0.486     Lead  Positron annihilation
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 29     Parent ID = 0
+  Particle = gamma     Track ID = 29     Parent ID = 28
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.387   -0.003   -0.003     0.1551    0.0000    0.000    0.000     Lead  No active process
-#   1    -7.330   -0.007   -0.010     0.0000    0.1551    0.057    0.057     Lead  Photoelectric effect
+#   0    -3.772    0.576   -0.158     0.5110    0.0000    0.000    0.000     Lead  
+#   1    -3.833    0.592   -0.129     0.0000    0.5110    0.069    0.069     Lead  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 30     Parent ID = 0
+  Particle = gamma     Track ID = 30     Parent ID = 28
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.402   -0.002   -0.003     2.3319    0.0000    0.000    0.000     Lead  No active process
-#   1    -7.220   -0.012   -0.005     0.6223    0.0000    0.182    0.182     Lead  Compton scattering
-#   2    -7.175    0.068   -0.052     0.0000    0.6223    0.104    0.286     Lead  Photoelectric effect
+#   0    -3.772    0.576   -0.158     0.5110    0.0000    0.000    0.000     Lead  
+#   1    -3.500    0.504   -0.285     0.5110    0.0000    0.309    0.309     Lead  Transportation
+#   2    -3.500    0.504   -0.285     0.5110    0.0000    0.000    0.309     liquidArgon  
+#   3    -3.000    0.373   -0.519     0.5110    0.0000    0.567    0.876     liquidArgon  Transportation
+#   4    -3.000    0.373   -0.519     0.5110    0.0000    0.000    0.876     Lead  
+#   5    -2.933    0.355   -0.550     0.0000    0.5110    0.077    0.953     Lead  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 31     Parent ID = 30
+  Particle = gamma     Track ID = 31     Parent ID = 28
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.220   -0.012   -0.005     1.7096    0.0000    0.000    0.000     Lead  No active process
-#   1    -7.217   -0.036    0.015     0.5670    1.0344    0.106    0.106     Lead  Bremstrahlung
-#   2    -7.217   -0.038    0.013    -0.0000    0.5670    0.036    0.142     Lead  Energy loss
+#   0    -3.779    0.579   -0.159     0.3119    0.0000    0.000    0.000     Lead  
+#   1    -3.509    0.502   -0.505     0.2483    0.0637    0.445    0.445     Lead  Compton scattering
+#   2    -3.500    0.482   -0.510     0.2483    0.0000    0.023    0.468     Lead  Transportation
+#   3    -3.500    0.482   -0.510     0.2483    0.0000    0.000    0.468     liquidArgon  
+#   4    -3.000   -0.626   -0.809     0.2483    0.0000    1.251    1.719     liquidArgon  Transportation
+#   5    -3.000   -0.626   -0.809     0.2483    0.0000    0.000    1.719     Lead  
+#   6    -2.938   -0.762   -0.846     0.0000    0.2483    0.154    1.873     Lead  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 32     Parent ID = 31
+  Particle = gamma     Track ID = 32     Parent ID = 28
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.217   -0.036    0.015     0.1082    0.0000    0.000    0.000     Lead  No active process
-#   1    -7.219   -0.043    0.007     0.0000    0.1082    0.011    0.011     Lead  Photoelectric effect
+#   0    -3.784    0.587   -0.156     0.8131    0.0000    0.000    0.000     Lead  
+#   1    -3.850   -1.744    0.575     0.0000    0.8131    2.443    2.443     Lead  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 33     Parent ID = 0
+  Particle = gamma     Track ID = 33     Parent ID = 28
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.456   -0.001   -0.001     0.8311    0.0000    0.000    0.000     Lead  No active process
-#   1    -6.925    0.004   -0.047     0.0000    0.8311    0.534    0.534     Lead  Photoelectric effect
+#   0    -3.797    0.644   -0.143     0.5596    0.0000    0.000    0.000     Lead  
+#   1    -3.694    0.412    0.067     0.0000    0.5596    0.330    0.330     Lead  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 34     Parent ID = 0
+  Particle = gamma     Track ID = 34     Parent ID = 28
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.482   -0.000    0.001     0.1225    0.0000    0.000    0.000     Lead  No active process
-#   1    -7.478   -0.000    0.001     0.0000    0.1225    0.004    0.004     Lead  Photoelectric effect
+#   0    -3.829    0.664   -0.208     0.6864    0.0000    0.000    0.000     Lead  
+#   1    -3.500    0.669   -0.060     0.6864    0.0000    0.361    0.361     Lead  Transportation
+#   2    -3.500    0.669   -0.060     0.6864    0.0000    0.000    0.361     liquidArgon  
+#   3    -3.000    0.676    0.165     0.6864    0.0000    0.548    0.909     liquidArgon  Transportation
+#   4    -3.000    0.676    0.165     0.6864    0.0000    0.000    0.909     Lead  
+#   5    -2.071    0.691    0.583     0.0000    0.6864    1.019    1.928     Lead  Photoelectric effect
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 35     Parent ID = 28
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -3.850    0.661   -0.223     0.1462    0.0000    0.000    0.000     Lead  
+#   1    -3.742    0.641   -0.173     0.0000    0.1462    0.119    0.119     Lead  Photoelectric effect
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 36     Parent ID = 28
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -3.874    0.659   -0.234     0.3689    0.0000    0.000    0.000     Lead  
+#   1    -3.836    0.656   -0.231     0.0000    0.3689    0.039    0.039     Lead  Photoelectric effect
+
+****************************************************************************************************
+  Particle = e-     Track ID = 37     Parent ID = 27
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -3.989    0.568   -0.231     1.9904    0.0000    0.000    0.000     Lead  
+#   1    -3.975    0.555   -0.250     0.2218    0.4367    0.045    0.045     Lead  Bremstrahlung
+#   2    -3.974    0.556   -0.251    -0.0000    0.2218    0.010    0.055     Lead  Energy loss
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 38     Parent ID = 37
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -3.975    0.555   -0.250     1.3319    0.0000    0.000    0.000     Lead  
+#   1    -4.038    0.836   -0.916     1.2584    0.0735    0.725    0.725     Lead  Compton scattering
+#   2    -3.970    1.033   -1.531     0.2936    0.9647    0.649    1.375     Lead  Compton scattering
+#   3    -3.728    1.051   -1.402     0.0000    0.2936    0.275    1.649     Lead  Photoelectric effect
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 39     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -7.451    0.003    0.000     6.0594    0.0000    0.000    0.000     Lead  
+#   1    -7.347    0.007    0.006     0.0000    1.2001    0.105    0.105     Lead  Lepton pair production
+
+****************************************************************************************************
+  Particle = e+     Track ID = 40     Parent ID = 39
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -7.347    0.007    0.006     3.8373    0.0000    0.000    0.000     Lead  
+#   1    -7.343    0.006    0.008     3.4901    0.0332    0.005    0.005     Lead  Bremstrahlung
+#   2    -7.332   -0.029    0.023     2.9062    0.5839    0.046    0.051     Lead  Multiple scattering
+#   3    -7.326   -0.049    0.053     2.5159    0.3903    0.046    0.097     Lead  Multiple scattering
+#   4    -7.360   -0.041    0.058     1.9311    0.5848    0.046    0.143     Lead  Multiple scattering
+#   5    -7.346   -0.065    0.073     1.5519    0.3792    0.046    0.189     Lead  Multiple scattering
+#   6    -7.324   -0.086    0.086     0.9139    0.6380    0.074    0.262     Lead  Bremstrahlung
+#   7    -7.311   -0.091    0.085    -0.0000    0.2419    0.025    0.287     Lead  Positron annihilation
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 41     Parent ID = 40
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -7.311   -0.091    0.085     1.0418    0.0000    0.000    0.000     Lead  
+#   1    -7.303   -0.058   -0.022     0.0000    1.0418    0.112    0.112     Lead  Photoelectric effect
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 42     Parent ID = 40
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -7.311   -0.091    0.085     0.6522    0.0000    0.000    0.000     Lead  
+#   1    -6.500   -1.241    0.207     0.6522    0.0000    1.413    1.413     Lead  Transportation
+#   2    -6.500   -1.241    0.207     0.6522    0.0000    0.000    1.413     liquidArgon  
+#   3    -6.000   -1.950    0.283     0.6522    0.0000    0.871    2.284     liquidArgon  Transportation
+#   4    -6.000   -1.950    0.283     0.6522    0.0000    0.000    2.284     Lead  
+#   5    -5.898   -2.095    0.298     0.0000    0.6522    0.178    2.462     Lead  Photoelectric effect
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 43     Parent ID = 40
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -7.343    0.006    0.008     0.3140    0.0000    0.000    0.000     Lead  
+#   1    -7.194   -0.132    0.086     0.0000    0.3140    0.217    0.217     Lead  Photoelectric effect
 --- Finish event 
-   Absorber: total energy (MeV):  47.209       total track length (cm):    2.608
-   Gap:      total energy (MeV):   1.074       total track length (cm):    0.583
-Time of this run:   User=0.01s Real=0.02s Sys=0s
+   Absorber: total energy (MeV):  47.935       total track length (cm):    2.405
+   Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
+Time of this run:   User=0.02s Real=0.03s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
