@@ -1,4 +1,4 @@
-// $Id: TG4ParticlesManager.cxx,v 1.8 2006/12/12 16:21:16 brun Exp $
+// $Id: TG4ParticlesManager.cxx,v 1.9 2006/12/15 09:30:29 brun Exp $
 // Category: physics
 //
 // Class TG4ParticlesManager
@@ -121,7 +121,7 @@ void TG4ParticlesManager::DefineParticles()
   // feedback phothon
   pdgDB->AddParticle("FeedbackPhoton","FeedbackPhoton", 0, kFALSE,
                      0, 0, "Special", kspe+51);
-  // fParticleNameMap.Add("???","FeedbackPhoton");
+  fParticleNameMap.AddInverse("opticalphoton","FeedbackPhoton");
 
   // generic ion
   // This particle should not appear in tracking (as it is commented 
@@ -301,7 +301,7 @@ G4ParticleDefinition* TG4ParticlesManager::GetParticleDefinition(
   }    
   
   if (particleDefinition==0 && warn) {
-    G4String text = "pdgEncoding= ";
+    TString text = "pdgEncoding= ";
     text +=  pdgEncoding;
     TG4Globals::Warning(
       "TG4ParticlesManager", "GetParticleDefinition",

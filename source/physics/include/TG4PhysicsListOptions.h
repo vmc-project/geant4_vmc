@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsListOptions.h,v 1.8 2005/11/18 21:29:35 brun Exp $
+// $Id: TG4PhysicsListOptions.h,v 1.1 2006/01/13 16:57:40 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4PhysicsListOptions
@@ -33,6 +33,7 @@ class TG4PhysicsListOptions
     void SetSpecialCutsPhysics(Bool_t value);
     void SetSpecialControlsPhysics(Bool_t value);
     void SetStepLimiterPhysics(Bool_t value);
+    void SetStackPopperPhysics(Bool_t value);
     
     // get methods
     Bool_t GetEMPhysics() const;
@@ -42,7 +43,8 @@ class TG4PhysicsListOptions
     Bool_t GetSpecialCutsPhysics() const;
     Bool_t GetSpecialControlsPhysics() const;
     Bool_t GetStepLimiterPhysics() const;
-     
+    Bool_t GetStackPopperPhysics() const;
+    
   private:
     // data members
     Bool_t  fSetEMPhysics;          //electromagnetic physics control
@@ -52,6 +54,7 @@ class TG4PhysicsListOptions
     Bool_t  fSetSpecialCutsPhysics; //special cuts process control 
     Bool_t  fSetSpecialControlsPhysics;//special controls process control
     Bool_t  fSetStepLimiterPhysics; //step limiter process control
+    Bool_t  fSetStackPopperPhysics; //stack popper process control
 };
 
 #endif //TG4_PHYSICS_LIST_OPTIONS_H

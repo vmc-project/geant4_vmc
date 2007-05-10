@@ -1,4 +1,4 @@
-// $Id: TG4TrackInformation.icc,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4TrackInformation.icc,v 1.2 2004/11/10 11:39:27 brun Exp $
 // Category: event
 
 // inline operators
@@ -35,6 +35,11 @@ inline void TG4TrackInformation::SetParentParticleID(G4int parentParticleID) {
   fParentParticleID = parentParticleID; 
 }
 
+inline void TG4TrackInformation::SetIsUserTrack(G4bool isUserTrack) { 
+  /// Set info that the track was poped from the VMC stack
+  fIsUserTrack = isUserTrack; 
+}
+
 inline G4int TG4TrackInformation::GetTrackParticleID() const { 
   /// Return track particle ID.= the index of track particle in VMC stack
   return fTrackParticleID; 
@@ -43,4 +48,9 @@ inline G4int TG4TrackInformation::GetTrackParticleID() const {
 inline G4int TG4TrackInformation::GetParentParticleID() const { 
   /// Return parent particle ID = the index of parent particle in VMC stack
   return fParentParticleID; 
+}
+
+inline G4bool TG4TrackInformation::IsUserTrack() const { 
+  /// Return the info if the track was poped from the VMC stack
+  return fIsUserTrack; 
 }

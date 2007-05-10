@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.21 2007/02/19 16:26:37 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.22 2007/03/07 14:22:45 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -282,7 +282,7 @@ void TG4GeometryManager::FillMediumMapFromG3()
     // Get medium ID from G3 tables    
     G4String name  = lv->GetName();
     G4String g3Name(name);
-    // Filter out the reflected volumesname extension
+    // Filter out the reflected volume name extension
     // added by reflection factory 
     G4String ext = G4ReflectionFactory::Instance()->GetVolumesNameExtension();
     if (name.find(ext)) g3Name = g3Name.substr(0, g3Name.find(ext));

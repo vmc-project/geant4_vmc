@@ -1,4 +1,4 @@
-// $Id: TG4TrackInformation.h,v 1.3 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4TrackInformation.h,v 1.4 2005/09/01 10:04:32 brun Exp $
 /// \ingroup event
 //
 /// \class TG4TrackInformation
@@ -18,7 +18,7 @@ class TG4TrackInformation : public G4VUserTrackInformation
   public:
     TG4TrackInformation();
     TG4TrackInformation(G4int trackParticleID);
-    TG4TrackInformation(G4int trackParticleID, G4int parentParticleID);
+    //TG4TrackInformation(G4int trackParticleID, G4int parentParticleID);
     virtual ~TG4TrackInformation();
    
     // operators
@@ -34,15 +34,18 @@ class TG4TrackInformation : public G4VUserTrackInformation
     // set methods
     void SetTrackParticleID(G4int trackParticleID);
     void SetParentParticleID(G4int parentParticleID);
+    void SetIsUserTrack(G4bool isUserTrack);
 
     // get methods
-    G4int GetTrackParticleID() const;
-    G4int GetParentParticleID() const;
+    G4int  GetTrackParticleID() const;
+    G4int  GetParentParticleID() const;
+    G4bool IsUserTrack() const;
 
   private:
     // data members
     G4int  fTrackParticleID; //the index of track particle in VMC stack
     G4int  fParentParticleID;//the index of parent track in VMC stack
+    G4bool fIsUserTrack;     //true if defined by user and not primary track
 };
 
 // inline methods

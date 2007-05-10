@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.cxx,v 1.9 2006/01/13 16:59:38 brun Exp $
+// $Id: TG4ModularPhysicsList.cxx,v 1.10 2006/12/12 16:21:16 brun Exp $
 // Category: physics
 //
 // Class TG4ModularPhysicsList
@@ -17,6 +17,7 @@
 #include "TG4PhysicsConstructorSpecialCuts.h"
 #include "TG4PhysicsConstructorSpecialControls.h"
 #include "TG4PhysicsConstructorStepLimiter.h"
+#include "TG4PhysicsConstructorStackPopper.h"
 #include "TG4GeometryServices.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4G3ControlVector.h"
@@ -40,6 +41,7 @@ TG4ModularPhysicsList::TG4ModularPhysicsList(const TG4PhysicsListOptions& option
     TG4Verbose("physicsList"),
     fMessenger(this),
     fPhysicsConstructorOptical(0),
+    fPhysicsConstructorStackPopper(0),
     fOptions(options)
  {
 //
@@ -56,6 +58,7 @@ TG4ModularPhysicsList::TG4ModularPhysicsList()
     TG4Verbose("physicsList"),
     fMessenger(this),
     fPhysicsConstructorOptical(0),
+    fPhysicsConstructorStackPopper(0),
     fOptions()
  {
 //
@@ -120,6 +123,12 @@ void TG4ModularPhysicsList::Configure()
 
   if ( fOptions.GetStepLimiterPhysics() ) 
     RegisterPhysics(new TG4PhysicsConstructorStepLimiter(verboseLevel));
+
+  if ( fOptions.GetStackPopperPhysics() ) {
+    fPhysicsConstructorStackPopper
+      = new TG4PhysicsConstructorStackPopper(verboseLevel); 
+    RegisterPhysics(fPhysicsConstructorStackPopper);
+  }  
 
   // warn about not allowed combinations
   if ( fOptions.GetMuonPhysics() && !fOptions.GetEMPhysics() ) {
@@ -450,3 +459,19 @@ void TG4ModularPhysicsList::SetMaxNumPhotonsPerStep(G4int maxNumPhotons)
   fPhysicsConstructorOptical->SetMaxNumPhotonsPerStep(maxNumPhotons); 
 }    
 
+//_____________________________________________________________________________
+void TG4ModularPhysicsList::SetStackPopperSelection(const G4String& selection)
+{
+/// Select particles with stack popper process
+
+  if ( !fPhysicsConstructorStackPopper ) {
+    TG4Globals::Exception(
+      "TG4ModularPhysicsList", "SetStackPopperSelection",
+      "SetStackPopper physics is not activated.");
+  }  
+  
+  fPhysicsConstructorStackPopper->SetSelection(selection); 
+
+  G4cout << "TG4ModularPhysicsList::SetStackPopperSelection: " << selection << G4endl;
+}   
+ 

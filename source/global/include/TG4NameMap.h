@@ -1,4 +1,4 @@
-// $Id: TG4NameMap.h,v 1.6 2006/09/13 06:26:11 brun Exp $
+// $Id: TG4NameMap.h,v 1.7 2006/12/12 16:21:15 brun Exp $
 /// \ingroup global
 //
 /// \class TG4NameMap
@@ -28,6 +28,7 @@ class TG4NameMap
 
     // methods
     G4bool Add(const G4String& first, const G4String& second);  
+    G4bool AddInverse(const G4String& first, const G4String& second);  
     G4bool AddName(const G4String& name);  
     const G4String& GetFirst(const G4String& second) const;
     const G4String& GetSecond(const G4String& first) const;

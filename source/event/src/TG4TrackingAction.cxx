@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.cxx,v 1.9 2006/12/12 16:21:15 brun Exp $
+// $Id: TG4TrackingAction.cxx,v 1.10 2006/12/15 09:30:29 brun Exp $
 // Category: event
 //
 // Class TG4TrackingAction
@@ -12,6 +12,7 @@
 #include "TG4StepManager.h"
 #include "TG4PhysicsManager.h"
 #include "TG4ParticlesManager.h"
+#include "TG4StackPopper.h"
 #include "TG4SensitiveDetector.h"
 #include "TG4SDServices.h"
 #include "TG4Globals.h"
@@ -53,6 +54,7 @@ TG4TrackingAction::TG4TrackingAction()
 //_____________________________________________________________________________
 TG4TrackingAction::~TG4TrackingAction() {
 //
+  fgInstance = 0;
 }
 
 //
@@ -66,39 +68,41 @@ void TG4TrackingAction::SetTrackInformation(const G4Track* track)
 /// and set the current track in stack.
 // --- 
 
-  // track index in the particles array
-  G4int trackID = track->GetTrackID();
-  G4int parentID = track->GetParentID();
-  Int_t trackIndex;
-  if (parentID == 0) { 
-    // in VMC track numbering starts from 0
-    trackIndex = trackID-1; 
-  } 
-  else { 
-    if (fSaveSecondaries)
-      trackIndex = gMC->GetStack()->GetNtrack();
-    else   
-      trackIndex = fTrackCounter++;
-          // if secondaries are not stacked in VMC stack
-          // use own counter for setting track index
-  }
-  
-  // set track index to track information
   TG4TrackInformation* trackInfo
-    = GetTrackInformation(track, "PreTrackingAction");
-  if (!trackInfo) {
+    = GetTrackInformation(track, "SetTrackInformation");
+  if ( ! trackInfo ) {
     // create track information and set it to G4Track
     // if it does not yet exist
-    trackInfo = new TG4TrackInformation(trackIndex);
+    trackInfo = new TG4TrackInformation();
     fpTrackingManager->SetUserTrackInformation(trackInfo);
         // the track information is deleted together with its
         // G4Track object  
   }
-  else
-    trackInfo->SetTrackParticleID(trackIndex);        
+
+  // track index in the particles array
+  Int_t trackIndex = trackInfo->GetTrackParticleID();
+  if ( trackIndex < 0 ) {
+     // Do not reset particle ID if it is already set
+    G4int trackID = track->GetTrackID();
+    G4int parentID = track->GetParentID();
+    if ( parentID == 0 ) { 
+      // in VMC track numbering starts from 0
+      trackIndex = trackID-1; 
+    } 
+    else { 
+      if ( fSaveSecondaries )
+        trackIndex = gMC->GetStack()->GetNtrack();
+      else   
+        trackIndex = fTrackCounter;
+            // if secondaries are not stacked in VMC stack
+            // use own counter for setting track index
+    }
+    trackInfo->SetTrackParticleID(trackIndex);
+  }  
 
   // set current track number
   gMC->GetStack()->SetCurrentTrack(trackIndex);
+  ++fTrackCounter;
 }
 
 //_____________________________________________________________________________
@@ -114,13 +118,6 @@ void TG4TrackingAction::SetParentToTrackInformation(const G4Track* track)
     for (i=0; i<G4int(secondaryTracks->size()); i++) {
       G4Track* secondary = (*secondaryTracks)[i]; 
 
-      if (secondary->GetUserInformation()) {
-        // this should never happen
-        TG4Globals::Exception(
-          "TG4TrackingAction", "PostTrackingAction",
-          "Inconsistent track information."); 
-      }        
-      
       // get parent track index
       TG4TrackInformation* parentInfo
         = GetTrackInformation(track, "PostTrackingAction");
@@ -128,12 +125,16 @@ void TG4TrackingAction::SetParentToTrackInformation(const G4Track* track)
       G4int parentParticleID 
         = parentInfo->GetTrackParticleID();
 
-      // create track information and set it to the G4Track
-      TG4TrackInformation* trackInfo 
-        = new TG4TrackInformation(-1, parentParticleID);
-      secondary->SetUserInformation(trackInfo);
+      // get or create track information and set it to the G4Track
+      TG4TrackInformation* trackInfo
+        = GetTrackInformation(secondary, "PostTrackingAction");
+      if ( ! trackInfo ) {
+        trackInfo = new TG4TrackInformation(-1);
         // the track information is deleted together with its
         // G4Track object  
+      }  
+      trackInfo->SetParentParticleID(parentParticleID);
+      secondary->SetUserInformation(trackInfo);
     }         
   }
       
@@ -241,9 +242,15 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
     FinishPrimaryTrack();
   }  
 
+  // reset stack popper (if activated
+  if ( TG4StackPopper::Instance() )
+    TG4StackPopper::Instance()->Reset();
+
   // set step manager status
   TG4StepManager* stepManager = TG4StepManager::Instance();
   stepManager->SetStep((G4Track*)track, kVertex);
+  
+  // clean fNofPoppedParticles in StackPopper process
   
   // set track information
   SetTrackInformation(track);
@@ -255,14 +262,21 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
   }
   else { 
     // save secondary particles info 
-    if (fSaveSecondaries) TrackToStack(track);
+    if (  fSaveSecondaries && 
+        ! GetTrackInformation(track, "PreUserTrackingAction")->IsUserTrack() ) {
+      TrackToStack(track);
+
+      // Notify a stack popper (if activated) about saving this secondary
+      if ( TG4StackPopper::Instance() )
+        TG4StackPopper::Instance()->Notify();
+    }  
   }
   
   // verbose
   if ( track->GetTrackID() == fNewVerboseTrackID) {
-      G4String command = "/tracking/verbose ";
-      TG4Globals::AppendNumberToString(command, fNewVerboseLevel);
-      G4UImanager::GetUIpointer()->ApplyCommand(command);
+    G4String command = "/tracking/verbose ";
+    TG4Globals::AppendNumberToString(command, fNewVerboseLevel);
+    G4UImanager::GetUIpointer()->ApplyCommand(command);
   }    
 
   // VMC application pre track action
@@ -281,7 +295,7 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
 /// Called by G4 kernel after finishing tracking.
 
   // counter
-  if (fSaveSecondaries) fTrackCounter++;
+  // if (fSaveSecondaries) fTrackCounter++;
   
   // set parent track particle index to the secondary tracks 
   SetParentToTrackInformation(track);
@@ -334,7 +348,7 @@ void TG4TrackingAction::TrackToStack(const G4Track* track)
   }
   else {
     motherIndex 
-      = GetTrackInformation(track,"SaveTrack")->GetParentParticleID();
+      = GetTrackInformation(track,"TrackToStack")->GetParentParticleID();
   }
      
   // PDG code
@@ -384,7 +398,7 @@ void TG4TrackingAction::TrackToStack(const G4Track* track)
   
   G4int ntr;
   // create particle 
-  gMC->GetStack()->PushTrack(1, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
+  gMC->GetStack()->PushTrack(0, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
                             polX, polY, polZ, mcProcess, ntr, weight, status);  
                    
 }

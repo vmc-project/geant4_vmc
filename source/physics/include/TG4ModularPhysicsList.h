@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.h,v 1.9 2006/01/13 16:59:38 brun Exp $
+// $Id: TG4ModularPhysicsList.h,v 1.10 2006/12/12 16:21:16 brun Exp $
 /// \ingroup physics
 //
 /// \class TG4ModularPhysicsList
@@ -23,6 +23,7 @@
 #include <globals.hh>
 
 class TG4PhysicsConstructorOptical;
+class TG4PhysicsConstructorStackPopper;
 
 class TG4ModularPhysicsList: public G4VModularPhysicsList,
                              public TG4Verbose
@@ -44,6 +45,7 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
     void SetProcessActivation();
     void SetRangeCut(Double_t value);
     void SetMaxNumPhotonsPerStep(Int_t maxNumPhotons);
+    void SetStackPopperSelection(const G4String& selection);
     
   protected:
     // static data members
@@ -52,6 +54,7 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
     // data members
     TG4PhysicsListMessenger        fMessenger; //messenger
     TG4PhysicsConstructorOptical*  fPhysicsConstructorOptical;
+    TG4PhysicsConstructorStackPopper*  fPhysicsConstructorStackPopper;
     TG4PhysicsListOptions          fOptions;
 
   private:

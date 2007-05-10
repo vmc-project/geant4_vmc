@@ -1,4 +1,4 @@
-// $Id: TG4TrackInformation.cxx,v 1.1.1.1 2002/09/27 10:00:03 rdm Exp $
+// $Id: TG4TrackInformation.cxx,v 1.2 2004/11/10 11:39:27 brun Exp $
 // Category: event
 //
 // Class TG4TrackInformation
@@ -15,7 +15,8 @@ G4Allocator<TG4TrackInformation> gAliTrackInfoAllocator;
 TG4TrackInformation::TG4TrackInformation()
   : G4VUserTrackInformation(),
     fTrackParticleID(-1),
-    fParentParticleID(-1) 
+    fParentParticleID(-1),
+    fIsUserTrack(false) 
 {
 //
 }
@@ -24,21 +25,22 @@ TG4TrackInformation::TG4TrackInformation()
 TG4TrackInformation::TG4TrackInformation(G4int trackParticleID) 
   : G4VUserTrackInformation(),
     fTrackParticleID(trackParticleID),
-    fParentParticleID(-1)
+    fParentParticleID(-1),
+    fIsUserTrack(false) 
 {
 //
 }    
-
+/*
 //_____________________________________________________________________________
-TG4TrackInformation::TG4TrackInformation(G4int trackParticleID, 
-                                         G4int parentParticleID)
+TG4TrackInformation::TG4TrackInformation(G4int  trackParticleID, 
+                                         G4int  parentParticleID)
   : G4VUserTrackInformation(),
     fTrackParticleID(trackParticleID),
     fParentParticleID(parentParticleID)
 {
 //
 }    
-
+*/
 //_____________________________________________________________________________
 TG4TrackInformation::~TG4TrackInformation(){
 //
@@ -54,5 +56,9 @@ void TG4TrackInformation::Print() const
 /// Print track information.
 
   G4cout << "TrackParticleID: " << fTrackParticleID << "   "
-         << "ParentParticleID: " << fParentParticleID << G4endl;
+         << "ParentParticleID: " << fParentParticleID;
+
+  if ( fIsUserTrack ) G4cout << "  userTrack";
+
+  G4cout << G4endl;
 }

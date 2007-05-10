@@ -1,4 +1,4 @@
-// $Id: TG4NameMap.cxx,v 1.5 2006/09/13 06:26:11 brun Exp $
+// $Id: TG4NameMap.cxx,v 1.6 2006/12/12 16:21:15 brun Exp $
 // Category: global
 //
 // Class TG4NameMap
@@ -50,6 +50,20 @@ G4bool TG4NameMap::Add(const G4String& first, const G4String& second)
 }
 
 //_____________________________________________________________________________
+G4bool TG4NameMap::AddInverse(const G4String& first, const G4String& second)
+{  
+/// Add names pair only to the inverse map.
+
+  if (GetFirst(second) == fgUndefined) {
+    // insert into map 
+    // only in case it is not yet here
+    fInverseMap[second] = first;
+    return true;
+  }
+  return false;
+}
+
+//_____________________________________________________________________________
 G4bool TG4NameMap::AddName(const G4String& name)
 {  
 /// Add name to the map.
@@ -94,9 +108,20 @@ void TG4NameMap::PrintAll() const
 /// Dump the whole map.
 
   if (fMap.size()) {
-    G4cout << "Dump of TG4NameMap - " << fMap.size() << " entries:" << G4endl;
+    G4cout << "Dump of map - " << fMap.size() << " entries:" << G4endl;
     G4int counter = 0;
     for (MapConstIterator i=fMap.begin(); i != fMap.end(); i++) {
+      const G4String& first  = (*i).first;
+      const G4String& second = (*i).second;
+      G4cout << "Map element " << std::setw(3) << counter++ << "   " 
+             << first << "   " << second << G4endl;
+    }
+  }
+
+  if (fInverseMap.size()) {
+    G4cout << "Dump of inverse map - " << fInverseMap.size() << " entries:" << G4endl;
+    G4int counter = 0;
+    for (MapConstIterator i=fInverseMap.begin(); i != fInverseMap.end(); i++) {
       const G4String& first  = (*i).first;
       const G4String& second = (*i).second;
       G4cout << "Map element " << std::setw(3) << counter++ << "   " 

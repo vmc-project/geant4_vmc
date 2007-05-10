@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsListOptions.cxx,v 1.8 2005/11/18 21:29:35 brun Exp $
+// $Id: TG4PhysicsListOptions.cxx,v 1.1 2006/01/13 16:57:41 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsListOptions
@@ -17,7 +17,8 @@ TG4PhysicsListOptions::TG4PhysicsListOptions()
     fSetOpticalPhysics(false),
     fSetSpecialCutsPhysics(false),
     fSetSpecialControlsPhysics(false),
-    fSetStepLimiterPhysics(true)
+    fSetStepLimiterPhysics(true),
+    fSetStackPopperPhysics(false)
 {
 //
 }
@@ -30,7 +31,8 @@ TG4PhysicsListOptions::TG4PhysicsListOptions(const TG4PhysicsListOptions& right)
     fSetOpticalPhysics(right.fSetOpticalPhysics),
     fSetSpecialCutsPhysics(right.fSetSpecialCutsPhysics),
     fSetSpecialControlsPhysics(right.fSetSpecialControlsPhysics),
-    fSetStepLimiterPhysics(right.fSetStepLimiterPhysics)
+    fSetStepLimiterPhysics(right.fSetStepLimiterPhysics),
+    fSetStackPopperPhysics(right.fSetStackPopperPhysics)
 {
 //
 }
@@ -59,6 +61,7 @@ TG4PhysicsListOptions::operator=(const TG4PhysicsListOptions &right)
   fSetOpticalPhysics = right.fSetOpticalPhysics;
   fSetSpecialCutsPhysics = right.fSetSpecialCutsPhysics;
   fSetSpecialControlsPhysics = right.fSetSpecialControlsPhysics;
+  fSetStackPopperPhysics = right.fSetStackPopperPhysics;
 
   return *this;
 }
@@ -117,6 +120,14 @@ void TG4PhysicsListOptions::SetStepLimiterPhysics(Bool_t value)
 }
 
 //_____________________________________________________________________________
+void TG4PhysicsListOptions::SetStackPopperPhysics(Bool_t value) 
+{ 
+  /// Switch on/off a process which pops from a stack user defined
+  /// tracks and put them in tracking
+  fSetStackPopperPhysics = value; 
+}
+
+//_____________________________________________________________________________
 Bool_t TG4PhysicsListOptions::GetEMPhysics() const 
 {
   /// Return EM physics control value
@@ -163,4 +174,11 @@ Bool_t TG4PhysicsListOptions::GetStepLimiterPhysics() const
 {
   /// Return Step limiter physics control value
   return fSetStepLimiterPhysics;
+}  
+
+//_____________________________________________________________________________
+Bool_t TG4PhysicsListOptions::GetStackPopperPhysics() const  
+{
+  /// Return Stack popper physics control value
+  return fSetStackPopperPhysics;
 }  
