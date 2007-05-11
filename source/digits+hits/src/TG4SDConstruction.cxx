@@ -1,4 +1,4 @@
-// $Id: TG4SDConstruction.cxx,v 1.4 2006/12/12 16:21:15 brun Exp $
+// $Id: TG4SDConstruction.cxx,v 1.5 2007/02/06 11:06:34 brun Exp $
 // Category: digits+hits
 //
 // Author: I.Hrivnacova
@@ -45,7 +45,7 @@ void TG4SDConstruction::CreateSD(G4LogicalVolume* lv) const
   G4String sdName = "/" + lvName;
 
   // cut copy number from sdName
-  sdName = geometryServices->G4ToG3VolumeName(sdName);
+  sdName = geometryServices->UserVolumeName(sdName);
   
   // create/retrieve the sensitive detector
   G4VSensitiveDetector* sd = 0; 

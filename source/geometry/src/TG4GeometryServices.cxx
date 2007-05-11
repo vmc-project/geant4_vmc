@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.17 2007/02/06 11:06:34 brun Exp $
+// $Id: TG4GeometryServices.cxx,v 1.18 2007/03/22 09:03:13 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryServices
@@ -41,10 +41,10 @@ const G4double       TG4GeometryServices::fgkDensityTolerance = 0.005;
 //_____________________________________________________________________________
 TG4GeometryServices::TG4GeometryServices() 
   : TG4Verbose("geometryServices"),
+    fIsG3toG4(false),
     fMediumMap(0),
     fOpSurfaceMap(0),
-    fWorld(0),
-    fSeparator(gSeparator)                                 
+    fWorld(0)
 {
 /// Standard constructor
 
@@ -58,6 +58,7 @@ TG4GeometryServices::TG4GeometryServices()
   fOpSurfaceMap = new TG4OpSurfaceMap();
 
   fgInstance = this;
+  
 }
 
 //_____________________________________________________________________________
@@ -80,7 +81,7 @@ G4bool TG4GeometryServices::IsG3Volume(const G4String& lvName) const
 /// was not created by Gsposp method with a generic name 
 /// (name_copyNo).
 
-  if (lvName.contains(fSeparator))
+  if (lvName.contains(gSeparator))
     return false;  
   else
     return true;   
@@ -250,14 +251,14 @@ G4String  TG4GeometryServices::CutVolumePath(const G4String& volumePath,
 }
 
 //_____________________________________________________________________________
-G4String  TG4GeometryServices::G4ToG3VolumeName(const G4String& name) const
+G4String  TG4GeometryServices::UserVolumeName(const G4String& name) const
 {
 /// Cut _copyNo extension added to logical volume name in case 
 /// the logical volume was created by Gsposp method.
 
   G4String cutName = name;
-  if (cutName.contains(fSeparator)) 
-  cutName = cutName(0,cutName.first(fSeparator));
+  if ( fIsG3toG4 && cutName.contains(gSeparator) ) 
+    cutName = cutName(0,cutName.first(gSeparator));
  
   return cutName;
 }
@@ -483,7 +484,7 @@ TG4GeometryServices::PrintPhysicalVolumeStore() const
     G4VPhysicalVolume* pv = (*pvStore)[i];
     G4cout << i << "th volume name=" 
                << pv->GetName() << "  g3name=" 
-               << G4ToG3VolumeName(pv->GetName()) << "  copyNo=" 
+               << UserVolumeName(pv->GetName()) << "  copyNo=" 
                << pv->GetCopyNo() 
                << G4endl;
   }
@@ -552,12 +553,11 @@ void TG4GeometryServices::PrintMedia() const
 }
 
 //_____________________________________________________________________________
-void TG4GeometryServices::SetSeparator(char separator) 
+void TG4GeometryServices::SetG3toG4Separator(char separator) 
 { 
 /// Set the volumes name separator that will be
 /// applied in both roottog4 and g3tog4 
 
-  fSeparator = separator; 
   gSeparator = separator; 
 }
 
@@ -685,10 +685,10 @@ TG4GeometryServices::FindPhysicalVolume(const G4String& name, G4int copyNo,
     G4VPhysicalVolume* pv = (*pvStore)[i];
     //G4cout << i << "th volume " 
     //           << pv->GetName() << "  " 
-    //           << G4ToG3VolumeName(pv->GetName()) << "  " 
+    //           << UserVolumeName(pv->GetName()) << "  " 
     //           << pv->GetCopyNo() 
     //           << G4endl;
-    if ( G4ToG3VolumeName(pv->GetName()) == name &&
+    if ( UserVolumeName(pv->GetName()) == name &&
          pv->GetCopyNo() == copyNo ) return pv;
   }
   
@@ -710,7 +710,7 @@ TG4GeometryServices::FindDaughter(const G4String& name, G4int copyNo,
 
   for (G4int i=0; i<mlv->GetNoDaughters(); i++) {
     G4VPhysicalVolume* dpv = mlv->GetDaughter(i);
-    if ( G4ToG3VolumeName(dpv->GetName()) == name &&
+    if ( UserVolumeName(dpv->GetName()) == name &&
          dpv->GetCopyNo() == copyNo ) return dpv;
   }         
   

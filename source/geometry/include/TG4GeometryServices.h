@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.h,v 1.12 2006/12/12 16:21:15 brun Exp $
+// $Id: TG4GeometryServices.h,v 1.13 2007/03/22 09:03:13 brun Exp $
 /// \ingroup geometry
 //
 /// \class TG4GeometryServices
@@ -58,7 +58,7 @@ class TG4GeometryServices : public TG4Verbose
     G4String  CutMaterialName(const char* name) const;
     G4String  CutVolumePath(const G4String& volumePath, 
                             G4String& volName, G4int& copyNo) const; 
-    G4String  G4ToG3VolumeName(const G4String& name) const;
+    G4String  UserVolumeName(const G4String& name) const;
 
     G4OpticalSurfaceModel  SurfaceModel(EMCOpSurfaceModel model) const;                                            
     G4SurfaceType          SurfaceType(EMCOpSurfaceType surfType) const;
@@ -80,7 +80,8 @@ class TG4GeometryServices : public TG4Verbose
 
     // set methods
     void SetWorld(G4VPhysicalVolume* world);
-    void SetSeparator(char separator);
+    void SetIsG3toG4(G4bool isG3toG4);
+    void SetG3toG4Separator(char separator);
 
     // get methods
            // volumes
@@ -88,7 +89,6 @@ class TG4GeometryServices : public TG4Verbose
     Int_t NofG4LogicalVolumes() const; 
     Int_t NofG4PhysicalVolumes() const; 
     G4VPhysicalVolume* GetWorld() const;
-    char GetSeparator() const;
 
     TG4Limits* GetLimits(G4UserLimits* limits) const;
     TG4Limits* GetLimits(G4UserLimits* limits,
@@ -134,11 +134,10 @@ class TG4GeometryServices : public TG4Verbose
     static const G4double  fgkDensityTolerance;//density tolerance (percentual)
  
     // data members
+    G4bool             fIsG3toG4;  // info if user geometry is defined via G3toG4
     TG4MediumMap*      fMediumMap; // map of madia
     TG4OpSurfaceMap*   fOpSurfaceMap;//map of optical surfaces names to their objects 
     G4VPhysicalVolume* fWorld;     //top physical volume (world)
-    char               fSeparator; //the volumes name separator (different
-                                   //in g3tog4 and roottog4)
 };
 
 // inline methods
@@ -153,14 +152,14 @@ inline void TG4GeometryServices::SetWorld(G4VPhysicalVolume* world) {
   fWorld = world; 
 }
 
+inline void TG4GeometryServices::SetIsG3toG4(G4bool isG3toG4) {
+  /// Set the info if user geometry is defined via G3toG4
+  fIsG3toG4 = isG3toG4;
+}  
+
 inline G4VPhysicalVolume* TG4GeometryServices::GetWorld() const {
   /// Set the world physical volume
   return fWorld; 
-}
-
-inline char TG4GeometryServices::GetSeparator() const {
-  /// Return the volumes name separator
-  return fSeparator; 
 }
 
 inline TG4MediumMap* TG4GeometryServices::GetMediumMap() const {

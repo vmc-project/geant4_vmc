@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.22 2007/03/07 14:22:45 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.23 2007/05/10 14:44:53 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -123,6 +123,9 @@ void TG4GeometryManager::ConstructG4GeometryViaVMC()
       "Geometry was not defined via VMC.");          
   }    
 */  
+  // pass info about using G3toG4 to geometry services
+  fGeometryServices->SetIsG3toG4(true);
+
   // set the first entry in the G3Vol table
   G4ggclos();        
   G3VolTableEntry* first = G3Vol.GetFirstVTE();
@@ -502,9 +505,6 @@ void TG4GeometryManager::ConstructMagField()
 void TG4GeometryManager::ConstructGeometry()
 {
 /// Construct Geant4 geometry depending on user geometry source
-
-  // Set volume names separator (for G3toG4 only)
-  gSeparator = fGeometryServices->GetSeparator();
 
   // Create magnetic field
   ConstructMagField();  

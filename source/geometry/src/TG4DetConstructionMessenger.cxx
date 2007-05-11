@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.cxx,v 1.11 2006/12/12 16:21:15 brun Exp $
+// $Id: TG4DetConstructionMessenger.cxx,v 1.12 2007/03/22 09:03:13 brun Exp $
 // Category: geometry
 //
 // Class TG4DetConstructionMessenger
@@ -50,8 +50,7 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fFieldTypeCmd->AvailableForStates(G4State_PreInit);
 
   fSeparatorCmd = new G4UIcmdWithAString("/mcDet/volNameSeparator", this);
-  guidance =   "Override the default value of the volume name separator:\n";
-  guidance = guidance + "  in roottog4 (in g3tog4 this is not yet available) \n";
+  guidance =   "Override the default value of the volume name separator in g3tog4\n";
   fSeparatorCmd->SetGuidance(guidance);
   fSeparatorCmd->SetParameterName("VolNameSeparator", true);
   fSeparatorCmd->AvailableForStates(G4State_PreInit);
@@ -117,7 +116,7 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
   }
   else if( command == fSeparatorCmd ) { 
     char separator = newValues(0);
-    TG4GeometryServices::Instance()->SetSeparator(separator);
+    TG4GeometryServices::Instance()->SetG3toG4Separator(separator);
   }
   if (command == fUniformFieldValueCmd) {  
     fGeometryManager

@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.18 2007/02/06 11:06:34 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.19 2007/02/19 16:26:01 brun Exp $
 // Category: digits+hits
 //
 // Class TG4StepManager
@@ -389,7 +389,7 @@ const char* TG4StepManager::CurrentVolName() const
 /// Return the current physical volume name.
 
   return  TG4GeometryServices::Instance()
-            ->G4ToG3VolumeName(GetCurrentPhysicalVolume()->GetName());
+            ->UserVolumeName(GetCurrentPhysicalVolume()->GetName());
 }
 
 //_____________________________________________________________________________
@@ -403,7 +403,7 @@ const char* TG4StepManager::CurrentVolOffName(Int_t off) const
 
   if (mother) {
     return TG4GeometryServices::Instance()
-             ->G4ToG3VolumeName(mother->GetName());
+             ->UserVolumeName(mother->GetName());
   }             
   else 
     return "";
@@ -430,7 +430,7 @@ const char* TG4StepManager::CurrentVolPath()
     G4VPhysicalVolume* physVolume = touchable->GetHistory()->GetVolume(i);
     fVolPathBuffer += "/";
     fVolPathBuffer 
-      += geometryServices->G4ToG3VolumeName(physVolume->GetName());
+      += geometryServices->UserVolumeName(physVolume->GetName());
     fVolPathBuffer += "_";
     TG4Globals::AppendNumberToString(fVolPathBuffer, physVolume->GetCopyNo());
   }     
@@ -438,7 +438,7 @@ const char* TG4StepManager::CurrentVolPath()
   // Add current volume to the path
   G4VPhysicalVolume* curPhysVolume = GetCurrentPhysicalVolume(); 
   fVolPathBuffer += "/";
-  fVolPathBuffer += geometryServices->G4ToG3VolumeName(curPhysVolume->GetName());
+  fVolPathBuffer += geometryServices->UserVolumeName(curPhysVolume->GetName());
   fVolPathBuffer += "_";
   TG4Globals::AppendNumberToString(fVolPathBuffer, curPhysVolume->GetCopyNo());
 

@@ -1,4 +1,4 @@
-// $Id: TG4SDServices.cxx,v 1.5 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4SDServices.cxx,v 1.6 2006/12/12 16:21:15 brun Exp $
 // Category: digits+hits
 //
 // Class TG4SDServices
@@ -221,7 +221,7 @@ const char*  TG4SDServices::VolDaughterName(const char* volName, Int_t i) const
   G4VPhysicalVolume* daughter = lv->GetDaughter(i);
   G4String g4Name = daughter->GetLogicalVolume()->GetName();
   
-  return TG4GeometryServices::Instance()->G4ToG3VolumeName(g4Name);
+  return TG4GeometryServices::Instance()->UserVolumeName(g4Name);
   
 }
 
