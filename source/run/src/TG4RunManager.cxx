@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.cxx,v 1.12 2006/12/12 16:21:16 brun Exp $
+// $Id: TG4RunManager.cxx,v 1.13 2007/02/06 11:06:34 brun Exp $
 // Category: run
 //
 // Class TG4RunManager
@@ -191,6 +191,8 @@ void TG4RunManager::ConfigureRunManager()
       gGeoManager->SetTopVolume(top);
       gGeoManager->CloseGeometry();  
     }  
+    // Now that we have the ideal geometry, call application misalignment code
+    TVirtualMCApplication::Instance()->MisalignGeometry();
     
     // Pass geometry to G4Root navigator
     rootNavMgr = TG4RootNavMgr::GetInstance(gGeoManager);
