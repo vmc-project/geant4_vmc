@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorOptical.cxx,v 1.4 2005/05/17 13:43:57 brun Exp $
+// $Id: TG4PhysicsConstructorOptical.cxx,v 1.5 2006/12/12 16:21:16 brun Exp $
 // Category: physics
 //
 // Class TG4PhysicsConstructorOptical
@@ -85,11 +85,11 @@ void TG4PhysicsConstructorOptical::ConstructProcess()
   //fRayleighScatteringProcess->DumpPhysicsTable();
 
   // add verbose 
-  fCerenkovProcess->SetVerboseLevel(VerboseLevel());
-  fScintillationProcess->SetVerboseLevel(VerboseLevel());
-  fAbsorptionProcess->SetVerboseLevel(VerboseLevel());
-  fRayleighScatteringProcess->SetVerboseLevel(VerboseLevel());
-  fBoundaryProcess->SetVerboseLevel(VerboseLevel());
+  fCerenkovProcess->SetVerboseLevel(VerboseLevel()-1);
+  fScintillationProcess->SetVerboseLevel(VerboseLevel()-1);
+  fAbsorptionProcess->SetVerboseLevel(VerboseLevel()-1);
+  fRayleighScatteringProcess->SetVerboseLevel(VerboseLevel()-1);
+  fBoundaryProcess->SetVerboseLevel(VerboseLevel()-1);
 
   fCerenkovProcess->SetMaxNumPhotonsPerStep(fMaxNumPhotonsPerStep);
   fCerenkovProcess->SetTrackSecondariesFirst(true);
