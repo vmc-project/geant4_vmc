@@ -1,4 +1,4 @@
-// $Id: TG4TrackingActionMessenger.cxx,v 1.4 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4TrackingActionMessenger.cxx,v 1.5 2006/12/12 16:21:15 brun Exp $
 // Category: event
 //
 // Class TG4TrackingActionMessenger
@@ -45,7 +45,8 @@ TG4TrackingActionMessenger::TG4TrackingActionMessenger(
   fNewVerboseTrackCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
   fSaveSecondariesCmd = new G4UIcmdWithABool("/mcTracking/saveSecondaries", this);
-  fSaveSecondariesCmd->SetGuidance("Option to save secondaries in the stack");
+  fSaveSecondariesCmd->SetGuidance("Option to save secondaries in the stack in tracking.");
+  fSaveSecondariesCmd->SetGuidance("By default this option is true.");
   fSaveSecondariesCmd->SetParameterName("SaveSecondaries", false);
   fSaveSecondariesCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 }

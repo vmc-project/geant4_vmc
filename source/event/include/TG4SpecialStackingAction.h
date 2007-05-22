@@ -1,4 +1,4 @@
-// $Id: TG4SpecialStackingAction.h,v 1.3 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4SpecialStackingAction.h,v 1.4 2006/12/12 16:21:15 brun Exp $
 /// \ingroup event
 //
 /// \class TG4SpecialStackingAction
@@ -27,8 +27,6 @@
 #include <G4UserStackingAction.hh>
 #include <globals.hh>
 
-class TG4TrackingAction;
-
 class G4Track;
 class G4TrackStack;
 
@@ -49,8 +47,7 @@ class TG4SpecialStackingAction : public G4UserStackingAction,
     TG4SpecialStackingAction& operator=(const TG4SpecialStackingAction& right);
 
     // data members
-    G4int               fStage;          //stage number
-    TG4TrackingAction*  fTrackingAction; //the tracking action
+    G4int  fStage; //stage number
 };
 
 #endif //TG4_STACKING_ACTION_H

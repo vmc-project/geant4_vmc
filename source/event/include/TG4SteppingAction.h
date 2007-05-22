@@ -1,4 +1,4 @@
-// $Id: TG4SteppingAction.h,v 1.4 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4SteppingAction.h,v 1.5 2006/12/12 16:21:15 brun Exp $
 /// \ingroup event
 //
 /// \class TG4SteppingAction
@@ -47,10 +47,12 @@ class TG4SteppingAction : public G4UserSteppingAction
     // set methods
     void SetLoopVerboseLevel(G4int level);
     void SetMaxNofSteps(G4int number);
+    void SetSaveSecondaries(G4bool saveSecondaries);
 
     // get methods
     G4int GetLoopVerboseLevel() const;
     G4int GetMaxNofSteps() const;
+    G4bool GetSaveSecondaries() const;
 
   protected:
     // methods
@@ -70,6 +72,7 @@ class TG4SteppingAction : public G4UserSteppingAction
     G4int  fLoopVerboseLevel;     //tracking verbose level                                           //for looping particles
                                   //for looping particles
     G4int  fLoopStepCounter;      //loop steps counter    
+    G4bool fSaveSecondaries;      //control of saving secondaries
 
 };
 
@@ -103,6 +106,11 @@ inline G4int TG4SteppingAction::GetMaxNofSteps() const {
 inline G4int TG4SteppingAction::GetLoopVerboseLevel() const { 
   /// Get loop verbose level (applied when a track is looping) 
   return fLoopVerboseLevel; 
+}
+
+inline G4bool TG4SteppingAction::GetSaveSecondaries() const { 
+  /// Return control for saving secondaries in the VMC stack
+  return fSaveSecondaries; 
 }
 
 #endif //TG4_STEPPING_ACTION_H

@@ -1,4 +1,4 @@
-// $Id: TG4SteppingActionMessenger.cxx,v 1.3 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4SteppingActionMessenger.cxx,v 1.4 2006/12/12 16:21:15 brun Exp $
 // Category: event
 //
 // Class TG4SteppingActionMessenger
@@ -12,6 +12,7 @@
 #include "TG4Globals.h"
 
 #include <G4UIcmdWithAnInteger.hh>
+#include <G4UIcmdWithABool.hh>
 
 //_____________________________________________________________________________
 TG4SteppingActionMessenger::TG4SteppingActionMessenger(
@@ -36,6 +37,12 @@ TG4SteppingActionMessenger::TG4SteppingActionMessenger(
   fMaxNofStepsCmd->SetParameterName("MaxNofSteps", false);
   fMaxNofStepsCmd->SetRange("MaxNofSteps >= 0");
   fMaxNofStepsCmd->AvailableForStates(G4State_Idle);
+
+  fSaveSecondariesCmd = new G4UIcmdWithABool("/mcTracking/saveSecondariesInStep", this);
+  fSaveSecondariesCmd->SetGuidance("Option to save secondaries in the stack during stepping.");
+  fSaveSecondariesCmd->SetGuidance("By default this option is false.");
+  fSaveSecondariesCmd->SetParameterName("SaveSecondariesInStep", false);
+  fSaveSecondariesCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 }
 
 //_____________________________________________________________________________
@@ -43,6 +50,7 @@ TG4SteppingActionMessenger::~TG4SteppingActionMessenger() {
 //
   delete fLoopVerboseCmd;
   delete fMaxNofStepsCmd;
+  delete fSaveSecondariesCmd;
 }
 
 //
@@ -62,5 +70,9 @@ void TG4SteppingActionMessenger::SetNewValue(G4UIcommand* command,
   else if(command == fMaxNofStepsCmd) { 
     fSteppingAction
       ->SetMaxNofSteps(fMaxNofStepsCmd->GetNewIntValue(newValue)); 
+  }   
+  else if(command == fSaveSecondariesCmd) { 
+    fSteppingAction
+      ->SetSaveSecondaries(fSaveSecondariesCmd->GetNewBoolValue(newValue)); 
   }   
 }

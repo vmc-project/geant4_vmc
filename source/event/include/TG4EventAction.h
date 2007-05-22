@@ -1,4 +1,4 @@
-// $Id: TG4EventAction.h,v 1.5 2006/04/12 10:38:21 brun Exp $
+// $Id: TG4EventAction.h,v 1.6 2006/12/12 16:21:15 brun Exp $
 /// \ingroup event
 //
 /// \class TG4EventAction
@@ -18,8 +18,6 @@
 #include <globals.hh>
 
 class G4Event;
-class G4PrimaryVertex;
-class G4PrimaryParticle;
 
 class TG4EventAction : public G4UserEventAction,
                        public TG4Verbose
@@ -44,8 +42,6 @@ class TG4EventAction : public G4UserEventAction,
 
     // methods 
     void DisplayEvent(const G4Event* event) const;
-    void PrimaryToStack(const G4PrimaryVertex* vertex,
-                        const G4PrimaryParticle* particle) const;
   
     // data members
     TG4EventActionMessenger   fMessenger; //messenger

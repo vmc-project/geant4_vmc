@@ -1,4 +1,4 @@
-// $Id: TG4SteppingAction.cxx,v 1.6 2005/01/05 08:04:58 brun Exp $
+// $Id: TG4SteppingAction.cxx,v 1.7 2006/12/12 16:21:15 brun Exp $
 // Category: event
 //
 // Class TG4SteppingAction
@@ -8,6 +8,8 @@
 // Author: I.Hrivnacova
 
 #include "TG4SteppingAction.h"
+#include "TG4TrackManager.h"
+#include "TG4TrackingAction.h"
 #include "TG4SensitiveDetector.h"
 #include "TG4SDServices.h"
 #include "TG4Globals.h"
@@ -27,7 +29,8 @@ TG4SteppingAction::TG4SteppingAction()
     fMaxNofSteps(kMaxNofSteps),
     fStandardVerboseLevel(-1),
     fLoopVerboseLevel(1),
-    fLoopStepCounter(0)
+    fLoopStepCounter(0),
+    fSaveSecondaries(false)
  {
 //
   if (fgInstance) { 
@@ -174,6 +177,10 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
     step->GetTrack()->SetTrackStatus(fStopAndKill);  
   }  
         
+  // save secondaries
+  if ( fSaveSecondaries ) 
+    TG4TrackManager::Instance()->SaveSecondaries(track, step->GetSecondary());
+        
   // call stepping action of derived class
   SteppingAction(step);
 
@@ -202,5 +209,18 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
     if (tsd) tsd->ProcessHitsOnBoundary((G4Step*)step);
 #endif     
   }  
+}
+
+//_____________________________________________________________________________
+void TG4SteppingAction::SetSaveSecondaries(G4bool saveSecondaries) 
+{ 
+/// Set control for saving secondaries in the VMC stack and pass it
+/// to TG4 stack manager
+
+  G4cout << "TG4SteppingAction::SetSaveSecondaries  " << saveSecondaries << G4endl;
+
+  fSaveSecondaries = saveSecondaries; 
+  TG4TrackManager::Instance()->SetSaveSecondaries(saveSecondaries, true);
+  TG4TrackingAction::Instance()->SetSaveSecondaries(!saveSecondaries);
 }
 

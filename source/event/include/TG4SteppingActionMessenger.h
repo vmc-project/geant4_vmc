@@ -1,4 +1,4 @@
-// $Id: TG4SteppingActionMessenger.h,v 1.3 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4SteppingActionMessenger.h,v 1.4 2006/12/12 16:21:15 brun Exp $
 /// \ingroup event
 //
 /// \class TG4SteppingActionMessenger
@@ -16,6 +16,7 @@ class TG4SteppingAction;
 
 class G4UIdirectory;
 class G4UIcmdWithAnInteger;
+class G4UIcmdWithABool;
 
 class TG4SteppingActionMessenger: public G4UImessenger
 {
@@ -36,6 +37,7 @@ class TG4SteppingActionMessenger: public G4UImessenger
     TG4SteppingAction*     fSteppingAction; //associated class  
     G4UIcmdWithAnInteger*  fLoopVerboseCmd; //command: loopVerbose
     G4UIcmdWithAnInteger*  fMaxNofStepsCmd; //command: maxNofSteps
+    G4UIcmdWithABool*      fSaveSecondariesCmd;//command: saveSecondaries
 };
 
 #endif //TG4_STEPPING_ACTION_MESSENGER_H

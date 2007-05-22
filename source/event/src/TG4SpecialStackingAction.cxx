@@ -1,4 +1,4 @@
-// $Id: TG4SpecialStackingAction.cxx,v 1.2 2004/11/10 11:39:27 brun Exp $
+// $Id: TG4SpecialStackingAction.cxx,v 1.3 2006/12/12 16:21:15 brun Exp $
 // Category: event
 //
 // Class TG4SpecialStackingAction
@@ -8,7 +8,6 @@
 // Author: I. Hrivnacova
 
 #include "TG4SpecialStackingAction.h"
-#include "TG4TrackingAction.h"
 #include "TG4Globals.h"
 
 #include <G4Track.hh>
@@ -26,8 +25,7 @@
 TG4SpecialStackingAction::TG4SpecialStackingAction()
   : G4UserStackingAction(),
     TG4Verbose("stackingAction",1),
-    fStage(0), 
-    fTrackingAction(0)
+    fStage(0)
 {
 // 
 }
@@ -51,12 +49,6 @@ TG4SpecialStackingAction::ClassifyNewTrack(const G4Track* track)
   if (fStage == 0) { 
     // move all primaries to PrimaryStack
     classification = fPostpone;
-
-    // save primary particle info
-    // (secondary particles are stored 
-    //  by AlTrackingAction::PreUserTrackingAction() method)
-    if (fTrackingAction->GetSavePrimaries())
-      fTrackingAction->TrackToStack(track);
   }  
   else {
      // exclude neutrinos
@@ -107,7 +99,6 @@ void TG4SpecialStackingAction::PrepareNewEvent()
 /// Called by G4 kernel at the beginning of event.
 
   fStage = 0;
-  fTrackingAction = TG4TrackingAction::Instance();
 }
 
 

@@ -1,4 +1,4 @@
-// $Id: TG4EventAction.cxx,v 1.6 2006/12/15 09:30:29 brun Exp $
+// $Id: TG4EventAction.cxx,v 1.7 2007/02/06 11:06:34 brun Exp $
 // Category: event
 //
 // Class TG4EventAction
@@ -10,6 +10,7 @@
 #include "TG4EventAction.h"
 #include "TG4TrackingAction.h"
 #include "TG4ParticlesManager.h"
+#include "TG4TrackManager.h"
 #include "TG4StateManager.h"
 #include "TG4Globals.h"
 
@@ -18,8 +19,6 @@
 #include <G4Trajectory.hh>
 #include <G4VVisManager.hh>
 #include <G4UImanager.hh>
-#include <G4PrimaryVertex.hh>
-#include <G4PrimaryParticle.hh>
 
 #include <TVirtualMC.h>
 #include <TVirtualMCStack.h>
@@ -83,58 +82,6 @@ void TG4EventAction::DisplayEvent(const G4Event* event) const
   }
 }
 
-//_____________________________________________________________________________
-void TG4EventAction::PrimaryToStack(const G4PrimaryVertex* vertex,
-                                    const G4PrimaryParticle* particle) const
-{
-/// Add primary particle to VMC stack
-
-  // Mother particle index 
-  G4int motherIndex = -1;
-     
-  // PDG code
-  G4int pdg 
-    = TG4ParticlesManager::Instance()
-      ->GetPDGEncoding(particle->GetG4code());
-
-  // track kinematics  
-  G4ThreeVector momentum = particle->GetMomentum(); 
-  G4double px = momentum.x()/GeV;
-  G4double py = momentum.y()/GeV;
-  G4double pz = momentum.z()/GeV;
-  G4double mass = particle->GetMass();
-  G4double e = sqrt(momentum.mag()*momentum.mag() + mass*mass);
-
-  G4ThreeVector position = vertex->GetPosition(); 
-  G4double vx = position.x()/cm;
-  G4double vy = position.y()/cm;
-  G4double vz = position.z()/cm;
-  // time of production - check if ekvivalent with G4
-  G4double t = particle->GetProperTime();
-
-  G4ThreeVector polarization = particle->GetPolarization(); 
-  G4double polX = polarization.x();
-  G4double polY = polarization.y();
-  G4double polZ = polarization.z();
-
-  // production process
-  TMCProcess mcProcess = kPPrimary; 
-  
-  G4double weight = particle->GetWeight();
-
-  // Track charge
-  // Store the dynamic particle charge (which in case of ion may
-  // be different from PDG charge) as status as there is no other 
-  // place where we can do it
-  G4int charge = G4int(particle->GetCharge()/eplus);
-  G4int status = charge;   
-  
-  G4int ntr;
-  // create particle 
-  gMC->GetStack()->PushTrack(1, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
-                            polX, polY, polZ, mcProcess, ntr, weight, status);  
-}                   
-
 //
 // public methods
 //
@@ -158,7 +105,7 @@ void TG4EventAction::BeginOfEventAction(const G4Event* event)
       
       for (G4int ip=0; ip<vertex->GetNumberOfParticle(); ip++) {
         G4PrimaryParticle* particle = vertex->GetPrimary(ip);
-        PrimaryToStack(vertex, particle);
+        TG4TrackManager::Instance()->PrimaryToStack(vertex, particle);
       }        
     }
   }  
@@ -191,11 +138,10 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
                " primary tracks processed." << G4endl;
     G4cout  << "    " << nofSavedTracks << 
                " tracks saved." << G4endl;
-    if (trackingAction) {
-       G4int nofAllTracks = trackingAction->GetNofTracks();
-       G4cout  << "    " << nofAllTracks << 
+
+    G4int nofAllTracks = TG4TrackManager::Instance()->GetNofTracks();
+    G4cout  << "    " << nofAllTracks << 
                   " all tracks processed." << G4endl;
-    }          
   }               
 
   // display event
