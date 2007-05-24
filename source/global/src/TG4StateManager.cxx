@@ -1,4 +1,4 @@
-// $Id: TG4StateManager.cxx,v 1.19 2006/12/15 09:30:29 brun Exp $
+// $Id: TG4StateManager.cxx,v 1.1 2007/02/06 11:06:34 brun Exp $
 // Category: geometry
 //
 // Class TG4StateManager
@@ -21,6 +21,7 @@ G4String TG4StateManager::GetStateName(TG4ApplicationState state)
     case kPreInit:              return "PreInit";
     case kConstructGeometry:    return "ConstructGeometry";
     case kConstructOpGeometry:  return "ConstructOpGeometry";
+    case kMisalignGeometry:     return "MisalignGeometry";
     case kInitGeometry:         return "InitGeometry";
     case kAddParticles:         return "AddParticles";
     case kInEvent:              return "InEvent";

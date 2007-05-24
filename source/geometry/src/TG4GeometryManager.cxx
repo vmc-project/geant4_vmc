@@ -1,4 +1,4 @@
-// $Id: TG4GeometryManager.cxx,v 1.23 2007/05/10 14:44:53 brun Exp $
+// $Id: TG4GeometryManager.cxx,v 1.24 2007/05/11 09:22:44 brun Exp $
 // Category: geometry
 //
 // Class TG4GeometryManager
@@ -222,14 +222,38 @@ void TG4GeometryManager::ConstructG4Geometry()
  
 
   // VMC application construct geometry 
-  if ( fUserGeometry == "VMCtoGeant4" || 
-       fUserGeometry == "RootToGeant4" ) {
+  if ( fUserGeometry == "VMCtoGeant4" ) {
 
     if ( VerboseLevel() > 1 ) 
       G4cout << "Running TVirtualMCApplication::ConstructGeometry" << G4endl;
 
     TG4StateManager::Instance()->SetNewState(kConstructGeometry);
     TVirtualMCApplication::Instance()->ConstructGeometry(); 
+    TG4StateManager::Instance()->SetNewState(kMisalignGeometry);
+    TVirtualMCApplication::Instance()->MisalignGeometry(); 
+    TG4StateManager::Instance()->SetNewState(kNotInApplication);
+  }    
+
+  // VMC application construct geometry 
+  if ( fUserGeometry == "RootToGeant4" ) {
+
+    if ( VerboseLevel() > 1 ) 
+      G4cout << "Running TVirtualMCApplication::ConstructGeometry" << G4endl;
+
+    TG4StateManager::Instance()->SetNewState(kConstructGeometry);
+    TVirtualMCApplication::Instance()->ConstructGeometry(); 
+    TG4StateManager::Instance()->SetNewState(kNotInApplication);
+    
+    // If Root geometry was not closed by user
+    // we have to do it here
+    if ( ! gGeoManager->IsClosed() ) {
+      TGeoVolume *top = (TGeoVolume*)gGeoManager->GetListOfVolumes()->First();
+      gGeoManager->SetTopVolume(top);
+      gGeoManager->CloseGeometry();  
+    }  
+    
+    TG4StateManager::Instance()->SetNewState(kMisalignGeometry);
+    TVirtualMCApplication::Instance()->MisalignGeometry(); 
     TG4StateManager::Instance()->SetNewState(kNotInApplication);
   }    
 

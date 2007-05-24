@@ -1,4 +1,4 @@
-// $Id: TG4RunManager.cxx,v 1.13 2007/02/06 11:06:34 brun Exp $
+// $Id: TG4RunManager.cxx,v 1.14 2007/05/21 14:42:45 brun Exp $
 // Category: run
 //
 // Class TG4RunManager
@@ -178,7 +178,7 @@ void TG4RunManager::ConfigureRunManager()
   if ( userGeometry == "VMCtoRoot" || userGeometry == "Root" ) {
 
     // Construct geometry via VMC application
-    if ( TG4GeometryManager::Instance()->VerboseLevel() > 0) 
+    if ( TG4GeometryManager::Instance()->VerboseLevel() > 0 ) 
       G4cout << "Running TVirtualMCApplication::ConstructGeometry"; 
 
     TG4StateManager::Instance()->SetNewState(kConstructGeometry);
@@ -190,9 +190,12 @@ void TG4RunManager::ConfigureRunManager()
       TGeoVolume *top = (TGeoVolume*)gGeoManager->GetListOfVolumes()->First();
       gGeoManager->SetTopVolume(top);
       gGeoManager->CloseGeometry();  
-    }  
+    }
+      
     // Now that we have the ideal geometry, call application misalignment code
+    TG4StateManager::Instance()->SetNewState(kMisalignGeometry);
     TVirtualMCApplication::Instance()->MisalignGeometry();
+    TG4StateManager::Instance()->SetNewState(kNotInApplication);
     
     // Pass geometry to G4Root navigator
     rootNavMgr = TG4RootNavMgr::GetInstance(gGeoManager);

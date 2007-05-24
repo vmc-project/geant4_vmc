@@ -1,4 +1,4 @@
-// $Id: TG4ApplicationState.h,v 1.4 2006/12/12 16:21:15 brun Exp $
+// $Id: TG4ApplicationState.h,v 1.1 2007/02/06 11:06:34 brun Exp $
 /// \ingroup global
 //
 /// \enum TG4ApplicationState
@@ -14,6 +14,7 @@ enum TG4ApplicationState
   kPreInit,
   kConstructGeometry, 
   kConstructOpGeometry,
+  kMisalignGeometry,
   kInitGeometry,
   kAddParticles,
   kInEvent,
