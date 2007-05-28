@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.19 2007/02/19 16:26:01 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.20 2007/05/11 09:22:44 brun Exp $
 // Category: digits+hits
 //
 // Class TG4StepManager
@@ -1122,8 +1122,7 @@ Bool_t TG4StepManager::IsTrackDisappeared() const
   // check
   G4TrackStatus status
      = fTrack->GetTrackStatus();
-  if ((status == fStopButAlive) ||  
-      (status == fKillTrackAndSecondaries) ||
+  if ((status == fKillTrackAndSecondaries) ||
       (status == fSuspend) ||
       (status == fPostponeToNextEvent)) {
     return true; 
@@ -1143,7 +1142,8 @@ Bool_t TG4StepManager::IsTrackAlive() const
 
   G4TrackStatus status
      = fTrack->GetTrackStatus();
-  if (status == fAlive)
+  if ( (status == fAlive) ||
+       (status == fStopButAlive) )
     return true; 
   else
     return false; 
@@ -1165,6 +1165,8 @@ Int_t TG4StepManager::NSecondaries() const
 {
 /// Return the number of secondary particles generated 
 /// in the current step.
+
+  if (fStepStatus == kVertex) return 0;
 
 #ifdef MCDEBUG
   CheckSteppingManager();
