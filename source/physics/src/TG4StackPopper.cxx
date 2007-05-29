@@ -1,4 +1,4 @@
-// $Id: TG4StackPopper.cxx,v 1.7 2006/12/18 15:43:18 brun Exp $
+// $Id: TG4StackPopper.cxx,v 1.1 2007/05/10 14:44:53 brun Exp $
 // Category: physics
 //
 // Class TG4StackPopper
@@ -80,9 +80,9 @@ G4VParticleChange* TG4StackPopper::AlongStepDoIt(const G4Track& track,
     }  
       
 
-    G4cout << "TG4StackPopper::AlongStepDoIt: Popped particle = " 
-           << particle->GetName() 
-           << " trackID = "<< itrack << G4endl;
+    //G4cout << "TG4StackPopper::AlongStepDoIt: Popped particle = " 
+    //       << particle->GetName() 
+    //       << " trackID = "<< itrack << G4endl;
 
     // Create dynamic particle
     G4DynamicParticle* dynamicParticle 
