@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.h,v 1.5 2006/12/12 16:21:15 brun Exp $
+// $Id: TG4TrackingAction.h,v 1.6 2007/05/22 12:26:42 brun Exp $
 /// \ingroup event
 //
 /// \class TG4TrackingAction
@@ -67,6 +67,7 @@ class TG4TrackingAction : public G4UserTrackingAction,
     TG4TrackingActionMessenger  fMessenger;   //messenger
     TG4TrackManager*            fTrackManager;//track manager 
     G4int   fPrimaryTrackID;    //current primary track ID 
+    G4int   fCurrentTrackID;    //current track ID 
     G4bool  fSaveSecondaries;   //control of saving secondaries
     G4int   fNewVerboseLevel;   //new /tracking/verbose level
     G4int   fNewVerboseTrackID; //track ID for which new /tracking/verbose level

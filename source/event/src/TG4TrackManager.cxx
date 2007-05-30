@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: TG4TrackManager.cxx,v 1.1 2007/05/22 12:26:42 brun Exp $
 // Category: event
 //
 // Class TG4TrackManager
@@ -132,6 +132,7 @@ G4int TG4TrackManager::SetTrackInformation(const G4Track* track)
             // if secondaries are not stacked in VMC stack
             // use own counter for setting track index
     }
+    
     if ( VerboseLevel() > 1 ) 
       G4cout << "TG4TrackManager::SetTrackInformation: setting " << trackIndex << G4endl;
       
@@ -168,6 +169,13 @@ void TG4TrackManager::SetParentToTrackInformation(const G4Track* track)
 
     // get parent track index
     TG4TrackInformation* parentInfo = GetTrackInformation(track);
+#ifdef MCDEBUG
+    if ( ! parentInfo ) {
+      TG4Globals::Exception("TG4TrackManager", "SetParentToTrackInformation",
+        "Parent track has no TG4TrackInformation set.");
+      return;
+    }    
+#endif  
     G4int parentParticleID = parentInfo->GetTrackParticleID();
 
     // get or create track information and set it to the G4Track

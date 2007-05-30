@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.cxx,v 1.11 2007/05/10 14:44:53 brun Exp $
+// $Id: TG4TrackingAction.cxx,v 1.12 2007/05/22 12:26:42 brun Exp $
 // Category: event
 //
 // Class TG4TrackingAction
@@ -37,6 +37,7 @@ TG4TrackingAction::TG4TrackingAction()
     fMessenger(this),
     fTrackManager(0),
     fPrimaryTrackID(0),
+    fCurrentTrackID(0),
     fSaveSecondaries(true),
     fNewVerboseLevel(0),
     fNewVerboseTrackID(-1)
@@ -133,13 +134,20 @@ void TG4TrackingAction::PrepareNewEvent()
     fTrackManager->SetNofTracks(0);
   else  
     fTrackManager->SetNofTracks(gMC->GetStack()->GetNtrack());
-
+    
+  fCurrentTrackID = 0;
 }
 
 //_____________________________________________________________________________
 void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
 {
 /// Called by G4 kernel before starting tracking.
+
+  // do not call this function more than once
+  if ( track->GetTrackID() == fCurrentTrackID ) return;
+  
+  // keep this track number for the check above
+  fCurrentTrackID = track->GetTrackID();
 
   // finish previous primary track first
   if (track->GetParentID() == 0) {  
@@ -153,8 +161,6 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
   // set step manager status
   TG4StepManager* stepManager = TG4StepManager::Instance();
   stepManager->SetStep((G4Track*)track, kVertex);
-  
-  // clean fNofPoppedParticles in StackPopper process
   
   // set track information
   G4int trackId = fTrackManager->SetTrackInformation(track);
@@ -229,7 +235,7 @@ void TG4TrackingAction::FinishPrimaryTrack()
     // verbose
     Verbose();
 
-    // VMC application finish primary track         
+    // VMC application finish primary track       
     TVirtualMCApplication::Instance()->FinishPrimary();
   }
   
