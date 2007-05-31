@@ -1,11 +1,18 @@
 // $Id: TG4StackPopper.cxx,v 1.1 2007/05/10 14:44:53 brun Exp $
-// Category: physics
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: physics
 // Class TG4StackPopper
 // ---------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4StackPopper.h"
 #include "TG4ParticlesManager.h"

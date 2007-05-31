@@ -1,11 +1,18 @@
-// $Id: TG4ProcessControlMap.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
-// Category: global
+// $Id: TG4ProcessControlMap.cxx,v 1.4 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: global
 // Class TG4ProcessControlMap
 // --------------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4ProcessControlMap.h"
 #include "TG4G3ControlVector.h"

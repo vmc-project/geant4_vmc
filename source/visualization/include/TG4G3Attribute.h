@@ -1,10 +1,19 @@
-// $Id: TG4G3Attribute.h,v 1.3 2005/09/01 10:04:33 brun Exp $
-/// \ingroup visualization
+// $Id: TG4G3Attribute.h,v 1.4 2006/12/12 16:21:16 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup visualization
 /// \enum TG4G3Attribute
 /// \brief Enumeration type for G3 visualization attributes.
 ///
-/// Author: A. Gheata
+/// \author A. Gheata
 
 #ifndef TG4_G3_ATTRIBUTE_H
 #define TG4_G3_ATTRIBUTE_H

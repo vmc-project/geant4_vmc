@@ -1,11 +1,20 @@
-// $Id: TG4PhysicsManager.h,v 1.8 2006/01/13 16:59:38 brun Exp $
-/// \ingroup physics
+// $Id: TG4PhysicsManager.h,v 1.9 2006/12/12 16:21:16 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup physics
 /// \class TG4PhysicsManager
 /// \brief Geant4 implementation of the TVirtualMC interface methods                    
 /// for building Geant4 physics and access to it.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN Orsay
 
 #ifndef TG4_PHYSICS_MANAGER_H
 #define TG4_PHYSICS_MANAGER_H

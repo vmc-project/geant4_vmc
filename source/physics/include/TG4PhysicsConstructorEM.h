@@ -1,12 +1,21 @@
-// $Id: TG4PhysicsConstructorEM.h,v 1.5 2006/01/13 16:59:38 brun Exp $
-/// \ingroup physics
+// $Id: TG4PhysicsConstructorEM.h,v 1.6 2006/12/12 16:21:16 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup physics
 /// \class TG4PhysicsConstructorEM
 /// \brief Constructor of electromagnetic physics.
 ///
 /// According to ExN04EMPhysics, GEANT4 tag Name: geant4-06-00
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN Orsay
 
 #ifndef TG4_PHYSICS_CONSTRUCTOR_EM_H
 #define TG4_PHYSICS_CONSTRUCTOR_EM_H

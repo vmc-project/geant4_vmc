@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.h,v 1.6 2007/05/22 12:26:42 brun Exp $
+// $Id: TG4TrackingAction.h,v 1.7 2007/05/30 16:05:56 brun Exp $
 /// \ingroup event
 //
 /// \class TG4TrackingAction
@@ -9,7 +9,7 @@
 /// It also takes care of setting step status (kVertex)
 /// and passing G4Track to TG4StepManager.
 ///
-/// Author: I.Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_TRACKING_ACTION_H
 #define TG4_TRACKING_ACTION_H

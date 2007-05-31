@@ -1,11 +1,18 @@
-// $Id: TG4PhysicsConstructorGeneral.cxx,v 1.6 2006/01/13 16:59:38 brun Exp $
-// Category: physics
+// $Id: TG4PhysicsConstructorGeneral.cxx,v 1.7 2006/12/12 16:21:16 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: physics
 // Class TG4PhysicsConstructorGeneral
 // ----------------------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4PhysicsConstructorGeneral.h"
 #include "TG4ProcessControlMap.h"

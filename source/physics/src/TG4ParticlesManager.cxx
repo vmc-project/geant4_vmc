@@ -1,11 +1,18 @@
-// $Id: TG4ParticlesManager.cxx,v 1.9 2006/12/15 09:30:29 brun Exp $
-// Category: physics
+// $Id: TG4ParticlesManager.cxx,v 1.10 2007/05/10 14:44:53 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: physics
 // Class TG4ParticlesManager
 // -------------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4ParticlesManager.h"
 #include "TG4G3Units.h"

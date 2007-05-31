@@ -1,11 +1,18 @@
-// $Id: TG4Medium.cxx,v 1.2 2006/12/15 09:30:29 brun Exp $
-// Category: geometry
+// $Id: TG4Medium.cxx,v 1.3 2007/03/22 09:03:13 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: geometry
 // Class TG4Medium
 // -------------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4Medium.h"
 #include "TG4Limits.h"

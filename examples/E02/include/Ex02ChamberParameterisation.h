@@ -1,4 +1,14 @@
-// $Id: Ex02ChamberParameterisation.h,v 1.1 2002/06/20 11:52:35 hristov Exp $
+// $Id: Ex02ChamberParameterisation.h,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //

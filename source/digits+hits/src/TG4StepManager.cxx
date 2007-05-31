@@ -1,11 +1,18 @@
-// $Id: TG4StepManager.cxx,v 1.20 2007/05/11 09:22:44 brun Exp $
-// Category: digits+hits
+// $Id: TG4StepManager.cxx,v 1.21 2007/05/28 14:13:45 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: digits+hits
 // Class TG4StepManager
 // --------------------
 // See the class description in the header file.
-//
-// Author: I.Hrivnacova
 
 #include "TG4StepManager.h"
 #include "TG4SteppingAction.h"

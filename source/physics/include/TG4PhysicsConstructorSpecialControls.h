@@ -1,10 +1,19 @@
-// $Id: TG4PhysicsConstructorSpecialControls.h,v 1.4 2005/09/01 10:04:33 brun Exp $
-/// \ingroup physics
+// $Id: TG4PhysicsConstructorSpecialControls.h,v 1.5 2006/01/13 16:59:38 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup physics
 /// \class TG4PhysicsConstructorSpecialControls
 /// \brief Constructor of special controls of physics processes.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN Orsay
 
 #ifndef TG4_PHYSICS_CONSTRUCTOR_SPECIAL_CONTROLS_H
 #define TG4_PHYSICS_CONSTRUCTOR_SPECIAL_CONTROLS_H

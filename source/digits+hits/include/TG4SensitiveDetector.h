@@ -1,6 +1,15 @@
-// $Id: TG4SensitiveDetector.h,v 1.3 2005/09/01 10:04:32 brun Exp $
-/// \ingroup digits_hits
+// $Id: TG4SensitiveDetector.h,v 1.4 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup digits_hits
 /// \class TG4SensitiveDetector
 /// \brief Sensitive detector common to all logical volumes
 ///
@@ -9,7 +18,7 @@
 /// and passing G4Step to TG4StepManager and for calling a user application
 /// stepping function.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_SENSITIVE_DETECTOR_H
 #define TG4_SENSITIVE_DETECTOR_H

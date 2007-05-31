@@ -1,11 +1,18 @@
-// $Id: TG4NameMap.cxx,v 1.6 2006/12/12 16:21:15 brun Exp $
-// Category: global
+// $Id: TG4NameMap.cxx,v 1.7 2007/05/10 14:44:53 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: global
 // Class TG4NameMap
 // ----------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4NameMap.h"
 #include "TG4Globals.h"

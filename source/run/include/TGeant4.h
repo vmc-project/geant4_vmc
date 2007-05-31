@@ -1,10 +1,19 @@
-// $Id: TGeant4.h,v 1.20 2007/02/06 11:06:34 brun Exp $
-/// \ingroup run
+// $Id: TGeant4.h,v 1.21 2007/03/22 09:04:09 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup run
 /// \class TGeant4
 /// \brief Implementation of the TVirtualMC interface for Geant4.                      
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TGEANT4_H
 #define TGEANT4_H

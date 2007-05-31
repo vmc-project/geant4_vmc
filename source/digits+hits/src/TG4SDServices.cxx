@@ -1,11 +1,18 @@
-// $Id: TG4SDServices.cxx,v 1.6 2006/12/12 16:21:15 brun Exp $
-// Category: digits+hits
+// $Id: TG4SDServices.cxx,v 1.7 2007/05/11 09:22:44 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: digits+hits
 // Class TG4SDServices
 // --------------------
 // See the class description in the header file.
-//
-// Author: I.Hrivnacova
 
 #include "TG4SDServices.h"
 #include "TG4SensitiveDetector.h"

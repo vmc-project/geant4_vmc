@@ -1,6 +1,15 @@
-// $Id: TG4Verbose.h,v 1.4 2005/09/01 10:04:32 brun Exp $
-/// \ingroup global
+// $Id: TG4Verbose.h,v 1.5 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup global
 /// \class TG4Verbose
 /// \brief Base class for defining the verbose level and 
 /// a common messenger 
@@ -10,7 +19,7 @@
 /// Used as a base class for all Geant4 VMC verbose classes;
 /// enables to handle the standard output in a common way.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_VERBOSE_H
 #define TG4_VERBOSE_H

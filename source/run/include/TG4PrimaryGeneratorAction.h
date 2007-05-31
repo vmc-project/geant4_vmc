@@ -1,11 +1,20 @@
-// $Id: TG4PrimaryGeneratorAction.h,v 1.2 2004/11/10 11:39:28 brun Exp $
-/// \ingroup run
+// $Id: TG4PrimaryGeneratorAction.h,v 1.3 2005/09/01 10:04:33 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup run
 /// \class TG4PrimaryGeneratorAction
 /// \brief Primary generator action defined via TVirtualMCStack 
 /// and TVirtualMCApplication.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_PRIMARY_GENERATOR_ACTION_H
 #define TG4_PRIMARY_GENERATOR_ACTION_H

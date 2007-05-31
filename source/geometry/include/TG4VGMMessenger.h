@@ -1,10 +1,24 @@
-// $Id: TG4VGMMessenger.h,v 1.1 2006/04/12 11:15:32 brun Exp $
-/// \ingroup geometry
+// $Id: TG4VGMMessenger.h,v 1.2 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup geometry
 /// \class TG4VGMMessenger
 /// \brief Messenger class that defines commands for VGM XML Exporter
 ///
-/// Author: I. Hrivnacova
+/// Implements commands:
+/// - /vgm/generateRoot
+/// - /vgm/generateAGDD [lvName]
+/// - /vgm/generateGDML [lvName]
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifdef USE_VGM
 

@@ -1,4 +1,14 @@
-// $Id: Ex02MCStack.h,v 1.4 2003/07/22 06:38:16 brun Exp $
+// $Id: Ex02MCStack.h,v 1.5 2005/11/19 07:07:47 brun Exp $
+
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //

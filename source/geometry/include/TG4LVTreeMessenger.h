@@ -1,10 +1,28 @@
-// $Id: TG4LVTreeMessenger.h,v 1.3 2005/09/01 10:04:32 brun Exp $
-/// \ingroup geometry
+// $Id: TG4LVTreeMessenger.h,v 1.4 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup geometry
 /// \class TG4LVTreeMessenger
 /// \brief The messenger class that defines commands for TG4LVTree.
 ///
-/// Author: I. Hrivnacova
+/// Implements commands:
+/// - /mcTree/setVolume [volName]
+/// - /mcTree/list
+/// - /mcTree/listLong
+/// - /mcTree/setLVTreeVisibility [true|false]
+/// - /mcTree/setVolVisibility [true|false]
+/// - /mcTree/setLVTreeColour [colourName]
+/// - /mcTree/setVolColour [colourName]
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_LV_TREE_MESSENGER_H
 #define TG4_LV_TREE_MESSENGER_H

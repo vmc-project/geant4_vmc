@@ -1,11 +1,18 @@
-// $Id: TG4DetConstruction.cxx,v 1.13 2006/12/12 16:21:15 brun Exp $
-// Category: geometry
+// $Id: TG4DetConstruction.cxx,v 1.14 2007/02/06 11:06:34 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: geometry
 // Class TG4DetConstruction
 // ---------------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4DetConstruction.h"
 #include "TG4GeometryManager.h"

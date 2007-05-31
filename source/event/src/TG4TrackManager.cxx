@@ -1,11 +1,18 @@
-// $Id: TG4TrackManager.cxx,v 1.1 2007/05/22 12:26:42 brun Exp $
-// Category: event
+// $Id: $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: event
 // Class TG4TrackManager
 // -----------------------
 // See the class description in the header file.
-//
-// Author: I.Hrivnacova
 
 #include "TG4TrackManager.h"
 #include "TG4TrackInformation.h"
@@ -132,7 +139,6 @@ G4int TG4TrackManager::SetTrackInformation(const G4Track* track)
             // if secondaries are not stacked in VMC stack
             // use own counter for setting track index
     }
-    
     if ( VerboseLevel() > 1 ) 
       G4cout << "TG4TrackManager::SetTrackInformation: setting " << trackIndex << G4endl;
       

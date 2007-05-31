@@ -1,8 +1,16 @@
-// $Id: TG4SDConstruction.cxx,v 1.5 2007/02/06 11:06:34 brun Exp $
+// $Id: TG4SDConstruction.cxx,v 1.6 2007/05/11 09:22:44 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
 // Category: digits+hits
-//
 // Author: I.Hrivnacova
-//
 // Class TG4SDConstruction
 // ------------------------
 // See the class description in the header file.

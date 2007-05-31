@@ -1,4 +1,14 @@
-// $Id: TG4SpecialCuts.h,v 1.4 2005/09/01 10:04:33 brun Exp $
+// $Id: TG4SpecialCuts.h,v 1.5 2006/01/13 16:59:38 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
 //
 // Classes TG4pecialCutsFor*
 //
@@ -22,7 +32,7 @@ class G4Track;
 /// \brief Special process that activates kinetic energy cuts
 /// for charged hadrons.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4SpecialCutsForChargedHadron: public TG4VSpecialCuts
 {
@@ -41,7 +51,7 @@ class TG4SpecialCutsForChargedHadron: public TG4VSpecialCuts
 /// \brief Special process that activates kinetic energy cuts
 /// for e-.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4SpecialCutsForElectron: public TG4VSpecialCuts
 {
@@ -60,7 +70,7 @@ class TG4SpecialCutsForElectron: public TG4VSpecialCuts
 /// \brief Special process that activates kinetic energy cuts
 /// for e+.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4SpecialCutsForEplus: public TG4VSpecialCuts
 {
@@ -79,7 +89,7 @@ class TG4SpecialCutsForEplus: public TG4VSpecialCuts
 /// \brief Special process that activates kinetic energy cuts
 /// for gamma.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4SpecialCutsForGamma: public TG4VSpecialCuts
 {
@@ -98,7 +108,7 @@ class TG4SpecialCutsForGamma: public TG4VSpecialCuts
 /// \brief Special process that activates kinetic energy cuts
 /// for muon.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4SpecialCutsForMuon: public TG4VSpecialCuts
 {
@@ -117,7 +127,7 @@ class TG4SpecialCutsForMuon: public TG4VSpecialCuts
 /// \brief Special process that activates kinetic energy cuts
 /// for neutral hadrons.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4SpecialCutsForNeutralHadron: public TG4VSpecialCuts
 {
@@ -136,7 +146,7 @@ class TG4SpecialCutsForNeutralHadron: public TG4VSpecialCuts
 /// \brief Special process that activates the kinetic energy cuts
 /// for other (than specified in TParticleWSP) particles.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4SpecialCutsForOther: public TG4VSpecialCuts
 {

@@ -1,4 +1,14 @@
-// $Id:  $
+// $Id: Doxymodules.h,v 1.1 2004/11/10 11:39:27 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
 // The class categories definitions for Doxygen
 
 /** @defgroup global global

@@ -1,11 +1,18 @@
-// $Id: TG4GeometryManager.cxx,v 1.24 2007/05/11 09:22:44 brun Exp $
-// Category: geometry
+// $Id: TG4GeometryManager.cxx,v 1.25 2007/05/24 09:05:24 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: geometry
 // Class TG4GeometryManager
 // ------------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4GeometryManager.h"
 #include "TG4GeometryServices.h"

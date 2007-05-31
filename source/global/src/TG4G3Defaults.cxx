@@ -1,11 +1,18 @@
-// $Id: TG4G3Defaults.cxx,v 1.3 2005/01/05 08:04:58 brun Exp $
-// Category: global
+// $Id: TG4G3Defaults.cxx,v 1.4 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: global
 // Class TG4G3Defaults
 // -------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4G3Defaults.h"
 #include "TG4Globals.h"

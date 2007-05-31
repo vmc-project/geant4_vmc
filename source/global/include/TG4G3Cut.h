@@ -1,10 +1,19 @@
-// $Id: TG4G3Cut.h,v 1.3 2005/09/01 10:04:32 brun Exp $
-/// \ingroup global
+// $Id: TG4G3Cut.h,v 1.4 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup global
 /// \enum TG4G3Cut
 /// Enumeration for G3 types of kinetic energy cuts.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_G3_CUT_H
 #define TG4_G3_CUT_H

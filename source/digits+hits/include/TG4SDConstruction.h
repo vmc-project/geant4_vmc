@@ -1,6 +1,15 @@
-// $Id: TG4SDConstruction.h,v 1.2 2004/11/10 11:39:27 brun Exp $
-/// \ingroup digits_hits
+// $Id: TG4SDConstruction.h,v 1.3 2005/09/01 10:04:32 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup digits_hits
 /// \class TG4SDConstruction
 /// \brief Sensitive detector construction
 /// 
@@ -10,7 +19,7 @@
 /// all cloned logical volumes (which a single G3 volume correspond to)
 /// share the same sensitive detector instance.
 ///
-/// Author: I.Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_SD_CONSTRUCTION_H
 #define TG4_SD_CONSTRUCTION_H

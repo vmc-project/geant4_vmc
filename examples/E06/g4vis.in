@@ -1,4 +1,14 @@
-# $Id: g4vis.in,v 1.1 2005/05/17 13:52:01 brun Exp $
+# $Id: g4vis.in,v 1.2 2006/01/13 16:58:17 brun Exp $
+
+#------------------------------------------------
+# The Virtual Monte Carlo examples
+# Copyright (C) 2007, Ivana Hrivnacova
+# All rights reserved.
+#
+# For the licensing terms see geant4_vmc/LICENSE.
+# Contact: vmc@pcroot.cern.ch
+#-------------------------------------------------
+
 #
 # Geant4 macro for setting visualization for Example06
 

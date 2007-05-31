@@ -1,10 +1,19 @@
-// $Id: TG4VolumesFrames.h,v 1.3 2005/09/01 10:04:33 brun Exp $
-/// \ingroup interfaces
+// $Id: TG4VolumesFrames.h,v 1.4 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup interfaces
 /// \class TG4VolumesFrames
 /// \brief Frames for the display of volumes properties
 ///
-/// Author: D. Adamova
+/// \author: D. Adamova, NPI Rez
 
 #ifndef TG4_VOLUMESFRAMES_H
 #define TG4_VOLUMESFRAMES_H

@@ -1,11 +1,18 @@
-// $Id: TG4VSpecialCuts.cxx,v 1.7 2006/12/18 15:43:18 brun Exp $
-// Category: physics
+// $Id: TG4VSpecialCuts.cxx,v 1.8 2007/02/23 11:15:40 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: physics
 // Class TG4VSpecialCuts
 // ---------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4VSpecialCuts.h"
 #include "TG4G3CutVector.h"

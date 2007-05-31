@@ -1,4 +1,14 @@
-// $Id: Ex06MCApplication.cxx,v 1.1 2005/05/17 13:52:01 brun Exp $
+// $Id: Ex06MCApplication.cxx,v 1.2 2006/12/12 16:21:39 brun Exp $
+
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
 //
 // Geant4 ExampleN06 adapted to Virtual Monte Carlo 
 //

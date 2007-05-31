@@ -1,11 +1,18 @@
-// $Id: TG4G3ControlVector.cxx,v 1.5 2005/07/22 10:22:48 brun Exp $
-// Category: global
+// $Id: TG4G3ControlVector.cxx,v 1.6 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: global
 // Class TG4G3ControlVector 
 // ------------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4G3ControlVector.h"
 #include "TG4G3CutVector.h"

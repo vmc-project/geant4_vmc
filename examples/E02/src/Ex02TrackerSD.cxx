@@ -1,4 +1,14 @@
-// $Id: Ex02TrackerSD.cxx,v 1.3 2005/02/25 17:00:13 brun Exp $
+// $Id: Ex02TrackerSD.cxx,v 1.4 2005/11/19 07:07:47 brun Exp $
+
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //

@@ -1,6 +1,15 @@
-// $Id: TG4UniformMagneticField.h,v 1.2 2004/11/10 11:39:27 brun Exp $
-/// \ingroup geometry
+// $Id: TG4UniformMagneticField.h,v 1.3 2005/09/01 10:04:32 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup geometry
 /// \class TG4UniformMagneticField
 /// \brief Uniform magnetic field.                                                  \n
 ///
@@ -8,7 +17,7 @@
 /// Id: ExN02MagneticField.hh,v 1.1 1999/01/07 16:05:47 gunter Exp           \n
 /// GEANT4 tag Name: geant4-00-01 
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_UNIFORM_MAGNETIC_FIELD_H
 #define TG4_UNIFORM_MAGNETIC_FIELD_H

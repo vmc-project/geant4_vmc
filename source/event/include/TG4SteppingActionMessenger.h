@@ -1,10 +1,24 @@
-// $Id: TG4SteppingActionMessenger.h,v 1.4 2006/12/12 16:21:15 brun Exp $
-/// \ingroup event
+// $Id: TG4SteppingActionMessenger.h,v 1.5 2007/05/22 12:26:42 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup event
 /// \class TG4SteppingActionMessenger
 /// \brief Messenger class that defines commands for TG4SteppingAction.
 ///
-/// Author: I. Hrivnacova
+/// Implements commands:
+/// - /mcTracking/loopVerbose [level]
+/// - /mcTracking/maxNofSteps [nofSteps]
+/// - /mcTracking/saveSecondariesInStep [true|false]
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_STEPPING_ACTION_MESSENGER_H
 #define TG4_STEPPING_ACTION_MESSENGER_H 

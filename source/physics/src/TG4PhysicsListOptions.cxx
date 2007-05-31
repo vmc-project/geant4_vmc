@@ -1,11 +1,18 @@
-// $Id: TG4PhysicsListOptions.cxx,v 1.1 2006/01/13 16:57:41 brun Exp $
-// Category: physics
+// $Id: TG4PhysicsListOptions.cxx,v 1.2 2007/05/10 14:44:53 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: physics
 // Class TG4PhysicsListOptions
 // ---------------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4PhysicsListOptions.h"
 

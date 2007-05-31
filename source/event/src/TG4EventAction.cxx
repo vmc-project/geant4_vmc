@@ -1,11 +1,18 @@
-// $Id: TG4EventAction.cxx,v 1.7 2007/02/06 11:06:34 brun Exp $
-// Category: event
+// $Id: TG4EventAction.cxx,v 1.8 2007/05/22 12:26:42 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: event
 // Class TG4EventAction
 // ---------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4EventAction.h"
 #include "TG4TrackingAction.h"

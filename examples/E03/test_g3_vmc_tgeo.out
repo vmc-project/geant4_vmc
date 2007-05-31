@@ -2,30 +2,31 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.15/04     19 March 2007   *
+  *   Version   5.15/08       30 May 2007   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-Compiled on 21 March 2007 for linux with thread support.
+Compiled on 30 May 2007 for linux with thread support.
 
 CINT/ROOT C/C++ Interpreter version 5.16.19, March 16, 2007
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E03_1.C("g3tgeoConfig.C", kTRUE)...
-Note: File "/work/projects/vmc/cvs/root/lib/libEG.so" already loaded
-Note: File "/work/projects/vmc/cvs/root/lib/libPhysics.so" already loaded
+Note: File "/work/projects/vmc/dev/root/lib/libEG.so" already loaded
+Note: File "/work/projects/vmc/dev/root/lib/libPhysics.so" already loaded
+Note: File "/work/projects/vmc/dev/root/lib/libNet.so" already loaded
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr     8421983      80825F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766521039    2DB02ECF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs     8445021     8421983
-                                        HEX      80DC5D      80825F
+          with Store/Table at absolute adrs   766544077   766521039
+                                        HEX    2DB088CD    2DB02ECF
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -66,7 +67,6 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10
---- Drawing       21 nodes with 5 visible levels
 <TCanvas::MakeDefCanvas>: created default TCanvas with name c1
    Absorber: total energy (MeV): 887.922       total track length (cm):  40.0991
    Gap:      total energy (MeV): 35.1757       total track length (cm):  15.8659
@@ -75,7 +75,6 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
  **** GTRIGI: IEVENT=      2 IDEVT=      2 Random Seeds =       4357           0
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10
---- Drawing       42 nodes with 6 visible levels
    Absorber: total energy (MeV): 942.347       total track length (cm):  40.8473
    Gap:      total energy (MeV): 29.2812       total track length (cm):  14.8421
 
@@ -83,7 +82,6 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
  **** GTRIGI: IEVENT=      3 IDEVT=      3 Random Seeds =       4357           0
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10
---- Drawing       42 nodes with 6 visible levels
    Absorber: total energy (MeV): 938.532       total track length (cm):   42.193
    Gap:      total energy (MeV):    26.9       total track length (cm):   12.712
 
@@ -91,7 +89,6 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
  **** GTRIGI: IEVENT=      4 IDEVT=      4 Random Seeds =       4357           0
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10
---- Drawing       42 nodes with 6 visible levels
    Absorber: total energy (MeV): 938.964       total track length (cm):  40.7794
    Gap:      total energy (MeV): 18.1992       total track length (cm):   7.3034
 
@@ -99,38 +96,38 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
  **** GTRIGI: IEVENT=      5 IDEVT=      5 Random Seeds =       4357           0
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10
---- Drawing       42 nodes with 6 visible levels
    Absorber: total energy (MeV): 932.308       total track length (cm):  41.4086
    Gap:      total energy (MeV): 32.0247       total track length (cm):  14.8179
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.15/04     19 March 2007   *
+  *   Version   5.15/08       30 May 2007   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-Compiled on 21 March 2007 for linux with thread support.
+Compiled on 30 May 2007 for linux with thread support.
 
 CINT/ROOT C/C++ Interpreter version 5.16.19, March 16, 2007
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E03_2.C("g3tgeoConfig.C", kTRUE)...
-Note: File "/work/projects/vmc/cvs/root/lib/libEG.so" already loaded
-Note: File "/work/projects/vmc/cvs/root/lib/libPhysics.so" already loaded
+Note: File "/work/projects/vmc/dev/root/lib/libEG.so" already loaded
+Note: File "/work/projects/vmc/dev/root/lib/libPhysics.so" already loaded
+Note: File "/work/projects/vmc/dev/root/lib/libNet.so" already loaded
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 --- Init MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766409311    2DAE7A5F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    35126991     217FECF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766432349   766409311
-                                        HEX    2DAED45D    2DAE7A5F
+          with Store/Table at absolute adrs    35150029    35126991
+                                        HEX     21858CD     217FECF
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -504,7 +501,6 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   2    -7.500   -0.001    0.005     0.0162    0.0000    0.000    0.838     ABSO  
 #   3    -7.500   -0.001    0.005     0.0000    0.0162    0.000    0.838     ABSO  Energy threshold
 --- Finish event 
---- Drawing       21 nodes with 5 visible levels
 <TCanvas::MakeDefCanvas>: created default TCanvas with name c1
    Absorber: total energy (MeV):  44.040       total track length (cm):    2.128
    Gap:      total energy (MeV):   1.371       total track length (cm):    0.360

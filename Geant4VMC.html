@@ -1,4 +1,16 @@
-<html><head><title>Geant4 VMC</title></head><body bgcolor="white" text="black">
+<html>
+<!-- 
+------------------------------------------------
+ The Geant4 Virtual Monte Carlo package
+ Copyright (C) 2007, Ivana Hrivnacova
+ All rights reserved.
+
+ For the licensing terms see geant4_vmc/LICENSE.
+ Contact: vmc@pcroot.cern.ch
+-------------------------------------------------
+-->
+
+<head><title>Geant4 VMC</title></head><body bgcolor="white" text="black">
 <basefont face="verdana,arial,helvetica,sans-serif">
 
  <table border="1" cellpadding="5" cellspacing="0" width="100%">
@@ -160,7 +172,19 @@
  </p><p>
  The consequence of this is that the particles added to the VMC stack
  in other than TVirtualMCApplication::GeneratePrimaries() functions
- are ignored in Geant4 tracking.
+ are, by default, ignored in Geant4 tracking. It is however possible
+ to activate a special <I> stack popper </I> process which pops 
+ these from the VMC stack and passes them to Geant4 in g4Config.C:
+ 
+ </p><p>
+ <font color="#aa0000"> <i>
+ // Switch on stack popper (not activated by default) </i> </font><br>
+ <font color="#00aa00" face="Courier"> 
+ TG4PhysicsListOptions options;                               <br>
+ options.SetStackPopperPhysics(true);                         <br>
+ runConfiguration-&gt;SetPhysicsListOptions(options);         <br>
+ </font>
+ 
  
  </p><p>
  The stack classes in the VMC examples provide the same stacking

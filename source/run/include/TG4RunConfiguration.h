@@ -1,6 +1,15 @@
-// $Id: TG4RunConfiguration.h,v 1.8 2006/12/12 16:21:16 brun Exp $
-/// \ingroup run
+// $Id: TG4RunConfiguration.h,v 1.9 2007/02/06 11:06:34 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup run
 /// \class TG4RunConfiguration
 /// \brief Takes care of creating Geant4 user action classes using VMC
 ///
@@ -19,7 +28,7 @@
 /// - geomRootToGeant4  - geometry defined via Root, G4 native navigation
 /// - geomGeant4        - geometry defined via Geant4, G4 native navigation
 
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_RUN_CONFIGURATION_H
 #define TG4_RUN_CONFIGURATION_H

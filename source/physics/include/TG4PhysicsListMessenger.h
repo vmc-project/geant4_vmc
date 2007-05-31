@@ -1,11 +1,25 @@
-// $Id: TG4PhysicsListMessenger.h,v 1.7 2006/12/12 16:21:16 brun Exp $
-/// \ingroup physics
+// $Id: TG4PhysicsListMessenger.h,v 1.8 2007/05/10 14:44:53 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup physics
 /// \class TG4PhysicsListMessenger
 /// \brief Messenger class that defines commands for the Geant4 VMC default 
 /// physics list.
 ///
-/// Author: I. Hrivnacova
+/// Implements commands:
+/// - /mcPhysics/rangeCut [cutValue]
+/// - /mcPhysics/setCerenkovMaxPhotons [maxNofPhotons]
+/// - /mcPhysics/setStackPopperSelection [particleName1 particleName2 ...]
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 #ifndef TG4_PHYSICS_LIST_MESSENGER_H
 #define TG4_PHYSICS_LIST_MESSENGER_H 

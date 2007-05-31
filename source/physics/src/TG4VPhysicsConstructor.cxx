@@ -1,13 +1,20 @@
-// $Id: TG4VPhysicsConstructor.cxx,v 1.3 2004/11/10 11:39:28 brun Exp $
-// Category: physics
+// $Id: TG4VPhysicsConstructor.cxx,v 1.4 2006/12/12 16:21:16 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: physics
 // Class TG4VPhysicsConstructor
 // ------------------------------
 // See the class description in the header file.
 // According to ExN04IonPhysics.cc,v 1.1.2.1 2001/06/28 19:07:37 gunter Exp 
 // GEANT4 tag Name: geant4-06-00
-//
-// Author: I. Hrivnacova
 
 #include "TG4VPhysicsConstructor.h"
 #include "TG4Globals.h"

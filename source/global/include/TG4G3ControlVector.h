@@ -1,10 +1,19 @@
-// $Id: TG4G3ControlVector.h,v 1.3 2004/11/10 11:39:28 brun Exp $
-/// \ingroup global
+// $Id: TG4G3ControlVector.h,v 1.4 2005/09/01 10:04:32 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup global
 /// \class TG4G3ControlVector
 /// \brief Vector of control process values with convenient set/get methods.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_G3_CONTROL_VECTOR_H
 #define TG4_G3_CONTROL_VECTOR_H

@@ -1,7 +1,15 @@
-// $Id: TG4VGMMessenger.cxx,v 1.1 2006/04/12 11:15:32 brun Exp $
+// $Id: TG4VGMMessenger.cxx,v 1.2 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
-// Author: I. Hrivnacova
-//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: geometry
 // Class TG4VGMMessenger
 // -------------------------
 // See the class description in the header file.

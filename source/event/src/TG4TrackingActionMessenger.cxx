@@ -1,11 +1,18 @@
-// $Id: TG4TrackingActionMessenger.cxx,v 1.5 2006/12/12 16:21:15 brun Exp $
-// Category: event
+// $Id: TG4TrackingActionMessenger.cxx,v 1.6 2007/05/22 12:26:42 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: event
 // Class TG4TrackingActionMessenger
 // --------------------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
  
 #include "TG4TrackingActionMessenger.h"
 #include "TG4TrackingAction.h"

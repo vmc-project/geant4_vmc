@@ -1,6 +1,15 @@
-// $Id: TG4RunManager.h,v 1.6 2006/01/13 16:59:39 brun Exp $
-/// \ingroup run
+// $Id: TG4RunManager.h,v 1.7 2006/12/12 16:21:16 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup run
 /// \class TG4RunManager
 /// \brief Geant4 implementation of the TVirtualMC interface methods                    
 /// for access to Geant4 at run level.
@@ -8,7 +17,7 @@
 /// It provides also methods for switching between Geant4 and
 /// Root UIs.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_RUN_MANAGER_H
 #define TG4_RUN_MANAGER_H

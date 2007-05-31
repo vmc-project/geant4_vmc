@@ -1,6 +1,15 @@
-// $Id: TG4VisManager.cxx,v 1.6 2006/12/12 16:21:16 brun Exp $
-// Category: visualization
+// $Id: TG4VisManager.cxx,v 1.7 2006/12/15 09:30:30 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: visualization
 // Class TG4VisManager
 // -------------------
 // See the class description in the header file.

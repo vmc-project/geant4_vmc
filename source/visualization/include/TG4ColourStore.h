@@ -1,10 +1,19 @@
-// $Id: TG4ColourStore.h,v 1.4 2005/09/01 10:04:33 brun Exp $
-/// \ingroup visualization
+// $Id: TG4ColourStore.h,v 1.5 2006/12/12 16:21:16 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup visualization
 /// \class TG4ColourStore
 /// \brief Singleton data type class - store for the predefined colours.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_COLOUR_STORE_H
 #define TG4_COLOUR_STORE_H

@@ -1,10 +1,19 @@
-// $Id: TG4PostDetConstruction.h,v 1.10 2006/04/12 10:37:23 brun Exp $
-/// \ingroup geometry
+// $Id: TG4PostDetConstruction.h,v 1.1 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup geometry
 /// \class TG4PostDetConstruction
 /// \brief The post detector construction used with G4Root navigation
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_POST_DET_CONSTRUCTION_H
 #define TG4_POST_DET_CONSTRUCTION_H

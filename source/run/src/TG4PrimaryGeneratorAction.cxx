@@ -1,11 +1,18 @@
-// $Id: TG4PrimaryGeneratorAction.cxx,v 1.6 2006/12/15 09:30:30 brun Exp $
-// Category: run
+// $Id: TG4PrimaryGeneratorAction.cxx,v 1.7 2007/02/06 11:06:34 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: run
 // Class TG4PrimaryGeneratorAction
 // -------------------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4PrimaryGeneratorAction.h"
 #include "TG4ParticlesManager.h"

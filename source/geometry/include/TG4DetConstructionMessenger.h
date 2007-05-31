@@ -1,10 +1,27 @@
-// $Id: TG4DetConstructionMessenger.h,v 1.8 2006/12/12 16:21:15 brun Exp $
-/// \ingroup geometry
+// $Id: TG4DetConstructionMessenger.h,v 1.9 2007/03/22 09:03:12 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup geometry
 /// \class TG4DetConstructionMessenger
 /// \brief Messenger class that defines commands for TG4DetConstruction.
 ///
-/// Author: I. Hrivnacova
+/// Implements commands:
+/// - /mcDet/fieldType [MCApplication|Uniform|None]
+/// - /mcDet/volNameSeparator [char]  - for geomVMCtoGeant4 only
+/// - /mcDet/uniformFieldValue 
+/// - /mcDet/printMaterials 
+/// - /mcDet/printMedia
+/// - /mcDet/printVolumes
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_DET_CONSTRUCTION_MESSENGER_H
 #define TG4_DET_CONSTRUCTION_MESSENGER_H

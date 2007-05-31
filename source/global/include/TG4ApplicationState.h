@@ -1,10 +1,19 @@
-// $Id: TG4ApplicationState.h,v 1.1 2007/02/06 11:06:34 brun Exp $
-/// \ingroup global
+// $Id: TG4ApplicationState.h,v 1.2 2007/05/24 09:05:24 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup global
 /// \enum TG4ApplicationState
 /// Enumeration for application states
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_APPLICATION_STATE_H
 #define TG4_APPLICATION_STATE_H

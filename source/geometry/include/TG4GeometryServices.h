@@ -1,13 +1,22 @@
-// $Id: TG4GeometryServices.h,v 1.13 2007/03/22 09:03:13 brun Exp $
-/// \ingroup geometry
+// $Id: TG4GeometryServices.h,v 1.14 2007/05/11 09:22:44 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup geometry
 /// \class TG4GeometryServices
 /// \brief Services for accessing to Geant4 geometry
 /// 
 /// The class provides service methods for accessing to Geant4 geometry,
 /// namely using VMC volumes and materials identifiers. 
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_GEOMETRY_SERVICES_H
 #define TG4_GEOMETRY_SERVICES_H

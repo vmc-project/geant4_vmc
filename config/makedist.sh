@@ -1,6 +1,15 @@
 #!/bin/sh
-# $Id: makedist.sh,v 1.3 2003/07/22 13:26:43 brun Exp $
-# -------------------------------------------------------------------------
+# $Id: makedist.sh,v 1.4 2005/09/23 12:41:03 brun Exp $
+
+#------------------------------------------------
+# The Geant4 Virtual Monte Carlo package
+# Copyright (C) 2007, Ivana Hrivnacova
+# All rights reserved.
+#
+# For the licensing terms see geant4_vmc/LICENSE.
+# Contact: vmc@pcroot.cern.ch
+#-------------------------------------------------
+
 # Script to produce source and optionally binary distribution of geant4_vmc.
 # Called by main Makefile.
 #

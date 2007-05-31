@@ -1,15 +1,24 @@
 // $Id: $
-/// \ingroup event
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup event
 /// \class TG4TrackManager
-/// \brief Actions at the beginnig and at the end of track
+/// \brief The class for storing G4 tracks in VMC sack
 /// 
-/// Class that ensures calling sensitive detector
-/// before track starts stepping.
-/// It also takes care of setting step status (kVertex)
-/// and passing G4Track to TG4StepManager.
+/// It provides methods for storing G4 primary particles
+/// and secondary tracks and utility functions for updating 
+/// TG4TrackInformation, which hold the info about
+/// correspondence between Geant4 and VMC stack numbering 
 ///
-/// Author: I.Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_TRACK_MANAGER_H
 #define TG4_TRACK_MANAGER_H

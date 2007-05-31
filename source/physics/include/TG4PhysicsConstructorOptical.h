@@ -1,12 +1,21 @@
-// $Id: TG4PhysicsConstructorOptical.h,v 1.5 2005/09/01 10:04:33 brun Exp $
-/// \ingroup physics
+// $Id: TG4PhysicsConstructorOptical.h,v 1.6 2006/12/12 16:21:16 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup physics
 /// \class TG4PhysicsConstructorOptical
 /// \brief Constructor of optical physics.
 ///
 /// According to ExN06PhysicsList (geant4 6.0)
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN Orsay
 
 #ifndef TG4_PHYSICS_CONSTRUCTOR_OPTICAL_H
 #define TG4_PHYSICS_CONSTRUCTOR_OPTICAL_H

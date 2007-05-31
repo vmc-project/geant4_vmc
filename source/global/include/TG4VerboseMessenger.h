@@ -1,10 +1,23 @@
-// $Id: TG4VerboseMessenger.h,v 1.5 2005/09/01 10:04:32 brun Exp $
+// $Id: TG4VerboseMessenger.h,v 1.6 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
 /// \ingroup global
 //
 /// \class TG4VerboseMessenger
 /// \brief Messenger class that defines commands for the verbose classes.
 ///
-/// Author: I. Hrivnacova
+/// For all objects derived from TG4Verbose class implements the command 
+/// - /mcVerbose/objectName [level]
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 
 #ifndef TG4_VERBOSE_MESSENGER_H

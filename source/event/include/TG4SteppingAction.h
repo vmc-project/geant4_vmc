@@ -1,6 +1,15 @@
-// $Id: TG4SteppingAction.h,v 1.5 2006/12/12 16:21:15 brun Exp $
-/// \ingroup event
+// $Id: TG4SteppingAction.h,v 1.6 2007/05/22 12:26:42 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup event
 /// \class TG4SteppingAction
 /// \brief Actions at each step
 /// 
@@ -10,7 +19,7 @@
 /// and takes care of stopping of a track when this number
 /// is reached.
 ///
-/// Author: I.Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_STEPPING_ACTION_H
 #define TG4_STEPPING_ACTION_H

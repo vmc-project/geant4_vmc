@@ -1,4 +1,14 @@
-// $Id: g4Config.C,v 1.2 2006/01/13 16:58:58 brun Exp $
+// $Id: g4ConfigOld.C,v 1.1 2006/12/12 16:21:39 brun Exp $
+
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
 //
 // Configuration macro for Geant4 VirtualMC for Example06
 // for geometry defined with VMC and selected Geant4 native navigation

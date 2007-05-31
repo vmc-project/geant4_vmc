@@ -1,6 +1,15 @@
-// $Id: TG4ExtDecayer.h,v 1.3 2005/09/01 10:04:33 brun Exp $
-/// \ingroup physics
+// $Id: TG4ExtDecayer.h,v 1.4 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup physics
 /// \class TG4ExtDecayer
 /// \brief Implements the G4VExtDecayer abstract class
 /// with the TVirtualMCDecayer.
@@ -9,7 +18,7 @@
 /// and has not pre-assigned decay products,
 /// the external decayer is called.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN Orsay
 
 #ifndef TG4_EXT_DECAYER_H
 #define TG4_EXT_DECAYER_H

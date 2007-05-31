@@ -1,11 +1,18 @@
-// $Id: TG4LVTree.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
-// Category: geometry
+// $Id: TG4LVTree.cxx,v 1.3 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: geometry
 // Class TG4LVTree
 // ---------------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4LVTree.h"
 #include "TG4Globals.h"

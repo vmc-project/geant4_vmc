@@ -1,10 +1,19 @@
-// $Id: TG4EventAction.h,v 1.6 2006/12/12 16:21:15 brun Exp $
-/// \ingroup event
+// $Id: TG4EventAction.h,v 1.7 2007/05/22 12:26:41 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup event
 /// \class TG4EventAction
 /// \brief Actions at the beginning and the end of event.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_EVENT_ACTION_H
 #define TG4_EVENT_ACTION_H 

@@ -1,4 +1,14 @@
-// $Id: Ex03CalorHit.cxx,v 1.1 2003/03/17 14:56:51 brun Exp $
+// $Id: Ex03CalorHit.cxx,v 1.2 2005/11/19 07:07:47 brun Exp $
+
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
 //
 // Geant4 ExampleN03 adapted to Virtual Monte Carlo 
 //

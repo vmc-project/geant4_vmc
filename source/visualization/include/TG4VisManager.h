@@ -1,6 +1,15 @@
-// $Id: TG4VisManager.h,v 1.5 2006/01/13 16:59:39 brun Exp $
-/// \ingroup visualization
+// $Id: TG4VisManager.h,v 1.6 2006/12/12 16:21:16 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup visualization
 /// \class TG4VisManager
 /// \brief Visualization manager class
 ///  
@@ -8,7 +17,7 @@
 /// graphics system and provides Geant4 implementation of 
 /// the TVirtualMC interface methods for visualization.
 ///
-/// Author: I. Hrivnacova, A. Gheata
+/// \author: I. Hrivnacova, IPN, Orsay; A. Gheata
 
 #ifndef TG4_VIS_MANAGER_H
 #define TG4_VIS_MANAGER_H

@@ -1,5 +1,17 @@
-# $Id: Makefile,v 1.4 2006/01/13 23:05:52 brun Exp $
+# $Id: Makefile,v 1.5 2006/12/12 20:17:19 brun Exp $
+
+#------------------------------------------------
+# The Virtual Monte Carlo examples
+# Copyright (C) 2007, Ivana Hrivnacova
+# All rights reserved.
 #
+# For the licensing terms see geant4_vmc/LICENSE.
+# Contact: vmc@pcroot.cern.ch
+#-------------------------------------------------
+
+# The makefile adopted from the old ALICE Makefiles system,
+# developped by ALICE Offline project (http://aliceinfo.cern.ch/Offline)
+
 # Makefile for building all examples
 
 MAKEFLAGS= --no-print-directory

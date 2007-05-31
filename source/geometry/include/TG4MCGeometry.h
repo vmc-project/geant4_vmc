@@ -1,13 +1,22 @@
-// $Id: TG4MCGeometry.h,v 1.2 2006/12/13 14:21:35 brun Exp $
-/// \ingroup geometry
+// $Id: TG4MCGeometry.h,v 1.3 2006/12/15 09:30:29 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup geometry
 /// \class TG4MCGeometry
 /// \brief Geant4 implementation of the TVirtualMCGeometry interface 
 ///
 /// This interfaces defines methods for building geometry a la geant3 
 /// and is implemented with use og G3toG4
 ///
-/// Author: V. Berejnoi, I. Hrivnacova
+/// \author: V. Berejnoi, CERN; I. Hrivnacova, IPN Orsay
 
 #ifndef TG4_G3_MC_GEOMETRY_H
 #define TG4_G3_MC_GEOMETRY_H

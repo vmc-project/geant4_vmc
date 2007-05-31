@@ -1,11 +1,18 @@
-// $Id: TG4VerboseMessenger.cxx,v 1.4 2005/01/28 12:29:38 brun Exp $
-// Category: global
+// $Id: TG4VerboseMessenger.cxx,v 1.5 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: global
 // Class TG4VerboseMessenger
 // ------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4VerboseMessenger.h"
 #include "TG4VVerbose.h"

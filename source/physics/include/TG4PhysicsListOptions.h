@@ -1,6 +1,15 @@
-// $Id: TG4PhysicsListOptions.h,v 1.1 2006/01/13 16:57:40 brun Exp $
-/// \ingroup physics
+// $Id: TG4PhysicsListOptions.h,v 1.2 2007/05/10 14:44:53 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup physics
 /// \class TG4PhysicsListOptions
 /// \brief The options for selection of provided physics constructors
 ///
@@ -8,7 +17,7 @@
 /// - EM physics, Muon physics, Step Limiter - activated
 /// - Hadron physics, Special cuts, Special controls - not activated
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN Orsay
 
 #ifndef TG4_PHYSICS_LIST_OPTIONS_H
 #define TG4_PHYSICS_LIST_OPTIONS_H

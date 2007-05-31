@@ -1,6 +1,15 @@
-// $Id: TG4Limits.h,v 1.6 2005/11/18 21:29:35 brun Exp $
-/// \ingroup global
+// $Id: TG4Limits.h,v 1.7 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup global
 /// \class TG4Limits
 /// \brief Extended G4UserLimits class.
 /// 
@@ -8,7 +17,7 @@
 /// vectors of kinetic energy cuts and control process flags
 /// data members.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_LIMITS_H
 #define TG4_LIMITS_H

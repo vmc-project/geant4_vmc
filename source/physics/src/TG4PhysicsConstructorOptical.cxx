@@ -1,12 +1,19 @@
-// $Id: TG4PhysicsConstructorOptical.cxx,v 1.5 2006/12/12 16:21:16 brun Exp $
-// Category: physics
+// $Id: TG4PhysicsConstructorOptical.cxx,v 1.6 2007/05/22 12:27:14 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: physics
 // Class TG4PhysicsConstructorOptical
 // ----------------------------------
 // See the class description in the header file.
 // According to ExN06PhysicsList (geant4 6.0)
-//
-// Author: I. Hrivnacova
 
 #include "TG4PhysicsConstructorOptical.h"
 #include "TG4ProcessControlMap.h"

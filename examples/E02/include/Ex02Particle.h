@@ -1,4 +1,14 @@
-// $Id: Ex02Particle.h,v 1.2 2003/02/26 13:36:44 brun Exp $
+// $Id: Ex02Particle.h,v 1.3 2005/11/19 07:07:47 brun Exp $
+
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
 //
 // Geant4 novice ExampleN02 adapted to Virtual Monte Carlo 
 //

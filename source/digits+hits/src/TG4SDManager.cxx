@@ -1,11 +1,18 @@
-// $Id: TG4SDManager.cxx,v 1.5 2006/12/12 16:21:15 brun Exp $
-// Category: digits+hits
+// $Id: TG4SDManager.cxx,v 1.6 2006/12/13 14:21:35 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: digits+hits
 // Class TG4SDManager
 // -------------------
 // See the class description in the header file.
-//
-// Author: I.Hrivnacova
 
 #include "TG4SDManager.h"
 #include "TG4SDConstruction.h"

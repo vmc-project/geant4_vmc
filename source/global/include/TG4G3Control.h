@@ -1,16 +1,26 @@
-// $Id: TG4G3Control.h,v 1.4 2005/09/01 10:04:32 brun Exp $
-/// \ingroup global
+// $Id: TG4G3Control.h,v 1.5 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup global
 /// \enum TG4G3Control
-/// Enumeration for G3 types of physics processes controls.
-/// The G4 physics processes and particles which the process
-/// control is applied to are indicated in the comments.
+/// \brief Enumeration for G3 types of physics processes controls.
+///
+/// The G4 physics processes and particles, which the process
+/// control is applied to, are indicated in the comments.
 /// The process control is mapped to the physics processes
 /// (using TG4ProcessControlMap) at the moment of process creating
 /// by the physics constructor; the physics contructor type
 /// is indicated by the "Physics:" comment.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_G3_CONTROL_H
 #define TG4_G3_CONTROL_H

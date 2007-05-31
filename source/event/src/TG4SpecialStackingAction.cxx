@@ -1,11 +1,18 @@
-// $Id: TG4SpecialStackingAction.cxx,v 1.3 2006/12/12 16:21:15 brun Exp $
+// $Id: TG4SpecialStackingAction.cxx,v 1.4 2007/05/22 12:26:42 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
 // Category: event
-//
 // Class TG4SpecialStackingAction
-// -----------------------
+// -------------------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4SpecialStackingAction.h"
 #include "TG4Globals.h"

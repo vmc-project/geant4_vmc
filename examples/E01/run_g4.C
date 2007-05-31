@@ -1,4 +1,14 @@
-// $Id: run_g4.C,v 1.3 2005/11/18 21:34:44 brun Exp $
+// $Id: run_g4.C,v 1.4 2006/12/12 16:21:37 brun Exp $
+
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
 //
 // Macro for running Example01 with Geant4. 
 

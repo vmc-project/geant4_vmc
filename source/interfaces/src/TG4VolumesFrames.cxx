@@ -1,4 +1,14 @@
-// $Id: TG4VolumesFrames.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
+// $Id: TG4VolumesFrames.cxx,v 1.3 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
 // Category: interfaces
 //
 //========================================================

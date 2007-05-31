@@ -1,13 +1,22 @@
-// $Id: TG4ProcessControlMap.h,v 1.4 2005/09/01 10:04:32 brun Exp $
-/// \ingroup global
+// $Id: TG4ProcessControlMap.h,v 1.5 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup global
 /// \class TG4ProcessControlMap
 /// \brief Maps G4 process names to TG4G3Control
 ///
 /// Singleton map container for associated pairs G4 process name 
 /// and TG4G3Control.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_PROCESS_CONTROL_MAP_H
 #define TG4_PROCESS_CONTROL_MAP_H

@@ -1,6 +1,15 @@
-// $Id: TG4MCGeometry.cxx,v 1.2 2006/12/13 14:21:35 brun Exp $
-// Category: geometry
+// $Id: TG4MCGeometry.cxx,v 1.3 2006/12/15 09:30:29 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: geometry
 // Class TG4MCGeometry
 // ------------------------
 // See the class description in the header file.
@@ -9,7 +18,7 @@
 // materials, tracking media support 
 // added by I.Hrivnacova, 27.5.1999.
 //
-// Author: V. Berejnoi, I. Hrivnacova
+// Author: V. Berejnoi, CERN; I. Hrivnacova, IPN Orsay
 
 #include "TG4MCGeometry.h"
 #include "TG4GeometryServices.h"

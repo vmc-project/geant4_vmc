@@ -2,22 +2,23 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.15/04     19 March 2007   *
+  *   Version   5.15/08       30 May 2007   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-Compiled on 21 March 2007 for linux with thread support.
+Compiled on 30 May 2007 for linux with thread support.
 
 CINT/ROOT C/C++ Interpreter version 5.16.19, March 16, 2007
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E01.C("g4tgeoConfigOld.C", kTRUE)...
-Note: File "/work/projects/vmc/cvs/root/lib/libEG.so" already loaded
-Note: File "/work/projects/vmc/cvs/root/lib/libPhysics.so" already loaded
+Note: File "/work/projects/vmc/dev/root/lib/libEG.so" already loaded
+Note: File "/work/projects/vmc/dev/root/lib/libPhysics.so" already loaded
+Note: File "/work/projects/vmc/dev/root/lib/libNet.so" already loaded
 Loading Geant4 granular libraries ...
 Loading VGM libraries ... 
 Loading libraries ... finished
@@ -35,7 +36,7 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-08-02-patch-01    (23-February-2007)
+ Geant4 version Name: geant4-08-03    (5-May-2007)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -124,6 +125,7 @@ conv:  Total cross sections has a good parametrisation from 1.5 MeV to 100 GeV f
 
 msc:  Model variant of multiple scattering for e-
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      LateralDisplacementFlag=  1   Skin= 0
       Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
 
 eIoni:   tables are built for  e-
@@ -166,9 +168,11 @@ hIoni:   tables are built for  proton
 
 msc:  Model variant of multiple scattering for proton
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      LateralDisplacementFlag=  1   Skin= 0
       Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
 
 msc:  Model variant of multiple scattering for GenericIon
+      LateralDisplacementFlag=  0   Skin= 0
       Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
 
 hIoni:   tables are built for  anti_proton
@@ -181,6 +185,7 @@ hIoni:   tables are built for  anti_proton
 
 msc:  Model variant of multiple scattering for mu+
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      LateralDisplacementFlag=  1   Skin= 0
       Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
 
 muIoni:   tables are built for  mu+
@@ -235,6 +240,7 @@ hIoni:   tables are built for  pi-
 
 msc:  Model variant of multiple scattering for pi-
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
+      LateralDisplacementFlag=  1   Skin= 0
       Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
 
 ========= Table of registered couples ==============================
@@ -271,8 +277,8 @@ Track -160 0 4  in EXPH  ArgonGas
 Track -160 0 4  in TRTU  Aluminium
 Track -40 0 16  in TRTU  Aluminium
 Track -40 0 16  in EXPH  ArgonGas
-Track 0 0 20  in EXPH  ArgonGas
-Track 0 0 20  in CALB  Lead
+Track -6.13676e-15 0 20  in EXPH  ArgonGas
+Track -6.13676e-15 0 20  in CALB  Lead
 Track 9 0 20.9  in CALB  Lead
 Track 9 0 20.9  in LAYB  Aluminium
 Track 11 0 21.1  in LAYB  Aluminium
@@ -359,8 +365,8 @@ Track -159.866 4.01344 0  in EXPH  ArgonGas
 Track -159.866 4.01344 0  in TRTU  Aluminium
 Track -42.1146 15.7885 0  in TRTU  Aluminium
 Track -42.1146 15.7885 0  in EXPH  ArgonGas
-Track 1.7053e-14 20 0  in EXPH  ArgonGas
-Track 1.7053e-14 20 0  in CALB  Lead
+Track 5.93692e-15 20 0  in EXPH  ArgonGas
+Track 5.93692e-15 20 0  in CALB  Lead
 Track 9 20.9 0  in CALB  Lead
 Track 9 20.9 0  in LAYB  Aluminium
 Track 11 21.1 0  in LAYB  Aluminium
@@ -530,7 +536,7 @@ Track 200 0 0  in EXPH  ArgonGas
 Track 300 0 0  in EXPH  ArgonGas
 
 >>> End of Event 0
-Time of this run:   User=0.01s Real=0.01s Sys=0s
+Time of this run:   User=0s Real=0s Sys=0s
 Number of events processed: 1
 Transformation for /EXPH_1/CALB_1/LAYB_9: 
 matrix global - tr=1  rot=0  refl=0  scl=0

@@ -1,11 +1,18 @@
-// $Id: TG4SensitiveDetector.cxx,v 1.2 2004/11/10 11:39:27 brun Exp $ //
-// Category: digits+hits
+// $Id: TG4SensitiveDetector.cxx,v 1.3 2006/12/12 16:21:15 brun Exp $ //
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: digits+hits
 // Class TG4SensitiveDetector
 // ---------------------------
 // See the class description in the header file.
-//
-// Author: I.Hrivnacova
 
 #include "TG4SensitiveDetector.h"
 #include "TG4StepManager.h"

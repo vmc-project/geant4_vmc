@@ -1,11 +1,18 @@
-// $Id: TG4RunManager.cxx,v 1.14 2007/05/21 14:42:45 brun Exp $
-// Category: run
+// $Id: TG4RunManager.cxx,v 1.15 2007/05/24 09:05:24 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: run
 // Class TG4RunManager
 // -------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4RunManager.h"
 #include "TG4RunConfiguration.h"

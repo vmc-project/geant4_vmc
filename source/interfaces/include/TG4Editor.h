@@ -1,10 +1,19 @@
-// $Id: TG4Editor.h,v 1.3 2005/09/01 10:04:33 brun Exp $
-/// \ingroup interfaces
+// $Id: TG4Editor.h,v 1.4 2006/09/13 06:26:11 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup interfaces
 /// \class TG4Editor
 /// \brief A supplementary service class for Geant4 VMC Geometry Browser
 ///
-/// Author: D. Adamova
+/// \author: D. Adamova, NPI Rez
 
 #ifndef TG4_EDITOR_H
 #define TG4_EDITOR_H

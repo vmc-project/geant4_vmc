@@ -1,6 +1,15 @@
-// $Id: TG4StepManager.h,v 1.10 2005/11/18 21:29:35 brun Exp $
-/// \ingroup digits_hits
+// $Id: TG4StepManager.h,v 1.11 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup digits_hits
 /// \class TG4StepManager
 /// \brief Geant4 implementation of the TVirtualMC interface methods                    
 /// for access to Geant4 at step level.
@@ -8,7 +17,7 @@
 /// The public methods that do not implement TVirtualMC methods
 /// are commented as G4 specific
 ///
-/// Author: I.Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_STEP_MANAGER_H
 #define TG4_STEP_MANAGER_H

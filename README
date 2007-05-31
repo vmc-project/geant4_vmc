@@ -1,4 +1,14 @@
-$Id: README,v 1.6 2004/07/30 12:25:14 brun Exp $
+$Id: README,v 1.7 2005/02/02 14:16:21 brun Exp $
+
+------------------------------------------------
+ The Virtual Monte Carlo examples
+ Copyright (C) 2007, Ivana Hrivnacova
+ All rights reserved.
+
+ For the licensing terms see geant4_vmc/LICENSE.
+ Contact: vmc@pcroot.cern.ch
+-------------------------------------------------
+
 
 Geant4 VMC - VirtualMC implementation for Geant4
 =================================================
@@ -6,8 +16,8 @@ Geant4 VMC - VirtualMC implementation for Geant4
 Files:
 ------
   README     - this file
+  history    - the tags history
   source     - structured source code
-  convertors - source code for g4toxml, roottog4 convertors
   config     - general makefiles
   examples   - examples of usage Virtual MC
 	      

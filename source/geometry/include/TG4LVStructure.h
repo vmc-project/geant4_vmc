@@ -1,13 +1,22 @@
-// $Id: TG4LVStructure.h,v 1.4 2005/09/01 10:04:32 brun Exp $
-/// \ingroup geometry
+// $Id: TG4LVStructure.h,v 1.5 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup geometry
 /// \class TG4LVStructure
 /// \brief A helper class for LVTree
 /// 
 /// Class that associates the name tree with the logical volumes tree. 
 /// Used for printing volumes trees.  
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_LV_STRUCTURE_H
 #define TG4_LV_STRUCTURE_H

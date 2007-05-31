@@ -1,4 +1,16 @@
-# $Id: Makefile,v 1.16 2005/10/13 08:42:29 brun Exp $
+# $Id: Makefile,v 1.17 2006/01/13 16:59:38 brun Exp $
+
+#------------------------------------------------
+# The Geant4 Virtual Monte Carlo package
+# Copyright (C) 2007, Ivana Hrivnacova
+# All rights reserved.
+#
+# For the licensing terms see geant4_vmc/LICENSE.
+# Contact: vmc@pcroot.cern.ch
+#-------------------------------------------------
+
+# The makefile adopted from the old ALICE Makefiles system,
+# developped by ALICE Offline project (http://aliceinfo.cern.ch/Offline)
 
 ############################### geant4_vmc Makefile ###########################
 

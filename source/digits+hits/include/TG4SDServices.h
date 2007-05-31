@@ -1,6 +1,15 @@
-// $Id: TG4SDServices.h,v 1.5 2005/09/01 10:04:32 brun Exp $
-/// \ingroup digits_hits
+// $Id: TG4SDServices.h,v 1.6 2006/12/12 16:21:15 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup digits_hits
 /// \class TG4SDServices
 /// \brief Sensitive detectors services
 ///
@@ -8,7 +17,7 @@
 /// namely using TVirtualMC volumes identifiers
 /// (implemented via TG4SensitiveDetector instances).
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_SD_SERVICES_H
 #define TG4_SD_SERVICES_H

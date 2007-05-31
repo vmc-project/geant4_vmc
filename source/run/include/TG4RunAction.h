@@ -1,10 +1,19 @@
-// $Id: TG4RunAction.h,v 1.3 2005/09/01 10:04:33 brun Exp $
-/// \ingroup run
+// $Id: TG4RunAction.h,v 1.4 2006/12/12 16:21:16 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup run
 /// \class TG4RunAction
 /// \brief Actions at the beginning and the end of run.
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_RUN_ACTION_H
 #define TG4_RUN_ACTION_H

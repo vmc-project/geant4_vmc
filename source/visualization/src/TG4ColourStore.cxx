@@ -1,11 +1,18 @@
-// $Id: TG4ColourStore.cxx,v 1.2 2004/11/10 11:39:28 brun Exp $
-// Category: visualization
+// $Id: TG4ColourStore.cxx,v 1.3 2006/12/12 16:21:16 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+// Category: visualization
 // Class TG4ColourStore
 // --------------------
 // See the class description in the header file.
-//
-// Author: I. Hrivnacova
 
 #include "TG4ColourStore.h"
 #include "TG4Globals.h"

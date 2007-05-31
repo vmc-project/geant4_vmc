@@ -1,4 +1,14 @@
-// $Id: Ex01DetectorConstructionOld.cxx,v 1.2 2006/12/13 14:20:58 brun Exp $
+// $Id: Ex01DetectorConstructionOld.cxx,v 1.3 2006/12/15 09:30:53 brun Exp $
+
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
 //
 // Geant4 ExampleN02 adapted to Virtual Monte Carlo 
 //

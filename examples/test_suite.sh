@@ -1,5 +1,15 @@
 #!/bin/sh 
-# $Id: test_suite.sh,v 1.5 2006/12/12 16:21:37 brun Exp $
+# $Id: test_suite.sh,v 1.6 2006/12/13 14:20:58 brun Exp $
+
+#------------------------------------------------
+# The Virtual Monte Carlo examples
+# Copyright (C) 2007, Ivana Hrivnacova
+# All rights reserved.
+#
+# For the licensing terms see geant4_vmc/LICENSE.
+# Contact: vmc@pcroot.cern.ch
+#-------------------------------------------------
+
 #
 # Run tests for all VMC examples and regenerate output files
 #

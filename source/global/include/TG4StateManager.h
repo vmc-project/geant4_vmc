@@ -1,10 +1,19 @@
-// $Id: TG4StateManager.h,v 1.12 2006/12/12 16:21:15 brun Exp $
-/// \ingroup geometry
+// $Id: TG4StateManager.h,v 1.1 2007/02/06 11:06:34 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup geometry
 /// \class TG4StateManager
 /// \brief The manager class for application state
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_STATE_MANAGER_H
 #define TG4_STATE_MANAGER_H

@@ -1,10 +1,19 @@
-// $Id: TG4ParticlesManager.h,v 1.5 2006/12/12 16:21:16 brun Exp $
-/// \ingroup physics
+// $Id: TG4ParticlesManager.h,v 1.6 2006/12/15 09:30:29 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup physics
 /// \class TG4ParticlesManager
 /// \brief Provides mapping between TDatabasePDG and Geant4 particles. 
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN Orsay
 
 #ifndef TG4_PARTICLES_MANAGER_H
 #define TG4_PARTICLES_MANAGER_H

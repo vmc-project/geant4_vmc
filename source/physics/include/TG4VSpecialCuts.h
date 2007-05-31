@@ -1,6 +1,15 @@
-// $Id: TG4VSpecialCuts.h,v 1.4 2005/09/01 10:04:33 brun Exp $
-/// \ingroup physics
+// $Id: TG4VSpecialCuts.h,v 1.5 2006/12/12 16:21:16 brun Exp $
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \ingroup physics
 /// \class TG4VSpecialCuts
 /// \brief Abstract base class for a special process that activates 
 /// kinetic energy cuts.                                                     
@@ -9,7 +18,7 @@
 /// by derived classes specific for each particle type
 /// (see TG4G3ParticleWSP.h).
 ///
-/// Author: I. Hrivnacova
+/// \author I. Hrivnacova; IPN Orsay
 
 #ifndef TG4_V_SPECIAL_CUTS_H
 #define TG4_V_SPECIAL_CUTS_H
