@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.15 2007/02/06 11:06:34 brun Exp $
+// $Id: TG4PhysicsManager.cxx,v 1.16 2007/05/31 10:24:33 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -648,8 +648,10 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus(const G4VProcess* process)
 
     // absorption
     case Absorption:
-    case Detection: 
        return kPLightAbsorption;
+       ;;
+    case Detection: 
+       return kPLightDetection;
        ;;
        
     case NotAtBoundary:

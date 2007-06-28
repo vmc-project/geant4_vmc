@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.21 2007/05/28 14:13:45 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.22 2007/05/31 10:24:32 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -939,6 +939,16 @@ Double_t TG4StepManager::Edep() const
 
     energyDeposit = fStep->GetTotalEnergyDeposit();
     energyDeposit /= TG4G3Units::Energy();
+  }
+  else if ( fStepStatus == kBoundary &&
+            fTrack->GetTrackStatus() == fStopAndKill ) {
+    G4VProcess *proc = fSteppingManager->GetfCurrentProcess();
+    TG4PhysicsManager *physicsManager = TG4PhysicsManager::Instance();      
+    if (proc && physicsManager->GetMCProcess(proc)==kPLightScattering &&
+        physicsManager->GetOpBoundaryStatus(proc)==kPLightDetection) {
+      energyDeposit = fTrack->GetTotalEnergy();
+      energyDeposit /= TG4G3Units::Energy();
+    }  
   }
   else   
     energyDeposit = 0;
