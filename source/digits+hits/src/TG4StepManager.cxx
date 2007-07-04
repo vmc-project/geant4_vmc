@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.22 2007/05/31 10:24:32 brun Exp $
+// $Id: TG4StepManager.cxx,v 1.23 2007/06/28 06:45:23 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -930,7 +930,7 @@ Double_t TG4StepManager::Edep() const
 {   
 /// Return the total energy deposit in this step.
 
-  G4double energyDeposit;
+  G4double energyDeposit = 0;
   if (fStepStatus == kNormalStep) {
 
 #ifdef MCDEBUG
@@ -948,10 +948,8 @@ Double_t TG4StepManager::Edep() const
         physicsManager->GetOpBoundaryStatus(proc)==kPLightDetection) {
       energyDeposit = fTrack->GetTotalEnergy();
       energyDeposit /= TG4G3Units::Energy();
-    }  
-  }
-  else   
-    energyDeposit = 0;
+    }
+  }    
 
   return energyDeposit;
 }
