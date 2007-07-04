@@ -2,16 +2,16 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.15/08       30 May 2007   *
+  *   Version   5.16/00      27 June 2007   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-Compiled on 30 May 2007 for linux with thread support.
+Compiled on 3 July 2007 for linux with thread support.
 
-CINT/ROOT C/C++ Interpreter version 5.16.19, March 16, 2007
+CINT/ROOT C/C++ Interpreter version 5.16.21, June 22, 2007
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -22,11 +22,11 @@ Note: File "/work/projects/vmc/dev/root/lib/libNet.so" already loaded
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766521039    2DB02ECF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766446287    2DAF0ACF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766544077   766521039
-                                        HEX    2DB088CD    2DB02ECF
+          with Store/Table at absolute adrs   766469325   766446287
+                                        HEX    2DAF64CD    2DAF0ACF
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -51,9 +51,10 @@ Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in default geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+ERROR: Cannot create geometry builder with NULL geometry
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
@@ -102,16 +103,16 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.15/08       30 May 2007   *
+  *   Version   5.16/00      27 June 2007   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-Compiled on 30 May 2007 for linux with thread support.
+Compiled on 3 July 2007 for linux with thread support.
 
-CINT/ROOT C/C++ Interpreter version 5.16.19, March 16, 2007
+CINT/ROOT C/C++ Interpreter version 5.16.21, June 22, 2007
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -123,11 +124,11 @@ Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 --- Init MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    35126991     217FECF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    35103439     217A2CF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    35150029    35126991
-                                        HEX     21858CD     217FECF
+          with Store/Table at absolute adrs    35126477    35103439
+                                        HEX     217FCCD     217A2CF
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -153,9 +154,10 @@ Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in default geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+ERROR: Cannot create geometry builder with NULL geometry
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 

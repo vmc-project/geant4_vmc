@@ -1,4 +1,4 @@
-$Id: history,v 1.20 2007/03/22 10:26:12 brun Exp $
+$Id: history,v 1.21 2007/05/31 10:24:30 brun Exp $
 
 ------------------------------------------------
  The Virtual Monte Carlo package
@@ -12,6 +12,17 @@ $Id: history,v 1.20 2007/03/22 10:26:12 brun Exp $
      
 Tags (history):
 ===============
+  03/07/2007
+  v2-3:
+    Geant4 VMC:
+      - Implemented non zero energy deposit in case of optical
+        boundary process with the status Detection
+        required by ALICE - thanks to Andrei Gheata
+      - Migration to Geant4 9.0
+      
+     Tested with Geant4 9.0, CLHEP 2.0.3.1, Root 5.16/00, VGM 2.09
+               
+
   30/05/2007:
   v2-2:
     Geant4 VMC:

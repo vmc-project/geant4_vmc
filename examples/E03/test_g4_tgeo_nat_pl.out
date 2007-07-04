@@ -2,16 +2,16 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.15/08       30 May 2007   *
+  *   Version   5.16/00      27 June 2007   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-Compiled on 30 May 2007 for linux with thread support.
+Compiled on 3 July 2007 for linux with thread support.
 
-CINT/ROOT C/C++ Interpreter version 5.16.19, March 16, 2007
+CINT/ROOT C/C++ Interpreter version 5.16.21, June 22, 2007
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -24,14 +24,14 @@ Loading VGM libraries ...
 Loading libraries ... finished
 
 *************************************************************
- Geant4 version Name: geant4-08-03    (5-May-2007)
+ Geant4 version Name: geant4-09-00    (29-June-2007)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
 *************************************************************
 
 
-<<< Geant4 Physics List engine packaging library: PACK 5.2
+<<< Geant4 Physics List engine packaging library: PACK 5.3
 <<< Geant4 Physics List simulation engine: LHEP_BERT 3.2
 
 Debug mode is switched on.
@@ -43,7 +43,6 @@ You have successfully registered the following graphics systems.
 Current available graphics systems are:
   ASCIITree (ATree)
   DAWNFILE (DAWNFILE)
-  GAGTree (GAGTree)
   G4HepRepFile (HepRepFile)
   G4HepRep (HepRepXML)
   RayTracer (RayTracer)
@@ -72,7 +71,7 @@ Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in Root geometry manager
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
@@ -106,7 +105,7 @@ conv:  Total cross sections has a good parametrisation from 1.5 MeV to 100 GeV f
 msc:  Model variant of multiple scattering for e-
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
       LateralDisplacementFlag=  1   Skin= 0
-      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+      Boundary/stepping algorithm is active with RangeFactor= 0.02  Step limit type 1
 
 eIoni:   tables are built for  e-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -119,7 +118,7 @@ eBrem:   tables are built for  e-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
       Total cross sections and sampling from StandBrem model (based on the EEDL data library) 
-      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
+      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV. LPM flag 1
 
 eIoni:   tables are built for  e+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -132,7 +131,7 @@ eBrem:   tables are built for  e+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
       Total cross sections and sampling from StandBrem model (based on the EEDL data library) 
-      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
+      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV. LPM flag 1
 
 annihil:       Sampling according eplus2gg model
       tables are built for  e+
@@ -141,7 +140,7 @@ annihil:       Sampling according eplus2gg model
 msc:  Model variant of multiple scattering for proton
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
       LateralDisplacementFlag=  1   Skin= 0
-      Boundary/stepping algorithm is active with facrange= 0.2  Step limitation 0
+      Boundary/stepping algorithm is active with RangeFactor= 0.2  Step limit type 0
 
 hIoni:   tables are built for  proton
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -153,14 +152,14 @@ hIoni:   tables are built for  proton
 
 msc:  Model variant of multiple scattering for GenericIon
       LateralDisplacementFlag=  0   Skin= 0
-      Boundary/stepping algorithm is active with facrange= 0.2  Step limitation 0
+      Boundary/stepping algorithm is active with RangeFactor= 0.2  Step limit type 1
 
 ionIoni:   tables are built for  GenericIon
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
       Scaling relation is used from proton dE/dx and range.
       Delta cross sections and sampling from BetheBloch model for scaled energy > 2 MeV
-      Parametrisation from BraggIon for protons below.
+      Parametrisation from BraggIon for protons below. NuclearStopping 1
 
       Stopping Power data for 8 ion/material pairs are used.
       Step function: finalRange(mm)= 0.1, dRoverRange= 0.1, integral: 1
@@ -176,7 +175,7 @@ hIoni:   tables are built for  anti_proton
 msc:  Model variant of multiple scattering for mu+
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
       LateralDisplacementFlag=  1   Skin= 0
-      Boundary/stepping algorithm is active with facrange= 0.2  Step limitation 0
+      Boundary/stepping algorithm is active with RangeFactor= 0.2  Step limit type 0
 
 muIoni:   tables are built for  mu+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -223,7 +222,7 @@ hIoni:   tables are built for  pi+
 msc:  Model variant of multiple scattering for pi-
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
       LateralDisplacementFlag=  1   Skin= 0
-      Boundary/stepping algorithm is active with facrange= 0.2  Step limitation 0
+      Boundary/stepping algorithm is active with RangeFactor= 0.2  Step limit type 0
 
 hIoni:   tables are built for  pi-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -235,40 +234,40 @@ hIoni:   tables are built for  pi-
 ### Run 0 start.
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 928.441       total track length (cm):  56.8461
-   Gap:      total energy (MeV): 36.5778       total track length (cm):   16.637
+   Absorber: total energy (MeV): 926.939       total track length (cm):  55.7256
+   Gap:      total energy (MeV):  20.721       total track length (cm):  9.70829
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV): 919.543       total track length (cm):  55.4065
-   Gap:      total energy (MeV): 35.3323       total track length (cm):  17.1601
+   Absorber: total energy (MeV): 951.236       total track length (cm):  57.4211
+   Gap:      total energy (MeV): 14.3178       total track length (cm):  6.67045
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 927.272       total track length (cm):  57.0465
-   Gap:      total energy (MeV): 23.2205       total track length (cm):   11.424
+   Absorber: total energy (MeV): 930.113       total track length (cm):  56.0589
+   Gap:      total energy (MeV): 18.8294       total track length (cm):   8.7005
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 932.314       total track length (cm):  57.8929
-   Gap:      total energy (MeV): 22.2809       total track length (cm):  9.84345
+   Absorber: total energy (MeV): 877.997       total track length (cm):  53.2385
+   Gap:      total energy (MeV): 40.5388       total track length (cm):  20.3652
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 931.118       total track length (cm):  57.0251
-   Gap:      total energy (MeV):  28.842       total track length (cm):  13.5948
-Time of this run:   User=0.36s Real=0.36s Sys=0s
+   Absorber: total energy (MeV): 935.808       total track length (cm):  57.2349
+   Gap:      total energy (MeV): 24.8236       total track length (cm):  12.5148
+Time of this run:   User=0.33s Real=0.34s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.15/08       30 May 2007   *
+  *   Version   5.16/00      27 June 2007   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-Compiled on 30 May 2007 for linux with thread support.
+Compiled on 3 July 2007 for linux with thread support.
 
-CINT/ROOT C/C++ Interpreter version 5.16.19, March 16, 2007
+CINT/ROOT C/C++ Interpreter version 5.16.21, June 22, 2007
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -282,14 +281,14 @@ Loading libraries ... finished
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-08-03    (5-May-2007)
+ Geant4 version Name: geant4-09-00    (29-June-2007)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
 *************************************************************
 
 
-<<< Geant4 Physics List engine packaging library: PACK 5.2
+<<< Geant4 Physics List engine packaging library: PACK 5.3
 <<< Geant4 Physics List simulation engine: LHEP_BERT 3.2
 
 Debug mode is switched on.
@@ -301,7 +300,6 @@ You have successfully registered the following graphics systems.
 Current available graphics systems are:
   ASCIITree (ATree)
   DAWNFILE (DAWNFILE)
-  GAGTree (GAGTree)
   G4HepRepFile (HepRepFile)
   G4HepRep (HepRepXML)
   RayTracer (RayTracer)
@@ -331,7 +329,7 @@ Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in Root geometry manager
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
@@ -367,7 +365,7 @@ conv:  Total cross sections has a good parametrisation from 1.5 MeV to 100 GeV f
 msc:  Model variant of multiple scattering for e-
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
       LateralDisplacementFlag=  1   Skin= 0
-      Boundary/stepping algorithm is active with facrange= 0.02  Step limitation 1
+      Boundary/stepping algorithm is active with RangeFactor= 0.02  Step limit type 1
 
 eIoni:   tables are built for  e-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -380,7 +378,7 @@ eBrem:   tables are built for  e-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
       Total cross sections and sampling from StandBrem model (based on the EEDL data library) 
-      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
+      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV. LPM flag 1
 
 eIoni:   tables are built for  e+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -393,7 +391,7 @@ eBrem:   tables are built for  e+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
       Total cross sections and sampling from StandBrem model (based on the EEDL data library) 
-      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV.
+      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV. LPM flag 1
 
 annihil:       Sampling according eplus2gg model
       tables are built for  e+
@@ -402,7 +400,7 @@ annihil:       Sampling according eplus2gg model
 msc:  Model variant of multiple scattering for proton
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
       LateralDisplacementFlag=  1   Skin= 0
-      Boundary/stepping algorithm is active with facrange= 0.2  Step limitation 0
+      Boundary/stepping algorithm is active with RangeFactor= 0.2  Step limit type 0
 
 hIoni:   tables are built for  proton
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -414,14 +412,14 @@ hIoni:   tables are built for  proton
 
 msc:  Model variant of multiple scattering for GenericIon
       LateralDisplacementFlag=  0   Skin= 0
-      Boundary/stepping algorithm is active with facrange= 0.2  Step limitation 0
+      Boundary/stepping algorithm is active with RangeFactor= 0.2  Step limit type 1
 
 ionIoni:   tables are built for  GenericIon
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
       Lambda tables from threshold to 100 TeV in 120 bins.
       Scaling relation is used from proton dE/dx and range.
       Delta cross sections and sampling from BetheBloch model for scaled energy > 2 MeV
-      Parametrisation from BraggIon for protons below.
+      Parametrisation from BraggIon for protons below. NuclearStopping 1
 
       Stopping Power data for 8 ion/material pairs are used.
       Step function: finalRange(mm)= 0.1, dRoverRange= 0.1, integral: 1
@@ -437,7 +435,7 @@ hIoni:   tables are built for  anti_proton
 msc:  Model variant of multiple scattering for mu+
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
       LateralDisplacementFlag=  1   Skin= 0
-      Boundary/stepping algorithm is active with facrange= 0.2  Step limitation 0
+      Boundary/stepping algorithm is active with RangeFactor= 0.2  Step limit type 0
 
 muIoni:   tables are built for  mu+
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -484,7 +482,7 @@ hIoni:   tables are built for  pi+
 msc:  Model variant of multiple scattering for pi-
       Lambda tables from 100 eV  to 100 TeV in 120 bins.
       LateralDisplacementFlag=  1   Skin= 0
-      Boundary/stepping algorithm is active with facrange= 0.2  Step limitation 0
+      Boundary/stepping algorithm is active with RangeFactor= 0.2  Step limit type 0
 
 hIoni:   tables are built for  pi-
       dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
@@ -505,378 +503,344 @@ hIoni:   tables are built for  pi-
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -9.000    0.000    0.000    50.0000    0.0000    0.000    0.000     WRLD  
-#   1    -7.500    0.000    0.000    49.9974    0.0026    1.500    1.500     WRLD  Unknown process
-#   2    -7.500    0.000    0.000    49.9974    0.0000    0.000    1.500     ABSO  
-#   3    -7.464    0.001    0.002    41.7303    1.1807    0.036    1.536     ABSO  Unknown process
-#   4    -7.401    0.009    0.004    40.2233    0.9362    0.064    1.600     ABSO  Unknown process
-#   5    -7.386    0.011    0.003    37.3606    0.2094    0.015    1.616     ABSO  Unknown process
-#   6    -7.365    0.013    0.003    36.8697    0.3279    0.020    1.636     ABSO  Unknown process
-#   7    -7.338    0.021    0.003    35.7155    0.3636    0.028    1.664     ABSO  Unknown process
-#   8    -7.306    0.032    0.008    33.2292    0.4352    0.034    1.699     ABSO  Unknown process
-#   9    -7.158    0.072    0.001    30.6210    2.0730    0.155    1.854     ABSO  Unknown process
-#  10    -7.151    0.076    0.000    21.6010    0.0802    0.008    1.862     ABSO  Unknown process
-#  11    -7.151    0.077    0.000    21.4804    0.0250    0.001    1.863     ABSO  Unknown process
-#  12    -7.012    0.180   -0.048    18.3271    2.0512    0.186    2.049     ABSO  Unknown process
-#  13    -6.962    0.277   -0.067    16.8672    1.3003    0.114    2.163     ABSO  Unknown process
-#  14    -6.937    0.310   -0.095    16.1558    0.6034    0.051    2.213     ABSO  Unknown process
-#  15    -6.909    0.489   -0.212    11.1245    3.4105    0.234    2.447     ABSO  Unknown process
-#  16    -6.806    0.650   -0.380     7.5496    3.5749    0.330    2.777     ABSO  Unknown process
-#  17    -6.811    0.655   -0.389     7.2478    0.1084    0.011    2.788     ABSO  Unknown process
-#  18    -6.873    0.617   -0.467     5.7334    1.5144    0.131    2.919     ABSO  Unknown process
-#  19    -6.896    0.623   -0.402     1.2846    1.3535    0.084    3.002     ABSO  Unknown process
-#  20    -6.906    0.635   -0.411     0.6647    0.4489    0.040    3.042     ABSO  Unknown process
-#  21    -6.909    0.634   -0.412    -0.0000    0.6647    0.045    3.087     ABSO  Unknown process
+#   1    -7.500    0.000    0.000    49.9973    0.0027    1.500    1.500     WRLD  Unknown process
+#   2    -7.500    0.000    0.000    49.9973    0.0000    0.000    1.500     ABSO  
+#   3    -7.456   -0.002    0.002    49.4355    0.4666    0.045    1.545     ABSO  Unknown process
+#   4    -7.350   -0.016    0.010    45.6123    1.7829    0.108    1.652     ABSO  Unknown process
+#   5    -7.285   -0.018    0.028    36.8927    0.8117    0.067    1.720     ABSO  Unknown process
+#   6    -7.165   -0.032    0.055    18.8502    1.7089    0.125    1.845     ABSO  Unknown process
+#   7    -7.085   -0.049    0.111    16.9794    1.0959    0.101    1.946     ABSO  Unknown process
+#   8    -7.054   -0.054    0.133    16.3207    0.4739    0.039    1.985     ABSO  Unknown process
+#   9    -7.047   -0.056    0.136    16.1193    0.0994    0.008    1.993     ABSO  Unknown process
+#  10    -7.006   -0.063    0.148    15.3443    0.5384    0.044    2.037     ABSO  Unknown process
+#  11    -6.843   -0.078    0.151    10.2453    2.9132    0.174    2.211     ABSO  Unknown process
+#  12    -6.801   -0.102    0.164     8.5798    0.4751    0.053    2.264     ABSO  Unknown process
+#  13    -6.762   -0.198    0.115     6.3515    1.5412    0.135    2.399     ABSO  Unknown process
+#  14    -6.735   -0.126   -0.014     3.4682    2.8833    0.248    2.647     ABSO  Unknown process
+#  15    -6.727   -0.072   -0.048     1.1467    1.1344    0.116    2.763     ABSO  Unknown process
+#  16    -6.728   -0.066   -0.044    -0.0000    1.1467    0.086    2.849     ABSO  Unknown process
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 1     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.906    0.635   -0.411     0.1710    0.0000    0.000    0.000     ABSO  
-#   1    -6.921    0.621   -0.416     0.0000    0.1710    0.021    0.021     ABSO  Unknown process
+#   0    -6.727   -0.072   -0.048     1.1871    0.0000    0.000    0.000     ABSO  
+#   1    -7.035    0.324   -0.305     0.3792    0.8079    0.564    0.564     ABSO  Unknown process
+#   2    -6.896    0.160   -0.826     0.0000    0.3792    0.563    1.127     ABSO  Unknown process
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 2     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.896    0.623   -0.402     3.0953    0.0000    0.000    0.000     ABSO  
-#   1    -7.500    1.314    0.035     3.0953    0.0000    1.017    1.017     ABSO  Unknown process
-#   2    -7.500    1.314    0.035     3.0953    0.0000    0.000    1.017     WRLD  
-#   3    -9.000    3.033    1.121     3.0953    0.0000    2.526    3.543     WRLD  Unknown process
+#   0    -6.762   -0.198    0.115     0.6872    0.0000    0.000    0.000     ABSO  
+#   1    -6.500   -0.367   -0.262     0.6872    0.0000    0.489    0.489     ABSO  Unknown process
+#   2    -6.500   -0.367   -0.262     0.6872    0.0000    0.000    0.489     GAPX  
+#   3    -6.000   -0.689   -0.982     0.6872    0.0000    0.934    1.423     GAPX  Unknown process
+#   4    -6.000   -0.689   -0.982     0.6872    0.0000    0.000    1.423     ABSO  
+#   5    -5.582   -0.959   -1.585     0.4408    0.2463    0.781    2.205     ABSO  Unknown process
+#   6    -5.000   -1.062   -1.583     0.4408    0.0000    0.591    2.796     ABSO  Unknown process
+#   7    -5.000   -1.062   -1.583     0.4408    0.0000    0.000    2.796     GAPX  
+#   8    -4.500   -1.150   -1.582     0.4408    0.0000    0.508    3.303     GAPX  Unknown process
+#   9    -4.500   -1.150   -1.582     0.4408    0.0000    0.000    3.303     ABSO  
+#  10    -3.673   -1.296   -1.579     0.3302    0.1106    0.840    4.143     ABSO  Unknown process
+#  11    -3.500   -1.225   -1.757     0.3302    0.0000    0.258    4.401     ABSO  Unknown process
+#  12    -3.500   -1.225   -1.757     0.3302    0.0000    0.000    4.401     GAPX  
+#  13    -3.000   -1.023   -2.270     0.3302    0.0000    0.745    5.146     GAPX  Unknown process
+#  14    -3.000   -1.023   -2.270     0.3302    0.0000    0.000    5.146     ABSO  
+#  15    -2.829   -0.953   -2.445     0.0000    0.3302    0.254    5.400     ABSO  Unknown process
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 3     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.811    0.655   -0.389     0.1934    0.0000    0.000    0.000     ABSO  
-#   1    -6.811    0.655   -0.391     0.1349    0.0584    0.002    0.002     ABSO  Unknown process
-#   2    -6.815    0.645   -0.391     0.0000    0.1349    0.011    0.012     ABSO  Unknown process
+#   0    -6.801   -0.102    0.164     1.1904    0.0000    0.000    0.000     ABSO  
+#   1    -6.500   -0.416    0.172     1.1904    0.0000    0.435    0.435     ABSO  Unknown process
+#   2    -6.500   -0.416    0.172     1.1904    0.0000    0.000    0.435     GAPX  
+#   3    -6.000   -0.938    0.185     1.1904    0.0000    0.723    1.158     GAPX  Unknown process
+#   4    -6.000   -0.938    0.185     1.1904    0.0000    0.000    1.158     ABSO  
+#   5    -5.213   -1.759    0.206     0.4429    0.7475    1.138    2.296     ABSO  Unknown process
+#   6    -5.255   -1.835    0.180     0.0000    0.4429    0.090    2.386     ABSO  Unknown process
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 4     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.909    0.489   -0.212     1.6208    0.0000    0.000    0.000     ABSO  
-#   1    -6.910    0.585   -0.222     0.2764    0.0000    0.097    0.097     ABSO  Unknown process
-#   2    -6.988    0.515   -0.113     0.0000    0.2764    0.151    0.248     ABSO  Unknown process
+#   0    -6.843   -0.078    0.151     2.1858    0.0000    0.000    0.000     ABSO  
+#   1    -6.500   -0.172    0.170     2.1858    0.0000    0.357    0.357     ABSO  Unknown process
+#   2    -6.500   -0.172    0.170     2.1858    0.0000    0.000    0.357     GAPX  
+#   3    -6.000   -0.308    0.198     2.1858    0.0000    0.519    0.876     GAPX  Unknown process
+#   4    -6.000   -0.308    0.198     2.1858    0.0000    0.000    0.876     ABSO  
+#   5    -5.000   -0.581    0.254     2.1858    0.0000    1.038    1.914     ABSO  Unknown process
+#   6    -5.000   -0.581    0.254     2.1858    0.0000    0.000    1.914     GAPX  
+#   7    -4.500   -0.717    0.282     2.1858    0.0000    0.519    2.433     GAPX  Unknown process
+#   8    -4.500   -0.717    0.282     2.1858    0.0000    0.000    2.433     ABSO  
+#   9    -3.500   -0.990    0.337     2.1858    0.0000    1.038    3.471     ABSO  Unknown process
+#  10    -3.500   -0.990    0.337     2.1858    0.0000    0.000    3.471     GAPX  
+#  11    -3.000   -1.126    0.365     2.1858    0.0000    0.519    3.989     GAPX  Unknown process
+#  12    -3.000   -1.126    0.365     2.1858    0.0000    0.000    3.989     ABSO  
+#  13    -2.000   -1.398    0.421     2.1858    0.0000    1.038    5.027     ABSO  Unknown process
+#  14    -2.000   -1.398    0.421     2.1858    0.0000    0.000    5.027     GAPX  
+#  15    -1.500   -1.535    0.449     2.1858    0.0000    0.519    5.546     GAPX  Unknown process
+#  16    -1.500   -1.535    0.449     2.1858    0.0000    0.000    5.546     ABSO  
+#  17    -0.500   -1.807    0.505     2.1858    0.0000    1.038    6.584     ABSO  Unknown process
+#  18    -0.500   -1.807    0.505     2.1858    0.0000    0.000    6.584     GAPX  
+#  19    -0.000   -1.944    0.533     2.1858    0.0000    0.519    7.103     GAPX  Unknown process
+#  20    -0.000   -1.944    0.533     2.1858    0.0000    0.000    7.103     ABSO  
+#  21     1.000   -2.216    0.588     2.1858    0.0000    1.038    8.141     ABSO  Unknown process
+#  22     1.000   -2.216    0.588     2.1858    0.0000    0.000    8.141     GAPX  
+#  23     1.500   -2.353    0.616     2.1858    0.0000    0.519    8.660     GAPX  Unknown process
+#  24     1.500   -2.353    0.616     2.1858    0.0000    0.000    8.660     ABSO  
+#  25     2.500   -2.625    0.672     2.1858    0.0000    1.038    9.698     ABSO  Unknown process
+#  26     2.500   -2.625    0.672     2.1858    0.0000    0.000    9.698     GAPX  
+#  27     3.000   -2.761    0.700     2.1858    0.0000    0.519   10.217     GAPX  Unknown process
+#  28     3.000   -2.761    0.700     2.1858    0.0000    0.000   10.217     ABSO  
+#  29     3.142   -2.800    0.708     1.8892    0.2965    0.148   10.365     ABSO  Unknown process
+#  30     4.000   -3.312    0.764     1.8892    0.0000    1.001   11.366     ABSO  Unknown process
+#  31     4.000   -3.312    0.764     1.8892    0.0000    0.000   11.366     GAPX  
+#  32     4.500   -3.611    0.797     1.8892    0.0000    0.583   11.949     GAPX  Unknown process
+#  33     4.500   -3.611    0.797     1.8892    0.0000    0.000   11.949     ABSO  
+#  34     4.600   -3.671    0.804     0.3275    0.0000    0.117   12.066     ABSO  Unknown process
+#  35     4.569   -3.678    0.863     0.0000    0.3275    0.067   12.133     ABSO  Unknown process
 
 ****************************************************************************************************
   Particle = e-     Track ID = 5     Parent ID = 4
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.910    0.585   -0.222     1.3444    0.0000    0.000    0.000     ABSO  
-#   1    -6.898    0.592   -0.229     0.8300    0.2341    0.024    0.024     ABSO  Unknown process
-#   2    -6.898    0.589   -0.232    -0.0000    0.8300    0.059    0.083     ABSO  Unknown process
+#   0     4.600   -3.671    0.804     1.5618    0.0000    0.000    0.000     ABSO  
+#   1     4.612   -3.672    0.815     1.3203    0.2415    0.025    0.025     ABSO  Unknown process
+#   2     4.598   -3.667    0.811     1.0404    0.2799    0.025    0.050     ABSO  Unknown process
+#   3     4.604   -3.667    0.823     0.6524    0.3880    0.025    0.075     ABSO  Unknown process
+#   4     4.604   -3.664    0.823    -0.0000    0.6524    0.044    0.119     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 6     Parent ID = 5
+  Particle = gamma     Track ID = 6     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.898    0.592   -0.229     0.2803    0.0000    0.000    0.000     ABSO  
-#   1    -6.905    0.522   -0.287     0.2785    0.0018    0.091    0.091     ABSO  Unknown process
-#   2    -6.887    0.269   -0.462     0.0000    0.2785    0.308    0.399     ABSO  Unknown process
+#   0    -7.006   -0.063    0.148     0.2366    0.0000    0.000    0.000     ABSO  
+#   1    -6.994   -0.062    0.153     0.0000    0.2366    0.013    0.013     ABSO  Unknown process
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 7     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.937    0.310   -0.095     0.1081    0.0000    0.000    0.000     ABSO  
-#   1    -6.937    0.310   -0.095     0.0000    0.1081    0.000    0.000     ABSO  Unknown process
+#   0    -7.047   -0.056    0.136     0.1021    0.0000    0.000    0.000     ABSO  
+#   1    -7.026   -0.063    0.145     0.0000    0.1021    0.024    0.024     ABSO  Unknown process
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 8     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.962    0.277   -0.067     0.1596    0.0000    0.000    0.000     ABSO  
-#   1    -6.947    0.290   -0.079     0.0000    0.1596    0.023    0.023     ABSO  Unknown process
+#   0    -7.054   -0.054    0.133     0.1848    0.0000    0.000    0.000     ABSO  
+#   1    -6.954   -0.066    0.178     0.0000    0.1848    0.110    0.110     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 9     Parent ID = 0
+  Particle = gamma     Track ID = 9     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.012    0.180   -0.048     1.1021    0.0000    0.000    0.000     ABSO  
-#   1    -7.007    0.180   -0.038     0.7678    0.1746    0.018    0.018     ABSO  Unknown process
-#   2    -7.005    0.172   -0.032     0.2955    0.3273    0.029    0.047     ABSO  Unknown process
-#   3    -7.005    0.172   -0.032    -0.0000    0.2955    0.015    0.062     ABSO  Unknown process
+#   0    -7.085   -0.049    0.111     0.7748    0.0000    0.000    0.000     ABSO  
+#   1    -6.803   -0.056    0.243     0.0000    0.7748    0.312    0.312     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 10     Parent ID = 9
+  Particle = gamma     Track ID = 10     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.005    0.172   -0.032     0.1450    0.0000    0.000    0.000     ABSO  
-#   1    -6.954    0.173   -0.013     0.0000    0.1450    0.055    0.055     ABSO  Unknown process
+#   0    -7.165   -0.032    0.055    16.3336    0.0000    0.000    0.000     ABSO  
+#   1    -6.500   -0.209    0.300    16.3336    0.0000    0.730    0.730     ABSO  Unknown process
+#   2    -6.500   -0.209    0.300    16.3336    0.0000    0.000    0.730     GAPX  
+#   3    -6.000   -0.342    0.484    16.3336    0.0000    0.549    1.279     GAPX  Unknown process
+#   4    -6.000   -0.342    0.484    16.3336    0.0000    0.000    1.279     ABSO  
+#   5    -5.760   -0.406    0.573     0.0000    0.0000    0.263    1.543     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 11     Parent ID = 9
+  Particle = e+     Track ID = 11     Parent ID = 10
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.007    0.180   -0.038     0.1596    0.0000    0.000    0.000     ABSO  
-#   1    -7.002    0.158   -0.019     0.1371    0.0225    0.030    0.030     ABSO  Unknown process
-#   2    -6.984    0.138   -0.026     0.0000    0.1371    0.028    0.058     ABSO  Unknown process
+#   0    -5.760   -0.406    0.573     5.6316    0.0000    0.000    0.000     ABSO  
+#   1    -5.715   -0.432    0.560     4.9493    0.6823    0.060    0.060     ABSO  Unknown process
+#   2    -5.687   -0.448    0.518     4.2109    0.7385    0.060    0.120     ABSO  Unknown process
+#   3    -5.665   -0.459    0.473     3.1936    1.0173    0.060    0.180     ABSO  Unknown process
+#   4    -5.629   -0.430    0.465     2.5469    0.6467    0.060    0.240     ABSO  Unknown process
+#   5    -5.597   -0.457    0.469     1.9430    0.6039    0.060    0.299     ABSO  Unknown process
+#   6    -5.630   -0.455    0.485     1.3021    0.6409    0.060    0.359     ABSO  Unknown process
+#   7    -5.627   -0.443    0.490    -0.0000    1.3021    0.101    0.460     ABSO  Unknown process
+#   8    -5.627   -0.443    0.490    -0.0000    0.0000    0.000    0.460     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 12     Parent ID = 0
+  Particle = gamma     Track ID = 12     Parent ID = 11
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.151    0.077    0.000     0.0956    0.0000    0.000    0.000     ABSO  
-#   1    -7.130    0.091    0.001     0.0000    0.0956    0.025    0.025     ABSO  Unknown process
+#   0    -5.627   -0.443    0.490     0.5110    0.0000    0.000    0.000     ABSO  
+#   1    -5.660   -0.437    0.483     0.0000    0.5110    0.035    0.035     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 13     Parent ID = 0
+  Particle = gamma     Track ID = 13     Parent ID = 11
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.151    0.076    0.000     8.9398    0.0000    0.000    0.000     ABSO  
-#   1    -6.764    0.329    0.005     0.0000    0.0000    0.463    0.463     ABSO  Unknown process
+#   0    -5.627   -0.443    0.490     0.5110    0.0000    0.000    0.000     ABSO  
+#   1    -5.524   -0.465    0.512     0.2285    0.2825    0.108    0.108     ABSO  Unknown process
+#   2    -5.521   -0.402    0.270     0.0000    0.2285    0.250    0.357     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = e+     Track ID = 14     Parent ID = 13
+  Particle = e-     Track ID = 14     Parent ID = 10
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.764    0.329    0.005     3.5364    0.0000    0.000    0.000     ABSO  
-#   1    -6.746    0.354   -0.003     1.3968    0.3689    0.036    0.036     ABSO  Unknown process
-#   2    -6.768    0.361   -0.022     0.3244    1.0724    0.093    0.129     ABSO  Unknown process
-#   3    -6.769    0.362   -0.022    -0.0000    0.3244    0.016    0.145     ABSO  Unknown process
-#   4    -6.769    0.362   -0.022    -0.0000    0.0000    0.000    0.145     ABSO  Unknown process
+#   0    -5.760   -0.406    0.573     9.6800    0.0000    0.000    0.000     ABSO  
+#   1    -5.721   -0.410    0.580     8.8794    0.4578    0.042    0.042     ABSO  Unknown process
+#   2    -5.680   -0.380    0.604     8.1989    0.6805    0.060    0.102     ABSO  Unknown process
+#   3    -5.670   -0.362    0.634     4.1362    0.4579    0.039    0.141     ABSO  Unknown process
+#   4    -5.656   -0.381    0.675     3.2297    0.9065    0.060    0.200     ABSO  Unknown process
+#   5    -5.665   -0.411    0.704     2.4733    0.7564    0.060    0.260     ABSO  Unknown process
+#   6    -5.684   -0.433    0.725     1.3613    1.1120    0.060    0.320     ABSO  Unknown process
+#   7    -5.679   -0.437    0.704     0.8051    0.5561    0.060    0.380     ABSO  Unknown process
+#   8    -5.677   -0.439    0.708     0.4089    0.0615    0.006    0.386     ABSO  Unknown process
+#   9    -5.676   -0.440    0.708    -0.0000    0.4089    0.023    0.410     ABSO  Unknown process
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 15     Parent ID = 14
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.769    0.362   -0.022     0.5110    0.0000    0.000    0.000     ABSO  
-#   1    -6.722   -2.130   -0.475     0.3702    0.1408    2.533    2.533     ABSO  Unknown process
-#   2    -6.687   -2.155   -0.481     0.0000    0.3702    0.043    2.576     ABSO  Unknown process
+#   0    -5.677   -0.439    0.708     0.3347    0.0000    0.000    0.000     ABSO  
+#   1    -5.641   -0.803    0.604     0.0000    0.3347    0.380    0.380     ABSO  Unknown process
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 16     Parent ID = 14
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.769    0.362   -0.022     0.5110    0.0000    0.000    0.000     ABSO  
-#   1    -6.787    1.322    0.153     0.2007    0.3103    0.976    0.976     ABSO  Unknown process
-#   2    -6.844    1.256    0.202     0.0000    0.2007    0.100    1.076     ABSO  Unknown process
+#   0    -5.670   -0.362    0.634     3.6048    0.0000    0.000    0.000     ABSO  
+#   1    -5.428   -0.107    1.503     0.0000    0.7159    0.937    0.937     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 17     Parent ID = 14
+  Particle = e+     Track ID = 17     Parent ID = 16
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.746    0.354   -0.003     1.7707    0.0000    0.000    0.000     ABSO  
-#   1    -6.809    0.503   -0.005     1.2993    0.4714    0.162    0.162     ABSO  Unknown process
-#   2    -7.252    0.925   -0.146     0.2289    0.0000    0.628    0.790     ABSO  Unknown process
-#   3    -7.242    0.920   -0.135     0.2134    0.0156    0.016    0.806     ABSO  Unknown process
-#   4    -7.211    0.885    0.012     0.0000    0.2134    0.155    0.960     ABSO  Unknown process
+#   0    -5.428   -0.107    1.503    -0.0000    0.0000    0.000    0.000     ABSO  
+#   1    -5.428   -0.107    1.503    -0.0000    0.0000    0.000    0.000     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 18     Parent ID = 17
+  Particle = gamma     Track ID = 18     Parent ID = 17
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.252    0.925   -0.146     1.0704    0.0000    0.000    0.000     ABSO  
-#   1    -7.251    0.940   -0.138     0.4573    0.6131    0.054    0.054     ABSO  Unknown process
-#   2    -7.250    0.940   -0.138    -0.0000    0.4573    0.027    0.081     ABSO  Unknown process
+#   0    -5.428   -0.107    1.503     0.5110    0.0000    0.000    0.000     ABSO  
+#   1    -5.259   -0.144    1.572     0.0000    0.5110    0.186    0.186     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 19     Parent ID = 13
+  Particle = gamma     Track ID = 19     Parent ID = 17
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.764    0.329    0.005     4.3814    0.0000    0.000    0.000     ABSO  
-#   1    -6.713    0.320    0.010     3.1348    1.2465    0.066    0.066     ABSO  Unknown process
-#   2    -6.705    0.319    0.004     2.8616    0.0962    0.011    0.077     ABSO  Unknown process
-#   3    -6.670    0.318    0.026     2.1041    0.7575    0.066    0.143     ABSO  Unknown process
-#   4    -6.664    0.287    0.035     1.3618    0.7423    0.060    0.204     ABSO  Unknown process
-#   5    -6.656    0.296    0.047     0.1616    1.2002    0.105    0.308     ABSO  Unknown process
-#   6    -6.656    0.296    0.047    -0.0000    0.1616    0.006    0.314     ABSO  Unknown process
+#   0    -5.428   -0.107    1.503     0.5110    0.0000    0.000    0.000     ABSO  
+#   1    -5.682   -0.051    1.399     0.4800    0.0310    0.280    0.280     ABSO  Unknown process
+#   2    -6.000    0.104    1.362     0.4800    0.0000    0.356    0.636     ABSO  Unknown process
+#   3    -6.000    0.104    1.362     0.4800    0.0000    0.000    0.636     GAPX  
+#   4    -6.500    0.348    1.304     0.4800    0.0000    0.559    1.195     GAPX  Unknown process
+#   5    -6.500    0.348    1.304     0.4800    0.0000    0.000    1.195     ABSO  
+#   6    -7.208    0.693    1.222     0.0000    0.4800    0.792    1.987     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 20     Parent ID = 19
+  Particle = e-     Track ID = 20     Parent ID = 16
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.705    0.319    0.004     0.1770    0.0000    0.000    0.000     ABSO  
-#   1    -6.692    0.323   -0.007     0.0000    0.1770    0.017    0.017     ABSO  Unknown process
+#   0    -5.428   -0.107    1.503     1.8669    0.0000    0.000    0.000     ABSO  
+#   1    -5.449   -0.115    1.527     0.3034    1.5636    0.135    0.135     ABSO  Unknown process
+#   2    -5.448   -0.115    1.528    -0.0000    0.3034    0.015    0.151     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 21     Parent ID = 0
+  Particle = gamma     Track ID = 21     Parent ID = 14
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.158    0.072    0.001     0.5352    0.0000    0.000    0.000     ABSO  
-#   1    -6.500    0.431   -0.060     0.5352    0.0000    0.752    0.752     ABSO  Unknown process
-#   2    -6.500    0.431   -0.060     0.5352    0.0000    0.000    0.752     GAPX  
-#   3    -6.000    0.704   -0.106     0.5352    0.0000    0.572    1.324     GAPX  Unknown process
-#   4    -6.000    0.704   -0.106     0.5352    0.0000    0.000    1.324     ABSO  
-#   5    -5.851    0.786   -0.119     0.0000    0.5352    0.170    1.494     ABSO  Unknown process
+#   0    -5.721   -0.410    0.580     0.3428    0.0000    0.000    0.000     ABSO  
+#   1    -5.000   -0.218    0.724     0.3428    0.0000    0.760    0.760     ABSO  Unknown process
+#   2    -5.000   -0.218    0.724     0.3428    0.0000    0.000    0.760     GAPX  
+#   3    -4.500   -0.084    0.825     0.3428    0.0000    0.527    1.287     GAPX  Unknown process
+#   4    -4.500   -0.084    0.825     0.3428    0.0000    0.000    1.287     ABSO  
+#   5    -4.159    0.007    0.893     0.0000    0.3428    0.359    1.646     ABSO  Unknown process
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 22     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.306    0.032    0.008     2.0510    0.0000    0.000    0.000     ABSO  
-#   1    -7.138    0.068    0.027     0.0000    0.2417    0.173    0.173     ABSO  Unknown process
+#   0    -7.285   -0.018    0.028     7.9079    0.0000    0.000    0.000     ABSO  
+#   1    -6.500   -0.089    0.305     7.9079    0.0000    0.835    0.835     ABSO  Unknown process
+#   2    -6.500   -0.089    0.305     7.9079    0.0000    0.000    0.835     GAPX  
+#   3    -6.000   -0.134    0.482     7.9079    0.0000    0.532    1.368     GAPX  Unknown process
+#   4    -6.000   -0.134    0.482     7.9079    0.0000    0.000    1.368     ABSO  
+#   5    -5.000   -0.225    0.835     7.9079    0.0000    1.064    2.432     ABSO  Unknown process
+#   6    -5.000   -0.225    0.835     7.9079    0.0000    0.000    2.432     GAPX  
+#   7    -4.500   -0.270    1.012     7.9079    0.0000    0.532    2.964     GAPX  Unknown process
+#   8    -4.500   -0.270    1.012     7.9079    0.0000    0.000    2.964     ABSO  
+#   9    -4.047   -0.311    1.172     0.0000    0.8128    0.482    3.446     ABSO  Unknown process
 
 ****************************************************************************************************
   Particle = e+     Track ID = 23     Parent ID = 22
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.138    0.068    0.027     0.7874    0.0000    0.000    0.000     ABSO  
-#   1    -7.135    0.067    0.022    -0.0000    0.7874    0.055    0.055     ABSO  Unknown process
-#   2    -7.135    0.067    0.022    -0.0000    0.0000    0.000    0.055     ABSO  Unknown process
+#   0    -4.047   -0.311    1.172    -0.0000    0.0000    0.000    0.000     ABSO  
+#   1    -4.047   -0.311    1.172    -0.0000    0.0000    0.000    0.000     ABSO  Unknown process
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 24     Parent ID = 23
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.135    0.067    0.022     0.5110    0.0000    0.000    0.000     ABSO  
-#   1    -7.151   -0.045    0.027     0.4612    0.0498    0.113    0.113     ABSO  Unknown process
-#   2    -7.155   -0.434    0.237     0.0000    0.4612    0.441    0.555     ABSO  Unknown process
+#   0    -4.047   -0.311    1.172     0.5110    0.0000    0.000    0.000     ABSO  
+#   1    -4.061   -0.408    1.176     0.0000    0.5110    0.098    0.098     ABSO  Unknown process
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 25     Parent ID = 23
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.135    0.067    0.022     0.5110    0.0000    0.000    0.000     ABSO  
-#   1    -6.922    1.544   -0.042     0.0000    0.5110    1.494    1.494     ABSO  Unknown process
+#   0    -4.047   -0.311    1.172     0.5110    0.0000    0.000    0.000     ABSO  
+#   1    -3.668    2.323    1.057     0.0000    0.5110    2.664    2.664     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 26     Parent ID = 0
+  Particle = e-     Track ID = 26     Parent ID = 22
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.338    0.021    0.003     0.7906    0.0000    0.000    0.000     ABSO  
-#   1    -6.740    0.212    0.043     0.3692    0.4214    0.629    0.629     ABSO  Unknown process
-#   2    -6.500   -0.161    0.243     0.3692    0.0000    0.487    1.116     ABSO  Unknown process
-#   3    -6.500   -0.161    0.243     0.3692    0.0000    0.000    1.116     GAPX  
-#   4    -6.142   -0.716    0.543     0.2866    0.0826    0.725    1.841     GAPX  Unknown process
-#   5    -6.000   -0.707    0.648     0.2866    0.0000    0.177    2.018     GAPX  Unknown process
-#   6    -6.000   -0.707    0.648     0.2866    0.0000    0.000    2.018     ABSO  
-#   7    -5.754   -0.691    0.828     0.0000    0.2866    0.305    2.323     ABSO  Unknown process
+#   0    -4.047   -0.311    1.172     6.0731    0.0000    0.000    0.000     ABSO  
+#   1    -3.992   -0.266    1.224     4.4737    1.5993    0.113    0.113     ABSO  Unknown process
+#   2    -3.984   -0.266    1.236     4.1261    0.2191    0.015    0.128     ABSO  Unknown process
+#   3    -3.978   -0.273    1.247     3.6187    0.2085    0.015    0.143     ABSO  Unknown process
+#   4    -3.962   -0.294    1.267     2.8360    0.5164    0.040    0.183     ABSO  Unknown process
+#   5    -3.940   -0.309    1.319     1.1530    1.6830    0.171    0.354     ABSO  Unknown process
+#   6    -3.943   -0.316    1.319    -0.0000    1.1530    0.087    0.441     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 27     Parent ID = 0
+  Particle = gamma     Track ID = 27     Parent ID = 26
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.365    0.013    0.003     0.1629    0.0000    0.000    0.000     ABSO  
-#   1    -7.344    0.018    0.004     0.0000    0.1629    0.022    0.022     ABSO  Unknown process
+#   0    -3.962   -0.294    1.267     0.2663    0.0000    0.000    0.000     ABSO  
+#   1    -3.940   -0.304    1.269     0.0000    0.2663    0.024    0.024     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 28     Parent ID = 0
+  Particle = gamma     Track ID = 28     Parent ID = 26
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.386    0.011    0.003     2.6534    0.0000    0.000    0.000     ABSO  
-#   1    -7.205    0.036    0.011     2.2991    0.3542    0.182    0.182     ABSO  Unknown process
-#   2    -7.082    0.038   -0.011     0.0000    1.2771    0.125    0.307     ABSO  Unknown process
+#   0    -3.978   -0.273    1.247     0.2989    0.0000    0.000    0.000     ABSO  
+#   1    -3.879   -0.295    1.270     0.0000    0.2989    0.104    0.104     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = e+     Track ID = 29     Parent ID = 28
+  Particle = gamma     Track ID = 29     Parent ID = 26
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.082    0.038   -0.011    -0.0000    0.0000    0.000    0.000     ABSO  
-#   1    -7.082    0.038   -0.011    -0.0000    0.0000    0.000    0.000     ABSO  Unknown process
+#   0    -3.984   -0.266    1.236     0.1285    0.0000    0.000    0.000     ABSO  
+#   1    -3.982   -0.266    1.244     0.0000    0.1285    0.008    0.008     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 30     Parent ID = 29
+  Particle = e-     Track ID = 30     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.082    0.038   -0.011     0.5110    0.0000    0.000    0.000     ABSO  
-#   1    -7.097   -0.737    0.532     0.0000    0.5110    0.946    0.946     ABSO  Unknown process
+#   0    -7.350   -0.016    0.010     2.0403    0.0000    0.000    0.000     ABSO  
+#   1    -7.346    0.008    0.008     1.5544    0.4859    0.038    0.038     ABSO  Unknown process
+#   2    -7.365    0.012    0.014     1.2272    0.3272    0.038    0.075     ABSO  Unknown process
+#   3    -7.366    0.014    0.022    -0.0000    1.2272    0.093    0.168     ABSO  Unknown process
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 31     Parent ID = 29
+  Particle = gamma     Track ID = 31     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.082    0.038   -0.011     0.5110    0.0000    0.000    0.000     ABSO  
-#   1    -7.080    0.157   -0.094     0.4555    0.0555    0.146    0.146     ABSO  Unknown process
-#   2    -7.009    0.487   -0.750     0.4306    0.0249    0.737    0.883     ABSO  Unknown process
-#   3    -6.912    0.730   -0.992     0.0000    0.4306    0.357    1.240     ABSO  Unknown process
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 32     Parent ID = 0
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.401    0.009    0.004     0.5708    0.0000    0.000    0.000     ABSO  
-#   1    -6.500    0.101   -0.001     0.5708    0.0000    0.905    0.905     ABSO  Unknown process
-#   2    -6.500    0.101   -0.001     0.5708    0.0000    0.000    0.905     GAPX  
-#   3    -6.000    0.152   -0.004     0.5708    0.0000    0.503    1.408     GAPX  Unknown process
-#   4    -6.000    0.152   -0.004     0.5708    0.0000    0.000    1.408     ABSO  
-#   5    -5.000    0.254   -0.009     0.5708    0.0000    1.005    2.413     ABSO  Unknown process
-#   6    -5.000    0.254   -0.009     0.5708    0.0000    0.000    2.413     GAPX  
-#   7    -4.500    0.305   -0.011     0.5708    0.0000    0.503    2.916     GAPX  Unknown process
-#   8    -4.500    0.305   -0.011     0.5708    0.0000    0.000    2.916     ABSO  
-#   9    -3.500    0.407   -0.016     0.5708    0.0000    1.005    3.921     ABSO  Unknown process
-#  10    -3.500    0.407   -0.016     0.5708    0.0000    0.000    3.921     GAPX  
-#  11    -3.000    0.458   -0.019     0.5708    0.0000    0.503    4.424     GAPX  Unknown process
-#  12    -3.000    0.458   -0.019     0.5708    0.0000    0.000    4.424     ABSO  
-#  13    -2.723    0.487   -0.020     0.4822    0.0886    0.278    4.702     ABSO  Unknown process
-#  14    -2.309    0.640    0.235     0.2306    0.2516    0.510    5.212     ABSO  Unknown process
-#  15    -2.300    0.628    0.222     0.0000    0.2306    0.020    5.232     ABSO  Unknown process
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 33     Parent ID = 0
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.464    0.001    0.002     7.0863    0.0000    0.000    0.000     ABSO  
-#   1    -6.868    0.028   -0.006     0.0000    0.3565    0.596    0.596     ABSO  Unknown process
-
-****************************************************************************************************
-  Particle = e+     Track ID = 34     Parent ID = 33
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.868    0.028   -0.006    -0.0000    0.0000    0.000    0.000     ABSO  
-#   1    -6.868    0.028   -0.006    -0.0000    0.0000    0.000    0.000     ABSO  Unknown process
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 35     Parent ID = 34
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.868    0.028   -0.006     0.5110    0.0000    0.000    0.000     ABSO  
-#   1    -6.845    0.029   -0.005     0.2106    0.3004    0.023    0.023     ABSO  Unknown process
-#   2    -6.942    0.133   -0.198     0.0000    0.2106    0.239    0.262     ABSO  Unknown process
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 36     Parent ID = 34
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.868    0.028   -0.006     0.5110    0.0000    0.000    0.000     ABSO  
-#   1    -7.500    0.006   -0.036     0.5110    0.0000    0.633    0.633     ABSO  Unknown process
-#   2    -7.500    0.006   -0.036     0.5110    0.0000    0.000    0.633     WRLD  
-#   3    -9.000   -0.045   -0.107     0.5110    0.0000    1.503    2.136     WRLD  Unknown process
-
-****************************************************************************************************
-  Particle = e-     Track ID = 37     Parent ID = 33
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.868    0.028   -0.006     5.7078    0.0000    0.000    0.000     ABSO  
-#   1    -6.816   -0.024   -0.010     4.5693    1.1385    0.092    0.092     ABSO  Unknown process
-#   2    -6.774   -0.056   -0.011     3.5599    0.8509    0.065    0.157     ABSO  Unknown process
-#   3    -6.772   -0.057   -0.011     2.9164    0.0295    0.002    0.159     ABSO  Unknown process
-#   4    -6.763   -0.091   -0.024     2.3309    0.5855    0.055    0.214     ABSO  Unknown process
-#   5    -6.756   -0.060   -0.057     0.6908    1.4902    0.125    0.340     ABSO  Unknown process
-#   6    -6.751   -0.056   -0.058     0.3622    0.1677    0.015    0.355     ABSO  Unknown process
-#   7    -6.751   -0.055   -0.057    -0.0000    0.3622    0.020    0.374     ABSO  Unknown process
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 38     Parent ID = 37
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.751   -0.056   -0.058     0.1609    0.0000    0.000    0.000     ABSO  
-#   1    -6.746   -0.045   -0.050     0.0000    0.1609    0.014    0.014     ABSO  Unknown process
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 39     Parent ID = 37
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.756   -0.060   -0.057     0.1498    0.0000    0.000    0.000     ABSO  
-#   1    -6.748   -0.115   -0.096     0.0000    0.1498    0.068    0.068     ABSO  Unknown process
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 40     Parent ID = 37
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.772   -0.057   -0.011     0.6140    0.0000    0.000    0.000     ABSO  
-#   1    -6.753   -0.063   -0.018     0.0000    0.6140    0.021    0.021     ABSO  Unknown process
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 41     Parent ID = 37
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.774   -0.056   -0.011     0.1585    0.0000    0.000    0.000     ABSO  
-#   1    -6.739   -0.066   -0.012     0.0000    0.1585    0.037    0.037     ABSO  Unknown process
+#   0    -7.456   -0.002    0.002     0.0952    0.0000    0.000    0.000     ABSO  
+#   1    -7.413   -0.004    0.005     0.0000    0.0952    0.043    0.043     ABSO  Unknown process
 --- Finish event 
-   Absorber: total energy (MeV):  46.308       total track length (cm):    2.701
-   Gap:      total energy (MeV):   0.083       total track length (cm):    0.000
+   Absorber: total energy (MeV):  49.997       total track length (cm):    3.097
+   Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 Time of this run:   User=0.01s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
