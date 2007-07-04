@@ -1,4 +1,4 @@
-# $Id: Makefile.linux,v 1.4 2006/12/12 17:22:10 brun Exp $
+# $Id: Makefile.linux,v 1.5 2007/05/31 10:24:30 brun Exp $
 
 #------------------------------------------------
 # The Geant4 Virtual Monte Carlo package
@@ -20,7 +20,7 @@ CC    = gcc
 
 # Global optimisation
   ifndef G4NO_OPTIMISE
-    OPT  = -O
+    OPT  = -O2
   else
     ifdef G4DEBUG
       OPT  = -g
