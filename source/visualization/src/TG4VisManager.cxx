@@ -1,4 +1,4 @@
-// $Id: TG4VisManager.cxx,v 1.7 2006/12/15 09:30:30 brun Exp $
+// $Id: TG4VisManager.cxx,v 1.8 2007/05/31 10:24:33 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -61,7 +61,6 @@
 // Not needing external packages or libraries...
 #include "G4ASCIITree.hh"
 #include "G4DAWNFILE.hh"
-#include "G4GAGTree.hh"
 #include "G4HepRepFile.hh"
 #include "G4HepRep.hh"
 #include "G4RayTracer.hh"
@@ -134,7 +133,6 @@ void TG4VisManager::RegisterGraphicsSystems()
   // Graphics Systems not needing external packages or libraries...
   RegisterGraphicsSystem (new G4ASCIITree);
   RegisterGraphicsSystem (new G4DAWNFILE);
-  RegisterGraphicsSystem (new G4GAGTree);
   RegisterGraphicsSystem (new G4HepRepFile);
   RegisterGraphicsSystem (new G4HepRep);
   RegisterGraphicsSystem (new G4RayTracer);
