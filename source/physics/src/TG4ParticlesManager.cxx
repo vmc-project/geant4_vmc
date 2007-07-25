@@ -1,4 +1,4 @@
-// $Id: TG4ParticlesManager.cxx,v 1.10 2007/05/10 14:44:53 brun Exp $
+// $Id: TG4ParticlesManager.cxx,v 1.11 2007/05/31 10:24:33 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -121,20 +121,23 @@ void TG4ParticlesManager::DefineParticles()
   TDatabasePDG *pdgDB = TDatabasePDG::Instance();
 
   // optical phothon
-  pdgDB->AddParticle("Cherenkov", "Cherenkov", 0, kFALSE,
-                     0,0,"Special",kspe+50);
+  if ( !pdgDB->GetParticle(kspe+50) )
+    pdgDB->AddParticle("Cherenkov", "Cherenkov", 0, kFALSE,
+                       0,0,"Special",kspe+50);
   fParticleNameMap.Add("opticalphoton","Cherenkov");
 
   // feedback phothon
-  pdgDB->AddParticle("FeedbackPhoton","FeedbackPhoton", 0, kFALSE,
-                     0, 0, "Special", kspe+51);
+  if ( !pdgDB->GetParticle(kspe+51) )
+    pdgDB->AddParticle("FeedbackPhoton","FeedbackPhoton", 0, kFALSE,
+                       0, 0, "Special", kspe+51);
   fParticleNameMap.AddInverse("opticalphoton","FeedbackPhoton");
 
   // generic ion
   // This particle should not appear in tracking (as it is commented 
   // in class G4GenericIon), but as it does, we map it anyway
-  pdgDB->AddParticle("GenericIon", "GenericIon",  0.938272, kTRUE,
-                     0, 1, "Special", kspe+60);
+  if ( !pdgDB->GetParticle(kspe+60) )
+    pdgDB->AddParticle("GenericIon", "GenericIon",  0.938272, kTRUE,
+                       0, 1, "Special", kspe+60);
   fParticleNameMap.Add("GenericIon","GenericIon");
   
   // Light ions
@@ -149,27 +152,27 @@ void TG4ParticlesManager::DefineParticles()
   G4ParticleDefinition* particle;
 
   particle = particleTable->FindParticle("deuteron");
-  if ( particle ) {
+  if ( particle && ! particleTable->GetParticle(particle->GetPDGEncoding()) ) {
     pdgDB->AddParticle("Deuteron","Deuteron",2*kGeV+8.071e-3, kTRUE,
 		       0, 3, "Ion", particle->GetPDGEncoding());
   }                       
                        
   particle = particleTable->FindParticle("triton");
-  if ( particle ) {
+  if ( particle && ! particleTable->GetParticle(particle->GetPDGEncoding()) ) {
     pdgDB->AddParticle("Triton","Triton",3*kGeV+14.931e-3,kFALSE,
 		     kHshGeV/(12.33*kYearsToSec), 3, "Ion", 
                      particle->GetPDGEncoding());
   }                       
                        
   particle = particleTable->FindParticle("alpha");
-  if ( particle ) {
+  if ( particle && ! particleTable->GetParticle(particle->GetPDGEncoding()) ) {
     pdgDB->AddParticle("Alpha","Alpha",4*kGeV+2.424e-3, kTRUE,
 		       kHshGeV/(12.33*kYearsToSec), 6, "Ion",
                        particle->GetPDGEncoding());
   }                       
 
   particle = particleTable->FindParticle("He3");
-  if ( particle ) {
+  if ( particle && ! particleTable->GetParticle(particle->GetPDGEncoding()) ) {
     pdgDB->AddParticle("HE3", "HE3", 3*kGeV+14.931e-3, kFALSE,
 		       0, 6, "Ion", particle->GetPDGEncoding());
   }                       
