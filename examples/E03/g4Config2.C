@@ -1,4 +1,4 @@
-// $Id: g4Config2.C,v 1.4 2006/12/18 15:43:18 brun Exp $
+// $Id: g4Config2.C,v 1.5 2007/05/31 10:24:31 brun Exp $
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
@@ -27,6 +27,11 @@ void Config()
   Ex03RunConfiguration2* runConfiguration 
     = new Ex03RunConfiguration2("geomRootToGeant4");
   
+  // Uncomment these lines to switch on special cuts
+  // TG4PhysicsListOptions options;
+  // options.SetSpecialCutsPhysics(true);
+  // runConfiguration->SetPhysicsListOptions(options);
+
   // TGeant4
   TGeant4* geant4
     = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration);

@@ -1,4 +1,4 @@
-// $Id: Ex03RunConfiguration2.cxx,v 1.1 2006/12/12 16:21:38 brun Exp $
+// $Id: Ex03RunConfiguration2.cxx,v 1.2 2007/08/09 13:43:33 brun Exp $
 //
 // Author: I. Hrivnacova
 //
@@ -42,8 +42,7 @@ G4VUserPhysicsList*  Ex03RunConfiguration2::CreatePhysicsList()
   
   // special processes from Geant4 VMC
   TG4PhysicsListOptions options;
-  options.SetSpecialCutsPhysics(true);
-  fSpecialPhysicsList = new TG4SpecialPhysicsList(options);
+  fSpecialPhysicsList = new TG4SpecialPhysicsList(fPhysicsListOptions);
   physicsList->AddPhysicsList(fSpecialPhysicsList);
 
   return physicsList;
