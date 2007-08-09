@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorMuon.h,v 1.6 2006/12/12 16:21:16 brun Exp $
+// $Id: TG4PhysicsConstructorMuon.h,v 1.7 2007/05/31 10:24:32 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -25,6 +25,7 @@
 #include <globals.hh>
 
 class G4MultipleScattering;
+class G4hMultipleScattering;
 class G4MuBremsstrahlung;
 class G4MuPairProduction;
 class G4MuIonisation;
@@ -47,13 +48,13 @@ class TG4PhysicsConstructorMuon: public TG4VPhysicsConstructor
 
     // data members
           // mu+ physics
-   G4MultipleScattering*   fMuPlusMultipleScattering;  //mu+ msc
+   G4hMultipleScattering*  fMuPlusMultipleScattering;  //mu+ msc
    G4MuBremsstrahlung*     fMuPlusBremsstrahlung ;     //mu+ Bremsstrahlung
    G4MuPairProduction*     fMuPlusPairProduction;      //mu+ pair production
    G4MuIonisation*         fMuPlusIonisation;          //mu+ ionisation
 
           // mu- physics
-   G4MultipleScattering*   fMuMinusMultipleScattering; //mu- msc
+   G4hMultipleScattering*  fMuMinusMultipleScattering; //mu- msc
    G4MuBremsstrahlung*     fMuMinusBremsstrahlung ;    //mu- Bremsstrahlung
    G4MuPairProduction*     fMuMinusPairProduction;     //mu- pair production
    G4MuIonisation*         fMuMinusIonisation;         //mu- ionisation

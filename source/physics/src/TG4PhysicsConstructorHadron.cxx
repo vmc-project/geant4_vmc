@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorHadron.cxx,v 1.6 2006/12/12 16:21:16 brun Exp $
+// $Id: TG4PhysicsConstructorHadron.cxx,v 1.7 2007/05/31 10:24:33 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -27,7 +27,7 @@
 #include <G4BaryonConstructor.hh>
 #include <G4ShortLivedConstructor.hh>
 
-#include <G4MultipleScattering.hh>
+#include <G4hMultipleScattering.hh>
 #include <G4hIonisation.hh>
 
 #include <G4HadronElasticProcess.hh>
@@ -509,7 +509,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForPionPlus()
 /// Construct processes for pi+.
 
   // create process
-  fPionPlusMult = new G4MultipleScattering();
+  fPionPlusMult = new G4hMultipleScattering();
   fPionPlusIonisation = new G4hIonisation();
 
   // add process
@@ -539,7 +539,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForPionMinus()
 /// Construct processes for pi-.
 
   // create process
-  fPionMinusMult = new G4MultipleScattering();
+  fPionMinusMult = new G4hMultipleScattering();
   fPionMinusIonisation = new G4hIonisation();
 
   // add process & set ordering
@@ -568,7 +568,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForKaonPlus()
 /// Construct processes for K+.
 
   // create process
-  fKaonPlusMult = new G4MultipleScattering();
+  fKaonPlusMult = new G4hMultipleScattering();
   fKaonPlusIonisation = new G4hIonisation();
 
   // add process
@@ -598,7 +598,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForKaonMinus()
 /// Construct processes for K-.
 
   // create process
-  fKaonMinusMult = new G4MultipleScattering();
+  fKaonMinusMult = new G4hMultipleScattering();
   fKaonMinusIonisation = new G4hIonisation();
 
   // add process & set ordering
@@ -627,7 +627,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForProton()
 /// Construct processes for proton.
 
   // create process
-  fProtonMult = new G4MultipleScattering();
+  fProtonMult = new G4hMultipleScattering();
   fProtonIonisation = new G4hIonisation();
 
   // add process
@@ -657,7 +657,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForAntiProton()
 /// Construct processes for anti-proton.
 
   // create process
-  fAntiProtonMult = new G4MultipleScattering();
+  fAntiProtonMult = new G4hMultipleScattering();
   fAntiProtonIonisation = new G4hIonisation();
   fAntiProtonAnnihilation = new G4AntiProtonAnnihilationAtRest();
 
@@ -689,7 +689,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForSigmaMinus()
 /// Construct processes for Sigma-.
 
   // create process
-  fSigmaMinusMult = new G4MultipleScattering();
+  fSigmaMinusMult = new G4hMultipleScattering();
   fSigmaMinusIonisation = new G4hIonisation();
 
   // add process & set ordering
@@ -718,7 +718,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForAntiSigmaMinus()
 /// Construct processes for anti-Sigma-.
 
   // create process
-  fAntiSigmaMinusMult = new G4MultipleScattering();
+  fAntiSigmaMinusMult = new G4hMultipleScattering();
   fAntiSigmaMinusIonisation = new G4hIonisation();
 
   // add process & set ordering
@@ -748,7 +748,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForSigmaPlus()
 /// Construct processes for Sigma+.
 
   // create process
-  fSigmaPlusMult = new G4MultipleScattering();
+  fSigmaPlusMult = new G4hMultipleScattering();
   fSigmaPlusIonisation = new G4hIonisation();
 
   // add process & set ordering
@@ -777,7 +777,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForAntiSigmaPlus()
 /// Construct processes for anti-Sigma+.
 
   // create process
-  fAntiSigmaPlusMult = new G4MultipleScattering();
+  fAntiSigmaPlusMult = new G4hMultipleScattering();
   fAntiSigmaPlusIonisation = new G4hIonisation();
 
   // add process & set ordering
@@ -807,7 +807,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForXiMinus()
 /// Construct processes for Xi-.
 
   // create process
-  fXiMinusMult = new G4MultipleScattering();
+  fXiMinusMult = new G4hMultipleScattering();
   fXiMinusIonisation = new G4hIonisation();
 
   // add process & set ordering
@@ -836,7 +836,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForAntiXiMinus()
 /// Construct processes for anti-Xi-.
 
   // create process
-  fAntiXiMinusMult = new G4MultipleScattering();
+  fAntiXiMinusMult = new G4hMultipleScattering();
   fAntiXiMinusIonisation = new G4hIonisation();
 
   // add process & set ordering
@@ -866,7 +866,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForOmegaMinus()
 /// Construct processes for Omega-.
 
   // create process
-  fOmegaMinusMult = new G4MultipleScattering();
+  fOmegaMinusMult = new G4hMultipleScattering();
   fOmegaMinusIonisation = new G4hIonisation();
 
   // add process & set ordering
@@ -895,7 +895,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForAntiOmegaMinus()
 /// Construct processes for pi+.
 
   // create process
-  fAntiOmegaMinusMult = new G4MultipleScattering();
+  fAntiOmegaMinusMult = new G4hMultipleScattering();
   fAntiOmegaMinusIonisation = new G4hIonisation();
 
   // add process & set ordering
@@ -937,7 +937,7 @@ void TG4PhysicsConstructorHadron::ConstructEMProcessForOther()
          particle->GetParticleName() != "chargedgeantino") {
         
       // create processes
-      G4VProcess* aMultipleScattering = new G4MultipleScattering();
+      G4VProcess* aMultipleScattering = new G4hMultipleScattering();
       G4VProcess* anIonisation = new G4hIonisation();
 
       // add processes

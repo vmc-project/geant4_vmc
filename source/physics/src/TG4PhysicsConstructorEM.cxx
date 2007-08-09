@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorEM.cxx,v 1.5 2006/01/13 16:59:38 brun Exp $
+// $Id: TG4PhysicsConstructorEM.cxx,v 1.6 2007/05/31 10:24:33 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -136,7 +136,7 @@ void TG4PhysicsConstructorEM::ConstructProcessForElectron()
   G4ProcessManager* pManager = G4Electron::Electron()->GetProcessManager();
   pManager->AddProcess(fElectronMultipleScattering, -1, 1, 1);
   pManager->AddProcess(fElectronIonisation,         -1, 2, 2);
-  pManager->AddProcess(fElectronBremsStrahlung,     -1,-1, 3);  
+  pManager->AddProcess(fElectronBremsStrahlung,     -1, 3, 3);  
 
   // map to G3 controls
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
@@ -166,7 +166,7 @@ void TG4PhysicsConstructorEM::ConstructProcessForPositron()
   G4ProcessManager * pManager = G4Positron::Positron()->GetProcessManager();
   pManager->AddProcess(fPositronMultipleScattering, -1, 1, 1);
   pManager->AddProcess(fPositronIonisation,         -1, 2, 2);
-  pManager->AddProcess(fPositronBremsStrahlung,     -1,-1, 3);  
+  pManager->AddProcess(fPositronBremsStrahlung,     -1, 3, 3);  
   pManager->AddProcess(fAnnihilation,                0,-1, 4);  
 
   // map to G3 controls

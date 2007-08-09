@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsListMessenger.cxx,v 1.7 2007/05/10 14:44:53 brun Exp $
+// $Id: TG4PhysicsListMessenger.cxx,v 1.8 2007/05/31 10:24:33 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -30,9 +30,7 @@ TG4PhysicsListMessenger::TG4PhysicsListMessenger(
   : G4UImessenger(),
     fPhysicsList(physicsList),
     fRangeCutCmd(0),
-    fProcessActivationCmd(0),
-    fSetCerenkovMaxPhotonsCmd(0),
-    fSetStackPopperSelectionCmd(0)
+    fSetCerenkovMaxPhotonsCmd(0)
 { 
 //
   fRangeCutCmd
@@ -46,12 +44,6 @@ TG4PhysicsListMessenger::TG4PhysicsListMessenger(
   fSetCerenkovMaxPhotonsCmd->SetParameterName("CerenkovMaxPhotons",false);
   fSetCerenkovMaxPhotonsCmd->SetRange("CerenkovMaxPhotons>=0");
   fSetCerenkovMaxPhotonsCmd->AvailableForStates(G4State_PreInit,G4State_Idle);  
-
-  fSetStackPopperSelectionCmd 
-    = new G4UIcmdWithAString("/mcPhysics/setStackPopperSelection",this);  
-  fSetStackPopperSelectionCmd->SetGuidance("Selects particles for stack popper process");
-  fSetStackPopperSelectionCmd->SetParameterName("StackPopperSelection",false);
-  fSetStackPopperSelectionCmd->AvailableForStates(G4State_PreInit);  
 }
 
 //______________________________________________________________________________
@@ -60,7 +52,6 @@ TG4PhysicsListMessenger::~TG4PhysicsListMessenger() {
 
   delete fRangeCutCmd;
   delete fSetCerenkovMaxPhotonsCmd;
-  delete fSetStackPopperSelectionCmd;
 }
 
 //
@@ -81,10 +72,5 @@ void TG4PhysicsListMessenger::SetNewValue(G4UIcommand* command,
     fPhysicsList
         ->SetMaxNumPhotonsPerStep(
              fSetCerenkovMaxPhotonsCmd->GetNewIntValue(newValue));
-  }  
-  else if (command == fSetStackPopperSelectionCmd) {
-    G4cout << "TG4PhysicsListMessenger::SetNewValue " << newValue << G4endl;
-    fPhysicsList
-        ->SetStackPopperSelection(newValue);
   }  
 }

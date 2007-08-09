@@ -1,4 +1,4 @@
-// $Id: TG4RunConfiguration.cxx,v 1.7 2006/12/12 16:21:16 brun Exp $
+// $Id: TG4RunConfiguration.cxx,v 1.8 2007/05/31 10:24:33 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -16,7 +16,9 @@
 
 #include "TG4RunConfiguration.h"
 #include "TG4DetConstruction.h"
+#include "TG4ComposedPhysicsList.h"
 #include "TG4ModularPhysicsList.h"
+#include "TG4SpecialPhysicsList.h"
 #include "TG4PrimaryGeneratorAction.h"
 #include "TG4RunAction.h"
 #include "TG4EventAction.h"
@@ -39,7 +41,7 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
                                          Bool_t specialStacking)
   : fUserGeometry(userGeometry),
     fSpecialStacking(specialStacking),
-    fPhysicsList(0),
+    fSpecialPhysicsList(0),
     fPhysicsListOptions(),
     fAGDDMessenger(0),
     fGDMLMessenger(0)
@@ -98,8 +100,16 @@ G4VUserPhysicsList* TG4RunConfiguration::CreatePhysicsList()
 {
 /// Create default Geant4 VMC physics list
 
-  fPhysicsList = new TG4ModularPhysicsList(fPhysicsListOptions);
-  return fPhysicsList;
+  TG4ComposedPhysicsList* builder = new TG4ComposedPhysicsList();
+
+  // Geant4 VMC defalut physics
+  builder->AddPhysicsList(new TG4ModularPhysicsList(fPhysicsListOptions));
+  
+  // Geant4 VMC special physics  
+  fSpecialPhysicsList = new TG4SpecialPhysicsList(fPhysicsListOptions);
+  builder->AddPhysicsList(fSpecialPhysicsList);
+  
+  return builder;
 }  
 
 //_____________________________________________________________________________
@@ -159,7 +169,7 @@ void TG4RunConfiguration::SetPhysicsListOptions(
 {
 /// Set physics list options
 
-  if ( fPhysicsList ) {
+  if ( fSpecialPhysicsList ) {
     TG4Globals::Exception(
       "TG4RunConfiguration", "SetPhysicsListOptions",
       "Physics list is already constructed." + TG4Globals::Endl() +
@@ -170,11 +180,11 @@ void TG4RunConfiguration::SetPhysicsListOptions(
 }                                   
 
 //_____________________________________________________________________________
-G4VUserPhysicsList* TG4RunConfiguration::GetPhysicsList() const
+TG4SpecialPhysicsList* TG4RunConfiguration::GetSpecialPhysicsList() const
 {
 /// Return its physics list.
   
-  return fPhysicsList;
+  return fSpecialPhysicsList;
 }
 
 //_____________________________________________________________________________

@@ -1,4 +1,4 @@
-// $Id: TGeant4.cxx,v 1.22 2007/03/22 09:04:09 brun Exp $
+// $Id: TGeant4.cxx,v 1.23 2007/05/31 10:24:33 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -66,7 +66,7 @@ TGeant4::TGeant4(const char* name, const char* title,
   //G4cout << "TG4SDManager has been created." << G4endl;
   
   // create physics manager  
-  fPhysicsManager = new TG4PhysicsManager(configuration->GetPhysicsList());
+  fPhysicsManager = new TG4PhysicsManager(configuration->GetSpecialPhysicsList());
   // add verbose level
   //G4cout << "TG4GeometryManager has been created." << G4endl;
   
@@ -123,7 +123,7 @@ TGeant4::TGeant4(const char* name, const char* title,
   //G4cout << "TG4SDManager has been created." << G4endl;
   
   // create physics manager  
-  fPhysicsManager = new TG4PhysicsManager(configuration->GetPhysicsList());
+  fPhysicsManager = new TG4PhysicsManager(configuration->GetSpecialPhysicsList());
   // add verbose level
   //G4cout << "TG4GeometryManager has been created." << G4endl;
   

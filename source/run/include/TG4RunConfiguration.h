@@ -1,4 +1,4 @@
-// $Id: TG4RunConfiguration.h,v 1.9 2007/02/06 11:06:34 brun Exp $
+// $Id: TG4RunConfiguration.h,v 1.10 2007/05/31 10:24:33 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -41,6 +41,7 @@
 class TG4DetConstruction;
 class TG4TrackingAction;
 class TG4SteppingAction;
+class TG4SpecialPhysicsList;
 
 class G4VUserDetectorConstruction;
 class G4VUserPrimaryGeneratorAction;
@@ -74,18 +75,18 @@ class TG4RunConfiguration
     virtual void SetPhysicsListOptions(const TG4PhysicsListOptions& options);
 
     // get methods
-    G4VUserPhysicsList*  GetPhysicsList() const;
+    TG4SpecialPhysicsList* GetSpecialPhysicsList() const;
     TString  GetUserGeometry() const;
     Bool_t   IsSpecialStacking() const;
 
   protected:
     // data members
-    TString                fUserGeometry;     //  way of building geometry
-    Bool_t                 fSpecialStacking;  //  option to include special stacking
-    G4VUserPhysicsList*    fPhysicsList;      //  user physics list
-    TG4PhysicsListOptions  fPhysicsListOptions;// physics list options
-    G4UImessenger*         fAGDDMessenger;    //! XML messenger
-    G4UImessenger*         fGDMLMessenger;    //! XML messenger
+    TString                fUserGeometry;      //  way of building geometry
+    Bool_t                 fSpecialStacking;   //  option to include special stacking
+    TG4SpecialPhysicsList* fSpecialPhysicsList;//  special physics list
+    TG4PhysicsListOptions  fPhysicsListOptions;//  physics list options
+    G4UImessenger*         fAGDDMessenger;     //! XML messenger
+    G4UImessenger*         fGDMLMessenger;     //! XML messenger
 
   private:
     TG4RunConfiguration();

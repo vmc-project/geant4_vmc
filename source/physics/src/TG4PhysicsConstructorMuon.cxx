@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorMuon.cxx,v 1.4 2006/01/13 16:59:39 brun Exp $
+// $Id: TG4PhysicsConstructorMuon.cxx,v 1.5 2007/05/31 10:24:33 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -33,6 +33,7 @@
 #include <G4AntiNeutrinoMu.hh>
 
 #include <G4MultipleScattering.hh>
+#include <G4hMultipleScattering.hh>
 #include <G4MuBremsstrahlung.hh>
 #include <G4MuPairProduction.hh>
 #include <G4MuIonisation.hh>
@@ -109,7 +110,7 @@ void TG4PhysicsConstructorMuon::ConstructProcessForMuonPlus()
 /// Constructs electromagnetic processes for mu+.
   
   // create processes
-  fMuPlusMultipleScattering = new G4MultipleScattering();
+  fMuPlusMultipleScattering = new G4hMultipleScattering();
   fMuPlusBremsstrahlung = new G4MuBremsstrahlung();
   fMuPlusPairProduction = new G4MuPairProduction();
   fMuPlusIonisation = new G4MuIonisation();
@@ -143,7 +144,7 @@ void TG4PhysicsConstructorMuon::ConstructProcessForMuonMinus()
 /// Constructs electromagnetic processes for mu-.
   
   // create processes
-  fMuMinusMultipleScattering = new G4MultipleScattering();
+  fMuMinusMultipleScattering = new G4hMultipleScattering();
   fMuMinusBremsstrahlung = new G4MuBremsstrahlung();
   fMuMinusPairProduction = new G4MuPairProduction();
   fMuMinusIonisation = new G4MuIonisation();

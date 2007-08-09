@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.16 2007/05/31 10:24:33 brun Exp $
+// $Id: TG4PhysicsManager.cxx,v 1.17 2007/06/28 06:45:23 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -15,7 +15,7 @@
 // See the class description in the header file.
 
 #include "TG4PhysicsManager.h"
-#include "TG4ModularPhysicsList.h"
+#include "TG4SpecialPhysicsList.h"
 #include "TG4ParticlesManager.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4StateManager.h"
@@ -38,12 +38,12 @@
 TG4PhysicsManager* TG4PhysicsManager::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4PhysicsManager::TG4PhysicsManager(G4VUserPhysicsList* physicsList)
+TG4PhysicsManager::TG4PhysicsManager(TG4SpecialPhysicsList* physicsList)
   : TG4Verbose("physicsManager"),
     fMessenger(this),
     fParticlesManager(0),
     fG3PhysicsManager(0),
-    fPhysicsList(physicsList),
+    fSpecialPhysicsList(physicsList),
     fProcessMCMap(),
     fProcessControlMap()
 { 
@@ -593,11 +593,8 @@ void TG4PhysicsManager::SetProcessActivation()
 /// (In)Activate built processes according
 /// to the setup in TG4G3PhysicsManager::fControlVector.
 
-  TG4ModularPhysicsList* tg4PhysicsList 
-    = dynamic_cast<TG4ModularPhysicsList*>(fPhysicsList);
-
-  if (tg4PhysicsList)
-    tg4PhysicsList->SetProcessActivation();
+  if (fSpecialPhysicsList)
+    fSpecialPhysicsList->SetProcessActivation();
 }       
 
 

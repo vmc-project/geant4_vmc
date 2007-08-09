@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsListMessenger.h,v 1.8 2007/05/10 14:44:53 brun Exp $
+// $Id: TG4PhysicsListMessenger.h,v 1.9 2007/05/31 10:24:32 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -17,7 +17,6 @@
 /// Implements commands:
 /// - /mcPhysics/rangeCut [cutValue]
 /// - /mcPhysics/setCerenkovMaxPhotons [maxNofPhotons]
-/// - /mcPhysics/setStackPopperSelection [particleName1 particleName2 ...]
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -55,11 +54,8 @@ class TG4PhysicsListMessenger: public G4UImessenger
 
     // commands    
     G4UIcmdWithADouble*       fRangeCutCmd;   //rangeCut command  
-    G4UIcmdWithoutParameter*  fProcessActivationCmd; //.
-                                              //setProcessActivation command
     G4UIcmdWithAnInteger*     fSetCerenkovMaxPhotonsCmd; 
                                               //setCerenkovMaxPhotons command                                                  
-    G4UIcmdWithAString*       fSetStackPopperSelectionCmd;                                                   
-};                                            //setStackPopperSelection command
+}; 
 
 #endif //TG4_PHYSICS_LIST_MESSENGER_H

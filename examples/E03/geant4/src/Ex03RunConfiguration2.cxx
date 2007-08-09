@@ -1,4 +1,4 @@
-// $Id: Ex03RunConfiguration2.cxx,v 1.3 2006/04/12 10:39:33 brun Exp $
+// $Id: Ex03RunConfiguration2.cxx,v 1.1 2006/12/12 16:21:38 brun Exp $
 //
 // Author: I. Hrivnacova
 //
@@ -10,6 +10,8 @@
 //#include "ExN03PrimaryGeneratorAction.hh"
 //#include "ExN03DetectorConstruction.hh"
 
+#include "TG4ComposedPhysicsList.h"
+#include "TG4SpecialPhysicsList.h"
 #include <LHEP_BERT.hh>
 
 //_____________________________________________________________________________
@@ -33,7 +35,18 @@ G4VUserPhysicsList*  Ex03RunConfiguration2::CreatePhysicsList()
 {
 // Create LHEP_BERT physics list
 
-  return new LHEP_BERT();
+  TG4ComposedPhysicsList* physicsList = new TG4ComposedPhysicsList();
+  
+  // physics list from G4
+  physicsList->AddPhysicsList(new LHEP_BERT());
+  
+  // special processes from Geant4 VMC
+  TG4PhysicsListOptions options;
+  options.SetSpecialCutsPhysics(true);
+  fSpecialPhysicsList = new TG4SpecialPhysicsList(options);
+  physicsList->AddPhysicsList(fSpecialPhysicsList);
+
+  return physicsList;
 }  
 
 

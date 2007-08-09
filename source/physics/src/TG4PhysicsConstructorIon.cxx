@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsConstructorIon.cxx,v 1.6 2006/12/12 16:21:16 brun Exp $
+// $Id: TG4PhysicsConstructorIon.cxx,v 1.7 2007/05/31 10:24:33 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -33,8 +33,8 @@
 #include <G4LETritonInelastic.hh>
 #include <G4AlphaInelasticProcess.hh>
 #include <G4LEAlphaInelastic.hh>
-#include <G4hIonisation.hh>
-#include <G4MultipleScattering.hh>
+#include <G4hMultipleScattering.hh>
+#include <G4ionIonisation.hh>
 
 //_____________________________________________________________________________
 TG4PhysicsConstructorIon::TG4PhysicsConstructorIon(const G4String& name)
@@ -224,8 +224,8 @@ void TG4PhysicsConstructorIon::ConstructEMProcessForGenericIon()
 /// Construct electromagnetic processes for generic ion.
 
   // create process
-  fIonMultipleScattering = new G4MultipleScattering();
-  fIonIonisation = new G4hIonisation();
+  fIonMultipleScattering = new G4hMultipleScattering();
+  fIonIonisation = new G4ionIonisation();
 
   // add process
   G4ProcessManager* pManager = G4GenericIon::GenericIon()->GetProcessManager();
@@ -249,8 +249,8 @@ void TG4PhysicsConstructorIon::ConstructEMProcessForDeuteron()
 /// Construct electromagnetic processes for deuteron.
 
   // create process
-  fDeuteronMultipleScattering = new G4MultipleScattering();
-  fDeuteronIonisation = new G4hIonisation();
+  fDeuteronMultipleScattering = new G4hMultipleScattering();
+  fDeuteronIonisation = new G4ionIonisation();
 
   // add process
   G4ProcessManager* pManager = G4Deuteron::Deuteron()->GetProcessManager();
@@ -274,8 +274,8 @@ void TG4PhysicsConstructorIon::ConstructEMProcessForTriton()
 /// Construct electromagnetic processes for triton.
 
   // create process
-  fTritonMultipleScattering = new G4MultipleScattering();
-  fTritonIonisation = new G4hIonisation();
+  fTritonMultipleScattering = new G4hMultipleScattering();
+  fTritonIonisation = new G4ionIonisation();
 
   // add process
   G4ProcessManager* pManager = G4Triton::Triton()->GetProcessManager();
@@ -299,8 +299,8 @@ void TG4PhysicsConstructorIon::ConstructEMProcessForAlpha()
 /// Construct electromagnetic processes for alpha.
 
   // create process
-  fAlphaMultipleScattering = new G4MultipleScattering();
-  fAlphaIonisation = new G4hIonisation();
+  fAlphaMultipleScattering = new G4hMultipleScattering();
+  fAlphaIonisation = new G4ionIonisation();
 
   // add process
   G4ProcessManager* pManager = G4Alpha::Alpha()->GetProcessManager();
@@ -324,8 +324,8 @@ void TG4PhysicsConstructorIon::ConstructEMProcessForHe3()
 /// Construct electromagnetic processes for He3.
 
   // create process
-  fHe3MultipleScattering = new G4MultipleScattering();
-  fHe3Ionisation = new G4hIonisation();
+  fHe3MultipleScattering = new G4hMultipleScattering();
+  fHe3Ionisation = new G4ionIonisation();
 
   // add process
   G4ProcessManager* pManager = G4He3::He3()->GetProcessManager();

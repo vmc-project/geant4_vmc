@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.h,v 1.11 2007/05/10 14:44:53 brun Exp $
+// $Id: TG4ModularPhysicsList.h,v 1.12 2007/05/31 10:24:32 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -32,7 +32,6 @@
 #include <globals.hh>
 
 class TG4PhysicsConstructorOptical;
-class TG4PhysicsConstructorStackPopper;
 
 class TG4ModularPhysicsList: public G4VModularPhysicsList,
                              public TG4Verbose
@@ -51,10 +50,8 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
     void DumpAllProcesses() const;
 
     // set methods
-    void SetProcessActivation();
     void SetRangeCut(Double_t value);
     void SetMaxNumPhotonsPerStep(Int_t maxNumPhotons);
-    void SetStackPopperSelection(const G4String& selection);
     
   protected:
     // static data members
@@ -63,7 +60,6 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
     // data members
     TG4PhysicsListMessenger        fMessenger; //messenger
     TG4PhysicsConstructorOptical*  fPhysicsConstructorOptical;
-    TG4PhysicsConstructorStackPopper*  fPhysicsConstructorStackPopper;
     TG4PhysicsListOptions          fOptions;
 
   private:
@@ -72,10 +68,6 @@ class TG4ModularPhysicsList: public G4VModularPhysicsList,
 
     // methods
     void Configure();
-    void SetProcessActivation(G4ProcessManager* processManager,
-                              G4int processId, G4bool activation);
-    void SetSpecialControlsActivation();
-    void SetSpecialCutsActivation();
 };
 
 #endif //TG4_MODULAR_PHYSICS_LIST_H

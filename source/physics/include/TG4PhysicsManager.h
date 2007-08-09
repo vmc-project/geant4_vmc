@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.h,v 1.9 2006/12/12 16:21:16 brun Exp $
+// $Id: TG4PhysicsManager.h,v 1.10 2007/05/31 10:24:32 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -38,6 +38,7 @@
 class TG4ParticlesManager;
 class TG4G3PhysicsManager;
 class TG4G3ProcessMap;
+class TG4SpecialPhysicsList;
 
 class G4ParticleDefinition;
 class G4VProcess;
@@ -46,7 +47,7 @@ class G4VUserPhysicsList;
 class TG4PhysicsManager : public TG4Verbose
 {
   public:
-    TG4PhysicsManager(G4VUserPhysicsList* physicsList);
+    TG4PhysicsManager(TG4SpecialPhysicsList* physicsList);
     virtual ~TG4PhysicsManager();
 
     // static access method
@@ -85,10 +86,10 @@ class TG4PhysicsManager : public TG4Verbose
     TMCProcess GetOpBoundaryStatus(const G4VProcess* process);
 
     // set methods
-    void SetPhysicsList(G4VUserPhysicsList* physicsList);
+    void SetSpecialPhysicsList(TG4SpecialPhysicsList* physicsList);
     
     // get methods
-    G4VUserPhysicsList* GetPhysicsList() const; 
+    TG4SpecialPhysicsList* GetSpecialPhysicsList() const; 
    
   private:
     TG4PhysicsManager();
@@ -106,10 +107,10 @@ class TG4PhysicsManager : public TG4Verbose
     static TG4PhysicsManager*  fgInstance; //this instance
     
     // data members
-    TG4PhysicsMessenger    fMessenger;        //messenger
-    TG4ParticlesManager*   fParticlesManager; //particles manager
-    TG4G3PhysicsManager*   fG3PhysicsManager; //G3 physics manager
-    G4VUserPhysicsList*    fPhysicsList; //physics list
+    TG4PhysicsMessenger    fMessenger;         //messenger
+    TG4ParticlesManager*   fParticlesManager;  //particles manager
+    TG4G3PhysicsManager*   fG3PhysicsManager;  //G3 physics manager
+    TG4SpecialPhysicsList* fSpecialPhysicsList;//special physics list
     TG4ProcessMCMap        fProcessMCMap;//the mapping between G4 process names
                                          //and TMCProcess codes
     TG4ProcessControlMap   fProcessControlMap; //the mapping between G4 processes
@@ -123,14 +124,15 @@ inline TG4PhysicsManager* TG4PhysicsManager::Instance() {
   return fgInstance; 
 }
 
-inline void TG4PhysicsManager::SetPhysicsList(G4VUserPhysicsList* physicsList) { 
+inline void TG4PhysicsManager::SetSpecialPhysicsList(
+                                  TG4SpecialPhysicsList* physicsList) { 
   /// Set the physics list
-  fPhysicsList = physicsList; 
+  fSpecialPhysicsList = physicsList; 
 }
 
-inline G4VUserPhysicsList* TG4PhysicsManager::GetPhysicsList() const { 
+inline TG4SpecialPhysicsList* TG4PhysicsManager::GetSpecialPhysicsList() const { 
   /// Return the physics list
-  return fPhysicsList; 
+  return fSpecialPhysicsList; 
 }
 
 #endif //TG4_PHYSICS_MANAGER_H

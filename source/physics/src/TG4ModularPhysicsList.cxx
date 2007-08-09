@@ -1,4 +1,4 @@
-// $Id: TG4ModularPhysicsList.cxx,v 1.11 2007/05/10 14:44:53 brun Exp $
+// $Id: TG4ModularPhysicsList.cxx,v 1.12 2007/05/31 10:24:33 brun Exp $
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -21,10 +21,6 @@
 #include "TG4PhysicsConstructorHadron.h"
 #include "TG4PhysicsConstructorIon.h"
 #include "TG4PhysicsConstructorOptical.h"
-#include "TG4PhysicsConstructorSpecialCuts.h"
-#include "TG4PhysicsConstructorSpecialControls.h"
-#include "TG4PhysicsConstructorStepLimiter.h"
-#include "TG4PhysicsConstructorStackPopper.h"
 #include "TG4GeometryServices.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4G3ControlVector.h"
@@ -32,12 +28,6 @@
 
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
-#include <G4BosonConstructor.hh>
-#include <G4LeptonConstructor.hh>
-#include <G4MesonConstructor.hh>
-#include <G4BaryonConstructor.hh>
-#include <G4IonConstructor.hh>
-#include <G4ShortLivedConstructor.hh>
 #include <G4ProcessTable.hh>
 
 const G4double TG4ModularPhysicsList::fgkDefaultCutValue = 1.0 * mm;
@@ -48,7 +38,6 @@ TG4ModularPhysicsList::TG4ModularPhysicsList(const TG4PhysicsListOptions& option
     TG4Verbose("physicsList"),
     fMessenger(this),
     fPhysicsConstructorOptical(0),
-    fPhysicsConstructorStackPopper(0),
     fOptions(options)
  {
 //
@@ -65,7 +54,6 @@ TG4ModularPhysicsList::TG4ModularPhysicsList()
     TG4Verbose("physicsList"),
     fMessenger(this),
     fPhysicsConstructorOptical(0),
-    fPhysicsConstructorStackPopper(0),
     fOptions()
  {
 //
@@ -121,22 +109,6 @@ void TG4ModularPhysicsList::Configure()
     RegisterPhysics(fPhysicsConstructorOptical);
   }  
 
-  // special processes
-  if ( fOptions.GetSpecialCutsPhysics() ) 
-    RegisterPhysics(new TG4PhysicsConstructorSpecialCuts(verboseLevel));
-
-  if ( fOptions.GetSpecialControlsPhysics() ) 
-    RegisterPhysics(new TG4PhysicsConstructorSpecialControls(verboseLevel));
-
-  if ( fOptions.GetStepLimiterPhysics() ) 
-    RegisterPhysics(new TG4PhysicsConstructorStepLimiter(verboseLevel));
-
-  if ( fOptions.GetStackPopperPhysics() ) {
-    fPhysicsConstructorStackPopper
-      = new TG4PhysicsConstructorStackPopper(verboseLevel); 
-    RegisterPhysics(fPhysicsConstructorStackPopper);
-  }  
-
   // warn about not allowed combinations
   if ( fOptions.GetMuonPhysics() && !fOptions.GetEMPhysics() ) {
     TG4Globals::Warning(
@@ -148,154 +120,6 @@ void TG4ModularPhysicsList::Configure()
          // all created physics constructors are deleted
          // in the base class destructor
 }    
-
-//_____________________________________________________________________________
-void TG4ModularPhysicsList::SetProcessActivation(G4ProcessManager* processManager,
-                                          G4int  processId, G4bool activation)
-{                                      
-/// Set process activation for the given process.
-
-  G4String strActivation = "Activate   ";
-  if (!activation) strActivation = "Inactivate ";
-
-  if (TG4VVerbose::VerboseLevel() > 1) {
-    G4cout << strActivation << " process " 
-           << (*processManager->GetProcessList())[processId]->GetProcessName() 
-           << " for " << processManager->GetParticleType()->GetParticleName() 
-           << G4endl;
-  }
-  
-  processManager->SetProcessActivation(processId, activation);        
-}  
-
-//_____________________________________________________________________________
-void TG4ModularPhysicsList::SetSpecialControlsActivation()
-{
-/// (In)Activate built processes according
-/// to the setup in TG4G3PhysicsManager::fControlVector.
-
-  TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
-  
-  TG4G3ControlVector* controlVector = g3PhysicsManager->GetControlVector();
-  TG4boolVector*    isControlVector = g3PhysicsManager->GetIsControlVector(); 
-
-  if (!controlVector || !isControlVector) {
-    TG4Globals::Exception(
-      "TG4ModularPhysicsList", "SetSpecialControlsActivation",
-      "Vectors of processes controls is not set.");
-    return;
-  }    
-  
-  theParticleIterator->reset();
-  while ((*theParticleIterator)())
-  {
-    G4ParticleDefinition* particle = theParticleIterator->value();
-    G4ProcessManager* processManager = particle->GetProcessManager(); 
-      
-    G4ProcessVector* processVector = processManager->GetProcessList();
-  
-    // activate or inactivate processes according to 
-    // global setting in the control vector in G3 physics manager
-    //
-    for (G4int i=0; i<processVector->length(); i++) {
-
-      TG4G3ControlValue control
-         = controlVector->GetControlValue((*processVector)[i]);
-      G4bool activation = processManager->GetProcessActivation(i);
-      
-      if (control != kUnsetControlValue) {
-         if (!TG4Globals::Compare(activation, control)) {
-
-          // set new process activation
-          G4bool activate;
-          if (control == kInActivate) activate = false; 
-          else                        activate = true;
-          
-          SetProcessActivation(processManager, i, activate);         
-        }
-      }
-    }          
-     
-    // activate or inactivate the special controls processes according to 
-    // setting in the isControl vector in G3 physics manager
-    //
-    //G4bool specialControls 
-    //  = TG4GeometryServices::Instance()->IsSpecialControls();  
-    G4bool specialControls 
-      = g3PhysicsManager->IsSpecialControls();  
-    TG4G3ParticleWSP particleWSP 
-      = g3PhysicsManager->GetG3ParticleWSP(particle);
-
-    if ( specialControls && particleWSP != kNofParticlesWSP ) { 
-      // special process is activated in case
-      // isControlVector in G3 physics manager is set
-      // or the special control is set by TG4Limits
-  
-      // get the special cut process
-      G4String processName = "specialControls";
-      G4VProcess* process = g3PhysicsManager->FindProcess(processName);
-      if (!process) {
-        TG4Globals::Exception(
-          "TG4ModularPhysicsList", "SetSpecialCutsActivation",
-          "The special control process for is not defined.");
-      }
-       
-      G4int index = processManager->GetProcessIndex(process);
-      SetProcessActivation(processManager, index, (*isControlVector)[particleWSP]);         
-    }
-  }  
-}
-
-//_____________________________________________________________________________
-void TG4ModularPhysicsList::SetSpecialCutsActivation()
-{
-/// (In)Activate built special cut processes according
-/// to the setup in TG4G3PhysicsManager
-
-  TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
-  TG4boolVector* isCutVector = g3PhysicsManager->GetIsCutVector(); 
-
-  if (!isCutVector) {
-    TG4Globals::Exception(
-      "TG4ModularPhysicsList", "SetSpecialCutsActivation",
-      "Vector of isCut booleans is not set.");
-    return;
-  }    
-  
-  theParticleIterator->reset();
-  while ((*theParticleIterator)())
-  {
-    G4ParticleDefinition* particle = theParticleIterator->value();
-    TG4G3ParticleWSP particleWSP 
-      = g3PhysicsManager->GetG3ParticleWSP(particle);
-    G4String name =
-      g3PhysicsManager->GetG3ParticleWSPName(particleWSP);
-
-    if ( (particleWSP !=kNofParticlesWSP) ) { 
-      // special process is activated in case
-      // cutVector (vector of kinetic energy cuts) is set
-      // or the special cut is set by TG4Limits
-  
-      G4ProcessManager* processManager 
-        = theParticleIterator->value()->GetProcessManager(); 
-      
-      // get the special cut process
-      G4String processName = "specialCutFor" + name;
-      G4VProcess* process = g3PhysicsManager->FindProcess(processName);
-      if (!process) {
-        TG4Globals::Exception(
-          "TG4ModularPhysicsList", "SetSpecialCutsActivation",
-          "The special cut process for " + TString(name) + " is not defined");
-      }
-       
-      // special process is activated in case
-      // cutVector (vector of kinetic energy cuts) is set
-      // or the special cut is set by TG4Limits
-      G4int index = processManager->GetProcessIndex(process);
-      SetProcessActivation(processManager, index, (*isCutVector)[particleWSP]);         
-    }
-  }    
-}
 
 //
 // public methods
@@ -433,26 +257,6 @@ void TG4ModularPhysicsList::SetRangeCut(G4double value)
 }  
 
 //_____________________________________________________________________________
-void TG4ModularPhysicsList::SetProcessActivation()
-{
-/// (In)Activate built processes according
-/// to the setup in TG4G3PhysicsManager
-
-  if ( fOptions.GetSpecialControlsPhysics() &&
-      (TG4G3PhysicsManager::Instance()->IsGlobalSpecialControls() ||
-       TG4G3PhysicsManager::Instance()->IsSpecialControls()) ) {
-       
-    SetSpecialControlsActivation();
-  }  
-       
-  if ( fOptions.GetSpecialCutsPhysics() &&
-       TG4G3PhysicsManager::Instance()->IsSpecialCuts() ) {
-  
-    SetSpecialCutsActivation();
-  }  
-}
-
-//_____________________________________________________________________________
 void TG4ModularPhysicsList::SetMaxNumPhotonsPerStep(G4int maxNumPhotons)
 {
 /// Limit step to the specified maximum number of Cherenkov photons
@@ -465,20 +269,3 @@ void TG4ModularPhysicsList::SetMaxNumPhotonsPerStep(G4int maxNumPhotons)
   
   fPhysicsConstructorOptical->SetMaxNumPhotonsPerStep(maxNumPhotons); 
 }    
-
-//_____________________________________________________________________________
-void TG4ModularPhysicsList::SetStackPopperSelection(const G4String& selection)
-{
-/// Select particles with stack popper process
-
-  if ( !fPhysicsConstructorStackPopper ) {
-    TG4Globals::Exception(
-      "TG4ModularPhysicsList", "SetStackPopperSelection",
-      "SetStackPopper physics is not activated.");
-  }  
-  
-  fPhysicsConstructorStackPopper->SetSelection(selection); 
-
-  G4cout << "TG4ModularPhysicsList::SetStackPopperSelection: " << selection << G4endl;
-}   
- 
