@@ -26,11 +26,10 @@ void Config()
   // Run configuration with user physics list
   Ex03RunConfiguration2* runConfiguration 
     = new Ex03RunConfiguration2("geomRootToGeant4");
-  
-  // Uncomment these lines to switch on special cuts
-  // TG4PhysicsListOptions options;
-  // options.SetSpecialCutsPhysics(true);
-  // runConfiguration->SetPhysicsListOptions(options);
+
+  // Run configuration with user physics list and special cuts activated
+  // Ex03RunConfiguration2* runConfiguration 
+  //  = new Ex03RunConfiguration2("geomRootToGeant4", "specialCuts");
 
   // TGeant4
   TGeant4* geant4

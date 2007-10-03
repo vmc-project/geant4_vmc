@@ -17,13 +17,8 @@ void Config()
 {
   // Default Geant4 VMC run configuration
   TG4RunConfiguration* runConfiguration 
-    = new TG4RunConfiguration("geomVMCtoRoot");
+    = new TG4RunConfiguration("geomVMCtoRoot", "emStandard+optical");
   
-  // Switch on optical physics (not activated by default)
-  TG4PhysicsListOptions options;
-  options.SetOpticalPhysics(true);
-  runConfiguration->SetPhysicsListOptions(options);
-
   // TGeant4
   TGeant4* geant4
     = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration);

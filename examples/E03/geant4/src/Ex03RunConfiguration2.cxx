@@ -12,11 +12,13 @@
 
 #include "TG4ComposedPhysicsList.h"
 #include "TG4SpecialPhysicsList.h"
+
 #include <LHEP_BERT.hh>
 
 //_____________________________________________________________________________
-Ex03RunConfiguration2::Ex03RunConfiguration2(const TString& userGeometry)
-  : TG4RunConfiguration(userGeometry) {
+Ex03RunConfiguration2::Ex03RunConfiguration2(const TString& userGeometry,
+                                             const TString& specialProcess)
+  : TG4RunConfiguration(userGeometry, "emStandard", specialProcess) {
 //
 }
 
@@ -33,19 +35,20 @@ Ex03RunConfiguration2::~Ex03RunConfiguration2(){
 //_____________________________________________________________________________
 G4VUserPhysicsList*  Ex03RunConfiguration2::CreatePhysicsList()
 {
-// Create LHEP_BERT physics list
+// Override the default physics list with user defined physics list;
+// LHEP_BERT physics list should be replaced with user own physics list
 
-  TG4ComposedPhysicsList* physicsList = new TG4ComposedPhysicsList();
+  TG4ComposedPhysicsList* builder = new TG4ComposedPhysicsList();
   
-  // physics list from G4
-  physicsList->AddPhysicsList(new LHEP_BERT());
+  // User physics list
+  G4cout << "Adding user physics list " << G4endl;
+  builder->AddPhysicsList(new LHEP_BERT());
+    
+  G4cout << "Adding SpecialPhysicsList " << G4endl;
+  builder->AddPhysicsList(new TG4SpecialPhysicsList(
+                                 fSpecialProcessSelection.Data()));
   
-  // special processes from Geant4 VMC
-  TG4PhysicsListOptions options;
-  fSpecialPhysicsList = new TG4SpecialPhysicsList(fPhysicsListOptions);
-  physicsList->AddPhysicsList(fSpecialPhysicsList);
-
-  return physicsList;
+  return builder;  
 }  
 
 

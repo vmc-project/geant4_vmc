@@ -15,7 +15,8 @@
 class Ex03RunConfiguration1 : public TG4RunConfiguration
 {
   public:
-    Ex03RunConfiguration1();
+    Ex03RunConfiguration1(const TString& physicsList = "emStandard",
+                          const TString& specialProcess = "stepLimiter");
     virtual ~Ex03RunConfiguration1();
 
     // methods

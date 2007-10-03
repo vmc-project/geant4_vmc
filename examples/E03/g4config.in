@@ -15,7 +15,7 @@
 
 /mcVerbose/all 0
 /mcVerbose/runAction 1
-/mcVerbose/physicsList 1
+/mcVerbose/composedPhysicsList 1
 #/mcVerbose/trackManager 2
 
 /run/particle/applyCuts

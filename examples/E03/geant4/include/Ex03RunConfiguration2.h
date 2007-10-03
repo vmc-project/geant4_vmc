@@ -15,7 +15,8 @@
 class Ex03RunConfiguration2 : public TG4RunConfiguration
 {
   public:
-    Ex03RunConfiguration2(const TString& userGeometry);
+    Ex03RunConfiguration2(const TString& userGeometry,
+                          const TString& specialProcess = "stepLimiter" );
     virtual ~Ex03RunConfiguration2();
 
     // methods

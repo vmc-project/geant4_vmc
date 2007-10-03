@@ -253,6 +253,10 @@ void g4libs_granular()
   // interfaces and graphics
   g4libs_graphics();
   
+  // physics lists
+  gSystem->Load("libG4phys_builders");
+  gSystem->Load("libG4phys_lists");
+
   // VGM libraries
   vgmlibs();
     

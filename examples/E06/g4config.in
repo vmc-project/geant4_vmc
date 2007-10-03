@@ -17,9 +17,7 @@
 #
 /mcVerbose/all 0
 /mcVerbose/geometryManager 1
-/mcVerbose/geometryBuilder 1
-/tracking/verbose 1
+/mcVerbose/opticalPhysicsList 1
 
-# Swith on optical physics
-#
-/mcVerbose/physicsList 1
+#/tracking/verbose 1
+

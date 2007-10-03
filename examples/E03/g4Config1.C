@@ -24,12 +24,12 @@ void Config()
 
   // Run configuration with user geometry construction via Geant4
   Ex03RunConfiguration1* runConfiguration 
-    = new Ex03RunConfiguration1();
+    = new Ex03RunConfiguration1("emStandard");
   
-  // Uncomment these lines to switch on special cuts
-  // TG4PhysicsListOptions options;
-  // options.SetSpecialCutsPhysics(true);
-  // runConfiguration->SetPhysicsListOptions(options);
+  // Run configuration with user geometry construction via Geant4
+  // + special cuts activated
+  // Ex03RunConfiguration1* runConfiguration 
+  //   = new Ex03RunConfiguration1("emStandard", "specialCuts");
 
   // TGeant4
   TGeant4* geant4

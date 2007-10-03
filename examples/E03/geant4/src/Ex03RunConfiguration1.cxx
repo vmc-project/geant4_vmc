@@ -9,11 +9,10 @@
 #include "Ex03RunConfiguration1.h"
 #include "ExN03DetectorConstruction.hh"
 
-#include <LHEP_BERT.hh>
-
 //_____________________________________________________________________________
-Ex03RunConfiguration1::Ex03RunConfiguration1()
-  : TG4RunConfiguration("geomGeant4") {
+Ex03RunConfiguration1::Ex03RunConfiguration1(const TString& physicsList,
+                                             const TString& specialProcess)
+  : TG4RunConfiguration("geomGeant4", physicsList, specialProcess) {
 //
 }
 

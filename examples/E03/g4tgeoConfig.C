@@ -15,14 +15,13 @@
 
 void Config()
 {
-  // RunConfiguration for Geant4
+  // Run configuration
   TG4RunConfiguration* runConfiguration 
-    = new TG4RunConfiguration("geomRoot");
+    = new TG4RunConfiguration("geomRoot", "emStandard");
   
-  // Uncomment these lines to switch on special cuts
-  // TG4PhysicsListOptions options;
-  // options.SetSpecialCutsPhysics(true);
-  // runConfiguration->SetPhysicsListOptions(options);
+  // Run configuration with special cuts activated
+  // TG4RunConfiguration* runConfiguration 
+  //   = new TG4RunConfiguration("geomRoot", "emStandard", "specialCuts");
   
   // TGeant4
   TGeant4* geant4
