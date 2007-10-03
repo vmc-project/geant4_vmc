@@ -279,24 +279,6 @@ void TG4G3PhysicsManager::CheckLock()
 }
 
 //_____________________________________________________________________________
-G4VProcess* TG4G3PhysicsManager::FindProcess(G4String processName) const
-{
-/// Find G4VProcess with specified name.
-
-  G4ProcessTable* processTable = G4ProcessTable::GetProcessTable();
-
-  G4ProcessVector* processVector 
-    = processTable->FindProcesses(processName);
-  G4VProcess* firstFoundProcess = 0;
-  if (processVector->entries()>0) firstFoundProcess= (*processVector)[0];
-
-  processVector->clear();
-  delete processVector;
-  
-  return firstFoundProcess;
-}
-
-//_____________________________________________________________________________
 G4bool TG4G3PhysicsManager::CheckCutWithTheVector(G4String name, 
                                  G4double value, TG4G3Cut& cut)
 {

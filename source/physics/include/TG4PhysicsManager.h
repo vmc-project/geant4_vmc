@@ -20,7 +20,6 @@
 #define TG4_PHYSICS_MANAGER_H
 
 #include "TG4Verbose.h"
-#include "TG4PhysicsMessenger.h"
 #include "TG4ProcessControlMap.h"
 #include "TG4ProcessMCMap.h"
 #include "TG4NameMap.h"
@@ -38,16 +37,16 @@
 class TG4ParticlesManager;
 class TG4G3PhysicsManager;
 class TG4G3ProcessMap;
-class TG4SpecialPhysicsList;
 
 class G4ParticleDefinition;
+class G4ProcessManager;
 class G4VProcess;
 class G4VUserPhysicsList;
 
 class TG4PhysicsManager : public TG4Verbose
 {
   public:
-    TG4PhysicsManager(TG4SpecialPhysicsList* physicsList);
+    TG4PhysicsManager();
     virtual ~TG4PhysicsManager();
 
     // static access method
@@ -84,15 +83,8 @@ class TG4PhysicsManager : public TG4Verbose
     void  SetProcessActivation();  
     TMCProcess GetMCProcess(const G4VProcess* process);
     TMCProcess GetOpBoundaryStatus(const G4VProcess* process);
-
-    // set methods
-    void SetSpecialPhysicsList(TG4SpecialPhysicsList* physicsList);
-    
-    // get methods
-    TG4SpecialPhysicsList* GetSpecialPhysicsList() const; 
    
   private:
-    TG4PhysicsManager();
     TG4PhysicsManager(const TG4PhysicsManager& right);
     TG4PhysicsManager& operator=(const TG4PhysicsManager& right);
 
@@ -103,15 +95,20 @@ class TG4PhysicsManager : public TG4Verbose
                        TG4G3ControlValue parval);
     G4ParticleDefinition* GetParticleDefinition(G4int pdgEncoding) const;
 
+    G4VProcess*  FindProcess(G4String processName) const;
+
+    void SetProcessActivation(G4ProcessManager* processManager,
+                              G4int processId, G4bool activation);
+    void SetSpecialControlsActivation();
+    void SetSpecialCutsActivation();
+
     // static data members
     static TG4PhysicsManager*  fgInstance; //this instance
     
     // data members
-    TG4PhysicsMessenger    fMessenger;         //messenger
     TG4ParticlesManager*   fParticlesManager;  //particles manager
     TG4G3PhysicsManager*   fG3PhysicsManager;  //G3 physics manager
-    TG4SpecialPhysicsList* fSpecialPhysicsList;//special physics list
-    TG4ProcessMCMap        fProcessMCMap;//the mapping between G4 process names
+    TG4ProcessMCMap        fProcessMCMap;      //the mapping between G4 process names
                                          //and TMCProcess codes
     TG4ProcessControlMap   fProcessControlMap; //the mapping between G4 processes
                                          //and G3 process controls
@@ -122,17 +119,6 @@ class TG4PhysicsManager : public TG4Verbose
 inline TG4PhysicsManager* TG4PhysicsManager::Instance() { 
   /// Return this instance
   return fgInstance; 
-}
-
-inline void TG4PhysicsManager::SetSpecialPhysicsList(
-                                  TG4SpecialPhysicsList* physicsList) { 
-  /// Set the physics list
-  fSpecialPhysicsList = physicsList; 
-}
-
-inline TG4SpecialPhysicsList* TG4PhysicsManager::GetSpecialPhysicsList() const { 
-  /// Return the physics list
-  return fSpecialPhysicsList; 
 }
 
 #endif //TG4_PHYSICS_MANAGER_H

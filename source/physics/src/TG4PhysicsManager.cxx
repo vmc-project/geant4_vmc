@@ -15,9 +15,9 @@
 // See the class description in the header file.
 
 #include "TG4PhysicsManager.h"
-#include "TG4SpecialPhysicsList.h"
 #include "TG4ParticlesManager.h"
 #include "TG4G3PhysicsManager.h"
+#include "TG4SpecialPhysicsList.h"
 #include "TG4StateManager.h"
 #include "TG4GeometryServices.h"
 #include "TG4MediumMap.h"
@@ -27,9 +27,12 @@
 #include "TG4G3Units.h"
 #include "TG4Limits.h"
 
+#include <G4ParticleTable.hh>
 #include <G4ParticleDefinition.hh>
 #include <G4VUserPhysicsList.hh>
 #include <G4OpBoundaryProcess.hh>
+#include <G4ProcessTable.hh>
+#include <G4ProcessManager.hh>
 #include <G4VProcess.hh>
 
 #include <TDatabasePDG.h>
@@ -38,12 +41,10 @@
 TG4PhysicsManager* TG4PhysicsManager::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4PhysicsManager::TG4PhysicsManager(TG4SpecialPhysicsList* physicsList)
+TG4PhysicsManager::TG4PhysicsManager()
   : TG4Verbose("physicsManager"),
-    fMessenger(this),
     fParticlesManager(0),
     fG3PhysicsManager(0),
-    fSpecialPhysicsList(physicsList),
     fProcessMCMap(),
     fProcessControlMap()
 { 
@@ -69,6 +70,8 @@ TG4PhysicsManager::TG4PhysicsManager(TG4SpecialPhysicsList* physicsList)
 //_____________________________________________________________________________
 TG4PhysicsManager::~TG4PhysicsManager() {
 //
+  fgInstance = 0; 
+
   delete fParticlesManager;
   delete fG3PhysicsManager;
 }
@@ -311,6 +314,172 @@ TG4PhysicsManager::GetParticleDefinition(G4int pdgEncoding) const
   }  
     
   return particleDefinition;    
+}
+
+//_____________________________________________________________________________
+G4VProcess* TG4PhysicsManager::FindProcess(G4String processName) const
+{
+/// Find G4VProcess with specified name.
+
+  G4ProcessTable* processTable = G4ProcessTable::GetProcessTable();
+
+  G4ProcessVector* processVector 
+    = processTable->FindProcesses(processName);
+  G4VProcess* firstFoundProcess = 0;
+  if ( processVector->entries()>0 ) firstFoundProcess= (*processVector)[0];
+
+  processVector->clear();
+  delete processVector;
+  
+  return firstFoundProcess;
+}
+
+//_____________________________________________________________________________
+void TG4PhysicsManager::SetProcessActivation(G4ProcessManager* processManager,
+                                             G4int  processId, 
+                                             G4bool activation)
+{                                      
+/// Set process activation for the given process.
+
+  G4String strActivation = "Activate   ";
+  if (!activation) strActivation = "Inactivate ";
+
+  if (TG4VVerbose::VerboseLevel() > 1) {
+    G4cout << strActivation << " process " 
+           << (*processManager->GetProcessList())[processId]->GetProcessName() 
+           << " for " << processManager->GetParticleType()->GetParticleName() 
+           << G4endl;
+  }
+  
+  processManager->SetProcessActivation(processId, activation);        
+}  
+
+//_____________________________________________________________________________
+void TG4PhysicsManager::SetSpecialControlsActivation()
+{
+/// (In)Activate built processes according
+/// to the setup in TG4G3PhysicsManager::fControlVector.
+
+  TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
+  
+  TG4G3ControlVector* controlVector = g3PhysicsManager->GetControlVector();
+  TG4boolVector*    isControlVector = g3PhysicsManager->GetIsControlVector(); 
+
+  if ( ! controlVector || ! isControlVector ) {
+    TG4Globals::Exception(
+      "TG4PhysicsManager", "SetSpecialControlsActivation",
+      "Vectors of processes controls is not set.");
+    return;
+  }    
+  
+  G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+  for ( G4int i=0; i<G4int(particleTable->size()); ++i) {
+
+    G4ParticleDefinition* particle = particleTable->GetParticle(i);
+    G4ProcessManager* processManager = particle->GetProcessManager(); 
+      
+    G4ProcessVector* processVector = processManager->GetProcessList();
+  
+    // activate or inactivate processes according to 
+    // global setting in the control vector in G3 physics manager
+    //
+    for (G4int i=0; i<processVector->length(); i++) {
+
+      TG4G3ControlValue control
+         = controlVector->GetControlValue((*processVector)[i]);
+      G4bool activation = processManager->GetProcessActivation(i);
+      
+      if (control != kUnsetControlValue) {
+         if (!TG4Globals::Compare(activation, control)) {
+
+          // set new process activation
+          G4bool activate;
+          if (control == kInActivate) activate = false; 
+          else                        activate = true;
+          
+          SetProcessActivation(processManager, i, activate);         
+        }
+      }
+    }          
+     
+    // activate or inactivate the special controls processes according to 
+    // setting in the isControl vector in G3 physics manager
+    //
+    //G4bool specialControls 
+    //  = TG4GeometryServices::Instance()->IsSpecialControls();  
+    G4bool specialControls 
+      = g3PhysicsManager->IsSpecialControls();  
+    TG4G3ParticleWSP particleWSP 
+      = g3PhysicsManager->GetG3ParticleWSP(particle);
+
+    if ( specialControls && particleWSP != kNofParticlesWSP ) { 
+      // special process is activated in case
+      // isControlVector in G3 physics manager is set
+      // or the special control is set by TG4Limits
+  
+      // get the special cut process (if it was instantiated)
+      G4String processName = "specialControls";
+      G4VProcess* process = FindProcess(processName);
+      if ( ! process ) {
+        TG4Globals::Exception(
+          "TG4PhysicsManager", "SetSpecialControlsActivation",
+          "The special control process for is not defined.");
+      }
+       
+      G4int index = processManager->GetProcessIndex(process);
+      SetProcessActivation(processManager, index, (*isControlVector)[particleWSP]); 
+    }
+  }  
+}
+
+//_____________________________________________________________________________
+void TG4PhysicsManager::SetSpecialCutsActivation()
+{
+/// (In)Activate built special cut processes according
+/// to the setup in TG4G3PhysicsManager
+
+  TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
+  TG4boolVector* isCutVector = g3PhysicsManager->GetIsCutVector(); 
+
+  if ( ! isCutVector ) {
+    TG4Globals::Exception(
+      "TG4PhysicsManager", "SetSpecialCutsActivation",
+      "Vector of isCut booleans is not set.");
+    return;
+  }    
+  
+  G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+  for ( G4int i=0; i<G4int(particleTable->size()); ++i) {
+
+    G4ParticleDefinition* particle = particleTable->GetParticle(i);
+    TG4G3ParticleWSP particleWSP 
+      = g3PhysicsManager->GetG3ParticleWSP(particle);
+    G4String name =
+      g3PhysicsManager->GetG3ParticleWSPName(particleWSP);
+
+    if ( (particleWSP !=kNofParticlesWSP) ) { 
+      // special process is activated in case
+      // cutVector (vector of kinetic energy cuts) is set
+      // or the special cut is set by TG4Limits
+  
+      G4ProcessManager* processManager = particle->GetProcessManager(); 
+      
+      // get the special cut process (if it was instantiated) 
+      G4String processName = "specialCutFor" + name;
+      G4VProcess* process = FindProcess(processName);
+      if (!process) {
+        TG4Globals::Exception(
+          "TG4PhysicsManager", "SetSpecialCutsActivation",
+          "The special cut process for " + TString(name) + " is not defined");
+      }
+
+      // special process is activated in case
+      // cutVector (vector of kinetic energy cuts) is set
+      // or the special cut is set by TG4Limits
+      G4int index = processManager->GetProcessIndex(process);
+      SetProcessActivation(processManager, index, (*isCutVector)[particleWSP]); 
+    }
+  }    
 }
 
 //
@@ -593,8 +762,20 @@ void TG4PhysicsManager::SetProcessActivation()
 /// (In)Activate built processes according
 /// to the setup in TG4G3PhysicsManager::fControlVector.
 
-  if (fSpecialPhysicsList)
-    fSpecialPhysicsList->SetProcessActivation();
+  if (  TG4SpecialPhysicsList::Instance() &&
+        TG4SpecialPhysicsList::Instance()->IsSpecialControls() &&
+      ( TG4G3PhysicsManager::Instance()->IsGlobalSpecialControls() ||
+        TG4G3PhysicsManager::Instance()->IsSpecialControls() ) ) {
+       
+    SetSpecialControlsActivation();
+  }  
+       
+  if (  TG4SpecialPhysicsList::Instance() &&
+        TG4SpecialPhysicsList::Instance()->IsSpecialCuts() &&
+        TG4G3PhysicsManager::Instance()->IsSpecialCuts() ) {
+  
+    SetSpecialCutsActivation();
+  }  
 }       
 
 
@@ -663,4 +844,3 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus(const G4VProcess* process)
   // should not happen
   return kPNoProcess;
 }
-

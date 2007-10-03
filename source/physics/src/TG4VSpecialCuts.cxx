@@ -25,7 +25,7 @@
 
 //_____________________________________________________________________________
 TG4VSpecialCuts::TG4VSpecialCuts(const G4String& processName)
-  : G4VProcess(processName),
+  : G4VProcess(processName, fUserDefined),
     fLossTableManager(G4LossTableManager::Instance())
 {
 //

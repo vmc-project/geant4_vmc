@@ -19,6 +19,7 @@
 #include <stdlib.h>
 
 const TString TG4Globals::fgkEndl = "x\n";
+const char    TG4Globals::fgkTokenSeparator = '+';
 
 //_____________________________________________________________________________
 TG4Globals::~TG4Globals() {
@@ -117,3 +118,39 @@ G4String TG4Globals::Help()
   return G4String("vmc@root.cern.ch");
 }  
   
+//_____________________________________________________________________________
+TString TG4Globals::GetToken(Int_t i, const TString& s)
+{
+/// Tokenize the given string and return the i-th token
+
+  std::vector<TString> tokens;  
+  std::string ss = s.Data();
+  
+/*
+  std::string::size_type idx0 = 0;
+  std::string::size_type idx1 = ss.find(fgkTokenSeparator,idx0);
+  if ( idx1 == std::string::npos ) idx1 = ss.length();
+  do {
+    tokens.push_back(TString(ss.substr(idx0, idx1-idx0)));
+    idx0 = idx1+1;
+    idx1 = ss.find(fgkTokenSeparator,idx0);
+    if ( idx1 == std::string::npos ) idx1 = ss.length();
+  }
+  while ( idx0 <= ss.length() );
+*/
+  std::string::size_type idx0 = 0;
+  do {
+    std::string::size_type idx1 = ss.find(fgkTokenSeparator,idx0);
+    if ( idx1 == std::string::npos ) idx1 = ss.length();
+    tokens.push_back(TString(ss.substr(idx0, idx1-idx0)));
+    idx0 = idx1+1;
+  }
+  while ( idx0 <= ss.length() );
+
+
+  
+  if ( i < 0 || i >= Int_t(tokens.size()) ) 
+    return "";
+  else
+    return tokens[i];
+}        

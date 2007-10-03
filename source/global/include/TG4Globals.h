@@ -65,11 +65,14 @@ class TG4Globals
     static G4bool Compare(G4bool activation, TG4G3ControlValue controlValue);
     static void PrintStars(G4bool emptyLineFirst);
     static G4String Help();
+    
+    static TString  GetToken(Int_t i, const TString& s);
 
   private:
     TG4Globals();  
 
-    static const TString fgkEndl; /// Special endl
+    static const TString fgkEndl;           /// Special endl
+    static const char    fgkTokenSeparator; /// Separator in GetToken() method
 };  
 
 // inline functions

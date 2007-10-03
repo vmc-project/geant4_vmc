@@ -1307,9 +1307,10 @@ Int_t TG4StepManager::StepProcesses(TArrayI& processes) const
 /// and returns the number of them.                                          \n
 /// TBD: Distinguish between kPDeltaRay and kPEnergyLoss
 
- if ( fStepStatus == kVertex || fStepStatus == kBoundary ) {
-   G4int nofProcesses = 0;
+ if ( fStepStatus == kVertex || fStepStatus == kBoundary) {
+   G4int nofProcesses = 1;
    processes.Set(nofProcesses);
+   processes[0] = kPNull;
    return nofProcesses;
  }  
    

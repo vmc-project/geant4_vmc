@@ -27,7 +27,6 @@
 #include "TG4DetConstruction.h"
 #include "TG4PostDetConstruction.h"
 #include "TG4SDConstruction.h"
-#include "TG4ModularPhysicsList.h"
 #include "TG4PrimaryGeneratorAction.h"
 #include "TG4RunAction.h"
 #include "TG4EventAction.h"

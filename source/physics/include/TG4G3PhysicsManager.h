@@ -53,7 +53,6 @@ class TG4G3PhysicsManager
     // methods
     void Lock();     
     void CheckLock();     
-    G4VProcess*  FindProcess(G4String processName) const;
     G4bool CheckCutWithTheVector(
              G4String name, G4double value, TG4G3Cut& cut);   
     G4bool CheckControlWithTheVector(

@@ -17,7 +17,9 @@
 #include "TG4RunConfiguration.h"
 #include "TG4DetConstruction.h"
 #include "TG4ComposedPhysicsList.h"
-#include "TG4ModularPhysicsList.h"
+#include "TG4EmPhysicsList.h"
+#include "TG4HadronPhysicsList.h"
+#include "TG4OpticalPhysicsList.h"
 #include "TG4SpecialPhysicsList.h"
 #include "TG4PrimaryGeneratorAction.h"
 #include "TG4RunAction.h"
@@ -38,11 +40,13 @@
 
 //_____________________________________________________________________________
 TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
+                                         const TString& physicsList,
+                                         const TString& specialProcess,
                                          Bool_t specialStacking)
   : fUserGeometry(userGeometry),
+    fPhysicsListSelection(physicsList),
+    fSpecialProcessSelection(specialProcess),
     fSpecialStacking(specialStacking),
-    fSpecialPhysicsList(0),
-    fPhysicsListOptions(),
     fAGDDMessenger(0),
     fGDMLMessenger(0)
     
@@ -57,10 +61,40 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
        
     TG4Globals::Exception(
       "TG4RunConfiguration", "TG4RunConfiguration",
-      "User geometry " + userGeometry + " not recognized." + TG4Globals::Endl() +
-      "Available options:"                                 + TG4Globals::Endl() +
+      "User geometry " + userGeometry + " not recognized." 
+         + TG4Globals::Endl() +
+      "Available options:"                                 
+         + TG4Globals::Endl() +
       "geomVMCtoGeant4 geomVMCtoRoot geomRoot geomRootToGeant4 geomGeant4");
-  }  
+  }
+   
+  if ( ! ( TG4Globals::GetToken(0, physicsList) == "emStandard" || 
+           TG4HadronPhysicsList::IsAvailableSelection(
+             TG4Globals::GetToken(0, physicsList).Data()) )   &&
+         ( TG4Globals::GetToken(1, physicsList) == "optical"  ||
+           TG4Globals::GetToken(1, physicsList) == ""  ) ) {
+
+     TG4Globals::Exception(
+      "TG4RunConfiguration", "TG4RunConfiguration",
+      "Physics list selection " + physicsList + " not recognized." 
+        + TG4Globals::Endl() +
+      "Available options:"                                         
+        + TG4Globals::Endl() +
+      "emStandard, emStandard+optical, XYZ, XYZ+optical"           
+        + TG4Globals::Endl() +
+      "  where XYZ: " + TString(TG4HadronPhysicsList::AvailableSelections())); 
+  } 
+
+  if ( ! TG4SpecialPhysicsList::IsAvailableSelection(specialProcess.Data()) ) {
+
+     TG4Globals::Exception(
+      "TG4RunConfiguration", "TG4RunConfiguration",
+      "Special process selection " + specialProcess + " not recognized." 
+        + TG4Globals::Endl() +
+      "Available options:"                                               
+        + TG4Globals::Endl() +
+      TString(TG4SpecialPhysicsList::AvailableSelections())); 
+  } 
 
   // instantiate LVtree browser
   TG4LVTree::Instance();
@@ -101,15 +135,30 @@ G4VUserPhysicsList* TG4RunConfiguration::CreatePhysicsList()
 /// Create default Geant4 VMC physics list
 
   TG4ComposedPhysicsList* builder = new TG4ComposedPhysicsList();
-
-  // Geant4 VMC defalut physics
-  builder->AddPhysicsList(new TG4ModularPhysicsList(fPhysicsListOptions));
   
-  // Geant4 VMC special physics  
-  fSpecialPhysicsList = new TG4SpecialPhysicsList(fPhysicsListOptions);
-  builder->AddPhysicsList(fSpecialPhysicsList);
+  TString token1 = TG4Globals::GetToken(0, fPhysicsListSelection);
+  TString token2 = TG4Globals::GetToken(1, fPhysicsListSelection);
   
-  return builder;
+  if ( token1 == "emStandard" ) {
+    G4cout << "Adding EMPhysicsList" << G4endl;
+    builder->AddPhysicsList(new TG4EmPhysicsList());
+  }  
+  else {
+    G4cout << "Adding HadronPhysicsList " << token1.Data() << G4endl;
+    builder->AddPhysicsList(new TG4HadronPhysicsList(token1.Data()));
+  }  
+    
+  if ( token2 == "optical" ) {
+    G4cout << "Adding OpticalPhysicsList " << G4endl;
+    builder->AddPhysicsList(new TG4OpticalPhysicsList());
+  }  
+    
+  // add option here
+  G4cout << "Adding SpecialPhysicsList " << G4endl;
+  builder->AddPhysicsList(new TG4SpecialPhysicsList(
+                                 fSpecialProcessSelection.Data()));
+  
+  return builder;  
 }  
 
 //_____________________________________________________________________________
@@ -162,30 +211,6 @@ G4UserStackingAction* TG4RunConfiguration::CreateStackingAction()
     
   return 0;
 }    
-
-//_____________________________________________________________________________
-void TG4RunConfiguration::SetPhysicsListOptions(
-                              const TG4PhysicsListOptions& options)
-{
-/// Set physics list options
-
-  if ( fSpecialPhysicsList ) {
-    TG4Globals::Exception(
-      "TG4RunConfiguration", "SetPhysicsListOptions",
-      "Physics list is already constructed." + TG4Globals::Endl() +
-      "Cannot set options for its building.");  
-  }
-
-  fPhysicsListOptions = options;
-}                                   
-
-//_____________________________________________________________________________
-TG4SpecialPhysicsList* TG4RunConfiguration::GetSpecialPhysicsList() const
-{
-/// Return its physics list.
-  
-  return fSpecialPhysicsList;
-}
 
 //_____________________________________________________________________________
 TString TG4RunConfiguration::GetUserGeometry() const

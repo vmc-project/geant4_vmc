@@ -35,6 +35,12 @@
  */
 /** @} */
 
+/** @defgroup physics_list physics_list
+ *  Category physics
+ *  @{
+ */
+/** @} */
+
 /** @defgroup event event 
  *  Category event
  *  @{

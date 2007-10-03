@@ -27,13 +27,26 @@
 /// - geomRoot          - geometry defined via Root, Root navigation
 /// - geomRootToGeant4  - geometry defined via Root, G4 native navigation
 /// - geomGeant4        - geometry defined via Geant4, G4 native navigation
+///
+/// The second argument in the constructor selects physics list:
+/// - emStandard         - standard em physics (default)
+/// - emStandard+optical - standard em physics + optical physics
+/// - XYZ                - selected hadron physics list ( XYZ = LHEP, QGSP, ...)
+/// - XYZ+optical        - selected hadron physics list + optical physics
+///
+/// The third argument activates the special processes in the TG4SpecialPhysicsList,
+/// which implement VMC features:
+/// - stepLimiter       - step limiter (default) 
+/// - specialCuts       - VMC cuts
+/// - specialControls   - VMC controls for activation/inactivation selected processes
+/// - stackPopper       - stackPopper process
+/// When more than one options are selected, they should be separated with '+'
+/// character: eg. stepLimit+specialCuts.
 
 /// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef TG4_RUN_CONFIGURATION_H
 #define TG4_RUN_CONFIGURATION_H
-
-#include "TG4PhysicsListOptions.h"
 
 #include <Rtypes.h>
 #include <TString.h>
@@ -56,6 +69,8 @@ class TG4RunConfiguration
 {
   public:
     TG4RunConfiguration(const TString& userGeometry,
+                        const TString& physicsList = "emStandard",
+                        const TString& specialProcess = "stepLimiter",
                         Bool_t specialStacking = false);
     virtual ~TG4RunConfiguration();
 
@@ -71,20 +86,16 @@ class TG4RunConfiguration
     virtual TG4SteppingAction*    CreateSteppingAction();
     virtual G4UserStackingAction* CreateStackingAction(); 
 
-    // set methods
-    virtual void SetPhysicsListOptions(const TG4PhysicsListOptions& options);
-
     // get methods
-    TG4SpecialPhysicsList* GetSpecialPhysicsList() const;
     TString  GetUserGeometry() const;
     Bool_t   IsSpecialStacking() const;
 
   protected:
     // data members
-    TString                fUserGeometry;      //  way of building geometry
+    TString                fUserGeometry;            //  way of building geometry
+    TString                fPhysicsListSelection;    //  physics list selection
+    TString                fSpecialProcessSelection; //  special process selection
     Bool_t                 fSpecialStacking;   //  option to include special stacking
-    TG4SpecialPhysicsList* fSpecialPhysicsList;//  special physics list
-    TG4PhysicsListOptions  fPhysicsListOptions;//  physics list options
     G4UImessenger*         fAGDDMessenger;     //! XML messenger
     G4UImessenger*         fGDMLMessenger;     //! XML messenger
 

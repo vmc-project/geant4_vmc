@@ -24,7 +24,7 @@
 
 //_____________________________________________________________________________
 TG4SpecialControls::TG4SpecialControls(const G4String& processName)
-  : G4VProcess(processName),
+  : G4VProcess(processName, fUserDefined),
     TG4Verbose("specialControls"),
     fSwitchControls(kUnswitch),
     fSwitchedProcesses(),
@@ -32,9 +32,6 @@ TG4SpecialControls::TG4SpecialControls(const G4String& processName)
     fLastTrackID(0) {
 //    
    verboseLevel = VerboseLevel();
-   if (VerboseLevel() >0 ) {
-     G4cout << GetProcessName() << " is created "<< G4endl;
-   }
 }
 
 //_____________________________________________________________________________

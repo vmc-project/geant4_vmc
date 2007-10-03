@@ -53,7 +53,7 @@ TGeant4::TGeant4(const char* name, const char* title,
   fStateManager = new TG4StateManager();
   fStateManager->SetNewState(kPreInit);
   // add verbose level
-  //G4cout << "TG4StateManager has been created." << G4endl;
+  G4cout << "TG4StateManager has been created." << G4endl;
   
   // create geometry manager
   fGeometryManager = new TG4GeometryManager(fUserGeometry);
@@ -66,7 +66,7 @@ TGeant4::TGeant4(const char* name, const char* title,
   //G4cout << "TG4SDManager has been created." << G4endl;
   
   // create physics manager  
-  fPhysicsManager = new TG4PhysicsManager(configuration->GetSpecialPhysicsList());
+  fPhysicsManager = new TG4PhysicsManager();
   // add verbose level
   //G4cout << "TG4GeometryManager has been created." << G4endl;
   
@@ -123,7 +123,7 @@ TGeant4::TGeant4(const char* name, const char* title,
   //G4cout << "TG4SDManager has been created." << G4endl;
   
   // create physics manager  
-  fPhysicsManager = new TG4PhysicsManager(configuration->GetSpecialPhysicsList());
+  fPhysicsManager = new TG4PhysicsManager();
   // add verbose level
   //G4cout << "TG4GeometryManager has been created." << G4endl;
   

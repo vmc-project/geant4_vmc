@@ -45,7 +45,7 @@ endif
 
 # Source directories
 #
-GDIRS:=	global geometry digits+hits physics event run interfaces visualization
+GDIRS:=	global geometry digits+hits physics physics_list event run interfaces visualization
 
 # Rules
 #
@@ -64,8 +64,7 @@ SRCS	:= $(CXXSRC)
 
 # C++ Headers processed by CINT
 #
-HDRS	:= physics/include/TG4PhysicsListOptions.h \
-           run/include/TG4RunConfiguration.h \
+HDRS	:= run/include/TG4RunConfiguration.h \
 	   run/include/TGeant4.h \
 	   $(wildcard interfaces/include/*.h) \
 	   geant4vmcLinkDef.h
