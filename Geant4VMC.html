@@ -42,6 +42,7 @@
 
  <ul><li> <a href="#Impl_Introduction">         Introduction          </a>
      </li><li> <a href="#Impl_Geometry">             Geometry definition and navigation </a>
+     </li><li> <a href="#Impl_Physics">              Physics list selection </a>
      </li><li> <a href="#Impl_Stacking">             Stacking of particles  </a>
      </li><li> <a href="#Impl_OverridingDefaults">   User Geant4 classes,
                                                 user physics list      </a>
@@ -157,6 +158,46 @@
  There is no limitation on use of the MANY option with G4Root navigation
  (options <font face="Courier"> geomVMCtoRoot, geomRoot </font>.
 
+ <a name="Impl_Physics"></a> 
+ </p><h3> Physics list selection </h3>
+
+ <p>
+ Since the version 2.4, the default Geant4 VMC physics list has been removed
+ and user can choose the physics list from the physics lists provided in Geant4
+ or include theit own physics list. The choice of the of the physics list
+ is done via the option specified with creating TG4RunConfiguration object.
+ This option is passed as second argument in TG4RunConfiguration constructor
+ (see examples for more details):
+
+ <ul><li> <font color="#00aa00" face="Courier"> 
+          emStandard </font>  - standard em physics (default)
+     <li> <font color="#00aa00" face="Courier"> 
+          emStandard+optical </font>     - standard em physics + optical physics
+     <li> <font color="#00aa00" face="Courier"> 
+          XYZ </font>          - selected hadron physics list ( XYZ = LHEP, QGSP, ...)
+     <li> <font color="#00aa00" face="Courier"> 
+          XYZ+optical </font>  - selected hadron physics list + optical physics
+ </ul> 
+ 
+ In order to activate the support of VMC features like the VMC cuts, VMC process
+ controls, user has to activate the special processes defined in TG4SpecialPhysicsList.
+ The selection of special processes is passed as third argument in TG4RunConfiguration 
+ constructor (see examples for more details):
+
+ <ul><li> <font color="#00aa00" face="Courier"> 
+          stepLimiter </font>     - step limiter (default) 
+     <li> <font color="#00aa00" face="Courier"> 
+          specialCut </font>      - VMC cuts
+     <li> <font color="#00aa00" face="Courier"> 
+          specialControls </font> - VMC controls for activation/inactivation selected processes
+     <li> <font color="#00aa00" face="Courier"> 
+          stackPopper </font>     - stack popper physics
+ </ul> 
+ 
+ When more than one options are selected, they should be separated with '+'
+ character: eg. <font face="Courier"> stepLimit+specialCuts </font>,
+ <font face="Courier"> stepLimit+specialCuts+stackPopper </font>, etc.
+ 
  <a name="Impl_Stacking"></a> 
  <h3> Stacking of particles </h3>
 
@@ -170,22 +211,13 @@
  kernel and the user VMC stack only monitors this stacking.
 
  </p><p>
- The consequence of this is that the particles added to the VMC stack
+ The consequence of this is that, by default, the particles added to the VMC stack
  in other than TVirtualMCApplication::GeneratePrimaries() functions
- are, by default, ignored in Geant4 tracking. It is however possible
- to activate a special <I> stack popper </I> process which pops 
- these from the VMC stack and passes them to Geant4 in g4Config.C:
- 
- </p><p>
- <font color="#aa0000"> <i>
- // Switch on stack popper (not activated by default) </i> </font><br>
- <font color="#00aa00" face="Courier"> 
- TG4PhysicsListOptions options;                               <br>
- options.SetStackPopperPhysics(true);                         <br>
- runConfiguration-&gt;SetPhysicsListOptions(options);         <br>
- </font>
- 
- 
+ are ignored in Geant4 tracking. User has to activate the stack
+ popper special process (see paragraph on Physics list selection), if he wants
+ to add particles to the stack during tracking. The added particles are then 
+ handled as secondaries of the current track.
+   
  </p><p>
  The stack classes in the VMC examples provide the same stacking
  mechanism for both Geant3 and Geant4 MCs and they are recommended to be used in
@@ -235,6 +267,12 @@
  
  </p><p>
  Analogically user can switch on/off other physics options.
+
+ </p><p>
+ In case, a user has registered his own physics list, 
+ he has a possibility to register the special cuts physics constructor
+ (class TG4PhysicsConstructorSpecialCuts) in his own modular physics list 
+ to get this functionality.
  
  <a name="Impl_Visualization"></a> 
  </p><h3> Visualization </h3>
@@ -333,7 +371,7 @@ Contact:
 
 Page maintained by:
 <a href="mailto:Ivana.Hrivnacova@cern.ch">Ivana Hrivnacova</a> <br>
-<i> Last update: 18/12/2006 </i>
+<i> Last update: 03/10/2007 </i>
 
 <p></p>
 </body></html>
