@@ -1,4 +1,4 @@
-// $Id: basiclibs.C,v 1.5 2007/03/22 09:08:27 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples

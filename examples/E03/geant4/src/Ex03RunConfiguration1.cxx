@@ -1,4 +1,4 @@
-// $Id: Ex03RunConfiguration1.cxx,v 1.3 2006/04/12 10:39:33 brun Exp $
+// $Id$
 //
 // Author: I. Hrivnacova
 //

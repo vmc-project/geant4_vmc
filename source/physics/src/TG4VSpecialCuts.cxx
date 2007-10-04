@@ -1,4 +1,4 @@
-// $Id: TG4VSpecialCuts.cxx,v 1.8 2007/02/23 11:15:40 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

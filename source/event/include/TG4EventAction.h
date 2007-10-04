@@ -1,4 +1,4 @@
-// $Id: TG4EventAction.h,v 1.7 2007/05/22 12:26:41 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

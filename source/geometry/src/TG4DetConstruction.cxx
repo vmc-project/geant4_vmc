@@ -1,4 +1,4 @@
-// $Id: TG4DetConstruction.cxx,v 1.14 2007/02/06 11:06:34 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

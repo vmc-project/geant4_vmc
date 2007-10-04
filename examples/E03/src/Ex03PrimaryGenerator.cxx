@@ -1,4 +1,4 @@
-// $Id: Ex03PrimaryGenerator.cxx,v 1.2 2003/07/22 06:38:17 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples

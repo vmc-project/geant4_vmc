@@ -1,4 +1,4 @@
-// $Id: TG4GeometryServices.cxx,v 1.19 2007/05/11 09:22:44 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

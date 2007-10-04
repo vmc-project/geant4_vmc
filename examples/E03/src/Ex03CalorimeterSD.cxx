@@ -1,4 +1,4 @@
-// $Id: Ex03CalorimeterSD.cxx,v 1.4 2006/12/12 16:21:38 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples

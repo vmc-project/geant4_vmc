@@ -1,4 +1,4 @@
-// $Id: TG4DetConstructionMessenger.cxx,v 1.12 2007/03/22 09:03:13 brun Exp $
+// $Id$
 // Category: geometry
 //
 // Class TG4DetConstructionMessenger

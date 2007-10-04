@@ -1,4 +1,4 @@
-// $Id: TG4RunAction.cxx,v 1.4 2006/12/12 16:21:16 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

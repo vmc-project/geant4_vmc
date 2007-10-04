@@ -1,4 +1,4 @@
-// $Id: optPhoton.C,v 1.2 2005/05/20 21:47:38 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples

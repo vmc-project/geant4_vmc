@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.h,v 1.7 2007/05/30 16:05:56 brun Exp $
+// $Id$
 /// \ingroup event
 //
 /// \class TG4TrackingAction

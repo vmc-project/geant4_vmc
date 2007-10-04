@@ -1,4 +1,4 @@
-// $Id: TG4ExtDecayer.cxx,v 1.5 2006/12/15 09:30:29 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

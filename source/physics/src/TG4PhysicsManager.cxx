@@ -1,4 +1,4 @@
-// $Id: TG4PhysicsManager.cxx,v 1.17 2007/06/28 06:45:23 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

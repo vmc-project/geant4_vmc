@@ -1,4 +1,4 @@
-// $Id: TG4LVStructure.h,v 1.5 2006/12/12 16:21:15 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

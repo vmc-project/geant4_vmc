@@ -1,4 +1,4 @@
-// $Id: TG4SpecialStackingAction.h,v 1.5 2007/05/22 12:26:42 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

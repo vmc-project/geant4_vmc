@@ -1,4 +1,4 @@
-// $Id: g3Config.C,v 1.4 2005/01/05 08:05:30 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples

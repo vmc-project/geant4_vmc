@@ -1,4 +1,4 @@
-// $Id: g3libs.C,v 1.2 2003/12/08 14:13:40 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples

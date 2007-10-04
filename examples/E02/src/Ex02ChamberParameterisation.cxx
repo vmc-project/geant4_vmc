@@ -1,4 +1,4 @@
-// $Id: Ex02ChamberParameterisation.cxx,v 1.1.1.1 2002/09/27 10:00:02 rdm Exp $
+// $Id$
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples

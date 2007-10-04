@@ -1,4 +1,4 @@
-// $Id: TG4OpSurfaceMap.h,v 1.2 2005/09/01 10:04:32 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

@@ -1,4 +1,4 @@
-// $Id: TG4NameMap.h,v 1.8 2007/05/10 14:44:53 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

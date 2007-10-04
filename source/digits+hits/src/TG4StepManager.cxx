@@ -1,4 +1,4 @@
-// $Id: TG4StepManager.cxx,v 1.23 2007/06/28 06:45:23 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

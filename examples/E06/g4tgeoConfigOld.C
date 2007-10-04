@@ -1,4 +1,4 @@
-// $Id: g4tgeoConfigOld.C,v 1.2 2006/12/18 15:43:18 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples

@@ -1,4 +1,4 @@
-// $Id: TG4TrackingAction.cxx,v 1.12 2007/05/22 12:26:42 brun Exp $
+// $Id$
 // Category: event
 //
 // Class TG4TrackingAction

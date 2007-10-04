@@ -1,4 +1,4 @@
-// $Id: geant4e03LinkDef.h,v 1.1 2005/05/17 13:52:01 brun Exp $
+// $Id$
 
 #ifdef __CINT__
 

@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: makedist.sh,v 1.4 2005/09/23 12:41:03 brun Exp $
+# $Id$
 
 #------------------------------------------------
 # The Geant4 Virtual Monte Carlo package

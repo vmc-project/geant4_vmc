@@ -1,4 +1,4 @@
-// $Id: g4Config2.C,v 1.5 2007/05/31 10:24:31 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples

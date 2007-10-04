@@ -1,4 +1,4 @@
-// $Id: TG4Editor.h,v 1.4 2006/09/13 06:26:11 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

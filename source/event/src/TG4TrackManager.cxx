@@ -1,4 +1,4 @@
-// $Id: $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

@@ -1,4 +1,4 @@
-// $Id: TGeant4.h,v 1.21 2007/03/22 09:04:09 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

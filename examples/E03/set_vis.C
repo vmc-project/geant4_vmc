@@ -1,4 +1,4 @@
-// $Id: set_vis.C,v 1.2 2005/05/17 13:44:26 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples

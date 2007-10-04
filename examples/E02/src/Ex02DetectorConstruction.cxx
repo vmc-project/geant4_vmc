@@ -1,4 +1,4 @@
-// $Id: Ex02DetectorConstruction.cxx,v 1.4 2007/02/14 16:34:04 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples

@@ -1,4 +1,4 @@
-// $Id: TG4PrimaryGeneratorAction.h,v 1.3 2005/09/01 10:04:33 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

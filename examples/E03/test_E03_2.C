@@ -1,4 +1,4 @@
-// $Id: test_E03_2.C,v 1.1 2006/12/13 14:20:17 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples

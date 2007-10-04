@@ -1,5 +1,5 @@
 #!/bin/sh 
-# $Id: test_suite.sh,v 1.6 2006/12/13 14:20:58 brun Exp $
+# $Id$
 
 #------------------------------------------------
 # The Virtual Monte Carlo examples

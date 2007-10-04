@@ -1,4 +1,4 @@
-// $Id: TG4ComposedPhysicsMessenger.h,v 1.1 2007/08/09 13:43:34 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

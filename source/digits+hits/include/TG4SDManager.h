@@ -1,4 +1,4 @@
-// $Id: TG4SDManager.h,v 1.7 2006/12/13 14:21:35 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

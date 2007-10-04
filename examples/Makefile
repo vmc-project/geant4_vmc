@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.5 2006/12/12 20:17:19 brun Exp $
+# $Id$
 
 #------------------------------------------------
 # The Virtual Monte Carlo examples

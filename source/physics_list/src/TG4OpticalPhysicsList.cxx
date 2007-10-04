@@ -1,4 +1,4 @@
-// $Id: TG4OpticalPhysicsList.cxx,v 1.13 2007/08/09 13:43:34 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

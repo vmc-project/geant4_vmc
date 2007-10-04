@@ -1,4 +1,4 @@
-// $Id: Ex01MCStack.h,v 1.4 2003/07/22 06:37:48 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples

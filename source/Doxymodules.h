@@ -1,4 +1,4 @@
-// $Id: Doxymodules.h,v 1.1 2004/11/10 11:39:27 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

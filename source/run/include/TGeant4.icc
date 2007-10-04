@@ -1,4 +1,4 @@
-// $Id: TGeant4.icc,v 1.10 2005/11/18 21:29:35 brun Exp $
+// $Id$
 // Category: run
 
 #include "TG4StepManager.h" 

@@ -1,4 +1,4 @@
-// $Id: TG4SpecialControls.cxx,v 1.6 2007/03/22 09:03:44 brun Exp $ //
+// $Id$ //
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package

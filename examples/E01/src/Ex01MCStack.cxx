@@ -1,4 +1,4 @@
-// $Id: Ex01MCStack.cxx,v 1.5 2006/12/13 14:20:58 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples

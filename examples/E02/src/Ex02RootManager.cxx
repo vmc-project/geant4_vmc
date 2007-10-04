@@ -1,4 +1,4 @@
-// $Id: Ex02RootManager.cxx,v 1.4 2005/11/19 07:07:47 brun Exp $
+// $Id$
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
