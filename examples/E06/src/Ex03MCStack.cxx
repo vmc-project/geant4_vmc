@@ -63,7 +63,7 @@ void  Ex03MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
   	                 Double_t px, Double_t py, Double_t pz, Double_t e,
   		         Double_t vx, Double_t vy, Double_t vz, Double_t tof,
 		         Double_t polx, Double_t poly, Double_t polz,
-		         TMCProcess mech, Int_t& /*ntr*/, Double_t weight,
+		         TMCProcess mech, Int_t& ntr, Double_t weight,
 		         Int_t is) 
 {
 // Creates a new particle with specified properties,
@@ -88,7 +88,9 @@ void  Ex03MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
 
   if (parent<0) fNPrimary++;  
     
-  if (toBeDone) fStack.push(particle);  
+  if (toBeDone) fStack.push(particle);
+  
+  ntr = GetNtrack() - 1;  
 }			 
 
 //_____________________________________________________________________________
