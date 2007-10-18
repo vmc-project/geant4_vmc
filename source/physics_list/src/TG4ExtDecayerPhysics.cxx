@@ -63,14 +63,14 @@ void TG4ExtDecayerPhysics::ConstructParticle()
 void TG4ExtDecayerPhysics::ConstructProcess()
 {
 /// Loop over all particles instantiated and add external decayer
-/// to all decay processes
+/// to all decay processes if External decayer is set
 
-  // CHeck if VMC decayer is defined
+  // Check if VMC decayer is defined
   TVirtualMCDecayer* mcDecayer = gMC->GetDecayer(); 
   if ( ! mcDecayer ) {
-    TG4Globals::Warning(
-      "TG4ExtDecayerPhysics", "ConstructProcess",
-      "No VMC external decayer defined.");
+    // TG4Globals::Warning(
+    //  "TG4ExtDecayerPhysics", "ConstructProcess",
+    //  "No VMC external decayer defined.");
     return;
   }    
       
@@ -84,6 +84,12 @@ void TG4ExtDecayerPhysics::ConstructProcess()
   theParticleIterator->reset();
   while ((*theParticleIterator)())
   {
+    if ( VerboseLevel() > 1 ) {
+      G4cout << "Setting ext decayer for: " 
+             <<  theParticleIterator->value()->GetParticleName() 
+             << G4endl;
+    }         
+  
     G4ProcessVector* processVector 
       = theParticleIterator->value()->GetProcessManager()->GetProcessList();
     for (G4int i=0; i<processVector->length(); i++) {
@@ -93,7 +99,7 @@ void TG4ExtDecayerPhysics::ConstructProcess()
     }              
   }
 
-  if (VerboseLevel() > 0) {
+  if ( VerboseLevel() > 0 ) {
     G4cout << "### " << "External decayer physics constructed." << G4endl;
   }  
 }

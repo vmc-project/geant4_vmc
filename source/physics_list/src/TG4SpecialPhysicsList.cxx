@@ -19,6 +19,7 @@
 #include "TG4SpecialControlsPhysics.h"
 #include "TG4StepLimiterPhysics.h"
 #include "TG4StackPopperPhysics.h"
+#include "TG4ExtDecayerPhysics.h"
 #include "TG4ProcessControlMapPhysics.h"
 #include "TG4ProcessMCMapPhysics.h"
 #include "TG4GeometryServices.h"
@@ -151,7 +152,8 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
         "Unrecognized option " + token);
     }
     token = TG4Globals::GetToken(++itoken, selection); 
-  }        
+  }  
+  RegisterPhysics(new TG4ExtDecayerPhysics(verboseLevel));
   RegisterPhysics(new TG4ProcessMCMapPhysics(verboseLevel));
 }    
 

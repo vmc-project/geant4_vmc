@@ -68,12 +68,12 @@ G4DecayProducts* TG4ExtDecayer::ImportDecayProducts(const G4Track& track)
   
   // get particle momentum
   G4ThreeVector momentum = track.GetMomentum(); 
-  G4double mag = momentum.mag();  
+  G4double etot = track.GetDynamicParticle()->GetTotalEnergy();;  
   TLorentzVector p;    
-  p[0] = momentum.x()/mag;
-  p[1] = momentum.x()/mag;
-  p[2] = momentum.x()/mag;
-  p[3] = mag/TG4G3Units::Energy();
+  p[0] = momentum.x() / TG4G3Units::Energy();
+  p[1] = momentum.y() / TG4G3Units::Energy();
+  p[2] = momentum.z() / TG4G3Units::Energy();
+  p[3] = etot         / TG4G3Units::Energy();
   
   // get particle PDG
   // ask TG4ParticlesManager to get PDG encoding 
