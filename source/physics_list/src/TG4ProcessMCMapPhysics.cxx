@@ -88,8 +88,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("CHIPSNuclearAbsorptionAtRest", kPNuclearAbsorption); 
   
   mcMap->Add("AntiProtonAnnihilationAtRest", kPPbarAnnihilation); 
-  mcMap->Add("AntiNeutronAnnihilationAtRest", kPPbarAnnihilation);
-         /// \todo Define kPAnnihilation to cover both
+  mcMap->Add("AntiNeutronAnnihilationAtRest", kPNbarAnnihilation);
 
   mcMap->Add("HadronElastic", kPHElastic); 
   mcMap->Add("hElastic", kPHElastic); 
@@ -126,22 +125,19 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("alphaInelastic", kPHInhelastic); 
   mcMap->Add("He3Inelastic", kPHInhelastic); 
   mcMap->Add("ionInelastic", kPHInhelastic); 
-  mcMap->Add("PhotonInelastic", kPHInhelastic); 
-         /// \todo Define kPPhotonInelastic
+  mcMap->Add("PhotonInelastic", kPPhotonInhelastic); 
 
   mcMap->Add("nKiller", kPHadronic); 
 
   mcMap->Add("muMinusCaptureAtRest", kPMuonNuclear); 
-  mcMap->Add("PositronNuclear", kPMuonNuclear); 
-  mcMap->Add("ElectroNuclear", kPMuonNuclear); 
-             /// \todo Add kPPositronNuclear, kPElectronNuclear
+  mcMap->Add("PositronNuclear", kPPositronNuclear); 
+  mcMap->Add("ElectroNuclear", kPElectronNuclear); 
   
   mcMap->Add("Cerenkov", kPCerenkov);
-  mcMap->Add("Scintillation", kPNoProcess);
+  mcMap->Add("Scintillation", kPScintillation);
   mcMap->Add("OpAbsorption", kPLightAbsorption);
   mcMap->Add("OpRayleigh", kPRayleigh);
   mcMap->Add("OpBoundary", kPLightScattering);
-             /// \todo Add kPScintillation
 
   mcMap->Add("Transportation", kPTransportation);
   
