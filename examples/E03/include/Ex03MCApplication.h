@@ -50,6 +50,8 @@ class Ex03MCApplication : public TVirtualMCApplication
  
     virtual void ConstructGeometry();
     virtual void InitGeometry();
+    virtual void AddParticles();
+    virtual void AddIons();
     virtual void GeneratePrimaries();
     virtual void BeginEvent();
     virtual void BeginPrimary();

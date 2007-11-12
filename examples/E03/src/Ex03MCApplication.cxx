@@ -137,7 +137,7 @@ void Ex03MCApplication::InitMC(const char* setup)
   gMC->BuildPhysics(); 
   
   RegisterStack();
-}
+}                                   
 
 //_____________________________________________________________________________
 void Ex03MCApplication::RunMC(Int_t nofEvents)
@@ -207,6 +207,48 @@ void Ex03MCApplication::InitGeometry()
 }
 
 //_____________________________________________________________________________
+void Ex03MCApplication::AddParticles()
+{    
+// Example of user defined particle with user defined decay mode
+// ---
+  
+  fVerbose.AddParticles();
+  
+  // Define particle
+  gMC->DefineParticle(1000020050, "He5", kPTHadron,
+                      5.03427 , 2.0, 0.002 , 
+                      "Ion", 0.0, 0, 1, 0, 0, 0, 0, 0, 5, kFALSE); 
+
+  // Define the 2 body  phase space decay  for He5
+  Int_t mode[6][3];                  
+  Float_t bratio[6];
+
+  for (Int_t kz = 0; kz < 6; kz++) {
+     bratio[kz] = 0.;
+     mode[kz][0] = 0;
+     mode[kz][1] = 0;
+     mode[kz][2] = 0;
+  }
+  bratio[0] = 100.;
+  mode[0][0] =2112;       // neutron 
+  mode[0][1] =1000020040 ; // alpha
+
+  gMC->SetDecayMode(1000020050 ,bratio,mode);
+}
+
+//_____________________________________________________________________________
+void Ex03MCApplication::AddIons()
+{    
+// Example of user defined ion
+// ---
+  
+  fVerbose.AddIons();
+  
+  gMC->DefineIon("MyIon", 34, 70, 12, 0.); 
+
+}
+
+//_____________________________________________________________________________
 void Ex03MCApplication::GeneratePrimaries()
 {    
 // Fill the user stack (derived from TVirtualMCStack) with primary particles.
@@ -271,6 +313,16 @@ void Ex03MCApplication::Stepping()
 // User actions at each step
 // ---
 
+  // Work around for Fluka VMC, which does not call
+  // MCApplication::PreTrack()
+  //
+  static Int_t trackId = 0;
+  if ( TString(gMC->GetName()) == "TFluka" &&
+       gMC->GetStack()->GetCurrentTrackNumber() != trackId ) {
+    fVerbose.PreTrack();
+    trackId = gMC->GetStack()->GetCurrentTrackNumber();
+  }      
+    
   fVerbose.Stepping();
 
   fCalorimeterSD->ProcessHits();

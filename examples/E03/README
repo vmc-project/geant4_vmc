@@ -29,6 +29,7 @@ Example03
     Verbosity
     Geometry defined via Geant4 (G4)
     User defined physics list (G4)
+    User defined particles and ions (G3, G4)
 
   See also description of in 
     geant4/examples/novice/N03/README

@@ -39,15 +39,18 @@ class Ex03PrimaryGenerator : public TObject
 
     // set methods
     void  SetIsRandom(Bool_t isRandomGenerator);
+    void  SetUserParticles(Bool_t userParticles);
     void  SetNofPrimaries(Int_t nofPrimaries);
  
   private:
     // methods
-    void GeneratePrimary(const TVector3& origin);
-  
+    void GeneratePrimary1(const TVector3& origin);
+    void GeneratePrimary2(const TVector3& origin);
+ 
     // data members
     TVirtualMCStack*  fStack;    
     Bool_t            fIsRandom;
+    Bool_t            fUserParticles;
     Int_t             fNofPrimaries;
 
   ClassDef(Ex03PrimaryGenerator,1)  //Ex03PrimaryGenerator
@@ -57,6 +60,9 @@ class Ex03PrimaryGenerator : public TObject
 
 inline void  Ex03PrimaryGenerator::SetIsRandom(Bool_t isRandom)
 { fIsRandom = isRandom; }
+
+inline void  Ex03PrimaryGenerator::SetUserParticles(Bool_t userParticles)
+{ fUserParticles = userParticles; }
 
 inline void  Ex03PrimaryGenerator::SetNofPrimaries(Int_t nofPrimaries)
 { fNofPrimaries = nofPrimaries; }

@@ -25,6 +25,7 @@
 #include <TObject.h>
 #include <TTree.h>
 #include <TFile.h>
+#include <TDirectory.h>
 
 class TParticle;
 
@@ -53,6 +54,7 @@ class Ex02RootManager : public TObject
     // data members
     TFile*  fFile;
     TTree*  fTree;
+    TString fPath;
     
     ClassDef(Ex02RootManager,0) // Root IO manager
 };
