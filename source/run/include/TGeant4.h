@@ -192,8 +192,20 @@ class TGeant4: public TVirtualMC
     // set methods
     virtual Bool_t SetCut(const char* cutName, Double_t cutValue);
     virtual Bool_t SetProcess(const char* flagName, Int_t flagValue);
-    virtual Bool_t DefineParticle(Int_t pdg, const char* name, TMCParticleType type, 
+    virtual Bool_t DefineParticle(Int_t pdg, const char* name,
+                        TMCParticleType mcType, 
                         Double_t mass, Double_t charge, Double_t lifetime);
+    virtual Bool_t DefineParticle(Int_t pdg, const char* name,
+                        TMCParticleType mcType, 
+                        Double_t mass, Double_t charge, Double_t lifetime, 
+                        const TString& pType, Double_t width, 
+                        Int_t iSpin, Int_t iParity, Int_t iConjugation, 
+                        Int_t iIsospin, Int_t iIsospinZ, Int_t gParity,
+                        Int_t lepton, Int_t baryon,
+                        Bool_t stable, Bool_t shortlived = kFALSE,
+                        const TString& subType = "",
+                        Int_t antiEncoding = 0, Double_t magMoment = 0.0,
+                        Double_t excitation = 0.0);
     virtual Bool_t DefineIon(const char* name, Int_t Z, Int_t A,  
                         Int_t Q, Double_t excEnergy, Double_t mass);
     virtual Double_t Xsec(char* reac, Double_t energy, Int_t part, Int_t mate);
@@ -224,7 +236,7 @@ class TGeant4: public TVirtualMC
     virtual void SetMaxNStep(Int_t);
     virtual void SetUserDecay(Int_t);     //NEW
     virtual void ForceDecayTime(Float_t); //NEW
-
+    virtual Bool_t SetDecayMode(Int_t pdg, Float_t bratio[6], Int_t mode[6][3]); //new 
     // get methods
          // tracking volume(s) 
     virtual Int_t CurrentVolID(Int_t& copyNo) const;

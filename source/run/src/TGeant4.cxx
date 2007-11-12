@@ -885,15 +885,37 @@ Bool_t TGeant4::SetProcess(const char* flagName, Int_t flagValue)
 }  
  
 //_____________________________________________________________________________
-Bool_t TGeant4::DefineParticle(Int_t pdg, const char* name, TMCParticleType type, 
-                          Double_t mass, Double_t charge, Double_t lifetime) 
+Bool_t TGeant4::DefineParticle(Int_t pdg, const char* name, TMCParticleType mcType, 
+                          Double_t mass, Double_t charge, Double_t lifetime)
 {
-/// Only check if particle with specified pdg is available in Geant4;
-/// if not gives exception.
+/// Old function definition, now replaced with more arguments
+
+  TVirtualMC::DefineParticle(pdg, name, mcType, mass, charge, lifetime);
+  
+  return false;
+}                          
+                        
+//_____________________________________________________________________________
+Bool_t TGeant4::DefineParticle(Int_t pdg, const char* name, TMCParticleType mcType, 
+                          Double_t mass, Double_t charge, Double_t lifetime, 
+                          const TString& pType, Double_t width, 
+                          Int_t iSpin, Int_t iParity, Int_t iConjugation, 
+                          Int_t iIsospin, Int_t iIsospinZ, Int_t gParity,
+                          Int_t lepton, Int_t baryon,
+                          Bool_t stable, Bool_t shortlived,
+                          const TString& subType,
+                          Int_t antiEncoding, Double_t magMoment,
+                          Double_t excitation)
+{
+/// Add the user defined particle with specified characteristics.
 
   if ( ! CheckApplicationState("DefineParticle", kAddParticles ) ) return false;
 
-  return fPhysicsManager->DefineParticle(pdg, name, type, mass, charge, lifetime);
+  return fPhysicsManager->DefineParticle(pdg, name, mcType, mass, charge, lifetime,
+                            pType, width, iSpin, iParity, iConjugation, 
+                            iIsospin, iIsospinZ, gParity, lepton, baryon,
+                            stable, shortlived, subType, antiEncoding, magMoment,
+                            excitation);
 }                          
                         
 //_____________________________________________________________________________
@@ -903,11 +925,21 @@ Bool_t TGeant4::DefineIon(const char* name, Int_t Z, Int_t A,
 /// Keep user defined ion properties in order to be able to use
 /// them later as a primary particle.
  
-  if ( ! CheckApplicationState("DefineIon", kAddParticles ) ) return false;
+  if ( ! CheckApplicationState("DefineIon", kAddIons ) ) return false;
 
   return fPhysicsManager->DefineIon(name, Z, A, Q, excEnergy, mass);
 }  
 
+//_____________________________________________________________________________
+Bool_t TGeant4::SetDecayMode(Int_t pdg, Float_t bratio[6], Int_t mode[6][3])
+{               
+/// Set a user phase space decay for a particle  
+
+  if ( ! CheckApplicationState("SetDecayMode", kAddParticles ) ) return false;
+
+  return fPhysicsManager->SetDecayMode(pdg, bratio, mode);
+}
+                                   
 //_____________________________________________________________________________
 Double_t TGeant4::Xsec(char* reac, Double_t energy, Int_t part, Int_t mate) 
 {

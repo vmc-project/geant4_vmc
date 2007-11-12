@@ -26,6 +26,7 @@ enum TG4ApplicationState
   kMisalignGeometry,
   kInitGeometry,
   kAddParticles,
+  kAddIons,
   kInEvent,
   kNotInApplication
 };

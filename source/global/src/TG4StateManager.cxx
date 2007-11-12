@@ -31,6 +31,7 @@ G4String TG4StateManager::GetStateName(TG4ApplicationState state)
     case kMisalignGeometry:     return "MisalignGeometry";
     case kInitGeometry:         return "InitGeometry";
     case kAddParticles:         return "AddParticles";
+    case kAddIons:              return "AddIons";
     case kInEvent:              return "InEvent";
     case kNotInApplication:   
     default:                    return "NotInApplication";

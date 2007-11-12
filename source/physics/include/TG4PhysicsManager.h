@@ -58,10 +58,21 @@ class TG4PhysicsManager : public TG4Verbose
     // set methods
     Bool_t SetCut(const char* cutName, Float_t cutValue);
     Bool_t SetProcess(const char* controlName, Int_t controlValue);
-    Bool_t DefineParticle(Int_t pdg, const char* name, TMCParticleType type, 
-                 Double_t mass, Double_t charge, Double_t lifetime);
+    Bool_t DefineParticle(Int_t pdg, const char* name,
+                 TMCParticleType mcType, 
+                 Double_t mass, Double_t charge, Double_t lifetime, 
+                 const TString& pType, Double_t width, 
+                 Int_t iSpin, Int_t iParity, Int_t iConjugation, 
+                 Int_t iIsospin, Int_t iIsospinZ, Int_t gParity,
+                 Int_t lepton, Int_t baryon,
+                 Bool_t stable, Bool_t shortlived = kFALSE,
+                 const TString& subType = "",
+                 Int_t antiEncoding = 0, Double_t magMoment = 0.0,
+                 Double_t excitation = 0.0);
     Bool_t DefineIon(const char* name, Int_t Z, Int_t A,  
                  Int_t Q, Double_t excEnergy, Double_t mass);
+    Bool_t SetDecayMode(Int_t pdg, Float_t bratio[6], Int_t mode[6][3]);
+
     Float_t Xsec(char* reac, Float_t energy, Int_t part, Int_t mate);
      
         // particle table usage         

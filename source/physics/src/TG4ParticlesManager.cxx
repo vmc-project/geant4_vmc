@@ -15,6 +15,8 @@
 // See the class description in the header file.
 
 #include "TG4ParticlesManager.h"
+#include "TG4UserIon.h"
+#include "TG4UserParticle.h"
 #include "TG4G3Units.h"
 
 #include <G4ParticleDefinition.hh>
@@ -25,13 +27,23 @@
 #include <TParticle.h>
 #include <TClonesArray.h>
 
+#include <G4VDecayChannel.hh>
+#include <G4PhaseSpaceDecayChannel.hh>
+#include <G4DecayTable.hh>
+#include "TG4StateManager.h"
+#include <TVirtualMCApplication.h>
+#include <TParticle.h>
+
+
+
 TG4ParticlesManager* TG4ParticlesManager::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4ParticlesManager::TG4ParticlesManager()
   : TG4Verbose("particlesManager"),
     fParticleNameMap(),
-    fUserIonMap()
+    fUserIonMap(),
+    fUserParticles()
     
 { 
 //
@@ -187,6 +199,72 @@ void TG4ParticlesManager::DefineParticles()
 }  
  
 //_____________________________________________________________________________
+void TG4ParticlesManager::AddParticle(Int_t pdg, const TString& name,
+                 TMCParticleType mcType,
+                 Double_t mass, Double_t charge, Double_t lifetime, 
+                 const TString& pType, Double_t width, 
+                 Int_t iSpin, Int_t iParity, Int_t iConjugation, 
+                 Int_t iIsospin, Int_t iIsospinZ, Int_t gParity,
+                 Int_t lepton, Int_t baryon,
+                 Bool_t stable, Bool_t shortlived,
+                 const TString& subType,
+                 Int_t antiEncoding, Double_t magMoment,
+                 Double_t excitation)
+{
+/// Add the user defined particle with specified characteristics.
+                 
+  if ( VerboseLevel() > 1 ) {
+    G4cout << "Adding particle with:  "             << G4endl
+           << "  pdg =          " << pdg            << G4endl
+           << "  name =         " << name           << G4endl
+           << "  mcType =       " << mcType         << G4endl
+           << "  mass [GeV} =   " << mass           << G4endl
+           << "  charge [e] =   " << charge         << G4endl 
+           << "  lifetime [s] = " << lifetime       << G4endl 
+           << "  pType =        " << pType.Data()   << G4endl  
+           << "  width =        " << width          << G4endl 
+           << "  iSpin =        " << iSpin          << G4endl
+           << "  iParity =      " << iParity        << G4endl
+           << "  iConjugation=  " << iConjugation   << G4endl
+           << "  iIsospin =     " << iIsospin       << G4endl
+           << "  iIsospinZ =    " << iIsospinZ      << G4endl
+           << "  gParity =      " << gParity        << G4endl
+           << "  lepton =       " << lepton         << G4endl
+           << "  baryon =       " << baryon         << G4endl
+           << "  stable =       " << stable         << G4endl
+           << "  shortlived =   " << shortlived     << G4endl
+           << "  subType =      " << subType.Data() << G4endl
+           << "  antiEncoding = " << antiEncoding   << G4endl 
+           << "  magMoment =    " << magMoment      << G4endl
+           << "  excitation [GeV] = " << excitation << G4endl;
+  } 
+  
+  // Instantiate a new user particle
+  // with the first available user type
+  // 
+  fUserParticles.push_back(
+    new TG4UserParticle(
+           name.Data(), mcType,  
+           mass * TG4G3Units::Energy(), width * TG4G3Units::Energy(),
+           charge* TG4G3Units::Charge(), 
+           iSpin, iParity, iConjugation, iIsospin, iIsospinZ, gParity,
+           pType.Data(), lepton, baryon, pdg, stable, 
+           lifetime * TG4G3Units::Time(), 0, 
+           shortlived, subType.Data(), antiEncoding, magMoment, 
+           excitation * TG4G3Units::Energy()));
+                       
+  // Add particle to TDatabasePDG
+  Int_t anti = -1;
+  if ( antiEncoding != 0 ) anti = antiEncoding;
+  
+  TDatabasePDG *pdgDB = TDatabasePDG::Instance();
+  if ( !pdgDB->GetParticle(pdg) ) {
+    pdgDB->AddParticle(name.Data(), name.Data(), mass, stable,
+                       width, charge*3, pType.Data(), pdg, anti);
+  } 
+}                         
+
+//_____________________________________________________________________________
 void TG4ParticlesManager::AddIon(const G4String& name, G4int Z, G4int A, G4int Q, 
                                  G4double excEnergy)
 {
@@ -222,6 +300,72 @@ void TG4ParticlesManager::AddIon(const G4String& name, G4int Z, G4int A, G4int Q
   // Add ion to the map to be able to retrieve later its charge
   fUserIonMap[name] 
     = new TG4UserIon(name, particleDefinition->GetPDGEncoding(), Q);
+}
+
+//_____________________________________________________________________________
+Bool_t TG4ParticlesManager::SetDecayMode(Int_t pdg, 
+                                         Float_t bratio[6], Int_t mode[6][3])
+{
+/// Set a user phase space decay for a particle  
+   
+  // Check input pdg 
+  if ( pdg == 0 ) {
+    TG4Globals::Exception(
+       "TG4ParticlesManager", "SetDecayMode", 
+       "Cannot define decay mode for particle with PDG=0");
+  }     
+          
+  G4ParticleTable* particleTable= G4ParticleTable::GetParticleTable();                        
+  G4ParticleDefinition* particleDefinition = particleTable->FindParticle(pdg);
+  
+  if ( ! particleDefinition ) {
+     TString pdgs; 
+     pdgs += pdg;
+     TG4Globals::Exception( 
+       "TG4ParticlesManager", "SetDecayMode", 
+       "Particle PDG=" + pdgs + " was not found in G4ParticleTable.");
+  }     
+
+  G4String particleName=  particleDefinition->GetParticleName();
+  G4DecayTable *decayTable =  new G4DecayTable();
+  
+  // Loop over decay channels
+  //
+  for (Int_t kz = 0; kz < 6; ++kz) {
+
+    // Fill names of daughters     
+    G4int nofDaughters = 0;
+    std::vector<G4String> daughtersNames(3);
+    for ( G4int i=0; i<3; i++ ) {
+      daughtersNames[i] = "";
+      if ( mode[kz][i] != 0 ) {
+        G4ParticleDefinition* daughter = particleTable->FindParticle(mode[kz][i]);
+        if ( ! daughter ) {
+          TString pdgs;
+          pdgs += mode[kz][i];
+          TG4Globals::Exception( 
+            "TG4ParticlesManager", "SetDecayMode", 
+            "Daughter particle PDG=" + pdgs + " was not found in G4ParticleTable.");
+        }     
+        daughtersNames[i] = daughter->GetParticleName();
+        ++nofDaughters;
+      }  
+    }  
+    
+    // Define decay channel
+    G4VDecayChannel* decayChannel
+      = new G4PhaseSpaceDecayChannel(
+              particleName, bratio[kz]/100.0, nofDaughters, 
+              daughtersNames[0], daughtersNames[1], daughtersNames[2]);
+    decayTable->Insert(decayChannel);
+  }
+    
+  particleDefinition->SetDecayTable(decayTable);
+  
+  if ( VerboseLevel() > 1 ) 
+    particleDefinition->DumpTable();
+    
+  return true;  
 }
 
 //_____________________________________________________________________________
@@ -385,3 +529,25 @@ TG4UserIon*  TG4ParticlesManager::GetUserIon(
    return 0;
 }     
                                                           
+//_____________________________________________________________________________
+G4int  TG4ParticlesManager::GetNofUserParticles() const
+{
+/// Return the number of user defined particles
+
+  return G4int(fUserParticles.size());
+}  
+  
+//_____________________________________________________________________________
+TG4UserParticle*  TG4ParticlesManager::GetUserParticle(G4int index) const
+{
+/// Return the index-th user particle
+
+  if ( index < 0 || index >= G4int(fUserParticles.size()) ) {
+    TG4Globals::Exception(
+       "TG4ParticlesManager", "GetUserParticle",
+       "Index out of limits");
+  }     
+  
+  return fUserParticles[index];
+}  
+    

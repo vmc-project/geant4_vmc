@@ -589,11 +589,19 @@ Bool_t TG4PhysicsManager::SetProcess(const char* controlName, Int_t value)
 
 //_____________________________________________________________________________
 Bool_t TG4PhysicsManager::DefineParticle(Int_t pdg, const char* name, 
-                           TMCParticleType /*type*/, Double_t /*mass*/, 
-                           Double_t /*charge*/, Double_t /*lifetime*/)
+                            TMCParticleType mcType, 
+                            Double_t mass, Double_t charge, Double_t lifetime, 
+                            const TString& pType, Double_t width, 
+                            Int_t iSpin, Int_t iParity, Int_t iConjugation, 
+                            Int_t iIsospin, Int_t iIsospinZ, Int_t gParity,
+                            Int_t lepton, Int_t baryon,
+                            Bool_t stable, Bool_t shortlived,
+                            const TString& subType,
+                            Int_t antiEncoding, Double_t magMoment,
+                            Double_t excitation)
 {
-/// Only check if particle with specified pdg is available in Geant4;
-/// if not give exception.
+/// Check if particle with specified pdg is available in Geant4;
+/// if not let particles manager to create a new user particle.
 
    // Check if particle is available in Geant4
   G4ParticleTable* particleTable 
@@ -607,27 +615,39 @@ Bool_t TG4PhysicsManager::DefineParticle(Int_t pdg, const char* name,
          particleDefinition = particleTable->FindParticle("geantino");
   }        
   
-  if (particleDefinition) { 
-     if (VerboseLevel() > 0) {    
-       G4cout << "TG4PhysicsManager::DefineParticle (PDG = " 
-              << pdg << ", " << name << "): " << G4endl;
-       G4cout << "   This particle is in Geant4 defined as " 
-              <<  particleDefinition->GetParticleName() << G4endl;
-     }              
-     return true;              
-  }            
-  else { 
+  if ( particleDefinition ) { 
      TString text = "Particle with PDG=";
      text += pdg;
-     text += ", name=" + TString(name) + " does not exist in Geant4.";
-     TG4Globals::Exception(
-       "TG4PhysicsManager", "DefineParticle",
-       text + TG4Globals::Endl() +
-       "Ask " + TString(TG4Globals::Help()) + 
-       " to include this particle in Geant4 VMC.");
-     return false;                  
+     text += ", name=" + TString(name) + TG4Globals::Endl();
+     text += "is defined in Geant4 as \"";
+     text += particleDefinition->GetParticleName().c_str();
+     text += "\"." + TG4Globals::Endl();
+     text += "User definition will be ignored.";
+
+     TG4Globals::Warning(
+       "TG4PhysicsManager", "DefineParticle", text);
+
+     return false;              
+  }            
+  else { 
+     fParticlesManager->AddParticle(pdg, name, mcType, mass, charge, lifetime,
+                            pType, width, iSpin, iParity, iConjugation, 
+                            iIsospin, iIsospinZ, gParity, lepton, baryon,
+                            stable, shortlived, subType, antiEncoding, magMoment,
+                            excitation);                
+     return true;              
   }
 }
+
+//_____________________________________________________________________________                           
+Bool_t TG4PhysicsManager::SetDecayMode(Int_t pdg, Float_t bratio[6], Int_t mode[6][3])
+{
+  fParticlesManager->SetDecayMode(pdg, bratio, mode);
+
+  return true;
+}
+
+
 
 //_____________________________________________________________________________
 Bool_t TG4PhysicsManager::DefineIon(const char* name, Int_t Z, Int_t A,  
@@ -751,8 +771,8 @@ void  TG4PhysicsManager::DefineParticles()
 
   fParticlesManager->DefineParticles();
 
-  TG4StateManager::Instance()->SetNewState(kAddParticles);
-  TVirtualMCApplication::Instance()->AddParticles();
+  TG4StateManager::Instance()->SetNewState(kAddIons);
+  TVirtualMCApplication::Instance()->AddIons();
   TG4StateManager::Instance()->SetNewState(kNotInApplication);
 }    
 

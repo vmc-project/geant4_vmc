@@ -17,6 +17,7 @@
 #include "TG4PrimaryGeneratorAction.h"
 #include "TG4ParticlesManager.h"
 #include "TG4StateManager.h"
+#include "TG4UserIon.h"
 #include "TG4G3Units.h"
 #include "TG4Globals.h"
 
@@ -138,7 +139,7 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
       if ( G4IonTable::IsIon(particleDefinition) &&
            particleDefinition->GetParticleName() != "proton" ) {
         // Get dynamic charge defined by user
-        TG4UserIon* userIon = particlesManager->GetUserIon(particle->GetName());
+        TG4UserIon* userIon = particlesManager->GetUserIon(particle->GetName(), false);
         if ( userIon ) charge = userIon->GetQ() * eplus;
       }       
       primaryParticle->SetCharge(charge);
