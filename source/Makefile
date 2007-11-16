@@ -27,12 +27,14 @@ LIBDIR  = $(TOPDIR)/lib/tgt_$(PLATFORM)
 ifeq ($(ROOTSYS),)
 ROOT_INCDIR = $(shell root-config --incdir)
 ROOT_BINDIR = $(shell root-config --prefix)/bin
+ROOT_ETCDIR = $(shell root-config --prefix)/etc/vmc
 else
 ROOT_INCDIR = $(ROOTSYS)/include
 ROOT_BINDIR = $(ROOTSYS)/bin
+ROOT_ETCDIR = $(ROOTSYS)/etc/vmc
 endif
 
-include ../config/Makefile.$(PLATFORM)
+include $(ROOT_ETCDIR)/Makefile.$(PLATFORM)
 
 ifneq ($(findstring gcc,$(CC)),)
 GCC_MAJOR    := $(shell $(CC) -dumpversion 2>&1 | cut -d'.' -f1)
@@ -49,13 +51,13 @@ GDIRS:=	global geometry digits+hits physics physics_list event run interfaces vi
 
 # Rules
 #
-include ../config/MakeRules
+include $(ROOT_ETCDIR)/MakeRules
 
 # Dictionary
 #
 GDICT    := $(BINDIR)/geant4Cint.cxx
 GDICTH   := $(GDICT:.cxx=.h)
-GDICTO   := $(patsubst %.cxx,$(BINDIR)/%.o,$(GDICT))
+GDICTO   := $(patsubst %.cxx,%.o,$(GDICT))
 
 # Sources
 #
@@ -208,10 +210,10 @@ depend:		$(SRCS)
 TOCLEAN		= $(BINDIR) $(TOPDIR)/include
 TOCLEANALL	= $(BINDIR) $(TOPDIR)/include $(LIBDIR)
 
-MAKEDIST	= ../config/makedist.sh $(GCC_VERS) lib
-MAKEDISTSRC	= ../config/makedist.sh
+MAKEDIST	= $(ROOT_ETCDIR)/g4_makedist.sh $(GCC_VERS) lib
+MAKEDISTSRC	= $(ROOT_ETCDIR)/g4_makedist.sh
 
-include ../config/MakeMacros
+include $(ROOT_ETCDIR)/MakeMacros
 
 ############################### Dependencies ##################################
 

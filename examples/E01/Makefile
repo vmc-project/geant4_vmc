@@ -27,24 +27,26 @@ LIBDIR  = $(TOPDIR)/lib/tgt_$(PLATFORM)
 ifeq ($(ROOTSYS),)
 ROOT_INCDIR = $(shell root-config --incdir)
 ROOT_BINDIR = $(shell root-config --prefix)/bin
+ROOT_ETCDIR = $(shell root-config --prefix)/etc/vmc
 else
 ROOT_INCDIR = $(ROOTSYS)/include
 ROOT_BINDIR = $(ROOTSYS)/bin
+ROOT_ETCDIR = $(ROOTSYS)/etc/vmc
 endif
 
-include $(TOPDIR)/config/Makefile.$(PLATFORM)
+include $(ROOT_ETCDIR)/Makefile.$(PLATFORM)
 
 ############################### Sources #######################################
 
 # Rules
 #
-include $(TOPDIR)/config/MakeRules
+include $(ROOT_ETCDIR)/MakeRules
 
 # Dictionary
 #
 GDICT    := $(BINDIR)/$(PACKAGE)Cint.cxx
 GDICTH   := $(GDICT:.cxx=.h)
-GDICTO   := $(patsubst %.cxx,$(BINDIR)/%.o,$(GDICT))
+GDICTO   := $(patsubst %.cxx,%.o,$(GDICT))
 
 # Sources
 #
@@ -92,7 +94,7 @@ depend:		$(SRCS)
 
 TOCLEAN		= $(BINDIR) $(LIBDIR)/lib$(PACKAGE).$(SL) $(LIBDIR)/lib$(PACKAGE).a
 
-include $(TOPDIR)/config/MakeMacros
+include $(ROOT_ETCDIR)/MakeMacros
 
 ############################### Dependencies ##################################
 
