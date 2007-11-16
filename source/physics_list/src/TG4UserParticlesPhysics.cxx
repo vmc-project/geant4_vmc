@@ -79,7 +79,7 @@ void TG4UserParticlesPhysics::ConstructParticle()
 
   TG4StateManager::Instance()->SetNewState(kAddParticles);
   TVirtualMCApplication::Instance()->AddParticles();
-  TG4StateManager::Instance()->SetNewState(kNotInApplication);
+  TG4StateManager::Instance()->SetNewState(kPreInit);
 }
 
 //_____________________________________________________________________________

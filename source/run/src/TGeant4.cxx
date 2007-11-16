@@ -53,7 +53,7 @@ TGeant4::TGeant4(const char* name, const char* title,
   fStateManager = new TG4StateManager();
   fStateManager->SetNewState(kPreInit);
   // add verbose level
-  G4cout << "TG4StateManager has been created." << G4endl;
+  //G4cout << "TG4StateManager has been created." << G4endl;
   
   // create geometry manager
   fGeometryManager = new TG4GeometryManager(fUserGeometry);
@@ -867,7 +867,7 @@ Bool_t TGeant4::SetCut(const char* cutName, Double_t cutValue)
 { 
 /// Set cut specified by cutName.
 
-  if ( ! CheckApplicationState("SetCut", kInitGeometry, false, true ) ) 
+  if ( ! CheckApplicationState("SetCut", kPreInit) ) 
     return false;
 
   return fPhysicsManager->SetCut(cutName, cutValue);
@@ -878,7 +878,7 @@ Bool_t TGeant4::SetProcess(const char* flagName, Int_t flagValue)
 {
 /// Set process control specified by flagName.
 
-  if ( ! CheckApplicationState("SetProcess", kInitGeometry, false, true  ) ) 
+  if ( ! CheckApplicationState("SetProcess", kPreInit) ) 
     return false;
 
   return fPhysicsManager->SetProcess(flagName, flagValue);
