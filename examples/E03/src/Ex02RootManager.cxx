@@ -32,6 +32,7 @@ Ex02RootManager::Ex02RootManager(const char* projectName, FileMode fileMode)
   : TObject()
 {
 //
+
   if (fgInstance) {
     Fatal("Ex02RootManager", "Singleton instance already exists.");
     return;
@@ -54,7 +55,8 @@ Ex02RootManager::Ex02RootManager(const char* projectName, FileMode fileMode)
       fTree = new TTree(projectName, treeTitle);
       ;;  
   }
-
+  
+  fPath = gDirectory->GetPath();
   fgInstance = this;
 }
 
@@ -125,9 +127,13 @@ void  Ex02RootManager::Fill()
 //_____________________________________________________________________________
 void Ex02RootManager:: WriteAll()
 {
-// Erites the tree in the file.
+// Writes the tree in the file.
 // ---
 
+  gDirectory->cd(fPath.Data());
+     // Go in the directory where we have defined Root file
+     // Needed when running with Fluka  
+  
   fTree->Write();
 }  
 
