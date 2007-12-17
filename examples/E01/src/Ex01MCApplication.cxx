@@ -29,6 +29,7 @@
 #include <TLorentzVector.h>
 #include <TArrayD.h>
 #include <TGeoManager.h>
+#include <TGeoMatrix.h>
 
 ClassImp(Ex01MCApplication)
 
