@@ -77,6 +77,9 @@ void g4libs_graphics(Bool_t granular = true)
   Bool_t isOpenGL = !isSet("G4VIS_NONE") &&
                     (isSet("G4VIS_BUILD_OPENGLX_DRIVER") ||
                      isSet("G4VIS_BUILD_OPENGLXM_DRIVER"));
+  Bool_t isOIX = !isSet("G4VIS_NONE") &&
+                 (isSet("G4VIS_BUILD_OIX_DRIVER") ||
+                  isSet("G4VIS_BUILD_OI_DRIVER"));
   Bool_t isVRML = !isSet("G4VIS_NONE");
   Bool_t isRayTracer = !isSet("G4VIS_NONE");
 
@@ -115,6 +118,11 @@ void g4libs_graphics(Bool_t granular = true)
     gSystem->Load("libGLU");
     gSystem->Load("libGL");
     gSystem->Load("libG4OpenGL");
+  }  
+  if (isOIX) {
+    cout << "loading OpenInventor" << endl;
+    gSystem->Load("libInventor");
+    gSystem->Load("libG4OpenInventor");
   }  
   if (isVRML)
     gSystem->Load("libG4VRML");
@@ -232,6 +240,7 @@ void g4libs_granular()
   // digits_hits  
   gSystem->Load("libG4hits");
   gSystem->Load("libG4digits");   
+  gSystem->Load("libG4detutils");
   gSystem->Load("libG4detector");   
 
   // parameterisation

@@ -120,7 +120,8 @@ void TG4OpticalPhysics::ConstructProcess()
     G4ProcessManager* processManager = particle->GetProcessManager();
     G4String particleName = particle->GetParticleName();
     if (fCerenkovProcess->IsApplicable(*particle)) {
-      processManager->AddContinuousProcess(fCerenkovProcess);
+      processManager->AddProcess(fCerenkovProcess);
+      processManager->SetProcessOrdering(fCerenkovProcess,idxPostStep);
     }
     if (fScintillationProcess->IsApplicable(*particle)) {
       processManager->AddProcess(fScintillationProcess);
