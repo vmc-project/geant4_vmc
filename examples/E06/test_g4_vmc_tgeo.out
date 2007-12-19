@@ -2,24 +2,22 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.16/00      27 June 2007   *
+  *   Version   5.17/08  13 December 2007   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-Compiled on 3 July 2007 for linux with thread support.
+ROOT 5.17/08 (tags/v5-17-08@21361, Dec 18 2007, 13:12:16 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.16.21, June 22, 2007
+CINT/ROOT C/C++ Interpreter version 5.16.27, Oct 25, 2007
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E06.C("g4tgeoConfigOld.C", kTRUE)...
-Note: File "/work/projects/vmc/dev/root/lib/libEG.so" already loaded
-Note: File "/work/projects/vmc/dev/root/lib/libPhysics.so" already loaded
-Note: File "/work/projects/vmc/dev/root/lib/libNet.so" already loaded
 Loading Geant4 granular libraries ...
+loading OpenInventor
 Loading VGM libraries ... 
 Loading libraries ... finished
 Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
@@ -36,7 +34,7 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-09-00    (29-June-2007)
+ Geant4 version Name: geant4-09-01    (14-December-2007)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -67,6 +65,9 @@ The material properties BACKSCATTERCONSTANT set for optical surface WaterSurface
 The material properties REFLECTIVITY set for optical surface AirSurface
 The material properties EFFICIENCY set for optical surface AirSurface
 Info in <TG4RootNavMgr::ConnectToG4>: ROOT detector construction class connected to G4RunManager
+Adding EMPhysicsList
+Adding OpticalPhysicsList 
+Adding SpecialPhysicsList 
 Debug mode is switched on.
 Visualization Manager instantiating...
 Visualization Manager initialising...
@@ -81,10 +82,14 @@ Current available graphics systems are:
   RayTracer (RayTracer)
   VRML1FILE (VRML1FILE)
   VRML2FILE (VRML2FILE)
+  FukuiRenderer (DAWN)
   OpenGLImmediateX (OGLIX)
   OpenGLStoredX (OGLSX)
   OpenGLImmediateXm (OGLIXm)
   OpenGLStoredXm (OGLSXm)
+  OpenInventorXt (OIX)
+  VRML1 (VRML1)
+  VRML2 (VRML2)
 
 Registering model factories...
 
@@ -96,19 +101,13 @@ Registered model factories:
 Registered filter factories:
   None
 
-***** COMMAND NOT FOUND </mcVerbose/geometryBuilder 1> *****
-***** Command ignored *****
-
-###
-You are using the Geant4 VMC hadronics physics
-equivalent to ExN04HadronPhysics from Geant4 (version 6.0)
-Note that this hadronic physics list is not optimized for any particular usage.
-If you wish to have a starting point tailored for a particular area of work,
-please use one of the available physics lists by use-case.
- More information can also be found from the Geant4 HyperNews.
-###
-
- AddDiscreteProcess to OpticalPhoton 
+G4Cerenkov::G4Cerenkov constructor
+NOTE: this is now a G4VDiscreteProcess!
+Required change in UserPhysicsList: 
+change: pmanager->AddContinuousProcess(theCerenkovProcess);
+to:     pmanager->AddProcess(theCerenkovProcess);
+        pmanager->SetProcessOrdering(theCerenkovProcess,idxPostStep);
+### Optical physics constructed.
 
 **********************************************
     GEANT4 Geometry statistics: 
@@ -122,11 +121,11 @@ please use one of the available physics lists by use-case.
 
 ***** Table : Nb of materials = 2 *****
 
- Material:      Air     density:  1.290 mg/cm3  temperature: 273.15 K  pressure:   1.00 atm  RadLength: 285.161 m  
+ Material:      Air     density:  1.290 mg/cm3  RadL: 285.161 m    Imean:  85.684 eV   temperature: 273.15 K  pressure:   1.00 atm
    --->  Element: NITROGEN (N)   Z =  7.0   N =  14.0   A =  14.01 g/mole  ElmMassFraction:  70.00 %  ElmAbundance  72.71 %
    --->  Element: OXYGEN (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole  ElmMassFraction:  30.00 %  ElmAbundance  27.29 %
 
- Material:    Water     density:  1.000 g/cm3   temperature: 273.15 K  pressure:   1.00 atm  RadLength:  36.092 cm 
+ Material:    Water     density:  1.000 g/cm3   RadL:  36.092 cm   Imean:  70.893 eV 
    --->  Element: HYDROGEN (H)   Z =  1.0   N =   1.0   A =   1.01 g/mole  ElmMassFraction:  11.21 %  ElmAbundance  66.67 %
    --->  Element: OXYGEN (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole  ElmMassFraction:  88.79 %  ElmAbundance  33.33 %
 
@@ -448,220 +447,13 @@ SPECULARSPIKECONSTANT
 MPV[0]: (2.038e-06, 0.2)
 MPV[1]: (4.144e-06, 0.2)
  Done DumpVector of 2 entries 
-
-phot:  Total cross sections from Sandia parametrisation. 
-      Sampling according PhotoElectric model
-
-compt:  Total cross sections has a good parametrisation from 10 KeV to (100/Z) GeV
-      Sampling according Klein-Nishina model
-      tables are built for  gamma
-      Lambda tables from 100 eV  to 100 GeV in 90 bins.
-
-conv:  Total cross sections has a good parametrisation from 1.5 MeV to 100 GeV for all Z;
-      sampling secondary e+e- according Bethe-Heitler model
-      tables are built for  gamma
-      Lambda tables from 1.022 MeV to 100 GeV in 100 bins.
-
-msc:  Model variant of multiple scattering for e-
-      Lambda tables from 100 eV  to 100 TeV in 120 bins.
-      LateralDisplacementFlag=  1   Skin= 0
-      Boundary/stepping algorithm is active with RangeFactor= 0.02  Step limit type 1
-
-eIoni:   tables are built for  e-
-      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
-      Lambda tables from threshold to 100 TeV in 120 bins.
-      Delta cross sections and sampling from MollerBhabha model
-      Good description from 1 KeV to 100 GeV.
-      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
-
-eBrem:   tables are built for  e-
-      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
-      Lambda tables from threshold to 100 TeV in 120 bins.
-      Total cross sections and sampling from StandBrem model (based on the EEDL data library) 
-      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV. LPM flag 1
-
-eIoni:   tables are built for  e+
-      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
-      Lambda tables from threshold to 100 TeV in 120 bins.
-      Delta cross sections and sampling from MollerBhabha model
-      Good description from 1 KeV to 100 GeV.
-      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
-
-eBrem:   tables are built for  e+
-      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
-      Lambda tables from threshold to 100 TeV in 120 bins.
-      Total cross sections and sampling from StandBrem model (based on the EEDL data library) 
-      Good description from 1 KeV to 100 GeV, log scale extrapolation above 100 GeV. LPM flag 1
-
-annihil:       Sampling according eplus2gg model
-      tables are built for  e+
-      Lambda tables from 100 eV  to 100 TeV in 120 bins.
-
-hIoni:   tables are built for  proton
-      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
-      Lambda tables from threshold to 100 TeV in 120 bins.
-      Scaling relation is used from proton dE/dx and range.
-      Delta cross sections and sampling from BetheBloch model for scaled energy > 2 MeV
-      Parametrisation from Bragg for protons below.
-      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
-
-msc:  Model variant of multiple scattering for proton
-      Lambda tables from 100 eV  to 100 TeV in 120 bins.
-      LateralDisplacementFlag=  1   Skin= 0
-      Boundary/stepping algorithm is active with RangeFactor= 0.02  Step limit type 1
-
-msc:  Model variant of multiple scattering for GenericIon
-      LateralDisplacementFlag=  0   Skin= 0
-      Boundary/stepping algorithm is active with RangeFactor= 0.2  Step limit type 1
-
-hIoni:   tables are built for  anti_proton
-      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
-      Lambda tables from threshold to 100 TeV in 120 bins.
-      Scaling relation is used from proton dE/dx and range.
-      Delta cross sections and sampling from BetheBloch model for scaled energy > 2 MeV
-      Parametrisation from Bragg for protons below.
-      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
-
-msc:  Model variant of multiple scattering for mu+
-      Lambda tables from 100 eV  to 100 TeV in 120 bins.
-      LateralDisplacementFlag=  1   Skin= 0
-      Boundary/stepping algorithm is active with RangeFactor= 0.02  Step limit type 1
-
-muIoni:   tables are built for  mu+
-      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
-      Lambda tables from threshold to 100 TeV in 120 bins.
-      Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
-      radiative corrections for E > 1 GeV
-      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
-
-muBrems:   tables are built for  mu+
-      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
-      Lambda tables from threshold to 100 TeV in 120 bins.
-      Parametrised model 
-
-muPairProd:   tables are built for  mu+
-      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
-      Lambda tables from threshold to 100 TeV in 120 bins.
-      Parametrised model 
-
-muIoni:   tables are built for  mu-
-      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
-      Lambda tables from threshold to 100 TeV in 120 bins.
-      Bether-Bloch model for E > 0.2 MeV, parametrisation of Bragg peak below, 
-      radiative corrections for E > 1 GeV
-      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
-
-muBrems:   tables are built for  mu-
-      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
-      Lambda tables from threshold to 100 TeV in 120 bins.
-      Parametrised model 
-
-muPairProd:   tables are built for  mu-
-      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
-      Lambda tables from threshold to 100 TeV in 120 bins.
-      Parametrised model 
-
-hIoni:   tables are built for  pi+
-      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
-      Lambda tables from threshold to 100 TeV in 120 bins.
-      Scaling relation is used from proton dE/dx and range.
-      Delta cross sections and sampling from BetheBloch model for scaled energy > 0.297504 MeV
-      Parametrisation from Bragg for protons below.
-      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
-
-hIoni:   tables are built for  pi-
-      dE/dx and range tables from 100 eV  to 100 TeV in 120 bins.
-      Lambda tables from threshold to 100 TeV in 120 bins.
-      Scaling relation is used from proton dE/dx and range.
-      Delta cross sections and sampling from BetheBloch model for scaled energy > 0.297504 MeV
-      Parametrisation from Bragg for protons below.
-      Step function: finalRange(mm)= 1, dRoverRange= 0.2, integral: 1
-
-msc:  Model variant of multiple scattering for pi-
-      Lambda tables from 100 eV  to 100 TeV in 120 bins.
-      LateralDisplacementFlag=  1   Skin= 0
-      Boundary/stepping algorithm is active with RangeFactor= 0.02  Step limit type 1
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-G4SteppingManager::InvokeAtRestDoItProcs: No AtRestDoIt process is active. 
-Number of optical photons produced in this event : 2051
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 2021
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-G4SteppingManager::InvokeAtRestDoItProcs: No AtRestDoIt process is active. 
-Number of optical photons produced in this event : 2024
-Number of optical photons produced in this event : 2008
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 2035
-Number of optical photons produced in this event : 2213
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 2030
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 2075
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 2006
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 2075
+Number of optical photons produced in this event : 611
+Number of optical photons produced in this event : 581
+Number of optical photons produced in this event : 557
+Number of optical photons produced in this event : 724
+Number of optical photons produced in this event : 484
+Number of optical photons produced in this event : 633
+Number of optical photons produced in this event : 653
+Number of optical photons produced in this event : 701
+Number of optical photons produced in this event : 628
+Number of optical photons produced in this event : 697

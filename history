@@ -12,6 +12,31 @@ $Id$
      
 Tags (history):
 ===============
+  18/12/2007
+  v2-4:
+    Geant4 VMC:
+      - Geant4 VMC default physics list replaced with the
+        physics lists provided in Geant4 selected by user
+        via an option in TG4RunConfiguration class.
+        - The classes used for selecting/building physics list
+          are now moved in a new directory physics_list
+        - The physics constructor classes were renamed
+          from  TG4PhysicsConstructorXYZ to TG4XYZPhysics 
+        - Some command defined in /mcPhysics were changed 
+          with these modifications
+      - Implemented new TVirtualMC functions for user defined
+        particles, including their decay channels:
+          DefineParticle()
+          SetDecayMode()
+      - Revised TMCProcess constants, adding new constants
+        needed for Geant4 physics in root/vmc    
+    
+    Examples:
+      - In E03: added an example for adding particles and ions      
+        thanks to Mohammad Al-Turany
+    
+    Tested with Geant4 9.1, CLHEP 2.0.3.2, Root 5.17/08, VGM 3.00
+
   03/07/2007
   v2-3:
     Geant4 VMC:

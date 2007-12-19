@@ -2,31 +2,28 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.16/00      27 June 2007   *
+  *   Version   5.17/08  13 December 2007   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-Compiled on 3 July 2007 for linux with thread support.
+ROOT 5.17/08 (tags/v5-17-08@21361, Dec 18 2007, 13:12:16 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.16.21, June 22, 2007
+CINT/ROOT C/C++ Interpreter version 5.16.27, Oct 25, 2007
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E02.C("g3tgeoConfig.C", kFALSE)...
-Note: File "/work/projects/vmc/dev/root/lib/libEG.so" already loaded
-Note: File "/work/projects/vmc/dev/root/lib/libPhysics.so" already loaded
-Note: File "/work/projects/vmc/dev/root/lib/libNet.so" already loaded
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766364367    2DADCACF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766473103    2DAF738F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766387405   766364367
-                                        HEX    2DAE24CD    2DADCACF
+          with Store/Table at absolute adrs   766496141   766473103
+                                        HEX    2DAFCD8D    2DAF738F
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

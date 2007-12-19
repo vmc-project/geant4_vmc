@@ -44,31 +44,42 @@ do
 
     echo "... Running test with G4, geometry via VMC,  TGeo navigation" 
     root.exe -q "test_$EXAMPLE.C(\"g4tgeoConfigOld.C\", kTRUE)" >& test_g4_vmc_tgeo.out   
+
   else
-    # Run two macro + special configuration available only in E03 example
+    # Run three macro + special configuration available only in E03 example
     echo "... Running test with G3, geometry via TGeo, TGeo navigation" 
     root.exe -q "test_E03_1.C(\"g3tgeoConfig.C\", kFALSE)" >& test_g3_tgeo_tgeo.out   
     root.exe -q "test_E03_2.C(\"g3tgeoConfig.C\", kFALSE)" >& tmpfile
+    cat tmpfile >> test_g3_tgeo_tgeo.out
+    root.exe -q "test_E03_3.C(\"g3tgeoConfig.C\", kFALSE)" >& tmpfile
     cat tmpfile >> test_g3_tgeo_tgeo.out
 
     echo "... Running test with G3, geometry via VMC,  Native navigation" 
     root.exe -q "test_E03_1.C(\"g3Config.C\", kTRUE)" >& test_g3_vmc_nat.out   
     root.exe -q "test_E03_2.C(\"g3Config.C\", kTRUE)" >& tmpfile   
     cat tmpfile >> test_g3_vmc_nat.out
+    root.exe -q "test_E03_3.C(\"g3Config.C\", kTRUE)" >& tmpfile   
+    cat tmpfile >> test_g3_vmc_nat.out
 
     echo "... Running test with G3, geometry via VMC,  TGeo navigation" 
     root.exe -q "test_E03_1.C(\"g3tgeoConfig.C\", kTRUE)" >& test_g3_vmc_tgeo.out   
     root.exe -q "test_E03_2.C(\"g3tgeoConfig.C\", kTRUE)" >& tmpfile  
+    cat tmpfile >> test_g3_vmc_tgeo.out
+    root.exe -q "test_E03_3.C(\"g3tgeoConfig.C\", kTRUE)" >& tmpfile  
     cat tmpfile >> test_g3_vmc_tgeo.out
 
     echo "... Running test with G4, geometry via TGeo, Native navigation" 
     root.exe -q "test_E03_1.C(\"g4Config.C\", kFALSE)" >& test_g4_tgeo_nat.out   
     root.exe -q "test_E03_2.C(\"g4Config.C\", kFALSE)" >& tmpfile  
     cat tmpfile >> test_g4_tgeo_nat.out
+    root.exe -q "test_E03_3.C(\"g4Config.C\", kFALSE)" >& tmpfile  
+    cat tmpfile >> test_g4_tgeo_nat.out
 
     echo "... Running test with G4, geometry via TGeo, TGeo navigation" 
     root.exe -q "test_E03_1.C(\"g4tgeoConfig.C\", kFALSE)" >& test_g4_tgeo_tgeo.out   
     root.exe -q "test_E03_2.C(\"g4tgeoConfig.C\", kFALSE)" >& tmpfile   
+    cat tmpfile >> test_g4_tgeo_tgeo.out
+    root.exe -q "test_E03_3.C(\"g4tgeoConfig.C\", kFALSE)" >& tmpfile   
     cat tmpfile >> test_g4_tgeo_tgeo.out
 
     echo "... Running test with G4, geometry via VMC,  Native navigation" 
@@ -80,17 +91,24 @@ do
     root.exe -q "test_E03_1.C(\"g4tgeoConfigOld.C\", kTRUE)" >& test_g4_vmc_tgeo.out   
     root.exe -q "test_E03_2.C(\"g4tgeoConfigOld.C\", kTRUE)" >& tmpfile 
     cat tmpfile >> test_g4_vmc_tgeo.out
+    root.exe -q "test_E03_3.C(\"g4tgeoConfigOld.C\", kTRUE)" >& tmpfile 
+    cat tmpfile >> test_g4_vmc_tgeo.out
 
     echo "... Running test with G4, geometry via G4,   Native navigation" 
     root.exe -q "test_E03_1.C(\"g4Config1.C\", kFALSE)" >& test_g4_g4_nat.out   
     root.exe -q "test_E03_2.C(\"g4Config1.C\", kFALSE)" >& tmpfile   
+    cat tmpfile >> test_g4_g4_nat.out
+    root.exe -q "test_E03_3.C(\"g4Config1.C\", kFALSE)" >& tmpfile   
     cat tmpfile >> test_g4_g4_nat.out
 
     echo "... Running test with G4, geometry via TGeo, Native navigation, User physics list" 
     root.exe -q "test_E03_1.C(\"g4Config2.C\", kFALSE)" >& test_g4_tgeo_nat_pl.out   
     root.exe -q "test_E03_2.C(\"g4Config2.C\", kFALSE)" >& tmpfile    
     cat tmpfile >> test_g4_tgeo_nat_pl.out
+    root.exe -q "test_E03_3.C(\"g4Config2.C\", kFALSE)" >& tmpfile    
+    cat tmpfile >> test_g4_tgeo_nat_pl.out
     rm tmpfile
+
   fi  
 
   echo " "
