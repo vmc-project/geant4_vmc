@@ -125,7 +125,7 @@ Geant4 has been created.
 ---> Begin of event: 5
    Absorber: total energy (MeV): 904.427       total track length (cm):  55.3041
    Gap:      total energy (MeV): 31.3508       total track length (cm):  15.3306
-Time of this run:   User=0.34s Real=0.33s Sys=0s
+Time of this run:   User=0.34s Real=0.34s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
@@ -776,13 +776,9 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  41.707       total track length (cm):    2.217
    Gap:      total energy (MeV):   8.290       total track length (cm):    4.409
-Time of this run:   User=0.01s Real=0.02s Sys=0s
+Time of this run:   User=0.01s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
-WARNING - Attempt to delete the physical volume store while geometry closed !
-WARNING - Attempt to delete the logical volume store while geometry closed !
-WARNING - Attempt to delete the solid store while geometry closed !
-WARNING - Attempt to delete the region store while geometry closed !
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
@@ -45258,6 +45254,6 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1075.290       total track length (cm):    0.087
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.8s Real=0.99s Sys=0.19s
+Time of this run:   User=0.79s Real=0.97s Sys=0.18s
 Number of events processed: 1
 --- Finish Run MC 

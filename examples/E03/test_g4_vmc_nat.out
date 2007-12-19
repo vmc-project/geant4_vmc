@@ -111,7 +111,7 @@ Instantiated 6 volume table entries
 ---> Begin of event: 5
    Absorber: total energy (MeV): 935.931       total track length (cm):  54.0119
    Gap:      total energy (MeV): 21.3387       total track length (cm):  8.73023
-Time of this run:   User=0.27s Real=0.28s Sys=0s
+Time of this run:   User=0.28s Real=0.29s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
@@ -672,7 +672,3 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 Time of this run:   User=0.01s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
-WARNING - Attempt to delete the physical volume store while geometry closed !
-WARNING - Attempt to delete the logical volume store while geometry closed !
-WARNING - Attempt to delete the solid store while geometry closed !
-WARNING - Attempt to delete the region store while geometry closed !

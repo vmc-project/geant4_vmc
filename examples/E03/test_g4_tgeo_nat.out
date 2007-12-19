@@ -114,7 +114,7 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 ---> Begin of event: 5
    Absorber: total energy (MeV): 930.776       total track length (cm):  54.9158
    Gap:      total energy (MeV): 19.8425       total track length (cm):  9.15042
-Time of this run:   User=0.31s Real=0.31s Sys=0.01s
+Time of this run:   User=0.32s Real=0.32s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
@@ -757,10 +757,6 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 Time of this run:   User=0.01s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
-WARNING - Attempt to delete the physical volume store while geometry closed !
-WARNING - Attempt to delete the logical volume store while geometry closed !
-WARNING - Attempt to delete the solid store while geometry closed !
-WARNING - Attempt to delete the region store while geometry closed !
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
@@ -45054,6 +45050,6 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1080.034       total track length (cm):    0.096
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.72s Real=1.06s Sys=0.26s
+Time of this run:   User=0.72s Real=0.96s Sys=0.23s
 Number of events processed: 1
 --- Finish Run MC 

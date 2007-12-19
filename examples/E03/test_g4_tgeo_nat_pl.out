@@ -261,7 +261,7 @@ hIoni:   tables are built for  pi-
 ---> Begin of event: 5
    Absorber: total energy (MeV): 900.773       total track length (cm):  52.0257
    Gap:      total energy (MeV): 40.8648       total track length (cm):  20.1458
-Time of this run:   User=0.33s Real=0.61s Sys=0.01s
+Time of this run:   User=0.33s Real=0.33s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
@@ -1022,13 +1022,9 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  48.281       total track length (cm):    2.285
    Gap:      total energy (MeV):   0.188       total track length (cm):    0.047
-Time of this run:   User=0.01s Real=0.01s Sys=0s
+Time of this run:   User=0.01s Real=0.02s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
-WARNING - Attempt to delete the physical volume store while geometry closed !
-WARNING - Attempt to delete the logical volume store while geometry closed !
-WARNING - Attempt to delete the solid store while geometry closed !
-WARNING - Attempt to delete the region store while geometry closed !
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
@@ -45181,6 +45177,6 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1134.701       total track length (cm):    0.145
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.74s Real=1.01s Sys=0.24s
+Time of this run:   User=0.79s Real=0.96s Sys=0.17s
 Number of events processed: 1
 --- Finish Run MC 

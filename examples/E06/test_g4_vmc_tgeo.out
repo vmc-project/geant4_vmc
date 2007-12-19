@@ -118,6 +118,335 @@ to:     pmanager->AddProcess(theCerenkovProcess);
               3 sensitive detectors
 **********************************************
 
+
+***** Table : Nb of materials = 2 *****
+
+ Material:      Air     density:  1.290 mg/cm3  RadL: 285.161 m    Imean:  85.684 eV   temperature: 273.15 K  pressure:   1.00 atm
+   --->  Element: NITROGEN (N)   Z =  7.0   N =  14.0   A =  14.01 g/mole  ElmMassFraction:  70.00 %  ElmAbundance  72.71 %
+   --->  Element: OXYGEN (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole  ElmMassFraction:  30.00 %  ElmAbundance  27.29 %
+
+ Material:    Water     density:  1.000 g/cm3   RadL:  36.092 cm   Imean:  70.893 eV 
+   --->  Element: HYDROGEN (H)   Z =  1.0   N =   1.0   A =   1.01 g/mole  ElmMassFraction:  11.21 %  ElmAbundance  66.67 %
+   --->  Element: OXYGEN (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole  ElmMassFraction:  88.79 %  ElmAbundance  33.33 %
+
+Air material properties table: 
+ABSLENGTH
+MPV[0]: (2.034e-06, inf)
+MPV[1]: (2.068e-06, inf)
+MPV[2]: (2.103e-06, inf)
+MPV[3]: (2.139e-06, inf)
+MPV[4]: (2.177e-06, inf)
+MPV[5]: (2.216e-06, inf)
+MPV[6]: (2.256e-06, inf)
+MPV[7]: (2.298e-06, inf)
+MPV[8]: (2.341e-06, inf)
+MPV[9]: (2.386e-06, inf)
+MPV[10]: (2.433e-06, inf)
+MPV[11]: (2.481e-06, inf)
+MPV[12]: (2.532e-06, inf)
+MPV[13]: (2.585e-06, inf)
+MPV[14]: (2.64e-06, inf)
+MPV[15]: (2.697e-06, inf)
+MPV[16]: (2.757e-06, inf)
+MPV[17]: (2.82e-06, inf)
+MPV[18]: (2.885e-06, inf)
+MPV[19]: (2.954e-06, inf)
+MPV[20]: (3.026e-06, inf)
+MPV[21]: (3.102e-06, inf)
+MPV[22]: (3.181e-06, inf)
+MPV[23]: (3.265e-06, inf)
+MPV[24]: (3.353e-06, inf)
+MPV[25]: (3.446e-06, inf)
+MPV[26]: (3.545e-06, inf)
+MPV[27]: (3.649e-06, inf)
+MPV[28]: (3.76e-06, inf)
+MPV[29]: (3.877e-06, inf)
+MPV[30]: (4.002e-06, inf)
+MPV[31]: (4.136e-06, inf)
+ Done DumpVector of 32 entries 
+EFFICIENCY
+MPV[0]: (2.034e-06, 0)
+MPV[1]: (2.068e-06, 0)
+MPV[2]: (2.103e-06, 0)
+MPV[3]: (2.139e-06, 0)
+MPV[4]: (2.177e-06, 0)
+MPV[5]: (2.216e-06, 0)
+MPV[6]: (2.256e-06, 0)
+MPV[7]: (2.298e-06, 0)
+MPV[8]: (2.341e-06, 0)
+MPV[9]: (2.386e-06, 0)
+MPV[10]: (2.433e-06, 0)
+MPV[11]: (2.481e-06, 0)
+MPV[12]: (2.532e-06, 0)
+MPV[13]: (2.585e-06, 0)
+MPV[14]: (2.64e-06, 0)
+MPV[15]: (2.697e-06, 0)
+MPV[16]: (2.757e-06, 0)
+MPV[17]: (2.82e-06, 0)
+MPV[18]: (2.885e-06, 0)
+MPV[19]: (2.954e-06, 0)
+MPV[20]: (3.026e-06, 0)
+MPV[21]: (3.102e-06, 0)
+MPV[22]: (3.181e-06, 0)
+MPV[23]: (3.265e-06, 0)
+MPV[24]: (3.353e-06, 0)
+MPV[25]: (3.446e-06, 0)
+MPV[26]: (3.545e-06, 0)
+MPV[27]: (3.649e-06, 0)
+MPV[28]: (3.76e-06, 0)
+MPV[29]: (3.877e-06, 0)
+MPV[30]: (4.002e-06, 0)
+MPV[31]: (4.136e-06, 0)
+ Done DumpVector of 32 entries 
+FASTCOMPONENT
+NULL Material Property Vector Pointer.
+RAYLEIGH
+NULL Material Property Vector Pointer.
+RINDEX
+MPV[0]: (2.034e-06, 1)
+MPV[1]: (2.068e-06, 1)
+MPV[2]: (2.103e-06, 1)
+MPV[3]: (2.139e-06, 1)
+MPV[4]: (2.177e-06, 1)
+MPV[5]: (2.216e-06, 1)
+MPV[6]: (2.256e-06, 1)
+MPV[7]: (2.298e-06, 1)
+MPV[8]: (2.341e-06, 1)
+MPV[9]: (2.386e-06, 1)
+MPV[10]: (2.433e-06, 1)
+MPV[11]: (2.481e-06, 1)
+MPV[12]: (2.532e-06, 1)
+MPV[13]: (2.585e-06, 1)
+MPV[14]: (2.64e-06, 1)
+MPV[15]: (2.697e-06, 1)
+MPV[16]: (2.757e-06, 1)
+MPV[17]: (2.82e-06, 1)
+MPV[18]: (2.885e-06, 1)
+MPV[19]: (2.954e-06, 1)
+MPV[20]: (3.026e-06, 1)
+MPV[21]: (3.102e-06, 1)
+MPV[22]: (3.181e-06, 1)
+MPV[23]: (3.265e-06, 1)
+MPV[24]: (3.353e-06, 1)
+MPV[25]: (3.446e-06, 1)
+MPV[26]: (3.545e-06, 1)
+MPV[27]: (3.649e-06, 1)
+MPV[28]: (3.76e-06, 1)
+MPV[29]: (3.877e-06, 1)
+MPV[30]: (4.002e-06, 1)
+MPV[31]: (4.136e-06, 1)
+ Done DumpVector of 32 entries 
+SLOWCOMPONENT
+NULL Material Property Vector Pointer.
+Water material properties table: 
+ABSLENGTH
+MPV[0]: (2.034e-06, 3448)
+MPV[1]: (2.068e-06, 4082)
+MPV[2]: (2.103e-06, 6329)
+MPV[3]: (2.139e-06, 9174)
+MPV[4]: (2.177e-06, 12346)
+MPV[5]: (2.216e-06, 13889)
+MPV[6]: (2.256e-06, 15152)
+MPV[7]: (2.298e-06, 17241)
+MPV[8]: (2.341e-06, 18868)
+MPV[9]: (2.386e-06, 20000)
+MPV[10]: (2.433e-06, 26316)
+MPV[11]: (2.481e-06, 35714)
+MPV[12]: (2.532e-06, 45455)
+MPV[13]: (2.585e-06, 47619)
+MPV[14]: (2.64e-06, 52632)
+MPV[15]: (2.697e-06, 52632)
+MPV[16]: (2.757e-06, 55556)
+MPV[17]: (2.82e-06, 52632)
+MPV[18]: (2.885e-06, 52632)
+MPV[19]: (2.954e-06, 47619)
+MPV[20]: (3.026e-06, 45455)
+MPV[21]: (3.102e-06, 41667)
+MPV[22]: (3.181e-06, 37037)
+MPV[23]: (3.265e-06, 33333)
+MPV[24]: (3.353e-06, 30000)
+MPV[25]: (3.446e-06, 28500)
+MPV[26]: (3.545e-06, 27000)
+MPV[27]: (3.649e-06, 24500)
+MPV[28]: (3.76e-06, 22000)
+MPV[29]: (3.877e-06, 19500)
+MPV[30]: (4.002e-06, 17500)
+MPV[31]: (4.136e-06, 14500)
+ Done DumpVector of 32 entries 
+EFFICIENCY
+MPV[0]: (2.034e-06, 0)
+MPV[1]: (2.068e-06, 0)
+MPV[2]: (2.103e-06, 0)
+MPV[3]: (2.139e-06, 0)
+MPV[4]: (2.177e-06, 0)
+MPV[5]: (2.216e-06, 0)
+MPV[6]: (2.256e-06, 0)
+MPV[7]: (2.298e-06, 0)
+MPV[8]: (2.341e-06, 0)
+MPV[9]: (2.386e-06, 0)
+MPV[10]: (2.433e-06, 0)
+MPV[11]: (2.481e-06, 0)
+MPV[12]: (2.532e-06, 0)
+MPV[13]: (2.585e-06, 0)
+MPV[14]: (2.64e-06, 0)
+MPV[15]: (2.697e-06, 0)
+MPV[16]: (2.757e-06, 0)
+MPV[17]: (2.82e-06, 0)
+MPV[18]: (2.885e-06, 0)
+MPV[19]: (2.954e-06, 0)
+MPV[20]: (3.026e-06, 0)
+MPV[21]: (3.102e-06, 0)
+MPV[22]: (3.181e-06, 0)
+MPV[23]: (3.265e-06, 0)
+MPV[24]: (3.353e-06, 0)
+MPV[25]: (3.446e-06, 0)
+MPV[26]: (3.545e-06, 0)
+MPV[27]: (3.649e-06, 0)
+MPV[28]: (3.76e-06, 0)
+MPV[29]: (3.877e-06, 0)
+MPV[30]: (4.002e-06, 0)
+MPV[31]: (4.136e-06, 0)
+ Done DumpVector of 32 entries 
+FASTCOMPONENT
+MPV[0]: (2.034e-06, 1)
+MPV[1]: (2.068e-06, 1)
+MPV[2]: (2.103e-06, 1)
+MPV[3]: (2.139e-06, 1)
+MPV[4]: (2.177e-06, 1)
+MPV[5]: (2.216e-06, 1)
+MPV[6]: (2.256e-06, 1)
+MPV[7]: (2.298e-06, 1)
+MPV[8]: (2.341e-06, 1)
+MPV[9]: (2.386e-06, 1)
+MPV[10]: (2.433e-06, 1)
+MPV[11]: (2.481e-06, 1)
+MPV[12]: (2.532e-06, 1)
+MPV[13]: (2.585e-06, 1)
+MPV[14]: (2.64e-06, 1)
+MPV[15]: (2.697e-06, 1)
+MPV[16]: (2.757e-06, 1)
+MPV[17]: (2.82e-06, 1)
+MPV[18]: (2.885e-06, 1)
+MPV[19]: (2.954e-06, 1)
+MPV[20]: (3.026e-06, 1)
+MPV[21]: (3.102e-06, 1)
+MPV[22]: (3.181e-06, 1)
+MPV[23]: (3.265e-06, 1)
+MPV[24]: (3.353e-06, 1)
+MPV[25]: (3.446e-06, 1)
+MPV[26]: (3.545e-06, 1)
+MPV[27]: (3.649e-06, 1)
+MPV[28]: (3.76e-06, 1)
+MPV[29]: (3.877e-06, 1)
+MPV[30]: (4.002e-06, 1)
+MPV[31]: (4.136e-06, 1)
+ Done DumpVector of 32 entries 
+RAYLEIGH
+NULL Material Property Vector Pointer.
+RINDEX
+MPV[0]: (2.034e-06, 1.3435)
+MPV[1]: (2.068e-06, 1.344)
+MPV[2]: (2.103e-06, 1.3445)
+MPV[3]: (2.139e-06, 1.345)
+MPV[4]: (2.177e-06, 1.3455)
+MPV[5]: (2.216e-06, 1.346)
+MPV[6]: (2.256e-06, 1.3465)
+MPV[7]: (2.298e-06, 1.347)
+MPV[8]: (2.341e-06, 1.3475)
+MPV[9]: (2.386e-06, 1.348)
+MPV[10]: (2.433e-06, 1.3485)
+MPV[11]: (2.481e-06, 1.3492)
+MPV[12]: (2.532e-06, 1.35)
+MPV[13]: (2.585e-06, 1.3505)
+MPV[14]: (2.64e-06, 1.351)
+MPV[15]: (2.697e-06, 1.3518)
+MPV[16]: (2.757e-06, 1.3522)
+MPV[17]: (2.82e-06, 1.353)
+MPV[18]: (2.885e-06, 1.3535)
+MPV[19]: (2.954e-06, 1.354)
+MPV[20]: (3.026e-06, 1.3545)
+MPV[21]: (3.102e-06, 1.355)
+MPV[22]: (3.181e-06, 1.3555)
+MPV[23]: (3.265e-06, 1.356)
+MPV[24]: (3.353e-06, 1.3568)
+MPV[25]: (3.446e-06, 1.3572)
+MPV[26]: (3.545e-06, 1.358)
+MPV[27]: (3.649e-06, 1.3585)
+MPV[28]: (3.76e-06, 1.359)
+MPV[29]: (3.877e-06, 1.3595)
+MPV[30]: (4.002e-06, 1.36)
+MPV[31]: (4.136e-06, 1.3608)
+ Done DumpVector of 32 entries 
+SLOWCOMPONENT
+MPV[0]: (2.034e-06, 0.01)
+MPV[1]: (2.068e-06, 1)
+MPV[2]: (2.103e-06, 2)
+MPV[3]: (2.139e-06, 3)
+MPV[4]: (2.177e-06, 4)
+MPV[5]: (2.216e-06, 5)
+MPV[6]: (2.256e-06, 6)
+MPV[7]: (2.298e-06, 7)
+MPV[8]: (2.341e-06, 8)
+MPV[9]: (2.386e-06, 9)
+MPV[10]: (2.433e-06, 8)
+MPV[11]: (2.481e-06, 7)
+MPV[12]: (2.532e-06, 6)
+MPV[13]: (2.585e-06, 4)
+MPV[14]: (2.64e-06, 3)
+MPV[15]: (2.697e-06, 2)
+MPV[16]: (2.757e-06, 1)
+MPV[17]: (2.82e-06, 0.01)
+MPV[18]: (2.885e-06, 1)
+MPV[19]: (2.954e-06, 2)
+MPV[20]: (3.026e-06, 3)
+MPV[21]: (3.102e-06, 4)
+MPV[22]: (3.181e-06, 5)
+MPV[23]: (3.265e-06, 6)
+MPV[24]: (3.353e-06, 7)
+MPV[25]: (3.446e-06, 8)
+MPV[26]: (3.545e-06, 9)
+MPV[27]: (3.649e-06, 8)
+MPV[28]: (3.76e-06, 7)
+MPV[29]: (3.877e-06, 6)
+MPV[30]: (4.002e-06, 5)
+MPV[31]: (4.136e-06, 4)
+ Done DumpVector of 32 entries 
+FASTTIMECONSTANT
+1
+RESOLUTIONSCALE
+1
+SCINTILLATIONYIELD
+50
+SLOWTIMECONSTANT
+10
+YIELDRATIO
+0.8
+AirSurface optical surface material properties table: 
+EFFICIENCY
+MPV[0]: (2.038e-06, 0.8)
+MPV[1]: (4.144e-06, 1)
+ Done DumpVector of 2 entries 
+REFLECTIVITY
+MPV[0]: (2.038e-06, 0.3)
+MPV[1]: (4.144e-06, 0.5)
+ Done DumpVector of 2 entries 
+WaterSurface optical surface material properties table: 
+BACKSCATTERCONSTANT
+MPV[0]: (2.038e-06, 0.2)
+MPV[1]: (4.144e-06, 0.2)
+ Done DumpVector of 2 entries 
+RINDEX
+MPV[0]: (2.038e-06, 1.35)
+MPV[1]: (4.144e-06, 1.4)
+ Done DumpVector of 2 entries 
+SPECULARLOBECONSTANT
+MPV[0]: (2.038e-06, 0.3)
+MPV[1]: (4.144e-06, 0.3)
+ Done DumpVector of 2 entries 
+SPECULARSPIKECONSTANT
+MPV[0]: (2.038e-06, 0.2)
+MPV[1]: (4.144e-06, 0.2)
+ Done DumpVector of 2 entries 
 Number of optical photons produced in this event : 611
 Number of optical photons produced in this event : 581
 Number of optical photons produced in this event : 557

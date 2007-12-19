@@ -770,13 +770,9 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  44.460       total track length (cm):    2.602
    Gap:      total energy (MeV):   2.599       total track length (cm):    1.383
-Time of this run:   User=0s Real=0.01s Sys=0s
+Time of this run:   User=0.01s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
-WARNING - Attempt to delete the solid store while geometry closed !
-WARNING - Attempt to delete the logical volume store while geometry closed !
-WARNING - Attempt to delete the physical volume store while geometry closed !
-WARNING - Attempt to delete the region store while geometry closed !
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
@@ -981,6 +977,6 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1181.946       total track length (cm):    0.141
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.01s Real=0.01s Sys=0s
+Time of this run:   User=0s Real=0s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
