@@ -219,6 +219,19 @@ void Ex06MCApplication::Stepping()
 // ---
 
   fVerbose.Stepping();
+
+  // Work around for Fluka VMC, which does not call
+  // MCApplication::PreTrack()
+  //
+  static Int_t trackId = 0;
+  if ( TString(gMC->GetName()) == "TFluka" &&
+       gMC->GetStack()->GetCurrentTrackNumber() != trackId ) {
+
+    fVerbose.PreTrack();
+    trackId = gMC->GetStack()->GetCurrentTrackNumber();
+    if (gMC->TrackPid() == 50000050 ) fGammaCounter++;
+  }      
+    
 }
 
 //_____________________________________________________________________________
