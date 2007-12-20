@@ -1,0 +1,693 @@
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version   5.17/08  13 December 2007   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+ROOT 5.17/08 (tags/v5-17-08@21361, Dec 18 2007, 13:12:16 on linux)
+
+CINT/ROOT C/C++ Interpreter version 5.16.27, Oct 25, 2007
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+
+Processing test_E01.C("flConfig.C", kTRUE)...
+Loading Fluka libraries ...
+Loading Fluka libraries ... finished
+Preparing Fluka working directory ...
+Preparing Fluka working directory ... finished
+
+
+------------------------------------------------------------------------------
+- You are using the TFluka Virtual Monte Carlo Interface to FLUKA.           -
+- Please see the file fluka.out for FLUKA output and licensing information.  -
+------------------------------------------------------------------------------
+
+
+Fluka has been created.
+Info in <TGeoManager::TGeoManager>: Geometry geom, FLUKA geometry created
+Geometry will be defined via VMC
+Info in <TGeoManager::SetTopVolume>: Top volume is EXPH. Master volume is EXPH
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoNodeCache::BuildIDArray>: --- node ID tracking enabled, size=180 Bytes
+
+Info in <TGeoManager::CloseGeometry>: 22 nodes/ 4 volume UID's in FLUKA geometry
+Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+Info in <TGeoManager::Export>: Exporting geom FLUKA geometry as root file. Optimizations streamed.
+#############################################################
+Magnetic field enabled
+#############################################################
+==> TFluka::BuildPhysics() Read input cards.
+ ==> Inside FLUKAM!!!
+     * ITIMES = 0 LFDRTR = T
+1
+
+              FLUKA User license:
+
+  By downloading and/or using FLUKA, you agree with the
+  following license/conditions/requests:
+
+
+                Copyright statement and license conditions
+    
+  Copyright Italian National Institute for Nuclear Physics
+  (INFN) and European Organization for Nuclear Research (CERN)
+  ("the FLUKA copyright holders"), 1989-2007.
+    
+  All rights not expressly granted under this license are
+  reserved.
+    
+  This software results from work performed by Alberto Fasso`,
+  Alfredo Ferrari, Johannes Ranft and Paola Sala.
+    
+  INFN and CERN are the exclusive source of distribution of
+  the code, bug fixes and documentation of the FLUKA
+  software. Each official version of FLUKA is identified by a
+  numbering scheme specifying major and minor releases.
+    
+  The FLUKA Coordination Committee or its delegates are able
+  to grant any of the permissions noted in this License
+  Agreement as requiring a specific consent. Any such consent
+  may only be granted in writing.
+    
+  Installation, use, reproduction, display of the FLUKA
+  software ("FLUKA"), in source and binary forms, are
+  permitted free of charge on a non-exclusive basis for
+  internal scientific, non-commercial and non-weapon-related
+  use by non-profit organizations only. Any exercise of these
+  rights is subject to the following conditions:
+    
+  1 Insertion of the FLUKA code, in whole or in part, into
+    other codes, or its translation into any other computer
+    language are possible only after obtaining prior written
+    permission. Modifications of the FLUKA code are permitted
+    for use by the licensee only, unless authorized in
+    written.
+    
+  2 FLUKA is non-transferable, non-sub-licensable and may not
+    be distributed in any way, without express written
+    consent, whether in original or modified form. Site-wise
+    or collaboration-wise conditions can be agreed with the
+    FLUKA Coordination Committee.
+    
+  3 Notwithstanding the above, the licensee may modify and
+    sub-license FLUKA User Routines to third parties in so far
+    as their purpose is limited to the adaptation of input and
+    output interfaces of FLUKA and their modification does not
+    circumvent, replace, add to or modify any of the functions
+    of FLUKA, or extract specific isolated results from any of
+    the individual internal physics models embedded within
+    FLUKA.
+    
+  4 The licensee shall forthwith license all its modifications
+    of FLUKA to the FLUKA copyright holders, at no cost and
+    with no limitation of use. The licensee acknowledges that
+    the FLUKA copyright holders may insert such modifications
+    into future releases of FLUKA, subject to appropriate
+    acknowledgment of the licensee's contribution.
+    
+  5 Any publication by the licensee with respect to FLUKA or
+    results obtained from it shall explicitly acknowledge
+    FLUKA by quoting its set of references and the FLUKA
+    copyright holders. The licensee shall not without prior
+    written permission publish documents or results based on a
+    modified form of FLUKA, unless the modification
+    exclusively concerns User Routines for the adaptation of
+    its input and output interfaces which comply with the same
+    restrictions, as defined in section 3) as those which
+    apply to sub-licensing. Any publication of documents or
+    results shall be based only on official FLUKA versions as
+    obtained from the FLUKA website (http://www.fluka.org) or
+    from any authorized mirror. Publication here implies any
+    legal publication to any third party, whether verbal,
+    electronic, visual, in writing or otherwise.
+    
+  6 The licensee shall ensure that the FLUKA references,
+    copyright statement and license conditions are not altered
+    or removed from FLUKA. Any integration of any portion of
+    FLUKA, in modified or in unmodified form, into any other
+    software package must preserve the internal copyright
+    notices in those portions of FLUKA that have been
+    employed, and must reproduce such notices within any
+    additional global notices included along or embedded
+    within the software into which FLUKA has been
+    integrated. Any portion of FLUKA so integrated, whether
+    modified or unmodified shall continue to be subject to
+    these license conditions.
+    
+  7 Nothing in this license shall be construed as to grant any
+    rights in any of the FLUKA versions since 1989. In
+    addition, users are not permitted to circumvent any
+    protection in prior distributions of FLUKA that provided
+    for a preset expiration date of the code
+    
+  8 Versions or parts of the FLUKA source code, entrusted to
+    individuals or groups prior to the enactment of the
+    CERN-INFN Collaboration Agreement, which are listed in
+    Chapter 5 of Annex 1 of the EP-AB-INFN Scientific
+    Agreement (19-02-2003), together with the agreed
+    conditions of use, are subject to this License Agreement
+    in addition to any other restrictions on the scope of use
+    that may have been part of the initial use grant.
+    
+  9 Commercial use of FLUKA, outside the scope of this
+    license, must be negotiated with the copyright holders
+    
+  10 DISCLAIMER
+    
+  THIS SOFTWARE IS PROVIDED BY THE FLUKA COPYRIGHT HOLDERS "AS
+  IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT
+  NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, OF
+  SATISFACTORY QUALITY, AND FITNESS FOR A PARTICULAR PURPOSE
+  OR USE ARE DISCLAIMED. THE FLUKA COPYRIGHT HOLDERS AND THE
+  AUTHORS MAKE NO REPRESENTATION THAT THE SOFTWARE AND
+  MODIFICATIONS THEREOF, WILL NOT INFRINGE ANY PATENT,
+  COPYRIGHT, TRADE SECRET OR OTHER PROPRIETARY RIGHT.
+    
+  11 LIMITATION OF LIABILITY
+    
+  THE FLUKA COPYRIGHT HOLDERS AND THE AUTHORS SHALL HAVE NO
+  LIABILITY FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL,
+  CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES OF ANY
+  CHARACTER INCLUDING, WITHOUT LIMITATION, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES, LOSS OF USE, DATA OR PROFITS,
+  OR BUSINESS INTERRUPTION, HOWEVER CAUSED AND ON ANY THEORY
+  OF CONTRACT, WARRANTY, TORT (INCLUDING NEGLIGENCE), PRODUCT
+  LIABILITY OR OTHERWISE, ARISING IN ANY WAY OUT OF THE USE OF
+  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+  DAMAGES.
+    
+    
+    
+  REQUESTS MADE BY THE FLUKA AUTHORS TO ALL USERS
+    
+  All licensees are requested to report as soon as practical
+  to the Authors any errors or bugs found in any portion of
+  FLUKA and its accompanying documentation.
+    
+  All licensees are requested to forward copies of all
+  comparisons that they may make between FLUKA results and
+  data or other codes as soon as practical.  The Authors agree
+  to keep any such communications confidential unless
+  otherwise notified by the contributing user.
+    
+  The Authors reserve the right of publishing any benchmarking
+  and/or comparisons of the distinct separate performance of
+  the individual internal models that are embedded into FLUKA,
+  whether the comparisons are with data or with other
+  codes. The Authors would also like to convey a general
+  willingness to conduct any such benchmarking efforts either
+  upon request or in collaboration with interested parties. In
+  case of doubt please contact the Authors.
+    
+  Users should exclusively download FLUKA from the official
+  FLUKA website (http://www.fluka.org) or one of the
+  authorized mirror sites.  Users are invited to regularly
+  update their FLUKA version to profit for improvements and
+  bug fixes.
+    
+  Users are invited to use reasonably updated versions of the
+  code for publications. Publications of results based on
+  those FLUKA versions that are declared unsupported and
+  obsolete on the official FLUKA website shall be avoided.
+    
+  Users should address any request of consent to one member of
+  the FLUKA Coordinating Committee, which at present is
+  composed as follows:
+    
+  Giuseppe Battistoni    Giuseppe.Battistoni@mi.infn.it
+  (chairman)
+  John     Ferguson      John.Ferguson@cern.ch
+  John     Harvey        John.Harvey@cern.ch
+  Johannes Ranft         Johannes.Ranft@cern.ch
+  Paola    Sala          Paola.Sala@mi.infn.it
+    
+
+     In accordance with the User License, the use of the FLUKA code
+     shall be acknowledged explicitly by quoting the following and
+     only the following set of references:
+
+
+   - A. Ferrari, P.R. Sala, A. Fasso', and J. Ranft,
+     "FLUKA: a multi-particle transport code",
+      CERN 2005-10 (2005), INFN/TC_05/11, SLAC-R-773 
+
+
+   - A. Fasso', A. Ferrari, S. Roesler, P.R. Sala, G. Battistoni,
+     F. Cerutti, E. Gadioli, M.V. Garzelli, F. Ballarini,
+     A. Ottolenghi, A. Empl and J. Ranft,
+     "The physics models of FLUKA: status and recent developments",
+     Computing in High Energy and Nuclear Physics 2003 Conference
+     (CHEP2003), La Jolla, CA, USA, March 24-28, 2003, 
+     (paper MOMT005) eConf C0303241 (2003), arXiv:hep-ph/0306267
+
+     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     !!!! DOWNLOAD/USE OF THE FLUKA SOFTWARE IMPLIES FULL     !!!!
+     !!!! ACCEPTANCE OF THE LICENSE AND ASSOCIATED CONDITIONS !!!!
+     !!!! INCLUDING THE AUTHOR'S REQUESTS                     !!!!
+     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ <== Outside FLUKAM!!!
+<== TFluka::BuildPhysics() Read input cards End R:9.28s C:9.06s
+ ==> Inside FLUKAM!!!
+     * ITIMES = 1 LFDRTR = T
+
+Starting new track
+Track -200 0 0  in EXPH  ArgonGas
+Track -160 0 4  in EXPH  ArgonGas
+Track -160 0 4  in EXPH  ArgonGas
+Track -160 0 4  in TRTU  Aluminium
+Track -40 0 16  in TRTU  Aluminium
+Track -40 0 16  in TRTU  Aluminium
+Track -40 0 16  in EXPH  ArgonGas
+Track 9.95257e-11 0 20  in EXPH  ArgonGas
+Track 9.95257e-11 0 20  in EXPH  ArgonGas
+Track 9.95257e-11 0 20  in CALB  Lead
+Track 9 0 20.9  in CALB  Lead
+Track 9 0 20.9  in CALB  Lead
+Track 9 0 20.9  in LAYB  Aluminium
+Track 11 0 21.1  in LAYB  Aluminium
+Track 11 0 21.1  in LAYB  Aluminium
+Track 11 0 21.1  in CALB  Lead
+Track 19 0 21.9  in CALB  Lead
+Track 19 0 21.9  in CALB  Lead
+Track 19 0 21.9  in LAYB  Aluminium
+Track 21 0 22.1  in LAYB  Aluminium
+Track 21 0 22.1  in LAYB  Aluminium
+Track 21 0 22.1  in CALB  Lead
+Track 29 0 22.9  in CALB  Lead
+Track 29 0 22.9  in CALB  Lead
+Track 29 0 22.9  in LAYB  Aluminium
+Track 31 0 23.1  in LAYB  Aluminium
+Track 31 0 23.1  in LAYB  Aluminium
+Track 31 0 23.1  in CALB  Lead
+Track 39 0 23.9  in CALB  Lead
+Track 39 0 23.9  in CALB  Lead
+Track 39 0 23.9  in LAYB  Aluminium
+Track 41 0 24.1  in LAYB  Aluminium
+Track 41 0 24.1  in LAYB  Aluminium
+Track 41 0 24.1  in CALB  Lead
+Track 49 0 24.9  in CALB  Lead
+Track 49 0 24.9  in CALB  Lead
+Track 49 0 24.9  in LAYB  Aluminium
+Track 51 0 25.1  in LAYB  Aluminium
+Track 51 0 25.1  in LAYB  Aluminium
+Track 51 0 25.1  in CALB  Lead
+Track 59 0 25.9  in CALB  Lead
+Track 59 0 25.9  in CALB  Lead
+Track 59 0 25.9  in LAYB  Aluminium
+Track 61 0 26.1  in LAYB  Aluminium
+Track 61 0 26.1  in LAYB  Aluminium
+Track 61 0 26.1  in CALB  Lead
+Track 69 0 26.9  in CALB  Lead
+Track 69 0 26.9  in CALB  Lead
+Track 69 0 26.9  in LAYB  Aluminium
+Track 71 0 27.1  in LAYB  Aluminium
+Track 71 0 27.1  in LAYB  Aluminium
+Track 71 0 27.1  in CALB  Lead
+Track 79 0 27.9  in CALB  Lead
+Track 79 0 27.9  in CALB  Lead
+Track 79 0 27.9  in LAYB  Aluminium
+Track 81 0 28.1  in LAYB  Aluminium
+Track 81 0 28.1  in LAYB  Aluminium
+Track 81 0 28.1  in CALB  Lead
+Track 89 0 28.9  in CALB  Lead
+Track 89 0 28.9  in CALB  Lead
+Track 89 0 28.9  in LAYB  Aluminium
+Track 91 0 29.1  in LAYB  Aluminium
+Track 91 0 29.1  in LAYB  Aluminium
+Track 91 0 29.1  in CALB  Lead
+Track 99 0 29.9  in CALB  Lead
+Track 99 0 29.9  in CALB  Lead
+Track 99 0 29.9  in LAYB  Aluminium
+Track 101 0 30.1  in LAYB  Aluminium
+Track 101 0 30.1  in LAYB  Aluminium
+Track 101 0 30.1  in CALB  Lead
+Track 109 0 30.9  in CALB  Lead
+Track 109 0 30.9  in CALB  Lead
+Track 109 0 30.9  in LAYB  Aluminium
+Track 111 0 31.1  in LAYB  Aluminium
+Track 111 0 31.1  in LAYB  Aluminium
+Track 111 0 31.1  in CALB  Lead
+Track 119 0 31.9  in CALB  Lead
+Track 119 0 31.9  in CALB  Lead
+Track 119 0 31.9  in LAYB  Aluminium
+Track 121 0 32.1  in LAYB  Aluminium
+Track 121 0 32.1  in LAYB  Aluminium
+Track 121 0 32.1  in CALB  Lead
+Track 129 0 32.9  in CALB  Lead
+Track 129 0 32.9  in CALB  Lead
+Track 129 0 32.9  in LAYB  Aluminium
+Track 131 0 33.1  in LAYB  Aluminium
+Track 131 0 33.1  in LAYB  Aluminium
+Track 131 0 33.1  in CALB  Lead
+Track 139 0 33.9  in CALB  Lead
+Track 139 0 33.9  in CALB  Lead
+Track 139 0 33.9  in LAYB  Aluminium
+Track 141 0 34.1  in LAYB  Aluminium
+Track 141 0 34.1  in LAYB  Aluminium
+Track 141 0 34.1  in CALB  Lead
+Track 149 0 34.9  in CALB  Lead
+Track 149 0 34.9  in CALB  Lead
+Track 149 0 34.9  in LAYB  Aluminium
+Track 151 0 35.1  in LAYB  Aluminium
+Track 151 0 35.1  in LAYB  Aluminium
+Track 151 0 35.1  in CALB  Lead
+Track 159 0 35.9  in CALB  Lead
+Track 159 0 35.9  in CALB  Lead
+Track 159 0 35.9  in LAYB  Aluminium
+Track 161 0 36.1  in LAYB  Aluminium
+Track 161 0 36.1  in LAYB  Aluminium
+Track 161 0 36.1  in CALB  Lead
+Track 169 0 36.9  in CALB  Lead
+Track 169 0 36.9  in CALB  Lead
+Track 169 0 36.9  in LAYB  Aluminium
+Track 171 0 37.1  in LAYB  Aluminium
+Track 171 0 37.1  in LAYB  Aluminium
+Track 171 0 37.1  in CALB  Lead
+Track 179 0 37.9  in CALB  Lead
+Track 179 0 37.9  in CALB  Lead
+Track 179 0 37.9  in LAYB  Aluminium
+Track 181 0 38.1  in LAYB  Aluminium
+Track 181 0 38.1  in LAYB  Aluminium
+Track 181 0 38.1  in CALB  Lead
+Track 189 0 38.9  in CALB  Lead
+Track 189 0 38.9  in CALB  Lead
+Track 189 0 38.9  in LAYB  Aluminium
+Track 191 0 39.1  in LAYB  Aluminium
+Track 191 0 39.1  in LAYB  Aluminium
+Track 191 0 39.1  in CALB  Lead
+Track 200 0 40  in CALB  Lead
+Track 200 0 40  in CALB  Lead
+Track 200 0 40  in EXPH  ArgonGas
+Track 300 0 50  in EXPH  ArgonGas
+Track 300 0 50  in EXPH  ArgonGas
+Track 300 0 50  in OutOfWorld  
+Track 300 0 50  in OutOfWorld  
+
+Starting new track
+Track -200 0 0  in EXPH  ArgonGas
+Track -159.866 4.01344 0  in EXPH  ArgonGas
+Track -159.866 4.01344 0  in EXPH  ArgonGas
+Track -159.866 4.01344 0  in TRTU  Aluminium
+Track -42.1146 15.7885 0  in TRTU  Aluminium
+Track -42.1146 15.7885 0  in TRTU  Aluminium
+Track -42.1146 15.7885 0  in EXPH  ArgonGas
+Track 9.94973e-11 20 0  in EXPH  ArgonGas
+Track 9.94973e-11 20 0  in EXPH  ArgonGas
+Track 9.94973e-11 20 0  in CALB  Lead
+Track 9 20.9 0  in CALB  Lead
+Track 9 20.9 0  in CALB  Lead
+Track 9 20.9 0  in LAYB  Aluminium
+Track 11 21.1 0  in LAYB  Aluminium
+Track 11 21.1 0  in LAYB  Aluminium
+Track 11 21.1 0  in CALB  Lead
+Track 19 21.9 0  in CALB  Lead
+Track 19 21.9 0  in CALB  Lead
+Track 19 21.9 0  in LAYB  Aluminium
+Track 21 22.1 0  in LAYB  Aluminium
+Track 21 22.1 0  in LAYB  Aluminium
+Track 21 22.1 0  in CALB  Lead
+Track 29 22.9 0  in CALB  Lead
+Track 29 22.9 0  in CALB  Lead
+Track 29 22.9 0  in LAYB  Aluminium
+Track 31 23.1 0  in LAYB  Aluminium
+Track 31 23.1 0  in LAYB  Aluminium
+Track 31 23.1 0  in CALB  Lead
+Track 39 23.9 0  in CALB  Lead
+Track 39 23.9 0  in CALB  Lead
+Track 39 23.9 0  in LAYB  Aluminium
+Track 41 24.1 0  in LAYB  Aluminium
+Track 41 24.1 0  in LAYB  Aluminium
+Track 41 24.1 0  in CALB  Lead
+Track 49 24.9 0  in CALB  Lead
+Track 49 24.9 0  in CALB  Lead
+Track 49 24.9 0  in LAYB  Aluminium
+Track 51 25.1 0  in LAYB  Aluminium
+Track 51 25.1 0  in LAYB  Aluminium
+Track 51 25.1 0  in CALB  Lead
+Track 59 25.9 0  in CALB  Lead
+Track 59 25.9 0  in CALB  Lead
+Track 59 25.9 0  in LAYB  Aluminium
+Track 61 26.1 0  in LAYB  Aluminium
+Track 61 26.1 0  in LAYB  Aluminium
+Track 61 26.1 0  in CALB  Lead
+Track 69 26.9 0  in CALB  Lead
+Track 69 26.9 0  in CALB  Lead
+Track 69 26.9 0  in LAYB  Aluminium
+Track 71 27.1 0  in LAYB  Aluminium
+Track 71 27.1 0  in LAYB  Aluminium
+Track 71 27.1 0  in CALB  Lead
+Track 79 27.9 0  in CALB  Lead
+Track 79 27.9 0  in CALB  Lead
+Track 79 27.9 0  in LAYB  Aluminium
+Track 81 28.1 0  in LAYB  Aluminium
+Track 81 28.1 0  in LAYB  Aluminium
+Track 81 28.1 0  in CALB  Lead
+Track 89 28.9 0  in CALB  Lead
+Track 89 28.9 0  in CALB  Lead
+Track 89 28.9 0  in LAYB  Aluminium
+Track 91 29.1 0  in LAYB  Aluminium
+Track 91 29.1 0  in LAYB  Aluminium
+Track 91 29.1 0  in CALB  Lead
+Track 99 29.9 0  in CALB  Lead
+Track 99 29.9 0  in CALB  Lead
+Track 99 29.9 0  in LAYB  Aluminium
+Track 101 30.1 0  in LAYB  Aluminium
+Track 101 30.1 0  in LAYB  Aluminium
+Track 101 30.1 0  in CALB  Lead
+Track 109 30.9 0  in CALB  Lead
+Track 109 30.9 0  in CALB  Lead
+Track 109 30.9 0  in LAYB  Aluminium
+Track 111 31.1 0  in LAYB  Aluminium
+Track 111 31.1 0  in LAYB  Aluminium
+Track 111 31.1 0  in CALB  Lead
+Track 119 31.9 0  in CALB  Lead
+Track 119 31.9 0  in CALB  Lead
+Track 119 31.9 0  in LAYB  Aluminium
+Track 121 32.1 0  in LAYB  Aluminium
+Track 121 32.1 0  in LAYB  Aluminium
+Track 121 32.1 0  in CALB  Lead
+Track 129 32.9 0  in CALB  Lead
+Track 129 32.9 0  in CALB  Lead
+Track 129 32.9 0  in LAYB  Aluminium
+Track 131 33.1 0  in LAYB  Aluminium
+Track 131 33.1 0  in LAYB  Aluminium
+Track 131 33.1 0  in CALB  Lead
+Track 139 33.9 0  in CALB  Lead
+Track 139 33.9 0  in CALB  Lead
+Track 139 33.9 0  in LAYB  Aluminium
+Track 141 34.1 0  in LAYB  Aluminium
+Track 141 34.1 0  in LAYB  Aluminium
+Track 141 34.1 0  in CALB  Lead
+Track 149 34.9 0  in CALB  Lead
+Track 149 34.9 0  in CALB  Lead
+Track 149 34.9 0  in LAYB  Aluminium
+Track 151 35.1 0  in LAYB  Aluminium
+Track 151 35.1 0  in LAYB  Aluminium
+Track 151 35.1 0  in CALB  Lead
+Track 159 35.9 0  in CALB  Lead
+Track 159 35.9 0  in CALB  Lead
+Track 159 35.9 0  in LAYB  Aluminium
+Track 161 36.1 0  in LAYB  Aluminium
+Track 161 36.1 0  in LAYB  Aluminium
+Track 161 36.1 0  in CALB  Lead
+Track 169 36.9 0  in CALB  Lead
+Track 169 36.9 0  in CALB  Lead
+Track 169 36.9 0  in LAYB  Aluminium
+Track 171 37.1 0  in LAYB  Aluminium
+Track 171 37.1 0  in LAYB  Aluminium
+Track 171 37.1 0  in CALB  Lead
+Track 179 37.9 0  in CALB  Lead
+Track 179 37.9 0  in CALB  Lead
+Track 179 37.9 0  in LAYB  Aluminium
+Track 181 38.1 0  in LAYB  Aluminium
+Track 181 38.1 0  in LAYB  Aluminium
+Track 181 38.1 0  in CALB  Lead
+Track 189 38.9 0  in CALB  Lead
+Track 189 38.9 0  in CALB  Lead
+Track 189 38.9 0  in LAYB  Aluminium
+Track 191 39.1 0  in LAYB  Aluminium
+Track 191 39.1 0  in LAYB  Aluminium
+Track 191 39.1 0  in CALB  Lead
+Track 200 40 0  in CALB  Lead
+Track 200 40 0  in CALB  Lead
+Track 200 40 0  in EXPH  ArgonGas
+Track 300 50 0  in EXPH  ArgonGas
+Track 300 50 0  in EXPH  ArgonGas
+Track 300 50 0  in OutOfWorld  
+Track 300 50 0  in OutOfWorld  
+=== TRACKING PRIMARY 0 ===
+
+Starting new track
+Track -200 0 0  in EXPH  ArgonGas
+Track -160 0 0  in EXPH  ArgonGas
+Track -160 0 0  in EXPH  ArgonGas
+Track -160 0 0  in TRTU  Aluminium
+Track -40 0 0  in TRTU  Aluminium
+Track -40 0 0  in TRTU  Aluminium
+Track -40 0 0  in EXPH  ArgonGas
+Track 1.00002e-10 0 0  in EXPH  ArgonGas
+Track 1.00002e-10 0 0  in EXPH  ArgonGas
+Track 1.00002e-10 0 0  in CALB  Lead
+Track 9 0 0  in CALB  Lead
+Track 9 0 0  in CALB  Lead
+Track 9 0 0  in LAYB  Aluminium
+Track 11 0 0  in LAYB  Aluminium
+Track 11 0 0  in LAYB  Aluminium
+Track 11 0 0  in CALB  Lead
+Track 19 0 0  in CALB  Lead
+Track 19 0 0  in CALB  Lead
+Track 19 0 0  in LAYB  Aluminium
+Track 21 0 0  in LAYB  Aluminium
+Track 21 0 0  in LAYB  Aluminium
+Track 21 0 0  in CALB  Lead
+Track 29 0 0  in CALB  Lead
+Track 29 0 0  in CALB  Lead
+Track 29 0 0  in LAYB  Aluminium
+Track 31 0 0  in LAYB  Aluminium
+Track 31 0 0  in LAYB  Aluminium
+Track 31 0 0  in CALB  Lead
+Track 39 0 0  in CALB  Lead
+Track 39 0 0  in CALB  Lead
+Track 39 0 0  in LAYB  Aluminium
+Track 41 0 0  in LAYB  Aluminium
+Track 41 0 0  in LAYB  Aluminium
+Track 41 0 0  in CALB  Lead
+Track 49 0 0  in CALB  Lead
+Track 49 0 0  in CALB  Lead
+Track 49 0 0  in LAYB  Aluminium
+Track 51 0 0  in LAYB  Aluminium
+Track 51 0 0  in LAYB  Aluminium
+Track 51 0 0  in CALB  Lead
+Track 59 0 0  in CALB  Lead
+Track 59 0 0  in CALB  Lead
+Track 59 0 0  in LAYB  Aluminium
+Track 61 0 0  in LAYB  Aluminium
+Track 61 0 0  in LAYB  Aluminium
+Track 61 0 0  in CALB  Lead
+Track 69 0 0  in CALB  Lead
+Track 69 0 0  in CALB  Lead
+Track 69 0 0  in LAYB  Aluminium
+Track 71 0 0  in LAYB  Aluminium
+Track 71 0 0  in LAYB  Aluminium
+Track 71 0 0  in CALB  Lead
+Track 79 0 0  in CALB  Lead
+Track 79 0 0  in CALB  Lead
+Track 79 0 0  in LAYB  Aluminium
+Track 81 0 0  in LAYB  Aluminium
+Track 81 0 0  in LAYB  Aluminium
+Track 81 0 0  in CALB  Lead
+Track 89 0 0  in CALB  Lead
+Track 89 0 0  in CALB  Lead
+Track 89 0 0  in LAYB  Aluminium
+Track 91 0 0  in LAYB  Aluminium
+Track 91 0 0  in LAYB  Aluminium
+Track 91 0 0  in CALB  Lead
+Track 99 0 0  in CALB  Lead
+Track 99 0 0  in CALB  Lead
+Track 99 0 0  in LAYB  Aluminium
+Track 101 0 0  in LAYB  Aluminium
+Track 101 0 0  in LAYB  Aluminium
+Track 101 0 0  in CALB  Lead
+Track 109 0 0  in CALB  Lead
+Track 109 0 0  in CALB  Lead
+Track 109 0 0  in LAYB  Aluminium
+Track 111 0 0  in LAYB  Aluminium
+Track 111 0 0  in LAYB  Aluminium
+Track 111 0 0  in CALB  Lead
+Track 119 0 0  in CALB  Lead
+Track 119 0 0  in CALB  Lead
+Track 119 0 0  in LAYB  Aluminium
+Track 121 0 0  in LAYB  Aluminium
+Track 121 0 0  in LAYB  Aluminium
+Track 121 0 0  in CALB  Lead
+Track 129 0 0  in CALB  Lead
+Track 129 0 0  in CALB  Lead
+Track 129 0 0  in LAYB  Aluminium
+Track 131 0 0  in LAYB  Aluminium
+Track 131 0 0  in LAYB  Aluminium
+Track 131 0 0  in CALB  Lead
+Track 139 0 0  in CALB  Lead
+Track 139 0 0  in CALB  Lead
+Track 139 0 0  in LAYB  Aluminium
+Track 141 0 0  in LAYB  Aluminium
+Track 141 0 0  in LAYB  Aluminium
+Track 141 0 0  in CALB  Lead
+Track 149 0 0  in CALB  Lead
+Track 149 0 0  in CALB  Lead
+Track 149 0 0  in LAYB  Aluminium
+Track 151 0 0  in LAYB  Aluminium
+Track 151 0 0  in LAYB  Aluminium
+Track 151 0 0  in CALB  Lead
+Track 159 0 0  in CALB  Lead
+Track 159 0 0  in CALB  Lead
+Track 159 0 0  in LAYB  Aluminium
+Track 161 0 0  in LAYB  Aluminium
+Track 161 0 0  in LAYB  Aluminium
+Track 161 0 0  in CALB  Lead
+Track 169 0 0  in CALB  Lead
+Track 169 0 0  in CALB  Lead
+Track 169 0 0  in LAYB  Aluminium
+Track 171 0 0  in LAYB  Aluminium
+Track 171 0 0  in LAYB  Aluminium
+Track 171 0 0  in CALB  Lead
+Track 179 0 0  in CALB  Lead
+Track 179 0 0  in CALB  Lead
+Track 179 0 0  in LAYB  Aluminium
+Track 181 0 0  in LAYB  Aluminium
+Track 181 0 0  in LAYB  Aluminium
+Track 181 0 0  in CALB  Lead
+Track 189 0 0  in CALB  Lead
+Track 189 0 0  in CALB  Lead
+Track 189 0 0  in LAYB  Aluminium
+Track 191 0 0  in LAYB  Aluminium
+Track 191 0 0  in LAYB  Aluminium
+Track 191 0 0  in CALB  Lead
+Track 200 0 0  in CALB  Lead
+Track 200 0 0  in CALB  Lead
+Track 200 0 0  in EXPH  ArgonGas
+Track 300 0 0  in EXPH  ArgonGas
+Track 300 0 0  in EXPH  ArgonGas
+Track 300 0 0  in OutOfWorld  
+Track 300 0 0  in OutOfWorld  
+ <== Outside FLUKAM!!!
+Event: 0 R:0.01s C:0.00s
+Transformation for /EXPH_1/CALB_1/LAYB_9: 
+matrix global_0 - tr=1  rot=0  refl=0  scl=0
+  1.000000    0.000000    0.000000    Tx = 100.000000
+  0.000000    1.000000    0.000000    Ty =   0.000000
+  0.000000    0.000000    1.000000    Tz =   0.000000
+
+Error in <TGeoNavigator::cd>: Path /EXPH_1/CALB_1/LAYB_100 not valid
+Volume path /EXPH_1/CALB_1/LAYB_100 not found
+
+Transformation for /EXPH_1/CALB_1/LAYB_9: 
+matrix global_0 - tr=1  rot=0  refl=0  scl=0
+  1.000000    0.000000    0.000000    Tx = 100.000000
+  0.000000    1.000000    0.000000    Ty =   0.000000
+  0.000000    0.000000    1.000000    Tz =   0.000000
+
+Shape for /EXPH_1/CALB_1/LAYB_9: 
+BOX  parameters: 1,  40,  40,  
+
+Material for LAYB volume: 
+Aluminium  1  Aeff = 26.98  Zeff = 13  density = 2.7  radl = 8.8751  inter = 0.1
+
+Medium for LAYB volume: 
+Aluminium  2  nmat = 1  isvol = 0  ifield = 0  fieldm = 0  tmaxfd = -20  stemax = -0.01  deemax = -0.3  epsil = 0.001  stmin = -0.8
+
+Error in <TGeoNavigator::cd>: Path /EXPH_1/CALB_1/LAYB_100 not valid
+GetTransformation: Volume path /EXPH_1/CALB_1/LAYB_100 not found
+Error in <TGeoNavigator::cd>: Path /EXPH_1/CALB_1/LAYB_100 not valid
+GetShape: Volume path /EXPH_1/CALB_1/LAYB_100 not found
+GetMaterial: Volume name XYZ not found
+GetMedium: Volume name XYZ not found

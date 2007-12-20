@@ -1,0 +1,491 @@
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version   5.17/08  13 December 2007   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+ROOT 5.17/08 (tags/v5-17-08@21361, Dec 18 2007, 13:12:16 on linux)
+
+CINT/ROOT C/C++ Interpreter version 5.16.27, Oct 25, 2007
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+
+Processing test_E02.C("flConfig.C", kTRUE)...
+Loading Fluka libraries ...
+Loading Fluka libraries ... finished
+Preparing Fluka working directory ...
+Preparing Fluka working directory ... finished
+
+
+------------------------------------------------------------------------------
+- You are using the TFluka Virtual Monte Carlo Interface to FLUKA.           -
+- Please see the file fluka.out for FLUKA output and licensing information.  -
+------------------------------------------------------------------------------
+
+
+Fluka has been created.
+Info in <TGeoManager::TGeoManager>: Geometry geom, FLUKA geometry created
+Geometry will be defined via VMC
+Mixture 8695504        Air     2 
+Mixture (2)     0        Air     2 
+Target is 5 cm of lead 
+There are 5 chambers in the tracker region. The chambers are 2 mm of Xenon gas
+ The distance between chamber is 80 cm
+Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoNodeCache::BuildIDArray>: --- node ID tracking enabled, size=68 Bytes
+
+Info in <TGeoManager::CloseGeometry>: 8 nodes/ 4 volume UID's in FLUKA geometry
+Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+Info in <TGeoManager::Export>: Exporting geom FLUKA geometry as root file. Optimizations streamed.
+#############################################################
+Magnetic field enabled
+#############################################################
+==> TFluka::BuildPhysics() Read input cards.
+ ==> Inside FLUKAM!!!
+     * ITIMES = 0 LFDRTR = T
+1
+
+              FLUKA User license:
+
+  By downloading and/or using FLUKA, you agree with the
+  following license/conditions/requests:
+
+
+                Copyright statement and license conditions
+    
+  Copyright Italian National Institute for Nuclear Physics
+  (INFN) and European Organization for Nuclear Research (CERN)
+  ("the FLUKA copyright holders"), 1989-2007.
+    
+  All rights not expressly granted under this license are
+  reserved.
+    
+  This software results from work performed by Alberto Fasso`,
+  Alfredo Ferrari, Johannes Ranft and Paola Sala.
+    
+  INFN and CERN are the exclusive source of distribution of
+  the code, bug fixes and documentation of the FLUKA
+  software. Each official version of FLUKA is identified by a
+  numbering scheme specifying major and minor releases.
+    
+  The FLUKA Coordination Committee or its delegates are able
+  to grant any of the permissions noted in this License
+  Agreement as requiring a specific consent. Any such consent
+  may only be granted in writing.
+    
+  Installation, use, reproduction, display of the FLUKA
+  software ("FLUKA"), in source and binary forms, are
+  permitted free of charge on a non-exclusive basis for
+  internal scientific, non-commercial and non-weapon-related
+  use by non-profit organizations only. Any exercise of these
+  rights is subject to the following conditions:
+    
+  1 Insertion of the FLUKA code, in whole or in part, into
+    other codes, or its translation into any other computer
+    language are possible only after obtaining prior written
+    permission. Modifications of the FLUKA code are permitted
+    for use by the licensee only, unless authorized in
+    written.
+    
+  2 FLUKA is non-transferable, non-sub-licensable and may not
+    be distributed in any way, without express written
+    consent, whether in original or modified form. Site-wise
+    or collaboration-wise conditions can be agreed with the
+    FLUKA Coordination Committee.
+    
+  3 Notwithstanding the above, the licensee may modify and
+    sub-license FLUKA User Routines to third parties in so far
+    as their purpose is limited to the adaptation of input and
+    output interfaces of FLUKA and their modification does not
+    circumvent, replace, add to or modify any of the functions
+    of FLUKA, or extract specific isolated results from any of
+    the individual internal physics models embedded within
+    FLUKA.
+    
+  4 The licensee shall forthwith license all its modifications
+    of FLUKA to the FLUKA copyright holders, at no cost and
+    with no limitation of use. The licensee acknowledges that
+    the FLUKA copyright holders may insert such modifications
+    into future releases of FLUKA, subject to appropriate
+    acknowledgment of the licensee's contribution.
+    
+  5 Any publication by the licensee with respect to FLUKA or
+    results obtained from it shall explicitly acknowledge
+    FLUKA by quoting its set of references and the FLUKA
+    copyright holders. The licensee shall not without prior
+    written permission publish documents or results based on a
+    modified form of FLUKA, unless the modification
+    exclusively concerns User Routines for the adaptation of
+    its input and output interfaces which comply with the same
+    restrictions, as defined in section 3) as those which
+    apply to sub-licensing. Any publication of documents or
+    results shall be based only on official FLUKA versions as
+    obtained from the FLUKA website (http://www.fluka.org) or
+    from any authorized mirror. Publication here implies any
+    legal publication to any third party, whether verbal,
+    electronic, visual, in writing or otherwise.
+    
+  6 The licensee shall ensure that the FLUKA references,
+    copyright statement and license conditions are not altered
+    or removed from FLUKA. Any integration of any portion of
+    FLUKA, in modified or in unmodified form, into any other
+    software package must preserve the internal copyright
+    notices in those portions of FLUKA that have been
+    employed, and must reproduce such notices within any
+    additional global notices included along or embedded
+    within the software into which FLUKA has been
+    integrated. Any portion of FLUKA so integrated, whether
+    modified or unmodified shall continue to be subject to
+    these license conditions.
+    
+  7 Nothing in this license shall be construed as to grant any
+    rights in any of the FLUKA versions since 1989. In
+    addition, users are not permitted to circumvent any
+    protection in prior distributions of FLUKA that provided
+    for a preset expiration date of the code
+    
+  8 Versions or parts of the FLUKA source code, entrusted to
+    individuals or groups prior to the enactment of the
+    CERN-INFN Collaboration Agreement, which are listed in
+    Chapter 5 of Annex 1 of the EP-AB-INFN Scientific
+    Agreement (19-02-2003), together with the agreed
+    conditions of use, are subject to this License Agreement
+    in addition to any other restrictions on the scope of use
+    that may have been part of the initial use grant.
+    
+  9 Commercial use of FLUKA, outside the scope of this
+    license, must be negotiated with the copyright holders
+    
+  10 DISCLAIMER
+    
+  THIS SOFTWARE IS PROVIDED BY THE FLUKA COPYRIGHT HOLDERS "AS
+  IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT
+  NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, OF
+  SATISFACTORY QUALITY, AND FITNESS FOR A PARTICULAR PURPOSE
+  OR USE ARE DISCLAIMED. THE FLUKA COPYRIGHT HOLDERS AND THE
+  AUTHORS MAKE NO REPRESENTATION THAT THE SOFTWARE AND
+  MODIFICATIONS THEREOF, WILL NOT INFRINGE ANY PATENT,
+  COPYRIGHT, TRADE SECRET OR OTHER PROPRIETARY RIGHT.
+    
+  11 LIMITATION OF LIABILITY
+    
+  THE FLUKA COPYRIGHT HOLDERS AND THE AUTHORS SHALL HAVE NO
+  LIABILITY FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL,
+  CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES OF ANY
+  CHARACTER INCLUDING, WITHOUT LIMITATION, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES, LOSS OF USE, DATA OR PROFITS,
+  OR BUSINESS INTERRUPTION, HOWEVER CAUSED AND ON ANY THEORY
+  OF CONTRACT, WARRANTY, TORT (INCLUDING NEGLIGENCE), PRODUCT
+  LIABILITY OR OTHERWISE, ARISING IN ANY WAY OUT OF THE USE OF
+  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+  DAMAGES.
+    
+    
+    
+  REQUESTS MADE BY THE FLUKA AUTHORS TO ALL USERS
+    
+  All licensees are requested to report as soon as practical
+  to the Authors any errors or bugs found in any portion of
+  FLUKA and its accompanying documentation.
+    
+  All licensees are requested to forward copies of all
+  comparisons that they may make between FLUKA results and
+  data or other codes as soon as practical.  The Authors agree
+  to keep any such communications confidential unless
+  otherwise notified by the contributing user.
+    
+  The Authors reserve the right of publishing any benchmarking
+  and/or comparisons of the distinct separate performance of
+  the individual internal models that are embedded into FLUKA,
+  whether the comparisons are with data or with other
+  codes. The Authors would also like to convey a general
+  willingness to conduct any such benchmarking efforts either
+  upon request or in collaboration with interested parties. In
+  case of doubt please contact the Authors.
+    
+  Users should exclusively download FLUKA from the official
+  FLUKA website (http://www.fluka.org) or one of the
+  authorized mirror sites.  Users are invited to regularly
+  update their FLUKA version to profit for improvements and
+  bug fixes.
+    
+  Users are invited to use reasonably updated versions of the
+  code for publications. Publications of results based on
+  those FLUKA versions that are declared unsupported and
+  obsolete on the official FLUKA website shall be avoided.
+    
+  Users should address any request of consent to one member of
+  the FLUKA Coordinating Committee, which at present is
+  composed as follows:
+    
+  Giuseppe Battistoni    Giuseppe.Battistoni@mi.infn.it
+  (chairman)
+  John     Ferguson      John.Ferguson@cern.ch
+  John     Harvey        John.Harvey@cern.ch
+  Johannes Ranft         Johannes.Ranft@cern.ch
+  Paola    Sala          Paola.Sala@mi.infn.it
+    
+
+     In accordance with the User License, the use of the FLUKA code
+     shall be acknowledged explicitly by quoting the following and
+     only the following set of references:
+
+
+   - A. Ferrari, P.R. Sala, A. Fasso', and J. Ranft,
+     "FLUKA: a multi-particle transport code",
+      CERN 2005-10 (2005), INFN/TC_05/11, SLAC-R-773 
+
+
+   - A. Fasso', A. Ferrari, S. Roesler, P.R. Sala, G. Battistoni,
+     F. Cerutti, E. Gadioli, M.V. Garzelli, F. Ballarini,
+     A. Ottolenghi, A. Empl and J. Ranft,
+     "The physics models of FLUKA: status and recent developments",
+     Computing in High Energy and Nuclear Physics 2003 Conference
+     (CHEP2003), La Jolla, CA, USA, March 24-28, 2003, 
+     (paper MOMT005) eConf C0303241 (2003), arXiv:hep-ph/0306267
+
+     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     !!!! DOWNLOAD/USE OF THE FLUKA SOFTWARE IMPLIES FULL     !!!!
+     !!!! ACCEPTANCE OF THE LICENSE AND ASSOCIATED CONDITIONS !!!!
+     !!!! INCLUDING THE AUTHOR'S REQUESTS                     !!!!
+     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ <== Outside FLUKAM!!!
+<== TFluka::BuildPhysics() Read input cards End R:11.68s C:10.44s
+ ==> Inside FLUKAM!!!
+     * ITIMES = 1 LFDRTR = T
+ <== Outside FLUKAM!!!
+
+-------->Hits Collection: in this event they are 21 hits in the tracker chambers: 
+  trackID: 0  chamberNb: 0  energy deposit (keV): 59.4734  position (cm): (0.698784, 15.9832, -145.679)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 15.9097  position (cm): (0.7273, 16.9277, -141.582)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.817923  position (cm): (0.735186, 17.1956, -140.443)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.817923  position (cm): (0.737914, 17.2898, -140.044)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.2558  position (cm): (0.738186, 17.2992, -140.004)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.0355377  position (cm): (0.738224, 17.3005, -139.999)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 56.3105  position (cm): (1.23085, 38.4796, -69.3687)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 28.0024  position (cm): (1.27282, 40.5961, -63.6551)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 17.968  position (cm): (1.29769, 41.8443, -60.3629)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 0.817923  position (cm): (1.30017, 41.9692, -60.0363)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 0.218617  position (cm): (1.30042, 41.9817, -60.0036)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 0.0262549  position (cm): (1.30045, 41.9832, -59.9997)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 76.5199  position (cm): (1.85854, 75.4885, 13.1364)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 37.794  position (cm): (1.89789, 78.2885, 18.2851)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 7.77027  position (cm): (1.91092, 79.2408, 20.0106)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 29.421  position (cm): (2.42921, 121.812, 86.5666)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 43.8214  position (cm): (2.47361, 125.786, 91.9349)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 43.7589  position (cm): (2.53823, 131.924, 100.002)
+  trackID: 0  chamberNb: 4  energy deposit (keV): 31.4701  position (cm): (3.09777, 190.478, 165.635)
+  trackID: 0  chamberNb: 4  energy deposit (keV): 24.8712  position (cm): (3.12851, 193.867, 168.91)
+  trackID: 0  chamberNb: 4  energy deposit (keV): 27.4875  position (cm): (3.15556, 196.816, 171.722)
+Ex02MCStack Info  
+Total number of particles:   2
+Number of primary particles: 1
+Track ID:  0
+TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
+Primary    
+Number of daughters: 1
+
+Track ID:  1
+TParticle: e-             p: 0.000516 0.001127 0.001400 Vertex: 3.231201e-03 1.696534e+00 -2.444183e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Event: 0 R:0.01s C:0.01s
+ ==> Inside FLUKAM!!!
+     * ITIMES = 1 LFDRTR = T
+ <== Outside FLUKAM!!!
+
+-------->Hits Collection: in this event they are 19 hits in the tracker chambers: 
+  trackID: 0  chamberNb: 0  energy deposit (keV): 73.4766  position (cm): (-1.11444, 18.2374, -145.816)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 34.4343  position (cm): (-1.16211, 19.3072, -141.62)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 9.50611  position (cm): (-1.17549, 19.61, -140.453)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.408962  position (cm): (-1.18015, 19.7165, -140.045)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.26304  position (cm): (-1.18062, 19.7271, -140.005)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.0296731  position (cm): (-1.18067, 19.7283, -140)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 20.4452  position (cm): (-1.94068, 40.5985, -74.8895)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 126.029  position (cm): (-2.08157, 45.1221, -63.3847)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 14.8167  position (cm): (-2.11952, 46.3648, -60.3344)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 0.817923  position (cm): (-2.12325, 46.4885, -60.0334)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 0.203187  position (cm): (-2.12362, 46.5008, -60.0033)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 0.0277847  position (cm): (-2.12368, 46.5025, -59.9992)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 51.7357  position (cm): (-2.9511, 78.0544, 5.62212)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 97.0638  position (cm): (-3.0754, 83.6132, 15.4398)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 21.3431  position (cm): (-3.13376, 86.2838, 20.0159)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 38.2666  position (cm): (-4.02141, 131.184, 86.1657)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 37.7472  position (cm): (-4.10045, 135.358, 91.4817)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 26.1696  position (cm): (-4.18104, 139.635, 96.8142)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 23.4861  position (cm): (-4.23075, 142.247, 100.014)
+Ex02MCStack Info  
+Total number of particles:   3
+Number of primary particles: 1
+Track ID:  0
+TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
+Primary    
+Number of daughters: 2
+
+Track ID:  1
+TParticle: e-             p: -0.001322 -0.000280 0.002289 Vertex: 6.226724e-04 1.697011e+00 -2.445128e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  2
+TParticle: e-             p: -0.000393 -0.001090 0.002129 Vertex: -3.969396e-02 2.024383e+00 -2.404003e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Event: 1 R:0.00s C:0.00s
+ ==> Inside FLUKAM!!!
+     * ITIMES = 1 LFDRTR = T
+ <== Outside FLUKAM!!!
+
+-------->Hits Collection: in this event they are 21 hits in the tracker chambers: 
+  trackID: 0  chamberNb: 0  energy deposit (keV): 103.794  position (cm): (0.92476, 15.5812, -146.486)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 34.6406  position (cm): (0.983129, 16.9163, -140.642)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 4.31565  position (cm): (0.988977, 17.0515, -140.064)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.371019  position (cm): (0.989561, 17.0651, -140.006)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.0471284  position (cm): (0.989635, 17.0668, -139.999)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 27.2702  position (cm): (1.65986, 36.1297, -74.792)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 38.0217  position (cm): (1.74521, 39.0416, -66.7004)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 103.113  position (cm): (1.80246, 41.0789, -61.238)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 3.00881  position (cm): (1.81391, 41.4926, -60.1478)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 0.890279  position (cm): (1.81531, 41.5432, -60.0148)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 0.104568  position (cm): (1.81547, 41.5491, -59.9991)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 22.6644  position (cm): (2.52403, 70.4411, 4.64311)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 55.2233  position (cm): (2.64644, 75.8008, 14.7862)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 26.7844  position (cm): (2.71015, 78.6533, 20.0064)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 73.7883  position (cm): (3.54298, 120.461, 85.6688)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 31.9129  position (cm): (3.60751, 124.057, 90.5627)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 38.6643  position (cm): (3.70334, 129.443, 97.7065)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 10.633  position (cm): (3.72849, 130.859, 99.5501)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 1.63585  position (cm): (3.73481, 131.214, 100.009)
+  trackID: 0  chamberNb: 4  energy deposit (keV): 71.0279  position (cm): (4.78411, 194.674, 170.392)
+  trackID: 0  chamberNb: 4  energy deposit (keV): 13.6418  position (cm): (4.81811, 196.814, 172.422)
+Ex02MCStack Info  
+Total number of particles:   2
+Number of primary particles: 1
+Track ID:  0
+TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
+Primary    
+Number of daughters: 1
+
+Track ID:  1
+TParticle: e-             p: -0.000856 -0.000430 0.001082 Vertex: -8.920392e-03 1.794259e+00 -2.431045e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Event: 2 R:0.00s C:0.01s
+ ==> Inside FLUKAM!!!
+     * ITIMES = 1 LFDRTR = T
+ <== Outside FLUKAM!!!
+
+-------->Hits Collection: in this event they are 21 hits in the tracker chambers: 
+  trackID: 0  chamberNb: 0  energy deposit (keV): 43.4115  position (cm): (2.32638, 16.4893, -150.533)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 95.4678  position (cm): (2.55801, 18.6476, -141.669)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 4.49858  position (cm): (2.58955, 18.951, -140.467)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.817923  position (cm): (2.60054, 19.0576, -140.047)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.270942  position (cm): (2.60163, 19.0683, -140.005)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.0370464  position (cm): (2.60178, 19.0698, -139.999)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 104.187  position (cm): (4.52542, 42.3015, -67.441)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 40.1233  position (cm): (4.66993, 44.4192, -62.0725)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 8.86649  position (cm): (4.72024, 45.1692, -60.2045)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 1.63585  position (cm): (4.72523, 45.2435, -60.0204)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 0.144925  position (cm): (4.72581, 45.2522, -59.9989)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 55.4675  position (cm): (6.66883, 78.5394, 9.7396)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 30.3612  position (cm): (6.82624, 81.5781, 15.1446)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 21.1386  position (cm): (6.93948, 83.8019, 19.0237)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 3.68065  position (cm): (6.96824, 84.3726, 20.009)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 40.6137  position (cm): (9.01208, 129.362, 87.127)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 36.4487  position (cm): (9.14008, 132.446, 91.1083)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 76.42  position (cm): (9.32077, 136.849, 96.6823)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 23.3934  position (cm): (9.42914, 139.531, 100.014)
+  trackID: 0  chamberNb: 4  energy deposit (keV): 8.70174  position (cm): (11.5554, 196.45, 161.336)
+  trackID: 0  chamberNb: 4  energy deposit (keV): 1.22688  position (cm): (11.5677, 196.801, 161.667)
+Ex02MCStack Info  
+Total number of particles:   5
+Number of primary particles: 1
+Track ID:  0
+TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
+Primary    
+Number of daughters: 4
+
+Track ID:  1
+TParticle: e-             p: -0.000892 0.000548 0.001053 Vertex: -1.038963e-03 1.689173e+00 -2.445548e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  2
+TParticle: e-             p: 0.001425 -0.000032 0.002289 Vertex: 1.982135e-02 1.915185e+00 -2.419185e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  3
+TParticle: e-             p: 0.000164 -0.000961 0.001412 Vertex: 4.840810e-02 2.035155e+00 -2.405838e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  4
+TParticle: e-             p: 0.001763 0.000680 0.003696 Vertex: 5.031731e-02 2.042996e+00 -2.404996e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Event: 3 R:0.00s C:0.00s
+ ==> Inside FLUKAM!!!
+     * ITIMES = 1 LFDRTR = T
+ <== Outside FLUKAM!!!
+
+-------->Hits Collection: in this event they are 20 hits in the tracker chambers: 
+  trackID: 0  chamberNb: 0  energy deposit (keV): 49.3209  position (cm): (-0.597872, 15.6031, -146.42)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 22.8833  position (cm): (-0.624153, 16.6558, -141.791)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 12.3195  position (cm): (-0.633051, 17.0313, -140.177)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.408962  position (cm): (-0.633955, 17.0686, -140.018)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 0.114052  position (cm): (-0.634056, 17.0728, -140)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 37.5077  position (cm): (-1.03391, 37.46, -71.095)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 23.2815  position (cm): (-1.07224, 39.8188, -64.6452)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 16.5045  position (cm): (-1.09849, 41.3917, -60.4615)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 1.89899  position (cm): (-1.10147, 41.5678, -59.9989)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 34.2383  position (cm): (-1.52623, 71.5456, 6.70697)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 37.4225  position (cm): (-1.58378, 76.0858, 15.2489)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 20.3165  position (cm): (-1.60963, 78.1752, 19.0755)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 3.82673  position (cm): (-1.61606, 78.6991, 20.0249)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 39.0056  position (cm): (-2.0886, 122.04, 87.7383)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 44.2736  position (cm): (-2.16309, 129.774, 98.0462)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 9.41008  position (cm): (-2.17462, 130.984, 99.6206)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 1.22688  position (cm): (-2.17746, 131.285, 100.01)
+  trackID: 0  chamberNb: 4  energy deposit (keV): 22.5118  position (cm): (-2.67256, 187.769, 163.696)
+  trackID: 0  chamberNb: 4  energy deposit (keV): 68.4649  position (cm): (-2.72259, 194.042, 169.788)
+  trackID: 0  chamberNb: 4  energy deposit (keV): 15.0177  position (cm): (-2.74446, 196.805, 172.417)
+Ex02MCStack Info  
+Total number of particles:   4
+Number of primary particles: 1
+Track ID:  0
+TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
+Primary    
+Number of daughters: 2
+
+Track ID:  1
+TParticle: e-             p: -0.000638 0.000969 0.001193 Vertex: -3.771275e-02 1.901624e+00 -2.414517e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  2
+TParticle: e-             p: 0.000336 0.001403 0.001877 Vertex: -4.719857e-02 1.960688e+00 -2.406542e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 1
+
+Track ID:  3
+TParticle: gamma          p: -0.000444 -0.000206 -0.000279 Vertex: -6.980381e-02 1.955676e+00 -2.406458e+02     2    -1
+Mother:    e-  with ID: 2
+Number of daughters: 0
+
+Event: 4 R:0.00s C:0.00s
