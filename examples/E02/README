@@ -48,6 +48,12 @@ Macros:
   g4config.in     - macro for G4 configuration using G4 commands
   g4vis.in        - macro for G4 visualization settings
   
+  For running example with Fluka:
+  
+  run_fl.C        - macro for running example 
+  flConfig.C      - configuration macro for Fluka
+
+
 To run example:
 ===============
   
@@ -59,3 +65,6 @@ To run example:
   
   With G4 + TGeo navigation:
   root[0] .x run_g4.C("g4tgeoConfig.C");  
+
+  With Fluka:
+  root[0] .x run_fl.C  

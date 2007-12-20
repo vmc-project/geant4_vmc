@@ -39,6 +39,11 @@ Macros:
   g4Config.C     - configuration macro for G4 with native geometry navigation (default)
   g4tgeoConfig.C - configuration macro for G4 with TGeo geometry navigation
   
+  For running example with Fluka:
+  
+  run_fl.C       - macro for running example 
+  flConfig.C     - configuration macro for Fluka
+  
 To run example:
 ===============
   
@@ -51,6 +56,9 @@ To run example:
   With G4 + TGeo navigation:
   root[0] .x run_g4.C("g4tgeoConfig.C");  
 
+  With Fluka:
+  root[0] .x run_fl.C  
+  
 
   Note that as geometry is defined via TGeo,
   the example cannot be run with TGeant3 with its native geometry.

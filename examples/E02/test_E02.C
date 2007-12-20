@@ -35,6 +35,17 @@ void test_E02(const TString& configMacro, Bool_t oldGeometry)
     gROOT->LoadMacro("../macro/g4libs.C");
     g4libs();
   }  
+  else if ( mc == "fl" ) {  
+    // Fluka libraries
+    gROOT->LoadMacro("../macro/fllibs.C");
+    fllibs();
+    
+    // Prepare Fluka working directory
+    gSystem->Exec("../macro/run_fluka.sh");
+
+    // Enter in Fluka working directory
+    gSystem->cd("fluka_out");
+  }  
   
   // Load this example library
   gSystem->Load("libexample02");

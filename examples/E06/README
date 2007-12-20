@@ -38,7 +38,12 @@ Macros:
   g4config.in  - macro for G4 configuration using G4 commands (called from g4Config.C)
   g4config2.in - macro for setting after initialization
 
-  Common macros (can be calleded by run_g3.C/run_g4.C):
+  For running example with Fluka:
+  
+  run_fl.C       - macro for running example 
+  flConfig.C     - configuration macro for Fluka
+
+  Common macros (can be called by run_g3.C/run_g4.C):
   
   optPhoton.C  - test macro for polarized optical photon
 
@@ -54,3 +59,5 @@ To run example
   With G4 + TGeo navigation:
   root[0] .x run_g4.C("g4tgeoConfig.C");   
 
+  With Fluka:
+  root[0] .x run_fl.C  

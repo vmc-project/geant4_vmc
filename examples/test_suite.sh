@@ -45,6 +45,12 @@ do
     echo "... Running test with G4, geometry via VMC,  TGeo navigation" 
     root.exe -q "test_$EXAMPLE.C(\"g4tgeoConfigOld.C\", kTRUE)" >& test_g4_vmc_tgeo.out   
 
+    echo "... Running test with Fluka, geometry via TGeo" 
+    root.exe -q "test_$EXAMPLE.C(\"flConfig.C\", kFALSE)" >& test_fl_tgeo.out   
+
+    echo "... Running test with Fluka, geometry via VMC" 
+    root.exe -q "test_$EXAMPLE.C(\"flConfig.C\", kTRUE)" >& test_fl_vmc.out   
+
   else
     # Run three macro + special configuration available only in E03 example
     echo "... Running test with G3, geometry via TGeo, TGeo navigation" 
@@ -108,6 +114,16 @@ do
     root.exe -q "test_E03_3.C(\"g4Config2.C\", kFALSE)" >& tmpfile    
     cat tmpfile >> test_g4_tgeo_nat_pl.out
     rm tmpfile
+
+    echo "... Running test with Fluka, geometry via TGeo" 
+    root.exe -q "test_E03_1.C(\"flConfig.C\", kFALSE)" >& test_fl_tgeo.out   
+    root.exe -q "test_E03_2.C(\"flConfig.C\", kFALSE)" >& tmpfile
+    cat tmpfile >> test_fl_tgeo.out
+
+    echo "... Running test with Fluka, geometry via VMC" 
+    root.exe -q "test_E03_1.C(\"flConfig.C\", kTRUE)" >& test_fl_vmc.out   
+    root.exe -q "test_E03_2.C(\"flConfig.C\", kTRUE)" >& tmpfile   
+    cat tmpfile >> test_fl_vmc.out
 
   fi  
 
