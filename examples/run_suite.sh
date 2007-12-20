@@ -45,6 +45,10 @@ do
     root.exe -q "run_g4.C(\"g4Config2.C\")"  >& run_g4pl.out
   fi
 
+  # run Fluka
+  echo "... Running example $EXAMPLE with Fluka" 
+  root.exe -q "run_fl.C"  >& run_fl.out
+
 done
         
 cd $CURDIR
