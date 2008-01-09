@@ -1,0 +1,68 @@
+/*! 
+
+/// \file "E06/.README"
+/// \brief The Example E06 README page
+
+
+\page README_E06 Example E06
+
+\section e06_s1 Description
+
+  Geant4 ExampleN06 adapted to Virtual Monte Carlo.
+
+  It demonstrates:
+    - Physics - Cherenkov and optical photon processes
+
+  See also the description of in 
+    geant4/examples/novice/N06/README
+
+\section e06_s2 Macros
+
+  For running example with G3:
+  <pre>
+  \link       E06/run_g3.C run_g3.C      \endlink - macro for running example 
+  \link E06/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry (default)
+  \link     E06/g3Config.C g3Config.C    \endlink - configuration macro for G3 with native geometry 
+  </pre>
+
+  For running example with G4:
+  <pre>
+  \link       E06/run_g4.C run_g4.C      \endlink - macro for running example 
+  \link     E06/g4Config.C g4Config.C    \endlink - configuration macro - G4 with native geometry navigation (default)
+  \link E06/g4tgeoConfig.C g4tgeoConfig.C\endlink - configuration macro - G4 with TGeo geometry navigation
+   g4config.in  - macro for G4 configuration using G4 commands (called from g4Config.C)
+   g4config2.in - macro for setting after initialization
+  </pre>
+
+  For running example with Fluka:
+  <pre>
+  \link   E06/run_fl.C run_fl.C  \endlink - macro for running example 
+  \link E06/flConfig.C flConfig.C\endlink - configuration macro for Fluka
+  </pre>
+
+  Common macros (can be called by run_g3.C/run_g4.C):
+  <pre>
+  optPhoton.C  - test macro for polarized optical photon
+  </pre>
+
+\section e06_s3 To run example 
+  <pre>
+  With G3 + TGeo:
+  root[0] .x \link E06/run_g3.C run_g3.C\endlink
+  
+  With G4:
+  root[0] .x \link E06/run_g4.C run_g4.C\endlink 
+
+  With G4 + TGeo navigation:
+  root[0] .x \link E06/run_g4.C run_g4.C\endlink(\link E06/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);  
+
+  With Fluka:
+  root[0] .x \link E06/run_fl.C run_fl.C\endlink 
+  </pre>
+  
+\section e06_s4 Classes
+
+The documentation of all classes and the basic macros for this example
+is availabe on \link E06 this page \endlink. 
+
+*/

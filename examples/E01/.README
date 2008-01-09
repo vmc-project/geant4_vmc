@@ -1,0 +1,73 @@
+/*! 
+
+\file "E01/.README"
+\brief The Example E01 README page
+
+\page README_E01 Example E01
+
+\section e01_s1 Description
+
+  The Geant4 ExampleN01 adapted to Virtual Monte Carlo.
+
+  It demonstrates:
+  -  Simple geometry (Gsvolu, Gspos)
+  -  Simple primary generator: 
+      one geantino with a fixed position and direction
+  -  Access to particle in stepping
+
+  See also the description of in 
+    geant4/examples/novice/N01/README
+
+
+\section e01_s2 Macros
+
+  For running example with G3:
+  <pre>
+  \link       E01/run_g3.C run_g3.C      \endlink - macro for running example 
+  \link E01/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry (default)
+  \link     E01/g3Config.C g3Config.C    \endlink - configuration macro for G3 with native geometry 
+  </pre>
+
+  For running example with G4:
+  <pre>
+  \link       E01/run_g4.C run_g4.C      \endlink - macro for running example 
+  \link     E01/g4Config.C g4Config.C    \endlink - configuration macro for G4 with native geometry navigation (default)
+  \link E01/g4tgeoConfig.C g4tgeoConfig.C\endlink - configuration macro for G4 with TGeo geometry navigation
+  </pre>
+  
+  For running example with Fluka:
+  <pre>
+  \link   E01/run_fl.C run_fl.C  \endlink - macro for running example 
+  \link E01/flConfig.C flConfig.C\endlink - configuration macro for Fluka
+  </pre>
+  
+\section e01_s3 To run example
+  
+  <pre>
+  With G3 + TGeo:
+  root[0] .x \link E01/run_g3.C run_g3.C\endlink
+  
+  With G4:
+  root[0] .x \link E01/run_g4.C run_g4.C\endlink 
+  
+  With G4 + TGeo navigation:
+  root[0] .x \link E01/run_g4.C run_g4.C\endlink(\link E01/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);  
+
+  With Fluka:
+  root[0] .x \link E01/run_fl.C run_fl.C\endlink 
+  </pre>
+  
+
+  Note that as geometry is defined via TGeo,
+  the example cannot be run with TGeant3 with its native geometry.
+  One has to switch to geometry definition via VMC 
+  (see test_E01.C)
+
+\section e01_s4 Classes
+
+The documentation of all classes and the basic macros for this example
+is availabe on \link E01 this page \endlink. 
+
+  
+*/
+  

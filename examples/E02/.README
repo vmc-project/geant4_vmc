@@ -1,0 +1,75 @@
+/*! 
+
+\file "E02/.README"
+\brief The Example E02 README page
+
+\page README_E02 Example E02
+
+\section e02_s1 Description
+
+  The Geant4 ExampleN02 adapted to Virtual Monte Carlo.
+
+  It demonstrates:
+  -  Geometry - parameterised volume (Gsposp)
+  -  Definition of sensitive volumes
+  -  Physics - hadronics processes off
+  -  Particles cuts: 
+       default G3 cuts, G4 cut in range: 1cm
+  -  Simple primary generator: 
+       one proton with a fixed position and direction
+  -  Generating hits
+  -  Drawing geometry (G3, G3+TGeo, G4) + trajectories (G3+TGeo and G4)
+  -  Storing hits, particles stack in Root file
+
+  See also description of in 
+    geant4/examples/novice/N02/README
+
+
+\section e02_s2 Macros
+
+  For running example with G3:
+  <pre>
+  \link       E02/run_g3.C run_g3.C      \endlink - macro for running example 
+  \link E02/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry (default)
+  \link     E02/g3Config.C g3Config.C    \endlink - configuration macro for G3 with native geometry 
+  </pre>
+
+
+  For running example with G4:
+  <pre>
+  \link       E02/run_g4.C run_g4.C      \endlink - macro for running example 
+  \link     E02/g4Config.C g4Config.C    \endlink - configuration macro for G4 with native geometry navigation (default)
+  \link E02/g4tgeoConfig.C g4tgeoConfig.C\endlink - configuration macro for G4 with TGeo geometry navigation
+   g4config.in     - macro for G4 configuration using G4 commands
+   g4vis.in        - macro for G4 visualization settings
+  </pre>
+  
+  For running example with Fluka:
+  <pre>
+  \link   E02/run_fl.C run_fl.C  \endlink - macro for running example 
+  \link E02/flConfig.C flConfig.C\endlink - configuration macro for Fluka
+  </pre>
+
+
+\section e02_s3 To run example
+
+  <pre>
+  With G3 + TGeo:
+  root[0] .x \link E02/run_g3.C run_g3.C\endlink
+  
+  With G4:
+  root[0] .x \link E02/run_g4.C run_g4.C\endlink 
+  
+  With G4 + TGeo navigation:
+  root[0] .x \link E02/run_g4.C run_g4.C\endlink(\link E02/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);  
+
+  With Fluka:
+  root[0] .x \link E02/run_fl.C run_fl.C\endlink 
+  </pre>
+  
+\section e02_s4 Classes
+
+The documentation of all classes and the basic macros for this example
+is availabe on \link E02 this page \endlink. 
+
+*/

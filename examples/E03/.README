@@ -1,0 +1,104 @@
+/*! 
+
+/// \file "E03/.README"
+/// \brief The Example E03 README page
+
+\page README_E03 Example E03
+
+\section e03_s1 Description
+
+  The Geant4 ExampleN03 adapted to Virtual Monte Carlo
+  and extended for testing some other VMC features.
+
+  It demonstrates:
+    - Geometry - divided volume (Gsdvn)
+    - Definition of sensitive volumes
+    - Physics - hadronics processes off
+    - Particles cuts: 
+        G4 cut in range: 1mm;
+        G3 cuts set to correspond to 1mm cut in range
+    - Primary generator with randomized position (optional),
+      defined number of electrons with moving position and fixed direction
+    - Calorimetry hits
+    - Storing hits, particles stack in Root file
+    - Drawing geometry (G3, G3+TGeo, G4) + trajectories (G3+TGeo and G4)
+    - Verbosity
+    - Geometry defined via Geant4 (G4)
+    - User defined physics list (G4)
+    - User defined particles and ions (G3, G4)
+
+  See also description of in 
+    geant4/examples/novice/N03/README
+
+\section e03_s2 Compilation:
+
+  With G4:\n
+  An extra library with user defined Geant4 based classes has to be build:
+  <pre>
+  cd E03/geant4
+  gmake
+  </pre>
+
+  Use of user own defined physics list is demonstrated on
+  the LHEP_BERT hadronics physics list provided in Geant4.
+
+\section e03_s3 Macros
+
+  For running example with G3:
+  <pre>
+  \link       E03/run_g3.C run_g3.C      \endlink - macro for running example 
+  \link E03/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry(default)
+  \link     E03/g3Config.C g3Config.C    \endlink - configuration macro for G3 with native geometry
+  </pre>
+
+  For running example with G4:
+  <pre>
+  \link       E03/run_g4.C run_g4.C      \endlink - macro for running example 
+  \link     E03/g4Config.C g4Config.C    \endlink - configuration macro - G4 native geometry navigation (default)
+  \link    E03/g4Config1.C g4Config1.C   \endlink - configuration macro - geometry defined via Geant4
+  \link    E03/g4Config2.C g4Config2.C   \endlink - configuration macro - user defined physics list (LHEP_BERT)
+  \link E03/g4tgeoConfig.C g4tgeoConfig.C\endlink - configuration macro - G4 with Tgeo navigation 
+   g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
+   g4config2.in  - macro for G4 configuration using G4 commands (called from g4Config2.C)
+   g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
+  </pre>
+
+  For running example with Fluka:
+  <pre>
+  \link   E01/run_fl.C run_fl.C  \endlink - macro for running example 
+  \link E01/flConfig.C flConfig.C\endlink - configuration macro for Fluka
+  </pre>
+
+  Common macro (called by run_g3.C/run_g4.C):
+  <pre>
+  \link E03/set_vis.C set_vis.C\endlink - setting visualization
+  </pre>
+
+\section e03_s4 To run example 
+
+  <pre>
+  With G3 + TGeo:
+  root[0] .x \link E03/run_g3.C run_g3.C\endlink
+  
+  With G4:
+  root[0] .x \link E03/run_g4.C run_g4.C\endlink 
+
+  With G4 + TGeo navigation:
+  root[0] .x \link E03/run_g4.C run_g4.C\endlink(\link E03/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);  
+
+  With G4 with geometry defined via Geant4:
+  root[0] .x \link E03/run_g4.C run_g4.C\endlink(\link E03/g4Config1.C "g4Config1.C"\endlink);  
+
+  With G4 with user defined physics list:
+  root[0] .x \link E03/run_g4.C run_g4.C\endlink(\link E03/g4Config2.C "g4Config2.C"\endlink);  
+
+  With Fluka:
+  root[0] .x \link E03/run_fl.C run_fl.C\endlink 
+  </pre>
+  
+\section e03_s5 Classes
+
+The documentation of all classes and the basic macros for this example
+is availabe on \link E03 this page \endlink. 
+
+*/
