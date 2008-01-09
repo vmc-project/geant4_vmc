@@ -1,3 +1,6 @@
+#ifndef TG4_LISTTREE_FRAME_H
+#define TG4_LISTTREE_FRAME_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,14 +12,16 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
+/// \file TG4ListTreeFrame.h
+/// \brief Definition of the TG4ListTreeFrame class 
+///
+/// \author D. Adamova, NPI Rez
+
 /// \ingroup interfaces
 /// \class TG4ListTreeFrame
 /// \brief Frame for the ListTree container
 ///
 /// \author: D. Adamova, NPI Rez
-
-#ifndef TG4_LISTTREE_FRAME_H
-#define TG4_LISTTREE_FRAME_H
 
 #include <TGFrame.h>
 #include <TObject.h>
@@ -41,13 +46,15 @@ public:
     void SendCloseMessage();                
 
 private:
+    /// Not implemented
     TG4ListTreeFrame& operator=(const TG4ListTreeFrame& ltf);
+    /// Not implemented
     TG4ListTreeFrame(const TG4ListTreeFrame& ltf);                     
 
-    TGCanvas*   fCanvasWindow;  // Canvas window for the list tree
-    TGListTree* fVolumesListTree;  // volumes list tree 
+    TGCanvas*   fCanvasWindow;    ///< Canvas window for the list tree
+    TGListTree* fVolumesListTree; ///< volumes list tree 
                         
-    ClassDef(TG4ListTreeFrame,0)  // the frame for the volumes list tree 
+    ClassDef(TG4ListTreeFrame,0) // the frame for the volumes list tree 
   };
   
 //

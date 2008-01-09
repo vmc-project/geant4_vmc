@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: global
-// Class TG4NameMap
-// ----------------
-// See the class description in the header file.
+/// \file TG4NameMap.cxx
+/// \brief Implementation of the TG4NameMap class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4NameMap.h"
 #include "TG4Globals.h"
@@ -28,12 +28,13 @@ TG4NameMap::TG4NameMap()
     fInverseMap(),
     fSecond(fgUndefined) 
 {
-//
+/// Default constructor
 }
 
 //_____________________________________________________________________________
-TG4NameMap::~TG4NameMap() {
-//
+TG4NameMap::~TG4NameMap() 
+{
+/// Destructor
 }
 
 //

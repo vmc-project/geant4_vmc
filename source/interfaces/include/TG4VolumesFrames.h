@@ -1,3 +1,6 @@
+#ifndef TG4_VOLUMESFRAMES_H
+#define TG4_VOLUMESFRAMES_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,14 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup interfaces
-/// \class TG4VolumesFrames
-/// \brief Frames for the display of volumes properties
+/// \file TG4VolumesFrames.h
+/// \brief Definition of the TG4VolumesFrames class 
 ///
-/// \author: D. Adamova, NPI Rez
-
-#ifndef TG4_VOLUMESFRAMES_H
-#define TG4_VOLUMESFRAMES_H
+/// \author D. Adamova, NPI Rez
 
 #include <TObject.h>
 #include <TGFrame.h>
@@ -29,6 +28,12 @@ class TGTextEntry;
 class TGComboBox;
 class G4UserLimits;
 class TG4MainFrame; 
+
+/// \ingroup interfaces
+/// \class TG4VolumesFrames
+/// \brief Frames for the display of volumes properties
+///
+/// \author: D. Adamova, NPI Rez
 
 class TG4VolumesFrames : public TObject {
 
@@ -44,35 +49,77 @@ public:
     void DisplayControls();
 
 private:
+    /// Not implemented
     TG4VolumesFrames(const TG4VolumesFrames& vf) ;
+    /// Not implemented
     TG4VolumesFrames& operator=(const TG4VolumesFrames& vf) ;
 
     TString GetLimitsDisplay(G4UserLimits* limits) const;
     TString GetCutsDisplay(G4UserLimits* limits) const;
     TString GetControlsDisplay(G4UserLimits* limits) const;
     
-    TG4MainFrame*       fPanel;    //main frame
-    TGCompositeFrame*   fCapFrame; // the top frame for volumes properties display
-    TGCompositeFrame*   fVolSubframe1; // frame for the combo box
-    TGCompositeFrame*   fVolSubframe2; //  frame for the text entries        
-    TGGroupFrame*       fGrFrame; // frame for user's limits
-    TGHorizontalFrame*  fGrHFrame; // frame to hold text buttons
-    TGTextButton*       fbtsumm; // button to invoke user's limits display  
-    TGTextButton*       fbtcuts; // button to invoke cuts display
-    TGTextButton*       fbtcontrols; // button to invoke controls display
-    TGLayoutHints*      fVolFrameLayout; // layout hints for SubFrames
-    TGHorizontalFrame*  fHframe[3];     // horizontal frames for text entries
-    TGLabel*            fLabel[3];      // labels for text entries
-    TGTextBuffer*       fVolTextBuff[3]; // text buffs for vols propertie
-    TGTextEntry*        fVolTextEntry[3]; // text entries for vols properties
-    TGComboBox*         fVolumesCombo; // volumes  combo box
-    TGLabel*            fComboLabel;   // label for combo box
-    TGTextBuffer*       fDisplBuffLimits; //buffer containing text for user limits display
-    TGTextBuffer*       fDisplBuffCuts; //buffer containing text for cuts display
-    TGTextBuffer*       fDisplBuffControls; //buffer containing text for controls display
-                               
     void AddLogicalVolumeName( const char* name, Int_t index) const;
 
+    //
+    // data members
+    
+    /// main frame
+    TG4MainFrame*       fPanel;
+    
+    /// the top frame for volumes properties display    
+    TGCompositeFrame*   fCapFrame;
+    
+    /// frame for the combo box    
+    TGCompositeFrame*   fVolSubframe1;
+    
+    /// frame for the text entries            
+    TGCompositeFrame*   fVolSubframe2;
+    
+    /// frame for user's limits    
+    TGGroupFrame*       fGrFrame;
+    
+    /// frame to hold text buttons    
+    TGHorizontalFrame*  fGrHFrame;
+    
+    /// button to invoke user's limits display      
+    TGTextButton*       fbtsumm;
+    
+    /// button to invoke cuts display
+    TGTextButton*       fbtcuts;
+    
+    /// button to invoke controls display    
+    TGTextButton*       fbtcontrols;
+    
+    /// layout hints for SubFrames    
+    TGLayoutHints*      fVolFrameLayout;
+    
+    /// horizontal frames for text entries
+    TGHorizontalFrame*  fHframe[3];
+    
+    /// labels for text entries
+    TGLabel*            fLabel[3];
+    
+    /// text buffs for vols propertie    
+    TGTextBuffer*       fVolTextBuff[3];
+    
+    /// text entries for vols properties    
+    TGTextEntry*        fVolTextEntry[3];
+    
+    /// volumes  combo box    
+    TGComboBox*         fVolumesCombo;
+    
+    /// label for combo box
+    TGLabel*            fComboLabel;
+    
+    /// buffer containing text for user limits display    
+    TGTextBuffer*       fDisplBuffLimits;
+    
+    /// buffer containing text for cuts display
+    TGTextBuffer*       fDisplBuffCuts;
+    
+    /// buffer containing text for controls display    
+    TGTextBuffer*       fDisplBuffControls;
+                               
     ClassDef(TG4VolumesFrames,0)
          // class for the composition of the volumes display frame    
   };

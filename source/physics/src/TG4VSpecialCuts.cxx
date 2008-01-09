@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics
-// Class TG4VSpecialCuts
-// ---------------------
-// See the class description in the header file.
+/// \file TG4VSpecialCuts.cxx
+/// \brief Implementation of the TG4VSpecialCuts class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4VSpecialCuts.h"
 #include "TG4G3CutVector.h"
@@ -28,12 +28,13 @@ TG4VSpecialCuts::TG4VSpecialCuts(const G4String& processName)
   : G4VProcess(processName, fUserDefined),
     fLossTableManager(G4LossTableManager::Instance())
 {
-//
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
-TG4VSpecialCuts::~TG4VSpecialCuts() {
-//
+TG4VSpecialCuts::~TG4VSpecialCuts() 
+{
+/// Destructor
 }
 
 //

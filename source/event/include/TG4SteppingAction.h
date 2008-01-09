@@ -1,3 +1,6 @@
+#ifndef TG4_STEPPING_ACTION_H
+#define TG4_STEPPING_ACTION_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,20 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup event
-/// \class TG4SteppingAction
-/// \brief Actions at each step
-/// 
-/// This class ensures the additional call to the sensitive detector
-/// when track crosses a geometrical boundary.
-/// It also enables to define a maximum number of steps
-/// and takes care of stopping of a track when this number
-/// is reached.
+/// \file TG4SteppingAction.h
+/// \brief Definition of the TG4SteppingAction class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_STEPPING_ACTION_H
-#define TG4_STEPPING_ACTION_H
 
 #include "TG4SteppingActionMessenger.h"
 
@@ -32,6 +25,17 @@
 
 class G4Track;
 class G4Step;
+
+/// \ingroup event
+/// \brief Actions at each step
+/// 
+/// This class ensures the additional call to the sensitive detector
+/// when track crosses a geometrical boundary.
+/// It also enables to define a maximum number of steps
+/// and takes care of stopping of a track when this number
+/// is reached.
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4SteppingAction : public G4UserSteppingAction 
 {
@@ -68,21 +72,34 @@ class TG4SteppingAction : public G4UserSteppingAction
     void PrintTrackInfo(const G4Track* track) const;
 
   private:
+    /// Not implemented
     TG4SteppingAction(const TG4SteppingAction& right);
+    /// Not implemented
     TG4SteppingAction& operator=(const TG4SteppingAction& right);
 
     // static data members
-    static TG4SteppingAction*   fgInstance; //this instance
+    static TG4SteppingAction*   fgInstance; ///< this instance
 
+    //
     // data members
-    TG4SteppingActionMessenger  fMessenger; //messenger    
-    G4int  fMaxNofSteps;          //max number of steps allowed
-    G4int  fStandardVerboseLevel; //standard tracking verbose level
-    G4int  fLoopVerboseLevel;     //tracking verbose level                                           //for looping particles
-                                  //for looping particles
-    G4int  fLoopStepCounter;      //loop steps counter    
-    G4bool fSaveSecondaries;      //control of saving secondaries
-
+    
+    /// messenger    
+    TG4SteppingActionMessenger  fMessenger;
+    
+    /// max number of allowed steps
+    G4int  fMaxNofSteps;
+    
+    /// standard tracking verbose level
+    G4int  fStandardVerboseLevel;
+    
+    /// tracking verbose level for looping particles
+    G4int  fLoopVerboseLevel;
+    
+    /// counter of step in looping    
+    G4int  fLoopStepCounter;
+    
+    /// control of saving secondaries
+    G4bool fSaveSecondaries;
 };
 
 // inline methods

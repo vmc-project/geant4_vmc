@@ -1,3 +1,6 @@
+#ifndef TG4_PRIMARY_GENERATOR_ACTION_H
+#define TG4_PRIMARY_GENERATOR_ACTION_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,15 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup run
-/// \class TG4PrimaryGeneratorAction
-/// \brief Primary generator action defined via TVirtualMCStack 
-/// and TVirtualMCApplication.
+/// \file TG4PrimaryGeneratorAction.h
+/// \brief Definition of the TG4PrimaryGeneratorAction class 
 ///
-/// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_PRIMARY_GENERATOR_ACTION_H
-#define TG4_PRIMARY_GENERATOR_ACTION_H
+/// \author I. Hrivnacova; IPN Orsay
 
 #include "TG4Verbose.h"
 
@@ -26,6 +24,12 @@
 
 class G4ParticleGun;
 class G4Event;
+
+/// \ingroup run
+/// \brief Primary generator action defined via TVirtualMCStack 
+/// and TVirtualMCApplication.
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction,
                                   public TG4Verbose

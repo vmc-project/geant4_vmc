@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: run
-// Class TG4RunManager
-// -------------------
-// See the class description in the header file.
+/// \file TG4RunManager.cxx
+/// \brief Implementation of the TG4RunManager class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4RunManager.h"
 #include "TG4RunConfiguration.h"
@@ -69,7 +69,8 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
     fARGC(argc),
     fARGV(argv)  
 {
-// 
+/// Standard constructor
+
   if (fgInstance) {
     TG4Globals::Exception(
       "TG4RunManager", "TG4RunManager",
@@ -116,7 +117,8 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration)
     fARGV(0)
   
 {
-//
+/// Default constructor
+
   if (fgInstance) {
     TG4Globals::Exception(
       "TG4RunManager", "TG4RunManager",
@@ -158,8 +160,10 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration)
 }
 
 //_____________________________________________________________________________
-TG4RunManager::~TG4RunManager() {
-//  
+TG4RunManager::~TG4RunManager() 
+{
+/// Destructor
+
   delete fRunConfiguration;
   delete fGeantUISession;
   delete fRunManager;

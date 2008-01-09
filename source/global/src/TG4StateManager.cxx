@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: geometry
-// Class TG4StateManager
-// ------------------------
-// See the class description in the header file.
+/// \file TG4StateManager.cxx
+/// \brief Implementation of the TG4StateManager class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4StateManager.h"
 #include "TG4Globals.h"
@@ -69,7 +69,8 @@ TG4StateManager::~TG4StateManager()
 //_____________________________________________________________________________
 void TG4StateManager::SetNewState(TG4ApplicationState state) 
 {
-  /// Set application state
+/// Set application state
+
   if ( VerboseLevel() > 1 ) {
     G4cout << "**** TG4StateManager::SetNewState: " 
            << GetStateName(state) << "****" << G4endl;

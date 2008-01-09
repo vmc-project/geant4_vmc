@@ -1,3 +1,6 @@
+#ifndef TG4_SD_CONSTRUCTION_H
+#define TG4_SD_CONSTRUCTION_H
+
 // $Id$
 
 //------------------------------------------------
@@ -8,6 +11,15 @@
 // For the licensing terms see geant4_vmc/LICENSE.
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
+
+/// \file TG4SDConstruction.h
+/// \brief Definition of the TG4SDConstruction class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
+#include "TG4Verbose.h"
+
+class G4LogicalVolume;
 
 /// \ingroup digits_hits
 /// \class TG4SDConstruction
@@ -20,13 +32,6 @@
 /// share the same sensitive detector instance.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_SD_CONSTRUCTION_H
-#define TG4_SD_CONSTRUCTION_H
-
-#include "TG4Verbose.h"
-
-class G4LogicalVolume;
 
 class TG4SDConstruction : public TG4Verbose
 

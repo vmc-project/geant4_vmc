@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics
-// Class TG4G3PhysicsManager
-// -------------------------
-// See the class description in the header file.
+/// \file TG4G3PhysicsManager.cxx
+/// \brief Implementation of the TG4G3PhysicsManager class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4G3PhysicsManager.h"
 #include "TG4G3CutVector.h"
@@ -36,7 +36,8 @@ TG4G3PhysicsManager::TG4G3PhysicsManager()
     fG3Defaults(),
     fLock(false)
 {
-// 
+/// Default constructor
+
   if (fgInstance) {
     TG4Globals::Exception(
       "TG4G3PhysicsManager", "TG4G3PhysicsManager",
@@ -62,8 +63,10 @@ TG4G3PhysicsManager::TG4G3PhysicsManager()
 }
 
 //_____________________________________________________________________________
-TG4G3PhysicsManager::~TG4G3PhysicsManager() {
-//
+TG4G3PhysicsManager::~TG4G3PhysicsManager() 
+{
+/// Destructor
+
 //  delete fIsCutVector;
   delete fIsControlVector;
 }

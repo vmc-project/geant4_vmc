@@ -1,3 +1,6 @@
+#ifndef TG4_LIMITS_H
+#define TG4_LIMITS_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,18 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup global
-/// \class TG4Limits
-/// \brief Extended G4UserLimits class.
-/// 
-/// Class extends G4UserLimits base class with the
-/// vectors of kinetic energy cuts and control process flags
-/// data members.
+/// \file TG4Limits.h
+/// \brief Definition of the TG4Limits class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_LIMITS_H
-#define TG4_LIMITS_H
 
 #include "TG4Globals.h"
 #include "TG4G3Cut.h"
@@ -31,6 +26,15 @@
 #include <G4UserLimits.hh>
 
 class G4VProcess;
+
+/// \ingroup global
+/// \brief Extended G4UserLimits class.
+/// 
+/// Class extends G4UserLimits base class with the
+/// vectors of kinetic energy cuts and control process flags
+/// data members.
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4Limits: public G4UserLimits
 {
@@ -81,6 +85,7 @@ class TG4Limits: public G4UserLimits
     TG4G3ControlValue GetControl(G4VProcess* process) const; 
 
   private:
+    /// Not implemented
     TG4Limits();
 
     // methods
@@ -88,14 +93,14 @@ class TG4Limits: public G4UserLimits
                     const TG4G3ControlVector& controls);
   
     // static data members
-    static G4int  fgCounter;           // counter 
+    static G4int  fgCounter;           ///< counter 
 
     // data members
-    G4String            fName;         //name
-    G4bool              fIsCut;        //true if any cut value is set
-    G4bool              fIsControl;    //true if any control value is set
-    TG4G3CutVector      fCutVector;    //the vector of G3 cut values
-    TG4G3ControlVector  fControlVector;//the vector of G3 control values 
+    G4String            fName;         ///< name
+    G4bool              fIsCut;        ///< true if any cut value is set
+    G4bool              fIsControl;    ///< true if any control value is set
+    TG4G3CutVector      fCutVector;    ///< the vector of G3 cut values
+    TG4G3ControlVector  fControlVector;///< the vector of G3 control values 
 };
 
 // inline methods

@@ -9,13 +9,15 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4OpticalPhysics
-// ------------------------
-// See the class description in the header file.
-// According to ExN06PhysicsList (geant4 6.0)
+/// \file TG4OpticalPhysics.cxx
+/// \brief Implementation of the TG4OpticalPhysics class 
+///
+/// According to ExN06PhysicsList (geant4 6.0)
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4OpticalPhysics.h"
+#include "TG4Globals.h"
 
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
@@ -38,7 +40,7 @@ TG4OpticalPhysics::TG4OpticalPhysics(const G4String& name)
     fBoundaryProcess(0),
     fMaxNumPhotonsPerStep(fgkDefaultMaxNumPhotonsPerStep) 
 {
-//
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
@@ -53,12 +55,13 @@ TG4OpticalPhysics::TG4OpticalPhysics(G4int verboseLevel,
     fBoundaryProcess(0), 
     fMaxNumPhotonsPerStep(fgkDefaultMaxNumPhotonsPerStep) 
 {
-//
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
-TG4OpticalPhysics::~TG4OpticalPhysics() {
-//
+TG4OpticalPhysics::~TG4OpticalPhysics() 
+{
+/// Destructor
 }
 
 //
@@ -147,6 +150,12 @@ void TG4OpticalPhysics::SetMaxNumPhotonsPerStep(G4int maxNumPhotons)
 
   fMaxNumPhotonsPerStep = maxNumPhotons;
 
-  if ( fCerenkovProcess ) 
+  if ( fCerenkovProcess ) {
     fCerenkovProcess->SetMaxNumPhotonsPerStep(maxNumPhotons);
+  }  
+  else {
+    TG4Globals::Warning(
+      "TG4OpticalPhysics", "SetMaxNumPhotonsPerStep",
+      "Cerenkov process was not instantiated.");
+  }    
 }

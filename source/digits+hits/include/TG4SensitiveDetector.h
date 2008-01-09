@@ -1,3 +1,6 @@
+#ifndef TG4_SENSITIVE_DETECTOR_H
+#define TG4_SENSITIVE_DETECTOR_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,8 +12,17 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
+/// \file TG4SensitiveDetector.h
+/// \brief Definition of the TG4SensitiveDetector class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
+#include <G4VSensitiveDetector.hh>
+#include <globals.hh>
+
+class TG4StepManager;
+
 /// \ingroup digits_hits
-/// \class TG4SensitiveDetector
 /// \brief Sensitive detector common to all logical volumes
 ///
 /// This class adds integer identifier data member to G4VSensitiveDetector.
@@ -19,14 +31,6 @@
 /// stepping function.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_SENSITIVE_DETECTOR_H
-#define TG4_SENSITIVE_DETECTOR_H
-
-#include <G4VSensitiveDetector.hh>
-#include <globals.hh>
-
-class TG4StepManager;
 
 class TG4SensitiveDetector : public G4VSensitiveDetector
 {
@@ -47,16 +51,19 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
     G4int GetID() const;
     
   private:          
+    /// Not implemented
     TG4SensitiveDetector(); 
+    /// Not implemented
     TG4SensitiveDetector(const TG4SensitiveDetector& right);
+    /// Not implemented
     TG4SensitiveDetector& operator=(const TG4SensitiveDetector &right);
 
     // data members
-    static G4int  fgSDCounter; //sensitive detector counter
+    static G4int fgSDCounter; ///< sensitive detector counter
 
     // data members
-    G4int  fID;                    //sensitive detector ID
-    TG4StepManager*  fStepManager; //TG4StepManager
+    G4int            fID;          ///< sensitive detector ID
+    TG4StepManager*  fStepManager; ///< the TG4StepManager instance
 };
 
 // inline methods

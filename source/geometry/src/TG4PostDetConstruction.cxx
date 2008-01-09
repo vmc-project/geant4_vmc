@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: geometry
-// Class TG4PostDetConstruction
-// ---------------------------
-// See the class description in the header file.
+/// \file TG4PostDetConstruction.cxx
+/// \brief Implementation of the TG4PostDetConstruction class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4PostDetConstruction.h"
 #include "TG4GeometryManager.h"
@@ -22,8 +22,7 @@
 TG4PostDetConstruction::TG4PostDetConstruction()
   : TVirtualUserPostDetConstruction()
 {
-/// Standard constructor
-//
+/// Default constructor
 }
 
 //_____________________________________________________________________________

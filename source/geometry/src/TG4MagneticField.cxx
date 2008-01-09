@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: geometry
-// Class TG4ParticlesManager
-// -------------------------
-// See the class description in the header file.
+/// \file TG4MagneticField.cxx
+/// \brief Implementation of the TG4MagneticField class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4MagneticField.h"
 #include "TG4G3Units.h"
@@ -26,7 +26,7 @@
 TG4MagneticField::TG4MagneticField()
   : G4MagneticField() 
 {
-/// Standard constructor
+/// Default constructor
 
   G4FieldManager* fieldManager
      = G4TransportationManager::GetTransportationManager()->GetFieldManager();

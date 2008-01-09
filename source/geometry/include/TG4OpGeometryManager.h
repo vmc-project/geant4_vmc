@@ -1,3 +1,6 @@
+#ifndef TG4_OP_GEOMETRY_MANAGER_H
+#define TG4_OP_GEOMETRY_MANAGER_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,15 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup geometry
-/// \class TG4OpGeometryManager
-/// \brief Geant4 implementation of the TVirtualMC interface methods                    
-/// for definition of material properties for optical processes
+/// \file TG4OpGeometryManager.h
+/// \brief Definition of the TG4OpGeometryManager class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_OP_GEOMETRY_MANAGER_H
-#define TG4_OP_GEOMETRY_MANAGER_H
 
 #include "TG4Verbose.h"
 #include "TG4IntMap.h"
@@ -33,6 +31,13 @@
 class TG4GeometryServices;
 
 class G4OpticalSurface;
+
+/// \ingroup geometry
+/// \brief Geant4 implementation of the TVirtualMC interface methods                    
+/// for definition of material properties for optical processes
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
 class TG4OpGeometryManager : public TG4Verbose
 {
   public:
@@ -77,14 +82,20 @@ class TG4OpGeometryManager : public TG4Verbose
                            Double_t &dens, Double_t &radl, Double_t &absl,
                          Double_t* ubuf, Int_t& nbuf);
     
-  protected:
+  private:
+    /// Not implemented
     TG4OpGeometryManager(const TG4OpGeometryManager& right);
+    /// Not implemented
     TG4OpGeometryManager& operator=(const TG4OpGeometryManager& right);
 
-  private:
+    //
     // data members
-    TG4GeometryServices*  fGeometryServices; // geometry services
-    TG4OpSurfaceMap*      fOpSurfaceMap;     //map of optical surfaces names to their objects 
+    
+    /// geometry services
+    TG4GeometryServices*  fGeometryServices;
+    
+    /// map of optical surfaces names to their objects 
+    TG4OpSurfaceMap*      fOpSurfaceMap;
 };
 
 

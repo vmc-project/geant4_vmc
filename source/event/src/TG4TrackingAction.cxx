@@ -1,11 +1,18 @@
 // $Id$
-// Category: event
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
-// Class TG4TrackingAction
-// -----------------------
-// See the class description in the header file.
-//
-// Author: I.Hrivnacova
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \file TG4TrackingAction.cxx
+/// \brief Implementation of the TG4TrackingAction class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4TrackingAction.h"
 #include "TG4TrackInformation.h"
@@ -42,7 +49,8 @@ TG4TrackingAction::TG4TrackingAction()
     fNewVerboseLevel(0),
     fNewVerboseTrackID(-1)
 {
-//
+/// Default constructor
+
   if (fgInstance) { 
     TG4Globals::Exception(
       "TG4TrackingAction", "TG4TrackingAction", 
@@ -55,8 +63,10 @@ TG4TrackingAction::TG4TrackingAction()
 }
 
 //_____________________________________________________________________________
-TG4TrackingAction::~TG4TrackingAction() {
-//
+TG4TrackingAction::~TG4TrackingAction() 
+{
+/// Destructor
+
   fgInstance = 0;
   
   delete fTrackManager;

@@ -1,3 +1,6 @@
+#ifndef TG4_TRACK_INFORMATION_H
+#define TG4_TRACK_INFORMATION_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,18 +12,19 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics
-/// \class TG4TrackInformation
-/// \brief Defines additional track information.
+/// \file TG4TrackInformation.h
+/// \brief Definition of the TG4TrackInformation class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_TRACK_INFORMATION_H
-#define TG4_TRACK_INFORMATION_H
 
 #include <G4VUserTrackInformation.hh>
 #include <G4Allocator.hh>
 #include <globals.hh>
+
+/// \ingroup physics
+/// \brief Defines additional track information.
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4TrackInformation : public G4VUserTrackInformation
 {
@@ -30,12 +34,12 @@ class TG4TrackInformation : public G4VUserTrackInformation
     //TG4TrackInformation(G4int trackParticleID, G4int parentParticleID);
     virtual ~TG4TrackInformation();
    
-    // operators
-    // required by G4
+    // operators required by G4
+    
+                 /// Override \em new operator for G4Allocator
     inline void *operator new(size_t);
-      // Override "new" for "G4Allocator".
+                 /// Override \em delete operator for G4Allocator
     inline void operator delete(void *trackInformation);
-      // Override "delete" for "G4Allocator".
       
     // methods
     virtual void Print() const;  
@@ -52,9 +56,9 @@ class TG4TrackInformation : public G4VUserTrackInformation
 
   private:
     // data members
-    G4int  fTrackParticleID; //the index of track particle in VMC stack
-    G4int  fParentParticleID;//the index of parent track in VMC stack
-    G4bool fIsUserTrack;     //true if defined by user and not primary track
+    G4int  fTrackParticleID; ///< the index of track particle in VMC stack
+    G4int  fParentParticleID;///< the index of parent track in VMC stack
+    G4bool fIsUserTrack;     ///< true if defined by user and not primary track
 };
 
 // inline methods

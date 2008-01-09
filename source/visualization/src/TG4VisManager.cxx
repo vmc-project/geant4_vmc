@@ -9,40 +9,24 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: visualization
-// Class TG4VisManager
-// -------------------
-// See the class description in the header file.
-// According to visualization/management/include/MyVisManager.*
-// John Allison 24th January 1998.
-// I. Hrivnacova 12.5.98
-//
-// Renamed to TG4VisManager
-// I. Hrivnacova, 3.9.99
-//
-// Added AliMC implementation
-// A. Gheata, 22.2.00
-//
-// Added OpenGL*Win32, RayTracer (as replacement of RayX) drivers 
-// based on G4 suggestions.
-// I. Gonzalez, 4.4.2000
-//
-// Example Visualization Manager description:
-//   Implements virtual function RegisterGraphicsSystems.  
-//   Exploits C-pre-processor variables G4VIS_USE_DAWN, etc.,
-//   which are set by the G4 makefiles if
-//   environment variables of the same name are set.
-//
-// So all you have to do is set environment variables and compile and
-//   instantiate this in your main().
-//
-// Alternatively, you can implement an empty function here and just
-//   register the systems you want in your main(), e.g.:
-//   G4VisManager* myVisManager = new MyVisManager;
-//   myVisManager -> RegisterGraphicsSystem (new MyGraphicsSystem);
-//
-// Author: I. Hrivnacova, A. Gheata
-
+/// \file TG4VisManager.cxx
+/// \brief Implementation of the TG4VisManager class 
+///
+/// According to visualization/management/include/MyVisManager.*
+/// by John Allison 24th January 1998 \n
+/// I. Hrivnacova 12.5.98
+///
+/// Renamed to TG4VisManager \n
+/// I. Hrivnacova, 3.9.99
+///
+/// Added AliMC implementation \n
+/// A. Gheata, 22.2.00
+///
+/// Added OpenGL*Win32, RayTracer (as replacement of RayX) drivers 
+/// based on G4 suggestions.\n
+/// I. Gonzalez, 4.4.2000
+///
+/// \author I. Hrivnacova, IPN Orsay; A, Gheata
 
 #ifdef G4VIS_USE
 
@@ -109,13 +93,15 @@ TG4VisManager::TG4VisManager(G4int verboseLevel)
     fColourFlag(true),
     fVerboseLevel(verboseLevel) 
 {
-//  
+/// Standard constructor
+
   Initialize();
 }
 
 //_____________________________________________________________________________
-TG4VisManager::~TG4VisManager() {
-//
+TG4VisManager::~TG4VisManager() 
+{
+/// Destructor
 }  
 
 //
@@ -184,6 +170,8 @@ void TG4VisManager::RegisterGraphicsSystems()
 //_____________________________________________________________________________
 void TG4VisManager::RegisterModelFactories()
 {
+/// Register model factories
+
    RegisterModelFactory(new G4TrajectoryDrawByChargeFactory());
    RegisterModelFactory(new G4TrajectoryDrawByParticleIDFactory());
 }
@@ -217,7 +205,7 @@ G4bool TG4VisManager::Contains(const PhysicalVolumesVector& pvVector,
 }
 
 //_____________________________________________________________________________
-LogicalVolumesVector TG4VisManager::GetLVList(G4String name)
+TG4VisManager::LogicalVolumesVector TG4VisManager::GetLVList(G4String name)
 {
 /// Get function returning the list of logical volumes
 /// associated to NAME; G4 built clones of a G3 volume (identified 
@@ -259,7 +247,7 @@ LogicalVolumesVector TG4VisManager::GetLVList(G4String name)
 
 
 //_____________________________________________________________________________
-PhysicalVolumesVector TG4VisManager::GetPVList(G4String name)
+TG4VisManager::PhysicalVolumesVector TG4VisManager::GetPVList(G4String name)
 {
 /// Get function returning the physical volume pointer for NAME
 

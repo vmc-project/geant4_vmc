@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: event
-// Class TG4SteppingActionMessenger
-// --------------------------------
-// See the class description in the header file.
+/// \file TG4SteppingActionMessenger.cxx
+/// \brief Implementation of the TG4SteppingActionMessenger class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SteppingActionMessenger.h"
 #include "TG4SteppingAction.h"
@@ -29,7 +29,8 @@ TG4SteppingActionMessenger::TG4SteppingActionMessenger(
     fLoopVerboseCmd(0),
     fMaxNofStepsCmd(0)
 {
-// 
+/// Standard constructor
+
   fLoopVerboseCmd = new G4UIcmdWithAnInteger("/mcTracking/loopVerbose", this);
   fLoopVerboseCmd
     ->SetGuidance("Set tracking verbose level for detected looping tracks.");
@@ -53,8 +54,10 @@ TG4SteppingActionMessenger::TG4SteppingActionMessenger(
 }
 
 //_____________________________________________________________________________
-TG4SteppingActionMessenger::~TG4SteppingActionMessenger() {
-//
+TG4SteppingActionMessenger::~TG4SteppingActionMessenger() 
+{
+/// Destructor
+
   delete fLoopVerboseCmd;
   delete fMaxNofStepsCmd;
   delete fSaveSecondariesCmd;

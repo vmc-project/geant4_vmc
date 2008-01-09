@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: run
-// Class TG4RunMessenger
-// ---------------------
-// See the class description in the header file.
+/// \file TG4RunMessenger.cxx
+/// \brief Implementation of the TG4RunMessenger class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4RunMessenger.h"
 #include "TG4RunManager.h"
@@ -33,7 +33,8 @@ TG4RunMessenger::TG4RunMessenger(TG4RunManager* runManager)
     fRootCommandCmd(0),
     fG3DefaultsCmd(0) 
 { 
-//
+/// Standard constructor
+
   fDirectory = new G4UIdirectory("/mcControl/");
   fDirectory->SetGuidance("TGeant4 control commands.");
 
@@ -62,8 +63,10 @@ TG4RunMessenger::TG4RunMessenger(TG4RunManager* runManager)
 }
 
 //_____________________________________________________________________________
-TG4RunMessenger::~TG4RunMessenger() {
-//
+TG4RunMessenger::~TG4RunMessenger() 
+{
+/// Destructor
+
   delete fDirectory;
   delete fRootCmd;
   delete fRootMacroCmd;

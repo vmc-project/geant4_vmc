@@ -1,3 +1,6 @@
+#ifndef TG4_PARTICLES_MANAGER_H
+#define TG4_PARTICLES_MANAGER_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,14 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics
-/// \class TG4ParticlesManager
-/// \brief Provides mapping between TDatabasePDG and Geant4 particles. 
+/// \file TG4ParticlesManager.h
+/// \brief Definition of the TG4ParticlesManager class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_PARTICLES_MANAGER_H
-#define TG4_PARTICLES_MANAGER_H
 
 #include "TG4Verbose.h"
 #include "TG4Globals.h"
@@ -41,10 +40,18 @@ class TClonesArray;
 class TG4UserIon;
 class TG4UserParticle;
 
+/// \ingroup physics
+/// \brief Provides mapping between TDatabasePDG and Geant4 particles. 
+///
+/// \author I. Hrivnacova; IPN Orsay
+
 class TG4ParticlesManager : public TG4Verbose
 {
   public:
+    /// The map of user ions by their names 
     typedef std::map<G4String, TG4UserIon*>  UserIonMap;
+
+    /// The vector of user particles
     typedef std::vector<TG4UserParticle*>    UserParticleVector;
 
     TG4ParticlesManager();
@@ -91,7 +98,9 @@ class TG4ParticlesManager : public TG4Verbose
     TG4UserParticle*  GetUserParticle(G4int index) const;
     
   private:
+    /// Not implemented
     TG4ParticlesManager(const TG4ParticlesManager& right);
+    /// Not implemented
     TG4ParticlesManager& operator=(const TG4ParticlesManager& right);
 
     // methods
@@ -100,13 +109,20 @@ class TG4ParticlesManager : public TG4Verbose
                               G4ParticleDefinition* particleDefinition);    
 
     // static data members
-    static TG4ParticlesManager*  fgInstance; //this instance
+    static TG4ParticlesManager*  fgInstance; ///< this instance
     
+    //
     // data members
-    TG4NameMap         fParticleNameMap; // the mapping between G4 particle names
-                                         // and TDatabasePDG names for special particles
-    UserIonMap         fUserIonMap;      // user defined ions mappped by their names
-    UserParticleVector fUserParticles;   // vector of user defined particles
+    
+    /// \brief the mapping between G4 particle names and TDatabasePDG names 
+    /// for special particles
+    TG4NameMap         fParticleNameMap;    
+
+    /// user defined ions mappped by their names
+    UserIonMap         fUserIonMap;
+    
+    /// vector of user defined particles
+    UserParticleVector fUserParticles;
 };
 
 // inline methods

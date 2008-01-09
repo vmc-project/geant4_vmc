@@ -1,3 +1,6 @@
+#ifndef TG4_PHYSICS_MANAGER_H
+#define TG4_PHYSICS_MANAGER_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,15 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics
-/// \class TG4PhysicsManager
-/// \brief Geant4 implementation of the TVirtualMC interface methods                    
-/// for building Geant4 physics and access to it.
+/// \file TG4PhysicsManager.h
+/// \brief Definition of the TG4PhysicsManager class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_PHYSICS_MANAGER_H
-#define TG4_PHYSICS_MANAGER_H
 
 #include "TG4Verbose.h"
 #include "TG4ProcessControlMap.h"
@@ -42,6 +40,12 @@ class G4ParticleDefinition;
 class G4ProcessManager;
 class G4VProcess;
 class G4VUserPhysicsList;
+
+/// \ingroup physics
+/// \brief Geant4 implementation of the TVirtualMC interface methods                    
+/// for building Geant4 physics and access to it.
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4PhysicsManager : public TG4Verbose
 {
@@ -96,7 +100,9 @@ class TG4PhysicsManager : public TG4Verbose
     TMCProcess GetOpBoundaryStatus(const G4VProcess* process);
    
   private:
+    /// Not implemented
     TG4PhysicsManager(const TG4PhysicsManager& right);
+    /// Not implemented
     TG4PhysicsManager& operator=(const TG4PhysicsManager& right);
 
     // methods
@@ -114,15 +120,22 @@ class TG4PhysicsManager : public TG4Verbose
     void SetSpecialCutsActivation();
 
     // static data members
-    static TG4PhysicsManager*  fgInstance; //this instance
+    static TG4PhysicsManager*  fgInstance; ///< this instance
     
+    //
     // data members
-    TG4ParticlesManager*   fParticlesManager;  //particles manager
-    TG4G3PhysicsManager*   fG3PhysicsManager;  //G3 physics manager
-    TG4ProcessMCMap        fProcessMCMap;      //the mapping between G4 process names
-                                         //and TMCProcess codes
-    TG4ProcessControlMap   fProcessControlMap; //the mapping between G4 processes
-                                         //and G3 process controls
+    
+    /// particles manager
+    TG4ParticlesManager*   fParticlesManager;
+    
+    /// G3 physics manager
+    TG4G3PhysicsManager*   fG3PhysicsManager;
+    
+    /// the mapping between G4 process names and TMCProcess codes
+    TG4ProcessMCMap        fProcessMCMap;
+    
+    /// the mapping between G4 processes and G3 process controls
+    TG4ProcessControlMap   fProcessControlMap;
 };
 
 // inline methods

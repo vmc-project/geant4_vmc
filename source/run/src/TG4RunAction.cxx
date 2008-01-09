@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: run
-// Class TG4RunAction
-// ------------------
-// See the class description in the header file.
+/// \file TG4RunAction.cxx
+/// \brief Implementation of the TG4RunAction class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <G4Timer.hh>
    // in order to avoid the odd dependency for the
@@ -30,13 +30,16 @@ TG4RunAction::TG4RunAction()
     fTimer(0),
     fRunID(-1) 
 {
-//
+/// Default constructor
+
   fTimer = new G4Timer;
 }
 
 //_____________________________________________________________________________
-TG4RunAction::~TG4RunAction() {
-//
+TG4RunAction::~TG4RunAction() 
+{
+/// Destructor
+
   delete fTimer;
 }
 

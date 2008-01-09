@@ -9,9 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Classes TG4pecialCutsFor*
-// --------------------------------------
-// See the class descriptions in the header file.
+/// \file TG4SpecialCuts.cxx
+/// \brief Implementation of the TG4SpecialCutsFor* classes 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SpecialCuts.h"
 #include "TG4Limits.h"
@@ -25,12 +26,13 @@ TG4SpecialCutsForChargedHadron::TG4SpecialCutsForChargedHadron(
                                                  const G4String& processName)
   : TG4VSpecialCuts(processName) 
 {
-/// Standard and default constructor
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsForChargedHadron::~TG4SpecialCutsForChargedHadron() {
-//
+TG4SpecialCutsForChargedHadron::~TG4SpecialCutsForChargedHadron() 
+{
+/// Destructor
 }
 
 //_____________________________________________________________________________
@@ -55,8 +57,9 @@ TG4SpecialCutsForElectron::TG4SpecialCutsForElectron(const G4String& processName
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsForElectron::~TG4SpecialCutsForElectron() {
-//
+TG4SpecialCutsForElectron::~TG4SpecialCutsForElectron() 
+{
+/// Destructor
 }
 
 //_____________________________________________________________________________
@@ -80,8 +83,9 @@ TG4SpecialCutsForEplus::TG4SpecialCutsForEplus(const G4String& processName)
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsForEplus::~TG4SpecialCutsForEplus() {
-//
+TG4SpecialCutsForEplus::~TG4SpecialCutsForEplus() 
+{
+/// Destructor
 }
 
 //_____________________________________________________________________________
@@ -105,8 +109,9 @@ TG4SpecialCutsForGamma::TG4SpecialCutsForGamma(const G4String& processName)
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsForGamma::~TG4SpecialCutsForGamma() {
-//
+TG4SpecialCutsForGamma::~TG4SpecialCutsForGamma() 
+{
+/// Destructor
 }
 
 //_____________________________________________________________________________
@@ -130,8 +135,9 @@ TG4SpecialCutsForMuon::TG4SpecialCutsForMuon(const G4String& processName)
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsForMuon::~TG4SpecialCutsForMuon() {
-//
+TG4SpecialCutsForMuon::~TG4SpecialCutsForMuon() 
+{
+/// Destructor
 }
 
 //_____________________________________________________________________________
@@ -156,8 +162,9 @@ TG4SpecialCutsForNeutralHadron::TG4SpecialCutsForNeutralHadron(
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsForNeutralHadron::~TG4SpecialCutsForNeutralHadron() {
-//
+TG4SpecialCutsForNeutralHadron::~TG4SpecialCutsForNeutralHadron() 
+{
+/// Destructor
 }
 
 //_____________________________________________________________________________
@@ -181,8 +188,9 @@ TG4SpecialCutsForOther::TG4SpecialCutsForOther(const G4String& processName)
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsForOther::~TG4SpecialCutsForOther() {
-//
+TG4SpecialCutsForOther::~TG4SpecialCutsForOther() 
+{
+/// Destructor
 }
 
 //_____________________________________________________________________________

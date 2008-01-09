@@ -1,3 +1,6 @@
+#ifndef TG4_SD_MANAGER_H
+#define TG4_SD_MANAGER_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,15 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup digits_hits
-/// \class TG4SDManager
-/// \brief Geant4 implementation of the TVirtualMC interface methods                    
-/// for access to Geant4 geometry related with sensitive detectors.
+/// \file TG4SDManager.h
+/// \brief Definition of the TG4SDManager class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_SD_MANAGER_H
-#define TG4_SD_MANAGER_H
 
 #include <globals.hh>
 
@@ -25,6 +23,12 @@
 
 class TG4SDServices;
 class TG4SDConstruction;
+
+/// \ingroup digits_hits
+/// \brief Geant4 implementation of the TVirtualMC interface methods                    
+/// for access to Geant4 geometry related with sensitive detectors.
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4SDManager
 {
@@ -51,16 +55,23 @@ class TG4SDManager
     TG4SDConstruction* GetSDConstruction() const;
 
   private:
+    /// Not implemented
     TG4SDManager(const TG4SDManager& right);
+    /// Not implemented
     TG4SDManager& operator=(const TG4SDManager& right);
 
     // static data members
-    static TG4SDManager* fgInstance;   //this instance
+    static TG4SDManager* fgInstance; ///< this instance
     
+    //
     // data members
-    TG4SDConstruction*  fSDConstruction; //sensitive detectors construction
-    TG4SDServices*      fSDServices;     //services related with sensitive
-                                         //detectors
+    
+    /// sensitive detectors construction 
+    TG4SDConstruction*  fSDConstruction;
+    
+    /// services related with sensitive detectors    
+    TG4SDServices*      fSDServices;
+                                         
 
 };
 

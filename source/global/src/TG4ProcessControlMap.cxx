@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: global
-// Class TG4ProcessControlMap
-// --------------------------
-// See the class description in the header file.
+/// \file TG4ProcessControlMap.cxx
+/// \brief Implementation of the TG4ProcessControlMap class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4ProcessControlMap.h"
 #include "TG4G3ControlVector.h"
@@ -28,7 +28,8 @@ TG4ProcessControlMap* TG4ProcessControlMap::fgInstance = 0;
 TG4ProcessControlMap::TG4ProcessControlMap() 
   : fMap()
 {
-//
+/// Default constructor
+
   if (fgInstance) {
     TG4Globals::Exception(
       "TG4ProcessControlMap", "TG4ProcessControlMap",
@@ -39,8 +40,9 @@ TG4ProcessControlMap::TG4ProcessControlMap()
 }
 
 //_____________________________________________________________________________
-TG4ProcessControlMap::~TG4ProcessControlMap() {
-//
+TG4ProcessControlMap::~TG4ProcessControlMap() 
+{
+/// Destructor
 }
 
 //

@@ -9,11 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: digits+hits
-// Author: I.Hrivnacova
-// Class TG4SDConstruction
-// ------------------------
-// See the class description in the header file.
+/// \file TG4SDConstruction.cxx
+/// \brief Implementation of the TG4SDConstruction class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SDConstruction.h"
 #include "TG4SensitiveDetector.h"
@@ -28,13 +27,15 @@
 
 //_____________________________________________________________________________
 TG4SDConstruction::TG4SDConstruction()    
-  : TG4Verbose("SDConstruction") {
-//
+  : TG4Verbose("SDConstruction") 
+{
+/// Default constructor
 }
 
 //_____________________________________________________________________________
-TG4SDConstruction::~TG4SDConstruction(){
-//
+TG4SDConstruction::~TG4SDConstruction()
+{
+/// Destructor
 }
 
 //
@@ -44,7 +45,7 @@ TG4SDConstruction::~TG4SDConstruction(){
 //_____________________________________________________________________________
 void TG4SDConstruction::CreateSD(G4LogicalVolume* lv) const
 { 
-/// Create/retrieve a sensitive detector for the logical volume.
+/// Create/retrieve a sensitive detector for the given logical volume.
 
   TG4GeometryServices* geometryServices = TG4GeometryServices::Instance();
   G4SDManager* pSDManager = G4SDManager::GetSDMpointer();

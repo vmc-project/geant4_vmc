@@ -9,16 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: interfaces
-//
-//========================================================
-//
-//------------TG4VolumesFrames.cxx--------------------------------//
-//--------- Frames for the the display of volumes properties---//
-//
-//========================================================= 
-//
-// Author: D. Adamova
+/// \file TG4VolumesFrames.cxx
+/// \brief Implementation of the TG4VolumesFrames class 
+///
+/// \author D. Adamova, NPI Rez
  
 #include "TG4VolumesFrames.h"
 #include "TG4MaterialsFrames.h"
@@ -44,8 +38,9 @@
 #include <G4UserLimits.hh>
 #include <G4Track.hh>
  
- 
- ClassImp(TG4VolumesFrames)
+/// \cond CLASSIMP
+ClassImp(TG4VolumesFrames)
+/// \endcond
 
 TG4VolumesFrames::TG4VolumesFrames( TGTab* Tab, TG4MainFrame* ActionFrame)
   : TObject(),
@@ -65,8 +60,10 @@ TG4VolumesFrames::TG4VolumesFrames( TGTab* Tab, TG4MainFrame* ActionFrame)
     fDisplBuffCuts(0),
     fDisplBuffControls(0)
 { 
-///---> creates the volumes properties display frame
-///---> and plunges it into the main frame
+/// Standard constructor
+/// - creates the volumes properties display frame
+/// - and plunges it into the main frame
+
    TGCompositeFrame* parent = Tab->AddTab("Volumes Properties");
    fCapFrame = new TGCompositeFrame(parent, 60, 20, kHorizontalFrame);
    ULong_t back= TGFrame::GetBlackPixel(); 
@@ -189,7 +186,7 @@ TG4VolumesFrames::TG4VolumesFrames( TGTab* Tab, TG4MainFrame* ActionFrame)
 
 TG4VolumesFrames::~TG4VolumesFrames()
 {
-///---> liquidator 
+/// Destructor
 
    G4cout << "\n Now in  TG4VolumesFrames destructor \n" << G4endl;
    delete fVolSubframe1;

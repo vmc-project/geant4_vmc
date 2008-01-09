@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4SpecialControlsPhysics
-// --------------------------------
-// See the class description in the header file.
+/// \file TG4SpecialControlsPhysics.cxx
+/// \brief Implementation of the TG4SpecialControlsPhysics class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SpecialControlsPhysics.h"
 #include "TG4SpecialControls.h"
@@ -33,7 +33,7 @@ TG4SpecialControlsPhysics::TG4SpecialControlsPhysics(
   : TG4VPhysicsConstructor(name),
     fSpecialControls(0) 
 {
-//
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
@@ -43,13 +43,14 @@ TG4SpecialControlsPhysics::TG4SpecialControlsPhysics(
   : TG4VPhysicsConstructor(name, verboseLevel),
     fSpecialControls(0) 
 {
-//
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
 TG4SpecialControlsPhysics::~TG4SpecialControlsPhysics() 
 {
-//
+/// Destructor
+
   delete fSpecialControls;
 }
 

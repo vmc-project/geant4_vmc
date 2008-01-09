@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4ComposedPhysicsMessenger
-// ------------------------------------
-// See the class description in the header file.
+/// \file TG4ComposedPhysicsMessenger.cxx
+/// \brief Implementation of the TG4ComposedPhysicsMessenger class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4ComposedPhysicsList.h"
 #include "TG4ComposedPhysicsMessenger.h"
@@ -36,7 +36,8 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
     fRangePositronCutCmd(0),
     fRangeAllCutCmd(0)     
 { 
-//
+/// Standard constructor
+
   fDirectory = new G4UIdirectory("/mcPhysics/");
   fDirectory->SetGuidance("TGeant4 physics control commands.");
 
@@ -114,8 +115,10 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
 }
 
 //______________________________________________________________________________
-TG4ComposedPhysicsMessenger::~TG4ComposedPhysicsMessenger() {
-//
+TG4ComposedPhysicsMessenger::~TG4ComposedPhysicsMessenger() 
+{
+/// Destructor
+
   delete fDirectory;
   delete fRangeGammaCutCmd;
   delete fRangeElectronCutCmd;

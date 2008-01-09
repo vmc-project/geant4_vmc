@@ -1,3 +1,6 @@
+#ifndef TG4_STEP_MANAGER_H
+#define TG4_STEP_MANAGER_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,18 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup digits_hits
-/// \class TG4StepManager
-/// \brief Geant4 implementation of the TVirtualMC interface methods                    
-/// for access to Geant4 at step level.
-///
-/// The public methods that do not implement TVirtualMC methods
-/// are commented as G4 specific
+/// \file TG4StepManager.h
+/// \brief Definition of the TG4StepManager class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_STEP_MANAGER_H
-#define TG4_STEP_MANAGER_H
 
 #include <Rtypes.h>
 
@@ -40,6 +35,15 @@ class G4VPhysicalVolume;
 class G4VTouchable;
 
 class TLorentzVector;
+
+/// \ingroup digits_hits
+/// \brief Geant4 implementation of the TVirtualMC interface methods                    
+/// for access to Geant4 at step level.
+///
+/// The public methods that do not implement TVirtualMC methods
+/// are commented as G4 specific
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4StepManager
 {
@@ -117,13 +121,15 @@ class TG4StepManager
 
         // secondaries
     Int_t NSecondaries() const;
-    void GetSecondary(Int_t isec, Int_t& particleId,
+    void GetSecondary(Int_t index, Int_t& particleId,
                       TLorentzVector& position, TLorentzVector& momentum);      
     TMCProcess ProdProcess(Int_t isec) const; 
     Int_t StepProcesses(TArrayI &proc) const;
 
   private:
+    /// Not implemented
     TG4StepManager(const TG4StepManager& right);
+    /// Not implemented
     TG4StepManager& operator=(const TG4StepManager& right);
 
     // methods
@@ -137,18 +143,33 @@ class TG4StepManager
                            G4int off, G4bool warn = false) const;
 
     // static data members
-    static TG4StepManager*  fgInstance;   //this instance
+    static TG4StepManager*  fgInstance;   ///< this instance
     
+    //
     // data members
-    G4Track*            fTrack;           //current track
-    G4Step*             fStep;            //current step
-    TG4StepStatus       fStepStatus;      //step status that decides whether
-                                          //track properties will be returned
-                                          //from PreStepPoint or PostStepPoint
-    G4VTouchable*       fTouchableHistory;//touchable history buffer                                           
-    G4SteppingManager*  fSteppingManager; //G4SteppingManager
-    G4String            fVolPathBuffer;   //buffer for current volume path
-    G4int               fCopyNoOffset;    //volume copy number offset
+    
+    /// current track
+    G4Track*            fTrack;
+    
+    /// current step
+    G4Step*             fStep;
+    
+    /// \brief step status 
+    /// \details that decides whether track properties will be returned from 
+    /// PreStepPoint or PostStepPoint
+    TG4StepStatus       fStepStatus; 
+
+    /// touchable history buffer    
+    G4VTouchable*       fTouchableHistory;
+    
+    /// G4SteppingManager  
+    G4SteppingManager*  fSteppingManager;
+    
+    /// buffer for current volume path
+    G4String            fVolPathBuffer;
+    
+    /// volume copy number offset
+    G4int               fCopyNoOffset;
 };
 
 // inline methods

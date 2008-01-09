@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: global
-// Class TG4Limits
-// ---------------
-// See the class description in the header file.
+/// \file TG4Limits.cxx
+/// \brief Implementation of the TG4Limits class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4Limits.h"
 
@@ -33,7 +33,8 @@ TG4Limits::TG4Limits(const TG4G3CutVector& cuts,
     fCutVector(cuts),
     fControlVector()
 {
-//
+/// Standard constructor
+
   Initialize(cuts, controls);
 }
 
@@ -51,7 +52,8 @@ TG4Limits::TG4Limits(const G4String& name,
     fCutVector(cuts),
     fControlVector()
 {
-//
+/// Standard constructor with specified \em name
+
   Initialize(cuts, controls);
 }
 
@@ -66,7 +68,8 @@ TG4Limits::TG4Limits(const G4UserLimits& g4Limits,
     fCutVector(cuts),
     fControlVector()
 {
-//
+/// Standard constructor with specified \em g4Limits
+
   Initialize(cuts, controls);
 }
 
@@ -82,7 +85,8 @@ TG4Limits::TG4Limits()
     fCutVector(),
     fControlVector()
 {
-//
+/// Default constructor
+
   ++fgCounter;
 }
 
@@ -95,12 +99,15 @@ TG4Limits::TG4Limits(const TG4Limits& right)
     fCutVector(right.fCutVector),
     fControlVector(right.fControlVector)
 {
+/// Copy constructor
+
   ++fgCounter;
 }  
 
 //_____________________________________________________________________________
-TG4Limits::~TG4Limits() {
-//
+TG4Limits::~TG4Limits() 
+{
+/// Destructor
 }
 
 //
@@ -110,6 +117,8 @@ TG4Limits::~TG4Limits() {
 //_____________________________________________________________________________
 TG4Limits& TG4Limits::operator=(const TG4Limits& right)
 {
+/// Assignment operator
+
   // check assignement to self
   if (this == &right) return *this;
 

@@ -1,3 +1,6 @@
+#ifndef TG4_GEOMETRY_MANAGER_H
+#define TG4_GEOMETRY_MANAGER_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,15 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup geometry
-/// \class TG4GeometryManager
-/// \brief The manager class for building Geant4 geometry depending on
-///  a selected user input
+/// \file TG4GeometryManager.h
+/// \brief Definition of the TG4GeometryManager class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_GEOMETRY_MANAGER_H
-#define TG4_GEOMETRY_MANAGER_H
 
 #include "TG4Verbose.h"
 #include "TG4Globals.h"
@@ -32,6 +30,12 @@ class TG4G3ControlVector;
 class G4MagneticField;
 
 class TVirtualMCGeometry;
+
+/// \ingroup geometry
+/// \brief The manager class for building Geant4 geometry depending on
+///  a selected user input
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4GeometryManager : public TG4Verbose
 {
@@ -55,11 +59,12 @@ class TG4GeometryManager : public TG4Verbose
     void SetFieldType(TG4MagneticFieldType fieldType);
     void SetUniformFieldValue(G4double fieldValue);
      
-  protected:
+  private:
+    /// Not implemented
     TG4GeometryManager(const TG4GeometryManager& right);
+    /// Not implemented
     TG4GeometryManager& operator=(const TG4GeometryManager& right);
 
-  private:
     // methods
     void CreateMCGeometry(); 
     void ConstructG4GeometryViaVMC();
@@ -71,20 +76,20 @@ class TG4GeometryManager : public TG4Verbose
     void FillMediumMap();
         
     // static data members
-    static TG4GeometryManager*  fgInstance;     //this instance
-    static const G4double       fgLimitDensity; //material density limit
-                                                //for setting max allowed step 
-    static const G4double       fgMaxStep;      //max allowed step in materials 
-                                                //with density < fLimitDensity
+    static TG4GeometryManager*  fgInstance;     ///< this instance
+    static const G4double       fgLimitDensity; ///< material density limit
+                                                ///< for setting max allowed step 
+    static const G4double       fgMaxStep;      ///< max allowed step in materials 
+                                                ///< with density < fLimitDensity
 
     // data members
-    TG4DetConstructionMessenger  fMessenger; //messenger
-    TG4GeometryServices*  fGeometryServices; // geometry services
-    TVirtualMCGeometry*   fMCGeometry;       // 
-    TG4OpGeometryManager* fOpManager;        //     
-    G4String              fUserGeometry;     // user geometry input                                        
-    TG4MagneticFieldType  fMagneticFieldType;// magnetic field type
-    G4MagneticField*      fMagneticField;    // magnetic field
+    TG4DetConstructionMessenger  fMessenger; ///< messenger
+    TG4GeometryServices*  fGeometryServices; ///< geometry services
+    TVirtualMCGeometry*   fMCGeometry;       ///< VirtualMC geometry
+    TG4OpGeometryManager* fOpManager;        ///< optical geometry manager    
+    G4String              fUserGeometry;     ///< user geometry input                                        
+    TG4MagneticFieldType  fMagneticFieldType;///< magnetic field type
+    G4MagneticField*      fMagneticField;    ///< magnetic field
 };
 
 // inline methods
@@ -95,7 +100,7 @@ inline TG4GeometryManager* TG4GeometryManager::Instance() {
 }
 
 inline  TG4OpGeometryManager* TG4GeometryManager::GetOpManager() const {
-  ///
+  /// Return the optical geometry manager
   return fOpManager;
 }   
 

@@ -1,3 +1,6 @@
+#ifndef TG4_DET_CONSTRUCTION_H
+#define TG4_DET_CONSTRUCTION_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,19 +12,20 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup geometry
-/// \class TG4DetConstruction
-/// \brief Detector construction for building geometry using 
-/// TVirtualMCApplication.
+/// \file TG4DetConstruction.h
+/// \brief Definition of the TG4DetConstruction class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_DET_CONSTRUCTION_H
-#define TG4_DET_CONSTRUCTION_H
 
 #include <G4VUserDetectorConstruction.hh>
 
 class G4VPhysicalVolume;
+
+/// \ingroup geometry
+/// \brief Detector construction for building geometry using 
+/// TVirtualMCApplication.
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4DetConstruction : public G4VUserDetectorConstruction
 {
@@ -33,7 +37,9 @@ class TG4DetConstruction : public G4VUserDetectorConstruction
     virtual G4VPhysicalVolume* Construct();
 
   private:    
+    /// Not implemented
     TG4DetConstruction(const TG4DetConstruction& right);
+    /// Not implemented
     TG4DetConstruction& operator=(const TG4DetConstruction& right);
 }; 
 

@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: global
-// Class TG4G3ControlVector 
-// ------------------------
-// See the class description in the header file.
+/// \file TG4G3ControlVector.cxx
+/// \brief Implementation of the TG4G3ControlVector class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4G3ControlVector.h"
 #include "TG4G3CutVector.h"
@@ -36,6 +36,8 @@ TG4StringVector TG4G3ControlVector::fgControlNameVector;
 TG4G3ControlVector::TG4G3ControlVector()
   : fControlVector()
 {
+/// Default constructor
+
   // initialize fControlVector 
   for (G4int i=0; i<=kNoG3Controls; i++) 
     fControlVector.push_back(kUnsetControlValue); 
@@ -48,13 +50,16 @@ TG4G3ControlVector::TG4G3ControlVector()
 TG4G3ControlVector::TG4G3ControlVector(const TG4G3ControlVector& right)
   :  fControlVector(right.fControlVector.size())
 {
+/// Copy constructor
+
   // copy stuff
   *this = right;  
 }
 
 //_____________________________________________________________________________
-TG4G3ControlVector::~TG4G3ControlVector() {
-//
+TG4G3ControlVector::~TG4G3ControlVector() 
+{
+/// Destructor
 }
 
 //
@@ -65,6 +70,8 @@ TG4G3ControlVector::~TG4G3ControlVector() {
 TG4G3ControlVector& TG4G3ControlVector::operator=(
                                           const TG4G3ControlVector& right)
 {
+/// Assignment operator
+
   // check assignement to self
   if (this == &right) return *this;
 
@@ -78,7 +85,8 @@ TG4G3ControlVector& TG4G3ControlVector::operator=(
 //_____________________________________________________________________________
 TG4G3ControlValue TG4G3ControlVector::operator[](G4int index) const
 {
-//
+/// Element access operator 
+
   if (index <= kNoG3Controls)
     return fControlVector[index];
   else {

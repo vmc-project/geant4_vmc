@@ -1,3 +1,6 @@
+#ifndef TG4_PROCESS_CONTROL_MAP_H
+#define TG4_PROCESS_CONTROL_MAP_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,17 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup global
-/// \class TG4ProcessControlMap
-/// \brief Maps G4 process names to TG4G3Control
-///
-/// Singleton map container for associated pairs G4 process name 
-/// and TG4G3Control.
+/// \file TG4ProcessControlMap.h
+/// \brief Definition of the TG4ProcessControlMap class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_PROCESS_CONTROL_MAP_H
-#define TG4_PROCESS_CONTROL_MAP_H
 
 #include <map>
 #include <globals.hh>
@@ -28,11 +24,25 @@
 
 class G4VProcess;
 
+/// \ingroup global
+/// \brief Maps G4 process names to TG4G3Control
+///
+/// Singleton map container for associated pairs G4 process name 
+/// and TG4G3Control.
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
 class TG4ProcessControlMap
 {
-  typedef std::map<G4String, TG4G3Control, std::less<G4String> >  Map;
-  typedef Map::iterator       MapIterator;
-  typedef Map::const_iterator MapConstIterator;
+  public:
+    /// The map of TG4G3Controls to strings 
+    typedef std::map<G4String, TG4G3Control, std::less<G4String> >  Map;
+
+    /// The iterator for the map of TG4G3Controls to strings 
+    typedef Map::iterator  MapIterator;
+
+    /// The constant iterator for the map of TG4G3Controls to strings 
+    typedef Map::const_iterator MapConstIterator;
 
   public:
     TG4ProcessControlMap();
@@ -54,17 +64,19 @@ class TG4ProcessControlMap
     const G4String& GetControlName(const G4String& processName);
 
   private:
+    /// Not implemented
     TG4ProcessControlMap(const TG4ProcessControlMap& right);
+    /// Not implemented
     TG4ProcessControlMap& operator=(const TG4ProcessControlMap& right);
   
     // methods
     G4bool IsDefined(const G4String& processName);
 
     // static data members
-    static TG4ProcessControlMap*  fgInstance; //this instance
+    static TG4ProcessControlMap*  fgInstance; ///< this instance
 
     // data members
-    Map  fMap; //map container
+    Map  fMap; ///< map container
 };
 
 // inline methods

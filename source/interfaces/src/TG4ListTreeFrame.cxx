@@ -9,16 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: interfaces
-//
-//========================================================
-//
-//------------TG4ListTreeFrame.cxx--------------------------------//
-//--------- Frame for the ListTree container---//
-//
-//========================================================= 
-//
-// Author: D. Adamova
+/// \file TG4ListTreeFrame.cxx
+/// \brief Implementation of the TG4ListTreeFrame class 
+///
+/// \author D. Adamova, NPI Rez
  
 #include "TG4ListTreeFrame.h"
 #include "TG4GuiVolume.h"
@@ -31,13 +25,17 @@
 #include <G4LogicalVolume.hh>
 #include <G4UImanager.hh>
 
+/// \cond CLASSIMP
 ClassImp(TG4ListTreeFrame)
+/// \endcond
 
 TG4ListTreeFrame::TG4ListTreeFrame( TGTab* Tab, TGMainFrame* ActionFrame)
   : TObject(),
     fCanvasWindow(0),
     fVolumesListTree(0)
 {
+/// Standard constructor
+
 //------>canvas for the ListTree
    TGCompositeFrame* parent= Tab->AddTab("Volumes");
    fCanvasWindow = new TGCanvas( parent, 400, 240);   
@@ -57,7 +55,7 @@ TG4ListTreeFrame::TG4ListTreeFrame( TGTab* Tab, TGMainFrame* ActionFrame)
 
 TG4ListTreeFrame::~TG4ListTreeFrame()
 {
-///---> liquidator 
+/// Destructor
 
    G4cout << "\n Now in  TG4ListTreeFrame destructor \n" << G4endl;
    delete fCanvasWindow;

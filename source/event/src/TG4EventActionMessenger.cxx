@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: event
-// Class TG4EventActionMessenger
-// -----------------------------
-// See the class description in the header file.
+/// \file TG4EventActionMessenger.cxx
+/// \brief Implementation of the TG4EventActionMessenger class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4EventActionMessenger.h"
 #include "TG4EventAction.h"
@@ -29,7 +29,8 @@ TG4EventActionMessenger::TG4EventActionMessenger(TG4EventAction* eventAction)
     fEventDirectory(0),
     fDrawTracksCmd(0)
 { 
-//
+/// Standard constructor
+
   fEventDirectory = new G4UIdirectory("/mcEvent/");
   fEventDirectory->SetGuidance("TG4EventAction control commands.");
 
@@ -43,8 +44,10 @@ TG4EventActionMessenger::TG4EventActionMessenger(TG4EventAction* eventAction)
 }
 
 //_____________________________________________________________________________
-TG4EventActionMessenger::~TG4EventActionMessenger() {
-//
+TG4EventActionMessenger::~TG4EventActionMessenger() 
+{
+/// Destructor
+
   delete fEventDirectory;
   delete fDrawTracksCmd;
 }

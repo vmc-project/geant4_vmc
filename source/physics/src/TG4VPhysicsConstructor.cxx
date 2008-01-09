@@ -9,12 +9,13 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics
-// Class TG4VPhysicsConstructor
-// ------------------------------
-// See the class description in the header file.
-// According to ExN04IonPhysics.cc,v 1.1.2.1 2001/06/28 19:07:37 gunter Exp 
-// GEANT4 tag Name: geant4-06-00
+/// \file TG4VPhysicsConstructor.cxx
+/// \brief Implementation of the TG4VPhysicsConstructor class 
+///
+/// According to ExN04IonPhysics.cc,v 1.1.2.1 2001/06/28 19:07:37 gunter Exp 
+/// GEANT4 tag Name: geant4-06-00
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4VPhysicsConstructor.h"
 #include "TG4Globals.h"
@@ -24,7 +25,8 @@ TG4VPhysicsConstructor::TG4VPhysicsConstructor(const G4String& name)
   : G4VPhysicsConstructor(name),
     TG4Verbose(G4String("physics" + name))
 {
-//
+/// Standard constructor
+
   VerboseLevel(1);
 }
 
@@ -34,13 +36,15 @@ TG4VPhysicsConstructor::TG4VPhysicsConstructor(const G4String& name,
   : G4VPhysicsConstructor(name),
     TG4Verbose(G4String("physics" + name))
 {
-//
+/// Standard constructor
+
   VerboseLevel(verboseLevel);
 }
 
 //_____________________________________________________________________________
-TG4VPhysicsConstructor::~TG4VPhysicsConstructor() {
-//
+TG4VPhysicsConstructor::~TG4VPhysicsConstructor() 
+{
+/// Destructor
 }
 
 //

@@ -1,3 +1,8 @@
+#ifndef TG4_VIS_MANAGER_H
+#define TG4_VIS_MANAGER_H
+
+#ifdef G4VIS_USE
+
 // $Id$
 
 //------------------------------------------------
@@ -9,6 +14,18 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
+/// \file TG4VisManager.h
+/// \brief Definition of the TG4VisManager class 
+///
+/// \author I. Hrivnacova; IPN Orsay
+
+#include "TG4G3Attribute.h"
+
+#include <G4VisManager.hh>
+#include <vector>
+
+#include <Rtypes.h>
+
 /// \ingroup visualization
 /// \class TG4VisManager
 /// \brief Visualization manager class
@@ -19,22 +36,15 @@
 ///
 /// \author: I. Hrivnacova, IPN, Orsay; A. Gheata
 
-#ifndef TG4_VIS_MANAGER_H
-#define TG4_VIS_MANAGER_H
-#ifdef G4VIS_USE
-
-#include "TG4G3Attribute.h"
-
-#include <G4VisManager.hh>
-#include <vector>
-
-#include <Rtypes.h>
-
-typedef std::vector<G4LogicalVolume*>    LogicalVolumesVector;
-typedef std::vector<G4VPhysicalVolume*>  PhysicalVolumesVector;
-
 class TG4VisManager: public G4VisManager 
 {
+  public:
+    /// The vector of G4 logical volumes
+    typedef std::vector<G4LogicalVolume*>    LogicalVolumesVector;
+
+    /// The vector of G4 physical volumes
+    typedef std::vector<G4VPhysicalVolume*>  PhysicalVolumesVector;
+
   public:
     TG4VisManager(G4int verboseLevel = 0);  
       // Controls initial verbose level of VisManager and VisMessenger.
@@ -54,7 +64,9 @@ class TG4VisManager: public G4VisManager
     void SetColors();
 
   private:
+    /// Not implemented
     TG4VisManager(const TG4VisManager& right);
+    /// Not implemented
     TG4VisManager& operator=(const TG4VisManager& right);
 
     // methods
@@ -98,8 +110,8 @@ class TG4VisManager: public G4VisManager
 
     //data members
     //------------
-    G4bool fColourFlag;  //colour flag
-    G4int  fVerboseLevel;//verbose level
+    G4bool fColourFlag;  ///< colour flag
+    G4int  fVerboseLevel;///< verbose level
 };
 
 // inline methods

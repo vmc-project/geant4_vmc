@@ -1,3 +1,6 @@
+#ifndef TG4_HADRON_PHYSICS_LIST_H
+#define TG4_HADRON_PHYSICS_LIST_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,17 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics_list
-/// \class TG4HadronPhysicsList
-/// \brief The hadron physics list helper class 
-///
-/// The hadron physics list instatiates the Geant4 hadron physics list 
-/// selected by its name in the constructor
+/// \file TG4HadronPhysicsList.h
+/// \brief Definition of the TG4HadronPhysicsList class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_HADRON_PHYSICS_LIST_H
-#define TG4_HADRON__PHYSICS_LIST_H
 
 #include "TG4Verbose.h"
 
@@ -27,6 +23,14 @@
 #include <globals.hh>
 
 class TG4OpticalPhysics;
+
+/// \ingroup physics_list
+/// \brief The hadron physics list helper class 
+///
+/// The hadron physics list instatiates the Geant4 hadron physics list 
+/// selected by its name in the constructor
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4HadronPhysicsList: public G4VUserPhysicsList,
                             public TG4Verbose
@@ -42,7 +46,10 @@ class TG4HadronPhysicsList: public G4VUserPhysicsList,
     // methods
     virtual void ConstructParticle();
     virtual void ConstructProcess();
+
+                  /// No cuts are set here
     virtual void SetCuts() {}
+
     virtual G4int VerboseLevel() const;
     virtual void  VerboseLevel(G4int level);
 
@@ -51,17 +58,22 @@ class TG4HadronPhysicsList: public G4VUserPhysicsList,
     
   protected:
     // static data members
-    static const G4double  fgkDefaultCutValue; //default cut value
+    static const G4double  fgkDefaultCutValue; ///< default cut value
 
   private:
+    /// Not implemented
     TG4HadronPhysicsList(const TG4HadronPhysicsList& right);
+    /// Not implemented
     TG4HadronPhysicsList& operator=(const TG4HadronPhysicsList& right);
 
     // methods
     void Configure(const G4String& selection);
     
+    // data members
+
+    /// the physics list according to user selection
     G4VUserPhysicsList*  fPhysicsList;
 };
 
-#endif //TG4_MODULAR_PHYSICS_LIST_H
+#endif //TG4_HADRON_PHYSICS_LIST_H
 

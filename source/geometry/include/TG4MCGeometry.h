@@ -1,3 +1,6 @@
+#ifndef TG4_G3_MC_GEOMETRY_H
+#define TG4_G3_MC_GEOMETRY_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,17 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup geometry
-/// \class TG4MCGeometry
-/// \brief Geant4 implementation of the TVirtualMCGeometry interface 
+/// \file TG4MCGeometry.h
+/// \brief Definition of the TG4MCGeometry class 
 ///
-/// This interfaces defines methods for building geometry a la geant3 
-/// and is implemented with use og G3toG4
-///
-/// \author: V. Berejnoi, CERN; I. Hrivnacova, IPN Orsay
-
-#ifndef TG4_G3_MC_GEOMETRY_H
-#define TG4_G3_MC_GEOMETRY_H
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4Verbose.h"
 #include "TG4IntMap.h"
@@ -42,6 +38,14 @@ class G4OpticalSurface;
 class TGeoHMatrix;
 class TArrayD;
 class TString;
+
+/// \ingroup geometry
+/// \brief Geant4 implementation of the TVirtualMCGeometry interface 
+///
+/// This interfaces defines methods for building geometry a la geant3 
+/// and is implemented with use og G3toG4
+///
+/// \author: V. Berejnoi, CERN; I. Hrivnacova, IPN Orsay
 
 class TG4MCGeometry :  public TVirtualMCGeometry,
                        public TG4Verbose
@@ -138,13 +142,19 @@ class TG4MCGeometry :  public TVirtualMCGeometry,
     virtual Int_t VolId2Mate(Int_t id) const;
 
   private:
+    /// Not implemented
     TG4MCGeometry(const TG4MCGeometry& right);
+    /// Not implemented
     TG4MCGeometry& operator=(const TG4MCGeometry& right);
 
+    //
     // data members
-    TG4GeometryServices*  fGeometryServices;//geometry services
-    TG4StringVector  fMaterialNameVector; // vector of material names sorted in the
-                                          // the order of materials in G3Mat
+    
+    /// geometry services
+    TG4GeometryServices*  fGeometryServices;
+    
+    /// vector of material names sorted in the order of materials in G3Mat
+    TG4StringVector  fMaterialNameVector; 
 };
 
 #endif //TG4_VMC_GEOMETRY_MANAGER_H

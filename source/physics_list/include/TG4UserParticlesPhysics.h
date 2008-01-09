@@ -1,3 +1,6 @@
+#ifndef TG4_USER_PARTICLES_PHYSICS_H
+#define TG4_USER_PARTICLES_PHYSICS_H
+
 // $Id: TG4UserParticlesPhysics.h 295 2007-10-04 23:17:33Z rdm $
 
 //------------------------------------------------
@@ -9,17 +12,18 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics_list
-/// \class TG4UserParticlesPhysics
-/// \brief The builder for user defined particles.
+/// \file TG4UserParticlesPhysics.h
+/// \brief Definition of the TG4UserParticlesPhysics class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-#ifndef TG4_USER_PARTICLES_PHYSICS_H
-#define TG4_USER_PARTICLES_PHYSICS_H
-
 #include "TG4VPhysicsConstructor.h"
 #include <globals.hh>
+
+/// \ingroup physics_list
+/// \brief The builder for user defined particles.
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4UserParticlesPhysics: public TG4VPhysicsConstructor
 {
@@ -31,12 +35,13 @@ class TG4UserParticlesPhysics: public TG4VPhysicsConstructor
 
   protected:
     // methods
-          // construct particle and physics
     virtual void ConstructParticle();
     virtual void ConstructProcess();
 
   private:
+    /// Not implemented
     TG4UserParticlesPhysics(const TG4UserParticlesPhysics& right);
+    /// Not implemented
     TG4UserParticlesPhysics& operator=(const TG4UserParticlesPhysics& right);
 };
 

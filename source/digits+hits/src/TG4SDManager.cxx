@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: digits+hits
-// Class TG4SDManager
-// -------------------
-// See the class description in the header file.
+/// \file TG4SDManager.cxx
+/// \brief Implementation of the TG4SDManager class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SDManager.h"
 #include "TG4SDConstruction.h"
@@ -30,7 +30,7 @@ TG4SDManager::TG4SDManager()
     fSDServices(0)
      
 {
-//
+/// Default constructor
 
   if (fgInstance)
     TG4Globals::Exception(
@@ -46,7 +46,7 @@ TG4SDManager::TG4SDManager()
 //_____________________________________________________________________________
 TG4SDManager::~TG4SDManager()
 {
-//
+/// Destructor
 
   delete fSDConstruction;
   delete fSDServices;
@@ -108,7 +108,6 @@ Int_t TG4SDManager::NofVolDaughters(const char* volName) const
 const char*  TG4SDManager::VolDaughterName(const char* volName, Int_t i) const
 {
 /// Return the name of the i-th daughter of the volume specified by name.
-// --- 
 
   return fSDServices->VolDaughterName(volName, i);  
 }
@@ -117,7 +116,6 @@ const char*  TG4SDManager::VolDaughterName(const char* volName, Int_t i) const
 Int_t  TG4SDManager::VolDaughterCopyNo(const char* volName, Int_t i) const
 {
 /// Return the copyNo of the i-th daughter of the volume specified by name.
-// 
 
   return fSDServices->VolDaughterCopyNo(volName, i);  
 }
@@ -126,7 +124,7 @@ Int_t  TG4SDManager::VolDaughterCopyNo(const char* volName, Int_t i) const
 //_____________________________________________________________________________
 Int_t TG4SDManager::VolId2Mate(Int_t volumeId)  const
 {
-/// Return the material number for a given volume id
+/// Return the material number for a given volume Id
 
   return fSDServices->GetMediumId(volumeId);                                
 }

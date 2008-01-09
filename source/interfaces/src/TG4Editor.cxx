@@ -9,17 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: interfaces
-//
-//========================================================
-//
-//---------------TG4Editor.cxx---------------------------//
-//------- A supplementary service class for--------------//
-//-----------AG4 Geometry Browser------------------------//
-//
-//=========================================================
-//
-// Author: D. Adamova
+/// \file TG4Editor.cxx
+/// \brief Implementation of the TG4Editor class 
+///
+/// \author D. Adamova, NPI Rez
 
 #include "TG4Editor.h"
 #include "TG4Globals.h"
@@ -28,17 +21,18 @@
 #include <TGTextEdit.h>
 #include <TGText.h>
 
-
+/// \cond CLASSIMP
 ClassImp(TG4Editor)
+/// \endcond
 
-TG4Editor::TG4Editor(const TGWindow* main, UInt_t w, UInt_t h) :
-    TGTransientFrame(gClient->GetRoot(), main, w, h),
+TG4Editor::TG4Editor(const TGWindow* main, UInt_t w, UInt_t h) 
+: TGTransientFrame(gClient->GetRoot(), main, w, h),
     fEdit(0),
     fOK(0),
     fL1(0),
     fL2(0)
 {
-   /// Create an editor 
+/// Standard constructor
 
    fEdit = new TGTextEdit(this, w, h, kSunkenFrame | kDoubleBorder);
    fL1 = new TGLayoutHints(kLHintsExpandX | kLHintsExpandY, 3, 3, 3, 3);
@@ -67,7 +61,7 @@ TG4Editor::TG4Editor(const TGWindow* main, UInt_t w, UInt_t h) :
 
 TG4Editor::~TG4Editor()
 {
-   /// Delete editor accessories
+/// Destructor
 
    delete fEdit;
    delete fOK;

@@ -1,3 +1,6 @@
+#ifndef TG4_INT_MAP_H
+#define TG4_INT_MAP_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,23 +12,30 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup global
-/// \class TG4IntMap
-/// \brief The map container for integer numbers associated with names.
+/// \file TG4IntMap.h
+/// \brief Definition of the TG4IntMap class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_INT_MAP_H
-#define TG4_INT_MAP_H
 
 #include <map>
 #include <globals.hh>
 
+/// \ingroup global
+/// \brief The map container for integer numbers associated with names.
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
 class TG4IntMap
 {
-  typedef std::map<G4String, G4int, std::less<G4String> >  Map;
-  typedef Map:: iterator       MapIterator;
-  typedef Map:: const_iterator MapConstIterator;
+  public:
+    /// The map of integers to strings
+    typedef std::map<G4String, G4int, std::less<G4String> >  Map;
+
+    /// The iterator for the map of integers to strings
+    typedef Map:: iterator  MapIterator;
+
+    /// The constant iterator for the map of integers to strings
+    typedef Map:: const_iterator MapConstIterator;
 
   public:
     TG4IntMap();
@@ -41,14 +51,16 @@ class TG4IntMap
   protected:
   
   private:
+    /// Not implemented
     TG4IntMap(const TG4IntMap& right);
+    /// Not implemented
     TG4IntMap& operator=(const TG4IntMap& right);
 
     // methods
     G4bool IsDefined(const G4String& first);
   
     // data members
-    Map  fMap; //map container
+    Map  fMap; ///< map container
 };
 
 #endif //TG4_NAME_MAP_H

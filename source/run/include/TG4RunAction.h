@@ -1,3 +1,6 @@
+#ifndef TG4_RUN_ACTION_H
+#define TG4_RUN_ACTION_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,14 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup run
-/// \class TG4RunAction
-/// \brief Actions at the beginning and the end of run.
+/// \file TG4RunAction.h
+/// \brief Definition of the TG4RunAction class 
 ///
-/// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_RUN_ACTION_H
-#define TG4_RUN_ACTION_H
+/// \author I. Hrivnacova; IPN Orsay
 
 #include "TG4Verbose.h"
 
@@ -27,6 +26,11 @@ class G4Timer;
     // in order to avoid the odd dependency for the
     // times system function this declaration must be the first
 class G4Run;
+
+/// \ingroup run
+/// \brief Actions at the beginning and the end of run.
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4RunAction : public G4UserRunAction,
                      public TG4Verbose
@@ -40,12 +44,14 @@ class TG4RunAction : public G4UserRunAction,
     virtual void EndOfRunAction(const G4Run* run);
 
   private:
+    /// Not implemented
     TG4RunAction(const TG4RunAction& right);
+    /// Not implemented
     TG4RunAction& operator=(const TG4RunAction& right);
 
     // data members
-    G4Timer*  fTimer; //G4Timer
-    G4int     fRunID; //run ID
+    G4Timer*  fTimer; ///< G4Timer
+    G4int     fRunID; ///< run ID
 };
 
 #endif //TG4_RUN_ACTION_H

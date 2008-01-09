@@ -1,3 +1,6 @@
+#ifndef TG4_STACK_POPPER_MESSENGER_H
+#define TG4_STACK_POPPER_MESSENGER_H 
+
 // $Id$
 
 //------------------------------------------------
@@ -9,18 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics_list
-/// \class TG4StackPopperMessenger
-/// \brief Messenger class that defines commands for the stack popper
-///        special process
-///
-/// Implements commands:
-/// - /mcPhysics/setStackPopperSelection [particleName1 particleName2 ...]
+/// \file TG4StackPopperMessenger.h
+/// \brief Definition of the TG4StackPopperMessenger class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_STACK_POPPER_MESSENGER_H
-#define TG4_STACK_POPPER_MESSENGER_H 
 
 #include <G4UImessenger.hh>
 #include <globals.hh>
@@ -28,6 +23,15 @@
 class TG4StackPopperPhysics;
 
 class G4UIcmdWithAString;
+
+/// \ingroup physics_list
+/// \brief Messenger class that defines commands for the stack popper
+///        special process
+///
+/// Implements commands:
+/// - /mcPhysics/setStackPopperSelection [particleName1 particleName2 ...]
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4StackPopperMessenger: public G4UImessenger
 {
@@ -39,13 +43,21 @@ class TG4StackPopperMessenger: public G4UImessenger
     virtual void SetNewValue(G4UIcommand* command, G4String string);
     
   private:
+    /// Not implemented
     TG4StackPopperMessenger();  
+    /// Not implemented
     TG4StackPopperMessenger(const TG4StackPopperMessenger& right);
+    /// Not implemented
     TG4StackPopperMessenger& operator=(const TG4StackPopperMessenger& right);
 
+    //
     // data members
-    TG4StackPopperPhysics* fStackPopperPhysics;//associated class
-    G4UIcmdWithAString*    fSetSelectionCmd;   //setStackPopperSelection command
+    
+    /// associated class
+    TG4StackPopperPhysics* fStackPopperPhysics;
+    
+    /// setStackPopperSelection command
+    G4UIcmdWithAString*    fSetSelectionCmd;
 };    
 
 #endif //TG4_STACK_POPPER_MESSENGER_H

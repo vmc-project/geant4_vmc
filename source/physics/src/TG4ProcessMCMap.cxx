@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics
-// Class TG4ProcessMCMap
-// ---------------------
-// See the class description in the header file.
+/// \file TG4ProcessMCMap.cxx
+/// \brief Implementation of the TG4ProcessMCMap class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4ProcessMCMap.h"
 #include "TG4G3PhysicsManager.h"
@@ -28,7 +28,8 @@ TG4ProcessMCMap* TG4ProcessMCMap::fgInstance = 0;
 TG4ProcessMCMap::TG4ProcessMCMap() 
   : fMap()
 {
-//
+/// Default constructor
+
   if (fgInstance) {
     TG4Globals::Exception(
       "TG4ProcessMCMap", "TG4ProcessMCMap",
@@ -39,8 +40,9 @@ TG4ProcessMCMap::TG4ProcessMCMap()
 }
 
 //_____________________________________________________________________________
-TG4ProcessMCMap::~TG4ProcessMCMap() {
-//
+TG4ProcessMCMap::~TG4ProcessMCMap() 
+{
+/// Destructor
 }
 
 //

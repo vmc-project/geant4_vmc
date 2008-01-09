@@ -9,16 +9,14 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: geometry
-// Class TG4MCGeometry
-// ------------------------
-// See the class description in the header file.
-// C++ interface to Geant3 basic routines for building Geant4 geometry
-// by V. Berejnoi, 25.2.1999;
-// materials, tracking media support 
-// added by I.Hrivnacova, 27.5.1999.
-//
-// Author: V. Berejnoi, CERN; I. Hrivnacova, IPN Orsay
+/// \file TG4MCGeometry.cxx
+/// \brief Implementation of the TG4MCGeometry class 
+///
+/// C++ interface to Geant3 basic routines for building Geant4 geometry
+/// by V. Berejnoi, 25.2.1999;                                           \n
+/// Materials, tracking media support added by I.Hrivnacova, 27.5.1999.
+///
+/// \author V. Berejnoi, CERN; I. Hrivnacova; IPN, Orsay
 
 #include "TG4MCGeometry.h"
 #include "TG4GeometryServices.h"
@@ -58,7 +56,7 @@
 #include <TString.h>
 #include <Riostream.h>
 
-// extern global method from g3tog4
+/// Extern global method from g3tog4
 void G3CLRead(G4String &, char *);
 
 //_____________________________________________________________________________
@@ -67,7 +65,7 @@ TG4MCGeometry::TG4MCGeometry()
     fGeometryServices(0),
     fMaterialNameVector()
 {
-/// Standard constructor
+/// Default constructor
 
   fGeometryServices = TG4GeometryServices::Instance();
   if ( !fGeometryServices ) {
@@ -917,8 +915,8 @@ Bool_t TG4MCGeometry::GetMedium(const TString& volumeName,
                               Double_t& deemax, Double_t& epsil, Double_t& stmin,
                               TArrayD& par)
 {                         
-// Returns the medium parameters for the volume specified by the
-// volume name.
+/// Return the medium parameters for the volume specified by the
+/// volume name.
 
   // Get volume
   G4LogicalVolume* lv =
@@ -957,7 +955,7 @@ Bool_t TG4MCGeometry::GetMedium(const TString& volumeName,
 //_____________________________________________________________________________
 Int_t TG4MCGeometry::MediumId(const Text_t* mediumName) const
 {
-// Returns the medium id for medium with given name
+/// Return the medium id for medium with given name
 
   TG4MediumMap* mediumMap = TG4GeometryServices::Instance()->GetMediumMap();
   TG4Medium* medium = mediumMap->GetMedium(G4String(mediumName), false);

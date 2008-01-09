@@ -1,3 +1,6 @@
+#ifndef TG4_GLOBALS_H
+#define TG4_GLOBALS_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,18 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup global
-/// \class TG4Globals
-/// \brief Basic types and functions of general use.
-///
-/// Class provides the basic types and functions of general use. 
-/// It is protected from instantiating (only static data members
-/// and static methods are defined).
+/// \file TG4Globals.h
+/// \brief Definition of the TG4Globals class and basic container types
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_GLOBALS_H
-#define TG4_GLOBALS_H
 
 #include "TG4G3Control.h"
 
@@ -36,13 +31,41 @@
 class G4Material;
 class G4Element;
 
-// basic types containers
+//
+// basic container types 
+
+/// \ingroup global
+/// The vector of booleans
 typedef std::vector<G4bool>     TG4boolVector;
+
+/// \ingroup global
+/// The vector of integers
 typedef std::vector<G4int>      TG4intVector;
+
+/// \ingroup global
+/// The vector of doubles
 typedef std::vector<G4double>   TG4doubleVector;
+
+/// \ingroup global
+/// The vector of strings
 typedef std::vector<G4String>   TG4StringVector;
+
+/// \ingroup global
+/// The map of integers to integers
 typedef std::map <G4int, G4int> TG4intMap;
+
+/// \ingroup global
+/// The set of strings
 typedef std::set <G4String, std::less<G4String> > TG4StringSet; 
+
+/// \ingroup global
+/// \brief Basic types and functions of general use.
+///
+/// Class provides the basic types and functions of general use. 
+/// It is protected from instantiating (only static data members
+/// and static methods are defined).
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4Globals
 {
@@ -71,8 +94,8 @@ class TG4Globals
   private:
     TG4Globals();  
 
-    static const TString fgkEndl;           /// Special endl
-    static const char    fgkTokenSeparator; /// Separator in GetToken() method
+    static const TString fgkEndl;           ///< Special endl
+    static const char    fgkTokenSeparator; ///< Separator in GetToken() method
 };  
 
 // inline functions

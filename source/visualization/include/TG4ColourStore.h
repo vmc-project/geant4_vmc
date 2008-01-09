@@ -1,3 +1,6 @@
+#ifndef TG4_COLOUR_STORE_H
+#define TG4_COLOUR_STORE_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,14 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup visualization
-/// \class TG4ColourStore
-/// \brief Singleton data type class - store for the predefined colours.
+/// \file TG4ColourStore.h
+/// \brief Definition of the TG4ColourStore class 
 ///
-/// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_COLOUR_STORE_H
-#define TG4_COLOUR_STORE_H
+/// \author I. Hrivnacova; IPN Orsay
 
 #include <G4Colour.hh>
 #include <globals.hh> 
@@ -24,11 +23,22 @@
 
 #include <TColor.h>
 
+/// \ingroup visualization
+/// \brief Singleton data type class - store for the predefined colours.
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
 class TG4ColourStore 
 {
-  typedef std::vector<TColor>          ColourVector;
-  typedef ColourVector::iterator       ColourIterator;
-  typedef ColourVector::const_iterator ColourConstIterator;
+  public:
+    /// The vector of TColor
+    typedef std::vector<TColor> ColourVector;
+
+    /// The iterator for the vector of TColor
+    typedef ColourVector::iterator ColourIterator;
+  
+    /// The constant iterator for the vector of TColor
+    typedef ColourVector::const_iterator ColourConstIterator;
 
   public:
     virtual ~TG4ColourStore();
@@ -43,15 +53,18 @@ class TG4ColourStore
     G4String GetColoursListWithCommas() const;
     
   private:
+    /// Not implemented
     TG4ColourStore();  
+    /// Not implemented
     TG4ColourStore(const TG4ColourStore& right);
+    /// Not implemented
     TG4ColourStore& operator=(const TG4ColourStore& right);
 
     // static data members
-    static TG4ColourStore*  fgInstance; //this instance
+    static TG4ColourStore*  fgInstance; ///< this instance
 
     // data members
-    ColourVector  fColours; //vector of TColor
+    ColourVector  fColours; ///< vector of TColor
 };   
 
 #endif //TG4_COLOUR_STORE_H

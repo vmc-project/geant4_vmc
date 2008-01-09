@@ -1,3 +1,6 @@
+#ifndef TG4_G3_CUT_VECTOR_H
+#define TG4_G3_CUT_VECTOR_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,20 +12,21 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup global
-/// \class TG4G3CutVector
-/// \brief Vector of kinetic energy cut values with
-/// convenient set/get methods.
+/// \file TG4G3CutVector.h
+/// \brief Definition of the TG4G3CutVector class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_G3_CUT_VECTOR_H
-#define TG4_G3_CUT_VECTOR_H
 
 #include "TG4Globals.h"
 #include "TG4G3Cut.h"
 
 class G4Track;
+
+/// \ingroup global
+/// \brief Vector of kinetic energy cut values with
+/// convenient set/get methods.
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4G3CutVector
 {
@@ -64,15 +68,29 @@ class TG4G3CutVector
     // static methods 
     static void FillCutNameVector();
   
+    //
     // static data members
-    static const G4double   fgkDCUTEOff;  //cut for delta rays by e- (if off)
-    static const G4double   fgkDCUTMOff;  //cut for delta rays by mu (if off)
-    static const G4double   fgkTolerance; //tolerance for comparing cuts
-    static TG4StringVector  fgCutNameVector; //vector of cut parameters names
+    
+    /// cut for delta rays by e- (if off)
+    static const G4double   fgkDCUTEOff;
+    
+    /// cut for delta rays by mu (if off)
+    static const G4double   fgkDCUTMOff;
+    
+    /// tolerance for comparing cuts
+    static const G4double   fgkTolerance;
+    
+    /// vector of cut parameters names
+    static TG4StringVector  fgCutNameVector;
   
+    //
     // data members
-    TG4doubleVector  fCutVector;  //vector of kinetic energy cut values 
-    G4bool           fDeltaRaysOn;//delta rays process control
+    
+    /// vector of kinetic energy cut values 
+    TG4doubleVector  fCutVector;
+    
+    /// delta rays process control
+    G4bool           fDeltaRaysOn;
 };
 
 // inline methods

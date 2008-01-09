@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: geometry
-// Class TG4Medium
-// -------------------------
-// See the class description in the header file.
+/// \file TG4Medium.cxx
+/// \brief Implementation of the TG4Medium class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4Medium.h"
 #include "TG4Limits.h"

@@ -1,3 +1,6 @@
+#ifndef TG4_V_VERBOSE_H
+#define TG4_V_VERBOSE_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,8 +12,16 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
+/// \file TG4VVerbose.h
+/// \brief Definition of the TG4VVerbose class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
+#include <globals.hh>
+
+class G4UImessenger;
+
 /// \ingroup global
-/// \class TG4VVerbose
 /// \brief Abstract base class for defining the verbose level 
 /// in a common way
 /// 
@@ -20,13 +31,6 @@
 /// - 2 and more - more detailed output
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_V_VERBOSE_H
-#define TG4_V_VERBOSE_H
-
-#include <globals.hh>
-
-class G4UImessenger;
 
 class TG4VVerbose
 {
@@ -43,13 +47,14 @@ class TG4VVerbose
 
   private:
     // methods
+    /// Create messenger
     virtual G4UImessenger* CreateMessenger() = 0;    
 
     // static data members
-    static const G4int  fgkDefaultVerboseLevel; // default verbose level
+    static const G4int  fgkDefaultVerboseLevel; ///< default verbose level
 
     // data members
-    G4int  fVerboseLevel; // verbose level
+    G4int  fVerboseLevel; ///< verbose level
 };     
 
 // inline methods

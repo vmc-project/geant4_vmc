@@ -1,3 +1,6 @@
+#ifndef TG4_LV_TREE_MESSENGER_H
+#define TG4_LV_TREE_MESSENGER_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,8 +12,23 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
+/// \file TG4LVTreeMessenger.h
+/// \brief Definition of the TG4LVTreeMessenger class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
+#include <G4UImessenger.hh>
+#include <globals.hh>
+
+class TG4LVTree;
+
+class G4UIdirectory;
+class G4UIcmdWithABool;
+class G4UIcmdWithAString;
+class G4UIcmdWithoutParameter;
+class G4LogicalVolume;
+
 /// \ingroup geometry
-/// \class TG4LVTreeMessenger
 /// \brief The messenger class that defines commands for TG4LVTree.
 ///
 /// Implements commands:
@@ -24,20 +42,6 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#ifndef TG4_LV_TREE_MESSENGER_H
-#define TG4_LV_TREE_MESSENGER_H
-
-#include <G4UImessenger.hh>
-#include <globals.hh>
-
-class TG4LVTree;
-
-class G4UIdirectory;
-class G4UIcmdWithABool;
-class G4UIcmdWithAString;
-class G4UIcmdWithoutParameter;
-class G4LogicalVolume;
-
 class TG4LVTreeMessenger: public G4UImessenger
 {
   public:
@@ -47,27 +51,53 @@ class TG4LVTreeMessenger: public G4UImessenger
     // methods
     virtual void SetNewValue(G4UIcommand* command, G4String newValues);
 
-  protected:
-    TG4LVTreeMessenger();
-    TG4LVTreeMessenger(const TG4LVTreeMessenger& right);
-    TG4LVTreeMessenger& operator=(const TG4LVTreeMessenger &right);
-             
   private:
+    /// Not implemented
+    TG4LVTreeMessenger();
+    /// Not implemented
+    TG4LVTreeMessenger(const TG4LVTreeMessenger& right);
+    /// Not implemented
+    TG4LVTreeMessenger& operator=(const TG4LVTreeMessenger &right);
+
+    //
     // data members
-    TG4LVTree*                fLVTree;               //associated class
-    G4LogicalVolume*          fCurrentVolume;        //current logical volume
-    G4UIdirectory*            fDirectory;            //command directory
-    G4UIcmdWithAString*       fSetCurrentLVCmd;      //command: setVolume
-    G4UIcmdWithoutParameter*  fListCmd;              //command: list
-    G4UIcmdWithoutParameter*  fListLongCmd;          //command: listLong
-    G4UIcmdWithAString*       fListDaughtersCmd;     //command: listDaughters
-    G4UIcmdWithAString*       fListLongDaughtersCmd; //command: listLongDaughters  
+    
+    /// associated class
+    TG4LVTree*                fLVTree;
+    
+    /// current logical volume
+    G4LogicalVolume*          fCurrentVolume;
+    
+    /// command directory
+    G4UIdirectory*            fDirectory;
+    
+    /// command directory
+    G4UIcmdWithAString*       fSetCurrentLVCmd;
+
+    /// command: list
+    G4UIcmdWithoutParameter*  fListCmd;
+    
+    /// command: listLong
+    G4UIcmdWithoutParameter*  fListLongCmd;
+    
+    /// command: listDaughters
+    G4UIcmdWithAString*       fListDaughtersCmd;
+    
+    /// command: listLongDaughters  
+    G4UIcmdWithAString*       fListLongDaughtersCmd;
 
 #ifdef G4VIS_USE
-    G4UIcmdWithABool*         fSetLVTreeVisibilityCmd; //command: setLVTreeVisibility   
-    G4UIcmdWithABool*         fSetVolVisibilityCmd;    //command: setVolVisibility
-    G4UIcmdWithAString*       fSetLVTreeColourCmd;     //command: setLVTreeColour  
-    G4UIcmdWithAString*       fSetVolColourCmd;        //command: setVolColour
+    /// command: setLVTreeVisibility   
+    G4UIcmdWithABool*         fSetLVTreeVisibilityCmd;
+    
+    /// command: setVolVisibility
+    G4UIcmdWithABool*         fSetVolVisibilityCmd;
+    
+    /// command: setLVTreeColour      
+    G4UIcmdWithAString*       fSetLVTreeColourCmd;
+    
+    /// command: setVolColour
+    G4UIcmdWithAString*       fSetVolColourCmd;
 #endif //G4VIS_USE
 };
 

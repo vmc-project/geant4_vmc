@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: global
-// Class TG4IntMap
-// ---------------
-// See the class description in the header file.
+/// \file TG4IntMap.cxx
+/// \brief Implementation of the TG4IntMap class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4IntMap.h"
 #include "TG4Globals.h"
@@ -24,12 +24,13 @@
 TG4IntMap::TG4IntMap()
   : fMap()
 {
-//
+/// Default constructor
 }
 
 //_____________________________________________________________________________
-TG4IntMap::~TG4IntMap() {
-//
+TG4IntMap::~TG4IntMap() 
+{
+/// Destructor
 }
 
 //

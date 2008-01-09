@@ -1,3 +1,6 @@
+#ifndef TGEANT4_H
+#define TGEANT4_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,14 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup run
-/// \class TGeant4
-/// \brief Implementation of the TVirtualMC interface for Geant4.                      
+/// \file TGeant4.h
+/// \brief Definition of the TGeant4 class 
 ///
-/// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TGEANT4_H
-#define TGEANT4_H
+/// \author I. Hrivnacova; IPN Orsay
 
 #include "TG4ApplicationState.h"
 
@@ -40,6 +39,11 @@ class TG4RunManager;
 class TGeoHMatrix;
 class TArrayD;
 class TString;
+
+/// \ingroup run
+/// \brief Implementation of the TVirtualMC interface for Geant4.                      
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TGeant4: public TVirtualMC
 {
@@ -333,8 +337,11 @@ class TGeant4: public TVirtualMC
     virtual Bool_t  SecondariesAreOrdered() const;
 
   private:
+    /// Not implemented
     TGeant4();
+    /// Not implemented
     TGeant4(const TGeant4& right);
+    /// Not implemented
     TGeant4& operator=(const TGeant4& right);
     
     // methods
@@ -348,17 +355,17 @@ class TGeant4: public TVirtualMC
                                  Bool_t allowLater = false) const;
 
     // data members
-    TG4StateManager*     fStateManager;    //application state manager
-    TG4GeometryManager*  fGeometryManager; //geometry manager
-    TG4SDManager*        fSDManager;       //sensitive detectors manager
-    TG4PhysicsManager*   fPhysicsManager;  //physics manager
-    TG4StepManager*      fStepManager;     //step manager
-    TG4VisManager*       fVisManager;      //visualization manager
-    TG4RunManager*       fRunManager;      //run manager
-    Int_t                fMediumCounter;   //global medium counter
-    Int_t                fMaterialCounter; //global material counter
-    Int_t                fMatrixCounter;   //global matrix counter
-    TString              fUserGeometry;    //user geometry
+    TG4StateManager*     fStateManager;    ///< application state manager
+    TG4GeometryManager*  fGeometryManager; ///< geometry manager
+    TG4SDManager*        fSDManager;       ///< sensitive detectors manager
+    TG4PhysicsManager*   fPhysicsManager;  ///< physics manager
+    TG4StepManager*      fStepManager;     ///< step manager
+    TG4VisManager*       fVisManager;      ///< visualization manager
+    TG4RunManager*       fRunManager;      ///< run manager
+    Int_t                fMediumCounter;   ///< global medium counter
+    Int_t                fMaterialCounter; ///< global material counter
+    Int_t                fMatrixCounter;   ///< global matrix counter
+    TString              fUserGeometry;    ///< user geometry
 
   ClassDef(TGeant4,0) // Geant4 implementation of the TVirtualMC interface 
 };

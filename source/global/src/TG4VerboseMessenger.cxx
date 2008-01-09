@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: global
-// Class TG4VerboseMessenger
-// ------------------
-// See the class description in the header file.
+/// \file TG4VerboseMessenger.cxx
+/// \brief Implementation of the TG4VerboseMessenger class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4VerboseMessenger.h"
 #include "TG4VVerbose.h"
@@ -32,7 +32,7 @@ TG4VerboseMessenger::TG4VerboseMessenger(const G4String& directoryName)
     fVerboseVector(),
     fCommandVector()
 { 
-//
+/// Standard constructor
 
   fDirectory = new G4UIdirectory(directoryName);
   fDirectory->SetGuidance("TGeant4 verbose control commands.");
@@ -47,8 +47,9 @@ TG4VerboseMessenger::TG4VerboseMessenger(const G4String& directoryName)
 }
 
 //_____________________________________________________________________________
-TG4VerboseMessenger::~TG4VerboseMessenger() {
-//
+TG4VerboseMessenger::~TG4VerboseMessenger() 
+{
+/// Destructor
 
   delete fDirectory;
   delete fGlobalVerboseCmd;

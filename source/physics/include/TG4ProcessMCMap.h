@@ -1,3 +1,6 @@
+#ifndef TG4_PROCESS_MC_MAP_H
+#define TG4_PROCESS_MC_MAP_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,17 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics
-/// \class TG4ProcessMCMap
-/// \brief Maps G4 process names to TMCProcess code 
-///
-/// Singleton map container for associated pairs
-/// of G4 process name and TMCProcess code.
+/// \file TG4ProcessMCMap.h
+/// \brief Definition of the TG4ProcessMCMap class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_PROCESS_MC_MAP_H
-#define TG4_PROCESS_MC_MAP_H
 
 #include <map>
 #include <globals.hh>
@@ -29,11 +25,25 @@
 
 class G4VProcess;
 
+/// \ingroup physics
+/// \brief Maps G4 process names to TMCProcess code 
+///
+/// Singleton map container for associated pairs
+/// of G4 process name and TMCProcess code.
+///
+/// \author I. Hrivnacova; IPN Orsay
+
 class TG4ProcessMCMap
 {
-  typedef std::map<G4String, TMCProcess, std::less<G4String> >  Map;
-  typedef Map::iterator        MapIterator;
-  typedef Map::const_iterator  MapConstIterator;
+  public:
+    /// The map of TMCProcess to strings
+    typedef std::map<G4String, TMCProcess, std::less<G4String> >  Map;
+
+    /// The iterator for the map of TMCProcess to strings
+    typedef Map::iterator  MapIterator;
+
+    /// The constant iterator for the map of TMCProcess to strings
+    typedef Map::const_iterator  MapConstIterator;
 
   public:
     TG4ProcessMCMap();
@@ -55,17 +65,19 @@ class TG4ProcessMCMap
     G4String    GetMCProcessName(const G4String& processName);
 
   private:
+    /// Not implemented
     TG4ProcessMCMap(const TG4ProcessMCMap& right);
+    /// Not implemented
     TG4ProcessMCMap& operator=(const TG4ProcessMCMap& right);
   
     // methods
     G4bool IsDefined(const G4String& processName);
 
     // static data members
-    static TG4ProcessMCMap*  fgInstance; //this instance
+    static TG4ProcessMCMap*  fgInstance; ///< this instance
 
     // data members
-    Map  fMap; //map container
+    Map  fMap; ///< map container
 };
 
 // inline methods

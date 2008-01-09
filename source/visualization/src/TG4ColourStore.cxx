@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: visualization
-// Class TG4ColourStore
-// --------------------
-// See the class description in the header file.
+/// \file TG4ColourStore.cxx
+/// \brief Implementation of the TG4ColourStore class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4ColourStore.h"
 #include "TG4Globals.h"
@@ -26,6 +26,8 @@ TG4ColourStore* TG4ColourStore::fgInstance = 0;
 TG4ColourStore::TG4ColourStore() 
   : fColours()
 {
+/// Default constructor
+
   // fill predefined colours 
   G4int id0 = 1000;
      
@@ -47,8 +49,9 @@ TG4ColourStore::TG4ColourStore()
 }
 
 //_____________________________________________________________________________
-TG4ColourStore::~TG4ColourStore() {
-//
+TG4ColourStore::~TG4ColourStore() 
+{
+/// Destructor
 }
 
 //

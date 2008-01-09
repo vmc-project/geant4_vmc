@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: geometry
-// Class TG4LVStructure
-// --------------------
-// See the class description in the header file.
+/// \file TG4LVStructure.cxx
+/// \brief Implementation of the TG4LVStructure class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4LVStructure.h"
 #include "TG4Globals.h"
@@ -76,6 +76,8 @@ TG4LVStructure::~TG4LVStructure()
 //_____________________________________________________________________________
 TG4LVStructure& TG4LVStructure::operator=(const TG4LVStructure &right)
 {
+/// Asignment operator
+
   // check assignement to self
   if (this == &right) return *this;
 
@@ -105,6 +107,8 @@ TG4LVStructure& TG4LVStructure::operator=(const TG4LVStructure &right)
 //_____________________________________________________________________________
 G4int TG4LVStructure::operator==(const TG4LVStructure &right) const
 {
+/// Equal operator
+
   // check == to self
   if (this == &right) return true;
 

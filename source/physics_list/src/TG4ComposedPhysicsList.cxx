@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4ComposedPhysicsList
-// ----------------------------
-// See the class description in the header file.
+/// \file TG4ComposedPhysicsList.cxx
+/// \brief Implementation of the TG4ComposedPhysicsList class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4ComposedPhysicsList.h"
 #include "TG4G3PhysicsManager.h"
@@ -39,13 +39,15 @@ TG4ComposedPhysicsList::TG4ComposedPhysicsList()
     fCutForElectron(fgkDefautCut),
     fCutForPositron(fgkDefautCut)
 {
-//
+/// Default constructor
+
   SetVerboseLevel(TG4VVerbose::VerboseLevel());
 }
 
 //_____________________________________________________________________________
-TG4ComposedPhysicsList::~TG4ComposedPhysicsList() {
-//
+TG4ComposedPhysicsList::~TG4ComposedPhysicsList() 
+{
+/// Destructor
 
   for ( G4int i=0; i<G4int(fPhysicsLists.size()); i++ )
     delete fPhysicsLists[i];

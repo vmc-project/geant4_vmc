@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: global
-// Class TG4Verbose
-// -------------------
-// See the class description in the header file.
+/// \file TG4VVerbose.cxx
+/// \brief Implementation of the TG4VVerbose class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4VVerbose.h"
 #include "TG4Globals.h"
@@ -24,18 +24,21 @@ const G4int TG4VVerbose::fgkDefaultVerboseLevel = 1;
 
 //_____________________________________________________________________________
 TG4VVerbose::TG4VVerbose()
-  : fVerboseLevel(fgkDefaultVerboseLevel) {
-//
+  : fVerboseLevel(fgkDefaultVerboseLevel) 
+{
+/// Default constructor
 }
   
 //_____________________________________________________________________________
 TG4VVerbose::TG4VVerbose(G4int verboseLevel) 
-  : fVerboseLevel(verboseLevel) {
-// 
+  : fVerboseLevel(verboseLevel) 
+{
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
-TG4VVerbose::~TG4VVerbose() {
-//
+TG4VVerbose::~TG4VVerbose() 
+{
+/// Destructor
 }
 

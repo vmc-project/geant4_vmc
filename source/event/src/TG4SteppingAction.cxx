@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: event
-// Class TG4SteppingAction
-// -----------------------
-// See the class description in the header file.
+/// \file TG4SteppingAction.cxx
+/// \brief Implementation of the TG4SteppingAction class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SteppingAction.h"
 #include "TG4TrackManager.h"
@@ -39,7 +39,8 @@ TG4SteppingAction::TG4SteppingAction()
     fLoopStepCounter(0),
     fSaveSecondaries(false)
  {
-//
+/// Default constructor
+
   if (fgInstance) { 
     TG4Globals::Exception(
       "TG4SteppingAction", "TG4SteppingAction", 
@@ -50,8 +51,9 @@ TG4SteppingAction::TG4SteppingAction()
 }
 
 //_____________________________________________________________________________
-TG4SteppingAction::~TG4SteppingAction() {
-//
+TG4SteppingAction::~TG4SteppingAction() 
+{
+/// Destructor
 }
 
 //

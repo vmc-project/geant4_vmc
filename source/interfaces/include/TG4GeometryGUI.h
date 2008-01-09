@@ -1,3 +1,6 @@
+#ifndef TG4_GEOMETRY_GUI_H
+#define TG4_GEOMETRY_GUI_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,14 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup interfaces
-/// \class TG4GeometryGUI
-/// \brief Geant4 VMC Geometry Browser
+/// \file TG4GeometryGUI.h
+/// \brief Definition of the TG4GeometryGUI class 
 ///
-/// \author: D. Adamova, NPI Rez
-
-#ifndef TG4_GEOMETRY_GUI_H
-#define TG4_GEOMETRY_GUI_H
+/// \author D. Adamova, NPI Rez
 
 #include <TObject.h>
 
@@ -24,6 +23,11 @@ class TG4MainFrame;
 class G4LogicalVolume;
 class TGListTreeItem;
 class G4LogicalVolumeStore;  
+
+/// \ingroup interfaces
+/// \brief Geant4 VMC Geometry Browser
+///
+/// \author: D. Adamova, NPI Rez
 
 class TG4GeometryGUI : public TObject
 {
@@ -36,13 +40,15 @@ public:
     void  ReadMaterials() const; 
 
  private:
+    /// Not implemented
     TG4GeometryGUI(const TG4GeometryGUI& gg) ;
+    /// Not implemented
     TG4GeometryGUI& operator=(const TG4GeometryGUI& gg) ;
 
-    TG4MainFrame* fPanel;   // the main  panel
+    TG4MainFrame* fPanel; ///< the main  panel
   
 
-    ClassDef(TG4GeometryGUI,1)  // GUI for Geant4 geometry  
+    ClassDef(TG4GeometryGUI,1) // GUI for Geant4 geometry  
 };
 
 #endif

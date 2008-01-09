@@ -1,3 +1,6 @@
+#ifndef TG4_SD_SERVICES_H
+#define TG4_SD_SERVICES_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,18 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup digits_hits
-/// \class TG4SDServices
-/// \brief Sensitive detectors services
-///
-/// The class provides service methods for accessing to Geant4 geometry,
-/// namely using TVirtualMC volumes identifiers
-/// (implemented via TG4SensitiveDetector instances).
+/// \file  TG4SDServices.h
+/// \brief Definition of the  TG4SDServices class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_SD_SERVICES_H
-#define TG4_SD_SERVICES_H
 
 #include <globals.hh>
 
@@ -30,6 +25,15 @@ class TG4SensitiveDetector;
 
 class G4LogicalVolume;
 class G4VSensitiveDetector;
+
+/// \ingroup digits_hits
+/// \brief Sensitive detectors services
+///
+/// The class provides service methods for accessing to Geant4 geometry,
+/// namely using TVirtualMC volumes identifiers
+/// (implemented via TG4SensitiveDetector instances).
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4SDServices
 {
@@ -64,13 +68,15 @@ class TG4SDServices
     Int_t        VolDaughterCopyNo(const char* volName, Int_t i) const;
 
   private:
+    /// Not implemented
     TG4SDServices(const TG4SDServices& right);
+    /// Not implemented
     TG4SDServices& operator=(const TG4SDServices& right);
 
     // static data members
-    static TG4SDServices* fgInstance;   //this instance
+    static TG4SDServices* fgInstance; ///< this instance
 
-    G4bool  fIsStopRun; // keeps info about run stopping by user  
+    G4bool  fIsStopRun; ///< info about run stopping by user  
 };
 
 // inline methods

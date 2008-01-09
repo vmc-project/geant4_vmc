@@ -1,3 +1,6 @@
+#ifndef TG4_STACKING_ACTION_H
+#define TG4_STACKING_ACTION_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,8 +12,20 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
+/// \file TG4SpecialStackingAction.h
+/// \brief Definition of the TG4SpecialStackingAction class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
+#include "TG4Verbose.h"
+
+#include <G4UserStackingAction.hh>
+#include <globals.hh>
+
+class G4Track;
+class G4TrackStack;
+
 /// \ingroup event
-/// \class TG4SpecialStackingAction
 /// \brief Defines a special stacking mechanism 
 /// 
 /// Class that defines a special stacking mechanism,
@@ -28,17 +43,6 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#ifndef TG4_STACKING_ACTION_H
-#define TG4_STACKING_ACTION_H
-
-#include "TG4Verbose.h"
-
-#include <G4UserStackingAction.hh>
-#include <globals.hh>
-
-class G4Track;
-class G4TrackStack;
-
 class TG4SpecialStackingAction : public G4UserStackingAction,
                                  public TG4Verbose
 {
@@ -52,11 +56,13 @@ class TG4SpecialStackingAction : public G4UserStackingAction,
     void PrepareNewEvent();
 
   private:
+    /// Not implemented
     TG4SpecialStackingAction(const TG4SpecialStackingAction& right);
+    /// Not implemented
     TG4SpecialStackingAction& operator=(const TG4SpecialStackingAction& right);
 
     // data members
-    G4int  fStage; //stage number
+    G4int  fStage; ///< stage number
 };
 
 #endif //TG4_STACKING_ACTION_H

@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: global
-// Class TG4UICmdWithAComplexString
-// --------------------------------
-// See the class description in the header file.
+/// \file TG4UICmdWithAComplexString.cxx
+/// \brief Implementation of the TG4UICmdWithAComplexString class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4UICmdWithAComplexString.h"
 
@@ -23,6 +23,7 @@ TG4UICmdWithAComplexString::TG4UICmdWithAComplexString(
                                  G4String commandPath, G4UImessenger* messenger)
   : G4UIcommand(commandPath, messenger)
 {
+/// Standard constructor.
 /// The command string with full path directory
 /// and the pointer to the messenger must be given.
 
@@ -35,8 +36,9 @@ TG4UICmdWithAComplexString::TG4UICmdWithAComplexString(
 }
 
 //_____________________________________________________________________________
-TG4UICmdWithAComplexString::~TG4UICmdWithAComplexString() {
-//
+TG4UICmdWithAComplexString::~TG4UICmdWithAComplexString() 
+{
+/// Destructor
 }
                                
 //

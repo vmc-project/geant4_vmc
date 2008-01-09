@@ -1,3 +1,6 @@
+#ifndef TG4_LV_TREE_H
+#define TG4_LV_TREE_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,17 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup geometry
-/// \class TG4LVTree
-/// \brief A simple logical volumes tree browser
-///
-/// Class provides methods for browsing volumes trees, 
-/// and setting their visualization attributes.
+/// \file TG4LVTree.h
+/// \brief Definition of the TG4LVTree class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_LV_TREE_H
-#define TG4_LV_TREE_H
 
 #include "TG4LVTreeMessenger.h"
 
@@ -31,6 +27,14 @@ class G4LogicalVolume;
 #ifdef G4VIS_USE
 class G4Colour;
 #endif
+
+/// \ingroup geometry
+/// \brief A simple logical volumes tree browser
+///
+/// Class provides methods for browsing volumes trees, 
+/// and setting their visualization attributes.
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4LVTree
 {
@@ -49,13 +53,16 @@ class TG4LVTree
 #ifdef G4VIS_USE
     void SetLVTreeVisibility(G4LogicalVolume* lv, G4bool visibility) const;
     void SetVolumeVisibility(G4LogicalVolume* lv, G4bool visibility) const;
-    void SetLVTreeColour(G4LogicalVolume* lv, const G4String& colName) const;
+    void SetLVTreeColour(G4LogicalVolume* lv, const G4String& colName) const;   
     void SetVolumeColour(G4LogicalVolume* lv, const G4String& colName) const;     
 #endif
 
   private:
+    /// Not implemented
     TG4LVTree(); 
+    /// Not implemented
     TG4LVTree(const TG4LVTree& right);
+    /// Not implemented
     TG4LVTree& operator=(const TG4LVTree &right);
 
     // methods
@@ -65,13 +72,11 @@ class TG4LVTree
     void Warn(const G4String& where) const;                               
 
     // static data members
-    static TG4LVTree* fgInstance;   // this instance
+    static TG4LVTree* fgInstance; ///<  this instance
 
     // data members
-    TG4LVTreeMessenger  fMessenger; // messenger     
+    TG4LVTreeMessenger  fMessenger; ///<  messenger     
 };
-
-// inline methods
 
 #endif //TG4_LV_TREE_H
 

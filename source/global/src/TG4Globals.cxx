@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: global
-// Class TG4Globals
-// ----------------
-// See the class description in the header file.
+/// \file TG4Globals.cxx
+/// \brief Implementation of the TG4Globals class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4Globals.h"
 
@@ -22,8 +22,9 @@ const TString TG4Globals::fgkEndl = "x\n";
 const char    TG4Globals::fgkTokenSeparator = '+';
 
 //_____________________________________________________________________________
-TG4Globals::~TG4Globals() {
-//
+TG4Globals::~TG4Globals() 
+{
+/// Destructor
 }
   
 //

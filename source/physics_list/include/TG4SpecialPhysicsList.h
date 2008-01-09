@@ -1,3 +1,6 @@
+#ifndef TG4_SPECIAL_PHYSICS_LIST_H
+#define TG4_SPECIAL_PHYSICS_LIST_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,17 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics_list
-/// \class TG4SpecialPhysicsList
-/// \brief The Geant4 VMC special physics list helper class 
-///
-/// The special physics list instatiates the Geant4 VMC special processes 
-/// according to the selection passed in the constructor  
+/// \file TG4SpecialPhysicsList.h
+/// \brief Definition of the TG4SpecialPhysicsList class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_SPECIAL_PHYSICS_LIST_H
-#define TG4_SPECIAL_PHYSICS_LIST_H
 
 #include "TG4Verbose.h"
 
@@ -27,6 +23,14 @@
 #include <globals.hh>
 
 class TG4StackPopperPhysics;
+
+/// \ingroup physics_list
+/// \brief The Geant4 VMC special physics list helper class 
+///
+/// The special physics list instatiates the Geant4 VMC special processes 
+/// according to the selection passed in the constructor  
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4SpecialPhysicsList: public G4VModularPhysicsList,
                              public TG4Verbose
@@ -43,7 +47,10 @@ class TG4SpecialPhysicsList: public G4VModularPhysicsList,
   
     // methods
     virtual void ConstructProcess();
+
+                  /// No cuts are set here
     virtual void SetCuts() {}
+
     virtual G4int VerboseLevel() const;
     virtual void  VerboseLevel(G4int level);
 
@@ -56,19 +63,21 @@ class TG4SpecialPhysicsList: public G4VModularPhysicsList,
     
   protected:
     // data members
-    TG4StackPopperPhysics*  fStackPopperPhysics;
-    G4bool                  fIsSpecialControls;
-    G4bool                  fIsSpecialCuts;
+    TG4StackPopperPhysics* fStackPopperPhysics;///< stack popper physics
+    G4bool                 fIsSpecialControls; ///< option for special controls
+    G4bool                 fIsSpecialCuts;     ///< option for special cuts
 
   private:
+    /// Not implemented
     TG4SpecialPhysicsList(const TG4SpecialPhysicsList& right);
+    /// Not implemented
     TG4SpecialPhysicsList& operator=(const TG4SpecialPhysicsList& right);
 
     // methods
     void Configure(const G4String& selection);
     
     // static data members
-    static TG4SpecialPhysicsList*  fgInstance; //this instance
+    static TG4SpecialPhysicsList*  fgInstance; ///< this instance
 };
 
 // inline methods

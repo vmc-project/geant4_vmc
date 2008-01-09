@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: run
-// Class TGeant4
-// -------------
-// See the class description in the header file.
+/// \file TGeant4.cxx
+/// \brief Implementation of the TGeant4 class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TGeant4.h"
 #include "TG4RunConfiguration.h"
@@ -30,7 +30,9 @@
 
 #include <TVirtualMCGeometry.h>
 
+/// \cond CLASSIMP
 ClassImp(TGeant4)
+/// \endcond
 
 //_____________________________________________________________________________
 TGeant4::TGeant4(const char* name, const char* title,
@@ -49,6 +51,8 @@ TGeant4::TGeant4(const char* name, const char* title,
     fUserGeometry(configuration->GetUserGeometry())
     
 {
+/// Standard constructor
+
   // create state manager
   fStateManager = new TG4StateManager();
   fStateManager->SetNewState(kPreInit);
@@ -106,6 +110,8 @@ TGeant4::TGeant4(const char* name, const char* title,
     fMatrixCounter(0),
     fUserGeometry(configuration->GetUserGeometry())
 {
+/// Standard constructor
+
   // create state manager
   fStateManager = new TG4StateManager();
   fStateManager->SetNewState(kPreInit);
@@ -149,8 +155,10 @@ TGeant4::TGeant4(const char* name, const char* title,
 
     
 //_____________________________________________________________________________
-TGeant4::~TGeant4() {
-//
+TGeant4::~TGeant4() 
+{
+/// Destructor
+
   delete fRunManager;
   delete fStateManager;
   delete fGeometryManager;

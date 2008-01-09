@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: geometry
-// Class TG4GeometryServices
-// -------------------------
-// See the class description in the header file.
+/// \file TG4GeometryServices.cxx
+/// \brief Implementation of the TG4GeometryServices class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4GeometryServices.h"
 #include "TG4MediumMap.h"
@@ -53,7 +53,7 @@ TG4GeometryServices::TG4GeometryServices()
     fOpSurfaceMap(0),
     fWorld(0)
 {
-/// Standard constructor
+/// Default constructor
 
   if (fgInstance) {
     TG4Globals::Exception(

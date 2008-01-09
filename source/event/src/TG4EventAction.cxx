@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: event
-// Class TG4EventAction
-// ---------------------
-// See the class description in the header file.
+/// \file TG4EventAction.cxx
+/// \brief Implementation of the TG4EventAction class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4EventAction.h"
 #include "TG4TrackingAction.h"
@@ -40,12 +40,13 @@ TG4EventAction::TG4EventAction()
     fTimer(),
     fDrawFlag("CHARGED")
 {
-//
+/// Default constructor
 }
 
 //_____________________________________________________________________________
-TG4EventAction::~TG4EventAction() {
-//
+TG4EventAction::~TG4EventAction() 
+{
+/// Destructor
 }
 
 //

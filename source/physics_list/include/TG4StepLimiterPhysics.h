@@ -1,3 +1,6 @@
+#ifndef TG4_STEP_LIMITER_PHYSICS_H
+#define TG4_STEP_LIMITER_PHYSICS_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,20 +12,21 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics_list
-/// \class TG4StepLimiterPhysics
-/// \brief The builder for step limiter process.
+/// \file TG4StepLimiterPhysics.h
+/// \brief Definition of the TG4StepLimiterPhysics class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_STEP_LIMITER_PHYSICS_H
-#define TG4_STEP_LIMITER_PHYSICS_H
 
 #include "TG4VPhysicsConstructor.h"
 
 #include <globals.hh>
 
 class G4StepLimiter;
+
+/// \ingroup physics_list
+/// \brief The builder for step limiter process.
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4StepLimiterPhysics: public TG4VPhysicsConstructor
 {
@@ -39,10 +43,12 @@ class TG4StepLimiterPhysics: public TG4VPhysicsConstructor
     virtual void ConstructProcess();
 
     // data members
-    G4StepLimiter* fStepLimiterProcess; // step limiter process
+    G4StepLimiter* fStepLimiterProcess; ///< step limiter process
 
   private:
+    /// Not implemented
     TG4StepLimiterPhysics(const TG4StepLimiterPhysics& right);
+    /// Not implemented
     TG4StepLimiterPhysics& operator=(const TG4StepLimiterPhysics& right);  
 };
 

@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4StackPopperMessenger
-// ------------------------------------
-// See the class description in the header file.
+/// \file TG4StackPopperMessenger.cxx
+/// \brief Implementation of the TG4StackPopperMessenger class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4StackPopperMessenger.h"
 #include "TG4StackPopperPhysics.h"
@@ -27,7 +27,8 @@ TG4StackPopperMessenger::TG4StackPopperMessenger(
     fStackPopperPhysics(stackPopperPhysics),
     fSetSelectionCmd(0)
 { 
-//
+/// Standard constructor
+
   fSetSelectionCmd 
     = new G4UIcmdWithAString("/mcPhysics/setStackPopperSelection", this);  
   fSetSelectionCmd->SetGuidance("Selects particles for stack popper process");
@@ -36,8 +37,10 @@ TG4StackPopperMessenger::TG4StackPopperMessenger(
 }
 
 //______________________________________________________________________________
-TG4StackPopperMessenger::~TG4StackPopperMessenger() {
-//
+TG4StackPopperMessenger::~TG4StackPopperMessenger() 
+{
+/// Destructor
+
   delete fSetSelectionCmd;
 }
 

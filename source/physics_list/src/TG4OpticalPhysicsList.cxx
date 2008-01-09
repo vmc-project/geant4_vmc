@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4OpticalPhysicsList
-// ---------------------------
-// See the class description in the header file.
+/// \file TG4OpticalPhysicsList.cxx
+/// \brief Implementation of the TG4OpticalPhysicsList class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4OpticalPhysicsList.h"
 #include "TG4OpticalPhysics.h"
@@ -21,16 +21,19 @@
 TG4OpticalPhysicsList::TG4OpticalPhysicsList()
   : G4VModularPhysicsList(),
     TG4Verbose("opticalPhysicsList")
- {
-//
+{
+/// Default constructor
+
   Configure();
 
   SetVerboseLevel(TG4VVerbose::VerboseLevel());
 }
 
 //_____________________________________________________________________________
-TG4OpticalPhysicsList::~TG4OpticalPhysicsList() {
-//
+TG4OpticalPhysicsList::~TG4OpticalPhysicsList() 
+{
+/// Destructor
+
   //delete fExtDecayer;
        // fExtDecayer is deleted in G4Decay destructor
 }

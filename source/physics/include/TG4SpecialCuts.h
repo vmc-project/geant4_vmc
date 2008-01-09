@@ -1,3 +1,6 @@
+#ifndef TG4_SPECIAL_CUTS_H
+#define TG4_SPECIAL_CUTS_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,17 +12,14 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Classes TG4pecialCutsFor*
-//
-// The specifications of TG4VSpecialCuts process class 
-// for different particle types. They implement only 
-// the GetMinEkine() abstract function.
-//
-// Author: I. Hrivnacova
-
-#ifndef TG4_SPECIAL_CUTS_H
-#define TG4_SPECIAL_CUTS_H
+/// \file TG4SpecialCuts.h
+/// \brief Definition of the TG4SpecialCutsFor* classes  
+///
+/// The specifications of TG4VSpecialCuts process class 
+/// for different particle types. They implement only 
+/// the GetMinEkine() abstract function.
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 #include "TG4VSpecialCuts.h"
 

@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4ExtDecayerPhysics
-// ----------------------------------
-// See the class description in the header file.
+/// \file TG4ExtDecayerPhysics.cxx
+/// \brief Implementation of the TG4ExtDecayerPhysics class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4ExtDecayerPhysics.h"
 #include "TG4ExtDecayer.h"
@@ -30,7 +30,7 @@ TG4ExtDecayerPhysics::TG4ExtDecayerPhysics(const G4String& name)
   : TG4VPhysicsConstructor(name),
     fDecayProcess(0)
 {
-//
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
@@ -39,13 +39,14 @@ TG4ExtDecayerPhysics::TG4ExtDecayerPhysics(G4int verboseLevel,
   : TG4VPhysicsConstructor(name, verboseLevel), 
     fDecayProcess(0)
 {
-//
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
 TG4ExtDecayerPhysics::~TG4ExtDecayerPhysics() 
 {
-//
+/// Destructor
+
   delete fDecayProcess;
 }
 

@@ -1,11 +1,19 @@
 // $Id$
-// Category: geometry
+
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
 //
-// Class TG4DetConstructionMessenger
-// ------------------------------------
-// See the class description in the header file.
-//
-// Author: I. Hrivnacova
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \file TG4DetConstructionMessenger.cxx
+/// \brief Implementation of the TG4DetConstructionMessenger class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
 
 #include "TG4DetConstructionMessenger.h"
 #include "TG4DetConstruction.h"

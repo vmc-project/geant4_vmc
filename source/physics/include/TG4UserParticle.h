@@ -1,4 +1,7 @@
-// $Id: TG4G3ParticleWSP.h 295 2007-10-04 23:17:33Z rdm $
+#ifndef TG4_USER_PARTICLE_H
+#define TG4_USER_PARTICLE_H
+
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -9,14 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics
-/// \enum TG4UserParticle
-/// \brief The class for user particle definition.
+/// \file TG4UserParticle.h
+/// \brief Definition of the TG4UserParticle class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_USER_PARTICLE_H
-#define TG4_USER_PARTICLE_H
 
 #include "TG4Globals.h"
 
@@ -24,6 +23,11 @@
 #include <globals.hh>
 
 #include <TMCParticleType.h>
+
+/// \ingroup physics
+/// \brief The class for user particle definition.
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4UserParticle : public G4ParticleDefinition
 {
@@ -59,18 +63,21 @@ class TG4UserParticle : public G4ParticleDefinition
     G4double         GetExcitationEnergy() const ; 
 
   private:
+    /// Not implemented
     TG4UserParticle();
     
     // data members
-    TMCParticleType  fMCType;
-    G4double         fExcitationEnergy;
+    TMCParticleType  fMCType;           ///< particle MC type
+    G4double         fExcitationEnergy; ///< excitation energy
 };
 
 // inline functions
 
+/// Return the particle MC type
 inline TMCParticleType TG4UserParticle::GetMCType() const
 { return fMCType; }
 
+/// Return the particle excitation energy
 inline G4double TG4UserParticle::GetExcitationEnergy() const
 { return fExcitationEnergy; }
 

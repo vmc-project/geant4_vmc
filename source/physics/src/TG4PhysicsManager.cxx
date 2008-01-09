@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics
-// Class TG4PhysicsManager
-// -----------------------
-// See the class description in the header file.
+/// \file TG4PhysicsManager.cxx
+/// \brief Implementation of the TG4PhysicsManager class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4PhysicsManager.h"
 #include "TG4ParticlesManager.h"
@@ -48,7 +48,8 @@ TG4PhysicsManager::TG4PhysicsManager()
     fProcessMCMap(),
     fProcessControlMap()
 { 
-//
+/// Default constructor
+
   if (fgInstance) {
     TG4Globals::Exception(
       "TG4PhysicsManager", "TG4PhysicsManager",
@@ -68,8 +69,10 @@ TG4PhysicsManager::TG4PhysicsManager()
 }
 
 //_____________________________________________________________________________
-TG4PhysicsManager::~TG4PhysicsManager() {
-//
+TG4PhysicsManager::~TG4PhysicsManager() 
+{
+/// Destructor
+
   fgInstance = 0; 
 
   delete fParticlesManager;
@@ -642,6 +645,8 @@ Bool_t TG4PhysicsManager::DefineParticle(Int_t pdg, const char* name,
 //_____________________________________________________________________________                           
 Bool_t TG4PhysicsManager::SetDecayMode(Int_t pdg, Float_t bratio[6], Int_t mode[6][3])
 {
+/// Set a user phase space decay for a particle  
+
   fParticlesManager->SetDecayMode(pdg, bratio, mode);
 
   return true;

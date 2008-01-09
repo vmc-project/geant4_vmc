@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4UserParticlesPhysics
-// ----------------------------------
-// See the class description in the header file.
+/// \file TG4UserParticlesPhysics.cxx
+/// \brief Implementation of the TG4UserParticlesPhysics class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4UserParticlesPhysics.h"
 #include "TG4UserParticle.h"
@@ -51,7 +51,7 @@
 TG4UserParticlesPhysics::TG4UserParticlesPhysics(const G4String& name)
   : TG4VPhysicsConstructor(name)
 {
-//
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
@@ -59,13 +59,13 @@ TG4UserParticlesPhysics::TG4UserParticlesPhysics(G4int verboseLevel,
                                      const G4String& name)
   : TG4VPhysicsConstructor(name, verboseLevel)
 {
-//
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
 TG4UserParticlesPhysics::~TG4UserParticlesPhysics() 
 {
-//
+/// Destructor
 }
 
 //

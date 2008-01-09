@@ -1,3 +1,6 @@
+#ifndef TG4_TRACKING_ACTION_MESSENGER_H
+#define TG4_TRACKING_ACTION_MESSENGER_H 
+
 // $Id$
 
 //------------------------------------------------
@@ -9,19 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup event
-/// \class TG4TrackingActionMessenger
-/// \brief Messenger class that defines commands for TG4TrackingAction.
+/// \file TG4TrackingActionMessenger.h
+/// \brief Definition of the TG4TrackingActionMessenger class 
 ///
-/// Implements command
-/// - /mcTracking/newVerbose [level]
-/// - /mcTracking/newVerboseTrack [trackID]
-/// - /mcTracking/saveSecondaries [true|false]
-/// 
 /// \author I. Hrivnacova; IPN, Orsay
- 
-#ifndef TG4_TRACKING_ACTION_MESSENGER_H
-#define TG4_TRACKING_ACTION_MESSENGER_H 
 
 #include <G4UImessenger.hh>
 #include <globals.hh>
@@ -32,6 +26,16 @@ class G4UIdirectory;
 class G4UIcmdWithAnInteger;
 class G4UIcmdWithABool;
 
+/// \ingroup event
+/// \brief Messenger class that defines commands for TG4TrackingAction.
+///
+/// Implements command
+/// - /mcTracking/newVerbose [level]
+/// - /mcTracking/newVerboseTrack [trackID]
+/// - /mcTracking/saveSecondaries [true|false]
+/// 
+/// \author I. Hrivnacova; IPN, Orsay
+ 
 class TG4TrackingActionMessenger: public G4UImessenger
 {
   public:
@@ -42,17 +46,20 @@ class TG4TrackingActionMessenger: public G4UImessenger
     virtual void SetNewValue(G4UIcommand* command, G4String string);
     
   private:
+    /// Not implemented
     TG4TrackingActionMessenger();
+    /// Not implemented
     TG4TrackingActionMessenger(const TG4TrackingActionMessenger& right);
+    /// Not implemented
     TG4TrackingActionMessenger& operator=(
                                const TG4TrackingActionMessenger& right);
 
     // data members
-    TG4TrackingAction*     fTrackingAction;    //associated class 
-    G4UIdirectory*         fTrackingDirectory; //command directory
-    G4UIcmdWithAnInteger*  fNewVerboseCmd;     //command: newVerbose
-    G4UIcmdWithAnInteger*  fNewVerboseTrackCmd;//command: newVerboseTrack
-    G4UIcmdWithABool*      fSaveSecondariesCmd;//command: saveSecondaries
+    TG4TrackingAction*     fTrackingAction;    ///< associated class 
+    G4UIdirectory*         fTrackingDirectory; ///< command directory
+    G4UIcmdWithAnInteger*  fNewVerboseCmd;     ///< command: newVerbose
+    G4UIcmdWithAnInteger*  fNewVerboseTrackCmd;///< command: newVerboseTrack
+    G4UIcmdWithABool*      fSaveSecondariesCmd;///< command: saveSecondaries
 };
 
 #endif //TG4_TRACKING_ACTION_MESSENGER_H

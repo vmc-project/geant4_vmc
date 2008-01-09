@@ -1,4 +1,7 @@
-// $Id: TG4G3ParticleWSP.h 295 2007-10-04 23:17:33Z rdm $
+#ifndef TG4_USER_ION_H
+#define TG4_USER_ION_H
+
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -9,14 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics
-/// \enum TG4UserIon
-/// \brief The class for user ion definition.
+/// \file TG4UserIon.h
+/// \brief Definition of the TG4UserIon class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_USER_ION_H
-#define TG4_USER_ION_H
 
 #include "TG4Globals.h"
 
@@ -25,22 +24,37 @@
 
 #include <TMCParticleType.h>
 
+/// \ingroup physics
+/// \brief The class for user ion definition.
+///
+/// \author I. Hrivnacova; IPN Orsay
+
 class TG4UserIon
 {
   public:
+             /// Standard constructor
     TG4UserIon(const G4String& name, G4int pdgEncoding, G4int Q)
       : fName(name), fPdgEncoding(pdgEncoding), fQ(Q) {}
-    ~TG4UserIon();
+
+             /// Destructor    
+    ~TG4UserIon() {}
     
     // methods
-    G4String GetName() const        { return fName;        }
-    G4int    GetPdgEncoding() const { return fPdgEncoding; }
-    G4int    GetQ() const           { return fQ;           }
     
+             /// Return the ion name defined by user
+    G4String GetName() const { return fName; }
+
+             /// Return the ion PDG encoding
+    G4int    GetPdgEncoding() const { return fPdgEncoding; }
+
+             /// Return the ion charge
+    G4int    GetQ() const { return fQ; }
+    
+  private:
     // data members
-    G4String fName;        // ion name defined by user
-    G4int    fPdgEncoding; // PDG encoding
-    G4int    fQ;           // charge
+    G4String fName;        ///< ion name defined by user
+    G4int    fPdgEncoding; ///< PDG encoding
+    G4int    fQ;           ///< charge
 };      
 
 #endif //TG4_USER_ION_H

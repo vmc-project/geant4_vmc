@@ -9,29 +9,26 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: interfaces
-//
-//==================================================================
-//
-//----------------TG4GuiVolume.cxx-------------------------------//
-//----Creating link for Logical Volume Tree in AG4 Geometry----//
-//
-//===================================================================
-//
-// Author: D. Adamova
+/// \file TG4GuiVolume.cxx
+/// \brief Implementation of the TG4GuiVolume class 
+///
+/// \author D. Adamova, NPI Rez
  
 #include "TG4GuiVolume.h"
 #include "TG4Globals.h"
 #include <G4LogicalVolume.hh> 
 
+/// \cond CLASSIMP
 ClassImp(TG4GuiVolume)
+/// \endcond
 
 TG4GuiVolume::TG4GuiVolume(const char* name, G4LogicalVolume* lvolume)
   : TObject(),
     fLogicalVolume(0),
     fItem(0)
 {
-/// Constructor
+/// Standard constructor
+
     fItem   = 0;
     fLogicalVolume = lvolume; 
     
@@ -42,6 +39,11 @@ TG4GuiVolume::TG4GuiVolume(const char* name, G4LogicalVolume* lvolume)
        "TG4GuiVolume", "TG4GuiVolume",
        "A wrong name assigned to the guiVolume in the ctor");
     }   
+}
+
+TG4GuiVolume::~TG4GuiVolume()
+{
+/// Destructor 
 }
 
 const char* TG4GuiVolume::GetName() const

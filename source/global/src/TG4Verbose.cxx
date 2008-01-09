@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: global
-// Class TG4Verbose
-// -------------------
-// See the class description in the header file.
+/// \file TG4Verbose.cxx
+/// \brief Implementation of the TG4Verbose class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4Verbose.h"
 #include "TG4Globals.h"
@@ -29,7 +29,8 @@ TG4Verbose::TG4Verbose(const G4String& cmdName)
   : TG4VVerbose(),
     fCommand(0) 
 {
-//
+/// Standard constructor with specified \em name
+
   CreateMessenger();
   
   fCommand = fgMessenger->AddCommand(this, cmdName);
@@ -42,15 +43,18 @@ TG4Verbose::TG4Verbose(const G4String& cmdName, G4int verboseLevel)
   : TG4VVerbose(verboseLevel),
     fCommand(0) 
 {
-// 
+/// Standard constructor with specified \em name and \em verboseLevel
+
   CreateMessenger();
 
   fCommand = fgMessenger->AddCommand(this, cmdName);  
 }
 
 //_____________________________________________________________________________
-TG4Verbose::~TG4Verbose() {
-//
+TG4Verbose::~TG4Verbose() 
+{
+/// Destructor
+
   fgCounter--;
   
   if (!fgMessenger) return;

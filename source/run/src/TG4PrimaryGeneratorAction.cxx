@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: run
-// Class TG4PrimaryGeneratorAction
-// -------------------------------
-// See the class description in the header file.
+/// \file TG4PrimaryGeneratorAction.cxx
+/// \brief Implementation of the TG4PrimaryGeneratorAction class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4PrimaryGeneratorAction.h"
 #include "TG4ParticlesManager.h"
@@ -33,13 +33,15 @@
 
 //_____________________________________________________________________________
 TG4PrimaryGeneratorAction::TG4PrimaryGeneratorAction()
-  : TG4Verbose("primaryGeneratorAction") {
-//
+  : TG4Verbose("primaryGeneratorAction") 
+{
+/// Default constructor
 }
 
 //_____________________________________________________________________________
-TG4PrimaryGeneratorAction::~TG4PrimaryGeneratorAction() {
-//
+TG4PrimaryGeneratorAction::~TG4PrimaryGeneratorAction() 
+{
+/// Destructor
 }
 
 //

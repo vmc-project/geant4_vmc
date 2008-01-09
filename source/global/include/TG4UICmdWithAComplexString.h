@@ -1,3 +1,6 @@
+#ifndef TG4_UI_CMD_WITH_A_COMPLEX_STRING_H
+#define TG4_UI_CMD_WITH_A_COMPLEX_STRING_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,8 +12,14 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
+/// \file TG4UICmdWithAComplexString.h
+/// \brief Definition of the TG4UICmdWithAComplexString class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
+#include <G4UIcommand.hh>
+
 /// \ingroup global
-/// \class TG4UICmdWithAComplexString
 /// \brief G4 command that takes up to three string values.
 /// 
 /// Concrete class of G4UIcommand. 
@@ -18,11 +27,6 @@
 /// General information of G4UIcommand is given in G4UIcommand.hh.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_UI_CMD_WITH_A_COMPLEX_STRING_H
-#define TG4_UI_CMD_WITH_A_COMPLEX_STRING_H
-
-#include <G4UIcommand.hh>
 
 class TG4UICmdWithAComplexString : public G4UIcommand
 {

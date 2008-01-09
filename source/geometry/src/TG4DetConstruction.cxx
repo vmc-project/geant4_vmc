@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: geometry
-// Class TG4DetConstruction
-// ---------------------------
-// See the class description in the header file.
+/// \file TG4DetConstruction.cxx
+/// \brief Implementation of the TG4DetConstruction class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4DetConstruction.h"
 #include "TG4GeometryManager.h"
@@ -24,7 +24,7 @@
 //_____________________________________________________________________________
 TG4DetConstruction::TG4DetConstruction()
 {
-/// Standard constructor
+/// Default constructor
 }
 
 //_____________________________________________________________________________

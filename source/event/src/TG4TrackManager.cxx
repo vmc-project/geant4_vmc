@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: event
-// Class TG4TrackManager
-// -----------------------
-// See the class description in the header file.
+/// \file TG4TrackManager.cxx 
+/// \brief Implementation of the TG4TrackManager class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4TrackManager.h"
 #include "TG4TrackInformation.h"
@@ -48,7 +48,8 @@ TG4TrackManager::TG4TrackManager()
     fCurrentTrackID(0),
     fNofSavedSecondaries(0)
 {
-//
+/// Default constructor
+
   if (fgInstance) { 
     TG4Globals::Exception(
       "TG4TrackManager", "TG4TrackManager", 
@@ -59,8 +60,10 @@ TG4TrackManager::TG4TrackManager()
 }
 
 //_____________________________________________________________________________
-TG4TrackManager::~TG4TrackManager() {
-//
+TG4TrackManager::~TG4TrackManager() 
+{
+/// Destructor
+
   fgInstance = 0;
 }
 

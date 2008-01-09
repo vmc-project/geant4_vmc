@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics
-// Class TG4VSpecialControls
-// -------------------------
-// See the class description in the header file.
+/// \file TG4SpecialControls.cxx
+/// \brief Implementation of the TG4SpecialControls class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SpecialControls.h"
 #include "TG4GeometryServices.h"
@@ -29,14 +29,17 @@ TG4SpecialControls::TG4SpecialControls(const G4String& processName)
     fSwitchControls(kUnswitch),
     fSwitchedProcesses(),
     fSwitchedControls(0),
-    fLastTrackID(0) {
-//    
+    fLastTrackID(0) 
+{
+/// Standard constructor
+
    verboseLevel = VerboseLevel();
 }
 
 //_____________________________________________________________________________
-TG4SpecialControls::~TG4SpecialControls() {
-//
+TG4SpecialControls::~TG4SpecialControls() 
+{
+/// Destructor
 }
 
 //

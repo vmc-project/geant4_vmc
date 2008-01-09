@@ -1,3 +1,6 @@
+#ifndef TG4_OP_SURFACE_MAP_H
+#define TG4_OP_SURFACE_MAP_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,16 +12,15 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup geometry
-/// \typedef TG4OpSurfaceMap
-/// \brief The map between optical surfaces names and their objects.
+/// \file TG4OpSurfaceMap.h
+/// \brief Definition of the TG4OpSurfaceMap typedef 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#ifndef TG4_OP_SURFACE_MAP_H
-#define TG4_OP_SURFACE_MAP_H
-
 #include <G4OpticalSurface.hh>
+
+/// \ingroup geometry
+/// \brief The map between optical surfaces names and their objects.
 
 typedef std::map<G4String, G4OpticalSurface*>  TG4OpSurfaceMap;
 

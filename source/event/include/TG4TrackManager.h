@@ -1,3 +1,6 @@
+#ifndef TG4_TRACK_MANAGER_H
+#define TG4_TRACK_MANAGER_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,19 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup event
-/// \class TG4TrackManager
-/// \brief The class for storing G4 tracks in VMC sack
-/// 
-/// It provides methods for storing G4 primary particles
-/// and secondary tracks and utility functions for updating 
-/// TG4TrackInformation, which hold the info about
-/// correspondence between Geant4 and VMC stack numbering 
+/// \file TG4TrackManager.h
+/// \brief Definition of the TG4TrackManager class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_TRACK_MANAGER_H
-#define TG4_TRACK_MANAGER_H
 
 #include "TG4Verbose.h"
 
@@ -33,6 +27,16 @@ class TG4TrackInformation;
 class G4Track;
 class G4PrimaryVertex;
 class G4PrimaryParticle;
+
+/// \ingroup event
+/// \brief The class for storing G4 tracks in VMC sack
+/// 
+/// It provides methods for storing G4 primary particles
+/// and secondary tracks and utility functions for updating 
+/// TG4TrackInformation, which hold the info about
+/// correspondence between Geant4 and VMC stack numbering 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4TrackManager : public TG4Verbose 
 {
@@ -64,23 +68,24 @@ class TG4TrackManager : public TG4Verbose
     G4bool IsUserTrack(const G4Track* track) const;
 
   private:
+    /// Not implemented
     TG4TrackManager(const TG4TrackManager& right);
+    /// Not implemented
     TG4TrackManager& operator=(const TG4TrackManager& right);
 
     // methods
     TG4TrackInformation* GetTrackInformation(const G4Track* track) const;
 
     // static data members
-    static TG4TrackManager*   fgInstance; //this instance
+    static TG4TrackManager*   fgInstance; ///< this instance
 
     // data members
-    G4TrackingManager*   fG4TrackingManager;  // G4 tracking manager
-    //TG4TrackManagerMessenger  fMessenger; //messenger
-    G4bool  fSaveSecondaries;   //control of saving secondaries
-    G4bool  fSaveSecondariesInStep;   //control of saving secondaries in step
-    G4int   fTrackCounter;      //tracks counter
-    G4int   fCurrentTrackID;     //current track ID
-    G4int   fNofSavedSecondaries;//number of secondaries already saved
+    G4TrackingManager*  fG4TrackingManager; ///< G4 tracking manager
+    G4bool  fSaveSecondaries;       ///< control of saving secondaries
+    G4bool  fSaveSecondariesInStep; ///< control of saving secondaries in step
+    G4int   fTrackCounter;          ///< tracks counter
+    G4int   fCurrentTrackID;        ///< current track ID
+    G4int   fNofSavedSecondaries;   ///< number of secondaries already saved
 };
 
 
@@ -96,7 +101,8 @@ inline void TG4TrackManager::SetNofTracks(G4int nofTracks) {
   fTrackCounter = nofTracks;
 }  
 
-inline void TG4TrackManager::SetG4TrackingManager(G4TrackingManager* trackingManager) {
+inline void TG4TrackManager::SetG4TrackingManager(
+                       G4TrackingManager* trackingManager) {
   /// Set G4 tracking manager
   fG4TrackingManager = trackingManager;
 }  

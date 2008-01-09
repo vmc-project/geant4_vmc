@@ -1,3 +1,6 @@
+#ifndef TG4_LV_STRUCTURE_H
+#define TG4_LV_STRUCTURE_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,17 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup geometry
-/// \class TG4LVStructure
-/// \brief A helper class for LVTree
-/// 
-/// Class that associates the name tree with the logical volumes tree. 
-/// Used for printing volumes trees.  
+/// \file TG4LVStructure.h
+/// \brief Definition of the TG4LVStructure class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_LV_STRUCTURE_H
-#define TG4_LV_STRUCTURE_H
 
 #include <globals.hh>
 #include <vector>
@@ -27,11 +23,23 @@
 class G4LogicalVolume;
 class TG4LVStructure;
 
-typedef std::vector<TG4LVStructure*>  LVStructuresVector;
-typedef std::vector<G4LogicalVolume*> LogicalVolumesVector;
+/// \ingroup geometry
+/// \brief A helper class for LVTree
+/// 
+/// Class that associates the name tree with the logical volumes tree. 
+/// Used for printing volumes trees.  
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4LVStructure 
 {
+  public:
+    /// The vecor of TG4 logical volume structures
+    typedef std::vector<TG4LVStructure*>  LVStructuresVector;
+
+    /// The vector of G4 logical volumes
+    typedef std::vector<G4LogicalVolume*> LogicalVolumesVector;
+
   public:
     TG4LVStructure(G4String aPath);
     TG4LVStructure(const TG4LVStructure& right);
@@ -58,6 +66,7 @@ class TG4LVStructure
     G4LogicalVolume* FindVolume(const G4String& name) const;
 
   private:
+    /// Not implemented
     TG4LVStructure(); 
 
     // methods
@@ -65,13 +74,23 @@ class TG4LVStructure
     G4String ExtractDirName(const G4String& path) const;
     void ClearAndDestroy(LVStructuresVector* structures); 
 
+    //
     // data members
-    LVStructuresVector    fStructures;     //vector of contained structures
-    LogicalVolumesVector  fLogicalVolumes; //vector of contained logical volumes
-                                           //(parallel to fStructures)
-    G4String  fPathName;     //full path name
-    G4String  fDirName;      //directory name
-    G4int     fVerboseLevel; //verbose level
+    
+    /// vector of contained structures
+    LVStructuresVector    fStructures;
+    
+    /// vector of contained logical volumes (parallel to fStructures)
+    LogicalVolumesVector  fLogicalVolumes;
+    
+    /// full path name
+    G4String  fPathName;
+    
+    /// directory name
+    G4String  fDirName;
+    
+    /// verbose level
+    G4int     fVerboseLevel;
 };
 
 #endif //TG4_LV_STRUCTURE_H

@@ -1,3 +1,6 @@
+#ifndef TG4_G3_DEFAULTS_H
+#define TG4_G3_DEFAULTS_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,17 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup global
-/// \class TG4G3Defaults
-/// \brief Default G3 kinetic energy cuts and control process values
-/// 
-/// Class provides the default G3 values of the kinetic energy cuts
-/// for particles and the control process parameters.
+/// \file TG4G3Defaults.h
+/// \brief Definition of the TG4G3Defaults class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_G3_DEFAULTS_H
-#define TG4_G3_DEFAULTS_H
 
 #include "TG4G3CutVector.h"
 #include "TG4G3ControlVector.h"
@@ -27,6 +23,14 @@
 #include "TG4G3Cut.h"
 
 #include <globals.hh>
+
+/// \ingroup global
+/// \brief Default G3 kinetic energy cuts and control process values
+/// 
+/// Class provides the default G3 values of the kinetic energy cuts
+/// for particles and the control process parameters.
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4G3Defaults
 {
@@ -46,15 +50,17 @@ class TG4G3Defaults
     TG4G3ControlValue ControlValue(G4int control) const; 
       
   private:
+    /// Not implemented
     TG4G3Defaults(const TG4G3Defaults& right);      
+    /// Not implemented
     TG4G3Defaults& operator=(const TG4G3Defaults& right);
 
     // static data members  
-    static TG4G3Defaults*  fgInstance;      //this instance
+    static TG4G3Defaults*  fgInstance; ///< this instance
     
     // data members
-    TG4G3CutVector     fCutVector;    // vector of default cut values       
-    TG4G3ControlVector fControlVector;// vector of default control values       
+    TG4G3CutVector     fCutVector;     ///< vector of default cut values       
+    TG4G3ControlVector fControlVector; ///< vector of default control values       
 };     
 
 // inline methods

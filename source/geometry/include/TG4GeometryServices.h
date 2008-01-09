@@ -1,3 +1,6 @@
+#ifndef TG4_GEOMETRY_SERVICES_H
+#define TG4_GEOMETRY_SERVICES_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,17 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup geometry
-/// \class TG4GeometryServices
-/// \brief Services for accessing to Geant4 geometry
-/// 
-/// The class provides service methods for accessing to Geant4 geometry,
-/// namely using VMC volumes and materials identifiers. 
+/// \file TG4GeometryServices.h
+/// \brief Definition of the TG4GeometryServices class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_GEOMETRY_SERVICES_H
-#define TG4_GEOMETRY_SERVICES_H
 
 #include "TG4Verbose.h"
 #include "TG4Globals.h"
@@ -49,6 +45,14 @@ class G4UserLimits;
 class G4OpticalSurface;
 
 class TGeoHMatrix;
+
+/// \ingroup geometry
+/// \brief Services for accessing to Geant4 geometry
+/// 
+/// The class provides service methods for accessing to Geant4 geometry,
+/// namely using VMC volumes and materials identifiers. 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4GeometryServices : public TG4Verbose
 {
@@ -125,11 +129,12 @@ class TG4GeometryServices : public TG4Verbose
     TG4MediumMap*    GetMediumMap() const;
     TG4OpSurfaceMap* GetOpSurfaceMap() const;
 
-  protected:
+  private:
+    /// Not implemented
     TG4GeometryServices(const TG4GeometryServices& right);
+    /// Not implemented
     TG4GeometryServices& operator=(const TG4GeometryServices& right);
 
-  private:
     // methods        
     G4bool IsG3Volume(const G4String& lvName) const;
     G4bool CompareElement(G4double a, G4double z, const G4Element* elem) const;
@@ -138,15 +143,24 @@ class TG4GeometryServices : public TG4Verbose
     G4double* ConvertAtomWeight(G4int nmat, G4double* a, G4double* wmat) const;
 
     // static data members
-    static TG4GeometryServices*  fgInstance;   //this instance
-    static const G4double  fgkAZTolerance;     //A,Z tolerance
-    static const G4double  fgkDensityTolerance;//density tolerance (percentual)
+    static TG4GeometryServices*  fgInstance;   ///< this instance
+    static const G4double  fgkAZTolerance;     ///< A,Z tolerance
+    static const G4double  fgkDensityTolerance;///< density tolerance (percentual)
  
+    //
     // data members
-    G4bool             fIsG3toG4;  // info if user geometry is defined via G3toG4
-    TG4MediumMap*      fMediumMap; // map of madia
-    TG4OpSurfaceMap*   fOpSurfaceMap;//map of optical surfaces names to their objects 
-    G4VPhysicalVolume* fWorld;     //top physical volume (world)
+    
+    /// info if user geometry is defined via G3toG4
+    G4bool             fIsG3toG4; 
+    
+    /// map of madia
+    TG4MediumMap*      fMediumMap;
+    
+    /// map of optical surfaces names to their objects 
+    TG4OpSurfaceMap*   fOpSurfaceMap;
+
+    /// top physical volume (world)
+    G4VPhysicalVolume* fWorld;
 };
 
 // inline methods

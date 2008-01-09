@@ -1,3 +1,6 @@
+#ifndef TG4_RUN_CONFIGURATION_H
+#define TG4_RUN_CONFIGURATION_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,8 +12,29 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
+/// \file TG4RunConfiguration.h
+/// \brief Definition of the TG4RunConfiguration class 
+///
+/// \author I. Hrivnacova; IPN Orsay
+
+#include <Rtypes.h>
+#include <TString.h>
+
+class TG4DetConstruction;
+class TG4TrackingAction;
+class TG4SteppingAction;
+class TG4SpecialPhysicsList;
+
+class G4VUserDetectorConstruction;
+class G4VUserPrimaryGeneratorAction;
+class G4VUserPhysicsList;
+class G4UserRunAction;
+class G4UserEventAction;
+class G4UserStackingAction;
+class G4RunManager;
+class G4UImessenger;
+
 /// \ingroup run
-/// \class TG4RunConfiguration
 /// \brief Takes care of creating Geant4 user action classes using VMC
 ///
 /// This class takes care of creating all Geant4 user defined mandatory
@@ -42,28 +66,8 @@
 /// - stackPopper       - stackPopper process
 /// When more than one options are selected, they should be separated with '+'
 /// character: eg. stepLimit+specialCuts.
-
+///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_RUN_CONFIGURATION_H
-#define TG4_RUN_CONFIGURATION_H
-
-#include <Rtypes.h>
-#include <TString.h>
-
-class TG4DetConstruction;
-class TG4TrackingAction;
-class TG4SteppingAction;
-class TG4SpecialPhysicsList;
-
-class G4VUserDetectorConstruction;
-class G4VUserPrimaryGeneratorAction;
-class G4VUserPhysicsList;
-class G4UserRunAction;
-class G4UserEventAction;
-class G4UserStackingAction;
-class G4RunManager;
-class G4UImessenger;
 
 class TG4RunConfiguration 
 {
@@ -92,16 +96,19 @@ class TG4RunConfiguration
 
   protected:
     // data members
-    TString                fUserGeometry;            //  way of building geometry
-    TString                fPhysicsListSelection;    //  physics list selection
-    TString                fSpecialProcessSelection; //  special process selection
-    Bool_t                 fSpecialStacking;   //  option to include special stacking
-    G4UImessenger*         fAGDDMessenger;     //! XML messenger
-    G4UImessenger*         fGDMLMessenger;     //! XML messenger
+    TString        fUserGeometry;           ///< way of building geometry
+    TString        fPhysicsListSelection;   ///< physics list selection
+    TString        fSpecialProcessSelection;///< special process selection
+    Bool_t         fSpecialStacking;        ///< option for special stacking
+    G4UImessenger* fAGDDMessenger;          //!< XML messenger
+    G4UImessenger* fGDMLMessenger;          //!< XML messenger
 
   private:
+    /// Not implemented
     TG4RunConfiguration();
+    /// Not implemented
     TG4RunConfiguration(const TG4RunConfiguration& right);
+    /// Not implemented
     TG4RunConfiguration& operator=(const TG4RunConfiguration& right);
 };
 

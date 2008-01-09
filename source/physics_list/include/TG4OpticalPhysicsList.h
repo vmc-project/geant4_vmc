@@ -1,3 +1,6 @@
+#ifndef TG4_OPTICAL_PHYSICS_LIST_H
+#define TG4_OPTICAL_PHYSICS_LIST_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,14 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics_list
-/// \class TG4OpticalPhysicsList
-/// \brief The optical physics list.
+/// \file TG4OpticalPhysicsList.h
+/// \brief Definition of the TG4OpticalPhysicsList class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_OPTICAL_PHYSICS_LIST_H
-#define TG4_OPTICAL_PHYSICS_LIST_H
 
 #include "TG4Verbose.h"
 
@@ -24,6 +23,11 @@
 #include <globals.hh>
 
 class TG4OpticalPhysics;
+
+/// \ingroup physics_list
+/// \brief The optical physics list.
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4OpticalPhysicsList: public G4VModularPhysicsList,
                              public TG4Verbose
@@ -34,12 +38,16 @@ class TG4OpticalPhysicsList: public G4VModularPhysicsList,
   
     // methods
     virtual void ConstructProcess();
+                  /// No cuts are set here
     virtual void SetCuts() {}
+
     virtual G4int VerboseLevel() const;
     virtual void  VerboseLevel(G4int level);
 
   private:
+    /// Not implemented
     TG4OpticalPhysicsList(const TG4OpticalPhysicsList& right);
+    /// Not implemented
     TG4OpticalPhysicsList& operator=(const TG4OpticalPhysicsList& right);
 
     // methods

@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: global
-// Class TG4G3Defaults
-// -------------------
-// See the class description in the header file.
+/// \file TG4G3Defaults.cxx
+/// \brief Implementation of the TG4G3Defaults class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4G3Defaults.h"
 #include "TG4Globals.h"
@@ -28,7 +28,8 @@ TG4G3Defaults::TG4G3Defaults()
   : fCutVector(),
     fControlVector()
 {
-//
+/// Default constructor
+
   if (fgInstance) {
     TG4Globals::Exception(
       "TG4G3Defaults", "TG4G3Defaults", 
@@ -70,8 +71,9 @@ TG4G3Defaults::TG4G3Defaults()
 }
   
 //_____________________________________________________________________________
-TG4G3Defaults::~TG4G3Defaults() {
-//
+TG4G3Defaults::~TG4G3Defaults() 
+{
+/// Destructor
 }
 
 //

@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4ProcessMCMapPhysics
-// -----------------------------
-// See the class description in the header file.
+/// \file TG4ProcessMCMapPhysics.cxx
+/// \brief Implementation of the TG4ProcessMCMapPhysics class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4ProcessMCMapPhysics.h"
 #include "TG4ProcessMCMap.h"
@@ -28,7 +28,8 @@
 TG4ProcessMCMapPhysics::TG4ProcessMCMapPhysics(const G4String& name)
   : TG4VPhysicsConstructor(name)
 {
-//
+/// Standard constructor
+
   FillMap();
 }
 
@@ -37,14 +38,15 @@ TG4ProcessMCMapPhysics::TG4ProcessMCMapPhysics(G4int verboseLevel,
                                                const G4String& name)
   : TG4VPhysicsConstructor(name, verboseLevel)
 {
-//
+/// Standard constructor
+
   FillMap();
 }
 
 //_____________________________________________________________________________
 TG4ProcessMCMapPhysics::~TG4ProcessMCMapPhysics() 
 {
-//
+/// Destructor
 }
 
 //

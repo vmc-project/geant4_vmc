@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: digits+hits
-// Class TG4StepManager
-// --------------------
-// See the class description in the header file.
+/// \file TG4StepManager.cxx
+/// \brief Implementation of the TG4StepManager class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4StepManager.h"
 #include "TG4SteppingAction.h"
@@ -48,7 +48,9 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
     fVolPathBuffer(),
     fCopyNoOffset(0)
 {
-// 
+/// Standard constructor
+/// \param userGeometry  User selection of geometry definition and navigation 
+
   if (fgInstance) {
     TG4Globals::Exception(
       "TG4StepManager", "TG4StepManager", 
@@ -65,8 +67,10 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
 }
 
 //_____________________________________________________________________________
-TG4StepManager::~TG4StepManager() {
-//
+TG4StepManager::~TG4StepManager() 
+{
+/// Destructor
+
   delete fTouchableHistory;
 }
 
@@ -167,7 +171,7 @@ const G4VTouchable* TG4StepManager::GetCurrentTouchable() const
 G4VPhysicalVolume* 
 TG4StepManager::GetCurrentOffPhysicalVolume(G4int off, G4bool warn) const 
 {
-/// Return the physical volume of the off-th mother's
+/// Return the physical volume of the off-th mother
 /// of the current volume.
  
   // Get current touchable
@@ -349,7 +353,7 @@ G4VPhysicalVolume* TG4StepManager::GetCurrentPhysicalVolume() const
 Int_t TG4StepManager::CurrentVolID(Int_t& copyNo) const
 {
 /// Return the current sensitive detector ID
-/// and the copy number of the current physical volume.
+/// and fill the copy number of the current physical volume 
 
   G4VPhysicalVolume* physVolume = GetCurrentPhysicalVolume();
   if ( ! physVolume ) {
@@ -367,8 +371,8 @@ Int_t TG4StepManager::CurrentVolID(Int_t& copyNo) const
 //_____________________________________________________________________________
 Int_t TG4StepManager::CurrentVolOffID(Int_t off, Int_t&  copyNo) const
 { 
-/// Return the off-th mother's of the current volume
-/// the sensitive detector ID and the copy number.
+/// Return the  the sensitive detector ID of the off-th mother of the current  
+/// volume and  fill the copy number of its physical volume 
 
   if (off == 0) return CurrentVolID(copyNo);
 #ifdef MCDEBUG
@@ -457,8 +461,13 @@ const char* TG4StepManager::CurrentVolPath()
 Int_t TG4StepManager::CurrentMaterial(Float_t &a, Float_t &z, Float_t &dens, 
                           Float_t &radl, Float_t &absl) const
 {
-/// Return the parameters of the current material during transport;
-/// the return value is the number of elements in the mixture.
+/// Get parameters of the current material material during transport.
+/// Return the number of elements in the mixture
+/// \param a     The atomic mass in au
+/// \param z     The atomic number
+/// \param dens  The density in g/cm3
+/// \param radl  The radiation length in cm
+/// \param absl  The absorption length in cm
 
   G4VPhysicalVolume* physVolume = GetCurrentPhysicalVolume(); 
     
@@ -501,20 +510,13 @@ void TG4StepManager::Gmtod(Float_t* xm, Float_t* xd, Int_t iflag)
 { 
 /// Transform a position from the world reference frame
 /// to the current volume reference frame.
+/// \param xm    Known coordinates in the world reference system
+/// \param xd    Computed coordinates in the daughter reference system
+/// \param iflag The option: 
+///              - IFLAG=1  convert coordinates,                                 \n
+///              - IFLAG=2  convert direction cosinus
 ///
-///  Geant3 desription:                                                     \n
-///  ==================                                                     \n
-///       Computes coordinates XD (in DRS) 
-///       from known coordinates XM in MRS.  
-///       The local reference system can be initialized by
-///         - the tracking routines and GMTOD used in GUSTEP
-///         - a call to GMEDIA(XM,NUMED)
-///         - a call to GLVOLU(NLEVEL,NAMES,NUMBER,IER) 
-///             (inverse routine is GDTOM) 
-///
-///        If IFLAG=1  convert coordinates,                                 \n
-///           IFLAG=2  convert direction cosinus
-///
+ 
 
   G4double* dxm = TG4GeometryServices::Instance()->CreateG4doubleArray(xm, 3);
   G4double* dxd = TG4GeometryServices::Instance()->CreateG4doubleArray(xd, 3);
@@ -535,19 +537,11 @@ void TG4StepManager::Gmtod(Double_t* xm, Double_t* xd, Int_t iflag)
 { 
 /// Transform a position from the world reference frame
 /// to the current volume reference frame.
-///
-///  Geant3 desription:                                                     \n
-///  ==================                                                     \n
-///       Computes coordinates XD (in DRS) 
-///       from known coordinates XM in MRS. 
-///       The local reference system can be initialized by
-///         - the tracking routines and GMTOD used in GUSTEP
-///         - a call to GMEDIA(XM,NUMED)
-///         - a call to GLVOLU(NLEVEL,NAMES,NUMBER,IER) 
-///             (inverse routine is GDTOM) 
-///
-///        If IFLAG=1  convert coordinates,                                 \n
-///           IFLAG=2  convert direction cosinus
+/// \param xm    Known coordinates in the world reference system
+/// \param xd    Computed coordinates in the daughter reference system
+/// \param iflag The option: 
+///              - IFLAG=1  convert coordinates,                                 \n
+///              - IFLAG=2  convert direction cosinus
 ///
 
 #ifdef MCDEBUG
@@ -610,19 +604,11 @@ void TG4StepManager::Gdtom(Float_t* xd, Float_t* xm, Int_t iflag)
 { 
 /// Transform a position from the current volume reference frame
 /// to the world reference frame.
-///
-///  Geant3 desription:                                                     \n
-///  ==================                                                     \n
-///  Computes coordinates XM (Master Reference System)
-///  knowing the coordinates XD (Detector Ref System)
-///  The local reference system can be initialized by
-///    - the tracking routines and GDTOM used in GUSTEP
-///    - a call to GSCMED(NLEVEL,NAMES,NUMBER)
-///        (inverse routine is GMTOD)
-/// 
-///   If IFLAG=1  convert coordinates,                                      \n
-///      IFLAG=2  convert direction cosinus
-///
+/// \param xd    Known coordinates in the daughter reference system
+/// \param xm    Computed coordinates in the world reference system
+/// \param iflag The option: 
+///              - IFLAG=1  convert coordinates,                                 \n
+///              - IFLAG=2  convert direction cosinus
 
 
   G4double* dxd = TG4GeometryServices::Instance()->CreateG4doubleArray(xd, 3);
@@ -644,19 +630,11 @@ void TG4StepManager::Gdtom(Double_t* xd, Double_t* xm, Int_t iflag)
 { 
 /// Transform a position from the current volume reference frame
 /// to the world reference frame.
-///
-///  Geant3 desription:                                                     \n
-///  ==================                                                     \n
-///  Computes coordinates XM (Master Reference System)
-///  knowing the coordinates XD (Detector Ref System)
-///  The local reference system can be initialized by
-///    - the tracking routines and GDTOM used in GUSTEP
-///    - a call to GSCMED(NLEVEL,NAMES,NUMBER)
-///        (inverse routine is GMTOD)
-/// 
-///   If IFLAG=1  convert coordinates,                                      \n
-///      IFLAG=2  convert direction cosinus
-///
+/// \param xd    Known coordinates in the daughter reference system
+/// \param xm    Computed coordinates in the world reference system
+/// \param iflag The option: 
+///              - IFLAG=1  convert coordinates,                                 \n
+///              - IFLAG=2  convert direction cosinus
 
   G4AffineTransform affineTransform;
 
@@ -748,9 +726,9 @@ Int_t TG4StepManager::GetMaxNStep() const
 //_____________________________________________________________________________
 void TG4StepManager::TrackPosition(TLorentzVector& position) const
 { 
-/// The current particle position (in the world reference frame)
+/// Fill the current particle position in the world reference frame
 /// and the local time since the current track is created
-/// (position of the PostStepPoint).
+/// (position in the PostStepPoint).
 
 #ifdef MCDEBUG
   CheckTrack();
@@ -771,9 +749,9 @@ void TG4StepManager::TrackPosition(TLorentzVector& position) const
 //_____________________________________________________________________________
 void TG4StepManager::TrackPosition(Double_t& x, Double_t& y, Double_t& z) const
 { 
-/// The current particle position (in the world reference frame)
-/// and the local time since the current track is created
-/// (position of the PostStepPoint).
+/// Fill the current particle position in the world reference frame
+/// (position in the PostStepPoint).
+
 
 #ifdef MCDEBUG
   CheckTrack();
@@ -796,7 +774,7 @@ void TG4StepManager::TrackPosition(Double_t& x, Double_t& y, Double_t& z) const
 //_____________________________________________________________________________
 void TG4StepManager::TrackMomentum(TLorentzVector& momentum) const
 {  
-/// The current particle "momentum" (px, py, pz, Etot).
+/// Fill the current particle momentum (px, py, pz, Etot) 
 
 #ifdef MCDEBUG
   CheckTrack();
@@ -815,7 +793,7 @@ void TG4StepManager::TrackMomentum(TLorentzVector& momentum) const
 void TG4StepManager::TrackMomentum(Double_t& px, Double_t& py, Double_t&pz,
                                    Double_t& etot) const
 {  
-/// The current particle "momentum" (px, py, pz, Etot).
+/// Fill the current particle momentum
 
 #ifdef MCDEBUG
   CheckTrack();
@@ -835,7 +813,7 @@ void TG4StepManager::TrackMomentum(Double_t& px, Double_t& py, Double_t&pz,
 //_____________________________________________________________________________
 void TG4StepManager::TrackVertexPosition(TLorentzVector& position) const
 { 
-/// The vertex particle position (in the world reference frame)
+/// Fill the vertex particle position (in the world reference frame)
 /// and the local time since the current track is created.
 
 #ifdef MCDEBUG
@@ -857,7 +835,7 @@ void TG4StepManager::TrackVertexPosition(TLorentzVector& position) const
 //_____________________________________________________________________________
 void TG4StepManager::TrackVertexMomentum(TLorentzVector& momentum) const
 {  
-/// The vertex particle "momentum" (px, py, pz, Ekin)                        \n
+/// Fill the vertex particle momentum (px, py, pz, Ekin)
 /// TO DO: change Ekin -> Etot 
 
 #ifdef MCDEBUG
@@ -912,8 +890,7 @@ Double_t TG4StepManager::TrackLength() const
 Double_t TG4StepManager::TrackTime() const
 {
 /// Return the local time since the current track is created.               \n
-/// Comment:
-/// in Geant4: there is also defined proper time as
+/// Note that in Geant4: there is also defined proper time as
 /// the proper time of the dynamical particle of the current track.
 
 #ifdef MCDEBUG
@@ -1199,9 +1176,12 @@ Int_t TG4StepManager::NSecondaries() const
 void TG4StepManager::GetSecondary(Int_t index, Int_t& particleId, 
                           TLorentzVector& position, TLorentzVector& momentum)
 {
-/// Fill the parameters (particle encoding, position, momentum)
-/// of the generated secondary particle which is specified by index.         \n
+/// Fill the parameters of the generated secondary particle 
 /// !! Check if indexing of secondaries is same !!
+/// \param index      The secondary particle index
+/// \param particleId The PDG encoding
+/// \param position   The position 
+/// \param momentum   The momentum 
 
 #ifdef MCDEBUG
   CheckSteppingManager();
@@ -1251,8 +1231,8 @@ void TG4StepManager::GetSecondary(Int_t index, Int_t& particleId,
 //_____________________________________________________________________________
 TMCProcess TG4StepManager::ProdProcess(Int_t isec) const
 {
-/// Return the process that has produced the secondary particles specified 
-/// with isec index in the current step.
+/// Return the VMC code of the process that has produced the secondary particle
+/// specified by its index
 
   G4int nofSecondaries = NSecondaries();
   if (fStepStatus == kVertex || !nofSecondaries) return kPNoProcess;
@@ -1303,9 +1283,10 @@ TMCProcess TG4StepManager::ProdProcess(Int_t isec) const
 //_____________________________________________________________________________
 Int_t TG4StepManager::StepProcesses(TArrayI& processes) const
 {
-/// Fill the array of processes that were active in the current step
-/// and returns the number of them.                                          \n
-/// TBD: Distinguish between kPDeltaRay and kPEnergyLoss
+/// Fill the array of processes that were active in the current step.
+/// The array is filled with the process VMC codes (TMCProcess).
+/// Return the number of active processes    
+/// (TBD: Distinguish between kPDeltaRay and kPEnergyLoss)
 
  if ( fStepStatus == kVertex || fStepStatus == kBoundary) {
    G4int nofProcesses = 1;

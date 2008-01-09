@@ -1,3 +1,6 @@
+#ifndef TG4_G3_CONTROL_VECTOR_H
+#define TG4_G3_CONTROL_VECTOR_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,14 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup global
-/// \class TG4G3ControlVector
-/// \brief Vector of control process values with convenient set/get methods.
+/// \file TG4G3ControlVector.h
+/// \brief Definition of the TG4G3ControlVector class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_G3_CONTROL_VECTOR_H
-#define TG4_G3_CONTROL_VECTOR_H
 
 #include "TG4Globals.h"
 #include "TG4G3Control.h"
@@ -27,9 +26,16 @@ class TG4G3CutVector;
 
 class G4VProcess;
 
+/// \ingroup global
+/// \brief Vector of control process values with convenient set/get methods.
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
 class TG4G3ControlVector
 {
-  typedef std::vector<TG4G3ControlValue> TG4ControlValueVector;
+  public:
+    /// The vector of TG4G3ControlValue
+    typedef std::vector<TG4G3ControlValue> TG4ControlValueVector;
 
   public:
     TG4G3ControlVector();
@@ -67,12 +73,17 @@ class TG4G3ControlVector
     // static methods 
     static void FillControlNameVector();
   
+    //
     // static data members
-    static TG4StringVector  fgControlNameVector; //vector of control parameters
-                                                 //names
 
+    /// vector of control parameters names                                    
+    static TG4StringVector  fgControlNameVector;
+
+    //
     // data members
-    TG4ControlValueVector   fControlVector; //vector of control process values
+    
+    /// vector of control process values
+    TG4ControlValueVector   fControlVector;
 };
 
 #endif //TG4_G3_CONTROL_VECTOR_H

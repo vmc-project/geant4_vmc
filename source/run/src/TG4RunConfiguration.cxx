@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: run
-// Class TG4RunConfiguration
-// --------------------------
-// See the class description in the header file.
+/// \file TG4RunConfiguration.cxx
+/// \brief Implementation of the TG4RunConfiguration class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4RunConfiguration.h"
 #include "TG4DetConstruction.h"
@@ -107,8 +107,10 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
 }
 
 //_____________________________________________________________________________
-TG4RunConfiguration::~TG4RunConfiguration(){
-//
+TG4RunConfiguration::~TG4RunConfiguration()
+{
+/// Destructor
+
   delete TG4LVTree::Instance();
   delete fAGDDMessenger;
   delete fGDMLMessenger;

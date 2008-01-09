@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4EmPhysicsList
-// ---------------------------
-// See the class description in the header file.
+/// \file TG4EmPhysicsList.cxx
+/// \brief Implementation of the TG4EmPhysicsList class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4EmPhysicsList.h"
 
@@ -30,7 +30,8 @@ TG4EmPhysicsList::TG4EmPhysicsList()
   : G4VModularPhysicsList(),
     TG4Verbose("emPhysicsList")
  {
-//
+/// Default constructor
+
   Configure();
 
   defaultCutValue = fgkDefaultCutValue;
@@ -39,8 +40,10 @@ TG4EmPhysicsList::TG4EmPhysicsList()
 }
 
 //_____________________________________________________________________________
-TG4EmPhysicsList::~TG4EmPhysicsList() {
-//
+TG4EmPhysicsList::~TG4EmPhysicsList() 
+{
+/// Destructor
+
   //delete fExtDecayer;
        // fExtDecayer is deleted in G4Decay destructor
 }

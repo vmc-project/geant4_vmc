@@ -1,3 +1,6 @@
+#ifndef TG4_GUI_VOLUME_H
+#define TG4_GUI_VOLUME_H
+ 
 // $Id$
 
 //------------------------------------------------
@@ -9,26 +12,26 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup interfaces
-/// \class TG4GuiVolume
-/// \brief Creating link for logical volume tree in geometry
+/// \file TG4GuiVolume.h
+/// \brief Definition of the TG4GuiVolume class 
 ///
-/// \author: D. Adamova, NPI Rez
+/// \author D. Adamova, NPI Rez
 
-#ifndef TG4_GUI_VOLUME_H
-#define TG4_GUI_VOLUME_H
- 
 #include <TObject.h>
 #include <TGListTree.h>
  
 class G4LogicalVolume;
 
+/// \ingroup interfaces
+/// \brief Creating link for logical volume tree in geometry
+///
+/// \author: D. Adamova, NPI Rez
 
 class TG4GuiVolume : public TObject 
 {
 public:
     TG4GuiVolume(const char* name, G4LogicalVolume* lvolume);
-    virtual ~TG4GuiVolume(){;}
+    virtual ~TG4GuiVolume();
 
     G4LogicalVolume* GetLogicalVolume() const;
     TGListTreeItem* GetItem() const;
@@ -37,11 +40,13 @@ public:
     void  SetItem(TGListTreeItem* item);
     
 private:      
+    /// Not implemented
     TG4GuiVolume(const TG4GuiVolume& gv) ;
+    /// Not implemented
     TG4GuiVolume & operator=(const TG4GuiVolume& gv) ;
 
-    G4LogicalVolume*  fLogicalVolume;    // geant logical volume 
-    TGListTreeItem*   fItem; // current item
+    G4LogicalVolume*  fLogicalVolume; ///< geant logical volume 
+    TGListTreeItem*   fItem; ///< current item
 
     ClassDef(TG4GuiVolume,0)   
 };

@@ -1,3 +1,6 @@
+#ifndef TG4_STATE_MANAGER_H
+#define TG4_STATE_MANAGER_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,14 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup geometry
-/// \class TG4StateManager
-/// \brief The manager class for application state
+/// \file TG4StateManager.h
+/// \brief Definition of the TG4StateManager class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_STATE_MANAGER_H
-#define TG4_STATE_MANAGER_H
 
 #include "TG4ApplicationState.h"
 #include "TG4Verbose.h"
@@ -24,6 +23,11 @@
 #include "globals.hh"
 
 class TG4StateManager;
+
+/// \ingroup geometry
+/// \brief The manager class for application state
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4StateManager : public TG4Verbose
 {
@@ -41,15 +45,17 @@ class TG4StateManager : public TG4Verbose
     TG4ApplicationState GetPreviousState() const;
      
   private:
+    /// Not implemented
     TG4StateManager(const TG4StateManager& right);
+    /// Not implemented
     TG4StateManager& operator=(const TG4StateManager& right);
 
     // static data members
-    static TG4StateManager* fgInstance;
+    static TG4StateManager* fgInstance; ///< this instance
 
     // data members
-    TG4ApplicationState  fCurrentState;  
-    TG4ApplicationState  fPreviousState; 
+    TG4ApplicationState  fCurrentState; ///< the current application state 
+    TG4ApplicationState  fPreviousState;///< the previous application state
 };
 
 // inline methods

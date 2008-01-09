@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4SpecialPhysicsList
-// ----------------------------
-// See the class description in the header file.
+/// \file TG4SpecialPhysicsList.cxx
+/// \brief Implementation of the TG4SpecialPhysicsList class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SpecialPhysicsList.h"
 #include "TG4SpecialCutsPhysics.h"
@@ -33,6 +33,10 @@
 #include <G4ProcessTable.hh>
 
 TG4SpecialPhysicsList* TG4SpecialPhysicsList::fgInstance = 0;
+
+//
+// static methods
+//
 
 //_____________________________________________________________________________
 G4String TG4SpecialPhysicsList::AvailableSelections()
@@ -64,6 +68,10 @@ G4bool TG4SpecialPhysicsList::IsAvailableSelection(const G4String& selection)
   return true;
 }  
 
+//
+// ctors, dtor
+//
+
 //_____________________________________________________________________________
 TG4SpecialPhysicsList::TG4SpecialPhysicsList(const G4String& selection)
   : G4VModularPhysicsList(),
@@ -72,8 +80,9 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList(const G4String& selection)
     fStackPopperPhysics(0),
     fIsSpecialControls(false),
     fIsSpecialCuts(false)
- {
-//
+{
+/// Standard constructor
+
   if (fgInstance) {
     TG4Globals::Exception(
       "TG4SpecialPhysicsList", "TG4SpecialPhysicsList",
@@ -94,16 +103,19 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList()
     fStackPopperPhysics(0),
     fIsSpecialControls(false),
     fIsSpecialCuts(false)
- {
-//
+{
+/// Default constructor
+
   Configure("");
 
   SetVerboseLevel(TG4VVerbose::VerboseLevel());
 }
 
 //_____________________________________________________________________________
-TG4SpecialPhysicsList::~TG4SpecialPhysicsList() {
-//
+TG4SpecialPhysicsList::~TG4SpecialPhysicsList() 
+{
+/// Destructor
+
   //delete fExtDecayer;
        // fExtDecayer is deleted in G4Decay destructor
 

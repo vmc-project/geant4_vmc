@@ -1,3 +1,6 @@
+#ifndef TG4_EVENT_ACTION_MESSENGER_H
+#define TG4_EVENT_ACTION_MESSENGER_H 
+
 // $Id$
 
 //------------------------------------------------
@@ -9,17 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup event
-/// \class TG4EventActionMessenger
-/// \brief Messenger class that defines commands for TG4EventAction.
-///
-/// Implements command
-/// - /mcEvent/drawTracks [NONE, CHARGED, ALL]
+/// \file TG4EventActionMessenger.h
+/// \brief Definition of the TG4EventActionMessenger class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_EVENT_ACTION_MESSENGER_H
-#define TG4_EVENT_ACTION_MESSENGER_H 
 
 #include <G4UImessenger.hh>
 
@@ -28,6 +24,14 @@ class TG4EventAction;
 class G4UIdirectory;
 class G4UIcmdWithAString;
 class G4UIcmdWithAnInteger;
+
+/// \ingroup event
+/// \brief Messenger class that defines commands for TG4EventAction.
+///
+/// Implements command
+/// - /mcEvent/drawTracks [NONE, CHARGED, ALL]
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4EventActionMessenger: public G4UImessenger
 {
@@ -39,15 +43,18 @@ class TG4EventActionMessenger: public G4UImessenger
     virtual void SetNewValue(G4UIcommand* command, G4String string);
     
   private:
+    /// Not implemented
     TG4EventActionMessenger();
+    /// Not implemented
     TG4EventActionMessenger(const TG4EventActionMessenger& right);
+    /// Not implemented
     TG4EventActionMessenger& operator=(
                             const TG4EventActionMessenger& right);
 
     // data members
-    TG4EventAction*        fEventAction;    //associated class
-    G4UIdirectory*         fEventDirectory; //command directory
-    G4UIcmdWithAString*    fDrawTracksCmd;  //command: drawTracks
+    TG4EventAction*        fEventAction;    ///< associated class
+    G4UIdirectory*         fEventDirectory; ///< command directory
+    G4UIcmdWithAString*    fDrawTracksCmd;  ///< command: drawTracks
 };
 
 #endif //TG4_EVENT_ACTION_MESSENGER_H

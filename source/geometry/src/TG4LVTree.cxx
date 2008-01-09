@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: geometry
-// Class TG4LVTree
-// ---------------------------
-// See the class description in the header file.
+/// \file TG4LVTree.cxx
+/// \brief Implementation of the TG4LVTree class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4LVTree.h"
 #include "TG4Globals.h"

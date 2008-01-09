@@ -1,3 +1,6 @@
+#ifndef TG4_SPECIAL_CUTS_PHYSICS_H
+#define TG4_SPECIAL_CUTS_PHYSICS_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,14 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics_list
-/// \class TG4SpecialCutsPhysics
-/// \brief The builder for special cuts process.
+/// \file TG4SpecialCutsPhysics.h
+/// \brief Definition of the TG4SpecialCutsPhysics class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_SPECIAL_CUTS_PHYSICS_H
-#define TG4_SPECIAL_CUTS_PHYSICS_H
 
 #include "TG4VPhysicsConstructor.h"
 
@@ -30,6 +29,10 @@ class TG4SpecialCutsForNeutralHadron;
 class TG4SpecialCutsForMuon;
 class TG4SpecialCutsForOther;
 
+/// \ingroup physics_list
+/// \brief The builder for special cuts process.
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4SpecialCutsPhysics: public TG4VPhysicsConstructor
 {
@@ -46,16 +49,33 @@ class TG4SpecialCutsPhysics: public TG4VPhysicsConstructor
     virtual void ConstructProcess();
     
   private:
+    /// Not implemented
     TG4SpecialCutsPhysics(const TG4SpecialCutsPhysics& right);
+    /// Not implemented
     TG4SpecialCutsPhysics& operator=(const TG4SpecialCutsPhysics& right);
 
+    //
     // data members
+    
+    /// the special cuts process for gamma
     TG4SpecialCutsForGamma*          fSpecialCutsForGamma;
+    
+    /// the special cuts process for e-
     TG4SpecialCutsForElectron*       fSpecialCutsForElectron;
+    
+    /// the special cuts process for e+ 
     TG4SpecialCutsForEplus*          fSpecialCutsForEplus;
+    
+    /// the special cuts process for charged hadron
     TG4SpecialCutsForChargedHadron*  fSpecialCutsForChargedHadron;
+    
+    /// the special cuts process for neutral hadron
     TG4SpecialCutsForNeutralHadron*  fSpecialCutsForNeutralHadron;
-    TG4SpecialCutsForMuon*           fSpecialCutsForMuon;
+    
+    /// the special cuts process for muon
+    TG4SpecialCutsForMuon*           fSpecialCutsForMuon; 
+    
+    /// the special cuts process for other particles
     TG4SpecialCutsForOther*          fSpecialCutsForOther;
 };
 

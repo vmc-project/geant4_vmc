@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics
-// Class TG4StackPopper
-// ---------------------
-// See the class description in the header file.
+/// \file TG4StackPopper.cxx
+/// \brief Implementation of the TG4StackPopper class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4StackPopper.h"
 #include "TG4ParticlesManager.h"
@@ -34,7 +34,8 @@ TG4StackPopper::TG4StackPopper(const G4String& processName)
   : G4VContinuousProcess(processName, fUserDefined),
     fNofDoneTracks(0)
 {
-//
+/// Standard constructor
+
   if (fgInstance) { 
     TG4Globals::Exception(
       "TG4StackPopper", "TG4StackPopper", 
@@ -45,8 +46,10 @@ TG4StackPopper::TG4StackPopper(const G4String& processName)
 }
 
 //_____________________________________________________________________________
-TG4StackPopper::~TG4StackPopper() {
-//
+TG4StackPopper::~TG4StackPopper() 
+{
+/// Destructor
+
   fgInstance = 0;
 }
 

@@ -1,3 +1,6 @@
+#ifndef TG4_SPECIAL_CONTROLS_PHYSICS_H
+#define TG4_SPECIAL_CONTROLS_PHYSICS_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,20 +12,21 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics_list
-/// \class TG4SpecialControlsPhysics
-/// \brief The builder for special controls process.
+/// \file TG4SpecialControlsPhysics.h
+/// \brief Definition of the TG4SpecialControlsPhysics class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_SPECIAL_CONTROLS_PHYSICS_H
-#define TG4_SPECIAL_CONTROLS_PHYSICS_H
 
 #include "TG4VPhysicsConstructor.h"
 
 #include <globals.hh>
 
 class TG4SpecialControls;
+
+/// \ingroup physics_list
+/// \brief The builder for special controls process.
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4SpecialControlsPhysics: public TG4VPhysicsConstructor
 {
@@ -42,7 +46,7 @@ class TG4SpecialControlsPhysics: public TG4VPhysicsConstructor
 
   private:
     // data members
-    TG4SpecialControls*  fSpecialControls;
+    TG4SpecialControls*  fSpecialControls; ///< the special controls process
 };
 
 #endif //TG4_SPECIAL_CONTROLS_PHYSICS_H

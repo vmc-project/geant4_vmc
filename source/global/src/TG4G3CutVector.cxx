@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: global
-// Class TG4G3CutVector
-// --------------------
-// See the class description in the header file.
+/// \file TG4G3CutVector.cxx
+/// \brief Implementation of the TG4G3CutVector class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4G3CutVector.h"
 #include "TG4G3Defaults.h"
@@ -37,6 +37,8 @@ TG4G3CutVector::TG4G3CutVector()
   : fCutVector(),
     fDeltaRaysOn(true)
 {
+/// Default constructor
+
   // fill name vector
   if (fgCutNameVector.size() == 0) FillCutNameVector(); 
 
@@ -50,13 +52,16 @@ TG4G3CutVector::TG4G3CutVector(const TG4G3CutVector& right)
   : fCutVector(right.fCutVector.size()),
     fDeltaRaysOn(right.fDeltaRaysOn)
 {
-  // copy stuff
+/// Copy constructor
+
+ // copy stuff
   *this = right;
 }
 
 //_____________________________________________________________________________
-TG4G3CutVector::~TG4G3CutVector() {
-//
+TG4G3CutVector::~TG4G3CutVector() 
+{
+/// Destructor
 }
 
 //
@@ -66,6 +71,8 @@ TG4G3CutVector::~TG4G3CutVector() {
 //_____________________________________________________________________________
 TG4G3CutVector& TG4G3CutVector::operator=(const TG4G3CutVector& right)
 {
+/// Assignment operator
+
   // check assignement to self
   if (this == &right) return *this;
 
@@ -80,7 +87,8 @@ TG4G3CutVector& TG4G3CutVector::operator=(const TG4G3CutVector& right)
 //_____________________________________________________________________________
 G4double TG4G3CutVector::operator[](G4int index) const 
 {
-//
+/// Element access operator 
+
   if (index < kNoG3Cuts)
     return fCutVector[index];
   else {

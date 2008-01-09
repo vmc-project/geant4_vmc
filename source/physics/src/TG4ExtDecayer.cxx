@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics
-// Class TG4ExtDecayer
-// -------------------
-// See the class description in the header file.
+/// \file TG4ExtDecayer.cxx
+/// \brief Implementation of the TG4ExtDecayer class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4ExtDecayer.h"
 #include "TG4ParticlesManager.h"
@@ -40,13 +40,16 @@ TG4ExtDecayer::TG4ExtDecayer(TVirtualMCDecayer* externalDecayer)
     fExternalDecayer(externalDecayer),
     fDecayProductsArray(0)
 {
-//
+/// Standard constructor
+
   fDecayProductsArray = new  TClonesArray("TParticle", 1000);
 }
 
 //_____________________________________________________________________________
-TG4ExtDecayer::~TG4ExtDecayer() {
-//
+TG4ExtDecayer::~TG4ExtDecayer() 
+{
+/// Destructor
+
   delete fDecayProductsArray;
 }
 

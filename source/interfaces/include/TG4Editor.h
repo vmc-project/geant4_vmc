@@ -1,3 +1,6 @@
+#ifndef TG4_EDITOR_H
+#define TG4_EDITOR_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,20 +12,22 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup interfaces
-/// \class TG4Editor
-/// \brief A supplementary service class for Geant4 VMC Geometry Browser
+/// \file TG4Editor.h
+/// \brief Definition of the TG4Editor class 
 ///
-/// \author: D. Adamova, NPI Rez
-
-#ifndef TG4_EDITOR_H
-#define TG4_EDITOR_H
+/// \author D. Adamova, NPI Rez
 
 #include <TGFrame.h> 
 
 class TGTextEdit;
 class TGTextButton;
 class TGLayoutHints;
+
+/// \ingroup interfaces
+/// \class TG4Editor
+/// \brief A supplementary service class for Geant4 VMC Geometry Browser
+///
+/// \author: D. Adamova, NPI Rez
 
 class TG4Editor : public TGTransientFrame {
  
@@ -39,15 +44,17 @@ public:
    TGTextEdit* GetEditor() const;
 
 private:
+   /// Not implemented
    TG4Editor(const TG4Editor& ge); 
+   /// Not implemented
    TG4Editor& operator=(const TG4Editor& ge) ;
 
-   TGTextEdit*       fEdit;   // text edit widget
-   TGTextButton*     fOK;     // OK button
-   TGLayoutHints*    fL1;     // layout of TGTextEdit
-   TGLayoutHints*    fL2;     // layout of OK button
+   TGTextEdit*       fEdit;   ///< text edit widget
+   TGTextButton*     fOK;     ///< OK button
+   TGLayoutHints*    fL1;     ///< layout of TGTextEdit
+   TGLayoutHints*    fL2;     ///< layout of OK button
    
-   ClassDef(TG4Editor,0)   // service Editor window for GUI
+   ClassDef(TG4Editor,0) // service Editor window for GUI
 };
 
 // inline methods

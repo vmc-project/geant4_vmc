@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: geometry
-// Class TG4LVTreeMessenger
-// ------------------------------------
-// See the class description in the header file.
+/// \file TG4LVTreeMessenger.cxx
+/// \brief Implementation of the TG4LVTreeMessenger class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4LVTreeMessenger.h"
 #include "TG4LVTree.h"
@@ -113,7 +113,8 @@ TG4LVTreeMessenger::TG4LVTreeMessenger(TG4LVTree* lvTree)
 //_____________________________________________________________________________
 TG4LVTreeMessenger::~TG4LVTreeMessenger()
 {
-//
+/// Destructor
+
   delete fDirectory;
   delete fSetCurrentLVCmd;
   delete fListCmd;

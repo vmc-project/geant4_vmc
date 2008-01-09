@@ -1,3 +1,6 @@
+#ifndef TG4_G3_PHYSICS_MANAGER_H
+#define TG4_G3_PHYSICS_MANAGER_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,21 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics
-/// \class TG4G3PhysicsManager
-/// \brief Provides a Geant3 way control to Geant4 physics. 
-///
-/// The G3 cuts and process controls are
-/// stored in fCutVector and fControlVector vectors.
-/// These special cuts/controls are activated 
-/// by registering their physics constructors
-/// (TG4PhysicsConstructorSpecialCuts, TG4PhysicsConstructorSpecialControl)
-/// to the physics list.
+/// \file TG4G3PhysicsManager.h
+/// \brief Definition of the TG4G3PhysicsManager class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_G3_PHYSICS_MANAGER_H
-#define TG4_G3_PHYSICS_MANAGER_H
 
 #include "TG4Globals.h"
 #include "TG4G3Defaults.h"
@@ -40,6 +32,18 @@ class TG4G3ControlVector;
 
 class G4ParticleDefinition;
 class G4VProcess;
+
+/// \ingroup physics
+/// \brief Provides a Geant3 way control to Geant4 physics. 
+///
+/// The G3 cuts and process controls are
+/// stored in fCutVector and fControlVector vectors.
+/// These special cuts/controls are activated 
+/// by registering their physics constructors
+/// (TG4PhysicsConstructorSpecialCuts, TG4PhysicsConstructorSpecialControl)
+/// to the physics list.
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4G3PhysicsManager
 {
@@ -78,7 +82,9 @@ class TG4G3PhysicsManager
     G4String GetG3ParticleWSPName(G4int particleWSP) const;
     
   private:
+    /// Not implemented
     TG4G3PhysicsManager(const TG4G3PhysicsManager& right);
+    /// Not implemented
     TG4G3PhysicsManager& operator=(const TG4G3PhysicsManager& right);
 
     // methods
@@ -92,15 +98,28 @@ class TG4G3PhysicsManager
     void SwitchIsControlVector(TG4G3Control control);
 
     // static data members
-    static TG4G3PhysicsManager*  fgInstance; //this instance
+    static TG4G3PhysicsManager*  fgInstance; ///< this instance
 
+    //
     // data members
-    TG4G3CutVector*      fCutVector;    //TG4CutVector  
-    TG4G3ControlVector*  fControlVector;//TG4ControlVector
-    TG4boolVector*    fIsCutVector;     //vector of booleans which cuts are set
-    TG4boolVector*    fIsControlVector; //vector of booleans which controls are set
-    TG4G3Defaults     fG3Defaults;      // G3 default cuts/controls                                          
-    G4bool            fLock;  //if true: cut/control vectors cannot be modified
+    
+    /// TG4G3CutVector  
+    TG4G3CutVector*      fCutVector;
+    
+    /// TG4G3ControlVector    
+    TG4G3ControlVector*  fControlVector;
+    
+    /// vector of booleans which cuts are set
+    TG4boolVector*       fIsCutVector;
+    
+    /// vector of booleans which controls are set
+    TG4boolVector*       fIsControlVector;
+    
+    /// G3 default cuts/controls
+    TG4G3Defaults        fG3Defaults;
+    
+    /// if true: cut/control vectors cannot be modified
+    G4bool               fLock;
 };
 
 // inline methods

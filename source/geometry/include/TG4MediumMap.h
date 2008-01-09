@@ -1,3 +1,6 @@
+#ifndef TG4_MEDIUM_MAP_H
+#define TG4_MEDIUM_MAP_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,14 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup geometry
-/// \class TG4MediumMap
-/// \brief The map of media to logical volumes
-/// 
+/// \file TG4MediumMap.h
+/// \brief Definition of the TG4MediumMap class 
+///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_MEDIUM_MAP_H
-#define TG4_MEDIUM_MAP_H
 
 #include "globals.hh"
 
@@ -26,6 +25,11 @@ class TG4Medium;
 
 class G4LogicalVolume;
 class G4UserLimits;
+
+/// \ingroup geometry
+/// \brief The map of media to logical volumes
+/// 
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4MediumMap
 {
@@ -45,14 +49,20 @@ class TG4MediumMap
     TG4Medium*  GetMedium(G4LogicalVolume* lv, G4bool warn = true) const;
     TG4Medium*  GetMedium(const G4String& name, G4bool warn = true) const;
 
-  protected:
+  private:
+    /// Not implemented
     TG4MediumMap(const TG4MediumMap& right);
+    /// Not implemented
     TG4MediumMap& operator=(const TG4MediumMap& right);
 
-  private:
+    //
     // data members
-    std::map<G4int, TG4Medium*>            fIdMap; // map of medias to their IDs
-    std::map<G4LogicalVolume*, TG4Medium*> fLVMap; // map of medias to logical volumes
+    
+    /// map of medias to their IDs
+    std::map<G4int, TG4Medium*>            fIdMap;
+    
+    /// map of medias to the logical volumes
+    std::map<G4LogicalVolume*, TG4Medium*> fLVMap;
 };
 
 

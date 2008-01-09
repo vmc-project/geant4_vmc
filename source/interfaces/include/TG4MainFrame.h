@@ -1,3 +1,6 @@
+#ifndef TG4_MAIN_FRAME_H
+#define TG4_MAIN_FRAME_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,14 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup interfaces
-/// \class TG4MainFrame
-/// \brief Main Window for the Geant4 VMC Geometry Browser
+/// \file TG4MainFrame.h
+/// \brief Definition of the TG4MainFrame class 
 ///
-/// \author: D. Adamova, NPI Rez
-
-#ifndef TG4_MAIN_FRAME_H
-#define TG4_MAIN_FRAME_H
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <TGFrame.h>
 
@@ -29,6 +28,10 @@ class TGTab;
 class TGMenuBar;
 class TGPopupMenu;
 
+/// \ingroup interfaces
+/// \brief Main Window for the Geant4 VMC Geometry Browser
+///
+/// \author: D. Adamova, NPI Rez
 
 class TG4MainFrame : public TGMainFrame {
 
@@ -43,29 +46,50 @@ public:
 
      void CloseWindow();                                                
      Bool_t ProcessMessage(Long_t msg, Long_t parm1, Long_t parm2);
-//---------------------------------------------------------------------------
 
 private:
+    /// Not implemented
     TG4MainFrame(const TG4MainFrame& mf);                     
+    /// Not implemented
     TG4MainFrame& operator=(const TG4MainFrame& mf);
 
-    TGMenuBar*          fMenuBar;          // main menu bar   
+    //
+    // data members
 
-    TGPopupMenu*        fPopupMenu;     // popup for window manipulations
-    TGPopupMenu*        fPopupMenuTest; // popup for test messages
-    TGPopupMenu*        fPopupMenuHelp; // popup for help messages
+    /// main menu bar 
+    TGMenuBar*          fMenuBar;
 
-    TGLayoutHints*      fMenuBarItemLayout;// layout left
-    TGLayoutHints*      fMenuBarHelpLayout;// layout right
-    TGLayoutHints*      fMenuBarLayout;    // main bar layout 
+    /// popup for window manipulations
+    TGPopupMenu*        fPopupMenu;
     
-    TGTab*      fTab;           // tab widget
+    /// popup for test messages
+    TGPopupMenu*        fPopupMenuTest;
     
-    TG4VolumesFrames*   fvolumesFrames;   // service class for adding vols subframes 
-    TG4MaterialsFrames* fmaterialsFrames; // service class for adding mats subframes 
-    TG4ListTreeFrame*   flistTreeFrame;          // service class for volumes list tree                
+    /// popup for help messages
+    TGPopupMenu*        fPopupMenuHelp;
 
-    ClassDef(TG4MainFrame,0)  // the main frame for the TG4 Browser  
+    /// layout left
+    TGLayoutHints*      fMenuBarItemLayout;
+
+    /// layout right
+    TGLayoutHints*      fMenuBarHelpLayout;
+
+    /// main bar layout 
+    TGLayoutHints*      fMenuBarLayout;
+
+    /// tab widget    
+    TGTab*              fTab;
+    
+    /// service class for adding vols subframes 
+    TG4VolumesFrames*   fvolumesFrames;
+    
+    /// service class for adding mats subframes 
+    TG4MaterialsFrames* fmaterialsFrames;
+    
+    /// service class for volumes list tree                    
+    TG4ListTreeFrame*   flistTreeFrame;
+
+    ClassDef(TG4MainFrame,0) // the main frame for the TG4 Browser  
   };
   
 //

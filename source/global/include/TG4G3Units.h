@@ -1,3 +1,6 @@
+#ifndef TG4_G3_UNITS_H
+#define TG4_G3_UNITS_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,18 +12,19 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
+/// \file TG4G3Units.h
+/// \brief Definition of the TG4G3Units class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
+#include <globals.hh>
+
 /// \ingroup global
-/// \class TG4G3Units
 /// \brief G3 default units of physical quantities; 
 ///
 /// All physical quantities returned by VMC are expressed in these units.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_G3_UNITS_H
-#define TG4_G3_UNITS_H
-
-#include <globals.hh>
 
 class TG4G3Units
 {
@@ -42,15 +46,15 @@ class TG4G3Units
     TG4G3Units();      
 
     // static data members  
-    static const G4double fgkLength;       //G3 length unit 
-    static const G4double fgkAngle;        //G3 angle unit 
-    static const G4double fgkTime;         //G3 time unit 
-    static const G4double fgkCharge;       //G3 charge unit  
-    static const G4double fgkEnergy;       //G3 energy unit  
-    static const G4double fgkMass;         //G3 mass unit
-    static const G4double fgkMassDensity;  //G3 mass density unit 
-    static const G4double fgkAtomicWeight; //G3 atomic weight unit  
-    static const G4double fgkField;        //G3 magnetic field unit 
+    static const G4double fgkLength;       ///< G3 length unit 
+    static const G4double fgkAngle;        ///< G3 angle unit 
+    static const G4double fgkTime;         ///< G3 time unit 
+    static const G4double fgkCharge;       ///< G3 charge unit  
+    static const G4double fgkEnergy;       ///< G3 energy unit  
+    static const G4double fgkMass;         ///< G3 mass unit
+    static const G4double fgkMassDensity;  ///< G3 mass density unit 
+    static const G4double fgkAtomicWeight; ///< G3 atomic weight unit  
+    static const G4double fgkField;        ///< G3 magnetic field unit 
 };     
 
 // inline methods

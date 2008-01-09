@@ -1,3 +1,6 @@
+#ifndef TG4_NAME_MAP_H
+#define TG4_NAME_MAP_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,8 +12,15 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
+/// \file TG4NameMap.h
+/// \brief Definition of the TG4NameMap class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
+#include <map>
+#include <globals.hh>
+
 /// \ingroup global
-/// \class TG4NameMap
 /// \brief The map container for associated names. 
 ///
 /// The names can be added into map either in pairs (Add() method)
@@ -19,17 +29,17 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#ifndef TG4_NAME_MAP_H
-#define TG4_NAME_MAP_H
-
-#include <map>
-#include <globals.hh>
-
 class TG4NameMap
 {
-  typedef std::map<G4String, G4String, std::less<G4String> >  Map;
-  typedef Map::iterator        MapIterator;
-  typedef Map::const_iterator  MapConstIterator;
+  public:
+    /// The map of strings to strings
+    typedef std::map<G4String, G4String, std::less<G4String> >  Map;
+
+    /// The iterator for the map of strings to strings
+    typedef Map::iterator  MapIterator;
+
+    /// The constant iterator for the map of strings to strings
+    typedef Map::const_iterator  MapConstIterator;
 
   public:
     TG4NameMap();
@@ -48,16 +58,18 @@ class TG4NameMap
     void SetSecond(const G4String& name);
 
   private:
+    /// Not implemented
     TG4NameMap(const TG4NameMap& right);
+    /// Not implemented
     TG4NameMap& operator=(const TG4NameMap& right);
   
     // static data members
-    static G4String fgUndefined;  //the value of undefined second
+    static G4String fgUndefined; ///< the value of undefined second
 
     // data members
-    Map       fMap;        //map container
-    Map       fInverseMap; //inverse map container
-    G4String  fSecond;     //the current second
+    Map       fMap;        ///< map container
+    Map       fInverseMap; ///< inverse map container
+    G4String  fSecond;     ///< the current second
 };
 
 // inline methods

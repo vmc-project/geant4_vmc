@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4HadronPhysicsList
-// ---------------------------
-// See the class description in the header file.
+/// \file TG4HadronPhysicsList.cxx
+/// \brief Implementation of the TG4HadronPhysicsList class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4HadronPhysicsList.h"
 
@@ -43,6 +43,10 @@
 #include <QGSP_QEL.hh>
 
 const G4double TG4HadronPhysicsList::fgkDefaultCutValue = 1.0 * mm;
+
+//
+// static methods
+//
 
 //_____________________________________________________________________________
 G4String TG4HadronPhysicsList::AvailableSelections()
@@ -76,12 +80,17 @@ G4bool TG4HadronPhysicsList::IsAvailableSelection(const G4String& selection)
   return available.contains(checkSelection);
 }  
 
+//
+// ctors, dtor
+//
+
 //_____________________________________________________________________________
 TG4HadronPhysicsList::TG4HadronPhysicsList(const G4String& selection)
   : G4VUserPhysicsList(),
     TG4Verbose("hadronPhysicsList")
- {
-//
+{
+/// Standard constructor
+
   Configure(selection);
 
   defaultCutValue = fgkDefaultCutValue;
@@ -90,8 +99,10 @@ TG4HadronPhysicsList::TG4HadronPhysicsList(const G4String& selection)
 }
 
 //_____________________________________________________________________________
-TG4HadronPhysicsList::~TG4HadronPhysicsList() {
-//
+TG4HadronPhysicsList::~TG4HadronPhysicsList() 
+{
+/// Destructor
+
   //delete fExtDecayer;
        // fExtDecayer is deleted in G4Decay destructor
 }

@@ -1,3 +1,6 @@
+#ifndef TG4_OPTICAL_PHYSICS_H
+#define TG4_OPTICAL_PHYSICS_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,16 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics_list
-/// \class TG4OpticalPhysics
-/// \brief Optical physics builder.
-///
-/// According to ExN06PhysicsList (geant4 6.0)
+/// \file TG4OpticalPhysics.h
+/// \brief Definition of the TG4OpticalPhysics class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_OPTICAL_PHYSICS_H
-#define TG4_OPTICAL_PHYSICS_H
 
 #include "TG4VPhysicsConstructor.h"
 
@@ -31,6 +28,13 @@ class G4Scintillation;
 class G4OpAbsorption;
 class G4OpRayleigh;
 class G4OpBoundaryProcess;
+
+/// \ingroup physics_list
+/// \brief Optical physics builder.
+///
+/// According to ExN06PhysicsList (geant4 6.0)
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4OpticalPhysics: public TG4VPhysicsConstructor
 {
@@ -50,21 +54,40 @@ class TG4OpticalPhysics: public TG4VPhysicsConstructor
     virtual void ConstructProcess();
 
   private:
+    /// Not implemented
     TG4OpticalPhysics(const TG4OpticalPhysics& right);
+    /// Not implemented
     TG4OpticalPhysics& operator=(const TG4OpticalPhysics& right);
 
+    //
     // static data members
-    static  const G4int  fgkDefaultMaxNumPhotonsPerStep;
+    
+    /// Default value for maximum number of Cerenkov photons per step
+    static const G4int  fgkDefaultMaxNumPhotonsPerStep;
           
+    //
     // data members
-    TG4OpticalPhysicsMessenger  fMessenger;          // messenger
-    G4Cerenkov*          fCerenkovProcess;           // Cerenkov 
-    G4Scintillation*     fScintillationProcess;      // scintillation
-    G4OpAbsorption*      fAbsorptionProcess;         // absorption
-    G4OpRayleigh*        fRayleighScatteringProcess; // Rayleigh
-    G4OpBoundaryProcess* fBoundaryProcess;           // boundary process
-    G4int                fMaxNumPhotonsPerStep;      // max number of Cerenkov
-                                                     // photons per step
+    
+    /// messenger
+    TG4OpticalPhysicsMessenger  fMessenger;
+    
+    /// Cerenkov process
+    G4Cerenkov*          fCerenkovProcess;
+    
+    /// scintillation process
+    G4Scintillation*     fScintillationProcess;
+    
+    /// optical absorption process
+    G4OpAbsorption*      fAbsorptionProcess;
+    
+    /// Rayleigh scattering process
+    G4OpRayleigh*        fRayleighScatteringProcess;
+    
+    /// optical boundary process
+    G4OpBoundaryProcess* fBoundaryProcess;
+    
+    /// max number of Cerenkov photons per step
+    G4int                fMaxNumPhotonsPerStep;   
 };
 
 #endif //TG4_OPTICAL_PHYSICS_H

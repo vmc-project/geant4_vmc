@@ -9,16 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: interfaces
-//
-//========================================================
-//
-//------------TG4MaterialsFrames.cxx--------------------------------//
-//--------- Frames for the the display of materials properties---//
-//
-//========================================================= 
-//
-// Author: D. Adamova
+/// \file TG4MaterialsFrames.cxx
+/// \brief Implementation of the TG4MaterialsFrames class 
+///
+/// \author D. Adamova, NPI Rez
  
 #include "TG4MaterialsFrames.h" 
 #include "TG4Globals.h"
@@ -32,9 +26,9 @@
 #include <G4Material.hh>
 #include <G4Element.hh>
 
-
-
- ClassImp(TG4MaterialsFrames)
+/// \cond CLASSIMP
+ClassImp(TG4MaterialsFrames)
+/// \endcond
 
 TG4MaterialsFrames::TG4MaterialsFrames( TGTab* Tab, TGMainFrame* ActionFrame )
   : TObject(),
@@ -45,8 +39,10 @@ TG4MaterialsFrames::TG4MaterialsFrames( TGTab* Tab, TGMainFrame* ActionFrame )
     fMaterialsCombo(0), 
     fComboLabel(0)
 { 
-///---> creates the materials properties display frame
-///---> and plunges it into the main frame
+/// Standard constructor:
+/// - creates the materials properties display frame
+/// - and plunges it into the main frame
+
    TGCompositeFrame* parent = Tab->AddTab("Materials Properties");
    fCapFrame = new TGCompositeFrame(parent, 60, 20, kHorizontalFrame);
    ULong_t back= TGFrame::GetBlackPixel(); 
@@ -113,7 +109,7 @@ TG4MaterialsFrames::TG4MaterialsFrames( TGTab* Tab, TGMainFrame* ActionFrame )
 
 TG4MaterialsFrames::~TG4MaterialsFrames()
 {
-  ///---> liquidator
+/// Destructor
   
    G4cout << "\n Now in  TG4MaterialsFrames destructor \n"<< G4endl;
    delete fMatSubframe1;

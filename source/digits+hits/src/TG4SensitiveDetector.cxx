@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: digits+hits
-// Class TG4SensitiveDetector
-// ---------------------------
-// See the class description in the header file.
+/// \file TG4SensitiveDetector.cxx
+/// \brief Implementation of the TG4SensitiveDetector class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SensitiveDetector.h"
 #include "TG4StepManager.h"
@@ -27,7 +27,7 @@ TG4SensitiveDetector::TG4SensitiveDetector(G4String sdName)
     fID(++fgSDCounter),
     fStepManager(TG4StepManager::Instance())
 {
-//
+/// Standard constructor with the specified \em name
 }
 
 //_____________________________________________________________________________
@@ -37,13 +37,15 @@ TG4SensitiveDetector::TG4SensitiveDetector(G4String sdName, G4int id)
     fStepManager(TG4StepManager::Instance())
 
 {
-//
+/// Standard constructor with specified \em name and \em id
+
   ++fgSDCounter;
 }
 
 //_____________________________________________________________________________
-TG4SensitiveDetector::~TG4SensitiveDetector() {
-//
+TG4SensitiveDetector::~TG4SensitiveDetector() 
+{
+/// Destructor
 }
 
 //

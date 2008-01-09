@@ -9,13 +9,14 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: geometry
-// Class TG4UniformMagneticField
-// -----------------------------
-// See the class description in the header file.
-// According to:
-// Id: ExN02MagneticField.cc,v 1.1 1999/01/07 16:05:49 gunter Exp 
-// GEANT4 tag Name: geant4-00-01
+/// \file TG4UniformMagneticField.cxx
+/// \brief Implementation of the TG4UniformMagneticField class 
+///
+/// According to:
+/// Id: ExN02MagneticField.cc,v 1.1 1999/01/07 16:05:49 gunter Exp 
+/// GEANT4 tag Name: geant4-00-01
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4UniformMagneticField.h"
 
@@ -67,7 +68,9 @@ TG4UniformMagneticField::~TG4UniformMagneticField()
 //_____________________________________________________________________________
 TG4UniformMagneticField& 
 TG4UniformMagneticField::operator=(const TG4UniformMagneticField& right)
-{                                  
+{
+/// Assignment operator
+                                  
   // check assignement to self
   if (this == &right) return *this;
 

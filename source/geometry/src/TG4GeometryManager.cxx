@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: geometry
-// Class TG4GeometryManager
-// ------------------------
-// See the class description in the header file.
+/// \file TG4GeometryManager.cxx
+/// \brief Implementation of the TG4GeometryManager class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4GeometryManager.h"
 #include "TG4GeometryServices.h"
@@ -100,6 +100,8 @@ TG4GeometryManager::~TG4GeometryManager()
 //_____________________________________________________________________________
 void TG4GeometryManager::CreateMCGeometry()
 {
+/// Create MC geometry
+
   if ( fUserGeometry == "VMCtoGeant4" || 
        fUserGeometry == "Geant4"      || 
        fUserGeometry == "RootToGeant4" ) {

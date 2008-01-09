@@ -1,3 +1,6 @@
+#ifndef TG4_V_PHYSICS_CONSTRUCTOR_H
+#define TG4_V_PHYSICS_CONSTRUCTOR_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,19 +12,20 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics
-/// \class TG4VPhysicsConstructor
-/// \brief Abstract base class for physics constructors with verbose.
+/// \file TG4VPhysicsConstructor.h
+/// \brief Definition of the TG4VPhysicsConstructor class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_V_PHYSICS_CONSTRUCTOR_H
-#define TG4_V_PHYSICS_CONSTRUCTOR_H
 
 #include "TG4Verbose.h"
 
 #include <G4VPhysicsConstructor.hh>
 #include <globals.hh>
+
+/// \ingroup physics
+/// \brief Abstract base class for physics constructors with verbose.
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4VPhysicsConstructor: public G4VPhysicsConstructor,
                               public TG4Verbose
@@ -32,8 +36,10 @@ class TG4VPhysicsConstructor: public G4VPhysicsConstructor,
     virtual ~TG4VPhysicsConstructor();
 
     // methods
-          // construct particle and physics
+                 /// Construct particles
     virtual void ConstructParticle() = 0;
+
+                 /// Construct physics processes
     virtual void ConstructProcess() = 0;
 
   protected:
@@ -42,7 +48,9 @@ class TG4VPhysicsConstructor: public G4VPhysicsConstructor,
     virtual G4int VerboseLevel() const;
 
   private:
+    /// Not implemented
     TG4VPhysicsConstructor();
+    /// Not implemented
     TG4VPhysicsConstructor(const TG4VPhysicsConstructor& right);
 
 };

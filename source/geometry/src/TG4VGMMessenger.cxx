@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: geometry
-// Class TG4VGMMessenger
-// -------------------------
-// See the class description in the header file.
+/// \file TG4VGMMessenger.cxx
+/// \brief Implementation of the TG4VGMMessenger class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifdef USE_VGM
 

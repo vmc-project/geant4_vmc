@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4SpecialCutsPhysics
-// ----------------------------
-// See the class description in the header file.
+/// \file TG4SpecialCutsPhysics.cxx
+/// \brief Implementation of the TG4SpecialCutsPhysics class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SpecialCutsPhysics.h"
 #include "TG4G3PhysicsManager.h"
@@ -39,7 +39,7 @@ TG4SpecialCutsPhysics::TG4SpecialCutsPhysics(
     fSpecialCutsForMuon(0),
     fSpecialCutsForOther(0)
 {
-//
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
@@ -55,13 +55,14 @@ TG4SpecialCutsPhysics::TG4SpecialCutsPhysics(
     fSpecialCutsForMuon(0),
     fSpecialCutsForOther(0)
 {
-//
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
 TG4SpecialCutsPhysics::~TG4SpecialCutsPhysics() 
 {
-//
+/// Destructor
+
   delete fSpecialCutsForGamma;
   delete fSpecialCutsForElectron;
   delete fSpecialCutsForEplus;

@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4StackPopperPhysics
-// --------------------------------------
-// See the class description in the header file.
+/// \file TG4StackPopperPhysics.cxx
+/// \brief Implementation of the TG4StackPopperPhysics class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4StackPopperPhysics.h"
 #include "TG4StackPopper.h"
@@ -27,7 +27,7 @@ TG4StackPopperPhysics::TG4StackPopperPhysics(const G4String& name)
     fStackPopperProcess(0),
     fSelection() 
 {
-//
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
@@ -38,13 +38,14 @@ TG4StackPopperPhysics::TG4StackPopperPhysics(G4int verboseLevel,
     fStackPopperProcess(0), 
     fSelection() 
 {
-//
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
 TG4StackPopperPhysics::~TG4StackPopperPhysics() 
 {
-//
+/// Destructor
+
   delete fStackPopperProcess;
 }
 

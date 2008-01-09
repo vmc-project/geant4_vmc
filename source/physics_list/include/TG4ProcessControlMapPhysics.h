@@ -1,3 +1,6 @@
+#ifndef TG4_PROCESS_MAP_PHYSICS_H
+#define TG4_PROCESS_MAP_PHYSICS_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,19 +12,20 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics_list
-/// \class TG4ProcessControlMapPhysics
-/// \brief Special builder which fills the VMC process control map
+/// \file TG4ProcessControlMapPhysics.h
+/// \brief Definition of the TG4ProcessControlMapPhysics class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_PROCESS_MAP_PHYSICS_H
-#define TG4_PROCESS_MAP_PHYSICS_H
 
 #include "TG4VPhysicsConstructor.h"
 #include <globals.hh>
 
 class G4Decay;
+
+/// \ingroup physics_list
+/// \brief Special builder which fills the VMC process control map
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4ProcessControlMapPhysics: public TG4VPhysicsConstructor
 {
@@ -38,8 +42,11 @@ class TG4ProcessControlMapPhysics: public TG4VPhysicsConstructor
     virtual void ConstructProcess();
 
   private:
+    /// Not implemented
     TG4ProcessControlMapPhysics(const TG4ProcessControlMapPhysics& right);
-    TG4ProcessControlMapPhysics& operator=(const TG4ProcessControlMapPhysics& right);
+    /// Not implemented
+    TG4ProcessControlMapPhysics& operator=(
+                                const TG4ProcessControlMapPhysics& right);
 
     void FillMap();
 };

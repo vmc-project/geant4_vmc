@@ -1,3 +1,6 @@
+#ifndef TG4_MEDIUM_H
+#define TG4_MEDIUM_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,19 +12,20 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup geometry
-/// \class TG4Medium
-/// \brief Helper class to keep medium data
+/// \file TG4Medium.h
+/// \brief Definition of the TG4Medium class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_MEDIUM_H
-#define TG4_MEDIUM_H
 
 #include "globals.hh"
 
 class G4UserLimits;
 class G4Material;
+
+/// \ingroup geometry
+/// \brief Helper class to keep medium data
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4Medium
 {
@@ -44,18 +48,21 @@ class TG4Medium
     G4UserLimits* GetLimits() const;
     
   private:
+    /// Not implemented
     TG4Medium();
+    /// Not implemented
     TG4Medium(const TG4Medium& right);
+    /// Not implemented
     TG4Medium& operator=(const TG4Medium& right);
 
     // static data members
-    static const G4String  fgkUndefinedName; // the default (undefined) name
+    static const G4String  fgkUndefinedName; ///< the default (undefined) name
   
     // data members
-    G4int         fID;       // medium ID
-    G4String      fName;     // medium name
-    G4Material*   fMaterial; // material associated with this medium
-    G4UserLimits* fLimits;   // user limits associated with this medium
+    G4int         fID;       ///< medium ID
+    G4String      fName;     ///< medium name
+    G4Material*   fMaterial; ///< material associated with this medium
+    G4UserLimits* fLimits;   ///< user limits associated with this medium
 };
 
 // inline functions

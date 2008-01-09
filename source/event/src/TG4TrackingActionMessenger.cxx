@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: event
-// Class TG4TrackingActionMessenger
-// --------------------------------
-// See the class description in the header file.
+/// \file TG4TrackingActionMessenger.cxx
+/// \brief Implementation of the TG4TrackingActionMessenger class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
  
 #include "TG4TrackingActionMessenger.h"
 #include "TG4TrackingAction.h"
@@ -32,7 +32,8 @@ TG4TrackingActionMessenger::TG4TrackingActionMessenger(
     fNewVerboseTrackCmd(0),
     fSaveSecondariesCmd(0)
 {
-// 
+/// Standard constructor
+
   fTrackingDirectory = new G4UIdirectory("/mcTracking/");
   fTrackingDirectory->SetGuidance("TG4TrackingAction control commands.");
 
@@ -59,8 +60,10 @@ TG4TrackingActionMessenger::TG4TrackingActionMessenger(
 }
 
 //_____________________________________________________________________________
-TG4TrackingActionMessenger::~TG4TrackingActionMessenger() {
-//
+TG4TrackingActionMessenger::~TG4TrackingActionMessenger() 
+{
+/// Destructor
+
   delete fTrackingDirectory;
   delete fNewVerboseCmd;
   delete fNewVerboseTrackCmd;

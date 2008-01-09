@@ -9,14 +9,15 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: event
-// Class TG4TrackInformation
-// -------------------------
-// See the class description in the header file.
+/// \file TG4TrackInformation.cxx
+/// \brief Implementation of the TG4TrackInformation class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4TrackInformation.h"
 
-G4Allocator<TG4TrackInformation> gAliTrackInfoAllocator;
+/// Geant4 allocator for TG4TrackInformation objects
+G4Allocator<TG4TrackInformation> gTrackInfoAllocator;
 
 //_____________________________________________________________________________
 TG4TrackInformation::TG4TrackInformation()
@@ -25,7 +26,7 @@ TG4TrackInformation::TG4TrackInformation()
     fParentParticleID(-1),
     fIsUserTrack(false) 
 {
-//
+/// Default constructor
 }
 
 //_____________________________________________________________________________
@@ -35,7 +36,7 @@ TG4TrackInformation::TG4TrackInformation(G4int trackParticleID)
     fParentParticleID(-1),
     fIsUserTrack(false) 
 {
-//
+/// Standard constructor
 }    
 /*
 //_____________________________________________________________________________
@@ -49,8 +50,9 @@ TG4TrackInformation::TG4TrackInformation(G4int  trackParticleID,
 }    
 */
 //_____________________________________________________________________________
-TG4TrackInformation::~TG4TrackInformation(){
-//
+TG4TrackInformation::~TG4TrackInformation()
+{
+/// Destructor
 }    
 
 //

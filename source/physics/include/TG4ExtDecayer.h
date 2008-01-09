@@ -1,3 +1,6 @@
+#ifndef TG4_EXT_DECAYER_H
+#define TG4_EXT_DECAYER_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,19 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup physics
-/// \class TG4ExtDecayer
-/// \brief Implements the G4VExtDecayer abstract class
-/// with the TVirtualMCDecayer.
-///
-/// In case a particle has not defined any decay channel
-/// and has not pre-assigned decay products,
-/// the external decayer is called.
+/// \file TG4ExtDecayer.h
+/// \brief Definition of the TG4ExtDecayer class 
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef TG4_EXT_DECAYER_H
-#define TG4_EXT_DECAYER_H
 
 #include "TG4Verbose.h"
 
@@ -36,6 +30,16 @@ class G4DecayProducts;
 
 class TClonesArray;
 
+/// \ingroup physics
+/// \brief Implements the G4VExtDecayer abstract class
+/// with the TVirtualMCDecayer.
+///
+/// In case a particle has not defined any decay channel
+/// and has not pre-assigned decay products,
+/// the external decayer is called.
+///
+/// \author I. Hrivnacova; IPN Orsay
+
 class TG4ExtDecayer : public G4VExtDecayer, 
                       public TG4Verbose
 {
@@ -46,12 +50,14 @@ class TG4ExtDecayer : public G4VExtDecayer,
     virtual G4DecayProducts* ImportDecayProducts(const G4Track& track);
     
   private:
+    /// Not implemented
     TG4ExtDecayer(const TG4ExtDecayer& right);
+    /// Not implemented
     TG4ExtDecayer& operator=(const TG4ExtDecayer& right);
 
-    TG4ParticlesManager* fParticlesManager;  //particles manager 
-    TVirtualMCDecayer*   fExternalDecayer;   //the external decayer
-    TClonesArray*        fDecayProductsArray;//array of decay products
+    TG4ParticlesManager* fParticlesManager;  ///< particles manager 
+    TVirtualMCDecayer*   fExternalDecayer;   ///< the external decayer
+    TClonesArray*        fDecayProductsArray;///< array of decay products
 };
 
 #endif //TG4_EXT_DECAYER_H

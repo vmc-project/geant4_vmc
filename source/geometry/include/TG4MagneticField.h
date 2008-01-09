@@ -1,3 +1,6 @@
+#ifndef TG4_MAGNETIC_FIELD_H
+#define TG4_MAGNETIC_FIELD_H
+
 //  $Id$
 
 //------------------------------------------------
@@ -9,17 +12,18 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup geometry
-/// \class TG4MagneticField
-/// \brief The magnetic field defined by the TVirtualMCApplication field map. 
+/// \file TG4MagneticField.h
+/// \brief Definition of the TG4MagneticField class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#ifndef TG4_MAGNETIC_FIELD_H
-#define TG4_MAGNETIC_FIELD_H
-
 #include <G4MagneticField.hh>
 #include <globals.hh>
+
+/// \ingroup geometry
+/// \brief The magnetic field defined by the TVirtualMCApplication field map. 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4MagneticField : public G4MagneticField
 {

@@ -1,3 +1,8 @@
+#ifndef TG4_VGM_MESSENGER_H
+#define TG4_VGM_MESSENGER_H
+
+#ifdef USE_VGM
+
 // $Id$
 
 //------------------------------------------------
@@ -9,21 +14,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup geometry
-/// \class TG4VGMMessenger
-/// \brief Messenger class that defines commands for VGM XML Exporter
-///
-/// Implements commands:
-/// - /vgm/generateRoot
-/// - /vgm/generateAGDD [lvName]
-/// - /vgm/generateGDML [lvName]
+/// \file TG4VGMMessenger.h
+/// \brief Definition of the TG4VGMMessenger class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifdef USE_VGM
-
-#ifndef TG4_VGM_MESSENGER_H
-#define TG4_VGM_MESSENGER_H
 
 #include <XmlVGM/VExporter.h>
 #include <Geant4GM/volumes/Factory.h>
@@ -37,6 +31,16 @@ class G4UIdirectory;
 class G4UIcmdWithAString;
 class G4UIcmdWithoutParameter;
 
+/// \ingroup geometry
+/// \brief Messenger class that defines commands for VGM XML Exporter
+///
+/// Implements commands:
+/// - /vgm/generateRoot
+/// - /vgm/generateAGDD [lvName]
+/// - /vgm/generateGDML [lvName]
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
 class TG4VGMMessenger: public G4UImessenger
 {
   public:
@@ -47,17 +51,30 @@ class TG4VGMMessenger: public G4UImessenger
     virtual void SetNewValue(G4UIcommand* command, G4String newValues);
     
   private:
+    /// Not implemented
     TG4VGMMessenger();
+    /// Not implemented
     TG4VGMMessenger(const TG4VGMMessenger& right);
+    /// Not implemented
     TG4VGMMessenger& operator=(const TG4VGMMessenger &right);
 
-    static G4UIdirectory*  fgDirectory;     // command directory
-    static G4UIcmdWithoutParameter* fgGenerateRootCmd;// command: /xml/generateRoot
-    static G4int           fgCounter;            // instances counter
-    Geant4GM::Factory*     fG4Factory;      // Geant4 VGM Factory
-    RootGM::Factory*       fRootFactory;    // Root VGM Factory
-    XmlVGM::VExporter*     fXmlVGMExporter; // associated class
-    G4UIcmdWithAString*    fGenerateXMLCmd; // command: /xml/generateXXX
+    //
+    // static data members
+    
+    /// command directory
+    static G4UIdirectory*  fgDirectory;
+    
+    ///  command: /xml/generateRoot
+    static G4UIcmdWithoutParameter* fgGenerateRootCmd;
+    
+    /// instances counter
+    static G4int           fgCounter;
+
+    // data members
+    Geant4GM::Factory*     fG4Factory;      ///< Geant4 VGM Factory
+    RootGM::Factory*       fRootFactory;    ///< Root VGM Factory
+    XmlVGM::VExporter*     fXmlVGMExporter; ///< associated class
+    G4UIcmdWithAString*    fGenerateXMLCmd; ///< command: /xml/generateXXX
 };
 
 #endif //TG4_XML_VGM_MESSENGER_H

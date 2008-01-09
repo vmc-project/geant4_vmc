@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: geometry
-// Class TG4MediumMap
-// -------------------------
-// See the class description in the header file.
+/// \file TG4MediumMap.cxx
+/// \brief Implementation of the TG4MediumMap.cxx class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4MediumMap.h"
 #include "TG4Medium.h"
@@ -28,7 +28,7 @@ TG4MediumMap::TG4MediumMap()
   : fIdMap(),
     fLVMap()
 {
-/// Default and standard constructor
+/// Default constructor
 }
 
 //_____________________________________________________________________________
@@ -73,6 +73,9 @@ TG4Medium* TG4MediumMap::AddMedium(G4int mediumID, G4bool warn)
 //_____________________________________________________________________________
 void TG4MediumMap::MapMedium(G4LogicalVolume* lv, G4int mediumID)
 {
+/// Map the medium with the given \em mediumID to the given logical volume
+/// \em lv 
+
   TG4Medium* medium = GetMedium(mediumID);
   
   if ( !medium ) {
@@ -90,6 +93,9 @@ void TG4MediumMap::MapMedium(G4LogicalVolume* lv, G4int mediumID)
 //_____________________________________________________________________________
 void TG4MediumMap::MapMedium(const G4String& lvName, G4int mediumID)
 {
+/// Map the medium with the given \em mediumID to the logical volume
+/// with given name \em lvName  
+
   G4LogicalVolume* lv 
     = TG4GeometryServices::Instance()->FindLogicalVolume(lvName);
   

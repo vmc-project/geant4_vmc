@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4StepLimiterPhysics
-// ----------------------------
-// See the class description in the header file.
+/// \file TG4StepLimiterPhysics.cxx
+/// \brief Implementation of the TG4StepLimiterPhysics class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4StepLimiterPhysics.h"
 #include "TG4ProcessControlMap.h"
@@ -29,7 +29,7 @@ TG4StepLimiterPhysics::TG4StepLimiterPhysics(const G4String& name)
   : TG4VPhysicsConstructor(name),
     fStepLimiterProcess(0) 
 {
-//
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
@@ -38,13 +38,14 @@ TG4StepLimiterPhysics::TG4StepLimiterPhysics(G4int verboseLevel,
   : TG4VPhysicsConstructor(name, verboseLevel), 
     fStepLimiterProcess(0) 
 {
-//
+/// Standard constructor
 }
 
 //_____________________________________________________________________________
 TG4StepLimiterPhysics::~TG4StepLimiterPhysics() 
 {
-//
+/// Destructor
+
   delete fStepLimiterProcess;
 }
 

@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics_lists
-// Class TG4OpticalPhysicsMessenger
-// ------------------------------------
-// See the class description in the header file.
+/// \file TG4OpticalPhysicsMessenger.cxx
+/// \brief Implementation of the TG4OpticalPhysicsMessenger class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4OpticalPhysicsMessenger.h"
 #include "TG4OpticalPhysics.h"
@@ -27,7 +27,8 @@ TG4OpticalPhysicsMessenger::TG4OpticalPhysicsMessenger(
     fOpticalPhysics(opticalPhysics),
     fSetCerenkovMaxPhotonsCmd(0)
 { 
-//
+/// Standard constructor
+
   fSetCerenkovMaxPhotonsCmd 
     = new G4UIcmdWithAnInteger("/mcPhysics/setCerenkovMaxPhotons", this);  
   fSetCerenkovMaxPhotonsCmd->SetGuidance("Set maximum number of photons per step");
@@ -37,8 +38,10 @@ TG4OpticalPhysicsMessenger::TG4OpticalPhysicsMessenger(
 }
 
 //______________________________________________________________________________
-TG4OpticalPhysicsMessenger::~TG4OpticalPhysicsMessenger() {
-//
+TG4OpticalPhysicsMessenger::~TG4OpticalPhysicsMessenger() 
+{
+/// Destructor
+
   delete fSetCerenkovMaxPhotonsCmd;
 }
 

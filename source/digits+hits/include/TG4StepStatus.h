@@ -1,3 +1,6 @@
+#ifndef TG4_STEP_STATUS_H
+#define TG4_STEP_STATUS_H
+
 // $Id$
 
 //------------------------------------------------
@@ -8,6 +11,11 @@
 // For the licensing terms see geant4_vmc/LICENSE.
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
+
+/// \file TG4StepStatus.h
+/// \brief Definition of the enumeration TG4StepStatus
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 /// \ingroup digits_hits
 /// \enum TG4StepStatus
@@ -24,16 +32,10 @@
 ///                   as current volume)
 ///  - kNormalStep - returns track properties in a post step
 ///                  point              
-///
-/// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_STEP_STATUS_H
-#define TG4_STEP_STATUS_H
-
 enum TG4StepStatus { 
-  kVertex,     //< in track vertex
-  kBoundary,   //< when crossing geometrical boundary
-  kNormalStep  //< in post step point
+  kVertex,     ///<  in track vertex
+  kBoundary,   ///<  when crossing geometrical boundary
+  kNormalStep  ///<  in post step point
 };
 
 #endif //TG4_STEP_STATUS_H

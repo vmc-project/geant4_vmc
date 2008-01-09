@@ -9,18 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: interfaces
-//
-//==============================================================
-//
-//----------------TG4GeometryGUI.cxx--------------------------//
-//----------------AG4 Geometry Browser----------------------//
-//
-//=================================================================
-//
-// Author: D. Adamova
-
-  
+/// \file TG4GeometryGUI.cxx
+/// \brief Implementation of the TG4Geometry class 
+///
+/// \author D. Adamova, NPI Rez
                  
 #include "TG4GeometryGUI.h"
 #include "TG4GuiVolume.h"
@@ -36,15 +28,16 @@
 #include <TGListTree.h>
 #include <TObjArray.h>
 
-
-                 
+/// \cond CLASSIMP
 ClassImp(TG4GeometryGUI)    
+/// \endcond
 
 TG4GeometryGUI::TG4GeometryGUI()
   : TObject(),
     fPanel(0)
 {
-///---> Constructor                 
+/// Standard constructor
+
     fPanel   =   new TG4MainFrame(gClient->GetRoot(), 650, 500);
 
     G4cout << "\n***********************************************" << G4endl;
@@ -59,8 +52,9 @@ TG4GeometryGUI::TG4GeometryGUI()
 
  }
  
-TG4GeometryGUI::~TG4GeometryGUI(){
-///---> liquidator
+TG4GeometryGUI::~TG4GeometryGUI()
+{
+/// Destructor
 
   G4cout << "\n Now in TG4GeometryGUI destructor \n" << G4endl;
   delete fPanel;

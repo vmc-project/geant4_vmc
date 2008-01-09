@@ -9,16 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: interfaces
-//
-//========================================================
-//
-//------------TG4MainFrame.cxx--------------------------------//
-//---------Main Window for the AG4 Geometry Browser---//
-//
-//========================================================= 
-//
-// Author: D. Adamova
+/// \file TG4MainFrame.cxx
+/// \brief Implementation of the TG4MainFrame class 
+///
+/// \author D. Adamova, NPI Rez
 
 #include "TG4MainFrame.h"
 #include "TG4Editor.h"
@@ -36,7 +30,9 @@
 
 #include <G4LogicalVolume.hh>
 
+/// \cond CLASSIMP
 ClassImp(TG4MainFrame)
+/// \endcond
 
 TG4MainFrame::TG4MainFrame(const TGWindow* p, UInt_t w, UInt_t h)
     : TGMainFrame(p, w, h),
@@ -51,7 +47,7 @@ TG4MainFrame::TG4MainFrame(const TGWindow* p, UInt_t w, UInt_t h)
       fmaterialsFrames(0),
       flistTreeFrame(0)          
 {
-///---> Creates the main frame 
+/// Standard constructor
 
   fMenuBarLayout = new TGLayoutHints(kLHintsTop | kLHintsLeft | kLHintsExpandX, 0, 0, 1, 1);
   fMenuBarItemLayout = new TGLayoutHints(kLHintsTop | kLHintsLeft, 0, 4, 0, 0);
@@ -105,7 +101,8 @@ TG4MainFrame::TG4MainFrame(const TGWindow* p, UInt_t w, UInt_t h)
 
 TG4MainFrame::~TG4MainFrame()
 {
-///----> Delete created widgets.
+/// Destructor
+
    G4cout << "\n Now in the TG4MainFrame destructor\n" << G4endl;  
    delete fMenuBarLayout;
    delete fMenuBarItemLayout;

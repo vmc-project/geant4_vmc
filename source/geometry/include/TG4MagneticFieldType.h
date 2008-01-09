@@ -1,3 +1,6 @@
+#ifndef TG4_MAGNETIC_FIELD_TYPE_H
+#define TG4_MAGNETIC_FIELD_TYPE_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,19 +12,18 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup geometry
-/// \enum TG4MagneticFieldType
-/// \brief Enumeration type for magnetic field types.
+/// \file TG4MagneticFieldType.h
+/// \brief Definition of the enumeration TG4MagneticFieldType
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#ifndef TG4_MAGNETIC_FIELD_TYPE_H
-#define TG4_MAGNETIC_FIELD_TYPE_H
+/// \ingroup geometry
+/// \brief Enumeration type for magnetic field types.
 
 enum TG4MagneticFieldType { 
-  kMCApplicationField, //< Field defined via MC Application 
-  kUniformField,       //< Uniform magnetic field
-  kNoField             //< No magnetic field
+  kMCApplicationField, ///<  Field defined via MC Application 
+  kUniformField,       ///<  Uniform magnetic field
+  kNoField             ///<  No magnetic field
 };
 
 #endif //TG4_MAGNETIC_FIELD_TYPE_H

@@ -1,3 +1,6 @@
+#ifndef TG4_POST_DET_CONSTRUCTION_H
+#define TG4_POST_DET_CONSTRUCTION_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,18 +12,19 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup geometry
-/// \class TG4PostDetConstruction
-/// \brief The post detector construction used with G4Root navigation
+/// \file TG4PostDetConstruction.h
+/// \brief Definition of the TG4PostDetConstruction class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef TG4_POST_DET_CONSTRUCTION_H
-#define TG4_POST_DET_CONSTRUCTION_H
 
 #include <TG4RootDetectorConstruction.h>
 
 class TG4PostDetConstruction;
+
+/// \ingroup geometry
+/// \brief The post detector construction used with G4Root navigation
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class TG4PostDetConstruction : public TVirtualUserPostDetConstruction
 {
@@ -32,7 +36,9 @@ class TG4PostDetConstruction : public TVirtualUserPostDetConstruction
     virtual void Initialize(TG4RootDetectorConstruction *dc);
 
   private:    
+    /// Not implemented
     TG4PostDetConstruction(const TG4PostDetConstruction& right);
+    /// Not implemented
     TG4PostDetConstruction& operator=(const TG4PostDetConstruction& right);
 }; 
 

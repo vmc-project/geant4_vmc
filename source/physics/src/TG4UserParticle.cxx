@@ -1,4 +1,4 @@
-// $Id: TG4ParticlesManager.cxx 295 2007-10-04 23:17:33Z rdm $
+// $Id$
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics
-// Class TG4UserParticle
-// -------------------------
-// See the class description in the header file.
+/// \file TG4UserParticle.cxx
+/// \brief Implementation of the TG4UserParticle class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4UserParticle.h"
 
@@ -48,10 +48,14 @@ TG4UserParticle::TG4UserParticle(
        shortlived, subType, anti_encoding, magneticMoment),
     fMCType(mcType),
     fExcitationEnergy(excitation)   
-{}
+{
+/// Standard constructor
+}
 
 TG4UserParticle::~TG4UserParticle()
-{}
+{
+/// Destructor
+}
 
 
 

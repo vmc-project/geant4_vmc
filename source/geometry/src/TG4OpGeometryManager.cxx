@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: geometry
-// Class TG4OpGeometryManager
-// ------------------------
-// See the class description in the header file.
+/// \file TG4OpGeometryManager.cxx
+/// \brief Implementation of the TG4OpGeometryManager class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4OpGeometryManager.h"
 #include "TG4GeometryServices.h"
@@ -58,7 +58,7 @@ TG4OpGeometryManager::TG4OpGeometryManager()
     fGeometryServices(0),
     fOpSurfaceMap(0)
 {
-/// Standard constructor
+/// Default constructor
 
   fGeometryServices = TG4GeometryServices::Instance();
   if ( !fGeometryServices ) {

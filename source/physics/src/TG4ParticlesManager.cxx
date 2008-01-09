@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: physics
-// Class TG4ParticlesManager
-// -------------------------
-// See the class description in the header file.
+/// \file TG4ParticlesManager.cxx
+/// \brief Implementation of the TG4ParticlesManager class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4ParticlesManager.h"
 #include "TG4UserIon.h"
@@ -46,7 +46,8 @@ TG4ParticlesManager::TG4ParticlesManager()
     fUserParticles()
     
 { 
-//
+/// Default constructor
+
   if (fgInstance) {
     TG4Globals::Exception(
       "TG4ParticlesManager", "TG4ParticlesManager",
@@ -57,8 +58,9 @@ TG4ParticlesManager::TG4ParticlesManager()
 }
 
 //_____________________________________________________________________________
-TG4ParticlesManager::~TG4ParticlesManager() {
-//
+TG4ParticlesManager::~TG4ParticlesManager() 
+{
+/// Destructor
 }
 
 //

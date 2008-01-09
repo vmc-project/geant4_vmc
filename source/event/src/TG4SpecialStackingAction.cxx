@@ -9,10 +9,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// Category: event
-// Class TG4SpecialStackingAction
-// -------------------------------
-// See the class description in the header file.
+/// \file TG4SpecialStackingAction.cxx
+/// \brief Implementation of the TG4SpecialStackingAction class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SpecialStackingAction.h"
 #include "TG4Globals.h"
@@ -34,12 +34,13 @@ TG4SpecialStackingAction::TG4SpecialStackingAction()
     TG4Verbose("stackingAction",1),
     fStage(0)
 {
-// 
+/// Default constructor
 }
 
 //_____________________________________________________________________________
-TG4SpecialStackingAction::~TG4SpecialStackingAction() {
-// 
+TG4SpecialStackingAction::~TG4SpecialStackingAction() 
+{
+/// Destructor
 }
 
 //
