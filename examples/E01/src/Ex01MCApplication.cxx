@@ -9,14 +9,13 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN01 adapted to Virtual Monte Carlo 
-//
-// Class Ex01MCApplication
-// ----------------------- 
-// Implementation of the TVirtualMCApplication
-//
-// by Ivana Hrivnacova, 5.4.2002
+/// \file Ex01MCApplication.cxx
+/// \brief Implementation of the Ex01MCApplication class 
+///
+/// Geant4 ExampleN01 adapted to Virtual Monte Carlo \n
+///
+/// \date 05/04/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "Ex01MCApplication.h"
 #include "Ex01MCStack.h"
@@ -31,7 +30,9 @@
 #include <TGeoManager.h>
 #include <TGeoMatrix.h>
 
+/// \cond CLASSIMP
 ClassImp(Ex01MCApplication)
+/// \endcond
 
 //_____________________________________________________________________________
 Ex01MCApplication::Ex01MCApplication(const char *name, const char *title) 
@@ -42,9 +43,9 @@ Ex01MCApplication::Ex01MCApplication(const char *name, const char *title)
     fImedPb(0),
     fOldGeometry(kFALSE)
 {
-//
-// Standard constructor
-//
+/// Standard constructor
+/// \param name   The MC application name 
+/// \param title  The MC application description
 
   // create a user stack
   fStack = new Ex01MCStack(100);  
@@ -59,33 +60,27 @@ Ex01MCApplication::Ex01MCApplication()
     fImedPb(0),
     fOldGeometry(kFALSE)
 {    
-  //
-  // Default constructor
-  //
+/// Default constructor
 }
 
 //_____________________________________________________________________________
 Ex01MCApplication::~Ex01MCApplication() 
 {
-  //
-  // Destructor  
-  //
-  
+/// Destructor  
+
   delete fStack;
   delete gMC;
   gMC = 0;
 }
 
 //
-// private
+// private methods
 //
 
 //_____________________________________________________________________________
 void Ex01MCApplication::ConstructMaterials()
 {
-  //
-  // Materials
-  //
+/// Construct materials using TGeo modeller
 
   // Create Root geometry manager 
   new TGeoManager("TGeo", "Root geometry manager");
@@ -145,6 +140,7 @@ void Ex01MCApplication::ConstructMaterials()
 //_____________________________________________________________________________
 void Ex01MCApplication::ConstructVolumes()
 {
+/// Contruct volumes using TGeo modeller
 
   //------------------------------ experimental hall (world volume)
   //------------------------------ beam line along x axis
@@ -207,15 +203,15 @@ void Ex01MCApplication::ConstructVolumes()
 }
 
 //
-// public
+// public methods
 //
 
 //_____________________________________________________________________________
 void Ex01MCApplication::InitMC(const char* setup)
 {    
-  //
-  // Initialize MC.
-  //
+/// Initialize MC.
+/// The selection of the concrete MC is done in the macro.
+/// \param setup The name of the configuration macro 
 
   gROOT->LoadMacro(setup);
   gInterpreter->ProcessLine("Config()");
@@ -225,13 +221,11 @@ void Ex01MCApplication::InitMC(const char* setup)
   gMC->BuildPhysics();  
 }
 
-//_____________________________________________________________________________
+//__________________________________________________________________________
 void Ex01MCApplication::RunMC(Int_t nofEvents)
 {    
-  //
-  // MC run.
-  //
-
+/// Run MC.
+/// \param nofEvents Number of events to be processed
 
   gMC->ProcessRun(nofEvents);
   FinishRun();
@@ -240,19 +234,14 @@ void Ex01MCApplication::RunMC(Int_t nofEvents)
 //_____________________________________________________________________________
 void Ex01MCApplication::FinishRun()
 {    
-  //
-  // Finish MC run.
-  //
-
- // UGLAST
+/// Finish MC run.
 }
 
 //_____________________________________________________________________________
 void Ex01MCApplication::ConstructGeometry()
 {    
-  //
-  // Construct geometry using TVirtualMC functions.
-  //
+/// Construct geometry using TGeo functions or
+/// TVirtualMC functions (if oldGeometry is selected)
   
   // Cannot use Root geometry if not supported with 
   // selected MC
@@ -278,9 +267,7 @@ void Ex01MCApplication::ConstructGeometry()
 //_____________________________________________________________________________
 void Ex01MCApplication::InitGeometry()
 {    
-  //
-  // Initialize geometry
-  //
+/// Initialize geometry.
   
   fImedAr = gMC->MediumId("ArgonGas");
   fImedAl = gMC->MediumId("Aluminium");
@@ -290,9 +277,7 @@ void Ex01MCApplication::InitGeometry()
 //_____________________________________________________________________________
 void Ex01MCApplication::GeneratePrimaries()
 {    
-  //
-  // Fill the user stack (derived from TVirtualMCStack) with primary particles.
-  //
+/// Fill the user stack (derived from TVirtualMCStack) with primary particles.
   
  // Track ID (filled by stack)
  Int_t ntr;
@@ -343,29 +328,22 @@ void Ex01MCApplication::GeneratePrimaries()
 //_____________________________________________________________________________
 void Ex01MCApplication::BeginEvent()
 {    
-  //
-  // User actions at beginning of event
-  //
-
-  // nothing to be done this example
+/// User actions at beginning of event.
+/// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void Ex01MCApplication::BeginPrimary()
 {    
-  //
-  // User actions at beginning of a primary track
-  //
-
-  // nothing to be done this example
+/// User actions at beginning of a primary track.
+/// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void Ex01MCApplication::PreTrack()
 {    
-  //
-  // User actions at beginning of each track
-  //
+/// User actions at beginning of each track.
+/// Print info message.
 
   cout << endl;
   cout << "Starting new track" << endl;
@@ -374,9 +352,8 @@ void Ex01MCApplication::PreTrack()
 //_____________________________________________________________________________
 void Ex01MCApplication::Stepping()
 {    
-  //
-  // User actions at each step
-  //
+/// User actions at each step.
+/// Print track position, the current volume and current medium names.
   
   TLorentzVector position;
   gMC->TrackPosition(position);
@@ -395,39 +372,28 @@ void Ex01MCApplication::Stepping()
 //_____________________________________________________________________________
 void Ex01MCApplication::PostTrack()
 {    
-  //
-  // User actions after finishing of each track
-  //
-
-  // nothing to be done this example
+/// User actions after finishing of each track
+/// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void Ex01MCApplication::FinishPrimary()
 {    
-  //
-  // User actions after finishing of a primary track
-  //
-
-  // nothing to be done this example
+/// User actions after finishing of a primary track.
+/// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void Ex01MCApplication::FinishEvent()
 {    
-  //
-  // User actions after finishing of an event
-  //
-
-  // nothing to be done this example
+/// User actions after finishing of an event
+/// Nothing to be done this example
 } 
 
 //_____________________________________________________________________________
 void Ex01MCApplication::Field(const Double_t* /*x*/, Double_t* b) const
 {
-  // 
-  // No magnetic field.
-  //
+/// No magnetic field.
   
    b[0] = 0.;
    b[1] = 0.;
@@ -437,10 +403,8 @@ void Ex01MCApplication::Field(const Double_t* /*x*/, Double_t* b) const
 //_____________________________________________________________________________
 void Ex01MCApplication::TestVMCGeometryGetters()
 {
-  //
-  // Test (new) VMC functions:
-  // GetTransform(), GetShape(), GetMaterial(), GetMedium() 
-  //
+/// Test (new) TVirtualMC functions:
+/// GetTransform(), GetShape(), GetMaterial(), GetMedium() 
 
   // Get transformation of 10th layer
   //

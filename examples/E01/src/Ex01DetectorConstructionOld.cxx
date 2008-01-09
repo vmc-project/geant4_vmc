@@ -9,13 +9,15 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN02 adapted to Virtual Monte Carlo 
-//
-// Id: Ex01DetectorConstructionOld.cc,v 1.11 2002/01/09 17:24:09 ranjard Exp 
-// GEANT4 tag Name: geant4-04-00-patch-02 
-//
-// by Ivana Hrivnacova, 21.4.2002
+/// \file Ex01DetectorConstructionOld.cxx 
+/// \brief Implementation of the Ex01DetectorConstructionOld class 
+///
+/// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
+/// Id: Ex01DetectorConstructionOld.cc,v 1.11 2002/01/09 17:24:09 ranjard Exp \n 
+/// GEANT4 tag Name: geant4-04-00-patch-02 
+///
+/// \date 21/04/2002
+/// \author I. Hrivnacova; IPN, Orsay
  
 #include <iostream>
 
@@ -23,7 +25,9 @@
 
 #include "Ex01DetectorConstructionOld.h"
 
+/// \cond CLASSIMP
 ClassImp(Ex01DetectorConstructionOld)
+/// \endcond
 
 using namespace std;
 
@@ -34,21 +38,19 @@ Ex01DetectorConstructionOld::Ex01DetectorConstructionOld()
     fImedAl(0),
     fImedPb(0)
 {
-//
+/// Default constructor
 }
 
 //_____________________________________________________________________________
 Ex01DetectorConstructionOld::~Ex01DetectorConstructionOld()
 {
-//
+/// Destructor
 }
 
 //_____________________________________________________________________________
 void Ex01DetectorConstructionOld::ConstructMaterials()
 {
-  //
-  // Materials
-  //
+/// Construct materials using VMC functions
 
   Double_t a;
   Double_t z;
@@ -100,6 +102,7 @@ void Ex01DetectorConstructionOld::ConstructMaterials()
 //_____________________________________________________________________________
 void Ex01DetectorConstructionOld::ConstructVolumes()
 {
+/// Construct volumes using VMC functions
 
   //------------------------------ experimental hall (world volume)
   //------------------------------ beam line along x axis

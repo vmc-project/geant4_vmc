@@ -9,11 +9,15 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Configuration macro for Geant3+TGeo VirtualMC for Example03
+/// \ingroup E03
+/// \file E03/g3tgeoConfig.C
+/// \brief Configuration macro for Geant3+TGeo VirtualMC for Example03 
 
 void Config()
 {
+/// The configuration function for Geant3+TGeo VMC for Example03
+/// called during MC application initialization. 
+
   TGeant3* geant3
     = new TGeant3TGeo("C++ Interface to Geant3 with TGeo geometry"); 
   

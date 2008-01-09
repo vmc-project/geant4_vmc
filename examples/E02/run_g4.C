@@ -9,11 +9,16 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Macro for running Example02 with Geant4. 
+/// \ingroup E02
+/// \file E02/run_g4.C
+/// \brief Macro for running Example02 with Geant4. 
 
 void run_g4(const TString& configMacro = "g4Config.C") 
 {
+/// Macro function for running Example02 with Geant4 from
+/// Root interactive session
+/// \param configMacro configuration macro name, default \ref E02/g4Config.C 
+
   // Load basic libraries
   gROOT->LoadMacro("../macro/basiclibs.C");
   basiclibs();

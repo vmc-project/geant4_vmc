@@ -1,3 +1,6 @@
+#ifndef EX02_STACK_H
+#define EX02_STACK_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,24 +12,24 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN02 adapted to Virtual Monte Carlo 
-//
-// Class Ex02MCStack
-// -----------------
-// Implementation of the TVirtualMCStack interface
-//
-// by Ivana Hrivnacova, 5.4.2002
-
-
-#ifndef EX02_STACK_H
-#define EX02_STACK_H
+/// \file  Ex02MCStack.h
+/// \brief Definition of the Ex02MCStack class 
+///
+/// Geant4 ExampleN02 adapted to Virtual Monte Carlo
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "Ex02Particle.h"
 
 #include <TVirtualMCStack.h>
 
 #include <stack>
+
+/// \ingroup E02
+/// \brief Implementation of the TVirtualMCStack interface
+///
+/// \date 05/04/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 class Ex02MCStack : public TVirtualMCStack
 {
@@ -60,10 +63,10 @@ class Ex02MCStack : public TVirtualMCStack
     
   private:
     // data members
-    std::stack<Ex02Particle*>  fStack;    //!
-    TObjArray*                 fParticles;
-    Int_t                      fCurrentTrack;
-    Int_t                      fNPrimary;
+    std::stack<Ex02Particle*>  fStack;        //!< The stack of particles (transient)
+    TObjArray*                 fParticles;    ///< The array of particle (persistent)
+    Int_t                      fCurrentTrack; ///< The current track number
+    Int_t                      fNPrimary;     ///< The number of primaries
     
     ClassDef(Ex02MCStack,1) // Ex02MCStack
 };

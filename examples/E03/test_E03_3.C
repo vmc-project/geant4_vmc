@@ -9,17 +9,21 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Test macro:
-// running Example03
-// parameters:
-// - configMacro: configuration macro loaded in initialization 
-// - oldGeometry: if true - geometry is defined via VMC, otherwise via TGeo
-// 
-// Run user defined primary particles with verbosity level switched on .
+/// \ingroup Tests
+/// \file test_E03_3.C
+/// \brief Example E03 Test macro 3
+///
+/// Running Example03
 
 void test_E03_3(const TString& configMacro, Bool_t oldGeometry)
 {
+/// Macro function for testing example E03 
+/// \param configMacro  configuration macro loaded in initialization 
+/// \param oldGeometry  if true - geometry is defined via VMC, otherwise 
+///                     via TGeo
+/// 
+/// Run user defined primary particles with verbosity level switched on 
+
   // Load basic libraries
   gROOT->LoadMacro("../macro/basiclibs.C");
   basiclibs();

@@ -9,13 +9,13 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN06 adapted to Virtual Monte Carlo 
-//
-// Class Ex06MCApplication
-// Implementation of the TVirtualMCApplication
-//
-// by Ivana Hrivnacova, 16.5.2005
+/// \file Ex06MCApplication.cxx
+/// \brief Implementation of the Ex06MCApplication class 
+///
+/// Geant4 ExampleN06 adapted to Virtual Monte Carlo
+///
+/// \date 16/05/2005
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <TROOT.h>
 #include <TInterpreter.h>
@@ -31,7 +31,9 @@
 #include "Ex06DetectorConstructionOld.h"
 #include "Ex06PrimaryGenerator.h"
 
+/// \cond CLASSIMP
 ClassImp(Ex06MCApplication)
+/// \endcond
 
 //_____________________________________________________________________________
 Ex06MCApplication::Ex06MCApplication(const char *name, const char *title) 
@@ -42,11 +44,11 @@ Ex06MCApplication::Ex06MCApplication(const char *name, const char *title)
     fStack(0),
     fDetConstruction(0),
     fPrimaryGenerator(0),
-    fCanvas(0),
     fOldGeometry(kFALSE)
 {
-// Standard constructor
-// ---
+/// Standard constructor
+/// \param name   The MC application name 
+/// \param title  The MC application description
 
   // Create a user stack
   fStack = new Ex03MCStack(1000);
@@ -67,18 +69,15 @@ Ex06MCApplication::Ex06MCApplication()
     fStack(0),
     fDetConstruction(0),
     fPrimaryGenerator(0),
-    fCanvas(0),
     fOldGeometry(kFALSE)
 {    
-// Default constructor
-// ---
+/// Default constructor
 }
 
 //_____________________________________________________________________________
 Ex06MCApplication::~Ex06MCApplication() 
 {
-// Destructor  
-// ---
+/// Destructor  
   
   delete fStack;
   delete fDetConstruction;
@@ -94,8 +93,9 @@ Ex06MCApplication::~Ex06MCApplication()
 //_____________________________________________________________________________
 void Ex06MCApplication::InitMC(const char* setup)
 {    
-// Initialize MC.
-// ---
+/// Initialize MC.
+/// The selection of the concrete MC is done in the macro.
+/// \param setup The name of the configuration macro 
 
   fVerbose.InitMC();
 
@@ -110,8 +110,8 @@ void Ex06MCApplication::InitMC(const char* setup)
 //_____________________________________________________________________________
 void Ex06MCApplication::RunMC(Int_t nofEvents)
 {    
-// MC run.
-// ---
+/// Run MC.
+/// \param nofEvents Number of events to be processed
 
   fVerbose.RunMC(nofEvents);
 
@@ -123,8 +123,9 @@ void Ex06MCApplication::RunMC(Int_t nofEvents)
 //_____________________________________________________________________________
 void Ex06MCApplication::ConstructGeometry()
 {    
-// Construct geometry using detector contruction class
-// ---
+/// Construct geometry using detector contruction class.
+/// The detector contruction class is using TGeo functions or
+/// TVirtualMC functions (if oldGeometry is selected)
 
   fVerbose.ConstructGeometry();
 
@@ -152,8 +153,7 @@ void Ex06MCApplication::ConstructGeometry()
 //_____________________________________________________________________________
 void Ex06MCApplication::ConstructOpGeometry()
 {    
-// Construct geometry using detector contruction class
-// ---
+/// Define material optical properties
 
   fVerbose.ConstructGeometry();
 
@@ -163,8 +163,7 @@ void Ex06MCApplication::ConstructOpGeometry()
 //_____________________________________________________________________________
 void Ex06MCApplication::InitGeometry()
 {    
-// Initialize geometry
-// ---
+/// Initialize geometry
   
   fVerbose.InitGeometry();
 }
@@ -172,8 +171,7 @@ void Ex06MCApplication::InitGeometry()
 //_____________________________________________________________________________
 void Ex06MCApplication::GeneratePrimaries()
 {    
-// Fill the user stack (derived from TVirtualMCStack) with primary particles.
-// ---
+/// Fill the user stack (derived from TVirtualMCStack) with primary particles.
   
   fVerbose.GeneratePrimaries();
 
@@ -183,8 +181,7 @@ void Ex06MCApplication::GeneratePrimaries()
 //_____________________________________________________________________________
 void Ex06MCApplication::BeginEvent()
 {    
-// User actions at beginning of event
-// ---
+/// User actions at beginning of event
 
   fVerbose.BeginEvent();
 
@@ -195,8 +192,7 @@ void Ex06MCApplication::BeginEvent()
 //_____________________________________________________________________________
 void Ex06MCApplication::BeginPrimary()
 {    
-// User actions at beginning of a primary track
-// ---
+/// User actions at beginning of a primary track
 
   fVerbose.BeginPrimary();
 }
@@ -204,8 +200,7 @@ void Ex06MCApplication::BeginPrimary()
 //_____________________________________________________________________________
 void Ex06MCApplication::PreTrack()
 {    
-// User actions at beginning of each track
-// ---
+/// User actions at beginning of each track
 
   fVerbose.PreTrack();
   
@@ -215,8 +210,7 @@ void Ex06MCApplication::PreTrack()
 //_____________________________________________________________________________
 void Ex06MCApplication::Stepping()
 {    
-// User actions at each step
-// ---
+/// User actions at each step
 
   fVerbose.Stepping();
 
@@ -237,8 +231,7 @@ void Ex06MCApplication::Stepping()
 //_____________________________________________________________________________
 void Ex06MCApplication::PostTrack()
 {    
-// User actions after finishing of each track
-// ---
+/// User actions after finishing of each track
 
   fVerbose.PostTrack();
 }
@@ -246,8 +239,7 @@ void Ex06MCApplication::PostTrack()
 //_____________________________________________________________________________
 void Ex06MCApplication::FinishPrimary()
 {    
-// User actions after finishing of a primary track
-// ---
+/// User actions after finishing of a primary track
 
   fVerbose.FinishPrimary();
 }
@@ -255,8 +247,7 @@ void Ex06MCApplication::FinishPrimary()
 //_____________________________________________________________________________
 void Ex06MCApplication::FinishEvent()
 {    
-// User actions after finishing of an event
-// ---
+/// User actions after finishing of an event
 
   fVerbose.FinishEvent();
   
@@ -285,8 +276,8 @@ void Ex06MCApplication::FinishEvent()
 //_____________________________________________________________________________
 void Ex06MCApplication::Field(const Double_t* /*x*/, Double_t* b) const
 {
-// Uniform magnetic field
-// ---
+/// Uniform magnetic field
+/// \param b   The field value
   
    for (Int_t i=0; i<3; i++) b[i] = 0.0;
 }

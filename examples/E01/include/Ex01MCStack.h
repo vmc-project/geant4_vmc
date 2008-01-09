@@ -1,3 +1,6 @@
+#ifndef Ex01_STACK_H
+#define Ex01_STACK_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,24 +12,24 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN01 adapted to Virtual Monte Carlo 
-//
-// Class Ex01MCStack
-// -----------------
-// Implementation of the TVirtualMCStack interface
-//
-// by Ivana Hrivnacova, 5.4.2002
-
-
-#ifndef Ex01_STACK_H
-#define Ex01_STACK_H
+/// \file  Ex01MCStack.h
+/// \brief Definition of the Ex01MCStack class 
+///
+/// Geant4 ExampleN01 adapted to Virtual Monte Carlo
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "Ex01Particle.h"
 
 #include <TVirtualMCStack.h>
 
 #include <stack>
+
+/// \ingroup E01
+/// \brief Implementation of the TVirtualMCStack interface
+///
+/// \date 05/04/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 class Ex01MCStack : public TVirtualMCStack
 {
@@ -42,11 +45,11 @@ class Ex01MCStack : public TVirtualMCStack
 		      Double_t polx, Double_t poly, Double_t polz,
 		      TMCProcess mech, Int_t& ntr, Double_t weight,
 		      Int_t is) ;
-    virtual TParticle* PopNextTrack(Int_t& track);
+    virtual TParticle* PopNextTrack(Int_t& itrack);
     virtual TParticle* PopPrimaryForTracking(Int_t i);    
     
     // set methods
-    virtual void  SetCurrentTrack(Int_t track);                           
+    virtual void  SetCurrentTrack(Int_t itrack);                           
 
     // get methods
     virtual Int_t  GetNtrack() const;
@@ -60,10 +63,10 @@ class Ex01MCStack : public TVirtualMCStack
     Ex01Particle* GetParticle(Int_t id) const;
   
     // data members
-    std::stack<Ex01Particle*>  fStack;    //!
-    TObjArray*                 fParticles;
-    Int_t                      fCurrentTrack;
-    Int_t                      fNPrimary;
+    std::stack<Ex01Particle*>  fStack;        //!< The stack of particles (transient)
+    TObjArray*                 fParticles;    ///< The array of particle (persistent)
+    Int_t                      fCurrentTrack; ///< The current track number
+    Int_t                      fNPrimary;     ///< The number of primaries
     
     ClassDef(Ex01MCStack,1) // Ex01MCStack
 };

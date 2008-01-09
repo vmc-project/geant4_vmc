@@ -1,3 +1,6 @@
+#ifndef EX03_PRIMARY_GENERATOR_H
+#define EX03_PRIMARY_GENERATOR_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,16 +12,14 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN03 adapted to Virtual Monte Carlo 
-//
-// Id: ExN03PrimaryGeneratorAction.hh,v 1.5 2002/01/09 17:24:11 ranjard Exp
-// GEANT4 tag Name: geant4-05-00
-//
-// by Ivana Hrivnacova, 6.3.2003
-
-#ifndef EX03_PRIMARY_GENERATOR_H
-#define EX03_PRIMARY_GENERATOR_H
+/// \file Ex03PrimaryGenerator.h 
+/// \brief Definition of the Ex03PrimaryGenerator class 
+///
+/// Geant4 ExampleN03 adapted to Virtual Monte Carlo: \n
+/// Id: ExN03PrimaryGeneratorAction.hh,v 1.5 2002/01/09 17:24:11 ranjard Exp
+/// GEANT4 tag Name: geant4-05-00
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <TVirtualMCApplication.h>
 
@@ -26,6 +27,12 @@ class TVirtualMCStack;
 class TVector3;
 
 class Ex03DetectorConstruction;
+
+/// \ingroup E03
+/// \brief The primary generator
+///
+/// \date 06/03/2003
+/// \author I. Hrivnacova; IPN, Orsay
 
 class Ex03PrimaryGenerator : public TObject
 {
@@ -48,22 +55,28 @@ class Ex03PrimaryGenerator : public TObject
     void GeneratePrimary2(const TVector3& origin);
  
     // data members
-    TVirtualMCStack*  fStack;    
-    Bool_t            fIsRandom;
-    Bool_t            fUserParticles;
-    Int_t             fNofPrimaries;
+    TVirtualMCStack*  fStack;         ///< VMC stack
+    Bool_t            fIsRandom;      ///< Switch to random generator
+    Bool_t            fUserParticles; ///< Switch to user particles
+    Int_t             fNofPrimaries;  ///< Number of primary particles
 
   ClassDef(Ex03PrimaryGenerator,1)  //Ex03PrimaryGenerator
 };
 
 // inline functions
 
+/// Switch on/off the random generator
+/// \param isRandom  If true, the position is randomized
 inline void  Ex03PrimaryGenerator::SetIsRandom(Bool_t isRandom)
 { fIsRandom = isRandom; }
 
+/// Switch on/off the user particles
+/// \param userParticles  If true, the user defined particles are shooted
 inline void  Ex03PrimaryGenerator::SetUserParticles(Bool_t userParticles)
 { fUserParticles = userParticles; }
 
+/// Set the number of particles to be generated
+/// \param nofPrimaries The number of particles to be generated
 inline void  Ex03PrimaryGenerator::SetNofPrimaries(Int_t nofPrimaries)
 { fNofPrimaries = nofPrimaries; }
 

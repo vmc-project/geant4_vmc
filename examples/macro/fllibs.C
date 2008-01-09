@@ -9,13 +9,15 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Macro for loading FLUKA libraries
+/// \file fllibs.C
+/// \brief Macro for loading FLUKA libraries
 
 #include <iostream>
 
 void fllibs()
 {
+/// Macro function for loading FLUKA libraries
+
   cout << "Loading Fluka libraries ..." << endl;
 
   gSystem->Load("libfluka.so");

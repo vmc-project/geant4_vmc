@@ -1,3 +1,6 @@
+#ifndef EX02_PARTICLE_H
+#define EX02_PARTICLE_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,25 +12,25 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 novice ExampleN02 adapted to Virtual Monte Carlo 
-//
-// Class Ex02Particle
-// ------------------
-// Extended TParticle with persistent pointers to mother and daughters
-// particles
-//
-// by Ivana Hrivnacova, 5.4.2002
-
-
-#ifndef EX02_PARTICLE_H
-#define EX02_PARTICLE_H
+/// \file  Ex02Particle.h
+/// \brief Definition of the Ex02Particle class
+///
+/// Geant4 ExampleN02 adapted to Virtual Monte Carlo
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <TObject.h>
 #include <TRef.h>
 #include <TRefArray.h>
 
 class TParticle;
+
+/// \ingroup E02
+/// \brief Extended TParticle with pointers to mother and daughter
+/// particles
+///
+/// \date 05/04/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 class Ex02Particle : public TObject
 {
@@ -52,10 +55,10 @@ class Ex02Particle : public TObject
     
   private:
     // data members
-    Int_t       fID;
-    TParticle*  fParticle;
-    TRef        fMother;
-    TRefArray   fDaughters;
+    Int_t       fID;        ///< The particle Id
+    TParticle*  fParticle;  ///< The particle definition
+    TRef        fMother;    ///< The particle mother 
+    TRefArray   fDaughters; ///< The particle daughters
     
     ClassDef(Ex02Particle,1) // Extended TParticle
 };

@@ -1,3 +1,6 @@
+#ifndef EX02_ROOT_MANAGER_H
+#define EX02_ROOT_MANAGER_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,18 +12,14 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 novice ExampleN02 adapted to Virtual Monte Carlo 
-//
-// Class Ex02RootManager
-// ---------------------
-// Class that takes care of Root IO.
-//
-// by Ivana Hrivnacova, 5.4.2002
-
-
-#ifndef EX02_ROOT_MANAGER_H
-#define EX02_ROOT_MANAGER_H
+/// \file E03/include/Ex02RootManager.h 
+/// \brief Definition of the Ex02RootManager class 
+///
+/// Geant4 ExampleN03 adapted to Virtual Monte Carlo. \n
+/// The implementation of the Ex02RootManager taken from
+/// the E02 example.
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <TObject.h>
 #include <TTree.h>
@@ -29,7 +28,18 @@
 
 class TParticle;
 
-enum FileMode { kRead, kWrite};
+/// Root file mode
+enum FileMode { 
+  kRead,  ///< Read mode 
+  kWrite  ///< Write mode
+};
+
+/// \ingroup E02
+/// \ingroup E03
+/// \brief Class that takes care of Root IO
+///
+/// \date 05/04/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 class Ex02RootManager : public TObject
 {
@@ -49,12 +59,12 @@ class Ex02RootManager : public TObject
     
   private:
     // data members
-    static  Ex02RootManager* fgInstance; //Singleton instance
+    static  Ex02RootManager* fgInstance; ///< Singleton instance
 
     // data members
-    TFile*  fFile;
-    TTree*  fTree;
-    TString fPath;
+    TFile*  fFile; ///< Root output file
+    TTree*  fTree; ///< Root output tree 
+    TString fPath; ///< The path to the root file
     
     ClassDef(Ex02RootManager,0) // Root IO manager
 };

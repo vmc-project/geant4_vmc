@@ -9,12 +9,15 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Configuration macro for Fluka VMC for Example01 
-
+/// \ingroup E01
+/// \file E01/flConfig.C
+/// \brief Configuration macro for Fluka VMC for Example01 
 
 void Config()
 {
+/// The configuration function for Fluka VMC for Example01
+/// called during MC application initialization. 
+
   new  TFluka("C++ Interface to Fluka", 0/*verbositylevel*/);
 
   cout << "Fluka has been created." << endl;

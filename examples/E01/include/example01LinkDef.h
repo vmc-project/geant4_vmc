@@ -9,6 +9,9 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
+/// \file example01LinkDef.h
+/// \brief The CINT link definitions for example E01 classes
+
 #ifdef __CINT__
 
 #pragma link off all globals;

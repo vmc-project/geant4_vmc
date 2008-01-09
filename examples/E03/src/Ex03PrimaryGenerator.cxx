@@ -9,13 +9,15 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN03 adapted to Virtual Monte Carlo 
-//
-// Id: ExN03PrimaryGeneratorAction.cc,v 1.6 2002/01/09 17:24:13 ranjard Exp 
-// GEANT4 tag Name: geant4-05-00 
-//
-// by Ivana Hrivnacova, 6.3.2003
+/// \file Ex03PrimaryGenerator.cxx 
+/// \brief Implementation of the Ex03PrimaryGenerator class 
+///
+/// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
+/// Id: ExN03PrimaryGeneratorAction.cc,v 1.6 2002/01/09 17:24:13 ranjard Exp \n
+/// GEANT4 tag Name: geant4-05-00 
+///
+/// \date 06/03/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <TVirtualMC.h>
 #include <TVirtualMCStack.h>
@@ -28,7 +30,9 @@
 
 #include "Ex03PrimaryGenerator.h"
 
+/// \cond CLASSIMP
 ClassImp(Ex03PrimaryGenerator)
+/// \endcond
 
 //_____________________________________________________________________________
 Ex03PrimaryGenerator::Ex03PrimaryGenerator(TVirtualMCStack* stack) 
@@ -39,8 +43,8 @@ Ex03PrimaryGenerator::Ex03PrimaryGenerator(TVirtualMCStack* stack)
     fNofPrimaries(1)
     
 {
-// Standard constructor
-// ---
+/// Standard constructor
+/// \param stack  The VMC stack
 }
 
 //_____________________________________________________________________________
@@ -50,15 +54,13 @@ Ex03PrimaryGenerator::Ex03PrimaryGenerator()
     fIsRandom(false),
     fNofPrimaries(0)
 {    
-// Default constructor
-// ---
+/// Default constructor
 }
 
 //_____________________________________________________________________________
 Ex03PrimaryGenerator::~Ex03PrimaryGenerator() 
 {
-// Destructor  
-// ---
+/// Destructor  
 }
 
 //
@@ -68,9 +70,9 @@ Ex03PrimaryGenerator::~Ex03PrimaryGenerator()
 //_____________________________________________________________________________
 void Ex03PrimaryGenerator::GeneratePrimary1(const TVector3& origin)
 {    
-// Add one primary particle to the user stack 
-// (derived from TVirtualMCStack).
-// ---
+/// Add one primary particle to the user stack 
+/// (derived from TVirtualMCStack).
+/// \param origin  The track position
   
  // Track ID (filled by stack)
  Int_t ntr;
@@ -117,9 +119,9 @@ void Ex03PrimaryGenerator::GeneratePrimary1(const TVector3& origin)
 //_____________________________________________________________________________
 void Ex03PrimaryGenerator::GeneratePrimary2(const TVector3& origin)
 {    
-// Add user defined particle and ion as primaries to the user stack 
-// (derived from TVirtualMCStack).
-// ---
+/// Add user defined particle and ion as primaries to the user stack 
+/// (derived from TVirtualMCStack).
+/// \param origin  The track position
   
  // Track ID (filled by stack)
  Int_t ntr;
@@ -186,8 +188,7 @@ void Ex03PrimaryGenerator::GeneratePrimary2(const TVector3& origin)
 //_____________________________________________________________________________
 void Ex03PrimaryGenerator::GeneratePrimaries(const TVector3& origin)
 {    
-// Fill the user stack (derived from TVirtualMCStack) with primary particles.
-// ---
+/// Fill the user stack (derived from TVirtualMCStack) with primary particles.
 
   if ( ! fUserParticles )
     for (Int_t i=0; i<fNofPrimaries; i++) GeneratePrimary1(origin);

@@ -9,13 +9,15 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN02 adapted to Virtual Monte Carlo 
-//
-// Id: ExN03CalorimeterSD.cc,v 1.6 2002/01/09 17:24:12 ranjard Exp 
-// GEANT4 tag $Name:  $
-//
-// by Ivana Hrivnacova, 6.3.2003
+/// \file Ex03CalorimeterSD.cxx 
+/// \brief Implementation of the Ex03CalorimeterSD class 
+///
+/// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
+/// Id: ExN03CalorimeterSD.cc,v 1.6 2002/01/09 17:24:12 ranjard Exp \n
+/// GEANT4 tag $Name:  $
+///
+/// \date 06/03/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <Riostream.h>
 #include <TVirtualMC.h>
@@ -27,7 +29,9 @@
 #include "Ex03CalorHit.h"
 #include "Ex02RootManager.h"
 
+/// \cond CLASSIMP
 ClassImp(Ex03CalorimeterSD)
+/// \endcond
 
 using namespace std;
 
@@ -41,9 +45,13 @@ Ex03CalorimeterSD::Ex03CalorimeterSD(const char* name,
     fGapVolId(0),
     fVerboseLevel(1)
 {
-  // Create hits collection and an empty hit for each layer
-  // As the copy numbers may start from 0 or 1 (depending on
-  // geometry model, we create one more layer for this case.)
+/// Standard constructor.
+/// Create hits collection and an empty hit for each layer
+/// As the copy numbers may start from 0 or 1 (depending on
+/// geometry model, we create one more layer for this case.)
+/// \param name      The calorimeter hits collection name
+/// \param detector  The detector construction
+
   fCalCollection = new TClonesArray("Ex03CalorHit", 500);
   for (Int_t i=0; i<fDetector->GetNbOfLayers()+1; i++) 
     new ((*fCalCollection)[i]) Ex03CalorHit();
@@ -57,11 +65,15 @@ Ex03CalorimeterSD::Ex03CalorimeterSD()
     fAbsorberVolId(0),
     fGapVolId(0),
     fVerboseLevel(1)
-{}
+{
+/// Default constructor
+}
 
 //_____________________________________________________________________________
 Ex03CalorimeterSD::~Ex03CalorimeterSD()
 {
+/// Destructor
+
   if (fCalCollection) fCalCollection->Delete();
   delete fCalCollection;
 }
@@ -73,8 +85,8 @@ Ex03CalorimeterSD::~Ex03CalorimeterSD()
 //_____________________________________________________________________________
 Ex03CalorHit* Ex03CalorimeterSD::GetHit(Int_t i) const
 {
-// Returns the hit for the specified layer.
-// ---
+/// \return   The hit for the specified layer.
+/// \param i  The layer number
 
   return (Ex03CalorHit*)fCalCollection->At(i);
 }
@@ -82,8 +94,7 @@ Ex03CalorHit* Ex03CalorimeterSD::GetHit(Int_t i) const
 //_____________________________________________________________________________
 void  Ex03CalorimeterSD::ResetHits()
 {
-// Resets all hits in the hits collection.
-// ---
+/// Reset all hits in the hits collection.
 
   for (Int_t i=0; i<fCalCollection->GetEntriesFast(); i++) 
     GetHit(i)->Reset();
@@ -96,9 +107,8 @@ void  Ex03CalorimeterSD::ResetHits()
 //_____________________________________________________________________________
 void Ex03CalorimeterSD::Initialize()
 {
-// Registers hits collection in Root manager;
-// sets sensitive volumes.
-// ---
+/// Register hits collection in the Root manager;
+/// set sensitive volumes.
   
   Register();
   
@@ -115,8 +125,7 @@ void Ex03CalorimeterSD::Initialize()
 //_____________________________________________________________________________
 Bool_t Ex03CalorimeterSD::ProcessHits()
 {
-// Accounts energy deposit and track lengths for each layer in its hit.
-// ---
+/// Account energy deposit and track lengths for each layer in its hit.
 
   Int_t copyNo;
   Int_t id = gMC->CurrentVolID(copyNo);
@@ -149,8 +158,7 @@ Bool_t Ex03CalorimeterSD::ProcessHits()
 //_____________________________________________________________________________
 void Ex03CalorimeterSD::EndOfEvent()
 {
-// Prints hits collection (if verbose) and resets hits afterwards.
-// ---
+/// Print hits collection (if verbose) and reset hits afterwards.
 
   if (fVerboseLevel>1)  Print();
     
@@ -161,8 +169,7 @@ void Ex03CalorimeterSD::EndOfEvent()
 //_____________________________________________________________________________
 void Ex03CalorimeterSD::Register()
 {
-// Registers the hits collection in Root manager.
-// ---
+/// Register the hits collection in Root manager.
   
   Ex02RootManager::Instance()
     ->Register("hits", "TClonesArray", &fCalCollection);
@@ -171,8 +178,7 @@ void Ex03CalorimeterSD::Register()
 //_____________________________________________________________________________
 void Ex03CalorimeterSD::Print(Option_t* /*option*/) const
 {
-// Prints the hits collection.
-// ---
+/// Print the hits collection.
   
    Int_t nofHits = fCalCollection->GetEntriesFast();
      
@@ -184,8 +190,7 @@ void Ex03CalorimeterSD::Print(Option_t* /*option*/) const
 //_____________________________________________________________________________
 void Ex03CalorimeterSD::PrintTotal() const
 {
-// Prints the total values for all layers.
-// ---
+/// Print the total values for all layers.
   
   Double_t totEAbs=0.;
   Double_t totLAbs=0.;

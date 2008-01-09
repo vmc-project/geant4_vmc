@@ -9,11 +9,13 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Example03 
-// Macro for reading the E03 simulated data from Root file
+/// \file E03/read.C
+/// \brief Macro for reading the E03 simulated data from Root file
 
+void read() 
 {
+/// Macro for reading the E03 simulated data from Root file
+
   // Load basic libraries
   gROOT->LoadMacro("../macro/basiclibs.C");
   basiclibs();

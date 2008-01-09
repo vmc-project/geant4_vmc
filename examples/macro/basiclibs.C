@@ -9,11 +9,13 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Macro for loading basic libraries used with both Geant3 and Geant4
+/// \file basiclibs.C
+/// \brief Macro for loading basic libraries used with all MCs
 
 void basiclibs()
 {
+/// Macro function for loading basic libraries used with all MCs
+
   gSystem->Load("libRIO");
   gSystem->Load("libGeom");
   gSystem->Load("libVMC");

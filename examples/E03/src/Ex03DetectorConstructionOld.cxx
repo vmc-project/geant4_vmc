@@ -9,20 +9,24 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN03 adapted to Virtual Monte Carlo 
-//
-// Id: ExN03DetectorConstruction.cc,v 1.11 2002/01/09 17:24:12 ranjard Exp 
-// GEANT4 tag $Name:  $
-//
-// by Ivana Hrivnacova, 6.3.2003
+/// \file Ex03DetectorConstructionOld.cxx 
+/// \brief Implementation of the Ex03DetectorConstructionOld class 
+///
+/// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
+/// Id: ExN03DetectorConstruction.cc,v 1.11 2002/01/09 17:24:12 ranjard Exp \n
+/// GEANT4 tag $Name:  $
+///
+/// \date 06/03/2002
+/// \author I. Hrivnacova; IPN, Orsay
  
 #include <Riostream.h>
 #include <TVirtualMC.h>
 
 #include "Ex03DetectorConstructionOld.h"
 
+/// \cond CLASSIMP
 ClassImp(Ex03DetectorConstructionOld)
+/// \endcond
 
 //_____________________________________________________________________________
 Ex03DetectorConstructionOld::Ex03DetectorConstructionOld()
@@ -39,6 +43,8 @@ Ex03DetectorConstructionOld::Ex03DetectorConstructionOld()
     fAbsorberMaterial("Lead"),
     fGapMaterial("liquidArgon")
 {
+/// Default constuctor
+
    // default parameter values of the calorimeter (in cm)
    fAbsorberThickness = 1.;
    fGapThickness      = 0.5;
@@ -51,7 +57,7 @@ Ex03DetectorConstructionOld::Ex03DetectorConstructionOld()
 //_____________________________________________________________________________
 Ex03DetectorConstructionOld::~Ex03DetectorConstructionOld()
 {
-// Destructor
+/// Destructor
 }
 
 //
@@ -61,8 +67,7 @@ Ex03DetectorConstructionOld::~Ex03DetectorConstructionOld()
 //_____________________________________________________________________________
 void Ex03DetectorConstructionOld::ComputeCalorParameters()
 {
-// Compute derived parameters of the calorimeter
-// ---
+/// Compute derived parameters of the calorimeter
 
   fLayerThickness = fAbsorberThickness + fGapThickness;
   fCalorThickness = fNbOfLayers*fLayerThickness;
@@ -78,6 +83,8 @@ void Ex03DetectorConstructionOld::ComputeCalorParameters()
 //_____________________________________________________________________________
 void Ex03DetectorConstructionOld::ConstructMaterials()
 {
+/// Construct materials using VMC functions
+
   //
   // Tracking medias (defaut parameters)
   //
@@ -231,6 +238,8 @@ void Ex03DetectorConstructionOld::ConstructMaterials()
 //_____________________________________________________________________________
 void Ex03DetectorConstructionOld::ConstructGeometry()
 {
+/// Contruct volumes using VMC functions
+
   // Complete the Calor parameters definition 
   ComputeCalorParameters();
    
@@ -331,6 +340,8 @@ void Ex03DetectorConstructionOld::ConstructGeometry()
 //_____________________________________________________________________________
 void Ex03DetectorConstructionOld::PrintCalorParameters()
 {
+/// Print calorimeter parameters
+
   cout << "\n------------------------------------------------------------"
        << "\n---> The calorimeter is " << fNbOfLayers << " layers of: [ "
        << fAbsorberThickness << "cm of " << fAbsorberMaterial  
@@ -342,8 +353,8 @@ void Ex03DetectorConstructionOld::PrintCalorParameters()
 //_____________________________________________________________________________
 void Ex03DetectorConstructionOld::SetNbOfLayers(Int_t value)
 {
-// Set number of layers.
-// --
+/// Set the number of layers.
+/// \param value  The new number of calorimeter layers
 
   fNbOfLayers = value;
 }
@@ -351,8 +362,8 @@ void Ex03DetectorConstructionOld::SetNbOfLayers(Int_t value)
 //_____________________________________________________________________________
 void Ex03DetectorConstructionOld::SetDefaultMaterial(const TString& materialName)
 {
-// Set default material
-// --
+/// Set default material
+/// \param materialName  The new default material name.
 
   fDefaultMaterial = materialName;
 }
@@ -360,8 +371,8 @@ void Ex03DetectorConstructionOld::SetDefaultMaterial(const TString& materialName
 //_____________________________________________________________________________
 void Ex03DetectorConstructionOld::SetAbsorberMaterial(const TString& materialName)
 {
-// Set absorber material
-// --
+/// Set absorer material
+/// \param materialName  The new absorber material name.
 
   fAbsorberMaterial = materialName;
 }
@@ -369,8 +380,8 @@ void Ex03DetectorConstructionOld::SetAbsorberMaterial(const TString& materialNam
 //_____________________________________________________________________________
 void Ex03DetectorConstructionOld::SetGapMaterial(const TString& materialName)
 {
-// Set gap material
-// --
+/// Set gap material
+/// \param materialName  The new gap material name.
 
   fGapMaterial = materialName;
 }
@@ -378,8 +389,8 @@ void Ex03DetectorConstructionOld::SetGapMaterial(const TString& materialName)
 //_____________________________________________________________________________
 void Ex03DetectorConstructionOld::SetCalorSizeYZ(Double_t value)
 {
-// Change the transverse size and recompute the calorimeter parameters
-// ---
+/// Change the transverse size and recompute the calorimeter parameters
+/// \param value The new calorimeter tranverse size
 
   fCalorSizeYZ = value;
 }  
@@ -387,8 +398,8 @@ void Ex03DetectorConstructionOld::SetCalorSizeYZ(Double_t value)
 //_____________________________________________________________________________
 void Ex03DetectorConstructionOld::SetAbsorberThickness(Double_t value)
 {
-// Change Absorber thickness and recompute the calorimeter parameters
-// ---
+/// Change the absorber thickness and recompute the calorimeter parameters
+/// \param value The new absorber thickness
 
   fAbsorberThickness = value;
 }  
@@ -396,8 +407,8 @@ void Ex03DetectorConstructionOld::SetAbsorberThickness(Double_t value)
 //_____________________________________________________________________________
 void Ex03DetectorConstructionOld::SetGapThickness(Double_t value)
 {
-// Change Gap thickness and recompute the calorimeter parameters
-// ---
+/// Change the gap thickness and recompute the calorimeter parameters
+/// \param value The new gap thickness
 
   fGapThickness = value;
 }  

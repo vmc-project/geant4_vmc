@@ -1,3 +1,6 @@
+#ifndef EX03_DETECTOR_CONSTRUCTION_OLD_H
+#define EX03_DETECTOR_CONSTRUCTION_OLD_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,16 +12,14 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN03 adapted to Virtual Monte Carlo 
-//
-// Id: ExN03DetectorConstruction.hh,v 1.5 2002/01/09 17:24:11 ranjard Exp 
-// GEANT4 tag $Name:  $
-//
-// by Ivana Hrivnacova, 6.3.2003
-
-#ifndef EX03_DETECTOR_CONSTRUCTION_OLD_H
-#define EX03_DETECTOR_CONSTRUCTION_OLD_H
+/// \file Ex03DetectorConstructionOld.h 
+/// \brief Definition of the Ex03DetectorConstructionOld class 
+///
+/// Geant4 ExampleN03 adapted to Virtual Monte Carlo. \n
+/// Id: ExN03DetectorConstruction.hh,v 1.5 2002/01/09 17:24:11 ranjard Exp 
+/// GEANT4 tag $Name:  $
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <map>
 
@@ -26,9 +27,17 @@
 #include <TObject.h>
 #include <TString.h>
 
+/// \ingroup E03
+/// \brief The old detector construction (via VMC functions)
+///
+/// \date 06/03/2003
+/// \author I. Hrivnacova; IPN, Orsay
+
 class Ex03DetectorConstructionOld : public TObject
 {
+  /// The map of string names to integers
   typedef map<TString, Int_t>  NameMap; 
+  /// The iterator for the map of string names to integers
   typedef NameMap::const_iterator   NameMapIterator; 
 
   public:  
@@ -43,39 +52,53 @@ class Ex03DetectorConstructionOld : public TObject
      
      // set methods
      void SetNbOfLayers (Int_t value);  
-     void SetDefaultMaterial(const TString&);     
-     void SetAbsorberMaterial(const TString&);     
-     void SetGapMaterial(const TString&);     
+     void SetDefaultMaterial(const TString& materialName);     
+     void SetAbsorberMaterial(const TString& materialName);     
+     void SetGapMaterial(const TString& materialName);     
      void SetCalorSizeYZ(Double_t value);          
      void SetAbsorberThickness(Double_t value);     
      void SetGapThickness(Double_t value);
      
      // get methods
+
+     /// \return The number of calorimeter layers
      Int_t    GetNbOfLayers() const    { return fNbOfLayers; }
+
+     /// \return The world size x component
      Double_t GetWorldSizeX() const    { return fWorldSizeX; } 
+
+     /// \return The world size y,z component
      Double_t GetWorldSizeYZ() const   { return fWorldSizeYZ; }
+
+     /// \return The calorimeter size y,z component
      Double_t GetCalorSizeYZ() const   { return fCalorSizeYZ; }
-     Double_t GetCalorThickness()const    { return fCalorThickness; } 
+
+     /// \return The calorimeter thickness
+     Double_t GetCalorThickness()const { return fCalorThickness; } 
+
+     /// \return The absorber thickness
      Double_t GetAbsorberThickness()const { return fAbsorberThickness; }      
-     Double_t GetGapThickness()const      { return fGapThickness; }
+
+     /// \return The gap thickness
+     Double_t GetGapThickness()const   { return fGapThickness; }
           
   private:      
      // methods
      void  ComputeCalorParameters();
 
      // data members  
-     Int_t     fNbOfLayers;
-     Double_t  fWorldSizeX;
-     Double_t  fWorldSizeYZ;
-     Double_t  fCalorSizeYZ;
-     Double_t  fCalorThickness;
-     Double_t  fLayerThickness;
-     Double_t  fAbsorberThickness;
-     Double_t  fGapThickness;
+     Int_t     fNbOfLayers;       ///< The number of calorimeter layers
+     Double_t  fWorldSizeX;       ///< The world size x component
+     Double_t  fWorldSizeYZ;      ///< The world size y,z component
+     Double_t  fCalorSizeYZ;      ///< The calorimeter size y,z component
+     Double_t  fCalorThickness;   ///< The calorimeter thickness
+     Double_t  fLayerThickness;   ///< The calorimeter layer thickness
+     Double_t  fAbsorberThickness;///< The absorber thickness
+     Double_t  fGapThickness;     ///< The gap thickness
      
-     TString   fDefaultMaterial;
-     TString   fAbsorberMaterial;
-     TString   fGapMaterial;
+     TString   fDefaultMaterial;  ///< The default material name
+     TString   fAbsorberMaterial; ///< The absorber material name
+     TString   fGapMaterial;      ///< The gap material name
      
   ClassDef(Ex03DetectorConstructionOld,1) //Ex03DetectorConstructionOld
 };

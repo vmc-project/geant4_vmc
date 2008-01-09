@@ -9,11 +9,16 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Macro for running Example02 with Geant3 
+/// \ingroup E02
+/// \file E02/run_g3.C
+/// \brief Macro for running Example02 with Geant3 
 
-void run_g3(const TString& configMacro = "g3Config.C") 
+void run_g3(const TString& configMacro = "g3tgeoConfig.C") 
 {
+/// Macro function for running Example02 with Geant3 from
+/// Root interactive session
+/// \param configMacro configuration macro name, default \ref E02/g3Config.C 
+
   // Load basic libraries
   gROOT->LoadMacro("../macro/basiclibs.C");
   basiclibs();

@@ -9,13 +9,15 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN06 adapted to Virtual Monte Carlo 
-//
-// Id: ExN06DetectorConstruction.cc,v 1.14 2004/03/17 22:41:12 gum Exp 
-// GEANT4 tag Name: geant4-07-00-cand-01 
-//
-// by Ivana Hrivnacova, 16.5.2005
+/// \file Ex06DetectorConstructionOld.cxx 
+/// \brief Implementation of the Ex06DetectorConstructionOld class 
+///
+/// Geant4 ExampleN06 adapted to Virtual Monte Carlo \n
+/// Id: ExN06DetectorConstruction.cc,v 1.14 2004/03/17 22:41:12 gum Exp \n
+/// GEANT4 tag Name: geant4-07-00-cand-01 
+///
+/// \date 16/05/2005
+/// \author I. Hrivnacova; IPN, Orsay
  
 #include <Riostream.h>
 #include <TVirtualMC.h>
@@ -23,12 +25,16 @@
 
 #include "Ex06DetectorConstructionOld.h"
 
+/// \cond CLASSIMP
 ClassImp(Ex06DetectorConstructionOld)
+/// \endcond
 
 //_____________________________________________________________________________
 Ex06DetectorConstructionOld::Ex06DetectorConstructionOld()
   : TObject()
 {
+/// Default constuctor
+
     fExpHallSize = 1000;  // 10*m
     fTankSize    = 500;   // 5*m
     fBubbleSize  = 50;    // 0.5*m
@@ -37,7 +43,7 @@ Ex06DetectorConstructionOld::Ex06DetectorConstructionOld()
 //_____________________________________________________________________________
 Ex06DetectorConstructionOld::~Ex06DetectorConstructionOld()
 {
-// Destructor
+/// Destructor
 }
 
 
@@ -48,6 +54,7 @@ Ex06DetectorConstructionOld::~Ex06DetectorConstructionOld()
 //_____________________________________________________________________________
 void Ex06DetectorConstructionOld::ConstructMaterials()
 {
+/// Construct materials using VMC functions
    
   Double_t a1[2] = { 14.01, 16.00};
   Double_t z1[2] = {  7.0,   8.0};
@@ -85,6 +92,7 @@ void Ex06DetectorConstructionOld::ConstructMaterials()
 //_____________________________________________________________________________
 void Ex06DetectorConstructionOld::ConstructGeometry()
 {
+/// Contruct volumes using VMC functions
 
 // The experimental Hall
 //

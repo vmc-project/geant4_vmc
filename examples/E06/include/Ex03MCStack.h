@@ -1,3 +1,6 @@
+#ifndef EX03_STACK_H
+#define EX03_STACK_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,19 +12,10 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN02 adapted to Virtual Monte Carlo 
-//
-// Class Ex03MCStack
-// -----------------
-// Implementation of the TVirtualMCStack interface
-// (Taken from example E03)
-//
-// by Ivana Hrivnacova, 16.5.2005
-
-
-#ifndef EX03_STACK_H
-#define EX03_STACK_H
+/// \file  E06/include/Ex03MCStack.h
+/// \brief Definition of the Ex03MCStack class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <TVirtualMCStack.h>
 
@@ -29,6 +23,15 @@
 
 class TParticle;
 class TClonesArray;
+
+/// \ingroup E03
+/// \ingroup E06
+/// \brief Implementation of the TVirtualMCStack interface
+///
+/// (Taken from the E03 example)
+///
+/// \date 16/05/2005
+/// \author I. Hrivnacova; IPN, Orsay
 
 class Ex03MCStack : public TVirtualMCStack
 {
@@ -62,10 +65,10 @@ class Ex03MCStack : public TVirtualMCStack
     
   private:
     // data members
-    std::stack<TParticle*>  fStack;    //!
-    TClonesArray*           fParticles;
-    Int_t                   fCurrentTrack;
-    Int_t                   fNPrimary;
+    std::stack<TParticle*>  fStack;       //!< The stack of particles (transient)
+    TClonesArray*           fParticles;   ///< The array of particle (persistent)
+    Int_t                   fCurrentTrack;///< The current track number
+    Int_t                   fNPrimary;    ///< The number of primaries
     
     ClassDef(Ex03MCStack,1) // Ex03MCStack
 };

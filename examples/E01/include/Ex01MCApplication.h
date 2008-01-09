@@ -1,3 +1,6 @@
+#ifndef EX01_MC_APPLICATION_H
+#define EX01_MC_APPLICATION_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,20 +12,21 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN01 adapted to Virtual Monte Carlo 
-//
-// Class Ex01MCApplication
-// ----------------------- 
-// Implementation of the TVirtualMCApplication
-//
-// by Ivana Hrivnacova, 5.4.2002
-
-#ifndef EX01_MC_APPLICATION_H
-#define EX01_MC_APPLICATION_H
+/// \file Ex01MCApplication.h
+/// \brief Definition of the Ex01MCApplication class 
+///
+/// Geant4 ExampleN01 adapted to Virtual Monte Carlo
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <TVirtualMCApplication.h>
 #include <TVirtualMCStack.h>
+
+/// \ingroup E01
+/// \brief Implementation of the TVirtualMCApplication
+///
+/// \date 05/04/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 class Ex01MCApplication : public TVirtualMCApplication
 {
@@ -61,11 +65,11 @@ class Ex01MCApplication : public TVirtualMCApplication
     void ConstructVolumes();
   
     // data members
-    TVirtualMCStack*  fStack;
-    Int_t  fImedAr;
-    Int_t  fImedAl;
-    Int_t  fImedPb;
-    Bool_t fOldGeometry;
+    TVirtualMCStack*  fStack;       ///< The VMC stack
+    Int_t             fImedAr;      ///< The Argon gas medium Id
+    Int_t             fImedAl;      ///< The Aluminium medium Id
+    Int_t             fImedPb;      ///< The Lead medium Id
+    Bool_t            fOldGeometry; ///< Option for geometry definition
 
   ClassDef(Ex01MCApplication,1)  //Interface to MonteCarlo application
 };
@@ -73,10 +77,16 @@ class Ex01MCApplication : public TVirtualMCApplication
 // inline functions
 
 inline Ex01MCApplication* Ex01MCApplication::Instance()
-{ return (Ex01MCApplication*)(TVirtualMCApplication::Instance()); }
+{ 
+  /// \return The MC application instance
+  return (Ex01MCApplication*)(TVirtualMCApplication::Instance()); 
+}
 
 inline void Ex01MCApplication::SetOldGeometry(Bool_t oldGeometry)
-{ fOldGeometry = oldGeometry; }
+{ 
+  /// Select old geometry definition (via TVirtualMC)
+  fOldGeometry = oldGeometry; 
+}
 
 #endif //EX01_MC_APPLICATION_H
 

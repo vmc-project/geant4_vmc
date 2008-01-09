@@ -9,19 +9,23 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN03 adapted to Virtual Monte Carlo 
-//
-// Id: ExN03CalorHit.cc,v 1.5 2002/01/09 17:24:12 ranjard Exp 
-// GEANT4 tag Name: geant4-05-00 
-//
-// by Ivana Hrivnacova, 6.3.2003
+/// \file Ex03CalorHit.cxx 
+/// \brief Implementation of the Ex03CalorHit class 
+///
+/// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
+/// Id: ExN03CalorHit.cc,v 1.5 2002/01/09 17:24:12 ranjard Exp \n
+/// GEANT4 tag Name: geant4-05-00 
+///
+/// \date 06/03/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <Riostream.h>
 
 #include "Ex03CalorHit.h"
 
+/// \cond CLASSIMP
 ClassImp(Ex03CalorHit)
+/// \endcond
 
 //_____________________________________________________________________________
 Ex03CalorHit::Ex03CalorHit() 
@@ -30,17 +34,20 @@ Ex03CalorHit::Ex03CalorHit()
     fTrackLengthAbs(0.),
     fEdepGap(0.),
     fTrackLengthGap(0.)
-{}
+{
+/// Default constructor
+}
 
 //_____________________________________________________________________________
 Ex03CalorHit::~Ex03CalorHit() 
-{}
+{
+/// Destructor
+}
 
 //_____________________________________________________________________________
 void Ex03CalorHit::Print(Option_t* /*option*/) const
 {
-// Prints hit info
-// ---
+/// Print hit info
 
   cout << "In absorber: " << endl
        << "   energy deposit (keV): " << fEdepAbs * 1.0e06 << endl
@@ -53,8 +60,7 @@ void Ex03CalorHit::Print(Option_t* /*option*/) const
 //_____________________________________________________________________________
 void Ex03CalorHit::Reset()
 {
-// Reset all accounted values.
-// ---
+/// Reset all accounted values.
 
   fEdepAbs = 0.;
   fTrackLengthAbs = 0.;

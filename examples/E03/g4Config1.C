@@ -9,14 +9,19 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Configuration macro for Geant4 VirtualMC for Example03
-// for geometry defined with Geant4 in a user run configuration
-
+/// \ingroup E03
+/// \file E03/g4Config1.C
+/// \brief Configuration macro for Geant4 VirtualMC for Example03
+///
+/// For geometry defined with Geant4 in a user run configuration.
 
 void Config()
 {
-  // Load G4 novice N02 example library (with detector construction)
+/// The configuration function for Geant4 VMC for Example03
+/// called during MC application initialization. 
+/// For geometry defined with Geant4 in a user run configuration.
+
+  // Load G4 novice N03 example library (with detector construction)
   gSystem->Load("$G4INSTALL/tmp/$G4SYSTEM/exampleN03/libexampleN03");
 
   // Load library with a user run configuration

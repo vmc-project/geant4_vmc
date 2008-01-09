@@ -9,6 +9,9 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
+/// \file g4libs.C
+/// \brief Macro for loading Geant4 and Geant4 VMC libraries
+
 //
 // Macro for loading Geant4 and Geant4 VMC libraries
 
@@ -17,9 +20,8 @@
 
 void g4libs()
 {
-// Loads granular Geant4 libraries.
-// Change the comment if global libraries are used.
-// ---
+/// Macro function for loading Geant4 granular libraries.
+/// Change the comment if global libraries are used.
 
   g4libs_granular();
   // g4libs_global();
@@ -27,8 +29,9 @@ void g4libs()
 
 Bool_t isSet(const char* variable)
 {
-// Checks if the specified environment variable is set
-// ---
+/// Helper function which checks if the specified environment variable 
+/// is set.
+/// \param variable  The environment variable name
 
   TString value = gSystem->Getenv(variable);
   if ( value != "") return true;
@@ -38,6 +41,9 @@ Bool_t isSet(const char* variable)
 
 Bool_t isLibrary(const char* libName)
 {
+/// Helper function which testes the existence of the given library
+/// \param libName  The library name
+
   if (TString(gSystem->DynamicPathName(libName, kTRUE)) != TString(""))
     return kTRUE;
   else  
@@ -46,6 +52,8 @@ Bool_t isLibrary(const char* libName)
 
 void vgmlibs()
 { 
+/// Macro function for loading VGM libraries.
+
   if (isSet("USE_VGM")) { 
     cout << "Loading VGM libraries ... " << endl;
     gSystem->Load("libClhepVGM");
@@ -58,9 +66,8 @@ void vgmlibs()
   
 void g4libs_graphics(Bool_t granular = true) 
 {
-// Loads G4 graphics libraries, 
-// external packages: graphics drivers, .. used by G4
-// ---
+/// Macro function for loading Geant4 graphics libraries, 
+/// external packages: graphics drivers, .. used by Geant4.
   
   // Graphics configuration
   Bool_t isXt = isSet("G4VIS_BUILD_OPACS_DRIVER") ||
@@ -133,9 +140,8 @@ void g4libs_graphics(Bool_t granular = true)
 
 void g4libs_granular()
 {
-// Loads G4 granular libraries and G4 VMC library. 
-// external packages: CLHEP, graphics drivers, .. used by G4
-// ---
+/// Macro function for loading Geant4 granular libraries, Geant4 VMC library
+/// and external packages: CLHEP, graphics drivers, .. used by Geant4.
 
   cout << "Loading Geant4 granular libraries ..." << endl;
 
@@ -281,10 +287,8 @@ void g4libs_granular()
 
 void g4libs_global()
 {
-// Loads G4 global libraries, 
-// external packages: CLHEP, graphics drivers, .. used by G4
-// and Alice G4 libraries: AliGeant4, TGeant4
-// ---
+/// Macro function for loading Geant4 global libraries, Geant4 VMC library 
+/// and external packages: CLHEP, graphics drivers, .. used by Geant4
 
   cout << "Loading Geant4 global libraries ..." << endl;
  

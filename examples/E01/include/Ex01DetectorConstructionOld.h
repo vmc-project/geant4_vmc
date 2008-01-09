@@ -1,3 +1,6 @@
+#ifndef EX01_DETECTOR_CONSTRUCTION_OLD_H
+#define EX01_DETECTOR_CONSTRUCTION_OLD_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,21 +12,29 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN02 adapted to Virtual Monte Carlo 
-// Old (deprecated) way of geometry definition via VMC
-//
-// Id: ExN02DetectorConstruction.hh,v 1.7 2002/01/09 17:24:09 ranjard Exp 
-// GEANT4 tag Name: geant4-04-00-patch-02 
-//
-// by Ivana Hrivnacova, 21.4.2002
-// separated from Ex01MCAopplication, 8.12.2006
-
-#ifndef EX01_DETECTOR_CONSTRUCTION_OLD_H
-#define EX01_DETECTOR_CONSTRUCTION_OLD_H
+/// \file Ex01DetectorConstructionOld.h
+/// \brief Definition of the Ex01DetectorConstructionOld class 
+///
+/// Geant4 ExampleN01 adapted to Virtual Monte Carlo \n
+/// Id: ExN02DetectorConstruction.hh,v 1.7 2002/01/09 17:24:09 ranjard Exp \n 
+/// GEANT4 tag Name: geant4-04-00-patch-02 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <TObject.h>
 #include <TString.h>
+
+/// \ingroup E01
+/// \brief The old (deprecated) detector construction class 
+///
+/// Geometry definition via VMC (for testing purposes only).
+/// The recomended way of geometry definition is using TGeo
+/// geometry modeller.
+///
+/// \date 21/04/2002
+/// Separated from Ex01MCAopplication, 08/12/2006
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class Ex01DetectorConstructionOld : public TObject
 {
@@ -37,10 +48,10 @@ class Ex01DetectorConstructionOld : public TObject
 
   private:
      // data members
-     Int_t  fImedAr;
-     Int_t  fImedAl;
-     Int_t  fImedPb;
-      
+     Int_t  fImedAr;  ///< The Argon medium Id
+     Int_t  fImedAl;  ///< The Aluminium medium Id 
+     Int_t  fImedPb;  ///< The Lead medium Id
+       
   ClassDef(Ex01DetectorConstructionOld,1) //Ex01DetectorConstructionOld
 };
 

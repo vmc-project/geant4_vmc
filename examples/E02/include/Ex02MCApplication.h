@@ -1,3 +1,6 @@
+#ifndef EX02_MC_APPLICATION_H
+#define EX02_MC_APPLICATION_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,17 +12,12 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN01 adapted to Virtual Monte Carlo 
-//
-// Class Ex02MCApplication
-// ----------------------- 
-// Implementation of the TVirtualMCApplication
-//
-// by Ivana Hrivnacova, 21.4.2002
-
-#ifndef EX02_MC_APPLICATION_H
-#define EX02_MC_APPLICATION_H
+/// \file Ex02MCApplication.h
+/// \brief Definition of the Ex02MCApplication class 
+///
+/// Geant4 ExampleN02 adapted to Virtual Monte Carlo
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <TVirtualMCApplication.h>
 
@@ -28,6 +26,12 @@
 #include "Ex02RootManager.h"
 
 class Ex02MCStack;
+
+/// \ingroup E02
+/// \brief Implementation of the TVirtualMCApplication
+///
+/// \date 21/04/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 class Ex02MCApplication : public TVirtualMCApplication
 {
@@ -55,7 +59,7 @@ class Ex02MCApplication : public TVirtualMCApplication
     virtual void PostTrack();
     virtual void FinishPrimary();
     virtual void FinishEvent();
-    virtual void Field(const Double_t* x, Double_t* b) const;
+    virtual void Field(const Double_t* /*x*/, Double_t* b) const;
     
     void   ReadEvent(Int_t i);
 
@@ -67,21 +71,24 @@ class Ex02MCApplication : public TVirtualMCApplication
     void RegisterStack();
   
     // data members
-    Ex02MCStack*             fStack;
-    Ex02DetectorConstruction fDetConstruction;
-    Ex02TrackerSD            fTrackerSD;
-    Double_t*                fFieldB;
-    Ex02RootManager          fRootManager;
-    Bool_t                   fOldGeometry;
+    Ex02MCStack*             fStack;           ///< VMC stack
+    Ex02DetectorConstruction fDetConstruction; ///< Dector construction
+    Ex02TrackerSD            fTrackerSD;       ///< Tracker SD
+    Double_t*                fFieldB;          ///< Magnetic field B vector
+    Ex02RootManager          fRootManager;     ///< Root manager 
+    Bool_t                   fOldGeometry;     ///< Option for geometry definition
 
   ClassDef(Ex02MCApplication,1)  //Interface to MonteCarlo application
 };
 
 // inline functions
 
+/// \return The singleton instance 
 inline Ex02MCApplication* Ex02MCApplication::Instance()
 { return (Ex02MCApplication*)(TVirtualMCApplication::Instance()); }
 
+/// Switch on/off the old geometry definition  (via VMC functions)
+/// \param oldGeometry  If true, geometry definition via VMC functions
 inline void Ex02MCApplication::SetOldGeometry(Bool_t oldGeometry)
 { fOldGeometry = oldGeometry; }
 

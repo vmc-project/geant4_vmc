@@ -9,13 +9,15 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN02 adapted to Virtual Monte Carlo 
-//
-// Id: Ex02DetectorConstructionOld.cc,v 1.11 2002/01/09 17:24:09 ranjard Exp 
-// GEANT4 tag Name: geant4-04-00-patch-02 
-//
-// by Ivana Hrivnacova, 21.4.2002
+/// \file Ex02DetectorConstructionOld.cxx 
+/// \brief Implementation of the Ex02DetectorConstructionOld class 
+///
+/// Geant4 ExampleN02 adapted to Virtual Monte Carlo \n
+/// Id: Ex02DetectorConstructionOld.cc,v 1.11 2002/01/09 17:24:09 ranjard Exp \n 
+/// GEANT4 tag Name: geant4-04-00-patch-02 
+///
+/// \date 21/04/2002
+/// \author I. Hrivnacova; IPN, Orsay
  
 #include <iostream>
 
@@ -24,7 +26,9 @@
 #include "Ex02DetectorConstructionOld.h"
 #include "Ex02ChamberParameterisation.h"
 
+/// \cond CLASSIMP
 ClassImp(Ex02DetectorConstructionOld)
+/// \endcond
 
 using namespace std;
 
@@ -42,6 +46,8 @@ Ex02DetectorConstructionOld::Ex02DetectorConstructionOld()
     fImedXe(0)
 
 {
+/// Default constuctor
+
   //fpMagField = new ExN02MagneticField();
 
 //--------- Sizes of the principal geometrical components (solids)  ---------
@@ -58,12 +64,16 @@ Ex02DetectorConstructionOld::Ex02DetectorConstructionOld()
 //_____________________________________________________________________________
 Ex02DetectorConstructionOld::~Ex02DetectorConstructionOld()
 {
+/// Destructor
+
   //delete fpMagField;
 }
 
 //_____________________________________________________________________________
 void Ex02DetectorConstructionOld::ConstructMaterials()
 {
+/// Construct materials using VMC functions
+
 //--------- Material definition ---------
 
   Double_t a;
@@ -122,6 +132,8 @@ void Ex02DetectorConstructionOld::ConstructMaterials()
 //_____________________________________________________________________________
 void Ex02DetectorConstructionOld::ConstructGeometry()
 {
+/// Construct volumes using VMC functions
+
 //--------- Sizes of the principal geometrical components (solids)  ---------
     
   Int_t targetMater  = fImedPb;
@@ -260,11 +272,15 @@ void Ex02DetectorConstructionOld::ConstructGeometry()
 //_____________________________________________________________________________
 void Ex02DetectorConstructionOld::SetTargetMaterial(const TString& /*materialName*/)
 {
+/// Set target material (not available with VMC)
+
   Warning("SetTargetMaterial", "Not available in virtual Monte Carlo");
 }
  
 //_____________________________________________________________________________
 void Ex02DetectorConstructionOld::SetChamberMaterial(const TString& /*materialName*/)
 {
+/// Set chamber material (not available with VMC)
+
   Warning("SetTargetMaterial", "Not available in virtual Monte Carlo");
 }

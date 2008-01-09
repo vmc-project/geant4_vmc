@@ -9,13 +9,15 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN06 adapted to Virtual Monte Carlo 
-//
-// Id: ExN06DetectorConstruction.cc,v 1.14 2004/03/17 22:41:12 gum Exp 
-// GEANT4 tag Name: geant4-07-00-cand-01 
-//
-// by Ivana Hrivnacova, 16.5.2005
+/// \file Ex06DetectorConstruction.cxx 
+/// \brief Implementation of the Ex06DetectorConstruction class 
+///
+/// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
+/// Id: ExN06DetectorConstruction.cc,v 1.14 2004/03/17 22:41:12 gum Exp 
+/// GEANT4 tag Name: geant4-07-00-cand-01 
+///
+/// \date 16/05/2005
+/// \author I. Hrivnacova; IPN, Orsay
  
 #include <Riostream.h>
 #include <TVirtualMC.h>
@@ -23,12 +25,16 @@
 
 #include "Ex06DetectorConstruction.h"
 
+/// \cond CLASSIMP
 ClassImp(Ex06DetectorConstruction)
+/// \endcond
 
 //_____________________________________________________________________________
 Ex06DetectorConstruction::Ex06DetectorConstruction()
   : TObject()
 {
+/// Default constuctor
+
     fExpHallSize = 1000;  // 10*m
     fTankSize    = 500;   // 5*m
     fBubbleSize  = 50;    // 0.5*m
@@ -37,7 +43,7 @@ Ex06DetectorConstruction::Ex06DetectorConstruction()
 //_____________________________________________________________________________
 Ex06DetectorConstruction::~Ex06DetectorConstruction()
 {
-// Destructor
+/// Destructor
 }
 
 //
@@ -47,6 +53,8 @@ Ex06DetectorConstruction::~Ex06DetectorConstruction()
 //_____________________________________________________________________________
 void Ex06DetectorConstruction::ConstructMaterials()
 {
+/// Construct materials using TGeo modeller
+
   // Create Root geometry manager 
   new TGeoManager("TGeo", "Root geometry manager");
    
@@ -92,6 +100,7 @@ void Ex06DetectorConstruction::ConstructMaterials()
 //_____________________________________________________________________________
 void Ex06DetectorConstruction::ConstructGeometry()
 {
+/// Contruct volumes using TGeo modeller
 
 // The experimental Hall
 //
@@ -141,6 +150,8 @@ void Ex06DetectorConstruction::ConstructGeometry()
 //_____________________________________________________________________________
 void Ex06DetectorConstruction::ConstructOpGeometry()
 {
+/// Define material optical properties
+
 // ------------ Generate & Add Material Properties Table ------------
 //
 

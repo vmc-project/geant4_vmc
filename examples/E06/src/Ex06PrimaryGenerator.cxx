@@ -9,13 +9,15 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN06 adapted to Virtual Monte Carlo 
-//
-// Id: ExN06PrimaryGeneratorAction.cc,v 1.3 2004/04/02 11:54:29 maire Exp 
-// GEANT4 tag Name: geant4-07-00-cand-01 
-//
-// by Ivana Hrivnacova, 16.5.2005
+/// \file Ex06PrimaryGenerator.cxx 
+/// \brief Implementation of the  class 
+///
+/// Geant4 ExampleN06 adapted to Virtual Monte Carlo \n
+/// Id: ExN06PrimaryGeneratorAction.cc,v 1.3 2004/04/02 11:54:29 maire Exp \n 
+/// GEANT4 tag Name: geant4-07-00-cand-01 
+///
+/// \date 16/05/2005
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <TVirtualMC.h>
 #include <TVirtualMCStack.h>
@@ -27,7 +29,9 @@
 
 #include "Ex06PrimaryGenerator.h"
 
+/// \cond CLASSIMP
 ClassImp(Ex06PrimaryGenerator)
+/// \endcond
 
 //_____________________________________________________________________________
 Ex06PrimaryGenerator::Ex06PrimaryGenerator(TVirtualMCStack* stack) 
@@ -41,8 +45,8 @@ Ex06PrimaryGenerator::Ex06PrimaryGenerator(TVirtualMCStack* stack)
     fPolAngle(0.),
     fNofPrimaries(1)
 {
-// Standard constructor
-// ---
+/// Standard constructor
+/// \param stack  The VMC stack
 }
 
 //_____________________________________________________________________________
@@ -57,15 +61,13 @@ Ex06PrimaryGenerator::Ex06PrimaryGenerator()
     fPolAngle(0.),
     fNofPrimaries(0)
 {    
-// Default constructor
-// ---
+/// Default constructor
 }
 
 //_____________________________________________________________________________
 Ex06PrimaryGenerator::~Ex06PrimaryGenerator() 
 {
-// Destructor  
-// ---
+/// Destructor  
 }
 
 //
@@ -76,8 +78,8 @@ Ex06PrimaryGenerator::~Ex06PrimaryGenerator()
 //_____________________________________________________________________________
 void Ex06PrimaryGenerator::GeneratePrimary()
 {    
-// Add one primary particle to the user stack (derived from TVirtualMCStack).
-// ---
+/// Add one primary particle to the user stack 
+/// (derived from TVirtualMCStack).
   
   // Track ID (filled by stack)
   Int_t ntr;
@@ -140,8 +142,7 @@ void Ex06PrimaryGenerator::GeneratePrimary()
 //_____________________________________________________________________________
 void Ex06PrimaryGenerator::GeneratePrimaries()
 {    
-// Fill the user stack (derived from TVirtualMCStack) with primary particle
-// ---
+/// Fill the user stack (derived from TVirtualMCStack) with primary particle
 
   for (Int_t i=0; i<fNofPrimaries; i++) GeneratePrimary();  
 }
@@ -150,8 +151,10 @@ void Ex06PrimaryGenerator::GeneratePrimaries()
 void Ex06PrimaryGenerator::SetDirection(
                               Double_t dirX, Double_t dirY, Double_t dirZ) 
 { 
-// Set normalized direction
-// ---
+/// Set normalized direction
+/// \param dirX  The new direction - x component
+/// \param dirY  The new direction - y component
+/// \param dirZ  The new direction - z component
 
   Double_t norm = TMath::Sqrt(dirX*dirX + dirY*dirY + dirZ*dirZ);
   

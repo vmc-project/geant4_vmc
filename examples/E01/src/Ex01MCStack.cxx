@@ -9,14 +9,13 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN01 adapted to Virtual Monte Carlo 
-//
-// Class Ex01MCStack
-// -----------------
-// Implementation of the TVirtualMCStack interface
-//
-// by Ivana Hrivnacova, 5.4.2002
+/// \file Ex01MCStack.cxx 
+/// \brief Implementation of the Ex01MCStack class 
+///
+/// Geant4 ExampleN01 adapted to Virtual Monte Carlo
+///
+/// \date 05/04/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "Ex01MCStack.h"
 
@@ -24,7 +23,9 @@
 #include <TObjArray.h>
 #include <TError.h>
 
+/// \cond CLASSIMP
 ClassImp(Ex01MCStack)
+/// \endcond
 
 //_____________________________________________________________________________
 Ex01MCStack::Ex01MCStack(Int_t size)
@@ -32,7 +33,9 @@ Ex01MCStack::Ex01MCStack(Int_t size)
     fCurrentTrack(-1),
     fNPrimary(0)
 {
-//
+/// Standard constructor
+/// \param size  The stack size
+
   fParticles = new TObjArray(size);
 }
 
@@ -42,13 +45,14 @@ Ex01MCStack::Ex01MCStack()
     fCurrentTrack(-1),
     fNPrimary(0)
 {
-//
+/// Default constructor
 }
 
 //_____________________________________________________________________________
 Ex01MCStack::~Ex01MCStack() 
 {
-//
+/// Destructor
+
   if (fParticles) fParticles->Delete();
   delete fParticles;
 }
@@ -58,8 +62,8 @@ Ex01MCStack::~Ex01MCStack()
 //_____________________________________________________________________________
 Ex01Particle*  Ex01MCStack::GetParticle(Int_t id) const
 {
-// Returns id-th particle in fParticles.
-// ---
+/// \return   The \em id -th particle in fParticles
+/// \param id The index of the particle to be returned
 
   if (id < 0 || id >= fParticles->GetEntriesFast())
     Fatal("GetParticle", "Index out of range"); 
@@ -78,10 +82,27 @@ void  Ex01MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
 		         TMCProcess mech, Int_t& ntr, Double_t weight,
 		         Int_t is) 
 {
-// Creates a new particle with specified properties,
-// adds it to the particles array (fParticles) and if not done to the 
-// stack (fStack).
-// ---
+/// Create a new particle and push into stack;
+/// adds it to the particles array (fParticles) and if not done to the 
+/// stack (fStack).
+/// \param toBeDone  1 if particles should go to tracking, 0 otherwise
+/// \param parent    number of the parent track, -1 if track is primary
+/// \param pdg       PDG encoding
+/// \param px        particle momentum - x component [GeV/c]
+/// \param py        particle momentum - y component [GeV/c]
+/// \param pz        particle momentum - z component [GeV/c]
+/// \param e         total energy [GeV]
+/// \param vx        position - x component [cm]
+/// \param vy        position - y component  [cm]
+/// \param vz        position - z component  [cm]
+/// \param tof       time of flight [s]
+/// \param polx      polarization - x component
+/// \param poly      polarization - y component
+/// \param polz      polarization - z component
+/// \param mech      creator process VMC code
+/// \param ntr       track number (is filled by the stack
+/// \param weight    particle weight
+/// \param is        generation status code
 
   const Int_t kFirstDaughter=-1;
   const Int_t kLastDaughter=-1;
@@ -112,8 +133,9 @@ void  Ex01MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
 //_____________________________________________________________________________
 TParticle* Ex01MCStack::PopNextTrack(Int_t& itrack)
 {
-// Gets next particle for tracking from the stack.
-// ---
+/// Get next particle for tracking from the stack.
+/// \return        The popped particle object
+/// \param itrack  The index of the popped track
 
   itrack = -1;
   if  (fStack.empty()) return 0;
@@ -132,8 +154,9 @@ TParticle* Ex01MCStack::PopNextTrack(Int_t& itrack)
 //_____________________________________________________________________________
 TParticle* Ex01MCStack::PopPrimaryForTracking(Int_t i)
 {
-// Returns i-th particle in fParticles.
-// ---
+/// Return \em i -th particle in fParticles.
+/// \return   The popped primary particle object
+/// \param i  The index of primary particle to be popped
 
   if (i < 0 || i >= fNPrimary)
     Fatal("GetPrimaryForTracking", "Index out of range"); 
@@ -142,19 +165,18 @@ TParticle* Ex01MCStack::PopPrimaryForTracking(Int_t i)
 }     
 
 //_____________________________________________________________________________
-void  Ex01MCStack::SetCurrentTrack(Int_t track) 
+void  Ex01MCStack::SetCurrentTrack(Int_t itrack) 
 {
-// Sets the current track to a given value.
-// ---
+/// Set the current track number to a given value.
+/// \param  itrack The current track number
 
-  fCurrentTrack = track;
+  fCurrentTrack = itrack;
 }     
 
 //_____________________________________________________________________________
 Int_t  Ex01MCStack::GetNtrack() const 
 {
-// Returns the number of all tracks.
-// ---
+/// \return  The total number of all tracks.
 
   return fParticles->GetEntriesFast();
 }  
@@ -162,8 +184,7 @@ Int_t  Ex01MCStack::GetNtrack() const
 //_____________________________________________________________________________
 Int_t  Ex01MCStack::GetNprimary() const 
 {
-// Returns the number of primary tracks.
-// ---
+/// \return  The total number of primary tracks.
 
   return fNPrimary;
 }  
@@ -171,8 +192,7 @@ Int_t  Ex01MCStack::GetNprimary() const
 //_____________________________________________________________________________
 TParticle* Ex01MCStack::GetCurrentTrack() const
 {
-// Gets the current track particle.
-// ---
+/// \return  The current track particle
 
   Ex01Particle* current = GetParticle(fCurrentTrack);
   
@@ -185,16 +205,14 @@ TParticle* Ex01MCStack::GetCurrentTrack() const
 //_____________________________________________________________________________
 Int_t  Ex01MCStack::GetCurrentTrackNumber() const 
 {
-// Returns the current track ID.
-// ---
+/// \return  The current track number
 
   return fCurrentTrack;
 }  
 //_____________________________________________________________________________
 Int_t  Ex01MCStack::GetCurrentParentTrackNumber() const 
 {
-// Returns the current track parent ID.
-// ---
+/// \return  The current track parent ID.
 
   Ex01Particle* current = GetParticle(fCurrentTrack);
   

@@ -9,13 +9,16 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Macro for loading Geant3 libraries
+/// \file g3libs.C
+/// \brief Macro for loading Geant3 libraries
 
 #include <iostream>
 
 Bool_t isLibrary(const char* libName)
 {
+/// Helper function which testes the existence of the given library
+/// \param libName  The library name
+
   if (TString(gSystem->DynamicPathName(libName, kTRUE)) != TString(""))
     return kTRUE;
   else  
@@ -24,6 +27,8 @@ Bool_t isLibrary(const char* libName)
 
 void g3libs()
 {
+/// Macro function for loading Geant3 libraries
+
   cout << "Loading Geant3 libraries ..." << endl;
 
   if (isLibrary("libdummies.so"))

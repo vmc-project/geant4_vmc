@@ -37,19 +37,13 @@ Example03
 Compilation:
 ============
   With G4:
-  An extra library with user defined physics list has to be build:
+  An extra library with user defined Geant4 based classes has to be build:
   
   cd E03/geant4
   gmake
 
   Use of user own defined physics list is demonstrated on
-  the LHEP_BERT hadronics physics list provided in Geant4;
-  to build its libraries:
-
-  cd $G4INSTALL/physics_lists/hadronic/Packaging
-  gmake
-  cd $G4INSTALL/physics_lists/hadronic/LHEP_BERT
-  gmake
+  the LHEP_BERT hadronics physics list provided in Geant4.
      
 
 Macros:
@@ -72,6 +66,11 @@ Macros:
   g4config2.in  - macro for G4 configuration using G4 commands (called from g4Config2.C)
   g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
 
+  For running example with Fluka:
+  
+  run_fl.C        - macro for running example 
+  flConfig.C      - configuration macro for Fluka
+
   Common macro (called by run_g3.C/run_g4.C):
   
   set_vis.C - setting visualization
@@ -93,3 +92,6 @@ To run example
 
   With G4 with user defined physics list:
   root[0] .x run_g4.C("g4Config2.C"); 
+
+  With Fluka:
+  root[0] .x run_fl.C  

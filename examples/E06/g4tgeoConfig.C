@@ -9,12 +9,18 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Configuration macro for Geant4 VirtualMC for Example03
-// for geometry defined with Root and selected G4Root navigation
+/// \ingroup E06
+/// \file E06/g4tgeoConfig.C
+/// \brief Configuration macro for Geant4 VirtualMC for Example06
+///
+/// For geometry defined with Root and selected G4Root navigation
 
 void Config()
 {
+/// The configuration function for Geant4 VMC for Example06
+/// called during MC application initialization. 
+/// For geometry defined with Root and selected G4Root navigation
+
   // Default Geant4 VMC run configuration
   TG4RunConfiguration* runConfiguration 
     = new TG4RunConfiguration("geomRoot", "emStandard+optical");

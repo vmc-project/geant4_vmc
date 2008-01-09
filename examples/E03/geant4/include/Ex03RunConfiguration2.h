@@ -1,16 +1,33 @@
-// $Id$
-//
-// Author: I. Hrivnacova
-//
-// Class Ex03RunConfiguration2
-// ----------------------------
-// This class overrides setting of the default Geant4 VMC physics list
-// with the LHEP_BERT hadronics physics list
-
 #ifndef EX03_RUN_CONFIGURATION2_H
 #define EX03_RUN_CONFIGURATION2_H
 
+// $Id$
+
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2007, Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \file Ex03RunConfiguration2.h 
+/// \brief Definition of the Ex03RunConfiguration2 class 
+///
+/// Geant4 ExampleN03 adapted to Virtual Monte Carlo
+///
+/// \author I. Hrivnacova; IPN, Orsay
+
 #include "TG4RunConfiguration.h"
+
+/// \ingroup E03
+/// \brief User Geant4 VMC run configuration
+///
+/// This class overrides setting of the default Geant4 VMC physics list
+/// with the LHEP_BERT hadronics physics list
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 class Ex03RunConfiguration2 : public TG4RunConfiguration
 {

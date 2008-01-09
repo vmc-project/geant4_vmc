@@ -1,3 +1,6 @@
+#ifndef EX03_MC_APPLICATION_H
+#define EX03_MC_APPLICATION_H
+
 // $Id$
 
 //------------------------------------------------
@@ -9,17 +12,12 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN03 adapted to Virtual Monte Carlo 
-//
-// Class Ex03MCApplication
-// ----------------------- 
-// Implementation of the TVirtualMCApplication
-//
-// by Ivana Hrivnacova, 6.3.2003
-
-#ifndef EX03_MC_APPLICATION_H
-#define EX03_MC_APPLICATION_H
+/// \file Ex03MCApplication.h 
+/// \brief Definition of the Ex03MCApplication class 
+///
+/// Geant4 ExampleN03 adapted to Virtual Monte Carlo
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <TVirtualMCApplication.h>
 #include "TMCVerbose.h"
@@ -30,6 +28,12 @@
 
 class Ex03MCStack;
 class Ex03PrimaryGenerator;
+
+/// \ingroup E03
+/// \brief Implementation of the TVirtualMCApplication
+///
+/// \date 06/03/2003
+/// \author I. Hrivnacova; IPN, Orsay
 
 class Ex03MCApplication : public TVirtualMCApplication
 {
@@ -60,7 +64,7 @@ class Ex03MCApplication : public TVirtualMCApplication
     virtual void PostTrack();
     virtual void FinishPrimary();
     virtual void FinishEvent();
-    virtual void Field(const Double_t* x, Double_t* b) const;
+    virtual void Field(const Double_t* /*x*/, Double_t* b) const;
     
     // set methods
     void  SetPrintModulo(Int_t value);
@@ -80,43 +84,55 @@ class Ex03MCApplication : public TVirtualMCApplication
     void RegisterStack();
   
     // data members
-    Int_t                     fPrintModulo;
-    Int_t                     fEventNo;
-    TMCVerbose                fVerbose;
-    Ex03MCStack*              fStack;
-    Ex03DetectorConstruction* fDetConstruction;
-    Ex03CalorimeterSD*        fCalorimeterSD;
-    Ex03PrimaryGenerator*     fPrimaryGenerator;
-    Double_t*                 fFieldB;
-    Ex02RootManager           fRootManager;
-    Bool_t                    fOldGeometry;
+    Int_t                     fPrintModulo;     ///< The event modulus number to be printed 
+    Int_t                     fEventNo;         ///< Event counter
+    TMCVerbose                fVerbose;         ///< VMC verbose helper
+    Ex03MCStack*              fStack;           ///< VMC stack
+    Ex03DetectorConstruction* fDetConstruction; ///< Dector construction
+    Ex03CalorimeterSD*        fCalorimeterSD;   ///< Calorimeter SD
+    Ex03PrimaryGenerator*     fPrimaryGenerator;///< Primary generator
+    Double_t*                 fFieldB;          ///< Magnetic field B vector
+    Ex02RootManager           fRootManager;     ///< Root manager 
+    Bool_t                    fOldGeometry;     ///< Option for geometry definition
 
   ClassDef(Ex03MCApplication,1)  //Interface to MonteCarlo application
 };
 
 // inline functions
 
+/// \return The singleton instance 
 inline Ex03MCApplication* Ex03MCApplication::Instance()
 { return (Ex03MCApplication*)(TVirtualMCApplication::Instance()); }
 
+/// Set the event modulus number to be printed 
+/// \param value  The new event modulus number value
 inline void  Ex03MCApplication::SetPrintModulo(Int_t value)  
 { fPrintModulo = value; }
 
+/// Set verbosity 
+/// \param verboseLevel  The new verbose level value
 inline void  Ex03MCApplication::SetVerboseLevel(Int_t verboseLevel)
 { fVerbose.SetLevel(verboseLevel); }
 
+/// Set magnetic field
+/// \param bz  The new field value in z
 inline void  Ex03MCApplication::SetField(Double_t bz)
 { fFieldB[2] = bz; }
 
+/// \return The detector construction
 inline Ex03DetectorConstruction* Ex03MCApplication::GetDetectorConstruction() const
 { return fDetConstruction; }
 
+/// \return The calorimeter sensitive detector
 inline Ex03CalorimeterSD* Ex03MCApplication::GetCalorimeterSD() const
 { return fCalorimeterSD; }
 
+/// \return The primary generator
 inline Ex03PrimaryGenerator* Ex03MCApplication::GetPrimaryGenerator() const
 { return fPrimaryGenerator; }
 
+/// Switch on/off the old geometry definition  (via VMC functions)
+/// \param oldGeometry  If true, geometry definition via VMC functions
 inline void Ex03MCApplication::SetOldGeometry(Bool_t oldGeometry)
 { fOldGeometry = oldGeometry; }
 

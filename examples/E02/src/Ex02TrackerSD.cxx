@@ -9,13 +9,15 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN02 adapted to Virtual Monte Carlo 
-//
-/// Id: ExN02TrackerSD.cc,v 1.6 2002/01/09 17:24:10 ranjard Exp 
-// GEANT4 tag Name: geant4-04-00-patch-02 
-//
-// by Ivana Hrivnacova, 21.4.2002
+/// \file Ex02TrackerSD.cxx 
+/// \brief Implementation of the Ex02TrackerSD class 
+///
+/// Geant4 ExampleN02 adapted to Virtual Monte Carlo \n
+/// Id: ExN02TrackerSD.cc,v 1.6 2002/01/09 17:24:10 ranjard Exp \n
+/// GEANT4 tag Name: geant4-04-00-patch-02 
+///
+/// \date 21/04/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <iostream>
 
@@ -27,7 +29,9 @@
 #include "Ex02TrackerHit.h"
 #include "Ex02RootManager.h"
 
+/// \cond CLASSIMP
 ClassImp(Ex02TrackerSD)
+/// \endcond
 
 using namespace std;
 
@@ -37,6 +41,9 @@ Ex02TrackerSD::Ex02TrackerSD(const char* name)
     fTrackerCollection(0),
     fVerboseLevel(1)
 {
+/// Standard constructor
+/// \param name  The tracker hits collection name
+
   fTrackerCollection = new TClonesArray("Ex02TrackerHit");
 }
 
@@ -45,11 +52,15 @@ Ex02TrackerSD::Ex02TrackerSD()
   : TNamed(),
     fTrackerCollection(0),
     fVerboseLevel(1)
-{}
+{
+/// Default constructor
+}
 
 //_____________________________________________________________________________
 Ex02TrackerSD::~Ex02TrackerSD()
-{}
+{
+/// Destructor
+}
 
 //
 // private methods
@@ -58,8 +69,8 @@ Ex02TrackerSD::~Ex02TrackerSD()
 //_____________________________________________________________________________
 Ex02TrackerHit* Ex02TrackerSD::AddHit()
 {
-// Creates a new hit in the TClonesArray.
-// ---
+/// Create a new hit in the TClonesArray.
+/// \return  The new hit
 
   TClonesArray& ref = *fTrackerCollection;
   Int_t size = ref.GetEntriesFast();
@@ -74,9 +85,8 @@ Ex02TrackerHit* Ex02TrackerSD::AddHit()
 //_____________________________________________________________________________
 void Ex02TrackerSD::Initialize()
 {
-// Registers hits collection in Root manager;
-// sets sensitive volumes.
-// ---
+/// Register hits collection in the Root manager;
+/// set sensitive volumes.
   
   Register();
   
@@ -86,8 +96,7 @@ void Ex02TrackerSD::Initialize()
 //_____________________________________________________________________________
 Bool_t Ex02TrackerSD::ProcessHits()
 {
-// Creates hits (in stepping).
-// ---
+/// Create hits (in stepping).
 
   Int_t copyNo;
   Int_t id = gMC->CurrentVolID(copyNo);
@@ -123,9 +132,8 @@ Bool_t Ex02TrackerSD::ProcessHits()
 //_____________________________________________________________________________
 void Ex02TrackerSD::EndOfEvent()
 {
-// Prints hits collection (if verbose)
-// and deletes hits afterwards.
-// ---
+/// Print hits collection (if verbose)
+/// and delete hits afterwards.
 
   if (fVerboseLevel>0)  Print();
     
@@ -136,8 +144,7 @@ void Ex02TrackerSD::EndOfEvent()
 //_____________________________________________________________________________
 void Ex02TrackerSD::Register()
 {
-// Registers the hits collection in Root manager.
-// ---
+/// Register the hits collection in the Root manager.
   
   Ex02RootManager::Instance()
     ->Register("hits", "TClonesArray", &fTrackerCollection);
@@ -146,8 +153,7 @@ void Ex02TrackerSD::Register()
 //_____________________________________________________________________________
 void Ex02TrackerSD::Print(const Option_t* /*option*/) const
 {
-// Prints the hits collection.
-// ---
+/// Print the hits collection.
   
    Int_t nofHits = fTrackerCollection->GetEntriesFast();
      

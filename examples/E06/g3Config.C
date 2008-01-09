@@ -9,11 +9,14 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Configuration macro for Geant3 VirtualMC for Example03
+/// \file E06/g3Config.C
+/// \brief Configuration macro for Geant3 VirtualMC for Example06 
 
 void Config()
 {
+/// The configuration function for Geant3 VMC for Example06
+/// called during MC application initialization. 
+
   new  TGeant3("C++ Interface to Geant3"); 
   cout << "Geant3 has been created." << endl;
 

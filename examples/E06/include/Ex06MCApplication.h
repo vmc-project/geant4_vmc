@@ -9,14 +9,12 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN06 adapted to Virtual Monte Carlo 
-//
-// Class Ex06MCApplication
-// ----------------------- 
-// Implementation of the TVirtualMCApplication
-//
-// by Ivana Hrivnacova, 16.5.2005
+/// \file Ex06MCApplication.h
+/// \brief Definition of the Ex06MCApplication class 
+///
+/// Geant4 ExampleN06 adapted to Virtual Monte Carlo \n
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 #ifndef EX06_MC_APPLICATION_H
 #define EX06_MC_APPLICATION_H
@@ -29,6 +27,12 @@ class TCanvas;
 class Ex03MCStack;
 class Ex06DetectorConstruction;
 class Ex06PrimaryGenerator;
+
+/// \ingroup E06
+/// \brief Implementation of the TVirtualMCApplication
+///
+/// \date 16/05/2005
+/// \author I. Hrivnacova; IPN, Orsay
 
 class Ex06MCApplication : public TVirtualMCApplication
 {
@@ -55,7 +59,7 @@ class Ex06MCApplication : public TVirtualMCApplication
     virtual void PostTrack();
     virtual void FinishPrimary();
     virtual void FinishEvent();
-    virtual void Field(const Double_t* x, Double_t* b) const;
+    virtual void Field(const Double_t* /*x*/, Double_t* b) const;
     
     // set methods
     void  SetVerboseLevel(Int_t verboseLevel);
@@ -67,33 +71,35 @@ class Ex06MCApplication : public TVirtualMCApplication
     void SetOldGeometry(Bool_t oldGeometry = kTRUE);
 
   private:
-    // methods
-    void RegisterStack();
-  
     // data members
-    Int_t                     fEventNo;
-    Int_t                     fGammaCounter;
-    TMCVerbose                fVerbose;
-    Ex03MCStack*              fStack;
-    Ex06DetectorConstruction* fDetConstruction;
-    Ex06PrimaryGenerator*     fPrimaryGenerator;
-    TCanvas*                  fCanvas;
-    Bool_t                    fOldGeometry;
+    Int_t                     fEventNo;         ///< Event counter
+    Int_t                     fGammaCounter;    ///< Optical photons counter
+    TMCVerbose                fVerbose;         ///< VMC verbose helper
+    Ex03MCStack*              fStack;           ///< VMC stack
+    Ex06DetectorConstruction* fDetConstruction; ///< Dector construction
+    Ex06PrimaryGenerator*     fPrimaryGenerator;///< Primary generator
+    Bool_t                    fOldGeometry;     ///< Option for geometry definition
 
   ClassDef(Ex06MCApplication,1)  //Interface to MonteCarlo application
 };
 
 // inline functions
 
+/// \return The singleton instance 
 inline Ex06MCApplication* Ex06MCApplication::Instance()
 { return (Ex06MCApplication*)(TVirtualMCApplication::Instance()); }
 
+/// Set verbosity 
+/// \param verboseLevel  The new verbose level value
 inline void  Ex06MCApplication::SetVerboseLevel(Int_t verboseLevel)
 { fVerbose.SetLevel(verboseLevel); }
 
+/// \return The primary generator
 inline Ex06PrimaryGenerator*  Ex06MCApplication::GetPrimaryGenerator() const
 { return fPrimaryGenerator; }
 
+/// Switch on/off the old geometry definition  (via VMC functions)
+/// \param oldGeometry  If true, geometry definition via VMC functions
 inline void Ex06MCApplication::SetOldGeometry(Bool_t oldGeometry)
 { fOldGeometry = oldGeometry; }
 

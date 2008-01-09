@@ -9,14 +9,13 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN03 adapted to Virtual Monte Carlo 
-//
-// Class Ex03MCApplication
-// ----------------------- 
-// Implementation of the TVirtualMCApplication
-//
-// by Ivana Hrivnacova, 6.3.2003
+/// \file Ex03MCApplication.cxx 
+/// \brief Implementation of the Ex03MCApplication class 
+///
+/// Geant4 ExampleN03 adapted to Virtual Monte Carlo
+///
+/// \date 06/03/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <TROOT.h>
 #include <TInterpreter.h>
@@ -33,7 +32,9 @@
 #include "Ex03PrimaryGenerator.h"
 #include "Ex03DetectorConstructionOld.h"
 
+/// \cond CLASSIMP
 ClassImp(Ex03MCApplication)
+/// \endcond
 
 //_____________________________________________________________________________
 Ex03MCApplication::Ex03MCApplication(const char *name, const char *title,
@@ -50,8 +51,10 @@ Ex03MCApplication::Ex03MCApplication(const char *name, const char *title,
     fRootManager("example03", fileMode),
     fOldGeometry(kFALSE)
 {
-// Standard constructor
-// ---
+/// Standard constructor
+/// \param name   The MC application name 
+/// \param title  The MC application description
+/// \param fileMode  Option for opening Root file (read or write mode)
 
   // Create a user stack
   fStack = new Ex03MCStack(1000);
@@ -85,15 +88,13 @@ Ex03MCApplication::Ex03MCApplication()
     fRootManager(),
     fOldGeometry(kFALSE)
 {    
-// Default constructor
-// ---
+/// Default constructor
 }
 
 //_____________________________________________________________________________
 Ex03MCApplication::~Ex03MCApplication() 
 {
-// Destructor  
-// ---
+/// Destructor  
   
   delete fStack;
   delete fDetConstruction;
@@ -111,8 +112,7 @@ Ex03MCApplication::~Ex03MCApplication()
 //_____________________________________________________________________________
 void Ex03MCApplication::RegisterStack()
 {
-// Register stack in Root manager.
-// ---
+/// Register stack in the Root manager.
 
   fRootManager.Register("stack", "Ex03MCStack", &fStack);   
 }  
@@ -124,8 +124,9 @@ void Ex03MCApplication::RegisterStack()
 //_____________________________________________________________________________
 void Ex03MCApplication::InitMC(const char* setup)
 {    
-// Initialize MC.
-// ---
+/// Initialize MC.
+/// The selection of the concrete MC is done in the macro.
+/// \param setup The name of the configuration macro 
 
   fVerbose.InitMC();
 
@@ -142,8 +143,8 @@ void Ex03MCApplication::InitMC(const char* setup)
 //_____________________________________________________________________________
 void Ex03MCApplication::RunMC(Int_t nofEvents)
 {    
-// MC run.
-// ---
+/// Run MC.
+/// \param nofEvents Number of events to be processed
 
   fVerbose.RunMC(nofEvents);
 
@@ -154,8 +155,7 @@ void Ex03MCApplication::RunMC(Int_t nofEvents)
 //_____________________________________________________________________________
 void Ex03MCApplication::FinishRun()
 {    
-// Finish MC run.
-// ---
+/// Finish MC run.
 
   fVerbose.FinishRun();
 
@@ -165,8 +165,8 @@ void Ex03MCApplication::FinishRun()
 //_____________________________________________________________________________
 void Ex03MCApplication::ReadEvent(Int_t i) 
 {
-// Read i-th event from Root file.    
-// ---
+/// Read \em i -th event and prints hits.
+/// \param i The number of event to be read    
 
   fCalorimeterSD->Register();
   RegisterStack();
@@ -176,8 +176,9 @@ void Ex03MCApplication::ReadEvent(Int_t i)
 //_____________________________________________________________________________
 void Ex03MCApplication::ConstructGeometry()
 {    
-// Construct geometry using detector contruction class
-// ---
+/// Construct geometry using detector contruction class.
+/// The detector contruction class is using TGeo functions or
+/// TVirtualMC functions (if oldGeometry is selected)
 
   fVerbose.ConstructGeometry();
 
@@ -197,8 +198,7 @@ void Ex03MCApplication::ConstructGeometry()
 //_____________________________________________________________________________
 void Ex03MCApplication::InitGeometry()
 {    
-// Initialize geometry
-// ---
+/// Initialize geometry
   
   fVerbose.InitGeometry();
   
@@ -209,8 +209,7 @@ void Ex03MCApplication::InitGeometry()
 //_____________________________________________________________________________
 void Ex03MCApplication::AddParticles()
 {    
-// Example of user defined particle with user defined decay mode
-// ---
+/// Example of user defined particle with user defined decay mode
   
   fVerbose.AddParticles();
   
@@ -239,8 +238,7 @@ void Ex03MCApplication::AddParticles()
 //_____________________________________________________________________________
 void Ex03MCApplication::AddIons()
 {    
-// Example of user defined ion
-// ---
+/// Example of user defined ion
   
   fVerbose.AddIons();
   
@@ -251,8 +249,7 @@ void Ex03MCApplication::AddIons()
 //_____________________________________________________________________________
 void Ex03MCApplication::GeneratePrimaries()
 {    
-// Fill the user stack (derived from TVirtualMCStack) with primary particles.
-// ---
+/// Fill the user stack (derived from TVirtualMCStack) with primary particles.
   
   fVerbose.GeneratePrimaries();
 
@@ -266,8 +263,7 @@ void Ex03MCApplication::GeneratePrimaries()
 //_____________________________________________________________________________
 void Ex03MCApplication::BeginEvent()
 {    
-// User actions at beginning of event
-// ---
+/// User actions at beginning of event
 
   fVerbose.BeginEvent();
 
@@ -292,8 +288,7 @@ void Ex03MCApplication::BeginEvent()
 //_____________________________________________________________________________
 void Ex03MCApplication::BeginPrimary()
 {    
-// User actions at beginning of a primary track
-// ---
+/// User actions at beginning of a primary track
 
   fVerbose.BeginPrimary();
 }
@@ -301,8 +296,7 @@ void Ex03MCApplication::BeginPrimary()
 //_____________________________________________________________________________
 void Ex03MCApplication::PreTrack()
 {    
-// User actions at beginning of each track
-// ---
+/// User actions at beginning of each track
 
   fVerbose.PreTrack();
 }
@@ -310,8 +304,7 @@ void Ex03MCApplication::PreTrack()
 //_____________________________________________________________________________
 void Ex03MCApplication::Stepping()
 {    
-// User actions at each step
-// ---
+/// User actions at each step
 
   // Work around for Fluka VMC, which does not call
   // MCApplication::PreTrack()
@@ -331,8 +324,7 @@ void Ex03MCApplication::Stepping()
 //_____________________________________________________________________________
 void Ex03MCApplication::PostTrack()
 {    
-// User actions after finishing of each track
-// ---
+/// User actions after finishing of each track
 
   fVerbose.PostTrack();
 }
@@ -340,8 +332,7 @@ void Ex03MCApplication::PostTrack()
 //_____________________________________________________________________________
 void Ex03MCApplication::FinishPrimary()
 {    
-// User actions after finishing of a primary track
-// ---
+/// User actions after finishing of a primary track
 
   fVerbose.FinishPrimary();
 }
@@ -349,8 +340,7 @@ void Ex03MCApplication::FinishPrimary()
 //_____________________________________________________________________________
 void Ex03MCApplication::FinishEvent()
 {    
-// User actions after finishing of an event
-// ---
+/// User actions after finishing of an event
 
   fVerbose.FinishEvent();
 
@@ -394,8 +384,8 @@ void Ex03MCApplication::FinishEvent()
 //_____________________________________________________________________________
 void Ex03MCApplication::Field(const Double_t* /*x*/, Double_t* b) const
 {
-// Uniform magnetic field
-// ---
+/// Uniform magnetic field
+/// \param b   The field value
   
    for (Int_t i=0; i<3; i++) b[i] = fFieldB[i];
 }

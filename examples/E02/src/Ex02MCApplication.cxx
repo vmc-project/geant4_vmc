@@ -9,14 +9,13 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 ExampleN01 adapted to Virtual Monte Carlo 
-//
-// Class Ex02MCApplication
-// ----------------------- 
-// Implementation of the TVirtualMCApplication
-//
-// by Ivana Hrivnacova, 21.4.2002
+/// \file Ex02MCApplication.cxx 
+/// \brief Implementation of the Ex02MCApplication class 
+///
+/// Geant4 ExampleN02 adapted to Virtual Monte Carlo
+///
+/// \date 21/04/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "Ex02MCApplication.h"
 #include "Ex02MCStack.h"
@@ -30,7 +29,9 @@
 #include <TVirtualGeoTrack.h>
 #include <Riostream.h>
 
+/// \cond CLASSIMP
 ClassImp(Ex02MCApplication)
+/// \endcond
 
 //_____________________________________________________________________________
 Ex02MCApplication::Ex02MCApplication(const char *name, const char *title,
@@ -43,8 +44,10 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title,
     fRootManager("example02", fileMode),
     fOldGeometry(kFALSE)
 {
-// Standard constructor
-// ---
+/// Standard constructor
+/// \param name   The MC application name 
+/// \param title  The MC application description
+/// \param fileMode  Option for opening Root file (read or write mode)
 
   // Create a user stack
   fStack = new Ex02MCStack(100); 
@@ -66,15 +69,13 @@ Ex02MCApplication::Ex02MCApplication()
     fRootManager(),
     fOldGeometry(kFALSE)
 {    
-// Default constructor
-// ---
+/// Default constructor
 }
 
 //_____________________________________________________________________________
 Ex02MCApplication::~Ex02MCApplication() 
 {
-// Destructor  
-// ---
+/// Destructor  
   
   delete fStack;
   delete fFieldB;
@@ -88,8 +89,7 @@ Ex02MCApplication::~Ex02MCApplication()
 //_____________________________________________________________________________
 void Ex02MCApplication::RegisterStack()
 {
-// Registers stack in Root manager.
-// ---
+/// Register stack in the Root manager.
 
   fRootManager.Register("stack", "Ex02MCStack", &fStack);   
 }  
@@ -101,8 +101,9 @@ void Ex02MCApplication::RegisterStack()
 //_____________________________________________________________________________
 void Ex02MCApplication::InitMC(const char* setup)
 {    
-// Initialize MC.
-// ---
+/// Initialize MC.
+/// The selection of the concrete MC is done in the macro.
+/// \param setup The name of the configuration macro 
 
   gROOT->LoadMacro(setup);
   gInterpreter->ProcessLine("Config()");
@@ -117,8 +118,8 @@ void Ex02MCApplication::InitMC(const char* setup)
 //_____________________________________________________________________________
 void Ex02MCApplication::RunMC(Int_t nofEvents)
 {    
-// MC run.
-// ---
+/// Run MC.
+/// \param nofEvents Number of events to be processed
 
   gMC->ProcessRun(nofEvents);
   FinishRun();
@@ -127,8 +128,7 @@ void Ex02MCApplication::RunMC(Int_t nofEvents)
 //_____________________________________________________________________________
 void Ex02MCApplication::FinishRun()
 {    
-// Finish MC run.
-// ---
+/// Finish MC run.
 
   fRootManager.WriteAll();
 }
@@ -136,8 +136,9 @@ void Ex02MCApplication::FinishRun()
 //_____________________________________________________________________________
 void Ex02MCApplication::ConstructGeometry()
 {    
-// Construct geometry using detector contruction class
-// ---
+/// Construct geometry using detector contruction class.
+/// The detector contruction class is using TGeo functions or
+/// TVirtualMC functions (if oldGeometry is selected)
 
   // Cannot use Root geometry if not supported with 
   // selected MC
@@ -163,8 +164,7 @@ void Ex02MCApplication::ConstructGeometry()
 //_____________________________________________________________________________
 void Ex02MCApplication::InitGeometry()
 {    
-// Initialize geometry
-// ---
+/// Initialize geometry
   
   fTrackerSD.Initialize();
 
@@ -178,8 +178,7 @@ void Ex02MCApplication::InitGeometry()
 //_____________________________________________________________________________
 void Ex02MCApplication::GeneratePrimaries()
 {    
-// Fill the user stack (derived from TVirtualMCStack) with primary particles.
-// ---
+/// Fill the user stack (derived from TVirtualMCStack) with primary particles.
   
  // Track ID (filled by stack)
  Int_t ntr;
@@ -221,35 +220,28 @@ void Ex02MCApplication::GeneratePrimaries()
 //_____________________________________________________________________________
 void Ex02MCApplication::BeginEvent()
 {    
-// User actions at beginning of event
-// ---
-
-  // nothing to be done this example
+/// User actions at beginning of event.
+/// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void Ex02MCApplication::BeginPrimary()
 {    
-// User actions at beginning of a primary track
-// ---
-
-  // nothing to be done this example
+/// User actions at beginning of a primary track.
+/// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void Ex02MCApplication::PreTrack()
 {    
-// User actions at beginning of each track
-// ---
-
-  // nothing to be done this example
+/// User actions at beginning of each track.
+/// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void Ex02MCApplication::Stepping()
 {    
-// User actions at each step
-// ---
+/// User actions at each step
 
   fTrackerSD.ProcessHits();
 }
@@ -257,26 +249,22 @@ void Ex02MCApplication::Stepping()
 //_____________________________________________________________________________
 void Ex02MCApplication::PostTrack()
 {    
-// User actions after finishing of each track
-// ---
-
-  // nothing to be done this example
+/// User actions at each step.
+/// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void Ex02MCApplication::FinishPrimary()
 {    
-// User actions after finishing of a primary track
-// ---
-
-  // nothing to be done this example
+/// User actions after finishing of a primary track.
+/// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void Ex02MCApplication::FinishEvent()
 {    
-// User actions after finishing of an event
-// ---
+/// User actions after finishing of an event
+/// Nothing to be done this example
 
   // Geant3
   // (visualization functions interfaced via VMC)
@@ -313,8 +301,8 @@ void Ex02MCApplication::FinishEvent()
 //_____________________________________________________________________________
 void Ex02MCApplication::Field(const Double_t* /*x*/, Double_t* b) const
 {
-// Uniform magnetic field
-// ---
+/// Uniform magnetic field
+/// \param b   The field value in the position \em x
   
    for (Int_t i=0; i<3; i++) b[i] = fFieldB[i];
 }
@@ -322,8 +310,8 @@ void Ex02MCApplication::Field(const Double_t* /*x*/, Double_t* b) const
 //_____________________________________________________________________________
 void  Ex02MCApplication::ReadEvent(Int_t i) 
 {
-// Reads i-th event and prints hits.    
-// ---
+/// Read \em i -th event and prints hits.
+/// \param i The number of event to be read    
   
   fTrackerSD.Register();
   RegisterStack();

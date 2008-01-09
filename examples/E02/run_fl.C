@@ -9,11 +9,16 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Macro for running Example02 with Fluka 
+/// \ingroup E02
+/// \file E02/run_fl.C
+/// \brief Macro for running Example02 with Fluka 
 
 void run_fl(const TString& configMacro = "flConfig.C") 
 {
+/// Macro function for running Example02 with Fluka from
+/// Root interactive session
+/// \param configMacro configuration macro name, default \ref E02/flConfig.C 
+
   // Prepare Fluka working directory
   gSystem->Exec("../macro/run_fluka.sh");
 

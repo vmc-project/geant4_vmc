@@ -9,22 +9,22 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Geant4 novice ExampleN01 adapted to Virtual Monte Carlo 
-//
-// Class Ex01Particle
-// ------------------
-// Extended TParticle with pointers to mother and daughters
-// particles
-//
-// by Ivana Hrivnacova, 5.4.2002
+/// \file Ex01Particle.cxx
+/// \brief Implementation of the Ex01Particle class 
+///
+/// Geant4 ExampleN01 adapted to Virtual Monte Carlo
+///
+/// \date 05/04/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "Ex01Particle.h"
 
 #include <TParticle.h>
 #include <TObjArray.h>
 
+/// \cond CLASSIMP
 ClassImp(Ex01Particle)
+/// \endcond
 
 //_____________________________________________________________________________
 Ex01Particle::Ex01Particle(Int_t id, TParticle* particle)
@@ -33,7 +33,9 @@ Ex01Particle::Ex01Particle(Int_t id, TParticle* particle)
     fMother(0),
     fDaughters(0)    
 {
-//
+/// Standard constructor
+/// \param  id        The particle id
+/// \param  particle  The particle definition (TParticle)
 }
 
 //_____________________________________________________________________________
@@ -43,7 +45,10 @@ Ex01Particle::Ex01Particle(Int_t id, TParticle* particle, Ex01Particle* mother)
     fMother(mother),
     fDaughters(0)    
 {
-//
+/// Standard constructor
+/// \param  id        The particle id
+/// \param  particle  The particle definition (TParticle)
+/// \param  mother    The particle mother
 }
 
 //_____________________________________________________________________________
@@ -53,13 +58,13 @@ Ex01Particle::Ex01Particle()
     fMother(0),
     fDaughters(0)    
 {
-//   
+/// Default constructor
 }
 
 //_____________________________________________________________________________
 Ex01Particle::~Ex01Particle() 
 {
-//
+/// Destructor
 
   if (fDaughters) delete fDaughters;
 }
@@ -71,8 +76,8 @@ Ex01Particle::~Ex01Particle()
 //_____________________________________________________________________________
 void Ex01Particle::AddDaughter(Ex01Particle* particle)
 {
-// Add particles daughter
-// ---
+/// Add particles daughter
+/// \param particle  The daughter particle
 
   if (!fDaughters) fDaughters = new TObjArray();
   
@@ -82,8 +87,8 @@ void Ex01Particle::AddDaughter(Ex01Particle* particle)
 //_____________________________________________________________________________
 void Ex01Particle::SetMother(Ex01Particle* particle)
 {
-// Add particles daughter
-// ---
+/// Set particle mother
+/// \param  particle  The mother particle
 
   fMother = particle;
 }  
@@ -91,8 +96,7 @@ void Ex01Particle::SetMother(Ex01Particle* particle)
 //_____________________________________________________________________________
 Int_t  Ex01Particle:: GetID() const
 {
-// Returs particle ID.
-// ---
+/// \return The particle Id.
 
   return fID;
 }  
@@ -101,8 +105,7 @@ Int_t  Ex01Particle:: GetID() const
 //_____________________________________________________________________________
 TParticle*  Ex01Particle::GetParticle() const
 {
-// Returns particle definition (TParticle).
-// ---
+/// \return The particle definition (TParticle).
 
   return fParticle;
 }  
@@ -110,8 +113,7 @@ TParticle*  Ex01Particle::GetParticle() const
 //_____________________________________________________________________________
 Ex01Particle* Ex01Particle::GetMother() const
 {
-// Returns particle definition (TParticle).
-// ---
+/// \return The particle mother.
 
   return fMother;
 }  
@@ -119,8 +121,7 @@ Ex01Particle* Ex01Particle::GetMother() const
 //_____________________________________________________________________________
 Int_t Ex01Particle::GetNofDaughters() const
 {
-// Returns number of daughters.
-// ---
+/// \return The number of daughters.
 
   if (!fDaughters) return 0;
   
@@ -130,8 +131,8 @@ Int_t Ex01Particle::GetNofDaughters() const
 //_____________________________________________________________________________
 Ex01Particle* Ex01Particle::GetDaughter(Int_t i) const
 {
-// Returns i-th daughter.
-// ---
+/// \return   \em i -th daughter
+/// \param i  The daughter index
 
   // add test if i
 

@@ -9,14 +9,16 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Test macro for polarized optical photon
-// (adapted optPhoton.mac)
-// (Note that Geant3 was not meant to use C photons as primary 
-// particles, so this macro cannot be used with G3.)
+/// \file E06/optPhoton.C
+/// \brief est macro for polarized optical photon for Example06
 
 void optPhoton()
 {
+/// Test macro for polarized optical photon
+/// (adapted optPhoton.mac).
+/// (Note that Geant3 was not meant to use C photons as primary 
+/// particles, so this macro cannot be used with G3.)
+
   // Primary generator
   Ex06PrimaryGenerator* generator
     =  Ex06MCApplication::Instance()->GetPrimaryGenerator();

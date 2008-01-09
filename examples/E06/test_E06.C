@@ -9,16 +9,17 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Test macro:
-// running Example06
-// parameters:
-// - configMacro: configuration macro loaded in initialization 
-// - oldGeometry: if true - geometry is defined via VMC, otherwise via TGeo
-// 
+/// \ingroup Tests
+/// \file test_E06.C
+/// \brief Example E06 Test macro
 
 void test_E06(const TString& configMacro, Bool_t oldGeometry)
 {
+/// Macro function for testing example E06 
+/// \param configMacro  configuration macro loaded in initialization 
+/// \param oldGeometry  if true - geometry is defined via VMC, otherwise 
+///                     via TGeo
+
   // Load basic libraries
   gROOT->LoadMacro("../macro/basiclibs.C");
   basiclibs();
