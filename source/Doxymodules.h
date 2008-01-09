@@ -9,7 +9,8 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-// The class categories definitions for Doxygen
+/// \file Doxymodules.h
+/// \brief The definitions of class categories for Doxygen
 
 /** @defgroup global global
  *  Category global
