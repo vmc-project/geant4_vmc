@@ -68,34 +68,6 @@ TG4TrackManager::~TG4TrackManager()
 }
 
 //
-// private methods
-//
-
-//_____________________________________________________________________________
-TG4TrackInformation* TG4TrackManager::GetTrackInformation(
-                                           const G4Track* track) const
-{
-/// Return user track information.
- 
-#ifdef MCDEBUG
-  G4VUserTrackInformation* trackInfo = track->GetUserInformation();
-  if (!trackInfo) return 0;  
-
-  TG4TrackInformation* tg4TrackInfo
-    = dynamic_cast<TG4TrackInformation*>(trackInfo);
-  if (!tg4TrackInfo) { 
-     TG4Globals::Exception(
-       "TG4TrackManager", "GetTrackInformation", 
-       "Unknown track information type");
-  }
-  
-  return tg4TrackInfo;
-#else  
-  return (TG4TrackInformation*)track->GetUserInformation();
-#endif  
-}    
-  
-//
 // public methods
 //
 
@@ -160,6 +132,7 @@ void TG4TrackManager::SetParentToTrackInformation(const G4Track* track)
 {
 /// Set parent track particle index to the secondary tracks.
 
+
 #ifdef MCDEBUG
   if ( !fG4TrackingManager ) {
     TG4Globals::Exception("TG4TrackManager", "SetParentToTrackInformation",
@@ -200,6 +173,21 @@ void TG4TrackManager::SetParentToTrackInformation(const G4Track* track)
     secondary->SetUserInformation(trackInfo);
   }         
 }
+
+//_____________________________________________________________________________
+void  TG4TrackManager::SetBackPDGLifetime(const G4Track* aTrack)
+{
+/// Set back the PDG lifetime to the G4ParticleDefinition,
+/// if it has been modified by user
+
+    TG4TrackInformation* trackInfo = GetTrackInformation(aTrack);
+    if ( trackInfo->GetPDGLifetime() > 0.0 ) {
+    
+      G4ParticleDefinition* particle
+        = aTrack->GetDynamicParticle()->GetDefinition();
+      particle->SetPDGLifeTime(trackInfo->GetPDGLifetime()); 
+    }  
+}  
 
 //_____________________________________________________________________________
 void TG4TrackManager::TrackToStack(const G4Track* track)
@@ -373,6 +361,30 @@ void TG4TrackManager::SetSaveSecondaries(G4bool saveSecondaries,
     fSaveSecondariesInStep = saveSecondaries;
 }
 
+//_____________________________________________________________________________
+TG4TrackInformation* TG4TrackManager::GetTrackInformation(
+                                           const G4Track* track) const
+{
+/// Return user track information.
+ 
+#ifdef MCDEBUG
+  G4VUserTrackInformation* trackInfo = track->GetUserInformation();
+  if (!trackInfo) return 0;  
+
+  TG4TrackInformation* tg4TrackInfo
+    = dynamic_cast<TG4TrackInformation*>(trackInfo);
+  if (!tg4TrackInfo) { 
+     TG4Globals::Exception(
+       "TG4TrackManager", "GetTrackInformation", 
+       "Unknown track information type");
+  }
+  
+  return tg4TrackInfo;
+#else  
+  return (TG4TrackInformation*)track->GetUserInformation();
+#endif  
+}    
+  
 //_____________________________________________________________________________
 G4bool TG4TrackManager::IsUserTrack(const G4Track* track) const
 {

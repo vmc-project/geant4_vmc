@@ -218,6 +218,9 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
 
   // set parent track particle index to the secondary tracks 
   fTrackManager->SetParentToTrackInformation(track);
+  
+  // restore particle lifetime if it was modified by user
+  fTrackManager->SetBackPDGLifetime(track);
 
   // VMC application post track action
   TVirtualMCApplication::Instance()->PostTrack();

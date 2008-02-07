@@ -20,6 +20,8 @@
 #include "TG4SDServices.h"
 #include "TG4ParticlesManager.h"
 #include "TG4PhysicsManager.h"
+#include "TG4TrackManager.h"
+#include "TG4TrackInformation.h"
 #include "TG4Globals.h"
 #include "TG4G3Units.h"
 
@@ -295,13 +297,26 @@ void TG4StepManager::SetUserDecay(Int_t /*pdg*/)
 }
 
 //_____________________________________________________________________________
-void TG4StepManager::ForceDecayTime(Float_t /*time*/)
+void TG4StepManager::ForceDecayTime(Float_t time)
 {
 /// Force decay time.                                                        \n
 /// Not yet implemented.
 
-  TG4Globals::Exception(
-    "TG4StepManager", "ForceDecayTime", "Not yet implemented.");
+#ifdef MCDEBUG
+  CheckTrack();
+#endif
+
+  G4ParticleDefinition* particle
+    = fTrack->GetDynamicParticle()->GetDefinition();
+  
+  // Store the original particle lifetime in track information
+  // (as it has to be set back after track is finished)
+  TG4TrackInformation* trackInformation
+    =  TG4TrackManager::Instance()->GetTrackInformation(fTrack);
+  trackInformation->SetPDGLifetime(particle->GetPDGLifeTime()); 
+    
+  // Set new lifetime value
+  particle->SetPDGLifeTime(time*TG4G3Units::Time());
 }
 
 //_____________________________________________________________________________

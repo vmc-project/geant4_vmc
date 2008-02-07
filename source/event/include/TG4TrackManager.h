@@ -50,6 +50,7 @@ class TG4TrackManager : public TG4Verbose
     // methods
     G4int SetTrackInformation(const G4Track* aTrack);
     void  SetParentToTrackInformation(const G4Track* aTrack);
+    void  SetBackPDGLifetime(const G4Track* aTrack);
 
     void  TrackToStack(const G4Track* track);
     void  PrimaryToStack(const G4PrimaryVertex* vertex,
@@ -63,6 +64,8 @@ class TG4TrackManager : public TG4Verbose
     void SetG4TrackingManager(G4TrackingManager* trackingManager);
 
     // get methods
+    TG4TrackInformation* GetTrackInformation(const G4Track* track) const;
+
     G4bool GetSaveSecondaries() const;
     G4int  GetNofTracks() const;
     G4bool IsUserTrack(const G4Track* track) const;
@@ -72,9 +75,6 @@ class TG4TrackManager : public TG4Verbose
     TG4TrackManager(const TG4TrackManager& right);
     /// Not implemented
     TG4TrackManager& operator=(const TG4TrackManager& right);
-
-    // methods
-    TG4TrackInformation* GetTrackInformation(const G4Track* track) const;
 
     // static data members
     static TG4TrackManager*   fgInstance; ///< this instance

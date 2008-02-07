@@ -24,7 +24,8 @@ TG4TrackInformation::TG4TrackInformation()
   : G4VUserTrackInformation(),
     fTrackParticleID(-1),
     fParentParticleID(-1),
-    fIsUserTrack(false) 
+    fPDGLifetime(-1.0),
+    fIsUserTrack(false)
 {
 /// Default constructor
 }
@@ -34,7 +35,8 @@ TG4TrackInformation::TG4TrackInformation(G4int trackParticleID)
   : G4VUserTrackInformation(),
     fTrackParticleID(trackParticleID),
     fParentParticleID(-1),
-    fIsUserTrack(false) 
+    fPDGLifetime(-1.0), 
+    fIsUserTrack(false)
 {
 /// Standard constructor
 }    

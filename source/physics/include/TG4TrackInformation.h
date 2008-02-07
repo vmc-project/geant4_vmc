@@ -21,6 +21,8 @@
 #include <G4Allocator.hh>
 #include <globals.hh>
 
+class G4ParticleDefinition;
+
 /// \ingroup physics
 /// \brief Defines additional track information.
 ///
@@ -47,18 +49,21 @@ class TG4TrackInformation : public G4VUserTrackInformation
     // set methods
     void SetTrackParticleID(G4int trackParticleID);
     void SetParentParticleID(G4int parentParticleID);
+    void SetPDGLifetime(G4double pdgLifetime);
     void SetIsUserTrack(G4bool isUserTrack);
 
     // get methods
     G4int  GetTrackParticleID() const;
     G4int  GetParentParticleID() const;
+    G4double GetPDGLifetime() const;
     G4bool IsUserTrack() const;
 
   private:
     // data members
-    G4int  fTrackParticleID; ///< the index of track particle in VMC stack
-    G4int  fParentParticleID;///< the index of parent track in VMC stack
-    G4bool fIsUserTrack;     ///< true if defined by user and not primary track
+    G4int    fTrackParticleID; ///< the index of track particle in VMC stack
+    G4int    fParentParticleID;///< the index of parent track in VMC stack
+    G4double fPDGLifetime;     ///< the original particle PDG lifetime
+    G4bool   fIsUserTrack;     ///< true if defined by user and not primary track
 };
 
 // inline methods

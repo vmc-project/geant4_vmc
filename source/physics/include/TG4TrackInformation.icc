@@ -46,6 +46,12 @@ inline void TG4TrackInformation::SetParentParticleID(G4int parentParticleID) {
   fParentParticleID = parentParticleID; 
 }
 
+inline void TG4TrackInformation::SetPDGLifetime(G4double pdgLifeTime) {
+  /// Set the PDG lifetime, if not yet done for this track.
+  /// Do nothing if called for the second time.
+  if ( fPDGLifetime < 0 ) fPDGLifetime = pdgLifeTime;
+}  
+
 inline void TG4TrackInformation::SetIsUserTrack(G4bool isUserTrack) { 
   /// Set info that the track was poped from the VMC stack
   fIsUserTrack = isUserTrack; 
@@ -60,6 +66,11 @@ inline G4int TG4TrackInformation::GetParentParticleID() const {
   /// Return parent particle ID = the index of parent particle in VMC stack
   return fParentParticleID; 
 }
+
+inline G4double TG4TrackInformation::GetPDGLifetime() const {
+  /// Return the original PDG lifetime for this track
+  return fPDGLifetime;
+}  
 
 inline G4bool TG4TrackInformation::IsUserTrack() const { 
   /// Return the info if the track was poped from the VMC stack
