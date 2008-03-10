@@ -120,11 +120,11 @@ G4String TG4Globals::Help()
 }  
   
 //_____________________________________________________________________________
-TString TG4Globals::GetToken(Int_t i, const TString& s)
+G4String TG4Globals::GetToken(Int_t i, const TString& s)
 {
 /// Tokenize the given string and return the i-th token
 
-  std::vector<TString> tokens;  
+  std::vector<G4String> tokens;  
   std::string ss = s.Data();
   
 /*
@@ -143,7 +143,7 @@ TString TG4Globals::GetToken(Int_t i, const TString& s)
   do {
     std::string::size_type idx1 = ss.find(fgkTokenSeparator,idx0);
     if ( idx1 == std::string::npos ) idx1 = ss.length();
-    tokens.push_back(TString(ss.substr(idx0, idx1-idx0)));
+    tokens.push_back(G4String(ss.substr(idx0, idx1-idx0)));
     idx0 = idx1+1;
   }
   while ( idx0 <= ss.length() );

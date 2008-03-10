@@ -89,7 +89,7 @@ class TG4Globals
     static void PrintStars(G4bool emptyLineFirst);
     static G4String Help();
     
-    static TString  GetToken(Int_t i, const TString& s);
+    static G4String  GetToken(Int_t i, const TString& s);
 
   private:
     TG4Globals();  

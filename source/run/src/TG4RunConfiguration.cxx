@@ -70,7 +70,7 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
    
   if ( ! ( TG4Globals::GetToken(0, physicsList) == "emStandard" || 
            TG4HadronPhysicsList::IsAvailableSelection(
-             TG4Globals::GetToken(0, physicsList).Data()) )   &&
+             TG4Globals::GetToken(0, physicsList)) )   &&
          ( TG4Globals::GetToken(1, physicsList) == "optical"  ||
            TG4Globals::GetToken(1, physicsList) == ""  ) ) {
 
