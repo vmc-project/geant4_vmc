@@ -11,6 +11,10 @@
 
 /// \file g4libs.C
 /// \brief Macro for loading Geant4 and Geant4 VMC libraries
+///
+/// Besides loading libraries, the macro also resets 
+/// FPE mask to 0, in order to make sure than FPE for
+/// FE_OVERFLOW is disabled what is required for Geant4.
 
 //
 // Macro for loading Geant4 and Geant4 VMC libraries
@@ -25,6 +29,8 @@ void g4libs()
 
   g4libs_granular();
   // g4libs_global();
+  
+  gSystem->SetFPEMask(0); 
 }   
 
 Bool_t isSet(const char* variable)
