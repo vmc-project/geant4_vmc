@@ -26,8 +26,8 @@ void Config()
       = new TG4RunConfiguration("geomRootToGeant4", "emStandard");
   
   // Run configuration with special cuts activated
-  // Ex03RunConfiguration2* runConfiguration 
-  //  = new Ex03RunConfiguration2("geomRootToGeant4", "emStandard", "specialCuts");
+  // TG4RunConfiguration2* runConfiguration 
+  //  = new TG4RunConfiguration2("geomRootToGeant4", "emStandard", "specialCuts");
 
   // TGeant4
   TGeant4* geant4
