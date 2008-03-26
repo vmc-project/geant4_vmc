@@ -94,7 +94,7 @@ inline G4bool TG4SpecialPhysicsList::IsSpecialControls() const {
   
 inline G4bool TG4SpecialPhysicsList::IsSpecialCuts() const {
   /// Return true if specialCuts are selected
-  return fIsSpecialControls;
+  return fIsSpecialCuts;
 }  
 
 #endif //TG4_SPECIAL_PHYSICS_LIST_H

@@ -132,6 +132,7 @@ void TG4ProcessControlMapPhysics::FillMap()
 
   controlMap->Add("nKiller", kHADR); 
 
+  controlMap->Add("muNucl", kMUNU); 
   controlMap->Add("muMinusCaptureAtRest", kMUNU); 
   controlMap->Add("PositronNuclear", kNoG3Controls); 
   controlMap->Add("ElectroNuclear", kNoG3Controls); 
@@ -141,6 +142,8 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("OpAbsorption", kLABS);
   controlMap->Add("OpRayleigh", kRAYL);
   controlMap->Add("OpBoundary", kLABS);
+
+  controlMap->Add("SynRad", kSYNC);
 }  
 
 //

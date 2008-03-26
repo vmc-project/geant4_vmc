@@ -68,28 +68,39 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
       "geomVMCtoGeant4 geomVMCtoRoot geomRoot geomRootToGeant4 geomGeant4");
   }
    
-  if ( ! ( TG4Globals::GetToken(0, physicsList) == "emStandard" || 
-           TG4HadronPhysicsList::IsAvailableSelection(
-             TG4Globals::GetToken(0, physicsList)) )   &&
-         ( TG4Globals::GetToken(1, physicsList) == "optical"  ||
-           TG4Globals::GetToken(1, physicsList) == ""  ) ) {
 
-     TG4Globals::Exception(
-      "TG4RunConfiguration", "TG4RunConfiguration",
-      "Physics list selection " + physicsList + " not recognized." 
-        + TG4Globals::Endl() +
-      "Available options:"                                         
-        + TG4Globals::Endl() +
-      "emStandard, emStandard+optical, XYZ, XYZ+optical"           
-        + TG4Globals::Endl() +
-      "  where XYZ: " + TString(TG4HadronPhysicsList::AvailableSelections())); 
-  } 
+  G4int itoken = 0;
+  G4String token;
+  do {
+    token = TG4Globals::GetToken(itoken++, physicsList);
+    
+    if ( ! TG4EmPhysicsList::IsAvailableSelection(token) &&
+         ! TG4HadronPhysicsList::IsAvailableSelection(token) &&
+         token != "optical" ) {
+         
+      TG4Globals::Exception(
+        "TG4RunConfiguration", "TG4RunConfiguration",
+        "Physics list selection " + physicsList + " not recognized." 
+          + TG4Globals::Endl() +
+        "Available options:"                                         
+          + TG4Globals::Endl() +
+        "EM, EM+optical, Hadron, Hadron+optical"           
+          + TG4Globals::Endl() +
+        "  where EM     = " + TString(TG4EmPhysicsList::AvailableSelections())
+          + TG4Globals::Endl() +
+        "        Hadron = " + TString(TG4HadronPhysicsList::AvailableSelections())
+          + TG4Globals::Endl() +
+        "  The EM selections are cumulative, while Hadron selections are exlusive."
+          + TG4Globals::Endl());
+    }
+  }  
+  while ( token != "");         
 
   if ( ! TG4SpecialPhysicsList::IsAvailableSelection(specialProcess.Data()) ) {
 
      TG4Globals::Exception(
       "TG4RunConfiguration", "TG4RunConfiguration",
-      "Special process selection " + specialProcess + " not recognized." 
+      "Special process selection " + specialProcess + " is not recognized." 
         + TG4Globals::Endl() +
       "Available options:"                                               
         + TG4Globals::Endl() +
@@ -138,25 +149,54 @@ G4VUserPhysicsList* TG4RunConfiguration::CreatePhysicsList()
 
   TG4ComposedPhysicsList* builder = new TG4ComposedPhysicsList();
   
-  TString token1 = TG4Globals::GetToken(0, fPhysicsListSelection);
-  TString token2 = TG4Globals::GetToken(1, fPhysicsListSelection);
-  
-  if ( token1 == "emStandard" ) {
-    G4cout << "Adding EMPhysicsList" << G4endl;
-    builder->AddPhysicsList(new TG4EmPhysicsList());
+  // Decompose physics list selection
+  G4int itoken = 0;
+  G4String emSelection;
+  G4String hadronSelection;
+  G4String opticalSelection;
+  G4String token;
+  do {
+    token = TG4Globals::GetToken(itoken++, fPhysicsListSelection);
+
+    if ( token.contains("em") ) {
+      emSelection += token;
+      emSelection += " ";
+    }
+    else if ( token == "optical" ) {
+      opticalSelection = token;
+    }
+    else if ( token != "" ) {
+      hadronSelection = token;
+    }
+  }    
+  while ( token != "");         
+    
+  if ( emSelection != "" && hadronSelection != "" ) {
+    TG4Globals::Exception(
+      "TG4RunConfiguration", "TG4RunConfiguration",
+      "Physics list selection " + fPhysicsListSelection + " is not valid." 
+        + TG4Globals::Endl() +
+      "The EM selections cannot be combined with Hadron selections."
+        + TG4Globals::Endl());
+  }     
+
+  if ( emSelection != "" ) {
+    G4cout << "Adding EMPhysicsList " << emSelection << G4endl;
+    builder->AddPhysicsList(new TG4EmPhysicsList(emSelection));
   }  
-  else {
-    G4cout << "Adding HadronPhysicsList " << token1.Data() << G4endl;
-    builder->AddPhysicsList(new TG4HadronPhysicsList(token1.Data()));
+  
+  if ( hadronSelection != "" ) {
+    G4cout << "Adding HadronPhysicsList " << hadronSelection << G4endl;
+    builder->AddPhysicsList(new TG4HadronPhysicsList(hadronSelection));
   }  
     
-  if ( token2 == "optical" ) {
+  if ( opticalSelection != "" ) {
     G4cout << "Adding OpticalPhysicsList " << G4endl;
     builder->AddPhysicsList(new TG4OpticalPhysicsList());
   }  
     
   // add option here
-  G4cout << "Adding SpecialPhysicsList " << G4endl;
+  G4cout << "Adding SpecialPhysicsList " << fSpecialProcessSelection.Data() << G4endl;
   builder->AddPhysicsList(new TG4SpecialPhysicsList(
                                  fSpecialProcessSelection.Data()));
   

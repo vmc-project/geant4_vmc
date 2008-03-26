@@ -26,8 +26,13 @@
 /// \brief The standard EM physics list 
 ///
 /// The EM physics list is implemented as modular physics list
-/// with registered G4EmStandardPhysics and G4DecayPhysics builders
-/// from Geant4
+/// with always registered G4EmStandardPhysics and G4DecayPhysics builders,
+/// and optionally also G4EmExtraPhysics builder from Geant4.
+///
+/// The selection of extra physics can be following:
+/// - "emExtraGammaNuclear "
+/// - "emExtraMuonNuclear "
+/// - "emExtraSynch "
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -35,9 +40,13 @@ class TG4EmPhysicsList: public G4VModularPhysicsList,
                         public TG4Verbose
 {
   public:
-    TG4EmPhysicsList();
+    TG4EmPhysicsList(const G4String& selection);
     virtual ~TG4EmPhysicsList();
   
+    // static methods
+    static G4String AvailableSelections();
+    static G4bool   IsAvailableSelection(const G4String& selection);
+ 
     // methods
     virtual void  ConstructProcess();
 
@@ -61,7 +70,7 @@ class TG4EmPhysicsList: public G4VModularPhysicsList,
     TG4EmPhysicsList& operator=(const TG4EmPhysicsList& right);
 
     // methods
-    void Configure();
+    void Configure(const G4String& selection);
 };
 
 #endif //TG4_MODULAR_PHYSICS_LIST_H

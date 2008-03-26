@@ -100,7 +100,7 @@ enum TG4G3Control
   /// - G4 processes: G4MuNuclearInteraction,
   ///                 G4MuonMinusCaptureAtRest
   /// - Particles: mu
-  /// - Physics:   Not set
+  /// - Physics:   EM Extra
   kMUNU, 
              
   /// Decay                 
@@ -151,8 +151,8 @@ enum TG4G3Control
   /// Synchrotron radiation in magnetic field           
   /// - G3 default value: 0             
   /// - G4 process: G4SynchrotronRadiation
-  /// - Particles: ??
-  /// - Physics:   Not set  
+  /// - Particles: e+, e-
+  /// - Physics:   EM Extra  
   kSYNC, 
 
   /// No process control

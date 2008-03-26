@@ -131,6 +131,7 @@ void TG4ProcessMCMapPhysics::FillMap()
 
   mcMap->Add("nKiller", kPHadronic); 
 
+  mcMap->Add("muNucl", kPMuonNuclear); 
   mcMap->Add("muMinusCaptureAtRest", kPMuonNuclear); 
   mcMap->Add("PositronNuclear", kPPositronNuclear); 
   mcMap->Add("ElectroNuclear", kPElectronNuclear); 
@@ -140,6 +141,8 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("OpAbsorption", kPLightAbsorption);
   mcMap->Add("OpRayleigh", kPRayleigh);
   mcMap->Add("OpBoundary", kPLightScattering);
+
+  mcMap->Add("SynRad", kPSynchrotron);
 
   mcMap->Add("Transportation", kPTransportation);
   

@@ -389,7 +389,7 @@ G4bool TG4G3PhysicsManager::IsGlobalSpecialControls() const
 {
 /// Return true if any global special control value is set
 
-  for (G4int i=0; i<kNofParticlesWSP; i++)
+  for (G4int i=0; i<kNoG3Controls; i++)
   {  if ((*fControlVector)[i] != kUnsetControlValue ) return true; }
 
   return false;
