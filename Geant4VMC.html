@@ -208,6 +208,17 @@
  character: eg. <font face="Courier"> "stepLimit+specialCuts"</font>,
  <font face="Courier"> "stepLimit+specialCuts+stackPopper"</font>, etc.
  
+ <p>
+ Users can tailor the physics lists provided by Geant4 via the commands defined
+ in the <font color="#aa0000" face="Courier">/physics_engine/tailor </font> command directory
+ and switch on the muon nuclear interaction, gamma nuclear interaction or syncrotron radiation
+ processes, which are not included by default:  
+ <ul>
+     <li> <font color="#aa0000" face="Courier"> /physics_engine/tailor/SyncRadiation on</font> 
+     <li> <font color="#aa0000" face="Courier"> /physics_engine/tailor/GammaNuclear on </font> 
+     <li> <font color="#aa0000" face="Courier"> /physics_engine/tailor/MuonNuclear on  </font> 
+ </ul>
+ 
  <a name="Impl_Stacking"></a> 
  <h3> Stacking of particles </h3>
 
@@ -340,6 +351,21 @@
      <font color="#aa0000" face="Courier">
      Idle&gt; /mcControl/rootCmd TBrowser b;      </font><br> <br>                                             
  </li></ul> 
+ 
+ <p>
+ Geant4 VMC implements several Geant4 commands associated with the objects defined
+ in Geant4 VMC. To make their Geant4 VMC origin apparent, all these commands start
+ with the prefix <i> mc </i>.  Several Geant4 and Geant VMC commands are used in the  
+ <i> g4config.in </i> and  <i> g4vis.in </i> macros in the
+ <a href="http://ivana.home.cern.ch/ivana/examples_html/index.html">
+ VMC examples </a>.  
+
+ <p> 
+ You can get an interactive help for all available commands by typing:  <br> 
+ <font color="#aa0000" face="Courier"> Idle&gt; help              </font><br>
+ or <br>
+ <font color="#aa0000" face="Courier"> Idle&gt; /control/manual   </font><br>
+ <br>  
 
  <hr>
 
@@ -379,7 +405,7 @@ Contact:
 
 Page maintained by:
 <a href="mailto:Ivana.Hrivnacova@cern.ch">Ivana Hrivnacova</a> <br>
-<i> Last update: 25/03/2008 </i>
+<i> Last update: 28/03/2008 </i>
 
 <p></p>
 </body></html>

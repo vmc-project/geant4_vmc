@@ -58,14 +58,6 @@ class G4UImessenger;
 /// - XYZ                - selected hadron physics list ( XYZ = LHEP, QGSP, ...)
 /// - XYZ+optical        - selected hadron physics list + optical physics
 ///
-/// It is also possible to add G4EmExtraPhysics in addition to emStandard 
-/// by adding any combination of these options, separated with '+':
-///  - emExtraGammaNuclear - gamma nuclear interaction
-///  - emExtraMuonNuclear  - muon nuclear interaction
-///  - emExtraSynch "      - synchrotron radiation
-/// Note that it is not possible to combine EM physics with hadron physics lists,
-/// as EM physics processes are already included.
-///
 /// The third argument activates the special processes in the TG4SpecialPhysicsList,
 /// which implement VMC features:
 /// - stepLimiter       - step limiter (default) 

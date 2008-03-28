@@ -37,9 +37,6 @@ G4String TG4EmPhysicsList::AvailableSelections()
 
   G4String selections;
   selections += "emStandard ";
-  selections += "emExtraGammaNuclear ";
-  selections += "emExtraMuonNuclear ";
-  selections += "emExtraSynch ";
   
   return selections;
 }  
@@ -88,7 +85,7 @@ TG4EmPhysicsList::~TG4EmPhysicsList()
 //
 
 //_____________________________________________________________________________
-void TG4EmPhysicsList::Configure(const G4String& selection)
+void TG4EmPhysicsList::Configure(const G4String& /*selection*/)
 {
 /// Create the selected physics constructors
 /// and registeres them in the modular physics list.
@@ -96,17 +93,13 @@ void TG4EmPhysicsList::Configure(const G4String& selection)
   // Standard electromagnetic physics
   RegisterPhysics(new G4EmStandardPhysics());
 
-  // Extra electromagnetic physics - if in selection
-  if ( selection.contains("Extra") ) {
-    G4EmExtraPhysics* extraPhysics = new G4EmExtraPhysics();
-    G4String stateOn("on");
-    if ( selection.contains("MuonNuclear") )  extraPhysics->Synch(stateOn);
-    if ( selection.contains("GammaNuclear") ) extraPhysics->GammaNuclear(stateOn);
-    if ( selection.contains("Synch") )        extraPhysics->MuonNuclear(stateOn);
-          // there is a mismatch in methods names in G4EmExtraPhysics !!!
-    
-    RegisterPhysics(extraPhysics);
-  }  
+  // Extra electromagnetic physics
+  G4EmExtraPhysics* extraPhysics = new G4EmExtraPhysics();
+  G4String state("off");
+  extraPhysics->Synch(state);
+  extraPhysics->GammaNuclear(state);
+  extraPhysics->MuonNuclear(state);
+  RegisterPhysics(extraPhysics);
 
   // decay physics
   RegisterPhysics(new G4DecayPhysics());
