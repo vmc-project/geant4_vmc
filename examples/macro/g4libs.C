@@ -56,6 +56,16 @@ Bool_t isLibrary(const char* libName)
     return kFALSE;
 }    
 
+Bool_t isBatch()
+{
+/// Helper function which testes if Root was started in batch mode
+
+  for ( Int_t i=0; i<gApplication->Argc(); ++i ) 
+    if ( TString(gROOT->GetApplication()->Argv(i)) == "-b" ) return true;
+  
+  return false;
+}    
+
 void vgmlibs()
 { 
 /// Macro function for loading VGM libraries.
@@ -286,7 +296,16 @@ void g4libs_granular()
     gSystem->Load("libG4root");
 
   // Geant4 VMC library
+  cout << "Loading geant4vmc library ... " << endl;
   gSystem->Load("libgeant4vmc");
+  
+  // Geant4 VMC GUI library 
+  // (if available and Root is not running in batch mode)
+  if ( isLibrary("libgeant4vmc_gui") && ! isBatch() ) ) {
+    cout << "Loading geant4vmc_gui library ... " << endl;
+    gSystem->Load("libgeant4vmc_gui");
+  }  
+  
 
   cout << "Loading libraries ... finished" << endl;
 }

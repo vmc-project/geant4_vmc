@@ -14,7 +14,7 @@
 
 ############################### geant4_vmc Makefile ###########################
 
-PACKAGE   = geant4vmc
+PACKAGE   = geant4vmc_gui
 
 ifeq ($(PLATFORM),)
 PLATFORM = $(shell root-config --arch)
@@ -47,7 +47,7 @@ endif
 
 # Source directories
 #
-GDIRS:=	global geometry digits+hits physics physics_list event run visualization
+GDIRS:=	interfaces
 
 # Rules
 #
@@ -55,7 +55,7 @@ include $(ROOT_ETCDIR)/MakeRules
 
 # Dictionary
 #
-GDICT    := $(BINDIR)/geant4Cint.cxx
+GDICT    := $(BINDIR)/geant4guiCint.cxx
 GDICTH   := $(GDICT:.cxx=.h)
 GDICTO   := $(patsubst %.cxx,%.o,$(GDICT))
 
@@ -69,7 +69,7 @@ SRCS	:= $(CXXSRC)
 HDRS	:= run/include/TG4RunConfiguration.h \
 	   run/include/TGeant4.h \
 	   $(wildcard interfaces/include/*.h) \
-	   geant4vmcLinkDef.h
+	   geant4vmc_guiLinkDef.h
 
 # C++ Headers copied to include
 #
@@ -90,7 +90,8 @@ endif
 INCDIR  := $(patsubst %,-I%/include,$(GDIRS)) \
 	   -I$(G4INCLUDE) \
 	   -I$(CLHEP_BASE_DIR)/include \
-	   -I$(G4INSTALL)/source/interfaces/common/include
+	   -I$(G4INSTALL)/source/interfaces/common/include \
+           -I$(TOPDIR)/include
 
 ifneq ($(USE_VGM),)
 INCDIR  += -I$(VGM_INSTALL)/packages/VGM/include \
@@ -190,7 +191,7 @@ SLIBRARY	= $(LIBDIR)/lib$(PACKAGE).$(SL)
 ALIBRARY	= $(LIBDIR)/lib$(PACKAGE).a
 
 default:	depend $(SLIBRARY) includes
-includes:       clean_includes make_includes
+includes:       make_includes
 static: 	$(ALIBRARY) 
 
 ifneq ($(USE_VGM),)
