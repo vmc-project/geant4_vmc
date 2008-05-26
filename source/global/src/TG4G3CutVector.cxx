@@ -315,7 +315,7 @@ G4double TG4G3CutVector::GetMinEkineForEplus(const G4Track& track) const
     return fCutVector[kPPCUTM];
   }   
   else
-    return fCutVector[kCUTELE];
+    return 0;
 }
 
 //_____________________________________________________________________________

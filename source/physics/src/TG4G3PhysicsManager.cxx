@@ -170,7 +170,6 @@ void TG4G3PhysicsManager::SwitchIsCutVector(TG4G3Cut cut)
            break;
     case kCUTELE:
            (*fIsCutVector)[kElectron] = true; 
-           (*fIsCutVector)[kEplus] = true; 
            break;
     case kDCUTE:
            (*fIsCutVector)[kElectron] = true; 

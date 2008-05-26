@@ -29,7 +29,7 @@ enum TG4G3Cut
   kCUTGAM,
    
   /// Electrons        
-  /// - G4 particles: "e-", "e+"
+  /// - G4 particles: "e-"
   /// - G3 default value: 0.001 GeV
   kCUTELE, 
   
