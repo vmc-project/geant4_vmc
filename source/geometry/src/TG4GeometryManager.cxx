@@ -2,7 +2,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007, Ivana Hrivnacova
+// Copyright (C) 2007, 2008 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -201,6 +201,7 @@ void TG4GeometryManager::ConstructG4GeometryViaVGM()
   // import Root geometry in VGM
   RootGM::Factory rootFactory;
   if ( VerboseLevel() > 1 ) rootFactory.SetDebug(1);
+  rootFactory.SetIgnore(true);
   rootFactory.Import(gGeoManager->GetTopNode());
     
   // export Root VGM geometry in Geant4
