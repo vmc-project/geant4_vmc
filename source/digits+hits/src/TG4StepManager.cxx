@@ -904,7 +904,8 @@ Double_t TG4StepManager::TrackLength() const
 //_____________________________________________________________________________
 Double_t TG4StepManager::TrackTime() const
 {
-/// Return the local time since the current track is created.               \n
+/// Return the global track time = time since the event in which 
+/// the track belongs is created.                                           \n
 /// Note that in Geant4: there is also defined proper time as
 /// the proper time of the dynamical particle of the current track.
 
@@ -912,7 +913,7 @@ Double_t TG4StepManager::TrackTime() const
   CheckTrack();
 #endif
   
-  G4double time = fTrack->GetLocalTime();
+  G4double time = fTrack->GetGlobalTime();
   time /= TG4G3Units::Time();
   return time;
 }
