@@ -28,9 +28,9 @@
 class TG4UserParticlesPhysics: public TG4VPhysicsConstructor
 {
   public:
-    TG4UserParticlesPhysics(const G4String& name = "userParticles");
+    TG4UserParticlesPhysics(const G4String& name = "UserParticles");
     TG4UserParticlesPhysics(G4int verboseLevel,
-                         const G4String& name = "userParticles");
+                         const G4String& name = "UserParticles");
     virtual ~TG4UserParticlesPhysics();
 
   protected:

@@ -37,9 +37,9 @@ class TG4SpecialCutsForOther;
 class TG4SpecialCutsPhysics: public TG4VPhysicsConstructor
 {
   public:
-    TG4SpecialCutsPhysics(const G4String& name = "Special cuts");
+    TG4SpecialCutsPhysics(const G4String& name = "SpecialCuts");
     TG4SpecialCutsPhysics(G4int verboseLevel,
-                          const G4String& name = "Special cuts");
+                          const G4String& name = "SpecialCuts");
     virtual ~TG4SpecialCutsPhysics();
 
   protected:

@@ -32,10 +32,10 @@ class TG4SpecialControlsPhysics: public TG4VPhysicsConstructor
 {
   public:
     TG4SpecialControlsPhysics(
-      const G4String& name = "Special controls");
+      const G4String& name = "SpecialControls");
     TG4SpecialControlsPhysics(
       G4int verboseLevel,
-      const G4String& name = "Special controls");
+      const G4String& name = "SpecialControls");
     virtual ~TG4SpecialControlsPhysics();
 
   protected:
