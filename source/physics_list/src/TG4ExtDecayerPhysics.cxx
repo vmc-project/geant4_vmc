@@ -28,16 +28,20 @@
 //_____________________________________________________________________________
 TG4ExtDecayerPhysics::TG4ExtDecayerPhysics(const G4String& name)
   : TG4VPhysicsConstructor(name),
-    fDecayProcess(0)
+    fMessenger(this),
+    fDecayProcess(0),
+    fSelection()     
 {
 /// Standard constructor
 }
 
 //_____________________________________________________________________________
 TG4ExtDecayerPhysics::TG4ExtDecayerPhysics(G4int verboseLevel,
-                                     const G4String& name)
+                                           const G4String& name)
   : TG4VPhysicsConstructor(name, verboseLevel), 
-    fDecayProcess(0)
+    fMessenger(this),
+    fDecayProcess(0),
+    fSelection()     
 {
 /// Standard constructor
 }
@@ -73,7 +77,7 @@ void TG4ExtDecayerPhysics::ConstructProcess()
     //  "TG4ExtDecayerPhysics", "ConstructProcess",
     //  "No VMC external decayer defined.");
     return;
-  }    
+  }  
       
   // Create Geant4 external decayer
   TG4ExtDecayer* tg4Decayer = new TG4ExtDecayer(mcDecayer);
@@ -84,15 +88,31 @@ void TG4ExtDecayerPhysics::ConstructProcess()
 
   theParticleIterator->reset();
   while ((*theParticleIterator)())
-  {
+  {    
+    G4ParticleDefinition* particle = theParticleIterator->value();
+    G4ProcessManager* pmanager = particle->GetProcessManager();
+    
+    if ( fSelection.find(particle->GetParticleName()) != std::string::npos ) {
+
+      if ( VerboseLevel() > 1 ) {
+        G4cout << "Switching off Geant4 decay table for: " 
+               <<  particle->GetParticleName() 
+               << G4endl;
+      } 
+
+      // Unset the decay table for particles in a selection;
+      // for the particles in selection, the external decayer
+      // will have a priority over Geant4 decay table
+      particle->SetDecayTable(0);
+    }          
+
     if ( VerboseLevel() > 1 ) {
       G4cout << "Setting ext decayer for: " 
              <<  theParticleIterator->value()->GetParticleName() 
              << G4endl;
-    }         
-  
-    G4ProcessVector* processVector 
-      = theParticleIterator->value()->GetProcessManager()->GetProcessList();
+    } 
+    
+    G4ProcessVector* processVector = pmanager->GetProcessList();
     for (G4int i=0; i<processVector->length(); i++) {
     
       G4Decay* decay = dynamic_cast<G4Decay*>((*processVector)[i]);

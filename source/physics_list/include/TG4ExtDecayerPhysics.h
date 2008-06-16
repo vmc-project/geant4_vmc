@@ -18,6 +18,7 @@
 /// \author I. Hrivnacova; IPN Orsay
 
 #include "TG4VPhysicsConstructor.h"
+#include "TG4ExtDecayerMessenger.h"
 #include <globals.hh>
 
 class G4Decay;
@@ -38,21 +39,34 @@ class TG4ExtDecayerPhysics: public TG4VPhysicsConstructor
                          const G4String& name = "ExtDecayer");
     virtual ~TG4ExtDecayerPhysics();
 
+    // set methods
+    void SetSelection(const G4String& selection);
+
   protected:
     // methods
           // construct particle and physics
     virtual void ConstructParticle();
     virtual void ConstructProcess();
 
-    // data members
-    G4Decay* fDecayProcess; ///< decay process
-
   private:
     /// Not implemented
     TG4ExtDecayerPhysics(const TG4ExtDecayerPhysics& right);
     /// Not implemented
     TG4ExtDecayerPhysics& operator=(const TG4ExtDecayerPhysics& right);
+    
+    // data members
+    TG4ExtDecayerMessenger  fMessenger;  ///< messenger
+    G4Decay*  fDecayProcess; ///< decay process
+    G4String  fSelection;    ///< particles selection 
 };
+
+// inline functions
+
+inline void TG4ExtDecayerPhysics::SetSelection(const G4String& selection) {
+  /// Select particles for which the external decayer will have priority 
+  /// over using Geant4 decay table 
+  fSelection = selection;
+}  
 
 #endif //TG4_EXT_DECAYER_PHYSICS_H
 
