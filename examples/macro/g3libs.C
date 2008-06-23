@@ -31,6 +31,10 @@ void g3libs()
 
   cout << "Loading Geant3 libraries ..." << endl;
 
+  gSystem->Load("libEG");
+  gSystem->Load("libEGPythia6");
+  gSystem->Load("libPythia6");  
+
   if (isLibrary("libdummies.so"))
      gSystem->Load("libdummies.so");
                    // libdummies.so needed from geant3_+vmc version 0.5
