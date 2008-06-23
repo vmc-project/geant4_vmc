@@ -47,6 +47,7 @@
      </li><li> <a href="#Impl_SpecialCuts">          Special cuts           </a>
      </li><li> <a href="#Impl_OverridingDefaults">   User Geant4 classes,
                                                 user physics list      </a>
+     </li><li> <a href="#Impl_Regions">              Regions           </a>
      </li><li> <a href="#Impl_Visualization">        Visualization          </a>
      </li><li> <a href="#Impl_Geant4UI">             Geant4 UI              </a>
  </li></ul>	 
@@ -292,6 +293,19 @@
  In other cases, though the customisation is possible and allowed by the design,
  it has not been tested and so it is not recommended especially for the novice users.
  
+ <a name="Impl_Regions"></a> 
+ </p><h3> Regions </h3>
+
+ <p>
+ In the development version (svn trun), user has now a possibility
+ to define Geant4 regions by overriding the 
+ <a href="http://ivana.home.cern.ch/ivana/g4vmc_html/classTG4VUserRegionConstruction.html">
+ TG4VUserRegionConstruction </a>
+ class. Definition and including of such a user region construction class
+ in the VMC application is demonstrated in the example E03 in
+ <a href="http://ivana.home.cern.ch/ivana/examples_html/classEx03RunConfiguration3.html">
+ Ex03RunConfiguration3 </a> class.
+
  <a name="Impl_Visualization"></a> 
  </p><h3> Visualization </h3>
           

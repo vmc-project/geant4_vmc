@@ -16,6 +16,7 @@
 
 #include "TG4RunConfiguration.h"
 #include "TG4DetConstruction.h"
+#include "TG4VUserRegionConstruction.h"
 #include "TG4ComposedPhysicsList.h"
 #include "TG4EmPhysicsList.h"
 #include "TG4HadronPhysicsList.h"
@@ -138,7 +139,12 @@ G4VUserDetectorConstruction* TG4RunConfiguration::CreateDetectorConstruction()
 
   if ( fUserGeometry == "Root" ) return 0;
    
-  return new TG4DetConstruction();
+  TG4DetConstruction* detConstruction = new TG4DetConstruction();
+  
+  detConstruction
+    ->SetUserRegionConstruction(CreateUserRegionConstruction());
+ 
+  return detConstruction;
 }  
 
 
@@ -251,6 +257,14 @@ G4UserStackingAction* TG4RunConfiguration::CreateStackingAction()
   if ( fSpecialStacking )
     return new TG4SpecialStackingAction();
     
+  return 0;
+}    
+
+//_____________________________________________________________________________
+TG4VUserRegionConstruction*  TG4RunConfiguration::CreateUserRegionConstruction()
+{
+/// No region construction is defined by default
+
   return 0;
 }    
 

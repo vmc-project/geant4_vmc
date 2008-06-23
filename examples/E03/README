@@ -30,6 +30,7 @@ Example03
     Geometry defined via Geant4 (G4)
     User defined physics list (G4)
     User defined particles and ions (G3, G4)
+    User defined regions (G4)
 
   See also description of in 
     geant4/examples/novice/N03/README
@@ -61,6 +62,7 @@ Macros:
   g4Config.C      - configuration macro - G4 native geometry navigation (default)
   g4Config1.C     - configuration macro - geometry defined via Geant4
   g4Config2.C     - configuration macro - user defined physics list (LHEP_BERT)
+  g4Config3.C     - configuration macro - user defined regions
   g4tgeoConfig.C  - configuration macro - G4 with Tgeo navigation 
   g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
   g4config2.in  - macro for G4 configuration using G4 commands (called from g4Config2.C)
@@ -92,6 +94,9 @@ To run example
 
   With G4 with user defined physics list:
   root[0] .x run_g4.C("g4Config2.C"); 
+
+  With G4 with user defined regions:
+  root[0] .x run_g4.C("g4Config3.C"); 
 
   With Fluka:
   root[0] .x run_fl.C  

@@ -45,6 +45,7 @@ SRCS	:= $(CXXSRC)
 #
 HDRS	:= include/Ex03RunConfiguration1.h \
 	   include/Ex03RunConfiguration2.h \
+	   include/Ex03RunConfiguration3.h \
 	   include/$(PACKAGE)LinkDef.h
 
 # Objects

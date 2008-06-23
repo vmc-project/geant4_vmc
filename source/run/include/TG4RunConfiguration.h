@@ -24,6 +24,7 @@ class TG4DetConstruction;
 class TG4TrackingAction;
 class TG4SteppingAction;
 class TG4SpecialPhysicsList;
+class TG4VUserRegionConstruction;
 
 class G4VUserDetectorConstruction;
 class G4VUserPrimaryGeneratorAction;
@@ -89,6 +90,8 @@ class TG4RunConfiguration
     virtual TG4TrackingAction*    CreateTrackingAction();
     virtual TG4SteppingAction*    CreateSteppingAction();
     virtual G4UserStackingAction* CreateStackingAction(); 
+    
+    virtual TG4VUserRegionConstruction*  CreateUserRegionConstruction();
 
     // get methods
     TString  GetUserGeometry() const;

@@ -17,12 +17,15 @@
 #include "TG4DetConstruction.h"
 #include "TG4GeometryManager.h"
 #include "TG4GeometryServices.h"
+#include "TG4VUserRegionConstruction.h"
 #include "TG4Globals.h"
 
 #include <G4VPhysicalVolume.hh>
 
 //_____________________________________________________________________________
 TG4DetConstruction::TG4DetConstruction()
+  : G4VUserDetectorConstruction(),
+    fUserRegionConstruction(0)
 {
 /// Default constructor
 }
@@ -45,7 +48,18 @@ G4VPhysicalVolume* TG4DetConstruction::Construct()
 
   // Build G4 geometry
   TG4GeometryManager::Instance()->ConstructGeometry();
+  
+  if ( fUserRegionConstruction ) fUserRegionConstruction->Construct();
 
   return TG4GeometryServices::Instance()->GetWorld();      
 }
+
+//_____________________________________________________________________________
+void TG4DetConstruction::SetUserRegionConstruction(
+                            TG4VUserRegionConstruction* userRegionConstruction)
+{
+/// Set user region construction
+
+  fUserRegionConstruction = userRegionConstruction;
+}                                   
 
