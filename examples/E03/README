@@ -63,7 +63,8 @@ Macros:
   g4Config1.C     - configuration macro - geometry defined via Geant4
   g4Config2.C     - configuration macro - user defined physics list (LHEP_BERT)
   g4Config3.C     - configuration macro - user defined regions
-  g4tgeoConfig.C  - configuration macro - G4 with Tgeo navigation 
+  g4tgeoConfig.C  - configuration macro - G4 with TGeo navigation 
+  g4tgeoConfig3.C - configuration macro - user defined regions, G4 with TGeo navigation 
   g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
   g4config2.in  - macro for G4 configuration using G4 commands (called from g4Config2.C)
   g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
@@ -97,6 +98,9 @@ To run example
 
   With G4 with user defined regions:
   root[0] .x run_g4.C("g4Config3.C"); 
+
+  With G4 + TGeo navigation with user defined regions:
+  root[0] .x run_g4.C("g4tgeoConfig3.C"); 
 
   With Fluka:
   root[0] .x run_fl.C  

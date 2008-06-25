@@ -10,16 +10,18 @@
 //-------------------------------------------------
 
 /// \ingroup E03
-/// \file E03/g4Config3.C
+/// \file E03/g4tgeoConfig3.C
 /// \brief Configuration macro for Geant4 VirtualMC for Example03
 ///
-/// Demonstrates activation of user defined regions
+/// Demonstrates activation of user defined regions for
+/// geometry defined with Root and selected G4Root navigation
 
 void Config()
 {
 /// The configuration function for Geant4 VMC for Example03
 /// called during MC application initialization. 
-/// It demonstrates activation of user defined regions.
+/// It demonstrates activation of user defined regions
+/// for geometry defined with Root and selected G4Root navigation.
 
   // Load G4 novice N03 example library (with detector construction)
   gSystem->Load("$G4INSTALL/tmp/$G4SYSTEM/exampleN03/libexampleN03");
@@ -29,7 +31,7 @@ void Config()
 
   // Run configuration with user defined regions
   Ex03RunConfiguration3* runConfiguration 
-    = new Ex03RunConfiguration3("geomRootToGeant4");
+    = new Ex03RunConfiguration3("geomRoot");
 
   // TGeant4
   TGeant4* geant4
