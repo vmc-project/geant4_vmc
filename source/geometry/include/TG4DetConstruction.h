@@ -19,8 +19,6 @@
 
 #include <G4VUserDetectorConstruction.hh>
 
-class TG4VUserRegionConstruction;
-
 class G4VPhysicalVolume;
 
 /// \ingroup geometry
@@ -37,19 +35,12 @@ class TG4DetConstruction : public G4VUserDetectorConstruction
 
     // methods
     virtual G4VPhysicalVolume* Construct();
-    
-    // set user region construction
-    void SetUserRegionConstruction(
-            TG4VUserRegionConstruction* userRegionConstruction);
 
   private:    
     /// Not implemented
     TG4DetConstruction(const TG4DetConstruction& right);
     /// Not implemented
     TG4DetConstruction& operator=(const TG4DetConstruction& right);
-    
-    /// user region construction
-    TG4VUserRegionConstruction* fUserRegionConstruction;
 }; 
 
 #endif //TG4_DET_CONSTRUCTION_H

@@ -27,6 +27,7 @@
 #include "TG4G3Units.h"
 #include "TG4G3CutVector.h"
 #include "TG4G3ControlVector.h"
+#include "TG4VUserRegionConstruction.h"
 #include "TG4Globals.h"
 
 #include <G3toG4.hh> 
@@ -68,7 +69,9 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fOpManager(0),
     fUserGeometry(userGeometry),
     fMagneticFieldType(kMCApplicationField), 
-    fMagneticField(0) 
+    fMagneticField(0),
+    fUserRegionConstruction(0)
+     
 {
 /// Standard constructor
 
@@ -554,6 +557,8 @@ void TG4GeometryManager::ConstructGeometry()
   TVirtualMCApplication::Instance()->ConstructOpGeometry();   
   TG4StateManager::Instance()->SetNewState(kNotInApplication);
 
+  // Construct user regions
+  if ( fUserRegionConstruction ) fUserRegionConstruction->Construct();
 }                   
 
 //_____________________________________________________________________________
@@ -665,4 +670,14 @@ void TG4GeometryManager::SetUniformFieldValue(G4double fieldValue)
   // Set value
   uniformField->SetFieldValue(fieldValue);
 }
+
+
+//_____________________________________________________________________________
+void TG4GeometryManager::SetUserRegionConstruction(
+                            TG4VUserRegionConstruction* userRegionConstruction)
+{
+/// Set user region construction
+
+  fUserRegionConstruction = userRegionConstruction;
+}                                   
 

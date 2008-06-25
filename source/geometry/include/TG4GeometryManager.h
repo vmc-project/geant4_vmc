@@ -26,6 +26,8 @@ class TG4GeometryServices;
 class TG4OpGeometryManager;
 class TG4G3CutVector;
 class TG4G3ControlVector;
+class TG4VUserRegionConstruction;
+
 
 class G4MagneticField;
 
@@ -59,6 +61,9 @@ class TG4GeometryManager : public TG4Verbose
     void SetFieldType(TG4MagneticFieldType fieldType);
     void SetUniformFieldValue(G4double fieldValue);
      
+    // set user region construction
+    void SetUserRegionConstruction(
+            TG4VUserRegionConstruction* userRegionConstruction);
   private:
     /// Not implemented
     TG4GeometryManager(const TG4GeometryManager& right);
@@ -90,6 +95,7 @@ class TG4GeometryManager : public TG4Verbose
     G4String              fUserGeometry;     ///< user geometry input                                        
     TG4MagneticFieldType  fMagneticFieldType;///< magnetic field type
     G4MagneticField*      fMagneticField;    ///< magnetic field
+    TG4VUserRegionConstruction* fUserRegionConstruction; ///< user region construction
 };
 
 // inline methods

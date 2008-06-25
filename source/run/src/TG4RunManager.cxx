@@ -182,6 +182,10 @@ void TG4RunManager::ConfigureRunManager()
   // Geometry construction and navigator
   //
   TString userGeometry = fRunConfiguration->GetUserGeometry();
+  
+  TG4GeometryManager::Instance()
+    ->SetUserRegionConstruction(
+        fRunConfiguration->CreateUserRegionConstruction());
     
   // Root navigator
   TG4RootNavMgr* rootNavMgr = 0;

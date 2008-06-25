@@ -139,12 +139,7 @@ G4VUserDetectorConstruction* TG4RunConfiguration::CreateDetectorConstruction()
 
   if ( fUserGeometry == "Root" ) return 0;
    
-  TG4DetConstruction* detConstruction = new TG4DetConstruction();
-  
-  detConstruction
-    ->SetUserRegionConstruction(CreateUserRegionConstruction());
- 
-  return detConstruction;
+  return new TG4DetConstruction();
 }  
 
 
