@@ -46,7 +46,8 @@ TG4PhysicsManager::TG4PhysicsManager()
     fParticlesManager(0),
     fG3PhysicsManager(0),
     fProcessMCMap(),
-    fProcessControlMap()
+    fProcessControlMap(),
+    fNotImplParNames()
 { 
 /// Default constructor
 
@@ -535,10 +536,14 @@ void  TG4PhysicsManager::Gstpar(Int_t itmed, const char *param, Float_t parval)
       GstparControl(itmed, control, controlValue);
       fG3PhysicsManager->Lock();
     } 
-    else if (cut==kNoG3Cuts && control==kNoG3Controls) { 
+    else if ( cut==kNoG3Cuts && control==kNoG3Controls &&
+              fNotImplParNames.find(TString(param) ) == fNotImplParNames.end() ) { 
+    
       TG4Globals::Warning(
         "TG4PhysicsManager", "Gstpar",
         TString(name) + " parameter is not yet implemented.");
+        
+      fNotImplParNames.insert(TString(param));  
     }        
   }   
 } 
@@ -552,9 +557,13 @@ Bool_t TG4PhysicsManager::SetCut(const char* cutName, Float_t cutValue)
   TG4G3Cut g3Cut = TG4G3CutVector::GetCut(cutName);
 
   if (g3Cut == kNoG3Cuts) {
-    TG4Globals::Warning(
-      "TG4PhysicsManager", "SetCut",
-      "Parameter " + TString(cutName) + " is not implemented.");
+    if ( fNotImplParNames.find(TString(cutName)) == fNotImplParNames.end() ) {
+      TG4Globals::Warning(
+        "TG4PhysicsManager", "SetCut",
+        "Parameter " + TString(cutName) + " is not implemented.");
+        
+      fNotImplParNames.insert(TString(cutName));
+    }      
     return false;
   }  
   
@@ -582,10 +591,13 @@ Bool_t TG4PhysicsManager::SetProcess(const char* controlName, Int_t value)
     
     return true;
   }  
-  else {   
-    TG4Globals::Warning(
-      "TG4PhysicsManager", "SetProcess",
-      "Parameter " + TString(controlName) + " is not implemented.");
+  else { 
+    if ( fNotImplParNames.find(TString(controlName)) == fNotImplParNames.end() ) {   
+      TG4Globals::Warning(
+        "TG4PhysicsManager", "SetProcess",
+        "Parameter " + TString(controlName) + " is not implemented.");
+      fNotImplParNames.insert(TString(controlName));
+    }  
     return false;
   }  
 }  
@@ -775,7 +787,6 @@ void  TG4PhysicsManager::DefineParticles()
 /// and maps them to G4 particles objects.
 
   fParticlesManager->DefineParticles();
-
   TG4StateManager::Instance()->SetNewState(kAddIons);
   TVirtualMCApplication::Instance()->AddIons();
   TG4StateManager::Instance()->SetNewState(kNotInApplication);

@@ -32,6 +32,8 @@
 
 #include <globals.hh>
 
+#include <set>
+
 class TG4ParticlesManager;
 class TG4G3PhysicsManager;
 class TG4G3ProcessMap;
@@ -136,6 +138,9 @@ class TG4PhysicsManager : public TG4Verbose
     
     /// the mapping between G4 processes and G3 process controls
     TG4ProcessControlMap   fProcessControlMap;
+    
+    /// set of not implemented Gstpar parameters
+    std::set<TString>      fNotImplParNames;
 };
 
 // inline methods
