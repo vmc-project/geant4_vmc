@@ -158,8 +158,9 @@ void  TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
     TString text = "Medium ";
     text += itmed;
     text += " not found." ;
-    TG4Globals::Exception(
+    TG4Globals::Warning(
       "TG4OpGeometryManager", "SetCerenkov", text); 
+    return;  
   }  
   G4Material* material = medium->GetMaterial();
   
@@ -232,13 +233,14 @@ void TG4OpGeometryManager::SetBorderSurface(const char *name,
     }  
     if ( ! pv2 ) 
       text += TString("Cannot find physical volume: ") + vol2Name;
-    TG4Globals::Exception("TG4OpGeometryManager", "SetBorderSurface", text);
+    TG4Globals::Warning("TG4OpGeometryManager", "SetBorderSurface", text);
+    return;
   }  
   
   // Get the optical surface
   TG4OpSurfaceMap::iterator it = fOpSurfaceMap->find(opSurfaceName);
   if ( it == fOpSurfaceMap->end() ) {
-    TG4Globals::Exception(
+    TG4Globals::Warning(
       "TG4OpGeometryManager", "SetBorderSurface",
       TString("Cannot find optical surface: ") + opSurfaceName);
     return;
@@ -261,17 +263,19 @@ void TG4OpGeometryManager::SetSkinSurface(const char *name,
     = fGeometryServices->FindLogicalVolume(volName, false); 
 
   if ( !lv ) {
-    TG4Globals::Exception(
+    TG4Globals::Warning(
       "TG4OpGeometryManager", "SetSkinSurface:",
       "Cannot find logical volume: " + TString(volName));
+    return;  
   }  
   
   // Get the optical surface
   TG4OpSurfaceMap::iterator it = fOpSurfaceMap->find(opSurfaceName);
   if (it == fOpSurfaceMap->end()) {
-    TG4Globals::Exception(
+    TG4Globals::Warning(
       "TG4OpGeometryManager", "SetBorderSurface",
       "Cannot find optical surface: " + TString(opSurfaceName));
+    return;  
   }  
   G4OpticalSurface* surface = (*it).second;
  
@@ -294,8 +298,9 @@ void TG4OpGeometryManager::SetMaterialProperty(
     TString text = "Medium ";
     text += itmed;
     text += "not found.";
-    TG4Globals::Exception(
+    TG4Globals::Warning(
       "TG4OpGeometryManager", "SetMaterialProperty", text); 
+    return;  
   }  
   G4Material* material = medium->GetMaterial();
   
@@ -345,8 +350,9 @@ void TG4OpGeometryManager::SetMaterialProperty(
     TString text = "Medium ";
     text += itmed;
     text += "not found.";
-    TG4Globals::Exception(
+    TG4Globals::Warning(
       "TG4OpGeometryManager", "SetMaterialProperty", text); 
+    return;  
   }  
   G4Material* material = medium->GetMaterial();
   
@@ -388,7 +394,7 @@ void TG4OpGeometryManager::SetMaterialProperty(
   // Get the optical surface
   TG4OpSurfaceMap::iterator it = fOpSurfaceMap->find(surfaceName);
   if (it == fOpSurfaceMap->end()) {
-    TG4Globals::Exception(
+    TG4Globals::Warning(
       "TG4OpGeometryManager", "SetMaterialProperty",
       "Cannot find optical surface: " + TString(surfaceName));
     return;
@@ -474,7 +480,7 @@ void TG4OpGeometryManager::Gfmate(Int_t imat, char *name, Double_t &a,
     TString text = "Material ";
     text += imat;
     text += "has not been found.";
-    TG4Globals::Exception("TG4OpGeometryManager", "Gfmate", text);
+    TG4Globals::Warning("TG4OpGeometryManager", "Gfmate", text);
   }
 } 
 
