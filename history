@@ -12,6 +12,30 @@ $Id$
      
 Tags (history):
 ===============
+  21/07/2008
+  v2-5:
+    Geant4 VMC:
+      - Implemented user defined regions via TG4VUserRegionConstruction
+        base class
+      - Implemented a possibility to select particles for
+        which the external decayer will have a priority over
+        using Geant4 decay table; the new command:
+        /mcPhysics/setExtDecayerSelection [particleName1 ..]
+      - Fix in applying CUTELE (problem reported by Stefano Sparato) 
+      - Fixing problem (undefined symbols) when running in batch mode
+        (reported by Mohammad Al-Turrany)
+      - Implemented TVirtualMC::ForceDecayTime()
+      - Improved and completed documentation
+      - Plus other minor fixes and corrections  
+   
+    Examples:
+      - Adding macros for running with Fluka
+      - In E03: added an example for user defined regions in Geant4
+      - Adding setting FPE mask to zero, in order to make sure than FPE for
+        FE_OVERFLOW is disabled what is required for Geant4.
+    
+    Tested with Geant4 9.1.p02, CLHEP 2.0.3.2, Root 5.20/00, VGM 3.01
+
   18/12/2007
   v2-4:
     Geant4 VMC:
