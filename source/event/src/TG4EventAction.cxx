@@ -133,12 +133,12 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
   TG4TrackingAction* trackingAction = TG4TrackingAction::Instance();
   if (trackingAction) trackingAction->FinishPrimaryTrack();   
 
-  if (VerboseLevel() > 0) {
+  if (VerboseLevel() > 1) {
     G4cout << G4endl;
     G4cout << ">>> End of Event " << event->GetEventID() << G4endl;
   }
 
-  if (VerboseLevel() > 1) {
+  if (VerboseLevel() > 2) {
     G4int nofPrimaryTracks = gMC->GetStack()->GetNprimary();
     G4int nofSavedTracks = gMC->GetStack()->GetNtrack();
    
