@@ -48,6 +48,7 @@ class TG4TrackManager : public TG4Verbose
     static TG4TrackManager* Instance();
 
     // methods
+    void  AddPrimaryParticleId(G4int id);
     G4int SetTrackInformation(const G4Track* aTrack);
     void  SetParentToTrackInformation(const G4Track* aTrack);
     void  SetBackPDGLifetime(const G4Track* aTrack);
@@ -80,7 +81,8 @@ class TG4TrackManager : public TG4Verbose
     static TG4TrackManager*   fgInstance; ///< this instance
 
     // data members
-    G4TrackingManager*  fG4TrackingManager; ///< G4 tracking manager
+    G4TrackingManager*  fG4TrackingManager;  ///< G4 tracking manager
+    std::vector<G4int>  fPrimaryParticleIds; ///< The VMC stack primary particle Ids
     G4bool  fSaveSecondaries;       ///< control of saving secondaries
     G4bool  fSaveSecondariesInStep; ///< control of saving secondaries in step
     G4int   fTrackCounter;          ///< tracks counter

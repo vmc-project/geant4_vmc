@@ -72,6 +72,16 @@ TG4TrackManager::~TG4TrackManager()
 //
 
 //_____________________________________________________________________________
+void  TG4TrackManager::AddPrimaryParticleId(G4int id)
+{
+/// Puts the given id in fPrimaryParticleIds.
+/// This is then used to keep the primary track Ids identical
+/// with Ids in VMC stack.
+
+  fPrimaryParticleIds.push_back(id);
+}  
+
+//_____________________________________________________________________________
 G4int TG4TrackManager::SetTrackInformation(const G4Track* track)
 {
 /// Set track index in VMC stack to track information
@@ -104,7 +114,8 @@ G4int TG4TrackManager::SetTrackInformation(const G4Track* track)
     G4int parentID = track->GetParentID();
     if ( parentID == 0 ) { 
       // in VMC track numbering starts from 0
-      trackIndex = trackID-1; 
+      // trackIndex = trackID-1; 
+      trackIndex = fPrimaryParticleIds[trackID-1];
     } 
     else { 
       if ( GetSaveSecondaries() )

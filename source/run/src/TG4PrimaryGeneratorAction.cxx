@@ -16,6 +16,7 @@
 
 #include "TG4PrimaryGeneratorAction.h"
 #include "TG4ParticlesManager.h"
+#include "TG4TrackManager.h"
 #include "TG4StateManager.h"
 #include "TG4UserIon.h"
 #include "TG4G3Units.h"
@@ -87,6 +88,9 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
     if (particle) {
       // only particles that didn't die (decay) in primary generator
       // will be transformed to G4 objects   
+      
+      // Pass this particle Id (in the VMC stack) to Track manager
+      TG4TrackManager::Instance()->AddPrimaryParticleId(i);
 
       // Get particle definition from TG4ParticlesManager
       //
