@@ -275,7 +275,6 @@ void Ex03DetectorConstruction::ConstructGeometry()
   Double_t* ubuf = 0;
   
   // Media Ids
-  Int_t airMediumId = gGeoManager->GetMedium("Air")->GetId();
   Int_t defaultMediumId = gGeoManager->GetMedium(fDefaultMaterial.Data())->GetId();
   Int_t absorberMediumId = gGeoManager->GetMedium(fAbsorberMaterial.Data())->GetId();
   Int_t gapMediumId = gGeoManager->GetMedium(fGapMaterial.Data())->GetId();
@@ -288,7 +287,7 @@ void Ex03DetectorConstruction::ConstructGeometry()
   world[0] = fWorldSizeX/2.;
   world[1] = fWorldSizeYZ/2.;
   world[2] = fWorldSizeYZ/2.;
-  TGeoVolume *top = gGeoManager->Volume("WRLD", "BOX", airMediumId, world, 3);
+  TGeoVolume *top = gGeoManager->Volume("WRLD", "BOX", defaultMediumId, world, 3);
   gGeoManager->SetTopVolume(top);
 
   //                               

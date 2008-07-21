@@ -251,7 +251,7 @@ void Ex03DetectorConstructionOld::ConstructGeometry()
   world[0] = fWorldSizeX/2.;
   world[1] = fWorldSizeYZ/2.;
   world[2] = fWorldSizeYZ/2.;
-  gMC->Gsvolu("WRLD", "BOX", gMC->MediumId("Air"), world, 3);
+  gMC->Gsvolu("WRLD", "BOX", gMC->MediumId(fDefaultMaterial.Data()), world, 3);
 
   //                               
   // Calorimeter
