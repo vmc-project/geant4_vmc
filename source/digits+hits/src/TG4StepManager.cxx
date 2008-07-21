@@ -37,6 +37,7 @@
 #include <G4VTouchable.hh>
 
 #include <TLorentzVector.h>
+#include <TMath.h>
 
 TG4StepManager* TG4StepManager::fgInstance = 0;
 
@@ -283,7 +284,7 @@ void TG4StepManager::SetMaxNStep(Int_t maxNofSteps)
 {
 /// Set the maximum number of steps.
 
-  TG4SteppingAction::Instance()->SetMaxNofSteps(maxNofSteps);
+  TG4SteppingAction::Instance()->SetMaxNofSteps(TMath::Abs(maxNofSteps));
 }
 
 //_____________________________________________________________________________
