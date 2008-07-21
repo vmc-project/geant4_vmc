@@ -2,16 +2,16 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.17/08  13 December 2007   *
+  *   Version   5.20/00      24 June 2008   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.17/08 (tags/v5-17-08@21361, Dec 18 2007, 13:12:16 on linux)
+ROOT 5.20/00 (tags/v5-20-00@24532, Jul 18 2008, 18:16:33 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.16.27, Oct 25, 2007
+CINT/ROOT C/C++ Interpreter version 5.16.29, Jan 08, 2008
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -19,17 +19,18 @@ Processing test_E01.C("g4ConfigOld.C", kTRUE)...
 Loading Geant4 granular libraries ...
 loading OpenInventor
 Loading VGM libraries ... 
+Loading geant4vmc library ... 
 Loading libraries ... finished
 
 *************************************************************
- Geant4 version Name: geant4-09-01    (14-December-2007)
+ Geant4 version Name: geant4-09-01-patch-02    (9-May-2008)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
 *************************************************************
 
-Adding EMPhysicsList
-Adding SpecialPhysicsList 
+Adding EMPhysicsList emStandard 
+Adding SpecialPhysicsList stepLimiter
 Debug mode is switched on.
 Visualization Manager instantiating...
 Visualization Manager initialising...
@@ -44,14 +45,10 @@ Current available graphics systems are:
   RayTracer (RayTracer)
   VRML1FILE (VRML1FILE)
   VRML2FILE (VRML2FILE)
-  FukuiRenderer (DAWN)
   OpenGLImmediateX (OGLIX)
   OpenGLStoredX (OGLSX)
   OpenGLImmediateXm (OGLIXm)
   OpenGLStoredXm (OGLSXm)
-  OpenInventorXt (OIX)
-  VRML1 (VRML1)
-  VRML2 (VRML2)
 
 Registering model factories...
 
@@ -351,9 +348,7 @@ Track 191 0 0  in CALB  Lead
 Track 200 0 0  in CALB  Lead
 Track 200 0 0  in EXPH  ArgonGas
 Track 300 0 0  in EXPH  ArgonGas
-
->>> End of Event 0
-Time of this run:   User=0.01s Real=0.01s Sys=0s
+Time of this run:   User=0.01s Real=0s Sys=0s
 Number of events processed: 1
 Transformation for /EXPH_1/CALB_1/LAYB_9: 
 matrix  - tr=1  rot=1  refl=0  scl=0

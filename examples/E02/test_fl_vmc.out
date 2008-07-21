@@ -2,16 +2,16 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.17/08  13 December 2007   *
+  *   Version   5.20/00      24 June 2008   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.17/08 (tags/v5-17-08@21361, Dec 18 2007, 13:12:16 on linux)
+ROOT 5.20/00 (tags/v5-20-00@24532, Jul 18 2008, 18:16:33 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.16.27, Oct 25, 2007
+CINT/ROOT C/C++ Interpreter version 5.16.29, Jan 08, 2008
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -31,8 +31,6 @@ Preparing Fluka working directory ... finished
 Fluka has been created.
 Info in <TGeoManager::TGeoManager>: Geometry geom, FLUKA geometry created
 Geometry will be defined via VMC
-Mixture 8695504        Air     2 
-Mixture (2)     0        Air     2 
 Target is 5 cm of lead 
 There are 5 chambers in the tracker region. The chambers are 2 mm of Xenon gas
  The distance between chamber is 80 cm
@@ -261,7 +259,7 @@ Magnetic field enabled
      !!!! INCLUDING THE AUTHOR'S REQUESTS                     !!!!
      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  <== Outside FLUKAM!!!
-<== TFluka::BuildPhysics() Read input cards End R:11.68s C:10.44s
+<== TFluka::BuildPhysics() Read input cards End R:10.32s C:10.31s
  ==> Inside FLUKAM!!!
      * ITIMES = 1 LFDRTR = T
  <== Outside FLUKAM!!!
@@ -344,7 +342,7 @@ TParticle: e-             p: -0.000393 -0.001090 0.002129 Vertex: -3.969396e-02 
 Mother:    proton  with ID: 0
 Number of daughters: 0
 
-Event: 1 R:0.00s C:0.00s
+Event: 1 R:0.00s C:0.01s
  ==> Inside FLUKAM!!!
      * ITIMES = 1 LFDRTR = T
  <== Outside FLUKAM!!!
@@ -384,7 +382,7 @@ TParticle: e-             p: -0.000856 -0.000430 0.001082 Vertex: -8.920392e-03 
 Mother:    proton  with ID: 0
 Number of daughters: 0
 
-Event: 2 R:0.00s C:0.01s
+Event: 2 R:0.00s C:0.00s
  ==> Inside FLUKAM!!!
      * ITIMES = 1 LFDRTR = T
  <== Outside FLUKAM!!!

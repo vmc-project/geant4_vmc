@@ -2,16 +2,16 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.17/08  13 December 2007   *
+  *   Version   5.20/00      24 June 2008   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.17/08 (tags/v5-17-08@21361, Dec 18 2007, 13:12:16 on linux)
+ROOT 5.20/00 (tags/v5-20-00@24532, Jul 18 2008, 18:16:33 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.16.27, Oct 25, 2007
+CINT/ROOT C/C++ Interpreter version 5.16.29, Jan 08, 2008
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -19,11 +19,11 @@ Processing test_E06.C("g3tgeoConfig.C", kFALSE)...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766480271    2DAF8F8F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766598735    2DB15E4F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766503309   766480271
-                                        HEX    2DAFE98D    2DAF8F8F
+          with Store/Table at absolute adrs   766621773   766598735
+                                        HEX    2DB1B84D    2DB15E4F
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
