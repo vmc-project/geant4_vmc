@@ -20,6 +20,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include <XmlVGM/VExporter.h>
+#include <VGM/volumes/IFactory.h>
 #include <Geant4GM/volumes/Factory.h>
 #include <RootGM/volumes/Factory.h>
 
@@ -44,7 +45,7 @@ class G4UIcmdWithoutParameter;
 class TG4VGMMessenger: public G4UImessenger
 {
   public:
-    TG4VGMMessenger(const G4String& xmlFormat);
+    TG4VGMMessenger(const G4String& xmlFormat, const G4String& userGeometry);
     virtual ~TG4VGMMessenger();
 
     // methods
@@ -71,6 +72,7 @@ class TG4VGMMessenger: public G4UImessenger
     static G4int           fgCounter;
 
     // data members
+    VGM::IFactory*         fImportFactory;  ///< VGM factory for import
     Geant4GM::Factory*     fG4Factory;      ///< Geant4 VGM Factory
     RootGM::Factory*       fRootFactory;    ///< Root VGM Factory
     XmlVGM::VExporter*     fXmlVGMExporter; ///< associated class

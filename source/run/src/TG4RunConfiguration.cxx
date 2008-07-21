@@ -113,8 +113,8 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
 
 #ifdef USE_VGM
   // instantiate XML messengers
-  fAGDDMessenger = new TG4VGMMessenger("AGDD");
-  fGDMLMessenger = new TG4VGMMessenger("GDML");
+  fAGDDMessenger = new TG4VGMMessenger("AGDD", userGeometry.Data());
+  fGDMLMessenger = new TG4VGMMessenger("GDML", userGeometry.Data());
 #endif    
 }
 

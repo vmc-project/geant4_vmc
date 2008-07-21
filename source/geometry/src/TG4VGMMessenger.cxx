@@ -35,19 +35,36 @@ G4UIcmdWithoutParameter* TG4VGMMessenger::fgGenerateRootCmd = 0;
 G4int                    TG4VGMMessenger::fgCounter = 0;
 
 //_____________________________________________________________________________
-TG4VGMMessenger::TG4VGMMessenger(const G4String& xmlFormat)
+TG4VGMMessenger::TG4VGMMessenger(const G4String& xmlFormat,
+                                 const G4String& userGeometry)
   : G4UImessenger(),
-    fG4Factory(new Geant4GM::Factory()),
+    fImportFactory(0),
+    fG4Factory(0),
     fRootFactory(0),
     fXmlVGMExporter(0),
     fGenerateXMLCmd()
 {
 /// Standard constructor
 
+  if ( userGeometry == "geomVMCtoGeant4"  ||
+       userGeometry == "geomRootToGeant4" ||
+       userGeometry == "geomGeant4" ) {
+    fG4Factory = new Geant4GM::Factory();
+    fImportFactory = fG4Factory;
+  }
+
+  if ( userGeometry == "geomVMCtoRoot"    ||
+       userGeometry == "geomRoot"      ) {
+    fRootFactory = new RootGM::Factory();
+    fImportFactory = fRootFactory;
+  }  
+  
+  fImportFactory->SetIgnore(true);
+
   if (xmlFormat == "AGDD")
-    fXmlVGMExporter = new XmlVGM::AGDDExporter(fG4Factory);
+    fXmlVGMExporter = new XmlVGM::AGDDExporter(fImportFactory);
   if (xmlFormat == "GDML")
-    fXmlVGMExporter = new XmlVGM::GDMLExporter(fG4Factory);
+    fXmlVGMExporter = new XmlVGM::GDMLExporter(fImportFactory);
 
   if (!fgDirectory) {
     fgDirectory = new G4UIdirectory("/vgm/");
@@ -100,11 +117,22 @@ void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
 {
 /// Applies command to the associated object.
 // ---
+  
+  G4cout << "TG4VGMMessenger::SetNewValue " 
+         << fImportFactory << " " << fG4Factory << " " << fRootFactory << G4endl;
 
-  if (!fG4Factory->Top()) {
-     // Import geometry in VGM
+  if ( fImportFactory == fG4Factory && !fG4Factory->Top()) {
+    // Import Geant4 geometry in VGM
     // fG4Factory->SetDebug(1);
+    G4cout << "Import Geant4 geometry in VGM" << G4endl;
     fG4Factory->Import(TG4GeometryServices::Instance()->GetWorld());
+  }
+    
+  if ( fImportFactory == fRootFactory && !fRootFactory->Top()) {
+    // Import Root geometry in VGM
+    // fRootFactory->SetDebug(1);
+    G4cout << "Import Root geometry in VGM" << G4endl;
+    fRootFactory->Import(gGeoManager->GetTopNode());
   }  
 
   if (command == fgGenerateRootCmd) { 
