@@ -24,9 +24,15 @@ TOPDIR  = $(shell pwd)/..
 BINDIR  = $(TOPDIR)/tmp/tgt_$(PLATFORM)
 LIBDIR  = $(TOPDIR)/lib/tgt_$(PLATFORM)
 
+ifeq ($(ROOTSYS),)
 ROOT_INCDIR := $(shell root-config --incdir)
 ROOT_BINDIR := $(shell root-config --bindir)
 ROOT_ETCDIR := $(shell root-config --etcdir)/vmc
+else
+ROOT_INCDIR = $(ROOTSYS)/include
+ROOT_BINDIR = $(ROOTSYS)/bin
+ROOT_ETCDIR = $(ROOTSYS)/etc/vmc
+endif
 
 include $(ROOT_ETCDIR)/Makefile.$(PLATFORM)
 
