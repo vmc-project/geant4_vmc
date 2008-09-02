@@ -268,7 +268,6 @@ void TG4TrackManager::TrackToStack(const G4Track* track)
   // create particle 
   gMC->GetStack()->PushTrack(0, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
                             polX, polY, polZ, mcProcess, ntr, weight, status);  
-                   
 }
 //_____________________________________________________________________________
 void TG4TrackManager::PrimaryToStack(const G4PrimaryVertex* vertex,
@@ -371,6 +370,14 @@ void TG4TrackManager::SetSaveSecondaries(G4bool saveSecondaries,
   else   
     fSaveSecondariesInStep = saveSecondaries;
 }
+
+//_____________________________________________________________________________
+void TG4TrackManager::ResetPrimaryParticleIds()
+{
+/// Clear the vector with the VMC stack primary particle Ids
+
+  fPrimaryParticleIds.clear();
+}    
 
 //_____________________________________________________________________________
 TG4TrackInformation* TG4TrackManager::GetTrackInformation(

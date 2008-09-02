@@ -63,6 +63,7 @@ class TG4TrackManager : public TG4Verbose
     void SetSaveSecondaries(G4bool saveSecondaries, G4bool inStep = false);
     void SetNofTracks(G4int nofTracks);
     void SetG4TrackingManager(G4TrackingManager* trackingManager);
+    void ResetPrimaryParticleIds();
 
     // get methods
     TG4TrackInformation* GetTrackInformation(const G4Track* track) const;

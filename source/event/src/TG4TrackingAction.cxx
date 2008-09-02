@@ -139,6 +139,8 @@ void TG4TrackingAction::PrepareNewEvent()
   stepManager->SetSteppingManager(fpTrackingManager->GetSteppingManager());
   
   fTrackManager->SetG4TrackingManager(fpTrackingManager);
+  
+  fTrackManager->ResetPrimaryParticleIds();  
 
   if (fSaveSecondaries)
     fTrackManager->SetNofTracks(0);
