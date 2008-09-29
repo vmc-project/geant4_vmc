@@ -49,7 +49,8 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
     fTouchableHistory(0),
     fSteppingManager(0),
     fVolPathBuffer(),
-    fCopyNoOffset(0)
+    fCopyNoOffset(0),
+    fDivisionCopyNoOffset(0)
 {
 /// Standard constructor
 /// \param userGeometry  User selection of geometry definition and navigation 
@@ -67,6 +68,12 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
   /// Set offset for passing copyNo to 1;
   /// as G3toG4 decrement copyNo passed by user by 1
   if ( userGeometry == "VMCtoGeant4" ) fCopyNoOffset = 1;
+
+  /// Set offset for passing copyNo to 1;
+  /// to be equivalent to Root geometrical model
+  /// (Root starts numbering from 1, while Geant4 from 0)
+  if ( userGeometry == "RootToGeant4"  || userGeometry == "Geant4") 
+    fDivisionCopyNoOffset = 1;
 }
 
 //_____________________________________________________________________________
@@ -378,6 +385,8 @@ Int_t TG4StepManager::CurrentVolID(Int_t& copyNo) const
     return 0;  
   }
   copyNo = physVolume->GetCopyNo() + fCopyNoOffset;
+  
+  if ( physVolume->IsParameterised() )  copyNo += fDivisionCopyNoOffset;
 
   // sensitive detector ID
   TG4SDServices* sdServices = TG4SDServices::Instance();  
@@ -399,6 +408,8 @@ Int_t TG4StepManager::CurrentVolOffID(Int_t off, Int_t&  copyNo) const
 
   if (mother) {
     copyNo = mother->GetCopyNo() + fCopyNoOffset;
+
+    if ( mother->IsParameterised() )  copyNo += fDivisionCopyNoOffset;
 
     // sensitive detector ID
     TG4SDServices* sdServices = TG4SDServices::Instance();

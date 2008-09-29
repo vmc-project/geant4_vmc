@@ -170,6 +170,7 @@ class TG4StepManager
     
     /// volume copy number offset
     G4int               fCopyNoOffset;
+    G4int               fDivisionCopyNoOffset;
 };
 
 // inline methods
