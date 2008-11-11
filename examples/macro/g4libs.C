@@ -28,7 +28,7 @@ void g4libs()
 /// Change the comment if global libraries are used.
 
   g4libs_granular();
-  // g4libs_global();
+  //g4libs_global();
   
   gSystem->SetFPEMask(0); 
 }   
@@ -100,6 +100,9 @@ void g4libs_graphics(Bool_t granular = true)
   Bool_t isOpenGL = !isSet("G4VIS_NONE") &&
                     (isSet("G4VIS_BUILD_OPENGLX_DRIVER") ||
                      isSet("G4VIS_BUILD_OPENGLXM_DRIVER"));
+  Bool_t isQt = !isSet("G4VIS_NONE") &&
+                (isSet("G4VIS_BUILD_OPENGLQT_DRIVER") ||
+                 isSet("G44UI_BUILD_QT_SESSION"));
   Bool_t isOIX = !isSet("G4VIS_NONE") &&
                  (isSet("G4VIS_BUILD_OIX_DRIVER") ||
                   isSet("G4VIS_BUILD_OI_DRIVER"));
@@ -117,6 +120,14 @@ void g4libs_graphics(Bool_t granular = true)
   if (isXaw) {
     gSystem->Load("libXaw");
   }
+  
+  if (isQt) {
+    gSystem->Load("libQtCore");
+    gSystem->Load("libQtGui");
+    gSystem->Load("libQtOpenGL");
+    gSystem->Load("libQtSql");
+    gSystem->Load("libQtXml");
+ }
   
   if (granular) {
     gSystem->Load("libG4UIcommon");
@@ -339,6 +350,9 @@ void g4libs_global()
   // interfaces and graphics
   g4libs_graphics(false);
  
+  // physics lists
+  gSystem->Load("libG4physicslists");
+
   // VGM libraries
   vgmlibs();
 
