@@ -626,7 +626,7 @@ Bool_t TG4PhysicsManager::DefineParticle(Int_t pdg, const char* name,
      particleDefinition = particleTable->FindParticle(pdg);
   else {
      G4String particleName(name);
-     if (name == "Rootino")        
+     if ( particleName == "Rootino" )        
          particleDefinition = particleTable->FindParticle("geantino");
   }        
   

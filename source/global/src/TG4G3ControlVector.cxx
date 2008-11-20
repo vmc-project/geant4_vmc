@@ -206,7 +206,7 @@ G4bool TG4G3ControlVector::SetControl(TG4G3Control control,
 /// Modify cuts if necessary.
 /// Return true if the control value was set.
 
-  if (control == kDRAY)
+  if (control == kDRAY) {
     if (controlValue == kActivate &&
         GetControlValue(kLOSS) == kActivate2) {
       TG4Globals::Warning(
@@ -214,7 +214,8 @@ G4bool TG4G3ControlVector::SetControl(TG4G3Control control,
       return false;
     }
     else 
-      cuts.SetDeltaRaysOn(true);           
+      cuts.SetDeltaRaysOn(true);
+  }               
 
   if (control == kLOSS && controlValue == kActivate2) {
     SetControl(kDRAY, kInActivate, cuts);

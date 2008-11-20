@@ -186,10 +186,10 @@ Bool_t TGeant4::CheckApplicationState(const TString& methodName,
   TG4ApplicationState currentState = fStateManager->GetCurrentState();
   TG4ApplicationState previousState = fStateManager->GetPreviousState();
   if ( currentState != requiredState && 
-       ! ( allowLater && currentState > requiredState ||
-           allowLater && previousState >= requiredState ) && 
-       ! ( allowSooner && currentState < requiredState ||
-           allowSooner && previousState <= requiredState ) &&
+       ! ( ( allowLater && currentState > requiredState ) ||
+           ( allowLater && previousState >= requiredState ) ) && 
+       ! ( ( allowSooner && currentState < requiredState ) ||
+           ( allowSooner && previousState <= requiredState ) ) &&
        ! ( allowJustAfter && previousState == requiredState ) ) {
 
     TString message 
