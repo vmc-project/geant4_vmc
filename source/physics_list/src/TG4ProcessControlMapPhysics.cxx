@@ -62,6 +62,8 @@ void TG4ProcessControlMapPhysics::FillMap()
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
 
   controlMap->Add("msc", kMULS); 
+  controlMap->Add("muMsc", kMULS); 
+  controlMap->Add("eCoulombScat", kMULS);
 
   controlMap->Add("eIoni", kLOSS); 
   controlMap->Add("muIoni", kLOSS); 
@@ -75,13 +77,17 @@ void TG4ProcessControlMapPhysics::FillMap()
   
   controlMap->Add("eBrem", kBREM); 
   controlMap->Add("muBrems", kBREM); 
+  controlMap->Add("hBrems", kBREM); 
 
   controlMap->Add("annihil", kANNI); 
 
   controlMap->Add("conv", kPAIR); 
   controlMap->Add("muPairProd", kPAIR); 
+  controlMap->Add("hPairProd", kPAIR); 
 
+  controlMap->Add("nCapture", kHADR);
   controlMap->Add("HadronCapture", kHADR);
+  controlMap->Add("nFission", kHADR);
   controlMap->Add("HadronFission", kHADR);
   
   controlMap->Add("PiMinusAbsorptionAtRest", kHADR); 
@@ -129,6 +135,7 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("He3Inelastic", kHADR); 
   controlMap->Add("ionInelastic", kHADR); 
   controlMap->Add("PhotonInelastic", kHADR); 
+  controlMap->Add("hInelastic", kHADR); 
 
   controlMap->Add("nKiller", kHADR); 
 

@@ -61,6 +61,10 @@ void TG4ProcessMCMapPhysics::FillMap()
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
 
   mcMap->Add("msc", kPMultipleScattering); 
+  mcMap->Add("muMsc", kPMultipleScattering); 
+  
+  mcMap->Add("eCoulombScat", kPMultipleScattering); 
+         // Add kPCoulombScattering
 
   mcMap->Add("eIoni", kPEnergyLoss); 
   mcMap->Add("muIoni", kPEnergyLoss); 
@@ -74,13 +78,17 @@ void TG4ProcessMCMapPhysics::FillMap()
   
   mcMap->Add("eBrem", kPBrem); 
   mcMap->Add("muBrems", kPBrem); 
+  mcMap->Add("hBrems", kPBrem); 
 
   mcMap->Add("annihil", kPAnnihilation); 
 
   mcMap->Add("conv", kPPair); 
   mcMap->Add("muPairProd", kPPair); 
+  mcMap->Add("hPairProd", kPPair); 
 
+  mcMap->Add("nCapture", kPNCapture);
   mcMap->Add("HadronCapture", kPNCapture);
+  mcMap->Add("nFission", kPNuclearFission);
   mcMap->Add("HadronFission", kPNuclearFission);
   
   mcMap->Add("PiMinusAbsorptionAtRest", kPNuclearAbsorption); 
@@ -127,6 +135,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("alphaInelastic", kPHInhelastic); 
   mcMap->Add("He3Inelastic", kPHInhelastic); 
   mcMap->Add("ionInelastic", kPHInhelastic); 
+  mcMap->Add("hInelastic", kPHInhelastic); 
   mcMap->Add("PhotonInelastic", kPPhotonInhelastic); 
 
   mcMap->Add("nKiller", kPHadronic); 
