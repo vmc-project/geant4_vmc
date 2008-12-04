@@ -32,6 +32,7 @@
 #include "TG4Globals.h"
 
 #include <G4UImessenger.hh>
+//#include <G4PhysListFactory.hh>
 
 #ifdef USE_VGM
 #include "TG4VGMMessenger.h"
@@ -77,6 +78,7 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
     
     if ( ! TG4EmPhysicsList::IsAvailableSelection(token) &&
          ! TG4HadronPhysicsList::IsAvailableSelection(token) &&
+         // ! G4PhysListFactory::IsReferencePhysList(token) &&
          token != "optical" ) {
          
       TG4Globals::Exception(
@@ -90,6 +92,7 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
         "  where EM     = " + TString(TG4EmPhysicsList::AvailableSelections())
           + TG4Globals::Endl() +
         "        Hadron = " + TString(TG4HadronPhysicsList::AvailableSelections())
+        //"        Hadron = " + TString(G4PhysListFactory::AvailablePhysLists())
           + TG4Globals::Endl() +
         "  The EM selections are cumulative, while Hadron selections are exlusive."
           + TG4Globals::Endl());
