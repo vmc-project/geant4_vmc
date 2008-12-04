@@ -226,6 +226,7 @@ void g4libs_granular()
   gSystem->Load("libG4emstandard");   
   gSystem->Load("libG4emlowenergy");  
   gSystem->Load("libG4muons");
+  gSystem->Load("libG4emhighenergy");
   gSystem->Load("libG4xrays");
   gSystem->Load("libG4optical");
 
