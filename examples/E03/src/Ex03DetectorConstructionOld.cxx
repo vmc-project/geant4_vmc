@@ -16,6 +16,11 @@
 /// Id: ExN03DetectorConstruction.cc,v 1.11 2002/01/09 17:24:12 ranjard Exp \n
 /// GEANT4 tag $Name:  $
 ///
+/// 11/12/2008: 
+/// Added new material (Mylar)according to:
+/// Id: ExN03DetectorConstruction.cc,v 1.24 2008/08/12 20:00:03 gum Exp
+/// GEANT4 tag Name: geant4-09-01-ref-09
+///
 /// \date 06/03/2002
 /// \author I. Hrivnacova; IPN, Orsay
  
@@ -164,6 +169,15 @@ void Ex03DetectorConstructionOld::ConstructMaterials()
   Double_t ws2[2] = { 10., 9.};
   density = 1.032;  
   gMC->Mixture(imat, name.Data(), as2, zs2, density, -2, ws2); 
+  gMC->Medium(mediumId, name.Data(), imat, 0, ifield, fieldm, tmaxfd, stemax,
+              deemax, epsil, stmin, ubuf, 0);
+
+  name = "Mylar";
+  Double_t am2[3] = { 12.01, 1.01, 16.00};
+  Double_t zm2[3] = { 6.0,   1.0,   8.0};
+  Double_t wm2[3] = { 10., 8., 4.};
+  density = 1.397;  
+  gMC->Mixture(imat, name.Data(), am2, zm2, density, -3, wm2); 
   gMC->Medium(mediumId, name.Data(), imat, 0, ifield, fieldm, tmaxfd, stemax,
               deemax, epsil, stmin, ubuf, 0);
 

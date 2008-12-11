@@ -14,13 +14,21 @@
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
 /// Id: ExN03DetectorConstruction.cc,v 1.11 2002/01/09 17:24:12 ranjard Exp \n
-/// GEANT4 tag $Name:  $
+///
+/// 11/12/2008: 
+/// - Updated materials definition using directly Root objects
+/// - Added new materials according to:
+///   Id: ExN03DetectorConstruction.cc,v 1.24 2008/08/12 20:00:03 gum Exp
+///   GEANT4 tag Name: geant4-09-01-ref-09
+/// - Changed cuts in SetCuts() according to Geant4 09-01-ref-09
 ///
 /// \date 06/03/2002
 /// \author I. Hrivnacova; IPN, Orsay
  
 #include <Riostream.h>
 #include <TGeoManager.h>
+#include <TGeoElement.h>
+#include <TGeoMaterial.h>
 #include <TVirtualMC.h>
 
 #include "Ex03DetectorConstruction.h"
@@ -92,176 +100,254 @@ void Ex03DetectorConstruction::ConstructMaterials()
 
   // Create Root geometry manager 
   new TGeoManager("TGeo", "Root geometry manager");
-   
-  Int_t ifield = 2;          // User defined magnetic field
-  Double_t fieldm = 10.;     // Maximum field value (in kiloGauss)
-  Double_t epsil  = .001;    // Tracking precision, 
-  Double_t stemax = -0.01;   // Maximum displacement for multiple scat 
-  Double_t tmaxfd = -20.;    // Maximum angle due to field deflection 
-  Double_t deemax = -.3;     // Maximum fractional energy loss, DLS 
-  Double_t stmin  = -.8;
-  
-  // stemax = 1.0;             // Maximum step limit
+
+
+  // Paremeter for tracking media  
+  Double_t param[20];
+  param[0] = 0;     // isvol  - Not used
+  param[1] = 2;     // ifield - User defined magnetic field
+  param[2] = 10.;   // fieldm - Maximum field value (in kiloGauss)
+  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection 
+  param[4] = -0.01; // stemax - Maximum displacement for multiple scat 
+  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS 
+  param[6] = .001;  // epsil - Tracking precision
+  param[7] = -.8;   // stmin
+  for ( Int_t i=8; i<20; ++i) param[i] = 0.;
+
 
 //--------- Material definition ---------
 
-  TString name;
-  Double_t a;
-  Double_t z;
-  Double_t density;
-  Double_t radl;
-  Double_t absl;
+  TString name;      // Material name
+  Double_t a;        // Mass of a mole in g/mole   
+  Double_t z;        // Atomic number
+  Double_t density;  // Material density in g/cm3
  
 //
 // define simple materials
 //
 
+  // Aluminium
+
   name = "Aluminium";
-  a = 26.98;
+  a = 26.98;          
   z = 13.;
-  density = 2.700;
-  radl = 8.893;
-  absl = 0.1;   
-  Int_t imat = 1;  
+  density = 2.700;  
+  TGeoMaterial* matAl 
+    = new TGeoMaterial(name.Data(), a, z, density); 
+    
   Int_t mediumId = 1;
-  gGeoManager->Material(name.Data(), a, z, density, imat, radl, absl);  
-  gGeoManager->Medium(name.Data(), mediumId, imat, 0, ifield, fieldm, tmaxfd, 
-                      stemax, deemax, epsil, stmin);
+  new TGeoMedium(name.Data(), mediumId, matAl, param);
+
+  // Liquid Argon
 
   name = "liquidArgon";
   a = 39.95;
   z = 18.;
   density = 1.390;
-  radl = 14.064;
-  absl = 0.1;  
-  imat = 2; 
-  mediumId = 2; 
-  gGeoManager->Material(name.Data(), a, z, density, imat, radl, absl);  
-  gGeoManager->Medium(name.Data(),  mediumId, imat, 0, ifield, fieldm, tmaxfd, 
-                      stemax, deemax, epsil, stmin);
+  TGeoMaterial* matAr
+    = new TGeoMaterial(name.Data(), a, z, density);
+
+  ++mediumId;   
+  new TGeoMedium(name.Data(), mediumId, matAr, param);
+
+  // Lead
 
   name = "Lead";
   a = 207.19;
   z = 82.;
   density = 11.35;
-  radl = 0.5612;
-  absl = 0.1;  
-  imat = 3;  
-  mediumId = 3; 
-  gGeoManager->Material(name.Data(), a, z, density, imat, radl, absl);  
-  gGeoManager->Medium(name.Data(), mediumId, imat, 0, ifield, fieldm, tmaxfd, 
-                      stemax, deemax, epsil, stmin);
+  TGeoMaterial* matLead 
+    = new TGeoMaterial(name.Data(), a, z, density); 
+    
+  ++mediumId;   
+  new TGeoMedium(name.Data(), mediumId, matLead, param);
 
 //
 // define a material from elements.   case 1: chemical molecule
 //
 
-  name = "Water";
-  //Double_t aw2[2] = { 1.01, 16.00};
-  Int_t zw2[2] = { 1, 8 };
-  Int_t ww2[2] = { 2, 1 };
-  density = 1.000;  
-  imat = 4;
-  mediumId = 4; 
-  TGeoMixture* mixture = new TGeoMixture(name.Data(), 2, density);
-  mixture->DefineElement(0, zw2[0], ww2[0]);
-  mixture->DefineElement(1, zw2[1], ww2[1]);
-  mixture->SetUniqueID(imat);
+  // Elements
+  
+  TGeoElement* elH  = new TGeoElement("Hydrogen", "H", z= 1,  a= 1.01);
+  TGeoElement* elC  = new TGeoElement("Carbon"  , "C", z= 6., a= 12.01);
+  TGeoElement* elN  = new TGeoElement("Nitrogen", "N", z= 7., a= 14.01);
+  TGeoElement* elO  = new TGeoElement("Oxygen"  , "O", z= 8., a= 16.00);
+  TGeoElement* elSi = new TGeoElement("Silicon", "Si", z= 14., a= 28.09);
 
-  gGeoManager->Medium(name.Data(), mediumId, imat, 0, ifield, fieldm, tmaxfd, 
-                      stemax, deemax, epsil, stmin);
+
+/*
+  // define an Element from isotopes, by relative abundance 
+  // (cannot be done with TGeo)
+
+  G4Isotope* U5 = new G4Isotope("U235", iz=92, n=235, a=235.01*g/mole);
+  G4Isotope* U8 = new G4Isotope("U238", iz=92, n=238, a=238.03*g/mole);
+
+  G4Element* U  = new G4Element("enriched Uranium",symbol="U",ncomponents=2);
+  U->AddIsotope(U5, abundance= 90.*perCent);
+  U->AddIsotope(U8, abundance= 10.*perCent);
+*/
+  // Water (H20)
+
+  name = "Water";
+  density = 1.000;  
+
+  TGeoMixture* matH2O
+    = new TGeoMixture(name.Data(), 2, density);
+  matH2O->AddElement(elH, 2);  
+  matH2O->AddElement(elO, 1);  
+  // overwrite computed meanExcitationEnergy with ICRU recommended value 
+  // (cannot be done with TGeo)
+  // H2O->GetIonisation()->SetMeanExcitationEnergy(75.0*eV);
+
+  ++mediumId;   
+  new TGeoMedium(name.Data(), mediumId, matH2O, param);
+
+  // Scintillator (C9H10)
 
   name = "Scintillator";
-  //Double_t as2[2] = { 1.01, 12.01};
-  Int_t zs2[2] = {  1, 6 };
-  Int_t ws2[2] = { 10, 9 };
   density = 1.032;  
-  imat = 5;
-  mediumId = 5; 
-  mixture = new TGeoMixture(name.Data(), 2, density);
-  mixture->DefineElement(0, zs2[0], ws2[0]);
-  mixture->DefineElement(1, zs2[1], ws2[1]);
-  mixture->SetUniqueID(imat);
+
+  TGeoMixture* matSci
+    = new TGeoMixture(name.Data(), 2, density);
+  matSci->AddElement(elC,  9); 
+  matSci->AddElement(elH, 10); 
   
-  gGeoManager->Medium(name.Data(), mediumId, imat, 0, ifield, fieldm, tmaxfd, 
-                      stemax, deemax, epsil, stmin);
+  ++mediumId;   
+  new TGeoMedium(name.Data(), mediumId, matSci, param);
+
+  // Mylar (C10H8O4)
+
+  name = "Mylar";
+  density = 1.397;  
+
+  TGeoMixture* matMyl
+    = new TGeoMixture(name.Data(), 3, density);
+  matMyl->AddElement(elC, 10); 
+  matMyl->AddElement(elH,  8); 
+  matMyl->AddElement(elO,  4); 
+ 
+  ++mediumId;   
+  new TGeoMedium(name.Data(), mediumId, matMyl, param);
+
+  // Quartz (SiO2)
 
   name = "quartz";
-  //Double_t aq2[2] = { 28.09, 16.00};
-  Int_t zq2[2] = { 14, 8 };
-  Int_t wq2[2] = {  1, 2 };
   density = 2.200;  
-  imat = 6;
-  mediumId = 6; 
-  mixture = new TGeoMixture(name.Data(), 2, density);
-  mixture->DefineElement(0, zq2[0], wq2[0]);
-  mixture->DefineElement(1, zq2[1], wq2[1]);
-  mixture->SetUniqueID(imat);
 
-  gGeoManager->Medium(name.Data(), mediumId, imat, 0, ifield, fieldm, tmaxfd, 
-                      stemax, deemax, epsil, stmin);
+  TGeoMixture* matSiO2
+    = new TGeoMixture(name.Data(), 2, density);
+  matSiO2->AddElement(elSi, 1); 
+  matSiO2->AddElement(elO, 2); 
+
+  ++mediumId;   
+  new TGeoMedium(name.Data(), mediumId, matSiO2, param);
 
 //
 // define a material from elements.   case 2: mixture by fractional mass
 //
 
   name = "Air";
-  Double_t aa2[2] = { 14.01, 16.00};
-  Double_t za2[2] = {  7.0,   8.0};
-  Double_t wa2[2] = {  0.7,   0.3};
   density = 1.29e-03;  
-  imat = 7;
-  mediumId = 7; 
-  gGeoManager->Mixture(name.Data(), aa2, za2, density, 2, wa2, imat); 
-  gGeoManager->Medium(name.Data(), mediumId, imat, 0, ifield, fieldm, tmaxfd, 
-                      stemax, deemax, epsil, stmin);
+
+  TGeoMixture* matAir
+    = new TGeoMixture(name.Data(), 2, density);
+  matAir->AddElement(elN, 0.7); 
+  matAir->AddElement(elO, 0.3); 
+  
+  ++mediumId;   
+  new TGeoMedium(name.Data(), mediumId, matAir, param);
 
 //
-// !! NOT SUPPORTED BY VMC
+// Define a material from elements and/or others materials (mixture of mixtures)
 //
-// define a material from elements and/or others materials (mixture of mixtures)
-//
-//density = 0.200*g/cm3;
-//G4Material* Aerog = new G4Material(name="Aerogel", density, ncomponents=3);
-//Aerog->AddMaterial(SiO2, fractionmass=62.5*perCent);
-//Aerog->AddMaterial(H2O , fractionmass=37.4*perCent);
-//Aerog->AddElement (C   , fractionmass= 0.1*perCent);
 
-//
-// !! NOT SUPPORTED BY VMC
+  name = "Aerogel";
+  density = 0.200;
+
+  TGeoMixture* matAerog
+    = new TGeoMixture(name.Data(), 3, density);
+  matAerog->AddElement(matSiO2, 0.625); 
+  matAerog->AddElement(matH2O,  0.374); 
+  matAerog->AddElement(elC,     0.001); 
+  
+  ++mediumId;   
+  new TGeoMedium(name.Data(), mediumId, matAerog, param);
+
 //
 // examples of gas in non STP conditions
 //
+
+
+  // CO2
+
+  name = "CarbonicGas";
+  density = 1.842e-03;
+  Double_t atmosphere = 6.32421e+08;
+  Double_t pressure   = 50.*atmosphere;
+  Double_t temperature = 325.;
+  
+  TGeoMixture* matCO2
+    = new TGeoMixture(name.Data(), 2, density);
+  matCO2-> AddElement(elC, 1); 
+  matCO2-> AddElement(elO, 2); 
+  matCO2->SetPressure(pressure);
+  matCO2->SetTemperature(temperature);
+  matCO2->SetState(TGeoMaterial::kMatStateGas);
+  
+  ++mediumId;   
+  new TGeoMedium(name.Data(), mediumId, matCO2, param);
+  
+
+  // Water Steam
+
+  name = "WaterSteam";
+  density  = 0.3e-03;
+  pressure    = 2.*atmosphere;
+  temperature = 500.;
+  
+  TGeoMixture* matSteam
+    = new TGeoMixture(name.Data(), 1, density);
+  matSteam->AddElement(matH2O, 1.0);  
+  matSteam->SetPressure(pressure);
+  matSteam->SetTemperature(temperature);
+  matSteam->SetState(TGeoMaterial::kMatStateGas);
+
+  ++mediumId;   
+  new TGeoMedium(name.Data(), mediumId, matSteam, param);
+
 //
-//density     = 27.*mg/cm3;
-//pressure    = 50.*atmosphere;
-//temperature = 325.*kelvin;
-//G4Material* CO2 = new G4Material(name="CarbonicGas", density, ncomponents=2,
-//                                     kStateGas,temperature,pressure);
-//CO2->AddElement(C, natoms=1);
-//CO2->AddElement(O, natoms=2);
-// 
+// examples of vacuum
 //
-// !! NOT SUPPORTED BY VMC
-//
-//density     = 0.3*mg/cm3;
-//pressure    = 2.*atmosphere;
-//temperature = 500.*kelvin;
-//G4Material* steam = new G4Material(name="WaterSteam", density, ncomponents=1,
-//                                      kStateGas,temperature,pressure);
-//steam->AddMaterial(H2O, fractionmass=1.);
+
+  // Vacuum
 
   name = "Galactic";
   a = 1.e-16;
   z = 1.e-16;
   density = 1.e-16;
-  radl = 1.e16; 
-  absl = 1.e16;  //??
-  imat = 8;  
-  mediumId = 8; 
-  gGeoManager->Material(name.Data(), a, z, density, imat, radl, absl);  
-  gGeoManager->Medium(name.Data(), mediumId, imat, 0, ifield, fieldm, tmaxfd, 
-                      stemax, deemax, epsil, stmin);
+
+  TGeoMaterial* matVacuum 
+    = new TGeoMaterial(name.Data(), a, z, density); 
+
+  ++mediumId;   
+  new TGeoMedium(name.Data(), mediumId, matVacuum, param);
+
+  // Beam
+
+  name = "Beam";
+  density = 1.e-5;
+  pressure    = 2.*atmosphere;
+  temperature = STP_temperature;
+
+  TGeoMixture* matBeam
+    = new TGeoMixture(name.Data(), 1, density);
+  matBeam->AddElement(matAir, 1.0);  
+  matBeam->SetPressure(pressure);
+  matBeam->SetTemperature(temperature);
+  matBeam->SetState(TGeoMaterial::kMatStateGas);
+
+  ++mediumId;   
+  new TGeoMedium(name.Data(), mediumId, matBeam, param);
 }    
 
 //_____________________________________________________________________________
@@ -388,52 +474,108 @@ void Ex03DetectorConstruction::SetCuts()
 /// Set cuts for e-, gamma equivalent to 1mm cut in G4.
 
   Int_t mediumId = gMC->MediumId("Aluminium");
-  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 597.e-06);
-  gMC->Gstpar(mediumId, "DCUTE",  597.e-06);
+  if ( mediumId ) {
+    gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
+    gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
+    gMC->Gstpar(mediumId, "CUTELE", 597.e-06);
+    gMC->Gstpar(mediumId, "DCUTE",  597.e-06);
+  }
 
   mediumId = gMC->MediumId("liquidArgon");
-  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 343.e-06);
-  gMC->Gstpar(mediumId, "DCUTE",  343.e-06);
+  if ( mediumId ) {
+    gMC->Gstpar(mediumId, "CUTGAM", 6.178e-06);
+    gMC->Gstpar(mediumId, "BCUTE",  6.178e-06);
+    gMC->Gstpar(mediumId, "CUTELE", 342.9e-06);
+    gMC->Gstpar(mediumId, "DCUTE",  342.9e-06);
+  }
 
   mediumId = gMC->MediumId("Lead");
-  gMC->Gstpar(mediumId, "CUTGAM", 101.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  101.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 1.38e-03);
-  gMC->Gstpar(mediumId, "DCUTE",  1.38e-03);
+  if ( mediumId ) {
+    gMC->Gstpar(mediumId, "CUTGAM", 100.5e-06);
+    gMC->Gstpar(mediumId, "BCUTE",  100.5e-06);
+    gMC->Gstpar(mediumId, "CUTELE", 1.378e-03);
+    gMC->Gstpar(mediumId, "DCUTE",  1.378e-03);
+  }
 
   mediumId = gMC->MediumId("Water");
-  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 347.e-03);
-  gMC->Gstpar(mediumId, "DCUTE",  347.e-03);
+  if ( mediumId ) {
+    gMC->Gstpar(mediumId, "CUTGAM", 2.902e-06);
+    gMC->Gstpar(mediumId, "BCUTE",  2.902e-06);
+    gMC->Gstpar(mediumId, "CUTELE", 347.2e-06);
+    gMC->Gstpar(mediumId, "DCUTE",  347.2e-06);
+  }
 
   mediumId = gMC->MediumId("Scintillator");
-  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 356.e-03);
-  gMC->Gstpar(mediumId, "DCUTE",  356.e-03);
+  if ( mediumId ) {
+    gMC->Gstpar(mediumId, "CUTGAM", 2.369e-06);
+    gMC->Gstpar(mediumId, "BCUTE",  2.369e-06);
+    gMC->Gstpar(mediumId, "CUTELE", 355.8e-06);
+    gMC->Gstpar(mediumId, "DCUTE",  355.8e-06);
+  }
 
-  mediumId = gMC->MediumId("quartz");
-  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 534.e-03);
-  gMC->Gstpar(mediumId, "DCUTE",  534.e-03);
+  mediumId = gMC->MediumId("Mylar");      
+  if ( mediumId ) {
+    gMC->Gstpar(mediumId, "CUTGAM", 2.978e-06);
+    gMC->Gstpar(mediumId, "BCUTE",  2.978e-06);
+    gMC->Gstpar(mediumId, "CUTELE", 417.5e-06);
+    gMC->Gstpar(mediumId, "DCUTE",  417.5e-06);
+  }
+
+  mediumId = gMC->MediumId("quartz"); 
+  if ( mediumId ) {
+    gMC->Gstpar(mediumId, "CUTGAM", 5.516e-06);
+    gMC->Gstpar(mediumId, "BCUTE",  5.516e-06);
+    gMC->Gstpar(mediumId, "CUTELE", 534.1e-06);
+    gMC->Gstpar(mediumId, "DCUTE",  534.1e-06);
+  }
 
   mediumId = gMC->MediumId("Air");
-  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 10.e-06);
-  gMC->Gstpar(mediumId, "DCUTE",  10.e-06);
+  if ( mediumId ) {
+    gMC->Gstpar(mediumId, "CUTGAM", 990.e-09);
+    gMC->Gstpar(mediumId, "BCUTE",  990.e-09);
+    gMC->Gstpar(mediumId, "CUTELE", 990.e-09);
+    gMC->Gstpar(mediumId, "DCUTE",  990.e-09);
+  }
+
+  mediumId = gMC->MediumId("Aerogel");
+  if ( mediumId ) {
+    gMC->Gstpar(mediumId, "CUTGAM", 1.706e-06);
+    gMC->Gstpar(mediumId, "BCUTE",  1.706e-06);
+    gMC->Gstpar(mediumId, "CUTELE", 119.0e-06);
+    gMC->Gstpar(mediumId, "DCUTE",  119.0e-06);
+  }
+
+  mediumId = gMC->MediumId("CarbonicGas");
+  if ( mediumId ) {
+    gMC->Gstpar(mediumId, "CUTGAM", 990.e-09);
+    gMC->Gstpar(mediumId, "BCUTE",  990.e-09);
+    gMC->Gstpar(mediumId, "CUTELE", 990.e-09);
+    gMC->Gstpar(mediumId, "DCUTE",  990.e-09);
+  }
+
+  mediumId = gMC->MediumId("WaterSteam");
+  if ( mediumId ) {
+    gMC->Gstpar(mediumId, "CUTGAM", 990.e-09);
+    gMC->Gstpar(mediumId, "BCUTE",  990.e-09);
+    gMC->Gstpar(mediumId, "CUTELE", 990.e-09);
+    gMC->Gstpar(mediumId, "DCUTE",  990.e-09);
+  }
 
   mediumId = gMC->MediumId("Galactic");
-  gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
-  gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
-  gMC->Gstpar(mediumId, "CUTELE", 10.e-06);
-  gMC->Gstpar(mediumId, "DCUTE",  10.e-06);
+  if ( mediumId ) {
+    gMC->Gstpar(mediumId, "CUTGAM", 990.e-09);
+    gMC->Gstpar(mediumId, "BCUTE",  990.e-09);
+    gMC->Gstpar(mediumId, "CUTELE", 990.e-09);
+    gMC->Gstpar(mediumId, "DCUTE",  990.e-09);
+  }
+
+  mediumId = gMC->MediumId("Beam");
+  if ( mediumId ) {
+    gMC->Gstpar(mediumId, "CUTGAM", 990.e-09);
+    gMC->Gstpar(mediumId, "BCUTE",  990.e-09);
+    gMC->Gstpar(mediumId, "CUTELE", 990.e-09);
+    gMC->Gstpar(mediumId, "DCUTE",  990.e-09);
+  }
 }    
 
 //_____________________________________________________________________________
