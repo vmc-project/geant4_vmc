@@ -30,6 +30,7 @@
 #include <TGeoElement.h>
 #include <TGeoMaterial.h>
 #include <TVirtualMC.h>
+#include <TList.h>
 
 #include "Ex03DetectorConstruction.h"
 
@@ -99,20 +100,7 @@ void Ex03DetectorConstruction::ConstructMaterials()
   //
 
   // Create Root geometry manager 
-  new TGeoManager("TGeo", "Root geometry manager");
-
-
-  // Paremeter for tracking media  
-  Double_t param[20];
-  param[0] = 0;     // isvol  - Not used
-  param[1] = 2;     // ifield - User defined magnetic field
-  param[2] = 10.;   // fieldm - Maximum field value (in kiloGauss)
-  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection 
-  param[4] = -0.01; // stemax - Maximum displacement for multiple scat 
-  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS 
-  param[6] = .001;  // epsil - Tracking precision
-  param[7] = -.8;   // stmin
-  for ( Int_t i=8; i<20; ++i) param[i] = 0.;
+  new TGeoManager("E03_geometry", "E03 VMC example geometry");
 
 
 //--------- Material definition ---------
@@ -126,41 +114,11 @@ void Ex03DetectorConstruction::ConstructMaterials()
 // define simple materials
 //
 
-  // Aluminium
+  new TGeoMaterial("Aluminium", a=26.98, z=13., density=2.700); 
 
-  name = "Aluminium";
-  a = 26.98;          
-  z = 13.;
-  density = 2.700;  
-  TGeoMaterial* matAl 
-    = new TGeoMaterial(name.Data(), a, z, density); 
-    
-  Int_t mediumId = 1;
-  new TGeoMedium(name.Data(), mediumId, matAl, param);
+  new TGeoMaterial("liquidArgon", a=39.95, z=18., density=1.390);
 
-  // Liquid Argon
-
-  name = "liquidArgon";
-  a = 39.95;
-  z = 18.;
-  density = 1.390;
-  TGeoMaterial* matAr
-    = new TGeoMaterial(name.Data(), a, z, density);
-
-  ++mediumId;   
-  new TGeoMedium(name.Data(), mediumId, matAr, param);
-
-  // Lead
-
-  name = "Lead";
-  a = 207.19;
-  z = 82.;
-  density = 11.35;
-  TGeoMaterial* matLead 
-    = new TGeoMaterial(name.Data(), a, z, density); 
-    
-  ++mediumId;   
-  new TGeoMedium(name.Data(), mediumId, matLead, param);
+  new TGeoMaterial("Lead", a=207.19, z=82., density=11.35); 
 
 //
 // define a material from elements.   case 1: chemical molecule
@@ -186,168 +144,118 @@ void Ex03DetectorConstruction::ConstructMaterials()
   U->AddIsotope(U5, abundance= 90.*perCent);
   U->AddIsotope(U8, abundance= 10.*perCent);
 */
-  // Water (H20)
-
-  name = "Water";
-  density = 1.000;  
 
   TGeoMixture* matH2O
-    = new TGeoMixture(name.Data(), 2, density);
+    = new TGeoMixture("Water", 2, density=1.000);
   matH2O->AddElement(elH, 2);  
   matH2O->AddElement(elO, 1);  
   // overwrite computed meanExcitationEnergy with ICRU recommended value 
   // (cannot be done with TGeo)
   // H2O->GetIonisation()->SetMeanExcitationEnergy(75.0*eV);
 
-  ++mediumId;   
-  new TGeoMedium(name.Data(), mediumId, matH2O, param);
-
-  // Scintillator (C9H10)
-
-  name = "Scintillator";
-  density = 1.032;  
-
   TGeoMixture* matSci
-    = new TGeoMixture(name.Data(), 2, density);
+    = new TGeoMixture("Scintillator", 2, density=1.032);
   matSci->AddElement(elC,  9); 
   matSci->AddElement(elH, 10); 
-  
-  ++mediumId;   
-  new TGeoMedium(name.Data(), mediumId, matSci, param);
-
-  // Mylar (C10H8O4)
-
-  name = "Mylar";
-  density = 1.397;  
 
   TGeoMixture* matMyl
-    = new TGeoMixture(name.Data(), 3, density);
+    = new TGeoMixture("Mylar", 3, density=1.397);
   matMyl->AddElement(elC, 10); 
   matMyl->AddElement(elH,  8); 
   matMyl->AddElement(elO,  4); 
- 
-  ++mediumId;   
-  new TGeoMedium(name.Data(), mediumId, matMyl, param);
-
-  // Quartz (SiO2)
-
-  name = "quartz";
-  density = 2.200;  
 
   TGeoMixture* matSiO2
-    = new TGeoMixture(name.Data(), 2, density);
+    = new TGeoMixture("quartz", 2, density=2.200);
   matSiO2->AddElement(elSi, 1); 
   matSiO2->AddElement(elO, 2); 
-
-  ++mediumId;   
-  new TGeoMedium(name.Data(), mediumId, matSiO2, param);
 
 //
 // define a material from elements.   case 2: mixture by fractional mass
 //
 
-  name = "Air";
-  density = 1.29e-03;  
-
   TGeoMixture* matAir
-    = new TGeoMixture(name.Data(), 2, density);
+    = new TGeoMixture("Air", 2, density=1.29e-03);
   matAir->AddElement(elN, 0.7); 
   matAir->AddElement(elO, 0.3); 
-  
-  ++mediumId;   
-  new TGeoMedium(name.Data(), mediumId, matAir, param);
 
 //
 // Define a material from elements and/or others materials (mixture of mixtures)
 //
 
-  name = "Aerogel";
-  density = 0.200;
-
   TGeoMixture* matAerog
-    = new TGeoMixture(name.Data(), 3, density);
+    = new TGeoMixture("Aerogel", 3, density=0.200);
   matAerog->AddElement(matSiO2, 0.625); 
   matAerog->AddElement(matH2O,  0.374); 
   matAerog->AddElement(elC,     0.001); 
-  
-  ++mediumId;   
-  new TGeoMedium(name.Data(), mediumId, matAerog, param);
 
 //
 // examples of gas in non STP conditions
 //
 
+  TGeoMixture* matCO2
+    = new TGeoMixture("CarbonicGas", 2, density=1.842e-03);
+  matCO2-> AddElement(elC, 1); 
+  matCO2-> AddElement(elO, 2); 
 
-  // CO2
-
-  name = "CarbonicGas";
-  density = 1.842e-03;
   Double_t atmosphere = 6.32421e+08;
   Double_t pressure   = 50.*atmosphere;
   Double_t temperature = 325.;
-  
-  TGeoMixture* matCO2
-    = new TGeoMixture(name.Data(), 2, density);
-  matCO2-> AddElement(elC, 1); 
-  matCO2-> AddElement(elO, 2); 
   matCO2->SetPressure(pressure);
   matCO2->SetTemperature(temperature);
   matCO2->SetState(TGeoMaterial::kMatStateGas);
   
-  ++mediumId;   
-  new TGeoMedium(name.Data(), mediumId, matCO2, param);
-  
 
-  // Water Steam
+  TGeoMixture* matSteam
+    = new TGeoMixture("WaterSteam", 1, density=0.3e-03);
+  matSteam->AddElement(matH2O, 1.0);  
 
-  name = "WaterSteam";
-  density  = 0.3e-03;
   pressure    = 2.*atmosphere;
   temperature = 500.;
-  
-  TGeoMixture* matSteam
-    = new TGeoMixture(name.Data(), 1, density);
-  matSteam->AddElement(matH2O, 1.0);  
   matSteam->SetPressure(pressure);
   matSteam->SetTemperature(temperature);
   matSteam->SetState(TGeoMaterial::kMatStateGas);
-
-  ++mediumId;   
-  new TGeoMedium(name.Data(), mediumId, matSteam, param);
 
 //
 // examples of vacuum
 //
 
-  // Vacuum
-
-  name = "Galactic";
-  a = 1.e-16;
-  z = 1.e-16;
-  density = 1.e-16;
-
-  TGeoMaterial* matVacuum 
-    = new TGeoMaterial(name.Data(), a, z, density); 
-
-  ++mediumId;   
-  new TGeoMedium(name.Data(), mediumId, matVacuum, param);
-
-  // Beam
-
-  name = "Beam";
-  density = 1.e-5;
-  pressure    = 2.*atmosphere;
-  temperature = STP_temperature;
+  new TGeoMaterial("Galactic", a=1.e-16, z=1.e-16, density=1.e-16); 
 
   TGeoMixture* matBeam
-    = new TGeoMixture(name.Data(), 1, density);
+    = new TGeoMixture("Beam", 1, density=1.e-5);
   matBeam->AddElement(matAir, 1.0);  
+
+  pressure    = 2.*atmosphere;
+  temperature = STP_temperature;
   matBeam->SetPressure(pressure);
   matBeam->SetTemperature(temperature);
   matBeam->SetState(TGeoMaterial::kMatStateGas);
 
-  ++mediumId;   
-  new TGeoMedium(name.Data(), mediumId, matBeam, param);
+  //
+  // Tracking media
+  //
+
+  // Paremeter for tracking media  
+  Double_t param[20];
+  param[0] = 0;     // isvol  - Not used
+  param[1] = 2;     // ifield - User defined magnetic field
+  param[2] = 10.;   // fieldm - Maximum field value (in kiloGauss)
+  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection 
+  param[4] = -0.01; // stemax - Maximum displacement for multiple scat 
+  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS 
+  param[6] = .001;  // epsil - Tracking precision
+  param[7] = -.8;   // stmin
+  for ( Int_t i=8; i<20; ++i) param[i] = 0.;
+  
+  Int_t mediumId = 0;
+  TList* materials = gGeoManager->GetListOfMaterials();
+  TIter next(materials);
+  while (TObject *obj = next()) {
+    TGeoMaterial* material = (TGeoMaterial*)obj;    
+    cout << "Creating medium: " << material->GetName() << endl;
+    new TGeoMedium(material->GetName(), ++mediumId, material, param);
+  }
+
 }    
 
 //_____________________________________________________________________________

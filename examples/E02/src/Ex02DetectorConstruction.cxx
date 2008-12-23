@@ -77,59 +77,59 @@ void Ex02DetectorConstruction::ConstructMaterials()
 //--------- Material definition ---------
 
   // Create Root geometry manager 
-  new TGeoManager("TGeo", "Root geometry manager");
+  new TGeoManager("E02_geometry", "E02 VMC example geometry");
    
-  Double_t a;
-  Double_t z;
-  Double_t density;
-  Double_t radl;
-  Double_t absl;
+  Double_t a;        // Mass of a mole in g/mole   
+  Double_t z;        // Atomic number
+  Double_t density;  // Material density in g/cm3
  
-  Double_t a2[2] = { 14.01, 16.00};
-  Double_t z2[2] = {  7.0,   8.0};
-  Double_t w2[2] = {  0.7,   0.3};
-  density = 1.29e-03;  
-  Int_t imatAir = 1;
-  gGeoManager->Mixture("Air", a2, z2, density, 2, w2, imatAir); 
-
-  a = 207.19;
-  z = 82.;
-  density = 11.35;
-  radl = 0.5612;
-  absl = 0.1;
-  Int_t imatPb = 2;  
-  gGeoManager->Material("Lead", a, z, density, imatPb, radl, absl);  
-
-  a = 131.29;
-  z = 54.;
-  density = 5.458e-03;
-  //pressure    = 1*atmosphere;
-  //temperature = 293.15*kelvin;
-  radl =  1553.9; 
-  absl = 0.1;
-  Int_t imatXe = 3;
-  gGeoManager->Material("XenonGas", a, z, density, imatXe, radl, absl);
+  // Elements
   
-  //
-  // Tracking medias
-  //
+  TGeoElement* elN  = new TGeoElement("Nitrogen", "N", z= 7., a= 14.01);
+  TGeoElement* elO  = new TGeoElement("Oxygen"  , "O", z= 8., a= 16.00);
+  
+  // Materials
 
-  Int_t ifield = 2;          // User defined magnetic field
-  Double_t fieldm = 10.;     // Maximum field value (in kiloGauss)
-  Double_t epsil  = .001;    // Tracking precision, 
-  Double_t stemax = -0.01;   // Maximum displacement for multiple scat 
-  Double_t tmaxfd = -20.;    // Maximum angle due to field deflection 
-  Double_t deemax = -.3;     // Maximum fractional energy loss, DLS 
-  Double_t stmin  = -.8;
-  fImedAir = 1;
-  gGeoManager->Medium("Air", fImedAir, imatAir, 0, ifield, fieldm, tmaxfd, 
-                      stemax, deemax, epsil, stmin); 
+  TGeoMixture* matAir
+    = new TGeoMixture("Air", 2, density = 1.29e-03);
+  matAir->AddElement(elN, 0.7); 
+  matAir->AddElement(elO, 0.3); 
+
+  TGeoMaterial* matLead 
+    = new TGeoMaterial("Lead", a = 207.19, z = 82., density = 11.35); 
+
+
+  TGeoMaterial* matXe 
+    = new TGeoMaterial("XenonGas", a = 131.29, z = 54., density = 5.458e-03);
+    
+  Double_t atmosphere = 6.32421e+08;
+  Double_t pressure   = 1.*atmosphere;
+  Double_t temperature = 293.15;
+  matXe->SetPressure(pressure);
+  matXe->SetTemperature(temperature);
+  matXe->SetState(TGeoMaterial::kMatStateGas);
+
+  // Tracking media
+
+  Double_t param[20];
+  param[0] = 0;     // isvol  - Not used
+  param[1] = 2;     // ifield - User defined magnetic field
+  param[2] = 10.;   // fieldm - Maximum field value (in kiloGauss)
+  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection 
+  param[4] = -0.01; // stemax - Maximum displacement for multiple scat 
+  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS 
+  param[6] = .001;  // epsil - Tracking precision
+  param[7] = -.8;   // stmin
+  for ( Int_t i=8; i<20; ++i) param[i] = 0.;
+
+  fImedAir = 1; 
+  new TGeoMedium("Air", fImedAir, matAir, param);
+  
   fImedPb = 2;
-  gGeoManager->Medium("Lead", fImedPb, imatPb, 0, ifield, fieldm, tmaxfd, 
-                      stemax, deemax, epsil, stmin); 
+  new TGeoMedium("Lead", fImedPb, matLead, param);
+  
   fImedXe = 3;
-  gGeoManager->Medium("XenonGas", fImedXe, imatXe, 0, ifield, fieldm, tmaxfd,
-                      stemax, deemax, epsil, stmin); 
+  new TGeoMedium("XenonGas", fImedXe, matXe, param);
 }    
 
 //_____________________________________________________________________________

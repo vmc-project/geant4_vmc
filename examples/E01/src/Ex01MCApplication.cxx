@@ -29,6 +29,7 @@
 #include <TArrayD.h>
 #include <TGeoManager.h>
 #include <TGeoMatrix.h>
+#include <TGeoMaterial.h>
 
 /// \cond CLASSIMP
 ClassImp(Ex01MCApplication)
@@ -83,58 +84,67 @@ void Ex01MCApplication::ConstructMaterials()
 /// Construct materials using TGeo modeller
 
   // Create Root geometry manager 
-  new TGeoManager("TGeo", "Root geometry manager");
+  new TGeoManager("E01_geometry", "E01 VMC example geometry");
    
-  Double_t a;
-  Double_t z;
-  Double_t density;
-  Double_t radl;
-  Double_t absl;
+  Double_t a;        // Mass of a mole in g/mole   
+  Double_t z;        // Atomic number
+  Double_t density;  // Material density in g/cm3
   
   a = 39.95;
   z = 18.;
   density = 1.782e-03;
-  radl = 0.1;
-  absl = 0.1;
-  Int_t imatAr = 1;
-  gGeoManager->Material("ArgonGas", a, z, density, imatAr, radl, absl);
+  TGeoMaterial* matAr 
+    = new TGeoMaterial("ArgonGas", a, z, density); 
 
   a = 26.98;
   z = 13.;
   density = 2.7;
-  radl = 0.1;
-  absl = 0.1;
-  Int_t imatAl = 2;
-  gGeoManager->Material("Aluminium", a, z, density, imatAl, radl, absl);
+  TGeoMaterial* matAl 
+    = new TGeoMaterial("Aluminium", a, z, density); 
   
   a = 207.19;
   z = 82.;
   density = 11.35;
-  radl = 0.1;
-  absl = 0.1;
-  Int_t imatLead = 3;  
-  gGeoManager->Material("Lead", a, z, density, imatLead, radl, absl);  
+  TGeoMaterial* matLead 
+    = new TGeoMaterial("Lead", a, z, density); 
+  
+/*
+  // Set material IDs
+  // This step is needed, only if user wants to use the material Ids
+  // in his application. Be aware that the material Ids vary
+  // with each concrete MC.
+  // It is recommended to use Media Ids instead, which values 
+  // set by user are preserved in all MCs
+  Int_t imat = 0;
+  matAr->SetUniqueID(imat++);    
+  matAl->SetUniqueID(imat++);    
+  matLead->SetUniqueID(imat++);  
+*/
 
   //
   // Tracking medias
   //
 
-  Int_t ifield = 0;         // No magnetic field 
-  Double_t fieldm = 0.;     //
-  Double_t epsil  = .001;    // Tracking precision, 
-  Double_t stemax = -0.01;   // Maximum displacement for multiple scat 
-  Double_t tmaxfd = -20.;    // Maximum angle due to field deflection 
-  Double_t deemax = -.3;     // Maximum fractional energy loss, DLS 
-  Double_t stmin  = -.8;
+  Double_t param[20];
+  param[0] = 0;     // isvol  - Not used
+  param[1] = 0;     // ifield - User defined magnetic field
+  param[2] = 0.;    // fieldm - Maximum field value (in kiloGauss)
+  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection 
+  param[4] = -0.01; // stemax - Maximum displacement for multiple scat 
+  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS 
+  param[6] = .001;  // epsil - Tracking precision
+  param[7] = -.8;   // stmin
+  for ( Int_t i=8; i<20; ++i) param[i] = 0.;
+
   fImedAr = 1;
-  gGeoManager->Medium("ArgonGas", fImedAr, imatAr, 0, ifield, fieldm, tmaxfd, 
-                      stemax, deemax, epsil, stmin); 
+  new TGeoMedium("ArgonGas", fImedAr, matAr, param);
+  
   fImedAl = 2;
-  gGeoManager->Medium("Aluminium", fImedAl, imatAl, 0, ifield, fieldm, tmaxfd,
-                      stemax, deemax, epsil, stmin); 
+  new TGeoMedium("Aluminium", fImedAl, matAl, param);
+  
   fImedPb = 3;
-  gGeoManager->Medium("Lead", fImedPb, imatLead, 0, ifield, fieldm, tmaxfd,
-                      stemax, deemax, epsil, stmin); 
+  new TGeoMedium("Lead", fImedPb, matLead, param);
+
 }
 
 //_____________________________________________________________________________
@@ -144,7 +154,7 @@ void Ex01MCApplication::ConstructVolumes()
 
   //------------------------------ experimental hall (world volume)
   //------------------------------ beam line along x axis
-
+ 
   Double_t* ubuf = 0;
 
   Double_t expHall[3];

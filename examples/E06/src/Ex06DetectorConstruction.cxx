@@ -56,45 +56,48 @@ void Ex06DetectorConstruction::ConstructMaterials()
 /// Construct materials using TGeo modeller
 
   // Create Root geometry manager 
-  new TGeoManager("TGeo", "Root geometry manager");
+  new TGeoManager("E06_geometry", "E06 VMC example geometry");
    
-  Double_t a1[2] = { 14.01, 16.00};
-  Double_t z1[2] = {  7.0,   8.0};
-  Double_t w1[2] = {  0.7,   0.3};
-  Double_t density = 1.29e-03;  
-  Int_t imatAir = 1;
-  gGeoManager->Mixture("Air", a1, z1, density, 2, w1, imatAir); 
+  Double_t a;        // Mass of a mole in g/mole   
+  Double_t z;        // Atomic number
+  Double_t density;  // Material density in g/cm3
+ 
+  // Elements
+  
+  TGeoElement* elH  = new TGeoElement("Hydrogen", "H", z= 1,  a= 1.01);
+  TGeoElement* elN  = new TGeoElement("Nitrogen", "N", z= 7., a= 14.01);
+  TGeoElement* elO  = new TGeoElement("Oxygen"  , "O", z= 8., a= 16.00);
+  
+  // Materials
 
-  Double_t a2[2] = {  1.01, 16.00};
-  Double_t z2[2] = {  1.0,   8.0};
-  Double_t w2[2] = {  2.0,   1.0};
-  // convert numbers of elements to relative wights
-  Double_t amol = 0;
-  Int_t i;
-  for (i=0;i<2;i++)  amol += a2[i]*w2[i];
-  for (i=0;i<2;i++)  w2[i] *= a2[i]/amol;
+  TGeoMixture* matAir
+    = new TGeoMixture("Air", 2, density = 1.29e-03);
+  matAir->AddElement(elN, 0.7); 
+  matAir->AddElement(elO, 0.3); 
 
-  density = 1.0;  
-  Int_t imatWater = 2;
-  gGeoManager->Mixture("Water", a2, z2, density, 2, w2, imatWater); 
+  TGeoMixture* matH2O
+    = new TGeoMixture("Water", 2, density = 1.000);
+  matH2O->AddElement(elH, 2);  
+  matH2O->AddElement(elO, 1);  
 
-  //
-  // Tracking medias
-  //
+  // Tracking media
 
-  Int_t ifield = 0;         // No magnetic field 
-  Double_t fieldm = 0.;     //
-  Double_t epsil  = .001;    // Tracking precision, 
-  Double_t stemax = -0.01;   // Maximum displacement for multiple scat 
-  Double_t tmaxfd = -20.;    // Maximum angle due to field deflection 
-  Double_t deemax = -.3;     // Maximum fractional energy loss, DLS 
-  Double_t stmin  = -.8;
+  Double_t param[20];
+  param[0] = 0;     // isvol  - Not used
+  param[1] = 2;     // ifield - User defined magnetic field
+  param[2] = 10.;   // fieldm - Maximum field value (in kiloGauss)
+  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection 
+  param[4] = -0.01; // stemax - Maximum displacement for multiple scat 
+  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS 
+  param[6] = .001;  // epsil - Tracking precision
+  param[7] = -.8;   // stmin
+  for ( Int_t i=8; i<20; ++i) param[i] = 0.;
+
   fImedAir = 1;
+  new TGeoMedium("Air", fImedAir, matAir, param);
+  
   fImedWater = 2;
-  gGeoManager->Medium("Air", fImedAir, imatAir, 0, ifield, fieldm, tmaxfd, 
-                      stemax, deemax, epsil, stmin); 
-  gGeoManager->Medium("Water", fImedWater, imatWater, 0, ifield, fieldm, tmaxfd,
-                      stemax, deemax, epsil, stmin); 
+  new TGeoMedium("Water", fImedWater, matH2O, param);
 }    
 
 //_____________________________________________________________________________
