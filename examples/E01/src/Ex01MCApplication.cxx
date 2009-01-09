@@ -39,6 +39,7 @@ ClassImp(Ex01MCApplication)
 Ex01MCApplication::Ex01MCApplication(const char *name, const char *title) 
   : TVirtualMCApplication(name,title),
     fStack(0),
+    fMagField(0),
     fImedAr(0),
     fImedAl(0),
     fImedPb(0),
@@ -50,12 +51,16 @@ Ex01MCApplication::Ex01MCApplication(const char *name, const char *title)
 
   // create a user stack
   fStack = new Ex01MCStack(100);  
+  
+  // create magnetic field (with zero value)
+  fMagField = new TGeoUniformMagField();
 }
 
 //_____________________________________________________________________________
 Ex01MCApplication::Ex01MCApplication()
   : TVirtualMCApplication(),
     fStack(0),
+    fMagField(0),
     fImedAr(0),
     fImedAl(0),
     fImedPb(0),
@@ -70,6 +75,7 @@ Ex01MCApplication::~Ex01MCApplication()
 /// Destructor  
 
   delete fStack;
+  delete fMagField;
   delete gMC;
   gMC = 0;
 }
@@ -127,8 +133,8 @@ void Ex01MCApplication::ConstructMaterials()
 
   Double_t param[20];
   param[0] = 0;     // isvol  - Not used
-  param[1] = 0;     // ifield - User defined magnetic field
-  param[2] = 0.;    // fieldm - Maximum field value (in kiloGauss)
+  param[1] = 2;     // ifield - User defined magnetic field
+  param[2] = 10.;   // fieldm - Maximum field value (in kiloGauss)
   param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection 
   param[4] = -0.01; // stemax - Maximum displacement for multiple scat 
   param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS 
@@ -227,6 +233,7 @@ void Ex01MCApplication::InitMC(const char* setup)
   gInterpreter->ProcessLine("Config()");
  
   gMC->SetStack(fStack);
+  gMC->SetMagField(fMagField);
   gMC->Init();
   gMC->BuildPhysics();  
 }
@@ -399,16 +406,6 @@ void Ex01MCApplication::FinishEvent()
 /// User actions after finishing of an event
 /// Nothing to be done this example
 } 
-
-//_____________________________________________________________________________
-void Ex01MCApplication::Field(const Double_t* /*x*/, Double_t* b) const
-{
-/// No magnetic field.
-  
-   b[0] = 0.;
-   b[1] = 0.;
-   b[2] = 0.;
-}
 
 //_____________________________________________________________________________
 void Ex01MCApplication::TestVMCGeometryGetters()

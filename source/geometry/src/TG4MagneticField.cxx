@@ -16,8 +16,10 @@
 
 #include "TG4MagneticField.h"
 #include "TG4G3Units.h"
+#include "TG4Globals.h"
 
 #include <TVirtualMCApplication.h>
+#include <TVirtualMC.h>
 
 #include <G4FieldManager.hh>
 #include <G4TransportationManager.hh>
@@ -51,10 +53,25 @@ void TG4MagneticField::GetFieldValue(const G4double point[3], G4double* bfield) 
 
   // Set units
   const G4double g3point[3] = { point[0] / TG4G3Units::Length(),
-                                 point[1] / TG4G3Units::Length(),
-                                 point[2] / TG4G3Units::Length() };
+                                point[1] / TG4G3Units::Length(),
+                                point[2] / TG4G3Units::Length() };
 
-  TVirtualMCApplication::Instance()->Field(g3point, bfield);
+  if ( gMC->GetMagField() ) {
+    gMC->GetMagField()->Field(g3point, bfield);
+  }
+  else {  
+    static Bool_t warn = true;
+    if (warn) { 
+      TG4Globals::Warning(
+        "TG4MagneticField", "GetFieldValue", 
+        TString("Using deprecated function TVirtualMCApplication::Field().")
+        + TG4Globals::Endl()
+        + TString("New TVirtualMagField interface should be used instead."));
+      warn = false;
+    }        
+
+    TVirtualMCApplication::Instance()->Field(g3point, bfield);
+  }  
   
   // Set units
   for (G4int i=0; i<3; i++) bfield[i] = bfield[i] * TG4G3Units::Field();

@@ -25,6 +25,8 @@
 #include "Ex02TrackerSD.h"
 #include "Ex02RootManager.h"
 
+class TVirtualMagField;
+
 class Ex02MCStack;
 
 /// \ingroup E02
@@ -59,7 +61,6 @@ class Ex02MCApplication : public TVirtualMCApplication
     virtual void PostTrack();
     virtual void FinishPrimary();
     virtual void FinishEvent();
-    virtual void Field(const Double_t* /*x*/, Double_t* b) const;
     
     void   ReadEvent(Int_t i);
 
@@ -74,7 +75,7 @@ class Ex02MCApplication : public TVirtualMCApplication
     Ex02MCStack*             fStack;           ///< VMC stack
     Ex02DetectorConstruction fDetConstruction; ///< Dector construction
     Ex02TrackerSD            fTrackerSD;       ///< Tracker SD
-    Double_t*                fFieldB;          ///< Magnetic field B vector
+    TVirtualMagField*        fMagField;        ///< Magnetic field
     Ex02RootManager          fRootManager;     ///< Root manager 
     Bool_t                   fOldGeometry;     ///< Option for geometry definition
 

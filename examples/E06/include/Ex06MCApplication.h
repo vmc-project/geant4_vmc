@@ -23,6 +23,7 @@
 #include "TMCVerbose.h"
 
 class TCanvas;
+class TVirtualMagField;
 
 class Ex03MCStack;
 class Ex06DetectorConstruction;
@@ -59,7 +60,6 @@ class Ex06MCApplication : public TVirtualMCApplication
     virtual void PostTrack();
     virtual void FinishPrimary();
     virtual void FinishEvent();
-    virtual void Field(const Double_t* /*x*/, Double_t* b) const;
     
     // set methods
     void  SetVerboseLevel(Int_t verboseLevel);
@@ -76,6 +76,7 @@ class Ex06MCApplication : public TVirtualMCApplication
     Int_t                     fGammaCounter;    ///< Optical photons counter
     TMCVerbose                fVerbose;         ///< VMC verbose helper
     Ex03MCStack*              fStack;           ///< VMC stack
+    TVirtualMagField*         fMagField;        ///< The magnetic field 
     Ex06DetectorConstruction* fDetConstruction; ///< Dector construction
     Ex06PrimaryGenerator*     fPrimaryGenerator;///< Primary generator
     Bool_t                    fOldGeometry;     ///< Option for geometry definition

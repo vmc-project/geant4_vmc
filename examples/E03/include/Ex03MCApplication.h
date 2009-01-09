@@ -20,6 +20,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include <TVirtualMCApplication.h>
+#include <TGeoUniformMagField.h> 
 #include "TMCVerbose.h"
 
 #include "Ex03DetectorConstruction.h"
@@ -64,12 +65,11 @@ class Ex03MCApplication : public TVirtualMCApplication
     virtual void PostTrack();
     virtual void FinishPrimary();
     virtual void FinishEvent();
-    virtual void Field(const Double_t* /*x*/, Double_t* b) const;
     
     // set methods
     void  SetPrintModulo(Int_t value);
     void  SetVerboseLevel(Int_t verboseLevel);
-    void  SetField(Double_t bz);
+    //void  SetField(Double_t bz);
     
     // get methods
     Ex03DetectorConstruction* GetDetectorConstruction() const;
@@ -91,7 +91,7 @@ class Ex03MCApplication : public TVirtualMCApplication
     Ex03DetectorConstruction* fDetConstruction; ///< Dector construction
     Ex03CalorimeterSD*        fCalorimeterSD;   ///< Calorimeter SD
     Ex03PrimaryGenerator*     fPrimaryGenerator;///< Primary generator
-    Double_t*                 fFieldB;          ///< Magnetic field B vector
+    TGeoUniformMagField*      fMagField;        ///< Magnetic field
     Ex02RootManager           fRootManager;     ///< Root manager 
     Bool_t                    fOldGeometry;     ///< Option for geometry definition
 
@@ -116,8 +116,8 @@ inline void  Ex03MCApplication::SetVerboseLevel(Int_t verboseLevel)
 
 /// Set magnetic field
 /// \param bz  The new field value in z
-inline void  Ex03MCApplication::SetField(Double_t bz)
-{ fFieldB[2] = bz; }
+//inline void  Ex03MCApplication::SetField(Double_t bz)
+//{ fMagField->SetFieldValue(0., 0., bz); }
 
 /// \return The detector construction
 inline Ex03DetectorConstruction* Ex03MCApplication::GetDetectorConstruction() const

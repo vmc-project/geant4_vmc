@@ -26,6 +26,7 @@
 #include <TVirtualMC.h>
 #include <TPDGCode.h>
 #include <TGeoManager.h>
+#include <TGeoUniformMagField.h>
 #include <TVirtualGeoTrack.h>
 #include <Riostream.h>
 
@@ -40,7 +41,7 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title,
     fStack(0),
     fDetConstruction(),
     fTrackerSD("Tracker Chamber"),
-    fFieldB(0),
+    fMagField(0),
     fRootManager("example02", fileMode),
     fOldGeometry(kFALSE)
 {
@@ -53,10 +54,7 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title,
   fStack = new Ex02MCStack(100); 
   
   // Constant magnetic field (in kiloGauss)
-  fFieldB = new Double_t[3];
-  fFieldB[0] = 20.;
-  fFieldB[1] = 0.;
-  fFieldB[2] = 0.;
+  fMagField = new TGeoUniformMagField(20., 0., 0.);
 }
 
 //_____________________________________________________________________________
@@ -65,7 +63,7 @@ Ex02MCApplication::Ex02MCApplication()
     fStack(0),
     fDetConstruction(),
     fTrackerSD(),
-    fFieldB(0),
+    fMagField(0),
     fRootManager(),
     fOldGeometry(kFALSE)
 {    
@@ -78,7 +76,7 @@ Ex02MCApplication::~Ex02MCApplication()
 /// Destructor  
   
   delete fStack;
-  delete fFieldB;
+  delete fMagField;
   delete gMC;
   gMC = 0;
 }
@@ -109,6 +107,7 @@ void Ex02MCApplication::InitMC(const char* setup)
   gInterpreter->ProcessLine("Config()");
  
   gMC->SetStack(fStack);
+  gMC->SetMagField(fMagField);
   gMC->Init();
   gMC->BuildPhysics(); 
   
@@ -297,15 +296,6 @@ void Ex02MCApplication::FinishEvent()
   fStack->Print();  
   fStack->Reset();
 } 
-
-//_____________________________________________________________________________
-void Ex02MCApplication::Field(const Double_t* /*x*/, Double_t* b) const
-{
-/// Uniform magnetic field
-/// \param b   The field value in the position \em x
-  
-   for (Int_t i=0; i<3; i++) b[i] = fFieldB[i];
-}
 
 //_____________________________________________________________________________
 void  Ex02MCApplication::ReadEvent(Int_t i) 

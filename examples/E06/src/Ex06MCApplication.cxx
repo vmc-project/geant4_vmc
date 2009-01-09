@@ -22,6 +22,7 @@
 #include <TVirtualMC.h>
 #include <Riostream.h>
 #include <TGeoManager.h>
+#include <TGeoUniformMagField.h>
 #include <TVirtualGeoTrack.h>
 #include <TCanvas.h>
 
@@ -42,6 +43,7 @@ Ex06MCApplication::Ex06MCApplication(const char *name, const char *title)
     fGammaCounter(0),
     fVerbose(0),
     fStack(0),
+    fMagField(0),
     fDetConstruction(0),
     fPrimaryGenerator(0),
     fOldGeometry(kFALSE)
@@ -53,6 +55,9 @@ Ex06MCApplication::Ex06MCApplication(const char *name, const char *title)
   // Create a user stack
   fStack = new Ex03MCStack(1000);
   
+  // create magnetic field (with zero value)
+  fMagField = new TGeoUniformMagField(); 
+
   // Create detector construction
   fDetConstruction = new Ex06DetectorConstruction();
   
@@ -67,6 +72,7 @@ Ex06MCApplication::Ex06MCApplication()
     fGammaCounter(0),
     fVerbose(0),
     fStack(0),
+    fMagField(0),
     fDetConstruction(0),
     fPrimaryGenerator(0),
     fOldGeometry(kFALSE)
@@ -80,6 +86,7 @@ Ex06MCApplication::~Ex06MCApplication()
 /// Destructor  
   
   delete fStack;
+  delete fMagField;
   delete fDetConstruction;
   delete fPrimaryGenerator;
   delete gMC;
@@ -103,6 +110,7 @@ void Ex06MCApplication::InitMC(const char* setup)
   gInterpreter->ProcessLine("Config()");
  
   gMC->SetStack(fStack);
+  gMC->SetMagField(fMagField);
   gMC->Init();
   gMC->BuildPhysics(); 
 }
@@ -272,13 +280,3 @@ void Ex06MCApplication::FinishEvent()
 
   fStack->Reset();
 } 
-
-//_____________________________________________________________________________
-void Ex06MCApplication::Field(const Double_t* /*x*/, Double_t* b) const
-{
-/// Uniform magnetic field
-/// \param b   The field value
-  
-   for (Int_t i=0; i<3; i++) b[i] = 0.0;
-}
- 

@@ -25,6 +25,7 @@
 #include <TVector3.h>
 #include <Riostream.h>
 #include <TGeoManager.h>
+#include <TGeoUniformMagField.h>
 #include <TVirtualGeoTrack.h>
 
 #include "Ex03MCApplication.h"
@@ -47,7 +48,7 @@ Ex03MCApplication::Ex03MCApplication(const char *name, const char *title,
     fDetConstruction(0),
     fCalorimeterSD(0),
     fPrimaryGenerator(0),
-    fFieldB(0),
+    fMagField(0),
     fRootManager("example03", fileMode),
     fOldGeometry(kFALSE)
 {
@@ -69,10 +70,7 @@ Ex03MCApplication::Ex03MCApplication(const char *name, const char *title,
   fPrimaryGenerator = new Ex03PrimaryGenerator(fStack);
   
   // Constant magnetic field (in kiloGauss)
-  fFieldB = new Double_t[3];
-  fFieldB[0] = 0.;
-  fFieldB[1] = 0.;
-  fFieldB[2] = 0.;
+  fMagField = new TGeoUniformMagField();
 }
 
 //_____________________________________________________________________________
@@ -84,7 +82,7 @@ Ex03MCApplication::Ex03MCApplication()
     fDetConstruction(0),
     fCalorimeterSD(0),
     fPrimaryGenerator(0),
-    fFieldB(0),
+    fMagField(0),
     fRootManager(),
     fOldGeometry(kFALSE)
 {    
@@ -100,7 +98,7 @@ Ex03MCApplication::~Ex03MCApplication()
   delete fDetConstruction;
   delete fCalorimeterSD;
   delete fPrimaryGenerator;
-  delete fFieldB;
+  delete fMagField;
   delete gMC;
   gMC = 0;
 }
@@ -134,6 +132,7 @@ void Ex03MCApplication::InitMC(const char* setup)
   gInterpreter->ProcessLine("Config()");
  
   gMC->SetStack(fStack);
+  gMC->SetMagField(fMagField);
   gMC->Init();
   gMC->BuildPhysics(); 
   
@@ -381,12 +380,3 @@ void Ex03MCApplication::FinishEvent()
   fStack->Reset();
 } 
 
-//_____________________________________________________________________________
-void Ex03MCApplication::Field(const Double_t* /*x*/, Double_t* b) const
-{
-/// Uniform magnetic field
-/// \param b   The field value
-  
-   for (Int_t i=0; i<3; i++) b[i] = fFieldB[i];
-}
- 

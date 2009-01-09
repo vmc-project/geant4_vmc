@@ -22,6 +22,8 @@
 #include <TVirtualMCApplication.h>
 #include <TVirtualMCStack.h>
 
+class TVirtualMagField;
+
 /// \ingroup E01
 /// \brief Implementation of the TVirtualMCApplication
 ///
@@ -53,7 +55,6 @@ class Ex01MCApplication : public TVirtualMCApplication
     virtual void PostTrack();
     virtual void FinishPrimary();
     virtual void FinishEvent();
-    virtual void Field(const Double_t* x, Double_t* b) const;
 
     // methods for tests
     void SetOldGeometry(Bool_t oldGeometry = kTRUE);
@@ -66,6 +67,7 @@ class Ex01MCApplication : public TVirtualMCApplication
   
     // data members
     TVirtualMCStack*  fStack;       ///< The VMC stack
+    TVirtualMagField* fMagField;    ///< The magnetic field 
     Int_t             fImedAr;      ///< The Argon gas medium Id
     Int_t             fImedAl;      ///< The Aluminium medium Id
     Int_t             fImedPb;      ///< The Lead medium Id
