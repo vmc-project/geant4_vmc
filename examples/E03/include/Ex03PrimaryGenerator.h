@@ -47,17 +47,20 @@ class Ex03PrimaryGenerator : public TObject
     // set methods
     void  SetIsRandom(Bool_t isRandomGenerator);
     void  SetUserParticles(Bool_t userParticles);
+    void  SetUserDecay(Bool_t userDecay);
     void  SetNofPrimaries(Int_t nofPrimaries);
  
   private:
     // methods
     void GeneratePrimary1(const TVector3& origin);
     void GeneratePrimary2(const TVector3& origin);
+    void GeneratePrimary3(const TVector3& origin);
  
     // data members
     TVirtualMCStack*  fStack;         ///< VMC stack
     Bool_t            fIsRandom;      ///< Switch to random generator
     Bool_t            fUserParticles; ///< Switch to user particles
+    Bool_t            fUserDecay;     ///< Switch to particle with user decay
     Int_t             fNofPrimaries;  ///< Number of primary particles
 
   ClassDef(Ex03PrimaryGenerator,1)  //Ex03PrimaryGenerator
@@ -69,11 +72,6 @@ class Ex03PrimaryGenerator : public TObject
 /// \param isRandom  If true, the position is randomized
 inline void  Ex03PrimaryGenerator::SetIsRandom(Bool_t isRandom)
 { fIsRandom = isRandom; }
-
-/// Switch on/off the user particles
-/// \param userParticles  If true, the user defined particles are shooted
-inline void  Ex03PrimaryGenerator::SetUserParticles(Bool_t userParticles)
-{ fUserParticles = userParticles; }
 
 /// Set the number of particles to be generated
 /// \param nofPrimaries The number of particles to be generated

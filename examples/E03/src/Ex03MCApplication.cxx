@@ -228,10 +228,32 @@ void Ex03MCApplication::AddParticles()
      mode[kz][2] = 0;
   }
   bratio[0] = 100.;
-  mode[0][0] =2112;       // neutron 
-  mode[0][1] =1000020040 ; // alpha
+  mode[0][0] = kNeutron;    // neutron (2112) 
+  mode[0][1] = 1000020040 ; // alpha
 
   gMC->SetDecayMode(1000020050 ,bratio,mode);
+  
+  
+  // Overwrite a decay mode already defined in MCs
+  // Kaon Short: 310 normally decays in two modes
+  // pi+, pi-  68.61 %
+  // pi0, pi0  31.39 %
+  // and we force only the mode pi0, pi0  
+
+  Int_t mode2[6][3];                  
+  Float_t bratio2[6];
+
+  for (Int_t kz = 0; kz < 6; kz++) {
+     bratio2[kz] = 0.;
+     mode2[kz][0] = 0;
+     mode2[kz][1] = 0;
+     mode2[kz][2] = 0;
+  }
+  bratio2[0] = 100.;
+  mode2[0][0] = kPi0;   // pi0 (111)
+  mode2[0][1] = kPi0 ;  // pi0 (111)
+
+  gMC->SetDecayMode(kK0Short, bratio2, mode2);
 }
 
 //_____________________________________________________________________________

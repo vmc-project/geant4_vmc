@@ -69,7 +69,6 @@ class Ex03MCApplication : public TVirtualMCApplication
     // set methods
     void  SetPrintModulo(Int_t value);
     void  SetVerboseLevel(Int_t verboseLevel);
-    //void  SetField(Double_t bz);
     
     // get methods
     Ex03DetectorConstruction* GetDetectorConstruction() const;
