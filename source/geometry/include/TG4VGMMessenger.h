@@ -30,6 +30,7 @@
 class G4UIcommand;
 class G4UIdirectory;
 class G4UIcmdWithAString;
+class G4UIcmdWithABool;
 class G4UIcmdWithoutParameter;
 
 /// \ingroup geometry
@@ -39,6 +40,8 @@ class G4UIcmdWithoutParameter;
 /// - /vgm/generateRoot
 /// - /vgm/generateAGDD [lvName]
 /// - /vgm/generateGDML [lvName]
+/// - /vgm/setAssembliesInNames  bool
+/// - /vgm/setNameSeparator bool
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -77,6 +80,8 @@ class TG4VGMMessenger: public G4UImessenger
     RootGM::Factory*       fRootFactory;    ///< Root VGM Factory
     XmlVGM::VExporter*     fXmlVGMExporter; ///< associated class
     G4UIcmdWithAString*    fGenerateXMLCmd; ///< command: /xml/generateXXX
+    G4UIcmdWithABool*      fSetAssembliesInNamesCmd; ///< command: /xml/setAssembliesInNames
+    G4UIcmdWithAString*    fSetNameSeparatorCmd;     ///< command: /xml/setNameSeparator
 };
 
 #endif //TG4_XML_VGM_MESSENGER_H
