@@ -371,6 +371,35 @@ Bool_t TG4ParticlesManager::SetDecayMode(Int_t pdg,
 }
 
 //_____________________________________________________________________________
+void TG4ParticlesManager::SetUserDecay(Int_t pdg)
+{
+/// Force the decay of particle with given PDG to be done with user 
+/// defined decay or external decayer
+/// Set the decay table to zero.
+/// Do not delete the existing table as it may be used somewhere else.
+   
+  // Check input pdg 
+  if ( pdg == 0 ) {
+    TG4Globals::Exception(
+       "TG4ParticlesManager", "SetUserDecay", 
+       "Cannot set user decay mode for particle with PDG=0");
+  }     
+          
+  G4ParticleTable* particleTable= G4ParticleTable::GetParticleTable();                        
+  G4ParticleDefinition* particleDefinition = particleTable->FindParticle(pdg);
+  
+  if ( ! particleDefinition ) {
+     TString pdgs; 
+     pdgs += pdg;
+     TG4Globals::Exception( 
+       "TG4ParticlesManager", "SetUserDecay", 
+       "Particle PDG=" + pdgs + " was not found in G4ParticleTable.");
+  }     
+
+  particleDefinition->SetDecayTable(0);
+}
+
+//_____________________________________________________________________________
 G4int TG4ParticlesManager::GetPDGEncoding(G4ParticleDefinition* particle)
 {
 /// Return the PDG code of particle;

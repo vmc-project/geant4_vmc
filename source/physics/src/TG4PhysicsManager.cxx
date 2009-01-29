@@ -655,6 +655,16 @@ Bool_t TG4PhysicsManager::DefineParticle(Int_t pdg, const char* name,
 }
 
 //_____________________________________________________________________________                           
+void TG4PhysicsManager::SetUserDecay(Int_t pdg)
+{
+/// Force the decay of particle with given PDG to be done with user 
+/// defined decay or external decayer
+
+  fParticlesManager->SetUserDecay(pdg);
+}
+
+
+//_____________________________________________________________________________                           
 Bool_t TG4PhysicsManager::SetDecayMode(Int_t pdg, Float_t bratio[6], Int_t mode[6][3])
 {
 /// Set a user phase space decay for a particle  
@@ -663,7 +673,6 @@ Bool_t TG4PhysicsManager::SetDecayMode(Int_t pdg, Float_t bratio[6], Int_t mode[
 
   return true;
 }
-
 
 
 //_____________________________________________________________________________

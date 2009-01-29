@@ -295,16 +295,6 @@ void TG4StepManager::SetMaxNStep(Int_t maxNofSteps)
 }
 
 //_____________________________________________________________________________
-void TG4StepManager::SetUserDecay(Int_t /*pdg*/)
-{
-/// Set user decay.                                                          \n
-/// Not yet implemented.
-
-  TG4Globals::Exception(
-    "TG4StepManager", "SetUserDecay", "Not yet implemented.");
-}
-
-//_____________________________________________________________________________
 void TG4StepManager::ForceDecayTime(Float_t time)
 {
 /// Force decay time.                                                        \n

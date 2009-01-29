@@ -65,8 +65,7 @@ class TG4StepManager
     void SetSteppingManager(G4SteppingManager* manager); // G4 specific
     void SetMaxStep(Double_t step);
     void SetMaxNStep(Int_t maxNofSteps); 
-    void SetUserDecay(Int_t pdg);      // Not implemented
-    void ForceDecayTime(Float_t pdg);  // Not implemented
+    void ForceDecayTime(Float_t pdg);
     
     // get methods
     G4Track* GetTrack() const;                            // G4 specific

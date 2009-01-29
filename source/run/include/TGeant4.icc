@@ -63,15 +63,6 @@ inline void TGeant4::SetMaxNStep(Int_t number)
 } 
 
 //_____________________________________________________________________________
-inline void TGeant4::SetUserDecay(Int_t number)
-{ 
-/// Set user decay specified by decay number                                 \n
-/// Not yet implemented.
-
-  fStepManager->SetUserDecay(number); 
-} 
-
-//_____________________________________________________________________________
 inline void TGeant4::ForceDecayTime(Float_t time)
 { 
 /// Force decay time.                                                        \n

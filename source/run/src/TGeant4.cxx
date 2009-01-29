@@ -939,6 +939,18 @@ Bool_t TGeant4::DefineIon(const char* name, Int_t Z, Int_t A,
 }  
 
 //_____________________________________________________________________________
+inline void TGeant4::SetUserDecay(Int_t pdg)
+{ 
+/// Force the decay of particle with given PDG to be done with user 
+/// defined decay or external decayer
+
+  if ( ! CheckApplicationState("SetUserDecay", kAddParticles ) &&
+       ! CheckApplicationState("SetUserDecay", kAddIons ) ) return;
+
+  fPhysicsManager->SetUserDecay(pdg); 
+} 
+
+//_____________________________________________________________________________
 Bool_t TGeant4::SetDecayMode(Int_t pdg, Float_t bratio[6], Int_t mode[6][3])
 {               
 /// Set a user phase space decay for a particle  

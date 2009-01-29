@@ -77,6 +77,7 @@ class TG4PhysicsManager : public TG4Verbose
                  Double_t excitation = 0.0);
     Bool_t DefineIon(const char* name, Int_t Z, Int_t A,  
                  Int_t Q, Double_t excEnergy, Double_t mass);
+    void   SetUserDecay(Int_t pdg);
     Bool_t SetDecayMode(Int_t pdg, Float_t bratio[6], Int_t mode[6][3]);
 
     Float_t Xsec(char* reac, Float_t energy, Int_t part, Int_t mate);

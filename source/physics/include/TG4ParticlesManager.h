@@ -75,6 +75,7 @@ class TG4ParticlesManager : public TG4Verbose
                  Double_t excitation = 0.0);
     void AddIon(const G4String& name, G4int Z, G4int A, G4int Q, 
                 G4double excEnergy);
+    void   SetUserDecay(Int_t pdg);
     Bool_t SetDecayMode(Int_t pdg, Float_t bratio[6], Int_t mode[6][3]); 
     // get methods
          // for G4 particle types   
@@ -106,7 +107,7 @@ class TG4ParticlesManager : public TG4Verbose
     // methods
     // G4int GetPDGIonEncoding(G4int Z, G4int A, G4int iso) const;
     void  AddIonToPdgDatabase(const G4String& name,
-                              G4ParticleDefinition* particleDefinition);    
+                              G4ParticleDefinition* particleDefinition);  
 
     // static data members
     static TG4ParticlesManager*  fgInstance; ///< this instance
