@@ -113,6 +113,10 @@
   test_g4_vmc_nat.out   - G4, geometry defined via VMC,  G4 native navigation
   test_g4_vmc_tgeo.out  - G4, geometry defined via VMC,  TGeo navigation
   </pre>
+  The files are saved in log/E0n directory.
+  The reference output files, which are updated with each release,
+  can be found at log_ref directory.  
+   
   All run_*.C macros can be run via run suite script:
   <pre>  
   run_suite.sh
