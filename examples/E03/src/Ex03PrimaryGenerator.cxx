@@ -242,7 +242,8 @@ void Ex03PrimaryGenerator::GeneratePrimaries(const TVector3& origin)
 /// Fill the user stack (derived from TVirtualMCStack) with primary particles.
 
   if ( fUserParticles ) {
-    for (Int_t i=0; i<fNofPrimaries; i++) GeneratePrimary2(origin);
+    if ( fNofPrimaries < 2 ) fNofPrimaries = 2;
+    for (Int_t i=0; i<fNofPrimaries/2; i++) GeneratePrimary2(origin);
     return;
   }
   
@@ -251,7 +252,7 @@ void Ex03PrimaryGenerator::GeneratePrimaries(const TVector3& origin)
     return;
   }
   
-  for (Int_t i=0; i<fNofPrimaries/2; i++) GeneratePrimary1(origin);
+  for (Int_t i=0; i<fNofPrimaries; i++) GeneratePrimary1(origin);
 }
 
 //_____________________________________________________________________________
