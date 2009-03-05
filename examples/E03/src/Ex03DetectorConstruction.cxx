@@ -252,7 +252,6 @@ void Ex03DetectorConstruction::ConstructMaterials()
   TIter next(materials);
   while (TObject *obj = next()) {
     TGeoMaterial* material = (TGeoMaterial*)obj;    
-    cout << "Creating medium: " << material->GetName() << endl;
     new TGeoMedium(material->GetName(), ++mediumId, material, param);
   }
 

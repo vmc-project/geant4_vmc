@@ -19,8 +19,8 @@ CURDIR=`pwd`
 OUTDIR=$CURDIR/log
 
 # Set 1 to 0 if you want to skip given MC
-TESTG3=0
-TESTG4=0 
+TESTG3=1
+TESTG4=1 
 TESTFL=1 
 
 # Recreate log directory only if running test for all MCs

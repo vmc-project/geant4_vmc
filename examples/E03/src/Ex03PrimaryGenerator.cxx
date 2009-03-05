@@ -40,6 +40,7 @@ Ex03PrimaryGenerator::Ex03PrimaryGenerator(TVirtualMCStack* stack)
     fStack(stack),
     fIsRandom(false),
     fUserParticles(false),
+    fUserDecay(false),
     fNofPrimaries(1)
     
 {
@@ -52,6 +53,8 @@ Ex03PrimaryGenerator::Ex03PrimaryGenerator()
   : TObject(),
     fStack(0),
     fIsRandom(false),
+    fUserParticles(false),
+    fUserDecay(false),
     fNofPrimaries(0)
 {    
 /// Default constructor

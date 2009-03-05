@@ -27,6 +27,7 @@
 #include <TGeoManager.h>
 #include <TGeoUniformMagField.h>
 #include <TVirtualGeoTrack.h>
+#include <TParticle.h>
 
 #include "Ex03MCApplication.h"
 #include "Ex03MCStack.h"
@@ -309,17 +310,44 @@ void Ex03MCApplication::BeginEvent()
 //_____________________________________________________________________________
 void Ex03MCApplication::BeginPrimary()
 {    
-/// User actions at beginning of a primary track
+/// User actions at beginning of a primary track.
+/// If test for user defined decay is activated,
+/// the primary track ID is printed on the screen.
 
   fVerbose.BeginPrimary();
+
+  if ( fPrimaryGenerator->GetUserDecay() ) {  
+    cout << "   Primary track ID = " 
+         << fStack->GetCurrentTrackNumber() << endl;
+  }   
 }
 
 //_____________________________________________________________________________
 void Ex03MCApplication::PreTrack()
 {    
 /// User actions at beginning of each track
+/// If test for user defined decay is activated,
+/// the decay products of the primary track (K0Short)
+/// are printed on the screen.
 
   fVerbose.PreTrack();
+  
+  // print info about K0Short decay products
+  if ( fPrimaryGenerator->GetUserDecay() ) {  
+    Int_t parentID = fStack->GetCurrentParentTrackNumber();
+
+    if ( parentID >= 0 &&
+         fStack->GetParticle(parentID)->GetPdgCode() == kK0Short  &&
+         fStack->GetCurrentTrack()->GetUniqueID() == kPDecay ) {  
+         // The production process is saved as TParticle unique ID
+         // via Ex03MCStack
+
+      cout << "      Current track " 
+           << fStack->GetCurrentTrack()->GetName()
+           << "  is a decay product of Parent ID = "
+           << fStack->GetCurrentParentTrackNumber() << endl;
+    }           
+  }          
 }
 
 //_____________________________________________________________________________
@@ -356,6 +384,10 @@ void Ex03MCApplication::FinishPrimary()
 /// User actions after finishing of a primary track
 
   fVerbose.FinishPrimary();
+
+  if ( fPrimaryGenerator->GetUserDecay() ) {  
+    cout << endl;
+  }   
 }
 
 //_____________________________________________________________________________

@@ -13,6 +13,6 @@
 # Geant4 configuration macro for Example02
 # (called from Root macro Config.C)
 
-/mcPhysics/rangeCuts 10.
+/mcPhysics/rangeCuts 10. mm
 /mcVerbose/all 1
 #/tracking/verbose 1

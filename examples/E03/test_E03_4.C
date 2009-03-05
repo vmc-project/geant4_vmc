@@ -63,7 +63,6 @@ void test_E03_4(const TString& configMacro, Bool_t oldGeometry)
   appl->GetPrimaryGenerator()->SetNofPrimaries(5);
   appl->GetPrimaryGenerator()->SetUserDecay(true);
   appl->SetPrintModulo(1);
-  appl->SetVerboseLevel(3);
 
   // Set geometry defined via VMC
   appl->SetOldGeometry(oldGeometry);  

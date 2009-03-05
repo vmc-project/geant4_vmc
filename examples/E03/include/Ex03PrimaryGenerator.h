@@ -49,6 +49,9 @@ class Ex03PrimaryGenerator : public TObject
     void  SetUserParticles(Bool_t userParticles);
     void  SetUserDecay(Bool_t userDecay);
     void  SetNofPrimaries(Int_t nofPrimaries);
+
+    // get methods
+    Bool_t GetUserDecay() const;
  
   private:
     // methods
@@ -77,6 +80,10 @@ inline void  Ex03PrimaryGenerator::SetIsRandom(Bool_t isRandom)
 /// \param nofPrimaries The number of particles to be generated
 inline void  Ex03PrimaryGenerator::SetNofPrimaries(Int_t nofPrimaries)
 { fNofPrimaries = nofPrimaries; }
+
+/// Return true if particle with user decay is activated
+inline Bool_t Ex03PrimaryGenerator::GetUserDecay() const
+{ return fUserDecay; }
 
 #endif //EX03_PRIMARY_GENERATOR_H
 
