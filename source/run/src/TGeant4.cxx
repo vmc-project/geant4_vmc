@@ -28,6 +28,10 @@
 
 #include <G4StateManager.hh>
 
+#ifdef G4VIS_USE
+#include <G4VisExecutive.hh>
+#endif
+
 #include <TVirtualMCGeometry.h>
 
 /// \cond CLASSIMP
@@ -44,6 +48,7 @@ TGeant4::TGeant4(const char* name, const char* title,
     fPhysicsManager(0),
     fStepManager(0),   
     fVisManager(0),
+    fVisExecutive(0),
     fRunManager(0),
     fMediumCounter(0),
     fMaterialCounter(0),
@@ -89,8 +94,9 @@ TGeant4::TGeant4(const char* name, const char* title,
 #endif    
   
 #ifdef G4VIS_USE
-  // create visualization manager
+  // create visualization managers
   fVisManager = new TG4VisManager();
+  fVisExecutive = new G4VisExecutive();
 #endif
 }
    
@@ -148,8 +154,9 @@ TGeant4::TGeant4(const char* name, const char* title,
 #endif    
   
 #ifdef G4VIS_USE
-  // create visualization manager
+  // create visualization managers
   fVisManager = new TG4VisManager();
+  fVisExecutive = new G4VisExecutive();
 #endif
 }
 
@@ -165,7 +172,8 @@ TGeant4::~TGeant4()
   delete fSDManager;
   delete fPhysicsManager;
   delete fStepManager;
-  // fVisManager is deleted with G4RunManager destructor
+  delete fVisManager;
+  delete fVisExecutive;
 }
 
 //
@@ -1124,6 +1132,11 @@ void TGeant4::Init()
 /// Initialize G4 run manager.
 
   fRunManager->Initialize();
+
+#ifdef G4VIS_USE
+  fVisExecutive->SetVerboseLevel(0);
+  fVisExecutive->Initialize();
+#endif
 }  
   
 //_____________________________________________________________________________

@@ -36,6 +36,8 @@ class TG4StepManager;
 class TG4VisManager;
 class TG4RunManager;
 
+class G4VisExecutive;
+
 class TGeoHMatrix;
 class TArrayD;
 class TString;
@@ -361,6 +363,7 @@ class TGeant4: public TVirtualMC
     TG4PhysicsManager*   fPhysicsManager;  ///< physics manager
     TG4StepManager*      fStepManager;     ///< step manager
     TG4VisManager*       fVisManager;      ///< visualization manager
+    G4VisExecutive*      fVisExecutive;    ///< Geant4 visualization manager
     TG4RunManager*       fRunManager;      ///< run manager
     Int_t                fMediumCounter;   ///< global medium counter
     Int_t                fMaterialCounter; ///< global material counter

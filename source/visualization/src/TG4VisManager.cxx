@@ -26,6 +26,9 @@
 /// based on G4 suggestions.\n
 /// I. Gonzalez, 4.4.2000
 ///
+/// Removed inheritance from G4VisManager.
+/// I. Hrivnacova, 05/03/2009
+///
 /// \author I. Hrivnacova, IPN Orsay; A, Gheata
 
 #ifdef G4VIS_USE
@@ -40,62 +43,12 @@
 #include <G4PhysicalVolumeModel.hh>
 #include <G4VVisManager.hh>
 
-// Supported drivers...
-
-// Not needing external packages or libraries...
-#include "G4ASCIITree.hh"
-#include "G4DAWNFILE.hh"
-#include "G4HepRepFile.hh"
-#include "G4HepRep.hh"
-#include "G4RayTracer.hh"
-#include "G4VRML1File.hh"
-#include "G4VRML2File.hh"
-
-// Needing external packages or libraries...
-
-#ifdef G4VIS_USE_DAWN
-#include "G4FukuiRenderer.hh"
-#endif
-
-#ifdef G4VIS_USE_OPENGLX
-#include "G4OpenGLImmediateX.hh"
-#include "G4OpenGLStoredX.hh"
-#endif
-
-#ifdef G4VIS_USE_OPENGLWIN32
-#include "G4OpenGLImmediateWin32.hh"
-#include "G4OpenGLStoredWin32.hh"
-#endif
-
-#ifdef G4VIS_USE_OPENGLXM
-#include "G4OpenGLImmediateXm.hh"
-#include "G4OpenGLStoredXm.hh"
-#endif
-
-#ifdef G4VIS_USE_OIX
-#include "G4OpenInventorX.hh"
-#endif
-
-#ifdef G4VIS_USE_OIWIN32
-#include "G4OpenInventorWin32.hh"
-#endif
-
-#ifdef G4VIS_USE_VRML
-#include "G4VRML1.hh"
-#include "G4VRML2.hh"
-#endif
-
-#include "G4TrajectoryModelFactories.hh"
-
 //_____________________________________________________________________________
 TG4VisManager::TG4VisManager(G4int verboseLevel)
-  : G4VisManager(),
-    fColourFlag(true),
+  : fColourFlag(true),
     fVerboseLevel(verboseLevel) 
 {
 /// Standard constructor
-
-  Initialize();
 }
 
 //_____________________________________________________________________________
@@ -107,74 +60,6 @@ TG4VisManager::~TG4VisManager()
 //
 // private methods
 //
-
-//_____________________________________________________________________________
-void TG4VisManager::RegisterGraphicsSystems() 
-{
-/// Register the graphics systems.
-
-  // all created graphics system instances are
-  // deleted in G4VisManager::~G4VisManager()
-
-  // Graphics Systems not needing external packages or libraries...
-  RegisterGraphicsSystem (new G4ASCIITree);
-  RegisterGraphicsSystem (new G4DAWNFILE);
-  RegisterGraphicsSystem (new G4HepRepFile);
-  RegisterGraphicsSystem (new G4HepRep);
-  RegisterGraphicsSystem (new G4RayTracer);
-  RegisterGraphicsSystem (new G4VRML1File);
-  RegisterGraphicsSystem (new G4VRML2File);
-
-  // Graphics systems needing external packages or libraries...
-
-#ifdef G4VIS_USE_DAWN
-  RegisterGraphicsSystem (new G4FukuiRenderer);
-#endif
-
-#ifdef G4VIS_USE_OPENGLX
-  RegisterGraphicsSystem (new G4OpenGLImmediateX);
-  RegisterGraphicsSystem (new G4OpenGLStoredX);
-#endif
-
-#ifdef G4VIS_USE_OPENGLWIN32
-  RegisterGraphicsSystem (new G4OpenGLImmediateWin32);
-  RegisterGraphicsSystem (new G4OpenGLStoredWin32);
-#endif
-
-#ifdef G4VIS_USE_OPENGLXM
-  RegisterGraphicsSystem (new G4OpenGLImmediateXm);
-  RegisterGraphicsSystem (new G4OpenGLStoredXm);
-#endif
-
-#ifdef G4VIS_USE_OIX
-  RegisterGraphicsSystem (new G4OpenInventorX);
-#endif
-
-#ifdef G4VIS_USE_OIWIN32
-  RegisterGraphicsSystem (new G4OpenInventorWin32);
-#endif
-
-#ifdef G4VIS_USE_VRML
-  RegisterGraphicsSystem (new G4VRML1);
-  RegisterGraphicsSystem (new G4VRML2);
-#endif
-
-  if (fVerboseLevel > 0) {
-    G4cout <<
-      "\nYou have successfully chosen to use the following graphics systems."
-         << G4endl;
-    PrintAvailableGraphicsSystems();
-  }
-}
-
-//_____________________________________________________________________________
-void TG4VisManager::RegisterModelFactories()
-{
-/// Register model factories
-
-   RegisterModelFactory(new G4TrajectoryDrawByChargeFactory());
-   RegisterModelFactory(new G4TrajectoryDrawByParticleIDFactory());
-}
 
 //_____________________________________________________________________________
 G4bool TG4VisManager::Contains(const LogicalVolumesVector& lvVector,

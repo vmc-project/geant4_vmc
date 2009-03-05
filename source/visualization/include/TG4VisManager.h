@@ -30,13 +30,12 @@
 /// \class TG4VisManager
 /// \brief Visualization manager class
 ///  
-/// G4VisManager derived class that takes care of registering
-/// graphics system and provides Geant4 implementation of 
+/// G4VisManager provides Geant4 implementation of 
 /// the TVirtualMC interface methods for visualization.
 ///
 /// \author: I. Hrivnacova, IPN, Orsay; A. Gheata
 
-class TG4VisManager: public G4VisManager 
+class TG4VisManager 
 {
   public:
     /// The vector of G4 logical volumes
@@ -71,8 +70,6 @@ class TG4VisManager: public G4VisManager
 
     // methods
     //--------
-    void RegisterGraphicsSystems();
-    void RegisterModelFactories();
     G4bool NeedSetColours();
     void SetColourFlag(G4bool value);
     
