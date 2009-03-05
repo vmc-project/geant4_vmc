@@ -12,7 +12,14 @@
 /// \file g3libs.C
 /// \brief Macro for loading Geant3 libraries
 
+#if !defined(__CINT__) || defined(__MAKECINT__)
+
 #include <iostream>
+
+#include <TSystem.h>
+#include <TString.h>
+
+#endif
 
 Bool_t isLibrary(const char* libName)
 {

@@ -12,7 +12,14 @@
 /// \file fllibs.C
 /// \brief Macro for loading FLUKA libraries
 
+#if !defined(__CINT__) || defined(__MAKECINT__)
+
 #include <iostream>
+
+#include <TSystem.h>
+#include <TString.h>
+
+#endif
 
 void fllibs()
 {

@@ -19,8 +19,19 @@
 //
 // Macro for loading Geant4 and Geant4 VMC libraries
 
+#if !defined(__CINT__) || defined(__MAKECINT__)
 
 #include <iostream>
+
+#include <TSystem.h>
+#include <TString.h>
+#include <TApplication.h>
+#include <TROOT.h>
+
+#endif
+
+void g4libs_granular();
+void g4libs_global();
 
 void g4libs()
 {
@@ -134,7 +145,7 @@ void g4libs_graphics(Bool_t granular = true)
     gSystem->Load("libG4UIbasic");
   }
   else
-   gSystem->Load("libG4interfaces");
+    gSystem->Load("libG4interfaces");
    
   if (isGAG) 
     gSystem->Load("libG4UIGAG");
@@ -313,12 +324,11 @@ void g4libs_granular()
   
   // Geant4 VMC GUI library 
   // (if available and Root is not running in batch mode)
-  if ( isLibrary("libgeant4vmc_gui") && ! isBatch() ) ) {
+  if ( isLibrary("libgeant4vmc_gui") && ! isBatch() ) {
     cout << "Loading geant4vmc_gui library ... " << endl;
     gSystem->Load("libgeant4vmc_gui");
   }  
   
-
   cout << "Loading libraries ... finished" << endl;
 }
 

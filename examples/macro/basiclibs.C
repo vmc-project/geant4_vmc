@@ -12,6 +12,12 @@
 /// \file basiclibs.C
 /// \brief Macro for loading basic libraries used with all MCs
 
+#if !defined(__CINT__) || defined(__MAKECINT__)
+
+#include <TSystem.h>
+
+#endif
+
 void basiclibs()
 {
 /// Macro function for loading basic libraries used with all MCs
