@@ -2,16 +2,16 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.20/00      24 June 2008   *
+  *   Version   5.23/02  26 February 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.20/00 (tags/v5-20-00@24532, Jul 18 2008, 18:16:33 on linux)
+ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.16.29, Jan 08, 2008
+CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -53,15 +53,15 @@ Magnetic field enabled
 
               FLUKA User license:
 
-  By downloading and/or using FLUKA, you agree with the
-  following license/conditions/requests:
+  By downloading or receiving an authorized copy and/or using 
+  FLUKA, you agree with the following license/conditions/requests:
 
 
                 Copyright statement and license conditions
     
   Copyright Italian National Institute for Nuclear Physics
   (INFN) and European Organization for Nuclear Research (CERN)
-  ("the FLUKA copyright holders"), 1989-2007.
+  ("the FLUKA copyright holders"), 1989-2008.
     
   All rights not expressly granted under this license are
   reserved.
@@ -91,7 +91,7 @@ Magnetic field enabled
     language are possible only after obtaining prior written
     permission. Modifications of the FLUKA code are permitted
     for use by the licensee only, unless authorized in
-    written.
+    writing.
     
   2 FLUKA is non-transferable, non-sub-licensable and may not
     be distributed in any way, without express written
@@ -148,7 +148,7 @@ Magnetic field enabled
     rights in any of the FLUKA versions since 1989. In
     addition, users are not permitted to circumvent any
     protection in prior distributions of FLUKA that provided
-    for a preset expiration date of the code
+    for a preset expiration date of the code.
     
   8 Versions or parts of the FLUKA source code, entrusted to
     individuals or groups prior to the enactment of the
@@ -160,7 +160,7 @@ Magnetic field enabled
     that may have been part of the initial use grant.
     
   9 Commercial use of FLUKA, outside the scope of this
-    license, must be negotiated with the copyright holders
+    license, must be negotiated with the copyright holders.
     
   10 DISCLAIMER
     
@@ -195,8 +195,8 @@ Magnetic field enabled
   FLUKA and its accompanying documentation.
     
   All licensees are requested to forward copies of all
-  comparisons that they may make between FLUKA results and
-  data or other codes as soon as practical.  The Authors agree
+  comparisons that they make between FLUKA results and
+  data or other codes as soon as practical. The Authors agree
   to keep any such communications confidential unless
   otherwise notified by the contributing user.
     
@@ -226,8 +226,8 @@ Magnetic field enabled
     
   Giuseppe Battistoni    Giuseppe.Battistoni@mi.infn.it
   (chairman)
-  John     Ferguson      John.Ferguson@cern.ch
-  John     Harvey        John.Harvey@cern.ch
+  Michael  Doser         Michael.Doser@cern.ch
+  Roberto  Losito        Roberto.Losito@cern.ch
   Johannes Ranft         Johannes.Ranft@cern.ch
   Paola    Sala          Paola.Sala@mi.infn.it
     
@@ -242,21 +242,29 @@ Magnetic field enabled
       CERN 2005-10 (2005), INFN/TC_05/11, SLAC-R-773 
 
 
-   - A. Fasso', A. Ferrari, S. Roesler, P.R. Sala, G. Battistoni,
-     F. Cerutti, E. Gadioli, M.V. Garzelli, F. Ballarini,
-     A. Ottolenghi, A. Empl and J. Ranft,
-     "The physics models of FLUKA: status and recent developments",
-     Computing in High Energy and Nuclear Physics 2003 Conference
-     (CHEP2003), La Jolla, CA, USA, March 24-28, 2003, 
-     (paper MOMT005) eConf C0303241 (2003), arXiv:hep-ph/0306267
+   - G. Battistoni, S. Muraro, P.R. Sala, F. Cerutti, A. Ferrari,
+     S. Roesler, A. Fasso`, J. Ranft
+     "The FLUKA code: Description and benchmarking",
+     Proceedings of the Hadronic Shower Simulation Workshop 2006,
+     Fermilab 6-8 September 2006, M. Albrow, R. Raja eds.,
+     AIP Conference Proceeding 896, 31-49, (2007)
 
      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      !!!! DOWNLOAD/USE OF THE FLUKA SOFTWARE IMPLIES FULL     !!!!
      !!!! ACCEPTANCE OF THE LICENSE AND ASSOCIATED CONDITIONS !!!!
      !!!! INCLUDING THE AUTHOR'S REQUESTS                     !!!!
      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+   Notes: The  "FLUKA User Routines"  mentioned at point 3) in the
+          FLUKA User License  are those (and only those) contained
+          in the directory usermvax, both in the source and binary
+          versions of the code
+
+          The Nuclear Energy Agency Data Bank is an authorized
+          distributor of the code
+
  <== Outside FLUKAM!!!
-<== TFluka::BuildPhysics() Read input cards End R:9.09s C:9.07s
+<== TFluka::BuildPhysics() Read input cards End R:9.51s C:9.40s
  ==> Inside FLUKAM!!!
      * ITIMES = 1 LFDRTR = T
 
@@ -660,7 +668,7 @@ Track 300 0 0  in EXPH  ArgonGas
 Track 300 0 0  in OutOfWorld  
 Track 300 0 0  in OutOfWorld  
  <== Outside FLUKAM!!!
-Event: 0 R:0.01s C:0.01s
+Event: 0 R:0.01s C:0.00s
 Transformation for /EXPH_1/CALB_1/LAYB_9: 
 matrix global_1 - tr=1  rot=0  refl=0  scl=0
   1.000000    0.000000    0.000000    Tx = 100.000000

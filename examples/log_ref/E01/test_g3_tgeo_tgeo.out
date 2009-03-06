@@ -2,16 +2,16 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.20/00      24 June 2008   *
+  *   Version   5.23/02  26 February 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.20/00 (tags/v5-20-00@24532, Jul 18 2008, 18:16:33 on linux)
+ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.16.29, Jan 08, 2008
+CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -19,11 +19,11 @@ Processing test_E01.C("g3tgeoConfig.C", kFALSE)...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766573135    2DB0FA4F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766906343    2DB60FE7 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766596173   766573135
-                                        HEX    2DB1544D    2DB0FA4F
+          with Store/Table at absolute adrs   766929381   766906343
+                                        HEX    2DB669E5    2DB60FE7
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -42,7 +42,7 @@ Loading Geant3 libraries ... finished
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
 Geant3 has been created.
 Geometry will be defined via TGeo
-Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
+Info in <TGeoManager::TGeoManager>: Geometry E01_geometry, E01 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is EXPH. Master volume is EXPH
 Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
 Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
@@ -50,7 +50,7 @@ Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
-Info in <TGeoManager::CloseGeometry>: 22 nodes/ 4 volume UID's in Root geometry manager
+Info in <TGeoManager::CloseGeometry>: 22 nodes/ 4 volume UID's in E01 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
  Calculating cross section tables, see gphysi.dat for more information
@@ -343,7 +343,7 @@ Material for LAYB volume:
 Aluminium  2  Aeff = 26.98  Zeff = 13  density = 2.7  radl = 8.8751  inter = 45.6209
 
 Medium for LAYB volume: 
-Aluminium  2  nmat = 2  isvol = 0  ifield = 0  fieldm = 0  tmaxfd = 20  stemax = 1e+10  deemax = 0.182866  epsil = 0.001  stmin = 0.0334544
+Aluminium  2  nmat = 2  isvol = 0  ifield = 2  fieldm = 10  tmaxfd = 20  stemax = 1e+10  deemax = 0.182866  epsil = 0.001  stmin = 0.0334544
 
 Error in <TGeoNavigator::cd>: Path /EXPH_1/CALB_1/LAYB_100 not valid
 GetTransformation: Volume path /EXPH_1/CALB_1/LAYB_100 not found

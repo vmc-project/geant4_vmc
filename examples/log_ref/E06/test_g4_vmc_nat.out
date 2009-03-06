@@ -2,28 +2,28 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.20/00      24 June 2008   *
+  *   Version   5.23/02  26 February 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.20/00 (tags/v5-20-00@24532, Jul 18 2008, 18:16:33 on linux)
+ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.16.29, Jan 08, 2008
+CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E06.C("g4ConfigOld.C", kTRUE)...
-Loading Geant4 granular libraries ...
-loading OpenInventor
+Loading Geant4 libraries ...
 Loading VGM libraries ... 
-Loading geant4vmc library ... 
-Loading libraries ... finished
+Loading G4root library ...
+Loading geant4vmc library ...
+Loading geant4vmc_gui library ... 
 
 *************************************************************
- Geant4 version Name: geant4-09-01-patch-02    (9-May-2008)
+ Geant4 version Name: geant4-09-02    (19-December-2008)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -34,33 +34,6 @@ Adding OpticalPhysicsList
 Adding SpecialPhysicsList stepLimiter
 Debug mode is switched on.
 Visualization Manager instantiating...
-Visualization Manager initialising...
-Registering graphics systems...
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRepFile (HepRepFile)
-  G4HepRep (HepRepXML)
-  RayTracer (RayTracer)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  OpenGLImmediateX (OGLIX)
-  OpenGLStoredX (OGLSX)
-  OpenGLImmediateXm (OGLIXm)
-  OpenGLStoredXm (OGLSXm)
-
-Registering model factories...
-
-You have successfully registered the following model factories.
-Registered model factories:
-  drawByCharge
-  drawByParticleID
-
-Registered filter factories:
-  None
-
 Geometry will be defined via VMC
 Air
 Water
@@ -85,7 +58,7 @@ The material properties BACKSCATTERCONSTANT set for optical surface WaterSurface
 The material properties REFLECTIVITY set for optical surface AirSurface
 The material properties EFFICIENCY set for optical surface AirSurface
 G4Cerenkov::G4Cerenkov constructor
-NOTE: this is now a G4VDiscreteProcess!
+NOTE: this is now a G4VProcess!
 Required change in UserPhysicsList: 
 change: pmanager->AddContinuousProcess(theCerenkovProcess);
 to:     pmanager->AddProcess(theCerenkovProcess);
@@ -104,11 +77,11 @@ to:     pmanager->AddProcess(theCerenkovProcess);
 
 ***** Table : Nb of materials = 2 *****
 
- Material:      Air     density:  1.290 mg/cm3  RadL: 285.113 m    Imean:  85.683 eV   temperature: 273.15 K  pressure:   1.00 atm
+ Material:      Air     density:  1.290 mg/cm3  RadL: 285.113 m    Nucl.Int.Length: 662.641 m    Imean:  85.683 eV   temperature: 273.15 K  pressure:   1.00 atm
    --->  Element: Nitrogen (N)   Z =  7.0   N =  14.0   A =  14.01 g/mole  ElmMassFraction:  70.00 %  ElmAbundance  72.72 %
    --->  Element: Oxygen (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole  ElmMassFraction:  30.00 %  ElmAbundance  27.28 %
 
- Material:    Water     density:  1.000 g/cm3   RadL:  36.086 cm   Imean:  70.859 eV 
+ Material:    Water     density:  1.000 g/cm3   RadL:  36.086 cm   Nucl.Int.Length:  75.403 cm   Imean:  70.859 eV 
    --->  Element: Hydrogen (H)   Z =  1.0   N =   1.0   A =   1.01 g/mole  ElmMassFraction:  11.21 %  ElmAbundance  66.71 %
    --->  Element: Oxygen (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole  ElmMassFraction:  88.79 %  ElmAbundance  33.29 %
 
@@ -430,8 +403,26 @@ SPECULARSPIKECONSTANT
 MPV[0]: (2.038e-06, 0.2)
 MPV[1]: (4.144e-06, 0.2)
  Done DumpVector of 2 entries 
+Number of optical photons produced in this event : 1563
+Number of optical photons produced in this event : 1672
+Number of optical photons produced in this event : 1564
 G4SteppingManager::InvokeAtRestDoItProcs: No AtRestDoIt process is active. 
+Number of optical photons produced in this event : 1557
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+
+Warning: G4MaterialPropertyVector::GetProperty
+==> attempt to Retrieve Property below range
+Number of optical photons produced in this event : 1460
+Number of optical photons produced in this event : 1356
+Number of optical photons produced in this event : 1599
 G4SteppingManager::InvokeAtRestDoItProcs: No AtRestDoIt process is active. 
+Number of optical photons produced in this event : 1497
+Number of optical photons produced in this event : 1462
 
 Warning: G4MaterialPropertyVector::GetProperty
 ==> attempt to Retrieve Property below range
@@ -441,33 +432,4 @@ Warning: G4MaterialPropertyVector::GetProperty
 
 Warning: G4MaterialPropertyVector::GetProperty
 ==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 646
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 622
-Number of optical photons produced in this event : 655
-G4SteppingManager::InvokeAtRestDoItProcs: No AtRestDoIt process is active. 
-Number of optical photons produced in this event : 638
-Number of optical photons produced in this event : 431
-G4SteppingManager::InvokeAtRestDoItProcs: No AtRestDoIt process is active. 
-Number of optical photons produced in this event : 696
-Number of optical photons produced in this event : 693
-Number of optical photons produced in this event : 593
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 510
-Number of optical photons produced in this event : 598
+Number of optical photons produced in this event : 1549

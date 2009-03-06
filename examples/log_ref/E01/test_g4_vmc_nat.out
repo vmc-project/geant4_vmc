@@ -2,28 +2,28 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.20/00      24 June 2008   *
+  *   Version   5.23/02  26 February 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.20/00 (tags/v5-20-00@24532, Jul 18 2008, 18:16:33 on linux)
+ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.16.29, Jan 08, 2008
+CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E01.C("g4ConfigOld.C", kTRUE)...
-Loading Geant4 granular libraries ...
-loading OpenInventor
+Loading Geant4 libraries ...
 Loading VGM libraries ... 
-Loading geant4vmc library ... 
-Loading libraries ... finished
+Loading G4root library ...
+Loading geant4vmc library ...
+Loading geant4vmc_gui library ... 
 
 *************************************************************
- Geant4 version Name: geant4-09-01-patch-02    (9-May-2008)
+ Geant4 version Name: geant4-09-02    (19-December-2008)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -33,33 +33,6 @@ Adding EMPhysicsList emStandard
 Adding SpecialPhysicsList stepLimiter
 Debug mode is switched on.
 Visualization Manager instantiating...
-Visualization Manager initialising...
-Registering graphics systems...
-
-You have successfully registered the following graphics systems.
-Current available graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRepFile (HepRepFile)
-  G4HepRep (HepRepXML)
-  RayTracer (RayTracer)
-  VRML1FILE (VRML1FILE)
-  VRML2FILE (VRML2FILE)
-  OpenGLImmediateX (OGLIX)
-  OpenGLStoredX (OGLSX)
-  OpenGLImmediateXm (OGLIXm)
-  OpenGLStoredXm (OGLSXm)
-
-Registering model factories...
-
-You have successfully registered the following model factories.
-Registered model factories:
-  drawByCharge
-  drawByParticleID
-
-Registered filter factories:
-  None
-
 Geant4 has been created.
 Geometry will be defined via VMC
 G4ggclos: setting top-level VolTableEntry
@@ -179,8 +152,8 @@ Track -159.866 4.01344 0  in EXPH  ArgonGas
 Track -159.866 4.01344 0  in TRTU  Aluminium
 Track -42.1146 15.7885 0  in TRTU  Aluminium
 Track -42.1146 15.7885 0  in EXPH  ArgonGas
-Track 1.15907e-14 20 0  in EXPH  ArgonGas
-Track 1.15907e-14 20 0  in CALB  Lead
+Track 1.06359e-14 20 0  in EXPH  ArgonGas
+Track 1.06359e-14 20 0  in CALB  Lead
 Track 9 20.9 0  in CALB  Lead
 Track 9 20.9 0  in LAYB  Aluminium
 Track 11 21.1 0  in LAYB  Aluminium

@@ -2,16 +2,16 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.20/00      24 June 2008   *
+  *   Version   5.23/02  26 February 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.20/00 (tags/v5-20-00@24532, Jul 18 2008, 18:16:33 on linux)
+ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.16.29, Jan 08, 2008
+CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -19,11 +19,11 @@ Processing test_E02.C("g3tgeoConfig.C", kFALSE)...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766417487    2DAE9A4F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766918631    2DB63FE7 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766440525   766417487
-                                        HEX    2DAEF44D    2DAE9A4F
+          with Store/Table at absolute adrs   766941669   766918631
+                                        HEX    2DB699E5    2DB63FE7
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -42,7 +42,7 @@ Loading Geant3 libraries ... finished
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
 Geant3 has been created.
 Geometry will be defined via TGeo
-Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
+Info in <TGeoManager::TGeoManager>: Geometry E02_geometry, E02 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Target is 5 cm of lead 
 There are 5 chambers in the tracker region. The chambers are 200 mm of Xenon gas
@@ -53,7 +53,7 @@ Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
-Info in <TGeoManager::CloseGeometry>: 8 nodes/ 4 volume UID's in Root geometry manager
+Info in <TGeoManager::CloseGeometry>: 8 nodes/ 4 volume UID's in E02 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
  Calculating cross section tables, see gphysi.dat for more information
@@ -88,7 +88,7 @@ Number of daughters: 0
   trackID: 0  chamberNb: 0  energy deposit (keV): 92.8173  position (cm): (-1.25423, 19.9118, -140.079)
   trackID: 0  chamberNb: 0  energy deposit (keV): 0.208348  position (cm): (-1.25526, 19.9326, -140)
   trackID: 0  chamberNb: 1  energy deposit (keV): 88.8884  position (cm): (-2.31507, 46.8751, -60.1317)
-  trackID: 0  chamberNb: 1  energy deposit (keV): 0.086714  position (cm): (-2.31694, 46.9299, -59.9998)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 0.086714  position (cm): (-2.31694, 46.9298, -59.9998)
   trackID: 0  chamberNb: 2  energy deposit (keV): 165.512  position (cm): (-3.4922, 86.9607, 19.7968)
   trackID: 0  chamberNb: 2  energy deposit (keV): 3.69571  position (cm): (-3.4953, 87.0816, 20.0003)
   trackID: 0  chamberNb: 3  energy deposit (keV): 127.276  position (cm): (-4.77414, 143.309, 99.6875)
@@ -108,10 +108,10 @@ Number of daughters: 0
   trackID: 0  chamberNb: 0  energy deposit (keV): 0.114825  position (cm): (-2.04469, 19.4622, -140)
   trackID: 0  chamberNb: 1  energy deposit (keV): 132.164  position (cm): (-3.7164, 46.0069, -60.1294)
   trackID: 0  chamberNb: 1  energy deposit (keV): 0.30894  position (cm): (-3.71922, 46.0599, -59.9998)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 164  position (cm): (-5.51456, 85.5444, 19.8005)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 164  position (cm): (-5.51456, 85.5443, 19.8005)
   trackID: 0  chamberNb: 2  energy deposit (keV): 0.234874  position (cm): (-5.51937, 85.6616, 20.0003)
   trackID: 0  chamberNb: 3  energy deposit (keV): 114.425  position (cm): (-7.53617, 141.199, 99.6937)
-  trackID: 0  chamberNb: 3  energy deposit (keV): 4.03059  position (cm): (-7.54434, 141.451, 100)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 4.03059  position (cm): (-7.54433, 141.451, 100)
 Ex02MCStack Info  
 Total number of particles:   1
 Number of primary particles: 1
@@ -147,7 +147,7 @@ Number of daughters: 0
   trackID: 0  chamberNb: 1  energy deposit (keV): 81.3612  position (cm): (2.79488, 38.9533, -60.1131)
   trackID: 0  chamberNb: 1  energy deposit (keV): 0.735222  position (cm): (2.79667, 38.9946, -59.9998)
   trackID: 0  chamberNb: 2  energy deposit (keV): 99.0028  position (cm): (4.0981, 74.5612, 19.8235)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 0.40622  position (cm): (4.1011, 74.6551, 20.0003)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 0.40622  position (cm): (4.1011, 74.6552, 20.0003)
   trackID: 0  chamberNb: 3  energy deposit (keV): 310.747  position (cm): (5.51602, 125.089, 99.7305)
   trackID: 0  chamberNb: 3  energy deposit (keV): 1.0527  position (cm): (5.52102, 125.289, 100)
   trackID: 0  chamberNb: 4  energy deposit (keV): 141.387  position (cm): (7.09863, 195.727, 179.569)

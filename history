@@ -12,6 +12,31 @@ $Id$
      
 Tags (history):
 ===============
+  06/03/2009
+  v2-6:
+    Geant4 VMC:
+       - Adaptation to the new TGeo mag field interface
+       - Implemented TVirtualMC::SetUserDecay
+       - Including the names of Root assemblies in volume names 
+         when exporting Root geometry in Geant4 (optinal)
+       - Removing G4VisManager inheritance from TG4VisManager;
+         G4VisExecutive is now used for instatiating G4 visualzation
+         drivers   
+      Fixes: 
+       - Fix in mapping primary particles Ids in TG4TrackManager.
+       - Increase copyNo from divisions by 1 when running with G4 native
+         geometry (to be compatible with TGeo numbering.)
+       - Migration to gcc 4.3.2 
+   
+    Examples:
+      - Migration to the new TGeo mag field interface 
+      - Material definition using directly Root objects,
+      - Added test for user decay (in E03)
+      - Macro g4libs.C replaced with a new one using Geant4 liblist;
+        thanks to Ch.H. Christensen and D. Naumov for this development. 
+    
+    Tested with Geant4 9.2, CLHEP 2.0.4.2, Root 5.23/02, VGM 3.02
+
   21/07/2008
   v2-5:
     Geant4 VMC:
