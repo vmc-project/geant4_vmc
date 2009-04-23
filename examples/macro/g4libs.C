@@ -43,7 +43,9 @@ void loadg4libs();
 void g4libs()
 {
 /// Function for loading all libraries for running VMC with Geant4
-   loadg4libs();
+  loadg4libs();
+
+  gSystem->SetFPEMask(0); 
 }   
 
 string NoSpaces(string s)
