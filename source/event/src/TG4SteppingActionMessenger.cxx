@@ -44,7 +44,7 @@ TG4SteppingActionMessenger::TG4SteppingActionMessenger(
     ->SetGuidance("Set maximum number of steps allowed.");
   fMaxNofStepsCmd->SetParameterName("MaxNofSteps", false);
   fMaxNofStepsCmd->SetRange("MaxNofSteps >= 0");
-  fMaxNofStepsCmd->AvailableForStates(G4State_Idle);
+  fMaxNofStepsCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
   fSaveSecondariesCmd = new G4UIcmdWithABool("/mcTracking/saveSecondariesInStep", this);
   fSaveSecondariesCmd->SetGuidance("Option to save secondaries in the stack during stepping.");
