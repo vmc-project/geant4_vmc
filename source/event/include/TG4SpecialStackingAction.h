@@ -43,6 +43,8 @@ class G4TrackStack;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
+#include "TG4SpecialStackingActionMessenger.h"
+
 class TG4SpecialStackingAction : public G4UserStackingAction,
                                  public TG4Verbose
 {
@@ -54,6 +56,12 @@ class TG4SpecialStackingAction : public G4UserStackingAction,
     G4ClassificationOfNewTrack ClassifyNewTrack(const G4Track* track);
     void NewStage();
     void PrepareNewEvent();
+    
+    // set method
+    void SetSkipNeutrino(G4bool skipNeutrino);
+    
+    // get method
+    G4bool GetSkipNeutrino() const;
 
   private:
     /// Not implemented
@@ -62,8 +70,21 @@ class TG4SpecialStackingAction : public G4UserStackingAction,
     TG4SpecialStackingAction& operator=(const TG4SpecialStackingAction& right);
 
     // data members
-    G4int  fStage; ///< stage number
+    TG4SpecialStackingActionMessenger  fMessenger; ///< messenger
+    G4int   fStage;        ///< stage number
+    G4bool  fSkipNeutrino; ///< option to skip tracking of neutrino
+    
 };
+
+// inline functions
+
+/// Set the option for skipping neutrino
+inline void TG4SpecialStackingAction::SetSkipNeutrino(G4bool skipNeutrino)
+{ fSkipNeutrino = skipNeutrino; }
+    
+/// Return the option for skipping neutrino
+inline G4bool TG4SpecialStackingAction::GetSkipNeutrino() const
+{ return fSkipNeutrino; }
 
 #endif //TG4_STACKING_ACTION_H
 

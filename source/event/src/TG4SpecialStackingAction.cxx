@@ -32,7 +32,9 @@
 TG4SpecialStackingAction::TG4SpecialStackingAction()
   : G4UserStackingAction(),
     TG4Verbose("stackingAction",1),
-    fStage(0)
+    fMessenger(this),
+    fStage(0),
+    fSkipNeutrino(false)
 {
 /// Default constructor
 }
@@ -61,12 +63,13 @@ TG4SpecialStackingAction::ClassifyNewTrack(const G4Track* track)
   else {
      // exclude neutrinos
     G4ParticleDefinition* particle = track->GetDefinition();
-    if( particle == G4NeutrinoE::NeutrinoEDefinition() ||
-        particle == G4NeutrinoMu::NeutrinoMuDefinition() ||
-        particle == G4NeutrinoTau::NeutrinoTauDefinition() ||
-        particle == G4AntiNeutrinoE::AntiNeutrinoEDefinition() ||
-        particle == G4AntiNeutrinoMu::AntiNeutrinoMuDefinition() ||
-        particle == G4AntiNeutrinoTau::AntiNeutrinoTauDefinition()) {
+    if ( fSkipNeutrino &&
+         ( particle == G4NeutrinoE::NeutrinoEDefinition() ||
+           particle == G4NeutrinoMu::NeutrinoMuDefinition() ||
+           particle == G4NeutrinoTau::NeutrinoTauDefinition() ||
+           particle == G4AntiNeutrinoE::AntiNeutrinoEDefinition() ||
+           particle == G4AntiNeutrinoMu::AntiNeutrinoMuDefinition() ||
+           particle == G4AntiNeutrinoTau::AntiNeutrinoTauDefinition() ) ) {
 
         return fKill;         
      }        
