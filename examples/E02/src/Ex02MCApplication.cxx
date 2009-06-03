@@ -221,6 +221,8 @@ void Ex02MCApplication::BeginEvent()
 {    
 /// User actions at beginning of event.
 /// Nothing to be done this example
+
+  fStack->SetObjectNumber();
 }
 
 //_____________________________________________________________________________
@@ -309,5 +311,4 @@ void  Ex02MCApplication::ReadEvent(Int_t i)
 
   fStack->Print();  
   fTrackerSD.Print();
-}  
-  
+}

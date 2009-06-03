@@ -86,7 +86,7 @@ Ex02RootManager::~Ex02RootManager()
 {
 /// Destructor
 
-  delete fFile;
+  delete  fTree->GetCurrentFile();
   fgInstance = 0;
 }
 
@@ -110,7 +110,7 @@ Ex02RootManager* Ex02RootManager::Instance()
 void  Ex02RootManager::Register(const char* name, const char* className, 
                                 void* objAddress)
 {
-/// Creates a branch and associates it with the given address.
+/// Create a branch and associates it with the given address.
 /// \param name       The branch name
 /// \param className  The class name of the object
 /// \param objAddress The object address
@@ -134,11 +134,9 @@ void Ex02RootManager:: WriteAll()
 {
 /// Write the Root tree in the file.
 
-  gDirectory->cd(fPath.Data());
-     // Go in the directory where we have defined Root file
-     // Needed when running with Fluka  
-  
-  fTree->Write();
+  TFile* file =  fTree->GetCurrentFile();
+  file->Write();
+  file->Close();
 }  
 
 //_____________________________________________________________________________

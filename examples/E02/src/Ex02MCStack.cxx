@@ -35,7 +35,8 @@ ClassImp(Ex02MCStack)
 Ex02MCStack::Ex02MCStack(Int_t size)
   : fParticles(0),
     fCurrentTrack(-1),
-    fNPrimary(0)
+    fNPrimary(0),
+    fObjectNumber(0)    
 {
 /// Standard constructor
 /// \param size  The stack size
@@ -47,7 +48,8 @@ Ex02MCStack::Ex02MCStack(Int_t size)
 Ex02MCStack::Ex02MCStack()
   : fParticles(0),
     fCurrentTrack(-1),
-    fNPrimary(0)
+    fNPrimary(0),
+    fObjectNumber(0)    
 {
 /// Default constructor
 }
@@ -107,14 +109,13 @@ void  Ex02MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
   particleDef->SetUniqueID(mech);
 
   Ex02Particle* mother = 0;
-  if (parent>=0) 
+  if ( parent >= 0 ) 
     mother = GetParticle(parent);
   else
     fNPrimary++;  
 
   Ex02Particle* particle = new Ex02Particle(GetNtrack(), particleDef, mother);
   if (mother) mother->AddDaughter(particle);
-
   fParticles->Add(particle);
     
   if (toBeDone) fStack.push(particle);  
@@ -180,6 +181,12 @@ void Ex02MCStack::Reset()
   fCurrentTrack = -1;
   fNPrimary = 0;
   fParticles->Delete();
+
+  //Restore Object count 
+  //To save space in the table keeping track of all referenced objects
+  //we assume that our events do not address each other. We reset the 
+  //object count to what it was at the beginning of the event
+  TProcessID::SetObjectCount(fObjectNumber);
 }       
 
 //_____________________________________________________________________________
@@ -190,6 +197,15 @@ void  Ex02MCStack::SetCurrentTrack(Int_t track)
 
   fCurrentTrack = track;
 }     
+
+//_____________________________________________________________________________
+void  Ex02MCStack::SetObjectNumber()
+{
+/// Set the current value of Root object counter into fObjectNumber.
+/// Tis value will be restored in Reset.
+
+  fObjectNumber = TProcessID::GetObjectCount();
+}                         
 
 //_____________________________________________________________________________
 Int_t  Ex02MCStack::GetNtrack() const 

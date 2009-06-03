@@ -52,6 +52,7 @@ class Ex02MCStack : public TVirtualMCStack
    
     // set methods
     virtual void  SetCurrentTrack(Int_t track);                           
+            void  SetObjectNumber();                           
 
     // get methods
     virtual Int_t  GetNtrack() const;
@@ -67,6 +68,7 @@ class Ex02MCStack : public TVirtualMCStack
     TObjArray*                 fParticles;    ///< The array of particle (persistent)
     Int_t                      fCurrentTrack; ///< The current track number
     Int_t                      fNPrimary;     ///< The number of primaries
+    Int_t                      fObjectNumber; ///< The Root object number counter
     
     ClassDef(Ex02MCStack,1) // Ex02MCStack
 };

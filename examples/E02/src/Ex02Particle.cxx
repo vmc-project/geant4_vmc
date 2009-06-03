@@ -122,8 +122,12 @@ void Ex02Particle::PrintDaughters() const
 
   for (Int_t i=0; i<GetNofDaughters(); i++)  {
     cout << i << "th daughter: " << endl;
-    GetDaughter(i)->Print();
+    if ( GetDaughter(i) ) 
+      GetDaughter(i)->Print();
+    else
+      cout << "0x0"; 
   }  
+  cout << endl;			  
 }  
 
 //_____________________________________________________________________________
