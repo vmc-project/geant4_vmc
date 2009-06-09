@@ -70,7 +70,8 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fUserGeometry(userGeometry),
     fMagneticFieldType(kMCApplicationField), 
     fMagneticField(0),
-    fUserRegionConstruction(0)
+    fUserRegionConstruction(0),
+    fIsUserMaxStep(false)
      
 {
 /// Standard constructor
@@ -613,6 +614,11 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
     
     // set new limits back to medium
     medium->SetLimits(tg4Limits);
+    
+    // inactivate max step defined by user 
+    // if its activation was not asked explicitely
+    if ( ! fIsUserMaxStep )
+      tg4Limits->SetMaxAllowedStep(DBL_MAX); 
 
     // limit max step for low density materials (< AIR)
     if (lv->GetMaterial()->GetDensity() < fgLimitDensity ) 

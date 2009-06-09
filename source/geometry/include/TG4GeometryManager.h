@@ -60,6 +60,7 @@ class TG4GeometryManager : public TG4Verbose
     
     void SetFieldType(TG4MagneticFieldType fieldType);
     void SetUniformFieldValue(G4double fieldValue);
+    void SetUserMaxStep(G4bool isUserMaxStep);
      
     // set user region construction
     void SetUserRegionConstruction(
@@ -96,6 +97,8 @@ class TG4GeometryManager : public TG4Verbose
     TG4MagneticFieldType  fMagneticFieldType;///< magnetic field type
     G4MagneticField*      fMagneticField;    ///< magnetic field
     TG4VUserRegionConstruction* fUserRegionConstruction; ///< user region construction
+    G4bool                fIsUserMaxStep;    ///< option to activate max step defined           
+                                             ///  in tracking media
 };
 
 // inline methods
@@ -105,10 +108,16 @@ inline TG4GeometryManager* TG4GeometryManager::Instance() {
   return fgInstance; 
 }
 
+inline void TG4GeometryManager::SetUserMaxStep(G4bool isUserMaxStep) {
+  /// (In)Activate the max step defined by user in tracking media
+  fIsUserMaxStep = isUserMaxStep;
+}  
+
 inline  TG4OpGeometryManager* TG4GeometryManager::GetOpManager() const {
   /// Return the optical geometry manager
   return fOpManager;
-}   
+}       
+
 
 #endif //TG4_GEOMETRY_MANAGER_H
 
