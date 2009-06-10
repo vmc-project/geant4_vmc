@@ -769,6 +769,19 @@ void TGeant4::SetRootGeometry()
 }
 
 //_____________________________________________________________________________
+void TGeant4::SetUserParameters(Bool_t isUserParameters)
+{
+/// Activate the parameters defined in tracking media
+/// (DEEMAX, STMIN, STEMAX), which are, be default, ignored.
+/// In Geant4 case, only STEMAX is taken into account.
+
+  if ( ! CheckApplicationState("SetUserParameters", kInitGeometry, 
+                               false, true) ) return;
+
+  fGeometryManager->SetUserMaxStep(isUserParameters);
+}  
+
+//_____________________________________________________________________________
 Int_t TGeant4::VolId(const Text_t* volName) const 
 {
 /// Return the volume ID = sensitive detector identifier.

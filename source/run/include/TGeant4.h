@@ -177,6 +177,11 @@ class TGeant4: public TVirtualMC
     // set geometry from Root (built via TGeo)
     virtual void SetRootGeometry();                   
     
+    // Activate the parameters defined in tracking media
+    // (DEEMAX, STMIN, STEMAX), which are, be default, ignored.
+    // In Geant4 case, only STEMAX is taken into account.
+    virtual void SetUserParameters(Bool_t isUserParameters);
+
     // get methods
     virtual Int_t VolId(const Text_t* volName) const;
     virtual const char* VolName(Int_t id) const;
@@ -243,6 +248,7 @@ class TGeant4: public TVirtualMC
     virtual void SetUserDecay(Int_t);     //NEW
     virtual void ForceDecayTime(Float_t); //NEW
     virtual Bool_t SetDecayMode(Int_t pdg, Float_t bratio[6], Int_t mode[6][3]); //new 
+
     // get methods
          // tracking volume(s) 
     virtual Int_t CurrentVolID(Int_t& copyNo) const;
