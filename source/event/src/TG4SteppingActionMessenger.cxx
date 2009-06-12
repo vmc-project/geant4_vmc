@@ -37,14 +37,14 @@ TG4SteppingActionMessenger::TG4SteppingActionMessenger(
   fLoopVerboseCmd->SetParameterName("LoopVerboseLevel", true);
   fLoopVerboseCmd->SetDefaultValue(1);
   fLoopVerboseCmd->SetRange("LoopVerboseLevel >= 0 && LoopVerboseLevel <= 5");
-  fLoopVerboseCmd->AvailableForStates(G4State_Idle);
+  fLoopVerboseCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
   fMaxNofStepsCmd = new G4UIcmdWithAnInteger("/mcTracking/maxNofSteps", this);
   fMaxNofStepsCmd
     ->SetGuidance("Set maximum number of steps allowed.");
   fMaxNofStepsCmd->SetParameterName("MaxNofSteps", false);
   fMaxNofStepsCmd->SetRange("MaxNofSteps >= 0");
-  fMaxNofStepsCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
+  fMaxNofStepsCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
   fSaveSecondariesCmd = new G4UIcmdWithABool("/mcTracking/saveSecondariesInStep", this);
   fSaveSecondariesCmd->SetGuidance("Option to save secondaries in the stack during stepping.");
