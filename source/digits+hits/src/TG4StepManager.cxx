@@ -22,6 +22,7 @@
 #include "TG4PhysicsManager.h"
 #include "TG4TrackManager.h"
 #include "TG4TrackInformation.h"
+#include "TG4Limits.h"
 #include "TG4Globals.h"
 #include "TG4G3Units.h"
 
@@ -46,6 +47,7 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
   : fTrack(0),
     fStep(0),
     fStepStatus(kNormalStep),
+    fLimitsModifiedOnFly(0),
     fTouchableHistory(0),
     fSteppingManager(0),
     fVolPathBuffer(),
@@ -269,21 +271,50 @@ void TG4StepManager::StopRun()
 //_____________________________________________________________________________
 void TG4StepManager::SetMaxStep(Double_t step)
 {
-/// Set the maximum step allowed in the current logical volume.
+/// Set the maximum step allowed in the current logical volume;
+/// the value is restored after exiting from the current tracking
+/// medium
 
-  G4UserLimits* userLimits 
-    = GetCurrentPhysicalVolume()->GetLogicalVolume()->GetUserLimits();
-  
 #ifdef MCDEBUG
-  if (!userLimits) {
-    TG4Globals::Exception(
+  TG4Limits* userLimits 
+     = TG4GeometryServices::Instance()
+         ->GetLimits(GetCurrentPhysicalVolume()->GetLogicalVolume()->GetUserLimits()); 
+#else  
+  TG4Limits* userLimits 
+    = (TG4Limits*) GetCurrentPhysicalVolume()->GetLogicalVolume()->GetUserLimits();
+#endif    
+
+  if ( ! userLimits ) {
+    TG4Globals::Warning(
       "TG4StepManager", "SetMaxStep", "User limits not defined.");
+    return;  
   }
-#endif  
+
+  //G4cout << "TG4StepManager::SetMaxStep  in " 
+  //       << GetCurrentPhysicalVolume()->GetLogicalVolume()->GetName() << "  "
+  //       << userLimits->GetName() << G4endl;
 
   // set max step
-  userLimits->SetMaxAllowedStep(step*TG4G3Units::Length()); 
+  userLimits->SetCurrentMaxAllowedStep(step*TG4G3Units::Length());
+  fLimitsModifiedOnFly = userLimits;
+}
 
+//_____________________________________________________________________________
+void TG4StepManager::SetMaxStepBack()
+{
+/// Restore back the maximum step after exiting from the tracking
+/// medium where it has been changed of fly
+
+  if ( ! fLimitsModifiedOnFly ) {
+    TG4Globals::Warning(
+      "TG4StepManager", "SetMaxStepBack", 
+      "No limits modified on fly found.");
+    return;  
+  }
+
+  // set max step
+  fLimitsModifiedOnFly->SetMaxAllowedStepBack();
+  fLimitsModifiedOnFly = 0;
 }
 
 //_____________________________________________________________________________

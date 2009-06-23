@@ -58,13 +58,11 @@ class TG4SpecialPhysicsList: public G4VModularPhysicsList,
     void SetStackPopperSelection(const G4String& selection);
     
     // get methods
-    G4bool IsSpecialControls() const;
     G4bool IsSpecialCuts() const;
     
   protected:
     // data members
     TG4StackPopperPhysics* fStackPopperPhysics;///< stack popper physics
-    G4bool                 fIsSpecialControls; ///< option for special controls
     G4bool                 fIsSpecialCuts;     ///< option for special cuts
 
   private:
@@ -87,11 +85,6 @@ inline TG4SpecialPhysicsList* TG4SpecialPhysicsList::Instance() {
   return fgInstance; 
 }  
 
-inline G4bool TG4SpecialPhysicsList::IsSpecialControls() const {
-  /// Return true if specialControls are selected
-  return fIsSpecialControls;
-}  
-  
 inline G4bool TG4SpecialPhysicsList::IsSpecialCuts() const {
   /// Return true if specialCuts are selected
   return fIsSpecialCuts;

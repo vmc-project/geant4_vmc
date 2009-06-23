@@ -29,6 +29,8 @@
 #include <TArrayI.h>
 #include <TMCProcess.h>
 
+class TG4Limits;
+
 class G4Track;
 class G4SteppingManager;
 class G4VPhysicalVolume;
@@ -64,6 +66,7 @@ class TG4StepManager
     void SetStep(G4Track* track, TG4StepStatus status);  // G4 specific
     void SetSteppingManager(G4SteppingManager* manager); // G4 specific
     void SetMaxStep(Double_t step);
+    void SetMaxStepBack();                               // G4 specific
     void SetMaxNStep(Int_t maxNofSteps); 
     void ForceDecayTime(Float_t pdg);
     
@@ -71,6 +74,7 @@ class TG4StepManager
     G4Track* GetTrack() const;                            // G4 specific
     G4Step*  GetStep() const;                             // G4 specific
     TG4StepStatus GetStepStatus() const;                  // G4 specific
+    TG4Limits*    GetLimitsModifiedOnFly() const;         // G4 specific
         
         // tracking volume(s) 
     G4VPhysicalVolume* GetCurrentPhysicalVolume() const;  // G4 specific
@@ -157,6 +161,9 @@ class TG4StepManager
     /// \details that decides whether track properties will be returned from 
     /// PreStepPoint or PostStepPoint
     TG4StepStatus       fStepStatus; 
+    
+    /// \brief limits which step limit was modified during tracking
+    TG4Limits*          fLimitsModifiedOnFly;
 
     /// touchable history buffer    
     G4VTouchable*       fTouchableHistory;
@@ -209,5 +216,10 @@ inline TG4StepStatus TG4StepManager::GetStepStatus() const {
   return fStepStatus; 
 }
 
+inline TG4Limits* TG4StepManager::GetLimitsModifiedOnFly() const {
+  /// Return limits that has been modified on fly
+  return fLimitsModifiedOnFly;
+}
+  
 #endif //TG4_STEP_MANAGER_H
 

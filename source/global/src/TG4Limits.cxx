@@ -31,7 +31,8 @@ TG4Limits::TG4Limits(const TG4G3CutVector& cuts,
     fIsCut(false),
     fIsControl(false), 
     fCutVector(cuts),
-    fControlVector()
+    fControlVector(),
+    fDefaultMaxStep(DBL_MAX)
 {
 /// Standard constructor
 
@@ -50,7 +51,8 @@ TG4Limits::TG4Limits(const G4String& name,
     fIsCut(false),
     fIsControl(false),
     fCutVector(cuts),
-    fControlVector()
+    fControlVector(),
+    fDefaultMaxStep(DBL_MAX)
 {
 /// Standard constructor with specified \em name
 
@@ -66,7 +68,8 @@ TG4Limits::TG4Limits(const G4UserLimits& g4Limits,
     fIsCut(false),
     fIsControl(false),
     fCutVector(cuts),
-    fControlVector()
+    fControlVector(),
+    fDefaultMaxStep(DBL_MAX)
 {
 /// Standard constructor with specified \em g4Limits
 
@@ -226,6 +229,42 @@ void TG4Limits::SetG3DefaultControls()
 
   fControlVector.SetG3Defaults();
   fIsControl = true;
+}
+
+//_____________________________________________________________________________
+void TG4Limits::SetCurrentMaxAllowedStep(G4double step)
+{
+/// Set the new value of max step in the base class
+
+  //G4cout << "TG4Limits::SetCurrentMaxStep: in " << GetName() 
+  //       << " step " << step << G4endl;
+
+  fMaxStep = step;
+}  
+  
+
+//_____________________________________________________________________________
+void TG4Limits::SetDefaultMaxAllowedStep()
+{
+/// Set the max stap value in base class as the default value
+/// (in fDefaultMaxStep)
+
+  //G4cout << "TG4Limits::SetDefaultMaxAllowedStep: in " << GetName() 
+  //       << " step " << fMaxStep << G4endl;
+
+  fDefaultMaxStep = fMaxStep;
+}
+
+//_____________________________________________________________________________
+void TG4Limits::SetMaxAllowedStepBack()
+{
+/// Set the default max stap value (stored in  fDefaultMaxStep) back
+/// as the max step value in the base class 
+
+  //G4cout << "TG4Limits::SetMaxAllowedStepBack: in " << GetName() 
+  //       << " step " << fDefaultMaxStep << G4endl;
+
+  fMaxStep = fDefaultMaxStep;
 }
 
 //_____________________________________________________________________________

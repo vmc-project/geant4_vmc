@@ -30,6 +30,7 @@
 class G4UIcommand;
 class G4UIdirectory;
 class G4UIcmdWithAString;
+class G4UIcmdWithAnInteger;
 class G4UIcmdWithABool;
 class G4UIcmdWithoutParameter;
 
@@ -79,7 +80,9 @@ class TG4VGMMessenger: public G4UImessenger
     Geant4GM::Factory*     fG4Factory;      ///< Geant4 VGM Factory
     RootGM::Factory*       fRootFactory;    ///< Root VGM Factory
     XmlVGM::VExporter*     fXmlVGMExporter; ///< associated class
-    G4UIcmdWithAString*    fGenerateXMLCmd; ///< command: /xml/generateXXX
+    G4UIcmdWithAString*    fGenerateXMLCmd; ///< command: /vgm/generateXXX
+    G4UIcmdWithAnInteger*  fSetXMLNumWidthCmd; ///< command: /vgm/setXMLNumWidth
+    G4UIcmdWithAnInteger*  fSetXMLNumPrecisionCmd; ///< command: /vgm/setXMLNumPrecision
     G4UIcmdWithABool*      fSetAssembliesInNamesCmd; ///< command: /xml/setAssembliesInNames
     G4UIcmdWithAString*    fSetNameSeparatorCmd;     ///< command: /xml/setNameSeparator
 };

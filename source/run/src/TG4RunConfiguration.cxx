@@ -47,8 +47,9 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
                                          Bool_t specialStacking)
   : fUserGeometry(userGeometry),
     fPhysicsListSelection(physicsList),
-    fSpecialProcessSelection(specialProcess),
+    fSpecialProcessSelection(),
     fSpecialStacking(specialStacking),
+    fSpecialControls(false),
     fAGDDMessenger(0),
     fGDMLMessenger(0)
     
@@ -98,9 +99,19 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
           + TG4Globals::Endl());
     }
   }  
-  while ( token != "");         
-
-  if ( ! TG4SpecialPhysicsList::IsAvailableSelection(specialProcess.Data()) ) {
+  while ( token != ""); 
+  
+  G4String g4SpecialProcess(specialProcess.Data());
+  
+  if ( g4SpecialProcess.contains("specialControls") ) {
+    fSpecialControls = true;  
+    // remove "specialControls" from the string passsed to special physics list
+    g4SpecialProcess.erase(g4SpecialProcess.find("specialControls"), 15);
+    g4SpecialProcess.erase(g4SpecialProcess.find("++"), 1);
+  }  
+  fSpecialProcessSelection = g4SpecialProcess;
+  
+  if ( ! TG4SpecialPhysicsList::IsAvailableSelection(g4SpecialProcess) ) {
 
      TG4Globals::Exception(
       "TG4RunConfiguration", "TG4RunConfiguration",
@@ -284,5 +295,13 @@ Bool_t TG4RunConfiguration::IsSpecialStacking() const
 /// Return true if special stacking is activated
 
   return fSpecialStacking;
+}  
+
+//_____________________________________________________________________________
+Bool_t TG4RunConfiguration::IsSpecialControls() const
+{
+/// Return true if special controls are activated
+
+  return fSpecialControls;
 }  
 

@@ -23,6 +23,7 @@
 #include "TG4StackPopper.h"
 #include "TG4SensitiveDetector.h"
 #include "TG4SDServices.h"
+#include "TG4SpecialControlsV2.h"
 #include "TG4Globals.h"
 
 #include <TVirtualMC.h>
@@ -42,6 +43,7 @@ TG4TrackingAction::TG4TrackingAction()
   : G4UserTrackingAction(),
     TG4Verbose("trackingAction",2),    
     fMessenger(this),
+    fSpecialControls(0),
     fTrackManager(0),
     fPrimaryTrackID(0),
     fCurrentTrackID(0),
@@ -166,6 +168,9 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
     FinishPrimaryTrack();
   }  
 
+  // initialize special controls manager
+  if ( fSpecialControls ) fSpecialControls->StartTrack(track);
+
   // reset stack popper (if activated
   if ( TG4StackPopper::Instance() )
     TG4StackPopper::Instance()->Reset();
@@ -197,10 +202,8 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
     
 
   // verbose
-  if ( track->GetTrackID() == fNewVerboseTrackID) {
-    G4String command = "/tracking/verbose ";
-    TG4Globals::AppendNumberToString(command, fNewVerboseLevel);
-    G4UImanager::GetUIpointer()->ApplyCommand(command);
+  if ( track->GetTrackID() >= fNewVerboseTrackID) {
+    fpTrackingManager->SetVerboseLevel(fNewVerboseLevel);
   }    
 
   // VMC application pre track action
@@ -217,6 +220,14 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
 void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
 {
 /// Called by G4 kernel after finishing tracking.
+
+  // restore processes activation 
+  if ( fSpecialControls && fSpecialControls->IsApplicable() ) 
+    fSpecialControls->RestoreProcessActivations();
+    
+  // set back max step limit if it has been modified on fly by user
+  if ( TG4StepManager::Instance()->GetLimitsModifiedOnFly() )
+    TG4StepManager::Instance()->SetMaxStepBack();
 
   // set parent track particle index to the secondary tracks 
   fTrackManager->SetParentToTrackInformation(track);
@@ -246,7 +257,7 @@ void TG4TrackingAction::FinishPrimaryTrack()
     TG4StepManager* stepManager = TG4StepManager::Instance();
     G4Track* noTrack = 0;
     stepManager->SetStep(noTrack, kVertex);
-   
+
     // verbose
     Verbose();
 

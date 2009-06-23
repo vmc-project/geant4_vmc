@@ -96,6 +96,7 @@ class TG4RunConfiguration
     // get methods
     TString  GetUserGeometry() const;
     Bool_t   IsSpecialStacking() const;
+    Bool_t   IsSpecialControls() const;
 
   protected:
     // data members
@@ -103,6 +104,7 @@ class TG4RunConfiguration
     TString        fPhysicsListSelection;   ///< physics list selection
     TString        fSpecialProcessSelection;///< special process selection
     Bool_t         fSpecialStacking;        ///< option for special stacking
+    Bool_t         fSpecialControls;        ///< option for special controls
     G4UImessenger* fAGDDMessenger;          //!< XML messenger
     G4UImessenger* fGDMLMessenger;          //!< XML messenger
 

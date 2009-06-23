@@ -25,6 +25,7 @@
 #include <Rtypes.h>
 
 class TG4RunConfiguration;
+class TG4SpecialControlsV2;
 
 class G4RunManager;
 class G4UIsession;
@@ -92,6 +93,7 @@ class TG4RunManager : public TG4Verbose
     G4RunManager*         fRunManager;       ///< G4RunManager
     TG4RunMessenger       fMessenger;        ///< messenger
     TG4RunConfiguration*  fRunConfiguration; ///< TG4RunConfiguration
+    TG4SpecialControlsV2* fSpecialControls;  ///< special controls manager
     G4UIsession*          fGeantUISession;   ///< G4 UI 
     TApplication*         fRootUISession;    ///< Root UI 
     G4bool                fRootUIOwner;      ///< ownership of Root UI

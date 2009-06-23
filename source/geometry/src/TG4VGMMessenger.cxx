@@ -28,6 +28,7 @@
 #include <G4UIdirectory.hh>
 #include <G4UIcmdWithoutParameter.hh>
 #include <G4UIcmdWithAString.hh>
+#include <G4UIcmdWithAnInteger.hh>
 #include <G4UIcmdWithABool.hh>
 
 #include <TGeoManager.h>
@@ -88,6 +89,18 @@ TG4VGMMessenger::TG4VGMMessenger(const G4String& xmlFormat,
   fGenerateXMLCmd->SetDefaultValue("");
   fGenerateXMLCmd->AvailableForStates(G4State_Idle); 
 
+  cmdName = G4String("/vgm/set") + xmlFormat + G4String("NumWidth");
+  fSetXMLNumWidthCmd = new G4UIcmdWithAnInteger(cmdName, this);
+  fSetXMLNumWidthCmd->SetGuidance("Set number with for XML generation");
+  fSetXMLNumWidthCmd->SetParameterName("xmlNumWidth", false);
+  fSetXMLNumWidthCmd->AvailableForStates(G4State_Idle); 
+
+  cmdName = G4String("/vgm/set") + xmlFormat + G4String("NumPrecision");
+  fSetXMLNumPrecisionCmd = new G4UIcmdWithAnInteger(cmdName, this);
+  fSetXMLNumPrecisionCmd->SetGuidance("Set number precision for XML generation");
+  fSetXMLNumPrecisionCmd->SetParameterName("xmlNumPrecision", false);
+  fSetXMLNumPrecisionCmd->AvailableForStates(G4State_Idle); 
+
   fSetAssembliesInNamesCmd = new G4UIcmdWithABool("/vgm/setAssembliesInNames", this);
   fSetAssembliesInNamesCmd->SetGuidance("Activate/inactivate including the names of Root assemblies");
   fSetAssembliesInNamesCmd->SetGuidance("in volume names when exporting Root geometry.");
@@ -122,6 +135,8 @@ TG4VGMMessenger::~TG4VGMMessenger()
     fgGenerateRootCmd = 0;
   }  
   delete fGenerateXMLCmd;
+  delete fSetXMLNumWidthCmd;
+  delete fSetXMLNumPrecisionCmd;
   delete fSetAssembliesInNamesCmd;
   delete fSetNameSeparatorCmd;
 }
@@ -150,14 +165,12 @@ void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
   if ( fImportFactory == fG4Factory && !fG4Factory->Top()) {
     // Import Geant4 geometry in VGM
     // fG4Factory->SetDebug(1);
-    G4cout << "Import Geant4 geometry in VGM" << G4endl;
     fG4Factory->Import(TG4GeometryServices::Instance()->GetWorld());
   }
     
   if ( fImportFactory == fRootFactory && !fRootFactory->Top()) {
     // Import Root geometry in VGM
     // fRootFactory->SetDebug(1);
-    G4cout << "Import Root geometry in VGM" << G4endl;
     fRootFactory->Import(gGeoManager->GetTopNode());
   }  
 
@@ -175,6 +188,14 @@ void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
       fXmlVGMExporter->GenerateXMLGeometry();
     else 
       fXmlVGMExporter->GenerateXMLGeometry(newValues);
+  }        
+
+  if (command == fSetXMLNumWidthCmd) {    
+      fXmlVGMExporter->SetNumWidth(fSetXMLNumWidthCmd->GetNewIntValue(newValues));
+  }        
+
+  if (command == fSetXMLNumPrecisionCmd) {    
+      fXmlVGMExporter->SetNumPrecision(fSetXMLNumPrecisionCmd->GetNewIntValue(newValues));
   }        
 
 }

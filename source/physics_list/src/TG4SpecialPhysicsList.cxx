@@ -16,7 +16,6 @@
 
 #include "TG4SpecialPhysicsList.h"
 #include "TG4SpecialCutsPhysics.h"
-#include "TG4SpecialControlsPhysics.h"
 #include "TG4StepLimiterPhysics.h"
 #include "TG4StackPopperPhysics.h"
 #include "TG4UserParticlesPhysics.h"
@@ -46,7 +45,6 @@ G4String TG4SpecialPhysicsList::AvailableSelections()
   G4String selections;
   selections += "stepLimiter ";
   selections += "specialCuts ";
-  selections += "specialControls ";
   selections += "stackPopper ";
   
   return selections;
@@ -76,9 +74,7 @@ G4bool TG4SpecialPhysicsList::IsAvailableSelection(const G4String& selection)
 TG4SpecialPhysicsList::TG4SpecialPhysicsList(const G4String& selection)
   : G4VModularPhysicsList(),
     TG4Verbose("specialPhysicsList"),
-    //fMessenger(this),
     fStackPopperPhysics(0),
-    fIsSpecialControls(false),
     fIsSpecialCuts(false)
 {
 /// Standard constructor
@@ -99,9 +95,7 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList(const G4String& selection)
 TG4SpecialPhysicsList::TG4SpecialPhysicsList()
   : G4VModularPhysicsList(),
     TG4Verbose("physicsList"),
-    //fMessenger(this),
     fStackPopperPhysics(0),
-    fIsSpecialControls(false),
     fIsSpecialCuts(false)
 {
 /// Default constructor
@@ -139,13 +133,8 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
   G4int itoken = 0;
   TString token = TG4Globals::GetToken(itoken, selection);
   while ( token != "" ) {
-      
-    if ( token == "specialControls" ) {
-      // G4cout << "Registering special controls physics" << G4endl;
-      RegisterPhysics(new TG4SpecialControlsPhysics(verboseLevel));
-      fIsSpecialControls = true;
-    }  
-    else if ( token == "specialCuts" ) { 
+
+    if ( token == "specialCuts" ) { 
       // G4cout << "Registering special cuts physics" << G4endl;
       RegisterPhysics(new TG4SpecialCutsPhysics(verboseLevel));
       fIsSpecialCuts = true;

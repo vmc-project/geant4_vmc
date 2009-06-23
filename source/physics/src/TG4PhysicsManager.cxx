@@ -367,9 +367,7 @@ void TG4PhysicsManager::SetSpecialControlsActivation()
   TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
   
   TG4G3ControlVector* controlVector = g3PhysicsManager->GetControlVector();
-  TG4boolVector*    isControlVector = g3PhysicsManager->GetIsControlVector(); 
-
-  if ( ! controlVector || ! isControlVector ) {
+  if ( ! controlVector  ) {
     TG4Globals::Exception(
       "TG4PhysicsManager", "SetSpecialControlsActivation",
       "Vectors of processes controls is not set.");
@@ -404,36 +402,8 @@ void TG4PhysicsManager::SetSpecialControlsActivation()
           SetProcessActivation(processManager, i, activate);         
         }
       }
-    }          
-     
-    // activate or inactivate the special controls processes according to 
-    // setting in the isControl vector in G3 physics manager
-    //
-    //G4bool specialControls 
-    //  = TG4GeometryServices::Instance()->IsSpecialControls();  
-    G4bool specialControls 
-      = g3PhysicsManager->IsSpecialControls();  
-    TG4G3ParticleWSP particleWSP 
-      = g3PhysicsManager->GetG3ParticleWSP(particle);
-
-    if ( specialControls && particleWSP != kNofParticlesWSP ) { 
-      // special process is activated in case
-      // isControlVector in G3 physics manager is set
-      // or the special control is set by TG4Limits
-  
-      // get the special cut process (if it was instantiated)
-      G4String processName = "specialControls";
-      G4VProcess* process = FindProcess(processName);
-      if ( ! process ) {
-        TG4Globals::Exception(
-          "TG4PhysicsManager", "SetSpecialControlsActivation",
-          "The special control process for is not defined.");
-      }
-       
-      G4int index = processManager->GetProcessIndex(process);
-      SetProcessActivation(processManager, index, (*isControlVector)[particleWSP]); 
     }
-  }  
+  }            
 }
 
 //_____________________________________________________________________________
@@ -808,9 +778,7 @@ void TG4PhysicsManager::SetProcessActivation()
 /// to the setup in TG4G3PhysicsManager::fControlVector.
 
   if (  TG4SpecialPhysicsList::Instance() &&
-        TG4SpecialPhysicsList::Instance()->IsSpecialControls() &&
-      ( TG4G3PhysicsManager::Instance()->IsGlobalSpecialControls() ||
-        TG4G3PhysicsManager::Instance()->IsSpecialControls() ) ) {
+        TG4G3PhysicsManager::Instance()->IsGlobalSpecialControls() ) {
        
     SetSpecialControlsActivation();
   }  

@@ -624,6 +624,9 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
     if (lv->GetMaterial()->GetDensity() < fgLimitDensity ) 
       tg4Limits->SetMaxAllowedStep(fgMaxStep);
       
+    // set max step the default value
+     tg4Limits->SetDefaultMaxAllowedStep(); 
+      
     // update controls in limits according to the setup 
     // in the passed vector
     tg4Limits->Update(controls);

@@ -165,7 +165,6 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("specialCutForForOther", kPStop); 
   mcMap->Add("specialCutForElectron", kPStop); 
   mcMap->Add("specialCutForElectron", kPStop); 
-  mcMap->Add("specialControls", kPNull); 
   mcMap->Add("stackPopper", kPNull); 
              /// \todo Add kPUserDefined
   

@@ -24,6 +24,7 @@
 
 class TG4TrackInformation;
 class TG4TrackManager;
+class TG4SpecialControlsV2;
 
 class G4Track;
 
@@ -61,6 +62,7 @@ class TG4TrackingAction : public G4UserTrackingAction,
     void SetNewVerboseLevel(G4int level);
     void SetNewVerboseTrackID(G4int trackID);
     void SetSaveSecondaries(G4bool saveSecondaries);
+    void SetSpecialControls(TG4SpecialControlsV2* specialControls);
 
     // get methods
     G4bool GetSaveSecondaries() const;
@@ -84,8 +86,11 @@ class TG4TrackingAction : public G4UserTrackingAction,
     /// messenger
     TG4TrackingActionMessenger  fMessenger; 
     
+    /// the special controls manager
+    TG4SpecialControlsV2*  fSpecialControls;
+    
     /// track manager 
-    TG4TrackManager*            fTrackManager;
+    TG4TrackManager*  fTrackManager;
     
     /// current primary track ID 
     G4int   fPrimaryTrackID;
@@ -120,6 +125,11 @@ inline void TG4TrackingAction::PostTrackingAction(const G4Track* /*aTrack*/) {
   /// Dummy post-tracking action that can be overriden
   /// in a user defined class
 }
+
+inline void TG4TrackingAction::SetSpecialControls(TG4SpecialControlsV2* specialControls) {
+  /// Return special controls manager
+  fSpecialControls = specialControls;
+}  
 
 inline G4bool TG4TrackingAction::GetSaveSecondaries() const { 
   /// Return control for saving secondaries in the VMC stack

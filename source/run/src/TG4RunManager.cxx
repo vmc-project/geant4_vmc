@@ -32,6 +32,7 @@
 #include "TG4EventAction.h"
 #include "TG4TrackingAction.h"
 #include "TG4SteppingAction.h"
+#include "TG4SpecialControlsV2.h"
 
 #include <G4RunManager.hh>
 #include <G4UIsession.hh>
@@ -110,6 +111,7 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration)
     fRunManager(0),
     fMessenger(this),
     fRunConfiguration(runConfiguration),
+    fSpecialControls(0),
     fGeantUISession(0),
     fRootUISession(0),
     fRootUIOwner(false),
@@ -165,6 +167,7 @@ TG4RunManager::~TG4RunManager()
 /// Destructor
 
   delete fRunConfiguration;
+  delete fSpecialControls;
   delete fGeantUISession;
   delete fRunManager;
   if (fRootUIOwner) delete fRootUISession;
@@ -249,6 +252,15 @@ void TG4RunManager::ConfigureRunManager()
 
   G4UserStackingAction* stackingAction = fRunConfiguration->CreateStackingAction(); 
   if ( stackingAction) fRunManager->SetUserAction(stackingAction);
+  
+  // Special controls action
+  //
+  if ( fRunConfiguration->IsSpecialControls() ) {
+    // add test if both tracking action and stepping action
+    fSpecialControls = new TG4SpecialControlsV2();
+    trackingAction->SetSpecialControls(fSpecialControls);
+    steppingAction->SetSpecialControls(fSpecialControls);
+  }  
 }
 
 //_____________________________________________________________________________

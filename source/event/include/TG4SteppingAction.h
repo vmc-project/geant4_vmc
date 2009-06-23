@@ -23,6 +23,8 @@
 
 #include <globals.hh>
 
+class TG4SpecialControlsV2;
+
 class G4Track;
 class G4Step;
 
@@ -61,6 +63,7 @@ class TG4SteppingAction : public G4UserSteppingAction
     void SetLoopVerboseLevel(G4int level);
     void SetMaxNofSteps(G4int number);
     void SetSaveSecondaries(G4bool saveSecondaries);
+    void SetSpecialControls(TG4SpecialControlsV2* specialControls);
 
     // get methods
     G4int GetLoopVerboseLevel() const;
@@ -86,6 +89,9 @@ class TG4SteppingAction : public G4UserSteppingAction
     /// messenger    
     TG4SteppingActionMessenger  fMessenger;
     
+    /// the special controls manager
+    TG4SpecialControlsV2*  fSpecialControls;
+
     /// max number of allowed steps
     G4int  fMaxNofSteps;
     
@@ -122,6 +128,11 @@ inline void TG4SteppingAction::SetLoopVerboseLevel(G4int level) {
 inline void TG4SteppingAction::SetMaxNofSteps(G4int number) { 
   /// Set maximum number of steps allowed 
   fMaxNofSteps = number; 
+}
+
+inline void TG4SteppingAction::SetSpecialControls(TG4SpecialControlsV2* specialControls)  { 
+  /// Set special controls manager
+  fSpecialControls = specialControls; 
 }
 
 inline G4int TG4SteppingAction::GetMaxNofSteps() const { 

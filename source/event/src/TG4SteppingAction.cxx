@@ -15,10 +15,13 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SteppingAction.h"
+#include "TG4StepManager.h"
 #include "TG4TrackManager.h"
 #include "TG4TrackingAction.h"
 #include "TG4SensitiveDetector.h"
+#include "TG4SpecialControlsV2.h"
 #include "TG4SDServices.h"
+#include "TG4Limits.h"
 #include "TG4Globals.h"
 
 #include <G4Track.hh>
@@ -33,6 +36,7 @@ TG4SteppingAction* TG4SteppingAction::fgInstance = 0;
 TG4SteppingAction::TG4SteppingAction() 
   : G4UserSteppingAction(),
     fMessenger(this),
+    fSpecialControls(0), 
     fMaxNofSteps(kMaxNofSteps),
     fStandardVerboseLevel(-1),
     fLoopVerboseLevel(1),
@@ -114,7 +118,8 @@ void TG4SteppingAction::PrintTrackInfo(const G4Track* track) const
 //
 // public methods
 //
-
+#include "TGeoVolume.h"
+#include "TGeoManager.h"
 //_____________________________________________________________________________
 void TG4SteppingAction::UserSteppingAction(const G4Step* step)
 {
@@ -122,6 +127,27 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
  
   G4Track* track = step->GetTrack();  
   G4int stepNumber = track->GetCurrentStepNumber();
+
+/*
+  // TO BE REMOVED   
+  G4LogicalVolume* currLV 
+    = step->GetPreStepPoint()->GetPhysicalVolume()->GetLogicalVolume();
+
+  G4UserLimits* limits 
+     = currLV->GetUserLimits();
+
+  if ( ! limits ) {
+    TGeoVolume* tgeoLV = gGeoManager->FindVolumeFast(currLV->GetName());
+    
+    G4cout << "No limits in  " <<  currLV->GetName() 
+           << "  TGeo volume  " << tgeoLV << "  with medium  ";
+    if ( tgeoLV ) 
+       G4cout <<  tgeoLV->GetMedium() << G4endl;
+    else      
+       G4cout <<  "-" << G4endl;
+  }     
+  // END TO BE REMOVED 
+*/              
 
   // stop track if maximum number of steps has been reached
   // 
@@ -189,34 +215,56 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
   // save secondaries
   if ( fSaveSecondaries ) 
     TG4TrackManager::Instance()->SaveSecondaries(track, step->GetSecondary());
+    
+  // apply special controls if init step or if crossing geometry border  
+  if ( step->GetPostStepPoint()->GetStepStatus() == fGeomBoundary &&
+       fSpecialControls && fSpecialControls->IsApplicable() ) {
+       
+      fSpecialControls->ApplyControls(); 
+  }   
         
   // call stepping action of derived class
   SteppingAction(step);
 
-  // let sensitive detector process boundary step
-  // if crossing geometry border
-  // (this ensures compatibility with G3 that
-  // makes boundary step of zero length)
+  // actions on the boundary
+  if (  step->GetPostStepPoint()->GetStepStatus() == fGeomBoundary ) {
+  
+    // set back max step limit if it has been modified on fly by user
+    G4UserLimits* modifiedLimits
+      = TG4StepManager::Instance()->GetLimitsModifiedOnFly();
+      
+    if ( modifiedLimits ) { 
+      G4UserLimits* nextLimits 
+        = step->GetPostStepPoint()
+            ->GetPhysicalVolume()->GetLogicalVolume()->GetUserLimits();
 
-  if (step->GetPostStepPoint()->GetStepStatus() == fGeomBoundary &&
-      step->GetTrack()->GetNextVolume() != 0) {
+      if ( nextLimits != modifiedLimits )
+        TG4StepManager::Instance()->SetMaxStepBack();
+    }    
+
+    // let sensitive detector process boundary step
+    // if crossing geometry border
+    // (this ensures compatibility with G3 that
+    // makes boundary step of zero length)
+    if ( step->GetTrack()->GetNextVolume() != 0) {
 
 #ifdef MCDEBUG
-    TG4SensitiveDetector* tsd
-      = TG4SDServices::Instance()
-           ->GetSensitiveDetector(
-                step->GetPostStepPoint()->GetPhysicalVolume()
-                    ->GetLogicalVolume()->GetSensitiveDetector());
+      TG4SensitiveDetector* tsd
+        = TG4SDServices::Instance()
+             ->GetSensitiveDetector(
+                  step->GetPostStepPoint()->GetPhysicalVolume()
+                      ->GetLogicalVolume()->GetSensitiveDetector());
 
-    if (tsd) tsd->ProcessHitsOnBoundary((G4Step*)step);
+      if (tsd) tsd->ProcessHitsOnBoundary((G4Step*)step);
 #else
-    TG4SensitiveDetector* tsd
-      = (TG4SensitiveDetector*) step->GetPostStepPoint()->GetPhysicalVolume()
-          ->GetLogicalVolume()->GetSensitiveDetector();
+      TG4SensitiveDetector* tsd
+        = (TG4SensitiveDetector*) step->GetPostStepPoint()->GetPhysicalVolume()
+            ->GetLogicalVolume()->GetSensitiveDetector();
 
-    if (tsd) tsd->ProcessHitsOnBoundary((G4Step*)step);
+      if (tsd) tsd->ProcessHitsOnBoundary((G4Step*)step);
 #endif     
-  }  
+    }
+  }        
 }
 
 //_____________________________________________________________________________
@@ -224,8 +272,6 @@ void TG4SteppingAction::SetSaveSecondaries(G4bool saveSecondaries)
 { 
 /// Set control for saving secondaries in the VMC stack and pass it
 /// to TG4 stack manager
-
-  G4cout << "TG4SteppingAction::SetSaveSecondaries  " << saveSecondaries << G4endl;
 
   fSaveSecondaries = saveSecondaries; 
   TG4TrackManager::Instance()->SetSaveSecondaries(saveSecondaries, true);
