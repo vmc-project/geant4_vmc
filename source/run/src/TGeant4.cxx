@@ -1017,7 +1017,7 @@ TString   TGeant4::ParticleName(Int_t pdg) const
 /// Return name of G4 particle specified by pdg.
 
   if ( ! CheckG4ApplicationState("ParticleName", G4State_Idle, true ) ) 
-    return 0;
+    return "";
 
   return fPhysicsManager->ParticleName(pdg);
 }  
