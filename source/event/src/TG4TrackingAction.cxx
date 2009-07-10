@@ -116,14 +116,11 @@ void TG4TrackingAction::Verbose() const
 /// Print primary track ID with a frequence defined
 /// by verbose level.
 
-  if (VerboseLevel() == 3) { 
-    G4cout << "$$$ Primary track " << fPrimaryTrackID << G4endl;
-  } 
-  else if (VerboseLevel() == 2 &&  fPrimaryTrackID % 10 == 0 ) {
-    G4cout << "$$$ Primary track " << fPrimaryTrackID  << G4endl;
-  } 
-  else if (VerboseLevel() == 1 &&  fPrimaryTrackID % 100 == 0 ) {
-    G4cout << "$$$ Primary track " << fPrimaryTrackID  << G4endl;
+  if ( ( VerboseLevel() == 1 &&  fPrimaryTrackID % 100 == 0 ) ||
+       ( VerboseLevel() == 2 &&  fPrimaryTrackID % 10  == 0 ) ||
+         VerboseLevel() == 3 ) {
+          
+    G4cout << "$$$X Primary track " << fPrimaryTrackID << G4endl;
   } 
 }
 
@@ -202,7 +199,7 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
     
 
   // verbose
-  if ( track->GetTrackID() >= fNewVerboseTrackID) {
+  if ( track->GetTrackID() == fNewVerboseTrackID) {
     fpTrackingManager->SetVerboseLevel(fNewVerboseLevel);
   }    
 
