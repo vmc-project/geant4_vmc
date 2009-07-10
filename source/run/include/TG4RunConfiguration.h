@@ -97,6 +97,7 @@ class TG4RunConfiguration
     TString  GetUserGeometry() const;
     Bool_t   IsSpecialStacking() const;
     Bool_t   IsSpecialControls() const;
+    Bool_t   IsSpecialCuts() const;
 
   protected:
     // data members
@@ -105,6 +106,7 @@ class TG4RunConfiguration
     TString        fSpecialProcessSelection;///< special process selection
     Bool_t         fSpecialStacking;        ///< option for special stacking
     Bool_t         fSpecialControls;        ///< option for special controls
+    Bool_t         fSpecialCuts;            ///< option for special cuts
     G4UImessenger* fAGDDMessenger;          //!< XML messenger
     G4UImessenger* fGDMLMessenger;          //!< XML messenger
 

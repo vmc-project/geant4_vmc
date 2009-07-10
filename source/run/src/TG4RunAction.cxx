@@ -20,6 +20,7 @@
 
 #include "TG4RunAction.h"
 #include "TG4Globals.h"
+#include "TG4RegionsManager.h"
 
 #include <G4Run.hh>
 
@@ -58,6 +59,11 @@ void TG4RunAction::BeginOfRunAction(const G4Run* run)
     G4cout << "### Run " << run->GetRunID() << " start." << G4endl;
   }
     
+  if ( TG4RegionsManager::Instance() &&
+       TG4RegionsManager::Instance()->IsCheck() ) {
+    TG4RegionsManager::Instance()->CheckRegions();
+  }  
+
   fTimer->Start();
 }
 

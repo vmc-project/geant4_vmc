@@ -50,6 +50,7 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
     fSpecialProcessSelection(),
     fSpecialStacking(specialStacking),
     fSpecialControls(false),
+    fSpecialCuts(false),
     fAGDDMessenger(0),
     fGDMLMessenger(0)
     
@@ -70,7 +71,6 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
          + TG4Globals::Endl() +
       "geomVMCtoGeant4 geomVMCtoRoot geomRoot geomRootToGeant4 geomGeant4");
   }
-   
 
   G4int itoken = 0;
   G4String token;
@@ -111,6 +111,10 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
   }  
   fSpecialProcessSelection = g4SpecialProcess;
   
+  if ( g4SpecialProcess.contains("specialCuts") ) {
+    fSpecialCuts = true;  
+  }  
+
   if ( ! TG4SpecialPhysicsList::IsAvailableSelection(g4SpecialProcess) ) {
 
      TG4Globals::Exception(
@@ -303,5 +307,13 @@ Bool_t TG4RunConfiguration::IsSpecialControls() const
 /// Return true if special controls are activated
 
   return fSpecialControls;
+}  
+
+//_____________________________________________________________________________
+Bool_t TG4RunConfiguration::IsSpecialCuts() const
+{
+/// Return true if special controls are activated
+
+  return fSpecialCuts;
 }  
 

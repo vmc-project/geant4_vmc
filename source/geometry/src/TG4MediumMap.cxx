@@ -20,13 +20,15 @@
 #include "TG4Globals.h"
 
 #include <G4LogicalVolume.hh>
+#include <G4Material.hh>
 
 #include <iomanip>
 
 //_____________________________________________________________________________
 TG4MediumMap::TG4MediumMap() 
   : fIdMap(),
-    fLVMap()
+    fLVMap(),
+    fMaterialMap()
 {
 /// Default constructor
 }
@@ -88,6 +90,10 @@ void TG4MediumMap::MapMedium(G4LogicalVolume* lv, G4int mediumID)
   }  
   
   fLVMap[lv]= medium;
+  
+  if ( fMaterialMap.find(lv->GetMaterial()) == fMaterialMap.end() ) {
+    fMaterialMap[lv->GetMaterial()]= medium; 
+  }  
 }  
 
 //_____________________________________________________________________________
@@ -157,6 +163,24 @@ TG4Medium* TG4MediumMap::GetMedium(G4int mediumID, G4bool warn) const
 }  
 
 //_____________________________________________________________________________
+TG4Medium*  TG4MediumMap::GetMedium(const G4String& name, G4bool warn) const
+{
+/// Return medium with the given name
+
+  std::map<G4int, TG4Medium*>::const_iterator it;
+  for ( it = fIdMap.begin(); it != fIdMap.end(); ++it ) 
+    if ( it->second->GetName() == name ) return it->second;
+    
+  // Give warning if not found
+  if ( warn ) {
+    TG4Globals::Warning(
+      "TG4MediumMap", "GetMedium",
+      "Medium " + TString(name) + " is not found.");
+  }    
+  return 0;
+}  
+
+//_____________________________________________________________________________
 TG4Medium*  TG4MediumMap::GetMedium(G4LogicalVolume* lv, G4bool warn) const
 {
 /// Return medium for the given lv
@@ -177,19 +201,22 @@ TG4Medium*  TG4MediumMap::GetMedium(G4LogicalVolume* lv, G4bool warn) const
 }  
 
 //_____________________________________________________________________________
-TG4Medium*  TG4MediumMap::GetMedium(const G4String& name, G4bool warn) const
+TG4Medium*  TG4MediumMap::GetMedium(const G4Material* material, G4bool warn) const
 {
-/// Return medium with the given name
+/// Return medium for the given material
 
-  std::map<G4int, TG4Medium*>::const_iterator it;
-  for ( it = fIdMap.begin(); it != fIdMap.end(); ++it ) 
-    if ( it->second->GetName() == name ) return it->second;
+  std::map<const G4Material*, TG4Medium*>::const_iterator it 
+    = fMaterialMap.find(material);
     
-  // Give warning if not found
-  if ( warn ) {
-    TG4Globals::Warning(
-      "TG4MediumMap", "GetMedium",
-      "Medium " + TString(name) + " is not found.");
-  }    
-  return 0;
+  if ( it == fMaterialMap.end() ) {
+    if ( warn ) {
+      TG4Globals::Warning(
+        "TG4MediumMap", "GetMedium",
+        "Medium for material " + TString(material->GetName()) + " is not found.");
+    }        
+    return 0;
+  }  
+
+  return it->second;
 }  
+

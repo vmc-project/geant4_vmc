@@ -746,9 +746,22 @@ TG4GeometryServices::FindLimits(const G4String& name, G4bool silent) const
   if (!silent) {
     TG4Globals::Warning(
       "TG4GeometryServices", "FindLimits", 
-      "Logical volume " + TString(name) + " not found.");
+      "Limits " + TString(name) + " not found.");
   }
   return 0;                                
+}  
+
+//_____________________________________________________________________________
+TG4Limits* 
+TG4GeometryServices::FindLimits(const G4Material* material, G4bool silent) const
+{
+/// Find limits with the specified name.
+
+  // Get medium 
+  TG4Medium* medium = fMediumMap->GetMedium(material, !silent);
+  if ( ! medium ) return 0;
+  
+  return FindLimits(medium->GetName(), silent);
 }  
 
 //_____________________________________________________________________________
@@ -881,4 +894,3 @@ G4Material* TG4GeometryServices::FindMaterial(G4double* a, G4double* z,
   delete [] weight;  
   return found;   
 }
-

@@ -67,7 +67,9 @@ TG4G3PhysicsManager::~TG4G3PhysicsManager()
 {
 /// Destructor
 
-//  delete fIsCutVector;
+  delete fCutVector;
+  delete fControlVector;
+  delete fIsCutVector;
   delete fIsControlVector;
 }
 

@@ -33,6 +33,7 @@
 #include "TG4TrackingAction.h"
 #include "TG4SteppingAction.h"
 #include "TG4SpecialControlsV2.h"
+#include "TG4RegionsManager.h"
 
 #include <G4RunManager.hh>
 #include <G4UIsession.hh>
@@ -64,6 +65,8 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
     fRunManager(0),
     fMessenger(this),
     fRunConfiguration(runConfiguration),
+    fSpecialControls(0),
+    fRegionsManager(0),
     fGeantUISession(0),
     fRootUISession(0),
     fRootUIOwner(false),
@@ -112,6 +115,7 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration)
     fMessenger(this),
     fRunConfiguration(runConfiguration),
     fSpecialControls(0),
+    fRegionsManager(0),
     fGeantUISession(0),
     fRootUISession(0),
     fRootUIOwner(false),
@@ -168,6 +172,7 @@ TG4RunManager::~TG4RunManager()
 
   delete fRunConfiguration;
   delete fSpecialControls;
+  delete fRegionsManager;
   delete fGeantUISession;
   delete fRunManager;
   if (fRootUIOwner) delete fRootUISession;
@@ -260,6 +265,12 @@ void TG4RunManager::ConfigureRunManager()
     fSpecialControls = new TG4SpecialControlsV2();
     trackingAction->SetSpecialControls(fSpecialControls);
     steppingAction->SetSpecialControls(fSpecialControls);
+  }
+  
+  // Regions manager
+  //
+  if ( fRunConfiguration->IsSpecialCuts() ) {
+    fRegionsManager = new TG4RegionsManager();
   }  
 }
 
@@ -370,6 +381,9 @@ void TG4RunManager::LateInitialize()
   TG4GeometryManager::Instance()
     ->SetUserLimits(*TG4G3PhysicsManager::Instance()->GetCutVector(),
                     *TG4G3PhysicsManager::Instance()->GetControlVector());
+
+  // convert tracking cuts in range cuts per regions
+  if ( fRegionsManager ) fRegionsManager->DefineRegions();
 
   // activate/inactivate physics processes
   TG4PhysicsManager::Instance()->SetProcessActivation();

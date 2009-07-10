@@ -24,7 +24,7 @@
 class TG4Medium;
 
 class G4LogicalVolume;
-class G4UserLimits;
+class G4Material;
 
 /// \ingroup geometry
 /// \brief The map of media to logical volumes
@@ -46,8 +46,9 @@ class TG4MediumMap
     // get methods
     G4int       GetNofMedia() const;
     TG4Medium*  GetMedium(G4int mediumID, G4bool warn = true) const;
-    TG4Medium*  GetMedium(G4LogicalVolume* lv, G4bool warn = true) const;
     TG4Medium*  GetMedium(const G4String& name, G4bool warn = true) const;
+    TG4Medium*  GetMedium(G4LogicalVolume* lv, G4bool warn = true) const;
+    TG4Medium*  GetMedium(const G4Material* material, G4bool warn = true) const;
 
   private:
     /// Not implemented
@@ -59,10 +60,13 @@ class TG4MediumMap
     // data members
     
     /// map of medias to their IDs
-    std::map<G4int, TG4Medium*>            fIdMap;
+    std::map<G4int, TG4Medium*>             fIdMap;
     
     /// map of medias to the logical volumes
-    std::map<G4LogicalVolume*, TG4Medium*> fLVMap;
+    std::map<G4LogicalVolume*, TG4Medium*>  fLVMap;
+
+    /// map of materials to medias
+    std::map<const G4Material*, TG4Medium*> fMaterialMap;
 };
 
 
