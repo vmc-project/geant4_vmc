@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -19,11 +19,11 @@ Processing test_E06.C("g3tgeoConfig.C", kFALSE)...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766882791    2DB5B3E7 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766417431    2DAE9A17 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766905829   766882791
-                                        HEX    2DB60DE5    2DB5B3E7
+          with Store/Table at absolute adrs   766440469   766417431
+                                        HEX    2DAEF415    2DAE9A17
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -52,23 +52,23 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
 Info in <TGeoManager::CloseGeometry>: 3 nodes/ 3 volume UID's in E06 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
-Warning in <TGeant3TGeo::SetMaterialProperty>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::SetMaterialProperty>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::SetMaterialProperty>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::SetMaterialProperty>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::SetMaterialProperty>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::SetMaterialProperty>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::SetMaterialProperty>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::DefineOpSurface>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::SetBorderSurface>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::DefineOpSurface>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::SetSkinSurface>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::SetMaterialProperty>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::SetMaterialProperty>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::SetMaterialProperty>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::SetMaterialProperty>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::SetMaterialProperty>: Not applicable in Geant3 - setting is ignored.
-Warning in <TGeant3TGeo::SetMaterialProperty>: Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::DefineOpSurface>: Called for surface WaterSurface. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetBorderSurface>: Called for border surface WaterSurface. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::DefineOpSurface>: Called for surface AirSurface. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetSkinSurface>: Called for skin surface AirSurface. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material surface  WaterSurface. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material surface  WaterSurface. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material surface  WaterSurface. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material surface  WaterSurface. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material surface  AirSurface. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material surface  AirSurface. Not applicable in Geant3 - setting is ignored.
 
  Calculating cross section tables, see gphysi.dat for more information
 

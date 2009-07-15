@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -19,11 +19,11 @@ Processing test_E03_1.C("g3tgeoConfig.C", kTRUE)...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766908391    2DB617E7 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766739991    2DB38617 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766931429   766908391
-                                        HEX    2DB671E5    2DB617E7
+          with Store/Table at absolute adrs   766763029   766739991
+                                        HEX    2DB3E015    2DB38617
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -104,14 +104,14 @@ MediumId: Medium Beam not found
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -122,11 +122,11 @@ Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 --- Init MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766733287    2DB36BE7 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766709271    2DB30E17 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766756325   766733287
-                                        HEX    2DB3C5E5    2DB36BE7
+          with Store/Table at absolute adrs   766732309   766709271
+                                        HEX    2DB36815    2DB30E17
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -516,14 +516,14 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -534,11 +534,11 @@ Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 --- Init MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766457831    2DAF37E7 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766609943    2DB18A17 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766480869   766457831
-                                        HEX    2DAF91E5    2DAF37E7
+          with Store/Table at absolute adrs   766632981   766609943
+                                        HEX    2DB1E415    2DB18A17
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -664,14 +664,14 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -681,11 +681,11 @@ Processing test_E03_4.C("g3tgeoConfig.C", kTRUE)...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766669799    2DB273E7 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766418455    2DAE9E17 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766692837   766669799
-                                        HEX    2DB2CDE5    2DB273E7
+          with Store/Table at absolute adrs   766441493   766418455
+                                        HEX    2DAEF815    2DAE9E17
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

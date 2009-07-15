@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -20,10 +20,9 @@ Loading Geant4 libraries ...
 Loading VGM libraries ... 
 Loading G4root library ...
 Loading geant4vmc library ...
-Loading geant4vmc_gui library ... 
 
 *************************************************************
- Geant4 version Name: geant4-09-02    (19-December-2008)
+ Geant4 version Name: geant4-09-02-patch-01    (13-March-2009)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -102,20 +101,20 @@ Instantiated 6 volume table entries
 ---> Begin of event: 5
    Absorber: total energy (MeV): 925.754       total track length (cm):  60.8118
    Gap:      total energy (MeV): 23.0898       total track length (cm):  11.1473
-Time of this run:   User=0.33s Real=0.33s Sys=0s
+Time of this run:   User=0.47s Real=0.47s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -126,11 +125,10 @@ Loading Geant4 libraries ...
 Loading VGM libraries ... 
 Loading G4root library ...
 Loading geant4vmc library ...
-Loading geant4vmc_gui library ... 
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-09-02    (19-December-2008)
+ Geant4 version Name: geant4-09-02-patch-01    (13-March-2009)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -843,7 +841,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  50.000       total track length (cm):    3.330
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.02s Real=0.02s Sys=0s
+Time of this run:   User=0.01s Real=0.02s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
 WARNING - Attempt to delete the physical volume store while geometry closed !
@@ -854,14 +852,14 @@ WARNING - Attempt to delete the region store while geometry closed !
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -872,11 +870,10 @@ Loading Geant4 libraries ...
 Loading VGM libraries ... 
 Loading G4root library ...
 Loading geant4vmc library ...
-Loading geant4vmc_gui library ... 
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-09-02    (19-December-2008)
+ Geant4 version Name: geant4-09-02-patch-01    (13-March-2009)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -970,43 +967,43 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
   Particle = neutron     Track ID = 2     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.463    0.000    0.000   285.3411    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    2.294   -2.035   285.3411    0.0000    3.214    3.214     ABSO  Transportation
-#   2    -6.500    2.294   -2.035   285.3411    0.0000    0.000    3.214     GAPX  No active process
-#   3    -6.000    3.484   -3.091   285.3411    0.0000    1.668    4.882     GAPX  Transportation
-#   4    -6.000    3.484   -3.091   285.3411    0.0000    0.000    4.882     ABSO  No active process
-#   5    -5.364    5.000   -4.436   285.3411    0.0000    2.124    7.006     ABSO  Transportation
-#   6    -5.364    5.000   -4.436   285.3411    0.0000    0.000    7.006     WRLD  No active process
-#   7    -4.944    6.000   -5.324   285.3411    0.0000    1.401    8.408     WRLD  Transportation
+#   0    -7.463    0.000    0.000   285.3693    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500    2.294   -2.035   285.3693    0.0000    3.214    3.214     ABSO  Transportation
+#   2    -6.500    2.294   -2.035   285.3693    0.0000    0.000    3.214     GAPX  No active process
+#   3    -6.000    3.484   -3.091   285.3693    0.0000    1.668    4.882     GAPX  Transportation
+#   4    -6.000    3.484   -3.091   285.3693    0.0000    0.000    4.882     ABSO  No active process
+#   5    -5.364    5.000   -4.436   285.3693    0.0000    2.124    7.006     ABSO  Transportation
+#   6    -5.364    5.000   -4.436   285.3693    0.0000    0.000    7.006     WRLD  No active process
+#   7    -4.944    6.000   -5.324   285.3693    0.0000    1.401    8.408     WRLD  Transportation
 
 ****************************************************************************************************
   Particle = Alpha     Track ID = 3     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.463    0.000    0.000    81.9465    0.0000    0.000    0.000     ABSO  No active process
-#   1    -7.471   -0.019    0.017    68.1404   13.8061    0.027    0.027     ABSO  Energy loss
-#   2    -7.479   -0.036    0.033    54.0615   14.0788    0.024    0.051     ABSO  Energy loss
-#   3    -7.486   -0.051    0.046    38.6638   15.3977    0.021    0.073     ABSO  Energy loss
-#   4    -7.491   -0.063    0.059    21.4249   17.2389    0.018    0.090     ABSO  Energy loss
-#   5    -7.494   -0.069    0.068     0.0000   21.4249    0.011    0.102     ABSO  Energy loss
+#   0    -7.463    0.000    0.000    81.9564    0.0000    0.000    0.000     ABSO  No active process
+#   1    -7.471   -0.019    0.017    68.1499   13.8064    0.027    0.027     ABSO  Energy loss
+#   2    -7.479   -0.036    0.033    54.0712   14.0787    0.024    0.051     ABSO  Energy loss
+#   3    -7.486   -0.051    0.046    38.6744   15.3969    0.021    0.073     ABSO  Energy loss
+#   4    -7.491   -0.063    0.059    21.4387   17.2357    0.018    0.090     ABSO  Energy loss
+#   5    -7.494   -0.069    0.068     0.0000   21.4387    0.011    0.102     ABSO  Energy loss
 --- Finish event 
-   Absorber: total energy (MeV): 1181.947       total track length (cm):    0.143
+   Absorber: total energy (MeV): 1181.956       total track length (cm):    0.143
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.01s Real=0s Sys=0s
+Time of this run:   User=0s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -1017,10 +1014,9 @@ Loading Geant4 libraries ...
 Loading VGM libraries ... 
 Loading G4root library ...
 Loading geant4vmc library ...
-Loading geant4vmc_gui library ... 
 
 *************************************************************
- Geant4 version Name: geant4-09-02    (19-December-2008)
+ Geant4 version Name: geant4-09-02-patch-01    (13-March-2009)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -1103,5 +1099,5 @@ Instantiated 6 volume table entries
 
    Absorber: total energy (MeV): 1680.22       total track length (cm):  110.798
    Gap:      total energy (MeV): 88.5503       total track length (cm):  44.0092
-Time of this run:   User=0.14s Real=0.14s Sys=0s
+Time of this run:   User=0.21s Real=0.2s Sys=0.01s
 Number of events processed: 1

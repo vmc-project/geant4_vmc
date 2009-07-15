@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -271,7 +271,7 @@ Magnetic field enabled
           distributor of the code
 
  <== Outside FLUKAM!!!
-<== TFluka::BuildPhysics() Read input cards End R:7.42s C:7.41s
+<== TFluka::BuildPhysics() Read input cards End R:7.75s C:7.47s
 
 ---> Begin of event: 1
  ==> Inside FLUKAM!!!
@@ -281,7 +281,7 @@ Magnetic field enabled
  <== Outside FLUKAM!!!
    Absorber: total energy (MeV): 873.855       total track length (cm):  45.0624
    Gap:      total energy (MeV): 59.0698       total track length (cm):  29.2166
-Event: 0 R:0.07s C:0.07s
+Event: 0 R:0.08s C:0.08s
 
 ---> Begin of event: 2
  ==> Inside FLUKAM!!!
@@ -311,7 +311,7 @@ Event: 2 R:0.06s C:0.06s
  <== Outside FLUKAM!!!
    Absorber: total energy (MeV):  899.77       total track length (cm):  43.9532
    Gap:      total energy (MeV): 31.1183       total track length (cm):  14.1871
-Event: 3 R:0.06s C:0.06s
+Event: 3 R:0.07s C:0.06s
 
 ---> Begin of event: 5
  ==> Inside FLUKAM!!!
@@ -321,19 +321,19 @@ Event: 3 R:0.06s C:0.06s
  <== Outside FLUKAM!!!
    Absorber: total energy (MeV): 878.117       total track length (cm):  42.8174
    Gap:      total energy (MeV): 21.1923       total track length (cm):  9.03612
-Event: 4 R:0.06s C:0.06s
+Event: 4 R:0.06s C:0.07s
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -599,7 +599,7 @@ Magnetic field enabled
           distributor of the code
 
  <== Outside FLUKAM!!!
-<== TFluka::BuildPhysics() Read input cards End R:7.43s C:7.39s
+<== TFluka::BuildPhysics() Read input cards End R:7.43s C:7.40s
 --- Run MC for 1 events
 --- Begin event 
 
@@ -1290,5 +1290,5 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  43.782       total track length (cm):    1.979
    Gap:      total energy (MeV):   1.641       total track length (cm):    0.557
-Event: 0 R:0.01s C:0.01s
+Event: 0 R:0.02s C:0.02s
 --- Finish Run MC 

@@ -12,6 +12,41 @@ $Id$
      
 Tags (history):
 ===============
+  15/07/2009
+  v2-7:
+    Geant4 VMC:
+      - Implemented new TVirtualMC function:
+        virtual void SetUserParameters(Bool_t isUserParameters);
+        which allows to activate the parameters defined in tracking media
+        (DEEMAX, STMIN, STEMAX), which are, be default, ignored.
+        In Geant4 case, only STEMAX is taken into account.
+      - New implementation of VMC cuts via regions;
+        this limits the number of secondaries produced beyond
+        tracking cuts and speeds up simulation.
+      - New implementation of support for special controls (G3 flags):
+        The process TG4SpecialControls is replaced with a manager class
+        TG4SpecialControlsV2, which functions are colled from tracking
+        and stepping functions.
+      - When using special stacking action, neutrinos are not killed 
+        by default, but optionally. This options can be set via a command:
+        /mcTracking/skipNeutrino  [true|false]
+       Fixes:
+      - Fix in applying special controls (the original processes activation
+        was not always restored when particle got out from a given tracking 
+        medium or stopped).
+      - Fix in applying SetMaxStep (the original step limit was not always 
+        restored when particle got out from a given tracking 
+        medium or stopped). 
+
+     Tested with Geant4 9.2.p01, CLHEP 2.0.4.2, Root 5.24/00, VGM 3.02;
+
+   Examples:
+      - Fixes in E02 example: fixing a problem reported by A, Robert,
+        when using stack for a large events, links to mother particles
+        get lost after a few hundreds of events.
+ 
+     Tested with Geant3 1.11, Geant4 VMC 2.7, Fluka VMC 0.4 
+
   06/03/2009
   v2-6:
     Geant4 VMC:

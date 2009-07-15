@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -20,7 +20,6 @@ Loading Geant4 libraries ...
 Loading VGM libraries ... 
 Loading G4root library ...
 Loading geant4vmc library ...
-Loading geant4vmc_gui library ... 
 Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
 Warning in <TGeoManager::Init>: Deleting previous geometry: VGM Root geometry/VGM Root geometry
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
@@ -40,7 +39,7 @@ Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered t
 ------------------------------------------------------------
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-09-02    (19-December-2008)
+ Geant4 version Name: geant4-09-02-patch-01    (13-March-2009)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -97,20 +96,20 @@ Geant4 has been created.
 ---> Begin of event: 5
    Absorber: total energy (MeV): 936.127       total track length (cm):  63.1868
    Gap:      total energy (MeV): 33.3689       total track length (cm):  16.8983
-Time of this run:   User=0.36s Real=0.37s Sys=0s
+Time of this run:   User=0.52s Real=0.56s Sys=0.01s
 Number of events processed: 5
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -121,7 +120,6 @@ Loading Geant4 libraries ...
 Loading VGM libraries ... 
 Loading G4root library ...
 Loading geant4vmc library ...
-Loading geant4vmc_gui library ... 
 --- Init MC 
 Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
 --- Construct geometry 
@@ -143,7 +141,7 @@ Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered t
 ------------------------------------------------------------
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-09-02    (19-December-2008)
+ Geant4 version Name: geant4-09-02-patch-01    (13-March-2009)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -518,8 +516,8 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  12    -1.500    1.056    2.177     4.4486    0.0000    0.000    4.348     ABSO  No active process
 #  13    -0.500    1.337    2.681     4.4486    0.0000    1.155    5.503     ABSO  Transportation
 #  14    -0.500    1.337    2.681     4.4486    0.0000    0.000    5.503     GAPX  No active process
-#  15    -0.000    1.478    2.934     4.4486    0.0000    0.577    6.080     GAPX  Transportation
-#  16    -0.000    1.478    2.934     4.4486    0.0000    0.000    6.080     ABSO  No active process
+#  15     0.000    1.478    2.934     4.4486    0.0000    0.577    6.080     GAPX  Transportation
+#  16     0.000    1.478    2.934     4.4486    0.0000    0.000    6.080     ABSO  No active process
 #  17     0.152    1.521    3.010     0.8102    0.0000    0.176    6.256     ABSO  Compton scattering
 #  18     0.186    1.505    3.537     0.0000    0.0880    0.528    6.784     ABSO  Photoelectric effect
 
@@ -536,8 +534,8 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0     0.181    1.503    3.540     0.4499    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.000    1.459    3.832     0.4499    0.0000    0.347    0.347     ABSO  Transportation
-#   2    -0.000    1.459    3.832     0.4499    0.0000    0.000    0.347     GAPX  No active process
+#   1     0.000    1.459    3.832     0.4499    0.0000    0.347    0.347     ABSO  Transportation
+#   2     0.000    1.459    3.832     0.4499    0.0000    0.000    0.347     GAPX  No active process
 #   3    -0.500    1.339    4.640     0.4499    0.0000    0.958    1.305     GAPX  Transportation
 #   4    -0.500    1.339    4.640     0.4499    0.0000    0.000    1.305     ABSO  No active process
 #   5    -0.525    1.333    4.681     0.0000    0.0880    0.048    1.352     ABSO  Photoelectric effect
@@ -941,7 +939,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  47.062       total track length (cm):    3.235
    Gap:      total energy (MeV):   2.938       total track length (cm):    1.543
-Time of this run:   User=0.01s Real=0.02s Sys=0.01s
+Time of this run:   User=0.02s Real=0.03s Sys=0.01s
 Number of events processed: 1
 --- Finish Run MC 
 WARNING - Attempt to delete the physical volume store while geometry closed !
@@ -952,14 +950,14 @@ WARNING - Attempt to delete the region store while geometry closed !
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -970,7 +968,6 @@ Loading Geant4 libraries ...
 Loading VGM libraries ... 
 Loading G4root library ...
 Loading geant4vmc library ...
-Loading geant4vmc_gui library ... 
 --- Init MC 
 Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
 --- Construct geometry 
@@ -992,7 +989,7 @@ Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered t
 ------------------------------------------------------------
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-09-02    (19-December-2008)
+ Geant4 version Name: geant4-09-02-patch-01    (13-March-2009)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -1063,43 +1060,43 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
   Particle = neutron     Track ID = 2     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.463    0.000    0.000   285.3411    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    2.294   -2.035   285.3411    0.0000    3.214    3.214     ABSO  Transportation
-#   2    -6.500    2.294   -2.035   285.3411    0.0000    0.000    3.214     GAPX  No active process
-#   3    -6.000    3.484   -3.091   285.3411    0.0000    1.668    4.882     GAPX  Transportation
-#   4    -6.000    3.484   -3.091   285.3411    0.0000    0.000    4.882     ABSO  No active process
-#   5    -5.364    5.000   -4.436   285.3411    0.0000    2.124    7.006     ABSO  Transportation
-#   6    -5.364    5.000   -4.436   285.3411    0.0000    0.000    7.006     WRLD  No active process
-#   7    -4.944    6.000   -5.324   285.3411    0.0000    1.401    8.408     WRLD  Transportation
+#   0    -7.463    0.000    0.000   285.3693    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500    2.294   -2.035   285.3693    0.0000    3.214    3.214     ABSO  Transportation
+#   2    -6.500    2.294   -2.035   285.3693    0.0000    0.000    3.214     GAPX  No active process
+#   3    -6.000    3.484   -3.091   285.3693    0.0000    1.668    4.882     GAPX  Transportation
+#   4    -6.000    3.484   -3.091   285.3693    0.0000    0.000    4.882     ABSO  No active process
+#   5    -5.364    5.000   -4.436   285.3693    0.0000    2.124    7.006     ABSO  Transportation
+#   6    -5.364    5.000   -4.436   285.3693    0.0000    0.000    7.006     WRLD  No active process
+#   7    -4.944    6.000   -5.324   285.3693    0.0000    1.401    8.408     WRLD  Transportation
 
 ****************************************************************************************************
   Particle = Alpha     Track ID = 3     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.463    0.000    0.000    81.9465    0.0000    0.000    0.000     ABSO  No active process
-#   1    -7.471   -0.019    0.017    68.1399   13.8066    0.027    0.027     ABSO  Energy loss
-#   2    -7.479   -0.036    0.033    54.0607   14.0793    0.024    0.051     ABSO  Energy loss
-#   3    -7.486   -0.051    0.046    38.6623   15.3984    0.021    0.073     ABSO  Energy loss
-#   4    -7.491   -0.063    0.059    21.4223   17.2400    0.018    0.090     ABSO  Energy loss
-#   5    -7.494   -0.069    0.068     0.0000   21.4223    0.011    0.102     ABSO  Energy loss
+#   0    -7.463    0.000    0.000    81.9564    0.0000    0.000    0.000     ABSO  No active process
+#   1    -7.471   -0.019    0.017    68.1495   13.8068    0.027    0.027     ABSO  Energy loss
+#   2    -7.479   -0.036    0.033    54.0704   14.0792    0.024    0.051     ABSO  Energy loss
+#   3    -7.486   -0.051    0.046    38.6729   15.3975    0.021    0.073     ABSO  Energy loss
+#   4    -7.491   -0.063    0.059    21.4361   17.2368    0.018    0.090     ABSO  Energy loss
+#   5    -7.494   -0.069    0.068     0.0000   21.4361    0.011    0.102     ABSO  Energy loss
 --- Finish event 
-   Absorber: total energy (MeV): 1181.947       total track length (cm):    0.143
+   Absorber: total energy (MeV): 1181.956       total track length (cm):    0.143
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0s Real=0s Sys=0s
+Time of this run:   User=0s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -1110,7 +1107,6 @@ Loading Geant4 libraries ...
 Loading VGM libraries ... 
 Loading G4root library ...
 Loading geant4vmc library ...
-Loading geant4vmc_gui library ... 
 Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
 Warning in <TGeoManager::Init>: Deleting previous geometry: VGM Root geometry/VGM Root geometry
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
@@ -1130,7 +1126,7 @@ Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered t
 ------------------------------------------------------------
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-09-02    (19-December-2008)
+ Geant4 version Name: geant4-09-02-patch-01    (13-March-2009)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -1191,5 +1187,5 @@ Geant4 has been created.
 
    Absorber: total energy (MeV): 1733.73       total track length (cm):  114.327
    Gap:      total energy (MeV): 89.5931       total track length (cm):  44.1406
-Time of this run:   User=0.14s Real=0.14s Sys=0s
+Time of this run:   User=0.21s Real=0.21s Sys=0s
 Number of events processed: 1

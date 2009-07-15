@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -20,10 +20,9 @@ Loading Geant4 libraries ...
 Loading VGM libraries ... 
 Loading G4root library ...
 Loading geant4vmc library ...
-Loading geant4vmc_gui library ... 
 
 *************************************************************
- Geant4 version Name: geant4-09-02    (19-December-2008)
+ Geant4 version Name: geant4-09-02-patch-01    (13-March-2009)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -144,20 +143,20 @@ Geant4 has been created.
 ---> Begin of event: 5
    Absorber: total energy (MeV): 941.052       total track length (cm):  61.8868
    Gap:      total energy (MeV): 11.2621       total track length (cm):  5.54415
-Time of this run:   User=0.27s Real=0.27s Sys=0s
+Time of this run:   User=0.4s Real=0.4s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -168,11 +167,10 @@ Loading Geant4 libraries ...
 Loading VGM libraries ... 
 Loading G4root library ...
 Loading geant4vmc library ...
-Loading geant4vmc_gui library ... 
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-09-02    (19-December-2008)
+ Geant4 version Name: geant4-09-02-patch-01    (13-March-2009)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -508,8 +506,8 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   4    -1.500    0.248    0.955     0.5110    0.0000    0.000    1.445     Lead  No active process
 #   5    -0.500    0.433    1.256     0.5110    0.0000    1.060    2.505     Lead  Transportation
 #   6    -0.500    0.433    1.256     0.5110    0.0000    0.000    2.505     liquidArgon  No active process
-#   7    -0.000    0.525    1.406     0.5110    0.0000    0.530    3.035     liquidArgon  Transportation
-#   8    -0.000    0.525    1.406     0.5110    0.0000    0.000    3.035     Lead  No active process
+#   7     0.000    0.525    1.406     0.5110    0.0000    0.530    3.035     liquidArgon  Transportation
+#   8     0.000    0.525    1.406     0.5110    0.0000    0.000    3.035     Lead  No active process
 #   9     0.071    0.538    1.428     0.3268    0.0000    0.075    3.110     Lead  Compton scattering
 #  10     0.205    0.312    1.611     0.1969    0.0000    0.320    3.431     Lead  Compton scattering
 #  11     0.205    0.312    1.611     0.0000    0.1969    0.001    3.431     Lead  Photoelectric effect
@@ -817,7 +815,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  47.050       total track length (cm):    3.146
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.01s Real=0.02s Sys=0s
+Time of this run:   User=0.02s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
 WARNING - Attempt to delete the solid store while geometry closed !
@@ -828,14 +826,14 @@ WARNING - Attempt to delete the region store while geometry closed !
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -846,11 +844,10 @@ Loading Geant4 libraries ...
 Loading VGM libraries ... 
 Loading G4root library ...
 Loading geant4vmc library ...
-Loading geant4vmc_gui library ... 
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-09-02    (19-December-2008)
+ Geant4 version Name: geant4-09-02-patch-01    (13-March-2009)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -985,43 +982,43 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
   Particle = neutron     Track ID = 2     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.463    0.000    0.000   285.3411    0.0000    0.000    0.000     Lead  No active process
-#   1    -6.500    2.294   -2.035   285.3411    0.0000    3.214    3.214     Lead  Transportation
-#   2    -6.500    2.294   -2.035   285.3411    0.0000    0.000    3.214     liquidArgon  No active process
-#   3    -6.000    3.484   -3.091   285.3411    0.0000    1.668    4.882     liquidArgon  Transportation
-#   4    -6.000    3.484   -3.091   285.3411    0.0000    0.000    4.882     Lead  No active process
-#   5    -5.364    5.000   -4.436   285.3411    0.0000    2.124    7.006     Lead  Transportation
-#   6    -5.364    5.000   -4.436   285.3411    0.0000    0.000    7.006     World  No active process
-#   7    -4.944    6.000   -5.324   285.3411    0.0000    1.401    8.408     World  Transportation
+#   0    -7.463    0.000    0.000   285.3693    0.0000    0.000    0.000     Lead  No active process
+#   1    -6.500    2.294   -2.035   285.3693    0.0000    3.214    3.214     Lead  Transportation
+#   2    -6.500    2.294   -2.035   285.3693    0.0000    0.000    3.214     liquidArgon  No active process
+#   3    -6.000    3.484   -3.091   285.3693    0.0000    1.668    4.882     liquidArgon  Transportation
+#   4    -6.000    3.484   -3.091   285.3693    0.0000    0.000    4.882     Lead  No active process
+#   5    -5.364    5.000   -4.436   285.3693    0.0000    2.124    7.006     Lead  Transportation
+#   6    -5.364    5.000   -4.436   285.3693    0.0000    0.000    7.006     World  No active process
+#   7    -4.944    6.000   -5.324   285.3693    0.0000    1.401    8.408     World  Transportation
 
 ****************************************************************************************************
   Particle = Alpha     Track ID = 3     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.463    0.000    0.000    81.9465    0.0000    0.000    0.000     Lead  No active process
-#   1    -7.471   -0.019    0.017    68.1399   13.8066    0.027    0.027     Lead  Energy loss
-#   2    -7.479   -0.036    0.033    54.0607   14.0793    0.024    0.051     Lead  Energy loss
-#   3    -7.486   -0.051    0.046    38.6623   15.3984    0.021    0.073     Lead  Energy loss
-#   4    -7.491   -0.063    0.059    21.4223   17.2400    0.018    0.090     Lead  Energy loss
-#   5    -7.494   -0.069    0.068     0.0000   21.4223    0.011    0.102     Lead  Energy loss
+#   0    -7.463    0.000    0.000    81.9564    0.0000    0.000    0.000     Lead  No active process
+#   1    -7.471   -0.019    0.017    68.1495   13.8068    0.027    0.027     Lead  Energy loss
+#   2    -7.479   -0.036    0.033    54.0704   14.0792    0.024    0.051     Lead  Energy loss
+#   3    -7.486   -0.051    0.046    38.6729   15.3975    0.021    0.073     Lead  Energy loss
+#   4    -7.491   -0.063    0.059    21.4361   17.2368    0.018    0.090     Lead  Energy loss
+#   5    -7.494   -0.069    0.068     0.0000   21.4361    0.011    0.102     Lead  Energy loss
 --- Finish event 
-   Absorber: total energy (MeV): 1181.947       total track length (cm):    0.143
+   Absorber: total energy (MeV): 1181.956       total track length (cm):    0.143
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0s Real=0s Sys=0s
+Time of this run:   User=0s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.23/02  26 February 2009   *
+  *   Version   5.24/00      29 June 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.23/02 (tags/v5-23-02@27626, Mar 04 2009, 17:16:14 on linux)
+ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -1032,10 +1029,9 @@ Loading Geant4 libraries ...
 Loading VGM libraries ... 
 Loading G4root library ...
 Loading geant4vmc library ...
-Loading geant4vmc_gui library ... 
 
 *************************************************************
- Geant4 version Name: geant4-09-02    (19-December-2008)
+ Geant4 version Name: geant4-09-02-patch-01    (13-March-2009)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -1160,5 +1156,5 @@ Geant4 has been created.
 
    Absorber: total energy (MeV): 1355.22       total track length (cm):  90.4518
    Gap:      total energy (MeV): 69.6853       total track length (cm):  35.6659
-Time of this run:   User=0.08s Real=0.08s Sys=0s
+Time of this run:   User=0.12s Real=0.12s Sys=0.01s
 Number of events processed: 1
