@@ -10,8 +10,8 @@
 //-------------------------------------------------
 
 /// \ingroup Tests
-/// \file test_E03_3.C
-/// \brief Example E03 Test macro 3
+/// \file test_E03_4.C
+/// \brief Example E03 Test macro 4
 ///
 /// Running Example03
 

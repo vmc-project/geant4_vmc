@@ -113,8 +113,8 @@ inline void  Ex03MCApplication::SetPrintModulo(Int_t value)
 inline void  Ex03MCApplication::SetVerboseLevel(Int_t verboseLevel)
 { fVerbose.SetLevel(verboseLevel); }
 
-/// Set magnetic field
-/// \param bz  The new field value in z
+// Set magnetic field
+// \param bz  The new field value in z
 //inline void  Ex03MCApplication::SetField(Double_t bz)
 //{ fMagField->SetFieldValue(0., 0., bz); }
 

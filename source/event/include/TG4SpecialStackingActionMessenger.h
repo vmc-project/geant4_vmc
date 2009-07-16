@@ -12,8 +12,8 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \file TG4StackingActionMessenger.h
-/// \brief Definition of the TG4StackingActionMessenger class 
+/// \file TG4SpecialStackingActionMessenger.h
+/// \brief Definition of the TG4SpecialStackingActionMessenger class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 

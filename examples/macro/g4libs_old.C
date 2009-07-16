@@ -9,8 +9,8 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \file g4libs.C
-/// \brief Macro for loading Geant4 and Geant4 VMC libraries
+/// \file g4libs_old.C
+/// \brief Old macro for loading Geant4 and Geant4 VMC libraries
 ///
 /// Besides loading libraries, the macro also resets 
 /// FPE mask to 0, in order to make sure than FPE for

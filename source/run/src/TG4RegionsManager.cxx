@@ -70,6 +70,7 @@ TG4RegionsManager::~TG4RegionsManager()
 // external methods
 //
 
+//_____________________________________________________________________________
 const G4ParticleDefinition* G4VRangeToEnergyConverter::GetParticleType() const
 {
 /// Missing implementation in Geant4; to be removed when corrected in Geant4
@@ -162,7 +163,9 @@ G4bool TG4RegionsManager::Iterate(
                                 std::map<G4double, G4double>::const_iterator& it,
                                 G4Material* material,
                                 G4VRangeToEnergyConverter& converter) const
-{                                   
+{
+/// Helper function called from ConvertEnergyToRange() in each iteration
+                                   
   G4double step = ( higherCut - lowerCut ) / nbin;
   energyToRangeMap.clear();
   G4String indent("     ");

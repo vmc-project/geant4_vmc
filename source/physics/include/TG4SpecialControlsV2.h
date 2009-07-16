@@ -1,4 +1,4 @@
-#ifndef TG4_SPECIAL_CONTROLS_2_H
+#ifndef TG4_SPECIAL_CONTROLS_V2_H
 #define TG4_SPECIAL_CONTROLS_V2_H
 
 // $Id$
@@ -96,5 +96,5 @@ inline Bool_t TG4SpecialControlsV2::IsApplicable() const {
   return fIsApplicable;
 }  
 
-#endif //TG4_SPECIAL_CONTROLS_H
+#endif //TG4_SPECIAL_CONTROLS_V2_H
 
