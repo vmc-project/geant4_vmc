@@ -67,18 +67,6 @@ TG4RegionsManager::~TG4RegionsManager()
 }
 
 //
-// external methods
-//
-
-//_____________________________________________________________________________
-const G4ParticleDefinition* G4VRangeToEnergyConverter::GetParticleType() const
-{
-/// Missing implementation in Geant4; to be removed when corrected in Geant4
-
-  return theParticle;
-}  
-
-//
 // private methods
 //
 
