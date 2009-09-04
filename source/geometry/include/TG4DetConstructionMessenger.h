@@ -39,6 +39,8 @@ class G4UIcmdWithADoubleAndUnit;
 /// - /mcDet/printMaterials 
 /// - /mcDet/printMedia
 /// - /mcDet/printVolumes
+/// - /mcDet/printCuts cutName
+/// - /mcDet/printControls controlName
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -84,6 +86,12 @@ class TG4DetConstructionMessenger: public G4UImessenger
     
     /// command: printVolumes  
     G4UIcmdWithoutParameter*    fPrintVolumesCmd;  
+
+    /// command: printCuts  
+    G4UIcmdWithAString*         fPrintCutsCmd;  
+
+    /// command: printControls  
+    G4UIcmdWithAString*         fPrintControlsCmd;  
 };
 
 #endif //TG4_DET_CONSTRUCTION_MESSENGER_H

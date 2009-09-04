@@ -90,6 +90,8 @@ class TG4GeometryServices : public TG4Verbose
     void PrintElementTable() const;
     void PrintMaterials() const;
     void PrintMedia() const;
+    void PrintCuts(const G4String& cutName) const;
+    void PrintControls(const G4String& controlName) const;
 
     // set methods
     void SetWorld(G4VPhysicalVolume* world);

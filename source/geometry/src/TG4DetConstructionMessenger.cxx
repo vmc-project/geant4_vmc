@@ -88,6 +88,21 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
     = new G4UIcmdWithoutParameter("/mcDet/printVolumes", this);
   fPrintMaterialsCmd->SetGuidance("Prints all volumes.");
   fPrintMaterialsCmd->AvailableForStates(G4State_Idle);   
+
+  fPrintCutsCmd 
+    = new G4UIcmdWithAString("/mcDet/printCuts", this);
+  fPrintCutsCmd
+    ->SetGuidance("Prints the cut value for given CutName for all tracking media");
+  fPrintCutsCmd->SetParameterName("CutName", false);
+  fPrintCutsCmd->AvailableForStates(G4State_Idle);   
+
+  fPrintControlsCmd 
+    = new G4UIcmdWithAString("/mcDet/printControls", this);
+  fPrintControlsCmd
+    ->SetGuidance("Prints the control value for given ControlName for all tracking media");
+  fPrintControlsCmd->SetParameterName("ControlName", false);
+  fPrintControlsCmd->AvailableForStates(G4State_Idle);   
+
 }
 
 //_____________________________________________________________________________
@@ -102,6 +117,8 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
   delete fPrintMaterialsCmd;
   delete fPrintMediaCmd;
   delete fPrintVolumesCmd;
+  delete fPrintCutsCmd; 
+  delete fPrintControlsCmd; 
 }
 
 //
@@ -138,5 +155,11 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
   }    
   else if (command == fPrintVolumesCmd) {
     TG4GeometryServices::Instance()->PrintLogicalVolumeStore();
+  }    
+  else if (command == fPrintCutsCmd) {
+    TG4GeometryServices::Instance()->PrintCuts(newValues);
+  }    
+  else if (command == fPrintControlsCmd) {
+    TG4GeometryServices::Instance()->PrintControls(newValues);
   }    
 }

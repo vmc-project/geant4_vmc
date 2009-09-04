@@ -560,6 +560,58 @@ void TG4GeometryServices::PrintMedia() const
 }
 
 //_____________________________________________________________________________
+void TG4GeometryServices::PrintCuts(const G4String& cutName) const
+{
+/// Print the cut value for the cut with given cutName for all
+/// tracking media
+
+   TG4G3Cut cut = TG4G3CutVector::GetCut(cutName);
+   if ( cut == kNoG3Cuts ) {
+     TG4Globals::Exception("TG4GeometryServices", "PrintCuts",
+       TString(cutName.c_str()) + " not defined.");
+     return;
+   }    
+
+   G4cout << "Cut " << cutName << G4endl;
+   G4cout << "Medium ID" << "  " << "cutValue(MeV)" << G4endl;
+   for ( G4int i=0; i< fMediumMap->GetNofMedia(); i++ ) {
+     TG4Medium* medium = fMediumMap->GetMedium(i+1);
+     if ( dynamic_cast<TG4Limits*>(medium->GetLimits()) ) {
+       G4double cutValue = (*GetLimits(medium->GetLimits())->GetCutVector())[cut];
+       G4cout << i+1 << "  " << cutValue << G4endl;
+     } 
+     else {
+       //G4cout << "Medium " << medium->GetName() 
+       //       << " has not TG4Limits " << G4endl;
+     }         
+   }  
+}
+
+//_____________________________________________________________________________
+void TG4GeometryServices::PrintControls(const G4String& controlName) const
+{
+/// Print the control value for the control with given controlName for all
+/// tracking media
+
+   TG4G3Control control = TG4G3ControlVector::GetControl(controlName);
+   if ( control == kNoG3Controls ) {
+     TG4Globals::Exception("TG4GeometryServices", "PrintControls",
+       TString(controlName.c_str()) + " not defined.");
+     return;
+   }    
+
+   G4cout << "Control " << controlName << G4endl;
+   G4cout << "Medium ID" << "  " << "controlValue" << G4endl;
+   for ( G4int i=0; i< fMediumMap->GetNofMedia(); i++ ) {
+   
+     TG4Medium* medium = fMediumMap->GetMedium(i+1);
+     G4int controlValue = (*GetLimits(medium->GetLimits())->GetControlVector())[control];
+     
+     G4cout << i+1 << "  " << controlValue << G4endl;
+   }  
+}
+
+//_____________________________________________________________________________
 void TG4GeometryServices::SetG3toG4Separator(char separator) 
 { 
 /// Set the volumes name separator that will be
