@@ -101,6 +101,14 @@ class TG4PhysicsManager : public TG4Verbose
     void  SetProcessActivation();  
     TMCProcess GetMCProcess(const G4VProcess* process);
     TMCProcess GetOpBoundaryStatus(const G4VProcess* process);
+
+    void SetCutForGamma(G4double cut);
+    void SetCutForElectron(G4double cut);
+    void SetCutForPositron(G4double cut);
+    
+    G4double GetCutForGamma() const;
+    G4double GetCutForElectron() const;
+    G4double GetCutForPositron() const;
    
   private:
     /// Not implemented
@@ -125,6 +133,8 @@ class TG4PhysicsManager : public TG4Verbose
     // static data members
     static TG4PhysicsManager*  fgInstance; ///< this instance
     
+    static const G4double      fgkDefautCut; ///< the default range cut value 
+
     //
     // data members
     
@@ -142,6 +152,17 @@ class TG4PhysicsManager : public TG4Verbose
     
     /// set of not implemented Gstpar parameters
     std::set<TString>      fNotImplParNames;
+
+    /// range cut for gamma
+    G4double               fCutForGamma;
+
+    /// range cut for electron
+    G4double               fCutForElectron; 
+
+    /// range cut for positron 
+    G4double               fCutForPositron; 
+    
+    
 };
 
 // inline methods
@@ -150,6 +171,37 @@ inline TG4PhysicsManager* TG4PhysicsManager::Instance() {
   /// Return this instance
   return fgInstance; 
 }
+
+inline void TG4PhysicsManager::SetCutForGamma(G4double cut) {
+  /// Set range cut value for gamma 
+  fCutForGamma = cut;
+}  
+
+inline void TG4PhysicsManager::SetCutForElectron(G4double cut) {
+  /// Set range cut value for electron 
+  fCutForElectron = cut;
+} 
+ 
+inline void TG4PhysicsManager::SetCutForPositron(G4double cut) {
+  /// Set range cut value for positron 
+  fCutForPositron = cut;
+}
+ 
+inline G4double TG4PhysicsManager::GetCutForGamma() const {
+  /// Return range cut for gamma
+  return fCutForGamma;
+}  
+
+inline G4double TG4PhysicsManager::GetCutForElectron() const {
+  /// Return range cut for electron
+  return fCutForElectron;
+}  
+
+inline G4double TG4PhysicsManager::GetCutForPositron() const {
+  /// Return range cut for positron
+  return fCutForPositron;
+}  
+
 
 #endif //TG4_PHYSICS_MANAGER_H
 

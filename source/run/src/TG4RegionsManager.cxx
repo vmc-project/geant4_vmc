@@ -16,6 +16,8 @@
 
 #include "TG4RegionsManager.h"
 #include "TG4RegionsMessenger.h"
+#include "TG4PhysicsManager.h"
+#include "TG4PhysicsManager.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4GeometryServices.h"
 #include "TG4G3CutVector.h"
@@ -69,24 +71,6 @@ TG4RegionsManager::~TG4RegionsManager()
 //
 // private methods
 //
-
-//_____________________________________________________________________________
-G4double TG4RegionsManager::GetDefaultRangeCut() const
-{
-/// Return the default range cut value defined in the registered
-/// physics list
-
-  G4RunManager* runManager = G4RunManager::GetRunManager();
-  
-  const G4VUserPhysicsList* kPhysicsList = runManager->GetUserPhysicsList();
-  if ( ! kPhysicsList ) {
-    TG4Globals::Exception(
-      "TG4RegionsManager", "GetDefaultRangeCut",
-      "No physics list is defined.");
-  }    
-  
-  return kPhysicsList->GetDefaultCutValue();
-}  
 
 //_____________________________________________________________________________
 G4Region* TG4RegionsManager::GetDefaultRegion() const
@@ -144,6 +128,7 @@ G4bool TG4RegionsManager::Iterate(
                                 G4double  energyCut,
                                 G4double& lowerCut, 
                                 G4double& higherCut,
+                                G4double  defaultRangeCut,
                                 G4double lowEdgeEnergy, 
                                 G4double highEdgeEnergy,
                                 G4int nbin,
@@ -159,7 +144,7 @@ G4bool TG4RegionsManager::Iterate(
   G4String indent("     ");
   for ( G4int i=0; i<nbin; i++ ) {
     G4double rangeCut = lowerCut + i*step;
-    if ( rangeCut < GetDefaultRangeCut() ) continue;
+    if ( rangeCut < defaultRangeCut ) continue;
     G4double energy = converter.Convert(rangeCut, material);
     if ( VerboseLevel() > 2 ) {
       G4cout << indent << "For range: " << rangeCut 
@@ -260,7 +245,8 @@ G4double TG4RegionsManager::ConvertEnergyToRange(
     G4double lowerCut = it->second;
     //G4cout << "lowerCut = " << lowerCut << G4endl;
     G4bool found 
-      = Iterate(energyCut, lowerCut, higherCut, lowEdgeEnergy, highEdgeEnergy,
+      = Iterate(energyCut, lowerCut, higherCut, defaultRangeCut, 
+                lowEdgeEnergy, highEdgeEnergy,
                 nbin, energyToRangeMap, it, material, converter);
               
     if ( ! found )  return higherCut;
@@ -361,7 +347,13 @@ G4bool TG4RegionsManager::CheckCut(TG4Limits* limits,
   }         
 
   // Get default range cut value from physics list
-  G4double defaultRangeCut = GetDefaultRangeCut();
+  G4double defaultRangeCut = 0.;
+  if ( particleName == "e-") { 
+    defaultRangeCut = TG4PhysicsManager::Instance()->GetCutForElectron();
+  }
+  else if ( particleName == "gamma") {
+    defaultRangeCut = TG4PhysicsManager::Instance()->GetCutForGamma();
+  }
 
   if ( energy < energyLimits*(1.0 - fgkEnergyTolerance) &&
        fabs( range - defaultRangeCut) > fgkRangeTolerance ) {
@@ -487,8 +479,11 @@ void TG4RegionsManager::DefineRegions()
   G4RToEConvForElectron g4ConverterEle;
   G4RToEConvForGamma g4ConverterGam;
   
-  // Get default range cut value from physics list
-  G4double defaultRangeCut = GetDefaultRangeCut();
+  // Get default range cut values from physics manager
+  G4double defaultRangeCutEle 
+    = TG4PhysicsManager::Instance()->GetCutForElectron();
+  G4double defaultRangeCutGam 
+    = TG4PhysicsManager::Instance()->GetCutForGamma();
 
   // Get default region 
   G4Region* worldRegion = GetDefaultRegion();
@@ -562,16 +557,16 @@ void TG4RegionsManager::DefineRegions()
 
     // Convert energy cuts defined in limits in range cuts
     G4double rangeEle 
-      = GetRangeCut(cutEle, material, g4ConverterEle, defaultRangeCut);
+      = GetRangeCut(cutEle, material, g4ConverterEle, defaultRangeCutEle);
     G4double rangeGam 
-      = GetRangeCut(cutGam, material, g4ConverterGam, defaultRangeCut);
+      = GetRangeCut(cutGam, material, g4ConverterGam, defaultRangeCutGam);
     if ( VerboseLevel() > 1 ) {
       G4cout << ".. converted in e- rangeCut = " << rangeEle << " mm  " 
              << "gamma rangeCut = " << rangeGam << " mm" << G4endl;
     }          
            
-    if ( fabs ( rangeEle - defaultRangeCut ) < 1e-03 && 
-         fabs ( rangeGam - defaultRangeCut ) < 1e-03 ) {
+    if ( fabs ( rangeEle - defaultRangeCutEle ) < 1e-03 && 
+         fabs ( rangeGam - defaultRangeCutGam ) < 1e-03 ) {
       // Do not create a new region if range cuts do not differ
       // from those in default region
       worldRegion->AddRootLogicalVolume(lv);
@@ -586,7 +581,7 @@ void TG4RegionsManager::DefineRegions()
       G4ProductionCuts* cuts = new G4ProductionCuts();
       cuts->SetProductionCut(rangeGam, 0);
       cuts->SetProductionCut(rangeEle, 1);
-      cuts->SetProductionCut(defaultRangeCut, 2);
+      cuts->SetProductionCut(TG4PhysicsManager::Instance()->GetCutForPositron(), 2);
       region->SetProductionCuts(cuts);
     }  
   }

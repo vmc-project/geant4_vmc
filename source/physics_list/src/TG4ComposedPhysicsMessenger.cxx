@@ -17,6 +17,7 @@
 #include "TG4ComposedPhysicsList.h"
 #include "TG4ComposedPhysicsMessenger.h"
 #include "TG4GeometryServices.h"
+#include "TG4PhysicsManager.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4ProcessControlMap.h"
 #include "TG4ProcessMCMap.h"
@@ -144,16 +145,25 @@ void TG4ComposedPhysicsMessenger::SetNewValue(G4UIcommand* command,
 /// Apply command to the associated object.
   
   if( command == fRangeGammaCutCmd ) { 
-    fPhysicsList->SetCutForGamma(fRangeGammaCutCmd->GetNewDoubleValue(newValue));
+    G4double cut = fRangeGammaCutCmd->GetNewDoubleValue(newValue);
+    TG4PhysicsManager::Instance()->SetCutForGamma(cut);
+    fPhysicsList->SetCutForGamma(cut);
   }
   else if ( command == fRangeElectronCutCmd ) { 
-    fPhysicsList->SetCutForElectron(fRangeElectronCutCmd->GetNewDoubleValue(newValue));
+    G4double cut = fRangeElectronCutCmd->GetNewDoubleValue(newValue);
+    TG4PhysicsManager::Instance()->SetCutForElectron(cut);
+    fPhysicsList->SetCutForElectron(cut);
   }
   else if ( command == fRangePositronCutCmd ) { 
-    fPhysicsList->SetCutForPositron(fRangePositronCutCmd->GetNewDoubleValue(newValue));
+    G4double cut = fRangePositronCutCmd->GetNewDoubleValue(newValue);
+    TG4PhysicsManager::Instance()->SetCutForPositron(cut);
+    fPhysicsList->SetCutForPositron(cut);
   }
   else if( command == fRangeAllCutCmd ) {
     G4double cut = fRangeAllCutCmd->GetNewDoubleValue(newValue);
+    TG4PhysicsManager::Instance()->SetCutForGamma(cut);
+    TG4PhysicsManager::Instance()->SetCutForElectron(cut);
+    TG4PhysicsManager::Instance()->SetCutForPositron(cut);
     fPhysicsList->SetCutForGamma(cut);
     fPhysicsList->SetCutForElectron(cut);
     fPhysicsList->SetCutForPositron(cut);

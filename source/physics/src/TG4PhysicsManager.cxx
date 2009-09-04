@@ -38,7 +38,8 @@
 #include <TDatabasePDG.h>
 #include <TVirtualMCApplication.h>
 
-TG4PhysicsManager* TG4PhysicsManager::fgInstance = 0;
+TG4PhysicsManager* TG4PhysicsManager::fgInstance   = 0;
+const G4double     TG4PhysicsManager::fgkDefautCut = 1*mm;  
 
 //_____________________________________________________________________________
 TG4PhysicsManager::TG4PhysicsManager()
@@ -47,7 +48,10 @@ TG4PhysicsManager::TG4PhysicsManager()
     fG3PhysicsManager(0),
     fProcessMCMap(),
     fProcessControlMap(),
-    fNotImplParNames()
+    fNotImplParNames(),
+    fCutForGamma(fgkDefautCut),
+    fCutForElectron(fgkDefautCut),
+    fCutForPositron(fgkDefautCut)
 { 
 /// Default constructor
 

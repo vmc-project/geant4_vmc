@@ -69,9 +69,6 @@ class TG4ComposedPhysicsList: public G4VUserPhysicsList,
     // data members
     TG4ComposedPhysicsMessenger       fMessenger;    ///< messenger
     std::vector<G4VUserPhysicsList*>  fPhysicsLists; ///< physics lists
-    G4double  fCutForGamma;    ///< cut for gamma
-    G4double  fCutForElectron; ///< cut for electron 
-    G4double  fCutForPositron; ///< cut for positron 
 };
 
 #endif //TG4_COMPOSED_MODULAR_PHYSICS_H

@@ -15,6 +15,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4ComposedPhysicsList.h"
+#include "TG4PhysicsManager.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4G3ControlVector.h"
 #include "TG4ProcessControlMap.h"
@@ -27,17 +28,12 @@
 #include <G4Positron.hh>
 
 
-const G4double TG4ComposedPhysicsList::fgkDefautCut = 1.0*mm;  
-
 //_____________________________________________________________________________
 TG4ComposedPhysicsList::TG4ComposedPhysicsList()
   : G4VUserPhysicsList(),
     TG4Verbose("composedPhysicsList"),
     fMessenger(this),
-    fPhysicsLists(),
-    fCutForGamma(fgkDefautCut),
-    fCutForElectron(fgkDefautCut),
-    fCutForPositron(fgkDefautCut)
+    fPhysicsLists()
 {
 /// Default constructor
 
@@ -94,9 +90,9 @@ void TG4ComposedPhysicsList::SetCuts()
 
   // Set cut values for gamma at first and for e- second and next for e+,
   // because some processes for e+/e- need cut values for gamma
-  SetCutValue(fCutForGamma, "gamma");
-  SetCutValue(fCutForElectron, "e-");
-  SetCutValue(fCutForPositron, "e+");
+  SetCutValue(TG4PhysicsManager::Instance()->GetCutForGamma(), "gamma");
+  SetCutValue(TG4PhysicsManager::Instance()->GetCutForElectron(), "e-");
+  SetCutValue(TG4PhysicsManager::Instance()->GetCutForPositron(), "e+");
 
   if ( VerboseLevel() > 1 ) DumpCutValuesTable();
 }
@@ -106,8 +102,7 @@ void TG4ComposedPhysicsList::SetCutForGamma(G4double cut)
 {
 /// Set cut value for gamma
 
-  fCutForGamma = cut;
-  SetParticleCuts(fCutForGamma, G4Gamma::Gamma());
+  SetParticleCuts(cut, G4Gamma::Gamma());
 }
 
 //_____________________________________________________________________________
@@ -115,8 +110,7 @@ void TG4ComposedPhysicsList::SetCutForElectron(G4double cut)
 {
 /// Set cut value for electron
 
-  fCutForElectron = cut;
-  SetParticleCuts(fCutForElectron, G4Electron::Electron());
+  SetParticleCuts(cut, G4Electron::Electron());
 }
 
 //_____________________________________________________________________________
@@ -125,9 +119,9 @@ void TG4ComposedPhysicsList::SetCutForPositron(G4double cut)
 {
 /// Set cut value for positron
 
-  fCutForPositron = cut;
-  SetParticleCuts(fCutForPositron, G4Positron::Positron());
+  SetParticleCuts(cut, G4Positron::Positron());
 }
+
 
 //_____________________________________________________________________________
 void TG4ComposedPhysicsList::PrintAllProcesses() const

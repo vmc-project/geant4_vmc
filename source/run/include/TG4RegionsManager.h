@@ -101,7 +101,6 @@ class TG4RegionsManager : public TG4Verbose
     TG4RegionsManager& operator=(const TG4RegionsManager& right);
 
     // methods
-    G4double  GetDefaultRangeCut() const;
     G4Region* GetDefaultRegion() const;
 
     G4double  GetGlobalEnergyCut(
@@ -115,6 +114,7 @@ class TG4RegionsManager : public TG4Verbose
     G4bool   Iterate(G4double  energyCut,
                      G4double& lowerCut, 
                      G4double& higherCut,
+                     G4double  defaultRangeCut,
                      G4double lowEdgeEnergy, 
                      G4double highEdgeEnergy,
                      G4int nbin,
