@@ -252,12 +252,10 @@ G4double TG4G3CutVector::GetMinEkineForGamma(const G4Track& track) const
   G4String processName = "";
   if (kpCreatorProcess) processName = kpCreatorProcess->GetProcessName();
 
-  if ((processName == "eBrem") || (processName == "IeBrem")) {
+  if ( processName == "eBrem" ) {
     return fCutVector[kBCUTE];
   }     
-  else if ((processName == "MuBrems") || (processName == "IMuBrems")) { 
-           //(processName == "//hBrems")|| (processName == "//IhBrems") 
-           // hadron Brehmstrahlung is not defined in G4
+  else if ( processName == "muBrems" || processName == "hBrems" ) { 
     return fCutVector[kBCUTM];
   }
   else {
@@ -274,26 +272,29 @@ G4double TG4G3CutVector::GetMinEkineForElectron(const G4Track& track) const
   G4String processName = "";
   if (kpCreatorProcess) processName = kpCreatorProcess->GetProcessName();
 
-  if ((processName == "eIoni") || (processName == "IeIoni")) {
+  if ( processName == "eIoni" ) {
     // delta rays by e-, e+
-
-    if (fDeltaRaysOn) 
+    if ( fDeltaRaysOn ) 
       return fCutVector[kDCUTE];
     else 
       return fgkDCUTEOff;
   }
-  else if ((processName == "MuIoni") || (processName == "IMuIoni") ||
-           (processName == "hIoni")  || (processName == "IhIoni")) {
-    // delta rays by other particles (mu, hadron)
-
-    if (fDeltaRaysOn) 
+  else if ( processName == "muIoni" ) {
+    // delta rays by mu
+    if ( fDeltaRaysOn ) 
       return fCutVector[kDCUTM];
     else 
       return fgkDCUTMOff;
   }
-  else if (processName == "MuPairProd") {
-    //direct pair production by muons
-
+  else if ( processName == "hIoni" || processName == "ionIoni" ) {
+    // delta rays by other particles
+    if ( fDeltaRaysOn ) 
+      return fCutVector[kCUTELE];
+    else 
+      return fgkDCUTMOff;
+  }
+  else if (processName == "muPairProd") {
+    // direct pair production by muons
     return fCutVector[kPPCUTM];
   }  
   else {   
@@ -310,8 +311,8 @@ G4double TG4G3CutVector::GetMinEkineForEplus(const G4Track& track) const
   G4String processName = "";
   if (kpCreatorProcess) processName = kpCreatorProcess->GetProcessName();
 
-  if (processName == "MuPairProd") {
-    //direct pair production by muons
+  if (processName == "muPairProd") {
+    // direct pair production by muons
     return fCutVector[kPPCUTM];
   }   
   else
