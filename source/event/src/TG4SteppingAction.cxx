@@ -148,8 +148,7 @@ void TG4SteppingAction::ProcessTrackIfBelowCut(const G4Step* step)
 /// Flag e+e- secondary pair for stop if its energy is below user cut
 
   if ( step->GetSecondary()->size() == 2 &&
-       ( (*step->GetSecondary())[0]->GetCreatorProcess()->GetProcessName() == "conv" ||
-         (*step->GetSecondary())[0]->GetCreatorProcess()->GetProcessName() == "muPairProd" ) ) {
+       ( (*step->GetSecondary())[0]->GetCreatorProcess()->GetProcessName() == "muPairProd" ) ) {
   
     G4double minEtotPair
       = TG4StepManager::Instance()
