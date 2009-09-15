@@ -97,6 +97,20 @@ G4double TG4SpecialCutsForEplus::GetMinEkine(const TG4Limits& limits,
   return limits.GetMinEkineForEplus(track);
 }  
 
+//_____________________________________________________________________________
+G4VParticleChange* TG4SpecialCutsForEplus::PostStepDoIt(const G4Track& track, 
+                                                 const G4Step& /*step*/)
+{
+/// Override method from G4VSpecialCuts and set energy deposit
+/// to total e+ energy
+ 
+  aParticleChange.Initialize(track);
+  aParticleChange.ProposeEnergy(0.) ;
+  aParticleChange.ProposeLocalEnergyDeposit(track.GetTotalEnergy()) ;
+  aParticleChange.ProposeTrackStatus(fStopAndKill);
+  return &aParticleChange;
+}
+
 //
 //  Class TG4SpecialCutsForGamma implementation
 //

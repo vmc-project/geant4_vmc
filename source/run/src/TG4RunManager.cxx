@@ -382,6 +382,10 @@ void TG4RunManager::LateInitialize()
     ->SetUserLimits(*TG4G3PhysicsManager::Instance()->GetCutVector(),
                     *TG4G3PhysicsManager::Instance()->GetControlVector());
 
+  // pass info if cut on e+e- pair is activated to stepping action                    
+  ((TG4SteppingAction*)fRunManager->GetUserSteppingAction())
+    ->SetIsPairCut((*TG4G3PhysicsManager::Instance()->GetIsCutVector())[kEplus]);                   
+
   // convert tracking cuts in range cuts per regions
   if ( fRegionsManager ) fRegionsManager->DefineRegions();
 

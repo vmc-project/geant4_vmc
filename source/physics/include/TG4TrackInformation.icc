@@ -57,6 +57,11 @@ inline void TG4TrackInformation::SetIsUserTrack(G4bool isUserTrack) {
   fIsUserTrack = isUserTrack; 
 }
 
+inline void TG4TrackInformation::SetStop(G4bool stop) { 
+  /// Set info that the track should be stopped
+  fStop = stop; 
+}
+
 inline G4int TG4TrackInformation::GetTrackParticleID() const { 
   /// Return track particle ID.= the index of track particle in VMC stack
   return fTrackParticleID; 
@@ -75,4 +80,9 @@ inline G4double TG4TrackInformation::GetPDGLifetime() const {
 inline G4bool TG4TrackInformation::IsUserTrack() const { 
   /// Return the info if the track was poped from the VMC stack
   return fIsUserTrack; 
+}
+
+inline G4bool TG4TrackInformation::IsStop() const { 
+  /// Return the info if the track should be stopped
+  return fStop; 
 }

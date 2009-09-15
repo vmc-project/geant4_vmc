@@ -78,6 +78,7 @@ class TG4StepManager
         
         // tracking volume(s) 
     G4VPhysicalVolume* GetCurrentPhysicalVolume() const;  // G4 specific
+    TG4Limits* GetCurrentLimits() const;  // G4 specific
     Int_t CurrentVolID(Int_t& copyNo) const;
     Int_t CurrentVolOffID(Int_t off, Int_t& copyNo) const;
     const char* CurrentVolName() const;

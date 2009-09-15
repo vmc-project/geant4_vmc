@@ -275,20 +275,9 @@ void TG4StepManager::SetMaxStep(Double_t step)
 /// the value is restored after exiting from the current tracking
 /// medium
 
-#ifdef MCDEBUG
-  TG4Limits* userLimits 
-     = TG4GeometryServices::Instance()
-         ->GetLimits(GetCurrentPhysicalVolume()->GetLogicalVolume()->GetUserLimits()); 
-#else  
-  TG4Limits* userLimits 
-    = (TG4Limits*) GetCurrentPhysicalVolume()->GetLogicalVolume()->GetUserLimits();
-#endif    
+  TG4Limits* userLimits = GetCurrentLimits();
 
-  if ( ! userLimits ) {
-    TG4Globals::Warning(
-      "TG4StepManager", "SetMaxStep", "User limits not defined.");
-    return;  
-  }
+  if ( ! userLimits )  return;
 
   //G4cout << "TG4StepManager::SetMaxStep  in " 
   //       << GetCurrentPhysicalVolume()->GetLogicalVolume()->GetName() << "  "
@@ -392,6 +381,29 @@ G4VPhysicalVolume* TG4StepManager::GetCurrentPhysicalVolume() const
   }   
   return physVolume;
 }     
+
+//_____________________________________________________________________________
+TG4Limits* TG4StepManager::GetCurrentLimits() const 
+{
+/// Return the current limits.
+
+#ifdef MCDEBUG
+  TG4Limits* userLimits 
+     = TG4GeometryServices::Instance()
+         ->GetLimits(GetCurrentPhysicalVolume()->GetLogicalVolume()->GetUserLimits()); 
+#else  
+  TG4Limits* userLimits 
+    = (TG4Limits*) GetCurrentPhysicalVolume()->GetLogicalVolume()->GetUserLimits();
+#endif    
+
+  if ( ! userLimits ) {
+    TG4Globals::Warning(
+      "TG4StepManager", "Get current limits", "User limits not defined.");
+    return 0;  
+  }
+  
+  return userLimits;  
+}
 
 //_____________________________________________________________________________
 Int_t TG4StepManager::CurrentVolID(Int_t& copyNo) const

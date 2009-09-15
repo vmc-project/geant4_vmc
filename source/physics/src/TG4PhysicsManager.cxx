@@ -246,12 +246,12 @@ void TG4PhysicsManager::GstparCut(G4int itmed, TG4G3Cut par, G4double parval)
     }             
   }           
 
-  // add units
-  if (par == kTOFMAX) parval *= TG4G3Units::Time();
-  else                parval *= TG4G3Units::Energy();
-
   // set new limits object to medium
   medium->SetLimits(limits);
+
+  // add units
+  if ( par == kTOFMAX ) parval *= TG4G3Units::Time();
+  else                  parval *= TG4G3Units::Energy();
 
   // set parameter
   limits->SetG3Cut(par, parval);
@@ -470,8 +470,6 @@ void  TG4PhysicsManager::Gstpar(Int_t itmed, const char *param, Float_t parval)
 /// Passe the tracking medium parameter to TG4Limits.
 /// The tracking medium parameter is set only in case
 /// its value is different from the "global" physics setup.
-/// (If: CheckCut/ControlWithG3Defaults is used checking
-///  is performed with respect to G3 default values.)
 /// When any cut/control parameter is set in limits
 /// the physics manager is locked and the physics setup
 /// cannot be changed.                                                       \n
@@ -788,8 +786,7 @@ void TG4PhysicsManager::SetProcessActivation()
   }  
        
   if (  TG4SpecialPhysicsList::Instance() &&
-        TG4SpecialPhysicsList::Instance()->IsSpecialCuts() &&
-        TG4G3PhysicsManager::Instance()->IsSpecialCuts() ) {
+        TG4SpecialPhysicsList::Instance()->IsSpecialCuts() ) {
   
     SetSpecialCutsActivation();
   }  

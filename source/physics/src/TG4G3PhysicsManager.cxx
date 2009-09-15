@@ -78,64 +78,13 @@ TG4G3PhysicsManager::~TG4G3PhysicsManager()
 //
 
 //_____________________________________________________________________________
-G4bool TG4G3PhysicsManager::CheckCutWithG3Defaults(G4String name, 
-                                 G4double value, TG4G3Cut& cut)
-{
-/// Retrieve corresponding TG4G3Cut from the name and 
-/// in case the value is different from the G3 default value
-/// sets true the value of the SwitchCutVector element 
-/// corresponding to this cut and returns true; 
-/// returns false otherwise.
-
-  // convert cut name -> TG4G3Cut
-  cut = TG4G3CutVector::GetCut(name);
-
-  // set switch vector element only if the value
-  // is different from G3 default
-  if (cut !=kNoG3Cuts) {
-    if (!fG3Defaults.IsDefaultCut(cut, value)) {
-      SwitchIsCutVector(cut);      
-      return true;
-    }  
-    else return false;  
-  }                               
-  return false;
-}
-
-//_____________________________________________________________________________
-G4bool TG4G3PhysicsManager::CheckControlWithG3Defaults(G4String name, 
-                                 G4double value, TG4G3Control& control,
-                                 TG4G3ControlValue& controlValue)
-{
-/// Retrieve corresponding TG4G3Control from the name and 
-/// in case the value is different from the G3 default value
-/// sets true the value of the SwitchControlVector element 
-/// corresponding to this control and return true; 
-/// return false otherwise.
-
-  // convert control name -> TG4G3Control
-  control = TG4G3ControlVector::GetControl(name);
-
-  // convert double value -> TG4G3ControlValue
-  controlValue = TG4G3ControlVector::GetControlValue(value, control);
-
-  // set switch vector element only if the value
-  // is different from G3 default
-  if (control !=kNoG3Controls) {
-    if (!fG3Defaults.IsDefaultControl(control, controlValue)) {
-      SwitchIsControlVector(control);      
-      return true;
-    }  
-    else return false;  
-  }                               
-  return false;
-}
-
-//_____________________________________________________________________________
 void TG4G3PhysicsManager::SetCut(TG4G3Cut cut, G4double cutValue)
 {  
 /// Set kinetic energy cut (in a G3-like way).
 
+  // Do nothing if cutValue is not valid
+  if ( ! TG4G3CutVector::CheckCutValue(cut, cutValue) ) return; 
+  
   fCutVector->SetCut(cut, cutValue);
   SwitchIsCutVector(cut);
 }  
@@ -178,6 +127,10 @@ void TG4G3PhysicsManager::SwitchIsCutVector(TG4G3Cut cut)
            break;
     case kDCUTM:
            (*fIsCutVector)[kElectron] = true; 
+           break;
+    case kPPCUTM:
+           (*fIsCutVector)[kElectron] = true; 
+           (*fIsCutVector)[kEplus] = true; 
            break;
     case kCUTNEU:
            (*fIsCutVector)[kNeutralHadron] = true; 
@@ -288,19 +241,30 @@ G4bool TG4G3PhysicsManager::CheckCutWithTheVector(G4String name,
 {
 /// Retrieve corresponding TG4G3Cut from the name and 
 /// in case the value is different from the value in cutVector
-/// set true the value of the fIsCutVector element 
+/// and is valid, set true the value of the fIsCutVector element 
 /// corresponding to this cut and return true; 
 /// return false otherwise.
 
   // convert cut name -> TG4G3Cut
   cut = TG4G3CutVector::GetCut(name);
 
+  // add units
+  if ( cut == kTOFMAX ) value *= TG4G3Units::Time();
+  else                  value *= TG4G3Units::Energy();
+  
+  // check cut value validity
+  if ( ! TG4G3CutVector::CheckCutValue(cut, value) ) return false;
+
   // set switch vector element only if the value
-  // is different from the value in cutVector
-  if (cut !=kNoG3Cuts) {
-    // get tolerance from TG4G3CutVector in G3 units
-    G4double tolerance = TG4G3CutVector::Tolerance()/ TG4G3Units::Energy();
-    if (std::abs(value - (*fCutVector)[cut]) > tolerance) {
+  // is different from the value in cutVector and is valid
+  if ( cut != kNoG3Cuts ) {
+    //G4cout << "Comparing: "
+    //       << value << "  "
+    //       << (*fCutVector)[cut] << "  "
+    //       << std::abs(value - (*fCutVector)[cut]) << "  > "
+    //       << TG4G3CutVector::Tolerance() << G4endl;
+           
+    if ( std::abs(value - (*fCutVector)[cut]) > TG4G3CutVector::Tolerance() ) {
       SwitchIsCutVector(cut);      
       return true;
     }  

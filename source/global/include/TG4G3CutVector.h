@@ -42,6 +42,7 @@ class TG4G3CutVector
     // static methods
     static G4double Tolerance();
     static TG4G3Cut GetCut(const G4String& cutName);
+    static G4bool   CheckCutValue(TG4G3Cut cut, G4double value);
     static const G4String& GetCutName(TG4G3Cut cut);
     
     // set methods
@@ -62,6 +63,7 @@ class TG4G3CutVector
     G4double GetMinEkineForNeutralHadron(const G4Track& track) const;
     G4double GetMinEkineForMuon(const G4Track& track) const;
     G4double GetMinEkineForOther(const G4Track& track) const;
+    G4double GetMinEtotPair() const;
     G4bool IsCut() const;
 
   private:

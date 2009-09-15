@@ -87,12 +87,6 @@ class TG4G3PhysicsManager
     /// Not implemented
     TG4G3PhysicsManager& operator=(const TG4G3PhysicsManager& right);
 
-    // methods
-    G4bool CheckCutWithG3Defaults(
-             G4String name, G4double value, TG4G3Cut& cut); 
-    G4bool CheckControlWithG3Defaults(
-             G4String name, G4double value, 
-             TG4G3Control& control, TG4G3ControlValue& controlValue); 
     // set methods
     void SwitchIsCutVector(TG4G3Cut cut);
     void SwitchIsControlVector(TG4G3Control control);

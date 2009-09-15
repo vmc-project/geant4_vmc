@@ -17,6 +17,7 @@
 #include "TG4SteppingAction.h"
 #include "TG4StepManager.h"
 #include "TG4TrackManager.h"
+#include "TG4TrackInformation.h"
 #include "TG4TrackingAction.h"
 #include "TG4SensitiveDetector.h"
 #include "TG4SpecialControlsV2.h"
@@ -41,7 +42,8 @@ TG4SteppingAction::TG4SteppingAction()
     fStandardVerboseLevel(-1),
     fLoopVerboseLevel(1),
     fLoopStepCounter(0),
-    fSaveSecondaries(false)
+    fSaveSecondaries(false),
+    fIsPairCut(false)
  {
 /// Default constructor
 
@@ -59,6 +61,159 @@ TG4SteppingAction::~TG4SteppingAction()
 {
 /// Destructor
 }
+
+//
+// private methods
+//
+
+//_____________________________________________________________________________
+void TG4SteppingAction::ProcessTrackIfLooping(const G4Step* step)
+{
+/// Stop track if maximum number of steps has been reached.
+
+  G4Track* track = step->GetTrack();  
+  G4int stepNumber = track->GetCurrentStepNumber();
+
+  if ( fLoopStepCounter ) {    
+     if ( stepNumber == 1 ) { 
+        // reset parameters at beginning of tracking
+        fpSteppingManager->SetVerboseLevel(fStandardVerboseLevel);
+        fLoopStepCounter = 0;
+                  // necessary in case particle has reached fMaxNofSteps
+                // but has stopped before processing kMaxNofLoopSteps
+     }        
+     else {
+      // count steps after detecting looping track
+      fLoopStepCounter++;
+      if ( fLoopStepCounter == kMaxNofLoopSteps ) {
+
+         // stop the looping track
+         track->SetTrackStatus(fStopAndKill); 
+
+         // reset parameters back
+         fpSteppingManager->SetVerboseLevel(fStandardVerboseLevel);
+         fLoopStepCounter = 0;
+      }          
+    }
+  }    
+  else if ( stepNumber> fMaxNofSteps ) { 
+      
+    // print looping info
+    if ( fLoopVerboseLevel > 0 ) {
+       G4cout << "*** Particle reached max step number ("
+              << fMaxNofSteps << "). ***" << G4endl;
+          if (fStandardVerboseLevel == 0) PrintTrackInfo(track);
+    }        
+   
+    // keep standard verbose level
+    if ( fStandardVerboseLevel < 0 ) 
+      fStandardVerboseLevel = fpSteppingManager->GetverboseLevel();
+
+    // set loop verbose level 
+    fpSteppingManager->SetVerboseLevel(fLoopVerboseLevel);
+      
+    // start looping counter
+    fLoopStepCounter++;
+  }
+}
+
+
+//_____________________________________________________________________________
+void TG4SteppingAction::ProcessTrackIfOutOfRegion(const G4Step* step)
+{
+/// stop track if a user defined tracking region has been reached
+
+  G4ThreeVector position 
+    = step->GetPostStepPoint()->GetPosition();
+
+  if ( position.mag() > TVirtualMCApplication::Instance()->TrackingRmax() ||
+       std::abs(position.z()) > TVirtualMCApplication::Instance()->TrackingZmax()) {
+ 
+    // print looping info
+    if (fLoopVerboseLevel > 0) {
+      G4cout << "*** Particle has reached user defined tracking region. ***" 
+             << G4endl;
+      if (fStandardVerboseLevel == 0) PrintTrackInfo(step->GetTrack());
+    }  
+
+    // stop the track
+    step->GetTrack()->SetTrackStatus(fStopAndKill);  
+  }
+}   
+  
+
+//_____________________________________________________________________________
+void TG4SteppingAction::ProcessTrackIfBelowCut(const G4Step* step)
+{
+/// Flag e+e- secondary pair for stop if its energy is below user cut
+
+  if ( step->GetSecondary()->size() == 2 &&
+       ( (*step->GetSecondary())[0]->GetCreatorProcess()->GetProcessName() == "conv" ||
+         (*step->GetSecondary())[0]->GetCreatorProcess()->GetProcessName() == "muPairProd" ) ) {
+  
+    G4double minEtotPair
+      = TG4StepManager::Instance()
+        ->GetCurrentLimits()->GetCutVector()->GetMinEtotPair();
+        
+    // G4cout <<  "minEtotPair[GeV]= " <<  minEtotPair << G4endl;     
+        
+    if ( minEtotPair > 0. &&
+         (*step->GetSecondary())[0]->GetTotalEnergy() + 
+         (*step->GetSecondary())[1]->GetTotalEnergy() <  minEtotPair ) 
+    {
+      // G4cout << "In stepping action: going to flag pair to stop" << G4endl;   
+      TG4TrackManager::Instance()
+        ->SetParentToTrackInformation(step->GetTrack());
+      TG4TrackManager::Instance()
+        ->GetTrackInformation((*step->GetSecondary())[0])->SetStop(true);
+      TG4TrackManager::Instance()
+        ->GetTrackInformation((*step->GetSecondary())[1])->SetStop(true);
+    }
+  }        
+}        
+
+
+//_____________________________________________________________________________
+void TG4SteppingAction::ProcessTrackOnBoundary(const G4Step* step)
+{
+/// Process actions on the boundary
+
+  // set back max step limit if it has been modified on fly by user
+  G4UserLimits* modifiedLimits
+    = TG4StepManager::Instance()->GetLimitsModifiedOnFly();
+    
+  if ( modifiedLimits ) { 
+    G4UserLimits* nextLimits 
+      = step->GetPostStepPoint()
+          ->GetPhysicalVolume()->GetLogicalVolume()->GetUserLimits();
+
+    if ( nextLimits != modifiedLimits )
+      TG4StepManager::Instance()->SetMaxStepBack();
+  }    
+
+  // let sensitive detector process boundary step
+  // if crossing geometry border
+  // (this ensures compatibility with G3 that
+  // makes boundary step of zero length)
+  if ( step->GetTrack()->GetNextVolume() != 0) {
+
+#ifdef MCDEBUG
+    TG4SensitiveDetector* tsd
+      = TG4SDServices::Instance()
+           ->GetSensitiveDetector(
+                step->GetPostStepPoint()->GetPhysicalVolume()
+                    ->GetLogicalVolume()->GetSensitiveDetector());
+
+    if (tsd) tsd->ProcessHitsOnBoundary((G4Step*)step);
+#else
+    TG4SensitiveDetector* tsd
+      = (TG4SensitiveDetector*) step->GetPostStepPoint()->GetPhysicalVolume()
+          ->GetLogicalVolume()->GetSensitiveDetector();
+
+    if (tsd) tsd->ProcessHitsOnBoundary((G4Step*)step);
+#endif     
+  }
+}          
 
 //
 // protected methods
@@ -124,9 +279,12 @@ void TG4SteppingAction::PrintTrackInfo(const G4Track* track) const
 void TG4SteppingAction::UserSteppingAction(const G4Step* step)
 {
 /// Called by G4 kernel at the end of each step.
+/// This method should not be overridden in a Geant4 VMC user class;
+/// there is defined SteppingAction(const G4Step* step) method
+/// for this purpose. 
  
-  G4Track* track = step->GetTrack();  
-  G4int stepNumber = track->GetCurrentStepNumber();
+  // stop track if maximum number of steps has been reached
+  ProcessTrackIfLooping(step);
 
 /*
   // TO BE REMOVED   
@@ -148,73 +306,18 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
   }     
   // END TO BE REMOVED 
 */              
+  
+  // stop track if a user defined tracking region has been reached
+  ProcessTrackIfOutOfRegion(step);
 
-  // stop track if maximum number of steps has been reached
-  // 
-  if (fLoopStepCounter) {    
-     if (stepNumber == 1 ) { 
-        // reset parameters at beginning of tracking
-        fpSteppingManager->SetVerboseLevel(fStandardVerboseLevel);
-        fLoopStepCounter = 0;
-                  // necessary in case particle has reached fMaxNofSteps
-                // but has stopped before processing kMaxNofLoopSteps
-     }        
-     else {
-      // count steps after detecting looping track
-      fLoopStepCounter++;
-      if (fLoopStepCounter == kMaxNofLoopSteps) {
+  // flag e+e- secondary pair for stop if its energy is below user cut
+  if ( fIsPairCut )
+    ProcessTrackIfBelowCut(step);
 
-         // stop the looping track
-         track->SetTrackStatus(fStopAndKill); 
-
-         // reset parameters back
-         fpSteppingManager->SetVerboseLevel(fStandardVerboseLevel);
-         fLoopStepCounter = 0;
-      }          
-    }
-  }    
-  else if (stepNumber> fMaxNofSteps) { 
-      
-    // print looping info
-    if (fLoopVerboseLevel > 0) {
-       G4cout << "*** Particle reached max step number ("
-              << fMaxNofSteps << "). ***" << G4endl;
-          if (fStandardVerboseLevel == 0) PrintTrackInfo(track);
-    }        
-   
-    // keep standard verbose level
-    if (fStandardVerboseLevel<0) 
-      fStandardVerboseLevel = fpSteppingManager->GetverboseLevel();
-
-    // set loop verbose level 
-    fpSteppingManager->SetVerboseLevel(fLoopVerboseLevel);
-      
-    // start looping counter
-    fLoopStepCounter++;
-  }
-
-  // stop track if a user defined tracking region
-  // has been reached
-  G4ThreeVector position 
-    = step->GetPostStepPoint()->GetPosition();
-
-  if (position.mag()    > TVirtualMCApplication::Instance()->TrackingRmax() ||
-      std::abs(position.z()) > TVirtualMCApplication::Instance()->TrackingZmax()) {
- 
-    // print looping info
-    if (fLoopVerboseLevel > 0) {
-      G4cout << "*** Particle has reached user defined tracking region. ***" 
-             << G4endl;
-      if (fStandardVerboseLevel == 0) PrintTrackInfo(step->GetTrack());
-    }  
-
-    // stop the track
-    step->GetTrack()->SetTrackStatus(fStopAndKill);  
-  }  
-        
   // save secondaries
   if ( fSaveSecondaries ) 
-    TG4TrackManager::Instance()->SaveSecondaries(track, step->GetSecondary());
+    TG4TrackManager::Instance()
+      ->SaveSecondaries(step->GetTrack(), step->GetSecondary());
     
   // apply special controls if init step or if crossing geometry border  
   if ( step->GetPostStepPoint()->GetStepStatus() == fGeomBoundary &&
@@ -227,44 +330,9 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
   SteppingAction(step);
 
   // actions on the boundary
-  if (  step->GetPostStepPoint()->GetStepStatus() == fGeomBoundary ) {
-  
-    // set back max step limit if it has been modified on fly by user
-    G4UserLimits* modifiedLimits
-      = TG4StepManager::Instance()->GetLimitsModifiedOnFly();
-      
-    if ( modifiedLimits ) { 
-      G4UserLimits* nextLimits 
-        = step->GetPostStepPoint()
-            ->GetPhysicalVolume()->GetLogicalVolume()->GetUserLimits();
-
-      if ( nextLimits != modifiedLimits )
-        TG4StepManager::Instance()->SetMaxStepBack();
-    }    
-
-    // let sensitive detector process boundary step
-    // if crossing geometry border
-    // (this ensures compatibility with G3 that
-    // makes boundary step of zero length)
-    if ( step->GetTrack()->GetNextVolume() != 0) {
-
-#ifdef MCDEBUG
-      TG4SensitiveDetector* tsd
-        = TG4SDServices::Instance()
-             ->GetSensitiveDetector(
-                  step->GetPostStepPoint()->GetPhysicalVolume()
-                      ->GetLogicalVolume()->GetSensitiveDetector());
-
-      if (tsd) tsd->ProcessHitsOnBoundary((G4Step*)step);
-#else
-      TG4SensitiveDetector* tsd
-        = (TG4SensitiveDetector*) step->GetPostStepPoint()->GetPhysicalVolume()
-            ->GetLogicalVolume()->GetSensitiveDetector();
-
-      if (tsd) tsd->ProcessHitsOnBoundary((G4Step*)step);
-#endif     
-    }
-  }        
+  if ( step->GetPostStepPoint()->GetStepStatus() == fGeomBoundary ) {
+    ProcessTrackOnBoundary(step);
+  }  
 }
 
 //_____________________________________________________________________________

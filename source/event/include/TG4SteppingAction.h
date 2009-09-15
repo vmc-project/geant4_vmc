@@ -64,11 +64,13 @@ class TG4SteppingAction : public G4UserSteppingAction
     void SetMaxNofSteps(G4int number);
     void SetSaveSecondaries(G4bool saveSecondaries);
     void SetSpecialControls(TG4SpecialControlsV2* specialControls);
+    void SetIsPairCut(G4bool isPairCut);
 
     // get methods
     G4int GetLoopVerboseLevel() const;
     G4int GetMaxNofSteps() const;
     G4bool GetSaveSecondaries() const;
+    G4bool GetIsPairCut() const;
 
   protected:
     // methods
@@ -82,6 +84,13 @@ class TG4SteppingAction : public G4UserSteppingAction
 
     // static data members
     static TG4SteppingAction*   fgInstance; ///< this instance
+    
+    //
+    // methods
+    void ProcessTrackIfLooping(const G4Step* step);
+    void ProcessTrackIfOutOfRegion(const G4Step* step);
+    void ProcessTrackIfBelowCut(const G4Step* step);
+    void ProcessTrackOnBoundary(const G4Step* step);
 
     //
     // data members
@@ -106,6 +115,9 @@ class TG4SteppingAction : public G4UserSteppingAction
     
     /// control of saving secondaries
     G4bool fSaveSecondaries;
+
+    /// control of cut on e+e- pair 
+    G4bool fIsPairCut;
 };
 
 // inline methods
@@ -135,6 +147,11 @@ inline void TG4SteppingAction::SetSpecialControls(TG4SpecialControlsV2* specialC
   fSpecialControls = specialControls; 
 }
 
+inline void TG4SteppingAction::SetIsPairCut(G4bool isPairCut) {
+  /// Set control for e+e- pair cut
+  fIsPairCut = isPairCut;
+}  
+
 inline G4int TG4SteppingAction::GetMaxNofSteps() const { 
   /// Get maximum number of steps allowed 
   return fMaxNofSteps; 
@@ -148,6 +165,11 @@ inline G4int TG4SteppingAction::GetLoopVerboseLevel() const {
 inline G4bool TG4SteppingAction::GetSaveSecondaries() const { 
   /// Return control for saving secondaries in the VMC stack
   return fSaveSecondaries; 
+}
+
+inline G4bool TG4SteppingAction::GetIsPairCut() const { 
+  /// Return control for saving secondaries in the VMC stack
+  return fIsPairCut; 
 }
 
 #endif //TG4_STEPPING_ACTION_H

@@ -16,6 +16,9 @@
 
 #include "TG4G3CutVector.h"
 #include "TG4G3Defaults.h"
+#include "TG4Globals.h"
+
+#include "CLHEP/Units/PhysicalConstants.h"
 
 #include <G4Track.hh>
 #include <G4ParticleDefinition.hh>
@@ -30,7 +33,72 @@
 const G4double  TG4G3CutVector::fgkDCUTEOff  = 10. * TeV;
 const G4double  TG4G3CutVector::fgkDCUTMOff  = 10. * TeV;
 const G4double  TG4G3CutVector::fgkTolerance =  1. * keV;
+                // for cut in time this value represents 1e-03s
 TG4StringVector TG4G3CutVector::fgCutNameVector;
+
+//
+// static methods
+//
+
+//_____________________________________________________________________________
+TG4G3Cut TG4G3CutVector::GetCut(const G4String& cutName)
+{
+/// Retrieve corresponding TG4G3Cut constant from the cutName.
+
+  if      (cutName == fgCutNameVector[kCUTGAM]) return kCUTGAM; 
+  else if (cutName == fgCutNameVector[kCUTELE]) return kCUTELE;
+  else if (cutName == fgCutNameVector[kCUTNEU]) return kCUTNEU;
+  else if (cutName == fgCutNameVector[kCUTHAD]) return kCUTHAD;
+  else if (cutName == fgCutNameVector[kCUTMUO]) return kCUTMUO;
+  else if (cutName == fgCutNameVector[kBCUTE])  return kBCUTE; 
+  else if (cutName == fgCutNameVector[kBCUTM])  return kBCUTM; 
+  else if (cutName == fgCutNameVector[kDCUTE])  return kDCUTE;
+  else if (cutName == fgCutNameVector[kDCUTM])  return kDCUTM;
+  else if (cutName == fgCutNameVector[kPPCUTM]) return kPPCUTM;
+  else if (cutName == fgCutNameVector[kTOFMAX]) return kTOFMAX;
+  else return kNoG3Cuts;
+}
+
+//_____________________________________________________________________________
+G4bool TG4G3CutVector::CheckCutValue(TG4G3Cut cut, G4double value)
+{
+/// Check if the cut value is valid for given cut;
+/// if not - print warning and return false.
+/// Currently only the PPCUTM value is tested if it is > 2 * mass of electron.
+
+  //G4cout << "TG4G3CutVector::CheckCutValue: " 
+  //       << value / MeV << " MeV  " 
+  //       << 2.*CLHEP::electron_mass_c2 / MeV  << " MeV" << G4endl;
+
+  if ( cut == kPPCUTM && 
+       value < ( 2.*CLHEP::electron_mass_c2 - TG4G3CutVector::Tolerance() ) )  {
+    TString message = "PPCUTM cut value ";
+    message += value;
+    message += " MeV is lower than 2*e_mass.";
+    TG4Globals::Warning(
+      "TG4G3CutVector", "CheckCutValue", 
+      message + TG4Globals::Endl() + 
+      TString("The cut will be ignored."));
+    return false;
+  }
+
+  return true;  
+}    
+
+//_____________________________________________________________________________
+const G4String& TG4G3CutVector::GetCutName(TG4G3Cut cut)
+{
+/// Return name of a specified cut.
+
+  // fill name vector
+  if (fgCutNameVector.size() == 0) TG4G3CutVector::FillCutNameVector(); 
+
+  return fgCutNameVector[cut];
+}  
+
+//
+// ctors, dtors 
+//
 
 //_____________________________________________________________________________
 TG4G3CutVector::TG4G3CutVector()
@@ -126,46 +194,16 @@ void TG4G3CutVector::FillCutNameVector()
 //
 
 //_____________________________________________________________________________
-TG4G3Cut TG4G3CutVector::GetCut(const G4String& cutName)
-{
-/// Retrieve corresponding TG4G3Cut constant from the cutName.
-
-  if      (cutName == fgCutNameVector[kCUTGAM]) return kCUTGAM; 
-  else if (cutName == fgCutNameVector[kCUTELE]) return kCUTELE;
-  else if (cutName == fgCutNameVector[kCUTNEU]) return kCUTNEU;
-  else if (cutName == fgCutNameVector[kCUTHAD]) return kCUTHAD;
-  else if (cutName == fgCutNameVector[kCUTMUO]) return kCUTMUO;
-  else if (cutName == fgCutNameVector[kBCUTE])  return kBCUTE; 
-  else if (cutName == fgCutNameVector[kBCUTM])  return kBCUTM; 
-  else if (cutName == fgCutNameVector[kDCUTE])  return kDCUTE;
-  else if (cutName == fgCutNameVector[kDCUTM])  return kDCUTM;
-  else if (cutName == fgCutNameVector[kPPCUTM]) return kPPCUTM;
-  else if (cutName == fgCutNameVector[kTOFMAX]) return kTOFMAX;
-  else return kNoG3Cuts;
-}
-
-//_____________________________________________________________________________
-const G4String& TG4G3CutVector::GetCutName(TG4G3Cut cut)
-{
-/// Return name of a specified cut.
-
-  // fill name vector
-  if (fgCutNameVector.size() == 0) TG4G3CutVector::FillCutNameVector(); 
-
-  return fgCutNameVector[cut];
-}  
-
-//_____________________________________________________________________________
 void TG4G3CutVector::SetCut(TG4G3Cut cut, G4double cutValue)
 {
 /// Set the cutValue for the specified cut.
 
-  if (cut>=kNoG3Cuts) {
+  if ( cut >= kNoG3Cuts ) {
     TG4Globals::Exception(
       "TG4G3CutVector", "SetG3Cut", "Inconsistent cut.");
   }
 
-  fCutVector[cut] = cutValue;          
+  fCutVector[cut] = cutValue;  
 }
 
 //_____________________________________________________________________________
@@ -243,10 +281,13 @@ void TG4G3CutVector::Print() const
 //_____________________________________________________________________________
 G4double TG4G3CutVector::GetMinEkineForGamma(const G4Track& track) const
 {
-/// Return the cut value for gamma.
-/// (Cut is not applied for "opticalphoton" 
-///  as it is treated in G4 as a particle different 
-///  from "gamma" in G4.)
+/// Return the cut value for gamma:
+/// - BCUTE   - if gamma is produced by e- Bremstrahlung
+/// - BCUTM   - if gamma is produced by muon or hadron Bremstrahlung
+/// - CUTGAM  - in all other cases
+///
+/// Cut is not applied for "opticalphoton" which is treated in G4 as a 
+/// particle different from "gamma".
 
   const G4VProcess* kpCreatorProcess = track.GetCreatorProcess();
   G4String processName = "";
@@ -266,7 +307,16 @@ G4double TG4G3CutVector::GetMinEkineForGamma(const G4Track& track) const
 //_____________________________________________________________________________
 G4double TG4G3CutVector::GetMinEkineForElectron(const G4Track& track) const
 {
-/// Return the cut value for e-. 
+/// Return the cut value for e-:
+/// - DCUTE - if e- is produced by e- ionisation and DRAY process is selected 
+///           (default) 
+/// - DCUTM - if e- is produced by muon ionisation and DRAY process is selected 
+///           (default) 
+/// - 10 TeV - if e- is produced by ionisation and DRAY process is
+///            switched off
+/// - 0.     - if  e- is produced by muon pair production.
+///            (The PPCUTM cut is applied on total energy of the e+e- pair)
+/// - CUTELE - in all other cases.
 
   const G4VProcess* kpCreatorProcess = track.GetCreatorProcess();
   G4String processName = "";
@@ -293,9 +343,10 @@ G4double TG4G3CutVector::GetMinEkineForElectron(const G4Track& track) const
     else 
       return fgkDCUTMOff;
   }
-  else if (processName == "muPairProd") {
+  else if ( processName == "muPairProd" ) {
     // direct pair production by muons
-    return fCutVector[kPPCUTM];
+    // the cut PPCUTM is applied on total energy of the e+e- pair 
+    return 0;
   }  
   else {   
     return fCutVector[kCUTELE];
@@ -303,26 +354,19 @@ G4double TG4G3CutVector::GetMinEkineForElectron(const G4Track& track) const
 }
 
 //_____________________________________________________________________________
-G4double TG4G3CutVector::GetMinEkineForEplus(const G4Track& track) const
+G4double TG4G3CutVector::GetMinEkineForEplus(const G4Track& /*track*/) const
 {
-/// Return the cut value for e+. 
+/// Return the cut value for e+.                              \n 
+/// No special cut is applied to e+; 
+/// the PPCUTM cut is applied on total energy of the e+e- pair. 
 
-  const G4VProcess* kpCreatorProcess = track.GetCreatorProcess();
-  G4String processName = "";
-  if (kpCreatorProcess) processName = kpCreatorProcess->GetProcessName();
-
-  if (processName == "muPairProd") {
-    // direct pair production by muons
-    return fCutVector[kPPCUTM];
-  }   
-  else
-    return 0;
+  return 0;
 }
 
 //_____________________________________________________________________________
 G4double TG4G3CutVector::GetMinEkineForChargedHadron(const G4Track& /*track*/) const
 {
-/// Return the cut value for charged hadron.
+/// Return the cut value for charged hadron (CUTHAD).
 
   return fCutVector[kCUTHAD];
 }
@@ -330,7 +374,7 @@ G4double TG4G3CutVector::GetMinEkineForChargedHadron(const G4Track& /*track*/) c
 //_____________________________________________________________________________
 G4double TG4G3CutVector::GetMinEkineForNeutralHadron(const G4Track& /*track*/) const
 {
-/// Return the cut value for neutral hadron.
+/// Return the cut value for neutral hadron (CUTNEU).
 
   return fCutVector[kCUTNEU];
 }
@@ -338,7 +382,7 @@ G4double TG4G3CutVector::GetMinEkineForNeutralHadron(const G4Track& /*track*/) c
 //_____________________________________________________________________________
 G4double TG4G3CutVector::GetMinEkineForMuon(const G4Track& /*track*/) const
 {
-/// Return the cut value for neutral muon.
+/// Return the cut value for muon (CUTMUO)
 
   return fCutVector[kCUTMUO];
 }
@@ -346,11 +390,20 @@ G4double TG4G3CutVector::GetMinEkineForMuon(const G4Track& /*track*/) const
 //_____________________________________________________________________________
 G4double TG4G3CutVector::GetMinEkineForOther(const G4Track& /*track*/) const
 {
-/// Return 0.
+/// No cut is applied for other particles.
 
   return 0.;
 }
-//_____________________________________________________________________________
+
+ //_____________________________________________________________________________
+G4double TG4G3CutVector::GetMinEtotPair() const
+{
+/// Return the cut value for the pair production by muons (PPCUTM).
+
+  return fCutVector[kPPCUTM];
+}   
+
+ //_____________________________________________________________________________
 G4bool TG4G3CutVector::IsCut() const
 {
 /// Return true if any of cuts is set.

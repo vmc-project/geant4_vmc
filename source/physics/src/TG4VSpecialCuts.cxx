@@ -17,6 +17,8 @@
 #include "TG4VSpecialCuts.h"
 #include "TG4G3CutVector.h"
 #include "TG4GeometryServices.h"
+#include "TG4TrackManager.h"
+#include "TG4TrackInformation.h"
 #include "TG4Limits.h"
 
 #include <G4UserLimits.hh>
@@ -66,6 +68,13 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
 #endif    
 
   if (!limits) return proposedStep;
+
+  // tracks flagged to stop
+  TG4TrackInformation* trackInformation
+    = TG4TrackManager::Instance()->GetTrackInformation(&track); 
+  if ( trackInformation && trackInformation->IsStop() ) {
+    return minStep;
+  }  
 
   // max track length
   proposedStep 

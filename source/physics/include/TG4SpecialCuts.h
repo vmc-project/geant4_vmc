@@ -82,6 +82,8 @@ class TG4SpecialCutsForEplus: public TG4VSpecialCuts
     // methods
     virtual G4double GetMinEkine(const TG4Limits& limits,
                                  const G4Track& track) const;
+    virtual G4VParticleChange* PostStepDoIt(const G4Track& track, 
+                                            const G4Step& /*step*/);
 };
 
 /// \ingroup physics
