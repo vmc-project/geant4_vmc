@@ -20,15 +20,15 @@
 #include "Ex02MCApplication.h"
 #include "Ex02MCStack.h"
 #include "Ex02DetectorConstructionOld.h"
+#include "Ex02MagField.h"
 
 #include <TROOT.h>
 #include <TInterpreter.h>
 #include <TVirtualMC.h>
 #include <TPDGCode.h>
 #include <TGeoManager.h>
-#include <TGeoUniformMagField.h>
 #include <TVirtualGeoTrack.h>
-#include <Riostream.h>
+#include <Riostream.h> 
 
 /// \cond CLASSIMP
 ClassImp(Ex02MCApplication)
@@ -54,7 +54,10 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title,
   fStack = new Ex02MCStack(100); 
   
   // Constant magnetic field (in kiloGauss)
-  fMagField = new TGeoUniformMagField(20., 0., 0.);
+  fMagField = new Ex02MagField(20., 0., 0.);
+
+  // It si also possible to use TGeoUniformMagField class:
+  // fMagField = new TGeoUniformMagField(20., 0., 0.);
 }
 
 //_____________________________________________________________________________

@@ -24,6 +24,7 @@
 #pragma link C++ class  Ex02ChamberParameterisation+;
 #pragma link C++ class  Ex02DetectorConstruction+;
 #pragma link C++ class  Ex02DetectorConstructionOld+;
+#pragma link C++ class  Ex02MagField+;
 #pragma link C++ class  Ex02TrackerHit+;
 #pragma link C++ class  Ex02TrackerSD+;
 #pragma link C++ class  Ex02RootManager+;
