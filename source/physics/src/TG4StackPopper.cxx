@@ -119,6 +119,7 @@ G4VParticleChange* TG4StackPopper::AlongStepDoIt(const G4Track& track,
         // the track information is deleted together with its
         // G4Track object  
     trackInformation->SetIsUserTrack(true);
+    trackInformation->SetPDGEncoding(particle->GetPdgCode());
     track->SetUserInformation(trackInformation);
       
     // Add track as a secondary

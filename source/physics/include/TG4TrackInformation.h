@@ -50,6 +50,7 @@ class TG4TrackInformation : public G4VUserTrackInformation
     void SetTrackParticleID(G4int trackParticleID);
     void SetParentParticleID(G4int parentParticleID);
     void SetPDGLifetime(G4double pdgLifetime);
+    void SetPDGEncoding(G4int pdgEncoding);
     void SetIsUserTrack(G4bool isUserTrack);
     void SetStop(G4bool stop);
 
@@ -57,6 +58,7 @@ class TG4TrackInformation : public G4VUserTrackInformation
     G4int  GetTrackParticleID() const;
     G4int  GetParentParticleID() const;
     G4double GetPDGLifetime() const;
+    G4int  GetPDGEncoding() const;
     G4bool IsUserTrack() const;
     G4bool IsStop() const;
 
@@ -66,6 +68,7 @@ class TG4TrackInformation : public G4VUserTrackInformation
     G4int    fTrackParticleID; ///< the index of track particle in VMC stack
     G4int    fParentParticleID;///< the index of parent track in VMC stack
     G4double fPDGLifetime;     ///< the original particle PDG lifetime
+    G4double fPDGEncoding;     ///< the particle PDG encoding
     G4bool   fIsUserTrack;     ///< true if defined by user and not primary track
     G4bool   fStop;            ///< true if track should be stopped
 };

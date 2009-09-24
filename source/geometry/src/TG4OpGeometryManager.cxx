@@ -54,7 +54,7 @@
 
 //_____________________________________________________________________________
 TG4OpGeometryManager::TG4OpGeometryManager() 
-  : TG4Verbose("geometryManager"),
+  : TG4Verbose("opGeometryManager"),
     fGeometryServices(0),
     fOpSurfaceMap(0)
 {
@@ -221,9 +221,9 @@ void TG4OpGeometryManager::SetBorderSurface(const char *name,
 
   // Get physical volumes
   G4VPhysicalVolume* pv1
-    = fGeometryServices->FindPhysicalVolume( vol1Name, vol1CopyNo, false); 
+    = fGeometryServices->FindPhysicalVolume( vol1Name, vol1CopyNo, true); 
   G4VPhysicalVolume* pv2
-    = fGeometryServices->FindPhysicalVolume( vol2Name, vol2CopyNo, false); 
+    = fGeometryServices->FindPhysicalVolume( vol2Name, vol2CopyNo, true); 
 
   if (! pv1 || ! pv2) {
     TString text;
@@ -260,7 +260,7 @@ void TG4OpGeometryManager::SetSkinSurface(const char *name,
 
   // Get logical volume
   G4LogicalVolume* lv
-    = fGeometryServices->FindLogicalVolume(volName, false); 
+    = fGeometryServices->FindLogicalVolume(volName, true); 
 
   if ( !lv ) {
     TG4Globals::Warning(

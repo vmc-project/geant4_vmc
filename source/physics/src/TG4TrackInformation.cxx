@@ -25,6 +25,7 @@ TG4TrackInformation::TG4TrackInformation()
     fTrackParticleID(-1),
     fParentParticleID(-1),
     fPDGLifetime(-1.0),
+    fPDGEncoding(0),
     fIsUserTrack(false),
     fStop(false)
 {
@@ -37,6 +38,7 @@ TG4TrackInformation::TG4TrackInformation(G4int trackParticleID)
     fTrackParticleID(trackParticleID),
     fParentParticleID(-1),
     fPDGLifetime(-1.0), 
+    fPDGEncoding(0),
     fIsUserTrack(false),
     fStop(false)
 {
