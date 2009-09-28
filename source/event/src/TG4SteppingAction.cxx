@@ -177,24 +177,24 @@ void TG4SteppingAction::ProcessTrackOnBoundary(const G4Step* step)
 {
 /// Process actions on the boundary
 
-  // set back max step limit if it has been modified on fly by user
-  G4UserLimits* modifiedLimits
-    = TG4StepManager::Instance()->GetLimitsModifiedOnFly();
-    
-  if ( modifiedLimits ) { 
-    G4UserLimits* nextLimits 
-      = step->GetPostStepPoint()
-          ->GetPhysicalVolume()->GetLogicalVolume()->GetUserLimits();
-
-    if ( nextLimits != modifiedLimits )
-      TG4StepManager::Instance()->SetMaxStepBack();
-  }    
-
   // let sensitive detector process boundary step
   // if crossing geometry border
   // (this ensures compatibility with G3 that
   // makes boundary step of zero length)
   if ( step->GetTrack()->GetNextVolume() != 0) {
+
+    // set back max step limit if it has been modified on fly by user
+    G4UserLimits* modifiedLimits
+      = TG4StepManager::Instance()->GetLimitsModifiedOnFly();
+    
+    if ( modifiedLimits ) { 
+      G4UserLimits* nextLimits 
+        = step->GetPostStepPoint()
+            ->GetPhysicalVolume()->GetLogicalVolume()->GetUserLimits();
+
+      if ( nextLimits != modifiedLimits )
+        TG4StepManager::Instance()->SetMaxStepBack();
+    }    
 
 #ifdef MCDEBUG
     TG4SensitiveDetector* tsd
