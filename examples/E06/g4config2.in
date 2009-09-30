@@ -16,15 +16,10 @@
 # Print material properties
 #
 /mcDet/printMaterials
+/mcDet/printMaterialsProperties
 
 # Physics list setting
 # 
-/process/inactivate phot
-/process/inactivate conv
-/process/inactivate compt
-/process/inactivate Scintillation
-
-# Limit max number of Cerenkov photons per step
-# (Needed as Cerenkov process does not limit step itself)
-#
-/mcPhysics/setCerenkovMaxPhotons 5
+#/process/inactivate phot
+#/process/inactivate conv
+#/process/inactivate compt

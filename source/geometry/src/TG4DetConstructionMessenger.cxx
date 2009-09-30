@@ -38,6 +38,7 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
     fSeparatorCmd(0),
     fUniformFieldValueCmd(0),
     fPrintMaterialsCmd(0),
+    fPrintMaterialsPropertiesCmd(0),
     fPrintVolumesCmd(0)
     
 {
@@ -79,6 +80,11 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fPrintMaterialsCmd->SetGuidance("Prints all materials.");
   fPrintMaterialsCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);   
 
+  fPrintMaterialsPropertiesCmd 
+    = new G4UIcmdWithoutParameter("/mcDet/printMaterialsProperties", this);
+  fPrintMaterialsPropertiesCmd->SetGuidance("Prints all material properties for all materials.");
+  fPrintMaterialsPropertiesCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);   
+
   fPrintMediaCmd 
     = new G4UIcmdWithoutParameter("/mcDet/printMedia", this);
   fPrintMediaCmd->SetGuidance("Prints all media.");
@@ -86,8 +92,8 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
 
   fPrintVolumesCmd 
     = new G4UIcmdWithoutParameter("/mcDet/printVolumes", this);
-  fPrintMaterialsCmd->SetGuidance("Prints all volumes.");
-  fPrintMaterialsCmd->AvailableForStates(G4State_Idle);   
+  fPrintVolumesCmd->SetGuidance("Prints all volumes.");
+  fPrintVolumesCmd->AvailableForStates(G4State_Idle);   
 
   fPrintCutsCmd 
     = new G4UIcmdWithAString("/mcDet/printCuts", this);
@@ -115,6 +121,7 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
   delete fSeparatorCmd;
   delete fUniformFieldValueCmd;
   delete fPrintMaterialsCmd;
+  delete fPrintMaterialsPropertiesCmd;
   delete fPrintMediaCmd;
   delete fPrintVolumesCmd;
   delete fPrintCutsCmd; 
@@ -149,6 +156,9 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
   }
   else if (command == fPrintMaterialsCmd) {
     TG4GeometryServices::Instance()->PrintMaterials();
+  }    
+  else if (command == fPrintMaterialsPropertiesCmd) {
+    TG4GeometryServices::Instance()->PrintMaterialsProperties();
   }    
   else if (command == fPrintMediaCmd) {
     TG4GeometryServices::Instance()->PrintMedia();

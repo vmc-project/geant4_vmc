@@ -26,6 +26,7 @@
 #include <G4OpticalSurface.hh>
 #include <G4SurfaceProperty.hh>
 #include <G4Transform3D.hh>
+#include <G4Version.hh>
 
 #include <Rtypes.h>
 #include <TMCOptical.h>
@@ -89,6 +90,7 @@ class TG4GeometryServices : public TG4Verbose
     void PrintPhysicalVolumeStore() const;
     void PrintElementTable() const;
     void PrintMaterials() const;
+    void PrintMaterialsProperties() const;
     void PrintMedia() const;
     void PrintCuts(const G4String& cutName) const;
     void PrintControls(const G4String& controlName) const;
@@ -145,7 +147,9 @@ class TG4GeometryServices : public TG4Verbose
     G4bool CompareMaterial(G4int nofElements, G4double density, 
                            const G4Material* material) const;
     G4double* ConvertAtomWeight(G4int nmat, G4double* a, G4double* wmat) const;
-
+#if G4VERSION_NUMBER >= 930
+    void DumpG4MaterialPropertiesTable(G4MaterialPropertiesTable* table) const;
+#endif
     // static data members
     static TG4GeometryServices*  fgInstance;   ///< this instance
     static const G4double  fgkAZTolerance;     ///< A,Z tolerance

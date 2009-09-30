@@ -29,6 +29,7 @@
 #include <G4PhysicalVolumeStore.hh>
 #include <G4VPhysicalVolume.hh>
 #include <G4Material.hh>
+#include <G4MaterialPropertiesTable.hh>
 #include <G4Element.hh>
 #include <G4UserLimits.hh>
 #include <G3toG4.hh> 
@@ -173,6 +174,51 @@ G4double* TG4GeometryServices::ConvertAtomWeight(G4int nmat,
   return weight;  
 }
 
+#if G4VERSION_NUMBER >= 930
+//_____________________________________________________________________________
+void TG4GeometryServices::DumpG4MaterialPropertiesTable(
+                              G4MaterialPropertiesTable* table) const
+{
+/// Redefined method from Geant4.
+/// In difference from G4 implementation the info about Null vector
+/// is printed to G4cout and not as G4Exception.
+
+  typedef std::map< G4String, G4MaterialPropertyVector*, std::less<G4String> > MPTMap;
+  typedef std::map< G4String, G4double, std::less<G4String> > MPTCMap;
+  typedef MPTMap::const_iterator MPTiterator;
+  typedef MPTCMap::const_iterator MPTCiterator;
+
+  const MPTMap* MPT = table->GetPropertiesMap(); 
+  MPTiterator i;
+  for (i = MPT->begin(); i != MPT->end(); ++i)
+  {
+    G4cout << (*i).first << G4endl;
+    if ( (*i).second != 0 )
+    {
+      (*i).second->DumpVector();
+    }
+    else
+    {
+      G4cout << "  NULL Material Property Vector Pointer." << G4endl;
+    }
+  }
+
+  const MPTCMap* MPTC = table->GetPropertiesCMap(); 
+  MPTCiterator j;
+  for (j = MPTC->begin(); j != MPTC->end(); ++j)
+  {
+    G4cout << j->first << G4endl;
+    if ( j->second != 0 )
+    {
+      G4cout << j->second << G4endl;
+    }
+    else
+    {
+      G4cout << "  No Material Constant Property." << G4endl;
+    }
+  }
+}  
+#endif                                
 //
 // public methods
 //
@@ -519,21 +565,32 @@ void TG4GeometryServices::PrintElementTable() const
 //_____________________________________________________________________________
 void TG4GeometryServices::PrintMaterials() const
 {
-/// Print all materials & material properties tables
+/// Print all materials
 
   // Dump materials
   const G4MaterialTable* matTable = G4Material::GetMaterialTable();
   G4cout << *matTable;
+}
+
+//_____________________________________________________________________________
+void TG4GeometryServices::PrintMaterialsProperties() const
+{
+/// Print all material properties tables
 
   // Dump material properties tables
   // associated with materials
+  const G4MaterialTable* matTable = G4Material::GetMaterialTable();
   for (G4int i=0; i<G4int(matTable->size()); i++) {
     if ( (*matTable)[i] &&
          (*matTable)[i]->GetMaterialPropertiesTable() ) {
          
       G4cout << (*matTable)[i]->GetName() 
              << " material properties table: " << G4endl;
+#if G4VERSION_NUMBER >= 930
+      DumpG4MaterialPropertiesTable((*matTable)[i]->GetMaterialPropertiesTable());
+#else
       (*matTable)[i]->GetMaterialPropertiesTable()->DumpTable();
+#endif
     }  
   }  
 
@@ -546,7 +603,11 @@ void TG4GeometryServices::PrintMaterials() const
          
       G4cout << it->first 
              << " optical surface material properties table: " << G4endl;
+#if G4VERSION_NUMBER >= 930
+      DumpG4MaterialPropertiesTable(it->second->GetMaterialPropertiesTable());
+#else
       it->second->GetMaterialPropertiesTable()->DumpTable();
+#endif
     }  
   }  
 }

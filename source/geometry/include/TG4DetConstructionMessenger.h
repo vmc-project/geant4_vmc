@@ -37,6 +37,7 @@ class G4UIcmdWithADoubleAndUnit;
 /// - /mcDet/volNameSeparator [char]  - for geomVMCtoGeant4 only
 /// - /mcDet/uniformFieldValue 
 /// - /mcDet/printMaterials 
+/// - /mcDet/printMaterialsProperties 
 /// - /mcDet/printMedia
 /// - /mcDet/printVolumes
 /// - /mcDet/printCuts cutName
@@ -80,6 +81,9 @@ class TG4DetConstructionMessenger: public G4UImessenger
     
     /// command: printMatrials     
     G4UIcmdWithoutParameter*    fPrintMaterialsCmd;
+    
+    /// command: printMaterialsProperties     
+    G4UIcmdWithoutParameter*    fPrintMaterialsPropertiesCmd;
     
     /// command: printMedia     
     G4UIcmdWithoutParameter*    fPrintMediaCmd;

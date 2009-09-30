@@ -20,15 +20,27 @@
 #include <G4UImessenger.hh>
 #include <globals.hh>
 
+#include "TG4OpticalProcess.h"
+
 class TG4OpticalPhysics;
 
+class G4UIcmdWithABool;
 class G4UIcmdWithAnInteger;
+class G4UIcmdWithADouble;
+class G4UIcmdWithAString;
 
 /// \ingroup physics_list
 /// \brief Messenger class that defines commands for the optical physics
 ///
 /// Implements commands:
-/// - /mcPhysics/setCerenkovMaxPhotons [maxNofPhotons]
+/// - /mcPhysics/selectOpProcess  processName
+/// - /mcPhysics/setOpProcessActivation  true|false
+/// - /mcPhysics/setOpProcessVerbose  verboseLevel
+/// - /mcPhysics/setCerenkovMaxPhotons maxNofPhotons
+/// - /mcPhysics/setCerenkovMaxBetaChange maxBetaChange
+/// - /mcPhysics/setScintillationYieldFactor yieldFactor
+/// - /mcPhysics/setOpticalSurfaceModel glisur|unified
+/// - /mcPhysics/setTrackSecondariesFirst true|false
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -55,8 +67,32 @@ class TG4OpticalPhysicsMessenger: public G4UImessenger
     /// associated class
     TG4OpticalPhysics*     fOpticalPhysics;
     
+    /// selected optical process
+    TG4OpticalProcess      fSelectedProcess;
+    
+    /// selectOpProcess command   
+    G4UIcmdWithAString*    fSelectOpProcessCmd;                                               
+
+    /// setCerenkovActivation command   
+    G4UIcmdWithABool*      fSetOpProcessActivationCmd;                                               
+
+    /// setCerenkovVerbose command   
+    G4UIcmdWithAnInteger*  fSetOpProcessVerboseCmd;                                               
+
     /// setCerenkovMaxPhotons command   
     G4UIcmdWithAnInteger*  fSetCerenkovMaxPhotonsCmd;                                               
+
+    /// setCerenkovMaxBetaChange command   
+    G4UIcmdWithADouble*    fSetCerenkovMaxBetaChangeCmd;                                               
+
+    /// setScintillationYieldFactor command   
+    G4UIcmdWithADouble*    fSetScintillationYieldFactorCmd;                                               
+
+    /// setOpticalSurfaceModel command   
+    G4UIcmdWithAString*    fSetOpticalSurfaceModelCmd;                                               
+
+    /// setTrackSecondariesFirst command   
+    G4UIcmdWithABool*      fSetTrackSecondariesFirstCmd;                                               
 };    
 
 #endif //TG4_OPTICAL_PHYSICS_MESSENGER_H
