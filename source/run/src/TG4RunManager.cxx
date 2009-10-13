@@ -36,23 +36,23 @@
 #include "TG4RegionsManager.h"
 
 #include <G4RunManager.hh>
+#include <Randomize.hh>
 #include <G4UIsession.hh>
 #include <G4UImanager.hh>
 #include <G4UIterminal.hh>
 #include <G4UItcsh.hh> 
 #include <G4UIXm.hh>
 #include <G4UIXaw.hh>
-#ifdef G4UI_USE_WO
-#include <G4UIWo.hh>
-#endif
 #ifdef G4UI_USE_GAG
 #include <G4UIGAG.hh>
 #endif
+#include <Randomize.hh>
 
 #include <TROOT.h> 
 #include <TRint.h>
 #include <TCint.h> 
 #include <TGeoManager.h>
+#include <TRandom.h>
 #include <TG4RootNavMgr.h>
 #include <TVirtualMCApplication.h>
 
@@ -293,11 +293,6 @@ void TG4RunManager::CreateGeantUI()
     else if (strcmp (fARGV[1], "dumb") == 0) {
       fGeantUISession = new G4UIterminal(); 
     }
-#ifdef G4UI_USE_WO
-    else if (strcmp (fARGV[1], "Wo") == 0) {
-      fGeantUISession = new G4UIWo(fARGC, fARGV); 
-    }
-#endif
 #ifdef G4UI_USE_XM
     else if (strcmp (fARGV[1], "Xm") == 0) {
       fGeantUISession = new G4UIXm(fARGC, fARGV); 
@@ -351,7 +346,20 @@ void TG4RunManager::FilterARGV(const G4String& arg)
   if (isArg) fARGC--;
 } 
  
- // public methods
+//_____________________________________________________________________________
+void TG4RunManager::SetRandomSeed()
+{
+/// Pass the random number seed from fRandom to Geant4 random number
+/// generator
+
+  long seeds[10];
+  seeds[0] = gRandom->GetSeed();    
+  seeds[1] = gRandom->GetSeed();    
+  seeds[2] = 0;    
+  CLHEP::HepRandom::setTheSeeds(seeds);
+}
+
+// public methods
 
 //_____________________________________________________________________________
 void TG4RunManager::Initialize()
@@ -399,6 +407,9 @@ void TG4RunManager::LateInitialize()
   if (VerboseLevel() > 2) {
     TG4GeometryServices::Instance()->PrintLogicalVolumeStore();  
   }
+  
+  // set the random number seed
+  SetRandomSeed();
 }
 
 //_____________________________________________________________________________

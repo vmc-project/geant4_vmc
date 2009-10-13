@@ -86,6 +86,7 @@ class TG4RunManager : public TG4Verbose
     void CreateGeantUI();
     void CreateRootUI();
     void FilterARGV(const G4String& option);
+    void SetRandomSeed();
     
     // static data members
     static TG4RunManager*  fgInstance; ///< this instance
