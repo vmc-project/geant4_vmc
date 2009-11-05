@@ -12,6 +12,13 @@ $Id$
      
 Tags (history):
 ===============
+  05/11/2009
+  v2-7a:
+    Geant4 VMC:
+      - Patch release, needed for moving to Geant4 9.2.p02.
+      
+     Tested with Geant4 9.2.p02, CLHEP 2.0.4.2, Root 5.24/00, VGM 3.02;
+
   15/07/2009
   v2-7:
     Geant4 VMC:
