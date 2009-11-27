@@ -157,6 +157,7 @@ void g4libs_graphics(Bool_t granular = true)
   gSystem->Load("libG4Tree");
   gSystem->Load("libG4visHepRep");
   gSystem->Load("libG4visXXX");
+  gSystem->Load("libG4GMocren");
   if (isDAWN)
     gSystem->Load("libG4FR");
   if (isOpenGL) {
@@ -255,13 +256,17 @@ void g4libs_granular()
   gSystem->Load("libG4hadronic_qgstring");
   gSystem->Load("libG4hadronic_HE");  
   gSystem->Load("libG4hadronic_LE");  
+  gSystem->Load("libG4hadronic_RPG");
   gSystem->Load("libG4hadronic_deex_util"); 
   gSystem->Load("libG4hadronic_bert_cascade.so");
   gSystem->Load("libG4had_muon_nuclear.so");
   gSystem->Load("libG4had_neu_hp.so");
+  gSystem->Load("libG4had_lll_fis.so");
   gSystem->Load("libG4had_preequ_exciton.so");
   gSystem->Load("libG4had_theo_max.so");
+  gSystem->Load("libG4hadronic_abrasion.so");
   gSystem->Load("libG4hadronic_binary.so"); 
+  gSystem->Load("libG4hadronic_bert_cascade.so");
   gSystem->Load("libG4hadronic_body_ci.so");
   gSystem->Load("libG4hadronic_coherent_elastic.so"); 
   gSystem->Load("libG4hadronic_deex_management.so");
@@ -272,10 +277,13 @@ void g4libs_granular()
   gSystem->Load("libG4hadronic_deex_handler.so");
   gSystem->Load("libG4hadronic_deex_multifragmentation.so");
   gSystem->Load("libG4hadronic_deex_photon_evaporation.so");
+  gSystem->Load("libG4hadronic_em_dissociation");
   gSystem->Load("libG4hadronic_hetcpp_evaporation.so");
   gSystem->Load("libG4hadronic_hetcpp_utils.so");
   gSystem->Load("libG4hadronic_interface_ci.so");
+  gSystem->Load("libG4hadronic_incl_cascade.so");
   gSystem->Load("libG4hadronic_iso.so");
+  gSystem->Load("libG4hadronic_qmd.so");
   gSystem->Load("libG4hadronic_leading_particle.so");
   gSystem->Load("libG4hadronic_radioactivedecay.so");
 
