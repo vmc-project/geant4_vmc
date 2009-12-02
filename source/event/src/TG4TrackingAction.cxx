@@ -47,7 +47,8 @@ TG4TrackingAction::TG4TrackingAction()
     fTrackManager(0),
     fPrimaryTrackID(0),
     fCurrentTrackID(0),
-    fSaveSecondaries(true),
+    fTrackSaveControl(kDoNotSave),
+    fOverwriteLastTrack(false),
     fNewVerboseLevel(0),
     fNewVerboseTrackID(-1)
 {
@@ -141,7 +142,7 @@ void TG4TrackingAction::PrepareNewEvent()
   
   fTrackManager->ResetPrimaryParticleIds();  
 
-  if (fSaveSecondaries)
+  if ( fTrackManager->GetTrackSaveControl() != kDoNotSave )
     fTrackManager->SetNofTracks(0);
   else  
     fTrackManager->SetNofTracks(gMC->GetStack()->GetNtrack());
@@ -159,7 +160,7 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
   
   // keep this track number for the check above
   fCurrentTrackID = track->GetTrackID();
-
+  
   // finish previous primary track first
   if (track->GetParentID() == 0) {  
     FinishPrimaryTrack();
@@ -177,7 +178,7 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
   stepManager->SetStep((G4Track*)track, kVertex);
   
   // set track information
-  G4int trackId = fTrackManager->SetTrackInformation(track);
+  G4int trackId = fTrackManager->SetTrackInformation(track, fOverwriteLastTrack);
   gMC->GetStack()->SetCurrentTrack(trackId);
 
   if (track->GetParentID() == 0) {  
@@ -185,18 +186,24 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
     
     // begin this primary track
     TVirtualMCApplication::Instance()->BeginPrimary();
+    
+    // set saving flag
+    fTrackSaveControl = kDoNotSave;
   }
   else {
-    // save secondary particles info 
-    if (  fSaveSecondaries && ! fTrackManager->IsUserTrack(track) ) {
-      fTrackManager->TrackToStack(track);
+    // set saving flag 
+    fTrackSaveControl = ( fTrackManager->IsUserTrack(track) ) ? 
+      kDoNotSave : fTrackManager->GetTrackSaveControl(); 
+  }     
+   
+  // save track in stack
+  if ( fTrackSaveControl == kSaveInPreTrack ) {
+    fTrackManager->TrackToStack(track, fOverwriteLastTrack);
 
-      // Notify a stack popper (if activated) about saving this secondary
-      if ( TG4StackPopper::Instance() )
-        TG4StackPopper::Instance()->Notify();
-    }  
-  }
-    
+    // Notify a stack popper (if activated) about saving this secondary
+    if ( TG4StackPopper::Instance() )
+      TG4StackPopper::Instance()->Notify();
+  }    
 
   // verbose
   if ( track->GetTrackID() == fNewVerboseTrackID) {
@@ -205,7 +212,7 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
 
   // VMC application pre track action
   TVirtualMCApplication::Instance()->PreTrack();
-
+  
   // call pre-tracking action of derived class
   PreTrackingAction(track);
 
@@ -218,6 +225,21 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
 {
 /// Called by G4 kernel after finishing tracking.
 
+#ifdef STACK_WITH_KEEP_FLAG  
+  // Remember whether this track should be kept in the stack
+  // or can be overwritten:
+  // the track will not be overwritten if it was flagged in the stack
+  // to be kept or if it has produced any secondary particles.  
+  fOverwriteLastTrack
+    =  ( ! gMC->GetStack()->GetKeepCurrentTrack() ) &&
+       ( ! fpTrackingManager->GimmeSecondaries() ||
+           fpTrackingManager->GimmeSecondaries()->size() == 0 );
+        // Experimental code with flagging tracks in stack for overwrite; 
+        // not yet available in distribution
+#else        
+  fOverwriteLastTrack = false;       
+#endif 
+ 
   // restore processes activation 
   if ( fSpecialControls && fSpecialControls->IsApplicable() ) 
     fSpecialControls->RestoreProcessActivations();
@@ -282,15 +304,3 @@ void TG4TrackingAction::SetNewVerboseTrackID(G4int trackID)
 
   fNewVerboseTrackID = trackID; 
 }
-
-//_____________________________________________________________________________
-void TG4TrackingAction::SetSaveSecondaries(G4bool saveSecondaries) 
-{ 
-/// Set control for saving secondaries in the VMC stack and pass it
-/// to TG4 stack manager
-
-  fSaveSecondaries = saveSecondaries; 
-  fTrackManager->SetSaveSecondaries(saveSecondaries);
-}
-
-

@@ -45,9 +45,11 @@ class TG4EventAction : public G4UserEventAction,
     
     // set methods
     void SetDrawFlag(G4String drawFlag);
+    void SetPrintMemory(G4bool printMemory);
     
     // get methods
     G4String GetDrawFlag() const;
+    G4bool   GetPrintMemory() const;
     
   private:
     /// Not implemented
@@ -62,6 +64,7 @@ class TG4EventAction : public G4UserEventAction,
     TG4EventActionMessenger   fMessenger; ///< messenger
     TStopwatch                fTimer;     ///< timer
     G4String                  fDrawFlag;  ///< control drawing of the event
+    G4bool                    fPrintMemory; ///< control for printing memory usage 
 };
 
 // inline methods
@@ -71,9 +74,19 @@ inline void TG4EventAction::SetDrawFlag(G4String drawFlag) {
   fDrawFlag = drawFlag; 
 }
 
+inline void TG4EventAction::SetPrintMemory(G4bool printMemory){ 
+  /// Set option for printing memory usage
+  fPrintMemory = printMemory; 
+}
+
 inline G4String TG4EventAction::GetDrawFlag() const {   
   /// Return control for drawing event
   return fDrawFlag;
+}
+
+inline G4bool TG4EventAction::GetPrintMemory() const {   
+  /// Return the option for printing memory usage
+  return fPrintMemory;
 }
 
 #endif //TG4_EVENT_ACTION_H

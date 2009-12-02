@@ -24,7 +24,6 @@ class TG4SteppingAction;
 
 class G4UIdirectory;
 class G4UIcmdWithAnInteger;
-class G4UIcmdWithABool;
 
 /// \ingroup event
 /// \brief Messenger class that defines commands for TG4SteppingAction.
@@ -32,7 +31,6 @@ class G4UIcmdWithABool;
 /// Implements commands:
 /// - /mcTracking/loopVerbose [level]
 /// - /mcTracking/maxNofSteps [nofSteps]
-/// - /mcTracking/saveSecondariesInStep [true|false]
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -58,7 +56,6 @@ class TG4SteppingActionMessenger: public G4UImessenger
     TG4SteppingAction*     fSteppingAction;    ///< associated class  
     G4UIcmdWithAnInteger*  fLoopVerboseCmd;    ///< command: loopVerbose
     G4UIcmdWithAnInteger*  fMaxNofStepsCmd;    ///< command: maxNofSteps
-    G4UIcmdWithABool*      fSaveSecondariesCmd;///< command: saveSecondaries
 };
 
 #endif //TG4_STEPPING_ACTION_MESSENGER_H

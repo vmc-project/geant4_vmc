@@ -27,7 +27,6 @@
 #include <TVirtualMC.h>
 #include <TVirtualMCApplication.h>
 #include <TVirtualMC.h>
-#include <TMCProcess.h>
 
 #include <G4TrackVector.hh>
 #include <G4TrackingManager.hh>
@@ -42,8 +41,7 @@ TG4TrackManager* TG4TrackManager::fgInstance = 0;
 TG4TrackManager::TG4TrackManager()     
   : TG4Verbose("trackManager"),
     fG4TrackingManager(0),   
-    fSaveSecondaries(true),
-    fSaveSecondariesInStep(false),
+    fTrackSaveControl(kSaveInPreTrack),
     fTrackCounter(0),
     fCurrentTrackID(0),
     fNofSavedSecondaries(0)
@@ -82,7 +80,7 @@ void  TG4TrackManager::AddPrimaryParticleId(G4int id)
 }  
 
 //_____________________________________________________________________________
-G4int TG4TrackManager::SetTrackInformation(const G4Track* track)
+G4int TG4TrackManager::SetTrackInformation(const G4Track* track, G4bool overWrite)
 {
 /// Set track index in VMC stack to track information
 /// and return its value
@@ -118,8 +116,10 @@ G4int TG4TrackManager::SetTrackInformation(const G4Track* track)
       trackIndex = fPrimaryParticleIds[trackID-1];
     } 
     else { 
-      if ( GetSaveSecondaries() )
+      if ( fTrackSaveControl != kDoNotSave ) {
         trackIndex = gMC->GetStack()->GetNtrack();
+        if ( overWrite ) trackIndex--;
+      }  
       else   
         trackIndex = fTrackCounter;
             // if secondaries are not stacked in VMC stack
@@ -200,13 +200,18 @@ void  TG4TrackManager::SetBackPDGLifetime(const G4Track* aTrack)
     }  
 }  
 
+#ifdef STACK_WITH_KEEP_FLAG  
 //_____________________________________________________________________________
-void TG4TrackManager::TrackToStack(const G4Track* track)
+void TG4TrackManager::TrackToStack(const G4Track* track, G4bool overWrite)
+#else
+//_____________________________________________________________________________
+void TG4TrackManager::TrackToStack(const G4Track* track, G4bool /*overWrite*/)
+#endif
 {
 /// Get all needed parameters from G4track and pass them
 /// to the VMC stack.
 
-  if ( VerboseLevel() > 1 )
+  if ( VerboseLevel() > 2 )
     G4cout << "TG4TrackManager::TrackToStack" << G4endl;
 
   // parent particle index 
@@ -265,10 +270,19 @@ void TG4TrackManager::TrackToStack(const G4Track* track)
   G4int status = charge;   
   
   G4int ntr;
+#ifdef STACK_WITH_KEEP_FLAG  
   // create particle 
   gMC->GetStack()->PushTrack(0, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
+                            polX, polY, polZ, mcProcess, ntr, weight, status,
+                            overWrite);  
+        // Experimental code with flagging tracks in stack for overwrite; 
+        // not yet available in distribution
+#else              
+  gMC->GetStack()->PushTrack(0, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
                             polX, polY, polZ, mcProcess, ntr, weight, status);  
+#endif
 }
+
 //_____________________________________________________________________________
 void TG4TrackManager::PrimaryToStack(const G4PrimaryVertex* vertex,
                                      const G4PrimaryParticle* particle)
@@ -357,18 +371,6 @@ void TG4TrackManager::SaveSecondaries(const G4Track* track,
     if ( TG4StackPopper::Instance() ) TG4StackPopper::Instance()->Notify();
     ++fNofSavedSecondaries;  
   }    
-}
-
-//_____________________________________________________________________________
-void TG4TrackManager::SetSaveSecondaries(G4bool saveSecondaries, 
-                                                G4bool inStep)
-{ 
-/// Set control for saving secondaries in the VMC stack
-
-  if ( ! inStep )
-    fSaveSecondaries = saveSecondaries;
-  else   
-    fSaveSecondariesInStep = saveSecondaries;
 }
 
 //_____________________________________________________________________________

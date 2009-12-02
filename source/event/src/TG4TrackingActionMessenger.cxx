@@ -16,11 +16,12 @@
  
 #include "TG4TrackingActionMessenger.h"
 #include "TG4TrackingAction.h"
+#include "TG4TrackManager.h"
 #include "TG4Globals.h"
 
 #include <G4UIdirectory.hh>
 #include <G4UIcmdWithAnInteger.hh>
-#include <G4UIcmdWithABool.hh>
+#include <G4UIcmdWithAString.hh>
 
 //_____________________________________________________________________________
 TG4TrackingActionMessenger::TG4TrackingActionMessenger(
@@ -52,10 +53,11 @@ TG4TrackingActionMessenger::TG4TrackingActionMessenger(
   fNewVerboseTrackCmd->SetRange("NewVerboseLevelTrackID >= 0");
   fNewVerboseTrackCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
-  fSaveSecondariesCmd = new G4UIcmdWithABool("/mcTracking/saveSecondaries", this);
-  fSaveSecondariesCmd->SetGuidance("Option to save secondaries in the stack in tracking.");
-  fSaveSecondariesCmd->SetGuidance("By default this option is true.");
+  fSaveSecondariesCmd = new G4UIcmdWithAString("/mcTracking/saveSecondaries", this);
+  fSaveSecondariesCmd->SetGuidance("Option for saving secondaries in the stack in tracking:");
+  fSaveSecondariesCmd->SetGuidance("(Default is saving in pre-track.)");
   fSaveSecondariesCmd->SetParameterName("SaveSecondaries", false);
+  fSaveSecondariesCmd->SetCandidates("DoNotSave SaveInPreTrack SaveInStep");
   fSaveSecondariesCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 }
 
@@ -89,7 +91,11 @@ void TG4TrackingActionMessenger::SetNewValue(G4UIcommand* command,
       ->SetNewVerboseTrackID(fNewVerboseTrackCmd->GetNewIntValue(newValue)); 
   }   
   else if(command == fSaveSecondariesCmd) { 
-    fTrackingAction
-      ->SetSaveSecondaries(fSaveSecondariesCmd->GetNewBoolValue(newValue)); 
+    if ( newValue == "DoNotSave" )
+      TG4TrackManager::Instance()->SetTrackSaveControl(kDoNotSave);
+    else if ( newValue == "SaveInPreTrack" )   
+      TG4TrackManager::Instance()->SetTrackSaveControl(kSaveInPreTrack);
+    else if ( newValue == "SaveInStep" )   
+      TG4TrackManager::Instance()->SetTrackSaveControl(kSaveInStep);
   }   
 }

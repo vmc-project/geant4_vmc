@@ -34,6 +34,7 @@ class G4UIcmdWithABool;
 /// - /mcRegions/dump [lvName]
 /// - /mcRegions/setRangePrecision value
 /// - /mcRegions/check [true|false]
+/// - /mcRegions/print [true|false]
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -60,6 +61,7 @@ class TG4RegionsMessenger: public G4UImessenger
     G4UIcmdWithAString*    fDumpRegionCmd;  ///< command: /mcRegions/dump [lvName]
     G4UIcmdWithAnInteger*  fSetRangePrecisionCmd; ///< command: /mcRegions/setRangePrecision value
     G4UIcmdWithABool*      fSetCheckCmd;    ///< command: /mcRegions/check [true|false]
+    G4UIcmdWithABool*      fSetPrintCmd;    ///< command: /mcRegions/print [true|false]
 };
 
 #endif //TG4_RUN_MESSENGER_H

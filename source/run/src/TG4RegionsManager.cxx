@@ -591,7 +591,88 @@ void TG4RegionsManager::DefineRegions()
   }  
 }    
 
+//_____________________________________________________________________________
+void  TG4RegionsManager::CheckRegions() const
+{
+/// Perform two checks:
+/// -  if region properties are consistent with energy cuts defined in limits
+/// -  if the region to which the volume belongs correspond to its material
 
+  G4cout << "Checking regions:" << G4endl;
+
+  CheckRegionsRanges();
+  CheckRegionsInGeometry();
+}  
+  
+//_____________________________________________________________________________
+void TG4RegionsManager::PrintRegions() const
+{
+/// Loop over production cuts table and print all regions
+/// ranges and energy cuts
+
+  G4ProductionCutsTable* productionCutsTable =  
+    G4ProductionCutsTable::GetProductionCutsTable();
+    
+  G4cout << "WriteAllRegions " << productionCutsTable->GetTableSize() << G4endl;
+
+  for ( G4int i=0; i< G4int(productionCutsTable->GetTableSize()); i++ ) {
+    const G4MaterialCutsCouple* couple 
+      = productionCutsTable->GetMaterialCutsCouple(i);
+      
+    const G4Material* material = couple ->GetMaterial();  
+    G4ProductionCuts* cuts = couple ->GetProductionCuts(); 
+    
+    G4double rangeGam = cuts->GetProductionCut(0);
+    G4double rangeEle = cuts->GetProductionCut(1);
+    if ( couple->IsRecalcNeeded() ) {
+      TG4Globals::Warning("TG4RegionsManager", "CheckRegions", 
+         "Recalculation is needed - cannot perform check"); 
+      return;   
+    }
+
+    const std::vector<G4double>* energyCutsGam 
+      = productionCutsTable->GetEnergyCutsVector(0);
+    const std::vector<G4double>* energyCutsEle 
+      = productionCutsTable->GetEnergyCutsVector(1);
+     
+    G4double cutGam = (*energyCutsGam)[couple->GetIndex()];
+    G4double cutEle = (*energyCutsEle)[couple->GetIndex()];
+
+    // Get limits via material
+    TG4Limits* limits
+      = TG4GeometryServices::Instance()->FindLimits(material, true);
+    
+    G4double cutGamLimits = DBL_MAX;
+    G4double cutEleLimits = DBL_MAX;
+    if ( ! limits ) {  
+      TG4Globals::Warning("TG4RegionsManager", "CheckRegions", 
+         "Limits for material " + TString(material->GetName()) + 
+         " not found. " + TG4Globals::Endl() );
+    }
+    else {
+      cutGamLimits = GetEnergyCut(limits, kCUTGAM, DBL_MAX);
+      cutEleLimits = GetEnergyCut(limits, kCUTELE, DBL_MAX);
+    }  
+    
+    // Strip ´ ´ from the material name 
+    G4String matName = material->GetName();
+    while ( matName.find(' ') != std::string::npos ) {
+      matName.erase(matName.find(' '),1);
+    }  
+    
+    // Print all data
+    G4cout
+       << std::setw(4) << i << "  "
+       << std::setw(30) << matName << "  "
+       << std::scientific << rangeGam << "  "
+       << std::scientific << rangeEle << "  "
+       << std::scientific << cutGam << "  "
+       << std::scientific << cutEle << "  "
+       << std::scientific << cutGamLimits << "  "
+       << std::scientific << cutEleLimits << G4endl;
+  }
+}             
+         
 //_____________________________________________________________________________
 void TG4RegionsManager::DumpRegion(const G4String& volName) const
 {
@@ -664,16 +745,3 @@ void TG4RegionsManager::DumpRegion(const G4String& volName) const
   }
 }  
 
-//_____________________________________________________________________________
-void  TG4RegionsManager::CheckRegions() const
-{
-/// Perform two checks:
-/// -  if region properties are consistent with energy cuts defined in limits
-/// -  if the region to which the volume belongs correspond to its material
-
-  G4cout << "Checking regions:" << G4endl;
-
-  CheckRegionsRanges();
-  CheckRegionsInGeometry();
-}  
-  

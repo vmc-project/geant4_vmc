@@ -30,6 +30,7 @@
 #include <TVirtualMC.h>
 #include <TVirtualMCStack.h>
 #include <TVirtualMCApplication.h>
+#include <TSystem.h>
 
 #include <math.h>
 
@@ -162,7 +163,13 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
   if (VerboseLevel() > 1) {
     // print time
     fTimer.Stop();
-    G4cout << "Time of this event: ";
     fTimer.Print();
   }  
+
+  if ( fPrintMemory ) {
+    ProcInfo_t procInfo;
+    gSystem->GetProcInfo(&procInfo);
+    G4cout << "Current memory usage: " 
+           << procInfo.fMemResident << ", " << procInfo.fMemVirtual << G4endl;
+  }         
 }

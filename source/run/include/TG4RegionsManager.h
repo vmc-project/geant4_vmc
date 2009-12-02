@@ -84,15 +84,18 @@ class TG4RegionsManager : public TG4Verbose
     // methods
     void  DefineRegions();                   
     void  CheckRegions() const;   
+    void  PrintRegions() const;   
     void  DumpRegion(const G4String& volName) const;  
     
     // set methods
     void   SetRangePrecision(G4int precision);
     void   SetCheck(G4bool isCheck);
+    void   SetPrint(G4bool isPrint);
     
     // get methods
     G4int  GetRangePrecision() const;                  
     G4bool IsCheck() const;                  
+    G4bool IsPrint() const;                  
   
   private:
     /// Not implemented
@@ -175,6 +178,8 @@ class TG4RegionsManager : public TG4Verbose
     G4int  fRangePrecision;
     /// option to perform consistency check (by default false)
     G4bool fIsCheck;                   
+    /// option to print all regions 
+    G4bool fIsPrint;                   
 };
 
 /// Return the singleton instance
@@ -190,6 +195,10 @@ inline void   TG4RegionsManager::SetRangePrecision(G4int precision)
 inline void  TG4RegionsManager::SetCheck(G4bool isCheck)
 {  fIsCheck = isCheck; }
     
+/// Set the option to print all regions
+inline void  TG4RegionsManager::SetPrint(G4bool isPrint)
+{  fIsPrint = isPrint; }
+    
 /// Return the precision for calculating ranges 
 inline G4int TG4RegionsManager::GetRangePrecision() const
 {  return fRangePrecision; }                  
@@ -197,6 +206,10 @@ inline G4int TG4RegionsManager::GetRangePrecision() const
 /// Return the option to perform consistency check 
 inline G4bool TG4RegionsManager::IsCheck() const
 { return fIsCheck; }                 
+
+/// Return the option to print all regions
+inline G4bool TG4RegionsManager::IsPrint() const
+{ return fIsPrint; }                 
 
 #endif //TG4_REGIONS_MANAGER_H
 

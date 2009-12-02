@@ -50,6 +50,11 @@ TG4RegionsMessenger::TG4RegionsMessenger(TG4RegionsManager* runManager)
   fSetCheckCmd->SetGuidance("with energy cuts defined in limits");
   fSetCheckCmd->SetParameterName("IsCheck", false);
   fSetCheckCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
+  fSetPrintCmd = new G4UIcmdWithABool("/mcRegions/print", this);
+  fSetPrintCmd->SetGuidance("Switch on|off printing of all regions properties");
+  fSetPrintCmd->SetParameterName("IsPrint", false);
+  fSetPrintCmd->AvailableForStates(G4State_PreInit, G4State_Init);
 }
 
 //_____________________________________________________________________________
@@ -61,6 +66,7 @@ TG4RegionsMessenger::~TG4RegionsMessenger()
   delete fDumpRegionCmd;
   delete fSetRangePrecisionCmd;
   delete fSetCheckCmd;
+  delete fSetPrintCmd;
 }
 
 //
@@ -80,5 +86,8 @@ void TG4RegionsMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
   }
   else if (command == fSetCheckCmd) {
     fRegionsManager->SetCheck(fSetCheckCmd->GetNewBoolValue(newValue)); 
+  }
+  else if (command == fSetPrintCmd) {
+    fRegionsManager->SetCheck(fSetPrintCmd->GetNewBoolValue(newValue)); 
   }
 }

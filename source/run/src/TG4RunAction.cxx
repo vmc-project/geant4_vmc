@@ -59,9 +59,13 @@ void TG4RunAction::BeginOfRunAction(const G4Run* run)
     G4cout << "### Run " << run->GetRunID() << " start." << G4endl;
   }
     
-  if ( TG4RegionsManager::Instance() &&
-       TG4RegionsManager::Instance()->IsCheck() ) {
-    TG4RegionsManager::Instance()->CheckRegions();
+  if ( TG4RegionsManager::Instance() ) {
+    if ( TG4RegionsManager::Instance()->IsCheck() ) {
+      TG4RegionsManager::Instance()->CheckRegions();
+    }  
+    if ( TG4RegionsManager::Instance()->IsPrint() ) {
+      TG4RegionsManager::Instance()->PrintRegions();
+    }  
   }  
 
   fTimer->Start();

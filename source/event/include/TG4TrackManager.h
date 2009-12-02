@@ -18,6 +18,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4Verbose.h"
+#include "TG4TrackSaveControl.h"
 
 #include <G4UserTrackingAction.hh>
 #include <G4TrackVector.hh>
@@ -49,26 +50,25 @@ class TG4TrackManager : public TG4Verbose
 
     // methods
     void  AddPrimaryParticleId(G4int id);
-    G4int SetTrackInformation(const G4Track* aTrack);
+    G4int SetTrackInformation(const G4Track* aTrack, G4bool overWrite = false);
     void  SetParentToTrackInformation(const G4Track* aTrack);
     void  SetBackPDGLifetime(const G4Track* aTrack);
 
-    void  TrackToStack(const G4Track* track);
+    void  TrackToStack(const G4Track* track, G4bool overWrite = false);
     void  PrimaryToStack(const G4PrimaryVertex* vertex,
                        const G4PrimaryParticle* particle);
 
     void  SaveSecondaries(const G4Track* track, G4TrackVector* secondaries);
 
     // set methods
-    void SetSaveSecondaries(G4bool saveSecondaries, G4bool inStep = false);
+    void SetTrackSaveControl(TG4TrackSaveControl control);
     void SetNofTracks(G4int nofTracks);
     void SetG4TrackingManager(G4TrackingManager* trackingManager);
     void ResetPrimaryParticleIds();
 
     // get methods
     TG4TrackInformation* GetTrackInformation(const G4Track* track) const;
-
-    G4bool GetSaveSecondaries() const;
+    TG4TrackSaveControl  GetTrackSaveControl() const;
     G4int  GetNofTracks() const;
     G4bool IsUserTrack(const G4Track* track) const;
 
@@ -84,8 +84,7 @@ class TG4TrackManager : public TG4Verbose
     // data members
     G4TrackingManager*  fG4TrackingManager;  ///< G4 tracking manager
     std::vector<G4int>  fPrimaryParticleIds; ///< The VMC stack primary particle Ids
-    G4bool  fSaveSecondaries;       ///< control of saving secondaries
-    G4bool  fSaveSecondariesInStep; ///< control of saving secondaries in step
+    TG4TrackSaveControl fTrackSaveControl;   ///< control of saving secondaries
     G4int   fTrackCounter;          ///< tracks counter
     G4int   fCurrentTrackID;        ///< current track ID
     G4int   fNofSavedSecondaries;   ///< number of secondaries already saved
@@ -99,6 +98,11 @@ inline TG4TrackManager* TG4TrackManager::Instance() {
   return fgInstance; 
 }
 
+inline void TG4TrackManager::SetTrackSaveControl(TG4TrackSaveControl control) { 
+  /// Set control for saving secondaries in the VMC stack
+  fTrackSaveControl = control;
+}
+
 inline void TG4TrackManager::SetNofTracks(G4int nofTracks) {
   /// Set number of tracks
   fTrackCounter = nofTracks;
@@ -110,10 +114,11 @@ inline void TG4TrackManager::SetG4TrackingManager(
   fG4TrackingManager = trackingManager;
 }  
 
-inline G4bool TG4TrackManager::GetSaveSecondaries() const { 
-  /// Return control for saving secondaries in the VMC stack
-  return fSaveSecondaries || fSaveSecondariesInStep; 
-}
+inline TG4TrackSaveControl  TG4TrackManager::GetTrackSaveControl() const
+{
+  /// Return control of saving secondaries
+  return fTrackSaveControl; 
+}  
 
 inline G4int TG4TrackManager::GetNofTracks() const { 
   /// Return track counter = current number of tracks (in event)  

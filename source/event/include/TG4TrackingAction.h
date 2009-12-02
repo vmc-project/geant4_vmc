@@ -19,6 +19,7 @@
 
 #include "TG4Verbose.h"
 #include "TG4TrackingActionMessenger.h"
+#include "TG4TrackSaveControl.h"
 
 #include <G4UserTrackingAction.hh>
 
@@ -61,11 +62,7 @@ class TG4TrackingAction : public G4UserTrackingAction,
     // set methods
     void SetNewVerboseLevel(G4int level);
     void SetNewVerboseTrackID(G4int trackID);
-    void SetSaveSecondaries(G4bool saveSecondaries);
     void SetSpecialControls(TG4SpecialControlsV2* specialControls);
-
-    // get methods
-    G4bool GetSaveSecondaries() const;
 
   private:
     /// Not implemented
@@ -98,9 +95,12 @@ class TG4TrackingAction : public G4UserTrackingAction,
     /// current track ID 
     G4int   fCurrentTrackID; 
     
-    /// control of saving secondaries
-    G4bool  fSaveSecondaries;
-    
+    /// control of saving secondary tracks
+    TG4TrackSaveControl  fTrackSaveControl;
+
+    /// control of saving current track
+    G4bool  fOverwriteLastTrack;
+
     /// new /tracking/verbose level
     G4int   fNewVerboseLevel;
     
@@ -130,10 +130,5 @@ inline void TG4TrackingAction::SetSpecialControls(TG4SpecialControlsV2* specialC
   /// Return special controls manager
   fSpecialControls = specialControls;
 }  
-
-inline G4bool TG4TrackingAction::GetSaveSecondaries() const { 
-  /// Return control for saving secondaries in the VMC stack
-  return fSaveSecondaries; 
-}
 
 #endif //TG4_TRACKING_ACTION_H

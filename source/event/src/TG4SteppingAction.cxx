@@ -42,7 +42,6 @@ TG4SteppingAction::TG4SteppingAction()
     fStandardVerboseLevel(-1),
     fLoopVerboseLevel(1),
     fLoopStepCounter(0),
-    fSaveSecondaries(false),
     fIsPairCut(false)
  {
 /// Default constructor
@@ -314,7 +313,7 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
     ProcessTrackIfBelowCut(step);
 
   // save secondaries
-  if ( fSaveSecondaries ) 
+  if ( TG4TrackManager::Instance()->GetTrackSaveControl() == kSaveInStep ) 
     TG4TrackManager::Instance()
       ->SaveSecondaries(step->GetTrack(), step->GetSecondary());
     
@@ -332,16 +331,5 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
   if ( step->GetPostStepPoint()->GetStepStatus() == fGeomBoundary ) {
     ProcessTrackOnBoundary(step);
   }  
-}
-
-//_____________________________________________________________________________
-void TG4SteppingAction::SetSaveSecondaries(G4bool saveSecondaries) 
-{ 
-/// Set control for saving secondaries in the VMC stack and pass it
-/// to TG4 stack manager
-
-  fSaveSecondaries = saveSecondaries; 
-  TG4TrackManager::Instance()->SetSaveSecondaries(saveSecondaries, true);
-  TG4TrackingAction::Instance()->SetSaveSecondaries(!saveSecondaries);
 }
 

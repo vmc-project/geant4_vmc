@@ -23,13 +23,14 @@ class TG4EventAction;
 
 class G4UIdirectory;
 class G4UIcmdWithAString;
-class G4UIcmdWithAnInteger;
+class G4UIcmdWithABool;
 
 /// \ingroup event
 /// \brief Messenger class that defines commands for TG4EventAction.
 ///
 /// Implements command
 /// - /mcEvent/drawTracks [NONE, CHARGED, ALL]
+/// - /mcEvent/printMemory [true|false]
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -55,6 +56,7 @@ class TG4EventActionMessenger: public G4UImessenger
     TG4EventAction*        fEventAction;    ///< associated class
     G4UIdirectory*         fEventDirectory; ///< command directory
     G4UIcmdWithAString*    fDrawTracksCmd;  ///< command: drawTracks
+    G4UIcmdWithABool*      fPrintMemoryCmd; ///< command: printMemory
 };
 
 #endif //TG4_EVENT_ACTION_MESSENGER_H

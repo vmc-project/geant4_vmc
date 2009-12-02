@@ -62,14 +62,12 @@ class TG4SteppingAction : public G4UserSteppingAction
     // set methods
     void SetLoopVerboseLevel(G4int level);
     void SetMaxNofSteps(G4int number);
-    void SetSaveSecondaries(G4bool saveSecondaries);
     void SetSpecialControls(TG4SpecialControlsV2* specialControls);
     void SetIsPairCut(G4bool isPairCut);
 
     // get methods
     G4int GetLoopVerboseLevel() const;
     G4int GetMaxNofSteps() const;
-    G4bool GetSaveSecondaries() const;
     G4bool GetIsPairCut() const;
 
   protected:
@@ -113,9 +111,6 @@ class TG4SteppingAction : public G4UserSteppingAction
     /// counter of step in looping    
     G4int  fLoopStepCounter;
     
-    /// control of saving secondaries
-    G4bool fSaveSecondaries;
-
     /// control of cut on e+e- pair 
     G4bool fIsPairCut;
 };
@@ -160,11 +155,6 @@ inline G4int TG4SteppingAction::GetMaxNofSteps() const {
 inline G4int TG4SteppingAction::GetLoopVerboseLevel() const { 
   /// Get loop verbose level (applied when a track is looping) 
   return fLoopVerboseLevel; 
-}
-
-inline G4bool TG4SteppingAction::GetSaveSecondaries() const { 
-  /// Return control for saving secondaries in the VMC stack
-  return fSaveSecondaries; 
 }
 
 inline G4bool TG4SteppingAction::GetIsPairCut() const { 
