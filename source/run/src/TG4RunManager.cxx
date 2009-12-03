@@ -269,9 +269,7 @@ void TG4RunManager::ConfigureRunManager()
   
   // Regions manager
   //
-  if ( fRunConfiguration->IsSpecialCuts() ) {
-    fRegionsManager = new TG4RegionsManager();
-  }  
+  fRegionsManager = new TG4RegionsManager();
 }
 
 //_____________________________________________________________________________
@@ -395,7 +393,7 @@ void TG4RunManager::LateInitialize()
     ->SetIsPairCut((*TG4G3PhysicsManager::Instance()->GetIsCutVector())[kEplus]);                   
 
   // convert tracking cuts in range cuts per regions
-  if ( fRegionsManager ) fRegionsManager->DefineRegions();
+  if ( fRunConfiguration->IsSpecialCuts() ) fRegionsManager->DefineRegions();
 
   // activate/inactivate physics processes
   TG4PhysicsManager::Instance()->SetProcessActivation();

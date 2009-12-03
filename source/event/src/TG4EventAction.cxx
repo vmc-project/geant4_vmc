@@ -169,7 +169,7 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
   if ( fPrintMemory ) {
     ProcInfo_t procInfo;
     gSystem->GetProcInfo(&procInfo);
-    G4cout << "Current memory usage: " 
-           << procInfo.fMemResident << ", " << procInfo.fMemVirtual << G4endl;
+    G4cout << "Current memory usage: resident " 
+           << procInfo.fMemResident << ", virtual " << procInfo.fMemVirtual << G4endl;
   }         
 }

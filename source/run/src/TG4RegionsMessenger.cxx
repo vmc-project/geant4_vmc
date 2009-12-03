@@ -88,6 +88,6 @@ void TG4RegionsMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     fRegionsManager->SetCheck(fSetCheckCmd->GetNewBoolValue(newValue)); 
   }
   else if (command == fSetPrintCmd) {
-    fRegionsManager->SetCheck(fSetPrintCmd->GetNewBoolValue(newValue)); 
+    fRegionsManager->SetPrint(fSetPrintCmd->GetNewBoolValue(newValue)); 
   }
 }

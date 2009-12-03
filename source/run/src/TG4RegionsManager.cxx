@@ -613,7 +613,14 @@ void TG4RegionsManager::PrintRegions() const
   G4ProductionCutsTable* productionCutsTable =  
     G4ProductionCutsTable::GetProductionCutsTable();
     
-  G4cout << "WriteAllRegions " << productionCutsTable->GetTableSize() << G4endl;
+  G4cout << "region #"
+         << "               material name"
+         << "  rangeGam[mm]" 
+         << "  rangeEle[mm]" 
+         << "   cutGam[GeV]" 
+         << "   cutEle[GeV]" 
+         << " vmcCutGam[GeV]" 
+         << " vmcCutEle[GeV]" << G4endl;
 
   for ( G4int i=0; i< G4int(productionCutsTable->GetTableSize()); i++ ) {
     const G4MaterialCutsCouple* couple 
