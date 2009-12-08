@@ -100,7 +100,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("AntiProtonAnnihilationAtRest", kPPbarAnnihilation); 
   mcMap->Add("AntiNeutronAnnihilationAtRest", kPNbarAnnihilation);
 
-  mcMap->Add("HadElastic", kPHElastic); 
+  mcMap->Add("hadElastic", kPHElastic); 
   mcMap->Add("HadronElastic", kPHElastic); 
   mcMap->Add("hElastic", kPHElastic); 
   mcMap->Add("CHIPSElasticScattering", kPHElastic); 

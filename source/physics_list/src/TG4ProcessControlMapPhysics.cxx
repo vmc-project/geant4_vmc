@@ -99,6 +99,7 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("AntiProtonAnnihilationAtRest", kHADR); 
   controlMap->Add("AntiNeutronAnnihilationAtRest", kHADR);
 
+  controlMap->Add("hadElastic", kHADR); 
   controlMap->Add("HadronElastic", kHADR); 
   controlMap->Add("hElastic", kHADR); 
   controlMap->Add("CHIPSElasticScattering", kHADR); 
