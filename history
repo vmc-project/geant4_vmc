@@ -12,6 +12,14 @@ $Id$
      
 Tags (history):
 ===============
+  08/12/2009
+  v2-7b:
+    Geant4 VMC:
+      - Patch release, including fix in TG4RunConfiguration constructor,
+        which allows to handle correctly special physics options.
+      
+     Tested with Geant4 9.2.p02, CLHEP 2.0.4.2, Root 5.24/00, VGM 3.02;
+
   05/11/2009
   v2-7a:
     Geant4 VMC:
