@@ -107,7 +107,8 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
     fSpecialControls = true;  
     // remove "specialControls" from the string passsed to special physics list
     g4SpecialProcess.erase(g4SpecialProcess.find("specialControls"), 15);
-    g4SpecialProcess.erase(g4SpecialProcess.find("++"), 1);
+    if ( g4SpecialProcess.find("++") != std::string::npos )
+      g4SpecialProcess.erase(g4SpecialProcess.find("++"), 1);
   }  
   fSpecialProcessSelection = g4SpecialProcess;
   
