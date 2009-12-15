@@ -38,6 +38,7 @@
 #include <G4RunManager.hh>
 #include <G4UIsession.hh>
 #include <G4UImanager.hh>
+#ifdef G4UI_USE
 #include <G4UIterminal.hh>
 #include <G4UItcsh.hh> 
 #include <G4UIXm.hh>
@@ -47,6 +48,7 @@
 #endif
 #ifdef G4UI_USE_GAG
 #include <G4UIGAG.hh>
+#endif
 #endif
 
 #include <TROOT.h> 
@@ -279,6 +281,7 @@ void TG4RunManager::CreateGeantUI()
 {
 /// Create interactive Geant4.
 
+#ifdef G4UI_USE
   if (!fGeantUISession)
   {
     // create geant4 UI
@@ -317,6 +320,7 @@ void TG4RunManager::CreateGeantUI()
       pUI->SetSession(fGeantUISession); 
     }
   }
+#endif  
 }
 
 //_____________________________________________________________________________
