@@ -149,8 +149,8 @@ ifndef G4UI_NONE
   CPPFLAGS += -I$(G4INSTALL)/source/interfaces/common/include
   CPPFLAGS += -I$(G4INSTALL)/source/interfaces/GAG/include
   CPPFLAGS += -DG4UI_USE_TERMINAL
+  CPPFLAGS += -DG4UI_USE
 ifdef G4UI_USE_TCSH
-  G4UI_USE  = 1
   CPPFLAGS += -DG4UI_USE_TCSH
 endif
 endif #G4UI_NONE
