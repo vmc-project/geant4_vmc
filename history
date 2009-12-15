@@ -12,6 +12,14 @@ $Id$
      
 Tags (history):
 ===============
+  15/12/2009
+  v2-7c:
+    Geant4 VMC:
+      - Patch release, including fix needed to run correctly 
+        with G4UI_NONE option.
+      
+     Tested with Geant4 9.2.p02, CLHEP 2.0.4.2, Root 5.24/00, VGM 3.02;
+
   08/12/2009
   v2-7b:
     Geant4 VMC:
