@@ -39,12 +39,8 @@
 #include <Randomize.hh>
 #include <G4UIsession.hh>
 #include <G4UImanager.hh>
-#include <G4UIterminal.hh>
-#include <G4UItcsh.hh> 
-#include <G4UIXm.hh>
-#include <G4UIXaw.hh>
-#ifdef G4UI_USE_GAG
-#include <G4UIGAG.hh>
+#ifdef G4UI_USE
+#include <G4UIExecutive.hh>
 #endif
 #include <Randomize.hh>
 
@@ -277,39 +273,13 @@ void TG4RunManager::CreateGeantUI()
 {
 /// Create interactive Geant4.
 
-  if (!fGeantUISession)
+#ifdef G4UI_USE
+  if ( ! fGeantUISession )
   {
-    // create geant4 UI
-    G4UImanager* pUI = G4UImanager::GetUIpointer();  
-    if (fARGC == 1) {
-#ifdef G4UI_USE_GAG
-      fGeantUISession = new G4UIGAG();
-#else
-      fGeantUISession = new G4UIterminal(new G4UItcsh);      
-#endif      
-    }  
-    else if (strcmp (fARGV[1], "dumb") == 0) {
-      fGeantUISession = new G4UIterminal(); 
-    }
-#ifdef G4UI_USE_XM
-    else if (strcmp (fARGV[1], "Xm") == 0) {
-      fGeantUISession = new G4UIXm(fARGC, fARGV); 
-    }
-#endif
-#ifdef G4UI_USE_XAW
-    else if (strcmp (fARGV[1], "Xaw") == 0) {
-      fGeantUISession = new G4UIXaw(fARGC, fARGV); 
-    }
-#endif 
-#ifdef G4UI_USE_GAG
-    else if (strcmp (fARGV[1], "GAG") == 0) {
-      fGeantUISession = new G4UIGAG (); 
-    }
-#endif 
-    if (fGeantUISession) {   
-      pUI->SetSession(fGeantUISession); 
-    }
+    G4UIExecutive* uiExecutive = new G4UIExecutive(fARGC, fARGV);
+    fGeantUISession = uiExecutive->GetSession();
   }
+#endif  
 }
 
 //_____________________________________________________________________________
@@ -437,17 +407,16 @@ void TG4RunManager::StartGeantUI()
 { 
 /// Start interactive/batch Geant4.
 
-  if (!fGeantUISession) CreateGeantUI();
-  if (fGeantUISession) {  
+  if ( ! fGeantUISession ) CreateGeantUI();
+  
+  if ( fGeantUISession ) {  
     // interactive session
     G4cout << "Welcome back in Geant4" << G4endl;
     fGeantUISession->SessionStart();
     G4cout << "Welcome back in Root" << G4endl;  
   }
   else {
-    // execute Geant4 macro if file is specified as an argument 
-    G4String fileName = fARGV[1];
-    ProcessGeantMacro(fileName);
+    G4cout << "Geant4 UI not available" << G4endl;
   }
 }
 

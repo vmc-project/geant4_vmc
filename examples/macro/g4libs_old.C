@@ -107,6 +107,7 @@ void g4libs_graphics(Bool_t granular = true)
   		isSet("G4UI_BUILD_XM_SESSION");
   Bool_t isXaw = isSet("G4UI_BUILD_XAW_SESSION");
   Bool_t isGAG = !isSet("G4UI_NONE") && isSet("G4UI_USE_GAG");
+  Bool_t isUI  = !isSet("G4UI_NONE");
   Bool_t isDAWN = !isSet("G4VIS_NONE");
   Bool_t isOpenGL = !isSet("G4VIS_NONE") &&
                     (isSet("G4VIS_BUILD_OPENGLX_DRIVER") ||
@@ -138,14 +139,16 @@ void g4libs_graphics(Bool_t granular = true)
     gSystem->Load("libQtOpenGL");
     gSystem->Load("libQtSql");
     gSystem->Load("libQtXml");
- }
-  
-  if (granular) {
-    gSystem->Load("libG4UIcommon");
-    gSystem->Load("libG4UIbasic");
   }
-  else
-    gSystem->Load("libG4interfaces");
+
+  if (isUI) {
+    if (granular) {
+      gSystem->Load("libG4UIcommon");
+      gSystem->Load("libG4UIbasic");
+    }
+    else
+      gSystem->Load("libG4interfaces");
+  }    
    
   if (isGAG) 
     gSystem->Load("libG4UIGAG");
