@@ -43,6 +43,7 @@
 #include <math.h>
 
 TG4GeometryServices* TG4GeometryServices::fgInstance = 0;
+G4String             TG4GeometryServices::fgBuffer="";
 const G4double       TG4GeometryServices::fgkAZTolerance = 0.001;      
 const G4double       TG4GeometryServices::fgkDensityTolerance = 0.005; 
 
@@ -304,16 +305,18 @@ G4String  TG4GeometryServices::CutVolumePath(const G4String& volumePath,
 }
 
 //_____________________________________________________________________________
-G4String  TG4GeometryServices::UserVolumeName(const G4String& name) const
+const G4String& TG4GeometryServices::UserVolumeName(const G4String& name) const
 {
 /// Cut _copyNo extension added to logical volume name in case 
 /// the logical volume was created by Gsposp method.
 
-  G4String cutName = name;
-  if ( fIsG3toG4 && cutName.contains(gSeparator) ) 
-    cutName = cutName(0,cutName.first(gSeparator));
- 
-  return cutName;
+  if ( fIsG3toG4 && name.contains(gSeparator) )  {
+    fgBuffer = name.substr(0,name.first(gSeparator));
+    return fgBuffer;
+  }
+  else {  
+    return name;
+  }  
 }
 
 //_____________________________________________________________________________

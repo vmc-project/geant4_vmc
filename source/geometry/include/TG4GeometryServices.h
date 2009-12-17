@@ -72,7 +72,7 @@ class TG4GeometryServices : public TG4Verbose
     G4String  CutMaterialName(const char* name) const;
     G4String  CutVolumePath(const G4String& volumePath, 
                             G4String& volName, G4int& copyNo) const; 
-    G4String  UserVolumeName(const G4String& name) const;
+    const G4String& UserVolumeName(const G4String& name) const;
 
     G4OpticalSurfaceModel  SurfaceModel(EMCOpSurfaceModel model) const;                                            
     G4SurfaceType          SurfaceType(EMCOpSurfaceType surfType) const;
@@ -152,6 +152,7 @@ class TG4GeometryServices : public TG4Verbose
 #endif
     // static data members
     static TG4GeometryServices*  fgInstance;   ///< this instance
+    static             G4String  fgBuffer;     ///< string buffer
     static const G4double  fgkAZTolerance;     ///< A,Z tolerance
     static const G4double  fgkDensityTolerance;///< density tolerance (percentual)
  

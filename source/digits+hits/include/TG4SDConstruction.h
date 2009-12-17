@@ -45,7 +45,7 @@ class TG4SDConstruction : public TG4Verbose
 
   private:
     // methods
-    void CreateSD(G4LogicalVolume* lv) const;
+    G4int CreateSD(G4LogicalVolume* lv) const;
 };
 
 #endif //TG4_SD_CONSTRUCTION_H

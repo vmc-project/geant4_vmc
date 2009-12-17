@@ -21,6 +21,8 @@
 
 #include <Rtypes.h>
 
+#include <map>
+
 class TG4SensitiveDetector;
 
 class G4LogicalVolume;
@@ -45,7 +47,10 @@ class TG4SDServices
     static TG4SDServices* Instance();
 
     // methods
+    void MapVolume(G4LogicalVolume* lv, G4int id);
     void PrintStatistics(G4bool open, G4bool close) const;
+    void PrintVolNameToIdMap() const;
+    void PrintVolIdToLVMap() const;
 
     // set methods
     void SetIsStopRun(G4bool stopRun);
@@ -55,7 +60,7 @@ class TG4SDServices
     G4int GetVolumeID(const G4String& volumeName) const;
     G4int GetVolumeID(G4LogicalVolume* volume) const;
     G4String         GetVolumeName(G4int volumeId) const;
-    G4LogicalVolume* GetLogicalVolume(G4int volumeId) const;   
+    G4LogicalVolume* GetLogicalVolume(G4int volumeId, G4bool warn = true) const;   
     G4int            GetMediumId(G4int volumeId) const;
     G4bool  GetIsStopRun() const; 
           // SDs
@@ -77,6 +82,12 @@ class TG4SDServices
     static TG4SDServices* fgInstance; ///< this instance
 
     G4bool  fIsStopRun; ///< info about run stopping by user  
+
+    /// map volume name -> volume id 
+    std::map<G4String, G4int> fVolNameToIdMap;
+
+    /// map volume id ->  logical volume
+    std::map<G4int, G4LogicalVolume*>  fVolIdToLVMap;
 };
 
 // inline methods
