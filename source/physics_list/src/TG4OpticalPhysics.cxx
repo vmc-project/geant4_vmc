@@ -44,7 +44,7 @@ TG4OpticalPhysics::TG4OpticalPhysics(const G4String& name)
     fMaxBetaChange(fgkDefaultMaxBetaChange),
     fYieldFactor(fgkDefaultYieldFactor),
     fSurfaceModel(fgkDefaultSurfaceModel),
-    fTrackSecondariesFirst(true)
+    fTrackSecondariesFirst(false)
 {
 /// Standard constructor
 
@@ -67,7 +67,7 @@ TG4OpticalPhysics::TG4OpticalPhysics(G4int verboseLevel,
     fMaxBetaChange(fgkDefaultMaxBetaChange),
     fYieldFactor(fgkDefaultYieldFactor),
     fSurfaceModel(fgkDefaultSurfaceModel),
-    fTrackSecondariesFirst(true)
+    fTrackSecondariesFirst(false)
 {
 /// Standard constructor
 
