@@ -42,6 +42,7 @@ TG4TrackManager::TG4TrackManager()
   : TG4Verbose("trackManager"),
     fG4TrackingManager(0),   
     fTrackSaveControl(kSaveInPreTrack),
+    fSaveDynamicCharge(false),
     fTrackCounter(0),
     fCurrentTrackID(0),
     fNofSavedSecondaries(0)
@@ -262,12 +263,13 @@ void TG4TrackManager::TrackToStack(const G4Track* track, G4bool /*overWrite*/)
   
   G4double weight = 1.;
 
-  // Track charge
-  // Store the dynamic particle charge (which in case of ion may
-  // be different from PDG charge) as status as there is no other 
-  // place where we can do it
-  G4int charge = G4int(track->GetDynamicParticle()->GetCharge()/eplus);
-  G4int status = charge;   
+  G4int status = 0;
+  if ( fSaveDynamicCharge ) {
+    // Store the dynamic particle charge (which in case of ion may
+    // be different from PDG charge) as status as there is no other 
+    // place where we can do it
+    status = G4int(track->GetDynamicParticle()->GetCharge()/eplus); 
+  }    
   
   G4int ntr;
 #ifdef STACK_WITH_KEEP_FLAG  
@@ -322,12 +324,13 @@ void TG4TrackManager::PrimaryToStack(const G4PrimaryVertex* vertex,
   
   G4double weight = particle->GetWeight();
 
-  // Track charge
-  // Store the dynamic particle charge (which in case of ion may
-  // be different from PDG charge) as status as there is no other 
-  // place where we can do it
-  G4int charge = G4int(particle->GetCharge()/eplus);
-  G4int status = charge;   
+  G4int status = 1;
+  if ( fSaveDynamicCharge ) {
+    // Store the dynamic particle charge (which in case of ion may
+    // be different from PDG charge) as status as there is no other 
+    // place where we can do it
+    status = G4int(particle->GetCharge()/eplus); 
+  }    
   
   G4int ntr;
   // create particle 

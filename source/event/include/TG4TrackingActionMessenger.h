@@ -25,6 +25,7 @@ class TG4TrackingAction;
 class G4UIdirectory;
 class G4UIcmdWithAnInteger;
 class G4UIcmdWithAString;
+class G4UIcmdWithABool;
 
 /// \ingroup event
 /// \brief Messenger class that defines commands for TG4TrackingAction.
@@ -33,6 +34,7 @@ class G4UIcmdWithAString;
 /// - /mcTracking/newVerbose [level]
 /// - /mcTracking/newVerboseTrack [trackID]
 /// - /mcTracking/saveSecondaries [DoNotSave|SaveInPreTrack|SaveInStep]
+/// - /mcTracking/saveDynamicCharge [true|false]
 /// 
 /// \author I. Hrivnacova; IPN, Orsay
  
@@ -60,6 +62,7 @@ class TG4TrackingActionMessenger: public G4UImessenger
     G4UIcmdWithAnInteger*  fNewVerboseCmd;     ///< command: newVerbose
     G4UIcmdWithAnInteger*  fNewVerboseTrackCmd;///< command: newVerboseTrack
     G4UIcmdWithAString*    fSaveSecondariesCmd;///< command: saveSecondaries
+    G4UIcmdWithABool*      fSaveDynamicChargeCmd; ///< command: saveDynamicCharge
 };
 
 #endif //TG4_TRACKING_ACTION_MESSENGER_H

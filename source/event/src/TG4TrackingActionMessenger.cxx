@@ -22,6 +22,7 @@
 #include <G4UIdirectory.hh>
 #include <G4UIcmdWithAnInteger.hh>
 #include <G4UIcmdWithAString.hh>
+#include <G4UIcmdWithABool.hh>
 
 //_____________________________________________________________________________
 TG4TrackingActionMessenger::TG4TrackingActionMessenger(
@@ -31,7 +32,8 @@ TG4TrackingActionMessenger::TG4TrackingActionMessenger(
     fTrackingDirectory(0),
     fNewVerboseCmd(0),
     fNewVerboseTrackCmd(0),
-    fSaveSecondariesCmd(0)
+    fSaveSecondariesCmd(0),
+    fSaveDynamicChargeCmd(0)
 {
 /// Standard constructor
 
@@ -59,6 +61,13 @@ TG4TrackingActionMessenger::TG4TrackingActionMessenger(
   fSaveSecondariesCmd->SetParameterName("SaveSecondaries", false);
   fSaveSecondariesCmd->SetCandidates("DoNotSave SaveInPreTrack SaveInStep");
   fSaveSecondariesCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+
+  fSaveDynamicChargeCmd = new G4UIcmdWithABool("/mcTracking/saveDynamicCharge", this);
+  fSaveDynamicChargeCmd
+    ->SetGuidance("Option for saving dynamic charge of secondary particles (as TParticle status).");
+  fSaveDynamicChargeCmd->SetGuidance("(The dynamic charge is not saved by default.)");
+  fSaveDynamicChargeCmd->SetParameterName("SaveDynamicCharge", false);
+  fSaveDynamicChargeCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 }
 
 //_____________________________________________________________________________
@@ -70,6 +79,7 @@ TG4TrackingActionMessenger::~TG4TrackingActionMessenger()
   delete fNewVerboseCmd;
   delete fNewVerboseTrackCmd;
   delete fSaveSecondariesCmd;
+  delete fSaveDynamicChargeCmd;
 }
 
 //
@@ -97,5 +107,9 @@ void TG4TrackingActionMessenger::SetNewValue(G4UIcommand* command,
       TG4TrackManager::Instance()->SetTrackSaveControl(kSaveInPreTrack);
     else if ( newValue == "SaveInStep" )   
       TG4TrackManager::Instance()->SetTrackSaveControl(kSaveInStep);
+  }   
+  else if(command == fSaveDynamicChargeCmd) { 
+    TG4TrackManager::Instance()->SetSaveDynamicCharge(
+                                   fSaveDynamicChargeCmd->GetNewBoolValue(newValue));
   }   
 }

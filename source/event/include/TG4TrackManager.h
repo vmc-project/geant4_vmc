@@ -62,6 +62,7 @@ class TG4TrackManager : public TG4Verbose
 
     // set methods
     void SetTrackSaveControl(TG4TrackSaveControl control);
+    void SetSaveDynamicCharge(G4bool saveDynamicCharge);
     void SetNofTracks(G4int nofTracks);
     void SetG4TrackingManager(G4TrackingManager* trackingManager);
     void ResetPrimaryParticleIds();
@@ -69,6 +70,7 @@ class TG4TrackManager : public TG4Verbose
     // get methods
     TG4TrackInformation* GetTrackInformation(const G4Track* track) const;
     TG4TrackSaveControl  GetTrackSaveControl() const;
+    G4bool GetSaveDynamicCharge() const;
     G4int  GetNofTracks() const;
     G4bool IsUserTrack(const G4Track* track) const;
 
@@ -85,6 +87,7 @@ class TG4TrackManager : public TG4Verbose
     G4TrackingManager*  fG4TrackingManager;  ///< G4 tracking manager
     std::vector<G4int>  fPrimaryParticleIds; ///< The VMC stack primary particle Ids
     TG4TrackSaveControl fTrackSaveControl;   ///< control of saving secondaries
+    G4bool  fSaveDynamicCharge;     ///< control of saving dynamic charge of secondaries
     G4int   fTrackCounter;          ///< tracks counter
     G4int   fCurrentTrackID;        ///< current track ID
     G4int   fNofSavedSecondaries;   ///< number of secondaries already saved
@@ -103,6 +106,11 @@ inline void TG4TrackManager::SetTrackSaveControl(TG4TrackSaveControl control) {
   fTrackSaveControl = control;
 }
 
+inline void TG4TrackManager::SetSaveDynamicCharge(G4bool saveDynamicCharge) {
+  /// Set control of saving dynamic charge of secondaries (in TParticle::fStatus) 
+  fSaveDynamicCharge = saveDynamicCharge;
+}  
+
 inline void TG4TrackManager::SetNofTracks(G4int nofTracks) {
   /// Set number of tracks
   fTrackCounter = nofTracks;
@@ -118,6 +126,12 @@ inline TG4TrackSaveControl  TG4TrackManager::GetTrackSaveControl() const
 {
   /// Return control of saving secondaries
   return fTrackSaveControl; 
+}  
+
+inline G4bool  TG4TrackManager::GetSaveDynamicCharge() const
+{
+  /// Return the control of saving dynamic charge of secondaries
+  return fSaveDynamicCharge; 
 }  
 
 inline G4int TG4TrackManager::GetNofTracks() const { 
