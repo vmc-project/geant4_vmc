@@ -261,7 +261,7 @@ void TG4TrackManager::TrackToStack(const G4Track* track, G4bool /*overWrite*/)
     if (mcProcess == kPEnergyLoss) mcProcess = kPDeltaRay;
   }  
   
-  G4double weight = 1.;
+  G4double weight = track->GetWeight();
 
   G4int status = 0;
   if ( fSaveDynamicCharge ) {

@@ -154,7 +154,11 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
       TVector3 polarization;
       particle->GetPolarisation(polarization);
       primaryParticle
-        ->SetPolarization(polarization.X(), polarization.Y(), polarization.Z());  
+        ->SetPolarization(polarization.X(), polarization.Y(), polarization.Z()); 
+        
+      // Set weight
+      G4double weight =  particle->GetWeight();
+      primaryParticle->SetWeight(weight); 
         
       // Add primary particle to the vertex
       vertex->SetPrimary(primaryParticle);
