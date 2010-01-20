@@ -94,7 +94,7 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("PionMinusAbsorptionAtRest", kHADR); 
   controlMap->Add("KaonMinusAbsorption", kHADR); 
   controlMap->Add("KaonMinusAbsorptionAtRest", kHADR); 
-  controlMap->Add("CHIPSNuclearAbsorptionAtRest", kHADR); 
+  controlMap->Add("CHIPSNuclearCaptureAtRest", kHADR); 
   
   controlMap->Add("AntiProtonAnnihilationAtRest", kHADR); 
   controlMap->Add("AntiNeutronAnnihilationAtRest", kHADR);
