@@ -23,7 +23,7 @@
 #include "TG4ComposedPhysicsList.h"
 #include "TG4SpecialPhysicsList.h"
 
-#include <LHEP_BERT.hh>
+#include <QGSP_BERT.hh>
 
 //_____________________________________________________________________________
 Ex03RunConfiguration2::Ex03RunConfiguration2(const TString& userGeometry,
@@ -60,7 +60,7 @@ G4VUserPhysicsList*  Ex03RunConfiguration2::CreatePhysicsList()
   
   // User physics list
   G4cout << "Adding user physics list " << G4endl;
-  builder->AddPhysicsList(new LHEP_BERT());
+  builder->AddPhysicsList(new QGSP_BERT());
     
   G4cout << "Adding SpecialPhysicsList " << G4endl;
   builder->AddPhysicsList(new TG4SpecialPhysicsList(
