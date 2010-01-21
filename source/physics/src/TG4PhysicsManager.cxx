@@ -830,6 +830,30 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus(const G4VProcess* process)
     case LobeReflection:
     case SpikeReflection: 
     case BackScattering:
+    case PolishedLumirrorAirReflection:
+    case PolishedLumirrorGlueReflection:
+    case PolishedAirReflection:
+    case PolishedTeflonAirReflection:
+    case PolishedTiOAirReflection:
+    case PolishedTyvekAirReflection:
+    case PolishedVM2000AirReflection:
+    case PolishedVM2000GlueReflection:
+    case EtchedLumirrorAirReflection:
+    case EtchedLumirrorGlueReflection:
+    case EtchedAirReflection:
+    case EtchedTeflonAirReflection:
+    case EtchedTiOAirReflection:
+    case EtchedTyvekAirReflection:
+    case EtchedVM2000AirReflection:
+    case EtchedVM2000GlueReflection:
+    case GroundLumirrorAirReflection:
+    case GroundLumirrorGlueReflection:
+    case GroundAirReflection:
+    case GroundTeflonAirReflection:
+    case GroundTiOAirReflection:
+    case GroundTyvekAirReflection:
+    case GroundVM2000AirReflection:
+    case GroundVM2000GlueReflection:
        return kPLightReflection;
        ;;
 
@@ -842,6 +866,7 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus(const G4VProcess* process)
     case Absorption:
        return kPLightAbsorption;
        ;;
+    // detection
     case Detection: 
        return kPLightDetection;
        ;;
