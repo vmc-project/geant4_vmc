@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.24/00      29 June 2009   *
+  *   Version   5.26/00  14 December 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
+ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -64,8 +64,25 @@ Warning in <TFluka::SetMaterialProperty>: New function - not yet implemented.
 Magnetic field enabled
 #############################################################
 ==> TFluka::BuildPhysics() Read input cards.
- ==> Inside FLUKAM!!!
-     * ITIMES = 0 LFDRTR = T
+
+   The use of FLUKA through the Virtual Monte Carlo (VMC) interface is
+   permitted at the conditions issued by the FLUKA Coordination Committee
+   for members of authorized experiments only and limited to activities
+   related to those experiments.
+
+   The derogation for the use of FLUKA_VMC does not waive any of the
+   prescriptions of the FLUKA license, including, but not only, the prohibition
+   to modify and/or to redistribute the code.
+
+   Users of FLUKA_VMC must be aware that many FLUKA capabilities/options are
+   not supported by that interface, including, but not only, those critical
+   for accelerator applications, power deposition, residual activity and dose
+   rates.
+   Therefore the native code should be preferentially used, and FLUKA_VMC
+   results could not be representative of FLUKA results. In particular
+   there are suspicions of serious bugs in the FLUKA_VMC implementation as of
+   today, which could adversely impact results besides the known FLUKA_VMC
+   limitations
 1
 
               FLUKA User license:
@@ -78,7 +95,7 @@ Magnetic field enabled
     
   Copyright Italian National Institute for Nuclear Physics
   (INFN) and European Organization for Nuclear Research (CERN)
-  ("the FLUKA copyright holders"), 1989-2008.
+  ("the FLUKA copyright holders"), 1989-2009.
     
   All rights not expressly granted under this license are
   reserved.
@@ -280,8 +297,15 @@ Magnetic field enabled
           The Nuclear Energy Agency Data Bank is an authorized
           distributor of the code
 
+
+ *** The use of FLUKA through VMC is permitted only for members ***
+ *** of authorized experiments and under well defined conditions ***
+ *** Stop using it unless you are sure you match the conditions/authorizations. Unauthorized use ***
+ *** will be considered an infringement of the FLUKA license ***
+
+
  <== Outside FLUKAM!!!
-<== TFluka::BuildPhysics() Read input cards End R:7.65s C:7.63s
+<== TFluka::BuildPhysics() Read input cards End R:17.81s C:17.72s
  ==> Inside FLUKAM!!!
      * ITIMES = 1 LFDRTR = T
 === TRACKING PRIMARY 90 ===
@@ -295,8 +319,8 @@ Magnetic field enabled
 === TRACKING PRIMARY 10 ===
 === TRACKING PRIMARY 0 ===
  <== Outside FLUKAM!!!
-Number of optical photons produced in this event : 1758
-Event: 0 R:0.28s C:0.28s
+Number of optical photons produced in this event : 1712
+Event: 0 R:0.74s C:0.74s
  ==> Inside FLUKAM!!!
      * ITIMES = 1 LFDRTR = T
 === TRACKING PRIMARY 90 ===
@@ -310,8 +334,8 @@ Event: 0 R:0.28s C:0.28s
 === TRACKING PRIMARY 10 ===
 === TRACKING PRIMARY 0 ===
  <== Outside FLUKAM!!!
-Number of optical photons produced in this event : 1570
-Event: 1 R:0.28s C:0.28s
+Number of optical photons produced in this event : 1618
+Event: 1 R:0.74s C:0.74s
  ==> Inside FLUKAM!!!
      * ITIMES = 1 LFDRTR = T
 === TRACKING PRIMARY 90 ===
@@ -325,8 +349,8 @@ Event: 1 R:0.28s C:0.28s
 === TRACKING PRIMARY 10 ===
 === TRACKING PRIMARY 0 ===
  <== Outside FLUKAM!!!
-Number of optical photons produced in this event : 1617
-Event: 2 R:0.28s C:0.29s
+Number of optical photons produced in this event : 1687
+Event: 2 R:0.71s C:0.70s
  ==> Inside FLUKAM!!!
      * ITIMES = 1 LFDRTR = T
 === TRACKING PRIMARY 90 ===
@@ -340,8 +364,8 @@ Event: 2 R:0.28s C:0.29s
 === TRACKING PRIMARY 10 ===
 === TRACKING PRIMARY 0 ===
  <== Outside FLUKAM!!!
-Number of optical photons produced in this event : 1729
-Event: 3 R:0.28s C:0.28s
+Number of optical photons produced in this event : 1788
+Event: 3 R:0.74s C:0.74s
  ==> Inside FLUKAM!!!
      * ITIMES = 1 LFDRTR = T
 === TRACKING PRIMARY 90 ===
@@ -355,8 +379,8 @@ Event: 3 R:0.28s C:0.28s
 === TRACKING PRIMARY 10 ===
 === TRACKING PRIMARY 0 ===
  <== Outside FLUKAM!!!
-Number of optical photons produced in this event : 1703
-Event: 4 R:0.28s C:0.28s
+Number of optical photons produced in this event : 1689
+Event: 4 R:0.72s C:0.72s
  ==> Inside FLUKAM!!!
      * ITIMES = 1 LFDRTR = T
 === TRACKING PRIMARY 90 ===
@@ -370,8 +394,8 @@ Event: 4 R:0.28s C:0.28s
 === TRACKING PRIMARY 10 ===
 === TRACKING PRIMARY 0 ===
  <== Outside FLUKAM!!!
-Number of optical photons produced in this event : 1578
-Event: 5 R:0.28s C:0.27s
+Number of optical photons produced in this event : 1608
+Event: 5 R:0.72s C:0.72s
  ==> Inside FLUKAM!!!
      * ITIMES = 1 LFDRTR = T
 === TRACKING PRIMARY 90 ===
@@ -385,8 +409,8 @@ Event: 5 R:0.28s C:0.27s
 === TRACKING PRIMARY 10 ===
 === TRACKING PRIMARY 0 ===
  <== Outside FLUKAM!!!
-Number of optical photons produced in this event : 1696
-Event: 6 R:0.28s C:0.28s
+Number of optical photons produced in this event : 1611
+Event: 6 R:0.72s C:0.72s
  ==> Inside FLUKAM!!!
      * ITIMES = 1 LFDRTR = T
 === TRACKING PRIMARY 90 ===
@@ -400,8 +424,8 @@ Event: 6 R:0.28s C:0.28s
 === TRACKING PRIMARY 10 ===
 === TRACKING PRIMARY 0 ===
  <== Outside FLUKAM!!!
-Number of optical photons produced in this event : 1653
-Event: 7 R:0.28s C:0.28s
+Number of optical photons produced in this event : 1715
+Event: 7 R:0.71s C:0.70s
  ==> Inside FLUKAM!!!
      * ITIMES = 1 LFDRTR = T
 === TRACKING PRIMARY 90 ===
@@ -415,8 +439,8 @@ Event: 7 R:0.28s C:0.28s
 === TRACKING PRIMARY 10 ===
 === TRACKING PRIMARY 0 ===
  <== Outside FLUKAM!!!
-Number of optical photons produced in this event : 1585
-Event: 8 R:0.28s C:0.28s
+Number of optical photons produced in this event : 1755
+Event: 8 R:0.72s C:0.72s
  ==> Inside FLUKAM!!!
      * ITIMES = 1 LFDRTR = T
 === TRACKING PRIMARY 90 ===
@@ -430,5 +454,5 @@ Event: 8 R:0.28s C:0.28s
 === TRACKING PRIMARY 10 ===
 === TRACKING PRIMARY 0 ===
  <== Outside FLUKAM!!!
-Number of optical photons produced in this event : 1680
-Event: 9 R:0.28s C:0.29s
+Number of optical photons produced in this event : 1718
+Event: 9 R:0.72s C:0.72s

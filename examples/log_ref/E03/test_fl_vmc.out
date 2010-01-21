@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.24/00      29 June 2009   *
+  *   Version   5.26/00  14 December 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
+ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -50,8 +50,25 @@ Info in <TGeoManager::Export>: Exporting geom FLUKA geometry as root file. Optim
 Magnetic field enabled
 #############################################################
 ==> TFluka::BuildPhysics() Read input cards.
- ==> Inside FLUKAM!!!
-     * ITIMES = 0 LFDRTR = T
+
+   The use of FLUKA through the Virtual Monte Carlo (VMC) interface is
+   permitted at the conditions issued by the FLUKA Coordination Committee
+   for members of authorized experiments only and limited to activities
+   related to those experiments.
+
+   The derogation for the use of FLUKA_VMC does not waive any of the
+   prescriptions of the FLUKA license, including, but not only, the prohibition
+   to modify and/or to redistribute the code.
+
+   Users of FLUKA_VMC must be aware that many FLUKA capabilities/options are
+   not supported by that interface, including, but not only, those critical
+   for accelerator applications, power deposition, residual activity and dose
+   rates.
+   Therefore the native code should be preferentially used, and FLUKA_VMC
+   results could not be representative of FLUKA results. In particular
+   there are suspicions of serious bugs in the FLUKA_VMC implementation as of
+   today, which could adversely impact results besides the known FLUKA_VMC
+   limitations
 1
 
               FLUKA User license:
@@ -64,7 +81,7 @@ Magnetic field enabled
     
   Copyright Italian National Institute for Nuclear Physics
   (INFN) and European Organization for Nuclear Research (CERN)
-  ("the FLUKA copyright holders"), 1989-2008.
+  ("the FLUKA copyright holders"), 1989-2009.
     
   All rights not expressly granted under this license are
   reserved.
@@ -266,8 +283,15 @@ Magnetic field enabled
           The Nuclear Energy Agency Data Bank is an authorized
           distributor of the code
 
+
+ *** The use of FLUKA through VMC is permitted only for members ***
+ *** of authorized experiments and under well defined conditions ***
+ *** Stop using it unless you are sure you match the conditions/authorizations. Unauthorized use ***
+ *** will be considered an infringement of the FLUKA license ***
+
+
  <== Outside FLUKAM!!!
-<== TFluka::BuildPhysics() Read input cards End R:7.39s C:7.37s
+<== TFluka::BuildPhysics() Read input cards End R:7.42s C:7.38s
 
 ---> Begin of event: 1
  ==> Inside FLUKAM!!!
@@ -307,7 +331,7 @@ Event: 2 R:0.06s C:0.06s
  <== Outside FLUKAM!!!
    Absorber: total energy (MeV):  899.77       total track length (cm):  43.9532
    Gap:      total energy (MeV): 31.1183       total track length (cm):  14.1871
-Event: 3 R:0.06s C:0.06s
+Event: 3 R:0.07s C:0.06s
 
 ---> Begin of event: 5
  ==> Inside FLUKAM!!!
@@ -322,14 +346,14 @@ Event: 4 R:0.06s C:0.06s
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.24/00      29 June 2009   *
+  *   Version   5.26/00  14 December 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
+ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -374,8 +398,25 @@ Magnetic field enabled
 --- Init geometry 
 --- Add ions 
 ==> TFluka::BuildPhysics() Read input cards.
- ==> Inside FLUKAM!!!
-     * ITIMES = 0 LFDRTR = T
+
+   The use of FLUKA through the Virtual Monte Carlo (VMC) interface is
+   permitted at the conditions issued by the FLUKA Coordination Committee
+   for members of authorized experiments only and limited to activities
+   related to those experiments.
+
+   The derogation for the use of FLUKA_VMC does not waive any of the
+   prescriptions of the FLUKA license, including, but not only, the prohibition
+   to modify and/or to redistribute the code.
+
+   Users of FLUKA_VMC must be aware that many FLUKA capabilities/options are
+   not supported by that interface, including, but not only, those critical
+   for accelerator applications, power deposition, residual activity and dose
+   rates.
+   Therefore the native code should be preferentially used, and FLUKA_VMC
+   results could not be representative of FLUKA results. In particular
+   there are suspicions of serious bugs in the FLUKA_VMC implementation as of
+   today, which could adversely impact results besides the known FLUKA_VMC
+   limitations
 1
 
               FLUKA User license:
@@ -388,7 +429,7 @@ Magnetic field enabled
     
   Copyright Italian National Institute for Nuclear Physics
   (INFN) and European Organization for Nuclear Research (CERN)
-  ("the FLUKA copyright holders"), 1989-2008.
+  ("the FLUKA copyright holders"), 1989-2009.
     
   All rights not expressly granted under this license are
   reserved.
@@ -590,8 +631,15 @@ Magnetic field enabled
           The Nuclear Energy Agency Data Bank is an authorized
           distributor of the code
 
+
+ *** The use of FLUKA through VMC is permitted only for members ***
+ *** of authorized experiments and under well defined conditions ***
+ *** Stop using it unless you are sure you match the conditions/authorizations. Unauthorized use ***
+ *** will be considered an infringement of the FLUKA license ***
+
+
  <== Outside FLUKAM!!!
-<== TFluka::BuildPhysics() Read input cards End R:7.43s C:7.42s
+<== TFluka::BuildPhysics() Read input cards End R:7.43s C:7.39s
 --- Run MC for 1 events
 --- Begin event 
 

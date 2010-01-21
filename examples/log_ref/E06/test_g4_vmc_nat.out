@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.24/00      29 June 2009   *
+  *   Version   5.26/00  14 December 2009   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.24/00 (tags/v5-24-00@29258, Jul 06 2009, 10:55:53 on linux)
+ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -22,7 +22,7 @@ Loading G4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-09-02-patch-01    (13-March-2009)
+ Geant4 version Name: geant4-09-03    (18-December-2009)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -33,6 +33,7 @@ Adding OpticalPhysicsList
 Adding SpecialPhysicsList stepLimiter
 Debug mode is switched on.
 Visualization Manager instantiating...
+G4VUserPhysicsList::SetVerboseLevel  : Verbose level is set to 2
 Geometry will be defined via VMC
 Air
 Water
@@ -41,27 +42,20 @@ Instantiated 3 volume table entries
                       2 positions.
 G4 Stat: instantiated 3 logical volumes 
                       2 physical volumes
-The tables for UV photon tracking set for Water
-The material properties FASTCOMPONENT set for Water
-The material properties SLOWCOMPONENT set for Water
-The material property SCINTILLATIONYIELD set for Water
-The material property RESOLUTIONSCALE set for Water
-The material property FASTTIMECONSTANT set for Water
-The material property SLOWTIMECONSTANT set for Water
-The material property YIELDRATIO set for Water
-The tables for UV photon tracking set for Air
-The material properties RINDEX set for optical surface WaterSurface
-The material properties SPECULARLOBECONSTANT set for optical surface WaterSurface
-The material properties SPECULARSPIKECONSTANT set for optical surface WaterSurface
-The material properties BACKSCATTERCONSTANT set for optical surface WaterSurface
-The material properties REFLECTIVITY set for optical surface AirSurface
-The material properties EFFICIENCY set for optical surface AirSurface
 G4Cerenkov::G4Cerenkov constructor
 NOTE: this is now a G4VProcess!
 Required change in UserPhysicsList: 
 change: pmanager->AddContinuousProcess(theCerenkovProcess);
 to:     pmanager->AddProcess(theCerenkovProcess);
         pmanager->SetProcessOrdering(theCerenkovProcess,idxPostStep);
+  Cerenkov process:  active
+    Max number of photons per step: 20
+    Max beta change per step:       0.1
+  Scintillation process:  inactive
+  Absorption process:  active
+  Rayleigh process:  active
+  Boundary process:  active
+    OpticalSurfaceModel:  unified
 ### Optical physics constructed.
 
 **********************************************
@@ -118,7 +112,7 @@ MPV[28]: (3.76e-06, inf)
 MPV[29]: (3.877e-06, inf)
 MPV[30]: (4.002e-06, inf)
 MPV[31]: (4.136e-06, inf)
- Done DumpVector of 32 entries 
+ Done DumpVector of 32 entries.
 EFFICIENCY
 MPV[0]: (2.034e-06, 0)
 MPV[1]: (2.068e-06, 0)
@@ -152,11 +146,11 @@ MPV[28]: (3.76e-06, 0)
 MPV[29]: (3.877e-06, 0)
 MPV[30]: (4.002e-06, 0)
 MPV[31]: (4.136e-06, 0)
- Done DumpVector of 32 entries 
+ Done DumpVector of 32 entries.
 FASTCOMPONENT
-NULL Material Property Vector Pointer.
+  NULL Material Property Vector Pointer.
 RAYLEIGH
-NULL Material Property Vector Pointer.
+  NULL Material Property Vector Pointer.
 RINDEX
 MPV[0]: (2.034e-06, 1)
 MPV[1]: (2.068e-06, 1)
@@ -190,9 +184,9 @@ MPV[28]: (3.76e-06, 1)
 MPV[29]: (3.877e-06, 1)
 MPV[30]: (4.002e-06, 1)
 MPV[31]: (4.136e-06, 1)
- Done DumpVector of 32 entries 
+ Done DumpVector of 32 entries.
 SLOWCOMPONENT
-NULL Material Property Vector Pointer.
+  NULL Material Property Vector Pointer.
 Water material properties table: 
 ABSLENGTH
 MPV[0]: (2.034e-06, 3448)
@@ -227,7 +221,7 @@ MPV[28]: (3.76e-06, 22000)
 MPV[29]: (3.877e-06, 19500)
 MPV[30]: (4.002e-06, 17500)
 MPV[31]: (4.136e-06, 14500)
- Done DumpVector of 32 entries 
+ Done DumpVector of 32 entries.
 EFFICIENCY
 MPV[0]: (2.034e-06, 0)
 MPV[1]: (2.068e-06, 0)
@@ -261,7 +255,7 @@ MPV[28]: (3.76e-06, 0)
 MPV[29]: (3.877e-06, 0)
 MPV[30]: (4.002e-06, 0)
 MPV[31]: (4.136e-06, 0)
- Done DumpVector of 32 entries 
+ Done DumpVector of 32 entries.
 FASTCOMPONENT
 MPV[0]: (2.034e-06, 1)
 MPV[1]: (2.068e-06, 1)
@@ -295,9 +289,9 @@ MPV[28]: (3.76e-06, 1)
 MPV[29]: (3.877e-06, 1)
 MPV[30]: (4.002e-06, 1)
 MPV[31]: (4.136e-06, 1)
- Done DumpVector of 32 entries 
+ Done DumpVector of 32 entries.
 RAYLEIGH
-NULL Material Property Vector Pointer.
+  NULL Material Property Vector Pointer.
 RINDEX
 MPV[0]: (2.034e-06, 1.3435)
 MPV[1]: (2.068e-06, 1.344)
@@ -331,7 +325,7 @@ MPV[28]: (3.76e-06, 1.359)
 MPV[29]: (3.877e-06, 1.3595)
 MPV[30]: (4.002e-06, 1.36)
 MPV[31]: (4.136e-06, 1.3608)
- Done DumpVector of 32 entries 
+ Done DumpVector of 32 entries.
 SLOWCOMPONENT
 MPV[0]: (2.034e-06, 0.01)
 MPV[1]: (2.068e-06, 1)
@@ -365,7 +359,7 @@ MPV[28]: (3.76e-06, 7)
 MPV[29]: (3.877e-06, 6)
 MPV[30]: (4.002e-06, 5)
 MPV[31]: (4.136e-06, 4)
- Done DumpVector of 32 entries 
+ Done DumpVector of 32 entries.
 FASTTIMECONSTANT
 1
 RESOLUTIONSCALE
@@ -380,55 +374,35 @@ AirSurface optical surface material properties table:
 EFFICIENCY
 MPV[0]: (2.038e-06, 0.8)
 MPV[1]: (4.144e-06, 1)
- Done DumpVector of 2 entries 
+ Done DumpVector of 2 entries.
 REFLECTIVITY
 MPV[0]: (2.038e-06, 0.3)
 MPV[1]: (4.144e-06, 0.5)
- Done DumpVector of 2 entries 
+ Done DumpVector of 2 entries.
 WaterSurface optical surface material properties table: 
 BACKSCATTERCONSTANT
 MPV[0]: (2.038e-06, 0.2)
 MPV[1]: (4.144e-06, 0.2)
- Done DumpVector of 2 entries 
+ Done DumpVector of 2 entries.
 RINDEX
 MPV[0]: (2.038e-06, 1.35)
 MPV[1]: (4.144e-06, 1.4)
- Done DumpVector of 2 entries 
+ Done DumpVector of 2 entries.
 SPECULARLOBECONSTANT
 MPV[0]: (2.038e-06, 0.3)
 MPV[1]: (4.144e-06, 0.3)
- Done DumpVector of 2 entries 
+ Done DumpVector of 2 entries.
 SPECULARSPIKECONSTANT
 MPV[0]: (2.038e-06, 0.2)
 MPV[1]: (4.144e-06, 0.2)
- Done DumpVector of 2 entries 
-Number of optical photons produced in this event : 1563
-Number of optical photons produced in this event : 1672
-Number of optical photons produced in this event : 1564
-G4SteppingManager::InvokeAtRestDoItProcs: No AtRestDoIt process is active. 
-Number of optical photons produced in this event : 1557
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 1460
-Number of optical photons produced in this event : 1356
-Number of optical photons produced in this event : 1599
-G4SteppingManager::InvokeAtRestDoItProcs: No AtRestDoIt process is active. 
-Number of optical photons produced in this event : 1497
-Number of optical photons produced in this event : 1462
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-
-Warning: G4MaterialPropertyVector::GetProperty
-==> attempt to Retrieve Property below range
-Number of optical photons produced in this event : 1549
+ Done DumpVector of 2 entries.
+Number of optical photons produced in this event : 1727
+Number of optical photons produced in this event : 1585
+Number of optical photons produced in this event : 1738
+Number of optical photons produced in this event : 1649
+Number of optical photons produced in this event : 1701
+Number of optical photons produced in this event : 1734
+Number of optical photons produced in this event : 1701
+Number of optical photons produced in this event : 1742
+Number of optical photons produced in this event : 1665
+Number of optical photons produced in this event : 1638
