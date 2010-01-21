@@ -8,10 +8,53 @@ $Id$
  For the licensing terms see geant4_vmc/LICENSE.
  Contact: vmc@pcroot.cern.ch
 -------------------------------------------------
-
      
 Tags (history):
 ===============
+  21/01/2010
+  v2-8:
+    Geant4 VMC:
+    Improvements:
+       - In optical physics:
+         Implemented new command for user customization
+         of optical physics list;
+         Changed/added the default parameters:
+           fgkDefaultMaxNumPhotons = 20; 
+           fgkDefaultMaxBetaChange = 1.0; 
+           fgkDefaultYieldFactor = 1.0;  
+       - Passing the random number seed from TRandom in CLHEP::HepRandom
+         (on the request from FairRoot)
+       - Added an option to print memory usage at the end of event
+       - Added an option to print all regions 
+       - New, faster implementation of VMC functions:
+           Int_t VolId(const Text_t* volName) const;
+           const char* VolName(Int_t id) const;
+    
+    Fixes:
+      - Fixes in applying VMC cuts:
+        - fixed processes names in TG4G3CutVector
+        - fix in applying PPCUTM: the cut is now applied as a limit
+          to the total energy of e+e- pair procuced by muon; 
+          the cut is not applied for e+e- pair from gamma conversion
+      - Fix in handling feedback photons: keep the feedback photon 
+          PDG encoding which is different from opticalphoton
+      - Fix in applying max step limit
+      - Fix in TG4RunConfiguration constructor:
+          to handle correctly special physics options.
+          Thanks to M. Al-Turany for reporting this problem.
+      - Fixes for running with option G4UI_NONE
+          Thanks to V. Di Benedetto for reporting this problem.
+      - Fixed handling of particle weights
+          Thanks to Vito Di Benedetto for pointing at this.
+          
+    Tested with Geant4 9.3, CLHEP 2.0.4.5, Root 5.26/00, VGM 3.02;
+
+    Examples:
+       - Added an example of magnetic field class Ex02MagField in E02
+         
+    Tested with Geant3 1.11, Geant4 VMC 2.8, Fluka VMC 0.4 
+             
+
   15/07/2009
   v2-7:
     Geant4 VMC:
