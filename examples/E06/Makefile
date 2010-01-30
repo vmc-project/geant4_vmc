@@ -66,13 +66,13 @@ OBJS	:= $(CXXOBJ) $(GDICTO)
 
 # Make include list
 #
-INCDIR  := -Iinclude
+INCLUDES := -Iinclude
 
 # C++ compilation flags
 #
-CXXFLAGS := $(CXXOPTS) -I. $(INCDIR) -I$(ROOT_INCDIR) 
+CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) 
 
-DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCDIR)
+DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCLUDES)
 
 ############################### Targets #######################################
 

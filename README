@@ -2,7 +2,7 @@ $Id$
 
 ------------------------------------------------
  The Virtual Monte Carlo examples
- Copyright (C) 2007, 2008 Ivana Hrivnacova
+ Copyright (C) 2007-2010 Ivana Hrivnacova
  All rights reserved.
 
  For the licensing terms see geant4_vmc/LICENSE.
@@ -18,20 +18,20 @@ Files:
   README     - this file
   history    - the tags history
   source     - structured source code
-  config     - general makefiles
-  examples   - examples of usage Virtual MC
+  g4root     - G4Root package 
+  examples   - examples demonstrating use of VMC
 	      
    
 Environment:
 ------------
   Geant4 VMC requires the Root, CLHEP, Geant4 installations
-  and optionally the VGM in case geometry is defined via
-  Root TGeo.
+  and optionally the VGM in case you want to run with Geant4
+  native navigation with geometry defined via Root TGeo. 
   The paths to these installations are defined using their
   standard environment variables:
 
-  ROOTSYS  - path to Root installation
-  CLHEP_BASE_DIR - path to CLHEP installation		    
+  ROOTSYS   - path to the Root installation
+  CLHEP_BASE_DIR - path to the CLHEP installation		    
   G4INSTALL - path to the Geant4 installation
   G4*       - Geant4 environment variables used for selection
               graphics drivers and UIs have the same meaning as
@@ -57,12 +57,29 @@ Environment:
 Compilation:
 ------------
   Geant4 VMC requires Root, CLHEP and Geant4 installation,
-  and, in case geometry is defined via Root TGeo, VGM installation.
+  and, optinally, VGM installation.
   Instructions for these installations can be found in their
   own documentation, they are not provided in this README. 
 
+  Geant4 VMC provides besides Geant4 VMC itself also
+  the G4Root package and VMC examples.
+
+  You can build all packages from the top directory:
+  cd geant4_vmc
+  make
+ 
+  Or you can build just a selected package from its own directory:
+
+  cd geant4_vmc/g4root
+  make
+  
   cd geant4_vmc/source
-  gmake
+  make
+  
+  cd geant4_vmc/examples
+  make  
+  
+  Note, that geant4_vmc always requires g4root to be built first.
 
   Compilation targets:
   default    builds shared libraries
@@ -89,7 +106,7 @@ Examples
 ============
   To build examples libraries:
   cd geant4_vmc/examples
-  gmake  
+  make  
 
   To run examples:
   cd geant4_vmc/examples/E01

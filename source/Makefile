@@ -23,6 +23,7 @@ endif
 TOPDIR  = $(shell pwd)/..
 BINDIR  = $(TOPDIR)/tmp/tgt_$(PLATFORM)
 LIBDIR  = $(TOPDIR)/lib/tgt_$(PLATFORM)
+INCDIR  = $(TOPDIR)/include/$(PACKAGE)
 
 ifeq ($(ROOTSYS),)
 ROOT_INCDIR := $(shell root-config --incdir)
@@ -87,13 +88,14 @@ ifndef G4INCLUDE
   G4INCLUDE := $(G4INSTALL)/include
 endif  
 
-INCDIR  := $(patsubst %,-I%/include,$(GDIRS)) \
+INCLUDES := $(patsubst %,-I%/include,$(GDIRS)) \
+           -I$(TOPDIR)/include/g4root \
 	   -I$(G4INCLUDE) \
 	   -I$(CLHEP_BASE_DIR)/include \
 	   -I$(G4INSTALL)/source/interfaces/common/include
 
 ifneq ($(USE_VGM),)
-INCDIR  += -I$(VGM_INSTALL)/packages/VGM/include \
+INCLUDES  += -I$(VGM_INSTALL)/packages/VGM/include \
 	   -I$(VGM_INSTALL)/packages/ClhepVGM/include \
 	   -I$(VGM_INSTALL)/packages/BaseVGM/include \
 	   -I$(VGM_INSTALL)/packages/Geant4GM/include \
@@ -103,7 +105,7 @@ endif
 
 # C++ compilation flags
 #
-CXXFLAGS := $(CXXOPTS) $(G4MCDEFS) -I. $(INCDIR) -I$(ROOT_INCDIR) 
+CXXFLAGS := $(CXXOPTS) $(G4MCDEFS) -I. $(INCLUDES) -I$(ROOT_INCDIR) 
 
 # Debug option 
 #
@@ -180,7 +182,7 @@ endif
 
 CXXFLAGS += $(CPPFLAGS)
 
-DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCDIR)
+DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCLUDES)
 
 ############################### Targets #######################################
 
@@ -206,8 +208,8 @@ $(DICT): 	$(HDRS)
 
 depend:		$(SRCS)
 
-TOCLEAN		= $(BINDIR) $(TOPDIR)/include
-TOCLEANALL	= $(BINDIR) $(TOPDIR)/include $(LIBDIR)
+TOCLEAN		= $(BINDIR) $(INCDIR)
+TOCLEANALL	= $(BINDIR) $(INCDIR) $(LIBDIR)
 
 MAKEDIST	= $(ROOT_ETCDIR)/g4_makedist.sh $(GCC_VERS) lib
 MAKEDISTSRC	= $(ROOT_ETCDIR)/g4_makedist.sh

@@ -59,15 +59,15 @@ ifndef G4INCLUDE
   G4INCLUDE := $(G4INSTALL)/include
 endif  
 
-INCDIR  := -Iinclude -I$(G4INCLUDE) \
+INCLUDES := -Iinclude -I$(G4INCLUDE) \
 	   -I$(CLHEP_BASE_DIR)/include \
 	   -I$(G4INSTALL)/physics_lists/hadronic/LHEP_BERT/include \
 	   -I$(G4INSTALL)/physics_lists/hadronic/Packaging/include \
 	   -I$(G4INSTALL)/examples/novice/N03/include \
-	   -I$(TOPDIR)/include
+	   -I$(TOPDIR)/include/geant4vmc
 
 ifneq ($(USE_VGM),)
-INCDIR  += -I$(VGM_INSTALL)/packages/VGM/include \
+INCLUDES  += -I$(VGM_INSTALL)/packages/VGM/include \
 	   -I$(VGM_INSTALL)/packages/ClhepVGM/include \
 	   -I$(VGM_INSTALL)/packages/BaseVGM/include \
 	   -I$(VGM_INSTALL)/packages/Geant4GM/include \
@@ -77,7 +77,7 @@ endif
 
 # C++ compilation flags
 #
-CXXFLAGS := $(CXXOPTS) $(G4MCDEFS) -I. $(INCDIR) -I$(ROOT_INCDIR) 
+CXXFLAGS := $(CXXOPTS) $(G4MCDEFS) -I. $(INCLUDES) -I$(ROOT_INCDIR) 
 
 # Debug option 
 #
@@ -154,7 +154,7 @@ endif
 
 CXXFLAGS += $(CPPFLAGS)
 
-DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCDIR)
+DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCLUDES)
 
 ############################### Targets #######################################
 

@@ -18,8 +18,8 @@ MAKEFLAGS= --no-print-directory
 
 SUBDIRS  = E01 E02 E03 E06
 
-MAKE_GEANT4 := $(shell ls ../include/TG4RunConfiguration.h )
-ifeq ($(MAKE_GEANT4),../include/TG4RunConfiguration.h)
+MAKE_GEANT4 := $(shell ls ../include/geant4vmc/TG4RunConfiguration.h 2> /dev/null )
+ifeq ($(MAKE_GEANT4),../include/geant4vmc/TG4RunConfiguration.h)
   SUBDIRS += E03/geant4
 endif
 
