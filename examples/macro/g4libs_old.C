@@ -326,8 +326,10 @@ void g4libs_granular()
   vgmlibs();
     
   // G4Root library (if available)
-  if ( isLibrary("libG4root") )
-    gSystem->Load("libG4root");
+  if ( isLibrary("libg4root") ) {   
+    cout << "Loading g4root library ..." << endl;
+    gSystem->Load("libg4root");
+  }  
 
   // Geant4 VMC library
   cout << "Loading geant4vmc library ... " << endl;
