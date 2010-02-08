@@ -9,21 +9,13 @@
  * For the list of contributors see $ROOTSYS/README/CREDITS.             *
  *************************************************************************/
 
+/// \file TG4RootNavigator.h
+/// \brief Definition of the TG4RootNavigator class 
+///
+/// \author A. Gheata; CERN
+
 #ifndef ROOT_TG4RootNavigator
 #define ROOT_TG4RootNavigator
-
-
-//////////////////////////////////////////////////////////////////////////
-//                                                                      //
-// TG4Navigator                                                         //
-//                                                                      //
-// GEANT4 navigator using directly a TGeo geometry.                     //
-//                                                                      //
-// All navigation methods requred by G4 tracking are implemented by     //
-// this class by invoking the corresponding functionality of ROOT       //
-// geometry modeler.                                                    //
-//                                                                      //
-//////////////////////////////////////////////////////////////////////////
 
 #ifndef G4NAVIGATOR_HH
 #include "G4Navigator.hh"
@@ -32,17 +24,25 @@
 class TGeoManager;
 class TG4RootDetectorConstruction;
 
+/// \brief GEANT4 navigator using directly a TGeo geometry.
+///
+/// All navigation methods requred by G4 tracking are implemented by 
+/// this class by invoking the corresponding functionality of ROOT
+/// geometry modeler.
+///
+/// \author A. Gheata; CERN
+
 class TG4RootNavigator : public G4Navigator {
 
 protected:
-   TGeoManager          *fGeometry;        // TGeo geometry manager
-   TG4RootDetectorConstruction *fDetConstruction; // G4Root detector construction
+   TGeoManager          *fGeometry;        ///< TGeo geometry manager
+   TG4RootDetectorConstruction *fDetConstruction; ///< G4Root detector construction
 
-   Bool_t                fStepEntering;    // Next step is entering daughter
-   Bool_t                fStepExiting;     // Next step is exiting current volume
-   G4ThreeVector         fNextPoint;       // Crossing point with next boundary
-   G4ThreeVector         fSafetyOrig;      // Last computed safety origin
-   G4double              fLastSafety;      // Last computed safety
+   Bool_t                fStepEntering;    ///< Next step is entering daughter
+   Bool_t                fStepExiting;     ///< Next step is exiting current volume
+   G4ThreeVector         fNextPoint;       ///< Crossing point with next boundary
+   G4ThreeVector         fSafetyOrig;      ///< Last computed safety origin
+   G4double              fLastSafety;      ///< Last computed safety
 private:
    G4VPhysicalVolume *SynchronizeHistory();
    TGeoNode          *SynchronizeGeoManager();
@@ -53,6 +53,8 @@ public:
    virtual ~TG4RootNavigator();
 
    void              SetDetectorConstruction(TG4RootDetectorConstruction *dc);
+   
+   /// Return the navigation history
    G4NavigationHistory *GetHistory() {return &fHistory;}
    
    // Virtual methods for navigation

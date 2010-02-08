@@ -9,17 +9,10 @@
  * For the list of contributors see $ROOTSYS/README/CREDITS.             *
  *************************************************************************/
 
-//////////////////////////////////////////////////////////////////////////
-//                                                                      //
-// TG4Navigator                                                         //
-//                                                                      //
-// GEANT4 navigator using directly a TGeo geometry.                     //
-//                                                                      //
-// All navigation methods requred by G4 tracking are implemented by     //
-// this class by invoking the corresponding functionality of ROOT       //
-// geometry modeler.                                                    //
-//                                                                      //
-//////////////////////////////////////////////////////////////////////////
+/// \file TG4RootNavigator.cxx
+/// \brief Implementation of the TG4RootNavigator class 
+///
+/// \author A. Gheata; CERN
 
 #include "TGeoManager.h"
 
@@ -27,7 +20,9 @@
 #include "TG4RootNavigator.h"
 
 //ClassImp(TG4RootNavigator)
-static const double gCm = 1./cm;
+
+/// constant for conversion cm <-> mm
+static const double gCm = 1./cm; 
 
 //______________________________________________________________________________
 TG4RootNavigator::TG4RootNavigator()
@@ -40,7 +35,7 @@ TG4RootNavigator::TG4RootNavigator()
                   fSafetyOrig(),
                   fLastSafety(0)
 {
-// Dummy ctor.
+/// Dummy ctor.
 }
 
 //______________________________________________________________________________
@@ -54,7 +49,7 @@ TG4RootNavigator::TG4RootNavigator(TG4RootDetectorConstruction *dc)
                   fSafetyOrig(),
                   fLastSafety(0)
 {
-// Default ctor.
+/// Default ctor.
    fSafetyOrig.set(kInfinity, kInfinity, kInfinity);
    SetDetectorConstruction(dc);
    SetWorldVolume(dc->GetTopPV());
@@ -63,14 +58,14 @@ TG4RootNavigator::TG4RootNavigator(TG4RootDetectorConstruction *dc)
 //______________________________________________________________________________
 TG4RootNavigator::~TG4RootNavigator()
 {
-// Destructor.
+/// Destructor.
 }
 
 //______________________________________________________________________________
 void TG4RootNavigator::SetDetectorConstruction(TG4RootDetectorConstruction *dc)
 {
-// Setter for detector construction. Root geometry manager pointer is taken from
-// it and must be valid.
+/// Setter for detector construction. Root geometry manager pointer is taken from
+/// it and must be valid.
    if (dc) fGeometry = dc->GetGeometryManager();
    if (!fGeometry || !fGeometry->IsClosed()) {
       G4cerr << "Cannot create TG4RootNavigator without closed ROOT geometry !" << G4endl;
@@ -85,18 +80,18 @@ G4double TG4RootNavigator::ComputeStep(const G4ThreeVector &pGlobalPoint,
                                        const G4double pCurrentProposedStepLength,
                                        G4double  &pNewSafety)
 {
-// Calculate the distance to the next boundary intersected
-// along the specified NORMALISED vector direction and
-// from the specified point in the global coordinate
-// system. LocateGlobalPointAndSetup or LocateGlobalPointWithinVolume 
-// must have been called with the same global point prior to this call.
-// The isotropic distance to the nearest boundary is also
-// calculated (usually an underestimate). The current
-// proposed Step length is used to avoid intersection
-// calculations: if it can be determined that the nearest
-// boundary is >pCurrentProposedStepLength away, kInfinity
-// is returned together with the computed isotropic safety
-// distance. Geometry must be closed.
+/// Calculate the distance to the next boundary intersected
+/// along the specified NORMALISED vector direction and
+/// from the specified point in the global coordinate
+/// system. LocateGlobalPointAndSetup or LocateGlobalPointWithinVolume 
+/// must have been called with the same global point prior to this call.
+/// The isotropic distance to the nearest boundary is also
+/// calculated (usually an underestimate). The current
+/// proposed Step length is used to avoid intersection
+/// calculations: if it can be determined that the nearest
+/// boundary is >pCurrentProposedStepLength away, kInfinity
+/// is returned together with the computed isotropic safety
+/// distance. Geometry must be closed.
 
 
    // The following 2 lines are not needed if G4 calls first LocateGlobalPoint...
@@ -177,18 +172,18 @@ G4VPhysicalVolume* TG4RootNavigator::ResetHierarchyAndLocate(
                                        const G4ThreeVector &direction,
                                        const G4TouchableHistory &h)
 {
-// Resets the geometrical hierarchy and search for the volumes deepest
-// in the hierarchy containing the point in the global coordinate space.
-// The direction is used to check if a volume is entered.
-// The search begin is the geometrical hierarchy at the location of the
-// last located point, or the endpoint of the previous Step if
-// SetGeometricallyLimitedStep() has been called immediately before.
-// 
-// Important Note: In order to call this the geometry MUST be closed.
-//
-// In case of TGeo-based geometry all volumes look as normal positioned, so 
-// there is no need to reset the hierarchy. The state of TGeo needs however
-// to be synchronized.
+/// Resets the geometrical hierarchy and search for the volumes deepest
+/// in the hierarchy containing the point in the global coordinate space.
+/// The direction is used to check if a volume is entered.
+/// The search begin is the geometrical hierarchy at the location of the
+/// last located point, or the endpoint of the previous Step if
+/// SetGeometricallyLimitedStep() has been called immediately before.
+/// 
+/// Important Note: In order to call this the geometry MUST be closed.
+///
+/// In case of TGeo-based geometry all volumes look as normal positioned, so 
+/// there is no need to reset the hierarchy. The state of TGeo needs however
+/// to be synchronized.
 #ifdef G4ROOT_DEBUG
    G4cout.precision(12);
    G4cout << "ResetHierarchyAndLocate: POINT: " << point << " DIR: "<< direction << G4endl;
@@ -208,9 +203,9 @@ G4VPhysicalVolume* TG4RootNavigator::ResetHierarchyAndLocate(
 //______________________________________________________________________________
 TGeoNode *TG4RootNavigator::SynchronizeGeoManager()
 {
-// Synchronize the current state of TGeoManager with the current navigation
-// history. Do the minimum possible work in case 
-// states are already (or almost) in sync. Returns current logical node.
+/// Synchronize the current state of TGeoManager with the current navigation
+/// history. Do the minimum possible work in case 
+/// states are already (or almost) in sync. Returns current logical node.
    Int_t geolevel = fGeometry->GetLevel();
    Int_t depth = fHistory.GetDepth();
    Int_t nodeIndex, level;
@@ -258,9 +253,9 @@ TGeoNode *TG4RootNavigator::SynchronizeGeoManager()
 //______________________________________________________________________________
 G4VPhysicalVolume *TG4RootNavigator::SynchronizeHistory()
 {
-// Synchronize the current navigation history according the state of TGeoManager
-// Do the minimum possible work in case states are already (or almost) in sync.
-// Returns current physical volume
+/// Synchronize the current navigation history according the state of TGeoManager
+/// Do the minimum possible work in case states are already (or almost) in sync.
+/// Returns current physical volume
    Int_t depth = fHistory.GetDepth();
    Int_t geolevel = fGeometry->GetLevel();
    G4VPhysicalVolume *pvol, *pnewvol=0;
@@ -302,17 +297,17 @@ TG4RootNavigator::LocateGlobalPointAndSetup(const G4ThreeVector& globalPoint,
                                             const G4bool /*relativeSearch*/,
                                             const G4bool ignoreDirection)
 {
-// Locate the point in the hierarchy return 0 if outside
-// The direction is required 
-//    - if on an edge shared by more than two surfaces 
-//      (to resolve likely looping in tracking)
-//    - at initial location of a particle
-//      (to resolve potential ambiguity at boundary)
-// 
-// Flags on exit: (comments to be completed)
-// fEntering         - True if entering `daughter' volume (or replica)
-//                     whether daughter of last mother directly 
-//                     or daughter of that volume's ancestor.
+/// Locate the point in the hierarchy return 0 if outside
+/// The direction is required 
+///    - if on an edge shared by more than two surfaces 
+///      (to resolve likely looping in tracking)
+///    - at initial location of a particle
+///      (to resolve potential ambiguity at boundary)
+/// 
+/// Flags on exit: (comments to be completed)
+/// fEntering         - True if entering `daughter' volume (or replica)
+///                     whether daughter of last mother directly 
+///                     or daughter of that volume's ancestor.
 
    static Long64_t ilocate = 0;
    ilocate++;
@@ -370,15 +365,15 @@ TG4RootNavigator::LocateGlobalPointAndSetup(const G4ThreeVector& globalPoint,
 //______________________________________________________________________________
 void TG4RootNavigator::LocateGlobalPointWithinVolume(const G4ThreeVector& pGlobalPoint)
 {
-// Notify the Navigator that a track has moved to the new Global point
-// 'position', that is known to be within the current safety.
-// No check is performed to ensure that it is within  the volume. 
-// This method can be called instead of LocateGlobalPointAndSetup ONLY if
-// the caller is certain that the new global point (position) is inside the
-// same volume as the previous position.  Usually this can be guaranteed
-// only if the point is within safety.
-//   fLastLocatedPointLocal = ComputeLocalPoint(pGlobalPoint);
-//   G4cout << "LocateGlobalPointWithinVolume: POINT: " << pGlobalPoint << G4endl;
+/// Notify the Navigator that a track has moved to the new Global point
+/// 'position', that is known to be within the current safety.
+/// No check is performed to ensure that it is within  the volume. 
+/// This method can be called instead of LocateGlobalPointAndSetup ONLY if
+/// the caller is certain that the new global point (position) is inside the
+/// same volume as the previous position.  Usually this can be guaranteed
+/// only if the point is within safety.
+///   fLastLocatedPointLocal = ComputeLocalPoint(pGlobalPoint);
+///   G4cout << "LocateGlobalPointWithinVolume: POINT: " << pGlobalPoint << G4endl;
 #ifdef G4ROOT_DEBUG
    G4cout.precision(12);
    G4cout << "LocateGlobalPointWithinVolume "  << pGlobalPoint << G4endl;
@@ -395,7 +390,7 @@ G4double TG4RootNavigator::ComputeSafety(const G4ThreeVector &globalpoint,
                                          const G4double pProposedMaxLength,
                                          const G4bool /*keepState*/)
 {
-// Compute safety and keep state on demand.
+/// Compute safety and keep state on demand.
    G4double saf = ComputeSafety(globalpoint, pProposedMaxLength);
    return saf;
 }
@@ -404,18 +399,18 @@ G4double TG4RootNavigator::ComputeSafety(const G4ThreeVector &globalpoint,
 G4double TG4RootNavigator::ComputeSafety(const G4ThreeVector &globalpoint, 
                                          const G4double /*pProposedMaxLength*/)
 {
-// Calculate the isotropic distance to the nearest boundary from the
-// specified point in the global coordinate system. 
-// The globalpoint utilised must be within the current volume.
-// The value returned is usually an underestimate.  
-// The proposed maximum length is used to avoid volume safety
-// calculations.  The geometry must be closed.
+/// Calculate the isotropic distance to the nearest boundary from the
+/// specified point in the global coordinate system. 
+/// The globalpoint utilised must be within the current volume.
+/// The value returned is usually an underestimate.  
+/// The proposed maximum length is used to avoid volume safety
+/// calculations.  The geometry must be closed.
 
-// TO CHANGE TGeoManager::Safety To take into account pProposedMaxLength
-//   fEnteredDaughter = kFALSE;
-//   fExitedMother = kFALSE;
-//   fStepEntering = kFALSE;
-//   fStepExiting = kFALSE;
+/// TO CHANGE TGeoManager::Safety To take into account pProposedMaxLength
+///   fEnteredDaughter = kFALSE;
+///   fExitedMother = kFALSE;
+///   fStepEntering = kFALSE;
+///   fStepExiting = kFALSE;
    Double_t d2 = globalpoint.diff2(fNextPoint);
    if (d2 < 1.e-10) {
 #ifdef G4ROOT_DEBUG
@@ -446,21 +441,21 @@ G4double TG4RootNavigator::ComputeSafety(const G4ThreeVector &globalpoint,
 //______________________________________________________________________________
 G4TouchableHistoryHandle TG4RootNavigator::CreateTouchableHistoryHandle() const
 {
-// Returns a reference counted handle to a touchable history.
+/// Returns a reference counted handle to a touchable history.
    return G4Navigator::CreateTouchableHistoryHandle();
 }
 
 //______________________________________________________________________________
 G4ThreeVector TG4RootNavigator::GetLocalExitNormal(G4bool* valid)
 {
-// Returns Exit Surface Normal and validity too.
-// It can only be called if the Navigator's last Step has crossed a
-// volume geometrical boundary.
-// It returns the Normal to the surface pointing out of the volume that
-// was left behind and/or into the volume that was entered.
-// (The normal is in the coordinate system of the final volume.)
-// This function takes full care about how to calculate this normal,
-// but if the surfaces are not convex it will return valid=false.
+/// Returns Exit Surface Normal and validity too.
+/// It can only be called if the Navigator's last Step has crossed a
+/// volume geometrical boundary.
+/// It returns the Normal to the surface pointing out of the volume that
+/// was left behind and/or into the volume that was entered.
+/// (The normal is in the coordinate system of the final volume.)
+/// This function takes full care about how to calculate this normal,
+/// but if the surfaces are not convex it will return valid=false.
    Double_t *norm, lnorm[3];
    *valid = true;
    norm = fGeometry->FindNormalFast();

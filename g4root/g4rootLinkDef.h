@@ -8,6 +8,11 @@
  * For the list of contributors see $ROOTSYS/README/CREDITS.             *
  *************************************************************************/
 
+/// \file g4rootLinkDef.h
+/// \brief  The CINT link definitions for G4Root classes interfaced in Root
+///
+/// \author A. Gheata; CERN
+
 #ifdef __CINT__
 
 #pragma link off all globals;

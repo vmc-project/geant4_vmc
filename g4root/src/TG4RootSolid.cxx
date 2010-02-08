@@ -9,14 +9,10 @@
  * For the list of contributors see $ROOTSYS/README/CREDITS.             *
  *************************************************************************/
 
-//////////////////////////////////////////////////////////////////////////
-//                                                                      //
-// TG4RootSolid                                                         //
-//                                                                      //
-// GEANT4 solid implemented by a ROOT shape. Visualization methods      //
-// not implemented.                                                     //
-//                                                                      //
-//////////////////////////////////////////////////////////////////////////
+/// \file TG4RootSolid.cxx
+/// \brief Implementation of the TG4RootSolid class 
+///
+/// \author A. Gheata; CERN
 
 #include "TGeoShape.h"
 #include "TGeoBBox.h"
@@ -34,13 +30,15 @@
 #include "TMath.h"
 
 //ClassImp(TG4RootSolid)
+
+/// constant for conversion cm <-> mm
 static const Double_t gCm = 1./cm;
 
 //______________________________________________________________________________
 TG4RootSolid::TG4RootSolid(TGeoShape *shape)
              :G4VSolid(shape->GetName())
 {
-// Constructor.
+/// Constructor.
    fShape = shape;
 }
    
@@ -50,9 +48,9 @@ G4bool TG4RootSolid::CalculateExtent(const EAxis /*pAxis*/,
 				                         const G4AffineTransform& /*pTransform*/,
 				                         G4double& /*pMin*/, G4double& /*pMax*/) const
 {
-// Calculate the minimum and maximum extent of the solid, when under the
-// specified transform, and within the specified limits. If the solid
-// is not intersected by the region, return false, else return true.
+/// Calculate the minimum and maximum extent of the solid, when under the
+/// specified transform, and within the specified limits. If the solid
+/// is not intersected by the region, return false, else return true.
    G4cout << "Warning: TG4RootSolid::CalculateExtent() not implemented" << G4endl;
    return false;
 }
@@ -60,9 +58,9 @@ G4bool TG4RootSolid::CalculateExtent(const EAxis /*pAxis*/,
 //______________________________________________________________________________
 EInside TG4RootSolid::Inside(const G4ThreeVector& p) const
 {
-// Returns kOutside if the point at offset p is outside the shapes
-// boundaries plus Tolerance/2, kSurface if the point is <= Tolerance/2
-// from a surface, otherwise kInside.
+/// Returns kOutside if the point at offset p is outside the shapes
+/// boundaries plus Tolerance/2, kSurface if the point is <= Tolerance/2
+/// from a surface, otherwise kInside.
    Double_t pt[3];
    pt[0] = p.x()*gCm; pt[1] = p.y()*gCm; pt[2] = p.z()*gCm;
    Bool_t in = fShape->Contains(pt);
@@ -76,8 +74,8 @@ EInside TG4RootSolid::Inside(const G4ThreeVector& p) const
 
 //______________________________________________________________________________
 G4ThreeVector TG4RootSolid::SurfaceNormal(const G4ThreeVector& p) const
-// Returns the outwards pointing unit normal of the shape for the
-// surface closest to the point at offset p.
+/// Returns the outwards pointing unit normal of the shape for the
+/// surface closest to the point at offset p.
 {
    Double_t pt[3], dir[3], norm[3];
    pt[0] = p.x()*gCm; pt[1] = p.y()*gCm; pt[2] = p.z()*gCm;
@@ -97,11 +95,11 @@ G4ThreeVector TG4RootSolid::SurfaceNormal(const G4ThreeVector& p) const
 //______________________________________________________________________________
 G4double TG4RootSolid::DistanceToIn(const G4ThreeVector& p, const G4ThreeVector& v) const
 {
-// Return the distance along the normalised vector v to the shape,
-// from the point at offset p. If there is no intersection, return
-// kInfinity. The first intersection resulting from `leaving' a
-// surface/volume is discarded. Hence, it is tolerant of points on
-// the surface of the shape.
+/// Return the distance along the normalised vector v to the shape,
+/// from the point at offset p. If there is no intersection, return
+/// kInfinity. The first intersection resulting from `leaving' a
+/// surface/volume is discarded. Hence, it is tolerant of points on
+/// the surface of the shape.
    Double_t pt[3], dir[3];
    pt[0] = p.x()*gCm; pt[1] = p.y()*gCm; pt[2] = p.z()*gCm;
    dir[0] = v.x(); dir[1] =v.y(); dir[2] = v.z();
@@ -113,8 +111,8 @@ G4double TG4RootSolid::DistanceToIn(const G4ThreeVector& p, const G4ThreeVector&
 //______________________________________________________________________________
 G4double TG4RootSolid::DistanceToIn(const G4ThreeVector& p) const
 {
-// Calculate the distance to the nearest surface of a shape from an
-// outside point. The distance can be an underestimate.
+/// Calculate the distance to the nearest surface of a shape from an
+/// outside point. The distance can be an underestimate.
    Double_t pt[3];
    pt[0] = p.x()*gCm; pt[1] = p.y()*gCm; pt[2] = p.z()*gCm;
    G4double safety = fShape->Safety(pt, kFALSE)*cm;
@@ -128,21 +126,21 @@ G4double TG4RootSolid::DistanceToOut(const G4ThreeVector& p,
 				   G4bool *validNorm,
 				   G4ThreeVector *n) const
 {
-// Return the distance along the normalised vector v to the shape,
-// from a point at an offset p inside or on the surface of the shape.
-// Intersections with surfaces, when the point is < Tolerance/2 from a
-// surface must be ignored.
-// If calcNorm==true:
-//    validNorm set true if the solid lies entirely behind or on the
-//              exiting surface.
-//    n set to exiting outwards normal vector (undefined Magnitude).
-//    validNorm set to false if the solid does not lie entirely behind
-//              or on the exiting surface
-// If calcNorm==false:
-//    validNorm and n are unused.
-//
-// Must be called as solid.DistanceToOut(p,v) or by specifying all
-// the parameters.
+/// Return the distance along the normalised vector v to the shape,
+/// from a point at an offset p inside or on the surface of the shape.
+/// Intersections with surfaces, when the point is < Tolerance/2 from a
+/// surface must be ignored.
+/// If calcNorm==true:
+///    validNorm set true if the solid lies entirely behind or on the
+///              exiting surface.
+///    n set to exiting outwards normal vector (undefined Magnitude).
+///    validNorm set to false if the solid does not lie entirely behind
+///              or on the exiting surface
+/// If calcNorm==false:
+///    validNorm and n are unused.
+///
+/// Must be called as solid.DistanceToOut(p,v) or by specifying all
+/// the parameters.
    Double_t pt[3], dir[3], norm[3];
    pt[0] = p.x()*gCm; pt[1] = p.y()*gCm; pt[2] = p.z()*gCm;
    dir[0] = v.x(); dir[1] =v.y(); dir[2] = v.z();
@@ -164,8 +162,8 @@ G4double TG4RootSolid::DistanceToOut(const G4ThreeVector& p,
 //______________________________________________________________________________
 G4double TG4RootSolid::DistanceToOut(const G4ThreeVector& p) const
 {
-// Calculate the distance to the nearest surface of a shape from an
-// inside point. The distance can be an underestimate.
+/// Calculate the distance to the nearest surface of a shape from an
+/// inside point. The distance can be an underestimate.
    Double_t pt[3];
    pt[0] = p.x()*gCm; pt[1] = p.y()*gCm; pt[2] = p.z()*gCm;
    G4double safety = fShape->Safety(pt, kTRUE)*cm;
@@ -176,19 +174,19 @@ G4double TG4RootSolid::DistanceToOut(const G4ThreeVector& p) const
 void TG4RootSolid::ComputeDimensions(G4VPVParameterisation* /*p*/, const G4int /*n*/,
                        const G4VPhysicalVolume* /*pRep*/)
 {
-// Throw exception if ComputeDimensions called frrom an illegal
-// derived class. It should not be called with this interface.
+/// Throw exception if ComputeDimensions called frrom an illegal
+/// derived class. It should not be called with this interface.
    G4cout << "Warning: TG4RootSolid::ComputeDimensions() not implemented" << G4endl;
 }
 
 //______________________________________________________________________________
 G4double TG4RootSolid::GetCubicVolume()
 {
-// Returns an estimation of the solid volume in internal units.
-// This method may be overloaded by derived classes to compute the
-// exact geometrical quantity for solids where this is possible,
-// or anyway to cache the computed value.
-// Note: the computed value is NOT cached.
+/// Returns an estimation of the solid volume in internal units.
+/// This method may be overloaded by derived classes to compute the
+/// exact geometrical quantity for solids where this is possible,
+/// or anyway to cache the computed value.
+/// Note: the computed value is NOT cached.
    G4double capacity = fShape->Capacity() * cm3;
    return capacity;
 }
@@ -196,15 +194,15 @@ G4double TG4RootSolid::GetCubicVolume()
 //______________________________________________________________________________
 G4GeometryType TG4RootSolid::GetEntityType() const
 {
-// Provide identification of the class of an object.
-// (required for persistency and STEP interface)
+/// Provide identification of the class of an object.
+/// (required for persistency and STEP interface)
    return G4String(fShape->ClassName());
 }   
 
 //______________________________________________________________________________
 G4ThreeVector TG4RootSolid::GetPointOnSurface() const
 {
-// Returns a random point located on the surface of the solid.
+/// Returns a random point located on the surface of the solid.
    G4cout << "Warning: TG4RootSolid::GetPointOnSurface() not implemented" << G4endl;
    return G4ThreeVector(0.,0.,0.);
 }
@@ -212,7 +210,7 @@ G4ThreeVector TG4RootSolid::GetPointOnSurface() const
 //______________________________________________________________________________
 std::ostream& TG4RootSolid::StreamInfo(std::ostream& os) const
 {
-// Dumps contents of the solid to a stream.
+/// Dumps contents of the solid to a stream.
   os << "-----------------------------------------------------------\n"
      << "    *** Dump for solid - " << GetName() << " ***\n"
      << "    ===================================================\n"
@@ -231,14 +229,14 @@ std::ostream& TG4RootSolid::StreamInfo(std::ostream& os) const
 //______________________________________________________________________________
 void TG4RootSolid::DescribeYourselfTo(G4VGraphicsScene& /*scene*/) const
 {
-// A "double dispatch" function which identifies the solid
-// to the graphics scene.
+/// A "double dispatch" function which identifies the solid
+/// to the graphics scene.
 }
 
 //______________________________________________________________________________
 G4VisExtent TG4RootSolid::GetExtent() const
 {
-// Provide extent (bounding box) as possible hint to the graphics view.
+/// Provide extent (bounding box) as possible hint to the graphics view.
    G4double dx = ((TGeoBBox*)fShape)->GetDX()*cm;
    G4double dy = ((TGeoBBox*)fShape)->GetDY()*cm;
    G4double dz = ((TGeoBBox*)fShape)->GetDZ()*cm;
@@ -252,47 +250,51 @@ G4VisExtent TG4RootSolid::GetExtent() const
 //______________________________________________________________________________
 G4Polyhedron* TG4RootSolid::CreatePolyhedron () const
 {
+/// Dummy implementation
    return NULL;
 }
    
 //______________________________________________________________________________
 G4NURBS* TG4RootSolid::CreateNURBS() const
 {
-// Create a G4Polyhedron/G4NURBS/...  (It is the caller's responsibility
-// to delete it).  A null pointer means "not created".
+/// Create a G4Polyhedron/G4NURBS/...  (It is the caller's responsibility
+/// to delete it).  A null pointer means "not created".
    return NULL;
 }
    
 //______________________________________________________________________________
 G4Polyhedron* TG4RootSolid::GetPolyhedron () const
 {
-// Smart access function - creates on request and stores for future
-// access.  A null pointer means "not available".
+/// Smart access function - creates on request and stores for future
+/// access.  A null pointer means "not available".
    return NULL;
 }
 
 //______________________________________________________________________________
 const G4VSolid* TG4RootSolid::GetConstituentSolid(G4int /*no*/) const
 {
+/// Dummy implementation
    return NULL;
 }
 
 //______________________________________________________________________________
 G4VSolid* TG4RootSolid::GetConstituentSolid(G4int /*no*/)
 {
-// If the solid is made up from a Boolean operation of two solids,
-// return the "no" solid. If the solid is not a "Boolean", return 0.
+/// If the solid is made up from a Boolean operation of two solids,
+/// return the "no" solid. If the solid is not a "Boolean", return 0.
    return NULL;
 }
 
 //______________________________________________________________________________
 const G4DisplacedSolid* TG4RootSolid::GetDisplacedSolidPtr() const
 {
+/// Dummy implementation
    return NULL;
 }
 
 //______________________________________________________________________________
 G4DisplacedSolid* TG4RootSolid::GetDisplacedSolidPtr()
 {
+/// Dummy implementation
    return NULL;
 }

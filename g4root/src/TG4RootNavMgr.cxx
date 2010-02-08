@@ -9,13 +9,10 @@
  * For the list of contributors see $ROOTSYS/README/CREDITS.             *
  *************************************************************************/
 
-//////////////////////////////////////////////////////////////////////////
-//                                                                      //
-// TG4RootNavMgr                                                        //
-//                                                                      //
-// Manager class creating a G4Navigator based on a ROOT geometry.       //
-//                                                                      //
-//////////////////////////////////////////////////////////////////////////
+/// \file TG4RootNavMgr.cxx
+/// \brief Implementation of the TG4RootNavMgr class 
+///
+/// \author A. Gheata; CERN
 
 #include "TGeoManager.h"
 #include "TG4RootNavigator.h"
@@ -26,7 +23,9 @@
 #include "G4TransportationManager.hh"
 #include "G4PropagatorInField.hh"
 
+/// \cond CLASSIMP
 ClassImp(TG4RootNavMgr)
+/// \endcond
 
 TG4RootNavMgr *TG4RootNavMgr::fRootNavMgr = 0;
 
@@ -38,7 +37,7 @@ TG4RootNavMgr::TG4RootNavMgr()
                fDetConstruction(0),
                fConnected(kFALSE)
 {
-// Dummy ctor.
+/// Dummy ctor.
 }
 
 //______________________________________________________________________________
@@ -49,7 +48,7 @@ TG4RootNavMgr::TG4RootNavMgr(TGeoManager *geom)
                fDetConstruction(0),
                fConnected(kFALSE)
 {
-// Default ctor.
+/// Default ctor.
    fDetConstruction = new TG4RootDetectorConstruction(geom);
    SetNavigator(new TG4RootNavigator);
 }
@@ -57,7 +56,7 @@ TG4RootNavMgr::TG4RootNavMgr(TGeoManager *geom)
 //______________________________________________________________________________
 TG4RootNavMgr::~TG4RootNavMgr()
 {
-// Destructor.
+/// Destructor.
 //   if (fNavigator) delete fNavigator;
    if (fDetConstruction) delete fDetConstruction;
    fRootNavMgr = 0;
@@ -66,7 +65,7 @@ TG4RootNavMgr::~TG4RootNavMgr()
 //______________________________________________________________________________
 TG4RootNavMgr *TG4RootNavMgr::GetInstance(TGeoManager *geom)
 {
-// Get the pointer to the singleton. If none, create one based on 'geom'.
+/// Get the pointer to the singleton. If none, create one based on 'geom'.
    if (fRootNavMgr) return fRootNavMgr;
    // Check if we have to create one.
    if (!geom) return NULL;
@@ -77,7 +76,7 @@ TG4RootNavMgr *TG4RootNavMgr::GetInstance(TGeoManager *geom)
 //______________________________________________________________________________
 Bool_t TG4RootNavMgr::ConnectToG4()
 {
-// Connect detector construction class to G4 run manager.
+/// Connect detector construction class to G4 run manager.
    if (fConnected) {
       Info("ConnectToG4", "Already connected");
       return kTRUE;
@@ -106,7 +105,7 @@ Bool_t TG4RootNavMgr::ConnectToG4()
 //______________________________________________________________________________
 void TG4RootNavMgr::SetNavigator(TG4RootNavigator *nav)
 {
-// Connect a navigator to G4.
+/// Connect a navigator to G4.
    if (fConnected) {
       Error("SetNavigator", "Navigator set after instantiation of G4RunManager. Won't set!!!");
       return;
@@ -126,7 +125,7 @@ void TG4RootNavMgr::SetNavigator(TG4RootNavigator *nav)
 //______________________________________________________________________________
 void TG4RootNavMgr::Initialize(TVirtualUserPostDetConstruction *sdinit)
 {
-// Construct G4 geometry based on TGeo geometry. 
+/// Construct G4 geometry based on TGeo geometry. 
    Info("Initialize", "Creating G4 hierarchy ...");
    if (fDetConstruction) fDetConstruction->Initialize(sdinit);
 }
@@ -134,7 +133,7 @@ void TG4RootNavMgr::Initialize(TVirtualUserPostDetConstruction *sdinit)
 //______________________________________________________________________________
 void TG4RootNavMgr::LocateGlobalPointAndSetup(Double_t *pt, Double_t *dir)
 {
-// Test the corresponding navigation method.
+/// Test the corresponding navigation method.
    G4ThreeVector point(pt[0], pt[1], pt[2]);
    G4VPhysicalVolume *pVol = 0;
    if (dir) {
@@ -149,14 +148,14 @@ void TG4RootNavMgr::LocateGlobalPointAndSetup(Double_t *pt, Double_t *dir)
 //______________________________________________________________________________
 void TG4RootNavMgr::SetVerboseLevel(Int_t level)
 {
-// Set navigator verbosity level.
+/// Set navigator verbosity level.
    fNavigator->SetVerboseLevel(level);
 }
 
 //______________________________________________________________________________
 void TG4RootNavMgr::PrintG4State() const
 {
-// Print current G4 state.
+/// Print current G4 state.
    G4NavigationHistory *history = fNavigator->GetHistory();
    G4cout << *history << G4endl;
 }

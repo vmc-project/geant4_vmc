@@ -9,56 +9,10 @@
  * For the list of contributors see $ROOTSYS/README/CREDITS.             *
  *************************************************************************/
 
-///////////////////////////////////////////////////////////////////////////
-// G4root interface
-//==================
-//
-// This package is an interface allowing running native GEANT4 with a ROOT
-// geometry. In fact it is just the G4 navigation that uses directly the 
-// TGeo geometry. The package contains:
-//
-// 1. A manager class: TG4RootNavMgr. This is a TObject-based class allowing
-//  the connection of a TGeo geometry to a G4RunManager object.
-// 2. A special G4 user detector construction: TG4RootDetectorConstruction
-//  The class takes a TGeo geometry and builds a GEANT4 logical hierarchy based
-//  on it. The class provides methods to acess GEANT4 created objects corresponding
-//  to TGeo ones.
-// 3. A user class TVirtualUserPostDetConstruction. Users should derive from this
-//  and implement the method Initialize() to connect G4 objects to the geometry
-//  (such as: sensitive detectors, user limits, magnetic field, ...)
-// 4. The navigation interface: TG4RootNavigator. This class derives from the base
-//  class G4Navigator and implements the navigation based on TGeo.
-// 5. TG4RootSolid - an interface class for using TGeo shapes as ROOT solids.
-//
-// To use the interface, one has to use the following calling sequence:
-//
-// Get the geometry in memory
-//   TGeoManager  *geom = TGeoManager::Import("mygeom.root");
-//   TG4RootNavMgr *mgr = TG4RootNavMgr::GetInstance(geom);
-// Create G4 run manager
-//   G4RunManager* runManager = new G4RunManager;
-// Instantiate user class
-//   MyUserPostDetConstruction *pdc = new MyUserPostDetConstruction();
-// Connect interface to run manager
-//   mgr->Initialize(pdc);
-//   mgr->ConnectToG4();
-//
-//////////////////////////////////////////////////////////////////////////
-//                                                                      //
-// TG4RootDetectorConstruction                                          //
-//                                                                      //
-// Builder creating a pseudo G4 geometry starting from a TGeo geometry. //
-//                                                                      //
-// To invoke the method Construct() the ROOT geometry must be in memory //
-// The G4 objects created are:                                          //
-//    TGeoElement               ---> G4Element                          //
-//    TGeoMaterial/TGeoMixture  ---> G4Material                         //
-//    TGeoMatrix                ---> G4RotationMatrix                   //
-//    TGeoVolume                ---> G4LogicalVolume                    //
-//    TGeoShape           ---> TG4RootSolid  : public G4Solid           //
-//    TGeoNode            ---> G4PVPlacement : public G4VPhysicalVolume //
-//                                                                      //
-//////////////////////////////////////////////////////////////////////////
+/// \file TG4RootDetectorConstruction.cxx
+/// \brief Implementation of the TG4RootDetectorConstruction class 
+///
+/// \author A. Gheata; CERN
 
 #include "TGeoManager.h"
 #include "TGeoMatrix.h"
@@ -87,7 +41,7 @@ TG4RootDetectorConstruction::TG4RootDetectorConstruction()
                              fTopPV(0),
                              fSDInit(0)
 {
-// Dummy ctor.
+/// Dummy ctor.
 }
 
 //______________________________________________________________________________
@@ -98,7 +52,7 @@ TG4RootDetectorConstruction::TG4RootDetectorConstruction(TGeoManager *geom)
                              fTopPV(0),
                              fSDInit(0)
 {
-// Default ctor.
+/// Default ctor.
    if (!geom || !geom->IsClosed()) {
       G4cerr << "Cannot create TG4RootDetectorConstruction without closed ROOT geometry !" << G4endl;
       G4Exception("Aborting...");
@@ -108,7 +62,7 @@ TG4RootDetectorConstruction::TG4RootDetectorConstruction(TGeoManager *geom)
 //______________________________________________________________________________
 TG4RootDetectorConstruction::~TG4RootDetectorConstruction()
 {
-// Destructor. Cleans all G4 geometry objects created.
+/// Destructor. Cleans all G4 geometry objects created.
 //   if (fGeometry) delete fGeometry;
 #ifdef G4GEOMETRY_VOXELDEBUG
    G4cout << "Deleting Materials ... ";
@@ -164,7 +118,7 @@ TG4RootDetectorConstruction::~TG4RootDetectorConstruction()
 //______________________________________________________________________________
 void TG4RootDetectorConstruction::Initialize(TVirtualUserPostDetConstruction *sdinit)
 {
-// Main construct method.
+/// Main construct method.
    if (sdinit) {
       if (fSDInit) delete fSDInit;
       fSDInit = sdinit;
@@ -178,7 +132,7 @@ void TG4RootDetectorConstruction::Initialize(TVirtualUserPostDetConstruction *sd
 //______________________________________________________________________________
 G4VPhysicalVolume *TG4RootDetectorConstruction::Construct()
 {
-// Main construct method.
+/// Main construct method.
    if (!fGeometry || !fGeometry->IsClosed()) {
       G4cerr << "Cannot create TG4RootDetectorConstruction without closed ROOT geometry !" << G4endl;
       G4Exception("Aborting...");
@@ -201,7 +155,7 @@ G4VPhysicalVolume *TG4RootDetectorConstruction::Construct()
 //______________________________________________________________________________
 void TG4RootDetectorConstruction::CreateG4LogicalVolumes()
 {
-// Create logical volumes for GEANT4 based on TGeo volumes.
+/// Create logical volumes for GEANT4 based on TGeo volumes.
    TIter next(fGeometry->GetListOfVolumes());
    TGeoVolume *vol;
    while ((vol=(TGeoVolume*)next())) {
@@ -213,7 +167,7 @@ void TG4RootDetectorConstruction::CreateG4LogicalVolumes()
 //______________________________________________________________________________
 void TG4RootDetectorConstruction::CreateG4PhysicalVolumes()
 {
-// Create physical volumes for GEANT4 based on TGeo hierarchy.
+/// Create physical volumes for GEANT4 based on TGeo hierarchy.
    TGeoNode *node = fGeometry->GetTopNode();
    fTopPV = CreateG4PhysicalVolume(node);
    TGeoIterator next(fGeometry->GetTopVolume());
@@ -231,7 +185,7 @@ void TG4RootDetectorConstruction::CreateG4PhysicalVolumes()
 //______________________________________________________________________________
 void TG4RootDetectorConstruction::CreateG4Materials()
 {
-// Create GEANT4 native materials and map them to the corresponding TGeo ones.
+/// Create GEANT4 native materials and map them to the corresponding TGeo ones.
    if (G4UnitDefinition::GetUnitsTable().size()==0) G4UnitDefinition::BuildUnitsTable();
 //   G4cout << "Units table: " << G4endl;
 //   G4UnitDefinition::PrintUnitsTable();
@@ -245,7 +199,7 @@ void TG4RootDetectorConstruction::CreateG4Materials()
 //______________________________________________________________________________
 void TG4RootDetectorConstruction::CreateG4Elements()
 {
-// Create all necessary G4 elements.
+/// Create all necessary G4 elements.
    TGeoElementTable *table = fGeometry->GetElementTable();
    Int_t nelements = table->GetNelements();
    TGeoElement *elem;
@@ -266,8 +220,8 @@ void TG4RootDetectorConstruction::CreateG4Elements()
 //______________________________________________________________________________
 G4LogicalVolume *TG4RootDetectorConstruction::CreateG4LogicalVolume(TGeoVolume *vol)
 {
-// Create a G4LogicalVolume object based on a TGeo one. If already created 
-// return just a pointer to the existing one.
+/// Create a G4LogicalVolume object based on a TGeo one. If already created 
+/// return just a pointer to the existing one.
    if (!vol) return NULL;
    G4LogicalVolume *pVolume = GetG4Volume(vol);
    if (pVolume) return pVolume;
@@ -297,7 +251,7 @@ G4LogicalVolume *TG4RootDetectorConstruction::CreateG4LogicalVolume(TGeoVolume *
 //______________________________________________________________________________
 G4VPhysicalVolume *TG4RootDetectorConstruction::CreateG4PhysicalVolume(TGeoNode *node)
 {
-// Create a G4VPhysicalVolume object based on a TGeo node.
+/// Create a G4VPhysicalVolume object based on a TGeo node.
    if (!node) return NULL;
    node->cd();
    G4VPhysicalVolume *pPhysicalVolume = GetG4VPhysicalVolume(node);
@@ -330,8 +284,8 @@ G4VPhysicalVolume *TG4RootDetectorConstruction::CreateG4PhysicalVolume(TGeoNode 
 //______________________________________________________________________________
 G4Material *TG4RootDetectorConstruction::CreateG4Material(const TGeoMaterial *mat)
 {
-// Create a GEANT4 material based on a TGeo one. If already created return 
-// just a pointer to the existing one.
+/// Create a GEANT4 material based on a TGeo one. If already created return 
+/// just a pointer to the existing one.
    G4Material *pMaterial = GetG4Material(mat);
    if (pMaterial) return pMaterial;
    G4State state = kStateUndefined;
@@ -395,8 +349,8 @@ G4Material *TG4RootDetectorConstruction::CreateG4Material(const TGeoMaterial *ma
 //______________________________________________________________________________
 G4RotationMatrix *TG4RootDetectorConstruction::CreateG4Rotation(const TGeoMatrix *matrix)
 {
-// Create a G4Transform3D object based on a TGeo matrix. If already created 
-// return just a pointer to the existing one.
+/// Create a G4Transform3D object based on a TGeo matrix. If already created 
+/// return just a pointer to the existing one.
    G4RotationMatrix *g4rot = 0;
    if (matrix->IsRotation()) {
 //      matrix->Print();
@@ -421,8 +375,8 @@ G4RotationMatrix *TG4RootDetectorConstruction::CreateG4Rotation(const TGeoMatrix
 //______________________________________________________________________________
 G4VSolid *TG4RootDetectorConstruction::CreateG4Solid(TGeoShape *shape)
 {
-// Create a G4 generic solid working with any TGeo shape. If already created 
-// return just a pointer to the existing one.
+/// Create a G4 generic solid working with any TGeo shape. If already created 
+/// return just a pointer to the existing one.
    return new TG4RootSolid(shape);
    return NULL;
 }
@@ -430,7 +384,7 @@ G4VSolid *TG4RootDetectorConstruction::CreateG4Solid(TGeoShape *shape)
 //______________________________________________________________________________
 G4Material *TG4RootDetectorConstruction::GetG4Material(const TGeoMaterial *mat) const
 {
-// Retreive a G4 material mapped to a ROOT material.
+/// Retreive a G4 material mapped to a ROOT material.
    G4MaterialIt_t it = fG4MaterialMap.find(mat);
    if (it != fG4MaterialMap.end()) return it->second;
    return NULL;
@@ -439,7 +393,7 @@ G4Material *TG4RootDetectorConstruction::GetG4Material(const TGeoMaterial *mat) 
 //______________________________________________________________________________
 G4LogicalVolume *TG4RootDetectorConstruction::GetG4Volume(const TGeoVolume *vol) const
 {
-// Retreive a G4 logical volume mapped to a ROOT volume.
+/// Retreive a G4 logical volume mapped to a ROOT volume.
    G4VolumeIt_t it = fG4VolumeMap.find(vol);
    if (it != fG4VolumeMap.end()) return it->second;
    return NULL;
@@ -448,7 +402,7 @@ G4LogicalVolume *TG4RootDetectorConstruction::GetG4Volume(const TGeoVolume *vol)
 //______________________________________________________________________________
 TGeoVolume *TG4RootDetectorConstruction::GetVolume(const G4LogicalVolume *g4vol) const
 {
-// Retreive a TGeo logical volume mapped to a G4 volume.
+/// Retreive a TGeo logical volume mapped to a G4 volume.
    VolumeIt_t it = fVolumeMap.find(g4vol);
    if (it != fVolumeMap.end()) return it->second;
    return NULL;
@@ -457,7 +411,7 @@ TGeoVolume *TG4RootDetectorConstruction::GetVolume(const G4LogicalVolume *g4vol)
 //______________________________________________________________________________
 G4VPhysicalVolume *TG4RootDetectorConstruction::GetG4VPhysicalVolume(const TGeoNode *node) const
 {
-// Retreive a G4 physical volume mapped to a ROOT node.
+/// Retreive a G4 physical volume mapped to a ROOT node.
    G4PVolumeIt_t it = fG4PVolumeMap.find(node);
    if (it != fG4PVolumeMap.end()) return it->second;
    return NULL;
@@ -466,7 +420,7 @@ G4VPhysicalVolume *TG4RootDetectorConstruction::GetG4VPhysicalVolume(const TGeoN
 //______________________________________________________________________________
 TGeoNode *TG4RootDetectorConstruction::GetNode(const G4VPhysicalVolume *g4pvol) const
 {
-// Retreive a TGeo node mapped to a G4 physical volume.
+/// Retreive a TGeo node mapped to a G4 physical volume.
    PVolumeIt_t it = fPVolumeMap.find(g4pvol);
    if (it != fPVolumeMap.end()) return it->second;
    return NULL;

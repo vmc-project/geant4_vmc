@@ -9,17 +9,13 @@
  * For the list of contributors see $ROOTSYS/README/CREDITS.             *
  *************************************************************************/
 
+/// \file TG4RootNavMgr.h
+/// \brief Definition of the TG4RootNavMgr class 
+///
+/// \author A. Gheata; CERN
+
 #ifndef ROOT_TG4RootNavMgr
 #define ROOT_TG4RootNavMgr
-
-
-//////////////////////////////////////////////////////////////////////////
-//                                                                      //
-// TG4RootNavMgr                                                        //
-//                                                                      //
-// Manager class creating a G4Navigator based on a ROOT geometry.       //
-//                                                                      //
-//////////////////////////////////////////////////////////////////////////
 
 #ifndef ROOT_TObject
 #include "TObject.h"
@@ -30,19 +26,23 @@ class TG4RootNavigator;
 class TG4RootDetectorConstruction;
 class TVirtualUserPostDetConstruction;
 
+/// \brief Manager class creating a G4Navigator based on a ROOT geometry.
+///
+/// \author A. Gheata; CERN
+
 class TG4RootNavMgr : public TObject {
 
 protected:
-   TGeoManager          *fGeometry;   // Pointer to TGeo geometry
-   TG4RootNavigator     *fNavigator;  // G4 navigator working with TGeo
-   TG4RootDetectorConstruction *fDetConstruction; // G4 geometry built based on ROOT one
-   Bool_t                fConnected;  // Flags connection to G4
+   TGeoManager          *fGeometry;   ///< Pointer to TGeo geometry
+   TG4RootNavigator     *fNavigator;  ///< G4 navigator working with TGeo
+   TG4RootDetectorConstruction *fDetConstruction; ///< G4 geometry built based on ROOT one
+   Bool_t                fConnected;  ///< Flags connection to G4
 
    TG4RootNavMgr();
    TG4RootNavMgr(TGeoManager *geom);   
 
 private:
-   static TG4RootNavMgr *fRootNavMgr; // Static pointer to singleton
+   static TG4RootNavMgr *fRootNavMgr; ///< Static pointer to singleton
 
 public:
    static TG4RootNavMgr *GetInstance(TGeoManager *geom=0);
@@ -57,7 +57,9 @@ public:
    void                  SetVerboseLevel(Int_t level);
 
    void                  SetNavigator(TG4RootNavigator *nav);
+                         /// Return the G4 navigator working with TGeo
    TG4RootNavigator     *GetNavigator() const {return fNavigator;}
+                         /// Return the G4 geometry built based on ROOT one
    TG4RootDetectorConstruction *GetDetConstruction() const {return fDetConstruction;}
 
    ClassDef(TG4RootNavMgr,0)  // Class crreating a G4Navigator based on ROOT geometry

@@ -9,17 +9,14 @@
  * For the list of contributors see $ROOTSYS/README/CREDITS.             *
  *************************************************************************/
 
+/// \file TG4RootSolid.h
+/// \brief Definition of the TG4RootSolid class 
+///
+/// \author A. Gheata; CERN
+
 #ifndef ROOT_TG4RootSolid
 #define ROOT_TG4RootSolid
 
-
-//////////////////////////////////////////////////////////////////////////
-//                                                                      //
-// TG4RootSolid                                                         //
-//                                                                      //
-// GEANT4 solid implemented by a ROOT shape.                            //
-//                                                                      //
-//////////////////////////////////////////////////////////////////////////
 
 #ifndef G4VSOLID_HH
 #include "G4VSolid.hh"
@@ -27,15 +24,21 @@
 
 class TGeoShape;
 
+/// \brief GEANT4 solid implemented by a ROOT shape. 
+///
+/// Visualization methods not implemented.     
+///
+/// \author A. Gheata; CERN
+
 class TG4RootSolid : public G4VSolid {
 
 protected:
-   TGeoShape            *fShape;      // TGeo associated shape
+   TGeoShape            *fShape;      ///< TGeo associated shape
 
 public:
-   TG4RootSolid() : G4VSolid(""), fShape(0) {}
+   TG4RootSolid() : G4VSolid(""), fShape(0) {} ///< Default ctor
    TG4RootSolid(TGeoShape *shape);
-   virtual ~TG4RootSolid() {}
+   virtual ~TG4RootSolid() {}                  ///< Destructor
 
    virtual G4bool CalculateExtent(const EAxis pAxis,
 			   const G4VoxelLimits& pVoxelLimit,
