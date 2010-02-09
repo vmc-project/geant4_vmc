@@ -23,7 +23,6 @@
 #include "TG4Medium.h"
 #include "TG4Limits.h"
 #include "TG4MagneticField.h"
-#include "TG4UniformMagneticField.h"
 #include "TG4G3Units.h"
 #include "TG4G3CutVector.h"
 #include "TG4G3ControlVector.h"
@@ -48,6 +47,7 @@
 #include <TGeoVolume.h>
 #include <TGeoMedium.h>
 #include <TGeoMCGeometry.h>
+#include <TVirtualMC.h>
 #include <TVirtualMCApplication.h>
 #include <TList.h>
 
@@ -68,7 +68,7 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fMCGeometry(0),
     fOpManager(0),
     fUserGeometry(userGeometry),
-    fMagneticFieldType(kMCApplicationField), 
+    fFieldParameters(),
     fMagneticField(0),
     fUserRegionConstruction(0),
     fIsUserMaxStep(false)
@@ -517,25 +517,11 @@ void TG4GeometryManager::ConstructMagField()
 
   if ( VerboseLevel() > 1 ) 
     G4cout << "TG4GeometryManager::ConstructMagField" << G4endl;
-
-  switch (fMagneticFieldType) {
-  
-    case kMCApplicationField:
-      fMagneticField = new TG4MagneticField();
+    
+  if ( gMC->GetMagField() ) {  
+      fMagneticField = new TG4MagneticField(fFieldParameters);
       if ( VerboseLevel() > 1 )
-        G4cout << "kMCApplicationField" << G4endl;
-      break;
-
-    case kUniformField:
-      fMagneticField = new TG4UniformMagneticField();
-      if ( VerboseLevel() > 1 )
-        G4cout << "kUniformField" << G4endl;
-      break;
-      
-    case kNoField:
-      if ( VerboseLevel() > 1 )
-        G4cout << "kNoField" << G4endl;
-      ;;
+        G4cout << "Magnetic field created." << G4endl;
   }  
 }
 
@@ -543,9 +529,6 @@ void TG4GeometryManager::ConstructMagField()
 void TG4GeometryManager::ConstructGeometry()
 {
 /// Construct Geant4 geometry depending on user geometry source
-
-  // Create magnetic field
-  ConstructMagField();  
 
   // Construct G4 geometry 
   ConstructG4Geometry();
@@ -567,6 +550,9 @@ void TG4GeometryManager::FinishGeometry()
 {
 /// Finish geometry construction after G4 run initialization
 
+  // Create magnetic field
+  ConstructMagField();  
+
   // Fill medium map if not yet done
   if ( fGeometryServices->GetMediumMap()->GetNofMedia() == 0 )
     FillMediumMap(); 
@@ -577,6 +563,25 @@ void TG4GeometryManager::FinishGeometry()
       ->GetNavigatorForTracking()->GetWorldVolume());
     
 }
+
+//_____________________________________________________________________________
+void TG4GeometryManager::UpdateMagField()
+{
+/// Update magnetic field.
+/// This function must be called if the field parameters were changed
+/// in other than PreInit> phase.
+
+  if ( ! fMagneticField ) {
+    TG4Globals::Warning("TG4GeometryManager", "UpdateMagField",
+      "No magnetic field is defined.");
+     return;
+  }
+  
+  if ( VerboseLevel() > 1 ) 
+    G4cout << "TG4GeometryManager::UpdateMagField" << G4endl;
+    
+  fMagneticField->Update(fFieldParameters);
+}    
 
 //_____________________________________________________________________________
 void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
@@ -634,50 +639,6 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
     // set limits to logical volume
     lv->SetUserLimits(tg4Limits);
   } 
-}
-
-
-//_____________________________________________________________________________
-void TG4GeometryManager::SetFieldType(TG4MagneticFieldType fieldType)
-{
-/// Select from available magnetic field types:
-/// field defined by TVirtualMCApplication, uniform magnetic field
-/// or no magnetic field.                                                    \n
-/// Applicable only when no field has been yet created (PreInit).
-
-  if (fMagneticField) {
-    TG4Globals::Warning(
-      "TG4GeometryManager", "SetFieldType",
-      "The magnetic field already exists." + TG4Globals::Endl() +
-      "Selection was ignored.");
-  }   
-
-  fMagneticFieldType = fieldType;
-}  
-
-//_____________________________________________________________________________
-void TG4GeometryManager::SetUniformFieldValue(G4double fieldValue)
-{
-/// Set uniform magnetic field to specified value.
-  
-  if ( ! fMagneticField ) {
-     TG4Globals::Exception(
-       "TG4GeometryManager", "SetUniformMagField",
-       "Magnetic field is not defined.");
-  }   
-
-  // Check field type 
-  TG4UniformMagneticField* uniformField 
-    =dynamic_cast<TG4UniformMagneticField*>(fMagneticField);
-
-  if ( ! uniformField ) {
-    TG4Globals::Exception(
-      "TG4GeometryManager", "SetUniformMagField",
-      "Defined magnetic field is not uniform.");
-  }   
-
-  // Set value
-  uniformField->SetFieldValue(fieldValue);
 }
 
 

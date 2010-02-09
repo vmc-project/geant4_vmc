@@ -18,7 +18,6 @@
 #include "TG4DetConstructionMessenger.h"
 #include "TG4DetConstruction.h"
 #include "TG4GeometryManager.h"
-#include "TG4MagneticFieldType.h"
 #include "TG4GeometryServices.h"
 #include "TG4Globals.h"
 
@@ -34,9 +33,8 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   : G4UImessenger(),
     fGeometryManager(geometryManager),
     fDirectory(0),
-    fFieldTypeCmd(0),
+    fUpdateMagFieldCmd(0),
     fSeparatorCmd(0),
-    fUniformFieldValueCmd(0),
     fPrintMaterialsCmd(0),
     fPrintMaterialsPropertiesCmd(0),
     fPrintVolumesCmd(0)
@@ -47,34 +45,21 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fDirectory = new G4UIdirectory("/mcDet/");
   fDirectory->SetGuidance("Detector construction control commands.");
 
-  fFieldTypeCmd = new G4UIcmdWithAString("/mcDet/fieldType", this);
-  G4String guidance =   "Select type of magnetic field:\n";
-  guidance = guidance + "  MCApplication:  field defined by VMC application (default)\n";
-  guidance = guidance + "  Uniform:        uniform magnetic field\n";
-  guidance = guidance + "  None:           no magnetic field";
-  fFieldTypeCmd->SetGuidance(guidance);
-  fFieldTypeCmd->SetParameterName("FieldType", true);
-  fFieldTypeCmd->SetCandidates("MCApplication Uniform None");   
-  fFieldTypeCmd->SetDefaultValue("MCApplication");
-  fFieldTypeCmd->AvailableForStates(G4State_PreInit);
+  fUpdateMagFieldCmd 
+    = new G4UIcmdWithoutParameter("/mcDet/updateMagField", this);
+  G4String guidance = "Update magnetic field.\n";
+  guidance += "This command must be called if the field parameters were changed \n";
+  guidance += "in the Idle state.";
+  fUpdateMagFieldCmd->SetGuidance(guidance);
+  fUpdateMagFieldCmd->AvailableForStates(G4State_Idle);   
 
   fSeparatorCmd = new G4UIcmdWithAString("/mcDet/volNameSeparator", this);
-  guidance =   "Override the default value of the volume name separator in g3tog4\n";
+  guidance 
+    = "Override the default value of the volume name separator in g3tog4\n";
   fSeparatorCmd->SetGuidance(guidance);
   fSeparatorCmd->SetParameterName("VolNameSeparator", true);
   fSeparatorCmd->AvailableForStates(G4State_PreInit);
 
-  fUniformFieldValueCmd 
-    = new G4UIcmdWithADoubleAndUnit("/mcDet/uniformFieldValue", this);
-  fUniformFieldValueCmd
-    ->SetGuidance("Define uniform magnetic field in Z direction.");
-  fUniformFieldValueCmd
-    ->SetGuidance("(Uniform magnetic field type has to be selected first.)");
-  fUniformFieldValueCmd->SetParameterName("UniformFieldValue", false, false);
-  fUniformFieldValueCmd->SetDefaultUnit("tesla");
-  fUniformFieldValueCmd->SetUnitCategory("Magnetic flux density");
-  fUniformFieldValueCmd->AvailableForStates(G4State_Idle);  
-  
   fPrintMaterialsCmd 
     = new G4UIcmdWithoutParameter("/mcDet/printMaterials", this);
   fPrintMaterialsCmd->SetGuidance("Prints all materials.");
@@ -117,9 +102,8 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
 /// Destructor
 
   delete fDirectory;
-  delete fFieldTypeCmd;
+  delete fUpdateMagFieldCmd;
   delete fSeparatorCmd;
-  delete fUniformFieldValueCmd;
   delete fPrintMaterialsCmd;
   delete fPrintMaterialsPropertiesCmd;
   delete fPrintMediaCmd;
@@ -138,21 +122,12 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
 {
 /// Apply command to the associated object.
 
-  if( command == fFieldTypeCmd ) { 
-    if (newValues == "MCApplication") 
-      fGeometryManager->SetFieldType(kMCApplicationField); 
-    if (newValues == "Uniform") 
-      fGeometryManager->SetFieldType(kUniformField); 
-    if (newValues == "None") 
-      fGeometryManager->SetFieldType(kNoField); 
-  }
+  if (command == fUpdateMagFieldCmd) {
+    TG4GeometryManager::Instance()->UpdateMagField();
+  }    
   else if( command == fSeparatorCmd ) { 
     char separator = newValues(0);
     TG4GeometryServices::Instance()->SetG3toG4Separator(separator);
-  }
-  if (command == fUniformFieldValueCmd) {  
-    fGeometryManager
-      ->SetUniformFieldValue(fUniformFieldValueCmd->GetNewDoubleValue(newValues)); 
   }
   else if (command == fPrintMaterialsCmd) {
     TG4GeometryServices::Instance()->PrintMaterials();
