@@ -44,7 +44,7 @@ const G4double TG4RegionsManager::fgkRangeTolerance = 1e-3*mm;
 const G4double TG4RegionsManager::fgkEnergyTolerance = 1e-03;
 const G4int    TG4RegionsManager::fgkNofBins = 10;
 const G4int    TG4RegionsManager::fgkMinRangeOrder = -3;
-const G4int    TG4RegionsManager::fgkMaxRangeOrder = 3;
+const G4int    TG4RegionsManager::fgkMaxRangeOrder = 4;
 const G4String TG4RegionsManager::fgkDefaultRegionName = "DefaultRegionForTheWorld";
 
 //_____________________________________________________________________________
@@ -168,7 +168,7 @@ G4bool TG4RegionsManager::Iterate(
   }
   else { 
     if ( VerboseLevel() > 2 ) {
-      G4cout << indent << "Found range: " 
+      G4cout << indent << "Found range limit: " 
              << it->second << " mm" << G4endl;
     }
     return true;  
@@ -228,7 +228,7 @@ G4double TG4RegionsManager::ConvertEnergyToRange(
   }  
     
   if ( VerboseLevel() > 2 ) {
-    G4cout << indent << "Found range: "  << it->second << " mm" << G4endl;
+    G4cout << indent << "Found range limit: "  << it->second << " mm" << G4endl;
   }  
 
   // Now iterate up to desired precision of range
@@ -239,9 +239,9 @@ G4double TG4RegionsManager::ConvertEnergyToRange(
     
     G4double higherCut = it->second;  
     //G4cout << "higherCut = " << higherCut << G4endl;
-    --it;
-    if ( it == energyToRangeMap.end() ) return higherCut;
+    if ( it == energyToRangeMap.begin() )  return higherCut;
   
+    --it;
     G4double lowerCut = it->second;
     //G4cout << "lowerCut = " << lowerCut << G4endl;
     G4bool found 
@@ -249,10 +249,20 @@ G4double TG4RegionsManager::ConvertEnergyToRange(
                 lowEdgeEnergy, highEdgeEnergy,
                 nbin, energyToRangeMap, it, material, converter);
               
-    if ( ! found )  return higherCut;
+    if ( ! found ) {
+       // Now we have to go one step back to get below the user cut value
+       // unless we are at the beginning of the map
+       if ( it == energyToRangeMap.begin() ) return higherCut;
+       --it;
+       return it->second;;
+    }   
     ++iteration;
   }  
 
+  // Now we have to go one step back to get below the user cut value
+  // unless we are at the beginning of the map
+  if ( it == energyToRangeMap.begin() ) return it->second;
+  --it;
   return it->second;;
 }            
 
