@@ -41,11 +41,11 @@ TG4RegionsManager* TG4RegionsManager::fgInstance = 0;
 
 const G4int    TG4RegionsManager::fgkDefaultRangePrecision = 2;
 const G4double TG4RegionsManager::fgkRangeTolerance = 1e-3*mm;
-const G4double TG4RegionsManager::fgkEnergyTolerance = 1e-03;
+const G4double TG4RegionsManager::fgkEnergyTolerance = 1e-06;
 const G4int    TG4RegionsManager::fgkNofBins = 10;
 const G4int    TG4RegionsManager::fgkMinRangeOrder = -3;
-const G4int    TG4RegionsManager::fgkMaxRangeOrder = 4;
-const G4String TG4RegionsManager::fgkDefaultRegionName = "DefaultRegionForTheWorld";
+const G4int    TG4RegionsManager::fgkMaxRangeOrder = 6;
+const G4String TG4RegionsManager::fgkDefaultRegionName = "RegionWithDefaultCuts";
 
 //_____________________________________________________________________________
 TG4RegionsManager::TG4RegionsManager()
@@ -71,17 +71,6 @@ TG4RegionsManager::~TG4RegionsManager()
 //
 // private methods
 //
-
-//_____________________________________________________________________________
-G4Region* TG4RegionsManager::GetDefaultRegion() const
-{
-/// Return the default region associated with world
-
-  G4LogicalVolume* worldLV 
-    = TG4GeometryServices::Instance()->GetWorld()->GetLogicalVolume();
-  
-  return worldLV->GetRegion();
-}  
 
 //_____________________________________________________________________________
 G4double  TG4RegionsManager::GetGlobalEnergyCut(TG4G3Cut cutType) const
@@ -197,7 +186,7 @@ G4double TG4RegionsManager::ConvertEnergyToRange(
 
   // Compute the range order where we will start iterating
   // withing the orders in between fgkMinRangeOrder and fgkMaxRangeOrder
-  // (1e-03mm, 1e-02, 1e-01, 1mm, 1cm, 10 cm, 1m)   
+  // (1e-03mm, 1e-02, 1e-01, 1mm, 1cm, 10 cm, 1m, 10m, 100m, 1000m )   
   G4String indent("     ");
   for ( G4int i=fgkMinRangeOrder; i<=fgkMaxRangeOrder; i++ ) {
     G4double rangeCut = pow(10.,i);
@@ -215,6 +204,15 @@ G4double TG4RegionsManager::ConvertEnergyToRange(
     energyToRangeMap.insert(std::pair<G4double,G4double>(energy/MeV, rangeCut));
   }
   
+  // If energyCut is above the maximum range order return the last
+  // computed value
+  if ( energyToRangeMap.rbegin()->first < energyCut ) {
+    if ( VerboseLevel() > 2 ) {
+      G4cout << indent << "Outside range, return the highest value " << G4endl;
+    }  
+    return energyToRangeMap.rbegin()->second;
+  }  
+
   // Now find the closest value of energy which is
   // equal or higher than given energyCut
   std::map<G4double, G4double>::const_iterator it
@@ -365,10 +363,10 @@ G4bool TG4RegionsManager::CheckCut(TG4Limits* limits,
     defaultRangeCut = TG4PhysicsManager::Instance()->GetCutForGamma();
   }
 
-  if ( energy < energyLimits*(1.0 - fgkEnergyTolerance) &&
+  if ( energy > energyLimits*(1.0 + fgkEnergyTolerance) &&
        fabs( range - defaultRangeCut) > fgkRangeTolerance ) {
     G4cout << "  !! " << particleName
-           << " cut from range < cut from limits !!"  << G4endl;
+           << " cut from range > cut from limits !!"  << G4endl;
     if ( VerboseLevel() <= 1 ) {       
       G4cout << "  energy from range = " << energy/MeV  << " MeV"
              << "  energy from limits = " << energyLimits << " MeV" << G4endl;
@@ -433,10 +431,16 @@ void TG4RegionsManager::CheckRegionsRanges() const
     
     if ( ! checkGam || ! checkEle ) good = false;     
   }
+  
   if ( good ) {
       G4cout << ".. Ranges in regions are consistent with energy cuts." 
              << G4endl;
-  }    
+  } 
+  else {
+      G4cout << ".. Found inconsistencies between ranges in regions and energy cuts." 
+             << G4endl;
+  }           
+     
 }             
          
 //_____________________________________________________________________________
@@ -452,7 +456,11 @@ void TG4RegionsManager::CheckRegionsInGeometry() const
   
     G4LogicalVolume* lv = (*lvStore)[i];
     
-    // skip volumes without media 
+    // skip world volume
+    if ( lv == TG4GeometryServices::Instance()->GetWorld()->GetLogicalVolume() )
+      continue;
+    
+    // skip volume without medium 
     TG4Medium* medium 
       = TG4GeometryServices::Instance()->GetMediumMap()->GetMedium(lv, false);
     if ( ! medium ) continue;  
@@ -471,6 +479,10 @@ void TG4RegionsManager::CheckRegionsInGeometry() const
   if ( good ) {
       G4cout << ".. Regions are consistent with materials."  << G4endl;
   }    
+  else {
+      G4cout << ".. Found inconsistencies between regions and materials." 
+             << G4endl;
+  }           
 }            
                          
 //
@@ -495,8 +507,18 @@ void TG4RegionsManager::DefineRegions()
   G4double defaultRangeCutGam 
     = TG4PhysicsManager::Instance()->GetCutForGamma();
 
-  // Get default region 
-  G4Region* worldRegion = GetDefaultRegion();
+  // Create a new region with default cuts
+  G4Region* defaultRegion = new G4Region(fgkDefaultRegionName);
+  G4ProductionCuts* dcuts = new G4ProductionCuts();
+  dcuts->SetProductionCut(defaultRangeCutGam, 0);
+  dcuts->SetProductionCut(defaultRangeCutEle, 1);
+  dcuts->SetProductionCut(TG4PhysicsManager::Instance()->GetCutForPositron(), 2);
+  defaultRegion->SetProductionCuts(dcuts);
+
+  // Get world default region 
+  G4LogicalVolume* worldLV 
+    = TG4GeometryServices::Instance()->GetWorld()->GetLogicalVolume();
+  G4Region* worldRegion = worldLV->GetRegion();
 
   // Get global energy cuts
   G4double cutEleGlobal = GetGlobalEnergyCut(kCUTELE);
@@ -507,24 +529,19 @@ void TG4RegionsManager::DefineRegions()
              << "  CUTGAM = " << cutGamGlobal << " MeV" << G4endl; 
   }           
   
-  // Define region for each logical volume  
-  //
-  
   G4int counter = 0;
   std::set<G4Material*> processedMaterials;
+  
+  // Define region for each logical volume  
+  //  
   
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
 
   for (G4int i=0; i<G4int(lvStore->size()); i++) {
   
+  
     G4LogicalVolume* lv = (*lvStore)[i];
-    if ( lv->IsRootRegion() ) {
-    
-      if ( VerboseLevel() > 1 ) {
-        G4cout << "Skipping Root region LV = " << lv->GetName() << G4endl;
-      }  
-      continue;
-    }   
+    G4bool isWorld = ( lv == worldLV ) ;
 
     TG4Medium* medium 
       = TG4GeometryServices::Instance()->GetMediumMap()->GetMedium(lv, false);
@@ -536,7 +553,7 @@ void TG4RegionsManager::DefineRegions()
     G4String regionName = material->GetName();
     G4Region* region 
       = G4RegionStore::GetInstance()->GetRegion(regionName, false );
-    if ( region ) {
+    if ( region && ! isWorld ) {
       if ( VerboseLevel() > 1 ) {
         G4cout << "   " << "adding volume in region = " << regionName << G4endl;
       }
@@ -552,11 +569,11 @@ void TG4RegionsManager::DefineRegions()
 
     // If this material was already processed and did not result
     // in a new region: add the logical volume to the world region
-    if ( processedMaterials.find(material) != processedMaterials.end() ) {
+    if ( processedMaterials.find(material) != processedMaterials.end() && ! isWorld) {
       if ( VerboseLevel() > 1 ) {
-        G4cout << "   " << "adding volume in default World region" << G4endl;
+        G4cout << "   " << "adding volume in the default region" << G4endl;
       }         
-      worldRegion->AddRootLogicalVolume(lv);
+      defaultRegion->AddRootLogicalVolume(lv);
       continue;
     } 
     
@@ -578,21 +595,36 @@ void TG4RegionsManager::DefineRegions()
     if ( fabs ( rangeEle - defaultRangeCutEle ) < 1e-03 && 
          fabs ( rangeGam - defaultRangeCutGam ) < 1e-03 ) {
       // Do not create a new region if range cuts do not differ
-      // from those in default region
-      worldRegion->AddRootLogicalVolume(lv);
+      // from those in the default region
+      if ( ! isWorld) {
+        if ( VerboseLevel() > 1 ) {
+          G4cout << "   " << "adding volume in the default region" << G4endl;
+        }         
+        defaultRegion->AddRootLogicalVolume(lv);
+      }  
       processedMaterials.insert(material);
     }  
     else {           
-      // Create new region
-      region = new G4Region(regionName);
-      region->AddRootLogicalVolume(lv);
-      ++counter;
-
+      // Create new cuts
       G4ProductionCuts* cuts = new G4ProductionCuts();
       cuts->SetProductionCut(rangeGam, 0);
       cuts->SetProductionCut(rangeEle, 1);
       cuts->SetProductionCut(TG4PhysicsManager::Instance()->GetCutForPositron(), 2);
-      region->SetProductionCuts(cuts);
+
+      if ( isWorld) {
+        // set new production cuts to the world
+        worldRegion->SetProductionCuts(cuts);
+        worldRegion->RegionModified(true);
+      }
+      else {
+        region = new G4Region(regionName);
+        ++counter;
+        if ( VerboseLevel() > 1 ) {
+          G4cout << "   " << "adding volume in a new region " << regionName << G4endl;
+        }         
+        region->AddRootLogicalVolume(lv);
+        region->SetProductionCuts(cuts);
+      }  
     }  
   }
   

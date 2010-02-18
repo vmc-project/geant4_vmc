@@ -104,8 +104,6 @@ class TG4RegionsManager : public TG4Verbose
     TG4RegionsManager& operator=(const TG4RegionsManager& right);
 
     // methods
-    G4Region* GetDefaultRegion() const;
-
     G4double  GetGlobalEnergyCut(
                     TG4G3Cut cutType) const;
 
@@ -166,7 +164,7 @@ class TG4RegionsManager : public TG4Verbose
     static const G4int    fgkMinRangeOrder;
     /// the maximum range order
     static const G4int    fgkMaxRangeOrder;
-    /// the name of default region (defined in G4RunManagerKernel) 
+    /// the name of the region with default cuts
     static const G4String fgkDefaultRegionName;
 
     //

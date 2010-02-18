@@ -520,8 +520,11 @@ void TG4GeometryManager::ConstructMagField()
     
   if ( gMC->GetMagField() ) {  
       fMagneticField = new TG4MagneticField(fFieldParameters);
-      if ( VerboseLevel() > 1 )
-        G4cout << "Magnetic field created." << G4endl;
+      if ( VerboseLevel() > 1 ) {
+        G4cout << "Magnetic field created with stepper "
+               << TG4FieldParameters::StepperTypeName(
+                    fFieldParameters.GetStepperType()) << G4endl;
+      }              
   }  
 }
 
