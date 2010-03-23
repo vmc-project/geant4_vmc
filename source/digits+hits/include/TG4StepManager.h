@@ -35,6 +35,7 @@ class G4Track;
 class G4SteppingManager;
 class G4VPhysicalVolume;
 class G4VTouchable;
+class G4Navigator;
 
 class TLorentzVector;
 
@@ -65,6 +66,7 @@ class TG4StepManager
     void SetStep(G4Step* step, TG4StepStatus status);    // G4 specific
     void SetStep(G4Track* track, TG4StepStatus status);  // G4 specific
     void SetSteppingManager(G4SteppingManager* manager); // G4 specific
+    void SetWorld(G4VPhysicalVolume* world);             // G4 specific
     void SetMaxStep(Double_t step);
     void SetMaxStepBack();                               // G4 specific
     void SetMaxNStep(Int_t maxNofSteps); 
@@ -171,6 +173,9 @@ class TG4StepManager
     
     /// G4SteppingManager  
     G4SteppingManager*  fSteppingManager;
+    
+    /// G4Navigator
+    G4Navigator*        fNavigator;
     
     /// buffer for current volume path
     G4String            fVolPathBuffer;

@@ -50,6 +50,7 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
     fLimitsModifiedOnFly(0),
     fTouchableHistory(0),
     fSteppingManager(0),
+    fNavigator(0),
     fVolPathBuffer(),
     fCopyNoOffset(0),
     fDivisionCopyNoOffset(0)
@@ -66,6 +67,8 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
   fgInstance = this;  
   
   fTouchableHistory = new G4TouchableHistory();
+  
+  fNavigator = new G4Navigator();
   
   /// Set offset for passing copyNo to 1;
   /// as G3toG4 decrement copyNo passed by user by 1
@@ -84,6 +87,7 @@ TG4StepManager::~TG4StepManager()
 /// Destructor
 
   delete fTouchableHistory;
+  delete fNavigator;
 }
 
 //
@@ -166,11 +170,7 @@ const G4VTouchable* TG4StepManager::GetCurrentTouchable() const
 #endif 
     const G4ThreeVector& position = fTrack->GetPosition();
     //const G4ThreeVector& direction = fTrack->GetMomentumDirection();
-    G4Navigator* navigator =
-      G4TransportationManager::GetTransportationManager()->
-        GetNavigatorForTracking();
-    
-    navigator->LocateGlobalPointAndUpdateTouchable(
+    fNavigator->LocateGlobalPointAndUpdateTouchable(
                      position, fTouchableHistory);
 
     touchable = fTouchableHistory;
@@ -267,6 +267,14 @@ void TG4StepManager::StopRun()
   StopEvent();
   G4UImanager::GetUIpointer()->ApplyCommand("/run/abort");
 }
+
+//_____________________________________________________________________________
+void TG4StepManager::SetWorld(G4VPhysicalVolume* world) 
+{
+/// Set world to the alterbative G4 navigator
+
+  fNavigator->SetWorldVolume(world);
+}  
 
 //_____________________________________________________________________________
 void TG4StepManager::SetMaxStep(Double_t step)
@@ -368,11 +376,8 @@ G4VPhysicalVolume* TG4StepManager::GetCurrentPhysicalVolume() const
 #endif 
 
     G4ThreeVector position = fTrack->GetPosition();
-    G4Navigator* navigator =
-      G4TransportationManager::GetTransportationManager()->
-        GetNavigatorForTracking();
     physVolume
-     = navigator->LocateGlobalPointAndSetup(position); 
+     = fNavigator->LocateGlobalPointAndSetup(position); 
      
     if ( ! physVolume ) {
       G4cerr << "No physical volume found at track vertex: "

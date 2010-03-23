@@ -22,6 +22,7 @@
 #include "TG4ParticlesManager.h"
 #include "TG4StackPopper.h"
 #include "TG4SensitiveDetector.h"
+#include "TG4GeometryServices.h"
 #include "TG4SDServices.h"
 #include "TG4SpecialControlsV2.h"
 #include "TG4Globals.h"
@@ -134,9 +135,10 @@ void TG4TrackingAction::PrepareNewEvent()
 {
 /// Called by G4 kernel at the beginning of event.
 
-  // set g4 stepping manager pointer
+  // set g4 stepping manager pointer and world volume
   TG4StepManager* stepManager = TG4StepManager::Instance();
   stepManager->SetSteppingManager(fpTrackingManager->GetSteppingManager());
+  stepManager->SetWorld(TG4GeometryServices::Instance()->GetWorld());
   
   fTrackManager->SetG4TrackingManager(fpTrackingManager);
   
