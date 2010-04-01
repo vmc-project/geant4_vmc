@@ -27,3 +27,8 @@ default:
 clean:
 	@for dir in $(SUBDIRS); do (cd $$dir && $(MAKE) clean); done;:
 
+dist:
+	@cd source && $(MAKE) dist;
+
+distsrc:
+	@cd source && $(MAKE) distsrc;
