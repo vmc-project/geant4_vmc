@@ -195,7 +195,7 @@ void TG4OpticalPhysics::ConstructProcess()
       for ( G4int i=kAbsorption; i<=kBoundary; i++ ) {  
         // Absorption, Raileigh, Boundary    
         if ( fProcessActivation[i] )
-          processManager->AddDiscreteProcess(fProcesses[kAbsorption]);
+          processManager->AddDiscreteProcess(fProcesses[i]);
       }  
     }
   }  
