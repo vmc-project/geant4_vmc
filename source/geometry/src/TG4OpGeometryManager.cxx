@@ -141,14 +141,14 @@ void  TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
 ///     - EFFIC       Detection efficiency for UV photons 
 ///     - RINDEX      Refraction index (if=0 metal)
 
-  // add units
-  // add units
+  // add units and detect if Rindex == 0
+  G4bool isRindex = false;
   G4double* ppckov2  = fGeometryServices->CreateG4doubleArray(ppckov, npckov); 
   G4double* absco2  = fGeometryServices->CreateG4doubleArray(absco, npckov); 
-  G4int i;
-  for (i=0; i<npckov; i++) {
+  for ( G4int i=0; i<npckov; i++ ) {
     ppckov2[i] *= TG4G3Units::Energy();
     absco2[i]  *= TG4G3Units::Length();
+    if ( rindex[i] != 0.0 ) isRindex = true;
   }  
 
   // get material of medium from table
@@ -178,8 +178,15 @@ void  TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
                     // used in G4OpAbsorption process
   table->AddProperty("EFFICIENCY", ppckov2, effic, npckov);
                     // used in G4OpBoundary process
-  table->AddProperty("RINDEX", ppckov2, rindex, npckov);
-                    // used in G4Cerenkov, G4OpRayleigh, G4OpBoundary
+
+  // Set RINDEX only if defined with non zero values.
+  // The zero value is a Geant3 convention to define material as metal which was not 
+  // adopted in Geant4, where 0 values cause unpredicatable behavior in 
+  // G4OpBoundary process
+  if ( isRindex ) {
+    table->AddProperty("RINDEX", ppckov2, rindex, npckov);
+                      // used in G4Cerenkov, G4OpRayleigh, G4OpBoundary
+  }                    
 
   delete [] ppckov2;           
   delete [] absco2;           
