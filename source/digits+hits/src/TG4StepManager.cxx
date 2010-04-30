@@ -465,7 +465,8 @@ const char* TG4StepManager::CurrentVolName() const
 /// Return the current physical volume name.
 
   return  TG4GeometryServices::Instance()
-            ->UserVolumeName(GetCurrentPhysicalVolume()->GetName());
+            ->UserVolumeName(
+                GetCurrentPhysicalVolume()->GetLogicalVolume()->GetName());
 }
 
 //_____________________________________________________________________________
@@ -479,7 +480,7 @@ const char* TG4StepManager::CurrentVolOffName(Int_t off) const
 
   if (mother) {
     return TG4GeometryServices::Instance()
-             ->UserVolumeName(mother->GetName());
+             ->UserVolumeName(mother->GetLogicalVolume()->GetName());
   }             
   else 
     return "";
