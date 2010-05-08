@@ -24,12 +24,15 @@
 
 #include <G4Run.hh>
 
+#include <TObjArray.h>
+
 //_____________________________________________________________________________
 TG4RunAction::TG4RunAction()
   : G4UserRunAction(),
     TG4Verbose("runAction"),
+    fCrossSectionManager(), 
     fTimer(0),
-    fRunID(-1) 
+    fRunID(-1)
 {
 /// Default constructor
 
@@ -82,4 +85,8 @@ void TG4RunAction::EndOfRunAction(const G4Run* run)
     G4cout << "Time of this run:   " << *fTimer << G4endl;
     G4cout << "Number of events processed: " << run->GetNumberOfEvent() << G4endl;
   }    
+
+  if ( fCrossSectionManager.IsMakeHistograms() ) {
+    fCrossSectionManager.MakeHistograms();
+  }  
 }    

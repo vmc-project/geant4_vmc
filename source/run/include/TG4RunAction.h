@@ -18,6 +18,7 @@
 /// \author I. Hrivnacova; IPN Orsay
 
 #include "TG4Verbose.h"
+#include "TG4CrossSectionManager.h"
 
 #include <G4UserRunAction.hh>
 #include <globals.hh>
@@ -26,6 +27,7 @@ class G4Timer;
     // in order to avoid the odd dependency for the
     // times system function this declaration must be the first
 class G4Run;
+
 
 /// \ingroup run
 /// \brief Actions at the beginning and the end of run.
@@ -50,6 +52,7 @@ class TG4RunAction : public G4UserRunAction,
     TG4RunAction& operator=(const TG4RunAction& right);
 
     // data members
+    TG4CrossSectionManager  fCrossSectionManager; ///< cross section manager
     G4Timer*  fTimer; ///< G4Timer
     G4int     fRunID; ///< run ID
 };
