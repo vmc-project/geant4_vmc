@@ -30,20 +30,16 @@ G4String TG4HadronPhysicsList::AvailableSelections()
 {
 /// Return list of all available selections
 
+  G4PhysListFactory phyListFactory;
+  const std::vector<G4String>& availablePhysLists
+    = phyListFactory.AvailablePhysLists();
+
   G4String selections;
-  selections += "FTFC ";
-  selections += "FTFP FTFP_BERT FTFP_EMV FTF_BIC  ";
-  selections += "LBE ";
-  selections += "LHEP LHEP_BERT LHEP_EMV LHEP_PRECO_HP ";
-  selections += "QBBC ";
-  selections += "QGSC QGSC_BERT QGSC_EFLOW QGSC_EMV "; 
-  selections += "QGSP ";
-  selections += "QGSP_BERT QGSP_BERT_DIF QGSP_BERT_EMV QGSP_BERT_HP QGSP_BERT_NQE QGSP_BERT_TRV ";
-  selections += "QGSP_BIC QGSP_BIC_HP ";
-  selections += "QGSP_DIF ";
-  selections += "QGSP_EMV QGSP_EMV_NQE QGSP_EMX QGSP_NQE QGSP_QEL ";
-  selections += "QGS_BIC ";
-  
+  for ( G4int i=0; i<G4int(availablePhysLists.size()); ++i ) {
+    selections += availablePhysLists[i];
+    selections += " ";    
+  }  
+
   return selections;
 }  
 
