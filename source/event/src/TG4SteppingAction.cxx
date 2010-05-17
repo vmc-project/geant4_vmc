@@ -23,6 +23,7 @@
 #include "TG4SpecialControlsV2.h"
 #include "TG4SDServices.h"
 #include "TG4Limits.h"
+#include "TG4G3Units.h"
 #include "TG4Globals.h"
 
 #include <G4Track.hh>
@@ -124,8 +125,9 @@ void TG4SteppingAction::ProcessTrackIfOutOfRegion(const G4Step* step)
 
   G4ThreeVector position 
     = step->GetPostStepPoint()->GetPosition();
+  position /=  TG4G3Units::Length();  
 
-  if ( position.mag() > TVirtualMCApplication::Instance()->TrackingRmax() ||
+  if ( position.perp() > TVirtualMCApplication::Instance()->TrackingRmax() ||
        std::abs(position.z()) > TVirtualMCApplication::Instance()->TrackingZmax()) {
  
     // print looping info
