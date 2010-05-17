@@ -43,6 +43,7 @@ class G4UIcmdWithADoubleAndUnit;
 /// - /mcCrossSection/setMinMomentum  value unit
 /// - /mcCrossSection/setMaxMomentum  value unit
 /// - /mcCrossSection/setMomentum     value unit
+/// - /mcCrossSection/setLabel     label
 /// - /mcCrossSection/printCrossSection crossSectionType
 ///
 /// \author I. Hrivnacova; IPN, Orsay
@@ -79,6 +80,7 @@ class TG4CrossSectionMessenger: public G4UImessenger
     G4UIcmdWithADoubleAndUnit*  fMinMomentumCmd;///< command: setMinMomentum
     G4UIcmdWithADoubleAndUnit*  fMaxMomentumCmd;///< command: setMaxMomentum
     G4UIcmdWithADoubleAndUnit*  fMomentumCmd;   ///< command: setMomentum
+    G4UIcmdWithAString*         fLabelCmd;      ///< command: setLabel
     G4UIcmdWithAString*         fPrintCmd;      ///< command: printCrossSection 
 };
 

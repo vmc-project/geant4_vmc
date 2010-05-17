@@ -51,6 +51,7 @@ TG4CrossSectionManager::TG4CrossSectionManager()
     fMaxMomentum(fgkDefaultMaxMomentum),
     fNofBinsE(fgkDefaultNofBinsE),
     fNofBinsP(fgkDefaultNofBinsP),
+    fLabel(),
     fKinEnergy(fgkDefaultKinEnergy),
     fIsInitialised(false),
     fMakeHistograms(false)
@@ -80,8 +81,10 @@ const G4ParticleDefinition* TG4CrossSectionManager::GetParticle() const
     = G4ParticleTable::GetParticleTable()->FindParticle(fParticleName);
 
   if ( ! particle ) {
-    TG4Globals::Warning("TG4CrossSectionManager", "GetParticle",
-                        "Particle not found.");
+    TString text = "Particle \"";
+    text += fParticleName.data();
+    text += "\" not found.";
+    TG4Globals::Warning("TG4CrossSectionManager", "GetParticle", text);
     return 0;
   }
 
@@ -97,8 +100,11 @@ const G4Element* TG4CrossSectionManager::GetElement() const
     = G4NistManager::Instance()->FindOrBuildElement(fElementName);
 
   if ( ! element ) {
-    TG4Globals::Warning("TG4CrossSectionManager", "GetElement",
-                        "Element not found.");
+    TString text = "Element \"";
+    text += fElementName.data();
+    text += "\" not found.";
+    G4cout << "element:" << fElementName << G4endl; 
+    TG4Globals::Warning("TG4CrossSectionManager", "GetElement", text);
     return 0;
   }
 
@@ -127,7 +133,9 @@ void TG4CrossSectionManager::CreateHistograms()
 
   fHistograms = new TObjArray();
 
-  TString title0 = fParticleName.data();
+  TString title0(fLabel.data());
+  title0 += ": ";
+  title0 += fParticleName.data();
   title0 += " - ";
   title0 += fElementName.data();
   title0 += " : ";

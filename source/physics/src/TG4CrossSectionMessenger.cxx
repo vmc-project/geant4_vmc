@@ -43,6 +43,7 @@ TG4CrossSectionMessenger::TG4CrossSectionMessenger(
     fMinMomentumCmd(0),
     fMaxMomentumCmd(0),
     fMomentumCmd(0),
+    fLabelCmd(0),  
     fPrintCmd(0)
 { 
 /// Standard constructor
@@ -105,6 +106,11 @@ TG4CrossSectionMessenger::TG4CrossSectionMessenger(
   fMomentumCmd->SetParameterName("Momentum", false);
   fMomentumCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
+  fLabelCmd = new G4UIcmdWithAString("/mcCrossSection/setLabel", this);
+  fLabelCmd->SetGuidance("Set label which will be put at the beginning of histograms title");
+  fLabelCmd->SetParameterName("Label", true);
+  fLabelCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+
   fPrintCmd = new G4UIcmdWithAString("/mcCrossSection/printCrossSection", this);
   fPrintCmd->SetGuidance("Print selected cross section for current kinetic energy");
   fPrintCmd->SetParameterName("crossSectionType", false);
@@ -133,6 +139,7 @@ TG4CrossSectionMessenger::~TG4CrossSectionMessenger()
   delete fKinECmd;
   delete fMinMomentumCmd;
   delete fMaxMomentumCmd;
+  delete fLabelCmd;
   delete fMomentumCmd;
   delete fPrintCmd;
 }
@@ -178,6 +185,9 @@ void TG4CrossSectionMessenger::SetNewValue(G4UIcommand* command, G4String newVal
   }
   else if (command == fMomentumCmd) {
     fCrossSectionManager->SetMomentum(fMomentumCmd->GetNewDoubleValue(newValue));
+  }
+  else if (command == fLabelCmd) {  
+    fCrossSectionManager->SetLabel(newValue); 
   }
   else if (command == fPrintCmd) {
     if ( newValue == "All" )

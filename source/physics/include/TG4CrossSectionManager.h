@@ -78,8 +78,8 @@ class TG4CrossSectionManager : public TG4Verbose
     void PrintCrossSections() const;
     void PrintCrossSection(TG4CrossSectionType type) const;
 
-    void SetParticleName(const G4String&);
-    void SetElementName(const G4String&);
+    void SetParticleName(const G4String& name);
+    void SetElementName(const G4String& name);
 
     void SetNumberOfBinsE(G4int val);
     void SetNumberOfBinsP(G4int val);
@@ -89,6 +89,8 @@ class TG4CrossSectionManager : public TG4Verbose
 
     void SetMinMomentum(G4double val);
     void SetMaxMomentum(G4double val);
+    
+    void SetLabel(const G4String& label);
 
     void SetKinEnergy(G4double val);
     void SetMomentum(G4double val);
@@ -132,6 +134,7 @@ class TG4CrossSectionManager : public TG4Verbose
     G4double   fMaxMomentum;  ///< maximum momentum (histogram range)
     G4int      fNofBinsE;     ///< number of bins in kinetic energy
     G4int      fNofBinsP;     ///< number of bins in momentum
+    G4String   fLabel;        ///< the histogram label
     G4double   fKinEnergy;    ///< current kinetic energy
     G4bool     fIsInitialised;  ///< info if histograms are created
     G4bool     fMakeHistograms; ///< option to make histograms (for ecternal use)
@@ -178,6 +181,12 @@ inline void TG4CrossSectionManager::SetNumberOfBinsP(G4int val) {
   /// Set the number of bins in momentum
   fNofBinsP = val;
 }  
+
+inline void TG4CrossSectionManager::SetLabel(const G4String& label) {
+  /// Set a label to the histogram.
+  /// The label will be added at the beginning of the histogram title.
+  fLabel = label;
+}    
 
 inline void TG4CrossSectionManager::SetKinEnergy(G4double val) {
   /// Set the current kinetic energy
