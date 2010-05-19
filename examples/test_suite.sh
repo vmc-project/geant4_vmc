@@ -21,10 +21,10 @@ OUTDIR=$CURDIR/log
 # Set 1 to 0 if you want to skip given MC
 TESTG3=1
 TESTG4=1 
-TESTFL=1 
+TESTFL=0 
 
-# Recreate log directory only if running test for all MCs
-if [ "$TESTG3" = "1" -a  "$TESTG4" = "1" -a "$TESTFL" = "1" ]; then
+# Recreate log directory only if running test for both G3 and G4
+if [ "$TESTG3" = "1" -a  "$TESTG4" = "1" ]; then
   rm -fr $OUTDIR
 fi  
 
