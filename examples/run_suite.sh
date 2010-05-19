@@ -46,8 +46,8 @@ do
   fi
 
   # run Fluka
-  echo "... Running example $EXAMPLE with Fluka" 
-  root.exe -q "run_fl.C"  >& run_fl.out
+  #echo "... Running example $EXAMPLE with Fluka" 
+  #root.exe -q "run_fl.C"  >& run_fl.out
 
 done
         
