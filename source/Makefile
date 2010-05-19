@@ -89,6 +89,7 @@ ifndef G4INCLUDE
 endif  
 
 INCLUDES := $(patsubst %,-I%/include,$(GDIRS)) \
+           -I$(TOPDIR)/include \
            -I$(TOPDIR)/include/g4root \
 	   -I$(G4INCLUDE) \
 	   -I$(CLHEP_BASE_DIR)/include \
@@ -191,7 +192,8 @@ SLIBRARY	= $(LIBDIR)/lib$(PACKAGE).$(SL)
 ALIBRARY	= $(LIBDIR)/lib$(PACKAGE).a
 
 default:	depend $(SLIBRARY) includes
-includes:       clean_includes make_includes
+#includes:       clean_includes make_includes
+includes:       make_includes
 static: 	$(ALIBRARY) 
 
 ifneq ($(USE_VGM),)
