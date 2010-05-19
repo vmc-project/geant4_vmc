@@ -176,6 +176,13 @@ void HandleLinkLine(const char* str, const char* what)
   
   // Process the vector with libs names and load libraries
   size_t n = libs.size();
+  TString sWhat(what);
+  Bool_t load = sWhat.Contains("l");
+  if (!load && !sWhat.Contains("u")) {
+     std::cerr << "  Unknown load action " << what << std::endl;
+     return;
+  }
+
   for ( size_t i = 0; i < n; ++i ) {
     size_t idx = n - i - 1;
     
@@ -190,10 +197,10 @@ void HandleLinkLine(const char* str, const char* what)
    
     int result = 0; 
     if ( libs[idx].c_str() ) {
-      if  ( TString(what).Contains("l") ) 
-        result = gSystem->Load(libs[idx].c_str());
-      else if ( TString(what).Contains("u") )
-        gSystem->Unload(libs[idx].c_str());
+       if  (load) 
+          result = gSystem->Load(libs[idx].c_str());
+       else
+          gSystem->Unload(libs[idx].c_str());
     } 
     // Uncomment to debug
     // if ( TString(what).Contains("l")  )
