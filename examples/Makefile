@@ -23,6 +23,10 @@ ifeq ($(MAKE_GEANT4),../include/geant4vmc/TG4RunConfiguration.h)
   SUBDIRS += E03/geant4
 endif
 
+MAKE_GEANT4_2 := $(shell ls ../include/TG4RunConfiguration.h 2> /dev/null )
+ifeq ($(MAKE_GEANT4_2),../include/TG4RunConfiguration.h)
+  SUBDIRS += E03/geant4
+endif
 
 .PHONY: default
 
