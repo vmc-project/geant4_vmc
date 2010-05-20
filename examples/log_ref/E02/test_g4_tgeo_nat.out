@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -18,11 +18,11 @@ Enclose multiple statements between { }.
 Processing test_E02.C("g4Config.C", kFALSE)...
 Loading Geant4 libraries ...
 Loading VGM libraries ... 
-Loading G4root library ...
+Loading g4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-09-03    (18-December-2009)
+ Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -325,7 +325,7 @@ Number of daughters: 0
   trackID: 4  chamberNb: 2  energy deposit (keV): 10.8785  position (cm): (-46.8975, 76.044, 15.9008)
   trackID: 4  chamberNb: 2  energy deposit (keV): 8.42811  position (cm): (-46.9134, 75.8337, 15.9396)
   trackID: 4  chamberNb: 2  energy deposit (keV): 6.06166  position (cm): (-47.0065, 75.699, 15.7301)
-  trackID: 4  chamberNb: 2  energy deposit (keV): 8.47582  position (cm): (-46.9705, 75.6513, 15.6097)
+  trackID: 4  chamberNb: 2  energy deposit (keV): 8.47581  position (cm): (-46.9705, 75.6513, 15.6097)
   trackID: 4  chamberNb: 2  energy deposit (keV): 10.0459  position (cm): (-47.0523, 75.6998, 15.4392)
   trackID: 4  chamberNb: 2  energy deposit (keV): 8.12414  position (cm): (-47.1424, 75.6215, 15.4072)
   trackID: 4  chamberNb: 2  energy deposit (keV): 11.2051  position (cm): (-47.1978, 75.6582, 15.3937)
@@ -401,5 +401,5 @@ TParticle: e-             p: 0.000147 0.000125 -0.000012 Vertex: 1.111630e+00 4.
 Mother:    proton  with ID: 0
 Number of daughters: 0
 
-Time of this run:   User=0.13s Real=0.13s Sys=0s
+Time of this run:   User=0.26s Real=0.26s Sys=0s
 Number of events processed: 5

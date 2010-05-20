@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -18,7 +18,7 @@ Enclose multiple statements between { }.
 Processing test_E03_1.C("g4tgeoConfigOld.C", kTRUE)...
 Loading Geant4 libraries ...
 Loading VGM libraries ... 
-Loading G4root library ...
+Loading g4root library ...
 Loading geant4vmc library ...
 Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
@@ -37,7 +37,7 @@ Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered t
 ------------------------------------------------------------
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-09-03    (18-December-2009)
+ Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -100,20 +100,20 @@ MediumId: Medium Beam not found
 ---> Begin of event: 5
    Absorber: total energy (MeV): 889.533       total track length (cm):  60.3641
    Gap:      total energy (MeV): 23.1314       total track length (cm):  11.6999
-Time of this run:   User=0.35s Real=0.36s Sys=0.01s
+Time of this run:   User=0.95s Real=0.95s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -122,7 +122,7 @@ Enclose multiple statements between { }.
 Processing test_E03_2.C("g4tgeoConfigOld.C", kTRUE)...
 Loading Geant4 libraries ...
 Loading VGM libraries ... 
-Loading G4root library ...
+Loading g4root library ...
 Loading geant4vmc library ...
 --- Init MC 
 Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
@@ -143,7 +143,7 @@ Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered t
 ------------------------------------------------------------
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-09-03    (18-December-2009)
+ Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -686,7 +686,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  45.342       total track length (cm):    3.073
    Gap:      total energy (MeV):   1.568       total track length (cm):    0.716
-Time of this run:   User=0.01s Real=0.02s Sys=0s
+Time of this run:   User=0.04s Real=0.04s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
 WARNING - Attempt to delete the physical volume store while geometry closed !
@@ -697,14 +697,14 @@ WARNING - Attempt to delete the region store while geometry closed !
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -713,7 +713,7 @@ Enclose multiple statements between { }.
 Processing test_E03_3.C("g4tgeoConfigOld.C", kTRUE)...
 Loading Geant4 libraries ...
 Loading VGM libraries ... 
-Loading G4root library ...
+Loading g4root library ...
 Loading geant4vmc library ...
 --- Init MC 
 Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
@@ -734,7 +734,7 @@ Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered t
 ------------------------------------------------------------
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-09-03    (18-December-2009)
+ Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -830,21 +830,21 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.160
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.01s Real=0.01s Sys=0s
+Time of this run:   User=0.02s Real=0.03s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -853,7 +853,7 @@ Enclose multiple statements between { }.
 Processing test_E03_4.C("g4tgeoConfigOld.C", kTRUE)...
 Loading Geant4 libraries ...
 Loading VGM libraries ... 
-Loading G4root library ...
+Loading g4root library ...
 Loading geant4vmc library ...
 Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
@@ -872,7 +872,7 @@ Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered t
 ------------------------------------------------------------
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-09-03    (18-December-2009)
+ Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -939,5 +939,5 @@ MediumId: Medium Beam not found
 
    Absorber: total energy (MeV): 1621.12       total track length (cm):  108.669
    Gap:      total energy (MeV): 82.1735       total track length (cm):  41.5236
-Time of this run:   User=0.14s Real=0.14s Sys=0.01s
+Time of this run:   User=0.47s Real=0.48s Sys=0.01s
 Number of events processed: 1

@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -18,11 +18,11 @@ Enclose multiple statements between { }.
 Processing test_E03_1.C("g4ConfigOld.C", kTRUE)...
 Loading Geant4 libraries ...
 Loading VGM libraries ... 
-Loading G4root library ...
+Loading g4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-09-03    (18-December-2009)
+ Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -103,20 +103,20 @@ Instantiated 6 volume table entries
 ---> Begin of event: 5
    Absorber: total energy (MeV): 922.326       total track length (cm):  61.1818
    Gap:      total energy (MeV): 25.8072       total track length (cm):  12.2605
-Time of this run:   User=0.34s Real=0.35s Sys=0s
+Time of this run:   User=0.98s Real=0.98s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -125,12 +125,12 @@ Enclose multiple statements between { }.
 Processing test_E03_2.C("g4ConfigOld.C", kTRUE)...
 Loading Geant4 libraries ...
 Loading VGM libraries ... 
-Loading G4root library ...
+Loading g4root library ...
 Loading geant4vmc library ...
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-09-03    (18-December-2009)
+ Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -692,7 +692,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  45.342       total track length (cm):    3.074
    Gap:      total energy (MeV):   1.569       total track length (cm):    0.716
-Time of this run:   User=0.02s Real=0.02s Sys=0s
+Time of this run:   User=0.04s Real=0.04s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
 WARNING - Attempt to delete the physical volume store while geometry closed !
@@ -703,14 +703,14 @@ WARNING - Attempt to delete the region store while geometry closed !
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -719,12 +719,12 @@ Enclose multiple statements between { }.
 Processing test_E03_3.C("g4ConfigOld.C", kTRUE)...
 Loading Geant4 libraries ...
 Loading VGM libraries ... 
-Loading G4root library ...
+Loading g4root library ...
 Loading geant4vmc library ...
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-09-03    (18-December-2009)
+ Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -839,21 +839,21 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.161
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.01s Real=0s Sys=0.01s
+Time of this run:   User=0.02s Real=0.02s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -862,11 +862,11 @@ Enclose multiple statements between { }.
 Processing test_E03_4.C("g4ConfigOld.C", kTRUE)...
 Loading Geant4 libraries ...
 Loading VGM libraries ... 
-Loading G4root library ...
+Loading g4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-09-03    (18-December-2009)
+ Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -951,5 +951,5 @@ Instantiated 6 volume table entries
 
    Absorber: total energy (MeV): 1606.94       total track length (cm):  109.359
    Gap:      total energy (MeV): 61.3515       total track length (cm):  32.2069
-Time of this run:   User=0.13s Real=0.12s Sys=0s
+Time of this run:   User=0.34s Real=0.35s Sys=0s
 Number of events processed: 1

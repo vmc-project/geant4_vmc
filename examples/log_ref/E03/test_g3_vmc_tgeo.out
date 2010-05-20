@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -19,11 +19,11 @@ Processing test_E03_1.C("g3tgeoConfig.C", kTRUE)...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766609623    2DB188D7 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766509399    2DB00157 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766632661   766609623
-                                        HEX    2DB1E2D5    2DB188D7
+          with Store/Table at absolute adrs   766532437   766509399
+                                        HEX    2DB05B55    2DB00157
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -40,6 +40,7 @@ Loading Geant3 libraries ... finished
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+ *** GCOMAD: cannot load common GCONSX
 Geant3 has been created.
 Info in <TGeoManager::TGeoManager>: Geometry Geometry, default geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
@@ -104,14 +105,14 @@ MediumId: Medium Beam not found
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -122,11 +123,11 @@ Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 --- Init MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766719191    2DB334D7 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766542167    2DB08157 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766742229   766719191
-                                        HEX    2DB38ED5    2DB334D7
+          with Store/Table at absolute adrs   766565205   766542167
+                                        HEX    2DB0DB55    2DB08157
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -143,6 +144,7 @@ Loading Geant3 libraries ... finished
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+ *** GCOMAD: cannot load common GCONSX
 Geant3 has been created.
 --- Add particles 
 --- Add ions 
@@ -516,14 +518,14 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -534,11 +536,11 @@ Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 --- Init MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766565591    2DB0DCD7 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766463319    2DAF4D57 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766588629   766565591
-                                        HEX    2DB136D5    2DB0DCD7
+          with Store/Table at absolute adrs   766486357   766463319
+                                        HEX    2DAFA755    2DAF4D57
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -555,6 +557,7 @@ Loading Geant3 libraries ... finished
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+ *** GCOMAD: cannot load common GCONSX
 Geant3 has been created.
 --- Add particles 
 --- Add ions 
@@ -664,14 +667,14 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -681,11 +684,11 @@ Processing test_E03_4.C("g3tgeoConfig.C", kTRUE)...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766887127    2DB5C4D7 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766754135    2DB3BD57 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766910165   766887127
-                                        HEX    2DB61ED5    2DB5C4D7
+          with Store/Table at absolute adrs   766777173   766754135
+                                        HEX    2DB41755    2DB3BD57
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -702,6 +705,7 @@ Loading Geant3 libraries ... finished
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+ *** GCOMAD: cannot load common GCONSX
 Geant3 has been created.
 Info in <TGeoManager::TGeoManager>: Geometry Geometry, default geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD

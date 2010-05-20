@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -18,11 +18,11 @@ Enclose multiple statements between { }.
 Processing test_E01.C("g4Config.C", kFALSE)...
 Loading Geant4 libraries ...
 Loading VGM libraries ... 
-Loading G4root library ...
+Loading g4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-09-03    (18-December-2009)
+ Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -71,8 +71,8 @@ Track -160 0 4  in EXPH  ArgonGas
 Track -160 0 4  in TRTU  Aluminium
 Track -40 0 16  in TRTU  Aluminium
 Track -40 0 16  in EXPH  ArgonGas
-Track -5.93969e-16 0 20  in EXPH  ArgonGas
-Track -5.93969e-16 0 20  in CALB  Lead
+Track 0 0 20  in EXPH  ArgonGas
+Track 0 0 20  in CALB  Lead
 Track 9 0 20.9  in CALB  Lead
 Track 9 0 20.9  in LAYB  Aluminium
 Track 11 0 21.1  in LAYB  Aluminium
@@ -159,8 +159,8 @@ Track -159.866 4.01344 0  in EXPH  ArgonGas
 Track -159.866 4.01344 0  in TRTU  Aluminium
 Track -42.1146 15.7885 0  in TRTU  Aluminium
 Track -42.1146 15.7885 0  in EXPH  ArgonGas
-Track 1.06359e-14 20 0  in EXPH  ArgonGas
-Track 1.06359e-14 20 0  in CALB  Lead
+Track 0 20 0  in EXPH  ArgonGas
+Track 0 20 0  in CALB  Lead
 Track 9 20.9 0  in CALB  Lead
 Track 9 20.9 0  in LAYB  Aluminium
 Track 11 21.1 0  in LAYB  Aluminium
@@ -328,7 +328,7 @@ Track 191 0 0  in CALB  Lead
 Track 200 0 0  in CALB  Lead
 Track 200 0 0  in EXPH  ArgonGas
 Track 300 0 0  in EXPH  ArgonGas
-Time of this run:   User=0.01s Real=0.01s Sys=0s
+Time of this run:   User=0.03s Real=0.03s Sys=0.01s
 Number of events processed: 1
 Transformation for /EXPH_1/CALB_1/LAYB_9: 
 matrix  - tr=1  rot=1  refl=0  scl=0

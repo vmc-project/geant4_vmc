@@ -11,6 +11,47 @@ $Id$
      
 Tags (history):
 ===============
+  20/05/2010
+  v2-9:
+    G4Root
+      - Moved from Root in Geant4 VMC 
+      
+    Geant4 VMC:
+    Improvements:
+      - Added new class TG4FieldParameters which allows customization of Geant4
+        magnetic field integrator and accuracy parameters.
+        (See E02/g4config.in an example of new commands.)
+      - Added new class TG4CrossSectionManager which allows inspecting
+        hadronic cross sections. 
+        (See: http://root.cern.ch/drupal/content/physics-list)
+      - The available hadron physics lists names are now taken directly from
+        G4PhysListFactory.   
+        
+    Fixes:
+      - In TG4RegionsManager: 
+        - set the range cuts to result always to an energy cut below the user 
+          cut value.
+        - set ranges also for the world volume
+        - increased the maximum order of search ranges (to 1km) 
+        - fixed CheckCut method (the cut from range must be <= VMC cut)
+      - In TG4StepManager:
+        - Adding its own G4Navigator object, which is used for LocateGlobalPoint... 
+          calls in pre-track phase.
+          (Fixes the problem reported by A. Robert.)
+      - In TG4OpGeometryManager, TG4OpticalPhysics 
+        - Do not set RINDEX material property if defined with zero values.
+          (The zero value is a Geant3 convention to define material as metal 
+          which was not adopted in Geant4, where 0 values cause unpredictable 
+          behavior in G4OpBoundary process.)
+        - The Raileigh and boundary processes were not added to opticalphoton 
+          process manager.
+      - Fix in applying MCApplication::TrackingRMax,TrackingZMax.  
+      
+    Examples:
+      - Frozen testing examples with Fluka.     
+          
+    Tested with Geant4 9.3.p01, CLHEP 2.0.4.5, Root 5.26/00b, VGM 3.03;
+
   21/01/2010
   v2-8:
     Geant4 VMC:

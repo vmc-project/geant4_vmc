@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Jan 20 2010, 15:15:01 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -18,11 +18,11 @@ Enclose multiple statements between { }.
 Processing test_E06.C("g4ConfigOld.C", kTRUE)...
 Loading Geant4 libraries ...
 Loading VGM libraries ... 
-Loading G4root library ...
+Loading g4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-09-03    (18-December-2009)
+ Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -396,13 +396,103 @@ SPECULARSPIKECONSTANT
 MPV[0]: (2.038e-06, 0.2)
 MPV[1]: (4.144e-06, 0.2)
  Done DumpVector of 2 entries.
-Number of optical photons produced in this event : 1727
-Number of optical photons produced in this event : 1585
-Number of optical photons produced in this event : 1738
+Number of optical photons produced in this event : 1609
+Number of optical photons produced in this event : 1763
+Number of optical photons produced in this event : 1656
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+Number of optical photons produced in this event : 1579
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+Number of optical photons produced in this event : 1645
+Number of optical photons produced in this event : 1642
+Number of optical photons produced in this event : 1860
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
 Number of optical photons produced in this event : 1649
-Number of optical photons produced in this event : 1701
-Number of optical photons produced in this event : 1734
-Number of optical photons produced in this event : 1701
-Number of optical photons produced in this event : 1742
-Number of optical photons produced in this event : 1665
-Number of optical photons produced in this event : 1638
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+Number of optical photons produced in this event : 1612
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+Number of optical photons produced in this event : 1675

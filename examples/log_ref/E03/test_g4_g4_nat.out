@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Feb 04 2010, 15:58:08 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -22,7 +22,7 @@ Loading g4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-09-03    (18-December-2009)
+ Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -90,7 +90,6 @@ Visualization Manager instantiating...
 G4ParticleDefinition::SetApplyCutsFlag() for proton
 becomes obsolete. Production threshold is applied only for gamma, e- and e+.
 Geant4 has been created.
-ExN03DetectorConstruction::Construct
 ++++  TG4Warning:  ++++
     TG4UserParticlesPhysics::ConstructProcess:
     No hadronic processes are built for user defined particles.
@@ -141,20 +140,20 @@ ExN03DetectorConstruction::Construct
 ---> Begin of event: 5
    Absorber: total energy (MeV): 924.249       total track length (cm):  60.7021
    Gap:      total energy (MeV): 23.5667       total track length (cm):  11.3199
-Time of this run:   User=0.44s Real=0.45s Sys=0.01s
+Time of this run:   User=1.25s Real=1.26s Sys=0.01s
 Number of events processed: 5
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Feb 04 2010, 15:58:08 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -168,7 +167,7 @@ Loading geant4vmc library ...
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-09-03    (18-December-2009)
+ Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -237,7 +236,6 @@ Visualization Manager instantiating...
 G4ParticleDefinition::SetApplyCutsFlag() for proton
 becomes obsolete. Production threshold is applied only for gamma, e- and e+.
 Geant4 has been created.
-ExN03DetectorConstruction::Construct
 ++++  TG4Warning:  ++++
     TG4UserParticlesPhysics::ConstructProcess:
     No hadronic processes are built for user defined particles.
@@ -767,7 +765,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  45.342       total track length (cm):    3.073
    Gap:      total energy (MeV):   1.568       total track length (cm):    0.716
-Time of this run:   User=0.02s Real=0.02s Sys=0s
+Time of this run:   User=0.05s Real=0.06s Sys=0.01s
 Number of events processed: 1
 --- Finish Run MC 
 WARNING - Attempt to delete the solid store while geometry closed !
@@ -778,14 +776,14 @@ WARNING - Attempt to delete the region store while geometry closed !
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Feb 04 2010, 15:58:08 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -799,7 +797,7 @@ Loading geant4vmc library ...
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-09-03    (18-December-2009)
+ Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -868,7 +866,6 @@ Visualization Manager instantiating...
 G4ParticleDefinition::SetApplyCutsFlag() for proton
 becomes obsolete. Production threshold is applied only for gamma, e- and e+.
 Geant4 has been created.
-ExN03DetectorConstruction::Construct
 ++++  TG4Warning:  ++++
     TG4UserParticlesPhysics::ConstructProcess:
     No hadronic processes are built for user defined particles.
@@ -951,21 +948,21 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.160
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.01s Real=0.02s Sys=0s
+Time of this run:   User=0.04s Real=0.04s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.26/00  14 December 2009   *
+  *   Version  5.26/00b   9 February 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00 (tags/v5-26-00@31883, Feb 04 2010, 15:58:08 on linux)
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
 
 CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
 Type ? for help. Commands must be C++ statements.
@@ -978,7 +975,7 @@ Loading g4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-09-03    (18-December-2009)
+ Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -1046,7 +1043,6 @@ Visualization Manager instantiating...
 G4ParticleDefinition::SetApplyCutsFlag() for proton
 becomes obsolete. Production threshold is applied only for gamma, e- and e+.
 Geant4 has been created.
-ExN03DetectorConstruction::Construct
 ++++  TG4Warning:  ++++
     TG4UserParticlesPhysics::ConstructProcess:
     No hadronic processes are built for user defined particles.
@@ -1101,5 +1097,5 @@ ExN03DetectorConstruction::Construct
 
    Absorber: total energy (MeV): 1546.24       total track length (cm):  104.056
    Gap:      total energy (MeV): 103.637       total track length (cm):  52.0267
-Time of this run:   User=0.16s Real=0.17s Sys=0s
+Time of this run:   User=0.77s Real=0.77s Sys=0.01s
 Number of events processed: 1
