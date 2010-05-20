@@ -216,6 +216,10 @@ TOCLEANALL	= $(BINDIR) $(INCDIR) $(LIBDIR)
 MAKEDIST	= $(ROOT_ETCDIR)/g4_makedist.sh $(GCC_VERS) lib
 MAKEDISTSRC	= $(ROOT_ETCDIR)/g4_makedist.sh
 
+#MAKEDIST       = $(ROOT_ETCDIR)/makedist.sh -p $(PACKAGE) -c $(GCC_VERS) -b
+#MAKEDISTSRC    = $(ROOT_ETCDIR)/makedist.sh -p $(PACKAGE) 
+#MAKEINSTALL    = $(ROOT_ETCDIR)/makedist.sh -p $(PACKAGE) -i
+
 include $(ROOT_ETCDIR)/MakeMacros
 
 ############################### Dependencies ##################################

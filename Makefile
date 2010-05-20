@@ -32,3 +32,6 @@ dist:
 
 distsrc:
 	@cd source && $(MAKE) distsrc;
+        
+install:
+	@cd source && $(MAKE) install;        
