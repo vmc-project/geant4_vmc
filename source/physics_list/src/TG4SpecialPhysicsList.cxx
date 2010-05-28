@@ -22,6 +22,7 @@
 #include "TG4ExtDecayerPhysics.h"
 #include "TG4ProcessControlMapPhysics.h"
 #include "TG4ProcessMCMapPhysics.h"
+#include "TG4EmModelPhysics.h"
 #include "TG4GeometryServices.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4G3ControlVector.h"
@@ -75,6 +76,7 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList(const G4String& selection)
   : G4VModularPhysicsList(),
     TG4Verbose("specialPhysicsList"),
     fStackPopperPhysics(0),
+    fEmModelPhysics(0),
     fIsSpecialCuts(false)
 {
 /// Standard constructor
@@ -96,6 +98,7 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList()
   : G4VModularPhysicsList(),
     TG4Verbose("physicsList"),
     fStackPopperPhysics(0),
+    fEmModelPhysics(0),
     fIsSpecialCuts(false)
 {
 /// Default constructor
@@ -158,6 +161,9 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
   RegisterPhysics(new TG4UserParticlesPhysics(verboseLevel));
   RegisterPhysics(new TG4ExtDecayerPhysics(verboseLevel));
   RegisterPhysics(new TG4ProcessMCMapPhysics(verboseLevel));
+  
+  fEmModelPhysics = new TG4EmModelPhysics(verboseLevel);
+  RegisterPhysics(fEmModelPhysics);
 }    
 
 //
@@ -227,3 +233,13 @@ void TG4SpecialPhysicsList::SetStackPopperSelection(const G4String& selection)
   G4cout << "TG4SpecialPhysicsList::SetStackPopperSelection: " << selection << G4endl;
 }   
  
+//_____________________________________________________________________________
+void TG4SpecialPhysicsList::SetEmModel(G4int mediumId, 
+                                       const G4String& elossModelName,
+                                       const G4String& fluctModelName,
+                                       const G4String& particles)
+{ 
+/// Set extra EM models to a region corresponding to given tracking medium.                                       
+
+  fEmModelPhysics->SetEmModel(mediumId, elossModelName, fluctModelName, particles);
+}    

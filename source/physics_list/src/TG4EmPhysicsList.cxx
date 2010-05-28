@@ -91,7 +91,7 @@ void TG4EmPhysicsList::Configure(const G4String& /*selection*/)
 /// and registeres them in the modular physics list.
 
   // Standard electromagnetic physics
-  RegisterPhysics(new G4EmStandardPhysics());
+  RegisterPhysics(new G4EmStandardPhysics(1));
 
   // Extra electromagnetic physics
   G4EmExtraPhysics* extraPhysics = new G4EmExtraPhysics();

@@ -510,10 +510,18 @@ void  TG4PhysicsManager::Gstpar(Int_t itmed, const char *param, Float_t parval)
     } 
     else if ( cut==kNoG3Cuts && control==kNoG3Controls &&
               fNotImplParNames.find(TString(param) ) == fNotImplParNames.end() ) { 
-    
-      TG4Globals::Warning(
-        "TG4PhysicsManager", "Gstpar",
-        TString(name) + " parameter is not yet implemented.");
+
+      if ( TString(param) == "STRA" ) {
+        TString text = name;
+        text += " parameter is supported via /mcPhysics/emModel commands.\n";
+        text += "    Setting via Gstpar is ignored.";
+        TG4Globals::Warning("TG4PhysicsManager", "Gstpar", text);
+      } 
+      else {        
+        TG4Globals::Warning(
+          "TG4PhysicsManager", "Gstpar",
+          TString(name) + " parameter is not yet implemented.");
+      }    
         
       fNotImplParNames.insert(TString(param));  
     }        

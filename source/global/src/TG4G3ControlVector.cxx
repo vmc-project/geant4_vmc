@@ -145,6 +145,10 @@ TG4G3Control TG4G3ControlVector::GetControl(const G4String& controlName)
   else if (controlName == fgControlNameVector[kDCAY]) return kDCAY;
   else if (controlName == fgControlNameVector[kLOSS]) return kLOSS;
   else if (controlName == fgControlNameVector[kMULS]) return kMULS;
+  else if (controlName == fgControlNameVector[kCKOV]) return kCKOV;
+  else if (controlName == fgControlNameVector[kRAYL]) return kRAYL;
+  else if (controlName == fgControlNameVector[kLABS]) return kLABS;
+  else if (controlName == fgControlNameVector[kSYNC]) return kSYNC;
   else return kNoG3Controls;
 }
 

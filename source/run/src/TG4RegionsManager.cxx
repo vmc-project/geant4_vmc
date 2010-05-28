@@ -547,9 +547,15 @@ void TG4RegionsManager::DefineRegions()
       = TG4GeometryServices::Instance()->GetMediumMap()->GetMedium(lv, false);
     if ( ! medium ) continue;  
       
+    G4Material* material = lv->GetMaterial();
+    if ( VerboseLevel() > 1 ) {
+      G4cout << "-- Volume = "  << i << "  "
+             << lv << "  " << lv->GetName()
+             << " material = "  << material->GetName() << G4endl;
+    }         
+
     // If region already exists, only add the logical volume
     // and continue the loop   
-    G4Material* material = lv->GetMaterial();
     G4String regionName = material->GetName();
     G4Region* region 
       = G4RegionStore::GetInstance()->GetRegion(regionName, false );
@@ -557,15 +563,9 @@ void TG4RegionsManager::DefineRegions()
       if ( VerboseLevel() > 1 ) {
         G4cout << "   " << "adding volume in region = " << regionName << G4endl;
       }
-      region->AddRootLogicalVolume(lv);
-      continue;
+      if ( lv->GetRegion() != region ) region->AddRootLogicalVolume(lv);
+      // continue;
     } 
-
-    if ( VerboseLevel() > 1 ) {
-      G4cout << "-- Volume = "  << i << "  "
-             << lv << "  " << lv->GetName()
-             << " material = "  << material->GetName() << G4endl;
-    }         
 
     // If this material was already processed and did not result
     // in a new region: add the logical volume to the world region
@@ -593,9 +593,11 @@ void TG4RegionsManager::DefineRegions()
     }          
            
     if ( fabs ( rangeEle - defaultRangeCutEle ) < 1e-03 && 
-         fabs ( rangeGam - defaultRangeCutGam ) < 1e-03 ) {
+         fabs ( rangeGam - defaultRangeCutGam ) < 1e-03 &&
+         ! region ) {
       // Do not create a new region if range cuts do not differ
-      // from those in the default region
+      // from those in the default region and region was not defined
+      // before
       if ( ! isWorld) {
         if ( VerboseLevel() > 1 ) {
           G4cout << "   " << "adding volume in the default region" << G4endl;
@@ -605,7 +607,7 @@ void TG4RegionsManager::DefineRegions()
       processedMaterials.insert(material);
     }  
     else {           
-      // Create new cuts
+      // Create new production cuts
       G4ProductionCuts* cuts = new G4ProductionCuts();
       cuts->SetProductionCut(rangeGam, 0);
       cuts->SetProductionCut(rangeEle, 1);
@@ -617,13 +619,24 @@ void TG4RegionsManager::DefineRegions()
         worldRegion->RegionModified(true);
       }
       else {
-        region = new G4Region(regionName);
-        ++counter;
-        if ( VerboseLevel() > 1 ) {
-          G4cout << "   " << "adding volume in a new region " << regionName << G4endl;
+        if ( region ) {
+          // set new production cuts the region if it exists
+          delete region->GetProductionCuts();
+          region->SetProductionCuts(cuts);
+          if ( VerboseLevel() > 1 ) {
+            G4cout << "   " << "production cuts reset in region " << regionName << G4endl;
+          }  
+        }  
+        else {  
+          // create new region with new production cuts
+          region = new G4Region(regionName);
+          ++counter;
+          if ( VerboseLevel() > 1 ) {
+            G4cout << "   " << "adding volume in a new region " << regionName << G4endl;
+          }  
+          region->AddRootLogicalVolume(lv);
+          region->SetProductionCuts(cuts);
         }         
-        region->AddRootLogicalVolume(lv);
-        region->SetProductionCuts(cuts);
       }  
     }  
   }

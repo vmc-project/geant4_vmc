@@ -23,6 +23,7 @@
 #include <globals.hh>
 
 class TG4StackPopperPhysics;
+class TG4EmModelPhysics;
 
 /// \ingroup physics_list
 /// \brief The Geant4 VMC special physics list helper class 
@@ -57,12 +58,18 @@ class TG4SpecialPhysicsList: public G4VModularPhysicsList,
     // set methods
     void SetStackPopperSelection(const G4String& selection);
     
+    void SetEmModel(G4int mediumId, 
+                    const G4String& elossModelName,
+                    const G4String& fluctModelName,
+                    const G4String& particles = "all");
+    
     // get methods
     G4bool IsSpecialCuts() const;
     
   protected:
     // data members
     TG4StackPopperPhysics* fStackPopperPhysics;///< stack popper physics
+    TG4EmModelPhysics*     fEmModelPhysics;    ///< EM models physics
     G4bool                 fIsSpecialCuts;     ///< option for special cuts
 
   private:

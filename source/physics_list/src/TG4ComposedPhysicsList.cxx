@@ -186,6 +186,11 @@ void TG4ComposedPhysicsList::VerboseLevel(G4int level)
   TG4VVerbose::VerboseLevel(level);
   SetVerboseLevel(level);
   
-  for (G4int i=0; i<G4int(fPhysicsLists.size()); i++ )
-    fPhysicsLists[i]->SetVerboseLevel(level);
+  for (G4int i=0; i<G4int(fPhysicsLists.size()); i++ ) {
+    TG4Verbose* verbose = dynamic_cast<TG4Verbose*>(fPhysicsLists[i]);
+    if ( verbose ) 
+      verbose->VerboseLevel(level);
+    else  
+      fPhysicsLists[i]->SetVerboseLevel(level);
+  }  
 }
