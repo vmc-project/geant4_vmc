@@ -27,6 +27,7 @@
 #include <TVirtualMCDecayer.h>
 #include <TVirtualMC.h>
 
+#include <G4TransportationManager.hh>
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
 #include <G4PAIModel.hh>
@@ -123,7 +124,10 @@ void TG4EmModelPhysics::CreateRegions()
 
   // Get world default region 
   G4LogicalVolume* worldLV 
-    = TG4GeometryServices::Instance()->GetWorld()->GetLogicalVolume();
+    = G4TransportationManager::GetTransportationManager()
+        ->GetNavigatorForTracking()->GetWorldVolume()->GetLogicalVolume();
+        // We cannot access world volume via geometry services as 
+        // the it is available here only after initialization
 
   // Get default range cut values from physics manager
   G4double rangeCutGam 
@@ -281,6 +285,9 @@ void TG4EmModelPhysics::ConstructProcess()
 {
 /// Loop over all particles and their processes and check if
 /// the process is present in the map
+
+  // Do nothing if no models were set  
+  if ( fModelMap.size() == 0 ) return; 
 
   // Create regions
   CreateRegions();
