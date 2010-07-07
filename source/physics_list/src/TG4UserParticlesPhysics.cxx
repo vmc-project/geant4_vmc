@@ -26,9 +26,7 @@
 #include "G4GammaConversion.hh"
 #include "G4PhotoElectricEffect.hh"
 
-#include "G4MultipleScattering.hh"
-#include "G4hMultipleScattering.hh"
-
+#include "G4eMultipleScattering.hh"
 #include "G4eIonisation.hh"
 #include "G4eBremsstrahlung.hh"
 #include "G4eplusAnnihilation.hh"
@@ -37,6 +35,7 @@
 #include "G4MuBremsstrahlung.hh"
 #include "G4MuPairProduction.hh"
 
+#include "G4hMultipleScattering.hh"
 #include "G4hIonisation.hh"
 #include <G4ionIonisation.hh>
 
@@ -107,7 +106,7 @@ void TG4UserParticlesPhysics::ConstructProcess()
 
       case kPTElectron: 
         // From G4EmStandardPhysics
-        processManager->AddProcess(new G4MultipleScattering, -1, 1, 1);
+        processManager->AddProcess(new G4eMultipleScattering, -1, 1, 1);
         processManager->AddProcess(new G4eIonisation,        -1, 2, 2);
         processManager->AddProcess(new G4eBremsstrahlung(),  -1, 3, 3);
         break;
