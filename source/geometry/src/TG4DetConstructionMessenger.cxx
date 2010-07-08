@@ -37,7 +37,9 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
     fSeparatorCmd(0),
     fPrintMaterialsCmd(0),
     fPrintMaterialsPropertiesCmd(0),
-    fPrintVolumesCmd(0)
+    fPrintVolumesCmd(0),
+    fSetLimitDensityCmd(0),
+    fSetMaxStepInLowDensityMaterialsCmd(0)
     
 {
 /// Standard constructor
@@ -94,6 +96,23 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fPrintControlsCmd->SetParameterName("ControlName", false);
   fPrintControlsCmd->AvailableForStates(G4State_Idle);   
 
+  fSetLimitDensityCmd 
+    = new G4UIcmdWithADoubleAndUnit("/mcDet/setLimitDensity", this);
+  fSetLimitDensityCmd->SetGuidance("Set the material density limit for setting max allowed step");
+  fSetLimitDensityCmd->SetParameterName("LimitDensity", false);
+  fSetLimitDensityCmd->SetDefaultUnit("g/cm3");
+  fSetLimitDensityCmd->SetUnitCategory("Volumic Mass");
+  fSetLimitDensityCmd->AvailableForStates(G4State_PreInit);
+  
+  fSetMaxStepInLowDensityMaterialsCmd 
+    = new G4UIcmdWithADoubleAndUnit("/mcDet/setMaxStepInLowDensityMaterials", this);
+  fSetMaxStepInLowDensityMaterialsCmd
+    ->SetGuidance("Set max allowed step value in materials with density below the density limit");
+  fSetMaxStepInLowDensityMaterialsCmd->SetParameterName("MaxStepInLowDensityMaterials", false);
+  fSetMaxStepInLowDensityMaterialsCmd->SetDefaultUnit("mm");
+  fSetMaxStepInLowDensityMaterialsCmd->SetUnitCategory("Length");
+  fSetMaxStepInLowDensityMaterialsCmd->AvailableForStates(G4State_PreInit);
+  
 }
 
 //_____________________________________________________________________________
@@ -110,6 +129,8 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
   delete fPrintVolumesCmd;
   delete fPrintCutsCmd; 
   delete fPrintControlsCmd; 
+  delete fSetLimitDensityCmd;
+  delete fSetMaxStepInLowDensityMaterialsCmd;
 }
 
 //
@@ -146,5 +167,14 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
   }    
   else if (command == fPrintControlsCmd) {
     TG4GeometryServices::Instance()->PrintControls(newValues);
-  }    
+  } 
+  else if (command == fSetLimitDensityCmd) {
+    TG4GeometryManager::Instance()
+      ->SetLimitDensity(fSetLimitDensityCmd->GetNewDoubleValue(newValues));
+  } 
+  else if (command == fSetMaxStepInLowDensityMaterialsCmd) {
+    TG4GeometryManager::Instance()
+      ->SetMaxStepInLowDensityMaterials(
+          fSetMaxStepInLowDensityMaterialsCmd->GetNewDoubleValue(newValues));
+  } 
 }

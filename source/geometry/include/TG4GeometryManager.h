@@ -61,6 +61,10 @@ class TG4GeometryManager : public TG4Verbose
     // set user region construction
     void SetUserRegionConstruction(
             TG4VUserRegionConstruction* userRegionConstruction);
+            
+    void SetLimitDensity(G4double density);
+    void SetMaxStepInLowDensityMaterials(G4double maxStep);
+           
   private:
     /// Not implemented
     TG4GeometryManager(const TG4GeometryManager& right);
@@ -79,10 +83,12 @@ class TG4GeometryManager : public TG4Verbose
         
     // static data members
     static TG4GeometryManager*  fgInstance;     ///< this instance
-    static const G4double       fgLimitDensity; ///< material density limit
-                                                ///< for setting max allowed step 
-    static const G4double       fgMaxStep;      ///< max allowed step in materials 
-                                                ///< with density < fLimitDensity
+    
+    ///< default material density limit for setting max allowed step 
+    static const G4double  fgDefaultLimitDensity; 
+    
+    ///< default max allowed step in materials with density < fLimitDensity
+    static const G4double  fgDefaultMaxStep; 
 
     // data members
     TG4DetConstructionMessenger  fMessenger; ///< messenger
@@ -95,6 +101,11 @@ class TG4GeometryManager : public TG4Verbose
     TG4VUserRegionConstruction* fUserRegionConstruction; ///< user region construction
     G4bool                fIsUserMaxStep;    ///< option to activate max step defined           
                                              ///  in tracking media
+    ///< material density limit for setting max allowed step 
+    G4double  fLimitDensity;     
+    
+    ///< max allowed step in materials with density < fLimitDensity
+    G4double  fMaxStepInLowDensityMaterials;                                     
 };
 
 // inline methods
@@ -114,6 +125,15 @@ inline  TG4OpGeometryManager* TG4GeometryManager::GetOpManager() const {
   return fOpManager;
 }       
 
+inline void TG4GeometryManager::SetLimitDensity(G4double density) {
+  /// Set the material density limit for setting max allowed step
+  fLimitDensity = density;
+}  
+
+inline void TG4GeometryManager::SetMaxStepInLowDensityMaterials(G4double maxStep) {
+  /// Set max allowed step value in materials with density < fLimitDensity
+  fMaxStepInLowDensityMaterials = maxStep;
+}  
 
 #endif //TG4_GEOMETRY_MANAGER_H
 
