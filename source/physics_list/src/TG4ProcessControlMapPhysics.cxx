@@ -137,6 +137,7 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("ionInelastic", kHADR); 
   controlMap->Add("PhotonInelastic", kHADR); 
   controlMap->Add("hInelastic", kHADR); 
+  controlMap->Add("CHIPS_Inelastic", kHADR); 
 
   controlMap->Add("nKiller", kHADR); 
 
@@ -144,6 +145,7 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("muMinusCaptureAtRest", kMUNU); 
   controlMap->Add("PositronNuclear", kNoG3Controls); 
   controlMap->Add("ElectroNuclear", kNoG3Controls); 
+  controlMap->Add("photoNuclear", kNoG3Controls); 
   
   controlMap->Add("Cerenkov", kCKOV);
   controlMap->Add("Scintillation", kNoG3Controls);
@@ -186,6 +188,7 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
            processName != "Transportation" &&
            processName != "PositronNuclear" && 
            processName != "ElectroNuclear" &&
+           processName != "photoNuclear" &&
            processName != "Scintillation" && 
            processName != "stackPopper" ) {
            

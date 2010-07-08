@@ -137,6 +137,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("He3Inelastic", kPHInhelastic); 
   mcMap->Add("ionInelastic", kPHInhelastic); 
   mcMap->Add("hInelastic", kPHInhelastic); 
+  mcMap->Add("CHIPS_Inelastic", kPHInhelastic); 
   mcMap->Add("PhotonInelastic", kPPhotonInhelastic); 
 
   mcMap->Add("nKiller", kPHadronic); 
@@ -145,6 +146,8 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("muMinusCaptureAtRest", kPMuonNuclear); 
   mcMap->Add("PositronNuclear", kPPositronNuclear); 
   mcMap->Add("ElectroNuclear", kPElectronNuclear); 
+  mcMap->Add("photoNuclear", kPNoProcess);
+           // To be added in TMCProcess
   
   mcMap->Add("Cerenkov", kPCerenkov);
   mcMap->Add("Scintillation", kPScintillation);
@@ -199,7 +202,7 @@ void TG4ProcessMCMapPhysics::ConstructProcess()
       G4String processName = (*processVector)[i]->GetProcessName();
 
       if ( mcMap->GetMCProcess(processName) == kPNoProcess &&
-           processName != "Scintillation" ) {
+           processName != "photoNuclear" ) {
         G4String text = "Unknown process code for ";
         text += processName;
         TG4Globals::Warning(
