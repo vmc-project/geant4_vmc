@@ -179,9 +179,6 @@ depend:		$(SRCS)
 TOCLEAN		= $(BINDIR) $(TOPDIR)/include
 TOCLEANALL	= $(BINDIR) $(TOPDIR)/include $(LIBDIR)
 
-MAKEDIST	= ../config/makedist.sh lib
-MAKEDISTSRC	= ../config/makedist.sh
-
 include $(ROOT_ETCDIR)/MakeMacros
 
 ############################### Dependencies ##################################

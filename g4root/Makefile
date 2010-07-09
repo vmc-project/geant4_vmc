@@ -115,9 +115,6 @@ depend:		$(SRCS)
 TOCLEAN		= $(BINDIR) $(INCDIR)
 TOCLEANALL	= $(BINDIR) $(INCDIR) $(LIBDIR)
 
-MAKEDIST	= $(ROOT_ETCDIR)/g4_makedist.sh $(GCC_VERS) lib
-MAKEDISTSRC	= $(ROOT_ETCDIR)/g4_makedist.sh
-
 include $(ROOT_ETCDIR)/MakeMacros
 
 ############################### Dependencies ##################################
