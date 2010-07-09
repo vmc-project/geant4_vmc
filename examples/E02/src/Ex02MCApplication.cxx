@@ -277,23 +277,19 @@ void Ex02MCApplication::FinishEvent()
     gMC->Gdraw("WRLD", 90., 180.);
   }  
  
-  // Geant3 + TGeo
-  // (use TGeo functions for visualization)
-  if ( TString(gMC->GetName()) == "TGeant3TGeo" && 
+  // Geant4 own visualization is activated via G4 macro (g4config.in)
+ 
+  // TGeo visualization
+  if ( gGeoManager && 
        gGeoManager->GetListOfTracks() &&
        gGeoManager->GetTrack(0) &&
        ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
        
-       gGeoManager->SetVisOption(0);	 
-       gGeoManager->SetTopVisible();
-       gGeoManager->DrawTracks("/*");  // this means all tracks
-          // Drawing G3 tracks via TGeo is available only
-	  // if geant3 is compile with -DCOLLECT_TRACK flag
-	  // (to be activated in geant3/TGeant3/TGeant3gu.cxx)
+     gGeoManager->SetVisOption(0);     
+     gGeoManager->SetTopVisible();
+     gGeoManager->DrawTracks("/*");  // this means all tracks
   }    
 
-  // Geant4 visualization is activated via G4 macro (g4config.in)
- 
   fRootManager.Fill();
 
   fTrackerSD.EndOfEvent();

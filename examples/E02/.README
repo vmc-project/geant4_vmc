@@ -18,7 +18,8 @@
   -  Simple primary generator: 
        one proton with a fixed position and direction
   -  Generating hits
-  -  Drawing geometry (G3, G3+TGeo, G4) + trajectories (G3+TGeo and G4)
+  -  Drawing geometry (G3, G3+TGeo, G4) 
+  -  Drawing trajectories (G3+TGeo, G4+TGeo, G4)
   -  Storing hits, particles stack in Root file
 
   See also description of in 

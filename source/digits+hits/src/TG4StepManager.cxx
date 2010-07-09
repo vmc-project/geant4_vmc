@@ -323,6 +323,14 @@ void TG4StepManager::SetMaxNStep(Int_t maxNofSteps)
 }
 
 //_____________________________________________________________________________
+void TG4StepManager::SetCollectTracks(Bool_t collectTracks)
+{
+/// (In)Activate collecting TGeo tracks 
+
+  TG4SteppingAction::Instance()->SetCollectTracks(collectTracks);
+}  
+
+//_____________________________________________________________________________
 void TG4StepManager::ForceDecayTime(Float_t time)
 {
 /// Force decay time.                                                        \n
@@ -344,6 +352,14 @@ void TG4StepManager::ForceDecayTime(Float_t time)
   // Set new lifetime value
   particle->SetPDGLifeTime(time*TG4G3Units::Time());
 }
+
+//_____________________________________________________________________________
+Bool_t  TG4StepManager::IsCollectTracks() const
+{
+/// Return the info if collecting tracks is activated
+
+  return TG4SteppingAction::Instance()->GetCollectTracks();
+}  
 
 //_____________________________________________________________________________
 G4VPhysicalVolume* TG4StepManager::GetCurrentPhysicalVolume() const 

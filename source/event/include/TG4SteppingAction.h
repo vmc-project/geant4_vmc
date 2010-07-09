@@ -18,6 +18,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SteppingActionMessenger.h"
+#include "TG4GeoTrackManager.h"
 
 #include <G4UserSteppingAction.hh>
 
@@ -64,11 +65,13 @@ class TG4SteppingAction : public G4UserSteppingAction
     void SetMaxNofSteps(G4int number);
     void SetSpecialControls(TG4SpecialControlsV2* specialControls);
     void SetIsPairCut(G4bool isPairCut);
+    void SetCollectTracks(G4bool collectTracks);
 
     // get methods
     G4int GetLoopVerboseLevel() const;
     G4int GetMaxNofSteps() const;
     G4bool GetIsPairCut() const;
+    G4bool GetCollectTracks() const;
 
   protected:
     // methods
@@ -82,7 +85,6 @@ class TG4SteppingAction : public G4UserSteppingAction
 
     // static data members
     static TG4SteppingAction*   fgInstance; ///< this instance
-    
     //
     // methods
     void ProcessTrackIfLooping(const G4Step* step);
@@ -96,6 +98,9 @@ class TG4SteppingAction : public G4UserSteppingAction
     /// messenger    
     TG4SteppingActionMessenger  fMessenger;
     
+    /// manager for collecting TGeo tracks    
+    TG4GeoTrackManager  fGeoTrackManager;
+
     /// the special controls manager
     TG4SpecialControlsV2*  fSpecialControls;
 
@@ -113,6 +118,9 @@ class TG4SteppingAction : public G4UserSteppingAction
     
     /// control of cut on e+e- pair 
     G4bool fIsPairCut;
+
+    /// control to collect Root tracks
+    G4bool fCollectTracks;
 };
 
 // inline methods
@@ -147,6 +155,11 @@ inline void TG4SteppingAction::SetIsPairCut(G4bool isPairCut) {
   fIsPairCut = isPairCut;
 }  
 
+inline void TG4SteppingAction::SetCollectTracks(G4bool collectTracks) {
+  /// (In)Activate collecting Root tracks
+  fCollectTracks = collectTracks;
+}  
+
 inline G4int TG4SteppingAction::GetMaxNofSteps() const { 
   /// Get maximum number of steps allowed 
   return fMaxNofSteps; 
@@ -161,5 +174,10 @@ inline G4bool TG4SteppingAction::GetIsPairCut() const {
   /// Return control for saving secondaries in the VMC stack
   return fIsPairCut; 
 }
+
+inline G4bool TG4SteppingAction::GetCollectTracks() const {
+  /// Return the info if collecting Root tracks is activated
+  return fCollectTracks;
+}  
 
 #endif //TG4_STEPPING_ACTION_H

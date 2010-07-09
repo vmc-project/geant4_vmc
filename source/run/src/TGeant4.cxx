@@ -1180,6 +1180,22 @@ Bool_t TGeant4::ProcessRun(Int_t nofEvents)
 }  
 
 //_____________________________________________________________________________
+void TGeant4::SetCollectTracks(Bool_t collectTracks)
+{
+/// (In)Activate collecting TGeo tracks 
+
+  fStepManager->SetCollectTracks(collectTracks);
+}  
+
+//_____________________________________________________________________________
+Bool_t  TGeant4::IsCollectTracks() const
+{
+/// Return the info if collecting tracks is activated
+
+  return fStepManager->IsCollectTracks();
+}  
+
+//_____________________________________________________________________________
 void TGeant4::StartGeantUI() 
 {
 /// Start interactive/batch Geant4.

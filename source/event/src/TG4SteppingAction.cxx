@@ -38,12 +38,14 @@ TG4SteppingAction* TG4SteppingAction::fgInstance = 0;
 TG4SteppingAction::TG4SteppingAction() 
   : G4UserSteppingAction(),
     fMessenger(this),
+    fGeoTrackManager(),
     fSpecialControls(0), 
     fMaxNofSteps(kMaxNofSteps),
     fStandardVerboseLevel(-1),
     fLoopVerboseLevel(1),
     fLoopStepCounter(0),
-    fIsPairCut(false)
+    fIsPairCut(false),
+    fCollectTracks(false)
  {
 /// Default constructor
 
@@ -313,6 +315,10 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
   // flag e+e- secondary pair for stop if its energy is below user cut
   if ( fIsPairCut )
     ProcessTrackIfBelowCut(step);
+    
+  // update Root track if collecting tracks is activated
+  if ( fCollectTracks ) 
+    fGeoTrackManager.UpdateRootTrack(step);  
 
   // save secondaries
   if ( TG4TrackManager::Instance()->GetTrackSaveControl() == kSaveInStep ) 

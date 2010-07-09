@@ -70,6 +70,7 @@ class TG4StepManager
     void SetMaxStep(Double_t step);
     void SetMaxStepBack();                               // G4 specific
     void SetMaxNStep(Int_t maxNofSteps); 
+    void SetCollectTracks(Bool_t collectTracks);
     void ForceDecayTime(Float_t pdg);
     
     // get methods
@@ -77,6 +78,7 @@ class TG4StepManager
     G4Step*  GetStep() const;                             // G4 specific
     TG4StepStatus GetStepStatus() const;                  // G4 specific
     TG4Limits*    GetLimitsModifiedOnFly() const;         // G4 specific
+    Bool_t   IsCollectTracks() const;
         
         // tracking volume(s) 
     G4VPhysicalVolume* GetCurrentPhysicalVolume() const;  // G4 specific

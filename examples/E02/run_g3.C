@@ -37,6 +37,8 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
   // Initialize MC
   appl->InitMC(configMacro);
   
+  gMC->SetCollectTracks(kTRUE);
+  
   // Run MC
   appl->RunMC(5);
 
