@@ -66,12 +66,6 @@
    g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
   </pre>
 
-  For running example with Fluka:
-  <pre>
-  \link   E01/run_fl.C run_fl.C  \endlink - macro for running example 
-  \link E01/flConfig.C flConfig.C\endlink - configuration macro for Fluka
-  </pre>
-
   Common macro (called by run_g3.C/run_g4.C):
   <pre>
   \link E03/set_vis.C set_vis.C\endlink - setting visualization
@@ -100,9 +94,6 @@
 
   With G4 + TGeo navigation with user defined regions:
   root[0] .x \link E03/run_g4.C run_g4.C\endlink(\link E03/g4tgeoConfig3.C "g4tgeoConfig3.C"\endlink);  
-
-  With Fluka:
-  root[0] .x \link E03/run_fl.C run_fl.C\endlink 
   </pre>
   
 \section e03_s5 Classes

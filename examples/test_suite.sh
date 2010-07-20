@@ -3,7 +3,7 @@
 
 #------------------------------------------------
 # The Virtual Monte Carlo examples
-# Copyright (C) 2007, 2008 Ivana Hrivnacova
+# Copyright (C) 2007 - 2010 Ivana Hrivnacova
 # All rights reserved.
 #
 # For the licensing terms see geant4_vmc/LICENSE.
@@ -21,7 +21,6 @@ OUTDIR=$CURDIR/log
 # Set 1 to 0 if you want to skip given MC
 TESTG3=1
 TESTG4=1 
-TESTFL=0 
 
 # Recreate log directory only if running test for both G3 and G4
 if [ "$TESTG3" = "1" -a  "$TESTG4" = "1" ]; then
@@ -64,14 +63,6 @@ do
 
       echo "... Running test with G4, geometry via VMC,  TGeo navigation" 
       root.exe -q "test_$EXAMPLE.C(\"g4tgeoConfigOld.C\", kTRUE)" >& $OUT/test_g4_vmc_tgeo.out   
-    fi  
-
-    if [ "$TESTFL" = "1" ]; then
-      echo "... Running test with Fluka, geometry via TGeo" 
-      root.exe -q "test_$EXAMPLE.C(\"flConfig.C\", kFALSE)" >& $OUT/test_fl_tgeo.out   
- 
-      echo "... Running test with Fluka, geometry via VMC" 
-      root.exe -q "test_$EXAMPLE.C(\"flConfig.C\", kTRUE)" >& $OUT/test_fl_vmc.out   
     fi  
 
   else
@@ -160,18 +151,6 @@ do
       root.exe -q "test_E03_4.C(\"g4Config2.C\", kFALSE)" >& tmpfile    
       cat tmpfile >> $OUT/test_g4_tgeo_nat_pl.out
       rm tmpfile
-    fi  
-
-    if [ "$TESTFL" = "1" ]; then
-      echo "... Running test with Fluka, geometry via TGeo" 
-      root.exe -q "test_E03_1.C(\"flConfig.C\", kFALSE)" >& $OUT/test_fl_tgeo.out   
-      root.exe -q "test_E03_2.C(\"flConfig.C\", kFALSE)" >& tmpfile
-      cat tmpfile >> $OUT/test_fl_tgeo.out
-
-      echo "... Running test with Fluka, geometry via VMC" 
-      root.exe -q "test_E03_1.C(\"flConfig.C\", kTRUE)" >& $OUT/test_fl_vmc.out   
-      root.exe -q "test_E03_2.C(\"flConfig.C\", kTRUE)" >& tmpfile   
-      cat tmpfile >> $OUT/test_fl_vmc.out
     fi  
 
   fi  

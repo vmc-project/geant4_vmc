@@ -44,12 +44,6 @@
    g4config.in     - macro for G4 configuration using G4 commands
    g4vis.in        - macro for G4 visualization settings
   </pre>
-  
-  For running example with Fluka:
-  <pre>
-  \link   E02/run_fl.C run_fl.C  \endlink - macro for running example 
-  \link E02/flConfig.C flConfig.C\endlink - configuration macro for Fluka
-  </pre>
 
 
 \section e02_s3 To run example
@@ -63,9 +57,6 @@
   
   With G4 + TGeo navigation:
   root[0] .x \link E02/run_g4.C run_g4.C\endlink(\link E02/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);  
-
-  With Fluka:
-  root[0] .x \link E02/run_fl.C run_fl.C\endlink 
   </pre>
   
 \section e02_s4 Classes

@@ -35,12 +35,6 @@
   \link E01/g4tgeoConfig.C g4tgeoConfig.C\endlink - configuration macro for G4 with TGeo geometry navigation
   </pre>
   
-  For running example with Fluka:
-  <pre>
-  \link   E01/run_fl.C run_fl.C  \endlink - macro for running example 
-  \link E01/flConfig.C flConfig.C\endlink - configuration macro for Fluka
-  </pre>
-  
 \section e01_s3 To run example
   
   <pre>
@@ -52,11 +46,7 @@
   
   With G4 + TGeo navigation:
   root[0] .x \link E01/run_g4.C run_g4.C\endlink(\link E01/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);  
-
-  With Fluka:
-  root[0] .x \link E01/run_fl.C run_fl.C\endlink 
   </pre>
-  
 
   Note that as geometry is defined via TGeo,
   the example cannot be run with TGeant3 with its native geometry.

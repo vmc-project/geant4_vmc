@@ -3,7 +3,7 @@
 
 #------------------------------------------------
 # The Virtual Monte Carlo examples
-# Copyright (C) 2007, 2008 Ivana Hrivnacova
+# Copyright (C) 2007 - 2010 Ivana Hrivnacova
 # All rights reserved.
 #
 # For the licensing terms see geant4_vmc/LICENSE.
@@ -44,10 +44,6 @@ do
     echo "... Running example $EXAMPLE with G4" 
     root.exe -q "run_g4.C(\"g4Config2.C\")"  >& run_g4pl.out
   fi
-
-  # run Fluka
-  #echo "... Running example $EXAMPLE with Fluka" 
-  #root.exe -q "run_fl.C"  >& run_fl.out
 
 done
         
