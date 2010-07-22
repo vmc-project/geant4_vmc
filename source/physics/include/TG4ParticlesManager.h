@@ -5,7 +5,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007, 2008 Ivana Hrivnacova
+// Copyright (C) 2007 - 2010 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -21,6 +21,7 @@
 #include "TG4Globals.h"
 #include "TG4NameMap.h"
 #include "TG4IntMap.h"
+#include "TG4ParticlesChecker.h"
 
 #include <globals.hh>
 #include <G4ThreeVector.hh>
@@ -124,6 +125,9 @@ class TG4ParticlesManager : public TG4Verbose
     
     /// vector of user defined particles
     UserParticleVector fUserParticles;
+
+    /// particles checker
+    TG4ParticlesChecker  fParticlesChecker;   
 };
 
 // inline methods

@@ -2,7 +2,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007, 2008 Ivana Hrivnacova
+// Copyright (C) 2007 - 2010 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -43,7 +43,8 @@ TG4ParticlesManager::TG4ParticlesManager()
   : TG4Verbose("particlesManager"),
     fParticleNameMap(),
     fUserIonMap(),
-    fUserParticles()
+    fUserParticles(),
+    fParticlesChecker()
     
 { 
 /// Default constructor
