@@ -71,7 +71,8 @@ class TG4RunManager : public TG4Verbose
     void ProcessRootMacro(G4String macroName);
     void ProcessGeantCommand(G4String command);
     void ProcessRootCommand(G4String command);
-    void UseG3Defaults();      
+    void UseG3Defaults();   
+    void UseRootRandom(G4bool useRootRandom);   
 
   private:
     /// Not implemented
@@ -102,6 +103,7 @@ class TG4RunManager : public TG4Verbose
     G4bool                fRootUIOwner;      ///< ownership of Root UI
     G4int                 fARGC;             ///< argc 
     char**                fARGV;             ///< argv
+    G4bool                fUseRootRandom;    ///< the option to use Root random number seed
 };
 
 // inline methods
@@ -110,6 +112,11 @@ inline TG4RunManager* TG4RunManager::Instance() {
   /// Return this instance
   return fgInstance; 
 }
+    
+inline void TG4RunManager::UseRootRandom(G4bool useRootRandom) {
+  /// Set the option whether to use Root random number seed 
+  fUseRootRandom = useRootRandom;
+}   
 
 #endif //TG4_RUN_MANAGER_H
 

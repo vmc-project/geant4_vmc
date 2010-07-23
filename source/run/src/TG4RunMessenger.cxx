@@ -22,6 +22,7 @@
 #include <G4UIdirectory.hh>
 #include <G4UIcmdWithoutParameter.hh>
 #include <G4UIcmdWithAString.hh>
+#include <G4UIcmdWithABool.hh>
 
 //_____________________________________________________________________________
 TG4RunMessenger::TG4RunMessenger(TG4RunManager* runManager)
@@ -31,7 +32,8 @@ TG4RunMessenger::TG4RunMessenger(TG4RunManager* runManager)
     fRootCmd(0),            
     fRootMacroCmd(0),  
     fRootCommandCmd(0),
-    fG3DefaultsCmd(0) 
+    fUseRootRandomCmd(0),
+    fG3DefaultsCmd(0)
 { 
 /// Standard constructor
 
@@ -56,6 +58,12 @@ TG4RunMessenger::TG4RunMessenger(TG4RunManager* runManager)
   fRootCommandCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle, 
                                       G4State_GeomClosed, G4State_EventProc);
 
+  fUseRootRandomCmd = new G4UIcmdWithABool("/mcControl/useRootRandom", this);
+  fUseRootRandomCmd
+    ->SetGuidance("(In)Activate passing the random number seed from Root to Geant4");
+  fUseRootRandomCmd->SetParameterName("UseRootRandom", true);
+  fUseRootRandomCmd->AvailableForStates(G4State_PreInit);
+
   fG3DefaultsCmd = new G4UIcmdWithoutParameter("/mcControl/g3Defaults", this);
   fG3DefaultsCmd->SetGuidance("Set G3 default parameters (cut values,");
   fG3DefaultsCmd->SetGuidance("tracking media max step values, ...)");
@@ -71,6 +79,7 @@ TG4RunMessenger::~TG4RunMessenger()
   delete fRootCmd;
   delete fRootMacroCmd;
   delete fRootCommandCmd;
+  delete fUseRootRandomCmd;
   delete fG3DefaultsCmd;
 }
 
@@ -91,6 +100,9 @@ void TG4RunMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
   }
   else if (command == fRootCommandCmd) {
     fRunManager->ProcessRootCommand(newValue); 
+  }
+  else if (command == fUseRootRandomCmd) {  
+    fRunManager->UseRootRandom(fUseRootRandomCmd->GetNewBoolValue(newValue)); 
   }
   else if (command == fG3DefaultsCmd) {
     fRunManager->UseG3Defaults(); 

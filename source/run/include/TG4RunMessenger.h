@@ -26,6 +26,7 @@ class TG4UICmdWithAComplexString;
 class G4UIdirectory;
 class G4UIcmdWithoutParameter;
 class G4UIcmdWithAString;
+class G4UIcmdWithABool;
 
 /// \ingroup run
 /// \brief Messenger class that defines commands for TG4RunManager
@@ -34,6 +35,7 @@ class G4UIcmdWithAString;
 /// - /mcControl/root
 /// - /mcControl/rootMacro [macroName]
 /// - /mcControl/rootCmd [cmdString]
+/// - /mcControl/useRootRandom [true|false]
 /// - /mcControl/g3Defaults
 ///
 /// \author I. Hrivnacova; IPN, Orsay
@@ -59,10 +61,11 @@ class TG4RunMessenger: public G4UImessenger
     TG4RunManager*  fRunManager; ///< associated class   
     G4UIdirectory*  fDirectory;  ///< command directory
 
-    G4UIcmdWithoutParameter*    fRootCmd;        ///< command: root
-    G4UIcmdWithAString*         fRootMacroCmd;   ///< command: rootMacro 
-    TG4UICmdWithAComplexString* fRootCommandCmd; ///< command: rootCmd 
-    G4UIcmdWithoutParameter*    fG3DefaultsCmd;  ///< command: g3Defaults   
+    G4UIcmdWithoutParameter*    fRootCmd;         ///< command: root
+    G4UIcmdWithAString*         fRootMacroCmd;    ///< command: rootMacro 
+    TG4UICmdWithAComplexString* fRootCommandCmd;  ///< command: rootCmd 
+    G4UIcmdWithABool*           fUseRootRandomCmd;///< command: useRootRandom   
+    G4UIcmdWithoutParameter*    fG3DefaultsCmd;   ///< command: g3Defaults   
 };
 
 #endif //TG4_RUN_MESSENGER_H

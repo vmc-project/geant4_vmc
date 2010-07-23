@@ -67,7 +67,8 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
     fRootUISession(0),
     fRootUIOwner(false),
     fARGC(argc),
-    fARGV(argv)  
+    fARGV(argv),  
+    fUseRootRandom(true) 
 {
 /// Standard constructor
 
@@ -116,8 +117,8 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration)
     fRootUISession(0),
     fRootUIOwner(false),
     fARGC(0),
-    fARGV(0)
-  
+    fARGV(0),
+    fUseRootRandom(true) 
 {
 /// Default constructor
 
@@ -377,7 +378,7 @@ void TG4RunManager::LateInitialize()
   }
   
   // set the random number seed
-  SetRandomSeed();
+  if ( fUseRootRandom ) SetRandomSeed();
 }
 
 //_____________________________________________________________________________
