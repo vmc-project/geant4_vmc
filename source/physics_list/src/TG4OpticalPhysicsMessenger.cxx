@@ -51,7 +51,7 @@ TG4OpticalPhysicsMessenger::TG4OpticalPhysicsMessenger(
     candidates += G4String(" ");
   }  
   fSelectOpProcessCmd->SetCandidates(candidates);
-  fSelectOpProcessCmd->AvailableForStates(G4State_PreInit, G4State_Idle);  
+  fSelectOpProcessCmd->AvailableForStates(G4State_PreInit, G4State_Idle, G4State_EventProc);  
 
   fSetOpProcessActivationCmd 
     = new G4UIcmdWithABool("/mcPhysics/setOpProcessActivation", this);  
@@ -64,7 +64,7 @@ TG4OpticalPhysicsMessenger::TG4OpticalPhysicsMessenger(
   fSetOpProcessVerboseCmd->SetGuidance("Set verbosity level for selected optical process");
   fSetOpProcessVerboseCmd->SetParameterName("OpProcessVerbose", false);
   fSetOpProcessVerboseCmd->SetRange("OpProcessVerbose>=0");
-  fSetOpProcessVerboseCmd->AvailableForStates(G4State_PreInit, G4State_Idle);  
+  fSetOpProcessVerboseCmd->AvailableForStates(G4State_PreInit, G4State_Idle, G4State_EventProc);  
 
   fSetCerenkovMaxPhotonsCmd 
     = new G4UIcmdWithAnInteger("/mcPhysics/setCerenkovMaxPhotons", this);  
@@ -128,7 +128,7 @@ void TG4OpticalPhysicsMessenger::SetNewValue(G4UIcommand* command,
                                           G4String newValue)
 { 
 /// Apply command to the associated object.
-  
+
   if (command == fSelectOpProcessCmd) {
     if      ( newValue == "Cerenkov" )      fSelectedProcess = kCerenkov;
     else if ( newValue == "Scintillation" ) fSelectedProcess = kScintillation;

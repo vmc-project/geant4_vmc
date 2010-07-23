@@ -458,14 +458,32 @@ void TG4RunManager::ProcessRootMacro(G4String macroName)
   macroFunction.append("()");
   gInterpreter->ProcessLine(macroFunction);
 }
- 
+
 //_____________________________________________________________________________
 void TG4RunManager::ProcessGeantCommand(G4String command)
 {
 /// Process Geant4 command.
 
   G4UImanager* pUI = G4UImanager::GetUIpointer();  
-  pUI->ApplyCommand(command);
+  G4int result = pUI->ApplyCommand(command);
+
+  // From G4UIbatch::ExecCommand():
+  switch ( result )  {
+    case fCommandSucceeded:
+      break;
+    case fCommandNotFound:
+      G4cerr << "***** COMMAND NOT FOUND <"
+             << command << "> *****" << G4endl;
+      break;
+    case fIllegalApplicationState:
+      G4cerr << "***** Illegal application state <"
+             << command << "> *****" << G4endl;
+      break;
+    default:
+      G4int pn = result%100;
+      G4cerr << "***** Illegal parameter (" << pn << ") <"
+             << command << "> *****" << G4endl;
+  }
 }
 
 //_____________________________________________________________________________
