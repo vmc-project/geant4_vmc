@@ -63,6 +63,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("msc", kPMultipleScattering); 
   mcMap->Add("muMsc", kPMultipleScattering); 
   
+  mcMap->Add("CoulombScat", kPMultipleScattering); 
   mcMap->Add("eCoulombScat", kPMultipleScattering); 
          // Add kPCoulombScattering
 

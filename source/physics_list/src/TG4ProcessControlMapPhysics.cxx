@@ -63,6 +63,7 @@ void TG4ProcessControlMapPhysics::FillMap()
 
   controlMap->Add("msc", kMULS); 
   controlMap->Add("muMsc", kMULS); 
+  controlMap->Add("CoulombScat", kMULS);
   controlMap->Add("eCoulombScat", kMULS);
 
   controlMap->Add("eIoni", kLOSS); 
