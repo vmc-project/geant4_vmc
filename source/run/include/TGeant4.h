@@ -256,7 +256,9 @@ class TGeant4: public TVirtualMC
     virtual const char* CurrentVolName() const;
     virtual const char* CurrentVolOffName(Int_t off) const;
     virtual const char* CurrentVolPath();
-    virtual Int_t CurrentMaterial(Float_t &a, Float_t &z, 
+    virtual Bool_t CurrentBoundaryNormal(
+                    Double_t &x, Double_t &y, Double_t &z) const;
+    virtual Int_t  CurrentMaterial(Float_t &a, Float_t &z, 
                     Float_t &dens, Float_t &radl, Float_t &absl) const;  
     virtual Int_t CurrentMedium() const;
     virtual void  Gmtod(Float_t* xm, Float_t* xd, Int_t iflag);

@@ -88,7 +88,9 @@ class TG4StepManager
     const char* CurrentVolName() const;
     const char* CurrentVolOffName(Int_t off) const;
     const char* CurrentVolPath();
-    Int_t CurrentMaterial(Float_t &a, Float_t &z, Float_t &dens, 
+    Bool_t CurrentBoundaryNormal(
+                    Double_t &x, Double_t &y, Double_t &z) const;
+    Int_t  CurrentMaterial(Float_t &a, Float_t &z, Float_t &dens, 
                     Float_t &radl, Float_t &absl) const;
     Int_t CurrentMedium() const;
     void Gmtod(Double_t* xm, Double_t* xd, Int_t iflag);

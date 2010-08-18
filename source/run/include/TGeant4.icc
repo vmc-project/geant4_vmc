@@ -114,6 +114,15 @@ inline const char* TGeant4::CurrentVolPath()
 } 
 
 //_____________________________________________________________________________
+inline Bool_t TGeant4::CurrentBoundaryNormal(
+                              Double_t& x, Double_t& y, Double_t& z) const
+{ 
+/// Returns the normal vector of the surface of the last volume exited
+
+  return fStepManager->CurrentBoundaryNormal(x, y, z);
+} 
+
+//_____________________________________________________________________________
 inline Int_t TGeant4::CurrentMaterial(Float_t &a, Float_t &z, 
                     Float_t &dens, Float_t &radl, Float_t &absl) const  
 { 

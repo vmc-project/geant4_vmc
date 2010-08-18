@@ -540,6 +540,31 @@ const char* TG4StepManager::CurrentVolPath()
 }
 
 //_____________________________________________________________________________
+Bool_t TG4StepManager::CurrentBoundaryNormal(
+                              Double_t& x, Double_t& y, Double_t& z) const
+{
+/// Return the he normal vector of the surface of the last volume exited
+
+   G4Navigator* theNavigator 
+     = G4TransportationManager::GetTransportationManager()
+       ->GetNavigatorForTracking();
+
+   G4bool valid;
+   G4ThreeVector theLocalNormal 
+     = theNavigator->GetLocalExitNormal(&valid);
+   if ( ! valid ) return false;
+   
+   G4ThreeVector theGlobalNormal 
+     = theNavigator->GetLocalToGlobalTransform().TransformAxis(theLocalNormal);
+     
+   x = theGlobalNormal.x();
+   y = theGlobalNormal.y();
+   z = theGlobalNormal.z();
+   
+   return true;
+}    
+
+//_____________________________________________________________________________
 Int_t TG4StepManager::CurrentMaterial(Float_t &a, Float_t &z, Float_t &dens, 
                           Float_t &radl, Float_t &absl) const
 {
