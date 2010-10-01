@@ -834,7 +834,7 @@ Int_t TG4StepManager::GetMaxNStep() const
 void TG4StepManager::TrackPosition(TLorentzVector& position) const
 { 
 /// Fill the current particle position in the world reference frame
-/// and the local time since the current track is created
+/// and the global time since the event in which the track belongs is created.
 /// (position in the PostStepPoint).
 
 #ifdef MCDEBUG
@@ -846,8 +846,8 @@ void TG4StepManager::TrackPosition(TLorentzVector& position) const
   G4ThreeVector positionVector = fTrack->GetPosition();
   positionVector *= 1./(TG4G3Units::Length());   
      
-  // local time   
-  G4double time = fTrack->GetLocalTime();
+  // global time   
+  G4double time = fTrack->GetGlobalTime();
   time /= TG4G3Units::Time();
     
   SetTLorentzVector(positionVector, time, position);
