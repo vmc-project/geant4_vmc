@@ -2,45 +2,22 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version  5.26/00b   9 February 2010   *
+  *   Version   5.27/06 29 September 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
+ROOT 5.27/06 (tags/v5-27-06@35857, Sep 29 2010, 16:18:05 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
+CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E03_1.C("g3tgeoConfig.C", kFALSE)...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
-
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766672215    2DB27D57 HEX
-
- MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766695253   766672215
-                                        HEX    2DB2D755    2DB27D57
-                                        HEX        560A           0
-                              relative adrs       22026           0
-          with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
-          This store has a fence of   16 words.
-
- MZLOGL.  Set Log Level 0 for store  0
-1*****  GEANT Version  3.21/11 Released on 100298
-0*****  Correction Cradle Version  0.1100
-
- MZDIV.   Initialize Division  Constant  in Store  0
-          NW/NWMAX=   20004000000,  MODE/KIND=  1  2
-          Division 20 initialized.
-
- MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
-
- MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
- *** GCOMAD: cannot load common GCONSX
 Geant3 has been created.
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
@@ -56,73 +33,34 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
-
- Calculating cross section tables, see gphysi.dat for more information
-
- Cross section calculation concluded successfully
+Warning in <TClass::TClass>: no dictionary for class stack<TParticle*,deque<TParticle*> > is available
 
 ---> Begin of event: 1
- **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
- GTREVE_ROOT : Transporting primary track No         20
- GTREVE_ROOT : Transporting primary track No         10
-<TCanvas::MakeDefCanvas>: created default TCanvas with name c1
+Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 936.678       total track length (cm):  41.6659
-   Gap:      total energy (MeV): 17.9447       total track length (cm):  8.49285
+   Gap:      total energy (MeV): 17.9446       total track length (cm):  8.49291
 
 ---> Begin of event: 2
- **** GTRIGI: IEVENT=      2 IDEVT=      2 Random Seeds =       4357           0
- GTREVE_ROOT : Transporting primary track No         20
- GTREVE_ROOT : Transporting primary track No         10
    Absorber: total energy (MeV): 917.233       total track length (cm):  41.3366
-   Gap:      total energy (MeV): 31.8042       total track length (cm):   14.247
+   Gap:      total energy (MeV): 31.8041       total track length (cm):  14.2471
 
 ---> Begin of event: 3
- **** GTRIGI: IEVENT=      3 IDEVT=      3 Random Seeds =       4357           0
- GTREVE_ROOT : Transporting primary track No         20
- GTREVE_ROOT : Transporting primary track No         10
    Absorber: total energy (MeV): 913.626       total track length (cm):  41.7153
-   Gap:      total energy (MeV): 21.8286       total track length (cm):  8.94053
+   Gap:      total energy (MeV): 21.8288       total track length (cm):  8.94056
 
 ---> Begin of event: 4
- **** GTRIGI: IEVENT=      4 IDEVT=      4 Random Seeds =       4357           0
- GTREVE_ROOT : Transporting primary track No         20
- GTREVE_ROOT : Transporting primary track No         10
    Absorber: total energy (MeV): 921.441       total track length (cm):  40.7427
    Gap:      total energy (MeV): 44.0442       total track length (cm):  20.5878
 
 ---> Begin of event: 5
- **** GTRIGI: IEVENT=      5 IDEVT=      5 Random Seeds =       4357           0
- GTREVE_ROOT : Transporting primary track No         20
- GTREVE_ROOT : Transporting primary track No         10
    Absorber: total energy (MeV): 912.903       total track length (cm):  42.9307
-   Gap:      total energy (MeV): 27.9136       total track length (cm):  12.9232
-  *******************************************
-  *                                         *
-  *        W E L C O M E  to  R O O T       *
-  *                                         *
-  *   Version  5.26/00b   9 February 2010   *
-  *                                         *
-  *  You are welcome to visit our Web site  *
-  *          http://root.cern.ch            *
-  *                                         *
-  *******************************************
+   Gap:      total energy (MeV): 27.9136       total track length (cm):  12.9233
 
-ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
-
-CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
-Type ? for help. Commands must be C++ statements.
-Enclose multiple statements between { }.
-
-Processing test_E03_2.C("g3tgeoConfig.C", kFALSE)...
-Loading Geant3 libraries ...
-Loading Geant3 libraries ... finished
---- Init MC 
-
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766475607    2DAF7D57 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   764324527    2D8EAAAF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766498645   766475607
-                                        HEX    2DAFD755    2DAF7D57
+          with Store/Table at absolute adrs   764347565   764324527
+                                        HEX    2D8F04AD    2D8EAAAF
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -139,7 +77,46 @@ Loading Geant3 libraries ... finished
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
- *** GCOMAD: cannot load common GCONSX
+
+ Calculating cross section tables, see gphysi.dat for more information
+
+ Cross section calculation concluded successfully
+ **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
+ GTREVE_ROOT : Transporting primary track No         20
+ GTREVE_ROOT : Transporting primary track No         10
+ **** GTRIGI: IEVENT=      2 IDEVT=      2 Random Seeds =       4357           0
+ GTREVE_ROOT : Transporting primary track No         20
+ GTREVE_ROOT : Transporting primary track No         10
+ **** GTRIGI: IEVENT=      3 IDEVT=      3 Random Seeds =       4357           0
+ GTREVE_ROOT : Transporting primary track No         20
+ GTREVE_ROOT : Transporting primary track No         10
+ **** GTRIGI: IEVENT=      4 IDEVT=      4 Random Seeds =       4357           0
+ GTREVE_ROOT : Transporting primary track No         20
+ GTREVE_ROOT : Transporting primary track No         10
+ **** GTRIGI: IEVENT=      5 IDEVT=      5 Random Seeds =       4357           0
+ GTREVE_ROOT : Transporting primary track No         20
+ GTREVE_ROOT : Transporting primary track No         10
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version   5.27/06 29 September 2010   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+ROOT 5.27/06 (tags/v5-27-06@35857, Sep 29 2010, 16:18:05 on linux)
+
+CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+
+Processing test_E03_2.C("g3tgeoConfig.C", kFALSE)...
+Loading Geant3 libraries ...
+Loading Geant3 libraries ... finished
+--- Init MC 
 Geant3 has been created.
 --- Add particles 
 --- Add ions 
@@ -159,15 +136,11 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
 --- Init geometry 
-
- Calculating cross section tables, see gphysi.dat for more information
-
- Cross section calculation concluded successfully
+Warning in <TClass::TClass>: no dictionary for class stack<TParticle*,deque<TParticle*> > is available
 --- Run MC for 1 events
 --- Begin event 
 
 ---> Begin of event: 1
- **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
 --- Generate primaries 
 --- Begin primary 
 
@@ -500,37 +473,16 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   3    -3.000    0.314    0.049     0.4699    0.0000    0.000    0.103     ABSO  No active process
 #   4    -3.000    0.314    0.049     0.0000    0.4699    0.000    0.103     ABSO  Energy threshold
 --- Finish event 
-<TCanvas::MakeDefCanvas>: created default TCanvas with name c1
+Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV):  46.033       total track length (cm):    1.916
    Gap:      total energy (MeV):   3.967       total track length (cm):    2.241
 --- Finish Run MC 
-  *******************************************
-  *                                         *
-  *        W E L C O M E  to  R O O T       *
-  *                                         *
-  *   Version  5.26/00b   9 February 2010   *
-  *                                         *
-  *  You are welcome to visit our Web site  *
-  *          http://root.cern.ch            *
-  *                                         *
-  *******************************************
 
-ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
-
-CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
-Type ? for help. Commands must be C++ statements.
-Enclose multiple statements between { }.
-
-Processing test_E03_3.C("g3tgeoConfig.C", kFALSE)...
-Loading Geant3 libraries ...
-Loading Geant3 libraries ... finished
---- Init MC 
-
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766865751    2DB57157 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   764408495    2D8FF2AF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766888789   766865751
-                                        HEX    2DB5CB55    2DB57157
+          with Store/Table at absolute adrs   764431533   764408495
+                                        HEX    2D904CAD    2D8FF2AF
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -547,7 +499,32 @@ Loading Geant3 libraries ... finished
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
- *** GCOMAD: cannot load common GCONSX
+
+ Calculating cross section tables, see gphysi.dat for more information
+
+ Cross section calculation concluded successfully
+ **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version   5.27/06 29 September 2010   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+ROOT 5.27/06 (tags/v5-27-06@35857, Sep 29 2010, 16:18:05 on linux)
+
+CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+
+Processing test_E03_3.C("g3tgeoConfig.C", kFALSE)...
+Loading Geant3 libraries ...
+Loading Geant3 libraries ... finished
+--- Init MC 
 Geant3 has been created.
 --- Add particles 
 --- Add ions 
@@ -567,15 +544,11 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
 --- Init geometry 
-
- Calculating cross section tables, see gphysi.dat for more information
-
- Cross section calculation concluded successfully
+Warning in <TClass::TClass>: no dictionary for class stack<TParticle*,deque<TParticle*> > is available
 --- Run MC for 1 events
 --- Begin event 
 
 ---> Begin of event: 1
- **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
 --- Generate primaries 
 --- Begin primary 
 
@@ -644,36 +617,16 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  30     3.877   -5.000    0.179   285.3408    0.0000    0.000   12.398     WRLD  No active process
 #  31     6.146   -6.000    0.215   285.3408    0.0000    2.480   14.877     WRLD  Transportation
 --- Finish event 
-<TCanvas::MakeDefCanvas>: created default TCanvas with name c1
+Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 1119.690       total track length (cm):    0.101
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
-  *******************************************
-  *                                         *
-  *        W E L C O M E  to  R O O T       *
-  *                                         *
-  *   Version  5.26/00b   9 February 2010   *
-  *                                         *
-  *  You are welcome to visit our Web site  *
-  *          http://root.cern.ch            *
-  *                                         *
-  *******************************************
 
-ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
-
-CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
-Type ? for help. Commands must be C++ statements.
-Enclose multiple statements between { }.
-
-Processing test_E03_4.C("g3tgeoConfig.C", kFALSE)...
-Loading Geant3 libraries ...
-Loading Geant3 libraries ... finished
-
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766578007    2DB10D57 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   764514991    2D9192AF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766601045   766578007
-                                        HEX    2DB16755    2DB10D57
+          with Store/Table at absolute adrs   764538029   764514991
+                                        HEX    2D91ECAD    2D9192AF
                                         HEX        560A           0
                               relative adrs       22026           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -690,7 +643,31 @@ Loading Geant3 libraries ... finished
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
- *** GCOMAD: cannot load common GCONSX
+
+ Calculating cross section tables, see gphysi.dat for more information
+
+ Cross section calculation concluded successfully
+ **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version   5.27/06 29 September 2010   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+ROOT 5.27/06 (tags/v5-27-06@35857, Sep 29 2010, 16:18:05 on linux)
+
+CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+
+Processing test_E03_4.C("g3tgeoConfig.C", kFALSE)...
+Loading Geant3 libraries ...
+Loading Geant3 libraries ... finished
 Geant3 has been created.
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
@@ -706,13 +683,9 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
-
- Calculating cross section tables, see gphysi.dat for more information
-
- Cross section calculation concluded successfully
+Warning in <TClass::TClass>: no dictionary for class stack<TParticle*,deque<TParticle*> > is available
 
 ---> Begin of event: 1
- **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    Primary track ID = 4
       Current track pi0  is a decay product of Parent ID = 4
       Current track pi0  is a decay product of Parent ID = 4
@@ -733,6 +706,33 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
       Current track pi0  is a decay product of Parent ID = 0
       Current track pi0  is a decay product of Parent ID = 0
 
-<TCanvas::MakeDefCanvas>: created default TCanvas with name c1
-   Absorber: total energy (MeV): 1439.14       total track length (cm):  68.1087
-   Gap:      total energy (MeV): 74.1968       total track length (cm):  34.9998
+Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
+   Absorber: total energy (MeV): 1531.44       total track length (cm):  72.1377
+   Gap:      total energy (MeV): 78.3146       total track length (cm):  38.2366
+
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   764586671    2D92AAAF HEX
+
+ MZSTOR.  Initialize Store  0  in /GCBANK/
+          with Store/Table at absolute adrs   764609709   764586671
+                                        HEX    2D9304AD    2D92AAAF
+                                        HEX        560A           0
+                              relative adrs       22026           0
+          with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
+          This store has a fence of   16 words.
+
+ MZLOGL.  Set Log Level 0 for store  0
+1*****  GEANT Version  3.21/11 Released on 100298
+0*****  Correction Cradle Version  0.1100
+
+ MZDIV.   Initialize Division  Constant  in Store  0
+          NW/NWMAX=   20004000000,  MODE/KIND=  1  2
+          Division 20 initialized.
+
+ MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
+
+ MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+
+ Calculating cross section tables, see gphysi.dat for more information
+
+ Cross section calculation concluded successfully
+ **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0

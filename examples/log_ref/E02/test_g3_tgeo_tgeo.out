@@ -2,45 +2,22 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version  5.26/00b   9 February 2010   *
+  *   Version   5.27/06 29 September 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
+ROOT 5.27/06 (tags/v5-27-06@35857, Sep 29 2010, 16:18:05 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
+CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E02.C("g3tgeoConfig.C", kFALSE)...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
-
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766786903    2DB43D57 HEX
-
- MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766809941   766786903
-                                        HEX    2DB49755    2DB43D57
-                                        HEX        560A           0
-                              relative adrs       22026           0
-          with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
-          This store has a fence of   16 words.
-
- MZLOGL.  Set Log Level 0 for store  0
-1*****  GEANT Version  3.21/11 Released on 100298
-0*****  Correction Cradle Version  0.1100
-
- MZDIV.   Initialize Division  Constant  in Store  0
-          NW/NWMAX=   20004000000,  MODE/KIND=  1  2
-          Division 20 initialized.
-
- MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
-
- MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
- *** GCOMAD: cannot load common GCONSX
 Geant3 has been created.
 Geometry will be defined via TGeo
 Info in <TGeoManager::TGeoManager>: Geometry E02_geometry, E02 VMC example geometry created
@@ -56,18 +33,14 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
 Info in <TGeoManager::CloseGeometry>: 8 nodes/ 4 volume UID's in E02 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
-
- Calculating cross section tables, see gphysi.dat for more information
-
- Cross section calculation concluded successfully
- **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
+Warning in <TClass::TClass>: no dictionary for class stack<Ex02Particle*,deque<Ex02Particle*> > is available
 
 -------->Hits Collection: in this event they are 12 hits in the tracker chambers: 
   trackID: 0  chamberNb: 0  energy deposit (keV): 89.4865  position (cm): (1.49477, 18.8225, -140.074)
   trackID: 0  chamberNb: 0  energy deposit (keV): 0.0452453  position (cm): (1.49588, 18.8413, -140)
   trackID: 0  chamberNb: 1  energy deposit (keV): 92.0393  position (cm): (2.71678, 44.7479, -60.1261)
   trackID: 0  chamberNb: 1  energy deposit (keV): 0.386461  position (cm): (2.71872, 44.7985, -59.9998)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 136.701  position (cm): (3.97799, 83.5408, 19.805)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 136.701  position (cm): (3.97798, 83.5408, 19.805)
   trackID: 0  chamberNb: 2  energy deposit (keV): 0.536045  position (cm): (3.98128, 83.6534, 20.0003)
   trackID: 0  chamberNb: 3  energy deposit (keV): 115.721  position (cm): (5.39332, 138.196, 99.7008)
   trackID: 0  chamberNb: 3  energy deposit (keV): 0.569381  position (cm): (5.39891, 138.437, 100)
@@ -83,12 +56,11 @@ TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.0
 Primary    
 Number of daughters: 0
 
- **** GTRIGI: IEVENT=      2 IDEVT=      2 Random Seeds =       4357           0
 
 -------->Hits Collection: in this event they are 8 hits in the tracker chambers: 
   trackID: 0  chamberNb: 0  energy deposit (keV): 92.8173  position (cm): (-1.25423, 19.9118, -140.079)
   trackID: 0  chamberNb: 0  energy deposit (keV): 0.208348  position (cm): (-1.25526, 19.9326, -140)
-  trackID: 0  chamberNb: 1  energy deposit (keV): 88.8884  position (cm): (-2.31507, 46.8751, -60.1317)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 88.8884  position (cm): (-2.31506, 46.8751, -60.1317)
   trackID: 0  chamberNb: 1  energy deposit (keV): 0.086714  position (cm): (-2.31694, 46.9298, -59.9998)
   trackID: 0  chamberNb: 2  energy deposit (keV): 165.512  position (cm): (-3.4922, 86.9607, 19.7968)
   trackID: 0  chamberNb: 2  energy deposit (keV): 3.69571  position (cm): (-3.4953, 87.0816, 20.0003)
@@ -102,7 +74,6 @@ TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.0
 Primary    
 Number of daughters: 0
 
- **** GTRIGI: IEVENT=      3 IDEVT=      3 Random Seeds =       4357           0
 
 -------->Hits Collection: in this event they are 8 hits in the tracker chambers: 
   trackID: 0  chamberNb: 0  energy deposit (keV): 133.446  position (cm): (-2.04312, 19.4423, -140.077)
@@ -121,7 +92,6 @@ TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.0
 Primary    
 Number of daughters: 0
 
- **** GTRIGI: IEVENT=      4 IDEVT=      4 Random Seeds =       4357           0
 
 -------->Hits Collection: in this event they are 8 hits in the tracker chambers: 
   trackID: 0  chamberNb: 0  energy deposit (keV): 134.121  position (cm): (-0.753775, 20.1111, -140.079)
@@ -140,15 +110,14 @@ TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.0
 Primary    
 Number of daughters: 0
 
- **** GTRIGI: IEVENT=      5 IDEVT=      5 Random Seeds =       4357           0
 
 -------->Hits Collection: in this event they are 10 hits in the tracker chambers: 
   trackID: 0  chamberNb: 0  energy deposit (keV): 107.302  position (cm): (1.53092, 15.7228, -140.064)
   trackID: 0  chamberNb: 0  energy deposit (keV): 0.375163  position (cm): (1.53191, 15.7368, -140)
-  trackID: 0  chamberNb: 1  energy deposit (keV): 81.3612  position (cm): (2.79488, 38.9533, -60.1131)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 81.3612  position (cm): (2.79488, 38.9532, -60.1131)
   trackID: 0  chamberNb: 1  energy deposit (keV): 0.735222  position (cm): (2.79667, 38.9946, -59.9998)
   trackID: 0  chamberNb: 2  energy deposit (keV): 99.0028  position (cm): (4.0981, 74.5612, 19.8235)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 0.40622  position (cm): (4.1011, 74.6552, 20.0003)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 0.40622  position (cm): (4.1011, 74.6551, 20.0003)
   trackID: 0  chamberNb: 3  energy deposit (keV): 310.747  position (cm): (5.51602, 125.089, 99.7305)
   trackID: 0  chamberNb: 3  energy deposit (keV): 1.0527  position (cm): (5.52102, 125.289, 100)
   trackID: 0  chamberNb: 4  energy deposit (keV): 141.387  position (cm): (7.09863, 195.727, 179.569)
@@ -161,3 +130,34 @@ TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.0
 Primary    
 Number of daughters: 0
 
+
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   764429999    2D9046AF HEX
+
+ MZSTOR.  Initialize Store  0  in /GCBANK/
+          with Store/Table at absolute adrs   764453037   764429999
+                                        HEX    2D90A0AD    2D9046AF
+                                        HEX        560A           0
+                              relative adrs       22026           0
+          with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
+          This store has a fence of   16 words.
+
+ MZLOGL.  Set Log Level 0 for store  0
+1*****  GEANT Version  3.21/11 Released on 100298
+0*****  Correction Cradle Version  0.1100
+
+ MZDIV.   Initialize Division  Constant  in Store  0
+          NW/NWMAX=   20004000000,  MODE/KIND=  1  2
+          Division 20 initialized.
+
+ MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
+
+ MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+
+ Calculating cross section tables, see gphysi.dat for more information
+
+ Cross section calculation concluded successfully
+ **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
+ **** GTRIGI: IEVENT=      2 IDEVT=      2 Random Seeds =       4357           0
+ **** GTRIGI: IEVENT=      3 IDEVT=      3 Random Seeds =       4357           0
+ **** GTRIGI: IEVENT=      4 IDEVT=      4 Random Seeds =       4357           0
+ **** GTRIGI: IEVENT=      5 IDEVT=      5 Random Seeds =       4357           0

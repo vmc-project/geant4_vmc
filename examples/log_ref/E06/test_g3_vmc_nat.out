@@ -2,45 +2,22 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version  5.26/00b   9 February 2010   *
+  *   Version   5.27/06 29 September 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
+ROOT 5.27/06 (tags/v5-27-06@35857, Sep 29 2010, 16:18:05 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
+CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E06.C("g3Config.C", kTRUE)...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
-
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766745943    2DB39D57 HEX
-
- MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766768981   766745943
-                                        HEX    2DB3F755    2DB39D57
-                                        HEX        560A           0
-                              relative adrs       22026           0
-          with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
-          This store has a fence of   16 words.
-
- MZLOGL.  Set Log Level 0 for store  0
-1*****  GEANT Version  3.21/11 Released on 100298
-0*****  Correction Cradle Version  0.1100
-
- MZDIV.   Initialize Division  Constant  in Store  0
-          NW/NWMAX=   20004000000,  MODE/KIND=  1  2
-          Division 20 initialized.
-
- MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
-
- MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
- *** GCOMAD: cannot load common GCONSX
 Geant3 has been created.
 Geometry will be defined via VMC
 Warning in <TGeant3::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
@@ -60,6 +37,38 @@ Warning in <TGeant3::SetMaterialProperty>: Called for material surface  WaterSur
 Warning in <TGeant3::SetMaterialProperty>: Called for material surface  WaterSurface. Not applicable in Geant3 - setting is ignored.
 Warning in <TGeant3::SetMaterialProperty>: Called for material surface  AirSurface. Not applicable in Geant3 - setting is ignored.
 Warning in <TGeant3::SetMaterialProperty>: Called for material surface  AirSurface. Not applicable in Geant3 - setting is ignored.
+Number of optical photons produced in this event : 2038
+Number of optical photons produced in this event : 2071
+Number of optical photons produced in this event : 2050
+Number of optical photons produced in this event : 2102
+Number of optical photons produced in this event : 2184
+Number of optical photons produced in this event : 2082
+Number of optical photons produced in this event : 2002
+Number of optical photons produced in this event : 2130
+Number of optical photons produced in this event : 2057
+Number of optical photons produced in this event : 2130
+
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   764411567    2D8FFEAF HEX
+
+ MZSTOR.  Initialize Store  0  in /GCBANK/
+          with Store/Table at absolute adrs   764434605   764411567
+                                        HEX    2D9058AD    2D8FFEAF
+                                        HEX        560A           0
+                              relative adrs       22026           0
+          with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
+          This store has a fence of   16 words.
+
+ MZLOGL.  Set Log Level 0 for store  0
+1*****  GEANT Version  3.21/11 Released on 100298
+0*****  Correction Cradle Version  0.1100
+
+ MZDIV.   Initialize Division  Constant  in Store  0
+          NW/NWMAX=   20004000000,  MODE/KIND=  1  2
+          Division 20 initialized.
+
+ MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
+
+ MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
  GGCLOS: Start automatic volume ordering:
 
  MZLINK.  Initialize Link Area  /GCHVIR/  for Store  0 NL/NS=     4     1
@@ -70,22 +79,12 @@ Warning in <TGeant3::SetMaterialProperty>: Called for material surface  AirSurfa
 
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
-Number of optical photons produced in this event : 2038
  **** GTRIGI: IEVENT=      2 IDEVT=      2 Random Seeds =       4357           0
-Number of optical photons produced in this event : 2071
  **** GTRIGI: IEVENT=      3 IDEVT=      3 Random Seeds =       4357           0
-Number of optical photons produced in this event : 2050
  **** GTRIGI: IEVENT=      4 IDEVT=      4 Random Seeds =       4357           0
-Number of optical photons produced in this event : 2102
  **** GTRIGI: IEVENT=      5 IDEVT=      5 Random Seeds =       4357           0
-Number of optical photons produced in this event : 2184
  **** GTRIGI: IEVENT=      6 IDEVT=      6 Random Seeds =       4357           0
-Number of optical photons produced in this event : 2082
  **** GTRIGI: IEVENT=      7 IDEVT=      7 Random Seeds =       4357           0
-Number of optical photons produced in this event : 2002
  **** GTRIGI: IEVENT=      8 IDEVT=      8 Random Seeds =       4357           0
-Number of optical photons produced in this event : 2130
  **** GTRIGI: IEVENT=      9 IDEVT=      9 Random Seeds =       4357           0
-Number of optical photons produced in this event : 2057
  **** GTRIGI: IEVENT=     10 IDEVT=     10 Random Seeds =       4357           0
-Number of optical photons produced in this event : 2130

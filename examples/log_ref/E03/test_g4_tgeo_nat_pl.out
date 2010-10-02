@@ -2,16 +2,16 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version  5.26/00b   9 February 2010   *
+  *   Version   5.27/06 29 September 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
+ROOT 5.27/06 (tags/v5-27-06@35857, Sep 29 2010, 16:18:05 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
+CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -22,7 +22,7 @@ Loading g4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
+ Geant4 version Name: geant4-09-03-patch-02    (17-September-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -69,6 +69,7 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
               6 sensitive detectors
 **********************************************
 
+Warning in <TClass::TClass>: no dictionary for class stack<TParticle*,deque<TParticle*> > is available
 
 phot:   for  gamma    SubType= 12
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -379,6 +380,10 @@ AntiNeutronInelastic  Models:  G4LEAntiNeutronInelastic: Emin(GeV)=     0  Emax(
                                         Bertini Cascade: Emin(GeV)=     0  Emax(GeV)= 9.9
 ============================================================================================
 ### Run 0 start.
+region #               material name  rangeGam[mm]  rangeEle[mm]   cutGam[GeV]   cutEle[GeV] vmcCutGam[GeV] vmcCutEle[GeV]
+   0                        Galactic  1.000000e+00  1.000000e+00  9.900000e-04  9.900000e-04  1.797693e+308  1.797693e+308
+   1                            Lead  1.000000e+00  1.000000e+00  1.018429e-01  1.367494e+00  1.005000e-01  1.378000e+00
+   2                     liquidArgon  1.000000e+00  1.000000e+00  6.199857e-03  3.448545e-01  6.178000e-03  3.429000e-01
 
 ---> Begin of event: 1
    Absorber: total energy (MeV): 913.023       total track length (cm):  61.6454
@@ -399,22 +404,22 @@ AntiNeutronInelastic  Models:  G4LEAntiNeutronInelastic: Emin(GeV)=     0  Emax(
 ---> Begin of event: 5
    Absorber: total energy (MeV): 898.478       total track length (cm):  60.1354
    Gap:      total energy (MeV): 35.4285       total track length (cm):   16.645
-Time of this run:   User=3.18s Real=3.32s Sys=0.02s
+Time of this run:   User=4.30000000000000e-01s Real=5.60000000000000e-01s Sys=0.00000000000000e+00s
 Number of events processed: 5
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version  5.26/00b   9 February 2010   *
+  *   Version   5.27/06 29 September 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
+ROOT 5.27/06 (tags/v5-27-06@35857, Sep 29 2010, 16:18:05 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
+CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -426,7 +431,7 @@ Loading geant4vmc library ...
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
+ Geant4 version Name: geant4-09-03-patch-02    (17-September-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -477,6 +482,7 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
               6 sensitive detectors
 **********************************************
 
+Warning in <TClass::TClass>: no dictionary for class stack<TParticle*,deque<TParticle*> > is available
 --- Run MC for 1 events
 
 phot:   for  gamma    SubType= 12
@@ -788,6 +794,10 @@ AntiNeutronInelastic  Models:  G4LEAntiNeutronInelastic: Emin(GeV)=     0  Emax(
                                         Bertini Cascade: Emin(GeV)=     0  Emax(GeV)= 9.9
 ============================================================================================
 ### Run 0 start.
+region #               material name  rangeGam[mm]  rangeEle[mm]   cutGam[GeV]   cutEle[GeV] vmcCutGam[GeV] vmcCutEle[GeV]
+   0                        Galactic  1.000000e+00  1.000000e+00  9.900000e-04  9.900000e-04  1.797693e+308  1.797693e+308
+   1                            Lead  1.000000e+00  1.000000e+00  1.018429e-01  1.367494e+00  1.005000e-01  1.378000e+00
+   2                     liquidArgon  1.000000e+00  1.000000e+00  6.199857e-03  3.448545e-01  6.178000e-03  3.429000e-01
 --- Begin event 
 
 ---> Begin of event: 1
@@ -1333,7 +1343,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  49.274       total track length (cm):    3.610
    Gap:      total energy (MeV):   0.726       total track length (cm):    0.286
-Time of this run:   User=0.1s Real=0.12s Sys=0.01s
+Time of this run:   User=2.00000000000000e-02s Real=4.00000000000000e-02s Sys=0.00000000000000e+00s
 Number of events processed: 1
 --- Finish Run MC 
 WARNING - Attempt to delete the physical volume store while geometry closed !
@@ -1344,16 +1354,16 @@ WARNING - Attempt to delete the region store while geometry closed !
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version  5.26/00b   9 February 2010   *
+  *   Version   5.27/06 29 September 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
+ROOT 5.27/06 (tags/v5-27-06@35857, Sep 29 2010, 16:18:05 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
+CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -1365,7 +1375,7 @@ Loading geant4vmc library ...
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
+ Geant4 version Name: geant4-09-03-patch-02    (17-September-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -1416,6 +1426,7 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
               6 sensitive detectors
 **********************************************
 
+Warning in <TClass::TClass>: no dictionary for class stack<TParticle*,deque<TParticle*> > is available
 --- Run MC for 1 events
 
 phot:   for  gamma    SubType= 12
@@ -1727,6 +1738,10 @@ AntiNeutronInelastic  Models:  G4LEAntiNeutronInelastic: Emin(GeV)=     0  Emax(
                                         Bertini Cascade: Emin(GeV)=     0  Emax(GeV)= 9.9
 ============================================================================================
 ### Run 0 start.
+region #               material name  rangeGam[mm]  rangeEle[mm]   cutGam[GeV]   cutEle[GeV] vmcCutGam[GeV] vmcCutEle[GeV]
+   0                        Galactic  1.000000e+00  1.000000e+00  9.900000e-04  9.900000e-04  1.797693e+308  1.797693e+308
+   1                            Lead  1.000000e+00  1.000000e+00  1.018429e-01  1.367494e+00  1.005000e-01  1.378000e+00
+   2                     liquidArgon  1.000000e+00  1.000000e+00  6.199857e-03  3.448545e-01  6.178000e-03  3.429000e-01
 --- Begin event 
 
 ---> Begin of event: 1
@@ -1737,10 +1752,10 @@ AntiNeutronInelastic  Models:  G4LEAntiNeutronInelastic: Emin(GeV)=     0  Emax(
   Particle = MyIon     Track ID = 1     Parent ID = -1
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -9.000    0.000    0.000  1050.0000    0.0000    0.000    0.000     WRLD  No active process
-#   1    -7.500    0.000    0.000  1050.0000    0.0000    1.500    1.500     WRLD  Transportation
-#   2    -7.500    0.000    0.000  1050.0000    0.0000    0.000    1.500     ABSO  No active process
-#   3    -7.495    0.000    0.000    -0.0000 1050.0000    0.005    1.505     ABSO  Energy loss
+#   0    -9.000    0.000    0.000  1061.2420    0.0000    0.000    0.000     WRLD  No active process
+#   1    -7.500    0.000    0.000  1061.2420    0.0000    1.500    1.500     WRLD  Transportation
+#   2    -7.500    0.000    0.000  1061.2420    0.0000    0.000    1.500     ABSO  No active process
+#   3    -7.495    0.000    0.000    11.2420 1050.0000    0.005    1.505     ABSO  Energy loss
 --- Begin primary 
 
 ****************************************************************************************************
@@ -1774,23 +1789,23 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.159
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.04s Real=0.04s Sys=0.01s
+Time of this run:   User=1.00000000000000e-02s Real=1.00000000000000e-02s Sys=0.00000000000000e+00s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version  5.26/00b   9 February 2010   *
+  *   Version   5.27/06 29 September 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
+ROOT 5.27/06 (tags/v5-27-06@35857, Sep 29 2010, 16:18:05 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
+CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
@@ -1801,7 +1816,7 @@ Loading g4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-09-03-patch-01    (9-April-2010)
+ Geant4 version Name: geant4-09-03-patch-02    (17-September-2010)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -1848,6 +1863,7 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
               6 sensitive detectors
 **********************************************
 
+Warning in <TClass::TClass>: no dictionary for class stack<TParticle*,deque<TParticle*> > is available
 
 phot:   for  gamma    SubType= 12
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -2158,6 +2174,10 @@ AntiNeutronInelastic  Models:  G4LEAntiNeutronInelastic: Emin(GeV)=     0  Emax(
                                         Bertini Cascade: Emin(GeV)=     0  Emax(GeV)= 9.9
 ============================================================================================
 ### Run 0 start.
+region #               material name  rangeGam[mm]  rangeEle[mm]   cutGam[GeV]   cutEle[GeV] vmcCutGam[GeV] vmcCutEle[GeV]
+   0                        Galactic  1.000000e+00  1.000000e+00  9.900000e-04  9.900000e-04  1.797693e+308  1.797693e+308
+   1                            Lead  1.000000e+00  1.000000e+00  1.018429e-01  1.367494e+00  1.005000e-01  1.378000e+00
+   2                     liquidArgon  1.000000e+00  1.000000e+00  6.199857e-03  3.448545e-01  6.178000e-03  3.429000e-01
 
 ---> Begin of event: 1
    Primary track ID = 4
@@ -2182,5 +2202,5 @@ AntiNeutronInelastic  Models:  G4LEAntiNeutronInelastic: Emin(GeV)=     0  Emax(
 
    Absorber: total energy (MeV): 1585.79       total track length (cm):  106.338
    Gap:      total energy (MeV): 82.1798       total track length (cm):  41.2141
-Time of this run:   User=0.79s Real=0.79s Sys=0s
+Time of this run:   User=1.30000000000000e-01s Real=1.40000000000000e-01s Sys=0.00000000000000e+00s
 Number of events processed: 1

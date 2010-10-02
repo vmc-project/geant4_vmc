@@ -2,57 +2,24 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version  5.26/00b   9 February 2010   *
+  *   Version   5.27/06 29 September 2010   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.26/00b (tags/v5-26-00b@32327, May 08 2010, 09:26:09 on linux)
+ROOT 5.27/06 (tags/v5-27-06@35857, Sep 29 2010, 16:18:05 on linux)
 
-CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
+CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
 Processing test_E01.C("g3Config.C", kTRUE)...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
-
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   766451031    2DAF1D57 HEX
-
- MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   766474069   766451031
-                                        HEX    2DAF7755    2DAF1D57
-                                        HEX        560A           0
-                              relative adrs       22026           0
-          with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
-          This store has a fence of   16 words.
-
- MZLOGL.  Set Log Level 0 for store  0
-1*****  GEANT Version  3.21/11 Released on 100298
-0*****  Correction Cradle Version  0.1100
-
- MZDIV.   Initialize Division  Constant  in Store  0
-          NW/NWMAX=   20004000000,  MODE/KIND=  1  2
-          Division 20 initialized.
-
- MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
-
- MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
- *** GCOMAD: cannot load common GCONSX
 Geant3 has been created.
 Geometry will be defined via VMC
- GGCLOS: Start automatic volume ordering:
-
- MZLINK.  Initialize Link Area  /GCHVIR/  for Store  0 NL/NS=     4     1
-
- MZLINK.  Initialize Link Area  /GCDINA/  for Store  0 NL/NS=     4     4
-
- Calculating cross section tables, see gphysi.dat for more information
-
- Cross section calculation concluded successfully
- **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
 
 Starting new track
 Track -200 0 0  in EXPH  ArgonGas
@@ -148,8 +115,8 @@ Track -159.865 4.01346 0  in EXPH  ArgonGas
 Track -159.865 4.01346 0  in TRTU  Aluminium
 Track -42.1144 15.7886 0  in TRTU  Aluminium
 Track -42.1144 15.7886 0  in EXPH  ArgonGas
-Track 0.00016019 20 0  in EXPH  ArgonGas
-Track 0.00016019 20 0  in CALB  Lead
+Track 0.000152561 20 0  in EXPH  ArgonGas
+Track 0.000152561 20 0  in CALB  Lead
 Track 9.0002 20.9 0  in CALB  Lead
 Track 9.0002 20.9 0  in LAYB  Aluminium
 Track 11.0002 21.1 0  in LAYB  Aluminium
@@ -324,7 +291,6 @@ matrix  - tr=1  rot=1  refl=0  scl=1
   0.000000    0.000000    1.000000    Tz =   0.000000
 Sx=  1.000000Sy=    1.000000Sz=    1.000000
 
- GLVOLU : Volume LAYB for Level   3 does not exist in Volume CALB
 Volume path /EXPH_1/CALB_1/LAYB_100 not found
 
 Transformation for /EXPH_1/CALB_1/LAYB_9: 
@@ -343,11 +309,44 @@ Aluminium  2  Aeff = 26.98  Zeff = 13  density = 2.7  radl = 8.8751  inter = 45.
 Medium for LAYB volume: 
 Aluminium  2  nmat = 2  isvol = 0  ifield = 0  fieldm = 0  tmaxfd = 20  stemax = 1e+10  deemax = 0.182866  epsil = 0.001  stmin = 0.0334544
 
- GLVOLU : Volume LAYB for Level   3 does not exist in Volume CALB
 GetTransformation: Volume path /EXPH_1/CALB_1/LAYB_100 not found
- GLVOLU : Volume LAYB for Level   3 does not exist in Volume CALB
 GetShape: Volume path /EXPH_1/CALB_1/LAYB_100 not found
 VolId: Volume XYZ not found
 GetMaterial: Volume name XYZ not found
 VolId: Volume XYZ not found
 GetMedium: Volume name XYZ not found
+
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   764538543    2D91EEAF HEX
+
+ MZSTOR.  Initialize Store  0  in /GCBANK/
+          with Store/Table at absolute adrs   764561581   764538543
+                                        HEX    2D9248AD    2D91EEAF
+                                        HEX        560A           0
+                              relative adrs       22026           0
+          with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
+          This store has a fence of   16 words.
+
+ MZLOGL.  Set Log Level 0 for store  0
+1*****  GEANT Version  3.21/11 Released on 100298
+0*****  Correction Cradle Version  0.1100
+
+ MZDIV.   Initialize Division  Constant  in Store  0
+          NW/NWMAX=   20004000000,  MODE/KIND=  1  2
+          Division 20 initialized.
+
+ MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
+
+ MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+ GGCLOS: Start automatic volume ordering:
+
+ MZLINK.  Initialize Link Area  /GCHVIR/  for Store  0 NL/NS=     4     1
+
+ MZLINK.  Initialize Link Area  /GCDINA/  for Store  0 NL/NS=     4     4
+
+ Calculating cross section tables, see gphysi.dat for more information
+
+ Cross section calculation concluded successfully
+ **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
+ GLVOLU : Volume LAYB for Level   3 does not exist in Volume CALB
+ GLVOLU : Volume LAYB for Level   3 does not exist in Volume CALB
+ GLVOLU : Volume LAYB for Level   3 does not exist in Volume CALB

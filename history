@@ -11,6 +11,42 @@ $Id$
      
 Tags (history):
 ===============
+  02/10/2010
+  v2-10:
+    Geant4 VMC:
+    Improvements:
+    - Implemented new TVirtualMC functions:
+      virtual void   SetCollectTracks(...);
+      virtual Bool_t IsCollectTracks() const;
+      virtual Bool_t CurrentBoundaryNormal(...) const;
+   - Added new TG4EmModelPhysics which allows user selection of an extra 
+      EM energy loss and fluctuations models.
+   -  Adding a utility class, TG4ParticlesChecker, for comparing particles 
+      properties defined in Root and Geant4 and its messenger 
+      TG4ParticlesCheckerMessenger.
+    - Implemented commands to allow user to customise the setting of the 
+      the max allowed step in materials with a density below a limit value
+    - Added a possbility to switch off passing the random number seed from 
+      TRandom in CLHEP::HepRandom; this allows using standard Geant4 commands 
+      for saving and restoring the random number generator status
+    - Mapped processed used in CHIPS and QBBC physics lists   
+    - Migration to Geant4 9.4.b01:
+      - updated TG4UserParticlesPhysics, mapped processes present in new 
+
+    Fixes:
+    - Fixed the time of flight returned via TVirtualMC::TrackPosition():
+      return the global track time (= time since the event in which the track 
+      belongs is created) instead of local track time (= the local time since 
+      the current track is created) in order to be consistent with Geant3.
+    
+    Tested with Geant4 9.3.p02, CLHEP 2.0.4.5, Root 5.27/06, VGM 3.03
+            and Geant4 9.4.b01, CLHEP 2.0.4.6  
+
+    Examples:
+      Removed macros for running examples with Fluka
+
+    Tested with Geant3 1.11, Geant4 VMC 2.10 
+
   20/05/2010
   v2-9:
     G4Root
