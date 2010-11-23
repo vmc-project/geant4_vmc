@@ -43,6 +43,8 @@ protected:
    G4ThreeVector         fNextPoint;       ///< Crossing point with next boundary
    G4ThreeVector         fSafetyOrig;      ///< Last computed safety origin
    G4double              fLastSafety;      ///< Last computed safety
+   Bool_t                fPushed;          ///< Check if particle was pushed
+   Int_t                 fNzeroSteps;      ///< Number of zero steps
 private:
    G4VPhysicalVolume *SynchronizeHistory();
    TGeoNode          *SynchronizeGeoManager();

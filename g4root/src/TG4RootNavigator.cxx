@@ -22,7 +22,11 @@
 //ClassImp(TG4RootNavigator)
 
 /// constant for conversion cm <-> mm
-static const double gCm = 1./cm; 
+static const double gCm = 1./cm;
+/// maximum number of zero steps until particle is pushed
+static const int    gMaxZeroSteps = 10;
+/// maximum number of zero steps until abort
+static const int    gMaxZeroStepsAbort = 35;
 
 //______________________________________________________________________________
 TG4RootNavigator::TG4RootNavigator()
@@ -33,7 +37,9 @@ TG4RootNavigator::TG4RootNavigator()
                   fStepExiting(kFALSE),
                   fNextPoint(),
                   fSafetyOrig(),
-                  fLastSafety(0)
+                  fLastSafety(0),
+                  fPushed(kFALSE),
+                  fNzeroSteps(0)
 {
 /// Dummy ctor.
 }
@@ -47,7 +53,9 @@ TG4RootNavigator::TG4RootNavigator(TG4RootDetectorConstruction *dc)
                   fStepExiting(kFALSE),
                   fNextPoint(),
                   fSafetyOrig(),
-                  fLastSafety(0)
+                  fLastSafety(0),
+                  fPushed(kFALSE),
+                  fNzeroSteps(0)
 {
 /// Default ctor.
    fSafetyOrig.set(kInfinity, kInfinity, kInfinity);
@@ -144,7 +152,33 @@ G4double TG4RootNavigator::ComputeStep(const G4ThreeVector &pGlobalPoint,
    }   
    G4double step = (gGeoManager->GetStep()+tol)*cm;
 //   if (step >= pCurrentProposedStepLength) step = kInfinity;
-   if (step < 1.e3*tol*cm) step = 0.;
+   if (step < 1.e3*tol*cm) {
+      step = 0.;
+      fNzeroSteps++;
+      if (fNzeroSteps>=gMaxZeroSteps) {
+         fPushed = kTRUE;
+         step += 0.9*kCarTolerance;
+         G4cerr << "WARNING - TG4RootNavigator::ComputeStep()" << G4endl
+                << "          Track stuck, not moving for " 
+                << fNzeroSteps << " steps" << G4endl
+                << "          in volume -" << gGeoManager->GetCurrentNode()->GetName()
+                << "- at point " << pGlobalPoint << G4endl
+                << "          direction: " << pDirection << "." << G4endl
+                << "          Potential geometry or navigation problem !"
+                << G4endl
+                << "          Trying pushing it of " << step << " mm ..."
+                << G4endl;         
+      } 
+      // Track needs to be aborted
+      if (fNzeroSteps>=gMaxZeroStepsAbort) {
+         G4Exception("TG4RootNavigator::ComputeStep()",
+                     "StuckTrack", EventMustBeAborted, 
+                     "Stuck Track: potential geometry or navigation problem.");
+      }   
+   } else {
+      fNzeroSteps = 0;
+      fPushed = kFALSE;
+   }   
    fStepEntering = fGeometry->IsStepEntering();
    fStepExiting  = fGeometry->IsStepExiting();
    if (fStepEntering || fStepExiting) {
@@ -158,6 +192,7 @@ G4double TG4RootNavigator::ComputeStep(const G4ThreeVector &pGlobalPoint,
    G4cout << "ComputeStep: point=" << pGlobalPoint << " dir=" << pDirection << G4endl;
    G4cout << "             pstep="<<pCurrentProposedStepLength << " snext=" << step << G4endl;
    G4cout << "             safe ="<<pNewSafety<< "  frombdr="<<frombdr<< "  oldpoint="<<oldpoint<<" entering=" <<fStepEntering << " exiting="<<fStepExiting << G4endl;
+   if (fPushed) G4cout << "Particle didn't move for " << fNzeroSteps << " and was pushed with: " << TGeoShape::Tolerance() << G4endl;
    if (fStepEntering || fStepExiting && fGeometry->GetNextNode()) {
       G4cout << "             current: " << fGeometry->GetCurrentNode()->GetName() <<
                 "  next: " << fGeometry->GetNextNode()->GetName() << G4endl;
