@@ -153,7 +153,7 @@ void TG4TrackManager::SetParentToTrackInformation(const G4Track* track)
   }    
 #endif  
 
-  G4TrackVector* secondaryTracks 
+  const G4TrackVector* secondaryTracks 
     = fG4TrackingManager->GetSteppingManager()->GetSecondary();
 
   if ( ! secondaryTracks ) return;
@@ -341,7 +341,7 @@ void TG4TrackManager::PrimaryToStack(const G4PrimaryVertex* vertex,
 
 //_____________________________________________________________________________
 void TG4TrackManager::SaveSecondaries(const G4Track* track,
-                                      G4TrackVector* secondaries)
+                                      const G4TrackVector* secondaries)
 {
 /// Save the secondary particles on VMC stack
 

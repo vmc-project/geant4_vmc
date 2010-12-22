@@ -58,7 +58,7 @@ class TG4TrackManager : public TG4Verbose
     void  PrimaryToStack(const G4PrimaryVertex* vertex,
                        const G4PrimaryParticle* particle);
 
-    void  SaveSecondaries(const G4Track* track, G4TrackVector* secondaries);
+    void  SaveSecondaries(const G4Track* track, const G4TrackVector* secondaries);
 
     // set methods
     void SetTrackSaveControl(TG4TrackSaveControl control);

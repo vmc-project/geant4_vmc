@@ -17,7 +17,6 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "Ex03RegionConstruction.h"
-#include "ExN03DetectorConstruction.hh"
 
 #include "TG4GeometryServices.h"
 

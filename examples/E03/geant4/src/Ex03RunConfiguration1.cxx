@@ -17,7 +17,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "Ex03RunConfiguration1.h"
-#include "ExN03DetectorConstruction.hh"
+#include "DetectorConstruction.hh"
 
 //_____________________________________________________________________________
 Ex03RunConfiguration1::Ex03RunConfiguration1(const TString& physicsList,
@@ -50,5 +50,5 @@ G4VUserDetectorConstruction*  Ex03RunConfiguration1::CreateDetectorConstruction(
 /// The Geant4 VMC detector construction is overridden with the detector
 /// construction class from the Geant4 novice example N03 library.
 
-  return new ExN03DetectorConstruction();
+  return new DetectorConstruction();
 }   

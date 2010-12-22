@@ -1305,7 +1305,7 @@ void TG4StepManager::GetSecondary(Int_t index, Int_t& particleId,
 #endif
 
   G4int nofSecondaries = NSecondaries();
-  G4TrackVector* secondaryTracks = fSteppingManager->GetSecondary();
+  const G4TrackVector* secondaryTracks = fSteppingManager->GetSecondary();
 
 #ifdef MCDEBUG
   if (!secondaryTracks) {
@@ -1358,7 +1358,7 @@ TMCProcess TG4StepManager::ProdProcess(Int_t isec) const
   CheckStep("ProdProcess");
 #endif
 
-  G4TrackVector* secondaryTracks = fSteppingManager->GetSecondary();
+  const G4TrackVector* secondaryTracks = fSteppingManager->GetSecondary();
  
 #ifdef MCDEBUG
   // should never happen
