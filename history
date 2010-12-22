@@ -11,6 +11,12 @@ $Id$
      
 Tags (history):
 ===============
+  22/12/2010
+  v2-11:
+    Migration to Geant4 9.4 release.
+    
+    Tested with Geant4 9.4, CLHEP 2.1.0.1, Root 5.28/00, VGM 3.04
+
   02/10/2010
   v2-10:
     Geant4 VMC:
