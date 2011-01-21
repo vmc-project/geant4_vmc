@@ -86,7 +86,8 @@ TG4Limits::TG4Limits()
     fIsCut(false),
     fIsControl(false) ,
     fCutVector(),
-    fControlVector()
+    fControlVector(),
+    fDefaultMaxStep(DBL_MAX)
 {
 /// Default constructor
 
@@ -100,7 +101,8 @@ TG4Limits::TG4Limits(const TG4Limits& right)
     fIsCut(right.fIsCut),
     fIsControl(right.fIsControl) ,
     fCutVector(right.fCutVector),
-    fControlVector(right.fControlVector)
+    fControlVector(right.fControlVector),
+    fDefaultMaxStep(right.fDefaultMaxStep)
 {
 /// Copy constructor
 

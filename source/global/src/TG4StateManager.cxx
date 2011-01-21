@@ -36,7 +36,6 @@ G4String TG4StateManager::GetStateName(TG4ApplicationState state)
     case kNotInApplication:   
     default:                    return "NotInApplication";
   }
-  return "Undefined";
 }  
 
 

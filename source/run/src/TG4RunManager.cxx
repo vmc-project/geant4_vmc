@@ -277,8 +277,7 @@ void TG4RunManager::CreateGeantUI()
 #ifdef G4UI_USE
   if ( ! fGeantUISession )
   {
-    G4UIExecutive* uiExecutive = new G4UIExecutive(fARGC, fARGV);
-    fGeantUISession = uiExecutive->GetSession();
+    fGeantUISession = new G4UIExecutive(fARGC, fARGV);
   }
 #endif  
 }
@@ -413,7 +412,7 @@ void TG4RunManager::StartGeantUI()
   if ( fGeantUISession ) {  
     // interactive session
     G4cout << "Welcome back in Geant4" << G4endl;
-    fGeantUISession->SessionStart();
+    fGeantUISession->GetSession()->SessionStart();
     G4cout << "Welcome back in Root" << G4endl;  
   }
   else {

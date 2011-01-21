@@ -39,6 +39,7 @@ using namespace std;
 Ex02TrackerSD::Ex02TrackerSD(const char* name)
   : TNamed(name, ""),
     fTrackerCollection(0),
+    fSensitiveVolumeID(-1),
     fVerboseLevel(1)
 {
 /// Standard constructor
@@ -51,6 +52,7 @@ Ex02TrackerSD::Ex02TrackerSD(const char* name)
 Ex02TrackerSD::Ex02TrackerSD()
   : TNamed(),
     fTrackerCollection(0),
+    fSensitiveVolumeID(-1),
     fVerboseLevel(1)
 {
 /// Default constructor

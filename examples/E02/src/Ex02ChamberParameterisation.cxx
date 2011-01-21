@@ -35,7 +35,13 @@ Ex02ChamberParameterisation::Ex02ChamberParameterisation(
                                  Double_t widthChamber, 
                                  Double_t lengthInitial, 
                                  Double_t lengthFinal )
-  : TObject()				 
+  : TObject(),				 
+    fNoChambers(noChambers), 
+    fStartZ(startZ), 
+    fHalfWidth(widthChamber*0.5),
+    fSpacing(spacingZ),
+    fHalfLengthFirst(lengthInitial*0.5),
+    fHalfLengthIncr(0) 
 {
 /// Standard constructor
 /// \param noChambers    Number of chambers
@@ -45,12 +51,6 @@ Ex02ChamberParameterisation::Ex02ChamberParameterisation(
 /// \param lengthInitial The first chamber length 
 /// \param lengthFinal   The last chamber length 
 
-   fNoChambers =  noChambers; 
-   fStartZ     =  startZ; 
-   fHalfWidth  =  widthChamber*0.5;
-   fSpacing    =  spacingZ;
-   fHalfLengthFirst = 0.5 * lengthInitial; 
-   // fHalfLengthLast = lengthFinal;
    if( noChambers > 0 ){
       fHalfLengthIncr =  0.5 * (lengthFinal-lengthInitial)/noChambers;
       if (spacingZ < widthChamber) {

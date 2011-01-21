@@ -112,10 +112,10 @@ void  TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
   
   SetCerenkov(itmed, npckov, ppckovDbl, abscoDbl, efficDbl, rindexDbl);
 
-  delete ppckovDbl;
-  delete abscoDbl;
-  delete efficDbl;
-  delete rindexDbl;         
+  delete [] ppckovDbl;
+  delete [] abscoDbl;
+  delete [] efficDbl;
+  delete [] rindexDbl;         
 }                         
 
 //_____________________________________________________________________________
@@ -160,6 +160,8 @@ void  TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
     text += " not found." ;
     TG4Globals::Warning(
       "TG4OpGeometryManager", "SetCerenkov", text); 
+    delete [] ppckov2;           
+    delete [] absco2;           
     return;  
   }  
   G4Material* material = medium->GetMaterial();

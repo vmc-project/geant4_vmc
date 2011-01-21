@@ -31,13 +31,14 @@ ClassImp(Ex06DetectorConstruction)
 
 //_____________________________________________________________________________
 Ex06DetectorConstruction::Ex06DetectorConstruction()
-  : TObject()
+  : TObject(),
+    fExpHallSize(1000),  // 10*m
+    fTankSize(500),      // 5*m
+    fBubbleSize(50),     // 0.5*m
+    fImedAir(-1),
+    fImedWater(-1)
 {
 /// Default constuctor
-
-    fExpHallSize = 1000;  // 10*m
-    fTankSize    = 500;   // 5*m
-    fBubbleSize  = 50;    // 0.5*m
 }
 
 //_____________________________________________________________________________

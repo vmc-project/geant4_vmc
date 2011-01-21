@@ -109,7 +109,7 @@ G4VParticleChange* TG4StackPopper::AlongStepDoIt(const G4Track& track,
       = particlesManager->GetParticlePosition(particle);
     G4double time = particle->T()*TG4G3Units::Time(); 
 
-    G4Track* track  
+    G4Track* secondaryTrack  
       = new G4Track(dynamicParticle, time, position);
 
     // set track information here to avoid saving track in the stack
@@ -120,10 +120,10 @@ G4VParticleChange* TG4StackPopper::AlongStepDoIt(const G4Track& track,
         // G4Track object  
     trackInformation->SetIsUserTrack(true);
     trackInformation->SetPDGEncoding(particle->GetPdgCode());
-    track->SetUserInformation(trackInformation);
+    secondaryTrack->SetUserInformation(trackInformation);
       
     // Add track as a secondary
-    aParticleChange.AddSecondary(track);
+    aParticleChange.AddSecondary(secondaryTrack);
   }
   
   // Set back current track number in the track
