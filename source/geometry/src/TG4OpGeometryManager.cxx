@@ -24,10 +24,9 @@
 #include "TG4G3ControlVector.h"
 #include "TG4Globals.h"
 
-#include <G3MatTable.hh>
-
 #include <G4LogicalVolume.hh>
 #include <G4Material.hh>
+#include <G4MaterialTable.hh>
 #include <G4MaterialPropertiesTable.hh>
 #include <G4LogicalBorderSurface.hh>
 #include <G4LogicalSkinSurface.hh>
@@ -440,18 +439,20 @@ void TG4OpGeometryManager::SetMaterialProperty(
 //_____________________________________________________________________________
 void TG4OpGeometryManager::Gfmate(Int_t imat, char *name, Float_t &a, 
           Float_t &z, Float_t &dens, Float_t &radl, Float_t &absl,
-          Float_t* /*ubuf*/, Int_t& nbuf) 
+          Float_t* ubuf, Int_t& nbuf) 
 { 
 /// Return parameters for material specified by material number imat 
 
   G4double da, dz, ddens, dradl, dabsl;  
-  Gfmate(imat, name, da, dz, ddens, dradl, dabsl, 0, nbuf);
+  Double_t dubuf[100];
+  Gfmate(imat, name, da, dz, ddens, dradl, dabsl, dubuf, nbuf);
   
   a = da;
   z = dz;
   dens = ddens;
   radl = dradl;
   absl = dabsl; 
+  for (Int_t i=0; i<nbuf; i++) ubuf[i] = dubuf[i];
 } 
 
  
@@ -460,17 +461,13 @@ void TG4OpGeometryManager::Gfmate(Int_t imat, char *name, Double_t &a,
           Double_t &z, Double_t &dens, Double_t &radl, Double_t &absl,
           Double_t* ubuf, Int_t& nbuf) 
 { 
-///  Return parameters for material specified by material number imat 
+/// Return parameters for material specified by material number imat 
 
-
-  // TO DO: change to use G4Material instead
-  G4Material* material = G3Mat.get(imat);
+  G4Material* material = G4Material::GetMaterialTable()->at(imat-1);
   
   if (material) {
-    // to do: change this correctly 
-    // !! unsafe conversion
     const char* chName = material->GetName();
-    name = (char*)chName;
+    strcpy(name, chName);
     a = fGeometryServices->GetEffA(material);
     z = fGeometryServices->GetEffZ(material);
     
@@ -488,8 +485,8 @@ void TG4OpGeometryManager::Gfmate(Int_t imat, char *name, Double_t &a,
   else {
     TString text = "Material ";
     text += imat;
-    text += "has not been found.";
-    TG4Globals::Warning("TG4OpGeometryManager", "Gfmate", text);
+    text += " has not been found.";
+    TG4Globals::Exception("TG4OpGeometryManager", "Gfmate", text);
   }
 } 
 

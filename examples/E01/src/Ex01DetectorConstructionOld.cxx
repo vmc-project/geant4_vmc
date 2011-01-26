@@ -74,6 +74,10 @@ void Ex01DetectorConstructionOld::ConstructMaterials()
   absl = 0.1;
   Int_t imatAl;
   gMC->Material(imatAl, "Aluminium", a, z, density, radl, absl, ubuf, 0);
+  // user defined parameters (only for test)
+  //Float_t ubuf2[3];
+  //ubuf2[0]=5.5; ubuf2[1]=6.5; ubuf2[2] = 7.5; 
+  //gMC->Material(imatAl, "Aluminium", a, z, density, radl, absl, ubuf2, 3);
   
   a = 207.19;
   z = 82.;

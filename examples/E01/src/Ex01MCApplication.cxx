@@ -570,5 +570,42 @@ void Ex01MCApplication::TestVMCGeometryGetters()
     cout << " not found" << endl;
   else 
     cout << " found" << endl;
+
+  // Gfmate -  float
+  char name2[20]; 
+  Float_t a2, z2, dens2, radl2, absl2;
+  Int_t nbuf2;
+  Float_t ubuf2[10];
+  gMC->Gfmate(2, name2, a2, z2, dens2, radl2, absl2, ubuf2, nbuf2);
+
+  cout << "Gfmate(float): imat = 2:" << endl;
+  cout << "  name = " << name2 << " a = " << a2 << " z = " << z2 
+       << " dens = " << dens2 << " radl = " << radl2 
+       << " absl = " << absl2 << endl;
+
+  cout << "  ubuf = ";
+  if ( nbuf2 == 0 ) 
+    cout << "not defined";
+  else 
+    for ( Int_t j=0; j<nbuf2; j++ ) cout << ubuf2[j] << " ";
+  cout << endl;   
+
+  // Gfmate -  double
+  char name3[20]; 
+  Double_t a3, z3, dens3, radl3, absl3;
+  Int_t nbuf3;
+  Double_t ubuf3[10];
+  gMC->Gfmate(1, name3, a3, z3, dens3, radl3, absl3, ubuf3, nbuf3);
+  cout << "Gfmate(double): imat = 1:" << endl;
+  cout << "  name = " << name3 << " a = " << a3 << " z = " << z3 
+       << " dens = " << dens3 << " radl = " << radl3 
+       << " absl = " << absl3 << endl;
+
+  cout << "  ubuf = ";
+  if ( nbuf3 == 0 ) 
+    cout << "not defined";
+  else 
+    for ( Int_t j=0; j<nbuf3; j++ ) cout << ubuf3[j] << " ";
+  cout << endl;   
  }  
 
