@@ -61,8 +61,6 @@ endif
 
 INCLUDES := -Iinclude -I$(G4INCLUDE) \
 	   -I$(CLHEP_BASE_DIR)/include \
-	   -I$(G4INSTALL)/physics_lists/hadronic/LHEP_BERT/include \
-	   -I$(G4INSTALL)/physics_lists/hadronic/Packaging/include \
 	   -I$(G4INSTALL)/examples/novice/N03/include \
 	   -I$(TOPDIR)/include/geant4vmc \
 	   -I$(TOPDIR)/include

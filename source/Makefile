@@ -92,8 +92,7 @@ INCLUDES := $(patsubst %,-I%/include,$(GDIRS)) \
            -I$(TOPDIR)/include \
            -I$(TOPDIR)/include/g4root \
 	   -I$(G4INCLUDE) \
-	   -I$(CLHEP_BASE_DIR)/include \
-	   -I$(G4INSTALL)/source/interfaces/common/include
+	   -I$(CLHEP_BASE_DIR)/include
 
 ifneq ($(USE_VGM),)
 INCLUDES  += -I$(VGM_INSTALL)/packages/VGM/include \
