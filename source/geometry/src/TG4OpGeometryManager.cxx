@@ -459,7 +459,7 @@ void TG4OpGeometryManager::Gfmate(Int_t imat, char *name, Float_t &a,
 //_____________________________________________________________________________
 void TG4OpGeometryManager::Gfmate(Int_t imat, char *name, Double_t &a, 
           Double_t &z, Double_t &dens, Double_t &radl, Double_t &absl,
-          Double_t* ubuf, Int_t& nbuf) 
+          Double_t* /*ubuf*/, Int_t& nbuf) 
 { 
 /// Return parameters for material specified by material number imat 
 
@@ -479,7 +479,6 @@ void TG4OpGeometryManager::Gfmate(Int_t imat, char *name, Double_t &a,
 
     // the following parameters are not defined in Geant4
     absl = 0.; 
-    ubuf = 0;
     nbuf = 0;
   }
   else {

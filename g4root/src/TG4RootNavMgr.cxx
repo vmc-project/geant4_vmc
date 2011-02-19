@@ -135,12 +135,11 @@ void TG4RootNavMgr::LocateGlobalPointAndSetup(Double_t *pt, Double_t *dir)
 {
 /// Test the corresponding navigation method.
    G4ThreeVector point(pt[0], pt[1], pt[2]);
-   G4VPhysicalVolume *pVol = 0;
    if (dir) {
       G4ThreeVector direction(dir[0], dir[1], dir[2]);
-      pVol = fNavigator->LocateGlobalPointAndSetup(point, &direction);
+      fNavigator->LocateGlobalPointAndSetup(point, &direction);
    } else {
-      pVol = fNavigator->LocateGlobalPointAndSetup(point);
+      fNavigator->LocateGlobalPointAndSetup(point);
    }
    fNavigator->PrintState();
 }   

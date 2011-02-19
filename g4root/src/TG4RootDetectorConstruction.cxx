@@ -329,7 +329,10 @@ G4Material *TG4RootDetectorConstruction::CreateG4Material(const TGeoMaterial *ma
 //         name = elem->GetTitle();
 //         G4Element *pElement = G4Element::GetElement(name);
          TGeoElement *elem = table->GetElement(Int_t(mixt->GetZmixt()[i]));
-         if (!elem) G4cout << "Woops: no element corresponding to Z=" << Int_t(mixt->GetZmixt()[i]) << G4endl;
+         if (!elem) {
+            G4cerr << "Woops: no element corresponding to Z=" << Int_t(mixt->GetZmixt()[i]) << G4endl;
+            G4Exception("Aborting...");
+         }   
          elname = elem->GetTitle();
          symbol = elem->GetName();
          G4Element *pElement = new G4Element(elname, symbol, G4double(mixt->GetZmixt()[i]), G4double(mixt->GetAmixt()[i])*(g/mole));
