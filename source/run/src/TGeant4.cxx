@@ -717,6 +717,18 @@ Bool_t TGeant4::GetShape(const TString& volumePath,
   ->GetShape(volumePath, shapeType, par);
 }  
 
+//______________________________________________________________________
+Bool_t TGeant4::GetMaterial(Int_t imat, TString& name,
+                     Double_t& a, Double_t& z, Double_t& density,
+                     Double_t& radl, Double_t& inter, TArrayD& par)
+{
+/// Fill the material parameters for the material specified by
+/// material ID; return false if the material is not found. 
+
+  return fGeometryManager->GetOpManager()
+    ->GetMaterial(imat, name, a, z, density, radl, inter, par);
+}    
+
 //_____________________________________________________________________________
 Bool_t TGeant4::GetMaterial(const TString& volumeName,
                           TString& name, Int_t& imat,
@@ -1106,7 +1118,7 @@ void  TGeant4::Gdraw(const char* name, Double_t theta, Double_t phi,
 
 #else
 //_____________________________________________________________________________
-void TGeant4::DrawOneSpec(const char* name) 
+void TGeant4::DrawOneSpec(const char* /*name*/) 
 {
 /// Function not enabled in no visualization mode
 
@@ -1115,7 +1127,7 @@ void TGeant4::DrawOneSpec(const char* name)
 } 
 
 //_____________________________________________________________________________
-void TGeant4::Gsatt(const char* name, const char* att, Int_t val) 
+void TGeant4::Gsatt(const char* /*name*/, const char* /*att*/, Int_t /*val*/) 
 {
 /// Function not enabled in no visualization mode
 
@@ -1124,9 +1136,9 @@ void TGeant4::Gsatt(const char* name, const char* att, Int_t val)
 } 
 
 //_____________________________________________________________________________
-void TGeant4::Gdraw(const char* p1, Double_t theta, Double_t phi,
-                        Double_t psi, Double_t u0, Double_t v0,
-                        Double_t ul, Double_t vl) 
+void TGeant4::Gdraw(const char* /*p1*/, Double_t /*theta*/, Double_t /*phi*/,
+                        Double_t /*psi*/, Double_t /*u0*/, Double_t /*v0*/,
+                        Double_t /*ul*/, Double_t /*vl*/) 
 {
 /// Function not enabled in no visualization mode
 

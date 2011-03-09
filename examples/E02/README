@@ -37,8 +37,8 @@ Macros:
   For running example with G3:
   
   run_g3.C        - macro for running example 
-  g3Config.C      - configuration macro for G3 with native geometry (default)
-  g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry
+  g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry (default)
+  g3Config.C      - configuration macro for G3 with native geometry
 
 
   For running example with G4:

@@ -16,13 +16,6 @@ void set_vis()
 {
 /// Macro for setting visualization for Example03 
 
-  if ( TString(gMC->GetName()) == "TGeant3" ) {
-    // Set drawing options
-    gMC->Gsatt("*", "seen", 16);
-    gMC->Gsatt("ABSO", "seen", 5);
-    gMC->Gsatt("GAPX", "seen", 6);
-  }    
-
   if ( TString(gMC->GetName()) == "TGeant3TGeo" ) {
     // Set drawing options
     TGeoVolume* vol;

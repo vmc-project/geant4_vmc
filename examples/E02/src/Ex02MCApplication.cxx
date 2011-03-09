@@ -169,12 +169,6 @@ void Ex02MCApplication::InitGeometry()
 /// Initialize geometry
   
   fTrackerSD.Initialize();
-
-  if (TString(gMC->GetName()) == "TGeant3") {
-    // Set drawing options
-    gMC->Gsatt("*", "seen", 16);
-    gMC->Gsatt("CHMB", "seen", 5);
-  }  
 }
 
 //_____________________________________________________________________________
@@ -270,13 +264,6 @@ void Ex02MCApplication::FinishEvent()
 /// User actions after finishing of an event
 /// Nothing to be done this example
 
-  // Geant3
-  // (visualization functions interfaced via VMC)
-  if (TString(gMC->GetName()) == "TGeant3") {
-    // add scale (1.4)
-    gMC->Gdraw("WRLD", 90., 180.);
-  }  
- 
   // Geant4 own visualization is activated via G4 macro (g4config.in)
  
   // TGeo visualization

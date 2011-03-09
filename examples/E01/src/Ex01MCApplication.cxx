@@ -468,18 +468,44 @@ void Ex01MCApplication::TestVMCGeometryGetters()
   }
   cout << endl;
 
-  // Get material
+
+  // Get material by material ID
   //
-  TString volName = "LAYB";
   TString matName;
-  Int_t imat;
+  Int_t imat = 2;
   Double_t a, z, density, radl, inter;
   TArrayD mpar;
+  result = gMC->GetMaterial(imat, matName, a, z, density, radl, inter, mpar);
+  if (result) {
+    cout << "Material with ID " << imat << ": " << endl;
+    cout << matName.Data() 
+         << "  Aeff = " << a 
+	 << "  Zeff = " << z 
+	 << "  density = " << density 
+	 << "  radl = " << radl
+	 << "  inter = " << inter 
+	 << endl;
+    if ( mpar.GetSize() > 0 ) {
+      cout  << " User defined parameters: ";
+      for (Int_t ipar = 0; ipar < par.GetSize(); ipar++)
+        cout << mpar.At(ipar) << ",  ";
+      cout << endl; 
+    }   
+  }
+  else {
+    cerr << "Material with ID " << imat << " not found" << endl;
+  }
+  cout << endl;
+
+  // Get material by volume name
+  //
+  TString volName = "LAYB";
+  mpar.Set(0);
   result = gMC->GetMaterial(volName, matName, imat, a, z, density,
 		            radl, inter, mpar);
   if (result) {
     cout << "Material for " << volName.Data() << " volume: " << endl;
-    cout << matName.Data() << "  " << imat 
+    cout << matName.Data() << "  " << imat
          << "  Aeff = " << a 
 	 << "  Zeff = " << z 
 	 << "  density = " << density 
@@ -572,7 +598,8 @@ void Ex01MCApplication::TestVMCGeometryGetters()
     cout << " found" << endl;
 
   // Gfmate -  float
-  char name2[20]; 
+  // Now deprecated in VMC
+  char name2[21]; 
   Float_t a2, z2, dens2, radl2, absl2;
   Int_t nbuf2;
   Float_t ubuf2[10];
@@ -591,7 +618,8 @@ void Ex01MCApplication::TestVMCGeometryGetters()
   cout << endl;   
 
   // Gfmate -  double
-  char name3[20]; 
+  // Now deprecated in VMC
+  char name3[21]; 
   Double_t a3, z3, dens3, radl3, absl3;
   Int_t nbuf3;
   Double_t ubuf3[10];

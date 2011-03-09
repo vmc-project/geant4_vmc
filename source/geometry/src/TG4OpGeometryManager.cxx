@@ -463,6 +463,9 @@ void TG4OpGeometryManager::Gfmate(Int_t imat, char *name, Double_t &a,
 { 
 /// Return parameters for material specified by material number imat 
 
+  TG4Globals::Warning("TG4OpGeometryManager", "Gfmate",
+    "Deprecated function - now replaced with GetMaterial(Int_t imat, ...)");
+
   G4Material* material = G4Material::GetMaterialTable()->at(imat-1);
   
   if (material) {
@@ -489,3 +492,36 @@ void TG4OpGeometryManager::Gfmate(Int_t imat, char *name, Double_t &a,
   }
 } 
 
+//_____________________________________________________________________________
+Bool_t TG4OpGeometryManager::GetMaterial(Int_t imat, TString& name,
+            Double_t& a, Double_t& z, Double_t& density,
+            Double_t& radl, Double_t& inter, TArrayD& par)
+{            
+/// Return parameters for material specified by material number imat
+/// (new function) 
+    
+  G4Material* material = G4Material::GetMaterialTable()->at(imat-1);
+  
+  if ( ! material ) {
+    TString text = "Material ";
+    text += imat;
+    text += " has not been found.";
+    TG4Globals::Warning(
+      "TG4OpGeometryManager", "GetMaterial", text);
+    return false;
+  }  
+
+  name = material->GetName();
+  a = fGeometryServices->GetEffA(material);
+  z = fGeometryServices->GetEffZ(material);
+  
+  density = material->GetDensity();
+  density /= TG4G3Units::MassDensity();
+
+  radl = material->GetRadlen();
+  radl /= TG4G3Units::Length();
+
+  inter = 0.; // TO DO: check how to get this
+  par.Set(0);
+  return true;
+}

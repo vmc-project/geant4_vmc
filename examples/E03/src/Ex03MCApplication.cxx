@@ -397,12 +397,6 @@ void Ex03MCApplication::FinishEvent()
 
   fVerbose.FinishEvent();
 
-  // Geant3
-  if (TString(gMC->GetName()) == "TGeant3") {
-    // add scale (1.4)
-    gMC->Gdraw("WRLD", 30., 30., 0, 10., 10., .75, .75);
-  }  
-
   // Geant3 + TGeo
   // (use TGeo functions for visualization)
   if ( TString(gMC->GetName()) == "TGeant3TGeo") {
