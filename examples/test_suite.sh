@@ -150,6 +150,8 @@ do
       cat tmpfile >> $OUT/test_g4_tgeo_nat_pl.out
       root.exe -q "test_E03_4.C(\"g4Config2.C\", kFALSE)" >& tmpfile    
       cat tmpfile >> $OUT/test_g4_tgeo_nat_pl.out
+      root.exe -q "test_E03_5.C(\"g4Config2.C\", kFALSE)" >& tmpfile    
+      cat tmpfile >> $OUT/test_g4_tgeo_nat_pl.out
       rm tmpfile
     fi  
 

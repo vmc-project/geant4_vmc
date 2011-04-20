@@ -79,21 +79,12 @@ G4int TG4ParticlesManager::GetPDGIonEncoding(G4int Z, G4int A, G4int iso) const
 }  
 */  
 //_____________________________________________________________________________
-void TG4ParticlesManager::AddIonToPdgDatabase(const G4String& name,
+void TG4ParticlesManager::AddParticleToPdgDatabase(const G4String& name,
                               G4ParticleDefinition* particleDefinition)
 {
-/// Add the ion in TDatabasePDG and the maps
-/// and return its generated PDG code.
+/// Add the particle definition in TDatabasePDG 
 
-  // Check if ion
-  if ( particleDefinition->GetParticleType() != "nucleus" ) {
-    
-      TG4Globals::Exception(
-        "TG4ParticlesManager", "AddIonToPdgDatabase", 
-        "Added particle is not ion."); 
-  }    
-
-  // Return if Ion was already added
+  // Return if particle was already added
   G4int pdgEncoding = particleDefinition->GetPDGEncoding();
   TParticlePDG* particlePDG 
     = TDatabasePDG::Instance()->GetParticle(pdgEncoding);
@@ -103,22 +94,26 @@ void TG4ParticlesManager::AddIonToPdgDatabase(const G4String& name,
   G4String g4Name = particleDefinition->GetParticleName();
   G4int pdgQ = G4int(particleDefinition->GetPDGCharge()/eplus);
       // !! here we do not save dynamic charge but the static one
+  G4String g4Type = particleDefinition->GetParticleType();
+  G4String rootType = g4Type;
+  if ( g4Type == "nucleus" ||  g4Type == "anti_nucleus") rootType="Ion";
 
   if (VerboseLevel() > 1) {
-     G4cout << "Adding ion to TDatabasePDG " << G4endl;
+     G4cout << "Adding particle to TDatabasePDG " << G4endl;
      G4cout << "   name:   " << g4Name << G4endl;
      G4cout << "   g4name: " << name << G4endl;
      G4cout << "   PDG:    " << pdgEncoding << G4endl;
      G4cout << "   pdgQ:   " << pdgQ << G4endl;
+     G4cout << "   type:   " << rootType << G4endl;
   }               
 
-  // Add ion to TDatabasePDG
+  // Add particle to TDatabasePDG
   TDatabasePDG::Instance()
     ->AddParticle(name, g4Name, 
                   particleDefinition->GetPDGMass()/TG4G3Units::Energy(), 
                   particleDefinition->GetPDGStable(), 
                   particleDefinition->GetPDGWidth()/TG4G3Units::Energy(), 
-                  pdgQ*3, "Ion", pdgEncoding);                     
+                  pdgQ*3, rootType, pdgEncoding);                     
 }
 
 
@@ -167,29 +162,56 @@ void TG4ParticlesManager::DefineParticles()
   G4ParticleDefinition* particle;
 
   particle = particleTable->FindParticle("deuteron");
-  if ( particle && ! particleTable->GetParticle(particle->GetPDGEncoding()) ) {
+  if ( particle && ! pdgDB->GetParticle(particle->GetPDGEncoding()) ) {
     pdgDB->AddParticle("Deuteron","Deuteron",2*kGeV+8.071e-3, kTRUE,
 		       0, 3, "Ion", particle->GetPDGEncoding());
   }                       
                        
   particle = particleTable->FindParticle("triton");
-  if ( particle && ! particleTable->GetParticle(particle->GetPDGEncoding()) ) {
+  if ( particle && ! pdgDB->GetParticle(particle->GetPDGEncoding()) ) {
     pdgDB->AddParticle("Triton","Triton",3*kGeV+14.931e-3,kFALSE,
 		     kHshGeV/(12.33*kYearsToSec), 3, "Ion", 
                      particle->GetPDGEncoding());
   }                       
                        
   particle = particleTable->FindParticle("alpha");
-  if ( particle && ! particleTable->GetParticle(particle->GetPDGEncoding()) ) {
+  if ( particle && ! pdgDB->GetParticle(particle->GetPDGEncoding()) ) {
     pdgDB->AddParticle("Alpha","Alpha",4*kGeV+2.424e-3, kTRUE,
 		       kHshGeV/(12.33*kYearsToSec), 6, "Ion",
                        particle->GetPDGEncoding());
   }                       
 
   particle = particleTable->FindParticle("He3");
-  if ( particle && ! particleTable->GetParticle(particle->GetPDGEncoding()) ) {
+  if ( particle && ! pdgDB->GetParticle(particle->GetPDGEncoding()) ) {
     pdgDB->AddParticle("HE3", "HE3", 3*kGeV+14.931e-3, kFALSE,
 		       0, 6, "Ion", particle->GetPDGEncoding());
+  }                       
+
+  // Light anti-ions
+  // Get parameters from Geant4
+  
+  particle = particleTable->FindParticle("anti_deuteron");
+  if ( particle && ! pdgDB->GetParticle(particle->GetPDGEncoding()) ) {
+    pdgDB->AddParticle("AntiDeuteron", "AntiDeuteron", 1.875613, kTRUE,
+		       0, -3, "Ion", particle->GetPDGEncoding());
+  }                       
+                       
+  particle = particleTable->FindParticle("anti_triton");
+  if ( particle && ! pdgDB->GetParticle(particle->GetPDGEncoding()) ) {
+    pdgDB->AddParticle("AntiTriton", "AntiTriton", 2.808921, kTRUE,
+		       0, -3, "Ion", particle->GetPDGEncoding());
+  }                       
+                       
+  particle = particleTable->FindParticle("anti_alpha");
+  if ( particle && ! pdgDB->GetParticle(particle->GetPDGEncoding()) ) {
+    pdgDB->AddParticle("AntiAlpha","AntiAlpha", 3.727379, kTRUE,
+		       0, -6, "Ion", particle->GetPDGEncoding());
+  }                       
+
+  particle = particleTable->FindParticle("anti_He3");
+  if ( particle && ! pdgDB->GetParticle(particle->GetPDGEncoding()) ) {
+    pdgDB->AddParticle("AntiHE3", "AntiHE3", 2.808391, kTRUE,
+		       0, -6, "Ion", particle->GetPDGEncoding());
   }                       
 
   // geantino
@@ -283,7 +305,7 @@ void TG4ParticlesManager::AddIon(const G4String& name, G4int Z, G4int A, G4int Q
   G4ParticleDefinition* particleDefinition
     = G4ParticleTable::GetParticleTable()->GetIon(Z, A, excEnergy);
   
-  if ( !particleDefinition ) {
+  if ( ! particleDefinition ) {
     TString text = "Z, A, excEnergy [keV]: ";
     text += Z;
     text += " ";
@@ -298,7 +320,7 @@ void TG4ParticlesManager::AddIon(const G4String& name, G4int Z, G4int A, G4int Q
   }        
   
   // Add ion to TDatabasePDG
-  AddIonToPdgDatabase(name, particleDefinition);
+  AddParticleToPdgDatabase(name, particleDefinition);
   
   // Add ion to the map to be able to retrieve later its charge
   fUserIonMap[name] 
@@ -412,7 +434,7 @@ G4int TG4ParticlesManager::GetPDGEncoding(G4ParticleDefinition* particle)
   if ( pdgEncoding ) {
     // Add particle to TDatabasePDG
     if ( ! TDatabasePDG::Instance()->GetParticle(pdgEncoding) )
-       AddIonToPdgDatabase(particle->GetParticleName(), particle); 
+       AddParticleToPdgDatabase(particle->GetParticleName(), particle); 
     return pdgEncoding;
   }     
   

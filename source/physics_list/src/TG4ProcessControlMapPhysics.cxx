@@ -130,11 +130,15 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("AntiOmegaMinusInelastic", kHADR); 
   controlMap->Add("DeuteronInelastic", kHADR); 
   controlMap->Add("dInelastic", kHADR); 
+  controlMap->Add("AntiDeuteronInelastic", kHADR); 
   controlMap->Add("TritonInelastic", kHADR); 
   controlMap->Add("tInelastic", kHADR); 
+  controlMap->Add("AntiTritonInelastic", kHADR); 
   controlMap->Add("AlphaInelastic", kHADR); 
   controlMap->Add("alphaInelastic", kHADR); 
+  controlMap->Add("AntiAlphaInelasticProcess", kHADR); 
   controlMap->Add("He3Inelastic", kHADR); 
+  controlMap->Add("AntiHe3InelasticProcess", kHADR); 
   controlMap->Add("ionInelastic", kHADR); 
   controlMap->Add("PhotonInelastic", kHADR); 
   controlMap->Add("hInelastic", kHADR); 

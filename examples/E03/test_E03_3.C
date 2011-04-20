@@ -60,7 +60,7 @@ void test_E03_3(const TString& configMacro, Bool_t oldGeometry)
   Ex03MCApplication* appl
     =  new Ex03MCApplication("Example03", "The example03 MC application");
   appl->GetPrimaryGenerator()->SetNofPrimaries(2);
-  appl->GetPrimaryGenerator()->SetUserParticles(true);
+  appl->GetPrimaryGenerator()->SetPrimaryType(Ex03PrimaryGenerator::kUser);
   appl->SetPrintModulo(1);
   appl->SetVerboseLevel(3);
 

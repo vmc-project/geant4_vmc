@@ -131,11 +131,15 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("AntiOmegaMinusInelastic", kPHInhelastic); 
   mcMap->Add("DeuteronInelastic", kPHInhelastic); 
   mcMap->Add("dInelastic", kPHInhelastic); 
+  mcMap->Add("AntiDeuteronInelastic", kPHInhelastic); 
   mcMap->Add("TritonInelastic", kPHInhelastic); 
   mcMap->Add("tInelastic", kPHInhelastic); 
+  mcMap->Add("AntiTritonInelastic", kPHInhelastic); 
   mcMap->Add("AlphaInelastic", kPHInhelastic); 
   mcMap->Add("alphaInelastic", kPHInhelastic); 
+  mcMap->Add("AntiAlphaInelasticProcess", kPHInhelastic); 
   mcMap->Add("He3Inelastic", kPHInhelastic); 
+  mcMap->Add("AntiHe3InelasticProcess", kPHInhelastic); 
   mcMap->Add("ionInelastic", kPHInhelastic); 
   mcMap->Add("hInelastic", kPHInhelastic); 
   mcMap->Add("CHIPS_Inelastic", kPHInhelastic); 

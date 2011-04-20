@@ -37,6 +37,15 @@ class Ex03DetectorConstruction;
 class Ex03PrimaryGenerator : public TObject
 {
   public:
+    /// Predefined primary generators
+    enum Type { 
+      kDefault,    ///< default (e-)
+      kUser,       ///< user defined particle and ion
+      kUserDecay,  ///< particle with user defined decay (K0Short)
+      kAnti        ///< light anti-nuclei (with Geant4 only)
+    }; 
+
+  public:
     Ex03PrimaryGenerator(TVirtualMCStack* stack); 
     Ex03PrimaryGenerator();
     virtual ~Ex03PrimaryGenerator();
@@ -46,8 +55,7 @@ class Ex03PrimaryGenerator : public TObject
 
     // set methods
     void  SetIsRandom(Bool_t isRandomGenerator);
-    void  SetUserParticles(Bool_t userParticles);
-    void  SetUserDecay(Bool_t userDecay);
+    void  SetPrimaryType(Type primaryType);
     void  SetNofPrimaries(Int_t nofPrimaries);
 
     // get methods
@@ -58,12 +66,12 @@ class Ex03PrimaryGenerator : public TObject
     void GeneratePrimary1(const TVector3& origin);
     void GeneratePrimary2(const TVector3& origin);
     void GeneratePrimary3(const TVector3& origin);
- 
+    void GeneratePrimary4(const TVector3& origin);
+
     // data members
     TVirtualMCStack*  fStack;         ///< VMC stack
     Bool_t            fIsRandom;      ///< Switch to random generator
-    Bool_t            fUserParticles; ///< Switch to user particles
-    Bool_t            fUserDecay;     ///< Switch to particle with user decay
+    Type              fPrimaryType;   ///< Primary generator selection
     Int_t             fNofPrimaries;  ///< Number of primary particles
 
   ClassDef(Ex03PrimaryGenerator,1)  //Ex03PrimaryGenerator
@@ -76,6 +84,12 @@ class Ex03PrimaryGenerator : public TObject
 inline void  Ex03PrimaryGenerator::SetIsRandom(Bool_t isRandom)
 { fIsRandom = isRandom; }
 
+/// Set the primary particle type to be generated
+/// \param  primaryType The primary particle type \see Ex03Primary
+inline void  Ex03PrimaryGenerator::SetPrimaryType(
+                        Ex03PrimaryGenerator::Type primaryType)
+{ fPrimaryType = primaryType; }
+
 /// Set the number of particles to be generated
 /// \param nofPrimaries The number of particles to be generated
 inline void  Ex03PrimaryGenerator::SetNofPrimaries(Int_t nofPrimaries)
@@ -83,7 +97,7 @@ inline void  Ex03PrimaryGenerator::SetNofPrimaries(Int_t nofPrimaries)
 
 /// Return true if particle with user decay is activated
 inline Bool_t Ex03PrimaryGenerator::GetUserDecay() const
-{ return fUserDecay; }
+{ return fPrimaryType == Ex03PrimaryGenerator::kUserDecay; }
 
 #endif //EX03_PRIMARY_GENERATOR_H
 

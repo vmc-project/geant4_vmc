@@ -61,7 +61,7 @@ void test_E03_4(const TString& configMacro, Bool_t oldGeometry)
   Ex03MCApplication* appl
     =  new Ex03MCApplication("Example03", "The example03 MC application");
   appl->GetPrimaryGenerator()->SetNofPrimaries(5);
-  appl->GetPrimaryGenerator()->SetUserDecay(true);
+  appl->GetPrimaryGenerator()->SetPrimaryType(Ex03PrimaryGenerator::kUserDecay);
   appl->SetPrintModulo(1);
 
   // Set geometry defined via VMC

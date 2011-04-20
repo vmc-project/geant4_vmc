@@ -83,7 +83,7 @@ void TG4EventAction::DisplayEvent(const G4Event* event) const
       }
       if ( (fDrawFlag == "ALL") ||
           ((fDrawFlag == "CHARGED") && (trajectory->GetCharge() != 0.))){
-         trajectory->DrawTrajectory(50); 
+         trajectory->DrawTrajectory(); 
             // the argument number defines the size of the step points
             // use 2000 to make step points well visible
       }        

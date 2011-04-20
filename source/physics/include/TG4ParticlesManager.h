@@ -107,7 +107,7 @@ class TG4ParticlesManager : public TG4Verbose
 
     // methods
     // G4int GetPDGIonEncoding(G4int Z, G4int A, G4int iso) const;
-    void  AddIonToPdgDatabase(const G4String& name,
+    void  AddParticleToPdgDatabase(const G4String& name,
                               G4ParticleDefinition* particleDefinition);  
 
     // static data members

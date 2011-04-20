@@ -39,8 +39,7 @@ Ex03PrimaryGenerator::Ex03PrimaryGenerator(TVirtualMCStack* stack)
   : TObject(),
     fStack(stack),
     fIsRandom(false),
-    fUserParticles(false),
-    fUserDecay(false),
+    fPrimaryType(kDefault),
     fNofPrimaries(1)
     
 {
@@ -53,8 +52,7 @@ Ex03PrimaryGenerator::Ex03PrimaryGenerator()
   : TObject(),
     fStack(0),
     fIsRandom(false),
-    fUserParticles(false),
-    fUserDecay(false),
+    fPrimaryType(kDefault),
     fNofPrimaries(0)
 {    
 /// Default constructor
@@ -234,6 +232,95 @@ void Ex03PrimaryGenerator::GeneratePrimary3(const TVector3& origin)
                   kPPrimary, ntr, 1., 0);
 }
 
+//_____________________________________________________________________________
+void Ex03PrimaryGenerator::GeneratePrimary4(const TVector3& origin)
+{    
+/// Add light anti-ions:
+  
+ // Track ID (filled by stack)
+ Int_t ntr;
+ 
+ // Option: to be tracked
+ Int_t toBeDone = 1; 
+ 
+ // PDG
+ TParticlePDG* particle = TDatabasePDG::Instance()->GetParticle("AntiDeuteron");
+ Int_t pdg = particle->PdgCode();;  
+
+ // Polarization
+ Double_t polx = 0.; 
+ Double_t poly = 0.; 
+ Double_t polz = 0.; 
+
+ // Position
+ Double_t vx  = -0.5 * origin.X(); 
+ Double_t vy  = 0.; 
+ Double_t vz =  0.;
+ Double_t tof = 0.;
+
+ // Energy (in GeV)
+ Double_t kinEnergy = 5;  
+ Double_t mass = particle->Mass(); 
+ Double_t e  = mass + kinEnergy;
+ 
+ // Particle momentum
+ Double_t px, py, pz;
+ px = sqrt(e*e - mass*mass); 
+ py = 0.; 
+ pz = 0.; 
+ 
+ // Randomize position
+ if (fIsRandom) {
+   vy = origin.Y()*(gRandom->Rndm() - 0.5);
+   vz = origin.Z()*(gRandom->Rndm() - 0.5);
+ }  
+
+ // Add particle to stack 
+ fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
+                  kPPrimary, ntr, 1., 0);
+                  
+
+ // anti_triton
+ particle = TDatabasePDG::Instance()->GetParticle("AntiTriton");
+ pdg = particle->PdgCode();
+ mass = particle->Mass(); 
+ e  = mass + kinEnergy;
+
+ px = sqrt(e*e - mass*mass); 
+ py = 0.; 
+ pz = 0.; 
+
+ fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
+                  kPPrimary, ntr, 1., 0);
+   
+ // anti_alpha
+ particle = TDatabasePDG::Instance()->GetParticle("AntiAlpha");
+ pdg = particle->PdgCode();
+ mass = particle->Mass(); 
+ e  = mass + kinEnergy;
+
+ px = sqrt(e*e - mass*mass); 
+ py = 0.; 
+ pz = 0.; 
+
+ fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
+                  kPPrimary, ntr, 1., 0);
+                   
+ // anti_He3
+ particle = TDatabasePDG::Instance()->GetParticle("AntiHE3");
+ pdg = particle->PdgCode();
+ mass = particle->Mass(); 
+ e  = mass + kinEnergy;
+
+ px = sqrt(e*e - mass*mass); 
+ py = 0.; 
+ pz = 0.; 
+
+ fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
+                  kPPrimary, ntr, 1., 0);
+                   
+}
+
 
 //
 // public methods
@@ -244,38 +331,27 @@ void Ex03PrimaryGenerator::GeneratePrimaries(const TVector3& origin)
 {    
 /// Fill the user stack (derived from TVirtualMCStack) with primary particles.
 
-  if ( fUserParticles ) {
-    if ( fNofPrimaries < 2 ) fNofPrimaries = 2;
-    for (Int_t i=0; i<fNofPrimaries/2; i++) GeneratePrimary2(origin);
-    return;
+  switch ( fPrimaryType ) {
+
+    case kDefault:
+      for (Int_t i=0; i<fNofPrimaries; i++) GeneratePrimary1(origin);
+      return;
+
+    case kUser:
+      if ( fNofPrimaries < 2 ) fNofPrimaries = 2;
+      for (Int_t i=0; i<fNofPrimaries/2; i++) GeneratePrimary2(origin);
+      return;
+      
+    case kUserDecay:
+      for (Int_t i=0; i<fNofPrimaries; i++) GeneratePrimary3(origin);
+      return;
+      
+    case kAnti:
+      if ( fNofPrimaries < 4 ) fNofPrimaries = 4;
+      for (Int_t i=0; i<fNofPrimaries/4; i++) GeneratePrimary4(origin);
+      return;
+      
+    default:
+      return;  
   }
-  
-  if ( fUserDecay ) {
-    for (Int_t i=0; i<fNofPrimaries; i++) GeneratePrimary3(origin);
-    return;
-  }
-  
-  for (Int_t i=0; i<fNofPrimaries; i++) GeneratePrimary1(origin);
 }
-
-//_____________________________________________________________________________
-void  Ex03PrimaryGenerator::SetUserParticles(Bool_t userParticles)
-{ 
-/// Switch on/off the user particles
-/// \param userParticles  If true, the user defined particles are shooted
-
-  fUserParticles = userParticles; 
-  fUserDecay = ! userParticles;
-}
-
-//_____________________________________________________________________________
-void  Ex03PrimaryGenerator::SetUserDecay(Bool_t userDecay)
-{ 
-/// Switch on/off the particle with a user decay
-/// \param userDecay  If true, the particles with user defined decay are shooted
-
-  fUserDecay = userDecay; 
-  fUserParticles = ! userDecay; 
-  
-}
-
