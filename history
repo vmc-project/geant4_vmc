@@ -11,6 +11,15 @@ $Id$
      
 Tags (history):
 ===============
+  27/05/2011
+  v2-11a:
+     - Patch release, including fix in implementation of TVirtualMC::Gfmate()
+     and added missing processes (present in Geant4 9.4.p01 physics lists) 
+     in the maps.
+      
+     Tested with Geant4 9.4.p01, CLHEP 2.1.0.1, Root 5.28/00d, VGM 3.04
+   
+
   22/12/2010
   v2-11:
     Migration to Geant4 9.4 release.
