@@ -65,6 +65,7 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("muMsc", kMULS); 
   controlMap->Add("CoulombScat", kMULS);
   controlMap->Add("eCoulombScat", kMULS);
+  controlMap->Add("nuclearStopping", kMULS);
 
   controlMap->Add("eIoni", kLOSS); 
   controlMap->Add("muIoni", kLOSS); 
@@ -72,6 +73,7 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("ionIoni", kLOSS); 
 
   controlMap->Add("Decay", kDCAY); 
+  controlMap->Add("RadioactiveDecay", kDCAY); 
 
   controlMap->Add("compt", kCOMP); 
   controlMap->Add("phot", kPHOT); 
@@ -103,8 +105,10 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("hadElastic", kHADR); 
   controlMap->Add("HadronElastic", kHADR); 
   controlMap->Add("hElastic", kHADR); 
+  controlMap->Add("hElasticLHEP", kHADR); 
   controlMap->Add("CHIPSElasticScattering", kHADR); 
   
+  controlMap->Add("inelastic", kHADR); 
   controlMap->Add("PionMinusInelastic", kHADR); 
   controlMap->Add("PionPlusInelastic", kHADR); 
   controlMap->Add("KaonPlusInelastic", kHADR); 
@@ -140,6 +144,8 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("He3Inelastic", kHADR); 
   controlMap->Add("AntiHe3InelasticProcess", kHADR); 
   controlMap->Add("ionInelastic", kHADR); 
+  controlMap->Add("CHIPS_LowEnergyIonIonInelastic", kHADR); 
+  controlMap->Add("CHIPS_IonIonElasticScattering", kHADR); 
   controlMap->Add("PhotonInelastic", kHADR); 
   controlMap->Add("hInelastic", kHADR); 
   controlMap->Add("CHIPS_Inelastic", kHADR); 
@@ -156,9 +162,11 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("Scintillation", kNoG3Controls);
   controlMap->Add("OpAbsorption", kLABS);
   controlMap->Add("OpRayleigh", kRAYL);
+  controlMap->Add("Rayl", kRAYL);
   controlMap->Add("OpBoundary", kLABS);
 
   controlMap->Add("SynRad", kSYNC);
+  controlMap->Add("CHIPS_SynchrotronRadiation", kSYNC);
 }  
 
 //
@@ -195,6 +203,8 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
            processName != "ElectroNuclear" &&
            processName != "photoNuclear" &&
            processName != "Scintillation" && 
+           processName != "MinEkineCuts" && 
+           processName != "MaxTimeCuts" && 
            processName != "stackPopper" ) {
            
         G4String text = "Unknown process control for ";

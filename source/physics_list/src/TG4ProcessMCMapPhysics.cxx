@@ -63,9 +63,9 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("msc", kPMultipleScattering); 
   mcMap->Add("muMsc", kPMultipleScattering); 
   
-  mcMap->Add("CoulombScat", kPMultipleScattering); 
-  mcMap->Add("eCoulombScat", kPMultipleScattering); 
-         // Add kPCoulombScattering
+  mcMap->Add("CoulombScat", kPCoulombScattering); 
+  mcMap->Add("eCoulombScat", kPCoulombScattering); 
+  mcMap->Add("nuclearStopping", kPCoulombScattering); 
 
   mcMap->Add("eIoni", kPEnergyLoss); 
   mcMap->Add("muIoni", kPEnergyLoss); 
@@ -73,6 +73,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("ionIoni", kPEnergyLoss); 
 
   mcMap->Add("Decay", kPDecay); 
+  mcMap->Add("RadioactiveDecay", kPDecay); 
 
   mcMap->Add("compt", kPCompton); 
   mcMap->Add("phot", kPPhotoelectric); 
@@ -104,8 +105,10 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("hadElastic", kPHElastic); 
   mcMap->Add("HadronElastic", kPHElastic); 
   mcMap->Add("hElastic", kPHElastic); 
+  mcMap->Add("hElasticLHEP", kPHElastic); 
   mcMap->Add("CHIPSElasticScattering", kPHElastic); 
   
+  mcMap->Add("inelastic", kPHInhelastic); 
   mcMap->Add("PionMinusInelastic", kPHInhelastic); 
   mcMap->Add("PionPlusInelastic", kPHInhelastic); 
   mcMap->Add("KaonPlusInelastic", kPHInhelastic); 
@@ -141,6 +144,8 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("He3Inelastic", kPHInhelastic); 
   mcMap->Add("AntiHe3InelasticProcess", kPHInhelastic); 
   mcMap->Add("ionInelastic", kPHInhelastic); 
+  mcMap->Add("CHIPS_LowEnergyIonIonInelastic", kPHInhelastic); 
+  mcMap->Add("CHIPS_IonIonElasticScattering", kPHInhelastic); 
   mcMap->Add("hInelastic", kPHInhelastic); 
   mcMap->Add("CHIPS_Inelastic", kPHInhelastic); 
   mcMap->Add("PhotonInelastic", kPPhotonInhelastic); 
@@ -158,9 +163,11 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("Scintillation", kPScintillation);
   mcMap->Add("OpAbsorption", kPLightAbsorption);
   mcMap->Add("OpRayleigh", kPRayleigh);
+  mcMap->Add("Rayl", kPRayleigh);
   mcMap->Add("OpBoundary", kPLightScattering);
 
   mcMap->Add("SynRad", kPSynchrotron);
+  mcMap->Add("CHIPS_SynchrotronRadiation", kPSynchrotron);
 
   mcMap->Add("Transportation", kPTransportation);
   
@@ -174,6 +181,8 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("specialCutForForOther", kPStop); 
   mcMap->Add("specialCutForElectron", kPStop); 
   mcMap->Add("specialCutForElectron", kPStop); 
+  mcMap->Add("MinEkineCuts", kPStop); 
+  mcMap->Add("MaxTimeCuts", kPStop); 
   mcMap->Add("stackPopper", kPNull); 
              /// \todo Add kPUserDefined
   
