@@ -253,6 +253,10 @@ void g4libs_granular()
   gSystem->Load("libG4hadronic_proc");
   gSystem->Load("libG4had_mod_man.so");
   gSystem->Load("libG4had_im_r_matrix.so");
+  if ( isLibrary("libG4had_lend.so") ) {
+    // only from 9.5.b01
+    gSystem->Load("libG4had_lend.so");
+  }  
   gSystem->Load("libG4had_string_man.so");
   gSystem->Load("libG4had_string_diff.so");
   gSystem->Load("libG4had_string_frag.so");
