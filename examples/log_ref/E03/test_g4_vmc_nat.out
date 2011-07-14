@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.28/00  14 December 2010   *
+  *   Version   5.30/00      27 June 2011   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.28/00 (tags/v5-28-00@37603, Dec 21 2010, 12:34:28 on linuxx8664gcc)
+ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -22,7 +22,7 @@ Loading g4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-09-04    (17-December-2010)
+ Geant4 version Name: geant4-09-04-patch-02    (24-June-2011)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -33,8 +33,6 @@ Adding SpecialPhysicsList stepLimiter
 Debug mode is switched on.
 Visualization Manager instantiating with verbosity "warnings (3)"...
 Geant4 has been created.
-G4ParticleDefinition::SetApplyCutsFlag() for proton
-becomes obsolete. Production threshold is applied only for gamma, e- and e+.
 Water
 Scintillator
 Mylar
@@ -87,7 +85,6 @@ Instantiated 6 volume table entries
               6 sensitive detectors
 **********************************************
 
-Warning in <TClass::TClass>: no dictionary for class stack<TParticle*,deque<TParticle*> > is available
 
 phot:   for  gamma    SubType= 12
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -346,38 +343,38 @@ hPairProd:   for  pi-    SubType= 4
 ### Run 0 start.
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 919.279       total track length (cm):  60.9519
-   Gap:      total energy (MeV): 33.4551       total track length (cm):   15.885
+   Absorber: total energy (MeV): 927.865       total track length (cm):  62.4027
+   Gap:      total energy (MeV): 28.7147       total track length (cm):  14.2109
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV): 925.638       total track length (cm):  62.0455
-   Gap:      total energy (MeV): 29.6939       total track length (cm):  14.3017
+   Absorber: total energy (MeV): 931.974       total track length (cm):  62.5618
+   Gap:      total energy (MeV): 33.1446       total track length (cm):  16.3806
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 918.286       total track length (cm):  60.8519
-   Gap:      total energy (MeV): 25.2247       total track length (cm):  12.1554
+   Absorber: total energy (MeV): 916.256       total track length (cm):  61.9401
+   Gap:      total energy (MeV):  34.585       total track length (cm):   16.492
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 906.449       total track length (cm):  61.2326
-   Gap:      total energy (MeV): 35.7755       total track length (cm):  16.9767
+   Absorber: total energy (MeV): 911.233       total track length (cm):  61.0109
+   Gap:      total energy (MeV): 20.3451       total track length (cm):  9.86473
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 929.197       total track length (cm):  62.8664
-   Gap:      total energy (MeV): 36.2866       total track length (cm):  18.0671
-Time of this run:   User=0.24s Real=0.24s Sys=0s
+   Absorber: total energy (MeV): 880.863       total track length (cm):  59.7935
+   Gap:      total energy (MeV): 34.3093       total track length (cm):  16.3537
+Time of this run:   User=0.16s Real=0.16s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.28/00  14 December 2010   *
+  *   Version   5.30/00      27 June 2011   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.28/00 (tags/v5-28-00@37603, Dec 21 2010, 12:34:28 on linuxx8664gcc)
+ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -391,7 +388,7 @@ Loading geant4vmc library ...
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-09-04    (17-December-2010)
+ Geant4 version Name: geant4-09-04-patch-02    (24-June-2011)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -403,8 +400,6 @@ Adding SpecialPhysicsList stepLimiter
 Debug mode is switched on.
 Visualization Manager instantiating with verbosity "warnings (3)"...
 Geant4 has been created.
-G4ParticleDefinition::SetApplyCutsFlag() for proton
-becomes obsolete. Production threshold is applied only for gamma, e- and e+.
 --- Construct geometry 
 Water
 Scintillator
@@ -460,7 +455,6 @@ Instantiated 6 volume table entries
               6 sensitive detectors
 **********************************************
 
-Warning in <TClass::TClass>: no dictionary for class stack<TParticle*,deque<TParticle*> > is available
 --- Run MC for 1 events
 
 phot:   for  gamma    SubType= 12
@@ -732,18 +726,18 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   1    -7.500    0.000    0.000    50.0000    0.0000    1.500    1.500     WRLD  Transportation
 #   2    -7.500    0.000    0.000    50.0000    0.0000    0.000    1.500     ABSO  No active process
 #   3    -7.457   -0.002    0.002    48.4023    0.4720    0.043    1.543     ABSO  Bremstrahlung
-#   4    -7.343   -0.018   -0.007    44.8496    1.4529    0.116    1.659     ABSO  Bremstrahlung
+#   4    -7.343   -0.018   -0.007    44.8496    1.4530    0.116    1.659     ABSO  Bremstrahlung
 #   5    -7.332   -0.020   -0.007    27.9177    0.1257    0.011    1.670     ABSO  Bremstrahlung
 #   6    -7.324   -0.022   -0.007    27.7267    0.0850    0.008    1.678     ABSO  Bremstrahlung
 #   7    -7.291   -0.032   -0.009    25.1471    0.3330    0.035    1.713     ABSO  Bremstrahlung
-#   8    -7.223   -0.043   -0.009    23.3726    0.9063    0.070    1.783     ABSO  Bremstrahlung
-#   9    -7.029   -0.090   -0.129    14.3499    2.7963    0.241    2.024     ABSO  Bremstrahlung
-#  10    -7.016   -0.095   -0.144     7.2005    0.4011    0.021    2.045     ABSO  Bremstrahlung
-#  11    -7.038   -0.078   -0.267     5.2712    1.7404    0.163    2.209     ABSO  Bremstrahlung
-#  12    -7.023   -0.180   -0.276     3.1960    1.6345    0.156    2.364     ABSO  Bremstrahlung
-#  13    -7.016   -0.188   -0.279     2.6827    0.2108    0.012    2.377     ABSO  Bremstrahlung
-#  14    -7.019   -0.187   -0.335     1.1842    1.4985    0.167    2.544     ABSO  Energy loss
-#  15    -7.019   -0.180   -0.335     0.0000    1.1842    0.090    2.634     ABSO  Energy loss
+#   8    -7.223   -0.043   -0.009    23.3725    0.9064    0.070    1.783     ABSO  Bremstrahlung
+#   9    -7.029   -0.090   -0.129    14.3490    2.7974    0.241    2.025     ABSO  Bremstrahlung
+#  10    -7.016   -0.095   -0.144     7.2000    0.4011    0.021    2.045     ABSO  Bremstrahlung
+#  11    -7.037   -0.078   -0.267     5.2710    1.7401    0.163    2.209     ABSO  Bremstrahlung
+#  12    -7.023   -0.180   -0.276     3.1957    1.6346    0.156    2.364     ABSO  Bremstrahlung
+#  13    -7.016   -0.188   -0.279     2.6824    0.2108    0.012    2.377     ABSO  Bremstrahlung
+#  14    -7.019   -0.187   -0.335     1.1840    1.4984    0.167    2.544     ABSO  Energy loss
+#  15    -7.019   -0.180   -0.335     0.0000    1.1840    0.090    2.634     ABSO  Energy loss
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 1     Parent ID = 0
@@ -765,240 +759,191 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   6    -5.000   -1.118   -1.262     0.4406    0.0000    0.000    2.438     GAPX  No active process
 #   7    -4.500   -1.350   -1.506     0.4406    0.0000    0.603    3.041     GAPX  Transportation
 #   8    -4.500   -1.350   -1.506     0.4406    0.0000    0.000    3.041     ABSO  No active process
-#   9    -4.030   -1.567   -1.735     0.0000    0.0880    0.566    3.607     ABSO  Photoelectric effect
+#   9    -4.031   -1.567   -1.735     0.0000    0.0880    0.566    3.607     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 3     Parent ID = 2
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.030   -1.567   -1.735     0.3526    0.0000    0.000    0.000     ABSO  No active process
+#   0    -4.031   -1.567   -1.735     0.3526    0.0000    0.000    0.000     ABSO  No active process
 #   1    -4.029   -1.567   -1.735     0.0000    0.3526    0.019    0.019     ABSO  Energy loss
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 4     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.038   -0.078   -0.267     0.1890    0.0000    0.000    0.000     ABSO  No active process
+#   0    -7.037   -0.078   -0.267     0.1890    0.0000    0.000    0.000     ABSO  No active process
 #   1    -7.060   -0.125   -0.312     0.0000    0.1890    0.069    0.069     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 5     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.016   -0.095   -0.144     6.7483    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500   -0.146   -0.877     6.7483    0.0000    0.898    0.898     ABSO  Transportation
-#   2    -6.500   -0.146   -0.877     6.7483    0.0000    0.000    0.898     GAPX  No active process
-#   3    -6.000   -0.194   -1.587     6.7483    0.0000    0.870    1.768     GAPX  Transportation
-#   4    -6.000   -0.194   -1.587     6.7483    0.0000    0.000    1.768     ABSO  No active process
-#   5    -5.000   -0.292   -3.008     6.7483    0.0000    1.740    3.508     ABSO  Transportation
-#   6    -5.000   -0.292   -3.008     6.7483    0.0000    0.000    3.508     GAPX  No active process
-#   7    -4.500   -0.341   -3.718     6.7483    0.0000    0.870    4.378     GAPX  Transportation
-#   8    -4.500   -0.341   -3.718     6.7483    0.0000    0.000    4.378     ABSO  No active process
-#   9    -4.372   -0.353   -3.900     0.2579    0.0000    0.223    4.601     ABSO  Compton scattering
-#  10    -4.422   -0.298   -3.649     0.1760    0.0000    0.262    4.863     ABSO  Compton scattering
-#  11    -4.454   -0.191   -3.669     0.0000    0.0880    0.113    4.977     ABSO  Photoelectric effect
+#   0    -7.016   -0.095   -0.144     6.7479    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500   -0.146   -0.877     6.7479    0.0000    0.898    0.898     ABSO  Transportation
+#   2    -6.500   -0.146   -0.877     6.7479    0.0000    0.000    0.898     GAPX  No active process
+#   3    -6.000   -0.194   -1.587     6.7479    0.0000    0.870    1.768     GAPX  Transportation
+#   4    -6.000   -0.194   -1.587     6.7479    0.0000    0.000    1.768     ABSO  No active process
+#   5    -5.000   -0.292   -3.008     6.7479    0.0000    1.740    3.508     ABSO  Transportation
+#   6    -5.000   -0.292   -3.008     6.7479    0.0000    0.000    3.508     GAPX  No active process
+#   7    -4.500   -0.341   -3.719     6.7479    0.0000    0.870    4.378     GAPX  Transportation
+#   8    -4.500   -0.341   -3.719     6.7479    0.0000    0.000    4.378     ABSO  No active process
+#   9    -4.372   -0.353   -3.901     0.2579    0.0000    0.223    4.601     ABSO  Compton scattering
+#  10    -4.423   -0.298   -3.649     0.1760    0.0000    0.262    4.863     ABSO  Compton scattering
+#  11    -4.455   -0.191   -3.670     0.0000    0.0880    0.113    4.977     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 6     Parent ID = 5
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.454   -0.191   -3.669     0.0880    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.455   -0.191   -3.669     0.0000    0.0880    0.002    0.002     ABSO  Energy loss
+#   0    -4.455   -0.191   -3.670     0.0880    0.0000    0.000    0.000     ABSO  No active process
+#   1    -4.455   -0.191   -3.670     0.0000    0.0880    0.002    0.002     ABSO  Energy loss
 
 ****************************************************************************************************
   Particle = e-     Track ID = 7     Parent ID = 5
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.422   -0.298   -3.649     0.0819    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.422   -0.298   -3.649     0.0000    0.0819    0.002    0.002     ABSO  Energy loss
+#   0    -4.423   -0.298   -3.649     0.0819    0.0000    0.000    0.000     ABSO  No active process
+#   1    -4.423   -0.298   -3.649     0.0000    0.0819    0.002    0.002     ABSO  Energy loss
 
 ****************************************************************************************************
   Particle = e-     Track ID = 8     Parent ID = 5
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.372   -0.353   -3.900     6.4903    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.345   -0.344   -3.923     6.0499    0.4404    0.038    0.038     ABSO  Multiple scattering
-#   2    -4.323   -0.338   -3.920     5.7368    0.3131    0.024    0.063     ABSO  Multiple scattering
-#   3    -4.310   -0.326   -3.908     5.4419    0.2949    0.023    0.085     ABSO  Multiple scattering
-#   4    -4.299   -0.310   -3.898     5.1924    0.2494    0.023    0.108     ABSO  Multiple scattering
-#   5    -4.287   -0.297   -3.887     4.7737    0.4188    0.023    0.131     ABSO  Multiple scattering
-#   6    -4.286   -0.276   -3.881     4.5645    0.2092    0.023    0.153     ABSO  Multiple scattering
-#   7    -4.269   -0.243   -3.846     3.8124    0.7521    0.064    0.217     ABSO  Multiple scattering
-#   8    -4.270   -0.247   -3.839     3.0131    0.1614    0.008    0.226     ABSO  Bremstrahlung
-#   9    -4.251   -0.264   -3.818     2.3514    0.4408    0.045    0.270     ABSO  Bremstrahlung
-#  10    -4.240   -0.248   -3.803     2.0421    0.3093    0.034    0.304     ABSO  Multiple scattering
-#  11    -4.232   -0.244   -3.800     1.8313    0.0878    0.010    0.314     ABSO  Bremstrahlung
-#  12    -4.223   -0.239   -3.782     1.5110    0.3203    0.032    0.345     ABSO  Multiple scattering
-#  13    -4.216   -0.252   -3.777     1.1712    0.3398    0.024    0.370     ABSO  Multiple scattering
-#  14    -4.212   -0.261   -3.784     0.9807    0.1905    0.023    0.392     ABSO  Multiple scattering
-#  15    -4.219   -0.255   -3.790     0.7763    0.2044    0.023    0.415     ABSO  Multiple scattering
-#  16    -4.218   -0.251   -3.788     0.0000    0.7763    0.055    0.469     ABSO  Energy loss
+#   0    -4.372   -0.353   -3.901     6.4900    0.0000    0.000    0.000     ABSO  No active process
+#   1    -4.346   -0.344   -3.923     6.0505    0.4394    0.038    0.038     ABSO  Multiple scattering
+#   2    -4.324   -0.338   -3.920     5.7382    0.3124    0.024    0.063     ABSO  Multiple scattering
+#   3    -4.311   -0.326   -3.908     5.4433    0.2949    0.023    0.085     ABSO  Multiple scattering
+#   4    -4.299   -0.310   -3.899     5.1939    0.2494    0.023    0.108     ABSO  Multiple scattering
+#   5    -4.287   -0.297   -3.888     4.7752    0.4187    0.023    0.130     ABSO  Multiple scattering
+#   6    -4.287   -0.276   -3.882     4.5660    0.2091    0.023    0.153     ABSO  Multiple scattering
+#   7    -4.270   -0.243   -3.847     3.8147    0.7513    0.064    0.217     ABSO  Multiple scattering
+#   8    -4.271   -0.247   -3.840     3.0124    0.1644    0.009    0.226     ABSO  Bremstrahlung
+#   9    -4.251   -0.264   -3.818     2.3507    0.4408    0.045    0.270     ABSO  Bremstrahlung
+#  10    -4.240   -0.248   -3.803     2.0422    0.3085    0.034    0.304     ABSO  Multiple scattering
+#  11    -4.232   -0.245   -3.800     1.8305    0.0886    0.010    0.314     ABSO  Bremstrahlung
+#  12    -4.223   -0.239   -3.782     1.5110    0.3195    0.032    0.345     ABSO  Multiple scattering
+#  13    -4.216   -0.252   -3.778     1.1719    0.3392    0.024    0.370     ABSO  Multiple scattering
+#  14    -4.212   -0.262   -3.785     0.9814    0.1905    0.023    0.392     ABSO  Multiple scattering
+#  15    -4.219   -0.255   -3.791     0.7770    0.2044    0.023    0.415     ABSO  Multiple scattering
+#  16    -4.219   -0.252   -3.788     0.0000    0.7770    0.055    0.469     ABSO  Energy loss
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 9     Parent ID = 8
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.232   -0.244   -3.800     0.1230    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.224   -0.249   -3.800     0.0000    0.1230    0.009    0.009     ABSO  Photoelectric effect
+#   0    -4.232   -0.245   -3.800     0.1230    0.0000    0.000    0.000     ABSO  No active process
+#   1    -4.225   -0.249   -3.800     0.0000    0.1230    0.009    0.009     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 10     Parent ID = 8
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.251   -0.264   -3.818     0.2210    0.0000    0.000    0.000     ABSO  No active process
-#   1    -3.983   -0.282   -3.539     0.0000    0.0880    0.387    0.387     ABSO  Photoelectric effect
+#   0    -4.251   -0.264   -3.818     0.2209    0.0000    0.000    0.000     ABSO  No active process
+#   1    -3.984   -0.285   -3.540     0.0000    0.0880    0.387    0.387     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 11     Parent ID = 10
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -3.983   -0.282   -3.539     0.1330    0.0000    0.000    0.000     ABSO  No active process
-#   1    -3.983   -0.282   -3.539     0.0000    0.1330    0.004    0.004     ABSO  Energy loss
+#   0    -3.984   -0.285   -3.540     0.1329    0.0000    0.000    0.000     ABSO  No active process
+#   1    -3.984   -0.285   -3.540     0.0000    0.1329    0.004    0.004     ABSO  Energy loss
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 12     Parent ID = 8
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.270   -0.247   -3.839     0.6379    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.353   -0.397   -3.366     0.5472    0.0000    0.504    0.504     ABSO  Compton scattering
-#   2    -4.500   -0.352   -3.070     0.5472    0.0000    0.333    0.836     ABSO  Transportation
-#   3    -4.500   -0.352   -3.070     0.5472    0.0000    0.000    0.836     GAPX  No active process
-#   4    -5.000   -0.201   -2.065     0.5472    0.0000    1.133    1.970     GAPX  Transportation
-#   5    -5.000   -0.201   -2.065     0.5472    0.0000    0.000    1.970     ABSO  No active process
-#   6    -6.000    0.101   -0.053     0.5472    0.0000    2.266    4.236     ABSO  Transportation
-#   7    -6.000    0.101   -0.053     0.5472    0.0000    0.000    4.236     GAPX  No active process
-#   8    -6.420    0.228    0.792     0.5017    0.0000    0.952    5.188     GAPX  Compton scattering
-#   9    -6.500    0.188    0.915     0.5017    0.0000    0.152    5.341     GAPX  Transportation
-#  10    -6.500    0.188    0.915     0.5017    0.0000    0.000    5.341     ABSO  No active process
-#  11    -7.156   -0.142    1.932     0.0000    0.0880    1.254    6.595     ABSO  Photoelectric effect
+#   0    -4.271   -0.247   -3.840     0.6378    0.0000    0.000    0.000     ABSO  No active process
+#   1    -4.293   -0.285   -3.716     0.5340    0.1038    0.132    0.132     ABSO  Compton scattering
+#   2    -4.310   -0.553   -3.484     0.0000    0.0880    0.355    0.486     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 13     Parent ID = 12
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.156   -0.142    1.932     0.4137    0.0000    0.000    0.000     ABSO  No active process
-#   1    -7.156   -0.142    1.934     0.0000    0.4137    0.024    0.024     ABSO  Energy loss
+#   0    -4.310   -0.553   -3.484     0.4460    0.0000    0.000    0.000     ABSO  No active process
+#   1    -4.310   -0.553   -3.482     0.0000    0.4460    0.026    0.026     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 14     Parent ID = 12
+  Particle = gamma     Track ID = 14     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.420    0.228    0.792     0.0455    0.0000    0.000    0.000     GAPX  No active process
-#   1    -6.420    0.229    0.792     0.0000    0.0455    0.004    0.004     GAPX  Energy loss
+#   0    -7.029   -0.090   -0.129     6.2262    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500   -0.254   -0.565     6.2262    0.0000    0.705    0.705     ABSO  Transportation
+#   2    -6.500   -0.254   -0.565     6.2262    0.0000    0.000    0.705     GAPX  No active process
+#   3    -6.000   -0.409   -0.978     6.2262    0.0000    0.666    1.372     GAPX  Transportation
+#   4    -6.000   -0.409   -0.978     6.2262    0.0000    0.000    1.372     ABSO  No active process
+#   5    -5.559   -0.546   -1.341     0.0000    0.0000    0.588    1.959     ABSO  Lepton pair production
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 15     Parent ID = 12
+  Particle = e+     Track ID = 15     Parent ID = 14
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.353   -0.397   -3.366     0.0907    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.353   -0.397   -3.365     0.0000    0.0907    0.002    0.002     ABSO  Energy loss
+#   0    -5.559   -0.546   -1.341     4.5861    0.0000    0.000    0.000     ABSO  No active process
+#   1    -5.524   -0.477   -1.443     1.8868    2.6993    0.217    0.217     ABSO  Energy loss
+#   2    -5.529   -0.454   -1.406     0.1781    1.7087    0.139    0.357     ABSO  Energy loss
+#   3    -5.529   -0.454   -1.406     0.0000    0.1781    0.007    0.363     ABSO  Energy loss
+#   4    -5.529   -0.454   -1.406     0.0000    0.0000    0.000    0.363     ABSO  Positron annihilation
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 16     Parent ID = 0
+  Particle = gamma     Track ID = 16     Parent ID = 15
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.029   -0.090   -0.129     6.2264    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500   -0.254   -0.565     6.2264    0.0000    0.705    0.705     ABSO  Transportation
-#   2    -6.500   -0.254   -0.565     6.2264    0.0000    0.000    0.705     GAPX  No active process
-#   3    -6.000   -0.409   -0.977     6.2264    0.0000    0.666    1.372     GAPX  Transportation
-#   4    -6.000   -0.409   -0.977     6.2264    0.0000    0.000    1.372     ABSO  No active process
-#   5    -5.810   -0.468   -1.134     0.0000    0.0000    0.253    1.625     ABSO  Lepton pair production
+#   0    -5.529   -0.454   -1.406     0.5110    0.0000    0.000    0.000     ABSO  No active process
+#   1    -5.126   -0.890   -1.263     0.0000    0.0880    0.611    0.611     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e+     Track ID = 17     Parent ID = 16
+  Particle = e-     Track ID = 17     Parent ID = 16
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.810   -0.468   -1.134     2.3256    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.797   -0.460   -1.170     1.7096    0.6160    0.057    0.057     ABSO  Multiple scattering
-#   2    -5.780   -0.446   -1.186     1.3231    0.3865    0.040    0.097     ABSO  Multiple scattering
-#   3    -5.766   -0.421   -1.185     0.4918    0.8313    0.091    0.188     ABSO  Bremstrahlung
-#   4    -5.766   -0.420   -1.188     0.0000    0.4918    0.030    0.218     ABSO  Energy loss
-#   5    -5.766   -0.420   -1.188     0.0000    0.0000    0.000    0.218     ABSO  Positron annihilation
+#   0    -5.126   -0.890   -1.263     0.4230    0.0000    0.000    0.000     ABSO  No active process
+#   1    -5.126   -0.892   -1.263     0.0000    0.4230    0.025    0.025     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 18     Parent ID = 17
+  Particle = gamma     Track ID = 18     Parent ID = 15
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.766   -0.420   -1.188     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.294   -0.631   -0.994     0.0000    0.0880    0.553    0.553     ABSO  Photoelectric effect
+#   0    -5.529   -0.454   -1.406     0.5110    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.000    0.056   -1.573     0.5110    0.0000    0.713    0.713     ABSO  Transportation
+#   2    -6.000    0.056   -1.573     0.5110    0.0000    0.000    0.713     GAPX  No active process
+#   3    -6.500    0.597   -1.750     0.5110    0.0000    0.758    1.471     GAPX  Transportation
+#   4    -6.500    0.597   -1.750     0.5110    0.0000    0.000    1.471     ABSO  No active process
+#   5    -7.227    1.383   -2.007     0.0000    0.0880    1.101    2.572     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 19     Parent ID = 18
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.294   -0.631   -0.994     0.4230    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.293   -0.631   -0.993     0.0000    0.4230    0.025    0.025     ABSO  Energy loss
+#   0    -7.227    1.383   -2.007     0.4230    0.0000    0.000    0.000     ABSO  No active process
+#   1    -7.227    1.385   -2.007     0.0000    0.4230    0.025    0.025     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 20     Parent ID = 17
+  Particle = e-     Track ID = 20     Parent ID = 14
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.766   -0.420   -1.188     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.000   -0.315   -1.284     0.5110    0.0000    0.274    0.274     ABSO  Transportation
-#   2    -6.000   -0.315   -1.284     0.5110    0.0000    0.000    0.274     GAPX  No active process
-#   3    -6.500   -0.091   -1.489     0.5110    0.0000    0.585    0.859     GAPX  Transportation
-#   4    -6.500   -0.091   -1.489     0.5110    0.0000    0.000    0.859     ABSO  No active process
-#   5    -6.620   -0.038   -1.539     0.0000    0.0880    0.140    0.999     ABSO  Photoelectric effect
+#   0    -5.559   -0.546   -1.341     0.6180    0.0000    0.000    0.000     ABSO  No active process
+#   1    -5.557   -0.547   -1.343     0.0000    0.6180    0.041    0.041     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 21     Parent ID = 20
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.620   -0.038   -1.539     0.4230    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.621   -0.038   -1.540     0.0000    0.4230    0.025    0.025     ABSO  Energy loss
-
-****************************************************************************************************
-  Particle = e-     Track ID = 22     Parent ID = 16
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.810   -0.468   -1.134     2.8788    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.787   -0.483   -1.138     2.4127    0.3186    0.035    0.035     ABSO  Bremstrahlung
-#   2    -5.778   -0.502   -1.159     1.8169    0.5958    0.045    0.080     ABSO  Multiple scattering
-#   3    -5.783   -0.519   -1.172     1.3979    0.4191    0.036    0.116     ABSO  Multiple scattering
-#   4    -5.771   -0.507   -1.171     0.9560    0.4419    0.032    0.148     ABSO  Multiple scattering
-#   5    -5.766   -0.506   -1.173     0.0000    0.9560    0.070    0.218     ABSO  Energy loss
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 23     Parent ID = 22
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.787   -0.483   -1.138     0.1475    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.783   -0.483   -1.141     0.0000    0.1475    0.006    0.006     ABSO  Photoelectric effect
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 24     Parent ID = 0
+  Particle = gamma     Track ID = 21     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.223   -0.043   -0.009     0.8681    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.913   -0.137   -0.093     0.6494    0.0000    0.334    0.334     ABSO  Compton scattering
-#   2    -6.644   -0.087   -0.044     0.5620    0.0874    0.278    0.612     ABSO  Compton scattering
-#   3    -6.500   -0.104    0.054     0.5620    0.0000    0.175    0.787     ABSO  Transportation
-#   4    -6.500   -0.104    0.054     0.5620    0.0000    0.000    0.787     GAPX  No active process
-#   5    -6.000   -0.166    0.394     0.5620    0.0000    0.608    1.395     GAPX  Transportation
-#   6    -6.000   -0.166    0.394     0.5620    0.0000    0.000    1.395     ABSO  No active process
-#   7    -5.000   -0.289    1.074     0.5620    0.0000    1.216    2.610     ABSO  Transportation
-#   8    -5.000   -0.289    1.074     0.5620    0.0000    0.000    2.610     GAPX  No active process
-#   9    -4.500   -0.351    1.414     0.5620    0.0000    0.608    3.218     GAPX  Transportation
-#  10    -4.500   -0.351    1.414     0.5620    0.0000    0.000    3.218     ABSO  No active process
-#  11    -4.107   -0.399    1.682     0.2310    0.0000    0.478    3.697     ABSO  Compton scattering
-#  12    -4.154   -0.340    1.717     0.0000    0.2310    0.083    3.780     ABSO  Photoelectric effect
+#   1    -6.500   -0.261   -0.206     0.8681    0.0000    0.780    0.780     ABSO  Transportation
+#   2    -6.500   -0.261   -0.206     0.8681    0.0000    0.000    0.780     GAPX  No active process
+#   3    -6.000   -0.411   -0.342     0.8681    0.0000    0.540    1.319     GAPX  Transportation
+#   4    -6.000   -0.411   -0.342     0.8681    0.0000    0.000    1.319     ABSO  No active process
+#   5    -5.372   -0.600   -0.513     0.0000    0.0880    0.678    1.997     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 25     Parent ID = 24
+  Particle = e-     Track ID = 22     Parent ID = 21
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.107   -0.399    1.682     0.3310    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.106   -0.399    1.682     0.0000    0.3310    0.017    0.017     ABSO  Energy loss
+#   0    -5.372   -0.600   -0.513     0.7801    0.0000    0.000    0.000     ABSO  No active process
+#   1    -5.370   -0.604   -0.513     0.0000    0.7801    0.055    0.055     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 26     Parent ID = 24
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.913   -0.137   -0.093     0.2187    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.913   -0.137   -0.094     0.0000    0.2187    0.009    0.009     ABSO  Energy loss
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 27     Parent ID = 0
+  Particle = gamma     Track ID = 23     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.291   -0.032   -0.009     2.2466    0.0000    0.000    0.000     ABSO  No active process
@@ -1010,314 +955,363 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   6    -5.000   -0.516   -0.061     2.2466    0.0000    0.000    2.342     GAPX  No active process
 #   7    -4.500   -0.621   -0.072     2.2466    0.0000    0.511    2.853     GAPX  Transportation
 #   8    -4.500   -0.621   -0.072     2.2466    0.0000    0.000    2.853     ABSO  No active process
-#   9    -3.500   -0.832   -0.095     2.2466    0.0000    1.022    3.875     ABSO  Transportation
-#  10    -3.500   -0.832   -0.095     2.2466    0.0000    0.000    3.875     GAPX  No active process
-#  11    -3.000   -0.938   -0.106     2.2466    0.0000    0.511    4.386     GAPX  Transportation
-#  12    -3.000   -0.938   -0.106     2.2466    0.0000    0.000    4.386     ABSO  No active process
-#  13    -2.682   -1.005   -0.113     1.1112    0.0000    0.325    4.711     ABSO  Compton scattering
-#  14    -2.000   -1.790   -0.438     1.1112    0.0000    1.090    5.801     ABSO  Transportation
-#  15    -2.000   -1.790   -0.438     1.1112    0.0000    0.000    5.801     GAPX  No active process
-#  16    -1.500   -2.366   -0.676     1.1112    0.0000    0.799    6.600     GAPX  Transportation
-#  17    -1.500   -2.366   -0.676     1.1112    0.0000    0.000    6.600     ABSO  No active process
-#  18    -0.500   -3.517   -1.152     1.1112    0.0000    1.598    8.198     ABSO  Transportation
-#  19    -0.500   -3.517   -1.152     1.1112    0.0000    0.000    8.198     GAPX  No active process
-#  20     0.000   -4.093   -1.390     1.1112    0.0000    0.799    8.996     GAPX  Transportation
-#  21     0.000   -4.093   -1.390     1.1112    0.0000    0.000    8.996     ABSO  No active process
-#  22     0.626   -4.814   -1.689     0.0000    0.0880    1.000    9.997     ABSO  Photoelectric effect
+#   9    -3.969   -0.733   -0.084     0.7215    0.0000    0.543    3.396     ABSO  Compton scattering
+#  10    -3.711   -0.459   -0.114     0.4669    0.2546    0.378    3.774     ABSO  Compton scattering
+#  11    -3.767   -0.050   -0.063     0.0000    0.0880    0.416    4.190     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 28     Parent ID = 27
+  Particle = e-     Track ID = 24     Parent ID = 23
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0     0.626   -4.814   -1.689     1.0232    0.0000    0.000    0.000     ABSO  No active process
-#   1     0.630   -4.815   -1.693     0.0000    1.0232    0.076    0.076     ABSO  Energy loss
+#   0    -3.767   -0.050   -0.063     0.3789    0.0000    0.000    0.000     ABSO  No active process
+#   1    -3.767   -0.049   -0.063     0.0000    0.3789    0.021    0.021     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 29     Parent ID = 27
+  Particle = e-     Track ID = 25     Parent ID = 23
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.682   -1.005   -0.113     1.1353    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.674   -1.000   -0.126     0.5273    0.4916    0.035    0.035     ABSO  Bremstrahlung
-#   2    -2.672   -0.999   -0.126     0.0000    0.5273    0.033    0.068     ABSO  Energy loss
+#   0    -3.969   -0.733   -0.084     1.5251    0.0000    0.000    0.000     ABSO  No active process
+#   1    -3.967   -0.736   -0.083     1.3608    0.0225    0.004    0.004     ABSO  Bremstrahlung
+#   2    -3.967   -0.744   -0.080     0.9890    0.1581    0.012    0.016     ABSO  Bremstrahlung
+#   3    -3.978   -0.735   -0.084     0.3773    0.6117    0.047    0.063     ABSO  Bremstrahlung
+#   4    -3.978   -0.736   -0.085     0.0000    0.3773    0.021    0.084     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 30     Parent ID = 29
+  Particle = gamma     Track ID = 26     Parent ID = 25
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.674   -1.000   -0.126     0.1164    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.653   -0.973   -0.121     0.0000    0.1164    0.035    0.035     ABSO  Photoelectric effect
+#   0    -3.967   -0.744   -0.080     0.2137    0.0000    0.000    0.000     ABSO  No active process
+#   1    -3.970   -0.745   -0.082     0.0000    0.2137    0.004    0.004     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 31     Parent ID = 0
+  Particle = gamma     Track ID = 27     Parent ID = 25
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -3.967   -0.736   -0.083     0.1419    0.0000    0.000    0.000     ABSO  No active process
+#   1    -3.953   -0.748   -0.074     0.0000    0.1419    0.021    0.021     ABSO  Photoelectric effect
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 28     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.324   -0.022   -0.007     0.1060    0.0000    0.000    0.000     ABSO  No active process
-#   1    -7.317   -0.023   -0.008     0.0000    0.1060    0.007    0.007     ABSO  Photoelectric effect
+#   1    -7.313   -0.024   -0.009     0.0000    0.1060    0.012    0.012     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 32     Parent ID = 0
+  Particle = gamma     Track ID = 29     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.332   -0.020   -0.007    16.8062    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.577   -0.221   -0.023     0.0000    0.0000    0.781    0.781     ABSO  Lepton pair production
+#   1    -6.500   -0.242   -0.025    16.8062    0.0000    0.861    0.861     ABSO  Transportation
+#   2    -6.500   -0.242   -0.025    16.8062    0.0000    0.000    0.861     GAPX  No active process
+#   3    -6.000   -0.375   -0.035    16.8062    0.0000    0.518    1.379     GAPX  Transportation
+#   4    -6.000   -0.375   -0.035    16.8062    0.0000    0.000    1.379     ABSO  No active process
+#   5    -5.000   -0.642   -0.057    16.8062    0.0000    1.035    2.414     ABSO  Transportation
+#   6    -5.000   -0.642   -0.057    16.8062    0.0000    0.000    2.414     GAPX  No active process
+#   7    -4.500   -0.775   -0.068    16.8062    0.0000    0.518    2.932     GAPX  Transportation
+#   8    -4.500   -0.775   -0.068    16.8062    0.0000    0.000    2.932     ABSO  No active process
+#   9    -3.500   -1.042   -0.089    16.8062    0.0000    1.035    3.967     ABSO  Transportation
+#  10    -3.500   -1.042   -0.089    16.8062    0.0000    0.000    3.967     GAPX  No active process
+#  11    -3.000   -1.175   -0.100    16.8062    0.0000    0.518    4.484     GAPX  Transportation
+#  12    -3.000   -1.175   -0.100    16.8062    0.0000    0.000    4.484     ABSO  No active process
+#  13    -2.302   -1.362   -0.115     0.0000    0.0000    0.723    5.207     ABSO  Lepton pair production
 
 ****************************************************************************************************
-  Particle = e+     Track ID = 33     Parent ID = 32
+  Particle = e+     Track ID = 30     Parent ID = 29
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.577   -0.221   -0.023     3.4938    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.558   -0.224   -0.031     3.2532    0.2407    0.023    0.023     ABSO  Multiple scattering
-#   2    -6.548   -0.221   -0.041     3.1203    0.1328    0.015    0.038     ABSO  Multiple scattering
-#   3    -6.542   -0.212   -0.044     2.9868    0.1335    0.012    0.050     ABSO  Multiple scattering
-#   4    -6.544   -0.216   -0.034     2.8853    0.1015    0.012    0.061     ABSO  Multiple scattering
-#   5    -6.544   -0.222   -0.025     2.7203    0.1650    0.012    0.073     ABSO  Multiple scattering
-#   6    -6.535   -0.227   -0.025     2.6193    0.1010    0.012    0.085     ABSO  Multiple scattering
-#   7    -6.524   -0.223   -0.023     2.5054    0.1138    0.012    0.097     ABSO  Multiple scattering
-#   8    -6.519   -0.231   -0.018     2.4261    0.0793    0.012    0.109     ABSO  Multiple scattering
-#   9    -6.519   -0.239   -0.017     2.1000    0.0921    0.008    0.117     ABSO  Bremstrahlung
-#  10    -6.520   -0.247   -0.010     1.8439    0.2561    0.012    0.128     ABSO  Multiple scattering
-#  11    -6.516   -0.253   -0.002     1.7373    0.1066    0.012    0.140     ABSO  Multiple scattering
-#  12    -6.518   -0.263    0.001     1.5915    0.1458    0.012    0.152     ABSO  Multiple scattering
-#  13    -6.522   -0.270   -0.003     0.9650    0.0898    0.011    0.163     ABSO  Bremstrahlung
-#  14    -6.523   -0.273   -0.012     0.8217    0.1433    0.012    0.175     ABSO  Multiple scattering
-#  15    -6.519   -0.280   -0.009     0.6494    0.1723    0.012    0.187     ABSO  Multiple scattering
-#  16    -6.515   -0.275   -0.013     0.5111    0.1383    0.012    0.199     ABSO  Multiple scattering
-#  17    -6.515   -0.270   -0.010     0.3843    0.1268    0.012    0.211     ABSO  Multiple scattering
-#  18    -6.513   -0.272   -0.014     0.1501    0.2342    0.012    0.222     ABSO  Multiple scattering
-#  19    -6.513   -0.272   -0.013     0.0000    0.1501    0.005    0.227     ABSO  Energy loss
-#  20    -6.513   -0.272   -0.013     0.0000    0.0000    0.000    0.227     ABSO  Positron annihilation
+#   0    -2.302   -1.362   -0.115     5.7394    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.264   -1.364   -0.120     0.8920    0.4265    0.041    0.041     ABSO  Bremstrahlung
+#   2    -2.259   -1.366   -0.115     0.0000    0.8920    0.065    0.106     ABSO  Energy loss
+#   3    -2.259   -1.366   -0.115     0.0000    0.0000    0.000    0.106     ABSO  Positron annihilation
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 34     Parent ID = 33
+  Particle = gamma     Track ID = 31     Parent ID = 30
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.513   -0.272   -0.013     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.517   -0.295   -0.055     0.0000    0.0880    0.048    0.048     ABSO  Photoelectric effect
+#   0    -2.259   -1.366   -0.115     0.5110    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.340   -1.357   -0.338     0.3575    0.1535    0.237    0.237     ABSO  Compton scattering
+#   2    -2.402   -1.307   -0.364     0.0000    0.3575    0.084    0.321     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 35     Parent ID = 34
+  Particle = gamma     Track ID = 32     Parent ID = 30
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.517   -0.295   -0.055     0.4230    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.517   -0.295   -0.052     0.3624    0.0606    0.005    0.005     ABSO  Multiple scattering
-#   2    -6.518   -0.297   -0.053     0.2826    0.0798    0.004    0.009     ABSO  Multiple scattering
-#   3    -6.516   -0.296   -0.054     0.2575    0.0251    0.003    0.012     ABSO  Multiple scattering
-#   4    -6.517   -0.297   -0.054     0.1952    0.0623    0.003    0.015     ABSO  Multiple scattering
-#   5    -6.518   -0.297   -0.055     0.0000    0.1952    0.008    0.023     ABSO  Energy loss
+#   0    -2.259   -1.366   -0.115     0.5110    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.000   -1.394    0.593     0.5110    0.0000    0.755    0.755     ABSO  Transportation
+#   2    -2.000   -1.394    0.593     0.5110    0.0000    0.000    0.755     GAPX  No active process
+#   3    -1.916   -1.403    0.824     0.2419    0.0000    0.246    1.001     GAPX  Compton scattering
+#   4    -2.000   -1.086    0.828     0.2419    0.0000    0.329    1.329     GAPX  Transportation
+#   5    -2.000   -1.086    0.828     0.2419    0.0000    0.000    1.329     ABSO  No active process
+#   6    -2.010   -1.046    0.828     0.0000    0.0880    0.041    1.370     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 36     Parent ID = 33
+  Particle = e-     Track ID = 33     Parent ID = 32
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.513   -0.272   -0.013     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500   -0.192    0.134     0.5110    0.0000    0.168    0.168     ABSO  Transportation
-#   2    -6.500   -0.192    0.134     0.5110    0.0000    0.000    0.168     GAPX  No active process
-#   3    -6.073    2.430    5.000     0.5110    0.0000    5.544    5.712     GAPX  Transportation
-#   4    -6.073    2.430    5.000     0.5110    0.0000    0.000    5.712     WRLD  No active process
-#   5    -5.985    2.969    6.000     0.5110    0.0000    1.139    6.852     WRLD  Transportation
+#   0    -2.010   -1.046    0.828     0.1539    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.010   -1.046    0.828     0.0000    0.1539    0.005    0.005     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 37     Parent ID = 33
+  Particle = e-     Track ID = 34     Parent ID = 32
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.522   -0.270   -0.003     0.5366    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.654   -0.201   -0.215     0.2625    0.0000    0.259    0.259     ABSO  Compton scattering
-#   2    -6.609   -0.209   -0.246     0.0000    0.2625    0.055    0.313     ABSO  Photoelectric effect
+#   0    -1.916   -1.403    0.824     0.2691    0.0000    0.000    0.000     GAPX  No active process
+#   1    -1.908   -1.412    0.840     0.0000    0.2691    0.072    0.072     GAPX  Energy loss
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 35     Parent ID = 30
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -2.264   -1.364   -0.120     4.4209    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.223   -1.347   -0.100     3.6704    0.7505    0.049    0.049     ABSO  Compton scattering
+#   2    -2.051   -1.297   -0.058     1.3345    0.0000    0.184    0.233     ABSO  Compton scattering
+#   3    -2.000   -1.315   -0.064     1.3345    0.0000    0.055    0.287     ABSO  Transportation
+#   4    -2.000   -1.315   -0.064     1.3345    0.0000    0.000    0.287     GAPX  No active process
+#   5    -1.500   -1.494   -0.121     1.3345    0.0000    0.534    0.822     GAPX  Transportation
+#   6    -1.500   -1.494   -0.121     1.3345    0.0000    0.000    0.822     ABSO  No active process
+#   7    -0.500   -1.853   -0.237     1.3345    0.0000    1.069    1.890     ABSO  Transportation
+#   8    -0.500   -1.853   -0.237     1.3345    0.0000    0.000    1.890     GAPX  No active process
+#   9     0.000   -2.033   -0.294     1.3345    0.0000    0.534    2.425     GAPX  Transportation
+#  10     0.000   -2.033   -0.294     1.3345    0.0000    0.000    2.425     ABSO  No active process
+#  11     1.000   -2.391   -0.410     1.3345    0.0000    1.069    3.493     ABSO  Transportation
+#  12     1.000   -2.391   -0.410     1.3345    0.0000    0.000    3.493     GAPX  No active process
+#  13     1.500   -2.571   -0.467     1.3345    0.0000    0.534    4.028     GAPX  Transportation
+#  14     1.500   -2.571   -0.467     1.3345    0.0000    0.000    4.028     ABSO  No active process
+#  15     2.500   -2.930   -0.583     1.3345    0.0000    1.069    5.096     ABSO  Transportation
+#  16     2.500   -2.930   -0.583     1.3345    0.0000    0.000    5.096     GAPX  No active process
+#  17     3.000   -3.109   -0.640     1.3345    0.0000    0.534    5.631     GAPX  Transportation
+#  18     3.000   -3.109   -0.640     1.3345    0.0000    0.000    5.631     ABSO  No active process
+#  19     4.000   -3.468   -0.756     1.3345    0.0000    1.069    6.699     ABSO  Transportation
+#  20     4.000   -3.468   -0.756     1.3345    0.0000    0.000    6.699     GAPX  No active process
+#  21     4.500   -3.647   -0.813     1.3345    0.0000    0.534    7.234     GAPX  Transportation
+#  22     4.500   -3.647   -0.813     1.3345    0.0000    0.000    7.234     ABSO  No active process
+#  23     5.500   -4.006   -0.929     1.3345    0.0000    1.069    8.302     ABSO  Transportation
+#  24     5.500   -4.006   -0.929     1.3345    0.0000    0.000    8.302     GAPX  No active process
+#  25     6.000   -4.185   -0.986     1.3345    0.0000    0.534    8.837     GAPX  Transportation
+#  26     6.000   -4.185   -0.986     1.3345    0.0000    0.000    8.837     ABSO  No active process
+#  27     7.000   -4.544   -1.101     1.3345    0.0000    1.069    9.905     ABSO  Transportation
+#  28     7.000   -4.544   -1.101     1.3345    0.0000    0.000    9.905     GAPX  No active process
+#  29     7.500   -4.724   -1.159     1.3345    0.0000    0.534   10.440     GAPX  Transportation
+#  30     7.500   -4.724   -1.159     1.3345    0.0000    0.000   10.440     WRLD  No active process
+#  31     9.000   -5.262   -1.332     1.3345    0.0000    1.603   12.043     WRLD  Transportation
+
+****************************************************************************************************
+  Particle = e-     Track ID = 36     Parent ID = 35
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -2.051   -1.297   -0.058     2.3359    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.044   -1.285   -0.059     2.1420    0.1939    0.015    0.015     ABSO  Multiple scattering
+#   2    -2.041   -1.285   -0.064     1.4118    0.0614    0.007    0.022     ABSO  Bremstrahlung
+#   3    -2.035   -1.284   -0.068     1.3283    0.0835    0.009    0.031     ABSO  Multiple scattering
+#   4    -2.032   -1.283   -0.074     1.2557    0.0726    0.008    0.039     ABSO  Multiple scattering
+#   5    -2.036   -1.282   -0.078     1.1912    0.0645    0.008    0.046     ABSO  Multiple scattering
+#   6    -2.034   -1.277   -0.081     1.1207    0.0705    0.008    0.054     ABSO  Multiple scattering
+#   7    -2.030   -1.275   -0.078     1.0625    0.0582    0.008    0.061     ABSO  Multiple scattering
+#   8    -2.024   -1.275   -0.077     0.9752    0.0873    0.008    0.069     ABSO  Multiple scattering
+#   9    -2.020   -1.272   -0.075     0.8042    0.1710    0.008    0.077     ABSO  Multiple scattering
+#  10    -2.019   -1.277   -0.076     0.7373    0.0669    0.008    0.084     ABSO  Multiple scattering
+#  11    -2.016   -1.281   -0.078     0.6546    0.0827    0.008    0.092     ABSO  Multiple scattering
+#  12    -2.021   -1.282   -0.077     0.5683    0.0862    0.008    0.099     ABSO  Multiple scattering
+#  13    -2.020   -1.283   -0.081     0.4592    0.1091    0.008    0.107     ABSO  Multiple scattering
+#  14    -2.021   -1.287   -0.081     0.3337    0.1255    0.008    0.114     ABSO  Multiple scattering
+#  15    -2.023   -1.286   -0.082     0.2201    0.1137    0.008    0.122     ABSO  Multiple scattering
+#  16    -2.025   -1.287   -0.082     0.0837    0.1363    0.008    0.130     ABSO  Multiple scattering
+#  17    -2.025   -1.287   -0.082     0.0000    0.0837    0.002    0.132     ABSO  Energy loss
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 37     Parent ID = 36
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -2.041   -1.285   -0.064     0.6688    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.000   -1.294   -0.144     0.6688    0.0000    0.090    0.090     ABSO  Transportation
+#   2    -2.000   -1.294   -0.144     0.6688    0.0000    0.000    0.090     GAPX  No active process
+#   3    -1.500   -1.398   -1.112     0.6688    0.0000    1.094    1.184     GAPX  Transportation
+#   4    -1.500   -1.398   -1.112     0.6688    0.0000    0.000    1.184     ABSO  No active process
+#   5    -1.293   -1.441   -1.513     0.6265    0.0000    0.454    1.638     ABSO  Compton scattering
+#   6    -1.007   -1.751   -2.159     0.2757    0.0000    0.772    2.409     ABSO  Compton scattering
+#   7    -1.015   -1.742   -2.166     0.0000    0.2757    0.014    2.423     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 38     Parent ID = 37
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.654   -0.201   -0.215     0.2741    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.655   -0.201   -0.215     0.0000    0.2741    0.013    0.013     ABSO  Energy loss
+#   0    -1.007   -1.751   -2.159     0.3507    0.0000    0.000    0.000     ABSO  No active process
+#   1    -1.007   -1.752   -2.160     0.0000    0.3507    0.019    0.019     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 39     Parent ID = 33
+  Particle = e-     Track ID = 39     Parent ID = 37
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.519   -0.239   -0.017     0.2340    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.542   -0.569    0.016     0.2313    0.0000    0.333    0.333     ABSO  Compton scattering
-#   2    -6.534   -0.743    0.069     0.0000    0.0880    0.182    0.515     ABSO  Photoelectric effect
+#   0    -1.293   -1.441   -1.513     0.0423    0.0000    0.000    0.000     ABSO  No active process
+#   1    -1.293   -1.441   -1.513     0.0000    0.0423    0.001    0.001     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 40     Parent ID = 39
+  Particle = e-     Track ID = 40     Parent ID = 29
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.534   -0.743    0.069     0.1433    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.534   -0.743    0.070     0.0000    0.1433    0.005    0.005     ABSO  Energy loss
+#   0    -2.302   -1.362   -0.115    10.0448    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.271   -1.370   -0.114     9.3427    0.4460    0.033    0.033     ABSO  Bremstrahlung
+#   2    -2.239   -1.377   -0.125     8.6934    0.5432    0.036    0.069     ABSO  Bremstrahlung
+#   3    -2.194   -1.385   -0.169     7.9981    0.6953    0.068    0.137     ABSO  Multiple scattering
+#   4    -2.155   -1.399   -0.182     7.5225    0.4755    0.046    0.183     ABSO  Multiple scattering
+#   5    -2.121   -1.427   -0.183     7.0534    0.4691    0.046    0.230     ABSO  Multiple scattering
+#   6    -2.081   -1.441   -0.175     6.5079    0.5455    0.046    0.276     ABSO  Multiple scattering
+#   7    -2.045   -1.417   -0.175     6.0816    0.4263    0.046    0.323     ABSO  Multiple scattering
+#   8    -2.045   -1.417   -0.175     3.9190    0.0008    0.000    0.323     ABSO  Bremstrahlung
+#   9    -2.015   -1.401   -0.181     3.3948    0.5242    0.046    0.369     ABSO  Multiple scattering
+#  10    -2.000   -1.410   -0.200     2.3600    1.0348    0.042    0.412     ABSO  Transportation
+#  11    -2.000   -1.410   -0.200     2.3600    0.0000    0.000    0.412     GAPX  No active process
+#  12    -1.968   -1.533   -0.218     2.1818    0.1781    0.134    0.546     GAPX  Multiple scattering
+#  13    -2.000   -1.590   -0.238     2.0873    0.0945    0.072    0.618     GAPX  Transportation
+#  14    -2.000   -1.590   -0.238     2.0873    0.0000    0.000    0.618     ABSO  No active process
+#  15    -2.005   -1.591   -0.241     2.0111    0.0762    0.007    0.624     ABSO  Multiple scattering
+#  16    -2.009   -1.592   -0.246     1.9620    0.0491    0.007    0.631     ABSO  Multiple scattering
+#  17    -2.015   -1.592   -0.246     1.8943    0.0677    0.007    0.638     ABSO  Multiple scattering
+#  18    -2.015   -1.586   -0.247     1.8395    0.0548    0.007    0.645     ABSO  Multiple scattering
+#  19    -2.020   -1.582   -0.248     1.7852    0.0543    0.007    0.651     ABSO  Multiple scattering
+#  20    -2.021   -1.579   -0.249     1.4989    0.0139    0.004    0.655     ABSO  Bremstrahlung
+#  21    -2.024   -1.575   -0.246     1.4263    0.0726    0.007    0.662     ABSO  Multiple scattering
+#  22    -2.030   -1.574   -0.247     1.3698    0.0565    0.007    0.668     ABSO  Multiple scattering
+#  23    -2.035   -1.576   -0.250     1.3181    0.0517    0.007    0.675     ABSO  Multiple scattering
+#  24    -2.033   -1.576   -0.256     1.2463    0.0718    0.007    0.682     ABSO  Multiple scattering
+#  25    -2.028   -1.582   -0.257     1.1726    0.0737    0.010    0.692     ABSO  Multiple scattering
+#  26    -2.029   -1.581   -0.252     1.0754    0.0972    0.007    0.698     ABSO  Multiple scattering
+#  27    -2.033   -1.577   -0.252     0.9923    0.0831    0.007    0.705     ABSO  Multiple scattering
+#  28    -2.034   -1.577   -0.257     0.9173    0.0749    0.007    0.712     ABSO  Multiple scattering
+#  29    -2.029   -1.577   -0.259     0.8752    0.0422    0.007    0.719     ABSO  Multiple scattering
+#  30    -2.028   -1.572   -0.258     0.7869    0.0882    0.007    0.726     ABSO  Multiple scattering
+#  31    -2.029   -1.572   -0.263     0.7254    0.0615    0.007    0.733     ABSO  Multiple scattering
+#  32    -2.031   -1.570   -0.266     0.6740    0.0514    0.007    0.739     ABSO  Multiple scattering
+#  33    -2.032   -1.572   -0.270     0.5785    0.0955    0.007    0.746     ABSO  Multiple scattering
+#  34    -2.032   -1.568   -0.271     0.5192    0.0592    0.007    0.753     ABSO  Multiple scattering
+#  35    -2.032   -1.569   -0.275     0.4604    0.0588    0.007    0.760     ABSO  Multiple scattering
+#  36    -2.033   -1.565   -0.275     0.3821    0.0783    0.007    0.766     ABSO  Multiple scattering
+#  37    -2.033   -1.565   -0.278     0.2893    0.0928    0.007    0.773     ABSO  Multiple scattering
+#  38    -2.034   -1.564   -0.280     0.1882    0.1011    0.007    0.780     ABSO  Multiple scattering
+#  39    -2.033   -1.564   -0.280     0.0411    0.1471    0.007    0.787     ABSO  Multiple scattering
+#  40    -2.033   -1.564   -0.280     0.0000    0.0411    0.001    0.787     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 41     Parent ID = 39
+  Particle = gamma     Track ID = 41     Parent ID = 40
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.542   -0.569    0.016     0.0027    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.542   -0.569    0.016     0.0000    0.0027    0.000    0.000     ABSO  Energy loss
+#   0    -2.021   -1.579   -0.249     0.2724    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.046   -1.551   -0.252     0.0000    0.0880    0.038    0.038     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 42     Parent ID = 32
+  Particle = e-     Track ID = 42     Parent ID = 41
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.577   -0.221   -0.023    12.2904    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.528   -0.237   -0.011     9.9344    0.5586    0.055    0.055     ABSO  Bremstrahlung
-#   2    -6.500   -0.244   -0.002     9.5616    0.3727    0.032    0.087     ABSO  Transportation
-#   3    -6.500   -0.244   -0.002     9.5616    0.0000    0.000    0.087     GAPX  No active process
-#   4    -6.131   -0.413   -0.067     8.7770    0.7383    0.415    0.502     GAPX  Bremstrahlung
-#   5    -6.000   -0.521   -0.095     8.2442    0.5329    0.174    0.677     GAPX  Transportation
-#   6    -6.000   -0.521   -0.095     8.2442    0.0000    0.000    0.677     ABSO  No active process
-#   7    -5.983   -0.548   -0.093     7.9560    0.2882    0.033    0.709     ABSO  Multiple scattering
-#   8    -5.985   -0.563   -0.092     7.6275    0.1805    0.016    0.725     ABSO  Bremstrahlung
-#   9    -5.970   -0.584   -0.082     5.4485    0.2784    0.029    0.754     ABSO  Bremstrahlung
-#  10    -5.957   -0.606   -0.066     5.0710    0.3775    0.033    0.787     ABSO  Multiple scattering
-#  11    -5.939   -0.613   -0.042     4.7477    0.3233    0.033    0.820     ABSO  Multiple scattering
-#  12    -5.915   -0.598   -0.036     4.4372    0.3106    0.033    0.853     ABSO  Multiple scattering
-#  13    -5.909   -0.596   -0.037     4.1227    0.0593    0.006    0.859     ABSO  Bremstrahlung
-#  14    -5.881   -0.589   -0.036     3.7918    0.3309    0.033    0.892     ABSO  Multiple scattering
-#  15    -5.870   -0.590   -0.008     3.3923    0.3995    0.036    0.928     ABSO  Multiple scattering
-#  16    -5.857   -0.592    0.016     3.0679    0.3244    0.033    0.961     ABSO  Multiple scattering
-#  17    -5.852   -0.598    0.016     2.0373    0.0799    0.008    0.969     ABSO  Bremstrahlung
-#  18    -5.830   -0.603    0.017     1.7124    0.3249    0.033    1.002     ABSO  Multiple scattering
-#  19    -5.817   -0.601    0.017     1.3380    0.1477    0.017    1.019     ABSO  Bremstrahlung
-#  20    -5.801   -0.607    0.016     0.9474    0.3906    0.033    1.052     ABSO  Multiple scattering
-#  21    -5.812   -0.611    0.023     0.4962    0.4512    0.033    1.085     ABSO  Multiple scattering
-#  22    -5.812   -0.609    0.022     0.0000    0.4962    0.031    1.116     ABSO  Energy loss
+#   0    -2.046   -1.551   -0.252     0.1844    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.046   -1.551   -0.252     0.0000    0.1844    0.007    0.007     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 43     Parent ID = 42
+  Particle = gamma     Track ID = 43     Parent ID = 40
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.817   -0.601    0.017     0.2267    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.767   -0.591    0.103     0.0000    0.2267    0.100    0.100     ABSO  Photoelectric effect
+#   0    -2.045   -1.417   -0.175     2.1617    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.000   -1.397   -0.161     2.1617    0.0000    0.051    0.051     ABSO  Transportation
+#   2    -2.000   -1.397   -0.161     2.1617    0.0000    0.000    0.051     GAPX  No active process
+#   3    -1.500   -1.169   -0.010     2.1617    0.0000    0.570    0.621     GAPX  Transportation
+#   4    -1.500   -1.169   -0.010     2.1617    0.0000    0.000    0.621     ABSO  No active process
+#   5    -0.500   -0.713    0.293     2.1617    0.0000    1.140    1.761     ABSO  Transportation
+#   6    -0.500   -0.713    0.293     2.1617    0.0000    0.000    1.761     GAPX  No active process
+#   7     0.000   -0.485    0.444     2.1617    0.0000    0.570    2.331     GAPX  Transportation
+#   8     0.000   -0.485    0.444     2.1617    0.0000    0.000    2.331     ABSO  No active process
+#   9     1.000   -0.030    0.747     2.1617    0.0000    1.140    3.471     ABSO  Transportation
+#  10     1.000   -0.030    0.747     2.1617    0.0000    0.000    3.471     GAPX  No active process
+#  11     1.500    0.198    0.898     2.1617    0.0000    0.570    4.041     GAPX  Transportation
+#  12     1.500    0.198    0.898     2.1617    0.0000    0.000    4.041     ABSO  No active process
+#  13     2.500    0.654    1.201     2.1617    0.0000    1.140    5.180     ABSO  Transportation
+#  14     2.500    0.654    1.201     2.1617    0.0000    0.000    5.180     GAPX  No active process
+#  15     3.000    0.882    1.352     2.1617    0.0000    0.570    5.750     GAPX  Transportation
+#  16     3.000    0.882    1.352     2.1617    0.0000    0.000    5.750     ABSO  No active process
+#  17     4.000    1.338    1.655     2.1617    0.0000    1.140    6.890     ABSO  Transportation
+#  18     4.000    1.338    1.655     2.1617    0.0000    0.000    6.890     GAPX  No active process
+#  19     4.500    1.565    1.806     2.1617    0.0000    0.570    7.460     GAPX  Transportation
+#  20     4.500    1.565    1.806     2.1617    0.0000    0.000    7.460     ABSO  No active process
+#  21     4.767    1.687    1.887     1.9161    0.0000    0.305    7.765     ABSO  Compton scattering
+#  22     5.437    2.102    2.303     0.0000    0.0000    0.891    8.656     ABSO  Lepton pair production
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 44     Parent ID = 42
+  Particle = e+     Track ID = 44     Parent ID = 43
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.852   -0.598    0.016     0.9507    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.309   -1.728   -0.293     0.0000    0.0880    1.291    1.291     ABSO  Photoelectric effect
+#   0     5.437    2.102    2.303     0.0709    0.0000    0.000    0.000     ABSO  No active process
+#   1     5.437    2.102    2.303     0.0000    0.0709    0.001    0.001     ABSO  Energy loss
+#   2     5.437    2.102    2.303     0.0000    0.0000    0.000    0.001     ABSO  Positron annihilation
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 45     Parent ID = 44
+  Particle = gamma     Track ID = 45     Parent ID = 44
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.309   -1.728   -0.293     0.8627    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.307   -1.728   -0.297     0.0000    0.8627    0.062    0.062     ABSO  Energy loss
+#   0     5.437    2.102    2.303     0.5110    0.0000    0.000    0.000     ABSO  No active process
+#   1     5.500    2.360    2.250     0.5110    0.0000    0.271    0.271     ABSO  Transportation
+#   2     5.500    2.360    2.250     0.5110    0.0000    0.000    0.271     GAPX  No active process
+#   3     6.000    4.415    1.830     0.5110    0.0000    2.156    2.427     GAPX  Transportation
+#   4     6.000    4.415    1.830     0.5110    0.0000    0.000    2.427     ABSO  No active process
+#   5     6.053    4.633    1.785     0.0000    0.0880    0.229    2.656     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 46     Parent ID = 42
+  Particle = e-     Track ID = 46     Parent ID = 45
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.909   -0.596   -0.037     0.2552    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.868   -0.558   -0.030     0.0000    0.2552    0.056    0.056     ABSO  Photoelectric effect
+#   0     6.053    4.633    1.785     0.4230    0.0000    0.000    0.000     ABSO  No active process
+#   1     6.054    4.635    1.786     0.0000    0.4230    0.025    0.025     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 47     Parent ID = 42
+  Particle = gamma     Track ID = 47     Parent ID = 44
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.970   -0.584   -0.082     1.9006    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.000   -3.729    0.357     1.9006    0.0000    3.320    3.320     ABSO  Transportation
-#   2    -5.000   -3.729    0.357     1.9006    0.0000    0.000    3.320     GAPX  No active process
-#   3    -4.608   -5.000    0.535     1.9006    0.0000    1.342    4.662     GAPX  Transportation
-#   4    -4.608   -5.000    0.535     1.9006    0.0000    0.000    4.662     WRLD  No active process
-#   5    -4.300   -6.000    0.674     1.9006    0.0000    1.056    5.718     WRLD  Transportation
+#   0     5.437    2.102    2.303     0.5110    0.0000    0.000    0.000     ABSO  No active process
+#   1     5.375    1.845    2.355     0.2585    0.0000    0.270    0.270     ABSO  Compton scattering
+#   2     5.304    1.907    2.610     0.0000    0.0880    0.272    0.541     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 48     Parent ID = 42
+  Particle = e-     Track ID = 48     Parent ID = 47
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.985   -0.563   -0.092     0.1479    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.981   -0.581   -0.084     0.0000    0.0880    0.020    0.020     ABSO  Photoelectric effect
+#   0     5.304    1.907    2.610     0.1705    0.0000    0.000    0.000     ABSO  No active process
+#   1     5.304    1.908    2.610     0.0000    0.1705    0.006    0.006     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 49     Parent ID = 48
+  Particle = e-     Track ID = 49     Parent ID = 47
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.981   -0.581   -0.084     0.0599    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.981   -0.581   -0.084     0.0000    0.0599    0.001    0.001     ABSO  Energy loss
+#   0     5.375    1.845    2.355     0.2525    0.0000    0.000    0.000     ABSO  No active process
+#   1     5.375    1.844    2.355     0.0000    0.2525    0.012    0.012     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 50     Parent ID = 42
+  Particle = e-     Track ID = 50     Parent ID = 43
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.131   -0.413   -0.067     0.0463    0.0000    0.000    0.000     GAPX  No active process
-#   1    -6.000   -0.530   -0.100     0.0463    0.0000    0.179    0.179     GAPX  Transportation
-#   2    -6.000   -0.530   -0.100     0.0463    0.0000    0.000    0.179     ABSO  No active process
-#   3    -5.973   -0.555   -0.107     0.0000    0.0159    0.037    0.216     ABSO  Photoelectric effect
+#   0     5.437    2.102    2.303     0.8231    0.0000    0.000    0.000     ABSO  No active process
+#   1     5.437    2.105    2.305     0.0000    0.8231    0.059    0.059     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 51     Parent ID = 50
+  Particle = e-     Track ID = 51     Parent ID = 43
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.973   -0.555   -0.107     0.0304    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.973   -0.555   -0.107     0.0000    0.0304    0.000    0.000     ABSO  Energy loss
+#   0     4.767    1.687    1.887     0.2456    0.0000    0.000    0.000     ABSO  No active process
+#   1     4.768    1.687    1.886     0.0000    0.2456    0.011    0.011     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 52     Parent ID = 42
+  Particle = gamma     Track ID = 52     Parent ID = 40
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.528   -0.237   -0.011     1.7974    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500   -0.243   -0.002     1.7974    0.0000    0.030    0.030     ABSO  Transportation
-#   2    -6.500   -0.243   -0.002     1.7974    0.0000    0.000    0.030     GAPX  No active process
-#   3    -6.000   -0.350    0.151     1.7974    0.0000    0.534    0.564     GAPX  Transportation
-#   4    -6.000   -0.350    0.151     1.7974    0.0000    0.000    0.564     ABSO  No active process
-#   5    -5.837   -0.385    0.201     0.0000    0.0000    0.174    0.738     ABSO  Lepton pair production
+#   0    -2.239   -1.377   -0.125     0.1062    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.226   -1.386   -0.134     0.0000    0.1062    0.017    0.017     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e+     Track ID = 53     Parent ID = 52
+  Particle = gamma     Track ID = 53     Parent ID = 40
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.837   -0.385    0.201     0.7080    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.832   -0.387    0.201     0.0000    0.7080    0.049    0.049     ABSO  Energy loss
-#   2    -5.832   -0.387    0.201     0.0000    0.0000    0.000    0.049     ABSO  Positron annihilation
+#   0    -2.271   -1.370   -0.114     0.2561    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.106   -1.409   -0.118     0.0000    0.2561    0.169    0.169     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 54     Parent ID = 53
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.832   -0.387    0.201     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.000   -0.373    0.080     0.5110    0.0000    0.208    0.208     ABSO  Transportation
-#   2    -6.000   -0.373    0.080     0.5110    0.0000    0.000    0.208     GAPX  No active process
-#   3    -6.139   -0.360   -0.022     0.2505    0.0000    0.173    0.380     GAPX  Compton scattering
-#   4    -6.000   -0.130   -0.165     0.2505    0.0000    0.305    0.685     GAPX  Transportation
-#   5    -6.000   -0.130   -0.165     0.2505    0.0000    0.000    0.685     ABSO  No active process
-#   6    -5.966   -0.073   -0.200     0.0000    0.0880    0.075    0.760     ABSO  Photoelectric effect
-
-****************************************************************************************************
-  Particle = e-     Track ID = 55     Parent ID = 54
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.966   -0.073   -0.200     0.1625    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.965   -0.074   -0.200     0.0000    0.1625    0.006    0.006     ABSO  Energy loss
-
-****************************************************************************************************
-  Particle = e-     Track ID = 56     Parent ID = 54
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.139   -0.360   -0.022     0.2605    0.0000    0.000    0.000     GAPX  No active process
-#   1    -6.157   -0.366   -0.028     0.0000    0.2605    0.069    0.069     GAPX  Energy loss
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 57     Parent ID = 53
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.832   -0.387    0.201     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.575   -0.410    0.389     0.0000    0.0880    0.319    0.319     ABSO  Photoelectric effect
-
-****************************************************************************************************
-  Particle = e-     Track ID = 58     Parent ID = 57
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.575   -0.410    0.389     0.4230    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.574   -0.410    0.390     0.0000    0.4230    0.025    0.025     ABSO  Energy loss
-
-****************************************************************************************************
-  Particle = e-     Track ID = 59     Parent ID = 52
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.837   -0.385    0.201     0.0674    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.837   -0.385    0.201     0.0000    0.0674    0.001    0.001     ABSO  Energy loss
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 60     Parent ID = 0
+  Particle = gamma     Track ID = 54     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.343   -0.018   -0.007     2.0998    0.0000    0.000    0.000     ABSO  No active process
@@ -1325,102 +1319,79 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   2    -6.500   -0.191    0.010     2.0998    0.0000    0.000    0.861     GAPX  No active process
 #   3    -6.000   -0.294    0.020     2.0998    0.0000    0.511    1.371     GAPX  Transportation
 #   4    -6.000   -0.294    0.020     2.0998    0.0000    0.000    1.371     ABSO  No active process
-#   5    -5.851   -0.325    0.023     0.0000    0.0000    0.152    1.523     ABSO  Lepton pair production
+#   5    -5.000   -0.500    0.041     2.0998    0.0000    1.021    2.393     ABSO  Transportation
+#   6    -5.000   -0.500    0.041     2.0998    0.0000    0.000    2.393     GAPX  No active process
+#   7    -4.500   -0.603    0.051     2.0998    0.0000    0.511    2.903     GAPX  Transportation
+#   8    -4.500   -0.603    0.051     2.0998    0.0000    0.000    2.903     ABSO  No active process
+#   9    -3.500   -0.809    0.071     2.0998    0.0000    1.021    3.924     ABSO  Transportation
+#  10    -3.500   -0.809    0.071     2.0998    0.0000    0.000    3.924     GAPX  No active process
+#  11    -3.000   -0.912    0.081     2.0998    0.0000    0.511    4.435     GAPX  Transportation
+#  12    -3.000   -0.912    0.081     2.0998    0.0000    0.000    4.435     ABSO  No active process
+#  13    -2.000   -1.118    0.101     2.0998    0.0000    1.021    5.456     ABSO  Transportation
+#  14    -2.000   -1.118    0.101     2.0998    0.0000    0.000    5.456     GAPX  No active process
+#  15    -1.500   -1.221    0.111     2.0998    0.0000    0.511    5.967     GAPX  Transportation
+#  16    -1.500   -1.221    0.111     2.0998    0.0000    0.000    5.967     ABSO  No active process
+#  17    -0.853   -1.355    0.124     1.3752    0.0000    0.660    6.627     ABSO  Compton scattering
+#  18    -0.500   -1.518    0.328     1.3752    0.0000    0.439    7.067     ABSO  Transportation
+#  19    -0.500   -1.518    0.328     1.3752    0.0000    0.000    7.067     GAPX  No active process
+#  20     0.000   -1.750    0.616     1.3752    0.0000    0.622    7.688     GAPX  Transportation
+#  21     0.000   -1.750    0.616     1.3752    0.0000    0.000    7.688     ABSO  No active process
+#  22     0.299   -1.888    0.788     1.1615    0.0000    0.372    8.060     ABSO  Compton scattering
+#  23     0.627   -2.256    1.010     0.8354    0.0000    0.541    8.601     ABSO  Compton scattering
+#  24     1.000   -2.328    1.173     0.8354    0.0000    0.414    9.014     ABSO  Transportation
+#  25     1.000   -2.328    1.173     0.8354    0.0000    0.000    9.014     GAPX  No active process
+#  26     1.500   -2.425    1.392     0.8354    0.0000    0.554    9.568     GAPX  Transportation
+#  27     1.500   -2.425    1.392     0.8354    0.0000    0.000    9.568     ABSO  No active process
+#  28     1.775   -2.478    1.512     0.6118    0.0000    0.305    9.873     ABSO  Compton scattering
+#  29     1.906   -2.536    1.477     0.0000    0.6118    0.148   10.021     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e+     Track ID = 61     Parent ID = 60
+  Particle = e-     Track ID = 55     Parent ID = 54
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.851   -0.325    0.023     0.8223    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.846   -0.323    0.025     0.0000    0.8223    0.059    0.059     ABSO  Energy loss
-#   2    -5.846   -0.323    0.025     0.0000    0.0000    0.000    0.059     ABSO  Positron annihilation
+#   0     1.775   -2.478    1.512     0.2236    0.0000    0.000    0.000     ABSO  No active process
+#   1     1.775   -2.478    1.512     0.0000    0.2236    0.010    0.010     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 62     Parent ID = 61
+  Particle = e-     Track ID = 56     Parent ID = 54
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.846   -0.323    0.025     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.655   -0.320    0.112     0.2592    0.0000    0.210    0.210     ABSO  Compton scattering
-#   2    -5.632   -0.216    0.066     0.0000    0.2592    0.116    0.326     ABSO  Photoelectric effect
+#   0     0.627   -2.256    1.010     0.3261    0.0000    0.000    0.000     ABSO  No active process
+#   1     0.627   -2.257    1.011     0.0000    0.3261    0.017    0.017     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 63     Parent ID = 62
+  Particle = e-     Track ID = 57     Parent ID = 54
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.655   -0.320    0.112     0.2518    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.654   -0.320    0.113     0.0000    0.2518    0.012    0.012     ABSO  Energy loss
+#   0     0.299   -1.888    0.788     0.2137    0.0000    0.000    0.000     ABSO  No active process
+#   1     0.299   -1.888    0.788     0.0000    0.2137    0.009    0.009     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 64     Parent ID = 61
+  Particle = e-     Track ID = 58     Parent ID = 54
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.846   -0.323    0.025     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.942   -0.324   -0.020     0.4750    0.0360    0.107    0.107     ABSO  Compton scattering
-#   2    -6.000   -0.306   -0.073     0.4750    0.0000    0.080    0.187     ABSO  Transportation
-#   3    -6.000   -0.306   -0.073     0.4750    0.0000    0.000    0.187     GAPX  No active process
-#   4    -6.500   -0.153   -0.534     0.4750    0.0000    0.697    0.884     GAPX  Transportation
-#   5    -6.500   -0.153   -0.534     0.4750    0.0000    0.000    0.884     ABSO  No active process
-#   6    -6.840   -0.048   -0.847     0.0000    0.0880    0.475    1.359     ABSO  Photoelectric effect
+#   0    -0.853   -1.355    0.124     0.7246    0.0000    0.000    0.000     ABSO  No active process
+#   1    -0.850   -1.354    0.122     0.0000    0.7246    0.050    0.050     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 65     Parent ID = 64
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.840   -0.048   -0.847     0.3870    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.842   -0.048   -0.848     0.0000    0.3870    0.022    0.022     ABSO  Energy loss
-
-****************************************************************************************************
-  Particle = e-     Track ID = 66     Parent ID = 60
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.851   -0.325    0.023     0.2555    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.851   -0.326    0.023     0.0000    0.2555    0.012    0.012     ABSO  Energy loss
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 67     Parent ID = 0
+  Particle = gamma     Track ID = 59     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.457   -0.002    0.002     1.1257    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500   -0.074    0.020     1.1257    0.0000    0.960    0.960     ABSO  Transportation
-#   2    -6.500   -0.074    0.020     1.1257    0.0000    0.000    0.960     GAPX  No active process
-#   3    -6.000   -0.111    0.030     1.1257    0.0000    0.502    1.461     GAPX  Transportation
-#   4    -6.000   -0.111    0.030     1.1257    0.0000    0.000    1.461     ABSO  No active process
-#   5    -5.000   -0.187    0.049     1.1257    0.0000    1.003    2.464     ABSO  Transportation
-#   6    -5.000   -0.187    0.049     1.1257    0.0000    0.000    2.464     GAPX  No active process
-#   7    -4.500   -0.224    0.059     1.1257    0.0000    0.502    2.966     GAPX  Transportation
-#   8    -4.500   -0.224    0.059     1.1257    0.0000    0.000    2.966     ABSO  No active process
-#   9    -3.500   -0.299    0.078     1.1257    0.0000    1.003    3.969     ABSO  Transportation
-#  10    -3.500   -0.299    0.078     1.1257    0.0000    0.000    3.969     GAPX  No active process
-#  11    -3.000   -0.337    0.088     1.1257    0.0000    0.502    4.470     GAPX  Transportation
-#  12    -3.000   -0.337    0.088     1.1257    0.0000    0.000    4.470     ABSO  No active process
-#  13    -2.820   -0.350    0.091     0.8991    0.0000    0.181    4.651     ABSO  Compton scattering
-#  14    -2.637   -0.371    0.192     0.0000    0.0880    0.209    4.861     ABSO  Photoelectric effect
+#   1    -7.035   -0.034    0.010     0.2563    0.0000    0.423    0.423     ABSO  Compton scattering
+#   2    -7.200   -0.215    0.136     0.0000    0.2563    0.276    0.699     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 68     Parent ID = 67
+  Particle = e-     Track ID = 60     Parent ID = 59
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.637   -0.371    0.192     0.8111    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.633   -0.370    0.193     0.0000    0.8111    0.058    0.058     ABSO  Energy loss
-
-****************************************************************************************************
-  Particle = e-     Track ID = 69     Parent ID = 67
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.820   -0.350    0.091     0.2266    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.819   -0.350    0.091     0.0820    0.0034    0.000    0.000     ABSO  Bremstrahlung
-#   2    -2.819   -0.350    0.091     0.0000    0.0820    0.002    0.002     ABSO  Energy loss
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 70     Parent ID = 69
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.819   -0.350    0.091     0.1412    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.762   -0.398    0.101     0.0000    0.1412    0.075    0.075     ABSO  Photoelectric effect
+#   0    -7.035   -0.034    0.010     0.8694    0.0000    0.000    0.000     ABSO  No active process
+#   1    -7.031   -0.031   -0.002     0.1325    0.7369    0.056    0.056     ABSO  Bremstrahlung
+#   2    -7.032   -0.031   -0.002     0.0000    0.1325    0.004    0.060     ABSO  Energy loss
 --- Finish event 
-   Absorber: total energy (MeV):  46.011       total track length (cm):    3.416
-   Gap:      total energy (MeV):   1.577       total track length (cm):    0.662
-Time of this run:   User=0.01s Real=0.02s Sys=0s
+   Absorber: total energy (MeV):  48.124       total track length (cm):    3.381
+   Gap:      total energy (MeV):   0.542       total track length (cm):    0.278
+Time of this run:   User=0s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
 WARNING - Attempt to delete the physical volume store while geometry closed !
@@ -1431,14 +1402,14 @@ WARNING - Attempt to delete the region store while geometry closed !
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.28/00  14 December 2010   *
+  *   Version   5.30/00      27 June 2011   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.28/00 (tags/v5-28-00@37603, Dec 21 2010, 12:34:28 on linuxx8664gcc)
+ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -1452,7 +1423,7 @@ Loading geant4vmc library ...
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-09-04    (17-December-2010)
+ Geant4 version Name: geant4-09-04-patch-02    (24-June-2011)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -1464,8 +1435,6 @@ Adding SpecialPhysicsList stepLimiter
 Debug mode is switched on.
 Visualization Manager instantiating with verbosity "warnings (3)"...
 Geant4 has been created.
-G4ParticleDefinition::SetApplyCutsFlag() for proton
-becomes obsolete. Production threshold is applied only for gamma, e- and e+.
 --- Construct geometry 
 Water
 Scintillator
@@ -1521,7 +1490,6 @@ Instantiated 6 volume table entries
               6 sensitive detectors
 **********************************************
 
-Warning in <TClass::TClass>: no dictionary for class stack<TParticle*,deque<TParticle*> > is available
 --- Run MC for 1 events
 
 phot:   for  gamma    SubType= 12
@@ -1810,8 +1778,8 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.463    0.000    0.000   285.3693    0.0000    0.000    0.000     ABSO  No active process
-#   1    -7.500   -0.024   -0.019   285.3693    0.0000    0.049    0.049     ABSO  Transportation
-#   2    -7.500   -0.024   -0.019   285.3693    0.0000    0.000    0.049     WRLD  No active process
+#   1    -7.500   -0.024   -0.020   285.3693    0.0000    0.049    0.049     ABSO  Transportation
+#   2    -7.500   -0.024   -0.020   285.3693    0.0000    0.000    0.049     WRLD  No active process
 #   3    -9.000   -1.007   -0.804   285.3693    0.0000    1.957    2.006     WRLD  Transportation
 
 ****************************************************************************************************
@@ -1819,14 +1787,14 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.463    0.000    0.000    81.9564    0.0000    0.000    0.000     ABSO  No active process
-#   1    -7.442    0.014    0.011    68.3677   13.5887    0.027    0.027     ABSO  Energy loss
-#   2    -7.423    0.025    0.021    54.0540   14.3137    0.024    0.051     ABSO  Energy loss
-#   3    -7.407    0.035    0.030    38.5550   15.4989    0.021    0.073     ABSO  Energy loss
-#   4    -7.394    0.043    0.040    21.1707   17.3844    0.018    0.091     ABSO  Energy loss
-#   5    -7.385    0.048    0.045     1.2709   19.8997    0.011    0.102     ABSO  Energy loss
-#   6    -7.385    0.048    0.045     0.0000    1.2709    0.000    0.102     ABSO  Energy loss
+#   1    -7.442    0.014    0.011    68.3827   13.5736    0.027    0.027     ABSO  Energy loss
+#   2    -7.423    0.025    0.021    54.2071   14.1756    0.024    0.051     ABSO  Energy loss
+#   3    -7.406    0.034    0.031    38.9693   15.2378    0.021    0.073     ABSO  Energy loss
+#   4    -7.392    0.042    0.039    21.9280   17.0413    0.018    0.091     ABSO  Energy loss
+#   5    -7.383    0.046    0.045     0.2755   21.6525    0.012    0.103     ABSO  Energy loss
+#   6    -7.383    0.046    0.045     0.0000    0.2755    0.000    0.103     ABSO  Energy loss
 --- Finish event 
-   Absorber: total energy (MeV): 1181.956       total track length (cm):    0.144
+   Absorber: total energy (MeV): 1181.956       total track length (cm):    0.145
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 Time of this run:   User=0s Real=0s Sys=0s
 Number of events processed: 1
@@ -1835,14 +1803,14 @@ Number of events processed: 1
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.28/00  14 December 2010   *
+  *   Version   5.30/00      27 June 2011   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.28/00 (tags/v5-28-00@37603, Dec 21 2010, 12:34:28 on linuxx8664gcc)
+ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -1855,7 +1823,7 @@ Loading g4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-09-04    (17-December-2010)
+ Geant4 version Name: geant4-09-04-patch-02    (24-June-2011)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -1866,8 +1834,6 @@ Adding SpecialPhysicsList stepLimiter
 Debug mode is switched on.
 Visualization Manager instantiating with verbosity "warnings (3)"...
 Geant4 has been created.
-G4ParticleDefinition::SetApplyCutsFlag() for proton
-becomes obsolete. Production threshold is applied only for gamma, e- and e+.
 Water
 Scintillator
 Mylar
@@ -1920,7 +1886,6 @@ Instantiated 6 volume table entries
               6 sensitive detectors
 **********************************************
 
-Warning in <TClass::TClass>: no dictionary for class stack<TParticle*,deque<TParticle*> > is available
 
 phot:   for  gamma    SubType= 12
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -2199,7 +2164,7 @@ hPairProd:   for  pi-    SubType= 4
       Current track pi0  is a decay product of Parent ID = 0
       Current track pi0  is a decay product of Parent ID = 0
 
-   Absorber: total energy (MeV): 1611.08       total track length (cm):   110.01
-   Gap:      total energy (MeV): 48.1182       total track length (cm):  23.4999
-Time of this run:   User=0.08s Real=0.09s Sys=0s
+   Absorber: total energy (MeV): 1392.35       total track length (cm):  95.6123
+   Gap:      total energy (MeV): 55.5354       total track length (cm):   27.512
+Time of this run:   User=0.04s Real=0.04s Sys=0s
 Number of events processed: 1

@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.28/00  14 December 2010   *
+  *   Version   5.30/00      27 June 2011   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.28/00 (tags/v5-28-00@37603, Dec 21 2010, 12:34:28 on linuxx8664gcc)
+ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -22,7 +22,7 @@ Loading g4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-09-04    (17-December-2010)
+ Geant4 version Name: geant4-09-04-patch-02    (24-June-2011)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -651,121 +651,157 @@ hPairProd:   for  pi-    SubType= 4
       Lambda tables from threshold to 10 TeV in 77 bins, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :   Emin=        0 eV       Emax=         10 TeV
-Number of optical photons produced in this event : 1725
-Number of optical photons produced in this event : 1587
+Number of optical photons produced in this event : 1680
+Number of optical photons produced in this event : 1666
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03773e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+   aPhotonEnergy = 2.03501e-06 [MeV]  PMmin = 2.038e-06 [MeV]
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03773e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+   aPhotonEnergy = 2.03501e-06 [MeV]  PMmin = 2.038e-06 [MeV]
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03773e-06 [MeV]  PMmin = 2.038e-06 [MeV]
-Number of optical photons produced in this event : 1653
-Number of optical photons produced in this event : 1616
+   aPhotonEnergy = 2.03501e-06 [MeV]  PMmin = 2.038e-06 [MeV]
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03565e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+   aPhotonEnergy = 2.03761e-06 [MeV]  PMmin = 2.038e-06 [MeV]
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03565e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+   aPhotonEnergy = 2.03761e-06 [MeV]  PMmin = 2.038e-06 [MeV]
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03565e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+   aPhotonEnergy = 2.03761e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+Number of optical photons produced in this event : 1676
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03468e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+   aPhotonEnergy = 2.03634e-06 [MeV]  PMmin = 2.038e-06 [MeV]
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03468e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+   aPhotonEnergy = 2.03634e-06 [MeV]  PMmin = 2.038e-06 [MeV]
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03468e-06 [MeV]  PMmin = 2.038e-06 [MeV]
-Number of optical photons produced in this event : 1729
+   aPhotonEnergy = 2.03634e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+Number of optical photons produced in this event : 1680
+Number of optical photons produced in this event : 1643
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03438e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+   aPhotonEnergy = 2.0354e-06 [MeV]  PMmin = 2.038e-06 [MeV]
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03438e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+   aPhotonEnergy = 2.0354e-06 [MeV]  PMmin = 2.038e-06 [MeV]
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03438e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+   aPhotonEnergy = 2.0354e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+Number of optical photons produced in this event : 1732
+Number of optical photons produced in this event : 1715
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03724e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+   aPhotonEnergy = 2.03548e-06 [MeV]  PMmin = 2.038e-06 [MeV]
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03724e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+   aPhotonEnergy = 2.03548e-06 [MeV]  PMmin = 2.038e-06 [MeV]
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03724e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+   aPhotonEnergy = 2.03548e-06 [MeV]  PMmin = 2.038e-06 [MeV]
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03655e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+   aPhotonEnergy = 2.03703e-06 [MeV]  PMmin = 2.038e-06 [MeV]
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03655e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+   aPhotonEnergy = 2.03703e-06 [MeV]  PMmin = 2.038e-06 [MeV]
 
 *** G4Exception : OutOfRange
       issued by : G4MaterialPropertyVector::GetProperty()
 Attempt to retrieve property below range !
 *** This is just a warning message.
-   aPhotonEnergy = 2.03655e-06 [MeV]  PMmin = 2.038e-06 [MeV]
-Number of optical photons produced in this event : 1706
-Number of optical photons produced in this event : 1675
-Number of optical photons produced in this event : 1605
-Number of optical photons produced in this event : 1682
-Number of optical photons produced in this event : 1679
+   aPhotonEnergy = 2.03703e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+   aPhotonEnergy = 2.03416e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+   aPhotonEnergy = 2.03416e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+   aPhotonEnergy = 2.03416e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+Number of optical photons produced in this event : 1669
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+   aPhotonEnergy = 2.0373e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+   aPhotonEnergy = 2.0373e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+
+*** G4Exception : OutOfRange
+      issued by : G4MaterialPropertyVector::GetProperty()
+Attempt to retrieve property below range !
+*** This is just a warning message.
+   aPhotonEnergy = 2.0373e-06 [MeV]  PMmin = 2.038e-06 [MeV]
+Number of optical photons produced in this event : 1667
+Number of optical photons produced in this event : 1648

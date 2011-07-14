@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.28/00  14 December 2010   *
+  *   Version   5.30/00      27 June 2011   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.28/00 (tags/v5-28-00@37603, Dec 21 2010, 12:34:28 on linuxx8664gcc)
+ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -58,11 +58,11 @@ Number of optical photons produced in this event : 2130
 Number of optical photons produced in this event : 2057
 Number of optical photons produced in this event : 2130
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   352839871    1507E8BF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   941406831    381CBA6F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   352862909   352839871
-                                        HEX    150842BD    1507E8BF
+          with Store/Table at absolute adrs   941429869   941406831
+                                        HEX    381D146D    381CBA6F
                                         HEX        555A           0
                               relative adrs       21850           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

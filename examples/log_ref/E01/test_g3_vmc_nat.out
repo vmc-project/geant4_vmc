@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.28/00  14 December 2010   *
+  *   Version   5.30/00      27 June 2011   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.28/00 (tags/v5-28-00@37603, Dec 21 2010, 12:34:28 on linuxx8664gcc)
+ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -303,6 +303,9 @@ Sx=  1.000000Sy=    1.000000Sz=    1.000000
 Shape for /EXPH_1/CALB_1/LAYB_9: 
 BOX  parameters: 1,  40,  40,  
 
+Material with ID 2: 
+Aluminium  Aeff = 26.98  Zeff = 13  density = 2.7  radl = 8.8751  inter = 45.6209
+
 Material for LAYB volume: 
 Aluminium  2  Aeff = 26.98  Zeff = 13  density = 2.7  radl = 8.8751  inter = 45.6209
 
@@ -316,11 +319,11 @@ GetMaterial: Volume name XYZ not found
 VolId: Volume XYZ not found
 GetMedium: Volume name XYZ not found
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   886406335    34D57CBF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   425427567    195B826F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   886429373   886406335
-                                        HEX    34D5D6BD    34D57CBF
+          with Store/Table at absolute adrs   425450605   425427567
+                                        HEX    195BDC6D    195B826F
                                         HEX        555A           0
                               relative adrs       21850           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

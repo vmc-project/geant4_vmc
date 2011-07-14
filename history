@@ -11,6 +11,37 @@ $Id$
      
 Tags (history):
 ===============
+  14/06/2011
+  v2-12:
+    Migration to Root v5.30/00 and Geant4 9.5.b01
+    
+    Geant4 VMC:
+    Developments:
+    - Implemented new TVirtualMC functions:
+      Bool_t GetMaterial(Int_t imat, ...);
+      ... which replaced the current Gfmate(...) functions
+    - Mapping physics processes from 9.4.p02 
+    - Adding light anti-ions (ani_deuteron, anti_triton, anti_alpha, anti_He3) 
+      so that users do not to define them themselves via 
+      TVirtualMC::DefineParticle.
+
+    Fixes:
+    - Coverity defects
+    - Fix in TG4ParticlesManager for handling particles which have 
+      no equivalent in TDatabasePDG: the particle is now added in TDatabasePDG 
+      without issuing an exception
+
+    Examples:
+    - Adding a test for testing all available G4 physics lists
+    - Adding a test for the new function GetMaterial() in E01
+    - Removing code calling Geant3 visualization functions from all 
+      examples code and macros
+    - Adding a primary generator with anti_nuclei in E03 and added this test 
+      in test_suite
+    
+    Tested with Geant4 9.4.p02 and 9.5.b01, CLHEP 2.1.0.1, 
+      Root 5.28/00e and Root 5.30/00, VGM 3.04
+
   22/12/2010
   v2-11:
     Migration to Geant4 9.4 release.
