@@ -39,6 +39,7 @@ G4String TG4HadronPhysicsList::AvailableSelections()
     selections += availablePhysLists[i];
     selections += " ";    
   }  
+  selections += "ShieldingLEND "; 
 
   return selections;
 }  
