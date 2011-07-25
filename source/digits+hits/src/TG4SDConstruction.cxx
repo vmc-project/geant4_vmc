@@ -25,10 +25,18 @@
 #include <G4LogicalVolumeStore.hh>
 
 #include <TVirtualMCApplication.h>
+#include <TGeoManager.h>
+#include <TGeoVolume.h>
+
+const G4String  TG4SDConstruction::fgkDefaultSVLabel = "SV";
 
 //_____________________________________________________________________________
 TG4SDConstruction::TG4SDConstruction()    
-  : TG4Verbose("SDConstruction") 
+  : TG4Verbose("SDConstruction"),
+    fMessenger(this),
+    fSelectionFromTGeo(false),
+    fSVLabel(fgkDefaultSVLabel), 
+    fSelection()
 {
 /// Default constructor
 }
@@ -77,6 +85,38 @@ G4int TG4SDConstruction::CreateSD(G4LogicalVolume* lv) const
   return ((TG4SensitiveDetector*)sd)->GetID();
 }
 
+//_____________________________________________________________________________
+void  TG4SDConstruction::FillSDSelectionFromTGeo()
+{
+/// Retrieve the selection of sensitive volumes from TGeo.
+/// The volumes are marked as sensitive when there is set the TGeoVolume option
+/// to a given value (TG4SDConstruction::fgkDefaultSVLabel by default)
+
+  if ( ! gGeoManager ) {
+    TG4Globals::Exception(
+      "TG4SDServices", "FillSDSelectionFromTGeo", 
+      "TGeo manager not defined.");
+  }
+  
+  TObjArray* volumes = gGeoManager->GetListOfVolumes();
+  TIterator* it = volumes->MakeIterator();
+  TGeoVolume* volume = 0;
+  while ( ( volume = (static_cast<TGeoVolume*>(it->Next())) ) ) {
+    if ( TString(volume->GetOption()) == TString(fSVLabel.data()) ) {
+      G4cout << "Adding volume " << volume->GetName() << " in SD selection" 
+             << G4endl; 
+      fSelection.insert(volume->GetName());
+    }  
+  }
+
+  if ( ! fSelection.size() ) {
+    TString text = "No volumes with SD selection found in TGeo geometry.\n";
+    text += "    The SD selection will not be applied.";
+    TG4Globals::Warning(
+      "TG4SDServices", "FillSDSelectionFromTGeo", text);
+  }
+}        
+
 //
 // public methods
 //
@@ -86,13 +126,32 @@ void TG4SDConstruction::Construct()
 { 
 /// Create sensitive detectors and initialize the VMC application.
 /// Sensitive detectors are set to all logical volumes
-  
+
+  if ( fSelectionFromTGeo ) FillSDSelectionFromTGeo();
+
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
   
   for ( G4int i=0; i<G4int(lvStore->size()); i++ ) {
-    G4int sdID = CreateSD((*lvStore)[i]);
-    TG4SDServices::Instance()->MapVolume((*lvStore)[i], sdID);
-  }  
+    G4LogicalVolume* lv = (*lvStore)[i];
+    // Create SD if selection is empty; 
+    // or if volume name is in selection if selection is defined
+    if ( ! fSelection.size() ||
+          fSelection.find(lv->GetName()) != fSelection.end() ) {
+      G4int sdID = CreateSD(lv);
+      TG4SDServices::Instance()->MapVolume(lv, sdID);
+    }  
+  }
+  
+  
+  if ( fSelection.size() ) {
+    // Set volume IDs to volumes which have not SD
+    G4int counter = TG4SensitiveDetector::GetTotalNofSensitiveDetectors();
+    for ( G4int i=0; i<G4int(lvStore->size()); i++ ) {
+      G4LogicalVolume* lv = (*lvStore)[i];
+      if ( ! lv->GetSensitiveDetector() ) 
+        TG4SDServices::Instance()->MapVolume(lv, counter++);
+    }
+  }    
   
   TG4StateManager::Instance()->SetNewState(kInitGeometry);
   TVirtualMCApplication::Instance()->InitGeometry();
@@ -101,7 +160,24 @@ void TG4SDConstruction::Construct()
   if (VerboseLevel() > 1) {
     TG4SDServices::Instance()->PrintVolNameToIdMap();
     TG4SDServices::Instance()->PrintVolIdToLVMap();
+    if ( fSelection.size() ) {
+      TG4SDServices::Instance()->PrintSensitiveVolumes();
+    }  
   }  
 }
 
+//_____________________________________________________________________________
+void TG4SDConstruction::AddSelection(const G4String& selection)
+{
+/// Add the selection in the set of volume names which will be
+/// made sensitive.
 
+  std::istringstream is(selection);  
+  G4String token;
+  while ( is >> token ) {
+    if (VerboseLevel() > 1) {
+      G4cout << "Adding volume " << token <<  " in SD selection." << G4cout;
+    }  
+    fSelection.insert(token);
+  }  
+}  

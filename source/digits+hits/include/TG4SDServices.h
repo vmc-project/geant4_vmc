@@ -51,6 +51,7 @@ class TG4SDServices
     void PrintStatistics(G4bool open, G4bool close) const;
     void PrintVolNameToIdMap() const;
     void PrintVolIdToLVMap() const;
+    void PrintSensitiveVolumes() const;
 
     // set methods
     void SetIsStopRun(G4bool stopRun);
@@ -88,6 +89,9 @@ class TG4SDServices
 
     /// map volume id ->  logical volume
     std::map<G4int, G4LogicalVolume*>  fVolIdToLVMap;
+
+    /// map logical volume -> volume id 
+    std::map<G4LogicalVolume*, G4int>  fLVToVolIdMap;
 };
 
 // inline methods

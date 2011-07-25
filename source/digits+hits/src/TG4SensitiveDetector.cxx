@@ -68,7 +68,7 @@ G4bool TG4SensitiveDetector::ProcessHits(G4Step* step, G4TouchableHistory*)
 
   // let user sensitive detector process normal step
   fStepManager->SetStep(step, kNormalStep);
-  UserProcessHits(step->GetTrack(), step);
+  TVirtualMCApplication::Instance()->Stepping();
 
   return true;
 }
@@ -81,7 +81,7 @@ G4bool TG4SensitiveDetector::ProcessHitsOnBoundary(G4Step* step)
 
   // let user sensitive detector process boundary step
   fStepManager->SetStep(step, kBoundary);
-  UserProcessHits(step->GetTrack(), step);
+  TVirtualMCApplication::Instance()->Stepping();
 
   return true;
 }
