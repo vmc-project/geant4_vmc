@@ -110,7 +110,9 @@ void  TG4SDConstruction::FillSDSelectionFromTGeo()
   }
 
   if ( ! fSelection.size() ) {
-    TString text = "No volumes with SD selection found in TGeo geometry.\n";
+    TString text = "No volumes with the option = \"";
+    text += TString(fSVLabel.data());
+    text += "\" were found in TGeo geometry.\n";
     text += "    The SD selection will not be applied.";
     TG4Globals::Warning(
       "TG4SDServices", "FillSDSelectionFromTGeo", text);
