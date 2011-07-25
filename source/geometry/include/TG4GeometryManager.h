@@ -84,10 +84,10 @@ class TG4GeometryManager : public TG4Verbose
     // static data members
     static TG4GeometryManager*  fgInstance;     ///< this instance
     
-    ///< default material density limit for setting max allowed step 
+    /// default material density limit for setting max allowed step 
     static const G4double  fgDefaultLimitDensity; 
     
-    ///< default max allowed step in materials with density < fLimitDensity
+    /// default max allowed step in materials with density < fLimitDensity
     static const G4double  fgDefaultMaxStep; 
 
     // data members
@@ -101,10 +101,10 @@ class TG4GeometryManager : public TG4Verbose
     TG4VUserRegionConstruction* fUserRegionConstruction; ///< user region construction
     G4bool                fIsUserMaxStep;    ///< option to activate max step defined           
                                              ///  in tracking media
-    ///< material density limit for setting max allowed step 
+    /// material density limit for setting max allowed step 
     G4double  fLimitDensity;     
     
-    ///< max allowed step in materials with density < fLimitDensity
+    /// max allowed step in materials with density < fLimitDensity
     G4double  fMaxStepInLowDensityMaterials;                                     
 };
 

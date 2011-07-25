@@ -35,6 +35,7 @@ class TParticlePDG;
 class TG4ParticlesChecker : public TG4Verbose
 {
   public:
+    /// The enumeration of "checkable" particle properties 
     enum ParticleProperty {
       kMass,     ///< mass 
       kCharge,   ///< charge
