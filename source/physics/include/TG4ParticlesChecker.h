@@ -30,6 +30,11 @@ class TParticlePDG;
 /// \brief A helper class for comparing the basic particles properties in between
 /// Root and Geant4
 ///
+/// Verbose level:
+/// - 1 : standard output
+/// - 2 : printing also Root particles which have no equivalent in G4
+/// - 3 : printing name candidates which are compared and more messages
+///
 /// \author I. Hrivnacova; IPN Orsay
 
 class TG4ParticlesChecker : public TG4Verbose
@@ -37,6 +42,7 @@ class TG4ParticlesChecker : public TG4Verbose
   public:
     /// The enumeration of "checkable" particle properties 
     enum ParticleProperty {
+      kName,     ///< mass 
       kMass,     ///< mass 
       kCharge,   ///< charge
       kLifetime, ///< lifetime
@@ -82,6 +88,7 @@ class TG4ParticlesChecker : public TG4Verbose
 
     void PrintCheckedProperties() const;                  
 
+    G4bool CheckName(G4ParticleDefinition* g4Particle, TParticlePDG* rtParticle) const;
     G4bool CheckProperty(ParticleProperty property,
                          G4ParticleDefinition* g4Particle, TParticlePDG* rtParticle) const;
     G4bool CheckParticle(G4ParticleDefinition* g4Particle, TParticlePDG* rtParticle) const;
