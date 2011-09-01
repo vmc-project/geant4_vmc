@@ -1340,6 +1340,7 @@ void TG4StepManager::GetSecondary(Int_t index, Int_t& particleId,
 
   // momentum & energy
   G4ThreeVector momentumVector = track->GetMomentum();        
+  momentumVector *= 1./(TG4G3Units::Energy());   
   G4double energy = track->GetDynamicParticle()->GetTotalEnergy();
   energy /= TG4G3Units::Energy();
   SetTLorentzVector(momentumVector, energy, momentum);
