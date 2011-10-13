@@ -95,6 +95,7 @@ class TG4RunConfiguration
 
     // get methods
     TString  GetUserGeometry() const;
+    TString  GetPhysicsListSelection() const;
     Bool_t   IsSpecialStacking() const;
     Bool_t   IsSpecialControls() const;
     Bool_t   IsSpecialCuts() const;
@@ -118,6 +119,13 @@ class TG4RunConfiguration
     /// Not implemented
     TG4RunConfiguration& operator=(const TG4RunConfiguration& right);
 };
+
+// inline functions
+
+inline TString TG4RunConfiguration::GetPhysicsListSelection() const {
+  /// Return physics list selection
+  return fPhysicsListSelection;
+}  
 
 #endif //TG4V_RUN_CONFIGURATION_H
 

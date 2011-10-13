@@ -58,6 +58,12 @@ TGeant4::TGeant4(const char* name, const char* title,
 {
 /// Standard constructor
 
+  // Update title with a physics selection
+  TString newTitle = title;
+  newTitle.Append(" : ");
+  newTitle.Append(configuration->GetPhysicsListSelection());
+  SetTitle(newTitle);
+
   // create state manager
   fStateManager = new TG4StateManager();
   fStateManager->SetNewState(kPreInit);
@@ -118,6 +124,12 @@ TGeant4::TGeant4(const char* name, const char* title,
     fUserGeometry(configuration->GetUserGeometry())
 {
 /// Standard constructor
+
+  // Update title with a physics selection
+  TString newTitle = title;
+  newTitle.Append(" : ");
+  newTitle.Append(configuration->GetPhysicsListSelection());
+  SetTitle(newTitle);
 
   // create state manager
   fStateManager = new TG4StateManager();
