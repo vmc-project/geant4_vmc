@@ -170,7 +170,9 @@ TG4RunManager::~TG4RunManager()
   delete fRunConfiguration;
   delete fSpecialControls;
   delete fRegionsManager;
+#ifdef G4UI_USE
   delete fGeantUISession;
+#endif
   delete fRunManager;
   if (fRootUIOwner) delete fRootUISession;
 }
@@ -410,10 +412,12 @@ void TG4RunManager::StartGeantUI()
   if ( ! fGeantUISession ) CreateGeantUI();
   
   if ( fGeantUISession ) {  
+#ifdef G4UI_USE
     // interactive session
     G4cout << "Welcome back in Geant4" << G4endl;
     fGeantUISession->GetSession()->SessionStart();
     G4cout << "Welcome back in Root" << G4endl;  
+#endif    
   }
   else {
     G4cout << "Geant4 UI not available" << G4endl;

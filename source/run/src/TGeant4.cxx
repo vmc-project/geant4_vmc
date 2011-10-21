@@ -185,8 +185,10 @@ TGeant4::~TGeant4()
   delete fSDManager;
   delete fPhysicsManager;
   delete fStepManager;
+#ifdef G4VIS_USE
   delete fVisManager;
   delete fVisExecutive;
+#endif
 }
 
 //
