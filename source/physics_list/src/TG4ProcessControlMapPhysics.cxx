@@ -166,6 +166,8 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("OpRayleigh", kRAYL);
   controlMap->Add("Rayl", kRAYL);
   controlMap->Add("OpBoundary", kLABS);
+  controlMap->Add("OpMieHG", kNoG3Controls);
+  controlMap->Add("OpWLS", kNoG3Controls);
 
   controlMap->Add("SynRad", kSYNC);
   controlMap->Add("CHIPS_SynchrotronRadiation", kSYNC);
@@ -205,6 +207,8 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
            processName != "ElectroNuclear" &&
            processName != "photoNuclear" &&
            processName != "Scintillation" && 
+           processName != "OpMieHG" &&
+           processName != "OpWLS" &&
            processName != "MinEkineCuts" && 
            processName != "MaxTimeCuts" && 
            processName != "stackPopper" ) {

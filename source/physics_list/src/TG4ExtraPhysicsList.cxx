@@ -2,46 +2,47 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007, 2008 Ivana Hrivnacova
+// Copyright (C) 2007 - 2011 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \file TG4EmPhysicsList.cxx
-/// \brief Implementation of the TG4EmPhysicsList class 
+/// \file TG4ExtraPhysicsList.cxx
+/// \brief Implementation of the TG4ExtraPhysicsList class 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include "TG4EmPhysicsList.h"
+#include "TG4ExtraPhysicsList.h"
 
-#include <G4EmStandardPhysics.hh>
-#include <G4DecayPhysics.hh>
+#include <G4EmExtraPhysics.hh>
+#include <G4OpticalPhysics.hh>
+#include <G4RadioactiveDecayPhysics.hh>
 
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
 #include <G4ProcessTable.hh>
 
-const G4double TG4EmPhysicsList::fgkDefaultCutValue = 1.0 * mm;
+const G4double TG4ExtraPhysicsList::fgkDefaultCutValue = 1.0 * mm;
 
 //
 // static methods
 //
 
 //_____________________________________________________________________________
-G4String TG4EmPhysicsList::AvailableSelections()
+G4String TG4ExtraPhysicsList::AvailableSelections()
 {
 /// Return list of all available selections
 
   G4String selections;
-  selections += "emStandard ";
+  selections += "extra optical radDecay ";
   
   return selections;
 }  
 
 //_____________________________________________________________________________
-G4bool TG4EmPhysicsList::IsAvailableSelection(const G4String& selection)
+G4bool TG4ExtraPhysicsList::IsAvailableSelection(const G4String& selection)
 {
 /// Return list of all available selections
 
@@ -57,9 +58,9 @@ G4bool TG4EmPhysicsList::IsAvailableSelection(const G4String& selection)
 //
 
 //_____________________________________________________________________________
-TG4EmPhysicsList::TG4EmPhysicsList(const G4String& selection)
+TG4ExtraPhysicsList::TG4ExtraPhysicsList(const G4String& selection)
   : G4VModularPhysicsList(),
-    TG4Verbose("emPhysicsList")
+    TG4Verbose("extraPhysicsList")
  {
 /// Default constructor
 
@@ -71,12 +72,9 @@ TG4EmPhysicsList::TG4EmPhysicsList(const G4String& selection)
 }
 
 //_____________________________________________________________________________
-TG4EmPhysicsList::~TG4EmPhysicsList() 
+TG4ExtraPhysicsList::~TG4ExtraPhysicsList() 
 {
 /// Destructor
-
-  //delete fExtDecayer;
-       // fExtDecayer is deleted in G4Decay destructor
 }
 
 //
@@ -84,16 +82,31 @@ TG4EmPhysicsList::~TG4EmPhysicsList()
 //
 
 //_____________________________________________________________________________
-void TG4EmPhysicsList::Configure(const G4String& /*selection*/)
+void TG4ExtraPhysicsList::Configure(const G4String& selection)
 {
 /// Create the selected physics constructors
 /// and registeres them in the modular physics list.
 
-  // Standard electromagnetic physics
-  RegisterPhysics(new G4EmStandardPhysics(1));
+  // Extra electromagnetic physics
+  if ( selection.contains("extra") ) {
+    G4EmExtraPhysics* extraPhysics = new G4EmExtraPhysics();
+    G4String state("off");
+    extraPhysics->Synch(state);
+    extraPhysics->GammaNuclear(state);
+    extraPhysics->MuonNuclear(state);
+    RegisterPhysics(extraPhysics);
+  }  
 
-  // decay physics
-  RegisterPhysics(new G4DecayPhysics());
+  // Optical physics
+  if ( selection.contains("optical") ) {
+    G4OpticalPhysics* g4OpticalPhysics = new G4OpticalPhysics();
+    RegisterPhysics(g4OpticalPhysics);
+  }  
+
+  // Radioactive decay physics
+  if ( selection.contains("radDecay") ) {
+    RegisterPhysics(new G4RadioactiveDecayPhysics());
+  }  
 }    
 
 //
@@ -101,19 +114,29 @@ void TG4EmPhysicsList::Configure(const G4String& /*selection*/)
 //
 
 //_____________________________________________________________________________
-void TG4EmPhysicsList::ConstructProcess()
+void TG4ExtraPhysicsList::ConstructProcess()
 {
-/// Call ase class method + add verbose info
+/// Call base class method + add verbose info
 
   // create processes for registered physics
-  G4VModularPhysicsList::ConstructProcess();
-
-  if (VerboseLevel() > 0) 
-    G4cout << "### EM physics constructed. " << G4endl;
+  // G4VModularPhysicsList::ConstructProcess();
+  G4PhysConstVector::iterator itr;
+  for (itr = physicsVector->begin(); itr!= physicsVector->end(); ++itr) {
+    (*itr)->ConstructProcess();
+  }
+  
+  if ( VerboseLevel() > 0 ) { 
+    G4cout << "### Extra physics constructed: ";
+    G4PhysConstVector::iterator it;
+    for ( it = physicsVector->begin(); it != physicsVector->end(); ++it ) {
+      G4cout << (*it)->GetPhysicsName() << " ";
+    }
+    G4cout << G4endl;
+  }    
 }
 
 //_____________________________________________________________________________
-G4int TG4EmPhysicsList::VerboseLevel() const 
+G4int TG4ExtraPhysicsList::VerboseLevel() const 
 {
 /// Return verbose level (via TG4VVerbose)
 
@@ -122,7 +145,7 @@ G4int TG4EmPhysicsList::VerboseLevel() const
 
 
 //_____________________________________________________________________________
-void TG4EmPhysicsList::VerboseLevel(G4int level) 
+void TG4ExtraPhysicsList::VerboseLevel(G4int level) 
 {
 /// Set the specified level to both TG4Verbose and 
 /// G4VModularPhysicsList.
@@ -142,7 +165,7 @@ void TG4EmPhysicsList::VerboseLevel(G4int level)
 }
 
 //_____________________________________________________________________________
-void TG4EmPhysicsList::SetRangeCut(G4double value)
+void TG4ExtraPhysicsList::SetRangeCut(G4double value)
 {
 /// Reset the default cut to a given value.                                 \n
 /// !!! Should be used only in PreInit phase,

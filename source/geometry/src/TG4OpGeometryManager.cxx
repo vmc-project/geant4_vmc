@@ -328,7 +328,8 @@ void TG4OpGeometryManager::SetMaterialProperty(
   for (i=0; i<np; i++) {
     pp2[i] = pp2[i]*TG4G3Units::Energy();
     val2[i]  = values[i];
-    if (G4String(propertyName) == "ABSLENGTH") 
+    if ( G4String(propertyName) == "ABSLENGTH" || 
+         G4String(propertyName) == "MIEHG" ) 
       val2[i]  = val2[i]*TG4G3Units::Length();
   }  
   table->AddProperty(propertyName, pp2, val2, np);
@@ -373,15 +374,26 @@ void TG4OpGeometryManager::SetMaterialProperty(
     material->SetMaterialPropertiesTable(table);
   }  
 
-  // add units
-  if ( G4String(propertyName) == "SCINTILLATIONYIELD") {
-       value  = value/TG4G3Units::Energy();
+  // Birks constant is set in a different way 
+  if ( G4String(propertyName) == "BIRKS_CONSTANT" ) {
+       value  = value*TG4G3Units::Length()/TG4G3Units::Energy();
+       material->GetIonisation()->SetBirksConstant(value);
+  }
+  else {
+    // add units
+    if ( G4String(propertyName) == "SCINTILLATIONYIELD") {
+         value  = value/TG4G3Units::Energy();
+    }  
+    if ( G4String(propertyName) == "FASTTIMECONSTANT" || 
+         G4String(propertyName) == "SLOWTIMECONSTANT" ) { 
+         value  = value*TG4G3Units::Time();
+    } 
+    if ( G4String(propertyName) == "BIRKS_CONSTANT" ) {
+         value  = value*TG4G3Units::Length()/TG4G3Units::Energy();
+    }
+  
+    table->AddConstProperty(propertyName, value);
   }  
-  if ( G4String(propertyName) == "FASTTIMECONSTANT" || 
-       G4String(propertyName) == "SLOWTIMECONSTANT" ) { 
-       value  = value*TG4G3Units::Time();
-  }  
-  table->AddConstProperty(propertyName, value);
 
   // verbose
   if (VerboseLevel() > 0) {

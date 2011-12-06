@@ -159,7 +159,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("PositronNuclear", kPPositronNuclear); 
   mcMap->Add("ElectroNuclear", kPElectronNuclear); 
   mcMap->Add("photoNuclear", kPNoProcess);
-           // To be added in TMCProcess
+           /// \todo Add kPPhotoNuclear
   
   mcMap->Add("Cerenkov", kPCerenkov);
   mcMap->Add("Scintillation", kPScintillation);
@@ -167,6 +167,9 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("OpRayleigh", kPRayleigh);
   mcMap->Add("Rayl", kPRayleigh);
   mcMap->Add("OpBoundary", kPLightScattering);
+  mcMap->Add("OpMieHG", kPLightScattering);
+  mcMap->Add("OpWLS", kPNull);
+             /// \todo Add kPOpticalWavelengthShifting
 
   mcMap->Add("SynRad", kPSynchrotron);
   mcMap->Add("CHIPS_SynchrotronRadiation", kPSynchrotron);
