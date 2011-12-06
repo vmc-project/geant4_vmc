@@ -40,7 +40,8 @@ class TG4HadronPhysicsList: public G4VUserPhysicsList,
     virtual ~TG4HadronPhysicsList();
   
     // static methods
-    static G4String AvailableSelections();
+    static G4String AvailableHadronSelections();
+    static G4String AvailableEMSelections();
     static G4bool   IsAvailableSelection(const G4String& selection);
  
     // methods

@@ -26,9 +26,9 @@ const G4double TG4HadronPhysicsList::fgkDefaultCutValue = 1.0 * mm;
 
 
 //_____________________________________________________________________________
-G4String TG4HadronPhysicsList::AvailableSelections()
+G4String TG4HadronPhysicsList::AvailableHadronSelections()
 {
-/// Return list of all available selections
+/// Return list of all available hadron physics lists selections
 
   G4PhysListFactory phyListFactory;
   const std::vector<G4String>& availablePhysLists
@@ -39,7 +39,25 @@ G4String TG4HadronPhysicsList::AvailableSelections()
     selections += availablePhysLists[i];
     selections += " ";    
   }  
-  selections += "ShieldingLEND "; 
+  //selections += "ShieldingLEND "; 
+
+  return selections;
+}  
+
+//_____________________________________________________________________________
+G4String TG4HadronPhysicsList::AvailableEMSelections()
+{
+/// Return list of all available EM options selections
+
+  G4PhysListFactory phyListFactory;
+  const std::vector<G4String>& availablePhysListsEM
+    = phyListFactory.AvailablePhysListsEM();
+
+  G4String selections;
+  for ( G4int i=0; i<G4int(availablePhysListsEM.size()); ++i ) {
+    selections += availablePhysListsEM[i];
+    selections += " ";    
+  }  
 
   return selections;
 }  
@@ -49,11 +67,8 @@ G4bool TG4HadronPhysicsList::IsAvailableSelection(const G4String& selection)
 {
 /// Return list of all available selections
 
-  G4String available = AvailableSelections();
-  G4String checkSelection = selection;
-  checkSelection += " ";
-  
-  return available.contains(checkSelection);
+  G4PhysListFactory physListFactory;
+  return physListFactory.IsReferencePhysList(selection);
 }  
 
 //

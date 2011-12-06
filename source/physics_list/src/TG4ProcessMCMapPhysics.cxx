@@ -94,10 +94,12 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("HadronFission", kPNuclearFission);
   
   mcMap->Add("PiMinusAbsorptionAtRest", kPNuclearAbsorption); 
+  mcMap->Add("PiMinusAbsorptionBertini", kPNuclearAbsorption); 
   mcMap->Add("PionMinusAbsorptionAtRest", kPNuclearAbsorption); 
   mcMap->Add("KaonMinusAbsorption", kPNuclearAbsorption); 
   mcMap->Add("KaonMinusAbsorptionAtRest", kPNuclearAbsorption); 
   mcMap->Add("CHIPSNuclearCaptureAtRest", kPNuclearAbsorption); 
+  mcMap->Add("FTFNuclearCaptureAtRest", kPNuclearAbsorption); 
   
   mcMap->Add("AntiProtonAnnihilationAtRest", kPPbarAnnihilation); 
   mcMap->Add("AntiNeutronAnnihilationAtRest", kPNbarAnnihilation);

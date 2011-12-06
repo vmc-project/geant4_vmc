@@ -88,14 +88,15 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
           + TG4Globals::Endl() +
         "Available options:"                                         
           + TG4Globals::Endl() +
-        "EM, EM+optical, Hadron, Hadron+optical"           
+        "EMonly, EMonly+optical, Hadron_EM, Hadron_EM+optical"           
           + TG4Globals::Endl() +
-        "  where EM     = " + TString(TG4EmPhysicsList::AvailableSelections())
+        "  where EMonly = " + TString(TG4EmPhysicsList::AvailableSelections())
           + TG4Globals::Endl() +
-        "        Hadron = " + TString(TG4HadronPhysicsList::AvailableSelections())
-        //"        Hadron = " + TString(G4PhysListFactory::AvailablePhysLists())
+        "        Hadron = " + TString(TG4HadronPhysicsList::AvailableHadronSelections())
           + TG4Globals::Endl() +
-        "  The EM selections are cumulative, while Hadron selections are exlusive."
+        "        EM = " + TString(TG4HadronPhysicsList::AvailableEMSelections())
+          + TG4Globals::Endl() +
+        "  The EMonly selections are cumulative, while Hadron selections are exlusive."
           + TG4Globals::Endl());
     }
   }  

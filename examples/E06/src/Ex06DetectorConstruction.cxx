@@ -229,41 +229,13 @@ void Ex06DetectorConstruction::ConstructOpGeometry()
   gMC->SetMaterialProperty(fImedWater, "SLOWTIMECONSTANT", 10.0e-09); // 10.*ns
   gMC->SetMaterialProperty(fImedWater, "YIELDRATIO", 0.8);
 
-//
-// Air
-//
-  Double_t refractiveIndex2[nEntries] =
-            { 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00,
-              1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00,
-              1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00,
-              1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00,
-              1.00, 1.00, 1.00, 1.00 };
-
-  // Added (for Geant3)
-  Double_t absorption2[nEntries] =
-           { DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, 
-             DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, 
-             DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, 
-             DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX,
-	     DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX }; 
-	     
-  // Added (for Geant3)
-  Double_t efficiency2[nEntries] =
-            { 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
-              0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
-              0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
-              0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
-              0.00, 0.00, 0.00, 0.00 };
-
-  gMC->SetCerenkov(fImedAir, nEntries, photonEnergy,
-                   absorption2, efficiency2, refractiveIndex2); 
 
 //	------------- Surfaces --------------
 //
 // Water Tank
 //
   gMC->DefineOpSurface("WaterSurface", 
-                        kUnified, kDielectric_dielectric, kGround, 0.);
+                        kUnified, kDielectric_dielectric, kGround, 1.0);
 			          // CHECK default value of sigma alpha
   gMC->SetBorderSurface("WaterSurface", 
                        "TANK", 1, "WRLD", 1, "WaterSurface");
@@ -273,7 +245,7 @@ void Ex06DetectorConstruction::ConstructOpGeometry()
 // Air Bubble
 //
   gMC->DefineOpSurface("AirSurface", 
-                        kGlisur, kDielectric_dielectric, kPolished, 0.);
+                        kGlisur, kDielectric_dielectric, kPolished, 1.0);
 			          // CHECK default value of sigma alpha
   gMC->SetSkinSurface("AirSurface", "BUBL", "AirSurface");				  
   

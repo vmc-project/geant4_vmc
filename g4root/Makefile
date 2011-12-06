@@ -76,19 +76,22 @@ OBJS	:= $(CXXOBJ) $(GDICTO)
 
 # Make include list
 #
-ifndef G4INCLUDE
-  G4INCLUDE := $(G4INSTALL)/include
-endif  
+ifeq ($(G4INSTALL),)
+  G4CFLAGS := $(shell geant4-config --cflags)
+else   
+  ifndef G4INCLUDE
+    G4CFLAGS := -I$(G4INSTALL)/include
+  else
+    G4CFLAGS := -I$(G4INCLUDE)
+  endif 
+endif   
 
 INCLUDES := -Iinclude \
-           -I$(G4INCLUDE) \
 	   -I$(CLHEP_BASE_DIR)/include
 
 # C++ compilation flags
 #
-CXXFLAGS := $(CXXOPTS) $(G4MCDEFS) -I. $(INCLUDES) -I$(ROOT_INCDIR) 
-
-CXXFLAGS += $(CPPFLAGS)
+CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) $(G4CFLAGS)
 
 DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCLUDES)
 

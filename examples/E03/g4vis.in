@@ -21,7 +21,7 @@
 /vis/open OGLIX
 #/vis/open DAWNFILE
 /vis/drawVolume
-/vis/viewer/flush
+#/vis/viewer/flush
 
 /tracking/storeTrajectory 1
 /mcEvent/drawTracks ALL

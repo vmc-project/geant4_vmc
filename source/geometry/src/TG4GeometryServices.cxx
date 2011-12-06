@@ -196,7 +196,7 @@ void TG4GeometryServices::DumpG4MaterialPropertiesTable(
     G4cout << (*i).first << G4endl;
     if ( (*i).second != 0 )
     {
-      (*i).second->DumpVector();
+      (*i).second->DumpValues();
     }
     else
     {

@@ -68,8 +68,9 @@ void TG4RootNavigator::SetDetectorConstruction(TG4RootDetectorConstruction *dc)
 /// it and must be valid.
    if (dc) fGeometry = dc->GetGeometryManager();
    if (!fGeometry || !fGeometry->IsClosed()) {
-      G4cerr << "Cannot create TG4RootNavigator without closed ROOT geometry !" << G4endl;
-      G4Exception("Aborting...");
+      G4Exception("TG4RootNavigator::SetDetectorConstruction",
+                  "G4Root_F001", FatalException, 
+                  "Cannot create TG4RootNavigator without closed ROOT geometry !");
    }   
    fDetConstruction = dc;
 }
