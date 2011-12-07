@@ -365,6 +365,9 @@ G4bool TG4ParticlesChecker::CheckParticles() const
     = ! ( fCheckedProperties.size() == 1 && 
           fCheckedProperties.find(kName) != fCheckedProperties.end() );
     
+  std::set<G4String> names;
+  std::set<G4String> duplicateNames;
+
   TIter next(rootParticles);
   TObject* obj;
   while ((obj = next())) {
@@ -383,7 +386,15 @@ G4bool TG4ParticlesChecker::CheckParticles() const
              << G4endl
              << "=====================================================================" 
              << G4endl;
-    }         
+    } 
+    
+    // check if name is unique in Root database
+    G4String name = rootParticle->GetName();
+    if ( names.find(name) !=  names.end() ) {
+      G4cout << "!!! duplicate name: " << name << G4endl;
+      duplicateNames.insert(name);
+    }
+    names.insert(name);             
 
     if ( ! g4Particle ) {  
       if ( VerboseLevel() > 1 ) 
@@ -400,6 +411,15 @@ G4bool TG4ParticlesChecker::CheckParticles() const
       G4cout << G4endl;
     }  
   }
+  
+  if ( duplicateNames.size() > 0 ) {
+    G4cout << "!!! Found duplicate particle names: ";
+    std::set<G4String>::iterator it;
+    for ( it = duplicateNames.begin(); it != duplicateNames.end(); it++ ) {
+      G4cout << *it << "  ";
+    }  
+    G4cout << G4endl;
+  }  
   
   return resultAll;  
 }
