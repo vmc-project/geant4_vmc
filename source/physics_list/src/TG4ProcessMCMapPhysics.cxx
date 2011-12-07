@@ -158,8 +158,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("muMinusCaptureAtRest", kPMuonNuclear); 
   mcMap->Add("PositronNuclear", kPPositronNuclear); 
   mcMap->Add("ElectroNuclear", kPElectronNuclear); 
-  mcMap->Add("photoNuclear", kPNoProcess);
-           /// \todo Add kPPhotoNuclear
+  mcMap->Add("photoNuclear", kPPhotoNuclear);
   
   mcMap->Add("Cerenkov", kPCerenkov);
   mcMap->Add("Scintillation", kPScintillation);
@@ -188,9 +187,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("specialCutForElectron", kPStop); 
   mcMap->Add("MinEkineCuts", kPStop); 
   mcMap->Add("MaxTimeCuts", kPStop); 
-  mcMap->Add("stackPopper", kPNull); 
-             /// \todo Add kPUserDefined
-  
+  mcMap->Add("stackPopper", kPUserDefined);   
 }  
 //
 // protected methods
