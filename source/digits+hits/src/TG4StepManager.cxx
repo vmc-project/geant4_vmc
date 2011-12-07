@@ -50,7 +50,6 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
     fLimitsModifiedOnFly(0),
     fTouchableHistory(0),
     fSteppingManager(0),
-    fNavigator(0),
     fVolPathBuffer(),
     fCopyNoOffset(0),
     fDivisionCopyNoOffset(0)
@@ -58,7 +57,7 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
 /// Standard constructor
 /// \param userGeometry  User selection of geometry definition and navigation 
 
-  if (fgInstance) {
+  if ( fgInstance ) {
     TG4Globals::Exception(
       "TG4StepManager", "TG4StepManager", 
       "Cannot create two instances of singleton.");
@@ -67,8 +66,6 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
   fgInstance = this;  
   
   fTouchableHistory = new G4TouchableHistory();
-  
-  fNavigator = new G4Navigator();
   
   /// Set offset for passing copyNo to 1;
   /// as G3toG4 decrement copyNo passed by user by 1
@@ -87,7 +84,6 @@ TG4StepManager::~TG4StepManager()
 /// Destructor
 
   delete fTouchableHistory;
-  delete fNavigator;
 }
 
 //
@@ -99,7 +95,7 @@ void TG4StepManager::CheckTrack() const
 {
 /// Give exception in case the track is not defined.
 
-  if (!fTrack) 
+  if ( ! fTrack ) 
     TG4Globals::Exception(
       "TG4StepManager", "CheckTrack", "Track is not defined.");
 }     
@@ -110,7 +106,7 @@ void TG4StepManager::CheckStep(const G4String& method) const
 {
 /// Give exception in case the step is not defined.
 
-  if (!fStep) {
+  if ( ! fStep ) {
     TG4Globals::Exception(
       "TG4StepManager", method, "Step is not defined.");
   }
@@ -122,7 +118,7 @@ void TG4StepManager::CheckSteppingManager() const
 {
 /// Give exception in case the step is not defined.
 
-  if (!fSteppingManager) 
+  if ( ! fSteppingManager ) 
     TG4Globals::Exception(
       "TG4StepManager", "CheckSteppingManager", 
       "Stepping manager is not defined.");
@@ -146,37 +142,14 @@ const G4VTouchable* TG4StepManager::GetCurrentTouchable() const
 {
 /// Return the current touchable.
  
-  const G4VTouchable* touchable; 
-  if (fStepStatus == kNormalStep) {
-
-#ifdef MCDEBUG
-    CheckStep("GetCurrentTouchable");
-#endif    
-
-    touchable = fStep->GetPreStepPoint()->GetTouchable();
-  }  
-  else if (fStepStatus == kBoundary) {
-
-#ifdef MCDEBUG
-    CheckStep("GetCurrentTouchable");
-#endif 
-
-    touchable = fStep->GetPostStepPoint()->GetTouchable();
-  }  
-  else {
-
 #ifdef MCDEBUG
     CheckTrack();
-#endif 
-    const G4ThreeVector& position = fTrack->GetPosition();
-    //const G4ThreeVector& direction = fTrack->GetMomentumDirection();
-    fNavigator->LocateGlobalPointAndUpdateTouchable(
-                     position, fTouchableHistory);
+#endif    
 
-    touchable = fTouchableHistory;
-  }   
-    
-  return touchable;
+  if ( fStepStatus != kBoundary ) 
+    return fTrack->GetTouchable();
+  else
+    return fTrack->GetNextTouchable();
 }  
 
 //_____________________________________________________________________________
@@ -192,8 +165,8 @@ TG4StepManager::GetCurrentOffPhysicalVolume(G4int off, G4bool warn) const
 
   // Check touchable depth
   //
-  if (touchable->GetHistoryDepth() < off) {
-    if (warn) {
+  if ( touchable->GetHistoryDepth() < off ) {
+    if ( warn ) {
       TString text = "level=";
       text += off;
       TG4Globals::Warning(
@@ -204,7 +177,7 @@ TG4StepManager::GetCurrentOffPhysicalVolume(G4int off, G4bool warn) const
     return 0;
   }  
 
-  if (off == 0)
+  if ( off == 0 )
     return touchable->GetVolume();
   
   // Get the off-th mother
@@ -232,7 +205,7 @@ void TG4StepManager::StopTrack()
 ///  - fKillTrackAndSecondaries  // Kill the current track and also associated
 ///                       // secondaries.
 
-  if (fTrack) {
+  if ( fTrack ) {
     fTrack->SetTrackStatus(fStopAndKill);
     // fTrack->SetTrackStatus(fStopButAlive);
     // fTrack->SetTrackStatus(fKillTrackAndSecondaries);
@@ -249,7 +222,7 @@ void TG4StepManager::StopEvent()
 {
 /// Abort the current event processing.
 
-  if (fTrack) {
+  if ( fTrack ) {
     fTrack->SetTrackStatus(fKillTrackAndSecondaries);
             //StopTrack();   // cannot be used as it keeps secondaries
   }
@@ -267,14 +240,6 @@ void TG4StepManager::StopRun()
   StopEvent();
   G4UImanager::GetUIpointer()->ApplyCommand("/run/abort");
 }
-
-//_____________________________________________________________________________
-void TG4StepManager::SetWorld(G4VPhysicalVolume* world) 
-{
-/// Set world to the alterbative G4 navigator
-
-  fNavigator->SetWorldVolume(world);
-}  
 
 //_____________________________________________________________________________
 void TG4StepManager::SetMaxStep(Double_t step)
@@ -368,39 +333,14 @@ G4VPhysicalVolume* TG4StepManager::GetCurrentPhysicalVolume() const
 /// According to fStepStatus the volume from track vertex,
 /// pre step point or post step point is returned.
 
-  G4VPhysicalVolume* physVolume; 
-  if (fStepStatus == kNormalStep) {
-
 #ifdef MCDEBUG
-    CheckStep("GetCurrentPhysicalVolume");
-#endif    
-
-    physVolume = fStep->GetPreStepPoint()->GetPhysicalVolume();
-  }  
-  else if (fStepStatus == kBoundary) {
-
-#ifdef MCDEBUG
-    CheckStep("GetCurrentPhysicalVolume");
+  CheckTrack();
 #endif 
-
-    physVolume = fStep->GetPostStepPoint()->GetPhysicalVolume();
-  }  
-  else {
-
-#ifdef MCDEBUG
-    CheckTrack();
-#endif 
-
-    G4ThreeVector position = fTrack->GetPosition();
-    physVolume
-     = fNavigator->LocateGlobalPointAndSetup(position); 
-     
-    if ( ! physVolume ) {
-      G4cerr << "No physical volume found at track vertex: "
-             << position << G4endl; 
-    }         
-  }   
-  return physVolume;
+ 
+  if ( fStepStatus != kBoundary ) 
+    return fTrack->GetVolume();
+  else 
+    return fTrack->GetNextVolume(); 
 }     
 
 //_____________________________________________________________________________
@@ -453,14 +393,14 @@ Int_t TG4StepManager::CurrentVolOffID(Int_t off, Int_t&  copyNo) const
 /// Return the  the sensitive detector ID of the off-th mother of the current  
 /// volume and  fill the copy number of its physical volume 
 
-  if (off == 0) return CurrentVolID(copyNo);
+  if ( off == 0 ) return CurrentVolID(copyNo);
 #ifdef MCDEBUG
    G4VPhysicalVolume* mother = GetCurrentOffPhysicalVolume(off, true); 
 #else
    G4VPhysicalVolume* mother = GetCurrentOffPhysicalVolume(off); 
 #endif   
 
-  if (mother) {
+  if ( mother ) {
     copyNo = mother->GetCopyNo() + fCopyNoOffset;
 
     if ( mother->IsParameterised() )  copyNo += fDivisionCopyNoOffset;
@@ -480,7 +420,7 @@ const char* TG4StepManager::CurrentVolName() const
 {
 /// Return the current physical volume name.
 
-  return  TG4GeometryServices::Instance()
+  return TG4GeometryServices::Instance()
             ->UserVolumeName(
                 GetCurrentPhysicalVolume()->GetLogicalVolume()->GetName());
 }
@@ -490,11 +430,11 @@ const char* TG4StepManager::CurrentVolOffName(Int_t off) const
 { 
 /// Return the off-th mother's physical volume name.
 
-  if (off == 0) return CurrentVolName();
+  if ( off == 0) return CurrentVolName();
 
   G4VPhysicalVolume* mother = GetCurrentOffPhysicalVolume(off); 
 
-  if (mother) {
+  if ( mother ) {
     return TG4GeometryServices::Instance()
              ->UserVolumeName(mother->GetLogicalVolume()->GetName());
   }             
@@ -519,7 +459,7 @@ const char* TG4StepManager::CurrentVolPath()
   // Compose the path
   //
   fVolPathBuffer = "";
-  for (G4int i=0; i<depth; i++) {
+  for ( G4int i=0; i<depth; i++ ) {
     G4VPhysicalVolume* physVolume = touchable->GetHistory()->GetVolume(i);
     fVolPathBuffer += "/";
     fVolPathBuffer 
@@ -630,7 +570,7 @@ void TG4StepManager::Gmtod(Float_t* xm, Float_t* xd, Int_t iflag)
 
   Gmtod(dxm, dxd, iflag);
 
-  for (G4int i=0; i<3; i++) {
+  for ( G4int i=0; i<3; i++ ) {
     xm[i] = dxm[i]; 
     xd[i] = dxd[i];
   }   
@@ -652,7 +592,7 @@ void TG4StepManager::Gmtod(Double_t* xm, Double_t* xd, Int_t iflag)
 ///
 
 #ifdef MCDEBUG
-  if (iflag != 1 && iflag != 2) {
+  if ( iflag != 1 && iflag != 2 ) {
       TString text = "iflag=";
       text += iflag;
       TG4Globals::Warning(
@@ -661,45 +601,19 @@ void TG4StepManager::Gmtod(Double_t* xm, Double_t* xd, Int_t iflag)
   }        
 #endif
 
-  G4AffineTransform affineTransform;
-
-  if (fStepStatus == kVertex) {
-    G4Navigator* navigator =
-      G4TransportationManager::GetTransportationManager()->
-        GetNavigatorForTracking();
-        
-    affineTransform = navigator->GetGlobalToLocalTransform();
-  }
-  else if (fStepStatus == kBoundary) {
-
-#ifdef MCDEBUG
-    CheckStep("Gmtod");
-#endif
- 
-    affineTransform
-      = fStep->GetPostStepPoint()->GetTouchable()->GetHistory()
-        ->GetTopTransform();
-  }        
-  else {
-
-#ifdef MCDEBUG
-    CheckStep("Gmtod");
-#endif
- 
-    affineTransform
-      = fStep->GetPreStepPoint()->GetTouchable()->GetHistory()
-        ->GetTopTransform();
-  }        
+  const G4AffineTransform& affineTransform
+    = GetCurrentTouchable()->GetHistory()->GetTopTransform();
 
   G4ThreeVector theGlobalPoint(xm[0]* TG4G3Units::Length(),
                                xm[1]* TG4G3Units::Length(),                       
                                xm[2]* TG4G3Units::Length()); 
   G4ThreeVector theLocalPoint;
-  if (iflag == 1) 
+  if ( iflag == 1 ) 
     theLocalPoint = affineTransform.TransformPoint(theGlobalPoint);
-  else
+  else {
     // if ( iflag == 2)
     theLocalPoint = affineTransform.TransformAxis(theGlobalPoint);
+  }  
 
   xd[0] = theLocalPoint.x()/TG4G3Units::Length();
   xd[1] = theLocalPoint.y()/TG4G3Units::Length();
@@ -723,7 +637,7 @@ void TG4StepManager::Gdtom(Float_t* xd, Float_t* xm, Int_t iflag)
 
   Gdtom(dxd, dxm, iflag);
 
-  for (G4int i=0; i<3; i++) {
+  for ( G4int i=0; i<3; i++ ) {
     xd[i] = dxd[i];
     xm[i] = dxm[i]; 
   }   
@@ -743,49 +657,28 @@ void TG4StepManager::Gdtom(Double_t* xd, Double_t* xm, Int_t iflag)
 ///              - IFLAG=1  convert coordinates,                                 \n
 ///              - IFLAG=2  convert direction cosinus
 
-  G4AffineTransform affineTransform;
-
-  if (fStepStatus == kVertex) {
-    G4Navigator* navigator =
-      G4TransportationManager::GetTransportationManager()->
-        GetNavigatorForTracking();
-        
-    affineTransform = navigator->GetLocalToGlobalTransform();
-  }
-  else if (fStepStatus == kBoundary) {
-
 #ifdef MCDEBUG
-    CheckStep("Gdtom");
+  if ( iflag != 1 && iflag != 2 ) {
+      TString text = "iflag=";
+      text += iflag;
+      TG4Globals::Warning(
+        "TG4StepManager", "Gmtod", text + " is different from 1..2.");
+      return;        
+  }        
 #endif
 
-    affineTransform
-      = fStep->GetPostStepPoint()->GetTouchable()->GetHistory()
-        ->GetTopTransform().Inverse();
-  }        
-  else {
-
-#ifdef MCDEBUG
-    CheckStep("Gdtom");
-#endif
-
-    affineTransform
-      = fStep->GetPreStepPoint()->GetTouchable()->GetHistory()
-        ->GetTopTransform().Inverse();
-  }        
+  const G4AffineTransform& affineTransform
+    = GetCurrentTouchable()->GetHistory()->GetTopTransform();
 
   G4ThreeVector theLocalPoint(xd[0]*TG4G3Units::Length(),
                               xd[1]*TG4G3Units::Length(),
                               xd[2]*TG4G3Units::Length()); 
   G4ThreeVector theGlobalPoint;
-  if(iflag == 1)
-       theGlobalPoint = affineTransform.TransformPoint(theLocalPoint);
-  else if( iflag == 2)
-       theGlobalPoint = affineTransform.TransformAxis(theLocalPoint);
+  if ( iflag == 1 )
+    theGlobalPoint = affineTransform.TransformPoint(theLocalPoint);
   else {
-    TString text = "iflag=";
-    text += iflag;
-    TG4Globals::Warning(
-      "TG4StepManager", "Gdtom", text + " is different from 1..2.");
+    // if( iflag == 2)
+    theGlobalPoint = affineTransform.TransformAxis(theLocalPoint);
   }    
 
   xm[0] = theGlobalPoint.x()/TG4G3Units::Length();
@@ -807,7 +700,7 @@ Double_t TG4StepManager::MaxStep() const
     = curLogVolume->GetUserLimits();
 
   G4double maxStep;
-  if (userLimits == 0) { 
+  if ( userLimits == 0 ) { 
     TG4Globals::Warning(
       "TG4StepManager", "MaxStep",
       "User Limits are not defined for the current logical volume " + 
@@ -963,20 +856,14 @@ Double_t TG4StepManager::TrackStep() const
 {   
 /// Return the current step length.
 
-  G4double length;
-  if (fStepStatus == kNormalStep) {
-
+  if ( fStepStatus == kNormalStep ) {
 #ifdef MCDEBUG
     CheckStep("TrackStep");    
 #endif
-
-    length = fStep->GetStepLength();
-    length /= TG4G3Units::Length();
+    return fStep->GetStepLength()/TG4G3Units::Length();
   }  
   else 
-    length = 0;
-
-  return length;
+    return 0;
 }
 
 //_____________________________________________________________________________
@@ -988,9 +875,7 @@ Double_t TG4StepManager::TrackLength() const
   CheckTrack();
 #endif
 
-  G4double length = fTrack->GetTrackLength();
-  length /= TG4G3Units::Length();
-  return length;
+  return fTrack->GetTrackLength()/TG4G3Units::Length();
 }
 
 //_____________________________________________________________________________
@@ -1005,9 +890,7 @@ Double_t TG4StepManager::TrackTime() const
   CheckTrack();
 #endif
   
-  G4double time = fTrack->GetGlobalTime();
-  time /= TG4G3Units::Time();
-  return time;
+  return fTrack->GetGlobalTime()/TG4G3Units::Time();
 }
 
 //_____________________________________________________________________________
@@ -1015,28 +898,26 @@ Double_t TG4StepManager::Edep() const
 {   
 /// Return the total energy deposit in this step.
 
-  G4double energyDeposit = 0;
-  if (fStepStatus == kNormalStep) {
+  if ( fStepStatus == kNormalStep ) {
 
 #ifdef MCDEBUG
     CheckStep("Edep");
 #endif
 
-    energyDeposit = fStep->GetTotalEnergyDeposit();
-    energyDeposit /= TG4G3Units::Energy();
+    return fStep->GetTotalEnergyDeposit()/TG4G3Units::Energy();
   }
-  else if ( fStepStatus == kBoundary &&
-            fTrack->GetTrackStatus() == fStopAndKill ) {
-    G4VProcess *proc = fSteppingManager->GetfCurrentProcess();
-    TG4PhysicsManager *physicsManager = TG4PhysicsManager::Instance();      
-    if (proc && physicsManager->GetMCProcess(proc)==kPLightScattering &&
-        physicsManager->GetOpBoundaryStatus(proc)==kPLightDetection) {
-      energyDeposit = fTrack->GetTotalEnergy();
-      energyDeposit /= TG4G3Units::Energy();
+  
+  if ( fStepStatus == kBoundary &&
+       fTrack->GetTrackStatus() == fStopAndKill ) {
+    G4VProcess* proc = fSteppingManager->GetfCurrentProcess();
+    TG4PhysicsManager* physicsManager = TG4PhysicsManager::Instance();      
+    if ( proc && physicsManager->GetMCProcess(proc)==kPLightScattering &&
+         physicsManager->GetOpBoundaryStatus(proc)==kPLightDetection ) {
+      return fTrack->GetTotalEnergy()/TG4G3Units::Energy();
     }
-  }    
-
-  return energyDeposit;
+  }
+      
+  return 0;
 }
 
 //_____________________________________________________________________________
@@ -1078,11 +959,8 @@ Double_t TG4StepManager::TrackCharge() const
   CheckTrack();
 #endif
 
-  G4double charge
-    = fTrack->GetDynamicParticle()->GetDefinition()
-      ->GetPDGCharge();
-  charge /= TG4G3Units::Charge();        
-  return charge;
+  return fTrack->GetDynamicParticle()->GetDefinition()
+           ->GetPDGCharge()/TG4G3Units::Charge();
 }
 
 //_____________________________________________________________________________
@@ -1094,11 +972,8 @@ Double_t TG4StepManager::TrackMass() const
   CheckTrack();
 #endif
 
-  G4double mass
-    = fTrack->GetDynamicParticle()->GetDefinition()
-      ->GetPDGMass();
-  mass /= TG4G3Units::Mass();        
-  return mass;
+  return fTrack->GetDynamicParticle()->GetDefinition()
+           ->GetPDGMass()/TG4G3Units::Mass();
 }
 
 //_____________________________________________________________________________
@@ -1110,10 +985,7 @@ Double_t TG4StepManager::Etot() const
   CheckTrack();
 #endif
 
-  G4double energy
-    = fTrack->GetDynamicParticle()->GetTotalEnergy();
-  energy /= TG4G3Units::Energy();  
-  return energy;
+  return fTrack->GetDynamicParticle()->GetTotalEnergy()/TG4G3Units::Energy();
 }
 
 //_____________________________________________________________________________
@@ -1122,7 +994,7 @@ Bool_t TG4StepManager::IsTrackInside() const
 /// Return true if the particle does not cross a geometrical boundary
 /// and is not in the vertex.
 
-  if (fStepStatus == kNormalStep  && !(IsTrackExiting()) ) {
+  if ( fStepStatus == kNormalStep  && ! ( IsTrackExiting() ) ) {
     // track is always inside during a normal step
     return true; 
   }    
@@ -1136,7 +1008,7 @@ Bool_t TG4StepManager::IsTrackEntering() const
 /// Return true if the particle crosses a geometrical boundary
 /// or is in the vertex.
 
-  if (fStepStatus != kNormalStep) {
+  if ( fStepStatus != kNormalStep ) {
     // track is entering during a vertex or boundary step
     return true;  
   }
@@ -1168,16 +1040,13 @@ Bool_t TG4StepManager::IsTrackOut() const
 /// Return true if the particle crosses the world boundary
 /// at the post-step point.
 
-  if (fStepStatus == kVertex) return false;
+  if ( fStepStatus == kVertex ) return false;
 
 #ifdef MCDEBUG
-  CheckStep("IsTrackCut");
+  CheckStep("IsTrackOut");
 #endif
 
-  // check
-  G4StepStatus status
-    = fStep->GetPostStepPoint()->GetStepStatus();
-  if (status == fWorldBoundary)
+  if ( fStep->GetPostStepPoint()->GetStepStatus() == fWorldBoundary )
     return true; 
   else
     return false;
@@ -1207,10 +1076,10 @@ Bool_t TG4StepManager::IsTrackStop() const
   // check
   G4TrackStatus status
      = fTrack->GetTrackStatus();
-  if ((status == fStopAndKill) ||  
-      (status == fKillTrackAndSecondaries) ||
-      (status == fSuspend) ||
-      (status == fPostponeToNextEvent)) {
+  if ( ( status == fStopAndKill ) ||  
+       ( status == fKillTrackAndSecondaries ) ||
+       ( status == fSuspend ) ||
+       ( status == fPostponeToNextEvent ) ) {
     return true; 
   }
   else
@@ -1231,9 +1100,9 @@ Bool_t TG4StepManager::IsTrackDisappeared() const
   // check
   G4TrackStatus status
      = fTrack->GetTrackStatus();
-  if ((status == fKillTrackAndSecondaries) ||
-      (status == fSuspend) ||
-      (status == fPostponeToNextEvent)) {
+  if ( ( status == fKillTrackAndSecondaries ) ||
+       ( status == fSuspend ) ||
+       ( status == fPostponeToNextEvent ) ) {
     return true; 
   }
   else
@@ -1263,7 +1132,7 @@ Bool_t TG4StepManager::IsNewTrack() const
 {
 /// Return true when the track performs the first step.
 
-  if (fStepStatus == kVertex)
+  if ( fStepStatus == kVertex )
     return true;
   else  
     return false;
@@ -1275,7 +1144,7 @@ Int_t TG4StepManager::NSecondaries() const
 /// Return the number of secondary particles generated 
 /// in the current step.
 
-  if (fStepStatus == kVertex) return 0;
+  if ( fStepStatus == kVertex ) return 0;
 
 #ifdef MCDEBUG
   CheckSteppingManager();
@@ -1308,12 +1177,12 @@ void TG4StepManager::GetSecondary(Int_t index, Int_t& particleId,
   const G4TrackVector* secondaryTracks = fSteppingManager->GetSecondary();
 
 #ifdef MCDEBUG
-  if (!secondaryTracks) {
+  if ( ! secondaryTracks ) {
     TG4Globals::Exception(
       "TG4StepManager", "GetSecondary", "Secondary tracks vector is empty");
   }
   
-  if (index >= nofSecondaries) {
+  if ( index >= nofSecondaries ) {
     TG4Globals::Exception(
       "TG4StepManager", "GetSecondary", "Wrong secondary track index.");
   }
@@ -1353,7 +1222,7 @@ TMCProcess TG4StepManager::ProdProcess(Int_t isec) const
 /// specified by its index
 
   G4int nofSecondaries = NSecondaries();
-  if (fStepStatus == kVertex || !nofSecondaries) return kPNoProcess;
+  if ( fStepStatus == kVertex || ! nofSecondaries ) return kPNoProcess;
 
 #ifdef MCDEBUG
   CheckStep("ProdProcess");
@@ -1363,14 +1232,14 @@ TMCProcess TG4StepManager::ProdProcess(Int_t isec) const
  
 #ifdef MCDEBUG
   // should never happen
-  if (!secondaryTracks) {
+  if ( ! secondaryTracks ) {
     TG4Globals::Exception(
       "TG4StepManager", "ProdProcess", "Secondary tracks vector is empty.");
 
     return kPNoProcess;  
   }    
 
-  if (isec >= nofSecondaries) {
+  if ( isec >= nofSecondaries ) {
     TG4Globals::Exception(
       "TG4StepManager", "ProdProcess", "Wrong secondary track index.");
 
@@ -1438,10 +1307,10 @@ Int_t TG4StepManager::StepProcesses(TArrayI& processes) const
   // fill array with (nofAlongStep-1) along step processes 
   TG4PhysicsManager* physicsManager = TG4PhysicsManager::Instance();
   G4int counter = 0;  
-  for (G4int i=0; i<nofAlongStep; i++) {
+  for ( G4int i=0; i<nofAlongStep; i++ ) {
     G4VProcess* g4Process = (*processVector)[i];    
     // do not fill transportation along step process
-    if (g4Process && g4Process->GetProcessName() != "Transportation")
+    if ( g4Process && g4Process->GetProcessName() != "Transportation" )
       processes[counter++] = physicsManager->GetMCProcess(g4Process);
   }
     

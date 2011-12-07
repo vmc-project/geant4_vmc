@@ -138,10 +138,8 @@ void TG4TrackingAction::PrepareNewEvent()
   // set g4 stepping manager pointer and world volume
   TG4StepManager* stepManager = TG4StepManager::Instance();
   stepManager->SetSteppingManager(fpTrackingManager->GetSteppingManager());
-  stepManager->SetWorld(TG4GeometryServices::Instance()->GetWorld());
   
   fTrackManager->SetG4TrackingManager(fpTrackingManager);
-  
   fTrackManager->ResetPrimaryParticleIds();  
 
   if ( fTrackManager->GetTrackSaveControl() != kDoNotSave )
