@@ -541,15 +541,11 @@ Int_t TG4StepManager::CurrentMaterial(Float_t &a, Float_t &z, Float_t &dens,
 //_____________________________________________________________________________
 Int_t TG4StepManager::CurrentMedium() const
 {   
-/// Return the second index of the current material (corresponding to
-/// G3 tracking medium index).
+/// Return the medium ID 
 
-  // current logical volume
-  G4LogicalVolume* curLV = GetCurrentPhysicalVolume()->GetLogicalVolume();
-
-  // medium index  
-  TG4GeometryServices* geometryServices = TG4GeometryServices::Instance();
-  return geometryServices->GetMediumId(curLV);
+  return TG4SDServices::Instance()
+            ->GetMediumID(
+                 GetCurrentPhysicalVolume()->GetLogicalVolume());
 }
 
 //_____________________________________________________________________________

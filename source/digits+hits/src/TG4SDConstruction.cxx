@@ -70,12 +70,15 @@ G4int TG4SDConstruction::CreateSD(G4LogicalVolume* lv) const
   G4VSensitiveDetector* sd = 0; 
   sd = pSDManager->FindSensitiveDetector(sdName, false);
   if (!sd) {
-    TG4SensitiveDetector* newSD = new TG4SensitiveDetector(sdName);        
+    G4int mediumId = TG4GeometryServices::Instance()->GetMediumId(lv);
+    TG4SensitiveDetector* newSD = new TG4SensitiveDetector(sdName, mediumId);        
     pSDManager->AddNewDetector(newSD);
 
     if (VerboseLevel() > 1) {
-      G4cout << "Sensitive detector " << sdName << "  ID=" 
-             << newSD->GetID() << " has been created." << G4endl;
+      G4cout << "Sensitive detector " << sdName 
+             << "  ID="  << newSD->GetID() 
+             << "  medium ID="  << newSD->GetMediumID() 
+             << " has been created." << G4endl;
     }
                  
     sd = newSD;  

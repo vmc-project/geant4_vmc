@@ -15,6 +15,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SensitiveDetector.h"
+#include "TG4GeometryServices.h"
 #include "TG4StepManager.h"
 
 #include <TVirtualMCApplication.h>
@@ -22,24 +23,13 @@
 G4int TG4SensitiveDetector::fgSDCounter = 0;
 
 //_____________________________________________________________________________
-TG4SensitiveDetector::TG4SensitiveDetector(G4String sdName)
+TG4SensitiveDetector::TG4SensitiveDetector(G4String sdName, G4int mediumID)
   : G4VSensitiveDetector(sdName),
     fID(++fgSDCounter),
+    fMediumID(mediumID),
     fStepManager(TG4StepManager::Instance())
 {
 /// Standard constructor with the specified \em name
-}
-
-//_____________________________________________________________________________
-TG4SensitiveDetector::TG4SensitiveDetector(G4String sdName, G4int id)
-  : G4VSensitiveDetector(sdName),
-    fID(id),
-    fStepManager(TG4StepManager::Instance())
-
-{
-/// Standard constructor with specified \em name and \em id
-
-  ++fgSDCounter;
 }
 
 //_____________________________________________________________________________

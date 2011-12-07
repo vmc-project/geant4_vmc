@@ -25,7 +25,8 @@ class TG4StepManager;
 /// \ingroup digits_hits
 /// \brief Sensitive detector common to all logical volumes
 ///
-/// This class adds integer identifier data member to G4VSensitiveDetector.
+/// This class adds integer identifier data member to G4VSensitiveDetector
+/// and keeps the medium ID of the associated volume.  
 /// It also takes care of setting step status (kBoundary, kNormalStep)
 /// and passing G4Step to TG4StepManager and for calling a user application
 /// stepping function.
@@ -35,8 +36,7 @@ class TG4StepManager;
 class TG4SensitiveDetector : public G4VSensitiveDetector
 {
   public:
-    TG4SensitiveDetector(G4String sdName);
-    TG4SensitiveDetector(G4String sdName, G4int id);
+    TG4SensitiveDetector(G4String sdName, G4int mediumID);
     virtual ~TG4SensitiveDetector();
 
     // methods
@@ -46,9 +46,10 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
  
     // static get method
     static G4int GetTotalNofSensitiveDetectors();
-
+    
     // get methods
     G4int GetID() const;
+    G4int GetMediumID() const;
     
   private:          
     /// Not implemented
@@ -63,6 +64,7 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
 
     // data members
     G4int            fID;          ///< sensitive detector ID
+    G4int            fMediumID;    ///< medium ID
     TG4StepManager*  fStepManager; ///< the TG4StepManager instance
 };
 
@@ -77,6 +79,11 @@ inline G4int TG4SensitiveDetector::GetID() const {
   /// Returns sensitive detector ID.
   return fID; 
 }
+
+inline G4int TG4SensitiveDetector::GetMediumID() const {
+  /// Returns medium ID
+  return fMediumID;
+}  
 
 #endif //TG4V_SENSITIVE_DETECTOR_H
 
