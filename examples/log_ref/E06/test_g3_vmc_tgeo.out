@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.30/00      27 June 2011   *
+  *   Version   5.32/00   2 December 2011   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
+ROOT 5.32/00 (tags/v5-32-00@42375, Dec 05 2011, 11:57:44 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -22,14 +22,19 @@ Geant3TGeo has been created.
 Geometry will be defined via VMC
 Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
 Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
 Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
 Info in <TGeoManager::CloseGeometry>: 3 nodes/ 3 volume UID's in Root geometry manager
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
+Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
 Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
 Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
 Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material ID     2. Not applicable in Geant3 - setting is ignored.
@@ -47,22 +52,22 @@ Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material surface  Wate
 Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material surface  WaterSurface. Not applicable in Geant3 - setting is ignored.
 Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material surface  AirSurface. Not applicable in Geant3 - setting is ignored.
 Warning in <TGeant3TGeo::SetMaterialProperty>: Called for material surface  AirSurface. Not applicable in Geant3 - setting is ignored.
-Number of optical photons produced in this event : 2038
-Number of optical photons produced in this event : 2071
-Number of optical photons produced in this event : 2050
-Number of optical photons produced in this event : 2102
-Number of optical photons produced in this event : 2184
-Number of optical photons produced in this event : 2082
+Number of optical photons produced in this event : 2125
+Number of optical photons produced in this event : 2101
+Number of optical photons produced in this event : 2150
 Number of optical photons produced in this event : 2002
-Number of optical photons produced in this event : 2130
-Number of optical photons produced in this event : 2057
-Number of optical photons produced in this event : 2130
+Number of optical photons produced in this event : 2160
+Number of optical photons produced in this event : 2071
+Number of optical photons produced in this event : 2083
+Number of optical photons produced in this event : 2036
+Number of optical photons produced in this event : 2301
+Number of optical photons produced in this event : 2210
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   941406831    381CBA6F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   271407423    102D593F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   941429869   941406831
-                                        HEX    381D146D    381CBA6F
+          with Store/Table at absolute adrs   271430461   271407423
+                                        HEX    102DB33D    102D593F
                                         HEX        555A           0
                               relative adrs       21850           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

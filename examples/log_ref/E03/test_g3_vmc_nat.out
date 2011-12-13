@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.30/00      27 June 2011   *
+  *   Version   5.32/00   2 December 2011   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
+ROOT 5.32/00 (tags/v5-32-00@42375, Dec 05 2011, 11:57:44 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -48,11 +48,11 @@ MediumId: Medium Beam not found
    Absorber: total energy (MeV):  948.48       total track length (cm):  43.7742
    Gap:      total energy (MeV): 24.1166       total track length (cm):  10.2516
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   918944367    36C5FA6F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   254775615     F2F913F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   918967405   918944367
-                                        HEX    36C6546D    36C5FA6F
+          with Store/Table at absolute adrs   254798653   254775615
+                                        HEX     F2FEB3D     F2F913F
                                         HEX        555A           0
                               relative adrs       21850           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -97,14 +97,14 @@ MediumId: Medium Beam not found
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.30/00      27 June 2011   *
+  *   Version   5.32/00   2 December 2011   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
+ROOT 5.32/00 (tags/v5-32-00@42375, Dec 05 2011, 11:57:44 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -467,11 +467,11 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Gap:      total energy (MeV):   3.967       total track length (cm):    2.241
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   478558831    1C863A6F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   614452543    249FCD3F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   478581869   478558831
-                                        HEX    1C86946D    1C863A6F
+          with Store/Table at absolute adrs   614475581   614452543
+                                        HEX    24A0273D    249FCD3F
                                         HEX        555A           0
                               relative adrs       21850           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -502,14 +502,14 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.30/00      27 June 2011   *
+  *   Version   5.32/00   2 December 2011   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
+ROOT 5.32/00 (tags/v5-32-00@42375, Dec 05 2011, 11:57:44 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -608,11 +608,11 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   363558511    15AB766F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   994457919    3B46393F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   363581549   363558511
-                                        HEX    15ABD06D    15AB766F
+          with Store/Table at absolute adrs   994480957   994457919
+                                        HEX    3B46933D    3B46393F
                                         HEX        555A           0
                               relative adrs       21850           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -643,14 +643,14 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.30/00      27 June 2011   *
+  *   Version   5.32/00   2 December 2011   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
+ROOT 5.32/00 (tags/v5-32-00@42375, Dec 05 2011, 11:57:44 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -693,11 +693,11 @@ MediumId: Medium Beam not found
    Absorber: total energy (MeV): 1483.71       total track length (cm):   70.756
    Gap:      total energy (MeV): 76.3271       total track length (cm):  36.8609
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   867809903    33B9BA6F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   745444671    2C6E953F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   867832941   867809903
-                                        HEX    33BA146D    33B9BA6F
+          with Store/Table at absolute adrs   745467709   745444671
+                                        HEX    2C6EEF3D    2C6E953F
                                         HEX        555A           0
                               relative adrs       21850           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

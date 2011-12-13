@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.30/00      27 June 2011   *
+  *   Version   5.32/00   2 December 2011   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
+ROOT 5.32/00 (tags/v5-32-00@42375, Dec 05 2011, 11:57:44 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -22,12 +22,12 @@ Geant3 has been created.
 Geometry will be defined via TGeo
 Info in <TGeoManager::TGeoManager>: Geometry E01_geometry, E01 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is EXPH. Master volume is EXPH
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
 Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
 Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
 Info in <TGeoManager::CloseGeometry>: 22 nodes/ 4 volume UID's in E01 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
@@ -328,11 +328,11 @@ GetShape: Volume path /EXPH_1/CALB_1/LAYB_100 not found
 GetMaterial: Volume name XYZ not found
 GetMedium: Volume name XYZ not found
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   711394927    2A67066F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   475317567    1C54C53F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   711417965   711394927
-                                        HEX    2A67606D    2A67066F
+          with Store/Table at absolute adrs   475340605   475317567
+                                        HEX    1C551F3D    1C54C53F
                                         HEX        555A           0
                               relative adrs       21850           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

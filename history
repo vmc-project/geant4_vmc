@@ -11,6 +11,49 @@ $Id$
      
 Tags (history):
 ===============
+  13/12/2011
+  v2-13:
+    Migration to Geant4 9.5:
+    In Makefiles: use of geant4-config if G4INSTALL is not defined
+    
+    Geant4 VMC:
+    Developments:
+    - Implemented a possibility to select sensitive volumes by the user;
+      in this case TVirtualMCApplication::Stepping() function is called only when
+      track is located in a sensitive volume.
+    - Added the user physics selection in the TGeant4 title, so that
+      it can be retrievable in a user application.
+    - Migration to changes in G4PhysListFactory
+      (now all hadronic lists can be combined with all EM options)
+    - Modified building of physics list:
+      Added TG4ExtraPhysicsList with the following optional Geant4 builders:
+      G4ExtraPhysics   -  moved from TG4EmPhysicsList;
+      G4OpticalPhysics -  which has replaced TG4OpticalPhysics;
+        this implies the changes of commands for configuring optical processes
+      G4RadioactiveDecayBuilder - new
+    - Faster implementation of TVirtualMC::GetMediumID()
+      (the medium ID is now added in TG4SensitiveDetector object)
+
+    Fixes:
+    - Fix in GetSecondary(..) (bug reported by L. Zambelli) 
+      there was missing conversion of units in the returned value of particle 
+      momentum.
+    - Fixing compilation with G4UI_NONE and G4VIS_NONE
+
+    Examples:
+    - new g4libs.C macro with use of geant4-config;
+      the macro based on liblist renamed to g4libs_old.C;
+      previous g4libs_old.C (explicit loading) removed
+    - E06:
+      - Added setting parameters for Optical Mie Scattering (according N06)  
+      - Updated configuration optical processes using G4 commands
+      - Removed special setting for G3 (it was causing G4 exception
+        and seems not to be needed for G3)
+    
+    Tested with Geant4 9.5 (with embedded CLHEP 2.1.1.0), 
+      Root 5.30/04 and Root 5.32/00 + patch in root/etc from rev.42474,
+      VGM 3.05
+
   14/07/2011
   v2-12:
     Migration to Root v5.30/00 and Geant4 9.5.b01
