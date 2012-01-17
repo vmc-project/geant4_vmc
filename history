@@ -11,6 +11,16 @@ $Id$
      
 Tags (history):
 ===============
+  17/01/2012:
+  v2-13a:
+    Patch release, including fix in TG4ParticlesChecker:
+      Explicitly declare std::string (instead of G4String) when accessing
+      a char element via [0] to avoid compilation problem on Debian Lenny
+      and SLC 5.7.
+
+    Tested with Geant4 9.5 (with embedded CLHEP 2.1.1.0), 
+      Root Root 5.32/00 + patch in root/etc from rev.42474, VGM 3.05
+
   13/12/2011
   v2-13:
     Migration to Geant4 9.5:
