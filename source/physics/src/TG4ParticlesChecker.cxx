@@ -200,7 +200,10 @@ G4bool TG4ParticlesChecker::CheckName(G4ParticleDefinition* g4Particle,
       fCheckedProperties.find(kName) != fCheckedProperties.end();
     
   std::set<G4String> candidates;
-  char firstChar = rtValue[0];
+  std::string rtValueStd = rtValue;
+  char firstChar = rtValueStd[0];
+         // explicitly declared std::string needed for compiling
+         // on Debian Lenny (reported by Mohhamad) 
   if ( firstChar >= 'A' &&  firstChar <= 'Z') {
     firstChar = tolower(firstChar);  // Xx -> xx
   }  
