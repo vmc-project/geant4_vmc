@@ -91,10 +91,6 @@ void TG4RunAction::BeginOfRunAction(const G4Run* run)
   if ( fReadRandomStatus) {
     // restore event random number status from a file
     CLHEP::HepRandom::showEngineStatus();
-    if ( VerboseLevel() > 0) {
-      G4cout << "Resetting random engine from " 
-             << fRandomStatusFile << G4endl;  
-    }         
     G4String command("/random/resetEngineFrom ");
     command += fRandomStatusFile;
     G4UImanager::GetUIpointer()->ApplyCommand(command.data());
