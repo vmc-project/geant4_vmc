@@ -19,6 +19,7 @@
 
 #include "TG4Verbose.h"
 #include "TG4CrossSectionManager.h"
+#include "TG4RunActionMessenger.h"
 
 #include <G4UserRunAction.hh>
 #include <globals.hh>
@@ -44,6 +45,11 @@ class TG4RunAction : public G4UserRunAction,
     // methods
     virtual void BeginOfRunAction(const G4Run* run);
     virtual void EndOfRunAction(const G4Run* run);
+    
+    // set methods
+    void SetSaveRandomStatus(G4bool saveRandomStatus);
+    void SetReadRandomStatus(G4bool readRandomStatus);
+    void SetRandomStatusFile(G4String RandomStatusFile);
 
   private:
     /// Not implemented
@@ -51,10 +57,33 @@ class TG4RunAction : public G4UserRunAction,
     /// Not implemented
     TG4RunAction& operator=(const TG4RunAction& right);
 
-    // data members
+    // static data members
+    /// default name of the random engine status file to be read in
+    static const G4String  fgkDefaultRandomStatusFile;
+  
+     // data members
+    TG4RunActionMessenger   fMessenger; ///< messenger
     TG4CrossSectionManager  fCrossSectionManager; ///< cross section manager
     G4Timer*  fTimer; ///< G4Timer
     G4int     fRunID; ///< run ID
+    G4bool    fSaveRandomStatus; ///< control for saving random engine status
+    G4bool    fReadRandomStatus; ///< control for reading random engine status
+    G4String  fRandomStatusFile; ///< random engine status file name
 };
+
+inline void TG4RunAction::SetSaveRandomStatus(G4bool saveRandomStatus) {
+  /// Set option for saving random engine status
+  fSaveRandomStatus = saveRandomStatus;
+}  
+
+inline void TG4RunAction::SetReadRandomStatus(G4bool readRandomStatus) {
+  /// Set option for reading random engine status
+  fReadRandomStatus = readRandomStatus;
+}  
+
+inline void TG4RunAction::SetRandomStatusFile(G4String RandomStatusFile) {
+  /// Set random engine status file name
+  fRandomStatusFile = RandomStatusFile;
+}
 
 #endif //TG4_RUN_ACTION_H

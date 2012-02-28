@@ -31,6 +31,7 @@ class G4UIcmdWithABool;
 /// Implements command
 /// - /mcEvent/drawTracks [NONE, CHARGED, ALL]
 /// - /mcEvent/printMemory [true|false]
+/// - /mcEvent/saveRandom [true|false]
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -57,6 +58,7 @@ class TG4EventActionMessenger: public G4UImessenger
     G4UIdirectory*         fEventDirectory; ///< command directory
     G4UIcmdWithAString*    fDrawTracksCmd;  ///< command: drawTracks
     G4UIcmdWithABool*      fPrintMemoryCmd; ///< command: printMemory
+    G4UIcmdWithABool*      fSaveRandomStatusCmd; ///< command: saveRandom
 };
 
 #endif //TG4_EVENT_ACTION_MESSENGER_H

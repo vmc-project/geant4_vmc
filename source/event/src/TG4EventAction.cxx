@@ -26,6 +26,7 @@
 #include <G4Trajectory.hh>
 #include <G4VVisManager.hh>
 #include <G4UImanager.hh>
+#include <Randomize.hh>
 
 #include <TVirtualMC.h>
 #include <TVirtualMCStack.h>
@@ -39,7 +40,8 @@ TG4EventAction::TG4EventAction()
   : TG4Verbose("eventAction"),
     fMessenger(this),
     fTimer(),
-    fDrawFlag("CHARGED")
+    fDrawFlag("CHARGED"),
+    fSaveRandomStatus(false)
 {
 /// Default constructor
 }
@@ -117,7 +119,16 @@ void TG4EventAction::BeginOfEventAction(const G4Event* event)
         TG4TrackManager::Instance()->PrimaryToStack(vertex, particle);
       }        
     }
-  }  
+  } 
+  
+  // save the event random number status per event
+  if ( fSaveRandomStatus) {
+    G4UImanager::GetUIpointer()->ApplyCommand("/random/saveThisEvent");
+    if (VerboseLevel() > 0)
+      G4cout << "Saving random status: " << G4endl;  
+      CLHEP::HepRandom::showEngineStatus();
+      G4cout << G4endl;  
+  }    
 
   if (VerboseLevel() > 0) {
     G4cout << ">>> Event " << event->GetEventID() << G4endl;

@@ -27,7 +27,8 @@ TG4EventActionMessenger::TG4EventActionMessenger(TG4EventAction* eventAction)
   : G4UImessenger(),
     fEventAction(eventAction),
     fEventDirectory(0),
-    fDrawTracksCmd(0)
+    fDrawTracksCmd(0),
+    fSaveRandomStatusCmd(0)
 { 
 /// Standard constructor
 
@@ -46,6 +47,11 @@ TG4EventActionMessenger::TG4EventActionMessenger(TG4EventAction* eventAction)
   fPrintMemoryCmd->SetGuidance("Print memory usage at the end of event");
   fPrintMemoryCmd->SetParameterName("PrintMemory", false);
   fPrintMemoryCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+
+  fSaveRandomStatusCmd = new G4UIcmdWithABool("/mcEvent/saveRandom", this);
+  fSaveRandomStatusCmd->SetGuidance("Save random engine status for each event");
+  fSaveRandomStatusCmd->SetParameterName("SaveRandom", false);
+  fSaveRandomStatusCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 }
 
 //_____________________________________________________________________________
@@ -56,6 +62,7 @@ TG4EventActionMessenger::~TG4EventActionMessenger()
   delete fEventDirectory;
   delete fDrawTracksCmd;
   delete fPrintMemoryCmd;
+  delete fSaveRandomStatusCmd;
 }
 
 //
@@ -75,5 +82,9 @@ void TG4EventActionMessenger::SetNewValue(G4UIcommand* command,
   else if(command == fPrintMemoryCmd)
   { 
     fEventAction->SetPrintMemory(fPrintMemoryCmd->GetNewBoolValue(newValue)); 
+  }   
+  else if(command == fSaveRandomStatusCmd)
+  { 
+    fEventAction->SetSaveRandomStatus(fSaveRandomStatusCmd->GetNewBoolValue(newValue)); 
   }   
 }

@@ -42,7 +42,6 @@
 #ifdef G4UI_USE
 #include <G4UIExecutive.hh>
 #endif
-#include <Randomize.hh>
 
 #include <TROOT.h> 
 #include <TRint.h>
