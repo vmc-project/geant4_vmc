@@ -22,12 +22,13 @@
 #include <iostream>
 
 #include <TVirtualMC.h>
+#include <TVirtualMCRootManager.h>
+#include <TMCRootMutex.h>
 #include <TLorentzVector.h>
 #include <TTree.h>
 
 #include "Ex02TrackerSD.h"
 #include "Ex02TrackerHit.h"
-#include "Ex02RootManager.h"
 
 /// \cond CLASSIMP
 ClassImp(Ex02TrackerSD)
@@ -44,8 +45,6 @@ Ex02TrackerSD::Ex02TrackerSD(const char* name)
 {
 /// Standard constructor
 /// \param name  The tracker hits collection name
-
-  fTrackerCollection = new TClonesArray("Ex02TrackerHit");
 }
 
 //_____________________________________________________________________________
@@ -90,8 +89,18 @@ void Ex02TrackerSD::Initialize()
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
   
-  Register();
-  
+  static __thread Bool_t registered = false;
+  if ( ! registered ) {
+    cout << "... creating TClonesArray" << endl;
+    // Lock Root when creating data - seems not to be needed ?
+    //TMCRootMutex::Lock();
+    fTrackerCollection = new TClonesArray("Ex02TrackerHit");
+    //TMCRootMutex::UnLock();
+    // Register to Root IO only if RootManager is instantiated
+    if ( TVirtualMCRootManager::Instance() ) Register();
+    registered = true;
+  }   
+
   fSensitiveVolumeID = gMC->VolId("CHMB");
 }
 
@@ -108,17 +117,17 @@ Bool_t Ex02TrackerSD::ProcessHits()
   Double_t edep = gMC->Edep();
 
   if (edep==0.) return false;
-
+  
   Ex02TrackerHit* newHit = AddHit();
 
   // Track ID
-  newHit->SetTrackID  (gMC->GetStack()->GetCurrentTrackNumber());
+  newHit->SetTrackID (gMC->GetStack()->GetCurrentTrackNumber());
 
   // Chamber no
   newHit->SetChamberNb(copyNo);
 
   // Energy deposit
-  newHit->SetEdep     (edep);
+  newHit->SetEdep(edep);
 
   // Position
   TLorentzVector pos;
@@ -137,10 +146,10 @@ void Ex02TrackerSD::EndOfEvent()
 /// Print hits collection (if verbose)
 /// and delete hits afterwards.
 
-  if (fVerboseLevel>0)  Print();
+  //if (fVerboseLevel>0)  Print();
     
   // Reset hits collection
-  fTrackerCollection->Delete();  
+  fTrackerCollection->Clear();  
 }
 
 //_____________________________________________________________________________
@@ -148,7 +157,7 @@ void Ex02TrackerSD::Register()
 {
 /// Register the hits collection in the Root manager.
   
-  Ex02RootManager::Instance()
+  TVirtualMCRootManager::Instance()
     ->Register("hits", "TClonesArray", &fTrackerCollection);
 }
 

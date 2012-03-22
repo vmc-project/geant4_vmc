@@ -19,6 +19,7 @@
 #include "TG4ParticlesManager.h"
 #include "TG4StateManager.h"
 #include "TG4Globals.h"
+#include "TGeant4.h"
 
 #include <G4ProcessManager.hh>
 

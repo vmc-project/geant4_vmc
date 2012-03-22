@@ -81,7 +81,7 @@ class TG4TrackManager : public TG4Verbose
     TG4TrackManager& operator=(const TG4TrackManager& right);
 
     // static data members
-    static TG4TrackManager*   fgInstance; ///< this instance
+    static __thread TG4TrackManager*   fgInstance; ///< this instance
 
     // data members
     G4TrackingManager*  fG4TrackingManager;  ///< G4 tracking manager

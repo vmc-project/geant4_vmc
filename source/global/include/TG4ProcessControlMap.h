@@ -70,10 +70,11 @@ class TG4ProcessControlMap
     TG4ProcessControlMap& operator=(const TG4ProcessControlMap& right);
   
     // methods
-    G4bool IsDefined(const G4String& processName);
+     G4bool IsDefined(const G4String& processName);
 
     // static data members
-    static TG4ProcessControlMap*  fgInstance; ///< this instance
+    // MT COMMON
+    static __thread TG4ProcessControlMap*  fgInstance; ///< this instance
 
     // data members
     Map  fMap; ///< map container

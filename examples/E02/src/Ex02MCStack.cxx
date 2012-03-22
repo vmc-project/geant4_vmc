@@ -19,6 +19,7 @@
 
 #include "Ex02MCStack.h"
 
+#include <TMCRootMutex.h>
 #include <TParticle.h>
 #include <TObjArray.h>
 #include <TError.h>
@@ -28,7 +29,7 @@
 using namespace std;
 
 /// \cond CLASSIMP
-ClassImp(Ex02MCStack)
+//ClassImp(Ex02MCStack)
 /// \endcond
 
 //_____________________________________________________________________________
@@ -97,6 +98,8 @@ void  Ex02MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
 /// \param weight    particle weight
 /// \param is        generation status code
 
+  TMCRootMutex::Lock();
+
   const Int_t kFirstDaughter=-1;
   const Int_t kLastDaughter=-1;
   
@@ -121,6 +124,8 @@ void  Ex02MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
   if (toBeDone) fStack.push(particle);  
 
   ntr = GetNtrack() - 1;   
+
+  TMCRootMutex::UnLock();
 }			 
 
 //_____________________________________________________________________________
@@ -181,6 +186,7 @@ void Ex02MCStack::Reset()
   fCurrentTrack = -1;
   fNPrimary = 0;
   fParticles->Delete();
+  //fParticles->Clear();
 
   //Restore Object count 
   //To save space in the table keeping track of all referenced objects

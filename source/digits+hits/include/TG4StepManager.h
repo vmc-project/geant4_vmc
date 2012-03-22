@@ -153,7 +153,7 @@ class TG4StepManager
                            G4int off, G4bool warn = false) const;
 
     // static data members
-    static TG4StepManager*  fgInstance;   ///< this instance
+    static __thread TG4StepManager*  fgInstance;   ///< this instance
     
     //
     // data members

@@ -59,10 +59,10 @@ class TG4ProcessMCMap
     void Clear();
 
     // get methods
-    TMCProcess  GetMCProcess(const G4VProcess* process);
-    TMCProcess  GetMCProcess(const G4String& processName);
-    G4String    GetMCProcessName(const G4VProcess* process);
-    G4String    GetMCProcessName(const G4String& processName);
+    TMCProcess  GetMCProcess(const G4VProcess* process) const;
+    TMCProcess  GetMCProcess(const G4String& processName) const;
+    G4String    GetMCProcessName(const G4VProcess* process) const;
+    G4String    GetMCProcessName(const G4String& processName) const;
 
   private:
     /// Not implemented
@@ -74,7 +74,8 @@ class TG4ProcessMCMap
     G4bool IsDefined(const G4String& processName);
 
     // static data members
-    static TG4ProcessMCMap*  fgInstance; ///< this instance
+    // MT COMMON
+    static __thread TG4ProcessMCMap*  fgInstance; ///< this instance
 
     // data members
     Map  fMap; ///< map container

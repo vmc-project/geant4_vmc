@@ -131,7 +131,7 @@ class TG4PhysicsManager : public TG4Verbose
     void SetSpecialCutsActivation();
 
     // static data members
-    static TG4PhysicsManager*  fgInstance; ///< this instance
+    static __thread TG4PhysicsManager*  fgInstance; ///< this instance
     
     static const G4double      fgkDefautCut; ///< the default range cut value 
 

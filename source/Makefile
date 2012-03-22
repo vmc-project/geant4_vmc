@@ -91,6 +91,7 @@ endif
 INCLUDES := $(patsubst %,-I%/include,$(GDIRS)) \
            -I$(TOPDIR)/include \
            -I$(TOPDIR)/include/g4root \
+           -I$(TOPDIR)/tpmalloc \
 	   -I$(G4INCLUDE) \
 	   -I$(CLHEP_BASE_DIR)/include
 

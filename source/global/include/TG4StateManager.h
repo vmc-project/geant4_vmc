@@ -51,7 +51,7 @@ class TG4StateManager : public TG4Verbose
     TG4StateManager& operator=(const TG4StateManager& right);
 
     // static data members
-    static TG4StateManager* fgInstance; ///< this instance
+    static __thread TG4StateManager* fgInstance; ///< this instance
 
     // data members
     TG4ApplicationState  fCurrentState; ///< the current application state 
@@ -59,6 +59,7 @@ class TG4StateManager : public TG4Verbose
 };
 
 // inline methods
+
 
 inline TG4StateManager* TG4StateManager::Instance() { 
   /// Return this instance

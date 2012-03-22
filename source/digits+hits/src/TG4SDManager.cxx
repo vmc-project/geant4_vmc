@@ -22,7 +22,10 @@
 #include "TG4Medium.h"
 #include "TG4Globals.h"
 
-TG4SDManager* TG4SDManager::fgInstance = 0;
+#include <TVirtualMC.h>
+
+
+__thread TG4SDManager* TG4SDManager::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4SDManager::TG4SDManager()
@@ -63,6 +66,7 @@ void TG4SDManager::Initialize()
 /// sets second indexes for materials (corresponding to G3 tracking 
 /// media) and clear remaing G3 tables.
 
+  G4cout << "TG4SDManager::Initialize " << gMC << G4endl;
   fSDConstruction->Construct();
 }  
   

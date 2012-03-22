@@ -22,7 +22,7 @@
 #include <iomanip>
 #include "globals.hh"
 
-TG4ProcessMCMap* TG4ProcessMCMap::fgInstance = 0;
+__thread TG4ProcessMCMap* TG4ProcessMCMap::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4ProcessMCMap::TG4ProcessMCMap() 
@@ -116,7 +116,7 @@ void TG4ProcessMCMap::Clear()
 }  
 
 //_____________________________________________________________________________
-TMCProcess TG4ProcessMCMap::GetMCProcess(const G4VProcess* process)
+TMCProcess TG4ProcessMCMap::GetMCProcess(const G4VProcess* process) const
 {
 /// Return TMCProcess code for the process with a given name.
 
@@ -126,11 +126,11 @@ TMCProcess TG4ProcessMCMap::GetMCProcess(const G4VProcess* process)
 }
 
 //_____________________________________________________________________________
-TMCProcess TG4ProcessMCMap::GetMCProcess(const G4String& processName)
+TMCProcess TG4ProcessMCMap::GetMCProcess(const G4String& processName) const
 {
 /// Return TMCProcess code for the process with a given name.
 
-  MapIterator i = fMap.find(processName);
+  MapConstIterator i = fMap.find(processName);
   if (i == fMap.end()) 
     return kPNoProcess;
   else                 
@@ -138,7 +138,7 @@ TMCProcess TG4ProcessMCMap::GetMCProcess(const G4String& processName)
 }
 
 //_____________________________________________________________________________
-G4String TG4ProcessMCMap::GetMCProcessName(const G4VProcess* process)
+G4String TG4ProcessMCMap::GetMCProcessName(const G4VProcess* process) const
 {
 /// Return TMCProcess code for the process with a given name.
 
@@ -148,7 +148,7 @@ G4String TG4ProcessMCMap::GetMCProcessName(const G4VProcess* process)
 }  
 
 //_____________________________________________________________________________
-G4String TG4ProcessMCMap::GetMCProcessName(const G4String& processName)
+G4String TG4ProcessMCMap::GetMCProcessName(const G4String& processName) const
 {
 /// Return TMCProcess code for the process with a given name.
 

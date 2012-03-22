@@ -25,7 +25,7 @@
 #include <G4UImessenger.hh>
 #include <G4ProcessTable.hh>
 
-TG4G3PhysicsManager* TG4G3PhysicsManager::fgInstance = 0;
+__thread TG4G3PhysicsManager* TG4G3PhysicsManager::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4G3PhysicsManager::TG4G3PhysicsManager()

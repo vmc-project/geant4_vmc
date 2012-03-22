@@ -1,0 +1,35 @@
+.PHONY: all clean
+
+PACKAGE   = tpmalloc
+
+TOPDIR  = $(shell pwd)/..
+LIBDIR  = $(TOPDIR)/lib/tgt_$(PLATFORM)
+
+ifeq ($(ROOTSYS),)
+ROOT_ETCDIR := $(shell root-config --etcdir)/vmc
+else
+ROOT_ETCDIR = $(ROOTSYS)/etc/vmc
+endif
+
+# Rules
+#
+include $(ROOT_ETCDIR)/MakeRules
+
+all: message libtpmallocstub.so libmymalloc.so
+
+libtpmallocstub.so: tpmallocstub.c
+	gcc -fPIC -O3 -c tpmallocstub.c
+	gcc -shared -O3 -o $(LIBDIR)/libtpmallocstub.so tpmallocstub.o
+
+libmymalloc.so: hjmalloc.c mymalloc.c
+	gcc -fPIC -O3 -c -o hjmalloc.o hjmalloc.c
+	gcc -fPIC -O3 -c -o mymalloc.o mymalloc.c
+	gcc -shared -O3 -o $(LIBDIR)/libmymalloc.so mymalloc.o hjmalloc.o
+
+message:
+	@echo "Building tpmalloc libraries ..."
+clean:
+	@rm -rf *.o *.so
+
+include $(ROOT_ETCDIR)/MakeMacros
+

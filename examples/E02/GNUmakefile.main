@@ -1,0 +1,38 @@
+name := exampleE02
+G4TARGET := $(name)
+G4EXLIB := true
+
+.PHONY: all clean_all
+
+all: lib bin 
+
+include $(G4INSTALL)/config/architecture.gmk
+
+#Example E02
+CPPFLAGS += -I${G4VMC}/E02/include
+EXTRALIBS += -L${G4VMC}/lib/tgt_linuxx8664gcc -lexample02
+
+#VGM
+EXTRALIBS += -L$(VGM_INSTALL)/lib/$(VGM_SYSTEM)
+EXTRALIBS += -lGeant4GM -lRootGM  -lBaseVGM -lClhepVGM -lXmlVGM
+
+#G4VMC
+CPPFLAGS += -I${G4VMC}/include/geant4vmc
+EXTRALIBS += -L${G4VMC}/lib/tgt_linuxx8664gcc -lgeant4vmc
+
+#G4ROOT
+CPPFLAGS += -I${G4VMC}/include/g4root
+EXTRALIBS += -L${G4VMC}/lib/tgt_linuxx8664gcc -lg4root
+
+#tpmalloc
+CPPFLAGS += -I${G4VMC}/include/tpmallocstub
+EXTRALIBS +=  -L${G4VMC}/lib/tgt_linuxx8664gcc -ltpmallocstub -lrt -lpthread
+
+#ROOT
+CPPFLAGS += $(shell $(ROOTSYS)/bin/root-config --cflags)
+EXTRALIBS += $(shell $(ROOTSYS)/bin/root-config --glibs) -lGeomPainter -lGeom -lVMC
+
+include $(G4INSTALL)/config/binmake.gmk
+
+clean_all: clean
+	@rm -rf *.stderr *.stdout bin tmp testoutput*

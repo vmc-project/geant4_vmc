@@ -63,37 +63,37 @@ TGeant4::TGeant4(const char* name, const char* title,
   newTitle.Append(" : ");
   newTitle.Append(configuration->GetPhysicsListSelection());
   SetTitle(newTitle);
-
+  
   // create state manager
   fStateManager = new TG4StateManager();
   fStateManager->SetNewState(kPreInit);
   // add verbose level
-  //G4cout << "TG4StateManager has been created." << G4endl;
+  G4cout << "TG4StateManager has been created." << G4endl;
   
   // create geometry manager
   fGeometryManager = new TG4GeometryManager(fUserGeometry);
   // add verbose level
-  //G4cout << "TG4GeometryManager has been created." << G4endl;
+  G4cout << "TG4GeometryManager has been created." << G4endl;
   
   // create sensitive detectors manager
   fSDManager = new TG4SDManager();
   // add verbose level
-  //G4cout << "TG4SDManager has been created." << G4endl;
+  G4cout << "TG4SDManager has been created." << G4endl;
   
   // create physics manager  
   fPhysicsManager = new TG4PhysicsManager();
   // add verbose level
-  //G4cout << "TG4GeometryManager has been created." << G4endl;
+  G4cout << "TG4GeometryManager has been created." << G4endl;
   
   // create step manager 
   fStepManager = new TG4StepManager(fUserGeometry);
   // add verbose level
-  //G4cout << "TG4StepManager has been created." << G4endl;
+  G4cout << "TG4StepManager has been created." << G4endl;
 
   // create run manager
   fRunManager = new TG4RunManager(configuration, argc, argv);
   // add verbose level
-  //G4cout << "TG4RunManager has been created." << G4endl;
+  G4cout << "TG4RunManager has been created." << G4endl;
 
 #ifdef MCDEBUG
   G4cout << "Debug mode is switched on." << G4endl;
@@ -135,32 +135,32 @@ TGeant4::TGeant4(const char* name, const char* title,
   fStateManager = new TG4StateManager();
   fStateManager->SetNewState(kPreInit);
   // add verbose level
-  //G4cout << "TG4StateManager has been created." << G4endl;
+  G4cout << "TG4StateManager has been created." << G4endl;
   
   // create geometry manager
   fGeometryManager = new TG4GeometryManager(fUserGeometry);
   // add verbose level
-  //G4cout << "TG4GeometryManager has been created." << G4endl;
+  G4cout << "TG4GeometryManager has been created." << G4endl;
   
   // create sensitive detectors manager
   fSDManager = new TG4SDManager();
   // add verbose level
-  //G4cout << "TG4SDManager has been created." << G4endl;
+  G4cout << "TG4SDManager has been created." << G4endl;
   
   // create physics manager  
   fPhysicsManager = new TG4PhysicsManager();
   // add verbose level
-  //G4cout << "TG4GeometryManager has been created." << G4endl;
+  G4cout << "TG4GeometryManager has been created." << G4endl;
   
   // create step manager 
   fStepManager = new TG4StepManager(fUserGeometry);
   // add verbose level
-  //G4cout << "TG4StepManager has been created." << G4endl;
+  G4cout << "TG4StepManager has been created." << G4endl;
   
   // create run manager
   fRunManager = new TG4RunManager(configuration);
   // add verbose level
-  //G4cout << "TG4RunManager has been created." << G4endl;
+  G4cout << "TG4RunManager has been created." << G4endl;
 
 #ifdef MCDEBUG
   G4cout << "Debug mode is switched on." << G4endl;
@@ -941,16 +941,18 @@ Bool_t TGeant4::SetProcess(const char* flagName, Int_t flagValue)
 }  
  
 //_____________________________________________________________________________
-Bool_t TGeant4::DefineParticle(Int_t pdg, const char* name, TMCParticleType mcType, 
-                          Double_t mass, Double_t charge, Double_t lifetime)
+Bool_t TGeant4::DefineParticle(Int_t /*pdg*/, const char* /*name*/, TMCParticleType /*mcType*/, 
+                          Double_t /*mass*/, Double_t /*charge*/, Double_t /*lifetime*/)
 {
 /// Old function definition, now replaced with more arguments
 
-  TVirtualMC::DefineParticle(pdg, name, mcType, mass, charge, lifetime);
-  
+  TG4Globals:: Warning(
+    "TGeant4", "DefineParticle",
+    "Deprecated function. The function with long argument list should be used instead."); 
+
   return false;
 }                          
-                        
+                       
 //_____________________________________________________________________________
 Bool_t TGeant4::DefineParticle(Int_t pdg, const char* name, TMCParticleType mcType, 
                           Double_t mass, Double_t charge, Double_t lifetime, 
@@ -1172,6 +1174,20 @@ void TGeant4::Init()
 /// Initialize G4 run manager.
 
   fRunManager->Initialize();
+
+#ifdef G4VIS_USE
+  fVisExecutive->SetVerboseLevel(0);
+  fVisExecutive->Initialize();
+#endif
+}  
+  
+//_____________________________________________________________________________
+void TGeant4::InitMT(Int_t threadRank) 
+{ 
+/// Initialize G4 run manager.
+
+  G4cout << "TGeant4::Init " << threadRank << G4endl;
+  fRunManager->Initialize(threadRank);
 
 #ifdef G4VIS_USE
   fVisExecutive->SetVerboseLevel(0);

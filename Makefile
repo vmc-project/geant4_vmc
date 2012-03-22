@@ -17,7 +17,7 @@
 
 MAKEFLAGS= --no-print-directory
 
-SUBDIRS  = g4root source examples
+SUBDIRS  = g4root tpmalloc source examples
 
 .PHONY: default
 

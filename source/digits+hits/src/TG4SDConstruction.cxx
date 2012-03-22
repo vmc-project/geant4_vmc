@@ -28,6 +28,8 @@
 #include <TGeoManager.h>
 #include <TGeoVolume.h>
 
+#include <TVirtualMC.h>
+
 const G4String  TG4SDConstruction::fgkDefaultSVLabel = "SV";
 
 //_____________________________________________________________________________
@@ -52,37 +54,32 @@ TG4SDConstruction::~TG4SDConstruction()
 //
 
 //_____________________________________________________________________________
-G4int TG4SDConstruction::CreateSD(G4LogicalVolume* lv) const
+G4VSensitiveDetector* TG4SDConstruction::CreateSD() const
 { 
-/// Create/retrieve a sensitive detector for the given logical volume.
+/// Create/or retreive a generic sensitive detector
 /// Return the ID of created/retrievd sensitive detector,
 
-  TG4GeometryServices* geometryServices = TG4GeometryServices::Instance();
   G4SDManager* pSDManager = G4SDManager::GetSDMpointer();
+  G4String sdName = "/mcSD";
 
-  G4String lvName = lv->GetName();   
-  G4String sdName = "/" + lvName;
-
-  // cut copy number from sdName
-  sdName = geometryServices->UserVolumeName(sdName);
-  
-  // create/retrieve the sensitive detector
+  // create the sensitive detector
   G4VSensitiveDetector* sd = 0; 
   sd = pSDManager->FindSensitiveDetector(sdName, false);
-  if (!sd) {
-    TG4SensitiveDetector* newSD = new TG4SensitiveDetector(sdName);        
-    pSDManager->AddNewDetector(newSD);
+  if ( ! sd ) {
+    sd = new TG4SensitiveDetector(sdName);        
+    pSDManager->AddNewDetector(sd);
 
     if (VerboseLevel() > 1) {
-      G4cout << "Sensitive detector " << sdName << "  ID=" 
-             << newSD->GetID() << " has been created." << G4endl;
+      G4cout << "Sensitive detector " << sdName 
+             << " has been created." << G4endl;
     }
-                 
-    sd = newSD;  
-  }        
-  lv->SetSensitiveDetector(sd);             
+  }
+  else {
+    TG4Globals::Warning("TG4SDConstruction", "CreateSD",
+       "/mcSD already exists.");
+  }
   
-  return ((TG4SensitiveDetector*)sd)->GetID();
+  return sd;     
 }
 
 //_____________________________________________________________________________
@@ -129,9 +126,14 @@ void TG4SDConstruction::Construct()
 /// Create sensitive detectors and initialize the VMC application.
 /// Sensitive detectors are set to all logical volumes
 
+  G4cout << "TG4SDConstruction::Construct" << gMC << G4endl;
+
+  G4VSensitiveDetector* sd = CreateSD();
+
   if ( fSelectionFromTGeo ) FillSDSelectionFromTGeo();
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
+  G4cout << "lvStore" << lvStore << G4endl;
   
   for ( G4int i=0; i<G4int(lvStore->size()); i++ ) {
     G4LogicalVolume* lv = (*lvStore)[i];
@@ -139,21 +141,13 @@ void TG4SDConstruction::Construct()
     // or if volume name is in selection if selection is defined
     if ( ! fSelection.size() ||
           fSelection.find(lv->GetName()) != fSelection.end() ) {
-      G4int sdID = CreateSD(lv);
-      TG4SDServices::Instance()->MapVolume(lv, sdID);
+
+      G4cout << "Set SD " << sd << " to LV " << lv << " " << lv->GetName() << G4endl;
+      lv->SetSensitiveDetector(sd);
     }  
+    // map volume to its ID in the map
+    TG4SDServices::Instance()->MapVolume(lv, i);
   }
-  
-  
-  if ( fSelection.size() ) {
-    // Set volume IDs to volumes which have not SD
-    G4int counter = TG4SensitiveDetector::GetTotalNofSensitiveDetectors();
-    for ( G4int i=0; i<G4int(lvStore->size()); i++ ) {
-      G4LogicalVolume* lv = (*lvStore)[i];
-      if ( ! lv->GetSensitiveDetector() ) 
-        TG4SDServices::Instance()->MapVolume(lv, counter++);
-    }
-  }    
   
   TG4StateManager::Instance()->SetNewState(kInitGeometry);
   TVirtualMCApplication::Instance()->InitGeometry();

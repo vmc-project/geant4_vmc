@@ -23,7 +23,8 @@
 
 //_____________________________________________________________________________
 TG4DetConstruction::TG4DetConstruction()
-  : G4VUserDetectorConstruction()
+  : G4VUserDetectorConstruction(),
+    fWorld(0)
 {
 /// Default constructor
 }
@@ -47,5 +48,32 @@ G4VPhysicalVolume* TG4DetConstruction::Construct()
   // Build G4 geometry
   TG4GeometryManager::Instance()->ConstructGeometry();
 
-  return TG4GeometryServices::Instance()->GetWorld();      
+  fWorld = TG4GeometryServices::Instance()->GetWorld();  
+  
+  return fWorld;    
+}
+
+//_____________________________________________________________________________
+G4VPhysicalVolume* TG4DetConstruction::ConstructSlave()
+{ 
+/// Construct geometry is delegated to TG4GeometryManager
+// --
+
+  // Build G4 geometry
+  TG4GeometryManager::Instance()->ConstructSlaveGeometry();
+
+  G4cout << "Setting world to TG4GeometryServices::Instance " 
+         << TG4GeometryServices::Instance() << " " << fWorld << G4endl;
+         
+  TG4GeometryServices::Instance()->SetWorld(fWorld);  
+  
+  return fWorld;    
+}
+
+//_____________________________________________________________________________
+void TG4DetConstruction::SlaveTG4DetConstruction()
+{
+/// Nothing to be done yet
+
+  G4cout << "TG4DetConstruction::SlaveTG4DetConstruction" << G4endl;
 }

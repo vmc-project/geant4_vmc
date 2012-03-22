@@ -21,7 +21,7 @@
 
 // static data members
 
-TG4G3Defaults* TG4G3Defaults::fgInstance = 0;
+__thread TG4G3Defaults* TG4G3Defaults::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4G3Defaults::TG4G3Defaults() 

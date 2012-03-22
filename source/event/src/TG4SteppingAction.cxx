@@ -32,7 +32,7 @@
 #include <TVirtualMCApplication.h>
 
 // static data members
-TG4SteppingAction* TG4SteppingAction::fgInstance = 0;
+__thread TG4SteppingAction* TG4SteppingAction::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4SteppingAction::TG4SteppingAction() 
@@ -286,7 +286,7 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
 /// for this purpose. 
  
   // stop track if maximum number of steps has been reached
-  ProcessTrackIfLooping(step);
+  ProcessTrackIfLooping(step);  
 
 /*
   // TO BE REMOVED   

@@ -56,7 +56,7 @@
 #include <RootGM/volumes/Factory.h>
 #endif
 
-TG4GeometryManager* TG4GeometryManager::fgInstance = 0;
+__thread TG4GeometryManager* TG4GeometryManager::fgInstance = 0;
 const G4double      TG4GeometryManager::fgDefaultLimitDensity = 0.001*(g/cm3);
 const G4double      TG4GeometryManager::fgDefaultMaxStep= 10*cm;
 
@@ -77,6 +77,8 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
      
 {
 /// Standard constructor
+
+  G4cout << "TG4GeometryManager::TG4GeometryManager " << this << G4endl;
 
   if ( fgInstance ) {
     TG4Globals::Exception(
@@ -530,6 +532,8 @@ void TG4GeometryManager::ConstructMagField()
   }  
 }
 
+#include "TG4SDManager.h"
+
 //_____________________________________________________________________________
 void TG4GeometryManager::ConstructGeometry()
 {
@@ -548,6 +552,32 @@ void TG4GeometryManager::ConstructGeometry()
 
   // Construct user regions
   if ( fUserRegionConstruction ) fUserRegionConstruction->Construct();
+
+  // Initialize SD manager
+  //TG4SDManager::Instance()->Initialize();
+}                   
+
+//_____________________________________________________________________________
+void TG4GeometryManager::ConstructSlaveGeometry()
+{
+/// Construct Geant4 geometry depending on user geometry source
+
+  // Construct G4 geometry 
+  //ConstructG4Geometry();
+
+  // Fill medium map
+  FillMediumMap(); 
+
+  // VMC application construct geometry for optical processes
+  TG4StateManager::Instance()->SetNewState(kConstructOpGeometry);
+  TVirtualMCApplication::Instance()->ConstructOpGeometry();   
+  TG4StateManager::Instance()->SetNewState(kNotInApplication);
+
+  // Construct user regions
+  if ( fUserRegionConstruction ) fUserRegionConstruction->Construct();
+
+  // Initialize SD manager
+  //TG4SDManager::Instance()->Initialize();
 }                   
 
 //_____________________________________________________________________________

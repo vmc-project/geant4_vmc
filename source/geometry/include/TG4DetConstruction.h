@@ -35,12 +35,17 @@ class TG4DetConstruction : public G4VUserDetectorConstruction
 
     // methods
     virtual G4VPhysicalVolume* Construct();
+    virtual G4VPhysicalVolume* ConstructSlave();
+    
+    void SlaveTG4DetConstruction();
 
   private:    
     /// Not implemented
     TG4DetConstruction(const TG4DetConstruction& right);
     /// Not implemented
     TG4DetConstruction& operator=(const TG4DetConstruction& right);
+    
+    G4VPhysicalVolume* fWorld;
 }; 
 
 #endif //TG4_DET_CONSTRUCTION_H

@@ -75,7 +75,7 @@ class TG4TrackingAction : public G4UserTrackingAction,
     void Verbose() const;
 
     // static data members
-    static TG4TrackingAction*   fgInstance; ///< this instance
+    static __thread TG4TrackingAction*   fgInstance; ///< this instance
 
     //
     // data members

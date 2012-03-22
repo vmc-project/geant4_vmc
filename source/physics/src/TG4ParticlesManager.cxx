@@ -36,7 +36,7 @@
 
 
 
-TG4ParticlesManager* TG4ParticlesManager::fgInstance = 0;
+__thread TG4ParticlesManager* TG4ParticlesManager::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4ParticlesManager::TG4ParticlesManager()

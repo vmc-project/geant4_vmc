@@ -151,7 +151,7 @@ class TG4GeometryServices : public TG4Verbose
     void DumpG4MaterialPropertiesTable(G4MaterialPropertiesTable* table) const;
 #endif
     // static data members
-    static TG4GeometryServices*  fgInstance;   ///< this instance
+    static __thread TG4GeometryServices*  fgInstance;   ///< this instance
     static             G4String  fgBuffer;     ///< string buffer
     static const G4double  fgkAZTolerance;     ///< A,Z tolerance
     static const G4double  fgkDensityTolerance;///< density tolerance (percentual)

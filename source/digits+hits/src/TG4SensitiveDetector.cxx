@@ -24,23 +24,13 @@ G4int TG4SensitiveDetector::fgSDCounter = 0;
 //_____________________________________________________________________________
 TG4SensitiveDetector::TG4SensitiveDetector(G4String sdName)
   : G4VSensitiveDetector(sdName),
-    fID(++fgSDCounter),
     fStepManager(TG4StepManager::Instance())
 {
 /// Standard constructor with the specified \em name
-}
-
-//_____________________________________________________________________________
-TG4SensitiveDetector::TG4SensitiveDetector(G4String sdName, G4int id)
-  : G4VSensitiveDetector(sdName),
-    fID(id),
-    fStepManager(TG4StepManager::Instance())
-
-{
-/// Standard constructor with specified \em name and \em id
 
   ++fgSDCounter;
-}
+} 
+
 
 //_____________________________________________________________________________
 TG4SensitiveDetector::~TG4SensitiveDetector() 

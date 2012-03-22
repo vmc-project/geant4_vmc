@@ -58,8 +58,10 @@ void TG4GeoTrackManager::UpdateRootTrack(const G4Step* step)
    
    if ( stepNumber == 1 ) {
      // Find and update parent track if it exists
-     Int_t trackNumber = gMC->GetStack()->GetCurrentTrackNumber();
-     Int_t parentTrackNumber = gMC->GetStack()->GetCurrentParentTrackNumber(); 
+     Int_t trackNumber 
+       = gMC->GetStack()->GetCurrentTrackNumber();
+     Int_t parentTrackNumber 
+       = gMC->GetStack()->GetCurrentParentTrackNumber(); 
      Int_t pdg = gMC->TrackPid();
      if ( parentTrackNumber >= 0 ) {
        fParentTGeoTrack = gGeoManager->FindTrackWithId(parentTrackNumber);

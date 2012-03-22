@@ -23,11 +23,12 @@
 
 #include "Ex02DetectorConstruction.h"
 #include "Ex02TrackerSD.h"
-#include "Ex02RootManager.h"
 
-class TVirtualMagField;
+#include <TVirtualMCRootManager.h>
 
 class Ex02MCStack;
+
+class TVirtualMagField;
 
 /// \ingroup E02
 /// \brief Implementation of the TVirtualMCApplication
@@ -38,16 +39,13 @@ class Ex02MCStack;
 class Ex02MCApplication : public TVirtualMCApplication
 {
   public:
-    Ex02MCApplication(const char* name,  const char *title, 
-                      FileMode fileMode = kWrite);
+    Ex02MCApplication(const char* name,  const char *title);
     Ex02MCApplication();
     virtual ~Ex02MCApplication();
-  
-    // static access method
-    static Ex02MCApplication* Instance(); 
 
     // methods
     void InitMC(const char *setup);
+    void InitMC(Int_t threadRank);
     void RunMC(Int_t nofEvents);
     void FinishRun();
  
@@ -70,23 +68,19 @@ class Ex02MCApplication : public TVirtualMCApplication
   private:
     // methods
     void RegisterStack();
-  
+    
     // data members
+    TVirtualMCRootManager*   fRootManager;     //!< Root manager 
     Ex02MCStack*             fStack;           ///< VMC stack
     Ex02DetectorConstruction fDetConstruction; ///< Dector construction
     Ex02TrackerSD            fTrackerSD;       ///< Tracker SD
     TVirtualMagField*        fMagField;        ///< Magnetic field
-    Ex02RootManager          fRootManager;     ///< Root manager 
     Bool_t                   fOldGeometry;     ///< Option for geometry definition
 
   ClassDef(Ex02MCApplication,1)  //Interface to MonteCarlo application
 };
 
 // inline functions
-
-/// \return The singleton instance 
-inline Ex02MCApplication* Ex02MCApplication::Instance()
-{ return (Ex02MCApplication*)(TVirtualMCApplication::Instance()); }
 
 /// Switch on/off the old geometry definition  (via VMC functions)
 /// \param oldGeometry  If true, geometry definition via VMC functions

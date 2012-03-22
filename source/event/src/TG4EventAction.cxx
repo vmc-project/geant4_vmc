@@ -140,8 +140,10 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
   }
 
   if (VerboseLevel() > 2) {
-    G4int nofPrimaryTracks = gMC->GetStack()->GetNprimary();
-    G4int nofSavedTracks = gMC->GetStack()->GetNtrack();
+    G4int nofPrimaryTracks 
+      = gMC->GetStack()->GetNprimary();
+    G4int nofSavedTracks 
+      = gMC->GetStack()->GetNtrack();
    
     G4cout  << "    " << nofPrimaryTracks << 
                " primary tracks processed." << G4endl;

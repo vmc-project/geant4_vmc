@@ -29,7 +29,7 @@
 #include <G4VisAttributes.hh>
 #endif
 
-TG4LVTree* TG4LVTree::fgInstance = 0;
+__thread TG4LVTree* TG4LVTree::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4LVTree* TG4LVTree::Instance() 

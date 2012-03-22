@@ -52,6 +52,7 @@ class TG4GeometryManager : public TG4Verbose
     // functions for building geometry
     void ConstructMagField();
     void ConstructGeometry();
+    void ConstructSlaveGeometry();
     void FinishGeometry();
     void UpdateMagField();
     void SetUserLimits(const TG4G3CutVector& cuts,
@@ -82,7 +83,7 @@ class TG4GeometryManager : public TG4Verbose
     void FillMediumMap();
         
     // static data members
-    static TG4GeometryManager*  fgInstance;     ///< this instance
+    static __thread TG4GeometryManager*  fgInstance;     ///< this instance
     
     /// default material density limit for setting max allowed step 
     static const G4double  fgDefaultLimitDensity; 

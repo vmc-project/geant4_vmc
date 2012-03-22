@@ -22,7 +22,7 @@
 
 #include <set>
 
-class G4LogicalVolume;
+class G4VSensitiveDetector;
 
 /// \ingroup digits_hits
 /// \class TG4SDConstruction
@@ -56,7 +56,7 @@ class TG4SDConstruction : public TG4Verbose
 
   private:
     // methods
-    G4int CreateSD(G4LogicalVolume* lv) const;
+    G4VSensitiveDetector* CreateSD() const;
     void  FillSDSelectionFromTGeo();
     
     TG4SDMessenger  fMessenger;  ///< messenger

@@ -37,7 +37,7 @@
 #include <G4UImanager.hh>
 
 // static data members
-TG4TrackingAction* TG4TrackingAction::fgInstance = 0;
+__thread TG4TrackingAction* TG4TrackingAction::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4TrackingAction::TG4TrackingAction()     
@@ -147,7 +147,8 @@ void TG4TrackingAction::PrepareNewEvent()
   if ( fTrackManager->GetTrackSaveControl() != kDoNotSave )
     fTrackManager->SetNofTracks(0);
   else  
-    fTrackManager->SetNofTracks(gMC->GetStack()->GetNtrack());
+    fTrackManager
+      ->SetNofTracks(gMC->GetStack()->GetNtrack());
     
   fCurrentTrackID = 0;
 }
@@ -180,7 +181,8 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
   stepManager->SetStep((G4Track*)track, kVertex);
   
   // set track information
-  G4int trackId = fTrackManager->SetTrackInformation(track, fOverwriteLastTrack);
+  G4int trackId 
+    = fTrackManager->SetTrackInformation(track, fOverwriteLastTrack);
   gMC->GetStack()->SetCurrentTrack(trackId);
 
   if (track->GetParentID() == 0) {  

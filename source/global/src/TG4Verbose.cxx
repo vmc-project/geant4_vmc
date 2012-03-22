@@ -20,9 +20,9 @@
 #include <math.h>
 
 // static data members
-const G4String       TG4Verbose::fgkDirectoryName = "/mcVerbose/";
-G4int                TG4Verbose::fgCounter = 0;
-TG4VerboseMessenger* TG4Verbose::fgMessenger = 0;
+         const G4String       TG4Verbose::fgkDirectoryName = "/mcVerbose/";
+__thread G4int                TG4Verbose::fgCounter = 0;
+__thread TG4VerboseMessenger* TG4Verbose::fgMessenger = 0;
 
 //_____________________________________________________________________________
 TG4Verbose::TG4Verbose(const G4String& cmdName)

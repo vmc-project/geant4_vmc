@@ -27,10 +27,8 @@
 #pragma link C++ class  Ex02MagField+;
 #pragma link C++ class  Ex02TrackerHit+;
 #pragma link C++ class  Ex02TrackerSD+;
-#pragma link C++ class  Ex02RootManager+;
-#pragma link C++ class  std::stack<Ex02Particle*,deque<Ex02Particle*> >+;
-
-#pragma link C++ enum   FileMode;
+//#pragma link C++ class  std::stack<Ex02Particle*,deque<Ex02Particle*> >+;
+#pragma link C++ class  std::stack<Ex02Particle*>+;
 
 #endif
 

@@ -36,7 +36,6 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
 {
   public:
     TG4SensitiveDetector(G4String sdName);
-    TG4SensitiveDetector(G4String sdName, G4int id);
     virtual ~TG4SensitiveDetector();
 
     // methods
@@ -46,9 +45,6 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
  
     // static get method
     static G4int GetTotalNofSensitiveDetectors();
-
-    // get methods
-    G4int GetID() const;
     
   private:          
     /// Not implemented
@@ -62,7 +58,6 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
     static G4int fgSDCounter; ///< sensitive detector counter
 
     // data members
-    G4int            fID;          ///< sensitive detector ID
     TG4StepManager*  fStepManager; ///< the TG4StepManager instance
 };
 
@@ -71,11 +66,6 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
 inline G4int TG4SensitiveDetector::GetTotalNofSensitiveDetectors() { 
   /// Returns the total number of sensitive detectors.
   return fgSDCounter; 
-}
-
-inline G4int TG4SensitiveDetector::GetID() const { 
-  /// Returns sensitive detector ID.
-  return fID; 
 }
 
 #endif //TG4V_SENSITIVE_DETECTOR_H

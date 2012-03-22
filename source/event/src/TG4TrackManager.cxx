@@ -35,7 +35,7 @@
 #include <G4PrimaryParticle.hh>
 
 // static data members
-TG4TrackManager* TG4TrackManager::fgInstance = 0;
+__thread TG4TrackManager* TG4TrackManager::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4TrackManager::TG4TrackManager()     
@@ -274,13 +274,15 @@ void TG4TrackManager::TrackToStack(const G4Track* track, G4bool /*overWrite*/)
   G4int ntr;
 #ifdef STACK_WITH_KEEP_FLAG  
   // create particle 
-  gMC->GetStack()->PushTrack(0, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
+  gMC->GetStack()
+    ->PushTrack(0, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
                             polX, polY, polZ, mcProcess, ntr, weight, status,
                             overWrite);  
         // Experimental code with flagging tracks in stack for overwrite; 
         // not yet available in distribution
 #else              
-  gMC->GetStack()->PushTrack(0, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
+  gMC->GetStack()
+    ->PushTrack(0, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
                             polX, polY, polZ, mcProcess, ntr, weight, status);  
 #endif
 }
@@ -335,7 +337,7 @@ void TG4TrackManager::PrimaryToStack(const G4PrimaryVertex* vertex,
   G4int ntr;
   // create particle 
   gMC->GetStack()->PushTrack(1, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
-                            polX, polY, polZ, mcProcess, ntr, weight, status);  
+                             polX, polY, polZ, mcProcess, ntr, weight, status);  
 }                   
 
 
@@ -394,8 +396,10 @@ TG4TrackInformation* TG4TrackManager::GetTrackInformation(
   G4VUserTrackInformation* trackInfo = track->GetUserInformation();
   if (!trackInfo) return 0;  
 
+  //TG4TrackInformation* tg4TrackInfo
+  //  = dynamic_cast<TG4TrackInformation*>(trackInfo);
   TG4TrackInformation* tg4TrackInfo
-    = dynamic_cast<TG4TrackInformation*>(trackInfo);
+    = static_cast<TG4TrackInformation*>(trackInfo);
   if (!tg4TrackInfo) { 
      TG4Globals::Exception(
        "TG4TrackManager", "GetTrackInformation", 

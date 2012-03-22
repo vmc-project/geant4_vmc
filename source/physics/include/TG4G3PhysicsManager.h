@@ -92,7 +92,7 @@ class TG4G3PhysicsManager
     void SwitchIsControlVector(TG4G3Control control);
 
     // static data members
-    static TG4G3PhysicsManager*  fgInstance; ///< this instance
+    static __thread TG4G3PhysicsManager*  fgInstance; ///< this instance
 
     //
     // data members

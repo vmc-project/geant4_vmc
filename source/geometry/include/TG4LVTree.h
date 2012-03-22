@@ -72,7 +72,7 @@ class TG4LVTree
     void Warn(const G4String& where) const;                               
 
     // static data members
-    static TG4LVTree* fgInstance; ///<  this instance
+    static __thread TG4LVTree* fgInstance; ///<  this instance
 
     // data members
     TG4LVTreeMessenger  fMessenger; ///<  messenger     

@@ -25,6 +25,9 @@
 #include <TROOT.h>
 #include <TInterpreter.h>
 #include <TVirtualMC.h>
+#include <TMCRootManager.h>
+#include <TMCRootManagerMT.h>
+#include <TMCRootMutex.h>
 #include <TPDGCode.h>
 #include <TGeoManager.h>
 #include <TVirtualGeoTrack.h>
@@ -35,14 +38,13 @@ ClassImp(Ex02MCApplication)
 /// \endcond
 
 //_____________________________________________________________________________
-Ex02MCApplication::Ex02MCApplication(const char *name, const char *title,
-                                     FileMode fileMode) 
+Ex02MCApplication::Ex02MCApplication(const char *name, const char *title) 
   : TVirtualMCApplication(name,title),
+    fRootManager(0),
     fStack(0),
     fDetConstruction(),
     fTrackerSD("Tracker Chamber"),
     fMagField(0),
-    fRootManager("example02", fileMode),
     fOldGeometry(kFALSE)
 {
 /// Standard constructor
@@ -50,24 +52,17 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title,
 /// \param title  The MC application description
 /// \param fileMode  Option for opening Root file (read or write mode)
 
-  // Create a user stack
-  fStack = new Ex02MCStack(100); 
-  
-  // Constant magnetic field (in kiloGauss)
-  fMagField = new Ex02MagField(20., 0., 0.);
-
-  // It si also possible to use TGeoUniformMagField class:
-  // fMagField = new TGeoUniformMagField(20., 0., 0.);
+  printf("Ex02MCApplication::Ex02MCApplication %p \n", this);  
 }
 
 //_____________________________________________________________________________
 Ex02MCApplication::Ex02MCApplication()
   : TVirtualMCApplication(),
+    fRootManager(0),
     fStack(0),
     fDetConstruction(),
     fTrackerSD(),
     fMagField(0),
-    fRootManager(),
     fOldGeometry(kFALSE)
 {    
 /// Default constructor
@@ -78,10 +73,18 @@ Ex02MCApplication::~Ex02MCApplication()
 {
 /// Destructor  
   
+  // Root manager locks Root on his own 
+  delete fRootManager;
+
+  TMCRootMutex::Lock();
+  printf("Ex02MCApplication::~Ex02MCApplication %p \n", this);  
+
   delete fStack;
   delete fMagField;
   delete gMC;
-  gMC = 0;
+
+  printf("Done Ex02MCApplication::~Ex02MCApplication %p \n", this);  
+  TMCRootMutex::UnLock();
 }
 
 //
@@ -92,7 +95,8 @@ void Ex02MCApplication::RegisterStack()
 {
 /// Register stack in the Root manager.
 
-  fRootManager.Register("stack", "Ex02MCStack", &fStack);   
+  cout << "Ex02MCApplication::RegisterStack: " << endl;  
+  fRootManager->Register("stack", "Ex02MCStack", &fStack);   
 }  
 
 //
@@ -102,19 +106,74 @@ void Ex02MCApplication::RegisterStack()
 //_____________________________________________________________________________
 void Ex02MCApplication::InitMC(const char* setup)
 {    
-/// Initialize MC.
+/// Initialize MC from Config.C macro
 /// The selection of the concrete MC is done in the macro.
 /// \param setup The name of the configuration macro 
 
   gROOT->LoadMacro(setup);
   gInterpreter->ProcessLine("Config()");
- 
+  
+  // Create application data
+
+  // Create Root manager
+  fRootManager 
+    = new TMCRootManager(GetName(), TVirtualMCRootManager::kWrite); 
+  // Create a user stack
+  fStack = new Ex02MCStack(100); 
+  // Constant magnetic field (in kiloGauss)
+  fMagField = new Ex02MagField(20., 0., 0.);
+  // It si also possible to use TGeoUniformMagField class:
+  // fMagField = new TGeoUniformMagField(20., 0., 0.);
+  RegisterStack();
+
+  // Set data to MC
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);
+
+  // Init MC
   gMC->Init();
   gMC->BuildPhysics(); 
+}  
+
+//_____________________________________________________________________________
+void Ex02MCApplication::InitMC(Int_t threadRank)
+{    
+/// Initialize MC from main program (Geant4 MT).
+/// The selection of the concrete MC is done in main().
+/// \param threadRank The thread rank number
+
+  if ( threadRank > 0 ) {
+    // Create Root manager only on workers
+    // as the master has nothing to write
+      // Lock Root when creating Manager
+      fRootManager 
+        = new TMCRootManagerMT(GetName(), TVirtualMCRootManager::kWrite); 
+  } 
   
-  RegisterStack();
+  // Create application data
+
+  // Lock Root when creating data - seems not to be needed ?
+  //TMCRootMutex::Lock();
+  //
+  // Create a user stack
+  fStack = new Ex02MCStack(100); 
+  // Constant magnetic field (in kiloGauss)
+  fMagField = new Ex02MagField(20., 0., 0.);
+  // It si also possible to use TGeoUniformMagField class:
+  // fMagField = new TGeoUniformMagField(20., 0., 0.);
+  //
+  //TMCRootMutex::UnLock();
+ 
+  // Set data to MC
+  printf("Setting stack %p to mc %p rootMan %p \n", fStack, gMC, fRootManager);
+  gMC->SetStack(fStack);
+  gMC->SetMagField(fMagField);
+
+  if ( fRootManager ) RegisterStack();
+    
+  // Initialize MC
+  gMC->InitMT(threadRank);
+  gMC->BuildPhysics(); 
 }
 
 //_____________________________________________________________________________
@@ -132,7 +191,11 @@ void Ex02MCApplication::FinishRun()
 {    
 /// Finish MC run.
 
-  fRootManager.WriteAll();
+  cout << "Ex02MCApplication::FinishRun: " << endl;  
+  if ( fRootManager ) {
+    fRootManager->WriteAll();
+    fRootManager->Close();
+  }  
 }
 
 //_____________________________________________________________________________
@@ -277,11 +340,11 @@ void Ex02MCApplication::FinishEvent()
      gGeoManager->DrawTracks("/*");  // this means all tracks
   }    
 
-  fRootManager.Fill();
+  fRootManager->Fill();
 
   fTrackerSD.EndOfEvent();
 
-  fStack->Print();  
+  //fStack->Print();  
   fStack->Reset();
 } 
 
@@ -291,9 +354,14 @@ void  Ex02MCApplication::ReadEvent(Int_t i)
 /// Read \em i -th event and prints hits.
 /// \param i The number of event to be read    
   
+  if ( ! fRootManager ) {
+    fRootManager 
+      = new TMCRootManager(GetName(), TVirtualMCRootManager::kRead);
+  }     
+
   fTrackerSD.Register();
   RegisterStack();
-  fRootManager.ReadEvent(i);
+  fRootManager->ReadEvent(i);
 
   fStack->Print();  
   fTrackerSD.Print();

@@ -35,7 +35,7 @@
 #include "TG4SpecialControlsV2.h"
 #include "TG4RegionsManager.h"
 
-#include <G4RunManager.hh>
+#include <G4ParRunManager.hh>
 #include <Randomize.hh>
 #include <G4UIsession.hh>
 #include <G4UImanager.hh>
@@ -52,7 +52,7 @@
 #include <TG4RootNavMgr.h>
 #include <TVirtualMCApplication.h>
 
-TG4RunManager* TG4RunManager::fgInstance = 0;
+__thread TG4RunManager* TG4RunManager::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration, 
@@ -94,7 +94,7 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
   FilterARGV("-splash");
 
   // create and configure G4 run manager
-  ConfigureRunManager();
+  //ConfigureRunManager();
 
   // create geant4 UI
   CreateGeantUI();
@@ -146,13 +146,14 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration)
   // filter out "-splash" from argument list
   FilterARGV("-splash");
 
+/*
   // create and configure G4 run manager
   ConfigureRunManager();
 
   if (VerboseLevel() > 1) {
     G4cout << "G4RunManager has been created." << G4endl;
   }  
-
+*/
   // create geant4 UI
   CreateGeantUI();
       // must be created before TG4VisManager::Initialize()
@@ -173,7 +174,7 @@ TG4RunManager::~TG4RunManager()
 #ifdef G4UI_USE
   delete fGeantUISession;
 #endif
-  delete fRunManager;
+  if ( !  fRunManager->isSlave ) delete fRunManager;
   if (fRootUIOwner) delete fRootUISession;
 }
 
@@ -182,12 +183,15 @@ TG4RunManager::~TG4RunManager()
 //
 
 //_____________________________________________________________________________
-void TG4RunManager::ConfigureRunManager()
+void TG4RunManager::ConfigureRunManager(Int_t threadRank)
 {
 /// Set the user action classes defined by TG4RunConfiguration to G4RunManager.
 
   // Geometry construction and navigator
   //
+  G4cout << "TG4RunManager::ConfigureRunManager " 
+       << this << " threadRank: "  << threadRank << G4endl;
+
   TString userGeometry = fRunConfiguration->GetUserGeometry();
   
   TG4GeometryManager::Instance()
@@ -223,11 +227,31 @@ void TG4RunManager::ConfigureRunManager()
   }  
 
   // G4 run manager
-  fRunManager =  new G4RunManager();
+  if (threadRank == 0)
+    fRunManager =  new G4ParRunManager();
+  else  
+    fRunManager =  new G4ParRunManager(1);
 
-  if ( userGeometry != "VMCtoRoot" && userGeometry != "Root" ) 
-    fRunManager
-      ->SetUserInitialization(fRunConfiguration->CreateDetectorConstruction());
+  if ( userGeometry != "VMCtoRoot" && userGeometry != "Root" ) {
+    static G4VUserDetectorConstruction* detConstruction = 0;
+    if (threadRank == 0) {
+      G4cout << "calling fRunConfiguration->CreateDetectorConstruction()" << G4endl;
+      detConstruction = fRunConfiguration->CreateDetectorConstruction();
+    }
+    else {
+      G4cout << "calling tg4DetConstruction->SlaveTG4DetConstruction()" << G4endl;
+      TG4DetConstruction* tg4DetConstruction 
+        = dynamic_cast<TG4DetConstruction*>(detConstruction);
+      if (tg4DetConstruction) {
+        tg4DetConstruction->SlaveTG4DetConstruction();
+      }
+      else {
+        TG4Globals::Warning("TG4RunManager", "ConfigureRunManager",
+                            "Unsupported detector construction type.");
+      }        
+    }  
+    fRunManager->SetUserInitialization(detConstruction);
+  }    
   else {
     rootNavMgr->Initialize(new TG4PostDetConstruction());
     rootNavMgr->ConnectToG4();  
@@ -332,10 +356,27 @@ void TG4RunManager::SetRandomSeed()
 // public methods
 
 //_____________________________________________________________________________
-void TG4RunManager::Initialize()
+void TG4RunManager::Initialize(Int_t threadRank)
 {
 /// Initialize G4.
 
+  G4cout << "TG4RunManager::Initialize " 
+       << this << " threadRank: "  << threadRank << G4endl;
+
+  // create G4ParRunManager
+  ConfigureRunManager(threadRank);
+  if (VerboseLevel() > 1) {
+    G4cout << "G4RunManager has been created." << G4endl;
+  }  
+
+  // create geant4 UI
+  //CreateGeantUI();
+      // must be created before TG4VisManager::Initialize()
+      // (that is invoked in TGeant4 constructor)
+
+  // create root UI
+  //CreateRootUI();
+  
   // initialize Geant4
   fRunManager->Initialize();
 

@@ -16,14 +16,18 @@
 /// \author I. Hrivnacova; IPN Orsay
 
 /// Geant4 allocator for TG4TrackInformation objects
-extern G4Allocator<TG4TrackInformation> gTrackInfoAllocator;
+extern __thread G4Allocator<TG4TrackInformation>* gTrackInfoAllocator;
 
 inline void* TG4TrackInformation::operator new(size_t) 
 {
 /// Override "new" for "G4Allocator".
 
+  if ( ! gTrackInfoAllocator ) {
+    gTrackInfoAllocator = new G4Allocator<TG4TrackInformation>;
+  }  
+
   void *trackInfo;
-  trackInfo = (void *) gTrackInfoAllocator.MallocSingle();
+  trackInfo = (void *) (*gTrackInfoAllocator).MallocSingle();
   return trackInfo;
 }
 
@@ -31,7 +35,7 @@ inline void TG4TrackInformation::operator delete(void *trackInfo)
 { 
 /// Override "delete" for "G4Allocator".
 
-  gTrackInfoAllocator.FreeSingle((TG4TrackInformation *) trackInfo);
+  (*gTrackInfoAllocator).FreeSingle((TG4TrackInformation *) trackInfo);
 }
 
 // inline methods

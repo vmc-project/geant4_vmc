@@ -32,7 +32,7 @@
 #include <G4ProcessManager.hh>
 #include <G4ProcessTable.hh>
 
-TG4SpecialPhysicsList* TG4SpecialPhysicsList::fgInstance = 0;
+__thread TG4SpecialPhysicsList* TG4SpecialPhysicsList::fgInstance = 0;
 
 //
 // static methods
