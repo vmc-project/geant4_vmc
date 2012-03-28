@@ -664,7 +664,7 @@ void TG4StepManager::Gdtom(Double_t* xd, Double_t* xm, Int_t iflag)
 #endif
 
   const G4AffineTransform& affineTransform
-    = GetCurrentTouchable()->GetHistory()->GetTopTransform();
+    = GetCurrentTouchable()->GetHistory()->GetTopTransform().Inverse();
 
   G4ThreeVector theLocalPoint(xd[0]*TG4G3Units::Length(),
                               xd[1]*TG4G3Units::Length(),
