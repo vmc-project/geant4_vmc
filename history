@@ -11,6 +11,19 @@ $Id$
      
 Tags (history):
 ===============
+  28/03/2012:
+  v2-13b:
+    Patch release including fixes:
+      - Fixed mapping between Rootino and geantino;
+        user can now introduce chargedgeantino by setting the title 
+        "ChargedRootino" to Rootino particle.
+      - Fixed implementation of TGeant4::DefineParticle() with short argument list
+        (print a warning about a deprecated function).
+      - Fixing bug in TVirtualMC::Gdtom() implementation
+   
+    Tested with Geant4 9.5 (with embedded CLHEP 2.1.1.0), 
+      Root 5.32/00 + patch in root/etc from rev.42474, VGM 3.05
+
   17/01/2012:
   v2-13a:
     Patch release, including fix in TG4ParticlesChecker:
@@ -19,7 +32,7 @@ Tags (history):
       and SLC 5.7.
 
     Tested with Geant4 9.5 (with embedded CLHEP 2.1.1.0), 
-      Root Root 5.32/00 + patch in root/etc from rev.42474, VGM 3.05
+      Root 5.32/00 + patch in root/etc from rev.42474, VGM 3.05
 
   13/12/2011
   v2-13:
