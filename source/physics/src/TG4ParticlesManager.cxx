@@ -216,7 +216,12 @@ void TG4ParticlesManager::DefineParticles()
 
   // geantino
   fParticleNameMap.Add("geantino", "Rootino");
-  fParticleNameMap.Add("chargedgeantino", "Rootino");
+  fParticleNameMap.Add("chargedgeantino", "ChargedRootino");
+      // ChargedRootino does not exist in Root particle database
+      // but the user can just change the title of Rootino to ChargedRootino 
+      // to get it interpreted as chargedgeantino:
+      // TParticlePDG* rootino = pdgTable->GetParticle("Rootino");
+      // if (rootino) rootino->SetTitle("ChargedRootino");
   
   if (VerboseLevel() > 1) {
     fParticleNameMap.PrintAll();
@@ -443,7 +448,12 @@ G4int TG4ParticlesManager::GetPDGEncoding(G4ParticleDefinition* particle)
   // get particle name from the name map
   G4String g4name = particle->GetParticleName();
   G4String tname = fParticleNameMap.GetSecond(g4name);
-  if (tname == "Undefined") {
+  if ( tname == "ChargedRootino" ) tname = "Rootino"; 
+          // special treatment for Rootino
+          // user can reset the particle title to ChargedRootino to interpret
+          // Rootino as chargedgeantino
+
+  if ( tname == "Undefined") {
     particle->DumpTable();
     TG4Globals::Exception(
       "TG4ParticlesManager", "GetPDGEncoding",
@@ -504,6 +514,10 @@ G4ParticleDefinition* TG4ParticlesManager::GetParticleDefinition(
 
   if (!particleDefinition) {
     G4String rootName = particle->GetName();
+    if ( rootName == "Rootino") rootName = particle->GetTitle();
+           // special treatment for Rootino
+           // user can reset the particle title to ChargedRootino to interpret
+           // Rootino as chargedgeantino
     G4String g4Name = fParticleNameMap.GetFirst(rootName);
     particleDefinition = particleTable->FindParticle(g4Name);
   }    
