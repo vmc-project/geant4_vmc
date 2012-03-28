@@ -941,12 +941,14 @@ Bool_t TGeant4::SetProcess(const char* flagName, Int_t flagValue)
 }  
  
 //_____________________________________________________________________________
-Bool_t TGeant4::DefineParticle(Int_t pdg, const char* name, TMCParticleType mcType, 
-                          Double_t mass, Double_t charge, Double_t lifetime)
+Bool_t TGeant4::DefineParticle(Int_t /*pdg*/, const char* /*name*/, 
+                          TMCParticleType /*mcType*/, Double_t /*mass*/, 
+                          Double_t /*charge*/, Double_t /*lifetime*/)
 {
 /// Old function definition, now replaced with more arguments
 
-  TVirtualMC::DefineParticle(pdg, name, mcType, mass, charge, lifetime);
+  TG4Globals:: Warning("TGeant4", "DefineParticle", 
+    "Deprecated function: the function with long argument list should be used instead."); 
   
   return false;
 }                          
