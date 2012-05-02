@@ -11,6 +11,15 @@ $Id$
      
 Tags (history):
 ===============
+  02/05/2012:
+  v2-12b:
+    Patch release, including a fix in TG4TrackManager:
+      - Fixed units of the particle time when storing secondary or
+        primary particles in the VMC stack.
+        
+    Tested with Geant4 9.4.p03, CLHEP 2.1.0.1,  
+      Root 5.32/00 + patch in root/etc from rev.42474, VGM 3.05
+        
   28/03/2012:
   v2-12a:
     Patch release including fixes:
