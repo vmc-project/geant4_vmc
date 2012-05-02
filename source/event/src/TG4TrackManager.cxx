@@ -22,6 +22,7 @@
 #include "TG4StackPopper.h"
 #include "TG4SensitiveDetector.h"
 #include "TG4SDServices.h"
+#include "TG4G3Units.h"
 #include "TG4Globals.h"
 
 #include <TVirtualMC.h>
@@ -230,19 +231,21 @@ void TG4TrackManager::TrackToStack(const G4Track* track, G4bool /*overWrite*/)
     = TG4ParticlesManager::Instance()->GetPDGEncoding(track->GetDefinition());
 
   // track kinematics  
-  G4ThreeVector momentum = track->GetMomentum(); 
+  G4ThreeVector momentum = track->GetMomentum();
+  momentum *= 1./(TG4G3Units::Energy()); 
   
-  G4double px = momentum.x()/GeV;
-  G4double py = momentum.y()/GeV;
-  G4double pz = momentum.z()/GeV;
-  G4double e = track->GetTotalEnergy()/GeV;
+  G4double px = momentum.x();
+  G4double py = momentum.y();
+  G4double pz = momentum.z();
+  G4double e = track->GetTotalEnergy()/TG4G3Units::Energy();  
 
   G4ThreeVector position = track->GetPosition(); 
-  G4double vx = position.x()/cm;
-  G4double vy = position.y()/cm;
-  G4double vz = position.z()/cm;
-  // time of production - check if ekvivalent with G4
-  G4double t = track->GetGlobalTime();
+  position *= 1./(TG4G3Units::Length());
+  G4double vx = position.x();
+  G4double vy = position.y();
+  G4double vz = position.z();
+  G4double t = track->GetGlobalTime()/TG4G3Units::Time();
+  
 
   G4ThreeVector polarization = track->GetPolarization(); 
   G4double polX = polarization.x();
@@ -301,18 +304,20 @@ void TG4TrackManager::PrimaryToStack(const G4PrimaryVertex* vertex,
 
   // track kinematics  
   G4ThreeVector momentum = particle->GetMomentum(); 
-  G4double px = momentum.x()/GeV;
-  G4double py = momentum.y()/GeV;
-  G4double pz = momentum.z()/GeV;
+  momentum *= 1./(TG4G3Units::Energy()); 
+  G4double px = momentum.x();
+  G4double py = momentum.y();
+  G4double pz = momentum.z();
   G4double mass = particle->GetMass();
   G4double e = sqrt(momentum.mag()*momentum.mag() + mass*mass);
+  e /= (TG4G3Units::Energy()); 
 
   G4ThreeVector position = vertex->GetPosition(); 
-  G4double vx = position.x()/cm;
-  G4double vy = position.y()/cm;
-  G4double vz = position.z()/cm;
-  // time of production - check if ekvivalent with G4
-  G4double t = particle->GetProperTime();
+  position *= 1./(TG4G3Units::Length());
+  G4double vx = position.x();
+  G4double vy = position.y();
+  G4double vz = position.z();
+  G4double t = vertex->GetT0()/TG4G3Units::Time();;
 
   G4ThreeVector polarization = particle->GetPolarization(); 
   G4double polX = polarization.x();
