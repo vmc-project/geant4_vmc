@@ -11,6 +11,12 @@ $Id$
      
 Tags (history):
 ===============
+  02/05/2012:
+  v2-13c:
+    Patch release, including a fix in TG4TrackManager:
+      - Fixed units of the particle time when storing secondary or
+        primary particles in the VMC stack.
+
   28/03/2012:
   v2-13b:
     Patch release including fixes:
