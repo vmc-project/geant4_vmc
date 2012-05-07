@@ -105,8 +105,6 @@ class TG4StepManager
     void TrackMomentum(TLorentzVector& momentum) const;
     void TrackMomentum(Double_t& px, Double_t& py, Double_t&pz, 
                        Double_t& etot) const;
-    void TrackVertexPosition(TLorentzVector& position) const;
-    void TrackVertexMomentum(TLorentzVector& momentum) const;
     Double_t TrackStep() const;  
     Double_t TrackLength() const;   
     Double_t TrackTime() const;  

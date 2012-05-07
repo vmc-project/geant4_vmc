@@ -279,8 +279,6 @@ class TGeant4: public TVirtualMC
     virtual void    TrackMomentum(TLorentzVector& momentum) const;
     virtual void    TrackMomentum(Double_t& px, Double_t& py, Double_t&pz,
                                   Double_t& etot) const;
-    virtual void    TrackVertexPosition(TLorentzVector& position) const;
-    virtual void    TrackVertexMomentum(TLorentzVector& momentum) const;
     virtual Double_t TrackStep() const;
     virtual Double_t TrackLength() const; 
     virtual Double_t TrackTime() const;

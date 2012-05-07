@@ -245,24 +245,6 @@ inline void TGeant4::TrackMomentum(Double_t& px, Double_t& py, Double_t& pz,
 } 
 
 //_____________________________________________________________________________
-inline void TGeant4::TrackVertexPosition(TLorentzVector& position) const
-{ 
-/// The vertex particle position (in the world reference frame)
-/// and the local time since the current track is created.
-
-  fStepManager->TrackVertexPosition(position); 
-} 
-
-//_____________________________________________________________________________
-inline void TGeant4::TrackVertexMomentum(TLorentzVector& momentum) const
-{ 
-/// The vertex particle "momentum" (px, py, pz, Ekin)                        \n
-/// to do: change Ekin -> Etot 
-
-  fStepManager->TrackVertexMomentum(momentum); 
-} 
-
-//_____________________________________________________________________________
 inline Double_t TGeant4::TrackStep() const
 { 
 /// Returns the current step length.

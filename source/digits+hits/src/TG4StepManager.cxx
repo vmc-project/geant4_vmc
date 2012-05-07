@@ -807,47 +807,6 @@ void TG4StepManager::TrackMomentum(Double_t& px, Double_t& py, Double_t&pz,
 }
 
 //_____________________________________________________________________________
-void TG4StepManager::TrackVertexPosition(TLorentzVector& position) const
-{ 
-/// Fill the vertex particle position (in the world reference frame)
-/// and the local time since the current track is created.
-
-#ifdef MCDEBUG
-  CheckTrack();
-#endif
-
-  // position
-  G4ThreeVector positionVector = fTrack->GetVertexPosition();
-  positionVector *= 1./(TG4G3Units::Length());   
-     
-  // local time 
-  // to be checked  
-  G4double time = fTrack->GetLocalTime();
-  time /= TG4G3Units::Time();
-      
-  SetTLorentzVector(positionVector, time, position);
-}
-
-//_____________________________________________________________________________
-void TG4StepManager::TrackVertexMomentum(TLorentzVector& momentum) const
-{  
-/// Fill the vertex particle momentum (px, py, pz, Ekin)
-/// TO DO: change Ekin -> Etot 
-
-#ifdef MCDEBUG
-  CheckTrack();
-#endif
-
-  G4ThreeVector momentumVector = fTrack->GetVertexMomentumDirection(); 
-  momentumVector *= 1./(TG4G3Units::Energy());   
-
-  G4double energy = fTrack->GetVertexKineticEnergy();
-  energy /= TG4G3Units::Energy();  
-
-  SetTLorentzVector(momentumVector, energy, momentum);
-}
-
-//_____________________________________________________________________________
 Double_t TG4StepManager::TrackStep() const
 {   
 /// Return the current step length.
