@@ -77,9 +77,78 @@ TG4OpGeometryManager::~TG4OpGeometryManager()
 }
 
 //
-// public methods - TVirtualMC implementation
+// private methods
 //
 
+//_____________________________________________________________________________
+Double_t TG4OpGeometryManager::AddUnit(const G4String& propertyName, 
+                                       Double_t value) const
+{
+/// Add unit to a given property value and print a warning 
+/// if the property is not known to the VMC interface 
+
+   if ( propertyName == "ABSLENGTH" ||  
+        propertyName == "MIEHG" ||
+        propertyName == "RAYLEIGH" ||
+        propertyName == "WLSABSLENGTH" ) {
+     return  value*TG4G3Units::Length();
+   }  
+
+   if ( propertyName == "BIRKS_CONSTANT" ) {
+     return  value*TG4G3Units::Length()/TG4G3Units::Energy();
+   }  
+
+   if ( propertyName.find("SCINTILLATIONYIELD") != std::string::npos ) {
+     return value/TG4G3Units::Energy();
+   }  
+
+   if ( propertyName == "FASTTIMECONSTANT" ||
+        propertyName == "FASTSCINTILLATIONRISETIME" ||
+        propertyName == "SLOWTIMECONSTANT" ||
+        propertyName == "SLOWSCINTILLATIONRISETIME" ||
+        propertyName == "WLSTIMECONSTANT" ) { 
+     return value*TG4G3Units::Time();
+   } 
+   
+   if ( propertyName == "GROUPVEL" ) {
+     // use the same convention as in Root for velocity of light
+     return value*m/s;
+   }  
+
+   if ( propertyName == "BACKSCATTERCONSTANT" || 
+        propertyName == "EFFICIENCY" ||
+        propertyName == "FASTCOMPONENT" ||
+        propertyName == "IMAGINARYRINDEX" ||
+        propertyName == "MIEHG_BACKWARD" ||
+        propertyName == "MIEHG_FORWARD" ||
+        propertyName == "MIEHG_FORWARD_RATIO" ||
+        propertyName == "REALRINDEX" ||
+        propertyName == "REFLECTIVITY" ||
+        propertyName == "RESOLUTIONSCALE" ||
+        propertyName == "RINDEX" ||
+        propertyName == "SLOWCOMPONENT" ||
+        propertyName == "SPECULARLOBECONSTANT" ||
+        propertyName == "SPECULARSPIKECONSTANT" ||
+        propertyName == "TRANSMITTANCE" ||
+        propertyName == "WLSCOMPONENT" ||
+        propertyName == "WLSMEANNUMBERPHOTONS" ||
+        propertyName == "YIELDRATIO" ) {
+
+     return value;  
+   } 
+   
+   TString text = "Unknown material property ";
+   text += propertyName.data();
+   text += "x\n";
+   text += "No units conversion performed.";   
+   TG4Globals::Warning("TG4OpGeometryManager", "AddUnit", text);
+   return value;  
+}                                       
+
+
+//
+// public methods - TVirtualMC implementation
+//
 
 //_____________________________________________________________________________
 void  TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov, 
@@ -324,13 +393,9 @@ void TG4OpGeometryManager::SetMaterialProperty(
   // add units
   G4double* pp2  = fGeometryServices->CreateG4doubleArray(pp, np); 
   G4double* val2 = fGeometryServices->CreateG4doubleArray(values, np); 
-  G4int i;
-  for (i=0; i<np; i++) {
+  for (G4int i=0; i<np; i++) {
     pp2[i] = pp2[i]*TG4G3Units::Energy();
-    val2[i]  = values[i];
-    if ( G4String(propertyName) == "ABSLENGTH" || 
-         G4String(propertyName) == "MIEHG" ) 
-      val2[i]  = val2[i]*TG4G3Units::Length();
+    val2[i]  = AddUnit(propertyName, values[i]);
   }  
   table->AddProperty(propertyName, pp2, val2, np);
 
@@ -374,24 +439,14 @@ void TG4OpGeometryManager::SetMaterialProperty(
     material->SetMaterialPropertiesTable(table);
   }  
 
+  // Add units
+  value  = AddUnit(propertyName, value);
+
   // Birks constant is set in a different way 
   if ( G4String(propertyName) == "BIRKS_CONSTANT" ) {
-       value  = value*TG4G3Units::Length()/TG4G3Units::Energy();
-       material->GetIonisation()->SetBirksConstant(value);
+    material->GetIonisation()->SetBirksConstant(value);
   }
   else {
-    // add units
-    if ( G4String(propertyName) == "SCINTILLATIONYIELD") {
-         value  = value/TG4G3Units::Energy();
-    }  
-    if ( G4String(propertyName) == "FASTTIMECONSTANT" || 
-         G4String(propertyName) == "SLOWTIMECONSTANT" ) { 
-         value  = value*TG4G3Units::Time();
-    } 
-    if ( G4String(propertyName) == "BIRKS_CONSTANT" ) {
-         value  = value*TG4G3Units::Length()/TG4G3Units::Energy();
-    }
-  
     table->AddConstProperty(propertyName, value);
   }  
 
@@ -432,13 +487,14 @@ void TG4OpGeometryManager::SetMaterialProperty(
 
   // add units
   G4double* pp2  = fGeometryServices->CreateG4doubleArray(pp, np); 
-  G4int i;
-  for (i=0; i<np; i++) {
+  G4double* val2 = fGeometryServices->CreateG4doubleArray(values, np); 
+  for (G4int i=0; i<np; i++) {
     pp2[i] = pp2[i]*TG4G3Units::Energy();
+    val2[i]  = AddUnit(propertyName, values[i]);
   }  
-  table->AddProperty(propertyName, pp2, values, np);
- 
+  table->AddProperty(propertyName, pp2, val2, np);
   delete [] pp2;  
+  delete [] val2;
 
   // verbose
   if (VerboseLevel() > 0) {

@@ -91,6 +91,9 @@ class TG4OpGeometryManager : public TG4Verbose
     /// Not implemented
     TG4OpGeometryManager& operator=(const TG4OpGeometryManager& right);
 
+    // methods
+    Double_t AddUnit(const G4String& propertyName, Double_t value) const; 
+
     //
     // data members
     
