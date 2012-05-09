@@ -757,10 +757,6 @@ void TG4StepManager::TrackPosition(Double_t& x, Double_t& y, Double_t& z) const
   // check if this is == to PostStepPoint position !!
   G4ThreeVector positionVector = fTrack->GetPosition();
   positionVector *= 1./(TG4G3Units::Length());   
-     
-  // local time   
-  G4double time = fTrack->GetLocalTime();
-  time /= TG4G3Units::Time();
     
   x = positionVector.x();
   y = positionVector.y();
@@ -1158,7 +1154,7 @@ void TG4StepManager::GetSecondary(Int_t index, Int_t& particleId,
   // position & time
   G4ThreeVector positionVector = track->GetPosition();
   positionVector *= 1./(TG4G3Units::Length());
-  G4double time = track->GetLocalTime();
+  G4double time = track->GetGlobalTime();
   time /= TG4G3Units::Time();
   SetTLorentzVector(positionVector, time, position);
 
