@@ -98,7 +98,7 @@ Double_t TG4OpGeometryManager::AddUnit(const G4String& propertyName,
      return  value*TG4G3Units::Length()/TG4G3Units::Energy();
    }  
 
-   if ( propertyName.find("SCINTILLATIONYIELD") != std::string::npos ) {
+   if ( propertyName == "SCINTILLATIONYIELD" ) {
      return value/TG4G3Units::Energy();
    }  
 
@@ -132,7 +132,13 @@ Double_t TG4OpGeometryManager::AddUnit(const G4String& propertyName,
         propertyName == "TRANSMITTANCE" ||
         propertyName == "WLSCOMPONENT" ||
         propertyName == "WLSMEANNUMBERPHOTONS" ||
-        propertyName == "YIELDRATIO" ) {
+        propertyName == "YIELDRATIO" ||
+        propertyName == "PROTONSCINTILLATIONYIELD" ||
+        propertyName == "DEUTERONSCINTILLATIONYIELD" ||
+        propertyName == "TRITONSCINTILLATIONYIELD" ||
+        propertyName == "ALPHASCINTILLATIONYIELD" ||
+        propertyName == "IONSCINTILLATIONYIELD" ||
+        propertyName == "ELECTRONSCINTILLATIONYIELD" ) {
 
      return value;  
    } 
