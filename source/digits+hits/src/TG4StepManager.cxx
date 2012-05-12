@@ -69,7 +69,7 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
   
   /// Set offset for passing copyNo to 1;
   /// as G3toG4 decrement copyNo passed by user by 1
-  if ( userGeometry == "VMCtoGeant4" ) fCopyNoOffset = 1;
+  if ( userGeometry == "VMCtoGeant4") fCopyNoOffset = 1;
 
   /// Set offset for passing copyNo to 1;
   /// to be equivalent to Root geometrical model
@@ -177,17 +177,7 @@ TG4StepManager::GetCurrentOffPhysicalVolume(G4int off, G4bool warn) const
     return 0;
   }  
 
-  if ( off == 0 )
-    return touchable->GetVolume();
-  
-  // Get the off-th mother
-  // 
-  G4int index = touchable->GetHistoryDepth() - off;
-        // in the touchable history volumes are ordered
-        // from top volume up to mother volume;
-        // the touchable volume is not in the history
-  
-  return touchable->GetHistory()->GetVolume(index); 
+  return touchable->GetVolume(off);
 }     
 
 //
@@ -380,7 +370,8 @@ Int_t TG4StepManager::CurrentVolID(Int_t& copyNo) const
   }
   copyNo = physVolume->GetCopyNo() + fCopyNoOffset;
   
-  if ( physVolume->IsParameterised() )  copyNo += fDivisionCopyNoOffset;
+  if ( physVolume->IsParameterised() ||
+       physVolume->IsReplicated() )  copyNo += fDivisionCopyNoOffset;
 
   // sensitive detector ID
   TG4SDServices* sdServices = TG4SDServices::Instance();  
@@ -403,7 +394,8 @@ Int_t TG4StepManager::CurrentVolOffID(Int_t off, Int_t&  copyNo) const
   if ( mother ) {
     copyNo = mother->GetCopyNo() + fCopyNoOffset;
 
-    if ( mother->IsParameterised() )  copyNo += fDivisionCopyNoOffset;
+    if ( mother->IsParameterised() ||
+         mother->IsReplicated() )  copyNo += fDivisionCopyNoOffset;
 
     // sensitive detector ID
     TG4SDServices* sdServices = TG4SDServices::Instance();
@@ -476,7 +468,6 @@ const char* TG4StepManager::CurrentVolPath()
   TG4Globals::AppendNumberToString(fVolPathBuffer, curPhysVolume->GetCopyNo());
 
   return fVolPathBuffer.data(); 
-
 }
 
 //_____________________________________________________________________________

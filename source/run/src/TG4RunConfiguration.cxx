@@ -178,9 +178,8 @@ G4VUserPhysicsList* TG4RunConfiguration::CreatePhysicsList()
   G4String extraSelection;
   G4String token;
   G4bool isValid = true;
-  do {
-    token = TG4Globals::GetToken(itoken++, fPhysicsListSelection);
-
+  while ( ( token = TG4Globals::GetToken(itoken++, fPhysicsListSelection) ) != "" )         
+  {
     // The first token must be either EM or Hadronic physics list
     if ( ( itoken == 1 ) ) {
       if ( TG4EmPhysicsList::IsAvailableSelection(token) ) {
@@ -204,8 +203,7 @@ G4VUserPhysicsList* TG4RunConfiguration::CreatePhysicsList()
       }  
     }
   }    
-  while ( token != "");         
-    
+      
   if ( ! isValid ) {
     TG4Globals::Exception(
       "TG4RunConfiguration", "TG4RunConfiguration",
@@ -227,7 +225,7 @@ G4VUserPhysicsList* TG4RunConfiguration::CreatePhysicsList()
   }  
     
   if ( extraSelection != "" ) {
-    G4cout << "Adding ExtraPhysicsList " << G4endl;
+    G4cout << "Adding ExtraPhysicsList " << extraSelection << G4endl;
     builder->AddPhysicsList(new TG4ExtraPhysicsList(extraSelection));
   }  
     

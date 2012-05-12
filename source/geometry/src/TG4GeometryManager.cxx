@@ -349,7 +349,7 @@ void TG4GeometryManager::FillMediumMapFromG3()
 void TG4GeometryManager::FillMediumMapFromG4()
 {
 /// Map G4 materials in the medium map;
-/// the materialIndex is used to define medium ID
+/// the materialIndex is used to define medium ID.
 
   if ( VerboseLevel() > 1 ) 
     G4cout << "TG4GeometryManager::FillMediumMapFromG4()" << G4endl;
@@ -614,12 +614,15 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
     // get tracking medium name
     G4String name = medium->GetName();
     
-    if (tg4Limits) 
+    if (tg4Limits) {
       tg4Limits->SetName(name);
+    }  
     else {
-      tg4Limits = fGeometryServices->FindLimits(name, true);  
-      if (!tg4Limits) 
-        tg4Limits = new TG4Limits(name, cuts, controls); 
+      // Check if the step below is needed
+      tg4Limits = fGeometryServices->FindLimits2(name, true);  
+      if (!tg4Limits) {
+         tg4Limits = new TG4Limits(name, cuts, controls);
+      } 
     }
     
     // set new limits back to medium

@@ -121,6 +121,8 @@ class TG4GeometryServices : public TG4Verbose
                                        G4bool silent = false) const;
     TG4Limits*         FindLimits(const G4String& name, 
                                        G4bool silent = false) const;
+    TG4Limits*         FindLimits2(const G4String& name, 
+                                       G4bool silent = false) const;
     TG4Limits*         FindLimits(const G4Material*, 
                                        G4bool silent = false) const;
 

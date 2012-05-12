@@ -738,7 +738,7 @@ TG4Limits* TG4GeometryServices::GetLimits(G4UserLimits* limits) const
   TG4Limits* tg4Limits = dynamic_cast<TG4Limits*> (limits);
   if ( !tg4Limits ) {
     TG4Globals::Exception(
-      "TG4GeometryServices", "GetLimits", "Wrong limits type"); 
+      "TG4GeometryServices", "GetLimits(.)", "Wrong limits type"); 
     return 0;
   }  
 
@@ -769,7 +769,7 @@ TG4Limits* TG4GeometryServices::GetLimits(
   }  
  
   TG4Globals::Exception(
-    "TG4GeometryServices", "GetLimits", "Wrong limits type."); 
+    "TG4GeometryServices", "GetLimits(..)", "Wrong limits type."); 
   return 0;
 }        
 
@@ -855,6 +855,32 @@ TG4GeometryServices::FindLimits(const G4String& name, G4bool silent) const
   
   for (G4int i=0; i<G4int(lvStore->size()); i++) {
     G4LogicalVolume* lv = (*lvStore)[i];
+    TG4Limits* limits = GetLimits(lv->GetUserLimits());
+    if (limits && limits->GetName() == name) return limits;
+  }
+  
+  if (!silent) {
+    TG4Globals::Warning(
+      "TG4GeometryServices", "FindLimits", 
+      "Limits " + TString(name) + " not found.");
+  }
+  return 0;                                
+}  
+
+//_____________________________________________________________________________
+TG4Limits* 
+TG4GeometryServices::FindLimits2(const G4String& name, G4bool silent) const
+{
+/// Find limits with the specified name.
+/// Do not give an exception when limits of G4UserLimits are processed
+
+  G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
+  
+  for (G4int i=0; i<G4int(lvStore->size()); i++) {
+    G4LogicalVolume* lv = (*lvStore)[i];
+    if ( ! dynamic_cast<TG4Limits*>(lv->GetUserLimits()) ) {
+      continue;
+    }  
     TG4Limits* limits = GetLimits(lv->GetUserLimits());
     if (limits && limits->GetName() == name) return limits;
   }
