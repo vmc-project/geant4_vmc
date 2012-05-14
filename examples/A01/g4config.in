@@ -1,0 +1,39 @@
+# $Id: g4config.in 341 2008-05-26 11:04:57Z ivana $
+
+#------------------------------------------------
+# The Virtual Monte Carlo examples
+# Copyright (C) 2007 - 2012 Ivana Hrivnacova
+# All rights reserved.
+#
+# For the licensing terms see geant4_vmc/LICENSE.
+# Contact: vmc@pcroot.cern.ch
+#-------------------------------------------------
+
+#
+# Geant4 configuration macro for Example A01
+# (called from Root macro g4Config.C)
+
+/mcVerbose/all 1
+/mcVerbose/runAction 1
+/mcVerbose/composedPhysicsList 1
+/mcVerbose/trackingAction 0
+/mcVerbose/eventAction 0
+#/mcVerbose/trackManager 2
+
+/run/particle/applyCuts
+#/mcTracking/saveSecondariesInStep true
+
+#/tracking/verbose 1
+
+#options to speed up
+/mcTracking/saveSecondaries DoNotSave
+
+# no effect
+#/mcDet/addSDSelection wirePlane1Logical
+#/mcDet/addSDSelection wirePlane2Logical
+#/mcDet/addSDSelection hodoscope1Logical
+#/mcDet/addSDSelection hodoscope2Logical
+#/mcDet/addSDSelection cellLogical
+#/mcDet/addSDSelection HadCalScintiLogical
+
+
