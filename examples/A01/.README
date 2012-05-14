@@ -1,0 +1,85 @@
+/*! 
+
+\file "A01/.README"
+\brief The Example A01 README page
+
+\page README_A01 Example A01
+
+\section a01_s1 Description
+
+  Geant4 extended example analysis/A01 adapted to Virtual Monte Carlo.
+
+  It demonstrates:
+    - Geometry - placements with rotations, divided volume
+    - Geometry defined via Geant4 (G4) or Root file
+    - Definition of sensitive volumes
+    - Hodoscope, drift chamber and calorimeter detector types
+    - Particles cuts 
+      - G4 cut in range: 1mm
+      - G3 cuts set to correspond to 1mm cut in range
+    - Primary generator with fixed position and momentum, optionally
+        randomized momentum within a given interval
+    - Storing hits, particles stack (from E03 exaample) in Root file
+
+  See also the description of the Geant4 example in 
+    geant4/examples/extednded/analysis/A01/README
+
+\section a01_s2 Compilation:
+
+  With G4:\n
+  An extra library with user defined Geant4 based classes has to be build:
+  <pre>
+  cd A01/geant4
+  make
+  </pre>
+
+\section a01_s3 Macros
+
+  For running example with G3:
+  <pre>
+  \link       A01/run_g3.C run_g3.C      \endlink - macro for running example 
+  \link A01/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry (default)
+  </pre>
+
+  For running example with G4:
+  <pre>
+  \link       A01/run_g4.C run_g4.C      \endlink - macro for running example 
+  \link     A01/g4Config.C g4Config.C    \endlink - configuration macro for G4 with native geometry navigation (default)
+  \link    A01/g4Config1.C g4Config1.C   \endlink - configuration macro - geometry defined via Geant4
+  \link A01/g4tgeoConfig.C g4tgeoConfig.C\endlink - configuration macro for G4 with TGeo geometry navigation
+   g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
+   g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
+  </pre>
+
+  Common macro (called by run_g3.C/run_g4.C):
+  <pre>
+  \link A01/set_vis.C set_vis.C\endlink - setting visualization
+  </pre>
+  
+\section a01_s4 To run example
+  
+  <pre>
+  With G3 + TGeo:
+  root[0] .x \link A01/run_g3.C run_g3.C\endlink
+  
+  With G4:
+  root[0] .x \link A01/run_g4.C run_g4.C\endlink 
+  
+  With G4 + TGeo navigation:
+  root[0] .x \link A01/run_g4.C run_g4.C\endlink(\link A01/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);  
+
+  With G4 with geometry defined via Geant4:
+  root[0] .x \link A01/run_g4.C run_g4.C\endlink(\link A01/g4Config1.C "g4Config1.C"\endlink); 
+  </pre>
+
+  Note that as geometry is defined via TGeo or native Geant4,
+  the example cannot be run with TGeant3 with its native geometry.
+
+\section a01_s5 Classes
+
+The documentation of all classes and the basic macros for this example
+is availabe on \link A01 this page \endlink. 
+
+  
+*/
+  
