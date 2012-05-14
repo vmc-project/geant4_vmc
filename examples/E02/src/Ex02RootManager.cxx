@@ -9,7 +9,7 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \file Ex02RootManager.cxx
+/// \file E02/src/Ex02RootManager.cxx
 /// \brief Implementation of the Ex02RootManager class 
 ///
 /// Geant4 ExampleN02 adapted to Virtual Monte Carlo
