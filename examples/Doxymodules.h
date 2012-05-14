@@ -51,6 +51,15 @@
 /** \} */
 
 
+/** \defgroup A01 A01
+ *  \brief The VMC example A01
+ *
+ *  The Geant4 extended example analysisi/A01 adapted to Virtual Monte Carlo. 
+ *  See more on the \ref README_A01 page.
+ *  \{
+ */
+/** \} */
+
 /** \defgroup Tests Tests
  *
  *  The VMC examples test macros

@@ -16,16 +16,16 @@
 
 MAKEFLAGS= --no-print-directory
 
-SUBDIRS  = E01 E02 E03 E06
+SUBDIRS  = E01 E02 E03 E06 A01
 
 MAKE_GEANT4 := $(shell ls ../include/geant4vmc/TG4RunConfiguration.h 2> /dev/null )
 ifeq ($(MAKE_GEANT4),../include/geant4vmc/TG4RunConfiguration.h)
-  SUBDIRS += E03/geant4
+  SUBDIRS += E03/geant4 A01/geant4
 endif
 
 MAKE_GEANT4_2 := $(shell ls ../include/TG4RunConfiguration.h 2> /dev/null )
 ifeq ($(MAKE_GEANT4_2),../include/TG4RunConfiguration.h)
-  SUBDIRS += E03/geant4
+  SUBDIRS += E03/geant4 A01/geant4
 endif
 
 .PHONY: default

@@ -20,8 +20,9 @@
 \section exa_s1 Introduction
 
   To demonstrate use of VirtualMC, four Geant4 novice
-  examples (N01, N02, N03, N06) has been rewritten
-  as VMC applications: \ref E01, \ref E02, \ref E03, \ref E06.
+  examples (N01, N02, N03, N06) and one extended example (analysis/A01) 
+  have been rewritten as VMC applications: 
+  \ref E01, \ref E02, \ref E03, \ref E06, \ref A01.
   
   See more detail description in the README files
   withing each example subdirectory:
@@ -29,13 +30,14 @@
   - \ref README_E02
   - \ref README_E03
   - \ref README_E06
+  - \ref README_A01
 
 \section exa_s2 Geometry definition
 
   The VirtualMC defines since beginning the methods for geometry 
-  construction in Geant3 style (the functions have the same names and 
+  construction in the Geant3 style (the functions have the same names and 
   the same parameters sequence as the functions in Geant3).
-  This makes easier transition from Geant3 application to VMC.
+  This makes the transition from a Geant3 application to VMC easier.
   
   Since the integration of the TGeo geometry modeller,
   user has a possibility to define geometry directly via TGeo,
