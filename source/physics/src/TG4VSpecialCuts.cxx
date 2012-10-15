@@ -53,9 +53,7 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
 
   // set condition
   *condition = NotForced;
-
   G4double proposedStep = DBL_MAX;
-  G4double minStep = (1.0e-9)*m;
   
   // get limits
 #ifdef MCDEBUG
@@ -73,63 +71,43 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
   TG4TrackInformation* trackInformation
     = TG4TrackManager::Instance()->GetTrackInformation(&track); 
   if ( trackInformation && trackInformation->IsStop() ) {
-    return minStep;
+    return 0.;
   }  
+
+  // min kinetic energy (from limits)
+  G4double minEkine = GetMinEkine(*limits, track);
+  if ( track.GetKineticEnergy() <= minEkine ) return 0.;
 
   // max track length
   proposedStep 
     = (limits->GetUserMaxTrackLength(track) - track.GetTrackLength());
-  if (proposedStep < 0.) return minStep;
+  if (proposedStep < 0.) return 0.;
 
   // max time limit
-  G4double beta 
-    = (track.GetDynamicParticle()->GetTotalMomentum()) /
-      (track.GetTotalEnergy());
-  G4double time
-    = (limits->GetUserMaxTime(track) - track.GetGlobalTime());
-  G4double temp = beta*c_light*time;
-  if (temp < 0.) return minStep;
-  if (proposedStep > temp) proposedStep = temp;
-
-  G4ParticleDefinition* particle = track.GetDefinition();
-  if (particle->GetPDGCharge() != 0.) {
-
-    // min remaining range
-    G4double kinEnergy = track.GetKineticEnergy();
-    const G4MaterialCutsCouple* couple = track.GetMaterialCutsCouple();
-    if ( ! couple ) {
-      G4String text = "No material cuts couple defined for volume =  ";
-      text = text + track.GetVolume()->GetLogicalVolume()->GetName();
-      TG4Globals::Exception(
-        "TG4VSpecialCuts", "PostStepGetPhysicalInteractionLength", text);
-    }    
-    
-    G4double rangeNow = fLossTableManager->GetRange(particle, kinEnergy, couple);
-    G4double rmin = limits->GetUserMinRange(track);
-    if (rmin > DBL_MIN) {
-      temp = rangeNow - rmin;
-      if (temp < 0.) return 0.;
-      if (proposedStep > temp) proposedStep = temp;
-    }         
-    if (temp < 0.) return minStep;
-    if (proposedStep > temp) proposedStep = temp;
-
-    // min kinetic energy (from limits)
-    // the kin energy cut can be applied only in case
-    // G4EnergyLossTables are defined for the particle    
-    G4double minEkine = GetMinEkine(*limits, track);
-    if (minEkine > DBL_MIN) {
-         rmin = fLossTableManager->GetRange(particle, minEkine, couple);
-         temp = rangeNow - rmin;
-         if (temp < 0.) return 0.;
-         if (proposedStep > temp) proposedStep = temp;
-       }         
+  G4double tlimit = limits->GetUserMaxTime(track);
+  if(tlimit < DBL_MAX) {
+    G4double beta  = (track.GetDynamicParticle()->GetTotalMomentum())
+      /(track.GetTotalEnergy());
+    G4double dTime = (tlimit - track.GetGlobalTime());
+    G4double temp  = beta*c_light*dTime;
+    if (temp < 0.) { return 0.; }
+    if (proposedStep > temp) { proposedStep = temp; }
   }
-  else {  
-    // min kinetic energy (from limits)
-    // for neutral particles
-    G4double minEkine = GetMinEkine(*limits, track);
-    if (track.GetKineticEnergy() <= minEkine) return minStep;
+
+  // min remaining range
+  // (only for charged particle except for chargedGeantino)
+  G4double rmin = limits->GetUserMinRange(track);
+  if (rmin > DBL_MIN) {
+    G4ParticleDefinition* particle = track.GetDefinition();
+    if ( ( particle->GetPDGCharge() != 0. ) && 
+         ( particle->GetPDGMass() > 0.0 ) )  {
+      G4double ekin = track.GetKineticEnergy();
+      const G4MaterialCutsCouple* couple = track.GetMaterialCutsCouple();
+      G4double rangeNow = fLossTableManager->GetRange(particle, ekin, couple);
+      G4double temp = rangeNow - rmin;
+      if ( temp < 0. ) { return 0.; }
+      if ( proposedStep > temp ) { proposedStep = temp; }
+    }         
   }
   return proposedStep;
 }
