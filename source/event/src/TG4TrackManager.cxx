@@ -34,6 +34,7 @@
 #include <G4UImanager.hh>
 #include <G4PrimaryVertex.hh>
 #include <G4PrimaryParticle.hh>
+#include <G4SystemOfUnits.hh>
 
 // static data members
 TG4TrackManager* TG4TrackManager::fgInstance = 0;

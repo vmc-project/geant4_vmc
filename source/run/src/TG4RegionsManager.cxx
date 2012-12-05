@@ -33,6 +33,7 @@
 #include <G4RToEConvForElectron.hh>
 #include <G4RToEConvForGamma.hh>
 #include <G4UnitsTable.hh>
+#include <G4SystemOfUnits.hh>
 
 #include <map>
 #include <set>

@@ -23,6 +23,7 @@
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
 #include <G4ProcessTable.hh>
+#include <G4SystemOfUnits.hh>
 
 const G4double TG4ExtraPhysicsList::fgkDefaultCutValue = 1.0 * mm;
 

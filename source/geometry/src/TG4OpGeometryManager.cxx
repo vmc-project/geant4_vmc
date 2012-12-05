@@ -46,6 +46,7 @@
 #include <G4Tubs.hh>
 #include <G4TwistedTrap.hh>
 #include <G4Transform3D.hh>
+#include <G4SystemOfUnits.hh>
 
 #include <TArrayD.h>
 #include <TString.h>

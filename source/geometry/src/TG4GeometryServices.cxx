@@ -32,6 +32,7 @@
 #include <G4MaterialPropertiesTable.hh>
 #include <G4Element.hh>
 #include <G4UserLimits.hh>
+#include <G4SystemOfUnits.hh>
 #include <G3toG4.hh> 
 #include <G3EleTable.hh> 
 

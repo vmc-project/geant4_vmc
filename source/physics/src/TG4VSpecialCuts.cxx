@@ -24,6 +24,7 @@
 #include <G4UserLimits.hh>
 #include <G4EnergyLossTables.hh>
 #include <G4LossTableManager.hh>
+#include <G4PhysicalConstants.hh>
 
 //_____________________________________________________________________________
 TG4VSpecialCuts::TG4VSpecialCuts(const G4String& processName)

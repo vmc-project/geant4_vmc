@@ -34,6 +34,7 @@
 #include <G4ProcessTable.hh>
 #include <G4ProcessManager.hh>
 #include <G4VProcess.hh>
+#include <G4SystemOfUnits.hh>
 
 #include <TDatabasePDG.h>
 #include <TVirtualMCApplication.h>

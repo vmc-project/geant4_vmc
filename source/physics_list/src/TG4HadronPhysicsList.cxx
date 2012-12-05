@@ -16,6 +16,8 @@
 
 #include "TG4HadronPhysicsList.h"
 
+#include <G4SystemOfUnits.hh>
+
 #include "G4PhysListFactory.hh"
 
 const G4double TG4HadronPhysicsList::fgkDefaultCutValue = 1.0 * mm;

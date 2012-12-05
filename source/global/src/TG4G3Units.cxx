@@ -16,6 +16,8 @@
 
 #include "TG4G3Units.h"
 
+#include <G4SystemOfUnits.hh>
+
 // static const data members
 
 const G4double TG4G3Units::fgkLength  = cm;

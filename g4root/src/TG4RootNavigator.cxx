@@ -14,6 +14,8 @@
 ///
 /// \author A. Gheata; CERN
 
+#include "G4SystemOfUnits.hh"
+
 #include "TGeoManager.h"
 
 #include "TG4RootDetectorConstruction.h"

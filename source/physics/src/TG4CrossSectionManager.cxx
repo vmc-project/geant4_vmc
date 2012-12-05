@@ -22,6 +22,7 @@
 #include <G4ParticleDefinition.hh>
 #include <G4ParticleTable.hh>
 #include <G4HadronicProcessStore.hh>
+#include <G4SystemOfUnits.hh>
 
 #include <TH1.h>
 #include <TObjArray.h>

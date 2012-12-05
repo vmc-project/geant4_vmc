@@ -42,6 +42,7 @@
 #include <G4Material.hh>
 #include <G4TransportationManager.hh>
 #include <G4PVPlacement.hh>
+#include <G4SystemOfUnits.hh>
 
 #include <TGeoManager.h>
 #include <TGeoVolume.h>
