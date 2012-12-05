@@ -55,6 +55,7 @@
 #include "G4VisAttributes.hh"
 #include "G4Colour.hh"
 
+#include "G4SystemOfUnits.hh"
 #include "G4ios.hh"
 
 #include "A01DetectorConstMessenger.h"
@@ -109,6 +110,7 @@ A01DetectorConstruction::~A01DetectorConstruction()
 
 G4VPhysicalVolume* A01DetectorConstruction::Construct()
 {
+/*
   // All managed (deleted) by SDManager
   G4VSensitiveDetector* hodoscope1;
   G4VSensitiveDetector* hodoscope2;
@@ -119,7 +121,7 @@ G4VPhysicalVolume* A01DetectorConstruction::Construct()
   ConstructMaterials();
 
   // Local Magnetic Field
-/*  
+    
   static G4bool fieldIsInitialized = false;
   if(!fieldIsInitialized)
   {
