@@ -23,7 +23,7 @@
 #include "G4LogicalVolume.hh"
 #include "G4Region.hh"
 #include "G4ProductionCuts.hh"
-
+#include "G4SystemOfUnits.hh"
 
 //_____________________________________________________________________________
 Ex03RegionConstruction::Ex03RegionConstruction() 
