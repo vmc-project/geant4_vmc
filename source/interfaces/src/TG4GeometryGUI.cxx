@@ -42,7 +42,7 @@ TG4GeometryGUI::TG4GeometryGUI()
 
     G4cout << "\n***********************************************" << G4endl;
     G4cout << "***********************************************" << G4endl;
-    G4cout << " Welcome to the Geometry Browser for AliGeant4 " << G4endl;
+    G4cout << " Welcome to Geant4 VMC Browser                 " << G4endl;
     G4cout << "\n***********************************************" << G4endl;
     G4cout << "***********************************************\n" << G4endl;
     

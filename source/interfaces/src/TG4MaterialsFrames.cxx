@@ -25,6 +25,7 @@
  
 #include <G4Material.hh>
 #include <G4Element.hh>
+#include <G4SystemOfUnits.hh>
 
 /// \cond CLASSIMP
 ClassImp(TG4MaterialsFrames)
@@ -55,7 +56,7 @@ TG4MaterialsFrames::TG4MaterialsFrames( TGTab* Tab, TGMainFrame* ActionFrame )
    TGLayoutHints* lLayoutHints3 = 
              new TGLayoutHints(kLHintsTop | kLHintsLeft | kLHintsExpandX,
                            2, 2, 2, 2);   
-   Text_t* lComboLabelText = " Pick up a material here ";
+   const Text_t* lComboLabelText = " Pick up a material here ";
    fComboLabel = new TGLabel( fMatSubframe1, lComboLabelText);
    fMatSubframe1->AddFrame(fComboLabel, lLayoutHints3);
    fMatSubframe1->AddFrame(fMaterialsCombo, fMatFrameLayout);
@@ -67,7 +68,7 @@ TG4MaterialsFrames::TG4MaterialsFrames( TGTab* Tab, TGMainFrame* ActionFrame )
 
    
 // text labels with material properties 
-   Text_t* labelText[8]  = 
+   const Text_t* labelText[8]  = 
    {"Index             ", 
     "Number of elements",
     "Elements list     ",
