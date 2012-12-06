@@ -53,47 +53,6 @@ TG4EventAction::~TG4EventAction()
 }
 
 //
-// private methods
-//
-
-//_____________________________________________________________________________
-void TG4EventAction::DisplayEvent(const G4Event* event) const
-{
-/// Draw trajectories.
-
-  if (G4VVisManager::GetConcreteInstance()) {
-
-    // trajectories processing
-    G4TrajectoryContainer* trajectoryContainer 
-      = event->GetTrajectoryContainer();
-
-    G4int nofTrajectories = 0;
-    if (trajectoryContainer)
-      nofTrajectories = trajectoryContainer->entries(); 
-  
-    if (VerboseLevel() > 0 && nofTrajectories > 0) {
-      G4cout << "    " << nofTrajectories; 
-      G4cout << " trajectories stored." << G4endl;
-    }  
-
-    for (G4int i=0; i<nofTrajectories; i++) { 
-      G4VTrajectory* vtrajectory = (*(event->GetTrajectoryContainer()))[i];
-      G4Trajectory* trajectory = dynamic_cast<G4Trajectory*>(vtrajectory);
-      if (!trajectory) {
-        TG4Globals::Exception(
-          "TG4EventAction", "DisplayEvent", "Unknown trajectory type.");
-      }
-      if ( (fDrawFlag == "ALL") ||
-          ((fDrawFlag == "CHARGED") && (trajectory->GetCharge() != 0.))){
-         trajectory->DrawTrajectory(); 
-            // the argument number defines the size of the step points
-            // use 2000 to make step points well visible
-      }        
-    }      
-  }
-}
-
-//
 // public methods
 //
 
@@ -163,9 +122,6 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
     G4cout  << "    " << nofAllTracks << 
                   " all tracks processed." << G4endl;
   }               
-
-  // display event
-  DisplayEvent(event);
 
   // VMC application finish event
   TVirtualMCApplication::Instance()->FinishEvent();    

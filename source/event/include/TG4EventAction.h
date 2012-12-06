@@ -58,9 +58,6 @@ class TG4EventAction : public G4UserEventAction,
     /// Not implemented
     TG4EventAction& operator=(const TG4EventAction& right);
 
-    // methods 
-    void DisplayEvent(const G4Event* event) const;
-  
     // data members
     TG4EventActionMessenger   fMessenger; ///< messenger
     TStopwatch  fTimer;          ///< timer

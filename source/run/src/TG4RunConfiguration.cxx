@@ -28,7 +28,6 @@
 #include "TG4TrackingAction.h"
 #include "TG4SteppingAction.h"
 #include "TG4SpecialStackingAction.h"
-#include "TG4LVTree.h"
 #include "TG4Globals.h"
 
 #include <G4UImessenger.hh>
@@ -129,9 +128,6 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
       TString(TG4SpecialPhysicsList::AvailableSelections())); 
   } 
 
-  // instantiate LVtree browser
-  TG4LVTree::Instance();
-
 #ifdef USE_VGM
   // instantiate XML messengers
   fAGDDMessenger = new TG4VGMMessenger("AGDD", userGeometry.Data());
@@ -144,7 +140,6 @@ TG4RunConfiguration::~TG4RunConfiguration()
 {
 /// Destructor
 
-  delete TG4LVTree::Instance();
   delete fAGDDMessenger;
   delete fGDMLMessenger;
 }
