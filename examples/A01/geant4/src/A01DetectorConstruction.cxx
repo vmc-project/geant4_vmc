@@ -118,8 +118,10 @@ G4VPhysicalVolume* A01DetectorConstruction::Construct()
   G4VSensitiveDetector* chamber2;
   G4VSensitiveDetector* EMcalorimeter;
   G4VSensitiveDetector* HadCalorimeter;
+*/  
   ConstructMaterials();
 
+/*
   // Local Magnetic Field
     
   static G4bool fieldIsInitialized = false;
@@ -336,7 +338,7 @@ G4VPhysicalVolume* A01DetectorConstruction::Construct()
   // visualization attributes ------------------------------------------------
 
   fWorldVisAtt = new G4VisAttributes(G4Colour(1.0,1.0,1.0));
-  fWorldVisAtt->SetVisibility(false);
+  //fWorldVisAtt->SetVisibility(false);
   worldLogical->SetVisAttributes(fWorldVisAtt);
 
   fMagneticVisAtt = new G4VisAttributes(G4Colour(0.9,0.9,0.9));   // LightGray
@@ -370,7 +372,7 @@ G4VPhysicalVolume* A01DetectorConstruction::Construct()
   fHadCalorimeterVisAtt = new G4VisAttributes(G4Colour(0.0, 0.0, 0.9));
   HadCalorimeterLogical->SetVisAttributes(fHadCalorimeterVisAtt);
   fHadCalorimeterCellVisAtt = new G4VisAttributes(G4Colour(0.0, 0.0, 0.9));
-  fHadCalorimeterCellVisAtt->SetVisibility(false);
+  //fHadCalorimeterCellVisAtt->SetVisibility(false);
   HadCalColumnLogical->SetVisAttributes(fHadCalorimeterCellVisAtt);
   HadCalCellLogical->SetVisAttributes(fHadCalorimeterCellVisAtt);
   HadCalLayerLogical->SetVisAttributes(fHadCalorimeterCellVisAtt);

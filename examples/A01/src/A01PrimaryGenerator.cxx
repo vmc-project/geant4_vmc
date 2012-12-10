@@ -39,7 +39,7 @@ A01PrimaryGenerator::A01PrimaryGenerator(TVirtualMCStack* stack)
   : TObject(),
     fStack(stack),
     fNofPrimaries(1),
-    fDefaultParticle(kPositron),  
+    fDefaultParticle(kMuonPlus),  
     fMomentum(1.),           // 1 GeV
     fSigmaMomentum(50.e-03), // 50 MeV;
     fSigmaAngle(2.),         // 2 deg
@@ -53,7 +53,7 @@ A01PrimaryGenerator::A01PrimaryGenerator()
   : TObject(),
     fStack(0),
     fNofPrimaries(0),
-    fDefaultParticle(kPositron),  
+    fDefaultParticle(kMuonPlus),  
     fMomentum(1.),           // 1 GeV
     fSigmaMomentum(50.e-03), // 50 MeV;
     fSigmaAngle(2.),         // 2 deg

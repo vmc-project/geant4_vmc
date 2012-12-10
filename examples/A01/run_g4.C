@@ -33,19 +33,19 @@ void run_g4(const TString& configMacro = "g4Config.C")
   // MC application
   A01MCApplication* appl 
     =  new A01MCApplication("ExampleA01", "The exampleA01 MC application");
-  appl->GetPrimaryGenerator()->SetNofPrimaries(100);
+  appl->GetPrimaryGenerator()->SetRandomize(false);
   appl->SetWriteStack(true);
   appl->SetWriteHits(true);
 
   appl->InitMC(configMacro);
 
   // visualization setting
-  //gROOT->LoadMacro("set_vis.C");
-  //set_vis();
+  gROOT->LoadMacro("set_vis.C");
+  set_vis();
 
   TStopwatch timer;
   timer.Start();  
-  appl->RunMC(10);
+  appl->RunMC(5);
   timer.Stop();
   timer.Print();
   
