@@ -26,7 +26,7 @@ void Config()
 
   // Run configuration with user geometry construction via Geant4
   Ex03RunConfiguration1* runConfiguration 
-    = new Ex03RunConfiguration1("emStandard");
+    = new Ex03RunConfiguration1("FTFP_BERT");
   
   // Run configuration with user geometry construction via Geant4
   // + special cuts activated

@@ -61,7 +61,7 @@ Macros:
   run_g4.C        - macro for running example 
   g4Config.C      - configuration macro - G4 native geometry navigation (default)
   g4Config1.C     - configuration macro - geometry defined via Geant4
-  g4Config2.C     - configuration macro - user defined physics list (LHEP_BERT)
+  g4Config2.C     - configuration macro - user defined physics list (QGSP_BERT)
   g4Config3.C     - configuration macro - user defined regions
   g4tgeoConfig.C  - configuration macro - G4 with TGeo navigation 
   g4tgeoConfig3.C - configuration macro - user defined regions, G4 with TGeo navigation 
