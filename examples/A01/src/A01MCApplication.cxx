@@ -341,14 +341,13 @@ void A01MCApplication::FinishEvent()
      gGeoManager->GetTopVolume()->Draw();
 
      // Draw tracks (if filled)
+     // Available when this feature is activated via
+     // gMC->SetCollectTracks(kTRUE);
      if ( gGeoManager->GetListOfTracks() &&
           gGeoManager->GetTrack(0) &&
         ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
        
        gGeoManager->DrawTracks("/*");  // this means all tracks
-          // Drawing G3 tracks via TGeo is available only
-	  // if geant3 is compile with -DCOLLECT_TRACK flag
-	  // (to be activated in geant3/TGeant3/TGeant3gu.cxx)
     }	  
   }    
  
