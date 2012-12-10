@@ -259,20 +259,24 @@ void Ex06MCApplication::FinishEvent()
 
   fVerbose.FinishEvent();
   
-  // Draw event with TGeo
-  // available only with TGeant3TGeo
+  // Geant3 + TGeo
+  // (use TGeo functions for visualization)
+  if ( TString(gMC->GetName()) == "TGeant3TGeo") {
+  
+     // Draw volume 
+     gGeoManager->SetVisOption(0);	 
+     gGeoManager->SetTopVisible();
+     gGeoManager->GetTopVolume()->Draw();
 
-  if ( TString(gMC->GetName()) == "TGeant3TGeo" && 
-       gGeoManager->GetListOfTracks() &&
-       gGeoManager->GetTrack(0) &&
-       ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
+     // Draw tracks (if filled)
+     // Available when this feature is activated via
+     // gMC->SetCollectTracks(kTRUE);
+     if ( gGeoManager->GetListOfTracks() &&
+          gGeoManager->GetTrack(0) &&
+        ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
        
-       gGeoManager->SetVisOption(0);	 
-       gGeoManager->SetTopVisible();
        gGeoManager->DrawTracks("/*");  // this means all tracks
-          // Drawing G3 tracks via TGeo is available only
-	  // if geant3 is compile with -DCOLLECT_TRACK flag
-	  // (to be activated in geant3/TGeant3/TGeant3gu.cxx)
+    }	  
   }    
 
   cout << "Number of optical photons produced in this event : "
