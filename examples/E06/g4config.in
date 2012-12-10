@@ -52,8 +52,4 @@
 /optics_engine/setCerenkovMaxBetaChange 0.1
 /optics_engine/setTrackSecondariesFirst false
 
-# Set optical surface model 
-#
-/optics_engine/setOpticalSurfaceModel unified
-
 #/tracking/verbose 1
