@@ -34,7 +34,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
   Ex06MCApplication* appl 
     = new Ex06MCApplication("Example06", "The example06 MC application");
     
-  appl->GetPrimaryGenerator()->SetNofPrimaries(100);  
+  appl->GetPrimaryGenerator()->SetNofPrimaries(10);  
   //appl->SetVerboseLevel(3);  
   
   // Macro to run with primary = polarized optical photon
@@ -51,7 +51,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
   ((TGeant4*)gMC)->ProcessGeantMacro("g4vis.in");
 
   // Run MC
-  appl->RunMC(10);
+  appl->RunMC(5);
 
   delete appl;
 }  
