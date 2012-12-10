@@ -208,7 +208,7 @@ void TG4MCGeometry::Medium(Int_t& kmed, const char *name, Int_t nmat,
 /// - !! The other parameters (IFIELD, FIELDM, TMAXFD, DEEMAX, EPSIL, STMIN)
 /// are ignored by Geant4.
 ///
-///  Geant3 desription:                                                      \n
+///  Geant3 desription: 
 ///  ==================
 ///  - NTMED  Tracking medium number
 ///  - NAME   Tracking medium name
@@ -249,7 +249,7 @@ void TG4MCGeometry::Medium(Int_t& kmed, const char *name, Int_t nmat,
 /// - !! The other parameters (IFIELD, FIELDM, TMAXFD, DEEMAX, EPSIL, STMIN)
 /// are ignored by Geant4.
 ///
-///  Geant3 desription:                                                      \n
+///  Geant3 desription:
 ///  ==================
 ///  - NTMED  Tracking medium number
 ///  - NAME   Tracking medium name
@@ -356,7 +356,7 @@ Int_t TG4MCGeometry::Gsvolu(const char *name, const char *shape,
 void  TG4MCGeometry::Gsdvn(const char *name, const char *mother, 
            Int_t ndiv, Int_t iaxis) 
 { 
-///  Geant3 desription:                                                     \n
+///  Geant3 desription:
 ///  ==================
 ///  - NAME   Volume name
 ///  - MOTHER Mother volume name

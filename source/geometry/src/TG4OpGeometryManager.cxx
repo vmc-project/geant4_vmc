@@ -163,7 +163,7 @@ void  TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
                              Float_t* rindex)
 {
 ///
-///  Geant3 desription:                                                     \n
+///  Geant3 desription:
 ///  ==================
 ///
 ///    Stores the tables for UV photon tracking in medium ITMED 
@@ -199,7 +199,7 @@ void  TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
                              Double_t* rindex)
 {
 ///
-///  Geant3 desription:                                                     \n
+///  Geant3 desription:
 ///  ==================
 ///
 ///    Stores the tables for UV photon tracking in medium ITMED 
