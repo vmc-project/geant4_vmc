@@ -27,7 +27,7 @@
 // --------------------------------------------------------------
 //
 
-#include "A01CellParameterisation.h"
+#include "A01CellParameterisation.hh"
 
 #include "G4VPhysicalVolume.hh"
 #include "G4ThreeVector.hh"

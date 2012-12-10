@@ -27,7 +27,7 @@
 // --------------------------------------------------------------
 //
 
-#include "A01DetectorConstruction.h"
+#include "A01DetectorConstruction.hh"
 
 #include "G4FieldManager.hh"
 #include "G4TransportationManager.hh"
@@ -58,7 +58,7 @@
 #include "G4SystemOfUnits.hh"
 #include "G4ios.hh"
 
-#include "A01DetectorConstMessenger.h"
+#include "A01DetectorConstMessenger.hh"
 //#include "A01MagneticField.hh"
 //#include "A01CellParameterisation.h"
 /*

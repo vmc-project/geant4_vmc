@@ -17,7 +17,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "A01RunConfiguration.h"
-#include "A01DetectorConstruction.h"
+#include "A01DetectorConstruction.hh"
 
 //_____________________________________________________________________________
 A01RunConfiguration::A01RunConfiguration(const TString& physicsList,

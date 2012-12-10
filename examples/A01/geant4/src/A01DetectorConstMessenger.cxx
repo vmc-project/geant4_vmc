@@ -26,8 +26,8 @@
 // $Id$
 // --------------------------------------------------------------
 //
-#include "A01DetectorConstMessenger.h"
-#include "A01DetectorConstruction.h"
+#include "A01DetectorConstMessenger.hh"
+#include "A01DetectorConstruction.hh"
 #include "G4UIdirectory.hh"
 #include "G4UIcmdWithADoubleAndUnit.hh"
 #include "G4ios.hh"
