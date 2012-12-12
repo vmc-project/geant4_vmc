@@ -21,7 +21,7 @@
 
 #include "TG4RunConfiguration.h"
 
-/// \ingroup E03
+/// \ingroup A01
 /// \brief User Geant4 VMC run configuration
 ///
 /// This class overrides setting of the default Geant4 VMC geometry

@@ -1,3 +1,5 @@
+// $Id$
+
 //
 // ********************************************************************
 // * License and Disclaimer                                           *
@@ -23,11 +25,21 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
+
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2007 - 2012 Ivana Hrivnacova
+// All rights reserved.
 //
-// $Id$
-// GEANT4 tag $Name: not supported by cvs2svn $
-//
-// 
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \file DetectorMessenger.cxx
+/// \brief Implementation of the DetectorMessenger class 
+///
+/// Geant4 example E03 adapted to Virtual Monte Carlo
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

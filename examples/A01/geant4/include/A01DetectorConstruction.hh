@@ -1,3 +1,6 @@
+#ifndef A01DetectorConstruction_h
+#define A01DetectorConstruction_h 1
+
 //
 // ********************************************************************
 // * License and Disclaimer                                           *
@@ -27,8 +30,19 @@
 // --------------------------------------------------------------
 //
 
-#ifndef A01DetectorConstruction_h
-#define A01DetectorConstruction_h 1
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2007 - 2012 Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \file A01DetectorConstruction.hh
+/// \brief Definition of the A01DetectorConstruction class 
+///
+/// Geant4 example A01 adapted to Virtual Monte Carlo
 
 #include "globals.hh"
 #include "G4VUserDetectorConstruction.hh"
@@ -41,6 +55,9 @@ class G4VSensitiveDetector;
 class G4VisAttributes;
 class A01DetectorConstMessenger;
 class A01MagneticField;
+
+/// \ingroup A01
+/// \brief The detector construction (defined via Geant4)
 
 class A01DetectorConstruction : public G4VUserDetectorConstruction
 {

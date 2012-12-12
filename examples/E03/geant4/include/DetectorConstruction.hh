@@ -1,3 +1,6 @@
+#ifndef DetectorConstruction_h
+#define DetectorConstruction_h 1
+
 //
 // ********************************************************************
 // * License and Disclaimer                                           *
@@ -23,17 +26,20 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-//
-// $Id: DetectorConstruction.hh,v 1.1 2010-10-18 15:56:17 maire Exp $
-// GEANT4 tag $Name: not supported by cvs2svn $
-//
-// 
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2007 - 2012 Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
 
-#ifndef DetectorConstruction_h
-#define DetectorConstruction_h 1
+/// \file DetectorConstruction.hh 
+/// \brief Definition of the DetectorConstruction class 
+///
+/// Geant4 example E03 adapted to Virtual Monte Carlo
 
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
@@ -46,6 +52,9 @@ class G4UniformMagField;
 class DetectorMessenger;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+/// \ingroup E03
+/// \brief The detector construction (defined via Geant4)
 
 class DetectorConstruction : public G4VUserDetectorConstruction
 {

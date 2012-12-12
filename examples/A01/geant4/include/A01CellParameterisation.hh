@@ -1,3 +1,6 @@
+#ifndef A01CellParameterisation_H
+#define A01CellParameterisation_H 1
+
 //
 // ********************************************************************
 // * License and Disclaimer                                           *
@@ -23,16 +26,27 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-// $Id$
-// --------------------------------------------------------------
-//
 
-#ifndef A01CellParameterisation_H
-#define A01CellParameterisation_H 1
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2007 - 2012 Ivana Hrivnacova
+// All rights reserved.
+//
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \file A01CellParameterisation.hh 
+/// \brief Definition of the A01CellParameterisation class 
+///
+/// Geant4 example A01 adapted to Virtual Monte Carlo
 
 #include "globals.hh"
 #include "G4VPVParameterisation.hh"
 class G4VPhysicalVolume;
+
+/// \ingroup A01
+/// \brief The cell parameterisation (defined via Geant4)
 
 class A01CellParameterisation : public G4VPVParameterisation
 {

@@ -1,3 +1,6 @@
+#ifndef DetectorMessenger_h
+#define DetectorMessenger_h 1
+
 //
 // ********************************************************************
 // * License and Disclaimer                                           *
@@ -23,17 +26,23 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
+
+//------------------------------------------------
+// The Virtual Monte Carlo examples
+// Copyright (C) 2007 - 2012 Ivana Hrivnacova
+// All rights reserved.
 //
-// $Id: DetectorMessenger.hh,v 1.1 2010-10-18 15:56:17 maire Exp $
-// GEANT4 tag $Name: not supported by cvs2svn $
-//
-// 
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
+
+/// \file DetectorMessenger.hh 
+/// \brief Definition of the DetectorMessenger class 
+///
+/// Geant4 example E03 adapted to Virtual Monte Carlo
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-#ifndef DetectorMessenger_h
-#define DetectorMessenger_h 1
 
 #include "globals.hh"
 #include "G4UImessenger.hh"
@@ -46,6 +55,9 @@ class G4UIcmdWithADoubleAndUnit;
 class G4UIcmdWithoutParameter;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+/// \ingroup E03
+/// \brief The detector construction messenger (defined via Geant4)
 
 class DetectorMessenger: public G4UImessenger
 {

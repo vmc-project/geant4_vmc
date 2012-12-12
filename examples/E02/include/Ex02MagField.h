@@ -41,7 +41,7 @@ public:
    Ex02MagField();
    virtual ~Ex02MagField();
    
-   virtual void Field(const Double_t* /*x*/, Double_t* B);
+   virtual void Field(const Double_t* x, Double_t* B);
    
 private:
    Ex02MagField(const Ex02MagField&);
