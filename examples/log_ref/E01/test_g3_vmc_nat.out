@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.32/00   2 December 2011   *
+  *   Version   5.34/03   27 October 2012   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.32/00 (tags/v5-32-00@42375, Dec 05 2011, 11:57:44 on linuxx8664gcc)
+ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -319,11 +319,11 @@ GetMaterial: Volume name XYZ not found
 VolId: Volume XYZ not found
 GetMedium: Volume name XYZ not found
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   407001407    1842593F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   595225039    237A69CF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   407024445   407001407
-                                        HEX    1842B33D    1842593F
+          with Store/Table at absolute adrs   595248077   595225039
+                                        HEX    237AC3CD    237A69CF
                                         HEX        555A           0
                               relative adrs       21850           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
