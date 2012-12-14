@@ -132,6 +132,12 @@ ifneq ($(USE_VGM),)
   CXXFLAGS += -DUSE_VGM
 endif
 
+# Use G3toG4 flag 
+#
+ifeq ($(NO_G3TOG4),)
+  CXXFLAGS += -DUSE_G3TOG4
+endif
+
 
 ######################## Supported Geant4 VIS, UI #############################
 #

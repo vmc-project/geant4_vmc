@@ -29,14 +29,6 @@
 #include "TG4VUserRegionConstruction.h"
 #include "TG4Globals.h"
 
-#include <G3toG4.hh> 
-#include <G3toG4MANY.hh>
-#include <G3toG4BuildTree.hh>
-#include <G3MatTable.hh>
-#include <G3MedTable.hh>
-#include <G3VolTable.hh>
-#include <G3SensVolVector.hh>
-
 #include <G4LogicalVolumeStore.hh>
 #include <G4ReflectionFactory.hh>
 #include <G4Material.hh>
@@ -51,6 +43,16 @@
 #include <TVirtualMC.h>
 #include <TVirtualMCApplication.h>
 #include <TList.h>
+
+#ifdef USE_G3TOG4
+#include <G3toG4.hh> 
+#include <G3toG4MANY.hh>
+#include <G3toG4BuildTree.hh>
+#include <G3MatTable.hh>
+#include <G3MedTable.hh>
+#include <G3VolTable.hh>
+#include <G3SensVolVector.hh>
+#endif
 
 #ifdef USE_VGM
 #include <Geant4GM/volumes/Factory.h>
@@ -128,6 +130,7 @@ void TG4GeometryManager::ConstructG4GeometryViaVMC()
 {
 /// Create G4 geometry objects according to the G3VolTable 
 
+#ifdef USE_G3TOG4
   if ( VerboseLevel() > 1 ) 
     G4cout << "TG4GeometryManager::ConstructG4GeometryViaVMC" << G4endl;
 
@@ -167,6 +170,13 @@ void TG4GeometryManager::ConstructG4GeometryViaVMC()
 
   // print G3 volume table statistics
   G3Vol.VTEStat();
+
+#else
+  TG4Globals::Exception(
+    "TG4GeometryManager", "ConstructG4GeometryViaVMC",
+    "Geant4 VMC has been installed without G3toG4." + TG4Globals::Endl() +
+    "Geometry construction via VMC is not supported.");
+#endif
 }
 
 //_____________________________________________________________________________
@@ -276,6 +286,7 @@ void TG4GeometryManager::ConstructG4Geometry()
 
   // Build G4 geometry
   if ( fUserGeometry == "VMCtoGeant4" ) 
+
     ConstructG4GeometryViaVMC();
   
   if ( fUserGeometry == "RootToGeant4" ) 
@@ -297,6 +308,7 @@ void TG4GeometryManager::FillMediumMapFromG3()
 {
 /// Map G3 tracking medium IDs to volumes names.
 
+#ifdef USE_G3TOG4
   if ( VerboseLevel() > 1 ) 
     G4cout << "TG4GeometryManager::FillMediumMapFromG3()" << G4endl;
 
@@ -344,6 +356,12 @@ void TG4GeometryManager::FillMediumMapFromG3()
   G3SensVol.clear(); 
   G3Mat.Clear();
   G3Med.Clear();
+#else
+  TG4Globals::Exception(
+    "TG4GeometryManager", "FillMediumMapFromG3",
+    "Geant4 VMC has been installed without G3toG4." + TG4Globals::Endl() +
+    "Geometry construction via VMC is not supported.");
+#endif
 }    
 
 //_____________________________________________________________________________

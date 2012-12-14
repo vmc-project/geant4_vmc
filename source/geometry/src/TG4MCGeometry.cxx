@@ -27,8 +27,10 @@
 #include "TG4G3ControlVector.h"
 #include "TG4Globals.h"
 
+#ifdef USE_G3TOG4
 #include <G3toG4.hh> 
 #include <G3MatTable.hh>
+#endif
 
 #include <G4LogicalVolume.hh>
 #include <G4Material.hh>
@@ -57,8 +59,10 @@
 #include <TString.h>
 #include <Riostream.h>
 
+#ifdef USE_G3TOG4
 /// Extern global method from g3tog4
 void G3CLRead(G4String &, char *);
+#endif
 
 //_____________________________________________________________________________
 TG4MCGeometry::TG4MCGeometry()
@@ -100,6 +104,7 @@ void TG4MCGeometry::Material(Int_t& kmat, const char* name, Double_t a,
 }
   
  
+#ifdef USE_G3TOG4
 //_____________________________________________________________________________
 void TG4MCGeometry::Material(Int_t& kmat, const char* name, Double_t a, 
           Double_t z, Double_t dens, Double_t radl, Double_t /*absl*/, Double_t* buf, 
@@ -107,6 +112,7 @@ void TG4MCGeometry::Material(Int_t& kmat, const char* name, Double_t a,
 {
 /// Create material.                                                         \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate
+/// Available only with USE_G3TOG4 option.
 
     G4String namein = fGeometryServices->CutMaterialName(name);
 
@@ -133,6 +139,18 @@ void TG4MCGeometry::Material(Int_t& kmat, const char* name, Double_t a,
         " are ignored by Geant4.");        
     }
 }
+#else
+//_____________________________________________________________________________
+void TG4MCGeometry::Material(Int_t&, const char*, Double_t, 
+          Double_t, Double_t, Double_t, Double_t, Double_t*,Int_t)
+{
+/// Create material.                                                         \n
+/// Not available without USE_G3TOG4 option.
+
+  TG4Globals::Exception("TG4MCGeometry", "Material",
+     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+}
+#endif      
   
  
 //_____________________________________________________________________________
@@ -165,12 +183,14 @@ void TG4MCGeometry::Mixture(Int_t& kmat, const char *name, Float_t *a,
    delete [] wmatin;
 } 
 
+#ifdef USE_G3TOG4
 //_____________________________________________________________________________
 void TG4MCGeometry::Mixture(Int_t& kmat, const char *name, Double_t* a, 
           Double_t* z, Double_t dens, Int_t nlmat, Double_t* wmat)
 { 
 /// Create material composed of more elements.                            \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate
+/// Available only with USE_G3TOG4 option.
 
    G4String namein = fGeometryServices->CutMaterialName(name);
 
@@ -193,6 +213,18 @@ void TG4MCGeometry::Mixture(Int_t& kmat, const char *name, Double_t* a,
     // save the original material name
     fMaterialNameVector.push_back(namein);  
 } 
+#else
+//_____________________________________________________________________________
+void TG4MCGeometry::Mixture(Int_t&, const char*, Double_t*, 
+          Double_t*, Double_t, Int_t, Double_t*)
+{ 
+/// Create material composed of more elements.                            \n
+/// Not available without USE_G3TOG4 option.
+
+  TG4Globals::Exception("TG4MCGeometry", "Mixture",
+     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+}
+#endif      
 
 //_____________________________________________________________________________
 void TG4MCGeometry::Medium(Int_t& kmed, const char *name, Int_t nmat, 
@@ -235,6 +267,7 @@ void TG4MCGeometry::Medium(Int_t& kmed, const char *name, Int_t nmat,
 } 
 
 
+#ifdef USE_G3TOG4
 //_____________________________________________________________________________
 void TG4MCGeometry::Medium(Int_t& kmed, const char *name, Int_t nmat, 
           Int_t isvol, Int_t ifield, Double_t fieldm, Double_t tmaxfd, 
@@ -268,6 +301,7 @@ void TG4MCGeometry::Medium(Int_t& kmed, const char *name, Int_t nmat,
 ///  - IFIELD = 1 if tracking performed with GRKUTA; 
 ///  - IFIELD = 2 if tracking performed with GHELIX; 
 ///  - IFIELD = 3 if tracking performed with GHELX3.  
+/// Available only with USE_G3TOG4 option.
 
   G4String namein = fGeometryServices->CutMaterialName(name);
 
@@ -287,17 +321,43 @@ void TG4MCGeometry::Medium(Int_t& kmed, const char *name, Int_t nmat,
       " are ignored by Geant4.");  
   }
 } 
+#else
+//_____________________________________________________________________________
+void TG4MCGeometry::Medium(Int_t&, const char *, Int_t, 
+          Int_t, Int_t, Double_t, Double_t, Double_t, Double_t, Double_t, 
+          Double_t, Double_t*, Int_t)
+{          
+/// Create a temporary "medium".
+/// Not available without USE_G3TOG4 option.
+
+  TG4Globals::Exception("TG4MCGeometry", "Medium",
+     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+}     
+#endif      
 
 
+#ifdef USE_G3TOG4
 //_____________________________________________________________________________
 void TG4MCGeometry::Matrix(Int_t& krot, Double_t thetaX, Double_t phiX, 
            Double_t thetaY, Double_t phiY, Double_t thetaZ, Double_t phiZ)
 {
 /// Create rotation matrix.
+/// Available only with USE_G3TOG4 option.
 
   G4gsrotm(krot, thetaX, phiX, thetaY, phiY, thetaZ, phiZ);
 }
-  
+#else
+//_____________________________________________________________________________
+void TG4MCGeometry::Matrix(Int_t&, Double_t, Double_t, 
+           Double_t, Double_t, Double_t, Double_t)
+{
+/// Create rotation matrix.
+/// Not available without USE_G3TOG4 option.
+
+  TG4Globals::Exception("TG4MCGeometry", "Matrix",
+     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+}     
+#endif      
 
 //_____________________________________________________________________________
 void TG4MCGeometry::Ggclos() 
@@ -309,10 +369,16 @@ void TG4MCGeometry::Ggclos()
 ///  ==================                                                      \n
 ///  close out the geometry
 
+#ifdef USE_G3TOG4
   G4ggclos();        
+#else
+  TG4Globals::Exception("TG4MCGeometry", "Ggclos()",
+     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+#endif      
 } 
  
 
+#ifdef USE_G3TOG4
 //_____________________________________________________________________________
 Int_t TG4MCGeometry::Gsvolu(const char *name, const char *shape, 
           Int_t nmed, Double_t* upar, Int_t npar) 
@@ -326,13 +392,26 @@ Int_t TG4MCGeometry::Gsvolu(const char *name, const char *shape,
 ///  - UPAR   Vector containing shape parameters
 ///
 ///  It creates a new volume in the JVOLUM data structure.
+///  Available only with USE_G3TOG4 option.
 // ---  
 
   G4gsvolu(fGeometryServices->CutName(name), 
            fGeometryServices->CutName(shape), nmed, upar, npar);
-
   return 0;
 } 
+#else
+//_____________________________________________________________________________
+Int_t TG4MCGeometry::Gsvolu(const char *, const char *, 
+          Int_t, Double_t*, Int_t) 
+{ 
+/// It creates a new volume in the JVOLUM data structure.
+/// Not available without USE_G3TOG4 option.
+
+  TG4Globals::Exception("TG4MCGeometry", "Gsvolu",
+     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+  return 0;
+}
+#endif      
 
 
 //_____________________________________________________________________________
@@ -352,6 +431,7 @@ Int_t TG4MCGeometry::Gsvolu(const char *name, const char *shape,
 } 
 
 
+#ifdef USE_G3TOG4
 //_____________________________________________________________________________
 void  TG4MCGeometry::Gsdvn(const char *name, const char *mother, 
            Int_t ndiv, Int_t iaxis) 
@@ -365,13 +445,27 @@ void  TG4MCGeometry::Gsdvn(const char *name, const char *mother,
 ///
 ///  - X,Y,Z of CAXIS will be translated to 1,2,3 for IAXIS.                \n
 ///  It divides a previously defined volume.
+///  Available only with USE_G3TOG4 option.
 //  ---
 
-    G4gsdvn(fGeometryServices->CutName(name), 
-            fGeometryServices->CutName(mother), ndiv, iaxis);
+  G4gsdvn(fGeometryServices->CutName(name), 
+          fGeometryServices->CutName(mother), ndiv, iaxis);
 } 
+#else
+//_____________________________________________________________________________
+void  TG4MCGeometry::Gsdvn(const char *, const char *, Int_t, Int_t) 
+{ 
+/// It divides a previously defined volume.
+/// Not available without USE_G3TOG4 option.
+//  ---
+
+  TG4Globals::Exception("TG4MCGeometry", "Gsdvn",
+     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+} 
+#endif      
  
  
+#ifdef USE_G3TOG4
 //_____________________________________________________________________________
 void  TG4MCGeometry::Gsdvn2(const char *name, const char *mother, 
            Int_t ndiv, Int_t iaxis, Double_t c0i, Int_t numed) 
@@ -381,12 +475,29 @@ void  TG4MCGeometry::Gsdvn2(const char *name, const char *mother,
 ///  Divides mother into ndiv divisions called name
 ///  along axis iaxis starting at coordinate value c0.
 ///  The new volume created will be medium number numed.
+///  Available only with USE_G3TOG4 option.
 
-    G4gsdvn2(fGeometryServices->CutName(name),
+  G4gsdvn2(fGeometryServices->CutName(name),
              fGeometryServices->CutName(mother), ndiv, iaxis, c0i, numed);
 } 
+#else
+//_____________________________________________________________________________
+void  TG4MCGeometry::Gsdvn2(const char *, const char *, 
+           Int_t, Int_t, Double_t, Int_t) 
+{ 
+///  Geant3 desription:                                                       \n
+///  ==================                                                       \n
+///  Divides mother into ndiv divisions called name
+///  along axis iaxis starting at coordinate value c0.
+///  Not available without USE_G3TOG4 option.
+
+  TG4Globals::Exception("TG4MCGeometry", "Gsdvn2",
+     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+}     
+#endif      
  
  
+#ifdef USE_G3TOG4
 //_____________________________________________________________________________
 void  TG4MCGeometry::Gsdvt(const char *name, const char *mother, 
            Double_t step, Int_t iaxis, Int_t numed, Int_t ndvmx)
@@ -400,12 +511,27 @@ void  TG4MCGeometry::Gsdvt(const char *name, const char *mother,
 ///  number NUMED. If NUMED is 0, NUMED of MOTHER is taken.
 ///  NDVMX is the expected maximum number of divisions
 ///  (If 0, no protection tests are performed) 
+///  Available only with USE_G3TOG4 option.
 
-    G4gsdvt(fGeometryServices->CutName(name), 
-            fGeometryServices->CutName(mother), step, iaxis, numed, ndvmx);
+  G4gsdvt(fGeometryServices->CutName(name), 
+          fGeometryServices->CutName(mother), step, iaxis, numed, ndvmx);
+}
+#else
+//_____________________________________________________________________________
+void  TG4MCGeometry::Gsdvt(const char *, const char *, 
+           Double_t, Int_t, Int_t, Int_t)
+{ 
+///  Divides MOTHER into divisions called NAME along
+///  axis IAXIS in steps of STEP. 
+///  Not available without USE_G3TOG4 option.
+
+  TG4Globals::Exception("TG4MCGeometry", "Gsdvt",
+     "This method requires geant4_vmc built with USE_G3TOG4 option.");
 } 
+#endif      
  
  
+#ifdef USE_G3TOG4
 //_____________________________________________________________________________
 void  TG4MCGeometry::Gsdvt2(const char *name, const char *mother, 
            Double_t step, Int_t iaxis, Double_t c0, Int_t numed, Int_t ndvmx)
@@ -421,10 +547,26 @@ void  TG4MCGeometry::Gsdvt2(const char *name, const char *mother,
 ///  If NUMED is 0, NUMED of mother is taken.                                \n               
 ///  NDVMX is the expected maximum number of divisions        
 ///  (If 0, no protection tests are performed)              
+///  Available only with USE_G3TOG4 option.
 
-    G4gsdvt2(fGeometryServices->CutName(name), 
-             fGeometryServices->CutName(mother), step, iaxis, c0, numed, ndvmx);
+  G4gsdvt2(fGeometryServices->CutName(name), 
+           fGeometryServices->CutName(mother), step, iaxis, c0, numed, ndvmx);
 } 
+#else
+//_____________________________________________________________________________
+void  TG4MCGeometry::Gsdvt2(const char *, const char *, 
+           Double_t, Int_t, Double_t, Int_t, Int_t)
+{ 
+///  Divides MOTHER into divisions called NAME along          
+///  axis IAXIS starting at coordinate value C0 with step    
+///  size STEP.                                                              \n       
+///  Not available without USE_G3TOG4 option.
+
+
+  TG4Globals::Exception("TG4MCGeometry", "Gsdvt",
+     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+} 
+#endif      
  
  
 //_____________________________________________________________________________
@@ -451,6 +593,7 @@ void  TG4MCGeometry::Gsord(const char* /*name*/, Int_t /*iax*/)
 } 
  
  
+#ifdef USE_G3TOG4
 //_____________________________________________________________________________
 void  TG4MCGeometry::Gspos(const char *vname, Int_t num, 
           const char *vmoth, Double_t x, Double_t y, Double_t z, Int_t irot, 
@@ -470,13 +613,27 @@ void  TG4MCGeometry::Gspos(const char *vname, Int_t num,
 ///  -  ONLY   ONLY/MANY flag
 ///
 ///  It positions a previously defined volume in the mother.
+///  Available only with USE_G3TOG4 option.
 // ---  
 
-   G4gspos(fGeometryServices->CutName(vname), ++num,
-           fGeometryServices->CutName(vmoth), x, y, z, irot, vonly);
+  G4gspos(fGeometryServices->CutName(vname), ++num,
+          fGeometryServices->CutName(vmoth), x, y, z, irot, vonly);
+}
+#else
+//_____________________________________________________________________________
+void  TG4MCGeometry::Gspos(const char *, Int_t, 
+          const char *, Double_t, Double_t, Double_t, Int_t, const char *) 
+{
+///  Position a volume into an existing one
+///  Not available without USE_G3TOG4 option.
+// ---  
+
+  TG4Globals::Exception("TG4MCGeometry", "Gspos",
+     "This method requires geant4_vmc built with USE_G3TOG4 option.");
 } 
+#endif      
  
- 
+#ifdef USE_G3TOG4
 //_____________________________________________________________________________
 void  TG4MCGeometry::Gsposp(const char *name, Int_t nr, 
            const char *mother, Double_t x, Double_t y, Double_t z, Int_t irot, 
@@ -486,11 +643,26 @@ void  TG4MCGeometry::Gsposp(const char *name, Int_t nr,
 ///  ==================                                                      \n
 ///  Place a copy of generic volume NAME with user number
 ///  NR inside MOTHER, with its parameters UPAR(1..NP)
+///  Available only with USE_G3TOG4 option.
 
-   G4gsposp(fGeometryServices->CutName(name), ++nr, 
-            fGeometryServices->CutName(mother), x, y, z, irot, konly, 
-             upar, np);
+  G4gsposp(fGeometryServices->CutName(name), ++nr, 
+           fGeometryServices->CutName(mother), x, y, z, irot, konly, 
+           upar, np);
 } 
+#else
+//_____________________________________________________________________________
+void  TG4MCGeometry::Gsposp(const char *, Int_t, 
+          const char *, Double_t, Double_t, Double_t, Int_t, 
+          const char *, Double_t*, Int_t) 
+{ 
+///  Place a copy of generic volume NAME with user number
+///  NR inside MOTHER, with its parameters UPAR(1..NP)
+///  Not available without USE_G3TOG4 option.
+
+ TG4Globals::Exception("TG4MCGeometry", "Gsposp",
+     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+}     
+#endif      
  
  
 //_____________________________________________________________________________
@@ -506,6 +678,7 @@ void  TG4MCGeometry::Gsposp(const char *name, Int_t nr,
 } 
  
  
+#ifdef USE_G3TOG4
 //_____________________________________________________________________________
 void  TG4MCGeometry::Gsbool(const char* onlyVolName, 
            const char* manyVolName)
@@ -513,10 +686,23 @@ void  TG4MCGeometry::Gsbool(const char* onlyVolName,
 /// Help for resolving MANY.
 /// Specify the ONLY volume that overlaps with the 
 /// specified MANY and has to be substracted.
+/// Available only with USE_G3TOG4 option.
 // ---  
 
-   G4gsbool(onlyVolName, manyVolName);
+  G4gsbool(onlyVolName, manyVolName);
 } 
+#else
+//_____________________________________________________________________________
+void  TG4MCGeometry::Gsbool(const char*, const char*)
+{ 
+/// Help for resolving MANY.
+/// Not available without USE_G3TOG4 option.
+// ---  
+
+  TG4Globals::Exception("TG4MCGeometry", "Gsbool",
+     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+}     
+#endif      
  
 //_____________________________________________________________________________
 Bool_t TG4MCGeometry::GetTransformation(const TString& volumePath, 
