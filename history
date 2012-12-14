@@ -11,6 +11,47 @@ $Id$
      
 Tags (history):
 ===============
+  14/12/2012
+  v2-14:
+    Migration to Geant4 9.6
+    Geant4 VMC:
+    Developments:    
+    - Implemented commands for activating saving random number status
+      and restoring it from a file: 
+    - Improved TG4VSpecialCuts: reorganized code to avoid unnecessary 
+      calculations before tests
+    - Removed obsolete features:
+      classes  TG4LVStructure, TG4LVTree, TG4LVTreeMessenger;
+      methood TG4EventAction::DisplayEvent; command /mcEvent/drawTracks
+    - Added an option to exclude G3toG4 dependent code which can be activated
+      by setting NO_G3TOG4 environment variable 
+    G4Root:
+    - Added TG4RootNavigator::GetGlobalExitNormal(), required with Geant4 9.6.
+      (A. Gheata)
+      
+    Fixes:
+    - Fixed mapping between Rootino and geantino;
+      user can now introduce chargedgeantino by setting the title 
+      "ChargedRootino" to Rootino particle.
+    - Fixed bug in TVirtualMC::Gdtom() implementation 
+    - Fixed units in stacking particles 
+    - Fix in TVirtualMC::GetSecondary implementation: get track global time 
+      instead of the local one
+    - Fixes to support Geant4 native geometries: handling copyNo, taking into 
+      account the user limits 
+    - Fixed units in material optical properties  
+ 
+    Examples:
+    - Added new A01 example
+    - Improved g4vis.in macros and removed use of gean4_vmc commands 
+      (now removed)
+    - In E02, E03: Default physics list changed to FTFP_BERT to be consistent 
+      with the examples in Geant4 9.6
+ 
+    Tested with Geant4 9.6 (with embedded CLHEP 2.1.3.1), 
+      Root 5.34/03, VGM 3.06
+
+
   13/12/2011
   v2-13:
     Migration to Geant4 9.5:

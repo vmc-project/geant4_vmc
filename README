@@ -45,6 +45,10 @@ Environment:
   VGM_INSTALL - path to VGM (optional)		    
   USE_VGM     - this environment variable has to be set (eg. to 1)
                 to include VGM dependent code in compilation
+                (not included by default)
+  NO_G3TOG4   - this environment variable has to be set (eg. to 1)
+                to exclude G3toG4 dependent code in compilation
+                (included by default)
  
   It is important to install Geant4 VMC with the same environment
   setting as Geant4.
@@ -57,7 +61,7 @@ Environment:
 Compilation:
 ------------
   Geant4 VMC requires Root, CLHEP and Geant4 installation,
-  and, optinally, VGM installation.
+  and, optionally, VGM installation.
   Instructions for these installations can be found in their
   own documentation, they are not provided in this README. 
 
