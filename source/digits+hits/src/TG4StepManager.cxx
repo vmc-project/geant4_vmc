@@ -35,6 +35,7 @@
 #include <G4VProcess.hh>
 #include <G4ProcessManager.hh>
 #include <G4ProcessVector.hh>
+#include <G4OpticalPhoton.hh>
 #include <G4VTouchable.hh>
 
 #include <TLorentzVector.h>
@@ -854,7 +855,7 @@ Double_t TG4StepManager::Edep() const
     G4VProcess* proc = fSteppingManager->GetfCurrentProcess();
     TG4PhysicsManager* physicsManager = TG4PhysicsManager::Instance();      
     if ( proc && physicsManager->GetMCProcess(proc)==kPLightScattering &&
-         physicsManager->GetOpBoundaryStatus(proc)==kPLightDetection ) {
+         physicsManager->GetOpBoundaryStatus()==kPLightDetection ) {
       return fTrack->GetTotalEnergy()/TG4G3Units::Energy();
     }
   }
@@ -1240,11 +1241,11 @@ Int_t TG4StepManager::StepProcesses(TArrayI& processes) const
     = fStep->GetPostStepPoint()->GetProcessDefinedStep();
 
   // set array size
-  processes.Set(nofAlongStep+1);
+  processes.Set(nofAlongStep+2);
      // maximum number of processes:
      // nofAlongStep (along step) - 1 (transportations) + 1 (post step process)
-     // + possibly 1 (additional process if kPLightScattering)
-     // => nofAlongStep + 1
+     // + possibly 2 (additional processes if OpBoundary )
+     // => nofAlongStep + 2
  
   // fill array with (nofAlongStep-1) along step processes 
   TG4PhysicsManager* physicsManager = TG4PhysicsManager::Instance();
@@ -1256,12 +1257,19 @@ Int_t TG4StepManager::StepProcesses(TArrayI& processes) const
       processes[counter++] = physicsManager->GetMCProcess(g4Process);
   }
     
-  // fill array with 1 or 2 (if kPLightScattering) last process
-  processes[counter++] = physicsManager->GetMCProcess(kpLastProcess);
-  if (processes[counter-1] == kPLightScattering) {
-     // add reflection/absorption as additional process
-     processes[counter++] = physicsManager->GetOpBoundaryStatus(kpLastProcess);
+  // fill array with optical photon information
+  if ( fStep->GetTrack()->GetDefinition() == G4OpticalPhoton::Definition() &&
+       kpLastProcess->GetProcessName() == "Transportation" &&
+       physicsManager->IsOpBoundaryProcess() ) { 
+       
+     // add light scattering anbd reflection/absorption as additional processes
+     processes[counter++] = kPLightScattering;
+     processes[counter++] = physicsManager->GetOpBoundaryStatus();
   }        
+
+  // fill array with last process
+  processes[counter++] = physicsManager->GetMCProcess(kpLastProcess);
+
     
   return counter;  
 }
