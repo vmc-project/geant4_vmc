@@ -369,6 +369,7 @@ void TG4RunManager::LateInitialize()
 
   // activate/inactivate physics processes
   TG4PhysicsManager::Instance()->SetProcessActivation();
+  TG4PhysicsManager::Instance()->RetrieveOpBoundaryProcess();
 
   // print statistics
   TG4GeometryServices::Instance()->PrintStatistics(true, false);  

@@ -31,6 +31,7 @@
 #include <G4ParticleDefinition.hh>
 #include <G4VUserPhysicsList.hh>
 #include <G4OpBoundaryProcess.hh>
+#include <G4OpticalPhoton.hh>
 #include <G4ProcessTable.hh>
 #include <G4ProcessManager.hh>
 #include <G4VProcess.hh>
@@ -51,7 +52,8 @@ TG4PhysicsManager::TG4PhysicsManager()
     fNotImplParNames(),
     fCutForGamma(fgkDefautCut),
     fCutForElectron(fgkDefautCut),
-    fCutForPositron(fgkDefautCut)
+    fCutForPositron(fgkDefautCut),
+    fOpBoundaryProcess(0)
 { 
 /// Default constructor
 
@@ -800,6 +802,23 @@ void TG4PhysicsManager::SetProcessActivation()
   }  
 }       
 
+//_____________________________________________________________________________
+void TG4PhysicsManager::RetrieveOpBoundaryProcess()
+{
+/// Retrieve the G4OpBoundaryProcess 
+
+  G4ParticleDefinition* photon = G4OpticalPhoton::Definition();
+  G4ProcessManager* processManager = photon->GetProcessManager();
+
+  G4int nofProcesses = processManager->GetProcessListLength();
+  G4ProcessVector* processList = processManager->GetProcessList();
+  for ( G4int i=0; i<nofProcesses; i++){
+    if ( (*processList)[i]->GetProcessName()=="OpBoundary" ) {
+      fOpBoundaryProcess = dynamic_cast<G4OpBoundaryProcess*>((*processList)[i]);
+      break;
+    }
+  }  
+}
 
 //_____________________________________________________________________________
 TMCProcess TG4PhysicsManager::GetMCProcess(const G4VProcess* process)
@@ -812,25 +831,19 @@ TMCProcess TG4PhysicsManager::GetMCProcess(const G4VProcess* process)
 }
 
 //_____________________________________________________________________________
-TMCProcess TG4PhysicsManager::GetOpBoundaryStatus(const G4VProcess* process)
+TMCProcess TG4PhysicsManager::GetOpBoundaryStatus()
 {
 /// Return the TMCProcess code according to the OpBoundary process
 /// status.
  
-#ifdef MCDEBUG
-  const G4OpBoundaryProcess* opBoundary
-    = dynamic_cast<const G4OpBoundaryProcess*>(process);
-    
-  if (!opBoundary) {
+  if ( ! fOpBoundaryProcess ) {
     TG4Globals::Exception(
-      "TG4PhysicsManager", "GetOpBoundaryStatus", "Wrong process type.");
+      "TG4PhysicsManager", "GetOpBoundaryStatus", 
+      "OpBoundary process is not defined.");
     return kPNoProcess;
   }
-#else
-  const G4OpBoundaryProcess* opBoundary = (const G4OpBoundaryProcess*)process;
-#endif  
 
-  switch (opBoundary->GetStatus()) {
+  switch (fOpBoundaryProcess->GetStatus()) {
     // reflection
     case FresnelReflection: 
     case TotalInternalReflection:
