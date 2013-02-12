@@ -59,7 +59,7 @@ void loadg4libs()
   for (Int_t i=libs->GetEntriesFast()-1; i>0; i-- ) {
     TString lib = ((TObjString*)libs->At(i))->GetString();
     lib.ReplaceAll("-lG", "libG");
-    cout << "Loading |" << lib.Data() << "|" << endl; 
+    //cout << "Loading |" << lib.Data() << "|" << endl; 
     gSystem->Load(lib.Data());
   } 
   
