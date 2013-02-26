@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/04   10 January 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -329,13 +329,13 @@ GetShape: Volume path /EXPH_1/CALB_1/LAYB_100 not found
 GetMaterial: Volume name XYZ not found
 GetMedium: Volume name XYZ not found
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    48118223     2DE39CF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   837799519    31EFCE5F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    48141261    48118223
-                                        HEX     2DE93CD     2DE39CF
-                                        HEX        555A           0
-                              relative adrs       21850           0
+          with Store/Table at absolute adrs   837822453   837799519
+                                        HEX    31F027F5    31EFCE5F
+                                        HEX        59FA           0
+                              relative adrs       23034           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 

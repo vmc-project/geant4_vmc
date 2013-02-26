@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/04   10 January 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -17,13 +17,13 @@ Enclose multiple statements between { }.
 
 Processing test_E03_1.C("g4ConfigOld.C", kTRUE)...
 Loading Geant4 libraries (using geant4-config) ...
-31
+32
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-09-06-ref-00    (30-November-2012)
+ Geant4 version Name: geant4-09-06-patch-01    (1-February-2013)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -590,37 +590,37 @@ AntiNeutronInelastic  Crs sctns:              AntiAGlauber: Emin(GeV)=    0  Ema
 
 ---> Begin of event: 1
    Absorber: total energy (MeV):  907.41       total track length (cm):  61.6788
-   Gap:      total energy (MeV):  39.723       total track length (cm):  19.6631
+   Gap:      total energy (MeV): 39.7228       total track length (cm):   19.663
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV): 928.376       total track length (cm):  63.2176
-   Gap:      total energy (MeV): 22.3193       total track length (cm):  10.4785
+   Absorber: total energy (MeV): 927.331       total track length (cm):  63.4043
+   Gap:      total energy (MeV): 20.8088       total track length (cm):  10.3101
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 916.944       total track length (cm):  61.8146
-   Gap:      total energy (MeV): 32.8736       total track length (cm):  16.1583
+   Absorber: total energy (MeV): 918.072       total track length (cm):  62.4987
+   Gap:      total energy (MeV): 27.1258       total track length (cm):  13.1336
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 921.865       total track length (cm):   62.533
-   Gap:      total energy (MeV): 18.6045       total track length (cm):  8.65587
+   Absorber: total energy (MeV): 875.274       total track length (cm):  59.4537
+   Gap:      total energy (MeV): 40.7049       total track length (cm):  20.4427
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 920.442       total track length (cm):  62.8691
-   Gap:      total energy (MeV): 38.9846       total track length (cm):  19.6133
-Time of this run:   User=0.2s Real=0.2s Sys=0s
+   Absorber: total energy (MeV): 930.741       total track length (cm):  63.4413
+   Gap:      total energy (MeV): 39.1503       total track length (cm):  18.3108
+Time of this run:   User=0.17s Real=0.17s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/04   10 January 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -628,14 +628,14 @@ Enclose multiple statements between { }.
 
 Processing test_E03_2.C("g4ConfigOld.C", kTRUE)...
 Loading Geant4 libraries (using geant4-config) ...
-31
+32
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-09-06-ref-00    (30-November-2012)
+ Geant4 version Name: geant4-09-06-patch-01    (1-February-2013)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -1761,14 +1761,14 @@ WARNING - Attempt to delete the region store while geometry closed !
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/04   10 January 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -1776,14 +1776,14 @@ Enclose multiple statements between { }.
 
 Processing test_E03_3.C("g4ConfigOld.C", kTRUE)...
 Loading Geant4 libraries (using geant4-config) ...
-31
+32
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
 --- Init MC 
 
 *************************************************************
- Geant4 version Name: geant4-09-06-ref-00    (30-November-2012)
+ Geant4 version Name: geant4-09-06-patch-01    (1-February-2013)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -2424,14 +2424,14 @@ Number of events processed: 1
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/04   10 January 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -2439,13 +2439,13 @@ Enclose multiple statements between { }.
 
 Processing test_E03_4.C("g4ConfigOld.C", kTRUE)...
 Loading Geant4 libraries (using geant4-config) ...
-31
+32
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-09-06-ref-00    (30-November-2012)
+ Geant4 version Name: geant4-09-06-patch-01    (1-February-2013)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -3031,7 +3031,7 @@ AntiNeutronInelastic  Crs sctns:              AntiAGlauber: Emin(GeV)=    0  Ema
       Current track pi0  is a decay product of Parent ID = 0
       Current track pi0  is a decay product of Parent ID = 0
 
-   Absorber: total energy (MeV):    1419       total track length (cm):  97.0077
-   Gap:      total energy (MeV): 59.3822       total track length (cm):   29.022
-Time of this run:   User=0.06s Real=0.06s Sys=0s
+   Absorber: total energy (MeV): 1337.43       total track length (cm):  92.2795
+   Gap:      total energy (MeV): 71.0669       total track length (cm):  35.4209
+Time of this run:   User=0.06s Real=0.05s Sys=0s
 Number of events processed: 1

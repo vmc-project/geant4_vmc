@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/04   10 January 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -17,7 +17,7 @@ Enclose multiple statements between { }.
 
 Processing test_E03_1.C("g4tgeoConfig.C", kFALSE)...
 Loading Geant4 libraries (using geant4-config) ...
-31
+32
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
@@ -41,7 +41,7 @@ Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered t
 ------------------------------------------------------------
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-09-06-ref-00    (30-November-2012)
+ Geant4 version Name: geant4-09-06-patch-01    (1-February-2013)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -419,20 +419,20 @@ hPairProd:   for  pi-    SubType= 4
 ---> Begin of event: 5
    Absorber: total energy (MeV): 916.463       total track length (cm):  63.3565
    Gap:      total energy (MeV): 32.0276       total track length (cm):  15.5571
-Time of this run:   User=0.29s Real=0.3s Sys=0s
+Time of this run:   User=0.17s Real=0.17s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/04   10 January 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -440,7 +440,7 @@ Enclose multiple statements between { }.
 
 Processing test_E03_2.C("g4tgeoConfig.C", kFALSE)...
 Loading Geant4 libraries (using geant4-config) ...
-31
+32
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
@@ -466,7 +466,7 @@ Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered t
 ------------------------------------------------------------
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-09-06-ref-00    (30-November-2012)
+ Geant4 version Name: geant4-09-06-patch-01    (1-February-2013)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -1475,7 +1475,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  48.792       total track length (cm):    3.412
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.01s Real=0.01s Sys=0.01s
+Time of this run:   User=0.01s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
 WARNING - Attempt to delete the physical volume store while geometry closed !
@@ -1486,14 +1486,14 @@ WARNING - Attempt to delete the region store while geometry closed !
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/04   10 January 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -1501,7 +1501,7 @@ Enclose multiple statements between { }.
 
 Processing test_E03_3.C("g4tgeoConfig.C", kFALSE)...
 Loading Geant4 libraries (using geant4-config) ...
-31
+32
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
@@ -1527,7 +1527,7 @@ Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered t
 ------------------------------------------------------------
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-09-06-ref-00    (30-November-2012)
+ Geant4 version Name: geant4-09-06-patch-01    (1-February-2013)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -1956,21 +1956,21 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.145
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0s Real=0.01s Sys=0s
+Time of this run:   User=0.01s Real=0s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/04   10 January 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -1978,7 +1978,7 @@ Enclose multiple statements between { }.
 
 Processing test_E03_4.C("g4tgeoConfig.C", kFALSE)...
 Loading Geant4 libraries (using geant4-config) ...
-31
+32
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
@@ -2002,7 +2002,7 @@ Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered t
 ------------------------------------------------------------
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-09-06-ref-00    (30-November-2012)
+ Geant4 version Name: geant4-09-06-patch-01    (1-February-2013)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -2382,7 +2382,7 @@ hPairProd:   for  pi-    SubType= 4
       Current track pi0  is a decay product of Parent ID = 0
       Current track pi0  is a decay product of Parent ID = 0
 
-   Absorber: total energy (MeV):    1670       total track length (cm):  114.586
-   Gap:      total energy (MeV): 86.2631       total track length (cm):  43.6711
-Time of this run:   User=0.08s Real=0.08s Sys=0s
+   Absorber: total energy (MeV): 1694.34       total track length (cm):  116.656
+   Gap:      total energy (MeV): 75.3024       total track length (cm):  37.7001
+Time of this run:   User=0.06s Real=0.06s Sys=0s
 Number of events processed: 1

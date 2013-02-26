@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/04   10 January 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -17,7 +17,7 @@ Enclose multiple statements between { }.
 
 Processing test_E02.C("g4tgeoConfigOld.C", kTRUE)...
 Loading Geant4 libraries (using geant4-config) ...
-31
+32
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
@@ -39,7 +39,7 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-09-06-ref-00    (30-November-2012)
+ Geant4 version Name: geant4-09-06-patch-01    (1-February-2013)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -395,147 +395,196 @@ hPairProd:   for  pi-    SubType= 4
 >>> Event 0
 
 -------->Hits Collection: in this event they are 5 hits in the tracker chambers: 
-  trackID: 0  chamberNb: 0  energy deposit (keV): 87.8191  position (cm): (0.400025, 8.48986, -140)
-  trackID: 0  chamberNb: 1  energy deposit (keV): 118.865  position (cm): (0.700276, 12.7853, -60)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 87.1521  position (cm): (1.00588, 17.095, 20)
-  trackID: 0  chamberNb: 3  energy deposit (keV): 125.408  position (cm): (1.30262, 21.164, 100)
-  trackID: 0  chamberNb: 4  energy deposit (keV): 81.9764  position (cm): (1.64396, 25.4456, 180)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 89.9415  position (cm): (0.937594, 17.1224, -140)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 125.911  position (cm): (1.69036, 41.617, -60)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 99.3272  position (cm): (2.48613, 78.731, 20)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 168.436  position (cm): (3.34139, 131.242, 100)
+  trackID: 0  chamberNb: 4  energy deposit (keV): 79.2779  position (cm): (4.27399, 196.8, 172.473)
 Ex02MCStack Info  
-Total number of particles:   2
+Total number of particles:   5
 Number of primary particles: 1
 Track ID:  0
 TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
 Primary    
-Number of daughters: 1
+Number of daughters: 4
 
 Track ID:  1
-TParticle: e-             p: 0.000045 0.000225 0.000050 Vertex: 1.219241e+00 2.053519e+01 7.759127e+01     0    -1
+TParticle: e-             p: -0.000138 -0.000037 0.000087 Vertex: 4.530795e+00 2.151570e+02 1.891523e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  2
+TParticle: e-             p: 0.000158 -0.000041 0.000093 Vertex: 4.354202e+00 2.025087e+02 1.778028e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  3
+TParticle: e-             p: -0.000128 -0.000061 0.000082 Vertex: 3.349189e+00 1.317460e+02 1.006527e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  4
+TParticle: e-             p: 0.000335 -0.000063 0.000204 Vertex: 2.870400e+00 1.007420e+02 5.683077e+01     0    -1
 Mother:    proton  with ID: 0
 Number of daughters: 0
 
 >>> Event 1
 
--------->Hits Collection: in this event they are 15 hits in the tracker chambers: 
-  trackID: 0  chamberNb: 0  energy deposit (keV): 104.016  position (cm): (0.0175503, 5.83285, -140)
-  trackID: 0  chamberNb: 1  energy deposit (keV): 118.852  position (cm): (0.0252441, 7.23805, -60)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 73.603  position (cm): (0.00594224, 8.68158, 20)
-  trackID: 0  chamberNb: 3  energy deposit (keV): 95.5873  position (cm): (-0.0557754, 11.3899, 100)
-  trackID: 0  chamberNb: 4  energy deposit (keV): 57.6789  position (cm): (-0.109194, 13.963, 171.699)
-  trackID: 0  chamberNb: 4  energy deposit (keV): 38.3254  position (cm): (-0.111133, 13.9668, 180)
-  trackID: 2  chamberNb: 4  energy deposit (keV): 8.78025  position (cm): (-0.325918, 14.72, 171.863)
-  trackID: 2  chamberNb: 4  energy deposit (keV): 9.65968  position (cm): (-0.965566, 14.6213, 172.43)
-  trackID: 2  chamberNb: 4  energy deposit (keV): 14.5708  position (cm): (-1.29164, 14.9291, 172.512)
-  trackID: 2  chamberNb: 4  energy deposit (keV): 12.8837  position (cm): (-1.00641, 15.13, 172.206)
-  trackID: 2  chamberNb: 4  energy deposit (keV): 10.7096  position (cm): (-0.865308, 14.9893, 172.419)
-  trackID: 2  chamberNb: 4  energy deposit (keV): 4.26944  position (cm): (-1.07895, 15.0103, 172.275)
-  trackID: 2  chamberNb: 4  energy deposit (keV): 5.60238  position (cm): (-0.980406, 15.1594, 172.396)
-  trackID: 2  chamberNb: 4  energy deposit (keV): 14.9102  position (cm): (-0.875563, 15.0833, 172.48)
-  trackID: 2  chamberNb: 4  energy deposit (keV): 6.41187  position (cm): (-0.876055, 15.0777, 172.476)
+-------->Hits Collection: in this event they are 39 hits in the tracker chambers: 
+  trackID: 0  chamberNb: 0  energy deposit (keV): 10.8551  position (cm): (0.206099, 15.3814, -157.249)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 86.9478  position (cm): (0.244915, 19.6182, -140)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 9.16121  position (cm): (0.37878, 38.9279, -78.9004)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 77.3632  position (cm): (0.427401, 46.3308, -60)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 122.363  position (cm): (0.663593, 86.0327, 20)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 155.986  position (cm): (0.953105, 141.964, 100)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 6.06086  position (cm): (0.590777, 38.741, -78.8182)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 2.91167  position (cm): (0.760969, 38.7001, -78.753)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 0.89566  position (cm): (0.872344, 38.7309, -78.7763)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 1.78405  position (cm): (0.959593, 38.6528, -78.7962)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 2.21377  position (cm): (1.04397, 38.7441, -78.8089)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 1.42812  position (cm): (0.986115, 38.7601, -78.7596)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 1.59611  position (cm): (1.01607, 38.6995, -78.7933)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 2.5441  position (cm): (1.05999, 38.6529, -78.8748)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 0.651885  position (cm): (1.10319, 38.6209, -78.8337)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 1.00448  position (cm): (1.14334, 38.5818, -78.8841)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 0.673011  position (cm): (1.17171, 38.5968, -78.8514)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 2.91773  position (cm): (1.23084, 38.5945, -78.8509)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 1.09309  position (cm): (1.27527, 38.6118, -78.8397)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 8.06393  position (cm): (1.29674, 38.6235, -78.7987)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 2.83705  position (cm): (1.32796, 38.6326, -78.7371)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 2.74541  position (cm): (1.355, 38.6711, -78.8006)
+  trackID: 4  chamberNb: 1  energy deposit (keV): 12.3105  position (cm): (1.35737, 38.6647, -78.8166)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 12.0555  position (cm): (0.0294088, 15.2694, -156.907)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 15.248  position (cm): (0.471474, 15.2564, -157.096)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 15.5103  position (cm): (0.793472, 15.8612, -156.48)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 12.8279  position (cm): (1.168, 16.1229, -156.898)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 8.43985  position (cm): (0.708741, 15.9682, -156.777)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 7.7648  position (cm): (1.03829, 16.1478, -157.012)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 12.945  position (cm): (0.539913, 15.7686, -156.912)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 6.51583  position (cm): (0.281023, 15.4312, -157.023)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 3.51688  position (cm): (0.14063, 15.5101, -156.916)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 5.49034  position (cm): (0.357501, 15.6488, -156.783)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 8.27345  position (cm): (0.0357599, 15.4391, -156.809)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 4.85321  position (cm): (-0.0978724, 15.6298, -156.813)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 4.90723  position (cm): (-0.220545, 15.8035, -156.672)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 4.38696  position (cm): (0.0105947, 15.8241, -156.754)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 10.7081  position (cm): (0.100524, 15.9754, -156.669)
+  trackID: 6  chamberNb: 0  energy deposit (keV): 11.667  position (cm): (0.11429, 15.9669, -156.666)
 Ex02MCStack Info  
 Total number of particles:   7
 Number of primary particles: 1
 Track ID:  0
 TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
 Primary    
-Number of daughters: 5
+Number of daughters: 6
 
 Track ID:  1
-TParticle: e-             p: 0.000147 -0.000072 0.000027 Vertex: -1.194781e-01 1.467213e+01 2.138617e+02     0    -1
+TParticle: e-             p: -0.000184 0.000054 -0.000011 Vertex: 1.327135e+00 2.516115e+02 2.048084e+02     0    -1
 Mother:    proton  with ID: 0
 Number of daughters: 0
 
 Track ID:  2
-TParticle: e-             p: -0.000296 0.000039 0.000091 Vertex: -1.091936e-01 1.396296e+01 1.716990e+02     0    -1
+TParticle: e-             p: -0.000055 -0.000080 0.000144 Vertex: 1.252469e+00 2.294400e+02 1.874590e+02     0    -1
 Mother:    proton  with ID: 0
 Number of daughters: 0
 
 Track ID:  3
-TParticle: e-             p: 0.000153 0.000059 0.000027 Vertex: 2.026094e-02 7.759699e+00 -3.180819e+01     0    -1
+TParticle: e-             p: -0.000126 0.000056 -0.000028 Vertex: 1.093386e+00 1.833700e+02 1.457121e+02     0    -1
 Mother:    proton  with ID: 0
 Number of daughters: 0
 
 Track ID:  4
-TParticle: e-             p: 0.000454 0.000293 0.000302 Vertex: 2.219628e-02 6.501729e+00 -1.082033e+02     0    -1
+TParticle: e-             p: 0.000223 -0.000033 0.000069 Vertex: 3.787799e-01 3.892786e+01 -7.890043e+01     0    -1
 Mother:    proton  with ID: 0
-Number of daughters: 1
+Number of daughters: 0
 
 Track ID:  5
-TParticle: e-             p: -0.000000 0.000138 -0.000042 Vertex: 4.328574e-01 6.452315e+00 -1.082609e+02     4    -1
-Mother:    e-  with ID: 4
+TParticle: e-             p: -0.000090 0.000420 0.000042 Vertex: 2.960865e-01 2.681928e+01 -1.145903e+02     0    -1
+Mother:    proton  with ID: 0
 Number of daughters: 0
 
 Track ID:  6
-TParticle: e-             p: -0.000300 -0.000074 0.000097 Vertex: -1.722488e-03 4.692851e-01 -2.664798e+02     0    -1
+TParticle: e-             p: -0.000073 -0.000333 0.000230 Vertex: 2.060994e-01 1.538142e+01 -1.572491e+02     0    -1
 Mother:    proton  with ID: 0
 Number of daughters: 0
 
 >>> Event 2
 
 -------->Hits Collection: in this event they are 5 hits in the tracker chambers: 
-  trackID: 0  chamberNb: 0  energy deposit (keV): 87.0316  position (cm): (-1.23364, 9.04759, -140)
-  trackID: 0  chamberNb: 1  energy deposit (keV): 98.9174  position (cm): (-2.25088, 13.7644, -60)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 101.073  position (cm): (-3.22272, 18.1178, 20)
-  trackID: 0  chamberNb: 3  energy deposit (keV): 107.606  position (cm): (-4.24895, 22.8455, 100)
-  trackID: 0  chamberNb: 4  energy deposit (keV): 96.0486  position (cm): (-5.32249, 27.5707, 180)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 93.6618  position (cm): (-0.246951, 17.8829, -140)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 108.758  position (cm): (-0.463361, 43.0621, -60)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 118.952  position (cm): (-0.669585, 80.9812, 20)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 150.524  position (cm): (-0.902938, 134.475, 100)
+  trackID: 0  chamberNb: 4  energy deposit (keV): 68.4173  position (cm): (-1.15644, 196.8, 168.314)
 Ex02MCStack Info  
-Total number of particles:   2
+Total number of particles:   3
 Number of primary particles: 1
 Track ID:  0
 TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
 Primary    
-Number of daughters: 1
+Number of daughters: 2
 
 Track ID:  1
-TParticle: e-             p: 0.000206 0.000007 0.000046 Vertex: -2.926202e+00 1.731230e+01 -4.360569e+00     0    -1
+TParticle: e-             p: -0.000006 -0.000067 0.000122 Vertex: -1.361006e+00 2.520917e+02 2.148526e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  2
+TParticle: e-             p: 0.000161 -0.000072 0.000167 Vertex: -1.209916e+00 2.109069e+02 1.812482e+02     0    -1
 Mother:    proton  with ID: 0
 Number of daughters: 0
 
 >>> Event 3
 
 -------->Hits Collection: in this event they are 5 hits in the tracker chambers: 
-  trackID: 0  chamberNb: 0  energy deposit (keV): 100.357  position (cm): (1.26069, 4.52352, -140)
-  trackID: 0  chamberNb: 1  energy deposit (keV): 80.1574  position (cm): (2.27506, 7.48257, -60)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 118.258  position (cm): (3.28115, 10.4632, 20)
-  trackID: 0  chamberNb: 3  energy deposit (keV): 90.0162  position (cm): (4.27238, 12.5059, 100)
-  trackID: 0  chamberNb: 4  energy deposit (keV): 105.639  position (cm): (5.24585, 14.1815, 180)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 135.377  position (cm): (-0.501593, 18.557, -140)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 92.7356  position (cm): (-0.913104, 44.3438, -60)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 128.326  position (cm): (-1.31827, 82.9664, 20)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 118.493  position (cm): (-1.76731, 137.484, 100)
+  trackID: 0  chamberNb: 4  energy deposit (keV): 19.6233  position (cm): (-2.20538, 196.8, 164.241)
 Ex02MCStack Info  
-Total number of particles:   4
+Total number of particles:   3
 Number of primary particles: 1
 Track ID:  0
 TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
 Primary    
-Number of daughters: 3
+Number of daughters: 2
 
 Track ID:  1
-TParticle: e-             p: 0.000122 0.000274 0.000090 Vertex: 4.539211e+00 1.283392e+01 1.217822e+02     0    -1
+TParticle: e-             p: 0.000104 0.000106 -0.000063 Vertex: -1.990104e+00 1.677553e+02 1.350251e+02     0    -1
 Mother:    proton  with ID: 0
 Number of daughters: 0
 
 Track ID:  2
-TParticle: e-             p: 0.000091 0.000372 0.000149 Vertex: 3.434175e+00 1.055230e+01 3.231850e+01     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
-Track ID:  3
-TParticle: e-             p: 0.000268 0.000028 0.000070 Vertex: 6.647610e-01 3.755050e+00 -1.871415e+02     0    -1
+TParticle: e-             p: 0.000007 -0.000227 0.000132 Vertex: -5.889993e-01 2.311648e+01 -1.227848e+02     0    -1
 Mother:    proton  with ID: 0
 Number of daughters: 0
 
 >>> Event 4
 
 -------->Hits Collection: in this event they are 5 hits in the tracker chambers: 
-  trackID: 0  chamberNb: 0  energy deposit (keV): 115.999  position (cm): (0.111181, 8.48572, -140)
-  trackID: 0  chamberNb: 1  energy deposit (keV): 93.5142  position (cm): (0.211081, 12.7773, -60)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 116.204  position (cm): (0.303699, 17.0379, 20)
-  trackID: 0  chamberNb: 3  energy deposit (keV): 104.588  position (cm): (0.384669, 21.2817, 100)
-  trackID: 0  chamberNb: 4  energy deposit (keV): 93.126  position (cm): (0.387727, 25.533, 180)
+  trackID: 0  chamberNb: 0  energy deposit (keV): 102.833  position (cm): (-1.02174, 18.2866, -140)
+  trackID: 0  chamberNb: 1  energy deposit (keV): 111.453  position (cm): (-1.8537, 43.7799, -60)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 141.278  position (cm): (-2.74289, 82.0641, 20)
+  trackID: 0  chamberNb: 3  energy deposit (keV): 134.244  position (cm): (-3.74554, 136.178, 100)
+  trackID: 0  chamberNb: 4  energy deposit (keV): 39.8232  position (cm): (-4.65563, 196.8, 165.917)
 Ex02MCStack Info  
-Total number of particles:   1
+Total number of particles:   3
 Number of primary particles: 1
 Track ID:  0
 TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
 Primary    
+Number of daughters: 2
+
+Track ID:  1
+TParticle: e-             p: 0.000174 -0.000035 0.000138 Vertex: -5.585043e+00 2.680702e+02 2.237685e+02     0    -1
+Mother:    proton  with ID: 0
 Number of daughters: 0
 
-Time of this run:   User=0.02s Real=0.02s Sys=0s
+Track ID:  2
+TParticle: e-             p: 0.000035 0.000197 -0.000108 Vertex: -4.084045e+00 1.576483e+02 1.255620e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Time of this run:   User=0.02s Real=0.01s Sys=0s
 Number of events processed: 5

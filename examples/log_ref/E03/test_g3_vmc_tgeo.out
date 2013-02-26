@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/04   10 January 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -60,13 +60,13 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV):  948.48       total track length (cm):  43.7742
    Gap:      total energy (MeV): 24.1166       total track length (cm):  10.2516
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr  1050782159    3EA1A9CF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   721403487    2AFFBE5F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs  1050805197  1050782159
-                                        HEX    3EA203CD    3EA1A9CF
-                                        HEX        555A           0
-                              relative adrs       21850           0
+          with Store/Table at absolute adrs   721426421   721403487
+                                        HEX    2B0017F5    2AFFBE5F
+                                        HEX        59FA           0
+                              relative adrs       23034           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -104,14 +104,14 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/04   10 January 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -486,13 +486,13 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   3.967       total track length (cm):    2.241
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   367898063    15EDADCF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   321189471    1324F65F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   367921101   367898063
-                                        HEX    15EE07CD    15EDADCF
-                                        HEX        555A           0
-                              relative adrs       21850           0
+          with Store/Table at absolute adrs   321212405   321189471
+                                        HEX    13254FF5    1324F65F
+                                        HEX        59FA           0
+                              relative adrs       23034           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -516,14 +516,14 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/04   10 January 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -634,13 +634,13 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   899935695    35A3EDCF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   587143775    22FF1A5F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   899958733   899935695
-                                        HEX    35A447CD    35A3EDCF
-                                        HEX        555A           0
-                              relative adrs       21850           0
+          with Store/Table at absolute adrs   587166709   587143775
+                                        HEX    22FF73F5    22FF1A5F
+                                        HEX        59FA           0
+                              relative adrs       23034           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -664,14 +664,14 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/04   10 January 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -726,13 +726,13 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 1483.71       total track length (cm):   70.756
    Gap:      total energy (MeV): 76.3272       total track length (cm):  36.8609
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   720767439    2AF609CF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   876411487    343CFA5F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   720790477   720767439
-                                        HEX    2AF663CD    2AF609CF
-                                        HEX        555A           0
-                              relative adrs       21850           0
+          with Store/Table at absolute adrs   876434421   876411487
+                                        HEX    343D53F5    343CFA5F
+                                        HEX        59FA           0
+                              relative adrs       23034           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
