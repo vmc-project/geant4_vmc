@@ -11,6 +11,26 @@ $Id$
      
 Tags (history):
 ===============
+  26/02/2013
+  v2-13d:
+    Patch release, including following fixes:
+    Geant4 VMC:
+    - Fix in TVirtualMC::GetSecondary implementation: 
+      get track global time instead of the local one
+    - Fixed filling optical photon status in TVirtualMC::StepProcess()
+    - Fixed setting of PAI model to selected particles in TG4EmModelPhysics
+      and setting TG4EmModelPhysics verbose level 
+    - Fixed units in TG4RegionsManager::PrintRegions()
+    G4Root:
+    - Added TG4RootNavigator::GetGlobalExitNormal(), required with Geant4 9.6.
+      and 9.5.p02  (A. Gheata)
+    Examples:
+    - Fixed test_suite.sh 
+
+    Tested with Geant4 9.5.p02 (with embedded CLHEP 2.1.1.0), 
+      Root 5.32/00 + patch in root/etc from rev.42474 and Root 5.34/04, 
+      VGM 3.05
+
   02/05/2012:
   v2-13c:
     Patch release, including a fix in TG4TrackManager:
