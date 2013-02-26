@@ -21,6 +21,7 @@
 #include "TG4G3PhysicsManager.h"
 #include "TG4GeometryServices.h"
 #include "TG4G3CutVector.h"
+#include "TG4G3Units.h"
 #include "TG4Limits.h"
 #include "TG4Globals.h"
 
@@ -729,10 +730,10 @@ void TG4RegionsManager::PrintRegions() const
        << std::setw(30) << matName << "  "
        << std::scientific << rangeGam << "  "
        << std::scientific << rangeEle << "  "
-       << std::scientific << cutGam << "  "
-       << std::scientific << cutEle << "  "
-       << std::scientific << cutGamLimits << "  "
-       << std::scientific << cutEleLimits << G4endl;
+       << std::scientific << cutGam / TG4G3Units::Energy() << "  "
+       << std::scientific << cutEle / TG4G3Units::Energy() << "  "
+       << std::scientific << cutGamLimits / TG4G3Units::Energy() << "  "
+       << std::scientific << cutEleLimits / TG4G3Units::Energy() << G4endl;
   }
 }             
          

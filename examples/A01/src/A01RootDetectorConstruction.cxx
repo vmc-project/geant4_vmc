@@ -20,6 +20,7 @@
 #include <Riostream.h>
 #include <TGeoManager.h>
 #include <TVirtualMC.h>
+#include <TList.h>
 
 #include "A01RootDetectorConstruction.h"
 
@@ -54,6 +55,16 @@ void A01RootDetectorConstruction::ConstructGeometry()
 
   TGeoManager::Import(fGeometryFileName.Data());
     
+  // Update media parameters (needed for Geant3)
+  TList* media = gGeoManager->GetListOfMedia();
+  TIter next(media);
+  while (TObject *obj = next()) {
+    TGeoMedium* medium = (TGeoMedium*)obj;    
+    medium->SetParam(1,2);    // ifield - User defined magnetic field
+    medium->SetParam(2,10);   // fieldm - Maximum field value (in kiloGauss)
+    medium->SetParam(6,.001); // epsil - Tracking precision
+  }
+
   // notify VMC about Root geometry
   gMC->SetRootGeometry();
 }

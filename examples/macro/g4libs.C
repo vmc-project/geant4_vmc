@@ -58,13 +58,10 @@ void loadg4libs()
   cout << libs->GetEntriesFast() << endl;
   for (Int_t i=libs->GetEntriesFast()-1; i>0; i-- ) {
     TString lib = ((TObjString*)libs->At(i))->GetString();
-    lib.ReplaceAll("-lG4", "libG4");
+    lib.ReplaceAll("-lG", "libG");
     //cout << "Loading |" << lib.Data() << "|" << endl; 
     gSystem->Load(lib.Data());
   } 
-  
-  //cout << "Loading |" << "libG3toG4" << "|" << endl; 
-  gSystem->Load("libG3toG4");  
   
   gSystem->SetFPEMask(0); 
 }   
