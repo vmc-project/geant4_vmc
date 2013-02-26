@@ -246,7 +246,9 @@ void TG4EmModelPhysics::AddModels()
       
       // skip particles which are not in selection
       if ( particles != "all" &&
-           particles.find(particle->GetParticleName()) != std::string::npos ) continue;
+           particles.find(particle->GetParticleName()) == std::string::npos ) {
+           continue;
+      }     
            
       G4ProcessVector* processVector 
         = particle->GetProcessManager()->GetProcessList();
