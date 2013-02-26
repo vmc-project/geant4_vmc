@@ -11,6 +11,24 @@ $Id$
      
 Tags (history):
 ===============
+  26/02/2013
+  v2-14a:
+    Patch release, including following fixes:
+    Geant4 VMC:
+    - Fixed filling optical photon status in TVirtualMC::StepProcess()
+    - Fixed setting of PAI model to selected particles in TG4EmModelPhysics
+      and setting TG4EmModelPhysics verbose level 
+    - Fixed units in TG4RegionsManager::PrintRegions()
+    
+    Examples:
+    - Fix in loading Geant4 libraries.
+    - In A01: added setting media parameters (needed for correct tracking
+      in field with Geant3)
+    - Fixed test_suite.sh 
+
+    Tested with Geant4 9.6.p01 (with embedded CLHEP 2.1.3.1), 
+      Root 5.34/04, VGM 3.06
+
   14/12/2012
   v2-14:
     Migration to Geant4 9.6
