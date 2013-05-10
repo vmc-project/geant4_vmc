@@ -54,8 +54,8 @@ TG4RegionsManager::TG4RegionsManager()
   : TG4Verbose("regionsManager"),
     fMessenger(this),
     fRangePrecision(fgkDefaultRangePrecision),
-    fIsCheck(false)
-    
+    fIsCheck(false),
+    fIsPrint(false)    
 { 
 /// Default constructor
 
