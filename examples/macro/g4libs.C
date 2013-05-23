@@ -58,9 +58,10 @@ void loadg4libs()
   cout << libs->GetEntriesFast() << endl;
   for (Int_t i=libs->GetEntriesFast()-1; i>0; i-- ) {
     TString lib = ((TObjString*)libs->At(i))->GetString();
-    lib.ReplaceAll("-lG", "libG");
+    lib.ReplaceAll("-l", "lib");
     //cout << "Loading |" << lib.Data() << "|" << endl; 
-    gSystem->Load(lib.Data());
+    if(lib.BeginsWith("lib"))
+      gSystem->Load(lib.Data());
   } 
   
   gSystem->SetFPEMask(0); 
@@ -136,4 +137,5 @@ void g4libs()
     cout << "Loading geant4vmc_gui library ... " << endl;
     gSystem->Load("libgeant4vmc_gui");
   }  
+
 }
