@@ -75,6 +75,7 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fMagneticField(0),
     fUserRegionConstruction(0),
     fIsUserMaxStep(false),
+    fIsMaxStepInLowDensityMaterials(false),
     fLimitDensity(fgDefaultLimitDensity),
     fMaxStepInLowDensityMaterials(fgDefaultMaxStep)
      
@@ -653,11 +654,12 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
       tg4Limits->SetMaxAllowedStep(DBL_MAX); 
 
     // limit max step for low density materials (< AIR)
-    if (lv->GetMaterial()->GetDensity() < fLimitDensity )
+    if ( fIsMaxStepInLowDensityMaterials &&
+         lv->GetMaterial()->GetDensity() < fLimitDensity )
       tg4Limits->SetMaxAllowedStep(fMaxStepInLowDensityMaterials);
       
     // set max step the default value
-     tg4Limits->SetDefaultMaxAllowedStep(); 
+    tg4Limits->SetDefaultMaxAllowedStep(); 
       
     // update controls in limits according to the setup 
     // in the passed vector

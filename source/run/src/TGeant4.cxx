@@ -805,7 +805,7 @@ void TGeant4::SetUserParameters(Bool_t isUserParameters)
   if ( ! CheckApplicationState("SetUserParameters", kInitGeometry, 
                                false, true) ) return;
 
-  fGeometryManager->SetUserMaxStep(isUserParameters);
+  fGeometryManager->SetIsUserMaxStep(isUserParameters);
 }  
 
 //_____________________________________________________________________________
