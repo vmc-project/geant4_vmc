@@ -115,7 +115,12 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
 
   fSetLimitDensityCmd 
     = new G4UIcmdWithADoubleAndUnit("/mcDet/setLimitDensity", this);
-  fSetLimitDensityCmd->SetGuidance("Set the material density limit for setting max allowed step");
+  fSetLimitDensityCmd
+    ->SetGuidance("Set the material density limit for setting max allowed step");
+  fSetLimitDensityCmd
+    ->SetGuidance("Note that setting step limits has to be activated first via:\n");
+  fSetLimitDensityCmd
+    ->SetGuidance("/mcDet/setIsMaxStepInLowDensityMaterials true");
   fSetLimitDensityCmd->SetParameterName("LimitDensity", false);
   fSetLimitDensityCmd->SetDefaultUnit("g/cm3");
   fSetLimitDensityCmd->SetUnitCategory("Volumic Mass");
@@ -125,11 +130,14 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
     = new G4UIcmdWithADoubleAndUnit("/mcDet/setMaxStepInLowDensityMaterials", this);
   fSetMaxStepInLowDensityMaterialsCmd
     ->SetGuidance("Set max allowed step value in materials with density below the density limit");
+  fSetMaxStepInLowDensityMaterialsCmd
+    ->SetGuidance("Note that setting step limits has to be activated first via:\n");
+  fSetMaxStepInLowDensityMaterialsCmd
+    ->SetGuidance("/mcDet/setIsMaxStepInLowDensityMaterials true");
   fSetMaxStepInLowDensityMaterialsCmd->SetParameterName("MaxStepInLowDensityMaterials", false);
   fSetMaxStepInLowDensityMaterialsCmd->SetDefaultUnit("mm");
   fSetMaxStepInLowDensityMaterialsCmd->SetUnitCategory("Length");
   fSetMaxStepInLowDensityMaterialsCmd->AvailableForStates(G4State_PreInit);
-  
 }
 
 //_____________________________________________________________________________

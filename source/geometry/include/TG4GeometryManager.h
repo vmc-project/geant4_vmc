@@ -121,16 +121,6 @@ inline TG4GeometryManager* TG4GeometryManager::Instance() {
   return fgInstance; 
 }
 
-inline void TG4GeometryManager::SetIsUserMaxStep(G4bool isUserMaxStep) {
-  /// (In)Activate the max step defined by user in tracking media
-  fIsUserMaxStep = isUserMaxStep;
-}  
-
-inline void TG4GeometryManager::SetIsMaxStepInLowDensityMaterials(G4bool isMaxStep) {
-  /// (In)Activate the max step defined in low density materials 
-  fIsMaxStepInLowDensityMaterials = isMaxStep;
-}  
-
 inline  TG4OpGeometryManager* TG4GeometryManager::GetOpManager() const {
   /// Return the optical geometry manager
   return fOpManager;

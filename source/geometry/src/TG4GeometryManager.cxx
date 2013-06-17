@@ -672,6 +672,31 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
 
 
 //_____________________________________________________________________________
+void TG4GeometryManager::SetIsUserMaxStep(G4bool isUserMaxStep) 
+{
+  /// (In)Activate the max step defined by user in tracking media
+  
+  if ( VerboseLevel() > 0 ) 
+    G4cout << "TG4GeometryManager::SetIsUserMaxStep: " 
+           << std::boolalpha << isUserMaxStep << G4endl; 
+
+  fIsUserMaxStep = isUserMaxStep;
+}  
+
+//_____________________________________________________________________________
+void TG4GeometryManager::SetIsMaxStepInLowDensityMaterials(G4bool isMaxStep) 
+{
+  /// (In)Activate the max step defined in low density materials 
+
+  if ( VerboseLevel() > 0 ) 
+    G4cout << "TG4GeometryManager::SetIsMaxStepInLowDensityMaterials: " 
+           << std::boolalpha << isMaxStep << G4endl; 
+
+  fIsMaxStepInLowDensityMaterials = isMaxStep;
+}  
+
+
+//_____________________________________________________________________________
 void TG4GeometryManager::SetUserRegionConstruction(
                             TG4VUserRegionConstruction* userRegionConstruction)
 {
