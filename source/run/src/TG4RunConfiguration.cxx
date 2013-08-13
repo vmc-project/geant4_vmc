@@ -20,7 +20,7 @@
 #include "TG4ComposedPhysicsList.h"
 #include "TG4EmPhysicsList.h"
 #include "TG4HadronPhysicsList.h"
-#include "TG4OpticalPhysicsList.h"
+#include "TG4ExtraPhysicsList.h"
 #include "TG4SpecialPhysicsList.h"
 #include "TG4PrimaryGeneratorAction.h"
 #include "TG4RunAction.h"
@@ -28,7 +28,6 @@
 #include "TG4TrackingAction.h"
 #include "TG4SteppingAction.h"
 #include "TG4SpecialStackingAction.h"
-#include "TG4LVTree.h"
 #include "TG4Globals.h"
 
 #include <G4UImessenger.hh>
@@ -79,8 +78,7 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
     
     if ( ! TG4EmPhysicsList::IsAvailableSelection(token) &&
          ! TG4HadronPhysicsList::IsAvailableSelection(token) &&
-         // ! G4PhysListFactory::IsReferencePhysList(token) &&
-         token != "optical" ) {
+         ! TG4ExtraPhysicsList::IsAvailableSelection(token) ) {
          
       TG4Globals::Exception(
         "TG4RunConfiguration", "TG4RunConfiguration",
@@ -88,14 +86,17 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
           + TG4Globals::Endl() +
         "Available options:"                                         
           + TG4Globals::Endl() +
-        "EM, EM+optical, Hadron, Hadron+optical"           
+        "EMonly, EMonly+Extra, Hadron_EM, Hadron_EM+Extra"           
           + TG4Globals::Endl() +
-        "  where EM     = " + TString(TG4EmPhysicsList::AvailableSelections())
+        "  where EMonly = " + TString(TG4EmPhysicsList::AvailableSelections())
           + TG4Globals::Endl() +
-        "        Hadron = " + TString(TG4HadronPhysicsList::AvailableSelections())
-        //"        Hadron = " + TString(G4PhysListFactory::AvailablePhysLists())
+        "        Hadron = " + TString(TG4HadronPhysicsList::AvailableHadronSelections())
           + TG4Globals::Endl() +
-        "  The EM selections are cumulative, while Hadron selections are exlusive."
+        "        EM = " + TString(TG4HadronPhysicsList::AvailableEMSelections())
+          + TG4Globals::Endl() +
+        "        Extra = " + TString(TG4ExtraPhysicsList::AvailableSelections())
+          + TG4Globals::Endl() +
+        "  The Extra selections are cumulative, while Hadron selections are exlusive."
           + TG4Globals::Endl());
     }
   }  
@@ -127,9 +128,6 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
       TString(TG4SpecialPhysicsList::AvailableSelections())); 
   } 
 
-  // instantiate LVtree browser
-  TG4LVTree::Instance();
-
 #ifdef USE_VGM
   // instantiate XML messengers
   fAGDDMessenger = new TG4VGMMessenger("AGDD", userGeometry.Data());
@@ -142,7 +140,6 @@ TG4RunConfiguration::~TG4RunConfiguration()
 {
 /// Destructor
 
-  delete TG4LVTree::Instance();
   delete fAGDDMessenger;
   delete fGDMLMessenger;
 }
@@ -173,33 +170,45 @@ G4VUserPhysicsList* TG4RunConfiguration::CreatePhysicsList()
   G4int itoken = 0;
   G4String emSelection;
   G4String hadronSelection;
-  G4String opticalSelection;
+  G4String extraSelection;
   G4String token;
-  do {
-    token = TG4Globals::GetToken(itoken++, fPhysicsListSelection);
-
-    if ( token.contains("em") ) {
-      emSelection += token;
-      emSelection += " ";
+  G4bool isValid = true;
+  while ( ( token = TG4Globals::GetToken(itoken++, fPhysicsListSelection) ) != "" )         
+  {
+    // The first token must be either EM or Hadronic physics list
+    if ( ( itoken == 1 ) ) {
+      if ( TG4EmPhysicsList::IsAvailableSelection(token) ) {
+        emSelection = token;
+      }
+      else if ( TG4HadronPhysicsList::IsAvailableSelection(token) ) {  
+        hadronSelection = token;
+      }
+      else {
+        isValid = false;
+      }  
     }
-    else if ( token == "optical" ) {
-      opticalSelection = token;
-    }
-    else if ( token != "" ) {
-      hadronSelection = token;
+    // The next tokens are Extra physics selections 
+    else  {
+      if ( TG4ExtraPhysicsList::IsAvailableSelection(token) ) {
+        extraSelection += token;
+        extraSelection += " ";
+      }
+      else {
+        isValid = false;
+      }  
     }
   }    
-  while ( token != "");         
-    
-  if ( emSelection != "" && hadronSelection != "" ) {
+      
+  if ( ! isValid ) {
     TG4Globals::Exception(
       "TG4RunConfiguration", "TG4RunConfiguration",
       "Physics list selection " + fPhysicsListSelection + " is not valid." 
         + TG4Globals::Endl() +
-      "The EM selections cannot be combined with Hadron selections."
+      "The EMonly selections cannot be combined with Hadron selections."
         + TG4Globals::Endl());
   }     
 
+    
   if ( emSelection != "" ) {
     G4cout << "Adding EMPhysicsList " << emSelection << G4endl;
     builder->AddPhysicsList(new TG4EmPhysicsList(emSelection));
@@ -210,11 +219,12 @@ G4VUserPhysicsList* TG4RunConfiguration::CreatePhysicsList()
     builder->AddPhysicsList(new TG4HadronPhysicsList(hadronSelection));
   }  
     
-  if ( opticalSelection != "" ) {
-    G4cout << "Adding OpticalPhysicsList " << G4endl;
-    builder->AddPhysicsList(new TG4OpticalPhysicsList());
+  if ( extraSelection != "" ) {
+    G4cout << "Adding ExtraPhysicsList " << extraSelection << G4endl;
+    builder->AddPhysicsList(new TG4ExtraPhysicsList(extraSelection));
   }  
     
+        
   // add option here
   G4cout << "Adding SpecialPhysicsList " << fSpecialProcessSelection.Data() << G4endl;
   builder->AddPhysicsList(new TG4SpecialPhysicsList(

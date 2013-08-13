@@ -15,36 +15,41 @@
 
 # Verbose levels
 #
-/mcVerbose/all 0
+/mcVerbose/all 1
+/mcVerbose/trackingAction 0
 /mcVerbose/geometryManager 1
-/mcVerbose/opticalPhysicsList 2
+/mcVerbose/extraPhysicsList 2
 
 # Optical processes verbose
 # 
-#/mcPhysics/selectOpProcess Scintillation
-#/mcPhysics/setOpProcessVerbose 2
-#/mcPhysics/selectOpProcess Cerenkov
-#/mcPhysics/setOpProcessVerbose 2
-#/mcPhysics/selectOpProcess Absorption
-#/mcPhysics/setOpProcessVerbose 2
-#/mcPhysics/selectOpProcess Rayleigh
-#/mcPhysics/setOpProcessVerbose 2
-#/mcPhysics/selectOpProcess Boundary
-#/mcPhysics/setOpProcessVerbose 2
+#/optics_engine/selectOpProcess Scintillation
+#/optics_engine/setOpProcessVerbose 2
+#/optics_engine/selectOpProcess Cerenkov
+#/optics_engine/setOpProcessVerbose 2
+#/optics_engine/selectOpProcess Absorption
+#/optics_engine/setOpProcessVerbose 2
+#/optics_engine/selectOpProcess Rayleigh
+#/optics_engine/setOpProcessVerbose 2
+#/optics_engine/selectOpProcess Boundary
+#/optics_engine/setOpProcessVerbose 2
+#/optics_engine/selectOpProcess OptWLS
+#/optics_engine/setOpProcessVerbose 2
+#/optics_engine/selectOpProcess OptMieHG
+#/optics_engine/setOpProcessVerbose 2
 
-# Inactivate scintillation
+# Inactivate scintillation, [WLS, MieHG]
 #
-/mcPhysics/selectOpProcess Scintillation
-/mcPhysics/setOpProcessActivation false
+/optics_engine/selectOpProcess Scintillation
+/optics_engine/setOpProcessUse false
+#/optics_engine/selectOpProcess OpWLS
+#/optics_engine/setOpProcessUse false
+#/optics_engine/selectOpProcess OpMieHG
+#/optics_engine/setOpProcessUse false
 
 # Set parameters for Cerenkov
 #
-/mcPhysics/setCerenkovMaxPhotons 20
-/mcPhysics/setCerenkovMaxBetaChange 0.1
-
-# Set optical surface model 
-#
-/mcPhysics/setOpticalSurfaceModel unified
+/optics_engine/setCerenkovMaxPhotons 20
+/optics_engine/setCerenkovMaxBetaChange 0.1
+/optics_engine/setTrackSecondariesFirst false
 
 #/tracking/verbose 1
-

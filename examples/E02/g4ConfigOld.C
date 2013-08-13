@@ -22,7 +22,7 @@ void Config()
 
   // RunConfiguration for Geant4
   TG4RunConfiguration* runConfiguration 
-    = new TG4RunConfiguration("geomVMCtoGeant4");
+    = new TG4RunConfiguration("geomVMCtoGeant4", "FTFP_BERT");
   
   // TGeant4
   TGeant4* geant4

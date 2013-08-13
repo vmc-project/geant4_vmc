@@ -25,7 +25,8 @@ class TG4StepManager;
 /// \ingroup digits_hits
 /// \brief Sensitive detector common to all logical volumes
 ///
-/// This class adds integer identifier data member to G4VSensitiveDetector.
+/// This class adds integer identifier data member to G4VSensitiveDetector
+/// and keeps the medium ID of the associated volume.  
 /// It also takes care of setting step status (kBoundary, kNormalStep)
 /// and passing G4Step to TG4StepManager and for calling a user application
 /// stepping function.

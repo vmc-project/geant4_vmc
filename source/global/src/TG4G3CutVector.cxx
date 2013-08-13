@@ -23,6 +23,7 @@
 #include <G4Track.hh>
 #include <G4ParticleDefinition.hh>
 #include <G4VProcess.hh>
+#include <G4SystemOfUnits.hh>
 
 #if __GNUC__ >= 3
 #include <sstream>

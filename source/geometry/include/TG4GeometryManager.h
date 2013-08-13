@@ -57,7 +57,8 @@ class TG4GeometryManager : public TG4Verbose
     void UpdateMagField();
     void SetUserLimits(const TG4G3CutVector& cuts,
                        const TG4G3ControlVector& controls) const;
-    void SetUserMaxStep(G4bool isUserMaxStep);
+    void SetIsUserMaxStep(G4bool isUserMaxStep);
+    void SetIsMaxStepInLowDensityMaterials(G4bool isMaxStep);
      
     // set user region construction
     void SetUserRegionConstruction(
@@ -100,8 +101,13 @@ class TG4GeometryManager : public TG4Verbose
     TG4FieldParameters    fFieldParameters;  ///< magnetic field parameters
     TG4MagneticField*     fMagneticField;    ///< magnetic field
     TG4VUserRegionConstruction* fUserRegionConstruction; ///< user region construction
-    G4bool                fIsUserMaxStep;    ///< option to activate max step defined           
-                                             ///  in tracking media
+
+    /// option to activate max step defined in tracking media
+    G4bool    fIsUserMaxStep; 
+
+    /// option to activate max step defined in low density materials           
+    G4bool    fIsMaxStepInLowDensityMaterials; 
+    
     /// material density limit for setting max allowed step 
     G4double  fLimitDensity;     
     
@@ -115,11 +121,6 @@ inline TG4GeometryManager* TG4GeometryManager::Instance() {
   /// Return this instance
   return fgInstance; 
 }
-
-inline void TG4GeometryManager::SetUserMaxStep(G4bool isUserMaxStep) {
-  /// (In)Activate the max step defined by user in tracking media
-  fIsUserMaxStep = isUserMaxStep;
-}  
 
 inline  TG4OpGeometryManager* TG4GeometryManager::GetOpManager() const {
   /// Return the optical geometry manager

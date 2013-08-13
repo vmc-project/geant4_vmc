@@ -37,6 +37,7 @@
 #include <G4VSolid.hh>
 #include <G4UserLimits.hh>
 #include <G4Track.hh>
+#include <G4SystemOfUnits.hh>
  
 /// \cond CLASSIMP
 ClassImp(TG4VolumesFrames)
@@ -76,7 +77,7 @@ TG4VolumesFrames::TG4VolumesFrames( TGTab* Tab, TG4MainFrame* ActionFrame)
    TGLayoutHints* lLayoutHints3 = 
              new TGLayoutHints(kLHintsTop | kLHintsLeft | kLHintsExpandX,
                            2, 2, 2, 2);   
-   Text_t* lComboLabelText = " Pick up a volume here ";
+   const Text_t* lComboLabelText = " Pick up a volume here ";
    fComboLabel = new TGLabel( fVolSubframe1, lComboLabelText);
    fVolSubframe1->AddFrame(fComboLabel, lLayoutHints3);
    fVolSubframe1->AddFrame(fVolumesCombo, fVolFrameLayout);
@@ -87,7 +88,7 @@ TG4VolumesFrames::TG4VolumesFrames( TGTab* Tab, TG4MainFrame* ActionFrame)
    
 // text labels with lvolumes properties 
 
-   Text_t* labelText[3]  = 
+   const Text_t* labelText[3]  = 
    {"Shape's Name", 
     "Material    ",
     "User Limits " }; 

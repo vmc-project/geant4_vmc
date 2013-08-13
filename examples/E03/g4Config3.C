@@ -29,7 +29,7 @@ void Config()
 
   // Run configuration with user defined regions
   Ex03RunConfiguration3* runConfiguration 
-    = new Ex03RunConfiguration3("geomRootToGeant4");
+    = new Ex03RunConfiguration3("geomRootToGeant4", "FTFP_BERT");
 
   // TGeant4
   TGeant4* geant4

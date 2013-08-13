@@ -46,6 +46,7 @@ class TG4EventAction : public G4UserEventAction,
     // set methods
     void SetDrawFlag(G4String drawFlag);
     void SetPrintMemory(G4bool printMemory);
+    void SetSaveRandomStatus(G4bool saveRandomStatus);
     
     // get methods
     G4String GetDrawFlag() const;
@@ -57,14 +58,14 @@ class TG4EventAction : public G4UserEventAction,
     /// Not implemented
     TG4EventAction& operator=(const TG4EventAction& right);
 
-    // methods 
-    void DisplayEvent(const G4Event* event) const;
-  
     // data members
     TG4EventActionMessenger   fMessenger; ///< messenger
-    TStopwatch                fTimer;     ///< timer
-    G4String                  fDrawFlag;  ///< control drawing of the event
-    G4bool                    fPrintMemory; ///< control for printing memory usage 
+    TStopwatch  fTimer;          ///< timer
+    G4String    fDrawFlag;       ///< control drawing of the event
+    G4bool      fPrintMemory;    ///< control for printing memory usage 
+
+    /// control for saving random engine status for each event
+    G4bool      fSaveRandomStatus; 
 };
 
 // inline methods
@@ -88,6 +89,11 @@ inline G4bool TG4EventAction::GetPrintMemory() const {
   /// Return the option for printing memory usage
   return fPrintMemory;
 }
+
+inline void TG4EventAction::SetSaveRandomStatus(G4bool saveRandomStatus) {
+  /// Set option for saving random engine status for each event
+  fSaveRandomStatus = saveRandomStatus;
+}  
 
 #endif //TG4_EVENT_ACTION_H
 

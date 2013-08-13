@@ -26,14 +26,8 @@
 /// \brief The standard EM physics list 
 ///
 /// The EM physics list is implemented as modular physics list
-/// with registered G4EmStandardPhysics, G4EmExtraPhysics and G4DecayPhysics 
+/// with registered G4EmStandardPhysics and G4DecayPhysics 
 /// builders,
-///
-/// The EM extra physics processes, not activated by default,
-/// can be switched on using the following Geant4 commands:
-/// - /physics_engine/tailor/SyncRadiation on
-/// - /physics_engine/tailor/GammaNuclear on
-/// - /physics_engine/tailor/MuonNuclear on
 ///
 /// \author I. Hrivnacova; IPN Orsay
 

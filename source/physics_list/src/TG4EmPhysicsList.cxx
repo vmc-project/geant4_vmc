@@ -17,8 +17,8 @@
 #include "TG4EmPhysicsList.h"
 
 #include <G4EmStandardPhysics.hh>
-#include <G4EmExtraPhysics.hh>
 #include <G4DecayPhysics.hh>
+#include <G4SystemOfUnits.hh>
 
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
@@ -92,14 +92,6 @@ void TG4EmPhysicsList::Configure(const G4String& /*selection*/)
 
   // Standard electromagnetic physics
   RegisterPhysics(new G4EmStandardPhysics(1));
-
-  // Extra electromagnetic physics
-  G4EmExtraPhysics* extraPhysics = new G4EmExtraPhysics();
-  G4String state("off");
-  extraPhysics->Synch(state);
-  extraPhysics->GammaNuclear(state);
-  extraPhysics->MuonNuclear(state);
-  RegisterPhysics(extraPhysics);
 
   // decay physics
   RegisterPhysics(new G4DecayPhysics());

@@ -18,6 +18,8 @@
 #include "TG4G3Units.h"
 #include "TG4Globals.h"
 
+#include <G4SystemOfUnits.hh>
+
 #include <TVirtualMCApplication.h>
 #include <TVirtualMC.h>
 

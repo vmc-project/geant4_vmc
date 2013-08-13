@@ -14,6 +14,8 @@
 ///
 /// \author A. Gheata; CERN
 
+#include "G4SystemOfUnits.hh"
+
 #include "TGeoManager.h"
 
 #include "TG4RootDetectorConstruction.h"
@@ -68,8 +70,9 @@ void TG4RootNavigator::SetDetectorConstruction(TG4RootDetectorConstruction *dc)
 /// it and must be valid.
    if (dc) fGeometry = dc->GetGeometryManager();
    if (!fGeometry || !fGeometry->IsClosed()) {
-      G4cerr << "Cannot create TG4RootNavigator without closed ROOT geometry !" << G4endl;
-      G4Exception("Aborting...");
+      G4Exception("TG4RootNavigator::SetDetectorConstruction",
+                  "G4Root_F001", FatalException, 
+                  "Cannot create TG4RootNavigator without closed ROOT geometry !");
    }   
    fDetConstruction = dc;
 }
@@ -114,7 +117,9 @@ G4double TG4RootNavigator::ComputeStep(const G4ThreeVector &pGlobalPoint,
    }   
       
    Bool_t frombdr = fEnteredDaughter | fExitedMother;
+#ifdef G4ROOT_DEBUG
    Bool_t oldpoint = kFALSE;
+#endif
    if (frombdr) {
       Double_t npt[3];
       tol = TGeoShape::Tolerance();
@@ -128,7 +133,9 @@ G4double TG4RootNavigator::ComputeStep(const G4ThreeVector &pGlobalPoint,
       fGeometry->SetCurrentPoint(pGlobalPoint.x()*gCm, pGlobalPoint.y()*gCm, pGlobalPoint.z()*gCm);
       Double_t d2 = pGlobalPoint.diff2(fSafetyOrig);
       if (d2 < 1.e-10) {
+#ifdef G4ROOT_DEBUG
          oldpoint = kTRUE;
+#endif
          compute_safety = kFALSE;
          pNewSafety = fLastSafety;
       }   
@@ -470,6 +477,37 @@ G4ThreeVector TG4RootNavigator::GetLocalExitNormal(G4bool* valid)
    normal.setZ(lnorm[2]);  
 #ifdef G4ROOT_DEBUG
    G4cout << "GetLocalExitNormal: " << normal << G4endl;   
+#endif
+   return normal; 
+}
+
+//______________________________________________________________________________
+G4ThreeVector TG4RootNavigator::GetGlobalExitNormal(const G4ThreeVector& /*point*/,G4bool* valid)
+{
+    // Return Exit Surface Normal and validity too.
+    // Can only be called if the Navigator's last Step has crossed a
+    // volume geometrical boundary.
+    // It returns the Normal to the surface pointing out of the volume that
+    // was left behind and/or into the volume that was entered.
+    // Convention:
+    //   The *local* normal is in the coordinate system of the *final* volume.
+    // Restriction:
+    //   Normals are not available for replica volumes (returns valid= false)
+    // These methods takes full care about how to calculate this normal,
+    // but if the surfaces are not convex it will return valid=false.
+   Double_t *norm;
+   *valid = true;
+   norm = fGeometry->FindNormalFast();
+   G4ThreeVector normal(0.,0.,1.);
+   if (!norm) {
+      *valid = false;
+      return normal;
+   }
+   normal.setX(norm[0]);   
+   normal.setY(norm[1]);   
+   normal.setZ(norm[2]);  
+#ifdef G4ROOT_DEBUG
+   G4cout << "GetGlobalExitNormal: " << normal << G4endl;   
 #endif
    return normal; 
 }

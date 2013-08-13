@@ -84,6 +84,19 @@ public:
                                   const G4bool keepState);
    virtual G4TouchableHistoryHandle CreateTouchableHistoryHandle() const;
    virtual G4ThreeVector GetLocalExitNormal(G4bool* valid);
+   virtual G4ThreeVector GetGlobalExitNormal(const G4ThreeVector& point,
+                                             G4bool* valid);
+    // Return Exit Surface Normal and validity too.
+    // Can only be called if the Navigator's last Step has crossed a
+    // volume geometrical boundary.
+    // It returns the Normal to the surface pointing out of the volume that
+    // was left behind and/or into the volume that was entered.
+    // Convention:
+    //   The *local* normal is in the coordinate system of the *final* volume.
+    // Restriction:
+    //   Normals are not available for replica volumes (returns valid= false)
+    // These methods takes full care about how to calculate this normal,
+    // but if the surfaces are not convex it will return valid=false.
 
 //   ClassDef(TG4RootNavigator,0)  // Class defining a G4Navigator based on ROOT geometry
 };

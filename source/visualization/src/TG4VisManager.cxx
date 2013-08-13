@@ -42,6 +42,7 @@
 #include <G4Material.hh>
 #include <G4PhysicalVolumeModel.hh>
 #include <G4VVisManager.hh>
+#include <G4SystemOfUnits.hh>
 
 //_____________________________________________________________________________
 TG4VisManager::TG4VisManager(G4int verboseLevel)

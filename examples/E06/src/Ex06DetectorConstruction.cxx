@@ -229,41 +229,69 @@ void Ex06DetectorConstruction::ConstructOpGeometry()
   gMC->SetMaterialProperty(fImedWater, "SLOWTIMECONSTANT", 10.0e-09); // 10.*ns
   gMC->SetMaterialProperty(fImedWater, "YIELDRATIO", 0.8);
 
-//
-// Air
-//
-  Double_t refractiveIndex2[nEntries] =
-            { 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00,
-              1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00,
-              1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00,
-              1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00,
-              1.00, 1.00, 1.00, 1.00 };
+  const Int_t nEntriesWater = 60;
 
-  // Added (for Geant3)
-  Double_t absorption2[nEntries] =
-           { DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, 
-             DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, 
-             DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, 
-             DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX,
-	     DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX }; 
-	     
-  // Added (for Geant3)
-  Double_t efficiency2[nEntries] =
-            { 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
-              0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
-              0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
-              0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
-              0.00, 0.00, 0.00, 0.00 };
+  Double_t energyWater[nEntriesWater] = {
+     1.56962e-09, 1.58974e-09, 1.61039e-09, 1.63157e-09,
+     1.65333e-09, 1.67567e-09, 1.69863e-09, 1.72222e-09,
+     1.74647e-09, 1.77142e-09, 1.79710e-09, 1.82352e-09,
+     1.85074e-09, 1.87878e-09, 1.90769e-09, 1.93749e-09,
+     1.96825e-09, 1.99999e-09, 2.03278e-09, 2.06666e-09,
+     2.10169e-09, 2.13793e-09, 2.17543e-09, 2.21428e-09,
+     2.25454e-09, 2.29629e-09, 2.33962e-09, 2.38461e-09,
+     2.43137e-09, 2.47999e-09, 2.53061e-09, 2.58333e-09,
+     2.63829e-09, 2.69565e-09, 2.75555e-09, 2.81817e-09,
+     2.88371e-09, 2.95237e-09, 3.02438e-09, 3.09999e-09,
+     3.17948e-09, 3.26315e-09, 3.35134e-09, 3.44444e-09,
+     3.54285e-09, 3.64705e-09, 3.75757e-09, 3.87499e-09,
+     3.99999e-09, 4.13332e-09, 4.27585e-09, 4.42856e-09,
+     4.59258e-09, 4.76922e-09, 4.95999e-09, 5.16665e-09,
+     5.39129e-09, 5.63635e-09, 5.90475e-09, 6.19998e-09
+  };
 
-  gMC->SetCerenkov(fImedAir, nEntries, photonEnergy,
-                   absorption2, efficiency2, refractiveIndex2); 
+  //assume 100 times larger than the rayleigh scattering for now.
+  Double_t mieWater[nEntriesWater] = {
+     167024.4*100, 158726.7*100, 150742  *100,
+     143062.5*100, 135680.2*100, 128587.4*100,
+     121776.3*100, 115239.5*100, 108969.5*100,
+     102958.8*100, 97200.35*100, 91686.86*100,
+     86411.33*100, 81366.79*100, 76546.42*100,
+     71943.46*100, 67551.29*100, 63363.36*100,
+     59373.25*100, 55574.61*100, 51961.24*100,
+     48527.00*100, 45265.87*100, 42171.94*100,
+     39239.39*100, 36462.50*100, 33835.68*100,
+     31353.41*100, 29010.30*100, 26801.03*100,
+     24720.42*100, 22763.36*100, 20924.88*100,
+     19200.07*100, 17584.16*100, 16072.45*100,
+     14660.38*100, 13343.46*100, 12117.33*100,
+     10977.70*100, 9920.416*100, 8941.407*100,
+     8036.711*100, 7202.470*100, 6434.927*100,
+     5730.429*100, 5085.425*100, 4496.467*100,
+     3960.210*100, 3473.413*100, 3032.937*100,
+     2635.746*100, 2278.907*100, 1959.588*100,
+     1675.064*100, 1422.710*100, 1200.004*100,
+     1004.528*100, 833.9666*100, 686.1063*100
+  };
+
+  // gforward, gbackward, forward backward ratio
+  Double_t mieWaterConst[3] = { 0.99, 0.99, 0.8 };
+
+  gMC->SetMaterialProperty(fImedWater, 
+                           "MIEHG", nEntriesWater, energyWater, mieWater);
+  gMC->SetMaterialProperty(fImedWater, "MIEHG_FORWARD", mieWaterConst[0]);
+  gMC->SetMaterialProperty(fImedWater, "MIEHG_BACKWARD", mieWaterConst[1]);
+  gMC->SetMaterialProperty(fImedWater, "MIEHG_FORWARD_RATIO", mieWaterConst[2]);
+
+  // Set the Birks Constant for the Water scintillator
+  gMC->SetMaterialProperty(fImedWater, "BIRKS_CONSTANT", 0.126e+02); // mm/MeV
+
 
 //	------------- Surfaces --------------
 //
 // Water Tank
 //
   gMC->DefineOpSurface("WaterSurface", 
-                        kUnified, kDielectric_dielectric, kGround, 0.);
+                        kUnified, kDielectric_dielectric, kGround, 1.0);
 			          // CHECK default value of sigma alpha
   gMC->SetBorderSurface("WaterSurface", 
                        "TANK", 1, "WRLD", 1, "WaterSurface");
@@ -273,7 +301,7 @@ void Ex06DetectorConstruction::ConstructOpGeometry()
 // Air Bubble
 //
   gMC->DefineOpSurface("AirSurface", 
-                        kGlisur, kDielectric_dielectric, kPolished, 0.);
+                        kGlisur, kDielectric_dielectric, kPolished, 1.0);
 			          // CHECK default value of sigma alpha
   gMC->SetSkinSurface("AirSurface", "BUBL", "AirSurface");				  
   

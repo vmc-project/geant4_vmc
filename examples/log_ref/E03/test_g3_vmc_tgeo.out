@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.30/00      27 June 2011   *
+  *   Version   5.34/03   27 October 2012   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
+ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -21,12 +21,13 @@ Loading Geant3 libraries ... finished
 Geant3 has been created.
 Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
 Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
 Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in Root geometry manager
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
@@ -59,11 +60,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV):  948.48       total track length (cm):  43.7742
    Gap:      total energy (MeV): 24.1166       total track length (cm):  10.2516
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   369143407    1600AE6F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr  1050782159    3EA1A9CF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   369166445   369143407
-                                        HEX    1601086D    1600AE6F
+          with Store/Table at absolute adrs  1050805197  1050782159
+                                        HEX    3EA203CD    3EA1A9CF
                                         HEX        555A           0
                               relative adrs       21850           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -103,14 +104,14 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.30/00      27 June 2011   *
+  *   Version   5.34/03   27 October 2012   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
+ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -126,12 +127,13 @@ Geant3 has been created.
 --- Construct geometry 
 Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
 Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
 Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in Root geometry manager
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
@@ -484,11 +486,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   3.967       total track length (cm):    2.241
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   730751599    2B8E626F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   367898063    15EDADCF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   730774637   730751599
-                                        HEX    2B8EBC6D    2B8E626F
+          with Store/Table at absolute adrs   367921101   367898063
+                                        HEX    15EE07CD    15EDADCF
                                         HEX        555A           0
                               relative adrs       21850           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -514,14 +516,14 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.30/00      27 June 2011   *
+  *   Version   5.34/03   27 October 2012   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
+ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -537,12 +539,13 @@ Geant3 has been created.
 --- Construct geometry 
 Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
 Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
 Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in Root geometry manager
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
@@ -585,9 +588,9 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.466    0.000    0.000    81.9464    0.0000    0.000    0.000     ABSO  No active process
-#   1    -7.500    0.015   -0.001    62.2561   19.6903    0.037    0.037     ABSO  Multiple scattering
-#   2    -7.500    0.015   -0.001    62.2561    0.0000    0.000    0.037     WRLD  No active process
-#   3    -9.000    0.513    0.042    62.2561    0.0000    1.581    1.618     WRLD  Transportation
+#   1    -7.500    0.015   -0.001    61.1637   20.7827    0.037    0.037     ABSO  Multiple scattering
+#   2    -7.500    0.015   -0.001    61.1637    0.0000    0.000    0.037     WRLD  No active process
+#   3    -9.000    0.592   -0.097    61.1637    0.0000    1.610    1.647     WRLD  Transportation
 
 ****************************************************************************************************
   Particle = neutron     Track ID = 2     Parent ID = 0
@@ -627,15 +630,15 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  31     6.146   -6.000    0.215   285.3407    0.0000    2.480   14.877     WRLD  Transportation
 --- Finish event 
 Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
-   Absorber: total energy (MeV): 1119.690       total track length (cm):    0.101
+   Absorber: total energy (MeV): 1120.783       total track length (cm):    0.101
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   152914543     91D4A6F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   899935695    35A3EDCF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   152937581   152914543
-                                        HEX     91DA46D     91D4A6F
+          with Store/Table at absolute adrs   899958733   899935695
+                                        HEX    35A447CD    35A3EDCF
                                         HEX        555A           0
                               relative adrs       21850           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -661,14 +664,14 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.30/00      27 June 2011   *
+  *   Version   5.34/03   27 October 2012   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.30/00 (tags/v5-30-00@40062, Jul 13 2011, 14:37:53 on linuxx8664gcc)
+ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -680,12 +683,13 @@ Loading Geant3 libraries ... finished
 Geant3 has been created.
 Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
 Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
 Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in Root geometry manager
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
@@ -722,11 +726,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 1483.71       total track length (cm):   70.756
    Gap:      total energy (MeV): 76.3272       total track length (cm):  36.8609
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   724238959    2B2B026F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   720767439    2AF609CF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   724261997   724238959
-                                        HEX    2B2B5C6D    2B2B026F
+          with Store/Table at absolute adrs   720790477   720767439
+                                        HEX    2AF663CD    2AF609CF
                                         HEX        555A           0
                               relative adrs       21850           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

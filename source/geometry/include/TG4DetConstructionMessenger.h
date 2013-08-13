@@ -41,6 +41,8 @@ class G4UIcmdWithADoubleAndUnit;
 /// - /mcDet/printVolumes
 /// - /mcDet/printCuts cutName
 /// - /mcDet/printControls controlName
+/// - /mcDet/setIsUserMaxStep true|false
+/// - /mcDet/setIsMaxStepInLowDensityMaterials true|false
 /// - /mcDet/setMaxStepInLowDensityMaterials value
 /// - /mcDet/setLimitDensity value 
 ///
@@ -95,10 +97,16 @@ class TG4DetConstructionMessenger: public G4UImessenger
     /// command: printControls  
     G4UIcmdWithAString*         fPrintControlsCmd;  
     
-    // command: setLimitDensity
+    /// command: setIsUserMaxStep
+    G4UIcmdWithABool*           fIsUserMaxStepCmd;
+    
+    /// command: setIsMaxStepInLowDensityMaterials
+    G4UIcmdWithABool*           fIsMaxStepInLowDensityMaterialsCmd;
+    
+    /// command: setLimitDensity
     G4UIcmdWithADoubleAndUnit*  fSetLimitDensityCmd;
 
-    // command: setMaxStepInLowDensityMaterials
+    /// command: setMaxStepInLowDensityMaterials
     G4UIcmdWithADoubleAndUnit*  fSetMaxStepInLowDensityMaterialsCmd;
 };
 

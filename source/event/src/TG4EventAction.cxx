@@ -26,6 +26,7 @@
 #include <G4Trajectory.hh>
 #include <G4VVisManager.hh>
 #include <G4UImanager.hh>
+#include <Randomize.hh>
 
 #include <TVirtualMC.h>
 #include <TVirtualMCStack.h>
@@ -39,7 +40,8 @@ TG4EventAction::TG4EventAction()
   : TG4Verbose("eventAction"),
     fMessenger(this),
     fTimer(),
-    fDrawFlag("CHARGED")
+    fDrawFlag("CHARGED"),
+    fSaveRandomStatus(false)
 {
 /// Default constructor
 }
@@ -48,47 +50,6 @@ TG4EventAction::TG4EventAction()
 TG4EventAction::~TG4EventAction() 
 {
 /// Destructor
-}
-
-//
-// private methods
-//
-
-//_____________________________________________________________________________
-void TG4EventAction::DisplayEvent(const G4Event* event) const
-{
-/// Draw trajectories.
-
-  if (G4VVisManager::GetConcreteInstance()) {
-
-    // trajectories processing
-    G4TrajectoryContainer* trajectoryContainer 
-      = event->GetTrajectoryContainer();
-
-    G4int nofTrajectories = 0;
-    if (trajectoryContainer)
-      nofTrajectories = trajectoryContainer->entries(); 
-  
-    if (VerboseLevel() > 0 && nofTrajectories > 0) {
-      G4cout << "    " << nofTrajectories; 
-      G4cout << " trajectories stored." << G4endl;
-    }  
-
-    for (G4int i=0; i<nofTrajectories; i++) { 
-      G4VTrajectory* vtrajectory = (*(event->GetTrajectoryContainer()))[i];
-      G4Trajectory* trajectory = dynamic_cast<G4Trajectory*>(vtrajectory);
-      if (!trajectory) {
-        TG4Globals::Exception(
-          "TG4EventAction", "DisplayEvent", "Unknown trajectory type.");
-      }
-      if ( (fDrawFlag == "ALL") ||
-          ((fDrawFlag == "CHARGED") && (trajectory->GetCharge() != 0.))){
-         trajectory->DrawTrajectory(); 
-            // the argument number defines the size of the step points
-            // use 2000 to make step points well visible
-      }        
-    }      
-  }
 }
 
 //
@@ -117,7 +78,16 @@ void TG4EventAction::BeginOfEventAction(const G4Event* event)
         TG4TrackManager::Instance()->PrimaryToStack(vertex, particle);
       }        
     }
-  }  
+  } 
+  
+  // save the event random number status per event
+  if ( fSaveRandomStatus) {
+    G4UImanager::GetUIpointer()->ApplyCommand("/random/saveThisEvent");
+    if (VerboseLevel() > 0)
+      G4cout << "Saving random status: " << G4endl;  
+      CLHEP::HepRandom::showEngineStatus();
+      G4cout << G4endl;  
+  }    
 
   if (VerboseLevel() > 0) {
     G4cout << ">>> Event " << event->GetEventID() << G4endl;
@@ -154,9 +124,6 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
     G4cout  << "    " << nofAllTracks << 
                   " all tracks processed." << G4endl;
   }               
-
-  // display event
-  DisplayEvent(event);
 
   // VMC application finish event
   TVirtualMCApplication::Instance()->FinishEvent();    

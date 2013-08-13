@@ -42,6 +42,7 @@ class G4ParticleDefinition;
 class G4ProcessManager;
 class G4VProcess;
 class G4VUserPhysicsList;
+class G4OpBoundaryProcess;
 
 /// \ingroup physics
 /// \brief Geant4 implementation of the TVirtualMC interface methods                    
@@ -99,8 +100,9 @@ class TG4PhysicsManager : public TG4Verbose
 
     void  DefineParticles();      
     void  SetProcessActivation();  
+    void  RetrieveOpBoundaryProcess();  
     TMCProcess GetMCProcess(const G4VProcess* process);
-    TMCProcess GetOpBoundaryStatus(const G4VProcess* process);
+    TMCProcess GetOpBoundaryStatus();
 
     void SetCutForGamma(G4double cut);
     void SetCutForElectron(G4double cut);
@@ -109,6 +111,7 @@ class TG4PhysicsManager : public TG4Verbose
     G4double GetCutForGamma() const;
     G4double GetCutForElectron() const;
     G4double GetCutForPositron() const;
+    G4bool   IsOpBoundaryProcess() const;
    
   private:
     /// Not implemented
@@ -162,6 +165,8 @@ class TG4PhysicsManager : public TG4Verbose
     /// range cut for positron 
     G4double               fCutForPositron; 
     
+    /// optical boundary process
+    G4OpBoundaryProcess*   fOpBoundaryProcess;
     
 };
 
@@ -202,6 +207,10 @@ inline G4double TG4PhysicsManager::GetCutForPositron() const {
   return fCutForPositron;
 }  
 
+inline G4bool TG4PhysicsManager::IsOpBoundaryProcess() const {
+  /// Return true if optical boundary process is defined
+  return ( fOpBoundaryProcess != 0 );
+}  
 
 #endif //TG4_PHYSICS_MANAGER_H
 

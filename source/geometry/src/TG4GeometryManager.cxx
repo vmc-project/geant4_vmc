@@ -29,19 +29,12 @@
 #include "TG4VUserRegionConstruction.h"
 #include "TG4Globals.h"
 
-#include <G3toG4.hh> 
-#include <G3toG4MANY.hh>
-#include <G3toG4BuildTree.hh>
-#include <G3MatTable.hh>
-#include <G3MedTable.hh>
-#include <G3VolTable.hh>
-#include <G3SensVolVector.hh>
-
 #include <G4LogicalVolumeStore.hh>
 #include <G4ReflectionFactory.hh>
 #include <G4Material.hh>
 #include <G4TransportationManager.hh>
 #include <G4PVPlacement.hh>
+#include <G4SystemOfUnits.hh>
 
 #include <TGeoManager.h>
 #include <TGeoVolume.h>
@@ -50,6 +43,16 @@
 #include <TVirtualMC.h>
 #include <TVirtualMCApplication.h>
 #include <TList.h>
+
+#ifdef USE_G3TOG4
+#include <G3toG4.hh> 
+#include <G3toG4MANY.hh>
+#include <G3toG4BuildTree.hh>
+#include <G3MatTable.hh>
+#include <G3MedTable.hh>
+#include <G3VolTable.hh>
+#include <G3SensVolVector.hh>
+#endif
 
 #ifdef USE_VGM
 #include <Geant4GM/volumes/Factory.h>
@@ -72,6 +75,7 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fMagneticField(0),
     fUserRegionConstruction(0),
     fIsUserMaxStep(false),
+    fIsMaxStepInLowDensityMaterials(false),
     fLimitDensity(fgDefaultLimitDensity),
     fMaxStepInLowDensityMaterials(fgDefaultMaxStep)
      
@@ -129,6 +133,7 @@ void TG4GeometryManager::ConstructG4GeometryViaVMC()
 {
 /// Create G4 geometry objects according to the G3VolTable 
 
+#ifdef USE_G3TOG4
   if ( VerboseLevel() > 1 ) 
     G4cout << "TG4GeometryManager::ConstructG4GeometryViaVMC" << G4endl;
 
@@ -168,6 +173,13 @@ void TG4GeometryManager::ConstructG4GeometryViaVMC()
 
   // print G3 volume table statistics
   G3Vol.VTEStat();
+
+#else
+  TG4Globals::Exception(
+    "TG4GeometryManager", "ConstructG4GeometryViaVMC",
+    "Geant4 VMC has been installed without G3toG4." + TG4Globals::Endl() +
+    "Geometry construction via VMC is not supported.");
+#endif
 }
 
 //_____________________________________________________________________________
@@ -277,6 +289,7 @@ void TG4GeometryManager::ConstructG4Geometry()
 
   // Build G4 geometry
   if ( fUserGeometry == "VMCtoGeant4" ) 
+
     ConstructG4GeometryViaVMC();
   
   if ( fUserGeometry == "RootToGeant4" ) 
@@ -298,6 +311,7 @@ void TG4GeometryManager::FillMediumMapFromG3()
 {
 /// Map G3 tracking medium IDs to volumes names.
 
+#ifdef USE_G3TOG4
   if ( VerboseLevel() > 1 ) 
     G4cout << "TG4GeometryManager::FillMediumMapFromG3()" << G4endl;
 
@@ -345,13 +359,19 @@ void TG4GeometryManager::FillMediumMapFromG3()
   G3SensVol.clear(); 
   G3Mat.Clear();
   G3Med.Clear();
+#else
+  TG4Globals::Exception(
+    "TG4GeometryManager", "FillMediumMapFromG3",
+    "Geant4 VMC has been installed without G3toG4." + TG4Globals::Endl() +
+    "Geometry construction via VMC is not supported.");
+#endif
 }    
 
 //_____________________________________________________________________________
 void TG4GeometryManager::FillMediumMapFromG4()
 {
 /// Map G4 materials in the medium map;
-/// the materialIndex is used to define medium ID
+/// the materialIndex is used to define medium ID.
 
   if ( VerboseLevel() > 1 ) 
     G4cout << "TG4GeometryManager::FillMediumMapFromG4()" << G4endl;
@@ -644,12 +664,15 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
     // get tracking medium name
     G4String name = medium->GetName();
     
-    if (tg4Limits) 
+    if (tg4Limits) {
       tg4Limits->SetName(name);
+    }  
     else {
-      tg4Limits = fGeometryServices->FindLimits(name, true);  
-      if (!tg4Limits) 
-        tg4Limits = new TG4Limits(name, cuts, controls); 
+      // Check if the step below is needed
+      tg4Limits = fGeometryServices->FindLimits2(name, true);  
+      if (!tg4Limits) {
+         tg4Limits = new TG4Limits(name, cuts, controls);
+      } 
     }
     
     // set new limits back to medium
@@ -661,11 +684,12 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
       tg4Limits->SetMaxAllowedStep(DBL_MAX); 
 
     // limit max step for low density materials (< AIR)
-    if (lv->GetMaterial()->GetDensity() < fLimitDensity )
+    if ( fIsMaxStepInLowDensityMaterials &&
+         lv->GetMaterial()->GetDensity() < fLimitDensity )
       tg4Limits->SetMaxAllowedStep(fMaxStepInLowDensityMaterials);
       
     // set max step the default value
-     tg4Limits->SetDefaultMaxAllowedStep(); 
+    tg4Limits->SetDefaultMaxAllowedStep(); 
       
     // update controls in limits according to the setup 
     // in the passed vector
@@ -675,6 +699,31 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
     lv->SetUserLimits(tg4Limits);
   } 
 }
+
+
+//_____________________________________________________________________________
+void TG4GeometryManager::SetIsUserMaxStep(G4bool isUserMaxStep) 
+{
+  /// (In)Activate the max step defined by user in tracking media
+  
+  if ( VerboseLevel() > 0 ) 
+    G4cout << "TG4GeometryManager::SetIsUserMaxStep: " 
+           << std::boolalpha << isUserMaxStep << G4endl; 
+
+  fIsUserMaxStep = isUserMaxStep;
+}  
+
+//_____________________________________________________________________________
+void TG4GeometryManager::SetIsMaxStepInLowDensityMaterials(G4bool isMaxStep) 
+{
+  /// (In)Activate the max step defined in low density materials 
+
+  if ( VerboseLevel() > 0 ) 
+    G4cout << "TG4GeometryManager::SetIsMaxStepInLowDensityMaterials: " 
+           << std::boolalpha << isMaxStep << G4endl; 
+
+  fIsMaxStepInLowDensityMaterials = isMaxStep;
+}  
 
 
 //_____________________________________________________________________________

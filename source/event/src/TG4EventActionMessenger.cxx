@@ -19,7 +19,6 @@
 #include "TG4Globals.h"
 
 #include <G4UIdirectory.hh>
-#include <G4UIcmdWithAString.hh>
 #include <G4UIcmdWithABool.hh>
 
 //_____________________________________________________________________________
@@ -27,25 +26,23 @@ TG4EventActionMessenger::TG4EventActionMessenger(TG4EventAction* eventAction)
   : G4UImessenger(),
     fEventAction(eventAction),
     fEventDirectory(0),
-    fDrawTracksCmd(0)
+    fPrintMemoryCmd(0), 
+    fSaveRandomStatusCmd(0)
 { 
 /// Standard constructor
 
   fEventDirectory = new G4UIdirectory("/mcEvent/");
   fEventDirectory->SetGuidance("TG4EventAction control commands.");
 
-  fDrawTracksCmd = new G4UIcmdWithAString("/mcEvent/drawTracks", this);
-  fDrawTracksCmd->SetGuidance("Draw the tracks in the event");
-  fDrawTracksCmd->SetGuidance("  Choice : NONE, CHARGED(default), ALL");
-  fDrawTracksCmd->SetParameterName("Choice", true);
-  fDrawTracksCmd->SetDefaultValue("CHARGED");
-  fDrawTracksCmd->SetCandidates("NONE CHARGED ALL");
-  fDrawTracksCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
-
   fPrintMemoryCmd = new G4UIcmdWithABool("/mcEvent/printMemory", this);
   fPrintMemoryCmd->SetGuidance("Print memory usage at the end of event");
   fPrintMemoryCmd->SetParameterName("PrintMemory", false);
   fPrintMemoryCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+
+  fSaveRandomStatusCmd = new G4UIcmdWithABool("/mcEvent/saveRandom", this);
+  fSaveRandomStatusCmd->SetGuidance("Save random engine status for each event");
+  fSaveRandomStatusCmd->SetParameterName("SaveRandom", false);
+  fSaveRandomStatusCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 }
 
 //_____________________________________________________________________________
@@ -54,8 +51,8 @@ TG4EventActionMessenger::~TG4EventActionMessenger()
 /// Destructor
 
   delete fEventDirectory;
-  delete fDrawTracksCmd;
   delete fPrintMemoryCmd;
+  delete fSaveRandomStatusCmd;
 }
 
 //
@@ -68,12 +65,12 @@ void TG4EventActionMessenger::SetNewValue(G4UIcommand* command,
 { 
 /// Apply command to the associated object.
 
-  if(command == fDrawTracksCmd)
-  { 
-    fEventAction->SetDrawFlag(newValue); 
-  }   
-  else if(command == fPrintMemoryCmd)
+  if ( command == fPrintMemoryCmd )
   { 
     fEventAction->SetPrintMemory(fPrintMemoryCmd->GetNewBoolValue(newValue)); 
+  }   
+  else if ( command == fSaveRandomStatusCmd )
+  { 
+    fEventAction->SetSaveRandomStatus(fSaveRandomStatusCmd->GetNewBoolValue(newValue)); 
   }   
 }

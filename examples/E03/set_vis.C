@@ -23,6 +23,7 @@ void set_vis()
     if (vol) vol->SetLineColor(kMagenta);
     vol = gGeoManager->GetVolume("GAPX");
     if (vol) vol->SetLineColor(kYellow);
+    gMC->SetCollectTracks(kTRUE);
   }    
 
   if (TString(gMC->GetName()) == "TGeant4") {

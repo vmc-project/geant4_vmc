@@ -222,6 +222,33 @@ G4int TG4SDServices::GetVolumeID(G4LogicalVolume* logicalVolume) const
 
 
 //_____________________________________________________________________________
+G4int TG4SDServices::GetMediumID(G4LogicalVolume* logicalVolume) const 
+{
+/// Return the medium ID for the specified logical volume.
+ 
+#ifdef MCDEBUG
+  G4VSensitiveDetector* sd
+    = logicalVolume->GetSensitiveDetector();
+
+  if (sd) {
+    return GetSensitiveDetector(sd)->GetMediumID();
+  }  
+  else {
+    return TG4GeometryServices::Instance()->GetMediumId(logicalVolume);
+  }  
+#else
+  G4VSensitiveDetector* sd
+    = logicalVolume->GetSensitiveDetector();
+  if ( sd ) 
+    return ((TG4SensitiveDetector*)sd)->GetMediumID(); 
+  else {
+    return TG4GeometryServices::Instance()->GetMediumId(logicalVolume);
+  }  
+#endif   
+} 
+
+
+//_____________________________________________________________________________
 G4String TG4SDServices::GetVolumeName(G4int volumeId) const
 {
 /// Return the name of the volume with the given identifier.

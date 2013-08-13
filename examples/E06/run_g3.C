@@ -34,14 +34,17 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
   Ex06MCApplication* appl 
     = new Ex06MCApplication("Example06", "The example06 MC application");
     
-  appl->GetPrimaryGenerator()->SetNofPrimaries(100);  
+  appl->GetPrimaryGenerator()->SetNofPrimaries(10);  
   //appl->SetVerboseLevel(3);  
 
   // Initialize MC
   appl->InitMC(configMacro);
   
+  // Activate storing tracks
+  gMC->SetCollectTracks(kTRUE);
+  
   // Run MC
-  appl->RunMC(10);
+  appl->RunMC(5);
 
   delete appl;
 }  

@@ -38,6 +38,8 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
     fPrintMaterialsCmd(0),
     fPrintMaterialsPropertiesCmd(0),
     fPrintVolumesCmd(0),
+    fIsUserMaxStepCmd(),
+    fIsMaxStepInLowDensityMaterialsCmd(0),
     fSetLimitDensityCmd(0),
     fSetMaxStepInLowDensityMaterialsCmd(0)
     
@@ -96,9 +98,29 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fPrintControlsCmd->SetParameterName("ControlName", false);
   fPrintControlsCmd->AvailableForStates(G4State_Idle);   
 
+  fIsUserMaxStepCmd
+    = new G4UIcmdWithABool("/mcDet/setIsUserMaxStep", this);
+  fIsUserMaxStepCmd
+    ->SetGuidance("Active user step limits defined in tracking media.");
+  fIsUserMaxStepCmd->SetParameterName("IsUserMaxStep", false);
+  fIsUserMaxStepCmd->AvailableForStates(G4State_PreInit);  
+
+  fIsMaxStepInLowDensityMaterialsCmd
+    = new G4UIcmdWithABool("/mcDet/setIsMaxStepInLowDensityMaterials", this);
+  fIsMaxStepInLowDensityMaterialsCmd
+    ->SetGuidance("Active user step limits defined in tracking media.");
+  fIsMaxStepInLowDensityMaterialsCmd
+    ->SetParameterName("IsMaxStepInLowDensityMaterials", false);
+  fIsMaxStepInLowDensityMaterialsCmd->AvailableForStates(G4State_PreInit);  
+
   fSetLimitDensityCmd 
     = new G4UIcmdWithADoubleAndUnit("/mcDet/setLimitDensity", this);
-  fSetLimitDensityCmd->SetGuidance("Set the material density limit for setting max allowed step");
+  fSetLimitDensityCmd
+    ->SetGuidance("Set the material density limit for setting max allowed step");
+  fSetLimitDensityCmd
+    ->SetGuidance("Note that setting step limits has to be activated first via:\n");
+  fSetLimitDensityCmd
+    ->SetGuidance("/mcDet/setIsMaxStepInLowDensityMaterials true");
   fSetLimitDensityCmd->SetParameterName("LimitDensity", false);
   fSetLimitDensityCmd->SetDefaultUnit("g/cm3");
   fSetLimitDensityCmd->SetUnitCategory("Volumic Mass");
@@ -108,11 +130,14 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
     = new G4UIcmdWithADoubleAndUnit("/mcDet/setMaxStepInLowDensityMaterials", this);
   fSetMaxStepInLowDensityMaterialsCmd
     ->SetGuidance("Set max allowed step value in materials with density below the density limit");
+  fSetMaxStepInLowDensityMaterialsCmd
+    ->SetGuidance("Note that setting step limits has to be activated first via:\n");
+  fSetMaxStepInLowDensityMaterialsCmd
+    ->SetGuidance("/mcDet/setIsMaxStepInLowDensityMaterials true");
   fSetMaxStepInLowDensityMaterialsCmd->SetParameterName("MaxStepInLowDensityMaterials", false);
   fSetMaxStepInLowDensityMaterialsCmd->SetDefaultUnit("mm");
   fSetMaxStepInLowDensityMaterialsCmd->SetUnitCategory("Length");
   fSetMaxStepInLowDensityMaterialsCmd->AvailableForStates(G4State_PreInit);
-  
 }
 
 //_____________________________________________________________________________
@@ -129,6 +154,8 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
   delete fPrintVolumesCmd;
   delete fPrintCutsCmd; 
   delete fPrintControlsCmd; 
+  delete fIsUserMaxStepCmd;
+  delete fIsMaxStepInLowDensityMaterialsCmd;
   delete fSetLimitDensityCmd;
   delete fSetMaxStepInLowDensityMaterialsCmd;
 }
@@ -168,6 +195,15 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
   else if (command == fPrintControlsCmd) {
     TG4GeometryServices::Instance()->PrintControls(newValues);
   } 
+  else if (command == fIsUserMaxStepCmd) {
+    TG4GeometryManager::Instance()
+      ->SetIsUserMaxStep(fIsUserMaxStepCmd->GetNewBoolValue(newValues));
+  }    
+  else if (command == fIsMaxStepInLowDensityMaterialsCmd) {
+    TG4GeometryManager::Instance()
+      ->SetIsMaxStepInLowDensityMaterials(
+          fIsMaxStepInLowDensityMaterialsCmd->GetNewBoolValue(newValues));
+  }    
   else if (command == fSetLimitDensityCmd) {
     TG4GeometryManager::Instance()
       ->SetLimitDensity(fSetLimitDensityCmd->GetNewDoubleValue(newValues));

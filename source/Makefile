@@ -84,9 +84,23 @@ OBJS	:= $(CXXOBJ) $(GDICTO)
 
 # Make include list
 #
-ifndef G4INCLUDE
-  G4INCLUDE := $(G4INSTALL)/include
-endif  
+
+ifeq ($(G4INSTALL),)
+  G4CFLAGS := $(shell geant4-config --cflags)
+  #additional flags - not handled via geant4-config
+  ifeq ($(G4VIS_NONE),) 
+    G4CFLAGS += -DG4VIS_USE 
+  endif  
+  ifeq ($(G4UI_NONE),) 
+    G4CFLAGS += -DG4UI_USE 
+  endif  
+else   
+  ifndef G4INCLUDE
+    G4CFLAGS := -I$(G4INSTALL)/include
+  else
+    G4CFLAGS := -I$(G4INCLUDE)
+  endif 
+endif   
 
 INCLUDES := $(patsubst %,-I%/include,$(GDIRS)) \
            -I$(TOPDIR)/include \
@@ -106,7 +120,7 @@ endif
 
 # C++ compilation flags
 #
-CXXFLAGS := $(CXXOPTS) $(G4MCDEFS) -I. $(INCLUDES) -I$(ROOT_INCDIR) 
+CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) $(G4CFLAGS)
 
 # Debug option 
 #
@@ -120,54 +134,62 @@ ifneq ($(USE_VGM),)
   CXXFLAGS += -DUSE_VGM
 endif
 
+# Use G3toG4 flag 
+#
+ifeq ($(NO_G3TOG4),)
+  CXXFLAGS += -DUSE_G3TOG4
+endif
+
 
 ######################## Supported Geant4 VIS, UI #############################
 #
 # Supported Geant4 VIS, UI setting: 
 # OPENGLX, OPENGLXM, XM, TCSH
 #
-ifndef G4VIS_NONE
-  CPPFLAGS += -DG4VIS_USE
-ifdef G4VIS_USE_OPENGLX
-  G4VIS_USE_OPENGL = 1
-  CPPFLAGS += -DG4VIS_USE_OPENGLX
-  INC_X11   = 1
-endif
-ifdef G4VIS_USE_OPENGLXM
-  G4VIS_USE_OPENGL = 1
-  CPPFLAGS += -DG4VIS_USE_OPENGLXM
-  INC_XM    = 1
-endif
-ifdef G4VIS_USE_OPENGL
-  CPPFLAGS += -DG4VIS_USE_OPENGL
-  CPPFLAGS += -I$(G4INSTALL)/source/visualization/OpenGL/include
-  INC_GL    = 1
-endif
-  CPPFLAGS += -I$(G4INSTALL)/source/visualization/management/include
-  CPPFLAGS += -I$(G4INSTALL)/source/visualization/modeling/include
-endif #G4VIS_NONE
+ifneq ($(G4INSTALL),)
+  ifndef G4VIS_NONE
+    CPPFLAGS += -DG4VIS_USE
+  ifdef G4VIS_USE_OPENGLX
+    G4VIS_USE_OPENGL = 1
+    CPPFLAGS += -DG4VIS_USE_OPENGLX
+    INC_X11   = 1
+  endif
+  ifdef G4VIS_USE_OPENGLXM
+    G4VIS_USE_OPENGL = 1
+    CPPFLAGS += -DG4VIS_USE_OPENGLXM
+    INC_XM    = 1
+  endif
+  ifdef G4VIS_USE_OPENGL
+    CPPFLAGS += -DG4VIS_USE_OPENGL
+    CPPFLAGS += -I$(G4INSTALL)/source/visualization/OpenGL/include
+    INC_GL    = 1
+  endif
+    CPPFLAGS += -I$(G4INSTALL)/source/visualization/management/include
+    CPPFLAGS += -I$(G4INSTALL)/source/visualization/modeling/include
+  endif #G4VIS_NONE
 
-ifndef G4UI_NONE
-  CPPFLAGS += -I$(G4INSTALL)/source/interfaces/basic/include
-  CPPFLAGS += -I$(G4INSTALL)/source/interfaces/common/include
-  CPPFLAGS += -I$(G4INSTALL)/source/interfaces/GAG/include
-  CPPFLAGS += -DG4UI_USE_TERMINAL
-  CPPFLAGS += -DG4UI_USE
-ifdef G4UI_USE_TCSH
-  CPPFLAGS += -DG4UI_USE_TCSH
-endif
-endif #G4UI_NONE
+  ifndef G4UI_NONE
+    CPPFLAGS += -I$(G4INSTALL)/source/interfaces/basic/include
+    CPPFLAGS += -I$(G4INSTALL)/source/interfaces/common/include
+    CPPFLAGS += -I$(G4INSTALL)/source/interfaces/GAG/include
+    CPPFLAGS += -DG4UI_USE_TERMINAL
+    CPPFLAGS += -DG4UI_USE
+  ifdef G4UI_USE_TCSH
+    CPPFLAGS += -DG4UI_USE_TCSH
+  endif
+  endif #G4UI_NONE
 
-ifdef INC_GL
-  CPPFLAGS += $(OGLFLAGS)
-endif
-ifdef INC_XM
-  INC_X11   = 1
-  CPPFLAGS += $(XMFLAGS)
-endif
-ifdef INC_X11
-  CPPFLAGS += $(X11FLAGS)
-endif
+  ifdef INC_GL
+    CPPFLAGS += $(OGLFLAGS)
+  endif
+  ifdef INC_XM
+    INC_X11   = 1
+    CPPFLAGS += $(XMFLAGS)
+  endif
+  ifdef INC_X11
+    CPPFLAGS += $(X11FLAGS)
+  endif
+endif  
 
 ######################## Full Geant4 VIS, UI ##################################
 #
@@ -177,9 +199,11 @@ endif
 # and even though a correct behaviour is expected,
 # it is not guaranteed. 
 # 
+#ifneq ($(G4INSTALL),)
 #include $(G4INSTALL)/config/G4UI_USE.gmk
 #include $(G4INSTALL)/config/G4VIS_USE.gmk
 #include $(G4INSTALL)/config/interactivity.gmk
+#endif  
 
 CXXFLAGS += $(CPPFLAGS)
 

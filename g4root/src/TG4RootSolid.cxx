@@ -25,6 +25,7 @@
 #include "G4NURBS.hh"
 #include "G4NURBSbox.hh"
 #include "G4VisExtent.hh"
+#include "G4SystemOfUnits.hh"
 
 #include "TG4RootSolid.h"
 #include "TMath.h"

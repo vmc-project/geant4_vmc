@@ -94,10 +94,14 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("HadronFission", kPNuclearFission);
   
   mcMap->Add("PiMinusAbsorptionAtRest", kPNuclearAbsorption); 
+  mcMap->Add("PiMinusAbsorptionBertini", kPNuclearAbsorption); 
   mcMap->Add("PionMinusAbsorptionAtRest", kPNuclearAbsorption); 
   mcMap->Add("KaonMinusAbsorption", kPNuclearAbsorption); 
   mcMap->Add("KaonMinusAbsorptionAtRest", kPNuclearAbsorption); 
   mcMap->Add("CHIPSNuclearCaptureAtRest", kPNuclearAbsorption); 
+  mcMap->Add("FTFNuclearCaptureAtRest", kPNuclearAbsorption); 
+  mcMap->Add("hFritiofCaptureAtRest", kPNuclearAbsorption); 
+  mcMap->Add("hBertiniCaptureAtRest", kPNuclearAbsorption); 
   
   mcMap->Add("AntiProtonAnnihilationAtRest", kPPbarAnnihilation); 
   mcMap->Add("AntiNeutronAnnihilationAtRest", kPNbarAnnihilation);
@@ -110,39 +114,67 @@ void TG4ProcessMCMapPhysics::FillMap()
   
   mcMap->Add("inelastic", kPHInhelastic); 
   mcMap->Add("PionMinusInelastic", kPHInhelastic); 
+  mcMap->Add("pi-Inelastic", kPHInhelastic); 
   mcMap->Add("PionPlusInelastic", kPHInhelastic); 
+  mcMap->Add("pi+Inelastic", kPHInhelastic); 
   mcMap->Add("KaonPlusInelastic", kPHInhelastic); 
+  mcMap->Add("kaon+Inelastic", kPHInhelastic); 
   mcMap->Add("KaonMinusInelastic", kPHInhelastic); 
+  mcMap->Add("kaon-Inelastic", kPHInhelastic); 
   mcMap->Add("KaonZeroLInelastic", kPHInhelastic); 
+  mcMap->Add("kaon0LInelastic", kPHInhelastic); 
   mcMap->Add("KaonZeroSInelastic", kPHInhelastic); 
+  mcMap->Add("kaon0SInelastic", kPHInhelastic); 
   mcMap->Add("LambdaInelastic", kPHInhelastic); 
+  mcMap->Add("lambdaInelastic", kPHInhelastic); 
   mcMap->Add("ProtonInelastic", kPHInhelastic); 
+  mcMap->Add("protonInelastic", kPHInhelastic); 
   mcMap->Add("AntiProtonInelastic", kPHInhelastic); 
+  mcMap->Add("anti_protonInelastic", kPHInhelastic); 
   mcMap->Add("NeutronInelastic", kPHInhelastic); 
+  mcMap->Add("neutronInelastic", kPHInhelastic); 
   mcMap->Add("AntiNeutronInelastic", kPHInhelastic); 
+  mcMap->Add("anti_neutronInelastic", kPHInhelastic); 
   mcMap->Add("LambdaInelastic", kPHInhelastic); 
   mcMap->Add("AntiLambdaInelastic", kPHInhelastic); 
+  mcMap->Add("anti_lambdaInelastic", kPHInhelastic); 
   mcMap->Add("SigmaMinusInelastic", kPHInhelastic); 
+  mcMap->Add("sigma-Inelastic", kPHInhelastic); 
   mcMap->Add("AntiSigmaMinusInelastic", kPHInhelastic); 
+  mcMap->Add("anti_sigma-Inelastic", kPHInhelastic); 
   mcMap->Add("SigmaPlusInelastic", kPHInhelastic); 
+  mcMap->Add("sigma+Inelastic", kPHInhelastic); 
   mcMap->Add("AntiSigmaPlusInelastic", kPHInhelastic); 
+  mcMap->Add("anti_sigma+Inelastic", kPHInhelastic); 
+  mcMap->Add("sigma0Inelastic", kPHInhelastic); 
   mcMap->Add("XiMinusInelastic", kPHInhelastic); 
+  mcMap->Add("xi-Inelastic", kPHInhelastic); 
   mcMap->Add("AntiXiMinusInelastic", kPHInhelastic); 
+  mcMap->Add("anti_xi-Inelastic", kPHInhelastic); 
   mcMap->Add("XiZeroInelastic", kPHInhelastic); 
+  mcMap->Add("xi0Inelastic", kPHInhelastic); 
   mcMap->Add("AntiXiZeroInelastic", kPHInhelastic); 
+  mcMap->Add("anti_xi0Inelastic", kPHInhelastic); 
   mcMap->Add("OmegaMinusInelastic", kPHInhelastic); 
+  mcMap->Add("omega-Inelastic", kPHInhelastic); 
   mcMap->Add("AntiOmegaMinusInelastic", kPHInhelastic); 
+  mcMap->Add("anti_omega-Inelastic", kPHInhelastic); 
   mcMap->Add("DeuteronInelastic", kPHInhelastic); 
   mcMap->Add("dInelastic", kPHInhelastic); 
   mcMap->Add("AntiDeuteronInelastic", kPHInhelastic); 
+  mcMap->Add("anti_deuteronInelastic", kPHInhelastic); 
   mcMap->Add("TritonInelastic", kPHInhelastic); 
   mcMap->Add("tInelastic", kPHInhelastic); 
   mcMap->Add("AntiTritonInelastic", kPHInhelastic); 
+  mcMap->Add("AntiTritonInelasticProcess", kPHInhelastic); 
+  mcMap->Add("anti_tritonInelastic", kPHInhelastic); 
   mcMap->Add("AlphaInelastic", kPHInhelastic); 
   mcMap->Add("alphaInelastic", kPHInhelastic); 
   mcMap->Add("AntiAlphaInelasticProcess", kPHInhelastic); 
+  mcMap->Add("anti_alphaInelastic", kPHInhelastic); 
   mcMap->Add("He3Inelastic", kPHInhelastic); 
   mcMap->Add("AntiHe3InelasticProcess", kPHInhelastic); 
+  mcMap->Add("anti_He3Inelastic", kPHInhelastic); 
   mcMap->Add("ionInelastic", kPHInhelastic); 
   mcMap->Add("CHIPS_LowEnergyIonIonInelastic", kPHInhelastic); 
   mcMap->Add("CHIPS_IonIonElasticScattering", kPHInhelastic); 
@@ -156,8 +188,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("muMinusCaptureAtRest", kPMuonNuclear); 
   mcMap->Add("PositronNuclear", kPPositronNuclear); 
   mcMap->Add("ElectroNuclear", kPElectronNuclear); 
-  mcMap->Add("photoNuclear", kPNoProcess);
-           // To be added in TMCProcess
+  mcMap->Add("photoNuclear", kPPhotoNuclear);
   
   mcMap->Add("Cerenkov", kPCerenkov);
   mcMap->Add("Scintillation", kPScintillation);
@@ -165,6 +196,9 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("OpRayleigh", kPRayleigh);
   mcMap->Add("Rayl", kPRayleigh);
   mcMap->Add("OpBoundary", kPLightScattering);
+  mcMap->Add("OpMieHG", kPLightScattering);
+  mcMap->Add("OpWLS", kPNull);
+             /// \todo Add kPOpticalWavelengthShifting
 
   mcMap->Add("SynRad", kPSynchrotron);
   mcMap->Add("CHIPS_SynchrotronRadiation", kPSynchrotron);
@@ -183,9 +217,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("specialCutForElectron", kPStop); 
   mcMap->Add("MinEkineCuts", kPStop); 
   mcMap->Add("MaxTimeCuts", kPStop); 
-  mcMap->Add("stackPopper", kPNull); 
-             /// \todo Add kPUserDefined
-  
+  mcMap->Add("stackPopper", kPUserDefined);   
 }  
 //
 // protected methods

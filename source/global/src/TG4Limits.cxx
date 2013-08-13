@@ -16,7 +16,7 @@
 
 #include "TG4Limits.h"
 
-#include <globals.hh>
+#include <G4SystemOfUnits.hh>
 
 G4int  TG4Limits::fgCounter = 0;
 

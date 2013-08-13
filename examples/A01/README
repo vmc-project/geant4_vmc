@@ -1,0 +1,79 @@
+$Id: README 545 2011-07-14 16:36:00Z ivana $
+
+------------------------------------------------
+ The Virtual Monte Carlo examples
+ Copyright (C) 2007 - 2012 Ivana Hrivnacova
+ All rights reserved.
+
+ For the licensing terms see geant4_vmc/LICENSE.
+ Contact: vmc@pcroot.cern.ch
+-------------------------------------------------
+
+
+Example A01
+-----------
+  Geant4 extended example analysis/A01 adapted to Virtual Monte Carlo.
+
+  Demonstrates:
+    Geometry - placements with rotations, divided volume
+    Geometry defined via Geant4 (G4) or Root file
+    Definition of sensitive volumes
+    Hodoscope, drift chamber and calorimeter detector types
+    Particles cuts 
+      - G4 cut in range: 1mm
+        G3 cuts set to correspond to 1mm cut in range
+    Primary generator with fixed position and momentum, optionally
+        randomized momentum within a given interval
+    Storing hits, particles stack (from E03 exaample) in Root file
+
+  See also the description of the Geant4 example in 
+    geant4/examples/extednded/analysis/A01/README
+
+Compilation:
+-----------=
+  With G4:
+  An extra library with user defined Geant4 based classes has to be build:
+  
+  cd A01/geant4
+  make
+     
+
+Macros:
+-------
+
+  For running example with G3:
+  
+  run_g3.C        - macro for running example 
+  g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry(default)
+
+  For running example with G4:
+  
+  run_g4.C        - macro for running example 
+  g4Config.C      - configuration macro - geometry option geomRootToGeant4 (default)
+  g4Config1.C     - configuration macro - geometry defined via Geant4 (geomGeant4)
+  g4tgeoConfig.C  - configuration macro - G4 with TGeo navigation 
+  g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
+  g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
+
+  Common macro (called by run_g3.C/run_g4.C):
+  
+  set_vis.C - setting visualization
+
+To run example 
+---------------
+  
+  With G3 + TGeo:
+  root[0] .x run_g3.C
+  
+  With G4:
+  root[0] .x run_g4.C  
+
+  With G4 + TGeo navigation:
+  root[0] .x run_g4.C("g4tgeoConfig.C");   
+
+  With G4 with geometry defined via Geant4:
+  root[0] .x run_g4.C("g4Config1.C"); 
+
+  Note that as geometry is defined via TGeo or native Geant4,
+  the example cannot be run with TGeant3 with its native geometry.
+

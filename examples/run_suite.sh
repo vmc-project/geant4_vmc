@@ -17,7 +17,7 @@
 
 CURDIR=`pwd`
 
-for EXAMPLE in E01 E02 E03 E06
+for EXAMPLE in E01 E02 E03 E06 A01
 do
   cd $CURDIR/$EXAMPLE
 
@@ -37,11 +37,18 @@ do
   echo "... Running example $EXAMPLE with G4 + TGeo navigation" 
   root.exe -q "run_g4.C(\"g4tgeoConfig.C\")"  >& run_g4tgeo.out
 
+  # configuration available only in E03, A01 example
+  if [ "$EXAMPLE" = "E03" -o "$EXAMPLE" = "A01" ]; then 
+
+    # run G4 + geometry via G4
+    echo "... Running example $EXAMPLE with G4; geometry via G4" 
+    root.exe -q "run_g4.C(\"g4Config1.C\")"  >& run_g4pl.out
+  fi
+  
   # configuration available only in E03 example
   if [ "$EXAMPLE" = "E03" ]; then 
-
     # run G4 + User physics list
-    echo "... Running example $EXAMPLE with G4" 
+    echo "... Running example $EXAMPLE with G4; user PL" 
     root.exe -q "run_g4.C(\"g4Config2.C\")"  >& run_g4pl.out
   fi
 

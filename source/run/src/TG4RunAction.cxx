@@ -23,16 +23,24 @@
 #include "TG4RegionsManager.h"
 
 #include <G4Run.hh>
+#include <Randomize.hh>
+#include <G4UImanager.hh>
 
 #include <TObjArray.h>
+
+const G4String TG4RunAction::fgkDefaultRandomStatusFile = "currentRun.rndm";
 
 //_____________________________________________________________________________
 TG4RunAction::TG4RunAction()
   : G4UserRunAction(),
     TG4Verbose("runAction"),
+    fMessenger(this),
     fCrossSectionManager(), 
     fTimer(0),
-    fRunID(-1)
+    fRunID(-1),
+    fSaveRandomStatus(false),
+    fReadRandomStatus(false),
+    fRandomStatusFile(fgkDefaultRandomStatusFile)
 {
 /// Default constructor
 
@@ -73,6 +81,28 @@ void TG4RunAction::BeginOfRunAction(const G4Run* run)
     if ( TG4RegionsManager::Instance()->IsPrint() ) {
       TG4RegionsManager::Instance()->PrintRegions();
     }  
+  }  
+
+  // activate random number status
+  if ( fSaveRandomStatus) {
+    G4UImanager::GetUIpointer()->ApplyCommand("/random/setSavingFlag true");
+    if ( VerboseLevel() > 0)
+      G4cout << "Activated saving random status " << G4endl;  
+      CLHEP::HepRandom::showEngineStatus();
+      G4cout << G4endl;  
+  }    
+    
+  if ( fReadRandomStatus) {
+    // restore event random number status from a file
+    CLHEP::HepRandom::showEngineStatus();
+    G4String command("/random/resetEngineFrom ");
+    command += fRandomStatusFile;
+    G4UImanager::GetUIpointer()->ApplyCommand(command.data());
+    if ( VerboseLevel() > 0) {
+      G4cout << "Resetting random engine from " << fRandomStatusFile << G4endl;  
+      CLHEP::HepRandom::showEngineStatus();
+      G4cout << G4endl;  
+    }         
   }  
 
   fTimer->Start();

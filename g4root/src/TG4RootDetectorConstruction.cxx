@@ -24,6 +24,8 @@
 #include "G4LogicalVolumeStore.hh"
 #include "G4SolidStore.hh"
 #include "G4GeometryManager.hh"
+#include "G4PhysicalConstants.hh"
+#include "G4SystemOfUnits.hh"
 
 #include "TG4RootNavMgr.h"
 #include "TList.h"
@@ -54,8 +56,9 @@ TG4RootDetectorConstruction::TG4RootDetectorConstruction(TGeoManager *geom)
 {
 /// Default ctor.
    if (!geom || !geom->IsClosed()) {
-      G4cerr << "Cannot create TG4RootDetectorConstruction without closed ROOT geometry !" << G4endl;
-      G4Exception("Aborting...");
+      G4Exception("TG4RootDetectorConstruction::TG4RootDetectorConstruction",
+                  "G4Root_F001", FatalException, 
+                  "Cannot create TG4RootDetectorConstruction without closed ROOT geometry !");
    }   
 }
 
@@ -134,8 +137,9 @@ G4VPhysicalVolume *TG4RootDetectorConstruction::Construct()
 {
 /// Main construct method.
    if (!fGeometry || !fGeometry->IsClosed()) {
-      G4cerr << "Cannot create TG4RootDetectorConstruction without closed ROOT geometry !" << G4endl;
-      G4Exception("Aborting...");
+      G4Exception("TG4RootDetectorConstruction::Construct",
+                  "G4Root_F001", FatalException, 
+                  "Cannot create TG4RootDetectorConstruction without closed ROOT geometry !");
    }
    if (fTopPV) return fTopPV; 
    // Convert reflections via TGeo reflection factory
@@ -228,8 +232,11 @@ G4LogicalVolume *TG4RootDetectorConstruction::CreateG4LogicalVolume(TGeoVolume *
    G4String sname(vol->GetName());
    G4VSolid *pSolid = CreateG4Solid(vol->GetShape());
    if (!pSolid) {
-      G4cerr << "Cannot make solid from shape: " << vol->GetShape()->GetName() << G4endl;
-      G4Exception("Aborting in CreateLogicalVolume()");
+      G4ExceptionDescription description;
+      description << "      " 
+        << "Cannot make solid from shape: " << vol->GetShape()->GetName();
+      G4Exception("TG4RootDetectorConstruction::CreateG4LogicalVolume",
+                  "G4Root_F002", FatalException, description);
    }   
    G4Material *pMaterial = 0;
    if (vol->IsAssembly()) {
@@ -238,8 +245,11 @@ G4LogicalVolume *TG4RootDetectorConstruction::CreateG4LogicalVolume(TGeoVolume *
       pMaterial = GetG4Material(vol->GetMedium()->GetMaterial());
    }
    if (!pMaterial) {
-      G4cerr << "Cannot make material for volume: " << vol->GetName() << G4endl;
-      G4Exception("Aborting in CreateLogicalVolume()");
+      G4ExceptionDescription description;
+      description << "      " 
+         << "Cannot make material for volume: " << vol->GetName() << G4endl;
+      G4Exception("TG4RootDetectorConstruction::CreateG4LogicalVolume",
+                  "G4Root_F003", FatalException, description);
    }   
    pVolume = new G4LogicalVolume(pSolid, pMaterial, sname, 
                                                   NULL, NULL, NULL, false);
@@ -263,13 +273,19 @@ G4VPhysicalVolume *TG4RootDetectorConstruction::CreateG4PhysicalVolume(TGeoNode 
    G4String pName(node->GetVolume()->GetName());
    G4LogicalVolume *pCurrentLogical = CreateG4LogicalVolume(node->GetVolume());
    if (!pCurrentLogical) {
-      G4cerr << "No G4 volume created for TGeo node " << node->GetName() << G4endl;
-      G4Exception("Aborting in CreatePhysicalVolume()");
+      G4ExceptionDescription description;
+      description << "      " 
+         << "No G4 volume created for TGeo node " << node->GetName() << G4endl;
+      G4Exception("TG4RootDetectorConstruction::CreateG4PhysicalVolume",
+                  "G4Root_F004", FatalException, description);
    }   
    G4LogicalVolume *pMotherLogical = CreateG4LogicalVolume(node->GetMotherVolume());
    if (!pMotherLogical && node!=fGeometry->GetTopNode()) {
-      G4cerr << "No G4 mother volume crated for TGeo node " << node->GetName() << G4endl;
-      G4Exception("Aborting in CreatePhysicalVolume()");
+      G4ExceptionDescription description;
+      description << "      " 
+         << "No G4 mother volume crated for TGeo node " << node->GetName();
+      G4Exception("TG4RootDetectorConstruction::CreateG4PhysicalVolume",
+                  "G4Root_F005", FatalException, description);
    }   
    G4bool pMany = false;
    G4int pCopyNo = node->GetNumber();
@@ -330,8 +346,11 @@ G4Material *TG4RootDetectorConstruction::CreateG4Material(const TGeoMaterial *ma
 //         G4Element *pElement = G4Element::GetElement(name);
          TGeoElement *elem = table->GetElement(Int_t(mixt->GetZmixt()[i]));
          if (!elem) {
-            G4cerr << "Woops: no element corresponding to Z=" << Int_t(mixt->GetZmixt()[i]) << G4endl;
-            G4Exception("Aborting...");
+            G4ExceptionDescription description;
+            description << "      " 
+              << "Woops: no element corresponding to Z=" << Int_t(mixt->GetZmixt()[i]);
+            G4Exception("TG4RootDetectorConstruction::CreateG4Material",
+                        "G4Root_F006", FatalException, description);
          }   
          elname = elem->GetTitle();
          symbol = elem->GetName();

@@ -25,9 +25,15 @@ BINDIR  = $(TOPDIR)/tmp/tgt_$(PLATFORM)
 LIBDIR  = $(TOPDIR)/lib/tgt_$(PLATFORM)
 INCDIR  = $(TOPDIR)/include/$(PACKAGE)
 
-ROOT_INCDIR = $(shell root-config --incdir)
-ROOT_BINDIR = $(shell root-config --bindir)
-ROOT_ETCDIR = $(shell root-config --etcdir)/vmc
+ifeq ($(ROOTSYS),)
+ROOT_INCDIR := $(shell root-config --incdir)
+ROOT_BINDIR := $(shell root-config --bindir)
+ROOT_ETCDIR := $(shell root-config --etcdir)/vmc
+else
+ROOT_INCDIR = $(ROOTSYS)/include
+ROOT_BINDIR = $(ROOTSYS)/bin
+ROOT_ETCDIR = $(ROOTSYS)/etc/vmc
+endif
 
 include $(ROOT_ETCDIR)/Makefile.$(PLATFORM)
 
@@ -61,9 +67,7 @@ SRCS	:= $(CXXSRC)
 
 # C++ Headers processed by CINT
 #
-HDRS	:= run/include/TG4RunConfiguration.h \
-	   run/include/TGeant4.h \
-	   $(wildcard interfaces/include/*.h) \
+HDRS	:= $(wildcard interfaces/include/*.h) \
 	   geant4vmc_guiLinkDef.h
 
 # C++ Headers copied to include
@@ -78,9 +82,22 @@ OBJS	:= $(CXXOBJ) $(GDICTO)
 
 # Make include list
 #
-ifndef G4INCLUDE
-  G4INCLUDE := $(G4INSTALL)/include
-endif  
+ifeq ($(G4INSTALL),)
+  G4CFLAGS := $(shell geant4-config --cflags)
+  #additional flags - not handled via geant4-config
+  ifeq ($(G4VIS_NONE),) 
+    G4CFLAGS += -DG4VIS_USE 
+  endif  
+  ifeq ($(G4UI_NONE),) 
+    G4CFLAGS += -DG4UI_USE 
+  endif  
+else   
+  ifndef G4INCLUDE
+    G4CFLAGS := -I$(G4INSTALL)/include
+  else
+    G4CFLAGS := -I$(G4INCLUDE)
+  endif 
+endif   
 
 INCLUDES := $(patsubst %,-I%/include,$(GDIRS)) \
            -I$(TOPDIR)/include/geant4vmc \
@@ -100,7 +117,7 @@ endif
 
 # C++ compilation flags
 #
-CXXFLAGS := $(CXXOPTS) $(G4MCDEFS) -I. $(INCLUDES) -I$(ROOT_INCDIR) 
+CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) $(G4CFLAGS)
 
 # Debug option 
 #

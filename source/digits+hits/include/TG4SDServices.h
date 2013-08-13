@@ -60,6 +60,7 @@ class TG4SDServices
           // volume IDs conversions
     G4int GetVolumeID(const G4String& volumeName) const;
     G4int GetVolumeID(G4LogicalVolume* volume) const;
+    G4int GetMediumID(G4LogicalVolume* volume) const;
     G4String         GetVolumeName(G4int volumeId) const;
     G4LogicalVolume* GetLogicalVolume(G4int volumeId, G4bool warn = true) const;   
     G4int            GetMediumId(G4int volumeId) const;

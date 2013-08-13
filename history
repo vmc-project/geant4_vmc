@@ -11,6 +11,90 @@ $Id$
      
 Tags (history):
 ===============
+  14/12/2012
+  v2-14:
+    Migration to Geant4 9.6
+    Geant4 VMC:
+    Developments:    
+    - Implemented commands for activating saving random number status
+      and restoring it from a file: 
+    - Improved TG4VSpecialCuts: reorganized code to avoid unnecessary 
+      calculations before tests
+    - Removed obsolete features:
+      classes  TG4LVStructure, TG4LVTree, TG4LVTreeMessenger;
+      methood TG4EventAction::DisplayEvent; command /mcEvent/drawTracks
+    - Added an option to exclude G3toG4 dependent code which can be activated
+      by setting NO_G3TOG4 environment variable 
+    G4Root:
+    - Added TG4RootNavigator::GetGlobalExitNormal(), required with Geant4 9.6.
+      (A. Gheata)
+      
+    Fixes:
+    - Fixed mapping between Rootino and geantino;
+      user can now introduce chargedgeantino by setting the title 
+      "ChargedRootino" to Rootino particle.
+    - Fixed bug in TVirtualMC::Gdtom() implementation 
+    - Fixed units in stacking particles 
+    - Fix in TVirtualMC::GetSecondary implementation: get track global time 
+      instead of the local one
+    - Fixes to support Geant4 native geometries: handling copyNo, taking into 
+      account the user limits 
+    - Fixed units in material optical properties  
+ 
+    Examples:
+    - Added new A01 example
+    - Improved g4vis.in macros and removed use of gean4_vmc commands 
+      (now removed)
+    - In E02, E03: Default physics list changed to FTFP_BERT to be consistent 
+      with the examples in Geant4 9.6
+ 
+    Tested with Geant4 9.6 (with embedded CLHEP 2.1.3.1), 
+      Root 5.34/03, VGM 3.06
+
+
+  13/12/2011
+  v2-13:
+    Migration to Geant4 9.5:
+    In Makefiles: use of geant4-config if G4INSTALL is not defined
+    
+    Geant4 VMC:
+    Developments:
+    - Implemented a possibility to select sensitive volumes by the user;
+      in this case TVirtualMCApplication::Stepping() function is called only when
+      track is located in a sensitive volume.
+    - Added the user physics selection in the TGeant4 title, so that
+      it can be retrievable in a user application.
+    - Migration to changes in G4PhysListFactory
+      (now all hadronic lists can be combined with all EM options)
+    - Modified building of physics list:
+      Added TG4ExtraPhysicsList with the following optional Geant4 builders:
+      G4ExtraPhysics   -  moved from TG4EmPhysicsList;
+      G4OpticalPhysics -  which has replaced TG4OpticalPhysics;
+        this implies the changes of commands for configuring optical processes
+      G4RadioactiveDecayBuilder - new
+    - Faster implementation of TVirtualMC::GetMediumID()
+      (the medium ID is now added in TG4SensitiveDetector object)
+
+    Fixes:
+    - Fix in GetSecondary(..) (bug reported by L. Zambelli) 
+      there was missing conversion of units in the returned value of particle 
+      momentum.
+    - Fixing compilation with G4UI_NONE and G4VIS_NONE
+
+    Examples:
+    - new g4libs.C macro with use of geant4-config;
+      the macro based on liblist renamed to g4libs_old.C;
+      previous g4libs_old.C (explicit loading) removed
+    - E06:
+      - Added setting parameters for Optical Mie Scattering (according N06)  
+      - Updated configuration optical processes using G4 commands
+      - Removed special setting for G3 (it was causing G4 exception
+        and seems not to be needed for G3)
+    
+    Tested with Geant4 9.5 (with embedded CLHEP 2.1.1.0), 
+      Root 5.30/04 and Root 5.32/00 + patch in root/etc from rev.42474,
+      VGM 3.05
+
   14/07/2011
   v2-12:
     Migration to Root v5.30/00 and Geant4 9.5.b01
