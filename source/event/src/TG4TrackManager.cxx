@@ -37,7 +37,7 @@
 #include <G4SystemOfUnits.hh>
 
 // static data members
-__thread TG4TrackManager* TG4TrackManager::fgInstance = 0;
+G4ThreadLocal TG4TrackManager* TG4TrackManager::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4TrackManager::TG4TrackManager()     

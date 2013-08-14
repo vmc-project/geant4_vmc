@@ -56,7 +56,7 @@ class TG4G3Defaults
     TG4G3Defaults& operator=(const TG4G3Defaults& right);
 
     // static data members  
-    static __thread TG4G3Defaults*  fgInstance; ///< this instance
+    static G4ThreadLocal TG4G3Defaults*  fgInstance; ///< this instance
     
     // data members
     TG4G3CutVector     fCutVector;     ///< vector of default cut values       

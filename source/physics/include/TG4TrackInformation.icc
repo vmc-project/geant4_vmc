@@ -16,7 +16,7 @@
 /// \author I. Hrivnacova; IPN Orsay
 
 /// Geant4 allocator for TG4TrackInformation objects
-extern __thread G4Allocator<TG4TrackInformation>* gTrackInfoAllocator;
+extern G4ThreadLocal G4Allocator<TG4TrackInformation>* gTrackInfoAllocator;
 
 inline void* TG4TrackInformation::operator new(size_t) 
 {

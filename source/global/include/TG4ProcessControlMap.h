@@ -74,7 +74,7 @@ class TG4ProcessControlMap
 
     // static data members
     // MT COMMON
-    static __thread TG4ProcessControlMap*  fgInstance; ///< this instance
+    static G4ThreadLocal TG4ProcessControlMap*  fgInstance; ///< this instance
 
     // data members
     Map  fMap; ///< map container

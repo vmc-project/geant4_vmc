@@ -43,7 +43,7 @@
 #include <iomanip>
 #include <math.h>
 
-__thread TG4GeometryServices* TG4GeometryServices::fgInstance = 0;
+G4ThreadLocal TG4GeometryServices* TG4GeometryServices::fgInstance = 0;
 G4String             TG4GeometryServices::fgBuffer="";
 const G4double       TG4GeometryServices::fgkAZTolerance = 0.001;      
 const G4double       TG4GeometryServices::fgkDensityTolerance = 0.005; 

@@ -111,7 +111,7 @@ class TG4ParticlesManager : public TG4Verbose
                               G4ParticleDefinition* particleDefinition);  
 
     // static data members
-    static __thread TG4ParticlesManager*  fgInstance; ///< this instance
+    static G4ThreadLocal TG4ParticlesManager*  fgInstance; ///< this instance
     
     //
     // data members

@@ -22,7 +22,7 @@
 #include <iomanip>
 #include "globals.hh"
 
-__thread TG4ProcessMCMap* TG4ProcessMCMap::fgInstance = 0;
+G4ThreadLocal TG4ProcessMCMap* TG4ProcessMCMap::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4ProcessMCMap::TG4ProcessMCMap() 

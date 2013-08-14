@@ -17,7 +17,7 @@
 #include "TG4TrackInformation.h"
 
 /// Geant4 allocator for TG4TrackInformation objects
-__thread G4Allocator<TG4TrackInformation>* gTrackInfoAllocator = 0;
+G4ThreadLocal G4Allocator<TG4TrackInformation>* gTrackInfoAllocator = 0;
 
 //_____________________________________________________________________________
 TG4TrackInformation::TG4TrackInformation()

@@ -84,7 +84,7 @@ class TG4SteppingAction : public G4UserSteppingAction
     TG4SteppingAction& operator=(const TG4SteppingAction& right);
 
     // static data members
-    static __thread TG4SteppingAction*   fgInstance; ///< this instance
+    static G4ThreadLocal TG4SteppingAction*   fgInstance; ///< this instance
     //
     // methods
     void ProcessTrackIfLooping(const G4Step* step);

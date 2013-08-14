@@ -37,7 +37,7 @@
 #include <G4UImanager.hh>
 
 // static data members
-__thread TG4TrackingAction* TG4TrackingAction::fgInstance = 0;
+G4ThreadLocal TG4TrackingAction* TG4TrackingAction::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4TrackingAction::TG4TrackingAction()     

@@ -41,7 +41,7 @@
 #include <TLorentzVector.h>
 #include <TMath.h>
 
-__thread TG4StepManager* TG4StepManager::fgInstance = 0;
+G4ThreadLocal TG4StepManager* TG4StepManager::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4StepManager::TG4StepManager(const TString& userGeometry) 

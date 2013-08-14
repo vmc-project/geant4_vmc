@@ -32,7 +32,7 @@
 #include <TVirtualMCApplication.h>
 
 // static data members
-__thread TG4SteppingAction* TG4SteppingAction::fgInstance = 0;
+G4ThreadLocal TG4SteppingAction* TG4SteppingAction::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4SteppingAction::TG4SteppingAction() 

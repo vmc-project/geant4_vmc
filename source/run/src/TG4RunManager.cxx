@@ -51,7 +51,7 @@
 #include <TG4RootNavMgr.h>
 #include <TVirtualMCApplication.h>
 
-__thread TG4RunManager* TG4RunManager::fgInstance = 0;
+G4ThreadLocal TG4RunManager* TG4RunManager::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration, 

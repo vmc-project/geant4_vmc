@@ -40,7 +40,7 @@
 #include <TDatabasePDG.h>
 #include <TVirtualMCApplication.h>
 
-__thread TG4PhysicsManager* TG4PhysicsManager::fgInstance   = 0;
+G4ThreadLocal TG4PhysicsManager* TG4PhysicsManager::fgInstance   = 0;
 const G4double     TG4PhysicsManager::fgkDefautCut = 1*mm;  
 
 //_____________________________________________________________________________

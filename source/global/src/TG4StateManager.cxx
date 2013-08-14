@@ -17,7 +17,7 @@
 #include "TG4StateManager.h"
 #include "TG4Globals.h"
 
-__thread TG4StateManager* TG4StateManager::fgInstance = 0;
+G4ThreadLocal TG4StateManager* TG4StateManager::fgInstance = 0;
 
 //_____________________________________________________________________________
 G4String TG4StateManager::GetStateName(TG4ApplicationState state)

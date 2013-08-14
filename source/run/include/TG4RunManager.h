@@ -90,7 +90,7 @@ class TG4RunManager : public TG4Verbose
     void SetRandomSeed();
     
     // static data members
-    static __thread TG4RunManager*  fgInstance; ///< this instance
+    static G4ThreadLocal TG4RunManager*  fgInstance; ///< this instance
     
     // data members    
     G4RunManager*         fRunManager;       ///< G4RunManager

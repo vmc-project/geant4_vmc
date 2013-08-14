@@ -82,7 +82,7 @@ class TG4SpecialPhysicsList: public G4VModularPhysicsList,
     void Configure(const G4String& selection);
     
     // static data members
-    static __thread TG4SpecialPhysicsList*  fgInstance; ///< this instance
+    static G4ThreadLocal TG4SpecialPhysicsList*  fgInstance; ///< this instance
 };
 
 // inline methods

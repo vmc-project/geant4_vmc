@@ -84,7 +84,7 @@ class TG4GeometryManager : public TG4Verbose
     void FillMediumMap();
         
     // static data members
-    static __thread TG4GeometryManager*  fgInstance;     ///< this instance
+    static G4ThreadLocal TG4GeometryManager*  fgInstance;     ///< this instance
     
     /// default material density limit for setting max allowed step 
     static const G4double  fgDefaultLimitDensity; 

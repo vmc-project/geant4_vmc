@@ -61,7 +61,7 @@ class TG4SDManager
     TG4SDManager& operator=(const TG4SDManager& right);
 
     // static data members
-    static __thread TG4SDManager* fgInstance; ///< this instance
+    static G4ThreadLocal TG4SDManager* fgInstance; ///< this instance
     
     //
     // data members

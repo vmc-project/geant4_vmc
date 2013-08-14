@@ -59,7 +59,7 @@
 #include <RootGM/volumes/Factory.h>
 #endif
 
-__thread TG4GeometryManager* TG4GeometryManager::fgInstance = 0;
+G4ThreadLocal TG4GeometryManager* TG4GeometryManager::fgInstance = 0;
 const G4double      TG4GeometryManager::fgDefaultLimitDensity = 0.001*(g/cm3);
 const G4double      TG4GeometryManager::fgDefaultMaxStep= 10*cm;
 

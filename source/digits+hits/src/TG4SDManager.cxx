@@ -25,7 +25,7 @@
 #include <TVirtualMC.h>
 
 
-__thread TG4SDManager* TG4SDManager::fgInstance = 0;
+G4ThreadLocal TG4SDManager* TG4SDManager::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4SDManager::TG4SDManager()
