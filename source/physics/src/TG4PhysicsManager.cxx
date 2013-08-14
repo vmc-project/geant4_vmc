@@ -37,6 +37,7 @@
 #include <G4VProcess.hh>
 #include <G4Version.hh>
 #include <G4SystemOfUnits.hh>
+#include <G4Version.hh>
 
 #include <TDatabasePDG.h>
 #include <TVirtualMCApplication.h>
@@ -893,11 +894,12 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus()
     case Detection: 
        return kPLightDetection;
        ;;
-    // dichroic 
+#if G4VERSION_NUMBER >= 1000
     // TO BE CHECKED
     case Dichroic:
        return kPLightDetection;
        ;;
+#endif       
        
     case NotAtBoundary:
     case SameMaterial:
