@@ -168,9 +168,6 @@ class TG4StepManager
     /// \brief limits which step limit was modified during tracking
     TG4Limits*          fLimitsModifiedOnFly;
 
-    /// touchable history buffer    
-    G4VTouchable*       fTouchableHistory;
-    
     /// G4SteppingManager  
     G4SteppingManager*  fSteppingManager;
     

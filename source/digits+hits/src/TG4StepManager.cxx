@@ -49,7 +49,6 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
     fStep(0),
     fStepStatus(kNormalStep),
     fLimitsModifiedOnFly(0),
-    fTouchableHistory(0),
     fSteppingManager(0),
     fVolPathBuffer(),
     fCopyNoOffset(0),
@@ -66,8 +65,6 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
       
   fgInstance = this;  
   
-  fTouchableHistory = new G4TouchableHistory();
-  
   /// Set offset for passing copyNo to 1;
   /// as G3toG4 decrement copyNo passed by user by 1
   if ( userGeometry == "VMCtoGeant4") fCopyNoOffset = 1;
@@ -83,8 +80,6 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
 TG4StepManager::~TG4StepManager() 
 {
 /// Destructor
-
-  delete fTouchableHistory;
 }
 
 //
