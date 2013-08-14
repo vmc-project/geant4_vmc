@@ -23,6 +23,7 @@
 
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
+#include <G4Version.hh>
 
 //_____________________________________________________________________________
 TG4ProcessControlMapPhysics::TG4ProcessControlMapPhysics(const G4String& name)
@@ -128,6 +129,7 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("kaon0SInelastic", kHADR); 
   controlMap->Add("LambdaInelastic", kHADR); 
   controlMap->Add("lambdaInelastic", kHADR); 
+  controlMap->Add("anti-lambdaInelastic", kHADR); 
   controlMap->Add("ProtonInelastic", kHADR); 
   controlMap->Add("protonInelastic", kHADR); 
   controlMap->Add("AntiProtonInelastic", kHADR); 
@@ -188,8 +190,11 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("muNucl", kMUNU); 
   controlMap->Add("muMinusCaptureAtRest", kMUNU); 
   controlMap->Add("PositronNuclear", kNoG3Controls); 
+  controlMap->Add("positronNuclear", kNoG3Controls); 
   controlMap->Add("ElectroNuclear", kNoG3Controls); 
+  controlMap->Add("electronNuclear", kNoG3Controls); 
   controlMap->Add("photoNuclear", kNoG3Controls); 
+  controlMap->Add("photonNuclear", kNoG3Controls); 
   
   controlMap->Add("Cerenkov", kCKOV);
   controlMap->Add("Scintillation", kNoG3Controls);
@@ -223,11 +228,19 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
   G4bool success = true;
 
+#if G4VERSION_NUMBER < 1000
+  theParticleIterator->reset();
+  while ((*theParticleIterator)())
+  {
+    G4ProcessVector* processVector 
+      = theParticleIterator->value()->GetProcessManager()->GetProcessList();
+#else
   aParticleIterator->reset();
   while ((*aParticleIterator)())
   {
     G4ProcessVector* processVector 
       = aParticleIterator->value()->GetProcessManager()->GetProcessList();
+#endif
     for (G4int i=0; i<processVector->length(); i++) {
     
       G4String processName = (*processVector)[i]->GetProcessName();
@@ -235,12 +248,16 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
       if ( controlMap->GetControl(processName) == kNoG3Controls &&
            processName != "Transportation" &&
            processName != "PositronNuclear" && 
+           processName != "positronNuclear" && 
            processName != "ElectroNuclear" &&
+           processName != "electronNuclear" &&
            processName != "photoNuclear" &&
+           processName != "photonNuclear" &&
            processName != "Scintillation" && 
            processName != "OpMieHG" &&
            processName != "OpWLS" &&
            processName != "MinEkineCuts" && 
+           processName != "G4MinEkineCuts" && 
            processName != "MaxTimeCuts" && 
            processName != "stackPopper" ) {
            
