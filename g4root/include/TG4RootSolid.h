@@ -18,6 +18,10 @@
 #define ROOT_TG4RootSolid
 
 
+#ifndef G4VERSION_HH
+#include "G4Version.hh"
+#endif
+
 #ifndef G4VSOLID_HH
 #include "G4VSolid.hh"
 #endif
@@ -65,7 +69,9 @@ public:
    virtual void DescribeYourselfTo (G4VGraphicsScene& scene) const;
    virtual G4VisExtent   GetExtent        () const;
    virtual G4Polyhedron* CreatePolyhedron () const;
+#if G4VERSION_NUMBER < 1000
    virtual G4NURBS*      CreateNURBS      () const;
+#endif   
    virtual G4Polyhedron* GetPolyhedron () const;
    virtual const G4VSolid* GetConstituentSolid(G4int no) const;
    virtual       G4VSolid* GetConstituentSolid(G4int no);

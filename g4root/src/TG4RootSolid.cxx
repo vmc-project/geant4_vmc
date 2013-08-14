@@ -14,21 +14,23 @@
 ///
 /// \author A. Gheata; CERN
 
+#include "TG4RootSolid.h"
+
 #include "TGeoShape.h"
 #include "TGeoBBox.h"
+#include "TMath.h"
 
 #include "G4VoxelLimits.hh"
 #include "G4AffineTransform.hh"
 #include "G4VPVParameterisation.hh"
 #include "G4VGraphicsScene.hh"
 #include "G4Polyhedron.hh"
+#if G4VERSION_NUMBER < 1000
 #include "G4NURBS.hh"
 #include "G4NURBSbox.hh"
+#endif
 #include "G4VisExtent.hh"
 #include "G4SystemOfUnits.hh"
-
-#include "TG4RootSolid.h"
-#include "TMath.h"
 
 //ClassImp(TG4RootSolid)
 
@@ -255,6 +257,7 @@ G4Polyhedron* TG4RootSolid::CreatePolyhedron () const
    return NULL;
 }
    
+#if G4VERSION_NUMBER < 1000
 //______________________________________________________________________________
 G4NURBS* TG4RootSolid::CreateNURBS() const
 {
@@ -262,6 +265,7 @@ G4NURBS* TG4RootSolid::CreateNURBS() const
 /// to delete it).  A null pointer means "not created".
    return NULL;
 }
+#endif   
    
 //______________________________________________________________________________
 G4Polyhedron* TG4RootSolid::GetPolyhedron () const

@@ -24,6 +24,7 @@
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
 #include <G4Decay.hh>
+#include <G4Version.hh>
 
 //_____________________________________________________________________________
 TG4ExtDecayerPhysics::TG4ExtDecayerPhysics(const G4String& name)
@@ -86,10 +87,17 @@ void TG4ExtDecayerPhysics::ConstructProcess()
      // But we may have a problem if there are more than one 
      // instances of G4Decay process
 
+#if G4VERSION_NUMBER < 1000
   theParticleIterator->reset();
   while ((*theParticleIterator)())
   {    
     G4ParticleDefinition* particle = theParticleIterator->value();
+#else
+  aParticleIterator->reset();
+  while ((*aParticleIterator)())
+  {    
+    G4ParticleDefinition* particle = aParticleIterator->value();
+#endif    
     G4ProcessManager* pmanager = particle->GetProcessManager();
     
     if ( fSelection.find(particle->GetParticleName()) != std::string::npos ) {
@@ -108,7 +116,11 @@ void TG4ExtDecayerPhysics::ConstructProcess()
 
     if ( VerboseLevel() > 1 ) {
       G4cout << "Setting ext decayer for: " 
+#if G4VERSION_NUMBER < 1000
              <<  theParticleIterator->value()->GetParticleName() 
+#else
+             <<  aParticleIterator->value()->GetParticleName() 
+#endif    
              << G4endl;
     } 
     

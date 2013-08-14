@@ -18,6 +18,7 @@
 #include "TG4StackPopper.h"
 
 #include <G4ProcessManager.hh>
+#include <G4Version.hh>
 
 
 //_____________________________________________________________________________
@@ -67,10 +68,17 @@ void TG4StackPopperPhysics::ConstructProcess()
 
   fStackPopperProcess = new TG4StackPopper();
 
+#if G4VERSION_NUMBER < 1000
   theParticleIterator->reset();
   while( (*theParticleIterator)() ){
 
     G4ParticleDefinition* particle = theParticleIterator->value();
+#else
+  aParticleIterator->reset();
+  while( (*aParticleIterator)() ){
+
+    G4ParticleDefinition* particle = aParticleIterator->value();
+#endif    
     G4ProcessManager* pmanager = particle->GetProcessManager();
 
     // add this as an option

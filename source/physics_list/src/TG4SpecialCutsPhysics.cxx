@@ -23,6 +23,7 @@
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
 #include <G4VProcess.hh>
+#include <G4Version.hh>
 
 #include <TMCProcess.h>
 
@@ -100,10 +101,17 @@ void TG4SpecialCutsPhysics::ConstructProcess()
 
   TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
 
+#if G4VERSION_NUMBER < 1000
   theParticleIterator->reset();
   while ((*theParticleIterator)())
   {
     G4ParticleDefinition* particle = theParticleIterator->value();
+#else
+  aParticleIterator->reset();
+  while ((*aParticleIterator)())
+  {
+    G4ParticleDefinition* particle = aParticleIterator->value();
+#endif    
     TG4G3ParticleWSP particleWSP 
       = g3PhysicsManager->GetG3ParticleWSP(particle);
     G4String name =

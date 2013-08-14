@@ -34,6 +34,7 @@
 #include <G4PAIPhotonModel.hh>
 #include <G4LogicalVolumeStore.hh>
 #include <G4RegionStore.hh>
+#include <G4Version.hh>
 
 //
 // static methods
@@ -239,9 +240,15 @@ void TG4EmModelPhysics::AddModels()
     G4String particles = it->second->GetParticles();
     
     // Add selected models
+#if G4VERSION_NUMBER < 1000
     theParticleIterator->reset();
     while ((*theParticleIterator)()) {
       G4ParticleDefinition* particle = theParticleIterator->value();
+#else
+    aParticleIterator->reset();
+    while ((*aParticleIterator)()) {
+      G4ParticleDefinition* particle = aParticleIterator->value();
+#endif      
       G4String particleName = particle->GetParticleName();
       
       // skip particles which are not in selection

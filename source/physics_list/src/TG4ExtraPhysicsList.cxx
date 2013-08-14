@@ -24,6 +24,7 @@
 #include <G4ProcessManager.hh>
 #include <G4ProcessTable.hh>
 #include <G4SystemOfUnits.hh>
+#include <G4Version.hh>
 
 const G4double TG4ExtraPhysicsList::fgkDefaultCutValue = 1.0 * mm;
 
@@ -121,14 +122,19 @@ void TG4ExtraPhysicsList::ConstructProcess()
 
   // create processes for registered physics
   // G4VModularPhysicsList::ConstructProcess();
-  G4PhysConstVector::iterator itr;
-  for (itr = physicsVector->begin(); itr!= physicsVector->end(); ++itr) {
-    (*itr)->ConstructProcess();
+
+#if G4VERSION_NUMBER < 1000
+  G4PhysConstVector::iterator it;
+#else  
+  G4VMPLData::G4PhysConstVectorData* physicsVector 
+    = GetSubInstanceManager().offset[GetInstanceID()].physicsVector;
+  G4VMPLData::G4PhysConstVectorData::iterator it;
+#endif   
+  for (it = physicsVector->begin(); it!= physicsVector->end(); ++it) {
+    (*it)->ConstructProcess();
   }
-  
   if ( VerboseLevel() > 0 ) { 
     G4cout << "### Extra physics constructed: ";
-    G4PhysConstVector::iterator it;
     for ( it = physicsVector->begin(); it != physicsVector->end(); ++it ) {
       G4cout << (*it)->GetPhysicsName() << " ";
     }
@@ -154,8 +160,14 @@ void TG4ExtraPhysicsList::VerboseLevel(G4int level)
 
   TG4VVerbose::VerboseLevel(level);
   SetVerboseLevel(level);
-  
+
+#if G4VERSION_NUMBER < 1000
   G4PhysConstVector::iterator it;
+#else  
+  G4VMPLData::G4PhysConstVectorData* physicsVector 
+    = GetSubInstanceManager().offset[GetInstanceID()].physicsVector;
+  G4VMPLData::G4PhysConstVectorData::iterator it;
+#endif   
   for ( it = physicsVector->begin(); it != physicsVector->end(); ++it ) {
     TG4Verbose* verbose = dynamic_cast<TG4Verbose*>(*it);
     if ( verbose )

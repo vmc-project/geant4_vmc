@@ -35,6 +35,7 @@
 #include <G4ProcessTable.hh>
 #include <G4ProcessManager.hh>
 #include <G4VProcess.hh>
+#include <G4Version.hh>
 #include <G4SystemOfUnits.hh>
 
 #include <TDatabasePDG.h>
@@ -890,6 +891,11 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus()
        ;;
     // detection
     case Detection: 
+       return kPLightDetection;
+       ;;
+    // dichroic 
+    // TO BE CHECKED
+    case Dichroic:
        return kPLightDetection;
        ;;
        

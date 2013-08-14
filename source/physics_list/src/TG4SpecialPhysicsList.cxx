@@ -183,9 +183,15 @@ void TG4SpecialPhysicsList::ConstructProcess()
   // To avoid call AddTransportation twice we do not call directly
   // G4VModularPhysicsList::ConstructProcess();
   // but call registered processes ourselves:
-  G4PhysConstVector::iterator itr;
-  for (itr = physicsVector->begin(); itr!= physicsVector->end(); ++itr) {
-    (*itr)->ConstructProcess();
+#if G4VERSION_NUMBER < 1000
+  G4PhysConstVector::iterator it;
+#else  
+  G4VMPLData::G4PhysConstVectorData* physicsVector 
+    = GetSubInstanceManager().offset[GetInstanceID()].physicsVector;
+  G4VMPLData::G4PhysConstVectorData::iterator it;
+#endif   
+  for (it = physicsVector->begin(); it!= physicsVector->end(); ++it) {
+    (*it)->ConstructProcess();
   }
 }
 
@@ -207,7 +213,13 @@ void TG4SpecialPhysicsList::VerboseLevel(G4int level)
   TG4VVerbose::VerboseLevel(level);
   SetVerboseLevel(level);
   
+#if G4VERSION_NUMBER < 1000
   G4PhysConstVector::iterator it;
+#else  
+  G4VMPLData::G4PhysConstVectorData* physicsVector 
+    = GetSubInstanceManager().offset[GetInstanceID()].physicsVector;
+  G4VMPLData::G4PhysConstVectorData::iterator it;
+#endif   
   for ( it = physicsVector->begin(); it != physicsVector->end(); ++it ) {
     TG4Verbose* verbose = dynamic_cast<TG4Verbose*>(*it);
     if ( verbose )
