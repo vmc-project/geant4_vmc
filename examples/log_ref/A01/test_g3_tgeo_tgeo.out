@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/04   10 January 2013   *
+  *   Version   5.34/10    29 August 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
+ROOT 5.34/10 (v5-34-10@v5-34-10, Oct 30 2013, 13:50:11 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -68,13 +68,13 @@ Chamber1 has 532 hits.
 Chamber2 has 527 hits.
 EmCalorimeter has 31 hits. Total Edep is 27190.7 (MeV)
 HadCalorimeter has 3 hits. Total Edep is 9.09735 (MeV)
-Real time 0:00:03, CP time 2.970
+Real time 0:00:03, CP time 3.260
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   621036127    2504425F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   382070239    16C5EDDF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   621059061   621036127
-                                        HEX    25049BF5    2504425F
+          with Store/Table at absolute adrs   382093173   382070239
+                                        HEX    16C64775    16C5EDDF
                                         HEX        59FA           0
                               relative adrs       23034           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

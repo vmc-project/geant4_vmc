@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/04   10 January 2013   *
+  *   Version   5.34/10    29 August 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
+ROOT 5.34/10 (v5-34-10@v5-34-10, Oct 30 2013, 13:50:11 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -21,9 +21,10 @@ Loading Geant4 libraries (using geant4-config) ...
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
++++ G4StackManager uses G4SmartTrackStack. +++
 
 *************************************************************
- Geant4 version Name: geant4-09-06-patch-01    (1-February-2013)
+ Geant4 version Name: geant4-09-06-patch-02    (17-May-2013)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -711,7 +712,7 @@ Number of daughters: 0
 
 >>> Event 3
 
--------->Hits Collection: in this event they are 37 hits in the tracker chambers: 
+-------->Hits Collection: in this event they are 42 hits in the tracker chambers: 
   trackID: 0  chamberNb: 0  energy deposit (keV): 63.514  position (cm): (-1.08878, 16.1684, -146.661)
   trackID: 0  chamberNb: 0  energy deposit (keV): 30.3607  position (cm): (-1.1692, 17.7372, -140)
   trackID: 0  chamberNb: 1  energy deposit (keV): 156.285  position (cm): (-2.15984, 42.766, -60)
@@ -733,24 +734,29 @@ Number of daughters: 0
   trackID: 2  chamberNb: 3  energy deposit (keV): 3.06623  position (cm): (-4.55392, 126.835, 87.4258)
   trackID: 2  chamberNb: 3  energy deposit (keV): 12.6176  position (cm): (-4.64946, 126.835, 87.4713)
   trackID: 2  chamberNb: 3  energy deposit (keV): 4.16188  position (cm): (-4.651, 126.839, 87.4716)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 39.9866  position (cm): (-0.443419, 18.3512, -148.182)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 40.0373  position (cm): (-3.06157, 19.3253, -148.098)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 19.756  position (cm): (-4.14792, 20.6244, -148.433)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 15.7211  position (cm): (-5.32347, 19.9075, -147.54)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 13.0586  position (cm): (-4.22765, 19.5752, -147.194)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 18.7258  position (cm): (-4.52809, 19.2662, -147.663)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 9.76609  position (cm): (-4.92668, 18.9565, -147.751)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 6.85501  position (cm): (-4.56692, 18.7225, -147.755)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 10.0672  position (cm): (-4.45581, 18.45, -147.527)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 6.19662  position (cm): (-4.52902, 18.8388, -147.583)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 6.73852  position (cm): (-4.7097, 18.9627, -147.742)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 12.6306  position (cm): (-4.81533, 18.929, -147.642)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 3.69217  position (cm): (-4.81063, 19.1096, -147.589)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 5.79289  position (cm): (-4.78471, 19.1484, -147.472)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 5.69132  position (cm): (-4.65693, 19.1469, -147.494)
-  trackID: 7  chamberNb: 0  energy deposit (keV): 6.92643  position (cm): (-4.65648, 19.154, -147.496)
+  trackID: 9  chamberNb: 0  energy deposit (keV): 21.9574  position (cm): (0.0881079, 17.854, -148.97)
+  trackID: 9  chamberNb: 0  energy deposit (keV): 21.4373  position (cm): (-0.604871, 18.8418, -150.665)
+  trackID: 9  chamberNb: 0  energy deposit (keV): 13.8202  position (cm): (0.779115, 18.3543, -151.464)
+  trackID: 9  chamberNb: 0  energy deposit (keV): 10.0622  position (cm): (2.14469, 18.4784, -152.433)
+  trackID: 9  chamberNb: 0  energy deposit (keV): 12.4416  position (cm): (3.54559, 18.7824, -151.051)
+  trackID: 9  chamberNb: 0  energy deposit (keV): 11.8081  position (cm): (2.87305, 17.9772, -151.017)
+  trackID: 9  chamberNb: 0  energy deposit (keV): 14.6308  position (cm): (3.88285, 17.4269, -151.141)
+  trackID: 9  chamberNb: 0  energy deposit (keV): 9.08139  position (cm): (4.06139, 17.6191, -151.07)
+  trackID: 9  chamberNb: 0  energy deposit (keV): 8.74554  position (cm): (3.7579, 17.632, -150.744)
+  trackID: 9  chamberNb: 0  energy deposit (keV): 6.99101  position (cm): (3.88632, 17.832, -150.727)
+  trackID: 9  chamberNb: 0  energy deposit (keV): 3.73894  position (cm): (3.82309, 17.7578, -150.93)
+  trackID: 9  chamberNb: 0  energy deposit (keV): 6.58408  position (cm): (3.81661, 17.5477, -151.153)
+  trackID: 9  chamberNb: 0  energy deposit (keV): 8.2575  position (cm): (3.70417, 17.4699, -151.177)
+  trackID: 9  chamberNb: 0  energy deposit (keV): 8.71721  position (cm): (3.58879, 17.4177, -151.27)
+  trackID: 9  chamberNb: 0  energy deposit (keV): 5.70313  position (cm): (3.58861, 17.4126, -151.268)
+  trackID: 10  chamberNb: 0  energy deposit (keV): 12.5322  position (cm): (4.17605, 17.4832, -151.084)
+  trackID: 10  chamberNb: 0  energy deposit (keV): 11.5105  position (cm): (4.29503, 17.0749, -151.193)
+  trackID: 10  chamberNb: 0  energy deposit (keV): 5.80838  position (cm): (4.30759, 17.2601, -151.22)
+  trackID: 10  chamberNb: 0  energy deposit (keV): 11.258  position (cm): (4.26206, 17.4901, -151.333)
+  trackID: 10  chamberNb: 0  energy deposit (keV): 8.9522  position (cm): (4.31514, 17.5213, -151.191)
+  trackID: 10  chamberNb: 0  energy deposit (keV): 7.60482  position (cm): (4.31433, 17.5295, -151.189)
 Ex02MCStack Info  
-Total number of particles:   10
+Total number of particles:   12
 Number of primary particles: 1
 Track ID:  0
 TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
@@ -770,82 +776,608 @@ Number of daughters: 0
 Track ID:  3
 TParticle: e-             p: -0.000088 0.000129 0.002904 Vertex: -3.652129e+00 9.953164e+01 5.184143e+01     0    -1
 Mother:    proton  with ID: 0
-Number of daughters: 4
+Number of daughters: 6
 
 Track ID:  4
-TParticle: e-             p: 0.000155 0.000014 -0.000041 Vertex: -1.120228e+02 9.743945e+01 4.894320e+01     3    -1
+TParticle: e-             p: -0.000026 0.000159 0.000027 Vertex: -1.792619e+01 9.914503e+01 4.796233e+01     3    -1
 Mother:    e-  with ID: 3
 Number of daughters: 0
 
 Track ID:  5
-TParticle: e-             p: 0.000107 -0.000109 0.000016 Vertex: -9.876269e+01 9.691687e+01 4.861654e+01     3    -1
+TParticle: e-             p: -0.000135 0.000000 0.000036 Vertex: -1.111588e+01 9.933164e+01 4.798579e+01     3    -1
 Mother:    e-  with ID: 3
 Number of daughters: 0
 
 Track ID:  6
-TParticle: e-             p: -0.000096 0.000106 0.000068 Vertex: -7.503248e+01 9.973614e+01 5.032895e+01     3    -1
+TParticle: e-             p: -0.000124 0.000033 -0.000066 Vertex: -1.707800e+01 9.903745e+01 4.815655e+01     3    -1
 Mother:    e-  with ID: 3
 Number of daughters: 0
 
 Track ID:  7
-TParticle: e-             p: 0.000442 0.000210 0.000192 Vertex: -1.088784e+00 1.616843e+01 -1.466614e+02     0    -1
-Mother:    proton  with ID: 0
+TParticle: e-             p: 0.000148 0.000059 -0.000024 Vertex: 6.207631e+01 9.886451e+01 4.812086e+01     3    -1
+Mother:    e-  with ID: 3
 Number of daughters: 0
 
 Track ID:  8
-TParticle: gamma          p: -0.000029 -0.000025 -0.000004 Vertex: -5.525263e+00 9.875129e+01 5.142359e+01     3    -1
+TParticle: e-             p: -0.000126 -0.000027 0.000100 Vertex: 4.323707e+01 9.863224e+01 5.207535e+01     3    -1
 Mother:    e-  with ID: 3
-Number of daughters: 1
+Number of daughters: 0
 
 Track ID:  9
-TParticle: e-             p: -0.000047 -0.000018 0.000026 Vertex: -1.398514e+02 -1.498478e+01 3.526410e+01     8    -1
-Mother:    gamma  with ID: 8
+TParticle: e-             p: 0.000442 0.000210 0.000192 Vertex: -1.088784e+00 1.616843e+01 -1.466614e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 1
+
+Track ID:  10
+TParticle: e-             p: 0.000025 0.000047 -0.000244 Vertex: 3.882848e+00 1.742689e+01 -1.511405e+02     9    -1
+Mother:    e-  with ID: 9
+Number of daughters: 0
+
+Track ID:  11
+TParticle: gamma          p: 0.000010 0.000009 -0.000051 Vertex: -5.848721e+00 9.767814e+01 5.141807e+01     3    -1
+Mother:    e-  with ID: 3
 Number of daughters: 0
 
 >>> Event 4
 
--------->Hits Collection: in this event they are 9 hits in the tracker chambers: 
-  trackID: 0  chamberNb: 0  energy deposit (keV): 47.059  position (cm): (0.427179, 16.2889, -150.557)
-  trackID: 0  chamberNb: 0  energy deposit (keV): 62.3126  position (cm): (0.476639, 18.857, -140)
-  trackID: 0  chamberNb: 1  energy deposit (keV): 116.166  position (cm): (0.863768, 44.8842, -60)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 98.0715  position (cm): (1.25232, 83.7259, 20)
-  trackID: 0  chamberNb: 3  energy deposit (keV): 161.05  position (cm): (1.64206, 138.508, 100)
-  trackID: 0  chamberNb: 4  energy deposit (keV): 14.3105  position (cm): (1.96395, 196.8, 163.02)
-  trackID: 5  chamberNb: 0  energy deposit (keV): 21.0382  position (cm): (0.210896, 16.1679, -150.764)
-  trackID: 5  chamberNb: 0  energy deposit (keV): 15.9068  position (cm): (0.285891, 16.1191, -150.675)
-  trackID: 5  chamberNb: 0  energy deposit (keV): 6.76878  position (cm): (0.281591, 16.1186, -150.67)
+-------->Hits Collection: in this event they are 0 hits in the tracker chambers: 
 Ex02MCStack Info  
-Total number of particles:   6
+Total number of particles:   111
 Number of primary particles: 1
 Track ID:  0
 TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
 Primary    
-Number of daughters: 5
+Number of daughters: 35
 
 Track ID:  1
-TParticle: e-             p: -0.000198 -0.000000 0.000070 Vertex: 2.163719e+00 2.335007e+02 1.949926e+02     0    -1
+TParticle: Pt178[0.0]     p: 0.899974 0.636853 1.392383 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
 Mother:    proton  with ID: 0
 Number of daughters: 0
 
 Track ID:  2
-TParticle: e-             p: 0.000288 0.000023 0.000094 Vertex: 1.793358e+00 1.646321e+02 1.304028e+02     0    -1
+TParticle: proton         p: 0.099175 0.096086 -0.077113 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
 Mother:    proton  with ID: 0
 Number of daughters: 0
 
 Track ID:  3
-TParticle: e-             p: 0.000155 0.000321 -0.000058 Vertex: 1.312251e+00 9.116298e+01 3.255600e+01     0    -1
+TParticle: pi-            p: -0.078224 0.025153 -0.032455 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
 Mother:    proton  with ID: 0
-Number of daughters: 0
+Number of daughters: 17
 
 Track ID:  4
-TParticle: e-             p: -0.000073 0.000126 -0.000022 Vertex: 7.559970e-01 3.657014e+01 -8.189048e+01     0    -1
-Mother:    proton  with ID: 0
+TParticle: e-             p: -0.000234 0.000168 0.000157 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
 Number of daughters: 0
 
 Track ID:  5
-TParticle: e-             p: -0.000125 -0.000155 0.000083 Vertex: 4.271788e-01 1.628886e+01 -1.505567e+02     0    -1
+TParticle: e-             p: 0.000059 0.000134 0.000022 Vertex: -3.491332e-06 4.924878e-04 -2.902067e+02     0    -1
 Mother:    proton  with ID: 0
 Number of daughters: 0
 
-Time of this run:   User=0.04s Real=0.03s Sys=0s
+Track ID:  6
+TParticle: gamma          p: -0.000129 0.000675 -0.000089 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 2
+
+Track ID:  7
+TParticle: e-             p: 0.000275 0.000239 0.000254 Vertex: -3.795230e-01 2.155852e+00 -2.441775e+02     6    -1
+Mother:    gamma  with ID: 6
+Number of daughters: 0
+
+Track ID:  8
+TParticle: e-             p: -0.000324 0.000688 -0.000251 Vertex: -5.305654e-01 2.165917e+00 -2.443028e+02     6    -1
+Mother:    gamma  with ID: 6
+Number of daughters: 0
+
+Track ID:  9
+TParticle: gamma          p: -0.000224 0.000575 0.000865 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 1
+
+Track ID:  10
+TParticle: e-             p: -0.000324 0.000100 0.000038 Vertex: -6.209738e-01 2.196827e+00 -2.436104e+02     9    -1
+Mother:    gamma  with ID: 9
+Number of daughters: 0
+
+Track ID:  11
+TParticle: gamma          p: 0.000460 0.001539 -0.001654 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 2
+
+Track ID:  12
+TParticle: e-             p: 0.000710 0.000643 -0.001128 Vertex: -2.729302e-01 2.182906e+00 -2.448144e+02    11    -1
+Mother:    gamma  with ID: 11
+Number of daughters: 0
+
+Track ID:  13
+TParticle: e-             p: -0.000101 0.001217 -0.000363 Vertex: -3.443981e-01 2.141820e+00 -2.446498e+02    11    -1
+Mother:    gamma  with ID: 11
+Number of daughters: 0
+
+Track ID:  14
+TParticle: gamma          p: -0.001297 0.005245 -0.001733 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 0
+
+Track ID:  15
+TParticle: gamma          p: -0.000737 0.000942 -0.002337 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 1
+
+Track ID:  16
+TParticle: e-             p: -0.000931 0.001254 -0.002196 Vertex: -5.407948e-01 1.880050e+00 -2.445223e+02    15    -1
+Mother:    gamma  with ID: 15
+Number of daughters: 0
+
+Track ID:  17
+TParticle: gamma          p: -0.001413 0.000771 0.000589 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 0
+
+Track ID:  18
+TParticle: gamma          p: -0.000036 -0.000182 -0.000066 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 1
+
+Track ID:  19
+TParticle: e-             p: -0.000151 -0.000207 -0.000239 Vertex: -4.722877e-01 1.684423e+00 -2.442825e+02    18    -1
+Mother:    gamma  with ID: 18
+Number of daughters: 0
+
+Track ID:  20
+TParticle: gamma          p: 0.000069 0.000062 0.000000 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 1
+
+Track ID:  21
+TParticle: e-             p: -0.000021 0.000064 0.000009 Vertex: -4.497756e-01 1.775653e+00 -2.442510e+02    20    -1
+Mother:    gamma  with ID: 20
+Number of daughters: 0
+
+Track ID:  22
+TParticle: gamma          p: 0.000387 -0.000034 -0.000116 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 1
+
+Track ID:  23
+TParticle: e-             p: 0.000545 0.000145 -0.000327 Vertex: 1.940224e-01 1.716318e+00 -2.440654e+02    22    -1
+Mother:    gamma  with ID: 22
+Number of daughters: 0
+
+Track ID:  24
+TParticle: gamma          p: -0.000851 0.000511 -0.000830 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  25
+TParticle: gamma          p: -0.003862 -0.000097 -0.000863 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 1
+
+Track ID:  26
+TParticle: Tl201[0.0]     p: 0.115242 0.156598 -0.085158 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 0
+
+Track ID:  27
+TParticle: proton         p: 0.107603 0.046045 -0.258258 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  28
+TParticle: proton         p: -0.186489 -0.267421 0.216585 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  29
+TParticle: proton         p: 0.019514 0.406904 -0.091483 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 6
+
+Track ID:  30
+TParticle: e-             p: 0.000124 0.000107 -0.000148 Vertex: -4.413751e+00 4.113984e+01 -2.858194e+02    29    -1
+Mother:    proton  with ID: 29
+Number of daughters: 0
+
+Track ID:  31
+TParticle: e-             p: -0.000019 -0.000125 -0.000102 Vertex: -4.366939e+00 4.104431e+01 -2.851353e+02    29    -1
+Mother:    proton  with ID: 29
+Number of daughters: 0
+
+Track ID:  32
+TParticle: e-             p: 0.000028 0.000175 -0.000078 Vertex: -3.986257e+00 3.994976e+01 -2.797461e+02    29    -1
+Mother:    proton  with ID: 29
+Number of daughters: 0
+
+Track ID:  33
+TParticle: e-             p: -0.000120 0.000060 -0.000027 Vertex: -3.270873e+00 3.624431e+01 -2.700119e+02    29    -1
+Mother:    proton  with ID: 29
+Number of daughters: 0
+
+Track ID:  34
+TParticle: e-             p: 0.000129 0.000136 -0.000039 Vertex: -2.067975e+00 2.665249e+01 -2.570656e+02    29    -1
+Mother:    proton  with ID: 29
+Number of daughters: 0
+
+Track ID:  35
+TParticle: e-             p: -0.000128 0.000045 -0.000060 Vertex: -3.072979e-01 6.134659e+00 -2.450867e+02    29    -1
+Mother:    proton  with ID: 29
+Number of daughters: 0
+
+Track ID:  36
+TParticle: e-             p: -0.004001 0.000094 -0.001709 Vertex: -2.615515e-01 1.727098e+00 -2.440636e+02    25    -1
+Mother:    gamma  with ID: 25
+Number of daughters: 1
+
+Track ID:  37
+TParticle: gamma          p: -0.000611 0.000180 -0.000279 Vertex: -3.106591e-01 1.632536e+00 -2.440628e+02    36    -1
+Mother:    e-  with ID: 36
+Number of daughters: 2
+
+Track ID:  38
+TParticle: proton         p: -0.108292 0.357220 0.353893 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 5
+
+Track ID:  39
+TParticle: e-             p: 0.000020 -0.000187 -0.000192 Vertex: -1.192791e+01 1.184503e+02 -2.862737e+02    38    -1
+Mother:    proton  with ID: 38
+Number of daughters: 0
+
+Track ID:  40
+TParticle: e-             p: 0.000070 0.000115 -0.000021 Vertex: -1.129383e+01 1.169017e+02 -2.784906e+02    38    -1
+Mother:    proton  with ID: 38
+Number of daughters: 0
+
+Track ID:  41
+TParticle: e-             p: 0.000061 0.000135 -0.000154 Vertex: -3.196238e+00 3.792056e+01 -2.267506e+02    38    -1
+Mother:    proton  with ID: 38
+Number of daughters: 0
+
+Track ID:  42
+TParticle: e-             p: 0.000045 0.000170 -0.000147 Vertex: -2.523057e+00 2.954638e+01 -2.286125e+02    38    -1
+Mother:    proton  with ID: 38
+Number of daughters: 0
+
+Track ID:  43
+TParticle: e-             p: -0.000204 0.000130 0.000025 Vertex: -5.150884e-01 5.874559e+00 -2.405196e+02    38    -1
+Mother:    proton  with ID: 38
+Number of daughters: 0
+
+Track ID:  44
+TParticle: e-             p: -0.000050 -0.000318 0.000168 Vertex: -8.191770e-01 1.746447e+00 -2.442661e+02    37    -1
+Mother:    gamma  with ID: 37
+Number of daughters: 0
+
+Track ID:  45
+TParticle: e-             p: -0.000691 0.000319 -0.000406 Vertex: -8.442061e-01 1.789881e+00 -2.443061e+02    37    -1
+Mother:    gamma  with ID: 37
+Number of daughters: 0
+
+Track ID:  46
+TParticle: proton         p: -0.282437 -0.489000 -0.148910 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 14
+
+Track ID:  47
+TParticle: Bi202[0.0]     p: 0.030775 -0.268503 0.064639 Vertex: -6.447870e-01 4.153110e-01 -2.443895e+02    46    -1
+Mother:    proton  with ID: 46
+Number of daughters: 0
+
+Track ID:  48
+TParticle: neutron        p: -0.002427 0.004461 0.032447 Vertex: -6.447870e-01 4.153110e-01 -2.443895e+02    46    -1
+Mother:    proton  with ID: 46
+Number of daughters: 0
+
+Track ID:  49
+TParticle: neutron        p: -0.026587 0.020429 0.016127 Vertex: -6.447870e-01 4.153110e-01 -2.443895e+02    46    -1
+Mother:    proton  with ID: 46
+Number of daughters: 0
+
+Track ID:  50
+TParticle: neutron        p: -0.030934 -0.022491 -0.000290 Vertex: -6.447870e-01 4.153110e-01 -2.443895e+02    46    -1
+Mother:    proton  with ID: 46
+Number of daughters: 0
+
+Track ID:  51
+TParticle: neutron        p: -0.032411 0.008541 -0.019714 Vertex: -6.447870e-01 4.153110e-01 -2.443895e+02    46    -1
+Mother:    proton  with ID: 46
+Number of daughters: 0
+
+Track ID:  52
+TParticle: neutron        p: -0.025897 0.021871 -0.022612 Vertex: -6.447870e-01 4.153110e-01 -2.443895e+02    46    -1
+Mother:    proton  with ID: 46
+Number of daughters: 0
+
+Track ID:  53
+TParticle: neutron        p: 0.000666 0.047564 -0.010222 Vertex: -6.447870e-01 4.153110e-01 -2.443895e+02    46    -1
+Mother:    proton  with ID: 46
+Number of daughters: 0
+
+Track ID:  54
+TParticle: neutron        p: -0.074309 -0.243196 -0.215301 Vertex: -6.447870e-01 4.153110e-01 -2.443895e+02    46    -1
+Mother:    proton  with ID: 46
+Number of daughters: 0
+
+Track ID:  55
+TParticle: neutron        p: 0.021634 0.013881 0.003951 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 0
+
+Track ID:  56
+TParticle: neutron        p: 0.002334 -0.021808 -0.017393 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 0
+
+Track ID:  57
+TParticle: neutron        p: -0.021678 -0.036412 0.002877 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 0
+
+Track ID:  58
+TParticle: neutron        p: 0.045711 0.029347 -0.036046 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 0
+
+Track ID:  59
+TParticle: neutron        p: 0.063853 -0.037751 0.002313 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 0
+
+Track ID:  60
+TParticle: neutron        p: 0.076201 0.080486 0.037115 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 0
+
+Track ID:  61
+TParticle: neutron        p: -0.303405 -0.187131 0.093219 Vertex: -4.552779e-01 1.770687e+00 -2.442510e+02     3    -1
+Mother:    pi-  with ID: 3
+Number of daughters: 0
+
+Track ID:  62
+TParticle: neutron        p: 0.001847 -0.019993 0.002569 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  63
+TParticle: neutron        p: 0.009757 -0.019457 0.005009 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  64
+TParticle: neutron        p: -0.018403 -0.013473 0.001138 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  65
+TParticle: neutron        p: 0.000651 -0.011309 0.035024 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  66
+TParticle: neutron        p: 0.032062 0.021313 0.017933 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 3
+
+Track ID:  67
+TParticle: neutron        p: -0.029022 -0.004579 0.003938 Vertex: -2.125858e+00 1.651051e+00 -2.431357e+02    66    -1
+Mother:    neutron  with ID: 66
+Number of daughters: 0
+
+Track ID:  68
+TParticle: neutron        p: 0.001564 0.052677 0.020302 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  69
+TParticle: neutron        p: 0.016149 -0.042253 0.038431 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  70
+TParticle: neutron        p: -0.001680 -0.020765 0.059835 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  71
+TParticle: neutron        p: 0.017551 -0.063178 0.019350 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 1
+
+Track ID:  72
+TParticle: neutron        p: -0.017130 0.021344 -0.072939 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  73
+TParticle: neutron        p: -0.048535 -0.031511 0.062808 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 5
+
+Track ID:  74
+TParticle: neutron        p: -0.004629 -0.018324 -0.049718 Vertex: -2.088968e-01 1.536925e+00 -2.436276e+02    73    -1
+Mother:    neutron  with ID: 73
+Number of daughters: 0
+
+Track ID:  75
+TParticle: neutron        p: 0.010708 0.047345 0.089111 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  76
+TParticle: neutron        p: 0.014824 0.115954 -0.072399 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  77
+TParticle: neutron        p: 0.101133 -0.097696 -0.014908 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  78
+TParticle: neutron        p: 0.067273 0.127071 0.050267 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  79
+TParticle: neutron        p: -0.074874 -0.052526 0.165953 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  80
+TParticle: neutron        p: -0.005064 0.164406 -0.094482 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  81
+TParticle: neutron        p: -0.115814 0.202142 -0.006991 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  82
+TParticle: neutron        p: -0.196346 -0.047420 0.267181 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  83
+TParticle: neutron        p: -0.282000 0.174878 -0.230756 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  84
+TParticle: neutron        p: 0.290358 0.389857 0.176743 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  85
+TParticle: neutron        p: -0.171599 -0.555858 -0.138665 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  86
+TParticle: neutron        p: -0.094760 -0.888452 2.070997 Vertex: -3.667011e-03 1.733566e+00 -2.440060e+02     0    -1
+Mother:    proton  with ID: 0
+Number of daughters: 0
+
+Track ID:  87
+TParticle: gamma          p: -0.000021 -0.000207 0.000009 Vertex: -2.088968e-01 1.536925e+00 -2.436276e+02    73    -1
+Mother:    neutron  with ID: 73
+Number of daughters: 1
+
+Track ID:  88
+TParticle: e-             p: 0.000217 -0.000272 0.000128 Vertex: -2.098288e-01 1.527745e+00 -2.436272e+02    87    -1
+Mother:    gamma  with ID: 87
+Number of daughters: 0
+
+Track ID:  89
+TParticle: gamma          p: -0.000193 -0.000724 -0.000256 Vertex: -2.088968e-01 1.536925e+00 -2.436276e+02    73    -1
+Mother:    neutron  with ID: 73
+Number of daughters: 2
+
+Track ID:  90
+TParticle: e-             p: 0.000071 0.000071 -0.000386 Vertex: -2.993285e-01 1.766182e+00 -2.437759e+02    89    -1
+Mother:    gamma  with ID: 89
+Number of daughters: 0
+
+Track ID:  91
+TParticle: e-             p: -0.000141 -0.000923 -0.000167 Vertex: -2.241484e-01 1.479832e+00 -2.436478e+02    89    -1
+Mother:    gamma  with ID: 89
+Number of daughters: 0
+
+Track ID:  92
+TParticle: gamma          p: -0.000318 -0.000266 0.001173 Vertex: -2.088968e-01 1.536925e+00 -2.436276e+02    73    -1
+Mother:    neutron  with ID: 73
+Number of daughters: 2
+
+Track ID:  93
+TParticle: e-             p: 0.000271 0.000304 0.000423 Vertex: -4.197937e-01 1.927632e+00 -2.428542e+02    92    -1
+Mother:    gamma  with ID: 92
+Number of daughters: 0
+
+Track ID:  94
+TParticle: e-             p: -0.000131 -0.000631 0.000488 Vertex: -2.165954e-01 1.530485e+00 -2.435992e+02    92    -1
+Mother:    gamma  with ID: 92
+Number of daughters: 0
+
+Track ID:  95
+TParticle: gamma          p: -0.000094 0.000354 0.000134 Vertex: -2.125858e+00 1.651051e+00 -2.431357e+02    66    -1
+Mother:    neutron  with ID: 66
+Number of daughters: 1
+
+Track ID:  96
+TParticle: e-             p: -0.000150 0.000127 -0.000601 Vertex: -2.167721e+00 1.808802e+00 -2.430759e+02    95    -1
+Mother:    gamma  with ID: 95
+Number of daughters: 0
+
+Track ID:  97
+TParticle: gamma          p: -0.000031 -0.000094 0.000067 Vertex: -6.447870e-01 4.153110e-01 -2.443895e+02    46    -1
+Mother:    proton  with ID: 46
+Number of daughters: 1
+
+Track ID:  98
+TParticle: e-             p: -0.000094 -0.000138 -0.000074 Vertex: -6.572943e-01 3.767238e-01 -2.443621e+02    97    -1
+Mother:    gamma  with ID: 97
+Number of daughters: 0
+
+Track ID:  99
+TParticle: gamma          p: -0.000275 0.000367 -0.000017 Vertex: -6.447870e-01 4.153110e-01 -2.443895e+02    46    -1
+Mother:    proton  with ID: 46
+Number of daughters: 1
+
+Track ID:  100
+TParticle: e-             p: -0.000186 0.000568 -0.000400 Vertex: -8.252529e-01 6.557957e-01 -2.444008e+02    99    -1
+Mother:    gamma  with ID: 99
+Number of daughters: 0
+
+Track ID:  101
+TParticle: gamma          p: -0.000418 -0.000555 0.000129 Vertex: -6.447870e-01 4.153110e-01 -2.443895e+02    46    -1
+Mother:    proton  with ID: 46
+Number of daughters: 1
+
+Track ID:  102
+TParticle: e-             p: -0.000299 -0.000403 -0.000874 Vertex: -1.977058e+00 -1.353002e+00 -2.439798e+02   101    -1
+Mother:    gamma  with ID: 101
+Number of daughters: 0
+
+Track ID:  103
+TParticle: gamma          p: 0.000088 0.000226 -0.001010 Vertex: -6.447870e-01 4.153110e-01 -2.443895e+02    46    -1
+Mother:    proton  with ID: 46
+Number of daughters: 0
+
+Track ID:  104
+TParticle: gamma          p: -0.000924 -0.000615 -0.001587 Vertex: -6.447870e-01 4.153110e-01 -2.443895e+02    46    -1
+Mother:    proton  with ID: 46
+Number of daughters: 0
+
+Track ID:  105
+TParticle: gamma          p: 0.001779 -0.000846 0.000643 Vertex: -6.447870e-01 4.153110e-01 -2.443895e+02    46    -1
+Mother:    proton  with ID: 46
+Number of daughters: 2
+
+Track ID:  106
+TParticle: Pb208[0.0]     p: -0.002569 -0.021659 0.123147 Vertex: -2.088968e-01 1.536925e+00 -2.436276e+02    73    -1
+Mother:    neutron  with ID: 73
+Number of daughters: 0
+
+Track ID:  107
+TParticle: N14[0.0]       p: -0.039495 -0.051046 -0.011662 Vertex: 6.027796e+01 -2.152585e+02 -1.775480e+02    71    -1
+Mother:    neutron  with ID: 71
+Number of daughters: 0
+
+Track ID:  108
+TParticle: Pb208[0.0]     p: -0.011660 -0.003655 0.002900 Vertex: -2.125858e+00 1.651051e+00 -2.431357e+02    66    -1
+Mother:    neutron  with ID: 66
+Number of daughters: 0
+
+Track ID:  109
+TParticle: e-             p: -0.000252 -0.000116 0.000379 Vertex: 7.301970e-01 -2.681782e-01 -2.438510e+02   105    -1
+Mother:    gamma  with ID: 105
+Number of daughters: 0
+
+Track ID:  110
+TParticle: e-             p: 0.002029 -0.000825 0.000539 Vertex: 7.841658e-01 -2.637379e-01 -2.438735e+02   105    -1
+Mother:    gamma  with ID: 105
+Number of daughters: 0
+
+Time of this run:   User=0.05s Real=0.05s Sys=0s
 Number of events processed: 5

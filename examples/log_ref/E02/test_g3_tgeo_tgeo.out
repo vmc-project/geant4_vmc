@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/04   10 January 2013   *
+  *   Version   5.34/10    29 August 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
+ROOT 5.34/10 (v5-34-10@v5-34-10, Oct 30 2013, 13:50:11 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -131,11 +131,11 @@ Primary
 Number of daughters: 0
 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   731157087    2B94925F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   201829855     C07ADDF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   731180021   731157087
-                                        HEX    2B94EBF5    2B94925F
+          with Store/Table at absolute adrs   201852789   201829855
+                                        HEX     C080775     C07ADDF
                                         HEX        59FA           0
                               relative adrs       23034           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

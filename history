@@ -11,6 +11,20 @@ $Id$
      
 Tags (history):
 ===============
+  30/10/2013
+  v2-14b:
+    Patch release, including following fixes:
+    Geant4 VMC:
+     - TG4SpecialStackingAction adadpted for G4SmartTrackStack 
+       (in Geant4 since 9.6.x);   secondaries are not ordered even 
+       when the special stacking is activated
+    - TG4TrackingAction fixed to work properly with the default stacking of 
+      optical photons
+    - Fixed initialization of TG4EventAction::fPrintMemory
+ 
+    Tested with Geant4 9.6.p02 (with embedded CLHEP 2.1.3.1), 
+      Root 5.34/10, VGM 3.06
+  
   26/02/2013
   v2-14a:
     Patch release, including following fixes:

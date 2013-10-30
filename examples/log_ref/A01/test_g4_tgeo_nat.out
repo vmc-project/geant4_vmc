@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/04   10 January 2013   *
+  *   Version   5.34/10    29 August 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
+ROOT 5.34/10 (v5-34-10@v5-34-10, Oct 30 2013, 13:50:11 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -21,9 +21,10 @@ Loading Geant4 libraries (using geant4-config) ...
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
++++ G4StackManager uses G4SmartTrackStack. +++
 
 *************************************************************
- Geant4 version Name: geant4-09-06-patch-01    (1-February-2013)
+ Geant4 version Name: geant4-09-06-patch-02    (17-May-2013)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -563,44 +564,44 @@ AntiNeutronInelastic  Crs sctns:              AntiAGlauber: Emin(GeV)=    0  Ema
 ### Run 0 start.
 
 >>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 9 hits.
-Chamber1 has 539 hits.
-Chamber2 has 490 hits.
-EmCalorimeter has 37 hits. Total Edep is 87766.7 (MeV)
-HadCalorimeter has 5 hits. Total Edep is 5.90429 (MeV)
+Hodoscope1 has 2 hits.
+Hodoscope2 has 8 hits.
+Chamber1 has 535 hits.
+Chamber2 has 506 hits.
+EmCalorimeter has 35 hits. Total Edep is 90009.7 (MeV)
+HadCalorimeter has 5 hits. Total Edep is 9.9386 (MeV)
 
 >>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 2 hits.
-Hodoscope2 has 4 hits.
-Chamber1 has 524 hits.
-Chamber2 has 520 hits.
-EmCalorimeter has 18 hits. Total Edep is 18410.6 (MeV)
-HadCalorimeter has 8 hits. Total Edep is 2653.42 (MeV)
+Hodoscope2 has 2 hits.
+Chamber1 has 510 hits.
+Chamber2 has 518 hits.
+EmCalorimeter has 17 hits. Total Edep is 18519.8 (MeV)
+HadCalorimeter has 6 hits. Total Edep is 2582.57 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 9 hits.
-Chamber1 has 504 hits.
-Chamber2 has 481 hits.
-EmCalorimeter has 59 hits. Total Edep is 26022 (MeV)
-HadCalorimeter has 15 hits. Total Edep is 2023.18 (MeV)
+Hodoscope1 has 5 hits.
+Hodoscope2 has 14 hits.
+Chamber1 has 508 hits.
+Chamber2 has 473 hits.
+EmCalorimeter has 57 hits. Total Edep is 29308.2 (MeV)
+HadCalorimeter has 15 hits. Total Edep is 1337.73 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 5 hits.
-Hodoscope2 has 5 hits.
-Chamber1 has 487 hits.
-Chamber2 has 168 hits.
-EmCalorimeter has 54 hits. Total Edep is 7263.02 (MeV)
-HadCalorimeter has 13 hits. Total Edep is 312.768 (MeV)
+Hodoscope1 has 7 hits.
+Hodoscope2 has 6 hits.
+Chamber1 has 473 hits.
+Chamber2 has 156 hits.
+EmCalorimeter has 50 hits. Total Edep is 7146.87 (MeV)
+HadCalorimeter has 14 hits. Total Edep is 231.338 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 3 hits.
-Hodoscope2 has 9 hits.
-Chamber1 has 523 hits.
-Chamber2 has 525 hits.
-EmCalorimeter has 50 hits. Total Edep is 29256.8 (MeV)
-HadCalorimeter has 14 hits. Total Edep is 91.6642 (MeV)
-Time of this run:   User=9.77s Real=9.9s Sys=0.04s
+Hodoscope2 has 5 hits.
+Chamber1 has 536 hits.
+Chamber2 has 534 hits.
+EmCalorimeter has 56 hits. Total Edep is 29850.2 (MeV)
+HadCalorimeter has 15 hits. Total Edep is 55.5874 (MeV)
+Time of this run:   User=9.79s Real=9.89s Sys=0.03s
 Number of events processed: 5
-Real time 0:00:11, CP time 10.590
+Real time 0:00:11, CP time 10.490

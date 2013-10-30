@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/04   10 January 2013   *
+  *   Version   5.34/10    29 August 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/04 (tags/v5-34-04@48259, Feb 19 2013, 16:26:12 on linuxx8664gcc)
+ROOT 5.34/10 (v5-34-10@v5-34-10, Oct 30 2013, 13:50:11 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -21,9 +21,10 @@ Loading Geant4 libraries (using geant4-config) ...
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
++++ G4StackManager uses G4SmartTrackStack. +++
 
 *************************************************************
- Geant4 version Name: geant4-09-06-patch-01    (1-February-2013)
+ Geant4 version Name: geant4-09-06-patch-02    (17-May-2013)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -726,5 +727,5 @@ Number of optical photons produced in this event : 1621
 Number of optical photons produced in this event : 1695
 >>> Event 9
 Number of optical photons produced in this event : 1494
-Time of this run:   User=2.69s Real=2.72s Sys=0.01s
+Time of this run:   User=2.68s Real=2.69s Sys=0s
 Number of events processed: 10
