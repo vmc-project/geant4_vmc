@@ -158,7 +158,7 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
 
   // do not call this function more than once
   if ( track->GetTrackID() == fCurrentTrackID ) return;
-  
+
   // keep this track number for the check above
   fCurrentTrackID = track->GetTrackID();
   
@@ -263,7 +263,7 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
   
   // restore particle lifetime if it was modified by user
   fTrackManager->SetBackPDGLifetime(track);
-
+  
   if ( track->GetTrackStatus() != fSuspend ) {
 
     // VMC application post track action
