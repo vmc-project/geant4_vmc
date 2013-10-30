@@ -883,6 +883,9 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus()
 
     // refraction
     case FresnelRefraction: 
+#if G4VERSION_NUMBER >= 1000
+    case Dichroic:
+#endif       
        return kPLightRefraction;
        ;;
 
@@ -894,12 +897,6 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus()
     case Detection: 
        return kPLightDetection;
        ;;
-#if G4VERSION_NUMBER >= 1000
-    // TO BE CHECKED
-    case Dichroic:
-       return kPLightDetection;
-       ;;
-#endif       
        
     case NotAtBoundary:
     case SameMaterial:
