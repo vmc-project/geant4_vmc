@@ -518,10 +518,9 @@ Int_t TG4RunManager::CurrentEvent() const
 //_____________________________________________________________________________
 Bool_t  TG4RunManager::SecondariesAreOrdered() const 
 {
-///  Secondaries are ordered if the special stacking
-/// (defined in TG4SpecialStackingAction) is activated.
-// ----
+///  Since transition to G4SmartTrackStack in Geant4 9.6.x 
+///  secondaries are not ordered even when the special stacking is activated.
 
-  return fRunConfiguration->IsSpecialStacking();
+  return false;
 }  
 

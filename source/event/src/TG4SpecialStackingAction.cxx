@@ -21,12 +21,8 @@
 #include <G4TrackStack.hh>
 #include <G4StackedTrack.hh>
 #include <G4StackManager.hh>
-#include <G4NeutrinoE.hh>
-#include <G4NeutrinoMu.hh>
-#include <G4NeutrinoTau.hh>
-#include <G4AntiNeutrinoE.hh>
-#include <G4AntiNeutrinoMu.hh>
-#include <G4AntiNeutrinoTau.hh>
+
+#include <TPDGCode.h>
 
 //_____________________________________________________________________________
 TG4SpecialStackingAction::TG4SpecialStackingAction()
@@ -37,6 +33,8 @@ TG4SpecialStackingAction::TG4SpecialStackingAction()
     fSkipNeutrino(false)
 {
 /// Default constructor
+
+  G4cout << "### TG4SpecialStackingAction activated" << G4endl;
 }
 
 //_____________________________________________________________________________
@@ -55,34 +53,22 @@ TG4SpecialStackingAction::ClassifyNewTrack(const G4Track* track)
 {
 /// Classify the new track.
 
-  G4ClassificationOfNewTrack classification;
   if (fStage == 0) { 
     // move all primaries to PrimaryStack
-    classification = fPostpone;
+    return fPostpone;
   }  
-  else {
-     // exclude neutrinos
-    G4ParticleDefinition* particle = track->GetDefinition();
-    if ( fSkipNeutrino &&
-         ( particle == G4NeutrinoE::NeutrinoEDefinition() ||
-           particle == G4NeutrinoMu::NeutrinoMuDefinition() ||
-           particle == G4NeutrinoTau::NeutrinoTauDefinition() ||
-           particle == G4AntiNeutrinoE::AntiNeutrinoEDefinition() ||
-           particle == G4AntiNeutrinoMu::AntiNeutrinoMuDefinition() ||
-           particle == G4AntiNeutrinoTau::AntiNeutrinoTauDefinition() ) ) {
+  
+  if ( fSkipNeutrino ) {
+    G4int pdgCode = track->GetDefinition()->GetPDGEncoding();
+    if  ( pdgCode ==  kNuE || pdgCode ==  kNuEBar ||
+          pdgCode ==  kNuMu || pdgCode == kNuMuBar ||
+	  pdgCode ==  kNuTau || pdgCode == kNuTauBar ) {
 
-        return fKill;         
-     }        
-
-     G4int parentID = track->GetParentID();
-     if (parentID ==0) { 
-        return fUrgent; 
-     }
-     else { 
-        return fWaiting; 
-     }
+      return fKill;
+    }           
   }
-  return classification;
+
+  return fUrgent;          
 }
 
 //_____________________________________________________________________________
