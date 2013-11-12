@@ -40,6 +40,7 @@ TG4EventAction::TG4EventAction()
   : TG4Verbose("eventAction"),
     fMessenger(this),
     fTimer(),
+    fPrintMemory(false),
     fSaveRandomStatus(false)
 {
 /// Default constructor
