@@ -37,8 +37,6 @@
 #include <TVirtualMCApplication.h>
 #include <TParticle.h>
 
-
-
 TG4ParticlesManager* TG4ParticlesManager::fgInstance = 0;
 
 //_____________________________________________________________________________
