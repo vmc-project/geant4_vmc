@@ -881,6 +881,7 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus()
 
     // refraction
     case FresnelRefraction: 
+    case Dichroic:
        return kPLightRefraction;
        ;;
 

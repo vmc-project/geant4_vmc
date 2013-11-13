@@ -37,6 +37,8 @@ TG4SpecialStackingAction::TG4SpecialStackingAction()
     fSkipNeutrino(false)
 {
 /// Default constructor
+
+  G4cout << "### TG4SpecialStackingAction activated" << G4endl;
 }
 
 //_____________________________________________________________________________
@@ -55,34 +57,22 @@ TG4SpecialStackingAction::ClassifyNewTrack(const G4Track* track)
 {
 /// Classify the new track.
 
-  G4ClassificationOfNewTrack classification;
   if (fStage == 0) { 
     // move all primaries to PrimaryStack
-    classification = fPostpone;
+    return fPostpone;
   }  
-  else {
-     // exclude neutrinos
-    G4ParticleDefinition* particle = track->GetDefinition();
-    if ( fSkipNeutrino &&
-         ( particle == G4NeutrinoE::NeutrinoEDefinition() ||
-           particle == G4NeutrinoMu::NeutrinoMuDefinition() ||
-           particle == G4NeutrinoTau::NeutrinoTauDefinition() ||
-           particle == G4AntiNeutrinoE::AntiNeutrinoEDefinition() ||
-           particle == G4AntiNeutrinoMu::AntiNeutrinoMuDefinition() ||
-           particle == G4AntiNeutrinoTau::AntiNeutrinoTauDefinition() ) ) {
+  
+  if ( fSkipNeutrino ) {
+    G4int pdgCode = track->GetDefinition()->GetPDGEncoding();
+    if  ( pdgCode ==  kNuE || pdgCode ==  kNuEBar ||
+          pdgCode ==  kNuMu || pdgCode == kNuMuBar ||
+	  pdgCode ==  kNuTau || pdgCode == kNuTauBar ) {
 
-        return fKill;         
-     }        
-
-     G4int parentID = track->GetParentID();
-     if (parentID ==0) { 
-        return fUrgent; 
-     }
-     else { 
-        return fWaiting; 
-     }
+      return fKill;
+    }           
   }
-  return classification;
+
+  return fUrgent;          
 }
 
 //_____________________________________________________________________________
@@ -107,7 +97,8 @@ void TG4SpecialStackingAction::NewStage()
 //_____________________________________________________________________________
 void TG4SpecialStackingAction::PrepareNewEvent()
 {
-/// Called by G4 kernel at the beginning of event.
+///  Since transition to G4SmartTrackStack in Geant4 9.6.x 
+///  secondaries are not ordered even when the special stacking is activated.
 
   fStage = 0;
 }

@@ -162,8 +162,10 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
   // keep this track number for the check above
   fCurrentTrackID = track->GetTrackID();
   
+  G4bool isFirstStep = ( track->GetCurrentStepNumber() == 0 );
+  
   // finish previous primary track first
-  if (track->GetParentID() == 0) {  
+  if (track->GetParentID() == 0 && isFirstStep) {  
     FinishPrimaryTrack();
   }  
 
@@ -175,37 +177,41 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
     TG4StackPopper::Instance()->Reset();
 
   // set step manager status
-  TG4StepManager* stepManager = TG4StepManager::Instance();
-  stepManager->SetStep((G4Track*)track, kVertex);
+  if ( isFirstStep ) {
+    TG4StepManager* stepManager = TG4StepManager::Instance();
+    stepManager->SetStep((G4Track*)track, kVertex);
+  }  
   
   // set track information
   G4int trackId 
     = fTrackManager->SetTrackInformation(track, fOverwriteLastTrack);
   gMC->GetStack()->SetCurrentTrack(trackId);
 
-  if (track->GetParentID() == 0) {  
-    fPrimaryTrackID = track->GetTrackID();
+  if ( isFirstStep ) {
+    if (track->GetParentID() == 0) {  
+      fPrimaryTrackID = track->GetTrackID();
     
-    // begin this primary track
-    TVirtualMCApplication::Instance()->BeginPrimary();
+      // begin this primary track
+      TVirtualMCApplication::Instance()->BeginPrimary();
     
-    // set saving flag
-    fTrackSaveControl = kDoNotSave;
-  }
-  else {
-    // set saving flag 
-    fTrackSaveControl = ( fTrackManager->IsUserTrack(track) ) ? 
-      kDoNotSave : fTrackManager->GetTrackSaveControl(); 
-  }     
+      // set saving flag
+      fTrackSaveControl = kDoNotSave;
+    }
+    else {
+      // set saving flag 
+      fTrackSaveControl = ( fTrackManager->IsUserTrack(track) ) ? 
+        kDoNotSave : fTrackManager->GetTrackSaveControl(); 
+    }
    
-  // save track in stack
-  if ( fTrackSaveControl == kSaveInPreTrack ) {
-    fTrackManager->TrackToStack(track, fOverwriteLastTrack);
+    // save track in stack
+    if ( fTrackSaveControl == kSaveInPreTrack ) {
+      fTrackManager->TrackToStack(track, fOverwriteLastTrack);
 
-    // Notify a stack popper (if activated) about saving this secondary
-    if ( TG4StackPopper::Instance() )
-      TG4StackPopper::Instance()->Notify();
-  }    
+      // Notify a stack popper (if activated) about saving this secondary
+      if ( TG4StackPopper::Instance() )
+        TG4StackPopper::Instance()->Notify();
+    }
+  }      
 
   // verbose
   if ( track->GetTrackID() == fNewVerboseTrackID) {
@@ -213,13 +219,15 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
   }    
 
   // VMC application pre track action
-  TVirtualMCApplication::Instance()->PreTrack();
+  if ( isFirstStep ) {
+    TVirtualMCApplication::Instance()->PreTrack();
   
-  // call pre-tracking action of derived class
-  PreTrackingAction(track);
+    // call pre-tracking action of derived class
+    PreTrackingAction(track);
 
-  // Let sensitive detector process vertex step
-  UserProcessHits(track);
+    // Let sensitive detector process vertex step
+    UserProcessHits(track);
+  }  
 }
 
 //_____________________________________________________________________________
@@ -256,11 +264,14 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
   // restore particle lifetime if it was modified by user
   fTrackManager->SetBackPDGLifetime(track);
 
-  // VMC application post track action
-  TVirtualMCApplication::Instance()->PostTrack();
+  if ( track->GetTrackStatus() != fSuspend ) {
 
-  // call post-tracking action of derived class
-  PostTrackingAction(track);
+    // VMC application post track action
+    TVirtualMCApplication::Instance()->PostTrack();
+
+    // call post-tracking action of derived class
+    PostTrackingAction(track);
+  }  
 }
 
 //_____________________________________________________________________________

@@ -40,7 +40,6 @@ TG4EventAction::TG4EventAction()
   : TG4Verbose("eventAction"),
     fMessenger(this),
     fTimer(),
-    fDrawFlag("CHARGED"),
     fSaveRandomStatus(false)
 {
 /// Default constructor

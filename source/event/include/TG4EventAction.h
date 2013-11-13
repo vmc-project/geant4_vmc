@@ -44,13 +44,11 @@ class TG4EventAction : public G4UserEventAction,
     virtual void EndOfEventAction(const G4Event* event);
     
     // set methods
-    void SetDrawFlag(G4String drawFlag);
     void SetPrintMemory(G4bool printMemory);
     void SetSaveRandomStatus(G4bool saveRandomStatus);
     
     // get methods
-    G4String GetDrawFlag() const;
-    G4bool   GetPrintMemory() const;
+    G4bool  GetPrintMemory() const;
     
   private:
     /// Not implemented
@@ -61,7 +59,6 @@ class TG4EventAction : public G4UserEventAction,
     // data members
     TG4EventActionMessenger   fMessenger; ///< messenger
     TStopwatch  fTimer;          ///< timer
-    G4String    fDrawFlag;       ///< control drawing of the event
     G4bool      fPrintMemory;    ///< control for printing memory usage 
 
     /// control for saving random engine status for each event
@@ -70,19 +67,9 @@ class TG4EventAction : public G4UserEventAction,
 
 // inline methods
 
-inline void TG4EventAction::SetDrawFlag(G4String drawFlag) { 
-  /// Set control for drawing event: "CHARGED" (default), "ALL"
-  fDrawFlag = drawFlag; 
-}
-
 inline void TG4EventAction::SetPrintMemory(G4bool printMemory){ 
   /// Set option for printing memory usage
   fPrintMemory = printMemory; 
-}
-
-inline G4String TG4EventAction::GetDrawFlag() const {   
-  /// Return control for drawing event
-  return fDrawFlag;
 }
 
 inline G4bool TG4EventAction::GetPrintMemory() const {   
