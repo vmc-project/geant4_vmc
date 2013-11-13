@@ -23,6 +23,8 @@
 #include <G4DynamicParticle.hh>
 #include <G4ParticleTable.hh>
 #include <G4SystemOfUnits.hh>
+#include <G4IonTable.hh>
+#include <G4Version.hh>
  
 #include <TDatabasePDG.h>
 #include <TParticle.h>
@@ -34,8 +36,6 @@
 #include "TG4StateManager.h"
 #include <TVirtualMCApplication.h>
 #include <TParticle.h>
-
-
 
 TG4ParticlesManager* TG4ParticlesManager::fgInstance = 0;
 
@@ -308,8 +308,13 @@ void TG4ParticlesManager::AddIon(const G4String& name, G4int Z, G4int A, G4int Q
 
   // Get G4 ion particle definition
   // (Ion is created if it does not yet exist)
+#if G4VERSION_NUMBER >= 1000
+  G4ParticleDefinition* particleDefinition
+    = G4IonTable::GetIonTable()->GetIon(Z, A, excEnergy);
+#else
   G4ParticleDefinition* particleDefinition
     = G4ParticleTable::GetParticleTable()->GetIon(Z, A, excEnergy);
+#endif    
   
   if ( ! particleDefinition ) {
     TString text = "Z, A, excEnergy [keV]: ";
@@ -322,7 +327,11 @@ void TG4ParticlesManager::AddIon(const G4String& name, G4int Z, G4int A, G4int Q
     TG4Globals::Exception(
       "TG4ParticlesManager", "AddIon",
       text +  TG4Globals::Endl() + 
-      "G4ParticleTable::FindParticle() failed.");
+#if G4VERSION_NUMBER >= 1000
+      "G4IonTable::GetIon() failed.");
+#else
+      "G4ParticleTable::GetIon() failed.");
+#endif    
   }        
   
   // Add ion to TDatabasePDG

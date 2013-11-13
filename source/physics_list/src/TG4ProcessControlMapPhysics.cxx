@@ -111,6 +111,7 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("HadronElastic", kHADR); 
   controlMap->Add("hElastic", kHADR); 
   controlMap->Add("hElasticLHEP", kHADR); 
+  controlMap->Add("ionElastic", kHADR); 
   controlMap->Add("CHIPSElasticScattering", kHADR); 
   
   controlMap->Add("inelastic", kHADR); 

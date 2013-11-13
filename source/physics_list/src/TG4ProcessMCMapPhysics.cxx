@@ -111,6 +111,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("HadronElastic", kPHElastic); 
   mcMap->Add("hElastic", kPHElastic); 
   mcMap->Add("hElasticLHEP", kPHElastic); 
+  mcMap->Add("ionElastic", kPHElastic); 
   mcMap->Add("CHIPSElasticScattering", kPHElastic); 
   
   mcMap->Add("inelastic", kPHInhelastic); 
