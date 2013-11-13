@@ -24,6 +24,12 @@
 #include <G4ProcessManager.hh>
 #include <G4ProcessTable.hh>
 
+// According to G4VModularPhysicsList.cc
+#include <G4StateManager.hh>
+// This macros change the references to fields that are now encapsulated
+// in the class G4VMPLData.
+#define G4MT_physicsVector ((G4VMPLsubInstanceManager.offset[g4vmplInstanceID]).physicsVector)
+
 const G4double TG4EmPhysicsList::fgkDefaultCutValue = 1.0 * mm;
 
 //
@@ -131,9 +137,9 @@ void TG4EmPhysicsList::VerboseLevel(G4int level)
 
   TG4VVerbose::VerboseLevel(level);
   SetVerboseLevel(level);
-  
+
   G4PhysConstVector::iterator it;
-  for ( it = physicsVector->begin(); it != physicsVector->end(); ++it ) {
+  for ( it = G4MT_physicsVector->begin(); it != G4MT_physicsVector->end(); ++it ) {
     TG4Verbose* verbose = dynamic_cast<TG4Verbose*>(*it);
     if ( verbose )
       verbose->VerboseLevel(level);

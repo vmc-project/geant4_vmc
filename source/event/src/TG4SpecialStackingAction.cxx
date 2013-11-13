@@ -21,12 +21,8 @@
 #include <G4TrackStack.hh>
 #include <G4StackedTrack.hh>
 #include <G4StackManager.hh>
-#include <G4NeutrinoE.hh>
-#include <G4NeutrinoMu.hh>
-#include <G4NeutrinoTau.hh>
-#include <G4AntiNeutrinoE.hh>
-#include <G4AntiNeutrinoMu.hh>
-#include <G4AntiNeutrinoTau.hh>
+
+#include <TPDGCode.h>
 
 //_____________________________________________________________________________
 TG4SpecialStackingAction::TG4SpecialStackingAction()

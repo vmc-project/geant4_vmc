@@ -67,10 +67,10 @@ void TG4StepLimiterPhysics::ConstructProcess()
 
   fStepLimiterProcess = new G4StepLimiter();
 
-  theParticleIterator->reset();
-  while( (*theParticleIterator)() ){
+  aParticleIterator->reset();
+  while( (*aParticleIterator)() ){
 
-    G4ParticleDefinition* particle = theParticleIterator->value();
+    G4ParticleDefinition* particle = aParticleIterator->value();
     G4ProcessManager* pmanager = particle->GetProcessManager();
 
     pmanager ->AddProcess(fStepLimiterProcess, -1, -1, 6);

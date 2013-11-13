@@ -32,6 +32,12 @@
 #include <G4ProcessManager.hh>
 #include <G4ProcessTable.hh>
 
+// According to G4VModularPhysicsList.cc
+#include <G4StateManager.hh>
+// This macros change the references to fields that are now encapsulated
+// in the class G4VMPLData.
+#define G4MT_physicsVector ((G4VMPLsubInstanceManager.offset[g4vmplInstanceID]).physicsVector)
+
 G4ThreadLocal TG4SpecialPhysicsList* TG4SpecialPhysicsList::fgInstance = 0;
 
 //
@@ -184,7 +190,7 @@ void TG4SpecialPhysicsList::ConstructProcess()
   // G4VModularPhysicsList::ConstructProcess();
   // but call registered processes ourselves:
   G4PhysConstVector::iterator itr;
-  for (itr = physicsVector->begin(); itr!= physicsVector->end(); ++itr) {
+  for (itr = G4MT_physicsVector->begin(); itr!= G4MT_physicsVector->end(); ++itr) {
     (*itr)->ConstructProcess();
   }
 }
@@ -208,7 +214,7 @@ void TG4SpecialPhysicsList::VerboseLevel(G4int level)
   SetVerboseLevel(level);
   
   G4PhysConstVector::iterator it;
-  for ( it = physicsVector->begin(); it != physicsVector->end(); ++it ) {
+  for ( it = G4MT_physicsVector->begin(); it != G4MT_physicsVector->end(); ++it ) {
     TG4Verbose* verbose = dynamic_cast<TG4Verbose*>(*it);
     if ( verbose )
       verbose->VerboseLevel(level);

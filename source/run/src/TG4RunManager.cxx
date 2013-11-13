@@ -35,7 +35,7 @@
 #include "TG4SpecialControlsV2.h"
 #include "TG4RegionsManager.h"
 
-#include <G4ParRunManager.hh>
+#include <G4RunManager.hh>
 #include <Randomize.hh>
 #include <G4UIsession.hh>
 #include <G4UImanager.hh>
@@ -173,7 +173,7 @@ TG4RunManager::~TG4RunManager()
 #ifdef G4UI_USE
   delete fGeantUISession;
 #endif
-  if ( !  fRunManager->isSlave ) delete fRunManager;
+  delete fRunManager;
   if (fRootUIOwner) delete fRootUISession;
 }
 
@@ -226,10 +226,7 @@ void TG4RunManager::ConfigureRunManager(Int_t threadRank)
   }  
 
   // G4 run manager
-  if (threadRank == 0)
-    fRunManager =  new G4ParRunManager();
-  else  
-    fRunManager =  new G4ParRunManager(1);
+  fRunManager = new G4RunManager();
 
   if ( userGeometry != "VMCtoRoot" && userGeometry != "Root" ) {
     static G4VUserDetectorConstruction* detConstruction = 0;

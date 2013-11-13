@@ -223,11 +223,11 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
   G4bool success = true;
 
-  theParticleIterator->reset();
-  while ((*theParticleIterator)())
+  aParticleIterator->reset();
+  while ((*aParticleIterator)())
   {
     G4ProcessVector* processVector 
-      = theParticleIterator->value()->GetProcessManager()->GetProcessList();
+      = aParticleIterator->value()->GetProcessManager()->GetProcessList();
     for (G4int i=0; i<processVector->length(); i++) {
     
       G4String processName = (*processVector)[i]->GetProcessName();

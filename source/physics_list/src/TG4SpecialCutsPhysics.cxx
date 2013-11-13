@@ -100,10 +100,10 @@ void TG4SpecialCutsPhysics::ConstructProcess()
 
   TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
 
-  theParticleIterator->reset();
-  while ((*theParticleIterator)())
+  aParticleIterator->reset();
+  while ((*aParticleIterator)())
   {
-    G4ParticleDefinition* particle = theParticleIterator->value();
+    G4ParticleDefinition* particle = aParticleIterator->value();
     TG4G3ParticleWSP particleWSP 
       = g3PhysicsManager->GetG3ParticleWSP(particle);
     G4String name =

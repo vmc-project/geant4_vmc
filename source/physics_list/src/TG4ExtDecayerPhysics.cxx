@@ -86,10 +86,10 @@ void TG4ExtDecayerPhysics::ConstructProcess()
      // But we may have a problem if there are more than one 
      // instances of G4Decay process
 
-  theParticleIterator->reset();
-  while ((*theParticleIterator)())
+  aParticleIterator->reset();
+  while ((*aParticleIterator)())
   {    
-    G4ParticleDefinition* particle = theParticleIterator->value();
+    G4ParticleDefinition* particle = aParticleIterator->value();
     G4ProcessManager* pmanager = particle->GetProcessManager();
     
     if ( fSelection.find(particle->GetParticleName()) != std::string::npos ) {
@@ -108,7 +108,7 @@ void TG4ExtDecayerPhysics::ConstructProcess()
 
     if ( VerboseLevel() > 1 ) {
       G4cout << "Setting ext decayer for: " 
-             <<  theParticleIterator->value()->GetParticleName() 
+             <<  aParticleIterator->value()->GetParticleName() 
              << G4endl;
     } 
     
