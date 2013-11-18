@@ -35,7 +35,7 @@ class TG4DetConstruction : public G4VUserDetectorConstruction
 
     // methods
     virtual G4VPhysicalVolume* Construct();
-    virtual G4VPhysicalVolume* ConstructSlave();
+    virtual void ConstructSDandField();
     
     void SlaveTG4DetConstruction();
 

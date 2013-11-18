@@ -56,6 +56,8 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
 /// Create a new G4PrimaryVertex objects for each TParticle
 /// in the VMC stack.
   
+  G4cout << "TG4PrimaryGeneratorAction::TransformPrimaries: " << this << G4endl; 
+
   TVirtualMCStack* stack = gMC->GetStack();  
   if (!stack) {
     TG4Globals::Exception(
@@ -76,6 +78,7 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
      
 
   TG4ParticlesManager* particlesManager = TG4ParticlesManager::Instance();
+  G4cout << "TG4ParticleManager::Instance: " << particlesManager << G4endl; 
 
   G4PrimaryVertex* previousVertex = 0;
   G4ThreeVector previousPosition = G4ThreeVector(); 

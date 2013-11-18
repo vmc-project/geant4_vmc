@@ -20,7 +20,7 @@
 
 #include <TVirtualMCApplication.h>
 
-G4int TG4SensitiveDetector::fgSDCounter = 0;
+G4ThreadLocal G4int TG4SensitiveDetector::fgSDCounter = 0;
 
 //_____________________________________________________________________________
 TG4SensitiveDetector::TG4SensitiveDetector(G4String sdName, G4int mediumID)

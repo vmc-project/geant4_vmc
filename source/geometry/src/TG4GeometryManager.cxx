@@ -16,6 +16,7 @@
 
 #include "TG4GeometryManager.h"
 #include "TG4GeometryServices.h"
+#include "TG4SDManager.h"
 #include "TG4MCGeometry.h"
 #include "TG4OpGeometryManager.h"
 #include "TG4StateManager.h"
@@ -59,7 +60,7 @@
 #include <RootGM/volumes/Factory.h>
 #endif
 
-G4ThreadLocal TG4GeometryManager* TG4GeometryManager::fgInstance = 0;
+TG4GeometryManager* TG4GeometryManager::fgInstance = 0;
 const G4double      TG4GeometryManager::fgDefaultLimitDensity = 0.001*(g/cm3);
 const G4double      TG4GeometryManager::fgDefaultMaxStep= 10*cm;
 
@@ -81,8 +82,6 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
      
 {
 /// Standard constructor
-
-  G4cout << "TG4GeometryManager::TG4GeometryManager " << this << G4endl;
 
   if ( fgInstance ) {
     TG4Globals::Exception(
@@ -220,13 +219,13 @@ void TG4GeometryManager::ConstructG4GeometryViaVGM()
   
   // import Root geometry in VGM
   RootGM::Factory rootFactory;
-  if ( VerboseLevel() > 1 ) rootFactory.SetDebug(1);
+  //if ( VerboseLevel() > 1 ) rootFactory.SetDebug(1);
   rootFactory.SetIgnore(true);
   rootFactory.Import(gGeoManager->GetTopNode());
     
   // export Root VGM geometry in Geant4
   Geant4GM::Factory g4Factory;
-  if ( VerboseLevel() > 1 ) g4Factory.SetDebug(1);
+  //if ( VerboseLevel() > 1 ) g4Factory.SetDebug(1);
   rootFactory.Export(&g4Factory);
     
   G4VPhysicalVolume* g4World = g4Factory.World();
@@ -578,7 +577,7 @@ void TG4GeometryManager::ConstructGeometry()
 }                   
 
 //_____________________________________________________________________________
-void TG4GeometryManager::ConstructSlaveGeometry()
+void TG4GeometryManager::ConstructSDandField()
 {
 /// Construct Geant4 geometry depending on user geometry source
 
@@ -586,7 +585,7 @@ void TG4GeometryManager::ConstructSlaveGeometry()
   //ConstructG4Geometry();
 
   // Fill medium map
-  FillMediumMap(); 
+  //FillMediumMap(); 
 
   // VMC application construct geometry for optical processes
   TG4StateManager::Instance()->SetNewState(kConstructOpGeometry);
@@ -596,8 +595,12 @@ void TG4GeometryManager::ConstructSlaveGeometry()
   // Construct user regions
   if ( fUserRegionConstruction ) fUserRegionConstruction->Construct();
 
-  // Initialize SD manager
-  //TG4SDManager::Instance()->Initialize();
+  // Initialize SD manager (create SDs)
+  TG4SDManager::Instance()->Initialize();
+
+  // Create magnetic field
+  ConstructMagField();  
+
 }                   
 
 //_____________________________________________________________________________
@@ -605,8 +608,11 @@ void TG4GeometryManager::FinishGeometry()
 {
 /// Finish geometry construction after G4 run initialization
 
+  if ( VerboseLevel() > 1 ) 
+    G4cout << "TG4GeometryManager::FinishGeometry" << G4endl;
+
   // Create magnetic field
-  ConstructMagField();  
+  // ConstructMagField();  
 
   // Fill medium map if not yet done
   if ( fGeometryServices->GetMediumMap()->GetNofMedia() == 0 )
@@ -617,6 +623,9 @@ void TG4GeometryManager::FinishGeometry()
     G4TransportationManager::GetTransportationManager()
       ->GetNavigatorForTracking()->GetWorldVolume());
     
+  if ( VerboseLevel() > 1 ) 
+    G4cout << "TG4GeometryManager::FinishGeometry done" << G4endl;
+
 }
 
 //_____________________________________________________________________________
@@ -645,12 +654,14 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
 /// Set user limits defined in G3MedTable for all logical volumes.
 
   if ( VerboseLevel() > 1 ) 
-    G4cout << "TG4GeometryManager::SetUserLimits" << G4endl; 
+    G4cout << "TG4GeometryManager::SetUserLimits" << G4endl;
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
+  G4cout << "lvStore: " << lvStore << G4endl;
 
   for (G4int i=0; i<G4int(lvStore->size()); i++) {
     G4LogicalVolume* lv = (*lvStore)[i];
+    G4cout << fGeometryServices->GetMediumMap() << G4endl;
     TG4Medium* medium 
       = fGeometryServices->GetMediumMap()->GetMedium(lv, false);
       
@@ -698,6 +709,9 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
     // set limits to logical volume
     lv->SetUserLimits(tg4Limits);
   } 
+
+  if ( VerboseLevel() > 1 ) 
+    G4cout << "TG4GeometryManager::SetUserLimits done" << G4endl;
 }
 
 

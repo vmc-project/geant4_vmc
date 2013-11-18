@@ -255,6 +255,19 @@ void Ex01MCApplication::FinishRun()
 }
 
 //_____________________________________________________________________________
+TVirtualMCApplication* Ex01MCApplication::CloneForWorker() const 
+{
+  return new Ex01MCApplication(GetName(), GetTitle());
+}
+
+//_____________________________________________________________________________
+void Ex01MCApplication::InitForWorker() const 
+{
+  gMC->SetStack(fStack);
+  gMC->SetMagField(fMagField);
+}
+
+//_____________________________________________________________________________
 void Ex01MCApplication::ConstructGeometry()
 {    
 /// Construct geometry using TGeo functions or

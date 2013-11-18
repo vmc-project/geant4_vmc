@@ -40,16 +40,16 @@
 #include <TDatabasePDG.h>
 #include <TVirtualMCApplication.h>
 
-G4ThreadLocal TG4PhysicsManager* TG4PhysicsManager::fgInstance   = 0;
+TG4PhysicsManager* TG4PhysicsManager::fgInstance   = 0;
 const G4double     TG4PhysicsManager::fgkDefautCut = 1*mm;  
+TG4ProcessMCMap*   TG4PhysicsManager::fgProcessMCMap = 0;  
+TG4ProcessControlMap*  TG4PhysicsManager::fgProcessControlMap = 0;
 
 //_____________________________________________________________________________
 TG4PhysicsManager::TG4PhysicsManager()
   : TG4Verbose("physicsManager"),
     fParticlesManager(0),
     fG3PhysicsManager(0),
-    fProcessMCMap(),
-    fProcessControlMap(),
     fNotImplParNames(),
     fCutForGamma(fgkDefautCut),
     fCutForElectron(fgkDefautCut),
@@ -65,6 +65,12 @@ TG4PhysicsManager::TG4PhysicsManager()
   }
       
   fgInstance = this;  
+  
+  G4bool isMaster = ! G4Threading::IsWorkerThread();
+  if ( isMaster ) {
+    fgProcessMCMap = new TG4ProcessMCMap();
+    fgProcessControlMap = new TG4ProcessControlMap();
+  }
   
   // create particles manager
   fParticlesManager = new TG4ParticlesManager();
@@ -82,7 +88,13 @@ TG4PhysicsManager::~TG4PhysicsManager()
 /// Destructor
 
   fgInstance = 0; 
-
+  G4bool isMaster = ! G4Threading::IsWorkerThread();
+  if ( isMaster ) {
+    delete fgProcessMCMap;
+    delete fgProcessControlMap;
+    fgProcessMCMap = 0;
+    fgProcessControlMap = 0;
+  }  
   delete fParticlesManager;
   delete fG3PhysicsManager;
 }
@@ -90,127 +102,6 @@ TG4PhysicsManager::~TG4PhysicsManager()
 //
 // private methods
 //
-
-//_____________________________________________________________________________
-void TG4PhysicsManager::FillProcessMap()
-{
-/// Fill fProcessMCMap.
-/// The default G4 process names are used in the map.
-/// Not used - the map is filled in physics constructors
-/// only with processes that are really built.
-
-  // multiple scattering
-  fProcessMCMap.Add("msc",  kPMultipleScattering);
-  fProcessMCMap.Add("Imsc", kPMultipleScattering);
-    
-  // continuous energy loss
-  // !! including delta rays
-  fProcessMCMap.Add("eIoni",  kPEnergyLoss);
-  fProcessMCMap.Add("IeIoni", kPEnergyLoss);
-  fProcessMCMap.Add("LowEnergyIoni", kPEnergyLoss);
-  fProcessMCMap.Add("hIoni",  kPEnergyLoss);
-  fProcessMCMap.Add("IhIoni", kPEnergyLoss);
-  fProcessMCMap.Add("hLowEIoni", kPEnergyLoss);
-  fProcessMCMap.Add("MuIoni", kPEnergyLoss);
-  fProcessMCMap.Add("IMuIonisation", kPEnergyLoss);
-  fProcessMCMap.Add("ionIoni",  kPEnergyLoss);
-  fProcessMCMap.Add("ionLowEIoni",  kPEnergyLoss);
-  fProcessMCMap.Add("PAIonisation",  kPEnergyLoss);
-  
-  // bending in mag. field
-  // kPMagneticFieldL
-
-  // particle decay
-  fProcessMCMap.Add("Decay", kPDecay);
-  
-  // photon pair production or
-  // muon direct pair production
-  fProcessMCMap.Add("conv", kPPair);
-  fProcessMCMap.Add("LowEnConversion", kPPair);
-  fProcessMCMap.Add("MuPairProd", kPPair);
-  fProcessMCMap.Add("IMuPairProduction", kPPair);
-
-  // Compton scattering
-  fProcessMCMap.Add("compt", kPCompton);
-  fProcessMCMap.Add("LowEnCompton", kPCompton);
-  fProcessMCMap.Add("polarCompt", kPCompton);
-
-  // photoelectric effect
-  fProcessMCMap.Add("phot", kPPhotoelectric);
-  fProcessMCMap.Add("LowEnPhotoElec", kPPhotoelectric);
-
-  // bremsstrahlung
-  fProcessMCMap.Add("eBrem", kPBrem);
-  fProcessMCMap.Add("IeBrem", kPBrem);
-  fProcessMCMap.Add("MuBrems", kPBrem);
-  fProcessMCMap.Add("IMuBremsstrahlung", kPBrem);
-  fProcessMCMap.Add("LowEnBrem", kPBrem);
-
-  // delta-ray production
-  // kPDeltaRay
-  // has to be distinguished from kPEnergyLoss on flight
-  
-  // positron annihilation
-  fProcessMCMap.Add("annihil", kPAnnihilation);
-  fProcessMCMap.Add("Iannihil", kPAnnihilation);
-
-  // hadronic interaction
-  // kPHadronic
-
-  // nuclear evaporation
-  // kPEvaporation
-  
-  // nuclear fission
-  // kPNuclearFission
-
-  // nuclear absorption
-  fProcessMCMap.Add("PionMinusAbsorptionAtRest", kPNuclearAbsorption);
-  fProcessMCMap.Add("PiMinusAbsorptionAtRest", kPNuclearAbsorption);
-  fProcessMCMap.Add("KaonMinusAbsorption", kPNuclearAbsorption);         
-  fProcessMCMap.Add("KaonMinusAbsorptionAtRest", kPNuclearAbsorption);         
-  
-  // antiproton annihilation
-  fProcessMCMap.Add("AntiProtonAnnihilationAtRest", kPPbarAnnihilation);
-  // fProcessMCMap.Add("AntiNeutronAnnihilationAtRest", not defined);
-
-  // neutron capture    
-  fProcessMCMap.Add("NeutronCaptureAtRest", kPNCapture);
-  // fProcessMCMap.Add("LCapture", hadron capture not defined);
-
-  // hadronic elastic incoherent scattering
-  fProcessMCMap.Add("LElastic", kPHElastic);
-
-  // hadronic inelastic scattering
-  fProcessMCMap.Add("inelastic", kPHInhelastic);
-
-  // muon nuclear interaction
-  fProcessMCMap.Add("MuNucl", kPMuonNuclear);
-
-  // exceeded time of flight cut
-  // kPTOFlimit
-  
-  // nuclear photofission
-  // kPPhotoFission
-
-  // Rayleigh scattering
-  fProcessMCMap.Add("Rayleigh Scattering", kPRayleigh);
-
-  // no mechanism is active, usually at the entrance of a new volume
-  fProcessMCMap.Add("Transportation", kPTransportation);
-
-  // particle has fallen below energy threshold and tracking stops
-  // kPStop
-  
-  // Cerenkov photon absorption
-  fProcessMCMap.Add("Absorption", kPLightAbsorption);
-
-  // Cerenkov photon reflection/refraction
-  // kPLightScattering, kPLightReflection, kPLightRefraction
-  // has to be inquired from the G4OpBoundary process
-
-  // synchrotron radiation
-  fProcessMCMap.Add("SynchrotronRadiation", kPSynchrotron);
-}  
 
 //_____________________________________________________________________________
 void TG4PhysicsManager::GstparCut(G4int itmed, TG4G3Cut par, G4double parval)
@@ -828,7 +719,7 @@ TMCProcess TG4PhysicsManager::GetMCProcess(const G4VProcess* process)
  
   if (!process) return kPNoProcess;
 
-  return fProcessMCMap.GetMCProcess(process);
+  return fgProcessMCMap->GetMCProcess(process);
 }
 
 //_____________________________________________________________________________

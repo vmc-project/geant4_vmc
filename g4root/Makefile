@@ -77,7 +77,8 @@ OBJS	:= $(CXXOBJ) $(GDICTO)
 # Make include list
 #
 ifeq ($(G4INSTALL),)
-  G4CFLAGS := $(shell geant4-config --cflags)
+#  G4CFLAGS := $(shell geant4-config --cflags)
+  G4CFLAGS := -DG4INTY_USE_XT -DG4VIS_USE_OPENGL -DG4UI_USE_TCSH -DG4VIS_USE_RAYTRACERX -DG4VIS_USE_OPENGLX -DG4MULTITHREADED -ftls-model=global-dynamic -I/work/projects/vmc/mt/geant4/bin/../include/Geant4
 else   
   ifndef G4INCLUDE
     G4CFLAGS := -I$(G4INSTALL)/include
@@ -91,7 +92,7 @@ INCLUDES := -Iinclude \
 
 # C++ compilation flags
 #
-CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) $(G4CFLAGS)
+CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) $(G4CFLAGS) -ftls-model=global-dynamic
 
 DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCLUDES)
 

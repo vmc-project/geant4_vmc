@@ -87,6 +87,8 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList(const G4String& selection)
 {
 /// Standard constructor
 
+  G4cout << "TG4SpecialPhysicsList::TG4SpecialPhysicsList" << G4endl;
+
   if (fgInstance) {
     TG4Globals::Exception(
       "TG4SpecialPhysicsList", "TG4SpecialPhysicsList",
@@ -108,6 +110,8 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList()
     fIsSpecialCuts(false)
 {
 /// Default constructor
+
+  G4cout << "TG4SpecialPhysicsList::TG4SpecialPhysicsList" << G4endl;
 
   Configure("");
 

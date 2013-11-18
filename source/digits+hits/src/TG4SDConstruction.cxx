@@ -23,6 +23,7 @@
 #include <G4SDManager.hh>
 #include <G4LogicalVolume.hh>
 #include <G4LogicalVolumeStore.hh>
+#include <G4Threading.hh>
 
 #include <TVirtualMCApplication.h>
 #include <TGeoManager.h>
@@ -134,12 +135,13 @@ void TG4SDConstruction::Construct()
 /// Create sensitive detectors and initialize the VMC application.
 /// Sensitive detectors are set to all logical volumes
 
-  G4cout << "TG4SDConstruction::Construct" << gMC << G4endl;
+  G4cout << "TG4SDConstruction::Construct" << G4endl;
 
-  if ( fSelectionFromTGeo ) FillSDSelectionFromTGeo();
+  G4bool isMaster = ! G4Threading::IsWorkerThread();
+
+  if ( fSelectionFromTGeo && isMaster ) FillSDSelectionFromTGeo();
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-  G4cout << "lvStore" << lvStore << G4endl;
   
   for ( G4int i=0; i<G4int(lvStore->size()); i++ ) {
     G4LogicalVolume* lv = (*lvStore)[i];
@@ -148,7 +150,7 @@ void TG4SDConstruction::Construct()
     if ( ! fSelection.size() ||
           fSelection.find(lv->GetName()) != fSelection.end() ) {
       G4int sdID = CreateSD(lv);
-      TG4SDServices::Instance()->MapVolume(lv, sdID);
+      if ( isMaster ) TG4SDServices::Instance()->MapVolume(lv, sdID);
     }
   }    
 
@@ -158,7 +160,7 @@ void TG4SDConstruction::Construct()
     for ( G4int i=0; i<G4int(lvStore->size()); i++ ) {
       G4LogicalVolume* lv = (*lvStore)[i];
       if ( ! lv->GetSensitiveDetector() ) 
-        TG4SDServices::Instance()->MapVolume(lv, counter++);
+        if ( isMaster ) TG4SDServices::Instance()->MapVolume(lv, counter++);
     }
   }    
   
@@ -173,6 +175,8 @@ void TG4SDConstruction::Construct()
       TG4SDServices::Instance()->PrintSensitiveVolumes();
     }  
   }  
+
+  G4cout << "TG4SDConstruction::Construct done" << G4endl;
 }
 
 //_____________________________________________________________________________

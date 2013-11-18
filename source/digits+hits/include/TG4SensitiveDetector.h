@@ -60,7 +60,7 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
     TG4SensitiveDetector& operator=(const TG4SensitiveDetector &right);
 
     // data members
-    static G4int fgSDCounter; ///< sensitive detector counter
+    static G4ThreadLocal G4int fgSDCounter; ///< sensitive detector counter
 
     // data members
     G4int            fID;          ///< sensitive detector ID

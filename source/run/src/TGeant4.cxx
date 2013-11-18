@@ -27,6 +27,7 @@
 #include "TG4Globals.h"
 
 #include <G4StateManager.hh>
+#include <G4Threading.hh>
 
 #ifdef G4VIS_USE
 #include <G4VisExecutive.hh>
@@ -37,6 +38,10 @@
 /// \cond CLASSIMP
 ClassImp(TGeant4)
 /// \endcond
+
+//_____________________________________________________________________________
+TGeant4* TGeant4::fgMasterInstance = 0; 
+TVirtualMCApplication* TGeant4::fgMasterApplicationInstance = 0;
 
 //_____________________________________________________________________________
 TGeant4::TGeant4(const char* name, const char* title,
@@ -50,6 +55,7 @@ TGeant4::TGeant4(const char* name, const char* title,
     fVisManager(0),
     fVisExecutive(0),
     fRunManager(0),
+    fRunConfiguration(configuration),
     fMediumCounter(0),
     fMaterialCounter(0),
     fMatrixCounter(0),
@@ -58,32 +64,47 @@ TGeant4::TGeant4(const char* name, const char* title,
 {
 /// Standard constructor
 
+  G4cout << "TGeant4::TGeant4 " << this << G4endl;
+
+  G4bool isMaster = ! G4Threading::IsWorkerThread();
+  if ( isMaster ) {
+    fgMasterInstance = this; 
+    fgMasterApplicationInstance = TVirtualMCApplication::Instance();
+  }   
+
   // Update title with a physics selection
   TString newTitle = title;
   newTitle.Append(" : ");
   newTitle.Append(configuration->GetPhysicsListSelection());
   SetTitle(newTitle);
   
-  // create state manager
+  // create state manager - thread local
   fStateManager = new TG4StateManager();
   fStateManager->SetNewState(kPreInit);
   // add verbose level
   G4cout << "TG4StateManager has been created." << G4endl;
   
-  // create geometry manager
-  fGeometryManager = new TG4GeometryManager(fUserGeometry);
-  // add verbose level
-  G4cout << "TG4GeometryManager has been created." << G4endl;
-  
-  // create sensitive detectors manager
-  fSDManager = new TG4SDManager();
-  // add verbose level
-  G4cout << "TG4SDManager has been created." << G4endl;
-  
-  // create physics manager  
-  fPhysicsManager = new TG4PhysicsManager();
-  // add verbose level
-  G4cout << "TG4GeometryManager has been created." << G4endl;
+  // create geometry manager - shared
+  if ( isMaster ) {
+    fGeometryManager = new TG4GeometryManager(fUserGeometry);
+    // add verbose level
+    G4cout << "TG4GeometryManager has been created." << G4endl;
+
+    // create sensitive detectors manager - shared
+    fSDManager = new TG4SDManager();
+    // add verbose level
+    G4cout << "TG4SDManager has been created." << G4endl;
+
+    // create physics manager  
+    fPhysicsManager = new TG4PhysicsManager();
+    // add verbose level
+    G4cout << "TG4PhysicsManager has been created." << G4endl;
+  }  
+  else {
+    fGeometryManager = fgMasterInstance->fGeometryManager;
+    fSDManager = fgMasterInstance->fSDManager;
+    fPhysicsManager = fgMasterInstance->fPhysicsManager;
+  }  
   
   // create step manager 
   fStepManager = new TG4StepManager(fUserGeometry);
@@ -100,10 +121,13 @@ TGeant4::TGeant4(const char* name, const char* title,
 #endif    
   
 #ifdef G4VIS_USE
-  // create visualization managers
-  fVisManager = new TG4VisManager();
-  fVisExecutive = new G4VisExecutive();
+  if ( isMaster ) {
+    // create visualization managers
+    fVisManager = new TG4VisManager();
+    fVisExecutive = new G4VisExecutive();
+  }  
 #endif
+  G4cout << "TGeant4::TGeant4 done " << this << G4endl;
 }
    
 //_____________________________________________________________________________
@@ -118,12 +142,21 @@ TGeant4::TGeant4(const char* name, const char* title,
     fVisManager(0),
     fVisExecutive(0),
     fRunManager(0),
+    fRunConfiguration(configuration),
     fMediumCounter(0),
     fMaterialCounter(0),
     fMatrixCounter(0),
     fUserGeometry(configuration->GetUserGeometry())
 {
 /// Standard constructor
+
+  G4cout << "TGeant4::TGeant4 " << this << G4endl;
+
+  G4bool isMaster = ! G4Threading::IsWorkerThread();
+  if ( isMaster ) {
+    fgMasterInstance = this; 
+    fgMasterApplicationInstance = TVirtualMCApplication::Instance();
+  }   
 
   // Update title with a physics selection
   TString newTitle = title;
@@ -137,20 +170,28 @@ TGeant4::TGeant4(const char* name, const char* title,
   // add verbose level
   G4cout << "TG4StateManager has been created." << G4endl;
   
-  // create geometry manager
-  fGeometryManager = new TG4GeometryManager(fUserGeometry);
-  // add verbose level
-  G4cout << "TG4GeometryManager has been created." << G4endl;
+  // create geometry manager - shared
+  if ( isMaster ) {
+    fGeometryManager = new TG4GeometryManager(fUserGeometry);
+    // add verbose level
+    G4cout << "TG4GeometryManager has been created." << G4endl;
+
+    // create sensitive detectors manager
+    fSDManager = new TG4SDManager();
+    // add verbose level
+    G4cout << "TG4SDManager has been created." << G4endl;
+
+    // create physics manager  
+    fPhysicsManager = new TG4PhysicsManager();
+    // add verbose level
+    G4cout << "TG4PhysicsManager has been created." << G4endl;
   
-  // create sensitive detectors manager
-  fSDManager = new TG4SDManager();
-  // add verbose level
-  G4cout << "TG4SDManager has been created." << G4endl;
-  
-  // create physics manager  
-  fPhysicsManager = new TG4PhysicsManager();
-  // add verbose level
-  G4cout << "TG4GeometryManager has been created." << G4endl;
+  }  
+  else {
+    fGeometryManager = fgMasterInstance->fGeometryManager;
+    fSDManager = fgMasterInstance->fSDManager;
+    fPhysicsManager = fgMasterInstance->fPhysicsManager;
+  }  
   
   // create step manager 
   fStepManager = new TG4StepManager(fUserGeometry);
@@ -167,10 +208,13 @@ TGeant4::TGeant4(const char* name, const char* title,
 #endif    
   
 #ifdef G4VIS_USE
-  // create visualization managers
-  fVisManager = new TG4VisManager();
-  fVisExecutive = new G4VisExecutive();
+  if ( isMaster ) {
+    // create visualization managers
+    fVisManager = new TG4VisManager();
+    fVisExecutive = new G4VisExecutive();
+  }  
 #endif
+  G4cout << "TGeant4::TGeant4 done " << this << G4endl;
 }
 
     
@@ -179,16 +223,27 @@ TGeant4::~TGeant4()
 {
 /// Destructor
 
+  G4cout << "TGeant4::~TGeant4 " << this << G4endl;
+
+  G4bool isMaster = ! G4Threading::IsWorkerThread();
+  if ( isMaster ) {
+    fgMasterInstance = 0;
+    fgMasterApplicationInstance = 0;
+  }  
+
   delete fRunManager;
   delete fStateManager;
-  delete fGeometryManager;
-  delete fSDManager;
-  delete fPhysicsManager;
+  if ( isMaster )  {
+    delete fGeometryManager;
+    delete fSDManager;
+    delete fPhysicsManager;
+  }  
   delete fStepManager;
 #ifdef G4VIS_USE
   delete fVisManager;
   delete fVisExecutive;
 #endif
+  G4cout << "TGeant4::~TGeant4 done " << this << G4endl;
 }
 
 //
@@ -1182,17 +1237,14 @@ void TGeant4::Init()
 }  
   
 //_____________________________________________________________________________
-void TGeant4::InitMT(Int_t threadRank) 
+void TGeant4::InitMT(Int_t /*threadRank*/) 
 { 
 /// Initialize G4 run manager.
 
-  G4cout << "TGeant4::Init " << threadRank << G4endl;
-  fRunManager->Initialize(threadRank);
+  TG4Globals:: Warning(
+    "TGeant4", "InitMT", "Deprecated function."); 
 
-#ifdef G4VIS_USE
-  fVisExecutive->SetVerboseLevel(0);
-  fVisExecutive->Initialize();
-#endif
+  Init();
 }  
   
 //_____________________________________________________________________________
@@ -1201,7 +1253,7 @@ void TGeant4::BuildPhysics()
 /// Finish initialization of Geant4 after the G4 run manager initialization
 /// is finished. 
 
-  fRunManager->LateInitialize();
+  //fRunManager->LateInitialize();
 }  
 
 //_____________________________________________________________________________
@@ -1218,6 +1270,7 @@ Bool_t TGeant4::ProcessRun(Int_t nofEvents)
 {
 /// Process Geant4 run.
 
+  fRunManager->LateInitialize();
   return fRunManager->ProcessRun(nofEvents);
 }  
 
@@ -1287,6 +1340,21 @@ Bool_t  TGeant4::SecondariesAreOrdered() const
 
   return fRunManager->SecondariesAreOrdered();
 }  
+
+//_____________________________________________________________________________
+TGeant4* TGeant4::CloneForWorker() const
+{
+/// Clone this instance
+
+  TGeant4* geant4 
+    = new TGeant4(GetName(), GetTitle(), fRunConfiguration);
+
+  G4cout << "TGeant4::CloneForWorker: " << geant4 << G4endl;
+  G4cout << "TVirtualMCApplication: " << TVirtualMCApplication::Instance() << G4endl;
+
+  return geant4;
+}  
+ 
 
 // Geant3 specific methods
 // !!! need to be transformed to common interface

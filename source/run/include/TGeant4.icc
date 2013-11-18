@@ -23,6 +23,18 @@
 //
 
 //_____________________________________________________________________________
+inline TGeant4* TGeant4::MasterInstance() 
+{ 
+  return fgMasterInstance; 
+}    
+
+//_____________________________________________________________________________
+inline TVirtualMCApplication* TGeant4::MasterApplicationInstance() 
+{
+  return fgMasterApplicationInstance; 
+}    
+
+//_____________________________________________________________________________
 inline void TGeant4::StopTrack()
 { 
 /// Stop track

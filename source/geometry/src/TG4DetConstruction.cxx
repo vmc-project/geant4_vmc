@@ -54,26 +54,10 @@ G4VPhysicalVolume* TG4DetConstruction::Construct()
 }
 
 //_____________________________________________________________________________
-G4VPhysicalVolume* TG4DetConstruction::ConstructSlave()
+void TG4DetConstruction::ConstructSDandField()
 { 
-/// Construct geometry is delegated to TG4GeometryManager
+/// Construct SDandField is delegated to TG4GeometryManager
 // --
 
-  // Build G4 geometry
-  TG4GeometryManager::Instance()->ConstructSlaveGeometry();
-
-  G4cout << "Setting world to TG4GeometryServices::Instance " 
-         << TG4GeometryServices::Instance() << " " << fWorld << G4endl;
-         
-  TG4GeometryServices::Instance()->SetWorld(fWorld);  
-  
-  return fWorld;    
-}
-
-//_____________________________________________________________________________
-void TG4DetConstruction::SlaveTG4DetConstruction()
-{
-/// Nothing to be done yet
-
-  G4cout << "TG4DetConstruction::SlaveTG4DetConstruction" << G4endl;
+  TG4GeometryManager::Instance()->ConstructSDandField();
 }

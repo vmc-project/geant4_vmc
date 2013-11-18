@@ -120,7 +120,6 @@ class TG4PhysicsManager : public TG4Verbose
     TG4PhysicsManager& operator=(const TG4PhysicsManager& right);
 
     // methods
-    void FillProcessMap();
     void GstparCut(G4int itmed, TG4G3Cut par, G4double parval);
     void GstparControl(G4int itmed, TG4G3Control control, 
                        TG4G3ControlValue parval);
@@ -134,9 +133,15 @@ class TG4PhysicsManager : public TG4Verbose
     void SetSpecialCutsActivation();
 
     // static data members
-    static G4ThreadLocal TG4PhysicsManager*  fgInstance; ///< this instance
+    static  TG4PhysicsManager*  fgInstance; ///< this instance
     
-    static const G4double      fgkDefautCut; ///< the default range cut value 
+    static const G4double    fgkDefautCut; ///< the default range cut value 
+
+    /// the mapping between G4 process names and TMCProcess codes
+    static TG4ProcessMCMap*  fgProcessMCMap;
+
+    /// the mapping between G4 processes and G3 process controls
+    static TG4ProcessControlMap*  fgProcessControlMap;
 
     //
     // data members
@@ -146,12 +151,6 @@ class TG4PhysicsManager : public TG4Verbose
     
     /// G3 physics manager
     TG4G3PhysicsManager*   fG3PhysicsManager;
-    
-    /// the mapping between G4 process names and TMCProcess codes
-    TG4ProcessMCMap        fProcessMCMap;
-    
-    /// the mapping between G4 processes and G3 process controls
-    TG4ProcessControlMap   fProcessControlMap;
     
     /// set of not implemented Gstpar parameters
     std::set<TString>      fNotImplParNames;

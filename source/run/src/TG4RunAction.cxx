@@ -44,7 +44,7 @@ TG4RunAction::TG4RunAction()
 {
 /// Default constructor
 
-  G4cout << "Constructing TG4RunAction: " << this << G4endl;
+  G4cout << "TG4RunAction::TG4RunAction " << this << G4endl;
 
   fTimer = new G4Timer;
 }
@@ -54,7 +54,7 @@ TG4RunAction::~TG4RunAction()
 {
 /// Destructor
 
-  G4cout << "Destructing TG4RunAction: " << this << G4endl;
+  G4cout << "TG4RunAction::~TG4RunAction " << this << G4endl;
 
   delete fTimer;
 }

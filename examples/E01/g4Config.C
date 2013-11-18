@@ -28,6 +28,8 @@ void Config()
   // TGeant4
   TGeant4* geant4
     = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration);
+    
+  geant4->ProcessGeantCommand("/mcVerbose/all 3");  
 
   cout << "Geant4 has been created." << endl;
   

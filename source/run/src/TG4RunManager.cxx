@@ -24,18 +24,19 @@
 #include "TG4PhysicsManager.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4StateManager.h"
+#include "TG4ActionInitialization.h"
+#include "TG4WorkerInitialization.h"
 #include "TG4DetConstruction.h"
 #include "TG4PostDetConstruction.h"
 #include "TG4SDConstruction.h"
-#include "TG4PrimaryGeneratorAction.h"
-#include "TG4RunAction.h"
-#include "TG4EventAction.h"
-#include "TG4TrackingAction.h"
-#include "TG4SteppingAction.h"
-#include "TG4SpecialControlsV2.h"
 #include "TG4RegionsManager.h"
 
+#ifdef G4MULTITHREADED  
+#include <G4MTRunManager.hh>
+#else
 #include <G4RunManager.hh>
+#endif
+
 #include <Randomize.hh>
 #include <G4UIsession.hh>
 #include <G4UImanager.hh>
@@ -60,7 +61,6 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
     fRunManager(0),
     fMessenger(this),
     fRunConfiguration(runConfiguration),
-    fSpecialControls(0),
     fRegionsManager(0),
     fGeantUISession(0),
     fRootUISession(0),
@@ -70,6 +70,8 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
     fUseRootRandom(true) 
 {
 /// Standard constructor
+
+  G4cout << "TG4RunManager::TG4RunManager: " << this << G4endl;
 
   if (fgInstance) {
     TG4Globals::Exception(
@@ -86,7 +88,7 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
   fgInstance = this;
   
   if (VerboseLevel() > 1) {
-    G4cout << "G4RunManager has been created." << G4endl;
+    G4cout << "TG4RunManager has been created." << this << G4endl;
   }  
   
   // filter out "-splash" from argument list
@@ -110,7 +112,6 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration)
     fRunManager(0),
     fMessenger(this),
     fRunConfiguration(runConfiguration),
-    fSpecialControls(0),
     fRegionsManager(0),
     fGeantUISession(0),
     fRootUISession(0),
@@ -120,6 +121,8 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration)
     fUseRootRandom(true) 
 {
 /// Default constructor
+
+  G4cout << "TG4RunManager::TG4RunManager: " << this << G4endl;
 
   if (fgInstance) {
     TG4Globals::Exception(
@@ -134,6 +137,10 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration)
   }
       
   fgInstance = this;
+
+  if (VerboseLevel() > 1) {
+    G4cout << "TG4RunManager has been created." << this << G4endl;
+  }  
   
   // set primary UI
   fRootUISession = gROOT->GetApplication();
@@ -168,7 +175,6 @@ TG4RunManager::~TG4RunManager()
 /// Destructor
 
   delete fRunConfiguration;
-  delete fSpecialControls;
   delete fRegionsManager;
 #ifdef G4UI_USE
   delete fGeantUISession;
@@ -182,14 +188,13 @@ TG4RunManager::~TG4RunManager()
 //
 
 //_____________________________________________________________________________
-void TG4RunManager::ConfigureRunManager(Int_t threadRank)
+void TG4RunManager::ConfigureRunManager()
 {
 /// Set the user action classes defined by TG4RunConfiguration to G4RunManager.
 
   // Geometry construction and navigator
   //
-  G4cout << "TG4RunManager::ConfigureRunManager " 
-       << this << " threadRank: "  << threadRank << G4endl;
+  G4cout << "TG4RunManager::ConfigureRunManager " << this << G4endl;
 
   TString userGeometry = fRunConfiguration->GetUserGeometry();
   
@@ -197,6 +202,7 @@ void TG4RunManager::ConfigureRunManager(Int_t threadRank)
     ->SetUserRegionConstruction(
         fRunConfiguration->CreateUserRegionConstruction());
     
+/*
   // Root navigator
   TG4RootNavMgr* rootNavMgr = 0;
   if ( userGeometry == "VMCtoRoot" || userGeometry == "Root" ) {
@@ -224,71 +230,43 @@ void TG4RunManager::ConfigureRunManager(Int_t threadRank)
     // Pass geometry to G4Root navigator
     rootNavMgr = TG4RootNavMgr::GetInstance(gGeoManager);
   }  
-
+*/
   // G4 run manager
-  fRunManager = new G4RunManager();
+#ifdef G4MULTITHREADED  
+  fRunManager = new G4MTRunManager(); 
+  fRunManager
+    ->SetUserInitialization(new TG4WorkerInitialization());   
+#else    
+  fRunManager =  new G4RunManager();
+#endif
 
   if ( userGeometry != "VMCtoRoot" && userGeometry != "Root" ) {
-    static G4VUserDetectorConstruction* detConstruction = 0;
-    if (threadRank == 0) {
-      G4cout << "calling fRunConfiguration->CreateDetectorConstruction()" << G4endl;
-      detConstruction = fRunConfiguration->CreateDetectorConstruction();
-    }
-    else {
-      G4cout << "calling tg4DetConstruction->SlaveTG4DetConstruction()" << G4endl;
-      TG4DetConstruction* tg4DetConstruction 
-        = dynamic_cast<TG4DetConstruction*>(detConstruction);
-      if (tg4DetConstruction) {
-        tg4DetConstruction->SlaveTG4DetConstruction();
-      }
-      else {
-        TG4Globals::Warning("TG4RunManager", "ConfigureRunManager",
-                            "Unsupported detector construction type.");
-      }        
-    }  
-    fRunManager->SetUserInitialization(detConstruction);
+    fRunManager
+      ->SetUserInitialization(fRunConfiguration->CreateDetectorConstruction());
+    G4cout << "CreateDetectorConstruction done." << G4endl;
   }    
   else {
-    rootNavMgr->Initialize(new TG4PostDetConstruction());
-    rootNavMgr->ConnectToG4();  
+    TG4Globals::Exception(
+      "TG4RunManager", "ConfigureRunManager",
+      "Root navigation is not yet supported.");
+    //rootNavMgr->Initialize(new TG4PostDetConstruction());
+    //rootNavMgr->ConnectToG4();  
   }  
-  
+    
   // Other mandatory classes
   //  
   fRunManager
     ->SetUserInitialization(fRunConfiguration->CreatePhysicsList());
+  G4cout << "CreatePhysicsList done." << G4endl;
   fRunManager
-    ->SetUserAction(fRunConfiguration->CreatePrimaryGenerator());      
-
-  // User other action classes 
-  //
-  G4UserRunAction* runAction = fRunConfiguration->CreateRunAction();
-  if ( runAction ) fRunManager->SetUserAction(runAction);  
-
-  G4UserEventAction* eventAction = fRunConfiguration->CreateEventAction();
-  if ( eventAction ) fRunManager->SetUserAction(eventAction); 
-    
-  TG4TrackingAction* trackingAction = fRunConfiguration->CreateTrackingAction();
-  if ( trackingAction) fRunManager->SetUserAction(trackingAction); 
-    
-  TG4SteppingAction* steppingAction = fRunConfiguration->CreateSteppingAction();
-  if ( steppingAction) fRunManager->SetUserAction(steppingAction);
-
-  G4UserStackingAction* stackingAction = fRunConfiguration->CreateStackingAction(); 
-  if ( stackingAction) fRunManager->SetUserAction(stackingAction);
-  
-  // Special controls action
-  //
-  if ( fRunConfiguration->IsSpecialControls() ) {
-    // add test if both tracking action and stepping action
-    fSpecialControls = new TG4SpecialControlsV2();
-    trackingAction->SetSpecialControls(fSpecialControls);
-    steppingAction->SetSpecialControls(fSpecialControls);
-  }
+    ->SetUserInitialization(new TG4ActionInitialization(fRunConfiguration));      
+  G4cout << "Create ActionInitialization done." << G4endl;
   
   // Regions manager
   //
   fRegionsManager = new TG4RegionsManager();
+  
+  G4cout << "TG4RunManager::ConfigureRunManager done " << this << G4endl;
 }
 
 //_____________________________________________________________________________
@@ -352,15 +330,14 @@ void TG4RunManager::SetRandomSeed()
 // public methods
 
 //_____________________________________________________________________________
-void TG4RunManager::Initialize(Int_t threadRank)
+void TG4RunManager::Initialize()
 {
 /// Initialize G4.
 
-  G4cout << "TG4RunManager::Initialize " 
-       << this << " threadRank: "  << threadRank << G4endl;
+  G4cout << "TG4RunManager::Initialize " << this << G4endl;
 
   // create G4ParRunManager
-  ConfigureRunManager(threadRank);
+  ConfigureRunManager();
   if (VerboseLevel() > 1) {
     G4cout << "G4RunManager has been created." << G4endl;
   }  
@@ -374,13 +351,17 @@ void TG4RunManager::Initialize(Int_t threadRank)
   //CreateRootUI();
   
   // initialize Geant4
+  G4cout << "G4RunManager::Initialize " << G4endl;
   fRunManager->Initialize();
+  G4cout << "G4RunManager::Initialize done" << G4endl;
 
   // finish geometry
   TG4GeometryManager::Instance()->FinishGeometry();
   
   // initialize SD manager
   TG4SDManager::Instance()->Initialize();
+
+  G4cout << "TG4RunManager::Initialize done " << this << G4endl;
 }
 
 //_____________________________________________________________________________
@@ -389,17 +370,23 @@ void TG4RunManager::LateInitialize()
 /// Finish initialization of G4 after the G4Run initialization
 /// is finished. 
 
+  G4cout << "TG4RunManager::LateInitialize " << this << G4endl;
+  G4bool isMaster = ! G4Threading::IsWorkerThread();
+
   // define particles 
   TG4PhysicsManager::Instance()->DefineParticles();
 
   // set user limits
-  TG4GeometryManager::Instance()
-    ->SetUserLimits(*TG4G3PhysicsManager::Instance()->GetCutVector(),
-                    *TG4G3PhysicsManager::Instance()->GetControlVector());
+  if ( isMaster ) {
+    TG4GeometryManager::Instance()
+      ->SetUserLimits(*TG4G3PhysicsManager::Instance()->GetCutVector(),
+                      *TG4G3PhysicsManager::Instance()->GetControlVector());
+  }                    
 
-  // pass info if cut on e+e- pair is activated to stepping action                    
-  ((TG4SteppingAction*)fRunManager->GetUserSteppingAction())
-    ->SetIsPairCut((*TG4G3PhysicsManager::Instance()->GetIsCutVector())[kEplus]);                   
+  // pass info if cut on e+e- pair is activated to stepping action  
+  // TO DO LATER - Stepping Action NOT AVAILABLE                  
+  //((TG4SteppingAction*)fRunManager->GetUserSteppingAction())
+  //  ->SetIsPairCut((*TG4G3PhysicsManager::Instance()->GetIsCutVector())[kEplus]);                   
 
   // convert tracking cuts in range cuts per regions
   if ( fRunConfiguration->IsSpecialCuts() ) fRegionsManager->DefineRegions();
@@ -418,6 +405,8 @@ void TG4RunManager::LateInitialize()
   
   // set the random number seed
   if ( fUseRootRandom ) SetRandomSeed();
+
+  G4cout << "TG4RunManager::LateInitialize done " << this << G4endl;
 }
 
 //_____________________________________________________________________________

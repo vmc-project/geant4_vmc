@@ -81,7 +81,7 @@ class TG4SDServices
     TG4SDServices& operator=(const TG4SDServices& right);
 
     // static data members
-    static G4ThreadLocal TG4SDServices* fgInstance; ///< this instance
+    static TG4SDServices* fgInstance; ///< this instance
 
     G4bool  fIsStopRun; ///< info about run stopping by user  
 

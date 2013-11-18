@@ -55,7 +55,8 @@ OBJS	:= $(CXXOBJ) $(GDICTO)
 #
 ifeq ($(G4INSTALL),)
   #G4INCLUDE := $(shell geant4-config --prefix)/include/Geant4
-  G4CFLAGS := $(shell geant4-config --cflags)
+  #G4CFLAGS := $(shell geant4-config --cflags)
+  G4CFLAGS := -DG4INTY_USE_XT -DG4VIS_USE_OPENGL -DG4UI_USE_TCSH -DG4VIS_USE_RAYTRACERX -DG4VIS_USE_OPENGLX -DG4MULTITHREADED -I/work/projects/vmc/mt/geant4/bin/../include/Geant4
   #additional flags - not handled via geant4-config
   ifeq ($(G4VIS_NONE),) 
     G4CFLAGS += -DG4VIS_USE 

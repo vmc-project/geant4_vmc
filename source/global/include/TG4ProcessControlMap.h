@@ -73,8 +73,7 @@ class TG4ProcessControlMap
      G4bool IsDefined(const G4String& processName);
 
     // static data members
-    // MT COMMON
-    static G4ThreadLocal TG4ProcessControlMap*  fgInstance; ///< this instance
+    static TG4ProcessControlMap*  fgInstance; ///< this instance
 
     // data members
     Map  fMap; ///< map container

@@ -70,7 +70,7 @@ INCLUDES := -Iinclude
 
 # C++ compilation flags
 #
-CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) 
+CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) -ftls-model=global-dynamic
 
 DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCLUDES)
 

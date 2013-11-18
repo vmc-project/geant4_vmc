@@ -25,7 +25,7 @@
 #include <G4Material.hh>
 #include <iomanip>
 
-G4ThreadLocal TG4SDServices* TG4SDServices::fgInstance = 0;
+TG4SDServices* TG4SDServices::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4SDServices::TG4SDServices()

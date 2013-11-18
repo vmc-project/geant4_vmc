@@ -44,7 +44,9 @@ class Ex01MCApplication : public TVirtualMCApplication
     void InitMC(const char *setup);
     void RunMC(Int_t nofEvents);
     void FinishRun();
- 
+            
+    virtual TVirtualMCApplication* CloneForWorker() const; 
+    virtual void InitForWorker() const; 
     virtual void ConstructGeometry();
     virtual void InitGeometry();
     virtual void GeneratePrimaries();

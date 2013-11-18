@@ -53,7 +53,7 @@ class TG4RunManager : public TG4Verbose
     static TG4RunManager* Instance();
 
     // methods
-    void Initialize(Int_t threadRank=0);
+    void Initialize();
     void LateInitialize();
     void ProcessEvent();
     Bool_t ProcessRun(G4int nofEvents);
@@ -83,7 +83,7 @@ class TG4RunManager : public TG4Verbose
     TG4RunManager& operator=(const TG4RunManager& right);
 
     // methods
-    void ConfigureRunManager(Int_t threadRank=0);
+    void ConfigureRunManager();
     void CreateGeantUI();
     void CreateRootUI();
     void FilterARGV(const G4String& option);
@@ -96,7 +96,6 @@ class TG4RunManager : public TG4Verbose
     G4RunManager*         fRunManager;       ///< G4RunManager
     TG4RunMessenger       fMessenger;        ///< messenger
     TG4RunConfiguration*  fRunConfiguration; ///< TG4RunConfiguration
-    TG4SpecialControlsV2* fSpecialControls;  ///< special controls manager
     TG4RegionsManager*    fRegionsManager;   ///< regions manager
     G4UIExecutive*        fGeantUISession; ///< G4 UI 
     TApplication*         fRootUISession;    ///< Root UI 

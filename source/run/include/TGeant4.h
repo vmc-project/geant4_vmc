@@ -41,6 +41,7 @@ class G4VisExecutive;
 class TGeoHMatrix;
 class TArrayD;
 class TString;
+class TVirtualMCApplication;
 
 /// \ingroup run
 /// \brief Implementation of the TVirtualMC interface for Geant4.                      
@@ -345,6 +346,11 @@ class TGeant4: public TVirtualMC
     void StartRootUI();        
     void ProcessGeantMacro(const char* macroName);
     void ProcessGeantCommand(const char* commandPath);
+    
+        // Methods for MT
+    static TGeant4* MasterInstance();
+    static TVirtualMCApplication* MasterApplicationInstance();
+    TGeant4* CloneForWorker() const;    
 
         // get methods
     virtual Int_t   CurrentEvent() const; 
@@ -368,6 +374,14 @@ class TGeant4: public TVirtualMC
                                  G4ApplicationState requiredState,
                                  Bool_t allowLater = false) const;
 
+    // static data members
+    
+    /// master instance
+    static  TGeant4*  fgMasterInstance; 
+    
+    /// master application instance
+    static  TVirtualMCApplication*  fgMasterApplicationInstance;
+
     // data members
     TG4StateManager*     fStateManager;    ///< application state manager
     TG4GeometryManager*  fGeometryManager; ///< geometry manager
@@ -377,6 +391,7 @@ class TGeant4: public TVirtualMC
     TG4VisManager*       fVisManager;      ///< visualization manager
     G4VisExecutive*      fVisExecutive;    ///< Geant4 visualization manager
     TG4RunManager*       fRunManager;      ///< run manager
+    TG4RunConfiguration* fRunConfiguration;///< run configuration
     Int_t                fMediumCounter;   ///< global medium counter
     Int_t                fMaterialCounter; ///< global material counter
     Int_t                fMatrixCounter;   ///< global matrix counter
