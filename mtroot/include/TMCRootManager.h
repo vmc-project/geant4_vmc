@@ -31,6 +31,7 @@ class TMCRootManager : public TVirtualMCRootManager
 
     // methods
     virtual void  Register(const char* name, const char* className, void* objAddress);
+    virtual void  Register(const char* name, const char* className, const void* objAddress);
     virtual void  Fill();
     virtual void  Close();
     virtual void  WriteAll();

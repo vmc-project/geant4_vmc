@@ -37,6 +37,7 @@ class TMCRootManagerImpl
   
     // methods
     void  Register(const char* name, const char* className, void* objAddress);
+    void  Register(const char* name, const char* className, const void* objAddress);
     void  Fill();
     void  WriteAll();
     void  Close();

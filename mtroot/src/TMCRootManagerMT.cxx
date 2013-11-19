@@ -161,19 +161,31 @@ void  TMCRootManagerMT::Register(const char* name, const char* className,
 }
 
 //_____________________________________________________________________________
+void  TMCRootManagerMT::Register(const char* name, const char* className, 
+                                const void* objAddress)
+{
+/// Create a branch and associates it with the given address.
+/// \param name       The branch name
+/// \param className  The class name of the object
+/// \param objAddress The object address
+
+  Register(name, className, const_cast<void*>(objAddress));
+}
+
+//_____________________________________________________________________________
 void  TMCRootManagerMT::Fill()
 {
 /// Fill the Root tree.
-
+/*
   if ( fgIsFillLock ) {
     if ( fgDebug ) printf("Going to lock for Fill in %d  %p \n", fId, this);
     TMCRootMutex::Lock();
   }  
-
+*/
   if ( fgDebug ) printf("Fill in %d  %p \n", fId, this);
   fRootManager->Fill();
   if ( fgDebug ) printf("Done Fill in %d  %p \n", fId, this);
-  
+/*  
   if ( fgIsFillLock ) {
     TMCRootMutex::UnLock();
     if ( fgDebug ) printf("Released lock for Fill in %d  %p \n", fId, this);
@@ -195,6 +207,7 @@ void  TMCRootManagerMT::Fill()
     }  
   }        
   if ( fgDebug ) printf("Exiting Fill in %d  %p \n", fId, this);
+*/  
 }  
 
 //_____________________________________________________________________________

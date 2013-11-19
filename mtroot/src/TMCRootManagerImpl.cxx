@@ -118,6 +118,18 @@ void  TMCRootManagerImpl::Register(const char* name, const char* className,
 }
 
 //_____________________________________________________________________________
+void  TMCRootManagerImpl::Register(const char* name, const char* className, 
+                                const void* objAddress)
+{
+/// Create a branch and associates it with the given address.
+/// \param name       The branch name
+/// \param className  The class name of the object
+/// \param objAddress The object address
+
+  Register(name, className, const_cast<void*>(objAddress));
+}
+
+//_____________________________________________________________________________
 void  TMCRootManagerImpl::Fill()
 {
 /// Fill the Root tree.

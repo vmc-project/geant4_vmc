@@ -50,6 +50,7 @@ class TVirtualMCRootManager
 
     // methods
     virtual void  Register(const char* name, const char* className, void* objAddress) = 0;
+    virtual void  Register(const char* name, const char* className, const void* objAddress) = 0;
     virtual void  Fill() = 0;
     virtual void  WriteAll() = 0;
     virtual void  Close() = 0;
@@ -63,10 +64,10 @@ class TVirtualMCRootManager
     // not implemented
     TVirtualMCRootManager(const TVirtualMCRootManager& rhs);
     TVirtualMCRootManager& operator=(const TVirtualMCRootManager& rhs);
-#ifdef __CINT__
-    static           TVirtualMCRootManager* fgInstance; // singleton instance
-#else
+#if defined(__linux__) && !defined(__CINT__)
     static  __thread TVirtualMCRootManager* fgInstance; // singleton instance
+#else
+    static           TVirtualMCRootManager* fgInstance; // singleton instance
 #endif 
 };
 
