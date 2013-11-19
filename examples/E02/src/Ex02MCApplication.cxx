@@ -38,6 +38,14 @@ ClassImp(Ex02MCApplication)
 /// \endcond
 
 //_____________________________________________________________________________
+void Ex02MCApplication::InitThreading(Int_t nofWorkers)
+{
+  // Initialize Root manager
+  // TODO: Synchronize #threads in Root and Geant4
+  TMCRootManagerMT::Initialize(nofWorkers);
+}
+
+//_____________________________________________________________________________
 Ex02MCApplication::Ex02MCApplication(const char *name, const char *title) 
   : TVirtualMCApplication(name,title),
     fRootManager(0),
@@ -53,6 +61,20 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title)
 /// \param fileMode  Option for opening Root file (read or write mode)
 
   printf("Ex02MCApplication::Ex02MCApplication %p \n", this);  
+
+  // Create Root manager 
+  //fRootManager 
+  //  = new TMCRootManagerMT(GetName(), TVirtualMCRootManager::kWrite);
+  //fRootManager->SetDebug(true); 
+  
+  // Create application data
+
+  // Create a user stack
+  fStack = new Ex02MCStack(100); 
+  // Constant magnetic field (in kiloGauss)
+  fMagField = new Ex02MagField(20., 0., 0.);
+  // It si also possible to use TGeoUniformMagField class:
+  // fMagField = new TGeoUniformMagField(20., 0., 0.);
 }
 
 //_____________________________________________________________________________
@@ -91,7 +113,7 @@ Ex02MCApplication::~Ex02MCApplication()
 // private methods
 //
 //_____________________________________________________________________________
-void Ex02MCApplication::RegisterStack()
+void Ex02MCApplication::RegisterStack() const
 {
 /// Register stack in the Root manager.
 
@@ -113,19 +135,6 @@ void Ex02MCApplication::InitMC(const char* setup)
   gROOT->LoadMacro(setup);
   gInterpreter->ProcessLine("Config()");
   
-  // Create application data
-
-  // Create Root manager
-  fRootManager 
-    = new TMCRootManager(GetName(), TVirtualMCRootManager::kWrite); 
-  // Create a user stack
-  fStack = new Ex02MCStack(100); 
-  // Constant magnetic field (in kiloGauss)
-  fMagField = new Ex02MagField(20., 0., 0.);
-  // It si also possible to use TGeoUniformMagField class:
-  // fMagField = new TGeoUniformMagField(20., 0., 0.);
-  RegisterStack();
-
   // Set data to MC
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);
@@ -134,47 +143,6 @@ void Ex02MCApplication::InitMC(const char* setup)
   gMC->Init();
   gMC->BuildPhysics(); 
 }  
-
-//_____________________________________________________________________________
-void Ex02MCApplication::InitMC(Int_t threadRank)
-{    
-/// Initialize MC from main program (Geant4 MT).
-/// The selection of the concrete MC is done in main().
-/// \param threadRank The thread rank number
-
-  if ( threadRank > 0 ) {
-    // Create Root manager only on workers
-    // as the master has nothing to write
-      // Lock Root when creating Manager
-      fRootManager 
-        = new TMCRootManagerMT(GetName(), TVirtualMCRootManager::kWrite); 
-  } 
-  
-  // Create application data
-
-  // Lock Root when creating data - seems not to be needed ?
-  //TMCRootMutex::Lock();
-  //
-  // Create a user stack
-  fStack = new Ex02MCStack(100); 
-  // Constant magnetic field (in kiloGauss)
-  fMagField = new Ex02MagField(20., 0., 0.);
-  // It si also possible to use TGeoUniformMagField class:
-  // fMagField = new TGeoUniformMagField(20., 0., 0.);
-  //
-  //TMCRootMutex::UnLock();
- 
-  // Set data to MC
-  printf("Setting stack %p to mc %p rootMan %p \n", fStack, gMC, fRootManager);
-  gMC->SetStack(fStack);
-  gMC->SetMagField(fMagField);
-
-  if ( fRootManager ) RegisterStack();
-    
-  // Initialize MC
-  gMC->InitMT(threadRank);
-  gMC->BuildPhysics(); 
-}
 
 //_____________________________________________________________________________
 void Ex02MCApplication::RunMC(Int_t nofEvents)
@@ -192,6 +160,39 @@ void Ex02MCApplication::FinishRun()
 /// Finish MC run.
 
   cout << "Ex02MCApplication::FinishRun: " << endl;  
+  if ( fRootManager ) {
+    fRootManager->WriteAll();
+    fRootManager->Close();
+  }  
+}
+
+//_____________________________________________________________________________
+TVirtualMCApplication* Ex02MCApplication::CloneForWorker() const 
+{
+  return new Ex02MCApplication(GetName(), GetTitle());
+}
+
+//_____________________________________________________________________________
+void Ex02MCApplication::InitForWorker() const 
+{
+  cout << "Ex02MCApplication::InitForWorker " << this << endl;
+
+  // Create Root manager 
+  fRootManager 
+    = new TMCRootManagerMT(GetName(), TVirtualMCRootManager::kWrite);
+  fRootManager->SetDebug(true); 
+  
+  // Set data to MC
+  gMC->SetStack(fStack);
+  gMC->SetMagField(fMagField);
+
+  RegisterStack();
+}
+
+//_____________________________________________________________________________
+void Ex02MCApplication::FinishWorkerRun() const
+{
+  cout << "Ex02MCApplication::FinishWorkerRun: " << endl;  
   if ( fRootManager ) {
     fRootManager->WriteAll();
     fRootManager->Close();

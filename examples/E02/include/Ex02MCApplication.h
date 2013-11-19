@@ -43,12 +43,17 @@ class Ex02MCApplication : public TVirtualMCApplication
     Ex02MCApplication();
     virtual ~Ex02MCApplication();
 
+    static void InitThreading(Int_t nofWorkers);
+
     // methods
     void InitMC(const char *setup);
-    void InitMC(Int_t threadRank);
     void RunMC(Int_t nofEvents);
     void FinishRun();
  
+    virtual TVirtualMCApplication* CloneForWorker() const; 
+    virtual void InitForWorker() const; 
+    virtual void FinishWorkerRun() const;
+
     virtual void ConstructGeometry();
     virtual void InitGeometry();
     virtual void GeneratePrimaries();
@@ -67,10 +72,10 @@ class Ex02MCApplication : public TVirtualMCApplication
 
   private:
     // methods
-    void RegisterStack();
+    void RegisterStack() const;
     
     // data members
-    TVirtualMCRootManager*   fRootManager;     //!< Root manager 
+    mutable TVirtualMCRootManager*   fRootManager;     //!< Root manager 
     Ex02MCStack*             fStack;           ///< VMC stack
     Ex02DetectorConstruction fDetConstruction; ///< Dector construction
     Ex02TrackerSD            fTrackerSD;       ///< Tracker SD

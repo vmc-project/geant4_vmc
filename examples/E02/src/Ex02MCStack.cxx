@@ -98,7 +98,7 @@ void  Ex02MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
 /// \param weight    particle weight
 /// \param is        generation status code
 
-  TMCRootMutex::Lock();
+  //TMCRootMutex::Lock();
 
   const Int_t kFirstDaughter=-1;
   const Int_t kLastDaughter=-1;
@@ -125,7 +125,7 @@ void  Ex02MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
 
   ntr = GetNtrack() - 1;   
 
-  TMCRootMutex::UnLock();
+  //TMCRootMutex::UnLock();
 }			 
 
 //_____________________________________________________________________________

@@ -28,20 +28,26 @@ void run_g4(const TString& configMacro = "g4Config.C")
   g4libs();
 
   // Load this example library
+  gSystem->Load("libmtroot");
   gSystem->Load("libexample02");
   
+  // Initialize Root threading
+  // TODO: Synchronize #threads in Root and Geant4
+  Ex02MCApplication::InitThreading(2);
+
   // MC application
   Ex02MCApplication* appl 
     =  new Ex02MCApplication("Example02", "The example02 MC application");
 
   appl->InitMC(configMacro);
   
-  gMC->SetCollectTracks(kTRUE);
+  // TODO: pass this infor from master to workers
+  //gMC->SetCollectTracks(kTRUE);
  
   // Setting Geant4 visualization
   ((TGeant4*)gMC)->ProcessGeantMacro("g4vis.in");
   
-  appl->RunMC(5);
+  appl->RunMC(50);
 
   delete appl;
 }  
