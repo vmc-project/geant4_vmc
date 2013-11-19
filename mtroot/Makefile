@@ -52,9 +52,9 @@ include $(ROOT_ETCDIR)/MakeRules
 
 # Dictionary
 #
-GDICT    := $(BINDIR)/mtrootCint.cxx
-GDICTH   := $(GDICT:.cxx=.h)
-GDICTO   := $(patsubst %.cxx,%.o,$(GDICT))
+#GDICT    := $(BINDIR)/mtrootCint.cxx
+#GDICTH   := $(GDICT:.cxx=.h)
+#GDICTO   := $(patsubst %.cxx,%.o,$(GDICT))
 
 # Sources
 #
@@ -63,9 +63,9 @@ SRCS	:= $(CXXSRC)
 
 # C++ Headers processed by CINT
 #
-HDRS    := $(wildcard include/*.h)
-HDRS    := $(filter-out include/$(PACKAGE)LinkDef.h,$(HDRS))
-HDRS    += include/$(PACKAGE)LinkDef.h
+#HDRS    := $(wildcard include/*.h)
+#HDRS    := $(filter-out include/$(PACKAGE)LinkDef.h,$(HDRS))
+#HDRS    += include/$(PACKAGE)LinkDef.h
 
 # C++ Headers copied to include
 #
@@ -74,7 +74,8 @@ HEADERS	:= $(wildcard include/*.h)
 # Objects
 #
 CXXOBJ	:= $(patsubst %.cxx,$(BINDIR)/%.o,$(CXXSRC))
-OBJS	:= $(CXXOBJ) $(GDICTO)
+#OBJS	:= $(CXXOBJ) $(GDICTO)
+OBJS	:= $(CXXOBJ)
 
 # Make include list
 #
@@ -112,9 +113,9 @@ static: 	$(ALIBRARY)
 $(LIBDIR)/lib$(PACKAGE).$(SL):  $(OBJS)
 $(LIBDIR)/lib$(PACKAGE).a:      $(OBJS)
 
-DICT:=	 	$(GDICT)
+#DICT:=	 	$(GDICT)
 
-$(DICT): 	$(HDRS)
+#$(DICT): 	$(HDRS)
 
 depend:		$(SRCS)
 
