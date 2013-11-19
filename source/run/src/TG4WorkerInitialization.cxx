@@ -17,6 +17,8 @@
 #include "TG4WorkerInitialization.h"
 #include "TG4RunManager.h"
 
+#include <TVirtualMCApplication.h>
+
 //_____________________________________________________________________________
 TG4WorkerInitialization::TG4WorkerInitialization()
   : G4UserWorkerInitialization()
@@ -42,6 +44,22 @@ void TG4WorkerInitialization::WorkerRunStart() const
   G4cout << "TG4WorkerInitialization::WorkerRunStart() " << G4endl;
 
   TG4RunManager::Instance()->LateInitialize();
+  
+  TVirtualMCApplication::Instance()->BeginWorkerRun();
 
   G4cout << "TG4WorkerInitialization::WorkerRunStart() end " << G4endl;
 }   
+
+//_____________________________________________________________________________
+void TG4WorkerInitialization::WorkerRunEnd() const
+{
+// This method is called for each thread, when the local event loop has
+// finished but before the synchronization over threads.
+
+  G4cout << "TG4WorkerInitialization::WorkerRunEnd() " << G4endl;
+
+  TVirtualMCApplication::Instance()->FinishWorkerRun();
+
+  G4cout << "TG4WorkerInitialization::WorkerRunEnd() end " << G4endl;
+
+}

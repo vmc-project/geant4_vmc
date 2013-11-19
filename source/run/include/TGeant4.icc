@@ -18,6 +18,8 @@
 #include "TG4StepManager.h" 
 #include "TG4Globals.h" 
 
+#include <G4Threading.hh> 
+
 //
 // methods for step management
 //
