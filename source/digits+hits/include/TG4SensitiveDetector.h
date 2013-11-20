@@ -39,16 +39,15 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
     TG4SensitiveDetector(G4String sdName, G4int mediumID);
     virtual ~TG4SensitiveDetector();
 
+    // static get method
+    static G4int GetTotalNofSensitiveDetectors();
+
     // methods
     virtual void UserProcessHits(const G4Track* track,const G4Step* step);
     virtual G4bool ProcessHits(G4Step* step, G4TouchableHistory* history);
     virtual G4bool ProcessHitsOnBoundary(G4Step* step);
- 
-    // static get method
-    static G4int GetTotalNofSensitiveDetectors();
     
     // get methods
-    G4int GetID() const;
     G4int GetMediumID() const;
     
   private:          
@@ -59,11 +58,10 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
     /// Not implemented
     TG4SensitiveDetector& operator=(const TG4SensitiveDetector &right);
 
-    // data members
+    // static data members
     static G4ThreadLocal G4int fgSDCounter; ///< sensitive detector counter
 
     // data members
-    G4int            fID;          ///< sensitive detector ID
     G4int            fMediumID;    ///< medium ID
     TG4StepManager*  fStepManager; ///< the TG4StepManager instance
 };
@@ -73,11 +71,6 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
 inline G4int TG4SensitiveDetector::GetTotalNofSensitiveDetectors() { 
   /// Returns the total number of sensitive detectors.
   return fgSDCounter; 
-}
-
-inline G4int TG4SensitiveDetector::GetID() const { 
-  /// Returns sensitive detector ID.
-  return fID; 
 }
 
 inline G4int TG4SensitiveDetector::GetMediumID() const {

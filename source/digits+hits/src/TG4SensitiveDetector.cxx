@@ -20,22 +20,25 @@
 
 #include <TVirtualMCApplication.h>
 
+//_____________________________________________________________________________
 G4ThreadLocal G4int TG4SensitiveDetector::fgSDCounter = 0;
 
 //_____________________________________________________________________________
 TG4SensitiveDetector::TG4SensitiveDetector(G4String sdName, G4int mediumID)
   : G4VSensitiveDetector(sdName),
-    fID(++fgSDCounter),
     fMediumID(mediumID),
     fStepManager(TG4StepManager::Instance())
 {
 /// Standard constructor with the specified \em name
-} 
+  ++fgSDCounter;
+}
 
 //_____________________________________________________________________________
 TG4SensitiveDetector::~TG4SensitiveDetector() 
 {
 /// Destructor
+
+  --fgSDCounter;
 }
 
 //

@@ -71,66 +71,12 @@ void TG4SDManager::Initialize()
   G4cout << "TG4SDManager::Initialize done" << G4endl;
 }  
   
-
-//_____________________________________________________________________________
-Int_t TG4SDManager::VolId(const Text_t* volName) const
-{ 
-/// Return the volume ID = sensitive detector identifier.
-
-  return fSDServices->GetVolumeID(volName);
-}
-
-
-//_____________________________________________________________________________
-const char* TG4SDManager::VolName(Int_t id) const
-{
-/// Return the name of the volume specified by volume ID
-/// ( = sensitive detector name)
-
-  return fSDServices->GetVolumeName(id);
-}
-
-
-//_____________________________________________________________________________
-Int_t TG4SDManager::NofVolumes() const
-{
-/// Return the total number of VMC volumes 
-/// ( = number of sensitive detectors).
-
-  return fSDServices->NofSensitiveDetectors();
-}
-
-
-//_____________________________________________________________________________
-Int_t TG4SDManager::NofVolDaughters(const char* volName) const
-{
-/// Return the number of daughters of the volume specified by name
-  
-  return fSDServices->NofVolDaughters(volName);  
-}
-
-//_____________________________________________________________________________
-const char*  TG4SDManager::VolDaughterName(const char* volName, Int_t i) const
-{
-/// Return the name of the i-th daughter of the volume specified by name.
-
-  return fSDServices->VolDaughterName(volName, i);  
-}
-
-//_____________________________________________________________________________
-Int_t  TG4SDManager::VolDaughterCopyNo(const char* volName, Int_t i) const
-{
-/// Return the copyNo of the i-th daughter of the volume specified by name.
-
-  return fSDServices->VolDaughterCopyNo(volName, i);  
-}
-
- 
 //_____________________________________________________________________________
 Int_t TG4SDManager::VolId2Mate(Int_t volumeId)  const
 {
 /// Return the material number for a given volume Id
 
-  return fSDServices->GetMediumId(volumeId);                                
+  return fSDServices->GetMediumId(
+           TG4GeometryServices::Instance()->GetLogicalVolume(volumeId));
 }
  

@@ -560,6 +560,9 @@ void TG4GeometryManager::ConstructGeometry()
 
   // Construct G4 geometry 
   ConstructG4Geometry();
+  
+  // Fill volumes map
+  TG4GeometryServices::Instance()->MapVolumes();
 
   // Fill medium map
   FillMediumMap(); 

@@ -89,13 +89,16 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
   
   if (VerboseLevel() > 1) {
     G4cout << "TG4RunManager has been created." << this << G4endl;
-  }  
+  }
   
   // filter out "-splash" from argument list
   FilterARGV("-splash");
 
   // create and configure G4 run manager
-  //ConfigureRunManager();
+  G4bool isMaster = ! G4Threading::IsWorkerThread();
+  if ( isMaster ) {
+    ConfigureRunManager();
+  }  
 
   // create geant4 UI
   CreateGeantUI();
@@ -152,14 +155,15 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration)
   // filter out "-splash" from argument list
   FilterARGV("-splash");
 
-/*
   // create and configure G4 run manager
-  ConfigureRunManager();
+  G4bool isMaster = ! G4Threading::IsWorkerThread();
+  if ( isMaster ) {
+    ConfigureRunManager();
+  }
 
   if (VerboseLevel() > 1) {
     G4cout << "G4RunManager has been created." << G4endl;
   }  
-*/
   // create geant4 UI
   CreateGeantUI();
       // must be created before TG4VisManager::Initialize()
@@ -335,20 +339,6 @@ void TG4RunManager::Initialize()
 /// Initialize G4.
 
   G4cout << "TG4RunManager::Initialize " << this << G4endl;
-
-  // create G4ParRunManager
-  ConfigureRunManager();
-  if (VerboseLevel() > 1) {
-    G4cout << "G4RunManager has been created." << G4endl;
-  }  
-
-  // create geant4 UI
-  //CreateGeantUI();
-      // must be created before TG4VisManager::Initialize()
-      // (that is invoked in TGeant4 constructor)
-
-  // create root UI
-  //CreateRootUI();
   
   // initialize Geant4
   G4cout << "G4RunManager::Initialize " << G4endl;

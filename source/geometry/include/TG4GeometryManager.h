@@ -48,6 +48,7 @@ class TG4GeometryManager : public TG4Verbose
 
     TVirtualMCGeometry*   GetMCGeometry() const;
     TG4OpGeometryManager* GetOpManager() const;
+    TG4GeometryServices*  GetServices() const;
 
     // functions for building geometry
     void ConstructMagField();
@@ -126,6 +127,11 @@ inline  TG4OpGeometryManager* TG4GeometryManager::GetOpManager() const {
   /// Return the optical geometry manager
   return fOpManager;
 }       
+
+inline  TG4GeometryServices*  TG4GeometryManager::GetServices() const {
+  /// Return geometry services
+  return fGeometryServices;
+}
 
 inline void TG4GeometryManager::SetLimitDensity(G4double density) {
   /// Set the material density limit for setting max allowed step
