@@ -14,6 +14,8 @@
 
 #include "TVirtualMCRootManager.h"
 
+#include <vector>
+
 class TMCRootManagerImpl;
 
 //
@@ -28,9 +30,6 @@ class TMCRootManagerMT : public TVirtualMCRootManager
     TMCRootManagerMT(const char* projectName, FileMode fileMode = kWrite);
     virtual ~TMCRootManagerMT();     
   
-    // static methods
-    static void Initialize(Int_t nofWorkers);
-
     // methods
     virtual void  Register(const char* name, const char* className, void* objAddress);
     virtual void  Register(const char* name, const char* className, const void* objAddress);
@@ -45,10 +44,9 @@ class TMCRootManagerMT : public TVirtualMCRootManager
     TMCRootManagerMT& operator=(const TMCRootManagerMT& rhs);
 
     // global static data members
-    static  Int_t    fgNofWorkers;      // The total number of workers
     static  Int_t    fgCounter;         // The counter of instances
     static  Bool_t   fgIsFillLock;      // The if the Fill should be locked 
-    static  Bool_t*  fgIsFillLocks;     // The info per threadif the Fill should be locked
+    static  std::vector<Bool_t>* fgIsFillLocks; // The info per thread if the Fill should be locked
 
     // data members 
     Int_t                fId;           // This manager ID 

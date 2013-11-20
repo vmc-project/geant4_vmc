@@ -30,33 +30,9 @@ pthread_mutex_t fill_lock_mutex;
 // static data, methods
 //
 
-Int_t    TMCRootManagerMT::fgNofWorkers = 0;
-Int_t    TMCRootManagerMT::fgCounter = 0; 
-Bool_t   TMCRootManagerMT::fgIsFillLock = true; 
-Bool_t*  TMCRootManagerMT::fgIsFillLocks = 0;
-
-//_____________________________________________________________________________
-void TMCRootManagerMT::Initialize(Int_t nofWorkers)
-{
-/// Initialize Root IO for threading
-/// Add: protection against calling this twice
- 
-  if ( fgDebug ) 
-    printf("TMCRootManagerMT::Initialize with %d workers\n", nofWorkers);
-
-  // Initialize Root threading
-  TThread::Initialize();
-
-  // Initialize the global static data
-  fgNofWorkers = nofWorkers;
-  fgIsFillLocks = new Bool_t[nofWorkers];
-  for (Int_t i=0; i< nofWorkers; ++i ) {
-    fgIsFillLocks[i] = true;
-  }  
-
-  if ( fgDebug ) 
-    printf("Done TMCRootManagerMT::Initialize with %d workers\n", nofWorkers);
-}  
+Int_t   TMCRootManagerMT::fgCounter = 0; 
+Bool_t  TMCRootManagerMT::fgIsFillLock = true; 
+std::vector<Bool_t>* TMCRootManagerMT::fgIsFillLocks = 0;
 
 //
 // ctors, dtor
@@ -73,9 +49,9 @@ TMCRootManagerMT::TMCRootManagerMT(const char* projectName,
 /// \param projectName  The project name (passed as the Root tree name)
 /// \param fileMode     Option for opening Root file (read or write mode)
 
-  // Check if TMCRootManagerMT was initialized
-  if ( fgNofWorkers == 0 ) {
-     Fatal("TMCRootManagerMT", "NofWorkers must be set first.");
+  // Check if TThread was initialized
+  if ( ! TThread::IsInitialized() ) {
+     Fatal("TMCRootManagerMT", "TThread::Initialize() must be called first.");
   }    
 
   if ( fgDebug ) 
@@ -91,7 +67,11 @@ TMCRootManagerMT::TMCRootManagerMT(const char* projectName,
 
   // Increment counter
   pthread_mutex_lock(&counter_mutex);
+  if ( ! fgCounter ) {
+    fgIsFillLocks = new std::vector<Bool_t>();
+  } 
   ++fgCounter;
+  fgIsFillLocks->push_back(true);  
   pthread_mutex_unlock(&counter_mutex);
 
   TMCRootMutex::UnLock();
@@ -127,8 +107,12 @@ TMCRootManagerMT::~TMCRootManagerMT()
   // Global cleanup 
   pthread_mutex_lock(&counter_mutex);
   --fgCounter;
-  if ( fgCounter == 0 ) {
-    delete [] fgIsFillLocks;
+  fgIsFillLocks->pop_back();
+    // we do not care of the content of the vector at this stage
+    // but we update the size for consistency
+  if ( ! fgCounter ) {
+    delete fgIsFillLocks;
+    fgIsFillLocks = 0;
   }  
   pthread_mutex_unlock(&counter_mutex);
 
@@ -176,26 +160,26 @@ void  TMCRootManagerMT::Register(const char* name, const char* className,
 void  TMCRootManagerMT::Fill()
 {
 /// Fill the Root tree.
-/*
+
   if ( fgIsFillLock ) {
     if ( fgDebug ) printf("Going to lock for Fill in %d  %p \n", fId, this);
     TMCRootMutex::Lock();
   }  
-*/
+
   if ( fgDebug ) printf("Fill in %d  %p \n", fId, this);
   fRootManager->Fill();
   if ( fgDebug ) printf("Done Fill in %d  %p \n", fId, this);
-/*  
+  
   if ( fgIsFillLock ) {
     TMCRootMutex::UnLock();
     if ( fgDebug ) printf("Released lock for Fill in %d  %p \n", fId, this);
     // the access to TFile and TTree needs to be locked only until 
     // __after__ the first Fill
-    fgIsFillLocks[fId] = false;
+    (*fgIsFillLocks)[fId] = false;
     Bool_t isDoneAll = true;
     Int_t counter = 0;
-    while ( isDoneAll && counter < fgNofWorkers ) {
-      isDoneAll = ! fgIsFillLocks[counter++];
+    while ( isDoneAll && counter < fgCounter ) {
+      isDoneAll = ! (*fgIsFillLocks)[counter++];
     }
     if ( isDoneAll ) {
       pthread_mutex_lock(&fill_lock_mutex);
@@ -203,11 +187,9 @@ void  TMCRootManagerMT::Fill()
         printf("... Switching off locking of Fill() in %d %p\n", fId, this);
       fgIsFillLock = false;
       pthread_mutex_unlock(&fill_lock_mutex);
-      //if ( fgDebug ) printf("... Switching off locking of Fill()\n");
-    }  
+    }
   }        
   if ( fgDebug ) printf("Exiting Fill in %d  %p \n", fId, this);
-*/  
 }  
 
 //_____________________________________________________________________________
