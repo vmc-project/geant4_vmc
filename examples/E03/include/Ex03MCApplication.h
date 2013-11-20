@@ -20,15 +20,17 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include <TVirtualMCApplication.h>
-#include <TGeoUniformMagField.h> 
-#include "TMCVerbose.h"
 
 #include "Ex03DetectorConstruction.h"
 #include "Ex03CalorimeterSD.h"
-#include "Ex02RootManager.h"
+
+#include <TGeoUniformMagField.h>
+#include <TMCVerbose.h>
 
 class Ex03MCStack;
 class Ex03PrimaryGenerator;
+
+class TVirtualMCRootManager;
 
 /// \ingroup E03
 /// \brief Implementation of the TVirtualMCApplication
@@ -39,19 +41,19 @@ class Ex03PrimaryGenerator;
 class Ex03MCApplication : public TVirtualMCApplication
 {
   public:
-    Ex03MCApplication(const char* name,  const char *title, 
-                      FileMode fileMode = kWrite);
+    Ex03MCApplication(const char* name,  const char *title);
     Ex03MCApplication();
     virtual ~Ex03MCApplication();
   
-    // static access method
-    static Ex03MCApplication* Instance(); 
-
     // methods
     void InitMC(const char *setup);
     void RunMC(Int_t nofEvents);
     void FinishRun();
     void ReadEvent(Int_t i);
+
+    virtual TVirtualMCApplication* CloneForWorker() const;
+    virtual void InitForWorker() const;
+    virtual void FinishWorkerRun() const;
  
     virtual void ConstructGeometry();
     virtual void InitGeometry();
@@ -80,9 +82,11 @@ class Ex03MCApplication : public TVirtualMCApplication
  
   private:
     // methods
-    void RegisterStack();
+    Ex03MCApplication(const Ex03MCApplication& origin);
+    void RegisterStack() const;
   
     // data members
+    mutable TVirtualMCRootManager* fRootManager;//!< Root manager
     Int_t                     fPrintModulo;     ///< The event modulus number to be printed 
     Int_t                     fEventNo;         ///< Event counter
     TMCVerbose                fVerbose;         ///< VMC verbose helper
@@ -91,17 +95,13 @@ class Ex03MCApplication : public TVirtualMCApplication
     Ex03CalorimeterSD*        fCalorimeterSD;   ///< Calorimeter SD
     Ex03PrimaryGenerator*     fPrimaryGenerator;///< Primary generator
     TGeoUniformMagField*      fMagField;        ///< Magnetic field
-    Ex02RootManager           fRootManager;     ///< Root manager 
     Bool_t                    fOldGeometry;     ///< Option for geometry definition
+    Bool_t                    fIsMaster;        ///< If is on master thread
 
   ClassDef(Ex03MCApplication,1)  //Interface to MonteCarlo application
 };
 
 // inline functions
-
-/// \return The singleton instance 
-inline Ex03MCApplication* Ex03MCApplication::Instance()
-{ return (Ex03MCApplication*)(TVirtualMCApplication::Instance()); }
 
 /// Set the event modulus number to be printed 
 /// \param value  The new event modulus number value

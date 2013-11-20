@@ -19,15 +19,15 @@
 /// \date 06/03/2002
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include <Riostream.h>
-#include <TVirtualMC.h>
-#include <TLorentzVector.h>
-#include <TTree.h>
-
 #include "Ex03CalorimeterSD.h"
 #include "Ex03DetectorConstruction.h"
 #include "Ex03CalorHit.h"
-#include "Ex02RootManager.h"
+
+#include <Riostream.h>
+#include <TVirtualMC.h>
+#include <TVirtualMCRootManager.h>
+#include <TLorentzVector.h>
+#include <TTree.h>
 
 /// \cond CLASSIMP
 ClassImp(Ex03CalorimeterSD)
@@ -44,6 +44,28 @@ Ex03CalorimeterSD::Ex03CalorimeterSD(const char* name,
     fAbsorberVolId(0),
     fGapVolId(0),
     fVerboseLevel(1)
+{
+/// Standard constructor.
+/// Create hits collection and an empty hit for each layer
+/// As the copy numbers may start from 0 or 1 (depending on
+/// geometry model, we create one more layer for this case.)
+/// \param name      The calorimeter hits collection name
+/// \param detector  The detector construction
+
+  fCalCollection = new TClonesArray("Ex03CalorHit", 500);
+  for (Int_t i=0; i<fDetector->GetNbOfLayers()+1; i++)
+    new ((*fCalCollection)[i]) Ex03CalorHit();
+}
+
+//_____________________________________________________________________________
+Ex03CalorimeterSD::Ex03CalorimeterSD(const Ex03CalorimeterSD& origin,
+                                     Ex03DetectorConstruction* detector)
+  : TNamed(origin),
+    fDetector(detector),
+    fCalCollection(0),
+    fAbsorberVolId(0),
+    fGapVolId(0),
+    fVerboseLevel(origin.fVerboseLevel)
 {
 /// Standard constructor.
 /// Create hits collection and an empty hit for each layer
@@ -110,11 +132,11 @@ void Ex03CalorimeterSD::Initialize()
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
   
-  Register();
+  if ( TVirtualMCRootManager::Instance() ) Register();
   
   fAbsorberVolId = gMC->VolId("ABSO");
   fGapVolId = gMC->VolId("GAPX");
-  
+
   if ( fAbsorberVolId == 0 && fGapVolId == 0 ) {
     // Volume names are different in N03 detector construction
     fAbsorberVolId = gMC->VolId("Lead");  
@@ -146,11 +168,13 @@ Bool_t Ex03CalorimeterSD::ProcessHits()
     return false;
   }  
   
-  if (id == fAbsorberVolId)
+  if (id == fAbsorberVolId) {
     GetHit(copyNo)->AddAbs(edep,step);
+  }
     
-  if (id == fGapVolId)
+  if (id == fGapVolId) {
     GetHit(copyNo)->AddGap(edep,step);
+  }
 
   return true;
 }
@@ -171,7 +195,7 @@ void Ex03CalorimeterSD::Register()
 {
 /// Register the hits collection in Root manager.
   
-  Ex02RootManager::Instance()
+  TVirtualMCRootManager::Instance()
     ->Register("hits", "TClonesArray", &fCalCollection);
 }
 

@@ -36,7 +36,10 @@ class Ex03CalorHit;
 class Ex03CalorimeterSD : public TNamed
 {
   public:
-    Ex03CalorimeterSD(const char* name, Ex03DetectorConstruction* detector);
+    Ex03CalorimeterSD(const char* name,
+                      Ex03DetectorConstruction* detector);
+    Ex03CalorimeterSD(const Ex03CalorimeterSD& origin,
+                      Ex03DetectorConstruction* detector);
     Ex03CalorimeterSD();
     virtual ~Ex03CalorimeterSD();
 

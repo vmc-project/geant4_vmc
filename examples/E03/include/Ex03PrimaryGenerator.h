@@ -47,6 +47,8 @@ class Ex03PrimaryGenerator : public TObject
 
   public:
     Ex03PrimaryGenerator(TVirtualMCStack* stack); 
+    Ex03PrimaryGenerator(const Ex03PrimaryGenerator& origin,
+                         TVirtualMCStack* stack);
     Ex03PrimaryGenerator();
     virtual ~Ex03PrimaryGenerator();
 

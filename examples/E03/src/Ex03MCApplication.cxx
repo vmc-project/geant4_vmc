@@ -17,6 +17,15 @@
 /// \date 06/03/2002
 /// \author I. Hrivnacova; IPN, Orsay
 
+#include "Ex03MCApplication.h"
+#include "Ex03MCStack.h"
+#include "Ex03PrimaryGenerator.h"
+#include "Ex03DetectorConstructionOld.h"
+
+#include <TMCRootManager.h>
+#include <TMCRootManagerMT.h>
+#include <TMCRootMutex.h>
+
 #include <TROOT.h>
 #include <TInterpreter.h>
 #include <TVirtualMC.h>
@@ -29,19 +38,14 @@
 #include <TVirtualGeoTrack.h>
 #include <TParticle.h>
 
-#include "Ex03MCApplication.h"
-#include "Ex03MCStack.h"
-#include "Ex03PrimaryGenerator.h"
-#include "Ex03DetectorConstructionOld.h"
-
 /// \cond CLASSIMP
 ClassImp(Ex03MCApplication)
 /// \endcond
 
 //_____________________________________________________________________________
-Ex03MCApplication::Ex03MCApplication(const char *name, const char *title,
-                                     FileMode fileMode) 
+Ex03MCApplication::Ex03MCApplication(const char *name, const char *title)
   : TVirtualMCApplication(name,title),
+    fRootManager(0),
     fPrintModulo(1),
     fEventNo(0),
     fVerbose(0),
@@ -50,8 +54,8 @@ Ex03MCApplication::Ex03MCApplication(const char *name, const char *title,
     fCalorimeterSD(0),
     fPrimaryGenerator(0),
     fMagField(0),
-    fRootManager("example03", fileMode),
-    fOldGeometry(kFALSE)
+    fOldGeometry(kFALSE),
+    fIsMaster(kTRUE)
 {
 /// Standard constructor
 /// \param name   The MC application name 
@@ -75,8 +79,41 @@ Ex03MCApplication::Ex03MCApplication(const char *name, const char *title,
 }
 
 //_____________________________________________________________________________
+Ex03MCApplication::Ex03MCApplication(const Ex03MCApplication& origin)
+  : TVirtualMCApplication(origin.GetName(),origin.GetTitle()),
+    fRootManager(0),
+    fPrintModulo(origin.fPrintModulo),
+    fEventNo(0),
+    fVerbose(origin.fVerbose),
+    fStack(0),
+    fDetConstruction(origin.fDetConstruction),
+    fCalorimeterSD(0),
+    fPrimaryGenerator(0),
+    fMagField(0),
+    fOldGeometry(origin.fOldGeometry),
+    fIsMaster(kFALSE)
+{
+/// Copy constructor for cloning application on workers (in multithreading mode)
+/// \param \origin   The source MC application
+
+  // Create new user stack
+  fStack = new Ex03MCStack(1000);
+
+  // Create a calorimeter SD
+  fCalorimeterSD = new Ex03CalorimeterSD(*(origin.fCalorimeterSD), fDetConstruction);
+
+  // Create a primary generator
+  fPrimaryGenerator = new Ex03PrimaryGenerator(*(origin.fPrimaryGenerator), fStack);
+
+  // Constant magnetic field (in kiloGauss)
+  // TODO: check copying
+  fMagField = new TGeoUniformMagField();
+}
+
+//_____________________________________________________________________________
 Ex03MCApplication::Ex03MCApplication()
   : TVirtualMCApplication(),
+    fRootManager(0),
     fPrintModulo(1),
     fEventNo(0),
     fStack(0),
@@ -84,8 +121,8 @@ Ex03MCApplication::Ex03MCApplication()
     fCalorimeterSD(0),
     fPrimaryGenerator(0),
     fMagField(0),
-    fRootManager(),
-    fOldGeometry(kFALSE)
+    fOldGeometry(kFALSE),
+    fIsMaster(kTRUE)
 {    
 /// Default constructor
 }
@@ -95,13 +132,21 @@ Ex03MCApplication::~Ex03MCApplication()
 {
 /// Destructor  
   
+  // Root manager locks Root on his own
+  delete fRootManager;
+
+  TMCRootMutex::Lock();
+  printf("Ex02MCApplication::~Ex02MCApplication %p \n", this);
+
   delete fStack;
-  delete fDetConstruction;
+  if ( fIsMaster) delete fDetConstruction;
   delete fCalorimeterSD;
   delete fPrimaryGenerator;
   delete fMagField;
   delete gMC;
-  gMC = 0;
+
+  printf("Done Ex02MCApplication::~Ex02MCApplication %p \n", this);
+  TMCRootMutex::UnLock();
 }
 
 //
@@ -109,12 +154,15 @@ Ex03MCApplication::~Ex03MCApplication()
 //
 
 //_____________________________________________________________________________
-void Ex03MCApplication::RegisterStack()
+void Ex03MCApplication::RegisterStack() const
 {
 /// Register stack in the Root manager.
 
-  fRootManager.Register("stack", "Ex03MCStack", &fStack);   
-}  
+  if ( fRootManager ) {
+    cout << "Ex03MCApplication::RegisterStack: " << endl;
+    fRootManager->Register("stack", "Ex03MCStack", &fStack);
+  }
+}
 
 //
 // public methods
@@ -158,8 +206,44 @@ void Ex03MCApplication::FinishRun()
 /// Finish MC run.
 
   fVerbose.FinishRun();
+  cout << "Ex02MCApplication::FinishRun: " << endl;
+  if ( fRootManager ) {
+    fRootManager->WriteAll();
+    fRootManager->Close();
+  }
+}
 
-  fRootManager.WriteAll();
+//_____________________________________________________________________________
+TVirtualMCApplication* Ex03MCApplication::CloneForWorker() const
+{
+  return new Ex03MCApplication(*this);
+}
+
+//_____________________________________________________________________________
+void Ex03MCApplication::InitForWorker() const
+{
+  cout << "Ex03MCApplication::InitForWorker " << this << endl;
+
+  // Create Root manager
+  fRootManager
+    = new TMCRootManagerMT(GetName(), TVirtualMCRootManager::kWrite);
+  fRootManager->SetDebug(true);
+
+  // Set data to MC
+  gMC->SetStack(fStack);
+  gMC->SetMagField(fMagField);
+
+  RegisterStack();
+}
+
+//_____________________________________________________________________________
+void Ex03MCApplication::FinishWorkerRun() const
+{
+  cout << "Ex03MCApplication::FinishWorkerRun: " << endl;
+  if ( fRootManager ) {
+    fRootManager->WriteAll();
+    fRootManager->Close();
+  }
 }
 
 //_____________________________________________________________________________
@@ -170,7 +254,7 @@ void Ex03MCApplication::ReadEvent(Int_t i)
 
   fCalorimeterSD->Register();
   RegisterStack();
-  fRootManager.ReadEvent(i);
+  fRootManager->ReadEvent(i);
 }  
   
 //_____________________________________________________________________________
@@ -232,7 +316,8 @@ void Ex03MCApplication::AddParticles()
   mode[0][0] = kNeutron;    // neutron (2112) 
   mode[0][1] = 1000020040 ; // alpha
 
-  gMC->SetDecayMode(1000020050 ,bratio,mode);
+  // TODO: Fix for MT
+  //gMC->SetDecayMode(1000020050 ,bratio,mode);
   
   
   // Overwrite a decay mode already defined in MCs
@@ -254,7 +339,8 @@ void Ex03MCApplication::AddParticles()
   mode2[0][0] = kPi0;   // pi0 (111)
   mode2[0][1] = kPi0 ;  // pi0 (111)
 
-  gMC->SetDecayMode(kK0Short, bratio2, mode2);
+  // TODO: Fix for MT
+  //gMC->SetDecayMode(kK0Short, bratio2, mode2);
 }
 
 //_____________________________________________________________________________
@@ -358,6 +444,7 @@ void Ex03MCApplication::Stepping()
   // Work around for Fluka VMC, which does not call
   // MCApplication::PreTrack()
   //
+  //cout << "Ex03MCApplication::Stepping" << this << endl;
   static Int_t trackId = 0;
   if ( TString(gMC->GetName()) == "TFluka" &&
        gMC->GetStack()->GetCurrentTrackNumber() != trackId ) {
@@ -417,7 +504,7 @@ void Ex03MCApplication::FinishEvent()
     }	  
   }    
  
-  fRootManager.Fill();
+  fRootManager->Fill();
 
   if (fEventNo % fPrintModulo == 0) 
     fCalorimeterSD->PrintTotal();

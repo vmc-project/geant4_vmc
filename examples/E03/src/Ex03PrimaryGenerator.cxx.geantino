@@ -48,19 +48,6 @@ Ex03PrimaryGenerator::Ex03PrimaryGenerator(TVirtualMCStack* stack)
 }
 
 //_____________________________________________________________________________
-Ex03PrimaryGenerator::Ex03PrimaryGenerator(const Ex03PrimaryGenerator& origin,
-                                           TVirtualMCStack* stack)
-  : TObject(origin),
-    fStack(stack),
-    fIsRandom(origin.fIsRandom),
-    fPrimaryType(origin.fPrimaryType),
-    fNofPrimaries(origin.fNofPrimaries)
-{
-/// Standard constructor
-/// \param stack  The VMC stack
-}
-
-//_____________________________________________________________________________
 Ex03PrimaryGenerator::Ex03PrimaryGenerator()
   : TObject(),
     fStack(0),

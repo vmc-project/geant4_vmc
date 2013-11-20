@@ -25,10 +25,7 @@
 #pragma link C++ class  Ex03CalorHit+;
 #pragma link C++ class  Ex03CalorimeterSD+;
 #pragma link C++ class  Ex03PrimaryGenerator+;
-#pragma link C++ class  Ex02RootManager+;
 #pragma link C++ class  std::stack<TParticle*,deque<TParticle*> >+;
-
-#pragma link C++ enum   FileMode;
 
 #endif
 

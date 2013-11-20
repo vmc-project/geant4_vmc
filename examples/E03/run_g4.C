@@ -28,8 +28,12 @@ void run_g4(const TString& configMacro = "g4Config.C")
   g4libs();
 
   // Load this example library
+  gSystem->Load("libmtroot");
   gSystem->Load("libexample03");
  
+  // Initialize Root threading
+  TThread::Initialize();
+
   // MC application
   Ex03MCApplication* appl 
     =  new Ex03MCApplication("Example03", "The example03 MC application");
