@@ -43,8 +43,6 @@ class Ex02MCApplication : public TVirtualMCApplication
     Ex02MCApplication();
     virtual ~Ex02MCApplication();
 
-    static void InitThreading(Int_t nofWorkers);
-
     // methods
     void InitMC(const char *setup);
     void RunMC(Int_t nofEvents);

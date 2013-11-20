@@ -38,14 +38,6 @@ ClassImp(Ex02MCApplication)
 /// \endcond
 
 //_____________________________________________________________________________
-void Ex02MCApplication::InitThreading(Int_t nofWorkers)
-{
-  // Initialize Root manager
-  // TODO: Synchronize #threads in Root and Geant4
-  TMCRootManagerMT::Initialize(nofWorkers);
-}
-
-//_____________________________________________________________________________
 Ex02MCApplication::Ex02MCApplication(const char *name, const char *title) 
   : TVirtualMCApplication(name,title),
     fRootManager(0),
@@ -117,9 +109,11 @@ void Ex02MCApplication::RegisterStack() const
 {
 /// Register stack in the Root manager.
 
-  cout << "Ex02MCApplication::RegisterStack: " << endl;  
-  fRootManager->Register("stack", "Ex02MCStack", &fStack);   
-}  
+  if ( fRootManager ) {
+    cout << "Ex02MCApplication::RegisterStack: " << endl;
+    fRootManager->Register("stack", "Ex02MCStack", &fStack);
+  }
+}
 
 //
 // public methods
@@ -141,7 +135,9 @@ void Ex02MCApplication::InitMC(const char* setup)
 
   // Init MC
   gMC->Init();
-  gMC->BuildPhysics(); 
+  gMC->BuildPhysics();
+
+  RegisterStack();
 }  
 
 //_____________________________________________________________________________

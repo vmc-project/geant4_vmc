@@ -32,8 +32,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
   gSystem->Load("libexample02");
   
   // Initialize Root threading
-  // TODO: Synchronize #threads in Root and Geant4
-  Ex02MCApplication::InitThreading(2);
+  TThread::Initialize();
 
   // MC application
   Ex02MCApplication* appl 
