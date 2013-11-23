@@ -27,29 +27,29 @@ do
   
   # run G3 + TGeo navigation
   echo "... Running example $EXAMPLE with G3 + TGeo" 
-  root.exe -q "run_g3.C(\"g3tgeoConfig.C\")" >& run_g3tgeo.out
+  root.exe -q -b "run_g3.C(\"g3tgeoConfig.C\")" >& run_g3tgeo.out
   
   # run G4
   echo "... Running example $EXAMPLE with G4" 
-  root.exe -q "run_g4.C"  >& run_g4.out
+  root.exe -q -b "run_g4.C"  >& run_g4.out
 
   # run G4 + TGeo navigation
   echo "... Running example $EXAMPLE with G4 + TGeo navigation" 
-  root.exe -q "run_g4.C(\"g4tgeoConfig.C\")"  >& run_g4tgeo.out
+  root.exe -q -b "run_g4.C(\"g4tgeoConfig.C\")"  >& run_g4tgeo.out
 
   # configuration available only in E03, A01 example
   if [ "$EXAMPLE" = "E03" -o "$EXAMPLE" = "A01" ]; then 
 
     # run G4 + geometry via G4
     echo "... Running example $EXAMPLE with G4; geometry via G4" 
-    root.exe -q "run_g4.C(\"g4Config1.C\")"  >& run_g4pl.out
+    root.exe -q -b "run_g4.C(\"g4Config1.C\")"  >& run_g4pl.out
   fi
   
   # configuration available only in E03 example
   if [ "$EXAMPLE" = "E03" ]; then 
     # run G4 + User physics list
     echo "... Running example $EXAMPLE with G4; user PL" 
-    root.exe -q "run_g4.C(\"g4Config2.C\")"  >& run_g4pl.out
+    root.exe -q -b "run_g4.C(\"g4Config2.C\")"  >& run_g4pl.out
   fi
 
 done

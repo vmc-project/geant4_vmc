@@ -24,16 +24,16 @@ OUTDIR=$CURDIR/log/test_physics_lists
 # Define path to data files
 #
 DATAPATH=/work/packages/geant4/data
-export G4ABLADATA=$DATAPATH/G4ABLA3.0
-export G4LEDATA=$DATAPATH/G4EMLOW6.32
-export G4LEVELGAMMADATA=$DATAPATH/PhotonEvaporation2.3
-export G4NEUTRONHPDATA=$DATAPATH/G4NDL4.2
-export G4NEUTRONXSDATA=$DATAPATH/G4NEUTRONXS1.2
-export G4PIIDATA=$DATAPATH/G4PII1.3
-export G4RADIOACTIVEDATA=$DATAPATH/RadioactiveDecay3.6
-export G4REALSURFACEDATA=$DATAPATH/RealSurface1.0
-export G4SAIDXSDATA=$DATAPATH/G4SAIDDATA1.1
-#export G4LENDDATA=$DATAPATH/ENDF.B-VII.0
+#export G4ABLADATA=$DATAPATH/G4ABLA3.0
+#export G4LEDATA=$DATAPATH/G4EMLOW6.32
+#export G4LEVELGAMMADATA=$DATAPATH/PhotonEvaporation2.3
+#export G4NEUTRONHPDATA=$DATAPATH/G4NDL4.2
+#export G4NEUTRONXSDATA=$DATAPATH/G4NEUTRONXS1.2
+#export G4PIIDATA=$DATAPATH/G4PII1.3
+#export G4RADIOACTIVEDATA=$DATAPATH/RadioactiveDecay3.6
+#export G4REALSURFACEDATA=$DATAPATH/RealSurface1.0
+#export G4SAIDXSDATA=$DATAPATH/G4SAIDDATA1.1
+export G4LENDDATA=$DATAPATH/ENDF.B-VII.0
 
 # Remove previous log directory
 rm -fr $OUTDIR
@@ -41,7 +41,8 @@ rm -fr $OUTDIR
 # The list of available PLs is printed by geant4_vmc when a non-existing
 # PL is selected
 # Lists in 9.6
-for PHYSICS_LIST in CHIPS FTFP_BERT FTFP_BERT_TRV FTFP_BERT_HP FTF_BIC LBE LHEP QBBC QGSC_BERT QGSP QGSP_BERT QGSP_BERT_CHIPS QGSP_BERT_HP QGSP_BIC QGSP_BIC_HP QGSP_FTFP_BERT QGS_BIC QGSP_INCLXX Shielding
+for PHYSICS_LIST in FTFP_BERT FTFP_BERT_TRV FTFP_BERT_HP FTFP_INCLXX FTFP_INCLXX_HP FTF_BIC LBE QBBC QGSP_BERT QGSP_BERT_HP QGSP_BIC QGSP_BIC_HP QGSP_FTFP_BERT QGSP_INCLXX QGSP_INCLXX_HP QGS_BIC Shielding ShieldingLEND
+#for PHYSICS_LIST in LBE
 do
   for EM in _ _EMV _EMX _EMY _EMZ _LIV _PEN
   do
@@ -59,7 +60,7 @@ do
 
     # Run test
     echo "... Running test with $G4PHYSICS_LIST" 
-    root.exe -q "test_E03_pl.C(\"g4ConfigEnv.C\")" >& $OUTDIR/TMP.out 
+    root.exe -q -b "test_E03_pl.C(\"g4ConfigEnv.C\")" >& $OUTDIR/TMP.out 
     EXIT_STATUS=$?
   
     # Extract warnings
@@ -71,6 +72,7 @@ do
     # Keep output only if program finished with an error or include G4Exception
     if [ "$EXIT_STATUS" = "0" ]; then
       if [ ! -s $OUTDIR/exception_$G4PHYSICS_LIST.out  ]; then 
+        #mv $OUTDIR/TMP.out $OUTDIR/normalExit_$G4PHYSICS_LIST.out
         rm $OUTDIR/TMP.out
       else  
         mv $OUTDIR/TMP.out $OUTDIR/exception_$G4PHYSICS_LIST.out
