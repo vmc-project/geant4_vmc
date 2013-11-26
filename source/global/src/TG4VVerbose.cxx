@@ -15,7 +15,6 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4VVerbose.h"
-#include "TG4Globals.h"
 
 #include <math.h>
 
