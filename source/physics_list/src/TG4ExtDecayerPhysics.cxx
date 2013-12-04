@@ -37,9 +37,9 @@ TG4ExtDecayerPhysics::TG4ExtDecayerPhysics(const G4String& name)
 }
 
 //_____________________________________________________________________________
-TG4ExtDecayerPhysics::TG4ExtDecayerPhysics(G4int verboseLevel,
+TG4ExtDecayerPhysics::TG4ExtDecayerPhysics(G4int theVerboseLevel,
                                            const G4String& name)
-  : TG4VPhysicsConstructor(name, verboseLevel), 
+  : TG4VPhysicsConstructor(name, theVerboseLevel), 
     fMessenger(this),
     fDecayProcess(0),
     fSelection()     

@@ -32,7 +32,7 @@ class TG4StepLimiterPhysics: public TG4VPhysicsConstructor
 {
   public:
     TG4StepLimiterPhysics(const G4String& name = "StepLimiter");
-    TG4StepLimiterPhysics(G4int verboseLevel,
+    TG4StepLimiterPhysics(G4int theVerboseLevel,
                           const G4String& name = "StepLimiter");
     virtual ~TG4StepLimiterPhysics();
 

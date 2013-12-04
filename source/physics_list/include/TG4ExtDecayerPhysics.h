@@ -35,7 +35,7 @@ class TG4ExtDecayerPhysics: public TG4VPhysicsConstructor
 {
   public:
     TG4ExtDecayerPhysics(const G4String& name = "ExtDecayer");
-    TG4ExtDecayerPhysics(G4int verboseLevel,
+    TG4ExtDecayerPhysics(G4int theVerboseLevel,
                          const G4String& name = "ExtDecayer");
     virtual ~TG4ExtDecayerPhysics();
 

@@ -32,7 +32,7 @@ class TG4VPhysicsConstructor: public G4VPhysicsConstructor,
 {
   public:
     TG4VPhysicsConstructor(const G4String& name);
-    TG4VPhysicsConstructor(const G4String& name, G4int verboseLevel);
+    TG4VPhysicsConstructor(const G4String& name, G4int theVerboseLevel);
     virtual ~TG4VPhysicsConstructor();
 
     // methods

@@ -387,8 +387,8 @@ G4RotationMatrix *TG4RootDetectorConstruction::CreateG4Rotation(const TGeoMatrix
       invmat[6] = marray[2];
       invmat[7] = marray[5];
       invmat[8] = marray[8];
-      CLHEP::HepRep3x3 m(invmat);
-      g4rot = new G4RotationMatrix(m);
+      CLHEP::HepRep3x3 mclhep(invmat);
+      g4rot = new G4RotationMatrix(mclhep);
 //      G4cout << *g4rot << G4endl;
    }
    return g4rot;         

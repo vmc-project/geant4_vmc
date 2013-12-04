@@ -33,7 +33,7 @@ class TG4StackPopperPhysics : public TG4VPhysicsConstructor
 {
   public:
     TG4StackPopperPhysics(const G4String& name = "StackPopper");
-    TG4StackPopperPhysics(G4int verboseLevel,
+    TG4StackPopperPhysics(G4int theVerboseLevel,
                           const G4String& name = "StackPopper");
     virtual ~TG4StackPopperPhysics();
     

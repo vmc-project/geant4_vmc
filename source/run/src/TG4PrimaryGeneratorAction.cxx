@@ -26,12 +26,15 @@
 #include <G4ParticleTable.hh>
 #include <G4IonTable.hh>
 #include <G4ParticleDefinition.hh>
-#include <G4SystemOfUnits.hh>
 
 #include <TVirtualMC.h>
 #include <TVirtualMCApplication.h>
 #include <TVirtualMCStack.h>
 #include <TParticle.h>
+
+// Moved after Root includes to avoid shadowed variables 
+// generated from short units names
+#include <G4SystemOfUnits.hh>
 
 //_____________________________________________________________________________
 TG4PrimaryGeneratorAction::TG4PrimaryGeneratorAction()

@@ -18,10 +18,13 @@
 #include "TG4G3Units.h"
 #include "TG4Globals.h"
 
-#include <G4SystemOfUnits.hh>
-
 #include <TVirtualMCApplication.h>
 #include <TVirtualMC.h>
+
+// Moved after Root includes to avoid shadowed variables 
+// generated from short units names
+#include <G4SystemOfUnits.hh>
+
 
 const G4double  TG4FieldParameters::fgkDefaultStepMinimum = 0.01*mm;
 const G4double  TG4FieldParameters::fgkDefaultDeltaChord = 0.25 * mm;

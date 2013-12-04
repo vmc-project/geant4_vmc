@@ -33,7 +33,7 @@ enum EquationType {
                       ///  electric and magnetic field
   kEqEMFieldWithSpin, ///< G4EqEMFieldWithSpin: Equation of motion for a particle with spin
                       ///  in a combined electric and magnetic field                 
-  kEqEMFieldWithEDM,   ///< G4EqEMFieldWithEDM: Equation of motion in a combined
+  kEqEMFieldWithEDM   ///< G4EqEMFieldWithEDM: Equation of motion in a combined
                       /// electric and magnetic field, with spin tracking for both MDM and
                       /// EDM terms
 }; 

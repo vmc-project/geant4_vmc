@@ -45,9 +45,9 @@ TG4SpecialCutsPhysics::TG4SpecialCutsPhysics(
 
 //_____________________________________________________________________________
 TG4SpecialCutsPhysics::TG4SpecialCutsPhysics(
-                                     G4int verboseLevel,
+                                     G4int theVerboseLevel,
                                      const G4String& name)
-  : TG4VPhysicsConstructor(name, verboseLevel),
+  : TG4VPhysicsConstructor(name, theVerboseLevel),
     fSpecialCutsForGamma(0),
     fSpecialCutsForElectron(0),
     fSpecialCutsForEplus(0),

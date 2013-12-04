@@ -36,9 +36,9 @@ TG4ProcessControlMapPhysics::TG4ProcessControlMapPhysics(const G4String& name)
 
 //_____________________________________________________________________________
 TG4ProcessControlMapPhysics::TG4ProcessControlMapPhysics(
-                                           G4int verboseLevel,
+                                           G4int theVerboseLevel,
                                            const G4String& name)
-  : TG4VPhysicsConstructor(name, verboseLevel)
+  : TG4VPhysicsConstructor(name, theVerboseLevel)
 {
 /// Standard constructor
 
