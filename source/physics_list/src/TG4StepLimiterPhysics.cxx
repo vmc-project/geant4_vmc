@@ -33,9 +33,9 @@ TG4StepLimiterPhysics::TG4StepLimiterPhysics(const G4String& name)
 }
 
 //_____________________________________________________________________________
-TG4StepLimiterPhysics::TG4StepLimiterPhysics(G4int verboseLevel,
+TG4StepLimiterPhysics::TG4StepLimiterPhysics(G4int theVerboseLevel,
                                              const G4String& name)
-  : TG4VPhysicsConstructor(name, verboseLevel), 
+  : TG4VPhysicsConstructor(name, theVerboseLevel), 
     fStepLimiterProcess(0) 
 {
 /// Standard constructor

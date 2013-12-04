@@ -40,13 +40,13 @@ class TG4OpticalPhysics: public TG4VPhysicsConstructor
 {
   public:
     TG4OpticalPhysics(const G4String& name = "Optical");
-    TG4OpticalPhysics(G4int verboseLevel,
+    TG4OpticalPhysics(G4int theVerboseLevel,
                       const G4String& name = "Optical");
     virtual ~TG4OpticalPhysics();
 
     // set methods
     void SetProcessActivation(TG4OpticalProcess process, G4bool isActive);
-    void SetProcessVerbose(TG4OpticalProcess process, G4int verboseLevel);
+    void SetProcessVerbose(TG4OpticalProcess process, G4int theVerboseLevel);
 
     void SetMaxNumPhotonsPerStep(G4int maxNofPhotons);
     void SetMaxBetaChangePerStep(G4double maxBetaChange);

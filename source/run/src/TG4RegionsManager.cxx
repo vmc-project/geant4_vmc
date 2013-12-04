@@ -193,7 +193,7 @@ G4double TG4RegionsManager::ConvertEnergyToRange(
   for ( G4int i=fgkMinRangeOrder; i<=fgkMaxRangeOrder; i++ ) {
     G4double rangeCut = pow(10.,i);
     if ( rangeCut < defaultRangeCut ) continue;
-    G4double energy = converter.Convert(rangeCut,material);
+    energy = converter.Convert(rangeCut,material);
     if ( VerboseLevel() > 2 ) {
       G4cout << indent 
              << "For range: " << std::setw(5) << rangeCut 

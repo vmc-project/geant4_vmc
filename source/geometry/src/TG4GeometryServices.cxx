@@ -32,12 +32,15 @@
 #include <G4MaterialPropertiesTable.hh>
 #include <G4Element.hh>
 #include <G4UserLimits.hh>
-#include <G4SystemOfUnits.hh>
 #include <G3toG4.hh> 
 #include <G3EleTable.hh> 
 
 #include <TGeoMatrix.h>
 #include "Riostream.h"
+
+// Moved after Root includes to avoid shadowed variables 
+// generated from short units names
+#include <G4SystemOfUnits.hh>
 
 #include <vector>
 #include <iomanip>
@@ -764,7 +767,7 @@ TG4Limits* TG4GeometryServices::GetLimits(
   G4UserLimits* g4Limits = dynamic_cast<G4UserLimits*> (limits);
 
   if (g4Limits) {
-    TG4Limits* tg4Limits = new TG4Limits(*limits, cuts, controls);
+    tg4Limits = new TG4Limits(*limits, cuts, controls);
     delete limits;   
     return tg4Limits;
   }  
@@ -1010,13 +1013,13 @@ G4Material* TG4GeometryServices::FindMaterial(G4double* a, G4double* z,
   for (G4int i=0; i<G4int(G4Material::GetNumberOfMaterials()); i++) {  
     
     G4Material* material = (*G4Material::GetMaterialTable())[i];
-    G4int nm = material->GetNumberOfElements();
+    G4int nofElements = material->GetNumberOfElements();
     
-    if (CompareMaterial(nm, density, material)) {
+    if (CompareMaterial(nofElements, density, material)) {
 
       // loop over elements
       G4bool equal = true;
-      for (G4int ie=0; ie<nm; ie++) { 
+      for (G4int ie=0; ie<nofElements; ie++) { 
 
         G4double we = (material->GetFractionVector())[ie];
     

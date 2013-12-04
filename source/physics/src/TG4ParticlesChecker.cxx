@@ -19,12 +19,16 @@
 
 #include <G4ParticleTable.hh>
 #include <G4ParticleDefinition.hh>
-#include <G4SystemOfUnits.hh>
 
 #include <TDatabasePDG.h>
 #include <TParticle.h>
 #include <TClonesArray.h>
 #include <THashList.h>
+
+// Moved after Root includes to avoid shadowed variables 
+// generated from short units names
+#include <G4SystemOfUnits.hh>
+
 #include <iomanip>
 
 const G4double TG4ParticlesChecker::fgkDefaultPrecision = 1.e-06;

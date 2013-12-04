@@ -22,7 +22,6 @@
 #include <G4ParticleDefinition.hh>
 #include <G4DynamicParticle.hh>
 #include <G4ParticleTable.hh>
-#include <G4SystemOfUnits.hh>
 #include <G4IonTable.hh>
 #include <G4Version.hh>
  
@@ -36,6 +35,10 @@
 #include "TG4StateManager.h"
 #include <TVirtualMCApplication.h>
 #include <TParticle.h>
+
+// Moved after Root includes to avoid shadowed variables 
+// generated from short units names
+#include <G4SystemOfUnits.hh>
 
 TG4ParticlesManager* TG4ParticlesManager::fgInstance = 0;
 

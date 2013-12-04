@@ -35,10 +35,14 @@
 #include <G4ProcessTable.hh>
 #include <G4ProcessManager.hh>
 #include <G4VProcess.hh>
-#include <G4SystemOfUnits.hh>
+#include <G4Version.hh>
 
 #include <TDatabasePDG.h>
 #include <TVirtualMCApplication.h>
+
+// Moved after Root includes to avoid shadowed variables 
+// generated from short units names
+#include <G4SystemOfUnits.hh>
 
 TG4PhysicsManager* TG4PhysicsManager::fgInstance   = 0;
 const G4double     TG4PhysicsManager::fgkDefautCut = 1*mm;  
@@ -283,11 +287,11 @@ void TG4PhysicsManager::SetSpecialControlsActivation()
     // activate or inactivate processes according to 
     // global setting in the control vector in G3 physics manager
     //
-    for (G4int i=0; i<processVector->length(); i++) {
+    for (G4int j=0; j<processVector->length(); j++) {
 
       TG4G3ControlValue control
-         = controlVector->GetControlValue((*processVector)[i]);
-      G4bool activation = processManager->GetProcessActivation(i);
+         = controlVector->GetControlValue((*processVector)[j]);
+      G4bool activation = processManager->GetProcessActivation(j);
       
       if (control != kUnsetControlValue) {
          if (!TG4Globals::Compare(activation, control)) {
@@ -297,7 +301,7 @@ void TG4PhysicsManager::SetSpecialControlsActivation()
           if (control == kInActivate) activate = false; 
           else                        activate = true;
           
-          SetProcessActivation(processManager, i, activate);         
+          SetProcessActivation(processManager, j, activate);         
         }
       }
     }

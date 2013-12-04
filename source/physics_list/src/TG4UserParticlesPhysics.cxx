@@ -55,9 +55,9 @@ TG4UserParticlesPhysics::TG4UserParticlesPhysics(const G4String& name)
 }
 
 //_____________________________________________________________________________
-TG4UserParticlesPhysics::TG4UserParticlesPhysics(G4int verboseLevel,
+TG4UserParticlesPhysics::TG4UserParticlesPhysics(G4int theVerboseLevel,
                                      const G4String& name)
-  : TG4VPhysicsConstructor(name, verboseLevel)
+  : TG4VPhysicsConstructor(name, theVerboseLevel)
 {
 /// Standard constructor
 }

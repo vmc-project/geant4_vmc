@@ -58,7 +58,7 @@ class TG4EmModelPhysics: public TG4VPhysicsConstructor
     
   public:
     TG4EmModelPhysics(const G4String& name = "EmModelPhysics");
-    TG4EmModelPhysics(G4int verboseLevel,
+    TG4EmModelPhysics(G4int theVerboseLevel,
                       const G4String& name = "EmModelPhysics");
     virtual ~TG4EmModelPhysics();
     

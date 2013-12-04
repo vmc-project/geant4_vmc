@@ -32,13 +32,13 @@ TG4VPhysicsConstructor::TG4VPhysicsConstructor(const G4String& name)
 
 //_____________________________________________________________________________
 TG4VPhysicsConstructor::TG4VPhysicsConstructor(const G4String& name,
-                                               G4int verboseLevel)
+                                               G4int theVerboseLevel)
   : G4VPhysicsConstructor(name),
     TG4Verbose(G4String("physics" + name))
 {
 /// Standard constructor
 
-  VerboseLevel(verboseLevel);
+  VerboseLevel(theVerboseLevel);
 }
 
 //_____________________________________________________________________________

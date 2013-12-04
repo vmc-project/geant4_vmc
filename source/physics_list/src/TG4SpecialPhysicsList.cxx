@@ -139,9 +139,9 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
 /// Create the selected physics constructors
 /// and registeres them in the modular physics list.
 
-  Int_t verboseLevel = TG4VVerbose::VerboseLevel();
+  Int_t tg4VerboseLevel = TG4VVerbose::VerboseLevel();
 
-  RegisterPhysics(new TG4ProcessControlMapPhysics(verboseLevel));
+  RegisterPhysics(new TG4ProcessControlMapPhysics(tg4VerboseLevel));
 
   G4int itoken = 0;
   TString token = TG4Globals::GetToken(itoken, selection);
@@ -149,17 +149,17 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
 
     if ( token == "specialCuts" ) { 
       // G4cout << "Registering special cuts physics" << G4endl;
-      RegisterPhysics(new TG4SpecialCutsPhysics(verboseLevel));
+      RegisterPhysics(new TG4SpecialCutsPhysics(tg4VerboseLevel));
       fIsSpecialCuts = true;
     }  
     else if ( token == "stepLimiter" ) { 
       // G4cout << "Registering step limiter physics" << G4endl;
-      RegisterPhysics(new TG4StepLimiterPhysics(verboseLevel));
+      RegisterPhysics(new TG4StepLimiterPhysics(tg4VerboseLevel));
     }  
     else if ( token == "stackPopper" ) {    
       // G4cout << "Registering stack popper physics" << G4endl;
       fStackPopperPhysics
-        = new TG4StackPopperPhysics(verboseLevel); 
+        = new TG4StackPopperPhysics(tg4VerboseLevel); 
       RegisterPhysics(fStackPopperPhysics);
     }
     else {
@@ -168,11 +168,11 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
     }
     token = TG4Globals::GetToken(++itoken, selection); 
   }  
-  RegisterPhysics(new TG4UserParticlesPhysics(verboseLevel));
-  RegisterPhysics(new TG4ExtDecayerPhysics(verboseLevel));
-  RegisterPhysics(new TG4ProcessMCMapPhysics(verboseLevel));
+  RegisterPhysics(new TG4UserParticlesPhysics(tg4VerboseLevel));
+  RegisterPhysics(new TG4ExtDecayerPhysics(tg4VerboseLevel));
+  RegisterPhysics(new TG4ProcessMCMapPhysics(tg4VerboseLevel));
   
-  fEmModelPhysics = new TG4EmModelPhysics(verboseLevel);
+  fEmModelPhysics = new TG4EmModelPhysics(tg4VerboseLevel);
   RegisterPhysics(fEmModelPhysics);
 }    
 

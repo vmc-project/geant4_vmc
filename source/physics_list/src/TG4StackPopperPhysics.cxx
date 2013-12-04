@@ -31,9 +31,9 @@ TG4StackPopperPhysics::TG4StackPopperPhysics(const G4String& name)
 }
 
 //_____________________________________________________________________________
-TG4StackPopperPhysics::TG4StackPopperPhysics(G4int verboseLevel,
+TG4StackPopperPhysics::TG4StackPopperPhysics(G4int theVerboseLevel,
                                              const G4String& name)
-  : TG4VPhysicsConstructor(name, verboseLevel), 
+  : TG4VPhysicsConstructor(name, theVerboseLevel), 
     fMessenger(this),
     fStackPopperProcess(0), 
     fSelection() 

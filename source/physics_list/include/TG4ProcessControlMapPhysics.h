@@ -31,7 +31,7 @@ class TG4ProcessControlMapPhysics: public TG4VPhysicsConstructor
 {
   public:
     TG4ProcessControlMapPhysics(const G4String& name = "ProcessControlMap");
-    TG4ProcessControlMapPhysics(G4int verboseLevel,
+    TG4ProcessControlMapPhysics(G4int theVerboseLevel,
                          const G4String& name = "ProcessControlMap");
     virtual ~TG4ProcessControlMapPhysics();
 

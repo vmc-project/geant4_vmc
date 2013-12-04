@@ -93,9 +93,9 @@ TG4EmModelPhysics::TG4EmModelPhysics(const G4String& name)
 }
 
 //_____________________________________________________________________________
-TG4EmModelPhysics::TG4EmModelPhysics(G4int verboseLevel,
+TG4EmModelPhysics::TG4EmModelPhysics(G4int theVerboseLevel,
                                      const G4String& name)
-  : TG4VPhysicsConstructor(name, verboseLevel),
+  : TG4VPhysicsConstructor(name, theVerboseLevel),
     fMessenger(this),
     fEmConfigurator(),
     fModelMap()

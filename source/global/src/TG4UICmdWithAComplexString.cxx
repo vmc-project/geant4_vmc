@@ -20,8 +20,9 @@
 
 //_____________________________________________________________________________
 TG4UICmdWithAComplexString::TG4UICmdWithAComplexString(
-                                 G4String commandPath, G4UImessenger* messenger)
-  : G4UIcommand(commandPath, messenger)
+                               const G4String& theCommandPath, 
+                               G4UImessenger* theMessenger)
+  : G4UIcommand(theCommandPath, theMessenger)
 {
 /// Standard constructor.
 /// The command string with full path directory
@@ -46,7 +47,7 @@ TG4UICmdWithAComplexString::~TG4UICmdWithAComplexString()
 //
 
 //_____________________________________________________________________________
-void TG4UICmdWithAComplexString::SetParameterName(G4String name, 
+void TG4UICmdWithAComplexString::SetParameterName(const G4String& name, 
                                                   G4bool omittable)
 {
 /// Set the parameter names for the parameters. 
@@ -76,7 +77,7 @@ void TG4UICmdWithAComplexString::SetParameterName(G4String name,
 }
 
 //_____________________________________________________________________________
-void TG4UICmdWithAComplexString::SetDefaultValue(G4String defaultValue)
+void TG4UICmdWithAComplexString::SetDefaultValue(const G4String& defaultValue)
 {
 /// Set the default values of the parameters.
 /// These default values are used when user of this command ommits 
@@ -94,7 +95,7 @@ void TG4UICmdWithAComplexString::SetDefaultValue(G4String defaultValue)
 }
 
 //_____________________________________________________________________________
-G4String TG4UICmdWithAComplexString::GetNewStringValue(G4String paramString)
+G4String TG4UICmdWithAComplexString::GetNewStringValue(const G4String& paramString)
 {
 /// Return the parameter string 
 
