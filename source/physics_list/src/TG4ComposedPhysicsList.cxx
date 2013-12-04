@@ -17,8 +17,6 @@
 #include "TG4ComposedPhysicsList.h"
 #include "TG4PhysicsManager.h"
 #include "TG4G3PhysicsManager.h"
-#include "TG4G3ControlVector.h"
-#include "TG4ProcessControlMap.h"
 
 #include <G4VUserPhysicsList.hh>
 #include <G4ProcessManager.hh>
