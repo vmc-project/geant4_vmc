@@ -77,8 +77,10 @@ OBJS	:= $(CXXOBJ) $(GDICTO)
 # Make include list
 #
 ifeq ($(G4INSTALL),)
-#  G4CFLAGS := $(shell geant4-config --cflags)
-  G4CFLAGS := -DG4INTY_USE_XT -DG4VIS_USE_OPENGL -DG4UI_USE_TCSH -DG4VIS_USE_RAYTRACERX -DG4VIS_USE_OPENGLX -DG4MULTITHREADED -ftls-model=global-dynamic -I/work/projects/vmc/mt/geant4/bin/../include/Geant4
+  G4CFLAGS := $(shell geant4-config --cflags)
+  G4CFLAGS := $(filter-out -W%,$(G4CFLAGS))
+  G4CFLAGS := $(filter-out -std=c++98,$(G4CFLAGS))
+  G4CFLAGS := $(filter-out -pedantic,$(G4CFLAGS))
 else   
   ifndef G4INCLUDE
     G4CFLAGS := -I$(G4INSTALL)/include
@@ -92,7 +94,11 @@ INCLUDES := -Iinclude \
 
 # C++ compilation flags
 #
+<<<<<<< HEAD
 CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) $(G4CFLAGS) -ftls-model=global-dynamic
+=======
+CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) $(G4CFLAGS) 
+>>>>>>> aa549d1... Added filtering of G4 compiler flags (needed for Geant4 10.0)
 
 DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCLUDES)
 
