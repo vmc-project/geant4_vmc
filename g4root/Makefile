@@ -78,6 +78,9 @@ OBJS	:= $(CXXOBJ) $(GDICTO)
 #
 ifeq ($(G4INSTALL),)
   G4CFLAGS := $(shell geant4-config --cflags)
+  G4CFLAGS := $(filter-out -W%,$(G4CFLAGS))
+  G4CFLAGS := $(filter-out -std=c++98,$(G4CFLAGS))
+  G4CFLAGS := $(filter-out -pedantic,$(G4CFLAGS))
 else   
   ifndef G4INCLUDE
     G4CFLAGS := -I$(G4INSTALL)/include
@@ -91,7 +94,7 @@ INCLUDES := -Iinclude \
 
 # C++ compilation flags
 #
-CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) $(G4CFLAGS)
+CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) $(G4CFLAGS) 
 
 DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCLUDES)
 

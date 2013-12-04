@@ -87,6 +87,9 @@ OBJS	:= $(CXXOBJ) $(GDICTO)
 
 ifeq ($(G4INSTALL),)
   G4CFLAGS := $(shell geant4-config --cflags)
+  G4CFLAGS := $(filter-out -W%,$(G4CFLAGS))
+  G4CFLAGS := $(filter-out -std=c++98,$(G4CFLAGS))
+  G4CFLAGS := $(filter-out -pedantic,$(G4CFLAGS))
   #additional flags - not handled via geant4-config
   ifeq ($(G4VIS_NONE),) 
     G4CFLAGS += -DG4VIS_USE 
