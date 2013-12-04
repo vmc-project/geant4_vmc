@@ -43,7 +43,7 @@ class TString;
 /// \brief Geant4 implementation of the TVirtualMCGeometry interface 
 ///
 /// This interfaces defines methods for building geometry a la geant3 
-/// and is implemented with use of G3toG4
+/// and is implemented with use og G3toG4
 ///
 /// \author: V. Berejnoi, CERN; I. Hrivnacova, IPN Orsay
 

@@ -65,15 +65,6 @@ class TG4GeometryServices : public TG4Verbose
     static TG4GeometryServices* Instance();
 
     // methods
-
-            // TVirtualMC methods
-    Int_t VolId(const Text_t* volName) const;
-    const char* VolName(Int_t id) const;
-    Int_t NofVolumes() const;
-    Int_t NofVolDaughters(const char* volName) const;
-    const char*  VolDaughterName(const char* volName, Int_t i) const;
-    Int_t        VolDaughterCopyNo(const char* volName, Int_t i) const;
-
            // utilities  
     G4double* CreateG4doubleArray(Float_t* array, G4int size) const;
     G4double* CreateG4doubleArray(Double_t* array, G4int size) const;
@@ -94,7 +85,6 @@ class TG4GeometryServices : public TG4Verbose
            // printing 
     void PrintLimits(const G4String& name) const;
     void PrintVolumeLimits(const G4String& volumeName) const;
-    void PrintVolNameToIdMap() const;
     void PrintStatistics(G4bool open, G4bool close) const;
     void PrintLogicalVolumeStore() const;
     void PrintPhysicalVolumeStore() const;
@@ -106,18 +96,11 @@ class TG4GeometryServices : public TG4Verbose
     void PrintControls(const G4String& controlName) const;
 
     // set methods
-    void MapVolumes();
     void SetWorld(G4VPhysicalVolume* world);
     void SetIsG3toG4(G4bool isG3toG4);
     void SetG3toG4Separator(char separator);
 
     // get methods
-          // volume IDs conversions
-    G4int GetVolumeID(const G4String& volumeName) const;
-    // G4int GetVolumeID(G4LogicalVolume* volume) const;
-    G4LogicalVolume* GetLogicalVolume(G4int volumeId, G4bool warn = true) const;
-    G4String         GetVolumeName(G4int volumeId) const;
-
            // volumes
     Int_t NofG3Volumes() const; 
     Int_t NofG4LogicalVolumes() const; 
@@ -181,9 +164,6 @@ class TG4GeometryServices : public TG4Verbose
     /// info if user geometry is defined via G3toG4
     G4bool             fIsG3toG4; 
     
-    /// map volume name -> volume id 
-    std::map<G4String, G4int> fVolNameToIdMap;
-
     /// map of madia
     TG4MediumMap*      fMediumMap;
     

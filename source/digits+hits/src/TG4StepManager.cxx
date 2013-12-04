@@ -381,8 +381,9 @@ Int_t TG4StepManager::CurrentVolID(Int_t& copyNo) const
   if ( physVolume->IsParameterised() ||
        physVolume->IsReplicated() )  copyNo += fDivisionCopyNoOffset;
 
-  // Logical volume ID
-  return physVolume->GetLogicalVolume()->GetInstanceID();
+  // sensitive detector ID
+  TG4SDServices* sdServices = TG4SDServices::Instance();  
+  return sdServices->GetVolumeID(physVolume->GetLogicalVolume());
 } 
 
 //_____________________________________________________________________________
@@ -405,7 +406,8 @@ Int_t TG4StepManager::CurrentVolOffID(Int_t off, Int_t&  copyNo) const
          mother->IsReplicated() )  copyNo += fDivisionCopyNoOffset;
 
     // sensitive detector ID
-    return mother->GetLogicalVolume()->GetInstanceID();
+    TG4SDServices* sdServices = TG4SDServices::Instance();
+    return sdServices->GetVolumeID(mother->GetLogicalVolume());
   }
   else {
     copyNo = 0;
@@ -541,7 +543,7 @@ Int_t TG4StepManager::CurrentMedium() const
 /// Return the medium ID 
 
   return TG4SDServices::Instance()
-            ->GetMediumId(
+            ->GetMediumID(
                  GetCurrentPhysicalVolume()->GetLogicalVolume());
 }
 

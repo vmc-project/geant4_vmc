@@ -55,7 +55,7 @@ TG4SDConstruction::~TG4SDConstruction()
 //
 
 //_____________________________________________________________________________
-void TG4SDConstruction::CreateSD(G4LogicalVolume* lv) const
+G4int TG4SDConstruction::CreateSD(G4LogicalVolume* lv) const
 { 
 /// Create/retrieve a sensitive detector for the given logical volume.
 /// Return the ID of created/retrievd sensitive detector,
@@ -73,19 +73,22 @@ void TG4SDConstruction::CreateSD(G4LogicalVolume* lv) const
   G4VSensitiveDetector* sd = 0; 
   sd = pSDManager->FindSensitiveDetector(sdName, false);
   if (!sd) {
-    G4int mediumId = geometryServices->GetMediumId(lv);
+    G4int mediumId = TG4GeometryServices::Instance()->GetMediumId(lv);
     TG4SensitiveDetector* newSD = new TG4SensitiveDetector(sdName, mediumId);        
     pSDManager->AddNewDetector(newSD);
 
     if (VerboseLevel() > 1) {
       G4cout << "Sensitive detector " << sdName 
+             << "  ID="  << newSD->GetID() 
              << "  medium ID="  << newSD->GetMediumID() 
              << " has been created." << G4endl;
     }
-
+                 
     sd = newSD;  
   }        
   lv->SetSensitiveDetector(sd);             
+  
+  return ((TG4SensitiveDetector*)sd)->GetID();
 }
 
 //_____________________________________________________________________________
@@ -136,9 +139,7 @@ void TG4SDConstruction::Construct()
 
   G4bool isMaster = ! G4Threading::IsWorkerThread();
 
-  if ( isMaster ) {
-    if ( fSelectionFromTGeo ) FillSDSelectionFromTGeo();
-  }
+  if ( fSelectionFromTGeo && isMaster ) FillSDSelectionFromTGeo();
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
   
@@ -148,15 +149,28 @@ void TG4SDConstruction::Construct()
     // or if volume name is in selection if selection is defined
     if ( ! fSelection.size() ||
           fSelection.find(lv->GetName()) != fSelection.end() ) {
-      CreateSD(lv);
+      G4int sdID = CreateSD(lv);
+      if ( isMaster ) TG4SDServices::Instance()->MapVolume(lv, sdID);
     }
   }    
 
+  if ( fSelection.size() ) {
+    // Set volume IDs to volumes which have not SD
+    G4int counter = TG4SensitiveDetector::GetTotalNofSensitiveDetectors();
+    for ( G4int i=0; i<G4int(lvStore->size()); i++ ) {
+      G4LogicalVolume* lv = (*lvStore)[i];
+      if ( ! lv->GetSensitiveDetector() ) 
+        if ( isMaster ) TG4SDServices::Instance()->MapVolume(lv, counter++);
+    }
+  }    
+  
   TG4StateManager::Instance()->SetNewState(kInitGeometry);
   TVirtualMCApplication::Instance()->InitGeometry();
   TG4StateManager::Instance()->SetNewState(kNotInApplication);
 
   if (VerboseLevel() > 1) {
+    TG4SDServices::Instance()->PrintVolNameToIdMap();
+    TG4SDServices::Instance()->PrintVolIdToLVMap();
     if ( fSelection.size() ) {
       TG4SDServices::Instance()->PrintSensitiveVolumes();
     }  
@@ -175,7 +189,7 @@ void TG4SDConstruction::AddSelection(const G4String& selection)
   G4String token;
   while ( is >> token ) {
     if (VerboseLevel() > 1) {
-      G4cout << "Adding volume " << token <<  " in SD selection." << G4endl;
+      G4cout << "Adding volume " << token <<  " in SD selection." << G4cout;
     }  
     fSelection.insert(token);
   }  

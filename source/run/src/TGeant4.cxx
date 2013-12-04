@@ -18,7 +18,6 @@
 #include "TG4RunConfiguration.h"
 #include "TG4StateManager.h" 
 #include "TG4GeometryManager.h" 
-#include "TG4GeometryServices.h" 
 #include "TG4OpGeometryManager.h" 
 #include "TG4SDManager.h" 
 #include "TG4PhysicsManager.h" 
@@ -872,7 +871,7 @@ Int_t TGeant4::VolId(const Text_t* volName) const
   if ( ! CheckApplicationState("VolId", kInitGeometry, true ) ) 
     return 0;
 
-  return fGeometryManager->GetServices()->VolId(volName); 
+  return fSDManager->VolId(volName); 
 } 
 
 //_____________________________________________________________________________
@@ -884,7 +883,7 @@ const char* TGeant4::VolName(Int_t id) const {
   if ( ! CheckApplicationState("VolName", kInitGeometry, true ) ) 
     return "";
 
-  return fGeometryManager->GetServices()->VolName(id); 
+  return fSDManager->VolName(id); 
 }
  
 //_____________________________________________________________________________
@@ -912,7 +911,7 @@ Int_t TGeant4::NofVolumes() const
   if ( ! CheckApplicationState("NofVolumes", kInitGeometry, true ) ) 
     return 0;
 
-  return fGeometryManager->GetServices()->NofVolumes(); 
+  return fSDManager->NofVolumes(); 
 } 
 
 //_____________________________________________________________________________
@@ -923,7 +922,7 @@ Int_t TGeant4::NofVolDaughters(const char* volName) const
   if ( ! CheckApplicationState("NofVolDaughters", kInitGeometry, true ) ) 
     return 0;
 
-  return fGeometryManager->GetServices()->NofVolDaughters(volName); 
+  return fSDManager->NofVolDaughters(volName); 
 } 
 
 //_____________________________________________________________________________
@@ -934,7 +933,7 @@ const char*  TGeant4::VolDaughterName(const char* volName, Int_t i) const
   if ( ! CheckApplicationState("VolDaughterName", kInitGeometry, true ) ) 
     return "";
 
-  return fGeometryManager->GetServices()->VolDaughterName(volName, i); 
+  return fSDManager->VolDaughterName(volName, i); 
 } 
 
 //_____________________________________________________________________________
@@ -945,7 +944,7 @@ Int_t  TGeant4::VolDaughterCopyNo(const char* volName, Int_t i) const
   if ( ! CheckApplicationState("VolDaughterCopyNo", kInitGeometry, true ) ) 
     return 0;
 
-  return fGeometryManager->GetServices()->VolDaughterCopyNo(volName, i); 
+  return fSDManager->VolDaughterCopyNo(volName, i); 
 } 
 
 //_____________________________________________________________________________

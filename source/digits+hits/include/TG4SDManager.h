@@ -41,8 +41,14 @@ class TG4SDManager
 
     // methods
     void Initialize();
-
+    
     // TVirtualMC methods
+    Int_t VolId(const Text_t* volName) const;                
+    const char* VolName(Int_t id) const;
+    Int_t NofVolumes() const; 
+    Int_t NofVolDaughters(const char* volName) const;
+    const char*  VolDaughterName(const char* volName, Int_t i) const;
+    Int_t        VolDaughterCopyNo(const char* volName, Int_t i) const;
     Int_t VolId2Mate(Int_t volumeId) const;
 
     // get methods
@@ -65,6 +71,8 @@ class TG4SDManager
     
     /// services related with sensitive detectors    
     TG4SDServices*      fSDServices;
+                                         
+
 };
 
 // inline methods

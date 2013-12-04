@@ -52,7 +52,6 @@ const G4double       TG4GeometryServices::fgkDensityTolerance = 0.005;
 TG4GeometryServices::TG4GeometryServices() 
   : TG4Verbose("geometryServices"),
     fIsG3toG4(false),
-    fVolNameToIdMap(),
     fMediumMap(0),
     fOpSurfaceMap(0),
     fWorld(0)
@@ -225,93 +224,6 @@ void TG4GeometryServices::DumpG4MaterialPropertiesTable(
 //
 // public methods
 //
-
-//_____________________________________________________________________________
-Int_t TG4GeometryServices::VolId(const Text_t* volName) const
-{ 
-/// Return the volume ID = sensitive detector identifier.
-
-  return GetVolumeID(volName);
-}
-
-//_____________________________________________________________________________
-const char* TG4GeometryServices::VolName(Int_t id) const
-{
-/// Return the name of the volume specified by volume ID
-/// ( = sensitive detector name)
-
-  return GetVolumeName(id);
-}
-
-
-//_____________________________________________________________________________
-Int_t TG4GeometryServices::NofVolumes() const
-{
-/// Return the total number of logical volumes.
-
-  return G4LogicalVolumeStore::GetInstance()->size();
-}
-
-
-//_____________________________________________________________________________
-Int_t TG4GeometryServices::NofVolDaughters(const char* volName) const
-{
-/// Return the number of daughter of the volume specified by name
-
-  G4LogicalVolume* lv = GetLogicalVolume(GetVolumeID(volName));
-
-  if (!lv) return 0;
-
-  return lv->GetNoDaughters();
-}
-
-//_____________________________________________________________________________
-const char*  TG4GeometryServices::VolDaughterName(const char* volName, Int_t i) const
-{
-/// Return the name of the i-th daughter of the volume specified by name.
-
-  G4LogicalVolume* lv = GetLogicalVolume(GetVolumeID(volName));
-
-  if ( ! lv ) return "";
-
-  G4int nofDaughters = lv->GetNoDaughters();
-  if (i<0 || i>=nofDaughters) {
-    TString text =  "index=";
-    text += i;
-    TG4Globals::Warning(
-      "TG4GeometryServices", "VolDaughterName",
-      "Mother volume " + TString(volName) + " has no daughter with "
-      + text + ".");
-    return "";
-  }
-
-  G4String g4Name = lv->GetDaughter(i)->GetLogicalVolume()->GetName();
-
-  return UserVolumeName(g4Name);
-}
-
-//_____________________________________________________________________________
-Int_t  TG4GeometryServices::VolDaughterCopyNo(const char* volName, Int_t i) const
-{
-/// Return the copyNo of the i-th daughter of the volume specified by name.
-
-  G4LogicalVolume* lv = GetLogicalVolume(GetVolumeID(volName));
-
-  if ( ! lv ) return 0;
-
-  G4int nofDaughters = lv->GetNoDaughters();
-  if (i<0 || i>=nofDaughters) {
-    TString text =  "index=";
-    text += i;
-    TG4Globals::Warning(
-      "TG4GeometryServices", "VolDaughterCopyNo",
-      "Mother volume " + TString(volName) + " has no daughter with "+
-      text + ".");
-    return 0;
-  } 
-
-  return lv->GetDaughter(i)->GetCopyNo();
-}
 
 //_____________________________________________________________________________
 G4double* TG4GeometryServices::CreateG4doubleArray(Float_t* array, 
@@ -552,25 +464,6 @@ void TG4GeometryServices::PrintVolumeLimits(const G4String& volumeName) const
 }            
 
 //_____________________________________________________________________________
-void TG4GeometryServices::PrintVolNameToIdMap() const
-{
-/// Print volume name -> volume id map
-
-  if ( fVolNameToIdMap.size() ) {
-    G4cout << "Dump of VolNameToIdMap - " << fVolNameToIdMap.size()
-           << " entries:" << G4endl;
-    G4int counter = 0;
-    std::map<G4String, G4int>::const_iterator it;
-    for ( it = fVolNameToIdMap.begin(); it != fVolNameToIdMap.end(); ++it ) {
-      G4cout << "Map element " << std::right << std::setw(3) << counter++ << "   ";
-      G4cout << std::left << std::setw(20) << it->first <<  "   ";
-      G4cout << std::right << std::setw(8) << it->second <<  "   ";
-      G4cout << G4endl;
-    }
-  }
-}
-
-//_____________________________________________________________________________
 void TG4GeometryServices::PrintStatistics(G4bool open, G4bool close) const
 {
 /// Print G4 geometry statistics.
@@ -784,22 +677,6 @@ void TG4GeometryServices::PrintControls(const G4String& controlName) const
 }
 
 //_____________________________________________________________________________
-void TG4GeometryServices::MapVolumes()
-{
-/// Add the given volume in the maps.
-/// Do nothing if a given volume id or name is already present.
-
-  // cut copy number from sdName
-  G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-  for ( G4int i=0; i<G4int(lvStore->size()); i++ ) {
-    G4LogicalVolume* lv = (*lvStore)[i];
-    G4String name = lv->GetName();
-    G4int id = lv->GetInstanceID();
-    fVolNameToIdMap[name] = id;
-  }
-}
-
-//_____________________________________________________________________________
 void TG4GeometryServices::SetG3toG4Separator(char separator) 
 { 
 /// Set the volumes name separator that will be
@@ -807,38 +684,6 @@ void TG4GeometryServices::SetG3toG4Separator(char separator)
 
   gSeparator = separator; 
 }
-
-//_____________________________________________________________________________
-G4int TG4GeometryServices::GetVolumeID(const G4String& volName) const
-{
-/// Return the volume instanceID from the volumes name map.
-
-  G4String g4VolName = CutName(volName);
-
-  std::map<G4String, G4int>::const_iterator it
-    = fVolNameToIdMap.find(volName);
-
-  if ( it == fVolNameToIdMap.end() ) {
-    TG4Globals::Warning(
-      "TG4GeometryServices", "GetVolumeID",
-      "Unknown Volume Id for " + TString(volName.data()));
-    return 0;
-  }
-
-  return it->second;
-}
-
-/*
-
-//_____________________________________________________________________________
-G4int TG4GeometryServices::GetVolumeID(G4LogicalVolume* logicalVolume) const
-{
-/// Return the volume instanceID of the specified logical volume.
-/// Now this is used directly
-
-  return logicalVolume->GetInstanceID();
-}
-*/
 
 //_____________________________________________________________________________
 Int_t TG4GeometryServices::NofG3Volumes() const
@@ -882,6 +727,7 @@ Int_t TG4GeometryServices::NofG4PhysicalVolumes() const
   
   return counter;  
 }
+
 
 //_____________________________________________________________________________
 TG4Limits* TG4GeometryServices::GetLimits(G4UserLimits* limits) const

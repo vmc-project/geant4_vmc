@@ -56,8 +56,8 @@ class TG4SDConstruction : public TG4Verbose
 
   private:
     // methods
-    void CreateSD(G4LogicalVolume* lv) const;
-    void FillSDSelectionFromTGeo();
+    G4int CreateSD(G4LogicalVolume* lv) const;
+    void  FillSDSelectionFromTGeo();
     
     TG4SDMessenger  fMessenger;  ///< messenger
     
