@@ -16,7 +16,6 @@
 
 #include "TG4VerboseMessenger.h"
 #include "TG4VVerbose.h"
-#include "TG4Globals.h"
 
 #include <G4UImanager.hh>
 #include <G4UIcmdWithAnInteger.hh>
