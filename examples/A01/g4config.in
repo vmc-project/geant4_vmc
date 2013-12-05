@@ -14,7 +14,7 @@
 # (called from Root macro g4Config.C)
 
 /mcVerbose/all 1
-/mcVerbose/runAction 1
+#/mcVerbose/runAction 1
 /mcVerbose/composedPhysicsList 1
 /mcVerbose/trackingAction 0
 /mcVerbose/eventAction 0

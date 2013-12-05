@@ -19,12 +19,12 @@
 
 #include <Riostream.h>
 #include <TVirtualMC.h>
+#include <TVirtualMCRootManager.h>
 #include <TLorentzVector.h>
 #include <TTree.h>
 
 #include "A01HodoscopeSD.h"
 #include "A01HodoscopeHit.h"
-#include "Ex02RootManager.h"
 
 /// \cond CLASSIMP
 ClassImp(A01HodoscopeSD)
@@ -40,6 +40,24 @@ A01HodoscopeSD::A01HodoscopeSD(const char* name, const char* volName)
     fVolId(0),
     fWriteHits(true),
     fVerboseLevel(1)
+{
+/// Standard constructor.
+/// Create hits collection and an empty hit for each layer
+/// \param name      The calorimeter hits collection name
+/// \param volName   The sensitive volume name
+
+  fHitsCollection = new TClonesArray("A01HodoscopeHit", 500);
+  //cout << "Hodoscope nofHits: " << fHitsCollection->GetEntriesFast() << endl;
+}
+
+//_____________________________________________________________________________
+A01HodoscopeSD::A01HodoscopeSD(const A01HodoscopeSD& origin)
+  : TNamed(origin),
+    fHitsCollection(0),
+    fVolName(origin.fVolName),
+    fVolId(origin.fVolId),
+    fWriteHits(origin.fWriteHits),
+    fVerboseLevel(origin.fVerboseLevel)
 {
 /// Standard constructor.
 /// Create hits collection and an empty hit for each layer
@@ -94,7 +112,7 @@ void A01HodoscopeSD::Initialize()
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
   
-  Register();
+  if ( TVirtualMCRootManager::Instance() ) Register();
   
   fVolId = gMC->VolId(fVolName.Data());
 }
@@ -167,7 +185,7 @@ void A01HodoscopeSD::Register()
 /// Register the hits collection in Root manager.
   
   if ( fWriteHits ) {
-    Ex02RootManager::Instance()
+    TVirtualMCRootManager::Instance()
       ->Register(GetName(), "TClonesArray", &fHitsCollection);
   }    
 }

@@ -19,12 +19,12 @@
 
 #include <Riostream.h>
 #include <TVirtualMC.h>
+#include <TVirtualMCRootManager.h>
 #include <TLorentzVector.h>
 #include <TTree.h>
 
 #include "A01HadCalorimeterSD.h"
 #include "A01HadCalorHit.h"
-#include "Ex02RootManager.h"
 
 /// \cond CLASSIMP
 ClassImp(A01HadCalorimeterSD)
@@ -42,6 +42,27 @@ A01HadCalorimeterSD::A01HadCalorimeterSD(const char* name)
     fVolId(0),
     fWriteHits(true),
     fVerboseLevel(1)
+{
+/// Standard constructor.
+/// Create hits collection and an empty hit for each layer
+/// \param name  The calorimeter hits collection name
+
+  fCalCollection = new TClonesArray("A01HadCalorHit", fgkNofColumns*fgkNofRows);
+  Int_t counter = 0;
+  for (Int_t iColumn=0; iColumn<fgkNofColumns; ++iColumn) {
+    for (Int_t iRow=0; iRow<fgkNofRows; ++iRow) {
+      new ((*fCalCollection)[counter++]) A01HadCalorHit();
+    }
+  }    
+}
+
+//_____________________________________________________________________________
+A01HadCalorimeterSD::A01HadCalorimeterSD(const A01HadCalorimeterSD& origin)
+  : TNamed(origin),
+    fCalCollection(0),
+    fVolId(origin.fVolId),
+    fWriteHits(origin.fWriteHits),
+    fVerboseLevel(origin.fVerboseLevel)
 {
 /// Standard constructor.
 /// Create hits collection and an empty hit for each layer
@@ -108,7 +129,7 @@ void A01HadCalorimeterSD::Initialize()
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
   
-  Register();
+  if ( TVirtualMCRootManager::Instance() ) Register();
   
   fVolId = gMC->VolId("HadCalScintiLogical");
 }
@@ -180,7 +201,7 @@ void A01HadCalorimeterSD::Register()
 /// Register the hits collection in Root manager.
   
   if ( fWriteHits ) {
-    Ex02RootManager::Instance()
+    TVirtualMCRootManager::Instance()
       ->Register(GetName(), "TClonesArray", &fCalCollection);
   }    
 }

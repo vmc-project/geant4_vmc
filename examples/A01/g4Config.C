@@ -38,4 +38,6 @@ void Config()
   // Customise Geant4 setting
   // (verbose level, global range cut, ..)
   geant4->ProcessGeantMacro("g4config.in");
+
+  cout << "Processing Config() done." << endl;
 }

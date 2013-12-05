@@ -30,6 +30,10 @@
 #include <TParticle.h>
 #include <TParticlePDG.h>
 
+#include <TMCRootManager.h>
+#include <TMCRootManagerMT.h>
+#include <TMCAutoLock.h>
+
 #include "Ex03MCStack.h"
 #include "A01MCApplication.h"
 #include "A01PrimaryGenerator.h"
@@ -40,15 +44,18 @@
 #include "A01HadCalorimeterSD.h"
 #include "A01HodoscopeSD.h"
 
+namespace {
+  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
+}
 
 /// \cond CLASSIMP
 ClassImp(A01MCApplication)
 /// \endcond
 
 //_____________________________________________________________________________
-A01MCApplication::A01MCApplication(const char *name, const char *title,
-                                   FileMode fileMode) 
+A01MCApplication::A01MCApplication(const char *name, const char *title) 
   : TVirtualMCApplication(name,title),
+    fRootManager(0),
     fWriteStack(true),
     fWriteHits(true),
     fVerbose(0),
@@ -62,12 +69,11 @@ A01MCApplication::A01MCApplication(const char *name, const char *title,
     fHodoscopeSD2(0),
     fPrimaryGenerator(0),
     fMagField(0),
-    fRootManager("A01", fileMode)
+    fIsMaster(kTRUE)
 {
 /// Standard constructor
 /// \param name   The MC application name 
 /// \param title  The MC application description
-/// \param fileMode  Option for opening Root file (read or write mode)
 
   // Create a user stack
   fStack = new Ex03MCStack(1000);
@@ -92,8 +98,51 @@ A01MCApplication::A01MCApplication(const char *name, const char *title,
 }
 
 //_____________________________________________________________________________
+A01MCApplication::A01MCApplication(const A01MCApplication& origin) 
+  : TVirtualMCApplication(origin.GetName(),origin.GetTitle()),
+    fRootManager(0),
+    fWriteStack(origin.fWriteStack),
+    fWriteHits(origin.fWriteHits),
+    fVerbose(origin.fVerbose),
+    fStack(0),
+    fDetConstruction(origin.fDetConstruction),
+    fDriftChamberSD1(0),
+    fDriftChamberSD2(0),
+    fEmCalorimeterSD(0),
+    fHadCalorimeterSD(0),
+    fHodoscopeSD1(0),
+    fHodoscopeSD2(0),
+    fPrimaryGenerator(0),
+    fMagField(0),
+    fIsMaster(kFALSE)
+{
+/// Standard constructor
+/// \param name   The MC application name 
+/// \param title  The MC application description
+
+  // Create a user stack
+  fStack = new Ex03MCStack(1000);
+  
+  // Create SDs
+  fDriftChamberSD1 = new A01DriftChamberSD(*(origin.fDriftChamberSD1));
+  fDriftChamberSD2 = new A01DriftChamberSD(*(origin.fDriftChamberSD2));
+  fEmCalorimeterSD = new A01EmCalorimeterSD(*(origin.fEmCalorimeterSD)); 
+  fHadCalorimeterSD = new A01HadCalorimeterSD(*(origin.fHadCalorimeterSD)); 
+  fHodoscopeSD1 = new A01HodoscopeSD(*(origin.fHodoscopeSD1));
+  fHodoscopeSD2 = new A01HodoscopeSD(*(origin.fHodoscopeSD2));
+  
+  // Create a primary generator
+  fPrimaryGenerator = new A01PrimaryGenerator(*(origin.fPrimaryGenerator), fStack);
+  
+  // Constant magnetic field (in kiloGauss)
+  // field value: 1.0*tesla (= 10.0 kiloGauss) in y
+  fMagField = new A01MagField(0, 10.0, 0);
+}
+
+//_____________________________________________________________________________
 A01MCApplication::A01MCApplication()
   : TVirtualMCApplication(),
+    fRootManager(0),
     fWriteStack(true),
     fWriteHits(true),
     fStack(0),
@@ -106,7 +155,7 @@ A01MCApplication::A01MCApplication()
     fHodoscopeSD2(0),
     fPrimaryGenerator(0),
     fMagField(0),
-    fRootManager()
+    fIsMaster(kTRUE)
 {    
 /// Default constructor
 }
@@ -116,8 +165,14 @@ A01MCApplication::~A01MCApplication()
 {
 /// Destructor  
   
+  // Root manager locks on his own
+  delete fRootManager;
+
+  TMCAutoLock lk(&deleteMutex);
+  printf("A01MCApplication::~A01MCApplication %p \n", this);
+
   delete fStack;
-  delete fDetConstruction;
+  if ( fIsMaster) delete fDetConstruction;
   delete fDriftChamberSD1;
   delete fDriftChamberSD2;
   delete fEmCalorimeterSD;
@@ -127,7 +182,9 @@ A01MCApplication::~A01MCApplication()
   delete fPrimaryGenerator;
   delete fMagField;
   delete gMC;
-  gMC = 0;
+
+  printf("Done A01MCApplication::~A01MCApplication %p \n", this);
+  lk.unlock();
 }
 
 //
@@ -135,12 +192,13 @@ A01MCApplication::~A01MCApplication()
 //
 
 //_____________________________________________________________________________
-void A01MCApplication::RegisterStack()
+void A01MCApplication::RegisterStack() const
 {
 /// Register stack in the Root manager.
 
-  if ( fWriteStack ) {
-    fRootManager.Register("stack", "Ex03MCStack", &fStack);   
+  if ( fWriteStack && fRootManager ) {
+    cout << "A01MCApplication::RegisterStack: " << endl;
+    fRootManager->Register("stack", "Ex03MCStack", &fStack);   
   }  
 }  
 
@@ -160,8 +218,11 @@ void A01MCApplication::InitMC(const char* setup)
   gROOT->LoadMacro(setup);
   gInterpreter->ProcessLine("Config()");
  
+  // Set data to MC
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);
+
+  // Init MC
   gMC->Init();
   gMC->BuildPhysics(); 
   
@@ -187,9 +248,45 @@ void A01MCApplication::FinishRun()
 
   fVerbose.FinishRun();
 
-  if ( fWriteStack || fWriteHits ) {
-    fRootManager.WriteAll();
+  if ( fRootManager &&
+     ( fWriteStack || fWriteHits ) ) {
+    fRootManager->WriteAll();
+    fRootManager->Close();
   } 
+}
+
+//_____________________________________________________________________________
+TVirtualMCApplication* A01MCApplication::CloneForWorker() const
+{
+  cout << "A01MCApplication::CloneForWorker " << this << endl;
+  return new A01MCApplication(*this);
+}
+
+//_____________________________________________________________________________
+void A01MCApplication::InitForWorker() const
+{
+  cout << "A01MCApplication::InitForWorker " << this << endl;
+
+  // Create Root manager
+  fRootManager
+    = new TMCRootManagerMT(GetName(), TVirtualMCRootManager::kWrite);
+  //fRootManager->SetDebug(true);
+
+  // Set data to MC
+  gMC->SetStack(fStack);
+  gMC->SetMagField(fMagField);
+
+  RegisterStack();
+}
+
+//_____________________________________________________________________________
+void A01MCApplication::FinishWorkerRun() const
+{
+  cout << "A01MCApplication::FinishWorkerRun: " << endl;
+  if ( fRootManager ) {
+    fRootManager->WriteAll();
+    fRootManager->Close();
+  }
 }
 
 //_____________________________________________________________________________
@@ -205,7 +302,7 @@ void A01MCApplication::ReadEvent(Int_t i)
   fHodoscopeSD1->Register();
   fHodoscopeSD2->Register();
   RegisterStack();
-  fRootManager.ReadEvent(i);
+  fRootManager->ReadEvent(i);
 }  
   
 //_____________________________________________________________________________
@@ -352,10 +449,12 @@ void A01MCApplication::FinishEvent()
   }    
  
   if ( fWriteStack || fWriteHits ) {
-    fRootManager.Fill();
+    fRootManager->Fill();
   }  
 
+/*
   // Print info about primary particle
+  // TO DO: this code breaks
   TParticle* primary = fStack->GetParticle(0);
   cout << endl
        << ">>> Event " << gMC->CurrentEvent() 
@@ -364,7 +463,7 @@ void A01MCApplication::FinishEvent()
        << primary->Px()*1e03 << ", " 
        << primary->Py()*1e03 << ", " 
        << primary->Pz()*1e03 << ") MeV" << endl;
-
+*/
   // Call detectors
   fHodoscopeSD1->EndOfEvent();
   fHodoscopeSD2->EndOfEvent();

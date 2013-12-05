@@ -49,6 +49,21 @@ A01PrimaryGenerator::A01PrimaryGenerator(TVirtualMCStack* stack)
 }
 
 //_____________________________________________________________________________
+A01PrimaryGenerator::A01PrimaryGenerator(const A01PrimaryGenerator& origin,
+                                         TVirtualMCStack* stack) 
+  : TObject(origin),
+    fStack(stack),
+    fNofPrimaries(origin.fNofPrimaries),
+    fDefaultParticle(origin.fDefaultParticle),  
+    fMomentum(origin.fMomentum),           
+    fSigmaMomentum(origin.fSigmaMomentum), 
+    fSigmaAngle(origin.fSigmaAngle),
+    fRandomizePrimary(origin.fRandomizePrimary)    
+{
+/// Standard constructor
+}
+
+//_____________________________________________________________________________
 A01PrimaryGenerator::A01PrimaryGenerator()
   : TObject(),
     fStack(0),

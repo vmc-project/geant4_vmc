@@ -28,8 +28,12 @@ void run_g4(const TString& configMacro = "g4Config.C")
   g4libs();
 
   // Load this example library
+  gSystem->Load("libmtroot");
   gSystem->Load("libexampleA01");
  
+  // Initialize Root threading
+  TThread::Initialize();
+
   // MC application
   A01MCApplication* appl 
     =  new A01MCApplication("ExampleA01", "The exampleA01 MC application");
@@ -40,12 +44,12 @@ void run_g4(const TString& configMacro = "g4Config.C")
   appl->InitMC(configMacro);
 
   // visualization setting
-  gROOT->LoadMacro("set_vis.C");
-  set_vis();
+  //gROOT->LoadMacro("set_vis.C");
+  //set_vis();
 
   TStopwatch timer;
   timer.Start();  
-  appl->RunMC(5);
+  appl->RunMC(500);
   timer.Stop();
   timer.Print();
   

@@ -66,7 +66,7 @@ OBJS	:= $(CXXOBJ) $(GDICTO)
 
 # Make include list
 #
-INCLUDES := -Iinclude
+INCLUDES := -Iinclude -I$(TOPDIR)/include/mtroot
 
 # C++ compilation flags
 #

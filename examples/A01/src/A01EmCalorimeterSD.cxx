@@ -19,12 +19,12 @@
 
 #include <Riostream.h>
 #include <TVirtualMC.h>
+#include <TVirtualMCRootManager.h>
 #include <TLorentzVector.h>
 #include <TTree.h>
 
 #include "A01EmCalorimeterSD.h"
 #include "A01EmCalorHit.h"
-#include "Ex02RootManager.h"
 
 /// \cond CLASSIMP
 ClassImp(A01EmCalorimeterSD)
@@ -42,6 +42,23 @@ A01EmCalorimeterSD::A01EmCalorimeterSD(const char* name)
     fVolId(0),
     fWriteHits(true),
     fVerboseLevel(1)
+{
+/// Standard constructor.
+/// Create hits collection and an empty hit for each layer
+/// \param name      The calorimeter hits collection name
+
+  fCalCollection = new TClonesArray("A01EmCalorHit", fgkNofColumns*fgkNofRows);
+  for (Int_t i=0; i<fgkNofColumns*fgkNofRows; i++) 
+    new ((*fCalCollection)[i]) A01EmCalorHit();
+}
+
+//_____________________________________________________________________________
+A01EmCalorimeterSD::A01EmCalorimeterSD(const A01EmCalorimeterSD& origin)
+  : TNamed(origin),
+    fCalCollection(0),
+    fVolId(origin.fVolId),
+    fWriteHits(origin.fWriteHits),
+    fVerboseLevel(origin.fVerboseLevel)
 {
 /// Standard constructor.
 /// Create hits collection and an empty hit for each layer
@@ -95,7 +112,7 @@ void A01EmCalorimeterSD::Initialize()
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
   
-  Register();
+  if ( TVirtualMCRootManager::Instance() ) Register();
   
   fVolId = gMC->VolId("cellLogical");
 }
@@ -165,7 +182,7 @@ void A01EmCalorimeterSD::Register()
 /// Register the hits collection in Root manager.
   
   if ( fWriteHits ) {
-    Ex02RootManager::Instance()
+    TVirtualMCRootManager::Instance()
       ->Register(GetName(), "TClonesArray", &fCalCollection);
   }    
 }

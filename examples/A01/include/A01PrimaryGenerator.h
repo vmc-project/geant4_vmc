@@ -36,6 +36,8 @@ class A01PrimaryGenerator : public TObject
 {
   public:
     A01PrimaryGenerator(TVirtualMCStack* stack); 
+    A01PrimaryGenerator(const A01PrimaryGenerator& origin, 
+                        TVirtualMCStack* stack); 
     A01PrimaryGenerator();
     virtual ~A01PrimaryGenerator();
 

@@ -33,6 +33,7 @@ class A01HadCalorimeterSD : public TNamed
 {
   public:
     A01HadCalorimeterSD(const char* name);
+    A01HadCalorimeterSD(const A01HadCalorimeterSD& origin);
     A01HadCalorimeterSD();
     virtual ~A01HadCalorimeterSD();
 

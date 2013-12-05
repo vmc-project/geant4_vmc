@@ -33,6 +33,7 @@ class A01HodoscopeSD : public TNamed
 {
   public:
     A01HodoscopeSD(const char* name, const char* volName);
+    A01HodoscopeSD(const A01HodoscopeSD& origin);
     A01HodoscopeSD();
     virtual ~A01HodoscopeSD();
 

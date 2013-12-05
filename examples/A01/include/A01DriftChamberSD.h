@@ -33,6 +33,7 @@ class A01DriftChamberSD : public TNamed
 {
   public:
     A01DriftChamberSD(const char* name, const char* volName);
+    A01DriftChamberSD(const A01DriftChamberSD& origin);
     A01DriftChamberSD();
     virtual ~A01DriftChamberSD();
 

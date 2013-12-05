@@ -24,7 +24,6 @@
 #include "TMCVerbose.h"
 
 #include "A01RootDetectorConstruction.h"
-#include "Ex02RootManager.h"
 
 class Ex03MCStack;
 class A01MagField;
@@ -33,6 +32,8 @@ class A01DriftChamberSD;
 class A01EmCalorimeterSD;
 class A01HadCalorimeterSD;
 class A01HodoscopeSD;
+
+class TVirtualMCRootManager;
 
 /// \ingroup A01
 /// \brief Implementation of the TVirtualMCApplication
@@ -43,19 +44,19 @@ class A01HodoscopeSD;
 class A01MCApplication : public TVirtualMCApplication
 {
   public:
-    A01MCApplication(const char* name,  const char *title, 
-                     FileMode fileMode = kWrite);
+    A01MCApplication(const char* name,  const char *title);
     A01MCApplication();
     virtual ~A01MCApplication();
-  
-    // static access method
-    static A01MCApplication* Instance(); 
 
     // methods
     void InitMC(const char *setup);
     void RunMC(Int_t nofEvents);
     void FinishRun();
     void ReadEvent(Int_t i);
+
+    virtual TVirtualMCApplication* CloneForWorker() const;
+    virtual void InitForWorker() const;
+    virtual void FinishWorkerRun() const;
  
     virtual void ConstructGeometry();
     virtual void InitGeometry();
@@ -88,9 +89,11 @@ class A01MCApplication : public TVirtualMCApplication
  
   private:
     // methods
-    void RegisterStack();
+    A01MCApplication(const A01MCApplication& origin);
+    void RegisterStack() const;
   
     // data members
+    mutable TVirtualMCRootManager* fRootManager;//!< Root manager
     Bool_t                    fWriteStack;      ///< Option to write stack
     Bool_t                    fWriteHits;       ///< Option to write hits
     TMCVerbose                fVerbose;         ///< VMC verbose helper
@@ -104,16 +107,12 @@ class A01MCApplication : public TVirtualMCApplication
     A01HodoscopeSD*           fHodoscopeSD2;    ///< Hodoscope 2 SD
     A01PrimaryGenerator*      fPrimaryGenerator;///< Primary generator
     A01MagField*              fMagField;        ///< Magnetic field
-    Ex02RootManager           fRootManager;     ///< Root manager 
+    Bool_t                    fIsMaster;        ///< If is on master thread
 
   ClassDef(A01MCApplication,1)  //Interface to MonteCarlo application
 };
 
 // inline functions
-
-/// \return The singleton instance 
-inline A01MCApplication* A01MCApplication::Instance()
-{ return (A01MCApplication*)(TVirtualMCApplication::Instance()); }
 
 /// (In)Activate writing stack on file
 /// \param writeStack  The new value of the option

@@ -19,12 +19,12 @@
 
 #include <Riostream.h>
 #include <TVirtualMC.h>
+#include <TVirtualMCRootManager.h>
 #include <TLorentzVector.h>
 #include <TTree.h>
 
 #include "A01DriftChamberSD.h"
 #include "A01DriftChamberHit.h"
-#include "Ex02RootManager.h"
 
 /// \cond CLASSIMP
 ClassImp(A01DriftChamberSD)
@@ -40,6 +40,23 @@ A01DriftChamberSD::A01DriftChamberSD(const char* name, const char* volName)
     fVolId(0),
     fWriteHits(true),
     fVerboseLevel(1)
+{
+/// Standard constructor.
+/// Create hits collection.
+/// \param name      The calorimeter hits collection name
+/// \param volName   The sensitive volume name
+
+  fHitsCollection = new TClonesArray("A01DriftChamberHit", 500);
+}
+
+//_____________________________________________________________________________
+A01DriftChamberSD::A01DriftChamberSD(const A01DriftChamberSD& origin)
+  : TNamed(origin),
+    fHitsCollection(0),
+    fVolName(origin.fVolName),
+    fVolId(origin.fVolId),
+    fWriteHits(origin.fWriteHits),
+    fVerboseLevel(origin.fVerboseLevel)
 {
 /// Standard constructor.
 /// Create hits collection.
@@ -93,7 +110,7 @@ void A01DriftChamberSD::Initialize()
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
   
-  Register();
+  if ( TVirtualMCRootManager::Instance() ) Register();
   
   fVolId = gMC->VolId(fVolName.Data());
 }
@@ -157,7 +174,7 @@ void A01DriftChamberSD::Register()
 /// Register the hits collection in Root manager.
   
   if ( fWriteHits ) {
-    Ex02RootManager::Instance()
+    TVirtualMCRootManager::Instance()
       ->Register(GetName(), "TClonesArray", &fHitsCollection);
   }    
 }
