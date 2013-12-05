@@ -30,6 +30,10 @@
 
 #include "Ex03PrimaryGenerator.h"
 
+/// \cond CLASSIMP
+ClassImp(Ex03PrimaryGenerator)
+/// \endcond
+
 //_____________________________________________________________________________
 Ex03PrimaryGenerator::Ex03PrimaryGenerator(TVirtualMCStack* stack) 
   : TObject(),

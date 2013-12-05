@@ -29,6 +29,10 @@
 #include <TLorentzVector.h>
 #include <TTree.h>
 
+/// \cond CLASSIMP
+ClassImp(Ex03CalorimeterSD)
+/// \endcond
+
 using namespace std;
 
 //_____________________________________________________________________________
