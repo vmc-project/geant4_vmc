@@ -94,11 +94,7 @@ INCLUDES := -Iinclude \
 
 # C++ compilation flags
 #
-<<<<<<< HEAD
-CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) $(G4CFLAGS) -ftls-model=global-dynamic
-=======
 CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) $(G4CFLAGS) 
->>>>>>> aa549d1... Added filtering of G4 compiler flags (needed for Geant4 10.0)
 
 DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCLUDES)
 
