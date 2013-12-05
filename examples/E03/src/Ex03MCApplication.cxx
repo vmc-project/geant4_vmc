@@ -24,7 +24,7 @@
 
 #include <TMCRootManager.h>
 #include <TMCRootManagerMT.h>
-#include <TMCRootMutex.h>
+#include <TMCAutoLock.h>
 
 #include <TROOT.h>
 #include <TInterpreter.h>
@@ -37,6 +37,10 @@
 #include <TGeoUniformMagField.h>
 #include <TVirtualGeoTrack.h>
 #include <TParticle.h>
+
+namespace {
+  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
+}
 
 /// \cond CLASSIMP
 ClassImp(Ex03MCApplication)
@@ -132,10 +136,10 @@ Ex03MCApplication::~Ex03MCApplication()
 {
 /// Destructor  
   
-  // Root manager locks Root on his own
+  // Root manager locks on his own
   delete fRootManager;
 
-  TMCRootMutex::Lock();
+  TMCAutoLock lk(&deleteMutex);
   printf("Ex02MCApplication::~Ex02MCApplication %p \n", this);
 
   delete fStack;
@@ -146,7 +150,7 @@ Ex03MCApplication::~Ex03MCApplication()
   delete gMC;
 
   printf("Done Ex02MCApplication::~Ex02MCApplication %p \n", this);
-  TMCRootMutex::UnLock();
+  lk.unlock();
 }
 
 //
@@ -227,7 +231,7 @@ void Ex03MCApplication::InitForWorker() const
   // Create Root manager
   fRootManager
     = new TMCRootManagerMT(GetName(), TVirtualMCRootManager::kWrite);
-  fRootManager->SetDebug(true);
+  //fRootManager->SetDebug(true);
 
   // Set data to MC
   gMC->SetStack(fStack);
