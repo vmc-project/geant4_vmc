@@ -29,10 +29,6 @@
 
 #include "Ex03DetectorConstructionOld.h"
 
-/// \cond CLASSIMP
-ClassImp(Ex03DetectorConstructionOld)
-/// \endcond
-
 //_____________________________________________________________________________
 Ex03DetectorConstructionOld::Ex03DetectorConstructionOld()
   : TObject(),

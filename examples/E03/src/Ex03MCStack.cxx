@@ -24,10 +24,6 @@
 
 #include "Ex03MCStack.h"
 
-/// \cond CLASSIMP
-ClassImp(Ex03MCStack)
-/// \endcond
-
 //_____________________________________________________________________________
 Ex03MCStack::Ex03MCStack(Int_t size)
   : fParticles(0),

@@ -23,10 +23,6 @@
 
 #include "Ex03CalorHit.h"
 
-/// \cond CLASSIMP
-ClassImp(Ex03CalorHit)
-/// \endcond
-
 //_____________________________________________________________________________
 Ex03CalorHit::Ex03CalorHit() 
   : TObject(),

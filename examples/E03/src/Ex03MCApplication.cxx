@@ -42,10 +42,6 @@ namespace {
   TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
 }
 
-/// \cond CLASSIMP
-ClassImp(Ex03MCApplication)
-/// \endcond
-
 //_____________________________________________________________________________
 Ex03MCApplication::Ex03MCApplication(const char *name, const char *title)
   : TVirtualMCApplication(name,title),
