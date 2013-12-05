@@ -27,6 +27,10 @@
 
 using namespace std;
 
+/// \cond CLASSIMP
+ClassImp(Ex02MCStack)
+/// \endcond
+
 //_____________________________________________________________________________
 Ex02MCStack::Ex02MCStack(Int_t size)
   : fParticles(0),

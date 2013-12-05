@@ -19,6 +19,10 @@
 
 #include "Ex02MagField.h"
 
+/// \cond CLASSIMP
+ClassImp(Ex02MagField)
+/// \endcond
+
 //______________________________________________________________________________
 Ex02MagField::Ex02MagField(Double_t Bx, Double_t By, Double_t Bz)
   : TVirtualMagField("Ex02 magnetic field")

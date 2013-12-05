@@ -33,6 +33,10 @@
 #include <TVirtualGeoTrack.h>
 #include <Riostream.h> 
 
+/// \cond CLASSIMP
+ClassImp(Ex02MCApplication)
+/// \endcond
+
 namespace {
   TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
 }

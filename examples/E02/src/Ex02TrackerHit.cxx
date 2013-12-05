@@ -23,6 +23,10 @@
 
 #include "Ex02TrackerHit.h"
 
+/// \cond CLASSIMP
+ClassImp(Ex02TrackerHit)
+/// \endcond
+
 using namespace std;
 
 //_____________________________________________________________________________
