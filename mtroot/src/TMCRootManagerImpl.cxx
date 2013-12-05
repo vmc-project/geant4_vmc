@@ -163,6 +163,15 @@ void TMCRootManagerImpl::Close()
 }  
 
 //_____________________________________________________________________________
+void TMCRootManagerImpl:: WriteAndClose()
+{
+/// Write the Root tree in the file and close the file
+  
+  WriteAll();
+  Close();
+}  
+
+//_____________________________________________________________________________
 void  TMCRootManagerImpl::ReadEvent(Int_t i)
 {
 /// Read the event data for \em i -th event for all connected branches.

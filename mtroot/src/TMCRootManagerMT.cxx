@@ -17,11 +17,21 @@
 
 #include "TMCRootManagerMT.h"
 #include "TMCRootManagerImpl.h"
-#include "TMCRootMutex.h"
+#include "TMCAutoLock.h"
 #include "TThread.h"
 #include "TError.h"
 
 #include <cstdio>
+
+namespace {
+  TMCMutex createMutex = TMCMUTEX_INITIALIZER;
+  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
+  TMCMutex registerMutex = TMCMUTEX_INITIALIZER;
+  TMCMutex fillMutex  = TMCMUTEX_INITIALIZER;
+  TMCMutex tmpFillMutex  = TMCMUTEX_INITIALIZER;
+  TMCMutex writeMutex = TMCMUTEX_INITIALIZER;
+  TMCMutex closeMutex = TMCMUTEX_INITIALIZER;
+}  
 
 pthread_mutex_t counter_mutex;
 pthread_mutex_t fill_lock_mutex;
@@ -56,7 +66,7 @@ TMCRootManagerMT::TMCRootManagerMT(const char* projectName,
 
   if ( fgDebug ) 
     printf("Going to lock for TMCRootManagerMT::TMCRootManagerMT %p \n", this);
-  TMCRootMutex::Lock();
+  TMCAutoLock lk(&createMutex);
 
   // Set Id
   fId = fgCounter;
@@ -66,15 +76,15 @@ TMCRootManagerMT::TMCRootManagerMT(const char* projectName,
   if ( fgDebug ) printf("Done new fRootManager in %d  %p \n", fId, this);
 
   // Increment counter
-  pthread_mutex_lock(&counter_mutex);
+  //pthread_mutex_lock(&counter_mutex);
   if ( ! fgCounter ) {
     fgIsFillLocks = new std::vector<Bool_t>();
   } 
   ++fgCounter;
   fgIsFillLocks->push_back(true);  
-  pthread_mutex_unlock(&counter_mutex);
+  //pthread_mutex_unlock(&counter_mutex);
 
-  TMCRootMutex::UnLock();
+  lk.unlock();
   if ( fgDebug ) 
     printf("Released lock for TMCRootManagerMT::TMCRootManagerMT in %d  %p \n", fId, this);
 
@@ -93,31 +103,90 @@ TMCRootManagerMT::~TMCRootManagerMT()
 
   if ( fgDebug ) 
     printf("Going to lock for Delete fRootManager in %d  %p \n", fId, this);
-  TMCRootMutex::Lock();
+  TMCAutoLock lk(&deleteMutex);
 
   // Delete Root manager
   if ( fgDebug ) printf("Going to Delete fRootManager in %d  %p \n", fId, this);
   delete fRootManager;
   if ( fgDebug ) printf("Done Delete fRootManager in %d  %p \n", fId, this);
 
-  TMCRootMutex::UnLock();
   if ( fgDebug ) 
     printf("Released lock for Delete fRootManager in %d  %p \n", fId, this);
 
   // Global cleanup 
-  pthread_mutex_lock(&counter_mutex);
+  //pthread_mutex_lock(&counter_mutex);
   --fgCounter;
-  fgIsFillLocks->pop_back();
+  //fgIsFillLocks->pop_back();
     // we do not care of the content of the vector at this stage
     // but we update the size for consistency
   if ( ! fgCounter ) {
     delete fgIsFillLocks;
     fgIsFillLocks = 0;
   }  
-  pthread_mutex_unlock(&counter_mutex);
+  lk.unlock();
 
   if ( fgDebug ) 
     printf("Done TMCRootManagerMT::~TMCRootManagerMT %p \n", this);
+}
+
+//
+// private methods
+//
+
+//_____________________________________________________________________________
+void  TMCRootManagerMT::FillWithTmpLock()
+{
+/// Fill the Root tree.
+
+  if ( fgDebug ) printf("Going to lock for Fill in %d  %p \n", fId, this);
+  TMCAutoLock lk(&tmpFillMutex);
+
+  if ( fgDebug ) printf("Fill in %d  %p \n", fId, this);
+  fRootManager->Fill();
+  if ( fgDebug ) printf("Done Fill in %d  %p \n", fId, this);
+  
+  if ( fgIsFillLock ) {
+    // the access to TFile and TTree needs to be locked only until 
+    // __after__ the first Fill
+    (*fgIsFillLocks)[fId] = false;
+    Bool_t isDoneAll = true;
+    Int_t counter = 0;
+    while ( isDoneAll && counter < fgCounter ) {
+      isDoneAll = ! (*fgIsFillLocks)[counter++];
+    }
+    if ( isDoneAll ) {
+      if ( fgDebug ) 
+        printf("... Switching off locking of Fill() in %d %p\n", fId, this);
+      fgIsFillLock = false;
+    }
+  }        
+  if ( fgDebug ) printf("Exiting Fill in %d  %p \n", fId, this);
+  lk.unlock();
+  if ( fgDebug ) printf("Released lock for Fill in %d  %p \n", fId, this);
+}  
+
+//_____________________________________________________________________________
+void  TMCRootManagerMT::FillWithLock()
+{
+/// Fill the Root tree.
+
+  if ( fgDebug ) printf("Going to lock for Fill in %d  %p \n", fId, this);
+  TMCAutoLock lk(&fillMutex);
+
+  if ( fgDebug ) printf("Fill in %d  %p \n", fId, this);
+  fRootManager->Fill();
+  if ( fgDebug ) printf("Done Fill in %d  %p \n", fId, this);
+  
+  lk.unlock();
+  if ( fgDebug ) printf("Released lock for Fill in %d  %p \n", fId, this);
+}  
+
+//_____________________________________________________________________________
+void  TMCRootManagerMT::FillWithoutLock()
+{
+  if ( fgDebug ) printf("Fill in %d  %p \n", fId, this);
+  fRootManager->Fill();
+  if ( fgDebug ) printf("Done Fill in %d  %p \n", fId, this);
 }
 
 //
@@ -134,13 +203,13 @@ void  TMCRootManagerMT::Register(const char* name, const char* className,
 /// \param objAddress The object address
 
   if ( fgDebug ) printf("Going to lock for Register in %d  %p \n", fId, this);
-  TMCRootMutex::Lock();
+  TMCAutoLock lk(&registerMutex);
 
   if ( fgDebug ) printf("Register %s  in %d  %p \n", name, fId, this);
   fRootManager->Register(name, className, objAddress);
   if ( fgDebug ) printf("Done Register %s  in %d  %p \n", name, fId, this);
 
-  TMCRootMutex::UnLock();
+  lk.unlock();
   if ( fgDebug ) printf("Released lock for Register in %d  %p \n", fId, this);
 }
 
@@ -161,35 +230,15 @@ void  TMCRootManagerMT::Fill()
 {
 /// Fill the Root tree.
 
+/*
   if ( fgIsFillLock ) {
-    if ( fgDebug ) printf("Going to lock for Fill in %d  %p \n", fId, this);
-    TMCRootMutex::Lock();
+    FillWithTmpLock();
   }  
-
-  if ( fgDebug ) printf("Fill in %d  %p \n", fId, this);
-  fRootManager->Fill();
-  if ( fgDebug ) printf("Done Fill in %d  %p \n", fId, this);
-  
-  if ( fgIsFillLock ) {
-    TMCRootMutex::UnLock();
-    if ( fgDebug ) printf("Released lock for Fill in %d  %p \n", fId, this);
-    // the access to TFile and TTree needs to be locked only until 
-    // __after__ the first Fill
-    (*fgIsFillLocks)[fId] = false;
-    Bool_t isDoneAll = true;
-    Int_t counter = 0;
-    while ( isDoneAll && counter < fgCounter ) {
-      isDoneAll = ! (*fgIsFillLocks)[counter++];
-    }
-    if ( isDoneAll ) {
-      pthread_mutex_lock(&fill_lock_mutex);
-      if ( fgDebug ) 
-        printf("... Switching off locking of Fill() in %d %p\n", fId, this);
-      fgIsFillLock = false;
-      pthread_mutex_unlock(&fill_lock_mutex);
-    }
-  }        
-  if ( fgDebug ) printf("Exiting Fill in %d  %p \n", fId, this);
+  else {
+    FillWithoutLock();
+  }
+*/
+   FillWithLock(); 
 }  
 
 //_____________________________________________________________________________
@@ -198,13 +247,13 @@ void TMCRootManagerMT:: WriteAll()
 /// Write the Root tree in the file.
 
   if ( fgDebug ) printf("Going to lock for Write in %d  %p \n", fId, this);
-  TMCRootMutex::Lock();
+  TMCAutoLock lk(&writeMutex);
 
   if ( fgDebug ) printf("Write in %d  %p \n", fId, this);
   fRootManager->WriteAll();
   if ( fgDebug ) printf("Done Write in %d  %p \n", fId, this);
 
-  TMCRootMutex::UnLock();
+  lk.unlock();
   if ( fgDebug ) printf("Released lock for Write in %d  %p \n", fId, this);
 }  
 
@@ -214,14 +263,33 @@ void TMCRootManagerMT:: Close()
 /// Close the Root file.
 
   if ( fgDebug ) printf("Going to lock for Close in %d  %p \n", fId, this);
-  TMCRootMutex::Lock();
+  TMCAutoLock lk(&closeMutex);
 
   if ( fgDebug ) printf("Close in %d  %p \n", fId, this);
   fRootManager->Close();
   if ( fgDebug ) printf("Done Close in %d  %p \n", fId, this);
 
-  TMCRootMutex::UnLock();
+  lk.unlock();
   if ( fgDebug ) printf("Released lock for Write in %d  %p \n", fId, this);
+}  
+
+//_____________________________________________________________________________
+void TMCRootManagerMT:: WriteAndClose()
+{
+/// Write the Root tree in the file and close the file.
+
+  if ( fgDebug ) printf("Going to lock for WriteAndClose in %d  %p \n", fId, this);
+  TMCAutoLock lk(&writeMutex);
+
+  if ( fgDebug ) printf("Write in %d  %p \n", fId, this);
+  fRootManager->WriteAll();
+  if ( fgDebug ) printf("Done Write in %d  %p \n", fId, this);
+  if ( fgDebug ) printf("Close in %d  %p \n", fId, this);
+  fRootManager->Close();
+  if ( fgDebug ) printf("Done Close in %d  %p \n", fId, this);
+
+  lk.unlock();
+  if ( fgDebug ) printf("Released lock for WriteAndClose in %d  %p \n", fId, this);
 }  
 
 //_____________________________________________________________________________

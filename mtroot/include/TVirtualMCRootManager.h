@@ -54,6 +54,7 @@ class TVirtualMCRootManager
     virtual void  Fill() = 0;
     virtual void  WriteAll() = 0;
     virtual void  Close() = 0;
+    virtual void  WriteAndClose() = 0;
     virtual void  ReadEvent(Int_t i) = 0;
     
   protected:

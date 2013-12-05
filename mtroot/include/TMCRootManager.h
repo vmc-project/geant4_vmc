@@ -35,6 +35,7 @@ class TMCRootManager : public TVirtualMCRootManager
     virtual void  Fill();
     virtual void  Close();
     virtual void  WriteAll();
+    virtual void  WriteAndClose();
     virtual void  ReadEvent(Int_t i);
     
   private:

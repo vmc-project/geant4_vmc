@@ -36,12 +36,18 @@ class TMCRootManagerMT : public TVirtualMCRootManager
     virtual void  Fill();
     virtual void  WriteAll();
     virtual void  Close();
+    virtual void  WriteAndClose();
     virtual void  ReadEvent(Int_t i);
     
   private:
     // not implemented
     TMCRootManagerMT(const TMCRootManagerMT& rhs);
     TMCRootManagerMT& operator=(const TMCRootManagerMT& rhs);
+    
+    // methods
+    void  FillWithLock();
+    void  FillWithTmpLock();
+    void  FillWithoutLock();
 
     // global static data members
     static  Int_t    fgCounter;         // The counter of instances

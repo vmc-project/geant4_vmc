@@ -41,6 +41,7 @@ class TMCRootManagerImpl
     void  Fill();
     void  WriteAll();
     void  Close();
+    void  WriteAndClose();
     void  ReadEvent(Int_t i);
     
   private:

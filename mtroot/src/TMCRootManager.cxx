@@ -85,7 +85,7 @@ void  TMCRootManager::Fill()
 }  
 
 //_____________________________________________________________________________
-void TMCRootManager:: WriteAll()
+void TMCRootManager::WriteAll()
 {
 /// Write the Root tree in the file.
 
@@ -98,6 +98,15 @@ void TMCRootManager::Close()
 /// Close the Root file.
 
   fRootManager->Close();
+}  
+
+//_____________________________________________________________________________
+void TMCRootManager::WriteAndClose()
+{
+/// Write the Root tree in the file and close the file.
+
+  WriteAll();
+  Close();
 }  
 
 //_____________________________________________________________________________
