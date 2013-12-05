@@ -23,10 +23,6 @@
 
 #include "Ex02ChamberParameterisation.h"
 
-/// \cond CLASSIMP
-ClassImp(Ex02ChamberParameterisation)
-/// \endcond
-
 //_____________________________________________________________________________
 Ex02ChamberParameterisation::Ex02ChamberParameterisation(
                                  Int_t    noChambers, 

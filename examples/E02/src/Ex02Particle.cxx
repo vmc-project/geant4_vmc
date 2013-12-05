@@ -26,10 +26,6 @@
 
 using namespace std;
 
-/// \cond CLASSIMP
-ClassImp(Ex02Particle)
-/// \endcond
-
 //_____________________________________________________________________________
 Ex02Particle::Ex02Particle(Int_t id, TParticle* particle)
   : fID(id),

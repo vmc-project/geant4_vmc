@@ -27,15 +27,15 @@
 #include <TVirtualMC.h>
 #include <TMCRootManager.h>
 #include <TMCRootManagerMT.h>
-#include <TMCRootMutex.h>
+#include <TMCAutoLock.h>
 #include <TPDGCode.h>
 #include <TGeoManager.h>
 #include <TVirtualGeoTrack.h>
 #include <Riostream.h> 
 
-/// \cond CLASSIMP
-ClassImp(Ex02MCApplication)
-/// \endcond
+namespace {
+  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
+}
 
 //_____________________________________________________________________________
 Ex02MCApplication::Ex02MCApplication(const char *name, const char *title) 
@@ -50,15 +50,9 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title)
 /// Standard constructor
 /// \param name   The MC application name 
 /// \param title  The MC application description
-/// \param fileMode  Option for opening Root file (read or write mode)
 
   printf("Ex02MCApplication::Ex02MCApplication %p \n", this);  
 
-  // Create Root manager 
-  //fRootManager 
-  //  = new TMCRootManagerMT(GetName(), TVirtualMCRootManager::kWrite);
-  //fRootManager->SetDebug(true); 
-  
   // Create application data
 
   // Create a user stack
@@ -87,10 +81,10 @@ Ex02MCApplication::~Ex02MCApplication()
 {
 /// Destructor  
   
-  // Root manager locks Root on his own 
+  // Root manager locks on his own 
   delete fRootManager;
 
-  TMCRootMutex::Lock();
+  TMCAutoLock lk(&deleteMutex);
   printf("Ex02MCApplication::~Ex02MCApplication %p \n", this);  
 
   delete fStack;
@@ -98,7 +92,7 @@ Ex02MCApplication::~Ex02MCApplication()
   delete gMC;
 
   printf("Done Ex02MCApplication::~Ex02MCApplication %p \n", this);  
-  TMCRootMutex::UnLock();
+  lk.unlock();
 }
 
 //
@@ -157,6 +151,7 @@ void Ex02MCApplication::FinishRun()
 
   cout << "Ex02MCApplication::FinishRun: " << endl;  
   if ( fRootManager ) {
+    //fRootManager->WriteAndClose();
     fRootManager->WriteAll();
     fRootManager->Close();
   }  
@@ -176,7 +171,7 @@ void Ex02MCApplication::InitForWorker() const
   // Create Root manager 
   fRootManager 
     = new TMCRootManagerMT(GetName(), TVirtualMCRootManager::kWrite);
-  fRootManager->SetDebug(true); 
+  //fRootManager->SetDebug(true); 
   
   // Set data to MC
   gMC->SetStack(fStack);
@@ -190,6 +185,7 @@ void Ex02MCApplication::FinishWorkerRun() const
 {
   cout << "Ex02MCApplication::FinishWorkerRun: " << endl;  
   if ( fRootManager ) {
+    //fRootManager->WriteAndClose();
     fRootManager->WriteAll();
     fRootManager->Close();
   }  

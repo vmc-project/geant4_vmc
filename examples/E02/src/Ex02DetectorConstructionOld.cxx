@@ -26,10 +26,6 @@
 #include "Ex02DetectorConstructionOld.h"
 #include "Ex02ChamberParameterisation.h"
 
-/// \cond CLASSIMP
-ClassImp(Ex02DetectorConstructionOld)
-/// \endcond
-
 using namespace std;
 
 //_____________________________________________________________________________

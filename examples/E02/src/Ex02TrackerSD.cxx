@@ -23,16 +23,11 @@
 
 #include <TVirtualMC.h>
 #include <TVirtualMCRootManager.h>
-#include <TMCRootMutex.h>
 #include <TLorentzVector.h>
 #include <TTree.h>
 
 #include "Ex02TrackerSD.h"
 #include "Ex02TrackerHit.h"
-
-/// \cond CLASSIMP
-ClassImp(Ex02TrackerSD)
-/// \endcond
 
 using namespace std;
 
@@ -92,10 +87,10 @@ void Ex02TrackerSD::Initialize()
   static __thread Bool_t registered = false;
   if ( ! registered ) {
     cout << "... creating TClonesArray" << endl;
+
     // Lock Root when creating data - seems not to be needed ?
-    //TMCRootMutex::Lock();
     fTrackerCollection = new TClonesArray("Ex02TrackerHit");
-    //TMCRootMutex::UnLock();
+
     // Register to Root IO only if RootManager is instantiated
     if ( TVirtualMCRootManager::Instance() ) Register();
     registered = true;
