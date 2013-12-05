@@ -140,7 +140,7 @@ Ex03MCApplication::~Ex03MCApplication()
   delete fRootManager;
 
   TMCAutoLock lk(&deleteMutex);
-  printf("Ex02MCApplication::~Ex02MCApplication %p \n", this);
+  printf("Ex03MCApplication::~Ex03MCApplication %p \n", this);
 
   delete fStack;
   if ( fIsMaster) delete fDetConstruction;
@@ -149,7 +149,7 @@ Ex03MCApplication::~Ex03MCApplication()
   delete fMagField;
   delete gMC;
 
-  printf("Done Ex02MCApplication::~Ex02MCApplication %p \n", this);
+  printf("Done Ex03MCApplication::~Ex03MCApplication %p \n", this);
   lk.unlock();
 }
 
@@ -210,7 +210,7 @@ void Ex03MCApplication::FinishRun()
 /// Finish MC run.
 
   fVerbose.FinishRun();
-  cout << "Ex02MCApplication::FinishRun: " << endl;
+  cout << "Ex03MCApplication::FinishRun: " << endl;
   if ( fRootManager ) {
     fRootManager->WriteAll();
     fRootManager->Close();
