@@ -52,6 +52,8 @@
 #include <TG4RootNavMgr.h>
 #include <TVirtualMCApplication.h>
 
+//_____________________________________________________________________________
+TG4RunManager* TG4RunManager::fgMasterInstance = 0;
 G4ThreadLocal TG4RunManager* TG4RunManager::fgInstance = 0;
 
 //_____________________________________________________________________________
@@ -71,7 +73,7 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
 {
 /// Standard constructor
 
-  G4cout << "TG4RunManager::TG4RunManager: " << this << G4endl;
+  G4cout << "TG4RunManager::TG4RunManager 1st: " << this << G4endl;
 
   if (fgInstance) {
     TG4Globals::Exception(
@@ -85,88 +87,27 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
       "Cannot create instance without runConfiguration.");
   }
       
-  fgInstance = this;
+  fgInstance = this; 
+
+  G4bool isMaster = ! G4Threading::IsWorkerThread();
   
-  if (VerboseLevel() > 1) {
-    G4cout << "TG4RunManager has been created." << this << G4endl;
+  if ( isMaster ) {
+    fgMasterInstance = this; 
+    
+    // create geant4 UI
+    CreateUIs();
   }  
-  
-  // filter out "-splash" from argument list
-  FilterARGV("-splash");
+  else {
+    // Get G4 worker run manager 
+    fRunManager = G4RunManager::GetRunManager();
 
-  // create and configure G4 run manager
-  //ConfigureRunManager();
-
-  // create geant4 UI
-  CreateGeantUI();
-      // must be created before TG4VisManager::Initialize()
-      // (that is invoked in TGeant4 constructor)
-
-  // create root UI
-  CreateRootUI();
-}
-
-//_____________________________________________________________________________
-TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration)
-  : TG4Verbose("runManager"),
-    fRunManager(0),
-    fMessenger(this),
-    fRunConfiguration(runConfiguration),
-    fRegionsManager(0),
-    fGeantUISession(0),
-    fRootUISession(0),
-    fRootUIOwner(false),
-    fARGC(0),
-    fARGV(0),
-    fUseRootRandom(true) 
-{
-/// Default constructor
-
-  G4cout << "TG4RunManager::TG4RunManager: " << this << G4endl;
-
-  if (fgInstance) {
-    TG4Globals::Exception(
-      "TG4RunManager", "TG4RunManager",
-      "Cannot create two instances of singleton.");
-  }
-      
-  if (!fRunConfiguration) {
-    TG4Globals::Exception(
-      "TG4RunManager", "TG4RunManager",
-      "Cannot create instance without runConfiguration.");
-  }
-      
-  fgInstance = this;
+    fRootUISession = fgMasterInstance->fRootUISession;
+    fGeantUISession = fgMasterInstance->fGeantUISession;
+  }     
 
   if (VerboseLevel() > 1) {
     G4cout << "TG4RunManager has been created." << this << G4endl;
   }  
-  
-  // set primary UI
-  fRootUISession = gROOT->GetApplication();
-  if (fRootUISession) {
-    fARGC = fRootUISession->Argc();
-    fARGV = fRootUISession->Argv();
-  }
-
-  // filter out "-splash" from argument list
-  FilterARGV("-splash");
-
-/*
-  // create and configure G4 run manager
-  ConfigureRunManager();
-
-  if (VerboseLevel() > 1) {
-    G4cout << "G4RunManager has been created." << G4endl;
-  }  
-*/
-  // create geant4 UI
-  CreateGeantUI();
-      // must be created before TG4VisManager::Initialize()
-      // (that is invoked in TGeant4 constructor)
-
-  // create root UI
-  CreateRootUI();
 }
 
 //_____________________________________________________________________________
@@ -239,6 +180,9 @@ void TG4RunManager::ConfigureRunManager()
 #else    
   fRunManager =  new G4RunManager();
 #endif
+  if (VerboseLevel() > 1) {
+    G4cout << "G4RunManager has been created." << G4endl;
+  }  
 
   if ( userGeometry != "VMCtoRoot" && userGeometry != "Root" ) {
     fRunManager
@@ -274,11 +218,11 @@ void TG4RunManager::CreateGeantUI()
 {
 /// Create interactive Geant4.
 
+  if ( fGeantUISession ) return;
+
 #ifdef G4UI_USE
-  if ( ! fGeantUISession )
-  {
-    fGeantUISession = new G4UIExecutive(fARGC, fARGV);
-  }
+  // create session if it does not exist  
+  fGeantUISession = new G4UIExecutive(fARGC, fARGV);
 #endif  
 }
 
@@ -287,14 +231,35 @@ void TG4RunManager::CreateRootUI()
 {
 /// Create interactive Root.
 
-  if (!fRootUISession) 
-  {
-    // create session if it does not exist  
-    fRootUISession = new TRint("aliroot", 0, 0, 0, 0);
+  if ( fRootUISession ) return; 
 
-    // set ownership of Root UI
-    fRootUIOwner = true;
+  // create session if it does not exist  
+  fRootUISession = new TRint("rootSession", &fARGC, fARGV, 0, 0);
+  fRootUIOwner = true;
+}
+
+//_____________________________________________________________________________
+void TG4RunManager::CreateUIs()
+{
+/// Create Root & Geant4 interactive sessions
+
+  // set primary UI
+  fRootUISession = gROOT->GetApplication();
+  if (fRootUISession) {
+    fARGC = fRootUISession->Argc();
+    fARGV = fRootUISession->Argv();
   }
+
+  // filter out "-splash" from argument list
+  FilterARGV("-splash");
+
+  // create geant4 UI
+  CreateGeantUI();
+      // must be created before TG4VisManager::Initialize()
+      // (that is invoked in TGeant4 constructor)
+
+  // create root UI
+  CreateRootUI();
 }
 
 //_____________________________________________________________________________
@@ -303,7 +268,7 @@ void TG4RunManager::FilterARGV(const G4String& arg)
 /// Filter out the option argument from the arguments list fARGV,
 /// if present.
 
-  if (fARGC == 1) return;
+  if (fARGC <= 1) return;
 
   G4bool isArg = false;
   for (G4int i=0; i<fARGC; i++) {
@@ -336,24 +301,11 @@ void TG4RunManager::Initialize()
 
   G4cout << "TG4RunManager::Initialize " << this << G4endl;
 
-  // create G4ParRunManager
+  // create G4RunManager
   ConfigureRunManager();
-  if (VerboseLevel() > 1) {
-    G4cout << "G4RunManager has been created." << G4endl;
-  }  
 
-  // create geant4 UI
-  //CreateGeantUI();
-      // must be created before TG4VisManager::Initialize()
-      // (that is invoked in TGeant4 constructor)
-
-  // create root UI
-  //CreateRootUI();
-  
   // initialize Geant4
-  G4cout << "G4RunManager::Initialize " << G4endl;
   fRunManager->Initialize();
-  G4cout << "G4RunManager::Initialize done" << G4endl;
 
   // finish geometry
   TG4GeometryManager::Instance()->FinishGeometry();

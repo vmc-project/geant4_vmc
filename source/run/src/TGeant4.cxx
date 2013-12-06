@@ -45,7 +45,8 @@ TVirtualMCApplication* TGeant4::fgMasterApplicationInstance = 0;
 
 //_____________________________________________________________________________
 TGeant4::TGeant4(const char* name, const char* title,
-                 TG4RunConfiguration* configuration, int argc, char** argv)
+                 TG4RunConfiguration* configuration,
+                 int argc, char** argv)
   : TVirtualMC(name, title),
     fStateManager(0),
     fGeometryManager(0),
@@ -116,108 +117,25 @@ TGeant4::TGeant4(const char* name, const char* title,
   // add verbose level
   G4cout << "TG4RunManager has been created." << G4endl;
 
-#ifdef MCDEBUG
-  G4cout << "Debug mode is switched on." << G4endl;
-#endif    
-  
 #ifdef G4VIS_USE
   if ( isMaster ) {
     // create visualization managers
     fVisManager = new TG4VisManager();
     fVisExecutive = new G4VisExecutive();
-  }  
-#endif
-  G4cout << "TGeant4::TGeant4 done " << this << G4endl;
-}
-   
-//_____________________________________________________________________________
-TGeant4::TGeant4(const char* name, const char* title,
-                 TG4RunConfiguration* configuration)
-  : TVirtualMC(name, title),
-    fStateManager(0),
-    fGeometryManager(0), 
-    fSDManager(0),     
-    fPhysicsManager(0),
-    fStepManager(0),   
-    fVisManager(0),
-    fVisExecutive(0),
-    fRunManager(0),
-    fRunConfiguration(configuration),
-    fMediumCounter(0),
-    fMaterialCounter(0),
-    fMatrixCounter(0),
-    fUserGeometry(configuration->GetUserGeometry())
-{
-/// Standard constructor
-
-  G4cout << "TGeant4::TGeant4 " << this << G4endl;
-
-  G4bool isMaster = ! G4Threading::IsWorkerThread();
-  if ( isMaster ) {
-    fgMasterInstance = this; 
-    fgMasterApplicationInstance = TVirtualMCApplication::Instance();
-  }   
-
-  // Update title with a physics selection
-  TString newTitle = title;
-  newTitle.Append(" : ");
-  newTitle.Append(configuration->GetPhysicsListSelection());
-  SetTitle(newTitle);
-
-  // create state manager
-  fStateManager = new TG4StateManager();
-  fStateManager->SetNewState(kPreInit);
-  // add verbose level
-  G4cout << "TG4StateManager has been created." << G4endl;
-  
-  // create geometry manager - shared
-  if ( isMaster ) {
-    fGeometryManager = new TG4GeometryManager(fUserGeometry);
-    // add verbose level
-    G4cout << "TG4GeometryManager has been created." << G4endl;
-
-    // create sensitive detectors manager
-    fSDManager = new TG4SDManager();
-    // add verbose level
-    G4cout << "TG4SDManager has been created." << G4endl;
-
-    // create physics manager  
-    fPhysicsManager = new TG4PhysicsManager();
-    // add verbose level
-    G4cout << "TG4PhysicsManager has been created." << G4endl;
-  
   }  
   else {
-    fGeometryManager = fgMasterInstance->fGeometryManager;
-    fSDManager = fgMasterInstance->fSDManager;
-    fPhysicsManager = fgMasterInstance->fPhysicsManager;
-  }  
-  
-  // create step manager 
-  fStepManager = new TG4StepManager(fUserGeometry);
-  // add verbose level
-  G4cout << "TG4StepManager has been created." << G4endl;
-  
-  // create run manager
-  fRunManager = new TG4RunManager(configuration);
-  // add verbose level
-  G4cout << "TG4RunManager has been created." << G4endl;
+    fVisManager = fgMasterInstance->fVisManager;
+    fVisExecutive = fgMasterInstance->fVisExecutive;
+  }    
+#endif
 
 #ifdef MCDEBUG
   G4cout << "Debug mode is switched on." << G4endl;
 #endif    
   
-#ifdef G4VIS_USE
-  if ( isMaster ) {
-    // create visualization managers
-    fVisManager = new TG4VisManager();
-    fVisExecutive = new G4VisExecutive();
-  }  
-#endif
   G4cout << "TGeant4::TGeant4 done " << this << G4endl;
 }
 
-    
 //_____________________________________________________________________________
 TGeant4::~TGeant4() 
 {

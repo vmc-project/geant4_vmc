@@ -45,9 +45,9 @@ class TApplication;
 class TG4RunManager : public TG4Verbose
 {
   public:
-    TG4RunManager(TG4RunConfiguration* configuration, int argc, char** argv);
-    TG4RunManager(TG4RunConfiguration* configuration);
-    virtual ~TG4RunManager();
+    TG4RunManager(TG4RunConfiguration* configuration, 
+                  int argc = 0, char** argv = 0);
+     virtual ~TG4RunManager();
 
     // static access method
     static TG4RunManager* Instance();
@@ -84,12 +84,18 @@ class TG4RunManager : public TG4Verbose
 
     // methods
     void ConfigureRunManager();
+    void FilterARGV(const G4String& option);
     void CreateGeantUI();
     void CreateRootUI();
-    void FilterARGV(const G4String& option);
+    void CreateUIs();
     void SetRandomSeed();
     
     // static data members
+
+    /// master instance
+    static TG4RunManager*  fgMasterInstance; 
+    
+    /// thread local instance
     static G4ThreadLocal TG4RunManager*  fgInstance; ///< this instance
     
     // data members    
