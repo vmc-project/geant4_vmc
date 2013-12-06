@@ -51,9 +51,8 @@ class TGeant4: public TVirtualMC
 {
   public:
     TGeant4(const char* name, const char* title,
-            TG4RunConfiguration* configuration, int argc, char** argv);
-    TGeant4(const char* name, const char* title,
-            TG4RunConfiguration* configuration);
+            TG4RunConfiguration* configuration, 
+            int argc = 0, char** argv = 0);
     virtual ~TGeant4();
 
     //
