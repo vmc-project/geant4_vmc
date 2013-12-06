@@ -452,9 +452,7 @@ void A01MCApplication::FinishEvent()
     fRootManager->Fill();
   }  
 
-/*
   // Print info about primary particle
-  // TO DO: this code breaks
   TParticle* primary = fStack->GetParticle(0);
   cout << endl
        << ">>> Event " << gMC->CurrentEvent() 
@@ -463,7 +461,7 @@ void A01MCApplication::FinishEvent()
        << primary->Px()*1e03 << ", " 
        << primary->Py()*1e03 << ", " 
        << primary->Pz()*1e03 << ") MeV" << endl;
-*/
+
   // Call detectors
   fHodoscopeSD1->EndOfEvent();
   fHodoscopeSD2->EndOfEvent();
