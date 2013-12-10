@@ -204,7 +204,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("OpBoundary", kPLightScattering);
   mcMap->Add("OpMieHG", kPLightScattering);
   mcMap->Add("OpWLS", kPNull);
-             /// \todo Add kPOpticalWavelengthShifting
+             // Add kPOpticalWavelengthShifting in TMCProcess.h
 
   mcMap->Add("SynRad", kPSynchrotron);
   mcMap->Add("CHIPS_SynchrotronRadiation", kPSynchrotron);
