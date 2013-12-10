@@ -2,7 +2,7 @@ $Id$
 
 ------------------------------------------------
  The Virtual Monte Carlo package
- Copyright (C) 2007, 2008 Ivana Hrivnacova
+ Copyright (C) 2007-2013 Ivana Hrivnacova
  All rights reserved.
 
  For the licensing terms see geant4_vmc/LICENSE.
@@ -11,6 +11,38 @@ $Id$
      
 Tags (history):
 ===============
+  10/12/2013
+  v2-15:
+    Migration to Geant4 10.00
+    Geant4 VMC:
+    Developments:
+    - Applying step limit in low density materials made optional;
+      the default step value changed to 10m
+    - Added commands:
+      /mcDet/setIsUserMaxStep true|false
+      /mcDet/setIsMaxStepInLowDensityMaterials true|false
+    - TG4SpecialStackingAction adapted for G4SmartTrackStack
+      (in Geant4 since 9.6.x);  secondaries are not ordered even
+       when the special stacking is activated
+    - Added filtering of Geant4 compiler flags in makefiles 
+      (needed for Geant4 10.0)
+
+    Fixes:
+    - Fixed filling optical photon status in TVirtualMC::StepProcess()
+    - Fixed setting of PAI model to selected particles in TG4EmModelPhysics
+    - Fixed missing initialization in TG4RegionsManager  
+      (thanks to O. Freyermuth)
+    - Fixed g4libs.C to handle correctly using external CLHEP 
+      (thanks to I. Das)
+    - Fixed TG4TrackingAction to work properly with the default stacking of
+      optical photons  
+    - Fixed compiler warnings issued with Geant4 compiler flags not
+      enabled by default (mainly shadowed variables)
+
+    Tested with Geant4 10.00 (with embedded CLHEP 2.1.4.1)
+      + patch provided at http://bugzilla-geant4.kek.jp/show_bug.cgi?id=1537, 
+      Root 5.34/13, VGM 3.06
+
   14/12/2012
   v2-14:
     Migration to Geant4 9.6
