@@ -61,6 +61,7 @@
 /** \} */
 
 /** \defgroup Tests Tests
+ *  \brief The VMC examples tests
  *
  *  The VMC examples test macros
  *  \{
