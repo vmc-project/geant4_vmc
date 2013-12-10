@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/13  30 November 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/13 (v5-34-13@v5-34-13, Dec 05 2013, 12:50:09 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -60,13 +60,13 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV):  948.48       total track length (cm):  43.7742
    Gap:      total energy (MeV): 24.1166       total track length (cm):  10.2516
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr  1050782159    3EA1A9CF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr  1008487919    3C1C4DEF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs  1050805197  1050782159
-                                        HEX    3EA203CD    3EA1A9CF
-                                        HEX        555A           0
-                              relative adrs       21850           0
+          with Store/Table at absolute adrs  1008510853  1008487919
+                                        HEX    3C1CA785    3C1C4DEF
+                                        HEX        59FA           0
+                              relative adrs       23034           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -104,14 +104,14 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/13  30 November 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/13 (v5-34-13@v5-34-13, Dec 05 2013, 12:50:09 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -486,13 +486,13 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   3.967       total track length (cm):    2.241
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   367898063    15EDADCF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   905552367    35F9A1EF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   367921101   367898063
-                                        HEX    15EE07CD    15EDADCF
-                                        HEX        555A           0
-                              relative adrs       21850           0
+          with Store/Table at absolute adrs   905575301   905552367
+                                        HEX    35F9FB85    35F9A1EF
+                                        HEX        59FA           0
+                              relative adrs       23034           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -516,14 +516,14 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/13  30 November 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/13 (v5-34-13@v5-34-13, Dec 05 2013, 12:50:09 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -533,145 +533,99 @@ Processing test_E03_3.C("g3tgeoConfig.C", kTRUE)...
 Loading Geant3 libraries ...
 Loading Geant3 libraries ... finished
 --- Init MC 
-Geant3 has been created.
---- Add particles 
---- Add ions 
---- Construct geometry 
-Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
-Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
-Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
-Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
-Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
-Info in <TGeoManager::CloseGeometry>: Counting nodes...
-Info in <TGeoManager::Voxelize>: Voxelizing...
-Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
-Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in Root geometry manager
-Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+locf_() Warning: changing base from 7f6b00000000 to 7f6c00000000!!!
+This may result in program crash or incorrect results
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-------------------------------------------------------------
----> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
-------------------------------------------------------------
---- Init geometry 
-MediumId: Medium Aerogel not found
-MediumId: Medium CarbonicGas not found
-MediumId: Medium WaterSteam not found
-MediumId: Medium Beam not found
---- Run MC for 1 events
---- Begin event 
-
----> Begin of event: 1
---- Generate primaries 
---- Begin primary 
-
-****************************************************************************************************
-  Particle = MyIon     Track ID = 1     Parent ID = -1
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -9.000    0.000    0.000  1050.0031    0.0000    0.000    0.000     WRLD  No active process
-#   1    -7.500    0.000    0.000  1050.0031    0.0000    1.500    1.500     WRLD  Transportation
-#   2    -7.500    0.000    0.000  1050.0031    0.0000    0.000    1.500     ABSO  No active process
-#   3    -7.470    0.000    0.000     0.0000 1050.0000    0.030    1.530     ABSO  Energy threshold
---- Begin primary 
-
-****************************************************************************************************
-  Particle = He5     Track ID = 0     Parent ID = -1
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -9.000    0.000    0.000    50.0002    0.0000    0.000    0.000     WRLD  No active process
-#   1    -7.500    0.000    0.000    50.0002    0.0000    1.500    1.500     WRLD  Transportation
-#   2    -7.500    0.000    0.000    50.0002    0.0000    0.000    1.500     ABSO  No active process
-#   3    -7.466    0.000    0.000     0.0000   50.0000    0.034    1.534     ABSO  Decay
-
-****************************************************************************************************
-  Particle = Alpha     Track ID = 3     Parent ID = 0
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.466    0.000    0.000    81.9464    0.0000    0.000    0.000     ABSO  No active process
-#   1    -7.500    0.015   -0.001    61.1637   20.7827    0.037    0.037     ABSO  Multiple scattering
-#   2    -7.500    0.015   -0.001    61.1637    0.0000    0.000    0.037     WRLD  No active process
-#   3    -9.000    0.592   -0.097    61.1637    0.0000    1.610    1.647     WRLD  Transportation
-
-****************************************************************************************************
-  Particle = neutron     Track ID = 2     Parent ID = 0
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.466    0.000    0.000   285.3407    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500   -0.426    0.015   285.3407    0.0000    1.056    1.056     ABSO  Transportation
-#   2    -6.500   -0.426    0.015   285.3407    0.0000    0.000    1.056     GAPX  No active process
-#   3    -6.000   -0.646    0.023   285.3407    0.0000    0.546    1.603     GAPX  Transportation
-#   4    -6.000   -0.646    0.023   285.3407    0.0000    0.000    1.603     ABSO  No active process
-#   5    -5.000   -1.087    0.039   285.3407    0.0000    1.093    2.696     ABSO  Transportation
-#   6    -5.000   -1.087    0.039   285.3407    0.0000    0.000    2.696     GAPX  No active process
-#   7    -4.500   -1.308    0.047   285.3407    0.0000    0.546    3.242     GAPX  Transportation
-#   8    -4.500   -1.308    0.047   285.3407    0.0000    0.000    3.242     ABSO  No active process
-#   9    -3.500   -1.748    0.063   285.3407    0.0000    1.093    4.335     ABSO  Transportation
-#  10    -3.500   -1.748    0.063   285.3407    0.0000    0.000    4.335     GAPX  No active process
-#  11    -3.000   -1.969    0.070   285.3407    0.0000    0.546    4.882     GAPX  Transportation
-#  12    -3.000   -1.969    0.070   285.3407    0.0000    0.000    4.882     ABSO  No active process
-#  13    -2.000   -2.410    0.086   285.3407    0.0000    1.093    5.974     ABSO  Transportation
-#  14    -2.000   -2.410    0.086   285.3407    0.0000    0.000    5.974     GAPX  No active process
-#  15    -1.500   -2.630    0.094   285.3407    0.0000    0.546    6.521     GAPX  Transportation
-#  16    -1.500   -2.630    0.094   285.3407    0.0000    0.000    6.521     ABSO  No active process
-#  17    -0.500   -3.071    0.110   285.3407    0.0000    1.093    7.614     ABSO  Transportation
-#  18    -0.500   -3.071    0.110   285.3407    0.0000    0.000    7.614     GAPX  No active process
-#  19     0.000   -3.291    0.118   285.3407    0.0000    0.546    8.160     GAPX  Transportation
-#  20     0.000   -3.291    0.118   285.3407    0.0000    0.000    8.160     ABSO  No active process
-#  21     1.000   -3.732    0.134   285.3407    0.0000    1.093    9.253     ABSO  Transportation
-#  22     1.000   -3.732    0.134   285.3407    0.0000    0.000    9.253     GAPX  No active process
-#  23     1.500   -3.952    0.141   285.3407    0.0000    0.546    9.800     GAPX  Transportation
-#  24     1.500   -3.952    0.141   285.3407    0.0000    0.000    9.800     ABSO  No active process
-#  25     2.500   -4.393    0.157   285.3407    0.0000    1.093   10.893     ABSO  Transportation
-#  26     2.500   -4.393    0.157   285.3407    0.0000    0.000   10.893     GAPX  No active process
-#  27     3.000   -4.613    0.165   285.3407    0.0000    0.546   11.439     GAPX  Transportation
-#  28     3.000   -4.613    0.165   285.3407    0.0000    0.000   11.439     ABSO  No active process
-#  29     3.877   -5.000    0.179   285.3407    0.0000    0.959   12.398     ABSO  Transportation
-#  30     3.877   -5.000    0.179   285.3407    0.0000    0.000   12.398     WRLD  No active process
-#  31     6.146   -6.000    0.215   285.3407    0.0000    2.480   14.877     WRLD  Transportation
---- Finish event 
-Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
-   Absorber: total energy (MeV): 1120.783       total track length (cm):    0.101
-   Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
---- Finish Run MC 
-
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   899935695    35A3EDCF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr  1072183791    3FE839EF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   899958733   899935695
-                                        HEX    35A447CD    35A3EDCF
-                                        HEX        555A           0
-                              relative adrs       21850           0
-          with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
+          with Store/Table at absolute adrs  1072206725  1072183791
+                                        HEX    3FE89385    3FE839EF
+                                        HEX        59FA           0
+                              relative adrs       23034           0
+          with     1 Str. in     2 Links in   5300 Low words in******** words.
           This store has a fence of   16 words.
 
- MZLOGL.  Set Log Level 0 for store  0
-1*****  GEANT Version  3.21/11 Released on 100298
-0*****  Correction Cradle Version  0.1100
+ !!!!! ZFATAL called from MZSTOR  
 
- MZDIV.   Initialize Division  Constant  in Store  0
-          NW/NWMAX=   20004000000,  MODE/KIND=  1  2
-          Division 20 initialized.
+ !!!!! ZFATAL reached from MZSTOR    for Case=  1
 
- MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
+          IQUEST(11) = *********         4243472F   /GCB
+          IQUEST(12) = 793464385         2F4B4E41   ANK/
+          IQUEST(13) =        16               10
+          IQUEST(14) =         1                1
+          IQUEST(15) =         2                2
+          IQUEST(16) =      5300             14B4
+          IQUEST(17) = *********         C04C4B22   "KLÀ
+          IQUEST(18) =       164               A4
+          IQUEST(19) =      2000              7D0
 
- MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+          Current Store number =  0  (JQDIVI= 0)
+1ZEBRA SYSTEM Post-Mortem from ZPOSTM.
 
- Calculating cross section tables, see gphysi.dat for more information
+ /QUEST/
+              0            0            0            0            0            0            0            0
+     1414748749    538989135   1111705391    793464385           16            1            2         5300
+    -1068741854          164         2000            0            0            0            0            0
+              0            0            0            0            0            0            0            0
+              0            0            0            0            0            0            0            0
+              0            0            0            0            0            0            0            0
+       54535A4D     2020524F     4243472F     2F4B4E41           10            1            2         14B4
+       C04C4B22           A4          7D0            0            0            0            0            0
+              0            0            0            0            0            0            0            0
+              0            0            0            0            0            0            0            0
 
- Cross section calculation concluded successfully
- **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
+ Last Bank Lifted - COMMON /MZCL/LFW,LS,NIO,ID,NL,NS,ND,IOCH(1)
+           0         0   0             0       0       0            0 hex
+              0            0            0            0            0            0            0            0
+
+ Last Bank analysed - COMMON /MZCN/LFW,LS,NIO,ID,NL,NS,ND
+           0         0   0             0       0       0
+              0            0            0            0            0            0            0
+
+ TRACEQ.  In-line trace-back still not available.
+                                                                                                                                  
+ DZSNAP --- ZPOSTM                                                                                  OPTIONS : TCWM.               
+                                                                                                                                  
+   NAME       LQSTOR NQSTRU  NQREF NQLINK LQMINR LQ2END JQDVLL JQDVSY NQFEND  LOW-1  LOW-N HIGH-1 HIGH-N SYST-1 SYST-N    END     
+  /GCBANK/(FFA24E18)      1      2      2    164   5300      0      0     16      0     -1      0     -1      0     -1     -1     
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                      -15                0                   ?? 
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                      -14                0                   ?? 
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                      -13                0                   ?? 
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                      -12                0                   ?? 
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                      -11                0                   ?? 
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                      -10                0                   ?? 
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                       -9                0                   ?? 
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                       -8                0                   ?? 
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                       -7                0                   ?? 
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                       -6                0                   ?? 
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                       -5                0                   ?? 
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                       -4                0                   ?? 
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                       -3                0                   ?? 
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                       -2                0                   ?? 
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                       -1                0                   ?? 
+0DZSNAP/       ?? Store fence area corrupt -- Address and contents                        0                0                   ?? 
+0DZSNAP/       ?? Store end overwritten -- Contents of 2 last words                                  0                0        ?? 
+0DZSNAP/       ?? Store parameters wrong -- LQSTA(2)-LQEND(1)<NQMINR                         0-       0<     164               ?? 
+0DZSNAP/       ?? Store parameters wrong -- LQ2END>LAST                                   5300>       0                        ?? 
+                                                                                                                                  
+  WORKING SPACE   ADR(LQ(0)) = FFA24E18                                                                                           
+
+ !!!!! Stop for re-entry to ZFATAL.
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/03   27 October 2012   *
+  *   Version   5.34/13  30 November 2013   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/03 (tags/v5-34-03@46856, Dec 04 2012, 11:15:45 on linuxx8664gcc)
+ROOT 5.34/13 (v5-34-13@v5-34-13, Dec 05 2013, 12:50:09 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -726,13 +680,13 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 1483.71       total track length (cm):   70.756
    Gap:      total energy (MeV): 76.3272       total track length (cm):  36.8609
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   720767439    2AF609CF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   636383727    25EE71EF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   720790477   720767439
-                                        HEX    2AF663CD    2AF609CF
-                                        HEX        555A           0
-                              relative adrs       21850           0
+          with Store/Table at absolute adrs   636406661   636383727
+                                        HEX    25EECB85    25EE71EF
+                                        HEX        59FA           0
+                              relative adrs       23034           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
