@@ -75,7 +75,7 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fMagneticField(0),
     fUserRegionConstruction(0),
     fIsUserMaxStep(false),
-    fIsMaxStepInLowDensityMaterials(false),
+    fIsMaxStepInLowDensityMaterials(true),
     fLimitDensity(fgDefaultLimitDensity),
     fMaxStepInLowDensityMaterials(fgDefaultMaxStep)
      
