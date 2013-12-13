@@ -49,6 +49,10 @@ class Ex06MCApplication : public TVirtualMCApplication
     void InitMC(const char *setup);
     void RunMC(Int_t nofEvents);
  
+    virtual TVirtualMCApplication* CloneForWorker() const;
+    virtual void InitForWorker() const;
+    virtual void Merge(TVirtualMCApplication* localMCApplication);
+
     virtual void ConstructGeometry();
     virtual void ConstructOpGeometry();
     virtual void InitGeometry();
@@ -60,6 +64,7 @@ class Ex06MCApplication : public TVirtualMCApplication
     virtual void PostTrack();
     virtual void FinishPrimary();
     virtual void FinishEvent();
+            void FinishRun();
     
     // set methods
     void  SetVerboseLevel(Int_t verboseLevel);
@@ -71,15 +76,19 @@ class Ex06MCApplication : public TVirtualMCApplication
     void SetOldGeometry(Bool_t oldGeometry = kTRUE);
 
   private:
+    // methods
+    Ex06MCApplication(const Ex06MCApplication& origin);
+
     // data members
-    Int_t                     fEventNo;         ///< Event counter
     Int_t                     fGammaCounter;    ///< Optical photons counter
+    Int_t                     fRunGammaCounter; ///< Optical photons counter2
     TMCVerbose                fVerbose;         ///< VMC verbose helper
     Ex03MCStack*              fStack;           ///< VMC stack
     TVirtualMagField*         fMagField;        ///< The magnetic field 
     Ex06DetectorConstruction* fDetConstruction; ///< Dector construction
     Ex06PrimaryGenerator*     fPrimaryGenerator;///< Primary generator
     Bool_t                    fOldGeometry;     ///< Option for geometry definition
+    Bool_t                    fIsMaster;        ///< If is on master thread
 
   ClassDef(Ex06MCApplication,1)  //Interface to MonteCarlo application
 };

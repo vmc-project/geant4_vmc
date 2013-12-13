@@ -36,6 +36,8 @@ class Ex06PrimaryGenerator : public TObject
 {
   public:
     Ex06PrimaryGenerator(TVirtualMCStack* stack); 
+    Ex06PrimaryGenerator(const Ex06PrimaryGenerator& origin,
+                         TVirtualMCStack* stack);
     Ex06PrimaryGenerator();
     virtual ~Ex06PrimaryGenerator();
 
