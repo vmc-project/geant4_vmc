@@ -34,7 +34,7 @@ ClassImp(Ex06PrimaryGenerator)
 /// \endcond
 
 //_____________________________________________________________________________
-Ex06PrimaryGenerator::Ex06PrimaryGenerator(TVirtualMCStack* stack) 
+Ex06PrimaryGenerator::Ex06PrimaryGenerator(TVirtualMCStack* stack)
   : TObject(),
     fStack(stack),
     fPdg(kPositron),
@@ -44,6 +44,23 @@ Ex06PrimaryGenerator::Ex06PrimaryGenerator(TVirtualMCStack* stack)
     fDirZ(0.),
     fPolAngle(0.),
     fNofPrimaries(1)
+{
+/// Standard constructor
+/// \param stack  The VMC stack
+}
+
+//_____________________________________________________________________________
+Ex06PrimaryGenerator::Ex06PrimaryGenerator(const Ex06PrimaryGenerator& origin,
+                                           TVirtualMCStack* stack)
+  : TObject(origin),
+    fStack(stack),
+    fPdg(origin.fPdg),
+    fKinEnergy(origin.fKinEnergy),
+    fDirX(origin.fDirX),
+    fDirY(origin.fDirY),
+    fDirZ(origin.fDirZ),
+    fPolAngle(origin.fPolAngle),
+    fNofPrimaries(origin.fNofPrimaries)
 {
 /// Standard constructor
 /// \param stack  The VMC stack

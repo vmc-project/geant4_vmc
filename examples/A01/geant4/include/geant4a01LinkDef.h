@@ -1,7 +1,7 @@
 // $Id$
 
-/// \file  geant4e03LinkDef.h
-/// \brief The CINT link definitions for example E03/geant4 classes
+/// \file  geant4a01LinkDef.h
+/// \brief The CINT link definitions for example A01/geant4 classes
 
 #ifdef __CINT__
 

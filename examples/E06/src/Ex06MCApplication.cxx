@@ -26,11 +26,17 @@
 #include <TVirtualGeoTrack.h>
 #include <TCanvas.h>
 
+#include <TMCAutoLock.h>
+
 #include "Ex06MCApplication.h"
 #include "Ex03MCStack.h"
 #include "Ex06DetectorConstruction.h"
 #include "Ex06DetectorConstructionOld.h"
 #include "Ex06PrimaryGenerator.h"
+
+namespace {
+  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
+}
 
 /// \cond CLASSIMP
 ClassImp(Ex06MCApplication)
@@ -39,14 +45,15 @@ ClassImp(Ex06MCApplication)
 //_____________________________________________________________________________
 Ex06MCApplication::Ex06MCApplication(const char *name, const char *title) 
   : TVirtualMCApplication(name,title),
-    fEventNo(0),
     fGammaCounter(0),
+    fRunGammaCounter(0),
     fVerbose(0),
     fStack(0),
     fMagField(0),
     fDetConstruction(0),
     fPrimaryGenerator(0),
-    fOldGeometry(kFALSE)
+    fOldGeometry(kFALSE),
+    fIsMaster(kTRUE)
 {
 /// Standard constructor
 /// \param name   The MC application name 
@@ -66,16 +73,45 @@ Ex06MCApplication::Ex06MCApplication(const char *name, const char *title)
 }
 
 //_____________________________________________________________________________
+Ex06MCApplication::Ex06MCApplication(const Ex06MCApplication& origin)
+  : TVirtualMCApplication(origin.GetName(),origin.GetTitle()),
+    fGammaCounter(0),
+    fRunGammaCounter(0),
+    fVerbose(origin.fVerbose),
+    fStack(0),
+    fMagField(0),
+    fDetConstruction(origin.fDetConstruction),
+    fPrimaryGenerator(0),
+    fOldGeometry(origin.fOldGeometry),
+    fIsMaster(kFALSE)
+{
+/// Standard constructor
+/// \param origin  The source MC application
+
+  // Create a user stack
+  fStack = new Ex03MCStack(1000);
+
+  // create magnetic field (with zero value)
+  // TODO: check copying
+  fMagField = new TGeoUniformMagField();
+
+  // Create a primary generator
+  fPrimaryGenerator
+    = new Ex06PrimaryGenerator(*(origin.fPrimaryGenerator), fStack);
+}
+
+//_____________________________________________________________________________
 Ex06MCApplication::Ex06MCApplication()
   : TVirtualMCApplication(),
-    fEventNo(0),
     fGammaCounter(0),
+    fRunGammaCounter(0),
     fVerbose(0),
     fStack(0),
     fMagField(0),
     fDetConstruction(0),
     fPrimaryGenerator(0),
-    fOldGeometry(kFALSE)
+    fOldGeometry(kFALSE),
+    fIsMaster(kTRUE)
 {    
 /// Default constructor
 }
@@ -85,12 +121,18 @@ Ex06MCApplication::~Ex06MCApplication()
 {
 /// Destructor  
   
+
+  TMCAutoLock lk(&deleteMutex);
+  printf("Ex06MCApplication::~Ex06MCApplication %p \n", this);
+
   delete fStack;
   delete fMagField;
-  delete fDetConstruction;
+  if ( fIsMaster) delete fDetConstruction;
   delete fPrimaryGenerator;
   delete gMC;
-  gMC = 0;
+
+  printf("Done Ex06MCApplication::~Ex06MCApplication %p \n", this);
+  lk.unlock();
 }
 
 //
@@ -125,9 +167,36 @@ void Ex06MCApplication::RunMC(Int_t nofEvents)
 
   gMC->ProcessRun(nofEvents);
 
-  fVerbose.FinishRun();
+  FinishRun();
 }
 
+//_____________________________________________________________________________
+TVirtualMCApplication* Ex06MCApplication::CloneForWorker() const
+{
+  return new Ex06MCApplication(*this);
+}
+
+//_____________________________________________________________________________
+void Ex06MCApplication::InitForWorker() const
+{
+  cout << "Ex06MCApplication::InitForWorker " << this << endl;
+
+  // Set data to MC
+  gMC->SetStack(fStack);
+  gMC->SetMagField(fMagField);
+}
+
+//_____________________________________________________________________________
+void Ex06MCApplication::Merge(TVirtualMCApplication* localMCApplication)
+{
+  cout << "Ex06MCApplication::Merge " << this << endl;
+
+  Ex06MCApplication* ex06LocalMCApplication
+    = static_cast<Ex06MCApplication*>(localMCApplication);
+
+  fRunGammaCounter += ex06LocalMCApplication->fRunGammaCounter;
+}
+ 
 //_____________________________________________________________________________
 void Ex06MCApplication::ConstructGeometry()
 {    
@@ -193,7 +262,6 @@ void Ex06MCApplication::BeginEvent()
 
   fVerbose.BeginEvent();
 
-  fEventNo++;
   fGammaCounter = 0;
 }
 
@@ -212,7 +280,10 @@ void Ex06MCApplication::PreTrack()
 
   fVerbose.PreTrack();
   
-  if (gMC->TrackPid() == 50000050 ) fGammaCounter++;
+  if (gMC->TrackPid() == 50000050 ) {
+    fGammaCounter++;
+    fRunGammaCounter++;
+  }
 }
 
 //_____________________________________________________________________________
@@ -284,3 +355,14 @@ void Ex06MCApplication::FinishEvent()
 
   fStack->Reset();
 } 
+
+//_____________________________________________________________________________
+void Ex06MCApplication::FinishRun()
+{
+/// User actions after finishing of a run
+
+  fVerbose.FinishRun();
+
+  cout << "Number of optical photons produced in this run : "
+       << fRunGammaCounter << endl;
+}

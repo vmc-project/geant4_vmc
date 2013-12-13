@@ -104,10 +104,12 @@ Ex03MCApplication::Ex03MCApplication(const Ex03MCApplication& origin)
   fStack = new Ex03MCStack(1000);
 
   // Create a calorimeter SD
-  fCalorimeterSD = new Ex03CalorimeterSD(*(origin.fCalorimeterSD), fDetConstruction);
+  fCalorimeterSD
+    = new Ex03CalorimeterSD(*(origin.fCalorimeterSD), fDetConstruction);
 
   // Create a primary generator
-  fPrimaryGenerator = new Ex03PrimaryGenerator(*(origin.fPrimaryGenerator), fStack);
+  fPrimaryGenerator
+    = new Ex03PrimaryGenerator(*(origin.fPrimaryGenerator), fStack);
 
   // Constant magnetic field (in kiloGauss)
   // TODO: check copying

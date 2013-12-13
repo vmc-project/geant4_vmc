@@ -9,7 +9,7 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \ingroup A01
+/// \ingroup Tests
 /// \file A01/test_A01.C
 /// \brief Example A01 Test macro
 ///

@@ -15,28 +15,13 @@ CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_E06.C("g4tgeoConfig.C", kFALSE)...
+Processing test_A01.C("g4Config1.C", kFALSE)...
 Loading Geant4 libraries (using geant4-config) ...
 32
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
-Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
-Geometry will be defined via TGeo
-Warning in <TGeoManager::Init>: Deleting previous geometry: VGM Root geometry/VGM Root geometry
-Info in <TGeoManager::TGeoManager>: Geometry E06_geometry, E06 VMC example geometry created
-Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
-Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
-Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
-Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
-Info in <TGeoManager::CloseGeometry>: Counting nodes...
-Info in <TGeoManager::Voxelize>: Voxelizing...
-Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::CountLevels>: max level = 2, max placements = 1
-Info in <TGeoManager::CloseGeometry>: 3 nodes/ 3 volume UID's in E06 VMC example geometry
-Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
-Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
-Running TVirtualMCApplication::ConstructGeometry
+
 *************************************************************
  Geant4 version Name: geant4-10-00    (6-December-2013)
                       Copyright : Geant4 Collaboration
@@ -44,55 +29,162 @@ Running TVirtualMCApplication::ConstructGeometry
                             WWW : http://cern.ch/geant4
 *************************************************************
 
-Info in <TG4RootNavMgr::Initialize>: Creating G4 hierarchy ...
-Info in <TGeoManager::ConvertReflections>: Converting reflections in: E06_geometry - E06 VMC example geometry ...
-Info in <TGeoManager::ConvertReflections>: Done
-===> GEANT4 materials created and mapped to TGeo ones...
-===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
-### INFO: TG4RootDetectorConstruction::Construct() finished
-TG4PostDetConstruction::Initialize
-G4 Stat: instantiated 3 logical volumes 
-                      2 physical volumes
-The tables for UV photon tracking set for Water
-The material properties FASTCOMPONENT set for Water
-The material properties SLOWCOMPONENT set for Water
-The material property SCINTILLATIONYIELD set for Water
-The material property RESOLUTIONSCALE set for Water
-The material property FASTTIMECONSTANT set for Water
-The material property SLOWTIMECONSTANT set for Water
-The material property YIELDRATIO set for Water
-The material properties MIEHG set for Water
-The material property MIEHG_FORWARD set for Water
-The material property MIEHG_BACKWARD set for Water
-The material property MIEHG_FORWARD_RATIO set for Water
-The material property BIRKS_CONSTANT set for Water
-The material properties RINDEX set for optical surface WaterSurface
-The material properties SPECULARLOBECONSTANT set for optical surface WaterSurface
-The material properties SPECULARSPIKECONSTANT set for optical surface WaterSurface
-The material properties BACKSCATTERCONSTANT set for optical surface WaterSurface
-The material properties REFLECTIVITY set for optical surface AirSurface
-The material properties EFFICIENCY set for optical surface AirSurface
-Info in <TG4RootNavMgr::ConnectToG4>: ROOT detector construction class connected to G4RunManager
-Adding EMPhysicsList emStandard
-Adding ExtraPhysicsList optical 
+Adding HadronPhysicsList FTFP_BERT
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
 Adding SpecialPhysicsList stepLimiter
 Available UI session types: [ GAG, tcsh, csh ]
 Visualization Manager instantiating with verbosity "warnings (3)"...
-### EM physics constructed. 
-G4OpticalPhysics:: Add Optical Physics Processes
-  Cerenkov process:  used
-    Max number of photons per step: 20
-    Max beta change per step:       0.1
-  Track secondaries first:  activated
-  Scintillation process:  not used
-  OpAbsorption process:  used
-  OpRayleigh process:  used
-  OpMieHG process:  used
-  OpBoundary process:  used
-  OpWLS process:  used
-     WLS process time profile: delta
-### Optical physics constructed.
-### Extra physics constructed: Optical 
+Geant4 has been created.
+
+The materials defined are : 
+
+
+***** Table : Nb of materials = 5 *****
+
+ Material: ArgonGas    density:  1.782 mg/cm3  RadL: 109.708 m    Nucl.Int.Length: 671.428 m  
+                       Imean: 188.000 eV   temperature: 273.15 K  pressure:   1.00 atm
+
+   --->  Element: ArgonGas ( )   Z = 18.0   N =  40.0   A =  39.95 g/mole
+         --->  Isotope:    36   Z = 18   N =  36   A =  35.97 g/mole   abundance:   0.34 %
+         --->  Isotope:    38   Z = 18   N =  38   A =  37.96 g/mole   abundance:   0.06 %
+         --->  Isotope:    40   Z = 18   N =  40   A =  39.96 g/mole   abundance:  99.60 %
+          ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
+
+
+ Material:      Air    density:  1.290 mg/cm3  RadL: 285.161 m    Nucl.Int.Length: 662.680 m  
+                       Imean:  85.703 eV   temperature: 273.15 K  pressure:   1.00 atm
+
+   --->  Element: Nitrogen (N)   Z =  7.0   N =  14.0   A =  14.01 g/mole
+         --->  Isotope:   N14   Z =  7   N =  14   A =  14.00 g/mole   abundance:  99.63 %
+         --->  Isotope:   N15   Z =  7   N =  15   A =  15.00 g/mole   abundance:   0.37 %
+          ElmMassFraction:  70.00 %  ElmAbundance  72.71 % 
+
+   --->  Element: Oxigen (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole
+         --->  Isotope:   O16   Z =  8   N =  16   A =  15.99 g/mole   abundance:  99.76 %
+         --->  Isotope:   O17   Z =  8   N =  17   A =  17.00 g/mole   abundance:   0.04 %
+         --->  Isotope:   O18   Z =  8   N =  18   A =  18.00 g/mole   abundance:   0.20 %
+          ElmMassFraction:  30.00 %  ElmAbundance  27.29 % 
+
+
+ Material: Scintillator    density:  1.032 g/cm3   RadL:  42.549 cm   Nucl.Int.Length:  69.996 cm 
+                       Imean:  64.684 eV 
+
+   --->  Element: Carbon (C)   Z =  6.0   N =  12.0   A =  12.01 g/mole
+         --->  Isotope:   C12   Z =  6   N =  12   A =  12.00 g/mole   abundance:  98.93 %
+         --->  Isotope:   C13   Z =  6   N =  13   A =  13.00 g/mole   abundance:   1.07 %
+          ElmMassFraction:  91.45 %  ElmAbundance  47.37 % 
+
+   --->  Element: Hydrogen (H)   Z =  1.0   N =   1.0   A =   1.01 g/mole
+         --->  Isotope:    H1   Z =  1   N =   1   A =   1.01 g/mole   abundance:  99.99 %
+         --->  Isotope:    H2   Z =  1   N =   2   A =   2.01 g/mole   abundance:   0.01 %
+          ElmMassFraction:   8.55 %  ElmAbundance  52.63 % 
+
+
+ Material:      CsI    density:  4.510 g/cm3   RadL:   1.861 cm   Nucl.Int.Length:  39.299 cm 
+                       Imean: 489.505 eV 
+
+   --->  Element: Iodine (I)   Z = 53.0   N = 126.9   A = 126.90 g/mole
+         --->  Isotope:  I127   Z = 53   N = 127   A = 126.90 g/mole   abundance: 100.00 %
+          ElmMassFraction:  50.00 %  ElmAbundance  51.15 % 
+
+   --->  Element: Cesium (Cs)   Z = 55.0   N = 132.9   A = 132.90 g/mole
+         --->  Isotope: Cs133   Z = 55   N = 133   A = 132.91 g/mole   abundance: 100.00 %
+          ElmMassFraction:  50.00 %  ElmAbundance  48.85 % 
+
+
+ Material:     Lead    density: 11.350 g/cm3   RadL:   5.612 mm   Nucl.Int.Length:  18.247 cm 
+                       Imean: 823.000 eV 
+
+   --->  Element: Lead ( )   Z = 82.0   N = 207.2   A = 207.19 g/mole
+         --->  Isotope:   204   Z = 82   N = 204   A = 203.97 g/mole   abundance:   1.40 %
+         --->  Isotope:   206   Z = 82   N = 206   A = 205.97 g/mole   abundance:  24.10 %
+         --->  Isotope:   207   Z = 82   N = 207   A = 206.98 g/mole   abundance:  22.10 %
+         --->  Isotope:   208   Z = 82   N = 208   A = 207.98 g/mole   abundance:  52.40 %
+          ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
+
+
+
+
+The geometrical tree defined are : 
+
+worldPhysical[0] worldLogical 3 Air
+  magneticPhysical[0] magneticLogical 0 G4_Galactic
+  firstArmPhysical[0] firstArmLogical 20 Air
+    hodoscope1Physical[0] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[1] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[2] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[3] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[4] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[5] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[6] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[7] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[8] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[9] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[10] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[11] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[12] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[13] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[14] hodoscope1Logical 0 Scintillator
+    chamber1Physical[0] chamber1Logical 1 ArgonGas
+      wirePlane1Physical[0] wirePlane1Logical 0 ArgonGas
+    chamber1Physical[1] chamber1Logical 1 ArgonGas
+      wirePlane1Physical[0] wirePlane1Logical 0 ArgonGas
+    chamber1Physical[2] chamber1Logical 1 ArgonGas
+      wirePlane1Physical[0] wirePlane1Logical 0 ArgonGas
+    chamber1Physical[3] chamber1Logical 1 ArgonGas
+      wirePlane1Physical[0] wirePlane1Logical 0 ArgonGas
+    chamber1Physical[4] chamber1Logical 1 ArgonGas
+      wirePlane1Physical[0] wirePlane1Logical 0 ArgonGas
+  fSecondArmPhys[0] secondArmLogical 32 Air
+    hodoscope2Physical[0] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[1] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[2] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[3] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[4] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[5] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[6] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[7] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[8] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[9] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[10] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[11] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[12] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[13] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[14] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[15] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[16] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[17] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[18] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[19] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[20] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[21] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[22] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[23] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[24] hodoscope2Logical 0 Scintillator
+    chamber2Physical[0] chamber2Logical 1 ArgonGas
+      wirePlane2Physical[0] wirePlane2Logical 0 ArgonGas
+    chamber2Physical[1] chamber2Logical 1 ArgonGas
+      wirePlane2Physical[0] wirePlane2Logical 0 ArgonGas
+    chamber2Physical[2] chamber2Logical 1 ArgonGas
+      wirePlane2Physical[0] wirePlane2Logical 0 ArgonGas
+    chamber2Physical[3] chamber2Logical 1 ArgonGas
+      wirePlane2Physical[0] wirePlane2Logical 0 ArgonGas
+    chamber2Physical[4] chamber2Logical 1 ArgonGas
+      wirePlane2Physical[0] wirePlane2Logical 0 ArgonGas
+    EMcalorimeterPhysical[0] EMcalorimeterLogical 1 CsI
+      EmCalColumnPhysical[-1] EmCalColumnLogical 1 CsI
+        cellPhysical[-1] cellLogical 0 CsI
+    HadCalorimeterPhysical[0] HadCalorimeterLogical 1 Lead
+      HadCalColumnPhysical[-1] HadCalColumnLogical 1 Lead
+        HadCalCellPhysical[-1] HadCalCellLogical 1 Lead
+          HadCalLayerPhysical[-1] HadCalLayerLogical 1 Lead
+            HadCalScintiPhysical[0] HadCalScintiLogical 0 Scintillator
+### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
+### Hadron physics constructed. 
 ### Processes mapped to VMC controls ok.
 ### Step limiter physics constructed.
 ### User particles physics constructed. 
@@ -100,309 +192,13 @@ G4OpticalPhysics:: Add Optical Physics Processes
 
 **********************************************
     GEANT4 Geometry statistics: 
-              3 logical volumes
-              2 physical volumes
-              2 materials
-              2 user limits
-              3 sensitive detectors
+             18 logical volumes
+             63 physical volumes
+              6 materials
+              6 user limits
+             18 sensitive detectors
 **********************************************
 
-
-***** Table : Nb of materials = 2 *****
-
- Material:      Air    density:  1.290 mg/cm3  RadL: 285.161 m    Nucl.Int.Length: 662.680 m  
-                       Imean:  85.703 eV   temperature: 273.15 K  pressure:   1.00 atm
-
-   --->  Element: NITROGEN (N)   Z =  7.0   N =  14.0   A =  14.01 g/mole
-         --->  Isotope:   N14   Z =  7   N =  14   A =  14.00 g/mole   abundance:  99.63 %
-         --->  Isotope:   N15   Z =  7   N =  15   A =  15.00 g/mole   abundance:   0.37 %
-          ElmMassFraction:  70.00 %  ElmAbundance  72.71 % 
-
-   --->  Element: OXYGEN (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole
-         --->  Isotope:   O16   Z =  8   N =  16   A =  15.99 g/mole   abundance:  99.76 %
-         --->  Isotope:   O17   Z =  8   N =  17   A =  17.00 g/mole   abundance:   0.04 %
-         --->  Isotope:   O18   Z =  8   N =  18   A =  18.00 g/mole   abundance:   0.20 %
-          ElmMassFraction:  30.00 %  ElmAbundance  27.29 % 
-
-
- Material:    Water    density:  1.000 g/cm3   RadL:  36.092 cm   Nucl.Int.Length:  75.416 cm 
-                       Imean:  68.998 eV 
-
-   --->  Element: HYDROGEN (H)   Z =  1.0   N =   1.0   A =   1.01 g/mole
-         --->  Isotope:    H1   Z =  1   N =   1   A =   1.01 g/mole   abundance:  99.99 %
-         --->  Isotope:    H2   Z =  1   N =   2   A =   2.01 g/mole   abundance:   0.01 %
-          ElmMassFraction:  11.21 %  ElmAbundance  66.67 % 
-
-   --->  Element: OXYGEN (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole
-         --->  Isotope:   O16   Z =  8   N =  16   A =  15.99 g/mole   abundance:  99.76 %
-         --->  Isotope:   O17   Z =  8   N =  17   A =  17.00 g/mole   abundance:   0.04 %
-         --->  Isotope:   O18   Z =  8   N =  18   A =  18.00 g/mole   abundance:   0.20 %
-          ElmMassFraction:  88.79 %  ElmAbundance  33.33 % 
-
-
-Water material properties table: 
-ABSLENGTH
-2.034e-06	3448
-2.068e-06	4082
-2.103e-06	6329
-2.139e-06	9174
-2.177e-06	12346
-2.216e-06	13889
-2.256e-06	15152
-2.298e-06	17241
-2.341e-06	18868
-2.386e-06	20000
-2.433e-06	26316
-2.481e-06	35714
-2.532e-06	45455
-2.585e-06	47619
-2.64e-06	52632
-2.697e-06	52632
-2.757e-06	55556
-2.82e-06	52632
-2.885e-06	52632
-2.954e-06	47619
-3.026e-06	45455
-3.102e-06	41667
-3.181e-06	37037
-3.265e-06	33333
-3.353e-06	30000
-3.446e-06	28500
-3.545e-06	27000
-3.649e-06	24500
-3.76e-06	22000
-3.877e-06	19500
-4.002e-06	17500
-4.136e-06	14500
-EFFICIENCY
-2.034e-06	0
-2.068e-06	0
-2.103e-06	0
-2.139e-06	0
-2.177e-06	0
-2.216e-06	0
-2.256e-06	0
-2.298e-06	0
-2.341e-06	0
-2.386e-06	0
-2.433e-06	0
-2.481e-06	0
-2.532e-06	0
-2.585e-06	0
-2.64e-06	0
-2.697e-06	0
-2.757e-06	0
-2.82e-06	0
-2.885e-06	0
-2.954e-06	0
-3.026e-06	0
-3.102e-06	0
-3.181e-06	0
-3.265e-06	0
-3.353e-06	0
-3.446e-06	0
-3.545e-06	0
-3.649e-06	0
-3.76e-06	0
-3.877e-06	0
-4.002e-06	0
-4.136e-06	0
-FASTCOMPONENT
-2.034e-06	1
-2.068e-06	1
-2.103e-06	1
-2.139e-06	1
-2.177e-06	1
-2.216e-06	1
-2.256e-06	1
-2.298e-06	1
-2.341e-06	1
-2.386e-06	1
-2.433e-06	1
-2.481e-06	1
-2.532e-06	1
-2.585e-06	1
-2.64e-06	1
-2.697e-06	1
-2.757e-06	1
-2.82e-06	1
-2.885e-06	1
-2.954e-06	1
-3.026e-06	1
-3.102e-06	1
-3.181e-06	1
-3.265e-06	1
-3.353e-06	1
-3.446e-06	1
-3.545e-06	1
-3.649e-06	1
-3.76e-06	1
-3.877e-06	1
-4.002e-06	1
-4.136e-06	1
-MIEHG
-1.56962e-06	1.67024e+08
-1.58974e-06	1.58727e+08
-1.61039e-06	1.50742e+08
-1.63157e-06	1.43062e+08
-1.65333e-06	1.3568e+08
-1.67567e-06	1.28587e+08
-1.69863e-06	1.21776e+08
-1.72222e-06	1.1524e+08
-1.74647e-06	1.0897e+08
-1.77142e-06	1.02959e+08
-1.7971e-06	9.72004e+07
-1.82352e-06	9.16869e+07
-1.85074e-06	8.64113e+07
-1.87878e-06	8.13668e+07
-1.90769e-06	7.65464e+07
-1.93749e-06	7.19435e+07
-1.96825e-06	6.75513e+07
-1.99999e-06	6.33634e+07
-2.03278e-06	5.93732e+07
-2.06666e-06	5.55746e+07
-2.10169e-06	5.19612e+07
-2.13793e-06	4.8527e+07
-2.17543e-06	4.52659e+07
-2.21428e-06	4.21719e+07
-2.25454e-06	3.92394e+07
-2.29629e-06	3.64625e+07
-2.33962e-06	3.38357e+07
-2.38461e-06	3.13534e+07
-2.43137e-06	2.90103e+07
-2.47999e-06	2.6801e+07
-2.53061e-06	2.47204e+07
-2.58333e-06	2.27634e+07
-2.63829e-06	2.09249e+07
-2.69565e-06	1.92001e+07
-2.75555e-06	1.75842e+07
-2.81817e-06	1.60724e+07
-2.88371e-06	1.46604e+07
-2.95237e-06	1.33435e+07
-3.02438e-06	1.21173e+07
-3.09999e-06	1.09777e+07
-3.17948e-06	9.92042e+06
-3.26315e-06	8.94141e+06
-3.35134e-06	8.03671e+06
-3.44444e-06	7.20247e+06
-3.54285e-06	6.43493e+06
-3.64705e-06	5.73043e+06
-3.75757e-06	5.08542e+06
-3.87499e-06	4.49647e+06
-3.99999e-06	3.96021e+06
-4.13332e-06	3.47341e+06
-4.27585e-06	3.03294e+06
-4.42856e-06	2.63575e+06
-4.59258e-06	2.27891e+06
-4.76922e-06	1.95959e+06
-4.95999e-06	1.67506e+06
-5.16665e-06	1.42271e+06
-5.39129e-06	1.2e+06
-5.63635e-06	1.00453e+06
-5.90475e-06	833967
-6.19998e-06	686106
-RINDEX
-2.034e-06	1.3435
-2.068e-06	1.344
-2.103e-06	1.3445
-2.139e-06	1.345
-2.177e-06	1.3455
-2.216e-06	1.346
-2.256e-06	1.3465
-2.298e-06	1.347
-2.341e-06	1.3475
-2.386e-06	1.348
-2.433e-06	1.3485
-2.481e-06	1.3492
-2.532e-06	1.35
-2.585e-06	1.3505
-2.64e-06	1.351
-2.697e-06	1.3518
-2.757e-06	1.3522
-2.82e-06	1.353
-2.885e-06	1.3535
-2.954e-06	1.354
-3.026e-06	1.3545
-3.102e-06	1.355
-3.181e-06	1.3555
-3.265e-06	1.356
-3.353e-06	1.3568
-3.446e-06	1.3572
-3.545e-06	1.358
-3.649e-06	1.3585
-3.76e-06	1.359
-3.877e-06	1.3595
-4.002e-06	1.36
-4.136e-06	1.3608
-SLOWCOMPONENT
-2.034e-06	0.01
-2.068e-06	1
-2.103e-06	2
-2.139e-06	3
-2.177e-06	4
-2.216e-06	5
-2.256e-06	6
-2.298e-06	7
-2.341e-06	8
-2.386e-06	9
-2.433e-06	8
-2.481e-06	7
-2.532e-06	6
-2.585e-06	4
-2.64e-06	3
-2.697e-06	2
-2.757e-06	1
-2.82e-06	0.01
-2.885e-06	1
-2.954e-06	2
-3.026e-06	3
-3.102e-06	4
-3.181e-06	5
-3.265e-06	6
-3.353e-06	7
-3.446e-06	8
-3.545e-06	9
-3.649e-06	8
-3.76e-06	7
-3.877e-06	6
-4.002e-06	5
-4.136e-06	4
-FASTTIMECONSTANT
-1
-MIEHG_BACKWARD
-0.99
-MIEHG_FORWARD
-0.99
-MIEHG_FORWARD_RATIO
-0.8
-RESOLUTIONSCALE
-1
-SCINTILLATIONYIELD
-50
-SLOWTIMECONSTANT
-10
-YIELDRATIO
-0.8
-AirSurface optical surface material properties table: 
-EFFICIENCY
-2.038e-06	0.8
-4.144e-06	1
-REFLECTIVITY
-2.038e-06	0.3
-4.144e-06	0.5
-WaterSurface optical surface material properties table: 
-BACKSCATTERCONSTANT
-2.038e-06	0.2
-4.144e-06	0.2
-RINDEX
-2.038e-06	1.35
-4.144e-06	1.4
-SPECULARLOBECONSTANT
-2.038e-06	0.3
-4.144e-06	0.3
-SPECULARSPIKECONSTANT
-2.038e-06	0.2
-4.144e-06	0.2
 
 phot:   for  gamma    SubType= 12
       LambdaPrime table from 200 keV to 10 TeV in 54 bins 
@@ -727,26 +523,230 @@ hPairProd:   for  pi-    SubType= 4
       Sampling table 16x1001; from 1.11656 GeV to 10 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
+
+====================================================================
+                  HADRONIC PROCESSES SUMMARY (verbose level 1)
+
+---------------------------------------------------
+                           Hadronic Processes for GenericIon
+
+  Process: ionInelastic
+        Model:  Binary Light Ion Cascade: 0 eV  ---> 4 GeV
+        Model:                      FTFP: 2 GeV ---> 100 TeV
+     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for anti_neutron
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: anti_neutronInelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for anti_proton
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
+        Model:              AntiAElastic: 100 MeV ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: anti_protonInelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for e+
+
+  Process: positronNuclear
+        Model:   G4ElectroVDNuclearModel: 0 eV  ---> 1 PeV
+     Cr_sctns:          ElectroNuclearXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for e-
+
+  Process: electronNuclear
+        Model:   G4ElectroVDNuclearModel: 0 eV  ---> 1 PeV
+     Cr_sctns:          ElectroNuclearXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for gamma
+
+  Process: photonNuclear
+        Model:            BertiniCascade: 0 eV  ---> 3.5 GeV
+        Model:           TheoFSGenerator: 3 GeV ---> 100 TeV
+     Cr_sctns:            PhotoNuclearXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for kaon+
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: kaon+Inelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:  ChipsKaonPlusInelasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for kaon-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: kaon-Inelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns: ChipsKaonMinusInelasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: hBertiniCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for lambda
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: lambdaInelastic
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+        Model:                      FTFP: 2 GeV ---> 100 TeV
+     Cr_sctns:   ChipsHyperonInelasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for mu-
+
+  Process: muMinusCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for neutron
+
+  Process: hadElastic
+        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
+     Cr_sctns:     ChipsNeutronElasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: neutronInelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: nCapture
+        Model:               nRadCapture: 0 eV  ---> 100 TeV
+     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for pi+
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 1.0001 GeV
+        Model:           hElasticGlauber: 1 GeV ---> 100 TeV
+     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: pi+Inelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:      G4CrossSectionPairGG: 0 eV  ---> 100 TeV
+                         G4CrossSectionPairGG: G4PiNuclearCrossSection cross sections 
+                           below 91 GeV, Glauber-Gribov above 
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for pi-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 1.0001 GeV
+        Model:           hElasticGlauber: 1 GeV ---> 100 TeV
+     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: pi-Inelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:      G4CrossSectionPairGG: 0 eV  ---> 100 TeV
+                         G4CrossSectionPairGG: G4PiNuclearCrossSection cross sections 
+                           below 91 GeV, Glauber-Gribov above 
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: hBertiniCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for proton
+
+  Process: hadElastic
+        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
+     Cr_sctns:      ChipsProtonElasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: protonInelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+================================================================
 ### Run 0 start.
->>> Event 0
-Number of optical photons produced in this event : 1722
->>> Event 1
-Number of optical photons produced in this event : 1698
->>> Event 2
-Number of optical photons produced in this event : 1690
->>> Event 3
-Number of optical photons produced in this event : 1701
->>> Event 4
-Number of optical photons produced in this event : 1639
->>> Event 5
-Number of optical photons produced in this event : 1684
->>> Event 6
-Number of optical photons produced in this event : 1713
->>> Event 7
-Number of optical photons produced in this event : 1741
->>> Event 8
-Number of optical photons produced in this event : 1782
->>> Event 9
-Number of optical photons produced in this event : 1629
-Time of this run:   User=2.72s Real=2.76s Sys=0s
-Number of events processed: 10
+
+>>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 2 hits.
+Hodoscope2 has 10 hits.
+Chamber1 has 547 hits.
+Chamber2 has 501 hits.
+EmCalorimeter has 47 hits. Total Edep is 88973.8 (MeV)
+HadCalorimeter has 5 hits. Total Edep is 11.1819 (MeV)
+
+>>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 3 hits.
+Hodoscope2 has 5 hits.
+Chamber1 has 529 hits.
+Chamber2 has 524 hits.
+EmCalorimeter has 15 hits. Total Edep is 18564.9 (MeV)
+HadCalorimeter has 6 hits. Total Edep is 2744.29 (MeV)
+
+>>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 3 hits.
+Hodoscope2 has 11 hits.
+Chamber1 has 533 hits.
+Chamber2 has 501 hits.
+EmCalorimeter has 70 hits. Total Edep is 30282.5 (MeV)
+HadCalorimeter has 20 hits. Total Edep is 1661.73 (MeV)
+
+>>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 6 hits.
+Hodoscope2 has 6 hits.
+Chamber1 has 403 hits.
+Chamber2 has 152 hits.
+EmCalorimeter has 52 hits. Total Edep is 4473.47 (MeV)
+HadCalorimeter has 18 hits. Total Edep is 289.433 (MeV)
+
+>>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 4 hits.
+Hodoscope2 has 7 hits.
+Chamber1 has 527 hits.
+Chamber2 has 507 hits.
+EmCalorimeter has 51 hits. Total Edep is 28407.5 (MeV)
+HadCalorimeter has 14 hits. Total Edep is 69.8318 (MeV)
+Time of this run:   User=10.61s Real=10.82s Sys=0.04s
+Number of events processed: 5
+Real time 0:00:12, CP time 11.640

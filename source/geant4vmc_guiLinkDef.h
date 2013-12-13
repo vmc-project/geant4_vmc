@@ -9,8 +9,8 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \file geant4vmcLinkDef.h
-/// \brief The CINT link definitions for Geant4 VMC classes
+/// \file geant4vmc_guiLinkDef.h
+/// \brief The CINT link definitions for Geant4 VMC GUI classes (optional)
 /// interfaced in Root
 
 #ifdef __CINT__
