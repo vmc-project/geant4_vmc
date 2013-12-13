@@ -51,6 +51,7 @@ void test_E02(const TString& configMacro, Bool_t oldGeometry)
   }  
   
   // Load this example library
+  gSystem->Load("libmtroot");
   gSystem->Load("libexample02");
 
   // MC application

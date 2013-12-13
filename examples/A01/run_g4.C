@@ -44,12 +44,12 @@ void run_g4(const TString& configMacro = "g4Config.C")
   appl->InitMC(configMacro);
 
   // visualization setting
-  //gROOT->LoadMacro("set_vis.C");
-  //set_vis();
+  gROOT->LoadMacro("set_vis.C");
+  set_vis();
 
   TStopwatch timer;
   timer.Start();  
-  appl->RunMC(500);
+  appl->RunMC(5);
   timer.Stop();
   timer.Print();
   

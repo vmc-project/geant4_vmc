@@ -184,6 +184,13 @@ void Ex03MCApplication::InitMC(const char* setup)
   gROOT->LoadMacro(setup);
   gInterpreter->ProcessLine("Config()");
  
+  // Create Root manager 
+  if ( ! gMC->IsMT() ) {
+    fRootManager
+      = new TMCRootManager(GetName(), TVirtualMCRootManager::kWrite);
+    //fRootManager->SetDebug(true);
+  }
+  
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);
   gMC->Init();

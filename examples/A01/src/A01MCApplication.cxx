@@ -218,6 +218,13 @@ void A01MCApplication::InitMC(const char* setup)
   gROOT->LoadMacro(setup);
   gInterpreter->ProcessLine("Config()");
  
+  // Create Root manager
+  if ( ! gMC->IsMT() ) {
+    fRootManager
+      = new TMCRootManager(GetName(), TVirtualMCRootManager::kWrite);
+    //fRootManager->SetDebug(true);
+  }
+
   // Set data to MC
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);

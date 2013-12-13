@@ -28,6 +28,7 @@ void test_E03_pl(const TString& configMacro = "g4ConfigEnv.C")
   g4libs();
 
   // Load this example library
+  gSystem->Load("libmtroot");
   gSystem->Load("libexample03");
  
   // MC application

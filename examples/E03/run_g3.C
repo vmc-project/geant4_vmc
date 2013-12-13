@@ -28,6 +28,7 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
   g3libs();
   
   // Load this example library
+  gSystem->Load("libmtroot");
   gSystem->Load("libexample03");
 
   // MC application
