@@ -24,6 +24,8 @@
 #include "TG4SpecialControlsV2.h"
 #include "TGeant4.h"
 
+#include <G4Threading.hh>
+
 #include <TROOT.h>
 #include <TInterpreter.h>
 #include <TVirtualMCApplication.h>
@@ -76,9 +78,11 @@ void TG4ActionInitialization::Build() const
   G4cout << "TG4ActionInitialization::Build "  << this << G4endl;
 
   // create MC and MCApplication worker instances
-  TGeant4::MasterApplicationInstance()->CloneForWorker();
-  TGeant4::MasterInstance()->CloneForWorker();
-  TVirtualMCApplication::Instance()->InitForWorker();
+  if ( G4Threading::G4GetThreadId() > 0 ) {
+    TGeant4::MasterApplicationInstance()->CloneForWorker();
+    TGeant4::MasterInstance()->CloneForWorker();
+    TVirtualMCApplication::Instance()->InitForWorker();
+  }  
 
   SetUserAction(fRunConfiguration->CreatePrimaryGenerator());
 

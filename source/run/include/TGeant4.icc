@@ -431,3 +431,11 @@ inline Int_t TGeant4::StepProcesses(TArrayI &proc) const
 
   return fStepManager->StepProcesses(proc); 
 } 
+
+//_____________________________________________________________________________
+inline Bool_t TGeant4::IsMT() const
+{
+/// Returns true is Geant4 is built in multi-threading mode
+
+  return ( G4Threading::G4GetThreadId() != -2 ); 
+}
