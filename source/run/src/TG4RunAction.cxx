@@ -19,14 +19,23 @@
    // times system function this include must be the first
 
 #include "TG4RunAction.h"
+#include "TGeant4.h"
 #include "TG4Globals.h"
 #include "TG4RegionsManager.h"
 
 #include <G4Run.hh>
 #include <Randomize.hh>
 #include <G4UImanager.hh>
+#include "G4AutoLock.hh"
 
 #include <TObjArray.h>
+
+// mutex in a file scope
+
+namespace {
+  //Mutex to lock master application when merging data
+  G4Mutex mergeMutex = G4MUTEX_INITIALIZER;
+}  
 
 const G4String TG4RunAction::fgkDefaultRandomStatusFile = "currentRun.rndm";
 
@@ -113,14 +122,20 @@ void TG4RunAction::EndOfRunAction(const G4Run* run)
 {
 /// Called by G4 kernel at the end of run.
 
+
+  // Merge user application data
+  G4AutoLock lm(&mergeMutex);
+  TGeant4::MasterApplicationInstance()->Merge(TVirtualMCApplication::Instance());
+  lm.unlock();
+
+  if ( fCrossSectionManager.IsMakeHistograms() ) {
+    fCrossSectionManager.MakeHistograms();
+  }  
+
   fTimer->Stop();
 
   if (VerboseLevel() > 0) {
     G4cout << "Time of this run:   " << *fTimer << G4endl;
     G4cout << "Number of events processed: " << run->GetNumberOfEvent() << G4endl;
   }    
-
-  if ( fCrossSectionManager.IsMakeHistograms() ) {
-    fCrossSectionManager.MakeHistograms();
-  }  
 }    
