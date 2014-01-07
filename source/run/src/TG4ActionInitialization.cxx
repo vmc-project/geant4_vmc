@@ -78,7 +78,7 @@ void TG4ActionInitialization::Build() const
   G4cout << "TG4ActionInitialization::Build "  << this << G4endl;
 
   // create MC and MCApplication worker instances
-  if ( G4Threading::G4GetThreadId() > 0 ) {
+  if ( G4Threading::IsWorkerThread() ) {
     TGeant4::MasterApplicationInstance()->CloneForWorker();
     TGeant4::MasterInstance()->CloneForWorker();
     TVirtualMCApplication::Instance()->InitForWorker();
