@@ -92,7 +92,10 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
   G4bool isMaster = ! G4Threading::IsWorkerThread();
   
   if ( isMaster ) {
-    fgMasterInstance = this; 
+    fgMasterInstance = this;
+    
+    // create and configure G4 run manager
+    ConfigureRunManager();
     
     // create geant4 UI
     CreateUIs();
@@ -302,7 +305,7 @@ void TG4RunManager::Initialize()
   G4cout << "TG4RunManager::Initialize " << this << G4endl;
 
   // create G4RunManager
-  ConfigureRunManager();
+  //ConfigureRunManager();
 
   // initialize Geant4
   fRunManager->Initialize();
