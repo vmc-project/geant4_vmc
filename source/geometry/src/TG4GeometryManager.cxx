@@ -36,6 +36,7 @@
 #include <G4TransportationManager.hh>
 #include <G4PVPlacement.hh>
 #include <G4SystemOfUnits.hh>
+#include <G4AutoDelete.hh>
 
 #include <TGeoManager.h>
 #include <TGeoVolume.h>
@@ -64,6 +65,8 @@ TG4GeometryManager* TG4GeometryManager::fgInstance = 0;
 const G4double      TG4GeometryManager::fgDefaultLimitDensity = 0.001*(g/cm3);
 const G4double      TG4GeometryManager::fgDefaultMaxStep= 10*cm;
 
+G4ThreadLocal TG4MagneticField* TG4GeometryManager::fMagneticField = 0;
+
 //_____________________________________________________________________________
 TG4GeometryManager::TG4GeometryManager(const TString& userGeometry) 
   : TG4Verbose("geometryManager"),
@@ -73,7 +76,6 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fOpManager(0),
     fUserGeometry(userGeometry),
     fFieldParameters(),
-    fMagneticField(0),
     fUserRegionConstruction(0),
     fIsUserMaxStep(false),
     fIsMaxStepInLowDensityMaterials(true),
@@ -101,7 +103,8 @@ TG4GeometryManager::~TG4GeometryManager()
 {
 /// Destructor
 
-  delete fMagneticField;
+  // delete fMagneticField;
+        // deleted via G4AutoDelete;
 }
 
 //
@@ -547,11 +550,10 @@ void TG4GeometryManager::ConstructMagField()
         G4cout << "Magnetic field created with stepper "
                << TG4FieldParameters::StepperTypeName(
                     fFieldParameters.GetStepperType()) << G4endl;
-      }              
+      }
+      G4AutoDelete::Register(fMagneticField);
   }  
 }
-
-#include "TG4SDManager.h"
 
 //_____________________________________________________________________________
 void TG4GeometryManager::ConstructGeometry()
@@ -571,26 +573,28 @@ void TG4GeometryManager::ConstructGeometry()
 
   // Construct user regions
   if ( fUserRegionConstruction ) fUserRegionConstruction->Construct();
-
-  // Initialize SD manager
-  //TG4SDManager::Instance()->Initialize();
 }                   
+
+#include "TG4SDManager.h"
 
 //_____________________________________________________________________________
 void TG4GeometryManager::ConstructSDandField()
 {
 /// Construct Geant4 geometry depending on user geometry source
 
+  if ( VerboseLevel() > 1 ) 
+     G4cout << "TG4GeometryManager::ConstructSDandField() " << G4endl; 
+
   // Construct G4 geometry 
   //ConstructG4Geometry();
 
   // Fill medium map
   //FillMediumMap(); 
-
+  
   // VMC application construct geometry for optical processes
-  TG4StateManager::Instance()->SetNewState(kConstructOpGeometry);
-  TVirtualMCApplication::Instance()->ConstructOpGeometry();   
-  TG4StateManager::Instance()->SetNewState(kNotInApplication);
+  //TG4StateManager::Instance()->SetNewState(kConstructOpGeometry);
+  //TVirtualMCApplication::Instance()->ConstructOpGeometry();   
+  //TG4StateManager::Instance()->SetNewState(kNotInApplication);
 
   // Construct user regions
   if ( fUserRegionConstruction ) fUserRegionConstruction->Construct();
