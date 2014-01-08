@@ -21,6 +21,8 @@
 #include "TObject.h"
 #endif
 
+#include "G4Threading.hh"
+
 class TGeoManager;
 class TG4RootNavigator;
 class TG4RootDetectorConstruction;
@@ -39,13 +41,16 @@ protected:
    Bool_t                fConnected;  ///< Flags connection to G4
 
    TG4RootNavMgr();
-   TG4RootNavMgr(TGeoManager *geom);   
+   TG4RootNavMgr(TGeoManager *geom, TG4RootDetectorConstruction *detConstruction=0);   
 
 private:
-   static TG4RootNavMgr *fRootNavMgr; ///< Static pointer to singleton
+   static G4ThreadLocal TG4RootNavMgr *fRootNavMgr; ///< Static pointer to singleton
+   static TG4RootNavMgr *fgMasterInstance; 
 
 public:
    static TG4RootNavMgr *GetInstance(TGeoManager *geom=0);
+   static TG4RootNavMgr *GetInstance(const TG4RootNavMgr& navMgr);
+   static TG4RootNavMgr *GetMasterInstance();
    virtual ~TG4RootNavMgr();
    
    Bool_t                ConnectToG4();
@@ -62,6 +67,6 @@ public:
                          /// Return the G4 geometry built based on ROOT one
    TG4RootDetectorConstruction *GetDetConstruction() const {return fDetConstruction;}
 
-   ClassDef(TG4RootNavMgr,0)  // Class crreating a G4Navigator based on ROOT geometry
+   //ClassDef(TG4RootNavMgr,0)  // Class crreating a G4Navigator based on ROOT geometry
 };
 #endif

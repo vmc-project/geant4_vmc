@@ -24,10 +24,11 @@
 #include "G4PropagatorInField.hh"
 
 /// \cond CLASSIMP
-ClassImp(TG4RootNavMgr)
+//ClassImp(TG4RootNavMgr)
 /// \endcond
 
-TG4RootNavMgr *TG4RootNavMgr::fRootNavMgr = 0;
+G4ThreadLocal TG4RootNavMgr *TG4RootNavMgr::fRootNavMgr = 0;
+TG4RootNavMgr *TG4RootNavMgr::fgMasterInstance = 0; 
 
 //______________________________________________________________________________
 TG4RootNavMgr::TG4RootNavMgr()
@@ -41,11 +42,12 @@ TG4RootNavMgr::TG4RootNavMgr()
 }
 
 //______________________________________________________________________________
-TG4RootNavMgr::TG4RootNavMgr(TGeoManager *geom)
+TG4RootNavMgr::TG4RootNavMgr(TGeoManager *geom,
+                             TG4RootDetectorConstruction *detConstruction)
               :TObject(),
-               fGeometry(0),
+               fGeometry(geom),
                fNavigator(0),
-               fDetConstruction(0),
+               fDetConstruction(detConstruction),
                fConnected(kFALSE)
 {
 /// Default ctor.
@@ -60,6 +62,11 @@ TG4RootNavMgr::~TG4RootNavMgr()
 //   if (fNavigator) delete fNavigator;
    if (fDetConstruction) delete fDetConstruction;
    fRootNavMgr = 0;
+   
+   G4bool isMaster = ! G4Threading::IsWorkerThread();
+   if ( isMaster ) {
+     fgMasterInstance = 0;
+   }  
 }
 
 //______________________________________________________________________________
@@ -69,9 +76,34 @@ TG4RootNavMgr *TG4RootNavMgr::GetInstance(TGeoManager *geom)
    if (fRootNavMgr) return fRootNavMgr;
    // Check if we have to create one.
    if (!geom) return NULL;
-   fRootNavMgr = new TG4RootNavMgr(geom);
+   fRootNavMgr = new TG4RootNavMgr(geom);  
+   G4bool isMaster = ! G4Threading::IsWorkerThread();
+   if ( isMaster ) {
+    fgMasterInstance = fRootNavMgr; 
+   } 
    return fRootNavMgr;
 }
+
+//______________________________________________________________________________
+TG4RootNavMgr *TG4RootNavMgr::GetInstance(const TG4RootNavMgr& navMgr)
+{
+/// Get the pointer to the singleton. If none, create one based on 'geom'.
+   if (fRootNavMgr) return fRootNavMgr;
+   // Check if we have to create one.
+   fRootNavMgr = new TG4RootNavMgr(navMgr.fGeometry, navMgr.fDetConstruction);
+   G4bool isMaster = ! G4Threading::IsWorkerThread();
+   if ( isMaster ) {
+    fgMasterInstance = fRootNavMgr; 
+   } 
+   return fRootNavMgr;
+}
+
+//_____________________________________________________________________________
+TG4RootNavMgr *TG4RootNavMgr::GetMasterInstance() 
+{ 
+/// Get master instance
+  return fgMasterInstance; 
+}    
 
 //______________________________________________________________________________
 Bool_t TG4RootNavMgr::ConnectToG4()
@@ -96,7 +128,8 @@ Bool_t TG4RootNavMgr::ConnectToG4()
       Error("ConnectToG4", "Unable to connect: G4RunManager not instantiated");
       return kFALSE;
    }
-   runManager->SetUserInitialization(fDetConstruction);
+   G4bool isMaster = ! G4Threading::IsWorkerThread();
+   if (isMaster) runManager->SetUserInitialization(fDetConstruction);
    Info("ConnectToG4", "ROOT detector construction class connected to G4RunManager");
    fConnected = kTRUE;
    return kTRUE;
