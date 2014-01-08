@@ -73,7 +73,9 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
 {
 /// Standard constructor
 
-  G4cout << "TG4RunManager::TG4RunManager 1st: " << this << G4endl;
+  if (VerboseLevel() > 1) {
+    G4cout << "TG4RunManager::TG4RunManager " << this << G4endl;
+  }  
 
   if (fgInstance) {
     TG4Globals::Exception(
@@ -103,7 +105,7 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
   else {
     // Get G4 worker run manager 
     fRunManager = G4RunManager::GetRunManager();
-
+    
     fRootUISession = fgMasterInstance->fRootUISession;
     fGeantUISession = fgMasterInstance->fGeantUISession;
   }     
@@ -138,7 +140,8 @@ void TG4RunManager::ConfigureRunManager()
 
   // Geometry construction and navigator
   //
-  G4cout << "TG4RunManager::ConfigureRunManager " << this << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::ConfigureRunManager " << this << G4endl;
 
   TString userGeometry = fRunConfiguration->GetUserGeometry();
   
@@ -173,8 +176,10 @@ void TG4RunManager::ConfigureRunManager()
     
     // Pass geometry to G4Root navigator
     rootNavMgr = TG4RootNavMgr::GetInstance(gGeoManager);
+    G4cout << "TG4RootNavMgr has been created." << rootNavMgr << G4endl;
   }  
 */
+
   // G4 run manager
 #ifdef G4MULTITHREADED  
   fRunManager = new G4MTRunManager(); 
@@ -190,7 +195,8 @@ void TG4RunManager::ConfigureRunManager()
   if ( userGeometry != "VMCtoRoot" && userGeometry != "Root" ) {
     fRunManager
       ->SetUserInitialization(fRunConfiguration->CreateDetectorConstruction());
-    G4cout << "CreateDetectorConstruction done." << G4endl;
+    if ( VerboseLevel() > 1 )
+      G4cout << "CreateDetectorConstruction done." << G4endl;
   }    
   else {
     TG4Globals::Exception(
@@ -204,16 +210,20 @@ void TG4RunManager::ConfigureRunManager()
   //  
   fRunManager
     ->SetUserInitialization(fRunConfiguration->CreatePhysicsList());
-  G4cout << "CreatePhysicsList done." << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "CreatePhysicsList done." << G4endl;
+ 
   fRunManager
     ->SetUserInitialization(new TG4ActionInitialization(fRunConfiguration));      
-  G4cout << "Create ActionInitialization done." << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "Create ActionInitialization done." << G4endl;
   
   // Regions manager
   //
   fRegionsManager = new TG4RegionsManager();
   
-  G4cout << "TG4RunManager::ConfigureRunManager done " << this << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::ConfigureRunManager done " << this << G4endl;
 }
 
 //_____________________________________________________________________________
@@ -302,7 +312,8 @@ void TG4RunManager::Initialize()
 {
 /// Initialize G4.
 
-  G4cout << "TG4RunManager::Initialize " << this << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::Initialize " << this << G4endl;
 
   // create G4RunManager
   //ConfigureRunManager();
@@ -316,7 +327,8 @@ void TG4RunManager::Initialize()
   // initialize SD manager
   TG4SDManager::Instance()->Initialize();
 
-  G4cout << "TG4RunManager::Initialize done " << this << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::Initialize done " << this << G4endl;
 }
 
 //_____________________________________________________________________________
@@ -325,7 +337,9 @@ void TG4RunManager::LateInitialize()
 /// Finish initialization of G4 after the G4Run initialization
 /// is finished. 
 
-  G4cout << "TG4RunManager::LateInitialize " << this << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::LateInitialize " << this << G4endl;
+
   G4bool isMaster = ! G4Threading::IsWorkerThread();
 
   // define particles 
@@ -361,7 +375,8 @@ void TG4RunManager::LateInitialize()
   // set the random number seed
   if ( fUseRootRandom ) SetRandomSeed();
 
-  G4cout << "TG4RunManager::LateInitialize done " << this << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::LateInitialize done " << this << G4endl;
 }
 
 //_____________________________________________________________________________

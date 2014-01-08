@@ -87,7 +87,8 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList(const G4String& selection)
 {
 /// Standard constructor
 
-  G4cout << "TG4SpecialPhysicsList::TG4SpecialPhysicsList" << G4endl;
+  if (VerboseLevel() > 1)
+    G4cout << "TG4SpecialPhysicsList::TG4SpecialPhysicsList" << G4endl;
 
   if (fgInstance) {
     TG4Globals::Exception(

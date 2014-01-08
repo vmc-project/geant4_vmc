@@ -41,13 +41,13 @@ void TG4WorkerInitialization::WorkerRunStart() const
 {
 /// Call post initialization on workers
 
-  G4cout << "TG4WorkerInitialization::WorkerRunStart() " << G4endl;
+  //G4cout << "TG4WorkerInitialization::WorkerRunStart() " << G4endl;
 
   TG4RunManager::Instance()->LateInitialize();
   
   TVirtualMCApplication::Instance()->BeginWorkerRun();
 
-  G4cout << "TG4WorkerInitialization::WorkerRunStart() end " << G4endl;
+  //G4cout << "TG4WorkerInitialization::WorkerRunStart() end " << G4endl;
 }   
 
 /*
@@ -71,10 +71,9 @@ void TG4WorkerInitialization::WorkerStop() const
 // This method is called once at the end of simulation job. 
 // Implement here a clean up action.
 
-  G4cout << "TG4WorkerInitialization::WorkerStop() " << G4endl;
+  //G4cout << "TG4WorkerInitialization::WorkerStop() " << G4endl;
 
   TVirtualMCApplication::Instance()->FinishWorkerRun();
 
-  G4cout << "TG4WorkerInitialization::WorkerStop() end " << G4endl;
-
+  //G4cout << "TG4WorkerInitialization::WorkerStop() end " << G4endl;
 }

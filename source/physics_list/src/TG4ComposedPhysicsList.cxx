@@ -35,7 +35,9 @@ TG4ComposedPhysicsList::TG4ComposedPhysicsList()
 {
 /// Default constructor
 
-  G4cout << "TG4ComposedPhysicsList::TG4ComposedPhysicsList" << G4endl;
+  if ( VerboseLevel() >1 )
+    G4cout << "TG4ComposedPhysicsList::TG4ComposedPhysicsList" << G4endl;
+  
   SetVerboseLevel(TG4VVerbose::VerboseLevel());
 }
 
@@ -65,12 +67,14 @@ void TG4ComposedPhysicsList::ConstructParticle()
 {
 /// Construct all particles.
 
-  G4cout << "TG4ComposedPhysicsList::ConstructParticle" << G4endl;
+  if ( VerboseLevel() >1 )
+    G4cout << "TG4ComposedPhysicsList::ConstructParticle" << G4endl;
 
   for (G4int i=0; i<G4int(fPhysicsLists.size()); i++ )
     fPhysicsLists[i]->ConstructParticle();
 
-  G4cout << "TG4ComposedPhysicsList::ConstructParticle done" << G4endl;
+  if ( VerboseLevel() >1 )
+    G4cout << "TG4ComposedPhysicsList::ConstructParticle done" << G4endl;
 }
 
 //_____________________________________________________________________________
@@ -78,18 +82,21 @@ void TG4ComposedPhysicsList::ConstructProcess()
 {
 /// Construct all processes.
 
-  G4cout << "TG4ComposedPhysicsList::ConstructProcess" << G4endl;
+  if ( VerboseLevel() >1 )
+    G4cout << "TG4ComposedPhysicsList::ConstructProcess" << G4endl;
 
   // lock physics manager
   TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
   g3PhysicsManager->Lock();  
 
   for (G4int i=0; i<G4int(fPhysicsLists.size()); i++ ) {
-    G4cout << "fPhysicsLists[i]->ConstructProcess: " <<  fPhysicsLists[i] << G4endl;
+    if ( VerboseLevel() >1 )
+      G4cout << "fPhysicsLists[i]->ConstructProcess: " <<  fPhysicsLists[i] << G4endl;
     fPhysicsLists[i]->ConstructProcess();
   }  
 
-  G4cout << "TG4ComposedPhysicsList::ConstructProcess done" << G4endl;
+  if ( VerboseLevel() >1 )
+    G4cout << "TG4ComposedPhysicsList::ConstructProcess done" << G4endl;
 }
 
 //_____________________________________________________________________________

@@ -58,7 +58,7 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
 /// Standard constructor
 /// \param userGeometry  User selection of geometry definition and navigation 
 
-  G4cout << "TG4StepManager::TG4StepManager " << this << G4endl;
+  //G4cout << "TG4StepManager::TG4StepManager " << this << G4endl;
   
   if ( fgInstance ) {
     TG4Globals::Exception(
@@ -86,12 +86,12 @@ TG4StepManager::~TG4StepManager()
 {
 /// Destructor
 
-  G4cout << "TG4StepManager::~TG4StepManager " << this << G4endl;
+  //G4cout << "TG4StepManager::~TG4StepManager " << this << G4endl;
   
   // Breaks
   //delete fTouchableHistory;
 
-  G4cout << "TG4StepManager::~TG4StepManager end " << this << G4endl;
+  //G4cout << "TG4StepManager::~TG4StepManager end " << this << G4endl;
 }
 
 //

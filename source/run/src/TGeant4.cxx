@@ -65,7 +65,8 @@ TGeant4::TGeant4(const char* name, const char* title,
 {
 /// Standard constructor
 
-  G4cout << "TGeant4::TGeant4 " << this << G4endl;
+  // add verbose level
+  //G4cout << "TGeant4::TGeant4 " << this << G4endl;
 
   G4bool isMaster = ! G4Threading::IsWorkerThread();
   if ( isMaster ) {
@@ -83,23 +84,23 @@ TGeant4::TGeant4(const char* name, const char* title,
   fStateManager = new TG4StateManager();
   fStateManager->SetNewState(kPreInit);
   // add verbose level
-  G4cout << "TG4StateManager has been created." << G4endl;
+  //G4cout << "TG4StateManager has been created." << G4endl;
   
   // create geometry manager - shared
   if ( isMaster ) {
     fGeometryManager = new TG4GeometryManager(fUserGeometry);
     // add verbose level
-    G4cout << "TG4GeometryManager has been created." << G4endl;
+    //G4cout << "TG4GeometryManager has been created." << G4endl;
 
     // create sensitive detectors manager - shared
     fSDManager = new TG4SDManager();
     // add verbose level
-    G4cout << "TG4SDManager has been created." << G4endl;
+    //G4cout << "TG4SDManager has been created." << G4endl;
 
     // create physics manager  
     fPhysicsManager = new TG4PhysicsManager();
     // add verbose level
-    G4cout << "TG4PhysicsManager has been created." << G4endl;
+    //G4cout << "TG4PhysicsManager has been created." << G4endl;
   }  
   else {
     fGeometryManager = fgMasterInstance->fGeometryManager;
@@ -110,12 +111,12 @@ TGeant4::TGeant4(const char* name, const char* title,
   // create step manager 
   fStepManager = new TG4StepManager(fUserGeometry);
   // add verbose level
-  G4cout << "TG4StepManager has been created." << G4endl;
+  //G4cout << "TG4StepManager has been created." << G4endl;
 
   // create run manager
   fRunManager = new TG4RunManager(configuration, argc, argv);
   // add verbose level
-  G4cout << "TG4RunManager has been created." << G4endl;
+  //G4cout << "TG4RunManager has been created." << G4endl;
 
 #ifdef G4VIS_USE
   if ( isMaster ) {
@@ -133,7 +134,8 @@ TGeant4::TGeant4(const char* name, const char* title,
   G4cout << "Debug mode is switched on." << G4endl;
 #endif    
   
-  G4cout << "TGeant4::TGeant4 done " << this << G4endl;
+  // add verbose level
+  //G4cout << "TGeant4::TGeant4 done " << this << G4endl;
 }
 
 //_____________________________________________________________________________
@@ -141,7 +143,7 @@ TGeant4::~TGeant4()
 {
 /// Destructor
 
-  G4cout << "TGeant4::~TGeant4 " << this << G4endl;
+  // G4cout << "TGeant4::~TGeant4 " << this << G4endl;
 
   G4bool isMaster = ! G4Threading::IsWorkerThread();
   if ( isMaster ) {
@@ -161,7 +163,7 @@ TGeant4::~TGeant4()
   delete fVisManager;
   delete fVisExecutive;
 #endif
-  G4cout << "TGeant4::~TGeant4 done " << this << G4endl;
+  //G4cout << "TGeant4::~TGeant4 done " << this << G4endl;
 }
 
 //
@@ -1267,8 +1269,8 @@ TGeant4* TGeant4::CloneForWorker() const
   TGeant4* geant4 
     = new TGeant4(GetName(), GetTitle(), fRunConfiguration);
 
-  G4cout << "TGeant4::CloneForWorker: " << geant4 << G4endl;
-  G4cout << "TVirtualMCApplication: " << TVirtualMCApplication::Instance() << G4endl;
+  //G4cout << "TGeant4::CloneForWorker: " << geant4 << G4endl;
+  //G4cout << "TVirtualMCApplication: " << TVirtualMCApplication::Instance() << G4endl;
 
   return geant4;
 }  

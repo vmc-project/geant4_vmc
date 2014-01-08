@@ -66,9 +66,9 @@ void TG4SDManager::Initialize()
 /// sets second indexes for materials (corresponding to G3 tracking 
 /// media) and clear remaing G3 tables.
 
-  G4cout << "TG4SDManager::Initialize" << G4endl;
+  //G4cout << "TG4SDManager::Initialize" << G4endl;
   fSDConstruction->Construct();
-  G4cout << "TG4SDManager::Initialize done" << G4endl;
+  //G4cout << "TG4SDManager::Initialize done" << G4endl;
 }  
   
 

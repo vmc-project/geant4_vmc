@@ -661,11 +661,9 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
     G4cout << "TG4GeometryManager::SetUserLimits" << G4endl;
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-  G4cout << "lvStore: " << lvStore << G4endl;
 
   for (G4int i=0; i<G4int(lvStore->size()); i++) {
     G4LogicalVolume* lv = (*lvStore)[i];
-    G4cout << fGeometryServices->GetMediumMap() << G4endl;
     TG4Medium* medium 
       = fGeometryServices->GetMediumMap()->GetMedium(lv, false);
       

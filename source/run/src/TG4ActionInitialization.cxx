@@ -62,12 +62,12 @@ void TG4ActionInitialization::BuildForMaster() const
 {
 /// Build user actions defined on master thread
 
-  G4cout << "TG4ActionInitialization::BuildForMaster " << this << G4endl;
+  //G4cout << "TG4ActionInitialization::BuildForMaster " << this << G4endl;
 
   G4UserRunAction* runAction = fRunConfiguration->CreateRunAction();
   if ( runAction ) SetUserAction(runAction);  
 
-  G4cout << "TG4ActionInitialization::BuildForMaster end " << G4endl;
+  //G4cout << "TG4ActionInitialization::BuildForMaster end " << G4endl;
 }
 
 //_____________________________________________________________________________
@@ -75,7 +75,7 @@ void TG4ActionInitialization::Build() const
 {
 /// Build user actions defined on worker threads
 
-  G4cout << "TG4ActionInitialization::Build "  << this << G4endl;
+ //G4cout << "TG4ActionInitialization::Build "  << this << G4endl;
 
   // create MC and MCApplication worker instances
   if ( G4Threading::IsWorkerThread() ) {
@@ -109,5 +109,5 @@ void TG4ActionInitialization::Build() const
     steppingAction->SetSpecialControls(fSpecialControls);
   }
 */
-  G4cout << "TG4ActionInitialization::Build done " << this << G4endl;
+  //G4cout << "TG4ActionInitialization::Build done " << this << G4endl;
 }

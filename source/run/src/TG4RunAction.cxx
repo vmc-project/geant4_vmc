@@ -53,7 +53,8 @@ TG4RunAction::TG4RunAction()
 {
 /// Default constructor
 
-  G4cout << "TG4RunAction::TG4RunAction " << this << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunAction::TG4RunAction " << this << G4endl;
 
   fTimer = new G4Timer;
 }
@@ -63,7 +64,8 @@ TG4RunAction::~TG4RunAction()
 {
 /// Destructor
 
-  G4cout << "TG4RunAction::~TG4RunAction " << this << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunAction::~TG4RunAction " << this << G4endl;
 
   delete fTimer;
 }
