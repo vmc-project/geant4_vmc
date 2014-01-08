@@ -84,6 +84,7 @@ class TG4RunManager : public TG4Verbose
 
     // methods
     void ConfigureRunManager();
+    void CloneRootNavigatorForWorker();
     void FilterARGV(const G4String& option);
     void CreateGeantUI();
     void CreateRootUI();

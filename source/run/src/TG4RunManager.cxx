@@ -106,6 +106,9 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
     // Get G4 worker run manager 
     fRunManager = G4RunManager::GetRunManager();
     
+    // Clone G4Root navigator if needed
+    CloneRootNavigatorForWorker();
+
     fRootUISession = fgMasterInstance->fRootUISession;
     fGeantUISession = fgMasterInstance->fGeantUISession;
   }     
@@ -149,7 +152,6 @@ void TG4RunManager::ConfigureRunManager()
     ->SetUserRegionConstruction(
         fRunConfiguration->CreateUserRegionConstruction());
     
-/*
   // Root navigator
   TG4RootNavMgr* rootNavMgr = 0;
   if ( userGeometry == "VMCtoRoot" || userGeometry == "Root" ) {
@@ -178,7 +180,6 @@ void TG4RunManager::ConfigureRunManager()
     rootNavMgr = TG4RootNavMgr::GetInstance(gGeoManager);
     G4cout << "TG4RootNavMgr has been created." << rootNavMgr << G4endl;
   }  
-*/
 
   // G4 run manager
 #ifdef G4MULTITHREADED  
@@ -199,11 +200,11 @@ void TG4RunManager::ConfigureRunManager()
       G4cout << "CreateDetectorConstruction done." << G4endl;
   }    
   else {
-    TG4Globals::Exception(
-      "TG4RunManager", "ConfigureRunManager",
-      "Root navigation is not yet supported.");
-    //rootNavMgr->Initialize(new TG4PostDetConstruction());
-    //rootNavMgr->ConnectToG4();  
+    //TG4Globals::Exception(
+    //  "TG4RunManager", "ConfigureRunManager",
+    //  "Root navigation is not yet supported.");
+    rootNavMgr->Initialize(new TG4PostDetConstruction());
+    rootNavMgr->ConnectToG4();  
   }  
     
   // Other mandatory classes
@@ -224,6 +225,32 @@ void TG4RunManager::ConfigureRunManager()
   
   if ( VerboseLevel() > 1 )
     G4cout << "TG4RunManager::ConfigureRunManager done " << this << G4endl;
+}
+
+//_____________________________________________________________________________
+void TG4RunManager::CloneRootNavigatorForWorker()
+{
+  // Clone Root navigator for worker thread
+  //
+
+  TString userGeometry = fRunConfiguration->GetUserGeometry();
+  if ( userGeometry != "VMCtoRoot" && userGeometry != "Root" )  return;
+
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::CloneRootNavigatorForWorker " << this << G4endl;
+
+  // Master Root navigator
+  TG4RootNavMgr* masterRootNavMgr = TG4RootNavMgr::GetMasterInstance();
+
+  // Create G4Root navigator on worker
+  TG4RootNavMgr* rootNavMgr = TG4RootNavMgr::GetInstance(*masterRootNavMgr);
+  G4cout << "TG4RootNavMgr has been created." << rootNavMgr << G4endl;
+
+  //rootNavMgr->Initialize(new TG4PostDetConstruction());
+  rootNavMgr->ConnectToG4();
+
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::CloneRootNavigatorForWorker done " << this << G4endl;
 }
 
 //_____________________________________________________________________________
