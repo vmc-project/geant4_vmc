@@ -28,11 +28,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
   g4libs();
 
   // Load this example library
-  gSystem->Load("libmtroot");
   gSystem->Load("libexample02");
-  
-  // Initialize Root threading
-  TThread::Initialize();
 
   // MC application
   Ex02MCApplication* appl 
