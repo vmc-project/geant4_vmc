@@ -376,6 +376,9 @@ Bool_t TG4ParticlesManager::SetDecayMode(Int_t pdg,
   //
   for (Int_t kz = 0; kz < 6; ++kz) {
 
+    // Do not fill empty channels
+    if ( bratio[kz] == 0.) break;
+
     // Fill names of daughters     
     G4int nofDaughters = 0;
     std::vector<G4String> daughtersNames(3);
