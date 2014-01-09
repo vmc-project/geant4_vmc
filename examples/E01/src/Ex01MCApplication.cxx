@@ -30,6 +30,7 @@
 #include <TGeoManager.h>
 #include <TGeoMatrix.h>
 #include <TGeoMaterial.h>
+#include <TThread.h>
 
 /// \cond CLASSIMP
 ClassImp(Ex01MCApplication)
@@ -91,7 +92,13 @@ void Ex01MCApplication::ConstructMaterials()
 
   // Create Root geometry manager 
   new TGeoManager("E01_geometry", "E01 VMC example geometry");
-   
+
+  // Pass information about multi-threading to TGeoManager
+  if ( TThread::IsInitialized() ) {
+    cout << "TGeoManager will be used in multi-threading mode" << endl;
+    gGeoManager->SetMultiThread(kTRUE);
+  }
+
   Double_t a;        // Mass of a mole in g/mole   
   Double_t z;        // Atomic number
   Double_t density;  // Material density in g/cm3
