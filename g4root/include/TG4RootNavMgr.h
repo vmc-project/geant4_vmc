@@ -38,6 +38,7 @@ protected:
    TGeoManager          *fGeometry;   ///< Pointer to TGeo geometry
    TG4RootNavigator     *fNavigator;  ///< G4 navigator working with TGeo
    TG4RootDetectorConstruction *fDetConstruction; ///< G4 geometry built based on ROOT one
+   TVirtualUserPostDetConstruction* fPostDetDetConstruction; ///< User defined initialization
    Bool_t                fConnected;  ///< Flags connection to G4
 
    TG4RootNavMgr();

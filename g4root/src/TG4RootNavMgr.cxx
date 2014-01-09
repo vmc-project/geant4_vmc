@@ -51,8 +51,13 @@ TG4RootNavMgr::TG4RootNavMgr(TGeoManager *geom,
                fConnected(kFALSE)
 {
 /// Default ctor.
-   fDetConstruction = new TG4RootDetectorConstruction(geom);
-   SetNavigator(new TG4RootNavigator);
+   if ( ! detConstruction ) {
+     fDetConstruction = new TG4RootDetectorConstruction(geom);
+     SetNavigator(new TG4RootNavigator());
+   }
+   else {
+     SetNavigator(new TG4RootNavigator(detConstruction));
+   }  
 }
 
 //______________________________________________________________________________
