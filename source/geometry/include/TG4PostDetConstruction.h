@@ -34,6 +34,7 @@ class TG4PostDetConstruction : public TVirtualUserPostDetConstruction
 
     // methods
     virtual void Initialize(TG4RootDetectorConstruction *dc);
+    virtual void InitializeSDandField();
 
   private:    
     /// Not implemented
