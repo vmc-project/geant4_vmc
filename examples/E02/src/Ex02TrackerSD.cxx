@@ -88,6 +88,8 @@ void Ex02TrackerSD::Initialize()
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
   
+  cout << "Ex02TrackerSD::Initialize " << this << endl;
+
   static __thread Bool_t registered = false;
   if ( ! registered ) {
     cout << "... creating TClonesArray" << endl;
@@ -145,7 +147,7 @@ void Ex02TrackerSD::EndOfEvent()
 /// Print hits collection (if verbose)
 /// and delete hits afterwards.
 
-  //if (fVerboseLevel>0)  Print();
+  if (fVerboseLevel>0)  Print();
     
   // Reset hits collection
   fTrackerCollection->Clear();  
