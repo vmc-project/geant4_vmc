@@ -22,6 +22,8 @@
 #include "TG4StepStatus.h"
 
 #include <G4Step.hh>
+#include <G4TransportationManager.hh>
+#include <G4SteppingManager.hh>
 #include <G4ThreeVector.hh>
 #include <globals.hh>
 
@@ -204,6 +206,14 @@ inline void TG4StepManager::SetStep(G4Track* track, TG4StepStatus status) {
 inline void TG4StepManager::SetSteppingManager(G4SteppingManager* manager) { 
   /// Set G4 stepping manger. 
   fSteppingManager = manager; 
+
+  /// Set navigator !!!
+  G4cout << "SetNavigator:"
+         << G4TransportationManager::GetTransportationManager()
+		   ->GetNavigatorForTracking() << G4endl;
+  fSteppingManager
+    ->SetNavigator(G4TransportationManager::GetTransportationManager()
+		   ->GetNavigatorForTracking());
 }
 
 inline G4Track* TG4StepManager::GetTrack() const { 
