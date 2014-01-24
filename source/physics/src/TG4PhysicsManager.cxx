@@ -389,6 +389,8 @@ void TG4PhysicsManager::SetSpecialControlsActivation()
   for ( G4int i=0; i<G4int(particleTable->size()); ++i) {
 
     G4ParticleDefinition* particle = particleTable->GetParticle(i);
+    if ( ! particle ) continue;
+
     G4ProcessManager* processManager = particle->GetProcessManager(); 
       
     G4ProcessVector* processVector = processManager->GetProcessList();
@@ -437,6 +439,8 @@ void TG4PhysicsManager::SetSpecialCutsActivation()
   for ( G4int i=0; i<G4int(particleTable->size()); ++i) {
 
     G4ParticleDefinition* particle = particleTable->GetParticle(i);
+    if ( ! particle ) continue;
+
     TG4G3ParticleWSP particleWSP 
       = g3PhysicsManager->GetG3ParticleWSP(particle);
     G4String name =
@@ -448,7 +452,7 @@ void TG4PhysicsManager::SetSpecialCutsActivation()
       // or the special cut is set by TG4Limits
   
       G4ProcessManager* processManager = particle->GetProcessManager(); 
-      
+
       // get the special cut process (if it was instantiated) 
       G4String processName = "specialCutFor" + name;
       G4VProcess* process = FindProcess(processName);
