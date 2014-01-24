@@ -27,7 +27,6 @@
 #include <TVirtualMC.h>
 #include <TMCRootManager.h>
 #include <TMCRootManagerMT.h>
-#include <TMCAutoLock.h>
 #include <TPDGCode.h>
 #include <TGeoManager.h>
 #include <TVirtualGeoTrack.h>
@@ -36,10 +35,6 @@
 /// \cond CLASSIMP
 ClassImp(Ex02MCApplication)
 /// \endcond
-
-namespace {
-  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
-}
 
 //_____________________________________________________________________________
 Ex02MCApplication::Ex02MCApplication(const char *name, const char *title) 
@@ -85,18 +80,14 @@ Ex02MCApplication::~Ex02MCApplication()
 {
 /// Destructor  
   
-  // Root manager locks on his own 
-  delete fRootManager;
-
-  TMCAutoLock lk(&deleteMutex);
   printf("Ex02MCApplication::~Ex02MCApplication %p \n", this);  
 
+  delete fRootManager;
   delete fStack;
   delete fMagField;
   delete gMC;
 
   printf("Done Ex02MCApplication::~Ex02MCApplication %p \n", this);  
-  lk.unlock();
 }
 
 //

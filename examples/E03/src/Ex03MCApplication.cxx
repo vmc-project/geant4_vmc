@@ -24,7 +24,6 @@
 
 #include <TMCRootManager.h>
 #include <TMCRootManagerMT.h>
-#include <TMCAutoLock.h>
 
 #include <TROOT.h>
 #include <TInterpreter.h>
@@ -38,9 +37,9 @@
 #include <TVirtualGeoTrack.h>
 #include <TParticle.h>
 
-namespace {
-  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
-}
+//namespace {
+//  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
+//}
 
 /// \cond CLASSIMP
 ClassImp(Ex03MCApplication)
@@ -138,12 +137,9 @@ Ex03MCApplication::~Ex03MCApplication()
 {
 /// Destructor  
   
-  // Root manager locks on his own
-  delete fRootManager;
-
-  TMCAutoLock lk(&deleteMutex);
   printf("Ex03MCApplication::~Ex03MCApplication %p \n", this);
 
+  delete fRootManager;
   delete fStack;
   if ( fIsMaster) delete fDetConstruction;
   delete fCalorimeterSD;
@@ -152,7 +148,6 @@ Ex03MCApplication::~Ex03MCApplication()
   delete gMC;
 
   printf("Done Ex03MCApplication::~Ex03MCApplication %p \n", this);
-  lk.unlock();
 }
 
 //

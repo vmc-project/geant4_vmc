@@ -32,7 +32,6 @@
 
 #include <TMCRootManager.h>
 #include <TMCRootManagerMT.h>
-#include <TMCAutoLock.h>
 
 #include "Ex03MCStack.h"
 #include "A01MCApplication.h"
@@ -43,10 +42,6 @@
 #include "A01EmCalorimeterSD.h"
 #include "A01HadCalorimeterSD.h"
 #include "A01HodoscopeSD.h"
-
-namespace {
-  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
-}
 
 /// \cond CLASSIMP
 ClassImp(A01MCApplication)
@@ -165,12 +160,9 @@ A01MCApplication::~A01MCApplication()
 {
 /// Destructor  
   
-  // Root manager locks on his own
-  delete fRootManager;
-
-  TMCAutoLock lk(&deleteMutex);
   printf("A01MCApplication::~A01MCApplication %p \n", this);
 
+  delete fRootManager;
   delete fStack;
   if ( fIsMaster) delete fDetConstruction;
   delete fDriftChamberSD1;
@@ -184,7 +176,6 @@ A01MCApplication::~A01MCApplication()
   delete gMC;
 
   printf("Done A01MCApplication::~A01MCApplication %p \n", this);
-  lk.unlock();
 }
 
 //

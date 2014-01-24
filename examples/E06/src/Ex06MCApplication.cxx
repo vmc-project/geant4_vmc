@@ -26,17 +26,11 @@
 #include <TVirtualGeoTrack.h>
 #include <TCanvas.h>
 
-#include <TMCAutoLock.h>
-
 #include "Ex06MCApplication.h"
 #include "Ex03MCStack.h"
 #include "Ex06DetectorConstruction.h"
 #include "Ex06DetectorConstructionOld.h"
 #include "Ex06PrimaryGenerator.h"
-
-namespace {
-  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
-}
 
 /// \cond CLASSIMP
 ClassImp(Ex06MCApplication)
@@ -122,7 +116,6 @@ Ex06MCApplication::~Ex06MCApplication()
 /// Destructor  
   
 
-  TMCAutoLock lk(&deleteMutex);
   printf("Ex06MCApplication::~Ex06MCApplication %p \n", this);
 
   delete fStack;
@@ -132,7 +125,6 @@ Ex06MCApplication::~Ex06MCApplication()
   delete gMC;
 
   printf("Done Ex06MCApplication::~Ex06MCApplication %p \n", this);
-  lk.unlock();
 }
 
 //
