@@ -16,12 +16,10 @@
 
 #include "TG4Verbose.h"
 
-#include <math.h>
-
 // static data members
-        const G4String             TG4Verbose::fgkDirectoryName = "/mcVerbose/";
-G4ThreadLocal G4int                TG4Verbose::fgCounter = 0;
-G4ThreadLocal TG4VerboseMessenger* TG4Verbose::fgMessenger = 0;
+const G4String       TG4Verbose::fgkDirectoryName = "/mcVerbose/";
+G4int                TG4Verbose::fgCounter = 0;
+TG4VerboseMessenger* TG4Verbose::fgMessenger = 0;
 
 //_____________________________________________________________________________
 TG4Verbose::TG4Verbose(const G4String& cmdName)
@@ -60,12 +58,11 @@ TG4Verbose::~TG4Verbose()
   
   fgMessenger->RemoveCommand(this, fCommand);
      // fCommand is deleted by fgMessenger
-  
+
   if (fgCounter==0) {
     delete fgMessenger;
     fgMessenger = 0;
   }  
-  
 }
 
 //

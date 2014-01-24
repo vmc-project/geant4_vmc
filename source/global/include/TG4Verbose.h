@@ -55,8 +55,8 @@ class TG4Verbose : public TG4VVerbose
 
     // static data members
     static const G4String        fgkDirectoryName;///< directory name
-    static G4ThreadLocal G4int                 fgCounter;       ///< object counter
-    static G4ThreadLocal TG4VerboseMessenger*  fgMessenger; ///< messenger
+    static G4int                 fgCounter;       ///< object counter
+    static TG4VerboseMessenger*  fgMessenger;     ///< messenger
     
     // data members
     G4UIcommand*                 fCommand;        ///< verbose command
