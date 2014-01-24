@@ -109,6 +109,7 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
     // Clone G4Root navigator if needed
     CloneRootNavigatorForWorker();
 
+    fRegionsManager = fgMasterInstance->fRegionsManager;
     fRootUISession = fgMasterInstance->fRootUISession;
     fGeantUISession = fgMasterInstance->fGeantUISession;
   }     
@@ -123,13 +124,17 @@ TG4RunManager::~TG4RunManager()
 {
 /// Destructor
 
-  delete fRunConfiguration;
-  delete fRegionsManager;
+  G4bool isMaster = ! G4Threading::IsWorkerThread();
+
+  if ( isMaster ) {
+    delete fRunConfiguration;
+    delete fRegionsManager;
 #ifdef G4UI_USE
-  delete fGeantUISession;
+    delete fGeantUISession;
 #endif
-  delete fRunManager;
-  if (fRootUIOwner) delete fRootUISession;
+    delete fRunManager;
+    if (fRootUIOwner) delete fRootUISession;
+  }
 }
 
 //
@@ -386,15 +391,15 @@ void TG4RunManager::LateInitialize()
     TG4GeometryManager::Instance()
       ->SetUserLimits(*TG4G3PhysicsManager::Instance()->GetCutVector(),
                       *TG4G3PhysicsManager::Instance()->GetControlVector());
-  }                    
 
   // pass info if cut on e+e- pair is activated to stepping action  
   // TO DO LATER - Stepping Action NOT AVAILABLE                  
   //((TG4SteppingAction*)fRunManager->GetUserSteppingAction())
   //  ->SetIsPairCut((*TG4G3PhysicsManager::Instance()->GetIsCutVector())[kEplus]);                   
 
-  // convert tracking cuts in range cuts per regions
-  if ( fRunConfiguration->IsSpecialCuts() ) fRegionsManager->DefineRegions();
+    // convert tracking cuts in range cuts per regions
+    if ( fRunConfiguration->IsSpecialCuts() ) fRegionsManager->DefineRegions();
+  }
 
   // activate/inactivate physics processes
   TG4PhysicsManager::Instance()->SetProcessActivation();

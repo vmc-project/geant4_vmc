@@ -71,9 +71,13 @@ void TG4WorkerInitialization::WorkerStop() const
 // This method is called once at the end of simulation job. 
 // Implement here a clean up action.
 
-  //G4cout << "TG4WorkerInitialization::WorkerStop() " << G4endl;
+  //G4cout << "TG4WorkerInitialization::WorkerStop() " << this << G4endl;
 
   TVirtualMCApplication::Instance()->FinishWorkerRun();
+
+  //G4cout << "Go to delete MCApplication " << TVirtualMCApplication::Instance() << G4endl;
+
+  delete TVirtualMCApplication::Instance();
 
   //G4cout << "TG4WorkerInitialization::WorkerStop() end " << G4endl;
 }

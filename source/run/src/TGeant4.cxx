@@ -143,7 +143,7 @@ TGeant4::~TGeant4()
 {
 /// Destructor
 
-  // G4cout << "TGeant4::~TGeant4 " << this << G4endl;
+  //G4cout << "TGeant4::~TGeant4 " << this << G4endl;
 
   G4bool isMaster = ! G4Threading::IsWorkerThread();
   if ( isMaster ) {
@@ -160,8 +160,10 @@ TGeant4::~TGeant4()
   }  
   delete fStepManager;
 #ifdef G4VIS_USE
-  delete fVisManager;
-  delete fVisExecutive;
+  if ( isMaster ) {
+    delete fVisManager;
+    delete fVisExecutive;
+  }
 #endif
   //G4cout << "TGeant4::~TGeant4 done " << this << G4endl;
 }
