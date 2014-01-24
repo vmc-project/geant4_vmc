@@ -24,25 +24,22 @@
 #include "TG4SpecialControlsV2.h"
 #include "TGeant4.h"
 
-#include <G4Threading.hh>
+#include <G4AutoDelete.hh>
 
 #include <TROOT.h>
 #include <TInterpreter.h>
 #include <TVirtualMCApplication.h>
 
+G4ThreadLocal 
+TG4SpecialControlsV2* TG4ActionInitialization::fgSpecialControls = 0;
+
 //_____________________________________________________________________________
 TG4ActionInitialization::TG4ActionInitialization(
                                   TG4RunConfiguration* runConfiguration)
   : G4VUserActionInitialization(),
-    fRunConfiguration(runConfiguration),
-    fSpecialControls(0)
+    fRunConfiguration(runConfiguration)
 {
 /// Standard constructor
-
-  if ( fRunConfiguration->IsSpecialControls() ) {
-    // add test if both tracking action and stepping action
-    fSpecialControls = new TG4SpecialControlsV2();
-  }  
 }
 
 //_____________________________________________________________________________
@@ -50,7 +47,8 @@ TG4ActionInitialization::~TG4ActionInitialization()
 {
 /// Destructor
 
-  delete fSpecialControls;
+  //delete fgSpecialControls;
+     // deleted via G4AutoDelete
 }
 
 //
@@ -103,11 +101,13 @@ void TG4ActionInitialization::Build() const
 
   // Special controls action
   //
-/*
-  if ( fSpecialControls ) {
-    trackingAction->SetSpecialControls(fSpecialControls);
-    steppingAction->SetSpecialControls(fSpecialControls);
+  if (  fRunConfiguration->IsSpecialControls() ) {
+    G4cout << "### TG4SpecialControlsV2 constructed" << G4endl;
+    fgSpecialControls = new TG4SpecialControlsV2();
+    G4AutoDelete::Register(fgSpecialControls);
+ 
+    trackingAction->SetSpecialControls(fgSpecialControls);
+    steppingAction->SetSpecialControls(fgSpecialControls);
   }
-*/
   //G4cout << "TG4ActionInitialization::Build done " << this << G4endl;
 }
