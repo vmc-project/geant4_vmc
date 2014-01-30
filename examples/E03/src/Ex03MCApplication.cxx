@@ -58,6 +58,7 @@ Ex03MCApplication::Ex03MCApplication(const char *name, const char *title)
     fPrimaryGenerator(0),
     fMagField(0),
     fOldGeometry(kFALSE),
+    fIsControls(kFALSE),
     fIsMaster(kTRUE)
 {
 /// Standard constructor
@@ -127,6 +128,7 @@ Ex03MCApplication::Ex03MCApplication()
     fPrimaryGenerator(0),
     fMagField(0),
     fOldGeometry(kFALSE),
+    fIsControls(kFALSE),
     fIsMaster(kTRUE)
 {    
 /// Default constructor
@@ -295,6 +297,10 @@ void Ex03MCApplication::InitGeometry()
   fVerbose.InitGeometry();
   
   fDetConstruction->SetCuts();
+
+  if ( fIsControls )
+    fDetConstruction->SetControls();
+
   fCalorimeterSD->Initialize();
 }
 

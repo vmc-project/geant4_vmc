@@ -48,6 +48,7 @@ class Ex03DetectorConstruction : public TObject
      void ConstructMaterials();
      void ConstructGeometry();
      void SetCuts();
+     void SetControls();
      void PrintCalorParameters(); 
      //void UpdateGeometry();
      
