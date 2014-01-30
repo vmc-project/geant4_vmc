@@ -37,6 +37,9 @@ void run_g4(const TString& configMacro = "g4Config.C")
   // Initialize MC
   appl->InitMC(configMacro);
 
+  // Enter in Geant4 interactive session
+  //((TGeant4*)gMC)->StartGeantUI();
+
   // Run MC
   appl->RunMC(1);
   

@@ -43,6 +43,9 @@ void run_g4(const TString& configMacro = "g4Config.C")
   gROOT->LoadMacro("set_vis.C");
   set_vis();
 
+  // Enter in Geant4 interactive session
+  //((TGeant4*)gMC)->StartGeantUI();
+
   TStopwatch timer;
   timer.Start();  
   appl->RunMC(5);
