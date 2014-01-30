@@ -99,8 +99,8 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
     // create and configure G4 run manager
     ConfigureRunManager();
     
-    // create geant4 UI
-    CreateUIs();
+    // get/create Root UI
+    CreateRootUI();
   }  
   else {
     // Get G4 worker run manager 
@@ -268,36 +268,11 @@ void TG4RunManager::CloneRootNavigatorForWorker()
 }
 
 //_____________________________________________________________________________
-void TG4RunManager::CreateGeantUI()
-{
-/// Create interactive Geant4.
-
-  if ( fGeantUISession ) return;
-
-#ifdef G4UI_USE
-  // create session if it does not exist  
-  fGeantUISession = new G4UIExecutive(fARGC, fARGV);
-#endif  
-}
-
-//_____________________________________________________________________________
 void TG4RunManager::CreateRootUI()
 {
-/// Create interactive Root.
+/// Get/Create Root interactive session
 
-  if ( fRootUISession ) return; 
-
-  // create session if it does not exist  
-  fRootUISession = new TRint("rootSession", &fARGC, fARGV, 0, 0);
-  fRootUIOwner = true;
-}
-
-//_____________________________________________________________________________
-void TG4RunManager::CreateUIs()
-{
-/// Create Root & Geant4 interactive sessions
-
-  // set primary UI
+  // get Root UI session if it exists
   fRootUISession = gROOT->GetApplication();
   if (fRootUISession) {
     fARGC = fRootUISession->Argc();
@@ -307,13 +282,11 @@ void TG4RunManager::CreateUIs()
   // filter out "-splash" from argument list
   FilterARGV("-splash");
 
-  // create geant4 UI
-  CreateGeantUI();
-      // must be created before TG4VisManager::Initialize()
-      // (that is invoked in TGeant4 constructor)
-
-  // create root UI
-  CreateRootUI();
+  // create root UI if it does not exist
+  if ( ! fRootUISession ) {
+    fRootUISession = new TRint("rootSession", &fARGC, fARGV, 0, 0);
+    fRootUIOwner = true;
+  }
 }
 
 //_____________________________________________________________________________
@@ -443,6 +416,20 @@ Bool_t TG4RunManager::ProcessRun(G4int nofEvents)
 }
     
 //_____________________________________________________________________________
+void TG4RunManager::CreateGeantUI()
+{
+/// Create interactive Geant4.
+
+  if ( fGeantUISession ) return;
+
+#ifdef G4UI_USE
+  // create session if it does not exist
+  // G4cout << fARGC << "  "  << fARGV << G4endl;
+  fGeantUISession = new G4UIExecutive(fARGC, fARGV);
+#endif
+}
+
+//_____________________________________________________________________________
 void TG4RunManager::StartGeantUI()
 { 
 /// Start interactive/batch Geant4.
@@ -452,13 +439,13 @@ void TG4RunManager::StartGeantUI()
   if ( fGeantUISession ) {  
 #ifdef G4UI_USE
     // interactive session
-    G4cout << "Welcome back in Geant4" << G4endl;
+    G4cout << "Welcome (back) in Geant4" << G4endl;
     fGeantUISession->GetSession()->SessionStart();
-    G4cout << "Welcome back in Root" << G4endl;  
+    G4cout << "Welcome (back) in Root" << G4endl;
 #endif    
   }
   else {
-    G4cout << "Geant4 UI not available" << G4endl;
+    G4cout << "Geant4 UI not available." << G4endl;
   }
 }
 
@@ -469,9 +456,9 @@ void TG4RunManager::StartRootUI()
 
   if (!fRootUISession) CreateRootUI();
   if (fRootUISession) { 
-    G4cout << "Welcome back in Root" << G4endl;
+    G4cout << "Welcome (back) in Root" << G4endl;
     fRootUISession->Run(kTRUE);
-    G4cout << "Welcome back in Geant4" << G4endl;  
+    G4cout << "Welcome (back) in Geant4" << G4endl;
   }
 }
  

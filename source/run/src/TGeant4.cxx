@@ -1156,6 +1156,8 @@ void TGeant4::Init()
   fVisExecutive->SetVerboseLevel(0);
   fVisExecutive->Initialize();
 #endif
+
+  fRunManager->CreateGeantUI();
 }  
   
 //_____________________________________________________________________________
@@ -1175,7 +1177,7 @@ void TGeant4::BuildPhysics()
 /// Finish initialization of Geant4 after the G4 run manager initialization
 /// is finished. 
 
-  //fRunManager->LateInitialize();
+  fRunManager->LateInitialize();
 }  
 
 //_____________________________________________________________________________
@@ -1192,7 +1194,6 @@ Bool_t TGeant4::ProcessRun(Int_t nofEvents)
 {
 /// Process Geant4 run.
 
-  fRunManager->LateInitialize();
   return fRunManager->ProcessRun(nofEvents);
 }  
 
