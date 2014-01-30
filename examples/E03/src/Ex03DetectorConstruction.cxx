@@ -486,6 +486,23 @@ void Ex03DetectorConstruction::SetCuts()
 }    
 
 //_____________________________________________________________________________
+void Ex03DetectorConstruction::SetControls()
+{
+/// This function demonstrate how to inactivate physics processes via VMC controls.
+/// Here gamma processes are inactivated in Lead medium.
+/// Note that while in Geant3 this mechanism is used to speed-up simulation,
+/// this may cause slow down in Geant4 simulation where implementation of this
+/// mechanism is quite tricky.
+
+  Int_t mediumId = gMC->MediumId("Lead");
+  if ( mediumId ) {
+    gMC->Gstpar(mediumId, "COMP", 0);
+    gMC->Gstpar(mediumId, "PAIR", 0);
+    gMC->Gstpar(mediumId, "PHOT", 0);
+  }
+}
+
+//_____________________________________________________________________________
 void Ex03DetectorConstruction::PrintCalorParameters()
 {
 /// Print calorimeter parameters

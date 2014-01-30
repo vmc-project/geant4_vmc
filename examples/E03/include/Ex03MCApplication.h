@@ -69,6 +69,7 @@ class Ex03MCApplication : public TVirtualMCApplication
     // set methods
     void  SetPrintModulo(Int_t value);
     void  SetVerboseLevel(Int_t verboseLevel);
+    void  SetControls(Bool_t isConstrols);
     
     // get methods
     Ex03DetectorConstruction* GetDetectorConstruction() const;
@@ -93,6 +94,7 @@ class Ex03MCApplication : public TVirtualMCApplication
     TGeoUniformMagField*      fMagField;        ///< Magnetic field
     Ex02RootManager           fRootManager;     ///< Root manager 
     Bool_t                    fOldGeometry;     ///< Option for geometry definition
+    Bool_t                    fIsControls;      ///< Option to activate special controls
 
   ClassDef(Ex03MCApplication,1)  //Interface to MonteCarlo application
 };
@@ -134,6 +136,11 @@ inline Ex03PrimaryGenerator* Ex03MCApplication::GetPrimaryGenerator() const
 /// \param oldGeometry  If true, geometry definition via VMC functions
 inline void Ex03MCApplication::SetOldGeometry(Bool_t oldGeometry)
 { fOldGeometry = oldGeometry; }
+
+/// Switch on/off special process controls
+/// \param isControls  If true, special process controls setting is activated
+inline void Ex03MCApplication::SetControls(Bool_t isControls)
+{ fIsControls = isControls; }
 
 #endif //EX03_MC_APPLICATION_H
 

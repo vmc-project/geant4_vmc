@@ -51,7 +51,8 @@ Ex03MCApplication::Ex03MCApplication(const char *name, const char *title,
     fPrimaryGenerator(0),
     fMagField(0),
     fRootManager("example03", fileMode),
-    fOldGeometry(kFALSE)
+    fOldGeometry(kFALSE),
+    fIsControls(kFALSE)
 {
 /// Standard constructor
 /// \param name   The MC application name 
@@ -85,7 +86,8 @@ Ex03MCApplication::Ex03MCApplication()
     fPrimaryGenerator(0),
     fMagField(0),
     fRootManager(),
-    fOldGeometry(kFALSE)
+    fOldGeometry(kFALSE),
+    fIsControls(kFALSE)
 {    
 /// Default constructor
 }
@@ -203,6 +205,10 @@ void Ex03MCApplication::InitGeometry()
   fVerbose.InitGeometry();
   
   fDetConstruction->SetCuts();
+
+  if ( fIsControls )
+    fDetConstruction->SetControls();
+
   fCalorimeterSD->Initialize();
 }
 
