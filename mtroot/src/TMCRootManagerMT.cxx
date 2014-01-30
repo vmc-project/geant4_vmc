@@ -230,15 +230,16 @@ void  TMCRootManagerMT::Fill()
 {
 /// Fill the Root tree.
 
-/*
+  // Fill with lack untill first call on all threads
   if ( fgIsFillLock ) {
     FillWithTmpLock();
   }  
   else {
     FillWithoutLock();
   }
-*/
-   FillWithLock(); 
+
+  // Fill with lock during the whole run
+  // FillWithLock();
 }  
 
 //_____________________________________________________________________________
