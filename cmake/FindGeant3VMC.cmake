@@ -42,7 +42,7 @@ if (NOT Geant3VMC_ARCH)
    endif()
 endif()      
 
-find_path(Geant3VMC_LIBRARY_DIR NAMES libgeant321.so libgeant321.dylib PATHS
+find_path(Geant3VMC_LIBRARY_DIR NAMES libgeant321.so libgeant321.a libgeant321.dylib PATHS
   ${Geant3VMC_LIB_DIR}
   ${Geant3VMC_DIR}/lib/tgt_${Geant3VMC_ARCH}
 )

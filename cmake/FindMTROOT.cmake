@@ -41,7 +41,7 @@ if (NOT MTROOT_ARCH)
    endif()
 endif()      
 
-find_path(MTROOT_LIBRARY_DIR NAMES libmtroot.so libmtroot.dylib PATHS
+find_path(MTROOT_LIBRARY_DIR NAMES libmtroot.so libmtroot.a libmtroot.dylib PATHS
   ${MTROOT_LIB_DIR}
   ${MTROOT_DIR}/lib/tgt_${MTROOT_ARCH}
   ${Geant4VMC_DIR}/lib/tgt_${MTROOT_ARCH}

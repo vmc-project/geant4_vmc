@@ -25,7 +25,7 @@
 
 message(STATUS "Looking for VGM ...")
 
-find_path(VGM_LIBRARY_DIR NAMES libBaseVGM.so libBaseVGM.dylib PATHS
+find_path(VGM_LIBRARY_DIR NAMES libBaseVGM.so libBaseVGM.a libBaseVGM.dylib PATHS
   ${VGM_LIB_DIR}
   ${VGM_DIR}/lib/${VGM_SYSTEM}
   $ENV{VGM_INSTALL}/lib/$ENV{VGM_SYSTEM}

@@ -40,7 +40,7 @@ if (NOT Geant4VMC_ARCH)
    endif()
 endif()      
 
-find_path(Geant4VMC_LIBRARY_DIR NAMES libgeant4vmc.so libgeant4vmc.dylib PATHS
+find_path(Geant4VMC_LIBRARY_DIR NAMES libgeant4vmc.so libgeant4vmc.a libgeant4vmc.dylib PATHS
   ${Geant4VMC_LIB_DIR}
   ${Geant4VMC_DIR}/lib/tgt_${Geant4VMC_ARCH}
 )

@@ -41,7 +41,7 @@ if (NOT G4ROOT_ARCH)
    endif()
 endif()      
 
-find_path(G4ROOT_LIBRARY_DIR NAMES libg4root.so libg4root.dylib PATHS
+find_path(G4ROOT_LIBRARY_DIR NAMES libg4root.so libg4root.a libg4root.dylib PATHS
   ${G4ROOT_LIB_DIR}
   ${G4ROOT_DIR}/lib/tgt_${G4ROOT_ARCH}
   ${Geant4VMC_DIR}/lib/tgt_${G4ROOT_ARCH}
