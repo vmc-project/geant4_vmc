@@ -9,6 +9,8 @@
 
 # Adopted from Virtual Geometry Model and ROOT (ROOT_GENERATE_DICTIONARY)
 # (http://ivana.home.cern.ch/ivana/VGM.html)
+# I. Hrivnacova, 31/01/2014
+#
 # The CMake build for Virtual Geometry Model is a result of a merge 
 # of the CMake configuration files kindly provided 
 # by Florian Uhlig, GSI and Pere Mato, CERN.

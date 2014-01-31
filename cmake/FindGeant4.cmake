@@ -9,6 +9,8 @@
 
 # Adopted from Virtual Geometry Model.
 # (http://ivana.home.cern.ch/ivana/VGM.html)
+# I. Hrivnacova, 31/01/2014
+#
 # The CMake build for Virtual Geometry Model is a result of a merge 
 # of the CMake configuration files kindly provided 
 # by Florian Uhlig, GSI and Pere Mato, CERN.
@@ -31,6 +33,8 @@ message(STATUS "Looking for GEANT4 ...")
 if(EXISTS ${Geant4_DIR}/Geant4Config.cmake)
   include(${Geant4_DIR}/Geant4Config.cmake)
   set(GEANT4_INCLUDE_DIR ${Geant4_INCLUDE_DIRS})
+  # This is a temporary fix to find path to libG3toG4
+  set(GEANT4_LIBRARY_DIR ${Geant4_DIR}/..)
   message(STATUS "Found Geant4 CMake configuration in ${Geant4_DIR}")
   return()
 endif()
