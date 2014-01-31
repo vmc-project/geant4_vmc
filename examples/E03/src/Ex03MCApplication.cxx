@@ -139,7 +139,7 @@ Ex03MCApplication::~Ex03MCApplication()
 {
 /// Destructor  
   
-  printf("Ex03MCApplication::~Ex03MCApplication %p \n", this);
+  cout << "Ex03MCApplication::~Ex03MCApplication " << this << endl;
 
   delete fRootManager;
   delete fStack;
@@ -149,7 +149,7 @@ Ex03MCApplication::~Ex03MCApplication()
   delete fMagField;
   delete gMC;
 
-  printf("Done Ex03MCApplication::~Ex03MCApplication %p \n", this);
+  cout << "Done Ex03MCApplication::~Ex03MCApplication " << this << endl;
 }
 
 //
@@ -180,8 +180,10 @@ void Ex03MCApplication::InitMC(const char* setup)
 
   fVerbose.InitMC();
 
-  gROOT->LoadMacro(setup);
-  gInterpreter->ProcessLine("Config()");
+  if ( TString(setup) != "" ) {
+    gROOT->LoadMacro(setup);
+    gInterpreter->ProcessLine("Config()");
+  }  
  
   // Create Root manager 
   if ( ! gMC->IsMT() ) {
