@@ -140,8 +140,10 @@ void Ex06MCApplication::InitMC(const char* setup)
 
   fVerbose.InitMC();
 
-  gROOT->LoadMacro(setup);
-  gInterpreter->ProcessLine("Config()");
+  if ( TString(setup) != "" ) {
+    gROOT->LoadMacro(setup);
+    gInterpreter->ProcessLine("Config()");
+  }  
  
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);
