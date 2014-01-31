@@ -160,7 +160,7 @@ A01MCApplication::~A01MCApplication()
 {
 /// Destructor  
   
-  printf("A01MCApplication::~A01MCApplication %p \n", this);
+  cout << "A01MCApplication::~A01MCApplication " << this << endl;
 
   delete fRootManager;
   delete fStack;
@@ -175,7 +175,7 @@ A01MCApplication::~A01MCApplication()
   delete fMagField;
   delete gMC;
 
-  printf("Done A01MCApplication::~A01MCApplication %p \n", this);
+  cout << "Done A01MCApplication::~A01MCApplication " << this << endl;
 }
 
 //
@@ -206,8 +206,10 @@ void A01MCApplication::InitMC(const char* setup)
 
   fVerbose.InitMC();
 
-  gROOT->LoadMacro(setup);
-  gInterpreter->ProcessLine("Config()");
+  if ( TString(setup) != "" ) {
+    gROOT->LoadMacro(setup);
+    gInterpreter->ProcessLine("Config()");
+  }  
  
   // Create Root manager
   if ( ! gMC->IsMT() ) {
