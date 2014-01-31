@@ -116,7 +116,7 @@ Ex06MCApplication::~Ex06MCApplication()
 /// Destructor  
   
 
-  printf("Ex06MCApplication::~Ex06MCApplication %p \n", this);
+  cout << "Ex06MCApplication::~Ex06MCApplication " << this << endl;
 
   delete fStack;
   delete fMagField;
@@ -124,7 +124,7 @@ Ex06MCApplication::~Ex06MCApplication()
   delete fPrimaryGenerator;
   delete gMC;
 
-  printf("Done Ex06MCApplication::~Ex06MCApplication %p \n", this);
+  cout << "Done Ex06MCApplication::~Ex06MCApplication " << this << endl;
 }
 
 //
