@@ -19,10 +19,13 @@ MAKEFLAGS= --no-print-directory
 
 SUBDIRS  = g4root mtroot source examples
 
-.PHONY: default
+.PHONY: default static
 
 default:
 	@for dir in $(SUBDIRS); do (cd $$dir && echo "Making $$dir ..."  && $(MAKE)); done;:
+
+static:
+	@for dir in $(SUBDIRS); do (cd $$dir && echo "Making $$dir ..."  && $(MAKE) static); done;:
 
 clean:
 	@for dir in $(SUBDIRS); do (cd $$dir && $(MAKE) clean); done;:

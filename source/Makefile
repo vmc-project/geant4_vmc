@@ -221,7 +221,7 @@ ALIBRARY	= $(LIBDIR)/lib$(PACKAGE).a
 default:	depend $(SLIBRARY) includes
 #includes:       clean_includes make_includes
 includes:       make_includes
-static: 	$(ALIBRARY) 
+static: 	$(ALIBRARY)
 
 ifneq ($(USE_VGM),)
 vgm:
