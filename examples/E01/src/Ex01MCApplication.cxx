@@ -236,9 +236,11 @@ void Ex01MCApplication::InitMC(const char* setup)
 /// The selection of the concrete MC is done in the macro.
 /// \param setup The name of the configuration macro 
 
-  gROOT->LoadMacro(setup);
-  gInterpreter->ProcessLine("Config()");
- 
+  if ( TString(setup) != "" ) {
+    gROOT->LoadMacro(setup);
+    gInterpreter->ProcessLine("Config()");
+  }
+
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);
   gMC->Init();
