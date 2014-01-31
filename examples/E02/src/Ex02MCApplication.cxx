@@ -50,7 +50,7 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title)
 /// \param name   The MC application name 
 /// \param title  The MC application description
 
-  printf("Ex02MCApplication::Ex02MCApplication %p \n", this);  
+  cout << "Ex02MCApplication::Ex02MCApplication " << this << endl;  
 
   // Create application data
 
@@ -80,14 +80,14 @@ Ex02MCApplication::~Ex02MCApplication()
 {
 /// Destructor  
   
-  printf("Ex02MCApplication::~Ex02MCApplication %p \n", this);  
+  cout << "Ex02MCApplication::~Ex02MCApplication " << this << endl;  
 
   delete fRootManager;
   delete fStack;
   delete fMagField;
   delete gMC;
 
-  printf("Done Ex02MCApplication::~Ex02MCApplication %p \n", this);  
+  cout << "Done Ex02MCApplication::~Ex02MCApplication " << this << endl;  
 }
 
 //
@@ -115,8 +115,10 @@ void Ex02MCApplication::InitMC(const char* setup)
 /// The selection of the concrete MC is done in the macro.
 /// \param setup The name of the configuration macro 
 
-  gROOT->LoadMacro(setup);
-  gInterpreter->ProcessLine("Config()");
+  if ( TString(setup) != "" ) {
+    gROOT->LoadMacro(setup);
+    gInterpreter->ProcessLine("Config()");
+  }  
   
   // Create Root manager 
   if ( ! gMC->IsMT() ) {
