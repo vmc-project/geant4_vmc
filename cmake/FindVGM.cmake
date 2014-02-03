@@ -38,7 +38,7 @@ endif (VGM_LIBRARY_DIR)
 if (VGM_FOUND)
   set(LD_LIBRARY_PATH ${LD_LIBRARY_PATH} ${VGM_LIBRARY_DIR})
   set(VGM_LIBRARIES 
-      "-L${VGM_LIBRARY_DIR} -lBaseVGM -lClhepVGM -lGeant4GM -lRootGM -lXmlVGM")
+      "-L${VGM_LIBRARY_DIR} -lGeant4GM -lRootGM -lBaseVGM -lClhepVGM -lXmlVGM")
   if (NOT VGM_FIND_QUIETLY)
     message(STATUS "Found VGM in ${VGM_LIBRARY_DIR}")
   endif (NOT VGM_FIND_QUIETLY)
