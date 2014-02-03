@@ -23,6 +23,7 @@
 #include <G4DynamicParticle.hh>
 #include <G4ParticleTable.hh>
 #include <G4IonTable.hh>
+#include "G4AutoLock.hh"
 #include <G4Version.hh>
  
 #include <TDatabasePDG.h>
@@ -39,6 +40,11 @@
 // Moved after Root includes to avoid shadowed variables 
 // generated from short units names
 #include <G4SystemOfUnits.hh>
+
+namespace {
+  //Mutex to lock master application when merging data
+  G4Mutex addParticleMutex = G4MUTEX_INITIALIZER;
+}
 
 TG4ParticlesManager* TG4ParticlesManager::fgInstance = 0;
 
@@ -112,12 +118,14 @@ void TG4ParticlesManager::AddParticleToPdgDatabase(const G4String& name,
   }               
 
   // Add particle to TDatabasePDG
+  G4AutoLock lm(&addParticleMutex);
   TDatabasePDG::Instance()
     ->AddParticle(name, g4Name, 
                   particleDefinition->GetPDGMass()/TG4G3Units::Energy(), 
                   particleDefinition->GetPDGStable(), 
                   particleDefinition->GetPDGWidth()/TG4G3Units::Energy(), 
-                  pdgQ*3, rootType, pdgEncoding);                     
+                  pdgQ*3, rootType, pdgEncoding);
+  lm.unlock();
 }
 
 
