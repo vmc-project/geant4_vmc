@@ -31,6 +31,7 @@ static const double gCm = 1./cm;
 TG4RootNavigator::TG4RootNavigator()
                  :G4Navigator(),
                   fGeometry(0),
+                  fNavigator(0),
                   fDetConstruction(0),
                   fStepEntering(kFALSE),
                   fStepExiting(kFALSE),
@@ -45,6 +46,7 @@ TG4RootNavigator::TG4RootNavigator()
 TG4RootNavigator::TG4RootNavigator(TG4RootDetectorConstruction *dc)
                  :G4Navigator(),
                   fGeometry(0),
+                  fNavigator(0),
                   fDetConstruction(0),
                   fStepEntering(kFALSE),
                   fStepExiting(kFALSE),
@@ -74,7 +76,10 @@ void TG4RootNavigator::SetDetectorConstruction(TG4RootDetectorConstruction *dc)
       G4Exception("TG4RootNavigator::SetDetectorConstruction",
                   "G4Root_F001", FatalException, 
                   "Cannot create TG4RootNavigator without closed ROOT geometry !");
-   }   
+   }
+   fNavigator = fGeometry->GetCurrentNavigator();
+   if (!fNavigator) fNavigator = fGeometry->AddNavigator();
+   G4cout << "Navigator created: " << fNavigator << G4endl;
    fDetConstruction = dc;
 }
   
@@ -127,11 +132,11 @@ G4double TG4RootNavigator::ComputeStep(const G4ThreeVector &pGlobalPoint,
       npt[0] = pGlobalPoint.x()*gCm+tol*pDirection.x();
       npt[1] = pGlobalPoint.y()*gCm+tol*pDirection.y();
       npt[2] = pGlobalPoint.z()*gCm+tol*pDirection.z();
-      fGeometry->SetCurrentPoint(npt[0],npt[1],npt[2]);
+      fNavigator->SetCurrentPoint(npt[0],npt[1],npt[2]);
       compute_safety = kFALSE;
       pNewSafety = 0.0;
    } else {   
-      fGeometry->SetCurrentPoint(pGlobalPoint.x()*gCm, pGlobalPoint.y()*gCm, pGlobalPoint.z()*gCm);
+      fNavigator->SetCurrentPoint(pGlobalPoint.x()*gCm, pGlobalPoint.y()*gCm, pGlobalPoint.z()*gCm);
       Double_t d2 = pGlobalPoint.diff2(fSafetyOrig);
       if (d2 < 1.e-10) {
 #ifdef G4ROOT_DEBUG
@@ -142,19 +147,19 @@ G4double TG4RootNavigator::ComputeStep(const G4ThreeVector &pGlobalPoint,
       }   
       fSafetyOrig = pGlobalPoint;
    }   
-   fGeometry->SetCurrentDirection(pDirection.x(), pDirection.y(), pDirection.z());
-   fGeometry->FindNextBoundary(-(pstep*gCm-tol), "", !compute_safety);
+   fNavigator->SetCurrentDirection(pDirection.x(), pDirection.y(), pDirection.z());
+   fNavigator->FindNextBoundary(-(pstep*gCm-tol), "", !compute_safety);
 
    if (compute_safety) {
-      pNewSafety = (fGeometry->GetSafeDistance()-tol)*cm;
+      pNewSafety = (fNavigator->GetSafeDistance()-tol)*cm;
       if (pNewSafety<0.) pNewSafety = 0.;
       fLastSafety = pNewSafety;
    }   
-   G4double step = (gGeoManager->GetStep()+tol)*cm;
+   G4double step = (fNavigator->GetStep()+tol)*cm;
 //   if (step >= pCurrentProposedStepLength) step = kInfinity;
    if (step < 1.e3*tol*cm) step = 0.;
-   fStepEntering = fGeometry->IsStepEntering();
-   fStepExiting  = fGeometry->IsStepExiting();
+   fStepEntering = fNavigator->IsStepEntering();
+   fStepExiting  = fNavigator->IsStepExiting();
    if (fStepEntering || fStepExiting) {
       fNextPoint = pGlobalPoint + step*pDirection;
    } else {
@@ -166,9 +171,9 @@ G4double TG4RootNavigator::ComputeStep(const G4ThreeVector &pGlobalPoint,
    G4cout << "ComputeStep: point=" << pGlobalPoint << " dir=" << pDirection << G4endl;
    G4cout << "             pstep="<<pCurrentProposedStepLength << " snext=" << step << G4endl;
    G4cout << "             safe ="<<pNewSafety<< "  frombdr="<<frombdr<< "  oldpoint="<<oldpoint<<" entering=" <<fStepEntering << " exiting="<<fStepExiting << G4endl;
-   if (fStepEntering || fStepExiting && fGeometry->GetNextNode()) {
-      G4cout << "             current: " << fGeometry->GetCurrentNode()->GetName() <<
-                "  next: " << fGeometry->GetNextNode()->GetName() << G4endl;
+   if (fStepEntering || fStepExiting && fNavigator->GetNextNode()) {
+      G4cout << "             current: " << fNavigator->GetCurrentNode()->GetName() <<
+                "  next: " << fNavigator->GetNextNode()->GetName() << G4endl;
    }         
 #endif
    return step;
@@ -203,7 +208,7 @@ G4VPhysicalVolume* TG4RootNavigator::ResetHierarchyAndLocate(
    fStepExiting = kFALSE;
    fHistory = *h.GetHistory();
    SynchronizeGeoManager();
-   fGeometry->InitTrack(point.x()*gCm, point.y()*gCm, point.z()*gCm, direction.x(), direction.y(), direction.z());
+   fNavigator->InitTrack(point.x()*gCm, point.y()*gCm, point.z()*gCm, direction.x(), direction.y(), direction.z());
    G4VPhysicalVolume *pVol = SynchronizeHistory();
    return pVol;
 }
@@ -214,7 +219,7 @@ TGeoNode *TG4RootNavigator::SynchronizeGeoManager()
 /// Synchronize the current state of TGeoManager with the current navigation
 /// history. Do the minimum possible work in case 
 /// states are already (or almost) in sync. Returns current logical node.
-   Int_t geolevel = fGeometry->GetLevel();
+   Int_t geolevel = fNavigator->GetLevel();
    Int_t depth = fHistory.GetDepth();
    Int_t nodeIndex, level;
    G4VPhysicalVolume *pvol;
@@ -225,37 +230,37 @@ TGeoNode *TG4RootNavigator::SynchronizeGeoManager()
       if (level<=geolevel) {
          // TGeo has also something at this level - check if it matches what is
          // in fHistory
-         pnode = fGeometry->GetMother(geolevel-level);
+         pnode = fNavigator->GetMother(geolevel-level);
          // If the node at this level matches the one in the history, do nothing
          if (pnode==newnode) continue;
          // From this level down we need to update TGeo path.
          while (geolevel >= level) {
-            fGeometry->CdUp();
+            fNavigator->CdUp();
             geolevel--;
          }
          // Now TGeo is at level-1 and needs to update level
          // this should be the index of the node to be used in CdDown(index)
-         nodeIndex = fGeometry->GetCurrentVolume()->GetIndex(newnode);
+         nodeIndex = fNavigator->GetCurrentVolume()->GetIndex(newnode);
          if (nodeIndex < 0) {
             G4cerr << "SynchronizeGeoManager did not work (1)!!!" << G4endl;
             return NULL;         
          }
 //         nodeIndex = fHistory.GetReplicaNo(level);
-         fGeometry->CdDown(nodeIndex);
+         fNavigator->CdDown(nodeIndex);
          geolevel++;     // Should be equal to i now
       } else {
          // This level has to be synchronized
-         nodeIndex = fGeometry->GetCurrentVolume()->GetIndex(newnode);
+         nodeIndex = fNavigator->GetCurrentVolume()->GetIndex(newnode);
          if (nodeIndex < 0) {
             G4cerr << "SynchronizeGeoManager did not work (2)!!!" << G4endl;
             return NULL;         
          }
 //         nodeIndex = fHistory.GetReplicaNo(level);
-         fGeometry->CdDown(nodeIndex);
+         fNavigator->CdDown(nodeIndex);
          geolevel++;     // Should be equal to i now
       }
    }
-   return fGeometry->GetCurrentNode();
+   return fNavigator->GetCurrentNode();
 }          
       
 //______________________________________________________________________________
@@ -265,12 +270,12 @@ G4VPhysicalVolume *TG4RootNavigator::SynchronizeHistory()
 /// Do the minimum possible work in case states are already (or almost) in sync.
 /// Returns current physical volume
    Int_t depth = fHistory.GetDepth();
-   Int_t geolevel = fGeometry->GetLevel();
+   Int_t geolevel = fNavigator->GetLevel();
    G4VPhysicalVolume *pvol, *pnewvol=0;
    TGeoNode *pnode;
    Int_t level;
    for (level=0; level<=geolevel; level++) {
-      pnode = fGeometry->GetMother(geolevel-level);
+      pnode = fNavigator->GetMother(geolevel-level);
       pnewvol = fDetConstruction->GetG4VPhysicalVolume(pnode);
       if (level<=depth) {
          pvol = fHistory.GetVolume(level);
@@ -294,7 +299,7 @@ G4VPhysicalVolume *TG4RootNavigator::SynchronizeHistory()
       }
    }
    if (depth > level-1) fHistory.BackLevel(depth-level+1);
-   if (fGeometry->IsOutside()) pnewvol = NULL;      
+   if (fNavigator->IsOutside()) pnewvol = NULL;
    return pnewvol;      
 }         
 
@@ -323,7 +328,7 @@ TG4RootNavigator::LocateGlobalPointAndSetup(const G4ThreeVector& globalPoint,
    G4cout.precision(12);
    G4cout << "LocateGlobalPointAndSetup #" << ilocate << ": point: " << globalPoint << G4endl;
 #endif
-   fGeometry->SetCurrentPoint(globalPoint.x()*gCm, globalPoint.y()*gCm, globalPoint.z()*gCm);
+   fNavigator->SetCurrentPoint(globalPoint.x()*gCm, globalPoint.y()*gCm, globalPoint.z()*gCm);
    fEnteredDaughter = fExitedMother = kFALSE;
    Bool_t onBoundary = kFALSE;
    if (fStepEntering || fStepExiting) {
@@ -340,27 +345,27 @@ TG4RootNavigator::LocateGlobalPointAndSetup(const G4ThreeVector& globalPoint,
 #endif
    }
    if ((!ignoreDirection || onBoundary )&& pGlobalDirection) {
-      fGeometry->SetCurrentDirection(pGlobalDirection->x(), pGlobalDirection->y(), pGlobalDirection->z());
+      fNavigator->SetCurrentDirection(pGlobalDirection->x(), pGlobalDirection->y(), pGlobalDirection->z());
    }
 
 #ifdef G4ROOT_DEBUG
-   printf("   level %i: %s\n", fGeometry->GetLevel(), fGeometry->GetPath());
-   if (fGeometry->IsOutside()) G4cout << "   outside" << G4endl;
+   printf("   level %i: %s\n", fNavigator->GetLevel(), fNavigator->GetPath());
+   if (fNavigator->IsOutside()) G4cout << "   outside" << G4endl;
 #endif
    if (onBoundary) {
       fEnteredDaughter = fStepEntering;
       fExitedMother    = fStepExiting;
-      TGeoNode *skip = fGeometry->GetCurrentNode();
-      if (fGeometry->IsOutside()) skip = NULL;
-      if (fStepExiting && !fGeometry->GetLevel()) {
-         fGeometry->SetOutside();
+      TGeoNode *skip = fNavigator->GetCurrentNode();
+      if (fNavigator->IsOutside()) skip = NULL;
+      if (fStepExiting && !fNavigator->GetLevel()) {
+         fNavigator->SetOutside();
          return NULL;
       }   
-      fGeometry->CdNext();
-      fGeometry->CrossBoundaryAndLocate(fStepEntering, skip);
+      fNavigator->CdNext();
+      fNavigator->CrossBoundaryAndLocate(fStepEntering, skip);
    } else {   
-//      if (!relativeSearch) fGeometry->CdTop();
-      fGeometry->FindNode();
+//      if (!relativeSearch) fNavigator->CdTop();
+      fNavigator->FindNode();
    }   
    G4VPhysicalVolume *target = SynchronizeHistory();
 #ifdef G4ROOT_DEBUG
@@ -386,7 +391,7 @@ void TG4RootNavigator::LocateGlobalPointWithinVolume(const G4ThreeVector& pGloba
    G4cout.precision(12);
    G4cout << "LocateGlobalPointWithinVolume "  << pGlobalPoint << G4endl;
 #endif
-   fGeometry->SetCurrentPoint(pGlobalPoint.x()*gCm, pGlobalPoint.y()*gCm, pGlobalPoint.z()*gCm);
+   fNavigator->SetCurrentPoint(pGlobalPoint.x()*gCm, pGlobalPoint.y()*gCm, pGlobalPoint.z()*gCm);
    fStepEntering = kFALSE;
    fStepExiting = kFALSE;
    fEnteredDaughter = kFALSE;
@@ -433,9 +438,9 @@ G4double TG4RootNavigator::ComputeSafety(const G4ThreeVector &globalpoint,
 #endif
       return fLastSafety;
    }   
-   fGeometry->ResetState();
-   fGeometry->SetCurrentPoint(globalpoint.x()*gCm, globalpoint.y()*gCm, globalpoint.z()*gCm);
-   G4double safety = fGeometry->Safety()*cm;
+   fNavigator->ResetState();
+   fNavigator->SetCurrentPoint(globalpoint.x()*gCm, globalpoint.y()*gCm, globalpoint.z()*gCm);
+   G4double safety = fNavigator->Safety()*cm;
    fSafetyOrig = globalpoint;
    fLastSafety = safety;
 
@@ -466,13 +471,13 @@ G4ThreeVector TG4RootNavigator::GetLocalExitNormal(G4bool* valid)
 /// but if the surfaces are not convex it will return valid=false.
    Double_t *norm, lnorm[3];
    *valid = true;
-   norm = fGeometry->FindNormalFast();
+   norm = fNavigator->FindNormalFast();
    G4ThreeVector normal(0.,0.,1.);
    if (!norm) {
       *valid = false;
       return normal;
    }
-   fGeometry->MasterToLocalVect(norm, lnorm);
+   fNavigator->MasterToLocalVect(norm, lnorm);
    normal.setX(lnorm[0]);   
    normal.setY(lnorm[1]);   
    normal.setZ(lnorm[2]);  
@@ -498,7 +503,7 @@ G4ThreeVector TG4RootNavigator::GetGlobalExitNormal(const G4ThreeVector& /*point
     // but if the surfaces are not convex it will return valid=false.
    Double_t *norm;
    *valid = true;
-   norm = fGeometry->FindNormalFast();
+   norm = fNavigator->FindNormalFast();
    G4ThreeVector normal(0.,0.,1.);
    if (!norm) {
       *valid = false;

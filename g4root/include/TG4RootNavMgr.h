@@ -55,7 +55,7 @@ public:
    virtual ~TG4RootNavMgr();
    
    Bool_t                ConnectToG4();
-   void                  Initialize(TVirtualUserPostDetConstruction *sdinit=0);
+   void                  Initialize(TVirtualUserPostDetConstruction *sdinit=0, Int_t nthreads=1);
    void                  LocateGlobalPointAndSetup(Double_t *pt, Double_t *dir=0);
 
    //Test utilities

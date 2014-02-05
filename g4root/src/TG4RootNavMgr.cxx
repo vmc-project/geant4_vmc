@@ -83,6 +83,7 @@ TG4RootNavMgr *TG4RootNavMgr::GetInstance(TGeoManager *geom)
    if (!geom) return NULL;
    fRootNavMgr = new TG4RootNavMgr(geom);  
    G4bool isMaster = ! G4Threading::IsWorkerThread();
+   Printf("isMaster=%d", isMaster);
    if ( isMaster ) {
     fgMasterInstance = fRootNavMgr; 
    } 
@@ -161,11 +162,12 @@ void TG4RootNavMgr::SetNavigator(TG4RootNavigator *nav)
 }
 
 //______________________________________________________________________________
-void TG4RootNavMgr::Initialize(TVirtualUserPostDetConstruction *sdinit)
+void TG4RootNavMgr::Initialize(TVirtualUserPostDetConstruction *sdinit, Int_t nthreads)
 {
 /// Construct G4 geometry based on TGeo geometry. 
    Info("Initialize", "Creating G4 hierarchy ...");
    if (fDetConstruction) fDetConstruction->Initialize(sdinit);
+   if (nthreads>1) gGeoManager->SetMaxThreads(nthreads);
 }
 
 //______________________________________________________________________________

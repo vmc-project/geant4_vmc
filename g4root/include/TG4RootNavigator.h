@@ -36,6 +36,7 @@ class TG4RootNavigator : public G4Navigator {
 
 protected:
    TGeoManager          *fGeometry;        ///< TGeo geometry manager
+   TGeoNavigator        *fNavigator;       ///< TGeo navigator
    TG4RootDetectorConstruction *fDetConstruction; ///< G4Root detector construction
 
    Bool_t                fStepEntering;    ///< Next step is entering daughter
