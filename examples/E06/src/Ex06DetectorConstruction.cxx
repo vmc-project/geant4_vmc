@@ -59,12 +59,6 @@ void Ex06DetectorConstruction::ConstructMaterials()
 
   // Create Root geometry manager 
   new TGeoManager("E06_geometry", "E06 VMC example geometry");
-   
-  // Pass information about multi-threading to TGeoManager
-  if ( TThread::IsInitialized() ) {
-    cout << "TGeoManager will be used in multi-threading mode" << endl;
-    gGeoManager->SetMultiThread(kTRUE);
-  }
 
   Double_t a;        // Mass of a mole in g/mole   
   Double_t z;        // Atomic number

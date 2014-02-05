@@ -55,12 +55,6 @@ void A01RootDetectorConstruction::ConstructGeometry()
 /// Contruct volumes using TGeo modeller
 
   TGeoManager::Import(fGeometryFileName.Data());
-
-  // Pass information about multi-threading to TGeoManager
-  if ( TThread::IsInitialized() ) {
-    cout << "TGeoManager will be used in multi-threading mode" << endl;
-    gGeoManager->SetMultiThread(kTRUE);
-  }
     
   // Update media parameters (needed for Geant3)
   TList* media = gGeoManager->GetListOfMedia();

@@ -103,12 +103,6 @@ void Ex03DetectorConstruction::ConstructMaterials()
   // Create Root geometry manager 
   new TGeoManager("E03_geometry", "E03 VMC example geometry");
 
-  // Pass information about multi-threading to TGeoManager
-  if ( TThread::IsInitialized() ) {
-    cout << "TGeoManager will be used in multi-threading mode" << endl;
-    gGeoManager->SetMultiThread(kTRUE);
-  }  
-
 //--------- Material definition ---------
 
   TString name;      // Material name
