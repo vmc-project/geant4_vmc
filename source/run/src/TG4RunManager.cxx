@@ -208,7 +208,12 @@ void TG4RunManager::ConfigureRunManager()
     //TG4Globals::Exception(
     //  "TG4RunManager", "ConfigureRunManager",
     //  "Root navigation is not yet supported.");
-    rootNavMgr->Initialize(new TG4PostDetConstruction());
+#ifdef G4MULTITHREADED
+    G4int nthreads = G4MTRunManager::GetMasterRunManager()->GetNumberOfThreads();
+#else
+    G4int nthreads = 1;
+#endif
+    rootNavMgr->Initialize(new TG4PostDetConstruction(), nthreads);
     rootNavMgr->ConnectToG4();  
   }  
     
@@ -243,15 +248,6 @@ void TG4RunManager::CloneRootNavigatorForWorker()
 
   if ( VerboseLevel() > 1 )
     G4cout << "TG4RunManager::CloneRootNavigatorForWorker " << this << G4endl;
-
-  // Create new TGeo navigator
-  TGeoNavigator* tgeoNavigator = gGeoManager->GetCurrentNavigator();
-  G4cout << "Got TGeoNavigator: " <<  tgeoNavigator << G4endl;
-  //tgeoNavigator = new TGeoNavigator(gGeoManager);  // this gives 0 !!
-  //G4cout << "Created TGeoNavigator: " <<  tgeoNavigator << G4endl;
-  //G4cout << "Got TGeoNavigator: " <<  gGeoManager->GetCurrentNavigator() << G4endl;
-  gGeoManager->AddNavigator();
-  G4cout << "Got after Add TGeoNavigator: " <<  gGeoManager->GetCurrentNavigator() << G4endl;
 
   // Master Root navigator
   TG4RootNavMgr* masterRootNavMgr = TG4RootNavMgr::GetMasterInstance();
