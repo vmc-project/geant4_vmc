@@ -33,7 +33,8 @@ void run_g4(const TString& configMacro = "g4Config.C")
   // MC application
   A01MCApplication* appl 
     =  new A01MCApplication("ExampleA01", "The exampleA01 MC application");
-  appl->GetPrimaryGenerator()->SetRandomize(false);
+  appl->GetPrimaryGenerator()->SetRandomize(true);
+  appl->GetPrimaryGenerator()->SetNofPrimaries(20);
   appl->SetWriteStack(true);
   appl->SetWriteHits(true);
 
@@ -48,7 +49,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
 
   TStopwatch timer;
   timer.Start();  
-  appl->RunMC(5);
+  appl->RunMC(10);
   timer.Stop();
   timer.Print();
   
