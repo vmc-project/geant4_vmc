@@ -30,6 +30,35 @@
 #endif
 
 #include "TThread.h"
+#include "TROOT.h"
+#include "TInterpreter.h"
+
+namespace {
+
+// Utility function
+void ProcessMacro(int argc, char** argv) {
+  //G4cout << "Program arguments " << argc << "  ";
+  //for (G4int i=0; i< argc; ++i) { G4cout << argv[i] << ",  "; }
+  //G4cout << G4endl;
+
+  G4int counter = 1;
+  G4String macroName = argv[counter];
+  G4String functionName = macroName;
+  functionName.erase(functionName.find(".C"), 2);
+  functionName += "(";
+  while ( ++counter < argc ) {
+    functionName += argv[counter];
+    if ( counter < (argc - 1) ) functionName += ",";
+  }
+  functionName += ")";
+  G4cout << "macroName: " << macroName << G4endl;
+  G4cout << "functionName: " << functionName << G4endl;
+
+  gROOT->LoadMacro(macroName);
+  gInterpreter->ProcessLine(functionName);
+}
+
+}
 
 int main(int argc, char** argv)
 {
@@ -72,22 +101,29 @@ int main(int argc, char** argv)
       // reduce printing from GTREVE_ROOT (sets one printing per 1000 tracks) 
 #endif
 
-  // Initialize MC
-  appl->InitMC("");  
+  // Run example
+  if ( argc <= 1 ) {
+    // Initialize MC
+    appl->InitMC("");
   
-  // Activate storing tracks
-  // gMC->SetCollectTracks(kTRUE);
+    // Activate storing tracks
+    // gMC->SetCollectTracks(kTRUE);
 
 #ifdef USE_GEANT4
-  // Customise Geant4 setting after initialization:
-  // Physics list
-  geant4->ProcessGeantMacro("g4config2.in");
-  // Visualization settings
-  geant4->ProcessGeantMacro("g4vis.in");
+    // Customise Geant4 setting after initialization:
+    // Physics list
+    geant4->ProcessGeantMacro("g4config2.in");
+    // Visualization settings
+    geant4->ProcessGeantMacro("g4vis.in");
 #endif
   
-  // Run MC
-  appl->RunMC(5);
+    // Run MC
+    appl->RunMC(5);
+  }
+  else {
+    // Run from Root macro
+    ProcessMacro(argc, argv);
+  }
 
   delete appl;
 }  

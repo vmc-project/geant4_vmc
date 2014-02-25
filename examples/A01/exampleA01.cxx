@@ -30,6 +30,35 @@
 #endif
 
 #include "TThread.h"
+#include "TROOT.h"
+#include "TInterpreter.h"
+
+namespace {
+
+// Utility function
+void ProcessMacro(int argc, char** argv) {
+  //G4cout << "Program arguments " << argc << "  ";
+  //for (G4int i=0; i< argc; ++i) { G4cout << argv[i] << ",  "; }
+  //G4cout << G4endl;
+
+  G4int counter = 1;
+  G4String macroName = argv[counter];
+  G4String functionName = macroName;
+  functionName.erase(functionName.find(".C"), 2);
+  functionName += "(";
+  while ( ++counter < argc ) {
+    functionName += argv[counter];
+    if ( counter < (argc - 1) ) functionName += ",";
+  }
+  functionName += ")";
+  G4cout << "macroName: " << macroName << G4endl;
+  G4cout << "functionName: " << functionName << G4endl;
+
+  gROOT->LoadMacro(macroName);
+  gInterpreter->ProcessLine(functionName);
+}
+
+}
 
 int main(int argc, char** argv)
 {
@@ -44,9 +73,6 @@ int main(int argc, char** argv)
   A01MCApplication* appl 
     =  new A01MCApplication("ExampleA01", 
                             "The examplA01 MC application");
-  appl->GetPrimaryGenerator()->SetRandomize(false);
-  appl->SetWriteStack(true);
-  appl->SetWriteHits(true);
 
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4 
@@ -72,9 +98,19 @@ int main(int argc, char** argv)
   gMC->SetProcess("HADR",1);
 #endif
 
-  // Initialize MC application for this thread rank  
-  appl->InitMC("");  
-  appl->RunMC(5);
+  // Run example
+  if ( argc <= 1 ) {
+    // Run from this main
+    appl->GetPrimaryGenerator()->SetRandomize(false);
+    appl->SetWriteStack(true);
+    appl->SetWriteHits(true);
+    appl->InitMC("");
+    appl->RunMC(5);
+  }
+  else {
+    // Run from Root macro
+    ProcessMacro(argc, argv);
+  }
 
   delete appl;
 }  

@@ -25,40 +25,17 @@ void test_E03_5(const TString& configMacro, Bool_t oldGeometry)
 /// Run 1 primary with specialCuts and specialControls 
 /// and verbosity level switched on.
 
- // Load basic libraries
-  gROOT->LoadMacro("../macro/basiclibs.C");
-  basiclibs();
-
-  // Load MC libraries
-  TString mc = configMacro(0, 2);
-  if ( mc == "g3" ) {
-    // Geant3 libraries
-    gROOT->LoadMacro("../macro/g3libs.C");
-    g3libs();
-  }
-  else if ( mc == "g4" ) {  
-    // Geant4 libraries
-    gROOT->LoadMacro("../macro/g4libs.C");
-    g4libs();
+  // Load application if it does not yet exist
+  Bool_t needDelete = kFALSE;
+  if ( ! TVirtualMCApplication::Instance() ) {
+    gROOT->LoadMacro("./test_E03_load.C");
+    test_E03_load(configMacro, oldGeometry);
+    needDelete = kTRUE;
   }  
-  else if ( mc == "fl" ) {  
-    // Fluka libraries
-    gROOT->LoadMacro("../macro/fllibs.C");
-    fllibs();
-    
-    // Prepare Fluka working directory
-    gSystem->Exec("../macro/run_fluka.sh");
-
-    // Enter in Fluka working directory
-    gSystem->cd("fluka_out");
-  }  
-
-  // Load this example library
-  gSystem->Load("libexample03");
  
   // MC application
   Ex03MCApplication* appl
-    =  new Ex03MCApplication("Example03", "The example03 MC application");
+    = (Ex03MCApplication*)TVirtualMCApplication::Instance();
   appl->GetPrimaryGenerator()->SetNofPrimaries(1);
   appl->SetControls(kTRUE);
   appl->SetPrintModulo(1);
@@ -70,5 +47,5 @@ void test_E03_5(const TString& configMacro, Bool_t oldGeometry)
   appl->InitMC(configMacro);
   appl->RunMC(1);
 
-  delete appl;
+  if ( needDelete ) delete appl;
 }  

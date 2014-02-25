@@ -19,24 +19,20 @@ void test_E03_pl(const TString& configMacro = "g4ConfigEnv.C")
 /// Root interactive session
 /// \param configMacro configuration macro name, default \ref E03/g4Config.C 
 
-  // Load basic libraries
-  gROOT->LoadMacro("../macro/basiclibs.C");
-  basiclibs();
-
-  // Load Geant4 libraries
-  gROOT->LoadMacro("../macro/g4libs.C");
-  g4libs();
-
-  // Load this example library
-  gSystem->Load("libmtroot");
-  gSystem->Load("libexample03");
+  // Load application if it does not yet exist
+  Bool_t needDelete = kFALSE;
+  if ( ! TVirtualMCApplication::Instance() ) {
+    gROOT->LoadMacro("./test_E03_load.C");
+    test_E03_load(configMacro, oldGeometry);
+    needDelete = kTRUE;
+  }
  
   // MC application
   Ex03MCApplication* appl 
-    =  new Ex03MCApplication("Example03", "The example03 MC application");
+    = (Ex03MCApplication*)TVirtualMCApplication::Instance();
   appl->InitMC(configMacro);
   
   appl->RunMC(1);
   
-  delete appl;
+  if ( needDelete ) delete appl;
 }  
