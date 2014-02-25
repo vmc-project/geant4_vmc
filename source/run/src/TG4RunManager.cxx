@@ -280,7 +280,13 @@ void TG4RunManager::CreateRootUI()
 
   // create root UI if it does not exist
   if ( ! fRootUISession ) {
-    fRootUISession = new TRint("rootSession", &fARGC, fARGV, 0, 0);
+    // copy only first command line argument (name of program)
+    // (use the same way as in TApplication.cxx)
+    int argc = 1;
+    char** argv = (char **)new char*[argc];
+    argv[0] = StrDup(fARGV[0]);
+
+    fRootUISession = new TRint("rootSession", &argc, argv, 0, 0);
     fRootUIOwner = true;
   }
 }
