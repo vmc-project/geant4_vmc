@@ -32,17 +32,19 @@
 #include "TROOT.h"
 #include "TInterpreter.h"
 
+#include <string>
+
 namespace {
 
 // Utility function
 void ProcessMacro(int argc, char** argv) {
-  //G4cout << "Program arguments " << argc << "  ";
-  //for (G4int i=0; i< argc; ++i) { G4cout << argv[i] << ",  "; }
-  //G4cout << G4endl;
+  //std::cout << "Program arguments " << argc << "  ";
+  //for (G4int i=0; i< argc; ++i) { std::cout << argv[i] << ",  "; }
+  //std::cout << std::endl;
 
-  G4int counter = 1;
-  G4String macroName = argv[counter];
-  G4String functionName = macroName;
+  Int_t counter = 1;
+  std::string macroName = argv[counter];
+  std::string functionName = macroName;
   functionName.erase(functionName.find(".C"), 2);
   functionName += "(";
   while ( ++counter < argc ) {
@@ -50,11 +52,11 @@ void ProcessMacro(int argc, char** argv) {
     if ( counter < (argc - 1) ) functionName += ",";
   }
   functionName += ")";
-  G4cout << "macroName: " << macroName << G4endl;
-  G4cout << "functionName: " << functionName << G4endl;
+  //std::cout << "macroName: " << macroName << std::endl;
+  //std::cout << "functionName: " << functionName << std::endl;
 
-  gROOT->LoadMacro(macroName);
-  gInterpreter->ProcessLine(functionName);
+  gROOT->LoadMacro(macroName.data());
+  gInterpreter->ProcessLine(functionName.data());
 }
 
 }
@@ -91,7 +93,9 @@ int main(int argc, char** argv)
 #endif
   
 #ifdef USE_GEANT3
-  new TGeant3TGeo("C++ Interface to Geant3");
+  TGeant3* geant3
+    = new TGeant3TGeo("C++ Interface to Geant3");
+  geant3->SetHADR(0);
 #endif
 
   // Run example
