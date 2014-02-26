@@ -25,7 +25,7 @@ EXEDIR=$CURDIR/../examples_build_
 
 # Set 1 to 0 if you want to skip given MC
 TESTG3=1
-TESTG4=0
+TESTG4=1
 
 # Recreate log directory only if running test for both G3 and G4
 if [ "$TESTG3" = "1" -a  "$TESTG4" = "1" ]; then
@@ -46,13 +46,28 @@ do
   if [ "$EXAMPLE" != "E03" -a "$EXAMPLE" != "A01" ]; then 
     if [ "$TESTG3" = "1" ]; then
       EXE=$EXEDIR"g3/"$EXAMPLE"/example"$EXAMPLE
-      echo "... Running test with G3, geometry via TGeo, TGeo navigation" 
-      $EXE "test_$EXAMPLE.C" "\"\"" "kFALSE" >& $OUT/test_g3_tgeo_tgeo.out   
+      echo "... Running test with G3, geometry via TGeo, TGeo navigation"
+      $EXE -g3g TGeant3TGeo -rm "test_$EXAMPLE.C(\"\", kFALSE)" >& $OUT/test_g3_tgeo_tgeo.out
+
+      echo "... Running test with G3, geometry via VMC,  Native navigation"
+      $EXE -g3g TGeant3 -rm "test_$EXAMPLE.C(\"\", kTRUE)" >& $OUT/test_g3_vmc_nat.out
+
+      echo "... Running test with G3, geometry via VMC,  TGeo navigation"
+      $EXE -g3g TGeant3TGeo -rm "test_$EXAMPLE.C(\"\", kTRUE)" >& $OUT/test_g3_vmc_tgeo.out
     fi  
     if [ "$TESTG4" = "1" ]; then
       EXE=$EXEDIR"g4/"$EXAMPLE"/example"$EXAMPLE
-      echo "... Running test with G4, geometry via TGeo, Native navigation" 
-      $EXE "test_$EXAMPLE.C" "\"\"" "kFALSE" >& $OUT/test_g4_tgeo_nat.out   
+      echo "... Running test with G4, geometry via TGeo, Native navigation"
+      $EXE -g4g geomRootToGeant4 -rm "test_$EXAMPLE.C(\"\", kFALSE)" >& $OUT/test_g4_tgeo_nat.out
+
+      echo "... Running test with G4, geometry via TGeo, TGeo navigation"
+      $EXE -g4g geomRoot -rm "test_$EXAMPLE.C(\"\", kFALSE)" >& $OUT/test_g4_tgeo_tgeo.out
+
+      echo "... Running test with G4, geometry via VMC,  Native navigation"
+      $EXE -g4g geomVMCtoGeant4 -rm "test_$EXAMPLE.C(\"\", kTRUE)" >& $OUT/test_g4_vmc_nat.out
+
+      echo "... Running test with G4, geometry via VMC,  TGeo navigation"
+      $EXE -g4g geomVMCtoRoot -rm "test_$EXAMPLE.C(\"\", kTRUE)" >& $OUT/test_g4_vmc_tgeo.out
     fi  
   fi  
 
@@ -60,43 +75,107 @@ do
     # Run all macros + special configuration available only in E03 example
     if [ "$TESTG3" = "1" ]; then
       EXE=$EXEDIR"g3/"$EXAMPLE"/example"$EXAMPLE
-      echo "... Running test with G3, geometry via TGeo, TGeo navigation" 
-      $EXE "test_E03_1.C" "\"\"" "kFALSE" >& $OUT/test_g3_tgeo_tgeo.out   
-      $EXE "test_E03_2.C" "\"\"" "kFALSE" >& tmpfile    
+      echo "... Running test with G3, geometry via TGeo, TGeo navigation"
+      $EXE -g3g TGeant3TGeo -rm "test_E03_1.C(\"\", kFALSE)" >& $OUT/test_g3_tgeo_tgeo.out   
+      $EXE -g3g TGeant3TGeo -rm "test_E03_2.C(\"\", kFALSE)" >& tmpfile
       cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
-      $EXE "test_E03_3.C" "\"\"" "kFALSE" >& tmpfile
+      $EXE -g3g TGeant3TGeo -rm "test_E03_3.C(\"\", kFALSE)" >& tmpfile
       cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
-      $EXE "test_E03_4.C" "\"\"" "kFALSE" >& tmpfile
+      $EXE -g3g TGeant3TGeo -rm "test_E03_4.C(\"\", kFALSE)" >& tmpfile
       cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
-      $EXE "test_E03_5.C" "\"\"" "kFALSE" >& tmpfile
+      $EXE -g3g TGeant3TGeo -rm "test_E03_5.C(\"\", kFALSE)" >& tmpfile
       cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
+
+      echo "... Running test with G3, geometry via VMC,  Native navigation"
+      $EXE -g3g TGeant3 -rm "test_E03_1.C(\"\", kTRUE)" >& $OUT/test_g3_vmc_nat.out
+      $EXE -g3g TGeant3 -rm "test_E03_2.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g3_vmc_nat.out
+      $EXE -g3g TGeant3 -rm "test_E03_3.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g3_vmc_nat.out
+      $EXE -g3g TGeant3 -rm "test_E03_4.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g3_vmc_nat.out
+      $EXE -g3g TGeant3 -rm "test_E03_5.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g3_vmc_nat.out
+
+      echo "... Running test with G3, geometry via VMC,  TGeo navigation"
+      $EXE -g3g TGeant3TGeo -rm "test_E03_1.C(\"\", kTRUE)" >& $OUT/test_g3_vmc_tgeo.out
+      $EXE -g3g TGeant3TGeo -rm "test_E03_2.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
+      $EXE -g3g TGeant3TGeo -rm "test_E03_3.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
+      $EXE -g3g TGeant3TGeo -rm "test_E03_4.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
+      $EXE -g3g TGeant3TGeo -rm "test_E03_5.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
+
     fi  
     # Run all macros + special configuration available only in E03 example
     if [ "$TESTG4" = "1" ]; then
       EXE=$EXEDIR"g4/"$EXAMPLE"/example"$EXAMPLE
-      echo "... Running test with G4, geometry via TGeo, Native navigation" 
-      $EXE "test_E03_1.C" "\"\"" "kFALSE" >& $OUT/test_g4_tgeo_nat.out   
-      $EXE "test_E03_2.C" "\"\"" "kFALSE" >& tmpfile    
+      echo "... Running test with G4, geometry via TGeo, Native navigation"
+      $EXE -g4g geomRootToGeant4 -rm "test_E03_1.C(\"\", kFALSE)" >& $OUT/test_g4_tgeo_nat.out   
+      $EXE -g4g geomRootToGeant4 -rm "test_E03_2.C(\"\", kFALSE)" >& tmpfile
       cat tmpfile >> $OUT/test_g4_tgeo_nat.out
-      $EXE "test_E03_3.C" "\"\"" "kFALSE" >& tmpfile
+      $EXE -g4g geomRootToGeant4 -rm "test_E03_3.C(\"\", kFALSE)" >& tmpfile
       cat tmpfile >> $OUT/test_g4_tgeo_nat.out
-      $EXE "test_E03_4.C" "\"\"" "kFALSE" >& tmpfile
+      $EXE -g4g geomRootToGeant4 -rm "test_E03_4.C(\"\", kFALSE)" >& tmpfile
       cat tmpfile >> $OUT/test_g4_tgeo_nat.out
-      $EXE "test_E03_5.C" "\"\"" "kFALSE" >& tmpfile
+      $EXE -g4g geomRootToGeant4 -rm "test_E03_5.C(\"\", kFALSE)" >& tmpfile
       cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+
+      echo "... Running test with G4, geometry via TGeo, TGeo navigation"
+      $EXE -g4g geomRoot -rm "test_E03_1.C(\"\", kFALSE)" >& $OUT/test_g4_tgeo_tgeo.out   
+      $EXE -g4g geomRoot -rm "test_E03_2.C(\"\", kFALSE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+      $EXE -g4g geomRoot -rm "test_E03_3.C(\"\", kFALSE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+      $EXE -g4g geomRoot -rm "test_E03_4.C(\"\", kFALSE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+      $EXE -g4g geomRoot -rm "test_E03_5.C(\"\", kFALSE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+
+      echo "... Running test with G4, geometry via VMC,  Native navigation"
+      $EXE -g4g geomVMCtoGeant4 -rm "test_E03_1.C(\"\", kTRUE)" >& $OUT/test_g4_vmc_nat.out   
+      $EXE -g4g geomVMCtoGeant4 -rm "test_E03_2.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g4_vmc_nat.out
+      $EXE -g4g geomVMCtoGeant4 -rm "test_E03_3.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g4_vmc_nat.out
+      $EXE -g4g geomVMCtoGeant4 -rm "test_E03_4.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g4_vmc_nat.out
+      $EXE -g4g geomVMCtoGeant4 -rm "test_E03_5.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g4_vmc_nat.out
+
+      echo "... Running test with G4, geometry via VMC,  TGeo navigation"
+      $EXE -g4g geomVMCtoRoot -rm "test_E03_1.C(\"\", kTRUE)" >& $OUT/test_g4_vmc_tgeo.out   
+      $EXE -g4g geomVMCtoRoot -rm "test_E03_2.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
+      $EXE -g4g geomVMCtoRoot -rm "test_E03_3.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
+      $EXE -g4g geomVMCtoRoot -rm "test_E03_4.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
+      $EXE -g4g geomVMCtoRoot -rm "test_E03_5.C(\"\", kTRUE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
+
+      #echo "... Running test with G4, geometry via G4,   Native navigation"
+      #echo "... Running test with G4, geometry via TGeo, Native navigation, User physics list" 
     fi
   fi    
 
   if [ "$EXAMPLE" = "A01" ]; then 
     if [ "$TESTG3" = "1" ]; then
       EXE=$EXEDIR"g3/"$EXAMPLE"/example"$EXAMPLE
-      echo "... Running test with G3, geometry via TGeo, TGeo navigation" 
-      $EXE "test_$EXAMPLE.C" "\"\"" "kFALSE" >& $OUT/test_g3_tgeo_tgeo.out   
+      echo "... Running test with G3, geometry via TGeo, TGeo navigation"
+      $EXE -g3g TGeant3TGeo -rm "test_$EXAMPLE.C(\"\", kFALSE)" >& $OUT/test_g3_tgeo_tgeo.out   
     fi  
     if [ "$TESTG4" = "1" ]; then
       EXE=$EXEDIR"g4/"$EXAMPLE"/example"$EXAMPLE
-      echo "... Running test with G4, geometry via TGeo, Native navigation" 
-      $EXE "test_$EXAMPLE.C" "\"\"" "kFALSE" >& $OUT/test_g4_tgeo_nat.out   
+      echo "... Running test with G4, geometry via TGeo, Native navigation"
+      $EXE -g4g geomRootToGeant4 -rm "test_$EXAMPLE.C(\"\", kFALSE)" >& $OUT/test_g4_tgeo_nat.out   
+
+      echo "... Running test with G4, geometry via TGeo, TGeo navigation"
+      $EXE -g4g geomRoot -rm "test_$EXAMPLE.C(\"\", kFALSE)" >& $OUT/test_g4_tgeo_tgeo.out   
+
+      #echo "... Running test with G4, geometry via G4, Native navigation"
     fi  
   fi  
 
