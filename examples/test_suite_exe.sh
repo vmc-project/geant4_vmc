@@ -3,7 +3,7 @@
 
 #------------------------------------------------
 # The Virtual Monte Carlo examples
-# Copyright (C) 2007 - 2010 Ivana Hrivnacova
+# Copyright (C) 2014 Ivana Hrivnacova
 # All rights reserved.
 #
 # For the licensing terms see geant4_vmc/LICENSE.
@@ -11,8 +11,11 @@
 #-------------------------------------------------
 
 #
-# Run tests for all VMC examples from built executables and regenerate output files.
-# Only g4Config.C and g3tgeoConfig.C configurations are tested.
+# Run tests for all VMC examples from built executables and regenerate output
+# files. Only g4Config.C and g3tgeoConfig.C configurations are tested.
+# The executables are supposed to be found in
+# examples_build_g3/exampleName and examples_build_g4/exampleName
+# directories.
 #
 # By I. Hrivnacova, IPN Orsay
 
