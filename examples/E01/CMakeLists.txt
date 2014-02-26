@@ -29,7 +29,7 @@ set(CMAKE_MODULE_PATH
 #----------------------------------------------------------------------------
 # VMC Configuration file
 #
-include(VMCConfig)
+include(UseVMC)
 
 #----------------------------------------------------------------------------
 # Setup project include directories; compile definitions; link libraries
@@ -60,7 +60,7 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 # Add the executable, and link it to the Geant4 libraries
 #
 add_executable(exampleE01 exampleE01.cxx exampleE01Dict.cxx ${sources} ${headers})
-target_link_libraries(exampleE01 ${LINK_LIBRARIES})
+target_link_libraries(exampleE01 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets

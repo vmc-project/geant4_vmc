@@ -1,4 +1,4 @@
-#------------------------------------------------
+##------------------------------------------------
 # The Virtual Monte Carlo examples
 # Copyright (C) 2014 Ivana Hrivnacova
 # All rights reserved.
@@ -24,7 +24,7 @@
 #  Geant3VMC_LIBRARIES   - The libraries needed to use Geant3VMC
 #  Geant3VMC_LIBRARY_DIR - PATH to the library directory 
 
-message(STATUS "Looking for Geant3VMC ...")
+#message(STATUS "Looking for Geant3VMC ...")
 
 find_path(Geant3VMC_INCLUDE_DIR NAMES TGeant3.h PATHS
   ${Geant3VMC_INC_DIR}

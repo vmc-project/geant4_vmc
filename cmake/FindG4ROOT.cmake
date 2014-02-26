@@ -24,7 +24,7 @@
 #  G4ROOT_LIBRARIES   - The libraries needed to use G4ROOT
 #  G4ROOT_LIBRARY_DIR - PATH to the library directory 
 
-message(STATUS "Looking for G4ROOT ...")
+#message(STATUS "Looking for G4ROOT ...")
 
 find_path(G4ROOT_INCLUDE_DIR NAMES TG4RootNavigator.h PATHS
   ${G4ROOT_INC_DIR}

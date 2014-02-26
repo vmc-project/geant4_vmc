@@ -23,7 +23,7 @@
 #  VGM_LIBRARIES   - The libraries needed to use VGM
 #  VGM_LIBRARY_DIR - PATH to the library directory 
 
-message(STATUS "Looking for VGM ...")
+#message(STATUS "Looking for VGM ...")
 
 find_path(VGM_LIBRARY_DIR NAMES libBaseVGM.so libBaseVGM.a libBaseVGM.dylib PATHS
   ${VGM_LIB_DIR}

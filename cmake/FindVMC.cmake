@@ -10,11 +10,18 @@
 # Configuration file for CMake build for VMC applications.
 # It defines include directories, compile definitions and link libraries
 # for all required and optional packages.
-# It defines (updates) following variables:
-# - include_directories
-# - LINK_LIBRARIES
+# It defines (updates) PACKAGE_FOUND variables for all required/optional
+# VMC packages according to selected options
+# - VMC_FOUND
+# - GEANT4_FOUND
+# - Geant4VMC_FOUND
+# - G4ROOT_FOUND
+# - VGM_FOUND
+# - Geant3VMC_FOUND
+# - PYTHIA6_FOUND
+# - MTROOT_FOUND
 #
-# I. Hrivnacova, 31/01/2014
+# I. Hrivnacova, 26/02/2014
 
 #---Options---------------------------------------------------------------------
 option(WITH_GEANT4       "Build with Geant4" ON)
@@ -26,14 +33,13 @@ option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 
 #---Find required packages------------------------------------------------------
 
-set (LINK_LIBRARIES)
+set(VMC_FOUND FALSE)
 
 # ROOT (required)
 set(ROOT_DIR "" CACHE PATH "Directory where ROOT is installed")
 set(ROOT_INC_DIR "" CACHE PATH "Alternative directory for ROOT includes")
 set(ROOT_LIB_DIR "" CACHE PATH "Alternative directory for ROOT libraries")
 find_package(ROOT REQUIRED)
-include_directories(${ROOT_INCLUDE_DIR})
 
 # Geant4 
 if(WITH_GEANT4)
@@ -49,9 +55,6 @@ if(WITH_GEANT4)
     find_package(Geant4 REQUIRED)
   endif()
   add_definitions(-DUSE_GEANT4) 
-  include(${Geant4_USE_FILE})
-  include_directories(${Geant4_INCLUDE_DIR})
-  message(STATUS Geant4 LIB DIR ${GEANT4_LIBRARY_DIR})
 
   # Geant4VMC  
   set(Geant4VMC_DIR "" CACHE PATH "Directory where Geant4VMC is installed")
@@ -59,10 +62,8 @@ if(WITH_GEANT4)
   set(Geant4VMC_LIB_DIR "" CACHE PATH "Alternative directory for Geant4VMC libraries")
   set(Geant4VMC_ARCH "" CACHE PATH "Geant4VMC platform specification")
   find_package(Geant4VMC REQUIRED)      
-  include_directories(${Geant4VMC_INCLUDE_DIR})
-  set (LINK_LIBRARIES ${Geant4VMC_LIBRARIES} ${LINK_LIBRARIES})
   # currently G4ROOT is not optional in Geant4 VMC
-  set (WITH_G4ROOT ON)
+  set(WITH_G4ROOT ON)
   # set use VGM according to USE_VGM environment variable
   if ($ENV{USE_VGM}) 
     set(WITH_VGM ON) 
@@ -75,7 +76,6 @@ if(WITH_GEANT4)
     set(G4ROOT_LIB_DIR "" CACHE PATH "Alternative directory for G4ROOT libraries")
     set(G4ROOT_ARCH "" CACHE PATH "G4ROOT platform specification")
     find_package(G4ROOT REQUIRED)      
-    set (LINK_LIBRARIES ${LINK_LIBRARIES} ${G4ROOT_LIBRARIES})
   endif()
 
   # VGM
@@ -84,10 +84,7 @@ if(WITH_GEANT4)
     set(VGM_LIB_DIR "" CACHE PATH "Alternative directory for VGM libraries")
     set(VGM_SYSTEM "" CACHE PATH "VGM platform specification")
     find_package(VGM REQUIRED)      
-    set (LINK_LIBRARIES ${LINK_LIBRARIES} ${VGM_LIBRARIES})
   endif()
-
-  set (LINK_LIBRARIES ${LINK_LIBRARIES} ${Geant4_LIBRARIES} -L${GEANT4_LIBRARY_DIR} -lG3toG4)
 endif()
 
 # Geant3
@@ -97,13 +94,9 @@ if(WITH_GEANT3)
   set(Geant3VMC_LIB_DIR "" CACHE PATH "Alternative directory for Geant3VMC libraries")
   set(Geant3VMC_ARCH "" CACHE PATH "Geant3VMC platform specification")
   find_package(Geant3VMC REQUIRED)
-  add_definitions(-DUSE_GEANT3) 
-  include_directories(${Geant3VMC_INCLUDE_DIR})
-  set (LINK_LIBRARIES ${Geant3VMC_LIBRARIES} ${LINK_LIBRARIES})
   
   #PYTHIA6
   find_package(Pythia6 REQUIRED)
-  set (LINK_LIBRARIES ${LINK_LIBRARIES} ${Pythia6_LIBRARIES} ${Geant3VMC_LIBRARIES} )
 endif()
 
 # MTROOT
@@ -113,9 +106,7 @@ if (WITH_MTROOT)
   set(MTROOT_LIB_DIR "" CACHE PATH "Alternative directory for MTROOT libraries")
   set(MTROOT_ARCH "" CACHE PATH "MTROOT platform specification")
   find_package(MTROOT REQUIRED)      
-  include_directories(${MTROOT_INCLUDE_DIR})
-  set (LINK_LIBRARIES ${MTROOT_LIBRARIES} ${LINK_LIBRARIES})
 endif()
 
-# Finally add Root libraries
-set(LINK_LIBRARIES ${LINK_LIBRARIES} ${ROOT_LIBRARIES} -lVMC -lEG)
+# If all required packages above were found we can update VMC_FOUND
+set(VMC_FOUND TRUE)

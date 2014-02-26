@@ -24,7 +24,7 @@
 #  MTROOT_LIBRARIES   - The libraries needed to use MTROOT
 #  MTROOT_LIBRARY_DIR - PATH to the library directory 
 
-message(STATUS "Looking for MTROOT ...")
+#message(STATUS "Looking for MTROOT ...")
 
 find_path(MTROOT_INCLUDE_DIR NAMES TVirtualMCRootManager.h PATHS
   ${MTROOT_INC_DIR}

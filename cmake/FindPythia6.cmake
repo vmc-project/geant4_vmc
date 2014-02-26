@@ -25,6 +25,8 @@
 #  Pythia6_LIBRARIES
 #  Pythia6_LIBRARY_DIR - PATH to the library directory 
 
+#message(STATUS "Looking for Pythia6 ...")
+
 find_path(Pythia6_LIBRARY_DIR 
   NAMES libPythia6.so libPythia6.dylib
         pythia6-$ENV{PYTHIA6_VERSION}.so pythia6-$ENV{PYTHIA6_VERSION}.dylib

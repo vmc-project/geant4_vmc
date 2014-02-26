@@ -25,7 +25,7 @@
 # ROOT_LIBRARY_DIR    PATH to the library directory 
 # ROOT_ARCH           ROOT build architecture
 
-message(STATUS "Looking for ROOT ...")
+#message(STATUS "Looking for ROOT ...")
 
 set(ROOT_FOUND FALSE)
 

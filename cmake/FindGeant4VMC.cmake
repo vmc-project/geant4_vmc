@@ -24,7 +24,7 @@
 #  Geant4VMC_LIBRARIES   - The libraries needed to use Geant4VMC
 #  Geant4VMC_LIBRARY_DIR - PATH to the library directory 
 
-message(STATUS "Looking for Geant4VMC ...")
+#message(STATUS "Looking for Geant4VMC ...")
 
 find_path(Geant4VMC_INCLUDE_DIR NAMES TGeant4.h PATHS
   ${Geant4VMC_INC_DIR}

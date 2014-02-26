@@ -25,7 +25,7 @@
 # GEANT4_LIBRARIES      Most common libraries
 # GEANT4_LIBRARY_DIR    PATH to the library directory 
 
-message(STATUS "Looking for GEANT4 ...")
+#message(STATUS "Looking for GEANT4 ...")
 
 # First search for Geant4Config.cmake on the path defined via user setting 
 # Geant4_DIR
@@ -35,6 +35,7 @@ if(EXISTS ${Geant4_DIR}/Geant4Config.cmake)
   set(GEANT4_INCLUDE_DIR ${Geant4_INCLUDE_DIRS})
   # This is a temporary fix to find path to libG3toG4
   set(GEANT4_LIBRARY_DIR ${Geant4_DIR}/..)
+  set(GEANT4_FOUND TRUE)
   message(STATUS "Found Geant4 CMake configuration in ${Geant4_DIR}")
   return()
 endif()
@@ -62,6 +63,7 @@ if(GEANT4_CONFIG_EXECUTABLE)
     include(${Geant4_DIR}/Geant4Config.cmake)
     set(GEANT4_INCLUDE_DIR ${Geant4_INCLUDE_DIRS})
     set(GEANT4_LIBRARY_DIR ${G4PREFIX}/lib)
+    set(GEANT4_FOUND TRUE)
     message(STATUS "Found Geant4 CMake configuration in ${Geant4_DIR}")
     return()
   endif()
@@ -71,6 +73,7 @@ if(GEANT4_CONFIG_EXECUTABLE)
     include(${Geant4_DIR}/Geant4Config.cmake)
     set(GEANT4_INCLUDE_DIR ${Geant4_INCLUDE_DIRS})
     set(GEANT4_LIBRARY_DIR ${G4PREFIX}/lib64)
+    set(GEANT4_FOUND TRUE)
     message(STATUS "Found Geant4 CMake configuration in ${Geant4_DIR}")
     return()
   endif()
