@@ -13,7 +13,7 @@ $Id$
 Introduction
 =============
   To demonstrate use of VirtualMC, four Geant4 novice
-  examples (N01, N02, N03, N06) has been rewritten
+  (N01, N02, N03, N06) and one extended (A01) examples has been rewritten
   as VMC applications.
   
   See more detail description in README files
