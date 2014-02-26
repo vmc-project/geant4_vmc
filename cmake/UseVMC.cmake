@@ -52,7 +52,7 @@ if(GEANT4_FOUND)
     
 endif(GEANT4_FOUND)
 
-if(GEANT3_FOUND)
+if(Geant3VMC_FOUND)
   add_definitions(-DUSE_GEANT3) 
   include_directories(${Geant3VMC_INCLUDE_DIR})
   
@@ -63,7 +63,7 @@ if(GEANT3_FOUND)
     set(VMC_LIBRARIES ${Geant3VMC_LIBRARIES} ${VMC_LIBRARIES})
   endif(PYTHIA6_FOUND)
     
-endif(GEANT3_FOUND)
+endif(Geant3VMC_FOUND)
 
 # MTROOT
 if (MTROOT_FOUND)
