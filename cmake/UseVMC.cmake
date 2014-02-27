@@ -15,9 +15,9 @@
 
 #message(STATUS "Processing UseVMC.cmake")
 
-#if (NOT VMC_FOUND)
-#  find_package(VMC REQUIRED)
-#endif(NOT VMC_FOUND)
+if (NOT VMC_FOUND)
+  find_package(VMC REQUIRED)
+endif(NOT VMC_FOUND)
 
 set(VMC_LIBRARIES)
 
@@ -61,7 +61,7 @@ if(Geant3VMC_FOUND)
     set(VMC_LIBRARIES ${VMC_LIBRARIES} ${Pythia6_LIBRARIES} ${Geant3VMC_LIBRARIES})
   else()
     set(VMC_LIBRARIES ${Geant3VMC_LIBRARIES} ${VMC_LIBRARIES})
-  endif(PYTHIA6_FOUND)
+  endif(Pythia6_FOUND)
     
 endif(Geant3VMC_FOUND)
 
