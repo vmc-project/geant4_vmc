@@ -125,7 +125,7 @@ int main(int argc, char** argv)
   // (Multi-threading is triggered automatically if Geant4 was built 
   //  in MT mode.)
 #ifdef G4MULTITHREADED
-   TThread::Initialize();
+   //TThread::Initialize();
 #endif
 
   // Process arguments
@@ -230,7 +230,7 @@ int main(int argc, char** argv)
 #endif
 
   // Run example
-  if ( argc <= 1 ) {
+  if ( ! rootMacro.size() ) {
     // Run from this main
     appl->InitMC("");
     appl->RunMC(1);

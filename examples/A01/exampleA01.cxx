@@ -126,7 +126,7 @@ int main(int argc, char** argv)
   // (Multi-threading is triggered automatically if Geant4 was built 
   //  in MT mode.)
 #ifdef G4MULTITHREADED
-   TThread::Initialize();
+   //TThread::Initialize();
 #endif
 
   // Process arguments

@@ -38,6 +38,9 @@
 #ifdef USE_GEANT4
 #include "TG4RunConfiguration.h"
 #include "TGeant4.h"
+#include "Ex03RunConfiguration1.h"
+#include "Ex03RunConfiguration2.h"
+#include "Ex03RunConfiguration3.h"
 #endif
 
 #ifdef USE_GEANT3
@@ -63,7 +66,9 @@ void PrintUsage(std::string programName)
   std::cerr << "   [-g4pl, --g4-physics-list]:    Geant4 physics list selection" << std::endl;
   std::cerr << "   [-g4sp, --g4-special-physics]: Geant4 special physics selection" << std::endl;
   std::cerr << "   [-g4m,  --g4-macro]:           Geant4 macro" << std::endl;
-  std::cerr << "   [-g4mv, --g4-vis-macro]:       Geant4 visualization macro" << std::endl;
+  std::cerr << "   [-g4vm, --g4-vis-macro]:       Geant4 visualization macro" << std::endl;
+  std::cerr << "   [-g4uc, --g4-user-class]:      Geant4 user class "
+            << "                                  (geometry, regions, physics-list)" << std::endl;
 #endif
 #ifdef USE_GEANT3
   std::cerr << "   [-g3g,  --g3-geometry]:        Geant3 geometry option (TGeant3,TGeant3TGeo)" << std::endl;
@@ -81,6 +86,7 @@ void PrintG4Configuration(
        const std::string& g4Macro,
        const std::string& g4VisMacro,
        const std::string& g4Session,
+       const std::string& g4UserClass,
        const std::string& rootMacro)
 {
   std::cout << " Running " << programName << " with options:" << std::endl;
@@ -97,6 +103,9 @@ void PrintG4Configuration(
   }
   if ( g4Session.size() ) {
     std::cout << "   --g4-session:         " << g4Session << std::endl;
+  }
+  if ( g4UserClass.size() ) {
+    std::cout << "   --g4-user-class:      " << g4UserClass << std::endl;
   }
   if ( rootMacro.size() ) {
     std::cout << "   --root-macro:         " << rootMacro << std::endl;
@@ -126,7 +135,7 @@ int main(int argc, char** argv)
   // (Multi-threading is triggered automatically if Geant4 was built 
   //  in MT mode.)
 #ifdef G4MULTITHREADED
-   TThread::Initialize();
+   //TThread::Initialize();
 #endif
 
   // Process arguments
@@ -139,6 +148,7 @@ int main(int argc, char** argv)
   std::string g4Macro = "g4config.in";
   std::string g4VisMacro = "g4vis.in";
   std::string g4Session = "";
+  std::string g4UserClass = "";
 #endif
 #ifdef USE_GEANT3
   std::string g3Geometry = "TGeant3TGeo";
@@ -161,6 +171,9 @@ int main(int argc, char** argv)
               std::string(argv[i]) == "-g4vm") g4VisMacro = argv[i+1];
     else if ( std::string(argv[i]) == "--g4-session" ||
               std::string(argv[i]) == "-g4s")  g4Session = argv[i+1];
+    // the following option are specific to use of Geant4 dependent classes
+    else if ( std::string(argv[i]) == "--g4-user-class" ||
+              std::string(argv[i]) == "-g4uc") g4UserClass = argv[i+1];
 #endif
 #ifdef USE_GEANT3
     if      ( std::string(argv[i]) == "--g3-geometry" ||
@@ -180,7 +193,7 @@ int main(int argc, char** argv)
 #ifdef USE_GEANT4
     PrintG4Configuration(
       "exampleE03", g4Geometry, g4PhysicsList, g4SpecialPhysics,
-      g4Macro, g4VisMacro, g4Session, rootMacro);
+      g4Macro, g4VisMacro, g4Session, g4UserClass, rootMacro);
 #endif
 #ifdef USE_GEANT3
     PrintG3Configuration(
@@ -197,8 +210,27 @@ int main(int argc, char** argv)
 
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4 
-  TG4RunConfiguration* runConfiguration 
-    = new TG4RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics);
+  TG4RunConfiguration* runConfiguration = 0;
+  if ( ! g4UserClass.size() ) {
+    runConfiguration
+      = new TG4RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics);
+  }
+  else if ( g4UserClass == "geometry" ) {
+    runConfiguration
+      = new Ex03RunConfiguration1(g4PhysicsList, g4SpecialPhysics);
+  }
+  else if ( g4UserClass == "physics-list" ) {
+    runConfiguration
+      = new Ex03RunConfiguration2(g4Geometry, g4SpecialPhysics);
+  }
+  else if ( g4UserClass == "regions" ) {
+    runConfiguration
+      = new Ex03RunConfiguration3(g4Geometry, g4PhysicsList, g4SpecialPhysics);
+  }
+  else {
+    PrintUsage("exampleE03");
+    return 1;
+  }
 
   // TGeant4
   TGeant4* geant4
@@ -229,7 +261,7 @@ int main(int argc, char** argv)
 #endif
 
   // Run example
-  if ( argc <= 1 ) {
+  if ( ! rootMacro.size() ) {
     appl->InitMC("");
 #ifdef USE_GEANT4
   // Setting Geant4 visualization
