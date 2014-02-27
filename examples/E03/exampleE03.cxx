@@ -144,7 +144,7 @@ int main(int argc, char** argv)
 #ifdef USE_GEANT4
   std::string g4Geometry = "geomRootToGeant4";
   std::string g4PhysicsList = "FTFP_BERT";
-  std::string g4SpecialPhysics = "";
+  std::string g4SpecialPhysics = "stepLimiter";
   std::string g4Macro = "g4config.in";
   std::string g4VisMacro = "g4vis.in";
   std::string g4Session = "";
@@ -207,6 +207,10 @@ int main(int argc, char** argv)
   Ex03MCApplication* appl 
     =  new Ex03MCApplication("ExampleE03", 
                              "The exampleE03 MC application");
+
+  if ( g4Geometry.find("VMC") != std::string::npos) {
+    appl->SetOldGeometry(true);
+  }
 
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4 

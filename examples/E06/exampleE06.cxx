@@ -143,7 +143,7 @@ int main(int argc, char** argv)
 #ifdef USE_GEANT4
   std::string g4Geometry = "geomRootToGeant4";
   std::string g4PhysicsList = "emStandard+optical";
-  std::string g4SpecialPhysics = "";
+  std::string g4SpecialPhysics = "stepLimiter";
   std::string g4Macro = "g4config.in";
   std::string g4Macro2 = "g4config2.in";
   std::string g4VisMacro = "g4vis.in";
@@ -207,6 +207,10 @@ int main(int argc, char** argv)
                              "The exampleE06 MC application");
   appl->GetPrimaryGenerator()->SetNofPrimaries(10);  
   //appl->SetVerboseLevel(3);  
+
+  if ( g4Geometry.find("VMC") != std::string::npos) {
+    appl->SetOldGeometry(true);
+  }
 
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4 

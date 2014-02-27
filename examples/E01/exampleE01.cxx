@@ -112,7 +112,7 @@ void PrintG3Configuration(
   std::cout << " " << programName << std::endl;
   std::cout << "     --g3-geometry:        " << g3Geometry << std::endl;
   if ( rootMacro.size() ) {
-    std::cout << "     --root-macro]:    " << rootMacro << std::endl;
+    std::cout << "   --root-macro:         " << rootMacro << std::endl;
   }
 }
 
@@ -133,8 +133,8 @@ int main(int argc, char** argv)
   // the program name
 #ifdef USE_GEANT4
   std::string g4Geometry = "geomRootToGeant4";
-  std::string g4PhysicsList = "FTFP_BERT";
-  std::string g4SpecialPhysics = "";
+  std::string g4PhysicsList = "emStandard";
+  std::string g4SpecialPhysics = "stepLimiter";
   std::string g4Macro = "";
   std::string g4VisMacro = "";
   std::string g4Session = "";
@@ -193,6 +193,10 @@ int main(int argc, char** argv)
   Ex01MCApplication* appl 
     =  new Ex01MCApplication("ExampleE01",
                              "The exampleE01 MC application");
+
+  if ( g4Geometry.find("VMC") != std::string::npos) {
+    appl->SetOldGeometry(true);
+  }
 
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4 
