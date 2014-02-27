@@ -1,5 +1,5 @@
 #------------------------------------------------
-# The Virtual Monte Carlo examples
+# The Virtual Monte Carlo tests
 # Copyright (C) 2014 Ivana Hrivnacova
 # All rights reserved.
 #
@@ -7,7 +7,7 @@
 # Contact: vmc@pcroot.cern.ch
 #-------------------------------------------------
 
-# CMake Configuration file for the VMC E01 example
+# CMake Configuration file for the VMC E01 test
 # I. Hrivnacova, 31/01/2014
 
 #----------------------------------------------------------------------------
@@ -42,7 +42,7 @@ include_directories(
 # Generate Root dictionaries
 #
 ROOT_GENERATE_DICTIONARY(
-  exampleE01Dict 
+  testE01Dict
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex01MCApplication.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex01MCStack.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex01DetectorConstructionOld.h
@@ -59,16 +59,16 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(exampleE01 exampleE01.cxx exampleE01Dict.cxx ${sources} ${headers})
-target_link_libraries(exampleE01 ${VMC_LIBRARIES})
+add_executable(testE01 testE01.cxx testE01Dict.cxx ${sources} ${headers})
+target_link_libraries(testE01 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets
 # (this avoids the need of typing the program name after make)
 #
-add_custom_target(E01 DEPENDS exampleE01)
+add_custom_target(E01 DEPENDS testE01)
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS exampleE01 DESTINATION bin)
+install(TARGETS testE01 DESTINATION bin)

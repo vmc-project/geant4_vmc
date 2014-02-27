@@ -7,7 +7,7 @@
 # Contact: vmc@pcroot.cern.ch
 #-------------------------------------------------
 
-# CMake Configuration file for the VMC E03 example
+# CMake Configuration file for the VMC E03 test
 # I. Hrivnacova, 31/01/2014
 
 #----------------------------------------------------------------------------
@@ -42,7 +42,7 @@ include_directories(
 # Generate Root dictionaries
 #
 ROOT_GENERATE_DICTIONARY(
-  exampleE03Dict 
+  testE03Dict
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03MCApplication.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03MCStack.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03DetectorConstruction.h
@@ -76,16 +76,16 @@ endif(GEANT4_FOUND)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(exampleE03 exampleE03.cxx exampleE03Dict.cxx ${sources} ${headers})
-target_link_libraries(exampleE03 ${VMC_LIBRARIES})
+add_executable(testE03 testE03.cxx testE03Dict.cxx ${sources} ${headers})
+target_link_libraries(testE03 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets
 # (this avoids the need of typing the program name after make)
 #
-add_custom_target(E03 DEPENDS exampleE03)
+add_custom_target(E03 DEPENDS testE03)
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS exampleE03 DESTINATION bin)
+install(TARGETS testE03 DESTINATION bin)

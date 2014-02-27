@@ -7,7 +7,7 @@
 # Contact: vmc@pcroot.cern.ch
 #-------------------------------------------------
 
-# CMake Configuration file for the VMC E06 example
+# CMake Configuration file for the VMC E06 test
 # I. Hrivnacova, 31/01/2014
 
 #----------------------------------------------------------------------------
@@ -42,7 +42,7 @@ include_directories(
 # Generate Root dictionaries
 #
 ROOT_GENERATE_DICTIONARY(
-  exampleE06Dict 
+  testE06Dict
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex06MCApplication.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03MCStack.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex06DetectorConstruction.h
@@ -60,16 +60,16 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(exampleE06 exampleE06.cxx exampleE06Dict.cxx ${sources} ${headers})
-target_link_libraries(exampleE06 ${VMC_LIBRARIES})
+add_executable(testE06 testE06.cxx testE06Dict.cxx ${sources} ${headers})
+target_link_libraries(testE06 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets
 # (this avoids the need of typing the program name after make)
 #
-add_custom_target(E06 DEPENDS exampleE06)
+add_custom_target(E06 DEPENDS testE06)
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS exampleE06 DESTINATION bin)
+install(TARGETS testE06 DESTINATION bin)
