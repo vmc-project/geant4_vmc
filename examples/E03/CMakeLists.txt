@@ -60,6 +60,20 @@ file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cxx)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 
 #----------------------------------------------------------------------------
+# Add sources from geant4
+#
+if (GEANT4_FOUND)
+  include_directories(
+    ${PROJECT_SOURCE_DIR}/geant4/include)
+  list(APPEND sources
+    ${PROJECT_SOURCE_DIR}/geant4/src/B4DetectorConstruction.cxx
+    ${PROJECT_SOURCE_DIR}/geant4/src/Ex03RegionConstruction.cxx
+    ${PROJECT_SOURCE_DIR}/geant4/src/Ex03RunConfiguration1.cxx
+    ${PROJECT_SOURCE_DIR}/geant4/src/Ex03RunConfiguration2.cxx
+    ${PROJECT_SOURCE_DIR}/geant4/src/Ex03RunConfiguration3.cxx)
+endif(GEANT4_FOUND)
+
+#----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
 add_executable(exampleE03 exampleE03.cxx exampleE03Dict.cxx ${sources} ${headers})
