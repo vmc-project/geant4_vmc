@@ -42,7 +42,7 @@ include_directories(
 # Generate Root dictionaries
 #
 ROOT_GENERATE_DICTIONARY(
-  testE01Dict
+  exampleE01Dict
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex01MCApplication.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex01MCStack.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex01DetectorConstructionOld.h
@@ -57,18 +57,20 @@ file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cxx)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 
 #----------------------------------------------------------------------------
-# Add the executable, and link it to the Geant4 libraries
+# Add the executables, and link it to the Geant4 libraries
 #
-add_executable(testE01 testE01.cxx testE01Dict.cxx ${sources} ${headers})
+add_executable(exampleE01 exampleE01.cxx exampleE01Dict.cxx ${sources} ${headers})
+target_link_libraries(exampleE01 ${VMC_LIBRARIES})
+add_executable(testE01 testE01.cxx exampleE01Dict.cxx ${sources} ${headers})
 target_link_libraries(testE01 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets
 # (this avoids the need of typing the program name after make)
 #
-add_custom_target(E01 DEPENDS testE01)
+add_custom_target(E01 DEPENDS exampleE01 testE01)
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS testE01 DESTINATION bin)
+install(TARGETS exampleE01 testE01  DESTINATION bin)

@@ -43,7 +43,7 @@ include_directories(
 # Generate Root dictionaries
 #
 ROOT_GENERATE_DICTIONARY(
-  testA01Dict
+  exampleA01Dict
   ${CMAKE_CURRENT_SOURCE_DIR}/include/A01MCApplication.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03MCStack.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/A01MagField.h
@@ -69,16 +69,18 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(testA01 testA01.cxx testA01Dict.cxx ${sources} ${headers})
+add_executable(exampleA01 exampleA01.cxx exampleA01Dict.cxx ${sources} ${headers})
+target_link_libraries(exampleA01 ${VMC_LIBRARIES})
+add_executable(testA01 testA01.cxx exampleA01Dict.cxx ${sources} ${headers})
 target_link_libraries(testA01 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets
 # (this avoids the need of typing the program name after make)
 #
-add_custom_target(A01 DEPENDS testA01)
+add_custom_target(A01 DEPENDS exampleA01 testA01)
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS testA01 DESTINATION bin)
+install(TARGETS exampleA01 testA01 DESTINATION bin)
