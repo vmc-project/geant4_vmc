@@ -165,9 +165,11 @@ Examples Executables
   cd geant4_vmc/examples/E01
   ../../examples_build_g4/E01/exampleE01
   
-  The default configuration options defined in main() function
+  For keeping code simplicity, a fixed configuration is defined in
+  the examples main() function. More flexible version of the main function
+  is provided in the test programs where the default configuration options
   can be changed by running the program with command lined options, eg.
-  exampleE01
+  testE01
    [-g4g,  --g4-geometry]:        Geant4 VMC geometry option
    [-g4pl, --g4-physics-list]:    Geant4 physics list selection
    [-g4sp, --g4-special-physics]: Geant4 special physics selection
