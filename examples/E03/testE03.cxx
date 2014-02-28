@@ -171,7 +171,7 @@ int main(int argc, char** argv)
               std::string(argv[i]) == "-g4vm") g4VisMacro = argv[i+1];
     else if ( std::string(argv[i]) == "--g4-session" ||
               std::string(argv[i]) == "-g4s")  g4Session = argv[i+1];
-    // the following option are specific to use of Geant4 dependent classes
+    // the following option is specific to use of Geant4 dependent classes
     else if ( std::string(argv[i]) == "--g4-user-class" ||
               std::string(argv[i]) == "-g4uc") g4UserClass = argv[i+1];
 #endif

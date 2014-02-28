@@ -67,6 +67,19 @@ file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cxx)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 
 #----------------------------------------------------------------------------
+# Add sources from geant4
+#
+if (GEANT4_FOUND)
+  include_directories(
+    ${PROJECT_SOURCE_DIR}/geant4/include)
+  list(APPEND sources
+    ${PROJECT_SOURCE_DIR}/geant4/src/A01CellParameterisation.cxx
+    ${PROJECT_SOURCE_DIR}/geant4/src/A01DetectorConstMessenger.cxx
+    ${PROJECT_SOURCE_DIR}/geant4/src/A01DetectorConstruction.cxx
+    ${PROJECT_SOURCE_DIR}/geant4/src/A01RunConfiguration.cxx)
+endif(GEANT4_FOUND)
+
+#----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
 add_executable(exampleA01 exampleA01.cxx exampleA01Dict.cxx ${sources} ${headers})

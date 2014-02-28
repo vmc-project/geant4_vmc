@@ -31,7 +31,7 @@ void Config()
   // Run configuration with user geometry construction via Geant4
   // + special cuts activated
   // Ex03RunConfiguration1* runConfiguration 
-  //   = new Ex03RunConfiguration1("emStandard", "specialCuts");
+  //   = new Ex03RunConfiguration1("FTFP_BERT", "specialCuts");
 
   // TGeant4
   TGeant4* geant4

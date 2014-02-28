@@ -23,9 +23,6 @@ void Config()
 /// It demonstrates activation of user defined regions
 /// for geometry defined with Root and selected G4Root navigation.
 
-  // Load G4 novice N03 example library (with detector construction)
-  gSystem->Load("$G4INSTALL/tmp/$G4SYSTEM/exampleN03/libexampleN03");
-
   // Load library with a user run configuration
   gSystem->Load("libgeant4e03");
 

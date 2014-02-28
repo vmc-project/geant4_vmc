@@ -179,7 +179,7 @@ do
       root.exe -b -q "test_$EXAMPLE.C(\"g4tgeoConfig.C\", kFALSE)" >& $OUT/test_g4_tgeo_tgeo.out   
 
       echo "... Running test with G4, geometry via G4, Native navigation" 
-      root.exe -b -q "test_$EXAMPLE.C(\"g4Config1.C\", kFALSE)" >& $OUT/test_g4_nat.out   
+      root.exe -b -q "test_$EXAMPLE.C(\"g4Config1.C\", kFALSE)" >& $OUT/test_g4_g4_nat.out   
     fi  
   fi  
 

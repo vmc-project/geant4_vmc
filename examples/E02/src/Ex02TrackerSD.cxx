@@ -88,8 +88,6 @@ void Ex02TrackerSD::Initialize()
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
   
-  cout << "Ex02TrackerSD::Initialize " << this << endl;
-
   static __thread Bool_t registered = false;
   if ( ! registered ) {
     cout << "... creating TClonesArray" << endl;

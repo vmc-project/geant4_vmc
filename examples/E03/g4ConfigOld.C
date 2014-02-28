@@ -26,7 +26,7 @@ void Config()
     
   // Run configuration with special cuts activated
   // TG4RunConfiguration2* runConfiguration 
-  //  = new TG4RunConfiguration2("geomVMCToGeant4", "emStandard", "specialCuts");
+  //  = new TG4RunConfiguration2("geomVMCToGeant4", "FTFP_BERT", "specialCuts");
 
   // TGeant4
   TGeant4* geant4
