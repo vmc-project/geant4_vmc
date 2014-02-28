@@ -205,9 +205,9 @@ inline void TG4StepManager::SetSteppingManager(G4SteppingManager* manager) {
   fSteppingManager = manager; 
 
   /// Set navigator !!!
-  G4cout << "SetNavigator:"
-         << G4TransportationManager::GetTransportationManager()
-		   ->GetNavigatorForTracking() << G4endl;
+  //G4cout << "SetNavigator:"
+  //       << G4TransportationManager::GetTransportationManager()
+  //		   ->GetNavigatorForTracking() << G4endl;
   fSteppingManager
     ->SetNavigator(G4TransportationManager::GetTransportationManager()
 		   ->GetNavigatorForTracking());

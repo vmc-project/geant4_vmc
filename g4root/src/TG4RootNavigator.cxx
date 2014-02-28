@@ -79,7 +79,7 @@ void TG4RootNavigator::SetDetectorConstruction(TG4RootDetectorConstruction *dc)
    }
    fNavigator = fGeometry->GetCurrentNavigator();
    if (!fNavigator) fNavigator = fGeometry->AddNavigator();
-   G4cout << "Navigator created: " << fNavigator << G4endl;
+   //G4cout << "Navigator created: " << fNavigator << G4endl;
    fDetConstruction = dc;
 }
   
