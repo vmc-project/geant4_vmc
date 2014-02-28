@@ -33,7 +33,7 @@ class Ex03RunConfiguration3 : public TG4RunConfiguration
 {
   public:
     Ex03RunConfiguration3(const TString& userGeometry,
-                          const TString& physicsList = "emStandard",
+                          const TString& physicsList = "FTFP_BERT",
                           const TString& specialProcess = "stepLimiter");
     virtual ~Ex03RunConfiguration3();
 

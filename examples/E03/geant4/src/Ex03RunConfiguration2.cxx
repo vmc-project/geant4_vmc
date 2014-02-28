@@ -28,13 +28,13 @@
 //_____________________________________________________________________________
 Ex03RunConfiguration2::Ex03RunConfiguration2(const TString& userGeometry,
                                              const TString& specialProcess)
-  : TG4RunConfiguration(userGeometry, "emStandard", specialProcess) 
+  : TG4RunConfiguration(userGeometry, "FTFP_BERT", specialProcess) 
 {
 /// Standard constructor
 /// \param userGeometry    Selection of geometry input and navigation
 /// \param specialProcess  Selection of the special processes
 ///
-/// The physics physics list selection ("emStandard") is not used,
+/// The physics physics list selection ("FTFP_BERT") is not used,
 /// \see More on the available option in class TG4RunConfiguration:
 /// http://ivana.home.cern.ch/ivana/g4vmc_html/classTG4RunConfiguration.html
 }
