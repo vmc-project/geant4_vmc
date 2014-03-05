@@ -90,7 +90,7 @@ void Ex02TrackerSD::Initialize()
   
   static __thread Bool_t registered = false;
   if ( ! registered ) {
-    cout << "... creating TClonesArray" << endl;
+    //cout << "... creating TClonesArray" << endl;
 
     // Lock Root when creating data - seems not to be needed ?
     fTrackerCollection = new TClonesArray("Ex02TrackerHit");
