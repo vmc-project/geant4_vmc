@@ -50,7 +50,7 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title)
 /// \param name   The MC application name 
 /// \param title  The MC application description
 
-  cout << "Ex02MCApplication::Ex02MCApplication " << this << endl;  
+  //cout << "Ex02MCApplication::Ex02MCApplication " << this << endl;
 
   // Create application data
 
@@ -80,14 +80,14 @@ Ex02MCApplication::~Ex02MCApplication()
 {
 /// Destructor  
   
-  cout << "Ex02MCApplication::~Ex02MCApplication " << this << endl;  
+  //cout << "Ex02MCApplication::~Ex02MCApplication " << this << endl;
 
   delete fRootManager;
   delete fStack;
   delete fMagField;
   delete gMC;
 
-  cout << "Done Ex02MCApplication::~Ex02MCApplication " << this << endl;  
+  //cout << "Done Ex02MCApplication::~Ex02MCApplication " << this << endl;
 }
 
 //
@@ -99,7 +99,7 @@ void Ex02MCApplication::RegisterStack() const
 /// Register stack in the Root manager.
 
   if ( fRootManager ) {
-    cout << "Ex02MCApplication::RegisterStack: " << endl;
+    //cout << "Ex02MCApplication::RegisterStack: " << endl;
     fRootManager->Register("stack", "Ex02MCStack", &fStack);
   }
 }
@@ -153,7 +153,7 @@ void Ex02MCApplication::FinishRun()
 {    
 /// Finish MC run.
 
-  cout << "Ex02MCApplication::FinishRun: " << endl;  
+  //cout << "Ex02MCApplication::FinishRun: " << endl;
   if ( fRootManager ) {
     //fRootManager->WriteAndClose();
     fRootManager->WriteAll();
@@ -170,7 +170,7 @@ TVirtualMCApplication* Ex02MCApplication::CloneForWorker() const
 //_____________________________________________________________________________
 void Ex02MCApplication::InitForWorker() const 
 {
-  cout << "Ex02MCApplication::InitForWorker " << this << endl;
+  //cout << "Ex02MCApplication::InitForWorker " << this << endl;
 
   // Create Root manager 
   fRootManager 
@@ -187,7 +187,7 @@ void Ex02MCApplication::InitForWorker() const
 //_____________________________________________________________________________
 void Ex02MCApplication::FinishWorkerRun() const
 {
-  cout << "Ex02MCApplication::FinishWorkerRun: " << endl;  
+  //cout << "Ex02MCApplication::FinishWorkerRun: " << endl;
   if ( fRootManager ) {
     //fRootManager->WriteAndClose();
     fRootManager->WriteAll();
@@ -341,7 +341,7 @@ void Ex02MCApplication::FinishEvent()
 
   fTrackerSD.EndOfEvent();
 
-  //fStack->Print();  
+  fStack->Print();
   fStack->Reset();
 } 
 
