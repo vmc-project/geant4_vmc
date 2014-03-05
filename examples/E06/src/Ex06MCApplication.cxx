@@ -116,7 +116,7 @@ Ex06MCApplication::~Ex06MCApplication()
 /// Destructor  
   
 
-  cout << "Ex06MCApplication::~Ex06MCApplication " << this << endl;
+  //cout << "Ex06MCApplication::~Ex06MCApplication " << this << endl;
 
   delete fStack;
   delete fMagField;
@@ -124,7 +124,7 @@ Ex06MCApplication::~Ex06MCApplication()
   delete fPrimaryGenerator;
   delete gMC;
 
-  cout << "Done Ex06MCApplication::~Ex06MCApplication " << this << endl;
+  //cout << "Done Ex06MCApplication::~Ex06MCApplication " << this << endl;
 }
 
 //
@@ -173,7 +173,7 @@ TVirtualMCApplication* Ex06MCApplication::CloneForWorker() const
 //_____________________________________________________________________________
 void Ex06MCApplication::InitForWorker() const
 {
-  cout << "Ex06MCApplication::InitForWorker " << this << endl;
+  //cout << "Ex06MCApplication::InitForWorker " << this << endl;
 
   // Set data to MC
   gMC->SetStack(fStack);
@@ -183,7 +183,7 @@ void Ex06MCApplication::InitForWorker() const
 //_____________________________________________________________________________
 void Ex06MCApplication::Merge(TVirtualMCApplication* localMCApplication)
 {
-  cout << "Ex06MCApplication::Merge " << this << endl;
+  //cout << "Ex06MCApplication::Merge " << this << endl;
 
   Ex06MCApplication* ex06LocalMCApplication
     = static_cast<Ex06MCApplication*>(localMCApplication);

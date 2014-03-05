@@ -160,7 +160,7 @@ A01MCApplication::~A01MCApplication()
 {
 /// Destructor  
   
-  cout << "A01MCApplication::~A01MCApplication " << this << endl;
+  //cout << "A01MCApplication::~A01MCApplication " << this << endl;
 
   delete fRootManager;
   delete fStack;
@@ -175,7 +175,7 @@ A01MCApplication::~A01MCApplication()
   delete fMagField;
   delete gMC;
 
-  cout << "Done A01MCApplication::~A01MCApplication " << this << endl;
+  //cout << "Done A01MCApplication::~A01MCApplication " << this << endl;
 }
 
 //
@@ -188,7 +188,7 @@ void A01MCApplication::RegisterStack() const
 /// Register stack in the Root manager.
 
   if ( fWriteStack && fRootManager ) {
-    cout << "A01MCApplication::RegisterStack: " << endl;
+    //cout << "A01MCApplication::RegisterStack: " << endl;
     fRootManager->Register("stack", "Ex03MCStack", &fStack);   
   }  
 }  
@@ -258,14 +258,14 @@ void A01MCApplication::FinishRun()
 //_____________________________________________________________________________
 TVirtualMCApplication* A01MCApplication::CloneForWorker() const
 {
-  cout << "A01MCApplication::CloneForWorker " << this << endl;
+  //cout << "A01MCApplication::CloneForWorker " << this << endl;
   return new A01MCApplication(*this);
 }
 
 //_____________________________________________________________________________
 void A01MCApplication::InitForWorker() const
 {
-  cout << "A01MCApplication::InitForWorker " << this << endl;
+  //cout << "A01MCApplication::InitForWorker " << this << endl;
 
   // Create Root manager
   fRootManager
@@ -282,7 +282,7 @@ void A01MCApplication::InitForWorker() const
 //_____________________________________________________________________________
 void A01MCApplication::FinishWorkerRun() const
 {
-  cout << "A01MCApplication::FinishWorkerRun: " << endl;
+  //cout << "A01MCApplication::FinishWorkerRun: " << endl;
   if ( fRootManager ) {
     fRootManager->WriteAll();
     fRootManager->Close();

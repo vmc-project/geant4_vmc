@@ -139,7 +139,7 @@ Ex03MCApplication::~Ex03MCApplication()
 {
 /// Destructor  
   
-  cout << "Ex03MCApplication::~Ex03MCApplication " << this << endl;
+  //cout << "Ex03MCApplication::~Ex03MCApplication " << this << endl;
 
   delete fRootManager;
   delete fStack;
@@ -149,7 +149,7 @@ Ex03MCApplication::~Ex03MCApplication()
   delete fMagField;
   delete gMC;
 
-  cout << "Done Ex03MCApplication::~Ex03MCApplication " << this << endl;
+  //cout << "Done Ex03MCApplication::~Ex03MCApplication " << this << endl;
 }
 
 //
@@ -162,7 +162,7 @@ void Ex03MCApplication::RegisterStack() const
 /// Register stack in the Root manager.
 
   if ( fRootManager ) {
-    cout << "Ex03MCApplication::RegisterStack: " << endl;
+    //cout << "Ex03MCApplication::RegisterStack: " << endl;
     fRootManager->Register("stack", "Ex03MCStack", &fStack);
   }
 }
@@ -218,7 +218,7 @@ void Ex03MCApplication::FinishRun()
 /// Finish MC run.
 
   fVerbose.FinishRun();
-  cout << "Ex03MCApplication::FinishRun: " << endl;
+  //cout << "Ex03MCApplication::FinishRun: " << endl;
   if ( fRootManager ) {
     fRootManager->WriteAll();
     fRootManager->Close();
@@ -234,7 +234,7 @@ TVirtualMCApplication* Ex03MCApplication::CloneForWorker() const
 //_____________________________________________________________________________
 void Ex03MCApplication::InitForWorker() const
 {
-  cout << "Ex03MCApplication::InitForWorker " << this << endl;
+  //cout << "Ex03MCApplication::InitForWorker " << this << endl;
 
   // Create Root manager
   fRootManager
@@ -251,7 +251,7 @@ void Ex03MCApplication::InitForWorker() const
 //_____________________________________________________________________________
 void Ex03MCApplication::FinishWorkerRun() const
 {
-  cout << "Ex03MCApplication::FinishWorkerRun: " << endl;
+  //cout << "Ex03MCApplication::FinishWorkerRun: " << endl;
   if ( fRootManager ) {
     fRootManager->WriteAll();
     fRootManager->Close();
