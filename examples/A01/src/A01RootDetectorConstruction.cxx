@@ -21,7 +21,6 @@
 #include <TGeoManager.h>
 #include <TVirtualMC.h>
 #include <TList.h>
-#include <TThread.h>
 
 #include "A01RootDetectorConstruction.h"
 
