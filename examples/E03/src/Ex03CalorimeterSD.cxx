@@ -116,9 +116,9 @@ void Ex03CalorimeterSD::Initialize()
   fGapVolId = gMC->VolId("GAPX");
   
   if ( fAbsorberVolId == 0 && fGapVolId == 0 ) {
-    // Volume names are different in N03 detector construction
-    fAbsorberVolId = gMC->VolId("Lead");  
-    fGapVolId = gMC->VolId("liquidArgon");
+    // Volume names are different in B4 detector construction
+    fAbsorberVolId = gMC->VolId("Abso");
+    fGapVolId = gMC->VolId("Gap");
   }  
 }
 
