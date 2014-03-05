@@ -66,6 +66,7 @@ class A01DetectorConstruction : public G4VUserDetectorConstruction
     virtual ~A01DetectorConstruction();
 
     virtual G4VPhysicalVolume* Construct();
+    virtual void ConstructSDandField();
     void SetArmAngle(G4double val);
     inline G4double GetArmAngle() { return fArmAngle; }
 
