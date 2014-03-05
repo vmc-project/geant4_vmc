@@ -42,7 +42,7 @@ include_directories(
 # Generate Root dictionaries
 #
 ROOT_GENERATE_DICTIONARY(
-  testE06Dict
+  exampleE06Dict
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex06MCApplication.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03MCStack.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex06DetectorConstruction.h
@@ -60,9 +60,9 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(exampleE06 exampleE06.cxx testE06Dict.cxx ${sources} ${headers})
+add_executable(exampleE06 exampleE06.cxx exampleE06Dict.cxx ${sources} ${headers})
 target_link_libraries(exampleE06 ${VMC_LIBRARIES})
-add_executable(testE06 testE06.cxx testE06Dict.cxx ${sources} ${headers})
+add_executable(testE06 testE06.cxx exampleE06Dict.cxx ${sources} ${headers})
 target_link_libraries(testE06 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
