@@ -283,7 +283,7 @@ void B4DetectorConstruction::ConstructSDandField()
 { 
   // Added for VMC
   TG4GeometryManager::Instance()->ConstructSDandField();
-
+/*
   // Create global magnetic field messenger.
   // Uniform magnetic field is then created automatically if
   // the field value is not zero.
@@ -293,6 +293,7 @@ void B4DetectorConstruction::ConstructSDandField()
   
   // Register the field messenger for deleting
   G4AutoDelete::Register(fMagFieldMessenger);
+*/
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
