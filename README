@@ -126,14 +126,19 @@ Examples
   http://root.cern.ch/root/Install.html
   (Or directly from: ftp://root.cern.ch/root/pythia/)
 
-Examples Executables
+Examples Programs
 =====================
-  Since Geant4 VMC 3.0, there are also provided examples main programs
+  Since Geant4 VMC 3.0.x, there are also provided examples main programs
   which can be built against static libraries of all packages. This makes
   execution faster (10% gain was observed on A01 example in sequential mode
   and 24% in multi-threading mode).
 
-  The executables can be built using CMake in a standard way.
+  The programs can be built using CMake in a standard way. The CMake
+  configuration files, CMakeLists.txt, provided within examples are defined
+  with use of a generic configuration files UseVMC.cmake and FindVMC.cmake,
+  provided in geant4_vmc/cmake directory together with other Find modules for
+  all used packages. FindVMC.cmake is used to find all used packages which
+  selection is made by the user via the CMake options defined in this file.
 
   # build with Geant4
   cd geant4_vmc
@@ -165,22 +170,24 @@ Examples Executables
   cd geant4_vmc/examples/E01
   ../../examples_build_g4/E01/exampleE01
   
-  For keeping code simplicity, a fixed configuration is defined in
-  the examples main() function. More flexible version of the main function
-  is provided in the test programs where the default configuration options
-  can be changed by running the program with command lined options, eg.
-  testE01
-   [-g4g,  --g4-geometry]:        Geant4 VMC geometry option
-   [-g4pl, --g4-physics-list]:    Geant4 physics list selection
-   [-g4sp, --g4-special-physics]: Geant4 special physics selection
-   [-g4m,  --g4-macro]:           Geant4 macro
-   [-g4vm, --g4-vis-macro]:       Geant4 visualization macro
-   [-g3g,  --g3-geometry]:        Geant3 geometry option (TGeant3,TGeant3TGeo)
-   [-r4m,  --root-macro]:         Root macro
-   [-v,    --verbose]:            verbose option (yes,no)
+  For keeping maximum simplicity of the code, a fixed configuration is defined
+  in the examples main() function. More flexible version of the main() function
+  is provided in the test programs which default configuration options
+  can be changed by running the program with selectedcommand lined options,
+  eg.
 
-  Note that the g4* and g3* options are available only when built
-  with the corresponding WITH_GEANT3 or WITH_GEANT3 option.
+  testE01
+   [-g4g,  --g4-geometry]         Geant4 VMC geometry option
+   [-g4pl, --g4-physics-list]     Geant4 physics list selection
+   [-g4sp, --g4-special-physics]  Geant4 special physics selection
+   [-g4m,  --g4-macro]            Geant4 macro
+   [-g4vm, --g4-vis-macro]        Geant4 visualization macro
+   [-g3g,  --g3-geometry]         Geant3 geometry option (TGeant3,TGeant3TGeo)
+   [-r4m,  --root-macro]          Root macro
+   [-v,    --verbose]             verbose option (yes,no)
+
+  Note that the g4* and g3* options are available only when only when the
+  program was built with the corresponding WITH_GEANT3 or WITH_GEANT3 option.
   Root macro with arguments has to be passed in a single string, eg.
    --root-macro 'test_E01.C("",kFALSE)'
 
