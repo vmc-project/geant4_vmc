@@ -194,9 +194,16 @@ int main(int argc, char** argv)
     =  new Ex01MCApplication("ExampleE01",
                              "The exampleE01 MC application");
 
+#ifdef USE_GEANT4
   if ( g4Geometry.find("VMC") != std::string::npos) {
     appl->SetOldGeometry(true);
   }
+#endif
+#ifdef USE_GEANT3
+  if ( g3Geometry == "TGeant3" ) {
+    appl->SetOldGeometry(true);
+  }
+#endif
 
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4 
