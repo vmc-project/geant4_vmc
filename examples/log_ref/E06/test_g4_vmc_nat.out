@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/13  30 November 2013   *
+  *   Version   5.34/17  24 February 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/13 (v5-34-13@v5-34-13, Dec 05 2013, 12:50:09 on linuxx8664gcc)
+ROOT 5.34/17 (v5-34-17@v5-34-17, Mar 06 2014, 20:58:17 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -17,13 +17,14 @@ Enclose multiple statements between { }.
 
 Processing test_E06.C("g4ConfigOld.C", kTRUE)...
 Loading Geant4 libraries (using geant4-config) ...
-32
+33
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
+Loading mtroot library ...
 
 *************************************************************
- Geant4 version Name: geant4-10-00    (6-December-2013)
+ Geant4 version Name: geant4-10-00-patch-01    (28-February-2014)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -32,7 +33,6 @@ Loading geant4vmc library ...
 Adding EMPhysicsList emStandard
 Adding ExtraPhysicsList optical 
 Adding SpecialPhysicsList stepLimiter
-Available UI session types: [ GAG, tcsh, csh ]
 Visualization Manager instantiating with verbosity "warnings (3)"...
 Geometry will be defined via VMC
 Air
@@ -63,23 +63,13 @@ The material properties REFLECTIVITY set for optical surface AirSurface
 The material properties EFFICIENCY set for optical surface AirSurface
 ### EM physics constructed. 
 G4OpticalPhysics:: Add Optical Physics Processes
-  Cerenkov process:  used
-    Max number of photons per step: 20
-    Max beta change per step:       0.1
-  Track secondaries first:  activated
-  Scintillation process:  not used
-  OpAbsorption process:  used
-  OpRayleigh process:  used
-  OpMieHG process:  used
-  OpBoundary process:  used
-  OpWLS process:  used
-     WLS process time profile: delta
 ### Optical physics constructed.
 ### Extra physics constructed: Optical 
 ### Processes mapped to VMC controls ok.
 ### Step limiter physics constructed.
 ### User particles physics constructed. 
 ### Processes mapped to VMC codes ok.
+Available UI session types: [ GAG, tcsh, csh ]
 
 **********************************************
     GEANT4 Geometry statistics: 
@@ -90,302 +80,6 @@ G4OpticalPhysics:: Add Optical Physics Processes
               3 sensitive detectors
 **********************************************
 
-
-***** Table : Nb of materials = 2 *****
-
- Material:      Air    density:  1.290 mg/cm3  RadL: 285.113 m    Nucl.Int.Length: 662.641 m  
-                       Imean:  85.703 eV   temperature: 273.15 K  pressure:   1.00 atm
-
-   --->  Element: Nitrogen (N)   Z =  7.0   N =  14.0   A =  14.01 g/mole
-         --->  Isotope:   N14   Z =  7   N =  14   A =  14.00 g/mole   abundance:  99.63 %
-         --->  Isotope:   N15   Z =  7   N =  15   A =  15.00 g/mole   abundance:   0.37 %
-          ElmMassFraction:  70.00 %  ElmAbundance  72.72 % 
-
-   --->  Element: Oxygen (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole
-         --->  Isotope:   O16   Z =  8   N =  16   A =  15.99 g/mole   abundance:  99.76 %
-         --->  Isotope:   O17   Z =  8   N =  17   A =  17.00 g/mole   abundance:   0.04 %
-         --->  Isotope:   O18   Z =  8   N =  18   A =  18.00 g/mole   abundance:   0.20 %
-          ElmMassFraction:  30.00 %  ElmAbundance  27.28 % 
-
-
- Material:    Water    density:  1.000 g/cm3   RadL:  36.086 cm   Nucl.Int.Length:  75.403 cm 
-                       Imean:  68.963 eV 
-
-   --->  Element: Hydrogen (H)   Z =  1.0   N =   1.0   A =   1.01 g/mole
-         --->  Isotope:    H1   Z =  1   N =   1   A =   1.01 g/mole   abundance:  99.99 %
-         --->  Isotope:    H2   Z =  1   N =   2   A =   2.01 g/mole   abundance:   0.01 %
-          ElmMassFraction:  11.21 %  ElmAbundance  66.71 % 
-
-   --->  Element: Oxygen (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole
-         --->  Isotope:   O16   Z =  8   N =  16   A =  15.99 g/mole   abundance:  99.76 %
-         --->  Isotope:   O17   Z =  8   N =  17   A =  17.00 g/mole   abundance:   0.04 %
-         --->  Isotope:   O18   Z =  8   N =  18   A =  18.00 g/mole   abundance:   0.20 %
-          ElmMassFraction:  88.79 %  ElmAbundance  33.29 % 
-
-
-Water material properties table: 
-ABSLENGTH
-2.034e-06	3448
-2.068e-06	4082
-2.103e-06	6329
-2.139e-06	9174
-2.177e-06	12346
-2.216e-06	13889
-2.256e-06	15152
-2.298e-06	17241
-2.341e-06	18868
-2.386e-06	20000
-2.433e-06	26316
-2.481e-06	35714
-2.532e-06	45455
-2.585e-06	47619
-2.64e-06	52632
-2.697e-06	52632
-2.757e-06	55556
-2.82e-06	52632
-2.885e-06	52632
-2.954e-06	47619
-3.026e-06	45455
-3.102e-06	41667
-3.181e-06	37037
-3.265e-06	33333
-3.353e-06	30000
-3.446e-06	28500
-3.545e-06	27000
-3.649e-06	24500
-3.76e-06	22000
-3.877e-06	19500
-4.002e-06	17500
-4.136e-06	14500
-EFFICIENCY
-2.034e-06	0
-2.068e-06	0
-2.103e-06	0
-2.139e-06	0
-2.177e-06	0
-2.216e-06	0
-2.256e-06	0
-2.298e-06	0
-2.341e-06	0
-2.386e-06	0
-2.433e-06	0
-2.481e-06	0
-2.532e-06	0
-2.585e-06	0
-2.64e-06	0
-2.697e-06	0
-2.757e-06	0
-2.82e-06	0
-2.885e-06	0
-2.954e-06	0
-3.026e-06	0
-3.102e-06	0
-3.181e-06	0
-3.265e-06	0
-3.353e-06	0
-3.446e-06	0
-3.545e-06	0
-3.649e-06	0
-3.76e-06	0
-3.877e-06	0
-4.002e-06	0
-4.136e-06	0
-FASTCOMPONENT
-2.034e-06	1
-2.068e-06	1
-2.103e-06	1
-2.139e-06	1
-2.177e-06	1
-2.216e-06	1
-2.256e-06	1
-2.298e-06	1
-2.341e-06	1
-2.386e-06	1
-2.433e-06	1
-2.481e-06	1
-2.532e-06	1
-2.585e-06	1
-2.64e-06	1
-2.697e-06	1
-2.757e-06	1
-2.82e-06	1
-2.885e-06	1
-2.954e-06	1
-3.026e-06	1
-3.102e-06	1
-3.181e-06	1
-3.265e-06	1
-3.353e-06	1
-3.446e-06	1
-3.545e-06	1
-3.649e-06	1
-3.76e-06	1
-3.877e-06	1
-4.002e-06	1
-4.136e-06	1
-MIEHG
-1.56962e-06	1.67024e+08
-1.58974e-06	1.58727e+08
-1.61039e-06	1.50742e+08
-1.63157e-06	1.43062e+08
-1.65333e-06	1.3568e+08
-1.67567e-06	1.28587e+08
-1.69863e-06	1.21776e+08
-1.72222e-06	1.1524e+08
-1.74647e-06	1.0897e+08
-1.77142e-06	1.02959e+08
-1.7971e-06	9.72004e+07
-1.82352e-06	9.16869e+07
-1.85074e-06	8.64113e+07
-1.87878e-06	8.13668e+07
-1.90769e-06	7.65464e+07
-1.93749e-06	7.19435e+07
-1.96825e-06	6.75513e+07
-1.99999e-06	6.33634e+07
-2.03278e-06	5.93732e+07
-2.06666e-06	5.55746e+07
-2.10169e-06	5.19612e+07
-2.13793e-06	4.8527e+07
-2.17543e-06	4.52659e+07
-2.21428e-06	4.21719e+07
-2.25454e-06	3.92394e+07
-2.29629e-06	3.64625e+07
-2.33962e-06	3.38357e+07
-2.38461e-06	3.13534e+07
-2.43137e-06	2.90103e+07
-2.47999e-06	2.6801e+07
-2.53061e-06	2.47204e+07
-2.58333e-06	2.27634e+07
-2.63829e-06	2.09249e+07
-2.69565e-06	1.92001e+07
-2.75555e-06	1.75842e+07
-2.81817e-06	1.60724e+07
-2.88371e-06	1.46604e+07
-2.95237e-06	1.33435e+07
-3.02438e-06	1.21173e+07
-3.09999e-06	1.09777e+07
-3.17948e-06	9.92042e+06
-3.26315e-06	8.94141e+06
-3.35134e-06	8.03671e+06
-3.44444e-06	7.20247e+06
-3.54285e-06	6.43493e+06
-3.64705e-06	5.73043e+06
-3.75757e-06	5.08542e+06
-3.87499e-06	4.49647e+06
-3.99999e-06	3.96021e+06
-4.13332e-06	3.47341e+06
-4.27585e-06	3.03294e+06
-4.42856e-06	2.63575e+06
-4.59258e-06	2.27891e+06
-4.76922e-06	1.95959e+06
-4.95999e-06	1.67506e+06
-5.16665e-06	1.42271e+06
-5.39129e-06	1.2e+06
-5.63635e-06	1.00453e+06
-5.90475e-06	833967
-6.19998e-06	686106
-RINDEX
-2.034e-06	1.3435
-2.068e-06	1.344
-2.103e-06	1.3445
-2.139e-06	1.345
-2.177e-06	1.3455
-2.216e-06	1.346
-2.256e-06	1.3465
-2.298e-06	1.347
-2.341e-06	1.3475
-2.386e-06	1.348
-2.433e-06	1.3485
-2.481e-06	1.3492
-2.532e-06	1.35
-2.585e-06	1.3505
-2.64e-06	1.351
-2.697e-06	1.3518
-2.757e-06	1.3522
-2.82e-06	1.353
-2.885e-06	1.3535
-2.954e-06	1.354
-3.026e-06	1.3545
-3.102e-06	1.355
-3.181e-06	1.3555
-3.265e-06	1.356
-3.353e-06	1.3568
-3.446e-06	1.3572
-3.545e-06	1.358
-3.649e-06	1.3585
-3.76e-06	1.359
-3.877e-06	1.3595
-4.002e-06	1.36
-4.136e-06	1.3608
-SLOWCOMPONENT
-2.034e-06	0.01
-2.068e-06	1
-2.103e-06	2
-2.139e-06	3
-2.177e-06	4
-2.216e-06	5
-2.256e-06	6
-2.298e-06	7
-2.341e-06	8
-2.386e-06	9
-2.433e-06	8
-2.481e-06	7
-2.532e-06	6
-2.585e-06	4
-2.64e-06	3
-2.697e-06	2
-2.757e-06	1
-2.82e-06	0.01
-2.885e-06	1
-2.954e-06	2
-3.026e-06	3
-3.102e-06	4
-3.181e-06	5
-3.265e-06	6
-3.353e-06	7
-3.446e-06	8
-3.545e-06	9
-3.649e-06	8
-3.76e-06	7
-3.877e-06	6
-4.002e-06	5
-4.136e-06	4
-FASTTIMECONSTANT
-1
-MIEHG_BACKWARD
-0.99
-MIEHG_FORWARD
-0.99
-MIEHG_FORWARD_RATIO
-0.8
-RESOLUTIONSCALE
-1
-SCINTILLATIONYIELD
-50
-SLOWTIMECONSTANT
-10
-YIELDRATIO
-0.8
-AirSurface optical surface material properties table: 
-EFFICIENCY
-2.038e-06	0.8
-4.144e-06	1
-REFLECTIVITY
-2.038e-06	0.3
-4.144e-06	0.5
-WaterSurface optical surface material properties table: 
-BACKSCATTERCONSTANT
-2.038e-06	0.2
-4.144e-06	0.2
-RINDEX
-2.038e-06	1.35
-4.144e-06	1.4
-SPECULARLOBECONSTANT
-2.038e-06	0.3
-4.144e-06	0.3
-SPECULARSPIKECONSTANT
-2.038e-06	0.2
-4.144e-06	0.2
 
 phot:   for  gamma    SubType= 12
       LambdaPrime table from 200 keV to 10 TeV in 54 bins 
@@ -488,6 +182,12 @@ hPairProd:   for  proton    SubType= 4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
 
+CoulombScat:   for  proton    SubType= 1
+      Lambda table from 100 eV  to 10 TeV in 49 bins, spline: 1
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
+
 msc:   for GenericIon    SubType= 10
       RangeFactor= 0.2, stepLimitType: 0, latDisplacement: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -566,6 +266,12 @@ hPairProd:   for  kaon+    SubType= 4
       Sampling table 14x1001; from 3.94942 GeV to 10 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
+
+CoulombScat:   for  kaon+    SubType= 1
+      Lambda table from 100 eV  to 10 TeV in 47 bins, spline: 1
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
 
 msc:   for kaon-    SubType= 10
       RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 1, polarAngleLimit(deg)= 180
@@ -685,6 +391,12 @@ hPairProd:   for  pi+    SubType= 4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
 
+CoulombScat:   for  pi+    SubType= 1
+      Lambda table from 100 eV  to 10 TeV in 44 bins, spline: 1
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
+
 msc:   for pi-    SubType= 10
       RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 1, polarAngleLimit(deg)= 180
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -712,24 +424,35 @@ hPairProd:   for  pi-    SubType= 4
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
 ### Run 0 start.
 >>> Event 0
-Number of optical photons produced in this event : 1774
+$$$X Primary track 100
+Number of optical photons produced in this event : 1674
 >>> Event 1
-Number of optical photons produced in this event : 1687
+$$$X Primary track 100
+Number of optical photons produced in this event : 1746
 >>> Event 2
-Number of optical photons produced in this event : 1716
+$$$X Primary track 100
+Number of optical photons produced in this event : 1815
 >>> Event 3
-Number of optical photons produced in this event : 1751
+$$$X Primary track 100
+Number of optical photons produced in this event : 1631
 >>> Event 4
-Number of optical photons produced in this event : 1669
+$$$X Primary track 100
+Number of optical photons produced in this event : 1659
 >>> Event 5
-Number of optical photons produced in this event : 1663
+$$$X Primary track 100
+Number of optical photons produced in this event : 1684
 >>> Event 6
-Number of optical photons produced in this event : 1713
+$$$X Primary track 100
+Number of optical photons produced in this event : 1660
 >>> Event 7
-Number of optical photons produced in this event : 1732
+$$$X Primary track 100
+Number of optical photons produced in this event : 1647
 >>> Event 8
-Number of optical photons produced in this event : 1702
+$$$X Primary track 100
+Number of optical photons produced in this event : 1662
 >>> Event 9
-Number of optical photons produced in this event : 1666
-Time of this run:   User=2.64s Real=2.67s Sys=0s
+$$$X Primary track 100
+Number of optical photons produced in this event : 1598
+Time of this run:   User=2.36s Real=2.37s Sys=0s
 Number of events processed: 10
+Number of optical photons produced in this run : 33552

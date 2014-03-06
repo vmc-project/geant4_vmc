@@ -15,7 +15,7 @@ CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_E02.C("g4ConfigOld.C", kTRUE)...
+Processing test_A01.C("g4Config1.C", kFALSE)...
 Loading Geant4 libraries (using geant4-config) ...
 33
 Loading VGM libraries ... 
@@ -39,16 +39,150 @@ G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
 Adding SpecialPhysicsList stepLimiter
 Visualization Manager instantiating with verbosity "warnings (3)"...
 Geant4 has been created.
-Geometry will be defined via VMC
-Air
-Target is 5 cm of lead 
-There are 5 chambers in the tracker region. The chambers are 2 mm of Xenon gas
- The distance between chamber is 80 cm
-G4ggclos: setting top-level VolTableEntry
-Instantiated 9 volume table entries 
-                      7 positions.
-G4 Stat: instantiated 8 logical volumes 
-                      7 physical volumes
+
+The materials defined are : 
+
+
+***** Table : Nb of materials = 5 *****
+
+ Material: ArgonGas    density:  1.782 mg/cm3  RadL: 109.708 m    Nucl.Int.Length: 671.428 m  
+                       Imean: 188.000 eV   temperature: 273.15 K  pressure:   1.00 atm
+
+   --->  Element: ArgonGas ( )   Z = 18.0   N =  40.0   A =  39.95 g/mole
+         --->  Isotope:    36   Z = 18   N =  36   A =  35.97 g/mole   abundance:   0.34 %
+         --->  Isotope:    38   Z = 18   N =  38   A =  37.96 g/mole   abundance:   0.06 %
+         --->  Isotope:    40   Z = 18   N =  40   A =  39.96 g/mole   abundance:  99.60 %
+          ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
+
+
+ Material:      Air    density:  1.290 mg/cm3  RadL: 285.161 m    Nucl.Int.Length: 662.680 m  
+                       Imean:  85.703 eV   temperature: 273.15 K  pressure:   1.00 atm
+
+   --->  Element: Nitrogen (N)   Z =  7.0   N =  14.0   A =  14.01 g/mole
+         --->  Isotope:   N14   Z =  7   N =  14   A =  14.00 g/mole   abundance:  99.63 %
+         --->  Isotope:   N15   Z =  7   N =  15   A =  15.00 g/mole   abundance:   0.37 %
+          ElmMassFraction:  70.00 %  ElmAbundance  72.71 % 
+
+   --->  Element: Oxigen (O)   Z =  8.0   N =  16.0   A =  16.00 g/mole
+         --->  Isotope:   O16   Z =  8   N =  16   A =  15.99 g/mole   abundance:  99.76 %
+         --->  Isotope:   O17   Z =  8   N =  17   A =  17.00 g/mole   abundance:   0.04 %
+         --->  Isotope:   O18   Z =  8   N =  18   A =  18.00 g/mole   abundance:   0.20 %
+          ElmMassFraction:  30.00 %  ElmAbundance  27.29 % 
+
+
+ Material: Scintillator    density:  1.032 g/cm3   RadL:  42.549 cm   Nucl.Int.Length:  69.996 cm 
+                       Imean:  64.684 eV 
+
+   --->  Element: Carbon (C)   Z =  6.0   N =  12.0   A =  12.01 g/mole
+         --->  Isotope:   C12   Z =  6   N =  12   A =  12.00 g/mole   abundance:  98.93 %
+         --->  Isotope:   C13   Z =  6   N =  13   A =  13.00 g/mole   abundance:   1.07 %
+          ElmMassFraction:  91.45 %  ElmAbundance  47.37 % 
+
+   --->  Element: Hydrogen (H)   Z =  1.0   N =   1.0   A =   1.01 g/mole
+         --->  Isotope:    H1   Z =  1   N =   1   A =   1.01 g/mole   abundance:  99.99 %
+         --->  Isotope:    H2   Z =  1   N =   2   A =   2.01 g/mole   abundance:   0.01 %
+          ElmMassFraction:   8.55 %  ElmAbundance  52.63 % 
+
+
+ Material:      CsI    density:  4.510 g/cm3   RadL:   1.861 cm   Nucl.Int.Length:  39.299 cm 
+                       Imean: 489.505 eV 
+
+   --->  Element: Iodine (I)   Z = 53.0   N = 126.9   A = 126.90 g/mole
+         --->  Isotope:  I127   Z = 53   N = 127   A = 126.90 g/mole   abundance: 100.00 %
+          ElmMassFraction:  50.00 %  ElmAbundance  51.15 % 
+
+   --->  Element: Cesium (Cs)   Z = 55.0   N = 132.9   A = 132.90 g/mole
+         --->  Isotope: Cs133   Z = 55   N = 133   A = 132.91 g/mole   abundance: 100.00 %
+          ElmMassFraction:  50.00 %  ElmAbundance  48.85 % 
+
+
+ Material:     Lead    density: 11.350 g/cm3   RadL:   5.612 mm   Nucl.Int.Length:  18.247 cm 
+                       Imean: 823.000 eV 
+
+   --->  Element: Lead ( )   Z = 82.0   N = 207.2   A = 207.19 g/mole
+         --->  Isotope:   204   Z = 82   N = 204   A = 203.97 g/mole   abundance:   1.40 %
+         --->  Isotope:   206   Z = 82   N = 206   A = 205.97 g/mole   abundance:  24.10 %
+         --->  Isotope:   207   Z = 82   N = 207   A = 206.98 g/mole   abundance:  22.10 %
+         --->  Isotope:   208   Z = 82   N = 208   A = 207.98 g/mole   abundance:  52.40 %
+          ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
+
+
+
+
+The geometrical tree defined are : 
+
+worldPhysical[0] worldLogical 3 Air
+  magneticPhysical[0] magneticLogical 0 G4_Galactic
+  firstArmPhysical[0] firstArmLogical 20 Air
+    hodoscope1Physical[0] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[1] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[2] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[3] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[4] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[5] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[6] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[7] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[8] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[9] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[10] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[11] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[12] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[13] hodoscope1Logical 0 Scintillator
+    hodoscope1Physical[14] hodoscope1Logical 0 Scintillator
+    chamber1Physical[0] chamber1Logical 1 ArgonGas
+      wirePlane1Physical[0] wirePlane1Logical 0 ArgonGas
+    chamber1Physical[1] chamber1Logical 1 ArgonGas
+      wirePlane1Physical[0] wirePlane1Logical 0 ArgonGas
+    chamber1Physical[2] chamber1Logical 1 ArgonGas
+      wirePlane1Physical[0] wirePlane1Logical 0 ArgonGas
+    chamber1Physical[3] chamber1Logical 1 ArgonGas
+      wirePlane1Physical[0] wirePlane1Logical 0 ArgonGas
+    chamber1Physical[4] chamber1Logical 1 ArgonGas
+      wirePlane1Physical[0] wirePlane1Logical 0 ArgonGas
+  fSecondArmPhys[0] secondArmLogical 32 Air
+    hodoscope2Physical[0] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[1] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[2] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[3] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[4] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[5] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[6] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[7] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[8] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[9] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[10] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[11] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[12] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[13] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[14] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[15] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[16] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[17] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[18] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[19] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[20] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[21] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[22] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[23] hodoscope2Logical 0 Scintillator
+    hodoscope2Physical[24] hodoscope2Logical 0 Scintillator
+    chamber2Physical[0] chamber2Logical 1 ArgonGas
+      wirePlane2Physical[0] wirePlane2Logical 0 ArgonGas
+    chamber2Physical[1] chamber2Logical 1 ArgonGas
+      wirePlane2Physical[0] wirePlane2Logical 0 ArgonGas
+    chamber2Physical[2] chamber2Logical 1 ArgonGas
+      wirePlane2Physical[0] wirePlane2Logical 0 ArgonGas
+    chamber2Physical[3] chamber2Logical 1 ArgonGas
+      wirePlane2Physical[0] wirePlane2Logical 0 ArgonGas
+    chamber2Physical[4] chamber2Logical 1 ArgonGas
+      wirePlane2Physical[0] wirePlane2Logical 0 ArgonGas
+    EMcalorimeterPhysical[0] EMcalorimeterLogical 1 CsI
+      EmCalColumnPhysical[-1] EmCalColumnLogical 1 CsI
+        cellPhysical[-1] cellLogical 0 CsI
+    HadCalorimeterPhysical[0] HadCalorimeterLogical 1 Lead
+      HadCalColumnPhysical[-1] HadCalColumnLogical 1 Lead
+        HadCalCellPhysical[-1] HadCalCellLogical 1 Lead
+          HadCalLayerPhysical[-1] HadCalLayerLogical 1 Lead
+            HadCalScintiPhysical[0] HadCalScintiLogical 0 Scintillator
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 ### Hadron physics constructed. 
 ### Processes mapped to VMC controls ok.
@@ -59,14 +193,13 @@ Available UI session types: [ GAG, tcsh, csh ]
 
 **********************************************
     GEANT4 Geometry statistics: 
-              8 logical volumes
-              7 physical volumes
-              3 materials
-              3 user limits
-              4 sensitive detectors
+             18 logical volumes
+             63 physical volumes
+              6 materials
+              6 user limits
+             18 sensitive detectors
 **********************************************
 
-Warning in <TClass::TClass>: no dictionary for class stack<Ex02Particle*,deque<Ex02Particle*> > is available
 
 phot:   for  gamma    SubType= 12
       LambdaPrime table from 200 keV to 10 TeV in 54 bins 
@@ -594,258 +727,55 @@ hPairProd:   for  pi-    SubType= 4
 ================================================================
 ### Run 0 start.
 >>> Event 0
+$$$X Primary track 100
 
--------->Hits Collection: in this event they are 25 hits in the tracker chambers: 
-  trackID: 0  chamberNb: 1  energy deposit (keV): 89.9862  position (cm): (0.172511, 16.9349, -140)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 89.9863  position (cm): (0.387652, 41.2821, -60)
-  trackID: 0  chamberNb: 3  energy deposit (keV): 111.352  position (cm): (0.646566, 78.2772, 20)
-  trackID: 0  chamberNb: 4  energy deposit (keV): 0.469805  position (cm): (0.894798, 115.94, 80.0919)
-  trackID: 0  chamberNb: 4  energy deposit (keV): 135.55  position (cm): (0.984522, 130.644, 100)
-  trackID: 0  chamberNb: 5  energy deposit (keV): 86.6301  position (cm): (1.29895, 196.8, 173.189)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 0.96522  position (cm): (0.879846, 115.988, 80.0846)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 0.933984  position (cm): (0.858458, 115.978, 80.1397)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 2.21828  position (cm): (0.911118, 116.034, 80.2155)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 1.36668  position (cm): (0.931213, 115.992, 80.2269)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 1.78693  position (cm): (0.998072, 116.008, 80.2269)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 4.00149  position (cm): (1.06936, 115.973, 80.2588)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 1.91364  position (cm): (1.09376, 115.937, 80.2387)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 3.91768  position (cm): (1.10787, 115.976, 80.1529)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 1.21036  position (cm): (1.06209, 116.07, 80.1878)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 0.700263  position (cm): (0.987373, 116.099, 80.1734)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 1.94855  position (cm): (0.929119, 116.103, 80.2117)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 0.967674  position (cm): (0.932865, 116.059, 80.2331)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 1.15331  position (cm): (0.858797, 116.106, 80.2445)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 5.08856  position (cm): (0.80229, 116.117, 80.2492)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 2.66094  position (cm): (0.749537, 116.149, 80.2869)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 1.94673  position (cm): (0.737286, 116.11, 80.3885)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 6.38392  position (cm): (0.822098, 116.147, 80.399)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 8.96828  position (cm): (0.901182, 116.101, 80.5313)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 7.04461  position (cm): (0.89954, 116.094, 80.5286)
-Ex02MCStack Info  
-Total number of particles:   3
-Number of primary particles: 1
-Track ID:  0
-TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
-Primary    
-Number of daughters: 2
-
-Track ID:  1
-TParticle: e-             p: -0.000015 0.000226 -0.000090 Vertex: 8.947980e-01 1.159396e+02 8.009187e+01     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
-Track ID:  2
-TParticle: e-             p: -0.000096 0.000153 -0.000013 Vertex: 2.778632e-01 2.784549e+01 -9.934815e+01     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
+>>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 4 hits.
+Hodoscope2 has 12 hits.
+Chamber1 has 523 hits.
+Chamber2 has 476 hits.
+EmCalorimeter has 42 hits. Total Edep is 85987.6 (MeV)
+HadCalorimeter has 7 hits. Total Edep is 7.0065 (MeV)
 >>> Event 1
+$$$X Primary track 100
 
--------->Hits Collection: in this event they are 5 hits in the tracker chambers: 
-  trackID: 0  chamberNb: 1  energy deposit (keV): 120.061  position (cm): (-2.81653, 18.5181, -140)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 97.2842  position (cm): (-5.10165, 44.1791, -60)
-  trackID: 0  chamberNb: 3  energy deposit (keV): 127.509  position (cm): (-7.5769, 82.7514, 20)
-  trackID: 0  chamberNb: 4  energy deposit (keV): 136.987  position (cm): (-10.2571, 137.17, 100)
-  trackID: 0  chamberNb: 5  energy deposit (keV): 20.5642  position (cm): (-12.6547, 196.8, 164.602)
-Ex02MCStack Info  
-Total number of particles:   6
-Number of primary particles: 1
-Track ID:  0
-TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
-Primary    
-Number of daughters: 5
-
-Track ID:  1
-TParticle: e-             p: 0.000097 0.000081 -0.000057 Vertex: -1.299801e+01 2.060091e+02 1.730923e+02     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
-Track ID:  2
-TParticle: e-             p: 0.000039 0.000159 -0.000033 Vertex: -5.180549e+00 4.523442e+01 -5.736275e+01     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
-Track ID:  3
-TParticle: e-             p: 0.000056 0.000192 0.000019 Vertex: -5.587935e-01 4.039722e+00 -2.202772e+02     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
-Track ID:  4
-TParticle: e-             p: -0.000117 -0.000121 0.000040 Vertex: -4.805833e-01 3.726042e+00 -2.230896e+02     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
-Track ID:  5
-TParticle: e-             p: 0.000031 0.000139 0.000009 Vertex: -1.139909e-01 2.425489e+00 -2.362883e+02     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
+>>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 1 hits.
+Hodoscope2 has 2 hits.
+Chamber1 has 519 hits.
+Chamber2 has 512 hits.
+EmCalorimeter has 18 hits. Total Edep is 18767.7 (MeV)
+HadCalorimeter has 7 hits. Total Edep is 2577.9 (MeV)
 >>> Event 2
+$$$X Primary track 100
 
--------->Hits Collection: in this event they are 4 hits in the tracker chambers: 
-  trackID: 0  chamberNb: 1  energy deposit (keV): 91.291  position (cm): (1.29363, 19.5619, -140)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 108.11  position (cm): (2.40045, 46.1547, -60)
-  trackID: 0  chamberNb: 3  energy deposit (keV): 108.068  position (cm): (3.57192, 85.6953, 20)
-  trackID: 0  chamberNb: 4  energy deposit (keV): 111.911  position (cm): (4.79153, 141.314, 100)
-Ex02MCStack Info  
-Total number of particles:   5
-Number of primary particles: 1
-Track ID:  0
-TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
-Primary    
-Number of daughters: 4
-
-Track ID:  1
-TParticle: e-             p: 0.000013 0.000116 -0.000114 Vertex: 6.785595e+00 2.568539e+02 2.094077e+02     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
-Track ID:  2
-TParticle: e-             p: -0.000189 0.000062 -0.000012 Vertex: 6.506428e+00 2.389197e+02 1.958074e+02     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
-Track ID:  3
-TParticle: e-             p: 0.000245 0.000019 0.000069 Vertex: 6.197093e+00 2.197541e+02 1.800998e+02     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
-Track ID:  4
-TParticle: e-             p: 0.000020 0.000129 -0.000085 Vertex: 5.206296e+00 1.629246e+02 1.250538e+02     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
+>>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 1 hits.
+Hodoscope2 has 11 hits.
+Chamber1 has 512 hits.
+Chamber2 has 501 hits.
+EmCalorimeter has 71 hits. Total Edep is 29607.6 (MeV)
+HadCalorimeter has 19 hits. Total Edep is 1579.96 (MeV)
 >>> Event 3
+$$$X Primary track 100
 
--------->Hits Collection: in this event they are 38 hits in the tracker chambers: 
-  trackID: 0  chamberNb: 1  energy deposit (keV): 121.318  position (cm): (-1.58966, 19.1105, -140)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 136.683  position (cm): (-2.91078, 45.4247, -60)
-  trackID: 0  chamberNb: 3  energy deposit (keV): 60.2711  position (cm): (-4.1397, 78.6688, 9.35752)
-  trackID: 0  chamberNb: 3  energy deposit (keV): 76.2287  position (cm): (-4.33606, 84.7419, 20)
-  trackID: 0  chamberNb: 4  energy deposit (keV): 6.20465  position (cm): (-5.50711, 126.111, 82.0602)
-  trackID: 0  chamberNb: 4  energy deposit (keV): 130.231  position (cm): (-5.8574, 140.197, 100)
-  trackID: 0  chamberNb: 5  energy deposit (keV): 4.91117  position (cm): (-7.07453, 196.8, 160.749)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 11.2796  position (cm): (-6.16883, 126.182, 82.0348)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 18.0527  position (cm): (-7.84244, 126.753, 81.28)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 22.8031  position (cm): (-9.34994, 127.706, 81.0163)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 12.775  position (cm): (-8.78429, 127.419, 81.7043)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 11.6458  position (cm): (-7.93169, 127.858, 81.3566)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 37.4981  position (cm): (-6.9567, 127.203, 81.4594)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 23.1177  position (cm): (-6.62369, 126.943, 81.5364)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 7.10957  position (cm): (-6.39207, 126.843, 81.4978)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 10.0141  position (cm): (-6.73022, 126.742, 81.4573)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 4.69176  position (cm): (-6.89243, 126.912, 81.575)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 10.2279  position (cm): (-6.928, 127.08, 81.4151)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 7.24638  position (cm): (-6.9981, 127.178, 81.4189)
-  trackID: 1  chamberNb: 4  energy deposit (keV): 7.2934  position (cm): (-7.00254, 127.177, 81.4123)
-  trackID: 2  chamberNb: 3  energy deposit (keV): 26.4435  position (cm): (-3.63369, 80.2346, 9.3255)
-  trackID: 2  chamberNb: 3  energy deposit (keV): 33.5262  position (cm): (-7.8002, 81.0556, 9.08114)
-  trackID: 2  chamberNb: 3  energy deposit (keV): 28.108  position (cm): (-10.5962, 83.7946, 8.33091)
-  trackID: 2  chamberNb: 3  energy deposit (keV): 13.4088  position (cm): (-11.4686, 85.1502, 7.1714)
-  trackID: 2  chamberNb: 3  energy deposit (keV): 10.5326  position (cm): (-12.4532, 85.2859, 7.80286)
-  trackID: 2  chamberNb: 3  energy deposit (keV): 41.6742  position (cm): (-12.6302, 85.0169, 8.45695)
-  trackID: 2  chamberNb: 3  energy deposit (keV): 10.5067  position (cm): (-12.1455, 84.9189, 9.04794)
-  trackID: 2  chamberNb: 3  energy deposit (keV): 14.3636  position (cm): (-11.9581, 85.1822, 8.92147)
-  trackID: 2  chamberNb: 3  energy deposit (keV): 8.83251  position (cm): (-12.0783, 85.2578, 8.98207)
-  trackID: 2  chamberNb: 3  energy deposit (keV): 9.02708  position (cm): (-12.0721, 84.9171, 8.77831)
-  trackID: 2  chamberNb: 3  energy deposit (keV): 25.9032  position (cm): (-12.2424, 84.656, 8.60331)
-  trackID: 2  chamberNb: 3  energy deposit (keV): 8.35131  position (cm): (-12.2604, 84.6529, 8.5151)
-  trackID: 2  chamberNb: 3  energy deposit (keV): 2.36392  position (cm): (-12.2594, 84.6542, 8.51507)
-  trackID: 3  chamberNb: 3  energy deposit (keV): 34.8069  position (cm): (-10.9309, 84.1282, 8.61387)
-  trackID: 3  chamberNb: 3  energy deposit (keV): 7.61077  position (cm): (-10.8669, 84.2764, 8.50528)
-  trackID: 3  chamberNb: 3  energy deposit (keV): 7.63753  position (cm): (-10.8171, 84.2639, 8.34983)
-  trackID: 3  chamberNb: 3  energy deposit (keV): 9.17826  position (cm): (-10.8451, 84.377, 8.3749)
-  trackID: 3  chamberNb: 3  energy deposit (keV): 2.1025  position (cm): (-10.8449, 84.3767, 8.37628)
-Ex02MCStack Info  
-Total number of particles:   5
-Number of primary particles: 1
-Track ID:  0
-TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
-Primary    
-Number of daughters: 3
-
-Track ID:  1
-TParticle: e-             p: 0.000014 -0.000229 0.000411 Vertex: -5.507113e+00 1.261110e+02 8.206023e+01     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
-Track ID:  2
-TParticle: e-             p: 0.000336 -0.000219 0.000476 Vertex: -4.139704e+00 7.866879e+01 9.357520e+00     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 1
-
-Track ID:  3
-TParticle: e-             p: -0.000085 -0.000197 -0.000143 Vertex: -1.059620e+01 8.379457e+01 8.330911e+00     2    -1
-Mother:    e-  with ID: 2
-Number of daughters: 0
-
-Track ID:  4
-TParticle: e-             p: 0.000075 0.000262 0.000002 Vertex: -1.780045e+00 2.223407e+01 -1.282664e+02     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
+>>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 4 hits.
+Hodoscope2 has 5 hits.
+Chamber1 has 424 hits.
+Chamber2 has 144 hits.
+EmCalorimeter has 54 hits. Total Edep is 7220.41 (MeV)
+HadCalorimeter has 14 hits. Total Edep is 346.133 (MeV)
 >>> Event 4
+$$$X Primary track 100
 
--------->Hits Collection: in this event they are 32 hits in the tracker chambers: 
-  trackID: 0  chamberNb: 1  energy deposit (keV): 85.608  position (cm): (-0.237194, 16.3893, -140)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 2.91658  position (cm): (-0.3953, 33.5679, -78.9774)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 91.8544  position (cm): (-0.44616, 40.3021, -60)
-  trackID: 0  chamberNb: 3  energy deposit (keV): 90.4824  position (cm): (-0.583198, 76.6102, 20)
-  trackID: 0  chamberNb: 4  energy deposit (keV): 158.572  position (cm): (-0.799232, 128.037, 100)
-  trackID: 0  chamberNb: 5  energy deposit (keV): 88.5679  position (cm): (-1.03365, 188.644, 169.073)
-  trackID: 0  chamberNb: 5  energy deposit (keV): 88.9333  position (cm): (-1.06098, 196.8, 176.951)
-  trackID: 1  chamberNb: 5  energy deposit (keV): 9.90044  position (cm): (-1.36878, 188.244, 169.237)
-  trackID: 1  chamberNb: 5  energy deposit (keV): 3.13272  position (cm): (-1.34967, 188.393, 169.612)
-  trackID: 1  chamberNb: 5  energy deposit (keV): 10.3924  position (cm): (-1.24988, 188.715, 169.508)
-  trackID: 1  chamberNb: 5  energy deposit (keV): 8.57872  position (cm): (-1.13984, 188.677, 169.472)
-  trackID: 1  chamberNb: 5  energy deposit (keV): 8.44955  position (cm): (-1.08204, 188.618, 169.456)
-  trackID: 1  chamberNb: 5  energy deposit (keV): 3.6394  position (cm): (-0.951742, 188.741, 169.33)
-  trackID: 1  chamberNb: 5  energy deposit (keV): 7.55996  position (cm): (-1.01547, 188.888, 169.321)
-  trackID: 1  chamberNb: 5  energy deposit (keV): 9.13025  position (cm): (-1.06423, 188.856, 169.387)
-  trackID: 1  chamberNb: 5  energy deposit (keV): 2.32146  position (cm): (-1.065, 188.855, 169.386)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 8.07601  position (cm): (-0.114083, 33.6364, -78.714)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 0.580412  position (cm): (-0.0736335, 33.5644, -78.9157)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 3.6506  position (cm): (0.0028552, 33.6415, -78.8367)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 2.18103  position (cm): (0.0567848, 33.6386, -78.8257)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 3.65649  position (cm): (0.0277261, 33.659, -78.8095)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 3.16472  position (cm): (-0.125042, 33.6193, -78.8791)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 2.58691  position (cm): (-0.131738, 33.6312, -78.9029)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 4.05736  position (cm): (-0.0377337, 33.5442, -78.8589)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 5.0565  position (cm): (-0.00332961, 33.3839, -78.8516)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 2.53895  position (cm): (-0.155132, 33.3561, -78.8501)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 3.5716  position (cm): (-0.160259, 33.2259, -78.8434)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 8.36758  position (cm): (-0.0525331, 33.0916, -78.9669)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 7.74123  position (cm): (-0.0204877, 33.0004, -79.012)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 15.0557  position (cm): (-0.0116367, 32.9376, -79.1981)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 4.54584  position (cm): (-0.0790023, 33.0088, -79.1959)
-  trackID: 2  chamberNb: 2  energy deposit (keV): 5.35667  position (cm): (-0.080457, 33.0086, -79.2009)
-Ex02MCStack Info  
-Total number of particles:   5
-Number of primary particles: 1
-Track ID:  0
-TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.000000e+00 -2.910000e+02    -1    -1
-Primary    
-Number of daughters: 4
-
-Track ID:  1
-TParticle: e-             p: -0.000226 0.000127 -0.000037 Vertex: -1.033650e+00 1.886438e+02 1.690727e+02     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
-Track ID:  2
-TParticle: e-             p: 0.000247 0.000162 0.000033 Vertex: -3.953005e-01 3.356787e+01 -7.897740e+01     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
-Track ID:  3
-TParticle: e-             p: -0.000066 0.000128 -0.000013 Vertex: -2.962284e-01 2.212061e+01 -1.168657e+02     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
-Track ID:  4
-TParticle: e-             p: 0.000115 0.000103 -0.000000 Vertex: -2.543109e-01 1.796337e+01 -1.332578e+02     0    -1
-Mother:    proton  with ID: 0
-Number of daughters: 0
-
-Time of this run:   User=0.01s Real=0.01s Sys=0.01s
+>>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 3 hits.
+Hodoscope2 has 6 hits.
+Chamber1 has 536 hits.
+Chamber2 has 524 hits.
+EmCalorimeter has 53 hits. Total Edep is 29778.7 (MeV)
+HadCalorimeter has 17 hits. Total Edep is 184.662 (MeV)
+Time of this run:   User=8.64s Real=8.73s Sys=0.03s
 Number of events processed: 5
+Real time 0:00:10, CP time 9.660
