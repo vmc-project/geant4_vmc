@@ -24,25 +24,22 @@
 #include "TG4SpecialControlsV2.h"
 #include "TGeant4.h"
 
-#include <G4Threading.hh>
+#include <G4AutoDelete.hh>
 
 #include <TROOT.h>
 #include <TInterpreter.h>
 #include <TVirtualMCApplication.h>
 
+G4ThreadLocal 
+TG4SpecialControlsV2* TG4ActionInitialization::fgSpecialControls = 0;
+
 //_____________________________________________________________________________
 TG4ActionInitialization::TG4ActionInitialization(
                                   TG4RunConfiguration* runConfiguration)
   : G4VUserActionInitialization(),
-    fRunConfiguration(runConfiguration),
-    fSpecialControls(0)
+    fRunConfiguration(runConfiguration)
 {
 /// Standard constructor
-
-  if ( fRunConfiguration->IsSpecialControls() ) {
-    // add test if both tracking action and stepping action
-    fSpecialControls = new TG4SpecialControlsV2();
-  }  
 }
 
 //_____________________________________________________________________________
@@ -50,7 +47,8 @@ TG4ActionInitialization::~TG4ActionInitialization()
 {
 /// Destructor
 
-  delete fSpecialControls;
+  //delete fgSpecialControls;
+     // deleted via G4AutoDelete
 }
 
 //
@@ -62,12 +60,12 @@ void TG4ActionInitialization::BuildForMaster() const
 {
 /// Build user actions defined on master thread
 
-  G4cout << "TG4ActionInitialization::BuildForMaster " << this << G4endl;
+  //G4cout << "TG4ActionInitialization::BuildForMaster " << this << G4endl;
 
   G4UserRunAction* runAction = fRunConfiguration->CreateRunAction();
   if ( runAction ) SetUserAction(runAction);  
 
-  G4cout << "TG4ActionInitialization::BuildForMaster end " << G4endl;
+  //G4cout << "TG4ActionInitialization::BuildForMaster end " << G4endl;
 }
 
 //_____________________________________________________________________________
@@ -75,10 +73,10 @@ void TG4ActionInitialization::Build() const
 {
 /// Build user actions defined on worker threads
 
-  G4cout << "TG4ActionInitialization::Build "  << this << G4endl;
+ //G4cout << "TG4ActionInitialization::Build "  << this << G4endl;
 
   // create MC and MCApplication worker instances
-  if ( G4Threading::G4GetThreadId() > 0 ) {
+  if ( G4Threading::IsWorkerThread() ) {
     TGeant4::MasterApplicationInstance()->CloneForWorker();
     TGeant4::MasterInstance()->CloneForWorker();
     TVirtualMCApplication::Instance()->InitForWorker();
@@ -103,11 +101,13 @@ void TG4ActionInitialization::Build() const
 
   // Special controls action
   //
-/*
-  if ( fSpecialControls ) {
-    trackingAction->SetSpecialControls(fSpecialControls);
-    steppingAction->SetSpecialControls(fSpecialControls);
+  if (  fRunConfiguration->IsSpecialControls() ) {
+    G4cout << "### TG4SpecialControlsV2 constructed" << G4endl;
+    fgSpecialControls = new TG4SpecialControlsV2();
+    G4AutoDelete::Register(fgSpecialControls);
+ 
+    trackingAction->SetSpecialControls(fgSpecialControls);
+    steppingAction->SetSpecialControls(fgSpecialControls);
   }
-*/
-  G4cout << "TG4ActionInitialization::Build done " << this << G4endl;
+  //G4cout << "TG4ActionInitialization::Build done " << this << G4endl;
 }

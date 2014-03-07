@@ -30,6 +30,7 @@
 #include <TGeoManager.h>
 #include <TGeoMatrix.h>
 #include <TGeoMaterial.h>
+#include <TThread.h>
 
 /// \cond CLASSIMP
 ClassImp(Ex01MCApplication)
@@ -91,7 +92,7 @@ void Ex01MCApplication::ConstructMaterials()
 
   // Create Root geometry manager 
   new TGeoManager("E01_geometry", "E01 VMC example geometry");
-   
+
   Double_t a;        // Mass of a mole in g/mole   
   Double_t z;        // Atomic number
   Double_t density;  // Material density in g/cm3
@@ -229,9 +230,11 @@ void Ex01MCApplication::InitMC(const char* setup)
 /// The selection of the concrete MC is done in the macro.
 /// \param setup The name of the configuration macro 
 
-  gROOT->LoadMacro(setup);
-  gInterpreter->ProcessLine("Config()");
- 
+  if ( TString(setup) != "" ) {
+    gROOT->LoadMacro(setup);
+    gInterpreter->ProcessLine("Config()");
+  }
+
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);
   gMC->Init();

@@ -135,7 +135,8 @@ void TG4SDConstruction::Construct()
 /// Create sensitive detectors and initialize the VMC application.
 /// Sensitive detectors are set to all logical volumes
 
-  G4cout << "TG4SDConstruction::Construct" << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4SDConstruction::Construct" << G4endl;
 
   G4bool isMaster = ! G4Threading::IsWorkerThread();
 
@@ -176,7 +177,8 @@ void TG4SDConstruction::Construct()
     }  
   }  
 
-  G4cout << "TG4SDConstruction::Construct done" << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4SDConstruction::Construct done" << G4endl;
 }
 
 //_____________________________________________________________________________

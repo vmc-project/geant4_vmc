@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/13  30 November 2013   *
+  *   Version   5.34/17  24 February 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/13 (v5-34-13@v5-34-13, Dec 05 2013, 12:50:09 on linuxx8664gcc)
+ROOT 5.34/17 (v5-34-17@v5-34-17, Mar 06 2014, 20:58:17 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -23,6 +23,7 @@ Geometry will be defined via VMC
 Target is 5 cm of lead 
 There are 5 chambers in the tracker region. The chambers are 2 mm of Xenon gas
  The distance between chamber is 80 cm
+Warning in <TClass::TClass>: no dictionary for class stack<Ex02Particle*,deque<Ex02Particle*> > is available
 
 -------->Hits Collection: in this event they are 12 hits in the tracker chambers: 
   trackID: 0  chamberNb: 0  energy deposit (keV): 89.4865  position (cm): (1.49477, 18.8225, -140.074)
@@ -120,11 +121,11 @@ Primary
 Number of daughters: 0
 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    36031983     225CDEF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    83866623     4FFB3FF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    36054917    36031983
-                                        HEX     2262785     225CDEF
+          with Store/Table at absolute adrs    83889557    83866623
+                                        HEX     5000D95     4FFB3FF
                                         HEX        59FA           0
                               relative adrs       23034           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

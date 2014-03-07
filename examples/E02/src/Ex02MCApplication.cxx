@@ -27,7 +27,6 @@
 #include <TVirtualMC.h>
 #include <TMCRootManager.h>
 #include <TMCRootManagerMT.h>
-#include <TMCAutoLock.h>
 #include <TPDGCode.h>
 #include <TGeoManager.h>
 #include <TVirtualGeoTrack.h>
@@ -36,10 +35,6 @@
 /// \cond CLASSIMP
 ClassImp(Ex02MCApplication)
 /// \endcond
-
-namespace {
-  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
-}
 
 //_____________________________________________________________________________
 Ex02MCApplication::Ex02MCApplication(const char *name, const char *title) 
@@ -55,7 +50,7 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title)
 /// \param name   The MC application name 
 /// \param title  The MC application description
 
-  printf("Ex02MCApplication::Ex02MCApplication %p \n", this);  
+  //cout << "Ex02MCApplication::Ex02MCApplication " << this << endl;
 
   // Create application data
 
@@ -85,18 +80,14 @@ Ex02MCApplication::~Ex02MCApplication()
 {
 /// Destructor  
   
-  // Root manager locks on his own 
+  //cout << "Ex02MCApplication::~Ex02MCApplication " << this << endl;
+
   delete fRootManager;
-
-  TMCAutoLock lk(&deleteMutex);
-  printf("Ex02MCApplication::~Ex02MCApplication %p \n", this);  
-
   delete fStack;
   delete fMagField;
   delete gMC;
 
-  printf("Done Ex02MCApplication::~Ex02MCApplication %p \n", this);  
-  lk.unlock();
+  //cout << "Done Ex02MCApplication::~Ex02MCApplication " << this << endl;
 }
 
 //
@@ -108,7 +99,7 @@ void Ex02MCApplication::RegisterStack() const
 /// Register stack in the Root manager.
 
   if ( fRootManager ) {
-    cout << "Ex02MCApplication::RegisterStack: " << endl;
+    //cout << "Ex02MCApplication::RegisterStack: " << endl;
     fRootManager->Register("stack", "Ex02MCStack", &fStack);
   }
 }
@@ -124,8 +115,10 @@ void Ex02MCApplication::InitMC(const char* setup)
 /// The selection of the concrete MC is done in the macro.
 /// \param setup The name of the configuration macro 
 
-  gROOT->LoadMacro(setup);
-  gInterpreter->ProcessLine("Config()");
+  if ( TString(setup) != "" ) {
+    gROOT->LoadMacro(setup);
+    gInterpreter->ProcessLine("Config()");
+  }  
   
   // Create Root manager 
   if ( ! gMC->IsMT() ) {
@@ -160,7 +153,7 @@ void Ex02MCApplication::FinishRun()
 {    
 /// Finish MC run.
 
-  cout << "Ex02MCApplication::FinishRun: " << endl;  
+  //cout << "Ex02MCApplication::FinishRun: " << endl;
   if ( fRootManager ) {
     //fRootManager->WriteAndClose();
     fRootManager->WriteAll();
@@ -177,7 +170,7 @@ TVirtualMCApplication* Ex02MCApplication::CloneForWorker() const
 //_____________________________________________________________________________
 void Ex02MCApplication::InitForWorker() const 
 {
-  cout << "Ex02MCApplication::InitForWorker " << this << endl;
+  //cout << "Ex02MCApplication::InitForWorker " << this << endl;
 
   // Create Root manager 
   fRootManager 
@@ -194,7 +187,7 @@ void Ex02MCApplication::InitForWorker() const
 //_____________________________________________________________________________
 void Ex02MCApplication::FinishWorkerRun() const
 {
-  cout << "Ex02MCApplication::FinishWorkerRun: " << endl;  
+  //cout << "Ex02MCApplication::FinishWorkerRun: " << endl;
   if ( fRootManager ) {
     //fRootManager->WriteAndClose();
     fRootManager->WriteAll();
@@ -348,7 +341,7 @@ void Ex02MCApplication::FinishEvent()
 
   fTrackerSD.EndOfEvent();
 
-  //fStack->Print();  
+  fStack->Print();
   fStack->Reset();
 } 
 

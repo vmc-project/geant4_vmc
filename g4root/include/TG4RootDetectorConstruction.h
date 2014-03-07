@@ -130,6 +130,7 @@ public:
    virtual ~TG4RootDetectorConstruction();
    
    virtual G4VPhysicalVolume *Construct();
+   virtual void               ConstructSDandField();
 
    // Getters
                          /// Return TGeo geometry manager
@@ -164,5 +165,6 @@ public:
    
                          /// Initialize  
    virtual void          Initialize(TG4RootDetectorConstruction *dc) = 0;
+   virtual void          InitializeSDandField() {}
 };   
 #endif

@@ -59,8 +59,10 @@
   \link     E03/g4Config1.C g4Config1.C    \endlink - configuration macro - geometry defined via Geant4
   \link     E03/g4Config2.C g4Config2.C    \endlink - configuration macro - user defined physics list (LHEP_BERT)
   \link     E03/g4Config3.C g4Config3.C    \endlink - configuration macro - user defined regions
+  \link     E03/g4Config4.C g4Config4.C    \endlink - configuration macro - activation of VMC cuts and process controls
   \link  E03/g4tgeoConfig.C g4tgeoConfig.C \endlink - configuration macro - G4 with TGeo navigation 
   \link E03/g4tgeoConfig3.C g4tgeoConfig3.C\endlink - configuration macro - user defined regions, G4 with TGeo navigation 
+  \link E03/g4tgeoConfig4.C g4tgeoConfig4.C\endlink - configuration macro - activation of VMC cuts and process controls, TGeo navigation
   \link E03/g4ConfigEnv.C   g4ConfigEnv.C  \endlink - configuration macro - physics list defined via environment variable
    g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
    g4config2.in  - macro for G4 configuration using G4 commands (called from g4Config2.C)

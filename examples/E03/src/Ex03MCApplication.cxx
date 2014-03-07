@@ -24,7 +24,6 @@
 
 #include <TMCRootManager.h>
 #include <TMCRootManagerMT.h>
-#include <TMCAutoLock.h>
 
 #include <TROOT.h>
 #include <TInterpreter.h>
@@ -38,9 +37,9 @@
 #include <TVirtualGeoTrack.h>
 #include <TParticle.h>
 
-namespace {
-  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
-}
+//namespace {
+//  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
+//}
 
 /// \cond CLASSIMP
 ClassImp(Ex03MCApplication)
@@ -59,6 +58,7 @@ Ex03MCApplication::Ex03MCApplication(const char *name, const char *title)
     fPrimaryGenerator(0),
     fMagField(0),
     fOldGeometry(kFALSE),
+    fIsControls(kFALSE),
     fIsMaster(kTRUE)
 {
 /// Standard constructor
@@ -128,6 +128,7 @@ Ex03MCApplication::Ex03MCApplication()
     fPrimaryGenerator(0),
     fMagField(0),
     fOldGeometry(kFALSE),
+    fIsControls(kFALSE),
     fIsMaster(kTRUE)
 {    
 /// Default constructor
@@ -138,12 +139,9 @@ Ex03MCApplication::~Ex03MCApplication()
 {
 /// Destructor  
   
-  // Root manager locks on his own
+  //cout << "Ex03MCApplication::~Ex03MCApplication " << this << endl;
+
   delete fRootManager;
-
-  TMCAutoLock lk(&deleteMutex);
-  printf("Ex03MCApplication::~Ex03MCApplication %p \n", this);
-
   delete fStack;
   if ( fIsMaster) delete fDetConstruction;
   delete fCalorimeterSD;
@@ -151,8 +149,7 @@ Ex03MCApplication::~Ex03MCApplication()
   delete fMagField;
   delete gMC;
 
-  printf("Done Ex03MCApplication::~Ex03MCApplication %p \n", this);
-  lk.unlock();
+  //cout << "Done Ex03MCApplication::~Ex03MCApplication " << this << endl;
 }
 
 //
@@ -165,7 +162,7 @@ void Ex03MCApplication::RegisterStack() const
 /// Register stack in the Root manager.
 
   if ( fRootManager ) {
-    cout << "Ex03MCApplication::RegisterStack: " << endl;
+    //cout << "Ex03MCApplication::RegisterStack: " << endl;
     fRootManager->Register("stack", "Ex03MCStack", &fStack);
   }
 }
@@ -183,8 +180,10 @@ void Ex03MCApplication::InitMC(const char* setup)
 
   fVerbose.InitMC();
 
-  gROOT->LoadMacro(setup);
-  gInterpreter->ProcessLine("Config()");
+  if ( TString(setup) != "" ) {
+    gROOT->LoadMacro(setup);
+    gInterpreter->ProcessLine("Config()");
+  }  
  
   // Create Root manager 
   if ( ! gMC->IsMT() ) {
@@ -219,7 +218,7 @@ void Ex03MCApplication::FinishRun()
 /// Finish MC run.
 
   fVerbose.FinishRun();
-  cout << "Ex03MCApplication::FinishRun: " << endl;
+  //cout << "Ex03MCApplication::FinishRun: " << endl;
   if ( fRootManager ) {
     fRootManager->WriteAll();
     fRootManager->Close();
@@ -235,7 +234,7 @@ TVirtualMCApplication* Ex03MCApplication::CloneForWorker() const
 //_____________________________________________________________________________
 void Ex03MCApplication::InitForWorker() const
 {
-  cout << "Ex03MCApplication::InitForWorker " << this << endl;
+  //cout << "Ex03MCApplication::InitForWorker " << this << endl;
 
   // Create Root manager
   fRootManager
@@ -252,7 +251,7 @@ void Ex03MCApplication::InitForWorker() const
 //_____________________________________________________________________________
 void Ex03MCApplication::FinishWorkerRun() const
 {
-  cout << "Ex03MCApplication::FinishWorkerRun: " << endl;
+  //cout << "Ex03MCApplication::FinishWorkerRun: " << endl;
   if ( fRootManager ) {
     fRootManager->WriteAll();
     fRootManager->Close();
@@ -300,6 +299,10 @@ void Ex03MCApplication::InitGeometry()
   fVerbose.InitGeometry();
   
   fDetConstruction->SetCuts();
+
+  if ( fIsControls )
+    fDetConstruction->SetControls();
+
   fCalorimeterSD->Initialize();
 }
 
@@ -329,9 +332,7 @@ void Ex03MCApplication::AddParticles()
   mode[0][0] = kNeutron;    // neutron (2112) 
   mode[0][1] = 1000020040 ; // alpha
 
-  // TODO: Fix for MT
-  //gMC->SetDecayMode(1000020050 ,bratio,mode);
-  
+  gMC->SetDecayMode(1000020050 ,bratio,mode);
   
   // Overwrite a decay mode already defined in MCs
   // Kaon Short: 310 normally decays in two modes
@@ -352,8 +353,8 @@ void Ex03MCApplication::AddParticles()
   mode2[0][0] = kPi0;   // pi0 (111)
   mode2[0][1] = kPi0 ;  // pi0 (111)
 
-  // TODO: Fix for MT
-  //gMC->SetDecayMode(kK0Short, bratio2, mode2);
+  gMC->SetDecayMode(kK0Short, bratio2, mode2);
+
 }
 
 //_____________________________________________________________________________

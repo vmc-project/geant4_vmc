@@ -81,7 +81,7 @@ SLIBRARY	= $(LIBDIR)/lib$(PACKAGE).$(SL)
 ALIBRARY	= $(LIBDIR)/lib$(PACKAGE).a
 
 default:	depend $(SLIBRARY)
-
+static: 	$(ALIBRARY)
 
 $(LIBDIR)/lib$(PACKAGE).$(SL):  $(OBJS)
 $(LIBDIR)/lib$(PACKAGE).a:      $(OBJS)

@@ -60,9 +60,9 @@ TMCRootManagerMT::TMCRootManagerMT(const char* projectName,
 /// \param fileMode     Option for opening Root file (read or write mode)
 
   // Check if TThread was initialized
-  if ( ! TThread::IsInitialized() ) {
-     Fatal("TMCRootManagerMT", "TThread::Initialize() must be called first.");
-  }    
+  //if ( ! TThread::IsInitialized() ) {
+  //   Fatal("TMCRootManagerMT", "TThread::Initialize() must be called first.");
+  //}
 
   if ( fgDebug ) 
     printf("Going to lock for TMCRootManagerMT::TMCRootManagerMT %p \n", this);
@@ -230,15 +230,16 @@ void  TMCRootManagerMT::Fill()
 {
 /// Fill the Root tree.
 
-/*
+  // Fill with lack untill first call on all threads
   if ( fgIsFillLock ) {
     FillWithTmpLock();
   }  
   else {
     FillWithoutLock();
   }
-*/
-   FillWithLock(); 
+
+  // Fill with lock during the whole run
+  // FillWithLock();
 }  
 
 //_____________________________________________________________________________

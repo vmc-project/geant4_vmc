@@ -42,6 +42,9 @@
 
 #include "A01DetectorConstruction.hh"
 
+// Added for VMC
+#include "TG4GeometryManager.h"
+
 #include "G4FieldManager.hh"
 #include "G4TransportationManager.hh"
 #include "G4Mag_UsualEqRhs.hh"
@@ -416,6 +419,14 @@ G4VPhysicalVolume* A01DetectorConstruction::Construct()
   //
 */
   return worldPhysical;
+}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+void A01DetectorConstruction::ConstructSDandField()
+{ 
+  // Added for VMC
+  TG4GeometryManager::Instance()->ConstructSDandField();
 }
 
 void A01DetectorConstruction::ConstructMaterials()

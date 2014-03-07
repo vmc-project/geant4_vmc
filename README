@@ -2,7 +2,7 @@ $Id$
 
 ------------------------------------------------
  The Virtual Monte Carlo examples
- Copyright (C) 2007-2010 Ivana Hrivnacova
+ Copyright (C) 2007-2014 Ivana Hrivnacova
  All rights reserved.
 
  For the licensing terms see geant4_vmc/LICENSE.
@@ -118,13 +118,78 @@ Examples
   root [0] .x run_g3.C   // to run with Geant3
   root [0] .x run_g4.C   // to run with Geant4
   
+
   Note about Pythia6:
   Both MC require to load libPythia6.so which is not
   provided with Root by default. One can download it
   from the Root Web site:
   http://root.cern.ch/root/Install.html
   (Or directly from: ftp://root.cern.ch/root/pythia/)
+
+Examples Programs
+=====================
+  Since Geant4 VMC 3.0.x, there are also provided examples main programs
+  which can be built against static libraries of all packages. This makes
+  execution faster (10% gain was observed on A01 example in sequential mode
+  and 24% in multi-threading mode).
+
+  The programs can be built using CMake in a standard way. The CMake
+  configuration files, CMakeLists.txt, provided within examples are defined
+  with use of a generic configuration files UseVMC.cmake and FindVMC.cmake,
+  provided in geant4_vmc/cmake directory together with other Find modules for
+  all used packages. FindVMC.cmake is used to find all used packages which
+  selection is made by the user via the CMake options defined in this file.
+
+  # build with Geant4
+  cd geant4_vmc
+  mkdir examples_build_g4
+  cd examples_build_g4
+  cmake \
+    -DGeant4VMC_DIR=/my_path/geant4_vmc \
+    -DWITH_GEANT4=ON \
+    -DWITH_MTROOT=ON \
+    -DWITH_VGM=ON \
+    ../examples
+  make -jN
+
+  # build with Geant3
+  cd geant4_vmc
+  mkdir examples_build_g3
+  cd examples_build_g3
+  cmake \
+    -DGeant4VMC_DIR=/my_path/geant4_vmc \
+    -DGeant3VMC_DIR=/my_path/geant3 \
+    -DWITH_GEANT4=OFF \
+    -DWITH_GEANT3=ON \
+    -DWITH_MTROOT=ON \
+    ../examples
+  make -jN
+
+  The example can be then run by calling the executable in the build
+  directory:
+  cd geant4_vmc/examples/E01
+  ../../examples_build_g4/E01/exampleE01
   
+  For keeping maximum simplicity of the code, a fixed configuration is defined
+  in the examples main() function. More flexible version of the main() function
+  is provided in the test programs which default configuration options
+  can be changed by running the program with selectedcommand lined options,
+  eg.
+
+  testE01
+   [-g4g,  --g4-geometry]         Geant4 VMC geometry option
+   [-g4pl, --g4-physics-list]     Geant4 physics list selection
+   [-g4sp, --g4-special-physics]  Geant4 special physics selection
+   [-g4m,  --g4-macro]            Geant4 macro
+   [-g4vm, --g4-vis-macro]        Geant4 visualization macro
+   [-g3g,  --g3-geometry]         Geant3 geometry option (TGeant3,TGeant3TGeo)
+   [-r4m,  --root-macro]          Root macro
+   [-v,    --verbose]             verbose option (yes,no)
+
+  Note that the g4* and g3* options are available only when only when the
+  program was built with the corresponding WITH_GEANT3 or WITH_GEANT3 option.
+  Root macro with arguments has to be passed in a single string, eg.
+   --root-macro 'test_E01.C("",kFALSE)'
 
 Root and Geant4 UI
 ==================

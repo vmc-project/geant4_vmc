@@ -23,6 +23,7 @@
 
 #include <TVirtualMC.h>
 #include <TGeoManager.h>
+#include <TThread.h>
 
 #include "Ex02DetectorConstruction.h"
 #include "Ex02ChamberParameterisation.h"
@@ -78,7 +79,7 @@ void Ex02DetectorConstruction::ConstructMaterials()
 
   // Create Root geometry manager 
   new TGeoManager("E02_geometry", "E02 VMC example geometry");
-   
+
   Double_t a;        // Mass of a mole in g/mole   
   Double_t z;        // Atomic number
   Double_t density;  // Material density in g/cm3

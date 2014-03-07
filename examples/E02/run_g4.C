@@ -28,11 +28,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
   g4libs();
 
   // Load this example library
-  gSystem->Load("libmtroot");
   gSystem->Load("libexample02");
-  
-  // Initialize Root threading
-  TThread::Initialize();
 
   // MC application
   Ex02MCApplication* appl 
@@ -45,8 +41,11 @@ void run_g4(const TString& configMacro = "g4Config.C")
  
   // Setting Geant4 visualization
   ((TGeant4*)gMC)->ProcessGeantMacro("g4vis.in");
+
+  // Enter in Geant4 interactive session
+  //((TGeant4*)gMC)->StartGeantUI();
   
-  appl->RunMC(50);
+  appl->RunMC(5);
 
   delete appl;
 }  

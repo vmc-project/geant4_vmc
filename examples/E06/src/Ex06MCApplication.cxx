@@ -26,17 +26,11 @@
 #include <TVirtualGeoTrack.h>
 #include <TCanvas.h>
 
-#include <TMCAutoLock.h>
-
 #include "Ex06MCApplication.h"
 #include "Ex03MCStack.h"
 #include "Ex06DetectorConstruction.h"
 #include "Ex06DetectorConstructionOld.h"
 #include "Ex06PrimaryGenerator.h"
-
-namespace {
-  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
-}
 
 /// \cond CLASSIMP
 ClassImp(Ex06MCApplication)
@@ -122,8 +116,7 @@ Ex06MCApplication::~Ex06MCApplication()
 /// Destructor  
   
 
-  TMCAutoLock lk(&deleteMutex);
-  printf("Ex06MCApplication::~Ex06MCApplication %p \n", this);
+  //cout << "Ex06MCApplication::~Ex06MCApplication " << this << endl;
 
   delete fStack;
   delete fMagField;
@@ -131,8 +124,7 @@ Ex06MCApplication::~Ex06MCApplication()
   delete fPrimaryGenerator;
   delete gMC;
 
-  printf("Done Ex06MCApplication::~Ex06MCApplication %p \n", this);
-  lk.unlock();
+  //cout << "Done Ex06MCApplication::~Ex06MCApplication " << this << endl;
 }
 
 //
@@ -148,8 +140,10 @@ void Ex06MCApplication::InitMC(const char* setup)
 
   fVerbose.InitMC();
 
-  gROOT->LoadMacro(setup);
-  gInterpreter->ProcessLine("Config()");
+  if ( TString(setup) != "" ) {
+    gROOT->LoadMacro(setup);
+    gInterpreter->ProcessLine("Config()");
+  }  
  
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);
@@ -179,7 +173,7 @@ TVirtualMCApplication* Ex06MCApplication::CloneForWorker() const
 //_____________________________________________________________________________
 void Ex06MCApplication::InitForWorker() const
 {
-  cout << "Ex06MCApplication::InitForWorker " << this << endl;
+  //cout << "Ex06MCApplication::InitForWorker " << this << endl;
 
   // Set data to MC
   gMC->SetStack(fStack);
@@ -189,7 +183,7 @@ void Ex06MCApplication::InitForWorker() const
 //_____________________________________________________________________________
 void Ex06MCApplication::Merge(TVirtualMCApplication* localMCApplication)
 {
-  cout << "Ex06MCApplication::Merge " << this << endl;
+  //cout << "Ex06MCApplication::Merge " << this << endl;
 
   Ex06MCApplication* ex06LocalMCApplication
     = static_cast<Ex06MCApplication*>(localMCApplication);

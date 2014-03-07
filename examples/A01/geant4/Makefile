@@ -170,7 +170,7 @@ ALIBRARY	= $(LIBDIR)/lib$(PACKAGE).a
 
 default:	depend $(SLIBRARY)
 all:		default includes
-
+static: 	$(ALIBRARY)
 
 $(LIBDIR)/lib$(PACKAGE).$(SL):  $(OBJS)
 $(LIBDIR)/lib$(PACKAGE).a:      $(OBJS)

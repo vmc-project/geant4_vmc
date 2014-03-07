@@ -99,7 +99,7 @@ class TG4GeometryManager : public TG4Verbose
     TG4OpGeometryManager* fOpManager;        ///< optical geometry manager    
     G4String              fUserGeometry;     ///< user geometry input                                        
     TG4FieldParameters    fFieldParameters;  ///< magnetic field parameters
-    TG4MagneticField*     fMagneticField;    ///< magnetic field
+    static G4ThreadLocal TG4MagneticField*  fMagneticField; ///< magnetic field
     TG4VUserRegionConstruction* fUserRegionConstruction; ///< user region construction
 
     /// option to activate max step defined in tracking media

@@ -157,6 +157,14 @@ G4VPhysicalVolume *TG4RootDetectorConstruction::Construct()
 }
 
 //______________________________________________________________________________
+void TG4RootDetectorConstruction::ConstructSDandField()
+{
+  G4cout << "TG4RootDetectorConstruction::ConstructSDandField" << G4endl;
+  if (fSDInit) fSDInit->InitializeSDandField();
+  G4cout << "### INFO: TG4RootDetectorConstruction::ConstructSDandField finished" << G4endl;
+}  
+
+//______________________________________________________________________________
 void TG4RootDetectorConstruction::CreateG4LogicalVolumes()
 {
 /// Create logical volumes for GEANT4 based on TGeo volumes.

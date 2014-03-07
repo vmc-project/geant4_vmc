@@ -28,10 +28,13 @@ ifeq ($(MAKE_GEANT4_2),../include/TG4RunConfiguration.h)
   SUBDIRS += E03/geant4 A01/geant4
 endif
 
-.PHONY: default
+.PHONY: default static
 
 default:
 	@for dir in $(SUBDIRS); do (cd $$dir && $(MAKE)); done;:
+
+static:
+	@for dir in $(SUBDIRS); do (cd $$dir && $(MAKE) static); done;:
 
 clean:
 	@for dir in $(SUBDIRS); do (cd $$dir && $(MAKE) clean); done;:

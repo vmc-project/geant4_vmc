@@ -45,3 +45,13 @@ void TG4PostDetConstruction::Initialize(TG4RootDetectorConstruction* /*dc*/)
   TG4GeometryManager::Instance()->ConstructGeometry();  
 }
 
+//_____________________________________________________________________________
+void TG4PostDetConstruction::InitializeSDandField()
+{
+/// Construct geometry using the VMC application.
+// --
+
+  G4cout << "TG4PostDetConstruction::InitializeSDandField" << G4endl;
+  TG4GeometryManager::Instance()->ConstructSDandField();
+}
+

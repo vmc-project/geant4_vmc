@@ -100,6 +100,21 @@ Bool_t isSet(const char* variable)
   return false;
 }  
 
+Bool_t isMT()
+{
+/// Macro function for detecting if Geant4 libraries
+/// are built in multi-threading mode via 
+/// geant4-config --has-feature multithreading
+
+  FILE* pipe = gSystem->OpenPipe("geant4-config  --has-feature multithreading", "r");
+  char line[10];
+  fgets(line, sizeof(line), pipe);
+  TString answer = line;
+  answer.Remove(answer.First('\n'));
+  
+  return ( answer == "yes");
+}  
+
 void vgmlibs()
 { 
 /// Function for loading VGM libraries.
@@ -138,4 +153,11 @@ void g4libs()
     gSystem->Load("libgeant4vmc_gui");
   }  
 
+  // mtroot library (make optional)
+  cout << "Loading mtroot library ..." << endl;
+  gSystem->Load("libmtroot");
+  
+  // initialize Root threading  
+  //if ( isMT() )
+  // TThread::Initialize();
 }

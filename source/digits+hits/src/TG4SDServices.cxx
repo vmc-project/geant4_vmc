@@ -176,8 +176,8 @@ G4int TG4SDServices::GetVolumeID(G4LogicalVolume* logicalVolume) const
 /// The volume ID is defined via associated sensitive detector ID or
 /// is taken from a map (if user applies sentitive volumes selection.)
 
-  return logicalVolume->GetInstanceID();
-/* 
+ // return logicalVolume->GetInstanceID();
+
 #ifdef MCDEBUG
   G4VSensitiveDetector* sd
     = logicalVolume->GetSensitiveDetector();
@@ -217,7 +217,6 @@ G4int TG4SDServices::GetVolumeID(G4LogicalVolume* logicalVolume) const
     } 
   }  
 #endif   
-*/
 } 
 
 

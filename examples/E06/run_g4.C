@@ -50,6 +50,9 @@ void run_g4(const TString& configMacro = "g4Config.C")
   // Visualization settings
   ((TGeant4*)gMC)->ProcessGeantMacro("g4vis.in");
 
+  // Enter in Geant4 interactive session
+  //((TGeant4*)gMC)->StartGeantUI();
+
   // Run MC
   appl->RunMC(5);
 

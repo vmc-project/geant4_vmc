@@ -22,6 +22,7 @@
 #include <Riostream.h>
 #include <TVirtualMC.h>
 #include <TGeoManager.h>
+#include <TThread.h>
 
 #include "Ex06DetectorConstruction.h"
 
@@ -58,7 +59,7 @@ void Ex06DetectorConstruction::ConstructMaterials()
 
   // Create Root geometry manager 
   new TGeoManager("E06_geometry", "E06 VMC example geometry");
-   
+
   Double_t a;        // Mass of a mole in g/mole   
   Double_t z;        // Atomic number
   Double_t density;  // Material density in g/cm3
@@ -283,7 +284,7 @@ void Ex06DetectorConstruction::ConstructOpGeometry()
   gMC->SetMaterialProperty(fImedWater, "MIEHG_FORWARD_RATIO", mieWaterConst[2]);
 
   // Set the Birks Constant for the Water scintillator
-  gMC->SetMaterialProperty(fImedWater, "BIRKS_CONSTANT", 0.126e+02); // mm/MeV
+  gMC->SetMaterialProperty(fImedWater, "BIRKS_CONSTANT", 0.126e+02); // 0.126*mm/MeV
 
 
 //	------------- Surfaces --------------

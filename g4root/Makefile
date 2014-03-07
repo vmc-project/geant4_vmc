@@ -52,9 +52,9 @@ include $(ROOT_ETCDIR)/MakeRules
 
 # Dictionary
 #
-GDICT    := $(BINDIR)/g4rootCint.cxx
-GDICTH   := $(GDICT:.cxx=.h)
-GDICTO   := $(patsubst %.cxx,%.o,$(GDICT))
+#GDICT    := $(BINDIR)/g4rootCint.cxx
+#GDICTH   := $(GDICT:.cxx=.h)
+#GDICTO   := $(patsubst %.cxx,%.o,$(GDICT))
 
 # Sources
 #
@@ -63,7 +63,7 @@ SRCS	:= $(CXXSRC)
 
 # C++ Headers processed by CINT
 #
-HDRS	:= include/TG4RootNavMgr.h g4rootLinkDef.h
+#HDRS	:= include/TG4RootNavMgr.h g4rootLinkDef.h
 
 # C++ Headers copied to include
 #

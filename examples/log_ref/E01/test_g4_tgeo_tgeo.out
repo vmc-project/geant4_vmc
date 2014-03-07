@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/13  30 November 2013   *
+  *   Version   5.34/17  24 February 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/13 (v5-34-13@v5-34-13, Dec 05 2013, 12:50:09 on linuxx8664gcc)
+ROOT 5.34/17 (v5-34-17@v5-34-17, Mar 06 2014, 20:58:17 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -17,10 +17,11 @@ Enclose multiple statements between { }.
 
 Processing test_E01.C("g4tgeoConfig.C", kFALSE)...
 Loading Geant4 libraries (using geant4-config) ...
-32
+33
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
+Loading mtroot library ...
 Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
 Geometry will be defined via TGeo
 Warning in <TGeoManager::Init>: Deleting previous geometry: VGM Root geometry/VGM Root geometry
@@ -35,16 +36,18 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 2, max placements = 19
 Info in <TGeoManager::CloseGeometry>: 22 nodes/ 4 volume UID's in E01 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
-Info in <TG4RootNavMgr::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
-Running TVirtualMCApplication::ConstructGeometry
+Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
+isMaster=1
+Running TVirtualMCApplication::ConstructGeometryTG4RootNavMgr has been created.0x13f0eb0
+
 *************************************************************
- Geant4 version Name: geant4-10-00    (6-December-2013)
+ Geant4 version Name: geant4-10-00-patch-01    (28-February-2014)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
 *************************************************************
 
-Info in <TG4RootNavMgr::Initialize>: Creating G4 hierarchy ...
+Info in <TObject::Initialize>: Creating G4 hierarchy ...
 Info in <TGeoManager::ConvertReflections>: Converting reflections in: E01_geometry - E01 VMC example geometry ...
 Info in <TGeoManager::ConvertReflections>: Done
 ===> GEANT4 materials created and mapped to TGeo ones...
@@ -53,17 +56,20 @@ Info in <TGeoManager::ConvertReflections>: Done
 TG4PostDetConstruction::Initialize
 G4 Stat: instantiated 4 logical volumes 
                       21 physical volumes
-Info in <TG4RootNavMgr::ConnectToG4>: ROOT detector construction class connected to G4RunManager
+Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
 Adding EMPhysicsList emStandard
 Adding SpecialPhysicsList stepLimiter
-Available UI session types: [ GAG, tcsh, csh ]
 Visualization Manager instantiating with verbosity "warnings (3)"...
 Geant4 has been created.
+TG4RootDetectorConstruction::ConstructSDandField
+TG4PostDetConstruction::InitializeSDandField
+### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 ### EM physics constructed. 
 ### Processes mapped to VMC controls ok.
 ### Step limiter physics constructed.
 ### User particles physics constructed. 
 ### Processes mapped to VMC codes ok.
+Available UI session types: [ GAG, tcsh, csh ]
 
 **********************************************
     GEANT4 Geometry statistics: 
@@ -176,6 +182,12 @@ hPairProd:   for  proton    SubType= 4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
 
+CoulombScat:   for  proton    SubType= 1
+      Lambda table from 100 eV  to 10 TeV in 51 bins, spline: 1
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
+
 msc:   for GenericIon    SubType= 10
       RangeFactor= 0.2, stepLimitType: 0, latDisplacement: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -254,6 +266,12 @@ hPairProd:   for  kaon+    SubType= 4
       Sampling table 14x1001; from 3.94942 GeV to 10 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
+
+CoulombScat:   for  kaon+    SubType= 1
+      Lambda table from 100 eV  to 10 TeV in 49 bins, spline: 1
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
 
 msc:   for kaon-    SubType= 10
       RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 1, polarAngleLimit(deg)= 180
@@ -372,6 +390,12 @@ hPairProd:   for  pi+    SubType= 4
       Sampling table 16x1001; from 1.11656 GeV to 10 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
+
+CoulombScat:   for  pi+    SubType= 1
+      Lambda table from 100 eV  to 10 TeV in 46 bins, spline: 1
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
 
 msc:   for pi-    SubType= 10
       RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 1, polarAngleLimit(deg)= 180
@@ -664,7 +688,7 @@ Track 191 0 0  in CALB  Lead
 Track 200 0 0  in CALB  Lead
 Track 200 0 0  in EXPH  ArgonGas
 Track 300 0 0  in EXPH  ArgonGas
-Time of this run:   User=0s Real=0s Sys=0s
+Time of this run:   User=0.01s Real=0s Sys=0s
 Number of events processed: 1
 Transformation for /EXPH_1/CALB_1/LAYB_9: 
 matrix global_1 - tr=1  rot=0  refl=0  scl=0

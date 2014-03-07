@@ -56,17 +56,17 @@ void TG4SpecialControlsV2::SetSwitch()
 #ifdef MCDEBUG
   TG4Limits* limits 
      = TG4GeometryServices::Instance()
-         ->GetLimits(fkTrack->GetVolume()->GetLogicalVolume()->GetUserLimits()); 
+         ->GetLimits(fkTrack->GetNextVolume()->GetLogicalVolume()->GetUserLimits());
 #else  
   TG4Limits* limits 
-    = (TG4Limits*) fkTrack->GetVolume()->GetLogicalVolume()->GetUserLimits();
+    = (TG4Limits*) fkTrack->GetNextVolume()->GetLogicalVolume()->GetUserLimits();
 #endif    
 
   if ( ! limits ) {
     TG4Globals::Warning(
       "TG4SpecialControlsV2", "SetSwitch", 
       "No limits defined in " + 
-      TString(fkTrack->GetVolume()->GetLogicalVolume()->GetName()));
+      TString(fkTrack->GetNextVolume()->GetLogicalVolume()->GetName()));
     return;   
   }  
 
@@ -137,7 +137,11 @@ void TG4SpecialControlsV2::StartTrack(const G4Track* track)
   for (G4int i=0; i<processVector->length(); i++) {
     fProcessActivations.push_back(processManager->GetProcessActivation(i));
   }  
+
+  // apply controls
+  ApplyControls();
 }
+
 
 //_____________________________________________________________________________
 void TG4SpecialControlsV2::ApplyControls()
@@ -164,7 +168,7 @@ void TG4SpecialControlsV2::ApplyControls()
     for ( G4int i=0; i<fSwitchedProcesses.length(); i++ ) {
       if ( VerboseLevel() > 1 ) {
         G4cout << "Reset process activation back in " 
-               << fkTrack->GetVolume()->GetName() 
+               << fkTrack->GetNextVolume()->GetName()
                << G4endl;
       }
       processManager
@@ -178,7 +182,7 @@ void TG4SpecialControlsV2::ApplyControls()
 
     // set TG4Limits processes controls
     TG4Limits* limits 
-    = (TG4Limits*) fkTrack->GetVolume()->GetLogicalVolume()->GetUserLimits();
+    = (TG4Limits*) fkTrack->GetNextVolume()->GetLogicalVolume()->GetUserLimits();
 
     for ( G4int i=0; i<processVector->length(); i++ ) {
 
@@ -200,7 +204,7 @@ void TG4SpecialControlsV2::ApplyControls()
           if (VerboseLevel() > 1) {
             G4cout << "Set process inactivation for " 
                    << (*processVector)[i]->GetProcessName() << " in " 
-                       << fkTrack->GetVolume()->GetName() 
+                       << fkTrack->GetNextVolume()->GetName()
                    << G4endl;
           }
           processManager->SetProcessActivation(i,false);
@@ -210,7 +214,7 @@ void TG4SpecialControlsV2::ApplyControls()
           if (VerboseLevel() > 1) {
             G4cout << "Set process activation for " 
                    << (*processVector)[i]->GetProcessName() << " in " 
-                   << fkTrack->GetVolume()->GetName() 
+                   << fkTrack->GetNextVolume()->GetName()
                    << G4endl;
           }
           processManager->SetProcessActivation(i,true);

@@ -73,7 +73,9 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
 {
 /// Standard constructor
 
-  G4cout << "TG4RunManager::TG4RunManager 1st: " << this << G4endl;
+  if (VerboseLevel() > 1) {
+    G4cout << "TG4RunManager::TG4RunManager " << this << G4endl;
+  }  
 
   if (fgInstance) {
     TG4Globals::Exception(
@@ -92,15 +94,22 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
   G4bool isMaster = ! G4Threading::IsWorkerThread();
   
   if ( isMaster ) {
-    fgMasterInstance = this; 
+    fgMasterInstance = this;
     
-    // create geant4 UI
-    CreateUIs();
+    // create and configure G4 run manager
+    ConfigureRunManager();
+    
+    // get/create Root UI
+    CreateRootUI();
   }  
   else {
     // Get G4 worker run manager 
     fRunManager = G4RunManager::GetRunManager();
+    
+    // Clone G4Root navigator if needed
+    CloneRootNavigatorForWorker();
 
+    fRegionsManager = fgMasterInstance->fRegionsManager;
     fRootUISession = fgMasterInstance->fRootUISession;
     fGeantUISession = fgMasterInstance->fGeantUISession;
   }     
@@ -115,13 +124,17 @@ TG4RunManager::~TG4RunManager()
 {
 /// Destructor
 
-  delete fRunConfiguration;
-  delete fRegionsManager;
+  G4bool isMaster = ! G4Threading::IsWorkerThread();
+
+  if ( isMaster ) {
+    delete fRunConfiguration;
+    delete fRegionsManager;
 #ifdef G4UI_USE
-  delete fGeantUISession;
+    delete fGeantUISession;
 #endif
-  delete fRunManager;
-  if (fRootUIOwner) delete fRootUISession;
+    delete fRunManager;
+    if (fRootUIOwner) delete fRootUISession;
+  }
 }
 
 //
@@ -135,7 +148,8 @@ void TG4RunManager::ConfigureRunManager()
 
   // Geometry construction and navigator
   //
-  G4cout << "TG4RunManager::ConfigureRunManager " << this << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::ConfigureRunManager " << this << G4endl;
 
   TString userGeometry = fRunConfiguration->GetUserGeometry();
   
@@ -143,7 +157,6 @@ void TG4RunManager::ConfigureRunManager()
     ->SetUserRegionConstruction(
         fRunConfiguration->CreateUserRegionConstruction());
     
-/*
   // Root navigator
   TG4RootNavMgr* rootNavMgr = 0;
   if ( userGeometry == "VMCtoRoot" || userGeometry == "Root" ) {
@@ -170,8 +183,9 @@ void TG4RunManager::ConfigureRunManager()
     
     // Pass geometry to G4Root navigator
     rootNavMgr = TG4RootNavMgr::GetInstance(gGeoManager);
+    G4cout << "TG4RootNavMgr has been created." << rootNavMgr << G4endl;
   }  
-*/
+
   // G4 run manager
 #ifdef G4MULTITHREADED  
   fRunManager = new G4MTRunManager(); 
@@ -187,63 +201,74 @@ void TG4RunManager::ConfigureRunManager()
   if ( userGeometry != "VMCtoRoot" && userGeometry != "Root" ) {
     fRunManager
       ->SetUserInitialization(fRunConfiguration->CreateDetectorConstruction());
-    G4cout << "CreateDetectorConstruction done." << G4endl;
+    if ( VerboseLevel() > 1 )
+      G4cout << "CreateDetectorConstruction done." << G4endl;
   }    
   else {
-    TG4Globals::Exception(
-      "TG4RunManager", "ConfigureRunManager",
-      "Root navigation is not yet supported.");
-    //rootNavMgr->Initialize(new TG4PostDetConstruction());
-    //rootNavMgr->ConnectToG4();  
+    //TG4Globals::Exception(
+    //  "TG4RunManager", "ConfigureRunManager",
+    //  "Root navigation is not yet supported.");
+#ifdef G4MULTITHREADED
+    G4int nthreads = G4MTRunManager::GetMasterRunManager()->GetNumberOfThreads();
+#else
+    G4int nthreads = 1;
+#endif
+    rootNavMgr->Initialize(new TG4PostDetConstruction(), nthreads);
+    rootNavMgr->ConnectToG4();  
   }  
     
   // Other mandatory classes
   //  
   fRunManager
     ->SetUserInitialization(fRunConfiguration->CreatePhysicsList());
-  G4cout << "CreatePhysicsList done." << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "CreatePhysicsList done." << G4endl;
+ 
   fRunManager
     ->SetUserInitialization(new TG4ActionInitialization(fRunConfiguration));      
-  G4cout << "Create ActionInitialization done." << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "Create ActionInitialization done." << G4endl;
   
   // Regions manager
   //
   fRegionsManager = new TG4RegionsManager();
   
-  G4cout << "TG4RunManager::ConfigureRunManager done " << this << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::ConfigureRunManager done " << this << G4endl;
 }
 
 //_____________________________________________________________________________
-void TG4RunManager::CreateGeantUI()
+void TG4RunManager::CloneRootNavigatorForWorker()
 {
-/// Create interactive Geant4.
+  // Clone Root navigator for worker thread
+  //
 
-  if ( fGeantUISession ) return;
+  TString userGeometry = fRunConfiguration->GetUserGeometry();
+  if ( userGeometry != "VMCtoRoot" && userGeometry != "Root" )  return;
 
-#ifdef G4UI_USE
-  // create session if it does not exist  
-  fGeantUISession = new G4UIExecutive(fARGC, fARGV);
-#endif  
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::CloneRootNavigatorForWorker " << this << G4endl;
+
+  // Master Root navigator
+  TG4RootNavMgr* masterRootNavMgr = TG4RootNavMgr::GetMasterInstance();
+
+  // Create G4Root navigator on worker
+  TG4RootNavMgr* rootNavMgr = TG4RootNavMgr::GetInstance(*masterRootNavMgr);
+  G4cout << "TG4RootNavMgr has been created." << rootNavMgr << G4endl;
+
+  //rootNavMgr->Initialize(new TG4PostDetConstruction());
+  rootNavMgr->ConnectToG4();
+
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::CloneRootNavigatorForWorker done " << this << G4endl;
 }
 
 //_____________________________________________________________________________
 void TG4RunManager::CreateRootUI()
 {
-/// Create interactive Root.
+/// Get/Create Root interactive session
 
-  if ( fRootUISession ) return; 
-
-  // create session if it does not exist  
-  fRootUISession = new TRint("rootSession", &fARGC, fARGV, 0, 0);
-  fRootUIOwner = true;
-}
-
-//_____________________________________________________________________________
-void TG4RunManager::CreateUIs()
-{
-/// Create Root & Geant4 interactive sessions
-
-  // set primary UI
+  // get Root UI session if it exists
   fRootUISession = gROOT->GetApplication();
   if (fRootUISession) {
     fARGC = fRootUISession->Argc();
@@ -253,13 +278,17 @@ void TG4RunManager::CreateUIs()
   // filter out "-splash" from argument list
   FilterARGV("-splash");
 
-  // create geant4 UI
-  CreateGeantUI();
-      // must be created before TG4VisManager::Initialize()
-      // (that is invoked in TGeant4 constructor)
+  // create root UI if it does not exist
+  if ( ! fRootUISession ) {
+    // copy only first command line argument (name of program)
+    // (use the same way as in TApplication.cxx)
+    int argc = 1;
+    char** argv = (char **)new char*[argc];
+    argv[0] = StrDup(fARGV[0]);
 
-  // create root UI
-  CreateRootUI();
+    fRootUISession = new TRint("rootSession", &argc, argv, 0, 0);
+    fRootUIOwner = true;
+  }
 }
 
 //_____________________________________________________________________________
@@ -299,10 +328,11 @@ void TG4RunManager::Initialize()
 {
 /// Initialize G4.
 
-  G4cout << "TG4RunManager::Initialize " << this << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::Initialize " << this << G4endl;
 
   // create G4RunManager
-  ConfigureRunManager();
+  //ConfigureRunManager();
 
   // initialize Geant4
   fRunManager->Initialize();
@@ -313,7 +343,8 @@ void TG4RunManager::Initialize()
   // initialize SD manager
   TG4SDManager::Instance()->Initialize();
 
-  G4cout << "TG4RunManager::Initialize done " << this << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::Initialize done " << this << G4endl;
 }
 
 //_____________________________________________________________________________
@@ -322,7 +353,9 @@ void TG4RunManager::LateInitialize()
 /// Finish initialization of G4 after the G4Run initialization
 /// is finished. 
 
-  G4cout << "TG4RunManager::LateInitialize " << this << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::LateInitialize " << this << G4endl;
+
   G4bool isMaster = ! G4Threading::IsWorkerThread();
 
   // define particles 
@@ -333,15 +366,15 @@ void TG4RunManager::LateInitialize()
     TG4GeometryManager::Instance()
       ->SetUserLimits(*TG4G3PhysicsManager::Instance()->GetCutVector(),
                       *TG4G3PhysicsManager::Instance()->GetControlVector());
-  }                    
 
   // pass info if cut on e+e- pair is activated to stepping action  
   // TO DO LATER - Stepping Action NOT AVAILABLE                  
   //((TG4SteppingAction*)fRunManager->GetUserSteppingAction())
   //  ->SetIsPairCut((*TG4G3PhysicsManager::Instance()->GetIsCutVector())[kEplus]);                   
 
-  // convert tracking cuts in range cuts per regions
-  if ( fRunConfiguration->IsSpecialCuts() ) fRegionsManager->DefineRegions();
+    // convert tracking cuts in range cuts per regions
+    if ( fRunConfiguration->IsSpecialCuts() ) fRegionsManager->DefineRegions();
+  }
 
   // activate/inactivate physics processes
   TG4PhysicsManager::Instance()->SetProcessActivation();
@@ -358,7 +391,8 @@ void TG4RunManager::LateInitialize()
   // set the random number seed
   if ( fUseRootRandom ) SetRandomSeed();
 
-  G4cout << "TG4RunManager::LateInitialize done " << this << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RunManager::LateInitialize done " << this << G4endl;
 }
 
 //_____________________________________________________________________________
@@ -384,6 +418,20 @@ Bool_t TG4RunManager::ProcessRun(G4int nofEvents)
 }
     
 //_____________________________________________________________________________
+void TG4RunManager::CreateGeantUI()
+{
+/// Create interactive Geant4.
+
+  if ( fGeantUISession ) return;
+
+#ifdef G4UI_USE
+  // create session if it does not exist
+  // G4cout << fARGC << "  "  << fARGV << G4endl;
+  fGeantUISession = new G4UIExecutive(fARGC, fARGV);
+#endif
+}
+
+//_____________________________________________________________________________
 void TG4RunManager::StartGeantUI()
 { 
 /// Start interactive/batch Geant4.
@@ -393,13 +441,13 @@ void TG4RunManager::StartGeantUI()
   if ( fGeantUISession ) {  
 #ifdef G4UI_USE
     // interactive session
-    G4cout << "Welcome back in Geant4" << G4endl;
+    G4cout << "Welcome (back) in Geant4" << G4endl;
     fGeantUISession->GetSession()->SessionStart();
-    G4cout << "Welcome back in Root" << G4endl;  
+    G4cout << "Welcome (back) in Root" << G4endl;
 #endif    
   }
   else {
-    G4cout << "Geant4 UI not available" << G4endl;
+    G4cout << "Geant4 UI not available." << G4endl;
   }
 }
 
@@ -410,9 +458,9 @@ void TG4RunManager::StartRootUI()
 
   if (!fRootUISession) CreateRootUI();
   if (fRootUISession) { 
-    G4cout << "Welcome back in Root" << G4endl;
+    G4cout << "Welcome (back) in Root" << G4endl;
     fRootUISession->Run(kTRUE);
-    G4cout << "Welcome back in Geant4" << G4endl;  
+    G4cout << "Welcome (back) in Geant4" << G4endl;
   }
 }
  

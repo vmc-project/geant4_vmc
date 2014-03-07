@@ -32,7 +32,6 @@
 
 #include <TMCRootManager.h>
 #include <TMCRootManagerMT.h>
-#include <TMCAutoLock.h>
 
 #include "Ex03MCStack.h"
 #include "A01MCApplication.h"
@@ -43,10 +42,6 @@
 #include "A01EmCalorimeterSD.h"
 #include "A01HadCalorimeterSD.h"
 #include "A01HodoscopeSD.h"
-
-namespace {
-  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
-}
 
 /// \cond CLASSIMP
 ClassImp(A01MCApplication)
@@ -165,12 +160,9 @@ A01MCApplication::~A01MCApplication()
 {
 /// Destructor  
   
-  // Root manager locks on his own
+  //cout << "A01MCApplication::~A01MCApplication " << this << endl;
+
   delete fRootManager;
-
-  TMCAutoLock lk(&deleteMutex);
-  printf("A01MCApplication::~A01MCApplication %p \n", this);
-
   delete fStack;
   if ( fIsMaster) delete fDetConstruction;
   delete fDriftChamberSD1;
@@ -183,8 +175,7 @@ A01MCApplication::~A01MCApplication()
   delete fMagField;
   delete gMC;
 
-  printf("Done A01MCApplication::~A01MCApplication %p \n", this);
-  lk.unlock();
+  //cout << "Done A01MCApplication::~A01MCApplication " << this << endl;
 }
 
 //
@@ -197,7 +188,7 @@ void A01MCApplication::RegisterStack() const
 /// Register stack in the Root manager.
 
   if ( fWriteStack && fRootManager ) {
-    cout << "A01MCApplication::RegisterStack: " << endl;
+    //cout << "A01MCApplication::RegisterStack: " << endl;
     fRootManager->Register("stack", "Ex03MCStack", &fStack);   
   }  
 }  
@@ -215,8 +206,10 @@ void A01MCApplication::InitMC(const char* setup)
 
   fVerbose.InitMC();
 
-  gROOT->LoadMacro(setup);
-  gInterpreter->ProcessLine("Config()");
+  if ( TString(setup) != "" ) {
+    gROOT->LoadMacro(setup);
+    gInterpreter->ProcessLine("Config()");
+  }  
  
   // Create Root manager
   if ( ! gMC->IsMT() ) {
@@ -265,14 +258,14 @@ void A01MCApplication::FinishRun()
 //_____________________________________________________________________________
 TVirtualMCApplication* A01MCApplication::CloneForWorker() const
 {
-  cout << "A01MCApplication::CloneForWorker " << this << endl;
+  //cout << "A01MCApplication::CloneForWorker " << this << endl;
   return new A01MCApplication(*this);
 }
 
 //_____________________________________________________________________________
 void A01MCApplication::InitForWorker() const
 {
-  cout << "A01MCApplication::InitForWorker " << this << endl;
+  //cout << "A01MCApplication::InitForWorker " << this << endl;
 
   // Create Root manager
   fRootManager
@@ -289,7 +282,7 @@ void A01MCApplication::InitForWorker() const
 //_____________________________________________________________________________
 void A01MCApplication::FinishWorkerRun() const
 {
-  cout << "A01MCApplication::FinishWorkerRun: " << endl;
+  //cout << "A01MCApplication::FinishWorkerRun: " << endl;
   if ( fRootManager ) {
     fRootManager->WriteAll();
     fRootManager->Close();

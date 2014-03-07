@@ -49,7 +49,6 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
     fStep(0),
     fStepStatus(kNormalStep),
     fLimitsModifiedOnFly(0),
-    fTouchableHistory(0),
     fSteppingManager(0),
     fVolPathBuffer(),
     fCopyNoOffset(0),
@@ -58,7 +57,7 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
 /// Standard constructor
 /// \param userGeometry  User selection of geometry definition and navigation 
 
-  G4cout << "TG4StepManager::TG4StepManager " << this << G4endl;
+  //G4cout << "TG4StepManager::TG4StepManager " << this << G4endl;
   
   if ( fgInstance ) {
     TG4Globals::Exception(
@@ -67,8 +66,6 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
   }
       
   fgInstance = this;  
-  
-  fTouchableHistory = new G4TouchableHistory();
   
   /// Set offset for passing copyNo to 1;
   /// as G3toG4 decrement copyNo passed by user by 1
@@ -85,13 +82,6 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
 TG4StepManager::~TG4StepManager() 
 {
 /// Destructor
-
-  G4cout << "TG4StepManager::~TG4StepManager " << this << G4endl;
-  
-  // Breaks
-  //delete fTouchableHistory;
-
-  G4cout << "TG4StepManager::~TG4StepManager end " << this << G4endl;
 }
 
 //

@@ -23,6 +23,7 @@
 
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
+#include <G4Version.hh>
 
 //_____________________________________________________________________________
 TG4ProcessMCMapPhysics::TG4ProcessMCMapPhysics(const G4String& name)
@@ -128,6 +129,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("kaon0SInelastic", kPHInhelastic); 
   mcMap->Add("LambdaInelastic", kPHInhelastic); 
   mcMap->Add("lambdaInelastic", kPHInhelastic); 
+  mcMap->Add("anti-lambdaInelastic", kPHInhelastic); 
   mcMap->Add("ProtonInelastic", kPHInhelastic); 
   mcMap->Add("protonInelastic", kPHInhelastic); 
   mcMap->Add("AntiProtonInelastic", kPHInhelastic); 
@@ -188,8 +190,11 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("muNucl", kPMuonNuclear); 
   mcMap->Add("muMinusCaptureAtRest", kPMuonNuclear); 
   mcMap->Add("PositronNuclear", kPPositronNuclear); 
+  mcMap->Add("positronNuclear", kPPositronNuclear); 
   mcMap->Add("ElectroNuclear", kPElectronNuclear); 
+  mcMap->Add("electronNuclear", kPElectronNuclear); 
   mcMap->Add("photoNuclear", kPPhotoNuclear);
+  mcMap->Add("photonNuclear", kPPhotoNuclear);
   
   mcMap->Add("Cerenkov", kPCerenkov);
   mcMap->Add("Scintillation", kPScintillation);
@@ -217,6 +222,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("specialCutForElectron", kPStop); 
   mcMap->Add("specialCutForElectron", kPStop); 
   mcMap->Add("MinEkineCuts", kPStop); 
+  mcMap->Add("G4MinEkineCuts", kPStop); 
   mcMap->Add("MaxTimeCuts", kPStop); 
   mcMap->Add("stackPopper", kPUserDefined);   
 }  
@@ -236,17 +242,26 @@ void TG4ProcessMCMapPhysics::ConstructProcess()
 /// Loop over all particles and their processes and check if
 /// the process is present in the map
 
-  G4cout << "TG4ProcessMCMapPhysics::ConstructProcess: " << this << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4ProcessMCMapPhysics::ConstructProcess: " << this << G4endl;
 
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
-  G4cout << "mcMap: " << mcMap << G4endl;
   G4bool success = true;
 
+#if G4VERSION_NUMBER < 1000
+  theParticleIterator->reset();
+  while ((*theParticleIterator)())
+  {
+    G4ProcessVector* processVector 
+      = theParticleIterator->value()->GetProcessManager()->GetProcessList();
+#else
   aParticleIterator->reset();
   while ((*aParticleIterator)())
   {
     G4ProcessVector* processVector 
       = aParticleIterator->value()->GetProcessManager()->GetProcessList();
+#endif
+
     for (G4int i=0; i<processVector->length(); i++) {
     
       G4String processName = (*processVector)[i]->GetProcessName();

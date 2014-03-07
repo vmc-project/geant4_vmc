@@ -20,40 +20,18 @@ void test_E06(const TString& configMacro, Bool_t oldGeometry)
 /// \param oldGeometry  if true - geometry is defined via VMC, otherwise 
 ///                     via TGeo
 
-  // Load basic libraries
-  gROOT->LoadMacro("../macro/basiclibs.C");
-  basiclibs();
-  
-  // Load MC libraries
-  TString mc = configMacro(0, 2);
-  if ( mc == "g3" ) {
-    // Geant3 libraries
-    gROOT->LoadMacro("../macro/g3libs.C");
-    g3libs();
-  }
-  else if ( mc == "g4" ) {  
-    // Geant4 libraries
-    gROOT->LoadMacro("../macro/g4libs.C");
-    g4libs();
-  }  
-  else if ( mc == "fl" ) {  
-    // Fluka libraries
-    gROOT->LoadMacro("../macro/fllibs.C");
-    fllibs();
-    
-    // Prepare Fluka working directory
-    gSystem->Exec("../macro/run_fluka.sh");
 
-    // Enter in Fluka working directory
-    gSystem->cd("fluka_out");
+  // Load application if it does not yet exist
+  Bool_t needDelete = kFALSE;
+  if ( ! TVirtualMCApplication::Instance() ) {
+    gROOT->LoadMacro("./test_E06_load.C");
+    test_E06_load(configMacro, oldGeometry);
+    needDelete = kTRUE;
   }  
-    
-  // Load this example library
-  gSystem->Load("libexample06");
 
   // MC application
-  Ex06MCApplication* appl 
-    = new Ex06MCApplication("Example06", "The example06 MC application");
+  Ex06MCApplication* appl
+    = (Ex06MCApplication*)TVirtualMCApplication::Instance();
   appl->GetPrimaryGenerator()->SetNofPrimaries(100);  
     
   // Set geometry defined via VMC
@@ -63,7 +41,7 @@ void test_E06(const TString& configMacro, Bool_t oldGeometry)
  // Initialize MC
   appl->InitMC(configMacro);
   
-  if ( mc == "g4" ) {  
+  if ( gMC->GetName()  == "TGeant4" ) {
     // Customise Geant4 setting after initialization:
     // Physics list
     ((TGeant4*)gMC)->ProcessGeantMacro("g4config2.in");
@@ -72,5 +50,5 @@ void test_E06(const TString& configMacro, Bool_t oldGeometry)
   // Run MC
   appl->RunMC(10);
     
-  delete appl;
+  if ( needDelete ) delete appl;
 }  

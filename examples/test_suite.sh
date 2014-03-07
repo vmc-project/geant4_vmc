@@ -77,6 +77,8 @@ do
       cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
       root.exe -b -q "test_E03_4.C(\"g3tgeoConfig.C\", kFALSE)" >& tmpfile
       cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
+      root.exe -b -q "test_E03_5.C(\"g3tgeoConfig.C\", kFALSE)" >& tmpfile
+      cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
 
       echo "... Running test with G3, geometry via VMC,  Native navigation" 
       root.exe -b -q "test_E03_1.C(\"g3Config.C\", kTRUE)" >& $OUT/test_g3_vmc_nat.out   
@@ -86,6 +88,8 @@ do
       cat tmpfile >> $OUT/test_g3_vmc_nat.out
       root.exe -b -q "test_E03_4.C(\"g3Config.C\", kTRUE)" >& tmpfile   
       cat tmpfile >> $OUT/test_g3_vmc_nat.out
+      root.exe -b -q "test_E03_5.C(\"g3Config.C\", kTRUE)" >& tmpfile   
+      cat tmpfile >> $OUT/test_g3_vmc_nat.out
 
       echo "... Running test with G3, geometry via VMC,  TGeo navigation" 
       root.exe -b -q "test_E03_1.C(\"g3tgeoConfig.C\", kTRUE)" >& $OUT/test_g3_vmc_tgeo.out   
@@ -94,6 +98,8 @@ do
       root.exe -b -q "test_E03_3.C(\"g3tgeoConfig.C\", kTRUE)" >& tmpfile  
       cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
       root.exe -b -q "test_E03_4.C(\"g3tgeoConfig.C\", kTRUE)" >& tmpfile  
+      cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
+      root.exe -b -q "test_E03_5.C(\"g3tgeoConfig.C\", kTRUE)" >& tmpfile  
       cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
     fi  
 
@@ -106,6 +112,8 @@ do
       cat tmpfile >> $OUT/test_g4_tgeo_nat.out
       root.exe -b -q "test_E03_4.C(\"g4Config.C\", kFALSE)" >& tmpfile  
       cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+      root.exe -b -q "test_E03_5.C(\"g4Config4.C\", kFALSE)" >& tmpfile  
+      cat tmpfile >> $OUT/test_g4_tgeo_nat.out
 
       echo "... Running test with G4, geometry via TGeo, TGeo navigation" 
       root.exe -b -q "test_E03_1.C(\"g4tgeoConfig.C\", kFALSE)" >& $OUT/test_g4_tgeo_tgeo.out   
@@ -114,6 +122,8 @@ do
       root.exe -b -q "test_E03_3.C(\"g4tgeoConfig.C\", kFALSE)" >& tmpfile   
       cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
       root.exe -b -q "test_E03_4.C(\"g4tgeoConfig.C\", kFALSE)" >& tmpfile   
+      cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+      root.exe -b -q "test_E03_5.C(\"g4tgeoConfig4.C\", kFALSE)" >& tmpfile  
       cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
 
       echo "... Running test with G4, geometry via VMC,  Native navigation" 
@@ -151,8 +161,6 @@ do
       cat tmpfile >> $OUT/test_g4_tgeo_nat_pl.out
       root.exe -b -q "test_E03_4.C(\"g4Config2.C\", kFALSE)" >& tmpfile    
       cat tmpfile >> $OUT/test_g4_tgeo_nat_pl.out
-      root.exe -b -q "test_E03_5.C(\"g4Config2.C\", kFALSE)" >& tmpfile    
-      cat tmpfile >> $OUT/test_g4_tgeo_nat_pl.out
       rm tmpfile
     fi 
   fi   
@@ -171,7 +179,7 @@ do
       root.exe -b -q "test_$EXAMPLE.C(\"g4tgeoConfig.C\", kFALSE)" >& $OUT/test_g4_tgeo_tgeo.out   
 
       echo "... Running test with G4, geometry via G4, Native navigation" 
-      root.exe -b -q "test_$EXAMPLE.C(\"g4Config1.C\", kFALSE)" >& $OUT/test_g4_nat.out   
+      root.exe -b -q "test_$EXAMPLE.C(\"g4Config1.C\", kFALSE)" >& $OUT/test_g4_g4_nat.out   
     fi  
   fi  
 

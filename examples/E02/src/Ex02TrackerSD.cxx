@@ -90,7 +90,7 @@ void Ex02TrackerSD::Initialize()
   
   static __thread Bool_t registered = false;
   if ( ! registered ) {
-    cout << "... creating TClonesArray" << endl;
+    //cout << "... creating TClonesArray" << endl;
 
     // Lock Root when creating data - seems not to be needed ?
     fTrackerCollection = new TClonesArray("Ex02TrackerHit");
@@ -145,7 +145,7 @@ void Ex02TrackerSD::EndOfEvent()
 /// Print hits collection (if verbose)
 /// and delete hits afterwards.
 
-  //if (fVerboseLevel>0)  Print();
+  if (fVerboseLevel>0)  Print();
     
   // Reset hits collection
   fTrackerCollection->Clear();  

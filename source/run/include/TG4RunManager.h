@@ -65,6 +65,7 @@ class TG4RunManager : public TG4Verbose
     //
     // methods for Geant4 only 
     //
+    void CreateGeantUI();
     void StartGeantUI();
     void StartRootUI();
     void ProcessGeantMacro(G4String macroName);
@@ -84,10 +85,9 @@ class TG4RunManager : public TG4Verbose
 
     // methods
     void ConfigureRunManager();
+    void CloneRootNavigatorForWorker();
     void FilterARGV(const G4String& option);
-    void CreateGeantUI();
     void CreateRootUI();
-    void CreateUIs();
     void SetRandomSeed();
     
     // static data members

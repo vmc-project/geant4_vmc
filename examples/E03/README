@@ -63,8 +63,10 @@ Macros:
   g4Config1.C     - configuration macro - geometry defined via Geant4
   g4Config2.C     - configuration macro - user defined physics list (QGSP_BERT)
   g4Config3.C     - configuration macro - user defined regions
+  g4Config4.C     - configuration macro - activation of VMC cuts and process controls
   g4tgeoConfig.C  - configuration macro - G4 with TGeo navigation 
-  g4tgeoConfig3.C - configuration macro - user defined regions, G4 with TGeo navigation 
+  g4tgeoConfig3.C - configuration macro - user defined regions, TGeo navigation 
+  g4tgeoConfig4.C - configuration macro - activation of VMC cuts and process controls, TGeo navigation 
   g4ConfigEnv.C   - configuration macro - physics list defined via environment variable
   g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
   g4config2.in  - macro for G4 configuration using G4 commands (called from g4Config2.C)

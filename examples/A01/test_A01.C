@@ -22,41 +22,17 @@ void test_A01(const TString& configMacro, Bool_t oldGeometry)
 /// \param oldGeometry  if true - geometry is defined via VMC, otherwise 
 ///                     via TGeo
 
-  // Load basic libraries
-  gROOT->LoadMacro("../macro/basiclibs.C");
-  basiclibs();
-
-  // Load MC libraries
-  TString mc = configMacro(0, 2);
-  if ( mc == "g3" ) {
-    // Geant3 libraries
-    gROOT->LoadMacro("../macro/g3libs.C");
-    g3libs();
-  }
-  else if ( mc == "g4" ) {  
-    // Geant4 libraries
-    gROOT->LoadMacro("../macro/g4libs.C");
-    g4libs();
+  // Load application if it does not yet exist
+  Bool_t needDelete = kFALSE;
+  if ( ! TVirtualMCApplication::Instance() ) {
+    gROOT->LoadMacro("./test_A01_load.C");
+    test_A01_load(configMacro, oldGeometry);
+    needDelete = kTRUE;
   }  
-  else if ( mc == "fl" ) {  
-    // Fluka libraries
-    gROOT->LoadMacro("../macro/fllibs.C");
-    fllibs();
-    
-    // Prepare Fluka working directory
-    gSystem->Exec("../macro/run_fluka.sh");
 
-    // Enter in Fluka working directory
-    gSystem->cd("fluka_out");
-  }  
-  
-  // Load this example library
-  gSystem->Load("libmtroot");
-  gSystem->Load("libexampleA01");
- 
   // MC application
   A01MCApplication* appl 
-    =  new A01MCApplication("ExampleA01", "The exampleA01 MC application");
+    = (A01MCApplication*)TVirtualMCApplication::Instance();
   appl->GetPrimaryGenerator()->SetNofPrimaries(100);
   appl->SetWriteStack(true);
   appl->SetWriteHits(true);
@@ -69,5 +45,5 @@ void test_A01(const TString& configMacro, Bool_t oldGeometry)
   timer.Stop();
   timer.Print();
   
-  delete appl;
+  if ( needDelete ) delete appl;
 }  

@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/13  30 November 2013   *
+  *   Version   5.34/17  24 February 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/13 (v5-34-13@v5-34-13, Dec 05 2013, 12:50:09 on linuxx8664gcc)
+ROOT 5.34/17 (v5-34-17@v5-34-17, Mar 06 2014, 20:58:17 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -34,6 +34,7 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 2, max placements = 5
 Info in <TGeoManager::CloseGeometry>: 8 nodes/ 4 volume UID's in E02 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+Warning in <TClass::TClass>: no dictionary for class stack<Ex02Particle*,deque<Ex02Particle*> > is available
 
 -------->Hits Collection: in this event they are 12 hits in the tracker chambers: 
   trackID: 0  chamberNb: 0  energy deposit (keV): 89.4865  position (cm): (1.49477, 18.8225, -140.074)
@@ -131,11 +132,11 @@ Primary
 Number of daughters: 0
 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   984834543    3AB361EF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    54643711     341CBFF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   984857477   984834543
-                                        HEX    3AB3BB85    3AB361EF
+          with Store/Table at absolute adrs    54666645    54643711
+                                        HEX     3422595     341CBFF
                                         HEX        59FA           0
                               relative adrs       23034           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
