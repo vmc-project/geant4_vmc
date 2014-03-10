@@ -37,10 +37,6 @@
 #include <TVirtualGeoTrack.h>
 #include <TParticle.h>
 
-//namespace {
-//  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
-//}
-
 /// \cond CLASSIMP
 ClassImp(Ex03MCApplication)
 /// \endcond
