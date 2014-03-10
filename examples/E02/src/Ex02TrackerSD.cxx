@@ -47,6 +47,17 @@ Ex02TrackerSD::Ex02TrackerSD(const char* name)
 }
 
 //_____________________________________________________________________________
+Ex02TrackerSD::Ex02TrackerSD(const Ex02TrackerSD& origin)
+  : TNamed(origin.GetName(), origin.GetTitle()),
+    fTrackerCollection(0),
+    fSensitiveVolumeID(-1),
+    fVerboseLevel(1)
+{
+/// Standard constructor
+/// \param name  The tracker hits collection name
+}
+
+//_____________________________________________________________________________
 Ex02TrackerSD::Ex02TrackerSD()
   : TNamed(),
     fTrackerCollection(0),

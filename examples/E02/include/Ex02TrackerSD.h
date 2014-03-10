@@ -36,6 +36,7 @@ class Ex02TrackerSD : public TNamed
 {
   public:
     Ex02TrackerSD(const char* name);
+    Ex02TrackerSD(const Ex02TrackerSD& origin);
     Ex02TrackerSD();
     virtual ~Ex02TrackerSD();
 

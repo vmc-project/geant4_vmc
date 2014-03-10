@@ -42,7 +42,35 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title)
     fRootManager(0),
     fStack(0),
     fDetConstruction(),
-    fTrackerSD("Tracker Chamber"),
+    fTrackerSD(0),
+    fMagField(0),
+    fOldGeometry(kFALSE)
+{
+/// Standard constructor
+/// \param name   The MC application name
+/// \param title  The MC application description
+
+  //cout << "Ex02MCApplication::Ex02MCApplication " << this << endl;
+
+  // Create application data
+
+  // Create SD
+  fTrackerSD = new Ex02TrackerSD("Tracker Chamber");
+  // Create a user stack
+  fStack = new Ex02MCStack(100);
+  // Constant magnetic field (in kiloGauss)
+  fMagField = new Ex02MagField(20., 0., 0.);
+  // It si also possible to use TGeoUniformMagField class:
+  // fMagField = new TGeoUniformMagField(20., 0., 0.);
+}
+
+//_____________________________________________________________________________
+Ex02MCApplication::Ex02MCApplication(const Ex02MCApplication& origin)
+  : TVirtualMCApplication(origin.GetName(),origin.GetTitle()),
+    fRootManager(0),
+    fStack(0),
+    fDetConstruction(origin.fDetConstruction),
+    fTrackerSD(0),
     fMagField(0),
     fOldGeometry(kFALSE)
 {
@@ -54,6 +82,8 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title)
 
   // Create application data
 
+  // Create SD
+  fTrackerSD = new Ex02TrackerSD(*(origin.fTrackerSD));
   // Create a user stack
   fStack = new Ex02MCStack(100); 
   // Constant magnetic field (in kiloGauss)
@@ -84,6 +114,7 @@ Ex02MCApplication::~Ex02MCApplication()
 
   delete fRootManager;
   delete fStack;
+  delete fTrackerSD;
   delete fMagField;
   delete gMC;
 
@@ -164,7 +195,7 @@ void Ex02MCApplication::FinishRun()
 //_____________________________________________________________________________
 TVirtualMCApplication* Ex02MCApplication::CloneForWorker() const 
 {
-  return new Ex02MCApplication(GetName(), GetTitle());
+  return new Ex02MCApplication(*this);
 }
 
 //_____________________________________________________________________________
@@ -189,7 +220,6 @@ void Ex02MCApplication::FinishWorkerRun() const
 {
   //cout << "Ex02MCApplication::FinishWorkerRun: " << endl;
   if ( fRootManager ) {
-    //fRootManager->WriteAndClose();
     fRootManager->WriteAll();
     fRootManager->Close();
   }  
@@ -228,7 +258,7 @@ void Ex02MCApplication::InitGeometry()
 {    
 /// Initialize geometry
   
-  fTrackerSD.Initialize();
+  fTrackerSD->Initialize();
 }
 
 //_____________________________________________________________________________
@@ -301,7 +331,7 @@ void Ex02MCApplication::Stepping()
 {    
 /// User actions at each step
 
-  fTrackerSD.ProcessHits();
+  fTrackerSD->ProcessHits();
 }
 
 //_____________________________________________________________________________
@@ -339,7 +369,7 @@ void Ex02MCApplication::FinishEvent()
 
   fRootManager->Fill();
 
-  fTrackerSD.EndOfEvent();
+  fTrackerSD->EndOfEvent();
 
   fStack->Print();
   fStack->Reset();
@@ -356,10 +386,10 @@ void  Ex02MCApplication::ReadEvent(Int_t i)
       = new TMCRootManager(GetName(), TVirtualMCRootManager::kRead);
   }     
 
-  fTrackerSD.Register();
+  fTrackerSD->Register();
   RegisterStack();
   fRootManager->ReadEvent(i);
 
   fStack->Print();  
-  fTrackerSD.Print();
+  fTrackerSD->Print();
 }

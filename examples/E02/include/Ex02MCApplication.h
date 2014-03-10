@@ -70,13 +70,14 @@ class Ex02MCApplication : public TVirtualMCApplication
 
   private:
     // methods
+    Ex02MCApplication(const Ex02MCApplication& origin);
     void RegisterStack() const;
     
     // data members
     mutable TVirtualMCRootManager*   fRootManager;     //!< Root manager 
     Ex02MCStack*             fStack;           ///< VMC stack
     Ex02DetectorConstruction fDetConstruction; ///< Dector construction
-    Ex02TrackerSD            fTrackerSD;       ///< Tracker SD
+    Ex02TrackerSD*           fTrackerSD;       ///< Tracker SD
     TVirtualMagField*        fMagField;        ///< Magnetic field
     Bool_t                   fOldGeometry;     ///< Option for geometry definition
 
