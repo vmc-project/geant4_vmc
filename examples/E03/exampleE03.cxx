@@ -24,7 +24,8 @@
 #include "TGeant3TGeo.h"
 #endif
 
-//#include "TThread.h"
+#include "TThread.h"
+#include "TInterpreter.h"
 
 /// Application main program
 int main(int argc, char** argv)
@@ -33,7 +34,8 @@ int main(int argc, char** argv)
   // (Multi-threading is triggered automatically if Geant4 was built 
   //  in MT mode.)
 #ifdef G4MULTITHREADED
-   //TThread::Initialize();
+   TThread::Initialize();
+   gInterpreter->SetProcessLineLock(false);
 #endif
 
   // Create MC application (thread local)

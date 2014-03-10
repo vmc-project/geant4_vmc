@@ -24,7 +24,8 @@
 #include "TGeant3TGeo.h"
 #endif
 
-//#include "TThread.h"
+#include "TThread.h"
+#include "TInterpreter.h"
 
 /// Application main program
 int main(int argc, char** argv)
@@ -33,19 +34,8 @@ int main(int argc, char** argv)
   // (Multi-threading is triggered automatically if Geant4 was built 
   //  in MT mode.)
 #ifdef G4MULTITHREADED
-   //TThread::Initialize();
-#endif
-
-  // Process arguments
-  // This code is generic with the exception of the start values and
-  // the program name
-#ifdef USE_GEANT4
-  std::string g4Geometry = "geomRootToGeant4";
-  std::string g4PhysicsList = "FTFP_BERT";
-  std::string g4SpecialPhysics = "stepLimiter";
-  std::string g4Macro = "g4config.in";
-  std::string g4VisMacro = "g4vis.in";
-  std::string g4Session = "";
+   TThread::Initialize();
+   gInterpreter->SetProcessLineLock(false);
 #endif
 
   // Create MC application (thread local)
