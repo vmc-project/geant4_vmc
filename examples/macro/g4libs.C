@@ -158,6 +158,6 @@ void g4libs()
   gSystem->Load("libmtroot");
   
   // initialize Root threading  
-  //if ( isMT() )
-  // TThread::Initialize();
+  if ( isMT() )
+    TThread::Initialize();
 }
