@@ -21,6 +21,8 @@
 #/mcVerbose/trackingAction 0
 #/mcVerbose/extraPhysicsList 2
 
+/control/cout/ignoreThreadsExcept 0
+
 # Optical processes verbose
 # 
 #/optics_engine/selectOpProcess Scintillation

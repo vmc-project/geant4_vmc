@@ -15,6 +15,9 @@
 
 /mcPhysics/rangeCuts 10. mm
 /mcVerbose/all 1
+
+/control/cout/ignoreThreadsExcept 0
+
 #/mcMagField/stepperType HelixHeum
 #/mcMagField/printParameters
 #/tracking/verbose 1

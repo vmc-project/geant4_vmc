@@ -21,6 +21,8 @@
 #/mcVerbose/trackingAction 0
 #/mcVerbose/eventAction 0
 
+/control/cout/ignoreThreadsExcept 0
+
 /run/particle/applyCuts
 
 #/tracking/verbose 1
