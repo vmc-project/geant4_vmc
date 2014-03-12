@@ -32,9 +32,14 @@
 #include <G4MaterialPropertiesTable.hh>
 #include <G4Element.hh>
 #include <G4UserLimits.hh>
+<<<<<<< HEAD
 #include <G4SystemOfUnits.hh>
+=======
+#ifdef USE_G3TOG4
+>>>>>>> c43a996... Fixed compilati with NO_G3TOG4 option
 #include <G3toG4.hh> 
 #include <G3EleTable.hh> 
+#endif
 
 #include <TGeoMatrix.h>
 #include "Riostream.h"
@@ -84,11 +89,12 @@ TG4GeometryServices::~TG4GeometryServices()
 // private methods
 //
 
+#ifdef USE_G3TOG4
 //_____________________________________________________________________________
 G4bool TG4GeometryServices::IsG3Volume(const G4String& lvName) const
 {
 /// Return true if the logical volume of given volumeName
-/// was not created by Gsposp method with a generic name 
+/// was not created by Gsposp method with a generic name
 /// (name_copyNo).
 
   if (lvName.contains(gSeparator))
@@ -98,7 +104,7 @@ G4bool TG4GeometryServices::IsG3Volume(const G4String& lvName) const
 }
 
 //_____________________________________________________________________________
-G4bool TG4GeometryServices::CompareElement(G4double /*a*/, G4double z, 
+G4bool TG4GeometryServices::CompareElement(G4double /*a*/, G4double z,
                                            const G4Element* element) const
 {
 /// Compare given parameters with those of a given element,
@@ -122,6 +128,27 @@ G4bool TG4GeometryServices::CompareElement(G4double /*a*/, G4double z,
   else  
     return false;   
 }                                             
+#else
+//_____________________________________________________________________________
+G4bool TG4GeometryServices::IsG3Volume(const G4String& /*lvName*/) const
+{
+/// Return true if the logical volume of given volumeName
+/// was not created by Gsposp method with a generic name
+/// (name_copyNo).
+
+  return false;
+}
+
+//_____________________________________________________________________________
+G4bool TG4GeometryServices::CompareElement(G4double /*a*/, G4double /*z*/,
+                                           const G4Element* /*element*/) const
+{
+/// Compare given parameters with those of a given element,
+/// return true if they are equal, false otherwise.
+
+    return false;
+}
+#endif
 
 //_____________________________________________________________________________
 G4bool TG4GeometryServices::CompareMaterial(G4int nofElements, G4double density, 
@@ -311,13 +338,17 @@ const G4String& TG4GeometryServices::UserVolumeName(const G4String& name) const
 /// Cut _copyNo extension added to logical volume name in case 
 /// the logical volume was created by Gsposp method.
 
+#ifdef USE_G3TOG4
   if ( fIsG3toG4 && name.contains(gSeparator) )  {
     fgBuffer = name.substr(0,name.first(gSeparator));
     return fgBuffer;
   }
   else {  
     return name;
-  }  
+  }
+#else
+  return name;
+#endif
 }
 
 //_____________________________________________________________________________
@@ -676,14 +707,24 @@ void TG4GeometryServices::PrintControls(const G4String& controlName) const
    }  
 }
 
+#ifdef USE_G3TOG4
 //_____________________________________________________________________________
-void TG4GeometryServices::SetG3toG4Separator(char separator) 
-{ 
+void TG4GeometryServices::SetG3toG4Separator(char separator)
+{
 /// Set the volumes name separator that will be
-/// applied in both roottog4 and g3tog4 
+/// applied in both roottog4 and g3tog4
 
   gSeparator = separator; 
 }
+#else
+//_____________________________________________________________________________
+void TG4GeometryServices::SetG3toG4Separator(char /*separator*/)
+{
+/// Set the volumes name separator that will be
+/// applied in both roottog4 and g3tog4
+
+}
+#endif
 
 //_____________________________________________________________________________
 Int_t TG4GeometryServices::NofG3Volumes() const

@@ -148,7 +148,7 @@ void TG4MCGeometry::Material(Int_t&, const char*, Double_t,
 /// Not available without USE_G3TOG4 option.
 
   TG4Globals::Exception("TG4MCGeometry", "Material",
-     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+     "This method requires Geant4 installation with G3toG4.");
 }
 #endif      
   
@@ -222,7 +222,7 @@ void TG4MCGeometry::Mixture(Int_t&, const char*, Double_t*,
 /// Not available without USE_G3TOG4 option.
 
   TG4Globals::Exception("TG4MCGeometry", "Mixture",
-     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+     "This method requires Geant4 installation with G3toG4.");
 }
 #endif      
 
@@ -331,7 +331,7 @@ void TG4MCGeometry::Medium(Int_t&, const char *, Int_t,
 /// Not available without USE_G3TOG4 option.
 
   TG4Globals::Exception("TG4MCGeometry", "Medium",
-     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+     "This method requires Geant4 installation with G3toG4.");
 }     
 #endif      
 
@@ -355,7 +355,7 @@ void TG4MCGeometry::Matrix(Int_t&, Double_t, Double_t,
 /// Not available without USE_G3TOG4 option.
 
   TG4Globals::Exception("TG4MCGeometry", "Matrix",
-     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+     "This method requires Geant4 installation with G3toG4.");
 }     
 #endif      
 
@@ -373,7 +373,7 @@ void TG4MCGeometry::Ggclos()
   G4ggclos();        
 #else
   TG4Globals::Exception("TG4MCGeometry", "Ggclos()",
-     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+     "This method requires Geant4 installation with G3toG4.");
 #endif      
 } 
  
@@ -408,7 +408,7 @@ Int_t TG4MCGeometry::Gsvolu(const char *, const char *,
 /// Not available without USE_G3TOG4 option.
 
   TG4Globals::Exception("TG4MCGeometry", "Gsvolu",
-     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+     "This method requires Geant4 installation with G3toG4.");
   return 0;
 }
 #endif      
@@ -460,7 +460,7 @@ void  TG4MCGeometry::Gsdvn(const char *, const char *, Int_t, Int_t)
 //  ---
 
   TG4Globals::Exception("TG4MCGeometry", "Gsdvn",
-     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+     "This method requires Geant4 installation with G3toG4.");
 } 
 #endif      
  
@@ -492,7 +492,7 @@ void  TG4MCGeometry::Gsdvn2(const char *, const char *,
 ///  Not available without USE_G3TOG4 option.
 
   TG4Globals::Exception("TG4MCGeometry", "Gsdvn2",
-     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+     "This method requires Geant4 installation with G3toG4.");
 }     
 #endif      
  
@@ -526,7 +526,7 @@ void  TG4MCGeometry::Gsdvt(const char *, const char *,
 ///  Not available without USE_G3TOG4 option.
 
   TG4Globals::Exception("TG4MCGeometry", "Gsdvt",
-     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+     "This method requires Geant4 installation with G3toG4.");
 } 
 #endif      
  
@@ -564,7 +564,7 @@ void  TG4MCGeometry::Gsdvt2(const char *, const char *,
 
 
   TG4Globals::Exception("TG4MCGeometry", "Gsdvt",
-     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+     "This method requires Geant4 installation with G3toG4.");
 } 
 #endif      
  
@@ -629,7 +629,7 @@ void  TG4MCGeometry::Gspos(const char *, Int_t,
 // ---  
 
   TG4Globals::Exception("TG4MCGeometry", "Gspos",
-     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+     "This method requires Geant4 installation with G3toG4.");
 } 
 #endif      
  
@@ -660,7 +660,7 @@ void  TG4MCGeometry::Gsposp(const char *, Int_t,
 ///  Not available without USE_G3TOG4 option.
 
  TG4Globals::Exception("TG4MCGeometry", "Gsposp",
-     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+     "This method requires Geant4 installation with G3toG4.");
 }     
 #endif      
  
@@ -700,7 +700,7 @@ void  TG4MCGeometry::Gsbool(const char*, const char*)
 // ---  
 
   TG4Globals::Exception("TG4MCGeometry", "Gsbool",
-     "This method requires geant4_vmc built with USE_G3TOG4 option.");
+     "This method requires Geant4 installation with G3toG4.");
 }     
 #endif      
  
