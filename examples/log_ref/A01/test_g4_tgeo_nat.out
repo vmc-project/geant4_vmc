@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/13  30 November 2013   *
+  *   Version   5.34/17  24 February 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/13 (v5-34-13@v5-34-13, Dec 05 2013, 12:50:09 on linuxx8664gcc)
+ROOT 5.34/17 (v5-34-17@v5-34-17, Mar 10 2014, 15:40:20 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -17,13 +17,13 @@ Enclose multiple statements between { }.
 
 Processing test_A01.C("g4Config.C", kFALSE)...
 Loading Geant4 libraries (using geant4-config) ...
-32
+33
 Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
 
 *************************************************************
- Geant4 version Name: geant4-10-00    (6-December-2013)
+ Geant4 version Name: geant4-10-00-patch-01    (28-February-2014)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -168,6 +168,12 @@ hPairProd:   for  proton    SubType= 4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
 
+CoulombScat:   for  proton    SubType= 1
+      Lambda table from 100 eV  to 10 TeV in 49 bins, spline: 1
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
+
 msc:   for GenericIon    SubType= 10
       RangeFactor= 0.2, stepLimitType: 0, latDisplacement: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -246,6 +252,12 @@ hPairProd:   for  kaon+    SubType= 4
       Sampling table 14x1001; from 3.94942 GeV to 10 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
+
+CoulombScat:   for  kaon+    SubType= 1
+      Lambda table from 100 eV  to 10 TeV in 47 bins, spline: 1
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
 
 msc:   for kaon-    SubType= 10
       RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 1, polarAngleLimit(deg)= 180
@@ -364,6 +376,12 @@ hPairProd:   for  pi+    SubType= 4
       Sampling table 16x1001; from 1.11656 GeV to 10 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
+
+CoulombScat:   for  pi+    SubType= 1
+      Lambda table from 100 eV  to 10 TeV in 44 bins, spline: 1
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
 
 msc:   for pi-    SubType= 10
       RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 1, polarAngleLimit(deg)= 180
@@ -576,44 +594,44 @@ hPairProd:   for  pi-    SubType= 4
 ### Run 0 start.
 
 >>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 1 hits.
-Hodoscope2 has 11 hits.
-Chamber1 has 542 hits.
-Chamber2 has 502 hits.
-EmCalorimeter has 42 hits. Total Edep is 84759.9 (MeV)
-HadCalorimeter has 6 hits. Total Edep is 8.72297 (MeV)
+Hodoscope1 has 4 hits.
+Hodoscope2 has 9 hits.
+Chamber1 has 526 hits.
+Chamber2 has 487 hits.
+EmCalorimeter has 36 hits. Total Edep is 88176.1 (MeV)
+HadCalorimeter has 5 hits. Total Edep is 7.64103 (MeV)
 
 >>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 4 hits.
-Hodoscope2 has 5 hits.
-Chamber1 has 528 hits.
-Chamber2 has 516 hits.
-EmCalorimeter has 19 hits. Total Edep is 18578.3 (MeV)
-HadCalorimeter has 8 hits. Total Edep is 2520.47 (MeV)
+Hodoscope1 has 2 hits.
+Hodoscope2 has 3 hits.
+Chamber1 has 524 hits.
+Chamber2 has 523 hits.
+EmCalorimeter has 11 hits. Total Edep is 18255.5 (MeV)
+HadCalorimeter has 8 hits. Total Edep is 2605.34 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 3 hits.
-Hodoscope2 has 9 hits.
-Chamber1 has 520 hits.
-Chamber2 has 503 hits.
-EmCalorimeter has 66 hits. Total Edep is 26653.8 (MeV)
-HadCalorimeter has 20 hits. Total Edep is 1811.14 (MeV)
+Hodoscope2 has 14 hits.
+Chamber1 has 519 hits.
+Chamber2 has 499 hits.
+EmCalorimeter has 63 hits. Total Edep is 31796.6 (MeV)
+HadCalorimeter has 16 hits. Total Edep is 1553.91 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 7 hits.
-Hodoscope2 has 7 hits.
-Chamber1 has 439 hits.
-Chamber2 has 194 hits.
-EmCalorimeter has 52 hits. Total Edep is 8104.79 (MeV)
-HadCalorimeter has 14 hits. Total Edep is 524.87 (MeV)
+Hodoscope2 has 4 hits.
+Chamber1 has 426 hits.
+Chamber2 has 125 hits.
+EmCalorimeter has 48 hits. Total Edep is 3771.09 (MeV)
+HadCalorimeter has 11 hits. Total Edep is 191.74 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 2 hits.
-Hodoscope2 has 9 hits.
-Chamber1 has 531 hits.
-Chamber2 has 546 hits.
-EmCalorimeter has 52 hits. Total Edep is 28576.9 (MeV)
-HadCalorimeter has 16 hits. Total Edep is 107.925 (MeV)
-Time of this run:   User=10.19s Real=10.35s Sys=0.04s
+Hodoscope1 has 1 hits.
+Hodoscope2 has 5 hits.
+Chamber1 has 530 hits.
+Chamber2 has 521 hits.
+EmCalorimeter has 49 hits. Total Edep is 29462.7 (MeV)
+HadCalorimeter has 16 hits. Total Edep is 73.7046 (MeV)
+Time of this run:   User=9.34s Real=9.46s Sys=0.04s
 Number of events processed: 5
-Real time 0:00:11, CP time 11.230
+Real time 0:00:11, CP time 10.390

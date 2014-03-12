@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/13  30 November 2013   *
+  *   Version   5.34/17  24 February 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/13 (v5-34-13@v5-34-13, Dec 05 2013, 12:50:09 on linuxx8664gcc)
+ROOT 5.34/17 (v5-34-17@v5-34-17, Mar 10 2014, 15:40:20 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -30,51 +30,51 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
 
 >>> Event 1 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 2 hits.
-Hodoscope2 has 9 hits.
-Chamber1 has 517 hits.
-Chamber2 has 500 hits.
-EmCalorimeter has 32 hits. Total Edep is 88594.4 (MeV)
-HadCalorimeter has 3 hits. Total Edep is 8.95161 (MeV)
+Hodoscope1 has 1 hits.
+Hodoscope2 has 8 hits.
+Chamber1 has 514 hits.
+Chamber2 has 503 hits.
+EmCalorimeter has 32 hits. Total Edep is 90464.2 (MeV)
+HadCalorimeter has 3 hits. Total Edep is 9.10054 (MeV)
 
 >>> Event 2 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 3 hits.
-Chamber1 has 532 hits.
-Chamber2 has 531 hits.
-EmCalorimeter has 13 hits. Total Edep is 19149.7 (MeV)
-HadCalorimeter has 7 hits. Total Edep is 2610.21 (MeV)
-
->>> Event 3 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 4 hits.
-Hodoscope2 has 10 hits.
-Chamber1 has 518 hits.
-Chamber2 has 501 hits.
-EmCalorimeter has 45 hits. Total Edep is 27343.4 (MeV)
-HadCalorimeter has 14 hits. Total Edep is 978.956 (MeV)
-
->>> Event 4 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 5 hits.
-Hodoscope2 has 4 hits.
-Chamber1 has 439 hits.
-Chamber2 has 126 hits.
-EmCalorimeter has 22 hits. Total Edep is 3448.94 (MeV)
-HadCalorimeter has 5 hits. Total Edep is 102.742 (MeV)
-
->>> Event 5 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 2 hits.
 Hodoscope2 has 3 hits.
-Chamber1 has 532 hits.
-Chamber2 has 527 hits.
-EmCalorimeter has 31 hits. Total Edep is 27190.7 (MeV)
-HadCalorimeter has 3 hits. Total Edep is 9.09735 (MeV)
-Real time 0:00:03, CP time 3.190
+Chamber1 has 528 hits.
+Chamber2 has 512 hits.
+EmCalorimeter has 11 hits. Total Edep is 19115 (MeV)
+HadCalorimeter has 5 hits. Total Edep is 2493.23 (MeV)
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   248375791     ECDE9EF HEX
+>>> Event 3 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 2 hits.
+Hodoscope2 has 9 hits.
+Chamber1 has 504 hits.
+Chamber2 has 491 hits.
+EmCalorimeter has 50 hits. Total Edep is 24887.3 (MeV)
+HadCalorimeter has 12 hits. Total Edep is 968.838 (MeV)
+
+>>> Event 4 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 7 hits.
+Hodoscope2 has 6 hits.
+Chamber1 has 433 hits.
+Chamber2 has 162 hits.
+EmCalorimeter has 38 hits. Total Edep is 6798.73 (MeV)
+HadCalorimeter has 5 hits. Total Edep is 222.175 (MeV)
+
+>>> Event 5 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
+Hodoscope1 has 3 hits.
+Hodoscope2 has 6 hits.
+Chamber1 has 525 hits.
+Chamber2 has 530 hits.
+EmCalorimeter has 33 hits. Total Edep is 26404.5 (MeV)
+HadCalorimeter has 5 hits. Total Edep is 28.4749 (MeV)
+Real time 0:00:03, CP time 2.960
+
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   333052927    13D9FBFF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   248398725   248375791
-                                        HEX     ECE4385     ECDE9EF
+          with Store/Table at absolute adrs   333075861   333052927
+                                        HEX    13DA5595    13D9FBFF
                                         HEX        59FA           0
                               relative adrs       23034           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
