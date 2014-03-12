@@ -32,11 +32,7 @@
 #include <G4MaterialPropertiesTable.hh>
 #include <G4Element.hh>
 #include <G4UserLimits.hh>
-<<<<<<< HEAD
-#include <G4SystemOfUnits.hh>
-=======
 #ifdef USE_G3TOG4
->>>>>>> c43a996... Fixed compilati with NO_G3TOG4 option
 #include <G3toG4.hh> 
 #include <G3EleTable.hh> 
 #endif
