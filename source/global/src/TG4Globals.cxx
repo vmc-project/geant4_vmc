@@ -43,7 +43,7 @@ void TG4Globals::Exception(const TString& className,const TString& methodName,
   newText.ReplaceAll("x\n", "\n    ");
   
   G4cerr << newText.Data() << G4endl << G4endl;   
-  exit(1);
+  abort();
 }
 
 //_____________________________________________________________________________
