@@ -10,7 +10,7 @@
 //-------------------------------------------------
 
 /// \ingroup E03
-/// \file E03/g4Config4.C
+/// \file E03/g4tgeoConfig4.C
 /// \brief Configuration macro for Geant4 VirtualMC for Example03
 ///
 /// Demonstrates activation of VMC cuts and process controls
