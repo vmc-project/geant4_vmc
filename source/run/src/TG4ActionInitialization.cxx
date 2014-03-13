@@ -22,6 +22,7 @@
 #include "TG4SteppingAction.h"
 #include "TG4SpecialStackingAction.h"
 #include "TG4SpecialControlsV2.h"
+#include "TG4Globals.h"
 #include "TGeant4.h"
 
 #include <G4AutoDelete.hh>
@@ -77,7 +78,17 @@ void TG4ActionInitialization::Build() const
 
   // create MC and MCApplication worker instances
   if ( G4Threading::IsWorkerThread() ) {
-    TGeant4::MasterApplicationInstance()->CloneForWorker();
+    if ( ! TGeant4::MasterApplicationInstance()->CloneForWorker() ) {
+      // Give an exception if user application does not implement
+      // CloneForWorker as is run in MT
+      TG4Globals::Exception(
+        "TG4ActionInitialization", "Build",
+        "Failed to clone user application."
+        + TG4Globals::Endl()
+        + "TVirtualMCApplication::CloneForWorker() must be overriden in user code"
+        + TG4Globals::Endl()
+        + "in order to run in multi-threading mode.");
+    }
     TGeant4::MasterInstance()->CloneForWorker();
     TVirtualMCApplication::Instance()->InitForWorker();
   }  
