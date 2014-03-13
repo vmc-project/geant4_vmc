@@ -2,19 +2,17 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2013, Ivana Hrivnacova
+// Copyright (C) 2013, 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//______________________________________________________________________________
-//
-// The Root IO manager class for VMC examples for single-threaded applications.
-// It implements the TVirtualMCRootManager interface.
-//______________________________________________________________________________
-
+/// \file TMCRootManager.cxx
+/// \brief Implementation of the TMCRootManager class
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 #include "TMCRootManager.h"
 #include "TMCRootManagerImpl.h"

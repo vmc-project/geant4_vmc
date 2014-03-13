@@ -11,7 +11,7 @@
 
 /// \ingroup Tests
 /// \file test_E03_load.C
-/// \brief Example E03 Test macro
+/// \brief Example E03 macro for loading libraries for testing
 ///
 /// Running Example03
 

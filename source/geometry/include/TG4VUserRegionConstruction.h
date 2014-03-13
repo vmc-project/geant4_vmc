@@ -13,15 +13,14 @@
 //-------------------------------------------------
 
 /// \file TG4VUserRegionConstruction.h
-/// \brief The abstract base class for user defined regions 
+/// \brief Definition of the TG4VUserRegionConstruction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include <G4VUserDetectorConstruction.hh>
 
 /// \ingroup geometry
-/// \brief Detector construction for building geometry using 
-/// TVirtualMCApplication.
+/// \brief The abstract base class for user defined regions
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 

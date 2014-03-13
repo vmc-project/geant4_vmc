@@ -2,7 +2,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007, 2013 Ivana Hrivnacova
+// Copyright (C) 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -68,8 +68,9 @@ void TG4WorkerInitialization::WorkerRunEnd() const
 //_____________________________________________________________________________
 void TG4WorkerInitialization::WorkerStop() const
 {
-// This method is called once at the end of simulation job. 
-// Implement here a clean up action.
+/// This method is called once at the end of simulation job.
+/// It implements a clean up action, which is the clean-up of MC application
+/// in our case.
 
   //G4cout << "TG4WorkerInitialization::WorkerStop() " << this << G4endl;
 

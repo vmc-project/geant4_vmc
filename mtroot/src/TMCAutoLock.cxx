@@ -2,12 +2,17 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2013, Ivana Hrivnacova
+// Copyright (C) 2013, 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
+
+/// \file TMCAutoLock.cxx
+/// \brief Implementation of the TMCAutoLock class 
+///
+/// \author I. Hrivnacova; IPN, Orsay
 
 //
 // ********************************************************************

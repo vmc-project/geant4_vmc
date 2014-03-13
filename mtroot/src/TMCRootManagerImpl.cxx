@@ -2,21 +2,17 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2013, Ivana Hrivnacova
+// Copyright (C) 2013, 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//______________________________________________________________________________
-//
-// The common implementation of the TVirtualMCRootManager interface
-// for the Root IO managers for VMC examples.
-// It is used in TMCRootManager (for single-threaded applications)
-// and TMCRootManagerMT (for multi-threaded applications)
-//______________________________________________________________________________
-
+/// \file TMCRootManagerImpl.cxx
+/// \brief Implementation of the TMCRootManagerImpl class
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 #include "TMCRootManagerImpl.h"
 #include "TVirtualMCRootManager.h"
@@ -43,6 +39,7 @@ TMCRootManagerImpl::TMCRootManagerImpl(const char* projectName,
 /// Standard constructor
 /// \param projectName  The project name (passed as the Root tree name)
 /// \param fileMode     Option for opening Root file (read or write mode)
+/// \param threadRank   The thread Id (-1 when sequential mode)
 
   if ( TVirtualMCRootManager::GetDebug() ) 
     printf("TMCRootManagerImpl::TMCRootManagerImpl %p \n", this);

@@ -11,7 +11,7 @@
 
 /// \ingroup Tests
 /// \file test_E06.C
-/// \brief Example E06 Test macro
+/// \brief Example E06 macro for loading libraries for testing
 
 void test_E06_load(const TString& configMacro, Bool_t oldGeometry)
 {

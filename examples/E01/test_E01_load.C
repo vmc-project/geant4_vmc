@@ -11,7 +11,7 @@
 
 /// \ingroup Tests
 /// \file test_E01_load.C
-/// \brief Example E01 test macro
+/// \brief Example E01 macro for loading libraries for testing
 ///
 /// Running Example E01 and testing VMC geometry getters;
 

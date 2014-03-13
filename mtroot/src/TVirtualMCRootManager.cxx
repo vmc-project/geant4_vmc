@@ -1,21 +1,18 @@
-// @(#)root/vmc:$Name:  $:$Id$
-// Author: Ivana Hrivnacova, IPN Orsay 17/02/2012
+// $Id$
 
-/*************************************************************************
- * Copyright (C) 2006, Rene Brun and Fons Rademakers.                    *
- * Copyright (C) 2012, Ivana Hrivnacova.                         *
- * All rights reserved.                                                  *
- *                                                                       *
- * For the licensing terms see $ROOTSYS/LICENSE.                         *
- * For the list of contributors see $ROOTSYS/README/CREDITS.             *
- *************************************************************************/
-
-//______________________________________________________________________________
+//------------------------------------------------
+// The Geant4 Virtual Monte Carlo package
+// Copyright (C) 2013, 2014 Ivana Hrivnacova
+// All rights reserved.
 //
-// The abstract base class for Root IO managers for VMC examples 
-// for both single-threaded and  multi-threaded applications.
-//______________________________________________________________________________
+// For the licensing terms see geant4_vmc/LICENSE.
+// Contact: vmc@pcroot.cern.ch
+//-------------------------------------------------
 
+/// \file TVirtualMCRootManager.cxx
+/// \brief Implementation of the TVirtualMCRootManager class
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 #include "TVirtualMCRootManager.h"
 #include "TError.h"

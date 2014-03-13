@@ -2,17 +2,17 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2013, Ivana Hrivnacova
+// Copyright (C) 2013, 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-//
-// Class TMCAutoLock
-// --------------------
-// Extracted from G4AutoLock implementation for Linux
+/// \file TMCAutoLock.h
+/// \brief Definition of the TG4RunManager.h class
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 //
 // ********************************************************************
@@ -95,9 +95,13 @@
     typedef int (*thread_unlock)(TMCMutex*);
 #endif
 
-// Note: Note that G4TemplateAutoLock by itself is not thread-safe and
-//       cannot be shared among threads due to the locked switch
-//
+/// \brief Template classe which provides a mechanism to create a mutex and
+/// locks/unlocks it.
+///
+/// Extracted from G4AutoLock implementation for Linux
+/// Note: Note that G4TemplateAutoLock by itself is not thread-safe and
+///       cannot be shared among threads due to the locked switch
+
 template<class M, typename L, typename U>
 class TMCTemplateAutoLock
 {
@@ -138,6 +142,10 @@ class TMCTemplateAutoLock
     L _l;
     U _u;
 };
+
+/// \brief Realization of TMCTemplateAutoLock with TMCMutex
+///
+/// Extracted from G4AutoLock implementation for Linux
 
 struct TMCImpMutexAutoLock
   : public TMCTemplateAutoLock<TMCMutex,thread_lock,thread_unlock>

@@ -5,7 +5,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007, 2013 Ivana Hrivnacova
+// Copyright (C) 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -20,7 +20,7 @@
 #include <G4UserWorkerInitialization.hh>
 
 /// \ingroup run
-/// \brief 
+/// \brief Actions at start and end of run on a worker (call in MT mode only)
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 

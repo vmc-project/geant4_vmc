@@ -10,7 +10,7 @@
 //-------------------------------------------------
 
 /// \file TG4VUserRegionConstruction.cxx
-/// \brief Implementation of the TG4VUserRegionConstruction class 
+/// \brief Implementation of the TG4VUserRegionConstruction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
