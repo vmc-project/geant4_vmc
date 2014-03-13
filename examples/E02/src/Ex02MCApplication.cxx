@@ -74,9 +74,8 @@ Ex02MCApplication::Ex02MCApplication(const Ex02MCApplication& origin)
     fMagField(0),
     fOldGeometry(kFALSE)
 {
-/// Standard constructor
-/// \param name   The MC application name 
-/// \param title  The MC application description
+/// Copy constructor (for clonig on worker thread in MT mode).
+/// \param origin  The source object (on master).
 
   //cout << "Ex02MCApplication::Ex02MCApplication " << this << endl;
 

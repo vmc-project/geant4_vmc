@@ -111,9 +111,8 @@ A01MCApplication::A01MCApplication(const A01MCApplication& origin)
     fMagField(0),
     fIsMaster(kFALSE)
 {
-/// Standard constructor
-/// \param name   The MC application name 
-/// \param title  The MC application description
+/// Copy constructor (for clonig on worker thread in MT mode).
+/// \param origin  The source object (on master).
 
   // Create a user stack
   fStack = new Ex03MCStack(1000);

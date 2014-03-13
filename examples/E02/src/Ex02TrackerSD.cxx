@@ -53,8 +53,8 @@ Ex02TrackerSD::Ex02TrackerSD(const Ex02TrackerSD& origin)
     fSensitiveVolumeID(-1),
     fVerboseLevel(1)
 {
-/// Standard constructor
-/// \param name  The tracker hits collection name
+/// Copy constructor (for clonig on worker thread in MT mode).
+/// \param origin  The source object (on master).
 }
 
 //_____________________________________________________________________________

@@ -42,10 +42,11 @@ A01HodoscopeSD::A01HodoscopeSD(const char* name, const char* volName)
     fVerboseLevel(1)
 {
 /// Standard constructor.
-/// Create hits collection and an empty hit for each layer
+/// Create hits collection and an empty hit for each layer.
 /// \param name      The calorimeter hits collection name
 /// \param volName   The sensitive volume name
 
+  // Create hits collection and an empty hit for each layer
   fHitsCollection = new TClonesArray("A01HodoscopeHit", 500);
   //cout << "Hodoscope nofHits: " << fHitsCollection->GetEntriesFast() << endl;
 }
@@ -59,10 +60,9 @@ A01HodoscopeSD::A01HodoscopeSD(const A01HodoscopeSD& origin)
     fWriteHits(origin.fWriteHits),
     fVerboseLevel(origin.fVerboseLevel)
 {
-/// Standard constructor.
-/// Create hits collection and an empty hit for each layer
-/// \param name      The calorimeter hits collection name
-/// \param volName   The sensitive volume name
+/// Copy constructor (for clonig on worker thread in MT mode).
+/// Create hits collection and an empty hit for each layer.
+/// \param origin  The source object (on master).
 
   fHitsCollection = new TClonesArray("A01HodoscopeHit", 500);
   //cout << "Hodoscope nofHits: " << fHitsCollection->GetEntriesFast() << endl;

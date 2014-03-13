@@ -60,7 +60,6 @@ Ex03MCApplication::Ex03MCApplication(const char *name, const char *title)
 /// Standard constructor
 /// \param name   The MC application name 
 /// \param title  The MC application description
-/// \param fileMode  Option for opening Root file (read or write mode)
 
   // Create a user stack
   fStack = new Ex03MCStack(1000);

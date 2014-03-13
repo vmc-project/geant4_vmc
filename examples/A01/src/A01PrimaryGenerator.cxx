@@ -46,6 +46,7 @@ A01PrimaryGenerator::A01PrimaryGenerator(TVirtualMCStack* stack)
     fRandomizePrimary(true)    
 {
 /// Standard constructor
+/// \param stack  The VMC stack
 }
 
 //_____________________________________________________________________________
@@ -60,7 +61,9 @@ A01PrimaryGenerator::A01PrimaryGenerator(const A01PrimaryGenerator& origin,
     fSigmaAngle(origin.fSigmaAngle),
     fRandomizePrimary(origin.fRandomizePrimary)    
 {
-/// Standard constructor
+/// Copy constructor (for clonig on worker thread in MT mode).
+/// \param origin    The source object (on master).
+/// \param stack  The VMC stack
 }
 
 //_____________________________________________________________________________

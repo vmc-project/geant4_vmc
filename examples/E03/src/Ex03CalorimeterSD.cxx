@@ -67,11 +67,11 @@ Ex03CalorimeterSD::Ex03CalorimeterSD(const Ex03CalorimeterSD& origin,
     fGapVolId(origin.fGapVolId),
     fVerboseLevel(origin.fVerboseLevel)
 {
-/// Standard constructor.
+/// Copy constructor (for clonig on worker thread in MT mode).
 /// Create hits collection and an empty hit for each layer
 /// As the copy numbers may start from 0 or 1 (depending on
 /// geometry model, we create one more layer for this case.)
-/// \param name      The calorimeter hits collection name
+/// \param origin    The source object (on master).
 /// \param detector  The detector construction
 
   fCalCollection = new TClonesArray("Ex03CalorHit", 500);

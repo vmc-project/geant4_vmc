@@ -79,8 +79,8 @@ Ex06MCApplication::Ex06MCApplication(const Ex06MCApplication& origin)
     fOldGeometry(origin.fOldGeometry),
     fIsMaster(kFALSE)
 {
-/// Standard constructor
-/// \param origin  The source MC application
+/// Copy constructor (for clonig on worker thread in MT mode).
+/// \param origin  The source object (on master).
 
   // Create a user stack
   fStack = new Ex03MCStack(1000);

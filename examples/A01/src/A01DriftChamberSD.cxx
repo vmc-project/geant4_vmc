@@ -42,7 +42,7 @@ A01DriftChamberSD::A01DriftChamberSD(const char* name, const char* volName)
     fVerboseLevel(1)
 {
 /// Standard constructor.
-/// Create hits collection.
+/// Creates hits collection.
 /// \param name      The calorimeter hits collection name
 /// \param volName   The sensitive volume name
 
@@ -58,10 +58,9 @@ A01DriftChamberSD::A01DriftChamberSD(const A01DriftChamberSD& origin)
     fWriteHits(origin.fWriteHits),
     fVerboseLevel(origin.fVerboseLevel)
 {
-/// Standard constructor.
-/// Create hits collection.
-/// \param name      The calorimeter hits collection name
-/// \param volName   The sensitive volume name
+/// Copy constructor (for clonig on worker thread in MT mode).
+/// Creates hits collection.
+/// \param origin  The source object (on master).
 
   fHitsCollection = new TClonesArray("A01DriftChamberHit", 500);
 }

@@ -56,7 +56,8 @@ Ex03PrimaryGenerator::Ex03PrimaryGenerator(const Ex03PrimaryGenerator& origin,
     fPrimaryType(origin.fPrimaryType),
     fNofPrimaries(origin.fNofPrimaries)
 {
-/// Standard constructor
+/// Copy constructor (for clonig on worker thread in MT mode).
+/// \param origin    The source object (on master).
 /// \param stack  The VMC stack
 }
 

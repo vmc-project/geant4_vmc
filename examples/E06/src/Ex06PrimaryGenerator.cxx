@@ -62,8 +62,9 @@ Ex06PrimaryGenerator::Ex06PrimaryGenerator(const Ex06PrimaryGenerator& origin,
     fPolAngle(origin.fPolAngle),
     fNofPrimaries(origin.fNofPrimaries)
 {
-/// Standard constructor
-/// \param stack  The VMC stack
+/// Copy constructor (for clonig on worker thread in MT mode).
+/// \param origin  The source object (on master).
+/// \param stack   The VMC stack
 }
 
 //_____________________________________________________________________________

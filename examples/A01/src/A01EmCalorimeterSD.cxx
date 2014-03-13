@@ -44,7 +44,7 @@ A01EmCalorimeterSD::A01EmCalorimeterSD(const char* name)
     fVerboseLevel(1)
 {
 /// Standard constructor.
-/// Create hits collection and an empty hit for each layer
+/// Create hits collection and an empty hit for each layer.
 /// \param name      The calorimeter hits collection name
 
   fCalCollection = new TClonesArray("A01EmCalorHit", fgkNofColumns*fgkNofRows);
@@ -60,9 +60,9 @@ A01EmCalorimeterSD::A01EmCalorimeterSD(const A01EmCalorimeterSD& origin)
     fWriteHits(origin.fWriteHits),
     fVerboseLevel(origin.fVerboseLevel)
 {
-/// Standard constructor.
+/// Copy constructor (for clonig on worker thread in MT mode).
 /// Create hits collection and an empty hit for each layer
-/// \param name      The calorimeter hits collection name
+/// \param origin  The source object (on master).
 
   fCalCollection = new TClonesArray("A01EmCalorHit", fgkNofColumns*fgkNofRows);
   for (Int_t i=0; i<fgkNofColumns*fgkNofRows; i++) 
