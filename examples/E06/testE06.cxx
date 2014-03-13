@@ -7,15 +7,16 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \file exampleE06.cxx
-/// \brief The Geant4 VMC example E06 application executable
+/// \file testE06.cxx
+/// \brief The Geant4 VMC example E06 test application
 ///
-/// The Geant4 VMC application executable
+/// The Geant4 VMC test application
 /// with explicitely instantiated TGeant3 or TGeant4 and linked 
 /// with all libraries.
 ///
 /// Usage:
-/// exampleE06
+/// <pre>
+/// testE06
 ///   [-g4g,  --g4-geometry]:        Geant4 VMC geometry option
 ///   [-g4pl, --g4-physics-list]:    Geant4 physics list selection
 ///   [-g4sp, --g4-special-physics]: Geant4 special physics selection
@@ -25,6 +26,7 @@
 ///   [-g3g,  --g3-geometry]:        Geant3 geometry option (TGeant3,TGeant3TGeo)
 ///   [-r4m,  --root-macro]:         Root macro
 ///   [-v,    --verbose]:            verbose option (yes,no)
+/// </pre>
 ///
 /// Note that the g4* and g3* options are available only when built
 /// with the corresponding WITH_GEANT3 or WITH_GEANT3 option.
@@ -183,7 +185,7 @@ int main(int argc, char** argv)
     else if ( std::string(argv[i]) == "--verbose" ||
               std::string(argv[i]) == "-v")    verbose = argv[i+1];
     else {
-      PrintUsage("exampleE06");
+      PrintUsage("testE06");
       return 1;
     }
   }
@@ -191,12 +193,12 @@ int main(int argc, char** argv)
   if ( verbose == "yes" ) {
 #ifdef USE_GEANT4
     PrintG4Configuration(
-      "exampleE06", g4Geometry, g4PhysicsList, g4SpecialPhysics,
+      "testE06", g4Geometry, g4PhysicsList, g4SpecialPhysics,
       g4Macro, g4Macro2, g4VisMacro, g4Session, rootMacro);
 #endif
 #ifdef USE_GEANT3
     PrintG3Configuration(
-      "exampleE06", g3Geometry, rootMacro);
+      "testE06", g3Geometry, rootMacro);
 #endif
   }
   //
@@ -247,7 +249,7 @@ int main(int argc, char** argv)
     geant3 = new TGeant3TGeo("C++ Interface to Geant3");
   }
   else {
-    PrintUsage("exampleE06");
+    PrintUsage("testE06");
     return 1;
   }
   gMC->SetProcess("CKOV",1);

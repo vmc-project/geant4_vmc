@@ -7,15 +7,16 @@
 // Contact: vmc@pcroot.cern.ch
 //-------------------------------------------------
 
-/// \file exampleE03.cxx
-/// \brief The Geant4 VMC example E03 application executable
+/// \file testE03.cxx
+/// \brief The Geant4 VMC example E03 test application
 ///
-/// The Geant4 VMC application executable
+/// The Geant4 VMC test application
 /// with explicitely instantiated TGeant3 or TGeant4 and linked 
 /// with all libraries.
 ///
+/// <pre>
 /// Usage:
-/// exampleE03
+/// testE03
 ///   [-g4g,  --g4-geometry]:        Geant4 VMC geometry option
 ///   [-g4pl, --g4-physics-list]:    Geant4 physics list selection
 ///   [-g4sp, --g4-special-physics]: Geant4 special physics selection
@@ -29,6 +30,7 @@
 /// with the corresponding WITH_GEANT3 or WITH_GEANT3 option.
 /// Root macro with arguments should be passed within '', eg.
 ///  --root-macro 'test_E03_1.C("",kFALSE)'
+/// </pre>
 ///
 /// \date 26/02/2014
 /// \author I. Hrivnacova; IPN, Orsay
@@ -185,7 +187,7 @@ int main(int argc, char** argv)
     else if ( std::string(argv[i]) == "--verbose" ||
               std::string(argv[i]) == "-v")    verbose = argv[i+1];
     else {
-      PrintUsage("exampleE03");
+      PrintUsage("testE03");
       return 1;
     }
   }
@@ -193,12 +195,12 @@ int main(int argc, char** argv)
   if ( verbose == "yes" ) {
 #ifdef USE_GEANT4
     PrintG4Configuration(
-      "exampleE03", g4Geometry, g4PhysicsList, g4SpecialPhysics,
+      "testE03", g4Geometry, g4PhysicsList, g4SpecialPhysics,
       g4Macro, g4VisMacro, g4Session, g4UserClass, rootMacro);
 #endif
 #ifdef USE_GEANT3
     PrintG3Configuration(
-      "exampleE03", g3Geometry, rootMacro);
+      "testE03", g3Geometry, rootMacro);
 #endif
   }
   //
@@ -240,7 +242,7 @@ int main(int argc, char** argv)
       = new Ex03RunConfiguration3(g4Geometry, g4PhysicsList, g4SpecialPhysics);
   }
   else {
-    PrintUsage("exampleE03");
+    PrintUsage("testE03");
     return 1;
   }
 
@@ -264,7 +266,7 @@ int main(int argc, char** argv)
     new TGeant3TGeo("C++ Interface to Geant3");
   }
   else {
-    PrintUsage("exampleE03");
+    PrintUsage("testE03");
     return 1;
   }
   gMC->SetProcess("DRAY",1);
