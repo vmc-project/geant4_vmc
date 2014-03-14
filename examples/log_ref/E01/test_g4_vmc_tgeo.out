@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/17  24 February 2014   *
+  *   Version   5.34/18     14 March 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/17 (v5-34-17@v5-34-17, Mar 06 2014, 20:58:17 on linuxx8664gcc)
+ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -23,6 +23,13 @@ Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
 Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
+
+=============================================================
+ Geant4 Virtual Monte Carlo 
+ Version 3.00.b01 ( 14 March 2014 )
+ WWW : http://root.cern.ch/drupal/content/geant4-vmc
+=============================================================
+
 Geometry will be defined via VMC
 Info in <TGeoManager::SetTopVolume>: Top volume is EXPH. Master volume is EXPH
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -36,7 +43,7 @@ Info in <TGeoManager::CloseGeometry>: 22 nodes/ 4 volume UID's in VGM Root geome
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 isMaster=1
-Running TVirtualMCApplication::ConstructGeometryTG4RootNavMgr has been created.0x1e21970
+Running TVirtualMCApplication::ConstructGeometryTG4RootNavMgr has been created.0x1aae160
 
 *************************************************************
  Geant4 version Name: geant4-10-00-patch-01    (28-February-2014)
@@ -686,7 +693,7 @@ Track 191 0 0  in CALB  Lead
 Track 200 0 0  in CALB  Lead
 Track 200 0 0  in EXPH  ArgonGas
 Track 300 0 0  in EXPH  ArgonGas
-Time of this run:   User=0.01s Real=0s Sys=0s
+Time of this run:   User=0s Real=0s Sys=0s
 Number of events processed: 1
 Transformation for /EXPH_1/CALB_1/LAYB_9: 
 matrix global_1 - tr=1  rot=0  refl=0  scl=0

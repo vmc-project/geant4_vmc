@@ -11,6 +11,27 @@ $Id$
      
 Tags (history):
 ===============
+  14/03/2013
+  v3-00-b01:
+    Migration to Geant4 10.00 MT (beta release)
+    Geant4 VMC:
+      Developments:
+      - Migration to Geant4 multi-threading
+      Fixes:
+      - Fixed SetDecayMode(): do not fill empty channels (as this causes 
+        problems in MT)
+      - Added protection for zero return from G4ParticleTable::GetParticle(i) 
+      - Fixed implementation of special controls
+      - Fixed compilation with NO_G3TOG4
+    Examples:  
+      Developments:
+      - Migration to Geant4 multi-threading
+      - Added examples and examples tests main functions and CMake 
+        configuration files for bulding programs linked with all libraries
+
+    Tested with Geant4 10.00.p01 (with embedded CLHEP 2.1.4.1)
+      Root 5.34/18 (+patch in TCint class), VGM 3.06
+
   10/12/2013
   v2-15:
     Migration to Geant4 10.00

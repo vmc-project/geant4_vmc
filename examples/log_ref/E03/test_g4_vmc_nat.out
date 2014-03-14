@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/17  24 February 2014   *
+  *   Version   5.34/18     14 March 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/17 (v5-34-17@v5-34-17, Mar 06 2014, 20:58:17 on linuxx8664gcc)
+ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -22,6 +22,13 @@ Loading VGM libraries ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
+
+=============================================================
+ Geant4 Virtual Monte Carlo 
+ Version 3.00.b01 ( 14 March 2014 )
+ WWW : http://root.cern.ch/drupal/content/geant4-vmc
+=============================================================
+
 
 *************************************************************
  Geant4 version Name: geant4-10-00-patch-01    (28-February-2014)
@@ -659,20 +666,20 @@ hPairProd:   for  pi-    SubType= 4
 ---> Begin of event: 5
    Absorber: total energy (MeV): 906.216       total track length (cm):  64.4821
    Gap:      total energy (MeV): 41.8655       total track length (cm):  21.7851
-Time of this run:   User=0.17s Real=0.17s Sys=0s
+Time of this run:   User=0.21s Real=0.21s Sys=0.01s
 Number of events processed: 5
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/17  24 February 2014   *
+  *   Version   5.34/18     14 March 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/17 (v5-34-17@v5-34-17, Mar 06 2014, 20:58:17 on linuxx8664gcc)
+ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -686,6 +693,13 @@ Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
 --- Init MC 
+
+=============================================================
+ Geant4 Virtual Monte Carlo 
+ Version 3.00.b01 ( 14 March 2014 )
+ WWW : http://root.cern.ch/drupal/content/geant4-vmc
+=============================================================
+
 
 *************************************************************
  Geant4 version Name: geant4-10-00-patch-01    (28-February-2014)
@@ -2052,21 +2066,21 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  47.050       total track length (cm):    3.481
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.01s Real=0.01s Sys=0s
+Time of this run:   User=0.01s Real=0.01s Sys=0.01s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/17  24 February 2014   *
+  *   Version   5.34/18     14 March 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/17 (v5-34-17@v5-34-17, Mar 06 2014, 20:58:17 on linuxx8664gcc)
+ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -2080,6 +2094,13 @@ Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
 --- Init MC 
+
+=============================================================
+ Geant4 Virtual Monte Carlo 
+ Version 3.00.b01 ( 14 March 2014 )
+ WWW : http://root.cern.ch/drupal/content/geant4-vmc
+=============================================================
+
 
 *************************************************************
  Geant4 version Name: geant4-10-00-patch-01    (28-February-2014)
@@ -2768,21 +2789,21 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.145
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0s Real=0.01s Sys=0s
+Time of this run:   User=0.01s Real=0.01s Sys=0.01s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/17  24 February 2014   *
+  *   Version   5.34/18     14 March 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/17 (v5-34-17@v5-34-17, Mar 06 2014, 20:58:17 on linuxx8664gcc)
+ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -2795,6 +2816,13 @@ Loading VGM libraries ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
+
+=============================================================
+ Geant4 Virtual Monte Carlo 
+ Version 3.00.b01 ( 14 March 2014 )
+ WWW : http://root.cern.ch/drupal/content/geant4-vmc
+=============================================================
+
 
 *************************************************************
  Geant4 version Name: geant4-10-00-patch-01    (28-February-2014)
@@ -3436,5 +3464,5 @@ hPairProd:   for  pi-    SubType= 4
 
    Absorber: total energy (MeV): 1654.46       total track length (cm):  119.664
    Gap:      total energy (MeV):  69.182       total track length (cm):  33.9565
-Time of this run:   User=0.07s Real=0.07s Sys=0s
+Time of this run:   User=0.08s Real=0.08s Sys=0s
 Number of events processed: 1
