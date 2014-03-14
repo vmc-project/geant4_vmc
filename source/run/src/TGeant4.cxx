@@ -2,7 +2,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007, 2008 Ivana Hrivnacova
+// Copyright (C) 2007, 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -25,6 +25,7 @@
 #include "TG4VisManager.h"
 #include "TG4RunManager.h"
 #include "TG4Globals.h"
+#include "TG4Version.h"
 
 #include <G4StateManager.hh>
 #include <G4Threading.hh>
@@ -65,8 +66,7 @@ TGeant4::TGeant4(const char* name, const char* title,
 {
 /// Standard constructor
 
-  // add verbose level
-  //G4cout << "TGeant4::TGeant4 " << this << G4endl;
+  PrintVersion();
 
   G4bool isMaster = ! G4Threading::IsWorkerThread();
   if ( isMaster ) {
@@ -259,6 +259,21 @@ Bool_t TGeant4::CheckG4ApplicationState(const TString& methodName,
   return true;
 }       
              
+//_____________________________________________________________________________
+void TGeant4::PrintVersion() const
+{
+/// Prints the  version banner
+
+  G4cout
+    << G4endl
+    << "=============================================================" <<  G4endl
+    << " Geant4 Virtual Monte Carlo "  <<  G4endl
+    << " Version " <<  GEANT4_VMC_RELEASE << " ( " << GEANT4_VMC_RELEASE_DATE << " )"  
+    << G4endl
+    << " WWW : http://root.cern.ch/drupal/content/geant4-vmc" << G4endl
+    << "=============================================================" <<  G4endl
+    << G4endl;
+}
 
 //
 // methods for building/management of geometry

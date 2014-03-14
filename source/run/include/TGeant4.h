@@ -5,7 +5,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007, 2008 Ivana Hrivnacova
+// Copyright (C) 2007, 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -373,6 +373,8 @@ class TGeant4: public TVirtualMC
     Bool_t CheckG4ApplicationState(const TString& methodName,
                                  G4ApplicationState requiredState,
                                  Bool_t allowLater = false) const;
+
+    void PrintVersion() const;
 
     // static data members
     
