@@ -10,7 +10,7 @@
 //-------------------------------------------------
 
 /// \file TMCAutoLock.h
-/// \brief Definition of the TG4RunManager.h class
+/// \brief Definition of the TMCTemplateAutoLock and TMCImpMutexAutoLock classes
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
