@@ -34,6 +34,7 @@ ROOT_INCDIR = $(ROOTSYS)/include
 ROOT_BINDIR = $(ROOTSYS)/bin
 ROOT_ETCDIR = $(ROOTSYS)/etc/vmc
 endif
+ROOT_CFLAGS := $(shell root-config --cflags)
 
 include $(ROOT_ETCDIR)/Makefile.$(PLATFORM)
 
@@ -94,7 +95,7 @@ INCLUDES := -Iinclude \
 
 # C++ compilation flags
 #
-CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) $(G4CFLAGS) 
+CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) $(G4CFLAGS) $(ROOT_CFLAGS)
 
 DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCLUDES)
 
