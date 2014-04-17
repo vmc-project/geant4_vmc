@@ -326,7 +326,7 @@ G4String  TG4GeometryServices::CutVolumePath(const G4String& volumePath,
   
   volName = path(npos1+1, npos2-npos1-1 );
   G4String copyNoStr = path(npos2+1, npos3-npos2 );
-  istringstream in(copyNoStr);
+  std::istringstream in(copyNoStr);
   in >> copyNo;
   
   return path(npos3, path.length()-npos3);

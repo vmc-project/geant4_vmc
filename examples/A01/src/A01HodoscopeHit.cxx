@@ -21,6 +21,8 @@
 
 #include "A01HodoscopeHit.h"
 
+using namespace std;
+
 /// \cond CLASSIMP
 ClassImp(A01HodoscopeHit)
 /// \endcond

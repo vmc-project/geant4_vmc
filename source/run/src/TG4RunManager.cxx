@@ -46,7 +46,7 @@
 
 #include <TROOT.h> 
 #include <TRint.h>
-#include <TCint.h> 
+#include <TInterpreter.h>
 #include <TGeoManager.h>
 #include <TRandom.h>
 #include <TG4RootNavMgr.h>

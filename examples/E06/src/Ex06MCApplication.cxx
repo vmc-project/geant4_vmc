@@ -32,6 +32,8 @@
 #include "Ex06DetectorConstructionOld.h"
 #include "Ex06PrimaryGenerator.h"
 
+using namespace std;
+
 /// \cond CLASSIMP
 ClassImp(Ex06MCApplication)
 /// \endcond

@@ -26,6 +26,8 @@
 #include "A01DriftChamberSD.h"
 #include "A01DriftChamberHit.h"
 
+using namespace std;
+
 /// \cond CLASSIMP
 ClassImp(A01DriftChamberSD)
 /// \endcond
