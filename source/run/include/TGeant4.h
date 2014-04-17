@@ -17,15 +17,12 @@
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-#include "TG4ApplicationState.h"
-
-#include <G4ApplicationState.hh>
-
 #include <TVirtualMC.h>
 #include <TMCProcess.h>
 #include <TMCOptical.h>
 #include <TArrayI.h>
 #include <TString.h>
+#include <RVersion.h>
 
 class TG4RunConfiguration;
 class TG4StateManager;
@@ -364,18 +361,6 @@ class TGeant4: public TVirtualMC
     /// Not implemented
     TGeant4& operator=(const TGeant4& right);
     
-    // methods
-    Bool_t CheckApplicationState(const TString& methodName,
-                                 TG4ApplicationState requiredState,
-                                 Bool_t allowLater = false,
-                                 Bool_t allowSooner = false,
-                                 Bool_t allowJustAfter = false ) const;
-    Bool_t CheckG4ApplicationState(const TString& methodName,
-                                 G4ApplicationState requiredState,
-                                 Bool_t allowLater = false) const;
-
-    void PrintVersion() const;
-
     // static data members
     
     /// master instance
@@ -402,11 +387,14 @@ class TGeant4: public TVirtualMC
   ClassDef(TGeant4,0) // Geant4 implementation of the TVirtualMC interface 
 };
 
+
 #ifndef __CINT__
+#ifndef __CLING__
 
 // inline methods
 #include "TGeant4.icc"
 
 #endif
+#endif // ROOT_VERSION_CODE
 #endif // TGEANT4_H
 
