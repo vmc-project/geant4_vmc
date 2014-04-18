@@ -34,7 +34,10 @@ ROOT_INCDIR = $(ROOTSYS)/include
 ROOT_BINDIR = $(ROOTSYS)/bin
 ROOT_ETCDIR = $(ROOTSYS)/etc/vmc
 endif
-ROOT_CFLAGS := $(shell root-config --cflags)
+
+# Pass -std=c++11 flag from Root 
+# (as it is required for generation dicxtionaries with Root 6-beta)
+ROOT_CFLAGS :=  $(filter -std=c++11,$(shell root-config --cflags))
 
 include $(ROOT_ETCDIR)/Makefile.$(PLATFORM)
 
@@ -109,7 +112,6 @@ endif
 INCLUDES := $(patsubst %,-I%/include,$(GDIRS)) \
            -I$(TOPDIR)/include \
            -I$(TOPDIR)/include/g4root \
-           -I$(TOPDIR)/tpmalloc \
 	   -I$(G4INCLUDE) \
 	   -I$(CLHEP_BASE_DIR)/include
 
