@@ -19,6 +19,13 @@
 
 #include <TVirtualMCApplication.h>
 
+#include <G4AutoLock.hh>
+
+namespace {
+  //Mutex to lock master application when merging data
+  G4Mutex deleteMutex = G4MUTEX_INITIALIZER;
+}
+
 //_____________________________________________________________________________
 TG4WorkerInitialization::TG4WorkerInitialization()
   : G4UserWorkerInitialization()
@@ -78,7 +85,9 @@ void TG4WorkerInitialization::WorkerStop() const
 
   //G4cout << "Go to delete MCApplication " << TVirtualMCApplication::Instance() << G4endl;
 
+  G4AutoLock lm(&deleteMutex);
   delete TVirtualMCApplication::Instance();
+  lm.unlock();
 
   //G4cout << "TG4WorkerInitialization::WorkerStop() end " << G4endl;
 }
