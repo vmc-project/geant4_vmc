@@ -35,6 +35,8 @@
 
 #include "Ex03DetectorConstruction.h"
 
+using namespace std;
+
 /// \cond CLASSIMP
 ClassImp(Ex03DetectorConstruction)
 /// \endcond

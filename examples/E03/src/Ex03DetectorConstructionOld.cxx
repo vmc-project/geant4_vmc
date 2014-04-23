@@ -29,6 +29,8 @@
 
 #include "Ex03DetectorConstructionOld.h"
 
+using namespace std;
+
 /// \cond CLASSIMP
 ClassImp(Ex03DetectorConstructionOld)
 /// \endcond

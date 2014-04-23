@@ -43,6 +43,8 @@
 #include "A01HadCalorimeterSD.h"
 #include "A01HodoscopeSD.h"
 
+using namespace std;
+
 /// \cond CLASSIMP
 ClassImp(A01MCApplication)
 /// \endcond

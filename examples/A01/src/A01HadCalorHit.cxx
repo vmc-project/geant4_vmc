@@ -21,6 +21,8 @@
 
 #include "A01HadCalorHit.h"
 
+using namespace std;
+
 /// \cond CLASSIMP
 ClassImp(A01HadCalorHit)
 /// \endcond

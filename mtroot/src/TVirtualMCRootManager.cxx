@@ -22,7 +22,11 @@
 //
 
                          Bool_t  TVirtualMCRootManager::fgDebug = false;
+#if defined(__linux__)
 __thread TVirtualMCRootManager*  TVirtualMCRootManager::fgInstance = 0;
+#else
+         TVirtualMCRootManager*  TVirtualMCRootManager::fgInstance = 0;
+#endif
 
 //_____________________________________________________________________________
 TVirtualMCRootManager* TVirtualMCRootManager::Instance()

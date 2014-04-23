@@ -34,6 +34,10 @@ ROOT_BINDIR = $(ROOTSYS)/bin
 ROOT_ETCDIR = $(ROOTSYS)/etc/vmc
 endif
 
+# Pass -std=c++11 flag from Root 
+# (as it is required for generation dicxtionaries with Root 6-beta)
+ROOT_CFLAGS :=  $(filter -std=c++11,$(shell root-config --cflags))
+
 include $(ROOT_ETCDIR)/Makefile.$(PLATFORM)
 
 ############################### Sources #######################################
@@ -70,7 +74,7 @@ INCLUDES := -Iinclude -I$(TOPDIR)/include/mtroot
 
 # C++ compilation flags
 #
-CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) 
+CXXFLAGS := $(CXXOPTS) -I. $(INCLUDES) -I$(ROOT_INCDIR) $(ROOT_CFLAGS) 
 
 DEPINC 		+= -I. -I$(ROOT_INCDIR) $(INCLUDES)
 

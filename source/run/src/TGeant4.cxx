@@ -15,6 +15,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TGeant4.h"
+#include "TG4ApplicationState.h"
 #include "TG4RunConfiguration.h"
 #include "TG4StateManager.h" 
 #include "TG4GeometryManager.h" 
@@ -28,6 +29,7 @@
 #include "TG4Version.h"
 
 #include <G4StateManager.hh>
+#include <G4ApplicationState.hh>
 #include <G4Threading.hh>
 
 #ifdef G4VIS_USE
@@ -43,6 +45,113 @@ ClassImp(TGeant4)
 //_____________________________________________________________________________
 TGeant4* TGeant4::fgMasterInstance = 0; 
 TVirtualMCApplication* TGeant4::fgMasterApplicationInstance = 0;
+
+namespace {
+
+//_____________________________________________________________________________
+Bool_t CheckApplicationState(const TString& methodName,
+                             TG4ApplicationState requiredState,
+                             Bool_t allowLater = false,
+                             Bool_t allowSooner = false,
+                             Bool_t allowJustAfter = false)
+{
+/// If current application state does not correspond to the requiredState,
+/// gives a warning and returnse false; returns true otherwise.
+/// (To be changed in exception later.)
+
+  TG4StateManager* stateManager = TG4StateManager::Instance();
+  TG4ApplicationState currentState = stateManager->GetCurrentState();
+  TG4ApplicationState previousState = stateManager->GetPreviousState();
+  if ( currentState != requiredState &&
+       ! ( ( allowLater && currentState > requiredState ) ||
+           ( allowLater && previousState >= requiredState ) ) &&
+       ! ( ( allowSooner && currentState < requiredState ) ||
+           ( allowSooner && previousState <= requiredState ) ) &&
+       ! ( allowJustAfter && previousState == requiredState ) ) {
+
+    TString message
+      = TString("MC::") + methodName +
+      + TString(" can be called only from VMCApplication::")
+      + TString(stateManager->GetStateName(requiredState).c_str());
+    if ( allowLater )
+      message += TString(" or after");
+    if ( allowSooner )
+      message += TString(" or before");
+    if ( allowJustAfter )
+      message += TString(" or just after");
+    message += TG4Globals::Endl()
+             + TString("while detected in VMCApplication::")
+             + TString(stateManager->GetStateName(currentState).c_str());
+    if ( currentState == kNotInApplication )
+      message += TString(" after VMCApplication::")
+               + TString(stateManager->GetStateName(previousState).c_str());
+
+    TG4Globals::Warning("TGeant4", methodName, message);
+    return false;
+  }
+
+  return true;
+}
+
+//_____________________________________________________________________________
+Bool_t CheckG4ApplicationState(const TString& methodName,
+                               G4ApplicationState requiredState,
+                               Bool_t allowLater = false)
+{
+/// If current application state does not correcpond to the requiredState,
+/// gives a warning and returnse false; returns true otherwise.
+/// (To be changed in exception later.)
+
+  G4ApplicationState currentState
+    = G4StateManager::GetStateManager()->GetCurrentState();
+
+  if ( currentState != requiredState &&
+       ! ( allowLater && currentState > requiredState ) ) {
+
+    // States as strings
+    static std::vector<TString> g4StateNames;
+    g4StateNames.push_back("G4State_PreInit");
+    g4StateNames.push_back("G4State_Init");
+    g4StateNames.push_back("G4State_Idle");
+    g4StateNames.push_back("G4State_GeomClosed");
+    g4StateNames.push_back("G4State_EventProc");
+    g4StateNames.push_back("G4State_Quit");
+    g4StateNames.push_back("G4State_Abort");
+
+    TString message
+      = TString("MC::") + methodName +
+      + TString(" can be called only when Geant4 is in state ")
+      + g4StateNames[requiredState];
+    if ( allowLater )
+      message += TString(" or later");
+    message += TG4Globals::Endl()
+             + TString("while detected in state ")
+             + g4StateNames[currentState];
+
+    TG4Globals::Warning("TGeant4", methodName, message);
+    return false;
+  }
+
+  return true;
+}
+
+//_____________________________________________________________________________
+void PrintVersion()
+{
+/// Prints the  version banner
+
+  G4cout
+    << G4endl
+    << "=============================================================" <<  G4endl
+    << " Geant4 Virtual Monte Carlo "  <<  G4endl
+    << " Version " <<  GEANT4_VMC_RELEASE << " ( " << GEANT4_VMC_RELEASE_DATE << " )"  
+    << G4endl
+    << " WWW : http://root.cern.ch/drupal/content/geant4-vmc" << G4endl
+    << "=============================================================" <<  G4endl
+    << G4endl;
+}
+
+}
 
 //_____________________________________________________________________________
 TGeant4::TGeant4(const char* name, const char* title,
@@ -166,113 +275,6 @@ TGeant4::~TGeant4()
   }
 #endif
   //G4cout << "TGeant4::~TGeant4 done " << this << G4endl;
-}
-
-//
-// private methods
-// 
-
-//_____________________________________________________________________________
-Bool_t TGeant4::CheckApplicationState(const TString& methodName,
-                                    TG4ApplicationState requiredState,
-                                    Bool_t allowLater,
-                                    Bool_t allowSooner, 
-                                    Bool_t allowJustAfter) const
-{
-/// If current application state does not correspond to the requiredState,
-/// gives a warning and returnse false; returns true otherwise.
-/// (To be changed in exception later.)
-
-  TG4ApplicationState currentState = fStateManager->GetCurrentState();
-  TG4ApplicationState previousState = fStateManager->GetPreviousState();
-  if ( currentState != requiredState && 
-       ! ( ( allowLater && currentState > requiredState ) ||
-           ( allowLater && previousState >= requiredState ) ) && 
-       ! ( ( allowSooner && currentState < requiredState ) ||
-           ( allowSooner && previousState <= requiredState ) ) &&
-       ! ( allowJustAfter && previousState == requiredState ) ) {
-
-    TString message 
-      = TString("MC::") + methodName + 
-      + TString(" can be called only from VMCApplication::")
-      + TString(fStateManager->GetStateName(requiredState).c_str());
-    if ( allowLater ) 
-      message += TString(" or after");   
-    if ( allowSooner ) 
-      message += TString(" or before");   
-    if ( allowJustAfter ) 
-      message += TString(" or just after");   
-    message += TG4Globals::Endl() 
-             + TString("while detected in VMCApplication::")
-             + TString(fStateManager->GetStateName(currentState).c_str());
-    if ( currentState == kNotInApplication )         
-      message += TString(" after VMCApplication::")
-               + TString(fStateManager->GetStateName(previousState).c_str());
-
-    TG4Globals::Warning("TGeant4", methodName, message);
-    return false;
-  }
-  
-  return true;
-}       
-             
-
-//_____________________________________________________________________________
-Bool_t TGeant4::CheckG4ApplicationState(const TString& methodName,
-                                    G4ApplicationState requiredState,
-                                    Bool_t allowLater) const
-{
-/// If current application state does not correcpond to the requiredState,
-/// gives a warning and returnse false; returns true otherwise.
-/// (To be changed in exception later.)
-
-  G4ApplicationState currentState 
-    = G4StateManager::GetStateManager()->GetCurrentState();
-
-  if ( currentState != requiredState && 
-       ! ( allowLater && currentState > requiredState ) ) {
-
-    // States as strings
-    static std::vector<TString> g4StateNames;
-    g4StateNames.push_back("G4State_PreInit");
-    g4StateNames.push_back("G4State_Init"); 
-    g4StateNames.push_back("G4State_Idle"); 
-    g4StateNames.push_back("G4State_GeomClosed");
-    g4StateNames.push_back("G4State_EventProc");
-    g4StateNames.push_back("G4State_Quit"); 
-    g4StateNames.push_back("G4State_Abort");
-
-    TString message 
-      = TString("MC::") + methodName + 
-      + TString(" can be called only when Geant4 is in state ")
-      + g4StateNames[requiredState];
-    if ( allowLater ) 
-      message += TString(" or later");   
-    message += TG4Globals::Endl() 
-             + TString("while detected in state ") 
-             + g4StateNames[currentState];
-     
-    TG4Globals::Warning("TGeant4", methodName, message);
-    return false;
-  }
-  
-  return true;
-}       
-             
-//_____________________________________________________________________________
-void TGeant4::PrintVersion() const
-{
-/// Prints the  version banner
-
-  G4cout
-    << G4endl
-    << "=============================================================" <<  G4endl
-    << " Geant4 Virtual Monte Carlo "  <<  G4endl
-    << " Version " <<  GEANT4_VMC_RELEASE << " ( " << GEANT4_VMC_RELEASE_DATE << " )"  
-    << G4endl
-    << " WWW : http://root.cern.ch/drupal/content/geant4-vmc" << G4endl
-    << "=============================================================" <<  G4endl
-    << G4endl;
 }
 
 //

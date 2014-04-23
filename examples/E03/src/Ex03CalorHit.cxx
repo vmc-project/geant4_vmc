@@ -23,6 +23,8 @@
 
 #include "Ex03CalorHit.h"
 
+using namespace std;
+
 /// \cond CLASSIMP
 ClassImp(Ex03CalorHit)
 /// \endcond

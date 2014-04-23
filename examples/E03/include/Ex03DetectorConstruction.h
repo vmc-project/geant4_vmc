@@ -35,11 +35,6 @@
 
 class Ex03DetectorConstruction : public TObject
 {
-  /// The map of string names to integers
-  typedef map<TString, Int_t>  NameMap; 
-  /// The iterator for the map of string names to integers
-  typedef NameMap::const_iterator   NameMapIterator; 
-
   public:  
     Ex03DetectorConstruction();
     virtual ~Ex03DetectorConstruction();

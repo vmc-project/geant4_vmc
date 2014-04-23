@@ -26,6 +26,8 @@
 
 #include "Ex03MCStack.h"
 
+using namespace std;
+
 /// \cond CLASSIMP
 ClassImp(Ex03MCStack)
 /// \endcond

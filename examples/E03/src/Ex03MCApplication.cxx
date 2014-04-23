@@ -37,6 +37,8 @@
 #include <TVirtualGeoTrack.h>
 #include <TParticle.h>
 
+using namespace std;
+
 /// \cond CLASSIMP
 ClassImp(Ex03MCApplication)
 /// \endcond

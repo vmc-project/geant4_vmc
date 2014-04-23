@@ -32,6 +32,8 @@
 #include <TGeoMaterial.h>
 #include <TThread.h>
 
+using namespace std;
+
 /// \cond CLASSIMP
 ClassImp(Ex01MCApplication)
 /// \endcond

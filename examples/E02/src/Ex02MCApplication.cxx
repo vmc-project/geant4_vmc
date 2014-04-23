@@ -32,6 +32,8 @@
 #include <TVirtualGeoTrack.h>
 #include <Riostream.h> 
 
+using namespace std;
+
 /// \cond CLASSIMP
 ClassImp(Ex02MCApplication)
 /// \endcond
