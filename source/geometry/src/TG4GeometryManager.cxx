@@ -105,6 +105,8 @@ TG4GeometryManager::~TG4GeometryManager()
 
   // delete fMagneticField;
         // deleted via G4AutoDelete;
+  delete fGeometryServices;
+  delete fOpManager;
 }
 
 //
