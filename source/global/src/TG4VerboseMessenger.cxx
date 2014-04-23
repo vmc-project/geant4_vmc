@@ -53,8 +53,12 @@ TG4VerboseMessenger::~TG4VerboseMessenger()
   delete fDirectory;
   delete fGlobalVerboseCmd;
 
-  for (G4int i=0; i<G4int(fCommandVector.size()); i++)
+  for (G4int i=0; i<G4int(fCommandVector.size()); i++) {
+    //G4cout << this << "  ... Deleting "
+    //       << fCommandVector[i]->GetCommandName() << " "
+    //       << fCommandVector[i] << G4endl;
     delete fCommandVector[i];
+  }
 }
 
 //
@@ -74,7 +78,7 @@ void TG4VerboseMessenger::SetNewValueToAll(const G4String value) const
         // skip the first command in the tree ("all")
         cmdTree->GetCommand(i+1)->DoIt(value);     
      }        
-   }  
+   }
 }
 
 //

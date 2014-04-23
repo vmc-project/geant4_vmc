@@ -17,9 +17,9 @@
 #include "TG4Verbose.h"
 
 // static data members
-const G4String       TG4Verbose::fgkDirectoryName = "/mcVerbose/";
-G4int                TG4Verbose::fgCounter = 0;
-TG4VerboseMessenger* TG4Verbose::fgMessenger = 0;
+              const G4String       TG4Verbose::fgkDirectoryName = "/mcVerbose/";
+G4ThreadLocal G4int                TG4Verbose::fgCounter = 0;
+G4ThreadLocal TG4VerboseMessenger* TG4Verbose::fgMessenger = 0;
 
 //_____________________________________________________________________________
 TG4Verbose::TG4Verbose(const G4String& cmdName)
@@ -51,6 +51,8 @@ TG4Verbose::TG4Verbose(const G4String& cmdName, G4int verboseLevel)
 TG4Verbose::~TG4Verbose() 
 {
 /// Destructor
+
+  //G4cout << "TG4Verbose::~TG4Verbose " << fgCounter << " " << this << G4endl;
 
   fgCounter--;
   
