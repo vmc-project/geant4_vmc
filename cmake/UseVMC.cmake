@@ -30,15 +30,15 @@ if(GEANT4_FOUND)
   include(${Geant4_USE_FILE})
   
   if(Geant4VMC_FOUND)
-    include_directories(${Geant4VMC_INCLUDE_DIR})  
+    include_directories(${Geant4VMC_INCLUDE_DIR})
     set(VMC_LIBRARIES ${VMC_LIBRARIES} ${Geant4VMC_LIBRARIES})
     # currently G4ROOT is not optional in Geant4 VMC
-    set(WITH_G4ROOT ON)
+    set(VMC_WITH_G4ROOT ON)
     # set use VGM according to USE_VGM environment variable
     if(VGM_FOUND}) 
-      set(WITH_VGM ON) 
-    endif()  
-  endif(Geant4VMC_FOUND)  
+      set(VMC_WITH_VGM ON)
+    endif()
+  endif(Geant4VMC_FOUND)
 
   if(G4ROOT_FOUND)
     set(VMC_LIBRARIES ${VMC_LIBRARIES} ${G4ROOT_LIBRARIES})

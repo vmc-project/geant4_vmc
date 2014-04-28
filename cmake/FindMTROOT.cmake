@@ -26,6 +26,12 @@
 
 #message(STATUS "Looking for MTROOT ...")
 
+# Alternative paths which can be defined by user
+set(MTROOT_DIR "" CACHE PATH "Directory where MTROOT is installed")
+set(MTROOT_INC_DIR "" CACHE PATH "Alternative directory for MTROOT includes")
+set(MTROOT_LIB_DIR "" CACHE PATH "Alternative directory for MTROOT libraries")
+set(MTROOT_ARCH "" CACHE PATH "MTROOT platform specification")
+
 find_path(MTROOT_INCLUDE_DIR NAMES TVirtualMCRootManager.h PATHS
   ${MTROOT_INC_DIR}
   ${MTROOT_DIR}/include/mtroot
@@ -44,6 +50,7 @@ endif()
 find_path(MTROOT_LIBRARY_DIR NAMES libmtroot.so libmtroot.a libmtroot.dylib PATHS
   ${MTROOT_LIB_DIR}
   ${MTROOT_DIR}/lib/tgt_${MTROOT_ARCH}
+  ${Geant4VMC_DIR}/lib
   ${Geant4VMC_DIR}/lib/tgt_${MTROOT_ARCH}
 )
 

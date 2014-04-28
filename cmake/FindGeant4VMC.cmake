@@ -26,6 +26,12 @@
 
 #message(STATUS "Looking for Geant4VMC ...")
 
+# Alternative paths which can be defined by user
+set(Geant4VMC_DIR "" CACHE PATH "Directory where Geant4VMC is installed")
+set(Geant4VMC_INC_DIR "" CACHE PATH "Alternative directory for Geant4VMC includes")
+set(Geant4VMC_LIB_DIR "" CACHE PATH "Alternative directory for Geant4VMC libraries")
+set(Geant4VMC_ARCH "" CACHE PATH "Geant4VMC platform specification")
+
 find_path(Geant4VMC_INCLUDE_DIR NAMES TGeant4.h PATHS
   ${Geant4VMC_INC_DIR}
   ${Geant4VMC_DIR}/include/geant4vmc
@@ -42,6 +48,7 @@ endif()
 
 find_path(Geant4VMC_LIBRARY_DIR NAMES libgeant4vmc.so libgeant4vmc.a libgeant4vmc.dylib PATHS
   ${Geant4VMC_LIB_DIR}
+  ${Geant4VMC_DIR}/lib
   ${Geant4VMC_DIR}/lib/tgt_${Geant4VMC_ARCH}
 )
 

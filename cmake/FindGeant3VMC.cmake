@@ -26,6 +26,12 @@
 
 #message(STATUS "Looking for Geant3VMC ...")
 
+# Alternative paths which can be defined by user
+set(Geant3VMC_DIR "" CACHE PATH "Directory where Geant3VMC is installed")
+set(Geant3VMC_INC_DIR "" CACHE PATH "Alternative directory for Geant3VMC includes")
+set(Geant3VMC_LIB_DIR "" CACHE PATH "Alternative directory for Geant3VMC libraries")
+set(Geant3VMC_ARCH "" CACHE PATH "Geant3VMC platform specification")
+
 find_path(Geant3VMC_INCLUDE_DIR NAMES TGeant3.h PATHS
   ${Geant3VMC_INC_DIR}
   ${Geant3VMC_DIR}/TGeant3

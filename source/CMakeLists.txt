@@ -25,9 +25,9 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}) 
 
 #--- Options -------------------------------------------------------------------
-option(GEANTVMC_USE_VGM           "Build with VGM" ON)    
-option(GEANTVMC_USE_G4ROOT        "Build with G4Root" ON)    
-option(GEANTVMC_USE_SYSTEM_G4ROOT "Build with external G4Root" OFF)    
+option(GEANT4VMC_USE_VGM           "Build with VGM" ON)    
+option(GEANT4VMC_USE_G4ROOT        "Build with G4Root" ON)    
+option(GEANT4VMC_USE_SYSTEM_G4ROOT "Build with external G4Root" OFF)    
 option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)  
 
 #-- ROOT (required) ------------------------------------------------------------
@@ -48,21 +48,21 @@ endif(NOT GEANT4_FOUND)
 include(${Geant4_USE_FILE})
 
 #-- G4Root (required, to make optional) -------------------------------------------------------------
-if (GEANTVMC_USE_G4ROOT)
-  if(GEANTVMC_USE_SYSTEM_G4ROOT)
+if (GEANT4VMC_USE_G4ROOT)
+  if(GEANT4VMC_USE_SYSTEM_G4ROOT)
     if(NOT G4ROOT_FOUND)
       find_package(G4ROOT REQUIRED)      
     endif(NOT G4ROOT_FOUND)  
     include_directories(${G4ROOT_INCLUDE_DIR})
-  else(GEANTVMC_USE_SYSTEM_G4ROOT)
+  else(GEANT4VMC_USE_SYSTEM_G4ROOT)
     include_directories(${PROJECT_SOURCE_DIR}/../g4root/include) 
-  endif(GEANTVMC_USE_SYSTEM_G4ROOT)  
-else(GEANTVMC_USE_G4ROOT)
+  endif(GEANT4VMC_USE_SYSTEM_G4ROOT)  
+else(GEANT4VMC_USE_G4ROOT)
   set(G4ROOT_LIBRARIES)
-endif(GEANTVMC_USE_G4ROOT)
+endif(GEANT4VMC_USE_G4ROOT)
 
 #-- VGM (optional) -------------------------------------------------------------
-if (GEANTVMC_USE_VGM)
+if (GEANT4VMC_USE_VGM)
   if(NOT VGM_FOUND)
     find_package(VGM REQUIRED)      
   endif(NOT VGM_FOUND)  
@@ -77,9 +77,9 @@ if (GEANTVMC_USE_VGM)
     include_directories(${VGM_TOP_INCLUDE_DIR}/packages/XmlVGM/include)
   endif(VGM_INCLUDE_DIR)  
   add_definitions(-DUSE_VGM)
-else(GEANTVMC_USE_VGM)
+else(GEANT4VMC_USE_VGM)
   set(VGM_LIBRARIES)
-endif(GEANTVMC_USE_VGM)
+endif(GEANT4VMC_USE_VGM)
 
 #----------------------------------------------------------------------------
 # Setup project include directories; compile definitions; link libraries

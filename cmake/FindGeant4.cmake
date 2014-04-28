@@ -27,6 +27,13 @@
 
 #message(STATUS "Looking for GEANT4 ...")
 
+# Alternative paths which can be defined by user
+set(Geant4_DIR "" CACHE PATH "Directory where Geant4Config.cmake is installed")
+set(GEANT4_DIR "" CACHE PATH "Directory where Geant4 is installed")
+set(GEANT4_INC_DIR "" CACHE PATH "Alternative directory for Geant4 includes")
+set(GEANT4_LIB_DIR "" CACHE PATH "Alternative directory for Geant4 libraries")
+set(GEANT4_SYSTEM "" CACHE PATH "Geant4 platform specification")
+
 # First search for Geant4Config.cmake on the path defined via user setting 
 # Geant4_DIR
 

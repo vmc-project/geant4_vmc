@@ -58,12 +58,18 @@ file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cxx)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 
 #----------------------------------------------------------------------------
-# Add the executable, and link it to the Geant4 libraries
+# Add the example library
 #
-add_executable(exampleE06 exampleE06.cxx exampleE06Dict.cxx ${sources} ${headers})
-target_link_libraries(exampleE06 ${VMC_LIBRARIES})
-add_executable(testE06 testE06.cxx exampleE06Dict.cxx ${sources} ${headers})
-target_link_libraries(testE06 ${VMC_LIBRARIES})
+add_library(example06 ${sources} exampleE06Dict.cxx ${headers})
+target_link_libraries(example06 ${VMC_LIBRARIES})
+
+#----------------------------------------------------------------------------
+# Add the executable, and link it to all libraries
+#
+add_executable(exampleE06 exampleE06.cxx)
+add_executable(testE06 testE06.cxx)
+target_link_libraries(exampleE06 example06 ${VMC_LIBRARIES})
+target_link_libraries(testE06 example06 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets
@@ -75,3 +81,4 @@ add_custom_target(E06 DEPENDS exampleE06 testE06)
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
 install(TARGETS exampleE06 testE06 DESTINATION bin)
+install(TARGETS example06 DESTINATION lib)

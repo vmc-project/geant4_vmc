@@ -27,6 +27,11 @@
 
 #message(STATUS "Looking for ROOT ...")
 
+# Alternative paths which can be defined by user
+set(ROOT_DIR "" CACHE PATH "Directory where ROOT is installed")
+set(ROOT_INC_DIR "" CACHE PATH "Alternative directory for ROOT includes")
+set(ROOT_LIB_DIR "" CACHE PATH "Alternative directory for ROOT libraries")
+
 set(ROOT_FOUND FALSE)
 
 # First search for root-config executable on system path

@@ -146,9 +146,9 @@ Examples Programs
   cd examples_build_g4
   cmake \
     -DGeant4VMC_DIR=/my_path/geant4_vmc \
-    -DWITH_GEANT4=ON \
-    -DWITH_MTROOT=ON \
-    -DWITH_VGM=ON \
+    -DVMC_WITH_GEANT4=ON \
+    -DVMC_WITH_MTROOT=ON \
+    -DVMC_WITH_VGM=ON \
     ../examples
   make -jN
 
@@ -159,9 +159,9 @@ Examples Programs
   cmake \
     -DGeant4VMC_DIR=/my_path/geant4_vmc \
     -DGeant3VMC_DIR=/my_path/geant3 \
-    -DWITH_GEANT4=OFF \
-    -DWITH_GEANT3=ON \
-    -DWITH_MTROOT=ON \
+    -DVMC_WITH_GEANT4=OFF \
+    -DVMC_WITH_GEANT3=ON \
+    -DVMC_WITH_MTROOT=ON \
     ../examples
   make -jN
 
@@ -187,7 +187,8 @@ Examples Programs
    [-v,    --verbose]             verbose option (yes,no)
 
   Note that the g4* and g3* options are available only when only when the
-  program was built with the corresponding WITH_GEANT3 or WITH_GEANT3 option.
+  program was built with the corresponding VMC_WITH_GEANT3 or VMC_WITH_GEANT3 
+  option.
   Root macro with arguments has to be passed in a single string, eg.
    --root-macro 'test_E01.C("",kFALSE)'
 

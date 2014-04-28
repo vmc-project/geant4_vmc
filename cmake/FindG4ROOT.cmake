@@ -26,6 +26,12 @@
 
 #message(STATUS "Looking for G4ROOT ...")
 
+# Alternative paths which can be defined by user
+set(G4ROOT_DIR "" CACHE PATH "Directory where G4ROOT is installed")
+set(G4ROOT_INC_DIR "" CACHE PATH "Alternative directory for G4ROOT includes")
+set(G4ROOT_LIB_DIR "" CACHE PATH "Alternative directory for G4ROOT libraries")
+set(G4ROOT_ARCH "" CACHE PATH "G4ROOT platform specification")
+
 find_path(G4ROOT_INCLUDE_DIR NAMES TG4RootNavigator.h PATHS
   ${G4ROOT_INC_DIR}
   ${G4ROOT_DIR}/include/g4root
@@ -44,6 +50,7 @@ endif()
 find_path(G4ROOT_LIBRARY_DIR NAMES libg4root.so libg4root.a libg4root.dylib PATHS
   ${G4ROOT_LIB_DIR}
   ${G4ROOT_DIR}/lib/tgt_${G4ROOT_ARCH}
+  ${Geant4VMC_DIR}/lib
   ${Geant4VMC_DIR}/lib/tgt_${G4ROOT_ARCH}
 )
 

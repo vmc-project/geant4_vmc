@@ -60,26 +60,35 @@ file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cxx)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 
 #----------------------------------------------------------------------------
-# Add sources from geant4
+# Add the example library
+#
+add_library(example03 ${sources} exampleE03Dict.cxx ${headers})
+target_link_libraries(example03 ${VMC_LIBRARIES})
+
+#----------------------------------------------------------------------------
+# Add the example geant4 dependent library
 #
 if (GEANT4_FOUND)
   include_directories(
     ${PROJECT_SOURCE_DIR}/geant4/include)
-  list(APPEND sources
-    ${PROJECT_SOURCE_DIR}/geant4/src/B4DetectorConstruction.cxx
-    ${PROJECT_SOURCE_DIR}/geant4/src/Ex03RegionConstruction.cxx
-    ${PROJECT_SOURCE_DIR}/geant4/src/Ex03RunConfiguration1.cxx
-    ${PROJECT_SOURCE_DIR}/geant4/src/Ex03RunConfiguration2.cxx
-    ${PROJECT_SOURCE_DIR}/geant4/src/Ex03RunConfiguration3.cxx)
+  file(GLOB g4sources ${PROJECT_SOURCE_DIR}/geant4/src/*.cxx)
+  file(GLOB g4headers ${PROJECT_SOURCE_DIR}/geant4/include/*.h)
+  add_library(geant4e03 ${g4sources} ${g4headers})
+  target_link_libraries(geant4e03 ${VMC_LIBRARIES})
 endif(GEANT4_FOUND)
 
 #----------------------------------------------------------------------------
-# Add the executable, and link it to the Geant4 libraries
+# Add the executable, and link it to all libraries
 #
-add_executable(exampleE03 exampleE03.cxx exampleE03Dict.cxx ${sources} ${headers})
-target_link_libraries(exampleE03 ${VMC_LIBRARIES})
-add_executable(testE03 testE03.cxx exampleE03Dict.cxx ${sources} ${headers})
-target_link_libraries(testE03 ${VMC_LIBRARIES})
+add_executable(exampleE03 exampleE03.cxx)
+add_executable(testE03 testE03.cxx)
+if (GEANT4_FOUND)
+  target_link_libraries(exampleE03 example03 geant4e03 ${VMC_LIBRARIES})
+  target_link_libraries(testE03 example03 geant4e03 ${VMC_LIBRARIES})
+else()
+  target_link_libraries(exampleE03 example03 geant4e03 ${VMC_LIBRARIES})
+  target_link_libraries(testE03 example03 geant4e03 ${VMC_LIBRARIES})
+endif()
 
 #----------------------------------------------------------------------------
 # Add program to the project targets
@@ -91,3 +100,7 @@ add_custom_target(E03 DEPENDS exampleE03 testE03)
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
 install(TARGETS exampleE03 testE03 DESTINATION bin)
+install(TARGETS example03 DESTINATION lib)
+if (GEANT4_FOUND)
+  install(TARGETS geant4e03 DESTINATION lib)
+endif(GEANT4_FOUND)

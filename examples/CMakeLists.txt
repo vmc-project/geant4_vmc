@@ -18,6 +18,9 @@ cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 set(CMAKE_MODULE_PATH 
     ${Geant4VMC_DIR}/cmake
     ${CMAKE_MODULE_PATH}) 
+
+#---Use VMC.cmake only if examples are built as standalone
+#
 find_package(VMC REQUIRED)
 
 add_subdirectory(E01)

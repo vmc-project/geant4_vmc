@@ -65,27 +65,37 @@ ROOT_GENERATE_DICTIONARY(
 #
 file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cxx)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
+file(GLOB g4sources ${PROJECT_SOURCE_DIR}/geant4/src/*.cxx)
+file(GLOB g4headers ${PROJECT_SOURCE_DIR}/geant4/include/*.h)
 
 #----------------------------------------------------------------------------
-# Add sources from geant4
+# Add the example library
+#
+add_library(examplea01 ${sources} exampleA01Dict.cxx ${headers})
+target_link_libraries(examplea01 ${VMC_LIBRARIES})
+
+#----------------------------------------------------------------------------
+# Add the example geant4 dependent library
 #
 if (GEANT4_FOUND)
   include_directories(
     ${PROJECT_SOURCE_DIR}/geant4/include)
-  list(APPEND sources
-    ${PROJECT_SOURCE_DIR}/geant4/src/A01CellParameterisation.cxx
-    ${PROJECT_SOURCE_DIR}/geant4/src/A01DetectorConstMessenger.cxx
-    ${PROJECT_SOURCE_DIR}/geant4/src/A01DetectorConstruction.cxx
-    ${PROJECT_SOURCE_DIR}/geant4/src/A01RunConfiguration.cxx)
+  add_library(geant4a01 ${g4sources} ${g4headers})
+  target_link_libraries(geant4a01 ${VMC_LIBRARIES})
 endif(GEANT4_FOUND)
 
 #----------------------------------------------------------------------------
-# Add the executable, and link it to the Geant4 libraries
+# Add the executable, and link it to all libraries
 #
-add_executable(exampleA01 exampleA01.cxx exampleA01Dict.cxx ${sources} ${headers})
-target_link_libraries(exampleA01 ${VMC_LIBRARIES})
-add_executable(testA01 testA01.cxx exampleA01Dict.cxx ${sources} ${headers})
-target_link_libraries(testA01 ${VMC_LIBRARIES})
+add_executable(exampleA01 exampleA01.cxx)
+add_executable(testA01 testA01.cxx)
+if (GEANT4_FOUND)
+  target_link_libraries(exampleA01 examplea01 geant4a01 ${VMC_LIBRARIES})
+  target_link_libraries(testA01 examplea01 geant4a01  ${VMC_LIBRARIES})
+else()
+  target_link_libraries(exampleA01 examplea01 ${VMC_LIBRARIES})
+  target_link_libraries(testA01 examplea01 ${VMC_LIBRARIES})
+endif()
 
 #----------------------------------------------------------------------------
 # Add program to the project targets
@@ -97,3 +107,7 @@ add_custom_target(A01 DEPENDS exampleA01 testA01)
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
 install(TARGETS exampleA01 testA01 DESTINATION bin)
+install(TARGETS examplea01 DESTINATION lib)
+if (GEANT4_FOUND)
+  install(TARGETS geant4a01 DESTINATION lib)
+endif(GEANT4_FOUND)

@@ -24,30 +24,22 @@
 # I. Hrivnacova, 26/02/2014
 
 #---Options---------------------------------------------------------------------
-option(WITH_GEANT4       "Build with Geant4" ON)
-option(WITH_GEANT3       "Build with Geant3" OFF)
-option(WITH_G4ROOT       "Build with G4Root" OFF)    
-option(WITH_MTROOT       "Build with MtRoot" OFF)    
-option(WITH_VGM          "Build with VGM" OFF)    
-option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)  
+option(VMC_WITH_GEANT4   "Build with Geant4" ON)
+option(VMC_WITH_GEANT3   "Build with Geant3" OFF)
+option(VMC_WITH_G4ROOT   "Build with G4Root" OFF)
+option(VMC_WITH_MTROOT   "Build with MtRoot" OFF)
+option(VMC_WITH_VGM      "Build with VGM" OFF)
+option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 
 #---Find required packages------------------------------------------------------
 
 set(VMC_FOUND FALSE)
 
 # ROOT (required)
-set(ROOT_DIR "" CACHE PATH "Directory where ROOT is installed")
-set(ROOT_INC_DIR "" CACHE PATH "Alternative directory for ROOT includes")
-set(ROOT_LIB_DIR "" CACHE PATH "Alternative directory for ROOT libraries")
 find_package(ROOT REQUIRED)
 
 # Geant4 
-if(WITH_GEANT4)
-  set(Geant4_DIR "" CACHE PATH "Directory where Geant4Config.cmake is installed")
-  set(GEANT4_DIR "" CACHE PATH "Directory where Geant4 is installed")
-  set(GEANT4_INC_DIR "" CACHE PATH "Alternative directory for Geant4 includes")
-  set(GEANT4_LIB_DIR "" CACHE PATH "Alternative directory for Geant4 libraries")
-  set(GEANT4_SYSTEM "" CACHE PATH "Geant4 platform specification")
+if(VMC_WITH_GEANT4)
   option(WITH_GEANT4_UIVIS "Build example with Geant4 UI and Vis drivers" ON)
   if(WITH_GEANT4_UIVIS)
     find_package(Geant4 REQUIRED ui_all vis_all)
@@ -63,48 +55,32 @@ if(WITH_GEANT4)
   set(Geant4VMC_ARCH "" CACHE PATH "Geant4VMC platform specification")
   find_package(Geant4VMC REQUIRED)      
   # currently G4ROOT is not optional in Geant4 VMC
-  set(WITH_G4ROOT ON)
+  set(VMC_WITH_G4ROOT ON)
   # set use VGM according to USE_VGM environment variable
-  if ($ENV{USE_VGM}) 
-    set(WITH_VGM ON) 
+  if ($ENV{USE_VGM})
+    set(VMC_WITH_VGM ON)
   endif()  
 
   # G4ROOT
-  if (WITH_G4ROOT)
-    set(G4ROOT_DIR "" CACHE PATH "Directory where G4ROOT is installed")
-    set(G4ROOT_INC_DIR "" CACHE PATH "Alternative directory for G4ROOT includes")
-    set(G4ROOT_LIB_DIR "" CACHE PATH "Alternative directory for G4ROOT libraries")
-    set(G4ROOT_ARCH "" CACHE PATH "G4ROOT platform specification")
+  if (VMC_WITH_G4ROOT)
     find_package(G4ROOT REQUIRED)      
   endif()
 
   # VGM
-  if (WITH_VGM)
-    set(VGM_DIR "" CACHE PATH "Directory where VGM is installed")
-    set(VGM_LIB_DIR "" CACHE PATH "Alternative directory for VGM libraries")
-    set(VGM_SYSTEM "" CACHE PATH "VGM platform specification")
+  if (VMC_WITH_VGM)
     find_package(VGM REQUIRED)      
   endif()
 endif()
 
 # Geant3
-if(WITH_GEANT3)
-  set(Geant3VMC_DIR "" CACHE PATH "Directory where Geant3VMC is installed")
-  set(Geant3VMC_INC_DIR "" CACHE PATH "Alternative directory for Geant3VMC includes")
-  set(Geant3VMC_LIB_DIR "" CACHE PATH "Alternative directory for Geant3VMC libraries")
-  set(Geant3VMC_ARCH "" CACHE PATH "Geant3VMC platform specification")
+if(VMC_WITH_GEANT3)
   find_package(Geant3VMC REQUIRED)
-  
   #PYTHIA6
   find_package(Pythia6 REQUIRED)
 endif()
 
 # MTROOT
-if (WITH_MTROOT)
-  set(MTROOT_DIR "" CACHE PATH "Directory where MTROOT is installed")
-  set(MTROOT_INC_DIR "" CACHE PATH "Alternative directory for MTROOT includes")
-  set(MTROOT_LIB_DIR "" CACHE PATH "Alternative directory for MTROOT libraries")
-  set(MTROOT_ARCH "" CACHE PATH "MTROOT platform specification")
+if (VMC_WITH_MTROOT)
   find_package(MTROOT REQUIRED)      
 endif()
 

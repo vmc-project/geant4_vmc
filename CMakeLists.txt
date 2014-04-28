@@ -39,10 +39,10 @@ set(${PROJECT_NAME}_VERSION_MINOR "0")
 set(${PROJECT_NAME}_VERSION_PATCH "0")
 
 #--- Options -------------------------------------------------------------------
-option(GEANTVMC_USE_VGM           "Build with VGM" ON)    
-option(GEANTVMC_USE_G4ROOT        "Build with G4Root" ON)    
-option(GEANTVMC_USE_SYSTEM_G4ROOT "Build with external G4Root" OFF)    
-option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)  
+option(GEANT4VMC_USE_VGM           "Build with VGM" ON)
+option(GEANT4VMC_USE_G4ROOT        "Build with G4Root" ON)
+option(GEANT4VMC_USE_SYSTEM_G4ROOT "Build with external G4Root" OFF)
+option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 
 #--- CMake module path ---------------------------------------------------------
 set(CMAKE_MODULE_PATH 

@@ -29,7 +29,7 @@
 /// </pre>
 ///
 /// Note that the g4* and g3* options are available only when built
-/// with the corresponding WITH_GEANT3 or WITH_GEANT3 option.
+/// with the corresponding VMC_WITH_GEANT3 or VMC_WITH_GEANT3 option.
 /// Root macro with arguments should be passed within '', eg.
 ///  --root-macro 'test_E06.C("",kFALSE)'
 ///
