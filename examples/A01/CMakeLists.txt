@@ -87,13 +87,13 @@ endif(GEANT4_FOUND)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to all libraries
 #
-add_executable(exampleA01 exampleA01.cxx)
+add_executable(exeA01 exampleA01.cxx)
 add_executable(testA01 testA01.cxx)
 if (GEANT4_FOUND)
-  target_link_libraries(exampleA01 examplea01 geant4a01 ${VMC_LIBRARIES})
+  target_link_libraries(exeA01 examplea01 geant4a01 ${VMC_LIBRARIES})
   target_link_libraries(testA01 examplea01 geant4a01  ${VMC_LIBRARIES})
 else()
-  target_link_libraries(exampleA01 examplea01 ${VMC_LIBRARIES})
+  target_link_libraries(exeA01 examplea01 ${VMC_LIBRARIES})
   target_link_libraries(testA01 examplea01 ${VMC_LIBRARIES})
 endif()
 
@@ -101,12 +101,12 @@ endif()
 # Add program to the project targets
 # (this avoids the need of typing the program name after make)
 #
-add_custom_target(A01 DEPENDS exampleA01 testA01)
+add_custom_target(A01 DEPENDS exeA01 testA01)
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS exampleA01 testA01 DESTINATION bin)
+install(TARGETS exeA01 testA01 DESTINATION bin)
 install(TARGETS examplea01 DESTINATION lib)
 if (GEANT4_FOUND)
   install(TARGETS geant4a01 DESTINATION lib)
