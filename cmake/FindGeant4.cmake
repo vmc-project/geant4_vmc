@@ -24,6 +24,7 @@
 # GEANT4_INCLUDE_DIR    PATH to the include directory
 # GEANT4_LIBRARIES      Most common libraries
 # GEANT4_LIBRARY_DIR    PATH to the library directory 
+# GEANT4_HAS_G3TOG4     If Geant4 is built with G3toG4 package
 
 #message(STATUS "Looking for GEANT4 ...")
 
@@ -42,6 +43,8 @@ if(EXISTS ${Geant4_DIR}/Geant4Config.cmake)
   set(GEANT4_INCLUDE_DIR ${Geant4_INCLUDE_DIRS})
   # This is a temporary fix to find path to libG3toG4
   set(GEANT4_LIBRARY_DIR ${Geant4_DIR}/..)
+  # TODO: get this from Geant4 CMake files
+  set(GEANT4_HAS_G3TOG4 "yes")
   set(GEANT4_FOUND TRUE)
   message(STATUS "Found Geant4 CMake configuration in ${Geant4_DIR}")
   return()
@@ -64,6 +67,14 @@ if(GEANT4_CONFIG_EXECUTABLE)
     COMMAND ${GEANT4_CONFIG_EXECUTABLE} --version 
     OUTPUT_VARIABLE GEANT4_VERSION
     OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+  execute_process(
+    COMMAND ${GEANT4_CONFIG_EXECUTABLE} --has-feature g3tog4
+    OUTPUT_VARIABLE GEANT4_HAS_G3TOG4
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+    #message(STATUS "GEANT4_HAS_G3TOG4 ${GEANT4_HAS_G3TOG4}")
+    # TODO: remove this line when geant4-config is fixed
+    set(GEANT4_HAS_G3TOG4 "yes")
 
   if(EXISTS ${G4PREFIX}/lib/Geant4-${GEANT4_VERSION}/Geant4Config.cmake)
     set(Geant4_DIR ${G4PREFIX}/lib/Geant4-${GEANT4_VERSION})
@@ -103,6 +114,16 @@ if (NOT GEANT4_FOUND)
     $ENV{G4INSTALL}/lib/$ENV{G4SYSTEM}
     $ENV{G4LIB}
   )
+  find_path(GEANT4_G3TOG4_LIBRARY_DIR NAMES libG3toG4 PATHS
+    ${GEANT4_LIB_DIR}
+    ${GEANT4_DIR}/lib/${GEANT4_SYSTEM}
+    $ENV{G4INSTALL}/lib/$ENV{G4SYSTEM}
+    $ENV{G4LIB}
+  )
+  if (GEANT4_G3TOG4_LIBRARY_DIR)
+    set(GEANT4_HAS_G3TOG4 "yes")
+  endif()
+
   if (GEANT4_INCLUDE_DIR AND GEANT4_LIBRARY_DIR)
     execute_process(
       COMMAND ${GEANT4_LIBRARY_DIR}/liblist -m ${GEANT4_LIBRARY_DIR}                  
@@ -136,6 +157,6 @@ else()
 endif()
 
 # Make variables changeble to the advanced user
-mark_as_advanced(GEANT4_INCLUDE_DIR GEANT4_LIBRARY_DIR GEANT4_LIBRARIES)
+mark_as_advanced(GEANT4_INCLUDE_DIR GEANT4_LIBRARY_DIR GEANT4_LIBRARIES GEANT4_HAS_G3TOG4)
 
 
