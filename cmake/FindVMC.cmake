@@ -26,8 +26,8 @@
 #---Options---------------------------------------------------------------------
 option(VMC_WITH_GEANT4   "Build with Geant4" ON)
 option(VMC_WITH_GEANT3   "Build with Geant3" OFF)
-option(VMC_WITH_G4ROOT   "Build with G4Root" OFF)
-option(VMC_WITH_MTROOT   "Build with MtRoot" OFF)
+option(VMC_WITH_G4ROOT   "Build with G4Root" ON)
+option(VMC_WITH_MTROOT   "Build with MtRoot" ON)
 option(VMC_WITH_VGM      "Build with VGM" OFF)
 option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 
