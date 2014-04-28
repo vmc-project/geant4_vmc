@@ -46,6 +46,10 @@ if(NOT GEANT4_FOUND)
   endif()
 endif(NOT GEANT4_FOUND)  
 include(${Geant4_USE_FILE})
+#message(STATUS "GEANT4_HAS_G3TOG4 ${GEANT4_HAS_G3TOG4}")
+if ("${GEANT4_HAS_G3TOG4}" STREQUAL "yes")
+  add_definitions(-DUSE_G3TOG4)
+endif()
 
 #-- G4Root (required, to make optional) -------------------------------------------------------------
 if (GEANT4VMC_USE_G4ROOT)
