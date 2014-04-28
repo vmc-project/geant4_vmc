@@ -7,7 +7,7 @@
 # Contact: vmc@pcroot.cern.ch
 #-------------------------------------------------
 
-# CMake Configuration file for the VMC E02 test
+# CMake Configuration file for the VMC E02 example
 # I. Hrivnacova, 31/01/2014
 
 #----------------------------------------------------------------------------
@@ -82,7 +82,8 @@ target_link_libraries(testE02 example02 ${VMC_LIBRARIES})
 add_custom_target(E02 DEPENDS exampleE02 testE02)
 
 #----------------------------------------------------------------------------
-# Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
+# Install the executable to 'bin' and library to 'lib' directories
+# under CMAKE_INSTALL_PREFIX
 #
 install(TARGETS exampleE02 testE02 DESTINATION bin)
 install(TARGETS example02 DESTINATION lib)
