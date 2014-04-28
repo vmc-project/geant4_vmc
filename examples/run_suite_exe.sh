@@ -21,10 +21,11 @@
 
 CURDIR=`pwd`
 OUTDIR=$CURDIR/log_run_exe
-EXEDIR=$CURDIR/../examples_build_
+G3EXEDIR=$CURDIR/../../examples_install_g3/bin
+G4EXEDIR=$CURDIR/../../examples_install_g4/bin
 
 # Set 1 to 0 if you want to skip given MC
-TESTG3=0
+TESTG3=1
 TESTG4=1
 
 # Recreate log directory only if running test for both G3 and G4
@@ -42,13 +43,16 @@ do
   cd $CURDIR/$EXAMPLE
   
   if [ "$TESTG3" = "1" ]; then
-    EXE=$EXEDIR"g3/"$EXAMPLE"/example"$EXAMPLE
+    EXE=$G3EXEDIR"/example"$EXAMPLE
     echo "... Running example$EXAMPLE with G3"
     $EXE >& $OUT/example$EXAMPLE.out
   fi  
   
   if [ "$TESTG4" = "1" ]; then
-    EXE=$EXEDIR"g4/"$EXAMPLE"/example"$EXAMPLE
+    EXE=$G4EXEDIR"/example"$EXAMPLE
+    if [ "$EXAMPLE" = "A01" ]; then
+      EXE=$G4EXEDIR"/exe"$EXAMPLE
+    fi
     echo "... Running example$EXAMPLE with G4"
     $EXE >& $OUT/example$EXAMPLE.out
   fi  
