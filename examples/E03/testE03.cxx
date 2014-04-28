@@ -79,6 +79,7 @@ void PrintUsage(std::string programName)
   std::cerr << "   [-v,    --verbose]:            verbose option (yes,no)" << std::endl;
 }
 
+#ifdef USE_GEANT4
 /// Prints selected configuration on output stream (Geant4)
 void PrintG4Configuration(
        const std::string& programName,
@@ -113,7 +114,9 @@ void PrintG4Configuration(
     std::cout << "   --root-macro:         " << rootMacro << std::endl;
   }
 }
+#endif
 
+#ifdef USE_GEANT3
 /// Prints selected configuration on output stream (Geant3)
 void PrintG3Configuration(
        const std::string& programName,
@@ -127,6 +130,7 @@ void PrintG3Configuration(
     std::cout << "     --root-macro]:    " << rootMacro << std::endl;
   }
 }
+#endif
 
 }
 
