@@ -7,17 +7,17 @@
 # Contact: vmc@pcroot.cern.ch
 #-------------------------------------------------
 
-# CMake Configuration file for the VMC E03 example
-# I. Hrivnacova, 31/01/2014
+# CMake Configuration file for the VMC A01 example Geant4 based code
+# I. Hrivnacova, 28/04/2014
 
 #----------------------------------------------------------------------------
 # Setup the project
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 
 #----------------------------------------------------------------------------
-# Project E03
+# Project g4A01
 #
-project(E03)
+project(g4A01)
 
 #----------------------------------------------------------------------------
 # CMake Module Path
@@ -32,37 +32,19 @@ set(CMAKE_MODULE_PATH
 include(UseVMC)
 
 #----------------------------------------------------------------------------
-# Process the example geant4 dependent library
-#
-if (GEANT4_FOUND)
-  add_subdirectory(geant4)
-endif()
-
-#----------------------------------------------------------------------------
 # Setup project include directories; compile definitions; link libraries
 #
 include_directories(
   ${PROJECT_SOURCE_DIR}/include 
   ${CMAKE_CURRENT_BINARY_DIR})
 
-if (GEANT4_FOUND)
-  include_directories(
-    ${PROJECT_SOURCE_DIR}/geant4/include)
-endif(GEANT4_FOUND)
-
 #----------------------------------------------------------------------------
 # Generate Root dictionaries
 #
 ROOT_GENERATE_DICTIONARY(
-  exampleE03Dict
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03MCApplication.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03MCStack.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03DetectorConstruction.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03DetectorConstructionOld.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03CalorHit.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03CalorimeterSD.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03PrimaryGenerator.h
-  LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/example03LinkDef.h)
+  geant4a01Dict
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01RunConfiguration.h
+  LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/geant4a01LinkDef.h)
 
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
@@ -74,32 +56,16 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 #----------------------------------------------------------------------------
 # Add the example library
 #
-add_library(example03 ${sources} exampleE03Dict.cxx ${headers})
-target_link_libraries(example03 ${VMC_LIBRARIES})
-
-#----------------------------------------------------------------------------
-# Add the executable, and link it to all libraries
-#
-add_executable(exampleE03 exampleE03.cxx)
-add_executable(testE03 testE03.cxx)
-if (GEANT4_FOUND)
-  target_link_libraries(exampleE03 example03 geant4e03 ${VMC_LIBRARIES})
-  target_link_libraries(testE03 example03 geant4e03 ${VMC_LIBRARIES})
-else()
-  target_link_libraries(exampleE03 example03 geant4e03 ${VMC_LIBRARIES})
-  target_link_libraries(testE03 example03 geant4e03 ${VMC_LIBRARIES})
-endif()
+add_library(geant4a01 ${sources} geant4a01Dict.cxx ${headers})
+target_link_libraries(geant4a01 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets
 # (this avoids the need of typing the program name after make)
 #
-add_custom_target(E03 DEPENDS exampleE03 testE03)
+add_custom_target(g4A01 DEPENDS geant4a01)
 
 #----------------------------------------------------------------------------
-# Install the executable to 'bin' and library to 'lib' directories
-# under CMAKE_INSTALL_PREFIX
+# Install the library to 'lib' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS exampleE03 testE03 DESTINATION bin)
-install(TARGETS example03 DESTINATION lib)
-
+install(TARGETS geant4a01 DESTINATION lib)

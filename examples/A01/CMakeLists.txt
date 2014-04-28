@@ -7,7 +7,7 @@
 # Contact: vmc@pcroot.cern.ch
 #-------------------------------------------------
 
-# CMake Configuration file for the VMC A01 test
+# CMake Configuration file for the VMC A01 example
 # I. Hrivnacova, 31/01/2014
 
 #----------------------------------------------------------------------------
@@ -32,12 +32,24 @@ set(CMAKE_MODULE_PATH
 include(UseVMC)
 
 #----------------------------------------------------------------------------
+# Process the example geant4 dependent library
+#
+if (GEANT4_FOUND)
+  add_subdirectory(geant4)
+endif()
+
+#----------------------------------------------------------------------------
 # Setup project include directories; compile definitions; link libraries
 #
 include_directories(
   ${VMC_INCLUDE_DIR}
   ${PROJECT_SOURCE_DIR}/include 
   ${CMAKE_CURRENT_BINARY_DIR})
+
+if (GEANT4_FOUND)
+  include_directories(
+    ${PROJECT_SOURCE_DIR}/geant4/include)
+endif(GEANT4_FOUND)
 
 #----------------------------------------------------------------------------
 # Generate Root dictionaries
@@ -65,24 +77,12 @@ ROOT_GENERATE_DICTIONARY(
 #
 file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cxx)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
-file(GLOB g4sources ${PROJECT_SOURCE_DIR}/geant4/src/*.cxx)
-file(GLOB g4headers ${PROJECT_SOURCE_DIR}/geant4/include/*.h)
 
 #----------------------------------------------------------------------------
 # Add the example library
 #
-add_library(examplea01 ${sources} exampleA01Dict.cxx ${headers})
-target_link_libraries(examplea01 ${VMC_LIBRARIES})
-
-#----------------------------------------------------------------------------
-# Add the example geant4 dependent library
-#
-if (GEANT4_FOUND)
-  include_directories(
-    ${PROJECT_SOURCE_DIR}/geant4/include)
-  add_library(geant4a01 ${g4sources} ${g4headers})
-  target_link_libraries(geant4a01 ${VMC_LIBRARIES})
-endif(GEANT4_FOUND)
+add_library(exampleA01 ${sources} exampleA01Dict.cxx ${headers})
+target_link_libraries(exampleA01 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add the executable, and link it to all libraries
@@ -90,11 +90,11 @@ endif(GEANT4_FOUND)
 add_executable(exeA01 exampleA01.cxx)
 add_executable(testA01 testA01.cxx)
 if (GEANT4_FOUND)
-  target_link_libraries(exeA01 examplea01 geant4a01 ${VMC_LIBRARIES})
-  target_link_libraries(testA01 examplea01 geant4a01  ${VMC_LIBRARIES})
+  target_link_libraries(exeA01 exampleA01 geant4a01 ${VMC_LIBRARIES})
+  target_link_libraries(testA01 exampleA01 geant4a01  ${VMC_LIBRARIES})
 else()
-  target_link_libraries(exeA01 examplea01 ${VMC_LIBRARIES})
-  target_link_libraries(testA01 examplea01 ${VMC_LIBRARIES})
+  target_link_libraries(exeA01 exampleA01 ${VMC_LIBRARIES})
+  target_link_libraries(testA01 exampleA01 ${VMC_LIBRARIES})
 endif()
 
 #----------------------------------------------------------------------------
@@ -104,10 +104,8 @@ endif()
 add_custom_target(A01 DEPENDS exeA01 testA01)
 
 #----------------------------------------------------------------------------
-# Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
+# Install the executable to 'bin' and library to 'lib' directories
+# under CMAKE_INSTALL_PREFIX
 #
 install(TARGETS exeA01 testA01 DESTINATION bin)
-install(TARGETS examplea01 DESTINATION lib)
-if (GEANT4_FOUND)
-  install(TARGETS geant4a01 DESTINATION lib)
-endif(GEANT4_FOUND)
+install(TARGETS exampleA01 DESTINATION lib)
