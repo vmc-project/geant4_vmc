@@ -482,14 +482,14 @@ void TG4GeometryManager::FillMediumMapFromRoot()
         "Root volume " + TString(volName) + " not found"); 
     }  
     
+    // skip assemblies
+    if ( geoVolume && geoVolume->IsAssembly() )
+      continue;
+
     if ( geoVolume && ! geoVolume->GetMedium() ) {
-      if ( ! geoVolume->IsAssembly() ) {
-        TG4Globals::Exception(
-          "TG4GeometryManager", "FillMediumMapFromRoot",
-          "Root volume " + TString(volName) + " has not medium defined.");
-      }
-      else 
-        continue;   
+      TG4Globals::Exception(
+        "TG4GeometryManager", "FillMediumMapFromRoot",
+        "Root volume " + TString(volName) + " has not medium defined.");
     }  
     
     G4int mediumID = geoVolume->GetMedium()->GetId();
