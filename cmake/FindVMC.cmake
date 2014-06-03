@@ -24,11 +24,8 @@
 # I. Hrivnacova, 26/02/2014
 
 #---Options---------------------------------------------------------------------
-option(VMC_WITH_GEANT4   "Build with Geant4" ON)
+option(VMC_WITH_GEANT4   "Build with Geant4" OFF)
 option(VMC_WITH_GEANT3   "Build with Geant3" OFF)
-option(VMC_WITH_G4ROOT   "Build with G4Root" ON)
-option(VMC_WITH_MTROOT   "Build with MtRoot" ON)
-option(VMC_WITH_VGM      "Build with VGM" OFF)
 option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 
 #---Find required packages------------------------------------------------------
@@ -50,24 +47,10 @@ if(VMC_WITH_GEANT4)
 
   # Geant4VMC  
   set(Geant4VMC_DIR "" CACHE PATH "Directory where Geant4VMC is installed")
-  set(Geant4VMC_INC_DIR "" CACHE PATH "Alternative directory for Geant4VMC includes")
-  set(Geant4VMC_LIB_DIR "" CACHE PATH "Alternative directory for Geant4VMC libraries")
-  set(Geant4VMC_ARCH "" CACHE PATH "Geant4VMC platform specification")
   find_package(Geant4VMC REQUIRED)      
-  # currently G4ROOT is not optional in Geant4 VMC
-  set(VMC_WITH_G4ROOT ON)
-  # set use VGM according to USE_VGM environment variable
-  if ($ENV{USE_VGM})
-    set(VMC_WITH_VGM ON)
-  endif()  
-
-  # G4ROOT
-  if (VMC_WITH_G4ROOT)
-    find_package(G4ROOT REQUIRED)      
-  endif()
 
   # VGM
-  if (VMC_WITH_VGM)
+  if (Geant4VMC_USE_VGM)
     find_package(VGM REQUIRED)      
   endif()
 endif()
@@ -77,11 +60,6 @@ if(VMC_WITH_GEANT3)
   find_package(Geant3VMC REQUIRED)
   #PYTHIA6
   find_package(Pythia6 REQUIRED)
-endif()
-
-# MTROOT
-if (VMC_WITH_MTROOT)
-  find_package(MTROOT REQUIRED)      
 endif()
 
 # If all required packages above were found we can update VMC_FOUND

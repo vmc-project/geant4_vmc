@@ -22,7 +22,7 @@ foreach(_mod CMakeMacroParseArguments UseVMC)
 endforeach()
 
 # Find modules
-foreach(_find_mod G4ROOT Geant3VMC Geant4 Geant4VMC MTROOT Pythia6 ROOT VGM VMC)
+foreach(_find_mod Geant3VMC Geant4 Pythia6 ROOT VGM VMC)
   configure_file(
     ${PROJECT_SOURCE_DIR}/cmake/Find${_find_mod}.cmake
     ${PROJECT_BINARY_DIR}/Modules/Find${_find_mod}.cmake
@@ -36,8 +36,25 @@ set(GEANT4VMC_CMAKE_DIR ${CMAKE_INSTALL_PREFIX}/cmake)
 # Install the custom modules for the examples
 install(DIRECTORY
   ${PROJECT_BINARY_DIR}/Modules/
-  DESTINATION ${GEANT4VMC_CMAKE_DIR}
+  DESTINATION lib/Geant4VMC-${Geant4VMC_VERSION}/Modules
   COMPONENT Development
 )
 
+#
+# Install the Geant4VMCConfig, Geant4VMCConfigVersion
+#
+configure_file(
+  "${PROJECT_SOURCE_DIR}/cmake/Geant4VMCConfig.cmake.in"
+  "${PROJECT_BINARY_DIR}/Geant4VMCConfig.cmake" @ONLY)
 
+configure_file(
+  "${PROJECT_SOURCE_DIR}/cmake/Geant4VMCConfigVersion.cmake.in"
+  "${PROJECT_BINARY_DIR}/Geant4VMCConfigVersion.cmake" @ONLY)
+
+install(FILES
+  "${PROJECT_BINARY_DIR}/Geant4VMCConfig.cmake"
+  "${PROJECT_BINARY_DIR}/Geant4VMCConfigVersion.cmake"
+  DESTINATION lib/Geant4VMC-${Geant4VMC_VERSION})
+
+install(EXPORT Geant4VMCTargets
+  DESTINATION lib/Geant4VMC-${Geant4VMC_VERSION})

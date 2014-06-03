@@ -51,4 +51,4 @@ target_link_libraries(mtroot ${ROOT_LIBRARIES})
 
 #----Installation---------------------------------------------------------------
 install(DIRECTORY include/ DESTINATION include/mtroot)
-install(TARGETS mtroot DESTINATION lib)
+install(TARGETS mtroot EXPORT Geant4VMCTargets DESTINATION lib)

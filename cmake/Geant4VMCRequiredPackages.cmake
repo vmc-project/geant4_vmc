@@ -24,12 +24,12 @@ else()
 endif()
 
 #-- G4Root from external installation (optional) -------------------------------
-if (GEANT4VMC_USE_SYSTEM_G4ROOT)
+if (Geant4VMC_USE_SYSTEM_G4ROOT)
   find_package(G4ROOT REQUIRED)      
 endif()
 
 #-- VGM (optional) -------------------------------------------------------------
-if (GEANT4VMC_USE_VGM)
+if (Geant4VMC_USE_VGM)
   find_package(VGM REQUIRED)      
 endif()
 

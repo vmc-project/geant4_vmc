@@ -64,4 +64,4 @@ target_link_libraries(g4root ${Geant4_LIBRARIES} -L${GEANT4_LIBRARY_DIR} -lG3toG
 
 #----Installation---------------------------------------------------------------
 install(DIRECTORY include/ DESTINATION include/g4root)
-install(TARGETS g4root DESTINATION lib)
+install(TARGETS g4root EXPORT Geant4VMCTargets DESTINATION lib)

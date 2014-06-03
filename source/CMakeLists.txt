@@ -13,11 +13,11 @@
 #---CMake required version -----------------------------------------------------
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 
-#---Project G4Root -------------------------------------------------------------
+#---Project Geant4VMC/source ---------------------------------------------------  
 #
-project(Geant4VMC)
+project(Geant4VMCsource)
 
-#----------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # CMake Module Path
 #
 set(CMAKE_MODULE_PATH 
@@ -25,10 +25,10 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}) 
 
 #--- Options -------------------------------------------------------------------
-option(GEANT4VMC_USE_VGM           "Build with VGM" ON)    
-option(GEANT4VMC_USE_G4ROOT        "Build with G4Root" ON)    
-option(GEANT4VMC_USE_SYSTEM_G4ROOT "Build with external G4Root" OFF)    
-option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)  
+option(Geant4VMC_USE_VGM           "Build with VGM" ON)
+option(Geant4VMC_USE_G4ROOT        "Build with G4Root" ON)
+option(Geant4VMC_USE_SYSTEM_G4ROOT "Build with external G4Root" OFF)
+option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 
 #-- ROOT (required) ------------------------------------------------------------
 if(NOT ROOT_FOUND)
@@ -52,21 +52,21 @@ if ("${GEANT4_HAS_G3TOG4}" STREQUAL "yes")
 endif()
 
 #-- G4Root (required, to make optional) -------------------------------------------------------------
-if (GEANT4VMC_USE_G4ROOT)
-  if(GEANT4VMC_USE_SYSTEM_G4ROOT)
+if (Geant4VMC_USE_G4ROOT)
+  if(Geant4VMC_USE_SYSTEM_G4ROOT)
     if(NOT G4ROOT_FOUND)
-      find_package(G4ROOT REQUIRED)      
-    endif(NOT G4ROOT_FOUND)  
+      find_package(G4ROOT REQUIRED)
+    endif(NOT G4ROOT_FOUND)
     include_directories(${G4ROOT_INCLUDE_DIR})
-  else(GEANT4VMC_USE_SYSTEM_G4ROOT)
-    include_directories(${PROJECT_SOURCE_DIR}/../g4root/include) 
-  endif(GEANT4VMC_USE_SYSTEM_G4ROOT)  
-else(GEANT4VMC_USE_G4ROOT)
+  else(Geant4VMC_USE_SYSTEM_G4ROOT)
+    include_directories(${PROJECT_SOURCE_DIR}/../g4root/include)
+  endif(Geant4VMC_USE_SYSTEM_G4ROOT)
+else(Geant4VMC_USE_G4ROOT)
   set(G4ROOT_LIBRARIES)
-endif(GEANT4VMC_USE_G4ROOT)
+endif(Geant4VMC_USE_G4ROOT)
 
 #-- VGM (optional) -------------------------------------------------------------
-if (GEANT4VMC_USE_VGM)
+if (Geant4VMC_USE_VGM)
   if(NOT VGM_FOUND)
     find_package(VGM REQUIRED)      
   endif(NOT VGM_FOUND)  
@@ -81,9 +81,9 @@ if (GEANT4VMC_USE_VGM)
     include_directories(${VGM_TOP_INCLUDE_DIR}/packages/XmlVGM/include)
   endif(VGM_INCLUDE_DIR)  
   add_definitions(-DUSE_VGM)
-else(GEANT4VMC_USE_VGM)
+else(Geant4VMC_USE_VGM)
   set(VGM_LIBRARIES)
-endif(GEANT4VMC_USE_VGM)
+endif(Geant4VMC_USE_VGM)
 
 #----------------------------------------------------------------------------
 # Setup project include directories; compile definitions; link libraries
@@ -138,4 +138,4 @@ install(DIRECTORY
   ${PROJECT_SOURCE_DIR}/run/include/
   ${PROJECT_SOURCE_DIR}/visualization/include/ 
   DESTINATION include/geant4vmc)
-install(TARGETS geant4vmc DESTINATION lib)
+install(TARGETS geant4vmc EXPORT Geant4VMCTargets DESTINATION lib)

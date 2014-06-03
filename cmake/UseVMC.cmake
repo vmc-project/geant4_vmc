@@ -30,7 +30,7 @@ if(GEANT4_FOUND)
   include(${Geant4_USE_FILE})
   
   if(Geant4VMC_FOUND)
-    include_directories(${Geant4VMC_INCLUDE_DIR})
+    include_directories(${Geant4VMC_INCLUDE_DIRS})
     set(VMC_LIBRARIES ${VMC_LIBRARIES} ${Geant4VMC_LIBRARIES})
     # currently G4ROOT is not optional in Geant4 VMC
     set(VMC_WITH_G4ROOT ON)
@@ -73,3 +73,5 @@ endif(MTROOT_FOUND)
 
 # Finally add Root libraries
 set(VMC_LIBRARIES ${VMC_LIBRARIES} ${ROOT_LIBRARIES} -lVMC -lEG)
+
+# message(STATUS "VMC_LIBRARIES ${VMC_LIBRARIES}")

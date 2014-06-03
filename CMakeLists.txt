@@ -33,15 +33,16 @@ set(CMAKE_MODULE_PATH
 
 #--- Project definitions -------------------------------------------------------
 project(Geant4VMC)
-set(${PROJECT_NAME}_VERSION "3.0")
 set(${PROJECT_NAME}_VERSION_MAJOR "3")
 set(${PROJECT_NAME}_VERSION_MINOR "0")
 set(${PROJECT_NAME}_VERSION_PATCH "0")
+set(${PROJECT_NAME}_VERSION
+    ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH})
 
 #--- Options -------------------------------------------------------------------
-option(GEANT4VMC_USE_VGM           "Build with VGM" ON)
-option(GEANT4VMC_USE_G4ROOT        "Build with G4Root" ON)
-option(GEANT4VMC_USE_SYSTEM_G4ROOT "Build with external G4Root" OFF)
+option(Geant4VMC_USE_VGM           "Build with VGM" ON)
+option(Geant4VMC_USE_G4ROOT        "Build with G4Root" ON)
+option(Geant4VMC_USE_SYSTEM_G4ROOT "Build with external G4Root" OFF)
 option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 
 #--- CMake module path ---------------------------------------------------------

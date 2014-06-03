@@ -23,7 +23,7 @@ project(E01)
 # CMake Module Path
 #
 set(CMAKE_MODULE_PATH 
-    ${Geant4VMC_DIR}/cmake
+    ${Geant4VMC_DIR}/Modules
     ${CMAKE_MODULE_PATH}) 
 
 #----------------------------------------------------------------------------
