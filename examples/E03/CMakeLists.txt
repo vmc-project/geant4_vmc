@@ -34,7 +34,7 @@ include(UseVMC)
 #----------------------------------------------------------------------------
 # Process the example geant4 dependent library
 #
-if (GEANT4_FOUND)
+if (Geant4_FOUND)
   add_subdirectory(geant4)
 endif()
 
@@ -45,10 +45,10 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/include 
   ${CMAKE_CURRENT_BINARY_DIR})
 
-if (GEANT4_FOUND)
+if (Geant4_FOUND)
   include_directories(
     ${PROJECT_SOURCE_DIR}/geant4/include)
-endif(GEANT4_FOUND)
+endif(Geant4_FOUND)
 
 #----------------------------------------------------------------------------
 # Generate Root dictionaries
@@ -82,7 +82,7 @@ target_link_libraries(example03 ${VMC_LIBRARIES})
 #
 add_executable(exampleE03 exampleE03.cxx)
 add_executable(testE03 testE03.cxx)
-if (GEANT4_FOUND)
+if (Geant4_FOUND)
   target_link_libraries(exampleE03 example03 geant4e03 ${VMC_LIBRARIES})
   target_link_libraries(testE03 example03 geant4e03 ${VMC_LIBRARIES})
 else()
@@ -101,5 +101,5 @@ add_custom_target(E03 DEPENDS exampleE03 testE03)
 # under CMAKE_INSTALL_PREFIX
 #
 install(TARGETS exampleE03 testE03 DESTINATION bin)
-install(TARGETS example03 DESTINATION lib)
+install(TARGETS example03 DESTINATION ${CMAKE_INSTALL_LIBDIR})
 

@@ -8,18 +8,8 @@
 #-------------------------------------------------
 
 # Configuration file for CMake build for VMC applications.
-# It defines include directories, compile definitions and link libraries
-# for all required and optional packages.
-# It defines (updates) PACKAGE_FOUND variables for all required/optional
-# VMC packages according to selected options
+# It finds all required and selected packages and sets
 # - VMC_FOUND
-# - GEANT4_FOUND
-# - Geant4VMC_FOUND
-# - G4ROOT_FOUND
-# - VGM_FOUND
-# - Geant3VMC_FOUND
-# - PYTHIA6_FOUND
-# - MTROOT_FOUND
 #
 # I. Hrivnacova, 26/02/2014
 
@@ -37,17 +27,24 @@ find_package(ROOT REQUIRED)
 
 # Geant4 
 if(VMC_WITH_GEANT4)
-  option(WITH_GEANT4_UIVIS "Build example with Geant4 UI and Vis drivers" ON)
-  if(WITH_GEANT4_UIVIS)
-    find_package(Geant4 REQUIRED ui_all vis_all)
-  else()
-    find_package(Geant4 REQUIRED)
-  endif()
-  add_definitions(-DUSE_GEANT4) 
-
   # Geant4VMC  
+  # (it includes also Geant4 configuration options used in Geant4 VMC installation)
   set(Geant4VMC_DIR "" CACHE PATH "Directory where Geant4VMC is installed")
   find_package(Geant4VMC REQUIRED)      
+
+  # Geant4
+  set(_components)
+  if(Geant4VMC_USE_GEANT4_UI)
+    list(APPEND _components ui_all)
+  endif()
+  if(Geant4VMC_USE_GEANT4_VIS)
+    list(APPEND _components vis_all)
+  endif()
+  if(Geant4VMC_USE_GEANT4_G3TOG4)
+    list(APPEND _components g3tog4)
+  endif()
+  find_package(Geant4 REQUIRED ${_components})
+  add_definitions(-DUSE_GEANT4)
 
   # VGM
   if (Geant4VMC_USE_VGM)

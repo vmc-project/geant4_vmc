@@ -40,24 +40,24 @@ set(${PROJECT_NAME}_VERSION
     ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH})
 
 #--- Options -------------------------------------------------------------------
-option(Geant4VMC_USE_VGM           "Build with VGM" ON)
 option(Geant4VMC_USE_G4ROOT        "Build with G4Root" ON)
-option(Geant4VMC_USE_SYSTEM_G4ROOT "Build with external G4Root" OFF)
+option(Geant4VMC_USE_VGM           "Build with VGM" OFF)
+option(Geant4VMC_USE_GEANT4_UI     "Build with Geant4 UI drivers" ON)
+option(Geant4VMC_USE_GEANT4_VIS    "Build with Geant4 Vis drivers" ON)
+option(Geant4VMC_USE_GEANT4_G3TOG4 "Build with Geant4 G3toG4 library" OFF)
 option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
-
-#--- CMake module path ---------------------------------------------------------
-set(CMAKE_MODULE_PATH 
-    ${CMAKE_SOURCE_DIR}/cmake
-    ${CMAKE_MODULE_PATH}) 
 
 #--- Find required packages ----------------------------------------------------
 include(Geant4VMCRequiredPackages)
+
+#--- Utility to defined installation lib directory -----------------------------
+include(Geant4VMCInstallLibDir)
 
 #--- Add the packages sources --------------------------------------------------
 add_subdirectory(mtroot)
 add_subdirectory(g4root)
 add_subdirectory(source)
 
-#--- Build project customization =----------------------------------------------
+#--- Build project configuration -----------------------------------------------
 include(Geant4VMCBuildProject)
 

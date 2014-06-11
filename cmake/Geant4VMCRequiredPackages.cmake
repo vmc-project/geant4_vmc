@@ -16,17 +16,17 @@
 find_package(ROOT REQUIRED)
 
 #-- Geant4 (required) ----------------------------------------------------------
-option(WITH_GEANT4_UIVIS "Build example with Geant4 UI and Vis drivers" ON)
-if(WITH_GEANT4_UIVIS)
-  find_package(Geant4 REQUIRED ui_all vis_all)
-else()
-  find_package(Geant4 REQUIRED)
+set(_components)
+if(Geant4VMC_USE_GEANT4_UI)
+  list(APPEND _components ui_all)
 endif()
-
-#-- G4Root from external installation (optional) -------------------------------
-if (Geant4VMC_USE_SYSTEM_G4ROOT)
-  find_package(G4ROOT REQUIRED)      
+if(Geant4VMC_USE_GEANT4_VIS)
+  list(APPEND _components vis_all)
 endif()
+if(Geant4VMC_USE_GEANT4_G3TOG4)
+  list(APPEND _components g3tog4)
+endif()
+find_package(Geant4 REQUIRED ${_components})
 
 #-- VGM (optional) -------------------------------------------------------------
 if (Geant4VMC_USE_VGM)

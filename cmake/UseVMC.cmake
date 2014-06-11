@@ -22,10 +22,10 @@ endif(NOT VMC_FOUND)
 set(VMC_LIBRARIES)
 
 if(ROOT_FOUND)
-  include_directories(${ROOT_INCLUDE_DIR})
+  include_directories(${ROOT_INCLUDE_DIRS})
 endif(ROOT_FOUND)
 
-if(GEANT4_FOUND)
+if(Geant4_FOUND)
   add_definitions(-DUSE_GEANT4) 
   include(${Geant4_USE_FILE})
   
@@ -46,11 +46,11 @@ if(GEANT4_FOUND)
 
   if(VGM_FOUND)
     set(VMC_LIBRARIES ${VMC_LIBRARIES} ${VGM_LIBRARIES})
-  endif(VGM_FOUND)  
+  endif(VGM_FOUND)
 
-  set(VMC_LIBRARIES ${VMC_LIBRARIES} ${Geant4_LIBRARIES} -L${GEANT4_LIBRARY_DIR} -lG3toG4)
-    
-endif(GEANT4_FOUND)
+  set(VMC_LIBRARIES ${VMC_LIBRARIES} ${Geant4_LIBRARIES})
+
+endif(Geant4_FOUND)
 
 if(Geant3VMC_FOUND)
   add_definitions(-DUSE_GEANT3) 
@@ -67,11 +67,11 @@ endif(Geant3VMC_FOUND)
 
 # MTROOT
 if (MTROOT_FOUND)
-  include_directories(${MTROOT_INCLUDE_DIR})
+  include_directories(${MTROOT_INCLUDE_DIRS})
   set(VMC_LIBRARIES ${MTROOT_LIBRARIES} ${VMC_LIBRARIES})
 endif(MTROOT_FOUND)
 
 # Finally add Root libraries
 set(VMC_LIBRARIES ${VMC_LIBRARIES} ${ROOT_LIBRARIES} -lVMC -lEG)
 
-# message(STATUS "VMC_LIBRARIES ${VMC_LIBRARIES}")
+#message(STATUS "VMC_LIBRARIES ${VMC_LIBRARIES}")

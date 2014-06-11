@@ -29,7 +29,7 @@ option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 if(NOT ROOT_FOUND)
   find_package(ROOT REQUIRED)
 endif()  
-include_directories(${ROOT_INCLUDE_DIR})
+include_directories(${ROOT_INCLUDE_DIRS})
 
 #----------------------------------------------------------------------------
 # Setup project include directories; compile definitions; link libraries
@@ -51,4 +51,4 @@ target_link_libraries(mtroot ${ROOT_LIBRARIES})
 
 #----Installation---------------------------------------------------------------
 install(DIRECTORY include/ DESTINATION include/mtroot)
-install(TARGETS mtroot EXPORT Geant4VMCTargets DESTINATION lib)
+install(TARGETS mtroot EXPORT Geant4VMCTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})

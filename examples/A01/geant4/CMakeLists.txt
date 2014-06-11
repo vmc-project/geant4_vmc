@@ -50,8 +50,8 @@ ROOT_GENERATE_DICTIONARY(
 # Locate sources and headers for this project
 # NB: headers are included so they will show up in IDEs
 #
-file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cxx)
-file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
+file(GLOB sources geant4a01Dict.cxx ${PROJECT_SOURCE_DIR}/src/*.cxx)
+file(GLOB headers geant4a01Dict.h ${PROJECT_SOURCE_DIR}/include/*.h)
 
 #----------------------------------------------------------------------------
 # Add the example library
@@ -68,4 +68,4 @@ add_custom_target(g4A01 DEPENDS geant4a01)
 #----------------------------------------------------------------------------
 # Install the library to 'lib' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS geant4a01 DESTINATION lib)
+install(TARGETS geant4a01 DESTINATION ${CMAKE_INSTALL_LIBDIR})

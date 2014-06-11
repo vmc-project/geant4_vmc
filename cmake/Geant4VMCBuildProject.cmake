@@ -36,8 +36,14 @@ set(GEANT4VMC_CMAKE_DIR ${CMAKE_INSTALL_PREFIX}/cmake)
 # Install the custom modules for the examples
 install(DIRECTORY
   ${PROJECT_BINARY_DIR}/Modules/
-  DESTINATION lib/Geant4VMC-${Geant4VMC_VERSION}/Modules
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/Geant4VMC-${Geant4VMC_VERSION}/Modules
   COMPONENT Development
+)
+
+# Install examples
+install(DIRECTORY
+  ${PROJECT_SOURCE_DIR}/examples
+  DESTINATION shared
 )
 
 #
@@ -54,7 +60,7 @@ configure_file(
 install(FILES
   "${PROJECT_BINARY_DIR}/Geant4VMCConfig.cmake"
   "${PROJECT_BINARY_DIR}/Geant4VMCConfigVersion.cmake"
-  DESTINATION lib/Geant4VMC-${Geant4VMC_VERSION})
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/Geant4VMC-${Geant4VMC_VERSION})
 
 install(EXPORT Geant4VMCTargets
-  DESTINATION lib/Geant4VMC-${Geant4VMC_VERSION})
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/Geant4VMC-${Geant4VMC_VERSION})

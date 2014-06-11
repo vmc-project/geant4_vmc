@@ -86,4 +86,4 @@ add_custom_target(E02 DEPENDS exampleE02 testE02)
 # under CMAKE_INSTALL_PREFIX
 #
 install(TARGETS exampleE02 testE02 DESTINATION bin)
-install(TARGETS example02 DESTINATION lib)
+install(TARGETS example02 DESTINATION ${CMAKE_INSTALL_LIBDIR})

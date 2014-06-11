@@ -25,23 +25,28 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}) 
 
 #--- Options -------------------------------------------------------------------
-option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)  
+option(Geant4VMC_USE_GEANT4_UI     "Build with Geant4 UI drivers" ON)
+option(Geant4VMC_USE_GEANT4_VIS    "Build with Geant4 Vis drivers" ON)
+option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 
 #-- ROOT (required) ------------------------------------------------------------
 if(NOT ROOT_FOUND)
   find_package(ROOT REQUIRED)
 endif()  
-include_directories(${ROOT_INCLUDE_DIR})
+include_directories(${ROOT_INCLUDE_DIRS})
 
 #-- Geant4 (required) ----------------------------------------------------------
-if(NOT GEANT4_FOUND)
-  option(WITH_GEANT4_UIVIS "Build example with Geant4 UI and Vis drivers" ON)
-  if(WITH_GEANT4_UIVIS)
-    find_package(Geant4 REQUIRED ui_all vis_all)
-  else()
-    find_package(Geant4 REQUIRED)
+if(NOT Geant4_FOUND)
+  #  find_package(Geant4 REQUIRED ui_all vis_all )
+  set(_components)
+  if(Geant4VMC_USE_GEANT4_UI)
+    list(APPEND _components ui_all)
   endif()
-endif()  
+  if(Geant4VMC_USE_GEANT4_VIS)
+    list(APPEND _components vis_all)
+  endif()
+  find_package(Geant4 REQUIRED ${_components})
+endif()
 include(${Geant4_USE_FILE})
 
 #----------------------------------------------------------------------------
@@ -60,8 +65,8 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 
 #---Add library-----------------------------------------------------------------
 add_library(g4root ${sources} ${headers})
-target_link_libraries(g4root ${Geant4_LIBRARIES} -L${GEANT4_LIBRARY_DIR} -lG3toG4 ${ROOT_LIBRARIES} -lVMC -lEG)
+target_link_libraries(g4root ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} -lVMC -lEG)
 
 #----Installation---------------------------------------------------------------
 install(DIRECTORY include/ DESTINATION include/g4root)
-install(TARGETS g4root EXPORT Geant4VMCTargets DESTINATION lib)
+install(TARGETS g4root EXPORT Geant4VMCTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
