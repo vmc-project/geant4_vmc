@@ -11,7 +11,7 @@
 #
 # I. Hrivnacova, 03/06/2014
 
-set(PACKAGE_VERSION "@Geant4VMC_VERSION@")
+set(PACKAGE_VERSION "@Geant4VMCPackages_VERSION@")
  
 # Check whether the requested PACKAGE_FIND_VERSION is compatible
 if("${PACKAGE_VERSION}" VERSION_LESS "${PACKAGE_FIND_VERSION}")

@@ -86,8 +86,8 @@ if (Geant4_FOUND)
   target_link_libraries(exampleE03 example03 geant4e03 ${VMC_LIBRARIES})
   target_link_libraries(testE03 example03 geant4e03 ${VMC_LIBRARIES})
 else()
-  target_link_libraries(exampleE03 example03 geant4e03 ${VMC_LIBRARIES})
-  target_link_libraries(testE03 example03 geant4e03 ${VMC_LIBRARIES})
+  target_link_libraries(exampleE03 example03 ${VMC_LIBRARIES})
+  target_link_libraries(testE03 example03 ${VMC_LIBRARIES})
 endif()
 
 #----------------------------------------------------------------------------

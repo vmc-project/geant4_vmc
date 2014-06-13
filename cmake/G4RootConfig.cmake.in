@@ -1,0 +1,33 @@
+#------------------------------------------------
+# The Virtual Monte Carlo examples
+# Copyright (C) 2014 Ivana Hrivnacova
+# All rights reserved.
+#
+# For the licensing terms see geant4_vmc/LICENSE.
+# Contact: vmc@pcroot.cern.ch
+#-------------------------------------------------
+
+# Configuration file for CMake build for G4Root VMC package.
+# It defines the following variables
+#  G4Root_INCLUDE_DIRS         - include directories for G4Root
+#  G4Root_LIBRARIES            - libraries to link against G4Root
+#  CMAKE_INSTALL_LIBDIR        - library installation directory
+#
+# I. Hrivnacova, 03/06/2014
+
+# Compute installation prefix relative to this file
+get_filename_component(_dir "${CMAKE_CURRENT_LIST_FILE}" PATH)
+get_filename_component(_prefix "${_dir}/../.." ABSOLUTE)
+
+# Import targets
+include("${_prefix}/@CMAKE_INSTALL_LIBDIR@/G4Root-@Geant4VMCPackages_VERSION@/G4RootTargets.cmake")
+ 
+# Import options
+set(CMAKE_INSTALL_LIBDIR @CMAKE_INSTALL_LIBDIR@)
+
+# These are IMPORTED targets created by G4RootTargets.cmake
+set(G4Root_LIBRARIES g4root)
+
+# Set includes
+set(G4Root_INCLUDE_DIRS "${_prefix}/include/g4root")
+

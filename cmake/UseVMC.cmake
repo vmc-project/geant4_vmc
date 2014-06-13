@@ -32,17 +32,17 @@ if(Geant4_FOUND)
   if(Geant4VMC_FOUND)
     include_directories(${Geant4VMC_INCLUDE_DIRS})
     set(VMC_LIBRARIES ${VMC_LIBRARIES} ${Geant4VMC_LIBRARIES})
-    # currently G4ROOT is not optional in Geant4 VMC
-    set(VMC_WITH_G4ROOT ON)
+    # currently G4Root is not optional in Geant4 VMC
+    set(VMC_WITH_G4Root ON)
     # set use VGM according to USE_VGM environment variable
     if(VGM_FOUND}) 
       set(VMC_WITH_VGM ON)
     endif()
   endif(Geant4VMC_FOUND)
 
-  if(G4ROOT_FOUND)
-    set(VMC_LIBRARIES ${VMC_LIBRARIES} ${G4ROOT_LIBRARIES})
-  endif(G4ROOT_FOUND)  
+  if(G4Root_FOUND)
+    set(VMC_LIBRARIES ${VMC_LIBRARIES} ${G4Root_LIBRARIES})
+  endif(G4Root_FOUND)
 
   if(VGM_FOUND)
     set(VMC_LIBRARIES ${VMC_LIBRARIES} ${VGM_LIBRARIES})
@@ -52,24 +52,24 @@ if(Geant4_FOUND)
 
 endif(Geant4_FOUND)
 
-if(Geant3VMC_FOUND)
+if(Geant3_FOUND)
   add_definitions(-DUSE_GEANT3) 
-  include_directories(${Geant3VMC_INCLUDE_DIR})
+  include_directories(${Geant3_INCLUDE_DIRS})
   
   #Pythia6
   if(Pythia6_FOUND)
-    set(VMC_LIBRARIES ${VMC_LIBRARIES} ${Pythia6_LIBRARIES} ${Geant3VMC_LIBRARIES})
+    set(VMC_LIBRARIES ${VMC_LIBRARIES} ${Pythia6_LIBRARIES} ${Geant3_LIBRARIES})
   else()
-    set(VMC_LIBRARIES ${Geant3VMC_LIBRARIES} ${VMC_LIBRARIES})
+    set(VMC_LIBRARIES ${Geant3_LIBRARIES} ${VMC_LIBRARIES})
   endif(Pythia6_FOUND)
     
-endif(Geant3VMC_FOUND)
+endif(Geant3_FOUND)
 
-# MTROOT
-if (MTROOT_FOUND)
-  include_directories(${MTROOT_INCLUDE_DIRS})
-  set(VMC_LIBRARIES ${MTROOT_LIBRARIES} ${VMC_LIBRARIES})
-endif(MTROOT_FOUND)
+# MTRoot
+if (MTRoot_FOUND)
+  include_directories(${MTRoot_INCLUDE_DIRS})
+  set(VMC_LIBRARIES ${MTRoot_LIBRARIES} ${VMC_LIBRARIES})
+endif(MTRoot_FOUND)
 
 # Finally add Root libraries
 set(VMC_LIBRARIES ${VMC_LIBRARIES} ${ROOT_LIBRARIES} -lVMC -lEG)

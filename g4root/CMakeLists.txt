@@ -69,4 +69,7 @@ target_link_libraries(g4root ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} -lVMC -lEG)
 
 #----Installation---------------------------------------------------------------
 install(DIRECTORY include/ DESTINATION include/g4root)
-install(TARGETS g4root EXPORT Geant4VMCTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(TARGETS g4root EXPORT G4RootTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+#--- Build project configuration -----------------------------------------------
+include(G4RootBuildProject)

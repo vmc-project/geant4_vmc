@@ -13,9 +13,9 @@
 #---CMake required version -----------------------------------------------------
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 
-#---Project Geant4VMC/source ---------------------------------------------------  
+#---Project Geant4VMC  ---------------------------------------------------------
 #
-project(Geant4VMCsource)
+project(Geant4VMC)
 
 #-------------------------------------------------------------------------------
 # CMake Module Path
@@ -25,7 +25,7 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}) 
 
 #--- Options -------------------------------------------------------------------
-option(Geant4VMC_USE_G4ROOT        "Build with G4Root" ON)
+option(Geant4VMC_USE_G4Root        "Build with G4Root" ON)
 option(Geant4VMC_USE_VGM           "Build with VGM" OFF)
 option(Geant4VMC_USE_GEANT4_UI     "Build with Geant4 UI drivers" ON)
 option(Geant4VMC_USE_GEANT4_VIS    "Build with Geant4 Vis drivers" ON)
@@ -59,10 +59,10 @@ if (Geant4VMC_USE_GEANT4_G3TOG4)
 endif()
 
 #-- G4Root (now required, to be made optional) ---------------------------------
-if (Geant4VMC_USE_G4ROOT)
+if (Geant4VMC_USE_G4Root)
   include_directories(${PROJECT_SOURCE_DIR}/../g4root/include)
-  add_definitions(-DUSE_G4ROOT)
-endif(Geant4VMC_USE_G4ROOT)
+  add_definitions(-DUSE_G4Root)
+endif(Geant4VMC_USE_G4Root)
 
 #-- VGM (optional) -------------------------------------------------------------
 if (Geant4VMC_USE_VGM)
@@ -130,3 +130,6 @@ install(DIRECTORY
   ${PROJECT_SOURCE_DIR}/visualization/include/ 
   DESTINATION include/geant4vmc)
 install(TARGETS geant4vmc EXPORT Geant4VMCTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+#--- Build project configuration -----------------------------------------------
+include(Geant4VMCBuildProject)

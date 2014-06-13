@@ -51,4 +51,7 @@ target_link_libraries(mtroot ${ROOT_LIBRARIES})
 
 #----Installation---------------------------------------------------------------
 install(DIRECTORY include/ DESTINATION include/mtroot)
-install(TARGETS mtroot EXPORT Geant4VMCTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(TARGETS mtroot EXPORT MTRootTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+#--- Build project configuration -----------------------------------------------
+include(MTRootBuildProject)

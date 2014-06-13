@@ -32,7 +32,7 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}) 
 
 #--- Project definitions -------------------------------------------------------
-project(Geant4VMC)
+project(Geant4VMCPackages)
 set(${PROJECT_NAME}_VERSION_MAJOR "3")
 set(${PROJECT_NAME}_VERSION_MINOR "0")
 set(${PROJECT_NAME}_VERSION_PATCH "0")
@@ -40,7 +40,9 @@ set(${PROJECT_NAME}_VERSION
     ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH})
 
 #--- Options -------------------------------------------------------------------
-option(Geant4VMC_USE_G4ROOT        "Build with G4Root" ON)
+option(Geant4VMC_BUILD_G4Root      "Build G4Root" ON)
+option(Geant4VMC_BUILD_MTRoot      "Build MTRoot" ON)
+option(Geant4VMC_BUILD_Geant4VMC   "Build Geant4VMC" ON)
 option(Geant4VMC_USE_VGM           "Build with VGM" OFF)
 option(Geant4VMC_USE_GEANT4_UI     "Build with Geant4 UI drivers" ON)
 option(Geant4VMC_USE_GEANT4_VIS    "Build with Geant4 Vis drivers" ON)
@@ -54,10 +56,20 @@ include(Geant4VMCRequiredPackages)
 include(Geant4VMCInstallLibDir)
 
 #--- Add the packages sources --------------------------------------------------
-add_subdirectory(mtroot)
-add_subdirectory(g4root)
-add_subdirectory(source)
+#
+if(Geant4VMC_BUILD_G4Root)
+  add_subdirectory(g4root)
+  set(Geant4VMC_USE_G4Root ON)
+endif(Geant4VMC_BUILD_G4Root)
+
+if(Geant4VMC_BUILD_MTRoot)
+  add_subdirectory(mtroot)
+endif(Geant4VMC_BUILD_MTRoot)
+
+if(Geant4VMC_BUILD_Geant4VMC)
+  add_subdirectory(source)
+endif(Geant4VMC_BUILD_Geant4VMC)
 
 #--- Build project configuration -----------------------------------------------
-include(Geant4VMCBuildProject)
+#include(Geant4VMCBuildProject)
 

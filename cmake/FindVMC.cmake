@@ -25,6 +25,9 @@ set(VMC_FOUND FALSE)
 # ROOT (required)
 find_package(ROOT REQUIRED)
 
+# MTRoot
+find_package(MTRoot REQUIRED)
+
 # Geant4 
 if(VMC_WITH_GEANT4)
   # Geant4VMC  
@@ -54,7 +57,7 @@ endif()
 
 # Geant3
 if(VMC_WITH_GEANT3)
-  find_package(Geant3VMC REQUIRED)
+  find_package(Geant3 REQUIRED)
   #PYTHIA6
   find_package(Pythia6 REQUIRED)
 endif()
