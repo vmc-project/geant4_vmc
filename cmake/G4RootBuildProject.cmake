@@ -1,5 +1,5 @@
 #------------------------------------------------
-# The Virtual Monte Carlo examples
+# The Geant4 Virtual Monte Carlo package
 # Copyright (C) 2014 Ivana Hrivnacova
 # All rights reserved.
 #
@@ -10,7 +10,7 @@
 # Configuration file for CMake build for G4Root VMC package
 # which defines customised installation.
 #
-# I. Hrivnacova, 24/04/2014
+# I. Hrivnacova, 13/06/2014
 
 # Set needed variables for the install tree
 set(G4Root_CMAKE_DIR ${CMAKE_INSTALL_PREFIX}/cmake)

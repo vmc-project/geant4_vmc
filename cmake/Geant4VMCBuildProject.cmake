@@ -1,5 +1,5 @@
 #------------------------------------------------
-# The Virtual Monte Carlo examples
+# The Geant4 Virtual Monte Carlo package
 # Copyright (C) 2014 Ivana Hrivnacova
 # All rights reserved.
 #
@@ -10,7 +10,7 @@
 # Configuration file for CMake build for Geant4 VMC package
 # which defines customised installation.
 #
-# I. Hrivnacova, 24/04/2014
+# I. Hrivnacova, 13/06/2014
 
 # Copy the custom cmake modules into the build tree
 foreach(_mod CMakeMacroParseArguments UseVMC)

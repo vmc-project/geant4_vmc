@@ -1,5 +1,5 @@
 #------------------------------------------------
-# The Virtual Monte Carlo examples
+# The Geant4 Virtual Monte Carlo package
 # Copyright (C) 2014 Ivana Hrivnacova
 # All rights reserved.
 #

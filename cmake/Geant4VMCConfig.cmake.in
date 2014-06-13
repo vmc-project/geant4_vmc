@@ -1,5 +1,5 @@
 #------------------------------------------------
-# The Virtual Monte Carlo examples
+# The Geant4 Virtual Monte Carlo package
 # Copyright (C) 2014 Ivana Hrivnacova
 # All rights reserved.
 #
@@ -22,7 +22,7 @@
 #  MTRoot_LIBRARIES            - libraries to link against MTRoot
 #  CMAKE_INSTALL_LIBDIR        - library installation directory
 #
-# I. Hrivnacova, 03/06/2014
+# I. Hrivnacova, 13/06/2014
 
 # Compute installation prefix relative to this file
 get_filename_component(_dir "${CMAKE_CURRENT_LIST_FILE}" PATH)

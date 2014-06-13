@@ -1,5 +1,5 @@
 #------------------------------------------------
-# The Virtual Monte Carlo examples
+# The Virtual Monte Carlo packages
 # Copyright (C) 2014 Ivana Hrivnacova
 # All rights reserved.
 #
