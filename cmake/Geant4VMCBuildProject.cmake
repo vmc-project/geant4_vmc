@@ -22,7 +22,7 @@ foreach(_mod CMakeMacroParseArguments UseVMC)
 endforeach()
 
 # Find modules
-foreach(_find_mod Geant4 ROOT VGM VMC)
+foreach(_find_mod Geant4 ROOT VMC)
   configure_file(
     ${PROJECT_SOURCE_DIR}/../cmake/Find${_find_mod}.cmake
     ${PROJECT_BINARY_DIR}/Modules/Find${_find_mod}.cmake
