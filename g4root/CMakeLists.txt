@@ -17,12 +17,16 @@ cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 #
 project(G4Root)
 
-#----------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # CMake Module Path
 #
 set(CMAKE_MODULE_PATH 
     ${Geant4VMC_DIR}/cmake
+    ${PROJECT_SOURCE_DIR}/../cmake
     ${CMAKE_MODULE_PATH}) 
+
+#--- Project version -----------------------------------------------------------
+include(Geant4VMCPackagesVersion)
 
 #--- Options -------------------------------------------------------------------
 option(Geant4VMC_USE_GEANT4_UI     "Build with Geant4 UI drivers" ON)
@@ -48,6 +52,11 @@ if(NOT Geant4_FOUND)
   find_package(Geant4 REQUIRED ${_components})
 endif()
 include(${Geant4_USE_FILE})
+
+#--- Utility to defined installation lib directory -----------------------------
+if("${CMAKE_INSTALL_LIBDIR}" MATCHES "")
+  include(Geant4VMCInstallLibDir)
+endif()
 
 #----------------------------------------------------------------------------
 # Setup project include directories; compile definitions; link libraries

@@ -20,7 +20,11 @@ project(MTRoot)
 #---CMake Module Path
 set(CMAKE_MODULE_PATH 
     ${Geant4VMC_DIR}/cmake
+    ${PROJECT_SOURCE_DIR}/../cmake
     ${CMAKE_MODULE_PATH}) 
+
+#--- Project version -----------------------------------------------------------
+include(Geant4VMCPackagesVersion)
 
 #--- Options -------------------------------------------------------------------
 option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)  
@@ -30,6 +34,11 @@ if(NOT ROOT_FOUND)
   find_package(ROOT REQUIRED)
 endif()  
 include_directories(${ROOT_INCLUDE_DIRS})
+
+#--- Utility to defined installation lib directory -----------------------------
+if("${CMAKE_INSTALL_LIBDIR}" MATCHES "")
+  include(Geant4VMCInstallLibDir)
+endif()
 
 #----------------------------------------------------------------------------
 # Setup project include directories; compile definitions; link libraries

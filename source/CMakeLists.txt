@@ -22,7 +22,11 @@ project(Geant4VMC)
 #
 set(CMAKE_MODULE_PATH 
     ${Geant4VMC_DIR}/cmake
+    ${PROJECT_SOURCE_DIR}/../cmake
     ${CMAKE_MODULE_PATH}) 
+
+#--- Project version -----------------------------------------------------------
+include(Geant4VMCPackagesVersion)
 
 #--- Options -------------------------------------------------------------------
 option(Geant4VMC_USE_G4Root        "Build with G4Root" ON)
@@ -60,7 +64,12 @@ endif()
 
 #-- G4Root (now required, to be made optional) ---------------------------------
 if (Geant4VMC_USE_G4Root)
-  include_directories(${PROJECT_SOURCE_DIR}/../g4root/include)
+  if (Geant4VMC_BUILD_G4Root)
+    include_directories(${PROJECT_SOURCE_DIR}/../g4root/include)
+  else()
+    find_package(G4Root REQUIRED)
+    include_directories(${G4Root_INCLUDE_DIRS})
+  endif()
   add_definitions(-DUSE_G4Root)
 endif(Geant4VMC_USE_G4Root)
 
@@ -74,6 +83,11 @@ if (Geant4VMC_USE_VGM)
 else(Geant4VMC_USE_VGM)
   set(VGM_LIBRARIES)
 endif(Geant4VMC_USE_VGM)
+
+#--- Utility to defined installation lib directory -----------------------------
+if("${CMAKE_INSTALL_LIBDIR}" MATCHES "")
+  include(Geant4VMCInstallLibDir)
+endif()
 
 #----------------------------------------------------------------------------
 # Setup project include directories; compile definitions; link libraries
