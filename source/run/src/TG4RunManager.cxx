@@ -44,12 +44,15 @@
 #include <G4UIExecutive.hh>
 #endif
 
+#ifdef USE_G4ROOT
+#include <TG4RootNavMgr.h>
+#endif
+
 #include <TROOT.h> 
 #include <TRint.h>
 #include <TInterpreter.h>
 #include <TGeoManager.h>
 #include <TRandom.h>
-#include <TG4RootNavMgr.h>
 #include <TVirtualMCApplication.h>
 
 //_____________________________________________________________________________
@@ -158,6 +161,7 @@ void TG4RunManager::ConfigureRunManager()
         fRunConfiguration->CreateUserRegionConstruction());
     
   // Root navigator
+#ifdef USE_G4ROOT
   TG4RootNavMgr* rootNavMgr = 0;
   if ( userGeometry == "VMCtoRoot" || userGeometry == "Root" ) {
 
@@ -184,7 +188,8 @@ void TG4RunManager::ConfigureRunManager()
     // Pass geometry to G4Root navigator
     rootNavMgr = TG4RootNavMgr::GetInstance(gGeoManager);
     G4cout << "TG4RootNavMgr has been created." << rootNavMgr << G4endl;
-  }  
+  }
+#endif
 
   // G4 run manager
 #ifdef G4MULTITHREADED  
@@ -205,9 +210,7 @@ void TG4RunManager::ConfigureRunManager()
       G4cout << "CreateDetectorConstruction done." << G4endl;
   }    
   else {
-    //TG4Globals::Exception(
-    //  "TG4RunManager", "ConfigureRunManager",
-    //  "Root navigation is not yet supported.");
+#ifdef USE_G4ROOT
 #ifdef G4MULTITHREADED
     G4int nthreads = G4MTRunManager::GetMasterRunManager()->GetNumberOfThreads();
 #else
@@ -215,6 +218,10 @@ void TG4RunManager::ConfigureRunManager()
 #endif
     rootNavMgr->Initialize(new TG4PostDetConstruction(), nthreads);
     rootNavMgr->ConnectToG4();  
+#else
+   TG4Globals::Exception("TG4RunManager", "ConfigureRunManagerTG4MCGeometry",
+     "geomVMCtoRoot and geomRoot options require Geant4 VMC built with G4Root.");
+#endif
   }  
     
   // Other mandatory classes
@@ -242,7 +249,7 @@ void TG4RunManager::CloneRootNavigatorForWorker()
 {
   // Clone Root navigator for worker thread
   //
-
+#ifdef USE_G4ROOT
   TString userGeometry = fRunConfiguration->GetUserGeometry();
   if ( userGeometry != "VMCtoRoot" && userGeometry != "Root" )  return;
 
@@ -261,6 +268,7 @@ void TG4RunManager::CloneRootNavigatorForWorker()
 
   if ( VerboseLevel() > 1 )
     G4cout << "TG4RunManager::CloneRootNavigatorForWorker done " << this << G4endl;
+#endif
 }
 
 //_____________________________________________________________________________

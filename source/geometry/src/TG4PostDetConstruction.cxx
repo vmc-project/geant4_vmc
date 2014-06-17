@@ -14,6 +14,8 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
+#ifdef USE_G4ROOT
+
 #include "TG4PostDetConstruction.h"
 #include "TG4GeometryManager.h"
 #include "TG4Globals.h"
@@ -55,3 +57,4 @@ void TG4PostDetConstruction::InitializeSDandField()
   TG4GeometryManager::Instance()->ConstructSDandField();
 }
 
+#endif

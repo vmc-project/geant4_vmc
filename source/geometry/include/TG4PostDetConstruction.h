@@ -17,6 +17,8 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
+#ifdef USE_G4ROOT
+
 #include <TG4RootDetectorConstruction.h>
 
 class TG4PostDetConstruction;
@@ -42,6 +44,8 @@ class TG4PostDetConstruction : public TVirtualUserPostDetConstruction
     /// Not implemented
     TG4PostDetConstruction& operator=(const TG4PostDetConstruction& right);
 }; 
+
+#endif //USE_G4ROOT
 
 #endif //TG4_DET_CONSTRUCTION_H
 
