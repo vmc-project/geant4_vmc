@@ -19,11 +19,11 @@
 get_filename_component(_dir "${CMAKE_CURRENT_LIST_FILE}" PATH)
 get_filename_component(_prefix "${_dir}/../.." ABSOLUTE)
 
-# Import targets
-include("${_prefix}/@CMAKE_INSTALL_LIBDIR@/MTRoot-@Geant4VMCPackages_VERSION@/MTRootTargets.cmake")
- 
 # Import options
 set(CMAKE_INSTALL_LIBDIR @CMAKE_INSTALL_LIBDIR@)
+
+# Import targets
+include("${_prefix}/@CMAKE_INSTALL_LIBDIR@/MTRoot-@Geant4VMCPackages_VERSION@/MTRootTargets.cmake")
 
 # These are IMPORTED targets created by Geant4VMCTargets.cmake
 set(MTRoot_LIBRARIES mtroot)

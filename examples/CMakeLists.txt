@@ -13,7 +13,7 @@
 #---Adding examples subdirectories explicitly 
 #   and a custom target to for building all VMC examples -------------
 
-cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.6.4 FATAL_ERROR)
 
 set(CMAKE_MODULE_PATH 
     ${Geant4VMC_DIR}/Modules

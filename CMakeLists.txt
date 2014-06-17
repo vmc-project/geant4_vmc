@@ -39,6 +39,7 @@ include(Geant4VMCPackagesVersion)
 option(Geant4VMC_BUILD_G4Root      "Build G4Root" ON)
 option(Geant4VMC_BUILD_MTRoot      "Build MTRoot" ON)
 option(Geant4VMC_BUILD_Geant4VMC   "Build Geant4VMC" ON)
+option(Geant4VMC_USE_G4Root        "Build with G4Root" ON)
 option(Geant4VMC_USE_VGM           "Build with VGM" OFF)
 option(Geant4VMC_USE_GEANT4_UI     "Build with Geant4 UI drivers" ON)
 option(Geant4VMC_USE_GEANT4_VIS    "Build with Geant4 Vis drivers" ON)
@@ -55,7 +56,6 @@ include(Geant4VMCInstallLibDir)
 #
 if(Geant4VMC_BUILD_G4Root)
   add_subdirectory(g4root)
-  set(Geant4VMC_USE_G4Root ON)
 endif(Geant4VMC_BUILD_G4Root)
 
 if(Geant4VMC_BUILD_MTRoot)
@@ -65,7 +65,4 @@ endif(Geant4VMC_BUILD_MTRoot)
 if(Geant4VMC_BUILD_Geant4VMC)
   add_subdirectory(source)
 endif(Geant4VMC_BUILD_Geant4VMC)
-
-#--- Build project configuration -----------------------------------------------
-#include(Geant4VMCBuildProject)
 

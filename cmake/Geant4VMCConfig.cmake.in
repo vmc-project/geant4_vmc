@@ -11,15 +11,14 @@
 # It defines the following variables
 #  Geant4VMC_INCLUDE_DIRS      - include directories for Geant4VMC
 #  Geant4VMC_LIBRARIES         - libraries to link against
-#  Geant4VMC_USE_VGM           - build option: with VGM
 #  Geant4VMC_USE_G4Root        - build option: with internal G4Root
+#  Geant4VMC_USE_EXTERN_G4Root - build option: with external G4Root
+#  Geant4VMC_USE_VGM           - build option: with VGM
 #  Geant4VMC_USE_GEANT4_UI     - build option: with Geant4 UI drivers
 #  Geant4VMC_USE_GEANT4_VIS    - build option: with Geant4 Vis drivers
-#  Geant4VMC_USE_GEANT4_G3TOG4 - build option:  with Geant4 G3toG4 library
-#  G4Root_INCLUDE_DIRS         - include directories for G4Root
-#  G4Root_LIBRARIES            - libraries to link against G4Root
-#  MTRoot_INCLUDE_DIRS         - include directories for MTRoot
-#  MTRoot_LIBRARIES            - libraries to link against MTRoot
+#  Geant4VMC_USE_GEANT4_G3TOG4 - build option: with Geant4 G3toG4 library
+#  G4Root_INCLUDE_DIRS         - include directories for G4Root (if with internal G4Root)
+#  G4Root_LIBRARIES            - libraries to link against G4Root (if with internal G4Root)
 #  CMAKE_INSTALL_LIBDIR        - library installation directory
 #
 # I. Hrivnacova, 13/06/2014
@@ -29,16 +28,17 @@ get_filename_component(_dir "${CMAKE_CURRENT_LIST_FILE}" PATH)
 get_filename_component(_prefix "${_dir}/../.." ABSOLUTE)
 
 # Import options
-set(Geant4VMC_USE_VGM    @Geant4VMC_USE_VGM@)
 set(Geant4VMC_USE_G4Root @Geant4VMC_USE_G4Root@)
+set(Geant4VMC_USE_EXTERN_G4Root @Geant4VMC_USE_EXTERN_G4Root@)
+set(Geant4VMC_USE_VGM    @Geant4VMC_USE_VGM@)
 set(Geant4VMC_USE_GEANT4_UI  @Geant4VMC_USE_GEANT4_UI@)
 set(Geant4VMC_USE_GEANT4_VIS @Geant4VMC_USE_GEANT4_VIS@)
 set(Geant4VMC_USE_GEANT4_G3TOG4 @Geant4VMC_USE_GEANT4_G3TOG4@)
 set(CMAKE_INSTALL_LIBDIR @CMAKE_INSTALL_LIBDIR@)
 
 # Import targets
-include("${_prefix}/@CMAKE_INSTALL_LIBDIR@/MTRoot-@Geant4VMCPackages_VERSION@/MTRootTargets.cmake")
-if(Geant4VMC_USE_G4Root)
+if (Geant4VMC_USE_G4Root AND (NOT Geant4VMC_USE_EXTERN_G4Root))
+  # message(STATUS "Importing G4Root targets")
   include("${_prefix}/@CMAKE_INSTALL_LIBDIR@/G4Root-@Geant4VMCPackages_VERSION@/G4RootTargets.cmake")
 endif()
 include("${_prefix}/@CMAKE_INSTALL_LIBDIR@/Geant4VMC-@Geant4VMCPackages_VERSION@/Geant4VMCTargets.cmake")
@@ -49,8 +49,6 @@ if(Geant4VMC_USE_G4Root)
   set(Geant4VMC_LIBRARIES "${Geant4VMC_LIBRARIES};g4root")
   set(G4Root_LIBRARIES "${Geant4VMC_LIBRARIES};g4root")
 endif()
-set(Geant4VMC_LIBRARIES "${Geant4VMC_LIBRARIES};mtroot")
-set(MTRoot_LIBRARIES "${Geant4VMC_LIBRARIES};mtroot")
 
 # Set includes
 set(Geant4VMC_INCLUDE_DIRS "${_prefix}/include/geant4vmc")
@@ -58,6 +56,7 @@ if(Geant4VMC_USE_G4Root)
   set(Geant4VMC_INCLUDE_DIRS "${Geant4VMC_INCLUDE_DIRS};${_prefix}/include/g4root")
   set(G4Root_INCLUDE_DIRS "${_prefix}/include/g4root")
 endif()
-set(Geant4VMC_INCLUDE_DIRS "${Geant4VMC_INCLUDE_DIRS};${_prefix}/include/mtroot")
-set(MTRoot_INCLUDE_DIRS "${_prefix}/include/mtroot")
+
+# Advanced options
+mark_as_advanced(Geant4VMC_USE_EXTERN_G4Root)
 

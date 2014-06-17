@@ -146,6 +146,12 @@ ifeq ($(NO_G3TOG4),)
   CXXFLAGS += -DUSE_G3TOG4
 endif
 
+# Use G4ROOT flag
+#
+ifeq ($(NO_G4ROOT),)
+  CXXFLAGS += -DUSE_G4ROOT
+endif
+
 
 ######################## Supported Geant4 VIS, UI #############################
 #

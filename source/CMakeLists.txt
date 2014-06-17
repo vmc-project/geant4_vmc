@@ -11,7 +11,7 @@
 # I. Hrivnacova, 24/04/2014
 
 #---CMake required version -----------------------------------------------------
-cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.6.4 FATAL_ERROR)
 
 #---Project Geant4VMC  ---------------------------------------------------------
 #
@@ -35,6 +35,13 @@ option(Geant4VMC_USE_GEANT4_UI     "Build with Geant4 UI drivers" ON)
 option(Geant4VMC_USE_GEANT4_VIS    "Build with Geant4 Vis drivers" ON)
 option(Geant4VMC_USE_GEANT4_G3TOG4 "Build with Geant4 G3toG4 library" OFF)
 option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
+
+# Derived option
+set(Geant4VMC_USE_EXTERN_G4Root OFF)
+if ((NOT Geant4VMC_BUILD_G4Root) AND Geant4VMC_USE_G4Root)
+  set(Geant4VMC_USE_EXTERN_G4Root ON)
+endif()
+mark_as_advanced(Geant4VMC_USE_EXTERN_G4Root)
 
 #-- ROOT (required) ------------------------------------------------------------
 if(NOT ROOT_FOUND)
@@ -62,15 +69,18 @@ if (Geant4VMC_USE_GEANT4_G3TOG4)
   add_definitions(-DUSE_G3TOG4)
 endif()
 
-#-- G4Root (now required, to be made optional) ---------------------------------
+#-- G4Root ---------------------------------------------------------------------
 if (Geant4VMC_USE_G4Root)
   if (Geant4VMC_BUILD_G4Root)
     include_directories(${PROJECT_SOURCE_DIR}/../g4root/include)
+    set(G4Root_LIBRARIES g4root)
   else()
-    find_package(G4Root REQUIRED)
+    if(NOT G4Root_FOUND)
+      find_package(G4Root REQUIRED)
+    endif()
     include_directories(${G4Root_INCLUDE_DIRS})
   endif()
-  add_definitions(-DUSE_G4Root)
+  add_definitions(-DUSE_G4ROOT)
 endif(Geant4VMC_USE_G4Root)
 
 #-- VGM (optional) -------------------------------------------------------------
@@ -130,7 +140,7 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/*/include/*.h ${PROJECT_SOURCE_DIR}/incl
 #---Add library-----------------------------------------------------------------
 add_library(geant4vmc ${sources} geant4vmcDict.cxx ${headers})
 # Make g4root optional
-target_link_libraries(geant4vmc g4root ${VGM_LIBRARIES} ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} -lVMC -lEG)
+target_link_libraries(geant4vmc ${G4Root_LIBRARIES} ${VGM_LIBRARIES} ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} -lVMC -lEG)
 
 #----Installation---------------------------------------------------------------
 install(DIRECTORY 
