@@ -2,7 +2,7 @@ $Id$
 
 ------------------------------------------------
  The Virtual Monte Carlo examples
- Copyright (C) 2007, 2008 Ivana Hrivnacova
+ Copyright (C) 2007 - 2014 Ivana Hrivnacova
  All rights reserved.
 
  For the licensing terms see geant4_vmc/LICENSE.
@@ -15,9 +15,12 @@ Introduction
   To demonstrate use of VirtualMC, four Geant4 novice
   (N01, N02, N03, N06) and one extended (A01) examples has been rewritten
   as VMC applications.
-  
+
   See more detail description in README files
   withing each example subdirectory. 
+
+  The instructions how to build and run examples are provided
+  in examples/README_INSTALL.
 
 
 Geometry definition
