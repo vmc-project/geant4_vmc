@@ -44,6 +44,7 @@ option(Geant4VMC_USE_VGM           "Build with VGM" OFF)
 option(Geant4VMC_USE_GEANT4_UI     "Build with Geant4 UI drivers" ON)
 option(Geant4VMC_USE_GEANT4_VIS    "Build with Geant4 Vis drivers" ON)
 option(Geant4VMC_USE_GEANT4_G3TOG4 "Build with Geant4 G3toG4 library" OFF)
+option(Geant4VMC_INSTALL_EXAMPLES  "Install examples" ON)
 option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 
 #--- Find required packages ----------------------------------------------------

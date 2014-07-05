@@ -41,10 +41,12 @@ install(DIRECTORY
 )
 
 # Install examples
-install(DIRECTORY
-  ${PROJECT_SOURCE_DIR}/../examples
-  DESTINATION shared
-)
+if(Geant4VMC_INSTALL_EXAMPLES)
+  install(DIRECTORY
+    ${PROJECT_SOURCE_DIR}/../examples
+    DESTINATION share/Geant4VMC-${Geant4VMCPackages_VERSION}
+  )
+endif()
 
 #
 # Install the Geant4VMCConfig, Geant4VMCConfigVersion

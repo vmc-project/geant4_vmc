@@ -149,14 +149,12 @@ function(ROOT_GENERATE_DICTIONARY dictionary)
   foreach( d ${incdirs})    
    set(includedirs ${includedirs} -I${d})
   endforeach()
-  # filter-out -I/usr/include/QtCore
-  string(REPLACE "-I/usr/include/QtCore" ""  includedirs "${includedirs}")
-  # filter-out -I/usr/include/QtCore
-  string(REPLACE "-I/usr/include/QtGui" ""  includedirs "${includedirs}")
-  # filter-out -I/usr/include/QtCore
-  string(REPLACE "-I/usr/include/QtOpenGL" ""  includedirs "${includedirs}")
-  # filter-out -I/usr/include
-  string(REPLACE "-I/usr/include" ""  includedirs "${includedirs}")
+  # filter-out directories which make problems to Cint processing
+  list(REMOVE_ITEM includedirs "-I/usr/include/QtCore")
+  list(REMOVE_ITEM includedirs "-I/usr/include/QtGui")
+  list(REMOVE_ITEM includedirs "-I/usr/include/QtOpenGL")
+  list(REMOVE_ITEM includedirs "-I/usr/include")
+
   #---Get the list of definitions---------------------------
   get_directory_property(defs COMPILE_DEFINITIONS)
   foreach( d ${defs})
