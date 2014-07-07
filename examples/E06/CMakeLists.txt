@@ -24,10 +24,12 @@ project(E06)
 #
 set(CMAKE_MODULE_PATH 
     ${Geant4VMC_DIR}/Modules
+    ${Geant3_DIR}/Modules
     ${CMAKE_MODULE_PATH}) 
 
 #----------------------------------------------------------------------------
 # VMC Configuration file
+# (for building MC independent code)
 #
 include(UseVMC)
 
@@ -64,12 +66,18 @@ add_library(example06 ${sources} exampleE06Dict.cxx ${headers})
 target_link_libraries(example06 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
+# MC Configuration file
+# (for building MC dependent code)
+#
+include(UseMC)
+
+#----------------------------------------------------------------------------
 # Add the executable, and link it to all libraries
 #
 add_executable(exampleE06 exampleE06.cxx)
 add_executable(testE06 testE06.cxx)
-target_link_libraries(exampleE06 example06 ${VMC_LIBRARIES})
-target_link_libraries(testE06 example06 ${VMC_LIBRARIES})
+target_link_libraries(exampleE06 example06 ${MC_LIBRARIES})
+target_link_libraries(testE06 example06 ${MC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets

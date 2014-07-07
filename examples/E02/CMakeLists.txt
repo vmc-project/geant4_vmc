@@ -21,9 +21,11 @@ project(E02)
 
 #----------------------------------------------------------------------------
 # CMake Module Path
+# (for building MC independent code)
 #
 set(CMAKE_MODULE_PATH 
     ${Geant4VMC_DIR}/Modules
+    ${Geant3_DIR}/Modules
     ${CMAKE_MODULE_PATH}) 
 
 #----------------------------------------------------------------------------
@@ -68,12 +70,18 @@ add_library(example02 ${sources} exampleE02Dict.cxx ${headers})
 target_link_libraries(example02 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
+# MC Configuration file
+# (for building MC dependent code)
+#
+include(UseMC)
+
+#----------------------------------------------------------------------------
 # Add the executables, and link it to all libraries
 #
 add_executable(exampleE02 exampleE02.cxx)
 add_executable(testE02 testE02.cxx)
-target_link_libraries(exampleE02 example02 ${VMC_LIBRARIES})
-target_link_libraries(testE02 example02 ${VMC_LIBRARIES})
+target_link_libraries(exampleE02 example02 ${MC_LIBRARIES})
+target_link_libraries(testE02 example02 ${MC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets

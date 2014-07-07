@@ -24,19 +24,14 @@ project(E03)
 #
 set(CMAKE_MODULE_PATH 
     ${Geant4VMC_DIR}/Modules
+    ${Geant3_DIR}/Modules
     ${CMAKE_MODULE_PATH}) 
 
 #----------------------------------------------------------------------------
 # VMC Configuration file
+# (for building MC independent code)
 #
 include(UseVMC)
-
-#----------------------------------------------------------------------------
-# Process the example geant4 dependent library
-#
-if (Geant4_FOUND)
-  add_subdirectory(geant4)
-endif()
 
 #----------------------------------------------------------------------------
 # Setup project include directories; compile definitions; link libraries
@@ -44,11 +39,6 @@ endif()
 include_directories(
   ${PROJECT_SOURCE_DIR}/include 
   ${CMAKE_CURRENT_BINARY_DIR})
-
-if (Geant4_FOUND)
-  include_directories(
-    ${PROJECT_SOURCE_DIR}/geant4/include)
-endif(Geant4_FOUND)
 
 #----------------------------------------------------------------------------
 # Generate Root dictionaries
@@ -78,16 +68,31 @@ add_library(example03 ${sources} exampleE03Dict.cxx ${headers})
 target_link_libraries(example03 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
+# MC Configuration file
+# (for building MC dependent code)
+#
+include(UseMC)
+
+#----------------------------------------------------------------------------
+# Process the example geant4 dependent library
+#
+if (Geant4_FOUND)
+  add_subdirectory(geant4)
+  include_directories(
+    ${PROJECT_SOURCE_DIR}/geant4/include)
+endif()
+
+#----------------------------------------------------------------------------
 # Add the executable, and link it to all libraries
 #
 add_executable(exampleE03 exampleE03.cxx)
 add_executable(testE03 testE03.cxx)
 if (Geant4_FOUND)
-  target_link_libraries(exampleE03 example03 geant4e03 ${VMC_LIBRARIES})
-  target_link_libraries(testE03 example03 geant4e03 ${VMC_LIBRARIES})
+  target_link_libraries(exampleE03 example03 geant4e03 ${MC_LIBRARIES})
+  target_link_libraries(testE03 example03 geant4e03 ${MC_LIBRARIES})
 else()
-  target_link_libraries(exampleE03 example03 ${VMC_LIBRARIES})
-  target_link_libraries(testE03 example03 ${VMC_LIBRARIES})
+  target_link_libraries(exampleE03 example03 ${MC_LIBRARIES})
+  target_link_libraries(testE03 example03 ${MC_LIBRARIES})
 endif()
 
 #----------------------------------------------------------------------------

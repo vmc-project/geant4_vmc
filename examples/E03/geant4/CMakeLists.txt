@@ -27,9 +27,10 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}) 
 
 #----------------------------------------------------------------------------
-# VMC Configuration file
+# MC Configuration file
+# (for building MC dependent code)
 #
-include(UseVMC)
+include(UseMC)
 
 #----------------------------------------------------------------------------
 # Setup project include directories; compile definitions; link libraries
@@ -59,7 +60,7 @@ file(GLOB headers geant4e03Dict.h ${PROJECT_SOURCE_DIR}/include/*.h)
 # Add the example library
 #
 add_library(geant4e03 ${sources} geant4e03Dict.cxx ${headers})
-target_link_libraries(geant4e03 ${VMC_LIBRARIES})
+target_link_libraries(geant4e03 ${MC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets

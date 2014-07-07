@@ -20,9 +20,9 @@ set(CMAKE_MODULE_PATH
     ${Geant3_DIR}/Modules
     ${CMAKE_MODULE_PATH}) 
 
-#---Use VMC.cmake only if examples are built as standalone
-#
+# Find required packages (according to user selection)
 find_package(VMC REQUIRED)
+find_package(MC REQUIRED)
 
 add_subdirectory(E01)
 add_subdirectory(E02)
