@@ -77,6 +77,7 @@ void TG4ActionInitialization::Build() const
  //G4cout << "TG4ActionInitialization::Build "  << this << G4endl;
 
   // create MC and MCApplication worker instances
+#ifdef G4MULTITHREADED
   if ( G4Threading::IsWorkerThread() ) {
     if ( ! TGeant4::MasterApplicationInstance()->CloneForWorker() ) {
       // Give an exception if user application does not implement
@@ -92,7 +93,7 @@ void TG4ActionInitialization::Build() const
     TGeant4::MasterInstance()->CloneForWorker();
     TVirtualMCApplication::Instance()->InitForWorker();
   }  
-
+#endif
   SetUserAction(fRunConfiguration->CreatePrimaryGenerator());
 
   G4UserRunAction* runAction = fRunConfiguration->CreateRunAction();

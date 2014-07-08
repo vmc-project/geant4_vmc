@@ -32,10 +32,12 @@
 
 // mutex in a file scope
 
+#ifdef G4MULTITHREADED
 namespace {
   //Mutex to lock master application when merging data
   G4Mutex mergeMutex = G4MUTEX_INITIALIZER;
-}  
+}
+#endif
 
 const G4String TG4RunAction::fgkDefaultRandomStatusFile = "currentRun.rndm";
 
@@ -125,10 +127,12 @@ void TG4RunAction::EndOfRunAction(const G4Run* run)
 /// Called by G4 kernel at the end of run.
 
 
+#ifdef G4MULTITHREADED
   // Merge user application data
   G4AutoLock lm(&mergeMutex);
   TGeant4::MasterApplicationInstance()->Merge(TVirtualMCApplication::Instance());
   lm.unlock();
+#endif
 
   if ( fCrossSectionManager.IsMakeHistograms() ) {
     fCrossSectionManager.MakeHistograms();

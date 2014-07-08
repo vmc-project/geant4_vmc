@@ -349,7 +349,7 @@ void TG4RunManager::Initialize()
   TG4GeometryManager::Instance()->FinishGeometry();
   
   // initialize SD manager
-  TG4SDManager::Instance()->Initialize();
+  // TG4SDManager::Instance()->Initialize();
 
   if ( VerboseLevel() > 1 )
     G4cout << "TG4RunManager::Initialize done " << this << G4endl;

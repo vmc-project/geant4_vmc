@@ -41,10 +41,12 @@
 // generated from short units names
 #include <G4SystemOfUnits.hh>
 
+#ifdef G4MULTITHREADED
 namespace {
   //Mutex to lock master application when merging data
   G4Mutex addParticleMutex = G4MUTEX_INITIALIZER;
 }
+#endif
 
 TG4ParticlesManager* TG4ParticlesManager::fgInstance = 0;
 
@@ -118,14 +120,18 @@ void TG4ParticlesManager::AddParticleToPdgDatabase(const G4String& name,
   }               
 
   // Add particle to TDatabasePDG
+#ifdef G4MULTITHREADED
   G4AutoLock lm(&addParticleMutex);
+#endif
   TDatabasePDG::Instance()
     ->AddParticle(name, g4Name, 
                   particleDefinition->GetPDGMass()/TG4G3Units::Energy(), 
                   particleDefinition->GetPDGStable(), 
                   particleDefinition->GetPDGWidth()/TG4G3Units::Energy(), 
                   pdgQ*3, rootType, pdgEncoding);
+#ifdef G4MULTITHREADED
   lm.unlock();
+#endif
 }
 
 

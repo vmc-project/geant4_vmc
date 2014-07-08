@@ -21,10 +21,12 @@
 
 #include <G4AutoLock.hh>
 
+#ifdef G4MULTITHREADED
 namespace {
   //Mutex to lock master application when merging data
   G4Mutex deleteMutex = G4MUTEX_INITIALIZER;
 }
+#endif
 
 //_____________________________________________________________________________
 TG4WorkerInitialization::TG4WorkerInitialization()
@@ -51,9 +53,9 @@ void TG4WorkerInitialization::WorkerRunStart() const
   //G4cout << "TG4WorkerInitialization::WorkerRunStart() " << G4endl;
 
   TG4RunManager::Instance()->LateInitialize();
-  
+#ifdef G4MULTITHREADED
   TVirtualMCApplication::Instance()->BeginWorkerRun();
-
+#endif
   //G4cout << "TG4WorkerInitialization::WorkerRunStart() end " << G4endl;
 }   
 
@@ -80,14 +82,14 @@ void TG4WorkerInitialization::WorkerStop() const
 /// in our case.
 
   //G4cout << "TG4WorkerInitialization::WorkerStop() " << this << G4endl;
-
+#ifdef G4MULTITHREADED
   TVirtualMCApplication::Instance()->FinishWorkerRun();
-
   //G4cout << "Go to delete MCApplication " << TVirtualMCApplication::Instance() << G4endl;
 
   G4AutoLock lm(&deleteMutex);
   delete TVirtualMCApplication::Instance();
   lm.unlock();
+#endif
 
   //G4cout << "TG4WorkerInitialization::WorkerStop() end " << G4endl;
 }
