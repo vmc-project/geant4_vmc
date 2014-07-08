@@ -182,12 +182,20 @@ void Ex03MCApplication::InitMC(const char* setup)
     gInterpreter->ProcessLine("Config()");
   }  
  
-  // Create Root manager 
+// MT support available from root v 5.34/18
+#if ROOT_VERSION_CODE >= 336402
+  // Create Root manager
   if ( ! gMC->IsMT() ) {
     fRootManager
       = new TMCRootManager(GetName(), TVirtualMCRootManager::kWrite);
     //fRootManager->SetDebug(true);
   }
+#else
+  // Create Root manager
+  fRootManager
+    = new TMCRootManager(GetName(), TVirtualMCRootManager::kWrite);
+  //fRootManager->SetDebug(true);
+#endif
   
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);
