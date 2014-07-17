@@ -96,7 +96,7 @@ endif(Geant4VMC_USE_VGM)
 
 #--- Utility to defined installation lib directory -----------------------------
 if("${CMAKE_INSTALL_LIBDIR}" MATCHES "")
-  include(Geant4VMCInstallLibDir)
+  include(VMCInstallLibDir)
 endif()
 
 #----------------------------------------------------------------------------

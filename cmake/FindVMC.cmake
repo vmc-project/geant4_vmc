@@ -19,14 +19,15 @@ option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 
 #---Find required packages------------------------------------------------------
 
-set(VMC_FOUND FALSE)
-
 # ROOT (required)
 find_package(ROOT REQUIRED)
 
 # MTRoot
 if(VMC_WITH_MTRoot)
-  find_package(MTRoot REQUIRED)
+  # Do not search for MTRoot if building within Geant4VMC
+  if (NOT Geant4VMC_BUILD_MTRoot)
+    find_package(MTRoot REQUIRED)
+  endif()
 endif()
 
 # If all required packages above were found we can update VMC_FOUND

@@ -37,7 +37,7 @@ include_directories(${ROOT_INCLUDE_DIRS})
 
 #--- Utility to defined installation lib directory -----------------------------
 if("${CMAKE_INSTALL_LIBDIR}" MATCHES "")
-  include(Geant4VMCInstallLibDir)
+  include(VMCInstallLibDir)
 endif()
 
 #----------------------------------------------------------------------------

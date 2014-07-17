@@ -24,26 +24,43 @@ endif(NOT VMC_FOUND)
 # MC packages
 #
 if (NOT MC_FOUND)
-  find_package(MC REQUIRED)
+  find_package(MC)
 endif(NOT MC_FOUND)
 
 set(MC_LIBRARIES)
 
-if(ROOT_FOUND)
-  include_directories(${ROOT_INCLUDE_DIRS})
-endif(ROOT_FOUND)
+# ROOT (required)
+include_directories(${ROOT_INCLUDE_DIRS})
 
-if(Geant4_FOUND)
+# Geant4
+if(VMC_WITH_Geant4)
   add_definitions(-DUSE_GEANT4) 
   include(${Geant4_USE_FILE})
   
   if(Geant4VMC_FOUND)
+     # build outside Geant4VMC
     include_directories(${Geant4VMC_INCLUDE_DIRS})
     set(MC_LIBRARIES ${MC_LIBRARIES} ${Geant4VMC_LIBRARIES})
+  else()
+    # build inside Geant4VMC
+    include_directories(${Geant4VMC_SOURCE_DIR}/source/global/include)
+    include_directories(${Geant4VMC_SOURCE_DIR}/source/geometry/include)
+    include_directories(${Geant4VMC_SOURCE_DIR}/source/digits+hits/include)
+    include_directories(${Geant4VMC_SOURCE_DIR}/source/physics/include)
+    include_directories(${Geant4VMC_SOURCE_DIR}/source/physics_list/include)
+    include_directories(${Geant4VMC_SOURCE_DIR}/source/event/include)
+    include_directories(${Geant4VMC_SOURCE_DIR}/source/run/include)
+    include_directories(${Geant4VMC_SOURCE_DIR}/source/visualization/include)
+    set(MC_LIBRARIES ${MC_LIBRARIES} geant4vmc)
   endif(Geant4VMC_FOUND)
 
   if(G4Root_FOUND)
+    # build outside Geant4VMC
     set(MC_LIBRARIES ${MC_LIBRARIES} ${G4Root_LIBRARIES})
+  else()
+    # build inside Geant4VMC
+    include_directories(${Geant4VMC_SOURCE_DIR}/g4root/include)
+    set(MC_LIBRARIES ${MC_LIBRARIES} g4root)
   endif(G4Root_FOUND)
 
   if(VGM_FOUND)
@@ -52,9 +69,10 @@ if(Geant4_FOUND)
 
   set(MC_LIBRARIES ${MC_LIBRARIES} ${Geant4_LIBRARIES})
 
-endif(Geant4_FOUND)
+endif(VMC_WITH_Geant4)
 
-if(Geant3_FOUND)
+if(VMC_WITH_Geant3)
+  # always build outside Geant4VMC
   add_definitions(-DUSE_GEANT3) 
   include_directories(${Geant3_INCLUDE_DIRS})
   
@@ -65,13 +83,20 @@ if(Geant3_FOUND)
     set(MC_LIBRARIES ${Geant3_LIBRARIES} ${MC_LIBRARIES})
   endif(Pythia6_FOUND)
     
-endif(Geant3_FOUND)
+endif(VMC_WITH_Geant3)
 
-# MTRoot
-if (MTRoot_FOUND)
-  include_directories(${MTRoot_INCLUDE_DIRS})
-  set(MC_LIBRARIES ${MTRoot_LIBRARIES} ${MC_LIBRARIES})
-endif(MTRoot_FOUND)
+# MTRoot (optional)
+if (VMC_WITH_MTRoot)
+  # MTRoot
+  if (MTRoot_FOUND)
+     # build outside Geant4VMC
+    set(MC_LIBRARIES ${MTRoot_LIBRARIES} ${MC_LIBRARIES})
+  else()
+     # build inside Geant4VMC
+     # includes are already defined
+     set(MC_LIBRARIES ${MC_LIBRARIES} mtroot)
+  endif(MTRoot_FOUND)
+endif(VMC_WITH_MTRoot)
 
 # Finally add Root libraries
 set(MC_LIBRARIES ${MC_LIBRARIES} ${ROOT_LIBRARIES} -lVMC -lEG)

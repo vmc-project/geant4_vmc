@@ -20,10 +20,6 @@ set(CMAKE_MODULE_PATH
     ${Geant3_DIR}/Modules
     ${CMAKE_MODULE_PATH}) 
 
-# Find required packages (according to user selection)
-find_package(VMC REQUIRED)
-find_package(MC REQUIRED)
-
 add_subdirectory(E01)
 add_subdirectory(E02)
 add_subdirectory(E03)

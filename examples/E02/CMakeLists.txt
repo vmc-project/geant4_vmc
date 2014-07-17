@@ -70,10 +70,22 @@ add_library(example02 ${sources} exampleE02Dict.cxx ${headers})
 target_link_libraries(example02 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
+# Install the library to CMAKE_INSTALL_LIBDIR directory
+#
+install(TARGETS example02 DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+#----------------------------------------------------------------------------
 # MC Configuration file
 # (for building MC dependent code)
 #
 include(UseMC)
+
+#----------------------------------------------------------------------------
+# Do not build executables if no MC is selected
+#
+if (NOT MC_FOUND)
+  return()
+endif( NOT MC_FOUND)
 
 #----------------------------------------------------------------------------
 # Add the executables, and link it to all libraries
@@ -90,8 +102,6 @@ target_link_libraries(testE02 example02 ${MC_LIBRARIES})
 add_custom_target(E02 DEPENDS exampleE02 testE02)
 
 #----------------------------------------------------------------------------
-# Install the executable to 'bin' and library to 'lib' directories
-# under CMAKE_INSTALL_PREFIX
+# Install the executables to 'bin'
 #
 install(TARGETS exampleE02 testE02 DESTINATION bin)
-install(TARGETS example02 DESTINATION ${CMAKE_INSTALL_LIBDIR})

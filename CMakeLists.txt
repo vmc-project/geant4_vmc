@@ -39,6 +39,7 @@ include(Geant4VMCPackagesVersion)
 option(Geant4VMC_BUILD_G4Root      "Build G4Root" ON)
 option(Geant4VMC_BUILD_MTRoot      "Build MTRoot" ON)
 option(Geant4VMC_BUILD_Geant4VMC   "Build Geant4VMC" ON)
+option(Geant4VMC_BUILD_EXAMPLES    "Build VMC examples" ON)
 option(Geant4VMC_USE_G4Root        "Build with G4Root" ON)
 option(Geant4VMC_USE_VGM           "Build with VGM" OFF)
 option(Geant4VMC_USE_GEANT4_UI     "Build with Geant4 UI drivers" ON)
@@ -51,7 +52,7 @@ option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 include(Geant4VMCRequiredPackages)
 
 #--- Utility to defined installation lib directory -----------------------------
-include(Geant4VMCInstallLibDir)
+include(VMCInstallLibDir)
 
 #--- Add the packages sources --------------------------------------------------
 #
@@ -66,4 +67,20 @@ endif(Geant4VMC_BUILD_MTRoot)
 if(Geant4VMC_BUILD_Geant4VMC)
   add_subdirectory(source)
 endif(Geant4VMC_BUILD_Geant4VMC)
+
+if(Geant4VMC_BUILD_EXAMPLES)
+  # examples require mtroot
+  if(NOT Geant4VMC_BUILD_MTRoot)
+    message(STATUS "Building examples inactivated")
+    message(STATUS "as it requires Geant4VMC built with MTRoot.")
+    message(STATUS "Please set Geant4VMC_BUILD_MTRoot option ON.")
+  else()
+    set(VMC_WITH_Geant4 ON)
+    set(VMC_WITH_MTRoot ON)
+    set(VMC_FOUND ON)
+    set(MC_FOUND ON)
+    set(Geant4VMC_SOURCE_DIR ${CMAKE_SOURCE_DIR})
+    add_subdirectory(examples)
+  endif()
+endif(Geant4VMC_BUILD_EXAMPLES)
 
