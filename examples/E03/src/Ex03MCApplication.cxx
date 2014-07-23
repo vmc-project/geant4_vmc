@@ -180,6 +180,10 @@ void Ex03MCApplication::InitMC(const char* setup)
   if ( TString(setup) != "" ) {
     gROOT->LoadMacro(setup);
     gInterpreter->ProcessLine("Config()");
+    if ( ! gMC ) {
+      Fatal("InitMC",
+            "Processing Config() has failed. (No MC is instantiated.)");
+    }
   }  
  
 // MT support available from root v 5.34/18

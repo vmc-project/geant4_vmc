@@ -145,6 +145,10 @@ void Ex06MCApplication::InitMC(const char* setup)
   if ( TString(setup) != "" ) {
     gROOT->LoadMacro(setup);
     gInterpreter->ProcessLine("Config()");
+    if ( ! gMC ) {
+      Fatal("InitMC",
+            "Processing Config() has failed. (No MC is instantiated.)");
+    }
   }  
  
   gMC->SetStack(fStack);
