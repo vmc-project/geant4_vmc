@@ -14,8 +14,9 @@
 # I. Hrivnacova, 26/02/2014
 
 #---Options---------------------------------------------------------------------
-option(VMC_WITH_MTRoot   "Build with MTRoot" ON)
-option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
+option(VMC_WITH_MTRoot      "Build with MTRoot" ON)
+option(VMC_INSTALL_EXAMPLES "Install examples libraries and programs" ON)
+option(BUILD_SHARED_LIBS    "Build the dynamic libraries" ON)
 
 #---Find required packages------------------------------------------------------
 

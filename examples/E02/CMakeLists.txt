@@ -72,8 +72,10 @@ target_link_libraries(example02 ${VMC_LIBRARIES})
 #----------------------------------------------------------------------------
 # Install the library to CMAKE_INSTALL_LIBDIR directory
 #
-install(TARGETS example02 DESTINATION ${CMAKE_INSTALL_LIBDIR})
-
+if (VMC_INSTALL_EXAMPLES)
+  install(TARGETS example02 DESTINATION ${CMAKE_INSTALL_LIBDIR})
+endif()
+ 
 #----------------------------------------------------------------------------
 # MC Configuration file
 # (for building MC dependent code)
@@ -104,4 +106,6 @@ add_custom_target(E02 DEPENDS exampleE02 testE02)
 #----------------------------------------------------------------------------
 # Install the executables to 'bin'
 #
-install(TARGETS exampleE02 testE02 DESTINATION bin)
+if (VMC_INSTALL_EXAMPLES)
+  install(TARGETS exampleE02 testE02 DESTINATION bin)
+endif()

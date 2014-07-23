@@ -71,4 +71,6 @@ add_custom_target(g4E03 DEPENDS geant4e03)
 #----------------------------------------------------------------------------
 # Install the library to 'lib' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS geant4e03 DESTINATION ${CMAKE_INSTALL_LIBDIR})
+if (VMC_INSTALL_EXAMPLES)
+  install(TARGETS geant4e03 DESTINATION ${CMAKE_INSTALL_LIBDIR})
+endif()
