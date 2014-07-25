@@ -47,16 +47,19 @@ void loadg4libs()
   //cout << all_lines_t.Data() << endl;
   TObjArray* libs = all_lines_t.Tokenize(" ");
 
-/*
-  TString dynamicPath = gSystem->GetDynamicPath();
-  TString addPath = ((TObjString*)libs->At(0))->GetString();
-  addPath.Remove(0,2);
-  //cout << "Adding dynamic path " << addPath.Data() << endl; 
-  gSystem->AddDynamicPath(addPath.Data());
-*/  
+  //TString dynamicPath = gSystem->GetDynamicPath();
+  for (Int_t i=libs->GetEntriesFast()-1; i>=0; i-- ) {
+    TString addPath = ((TObjString*)libs->At(i))->GetString();
+    if (addPath.BeginsWith("-L")) {
+      addPath.Remove(0,2);
+      addPath.ReplaceAll("\"", "");
+      //cout << "Adding dynamic path " << addPath.Data() << endl;
+      gSystem->AddDynamicPath(addPath.Data());
+    }
+  }
 
   cout << libs->GetEntriesFast() << endl;
-  for (Int_t i=libs->GetEntriesFast()-1; i>0; i-- ) {
+  for (Int_t i=libs->GetEntriesFast()-1; i>=0; i-- ) {
     TString lib = ((TObjString*)libs->At(i))->GetString();
     lib.ReplaceAll("-l", "lib");
     //cout << "Loading |" << lib.Data() << "|" << endl; 
