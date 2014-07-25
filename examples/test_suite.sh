@@ -13,7 +13,7 @@
 #
 # Run tests for all VMC examples and regenerate output files
 # Usage:
-# test_suite.sh [--g3=on|off] [--g4=on|off]
+# test_suite.sh [--g3=on|off] [--g4=on|off][--builddir=dir]
 #
 # By I. Hrivnacova, IPN Orsay
 
@@ -25,6 +25,7 @@ FAILED="0"
 # Set 1 to 0 if you want to skip given MC
 TESTG3=1
 TESTG4=1
+BUILDDIR=""
 
 # Process script arguments
 for arg in "${@}"
@@ -35,9 +36,10 @@ do
     "--g3=off" ) TESTG3=0 ;;
     "--g4=on"  ) TESTG4=1 ;;
     "--g4=off" ) TESTG4=0 ;;
+     --builddir=* ) BUILDDIR=${arg#--builddir=} ;;
     * ) echo "Unsupported option $arg chosen."
         echo "Usage:"
-        echo "test_suite.sh [--g3=on|off] [--g4=on|off]"
+        echo "test_suite.sh [--g3=on|off] [--g4=on|off] [--builddir=dir]"
         exit 1
         ;;
   esac
@@ -46,7 +48,13 @@ done
 # Recreate log directory only if running test for both G3 and G4
 if [ "$TESTG3" = "1" -a  "$TESTG4" = "1" ]; then
   rm -fr $OUTDIR
-fi  
+fi
+
+# Set path to shared libraries if --builddir is provided via the option
+if [ "x${BUILDDIR}" != "x" ]; then
+  LIBS_FROM_BUILDDIR=$(find ${BUILDDIR} -iname "*.so" -exec dirname {} \; | tr '\r\n' ':')
+  export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${LIBS_FROM_BUILDDIR}
+fi
 
 for EXAMPLE in E01 E02 E03 E06 A01
 do
