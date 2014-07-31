@@ -395,15 +395,15 @@ void TG4RegionsManager::CheckRegionsRanges() const
       = productionCutsTable->GetMaterialCutsCouple(i);
       
     const G4Material* material = couple ->GetMaterial();  
-    G4ProductionCuts* cuts = couple ->GetProductionCuts(); 
-    
+    G4ProductionCuts* cuts = couple ->GetProductionCuts();
+
     G4double rangeGam = cuts->GetProductionCut(0);
     G4double rangeEle = cuts->GetProductionCut(1);
-    if ( couple->IsRecalcNeeded() ) {
-      TG4Globals::Warning("TG4RegionsManager", "CheckRegions", 
-         "Recalculation is needed - cannot perform check"); 
-      return;   
-    }
+    //if ( couple->IsRecalcNeeded() ) {
+    //  TG4Globals::Warning("TG4RegionsManager", "CheckRegions",
+    //     "Recalculation is needed - cannot perform check");
+    //  return;
+    //}
 
     const std::vector<G4double>* energyCutsGam 
       = productionCutsTable->GetEnergyCutsVector(0);
@@ -688,11 +688,11 @@ void TG4RegionsManager::PrintRegions() const
     
     G4double rangeGam = cuts->GetProductionCut(0);
     G4double rangeEle = cuts->GetProductionCut(1);
-    if ( couple->IsRecalcNeeded() ) {
-      TG4Globals::Warning("TG4RegionsManager", "CheckRegions", 
-         "Recalculation is needed - cannot perform check"); 
-      return;   
-    }
+    //if ( couple->IsRecalcNeeded() ) {
+    //  TG4Globals::Warning("TG4RegionsManager", "CheckRegions",
+    //     "Recalculation is needed - cannot perform check");
+    //  return;
+    //}
 
     const std::vector<G4double>* energyCutsGam 
       = productionCutsTable->GetEnergyCutsVector(0);
@@ -775,7 +775,8 @@ void TG4RegionsManager::DumpRegion(const G4String& volName) const
     
   const G4MaterialCutsCouple* couple
     = productionCutsTable->GetMaterialCutsCouple(lv->GetMaterial(), cuts);
-  if ( ! couple || couple->IsRecalcNeeded() ) {   
+  // if ( ! couple || couple->IsRecalcNeeded() ) {
+  if ( ! couple ) {
     G4cout << " not ready to print" << G4endl;
     return;
   } 
