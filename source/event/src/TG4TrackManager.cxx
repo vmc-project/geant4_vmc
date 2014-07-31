@@ -425,4 +425,4 @@ G4bool TG4TrackManager::IsUserTrack(const G4Track* track) const
 
   return  
    GetTrackInformation(track) != 0x0 && GetTrackInformation(track)->IsUserTrack();
-}   
+}

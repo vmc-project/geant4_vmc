@@ -76,7 +76,8 @@ class TG4RunConfiguration
     TG4RunConfiguration(const TString& userGeometry,
                         const TString& physicsList = "emStandard",
                         const TString& specialProcess = "stepLimiter",
-                        Bool_t specialStacking = false);
+                        Bool_t specialStacking = false,
+                        Bool_t mtApplication = true);
     virtual ~TG4RunConfiguration();
 
     // methods 
@@ -93,12 +94,16 @@ class TG4RunConfiguration
     
     virtual TG4VUserRegionConstruction*  CreateUserRegionConstruction();
 
+    // set methods
+    void  SetMTApplication(Bool_t mtApplication);
+
     // get methods
     TString  GetUserGeometry() const;
     TString  GetPhysicsListSelection() const;
     Bool_t   IsSpecialStacking() const;
     Bool_t   IsSpecialControls() const;
     Bool_t   IsSpecialCuts() const;
+    Bool_t   IsMTApplication() const;
 
   protected:
     // data members
@@ -106,6 +111,7 @@ class TG4RunConfiguration
     TString        fPhysicsListSelection;   ///< physics list selection
     TString        fSpecialProcessSelection;///< special process selection
     Bool_t         fSpecialStacking;        ///< option for special stacking
+    Bool_t         fMTApplication;          ///< option for MT mode if available
     Bool_t         fSpecialControls;        ///< option for special controls
     Bool_t         fSpecialCuts;            ///< option for special cuts
     G4UImessenger* fAGDDMessenger;          //!< XML messenger

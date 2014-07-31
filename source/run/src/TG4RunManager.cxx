@@ -192,16 +192,21 @@ void TG4RunManager::ConfigureRunManager()
 #endif
 
   // G4 run manager
-#ifdef G4MULTITHREADED  
-  fRunManager = new G4MTRunManager(); 
-  fRunManager
-    ->SetUserInitialization(new TG4WorkerInitialization());   
-#else    
+#ifdef G4MULTITHREADED
+  if (  fRunConfiguration->IsMTApplication() ) {
+     fRunManager = new G4MTRunManager();
+     fRunManager
+       ->SetUserInitialization(new TG4WorkerInitialization());
+   }
+   else {
+     fRunManager =  new G4RunManager();
+   }
+#else
   fRunManager =  new G4RunManager();
 #endif
   if (VerboseLevel() > 1) {
     G4cout << "G4RunManager has been created." << G4endl;
-  }  
+  }
 
   if ( userGeometry != "VMCtoRoot" && userGeometry != "Root" ) {
     fRunManager
@@ -211,10 +216,11 @@ void TG4RunManager::ConfigureRunManager()
   }    
   else {
 #ifdef USE_G4ROOT
-#ifdef G4MULTITHREADED
-    G4int nthreads = G4MTRunManager::GetMasterRunManager()->GetNumberOfThreads();
-#else
     G4int nthreads = 1;
+#ifdef G4MULTITHREADED
+    if (  fRunConfiguration->IsMTApplication() ) {
+      nthreads = G4MTRunManager::GetMasterRunManager()->GetNumberOfThreads();
+    }
 #endif
     rootNavMgr->Initialize(new TG4PostDetConstruction(), nthreads);
     rootNavMgr->ConnectToG4();  

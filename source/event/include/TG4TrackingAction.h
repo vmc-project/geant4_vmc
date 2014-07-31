@@ -64,6 +64,11 @@ class TG4TrackingAction : public G4UserTrackingAction,
     void SetNewVerboseTrackID(G4int trackID);
     void SetSpecialControls(TG4SpecialControlsV2* specialControls);
 
+    // get methods
+    G4int GetNewVerboseLevel() const;
+    G4int GetNewVerboseTrackID() const;
+    TG4TrackManager* GetTrackManager() const;
+
   private:
     /// Not implemented
     TG4TrackingAction(const TG4TrackingAction& right);

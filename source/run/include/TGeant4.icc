@@ -435,7 +435,8 @@ inline Int_t TGeant4::StepProcesses(TArrayI &proc) const
 //_____________________________________________________________________________
 inline Bool_t TGeant4::IsMT() const
 {
-/// Returns true is Geant4 is built in multi-threading mode
+/// Returns true if Geant4 is built in multi-threading mode and
+/// MT mode is not inactivated in runConfiguration.
 
-  return ( G4Threading::G4GetThreadId() != -2 ); 
+  return fIsMT;
 }

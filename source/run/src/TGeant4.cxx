@@ -170,8 +170,8 @@ TGeant4::TGeant4(const char* name, const char* title,
     fMediumCounter(0),
     fMaterialCounter(0),
     fMatrixCounter(0),
-    fUserGeometry(configuration->GetUserGeometry())
-    
+    fUserGeometry(configuration->GetUserGeometry()),
+    fIsMT(configuration->IsMTApplication())
 {
 /// Standard constructor
 
@@ -182,6 +182,11 @@ TGeant4::TGeant4(const char* name, const char* title,
     fgMasterInstance = this; 
     fgMasterApplicationInstance = TVirtualMCApplication::Instance();
   }   
+
+  // Inactivate MT mode if Geant4 is built in sequential mode
+  if ( G4Threading::G4GetThreadId() == -2 ) {
+    fIsMT = false;
+  }
 
   // Update title with a physics selection
   TString newTitle = title;

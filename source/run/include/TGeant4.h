@@ -383,6 +383,7 @@ class TGeant4: public TVirtualMC
     Int_t                fMaterialCounter; ///< global material counter
     Int_t                fMatrixCounter;   ///< global matrix counter
     TString              fUserGeometry;    ///< user geometry
+    Bool_t               fIsMT;            ///< multi-threading mode
 
   ClassDef(TGeant4,0) // Geant4 implementation of the TVirtualMC interface 
 };

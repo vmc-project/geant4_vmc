@@ -49,7 +49,8 @@ class TG4EventAction : public G4UserEventAction,
     
     // get methods
     G4bool  GetPrintMemory() const;
-    
+    G4bool  GetSaveRandomStatus() const;
+
   private:
     /// Not implemented
     TG4EventAction(const TG4EventAction& right);
@@ -77,10 +78,15 @@ inline G4bool TG4EventAction::GetPrintMemory() const {
   return fPrintMemory;
 }
 
+inline G4bool TG4EventAction::GetSaveRandomStatus() const {
+  /// Return the option for printing memory usage
+  return fSaveRandomStatus;
+}
+
 inline void TG4EventAction::SetSaveRandomStatus(G4bool saveRandomStatus) {
   /// Set option for saving random engine status for each event
   fSaveRandomStatus = saveRandomStatus;
-}  
+}
 
 #endif //TG4_EVENT_ACTION_H
 

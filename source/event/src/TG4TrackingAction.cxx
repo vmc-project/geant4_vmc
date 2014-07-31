@@ -317,3 +317,27 @@ void TG4TrackingAction::SetNewVerboseTrackID(G4int trackID)
 
   fNewVerboseTrackID = trackID; 
 }
+
+//_____________________________________________________________________________
+G4int TG4TrackingAction::GetNewVerboseLevel() const
+{
+/// Return new /tracking/verbose level
+
+  return fNewVerboseLevel;
+}
+
+//_____________________________________________________________________________
+G4int TG4TrackingAction::GetNewVerboseTrackID() const
+{
+/// Return track ID for which the new verbose level is applied
+
+  return fNewVerboseTrackID;
+}
+
+//_____________________________________________________________________________
+TG4TrackManager* TG4TrackingAction::GetTrackManager() const
+{
+/// Return track manager
+
+  return fTrackManager;
+}

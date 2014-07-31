@@ -43,11 +43,13 @@
 TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
                                          const TString& physicsList,
                                          const TString& specialProcess,
-                                         Bool_t specialStacking)
+                                         Bool_t specialStacking,
+                                         Bool_t mtApplication)
   : fUserGeometry(userGeometry),
     fPhysicsListSelection(physicsList),
     fSpecialProcessSelection(),
     fSpecialStacking(specialStacking),
+    fMTApplication(mtApplication),
     fSpecialControls(false),
     fSpecialCuts(false),
     fAGDDMessenger(0),
@@ -293,6 +295,14 @@ TG4VUserRegionConstruction*  TG4RunConfiguration::CreateUserRegionConstruction()
 }    
 
 //_____________________________________________________________________________
+void  TG4RunConfiguration::SetMTApplication(Bool_t mtApplication)
+{
+/// Select running application in MT mode, if available.
+
+  fMTApplication = mtApplication;
+}
+
+//_____________________________________________________________________________
 TString TG4RunConfiguration::GetUserGeometry() const
 {
 /// Return the way user geometry is built
@@ -328,3 +338,10 @@ Bool_t TG4RunConfiguration::IsSpecialCuts() const
   return fSpecialCuts;
 }  
 
+//_____________________________________________________________________________
+Bool_t  TG4RunConfiguration::IsMTApplication() const
+{
+/// Return true if running in multi-threading mode is activated
+
+  return fMTApplication;
+}

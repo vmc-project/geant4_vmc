@@ -22,9 +22,19 @@
 
 class TG4RunConfiguration;
 class TG4SpecialControlsV2;
+class TG4TrackingAction;
+class TG4SteppingAction;
+
+class G4UserEventAction;
+class TG4UserStackingAction;
 
 /// \ingroup run
 /// \brief Action Initialization class (required for MT mode)
+///
+/// Besides all user action classes it instantiates also their
+/// messenger classes to make their associated commands available in
+/// PreInit phase (as in MT mode creation of user action classes
+/// is delayed.)
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -53,6 +63,11 @@ class TG4ActionInitialization : public G4VUserActionInitialization
 
     //  data members
     TG4RunConfiguration*  fRunConfiguration; ///< run configuration
+
+    G4UserEventAction*    fEventAction;    ///< event action
+    TG4TrackingAction*    fTrackingAction; ///< tracking action
+    TG4SteppingAction*    fSteppingAction; ///< steping action
+    G4UserStackingAction* fStackingAction; ///< stacking action
 };
 
 #endif //TG4_ACTION_INITIALIZATION_H
