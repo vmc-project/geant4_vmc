@@ -16,10 +16,9 @@
 # Verbose levels
 #
 /mcVerbose/all 1
+/mcVerbose/trackingAction 0
 /mcVerbose/geometryManager 1
-# not available in pre-init
-#/mcVerbose/trackingAction 0
-#/mcVerbose/extraPhysicsList 2
+/mcVerbose/extraPhysicsList 2
 
 /control/cout/ignoreThreadsExcept 0
 

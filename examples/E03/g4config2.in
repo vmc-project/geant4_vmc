@@ -17,7 +17,5 @@
 /mcVerbose/all 0
 /mcVerbose/runAction 1
 
-/run/particle/applyCuts
-
 #/tracking/verbose 1
 

@@ -14,16 +14,13 @@
 # (called from Root macro g4Config.C)
 
 /mcVerbose/all 1
-#/mcVerbose/runAction 1
+/mcVerbose/runAction 1
 /mcVerbose/composedPhysicsList 1
+/mcVerbose/trackingAction 0
+/mcVerbose/eventAction 0
 #/mcVerbose/trackManager 2
-# not available in pre-init
-#/mcVerbose/trackingAction 0
-#/mcVerbose/eventAction 0
 
 /control/cout/ignoreThreadsExcept 0
-
-/run/particle/applyCuts
 
 #/tracking/verbose 1
 
