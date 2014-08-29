@@ -43,12 +43,14 @@ Macros:
 
   For running example with G3:
   
-  run_g3.C        - macro for running example 
+  load_g3.C       - macro to load the libraries to run the example with Geant3
+  run_g3.C        - macro for running example
   g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry(default)
 
   For running example with G4:
   
-  run_g4.C        - macro for running example 
+  load_g4.C       - macro to load the libraries to run the example with Geant
+  run_g4.C        - macro for running example
   g4Config.C      - configuration macro - geometry option geomRootToGeant4 (default)
   g4Config1.C     - configuration macro - geometry defined via Geant4 (geomGeant4)
   g4tgeoConfig.C  - configuration macro - G4 with TGeo navigation 
@@ -63,16 +65,20 @@ To run example
 ---------------
   
   With G3 + TGeo:
-  root[0] .x run_g3.C
-  
+  root[0] .x load_g3.C
+  root[1] .x run_g3.C
+
   With G4:
-  root[0] .x run_g4.C  
+  root[0] .x load_g4.C
+  root[1] .x run_g4.C
 
   With G4 + TGeo navigation:
-  root[0] .x run_g4.C("g4tgeoConfig.C");   
+  root[0] .x load_g4.C
+  root[1] .x run_g4.C("g4tgeoConfig.C");
 
   With G4 with geometry defined via Geant4:
-  root[0] .x run_g4.C("g4Config1.C"); 
+  root[0] .x load_g4.C
+  root[1] .x run_g4.C("g4Config1.C");
 
   Note that as geometry is defined via TGeo or native Geant4,
   the example cannot be run with TGeant3 with its native geometry.
