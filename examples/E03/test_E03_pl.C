@@ -2,7 +2,7 @@
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2011 Ivana Hrivnacova
+// Copyright (C) 2007-2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -19,13 +19,12 @@ void test_E03_pl(const TString& configMacro = "g4ConfigEnv.C")
 /// Root interactive session
 /// \param configMacro configuration macro name, default \ref E03/g4Config.C 
 
-  // Load application if it does not yet exist
+  // Create application if it does not yet exist
   Bool_t needDelete = kFALSE;
   if ( ! TVirtualMCApplication::Instance() ) {
-    gROOT->LoadMacro("./test_E03_load.C");
-    test_E03_load(configMacro, oldGeometry);
+    new Ex03MCApplication("Example03", "The example03 MC application");
     needDelete = kTRUE;
-  }
+  }  
  
   // MC application
   Ex03MCApplication* appl 
@@ -35,4 +34,5 @@ void test_E03_pl(const TString& configMacro = "g4ConfigEnv.C")
   appl->RunMC(1);
   
   if ( needDelete ) delete appl;
-}  
+}
+

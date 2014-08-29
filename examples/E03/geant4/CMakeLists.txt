@@ -69,8 +69,14 @@ target_link_libraries(geant4e03 ${MC_LIBRARIES})
 add_custom_target(g4E03 DEPENDS geant4e03)
 
 #----------------------------------------------------------------------------
-# Install the library to 'lib' directory under CMAKE_INSTALL_PREFIX
+# Install the library and dictionary map (if Root 6.x)
+# to CMAKE_INSTALL_LIBDIR directory
 #
 if (VMC_INSTALL_EXAMPLES)
   install(TARGETS geant4e03 DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  # dictionary map (only if ROOT 6.x)
+  if (${ROOT_FOUND_VERSION} GREATER 59999)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/geant4e03Dict_rdict.pcm
+      DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  endif()
 endif()

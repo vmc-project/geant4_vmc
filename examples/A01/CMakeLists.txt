@@ -75,10 +75,16 @@ add_library(exampleA01 ${sources} exampleA01Dict.cxx ${headers})
 target_link_libraries(exampleA01 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
-# Install the library to CMAKE_INSTALL_LIBDIR directory
+# Install the library and dictionary map (if Root 6.x)
+# to CMAKE_INSTALL_LIBDIR directory
 #
 if (VMC_INSTALL_EXAMPLES)
   install(TARGETS exampleA01 DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  # dictionary map (only if ROOT 6.x)
+  if (${ROOT_FOUND_VERSION} GREATER 59999)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/exampleA01Dict_rdict.pcm
+      DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  endif()
 endif()
 
 #----------------------------------------------------------------------------

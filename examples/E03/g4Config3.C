@@ -21,9 +21,6 @@ void Config()
 /// called during MC application initialization. 
 /// It demonstrates activation of user defined regions.
 
-  // Load library with a user run configuration
-  gSystem->Load("libgeant4e03");
-
   // Run configuration with user defined regions
   Ex03RunConfiguration3* runConfiguration 
     = new Ex03RunConfiguration3("geomRootToGeant4", "FTFP_BERT");

@@ -153,7 +153,14 @@ install(DIRECTORY
   ${PROJECT_SOURCE_DIR}/run/include/
   ${PROJECT_SOURCE_DIR}/visualization/include/ 
   DESTINATION include/geant4vmc)
-install(TARGETS geant4vmc EXPORT Geant4VMCTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(TARGETS geant4vmc EXPORT Geant4VMCTargets
+  DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+# Install dictionary map (only if ROOT 6.x
+if (${ROOT_FOUND_VERSION} GREATER 59999)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/geant4vmcDict_rdict.pcm
+    DESTINATION ${CMAKE_INSTALL_LIBDIR})
+endif()
 
 #--- Build project configuration -----------------------------------------------
 include(Geant4VMCBuildProject)

@@ -2,7 +2,7 @@
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2012 Ivana Hrivnacova
+// Copyright (C) 2007-2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -22,11 +22,10 @@ void test_A01(const TString& configMacro, Bool_t oldGeometry)
 /// \param oldGeometry  if true - geometry is defined via VMC, otherwise 
 ///                     via TGeo
 
-  // Load application if it does not yet exist
+  // Create application if it does not yet exist
   Bool_t needDelete = kFALSE;
   if ( ! TVirtualMCApplication::Instance() ) {
-    gROOT->LoadMacro("./test_A01_load.C");
-    test_A01_load(configMacro, oldGeometry);
+    new A01MCApplication("ExampleA01", "The exampleA01 MC application");
     needDelete = kTRUE;
   }  
 

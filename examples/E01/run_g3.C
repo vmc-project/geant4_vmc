@@ -2,7 +2,7 @@
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007, 2008 Ivana Hrivnacova
+// Copyright (C) 2007-2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -16,19 +16,10 @@
 void run_g3(const TString& configMacro = "g3tgeoConfig.C") 
 {
 /// Macro function for running Example01 with Geant3 from
-/// Root interactive session
+/// Root interactive session.
+/// Note that since Root 6 the libraries have to be loaded first
+/// via load_g3.C.
 /// \param configMacro configuration macro name, default \ref E01/g3Config.C 
-
-  // Load basic libraries
-  gROOT->LoadMacro("../macro/basiclibs.C");
-  basiclibs();
-  
-  // Load Geant3 libraries
-  gROOT->LoadMacro("../macro/g3libs.C");
-  g3libs();
-  
-  // Load this example library
-  gSystem->Load("libexample01");
 
   // MC application
   Ex01MCApplication* appl 

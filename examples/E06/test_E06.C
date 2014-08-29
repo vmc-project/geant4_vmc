@@ -21,11 +21,10 @@ void test_E06(const TString& configMacro, Bool_t oldGeometry)
 ///                     via TGeo
 
 
-  // Load application if it does not yet exist
+  // Create application if it does not yet exist
   Bool_t needDelete = kFALSE;
   if ( ! TVirtualMCApplication::Instance() ) {
-    gROOT->LoadMacro("./test_E06_load.C");
-    test_E06_load(configMacro, oldGeometry);
+    new Ex06MCApplication("Example06", "The example06 MC application");
     needDelete = kTRUE;
   }  
 

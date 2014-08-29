@@ -23,9 +23,6 @@ void Config()
 /// For geometry defined with Root, selected Geant4 native navigation
 /// and a user defined physics list in a user run configuration
 
-  // Load library with a user run configuration
-  gSystem->Load("libgeant4e03");
-
   // Run configuration with user physics list
   Ex03RunConfiguration2* runConfiguration 
     = new Ex03RunConfiguration2("geomRootToGeant4");

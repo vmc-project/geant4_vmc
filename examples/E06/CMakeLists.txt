@@ -66,10 +66,16 @@ add_library(example06 ${sources} exampleE06Dict.cxx ${headers})
 target_link_libraries(example06 ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
-# Install the library to CMAKE_INSTALL_LIBDIR directory
+# Install the library and dictionary map (if Root 6.x)
+# to CMAKE_INSTALL_LIBDIR directory
 #
 if (VMC_INSTALL_EXAMPLES)
   install(TARGETS example06 DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  # dictionary map (only if ROOT 6.x)
+  if (${ROOT_FOUND_VERSION} GREATER 59999)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/exampleE06Dict_rdict.pcm
+      DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  endif()
 endif()
 
 #----------------------------------------------------------------------------

@@ -22,6 +22,7 @@
 # ROOT_FOUND          If ROOT is found
 # ROOT_INCLUDE_DIRS   PATH to the include directories
 # ROOT_LIBRARIES      the libraries needed to use ROOT
+# ROOT_FOUND_VERSION  ROOT version number with removed separation characters
 
 #message(STATUS "Looking for ROOT ...")
 
@@ -69,6 +70,13 @@ if(ROOT_CONFIG_EXECUTABLE)
     OUTPUT_VARIABLE ROOT_LIBRARIES
     OUTPUT_STRIP_TRAILING_WHITESPACE)
     set (ROOT_LIBRARIES ${ROOT_LIBRARIES} -lGeom)
+
+  # Extract ROOT_FOUND_VERSION easier to compare in cmake
+  string(SUBSTRING ${ROOT_VERSION} 0 1 ROOT_MAJOR_VERSION)
+  string(SUBSTRING ${ROOT_VERSION} 2 2 ROOT_MINOR_VERSION)
+  string(SUBSTRING ${ROOT_VERSION} 5 2 ROOT_PATCH_VERSION)
+  MATH(EXPR ROOT_FOUND_VERSION
+       "${ROOT_MAJOR_VERSION}*10000 + ${ROOT_MINOR_VERSION}*100 + ${ROOT_PATCH_VERSION}")
 endif()
 
 # If search for root-config failed try to use directly user paths if set
@@ -104,6 +112,7 @@ mark_as_advanced(ROOT_INCLUDE_DIRS)
 mark_as_advanced(ROOT_LIBRARIES)
 mark_as_advanced(ROOT_LIBRARY_DIR)
 mark_as_advanced(ROOT_CONFIG_EXECUTABLE)
+mark_as_advanced(ROOT_FOUND_VERSION)
 
 #----------------------------------------------------------------------------
 # Dictionary generation

@@ -36,8 +36,7 @@ void g3libs()
 {
 /// Macro function for loading Geant3 libraries
 
-  cout << "Loading Geant3 libraries ..." << endl;
-
+  // Load libraries required by Geant3
   gSystem->Load("libEG");
   gSystem->Load("libEGPythia6");
   gSystem->Load("libPythia6");  
@@ -46,6 +45,7 @@ void g3libs()
      gSystem->Load("libdummies.so");
                    // libdummies.so needed from geant3_+vmc version 0.5
 
+  // Load  geant3 library
   gSystem->Load("libgeant321.so");
 
   cout << "Loading Geant3 libraries ... finished" << endl;

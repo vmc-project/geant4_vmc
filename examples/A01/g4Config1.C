@@ -21,9 +21,6 @@ void Config()
 /// called during MC application initialization. 
 /// For geometry defined with Geant4 in a user run configuration.
 
-  // Load library with a user run configuration
-  gSystem->Load("libgeant4a01");
-
   // Run configuration with user geometry construction via Geant4
   A01RunConfiguration* runConfiguration 
     = new A01RunConfiguration("FTFP_BERT");
