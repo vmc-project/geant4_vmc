@@ -80,7 +80,6 @@ Ex01MCApplication::~Ex01MCApplication()
   delete fStack;
   delete fMagField;
   delete gMC;
-  gMC = 0;
 }
 
 //
