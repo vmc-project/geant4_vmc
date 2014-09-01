@@ -44,7 +44,9 @@ include_directories(
 # Generate Root dictionaries
 #
 ROOT_GENERATE_DICTIONARY(
+  ${CMAKE_SHARED_LIBRARY_PREFIX}example02
   exampleE02Dict
+  no_rootmap
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex02MCApplication.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex02MCStack.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex02Particle.h

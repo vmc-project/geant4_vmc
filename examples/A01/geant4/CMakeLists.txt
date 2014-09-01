@@ -43,7 +43,9 @@ include_directories(
 # Generate Root dictionaries
 #
 ROOT_GENERATE_DICTIONARY(
+  ${CMAKE_SHARED_LIBRARY_PREFIX}geant4a01
   geant4a01Dict
+  no_rootmap
   ${CMAKE_CURRENT_SOURCE_DIR}/include/A01RunConfiguration.h
   LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/geant4a01LinkDef.h)
 

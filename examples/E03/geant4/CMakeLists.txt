@@ -43,7 +43,9 @@ include_directories(
 # Generate Root dictionaries
 #
 ROOT_GENERATE_DICTIONARY(
+  ${CMAKE_SHARED_LIBRARY_PREFIX}geant4e03
   geant4e03Dict
+  no_rootmap
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03RunConfiguration1.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03RunConfiguration2.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03RunConfiguration3.h

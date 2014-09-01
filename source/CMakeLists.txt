@@ -119,7 +119,9 @@ include_directories(
 # Generate Root dictionaries
 #
 ROOT_GENERATE_DICTIONARY(
+  ${CMAKE_SHARED_LIBRARY_PREFIX}geant4vmc
   geant4vmcDict
+  with_rootmap
   ${CMAKE_CURRENT_SOURCE_DIR}/run/include/TG4RunConfiguration.h
   ${CMAKE_CURRENT_SOURCE_DIR}/run/include/TGeant4.h
   LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/geant4vmcLinkDef.h)
@@ -160,7 +162,9 @@ install(TARGETS geant4vmc EXPORT Geant4VMCTargets
 
 # Install dictionary map (only if ROOT 6.x
 if (${ROOT_FOUND_VERSION} GREATER 59999)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/geant4vmcDict_rdict.pcm
+  install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/geant4vmcDict_rdict.pcm
+    ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}geant4vmc.rootmap
     DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()
 

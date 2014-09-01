@@ -44,7 +44,9 @@ include_directories(
 # Generate Root dictionaries
 #
 ROOT_GENERATE_DICTIONARY(
+  ${CMAKE_SHARED_LIBRARY_PREFIX}example06
   exampleE06Dict
+  no_rootmap
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex06MCApplication.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03MCStack.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex06DetectorConstruction.h
