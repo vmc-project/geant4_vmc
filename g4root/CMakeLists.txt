@@ -51,7 +51,9 @@ if(NOT Geant4_FOUND)
   endif()
   find_package(Geant4 REQUIRED ${_components})
 endif()
-include(${Geant4_USE_FILE})
+# Workaround for upstream bug: http://bugzilla-geant4.kek.jp/show_bug.cgi?id=1663
+#include(${Geant4_USE_FILE})
+include(UseGeant4)
 
 #--- Utility to defined installation lib directory -----------------------------
 if("${CMAKE_INSTALL_LIBDIR}" MATCHES "")

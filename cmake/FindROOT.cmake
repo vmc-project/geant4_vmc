@@ -97,6 +97,10 @@ if (NOT ROOT_FOUND)
 endif()    
 
 if(ROOT_FOUND)
+  # ROOT 6 requires C++11 support
+  if (ROOT_FOUND_VERSION GREATER 59999)
+     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+  endif()
   set(LD_LIBRARY_PATH ${LD_LIBRARY_PATH} ${ROOT_LIBRARY_DIR})
   if(NOT ROOT_FIND_QUIETLY)
     message(STATUS "Found ROOT ${ROOT_VERSION} in ${ROOT_PREFIX}")
