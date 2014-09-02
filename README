@@ -76,15 +76,18 @@ Geant4 VMC Build Options
 
   Overview of available options and their default values:
 
-    Geant4VMC_BUILD_G4Root       Build G4Root     ON
-    Geant4VMC_BUILD_MTRoot       Build MTRoot     ON
-    Geant4VMC_BUILD_Geant4VMC    Build Geant4VMC  ON
+    Geant4VMC_BUILD_G4Root       Build G4Root        ON
+    Geant4VMC_BUILD_MTRoot       Build MTRoot        ON
+    Geant4VMC_BUILD_Geant4VMC    Build Geant4VMC     ON
+    Geant4VMC_BUILD_EXAMPLES     Build VMC examples  ON
 
     Geant4VMC_USE_G4Root         Build with G4Root                ON
     Geant4VMC_USE_VGM            Build with VGM                   OFF
     Geant4VMC_USE_GEANT4_UI      Build with Geant4 UI drivers     ON
     Geant4VMC_USE_GEANT4_VIS     Build with Geant4 Vis drivers    ON
     Geant4VMC_USE_GEANT4_G3TOG4  Build with Geant4 G3toG4 library OFF
+
+    Geant4VMC_INSTALL_EXAMPLES   Install examples    ON
 
 
 Required and optional packages:
@@ -126,7 +129,7 @@ Examples
   The VMC examples libraries require ROOT installation, the VMC examples programs are built
   against Geant3 with VMC or Geant4 VMC libraries.
   
-  More details about povided confiration macros and tests
+  More details about provided configuration macros and tests
   can be found in examples/README.
 
   The instructions how to build and run examples are provided
