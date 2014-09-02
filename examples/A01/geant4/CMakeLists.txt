@@ -17,7 +17,7 @@ cmake_minimum_required(VERSION 2.6.4 FATAL_ERROR)
 #----------------------------------------------------------------------------
 # Project g4A01
 #
-project(g4A01)
+project(geant4A01)
 
 #----------------------------------------------------------------------------
 # CMake Module Path
@@ -43,40 +43,39 @@ include_directories(
 # Generate Root dictionaries
 #
 ROOT_GENERATE_DICTIONARY(
-  ${CMAKE_SHARED_LIBRARY_PREFIX}geant4a01
-  geant4a01Dict
+  ${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}
   no_rootmap
   ${CMAKE_CURRENT_SOURCE_DIR}/include/A01RunConfiguration.h
-  LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/geant4a01LinkDef.h)
+  LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}LinkDef.h)
 
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
 # NB: headers are included so they will show up in IDEs
 #
-file(GLOB sources geant4a01Dict.cxx ${PROJECT_SOURCE_DIR}/src/*.cxx)
-file(GLOB headers geant4a01Dict.h ${PROJECT_SOURCE_DIR}/include/*.h)
+file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cxx)
+file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 
 #----------------------------------------------------------------------------
 # Add the example library
 #
-add_library(geant4a01 ${sources} geant4a01Dict.cxx ${headers})
-target_link_libraries(geant4a01 ${MC_LIBRARIES})
+add_library(${g4library_name} ${sources} ${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}_dict.cxx ${headers})
+target_link_libraries(${g4library_name} ${VMC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets
 # (this avoids the need of typing the program name after make)
 #
-add_custom_target(g4A01 DEPENDS geant4a01)
+add_custom_target(${PROJECT_NAME} DEPENDS ${g4library_name})
 
 #----------------------------------------------------------------------------
 # Install the library and dictionary map (if Root 6.x)
 # to CMAKE_INSTALL_LIBDIR directory
 #
 if (VMC_INSTALL_EXAMPLES)
-  install(TARGETS geant4a01 DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  install(TARGETS ${g4library_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
   # dictionary map (only if ROOT 6.x)
   if (${ROOT_FOUND_VERSION} GREATER 59999)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/geant4a01Dict_rdict.pcm
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}_dict_rdict.pcm
       DESTINATION ${CMAKE_INSTALL_LIBDIR})
   endif()
 endif()

@@ -131,7 +131,7 @@ find_program(ROOTCINT_EXECUTABLE rootcint PATHS
 #---------------------------------------------------------------------------------------------------
 #---ROOT_GENERATE_DICTIONARY( dictionary headerfiles LINKDEF linkdef OPTIONS opt1 opt2 ...)
 #---------------------------------------------------------------------------------------------------
-function(ROOT_GENERATE_DICTIONARY libname dictionary with_rootmap)
+function(ROOT_GENERATE_DICTIONARY libname with_rootmap)
   PARSE_ARGUMENTS(ARG "LINKDEF;OPTIONS" "" ${ARGN})
   #---Get the list of header files-------------------------
   set(headerfiles)
@@ -188,19 +188,17 @@ function(ROOT_GENERATE_DICTIONARY libname dictionary with_rootmap)
     endif()
   endforeach()
   #---call rootcint / cling --------------------------------
-  set(OUTPUT_FILES ${dictionary}.cxx ${dictionary}.h)
+  set(OUTPUT_FILES ${libname}_dict.cxx ${libname}_dict.h)
   set(EXTRA_DICT_PARAMETERS "")
   if (ROOT_FOUND_VERSION GREATER 59999)
-    set(OUTPUT_FILES ${OUTPUT_FILES} ${dictionary}_rdict.pcm ${libname}.rootmap)
+    set(OUTPUT_FILES ${OUTPUT_FILES} ${libname}_rdict.pcm ${libname}.rootmap)
     set(EXTRA_DICT_PARAMETERS ${EXTRA_DICT_PARAMETERS}
         -inlineInputHeader -rmf ${libname}.rootmap
         -rml ${libname}${CMAKE_SHARED_LIBRARY_SUFFIX})
   endif()
   add_custom_command(
     OUTPUT ${OUTPUT_FILES}
-    COMMAND ${ROOTCINT_EXECUTABLE} -cint -f ${dictionary}.cxx ${EXTRA_DICT_PARAMETERS}
+    COMMAND ${ROOTCINT_EXECUTABLE} -cint -f ${libname}_dict.cxx ${EXTRA_DICT_PARAMETERS}
       -c ${ARG_OPTIONS} ${definitions} ${includedirs} ${rheaderfiles} ${_linkdef}
       DEPENDS ${headerfiles} ${_linkdef} ${ROOTCINTDEP})
 endfunction()
-
-

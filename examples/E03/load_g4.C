@@ -21,8 +21,8 @@ void load_g4()
 
   // Load this example library
   gSystem->Load("libmtroot");
-  gSystem->Load("libexample03");
+  gSystem->Load("libvmc_E03");
 
   // Load library with a user run configuration
-  gSystem->Load("libgeant4e03");
+  gSystem->Load("libgeant4_E03");
 }  

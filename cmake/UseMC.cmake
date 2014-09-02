@@ -8,8 +8,11 @@
 #-------------------------------------------------
 
 # Configuration file for CMake build for VMC applications.
-# It defines include directories, compile definitions and link libraries
-# (MC_LIBRARIES) for all required and optional packages.
+# It defines:
+# - include directories
+# - compile definitions
+# - link libraries (MC_LIBRARIES) for all required and optional packages
+# - MC_PREFIX - a prefix which can be included in the name of the executables
 #
 # I. Hrivnacova, 26/02/2014
 
@@ -70,7 +73,7 @@ if(VMC_WITH_Geant4)
   endif(VGM_FOUND)
 
   set(MC_LIBRARIES ${MC_LIBRARIES} ${Geant4_LIBRARIES})
-
+  set(MC_PREFIX "g4")
 endif(VMC_WITH_Geant4)
 
 if(VMC_WITH_Geant3)
@@ -83,6 +86,7 @@ if(VMC_WITH_Geant3)
     set(MC_LIBRARIES ${MC_LIBRARIES} ${Pythia6_LIBRARIES} ${Geant3_LIBRARIES})
   else()
     set(MC_LIBRARIES ${Geant3_LIBRARIES} ${MC_LIBRARIES})
+    set(MC_PREFIX "g3")
   endif(Pythia6_FOUND)
     
 endif(VMC_WITH_Geant3)
