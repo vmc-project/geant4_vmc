@@ -21,8 +21,8 @@
 
 CURDIR=`pwd`
 OUTDIR=$CURDIR/log_run_exe
-G3EXEDIR=$CURDIR/../../examples_install_g3/bin
-G4EXEDIR=$CURDIR/../../examples_install_g4/bin
+G3EXEDIR=$CURDIR/../../geant3_install/bin
+G4EXEDIR=$CURDIR/../../geant4_vmc_install/bin
 
 # Set 1 to 0 if you want to skip given MC
 TESTG3=1
@@ -43,18 +43,15 @@ do
   cd $CURDIR/$EXAMPLE
   
   if [ "$TESTG3" = "1" ]; then
-    EXE=$G3EXEDIR"/example"$EXAMPLE
-    echo "... Running example$EXAMPLE with G3"
-    $EXE >& $OUT/example$EXAMPLE.out
+    EXE=$G3EXEDIR"/g3vmc_example"$EXAMPLE
+    echo "... Running g3vmc_example$EXAMPLE"
+    $EXE >& $OUT/g3vmc_example$EXAMPLE.out
   fi  
   
   if [ "$TESTG4" = "1" ]; then
-    EXE=$G4EXEDIR"/example"$EXAMPLE
-    if [ "$EXAMPLE" = "A01" ]; then
-      EXE=$G4EXEDIR"/exe"$EXAMPLE
-    fi
-    echo "... Running example$EXAMPLE with G4"
-    $EXE >& $OUT/example$EXAMPLE.out
+    EXE=$G4EXEDIR"/g4vmc_example"$EXAMPLE
+    echo "... Running g4vmc_example$EXAMPLE"
+    $EXE >& $OUT/g4vmc_example$EXAMPLE.out
   fi  
   echo " "
 done  

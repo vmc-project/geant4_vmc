@@ -81,7 +81,7 @@ do
   
   if [ "$EXAMPLE" != "E03" -a "$EXAMPLE" != "A01" ]; then 
     if [ "$TESTG3" = "1" ]; then
-      EXE=$G3EXEDIR"/test"$EXAMPLE
+      EXE=$G3EXEDIR"/g3vmc_test"$EXAMPLE
       echo "... Running test with G3, geometry via TGeo, TGeo navigation"
       $EXE -g3g TGeant3TGeo -rm "test_$EXAMPLE.C(\"\", kFALSE)" >& $OUT/test_g3_tgeo_tgeo.out
       if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
@@ -95,7 +95,7 @@ do
       if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
     fi  
     if [ "$TESTG4" = "1" ]; then
-      EXE=$G4EXEDIR"/test"$EXAMPLE
+      EXE=$G4EXEDIR"/g4vmc_test"$EXAMPLE
       echo "... Running test with G4, geometry via TGeo, Native navigation"
       $EXE -g4g geomRootToGeant4 -g4vm "" -rm "test_$EXAMPLE.C(\"\", kFALSE)" >& $OUT/test_g4_tgeo_nat.out
       if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
@@ -117,7 +117,7 @@ do
   if [ "$EXAMPLE" = "E03" ]; then 
     # Run all macros + special configuration available only in E03 test
     if [ "$TESTG3" = "1" ]; then
-      EXE=$G3EXEDIR"/test"$EXAMPLE
+      EXE=$G3EXEDIR"/g3vmc_test"$EXAMPLE
       echo "... Running test with G3, geometry via TGeo, TGeo navigation vvv"
       TMP_FAILED="0"
       $EXE -g3g TGeant3TGeo -rm "test_E03_1.C(\"\", kFALSE)" >& $OUT/test_g3_tgeo_tgeo.out
@@ -174,7 +174,7 @@ do
     fi  
     # Run all macros + special configuration available only in E03 test
     if [ "$TESTG4" = "1" ]; then
-      EXE=$G4EXEDIR"/test"$EXAMPLE
+      EXE=$G4EXEDIR"/g4vmc_test"$EXAMPLE
       echo "... Running test with G4, geometry via TGeo, Native navigation"
       TMP_FAILED="0"
       $EXE -g4g geomRootToGeant4 -g4vm "" -rm "test_E03_1.C(\"\", kFALSE)" >& $OUT/test_g4_tgeo_nat.out   
@@ -275,13 +275,13 @@ do
 
   if [ "$EXAMPLE" = "A01" ]; then 
     if [ "$TESTG3" = "1" ]; then
-      EXE=$G3EXEDIR"/test"$EXAMPLE
+      EXE=$G3EXEDIR"/g3vmc_test"$EXAMPLE
       echo "... Running test with G3, geometry via TGeo, TGeo navigation"
       $EXE -g3g TGeant3TGeo -rm "test_$EXAMPLE.C(\"\", kFALSE)" >& $OUT/test_g3_tgeo_tgeo.out   
       if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
     fi  
     if [ "$TESTG4" = "1" ]; then
-      EXE=$G4EXEDIR"/test"$EXAMPLE
+      EXE=$G4EXEDIR"/g4vmc_test"$EXAMPLE
       echo "... Running test with G4, geometry via TGeo, Native navigation"
       $EXE -g4g geomRootToGeant4 -g4vm "" -rm "test_$EXAMPLE.C(\"\", kFALSE)" >& $OUT/test_g4_tgeo_nat.out   
       if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi

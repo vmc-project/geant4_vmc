@@ -60,7 +60,7 @@ do
 
     # Run test
     echo "... Running test with $G4PHYSICS_LIST" 
-    root.exe -q -b "test_E03_pl.C(\"g4ConfigEnv.C\")" >& $OUTDIR/TMP.out 
+    root.exe -q -b load_g4.C test_E03_pl.C\(\"g4ConfigEnv.C\"\) >& $OUTDIR/TMP.out 
     EXIT_STATUS=$?
   
     # Extract warnings
