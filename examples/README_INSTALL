@@ -12,7 +12,7 @@ $Id$
  Building examples
  ==================
 
- Since this 3.00, VMC examples are installed with CMake.
+ Since version 3.00, VMC examples are installed with CMake.
  The VMC examples libraries require ROOT installation, the VMC examples programs
  are built against Geant3 with VMC or Geant4 VMC libraries.
 
