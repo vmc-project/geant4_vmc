@@ -86,8 +86,9 @@ if(VMC_WITH_Geant3)
     set(MC_LIBRARIES ${MC_LIBRARIES} ${Pythia6_LIBRARIES} ${Geant3_LIBRARIES})
   else()
     set(MC_LIBRARIES ${Geant3_LIBRARIES} ${MC_LIBRARIES})
-    set(MC_PREFIX "g3")
   endif(Pythia6_FOUND)
+
+  set(MC_PREFIX "g3")
     
 endif(VMC_WITH_Geant3)
 
