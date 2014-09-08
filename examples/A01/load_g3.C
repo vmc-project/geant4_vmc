@@ -21,5 +21,5 @@ void load_g3()
 
   // Load this example library
   gSystem->Load("libmtroot");
-  gSystem->Load("libexampleA01");
+  gSystem->Load("libvmc_A01");
 }  

@@ -20,5 +20,5 @@ void load_g3()
   g3libs();
   
   // Load this example library
-  gSystem->Load("libexample01");
+  gSystem->Load("libvmc_E01");
 }  
