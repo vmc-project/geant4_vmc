@@ -161,6 +161,8 @@ void g4libs()
   gSystem->Load("libmtroot");
   
   // initialize Root threading  
-  if ( isMT() )
+  if ( isMT() ) {
     TThread::Initialize();
+    gInterpreter->SetProcessLineLock(false);
+  }
 }
