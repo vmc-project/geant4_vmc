@@ -23,7 +23,9 @@
 
 #ifdef G4MULTITHREADED
 namespace {
-  //Mutex to lock master application when merging data
+  // Mutex to lock MCApplication::FinishRun
+  // G4Mutex finishRunMutex = G4MUTEX_INITIALIZER;
+  // Mutex to lock deleting MC application
   G4Mutex deleteMutex = G4MUTEX_INITIALIZER;
 }
 #endif
@@ -59,21 +61,24 @@ void TG4WorkerInitialization::WorkerRunStart() const
   //G4cout << "TG4WorkerInitialization::WorkerRunStart() end " << G4endl;
 }   
 
-/*
+
 //_____________________________________________________________________________
 void TG4WorkerInitialization::WorkerRunEnd() const
 {
 // This method is called for each thread, when the local event loop has
 // finished but before the synchronization over threads.
 
-  G4cout << "TG4WorkerInitialization::WorkerRunEnd() " << G4endl;
+  //G4cout << "TG4WorkerInitialization::WorkerRunEnd() " << G4endl;
 
+#ifdef G4MULTITHREADED
+  //G4AutoLock lm(&finishRunMutex);
   TVirtualMCApplication::Instance()->FinishWorkerRun();
+  //lm.unlock();
+#endif
 
-  G4cout << "TG4WorkerInitialization::WorkerRunEnd() end " << G4endl;
-
+  //G4cout << "TG4WorkerInitialization::WorkerRunEnd() end " << G4endl;
 }
-*/
+
 //_____________________________________________________________________________
 void TG4WorkerInitialization::WorkerStop() const
 {
@@ -81,11 +86,9 @@ void TG4WorkerInitialization::WorkerStop() const
 /// It implements a clean up action, which is the clean-up of MC application
 /// in our case.
 
-  //G4cout << "TG4WorkerInitialization::WorkerStop() " << this << G4endl;
-#ifdef G4MULTITHREADED
-  TVirtualMCApplication::Instance()->FinishWorkerRun();
-  //G4cout << "Go to delete MCApplication " << TVirtualMCApplication::Instance() << G4endl;
+  //G4cout << "TG4WorkerInitialization::WorkerStop() " << G4endl;
 
+#ifdef G4MULTITHREADED
   G4AutoLock lm(&deleteMutex);
   delete TVirtualMCApplication::Instance();
   lm.unlock();

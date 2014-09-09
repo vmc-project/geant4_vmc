@@ -48,7 +48,7 @@ class TG4WorkerInitialization : public G4UserWorkerInitialization
     // ready to start the local event loop. This situation is identical to
     // "Idle" state in the sequential mode.
 
-    //virtual void WorkerRunEnd() const;
+    virtual void WorkerRunEnd() const;
     // This method is called for each thread, when the local event loop has
     // finished but before the synchronization over threads.
 
