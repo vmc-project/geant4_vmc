@@ -75,12 +75,12 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
   fRangeAllCutCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
   fPrintAllProcessesCmd 
     = new G4UIcmdWithoutParameter("/mcPhysics/printAllProcess", this);  
-  fPrintAllProcessesCmd->SetGuidance("Print names for all activated processes.");
+  fPrintAllProcessesCmd->SetGuidance("Print names for all instantiated processes.");
   fPrintAllProcessesCmd->AvailableForStates(G4State_Idle);  
 
   fDumpAllProcessesCmd 
     = new G4UIcmdWithoutParameter("/mcPhysics/dumpAllProcess", this);  
-  fDumpAllProcessesCmd->SetGuidance("Dump all activated processes.");
+  fDumpAllProcessesCmd->SetGuidance("Dump all instantiated processes.");
   fDumpAllProcessesCmd->AvailableForStates(G4State_Idle);  
 
   fPrintProcessMCMapCmd
