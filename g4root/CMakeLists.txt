@@ -29,6 +29,7 @@ set(CMAKE_MODULE_PATH
 include(Geant4VMCPackagesVersion)
 
 #--- Options -------------------------------------------------------------------
+option(G4Root_BUILD_TEST           "Build G4Root test" ON)
 option(Geant4VMC_USE_GEANT4_UI     "Build with Geant4 UI drivers" ON)
 option(Geant4VMC_USE_GEANT4_VIS    "Build with Geant4 Vis drivers" ON)
 option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
@@ -84,3 +85,8 @@ install(TARGETS g4root EXPORT G4RootTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 #--- Build project configuration -----------------------------------------------
 include(G4RootBuildProject)
+
+#--- Build test ----------------------------------------------------------------
+if (G4Root_BUILD_TEST)
+  add_subdirectory(test)
+endif(G4Root_BUILD_TEST)

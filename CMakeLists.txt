@@ -37,6 +37,7 @@ include(Geant4VMCPackagesVersion)
 
 #--- Options -------------------------------------------------------------------
 option(Geant4VMC_BUILD_G4Root      "Build G4Root" ON)
+option(Geant4VMC_BUILD_G4Root_TEST "Build G4Root test" OFF)
 option(Geant4VMC_BUILD_MTRoot      "Build MTRoot" ON)
 option(Geant4VMC_BUILD_Geant4VMC   "Build Geant4VMC" ON)
 option(Geant4VMC_BUILD_EXAMPLES    "Build VMC examples" ON)
@@ -58,6 +59,7 @@ include(VMCInstallLibDir)
 #
 if(Geant4VMC_BUILD_G4Root)
   add_subdirectory(g4root)
+  set(G4Root_BUILD_TEST ${Geant4VMC_BUILD_G4Root_TEST})
 endif(Geant4VMC_BUILD_G4Root)
 
 if(Geant4VMC_BUILD_MTRoot)

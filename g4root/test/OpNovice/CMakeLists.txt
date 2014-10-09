@@ -4,6 +4,11 @@ cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 project(OpNovice)
 
 #----------------------------------------------------------------------------
+# Define unique names of libraries and executables based on project name
+#
+set(program_name g4root_${PROJECT_NAME})
+
+#----------------------------------------------------------------------------
 # Add path to Find modules in Geant4 VMC installation
 set(CMAKE_MODULE_PATH 
     ${Geant4VMC_DIR}/Modules
@@ -27,7 +32,14 @@ find_package(ROOT REQUIRED)
 
 #----------------------------------------------------------------------------
 # Find G4Root(required)
-find_package(G4Root REQUIRED)
+if (NOT G4Root_BUILD_TEST)
+  # build outside G4Root
+  find_package(G4Root REQUIRED)
+else()
+  # build inside G4Root
+  include_directories(${G4Root_SOURCE_DIR}/include)
+  set(G4Root_LIBRARIES g4root)
+endif()
 
 #----------------------------------------------------------------------------
 # Setup Geant4 include directories and compile definitions
@@ -47,8 +59,8 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(OpNovice OpNovice.cc ${sources} ${headers})
-target_link_libraries(OpNovice ${Geant4_LIBRARIES} ${G4Root_LIBRARIES} ${ROOT_LIBRARIES} )
+add_executable(${program_name} OpNovice.cc ${sources} ${headers})
+target_link_libraries(${program_name} ${Geant4_LIBRARIES} ${G4Root_LIBRARIES} ${ROOT_LIBRARIES} )
 
 #----------------------------------------------------------------------------
 # Copy all scripts and data files to the build directory, i.e. the directory in which we
@@ -79,5 +91,5 @@ endforeach()
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS OpNovice DESTINATION bin)
+install(TARGETS ${program_name} DESTINATION bin)
 
