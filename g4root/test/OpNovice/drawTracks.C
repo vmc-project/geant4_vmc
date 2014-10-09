@@ -1,3 +1,11 @@
+
+/// \file drawTracks.C
+/// \brief Root macro to draw simulated tracks on top of the geometry
+///
+/// Geant4 OpNovice example adapted to G4Root test
+///
+/// \author A. Gheata; CERN
+
 void drawTracks()
 {
 // Draw simulated tracks on top of the geometry.
