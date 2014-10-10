@@ -231,10 +231,11 @@ std::ostream& TG4RootSolid::StreamInfo(std::ostream& os) const
 // Visualization functions
 
 //______________________________________________________________________________
-void TG4RootSolid::DescribeYourselfTo(G4VGraphicsScene& /*scene*/) const
+void TG4RootSolid::DescribeYourselfTo(G4VGraphicsScene& scene) const
 {
 /// A "double dispatch" function which identifies the solid
 /// to the graphics scene.
+   scene.AddSolid (*this);
 }
 
 //______________________________________________________________________________
@@ -254,8 +255,11 @@ G4VisExtent TG4RootSolid::GetExtent() const
 //______________________________________________________________________________
 G4Polyhedron* TG4RootSolid::CreatePolyhedron () const
 {
-/// Dummy implementation
-   return NULL;
+/// Create polyhedron for the bounding box
+  G4double dx = ((TGeoBBox*)fShape)->GetDX()*cm;
+  G4double dy = ((TGeoBBox*)fShape)->GetDY()*cm;
+  G4double dz = ((TGeoBBox*)fShape)->GetDZ()*cm;
+  return new G4PolyhedronBox (dx, dy, dz);
 }
    
 #if G4VERSION_NUMBER < 1000
@@ -273,7 +277,7 @@ G4Polyhedron* TG4RootSolid::GetPolyhedron () const
 {
 /// Smart access function - creates on request and stores for future
 /// access.  A null pointer means "not available".
-   return NULL;
+   return CreatePolyhedron();
 }
 
 //______________________________________________________________________________
