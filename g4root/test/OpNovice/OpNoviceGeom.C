@@ -54,7 +54,7 @@ void OpNoviceGeom()
   TGeoVolume *bubbleAir_log = new TGeoVolume("Bubble", bubbleAir_box, medair);
   bubbleAir_log->SetLineColor(kCyan);
   bubbleAir_log->SetTransparency(70);
-  waterTank_log->AddNode(bubbleAir_log, 0);
+  waterTank_log->AddNode(bubbleAir_log, 0, new TGeoTranslation(0,2500,0));
   
   geom->CloseGeometry();
   geom->SetTopVisible(true);
