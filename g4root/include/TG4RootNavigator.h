@@ -21,7 +21,11 @@
 #include "G4Navigator.hh"
 #endif
 
+#include <Rtypes.h>
+
 class TGeoManager;
+class TGeoNavigator;
+class TGeoNode;
 class TG4RootDetectorConstruction;
 
 /// \brief GEANT4 navigator using directly a TGeo geometry.
