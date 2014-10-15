@@ -34,11 +34,14 @@
 #include "OpNoviceSteppingAction.hh"
 #include "OpNoviceStackingAction.hh"
 #include "OpNoviceSteppingVerbose.hh"
+  // Added for G4Root
+#include "TG4RootNavMgr.h"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-OpNoviceActionInitialization::OpNoviceActionInitialization()
- : G4VUserActionInitialization()
+OpNoviceActionInitialization::OpNoviceActionInitialization(G4bool useG4Root)
+ : G4VUserActionInitialization(),
+   fUseG4Root(useG4Root)
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -61,6 +64,20 @@ void OpNoviceActionInitialization::Build() const
   SetUserAction(new OpNoviceRunAction());
   SetUserAction(new OpNoviceSteppingAction());
   SetUserAction(new OpNoviceStackingAction());
+
+  // Added for G4Root - start
+  if ( fUseG4Root ) {
+    // Master Root navigator
+    TG4RootNavMgr* masterRootNavMgr = TG4RootNavMgr::GetMasterInstance();
+    G4cout << "Got masterRootNavMgr: " << masterRootNavMgr << G4endl;
+    // Create G4Root navigator on worker
+    TG4RootNavMgr* rootNavMgr = TG4RootNavMgr::GetInstance(*masterRootNavMgr);
+    G4cout << "TG4RootNavMgr has been created." << rootNavMgr << G4endl;
+
+    //rootNavMgr->Initialize(new TG4PostDetConstruction());
+    rootNavMgr->ConnectToG4();
+  }
+  // Added for G4Root - end
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

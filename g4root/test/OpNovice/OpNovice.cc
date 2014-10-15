@@ -80,7 +80,7 @@ namespace {
     G4cerr << " Usage: " << G4endl;
     G4cerr << " OpNovice [-m macro ] [-u UIsession] [-t nThreads] [-r seed]"
            // Added for G4Root
-           << " [-g use_tgeo]"
+           << " [-g useG4Root]"
            << G4endl;
     G4cerr << "   note: -t option is available only for multi-threaded mode."
            << G4endl;
@@ -100,12 +100,10 @@ int main(int argc,char** argv)
 
   G4String macro;
   G4String session;
-#ifdef G4MULTITHREADED
   G4int nThreads = 0;
-#endif
 
   // Added for G4Root - start
-  G4bool use_tgeo = false;
+  G4bool useG4Root = false;
   TGeoManager *geom = 0;
   TG4RootNavMgr *mgr = 0;
   // Added for G4Root - end
@@ -115,7 +113,7 @@ int main(int argc,char** argv)
      if      ( G4String(argv[i]) == "-m" ) macro   = argv[i+1];
      else if ( G4String(argv[i]) == "-u" ) session = argv[i+1];
      // Added for G4Root
-     else if ( G4String(argv[i]) == "-g" ) use_tgeo = true;
+     else if ( G4String(argv[i]) == "-g" ) useG4Root = true;
      else if ( G4String(argv[i]) == "-r" ) myseed  = atoi(argv[i+1]);
 #ifdef G4MULTITHREADED
      else if ( G4String(argv[i]) == "-t" ) {
@@ -136,7 +134,7 @@ int main(int argc,char** argv)
   //
   
   // Added for G4Root - start
-  if (use_tgeo) {
+  if ( useG4Root ) {
      G4cout << "Using TGeo interface ..." << G4endl;
      geom = TGeoManager::Import("OpNoviceGeom.root");
      mgr = TG4RootNavMgr::GetInstance(geom);
@@ -153,8 +151,8 @@ int main(int argc,char** argv)
 #endif
 
  // Added for G4Root - start
-  if (use_tgeo) {
-     mgr->Initialize(OpNovicePostDetConstruction::GetInstance());
+  if ( useG4Root ) {
+     mgr->Initialize(OpNovicePostDetConstruction::GetInstance(), nThreads);
      mgr->ConnectToG4();
   }   
   // Added for G4Root - end
@@ -166,7 +164,7 @@ int main(int argc,char** argv)
   //
   // Detector construction
   // Added for G4Root - start
-  if (!use_tgeo) {
+  if ( ! useG4Root ) {
     runManager->SetUserInitialization(new OpNoviceDetectorConstruction());
   }  
   // Added for G4Root - end
@@ -174,7 +172,7 @@ int main(int argc,char** argv)
   // Physics list
   runManager-> SetUserInitialization(new OpNovicePhysicsList());
   // User action initialization
-  runManager->SetUserInitialization(new OpNoviceActionInitialization());
+  runManager->SetUserInitialization(new OpNoviceActionInitialization(useG4Root));
 
   // Initialize G4 kernel
   //
