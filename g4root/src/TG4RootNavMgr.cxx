@@ -156,6 +156,8 @@ void TG4RootNavMgr::SetNavigator(TG4RootNavigator *nav)
    delete trMgr->GetPropagatorInField();
    trMgr->SetPropagatorInField(new G4PropagatorInField(nav, fieldMgr));
    trMgr->ActivateNavigator(nav);
+   G4EventManager *evtMgr = G4EventManager::GetEventManager();
+   if (evtMgr) evtMgr->GetTrackingManager()->GetSteppingManager()->SetNavigator(nav);
    fNavigator = nav;
 //   trMgr->DeRegisterNavigator(oldNav);
    Info("SetNavigator", "TG4RootNavigator created and registered to G4TransportationManager");
