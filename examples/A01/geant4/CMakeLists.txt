@@ -59,7 +59,7 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 # Add the example library
 #
 add_library(${g4library_name} ${sources} ${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}_dict.cxx ${headers})
-target_link_libraries(${g4library_name} ${VMC_LIBRARIES})
+target_link_libraries(${g4library_name} ${VMC_LIBRARIES} ${MC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets
