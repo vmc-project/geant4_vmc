@@ -224,13 +224,13 @@ void TG4GeometryManager::ConstructG4GeometryViaVGM()
   
   // import Root geometry in VGM
   RootGM::Factory rootFactory;
-  //if ( VerboseLevel() > 1 ) rootFactory.SetDebug(1);
+  if ( VerboseLevel() > 1 ) rootFactory.SetDebug(1);
   rootFactory.SetIgnore(true);
   rootFactory.Import(gGeoManager->GetTopNode());
     
   // export Root VGM geometry in Geant4
   Geant4GM::Factory g4Factory;
-  //if ( VerboseLevel() > 1 ) g4Factory.SetDebug(1);
+  if ( VerboseLevel() > 1 ) g4Factory.SetDebug(1);
   rootFactory.Export(&g4Factory);
     
   G4VPhysicalVolume* g4World = g4Factory.World();
