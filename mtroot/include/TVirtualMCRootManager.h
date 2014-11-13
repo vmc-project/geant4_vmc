@@ -20,8 +20,7 @@
 #include <Rtypes.h>
 #include <TString.h>
 #include <TObject.h>
-
-#include "TVirtualMCRootManager.h"
+#include <TMCtls.h>
 
 #include <pthread.h>
 
@@ -67,10 +66,10 @@ class TVirtualMCRootManager
     // not implemented
     TVirtualMCRootManager(const TVirtualMCRootManager& rhs);
     TVirtualMCRootManager& operator=(const TVirtualMCRootManager& rhs);
-#if defined(__linux__) && !defined(__CINT__)
-    static  __thread TVirtualMCRootManager* fgInstance; // singleton instance
+#if !defined(__CINT__)
+    static  TMCThreadLocal TVirtualMCRootManager* fgInstance; // singleton instance
 #else
-    static           TVirtualMCRootManager* fgInstance; // singleton instance
+    static                 TVirtualMCRootManager* fgInstance; // singleton instance
 #endif 
 };
 
