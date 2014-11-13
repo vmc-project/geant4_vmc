@@ -87,3 +87,5 @@ if(Geant4VMC_BUILD_EXAMPLES)
   endif()
 endif(Geant4VMC_BUILD_EXAMPLES)
 
+#--- CPack ----------------- --------------------------------------------------
+include(Geant4VMCPackagesCPack)
