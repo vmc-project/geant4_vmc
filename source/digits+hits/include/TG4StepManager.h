@@ -152,8 +152,6 @@ class TG4StepManager
 
     // static data members
     static G4ThreadLocal TG4StepManager*  fgInstance;   ///< this instance
-    /// buffer for names to be returned via const char*
-    static G4ThreadLocal G4String  fgNameBuffer;
     
     //
     // data members
@@ -174,6 +172,9 @@ class TG4StepManager
     
     /// G4SteppingManager  
     G4SteppingManager*  fSteppingManager;
+
+    /// buffer for current volume name or path
+    mutable G4String    fNameBuffer;
     
     /// volume copy number offset
     G4int               fCopyNoOffset;

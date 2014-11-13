@@ -42,7 +42,7 @@
 #include <TMath.h>
 
 G4ThreadLocal TG4StepManager* TG4StepManager::fgInstance = 0;
-G4ThreadLocal G4String TG4StepManager::fgNameBuffer = "";
+//G4ThreadLocal G4String TG4StepManager::fgNameBuffer = "";
 
 //_____________________________________________________________________________
 TG4StepManager::TG4StepManager(const TString& userGeometry) 
@@ -51,6 +51,7 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
     fStepStatus(kNormalStep),
     fLimitsModifiedOnFly(0),
     fSteppingManager(0),
+    fNameBuffer(),
     fCopyNoOffset(0),
     fDivisionCopyNoOffset(0)
 {
@@ -410,12 +411,12 @@ const char* TG4StepManager::CurrentVolName() const
 {
 /// Return the current physical volume name.
 
-  fgNameBuffer
+  fNameBuffer
     = TG4GeometryServices::Instance()
       ->UserVolumeName(
           GetCurrentPhysicalVolume()->GetLogicalVolume()->GetName());
 
-  return fgNameBuffer.data();
+  return fNameBuffer.data();
 }
 
 //_____________________________________________________________________________
@@ -428,14 +429,14 @@ const char* TG4StepManager::CurrentVolOffName(Int_t off) const
   G4VPhysicalVolume* mother = GetCurrentOffPhysicalVolume(off); 
 
   if ( mother ) {
-    fgNameBuffer
+    fNameBuffer
       = TG4GeometryServices::Instance()
         ->UserVolumeName(mother->GetLogicalVolume()->GetName());
   }             
   else {
-    fgNameBuffer = "";
+    fNameBuffer = "";
   }
-  return fgNameBuffer.data();
+  return fNameBuffer.data();
 }
 
 //_____________________________________________________________________________
@@ -454,24 +455,24 @@ const char* TG4StepManager::CurrentVolPath()
   
   // Compose the path
   //
-  fgNameBuffer = "";
+  fNameBuffer = "";
   for ( G4int i=0; i<depth; i++ ) {
     G4VPhysicalVolume* physVolume = touchable->GetHistory()->GetVolume(i);
-    fgNameBuffer += "/";
-    fgNameBuffer
+    fNameBuffer += "/";
+    fNameBuffer
       += geometryServices->UserVolumeName(physVolume->GetName());
-    fgNameBuffer += "_";
-    TG4Globals::AppendNumberToString(fgNameBuffer, physVolume->GetCopyNo());
+    fNameBuffer += "_";
+    TG4Globals::AppendNumberToString(fNameBuffer, physVolume->GetCopyNo());
   }     
 
   // Add current volume to the path
   G4VPhysicalVolume* curPhysVolume = GetCurrentPhysicalVolume(); 
-  fgNameBuffer += "/";
-  fgNameBuffer += geometryServices->UserVolumeName(curPhysVolume->GetName());
-  fgNameBuffer += "_";
-  TG4Globals::AppendNumberToString(fgNameBuffer, curPhysVolume->GetCopyNo());
+  fNameBuffer += "/";
+  fNameBuffer += geometryServices->UserVolumeName(curPhysVolume->GetName());
+  fNameBuffer += "_";
+  TG4Globals::AppendNumberToString(fNameBuffer, curPhysVolume->GetCopyNo());
 
-  return fgNameBuffer.data();
+  return fNameBuffer.data();
 }
 
 //_____________________________________________________________________________
