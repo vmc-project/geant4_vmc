@@ -22,8 +22,6 @@
 #include <TObject.h>
 #include <TMCtls.h>
 
-#include <pthread.h>
-
 class TVirtualMCRootManager;
 
 /// \brief The abstract base class for Root IO manager for VMC examples 
