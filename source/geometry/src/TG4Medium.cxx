@@ -74,7 +74,7 @@ void TG4Medium::SetMaterial(G4Material* material)
 /// give a warning if medium material has been already defined
 
   if ( fMaterial && fMaterial != material ) {
-    G4cout << fMaterial->GetName() << " " << material->GetName() << G4cout;
+    G4cout << fMaterial->GetName() << " " << material->GetName() << G4endl;
     TG4Globals::Warning(
       "TG4Medium", "SetMaterial",
       "Reseting material " + TString(fMaterial->GetName()) + 

@@ -191,7 +191,7 @@ void TG4SDConstruction::AddSelection(const G4String& selection)
   G4String token;
   while ( is >> token ) {
     if (VerboseLevel() > 1) {
-      G4cout << "Adding volume " << token <<  " in SD selection." << G4cout;
+      G4cout << "Adding volume " << token <<  " in SD selection." << G4endl;
     }  
     fSelection.insert(token);
   }  
