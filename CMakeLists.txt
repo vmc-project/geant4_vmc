@@ -8,7 +8,7 @@
 #-------------------------------------------------
 
 # Configuration file for CMake build for Geant4 VMC packages.
-# Ispired by Geant4 and VGM projects.
+# Inspired by Geant4 and VGM projects.
 #
 # I. Hrivnacova, 24/04/2014
 
