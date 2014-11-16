@@ -2,36 +2,36 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/18     14 March 2014   *
+  *   Version   5.34/23   7 November 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
+ROOT 5.34/23 (v5-34-23@v5-34-23, Nov 14 2014, 00:24:05 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_A01.C("g4Config1.C", kFALSE)...
+Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
 33
-Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
+Processing test_A01.C("g4Config1.C", kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.00.b01 ( 14 March 2014 )
+ Version 3.0 ( 17 November 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 *************************************************************
- Geant4 version Name: geant4-10-00-patch-01    (28-February-2014)
+ Geant4 version Name: geant4-10-00-patch-03    (31-October-2014)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -55,10 +55,10 @@ The materials defined are :
  Material: ArgonGas    density:  1.782 mg/cm3  RadL: 109.708 m    Nucl.Int.Length: 671.428 m  
                        Imean: 188.000 eV   temperature: 273.15 K  pressure:   1.00 atm
 
-   --->  Element: ArgonGas ( )   Z = 18.0   N =  40.0   A =  39.95 g/mole
-         --->  Isotope:    36   Z = 18   N =  36   A =  35.97 g/mole   abundance:   0.34 %
-         --->  Isotope:    38   Z = 18   N =  38   A =  37.96 g/mole   abundance:   0.06 %
-         --->  Isotope:    40   Z = 18   N =  40   A =  39.96 g/mole   abundance:  99.60 %
+   --->  Element: Ar (Ar)   Z = 18.0   N =  40.0   A =  39.95 g/mole
+         --->  Isotope:  Ar36   Z = 18   N =  36   A =  35.97 g/mole   abundance:   0.34 %
+         --->  Isotope:  Ar38   Z = 18   N =  38   A =  37.96 g/mole   abundance:   0.06 %
+         --->  Isotope:  Ar40   Z = 18   N =  40   A =  39.96 g/mole   abundance:  99.60 %
           ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
 
 
@@ -77,7 +77,7 @@ The materials defined are :
           ElmMassFraction:  30.00 %  ElmAbundance  27.29 % 
 
 
- Material: Scintillator    density:  1.032 g/cm3   RadL:  42.549 cm   Nucl.Int.Length:  69.996 cm 
+ Material: Scintillator    density:  1.032 g/cm3   RadL:  42.549 cm   Nucl.Int.Length:  69.955 cm 
                        Imean:  64.684 eV 
 
    --->  Element: Carbon (C)   Z =  6.0   N =  12.0   A =  12.01 g/mole
@@ -106,11 +106,11 @@ The materials defined are :
  Material:     Lead    density: 11.350 g/cm3   RadL:   5.612 mm   Nucl.Int.Length:  18.247 cm 
                        Imean: 823.000 eV 
 
-   --->  Element: Lead ( )   Z = 82.0   N = 207.2   A = 207.19 g/mole
-         --->  Isotope:   204   Z = 82   N = 204   A = 203.97 g/mole   abundance:   1.40 %
-         --->  Isotope:   206   Z = 82   N = 206   A = 205.97 g/mole   abundance:  24.10 %
-         --->  Isotope:   207   Z = 82   N = 207   A = 206.98 g/mole   abundance:  22.10 %
-         --->  Isotope:   208   Z = 82   N = 208   A = 207.98 g/mole   abundance:  52.40 %
+   --->  Element: Pb (Pb)   Z = 82.0   N = 207.2   A = 207.19 g/mole
+         --->  Isotope: Pb204   Z = 82   N = 204   A = 203.97 g/mole   abundance:   1.40 %
+         --->  Isotope: Pb206   Z = 82   N = 206   A = 205.97 g/mole   abundance:  24.10 %
+         --->  Isotope: Pb207   Z = 82   N = 207   A = 206.98 g/mole   abundance:  22.10 %
+         --->  Isotope: Pb208   Z = 82   N = 208   A = 207.98 g/mole   abundance:  52.40 %
           ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
 
 
@@ -220,7 +220,7 @@ compt:   for  gamma    SubType= 13
        Klein-Nishina :  Emin=        0 eV    Emax=       10 TeV
 
 conv:   for  gamma    SubType= 14
-      Lambda table from 1.022 MeV to 10 TeV in 49 bins, spline: 1
+      Lambda table from 1.022 MeV to 10 TeV in 140 bins, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         BetheHeitler :  Emin=        0 eV    Emax=       80 GeV
      BetheHeitlerLPM :  Emin=       80 GeV   Emax=       10 TeV
@@ -554,6 +554,28 @@ hPairProd:   for  pi-    SubType= 4
                   HADRONIC PROCESSES SUMMARY (verbose level 1)
 
 ---------------------------------------------------
+                           Hadronic Processes for neutron
+
+  Process: hadElastic
+        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
+     Cr_sctns:     ChipsNeutronElasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: neutronInelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: nCapture
+        Model:               nRadCapture: 0 eV  ---> 100 TeV
+     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
+
+  Process: nKiller
+
+---------------------------------------------------
                            Hadronic Processes for GenericIon
 
   Process: ionInelastic
@@ -662,26 +684,6 @@ hPairProd:   for  pi-    SubType= 4
   Process: muMinusCaptureAtRest
 
 ---------------------------------------------------
-                           Hadronic Processes for neutron
-
-  Process: hadElastic
-        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
-     Cr_sctns:     ChipsNeutronElasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: neutronInelastic
-        Model:                      FTFP: 4 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 5 GeV
-     Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
-  Process: nCapture
-        Model:               nRadCapture: 0 eV  ---> 100 TeV
-     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
-
----------------------------------------------------
                            Hadronic Processes for pi+
 
   Process: hadElastic
@@ -733,56 +735,46 @@ hPairProd:   for  pi-    SubType= 4
 
 ================================================================
 ### Run 0 start.
->>> Event 0
-$$$X Primary track 100
 
 >>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 4 hits.
-Hodoscope2 has 12 hits.
-Chamber1 has 523 hits.
-Chamber2 has 476 hits.
-EmCalorimeter has 42 hits. Total Edep is 85987.6 (MeV)
-HadCalorimeter has 7 hits. Total Edep is 7.0065 (MeV)
->>> Event 1
-$$$X Primary track 100
+Hodoscope1 has 1 hits.
+Hodoscope2 has 8 hits.
+Chamber1 has 539 hits.
+Chamber2 has 497 hits.
+EmCalorimeter has 39 hits. Total Edep is 86488.2 (MeV)
+HadCalorimeter has 3 hits. Total Edep is 4.61369 (MeV)
 
 >>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 1 hits.
-Hodoscope2 has 2 hits.
-Chamber1 has 519 hits.
-Chamber2 has 512 hits.
-EmCalorimeter has 18 hits. Total Edep is 18767.7 (MeV)
-HadCalorimeter has 7 hits. Total Edep is 2577.9 (MeV)
->>> Event 2
-$$$X Primary track 100
+Hodoscope1 has 2 hits.
+Hodoscope2 has 4 hits.
+Chamber1 has 520 hits.
+Chamber2 has 518 hits.
+EmCalorimeter has 17 hits. Total Edep is 19026.4 (MeV)
+HadCalorimeter has 7 hits. Total Edep is 2625.16 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 1 hits.
-Hodoscope2 has 11 hits.
-Chamber1 has 512 hits.
-Chamber2 has 501 hits.
-EmCalorimeter has 71 hits. Total Edep is 29607.6 (MeV)
-HadCalorimeter has 19 hits. Total Edep is 1579.96 (MeV)
->>> Event 3
-$$$X Primary track 100
+Hodoscope1 has 2 hits.
+Hodoscope2 has 12 hits.
+Chamber1 has 544 hits.
+Chamber2 has 496 hits.
+EmCalorimeter has 68 hits. Total Edep is 29041.2 (MeV)
+HadCalorimeter has 18 hits. Total Edep is 1646.44 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 4 hits.
-Hodoscope2 has 5 hits.
-Chamber1 has 424 hits.
-Chamber2 has 144 hits.
-EmCalorimeter has 54 hits. Total Edep is 7220.41 (MeV)
-HadCalorimeter has 14 hits. Total Edep is 346.133 (MeV)
->>> Event 4
-$$$X Primary track 100
+Hodoscope1 has 5 hits.
+Hodoscope2 has 9 hits.
+Chamber1 has 462 hits.
+Chamber2 has 212 hits.
+EmCalorimeter has 42 hits. Total Edep is 6321.53 (MeV)
+HadCalorimeter has 15 hits. Total Edep is 468.548 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 6 hits.
-Chamber1 has 536 hits.
-Chamber2 has 524 hits.
-EmCalorimeter has 53 hits. Total Edep is 29778.7 (MeV)
-HadCalorimeter has 17 hits. Total Edep is 184.662 (MeV)
-Time of this run:   User=9.09s Real=9.43s Sys=0.04s
+Hodoscope1 has 2 hits.
+Hodoscope2 has 8 hits.
+Chamber1 has 516 hits.
+Chamber2 has 506 hits.
+EmCalorimeter has 57 hits. Total Edep is 27704.1 (MeV)
+HadCalorimeter has 16 hits. Total Edep is 115.996 (MeV)
+Time of this run:   User=10.82s Real=11.14s Sys=0.07s
 Number of events processed: 5
-Real time 0:00:11, CP time 10.130
+Real time 0:00:12, CP time 11.870

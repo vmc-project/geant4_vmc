@@ -2,22 +2,22 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/18     14 March 2014   *
+  *   Version   5.34/23   7 November 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
+ROOT 5.34/23 (v5-34-23@v5-34-23, Nov 14 2014, 00:24:05 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_E01.C("g3tgeoConfig.C", kFALSE)...
-Loading Geant3 libraries ...
+Processing load_g3.C...
 Loading Geant3 libraries ... finished
+Processing test_E01.C("g3tgeoConfig.C", kFALSE)...
 Geant3 has been created.
 Geometry will be defined via TGeo
 Info in <TGeoManager::TGeoManager>: Geometry E01_geometry, E01 VMC example geometry created
@@ -329,13 +329,13 @@ GetShape: Volume path /EXPH_1/CALB_1/LAYB_100 not found
 GetMaterial: Volume name XYZ not found
 GetMedium: Volume name XYZ not found
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   119829503     72473FF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   198013199     BCD710F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   119852437   119829503
-                                        HEX     724CD95     72473FF
-                                        HEX        59FA           0
-                              relative adrs       23034           0
+          with Store/Table at absolute adrs   192567909   198013199
+                                        HEX     B7A5A65     BCD710F
+                                        HEX    FFACE78A           0
+                              relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 

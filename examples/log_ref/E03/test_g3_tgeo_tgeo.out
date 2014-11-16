@@ -2,22 +2,22 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/18     14 March 2014   *
+  *   Version   5.34/23   7 November 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
+ROOT 5.34/23 (v5-34-23@v5-34-23, Nov 14 2014, 00:24:05 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_E03_1.C("g3tgeoConfig.C", kFALSE)...
-Loading Geant3 libraries ...
+Processing load_g3.C...
 Loading Geant3 libraries ... finished
+Processing test_E03_1.C("g3tgeoConfig.C", kFALSE)...
 Geant3 has been created.
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
@@ -56,13 +56,13 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 939.295       total track length (cm):  45.0105
    Gap:      total energy (MeV): 36.4053       total track length (cm):  15.9358
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   785216511    2ECD73FF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   378264847    168BDD0F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   785239445   785216511
-                                        HEX    2ECDCD95    2ECD73FF
-                                        HEX        59FA           0
-                              relative adrs       23034           0
+          with Store/Table at absolute adrs   372819557   378264847
+                                        HEX    1638C665    168BDD0F
+                                        HEX    FFACE78A           0
+                              relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -100,22 +100,22 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/18     14 March 2014   *
+  *   Version   5.34/23   7 November 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
+ROOT 5.34/23 (v5-34-23@v5-34-23, Nov 14 2014, 00:24:05 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_E03_2.C("g3tgeoConfig.C", kFALSE)...
-Loading Geant3 libraries ...
+Processing load_g3.C...
 Loading Geant3 libraries ... finished
+Processing test_E03_2.C("g3tgeoConfig.C", kFALSE)...
 --- Init MC 
 Geant3 has been created.
 --- Add particles 
@@ -478,13 +478,13 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   3.967       total track length (cm):    2.241
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   978870271    3A585FFF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr  1035902223    3DBE9D0F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   978893205   978870271
-                                        HEX    3A58B995    3A585FFF
-                                        HEX        59FA           0
-                              relative adrs       23034           0
+          with Store/Table at absolute adrs  1030456933  1035902223
+                                        HEX    3D6B8665    3DBE9D0F
+                                        HEX    FFACE78A           0
+                              relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -508,22 +508,22 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/18     14 March 2014   *
+  *   Version   5.34/23   7 November 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
+ROOT 5.34/23 (v5-34-23@v5-34-23, Nov 14 2014, 00:24:05 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_E03_3.C("g3tgeoConfig.C", kFALSE)...
-Loading Geant3 libraries ...
+Processing load_g3.C...
 Loading Geant3 libraries ... finished
+Processing test_E03_3.C("g3tgeoConfig.C", kFALSE)...
 --- Init MC 
 Geant3 has been created.
 --- Add particles 
@@ -622,13 +622,13 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   101865471     61257FF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   410364175    1875A90F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   101888405   101865471
-                                        HEX     612B195     61257FF
-                                        HEX        59FA           0
-                              relative adrs       23034           0
+          with Store/Table at absolute adrs   404918885   410364175
+                                        HEX    18229265    1875A90F
+                                        HEX    FFACE78A           0
+                              relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -652,22 +652,22 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/18     14 March 2014   *
+  *   Version   5.34/23   7 November 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
+ROOT 5.34/23 (v5-34-23@v5-34-23, Nov 14 2014, 00:24:05 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_E03_4.C("g3tgeoConfig.C", kFALSE)...
-Loading Geant3 libraries ...
+Processing load_g3.C...
 Loading Geant3 libraries ... finished
+Processing test_E03_4.C("g3tgeoConfig.C", kFALSE)...
 Geant3 has been created.
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
@@ -710,13 +710,13 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 1483.71       total track length (cm):   70.756
    Gap:      total energy (MeV): 76.3274       total track length (cm):  36.8609
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   769978367    2DE4EFFF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   839582991    320B050F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   770001301   769978367
-                                        HEX    2DE54995    2DE4EFFF
-                                        HEX        59FA           0
-                              relative adrs       23034           0
+          with Store/Table at absolute adrs   834137701   839582991
+                                        HEX    31B7EE65    320B050F
+                                        HEX    FFACE78A           0
+                              relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -740,22 +740,22 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/18     14 March 2014   *
+  *   Version   5.34/23   7 November 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
+ROOT 5.34/23 (v5-34-23@v5-34-23, Nov 14 2014, 00:24:05 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_E03_5.C("g3tgeoConfig.C", kFALSE)...
-Loading Geant3 libraries ...
+Processing load_g3.C...
 Loading Geant3 libraries ... finished
+Processing test_E03_5.C("g3tgeoConfig.C", kFALSE)...
 --- Init MC 
 Geant3 has been created.
 --- Add particles 
@@ -1127,13 +1127,13 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   2.957       total track length (cm):    1.496
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   332595199    13D2FFFF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   687631631    28FC6D0F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   332618133   332595199
-                                        HEX    13D35995    13D2FFFF
-                                        HEX        59FA           0
-                              relative adrs       23034           0
+          with Store/Table at absolute adrs   682186341   687631631
+                                        HEX    28A95665    28FC6D0F
+                                        HEX    FFACE78A           0
+                              relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 

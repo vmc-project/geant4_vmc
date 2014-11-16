@@ -2,31 +2,31 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/18     14 March 2014   *
+  *   Version   5.34/23   7 November 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
+ROOT 5.34/23 (v5-34-23@v5-34-23, Nov 14 2014, 00:24:05 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_A01.C("g4tgeoConfig.C", kFALSE)...
+Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
 33
-Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
+Processing test_A01.C("g4tgeoConfig.C", kFALSE)...
 Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.00.b01 ( 14 March 2014 )
+ Version 3.0 ( 17 November 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -40,10 +40,10 @@ Info in <TGeoManager::CloseGeometry>: 996 nodes/ 23 volume UID's in VGM Root geo
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 isMaster=1
-Running TVirtualMCApplication::ConstructGeometryTG4RootNavMgr has been created.0x2012390
+Running TVirtualMCApplication::ConstructGeometryTG4RootNavMgr has been created.0x23b33f0
 
 *************************************************************
- Geant4 version Name: geant4-10-00-patch-01    (28-February-2014)
+ Geant4 version Name: geant4-10-00-patch-03    (31-October-2014)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -101,7 +101,7 @@ compt:   for  gamma    SubType= 13
        Klein-Nishina :  Emin=        0 eV    Emax=       10 TeV
 
 conv:   for  gamma    SubType= 14
-      Lambda table from 1.022 MeV to 10 TeV in 49 bins, spline: 1
+      Lambda table from 1.022 MeV to 10 TeV in 140 bins, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         BetheHeitler :  Emin=        0 eV    Emax=       80 GeV
      BetheHeitlerLPM :  Emin=       80 GeV   Emax=       10 TeV
@@ -435,6 +435,28 @@ hPairProd:   for  pi-    SubType= 4
                   HADRONIC PROCESSES SUMMARY (verbose level 1)
 
 ---------------------------------------------------
+                           Hadronic Processes for neutron
+
+  Process: hadElastic
+        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
+     Cr_sctns:     ChipsNeutronElasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: neutronInelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: nCapture
+        Model:               nRadCapture: 0 eV  ---> 100 TeV
+     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
+
+  Process: nKiller
+
+---------------------------------------------------
                            Hadronic Processes for GenericIon
 
   Process: ionInelastic
@@ -543,26 +565,6 @@ hPairProd:   for  pi-    SubType= 4
   Process: muMinusCaptureAtRest
 
 ---------------------------------------------------
-                           Hadronic Processes for neutron
-
-  Process: hadElastic
-        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
-     Cr_sctns:     ChipsNeutronElasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: neutronInelastic
-        Model:                      FTFP: 4 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 5 GeV
-     Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
-  Process: nCapture
-        Model:               nRadCapture: 0 eV  ---> 100 TeV
-     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
-
----------------------------------------------------
                            Hadronic Processes for pi+
 
   Process: hadElastic
@@ -614,56 +616,46 @@ hPairProd:   for  pi-    SubType= 4
 
 ================================================================
 ### Run 0 start.
->>> Event 0
-$$$X Primary track 100
 
 >>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 2 hits.
-Hodoscope2 has 10 hits.
-Chamber1 has 548 hits.
-Chamber2 has 501 hits.
-EmCalorimeter has 39 hits. Total Edep is 87551.3 (MeV)
-HadCalorimeter has 6 hits. Total Edep is 15.6899 (MeV)
->>> Event 1
-$$$X Primary track 100
+Hodoscope1 has 3 hits.
+Hodoscope2 has 12 hits.
+Chamber1 has 532 hits.
+Chamber2 has 513 hits.
+EmCalorimeter has 40 hits. Total Edep is 90675.1 (MeV)
+HadCalorimeter has 4 hits. Total Edep is 3.59171 (MeV)
 
 >>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 4 hits.
-Hodoscope2 has 3 hits.
-Chamber1 has 531 hits.
-Chamber2 has 510 hits.
-EmCalorimeter has 16 hits. Total Edep is 18738.4 (MeV)
-HadCalorimeter has 4 hits. Total Edep is 2468.76 (MeV)
->>> Event 2
-$$$X Primary track 100
+Hodoscope1 has 2 hits.
+Hodoscope2 has 4 hits.
+Chamber1 has 547 hits.
+Chamber2 has 511 hits.
+EmCalorimeter has 22 hits. Total Edep is 18768.8 (MeV)
+HadCalorimeter has 4 hits. Total Edep is 2371.65 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 4 hits.
-Hodoscope2 has 13 hits.
-Chamber1 has 527 hits.
-Chamber2 has 509 hits.
-EmCalorimeter has 66 hits. Total Edep is 28607.6 (MeV)
-HadCalorimeter has 18 hits. Total Edep is 2170.2 (MeV)
->>> Event 3
-$$$X Primary track 100
+Hodoscope1 has 2 hits.
+Hodoscope2 has 9 hits.
+Chamber1 has 528 hits.
+Chamber2 has 483 hits.
+EmCalorimeter has 63 hits. Total Edep is 25964.9 (MeV)
+HadCalorimeter has 17 hits. Total Edep is 1563.35 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 6 hits.
-Hodoscope2 has 12 hits.
-Chamber1 has 436 hits.
-Chamber2 has 179 hits.
-EmCalorimeter has 40 hits. Total Edep is 7201.46 (MeV)
-HadCalorimeter has 14 hits. Total Edep is 397.068 (MeV)
->>> Event 4
-$$$X Primary track 100
+Hodoscope1 has 5 hits.
+Hodoscope2 has 6 hits.
+Chamber1 has 460 hits.
+Chamber2 has 195 hits.
+EmCalorimeter has 53 hits. Total Edep is 10156.3 (MeV)
+HadCalorimeter has 16 hits. Total Edep is 513.971 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 2 hits.
-Hodoscope2 has 6 hits.
-Chamber1 has 535 hits.
-Chamber2 has 508 hits.
-EmCalorimeter has 58 hits. Total Edep is 28824.1 (MeV)
-HadCalorimeter has 19 hits. Total Edep is 94.2033 (MeV)
-Time of this run:   User=10.4s Real=10.49s Sys=0.05s
+Hodoscope1 has 3 hits.
+Hodoscope2 has 9 hits.
+Chamber1 has 525 hits.
+Chamber2 has 502 hits.
+EmCalorimeter has 59 hits. Total Edep is 27585.2 (MeV)
+HadCalorimeter has 14 hits. Total Edep is 111.557 (MeV)
+Time of this run:   User=11.92s Real=12.19s Sys=0.05s
 Number of events processed: 5
-Real time 0:00:11, CP time 11.420
+Real time 0:00:13, CP time 12.980

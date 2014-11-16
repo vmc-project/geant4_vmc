@@ -2,36 +2,36 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/18     14 March 2014   *
+  *   Version   5.34/23   7 November 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
+ROOT 5.34/23 (v5-34-23@v5-34-23, Nov 14 2014, 00:24:05 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_E03_1.C("g4Config1.C", kFALSE)...
+Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
 33
-Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
+Processing test_E03_1.C("g4Config1.C", kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.00.b01 ( 14 March 2014 )
+ Version 3.0 ( 17 November 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 *************************************************************
- Geant4 version Name: geant4-10-00-patch-01    (28-February-2014)
+ Geant4 version Name: geant4-10-00-patch-03    (31-October-2014)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -63,19 +63,19 @@ Geant4 has been created.
  Material: liquidArgon    density:  1.390 g/cm3   RadL:  14.065 cm   Nucl.Int.Length:  86.078 cm 
                        Imean: 188.000 eV 
 
-   --->  Element: liquidArgon ( )   Z = 18.0   N =  40.0   A =  39.95 g/mole
-         --->  Isotope:    36   Z = 18   N =  36   A =  35.97 g/mole   abundance:   0.34 %
-         --->  Isotope:    38   Z = 18   N =  38   A =  37.96 g/mole   abundance:   0.06 %
-         --->  Isotope:    40   Z = 18   N =  40   A =  39.96 g/mole   abundance:  99.60 %
+   --->  Element: Ar (Ar)   Z = 18.0   N =  40.0   A =  39.95 g/mole
+         --->  Isotope:  Ar36   Z = 18   N =  36   A =  35.97 g/mole   abundance:   0.34 %
+         --->  Isotope:  Ar38   Z = 18   N =  38   A =  37.96 g/mole   abundance:   0.06 %
+         --->  Isotope:  Ar40   Z = 18   N =  40   A =  39.96 g/mole   abundance:  99.60 %
           ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
 
 
- Material: Galactic    density:  0.000 kg/m3   RadL: 204727512.315 pc   Nucl.Int.Length: 113804112.837 pc 
+ Material: Galactic    density:  0.000 kg/m3   RadL: 204727512.315 pc   Nucl.Int.Length: 113427275.267 pc 
                        Imean:  19.200 eV   temperature:   2.73 K  pressure:   0.00 atm
 
-   --->  Element: Galactic ( )   Z =  1.0   N =   1.0   A =   1.01 g/mole
-         --->  Isotope:     1   Z =  1   N =   1   A =   1.01 g/mole   abundance:  99.99 %
-         --->  Isotope:     2   Z =  1   N =   2   A =   2.01 g/mole   abundance:   0.01 %
+   --->  Element: H (H)   Z =  1.0   N =   1.0   A =   1.01 g/mole
+         --->  Isotope:    H1   Z =  1   N =   1   A =   1.01 g/mole   abundance:  99.99 %
+         --->  Isotope:    H2   Z =  1   N =   2   A =   2.01 g/mole   abundance:   0.01 %
           ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
 
 
@@ -173,71 +173,6 @@ Checking overlaps for volume Gap ... OK!
 
 ### User particles physics constructed. 
 ### Processes mapped to VMC codes ok.
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Aluminium not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Lead not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Water not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Scintillator not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Mylar not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium quartz not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Air not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Aerogel not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium CarbonicGas not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium WaterSteam not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Beam not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4SDServices::GetVolumeID:
-    Unknown Volume Id for ABSO
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4SDServices::GetVolumeID:
-    Unknown Volume Id for GAPX
-+++++++++++++++++++++++
-
 Available UI session types: [ GAG, tcsh, csh ]
 
 **********************************************
@@ -262,7 +197,7 @@ compt:   for  gamma    SubType= 13
        Klein-Nishina :  Emin=        0 eV    Emax=       10 TeV
 
 conv:   for  gamma    SubType= 14
-      Lambda table from 1.022 MeV to 10 TeV in 49 bins, spline: 1
+      Lambda table from 1.022 MeV to 10 TeV in 140 bins, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         BetheHeitler :  Emin=        0 eV    Emax=       80 GeV
      BetheHeitlerLPM :  Emin=       80 GeV   Emax=       10 TeV
@@ -596,6 +531,28 @@ hPairProd:   for  pi-    SubType= 4
                   HADRONIC PROCESSES SUMMARY (verbose level 1)
 
 ---------------------------------------------------
+                           Hadronic Processes for neutron
+
+  Process: hadElastic
+        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
+     Cr_sctns:     ChipsNeutronElasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: neutronInelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: nCapture
+        Model:               nRadCapture: 0 eV  ---> 100 TeV
+     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
+
+  Process: nKiller
+
+---------------------------------------------------
                            Hadronic Processes for GenericIon
 
   Process: ionInelastic
@@ -702,26 +659,6 @@ hPairProd:   for  pi-    SubType= 4
                            Hadronic Processes for mu-
 
   Process: muMinusCaptureAtRest
-
----------------------------------------------------
-                           Hadronic Processes for neutron
-
-  Process: hadElastic
-        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
-     Cr_sctns:     ChipsNeutronElasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: neutronInelastic
-        Model:                      FTFP: 4 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 5 GeV
-     Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
-  Process: nCapture
-        Model:               nRadCapture: 0 eV  ---> 100 TeV
-     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for pi+
@@ -777,61 +714,61 @@ hPairProd:   for  pi-    SubType= 4
 ### Run 0 start.
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 656.925       total track length (cm):  46.5284
-   Gap:      total energy (MeV): 163.691       total track length (cm):  84.6755
+   Absorber: total energy (MeV): 649.821       total track length (cm):  46.2808
+   Gap:      total energy (MeV): 175.048       total track length (cm):  89.4527
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV): 714.423       total track length (cm):   51.062
-   Gap:      total energy (MeV): 163.461       total track length (cm):    83.01
+   Absorber: total energy (MeV): 732.913       total track length (cm):  52.4614
+   Gap:      total energy (MeV): 169.719       total track length (cm):  84.9704
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 675.958       total track length (cm):  47.9758
-   Gap:      total energy (MeV):     170       total track length (cm):  85.4128
+   Absorber: total energy (MeV): 702.482       total track length (cm):   49.412
+   Gap:      total energy (MeV): 197.168       total track length (cm):  101.184
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 696.853       total track length (cm):  49.8475
-   Gap:      total energy (MeV): 173.585       total track length (cm):  87.0473
+   Absorber: total energy (MeV): 660.019       total track length (cm):  47.0448
+   Gap:      total energy (MeV): 171.957       total track length (cm):  86.2305
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV):  718.32       total track length (cm):  50.8071
-   Gap:      total energy (MeV): 175.019       total track length (cm):  87.9722
-Time of this run:   User=0.2s Real=0.2s Sys=0s
+   Absorber: total energy (MeV):  770.66       total track length (cm):  54.6916
+   Gap:      total energy (MeV): 182.022       total track length (cm):  92.1518
+Time of this run:   User=0.19s Real=0.19s Sys=0.01s
 Number of events processed: 5
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/18     14 March 2014   *
+  *   Version   5.34/23   7 November 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
+ROOT 5.34/23 (v5-34-23@v5-34-23, Nov 14 2014, 00:24:05 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_E03_2.C("g4Config1.C", kFALSE)...
+Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
 33
-Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
+Processing test_E03_2.C("g4Config1.C", kFALSE)...
 --- Init MC 
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.00.b01 ( 14 March 2014 )
+ Version 3.0 ( 17 November 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 *************************************************************
- Geant4 version Name: geant4-10-00-patch-01    (28-February-2014)
+ Geant4 version Name: geant4-10-00-patch-03    (31-October-2014)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -864,19 +801,19 @@ Geant4 has been created.
  Material: liquidArgon    density:  1.390 g/cm3   RadL:  14.065 cm   Nucl.Int.Length:  86.078 cm 
                        Imean: 188.000 eV 
 
-   --->  Element: liquidArgon ( )   Z = 18.0   N =  40.0   A =  39.95 g/mole
-         --->  Isotope:    36   Z = 18   N =  36   A =  35.97 g/mole   abundance:   0.34 %
-         --->  Isotope:    38   Z = 18   N =  38   A =  37.96 g/mole   abundance:   0.06 %
-         --->  Isotope:    40   Z = 18   N =  40   A =  39.96 g/mole   abundance:  99.60 %
+   --->  Element: Ar (Ar)   Z = 18.0   N =  40.0   A =  39.95 g/mole
+         --->  Isotope:  Ar36   Z = 18   N =  36   A =  35.97 g/mole   abundance:   0.34 %
+         --->  Isotope:  Ar38   Z = 18   N =  38   A =  37.96 g/mole   abundance:   0.06 %
+         --->  Isotope:  Ar40   Z = 18   N =  40   A =  39.96 g/mole   abundance:  99.60 %
           ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
 
 
- Material: Galactic    density:  0.000 kg/m3   RadL: 204727512.315 pc   Nucl.Int.Length: 113804112.837 pc 
+ Material: Galactic    density:  0.000 kg/m3   RadL: 204727512.315 pc   Nucl.Int.Length: 113427275.267 pc 
                        Imean:  19.200 eV   temperature:   2.73 K  pressure:   0.00 atm
 
-   --->  Element: Galactic ( )   Z =  1.0   N =   1.0   A =   1.01 g/mole
-         --->  Isotope:     1   Z =  1   N =   1   A =   1.01 g/mole   abundance:  99.99 %
-         --->  Isotope:     2   Z =  1   N =   2   A =   2.01 g/mole   abundance:   0.01 %
+   --->  Element: H (H)   Z =  1.0   N =   1.0   A =   1.01 g/mole
+         --->  Isotope:    H1   Z =  1   N =   1   A =   1.01 g/mole   abundance:  99.99 %
+         --->  Isotope:    H2   Z =  1   N =   2   A =   2.01 g/mole   abundance:   0.01 %
           ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
 
 
@@ -975,72 +912,6 @@ Checking overlaps for volume Gap ... OK!
 
 ### User particles physics constructed. 
 ### Processes mapped to VMC codes ok.
---- Init geometry 
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Aluminium not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Lead not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Water not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Scintillator not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Mylar not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium quartz not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Air not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Aerogel not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium CarbonicGas not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium WaterSteam not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Beam not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4SDServices::GetVolumeID:
-    Unknown Volume Id for ABSO
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4SDServices::GetVolumeID:
-    Unknown Volume Id for GAPX
-+++++++++++++++++++++++
-
 Available UI session types: [ GAG, tcsh, csh ]
 --- Add ions 
 
@@ -1067,7 +938,7 @@ compt:   for  gamma    SubType= 13
        Klein-Nishina :  Emin=        0 eV    Emax=       10 TeV
 
 conv:   for  gamma    SubType= 14
-      Lambda table from 1.022 MeV to 10 TeV in 49 bins, spline: 1
+      Lambda table from 1.022 MeV to 10 TeV in 140 bins, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         BetheHeitler :  Emin=        0 eV    Emax=       80 GeV
      BetheHeitlerLPM :  Emin=       80 GeV   Emax=       10 TeV
@@ -1401,6 +1272,28 @@ hPairProd:   for  pi-    SubType= 4
                   HADRONIC PROCESSES SUMMARY (verbose level 1)
 
 ---------------------------------------------------
+                           Hadronic Processes for neutron
+
+  Process: hadElastic
+        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
+     Cr_sctns:     ChipsNeutronElasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: neutronInelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: nCapture
+        Model:               nRadCapture: 0 eV  ---> 100 TeV
+     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
+
+  Process: nKiller
+
+---------------------------------------------------
                            Hadronic Processes for GenericIon
 
   Process: ionInelastic
@@ -1507,26 +1400,6 @@ hPairProd:   for  pi-    SubType= 4
                            Hadronic Processes for mu-
 
   Process: muMinusCaptureAtRest
-
----------------------------------------------------
-                           Hadronic Processes for neutron
-
-  Process: hadElastic
-        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
-     Cr_sctns:     ChipsNeutronElasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: neutronInelastic
-        Model:                      FTFP: 4 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 5 GeV
-     Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
-  Process: nCapture
-        Model:               nRadCapture: 0 eV  ---> 100 TeV
-     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for pi+
@@ -1766,7 +1639,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  14    -4.621    0.037    0.135     1.8505    0.3936    0.029    0.207     Abso  Multiple scattering
 #  15    -4.622    0.054    0.130     1.6571    0.1933    0.019    0.226     Abso  Multiple scattering
 #  16    -4.626    0.063    0.120     1.5184    0.1388    0.017    0.243     Abso  Multiple scattering
-#  17    -4.606    0.068    0.115     1.2800    0.2384    0.022    0.265     Abso  Multiple scattering
+#  17    -4.606    0.068    0.115     1.2799    0.2384    0.022    0.265     Abso  Multiple scattering
 #  18    -4.599    0.079    0.117     0.7998    0.2014    0.014    0.279     Abso  Bremstrahlung
 #  19    -4.603    0.084    0.118     0.0000    0.7998    0.056    0.335     Abso  Energy loss
 #  20    -4.603    0.084    0.118     0.0000    0.0000    0.000    0.335     Abso  Positron annihilation
@@ -1813,7 +1686,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   1    -4.661    0.032    0.037    28.5630    0.4381    0.030    0.030     Abso  Bremstrahlung
 #   2    -4.358   -0.002    0.118    23.5549    4.3055    0.333    0.364     Abso  Bremstrahlung
 #   3    -4.326   -0.015    0.125    22.3164    0.4997    0.036    0.399     Abso  Bremstrahlung
-#   4    -3.920   -0.087    0.322    16.0080    6.3084    0.506    0.905     Abso  Energy loss
+#   4    -3.919   -0.087    0.322    16.0080    6.3084    0.506    0.905     Abso  Energy loss
 #   5    -3.919   -0.087    0.322     8.6191    0.0045    0.001    0.906     Abso  Bremstrahlung
 #   6    -3.888   -0.188    0.369     5.0806    1.6118    0.133    1.038     Abso  Bremstrahlung
 #   7    -3.895   -0.206    0.373     4.7029    0.1679    0.021    1.059     Abso  Bremstrahlung
@@ -1916,18 +1789,18 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   1    -3.960   -1.470   -0.476     0.1861    0.0244    0.011    0.011      Gap  Multiple scattering
 #   2    -3.959   -1.466   -0.480     0.1734    0.0127    0.006    0.017      Gap  Multiple scattering
 #   3    -3.959   -1.463   -0.483     0.1606    0.0128    0.005    0.022      Gap  Multiple scattering
-#   4    -3.959   -1.461   -0.486     0.1505    0.0101    0.004    0.026      Gap  Multiple scattering
+#   4    -3.959   -1.461   -0.486     0.1504    0.0101    0.004    0.026      Gap  Multiple scattering
 #   5    -3.959   -1.459   -0.488     0.1402    0.0102    0.003    0.029      Gap  Multiple scattering
 #   6    -3.960   -1.459   -0.490     0.1353    0.0049    0.002    0.031      Gap  Multiple scattering
 #   7    -3.961   -1.459   -0.492     0.1316    0.0037    0.002    0.033      Gap  Multiple scattering
 #   8    -3.961   -1.461   -0.493     0.1008    0.0308    0.002    0.035      Gap  Multiple scattering
-#   9    -3.963   -1.462   -0.494     0.0935    0.0073    0.002    0.037      Gap  Multiple scattering
-#  10    -3.964   -1.461   -0.493     0.0792    0.0143    0.002    0.039      Gap  Multiple scattering
+#   9    -3.962   -1.462   -0.494     0.0934    0.0073    0.002    0.037      Gap  Multiple scattering
+#  10    -3.964   -1.461   -0.493     0.0791    0.0143    0.002    0.039      Gap  Multiple scattering
 #  11    -3.966   -1.460   -0.493     0.0735    0.0057    0.002    0.041      Gap  Multiple scattering
 #  12    -3.967   -1.459   -0.493     0.0632    0.0103    0.002    0.043      Gap  Multiple scattering
-#  13    -3.968   -1.459   -0.494     0.0455    0.0177    0.002    0.045      Gap  Multiple scattering
-#  14    -3.968   -1.458   -0.495     0.0314    0.0141    0.002    0.047      Gap  Multiple scattering
-#  15    -3.968   -1.458   -0.494     0.0000    0.0314    0.002    0.049      Gap  Energy loss
+#  13    -3.968   -1.459   -0.494     0.0454    0.0177    0.002    0.045      Gap  Multiple scattering
+#  14    -3.968   -1.458   -0.495     0.0313    0.0141    0.002    0.047      Gap  Multiple scattering
+#  15    -3.968   -1.458   -0.494     0.0000    0.0313    0.002    0.049      Gap  Energy loss
 
 ****************************************************************************************************
   Particle = e-     Track ID = 32     Parent ID = 28
@@ -2070,44 +1943,44 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
   Particle = gamma     Track ID = 49     Parent ID = 48
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -3.544   -0.413    0.194     1.8430    0.0000    0.000    0.000     Abso  No active process
-#   1    -3.426   -0.889   -0.000     1.8430    0.0000    0.528    0.528     Abso  Transportation
-#   2    -3.426   -0.889   -0.000     1.8430    0.0000    0.000    0.528      Gap  No active process
-#   3    -3.121   -2.115   -0.500     1.8430    0.0000    1.358    1.886      Gap  Transportation
-#   4    -3.121   -2.115   -0.500     1.8430    0.0000    0.000    1.886     Abso  No active process
+#   0    -3.544   -0.413    0.194     1.8429    0.0000    0.000    0.000     Abso  No active process
+#   1    -3.426   -0.889    0.000     1.8429    0.0000    0.528    0.528     Abso  Transportation
+#   2    -3.426   -0.889    0.000     1.8429    0.0000    0.000    0.528      Gap  No active process
+#   3    -3.120   -2.115   -0.500     1.8429    0.0000    1.358    1.886      Gap  Transportation
+#   4    -3.120   -2.115   -0.500     1.8429    0.0000    0.000    1.886     Abso  No active process
 #   5    -3.094   -2.220   -0.543     1.6819    0.0000    0.116    2.002     Abso  Compton scattering
 #   6    -2.781   -2.847   -0.921     1.5945    0.0000    0.796    2.799     Abso  Compton scattering
 #   7    -2.703   -3.001   -1.060     1.5089    0.0000    0.221    3.020     Abso  Compton scattering
-#   8    -2.697   -3.009   -1.067     0.7860    0.0000    0.013    3.033     Abso  Compton scattering
+#   8    -2.696   -3.009   -1.067     0.7860    0.0000    0.013    3.033     Abso  Compton scattering
 #   9    -2.292   -2.966   -1.500     0.7860    0.0000    0.595    3.628     Abso  Transportation
 #  10    -2.292   -2.966   -1.500     0.7860    0.0000    0.000    3.628      Gap  No active process
-#  11    -1.825   -2.917   -2.000     0.7860    0.0000    0.686    4.314      Gap  Transportation
-#  12    -1.825   -2.917   -2.000     0.7860    0.0000    0.000    4.314     Abso  No active process
+#  11    -1.824   -2.917   -2.000     0.7860    0.0000    0.686    4.314      Gap  Transportation
+#  12    -1.824   -2.917   -2.000     0.7860    0.0000    0.000    4.314     Abso  No active process
 #  13    -1.149   -2.845   -2.723     0.7377    0.0000    0.992    5.306     Abso  Compton scattering
-#  14    -0.946   -2.913   -3.000     0.7377    0.0000    0.350    5.656     Abso  Transportation
-#  15    -0.946   -2.913   -3.000     0.7377    0.0000    0.000    5.656      Gap  No active process
-#  16    -0.578   -3.037   -3.500     0.7377    0.0000    0.633    6.289      Gap  Transportation
-#  17    -0.578   -3.037   -3.500     0.7377    0.0000    0.000    6.289     Abso  No active process
-#  18    -0.573   -3.038   -3.506     0.6214    0.0000    0.008    6.297     Abso  Compton scattering
+#  14    -0.945   -2.913   -3.000     0.7377    0.0000    0.350    5.656     Abso  Transportation
+#  15    -0.945   -2.913   -3.000     0.7377    0.0000    0.000    5.656      Gap  No active process
+#  16    -0.578   -3.036   -3.500     0.7377    0.0000    0.633    6.289      Gap  Transportation
+#  17    -0.578   -3.036   -3.500     0.7377    0.0000    0.000    6.289     Abso  No active process
+#  18    -0.573   -3.038   -3.507     0.6214    0.0000    0.008    6.297     Abso  Compton scattering
 #  19    -0.259   -2.824   -4.500     0.6214    0.0000    1.064    7.361     Abso  Transportation
 #  20    -0.259   -2.824   -4.500     0.6214    0.0000    0.000    7.361      Gap  No active process
-#  21    -0.101   -2.717   -5.000     0.6214    0.0000    0.535    7.896      Gap  Transportation
-#  22    -0.101   -2.717   -5.000     0.6214    0.0000    0.000    7.896     Abso  No active process
-#  23     0.135   -2.556   -5.747     0.0000    0.0880    0.800    8.696     Abso  Photoelectric effect
+#  21    -0.101   -2.716   -5.000     0.6214    0.0000    0.535    7.896      Gap  Transportation
+#  22    -0.101   -2.716   -5.000     0.6214    0.0000    0.000    7.896     Abso  No active process
+#  23     0.135   -2.555   -5.747     0.0000    0.0880    0.800    8.696     Abso  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 50     Parent ID = 49
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0     0.135   -2.556   -5.747     0.5334    0.0000    0.000    0.000     Abso  No active process
-#   1     0.135   -2.555   -5.749     0.0000    0.5334    0.033    0.033     Abso  Energy loss
+#   0     0.135   -2.555   -5.747     0.5334    0.0000    0.000    0.000     Abso  No active process
+#   1     0.135   -2.554   -5.749     0.0000    0.5334    0.033    0.033     Abso  Energy loss
 
 ****************************************************************************************************
   Particle = e-     Track ID = 51     Parent ID = 49
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.573   -3.038   -3.506     0.1163    0.0000    0.000    0.000     Abso  No active process
-#   1    -0.573   -3.038   -3.506     0.0000    0.1163    0.003    0.003     Abso  Energy loss
+#   0    -0.573   -3.038   -3.507     0.1163    0.0000    0.000    0.000     Abso  No active process
+#   1    -0.573   -3.038   -3.507     0.0000    0.1163    0.003    0.003     Abso  Energy loss
 
 ****************************************************************************************************
   Particle = e-     Track ID = 52     Parent ID = 49
@@ -2120,7 +1993,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
   Particle = e-     Track ID = 53     Parent ID = 49
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.697   -3.009   -1.067     0.7229    0.0000    0.000    0.000     Abso  No active process
+#   0    -2.696   -3.009   -1.067     0.7229    0.0000    0.000    0.000     Abso  No active process
 #   1    -2.696   -3.013   -1.067     0.0000    0.7229    0.049    0.049     Abso  Energy loss
 
 ****************************************************************************************************
@@ -2236,44 +2109,44 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  47.529       total track length (cm):    3.487
    Gap:      total energy (MeV):   1.960       total track length (cm):    1.093
-Time of this run:   User=0.01s Real=0.01s Sys=0.01s
+Time of this run:   User=0.01s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/18     14 March 2014   *
+  *   Version   5.34/23   7 November 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
+ROOT 5.34/23 (v5-34-23@v5-34-23, Nov 14 2014, 00:24:05 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_E03_3.C("g4Config1.C", kFALSE)...
+Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
 33
-Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
+Processing test_E03_3.C("g4Config1.C", kFALSE)...
 --- Init MC 
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.00.b01 ( 14 March 2014 )
+ Version 3.0 ( 17 November 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 *************************************************************
- Geant4 version Name: geant4-10-00-patch-01    (28-February-2014)
+ Geant4 version Name: geant4-10-00-patch-03    (31-October-2014)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -2306,19 +2179,19 @@ Geant4 has been created.
  Material: liquidArgon    density:  1.390 g/cm3   RadL:  14.065 cm   Nucl.Int.Length:  86.078 cm 
                        Imean: 188.000 eV 
 
-   --->  Element: liquidArgon ( )   Z = 18.0   N =  40.0   A =  39.95 g/mole
-         --->  Isotope:    36   Z = 18   N =  36   A =  35.97 g/mole   abundance:   0.34 %
-         --->  Isotope:    38   Z = 18   N =  38   A =  37.96 g/mole   abundance:   0.06 %
-         --->  Isotope:    40   Z = 18   N =  40   A =  39.96 g/mole   abundance:  99.60 %
+   --->  Element: Ar (Ar)   Z = 18.0   N =  40.0   A =  39.95 g/mole
+         --->  Isotope:  Ar36   Z = 18   N =  36   A =  35.97 g/mole   abundance:   0.34 %
+         --->  Isotope:  Ar38   Z = 18   N =  38   A =  37.96 g/mole   abundance:   0.06 %
+         --->  Isotope:  Ar40   Z = 18   N =  40   A =  39.96 g/mole   abundance:  99.60 %
           ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
 
 
- Material: Galactic    density:  0.000 kg/m3   RadL: 204727512.315 pc   Nucl.Int.Length: 113804112.837 pc 
+ Material: Galactic    density:  0.000 kg/m3   RadL: 204727512.315 pc   Nucl.Int.Length: 113427275.267 pc 
                        Imean:  19.200 eV   temperature:   2.73 K  pressure:   0.00 atm
 
-   --->  Element: Galactic ( )   Z =  1.0   N =   1.0   A =   1.01 g/mole
-         --->  Isotope:     1   Z =  1   N =   1   A =   1.01 g/mole   abundance:  99.99 %
-         --->  Isotope:     2   Z =  1   N =   2   A =   2.01 g/mole   abundance:   0.01 %
+   --->  Element: H (H)   Z =  1.0   N =   1.0   A =   1.01 g/mole
+         --->  Isotope:    H1   Z =  1   N =   1   A =   1.01 g/mole   abundance:  99.99 %
+         --->  Isotope:    H2   Z =  1   N =   2   A =   2.01 g/mole   abundance:   0.01 %
           ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
 
 
@@ -2417,72 +2290,6 @@ Checking overlaps for volume Gap ... OK!
 
 ### User particles physics constructed. 
 ### Processes mapped to VMC codes ok.
---- Init geometry 
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Aluminium not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Lead not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Water not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Scintillator not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Mylar not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium quartz not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Air not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Aerogel not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium CarbonicGas not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium WaterSteam not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Beam not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4SDServices::GetVolumeID:
-    Unknown Volume Id for ABSO
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4SDServices::GetVolumeID:
-    Unknown Volume Id for GAPX
-+++++++++++++++++++++++
-
 Available UI session types: [ GAG, tcsh, csh ]
 --- Add ions 
 
@@ -2509,7 +2316,7 @@ compt:   for  gamma    SubType= 13
        Klein-Nishina :  Emin=        0 eV    Emax=       10 TeV
 
 conv:   for  gamma    SubType= 14
-      Lambda table from 1.022 MeV to 10 TeV in 49 bins, spline: 1
+      Lambda table from 1.022 MeV to 10 TeV in 140 bins, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         BetheHeitler :  Emin=        0 eV    Emax=       80 GeV
      BetheHeitlerLPM :  Emin=       80 GeV   Emax=       10 TeV
@@ -2843,6 +2650,28 @@ hPairProd:   for  pi-    SubType= 4
                   HADRONIC PROCESSES SUMMARY (verbose level 1)
 
 ---------------------------------------------------
+                           Hadronic Processes for neutron
+
+  Process: hadElastic
+        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
+     Cr_sctns:     ChipsNeutronElasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: neutronInelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: nCapture
+        Model:               nRadCapture: 0 eV  ---> 100 TeV
+     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
+
+  Process: nKiller
+
+---------------------------------------------------
                            Hadronic Processes for GenericIon
 
   Process: ionInelastic
@@ -2949,26 +2778,6 @@ hPairProd:   for  pi-    SubType= 4
                            Hadronic Processes for mu-
 
   Process: muMinusCaptureAtRest
-
----------------------------------------------------
-                           Hadronic Processes for neutron
-
-  Process: hadElastic
-        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
-     Cr_sctns:     ChipsNeutronElasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: neutronInelastic
-        Model:                      FTFP: 4 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 5 GeV
-     Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
-  Process: nCapture
-        Model:               nRadCapture: 0 eV  ---> 100 TeV
-     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for pi+
@@ -3093,36 +2902,36 @@ Number of events processed: 1
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/18     14 March 2014   *
+  *   Version   5.34/23   7 November 2014   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/18 (v5-34-18@v5-34-18, Mar 14 2014, 19:03:21 on linuxx8664gcc)
+ROOT 5.34/23 (v5-34-23@v5-34-23, Nov 14 2014, 00:24:05 on linuxx8664gcc)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 
-Processing test_E03_4.C("g4Config1.C", kFALSE)...
+Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
 33
-Loading VGM libraries ... 
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
+Processing test_E03_4.C("g4Config1.C", kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.00.b01 ( 14 March 2014 )
+ Version 3.0 ( 17 November 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 *************************************************************
- Geant4 version Name: geant4-10-00-patch-01    (28-February-2014)
+ Geant4 version Name: geant4-10-00-patch-03    (31-October-2014)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -3154,19 +2963,19 @@ Geant4 has been created.
  Material: liquidArgon    density:  1.390 g/cm3   RadL:  14.065 cm   Nucl.Int.Length:  86.078 cm 
                        Imean: 188.000 eV 
 
-   --->  Element: liquidArgon ( )   Z = 18.0   N =  40.0   A =  39.95 g/mole
-         --->  Isotope:    36   Z = 18   N =  36   A =  35.97 g/mole   abundance:   0.34 %
-         --->  Isotope:    38   Z = 18   N =  38   A =  37.96 g/mole   abundance:   0.06 %
-         --->  Isotope:    40   Z = 18   N =  40   A =  39.96 g/mole   abundance:  99.60 %
+   --->  Element: Ar (Ar)   Z = 18.0   N =  40.0   A =  39.95 g/mole
+         --->  Isotope:  Ar36   Z = 18   N =  36   A =  35.97 g/mole   abundance:   0.34 %
+         --->  Isotope:  Ar38   Z = 18   N =  38   A =  37.96 g/mole   abundance:   0.06 %
+         --->  Isotope:  Ar40   Z = 18   N =  40   A =  39.96 g/mole   abundance:  99.60 %
           ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
 
 
- Material: Galactic    density:  0.000 kg/m3   RadL: 204727512.315 pc   Nucl.Int.Length: 113804112.837 pc 
+ Material: Galactic    density:  0.000 kg/m3   RadL: 204727512.315 pc   Nucl.Int.Length: 113427275.267 pc 
                        Imean:  19.200 eV   temperature:   2.73 K  pressure:   0.00 atm
 
-   --->  Element: Galactic ( )   Z =  1.0   N =   1.0   A =   1.01 g/mole
-         --->  Isotope:     1   Z =  1   N =   1   A =   1.01 g/mole   abundance:  99.99 %
-         --->  Isotope:     2   Z =  1   N =   2   A =   2.01 g/mole   abundance:   0.01 %
+   --->  Element: H (H)   Z =  1.0   N =   1.0   A =   1.01 g/mole
+         --->  Isotope:    H1   Z =  1   N =   1   A =   1.01 g/mole   abundance:  99.99 %
+         --->  Isotope:    H2   Z =  1   N =   2   A =   2.01 g/mole   abundance:   0.01 %
           ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
 
 
@@ -3264,71 +3073,6 @@ Checking overlaps for volume Gap ... OK!
 
 ### User particles physics constructed. 
 ### Processes mapped to VMC codes ok.
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Aluminium not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Lead not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Water not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Scintillator not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Mylar not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium quartz not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Air not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Aerogel not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium CarbonicGas not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium WaterSteam not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4MCGeometry::MediumId:
-    Medium Beam not found.
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4SDServices::GetVolumeID:
-    Unknown Volume Id for ABSO
-+++++++++++++++++++++++
-
-++++  TG4Warning:  ++++
-    TG4SDServices::GetVolumeID:
-    Unknown Volume Id for GAPX
-+++++++++++++++++++++++
-
 Available UI session types: [ GAG, tcsh, csh ]
 
 **********************************************
@@ -3353,7 +3097,7 @@ compt:   for  gamma    SubType= 13
        Klein-Nishina :  Emin=        0 eV    Emax=       10 TeV
 
 conv:   for  gamma    SubType= 14
-      Lambda table from 1.022 MeV to 10 TeV in 49 bins, spline: 1
+      Lambda table from 1.022 MeV to 10 TeV in 140 bins, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         BetheHeitler :  Emin=        0 eV    Emax=       80 GeV
      BetheHeitlerLPM :  Emin=       80 GeV   Emax=       10 TeV
@@ -3687,6 +3431,28 @@ hPairProd:   for  pi-    SubType= 4
                   HADRONIC PROCESSES SUMMARY (verbose level 1)
 
 ---------------------------------------------------
+                           Hadronic Processes for neutron
+
+  Process: hadElastic
+        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
+     Cr_sctns:     ChipsNeutronElasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: neutronInelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: nCapture
+        Model:               nRadCapture: 0 eV  ---> 100 TeV
+     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
+
+  Process: nKiller
+
+---------------------------------------------------
                            Hadronic Processes for GenericIon
 
   Process: ionInelastic
@@ -3795,26 +3561,6 @@ hPairProd:   for  pi-    SubType= 4
   Process: muMinusCaptureAtRest
 
 ---------------------------------------------------
-                           Hadronic Processes for neutron
-
-  Process: hadElastic
-        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
-     Cr_sctns:     ChipsNeutronElasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: neutronInelastic
-        Model:                      FTFP: 4 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 5 GeV
-     Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
-  Process: nCapture
-        Model:               nRadCapture: 0 eV  ---> 100 TeV
-     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
-
----------------------------------------------------
                            Hadronic Processes for pi+
 
   Process: hadElastic
@@ -3888,7 +3634,7 @@ hPairProd:   for  pi-    SubType= 4
       Current track pi0  is a decay product of Parent ID = 0
       Current track pi0  is a decay product of Parent ID = 0
 
-   Absorber: total energy (MeV): 1039.72       total track length (cm):  75.1129
-   Gap:      total energy (MeV): 31.4087       total track length (cm):  15.7537
+   Absorber: total energy (MeV): 1036.95       total track length (cm):  75.8175
+   Gap:      total energy (MeV): 46.2845       total track length (cm):  23.7435
 Time of this run:   User=0.04s Real=0.04s Sys=0s
 Number of events processed: 1
