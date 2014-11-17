@@ -52,12 +52,6 @@
  */
 /** @} */
 
-/** @defgroup interfaces interfaces
- *  Category interfaces
- *  @{
- */
-/** @} */
-
 /** @defgroup visualization  visualization
  *  Category visualization
  *  @{
