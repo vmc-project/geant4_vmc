@@ -50,6 +50,7 @@
 #
 /optics_engine/setCerenkovMaxPhotons 20
 /optics_engine/setCerenkovMaxBetaChange 0.1
+/optics_engine/selectOpProcess Cerenkov
 /optics_engine/setTrackSecondariesFirst false
 
 #/tracking/verbose 1
