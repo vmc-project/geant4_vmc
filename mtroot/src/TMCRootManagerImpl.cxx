@@ -1,12 +1,10 @@
-// $Id$
-
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
 // Copyright (C) 2013, 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
-// Contact: vmc@pcroot.cern.ch
+// Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
 /// \file TMCRootManagerImpl.cxx

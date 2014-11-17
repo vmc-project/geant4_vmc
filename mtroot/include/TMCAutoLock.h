@@ -1,4 +1,5 @@
-// $Id$
+#ifndef TMCAUTOLOCK_HH
+#define TMCAUTOLOCK_HH
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -6,7 +7,7 @@
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
-// Contact: vmc@pcroot.cern.ch
+// Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
 /// \file TMCAutoLock.h
@@ -71,9 +72,6 @@
 // ---------------------------------------------------------------
 // Author: Andrea Dotti (15 Feb 2013): First Implementation
 // ---------------------------------------------------------------
-
-#ifndef TMCAUTOLOCK_HH
-#define TMCAUTOLOCK_HH
 
 #define TMCMULTITHREADED 1
 

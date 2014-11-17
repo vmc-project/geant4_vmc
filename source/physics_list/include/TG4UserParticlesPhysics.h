@@ -1,15 +1,13 @@
 #ifndef TG4_USER_PARTICLES_PHYSICS_H
 #define TG4_USER_PARTICLES_PHYSICS_H
 
-// $Id: TG4UserParticlesPhysics.h 295 2007-10-04 23:17:33Z rdm $
-
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007, 2008 Ivana Hrivnacova
+// Copyright (C) 2007 - 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
-// Contact: vmc@pcroot.cern.ch
+// Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
 /// \file TG4UserParticlesPhysics.h

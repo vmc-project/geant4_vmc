@@ -1,12 +1,13 @@
-// $Id$
+#ifndef Ex01_PARTICLE_H
+#define Ex01_PARTICLE_H
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007, 2008 Ivana Hrivnacova
+// Copyright (C) 2007 - 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
-// Contact: vmc@pcroot.cern.ch
+// Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
 /// \file  Ex01Particle.h
@@ -15,9 +16,6 @@
 /// Geant4 ExampleN01 adapted to Virtual Monte Carlo
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef Ex01_PARTICLE_H
-#define Ex01_PARTICLE_H
 
 #include <TObject.h>
 

@@ -1,15 +1,13 @@
 #ifndef TG4_RUN_ACTION_MESSENGER_H
 #define TG4_RUN_ACTION_MESSENGER_H 
 
-// $Id$
-
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2012 Ivana Hrivnacova
+// Copyright (C) 2007 - 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
-// Contact: vmc@pcroot.cern.ch
+// Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
 /// \file TG4RunActionMessenger.h
@@ -64,15 +62,13 @@ class TG4RunActionMessenger: public G4UImessenger
 #ifndef TG4_RUN_ACTION_MESSENGER_H
 #define TG4_RUN_ACTION_MESSENGER_H 
 
-// $Id$
-
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2012 Ivana Hrivnacova
+// Copyright (C) 2007 - 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
-// Contact: vmc@pcroot.cern.ch
+// Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
 /// \file TG4RunActionMessenger.h

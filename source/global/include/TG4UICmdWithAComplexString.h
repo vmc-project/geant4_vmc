@@ -1,15 +1,13 @@
 #ifndef TG4_UI_CMD_WITH_A_COMPLEX_STRING_H
 #define TG4_UI_CMD_WITH_A_COMPLEX_STRING_H
 
-// $Id$
-
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007, 2008 Ivana Hrivnacova
+// Copyright (C) 2007 - 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
-// Contact: vmc@pcroot.cern.ch
+// Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
 /// \file TG4UICmdWithAComplexString.h

@@ -1,15 +1,13 @@
 #ifndef A01_MAG_FIELD_H
 #define A01_MAG_FIELD_H
 
-// $Id$
-
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2012 Ivana Hrivnacova
+// Copyright (C) 2007 - 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
-// Contact: vmc@pcroot.cern.ch
+// Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
 /// \file  A01MagField.h
@@ -19,7 +17,6 @@
 ///
 /// \date 12/05/2012
 /// \author I. Hrivnacova; IPN, Orsay
-
 
 #include <TVirtualMagField.h>
 

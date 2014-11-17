@@ -1,12 +1,13 @@
-// $Id$
+#ifndef EX06_MC_APPLICATION_H
+#define EX06_MC_APPLICATION_H
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007, 2008 Ivana Hrivnacova
+// Copyright (C) 2007 - 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
-// Contact: vmc@pcroot.cern.ch
+// Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
 /// \file Ex06MCApplication.h
@@ -15,9 +16,6 @@
 /// Geant4 ExampleN06 adapted to Virtual Monte Carlo \n
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef EX06_MC_APPLICATION_H
-#define EX06_MC_APPLICATION_H
 
 #include <TVirtualMCApplication.h>
 #include "TMCVerbose.h"

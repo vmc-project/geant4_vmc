@@ -1,4 +1,5 @@
-// $Id$
+#ifndef ROOT_TMCRootManagerImpl
+#define ROOT_TMCRootManagerImpl
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -6,16 +7,13 @@
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
-// Contact: vmc@pcroot.cern.ch
+// Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
 /// \file TMCRootManagerImpl.h
 /// \brief Definition of the TMCRootManagerImpl class
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-#ifndef ROOT_TMCRootManagerImpl
-#define ROOT_TMCRootManagerImpl
 
 #include "TVirtualMCRootManager.h"
 

@@ -1,12 +1,13 @@
-// $Id$
+#ifndef EX02_DETECTOR_CONSTRUCTION_H
+#define EX02_DETECTOR_CONSTRUCTION_H
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007, 2008 Ivana Hrivnacova
+// Copyright (C) 2007 - 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
-// Contact: vmc@pcroot.cern.ch
+// Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
 /// \file Ex02DetectorConstruction.h 
@@ -17,9 +18,6 @@
 /// GEANT4 tag Name: geant4-04-00-patch-02 
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-#ifndef EX02_DETECTOR_CONSTRUCTION_H
-#define EX02_DETECTOR_CONSTRUCTION_H
 
 #include <TObject.h>
 #include <TString.h>
