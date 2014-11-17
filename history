@@ -9,7 +9,66 @@
      
 Tags (history):
 ===============
-  14/03/2013
+  17/11/2014
+  v3-0:
+    All packages:
+    - Consolidated migration to Geant4  multi-threading
+      o Added an option to select to run an application in sequential mode
+        also with Geant4 libraries built in MT mode
+      o Made setting defined via Geant4 actions available in PreInit phase
+    - Migration to Root 6.02/xx
+      (note that this involves building against C++11 standard)
+    - Migration to CMake build system (and removed "old" Makefiles)
+      o see new installation instructions at:
+        http://root.cern.ch/drupal/content/installing-geant4vmc-cmake
+    - Made use of G4Root package optional
+
+    Geant4 VMC:
+    - Removed obsolete "interfaces" category
+
+    G4Root (A. Gheata):
+    - Replaced old g4root test based on Geant4 N06 example with a new one based
+      on Geant4 OpNovice example (A. Gheata)
+    - Enabled Geant4 visualization of bounding box in TG4RootSolid.
+
+    Examples:
+    - Separated macros for loading libraries (load_g3|4.C) from run macros
+       (run_g3|4.C) - required for cling (Root6)
+    - Improved examples test suites:
+       o Possibility to select g3/g4 test via arguments
+       o Added summary message and return code
+       o Possibility to define build dir via arguments
+
+    Fixes:
+    - Fixed optional compilation without Geant4 G3toG4 package
+    - Fixed TG4GeometryManager destructor
+    - Fix in TG4RegionsManager to restore optional regions printing (was affected
+      by changes in Geant4 10.0)
+    - Fixed description of /mcPhysics/printAllProcess and /mcPhysics/dumpAllProcess
+      commands
+    - Fixed g4root test geometry (Andrei Gheata)
+    - Fixed TG4RootNavigator: added missing include and forward declarations
+    - Fix in G4Root for MT mode (by A. Gheata):
+      set G4Root navigator also to G4SteppingManager
+    - Fixed returning names via const char* (was failing on Mac)
+    - Fixed incorrectly used G4cout (instead of G4endl) in TG4SDConstruction.cxx,
+      TG4Medium.cxx
+
+    Known problems:
+    - Problem at exit in E02 example in MT mode
+    - On MAC OSX, a build option for Root VMC library has to be activated
+      for running in MT mode
+      o At present, this requires a customised ROOT installation with a
+        modification of TMCtls.h in root/montecarlo/vmc/include
+
+    Aknowledgment:
+     Thanks to Oliver Freyermuth, Physics Institute of the University of Bonn
+     for testing CMake build and examples test suites and his contributions.
+
+    Tested with Geant4 10.00.p03 (with embedded CLHEP 2.1.4.1)
+      Root 5.34/23 and Root 6.02/01, VGM 4.2
+
+  14/03/2014
   v3-00-b01:
     Migration to Geant4 10.00 MT (beta release)
     Geant4 VMC:
