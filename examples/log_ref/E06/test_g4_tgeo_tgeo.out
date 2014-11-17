@@ -45,7 +45,7 @@ Info in <TGeoManager::CloseGeometry>: 3 nodes/ 3 volume UID's in E06 VMC example
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 isMaster=1
-Running TVirtualMCApplication::ConstructGeometryTG4RootNavMgr has been created.0x2bed6d0
+Running TVirtualMCApplication::ConstructGeometryTG4RootNavMgr has been created.0x152afa0
 
 *************************************************************
  Geant4 version Name: geant4-10-00-patch-03    (31-October-2014)
@@ -95,7 +95,6 @@ G4OpticalPhysics:: Add Optical Physics Processes
   Cerenkov process:  used
     Max number of photons per step: 20
     Max beta change per step:       0.1
-  Track secondaries first:  activated
   Scintillation process:  not used
   OpAbsorption process:  used
   OpRayleigh process:  used
@@ -464,25 +463,25 @@ hPairProd:   for  pi-    SubType= 4
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
 ### Run 0 start.
 >>> Event 0
-Number of optical photons produced in this event : 1726
+Number of optical photons produced in this event : 1638
 >>> Event 1
-Number of optical photons produced in this event : 1734
+Number of optical photons produced in this event : 1667
 >>> Event 2
-Number of optical photons produced in this event : 1788
+Number of optical photons produced in this event : 1681
 >>> Event 3
-Number of optical photons produced in this event : 1770
+Number of optical photons produced in this event : 1734
 >>> Event 4
-Number of optical photons produced in this event : 1724
+Number of optical photons produced in this event : 1642
 >>> Event 5
-Number of optical photons produced in this event : 1677
+Number of optical photons produced in this event : 1716
 >>> Event 6
-Number of optical photons produced in this event : 1655
->>> Event 7
 Number of optical photons produced in this event : 1541
+>>> Event 7
+Number of optical photons produced in this event : 1676
 >>> Event 8
-Number of optical photons produced in this event : 1680
+Number of optical photons produced in this event : 1723
 >>> Event 9
-Number of optical photons produced in this event : 1694
-Time of this run:   User=2.85s Real=2.87s Sys=0s
+Number of optical photons produced in this event : 1674
+Time of this run:   User=2.47s Real=2.48s Sys=0s
 Number of events processed: 10
-Number of optical photons produced in this run : 16989
+Number of optical photons produced in this run : 16692

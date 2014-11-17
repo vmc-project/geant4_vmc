@@ -73,7 +73,6 @@ G4OpticalPhysics:: Add Optical Physics Processes
   Cerenkov process:  used
     Max number of photons per step: 20
     Max beta change per step:       0.1
-  Track secondaries first:  activated
   Scintillation process:  not used
   OpAbsorption process:  used
   OpRayleigh process:  used
@@ -442,25 +441,25 @@ hPairProd:   for  pi-    SubType= 4
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
 ### Run 0 start.
 >>> Event 0
-Number of optical photons produced in this event : 1674
+Number of optical photons produced in this event : 1686
 >>> Event 1
-Number of optical photons produced in this event : 1746
+Number of optical photons produced in this event : 1762
 >>> Event 2
-Number of optical photons produced in this event : 1815
+Number of optical photons produced in this event : 1650
 >>> Event 3
-Number of optical photons produced in this event : 1631
+Number of optical photons produced in this event : 1737
 >>> Event 4
-Number of optical photons produced in this event : 1659
+Number of optical photons produced in this event : 1716
 >>> Event 5
-Number of optical photons produced in this event : 1684
+Number of optical photons produced in this event : 1661
 >>> Event 6
-Number of optical photons produced in this event : 1660
+Number of optical photons produced in this event : 1608
 >>> Event 7
-Number of optical photons produced in this event : 1647
+Number of optical photons produced in this event : 1745
 >>> Event 8
-Number of optical photons produced in this event : 1662
+Number of optical photons produced in this event : 1649
 >>> Event 9
-Number of optical photons produced in this event : 1598
-Time of this run:   User=2.66s Real=2.68s Sys=0s
+Number of optical photons produced in this event : 1715
+Time of this run:   User=2.47s Real=2.47s Sys=0s
 Number of events processed: 10
-Number of optical photons produced in this run : 16776
+Number of optical photons produced in this run : 16929
