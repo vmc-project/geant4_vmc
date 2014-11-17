@@ -116,7 +116,7 @@ do
     # Run all macros + special configuration available only in E03 test
     if [ "$TESTG3" = "1" ]; then
       EXE=$G3EXEDIR"/g3vmc_test"$EXAMPLE
-      echo "... Running test with G3, geometry via TGeo, TGeo navigation vvv"
+      echo "... Running test with G3, geometry via TGeo, TGeo navigation"
       TMP_FAILED="0"
       $EXE -g3g TGeant3TGeo -rm "test_E03_1.C(\"\", kFALSE)" >& $OUT/test_g3_tgeo_tgeo.out
       if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
