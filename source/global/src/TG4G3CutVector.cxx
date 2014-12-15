@@ -62,7 +62,7 @@ TG4G3Cut TG4G3CutVector::GetCut(const G4String& cutName)
 G4bool TG4G3CutVector::CheckCutValue(TG4G3Cut cut, G4double value)
 {
 /// Check if the cut value is valid for given cut;
-/// if not - print warning and return false.
+/// if not return false.
 /// Currently only the PPCUTM value is tested if it is > 2 * mass of electron.
 
   //G4cout << "TG4G3CutVector::CheckCutValue: " 
@@ -71,13 +71,15 @@ G4bool TG4G3CutVector::CheckCutValue(TG4G3Cut cut, G4double value)
 
   if ( cut == kPPCUTM && 
        value < ( 2.*CLHEP::electron_mass_c2 - TG4G3CutVector::Tolerance() ) )  {
-    TString message = "PPCUTM cut value ";
-    message += value;
-    message += " MeV is lower than 2*e_mass.";
-    TG4Globals::Warning(
-      "TG4G3CutVector", "CheckCutValue", 
-      message + TG4Globals::Endl() + 
-      TString("The cut will be ignored."));
+    //TString message = "PPCUTM cut value ";
+    //message += value;
+    //message += " MeV is lower than 2*e_mass.";
+    //TG4Globals::Warning(
+    //  "TG4G3CutVector", "CheckCutValue",
+    //  message + TG4Globals::Endl() +
+    //  TString("The cut will be ignored."));
+              // The cut value is often set to 1 MeV, which makes no difference
+              // in Geant4, but in Geant3 it overrides the default, 10 MeV
     return false;
   }
 
