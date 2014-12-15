@@ -185,7 +185,8 @@ void TG4ProcessControlMapPhysics::FillMap()
 
   controlMap->Add("nKiller", kHADR); 
 
-  controlMap->Add("muNucl", kMUNU); 
+  controlMap->Add("muNucl", kMUNU);
+  controlMap->Add("muonNuclear", kMUNU);
   controlMap->Add("muMinusCaptureAtRest", kMUNU); 
   controlMap->Add("PositronNuclear", kNoG3Controls); 
   controlMap->Add("positronNuclear", kNoG3Controls); 

@@ -185,7 +185,8 @@ void TG4ProcessMCMapPhysics::FillMap()
 
   mcMap->Add("nKiller", kPHadronic); 
 
-  mcMap->Add("muNucl", kPMuonNuclear); 
+  mcMap->Add("muNucl", kPMuonNuclear);
+  mcMap->Add("muonNuclear", kPMuonNuclear);
   mcMap->Add("muMinusCaptureAtRest", kPMuonNuclear); 
   mcMap->Add("PositronNuclear", kPPositronNuclear); 
   mcMap->Add("positronNuclear", kPPositronNuclear); 
