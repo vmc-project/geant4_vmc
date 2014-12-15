@@ -24,6 +24,7 @@ class G4UIdirectory;
 class G4UIcmdWithADoubleAndUnit;
 class G4UIcmdWithoutParameter;
 class G4UIcmdWithAString;
+class G4UIcmdWithAnInteger;
 
 /// \ingroup physics_list
 /// \brief Messenger class that defines commands for Geant4 VMC composed 
@@ -39,6 +40,8 @@ class G4UIcmdWithAString;
 /// - /mcPhysics/printVolumeLimits [volName]
 /// - /mcPhysics/printGlobalCuts
 /// - /mcPhysics/printGlobalControls
+/// - /mcPhysics/g4NeutronHPVerbose
+/// - /mcPhysics/g4HadronicProcessStoreVerbose
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -100,6 +103,12 @@ class TG4ComposedPhysicsMessenger : public G4UImessenger
 
     /// printGeneralControls command
     G4UIcmdWithoutParameter*    fPrintGlobalControlsCmd;
+
+    /// g4NeutronHPVerbose command
+    G4UIcmdWithAnInteger*       fG4NeutronHPVerboseCmd;
+
+    /// g4HadronicProcessStoreVerbose command
+    G4UIcmdWithAnInteger*       fG4HadronicProcessStoreVerboseCmd;
 };     
 
 #endif //TG4_COMPOSED_PHYSICS_MESSENGER_H

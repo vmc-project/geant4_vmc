@@ -24,6 +24,9 @@
 #include <G4UIcmdWithADoubleAndUnit.hh>
 #include <G4UIcmdWithoutParameter.hh>
 #include <G4UIcmdWithAString.hh>
+#include <G4UIcmdWithAnInteger.hh>
+#include <G4NeutronHPManager.hh>
+#include <G4HadronicProcessStore.hh>
 
 //______________________________________________________________________________
 TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
@@ -33,7 +36,9 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
     fRangeGammaCutCmd(0),   
     fRangeElectronCutCmd(0),
     fRangePositronCutCmd(0),
-    fRangeAllCutCmd(0)     
+    fRangeAllCutCmd(0),    
+    fG4NeutronHPVerboseCmd(0),
+    fG4HadronicProcessStoreVerboseCmd(0)
 { 
 /// Standard constructor
 
@@ -111,6 +116,21 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
   fPrintGlobalControlsCmd
     ->SetGuidance("Print global VMC (G3-like) process controls.");
   fPrintGlobalControlsCmd->AvailableForStates(G4State_Idle);
+
+  fG4NeutronHPVerboseCmd
+    = new G4UIcmdWithAnInteger("/mcPhysics/g4NeutronHPVerbose", this);
+  fG4NeutronHPVerboseCmd->SetGuidance("Set G4NeutronHPManager verbose level");
+  fG4NeutronHPVerboseCmd->SetParameterName("NeutronHPVerbose",false);
+  fG4NeutronHPVerboseCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+
+  fG4HadronicProcessStoreVerboseCmd
+    = new G4UIcmdWithAnInteger("/mcPhysics/g4HadronicProcessStoreVerbose", this);
+  fG4HadronicProcessStoreVerboseCmd
+    ->SetGuidance("Set G4NeutronHPManager verbose level");
+  fG4HadronicProcessStoreVerboseCmd
+    ->SetParameterName("HadronicProcessStoreVerbose",false);
+  fG4HadronicProcessStoreVerboseCmd
+    ->AvailableForStates(G4State_PreInit,G4State_Idle);
 }
 
 //______________________________________________________________________________
@@ -130,6 +150,8 @@ TG4ComposedPhysicsMessenger::~TG4ComposedPhysicsMessenger()
   delete fPrintVolumeLimitsCmd;
   delete fPrintGlobalCutsCmd;
   delete fPrintGlobalControlsCmd;
+  delete fG4NeutronHPVerboseCmd;
+  delete fG4HadronicProcessStoreVerboseCmd;
 }
 
 //
@@ -187,4 +209,14 @@ void TG4ComposedPhysicsMessenger::SetNewValue(G4UIcommand* command,
   else if (command == fPrintGlobalControlsCmd) {
     TG4G3PhysicsManager::Instance()->GetControlVector()->Print();
   }  
+  else if (command == fG4NeutronHPVerboseCmd) {
+    G4NeutronHPManager::GetInstance()
+      ->SetVerboseLevel(
+          fG4NeutronHPVerboseCmd->GetNewIntValue(newValue));
+  }
+  else if (command == fG4HadronicProcessStoreVerboseCmd) {
+    G4HadronicProcessStore::Instance()
+      ->SetVerbose(
+          fG4HadronicProcessStoreVerboseCmd->GetNewIntValue(newValue));
+  }
 }
