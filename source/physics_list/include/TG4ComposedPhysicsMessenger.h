@@ -34,6 +34,7 @@ class G4UIcmdWithAnInteger;
 /// - /mcPhysics/rangeCutForElectron 
 /// - /mcPhysics/rangeCutForPositron
 /// - /mcPhysics/rangeCutForGamma
+/// - /mcPhysics/rangeCutForProton
 /// - /mcPhysics/rangeCuts
 /// - /mcPhysics/printProcessMCMap
 /// - /mcPhysics/printProcessControlMap
@@ -79,6 +80,9 @@ class TG4ComposedPhysicsMessenger : public G4UImessenger
 
     /// rangeCutForPositron command
     G4UIcmdWithADoubleAndUnit*  fRangePositronCutCmd;
+
+    /// rangeCutForProton command
+    G4UIcmdWithADoubleAndUnit*  fRangeProtonCutCmd;
 
     /// rangeCuts command
     G4UIcmdWithADoubleAndUnit*  fRangeAllCutCmd;

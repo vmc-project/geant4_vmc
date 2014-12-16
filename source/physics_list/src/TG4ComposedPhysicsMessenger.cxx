@@ -36,6 +36,7 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
     fRangeGammaCutCmd(0),   
     fRangeElectronCutCmd(0),
     fRangePositronCutCmd(0),
+    fRangeProtonCutCmd(0),
     fRangeAllCutCmd(0),    
     fG4NeutronHPVerboseCmd(0),
     fG4HadronicProcessStoreVerboseCmd(0)
@@ -68,6 +69,14 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
   fRangePositronCutCmd->SetUnitCategory("Length");
   fRangePositronCutCmd->SetRange("PositronCut>0.0");
   fRangePositronCutCmd->AvailableForStates(G4State_PreInit, G4State_Idle);  
+
+  fRangeProtonCutCmd
+    = new G4UIcmdWithADoubleAndUnit("/mcPhysics/rangeCutForProton", this);
+  fRangeProtonCutCmd->SetGuidance("Set range cut for proton.");
+  fRangeProtonCutCmd->SetParameterName("ProtonCut", false);
+  fRangeProtonCutCmd->SetUnitCategory("Length");
+  fRangeProtonCutCmd->SetRange("ProtonCut>0.0");
+  fRangeProtonCutCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
   fRangeAllCutCmd 
     = new G4UIcmdWithADoubleAndUnit("/mcPhysics/rangeCuts", this);  
@@ -142,6 +151,7 @@ TG4ComposedPhysicsMessenger::~TG4ComposedPhysicsMessenger()
   delete fRangeGammaCutCmd;
   delete fRangeElectronCutCmd;
   delete fRangePositronCutCmd;
+  delete fRangeProtonCutCmd;
   delete fRangeAllCutCmd;
   delete fPrintAllProcessesCmd;
   delete fDumpAllProcessesCmd;
@@ -179,14 +189,21 @@ void TG4ComposedPhysicsMessenger::SetNewValue(G4UIcommand* command,
     TG4PhysicsManager::Instance()->SetCutForPositron(cut);
     fPhysicsList->SetCutForPositron(cut);
   }
+  else if ( command == fRangeProtonCutCmd ) {
+    G4double cut = fRangeProtonCutCmd->GetNewDoubleValue(newValue);
+    TG4PhysicsManager::Instance()->SetCutForProton(cut);
+    fPhysicsList->SetCutForProton(cut);
+  }
   else if( command == fRangeAllCutCmd ) {
     G4double cut = fRangeAllCutCmd->GetNewDoubleValue(newValue);
     TG4PhysicsManager::Instance()->SetCutForGamma(cut);
     TG4PhysicsManager::Instance()->SetCutForElectron(cut);
     TG4PhysicsManager::Instance()->SetCutForPositron(cut);
+    TG4PhysicsManager::Instance()->SetCutForProton(cut);
     fPhysicsList->SetCutForGamma(cut);
     fPhysicsList->SetCutForElectron(cut);
     fPhysicsList->SetCutForPositron(cut);
+    fPhysicsList->SetCutForProton(cut);
   }
   else if (command == fPrintAllProcessesCmd) {
     fPhysicsList->PrintAllProcesses();
