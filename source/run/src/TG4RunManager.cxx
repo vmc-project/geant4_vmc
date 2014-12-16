@@ -185,7 +185,6 @@ void TG4RunManager::ConfigureRunManager()
     
     // Pass geometry to G4Root navigator
     rootNavMgr = TG4RootNavMgr::GetInstance(gGeoManager);
-    G4cout << "TG4RootNavMgr has been created." << rootNavMgr << G4endl;
   }
 #endif
 
