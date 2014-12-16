@@ -87,13 +87,21 @@ class TG4RegionsManager : public TG4Verbose
     
     // set methods
     void   SetRangePrecision(G4int precision);
+    void   SetApplyForGamma(G4bool applyForGamma);
+    void   SetApplyForElectron(G4bool applyForElectron);
+    void   SetApplyForPositron(G4bool applyForPositron);
+    void   SetApplyForProton(G4bool applyForProton);
     void   SetCheck(G4bool isCheck);
     void   SetPrint(G4bool isPrint);
     
     // get methods
-    G4int  GetRangePrecision() const;                  
-    G4bool IsCheck() const;                  
-    G4bool IsPrint() const;                  
+    G4int  GetRangePrecision() const;
+    G4bool GetApplyForGamma() const;
+    G4bool GetApplyForElectron() const;
+    G4bool GetApplyForPositron() const;
+    G4bool GetApplyForProton() const;
+    G4bool IsCheck() const;
+    G4bool IsPrint() const;
   
   private:
     /// Not implemented
@@ -172,6 +180,14 @@ class TG4RegionsManager : public TG4Verbose
     TG4RegionsMessenger  fMessenger;   
     /// the precision for calculating ranges
     G4int  fRangePrecision;
+    /// option to apply range cuts for gamma (default is true)
+    G4bool fApplyForGamma;
+    /// option to apply range cuts for e- (default is true)
+    G4bool fApplyForElectron;
+    /// option to apply range cuts for e+ (default is true)
+    G4bool fApplyForPositron;
+    /// option to apply range cuts for proton (default is true)
+    G4bool fApplyForProton;
     /// option to perform consistency check (by default false)
     G4bool fIsCheck;                   
     /// option to print all regions 
@@ -187,6 +203,22 @@ inline void   TG4RegionsManager::SetRangePrecision(G4int precision)
 { G4cout << "### New precision: " << precision << G4endl;
   fRangePrecision = precision; }
 
+/// Set the option to apply range cuts for gamma (default is true)
+inline void TG4RegionsManager::SetApplyForGamma(G4bool applyForGamma)
+{ fApplyForGamma = applyForGamma; }
+
+/// Set the option to apply range cuts for e- (default is true)
+inline void TG4RegionsManager::SetApplyForElectron(G4bool applyForElectron)
+{ fApplyForElectron = applyForElectron; }
+
+/// Set the option to apply range cuts for e+ (default is true)
+inline void TG4RegionsManager::SetApplyForPositron(G4bool applyForPositron)
+{ fApplyForPositron = applyForPositron; }
+
+/// Set the option to apply range cuts for proton (default is true)
+inline void TG4RegionsManager::SetApplyForProton(G4bool applyForProton)
+{ fApplyForProton = applyForProton; }
+
 /// Set the option to perform consistency check 
 inline void  TG4RegionsManager::SetCheck(G4bool isCheck)
 {  fIsCheck = isCheck; }
@@ -198,6 +230,22 @@ inline void  TG4RegionsManager::SetPrint(G4bool isPrint)
 /// Return the precision for calculating ranges 
 inline G4int TG4RegionsManager::GetRangePrecision() const
 {  return fRangePrecision; }                  
+
+/// Return the option to apply range cuts for gamma
+inline G4bool TG4RegionsManager::GetApplyForGamma() const
+{  return fApplyForGamma; }
+
+/// Return the option to apply range cuts for e+
+inline G4bool TG4RegionsManager::GetApplyForElectron() const
+{  return fApplyForElectron; }
+
+/// Return the option to apply range cuts for positron
+inline G4bool TG4RegionsManager::GetApplyForPositron() const
+{  return fApplyForPositron; }
+
+/// Return the option to apply range cuts for proton
+inline G4bool TG4RegionsManager::GetApplyForProton() const
+{  return fApplyForProton; }
 
 /// Return the option to perform consistency check 
 inline G4bool TG4RegionsManager::IsCheck() const

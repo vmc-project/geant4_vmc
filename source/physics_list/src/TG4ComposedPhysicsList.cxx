@@ -22,7 +22,7 @@
 #include <G4Gamma.hh>
 #include <G4Electron.hh>
 #include <G4Positron.hh>
-
+#include <G4Proton.hh>
 
 //_____________________________________________________________________________
 TG4ComposedPhysicsList::TG4ComposedPhysicsList()
@@ -107,6 +107,7 @@ void TG4ComposedPhysicsList::SetCuts()
   SetCutValue(TG4PhysicsManager::Instance()->GetCutForGamma(), "gamma");
   SetCutValue(TG4PhysicsManager::Instance()->GetCutForElectron(), "e-");
   SetCutValue(TG4PhysicsManager::Instance()->GetCutForPositron(), "e+");
+  SetCutValue(TG4PhysicsManager::Instance()->GetCutForProton(), "proton");
 
   if ( VerboseLevel() > 1 ) DumpCutValuesTable();
 }
@@ -128,7 +129,6 @@ void TG4ComposedPhysicsList::SetCutForElectron(G4double cut)
 }
 
 //_____________________________________________________________________________
-
 void TG4ComposedPhysicsList::SetCutForPositron(G4double cut)
 {
 /// Set cut value for positron
@@ -136,6 +136,13 @@ void TG4ComposedPhysicsList::SetCutForPositron(G4double cut)
   SetParticleCuts(cut, G4Positron::Positron());
 }
 
+//_____________________________________________________________________________
+void TG4ComposedPhysicsList::SetCutForProton(G4double cut)
+{
+/// Set cut value for positron
+
+  SetParticleCuts(cut, G4Proton::Proton());
+}
 
 //_____________________________________________________________________________
 void TG4ComposedPhysicsList::PrintAllProcesses() const

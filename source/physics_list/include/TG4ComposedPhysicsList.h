@@ -48,6 +48,7 @@ class TG4ComposedPhysicsList: public G4VUserPhysicsList,
     void SetCutForGamma(G4double cut);
     void SetCutForElectron(G4double cut);
     void SetCutForPositron(G4double cut);
+    void SetCutForProton(G4double cut);
 
     void PrintAllProcesses() const;
     void DumpAllProcesses() const;

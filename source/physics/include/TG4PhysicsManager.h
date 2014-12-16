@@ -105,10 +105,12 @@ class TG4PhysicsManager : public TG4Verbose
     void SetCutForGamma(G4double cut);
     void SetCutForElectron(G4double cut);
     void SetCutForPositron(G4double cut);
+    void SetCutForProton(G4double cut);
     
     G4double GetCutForGamma() const;
     G4double GetCutForElectron() const;
     G4double GetCutForPositron() const;
+    G4double GetCutForProton() const;
     G4bool   IsOpBoundaryProcess() const;
    
   private:
@@ -162,6 +164,9 @@ class TG4PhysicsManager : public TG4Verbose
     /// range cut for positron 
     G4double               fCutForPositron; 
     
+    /// range cut for proton
+    G4double               fCutForProton;
+
     /// optical boundary process
     G4OpBoundaryProcess*   fOpBoundaryProcess;
     
@@ -185,10 +190,15 @@ inline void TG4PhysicsManager::SetCutForElectron(G4double cut) {
 } 
  
 inline void TG4PhysicsManager::SetCutForPositron(G4double cut) {
-  /// Set range cut value for positron 
+  /// Set range cut value for positron
   fCutForPositron = cut;
 }
- 
+
+inline void TG4PhysicsManager::SetCutForProton(G4double cut) {
+  /// Set range cut value for proton
+  fCutForProton = cut;
+}
+
 inline G4double TG4PhysicsManager::GetCutForGamma() const {
   /// Return range cut for gamma
   return fCutForGamma;
@@ -203,6 +213,11 @@ inline G4double TG4PhysicsManager::GetCutForPositron() const {
   /// Return range cut for positron
   return fCutForPositron;
 }  
+
+inline G4double TG4PhysicsManager::GetCutForProton() const {
+  /// Return range cut for positron
+  return fCutForProton;
+}
 
 inline G4bool TG4PhysicsManager::IsOpBoundaryProcess() const {
   /// Return true if optical boundary process is defined

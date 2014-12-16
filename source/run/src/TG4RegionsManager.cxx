@@ -52,6 +52,10 @@ TG4RegionsManager::TG4RegionsManager()
   : TG4Verbose("regionsManager"),
     fMessenger(this),
     fRangePrecision(fgkDefaultRangePrecision),
+    fApplyForGamma(true),
+    fApplyForElectron(true),
+    fApplyForPositron(true),
+    fApplyForProton(true),
     fIsCheck(false),
     fIsPrint(false)    
 { 
@@ -496,7 +500,13 @@ void TG4RegionsManager::DefineRegions()
 
   if ( VerboseLevel() > 0 )
     G4cout << "Converting VMC cuts in regions" << G4endl; 
-  
+
+  // Do nothing if no option is activated
+  if ( ! ( fApplyForGamma || fApplyForElectron || fApplyForPositron ||
+           fApplyForProton ) ) {
+    return;
+  }
+
   // Create G4 range to energy converters
   G4RToEConvForElectron g4ConverterEle;
   G4RToEConvForGamma g4ConverterGam;
@@ -506,13 +516,18 @@ void TG4RegionsManager::DefineRegions()
     = TG4PhysicsManager::Instance()->GetCutForElectron();
   G4double defaultRangeCutGam 
     = TG4PhysicsManager::Instance()->GetCutForGamma();
+  G4double defaultRangeCutPositron
+    = TG4PhysicsManager::Instance()->GetCutForPositron();
+  G4double defaultRangeCutProton
+    = TG4PhysicsManager::Instance()->GetCutForProton();
 
   // Create a new region with default cuts
   G4Region* defaultRegion = new G4Region(fgkDefaultRegionName);
   G4ProductionCuts* dcuts = new G4ProductionCuts();
   dcuts->SetProductionCut(defaultRangeCutGam, 0);
   dcuts->SetProductionCut(defaultRangeCutEle, 1);
-  dcuts->SetProductionCut(TG4PhysicsManager::Instance()->GetCutForPositron(), 2);
+  dcuts->SetProductionCut(defaultRangeCutPositron, 2);
+  dcuts->SetProductionCut(defaultRangeCutProton, 3);
   defaultRegion->SetProductionCuts(dcuts);
 
   // Get world default region 
@@ -590,8 +605,8 @@ void TG4RegionsManager::DefineRegions()
     if ( VerboseLevel() > 1 ) {
       G4cout << ".. converted in e- rangeCut = " << rangeEle << " mm  " 
              << "gamma rangeCut = " << rangeGam << " mm" << G4endl;
-    }          
-           
+    }
+
     if ( fabs ( rangeEle - defaultRangeCutEle ) < 1e-03 && 
          fabs ( rangeGam - defaultRangeCutGam ) < 1e-03 &&
          ! region ) {
@@ -609,9 +624,30 @@ void TG4RegionsManager::DefineRegions()
     else {           
       // Create new production cuts
       G4ProductionCuts* cuts = new G4ProductionCuts();
-      cuts->SetProductionCut(rangeGam, 0);
-      cuts->SetProductionCut(rangeEle, 1);
-      cuts->SetProductionCut(TG4PhysicsManager::Instance()->GetCutForPositron(), 2);
+
+      if ( fApplyForGamma ) {
+        cuts->SetProductionCut(rangeGam, 0);
+      } else {
+        cuts->SetProductionCut(defaultRangeCutGam , 0);
+      }
+
+      if ( fApplyForElectron ) {
+        cuts->SetProductionCut(rangeEle, 1);
+      } else {
+        cuts->SetProductionCut(defaultRangeCutEle, 1);
+      }
+
+      if ( fApplyForPositron ) {
+        cuts->SetProductionCut(rangeEle, 2);
+      } else {
+        cuts->SetProductionCut(defaultRangeCutPositron, 2);
+      }
+
+      if ( fApplyForProton ) {
+        cuts->SetProductionCut(rangeEle, 3);
+      } else {
+        cuts->SetProductionCut(defaultRangeCutProton, 2);
+      }
 
       if ( isWorld) {
         // set new production cuts to the world

@@ -56,6 +56,7 @@ TG4PhysicsManager::TG4PhysicsManager()
     fCutForGamma(fgkDefautCut),
     fCutForElectron(fgkDefautCut),
     fCutForPositron(fgkDefautCut),
+    fCutForProton(fgkDefautCut),
     fOpBoundaryProcess(0)
 { 
 /// Default constructor
