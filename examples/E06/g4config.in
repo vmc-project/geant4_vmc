@@ -20,37 +20,20 @@
 
 /control/cout/ignoreThreadsExcept 0
 
-# Optical processes verbose
+# Optical physics builder verbose
 # 
-#/optics_engine/selectOpProcess Scintillation
-#/optics_engine/setOpProcessVerbose 2
-#/optics_engine/selectOpProcess Cerenkov
-#/optics_engine/setOpProcessVerbose 2
-#/optics_engine/selectOpProcess Absorption
-#/optics_engine/setOpProcessVerbose 2
-#/optics_engine/selectOpProcess Rayleigh
-#/optics_engine/setOpProcessVerbose 2
-#/optics_engine/selectOpProcess Boundary
-#/optics_engine/setOpProcessVerbose 2
-#/optics_engine/selectOpProcess OptWLS
-#/optics_engine/setOpProcessVerbose 2
-#/optics_engine/selectOpProcess OptMieHG
-#/optics_engine/setOpProcessVerbose 2
+/process/optical/verbose 2
 
 # Inactivate scintillation, [WLS, MieHG]
 #
-/optics_engine/selectOpProcess Scintillation
-/optics_engine/setOpProcessUse false
-#/optics_engine/selectOpProcess OpWLS
-#/optics_engine/setOpProcessUse false
-#/optics_engine/selectOpProcess OpMieHG
-#/optics_engine/setOpProcessUse false
+/process/optical/processActivation Scintillation false
+#/process/optical/processActivation OpWLS false
+#/process/optical/processActivation OpMieHG false
 
 # Set parameters for Cerenkov
 #
-/optics_engine/setCerenkovMaxPhotons 20
-/optics_engine/setCerenkovMaxBetaChange 0.1
-/optics_engine/selectOpProcess Cerenkov
-/optics_engine/setTrackSecondariesFirst false
+/process/optical/defaults/cerenkov/setMaxPhotons 20
+/process/optical/defaults/cerenkov/setMaxBetaChange 0.1
+/process/optical/setTrackSecondariesFirst Cerenkov false
 
 #/tracking/verbose 1

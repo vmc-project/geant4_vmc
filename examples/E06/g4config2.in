@@ -13,11 +13,22 @@
 
 # Print material properties
 #
-/mcDet/printMaterials
-/mcDet/printMaterialsProperties
+#/mcDet/printMaterials
+#/mcDet/printMaterialsProperties
 
 # Physics list setting
 # 
 #/process/inactivate phot
 #/process/inactivate conv
 #/process/inactivate compt
+
+ # Optical processes verbose
+ # (not available in PreInit)
+ #
+/process/optical/absorption/verbose 0
+/process/optical/rayleigh/verbose 0
+/process/optical/mie/verbose 0
+/process/optical/boundary/verbose 0
+/process/optical/wls/verbose 0
+/process/optical/scintillation/verbose 0
+/process/optical/cerenkov/verbose 0

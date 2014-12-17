@@ -38,11 +38,11 @@ void test_E06(const TString& configMacro, Bool_t oldGeometry)
  // Initialize MC
   appl->InitMC(configMacro);
   
-  if ( gMC->GetName()  == "TGeant4" ) {
+  if ( TString(gMC->GetName()) == "TGeant4" ) {
     // Customise Geant4 setting after initialization:
     // Physics list
     ((TGeant4*)gMC)->ProcessGeantMacro("g4config2.in");
-  }  
+  }
 
   // Run MC
   appl->RunMC(10);
