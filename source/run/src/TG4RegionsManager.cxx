@@ -579,11 +579,11 @@ void TG4RegionsManager::DefineRegions()
         G4cout << "   " << "adding volume in region = " << regionName << G4endl;
       }
       if ( lv->GetRegion() != region ) region->AddRootLogicalVolume(lv);
-      // continue;
+      continue;
     } 
 
     // If this material was already processed and did not result
-    // in a new region: add the logical volume to the world region
+    // in a new region: add the logical volume to the default region
     if ( processedMaterials.find(material) != processedMaterials.end() && ! isWorld) {
       if ( VerboseLevel() > 1 ) {
         G4cout << "   " << "adding volume in the default region" << G4endl;
@@ -653,26 +653,19 @@ void TG4RegionsManager::DefineRegions()
         // set new production cuts to the world
         worldRegion->SetProductionCuts(cuts);
         worldRegion->RegionModified(true);
+        if ( VerboseLevel() > 1 ) {
+          G4cout << "   " << "setting new production cuts to the world region" << G4endl;
+        }
       }
       else {
-        if ( region ) {
-          // set new production cuts the region if it exists
-          delete region->GetProductionCuts();
-          region->SetProductionCuts(cuts);
-          if ( VerboseLevel() > 1 ) {
-            G4cout << "   " << "production cuts reset in region " << regionName << G4endl;
-          }  
+        // create new region with new production cuts
+        region = new G4Region(regionName);
+        ++counter;
+        if ( VerboseLevel() > 1 ) {
+          G4cout << "   " << "adding volume in a new region " << regionName << G4endl;
         }  
-        else {  
-          // create new region with new production cuts
-          region = new G4Region(regionName);
-          ++counter;
-          if ( VerboseLevel() > 1 ) {
-            G4cout << "   " << "adding volume in a new region " << regionName << G4endl;
-          }  
-          region->AddRootLogicalVolume(lv);
-          region->SetProductionCuts(cuts);
-        }         
+        region->AddRootLogicalVolume(lv);
+        region->SetProductionCuts(cuts);
       }  
     }  
   }
@@ -704,8 +697,8 @@ void TG4RegionsManager::PrintRegions() const
   G4ProductionCutsTable* productionCutsTable =  
     G4ProductionCutsTable::GetProductionCutsTable();
     
-  G4cout << "region #"
-         << "               material name"
+  G4cout << "couple #"
+         << "           material name"
          << "  rangeGam[mm]" 
          << "  rangeEle[mm]" 
          << "   cutGam[GeV]" 
