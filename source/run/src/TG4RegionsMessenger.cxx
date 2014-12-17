@@ -107,16 +107,16 @@ void TG4RegionsMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     fRegionsManager->SetRangePrecision(fSetRangePrecisionCmd->GetNewIntValue(newValue));
   }
   else if (command == fApplyForGammaCmd) {
-    fRegionsManager->SetCheck(fApplyForGammaCmd->GetNewBoolValue(newValue));
+    fRegionsManager->SetApplyForGamma(fApplyForGammaCmd->GetNewBoolValue(newValue));
   }
   else if (command == fApplyForElectronCmd) {
-    fRegionsManager->SetCheck(fApplyForElectronCmd->GetNewBoolValue(newValue));
+    fRegionsManager->SetApplyForGamma(fApplyForElectronCmd->GetNewBoolValue(newValue));
   }
   else if (command == fApplyForPositronCmd) {
-    fRegionsManager->SetCheck(fApplyForPositronCmd->GetNewBoolValue(newValue));
+    fRegionsManager->SetApplyForPositron(fApplyForPositronCmd->GetNewBoolValue(newValue));
   }
   else if (command == fApplyForProtonCmd) {
-    fRegionsManager->SetCheck(fApplyForProtonCmd->GetNewBoolValue(newValue));
+    fRegionsManager->SetApplyForProton(fApplyForProtonCmd->GetNewBoolValue(newValue));
   }
   else if (command == fSetCheckCmd) {
     fRegionsManager->SetCheck(fSetCheckCmd->GetNewBoolValue(newValue));
