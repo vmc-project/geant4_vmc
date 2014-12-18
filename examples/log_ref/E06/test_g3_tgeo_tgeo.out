@@ -66,11 +66,11 @@ Number of optical photons produced in this event : 2301
 Number of optical photons produced in this event : 2210
 Number of optical photons produced in this run : 21239
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   740577551    2C24510F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   523177791    1F2F0F3F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   735132261   740577551
-                                        HEX    2BD13A65    2C24510F
+          with Store/Table at absolute adrs   517732501   523177791
+                                        HEX    1EDBF895    1F2F0F3F
                                         HEX    FFACE78A           0
                               relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

@@ -48,11 +48,11 @@ MediumId: Medium Beam not found
    Absorber: total energy (MeV): 939.295       total track length (cm):  45.0105
    Gap:      total energy (MeV): 36.4053       total track length (cm):  15.9358
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr  1059555599    3F27890F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   299531071    11DA7B3F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs  1054110309  1059555599
-                                        HEX    3ED47265    3F27890F
+          with Store/Table at absolute adrs   294085781   299531071
+                                        HEX    11876495    11DA7B3F
                                         HEX    FFACE78A           0
                               relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -467,11 +467,11 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Gap:      total energy (MeV):   3.967       total track length (cm):    2.241
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   577205519    2267750F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   665784127    27AF0F3F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   571760229   577205519
-                                        HEX    22145E65    2267750F
+          with Store/Table at absolute adrs   660338837   665784127
+                                        HEX    275BF895    27AF0F3F
                                         HEX    FFACE78A           0
                               relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -608,11 +608,11 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   982891791    3A95BD0F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   806716223    3015833F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   977446501   982891791
-                                        HEX    3A42A665    3A95BD0F
+          with Store/Table at absolute adrs   801270933   806716223
+                                        HEX    2FC26C95    3015833F
                                         HEX    FFACE78A           0
                               relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -693,11 +693,11 @@ MediumId: Medium Beam not found
    Absorber: total energy (MeV): 1483.71       total track length (cm):   70.756
    Gap:      total energy (MeV): 76.3274       total track length (cm):  36.8609
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    89067791     54F110F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   817207103    30B5973F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    83622501    89067791
-                                        HEX     4FBFA65     54F110F
+          with Store/Table at absolute adrs   811761813   817207103
+                                        HEX    30628095    30B5973F
                                         HEX    FFACE78A           0
                               relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -1107,11 +1107,11 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Gap:      total energy (MeV):   2.957       total track length (cm):    1.496
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   380123407    16A8390F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   601615167    23DBEB3F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   374678117   380123407
-                                        HEX    16552265    16A8390F
+          with Store/Table at absolute adrs   596169877   601615167
+                                        HEX    2388D495    23DBEB3F
                                         HEX    FFACE78A           0
                               relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

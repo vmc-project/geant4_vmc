@@ -68,13 +68,13 @@ Chamber1 has 525 hits.
 Chamber2 has 530 hits.
 EmCalorimeter has 33 hits. Total Edep is 26404.5 (MeV)
 HadCalorimeter has 5 hits. Total Edep is 28.4749 (MeV)
-Real time 0:00:03, CP time 3.690
+Real time 0:00:04, CP time 3.670
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   617609487    24CFF90F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    74414911     46F7B3F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   612164197   617609487
-                                        HEX    247CE265    24CFF90F
+          with Store/Table at absolute adrs    68969621    74414911
+                                        HEX     41C6495     46F7B3F
                                         HEX    FFACE78A           0
                               relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

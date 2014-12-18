@@ -132,11 +132,11 @@ Primary
 Number of daughters: 0
 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   258974991     F6FA50F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   443367231    1A6D3F3F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   253529701   258974991
-                                        HEX     F1C8E65     F6FA50F
+          with Store/Table at absolute adrs   437921941   443367231
+                                        HEX    1A1A2895    1A6D3F3F
                                         HEX    FFACE78A           0
                               relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

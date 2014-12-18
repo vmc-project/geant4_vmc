@@ -60,11 +60,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 939.295       total track length (cm):  45.0105
    Gap:      total energy (MeV): 36.4053       total track length (cm):  15.9358
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr  1037739279    3DDAA50F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   244187967     E8E033F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs  1032293989  1037739279
-                                        HEX    3D878E65    3DDAA50F
+          with Store/Table at absolute adrs   238742677   244187967
+                                        HEX     E3AEC95     E8E033F
                                         HEX    FFACE78A           0
                               relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -486,11 +486,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   3.967       total track length (cm):    2.241
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   940381455    380D150F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   934444863    37B27F3F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   934936165   940381455
-                                        HEX    37B9FE65    380D150F
+          with Store/Table at absolute adrs   928999573   934444863
+                                        HEX    375F6895    37B27F3F
                                         HEX    FFACE78A           0
                               relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -634,11 +634,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr  1001600271    3BB3350F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   756569919    2D18573F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   996154981  1001600271
-                                        HEX    3B601E65    3BB3350F
+          with Store/Table at absolute adrs   751124629   756569919
+                                        HEX    2CC54095    2D18573F
                                         HEX    FFACE78A           0
                               relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -726,11 +726,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 1483.71       total track length (cm):   70.756
    Gap:      total energy (MeV): 76.3274       total track length (cm):  36.8609
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   848729359    3296950F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   231943999     DD32F3F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   843284069   848729359
-                                        HEX    32437E65    3296950F
+          with Store/Table at absolute adrs   226498709   231943999
+                                        HEX     D801895     DD32F3F
                                         HEX    FFACE78A           0
                               relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -1147,11 +1147,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   2.957       total track length (cm):    1.496
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    38604047     24D0D0F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   527635263    1F73133F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    33158757    38604047
-                                        HEX     1F9F665     24D0D0F
+          with Store/Table at absolute adrs   522189973   527635263
+                                        HEX    1F1FFC95    1F73133F
                                         HEX    FFACE78A           0
                               relative adrs    -5445750           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
