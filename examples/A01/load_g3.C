@@ -11,10 +11,11 @@
 /// \file A01/load_g3.C
 /// \brief Macro for loading libraries to run example A01 with Geant3. 
 
+#include "../macro/g3libs.C"
+
 void load_g3()
 {
   // Load Geant4 libraries
-  gROOT->LoadMacro("../macro/g3libs.C");
   g3libs();
 
   // Load this example library

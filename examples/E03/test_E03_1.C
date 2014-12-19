@@ -13,6 +13,8 @@
 ///
 /// Running Example03
 
+//#include "set_vis.C"
+
 void test_E03_1(const TString& configMacro, Bool_t oldGeometry)
 {
 /// Macro function for testing example E03 
@@ -41,7 +43,6 @@ void test_E03_1(const TString& configMacro, Bool_t oldGeometry)
   appl->InitMC(configMacro);
 
   // visualization setting
-  // gROOT->LoadMacro("set_vis.C");
   // set_vis();
 
   appl->RunMC(5);

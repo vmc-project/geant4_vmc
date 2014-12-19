@@ -10,12 +10,13 @@
 /// \file E03/read.C
 /// \brief Macro for reading the E03 simulated data from Root file
 
+#include "../macro/basiclibs.C"
+
 void read() 
 {
 /// Macro for reading the E03 simulated data from Root file
 
   // Load basic libraries
-  gROOT->LoadMacro("../macro/basiclibs.C");
   basiclibs();
 
   // Load this example library

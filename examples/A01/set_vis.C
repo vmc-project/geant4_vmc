@@ -10,6 +10,8 @@
 /// \file A01/set_vis.C
 /// \brief Macro for setting visualization for Example A01 
 
+#include "TVirtualMC.h"
+
 void set_vis()
 {
 /// Macro for setting visualization for Example A01 

@@ -11,6 +11,8 @@
 /// \file A01/run_g3.C
 /// \brief Macro for running Example A01 with Geant3 
 
+#include "set_vis.C"
+
 void run_g3(const TString& configMacro = "g3tgeoConfig.C") 
 {
 /// Macro function for running Example A01 with Geant3 from
@@ -29,7 +31,6 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
   appl->InitMC(configMacro);
 
   // visualization setting
-  gROOT->LoadMacro("set_vis.C");
   set_vis();
 
   TStopwatch timer;

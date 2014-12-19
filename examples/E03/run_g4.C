@@ -11,6 +11,8 @@
 /// \file E03/run_g4.C
 /// \brief Macro for running Example03 with Geant4. 
 
+#include "set_vis.C"
+
 void run_g4(const TString& configMacro = "g4Config.C")
 {
 /// Macro function for running Example03 with Geant4 from
@@ -28,7 +30,6 @@ void run_g4(const TString& configMacro = "g4Config.C")
   appl->InitMC(configMacro);
 
   // Visualization setting
-  gROOT->LoadMacro("set_vis.C");
   set_vis();
 
   // Enter in Geant4 interactive session

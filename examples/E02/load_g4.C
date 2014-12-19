@@ -11,10 +11,11 @@
 /// \file E02/run_g4.C
 /// \brief Macro for loading libraries to run Example02 with Geant4. 
 
+#include "../macro/g4libs.C"
+
 void load_g4() 
 {
   // Load Geant4 + VMC libraries
-  gROOT->LoadMacro("../macro/g4libs.C");
   g4libs();
 
   // Load this example library

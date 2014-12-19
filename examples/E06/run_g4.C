@@ -11,6 +11,8 @@
 /// \file E06/run_g4.C
 /// \brief Macro for running Example06 with Geant4. 
 
+//#include "optPhoton.C"
+
 void run_g4(const TString& configMacro = "g4Config.C") 
 {
 /// Macro function for running Example06 with Geant4 from
@@ -27,7 +29,6 @@ void run_g4(const TString& configMacro = "g4Config.C")
   //appl->SetVerboseLevel(3);  
   
   // Macro to run with primary = polarized optical photon
-  //gROOT->LoadMacro("optPhoton.C");
   //optPhoton();  
 
   // Initialize MC
