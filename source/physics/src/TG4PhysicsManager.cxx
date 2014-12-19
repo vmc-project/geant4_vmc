@@ -782,6 +782,9 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus()
 #if G4VERSION_NUMBER >= 1000
     case Dichroic:
 #endif       
+#if G4VERSION_NUMBER >= 1010
+    case Transmission:
+#endif       
        return kPLightRefraction;
        ;;
 
