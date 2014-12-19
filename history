@@ -9,6 +9,32 @@
      
 Tags (history):
 ===============
+  19/12/2014
+  v3-1:
+    All packages:
+    - Migration to Geant4 10.1 and Root 6.02/02
+
+    Geant4 VMC:
+    Improved implementation of range cuts:
+    - The range cut calculated per region for electron is now by default applied
+      also to positron and proton
+    - Implemented commands which allow to inactivate applying range cuts
+      per particle:
+      /mcRegions/applyForXYZ true|false  where XYZ=Gamma, Electron,Positron,Proton
+    - Added a command for setting the range cut for proton:
+      /mcPhysics/rangeCutForProton
+    - Implemented commands to reduce Geant4 output from Geant4 hadronics physics:
+      /mcPhysics/g4NeutronHPVerbose
+      /mcPhysics/g4HadronicProcessStoreVerbose
+
+    Known problems:
+    - The problems listed in v3-0 (related to MT only)  are remaining.
+    - test_suite_exe.sh fails for example A01 (during loading geometry from a file)
+      with Root 6.02/02 - the problem requires a fix in Root
+
+    Tested with Geant4 10.01 (with embedded CLHEP 2.2.0.4)
+      Root 5.34/23 and Root 6.02/02, VGM 4.2
+
   17/11/2014
   v3-0:
     All packages:
