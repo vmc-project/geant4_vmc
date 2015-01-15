@@ -26,6 +26,8 @@
 
 /// constant for conversion cm <-> mm
 static const double gCm = 1./cm; 
+static const double gZeroStepThr = 1.e-3; // >1.e-4 limit in G4PropagatorInField
+static const int    gAbandonZeroSteps = 40; // <50 limit in G4PropagatorInField
 
 //______________________________________________________________________________
 TG4RootNavigator::TG4RootNavigator()
@@ -37,7 +39,8 @@ TG4RootNavigator::TG4RootNavigator()
                   fStepExiting(kFALSE),
                   fNextPoint(),
                   fSafetyOrig(),
-                  fLastSafety(0)
+                  fLastSafety(0),
+                  fNzeroSteps(0)
 {
 /// Dummy ctor.
 }
@@ -52,7 +55,8 @@ TG4RootNavigator::TG4RootNavigator(TG4RootDetectorConstruction *dc)
                   fStepExiting(kFALSE),
                   fNextPoint(),
                   fSafetyOrig(),
-                  fLastSafety(0)
+                  fLastSafety(0),
+                  fNzeroSteps(0)
 {
 /// Default ctor.
    fSafetyOrig.set(kInfinity, kInfinity, kInfinity);
@@ -157,7 +161,17 @@ G4double TG4RootNavigator::ComputeStep(const G4ThreeVector &pGlobalPoint,
    }   
    G4double step = (fNavigator->GetStep()+tol)*cm;
 //   if (step >= pCurrentProposedStepLength) step = kInfinity;
-   if (step < 1.e3*tol*cm) step = 0.;
+   if (step < 1.e3*tol*cm) {
+      step = 0.;
+      fNzeroSteps++;
+      // Geant4 will abandon the track if the number of zero steps>50 just
+      // because it expects a non-zero distance inside the mother to the next daughter
+      // The way out is to generate an extra very small fake step in the mother,
+      // before this threshold is reached
+      if (fNzeroSteps > gAbandonZeroSteps) step = gZeroStepThr;
+   } else {
+     fNzeroSteps = 0;
+   }
    fStepEntering = fNavigator->IsStepEntering();
    fStepExiting  = fNavigator->IsStepExiting();
    if (fStepEntering || fStepExiting) {

@@ -48,6 +48,7 @@ protected:
    G4ThreeVector         fNextPoint;       ///< Crossing point with next boundary
    G4ThreeVector         fSafetyOrig;      ///< Last computed safety origin
    G4double              fLastSafety;      ///< Last computed safety
+   Int_t                 fNzeroSteps;      ///< Number of zero steps in ComputeStep
 private:
    G4VPhysicalVolume *SynchronizeHistory();
    TGeoNode          *SynchronizeGeoManager();
