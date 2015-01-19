@@ -9,6 +9,26 @@
      
 Tags (history):
 ===============
+  19/01/2015
+  v3-0-p1:
+    Patch release, including following fixes:
+    G4Root (A. Gheata):
+      Fixed boundary crossing errors (by A. Gheata)
+      -  This error was due to the G4 field propagator which was exiting
+         some volume inside the mother and expecting a non-zero step, but in fact
+         was entering a daughter volume right away.
+   This fixes killing tracks by G4PropagatorInField as:
+      *** G4Exception : GeomNav1002
+              issued by : G4PropagatorInField::ComputeStep()
+      Particle is stuck; it will be killed.
+          Zero progress for 51 attempted steps.
+          Proposed Step is 1.78471e-05 but Step Taken is 1.78471e-05
+         in volume TPC_Drift
+      *** This is just a warning message. ***
+
+    Tested with Geant4 10.00.p03 (with embedded CLHEP 2.1.4.1)
+      Root 5.34/23 and Root 6.02/01, VGM 4.2
+
   17/11/2014
   v3-0:
     All packages:
