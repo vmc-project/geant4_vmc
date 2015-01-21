@@ -44,10 +44,11 @@ class TG4MagneticField : public G4MagneticField
     TG4MagneticField(const TG4FieldParameters& parameters);
     virtual ~TG4MagneticField();
 
-    void GetFieldValue(const G4double point[3], G4double* bfield) const;
+    virtual void GetFieldValue(const G4double point[3], G4double* bfield) const;
+
     void Update(const TG4FieldParameters& parameters);
     
-  private:
+  protected:
     // methods
     G4EquationOfMotion*      CreateEquation(
                                    EquationType equation);

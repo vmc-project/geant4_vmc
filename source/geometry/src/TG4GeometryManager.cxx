@@ -21,7 +21,7 @@
 #include "TG4MediumMap.h"
 #include "TG4Medium.h"
 #include "TG4Limits.h"
-#include "TG4MagneticField.h"
+#include "TG4CachedMagneticField.h"
 #include "TG4G3Units.h"
 #include "TG4G3CutVector.h"
 #include "TG4G3ControlVector.h"
@@ -75,6 +75,7 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fUserGeometry(userGeometry),
     fFieldParameters(),
     fUserRegionConstruction(0),
+    fIsCachedMagneticField(false),
     fIsUserMaxStep(false),
     fIsMaxStepInLowDensityMaterials(true),
     fLimitDensity(fgDefaultLimitDensity),
@@ -545,11 +546,22 @@ void TG4GeometryManager::ConstructMagField()
     G4cout << "TG4GeometryManager::ConstructMagField" << G4endl;
     
   if ( gMC->GetMagField() ) {  
-      fMagneticField = new TG4MagneticField(fFieldParameters);
-      if ( VerboseLevel() > 1 ) {
-        G4cout << "Magnetic field created with stepper "
-               << TG4FieldParameters::StepperTypeName(
-                    fFieldParameters.GetStepperType()) << G4endl;
+      if ( fFieldParameters.GetConstDistance() > 0. ) {
+        fMagneticField = new TG4CachedMagneticField(fFieldParameters);
+        fIsCachedMagneticField = true;
+      } else {
+        fMagneticField = new TG4MagneticField(fFieldParameters);
+        fIsCachedMagneticField = false;
+      }
+
+      if ( VerboseLevel() > 0 ) {
+        if ( fIsCachedMagneticField ) {
+          G4cout << "Cached magnetic field created with stepper ";
+        } else {
+          G4cout << "Magnetic field created with stepper ";
+        }
+        G4cout << TG4FieldParameters::StepperTypeName(
+                  fFieldParameters.GetStepperType()) << G4endl;
       }
       G4AutoDelete::Register(fMagneticField);
   }  
@@ -647,7 +659,10 @@ void TG4GeometryManager::UpdateMagField()
   
   if ( VerboseLevel() > 1 ) 
     G4cout << "TG4GeometryManager::UpdateMagField" << G4endl;
-    
+
+  // Only the parameters defined in TG4Magnetic field can be updated when
+  // field already exists, so we can safely call the base class non virtual
+  // method
   fMagneticField->Update(fFieldParameters);
 }    
 
@@ -751,3 +766,12 @@ void TG4GeometryManager::SetUserRegionConstruction(
   fUserRegionConstruction = userRegionConstruction;
 }                                   
 
+//_____________________________________________________________________________
+void TG4GeometryManager::PrintCachedFieldStatistics() const
+{
+/// Print field caching statistics
+
+  if ( VerboseLevel() > 0 && fIsCachedMagneticField ) {
+    static_cast<TG4CachedMagneticField*>(fMagneticField)->PrintStatistics();
+  }
+}

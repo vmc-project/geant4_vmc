@@ -36,6 +36,7 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
     fSetDeltaIntersectionCmd(0),
     fSetMinimumEpsilonStepCmd(0),
     fSetMaximumEpsilonStepCmd(0),
+    fSetConstDistanceCmd(0),
     fPrintParametersCmd(0)
 {
 /// Standard constructor
@@ -115,6 +116,18 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
   fSetMaximumEpsilonStepCmd->SetParameterName("MaximumEpsilonStep", false);
   fSetMaximumEpsilonStepCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
   
+  fSetConstDistanceCmd
+    = new G4UIcmdWithADoubleAndUnit("/mcMagField/setConstDistance", this);
+  fSetConstDistanceCmd
+    ->SetGuidance("Set the distance within which the field is considered constant.");
+  fSetConstDistanceCmd
+    ->SetGuidance("Non-zero value will trigger creating a cached magnetic field.");
+  fSetConstDistanceCmd->SetParameterName("ConstDistance", false);
+  fSetConstDistanceCmd->SetDefaultUnit("mm");
+  fSetConstDistanceCmd->SetUnitCategory("Length");
+  fSetConstDistanceCmd->SetRange("ConstDistance >= 0");
+  fSetConstDistanceCmd->AvailableForStates(G4State_PreInit);
+
   fPrintParametersCmd 
     = new G4UIcmdWithoutParameter("/mcMagField/printParameters", this);
   fPrintParametersCmd->SetGuidance("Prints all accuracy parameters.");
@@ -135,6 +148,7 @@ TG4FieldParametersMessenger::~TG4FieldParametersMessenger()
   delete fSetDeltaIntersectionCmd;
   delete fSetMinimumEpsilonStepCmd;
   delete fSetMaximumEpsilonStepCmd;
+  delete fSetConstDistanceCmd;
 }
 
 //
@@ -188,6 +202,10 @@ void TG4FieldParametersMessenger::SetNewValue(G4UIcommand* command,
   if (command == fSetMaximumEpsilonStepCmd) {  
     fFieldParameters
       ->SetMaximumEpsilonStep(fSetMaximumEpsilonStepCmd->GetNewDoubleValue(newValues)); 
+  }
+  if (command == fSetConstDistanceCmd) {
+    fFieldParameters
+      ->SetConstDistance(fSetConstDistanceCmd->GetNewDoubleValue(newValues));
   }
   else if (command == fPrintParametersCmd) {
     fFieldParameters->PrintParameters();

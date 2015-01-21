@@ -62,7 +62,7 @@ TG4MagneticField::~TG4MagneticField()
 }
 
 //
-// private methods
+// protected methods
 //
 
 //_____________________________________________________________________________

@@ -64,7 +64,10 @@ class TG4GeometryManager : public TG4Verbose
             
     void SetLimitDensity(G4double density);
     void SetMaxStepInLowDensityMaterials(G4double maxStep);
-           
+
+    // printing
+    void PrintCachedFieldStatistics() const;
+
   private:
     /// Not implemented
     TG4GeometryManager(const TG4GeometryManager& right);
@@ -99,6 +102,9 @@ class TG4GeometryManager : public TG4Verbose
     TG4FieldParameters    fFieldParameters;  ///< magnetic field parameters
     static G4ThreadLocal TG4MagneticField*  fMagneticField; ///< magnetic field
     TG4VUserRegionConstruction* fUserRegionConstruction; ///< user region construction
+
+    /// info if a cached magnetic field is in use
+    G4bool    fIsCachedMagneticField;
 
     /// option to activate max step defined in tracking media
     G4bool    fIsUserMaxStep; 

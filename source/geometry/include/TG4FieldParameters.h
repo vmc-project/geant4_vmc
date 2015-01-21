@@ -97,6 +97,7 @@ class TG4FieldParameters
     void SetDeltaIntersection(G4double value); 
     void SetMinimumEpsilonStep(G4double value); 
     void SetMaximumEpsilonStep(G4double value); 
+    void SetConstDistance(G4double value);
 
     // get methods
     EquationType GetEquationType() const;
@@ -107,6 +108,7 @@ class TG4FieldParameters
     G4double GetDeltaIntersection() const; 
     G4double GetMinimumEpsilonStep() const; 
     G4double GetMaximumEpsilonStep() const; 
+    G4double GetConstDistance() const;
 
   private:
     // static data members
@@ -123,6 +125,8 @@ class TG4FieldParameters
     static const G4double  fgkDefaultMinimumEpsilonStep;
     /// Default maximum epsilon step in global field manager
     static const G4double  fgkDefaultMaximumEpsilonStep;
+    /// Default constant distance
+    static const G4double  fgkDefaultConstDistance;
   
     // data members
     //
@@ -147,6 +151,9 @@ class TG4FieldParameters
 
     /// Type of integrator of particle's equation of motion
     StepperType  fStepper;  
+
+    /// The distance within which the field is considered constant
+    G4double  fConstDistance;
 };
 
 // inline functions
@@ -191,6 +198,11 @@ inline void TG4FieldParameters::SetMaximumEpsilonStep(G4double value) {
   fMaximumEpsilonStep = value;
 }  
 
+/// Set the distance within which the field is considered constant
+inline void TG4FieldParameters::SetConstDistance(G4double value) {
+  fConstDistance = value;
+}
+
 /// Return the type of equation of motion of a particle in a field
 inline EquationType TG4FieldParameters::GetEquationType() const {
   return fEquation;
@@ -230,6 +242,11 @@ inline G4double TG4FieldParameters::GetMinimumEpsilonStep() const {
 inline G4double TG4FieldParameters::GetMaximumEpsilonStep() const { 
   return fMaximumEpsilonStep;
 }  
+
+/// Return the distance within which the field is considered constant
+inline G4double TG4FieldParameters::GetConstDistance() const {
+  return fConstDistance;
+}
 
 #endif //TG4_FIELD_PARAMETERS_H
 

@@ -45,6 +45,7 @@ class G4UIcmdWithADoubleAndUnit;
 /// - /mcMagField/setDeltaIntersection value
 /// - /mcMagField/setMinimumEpsilonStep value
 /// - /mcMagField/setMaximumEpsilonStep value 
+/// - /mcMagField/setConstDistance value
 /// - /mcMagField/printParameters
 ///
 /// \author I. Hrivnacova; IPN, Orsay
@@ -97,8 +98,11 @@ class TG4FieldParametersMessenger: public G4UImessenger
     
     /// command: setMaximumEpsilon
     G4UIcmdWithADouble*         fSetMaximumEpsilonStepCmd;
-    
-    /// command: printParameters     
+
+    /// command: setConstDistance
+    G4UIcmdWithADoubleAndUnit*  fSetConstDistanceCmd;
+
+    /// command: printParameters
     G4UIcmdWithoutParameter*    fPrintParametersCmd;
 };
 

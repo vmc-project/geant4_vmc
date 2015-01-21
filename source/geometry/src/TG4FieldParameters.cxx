@@ -30,6 +30,7 @@ const G4double  TG4FieldParameters::fgkDefaultDeltaOneStep = 0.01*mm;
 const G4double  TG4FieldParameters::fgkDefaultDeltaIntersection = 0.001*mm;
 const G4double  TG4FieldParameters::fgkDefaultMinimumEpsilonStep = 5.0e-5;
 const G4double  TG4FieldParameters::fgkDefaultMaximumEpsilonStep = 0.001;
+const G4double  TG4FieldParameters::fgkDefaultConstDistance = 0.;
 
 //
 // static methods
@@ -167,6 +168,7 @@ void TG4FieldParameters::PrintParameters() const
          << "  equation type = " << EquationTypeName(fEquation) << G4endl
          << "  stepper type = "  << StepperTypeName(fStepper) << G4endl 
          << "  minStep = "       << fStepMinimum  << " mm" << G4endl
+         << "  constDistance = " << fConstDistance  << " mm" << G4endl
          << "  deltaChord = "    << fDeltaChord   << " mm" << G4endl
          << "  deltaOneStep = "  << fDeltaOneStep << " mm" << G4endl
          << "  deltaIntersection = " << fDeltaIntersection << " mm" << G4endl
