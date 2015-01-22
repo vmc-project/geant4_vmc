@@ -144,7 +144,8 @@ TG4FieldParameters::TG4FieldParameters()
     fMinimumEpsilonStep(fgkDefaultMinimumEpsilonStep),
     fMaximumEpsilonStep(fgkDefaultMaximumEpsilonStep),
     fEquation(kMagUsualEqRhs),
-    fStepper(kClassicalRK4)
+    fStepper(kClassicalRK4),
+    fConstDistance(0)
 {
 /// Default constructor
 }
