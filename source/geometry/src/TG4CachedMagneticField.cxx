@@ -95,14 +95,16 @@ void TG4CachedMagneticField::GetFieldValue(const G4double point[3], G4double* bf
 //_____________________________________________________________________________
 void TG4CachedMagneticField::Update(const TG4FieldParameters& parameters)
 {
-/// Update field with new equation stepper
+/// Update field with new field parameters
 
   // Update parameters in base class
-  TG4CachedMagneticField::Update(parameters);
+  TG4MagneticField::Update(parameters);
 
   // Const distance square
-  fConstDistanceSquare = parameters.GetConstDistance()*parameters.GetConstDistance();
+  fConstDistanceSquare
+    = parameters.GetConstDistance()*parameters.GetConstDistance();
 }
+
 
 //_____________________________________________________________________________
 void TG4CachedMagneticField::PrintStatistics() const

@@ -221,7 +221,7 @@ void TG4MagneticField::GetFieldValue(const G4double point[3], G4double* bfield) 
 //_____________________________________________________________________________
 void TG4MagneticField::Update(const TG4FieldParameters& parameters)
 {
-/// Update field with new equation stepper
+/// Update field with new field parameters
 
   G4FieldManager* fieldManager
      = G4TransportationManager::GetTransportationManager()->GetFieldManager();
