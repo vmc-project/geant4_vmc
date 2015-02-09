@@ -22,7 +22,7 @@
 #include <TGeoManager.h>
 #include <TGeoUniformMagField.h>
 #include <TVirtualGeoTrack.h>
-#include <TCanvas.h>
+#include <TLorentzVector.h>
 
 #include "Ex06MCApplication.h"
 #include "Ex03MCStack.h"
@@ -40,13 +40,16 @@ ClassImp(Ex06MCApplication)
 Ex06MCApplication::Ex06MCApplication(const char *name, const char *title) 
   : TVirtualMCApplication(name,title),
     fGammaCounter(0),
+    fFeedbackCounter(0),
     fRunGammaCounter(0),
+    fRunFeedbackCounter(0),
     fVerbose(0),
     fStack(0),
     fMagField(0),
     fDetConstruction(0),
     fPrimaryGenerator(0),
     fOldGeometry(kFALSE),
+    fTestStackPopper(kFALSE),
     fIsMaster(kTRUE)
 {
 /// Standard constructor
@@ -70,7 +73,9 @@ Ex06MCApplication::Ex06MCApplication(const char *name, const char *title)
 Ex06MCApplication::Ex06MCApplication(const Ex06MCApplication& origin)
   : TVirtualMCApplication(origin.GetName(),origin.GetTitle()),
     fGammaCounter(0),
+    fFeedbackCounter(0),
     fRunGammaCounter(0),
+    fRunFeedbackCounter(0),
     fVerbose(origin.fVerbose),
     fStack(0),
     fMagField(0),
@@ -98,7 +103,9 @@ Ex06MCApplication::Ex06MCApplication(const Ex06MCApplication& origin)
 Ex06MCApplication::Ex06MCApplication()
   : TVirtualMCApplication(),
     fGammaCounter(0),
+    fFeedbackCounter(0),
     fRunGammaCounter(0),
+    fRunFeedbackCounter(0),
     fVerbose(0),
     fStack(0),
     fMagField(0),
@@ -193,6 +200,7 @@ void Ex06MCApplication::Merge(TVirtualMCApplication* localMCApplication)
     = static_cast<Ex06MCApplication*>(localMCApplication);
 
   fRunGammaCounter += ex06LocalMCApplication->fRunGammaCounter;
+  fRunFeedbackCounter += ex06LocalMCApplication->fRunFeedbackCounter;
 }
  
 //_____________________________________________________________________________
@@ -261,6 +269,7 @@ void Ex06MCApplication::BeginEvent()
   fVerbose.BeginEvent();
 
   fGammaCounter = 0;
+  fFeedbackCounter = 0;
 }
 
 //_____________________________________________________________________________
@@ -282,6 +291,10 @@ void Ex06MCApplication::PreTrack()
     fGammaCounter++;
     fRunGammaCounter++;
   }
+  if (gMC->TrackPid() == 50000051 ) {
+    fFeedbackCounter++;
+    fRunFeedbackCounter++;
+  }
 }
 
 //_____________________________________________________________________________
@@ -301,8 +314,65 @@ void Ex06MCApplication::Stepping()
     fVerbose.PreTrack();
     trackId = gMC->GetStack()->GetCurrentTrackNumber();
     if (gMC->TrackPid() == 50000050 ) fGammaCounter++;
-  }      
-    
+    if (gMC->TrackPid() == 50000051 ) fFeedbackCounter++;
+  }
+
+  if ( ! fTestStackPopper ) return;
+
+  // Stack popper test
+  // Add 1 feedback photon (50000051, fixed momentum) when a charged track enters TANK
+  // and 3 feedback photons (momentum in opposite direction to parent photon)
+  //  when a photon is stopped in TANK
+
+  // Charged particles entering in TANK
+  TString volName = gMC->CurrentVolName();
+  if ( volName != "TANK" ) return;
+
+
+  if ( ( gMC->TrackCharge() != 0. ) && ( gMC->IsTrackEntering() ) ) {
+    // 1 keV
+    Double_t energy = 1e-06;
+    TLorentzVector momentum(energy, 0., 0., energy);
+    GenerateFeedback(1,momentum );
+  }
+
+  if ( ( gMC->TrackPid() == 50000050 ) && ( gMC->Edep() > 0. ) ) {
+    TLorentzVector momentum;
+    gMC->TrackMomentum(momentum);
+    momentum = -1.*momentum;
+    GenerateFeedback(3, momentum);
+  }
+}
+
+//_____________________________________________________________________________
+void Ex06MCApplication::GenerateFeedback(Int_t nofPhotons,
+                                         TLorentzVector momentum)
+{
+/// Generate FeedBack photons for the current particle.
+
+  for (Int_t i=0; i<nofPhotons; ++i) {
+     // same position as the parent track
+      TLorentzVector position;
+      gMC->TrackPosition(position);
+      // Feedback photon
+      Int_t pdgEncoding = 50000051;
+      // No polarization
+      Double_t  polarization[3];
+      polarization[0] = 0;
+      polarization[1] = 0;
+      polarization[2] = 0;
+
+      Int_t ntrack;
+      gMC->GetStack()->PushTrack(
+                         1,
+                         gMC->GetStack()->GetCurrentTrackNumber(),
+                         pdgEncoding,
+		         momentum.X(), momentum.Y(), momentum.Z(), momentum.T(),
+		         position.X(), position.Y(), position.Z(), position.T(),
+                         polarization[0],polarization[1],polarization[2],
+		         kPFeedBackPhoton,
+                         ntrack, 1.0, 0);
+  }
 }
 
 //_____________________________________________________________________________
@@ -351,6 +421,10 @@ void Ex06MCApplication::FinishEvent()
   cout << "Number of optical photons produced in this event : "
        << fGammaCounter << endl;
 
+  if ( fTestStackPopper) {
+    cout << "Number of feedback photons produced in this event : "
+         << fFeedbackCounter << endl;
+  }
   fStack->Reset();
 } 
 
@@ -363,4 +437,9 @@ void Ex06MCApplication::FinishRun()
 
   cout << "Number of optical photons produced in this run : "
        << fRunGammaCounter << endl;
+
+  if ( fTestStackPopper) {
+    cout << "Number of feedback photons produced in this run : "
+         << fRunFeedbackCounter << endl;
+  }
 }

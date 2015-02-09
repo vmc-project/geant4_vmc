@@ -18,7 +18,8 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include <TVirtualMCApplication.h>
-#include "TMCVerbose.h"
+#include <TLorentzVector.h>
+#include <TMCVerbose.h>
 
 class TCanvas;
 class TVirtualMagField;
@@ -72,20 +73,27 @@ class Ex06MCApplication : public TVirtualMCApplication
  
     // method for tests
     void SetOldGeometry(Bool_t oldGeometry = kTRUE);
+    void SetTestStackPopper(Bool_t option = kFALSE);
 
   private:
     // methods
     Ex06MCApplication(const Ex06MCApplication& origin);
 
+    // stack popper test
+    void GenerateFeedback(Int_t nofPhotons, TLorentzVector momentum);
+
     // data members
     Int_t                     fGammaCounter;    ///< Optical photons counter
+    Int_t                     fFeedbackCounter; ///< Feedback photons counter
     Int_t                     fRunGammaCounter; ///< Optical photons counter2
+    Int_t                     fRunFeedbackCounter; ///< Feedback photons counter2
     TMCVerbose                fVerbose;         ///< VMC verbose helper
     Ex03MCStack*              fStack;           ///< VMC stack
     TVirtualMagField*         fMagField;        ///< The magnetic field 
     Ex06DetectorConstruction* fDetConstruction; ///< Dector construction
     Ex06PrimaryGenerator*     fPrimaryGenerator;///< Primary generator
     Bool_t                    fOldGeometry;     ///< Option for geometry definition
+    Bool_t                    fTestStackPopper; ///< Option for stack popper test
     Bool_t                    fIsMaster;        ///< If is on master thread
 
   ClassDef(Ex06MCApplication,1)  //Interface to MonteCarlo application
@@ -110,6 +118,11 @@ inline Ex06PrimaryGenerator*  Ex06MCApplication::GetPrimaryGenerator() const
 /// \param oldGeometry  If true, geometry definition via VMC functions
 inline void Ex06MCApplication::SetOldGeometry(Bool_t oldGeometry)
 { fOldGeometry = oldGeometry; }
+
+/// Switch on/off the stack popper test
+/// \param option stack popper test activation option
+inline void Ex06MCApplication::SetTestStackPopper(Bool_t option)
+{ fTestStackPopper = option; }
 
 #endif //EX06_MC_APPLICATION_H
 
