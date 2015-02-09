@@ -20,6 +20,7 @@
 #include "TG4SensitiveDetector.h"
 #include "TG4SpecialControlsV2.h"
 #include "TG4SDServices.h"
+#include "TG4StackPopper.h"
 #include "TG4Limits.h"
 #include "TG4G3Units.h"
 #include "TG4Globals.h"
@@ -337,5 +338,19 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
   if ( step->GetPostStepPoint()->GetStepStatus() == fGeomBoundary ) {
     ProcessTrackOnBoundary(step);
   }  
-}
 
+  // Force an exclusive stackPopper step if track is not alive and
+  // there are user tracks popped in the VMC stack
+  if ( TG4StackPopper::Instance() &&
+       step->GetTrack()->GetTrackStatus() != fAlive &&
+       TG4StackPopper::Instance()->HasPoppedTracks()  ) {
+
+    //G4cout << "!!! Modifying track status to get processed user tracks."
+    //       << G4endl;
+    TG4StackPopper::Instance()
+      ->SetDoExclusiveStep(step->GetTrack()->GetTrackStatus());
+    G4Track* track = const_cast<G4Track*>(step->GetTrack());
+    //track->SetTrackStatus(fStopButAlive);
+    track->SetTrackStatus(fAlive);
+  }
+}

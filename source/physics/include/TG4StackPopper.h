@@ -15,7 +15,7 @@
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-#include <G4VContinuousProcess.hh>
+#include <G4VProcess.hh>
 
 class G4Track;
 
@@ -25,7 +25,7 @@ class G4Track;
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4StackPopper: public G4VContinuousProcess
+class TG4StackPopper: public G4VProcess
 {
   public:
     TG4StackPopper(const G4String& processName = "stackPopper");
@@ -35,18 +35,43 @@ class TG4StackPopper: public G4VContinuousProcess
     static TG4StackPopper* Instance();
 
     // methods
-    G4bool IsApplicable(const G4ParticleDefinition& /*particleDefinition*/); 
+    virtual G4bool IsApplicable(const G4ParticleDefinition& /*particleDefinition*/);
 
-    G4double GetContinuousStepLimit(const G4Track& /*aTrack*/,
-                                    G4double  previousStepSize ,
-                                    G4double  currentMinimumStep ,
-                                    G4double& currentSafety);
+    virtual G4double PostStepGetPhysicalInteractionLength(
+                           const G4Track& track,
+                           G4double previousStepSize,
+                           G4ForceCondition* condition);
+
+    virtual G4VParticleChange* PostStepDoIt(
+                                   const G4Track& track,
+                                   const G4Step& step);
+
+    // No operation in AlongStepDoIt and AtRestDoIt
+
+    virtual G4double AlongStepGetPhysicalInteractionLength(
+                           const G4Track& /*track*/,
+                           G4double  /*previousStepSize*/,
+                           G4double  /*currentMinimumStep*/,
+                           G4double& /*proposedSafety*/,
+                           G4GPILSelection* /*selection*/)  { return -1.0; }
+
+    virtual G4double AtRestGetPhysicalInteractionLength(
+                           const G4Track& /*track*/,
+                           G4ForceCondition* /*condition*/) { return -1.0; }
 
     virtual G4VParticleChange* AlongStepDoIt(
-                                    const G4Track& aTrack, 
-			            const G4Step&  aStep);                         
-    void Notify();                         
-    void Reset();                         
+                                   const G4Track& /*track*/,
+                                   const G4Step& /*step*/) { return 0; }
+
+    virtual G4VParticleChange* AtRestDoIt(
+                                   const G4Track& /*track*/,
+                                   const G4Step& /*step*/) { return 0; }
+
+    void Notify();
+    void Reset();
+    void SetDoExclusiveStep(G4TrackStatus trackStatus);
+
+    G4bool HasPoppedTracks() const;
 
   private:
     /// Not implemented
@@ -54,10 +79,20 @@ class TG4StackPopper: public G4VContinuousProcess
     /// Not implemented
     TG4StackPopper& operator = (const TG4StackPopper& right);
     
-    // static data members
-    static TG4StackPopper*  fgInstance; ///< this instance
+    /// this instance
+    static TG4StackPopper*  fgInstance;
 
-    G4int fNofDoneTracks; ///< counter for popped tracks
+    /// the counter for popped tracks
+    G4int  fNofDoneTracks;
+
+    /// The indication for performing exclusive step
+    ///
+    /// It is set in stepping action when a track is not alive and there are
+    /// user tracks in the VMC stack
+    G4bool fDoExclusiveStep;
+
+    /// The track status to be restored after performing exclusive step
+    G4TrackStatus fTrackStatus;
 };
 
 // inline methods
@@ -71,15 +106,6 @@ inline G4bool TG4StackPopper::IsApplicable(
                    const G4ParticleDefinition& /*particleDefinition*/) {
   /// Applicable to any particles
   return true;
-}
-   
-inline G4double TG4StackPopper::GetContinuousStepLimit(
-                   const G4Track& /*aTrack*/,
-                   G4double  /*previousStepSize*/,
-                   G4double  /*currentMinimumStep*/,
-                   G4double& /*currentSafety*/) {
-  /// Does not limit step                   
-  return DBL_MAX; 
 }
 
 #endif //TG4_STACK_POPPER_H
