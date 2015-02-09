@@ -61,29 +61,32 @@ void TG4StackPopperPhysics::ConstructParticle()
 //_____________________________________________________________________________
 void TG4StackPopperPhysics::ConstructProcess()
 {
-/// Set step limiter process to all particles
+/// Set step limiter process to slected particles or all particles
+/// if no particles were selected
 
   fStackPopperProcess = new TG4StackPopper();
 
   aParticleIterator->reset();
-  while( (*aParticleIterator)() ){
+  while ( (*aParticleIterator)() ) {
 
     G4ParticleDefinition* particle = aParticleIterator->value();
     G4ProcessManager* pmanager = particle->GetProcessManager();
 
     // add this as an option
     if ( fSelection.size() == 0 ||
-         fSelection.find(particle->GetParticleName()) != std::string::npos )
-         
+         fSelection.find(particle->GetParticleName()) != std::string::npos ) {
+
       if (VerboseLevel() > 1) {
         G4cout << "Adding StackPopper process to " 
                <<  particle->GetParticleName() << G4endl;
       }         
              
-      pmanager ->AddContinuousProcess(fStackPopperProcess);
+      pmanager->AddProcess(fStackPopperProcess);
+      pmanager->SetProcessOrdering(fStackPopperProcess,idxPostStep);
+    }
   }
   
   if (VerboseLevel() > 0) {
     G4cout << "### Stack popper physics constructed." << G4endl;
-  }  
+  }
 }

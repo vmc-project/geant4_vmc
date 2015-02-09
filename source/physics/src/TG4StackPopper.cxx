@@ -29,8 +29,9 @@ TG4StackPopper* TG4StackPopper::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4StackPopper::TG4StackPopper(const G4String& processName)
-  : G4VContinuousProcess(processName, fUserDefined),
-    fNofDoneTracks(0)
+  : G4VProcess(processName, fUserDefined),
+    fNofDoneTracks(0),
+    fDoExclusiveStep(false)
 {
 /// Standard constructor
 
@@ -55,10 +56,30 @@ TG4StackPopper::~TG4StackPopper()
 // public methods
 //
 
+//_____________________________________________________________________________
+G4double TG4StackPopper::PostStepGetPhysicalInteractionLength(
+                             const G4Track& /*track*/,
+                             G4double /*notUsed*/,
+                             G4ForceCondition* condition)
+{
+/// Do not limit step, set condition to StronglyForced if there are
+/// popped tracks in the stack
+
+  *condition = InActivated;
+  if ( HasPoppedTracks() ) {
+    if ( fDoExclusiveStep ) {
+      *condition = ExclusivelyForced;
+    } else {
+      *condition = StronglyForced;
+    }
+  }
+
+  return DBL_MAX;
+}
 
 //_____________________________________________________________________________
-G4VParticleChange* TG4StackPopper::AlongStepDoIt(const G4Track& track, 
-                                                 const G4Step& /*step*/)
+G4VParticleChange* TG4StackPopper::PostStepDoIt(const G4Track& track,
+                                                const G4Step& /*step*/)
 {
 /// Add particles from the stack as secondaries to the current particle
  
@@ -83,13 +104,13 @@ G4VParticleChange* TG4StackPopper::AlongStepDoIt(const G4Track& track,
 
     if (!particle) {
       TG4Globals::Exception(
-        "TG4StackPopper", "AlongStepDoIt", "No particle popped from stack!");
+        "TG4StackPopper", "PostStepDoIt", "No particle popped from stack!");
       return &aParticleChange;
     }  
       
 
-    //G4cout << "TG4StackPopper::AlongStepDoIt: Popped particle = " 
-    //       << particle->GetName() 
+    //G4cout << "TG4StackPopper::PostStepDoIt: Popped particle = "
+    //       << particle->GetName()
     //       << " trackID = "<< itrack << G4endl;
 
     // Create dynamic particle
@@ -97,7 +118,7 @@ G4VParticleChange* TG4StackPopper::AlongStepDoIt(const G4Track& track,
       = particlesManager->CreateDynamicParticle(particle);
     if ( ! dynamicParticle ) {
       TG4Globals::Exception(
-        "TG4StackPopper", "AlongStepDoIt",
+        "TG4StackPopper", "PostStepDoIt",
         "Conversion from Root particle -> G4 particle failed.");
     }    
  
@@ -123,11 +144,17 @@ G4VParticleChange* TG4StackPopper::AlongStepDoIt(const G4Track& track,
     // Add track as a secondary
     aParticleChange.AddSecondary(secondaryTrack);
   }
-  
+
   // Set back current track number in the track
   // (as stack may have changed it with popping particles)
   stack->SetCurrentTrack(currentTrackId);
   
+  // Set the kept track status if in exclusive step
+  if ( fDoExclusiveStep ) {
+    aParticleChange.ProposeTrackStatus(fTrackStatus);
+    fDoExclusiveStep = false;
+  }
+
   return &aParticleChange;
 }
 
@@ -136,7 +163,6 @@ void  TG4StackPopper::Notify()
 {
 /// Increment the number of done tracks
 
-  // G4cout << "TG4StackPopper::Update" << G4endl;
   ++fNofDoneTracks;
 }                           
 
@@ -146,7 +172,22 @@ void  TG4StackPopper::Reset()
 /// Reset the number of done tracks to the number od tracks in stack
 /// (when starting track)
 
-  // G4cout << "TG4StackPopper::Reset" << G4endl;
   fNofDoneTracks = gMC->GetStack()->GetNtrack();
 }                           
 
+//_____________________________________________________________________________
+void TG4StackPopper::SetDoExclusiveStep(G4TrackStatus trackStatus)
+{
+/// Activate performing exclusive step and keep the track status
+
+  fDoExclusiveStep = true;
+  fTrackStatus = trackStatus;
+}
+
+//_____________________________________________________________________________
+G4bool TG4StackPopper::HasPoppedTracks() const
+{
+/// Return true if there are user tracks in stack
+
+  return ( gMC->GetStack()->GetNtrack() != fNofDoneTracks );
+}
