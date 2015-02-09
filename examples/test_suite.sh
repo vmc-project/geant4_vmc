@@ -73,8 +73,17 @@ do
   
     if [ "$TESTG3" = "1" ]; then
       echo "... Running test with G3, geometry via TGeo, TGeo navigation" 
+      TMP_FAILED="0"
       $RUNG3 "test_$EXAMPLE.C(\"g3tgeoConfig.C\", kFALSE)" >& $OUT/test_g3_tgeo_tgeo.out
-      if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      # stack popper test
+      if [ "$EXAMPLE" = "E06" ]; then
+        #echo "... Running test with G3, geometry via TGeo, TGeo navigation, with Feedback photons" 
+        $RUNG3 "test_E06_2.C(\"g3tgeoConfig.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
+      fi
+      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
 
       echo "... Running test with G3, geometry via VMC,  Native navigation" 
       $RUNG3 "test_$EXAMPLE.C(\"g3Config.C\", kTRUE)" >& $OUT/test_g3_vmc_nat.out
@@ -87,18 +96,37 @@ do
 
     if [ "$TESTG4" = "1" ]; then
       echo "... Running test with G4, geometry via TGeo, Native navigation" 
+      TMP_FAILED="0"
       $RUNG4 "test_$EXAMPLE.C(\"g4Config.C\",kFALSE)" >& $OUT/test_g4_tgeo_nat.out
-      if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
- 
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      # stack popper test
+      if [ "$EXAMPLE" = "E06" ]; then
+        #echo "... Running test with G4, geometry via TGeo, Native navigation, with stackPopper" 
+        $RUNG4 "test_E06_2.C(\"g4Config1.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+      fi
+      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+
       echo "... Running test with G4, geometry via TGeo, TGeo navigation" 
+      TMP_FAILED="0"
       $RUNG4 "test_$EXAMPLE.C(\"g4tgeoConfig.C\",kFALSE)" >& $OUT/test_g4_tgeo_tgeo.out
       if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+      # stack popper test
+      if [ "$EXAMPLE" = "E06" ]; then
+        #echo "... Running test with G4, geometry via TGeo, TGeo navigation, with stackPopper" 
+        $RUNG4 "test_E06_2.C(\"g4tgeoConfig1.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+      fi
+      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
 
       echo "... Running test with G4, geometry via VMC,  Native navigation" 
       $RUNG4 "test_$EXAMPLE.C(\"g4ConfigOld.C\",kTRUE)" >& $OUT/test_g4_vmc_nat.out
       if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
 
       echo "... Running test with G4, geometry via VMC,  TGeo navigation" 
+      echo $RUNG4 "test_$EXAMPLE.C(\"g4tgeoConfigOld.C\",kTRUE)" >& $OUT/test_g4_vmc_tgeo.out
       $RUNG4 "test_$EXAMPLE.C(\"g4tgeoConfigOld.C\",kTRUE)" >& $OUT/test_g4_vmc_tgeo.out
       if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
     fi  

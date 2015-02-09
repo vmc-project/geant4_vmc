@@ -81,8 +81,17 @@ do
     if [ "$TESTG3" = "1" ]; then
       EXE=$G3EXEDIR"/g3vmc_test"$EXAMPLE
       echo "... Running test with G3, geometry via TGeo, TGeo navigation"
+      TMP_FAILED="0"
       $EXE -g3g TGeant3TGeo -rm "test_$EXAMPLE.C(\"\", kFALSE)" >& $OUT/test_g3_tgeo_tgeo.out
-      if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      # stack popper test
+      if [ "$EXAMPLE" = "E06" ]; then
+        #echo "... Running test with G3, geometry via TGeo, TGeo navigation, with Feedback photons" 
+        $EXE -g3g TGeant3TGeo -rm "test_E06_2.C(\"\", kFALSE)"  >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
+      fi
+      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
 
       echo "... Running test with G3, geometry via VMC,  Native navigation"
       $EXE -g3g TGeant3 -rm "test_$EXAMPLE.C(\"\", kTRUE)" >& $OUT/test_g3_vmc_nat.out
@@ -94,13 +103,31 @@ do
     fi  
     if [ "$TESTG4" = "1" ]; then
       EXE=$G4EXEDIR"/g4vmc_test"$EXAMPLE
+      TMP_FAILED="0"
       echo "... Running test with G4, geometry via TGeo, Native navigation"
       $EXE -g4g geomRootToGeant4 -g4vm "" -rm "test_$EXAMPLE.C(\"\", kFALSE)" >& $OUT/test_g4_tgeo_nat.out
-      if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      # stack popper test
+      if [ "$EXAMPLE" = "E06" ]; then
+        #echo "... Running test with G4, geometry via TGeo, Native navigation, with stackPopper" 
+        $EXE -g4g geomRootToGeant4 -g4vm "" -g4pl "FTFP_BERT_EMV+optical" -g4sp stackPopper -rm "test_E06_2.C(\"\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+      fi
+      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
 
+      TMP_FAILED="0"
       echo "... Running test with G4, geometry via TGeo, TGeo navigation"
       $EXE -g4g geomRoot -g4vm "" -rm "test_$EXAMPLE.C(\"\", kFALSE)" >& $OUT/test_g4_tgeo_tgeo.out
-      if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      # stack popper test
+      if [ "$EXAMPLE" = "E06" ]; then
+        #echo "... Running test with G4, geometry via TGeo, Native navigation, with stackPopper" 
+        $EXE -g4g geomRoot -g4vm "" -g4pl "FTFP_BERT_EMV+optical" -g4sp stackPopper -rm "test_E06_2.C(\"\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+      fi
+      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
 
       echo "... Running test with G4, geometry via VMC,  Native navigation"
       $EXE -g4g geomVMCtoGeant4 -g4vm "" -rm "test_$EXAMPLE.C(\"\", kTRUE)" >& $OUT/test_g4_vmc_nat.out
