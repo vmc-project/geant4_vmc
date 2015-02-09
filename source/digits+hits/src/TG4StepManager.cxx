@@ -1036,7 +1036,7 @@ Bool_t TG4StepManager::IsTrackDisappeared() const
 { 
 /// Return true if particle has disappeared 
 /// (due to any physical process)
-/// or has been killed, suspended or postponed to next event.
+/// or has been killed or postponed to next event.
 
 #ifdef MCDEBUG
   CheckTrack();
@@ -1045,8 +1045,8 @@ Bool_t TG4StepManager::IsTrackDisappeared() const
   // check
   G4TrackStatus status
      = fTrack->GetTrackStatus();
-  if ( ( status == fKillTrackAndSecondaries ) ||
-       ( status == fSuspend ) ||
+  if ( ( status == fStopAndKill ) ||
+       ( status == fKillTrackAndSecondaries ) ||
        ( status == fPostponeToNextEvent ) ) {
     return true; 
   }
