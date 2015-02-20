@@ -109,7 +109,7 @@ class TG4GeometryManager : public TG4Verbose
     TG4OpGeometryManager* fOpManager;        ///< optical geometry manager    
     G4String              fUserGeometry;     ///< user geometry input                                        
     std::vector<TG4FieldParameters*>  fFieldParameters; ///< magnetic field parameters
-    static G4ThreadLocal std::vector<TG4MagneticField*>  fMagneticFields; ///< magnetic fields
+    static G4ThreadLocal std::vector<TG4MagneticField*>*  fgMagneticFields; ///< magnetic fields
     TG4VUserRegionConstruction* fUserRegionConstruction; ///< user region construction
 
     /// info if a cached magnetic field is in use

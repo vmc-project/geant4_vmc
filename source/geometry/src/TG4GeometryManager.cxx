@@ -63,7 +63,7 @@ TG4GeometryManager* TG4GeometryManager::fgInstance = 0;
 const G4double      TG4GeometryManager::fgDefaultLimitDensity = 0.001*(g/cm3);
 const G4double      TG4GeometryManager::fgDefaultMaxStep= 10*cm;
 
-G4ThreadLocal std::vector<TG4MagneticField*> TG4GeometryManager::fMagneticFields;
+G4ThreadLocal std::vector<TG4MagneticField*>* TG4GeometryManager::fgMagneticFields = 0;
 
 //_____________________________________________________________________________
 TG4GeometryManager::TG4GeometryManager(const TString& userGeometry) 
@@ -88,6 +88,9 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
       "TG4GeometryManager", "TG4GeometryManager:",
       "Cannot create two instances of singleton.");
   }
+
+  // Create magnetic fields vector
+  fgMagneticFields = new std::vector<TG4MagneticField*>();
   
   // Field parameters for global field
   fFieldParameters.push_back(new TG4FieldParameters());
@@ -108,8 +111,9 @@ TG4GeometryManager::~TG4GeometryManager()
     delete fFieldParameters[i];
   }
 
-  // delete fMagneticField;
-        // deleted via G4AutoDelete;
+  delete fgMagneticFields;
+     // magnetic field objects are deleted via G4AutoDelete;
+
   delete fGeometryServices;
   delete fOpManager;
 }
@@ -560,7 +564,7 @@ void TG4GeometryManager::CreateMagField(TVirtualMagField* magField,
     G4cout << TG4FieldParameters::StepperTypeName(
               fieldParameters->GetStepperType()) << G4endl;
   }
-  fMagneticFields.push_back(tg4MagneticField);
+  fgMagneticFields->push_back(tg4MagneticField);
   G4AutoDelete::Register(tg4MagneticField);
 }
 
@@ -740,7 +744,7 @@ void TG4GeometryManager::UpdateMagField()
 /// This function must be called if the field parameters were changed
 /// in other than PreInit> phase.
 
-  if ( ! fMagneticFields.size() ) {
+  if ( ! fgMagneticFields->size() ) {
     TG4Globals::Warning("TG4GeometryManager", "UpdateMagField",
       "No magnetic field is defined.");
      return;
@@ -752,8 +756,8 @@ void TG4GeometryManager::UpdateMagField()
   // Only the parameters defined in TG4Magnetic field can be updated when
   // field already exists, so we can safely call the base class non virtual
   // method
-  for (G4int i=0; i<G4int(fMagneticFields.size()); ++i) {
-    fMagneticFields[i]->Update(*fFieldParameters[i]);
+  for (G4int i=0; i<G4int(fgMagneticFields->size()); ++i) {
+    fgMagneticFields->at(i)->Update(*fFieldParameters[i]);
   }
 }
 
@@ -875,8 +879,8 @@ void TG4GeometryManager::PrintFieldStatistics() const
 /// Currently only cached field print the cahching statistics.
 
   if ( VerboseLevel() > 0 ) {
-    for (G4int i=0; i<G4int(fMagneticFields.size()); ++i) {
-       fMagneticFields[i]->PrintStatistics();
+    for (G4int i=0; i<G4int(fgMagneticFields->size()); ++i) {
+       fgMagneticFields->at(i)->PrintStatistics();
     }
   }
 }
