@@ -15,10 +15,10 @@
 /// 
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include "TG4FieldParametersMessenger.h"
-
 #include <G4MagneticField.hh>
 #include <globals.hh>
+
+class TG4FieldParametersMessenger;
 
 /// The available equations of motion of a particle in a field  
 /// in Geant4
@@ -77,7 +77,7 @@ enum StepperType {
 class TG4FieldParameters
 {
   public:
-    TG4FieldParameters();
+    TG4FieldParameters(const G4String& volumeName = "");
     virtual ~TG4FieldParameters();
 
     // methods
@@ -100,6 +100,7 @@ class TG4FieldParameters
     void SetConstDistance(G4double value);
 
     // get methods
+    G4String  GetVolumeName() const;
     EquationType GetEquationType() const;
     StepperType  GetStepperType() const;
     G4double GetStepMinimum() const; 
@@ -131,7 +132,10 @@ class TG4FieldParameters
     // data members
     //
     /// Messenger for this class
-    TG4FieldParametersMessenger fMessenger;
+    TG4FieldParametersMessenger* fMessenger;
+
+    /// The name of associated volume, if local field
+    G4String  fVolumeName;
     
     /// Minimum step in G4ChordFinder 
     G4double  fStepMinimum; 
@@ -201,6 +205,11 @@ inline void TG4FieldParameters::SetMaximumEpsilonStep(G4double value) {
 /// Set the distance within which the field is considered constant
 inline void TG4FieldParameters::SetConstDistance(G4double value) {
   fConstDistance = value;
+}
+
+/// Return the name of associated volume, if local field
+inline  G4String  TG4FieldParameters::GetVolumeName() const {
+  return fVolumeName;
 }
 
 /// Return the type of equation of motion of a particle in a field

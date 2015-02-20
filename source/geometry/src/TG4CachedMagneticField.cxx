@@ -20,8 +20,10 @@
 #include <TVirtualMC.h>
 
 //_____________________________________________________________________________
-TG4CachedMagneticField::TG4CachedMagneticField(const TG4FieldParameters& parameters)
-  : TG4MagneticField(parameters),
+TG4CachedMagneticField::TG4CachedMagneticField(const TG4FieldParameters& parameters,
+                                               TVirtualMagField* magField,
+                                               G4LogicalVolume* lv)
+  : TG4MagneticField(parameters, magField, lv),
     fLastLocation(),
     fLastValue(),
     fCallsCounter(0),

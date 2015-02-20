@@ -24,6 +24,9 @@ class TG4FieldParameters;
 
 class G4EquationOfMotion;
 class G4MagIntegratorStepper;
+class G4LogicalVolume;
+
+class TVirtualMagField;
 
 /// \ingroup geometry
 /// \brief The magnetic field defined by the TVirtualMCApplication field map.
@@ -41,12 +44,17 @@ class G4MagIntegratorStepper;
 class TG4MagneticField : public G4MagneticField
 {
   public:
-    TG4MagneticField(const TG4FieldParameters& parameters);
+    TG4MagneticField(const TG4FieldParameters& parameters,
+                     TVirtualMagField* magField,
+                     G4LogicalVolume* lv = 0);
     virtual ~TG4MagneticField();
 
     virtual void GetFieldValue(const G4double point[3], G4double* bfield) const;
 
     void Update(const TG4FieldParameters& parameters);
+
+    virtual void PrintStatistics() const {}
+
     
   protected:
     // methods
@@ -55,6 +63,12 @@ class TG4MagneticField : public G4MagneticField
     G4MagIntegratorStepper*  CreateStepper(
                                    G4EquationOfMotion* equation,
                                    StepperType stepper);
+
+    // data
+    /// The associated TGeo magnetic field
+    TVirtualMagField*  fVirtualMagField;
+    /// The associated volume (if local field)
+    G4LogicalVolume*   fLogicalVolume;
 };
 
 #endif //TG4_MAGNETIC_FIELD_H

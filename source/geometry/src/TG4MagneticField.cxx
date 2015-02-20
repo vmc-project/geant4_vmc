@@ -17,7 +17,7 @@
 #include "TG4Globals.h"
 
 #include <TVirtualMCApplication.h>
-#include <TVirtualMC.h>
+#include <TVirtualMagField.h>
 
 #include <G4FieldManager.hh>
 #include <G4TransportationManager.hh>
@@ -47,8 +47,12 @@
 #include <G4CashKarpRKF45.hh>
 
 //_____________________________________________________________________________
-TG4MagneticField::TG4MagneticField(const TG4FieldParameters& parameters)
-  : G4MagneticField()
+TG4MagneticField::TG4MagneticField(const TG4FieldParameters& parameters,
+                                   TVirtualMagField* magField,
+                                   G4LogicalVolume* lv)
+  : G4MagneticField(),
+    fVirtualMagField(magField),
+    fLogicalVolume(lv)
 {
 /// Default constructor
 
@@ -197,8 +201,8 @@ void TG4MagneticField::GetFieldValue(const G4double point[3], G4double* bfield) 
                                 point[1] / TG4G3Units::Length(),
                                 point[2] / TG4G3Units::Length() };
 
-  if ( gMC->GetMagField() ) {
-    gMC->GetMagField()->Field(g3point, bfield);
+  if ( fVirtualMagField ) {
+    fVirtualMagField->Field(g3point, bfield);
   }
   else {  
     static Bool_t warn = true;
@@ -223,8 +227,17 @@ void TG4MagneticField::Update(const TG4FieldParameters& parameters)
 {
 /// Update field with new field parameters
 
-  G4FieldManager* fieldManager
-     = G4TransportationManager::GetTransportationManager()->GetFieldManager();
+  G4FieldManager* fieldManager = 0;
+
+  if ( ! fLogicalVolume ) {
+     // global field
+     fieldManager = G4TransportationManager::GetTransportationManager()->GetFieldManager();
+  } else {
+     // local field
+     fieldManager = new G4FieldManager();
+     G4bool forceToAllDaughters = true;
+     fLogicalVolume->SetFieldManager(fieldManager, forceToAllDaughters);
+  }
   fieldManager->SetDetectorField(this);
   
   // Geant4 default stepper

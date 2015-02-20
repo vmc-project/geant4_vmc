@@ -19,11 +19,15 @@
 #include "TG4MagneticField.h"
 
 #include <globals.hh>
+#include <G4ThreeVector.hh>
 
 class TG4FieldParameters;
 
 class G4EquationOfMotion;
 class G4MagIntegratorStepper;
+class G4LogicalVolume;
+
+class TVirtualMagField;
 
 /// \ingroup geometry
 /// \brief The cached magnetic field defined by the TVirtualMCApplication field map.
@@ -40,13 +44,15 @@ class G4MagIntegratorStepper;
 class TG4CachedMagneticField : public TG4MagneticField
 {
   public:
-    TG4CachedMagneticField(const TG4FieldParameters& parameters);
+    TG4CachedMagneticField(const TG4FieldParameters& parameters,
+                           TVirtualMagField* magField,
+                           G4LogicalVolume* lv = 0);
     virtual ~TG4CachedMagneticField();
 
     virtual void GetFieldValue(const G4double point[3], G4double* bfield) const;
     
     void Update(const TG4FieldParameters& parameters);
-    void PrintStatistics() const;
+    virtual void PrintStatistics() const;
     void ClearCounter();
     
   private:

@@ -41,7 +41,12 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
 {
 /// Standard constructor
 
-  fDirectory = new G4UIdirectory("/mcMagField/");
+  G4String directoryName = "/mcMagField/";
+  if ( fieldParameters->GetVolumeName() != "" )  {
+    directoryName.append(fieldParameters->GetVolumeName());
+    directoryName.append("/");
+  }
+  fDirectory = new G4UIdirectory(directoryName);
   fDirectory->SetGuidance("Magnetic field control commands.");
 
   fEquationTypeCmd = new G4UIcmdWithAString("/mcMagField/equationType", this);

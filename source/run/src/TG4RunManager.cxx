@@ -422,8 +422,8 @@ Bool_t TG4RunManager::ProcessRun(G4int nofEvents)
 
   fRunManager->BeamOn(nofEvents); 
 
-  // Pring cached field statistics
-  TG4GeometryManager::Instance()->PrintCachedFieldStatistics();
+  // Pring field statistics
+  TG4GeometryManager::Instance()->PrintFieldStatistics();
 
   G4bool result = ! TG4SDServices::Instance()->GetIsStopRun();
   TG4SDServices::Instance()->SetIsStopRun(false);

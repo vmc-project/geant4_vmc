@@ -13,6 +13,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4FieldParameters.h"
+#include "TG4FieldParametersMessenger.h"
 #include "TG4G3Units.h"
 #include "TG4Globals.h"
 
@@ -135,8 +136,9 @@ StepperType  TG4FieldParameters::GetStepperType(const G4String& name)
 
 
 //_____________________________________________________________________________
-TG4FieldParameters::TG4FieldParameters()
-  : fMessenger(this),
+TG4FieldParameters::TG4FieldParameters(const G4String& volumeName)
+  : fMessenger(0),
+    fVolumeName(volumeName),
     fStepMinimum(fgkDefaultStepMinimum),
     fDeltaChord(fgkDefaultDeltaChord),
     fDeltaOneStep(fgkDefaultDeltaOneStep),
@@ -148,12 +150,16 @@ TG4FieldParameters::TG4FieldParameters()
     fConstDistance(0)
 {
 /// Default constructor
+
+  fMessenger = new TG4FieldParametersMessenger(this);
 }
 
 //_____________________________________________________________________________
 TG4FieldParameters::~TG4FieldParameters() 
 {
 /// Destructor
+
+  delete fMessenger;
 }
 
 //
@@ -165,8 +171,11 @@ void TG4FieldParameters::PrintParameters() const
 {
 /// Prints all customizable accuracy parameters
 
-  G4cout << "Magnetic field parameters: " << G4endl
-         << "  equation type = " << EquationTypeName(fEquation) << G4endl
+  G4cout << "Magnetic field parameters: " << G4endl;
+  if ( fVolumeName.size() ) {
+    G4cout << "  volume name = " << fVolumeName << G4endl;
+  }
+  G4cout << "  equation type = " << EquationTypeName(fEquation) << G4endl
          << "  stepper type = "  << StepperTypeName(fStepper) << G4endl 
          << "  minStep = "       << fStepMinimum  << " mm" << G4endl
          << "  constDistance = " << fConstDistance  << " mm" << G4endl

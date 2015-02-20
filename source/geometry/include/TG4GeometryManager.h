@@ -20,6 +20,8 @@
 #include "TG4FieldParameters.h"
 #include "TG4DetConstructionMessenger.h"
 
+#include <vector>
+
 class TG4MagneticField;
 class TG4GeometryServices;
 class TG4OpGeometryManager;
@@ -27,7 +29,10 @@ class TG4G3CutVector;
 class TG4G3ControlVector;
 class TG4VUserRegionConstruction;
 
+class G4LogicalVolume;
+
 class TVirtualMCGeometry;
+class TVirtualMagField;
 
 /// \ingroup geometry
 /// \brief The manager class for building Geant4 geometry depending on
@@ -48,11 +53,11 @@ class TG4GeometryManager : public TG4Verbose
     TG4OpGeometryManager* GetOpManager() const;
 
     // functions for building geometry
-    void ConstructMagField();
     void ConstructGeometry();
     void ConstructSDandField();
     void FinishGeometry();
     void UpdateMagField();
+    void CreateMagFieldParameters(const G4String& fieldVolName);
     void SetUserLimits(const TG4G3CutVector& cuts,
                        const TG4G3ControlVector& controls) const;
     void SetIsUserMaxStep(G4bool isUserMaxStep);
@@ -66,7 +71,7 @@ class TG4GeometryManager : public TG4Verbose
     void SetMaxStepInLowDensityMaterials(G4double maxStep);
 
     // printing
-    void PrintCachedFieldStatistics() const;
+    void PrintFieldStatistics() const;
 
   private:
     /// Not implemented
@@ -83,6 +88,10 @@ class TG4GeometryManager : public TG4Verbose
     void FillMediumMapFromG4();
     void FillMediumMapFromRoot();
     void FillMediumMap();
+    void CreateMagField(TVirtualMagField* magField,
+           TG4FieldParameters* fieldParameters, G4LogicalVolume* lv);
+    void ConstructGlobalMagField();
+    void ConstructLocalMagFields();
         
     // static data members
     static TG4GeometryManager*  fgInstance;     ///< this instance
@@ -99,8 +108,8 @@ class TG4GeometryManager : public TG4Verbose
     TVirtualMCGeometry*   fMCGeometry;       ///< VirtualMC geometry
     TG4OpGeometryManager* fOpManager;        ///< optical geometry manager    
     G4String              fUserGeometry;     ///< user geometry input                                        
-    TG4FieldParameters    fFieldParameters;  ///< magnetic field parameters
-    static G4ThreadLocal TG4MagneticField*  fMagneticField; ///< magnetic field
+    std::vector<TG4FieldParameters*>  fFieldParameters; ///< magnetic field parameters
+    static G4ThreadLocal std::vector<TG4MagneticField*>  fMagneticFields; ///< magnetic fields
     TG4VUserRegionConstruction* fUserRegionConstruction; ///< user region construction
 
     /// info if a cached magnetic field is in use
