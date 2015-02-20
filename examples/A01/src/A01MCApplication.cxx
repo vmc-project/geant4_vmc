@@ -53,6 +53,7 @@ A01MCApplication::A01MCApplication(const char *name, const char *title)
     fRootManager(0),
     fWriteStack(true),
     fWriteHits(true),
+    fUseLocalMagField(false),
     fVerbose(0),
     fStack(0),
     fDetConstruction(0),
@@ -89,7 +90,9 @@ A01MCApplication::A01MCApplication(const char *name, const char *title)
   
   // Constant magnetic field (in kiloGauss)
   // field value: 1.0*tesla (= 10.0 kiloGauss) in y
-  fMagField = new A01MagField(0, 10.0, 0);
+  if ( ! fUseLocalMagField ) {
+    fMagField = new A01MagField(0, 10.0, 0);
+  }
 }
 
 //_____________________________________________________________________________
@@ -98,6 +101,7 @@ A01MCApplication::A01MCApplication(const A01MCApplication& origin)
     fRootManager(0),
     fWriteStack(origin.fWriteStack),
     fWriteHits(origin.fWriteHits),
+    fUseLocalMagField(origin.fUseLocalMagField),
     fVerbose(origin.fVerbose),
     fStack(0),
     fDetConstruction(origin.fDetConstruction),
@@ -130,7 +134,9 @@ A01MCApplication::A01MCApplication(const A01MCApplication& origin)
   
   // Constant magnetic field (in kiloGauss)
   // field value: 1.0*tesla (= 10.0 kiloGauss) in y
-  fMagField = new A01MagField(0, 10.0, 0);
+  if ( ! fUseLocalMagField ) {
+    fMagField = new A01MagField(0, 10.0, 0);
+  }
 }
 
 //_____________________________________________________________________________
@@ -139,6 +145,7 @@ A01MCApplication::A01MCApplication()
     fRootManager(0),
     fWriteStack(true),
     fWriteHits(true),
+    fUseLocalMagField(false),
     fStack(0),
     fDetConstruction(0),
     fDriftChamberSD1(0),
@@ -498,6 +505,20 @@ void  A01MCApplication::SetWriteHits(Bool_t writeHits)
   fDriftChamberSD2->SetWriteHits(writeHits);
   fEmCalorimeterSD->SetWriteHits(writeHits);
   fHadCalorimeterSD->SetWriteHits(writeHits);  
+}
+
+//_____________________________________________________________________________
+void  A01MCApplication::SetUseLocalMagField(Bool_t localMagField)
+{
+/// Set the option to use local magnetic field (working only with Geant4 !)
+/// \param localMagField  The new value of the option
+
+  fUseLocalMagField = localMagField;
+  fDetConstruction->SetUseLocalMagField(localMagField);
+
+  // delete existing global field
+  delete fMagField;
+  fMagField = 0;
 }
 
 //_____________________________________________________________________________

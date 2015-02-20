@@ -27,6 +27,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
   appl->GetPrimaryGenerator()->SetRandomize(false);
   appl->SetWriteStack(true);
   appl->SetWriteHits(true);
+  //appl->SetUseLocalMagField(true);
 
   appl->InitMC(configMacro);
 

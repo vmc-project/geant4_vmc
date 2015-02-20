@@ -21,6 +21,7 @@
 #include <TList.h>
 
 #include "A01RootDetectorConstruction.h"
+#include "A01LocalMagField.h"
 
 /// \cond CLASSIMP
 ClassImp(A01RootDetectorConstruction)
@@ -30,7 +31,8 @@ ClassImp(A01RootDetectorConstruction)
 A01RootDetectorConstruction::A01RootDetectorConstruction(
                                     const TString& geometryFileName)
   : TObject(),
-    fGeometryFileName(geometryFileName)
+    fGeometryFileName(geometryFileName),
+    fUseLocalMagField(false)
 {
 /// Standard constuctor
 /// \param geometryFileName The root geometry file name
@@ -63,6 +65,23 @@ void A01RootDetectorConstruction::ConstructGeometry()
     medium->SetParam(6,.001); // epsil - Tracking precision
   }
 
+  // Create local magnetic field
+  if ( fUseLocalMagField ) {
+    // Constant magnetic field (in kiloGauss)
+    // field value: 1.0*tesla (= 10.0 kiloGauss) in y
+    TVirtualMagField* magField = new A01LocalMagField(0, 10.0, 0);
+
+    // set the field to "magneticLogical" volume
+    TGeoVolume* magneticVolume = gGeoManager->FindVolumeFast("magneticLogical");
+    if ( magneticVolume ) {
+      magneticVolume->SetField(magField);
+    }
+    else {
+      cerr << "The Tube volume was not found in geometry." << endl;
+      cerr << "Local magnetic field was not be set." << endl;
+      delete magField;
+    }
+  }
   // notify VMC about Root geometry
   gMC->SetRootGeometry();
 }

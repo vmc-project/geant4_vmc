@@ -73,6 +73,7 @@ class A01MCApplication : public TVirtualMCApplication
     void  SetCuts();
     void  SetWriteStack(Bool_t writeStack);
     void  SetWriteHits(Bool_t writeHits);
+    void  SetUseLocalMagField(Bool_t localMagField);
     void  SetVerboseLevel(Int_t verboseLevel);
     
     // get methods
@@ -94,6 +95,8 @@ class A01MCApplication : public TVirtualMCApplication
     mutable TVirtualMCRootManager* fRootManager;//!< Root manager
     Bool_t                    fWriteStack;      ///< Option to write stack
     Bool_t                    fWriteHits;       ///< Option to write hits
+    /// Option to use local magnetic field (working only with Geant4 !)
+    Bool_t                    fUseLocalMagField;
     TMCVerbose                fVerbose;         ///< VMC verbose helper
     Ex03MCStack*              fStack;           ///< VMC stack
     A01RootDetectorConstruction*  fDetConstruction; ///< Detector construction

@@ -58,6 +58,7 @@ ROOT_GENERATE_DICTIONARY(
   ${CMAKE_CURRENT_SOURCE_DIR}/include/A01MCApplication.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03MCStack.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/A01MagField.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01LocalMagField.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/A01DriftChamberHit.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/A01EmCalorHit.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/A01HadCalorHit.h

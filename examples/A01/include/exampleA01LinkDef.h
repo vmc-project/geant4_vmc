@@ -19,6 +19,7 @@
 #pragma link C++ class  A01MCApplication+;
 #pragma link C++ class  Ex03MCStack+;
 #pragma link C++ class  A01MagField+;
+#pragma link C++ class  A01LocalMagField+;
 #pragma link C++ class  A01DriftChamberHit+;
 #pragma link C++ class  A01EmCalorHit+;
 #pragma link C++ class  A01HadCalorHit+;
