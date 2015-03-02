@@ -84,7 +84,8 @@ class A01MCApplication : public TVirtualMCApplication
     A01EmCalorimeterSD*          GetEmCalorimeterSD() const; 
     A01HadCalorimeterSD*         GetHadCalorimeterSD() const;
     A01HodoscopeSD*              GetHodoscopeSD1() const;    
-    A01HodoscopeSD*              GetHodoscopeSD2() const;    
+    A01HodoscopeSD*              GetHodoscopeSD2() const;
+    Bool_t  GetUseLocalMagField() const;
  
   private:
     // methods
@@ -160,7 +161,11 @@ inline A01HodoscopeSD* A01MCApplication::GetHodoscopeSD1() const
     
 /// \return The Hodoscope 2 SD
 inline A01HodoscopeSD* A01MCApplication::GetHodoscopeSD2() const
-{ return fHodoscopeSD2; }  
+{ return fHodoscopeSD2; }
+
+/// \return The option to use local magnetic field (working only with Geant4 !)
+inline Bool_t A01MCApplication::GetUseLocalMagField() const
+{ return fUseLocalMagField; }
 
 #endif //A01_MC_APPLICATION_H
 

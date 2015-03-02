@@ -293,21 +293,39 @@ do
   if [ "$EXAMPLE" = "A01" ]; then 
     if [ "$TESTG3" = "1" ]; then
       echo "... Running test with G3, geometry via TGeo, TGeo navigation" 
-      $RUNG3 "test_$EXAMPLE.C(\"g3tgeoConfig.C\", kFALSE)" >& $OUT/test_g3_tgeo_tgeo.out
+      $RUNG3 "test_A01_1.C(\"g3tgeoConfig.C\", kFALSE)" >& $OUT/test_g3_tgeo_tgeo.out
       if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
     fi  
 
     if [ "$TESTG4" = "1" ]; then
       echo "... Running test with G4, geometry via TGeo, Native navigation" 
-      $RUNG4 "test_$EXAMPLE.C(\"g4Config.C\", kFALSE)" >& $OUT/test_g4_tgeo_nat.out
-      if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+      TMP_FAILED="0"
+      $RUNG4 "test_A01_1.C(\"g4Config.C\", kFALSE)" >& $OUT/test_g4_tgeo_nat.out
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      $RUNG4 "test_A01_2.C(\"g4Config2.C\", kFALSE)" >& tmpfile
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+      rm tmpfile
+      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
  
       echo "... Running test with G4, geometry via TGeo, TGeo navigation" 
-      $RUNG4 "test_$EXAMPLE.C(\"g4tgeoConfig.C\", kFALSE)" >& $OUT/test_g4_tgeo_tgeo.out
-      if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+      TMP_FAILED="0"
+      $RUNG4 "test_A01_1.C(\"g4tgeoConfig.C\", kFALSE)" >& $OUT/test_g4_tgeo_tgeo.out
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      $RUNG4 "test_A01_2.C(\"g4tgeoConfig2.C\", kFALSE)" >& tmpfile
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+      rm tmpfile
+      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
 
       echo "... Running test with G4, geometry via G4, Native navigation" 
-      $RUNG4 "test_$EXAMPLE.C(\"g4Config1.C\", kFALSE)" >& $OUT/test_g4_g4_nat.out
+      TMP_FAILED="0"
+      $RUNG4 "test_A01_1.C(\"g4Config1.C\", kFALSE)" >& $OUT/test_g4_g4_nat.out
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      $RUNG4 "test_A01_2.C(\"g4Config1.C\", kFALSE)" >& tmpfile
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      cat tmpfile >> $OUT/test_g4_g4_nat.out
+      rm tmpfile
       if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
     fi  
   fi  

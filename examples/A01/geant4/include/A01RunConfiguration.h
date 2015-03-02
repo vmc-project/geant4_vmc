@@ -36,7 +36,20 @@ class A01RunConfiguration : public TG4RunConfiguration
 
     // methods
     virtual G4VUserDetectorConstruction*  CreateDetectorConstruction();
+
+    // set methods
+    void  SetUseLocalMagField(Bool_t localMagField);
+
+  private:
+    /// Option to use local magnetic field
+    Bool_t  fUseLocalMagField;
 };
 
-#endif //A01_RUN_CONFIGURATION1_H
+// inline functions
 
+/// Set the option to use local magnetic field (working only with Geant4 !)
+/// \param localMagField  The new value of the option
+inline void A01RunConfiguration::SetUseLocalMagField(Bool_t localMagField)
+{ fUseLocalMagField = localMagField; }
+
+#endif //A01_RUN_CONFIGURATION1_H

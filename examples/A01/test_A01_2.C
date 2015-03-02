@@ -8,17 +8,17 @@
 //-------------------------------------------------
 
 /// \ingroup Tests
-/// \file A01/test_A01_1.C
+/// \file A01/test_A01_2.C
 /// \brief Example A01 Test macro
 ///
 /// Running A01 example
 
-void test_A01_1(const TString& configMacro, Bool_t oldGeometry)
+void test_A01_2(const TString& configMacro, Bool_t oldGeometry)
 {
-/// Macro function for testing example A01 
-/// \param configMacro  configuration macro loaded in initialization 
+/// Macro function for testing example A01 with local magnetic field
+/// (can be used with Geant4 only).
 /// \param oldGeometry  if true - geometry is defined via VMC, otherwise 
-///                     via TGeo
+///                     via TGeo (not used)
 
   // Create application if it does not yet exist
   Bool_t needDelete = kFALSE;
@@ -33,6 +33,7 @@ void test_A01_1(const TString& configMacro, Bool_t oldGeometry)
   appl->GetPrimaryGenerator()->SetNofPrimaries(100);
   appl->SetWriteStack(true);
   appl->SetWriteHits(true);
+  appl->SetUseLocalMagField(true);
 
   appl->InitMC(configMacro);
 

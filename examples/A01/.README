@@ -11,6 +11,7 @@
 
   It demonstrates:
     - Geometry - placements with rotations, divided volume
+    - Geometry - local magnetic field (G4 only)
     - Geometry defined via Geant4 (G4) or Root file
     - Definition of sensitive volumes
     - Hodoscope, drift chamber and calorimeter detector types
@@ -23,15 +24,6 @@
 
   See also the description of the Geant4 example in 
     geant4/examples/extednded/analysis/A01/README
-
-\section a01_s2 Compilation:
-
-  With G4:\n
-  An extra library with user defined Geant4 based classes has to be build:
-  <pre>
-  cd A01/geant4
-  make
-  </pre>
 
 \section a01_s3 Macros
 
@@ -48,8 +40,11 @@
   \link       A01/run_g4.C run_g4.C      \endlink - macro for running example 
   \link     A01/g4Config.C g4Config.C    \endlink - configuration macro for G4 with native geometry navigation (default)
   \link    A01/g4Config1.C g4Config1.C   \endlink - configuration macro - geometry defined via Geant4
+  \link    A01/g4Config2.C g4Config2.C   \endlink - configuration macro - G4 with native geometry navigation with local magnetic field
   \link A01/g4tgeoConfig.C g4tgeoConfig.C\endlink - configuration macro for G4 with TGeo geometry navigation
+  \link A01/g4tgeoConfig2.C g4tgeoConfig2.C\endlink - configuration macro - G4 with TGeo navigation with local magnetic field
    g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
+   g4config2.in  - macro for G4 configuration using G4 commands (called from g4tgeoConfig2.C)
    g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
   </pre>
 

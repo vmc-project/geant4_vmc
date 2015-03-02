@@ -68,6 +68,7 @@ void PrintUsage(std::string programName)
   std::cerr << "   [-g4vm, --g4-vis-macro]:       Geant4 visualization macro" << std::endl;
   std::cerr << "   [-g4uc, --g4-user-class]:      Geant4 user class "
             << "                                  (geometry)" << std::endl;
+  std::cerr << "   [-g4lf, --g4-local-field]:     Geant4 local field option " << std::endl;
 #endif
 #ifdef USE_GEANT3
   std::cerr << "   [-g3g,  --g3-geometry]:        Geant3 geometry option (TGeant3,TGeant3TGeo)" << std::endl;
@@ -87,6 +88,7 @@ void PrintG4Configuration(
        const std::string& g4VisMacro,
        const std::string& g4Session,
        const std::string& g4UserClass,
+       const std::string& g4LocalField,
        const std::string& rootMacro)
 {
   std::cout << " Running " << programName << " with options:" << std::endl;
@@ -106,6 +108,9 @@ void PrintG4Configuration(
   }
   if ( g4UserClass.size() ) {
     std::cout << "   --g4-user-class:      " << g4UserClass << std::endl;
+  }
+  if ( g4LocalField.size() ) {
+    std::cout << "   --g4-local-field:     " << g4LocalField << std::endl;
   }
   if ( rootMacro.size() ) {
     std::cout << "   --root-macro:         " << rootMacro << std::endl;
@@ -153,6 +158,7 @@ int main(int argc, char** argv)
   std::string g4VisMacro = "g4vis.in";
   std::string g4Session = "";
   std::string g4UserClass = "";
+  std::string g4LocalField = "";
 #endif
 #ifdef USE_GEANT3
   std::string g3Geometry = "TGeant3TGeo";
@@ -178,6 +184,8 @@ int main(int argc, char** argv)
     // the following option is specific to use of Geant4 dependent classes
     else if ( std::string(argv[i]) == "--g4-user-class" ||
               std::string(argv[i]) == "-g4uc") g4UserClass = argv[i+1];
+    else if ( std::string(argv[i]) == "--g4-local-field" ||
+              std::string(argv[i]) == "-g4lf") g4LocalField = argv[i+1];
 #endif
 #ifdef USE_GEANT3
     if      ( std::string(argv[i]) == "--g3-geometry" ||
@@ -197,7 +205,7 @@ int main(int argc, char** argv)
 #ifdef USE_GEANT4
     PrintG4Configuration(
       "testA01", g4Geometry, g4PhysicsList, g4SpecialPhysics,
-      g4Macro, g4VisMacro, g4Session, g4UserClass, rootMacro);
+      g4Macro, g4VisMacro, g4Session, g4UserClass, g4LocalField, rootMacro);
 #endif
 #ifdef USE_GEANT3
     PrintG3Configuration(
@@ -211,8 +219,13 @@ int main(int argc, char** argv)
   A01MCApplication* appl 
     =  new A01MCApplication("ExampleA01", 
                             "The exampleA01 MC application");
-
 #ifdef USE_GEANT4
+  // Local magnetic field option
+  if ( g4LocalField.size() ) {
+    G4cout << "setting local field to true" << G4endl;
+    appl->SetUseLocalMagField(true);
+  }
+
   // RunConfiguration for Geant4 
   TG4RunConfiguration* runConfiguration = 0;
   if ( ! g4UserClass.size() ) {
@@ -222,6 +235,10 @@ int main(int argc, char** argv)
   else if ( g4UserClass == "geometry" ) {
     runConfiguration
       = new A01RunConfiguration(g4PhysicsList, g4SpecialPhysics);
+    // Local magnetic field option
+    if ( g4LocalField.size() ) {
+      static_cast<A01RunConfiguration*>(runConfiguration)->SetUseLocalMagField(true);
+    }
   }
   else {
     PrintUsage("testA01");

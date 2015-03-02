@@ -20,7 +20,8 @@
 //_____________________________________________________________________________
 A01RunConfiguration::A01RunConfiguration(const TString& physicsList,
                                          const TString& specialProcess)
-  : TG4RunConfiguration("geomGeant4", physicsList, specialProcess) 
+  : TG4RunConfiguration("geomGeant4", physicsList, specialProcess),
+    fUseLocalMagField(false)
 {
 /// Standard constructor
 /// \param physicsList     Selection of physics
@@ -48,5 +49,5 @@ G4VUserDetectorConstruction*  A01RunConfiguration::CreateDetectorConstruction()
 /// The Geant4 VMC detector construction is overridden with the detector
 /// construction class from the Geant4 novice example N03 library.
 
-  return new A01DetectorConstruction();
+  return new A01DetectorConstruction(fUseLocalMagField);
 }   

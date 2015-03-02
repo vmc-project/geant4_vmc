@@ -23,59 +23,56 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-
-//------------------------------------------------
-// The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
-// All rights reserved.
+// $Id: B5MagneticField.cc 77656 2013-11-27 08:52:57Z gcosmo $
 //
-// For the licensing terms see geant4_vmc/LICENSE.
-// Contact: root-vmc@cern.ch
-//-------------------------------------------------
+/// \file B5MagneticField.cc
+/// \brief Implementation of the B5MagneticField class
 
-/// \file A01DetectorConstMessenger.cxx
-/// \brief Implementation of the A01DetectorConstMessenger class 
-///
-/// Geant4 example A01 adapted to Virtual Monte Carlo
+#include "B5MagneticField.hh"
 
-#include "A01DetectorConstMessenger.hh"
-#include "A01DetectorConstruction.hh"
-#include "G4UIdirectory.hh"
-#include "G4UIcmdWithADoubleAndUnit.hh"
-#include "G4ios.hh"
+#include "G4GenericMessenger.hh"
+#include "G4SystemOfUnits.hh"
+#include "globals.hh"
 
-A01DetectorConstMessenger::A01DetectorConstMessenger(A01DetectorConstruction* mpga)
-:fTarget(mpga)
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+B5MagneticField::B5MagneticField()
+: G4MagneticField(), fMessenger(0), fBy(1.0*tesla)
 {
-  fMydetDirectory = new G4UIdirectory("/mydet/");
-  fMydetDirectory->SetGuidance("A01 detector setup control commands.");
-
-  fArmCmd = new G4UIcmdWithADoubleAndUnit("/mydet/armAngle",this);
-  fArmCmd->SetGuidance("Rotation angle of the second arm.");
-  fArmCmd->SetParameterName("angle",true);
-  fArmCmd->SetRange("angle>=0. && angle<180.");
-  fArmCmd->SetDefaultValue(30.);
-  fArmCmd->SetDefaultUnit("deg");
+    // define commands for this class
+    DefineCommands();
 }
 
-A01DetectorConstMessenger::~A01DetectorConstMessenger()
-{
-  delete fArmCmd;
-  delete fMydetDirectory;
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+B5MagneticField::~B5MagneticField()
+{ 
+    delete fMessenger; 
 }
 
-void A01DetectorConstMessenger::SetNewValue(G4UIcommand * command,G4String newValue)
+void B5MagneticField::GetFieldValue(const G4double [4],double *bField) const
 {
-  if( command==fArmCmd )
-  { fTarget->SetArmAngle(fArmCmd->GetNewDoubleValue(newValue)); }
+    bField[0] = 0.;
+    bField[1] = fBy;
+    bField[2] = 0.;
 }
 
-G4String A01DetectorConstMessenger::GetCurrentValue(G4UIcommand * command)
-{
-  G4String cv;
-  if( command==fArmCmd )
-  { cv = fArmCmd->ConvertToString(fTarget->GetArmAngle(),"deg"); }
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-  return cv;
+void B5MagneticField::DefineCommands()
+{
+    // Define /B5/field command directory using generic messenger class
+    fMessenger = new G4GenericMessenger(this, 
+                                        "/B5/field/", 
+                                        "Field control");
+
+    // fieldValue command 
+    G4GenericMessenger::Command& valueCmd
+      = fMessenger->DeclareMethodWithUnit("value","tesla",
+                                  &B5MagneticField::SetField, 
+                                  "Set field strength.");
+    valueCmd.SetParameterName("field", true);
+    valueCmd.SetDefaultValue("1.");
 }
 
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

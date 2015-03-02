@@ -27,7 +27,9 @@ void run_g4(const TString& configMacro = "g4Config.C")
   appl->GetPrimaryGenerator()->SetRandomize(false);
   appl->SetWriteStack(true);
   appl->SetWriteHits(true);
-  //appl->SetUseLocalMagField(true);
+  // Activate use of local magnetic field (available only with Geant4);
+  // requires to run with g4[tgeo]Config2.C
+  // appl->SetUseLocalMagField(true);
 
   appl->InitMC(configMacro);
 

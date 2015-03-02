@@ -19,9 +19,17 @@ void Config()
 /// called during MC application initialization. 
 /// For geometry defined with Geant4 in a user run configuration.
 
+
+  // Get local magnetic field option
+  A01MCApplication* appl
+    = (A01MCApplication*)TVirtualMCApplication::Instance();
+  Bool_t useLocalMagField = appl->GetUseLocalMagField();
+
+
   // Run configuration with user geometry construction via Geant4
   A01RunConfiguration* runConfiguration 
     = new A01RunConfiguration("FTFP_BERT");
+  runConfiguration->SetUseLocalMagField(useLocalMagField);
   
   // Run configuration with user geometry construction via Geant4
   // + special cuts activated

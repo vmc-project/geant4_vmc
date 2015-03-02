@@ -1,6 +1,3 @@
-#ifndef A01CellParameterisation_H
-#define A01CellParameterisation_H 1
-
 //
 // ********************************************************************
 // * License and Disclaimer                                           *
@@ -26,41 +23,39 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-
-//------------------------------------------------
-// The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
-// All rights reserved.
+// $Id: B5MagneticField.hh 76474 2013-11-11 10:36:34Z gcosmo $
 //
-// For the licensing terms see geant4_vmc/LICENSE.
-// Contact: root-vmc@cern.ch
-//-------------------------------------------------
+/// \file B5MagneticField.hh
+/// \brief Definition of the B5MagneticField class
 
-/// \file A01CellParameterisation.hh 
-/// \brief Definition of the A01CellParameterisation class 
-///
-/// Geant4 example A01 adapted to Virtual Monte Carlo
+#ifndef B5MagneticField_H
+#define B5MagneticField_H 1
 
 #include "globals.hh"
-#include "G4VPVParameterisation.hh"
-class G4VPhysicalVolume;
+#include "G4MagneticField.hh"
 
-/// \ingroup A01
-/// \brief The cell parameterisation (defined via Geant4)
+class G4GenericMessenger;
 
-class A01CellParameterisation : public G4VPVParameterisation
+/// Magnetic field
+
+class B5MagneticField : public G4MagneticField
 {
-  public:
-    A01CellParameterisation();
-    virtual ~A01CellParameterisation();
-    virtual void ComputeTransformation
-                   (const G4int copyNo,G4VPhysicalVolume *physVol) const;
+public:
+    B5MagneticField();
+    virtual ~B5MagneticField();
+    
+    virtual void GetFieldValue(const G4double point[4],double* bField ) const;
+    
+    void SetField(G4double val) { fBy = val; }
+    G4double GetField() const { return fBy; }
+    
+private:
+    void DefineCommands();
 
-  private:
-    G4double fXCell[80];
-    G4double fYCell[80];
+    G4GenericMessenger* fMessenger;
+    G4double fBy;
 };
 
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
 #endif
-
-

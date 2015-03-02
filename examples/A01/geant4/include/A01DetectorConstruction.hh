@@ -49,12 +49,13 @@
 #include "G4RotationMatrix.hh"
 #include "G4FieldManager.hh"
 
+class B5MagneticField;
+
 class G4VPhysicalVolume;
-class G4Material;
-class G4VSensitiveDetector;
+class G4LogicalVolume;
+class G4GenericMessenger;
+class G4FieldManager;
 class G4VisAttributes;
-class A01DetectorConstMessenger;
-class A01MagneticField;
 
 /// \ingroup A01
 /// \brief The detector construction (defined via Geant4)
@@ -62,7 +63,7 @@ class A01MagneticField;
 class A01DetectorConstruction : public G4VUserDetectorConstruction
 {
   public:
-    A01DetectorConstruction();
+    A01DetectorConstruction(G4bool useLocalMagField);
     virtual ~A01DetectorConstruction();
 
     virtual G4VPhysicalVolume* Construct();
@@ -71,34 +72,24 @@ class A01DetectorConstruction : public G4VUserDetectorConstruction
     inline G4double GetArmAngle() { return fArmAngle; }
 
     void ConstructMaterials();
-    void DestroyMaterials();
-    void DumpGeometricalTree(G4VPhysicalVolume* aVolume,G4int depth=0);
 
   private:
-    A01DetectorConstMessenger* fMessenger;
-    //A01MagneticField* fMagneticField;
-    //G4FieldManager* fFieldMgr;
+    void DefineCommands();
 
-    G4Material* fAir;
-    G4Material* fArgonGas;
-    G4Material* fScintillator;
-    G4Material* fCsI;
-    G4Material* fLead;
+    G4GenericMessenger* fMessenger;
 
-    G4VisAttributes* fWorldVisAtt;
-    G4VisAttributes* fMagneticVisAtt;
-    G4VisAttributes* fArmVisAtt;
-    G4VisAttributes* fHodoscopeVisAtt;
-    G4VisAttributes* fChamberVisAtt;
-    G4VisAttributes* fWirePlaneVisAtt;
-    G4VisAttributes* fEMcalorimeterVisAtt;
-    G4VisAttributes* fCellVisAtt;
-    G4VisAttributes* fHadCalorimeterVisAtt;
-    G4VisAttributes* fHadCalorimeterCellVisAtt;
+    static G4ThreadLocal B5MagneticField* fMagneticField;
+    static G4ThreadLocal G4FieldManager* fFieldMgr;
+
+    G4LogicalVolume* fMagneticLogical;
+
+    std::vector<G4VisAttributes*> fVisAttributes;
 
     G4double fArmAngle;
     G4RotationMatrix* fArmRotation;
     G4VPhysicalVolume* fSecondArmPhys;
+
+    G4bool fUseLocalMagField;
 };
 
 #endif

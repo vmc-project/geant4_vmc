@@ -1,0 +1,39 @@
+#------------------------------------------------
+# The Virtual Monte Carlo examples
+# Copyright (C) 2007 - 2014 Ivana Hrivnacova
+# All rights reserved.
+#
+# For the licensing terms see geant4_vmc/LICENSE.
+# Contact: root-vmc@cern.ch
+#-------------------------------------------------
+
+#
+# Geant4 configuration macro for Example A01
+# (called from Root macro g4Config2.C)
+
+/mcVerbose/all 1
+/mcVerbose/runAction 1
+/mcVerbose/composedPhysicsList 1
+/mcVerbose/trackingAction 0
+/mcVerbose/eventAction 0
+#/mcVerbose/trackManager 2
+
+/control/cout/ignoreThreadsExcept 0
+
+#/tracking/verbose 1
+
+# options for saving secondaries
+#/mcTracking/saveSecondaries DoNotSave
+#/mcTracking/saveSecondariesInStep true
+
+# sensitive volumes selection
+#/mcDet/addSDSelection wirePlane1Logical
+#/mcDet/addSDSelection wirePlane2Logical
+#/mcDet/addSDSelection hodoscope1Logical
+#/mcDet/addSDSelection hodoscope2Logical
+#/mcDet/addSDSelection cellLogical
+#/mcDet/addSDSelection HadCalScintiLogical
+
+# activate use of local magnetic field
+/mcDet/setIsLocalMagField true
+
