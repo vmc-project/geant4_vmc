@@ -75,6 +75,7 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fUserGeometry(userGeometry),
     fFieldParameters(),
     fUserRegionConstruction(0),
+    fIsLocalMagField(false),
     fIsUserMaxStep(false),
     fIsMaxStepInLowDensityMaterials(true),
     fLimitDensity(fgDefaultLimitDensity),
@@ -709,7 +710,10 @@ void TG4GeometryManager::ConstructSDandField()
 
   // Create magnetic field
   ConstructGlobalMagField();
-  ConstructLocalMagFields();
+
+  if ( fIsLocalMagField ) {
+    ConstructLocalMagFields();
+  }
 }
 
 //_____________________________________________________________________________
@@ -837,6 +841,18 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
     G4cout << "TG4GeometryManager::SetUserLimits done" << G4endl;
 }
 
+
+//_____________________________________________________________________________
+void TG4GeometryManager::SetIsLocalMagField(G4bool isLocalMagField)
+{
+  /// (In)Activate use of local magnetic field(s)
+
+  if ( VerboseLevel() > 0 )
+    G4cout << "TG4GeometryManager::SetIsLocalMagField: "
+           << std::boolalpha << isLocalMagField << G4endl;
+
+  fIsLocalMagField = isLocalMagField;
+}
 
 //_____________________________________________________________________________
 void TG4GeometryManager::SetIsUserMaxStep(G4bool isUserMaxStep) 

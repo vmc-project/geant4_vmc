@@ -33,6 +33,7 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
     fDirectory(0),
     fUpdateMagFieldCmd(0),
     fCreateMagFieldParametersCmd(0),
+    fIsLocalMagFieldCmd(0),
     fSeparatorCmd(0),
     fPrintMaterialsCmd(0),
     fPrintMaterialsPropertiesCmd(0),
@@ -64,6 +65,13 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
     ->SetGuidance("associated with the volume with the given name.");
   fCreateMagFieldParametersCmd->SetParameterName("FieldVolName", false);
   fCreateMagFieldParametersCmd->AvailableForStates(G4State_PreInit);
+
+  fIsLocalMagFieldCmd
+    = new G4UIcmdWithABool("/mcDet/setIsLocalMagField", this);
+  fIsLocalMagFieldCmd
+    ->SetGuidance("Get local magnetic field from Root geometry.");
+  fIsLocalMagFieldCmd->SetParameterName("IsLocalMagField", false);
+  fIsLocalMagFieldCmd->AvailableForStates(G4State_PreInit);
 
   fSeparatorCmd = new G4UIcmdWithAString("/mcDet/volNameSeparator", this);
   guidance 
@@ -156,6 +164,7 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
   delete fDirectory;
   delete fUpdateMagFieldCmd;
   delete fCreateMagFieldParametersCmd;
+  delete fIsLocalMagFieldCmd;
   delete fSeparatorCmd;
   delete fPrintMaterialsCmd;
   delete fPrintMaterialsPropertiesCmd;
@@ -184,6 +193,10 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
   }    
   else if( command == fCreateMagFieldParametersCmd ) {
     TG4GeometryManager::Instance()->CreateMagFieldParameters(newValues);
+  }
+  else if (command == fIsLocalMagFieldCmd) {
+    TG4GeometryManager::Instance()
+      ->SetIsLocalMagField(fIsLocalMagFieldCmd->GetNewBoolValue(newValues));
   }
   else if( command == fSeparatorCmd ) { 
     char separator = newValues(0);

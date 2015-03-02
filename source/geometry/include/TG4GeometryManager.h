@@ -60,6 +60,7 @@ class TG4GeometryManager : public TG4Verbose
     void CreateMagFieldParameters(const G4String& fieldVolName);
     void SetUserLimits(const TG4G3CutVector& cuts,
                        const TG4G3ControlVector& controls) const;
+    void SetIsLocalMagField(G4bool isLocalMagField);
     void SetIsUserMaxStep(G4bool isUserMaxStep);
     void SetIsMaxStepInLowDensityMaterials(G4bool isMaxStep);
      
@@ -111,6 +112,9 @@ class TG4GeometryManager : public TG4Verbose
     std::vector<TG4FieldParameters*>  fFieldParameters; ///< magnetic field parameters
     static G4ThreadLocal std::vector<TG4MagneticField*>*  fgMagneticFields; ///< magnetic fields
     TG4VUserRegionConstruction* fUserRegionConstruction; ///< user region construction
+
+    /// option to activate getting local magnetic fields from Root geometry
+    G4bool    fIsLocalMagField;
 
     /// info if a cached magnetic field is in use
     G4bool    fIsCachedMagneticField;
