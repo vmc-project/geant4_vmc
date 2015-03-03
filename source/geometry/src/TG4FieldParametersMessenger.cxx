@@ -49,7 +49,9 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
   fDirectory = new G4UIdirectory(directoryName);
   fDirectory->SetGuidance("Magnetic field control commands.");
 
-  fEquationTypeCmd = new G4UIcmdWithAString("/mcMagField/equationType", this);
+  G4String commandName = directoryName;
+  commandName.append("equationType");
+  fEquationTypeCmd = new G4UIcmdWithAString(commandName, this);
   G4String guidance 
     = "Select type of the equation of motion of a particle in a field";
   fEquationTypeCmd->SetGuidance(guidance);
@@ -63,7 +65,9 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
   fEquationTypeCmd->SetCandidates(candidates);   
   fEquationTypeCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
-  fStepperTypeCmd = new G4UIcmdWithAString("/mcMagField/stepperType", this);
+  commandName = directoryName;
+  commandName.append("stepperType");
+  fStepperTypeCmd = new G4UIcmdWithAString(commandName, this);
   guidance 
     = "Select type of the the integrator of particle's equation of motion in a field";
   fStepperTypeCmd->SetGuidance(guidance);
@@ -77,52 +81,59 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
   fStepperTypeCmd->SetCandidates(candidates);   
   fStepperTypeCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
-  fSetStepMinimumCmd 
-    = new G4UIcmdWithADoubleAndUnit("/mcMagField/setStepMinimum", this);
+  commandName = directoryName;
+  commandName.append("setStepMinimum");
+  fSetStepMinimumCmd = new G4UIcmdWithADoubleAndUnit(commandName, this);
   fSetStepMinimumCmd->SetGuidance("Set minimum step in G4ChordFinder");
   fSetStepMinimumCmd->SetParameterName("StepMinimum", false);
   fSetStepMinimumCmd->SetDefaultUnit("mm");
   fSetStepMinimumCmd->SetUnitCategory("Length");
   fSetStepMinimumCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
   
-  fSetDeltaChordCmd 
-    = new G4UIcmdWithADoubleAndUnit("/mcMagField/setDeltaChord", this);
+  commandName = directoryName;
+  commandName.append("setDeltaChord");
+  fSetDeltaChordCmd = new G4UIcmdWithADoubleAndUnit(commandName, this);
   fSetDeltaChordCmd->SetGuidance("Set delta chord in G4ChordFinder");
   fSetDeltaChordCmd->SetParameterName("DeltaChord", false);
   fSetDeltaChordCmd->SetDefaultUnit("mm");
   fSetDeltaChordCmd->SetUnitCategory("Length");
   fSetDeltaChordCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
   
-  fSetDeltaOneStepCmd 
-    = new G4UIcmdWithADoubleAndUnit("/mcMagField/setDeltaOneStep", this);
+  commandName = directoryName;
+  commandName.append("setDeltaOneStep");
+  fSetDeltaOneStepCmd = new G4UIcmdWithADoubleAndUnit(commandName, this);
   fSetDeltaOneStepCmd->SetGuidance("Set delta one step in global field manager");
   fSetDeltaOneStepCmd->SetParameterName("DeltaOneStep", false);
   fSetDeltaOneStepCmd->SetDefaultUnit("mm");
   fSetDeltaOneStepCmd->SetUnitCategory("Length");
   fSetDeltaOneStepCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
   
-  fSetDeltaIntersectionCmd 
-    = new G4UIcmdWithADoubleAndUnit("/mcMagField/setDeltaIntersection", this);
+  commandName = directoryName;
+  commandName.append("setDeltaIntersection");
+  fSetDeltaIntersectionCmd = new G4UIcmdWithADoubleAndUnit(commandName, this);
   fSetDeltaIntersectionCmd->SetGuidance("Set delta intersection in global field manager");
   fSetDeltaIntersectionCmd->SetParameterName("DeltaIntersection", false);
   fSetDeltaIntersectionCmd->SetDefaultUnit("mm");
   fSetDeltaIntersectionCmd->SetUnitCategory("Length");
   fSetDeltaIntersectionCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
   
-  fSetMinimumEpsilonStepCmd 
-    = new G4UIcmdWithADouble("/mcMagField/setMinimumEpsilonStep", this);
+  commandName = directoryName;
+  commandName.append("setMinimumEpsilonStep");
+  fSetMinimumEpsilonStepCmd = new G4UIcmdWithADouble(commandName, this);
   fSetMinimumEpsilonStepCmd->SetGuidance("Set minimum epsilon step in global field manager");
   fSetMinimumEpsilonStepCmd->SetParameterName("MinimumEpsilonStep", false);
   fSetMinimumEpsilonStepCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
   
-  fSetMaximumEpsilonStepCmd 
-    = new G4UIcmdWithADouble("/mcMagField/setMaximumEpsilonStep", this);
+  commandName = directoryName;
+  commandName.append("setMaximumEpsilonStep");
+  fSetMaximumEpsilonStepCmd = new G4UIcmdWithADouble(commandName, this);
   fSetMaximumEpsilonStepCmd->SetGuidance("Set maximum epsilon step in global field manager");
   fSetMaximumEpsilonStepCmd->SetParameterName("MaximumEpsilonStep", false);
   fSetMaximumEpsilonStepCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
   
-  fSetConstDistanceCmd
-    = new G4UIcmdWithADoubleAndUnit("/mcMagField/setConstDistance", this);
+  commandName = directoryName;
+  commandName.append("setConstDistance");
+  fSetConstDistanceCmd = new G4UIcmdWithADoubleAndUnit(commandName, this);
   fSetConstDistanceCmd
     ->SetGuidance("Set the distance within which the field is considered constant.");
   fSetConstDistanceCmd
@@ -133,8 +144,9 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
   fSetConstDistanceCmd->SetRange("ConstDistance >= 0");
   fSetConstDistanceCmd->AvailableForStates(G4State_PreInit);
 
-  fPrintParametersCmd 
-    = new G4UIcmdWithoutParameter("/mcMagField/printParameters", this);
+  commandName = directoryName;
+  commandName.append("printParameters");
+  fPrintParametersCmd = new G4UIcmdWithoutParameter(commandName, this);
   fPrintParametersCmd->SetGuidance("Prints all accuracy parameters.");
   fPrintParametersCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);   
 }
