@@ -548,22 +548,21 @@ void TG4GeometryManager::CreateMagField(TVirtualMagField* magField,
   }
 
   if ( VerboseLevel() > 0 ) {
-    G4String scope = "";
+    G4String fieldType = "";
     if ( ! lv ) {
-      scope = "global ";
+      fieldType = "Global";
     } else {
-      scope = " local (";
-      scope.append(lv->GetName());
-      scope.append(") ");
+      fieldType = "Local (in ";
+      fieldType.append(lv->GetName());
+      fieldType.append(")");
+    }
+    if ( isCachedMagneticField ) {
+      fieldType.append(" cached");
     }
 
-    if ( isCachedMagneticField ) {
-      G4cout << "Cached " << scope << "magnetic field created with stepper ";
-    } else {
-      G4cout << "Magnetic " << scope << "field created with stepper ";
-    }
+    G4cout << fieldType << " magnetic field created with stepper ";
     G4cout << TG4FieldParameters::StepperTypeName(
-              fieldParameters->GetStepperType()) << G4endl;
+                fieldParameters->GetStepperType()) << G4endl;
   }
   fgMagneticFields->push_back(tg4MagneticField);
   G4AutoDelete::Register(tg4MagneticField);
@@ -847,7 +846,7 @@ void TG4GeometryManager::SetIsLocalMagField(G4bool isLocalMagField)
 {
   /// (In)Activate use of local magnetic field(s)
 
-  if ( VerboseLevel() > 0 )
+  if ( VerboseLevel() > 1 )
     G4cout << "TG4GeometryManager::SetIsLocalMagField: "
            << std::boolalpha << isLocalMagField << G4endl;
 
