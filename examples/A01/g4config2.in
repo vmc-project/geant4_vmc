@@ -36,4 +36,8 @@
 
 # activate use of local magnetic field
 /mcDet/setIsLocalMagField true
-
+# customize local magnetic field parameters
+#/mcDet/createMagFieldParameters magneticLogical
+#/mcMagField/magneticLogical/stepperType NystromRK4
+# cached field
+#/mcMagField/magneticLogical/setConstDistance 1 cm
