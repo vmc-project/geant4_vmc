@@ -176,7 +176,7 @@ G4VUserPhysicsList* TG4RunConfiguration::CreatePhysicsList()
   while ( ( token = TG4Globals::GetToken(itoken++, fPhysicsListSelection) ) != "" )         
   {
     // The first token must be either EM or Hadronic physics list
-    if ( ( itoken == 1 ) ) {
+    if ( itoken == 1 ) {
       if ( TG4EmPhysicsList::IsAvailableSelection(token) ) {
         emSelection = token;
       }
