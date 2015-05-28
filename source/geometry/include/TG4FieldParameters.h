@@ -20,6 +20,9 @@
 
 class TG4FieldParametersMessenger;
 
+class G4EquationOfMotion;
+class G4MagIntegratorStepper;
+
 /// The available equations of motion of a particle in a field  
 /// in Geant4
 enum EquationType {
@@ -31,9 +34,10 @@ enum EquationType {
                       ///  electric and magnetic field
   kEqEMFieldWithSpin, ///< G4EqEMFieldWithSpin: Equation of motion for a particle with spin
                       ///  in a combined electric and magnetic field                 
-  kEqEMFieldWithEDM   ///< G4EqEMFieldWithEDM: Equation of motion in a combined
+  kEqEMFieldWithEDM,  ///< G4EqEMFieldWithEDM: Equation of motion in a combined
                       /// electric and magnetic field, with spin tracking for both MDM and
                       /// EDM terms
+  kUserEquation       ///< User defined equation of motion
 }; 
 
 /// The available integrator of particle's equation of motion
@@ -56,7 +60,8 @@ enum StepperType {
   kHelixMixedStepper, ///< G4HelixMixedStepper
   kHelixSimpleRunge,  ///< G4HelixSimpleRunge
   kNystromRK4,        ///< G4NystromRK4
-  kRKG3Stepper        ///< G4RKG3_Stepper
+  kRKG3Stepper,       ///< G4RKG3_Stepper
+  kUserStepper        ///< User defined stepper
 };  
                                       
 /// \ingroup geometry
@@ -91,6 +96,9 @@ class TG4FieldParameters
     // set methods
     void SetEquationType(EquationType equation);
     void SetStepperType(StepperType stepper);
+    void SetUserEquationOfMotion(G4EquationOfMotion* equation);
+    void SetUserStepper(G4MagIntegratorStepper* stepper);
+
     void SetStepMinimum(G4double value); 
     void SetDeltaChord(G4double value); 
     void SetDeltaOneStep(G4double value); 
@@ -101,8 +109,12 @@ class TG4FieldParameters
 
     // get methods
     G4String  GetVolumeName() const;
+
     EquationType GetEquationType() const;
     StepperType  GetStepperType() const;
+    G4EquationOfMotion*     GetUserEquationOfMotion() const;
+    G4MagIntegratorStepper* GetUserStepper() const;
+
     G4double GetStepMinimum() const; 
     G4double GetDeltaChord() const; 
     G4double GetDeltaOneStep() const; 
@@ -155,6 +167,12 @@ class TG4FieldParameters
 
     /// Type of integrator of particle's equation of motion
     StepperType  fStepper;  
+
+    /// User defined equation of motion
+    G4EquationOfMotion* fUserEquation;
+
+    /// User defined integrator of particle's equation of motion
+    G4MagIntegratorStepper*  fUserStepper;
 
     /// The distance within which the field is considered constant
     G4double  fConstDistance;
@@ -221,6 +239,16 @@ inline EquationType TG4FieldParameters::GetEquationType() const {
 inline StepperType TG4FieldParameters::GetStepperType() const {
   return fStepper;
 }  
+
+/// Return the user defined equation of motion
+inline G4EquationOfMotion*  TG4FieldParameters::GetUserEquationOfMotion() const {
+  return fUserEquation;
+}
+
+/// Return the user defined integrator of particle's equation of motion
+inline G4MagIntegratorStepper* TG4FieldParameters::GetUserStepper() const {
+  return fUserStepper;
+}
 
 /// Return minimum step in G4ChordFinder 
 inline G4double TG4FieldParameters::GetStepMinimum() const { 

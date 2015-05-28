@@ -30,6 +30,8 @@ class TG4G3ControlVector;
 class TG4VUserRegionConstruction;
 
 class G4LogicalVolume;
+class G4EquationOfMotion;
+class G4MagIntegratorStepper;
 
 class TVirtualMCGeometry;
 class TVirtualMagField;
@@ -67,6 +69,8 @@ class TG4GeometryManager : public TG4Verbose
     // set user region construction
     void SetUserRegionConstruction(
             TG4VUserRegionConstruction* userRegionConstruction);
+    void SetUserEquationOfMotion(G4EquationOfMotion* equation, G4String volumeName="");
+    void SetUserStepper(G4MagIntegratorStepper* stepper, G4String volumeName="");
             
     void SetLimitDensity(G4double density);
     void SetMaxStepInLowDensityMaterials(G4double maxStep);
@@ -89,6 +93,7 @@ class TG4GeometryManager : public TG4Verbose
     void FillMediumMapFromG4();
     void FillMediumMapFromRoot();
     void FillMediumMap();
+    TG4FieldParameters* GetOrCreateFieldParameters(const G4String& volumeName);
     void CreateMagField(TVirtualMagField* magField,
            TG4FieldParameters* fieldParameters, G4LogicalVolume* lv);
     void ConstructGlobalMagField();

@@ -22,6 +22,7 @@
 #include "TG4Medium.h"
 #include "TG4Limits.h"
 #include "TG4CachedMagneticField.h"
+#include "TG4FieldParameters.h"
 #include "TG4G3Units.h"
 #include "TG4G3CutVector.h"
 #include "TG4G3ControlVector.h"
@@ -580,6 +581,27 @@ void TG4GeometryManager::ConstructGlobalMagField()
 }
 
 //_____________________________________________________________________________
+TG4FieldParameters* TG4GeometryManager::GetOrCreateFieldParameters(
+                                          const G4String& volumeName)
+{
+/// Get field parameters with the given volumeName or create them if they
+/// do not exist yet
+
+  // Get user field parameters
+  TG4FieldParameters* fieldParameters = 0;
+  for (G4int i=0; i<G4int(fFieldParameters.size()); ++i) {
+    if ( fFieldParameters[i]->GetVolumeName() == volumeName ) {
+      return fFieldParameters[i];
+    }
+  }
+
+  // Create field parameters if not yet defined
+  fieldParameters = new TG4FieldParameters(volumeName);
+  fFieldParameters.push_back(fieldParameters);
+  return fieldParameters;
+}
+
+//_____________________________________________________________________________
 void TG4GeometryManager::ConstructLocalMagFields()
 {
 /// Construct Geant4 local magnetic field from Root geometry.
@@ -622,19 +644,8 @@ void TG4GeometryManager::ConstructLocalMagFields()
       continue;
     }
 
-    // Get user field parameters
-    TG4FieldParameters* fieldParameters = 0;
-    for (G4int i=0; i<G4int(fFieldParameters.size()); ++i) {
-      if ( fFieldParameters[i]->GetVolumeName() == volumeName ) {
-         fieldParameters = fFieldParameters[i];
-         break;
-      }
-    }
-    // Create field parameters if not yet defined
-    if ( ! fieldParameters ) {
-      fieldParameters = new TG4FieldParameters(volumeName);
-      fFieldParameters.push_back(fieldParameters);
-    }
+    // Get or create user field parameters
+    TG4FieldParameters* fieldParameters = GetOrCreateFieldParameters(volumeName);
 
     // Create magnetic field
     CreateMagField(magField, fieldParameters, lv);
@@ -885,7 +896,39 @@ void TG4GeometryManager::SetUserRegionConstruction(
 /// Set user region construction
 
   fUserRegionConstruction = userRegionConstruction;
-}                                   
+}
+
+//_____________________________________________________________________________
+void TG4GeometryManager::SetUserEquationOfMotion(
+                           G4EquationOfMotion* equation, G4String volumeName)
+{
+  if ( ! volumeName.size() ) {
+    // global field
+    fFieldParameters[0]->SetUserEquationOfMotion(equation);
+  }
+  else {
+    // local field
+    // Get or create user field parameters
+    TG4FieldParameters* fieldParameters = GetOrCreateFieldParameters(volumeName);
+    fieldParameters->SetUserEquationOfMotion(equation);
+  }
+}
+
+//_____________________________________________________________________________
+void TG4GeometryManager::SetUserStepper(
+                           G4MagIntegratorStepper* stepper, G4String volumeName)
+{
+  if ( ! volumeName.size() ) {
+    // global field
+    fFieldParameters[0]->SetUserStepper(stepper);
+  }
+  else {
+    // local field
+    // Get or create user field parameters
+    TG4FieldParameters* fieldParameters = GetOrCreateFieldParameters(volumeName);
+    fieldParameters->SetUserStepper(stepper);
+  }
+}
 
 //_____________________________________________________________________________
 void TG4GeometryManager::PrintFieldStatistics() const

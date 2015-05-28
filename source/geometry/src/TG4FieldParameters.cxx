@@ -48,6 +48,7 @@ G4String TG4FieldParameters::EquationTypeName(EquationType equation)
     case kEqMagElectric:     return G4String("EqMagElectric");
     case kEqEMFieldWithSpin: return G4String("EqEMFieldWithSpin"); 
     case kEqEMFieldWithEDM:  return G4String("EqEMFieldWithEDM"); 
+    case kUserEquation:      return G4String("UserDefinedEq");
   } 
   
   TG4Globals::Exception(
@@ -77,6 +78,7 @@ G4String TG4FieldParameters::StepperTypeName(StepperType stepper)
     case kHelixSimpleRunge:   return G4String("HelixSimpleRunge");
     case kNystromRK4:         return G4String("NystromRK4");
     case kRKG3Stepper:        return G4String("RKG3_Stepper");
+    case kUserStepper:        return G4String("UserDefinedStepper");
   }  
   
   TG4Globals::Exception(
@@ -95,6 +97,7 @@ EquationType TG4FieldParameters::GetEquationType(const G4String& name)
   if ( name == EquationTypeName(kEqMagElectric) )     return kEqMagElectric;
   if ( name == EquationTypeName(kEqEMFieldWithSpin) ) return kEqEMFieldWithSpin; 
   if ( name == EquationTypeName(kEqEMFieldWithEDM) )  return kEqEMFieldWithEDM; 
+  if ( name == EquationTypeName(kUserEquation) )      return kUserEquation;
   
   TG4Globals::Exception(
     "TG4FieldParameters", "GetEquationType:",
@@ -123,6 +126,7 @@ StepperType  TG4FieldParameters::GetStepperType(const G4String& name)
   if ( name == StepperTypeName(kHelixSimpleRunge) )   return kHelixSimpleRunge;
   if ( name == StepperTypeName(kNystromRK4) )         return kNystromRK4;
   if ( name == StepperTypeName(kRKG3Stepper) )        return kRKG3Stepper;
+  if ( name == StepperTypeName(kUserStepper) )        return kUserStepper;
   
   TG4Globals::Exception(
     "TG4FieldParameters", "GetStepperType:",
@@ -147,6 +151,8 @@ TG4FieldParameters::TG4FieldParameters(const G4String& volumeName)
     fMaximumEpsilonStep(fgkDefaultMaximumEpsilonStep),
     fEquation(kMagUsualEqRhs),
     fStepper(kClassicalRK4),
+    fUserEquation(0),
+    fUserStepper(0),
     fConstDistance(0)
 {
 /// Default constructor
@@ -184,6 +190,22 @@ void TG4FieldParameters::PrintParameters() const
          << "  deltaIntersection = " << fDeltaIntersection << " mm" << G4endl
          << "  epsMin = " << fMinimumEpsilonStep << G4endl
          << "  epsMax=  " << fMaximumEpsilonStep <<  G4endl;
-}         
+}
 
- 
+//_____________________________________________________________________________
+void TG4FieldParameters::SetUserEquationOfMotion(G4EquationOfMotion* equation)
+{
+/// Set user defined equation of motion
+
+  fUserEquation = equation;
+  fEquation = kUserEquation;
+}
+
+//_____________________________________________________________________________
+void TG4FieldParameters::SetUserStepper(G4MagIntegratorStepper* stepper)
+{
+/// Set user defined integrator of particle's equation of motion
+
+  fUserStepper = stepper;
+  fStepper = kUserStepper;
+}

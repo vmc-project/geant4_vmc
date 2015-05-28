@@ -94,7 +94,11 @@ TG4MagneticField::CreateEquation(EquationType equation)
                      
     case kEqEMFieldWithEDM:
       return new G4EqEMFieldWithEDM(this); 
-      break; 
+      break;
+    case kUserEquation:
+      // nothing to be done
+      return 0;
+      break;
   } 
   
   TG4Globals::Exception(
@@ -179,6 +183,10 @@ TG4MagneticField::CreateStepper(G4EquationOfMotion* equation,
     case kRKG3Stepper:
       return new G4RKG3_Stepper(eqRhs);
       break;
+    case kUserStepper:
+      // nothing to be done
+      return 0;
+      break;
   }  
   
   TG4Globals::Exception(
@@ -239,13 +247,24 @@ void TG4MagneticField::Update(const TG4FieldParameters& parameters)
      fLogicalVolume->SetFieldManager(fieldManager, forceToAllDaughters);
   }
   fieldManager->SetDetectorField(this);
-  
-  // Geant4 default stepper
-  G4EquationOfMotion* equation 
-    = CreateEquation(parameters.GetEquationType());
-  G4MagIntegratorStepper* stepper 
-    = CreateStepper(equation, parameters.GetStepperType());
-  
+
+  // Create equation of motion (or get the user one if defined)
+  G4EquationOfMotion* equation = 0;
+  if ( parameters.GetEquationType() == kUserEquation ) {
+    equation = parameters.GetUserEquationOfMotion();
+    equation->SetFieldObj(this);
+  } else {
+    equation = CreateEquation(parameters.GetEquationType());
+  }
+
+  // Create stepper  (or get the user one if defined)
+  G4MagIntegratorStepper* stepper = 0;
+  if ( parameters.GetStepperType() == kUserStepper ) {
+    stepper = parameters.GetUserStepper();
+  } else {
+    stepper = CreateStepper(equation, parameters.GetStepperType());
+  }
+
   // Chord finder
   G4ChordFinder* chordFinder
     = new G4ChordFinder(this, parameters.GetStepMinimum(), stepper);
