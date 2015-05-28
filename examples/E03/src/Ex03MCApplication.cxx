@@ -107,8 +107,9 @@ Ex03MCApplication::Ex03MCApplication(const Ex03MCApplication& origin)
     = new Ex03PrimaryGenerator(*(origin.fPrimaryGenerator), fStack);
 
   // Constant magnetic field (in kiloGauss)
-  // TODO: check copying
-  fMagField = new TGeoUniformMagField();
+  fMagField = new TGeoUniformMagField(origin.fMagField->GetFieldValue()[0],
+                                      origin.fMagField->GetFieldValue()[1],
+                                      origin.fMagField->GetFieldValue()[2]);
 }
 
 //_____________________________________________________________________________

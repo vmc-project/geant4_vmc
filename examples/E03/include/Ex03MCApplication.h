@@ -70,7 +70,8 @@ class Ex03MCApplication : public TVirtualMCApplication
     void  SetPrintModulo(Int_t value);
     void  SetVerboseLevel(Int_t verboseLevel);
     void  SetControls(Bool_t isConstrols);
-    
+    void  SetField(Double_t bz);
+
     // get methods
     Ex03DetectorConstruction* GetDetectorConstruction() const;
     Ex03CalorimeterSD*        GetCalorimeterSD() const;
@@ -115,8 +116,8 @@ inline void  Ex03MCApplication::SetVerboseLevel(Int_t verboseLevel)
 
 // Set magnetic field
 // \param bz  The new field value in z
-//inline void  Ex03MCApplication::SetField(Double_t bz)
-//{ fMagField->SetFieldValue(0., 0., bz); }
+inline void  Ex03MCApplication::SetField(Double_t bz)
+{ fMagField->SetFieldValue(0., 0., bz); }
 
 /// \return The detector construction
 inline Ex03DetectorConstruction* Ex03MCApplication::GetDetectorConstruction() const
