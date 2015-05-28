@@ -15,6 +15,7 @@
 /mcVerbose/runAction 1
 /mcVerbose/composedPhysicsList 1
 #/mcVerbose/trackManager 2
+#/mcVerbose/geometryManager 2
 
 /control/cout/ignoreThreadsExcept 0
 

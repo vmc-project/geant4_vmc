@@ -43,6 +43,7 @@
 #include "Ex03RunConfiguration1.h"
 #include "Ex03RunConfiguration2.h"
 #include "Ex03RunConfiguration3.h"
+#include "Ex03RunConfiguration4.h"
 #endif
 
 #ifdef USE_GEANT3
@@ -70,7 +71,7 @@ void PrintUsage(std::string programName)
   std::cerr << "   [-g4m,  --g4-macro]:           Geant4 macro" << std::endl;
   std::cerr << "   [-g4vm, --g4-vis-macro]:       Geant4 visualization macro" << std::endl;
   std::cerr << "   [-g4uc, --g4-user-class]:      Geant4 user class "
-            << "                                  (geometry, regions, physics-list)" << std::endl;
+            << "                                  (geometry, regions, physics-list, field)" << std::endl;
 #endif
 #ifdef USE_GEANT3
   std::cerr << "   [-g3g,  --g3-geometry]:        Geant3 geometry option (TGeant3,TGeant3TGeo)" << std::endl;
@@ -244,6 +245,10 @@ int main(int argc, char** argv)
   else if ( g4UserClass == "regions" ) {
     runConfiguration
       = new Ex03RunConfiguration3(g4Geometry, g4PhysicsList, g4SpecialPhysics);
+  }
+  else if ( g4UserClass == "field" ) {
+    runConfiguration
+      = new Ex03RunConfiguration4(g4Geometry, g4PhysicsList, g4SpecialPhysics);
   }
   else {
     PrintUsage("testE03");

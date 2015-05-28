@@ -207,6 +207,9 @@ do
       $RUNG4 "test_E03_5.C(\"g4Config4.C\", kFALSE)" >& tmpfile
       if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
       cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+      $RUNG4 "test_E03_6.C(\"g4Config5.C\", kFALSE)" >& tmpfile
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      cat tmpfile >> $OUT/test_g4_tgeo_nat.out
       if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
 
       echo "... Running test with G4, geometry via TGeo, TGeo navigation" 
@@ -223,6 +226,9 @@ do
       if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
       cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
       $RUNG4 "test_E03_5.C(\"g4tgeoConfig4.C\", kFALSE)" >& tmpfile
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+      $RUNG4 "test_E03_6.C(\"g4tgeoConfig5.C\", kFALSE)" >& tmpfile
       if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
       cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
       if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi

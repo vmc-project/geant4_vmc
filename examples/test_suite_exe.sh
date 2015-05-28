@@ -216,6 +216,9 @@ do
       $EXE -g4g geomRootToGeant4 -g4sp specialCuts+specialControls -g4vm "" -rm "test_E03_5.C(\"\", kFALSE)" >& tmpfile
       if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
       cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+      $EXE -g4g geomRootToGeant4 -g4uc "field" -g4vm "" -rm "test_E03_6.C(\"\", kFALSE)" >& tmpfile
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      cat tmpfile >> $OUT/test_g4_tgeo_nat.out
       if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
 
       echo "... Running test with G4, geometry via TGeo, TGeo navigation"
@@ -232,6 +235,9 @@ do
       if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
       cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
       $EXE -g4g geomRoot  -g4sp specialCuts+specialControls -g4vm "" -rm "test_E03_5.C(\"\", kFALSE)" >& tmpfile
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+      $EXE -g4g geomRoot -g4uc "field" -g4vm "" -rm "test_E03_6.C(\"\", kFALSE)" >& tmpfile
       if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
       cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
       if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi

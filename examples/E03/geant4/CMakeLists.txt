@@ -48,6 +48,7 @@ ROOT_GENERATE_DICTIONARY(
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03RunConfiguration1.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03RunConfiguration2.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03RunConfiguration3.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03RunConfiguration4.h
   LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}LinkDef.h)
 
 #----------------------------------------------------------------------------

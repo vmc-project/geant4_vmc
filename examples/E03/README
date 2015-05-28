@@ -29,6 +29,7 @@ Example03
     User defined physics list (G4)
     User defined particles and ions (G3, G4)
     User defined regions (G4)
+    User defined magnetic field equation of motion and/or its integrator (G4)
 
   See also description of in 
     geant4/examples/novice/N03/README
@@ -64,9 +65,13 @@ Macros:
   g4Config2.C     - configuration macro - user defined physics list (QGSP_BERT)
   g4Config3.C     - configuration macro - user defined regions
   g4Config4.C     - configuration macro - activation of VMC cuts and process controls
+  g4Config5.C     - configuration macro - activation of user defined magnetic field equation of motion
+                                          and/or its integrator
   g4tgeoConfig.C  - configuration macro - G4 with TGeo navigation 
   g4tgeoConfig3.C - configuration macro - user defined regions, TGeo navigation 
   g4tgeoConfig4.C - configuration macro - activation of VMC cuts and process controls, TGeo navigation 
+  g4Config5.C     - configuration macro - activation of user defined magnetic field equation of motion
+                                          and/or its integrator, TGeo navigation 
   g4ConfigEnv.C   - configuration macro - physics list defined via environment variable
   g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
   g4config2.in  - macro for G4 configuration using G4 commands (called from g4Config2.C)

@@ -37,7 +37,7 @@ Ex03PrimaryGenerator::Ex03PrimaryGenerator(TVirtualMCStack* stack)
   : TObject(),
     fStack(stack),
     fIsRandom(false),
-    fPrimaryType(kDefault),
+    fPrimaryType(kTestField),
     fNofPrimaries(1)
     
 {
@@ -333,6 +333,52 @@ void Ex03PrimaryGenerator::GeneratePrimary4(const TVector3& origin)
                    
 }
 
+//_____________________________________________________________________________
+void Ex03PrimaryGenerator::GeneratePrimary5(const TVector3& origin)
+{
+/// Add one primary particle (kMuonPlus) to the user stack
+
+ // Track ID (filled by stack)
+ Int_t ntr;
+
+ // Option: to be tracked
+ Int_t toBeDone = 1;
+
+ // PDG
+ Int_t pdg  = kMuonPlus;
+
+ // Polarization
+ Double_t polx = 0.;
+ Double_t poly = 0.;
+ Double_t polz = 0.;
+
+ // Position
+ Double_t vx  = -0.5 * origin.X();
+ Double_t vy  = 0.;
+ Double_t vz =  0.;
+ Double_t tof = 0.;
+
+ // Energy (in GeV)
+ Double_t kinEnergy = 0.1;
+ Double_t mass = 0.1056583715;
+ Double_t e  = mass + kinEnergy;
+
+ // Particle momentum
+ Double_t px, py, pz;
+ px = sqrt(e*e - mass*mass);
+ py = 0.;
+ pz = 0.;
+
+ // Randomize position
+ if (fIsRandom) {
+   vy = origin.Y()*(gRandom->Rndm() - 0.5);
+   vz = origin.Z()*(gRandom->Rndm() - 0.5);
+ }
+
+ // Add particle to stack
+ fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz,
+                  kPPrimary, ntr, 1., 0);
+}
 
 //
 // public methods
@@ -361,6 +407,10 @@ void Ex03PrimaryGenerator::GeneratePrimaries(const TVector3& origin)
     case kAnti:
       if ( fNofPrimaries < 4 ) fNofPrimaries = 4;
       for (Int_t i=0; i<fNofPrimaries/4; i++) GeneratePrimary4(origin);
+      return;
+
+    case kTestField:
+      for (Int_t i=0; i<fNofPrimaries; i++) GeneratePrimary5(origin);
       return;
       
     default:
