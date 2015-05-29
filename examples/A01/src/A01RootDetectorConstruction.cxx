@@ -77,8 +77,8 @@ void A01RootDetectorConstruction::ConstructGeometry()
       magneticVolume->SetField(magField);
     }
     else {
-      cerr << "The Tube volume was not found in geometry." << endl;
-      cerr << "Local magnetic field was not be set." << endl;
+      std::cerr << "The Tube volume was not found in geometry." << std::endl;
+      std::cerr << "Local magnetic field has not been set." << std::endl;
       delete magField;
     }
   }
