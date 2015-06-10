@@ -7,36 +7,33 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03G4DetectorConstruction.cc
-/// \brief Implementation of the Ex03G4DetectorConstruction class
+/// \file Ex03PostDetConstruction.cc
+/// \brief Implementation of the Ex03PostDetConstruction class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include "Ex03G4DetectorConstruction.h"
+#include "Ex03PostDetConstruction.h"
 
 #include "TG4GeometryManager.h"
 
-#include <G4Mag_UsualEqRhs.hh>
+#include "G4Mag_UsualEqRhs.hh"
 #include "G4NystromRK4.hh"
 
 //_____________________________________________________________________________
-Ex03G4DetectorConstruction::Ex03G4DetectorConstruction()
- : TG4DetConstruction()
+Ex03PostDetConstruction::Ex03PostDetConstruction()
+ : TG4VUserPostDetConstruction()
 {}
 
 //_____________________________________________________________________________
-Ex03G4DetectorConstruction::~Ex03G4DetectorConstruction()
+Ex03PostDetConstruction::~Ex03PostDetConstruction()
 { 
 }
 
 //_____________________________________________________________________________
-void Ex03G4DetectorConstruction::ConstructSDandField()
+void Ex03PostDetConstruction::Construct()
 { 
-/// Create user defined objects and set them to TG4GeometryManager;
-/// then call the base class function and return the Geant4 VMC detector construction
-
   // Create "user" equation of motion;
   // G4Mag_UsualEqRhs eqution and G4NystromRK4 stepper should be replaced with users 
   // own objects
@@ -46,9 +43,6 @@ void Ex03G4DetectorConstruction::ConstructSDandField()
 
   TG4GeometryManager::Instance()->SetUserEquationOfMotion(equation);
   TG4GeometryManager::Instance()->SetUserStepper(stepper);
-
-  // Call method defined in the base class
-  TG4DetConstruction::ConstructSDandField();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

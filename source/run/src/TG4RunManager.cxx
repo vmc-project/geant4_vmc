@@ -157,6 +157,10 @@ void TG4RunManager::ConfigureRunManager()
   TG4GeometryManager::Instance()
     ->SetUserRegionConstruction(
         fRunConfiguration->CreateUserRegionConstruction());
+
+  TG4GeometryManager::Instance()
+    ->SetUserPostDetConstruction(
+        fRunConfiguration->CreateUserPostDetConstruction());
     
   // Root navigator
 #ifdef USE_G4ROOT

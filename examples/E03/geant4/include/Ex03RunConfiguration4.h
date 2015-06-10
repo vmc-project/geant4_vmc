@@ -37,7 +37,7 @@ class Ex03RunConfiguration4 : public TG4RunConfiguration
     virtual ~Ex03RunConfiguration4();
 
     // methods
-    virtual G4VUserDetectorConstruction*  CreateDetectorConstruction();
+    virtual TG4VUserPostDetConstruction*  CreateUserPostDetConstruction();
 };
 
 #endif //EX03_RUN_CONFIGURATION4_H

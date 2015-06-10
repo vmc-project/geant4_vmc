@@ -28,6 +28,7 @@ class TG4OpGeometryManager;
 class TG4G3CutVector;
 class TG4G3ControlVector;
 class TG4VUserRegionConstruction;
+class TG4VUserPostDetConstruction;
 
 class G4LogicalVolume;
 class G4EquationOfMotion;
@@ -69,6 +70,8 @@ class TG4GeometryManager : public TG4Verbose
     // set user region construction
     void SetUserRegionConstruction(
             TG4VUserRegionConstruction* userRegionConstruction);
+    void SetUserPostDetConstruction(
+            TG4VUserPostDetConstruction* userPostDetConstruction);
     void SetUserEquationOfMotion(G4EquationOfMotion* equation, G4String volumeName="");
     void SetUserStepper(G4MagIntegratorStepper* stepper, G4String volumeName="");
             
@@ -117,6 +120,7 @@ class TG4GeometryManager : public TG4Verbose
     std::vector<TG4FieldParameters*>  fFieldParameters; ///< magnetic field parameters
     static G4ThreadLocal std::vector<TG4MagneticField*>*  fgMagneticFields; ///< magnetic fields
     TG4VUserRegionConstruction* fUserRegionConstruction; ///< user region construction
+    TG4VUserPostDetConstruction* fUserPostDetConstruction; ///< user post detector construction
 
     /// option to activate getting local magnetic fields from Root geometry
     G4bool    fIsLocalMagField;

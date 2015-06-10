@@ -23,6 +23,7 @@ class TG4TrackingAction;
 class TG4SteppingAction;
 class TG4SpecialPhysicsList;
 class TG4VUserRegionConstruction;
+class TG4VUserPostDetConstruction;
 
 class G4VUserDetectorConstruction;
 class G4VUserPrimaryGeneratorAction;
@@ -90,7 +91,8 @@ class TG4RunConfiguration
     virtual TG4SteppingAction*    CreateSteppingAction();
     virtual G4UserStackingAction* CreateStackingAction(); 
     
-    virtual TG4VUserRegionConstruction*  CreateUserRegionConstruction();
+    virtual TG4VUserRegionConstruction*   CreateUserRegionConstruction();
+    virtual TG4VUserPostDetConstruction*  CreateUserPostDetConstruction();
 
     // set methods
     void  SetMTApplication(Bool_t mtApplication);

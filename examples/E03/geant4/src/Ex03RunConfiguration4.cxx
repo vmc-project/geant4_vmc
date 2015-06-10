@@ -15,7 +15,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "Ex03RunConfiguration4.h"
-#include "Ex03G4DetectorConstruction.h"
+#include "Ex03PostDetConstruction.h"
 
 
 //_____________________________________________________________________________
@@ -41,9 +41,9 @@ Ex03RunConfiguration4::~Ex03RunConfiguration4()
 //
 
 //_____________________________________________________________________________
-G4VUserDetectorConstruction*  Ex03RunConfiguration4::CreateDetectorConstruction()
+TG4VUserPostDetConstruction*  Ex03RunConfiguration4::CreateUserPostDetConstruction()
 {
 /// User defined detector construction
 
-  return new Ex03G4DetectorConstruction();
+  return new Ex03PostDetConstruction();
 }   

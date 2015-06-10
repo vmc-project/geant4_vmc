@@ -27,6 +27,7 @@
 #include "TG4G3CutVector.h"
 #include "TG4G3ControlVector.h"
 #include "TG4VUserRegionConstruction.h"
+#include "TG4VUserPostDetConstruction.h"
 #include "TG4Globals.h"
 
 #include <G4LogicalVolumeStore.hh>
@@ -76,6 +77,7 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fUserGeometry(userGeometry),
     fFieldParameters(),
     fUserRegionConstruction(0),
+    fUserPostDetConstruction(0),
     fIsLocalMagField(false),
     fIsUserMaxStep(false),
     fIsMaxStepInLowDensityMaterials(true),
@@ -715,6 +717,9 @@ void TG4GeometryManager::ConstructSDandField()
   // Construct user regions
   if ( fUserRegionConstruction ) fUserRegionConstruction->Construct();
 
+  // Call user class for geometry customization
+  if ( fUserPostDetConstruction ) fUserPostDetConstruction->Construct();
+
   // Initialize SD manager (create SDs)
   TG4SDManager::Instance()->Initialize();
 
@@ -888,7 +893,6 @@ void TG4GeometryManager::SetIsMaxStepInLowDensityMaterials(G4bool isMaxStep)
   fIsMaxStepInLowDensityMaterials = isMaxStep;
 }  
 
-
 //_____________________________________________________________________________
 void TG4GeometryManager::SetUserRegionConstruction(
                             TG4VUserRegionConstruction* userRegionConstruction)
@@ -896,6 +900,15 @@ void TG4GeometryManager::SetUserRegionConstruction(
 /// Set user region construction
 
   fUserRegionConstruction = userRegionConstruction;
+}
+
+//_____________________________________________________________________________
+void TG4GeometryManager::SetUserPostDetConstruction(
+                            TG4VUserPostDetConstruction* userPostDetConstruction)
+{
+/// Set user region construction
+
+  fUserPostDetConstruction = userPostDetConstruction;
 }
 
 //_____________________________________________________________________________

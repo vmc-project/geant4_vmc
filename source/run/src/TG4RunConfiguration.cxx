@@ -293,6 +293,14 @@ TG4VUserRegionConstruction*  TG4RunConfiguration::CreateUserRegionConstruction()
 }    
 
 //_____________________________________________________________________________
+TG4VUserPostDetConstruction*  TG4RunConfiguration::CreateUserPostDetConstruction()
+{
+/// No user post detector construction is defined by default
+
+  return 0;
+}
+
+//_____________________________________________________________________________
 void  TG4RunConfiguration::SetMTApplication(Bool_t mtApplication)
 {
 /// Select running application in MT mode, if available.
