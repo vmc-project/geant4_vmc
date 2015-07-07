@@ -31,7 +31,7 @@
 
 enum TG4EmModel {
   kPAIModel,             ///< PAI model
-  kPAIPhotonModel,       ///< PAIPhoton model
+  kPAIPhotonModel,       ///< PAIPhot model
   kNoEmModel             ///< No extra EM model
 };  
 

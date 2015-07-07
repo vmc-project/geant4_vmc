@@ -29,7 +29,7 @@
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
 #include <G4PAIModel.hh>
-#include <G4PAIPhotonModel.hh>
+#include <G4PAIPhotModel.hh>
 #include <G4LogicalVolumeStore.hh>
 #include <G4RegionStore.hh>
 
@@ -201,7 +201,7 @@ void TG4EmModelPhysics::AddModel(
   }
   else if ( elossModel == kPAIPhotonModel || fluctModel == kPAIPhotonModel ) { 
     // PAIPhoton  
-    G4PAIPhotonModel* pai = new G4PAIPhotonModel(particle, "PAIPhotonModel");
+    G4PAIPhotModel* pai = new G4PAIPhotModel(particle, "PAIPhotModel");
     if ( elossModel == kPAIPhotonModel ) g4ElossModel = pai;
     if ( fluctModel == kPAIPhotonModel ) g4FluctModel = pai;
   }
