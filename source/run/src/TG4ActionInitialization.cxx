@@ -192,7 +192,8 @@ void TG4ActionInitialization::Build() const
   if (  fRunConfiguration->IsSpecialControls() ) {
     G4cout << "### TG4SpecialControlsV2 constructed" << G4endl;
     fgSpecialControls = new TG4SpecialControlsV2();
-    G4AutoDelete::Register(fgSpecialControls);
+    //causes break at exit
+    //G4AutoDelete::Register(fgSpecialControls);
  
     trackingAction->SetSpecialControls(fgSpecialControls);
     steppingAction->SetSpecialControls(fgSpecialControls);
