@@ -36,45 +36,6 @@
 #include <G4AnalysisUtilities.hh>
 
 //
-// utility functions
-//
-namespace {
-
-void CreateEmModel(TG4EmModel emModel, const G4ParticleDefinition* particle,
-                   G4VEmModel* g4EmModel, G4VEmFluctuationModel* g4FluctModel,
-                   G4int verboseLevel)
-{
-  if ( emModel == kPAIModel ) {
-    // PAI
-    if ( verboseLevel > 1 ) {
-      G4cout << "New G4PAIModel" << G4endl;
-    }
-    G4PAIModel* pai = new G4PAIModel(particle, "PAIModel");
-    g4EmModel = pai;
-    g4FluctModel = pai;
-  }
-  else if ( emModel == kPAIPhotonModel ) {
-    // PAIPhoton
-    if ( verboseLevel > 1 ) {
-      G4cout << "New G4PAIPhotModel" << G4endl;
-    }
-    G4PAIPhotModel* paiPhot = new G4PAIPhotModel(particle, "PAIPhotModel");
-    g4EmModel = paiPhot;
-    g4FluctModel = paiPhot;
-  }
-  else if ( emModel == kSpecialUrbanMscModel ) {
-    // SpecialUrbanMsc
-    if ( verboseLevel > 1 ) {
-      G4cout << "New TG4SpecialUrbanMscModel" << G4endl;
-    }
-    g4EmModel = new TG4SpecialUrbanMscModel();
-    g4FluctModel = 0;
-  }
-}
-
-}
-
-//
 // static methods
 //
 
@@ -282,9 +243,35 @@ void TG4EmModelPhysics::AddModel(
     if ( ! processName.size() ) continue;
 
     // CreateEM model
+    //
     G4VEmModel* g4EmModel = 0;
     G4VEmFluctuationModel* g4FluctModel = 0;
-    CreateEmModel(emModel, particle, g4EmModel, g4FluctModel, VerboseLevel());
+    if ( emModel == kPAIModel ) {
+      // PAI
+      G4PAIModel* pai = new G4PAIModel(particle, "PAIModel");
+      if ( verboseLevel > 1 ) {
+        G4cout << "New G4PAIModel" << G4endl;
+      }
+      g4EmModel = pai;
+      g4FluctModel = pai;
+    }
+    else if ( emModel == kPAIPhotonModel ) {
+      // PAIPhoton
+      if ( verboseLevel > 1 ) {
+        G4cout << "New G4PAIPhotModel" << G4endl;
+      }
+      G4PAIPhotModel* paiPhot = new G4PAIPhotModel(particle, "PAIPhotModel");
+      g4EmModel = paiPhot;
+      g4FluctModel = paiPhot;
+    }
+    else if ( emModel == kSpecialUrbanMscModel ) {
+      // SpecialUrbanMsc
+      if ( verboseLevel > 1 ) {
+        G4cout << "New TG4SpecialUrbanMscModel" << G4endl;
+      }
+      g4EmModel = new TG4SpecialUrbanMscModel();
+      g4FluctModel = 0;
+    }
 
     // Get regions
     std::vector<G4String> regionVector;
