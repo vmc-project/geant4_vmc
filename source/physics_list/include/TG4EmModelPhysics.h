@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -32,6 +32,7 @@
 enum TG4EmModel {
   kPAIModel,             ///< PAI model
   kPAIPhotonModel,       ///< PAIPhot model
+  kSpecialUrbanMscModel, ///< Special UrbanMsc model adapted for ALICE EMCAL
   kNoEmModel             ///< No extra EM model
 };  
 
@@ -43,8 +44,9 @@ class G4Region;
 /// \brief Physics builder which activates a selected EM energy loss
 /// and/or fluctuations model.
 ///
-/// In this first implementation, only G4PAIModel and G4PAIPhotonModel
-/// are supported. Other models available in Geant4 can be added on user
+/// In this implementation, G4PAIModel, G4PAIPhotModel and a special
+/// UrbanMsc MOdel tuned for ALICE EMCAL are supported.
+/// Other models available in Geant4 can be added on user
 /// requests.
 /// 
 /// \author I. Hrivnacova; IPN Orsay
@@ -52,12 +54,12 @@ class G4Region;
 class TG4EmModelPhysics: public TG4VPhysicsConstructor
 {
   public:
-    typedef std::map<G4int,TG4EmModelConfiguration*>  ModelToMediumIdMap;
+    typedef std::vector<TG4EmModelConfiguration*> EmModelConfigurationVector;
     
   public:
-    TG4EmModelPhysics(const G4String& name = "EmModelPhysics");
+    TG4EmModelPhysics(const G4String& name = "EmModel");
     TG4EmModelPhysics(G4int theVerboseLevel,
-                      const G4String& name = "EmModelPhysics");
+                      const G4String& name = "EmModel");
     virtual ~TG4EmModelPhysics();
     
     // static methods
@@ -65,16 +67,11 @@ class TG4EmModelPhysics: public TG4VPhysicsConstructor
     static G4String   GetEmModelName(G4int modelType);
     
     // set methods
-    void SetEmModel(G4int mediumId, 
-                    const G4String& elossModelName,
-                    const G4String& fluctModelName,
-                    const G4String& particles = "all");
-    void SetEmElossModel(G4int mediumId, 
-                    const G4String& elossModelName);
-    void SetEmFluctModel(G4int mediumId, 
-                    const G4String& elossModelName);
-    void SetEmModelParticles(G4int mediumId, 
+    void SetEmModel(const G4String& modelName);
+    void SetEmModelParticles(const G4String& modelName,
                     const G4String& particles);
+    void SetEmModelRegions(const G4String& modelName,
+                    const G4String& regions);
 
   protected:
     // methods
@@ -89,19 +86,20 @@ class TG4EmModelPhysics: public TG4VPhysicsConstructor
     TG4EmModelPhysics& operator=(const TG4EmModelPhysics& right);
     
     // methods
+    TG4EmModelConfiguration* GetEmModelConfiguration(
+                                const G4String& modelName,
+                                const G4String& functionName = "") const;
     void CreateRegions();
     void FillModelVectorFromMedia();
-    void AddModel(TG4EmModel elossModel,
-                  TG4EmModel fluctModel,
+    void AddModel(TG4EmModel model,
                   const G4ParticleDefinition* particle, 
-                  const G4String& processName,
                   const G4String& regionName);
     void AddModels();
 
     // data members
-    TG4EmModelPhysicsMessenger  fMessenger;///< messenger 
-    G4EmConfigurator      fEmConfigurator; ///< G4 EM configurator
-    ModelToMediumIdMap    fModelMap;       ///< the map of models per tracking media
+    TG4EmModelPhysicsMessenger  fMessenger;      ///< messenger
+    G4EmConfigurator            fEmConfigurator; ///< G4 EM configurator
+    EmModelConfigurationVector  fEmModels;       ///< registered EM models
 };
 
 #endif //TG4_PROCESS_MAP_PHYSICS_H

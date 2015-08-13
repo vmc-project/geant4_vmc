@@ -241,14 +241,3 @@ void TG4SpecialPhysicsList::SetStackPopperSelection(const G4String& selection)
 
   G4cout << "TG4SpecialPhysicsList::SetStackPopperSelection: " << selection << G4endl;
 }   
- 
-//_____________________________________________________________________________
-void TG4SpecialPhysicsList::SetEmModel(G4int mediumId, 
-                                       const G4String& elossModelName,
-                                       const G4String& fluctModelName,
-                                       const G4String& particles)
-{ 
-/// Set extra EM models to a region corresponding to given tracking medium.                                       
-
-  fEmModelPhysics->SetEmModel(mediumId, elossModelName, fluctModelName, particles);
-}    

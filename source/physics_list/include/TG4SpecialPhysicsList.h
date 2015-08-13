@@ -55,12 +55,7 @@ class TG4SpecialPhysicsList: public G4VModularPhysicsList,
 
     // set methods
     void SetStackPopperSelection(const G4String& selection);
-    
-    void SetEmModel(G4int mediumId, 
-                    const G4String& elossModelName,
-                    const G4String& fluctModelName,
-                    const G4String& particles = "all");
-    
+
     // get methods
     G4bool IsSpecialCuts() const;
     

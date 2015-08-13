@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -15,24 +15,21 @@
 #include "TG4EmModelConfiguration.h"
 
 //_____________________________________________________________________________
-TG4EmModelConfiguration::TG4EmModelConfiguration(
-                            const G4String& elossModelName,
-                            const G4String& fluctModelName,
-                            const G4String& particles)
-  : fElossModelName(elossModelName),
-    fFluctModelName(fluctModelName),
-    fParticles(particles)   
+TG4EmModelConfiguration::TG4EmModelConfiguration(const G4String& modelName)
+  : fModelName(modelName),
+    fParticles(),
+    fRegions()
 {
 /// Standard constructor
 
-  G4cout << "TG4EmModelConfiguration::TG4EmModelConfiguration" << G4endl;
+  G4cout << "TG4EmModelConfiguration::TG4EmModelConfiguration " << modelName  << G4endl;
 }
 
 //_____________________________________________________________________________
 TG4EmModelConfiguration::TG4EmModelConfiguration(const TG4EmModelConfiguration& rhs)
-  : fElossModelName(rhs.fElossModelName),
-    fFluctModelName(rhs.fFluctModelName),
-    fParticles(rhs.fParticles)   
+  : fModelName(rhs.fModelName),
+    fParticles(rhs.fParticles),
+    fRegions(rhs.fRegions)
 {
 /// Copy constructor
 
@@ -49,9 +46,9 @@ TG4EmModelConfiguration::operator=(const TG4EmModelConfiguration& rhs)
   if (this == &rhs) return *this;
 
   // assignment operator
-  fElossModelName = rhs.fElossModelName;
-  fFluctModelName = rhs.fFluctModelName;
-  fParticles = rhs.fParticles;   
+  fModelName = rhs.fModelName;
+  fParticles = rhs.fParticles;
+  fRegions = rhs.fRegions;
 
   return *this;
 }
