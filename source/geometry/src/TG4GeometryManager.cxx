@@ -93,9 +93,6 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
       "Cannot create two instances of singleton.");
   }
 
-  // Create magnetic fields vector
-  fgMagneticFields = new std::vector<TG4MagneticField*>();
-  
   // Field parameters for global field
   fFieldParameters.push_back(new TG4FieldParameters());
 
@@ -567,6 +564,12 @@ void TG4GeometryManager::CreateMagField(TVirtualMagField* magField,
     G4cout << TG4FieldParameters::StepperTypeName(
                 fieldParameters->GetStepperType()) << G4endl;
   }
+
+  // create magnetic field vector
+  if ( ! fgMagneticFields ) {
+    fgMagneticFields = new std::vector<TG4MagneticField*>();
+  }
+
   fgMagneticFields->push_back(tg4MagneticField);
   G4AutoDelete::Register(tg4MagneticField);
 }
@@ -763,7 +766,7 @@ void TG4GeometryManager::UpdateMagField()
 /// This function must be called if the field parameters were changed
 /// in other than PreInit> phase.
 
-  if ( ! fgMagneticFields->size() ) {
+  if ( ! fgMagneticFields ) {
     TG4Globals::Warning("TG4GeometryManager", "UpdateMagField",
       "No magnetic field is defined.");
      return;
@@ -949,7 +952,7 @@ void TG4GeometryManager::PrintFieldStatistics() const
 /// Print field statistics.
 /// Currently only cached field print the cahching statistics.
 
-  if ( VerboseLevel() > 0 ) {
+  if ( VerboseLevel() > 0 &&  fgMagneticFields ) {
     for (G4int i=0; i<G4int(fgMagneticFields->size()); ++i) {
        fgMagneticFields->at(i)->PrintStatistics();
     }
