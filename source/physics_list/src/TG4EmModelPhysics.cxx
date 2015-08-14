@@ -176,20 +176,26 @@ void TG4EmModelPhysics::CreateRegions()
     G4LogicalVolume* lv = (*lvStore)[i];
     G4bool isWorld = ( lv == worldLV ) ;
     
-    if ( isWorld) continue;
+    if ( isWorld ) continue;
 
-    G4Material* material = lv->GetMaterial();
-    G4String regionName = material->GetName();
+    TG4Medium* medium
+      = TG4GeometryServices::Instance()->GetMediumMap()->GetMedium(lv, false);
+
+    if ( ! medium ) continue;
+
+    G4String mediumName = medium->GetName();
+    G4String materialName = lv->GetMaterial()->GetName();
 
     //G4cout << "Processing volume " << lv->GetName()
-    //      << ", material " << regionName << G4endl;
+    //      << ", medium " << mediumName
+    //      << ", material " << materialName << G4endl;
 
     // Skip volumes with media which are not in the map  
     G4bool isEmModelRegion = false;
     EmModelConfigurationVector::const_iterator it;
     for ( it = fEmModels.begin(); it != fEmModels.end(); it++ ) {
       G4String regions = (*it)->GetRegions();
-      if ( regions.find(regionName) != std::string::npos ) isEmModelRegion = true;
+      if ( regions.find(mediumName) != std::string::npos ) isEmModelRegion = true;
     }
 
     if ( ! isEmModelRegion ) continue;
@@ -197,11 +203,11 @@ void TG4EmModelPhysics::CreateRegions()
     // If region already exists, only add the logical volume
     // and continue the loop   
     G4Region* region 
-      = G4RegionStore::GetInstance()->GetRegion(regionName, false );
+      = G4RegionStore::GetInstance()->GetRegion(materialName, false );
     //G4cout << "Got region " << regionName << " " << region << G4endl;
     
     if ( ! region ) {
-      region = new G4Region(regionName);
+      region = new G4Region(materialName);
       G4ProductionCuts* dcuts = new G4ProductionCuts();
       dcuts->SetProductionCut(rangeCutGam, 0);
       dcuts->SetProductionCut(rangeCutEle, 1);
@@ -287,16 +293,25 @@ void TG4EmModelPhysics::AddModel(
     }
 
     for (G4int j=0; j<G4int(regionVector.size()); ++j) {
+
+      // Get material name (=region name)
+      TG4Medium* medium
+        = TG4GeometryServices::Instance()->GetMediumMap()->GetMedium(regionVector[j]);
+      G4String regionName
+        = medium->GetMaterial()->GetName();
+
       if ( VerboseLevel() > 1 ) {
         G4cout << "Adding EM model: " << GetEmModelName(emModel)
                << " to particle: " << particle->GetParticleName()
                << " process: " << processName
-               << " region: " << regionVector[j] << G4endl;
+               << " medium: " << regionVector[j]
+               << " region: " << regionName
+               << G4endl;
       }
 
       fEmConfigurator.SetExtraEmModel(
                         particle->GetParticleName(), processName, g4EmModel,
-                        regionVector[j], 0.0, DBL_MAX, g4FluctModel);
+                        regionName, 0.0, DBL_MAX, g4FluctModel);
     }
   }
 }                               
