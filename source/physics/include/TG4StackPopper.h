@@ -80,7 +80,7 @@ class TG4StackPopper: public G4VProcess
     TG4StackPopper& operator = (const TG4StackPopper& right);
     
     /// this instance
-    static TG4StackPopper*  fgInstance;
+    static G4ThreadLocal TG4StackPopper*  fgInstance;
 
     /// the counter for popped tracks
     G4int  fNofDoneTracks;

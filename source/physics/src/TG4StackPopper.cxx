@@ -25,7 +25,7 @@
 #include <TParticle.h>
 
 
-TG4StackPopper* TG4StackPopper::fgInstance = 0;
+G4ThreadLocal TG4StackPopper* TG4StackPopper::fgInstance = 0;
 
 //_____________________________________________________________________________
 TG4StackPopper::TG4StackPopper(const G4String& processName)
