@@ -37,7 +37,7 @@ Ex03PrimaryGenerator::Ex03PrimaryGenerator(TVirtualMCStack* stack)
   : TObject(),
     fStack(stack),
     fIsRandom(false),
-    fPrimaryType(kTestField),
+    fPrimaryType(kDefault),
     fNofPrimaries(1)
     
 {
