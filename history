@@ -9,6 +9,63 @@
      
 Tags (history):
 ===============
+  17/08/2015
+  v3-2:
+    Geant4 VMC:
+    - Added support for local magnetic fields.
+    - Added cached magnetic field and a related UI command :
+        /mcMagneticField/setConstDistance value unit
+      The cached magnetic field is created automatically when
+      the ConstDistance parameter is set to a non zero value.
+    - Added a possibility to include a user defined magnetic field equation of motion 
+      and its integrator
+    - Integrated a new special UrbanMsc model adapted for ALICE EMCAL by V. Ivantchenko
+      and introduced a new set of commands (which do not allow invalid configurations):
+        /mcPhysics/emModel/setEmModel modelName
+        /mcPhysics/emModel/setParticles particleName1 particleName2 ...
+        /mcPhysics/emModel/setRegions regionName1 regionName2 ...
+
+    Examples:
+    - E03: Added a test configuration for including a user defined magnetic field equation 
+           of motion and its integrator in example E03 and included the test in test suites
+    - E06: Added test for adding tracks in VMC stack by user (in E06 example)
+    - A01: Implemented option for use of local magnetic field and
+           added a test with use of local fields in test suites
+
+    Fixes:
+    Geant4 VMC:
+    - Fixed TG4StackPopper class handling adding particles on the stack
+      from the user application. The user tracks generated at the last step of parent track
+      were not popped to the stack.
+    - Fixed implementation of TVirtualMC::IsTrackDisappeared():
+      return false if fSuspend, true if fStopAndKill.
+    - Use G4PAIPhotModel instead of G4PAIPhotonModel (recommended since Geant4 10.00)
+    - Fixed the expected names of output-files from rootcint (required by CMake 3.2.x):
+      - thanks to Oliver Freyermuth (Physics Institute of the University of Bonn).
+
+    G4Root (A. Gheata):
+      Fixed boundary crossing errors (by A. Gheata)
+      -  This error was due to the G4 field propagator which was exiting
+         some volume inside the mother and expecting a non-zero step, but in fact
+         was entering a daughter volume right away.
+      This fixes killing tracks by G4PropagatorInField as:
+      *** G4Exception : GeomNav1002
+              issued by : G4PropagatorInField::ComputeStep()
+      Particle is stuck; it will be killed.
+          Zero progress for 51 attempted steps.
+          Proposed Step is 1.78471e-05 but Step Taken is 1.78471e-05
+         in volume TPC_Drift
+      *** This is just a warning message. ***
+
+    Known problems:
+    - On MAC OSX, a build option for Root VMC library has to be activated
+      for running in MT mode
+      o At present, this requires a customised ROOT installation with a
+        modification of TMCtls.h in root/montecarlo/vmc/include
+
+    Tested with Geant4 10.01.p02 (with embedded CLHEP 2.2.0.4)
+      Root 5.34/26 and Root 6.04/02, VGM 4.3
+
   19/12/2014
   v3-1:
     All packages:
