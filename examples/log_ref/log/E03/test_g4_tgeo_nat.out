@@ -21,16 +21,32 @@ Loading Geant4 libraries (using geant4-config) ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_1.C("g4tgeoConfig.C", kFALSE)...
-Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
+Processing test_E03_1.C("g4Config.C", kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
-Warning in <TGeoManager::Init>: Deleting previous geometry: VGM Root geometry/VGM Root geometry
+
+*************************************************************
+ Geant4 version Name: geant4-10-01-patch-02    (19-June-2015)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+Adding HadronPhysicsList FTFP_BERT
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
+Adding SpecialPhysicsList stepLimiter
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Geant4 has been created.
+Processing Config() done.
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -42,42 +58,10 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
-Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
-isMaster=1
-Running TVirtualMCApplication::ConstructGeometry
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-02    (19-June-2015)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-Info in <TObject::Initialize>: Creating G4 hierarchy ...
-Info in <TGeoManager::ConvertReflections>: Converting reflections in: E03_geometry - E03 VMC example geometry ...
-Info in <TGeoManager::ConvertReflections>: Done
-===> GEANT4 materials created and mapped to TGeo ones...
-===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
-### INFO: TG4RootDetectorConstruction::Construct() finished
-TG4PostDetConstruction::Initialize
-G4 Stat: instantiated 6 logical volumes 
-                      14 physical volumes
-Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
-
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList stepLimiter
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Geant4 has been created.
-TG4RootDetectorConstruction::ConstructSDandField
-TG4PostDetConstruction::InitializeSDandField
-### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 ### Hadron physics constructed. 
 ### Processes mapped to VMC controls ok.
@@ -94,7 +78,7 @@ Available UI session types: [ GAG, tcsh, csh ]
 **********************************************
     GEANT4 Geometry statistics: 
               6 logical volumes
-             14 physical volumes
+              5 physical volumes
              13 materials
               9 user limits
               6 sensitive detectors
@@ -770,25 +754,25 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 ### Run 0 start.
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 947.281       total track length (cm):  67.9364
-   Gap:      total energy (MeV): 28.4491       total track length (cm):  14.5803
+   Absorber: total energy (MeV): 942.155       total track length (cm):  67.5961
+   Gap:      total energy (MeV): 33.5476       total track length (cm):  17.0391
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV): 917.381       total track length (cm):  65.4534
-   Gap:      total energy (MeV): 29.7311       total track length (cm):  13.8552
+   Absorber: total energy (MeV):  893.16       total track length (cm):  64.5761
+   Gap:      total energy (MeV): 38.1509       total track length (cm):  18.6185
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 911.642       total track length (cm):  65.9753
-   Gap:      total energy (MeV):  34.659       total track length (cm):  16.1502
+   Absorber: total energy (MeV): 871.724       total track length (cm):  62.5552
+   Gap:      total energy (MeV): 46.2134       total track length (cm):  22.4253
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 927.358       total track length (cm):  64.5654
-   Gap:      total energy (MeV): 41.6123       total track length (cm):  21.4304
+   Absorber: total energy (MeV): 876.495       total track length (cm):  62.9625
+   Gap:      total energy (MeV): 18.8156       total track length (cm):  8.92193
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 916.753       total track length (cm):  64.4279
-   Gap:      total energy (MeV): 21.4112       total track length (cm):  10.4328
-Time of this run:   User=0.17s Real=0.18s Sys=0s
+   Absorber: total energy (MeV): 905.648       total track length (cm):  63.4214
+   Gap:      total energy (MeV): 32.6847       total track length (cm):  15.7002
+Time of this run:   User=0.26s Real=0.27s Sys=0.01s
 Number of events processed: 5
   *******************************************
   *                                         *
@@ -813,18 +797,35 @@ Loading Geant4 libraries (using geant4-config) ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_2.C("g4tgeoConfig.C", kFALSE)...
+Processing test_E03_2.C("g4Config.C", kFALSE)...
 --- Init MC 
-Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
+
+*************************************************************
+ Geant4 version Name: geant4-10-01-patch-02    (19-June-2015)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+Adding HadronPhysicsList FTFP_BERT
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
+Adding SpecialPhysicsList stepLimiter
+--- Add particles 
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Geant4 has been created.
+Processing Config() done.
 --- Construct geometry 
-Warning in <TGeoManager::Init>: Deleting previous geometry: VGM Root geometry/VGM Root geometry
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -836,44 +837,11 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
-Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
-isMaster=1
-Running TVirtualMCApplication::ConstructGeometry
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-02    (19-June-2015)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-Info in <TObject::Initialize>: Creating G4 hierarchy ...
-Info in <TGeoManager::ConvertReflections>: Converting reflections in: E03_geometry - E03 VMC example geometry ...
-Info in <TGeoManager::ConvertReflections>: Done
-===> GEANT4 materials created and mapped to TGeo ones...
-===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
-### INFO: TG4RootDetectorConstruction::Construct() finished
-TG4PostDetConstruction::Initialize
-G4 Stat: instantiated 6 logical volumes 
-                      14 physical volumes
-Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
-
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList stepLimiter
---- Add particles 
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Geant4 has been created.
-TG4RootDetectorConstruction::ConstructSDandField
-TG4PostDetConstruction::InitializeSDandField
 --- Init geometry 
-### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 ### Hadron physics constructed. 
 ### Processes mapped to VMC controls ok.
@@ -891,7 +859,7 @@ Available UI session types: [ GAG, tcsh, csh ]
 **********************************************
     GEANT4 Geometry statistics: 
               6 logical volumes
-             14 physical volumes
+              5 physical volumes
              13 materials
               9 user limits
               6 sensitive detectors
@@ -1852,8 +1820,8 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   0    -6.282   -0.637   -0.343     4.2412    0.0000    0.000    0.000     GAPX  No active process
 #   1    -6.187   -0.854   -0.451     3.6185    0.5158    0.265    0.265     GAPX  Bremstrahlung
 #   2    -6.000   -1.234   -0.471     2.7728    0.8457    0.503    0.767     GAPX  Transportation
-#   3    -6.000   -1.234   -0.471     2.7728    0.0000    0.000    0.767     LAYE  No active process
-#   4    -6.000   -1.234   -0.471     2.7728    0.0000    0.000    0.767     LAYE  Transportation
+#   3    -6.000   -1.234   -0.471     2.7728    0.0000    0.000    0.767     ABSO  No active process
+#   4    -6.000   -1.234   -0.471     2.7728    0.0000    0.000    0.767     ABSO  Transportation
 #   5    -6.000   -1.234   -0.471     2.7728    0.0000    0.000    0.767     GAPX  No active process
 #   6    -6.007   -1.434   -0.523     2.4406    0.3322    0.218    0.985     GAPX  Multiple scattering
 #   7    -6.030   -1.561   -0.642     2.0367    0.4040    0.194    1.180     GAPX  Multiple scattering
@@ -2317,7 +2285,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  45.916       total track length (cm):    3.224
    Gap:      total energy (MeV):   4.084       total track length (cm):    2.070
-Time of this run:   User=0.01s Real=0.01s Sys=0s
+Time of this run:   User=0.01s Real=0.01s Sys=0.01s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
@@ -2343,18 +2311,35 @@ Loading Geant4 libraries (using geant4-config) ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_3.C("g4tgeoConfig.C", kFALSE)...
+Processing test_E03_3.C("g4Config.C", kFALSE)...
 --- Init MC 
-Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
+
+*************************************************************
+ Geant4 version Name: geant4-10-01-patch-02    (19-June-2015)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+Adding HadronPhysicsList FTFP_BERT
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
+Adding SpecialPhysicsList stepLimiter
+--- Add particles 
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Geant4 has been created.
+Processing Config() done.
 --- Construct geometry 
-Warning in <TGeoManager::Init>: Deleting previous geometry: VGM Root geometry/VGM Root geometry
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -2366,44 +2351,11 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
-Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
-isMaster=1
-Running TVirtualMCApplication::ConstructGeometry
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-02    (19-June-2015)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-Info in <TObject::Initialize>: Creating G4 hierarchy ...
-Info in <TGeoManager::ConvertReflections>: Converting reflections in: E03_geometry - E03 VMC example geometry ...
-Info in <TGeoManager::ConvertReflections>: Done
-===> GEANT4 materials created and mapped to TGeo ones...
-===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
-### INFO: TG4RootDetectorConstruction::Construct() finished
-TG4PostDetConstruction::Initialize
-G4 Stat: instantiated 6 logical volumes 
-                      14 physical volumes
-Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
-
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList stepLimiter
---- Add particles 
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Geant4 has been created.
-TG4RootDetectorConstruction::ConstructSDandField
-TG4PostDetConstruction::InitializeSDandField
 --- Init geometry 
-### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 ### Hadron physics constructed. 
 ### Processes mapped to VMC controls ok.
@@ -2421,7 +2373,7 @@ Available UI session types: [ GAG, tcsh, csh ]
 **********************************************
     GEANT4 Geometry statistics: 
               6 logical volumes
-             14 physical volumes
+              5 physical volumes
              13 materials
               9 user limits
               6 sensitive detectors
@@ -3161,7 +3113,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.144
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0s Real=0s Sys=0s
+Time of this run:   User=0s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
@@ -3187,16 +3139,32 @@ Loading Geant4 libraries (using geant4-config) ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_4.C("g4tgeoConfig.C", kFALSE)...
-Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
+Processing test_E03_4.C("g4Config.C", kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
-Warning in <TGeoManager::Init>: Deleting previous geometry: VGM Root geometry/VGM Root geometry
+
+*************************************************************
+ Geant4 version Name: geant4-10-01-patch-02    (19-June-2015)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+Adding HadronPhysicsList FTFP_BERT
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
+Adding SpecialPhysicsList stepLimiter
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Geant4 has been created.
+Processing Config() done.
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -3208,42 +3176,10 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
-Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
-isMaster=1
-Running TVirtualMCApplication::ConstructGeometry
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-02    (19-June-2015)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-Info in <TObject::Initialize>: Creating G4 hierarchy ...
-Info in <TGeoManager::ConvertReflections>: Converting reflections in: E03_geometry - E03 VMC example geometry ...
-Info in <TGeoManager::ConvertReflections>: Done
-===> GEANT4 materials created and mapped to TGeo ones...
-===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
-### INFO: TG4RootDetectorConstruction::Construct() finished
-TG4PostDetConstruction::Initialize
-G4 Stat: instantiated 6 logical volumes 
-                      14 physical volumes
-Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
-
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList stepLimiter
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Geant4 has been created.
-TG4RootDetectorConstruction::ConstructSDandField
-TG4PostDetConstruction::InitializeSDandField
-### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 ### Hadron physics constructed. 
 ### Processes mapped to VMC controls ok.
@@ -3260,7 +3196,7 @@ Available UI session types: [ GAG, tcsh, csh ]
 **********************************************
     GEANT4 Geometry statistics: 
               6 logical volumes
-             14 physical volumes
+              5 physical volumes
              13 materials
               9 user limits
               6 sensitive detectors
@@ -3956,9 +3892,9 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
       Current track pi0  is a decay product of Parent ID = 0
       Current track pi0  is a decay product of Parent ID = 0
 
-   Absorber: total energy (MeV): 1713.12       total track length (cm):  123.897
-   Gap:      total energy (MeV):  86.886       total track length (cm):  43.8697
-Time of this run:   User=0.07s Real=0.07s Sys=0s
+   Absorber: total energy (MeV):  1561.5       total track length (cm):  111.755
+   Gap:      total energy (MeV): 90.1115       total track length (cm):  45.6588
+Time of this run:   User=0.11s Real=0.11s Sys=0s
 Number of events processed: 1
   *******************************************
   *                                         *
@@ -3983,36 +3919,16 @@ Loading Geant4 libraries (using geant4-config) ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_5.C("g4tgeoConfig4.C", kFALSE)...
+Processing test_E03_5.C("g4Config4.C", kFALSE)...
 --- Init MC 
-Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
---- Construct geometry 
-Warning in <TGeoManager::Init>: Deleting previous geometry: VGM Root geometry/VGM Root geometry
-Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
-Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
-Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
-Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
-Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
-Info in <TGeoManager::CloseGeometry>: Counting nodes...
-Info in <TGeoManager::Voxelize>: Voxelizing...
-Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
-Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
-Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
-Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 
-------------------------------------------------------------
----> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
-------------------------------------------------------------
-isMaster=1
-Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
  Geant4 version Name: geant4-10-01-patch-02    (19-June-2015)
                       Copyright : Geant4 Collaboration
@@ -4020,16 +3936,6 @@ Running TVirtualMCApplication::ConstructGeometry
                             WWW : http://cern.ch/geant4
 *************************************************************
 
-Info in <TObject::Initialize>: Creating G4 hierarchy ...
-Info in <TGeoManager::ConvertReflections>: Converting reflections in: E03_geometry - E03 VMC example geometry ...
-Info in <TGeoManager::ConvertReflections>: Done
-===> GEANT4 materials created and mapped to TGeo ones...
-===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
-### INFO: TG4RootDetectorConstruction::Construct() finished
-TG4PostDetConstruction::Initialize
-G4 Stat: instantiated 6 logical volumes 
-                      14 physical volumes
-Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
 Adding HadronPhysicsList FTFP_BERT
 G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
 <<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
@@ -4041,10 +3947,23 @@ Adding SpecialPhysicsList specialCuts+
 ### TG4SpecialControlsV2 constructed
 Visualization Manager instantiating with verbosity "warnings (3)"...
 Geant4 has been created.
-TG4RootDetectorConstruction::ConstructSDandField
-TG4PostDetConstruction::InitializeSDandField
+--- Construct geometry 
+Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
+Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
+Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
+Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+
+------------------------------------------------------------
+---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
+------------------------------------------------------------
 --- Init geometry 
-### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 ### Hadron physics constructed. 
 ### Processes mapped to VMC controls ok.
@@ -4062,7 +3981,7 @@ Available UI session types: [ GAG, tcsh, csh ]
 **********************************************
     GEANT4 Geometry statistics: 
               6 logical volumes
-             14 physical volumes
+              5 physical volumes
              13 materials
               9 user limits
               6 sensitive detectors
@@ -5362,16 +5281,31 @@ Loading Geant4 libraries (using geant4-config) ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_6.C("g4tgeoConfig5.C", kFALSE)...
-Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
+Processing test_E03_6.C("g4Config5.C", kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
-Warning in <TGeoManager::Init>: Deleting previous geometry: VGM Root geometry/VGM Root geometry
+
+*************************************************************
+ Geant4 version Name: geant4-10-01-patch-02    (19-June-2015)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+Adding HadronPhysicsList FTFP_BERT
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
+Adding SpecialPhysicsList stepLimiter
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Geant4 has been created.
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -5383,43 +5317,11 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
-Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
-isMaster=1
-Running TVirtualMCApplication::ConstructGeometry
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-02    (19-June-2015)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-Info in <TObject::Initialize>: Creating G4 hierarchy ...
-Info in <TGeoManager::ConvertReflections>: Converting reflections in: E03_geometry - E03 VMC example geometry ...
-Info in <TGeoManager::ConvertReflections>: Done
-===> GEANT4 materials created and mapped to TGeo ones...
-===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
-### INFO: TG4RootDetectorConstruction::Construct() finished
-TG4PostDetConstruction::Initialize
-G4 Stat: instantiated 6 logical volumes 
-                      14 physical volumes
-Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
-
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList stepLimiter
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Geant4 has been created.
-TG4RootDetectorConstruction::ConstructSDandField
-TG4PostDetConstruction::InitializeSDandField
 Create user defined equation of motion and stepper
-### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 ### Hadron physics constructed. 
 ### Processes mapped to VMC controls ok.
@@ -5436,7 +5338,7 @@ Available UI session types: [ GAG, tcsh, csh ]
 **********************************************
     GEANT4 Geometry statistics: 
               6 logical volumes
-             14 physical volumes
+              5 physical volumes
              13 materials
               9 user limits
               6 sensitive detectors
@@ -6112,7 +6014,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 ### Run 0 start.
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 662.114       total track length (cm):  38.7953
-   Gap:      total energy (MeV): 41.7174       total track length (cm):  15.0366
-Time of this run:   User=0.01s Real=0s Sys=0s
+   Absorber: total energy (MeV): 644.134       total track length (cm):  37.4252
+   Gap:      total energy (MeV): 43.0682       total track length (cm):  15.3882
+Time of this run:   User=0.01s Real=0.01s Sys=0s
 Number of events processed: 1

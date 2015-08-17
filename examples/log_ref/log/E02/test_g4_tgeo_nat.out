@@ -21,17 +21,32 @@ Loading Geant4 libraries (using geant4-config) ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E02.C("g4tgeoConfig.C",kFALSE)...
-Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
+Processing test_E02.C("g4Config.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
+
+*************************************************************
+ Geant4 version Name: geant4-10-01-patch-02    (19-June-2015)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+Adding HadronPhysicsList FTFP_BERT
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
+Adding SpecialPhysicsList stepLimiter
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Geant4 has been created.
 Geometry will be defined via TGeo
-Warning in <TGeoManager::Init>: Deleting previous geometry: VGM Root geometry/VGM Root geometry
 Info in <TGeoManager::TGeoManager>: Geometry E02_geometry, E02 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -46,39 +61,10 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 2, max placements = 5
 Info in <TGeoManager::CloseGeometry>: 8 nodes/ 4 volume UID's in E02 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
-Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
-isMaster=1
-Running TVirtualMCApplication::ConstructGeometry
-*************************************************************
- Geant4 version Name: geant4-10-01-patch-02    (19-June-2015)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
-
-Info in <TObject::Initialize>: Creating G4 hierarchy ...
-Info in <TGeoManager::ConvertReflections>: Converting reflections in: E02_geometry - E02 VMC example geometry ...
-Info in <TGeoManager::ConvertReflections>: Done
-===> GEANT4 materials created and mapped to TGeo ones...
-===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
-### INFO: TG4RootDetectorConstruction::Construct() finished
-TG4PostDetConstruction::Initialize
+Converting Root geometry to Geant4 via VGM ... 
 G4 Stat: instantiated 8 logical volumes 
                       7 physical volumes
-Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
-
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList stepLimiter
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Geant4 has been created.
-TG4RootDetectorConstruction::ConstructSDandField
-TG4PostDetConstruction::InitializeSDandField
 Global magnetic field created with stepper ClassicalRK4
-### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 ### Hadron physics constructed. 
 ### Processes mapped to VMC controls ok.

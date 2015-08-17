@@ -26,7 +26,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -711,7 +711,7 @@ Track 191 0 0  in CALB  Lead
 Track 200 0 0  in CALB  Lead
 Track 200 0 0  in EXPH  ArgonGas
 Track 300 0 0  in EXPH  ArgonGas
-Time of this run:   User=0s Real=0.01s Sys=0s
+Time of this run:   User=0.01s Real=0s Sys=0s
 Number of events processed: 1
 Transformation for /EXPH_1/CALB_1/LAYB_9: 
 matrix global_1 - tr=1  rot=0  refl=0  scl=0

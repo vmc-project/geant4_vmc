@@ -26,7 +26,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -950,5 +950,5 @@ TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.0
 Primary    
 Number of daughters: 0
 
-Time of this run:   User=0.01s Real=0.02s Sys=0s
+Time of this run:   User=0.02s Real=0.02s Sys=0s
 Number of events processed: 5

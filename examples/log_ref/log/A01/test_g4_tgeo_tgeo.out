@@ -26,7 +26,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -796,9 +796,9 @@ Chamber1 has 517 hits.
 Chamber2 has 518 hits.
 EmCalorimeter has 51 hits. Total Edep is 28376.3 (MeV)
 HadCalorimeter has 13 hits. Total Edep is 72.706 (MeV)
-Time of this run:   User=11.99s Real=12.24s Sys=0.05s
+Time of this run:   User=10.71s Real=11s Sys=0.11s
 Number of events processed: 5
-Real time 0:00:13, CP time 13.100
+Real time 0:00:12, CP time 11.780
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
@@ -827,7 +827,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -1597,6 +1597,6 @@ Chamber1 has 528 hits.
 Chamber2 has 534 hits.
 EmCalorimeter has 47 hits. Total Edep is 29017.8 (MeV)
 HadCalorimeter has 15 hits. Total Edep is 94.9107 (MeV)
-Time of this run:   User=9.73s Real=9.94s Sys=0.06s
+Time of this run:   User=8.63s Real=8.85s Sys=0.08s
 Number of events processed: 5
-Real time 0:00:11, CP time 10.810
+Real time 0:00:10, CP time 9.650

@@ -26,7 +26,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -788,7 +788,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 ---> Begin of event: 5
    Absorber: total energy (MeV): 916.753       total track length (cm):  64.4279
    Gap:      total energy (MeV): 21.4112       total track length (cm):  10.4328
-Time of this run:   User=0.17s Real=0.18s Sys=0s
+Time of this run:   User=0.28s Real=0.29s Sys=0.01s
 Number of events processed: 5
   *******************************************
   *                                         *
@@ -819,7 +819,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -2349,7 +2349,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -3161,7 +3161,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.144
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0s Real=0s Sys=0s
+Time of this run:   User=0s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
@@ -3192,7 +3192,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -3958,7 +3958,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
    Absorber: total energy (MeV): 1713.12       total track length (cm):  123.897
    Gap:      total energy (MeV):  86.886       total track length (cm):  43.8697
-Time of this run:   User=0.07s Real=0.07s Sys=0s
+Time of this run:   User=0.12s Real=0.12s Sys=0s
 Number of events processed: 1
   *******************************************
   *                                         *
@@ -3989,7 +3989,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -5336,7 +5336,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  15.854       total track length (cm):    1.182
    Gap:      total energy (MeV):   2.757       total track length (cm):    1.187
-Time of this run:   User=0.01s Real=0.01s Sys=0s
+Time of this run:   User=0.01s Real=0.02s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
@@ -5367,7 +5367,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -6114,5 +6114,5 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 ---> Begin of event: 1
    Absorber: total energy (MeV): 662.114       total track length (cm):  38.7953
    Gap:      total energy (MeV): 41.7174       total track length (cm):  15.0366
-Time of this run:   User=0.01s Real=0s Sys=0s
+Time of this run:   User=0.01s Real=0.02s Sys=0s
 Number of events processed: 1

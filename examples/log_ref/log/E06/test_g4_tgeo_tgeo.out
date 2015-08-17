@@ -21,22 +21,27 @@ Loading Geant4 libraries (using geant4-config) ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_A01_1.C("g4tgeoConfig.C", kFALSE)...
+Processing test_E06.C("g4tgeoConfig.C",kFALSE)...
 Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
-Info in <TGeoManager::Import>: Reading geometry from file: A01geometry.root
-Info in <TGeoManager::CloseGeometry>: Geometry loaded from file...
-Info in <TGeoManager::SetTopVolume>: Top volume is worldLogical. Master volume is worldLogical
+Geometry will be defined via TGeo
+Warning in <TGeoManager::Init>: Deleting previous geometry: VGM Root geometry/VGM Root geometry
+Info in <TGeoManager::TGeoManager>: Geometry E06_geometry, E06 VMC example geometry created
+Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
-Info in <TGeoManager::CloseGeometry>: Voxelization retrieved from file
-Info in <TGeoManager::CountLevels>: max level = 6, max placements = 32
-Info in <TGeoManager::CloseGeometry>: 996 nodes/ 23 volume UID's in VGM Root geometry
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoManager::CountLevels>: max level = 2, max placements = 1
+Info in <TGeoManager::CloseGeometry>: 3 nodes/ 3 volume UID's in E06 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 isMaster=1
@@ -49,30 +54,57 @@ Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
 
 Info in <TObject::Initialize>: Creating G4 hierarchy ...
-Info in <TGeoManager::ConvertReflections>: Converting reflections in: VGM Root geometry - VGM Root geometry ...
+Info in <TGeoManager::ConvertReflections>: Converting reflections in: E06_geometry - E06 VMC example geometry ...
 Info in <TGeoManager::ConvertReflections>: Done
 ===> GEANT4 materials created and mapped to TGeo ones...
 ===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
 ### INFO: TG4RootDetectorConstruction::Construct() finished
 TG4PostDetConstruction::Initialize
-G4 Stat: instantiated 18 logical volumes 
-                      114 physical volumes
+G4 Stat: instantiated 3 logical volumes 
+                      2 physical volumes
+The tables for UV photon tracking set for Water
+The material properties FASTCOMPONENT set for Water
+The material properties SLOWCOMPONENT set for Water
+The material property SCINTILLATIONYIELD set for Water
+The material property RESOLUTIONSCALE set for Water
+The material property FASTTIMECONSTANT set for Water
+The material property SLOWTIMECONSTANT set for Water
+The material property YIELDRATIO set for Water
+The material properties MIEHG set for Water
+The material property MIEHG_FORWARD set for Water
+The material property MIEHG_BACKWARD set for Water
+The material property MIEHG_FORWARD_RATIO set for Water
+The material property BIRKS_CONSTANT set for Water
+The material properties RINDEX set for optical surface WaterSurface
+The material properties SPECULARLOBECONSTANT set for optical surface WaterSurface
+The material properties SPECULARSPIKECONSTANT set for optical surface WaterSurface
+The material properties BACKSCATTERCONSTANT set for optical surface WaterSurface
+The material properties REFLECTIVITY set for optical surface AirSurface
+The material properties EFFICIENCY set for optical surface AirSurface
 Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
-
-<<< Reference Physics List FTFP_BERT is built
-
+Adding EMPhysicsList emStandard
+Adding ExtraPhysicsList optical 
 Adding SpecialPhysicsList stepLimiter
 Visualization Manager instantiating with verbosity "warnings (3)"...
-Geant4 has been created.
 TG4RootDetectorConstruction::ConstructSDandField
 TG4PostDetConstruction::InitializeSDandField
 Global magnetic field created with stepper ClassicalRK4
 ### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
-### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
-### Hadron physics constructed. 
+### EM physics constructed. 
+G4OpticalPhysics:: Add Optical Physics Processes
+  Cerenkov process:  used
+    Max number of photons per step: 20
+    Max beta change per step:       0.1
+    Track secondaries first:  inactivated
+  Scintillation process:  not used
+  OpAbsorption process:  used
+  OpRayleigh process:  used
+  OpMieHG process:  used
+  OpBoundary process:  used
+  OpWLS process:  used
+     WLS process time profile: delta
+### Optical physics constructed.
+### Extra physics constructed: Optical 
 ### Processes mapped to VMC controls ok.
 ### Step limiter physics constructed.
 ### User particles physics constructed. 
@@ -81,11 +113,11 @@ Available UI session types: [ GAG, tcsh, csh ]
 
 **********************************************
     GEANT4 Geometry statistics: 
-             18 logical volumes
-            114 physical volumes
-              6 materials
-              6 user limits
-             18 sensitive detectors
+              3 logical volumes
+              2 physical volumes
+              2 materials
+              2 user limits
+              3 sensitive detectors
 **********************************************
 
 
@@ -448,357 +480,30 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
       180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
   eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
-
-====================================================================
-                  HADRONIC PROCESSES SUMMARY (verbose level 1)
-
----------------------------------------------------
-                           Hadronic Processes for neutron
-
-  Process: hadElastic
-        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: neutronInelastic
-        Model:                      FTFP: 4 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 5 GeV
-     Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
-  Process: nCapture
-        Model:               nRadCapture: 0 eV  ---> 100 TeV
-     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
-
-  Process: nKiller
-
----------------------------------------------------
-                           Hadronic Processes for GenericIon
-
-  Process: ionInelastic
-        Model:  Binary Light Ion Cascade: 0 eV  ---> 4 GeV
-        Model:                      FTFP: 2 GeV ---> 100 TeV
-     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
----------------------------------------------------
-                           Hadronic Processes for He3
-
-  Process: He3Inelastic
-        Model:  Binary Light Ion Cascade: 0 eV  ---> 4 GeV
-        Model:                      FTFP: 2 GeV ---> 100 TeV
-     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
----------------------------------------------------
-                           Hadronic Processes for alpha
-
-  Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: alphaInelastic
-        Model:  Binary Light Ion Cascade: 0 eV  ---> 4 GeV
-        Model:                      FTFP: 2 GeV ---> 100 TeV
-     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
----------------------------------------------------
-                           Hadronic Processes for anti_He3
-
-  Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
-        Model:              AntiAElastic: 100 MeV ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: anti_He3Inelastic
-        Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
-  Process: hFritiofCaptureAtRest
-
----------------------------------------------------
-                           Hadronic Processes for anti_alpha
-
-  Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
-        Model:              AntiAElastic: 100 MeV ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: anti_alphaInelastic
-        Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
-  Process: hFritiofCaptureAtRest
-
----------------------------------------------------
-                           Hadronic Processes for anti_deuteron
-
-  Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
-        Model:              AntiAElastic: 100 MeV ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: anti_deuteronInelastic
-        Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
-  Process: hFritiofCaptureAtRest
-
----------------------------------------------------
-                           Hadronic Processes for anti_neutron
-
-  Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: anti_neutronInelastic
-        Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
----------------------------------------------------
-                           Hadronic Processes for anti_proton
-
-  Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
-        Model:              AntiAElastic: 100 MeV ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: anti_protonInelastic
-        Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
-  Process: hFritiofCaptureAtRest
-
----------------------------------------------------
-                           Hadronic Processes for anti_triton
-
-  Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
-        Model:              AntiAElastic: 100 MeV ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: anti_tritonInelastic
-        Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
-  Process: hFritiofCaptureAtRest
-
----------------------------------------------------
-                           Hadronic Processes for deuteron
-
-  Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: dInelastic
-        Model:  Binary Light Ion Cascade: 0 eV  ---> 4 GeV
-        Model:                      FTFP: 2 GeV ---> 100 TeV
-     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
----------------------------------------------------
-                           Hadronic Processes for e+
-
-  Process: positronNuclear
-        Model:   G4ElectroVDNuclearModel: 0 eV  ---> 1 PeV
-     Cr_sctns:          ElectroNuclearXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
----------------------------------------------------
-                           Hadronic Processes for e-
-
-  Process: electronNuclear
-        Model:   G4ElectroVDNuclearModel: 0 eV  ---> 1 PeV
-     Cr_sctns:          ElectroNuclearXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
----------------------------------------------------
-                           Hadronic Processes for gamma
-
-  Process: photonNuclear
-        Model:            BertiniCascade: 0 eV  ---> 3.5 GeV
-        Model:           TheoFSGenerator: 3 GeV ---> 100 TeV
-     Cr_sctns:            PhotoNuclearXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
----------------------------------------------------
-                           Hadronic Processes for kaon+
-
-  Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: kaon+Inelastic
-        Model:                      FTFP: 4 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 5 GeV
-     Cr_sctns:  ChipsKaonPlusInelasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
----------------------------------------------------
-                           Hadronic Processes for kaon-
-
-  Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: kaon-Inelastic
-        Model:                      FTFP: 4 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 5 GeV
-     Cr_sctns: ChipsKaonMinusInelasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
-  Process: hBertiniCaptureAtRest
-
----------------------------------------------------
-                           Hadronic Processes for lambda
-
-  Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: lambdaInelastic
-        Model:            BertiniCascade: 0 eV  ---> 6 GeV
-        Model:                      FTFP: 2 GeV ---> 100 TeV
-     Cr_sctns:   ChipsHyperonInelasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
----------------------------------------------------
-                           Hadronic Processes for mu+
-
-  Process: muonNuclear
-        Model:      G4MuonVDNuclearModel: 0 eV  ---> 1 PeV
-     Cr_sctns:     KokoulinMuonNuclearXS: 0 eV  ---> 100 TeV
-
----------------------------------------------------
-                           Hadronic Processes for mu-
-
-  Process: muonNuclear
-        Model:      G4MuonVDNuclearModel: 0 eV  ---> 1 PeV
-     Cr_sctns:     KokoulinMuonNuclearXS: 0 eV  ---> 100 TeV
-
-  Process: muMinusCaptureAtRest
-
----------------------------------------------------
-                           Hadronic Processes for pi+
-
-  Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 1.0001 GeV
-        Model:           hElasticGlauber: 1 GeV ---> 100 TeV
-     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: pi+Inelastic
-        Model:                      FTFP: 4 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 5 GeV
-     Cr_sctns:      G4CrossSectionPairGG: 0 eV  ---> 100 TeV
-                         G4CrossSectionPairGG: G4PiNuclearCrossSection cross sections 
-                           below 91 GeV, Glauber-Gribov above 
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
----------------------------------------------------
-                           Hadronic Processes for pi-
-
-  Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 1.0001 GeV
-        Model:           hElasticGlauber: 1 GeV ---> 100 TeV
-     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: pi-Inelastic
-        Model:                      FTFP: 4 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 5 GeV
-     Cr_sctns:      G4CrossSectionPairGG: 0 eV  ---> 100 TeV
-                         G4CrossSectionPairGG: G4PiNuclearCrossSection cross sections 
-                           below 91 GeV, Glauber-Gribov above 
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
-  Process: hBertiniCaptureAtRest
-
----------------------------------------------------
-                           Hadronic Processes for proton
-
-  Process: hadElastic
-        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
-     Cr_sctns:      ChipsProtonElasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: protonInelastic
-        Model:                      FTFP: 4 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 5 GeV
-     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
----------------------------------------------------
-                           Hadronic Processes for triton
-
-  Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
-
-  Process: tInelastic
-        Model:  Binary Light Ion Cascade: 0 eV  ---> 4 GeV
-        Model:                      FTFP: 2 GeV ---> 100 TeV
-     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
-
-================================================================
 ### Run 0 start.
-
->>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 2 hits.
-Hodoscope2 has 10 hits.
-Chamber1 has 535 hits.
-Chamber2 has 488 hits.
-EmCalorimeter has 39 hits. Total Edep is 85026.5 (MeV)
-HadCalorimeter has 5 hits. Total Edep is 10.6068 (MeV)
-
->>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 7 hits.
-Chamber1 has 526 hits.
-Chamber2 has 518 hits.
-EmCalorimeter has 17 hits. Total Edep is 18698.6 (MeV)
-HadCalorimeter has 5 hits. Total Edep is 2491.08 (MeV)
-
->>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 2 hits.
-Hodoscope2 has 14 hits.
-Chamber1 has 530 hits.
-Chamber2 has 473 hits.
-EmCalorimeter has 62 hits. Total Edep is 28091.2 (MeV)
-HadCalorimeter has 16 hits. Total Edep is 1650.61 (MeV)
-
->>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 7 hits.
-Hodoscope2 has 5 hits.
-Chamber1 has 455 hits.
-Chamber2 has 144 hits.
-EmCalorimeter has 38 hits. Total Edep is 5303.12 (MeV)
-HadCalorimeter has 12 hits. Total Edep is 309.443 (MeV)
-
->>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 8 hits.
-Chamber1 has 517 hits.
-Chamber2 has 518 hits.
-EmCalorimeter has 51 hits. Total Edep is 28376.3 (MeV)
-HadCalorimeter has 13 hits. Total Edep is 72.706 (MeV)
-Time of this run:   User=11.99s Real=12.24s Sys=0.05s
-Number of events processed: 5
-Real time 0:00:13, CP time 13.100
+>>> Event 0
+Number of optical photons produced in this event : 1683
+>>> Event 1
+Number of optical photons produced in this event : 1722
+>>> Event 2
+Number of optical photons produced in this event : 1645
+>>> Event 3
+Number of optical photons produced in this event : 1625
+>>> Event 4
+Number of optical photons produced in this event : 1732
+>>> Event 5
+Number of optical photons produced in this event : 1693
+>>> Event 6
+Number of optical photons produced in this event : 1618
+>>> Event 7
+Number of optical photons produced in this event : 1762
+>>> Event 8
+Number of optical photons produced in this event : 1633
+>>> Event 9
+Number of optical photons produced in this event : 1613
+Time of this run:   User=3.1s Real=3.18s Sys=0.01s
+Number of events processed: 10
+Number of optical photons produced in this run : 16726
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
@@ -822,22 +527,27 @@ Loading Geant4 libraries (using geant4-config) ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_A01_2.C("g4tgeoConfig2.C", kFALSE)...
+Processing test_E06_2.C("g4tgeoConfig1.C", kFALSE)...
 Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
-Info in <TGeoManager::Import>: Reading geometry from file: A01geometry.root
-Info in <TGeoManager::CloseGeometry>: Geometry loaded from file...
-Info in <TGeoManager::SetTopVolume>: Top volume is worldLogical. Master volume is worldLogical
+Geometry will be defined via TGeo
+Warning in <TGeoManager::Init>: Deleting previous geometry: VGM Root geometry/VGM Root geometry
+Info in <TGeoManager::TGeoManager>: Geometry E06_geometry, E06 VMC example geometry created
+Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
-Info in <TGeoManager::CloseGeometry>: Voxelization retrieved from file
-Info in <TGeoManager::CountLevels>: max level = 6, max placements = 32
-Info in <TGeoManager::CloseGeometry>: 996 nodes/ 23 volume UID's in VGM Root geometry
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoManager::CountLevels>: max level = 2, max placements = 1
+Info in <TGeoManager::CloseGeometry>: 3 nodes/ 3 volume UID's in E06 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 isMaster=1
@@ -850,65 +560,98 @@ Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
 
 Info in <TObject::Initialize>: Creating G4 hierarchy ...
-Info in <TGeoManager::ConvertReflections>: Converting reflections in: VGM Root geometry - VGM Root geometry ...
+Info in <TGeoManager::ConvertReflections>: Converting reflections in: E06_geometry - E06 VMC example geometry ...
 Info in <TGeoManager::ConvertReflections>: Done
 ===> GEANT4 materials created and mapped to TGeo ones...
 ===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
 ### INFO: TG4RootDetectorConstruction::Construct() finished
 TG4PostDetConstruction::Initialize
-G4 Stat: instantiated 18 logical volumes 
-                      114 physical volumes
+G4 Stat: instantiated 3 logical volumes 
+                      2 physical volumes
+The tables for UV photon tracking set for Water
+The material properties FASTCOMPONENT set for Water
+The material properties SLOWCOMPONENT set for Water
+The material property SCINTILLATIONYIELD set for Water
+The material property RESOLUTIONSCALE set for Water
+The material property FASTTIMECONSTANT set for Water
+The material property SLOWTIMECONSTANT set for Water
+The material property YIELDRATIO set for Water
+The material properties MIEHG set for Water
+The material property MIEHG_FORWARD set for Water
+The material property MIEHG_BACKWARD set for Water
+The material property MIEHG_FORWARD_RATIO set for Water
+The material property BIRKS_CONSTANT set for Water
+The material properties RINDEX set for optical surface WaterSurface
+The material properties SPECULARLOBECONSTANT set for optical surface WaterSurface
+The material properties SPECULARSPIKECONSTANT set for optical surface WaterSurface
+The material properties BACKSCATTERCONSTANT set for optical surface WaterSurface
+The material properties REFLECTIVITY set for optical surface AirSurface
+The material properties EFFICIENCY set for optical surface AirSurface
 Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+Adding HadronPhysicsList FTFP_BERT_EMV
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT_EMV>  EMoption= 1
 <<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
 
-<<< Reference Physics List FTFP_BERT is built
+<<< Reference Physics List FTFP_BERT_EMV is built
 
-Adding SpecialPhysicsList stepLimiter
+Adding ExtraPhysicsList optical 
+Adding SpecialPhysicsList stackPopper
 Visualization Manager instantiating with verbosity "warnings (3)"...
-Geant4 has been created.
 TG4RootDetectorConstruction::ConstructSDandField
 TG4PostDetConstruction::InitializeSDandField
-Local (in magneticLogical) magnetic field created with stepper ClassicalRK4
+Global magnetic field created with stepper ClassicalRK4
 ### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 ### Hadron physics constructed. 
+G4OpticalPhysics:: Add Optical Physics Processes
+  Cerenkov process:  used
+    Max number of photons per step: 20
+    Max beta change per step:       0.1
+    Track secondaries first:  inactivated
+  Scintillation process:  not used
+  OpAbsorption process:  used
+  OpRayleigh process:  used
+  OpMieHG process:  used
+  OpBoundary process:  used
+  OpWLS process:  used
+     WLS process time profile: delta
+### Optical physics constructed.
+### Extra physics constructed: Optical 
 ### Processes mapped to VMC controls ok.
-### Step limiter physics constructed.
+### Stack popper physics constructed.
 ### User particles physics constructed. 
 ### Processes mapped to VMC codes ok.
 Available UI session types: [ GAG, tcsh, csh ]
 
 **********************************************
     GEANT4 Geometry statistics: 
-             18 logical volumes
-            114 physical volumes
-              6 materials
-              6 user limits
-             18 sensitive detectors
+              3 logical volumes
+              2 physical volumes
+              2 materials
+              2 user limits
+              3 sensitive detectors
 **********************************************
 
 
-phot:   for  gamma    SubType= 12  BuildTable= 0
+phot:   for  gamma, applyCuts: 1     SubType= 12  BuildTable= 0
       LambdaPrime table from 200 keV to 10 TeV in 54 bins 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
        PhotoElectric :  Emin=        0 eV    Emax=       10 TeV   AngularGenSauterGavrila  FluoActive
 
-compt:   for  gamma    SubType= 13  BuildTable= 1
+compt:   for  gamma, applyCuts: 1     SubType= 13  BuildTable= 1
       Lambda table from 100 eV  to 1 MeV, 7 bins per decade, spline: 1
       LambdaPrime table from 1 MeV to 10 TeV in 49 bins 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
        Klein-Nishina :  Emin=        0 eV    Emax=       10 TeV
 
-conv:   for  gamma    SubType= 14  BuildTable= 1
+conv:   for  gamma, applyCuts: 1     SubType= 14  BuildTable= 1
       Lambda table from 1.022 MeV to 10 TeV, 20 bins per decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         BetheHeitler :  Emin=        0 eV    Emax=       80 GeV
      BetheHeitlerLPM :  Emin=       80 GeV   Emax=       10 TeV
 
 msc:   for e-    SubType= 10
-      RangeFactor= 0.04, stepLimitType: 1, latDisplacement: 1
+      RangeFactor= 0.2, stepLimitType: 0, latDisplacement: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc :  Emin=        0 eV    Emax=      100 MeV  Table with 42 bins Emin=    100 eV    Emax=    100 MeV
         WentzelVIUni :  Emin=      100 MeV   Emax=       10 TeV  Table with 35 bins Emin=    100 MeV   Emax=     10 TeV
@@ -916,7 +659,7 @@ msc:   for e-    SubType= 10
 eIoni:   for  e-    SubType= 2
       dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
       Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
-      finalRange(mm)= 1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.01
+      finalRange(mm)= 1, dRoverRange= 0.8, integral: 1, fluct: 1, linLossLimit= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         MollerBhabha :  Emin=        0 eV    Emax=       10 TeV
 
@@ -928,14 +671,14 @@ eBrem:   for  e-    SubType= 3
              eBremSB :  Emin=        0 eV    Emax=        1 GeV   DipBustGen
             eBremLPM :  Emin=        1 GeV   Emax=       10 TeV   DipBustGen
 
-CoulombScat:   for  e-, integral: 1     SubType= 1  BuildTable= 1
+CoulombScat:   for  e-, integral: 1 , applyCuts: 1     SubType= 1  BuildTable= 1
       Lambda table from 100 MeV to 10 TeV, 7 bins per decade, spline: 1
       180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
   eCoulombScattering :  Emin=      100 MeV   Emax=       10 TeV
 
 msc:   for e+    SubType= 10
-      RangeFactor= 0.04, stepLimitType: 1, latDisplacement: 1
+      RangeFactor= 0.2, stepLimitType: 0, latDisplacement: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc :  Emin=        0 eV    Emax=      100 MeV  Table with 42 bins Emin=    100 eV    Emax=    100 MeV
         WentzelVIUni :  Emin=      100 MeV   Emax=       10 TeV  Table with 35 bins Emin=    100 MeV   Emax=     10 TeV
@@ -943,7 +686,7 @@ msc:   for e+    SubType= 10
 eIoni:   for  e+    SubType= 2
       dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
       Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
-      finalRange(mm)= 1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.01
+      finalRange(mm)= 1, dRoverRange= 0.8, integral: 1, fluct: 1, linLossLimit= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         MollerBhabha :  Emin=        0 eV    Emax=       10 TeV
 
@@ -955,11 +698,11 @@ eBrem:   for  e+    SubType= 3
              eBremSB :  Emin=        0 eV    Emax=        1 GeV   DipBustGen
             eBremLPM :  Emin=        1 GeV   Emax=       10 TeV   DipBustGen
 
-annihil:   for  e+, integral: 1     SubType= 5  BuildTable= 0
+annihil:   for  e+, integral: 1 , applyCuts: 1     SubType= 5  BuildTable= 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             eplus2gg :  Emin=        0 eV    Emax=       10 TeV
 
-CoulombScat:   for  e+, integral: 1     SubType= 1  BuildTable= 1
+CoulombScat:   for  e+, integral: 1 , applyCuts: 1     SubType= 1  BuildTable= 1
       Lambda table from 100 MeV to 10 TeV, 7 bins per decade, spline: 1
       180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -991,7 +734,7 @@ hPairProd:   for  proton    SubType= 4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
 
-CoulombScat:   for  proton, integral: 1     SubType= 1  BuildTable= 1
+CoulombScat:   for  proton, integral: 1 , applyCuts: 1     SubType= 1  BuildTable= 1
       Used Lambda table of anti_proton
       180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1050,7 +793,7 @@ hPairProd:   for  anti_proton    SubType= 4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
 
-CoulombScat:   for  anti_proton, integral: 1     SubType= 1  BuildTable= 1
+CoulombScat:   for  anti_proton, integral: 1 , applyCuts: 1     SubType= 1  BuildTable= 1
       Lambda table from threshold  to 10 TeV, 7 bins per decade, spline: 1
       180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1082,7 +825,7 @@ hPairProd:   for  kaon+    SubType= 4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
 
-CoulombScat:   for  kaon+, integral: 1     SubType= 1  BuildTable= 1
+CoulombScat:   for  kaon+, integral: 1 , applyCuts: 1     SubType= 1  BuildTable= 1
       Lambda table from threshold  to 10 TeV, 7 bins per decade, spline: 1
       180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1114,7 +857,7 @@ hPairProd:   for  kaon-    SubType= 4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
 
-CoulombScat:   for  kaon-, integral: 1     SubType= 1  BuildTable= 1
+CoulombScat:   for  kaon-, integral: 1 , applyCuts: 1     SubType= 1  BuildTable= 1
       Used Lambda table of kaon+
       180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1147,7 +890,7 @@ muPairProd:   for  mu+    SubType= 4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd :  Emin=        0 eV    Emax=       10 TeV
 
-CoulombScat:   for  mu+, integral: 1     SubType= 1  BuildTable= 1
+CoulombScat:   for  mu+, integral: 1 , applyCuts: 1     SubType= 1  BuildTable= 1
       Lambda table from threshold  to 10 TeV, 7 bins per decade, spline: 1
       180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1180,7 +923,7 @@ muPairProd:   for  mu-    SubType= 4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd :  Emin=        0 eV    Emax=       10 TeV
 
-CoulombScat:   for  mu-, integral: 1     SubType= 1  BuildTable= 1
+CoulombScat:   for  mu-, integral: 1 , applyCuts: 1     SubType= 1  BuildTable= 1
       Used Lambda table of mu+
       180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1212,7 +955,7 @@ hPairProd:   for  pi+    SubType= 4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
 
-CoulombScat:   for  pi+, integral: 1     SubType= 1  BuildTable= 1
+CoulombScat:   for  pi+, integral: 1 , applyCuts: 1     SubType= 1  BuildTable= 1
       Lambda table from threshold  to 10 TeV, 7 bins per decade, spline: 1
       180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1244,7 +987,7 @@ hPairProd:   for  pi-    SubType= 4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd :  Emin=        0 eV    Emax=       10 TeV
 
-CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
+CoulombScat:   for  pi-, integral: 1 , applyCuts: 1     SubType= 1  BuildTable= 1
       Used Lambda table of pi+
       180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1557,46 +1300,37 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
 ================================================================
 ### Run 0 start.
-
->>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 1 hits.
-Hodoscope2 has 10 hits.
-Chamber1 has 518 hits.
-Chamber2 has 519 hits.
-EmCalorimeter has 42 hits. Total Edep is 89997.3 (MeV)
-HadCalorimeter has 4 hits. Total Edep is 2.0723 (MeV)
-
->>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 4 hits.
-Chamber1 has 531 hits.
-Chamber2 has 522 hits.
-EmCalorimeter has 13 hits. Total Edep is 18606 (MeV)
-HadCalorimeter has 7 hits. Total Edep is 2463.09 (MeV)
-
->>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 12 hits.
-Chamber1 has 528 hits.
-Chamber2 has 499 hits.
-EmCalorimeter has 62 hits. Total Edep is 23366 (MeV)
-HadCalorimeter has 19 hits. Total Edep is 1814.79 (MeV)
-
->>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 8 hits.
-Hodoscope2 has 9 hits.
-Chamber1 has 459 hits.
-Chamber2 has 187 hits.
-EmCalorimeter has 53 hits. Total Edep is 6588.76 (MeV)
-HadCalorimeter has 16 hits. Total Edep is 286.255 (MeV)
-
->>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 2 hits.
-Hodoscope2 has 5 hits.
-Chamber1 has 528 hits.
-Chamber2 has 534 hits.
-EmCalorimeter has 47 hits. Total Edep is 29017.8 (MeV)
-HadCalorimeter has 15 hits. Total Edep is 94.9107 (MeV)
-Time of this run:   User=9.73s Real=9.94s Sys=0.06s
-Number of events processed: 5
-Real time 0:00:11, CP time 10.810
+>>> Event 0
+Number of optical photons produced in this event : 1607
+Number of feedback photons produced in this event : 3712
+>>> Event 1
+Number of optical photons produced in this event : 1627
+Number of feedback photons produced in this event : 3830
+>>> Event 2
+Number of optical photons produced in this event : 1657
+Number of feedback photons produced in this event : 3928
+>>> Event 3
+Number of optical photons produced in this event : 1635
+Number of feedback photons produced in this event : 3838
+>>> Event 4
+Number of optical photons produced in this event : 1601
+Number of feedback photons produced in this event : 3744
+>>> Event 5
+Number of optical photons produced in this event : 1510
+Number of feedback photons produced in this event : 3568
+>>> Event 6
+Number of optical photons produced in this event : 1591
+Number of feedback photons produced in this event : 3749
+>>> Event 7
+Number of optical photons produced in this event : 1589
+Number of feedback photons produced in this event : 3761
+>>> Event 8
+Number of optical photons produced in this event : 1594
+Number of feedback photons produced in this event : 3814
+>>> Event 9
+Number of optical photons produced in this event : 1657
+Number of feedback photons produced in this event : 3999
+Time of this run:   User=2.64s Real=2.68s Sys=0.01s
+Number of events processed: 10
+Number of optical photons produced in this run : 16068
+Number of feedback photons produced in this run : 37943

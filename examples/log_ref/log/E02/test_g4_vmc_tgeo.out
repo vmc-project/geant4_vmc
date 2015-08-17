@@ -21,30 +21,28 @@ Loading Geant4 libraries (using geant4-config) ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E02.C("g4tgeoConfig.C",kFALSE)...
+Processing test_E02.C("g4tgeoConfigOld.C",kTRUE)...
 Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometry created
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.2 ( 17 August 2015 )
+ Version 3.1 ( 19 December 2014 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
-Geometry will be defined via TGeo
-Warning in <TGeoManager::Init>: Deleting previous geometry: VGM Root geometry/VGM Root geometry
-Info in <TGeoManager::TGeoManager>: Geometry E02_geometry, E02 VMC example geometry created
+Geometry will be defined via VMC
+Target is 5 cm of lead 
+There are 5 chambers in the tracker region. The chambers are 2 mm of Xenon gas
+ The distance between chamber is 80 cm
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
-Target is 5 cm of lead 
-There are 5 chambers in the tracker region. The chambers are 200 mm of Xenon gas
- The distance between chamber is 80 cm
 Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
 Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 2, max placements = 5
-Info in <TGeoManager::CloseGeometry>: 8 nodes/ 4 volume UID's in E02 VMC example geometry
+Info in <TGeoManager::CloseGeometry>: 8 nodes/ 4 volume UID's in VGM Root geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 isMaster=1
@@ -57,7 +55,7 @@ Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
 
 Info in <TObject::Initialize>: Creating G4 hierarchy ...
-Info in <TGeoManager::ConvertReflections>: Converting reflections in: E02_geometry - E02 VMC example geometry ...
+Info in <TGeoManager::ConvertReflections>: Converting reflections in: VGM Root geometry - VGM Root geometry ...
 Info in <TGeoManager::ConvertReflections>: Done
 ===> GEANT4 materials created and mapped to TGeo ones...
 ===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
@@ -950,5 +948,5 @@ TParticle: proton         p: 0.000000 0.000000 3.824870 Vertex: 0.000000e+00 0.0
 Primary    
 Number of daughters: 0
 
-Time of this run:   User=0.01s Real=0.02s Sys=0s
+Time of this run:   User=0.02s Real=0.02s Sys=0s
 Number of events processed: 5
