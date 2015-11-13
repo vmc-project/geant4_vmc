@@ -95,10 +95,16 @@ void TG4ExtraPhysicsList::Configure(const G4String& selection)
   // Extra electromagnetic physics
   if ( selection.contains("extra") ) {
     G4EmExtraPhysics* extraPhysics = new G4EmExtraPhysics();
+#if G4VERSION_NUMBER >= 1012
+    extraPhysics->Synch(false);
+    extraPhysics->GammaNuclear(false);
+    extraPhysics->MuonNuclear(false);
+#else
     G4String state("off");
     extraPhysics->Synch(state);
     extraPhysics->GammaNuclear(state);
     extraPhysics->MuonNuclear(state);
+#endif
     RegisterPhysics(extraPhysics);
   }  
 
