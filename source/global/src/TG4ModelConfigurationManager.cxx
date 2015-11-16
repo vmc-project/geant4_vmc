@@ -33,13 +33,18 @@
 //_____________________________________________________________________________
 TG4ModelConfigurationManager::TG4ModelConfigurationManager(const G4String& name,
                                                 const G4String& availableModels)
-  : TG4Verbose("modelConfiguration"),
+  : TG4Verbose("modelConfigurationManager"),
     fMessenger(0),
     fName(name),
     fAvailableModels(availableModels),
-    fVector()
+    fVector(),
+    fCreateRegionsDone(false)
 {
 /// Standard constructor
+
+  if ( VerboseLevel() > 1 ) {
+    G4cout << "TG4ModelConfigurationManager::TG4ModelConfigurationManager" << G4endl;
+  }
 
   fMessenger = new TG4ModelConfigurationMessenger(this, availableModels);
 }
@@ -62,13 +67,16 @@ TG4ModelConfigurationManager::~TG4ModelConfigurationManager()
 //
 
 //_____________________________________________________________________________
-void TG4ModelConfigurationManager::CreateRegions() const
+void TG4ModelConfigurationManager::CreateRegions()
 {
 /// Create regions for all registered models
   
   if ( VerboseLevel() > 1 ) {
     G4cout << "TG4ModelConfigurationManager::ConstructRegions" << G4endl;
   }
+
+  // Return if regions were already created
+  if ( fCreateRegionsDone ) return;
 
   // Loop over logical volumes
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
@@ -82,9 +90,11 @@ void TG4ModelConfigurationManager::CreateRegions() const
     G4String mediumName = medium->GetName();
     G4String materialName = lv->GetMaterial()->GetName();
 
-    //G4cout << "Processing volume " << lv->GetName()
-    //      << ", medium " << mediumName
-    //      << ", material " << materialName << G4endl;
+    if ( VerboseLevel() > 2 ) {
+      G4cout << "Processing volume " << lv->GetName()
+             << ", medium " << mediumName
+             << ", material " << materialName << G4endl;
+    }
 
     // Skip volumes with media which are not in the regions list
     G4bool isModelRegion = false;
@@ -93,13 +103,17 @@ void TG4ModelConfigurationManager::CreateRegions() const
       if ( (*it)->HasRegion(mediumName) ) isModelRegion = true;
     }
 
-    if ( ! isModelRegion ) continue;
+    if ( ! isModelRegion ) {
+      if ( VerboseLevel() > 2 ) {
+        G4cout << "Medium " << mediumName << " is not in selection" << G4endl;
+      }
+      continue;
+    }
 
     // If region already exists, only add the logical volume
     // and continue the loop 
     G4Region* region
       = G4RegionStore::GetInstance()->GetRegion(materialName, false );
-    G4cout << "Got region " << materialName << " " << region << G4endl;
 
     if ( ! region ) {
       region = new G4Region(materialName);
@@ -115,6 +129,8 @@ void TG4ModelConfigurationManager::CreateRegions() const
     region->AddRootLogicalVolume(lv);
     lv->SetRegion(region);
   }
+
+  fCreateRegionsDone = true;
 }  
 
 //_____________________________________________________________________________

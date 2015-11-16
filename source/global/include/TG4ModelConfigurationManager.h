@@ -40,7 +40,7 @@ class TG4ModelConfigurationManager : public TG4Verbose
     virtual ~TG4ModelConfigurationManager();
 
     // methods
-    void CreateRegions() const;
+    void CreateRegions();
 
     // set methods
     void SetModel(const G4String& modelName);
@@ -75,6 +75,9 @@ class TG4ModelConfigurationManager : public TG4Verbose
 
     /// Vector of registered model configurations
     ModelConfigurationVector  fVector;
+
+    /// Info whether regions were constructed
+    G4bool  fCreateRegionsDone;
 };
 
 // inline functions

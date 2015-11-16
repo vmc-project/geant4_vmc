@@ -699,9 +699,6 @@ void TG4GeometryManager::ConstructGeometry()
 
   // Construct user regions
   if ( fUserRegionConstruction ) fUserRegionConstruction->Construct();
-
-  // Construct regions with fast simulation
-  fFastModelsManager->CreateRegions();
 }                   
 
 #include "TG4SDManager.h"
@@ -714,19 +711,11 @@ void TG4GeometryManager::ConstructSDandField()
   if ( VerboseLevel() > 1 ) 
      G4cout << "TG4GeometryManager::ConstructSDandField() " << G4endl; 
 
-  // Construct G4 geometry 
-  //ConstructG4Geometry();
-
-  // Fill medium map
-  //FillMediumMap(); 
-  
-  // VMC application construct geometry for optical processes
-  //TG4StateManager::Instance()->SetNewState(kConstructOpGeometry);
-  //TVirtualMCApplication::Instance()->ConstructOpGeometry();   
-  //TG4StateManager::Instance()->SetNewState(kNotInApplication);
-
   // Call user class for geometry customization
   if ( fUserPostDetConstruction ) fUserPostDetConstruction->Construct();
+
+  // Construct regions with fast simulation
+  fFastModelsManager->CreateRegions();
 
   // Initialize SD manager (create SDs)
   TG4SDManager::Instance()->Initialize();
