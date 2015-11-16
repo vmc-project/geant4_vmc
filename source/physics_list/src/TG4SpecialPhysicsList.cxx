@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -21,6 +21,7 @@
 #include "TG4ProcessControlMapPhysics.h"
 #include "TG4ProcessMCMapPhysics.h"
 #include "TG4EmModelPhysics.h"
+#include "TG4FastSimulationPhysics.h"
 #include "TG4GeometryServices.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4G3ControlVector.h"
@@ -106,6 +107,7 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList()
     TG4Verbose("physicsList"),
     fStackPopperPhysics(0),
     fEmModelPhysics(0),
+    fFastSimulationPhysics(0),
     fIsSpecialCuts(false)
 {
 /// Default constructor
@@ -173,6 +175,8 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
   
   fEmModelPhysics = new TG4EmModelPhysics(tg4VerboseLevel);
   RegisterPhysics(fEmModelPhysics);
+  fFastSimulationPhysics = new TG4FastSimulationPhysics(tg4VerboseLevel);
+  RegisterPhysics(fFastSimulationPhysics);
 }    
 
 //
@@ -227,17 +231,9 @@ void TG4SpecialPhysicsList::VerboseLevel(G4int level)
 }
 
 //_____________________________________________________________________________
-void TG4SpecialPhysicsList::SetStackPopperSelection(const G4String& selection)
+void TG4SpecialPhysicsList::SetUserFastSimulation(TG4VUserFastSimulation* fastSimulation) 
 {
-/// Select particles with stack popper process
+/// Set user fast simulation
 
-  if ( !fStackPopperPhysics ) {
-    TG4Globals::Exception(
-      "TG4SpecialPhysicsList", "SetStackPopperSelection",
-      "SetStackPopper physics is not activated.");
-  }  
-  
-  fStackPopperPhysics->SetSelection(selection); 
-
-  G4cout << "TG4SpecialPhysicsList::SetStackPopperSelection: " << selection << G4endl;
-}   
+  fFastSimulationPhysics->SetUserFastSimulation(fastSimulation);
+}

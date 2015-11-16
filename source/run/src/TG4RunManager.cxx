@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -21,6 +21,7 @@
 #include "TG4SDServices.h"
 #include "TG4PhysicsManager.h"
 #include "TG4G3PhysicsManager.h"
+#include "TG4SpecialPhysicsList.h"
 #include "TG4StateManager.h"
 #include "TG4ActionInitialization.h"
 #include "TG4WorkerInitialization.h"
@@ -237,6 +238,18 @@ void TG4RunManager::ConfigureRunManager()
     ->SetUserInitialization(fRunConfiguration->CreatePhysicsList());
   if ( VerboseLevel() > 1 )
     G4cout << "CreatePhysicsList done." << G4endl;
+
+  // User fast simulation
+  if ( TG4SpecialPhysicsList::Instance() ) {
+    TG4SpecialPhysicsList::Instance()->SetUserFastSimulation(
+      fRunConfiguration->CreateUserFastSimulation());
+  } else {
+    if ( fRunConfiguration->CreateUserFastSimulation() ) {
+      TG4Globals::Warning(
+        "TG4RunManager", "ConfigureRunManager",
+        "TG4SpecialPhysicsList  must be instantiated to use fast simulation");
+    }
+  }
  
   fRunManager
     ->SetUserInitialization(new TG4ActionInitialization(fRunConfiguration));      

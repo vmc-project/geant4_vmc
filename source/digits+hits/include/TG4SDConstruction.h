@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -51,6 +51,7 @@ class TG4SDConstruction : public TG4Verbose
     void AddSelection(const G4String& selection);
     void SetSelectionFromTGeo(G4bool value);
     void SetSensitiveVolumeLabel(const G4String& label);
+    void SetIsGflash(G4bool isGflash);
 
   private:
     // methods
@@ -70,6 +71,9 @@ class TG4SDConstruction : public TG4Verbose
     
     /// the set of volumes names which are selected as sensitive
     std::set<G4String> fSelection;
+
+    /// the flag to acivate creating Gflash sensitive detectors
+    G4bool             fIsGflash;
 };
 
 // inline functions
@@ -89,7 +93,12 @@ inline void TG4SDConstruction::SetSensitiveVolumeLabel(const G4String& label) {
   /// Set the sensitive volumes label
   /// (the string which is used to select sensitive volumes in TGeoGeometry)
   fSVLabel = label;
-}  
+}
+
+inline void TG4SDConstruction::SetIsGflash(G4bool isGflash) {
+  /// Set the flag to acivate creating Gflash sensitive detectors
+  fIsGflash = isGflash;
+}
 
 #endif //TG4_SD_CONSTRUCTION_H
 

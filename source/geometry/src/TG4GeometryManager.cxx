@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -17,6 +17,7 @@
 #include "TG4SDManager.h"
 #include "TG4MCGeometry.h"
 #include "TG4OpGeometryManager.h"
+#include "TG4ModelConfigurationManager.h"
 #include "TG4StateManager.h"
 #include "TG4MediumMap.h"
 #include "TG4Medium.h"
@@ -74,6 +75,7 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fGeometryServices(new TG4GeometryServices()),
     fMCGeometry(0),
     fOpManager(0),
+    fFastModelsManager(0),
     fUserGeometry(userGeometry),
     fFieldParameters(),
     fUserRegionConstruction(0),
@@ -99,6 +101,8 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
   CreateMCGeometry();
 
   fOpManager = new TG4OpGeometryManager();
+
+  fFastModelsManager = new TG4ModelConfigurationManager("fastSimulation");
   
   fgInstance = this;
 }
@@ -117,6 +121,7 @@ TG4GeometryManager::~TG4GeometryManager()
 
   delete fGeometryServices;
   delete fOpManager;
+  delete fFastModelsManager;
 }
 
 //
@@ -694,6 +699,9 @@ void TG4GeometryManager::ConstructGeometry()
 
   // Construct user regions
   if ( fUserRegionConstruction ) fUserRegionConstruction->Construct();
+
+  // Construct regions with fast simulation
+  fFastModelsManager->CreateRegions();
 }                   
 
 #include "TG4SDManager.h"
@@ -716,9 +724,6 @@ void TG4GeometryManager::ConstructSDandField()
   //TG4StateManager::Instance()->SetNewState(kConstructOpGeometry);
   //TVirtualMCApplication::Instance()->ConstructOpGeometry();   
   //TG4StateManager::Instance()->SetNewState(kNotInApplication);
-
-  // Construct user regions
-  if ( fUserRegionConstruction ) fUserRegionConstruction->Construct();
 
   // Call user class for geometry customization
   if ( fUserPostDetConstruction ) fUserPostDetConstruction->Construct();

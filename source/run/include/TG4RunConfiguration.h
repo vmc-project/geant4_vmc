@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -24,6 +24,7 @@ class TG4SteppingAction;
 class TG4SpecialPhysicsList;
 class TG4VUserRegionConstruction;
 class TG4VUserPostDetConstruction;
+class TG4VUserFastSimulation;
 
 class G4VUserDetectorConstruction;
 class G4VUserPrimaryGeneratorAction;
@@ -93,6 +94,7 @@ class TG4RunConfiguration
     
     virtual TG4VUserRegionConstruction*   CreateUserRegionConstruction();
     virtual TG4VUserPostDetConstruction*  CreateUserPostDetConstruction();
+    virtual TG4VUserFastSimulation*       CreateUserFastSimulation();
 
     // set methods
     void  SetMTApplication(Bool_t mtApplication);

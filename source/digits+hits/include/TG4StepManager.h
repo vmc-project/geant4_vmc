@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -20,6 +20,7 @@
 #include "TG4StepStatus.h"
 
 #include <G4Step.hh>
+#include <G4GFlashSpot.hh>
 #include <G4TransportationManager.hh>
 #include <G4SteppingManager.hh>
 #include <G4ThreeVector.hh>
@@ -64,6 +65,7 @@ class TG4StepManager
     // set methods
     void SetStep(G4Step* step, TG4StepStatus status);    // G4 specific
     void SetStep(G4Track* track, TG4StepStatus status);  // G4 specific
+    void SetStep(G4GFlashSpot* gflashSpot, TG4StepStatus status);  // G4 specific
     void SetSteppingManager(G4SteppingManager* manager); // G4 specific
     void SetMaxStep(Double_t step);
     void SetMaxStepBack();                               // G4 specific
@@ -141,6 +143,7 @@ class TG4StepManager
     // methods
     void CheckTrack() const;
     void CheckStep(const G4String& method) const;
+    void CheckGflashSpot(const G4String& method) const;
     void CheckSteppingManager() const;
     void SetTLorentzVector(G4ThreeVector xyz, G4double t, 
                            TLorentzVector& lv) const;    
@@ -159,6 +162,9 @@ class TG4StepManager
     
     /// current step
     G4Step*             fStep;
+
+    /// current Gflash spot
+    G4GFlashSpot*       fGflashSpot;
     
     /// \brief step status 
     /// \details that decides whether track properties will be returned from 
@@ -190,12 +196,18 @@ inline TG4StepManager* TG4StepManager::Instance() {
 
 inline void TG4StepManager::SetStep(G4Step* step, TG4StepStatus status) { 
   /// Set current step and step status. 
-  fTrack = step->GetTrack(); fStep = step; fStepStatus = status; 
+  fTrack = step->GetTrack(); fStep = step; fStepStatus = status; fGflashSpot = 0;
 }
 
 inline void TG4StepManager::SetStep(G4Track* track, TG4StepStatus status) { 
   /// Set current track and step status. 
-  fTrack = track; fStep = 0; fStepStatus = status; 
+  fTrack = track; fStep = 0; fStepStatus = status;  fGflashSpot = 0;
+}
+
+inline void TG4StepManager::SetStep(G4GFlashSpot* gflashSpot, TG4StepStatus status) {
+  /// Set current track and step status.
+  fTrack = const_cast<G4Track*>(gflashSpot->GetOriginatorTrack()->GetPrimaryTrack());
+  fStep = 0; fStepStatus = status;  fGflashSpot = gflashSpot;
 }
 
 inline void TG4StepManager::SetSteppingManager(G4SteppingManager* manager) { 

@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -15,6 +15,7 @@
 #include "TG4SDConstruction.h"
 #include "TG4SDServices.h"
 #include "TG4SensitiveDetector.h"
+#include "TG4GflashSensitiveDetector.h"
 #include "TG4GeometryServices.h"
 #include "TG4StateManager.h"
 
@@ -32,12 +33,13 @@
 const G4String  TG4SDConstruction::fgkDefaultSVLabel = "SV";
 
 //_____________________________________________________________________________
-TG4SDConstruction::TG4SDConstruction()    
+TG4SDConstruction::TG4SDConstruction()
   : TG4Verbose("SDConstruction"),
     fMessenger(this),
     fSelectionFromTGeo(false),
     fSVLabel(fgkDefaultSVLabel), 
-    fSelection()
+    fSelection(),
+    fIsGflash(false)
 {
 /// Default constructor
 }
@@ -71,8 +73,15 @@ G4int TG4SDConstruction::CreateSD(G4LogicalVolume* lv) const
   G4VSensitiveDetector* sd = 0; 
   sd = pSDManager->FindSensitiveDetector(sdName, false);
   if (!sd) {
+
     G4int mediumId = TG4GeometryServices::Instance()->GetMediumId(lv);
-    TG4SensitiveDetector* newSD = new TG4SensitiveDetector(sdName, mediumId);        
+
+    TG4SensitiveDetector* newSD = 0;
+    if ( fIsGflash ) {
+      newSD = new TG4GflashSensitiveDetector(sdName, mediumId);
+    } else {
+      newSD = new TG4SensitiveDetector(sdName, mediumId);
+    }
     pSDManager->AddNewDetector(newSD);
 
     if (VerboseLevel() > 1) {

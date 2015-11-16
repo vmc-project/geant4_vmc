@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -224,7 +224,6 @@ G4VUserPhysicsList* TG4RunConfiguration::CreatePhysicsList()
     builder->AddPhysicsList(new TG4ExtraPhysicsList(extraSelection));
   }  
     
-        
   // add option here
   G4cout << "Adding SpecialPhysicsList " << fSpecialProcessSelection.Data() << G4endl;
   builder->AddPhysicsList(new TG4SpecialPhysicsList(
@@ -296,6 +295,14 @@ TG4VUserRegionConstruction*  TG4RunConfiguration::CreateUserRegionConstruction()
 TG4VUserPostDetConstruction*  TG4RunConfiguration::CreateUserPostDetConstruction()
 {
 /// No user post detector construction is defined by default
+
+  return 0;
+}
+
+//_____________________________________________________________________________
+TG4VUserFastSimulation*  TG4RunConfiguration::CreateUserFastSimulation()
+{
+/// No user fast simulation is defined by default
 
   return 0;
 }

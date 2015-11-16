@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -30,6 +30,7 @@ class G4UIcmdWithABool;
 /// - /mcDet/addSDSelection volName1 [volName2 ...]
 /// - /mcDet/setSDSelectionFromTGeo  [true|false]
 /// - /mcDet/setSVLabel label 
+/// - /mcDet/setGflash  [true|false]
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -64,6 +65,9 @@ class TG4SDMessenger: public G4UImessenger
 
     /// setSVLabel command
     G4UIcmdWithAString* fSetSVLabelCmd;
+
+    /// setGflash command
+    G4UIcmdWithABool*   fSetGflashCmd;
 };    
 
 #endif //TG4_SD_MESSENGER_H

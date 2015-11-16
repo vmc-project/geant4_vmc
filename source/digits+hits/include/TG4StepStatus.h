@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -29,11 +29,14 @@
 ///                  (the volume that preceeds the boundary is returned
 ///                   as current volume)
 ///  - kNormalStep - returns track properties in a post step
-///                  point              
+///                  point
+///  - kGflashStep - returns track properties in a Gflash spot
+///                  point
 enum TG4StepStatus { 
   kVertex,     ///<  in track vertex
   kBoundary,   ///<  when crossing geometrical boundary
-  kNormalStep  ///<  in post step point
+  kNormalStep, ///<  in post step point
+  kGflashSpot  ///<  in post step point with Gflash
 };
 
 #endif //TG4_STEP_STATUS_H

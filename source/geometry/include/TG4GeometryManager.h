@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -25,6 +25,7 @@
 class TG4MagneticField;
 class TG4GeometryServices;
 class TG4OpGeometryManager;
+class TG4ModelConfigurationManager;
 class TG4G3CutVector;
 class TG4G3ControlVector;
 class TG4VUserRegionConstruction;
@@ -54,6 +55,7 @@ class TG4GeometryManager : public TG4Verbose
 
     TVirtualMCGeometry*   GetMCGeometry() const;
     TG4OpGeometryManager* GetOpManager() const;
+    TG4ModelConfigurationManager* GetFastModelsManager() const;
 
     // functions for building geometry
     void ConstructGeometry();
@@ -116,6 +118,10 @@ class TG4GeometryManager : public TG4Verbose
     TG4GeometryServices*  fGeometryServices; ///< geometry services
     TVirtualMCGeometry*   fMCGeometry;       ///< VirtualMC geometry
     TG4OpGeometryManager* fOpManager;        ///< optical geometry manager    
+
+    /// Fast simulation models manager
+    TG4ModelConfigurationManager*  fFastModelsManager;
+
     G4String              fUserGeometry;     ///< user geometry input                                        
     std::vector<TG4FieldParameters*>  fFieldParameters; ///< magnetic field parameters
     static G4ThreadLocal std::vector<TG4MagneticField*>*  fgMagneticFields; ///< magnetic fields
@@ -151,7 +157,12 @@ inline TG4GeometryManager* TG4GeometryManager::Instance() {
 inline  TG4OpGeometryManager* TG4GeometryManager::GetOpManager() const {
   /// Return the optical geometry manager
   return fOpManager;
-}       
+}
+
+inline TG4ModelConfigurationManager* TG4GeometryManager::GetFastModelsManager() const {
+  /// Return fast simulation models manager
+  return fFastModelsManager;
+}
 
 inline void TG4GeometryManager::SetLimitDensity(G4double density) {
   /// Set the material density limit for setting max allowed step

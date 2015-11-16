@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -46,6 +46,7 @@ G4ThreadLocal TG4StepManager* TG4StepManager::fgInstance = 0;
 TG4StepManager::TG4StepManager(const TString& userGeometry) 
   : fTrack(0),
     fStep(0),
+    fGflashSpot(0),
     fStepStatus(kNormalStep),
     fLimitsModifiedOnFly(0),
     fSteppingManager(0),
@@ -109,6 +110,16 @@ void TG4StepManager::CheckStep(const G4String& method) const
   }
 }     
 
+//_____________________________________________________________________________
+void TG4StepManager::CheckGflashSpot(const G4String& method) const
+{
+/// Give exception in case the step is not defined.
+
+  if ( ! fGflashSpot ) {
+    TG4Globals::Exception(
+      "TG4StepManager", method, "Gflash spot is not defined.");
+  }
+}
 
 //_____________________________________________________________________________
 void TG4StepManager::CheckSteppingManager() const
@@ -143,7 +154,12 @@ const G4VTouchable* TG4StepManager::GetCurrentTouchable() const
     CheckTrack();
 #endif    
 
-  if ( fStepStatus != kBoundary ) 
+  if ( fStepStatus == kGflashSpot ) {
+    G4ReferenceCountedHandle<G4VTouchable> touchableHandle
+      = fGflashSpot->GetTouchableHandle();
+    return touchableHandle();
+  }
+  else if ( fStepStatus != kBoundary )
     return fTrack->GetTouchable();
   else
     return fTrack->GetNextTouchable();
@@ -324,11 +340,13 @@ G4VPhysicalVolume* TG4StepManager::GetCurrentPhysicalVolume() const
   CheckTrack();
 #endif 
  
-  if ( fStepStatus != kBoundary ) 
+  if ( fStepStatus == kGflashSpot )
+    return fGflashSpot->GetTouchableHandle()->GetVolume();
+  else if ( fStepStatus != kBoundary )
     return fTrack->GetVolume();
-  else 
-    return fTrack->GetNextVolume(); 
-}     
+  else
+    return fTrack->GetNextVolume();
+}
 
 //_____________________________________________________________________________
 TG4Limits* TG4StepManager::GetCurrentLimits() const 
@@ -724,10 +742,15 @@ void TG4StepManager::TrackPosition(TLorentzVector& position) const
   CheckTrack();
 #endif
 
-  // get position
-  // check if this is == to PostStepPoint position !!
-  G4ThreeVector positionVector = fTrack->GetPosition();
-  positionVector *= 1./(TG4G3Units::Length());   
+  G4ThreeVector positionVector;
+  if ( fStepStatus == kGflashSpot ) {
+    positionVector = fGflashSpot->GetEnergySpot()->GetPosition();
+  } else {
+    // get position
+    // check if this is == to PostStepPoint position !!
+    positionVector = fTrack->GetPosition();
+  }
+  positionVector *= 1./(TG4G3Units::Length());
      
   // global time   
   G4double time = fTrack->GetGlobalTime();
@@ -747,9 +770,14 @@ void TG4StepManager::TrackPosition(Double_t& x, Double_t& y, Double_t& z) const
   CheckTrack();
 #endif
 
+  G4ThreeVector positionVector;
+  if ( fStepStatus == kGflashSpot ) {
+    positionVector = fGflashSpot->GetEnergySpot()->GetPosition();
+  } else {
   // get position
   // check if this is == to PostStepPoint position !!
-  G4ThreeVector positionVector = fTrack->GetPosition();
+    positionVector = fTrack->GetPosition();
+  }
   positionVector *= 1./(TG4G3Units::Length());   
     
   x = positionVector.x();
@@ -760,7 +788,8 @@ void TG4StepManager::TrackPosition(Double_t& x, Double_t& y, Double_t& z) const
 //_____________________________________________________________________________
 void TG4StepManager::TrackMomentum(TLorentzVector& momentum) const
 {  
-/// Fill the current particle momentum (px, py, pz, Etot) 
+/// Fill the current particle momentum (px, py, pz, Etot)
+/// Not updated in Gflash fast simulation.
 
 #ifdef MCDEBUG
   CheckTrack();
@@ -780,6 +809,7 @@ void TG4StepManager::TrackMomentum(Double_t& px, Double_t& py, Double_t&pz,
                                    Double_t& etot) const
 {  
 /// Fill the current particle momentum
+/// Not updated in Gflash fast simulation.
 
 #ifdef MCDEBUG
   CheckTrack();
@@ -800,6 +830,7 @@ void TG4StepManager::TrackMomentum(Double_t& px, Double_t& py, Double_t&pz,
 Double_t TG4StepManager::TrackStep() const
 {   
 /// Return the current step length.
+/// Not updated in Gflash fast simulation.
 
   if ( fStepStatus == kNormalStep ) {
 #ifdef MCDEBUG
@@ -815,6 +846,7 @@ Double_t TG4StepManager::TrackStep() const
 Double_t TG4StepManager::TrackLength() const
 {
 /// Return the length of the current track from its origin.
+/// Not updated in Gflash fast simulation.
 
 #ifdef MCDEBUG
   CheckTrack();
@@ -830,6 +862,7 @@ Double_t TG4StepManager::TrackTime() const
 /// the track belongs is created.                                           \n
 /// Note that in Geant4: there is also defined proper time as
 /// the proper time of the dynamical particle of the current track.
+/// Not updated in Gflash fast simulation.
 
 #ifdef MCDEBUG
   CheckTrack();
@@ -861,7 +894,16 @@ Double_t TG4StepManager::Edep() const
       return fTrack->GetTotalEnergy()/TG4G3Units::Energy();
     }
   }
-      
+
+  if ( fStepStatus == kGflashSpot ) {
+
+#ifdef MCDEBUG
+    CheckGflashSpot("Edep");
+#endif
+
+    return fGflashSpot->GetEnergySpot()->GetEnergy()/TG4G3Units::Energy();
+  }
+
   return 0;
 }
 
@@ -932,6 +974,8 @@ Double_t TG4StepManager::Etot() const
 
   return fTrack->GetDynamicParticle()->GetTotalEnergy()/TG4G3Units::Energy();
 }
+
+// TO DO: revise these with added kGflashSpot status
 
 //_____________________________________________________________________________
 Bool_t TG4StepManager::IsTrackInside() const
@@ -1089,7 +1133,7 @@ Int_t TG4StepManager::NSecondaries() const
 /// Return the number of secondary particles generated 
 /// in the current step.
 
-  if ( fStepStatus == kVertex ) return 0;
+  if ( fStepStatus == kVertex || fStepStatus == kGflashSpot ) return 0;
 
 #ifdef MCDEBUG
   CheckSteppingManager();
@@ -1119,8 +1163,9 @@ void TG4StepManager::GetSecondary(Int_t index, Int_t& particleId,
 #endif
 
   G4int nofSecondaries = NSecondaries();
-  const G4TrackVector* secondaryTracks = fSteppingManager->GetSecondary();
+  if ( ! nofSecondaries ) return;
 
+  const G4TrackVector* secondaryTracks = fSteppingManager->GetSecondary();
 #ifdef MCDEBUG
   if ( ! secondaryTracks ) {
     TG4Globals::Exception(
@@ -1220,7 +1265,7 @@ Int_t TG4StepManager::StepProcesses(TArrayI& processes) const
 /// Return the number of active processes    
 /// (TBD: Distinguish between kPDeltaRay and kPEnergyLoss)
 
- if ( fStepStatus == kVertex || fStepStatus == kBoundary) {
+ if ( fStepStatus == kVertex || fStepStatus == kBoundary || fStepStatus == kGflashSpot ) {
    G4int nofProcesses = 1;
    processes.Set(nofProcesses);
    processes[0] = kPNull;
@@ -1272,6 +1317,5 @@ Int_t TG4StepManager::StepProcesses(TArrayI& processes) const
   // fill array with last process
   processes[counter++] = physicsManager->GetMCProcess(kpLastProcess);
 
-    
   return counter;  
 }

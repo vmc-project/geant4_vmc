@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -24,8 +24,9 @@ TG4SDMessenger::TG4SDMessenger(TG4SDConstruction* sdConstruction)
   : G4UImessenger(),
     fSDConstruction(sdConstruction),
     fAddSDSelectionCmd(0),
-    fSetSDSelectionFromTGeoCmd(0)
-    
+    fSetSDSelectionFromTGeoCmd(0),
+    fSetSVLabelCmd(0),
+    fSetGflashCmd(0)
 { 
 /// Standard constructor
 
@@ -60,6 +61,13 @@ TG4SDMessenger::TG4SDMessenger(TG4SDConstruction* sdConstruction)
   fSetSVLabelCmd->SetParameterName("SVLabel", false);
   fSetSVLabelCmd->AvailableForStates(G4State_PreInit);  
 
+  fSetGflashCmd
+    = new G4UIcmdWithABool("/mcDet/setGflash", this);
+  guidance
+    = "Activate creating sensitive detectors adapted for GFlash.";
+  fSetGflashCmd->SetGuidance(guidance);
+  fSetGflashCmd->SetParameterName("Gflash", false);
+  fSetGflashCmd->AvailableForStates(G4State_PreInit);
 }
 
 //______________________________________________________________________________
@@ -70,6 +78,7 @@ TG4SDMessenger::~TG4SDMessenger()
   delete fAddSDSelectionCmd;
   delete fSetSDSelectionFromTGeoCmd;
   delete fSetSVLabelCmd;
+  delete fSetGflashCmd;
 }
 
 //
@@ -89,7 +98,11 @@ void TG4SDMessenger::SetNewValue(G4UIcommand* command,
     fSDConstruction->SetSelectionFromTGeo(
                        fSetSDSelectionFromTGeoCmd->GetNewBoolValue(newValue));
   }  
-  if ( command == fSetSVLabelCmd ) {
+  else if ( command == fSetSVLabelCmd ) {
     fSDConstruction->SetSensitiveVolumeLabel(newValue);
   }  
+  if ( command == fSetGflashCmd ) {
+    fSDConstruction->SetIsGflash(
+                       fSetGflashCmd->GetNewBoolValue(newValue));
+  }
 }

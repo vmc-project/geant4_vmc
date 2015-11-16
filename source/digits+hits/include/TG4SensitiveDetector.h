@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -49,7 +49,11 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
     G4int GetID() const;
     G4int GetMediumID() const;
     
-  private:          
+  protected:
+    // methods
+    TG4StepManager*  GetStepManager() const;
+
+  private:
     /// Not implemented
     TG4SensitiveDetector(); 
     /// Not implemented
@@ -82,6 +86,11 @@ inline G4int TG4SensitiveDetector::GetMediumID() const {
   /// Returns medium ID
   return fMediumID;
 }  
+
+inline TG4StepManager*  TG4SensitiveDetector::GetStepManager() const {
+  /// Returns the TG4StepManager instance
+  return fStepManager;
+}
 
 #endif //TG4V_SENSITIVE_DETECTOR_H
 
