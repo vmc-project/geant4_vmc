@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -61,7 +61,7 @@ void TG4StackPopperPhysics::ConstructParticle()
 //_____________________________________________________________________________
 void TG4StackPopperPhysics::ConstructProcess()
 {
-/// Set step limiter process to slected particles or all particles
+/// Set stack popper process to selected particles or all particles
 /// if no particles were selected
 
   fStackPopperProcess = new TG4StackPopper();
