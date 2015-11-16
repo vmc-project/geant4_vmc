@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2015 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -41,14 +41,14 @@ TG4TrackingActionMessenger::TG4TrackingActionMessenger(
   fNewVerboseCmd = new G4UIcmdWithAnInteger("/mcTracking/newVerbose", this);
   fNewVerboseCmd->SetGuidance("Set new verbose level (/tracking/verbose)");
   fNewVerboseCmd->SetGuidance("when a track with specified track ID ");
-  fNewVerboseCmd->SetGuidance("(/TG4Tracking/newVerboseTrack)\n starts tracking");
+  fNewVerboseCmd->SetGuidance("(/mcTracking/newVerboseTrack)\n starts tracking");
   fNewVerboseCmd->SetParameterName("NewVerboseLevel", false);
   fNewVerboseCmd->SetRange("NewVerboseLevel >= 0 && NewVerboseLevel <= 5");
   fNewVerboseCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
   fNewVerboseTrackCmd = new G4UIcmdWithAnInteger("/mcTracking/newVerboseTrack", this);
   fNewVerboseTrackCmd->SetGuidance("Set the track ID for which the new verbose level");
-  fNewVerboseTrackCmd->SetGuidance("(/TG4Tracking/newVerbose) will be applied.");
+  fNewVerboseTrackCmd->SetGuidance("(/mcTracking/newVerbose) will be applied.");
   fNewVerboseTrackCmd->SetParameterName("NewVerboseLevelTrackID", false);
   fNewVerboseTrackCmd->SetRange("NewVerboseLevelTrackID >= 0");
   fNewVerboseTrackCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
