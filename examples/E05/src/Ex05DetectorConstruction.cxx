@@ -124,6 +124,7 @@ void Ex05DetectorConstruction::Construct()
 
   TGeoVolume* experimentalHall_log 
     = new TGeoVolume("ExpHall_log", experimentalHall_box, medAir);
+  gGeoManager->SetTopVolume(experimentalHall_log);
 
   //------------------------------ 
   // Calorimeter segments
@@ -181,6 +182,12 @@ void Ex05DetectorConstruction::Construct()
                   new TGeoTranslation(crystalPos_x, crystalPos_y, crystalPos_z));
     }
   }
+
+  // close geometry
+  gGeoManager->CloseGeometry();
+    
+  // notify VMC about Root geometry
+  gMC->SetRootGeometry();
   
   cout << "There are " << nbOfCrystals 
        << " crystals per row in the calorimeter, so in total "
