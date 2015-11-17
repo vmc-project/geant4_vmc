@@ -30,7 +30,6 @@
 #pragma link C++ class  A01HodoscopeSD+;
 #pragma link C++ class  A01PrimaryGenerator+;
 #pragma link C++ class  A01RootDetectorConstruction+;
-#pragma link C++ class  Ex03MCStack+;
 #pragma link C++ class  std::stack<TParticle*,deque<TParticle*> >+;
 
 #endif
