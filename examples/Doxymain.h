@@ -17,19 +17,20 @@
 
 \section exa_s1 Introduction
 
-  To demonstrate use of VirtualMC, five Geant4 examples has been rewritten
+  To demonstrate use of VirtualMC, several Geant4 examples has been rewritten
   as VMC applications:
-  \ref E01, \ref E02, \ref E03, \ref E06, \ref A01.
+  \ref E01, \ref E02, \ref E03, \ref E06, \ref A01, \ref Gflash.
   
-  In previous versions of Geant4, these examples
-  were provide as novice (N01, N02, N03, N06) and extended (A01) examples.
-  The correspondence with the examples in Geant4 10.00.x is:
+  The correspondence with the examples in Geant4  (since 10.00.x) is:
   - E01 - no equivalent
   - E02 - basic/B2
   - E03 - basic/B4
   - E06 - extended/optical/OpNovice
   - A01 - basic/B5
-  
+  - \ref Gflash - extended/parameterisation/gflash
+
+  In previous versions of Geant4  (up to 9.6), these examples
+  were provided as novice (N01, N02, N03, N06) and extended (A01, gflash) examples.
   See more detail description in the README files
   withing each example subdirectory:
   - \ref README_E01
@@ -37,6 +38,7 @@
   - \ref README_E03
   - \ref README_E06
   - \ref README_A01
+  - \ref README_Gflash
 
 \section exa_s2 Geometry definition
 

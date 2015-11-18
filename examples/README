@@ -10,15 +10,19 @@
 
 Introduction
 =============
-  To demonstrate use of VirtualMC, five Geant4 examples has been rewritten
-  as VMC applications.  In previous versions of Geant4, these examples
-  were provide as novice (N01, N02, N03, N06) and extended (A01) examples.
-  The correspondence with the examples in Geant4 10.00.x is:
-  E01 - no equvalent
+  To demonstrate use of VirtualMC, several Geant4 examples has been rewritten
+  as VMC applications.
+
+  The correspondence with the examples in Geant4 (since 10.00.x) is:
+  E01 - no equvalent now
   E02 - basic/B2
   E03 - basic/B4
   E06 - extended/optical/OpNovice
   A01 - basic/B5
+  Gflash - extended/parameterisation/gflash
+
+  In previous versions of Geant4 (up to 9.6), these examples
+  were provided as novice (N01, N02, N03, N06) and extended (A01, gflash) examples.
 
   See more detail description in README files
   withing each example subdirectory. 
