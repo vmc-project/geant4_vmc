@@ -1,0 +1,30 @@
+# #------------------------------------------------
+# The Virtual Monte Carlo examples
+# Copyright (C) 2007 - 2015 Ivana Hrivnacova
+# All rights reserved.
+#
+# For the licensing terms see geant4_vmc/LICENSE.
+# Contact: root-vmc@cern.ch
+#-------------------------------------------------
+
+#
+# Geant4 configuration macro for Gflash example
+# (called from Root macro g4Config.C)
+
+/mcVerbose/all 0
+/mcVerbose/runAction 1
+/mcVerbose/composedPhysicsList 1
+#/mcVerbose/physicsFastSimulation 2
+#/mcVerbose/modelConfigurationManager 2
+#/mcVerbose/geometryManager 2
+
+/control/cout/ignoreThreadsExcept 0
+
+# activate Gflash sensitive detectors
+/mcDet/setGflash true
+# fast simulation configuration
+/mcPhysics/fastSimulation/setModel fastShowerModel
+/mcPhysics/fastSimulation/setParticles all
+/mcPhysics/fastSimulation/setRegions AirB
+
+#/tracking/verbose 1

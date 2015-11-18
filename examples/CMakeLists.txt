@@ -1,6 +1,6 @@
 #------------------------------------------------
 # The Virtual Monte Carlo examples
-# Copyright (C) 2014 Ivana Hrivnacova
+# Copyright (C) 2014 - 2015 Ivana Hrivnacova
 # All rights reserved.
 #
 # For the licensing terms see geant4_vmc/LICENSE.
@@ -25,5 +25,6 @@ add_subdirectory(E02)
 add_subdirectory(E03)
 add_subdirectory(E06)
 add_subdirectory(A01)
+add_subdirectory(Gflash)
 
-#add_custom_target(all DEPENDS E01 E02 E03 E06 A01)
+#add_custom_target(all DEPENDS E01 E02 E03 E05 E06 A01)
