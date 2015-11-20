@@ -1,0 +1,28 @@
+# #------------------------------------------------
+# The Virtual Monte Carlo examples
+# Copyright (C) 2007 - 2015 Ivana Hrivnacova
+# All rights reserved.
+#
+# For the licensing terms see geant4_vmc/LICENSE.
+# Contact: root-vmc@cern.ch
+#-------------------------------------------------
+
+#
+# Geant4 configuration macro for Garfield example
+# (called from Root macro g4Config.C)
+
+/mcVerbose/all 0
+/mcVerbose/runAction 1
+/mcVerbose/composedPhysicsList 1
+#/mcVerbose/physicsFastSimulation 2
+#/mcVerbose/modelConfigurationManager 2
+#/mcVerbose/geometryManager 2
+
+/control/cout/ignoreThreadsExcept 0
+
+# fast simulation configuration
+/mcPhysics/fastSimulation/setModel garfieldModel
+/mcPhysics/fastSimulation/setParticles mu+
+/mcPhysics/fastSimulation/setRegions ArCO2
+
+#/tracking/verbose 1

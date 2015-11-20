@@ -20,11 +20,23 @@ set(CMAKE_MODULE_PATH
     ${Geant3_DIR}/Modules
     ${CMAKE_MODULE_PATH}) 
 
+
 add_subdirectory(E01)
 add_subdirectory(E02)
 add_subdirectory(E03)
 add_subdirectory(E06)
 add_subdirectory(A01)
 add_subdirectory(Gflash)
+
+#----------------------------------------------------------------------------
+# Garfield example requires Garfield
+#
+find_package(Garfield QUIET)
+if(Garfield_FOUND)
+  add_subdirectory(Garfield)
+else()
+  message(STATUS "VMC Examples: Garfield package not found. ")
+  message(STATUS "Garfield example disabled")
+endif()
 
 #add_custom_target(all DEPENDS E01 E02 E03 E05 E06 A01)
