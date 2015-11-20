@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file E03/src/Ex03MCStack.cxx 
-/// \brief Implementation of the Ex03MCStack class 
+/// \file E03/src/Ex03MCStack.cxx
+/// \brief Implementation of the Ex03MCStack class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///

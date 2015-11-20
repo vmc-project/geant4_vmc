@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file  E03/include/Ex03MCStack.h
-/// \brief Definition of the Ex03MCStack class 
+/// \brief Definition of the Ex03MCStack class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///

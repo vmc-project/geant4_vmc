@@ -10,10 +10,10 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Gflash::FastSimulation.h 
-/// \brief Definition of the FastSimulation class 
+/// \file Gflash/geant4/include/FastSimulation.h
+/// \brief Definition of the Gflash::FastSimulation class
 ///
-/// Geant4 gflash adapted to Virtual Monte Carlo.
+/// Geant4 gflash example adapted to Virtual Monte Carlo.
 ///
 /// \date 28/10/2015
 /// \author I. Hrivnacova; IPN, Orsay

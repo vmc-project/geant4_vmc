@@ -13,26 +13,10 @@ Gflash example
   Geant4 gflash extended example adapted to Virtual Monte Carlo.
 
   Demonstrates:
-    Geometry - divided volume (Gsdvn)
-    Definition of sensitive volumes
-    Physics - hadronics processes off
-    Particles cuts 
-      - G4 cut in range: 1mm
-        G3 cuts set to correspond to 1mm cut in range
-    Primary generator with randomized position (optional)
-      defined number of electrons with moving position and fixed direction
-    Calorimetry hits
-    Storing hits, particles stack in Root file
-    Drawing geometry (G3, G3+TGeo, G4) + trajectories (G3+TGeo and G4)
-    Verbosity
-    Geometry defined via Geant4 (G4)
-    User defined physics list (G4)
-    User defined particles and ions (G3, G4)
-    User defined regions (G4)
-    User defined magnetic field equation of motion and/or its integrator (G4)
+  - add
 
   See also description of in 
-    geant4/examples/novice/N03/README
+    geant4/examples/extended/parameterisation/gflash
 
 Compilation:
 ============

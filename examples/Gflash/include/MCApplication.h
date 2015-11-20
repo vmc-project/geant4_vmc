@@ -10,10 +10,10 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file MCApplication.h 
-/// \brief Definition of the MCApplication class 
+/// \file Gflash/include/MCApplication.h
+/// \brief Definition of the Gflash::MCApplication class
 ///
-/// Geant4 gflash adapted to Virtual Monte Carlo.
+/// Geant4 gflash example adapted to Virtual Monte Carlo.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -37,7 +37,7 @@ class PrimaryGenerator;
 /// \ingroup Gflash
 /// \brief Implementation of the TVirtualMCApplication
 ///
-/// Geant4 gflash adapted to Virtual Monte Carlo.
+/// Geant4 gflash example adapted to Virtual Monte Carlo.
 ///
 /// \date 28/10/2015
 /// \author I. Hrivnacova; IPN, Orsay

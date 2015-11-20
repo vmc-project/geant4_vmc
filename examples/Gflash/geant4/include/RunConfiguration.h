@@ -10,10 +10,10 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Gflash::RunConfiguration1.h 
-/// \brief Definition of the RunConfiguration1 class 
+/// \file Gflash/geant4/include/RunConfiguration.h
+/// \brief Definition of the Gflash::RunConfiguration class
 ///
-/// Geant4 gflash adapted to Virtual Monte Carlo.
+/// Geant4 gflash example adapted to Virtual Monte Carlo.
 ///
 /// \date 28/10/2015
 /// \author I. Hrivnacova; IPN, Orsay

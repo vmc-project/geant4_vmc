@@ -10,10 +10,10 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file  DetectorConstruction.h
-/// \brief Definition of the DetectorConstruction class 
+/// \file  Gflash/include/DetectorConstruction.h
+/// \brief Definition of the Gflash::DetectorConstruction class
 ///
-/// Geant4 gflash adapted to Virtual Monte Carlo.
+/// Geant4 gflash example adapted to Virtual Monte Carlo.
 ///
 /// \date 28/10/2015
 /// \author I. Hrivnacova; IPN, Orsay
@@ -30,7 +30,7 @@ namespace Gflash
 /// \ingroup Gflash
 /// \brief The detector construction (via TGeo )
 ///
-/// Geant4 gflash adapted to Virtual Monte Carlo.
+/// Geant4 gflash example adapted to Virtual Monte Carlo.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 

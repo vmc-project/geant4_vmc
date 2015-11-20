@@ -7,10 +7,10 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file MCApplication.cxx 
-/// \brief Implementation of the MCApplication class 
+/// \file Gflash/src/MCApplication.cxx
+/// \brief Implementation of the Gflash::MCApplication class
 ///
-/// Geant4 ExampleN03 adapted to Virtual Monte Carlo
+/// Geant4 gflash adapted to Virtual Monte Carlo
 ///
 /// \date 28/10/2015
 /// \author I. Hrivnacova; IPN, Orsay

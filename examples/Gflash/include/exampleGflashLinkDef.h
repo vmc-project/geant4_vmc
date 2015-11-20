@@ -7,7 +7,7 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file  example03LinkDef.h
+/// \file  exampleGflashLinkDef.h
 /// \brief The CINT link definitions for example Gflash classes
 
 #ifdef __CINT__
