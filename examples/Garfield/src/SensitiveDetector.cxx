@@ -141,6 +141,8 @@ Bool_t  SensitiveDetector::UpdateFromGarfield()
   fHit->AddEdepGas(edep);
   fHit->AddAvalancheSize(avalancheSize);
   fHit->AddGain(gain);
+
+  return true;
 }
 
 //_____________________________________________________________________________
