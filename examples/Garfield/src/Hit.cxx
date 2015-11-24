@@ -19,6 +19,8 @@
 
 #include "Hit.h"
 
+using namespace std;
+
 /// \cond CLASSIMP
 ClassImp(Garfield::Hit)
 /// \endcond

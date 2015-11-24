@@ -28,6 +28,8 @@
 ClassImp(Gflash::SensitiveDetector)
 /// \endcond
 
+using namespace std;
+
 namespace Gflash
 {
 

@@ -23,6 +23,8 @@
 ClassImp(Gflash::Hit)
 /// \endcond
 
+using namespace std;
+
 namespace Gflash
 {
 
