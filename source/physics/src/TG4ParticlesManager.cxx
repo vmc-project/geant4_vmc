@@ -577,10 +577,14 @@ G4DynamicParticle* TG4ParticlesManager::CreateDynamicParticle(
   // create G4DynamicParticle
   G4DynamicParticle* dynamicParticle 
     = new G4DynamicParticle(particleDefinition, momentum);
+
+  // set polarization
+  G4ThreeVector polarization = GetParticlePolarization(particle);
+  dynamicParticle
+    ->SetPolarization(polarization.x(), polarization.y(), polarization.z());
   
   return dynamicParticle;
 }
-
 
 //_____________________________________________________________________________
 G4ThreeVector TG4ParticlesManager::GetParticlePosition(
@@ -606,6 +610,18 @@ G4ThreeVector TG4ParticlesManager::GetParticleMomentum(
                      particle->Py()*TG4G3Units::Energy(),
                      particle->Pz()*TG4G3Units::Energy());
   return momentum;
+}
+
+//_____________________________________________________________________________
+G4ThreeVector TG4ParticlesManager::GetParticlePolarization(
+                                   const TParticle* particle) const
+{
+/// Return particle polarization.
+
+  TVector3 polarization;
+  particle->GetPolarisation(polarization);
+
+  return G4ThreeVector(polarization.X(), polarization.Y(), polarization.Z());
 }
 
 //_____________________________________________________________________________

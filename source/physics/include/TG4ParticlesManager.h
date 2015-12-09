@@ -91,6 +91,8 @@ class TG4ParticlesManager : public TG4Verbose
                            const TParticle* particle) const;
     G4ThreeVector GetParticleMomentum(
                            const TParticle* particle) const; 
+    G4ThreeVector GetParticlePolarization(
+                           const TParticle* particle) const;
                                   
     TG4UserIon*   GetUserIon(const G4String& ionName, G4bool warn = true) const;
     
