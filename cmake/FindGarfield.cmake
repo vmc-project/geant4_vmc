@@ -28,7 +28,7 @@ find_path(Garfield_INCLUDE_DIRS Sensor.hh
 
 find_library(Garfield_LIBRARIES NAMES Garfield
 	         HINTS ${Garfield_DIR}/lib ${Garfield__LIB_DIR}
-             HINTS $ENV{Garfield_HOME}/lib)
+             HINTS $ENV{Garfield_HOME}/Library)
 #message(STATUS Garfield_LIBRARIES ${Garfield_LIBRARIES})
 
 #if (${Garfield_LIBRARY_DIR})
