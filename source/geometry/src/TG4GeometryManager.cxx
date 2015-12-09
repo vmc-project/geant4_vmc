@@ -706,20 +706,6 @@ void TG4GeometryManager::ConstructSDandField()
   if ( VerboseLevel() > 1 ) 
      G4cout << "TG4GeometryManager::ConstructSDandField() " << G4endl; 
 
-  // Construct G4 geometry 
-  //ConstructG4Geometry();
-
-  // Fill medium map
-  //FillMediumMap(); 
-  
-  // VMC application construct geometry for optical processes
-  //TG4StateManager::Instance()->SetNewState(kConstructOpGeometry);
-  //TVirtualMCApplication::Instance()->ConstructOpGeometry();   
-  //TG4StateManager::Instance()->SetNewState(kNotInApplication);
-
-  // Construct user regions
-  if ( fUserRegionConstruction ) fUserRegionConstruction->Construct();
-
   // Call user class for geometry customization
   if ( fUserPostDetConstruction ) fUserPostDetConstruction->Construct();
 

@@ -225,19 +225,3 @@ void TG4SpecialPhysicsList::VerboseLevel(G4int level)
       (*it)->SetVerboseLevel(level);  
   }
 }
-
-//_____________________________________________________________________________
-void TG4SpecialPhysicsList::SetStackPopperSelection(const G4String& selection)
-{
-/// Select particles with stack popper process
-
-  if ( !fStackPopperPhysics ) {
-    TG4Globals::Exception(
-      "TG4SpecialPhysicsList", "SetStackPopperSelection",
-      "SetStackPopper physics is not activated.");
-  }  
-  
-  fStackPopperPhysics->SetSelection(selection); 
-
-  G4cout << "TG4SpecialPhysicsList::SetStackPopperSelection: " << selection << G4endl;
-}   

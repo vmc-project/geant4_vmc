@@ -53,9 +53,6 @@ class TG4SpecialPhysicsList: public G4VModularPhysicsList,
     virtual G4int VerboseLevel() const;
     virtual void  VerboseLevel(G4int level);
 
-    // set methods
-    void SetStackPopperSelection(const G4String& selection);
-
     // get methods
     G4bool IsSpecialCuts() const;
     
