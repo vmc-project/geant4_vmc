@@ -356,11 +356,11 @@ void Ex06MCApplication::GenerateFeedback(Int_t nofPhotons,
       gMC->TrackPosition(position);
       // Feedback photon
       Int_t pdgEncoding = 50000051;
-      // No polarization
+      // Fixed polarization
       Double_t  polarization[3];
-      polarization[0] = 0;
-      polarization[1] = 0;
-      polarization[2] = 0;
+      polarization[0] = 0.3;
+      polarization[1] = 0.4;
+      polarization[2] = 0.866025403784438597;
 
       Int_t ntrack;
       gMC->GetStack()->PushTrack(
