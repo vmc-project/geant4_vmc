@@ -110,6 +110,11 @@ static const G4double Tdat[22] = {
 TG4SpecialUrbanMscModel::TG4SpecialUrbanMscModel(const G4String& nam)
   : G4VMscModel(nam)
 {
+
+#if G4VERSION_NUMBER >= 1020
+  rndmEngineMod = G4Random::getTheEngine();
+#endif
+
   masslimite    = 0.6*MeV;
   lambdalimit   = 1.*mm;
   fr            = 0.02;
@@ -427,6 +432,10 @@ G4double TG4SpecialUrbanMscModel::ComputeCrossSectionPerAtom(
 
 void TG4SpecialUrbanMscModel::StartTracking(G4Track* track)
 {
+#if G4VERSION_NUMBER >= 1020
+  rndmEngineMod = G4Random::getTheEngine();
+#endif
+
   SetParticle(track->GetDynamicParticle()->GetDefinition());
   firstStep = true; 
   inside = false;

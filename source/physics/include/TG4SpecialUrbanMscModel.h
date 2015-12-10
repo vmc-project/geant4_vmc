@@ -68,10 +68,16 @@
 #include "G4MscStepLimitType.hh"
 #include "G4Log.hh"
 #include "G4Exp.hh"
+#include "G4Version.hh"
 
 class G4ParticleChangeForMSC;
 class G4SafetyHelper;
 class G4LossTableManager;
+
+namespace CLHEP
+{
+class HepRandomEngine;
+}
 
 static const G4double c_highland = 13.6*CLHEP::MeV ;
 
@@ -127,6 +133,10 @@ private:
   //  hide assignment operator
   TG4SpecialUrbanMscModel & operator=(const  TG4SpecialUrbanMscModel &right);
   TG4SpecialUrbanMscModel(const  TG4SpecialUrbanMscModel&);
+
+#if G4VERSION_NUMBER >= 1020
+  CLHEP::HepRandomEngine*     rndmEngineMod;
+#endif
 
   const G4ParticleDefinition* particle;
   G4ParticleChangeForMSC*     fParticleChange;

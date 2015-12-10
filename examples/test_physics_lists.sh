@@ -22,27 +22,32 @@ OUTDIR=$CURDIR/log/test_physics_lists
 # Define path to data files
 #
 DATAPATH=/work/packages/geant4/data
+# paths set via geant4.sh
 #export G4ABLADATA=$DATAPATH/G4ABLA3.0
-#export G4LEDATA=$DATAPATH/G4EMLOW6.35
-#export G4LEVELGAMMADATA=$DATAPATH/PhotonEvaporation3.0
-#export G4NEUTRONHPDATA=$DATAPATH/G4NDL4.4
+#export G4LEDATA=$DATAPATH/G4EMLOW6.48
+#export G4LEVELGAMMADATA=$DATAPATH/PhotonEvaporation3.2
+#export G4NEUTRONHPDATA=$DATAPATH/G4NDL4.5
 #export G4NEUTRONXSDATA=$DATAPATH/G4NEUTRONXS1.4
 #export G4PIIDATA=$DATAPATH/G4PII1.3
-#export G4RADIOACTIVEDATA=$DATAPATH/RadioactiveDecay4.0
+#export G4RADIOACTIVEDATA=$DATAPATH/RadioactiveDecay4.3
 #export G4REALSURFACEDATA=$DATAPATH/RealSurface1.0
 #export G4SAIDXSDATA=$DATAPATH/G4SAIDDATA1.1
+# paths to optional data
 export G4LENDDATA=$DATAPATH/ENDF.B-VII.0
+export G4PROTONHPDATA=$DATAPATH/G4TENDL1.0
+
 
 # Remove previous log directory
 rm -fr $OUTDIR
 
 # The list of available PLs is printed by geant4_vmc when a non-existing
 # PL is selected
-# Lists in 10.1
+# Lists in 10.2
+#for PHYSICS_LIST in FTFP_BERT FTFP_BERT_TRV FTFP_BERT_HP FTFP_INCLXX FTFP_INCLXX_HP FTF_BIC LBE QBBC QGSP_BERT QGSP_BERT_HP QGSP_BIC QGSP_BIC_HP QGSP_BIC_AllHP QGSP_FTFP_BERT QGSP_INCLXX QGSP_INCLXX_HP QGS_BIC Shielding ShieldingLEND ShieldingM NuBeam
+# Lists in 10.2 (excluded QGSP_BIC_AllHP which causes exception)
 for PHYSICS_LIST in FTFP_BERT FTFP_BERT_TRV FTFP_BERT_HP FTFP_INCLXX FTFP_INCLXX_HP FTF_BIC LBE QBBC QGSP_BERT QGSP_BERT_HP QGSP_BIC QGSP_BIC_HP QGSP_FTFP_BERT QGSP_INCLXX QGSP_INCLXX_HP QGS_BIC Shielding ShieldingLEND ShieldingM NuBeam
-#for PHYSICS_LIST in LBE
 do
-  for EM in _ _EMV _EMX _EMY _EMZ _LIV _PEN
+  for EM in _ _EMV _EMX _EMY _EMZ _LIV _PEN __GS
   do
 
     if [ ! -d $OUTDIR ]; then
@@ -62,10 +67,13 @@ do
     EXIT_STATUS=$?
   
     # Extract warnings
-    cat $OUTDIR/TMP.out | grep "DATA" >& $OUTDIR/missingData_$G4PHYSICS_LIST.out
     cat $OUTDIR/TMP.out | grep "Unknown process code" >& $OUTDIR/processCode_$G4PHYSICS_LIST.out
     cat $OUTDIR/TMP.out | grep "Unknown process control" >& $OUTDIR/processControl_$G4PHYSICS_LIST.out
     cat $OUTDIR/TMP.out | grep "G4Exception" >& $OUTDIR/exception_$G4PHYSICS_LIST.out
+    # grep for DATA only if an execption was issued
+    if [ -s $OUTDIR/exception_$G4PHYSICS_LIST.out  ]; then 
+      cat $OUTDIR/TMP.out | grep "DATA" >& $OUTDIR/missingData_$G4PHYSICS_LIST.out
+    fi
 
     # Keep output only if program finished with an error or include G4Exception
     if [ "$EXIT_STATUS" = "0" ]; then
@@ -81,10 +89,6 @@ do
   
     # Remove files with zero size
     #
-    if [ ! -s $OUTDIR/missingData_$G4PHYSICS_LIST.out  ]; then 
-      rm $OUTDIR/missingData_$G4PHYSICS_LIST.out
-    fi
-
     if [ ! -s $OUTDIR/processCode_$G4PHYSICS_LIST.out  ]; then 
       rm $OUTDIR/processCode_$G4PHYSICS_LIST.out
     fi
@@ -95,6 +99,11 @@ do
 
     if [ ! -s $OUTDIR/exception_$G4PHYSICS_LIST.out  ]; then 
       rm $OUTDIR/exception_$G4PHYSICS_LIST.out
+    else
+      # check missingData only if an execption was issued
+      if [ ! -s $OUTDIR/missingData_$G4PHYSICS_LIST.out  ]; then 
+        rm $OUTDIR/missingData_$G4PHYSICS_LIST.out
+      fi
     fi
   
     echo " "
