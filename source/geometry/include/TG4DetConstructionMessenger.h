@@ -44,7 +44,8 @@ class G4UIcmdWithADoubleAndUnit;
 /// - /mcDet/setIsUserMaxStep true|false
 /// - /mcDet/setIsMaxStepInLowDensityMaterials true|false
 /// - /mcDet/setMaxStepInLowDensityMaterials value
-/// - /mcDet/setLimitDensity value 
+/// - /mcDet/setLimitDensity value
+/// - /mcDet/setRadiator volumeName xtrModel foilMaterial gasMaterial foilDensity gasDensity foilNUmber
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -66,7 +67,10 @@ class TG4DetConstructionMessenger: public G4UImessenger
     TG4DetConstructionMessenger& operator=(
                                 const TG4DetConstructionMessenger &right);
 
-    // \data members
+    // methods
+    void CreateSetRadiatorCmd();
+
+    // data members
     TG4GeometryManager*  fGeometryManager; ///< associated class
     G4UIdirectory*       fDirectory;       ///< command directory
     
@@ -114,6 +118,9 @@ class TG4DetConstructionMessenger: public G4UImessenger
 
     /// command: setMaxStepInLowDensityMaterials
     G4UIcmdWithADoubleAndUnit*  fSetMaxStepInLowDensityMaterialsCmd;
+
+    /// command: setRadiator
+    G4UIcommand*                fSetRadiatorCmd;
 };
 
 #endif //TG4_DET_CONSTRUCTION_MESSENGER_H

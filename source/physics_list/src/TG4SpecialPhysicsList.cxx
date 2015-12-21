@@ -16,6 +16,7 @@
 #include "TG4SpecialCutsPhysics.h"
 #include "TG4StepLimiterPhysics.h"
 #include "TG4StackPopperPhysics.h"
+#include "TG4TransitionRadiationPhysics.h"
 #include "TG4UserParticlesPhysics.h"
 #include "TG4ExtDecayerPhysics.h"
 #include "TG4ProcessControlMapPhysics.h"
@@ -142,6 +143,7 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
 
   Int_t tg4VerboseLevel = TG4VVerbose::VerboseLevel();
 
+  RegisterPhysics(new TG4TransitionRadiationPhysics(tg4VerboseLevel));
   RegisterPhysics(new TG4ProcessControlMapPhysics(tg4VerboseLevel));
 
   G4int itoken = 0;

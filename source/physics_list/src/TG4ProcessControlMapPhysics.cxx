@@ -203,6 +203,9 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("OpBoundary", kLABS);
   controlMap->Add("OpMieHG", kNoG3Controls);
   controlMap->Add("OpWLS", kNoG3Controls);
+  controlMap->Add("GammaXTRadiator", kNoG3Controls);
+  controlMap->Add("StrawXTRadiator", kNoG3Controls);
+  controlMap->Add("RegularXTRadiator", kNoG3Controls);
 
   controlMap->Add("SynRad", kSYNC);
   controlMap->Add("CHIPS_SynchrotronRadiation", kSYNC);
@@ -258,7 +261,10 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
            processName != "MinEkineCuts" && 
            processName != "G4MinEkineCuts" && 
            processName != "MaxTimeCuts" && 
-           processName != "stackPopper" ) {
+           processName != "stackPopper" &&
+           processName != "GammaXTRadiator" &&
+           processName != "StrawXTRadiator" &&
+           processName != "RegularXTRadiator") {
            
         G4String text = "Unknown process control for ";
         text += processName;

@@ -12,12 +12,15 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
+
+
 #include "TG4ProcessMCMapPhysics.h"
 #include "TG4ProcessMCMap.h"
 #include "TG4Globals.h"
 
 #include <TVirtualMCDecayer.h>
 #include <TVirtualMC.h>
+#include <RVersion.h>
 
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
@@ -203,7 +206,17 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("OpBoundary", kPLightScattering);
   mcMap->Add("OpMieHG", kPLightScattering);
   mcMap->Add("OpWLS", kPNull);
-             // Add kPOpticalWavelengthShifting in TMCProcess.h
+// Available since 6.07/03 and 5.34/35
+#if ( ( ROOT_VERSION_CODE >= ROOT_VERSION(6,7,3) ) || \
+      ( ( ROOT_VERSION_CODE <= ROOT_VERSION(6,0,0) ) && ( ROOT_VERSION_CODE >= ROOT_VERSION(5,34,35) ) ) )
+  mcMap->Add("GammaXTRadiator", kPTransitionRadiation);
+  mcMap->Add("StrawXTRadiator", kPTransitionRadiation);
+  mcMap->Add("RegularXTRadiator", kPTransitionRadiation);
+#else             // Add kPOpticalWavelengthShifting in TMCProcess.h
+  mcMap->Add("GammaXTRadiator", kPNull);
+  mcMap->Add("StrawXTRadiator", kPNull);
+  mcMap->Add("RegularXTRadiator", kPNull);
+#endif
 
   mcMap->Add("SynRad", kPSynchrotron);
   mcMap->Add("CHIPS_SynchrotronRadiation", kPSynchrotron);
@@ -265,8 +278,14 @@ void TG4ProcessMCMapPhysics::ConstructProcess()
     
       G4String processName = (*processVector)[i]->GetProcessName();
 
-      if ( mcMap->GetMCProcess(processName) == kPNoProcess &&
-           processName != "photoNuclear" ) {
+      if ( mcMap->GetMCProcess(processName) == kPNoProcess
+#if ( ! ( ROOT_VERSION_CODE >= ROOT_VERSION(6,7,3) ) && \
+      ! ( ( ROOT_VERSION_CODE <= ROOT_VERSION(6,0,0) ) && ( ROOT_VERSION_CODE >= ROOT_VERSION(5,34,34) ) ) )
+           && processName != "GammaXTRadiator"
+           && processName != "StrawXTRadiator"
+           && processName != "RegularXTRadiator"
+#endif
+          ) {
         G4String text = "Unknown process code for ";
         text += processName;
         TG4Globals::Warning(

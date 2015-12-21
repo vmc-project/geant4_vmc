@@ -21,6 +21,7 @@
 #include <globals.hh>
 
 class TG4StackPopperPhysics;
+class TG4TransitionRadiationPhysics;
 class TG4EmModelPhysics;
 class TG4FastSimulationPhysics;
 class TG4VUserFastSimulation;
@@ -63,10 +64,20 @@ class TG4SpecialPhysicsList: public G4VModularPhysicsList,
     
   protected:
     // data members
-    TG4StackPopperPhysics*    fStackPopperPhysics;   ///< stack popper physics
-    TG4EmModelPhysics*        fEmModelPhysics;       ///< EM models physics
-    TG4FastSimulationPhysics* fFastSimulationPhysics;///< fast simulation physics
-    G4bool                 fIsSpecialCuts;     ///< option for special cuts
+    /// Stack popper physics builder
+    TG4StackPopperPhysics*  fStackPopperPhysics;
+
+    /// Transition radiation physics builder
+    TG4TransitionRadiationPhysics*  fTransitionRadiationPhysics;
+
+    /// EM models physics builder
+    TG4EmModelPhysics*  fEmModelPhysics;
+
+    /// Fast simulation physics builder
+    TG4FastSimulationPhysics* fFastSimulationPhysics;
+
+    /// Option for special cuts
+    G4bool  fIsSpecialCuts;
 
   private:
     /// Not implemented

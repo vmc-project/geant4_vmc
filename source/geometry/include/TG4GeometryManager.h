@@ -30,6 +30,7 @@ class TG4G3CutVector;
 class TG4G3ControlVector;
 class TG4VUserRegionConstruction;
 class TG4VUserPostDetConstruction;
+class TG4RadiatorDescription;
 
 class G4LogicalVolume;
 class G4EquationOfMotion;
@@ -63,6 +64,8 @@ class TG4GeometryManager : public TG4Verbose
     void FinishGeometry();
     void UpdateMagField();
     void CreateMagFieldParameters(const G4String& fieldVolName);
+    TG4RadiatorDescription*
+         CreateRadiator(const G4String volName);
     void SetUserLimits(const TG4G3CutVector& cuts,
                        const TG4G3ControlVector& controls) const;
     void SetIsLocalMagField(G4bool isLocalMagField);
@@ -82,6 +85,9 @@ class TG4GeometryManager : public TG4Verbose
 
     // printing
     void PrintFieldStatistics() const;
+
+    // get methods
+    const std::vector<TG4RadiatorDescription*>& GetRadiators() const;
 
   private:
     /// Not implemented
@@ -122,11 +128,23 @@ class TG4GeometryManager : public TG4Verbose
     /// Fast simulation models manager
     TG4ModelConfigurationManager*  fFastModelsManager;
 
-    G4String              fUserGeometry;     ///< user geometry input                                        
-    std::vector<TG4FieldParameters*>  fFieldParameters; ///< magnetic field parameters
-    static G4ThreadLocal std::vector<TG4MagneticField*>*  fgMagneticFields; ///< magnetic fields
-    TG4VUserRegionConstruction* fUserRegionConstruction; ///< user region construction
-    TG4VUserPostDetConstruction* fUserPostDetConstruction; ///< user post detector construction
+    /// User geometry input
+    G4String  fUserGeometry;
+
+    /// Magnetic field parameters
+    std::vector<TG4FieldParameters*>  fFieldParameters;
+
+    /// Magnetic fields
+    static G4ThreadLocal std::vector<TG4MagneticField*>*  fgMagneticFields;
+
+    /// Radiators
+    std::vector<TG4RadiatorDescription*>  fRadiators;
+
+    /// User region construction
+    TG4VUserRegionConstruction* fUserRegionConstruction;
+
+    /// User post detector construction
+    TG4VUserPostDetConstruction* fUserPostDetConstruction;
 
     /// option to activate getting local magnetic fields from Root geometry
     G4bool    fIsLocalMagField;
@@ -173,6 +191,11 @@ inline void TG4GeometryManager::SetMaxStepInLowDensityMaterials(G4double maxStep
   /// Set max allowed step value in materials with density < fLimitDensity
   fMaxStepInLowDensityMaterials = maxStep;
 }  
+
+inline const std::vector<TG4RadiatorDescription*>& TG4GeometryManager::GetRadiators() const {
+  /// Return the vectpr of defined radiators
+  return fRadiators;
+}
 
 #endif //TG4_GEOMETRY_MANAGER_H
 

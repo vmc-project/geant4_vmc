@@ -24,6 +24,7 @@
 #include "TG4Limits.h"
 #include "TG4CachedMagneticField.h"
 #include "TG4FieldParameters.h"
+#include "TG4RadiatorDescription.h"
 #include "TG4G3Units.h"
 #include "TG4G3CutVector.h"
 #include "TG4G3ControlVector.h"
@@ -786,7 +787,18 @@ void TG4GeometryManager::CreateMagFieldParameters(const G4String& fieldVolName)
 /// associated with the volumes with the given name
 
   fFieldParameters.push_back(new TG4FieldParameters(fieldVolName));
-}    
+}
+
+//_____________________________________________________________________________
+TG4RadiatorDescription*
+TG4GeometryManager::CreateRadiator(const G4String volName)
+{
+  TG4RadiatorDescription* radiatorDescription = new TG4RadiatorDescription(volName);
+  fRadiators.push_back(radiatorDescription);
+
+  return radiatorDescription;
+}
+
 
 //_____________________________________________________________________________
 void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,

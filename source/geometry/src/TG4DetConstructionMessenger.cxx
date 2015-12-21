@@ -16,7 +16,9 @@
 #include "TG4DetConstructionMessenger.h"
 #include "TG4DetConstruction.h"
 #include "TG4GeometryManager.h"
+#include "TG4RadiatorDescription.h"
 #include "TG4GeometryServices.h"
+#include "TG4G3Units.h"
 #include "TG4Globals.h"
 
 #include <G4UIdirectory.hh>
@@ -24,6 +26,7 @@
 #include <G4UIcmdWithABool.hh>
 #include <G4UIcmdWithAString.hh>
 #include <G4UIcmdWithADoubleAndUnit.hh>
+#include <G4AnalysisUtilities.hh>
 
 //_____________________________________________________________________________
 TG4DetConstructionMessenger::TG4DetConstructionMessenger(
@@ -154,6 +157,8 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fSetMaxStepInLowDensityMaterialsCmd->SetDefaultUnit("mm");
   fSetMaxStepInLowDensityMaterialsCmd->SetUnitCategory("Length");
   fSetMaxStepInLowDensityMaterialsCmd->AvailableForStates(G4State_PreInit);
+
+  CreateSetRadiatorCmd();
 }
 
 //_____________________________________________________________________________
@@ -176,6 +181,53 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
   delete fIsMaxStepInLowDensityMaterialsCmd;
   delete fSetLimitDensityCmd;
   delete fSetMaxStepInLowDensityMaterialsCmd;
+  delete fSetRadiatorCmd;
+}
+
+//
+// private methods
+//
+
+//_____________________________________________________________________________
+void TG4DetConstructionMessenger::CreateSetRadiatorCmd()
+{
+  G4UIparameter* volumeName = new G4UIparameter("volumeName", 's', false);
+  volumeName->SetGuidance("Radiator envelope.");
+
+  G4UIparameter* xtrModel = new G4UIparameter("xtrModel", 's', false);
+  xtrModel->SetGuidance("XTR model.");
+  //xtrModel->SetCandidates("gammaR gammaM strawR regR transpR regM");
+
+  G4UIparameter* foilMaterial = new G4UIparameter("foilMaterial", 's', false);
+  foilMaterial->SetGuidance("Foil material name.");
+
+  G4UIparameter* gasMaterial = new G4UIparameter("gasMaterial", 's', false);
+  gasMaterial->SetGuidance("Gas material name.");
+
+  G4UIparameter* foilThickness = new G4UIparameter("foilThickness", 'd', false);
+  foilThickness->SetGuidance("Foil thickness (cm).");
+
+  G4UIparameter* gasThickness = new G4UIparameter("gasThickness", 'd', false);
+  gasThickness->SetGuidance("Gas thickness (cm).");
+
+  G4UIparameter* foilNumber = new G4UIparameter("foilNumber", 'i', false);
+  foilNumber->SetGuidance("Number of foils");
+
+  G4UIparameter* strawTubeMaterial = new G4UIparameter("strawTubeMaterial", 's', true);
+  strawTubeMaterial->SetGuidance("Straw tube material name.");
+  strawTubeMaterial->SetDefaultValue("");
+
+  fSetRadiatorCmd = new G4UIcommand("/mcDet/setRadiator", this);
+  fSetRadiatorCmd->SetGuidance("Define radiator properties.");
+  fSetRadiatorCmd->SetParameter(volumeName);
+  fSetRadiatorCmd->SetParameter(xtrModel);
+  fSetRadiatorCmd->SetParameter(foilMaterial);
+  fSetRadiatorCmd->SetParameter(gasMaterial);
+  fSetRadiatorCmd->SetParameter(foilThickness);
+  fSetRadiatorCmd->SetParameter(gasThickness);
+  fSetRadiatorCmd->SetParameter(foilNumber);
+  fSetRadiatorCmd->SetParameter(strawTubeMaterial);
+  fSetRadiatorCmd->AvailableForStates(G4State_PreInit);
 }
 
 //
@@ -184,7 +236,7 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
   
 //_____________________________________________________________________________
 void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command, 
-                                               G4String newValues)
+                                              G4String newValues)
 {
 /// Apply command to the associated object.
 
@@ -237,5 +289,37 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
     TG4GeometryManager::Instance()
       ->SetMaxStepInLowDensityMaterials(
           fSetMaxStepInLowDensityMaterialsCmd->GetNewDoubleValue(newValues));
-  } 
+  }
+  else if (command == fSetRadiatorCmd) {
+    // tokenize parameters in a vector
+    std::vector<G4String> parameters;
+    G4Analysis::Tokenize(newValues, parameters);
+
+    G4int counter = 0;
+    G4String volumeName = parameters[counter++];
+    G4String xtrModel = parameters[counter++];
+    G4String foilMaterial = parameters[counter++];
+    G4String gasMaterial = parameters[counter++];
+    G4double foilThickness = G4UIcommand::ConvertToDouble(parameters[counter++]);
+    G4double gasThickness = G4UIcommand::ConvertToDouble(parameters[counter++]);
+    G4int foilNumber = G4UIcommand::ConvertToInt(parameters[counter++]);
+    G4String strawTubeMaterial;
+    if ( G4int(parameters.size()) > counter) {
+      strawTubeMaterial = parameters[counter++];
+    }
+
+    // apply units
+    foilThickness *= TG4G3Units::Length();
+    gasThickness *= TG4G3Units::Length();
+
+    TG4RadiatorDescription* radiatorDescription
+      = TG4GeometryManager::Instance()->CreateRadiator(volumeName);
+    radiatorDescription->SetXtrModel(xtrModel);
+    radiatorDescription->SetFoilMaterialName(foilMaterial);
+    radiatorDescription->SetGasMaterialName(gasMaterial);
+    radiatorDescription->SetFoilThickness(foilThickness);
+    radiatorDescription->SetGasThickness(gasThickness);
+    radiatorDescription->SetFoilNumber(foilNumber);
+    radiatorDescription->SetStrawTubeMaterialName(strawTubeMaterial);
+  }
 }
