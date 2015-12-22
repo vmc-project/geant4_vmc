@@ -1,0 +1,71 @@
+/*! 
+
+/// \file "TR/.README.txt"
+/// \brief The ExampleTR README page
+
+\page README_TR Example TR
+
+\section etr_s1 Description
+
+  Geant4 TestEm10 adapted to Virtual Monte Carlo.
+
+  It demonstrates use of Geant4 transition radiation physics.
+
+  The users have to define the radiator envelope with
+  a material defined as a mixture of the foil and the gas material.
+  The radiator properties should be then set via the Geant4  VMC
+  command
+\verbatim
+  /mcDet/setRadiator volumeName xtrModel foilMaterial gasMaterial foilDensity gasDensity foilNUmber
+\endverbatim
+
+  For more details see the description in Geant4 example
+    geant4/examples/extended/electromagnetic/TestEm10
+
+\section etr_s2 Macros
+
+  For running example with G4:
+  <pre>
+  \link       TR/load_g4.C load_g4.C      \endlink - macro to load the libraries to run the example with Geant4
+  \link        TR/run_g4.C run_g4.C       \endlink - macro for running example 
+  \link      TR/g4Config.C g4Config.C     \endlink - configuration macro - G4 native geometry navigation (default)
+  \link  TR/g4tgeoConfig.C g4tgeoConfig.C \endlink - configuration macro - G4 with TGeo navigation 
+   g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
+   g4config2.in  - macro for G4 post-init configuration using G4 commands (called from run_g4.C)
+   g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
+  </pre>
+
+  For running example with G3:
+  <pre>
+  \link      TR/load_g3.C load_g3.C     \endlink - macro to load the libraries to run the example with Geant3
+  \link       TR/run_g3.C run_g3.C      \endlink - macro for running example 
+  \link TR/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry
+  </pre>
+
+  Common macro (called by run_g3.C/run_g4.C):
+  <pre>
+  \link TR/set_vis.C set_vis.C\endlink - setting visualization
+  </pre>
+
+\section etr_s4 To run example 
+
+  <pre>
+  With G4:
+  root[0] .x \link TR/load_g4.C load_g4.C\endlink
+  root[1] .x \link TR/run_g4.C run_g4.C\endlink
+
+  With G4 + TGeo navigation:
+  root[0] .x \link TR/load_g4.C load_g4.C\endlink
+  root[1] .x \link TR/run_g4.C run_g4.C\endlink(\link TR/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);
+
+  With G3 + TGeo:
+  root[0] .x \link TR/load_g3.C load_g3.C\endlink
+  root[1] .x \link TR/run_g3.C run_g3.C\endlink
+  </pre>
+
+\section etr_s5 Classes
+
+The documentation of all classes and the basic macros for this example
+is availabe on \link TR this page \endlink. 
+
+*/

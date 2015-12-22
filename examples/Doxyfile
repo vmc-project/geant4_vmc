@@ -776,7 +776,9 @@ RECURSIVE              = YES
 EXCLUDE                = E03/include/Ex02RootManager.h \
                          E03/src/Ex02RootManager.cxx \
                          E06/include/Ex03MCStack.h \
-                         E06/src/Ex03MCStack.cxx
+                         E06/src/Ex03MCStack.cxx \
+                         TR/include/Ex03MCStack.h \
+                         TR/src/Ex03MCStack.cxx
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded

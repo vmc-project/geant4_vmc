@@ -1,0 +1,64 @@
+------------------------------------------------
+ The Virtual Monte Carlo examples
+ Copyright (C) 2007 - 2015 Ivana Hrivnacova
+ All rights reserved.
+
+ For the licensing terms see geant4_vmc/LICENSE.
+ Contact: root-vmc@cern.ch
+-------------------------------------------------
+
+
+Example03
+=========
+  Geant4 TestEm10 adapted to Virtual Monte Carlo.
+
+  Demonstrates:
+    Use of Geant4 transition radiation physics.
+
+    The users have to define the radiator envelope with
+    a material defined as a mixture of the foil and the gas material.
+    The radiator properties should be then set via the Geant4  VMC
+    command
+    /mcDet/setRadiator volumeName xtrModel foilMaterial gasMaterial foilDensity gasDensity foilNUmber
+
+  For more details see the description in Geant4 example
+    geant4/examples/extended/electromagnetic/TestEm10
+
+
+Macros:
+=======
+
+  For running example with G4:
+  
+  load_g4.C      - macro to load the libraries to run the example with Geant
+  run_g4.C       - macro for running example
+  g4Config.C     - configuration macro - G4 native geometry navigation (default)
+  g4tgeoConfig.C - configuration macro - G4 with TGeo navigation 
+  g4config.in    - macro for G4 configuration using G4 commands (called from g4Config.C)
+  g4config2.in   - macro for G4 post-init configuration using G4 commands  (called from run_g4.C)
+  g4vis.in       - macro for G4 visualization settings (called from set_vis.C) 
+
+  For running example with G3:
+
+  load_g3.C       - macro to load the libraries to run the example with Geant3
+  run_g3.C        - macro for running example
+  g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry
+
+  Common macro (called by run_g3.C/run_g4.C):
+  
+  set_vis.C - setting visualization
+
+To run example 
+===============
+  
+  With G4:
+  root[0] .x load_g4.C
+  root[1] .x run_g4.C
+
+  With G4 + TGeo navigation:
+  root[0] .x load_g4.C
+  root[1] .x run_g4.C("g4tgeoConfig.C");
+
+  With G3 + TGeo:
+  root[0] .x load_g3.C
+  root[1] .x run_g3.C

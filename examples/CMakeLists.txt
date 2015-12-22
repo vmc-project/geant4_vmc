@@ -27,6 +27,7 @@ add_subdirectory(E03)
 add_subdirectory(E06)
 add_subdirectory(A01)
 add_subdirectory(Gflash)
+add_subdirectory(TR)
 
 #----------------------------------------------------------------------------
 # Garfield example requires Garfield

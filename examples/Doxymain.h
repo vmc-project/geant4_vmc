@@ -28,6 +28,7 @@
   - E06 - extended/optical/OpNovice
   - A01 - basic/B5
   - \ref Gflash - extended/parameterisation/gflash
+  - \ref TR - extended/electromagnetic/TestEm10
 
   In previous versions of Geant4  (up to 9.6), these examples
   were provided as novice (N01, N02, N03, N06) and extended (A01, gflash) examples.
@@ -39,6 +40,7 @@
   - \ref README_E06
   - \ref README_A01
   - \ref README_Gflash
+  - \ref README_TR
 
 \section exa_s2 Geometry definition
 

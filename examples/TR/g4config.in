@@ -1,0 +1,29 @@
+# #------------------------------------------------
+# The Virtual Monte Carlo examples
+# Copyright (C) 2007 - 2015 Ivana Hrivnacova
+# All rights reserved.
+#
+# For the licensing terms see geant4_vmc/LICENSE.
+# Contact: root-vmc@cern.ch
+#-------------------------------------------------
+
+#
+# Geant4 configuration macro for Example TR
+# (called from Root macro g4Config.C)
+
+# Geant4 VMC verbosity
+/mcVerbose/all 0
+/mcVerbose/runAction 1
+/mcVerbose/composedPhysicsList 1
+#/mcVerbose/trackManager 2
+#/mcVerbose/geometryManager 2
+
+# Geant4 versboity
+#/tracking/verbose 1
+/run/printProgress 1000
+
+/control/cout/ignoreThreadsExcept 0
+
+# Define radiator
+/mcDet/setRadiator Radiator gammaM Mylar Air 0.002 0.025 220
+

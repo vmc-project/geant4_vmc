@@ -66,6 +66,15 @@
  */
 /** \} */
 
+/** \defgroup TR TR
+ *  \brief The VMC example TR
+ *
+ *  The Geant4 extended example electromagnetic/TestEm10 adapted to Virtual Monte Carlo.
+ *  See more on the \ref README_TR page.
+ *  \{
+ */
+/** \} */
+
 /** \defgroup Tests Tests
  *  \brief The VMC examples tests
  *
