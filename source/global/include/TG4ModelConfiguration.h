@@ -59,7 +59,7 @@ class TG4ModelConfiguration
     // data members
     G4String  fModelName; ///< the EM model name
     G4String  fParticles; ///< the list of particle names
-    G4String  fRegions;   ///< the list of region (=media)
+    G4String  fRegions;   ///< the list of regions (=media)
     G4VFastSimulationModel*  fFastSimulationModel; ///< fast simulation model
 };
 

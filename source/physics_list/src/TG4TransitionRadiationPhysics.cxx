@@ -115,13 +115,6 @@ TG4TransitionRadiationPhysics::CreateXTRProcess(TG4RadiatorDescription* radiator
     }
   }
 
-  // Print materials used in radiator
-  G4cout << "Foil material: " << G4endl;
-  G4cout << *foilMaterial << G4endl;
-
-  G4cout << "Gas material: " << G4endl;
-  G4cout << *gasMaterial << G4endl;
-
   // Get remaining parameters
   G4double foilThickness = radiatorDescription->GetFoilThickness();
   G4double gasThickness = radiatorDescription->GetGasThickness();
