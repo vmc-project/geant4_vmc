@@ -52,6 +52,10 @@
   With G4 + TGeo navigation:
   root[0] .x \link Gflash/load_g4.C load_g4.C\endlink
   root[1] .x \link Gflash/run_g4.C run_g4.C\endlink(\link Gflash/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);
+
+  With G3 + TGeo:
+  root[0] .x load_g3.C
+  root[1] .x run_g3.C
   </pre>
 
 \section gflash_s4 Classes
