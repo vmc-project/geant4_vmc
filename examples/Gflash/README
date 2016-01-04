@@ -12,65 +12,40 @@ Gflash example
 ===============
   Geant4 gflash extended example adapted to Virtual Monte Carlo.
 
-  Demonstrates:
-  - add
+  The Geant4 gflash example adapted to Virtual Monte Carlo.
 
-  See also description of in 
-    geant4/examples/extended/parameterisation/gflash
+  It demonstrates the use of the Geant4 GFLASH parameterisation library. It uses the GFLASH equations
+  (hep-ex/0001020, Grindhammer & Peters) to parametrise electromagnetic showers in matter
 
-Compilation:
-============
-  With G4:
-  An extra library with user defined Geant4 based classes has to be build:
-  
-  cd Gflash/geant4
-  gmake
+  The Gflash model is not used when running the example with Geant3.
 
-  Use of user own defined physics list is demonstrated on
-  the LHEP_BERT hadronics physics list provided in Geant4.
-     
+  See also the Geant4 example description at:
+  -  http://geant4.web.cern.ch/geant4/UserDocumentation/Doxygen/examples_doc/html/Examplegflash.html
 
 Macros:
 =======
+
+  For running example with G4:
+  
+  load_g4.C       - macro to load the libraries to run the example with Geant4
+  run_g4.C        - macro for running example
+  g4Config.C      - configuration macro - G4 native geometry navigation (default)
+  g4tgeoConfig.C  - configuration macro - G4 with TGeo navigation
+  g4config.in     - macro for G4 configuration using G4 commands (called from g4Config.C)
+  g4vis.in        - macro for G4 visualization settings (called from set_vis.C)
 
   For running example with G3:
   
   load_g3.C       - macro to load the libraries to run the example with Geant3
   run_g3.C        - macro for running example
-  g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry(default)
-  g3Config.C      - configuration macro for G3 with native geometry
-
-  For running example with G4:
-  
-  load_g4.C       - macro to load the libraries to run the example with Geant
-  run_g4.C        - macro for running example
-  g4Config.C      - configuration macro - G4 native geometry navigation (default)
-  g4Config1.C     - configuration macro - geometry defined via Geant4
-  g4Config2.C     - configuration macro - user defined physics list (QGSP_BERT)
-  g4Config3.C     - configuration macro - user defined regions
-  g4Config4.C     - configuration macro - activation of VMC cuts and process controls
-  g4Config5.C     - configuration macro - activation of user defined magnetic field equation of motion
-                                          and/or its integrator
-  g4tgeoConfig.C  - configuration macro - G4 with TGeo navigation 
-  g4tgeoConfig3.C - configuration macro - user defined regions, TGeo navigation 
-  g4tgeoConfig4.C - configuration macro - activation of VMC cuts and process controls, TGeo navigation 
-  g4Config5.C     - configuration macro - activation of user defined magnetic field equation of motion
-                                          and/or its integrator, TGeo navigation 
-  g4ConfigEnv.C   - configuration macro - physics list defined via environment variable
-  g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
-  g4config2.in  - macro for G4 configuration using G4 commands (called from g4Config2.C)
-  g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
+  g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry (default)
 
   Common macro (called by run_g3.C/run_g4.C):
-  
+
   set_vis.C - setting visualization
 
-To run example 
+To run example
 ===============
-  
-  With G3 + TGeo:
-  root[0] .x load_g3.C
-  root[1] .x run_g3.C
 
   With G4:
   root[0] .x load_g4.C
@@ -80,17 +55,6 @@ To run example
   root[0] .x load_g4.C
   root[1] .x run_g4.C("g4tgeoConfig.C");
 
-  With G4 with geometry defined via Geant4:
-  root[0] .x load_g4.C
-  root[1] .x run_g4.C("g4Config1.C");
-
-  With G4 with user defined physics list:
-  root[0] .x load_g4.C
-  root[1] .x run_g4.C("g4Config2.C");
-
-  With G4 with user defined regions:
-  root[1] .x run_g4.C("g4Config3.C");
-
-  With G4 + TGeo navigation with user defined regions:
-  root[0] .x load_g4.C
-  root[0] .x run_g4.C("g4tgeoConfig3.C");
+  With G3 + TGeo:
+  root[0] .x load_g3.C
+  root[1] .x run_g3.C

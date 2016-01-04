@@ -7,41 +7,34 @@
 
 \section gflash_s1 Description
 
-  The Geant4 gflash example adapted to Virtual Monte Carlo
-  and extended for testing some other VMC features.
+  The Geant4 gflash example adapted to Virtual Monte Carlo.
 
-  It demonstrates:
-  - add
+  It demonstrates the use of the Geant4 GFLASH parameterisation library. It uses the GFLASH equations
+  (hep-ex/0001020, Grindhammer & Peters) to parametrise electromagnetic showers in matter
 
-  See also description of in 
-    geant4/examples/extended/parameterisation/gflash
+  The Gflash model is not used when running the example with Geant3.
 
-\section gflash_s2 Compilation:
+  See also the Geant4 example description at:
+  -  http://geant4.web.cern.ch/geant4/UserDocumentation/Doxygen/examples_doc/html/Examplegflash.html
 
-  With G4:\n
-  An extra library with user defined Geant4 based classes has to be build:
-  <pre>
-  cd Gflash/geant4
-  gmake
-  </pre>
 
-\section gflash_s3 Macros
-
-  For running example with G3:
-  <pre>
-  \link      Gflash/load_g3.C load_g3.C     \endlink - macro to load the libraries to run the example with Geant3
-  \link       Gflash/run_g3.C run_g3.C      \endlink - macro for running example 
-  \link Gflash/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry(default)
-  \link     Gflash/g3Config.C g3Config.C    \endlink - configuration macro for G3 with native geometry
-  </pre>
+\section gflash_s2 Macros
 
   For running example with G4:
   <pre>
   \link       Gflash/load_g4.C load_g4.C      \endlink - macro to load the libraries to run the example with Geant4
-  \link        Gflash/run_g4.C run_g4.C       \endlink - macro for running example 
+  \link        Gflash/run_g4.C run_g4.C       \endlink - macro for running example
+  \link      Gflash/g4Config.C g4Config.C     \endlink - configuration macro for G4 native geometry navigation (default)
+  \link  Gflash/g4tgeoConfig.C g4tgeoConfig.C \endlink - configuration macro for G4 with TGeo navigation
    g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
-   g4config2.in  - macro for G4 configuration using G4 commands (called from g4Config2.C)
-   g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
+   g4vis.in      - macro for G4 visualization settings (called from set_vis.C)
+  </pre>
+
+  For running example with G3:
+  <pre>
+  \link      Gflash/load_g3.C load_g3.C     \endlink - macro to load the libraries to run the example with Geant3
+  \link       Gflash/run_g3.C run_g3.C      \endlink - macro for running example
+  \link Gflash/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry(default)
   </pre>
 
   Common macro (called by run_g3.C/run_g4.C):
@@ -49,13 +42,9 @@
   \link Gflash/set_vis.C set_vis.C\endlink - setting visualization
   </pre>
 
-\section gflash_s4 To run example 
+\section gflash_s3 To run example
 
   <pre>
-  With G3 + TGeo:
-  root[0] .x \link Gflash/load_g3.C load_g3.C\endlink
-  root[1] .x \link Gflash/run_g3.C run_g3.C\endlink
-
   With G4:
   root[0] .x \link Gflash/load_g4.C load_g4.C\endlink
   root[1] .x \link Gflash/run_g4.C run_g4.C\endlink
@@ -63,12 +52,11 @@
   With G4 + TGeo navigation:
   root[0] .x \link Gflash/load_g4.C load_g4.C\endlink
   root[1] .x \link Gflash/run_g4.C run_g4.C\endlink(\link Gflash/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);
-
   </pre>
 
-\section gflash_s5 Classes
+\section gflash_s4 Classes
 
 The documentation of all classes and the basic macros for this example
-is availabe on \link Gflash this page \endlink. 
+is availabe on \link Gflash this page \endlink.
 
 */
