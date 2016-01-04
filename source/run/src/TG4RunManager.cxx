@@ -240,11 +240,12 @@ void TG4RunManager::ConfigureRunManager()
     G4cout << "CreatePhysicsList done." << G4endl;
 
   // User fast simulation
-  if ( TG4SpecialPhysicsList::Instance() ) {
-    TG4SpecialPhysicsList::Instance()->SetUserFastSimulation(
-      fRunConfiguration->CreateUserFastSimulation());
-  } else {
-    if ( fRunConfiguration->CreateUserFastSimulation() ) {
+  TG4VUserFastSimulation* userFastSimulation
+    = fRunConfiguration->CreateUserFastSimulation();
+  if ( userFastSimulation ) {
+    if ( TG4SpecialPhysicsList::Instance() ) {
+      TG4SpecialPhysicsList::Instance()->SetUserFastSimulation(userFastSimulation);
+    } else {
       TG4Globals::Warning(
         "TG4RunManager", "ConfigureRunManager",
         "TG4SpecialPhysicsList  must be instantiated to use fast simulation");

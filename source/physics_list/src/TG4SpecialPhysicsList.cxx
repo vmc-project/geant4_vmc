@@ -23,6 +23,7 @@
 #include "TG4ProcessMCMapPhysics.h"
 #include "TG4EmModelPhysics.h"
 #include "TG4FastSimulationPhysics.h"
+#include "TG4GflashFastSimulation.h"
 #include "TG4GeometryServices.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4G3ControlVector.h"
@@ -53,6 +54,7 @@ G4String TG4SpecialPhysicsList::AvailableSelections()
   selections += "stepLimiter ";
   selections += "specialCuts ";
   selections += "stackPopper ";
+  selections += "gflash ";
   
   return selections;
 }  
@@ -148,6 +150,7 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
 
   G4int itoken = 0;
   TString token = TG4Globals::GetToken(itoken, selection);
+  G4bool isGflash = false;
   while ( token != "" ) {
 
     if ( token == "specialCuts" ) { 
@@ -165,6 +168,9 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
         = new TG4StackPopperPhysics(tg4VerboseLevel); 
       RegisterPhysics(fStackPopperPhysics);
     }
+    else if ( token == "gflash") {
+      isGflash = true;
+    }
     else {
       TG4Globals::Warning("TG4SpecialPhysicsList", "Configure",
         "Unrecognized option " + token);
@@ -179,6 +185,9 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
   RegisterPhysics(fEmModelPhysics);
   fFastSimulationPhysics = new TG4FastSimulationPhysics(tg4VerboseLevel);
   RegisterPhysics(fFastSimulationPhysics);
+  if ( isGflash) {
+    fFastSimulationPhysics->SetUserFastSimulation(new TG4GflashFastSimulation());
+  }
 }    
 
 //

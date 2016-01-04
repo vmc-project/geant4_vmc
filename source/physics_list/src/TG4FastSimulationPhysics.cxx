@@ -266,3 +266,23 @@ void TG4FastSimulationPhysics::ConstructProcess()
     G4cout << "### Fast simulation models added to physics processes" << G4endl;
   }
 }
+
+//
+// public methods
+//
+
+//_____________________________________________________________________________
+void TG4FastSimulationPhysics::SetUserFastSimulation(TG4VUserFastSimulation* fastSimulation) 
+{
+/// Set user fast simulation class.
+/// Print a warning if fUserFastSimulation is already defined and ignore setting.
+
+  if ( fUserFastSimulation ) {
+    TG4Globals::Warning(
+      "TG4FastSimulationPhysics", "SetUserFastSimulation",
+      "Fast simulation was already defined, setting is ignored.");
+    return;
+  }
+
+  fUserFastSimulation = fastSimulation;
+}

@@ -80,12 +80,5 @@ class TG4FastSimulationPhysics : public TG4VPhysicsConstructor
     TG4VUserFastSimulation* fUserFastSimulation;
 };
 
-// inline functions
-
-inline void TG4FastSimulationPhysics::SetUserFastSimulation(TG4VUserFastSimulation* fastSimulation) {
-  /// Set user fast simulation class
-  fUserFastSimulation = fastSimulation;
-}
-
 #endif //TG4_FAST_SIMULATION_PHYSICS_H
 
