@@ -37,9 +37,11 @@
 using namespace std;
 
 /// \cond CLASSIMP
-ClassImp(Gflash::MCApplication)
+ClassImp(VMC::Gflash::MCApplication)
 /// \endcond
 
+namespace VMC
+{
 namespace Gflash
 {
 
@@ -482,5 +484,6 @@ void MCApplication::FinishEvent()
   fStack->Reset();  
 }
 
+}
 }
 

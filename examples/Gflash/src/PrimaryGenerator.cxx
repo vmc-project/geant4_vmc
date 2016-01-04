@@ -27,9 +27,11 @@
 #include "PrimaryGenerator.h"
 
 /// \cond CLASSIMP
-ClassImp(Gflash::PrimaryGenerator)
+ClassImp(VMC::Gflash::PrimaryGenerator)
 /// \endcond
 
+namespace VMC
+{
 namespace Gflash
 {
 
@@ -144,4 +146,5 @@ void PrimaryGenerator::GeneratePrimaries(const TVector3& origin)
   for (Int_t i=0; i<fNofPrimaries; i++) GenerateOnePrimary(origin);
 }
 
+}
 }

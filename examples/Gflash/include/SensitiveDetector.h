@@ -20,6 +20,8 @@
 #include <TNamed.h>
 #include <TClonesArray.h>
 
+namespace VMC
+{
 namespace Gflash
 {
 
@@ -76,6 +78,7 @@ inline void SensitiveDetector::SetVerboseLevel(Int_t level)
 inline TClonesArray* SensitiveDetector::GetHitsCollection() const
 { return fCaloHitsCollection; }
 
+}
 }
 
 #endif //EX02_CALORIMETER_SD_H

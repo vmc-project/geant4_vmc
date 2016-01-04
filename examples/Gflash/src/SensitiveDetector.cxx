@@ -25,11 +25,13 @@
 #include <TTree.h>
 
 /// \cond CLASSIMP
-ClassImp(Gflash::SensitiveDetector)
+ClassImp(VMC::Gflash::SensitiveDetector)
 /// \endcond
 
 using namespace std;
 
+namespace VMC
+{
 namespace Gflash
 {
 
@@ -45,7 +47,7 @@ SensitiveDetector::SensitiveDetector(const char* name)
 /// \param name      The calorimeter hits collection name
 /// \param detector  The detector construction
 
-  fCaloHitsCollection = new TClonesArray("Gflash::Hit", 500);
+  fCaloHitsCollection = new TClonesArray("VMC::Gflash::Hit", 500);
 }
 
 //_____________________________________________________________________________
@@ -185,4 +187,5 @@ void SensitiveDetector::PrintTotal() const
        << setw(7) << totEdep * 1.0e03 << endl;
 }
 
+}
 }

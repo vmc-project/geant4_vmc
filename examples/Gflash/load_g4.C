@@ -21,7 +21,4 @@ void load_g4()
   // Load this example library
   gSystem->Load("libmtroot");
   gSystem->Load("libvmc_Gflash");
-
-  // Load library with a user run configuration
-  gSystem->Load("libgeant4_Gflash");
 }  

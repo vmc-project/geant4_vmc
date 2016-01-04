@@ -29,6 +29,8 @@
 class Ex03MCStack;
 class TVirtualMCRootManager;
 
+namespace VMC
+{
 namespace Gflash
 {
 
@@ -117,6 +119,7 @@ inline SensitiveDetector* MCApplication::GetCalorimeterSD() const
 inline PrimaryGenerator* MCApplication::GetPrimaryGenerator() const
 { return fPrimaryGenerator; }
 
+}
 }
 
 #endif //GFLASH_MC_APPLICATION_H

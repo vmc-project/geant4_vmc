@@ -21,6 +21,8 @@
 #include <TObject.h>
 #include <TVector3.h>
 
+namespace VMC
+{
 namespace Gflash
 {
 
@@ -59,6 +61,7 @@ class Hit : public TObject
   ClassDef(Hit,1) //Hit  
 };
 
+}
 }
 
 #endif //GFLASH_HIT_H

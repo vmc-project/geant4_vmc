@@ -22,8 +22,8 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
 /// \param configMacro configuration macro name, default \ref Gflash/g3Config.C 
 
   // MC application
-  Gflash::MCApplication* appl 
-    =  new Gflash::MCApplication("ExampleGflash", "The exampleGflash MC application");
+  VMC::Gflash::MCApplication* appl
+    =  new VMC::Gflash::MCApplication("ExampleGflash", "The exampleGflash MC application");
   appl->InitMC(configMacro);
 
   // visualization setting

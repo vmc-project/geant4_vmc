@@ -23,8 +23,9 @@
 # activate Gflash sensitive detectors
 /mcDet/setGflash true
 # fast simulation configuration
-/mcPhysics/fastSimulation/setModel fastShowerModel
+/mcPhysics/fastSimulation/setModel GflashShowerModel
 /mcPhysics/fastSimulation/setParticles all
 /mcPhysics/fastSimulation/setRegions AirB
+/mcPhysics/setGflashMaterial PbWO4
 
 #/tracking/verbose 1

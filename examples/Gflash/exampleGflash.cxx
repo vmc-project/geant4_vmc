@@ -16,7 +16,7 @@
 #include "MCApplication.h"
 
 #ifdef USE_GEANT4
-#include "RunConfiguration.h"
+#include "TG4RunConfiguration.h"
 #include "TGeant4.h"
 #endif
 
@@ -39,14 +39,14 @@ int main(int argc, char** argv)
 #endif
 
   // Create MC application (thread local)
-  Gflash::MCApplication* appl 
-    =  new Gflash::MCApplication("ExampleGflash", 
-                                 "The exampleGflash MC application");
+  VMC::Gflash::MCApplication* appl
+    =  new VMC::Gflash::MCApplication("ExampleGflash",
+                                      "The exampleGflash MC application");
 
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4 
-  Gflash::RunConfiguration* runConfiguration 
-    = new Gflash::RunConfiguration("geomRootToGeant4", "FTFP_BERT");
+  TG4RunConfiguration* runConfiguration
+    = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT", "gflash");
 
   // TGeant4
   TGeant4* geant4

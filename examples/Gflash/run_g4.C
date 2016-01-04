@@ -15,15 +15,15 @@
 
 void run_g4(const TString& configMacro = "g4Config.C")
 {
-/// Macro function for running ExampleGflash with Geant4 from
+/// Macro function for running Example Gflash with Geant4 from
 /// Root interactive session
 /// Note that since Root 6 the libraries have to be loaded first
 /// via load_g4.C.
 /// \param configMacro configuration macro name, default \ref Gflash/g4Config.C 
 
   // MC application
-  Gflash::MCApplication* appl 
-    =  new Gflash::MCApplication("ExampleGflash", "The exampleGflash MC application");
+  VMC::Gflash::MCApplication* appl
+    =  new VMC::Gflash::MCApplication("ExampleGflash", "The exampleGflash MC application");
   appl->InitMC(configMacro);
 
   // Visualization setting

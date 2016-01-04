@@ -20,12 +20,12 @@ void Config()
 /// For geometry defined with Root and selected G4Root navigation
 
   // Run configuration
-  Gflash::RunConfiguration* runConfiguration 
-    = new Gflash::RunConfiguration("geomRoot", "FTFP_BERT");
+  TG4RunConfiguration* runConfiguration
+    = new TG4RunConfiguration("geomRoot", "FTFP_BERT", "gflash");
   
   // Run configuration with special cuts activated
-  // Gflash::RunConfiguration* runConfiguration 
-  //   = new Gflash::RunConfiguration("geomRoot", "FTFP_BERT", "specialCuts");
+  // TG4RunConfiguration* runConfiguration
+  //   = new TG4RunConfiguration("geomRoot", "FTFP_BERT", "specialCuts+gflash");
   
   // TGeant4
   TGeant4* geant4

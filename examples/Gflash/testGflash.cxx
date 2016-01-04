@@ -23,7 +23,7 @@
 ///   [-g4m,  --g4-macro]:           Geant4 macro
 ///   [-g4vm, --g4-vis-macro]:       Geant4 visualization macro
 ///   [-g3g,  --g3-geometry]:        Geant3 geometry option (TGeant3,TGeant3TGeo)
-///   [-r4m,  --root-macro]:         Root macro
+///   [-rm,   --root-macro]:         Root macro
 ///   [-v,    --verbose]:            verbose option (yes,no)
 ///
 /// Note that the g4* and g3* options are available only when built
@@ -39,7 +39,7 @@
 
 #ifdef USE_GEANT4
 #include "TGeant4.h"
-#include "RunConfiguration.h"
+#include "TG4RunConfiguration.h"
 #endif
 
 #ifdef USE_GEANT3
@@ -72,7 +72,7 @@ void PrintUsage(std::string programName)
 #ifdef USE_GEANT3
   std::cerr << "   [-g3g,  --g3-geometry]:        Geant3 geometry option (TGeant3,TGeant3TGeo)" << std::endl;
 #endif
-  std::cerr << "   [-r4m,  --root-macro]:         Root macro" << std::endl;
+  std::cerr << "   [-rm,   --root-macro]:         Root macro" << std::endl;
   std::cerr << "   [-v,    --verbose]:            verbose option (yes,no)" << std::endl;
 }
 
@@ -144,7 +144,7 @@ int main(int argc, char** argv)
 #ifdef USE_GEANT4
   std::string g4Geometry = "geomRootToGeant4";
   std::string g4PhysicsList = "FTFP_BERT";
-  std::string g4SpecialPhysics = "stepLimiter";
+  std::string g4SpecialPhysics = "stepLimiter+gflash";
   std::string g4Macro = "g4config.in";
   std::string g4VisMacro = "g4vis.in";
   std::string g4Session = "";
@@ -158,7 +158,9 @@ int main(int argc, char** argv)
   for ( Int_t i=1; i<argc; i=i+2 ) {
     std::cout << "processing " << argv[i] << " with " <<  argv[i+1] << std::endl;
 #ifdef USE_GEANT4
-    if      ( std::string(argv[i]) == "--g4-physics-list" ||
+    if      ( std::string(argv[i]) == "--g4-geometry" ||
+              std::string(argv[i]) == "-g4g")  g4Geometry = argv[i+1];
+    else if ( std::string(argv[i]) == "--g4-physics-list" ||
               std::string(argv[i]) == "-g4pl") g4PhysicsList = argv[i+1];
     else if ( std::string(argv[i]) == "--g4-special-physics" ||
               std::string(argv[i]) == "-g4sp") g4SpecialPhysics = argv[i+1];
@@ -198,14 +200,14 @@ int main(int argc, char** argv)
   // end of code to process arguments
 
   // Create MC application (thread local)
-  Gflash::MCApplication* appl 
-    =  new Gflash::MCApplication("ExampleGflash", 
-                                 "The exampleGflash MC application");
+  VMC::Gflash::MCApplication* appl
+    =  new VMC::Gflash::MCApplication("ExampleGflash",
+                                      "The exampleGflash MC application");
 
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4 
-  Gflash::RunConfiguration* runConfiguration 
-    = new Gflash::RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics);
+  TG4RunConfiguration* runConfiguration
+    = new TG4RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics);
 
   // TGeant4
   TGeant4* geant4

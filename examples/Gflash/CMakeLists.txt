@@ -23,7 +23,6 @@ project(Gflash)
 # Define unique names of libraries and executables based on project name
 #
 set(library_name vmc_${PROJECT_NAME})
-set(g4library_name geant4_${PROJECT_NAME})
 set(program_name example${PROJECT_NAME})
 set(test_name test${PROJECT_NAME})
 
@@ -102,26 +101,12 @@ if (NOT MC_FOUND)
 endif(NOT MC_FOUND)
 
 #----------------------------------------------------------------------------
-# Process the example geant4 dependent library
-#
-if (Geant4_FOUND)
-  add_subdirectory(geant4)
-  include_directories(
-    ${PROJECT_SOURCE_DIR}/geant4/include)
-endif()
-
-#----------------------------------------------------------------------------
 # Add the executables, and link then to all libraries
 #
 add_executable(${MC_PREFIX}vmc_${program_name} ${program_name}.cxx)
 add_executable(${MC_PREFIX}vmc_${test_name} ${test_name}.cxx)
-if (Geant4_FOUND)
-  target_link_libraries(${MC_PREFIX}vmc_${program_name} ${library_name} ${g4library_name} ${MC_LIBRARIES})
-  target_link_libraries(${MC_PREFIX}vmc_${test_name} ${library_name} ${g4library_name} ${MC_LIBRARIES})
-else()
-  target_link_libraries(${MC_PREFIX}vmc_${program_name} ${library_name} ${MC_LIBRARIES})
-  target_link_libraries(${MC_PREFIX}vmc_${test_name} ${library_name} ${MC_LIBRARIES})
-endif()
+target_link_libraries(${MC_PREFIX}vmc_${program_name} ${library_name} ${MC_LIBRARIES})
+target_link_libraries(${MC_PREFIX}vmc_${test_name} ${library_name} ${MC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets

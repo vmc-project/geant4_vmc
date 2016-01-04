@@ -22,6 +22,8 @@
 
 class TVirtualMCStack;
 
+namespace VMC
+{
 namespace Gflash
 {
 
@@ -94,6 +96,7 @@ inline TVector3 PrimaryGenerator::GetVertexPosition() const
 inline TVector3 PrimaryGenerator::GetVertexDirection() const
 { return fVertexDirection; }
 
+}
 }
 
 #endif //GFLASH_PRIMARY_GENERATOR_H

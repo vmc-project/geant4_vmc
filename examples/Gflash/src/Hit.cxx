@@ -20,11 +20,13 @@
 #include "Hit.h"
 
 /// \cond CLASSIMP
-ClassImp(Gflash::Hit)
+ClassImp(VMC::Gflash::Hit)
 /// \endcond
 
 using namespace std;
 
+namespace VMC
+{
 namespace Gflash
 {
 
@@ -63,4 +65,5 @@ void Hit::Reset()
   fCrystalNumber = 0;
 }
 
+}
 }

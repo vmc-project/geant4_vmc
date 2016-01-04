@@ -23,8 +23,8 @@ void read()
   gSystem->Load("libexampleGflash");
   
   // MC application
-  Gflash::MCApplication* appl 
-    =  new Gflash::MCApplication("ExampleGflash", "The exampleGflash MC application", kRead);
+  VMC::Gflash::MCApplication* appl
+    =  new VMC::Gflash::MCApplication("ExampleGflash", "The exampleGflash MC application", kRead);
 
   for (Int_t i=0; i<5; i++) {
     cout << "   Event no " << i+1 << ":" << endl;

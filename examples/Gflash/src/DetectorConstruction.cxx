@@ -30,9 +30,11 @@
 using namespace std;
 
 /// \cond CLASSIMP
-ClassImp(Gflash::DetectorConstruction)
+ClassImp(VMC::Gflash::DetectorConstruction)
 /// \endcond
 
+namespace VMC
+{
 namespace Gflash
 {
 
@@ -207,4 +209,5 @@ void DetectorConstruction::ConstructSDandField()
 }
 */
 
+}
 }

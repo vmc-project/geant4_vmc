@@ -18,11 +18,9 @@ void Config()
 /// The configuration function for Geant4 VMC for Gflash example
 /// called during MC application initialization. 
 
-  cout << "Constructing Gflash::RunConfiguration " << endl;
-
   // Run configuration
-  Gflash::RunConfiguration* runConfiguration 
-      = new Gflash::RunConfiguration("geomRootToGeant4", "FTFP_BERT");
+  TG4RunConfiguration* runConfiguration
+      = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT", "gflash");
   
   // Run configuration with special cuts activated
   // Gflash::RunConfiguration* runConfiguration 

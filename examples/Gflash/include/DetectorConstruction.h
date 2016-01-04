@@ -24,6 +24,8 @@
 #include <TObject.h>
 #include <TString.h>
 
+namespace VMC
+{
 namespace Gflash
 {
 
@@ -50,6 +52,7 @@ class DetectorConstruction : public TObject
   ClassDef(DetectorConstruction,1) //DetectorConstruction
 };
 
+}
 }
 
 #endif //GFLASH_DETECTOR_CONSTRUCTION_H
