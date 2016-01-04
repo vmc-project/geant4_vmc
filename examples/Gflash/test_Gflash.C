@@ -19,7 +19,6 @@ void test_Gflash(const TString& configMacro)
 {
 /// Macro function for testing example Gflash
 /// \param configMacro  configuration macro loaded in initialization
-/// \param nofEvents  number of events ti be run
 /// 
 /// Run 10 events and print the calorimeter hits.
 
