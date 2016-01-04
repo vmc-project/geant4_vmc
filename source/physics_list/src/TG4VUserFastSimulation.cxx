@@ -74,7 +74,7 @@ void TG4VUserFastSimulation::Register(G4VFastSimulationModel* fastSimulationMode
     text += fastSimulationModel->GetName().data();
     text += " configuration was not found.";
     TG4Globals::Warning(
-      "TG4FastSimulationPhysics", "UpdateRegions",
+      "TG4VUserFastSimulation", "Register",
       text + TG4Globals::Endl()
       + TString("The model configuration has to set firts.") + TG4Globals::Endl()
       + TString("/mcPhysics/fastSimulation/setModel command or SetModel() function."));
