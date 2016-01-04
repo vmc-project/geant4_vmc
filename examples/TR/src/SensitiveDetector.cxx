@@ -21,11 +21,13 @@
 #include <Riostream.h>
 
 /// \cond CLASSIMP
-ClassImp(TR::SensitiveDetector)
+ClassImp(VMC::TR::SensitiveDetector)
 /// \endcond
 
 using namespace std;
 
+namespace VMC
+{
 namespace TR
 {
 
@@ -116,4 +118,5 @@ void SensitiveDetector::Print(Option_t* /*option*/) const
        << endl << endl;
 }
 
+}
 }

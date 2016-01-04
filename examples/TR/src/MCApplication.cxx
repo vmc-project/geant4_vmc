@@ -38,9 +38,11 @@
 using namespace std;
 
 /// \cond CLASSIMP
-ClassImp(TR::MCApplication)
+ClassImp(VMC::TR::MCApplication)
 /// \endcond
 
+namespace VMC
+{
 namespace TR
 {
 
@@ -475,4 +477,4 @@ void MCApplication::FinishEvent()
 }
 
 }
-
+}

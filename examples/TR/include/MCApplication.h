@@ -26,6 +26,8 @@ class Ex03MCStack;
 
 class TVirtualMCRootManager;
 
+namespace VMC
+{
 namespace TR
 {
 
@@ -142,6 +144,7 @@ inline void MCApplication::SetOldGeometry(Bool_t oldGeometry)
 inline void MCApplication::SetControls(Bool_t isControls)
 { fIsControls = isControls; }
 
+}
 }
 
 #endif //MC_APPLICATION_H

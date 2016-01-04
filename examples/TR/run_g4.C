@@ -22,8 +22,8 @@ void run_g4(const TString& configMacro = "g4Config.C")
 /// \param configMacro configuration macro name, default \ref TR/g4Config.C 
 
   // MC application
-  TR::MCApplication* appl 
-    =  new TR::MCApplication("ExampleTR", "The exampleTR MC application");
+  VMC::TR::MCApplication* appl
+    =  new VMC::TR::MCApplication("ExampleTR", "The exampleTR MC application");
   appl->GetPrimaryGenerator()->SetNofPrimaries(1);
   appl->SetPrintModulo(10000);
 
@@ -39,6 +39,6 @@ void run_g4(const TString& configMacro = "g4Config.C")
   //((TGeant4*)gMC)->StartGeantUI();
 
   appl->RunMC(5000);
-   
+
   delete appl;
 }  

@@ -20,6 +20,8 @@
 
 #include <TNamed.h>
 
+namespace VMC
+{
 namespace TR
 {
 
@@ -67,6 +69,7 @@ inline void SensitiveDetector::SetVerboseLevel(Int_t level)
 inline Double_t SensitiveDetector::GetEdep() const
 { return fEdep; }
 
+}
 }
 
 #endif //SENSITIVE_DETECTOR_H

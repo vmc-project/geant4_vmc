@@ -24,9 +24,11 @@
 #include <TDatabasePDG.h>
 
 /// \cond CLASSIMP
-ClassImp(TR::PrimaryGenerator)
+ClassImp(VMC::TR::PrimaryGenerator)
 /// \endcond
 
+namespace VMC
+{
 namespace TR
 {
 
@@ -125,4 +127,5 @@ void PrimaryGenerator::GeneratePrimaries()
   }
 }
 
+}
 }

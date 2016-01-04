@@ -22,8 +22,8 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
 /// \param configMacro configuration macro name, default \ref TR/g3Config.C 
 
   // MC application
-  TR::MCApplication* appl 
-    =  new TR::MCApplication("ExampleTR", "The exampleTR MC application");
+  VMC::TR::MCApplication* appl
+    =  new VMC::TR::MCApplication("ExampleTR", "The exampleTR MC application");
   appl->GetPrimaryGenerator()->SetNofPrimaries(1);
   appl->SetPrintModulo(10000);
 
@@ -33,6 +33,6 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
   // set_vis();
 
   appl->RunMC(5000);
-  
+
   delete appl;
 }  

@@ -20,6 +20,8 @@
 
 #include <TObject.h>
 
+namespace VMC
+{
 namespace TR
 {
 
@@ -43,6 +45,7 @@ class DetectorConstruction : public TObject
   ClassDef(DetectorConstruction,1) //DetectorConstruction
 };
 
+}
 }
 
 #endif //DETECTOR_CONSTRUCTION_H

@@ -21,6 +21,8 @@
 
 class TVirtualMCStack;
 
+namespace VMC
+{
 namespace TR
 {
 
@@ -62,6 +64,7 @@ class PrimaryGenerator : public TObject
 inline void  PrimaryGenerator::SetNofPrimaries(Int_t nofPrimaries)
 { fNofPrimaries = nofPrimaries; }
 
+}
 }
 
 #endif //PRIMARY_GENERATOR_H

@@ -26,9 +26,11 @@
 using namespace std;
 
 /// \cond CLASSIMP
-ClassImp(TR::DetectorConstruction)
+ClassImp(VMC::TR::DetectorConstruction)
 /// \endcond
 
+namespace VMC
+{
 namespace TR
 {
 
@@ -258,4 +260,5 @@ void DetectorConstruction::ConstructGeometry()
   cout << endl;
 }
 
+}
 }

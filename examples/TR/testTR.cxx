@@ -206,9 +206,9 @@ int main(int argc, char** argv)
   // end of code to process arguments
 
   // Create MC application (thread local)
-  TR::MCApplication* appl 
-    =  new TR::MCApplication("ExampleTR", 
-                             "The exampleTR MC application");
+  VMC::TR::MCApplication* appl
+    =  new VMC::TR::MCApplication("ExampleTR",
+                                  "The exampleTR MC application");
   appl->GetPrimaryGenerator()->SetNofPrimaries(1);
   appl->SetPrintModulo(10000);
 

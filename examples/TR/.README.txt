@@ -16,11 +16,11 @@
   The radiator properties should be then set via the Geant4  VMC
   command
 \verbatim
-  /mcDet/setRadiator volumeName xtrModel foilMaterial gasMaterial foilDensity gasDensity foilNUmber
+/mcDet/setRadiator volumeName xtrModel foilMaterial gasMaterial foilDensity gasDensity foilNumber
 \endverbatim
 
-  For more details see the description in Geant4 example
-    geant4/examples/extended/electromagnetic/TestEm10
+  For more details see the Geant4 example description at:
+  - http://geant4.web.cern.ch/geant4/UserDocumentation/Doxygen/examples_doc/html/ExampleTestEm10.html
 
 \section etr_s2 Macros
 
