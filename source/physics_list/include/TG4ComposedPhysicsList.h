@@ -50,6 +50,8 @@ class TG4ComposedPhysicsList: public G4VUserPhysicsList,
     void SetCutForPositron(G4double cut);
     void SetCutForProton(G4double cut);
 
+    void SetProductionCutsTableEnergyRange(G4double min, G4double max);
+
     void PrintAllProcesses() const;
     void DumpAllProcesses() const;
 
@@ -68,6 +70,15 @@ class TG4ComposedPhysicsList: public G4VUserPhysicsList,
     // data members
     TG4ComposedPhysicsMessenger       fMessenger;    ///< messenger
     std::vector<G4VUserPhysicsList*>  fPhysicsLists; ///< physics lists
+
+    /// Info if the production cuts table energy range is redefined by user
+    G4bool  fIsProductionCutsTableEnergyRange;
+
+    /// The production cuts table energy range minimum redefined by user
+    G4double  fProductionCutsTableEnergyMin;
+
+    /// The production cuts table energy range maximum redefined by user
+    G4double  fProductionCutsTableEnergyMax;
 };
 
 #endif //TG4_COMPOSED_MODULAR_PHYSICS_H

@@ -27,6 +27,8 @@
 #include <G4UIcmdWithAnInteger.hh>
 #include <G4NeutronHPManager.hh>
 #include <G4HadronicProcessStore.hh>
+#include <G4AnalysisUtilities.hh>
+#include <G4UnitsTable.hh>
 
 //______________________________________________________________________________
 TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
@@ -85,6 +87,9 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
   fRangeAllCutCmd->SetUnitCategory("Length");
   fRangeAllCutCmd->SetRange("AllCut>0.0");
   fRangeAllCutCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
+
+  CreateProductionCutsTableEnergyRangeCmd();
+
   fPrintAllProcessesCmd 
     = new G4UIcmdWithoutParameter("/mcPhysics/printAllProcess", this);  
   fPrintAllProcessesCmd->SetGuidance("Print names for all instantiated processes.");
@@ -153,6 +158,7 @@ TG4ComposedPhysicsMessenger::~TG4ComposedPhysicsMessenger()
   delete fRangePositronCutCmd;
   delete fRangeProtonCutCmd;
   delete fRangeAllCutCmd;
+  delete fProductionCutsTableEnergyRangeCmd;
   delete fPrintAllProcessesCmd;
   delete fDumpAllProcessesCmd;
   delete fPrintProcessMCMapCmd;
@@ -165,12 +171,45 @@ TG4ComposedPhysicsMessenger::~TG4ComposedPhysicsMessenger()
 }
 
 //
+// private methods
+//
+
+//______________________________________________________________________________
+void TG4ComposedPhysicsMessenger::CreateProductionCutsTableEnergyRangeCmd()
+{
+/// Create poductionCutsTableEnergyRange command
+
+  G4UIparameter* minEnergy = new G4UIparameter("minEnergy", 'd', false);
+  minEnergy->SetGuidance("Production cuts table minimum energy.");
+
+  G4UIparameter* minEnergyUnit = new G4UIparameter("minEnergyUnit", 's', false);
+  minEnergyUnit->SetGuidance("Production cuts table min energy unit.");
+
+  G4UIparameter* maxEnergy = new G4UIparameter("maxEnergy", 'd', false);
+  maxEnergy->SetGuidance("Production cuts table maximum energy.");
+
+  G4UIparameter* maxEnergyUnit = new G4UIparameter("maxEnergyUnit", 's', false);
+  maxEnergyUnit->SetGuidance("Production cuts table max energy unit.");
+
+  fProductionCutsTableEnergyRangeCmd
+    = new G4UIcommand("/mcPhysics/productionCutsTableEnergyRange", this);
+  fProductionCutsTableEnergyRangeCmd
+    ->SetGuidance("Set the production cuts table energy range.");
+  fProductionCutsTableEnergyRangeCmd->SetParameter(minEnergy);
+  fProductionCutsTableEnergyRangeCmd->SetParameter(minEnergyUnit);
+  fProductionCutsTableEnergyRangeCmd->SetParameter(maxEnergy);
+  fProductionCutsTableEnergyRangeCmd->SetParameter(maxEnergyUnit);
+  fProductionCutsTableEnergyRangeCmd->AvailableForStates(G4State_PreInit);
+}
+
+
+//
 // public methods
 //
 
 //______________________________________________________________________________
 void TG4ComposedPhysicsMessenger::SetNewValue(G4UIcommand* command,
-                                                 G4String newValue)
+                                              G4String newValue)
 { 
 /// Apply command to the associated object.
   
@@ -204,6 +243,19 @@ void TG4ComposedPhysicsMessenger::SetNewValue(G4UIcommand* command,
     fPhysicsList->SetCutForElectron(cut);
     fPhysicsList->SetCutForPositron(cut);
     fPhysicsList->SetCutForProton(cut);
+  }
+  else if ( command == fProductionCutsTableEnergyRangeCmd ){
+    // tokenize parameters in a vector
+    std::vector<G4String> parameters;
+    G4Analysis::Tokenize(newValue, parameters);
+
+    G4int counter = 0;
+    G4double minEnergy = G4UIcommand::ConvertToDouble(parameters[counter++]);
+    G4double minEUnit  = G4UnitDefinition::GetValueOf(parameters[counter++]);
+    G4double maxEnergy = G4UIcommand::ConvertToDouble(parameters[counter++]);
+    G4double maxEUnit  = G4UnitDefinition::GetValueOf(parameters[counter++]);
+    fPhysicsList
+      ->SetProductionCutsTableEnergyRange(minEnergy*minEUnit, maxEnergy*maxEUnit);
   }
   else if (command == fPrintAllProcessesCmd) {
     fPhysicsList->PrintAllProcesses();

@@ -31,11 +31,12 @@ class G4UIcmdWithAnInteger;
 ///        physics list and related classes
 ///
 /// Implements commands:
-/// - /mcPhysics/rangeCutForElectron 
-/// - /mcPhysics/rangeCutForPositron
-/// - /mcPhysics/rangeCutForGamma
-/// - /mcPhysics/rangeCutForProton
-/// - /mcPhysics/rangeCuts
+/// - /mcPhysics/rangeCutForElectron  value [unit]
+/// - /mcPhysics/rangeCutForPositron  value [unit]
+/// - /mcPhysics/rangeCutForGamma     value [unit]
+/// - /mcPhysics/rangeCutForProton    value [unit]
+/// - /mcPhysics/rangeCuts            value [unit]
+/// - /mcPhysics/productionCutsTableEnergyRange  minValue maxValue [unit]
 /// - /mcPhysics/printProcessMCMap
 /// - /mcPhysics/printProcessControlMap
 /// - /mcPhysics/printVolumeLimits [volName]
@@ -63,6 +64,9 @@ class TG4ComposedPhysicsMessenger : public G4UImessenger
     /// Not implemented
     TG4ComposedPhysicsMessenger& operator=(const TG4ComposedPhysicsMessenger& right);
 
+    // methods
+    void CreateProductionCutsTableEnergyRangeCmd();
+
     //
     // data members
     
@@ -86,6 +90,9 @@ class TG4ComposedPhysicsMessenger : public G4UImessenger
 
     /// rangeCuts command
     G4UIcmdWithADoubleAndUnit*  fRangeAllCutCmd;
+
+    /// productionCutsTableEnergyRange command
+    G4UIcommand*                fProductionCutsTableEnergyRangeCmd;
     
     /// printAllProcess command 
     G4UIcmdWithoutParameter*    fPrintAllProcessesCmd;

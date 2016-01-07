@@ -23,13 +23,18 @@
 #include <G4Electron.hh>
 #include <G4Positron.hh>
 #include <G4Proton.hh>
+#include <G4RegionStore.hh>
+#include <G4SystemOfUnits.hh>
 
 //_____________________________________________________________________________
 TG4ComposedPhysicsList::TG4ComposedPhysicsList()
   : G4VUserPhysicsList(),
     TG4Verbose("composedPhysicsList"),
     fMessenger(this),
-    fPhysicsLists()
+    fPhysicsLists(),
+    fIsProductionCutsTableEnergyRange(false),
+    fProductionCutsTableEnergyMin(0.),
+    fProductionCutsTableEnergyMax(0.)
 {
 /// Default constructor
 
@@ -102,14 +107,49 @@ void TG4ComposedPhysicsList::SetCuts()
 {
 /// Set cut values
 
+  if ( VerboseLevel() >1 )
+    G4cout << "TG4ComposedPhysicsList::SetCuts" << G4endl;
+
+  if ( fIsProductionCutsTableEnergyRange ) {
+    G4ProductionCutsTable::GetProductionCutsTable()
+      ->SetEnergyRange(fProductionCutsTableEnergyMin, fProductionCutsTableEnergyMax);
+  }
+
+  // Get default range cut values from physics manager
+  G4double rangeCutGam = TG4PhysicsManager::Instance()->GetCutForGamma();
+  G4double rangeCutEle = TG4PhysicsManager::Instance()->GetCutForElectron();
+  G4double rangeCutPos = TG4PhysicsManager::Instance()->GetCutForPositron();
+  G4double rangeCutPro = TG4PhysicsManager::Instance()->GetCutForProton();
+
   // Set cut values for gamma at first and for e- second and next for e+,
   // because some processes for e+/e- need cut values for gamma
-  SetCutValue(TG4PhysicsManager::Instance()->GetCutForGamma(), "gamma");
-  SetCutValue(TG4PhysicsManager::Instance()->GetCutForElectron(), "e-");
-  SetCutValue(TG4PhysicsManager::Instance()->GetCutForPositron(), "e+");
-  SetCutValue(TG4PhysicsManager::Instance()->GetCutForProton(), "proton");
+  SetCutValue(rangeCutGam, "gamma");
+  SetCutValue(rangeCutEle, "e-");
+  SetCutValue(rangeCutPos, "e+");
+  SetCutValue(rangeCutPro, "proton");
 
-  if ( VerboseLevel() > 1 ) DumpCutValuesTable();
+  // Set the default production cuts to all already created regions.
+  // The cuts can be then further customized via VMC cuts or
+  // via Geant4 UI commands called after G4RunManager initialization
+  // (in VMC examples in g4config2.in macros)
+
+  // Loop over regions
+  G4RegionStore* regionStore = G4RegionStore::GetInstance();
+  for (G4int i=0; i<G4int(regionStore->size()); i++) {
+    G4Region* region = (*regionStore)[i];
+
+    // skip regions which already have production cuts defined
+    if ( region->GetProductionCuts() ) continue;
+
+    G4ProductionCuts* cuts = new G4ProductionCuts();
+    cuts->SetProductionCut(rangeCutGam, 0);
+    cuts->SetProductionCut(rangeCutEle, 1);
+    cuts->SetProductionCut(rangeCutPos, 2);
+    cuts->SetProductionCut(rangeCutPro, 3);
+    region->SetProductionCuts(cuts);
+  }
+
+  if ( VerboseLevel() > 0 ) DumpCutValuesTable();
 }
 
 //_____________________________________________________________________________
@@ -142,6 +182,16 @@ void TG4ComposedPhysicsList::SetCutForProton(G4double cut)
 /// Set cut value for positron
 
   SetParticleCuts(cut, G4Proton::Proton());
+}
+
+//_____________________________________________________________________________
+void TG4ComposedPhysicsList::SetProductionCutsTableEnergyRange(G4double min, G4double max)
+{
+/// Set the production cuts table energy range
+
+  fProductionCutsTableEnergyMin = min;
+  fProductionCutsTableEnergyMax = max;
+  fIsProductionCutsTableEnergyRange = true;
 }
 
 //_____________________________________________________________________________
