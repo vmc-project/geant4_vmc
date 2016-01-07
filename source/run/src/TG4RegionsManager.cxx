@@ -794,11 +794,13 @@ void TG4RegionsManager::DumpRegion(const G4String& volName) const
   
   // Range cuts
   G4cout << G4endl;
+  G4cout << " Region name: " << region->GetName() << G4endl;
   G4cout << " Material : " << lv->GetMaterial()->GetName() << G4endl;
   G4cout << " Range cuts        : " 
          << " gamma " << G4BestUnit(cuts->GetProductionCut("gamma"),"Length")
          << "    e- " << G4BestUnit(cuts->GetProductionCut("e-"),"Length")
          << "    e+ " << G4BestUnit(cuts->GetProductionCut("e+"),"Length")
+         << " proton " << G4BestUnit(cuts->GetProductionCut("proton"),"Length")
          << G4endl;
          
   // Energy cuts
@@ -821,14 +823,18 @@ void TG4RegionsManager::DumpRegion(const G4String& volName) const
     = productionCutsTable->GetEnergyCutsVector(1);
   const std::vector<G4double>* energyCutsPos 
     = productionCutsTable->GetEnergyCutsVector(2);
+  const std::vector<G4double>* energyCutsPro
+    = productionCutsTable->GetEnergyCutsVector(3);
     
   G4double cutGam = (*energyCutsGam)[couple->GetIndex()];
   G4double cutEle = (*energyCutsEle)[couple->GetIndex()];
   G4double cutPos = (*energyCutsPos)[couple->GetIndex()];
+  G4double cutPro = (*energyCutsPro)[couple->GetIndex()];
   
   G4cout << " gamma " << G4BestUnit(cutGam,"Energy")
          << "    e- " << G4BestUnit(cutEle,"Energy")
-         << "    e+ " << G4BestUnit(cutPos,"Energy");
+         << "    e+ " << G4BestUnit(cutPos,"Energy")
+         << " proton " << G4BestUnit(cutPro,"Energy");
   G4cout << G4endl;
 
   G4RegionStore* regionStore =  G4RegionStore::GetInstance();
