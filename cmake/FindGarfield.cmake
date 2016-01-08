@@ -23,12 +23,12 @@ set(Garfield_LIB_DIR "" CACHE PATH "Alternative directory for Garfield libraries
 
 find_path(Garfield_INCLUDE_DIRS Sensor.hh
           HINTS ${Garfield_DIR}/include ${Garfield_INC_DIR}
-          $ENV{Garfield_HOME}/Include)
+          $ENV{GARFIELD_HOME}/Include)
 #message(STATUS Garfield_INCLUDE_DIRS ${Garfield_INCLUDE_DIRS})
 
 find_library(Garfield_LIBRARIES NAMES Garfield
 	         HINTS ${Garfield_DIR}/lib ${Garfield__LIB_DIR}
-             HINTS $ENV{Garfield_HOME}/Library)
+             HINTS $ENV{GARFIELD_HOME}/Library)
 #message(STATUS Garfield_LIBRARIES ${Garfield_LIBRARIES})
 
 #if (${Garfield_LIBRARY_DIR})
