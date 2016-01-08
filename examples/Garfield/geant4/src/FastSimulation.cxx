@@ -17,8 +17,8 @@
 
 #include "FastSimulation.h"
 #include "GarfieldG4FastSimulationModel.h"
-#include "GarfieldPhysics.h"
 #include "GarfieldMessenger.h"
+//#include "GarfieldPhysics.h"
 
 #include <Random.hh>
 
@@ -56,10 +56,6 @@ FastSimulation::FastSimulation()
   // Set seed to Garfield random engine
   ::Garfield::randomEngine.Seed(1);
 
-  //Get instance of singleton GarfieldPhysics before creation of the physics list
-  GarfieldPhysics* garfieldPhysics = GarfieldPhysics::GetInstance();
-  cout << "garfieldPhysics " << garfieldPhysics << endl;
-
   // Construct the Garfield messenger which defines the Garfield physics specific 
   // command
   fMessenger = new GarfieldMessenger();
@@ -85,6 +81,7 @@ FastSimulation::FastSimulation()
   double minEnergy_keV = 100;
   double maxEnergy_keV = 1e+12;
 
+  //GarfieldPhysics* garfieldPhysics = GarfieldPhysics::GetInstance();
   //garfieldPhysics->AddParticleName("e-", minEnergy_keV, maxEnergy_keV);
   //garfieldPhysics->AddParticleName("e+", minEnergy_keV, maxEnergy_keV);
 
