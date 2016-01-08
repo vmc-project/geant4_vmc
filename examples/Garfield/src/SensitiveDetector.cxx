@@ -169,7 +169,7 @@ void SensitiveDetector::Register()
 /// Register the hits collection in Root manager.
   
   TVirtualMCRootManager::Instance()
-    ->Register("hit", "Garfield::Hit", &fHit);
+    ->Register("hit", "VMC::Garfield::Hit", &fHit);
 }
 
 //_____________________________________________________________________________
