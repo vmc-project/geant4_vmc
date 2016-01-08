@@ -17,9 +17,9 @@
 
 \section exa_s1 Introduction
 
-  To demonstrate use of VirtualMC, several Geant4 examples has been rewritten
-  as VMC applications:
-  \ref E01, \ref E02, \ref E03, \ref E06, \ref A01, \ref Gflash.
+  To demonstrate use of VirtualMC, several Geant4 examples and one
+  Garfield example have been rewritten as VMC applications:
+  \ref E01, \ref E02, \ref E03, \ref E06, \ref A01, \ref Gflash, \ref Garfield.
   
   The correspondence with the examples in Geant4  (since 10.00.x) is:
   - E01 - no equivalent
@@ -30,15 +30,17 @@
   - \ref Gflash - extended/parameterisation/gflash
   - \ref TR - extended/electromagnetic/TestEm10
 
-  In previous versions of Geant4  (up to 9.6), these examples
-  were provided as novice (N01, N02, N03, N06) and extended (A01, gflash) examples.
+  In previous versions of Geant4 (up to 9.6), these examples
+  were provided as novice (N01, N02, N03, N06) and extended
+  (A01, gflash, TestEm10) examples.
   See more detail description in the README files
-  withing each example subdirectory:
+  within each example subdirectory:
   - \ref README_E01
   - \ref README_E02
   - \ref README_E03
   - \ref README_E06
   - \ref README_A01
+  - \ref README_Garfield
   - \ref README_Gflash
   - \ref README_TR
 

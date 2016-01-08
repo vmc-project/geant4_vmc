@@ -10,8 +10,8 @@
 
 Introduction
 =============
-  To demonstrate use of VirtualMC, several Geant4 examples has been rewritten
-  as VMC applications.
+  To demonstrate use of VirtualMC, several Geant4 examples and one
+  Garfield example have been rewritten as VMC applications.
 
   The correspondence with the examples in Geant4 (since 10.00.x) is:
   E01 - no equvalent now
@@ -20,12 +20,14 @@ Introduction
   E06 - extended/optical/OpNovice
   A01 - basic/B5
   Gflash - extended/parameterisation/gflash
+  TR  - extended/electromagnetic/TestEm10
 
   In previous versions of Geant4 (up to 9.6), these examples
-  were provided as novice (N01, N02, N03, N06) and extended (A01, gflash) examples.
+  were provided as novice (N01, N02, N03, N06) and extended
+  (A01, gflash, TestEm10) examples.
 
-  See more detail description in README files
-  withing each example subdirectory. 
+  See more detail description in the README files
+  within each example subdirectory.
 
   The instructions how to build and run examples are provided
   in examples/README_INSTALL.
@@ -35,7 +37,7 @@ Geometry definition
 ====================
 
   The VirtualMC defines since beginning the methods for geometry 
-  construction in Geant3 style (the functions have the same names and 
+  construction in the Geant3 style (the functions have the same names and
   the same parameters sequence as the functions in Geant3).
   This made the transition from a Geant3 application to VMC easier.
   
