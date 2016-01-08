@@ -29,7 +29,7 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
   // visualization setting
   set_vis();
 
-  appl->RunMC(10);
+  appl->RunMC(5);
   
   delete appl;
 }  

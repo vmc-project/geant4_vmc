@@ -35,7 +35,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
   // Enter in Geant4 interactive session
   //((TGeant4*)gMC)->StartGeantUI();
 
-  appl->RunMC(20);
+  appl->RunMC(5);
   
   //delete appl;
 }  

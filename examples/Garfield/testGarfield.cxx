@@ -158,7 +158,9 @@ int main(int argc, char** argv)
   for ( Int_t i=1; i<argc; i=i+2 ) {
     std::cout << "processing " << argv[i] << " with " <<  argv[i+1] << std::endl;
 #ifdef USE_GEANT4
-    if      ( std::string(argv[i]) == "--g4-physics-list" ||
+    if      ( std::string(argv[i]) == "--g4-geometry" ||
+              std::string(argv[i]) == "-g4g")  g4Geometry = argv[i+1];
+    else if ( std::string(argv[i]) == "--g4-physics-list" ||
               std::string(argv[i]) == "-g4pl") g4PhysicsList = argv[i+1];
     else if ( std::string(argv[i]) == "--g4-special-physics" ||
               std::string(argv[i]) == "-g4sp") g4SpecialPhysics = argv[i+1];
