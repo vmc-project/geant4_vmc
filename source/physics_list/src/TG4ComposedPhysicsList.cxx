@@ -93,8 +93,6 @@ void TG4ComposedPhysicsList::ConstructProcess()
   g3PhysicsManager->Lock();  
 
   for (G4int i=0; i<G4int(fPhysicsLists.size()); i++ ) {
-    if ( VerboseLevel() >1 )
-      G4cout << "fPhysicsLists[i]->ConstructProcess: " <<  fPhysicsLists[i] << G4endl;
     fPhysicsLists[i]->ConstructProcess();
   }  
 

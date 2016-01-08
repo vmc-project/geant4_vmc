@@ -86,7 +86,6 @@ void TG4FastSimulationPhysics::UpdateRegions(
 
     if ( VerboseLevel() > 1 ) {
       G4cout << "Adding fast simulation model " << modelName
-             << " object " << fastSimulationModel
              << " to regions " << regions << G4endl;
     }
 

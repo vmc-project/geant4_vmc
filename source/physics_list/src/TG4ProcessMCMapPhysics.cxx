@@ -254,8 +254,9 @@ void TG4ProcessMCMapPhysics::ConstructProcess()
 /// Loop over all particles and their processes and check if
 /// the process is present in the map
 
-  if ( VerboseLevel() > 1 )
-    G4cout << "TG4ProcessMCMapPhysics::ConstructProcess: " << this << G4endl;
+  if ( VerboseLevel() > 1 ) {
+    G4cout << "TG4ProcessMCMapPhysics::ConstructProcess: " << G4endl;
+  }
 
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
   G4bool success = true;
