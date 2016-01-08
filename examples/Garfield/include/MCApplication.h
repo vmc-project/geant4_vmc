@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -29,6 +29,8 @@
 class Ex03MCStack;
 class TVirtualMCRootManager;
 
+namespace VMC
+{
 namespace Garfield
 {
 
@@ -115,6 +117,7 @@ inline SensitiveDetector* MCApplication::GetCalorimeterSD() const
 inline PrimaryGenerator* MCApplication::GetPrimaryGenerator() const
 { return fPrimaryGenerator; }
 
+}
 }
 
 #endif //GARFIELD_MC_APPLICATION_H

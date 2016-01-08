@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -42,14 +42,15 @@
 #include "GeometrySimple.hh"
 #include "SolidTube.hh"
 
-typedef std::pair<double, double> EnergyRange_keV;
-typedef std::map< const std::string, EnergyRange_keV> MapParticlesEnergy;
+typedef std::pair<double, double> EnergyRange_MeV;
+typedef std::map< const std::string, EnergyRange_MeV> MapParticlesEnergy;
 
-class GarfieldElectron{
+class GarfieldParticle{
 public:
-	GarfieldElectron( double ekin_eV,double time, double x_cm,double y_cm,double z_cm, double dx,double dy,double dz):fEkin_MeV(ekin_eV/1000000), fTime(time), fx_mm(10*x_cm),fy_mm(10*y_cm), fz_mm(10*z_cm),  fdx(dx), fdy(dy), fdz(dz){}
-	~GarfieldElectron(){};
+	GarfieldParticle(std::string particleName, double ekin_eV,double time, double x_cm,double y_cm,double z_cm, double dx,double dy,double dz):fParticleName(particleName), fEkin_MeV(ekin_eV/1000000), fTime(time), fx_mm(10*x_cm),fy_mm(10*y_cm), fz_mm(10*z_cm),  fdx(dx), fdy(dy), fdz(dz){}
+	~GarfieldParticle(){};
 
+	std::string getParticleName(){return fParticleName;}
 	double getX_mm() {return fx_mm;}
 	double getY_mm(){return fy_mm;}
 	double getZ_mm(){return fz_mm;}
@@ -61,6 +62,7 @@ public:
 
 
 private:
+	std::string fParticleName;
 	double fEkin_MeV, fTime, fx_mm,fy_mm,fz_mm,fdx,fdy,fdz;
 
 };
@@ -73,24 +75,28 @@ public:
 	void InitializePhysics();
 	void CreateGeometry();
 
-	void DoIt(std::string particleName, double ekin_keV,double time,
+	void DoIt(std::string particleName, double ekin_MeV,double time,
 			double x_cm, double y_cm, double z_cm, double dx, double dy, double dz);
 
 	void AddParticleName(const std::string particleName, double ekin_min_keV, double ekin_max_keV);
 	bool FindParticleName(const std::string name);
 	bool FindParticleNameEnergy(std::string name, double ekin_keV);
-	std::vector<GarfieldElectron*>* GetSecondaryElectrons();
-	void DeleteSecondaryElectrons();
-	inline void EnableCreateSecondariesInGeant4() {createSecondariesInGeant4 = true;};
-	inline void DisableCreateSecondariesInGeant4() {createSecondariesInGeant4 = false;};
+	void SetIonizationModel(std::string model, bool useDefaults=true);
+	std::string GetIonizationModel();
+	std::vector<GarfieldParticle*>* GetSecondaryParticles();
+	void DeleteSecondaryParticles();
+	inline void EnableCreateSecondariesInGeant4(bool flag) {createSecondariesInGeant4 = flag;};
 	inline bool GetCreateSecondariesInGeant4() {return createSecondariesInGeant4;};
 	inline double GetEnergyDeposit_MeV() {return fEnergyDeposit/1000000;};
 	inline double GetAvalancheSize() {return fAvalancheSize;};
 	inline double GetGain() {return fGain;};
+	inline void Clear() {fEnergyDeposit=0;fAvalancheSize=0;fGain=0;nsum=0;}
+
 private:
 	GarfieldPhysics();
 	~GarfieldPhysics();
 
+	std::string fIonizationModel;
 
 	static GarfieldPhysics* fGarfieldPhysics;
 	MapParticlesEnergy* fMapParticlesEnergy;
@@ -105,12 +111,13 @@ private:
 	Garfield::ComponentAnalyticField* fComponentAnalyticField;
 	Garfield::SolidTube* fTube;
 
-	std::vector<GarfieldElectron*>* fSecondaryElectrons;
+	std::vector<GarfieldParticle*>* fSecondaryParticles;
 
 	bool createSecondariesInGeant4;
 	double fEnergyDeposit;
 	double fAvalancheSize;
 	double fGain;
+	int nsum;
 
 };
 #endif /* GARFIELDMODELCONFIG_HH_ */

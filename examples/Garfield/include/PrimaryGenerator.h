@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -22,6 +22,8 @@
 
 class TVirtualMCStack;
 
+namespace VMC
+{
 namespace Garfield
 {
 
@@ -94,6 +96,7 @@ inline TVector3 PrimaryGenerator::GetVertexPosition() const
 inline TVector3 PrimaryGenerator::GetVertexDirection() const
 { return fVertexDirection; }
 
+}
 }
 
 #endif //GARFIELD_PRIMARY_GENERATOR_H

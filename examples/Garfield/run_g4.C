@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -22,9 +22,12 @@ void run_g4(const TString& configMacro = "g4Config.C")
 /// \param configMacro configuration macro name, default \ref Garfield/g4Config.C 
 
   // MC application
-  Garfield::MCApplication* appl 
-    =  new Garfield::MCApplication("ExampleGarfield", "The exampleGarfield MC application");
+  VMC::Garfield::MCApplication* appl 
+    =  new VMC::Garfield::MCApplication("ExampleGarfield", "The exampleGarfield MC application");
   appl->InitMC(configMacro);
+
+  // Customise Geant4 setting after initialization:
+  ((TGeant4*)gMC)->ProcessGeantMacro("g4config2.in");
 
   // Visualization setting
   set_vis();
@@ -32,7 +35,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
   // Enter in Geant4 interactive session
   //((TGeant4*)gMC)->StartGeantUI();
 
-  appl->RunMC(10);
+  appl->RunMC(20);
   
   //delete appl;
 }  

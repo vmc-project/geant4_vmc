@@ -13,7 +13,7 @@
   - Integration of Garfield simulation model in Geant4 VMC simulation;
     Garfield model in not used when running the example with Geant3.
 
-  See also the Garfiels example description of at: 
+  See also the original Garfield example description at:
     http://garfieldpp.web.cern.ch/garfieldpp/examples/geant4-interface/
 
 \section garfield_s2 Compilation:
@@ -34,6 +34,7 @@
   \link      Garfield/g4Config.C g4Config.C     \endlink - configuration macro for G4 with native geometry navigation (defaullt)
   \link  Garfield/g4tgeoConfig.C g4tgeoConfig.C \endlink - configuration macro for G4 with TGeo geometry navigation
    g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
+   g4config2.in  - macro for setting after initialization
    g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
   </pre>
 

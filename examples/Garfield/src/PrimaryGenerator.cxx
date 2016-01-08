@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -27,9 +27,11 @@
 #include "PrimaryGenerator.h"
 
 /// \cond CLASSIMP
-ClassImp(Garfield::PrimaryGenerator)
+ClassImp(VMC::Garfield::PrimaryGenerator)
 /// \endcond
 
+namespace VMC
+{
 namespace Garfield
 {
 
@@ -145,3 +147,5 @@ void PrimaryGenerator::GeneratePrimaries(const TVector3& origin)
 }
 
 }
+}
+

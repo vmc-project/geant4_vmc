@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -20,6 +20,8 @@
 #include <TNamed.h>
 #include <TClonesArray.h>
 
+namespace VMC
+{
 namespace Garfield
 {
 
@@ -76,6 +78,7 @@ inline void SensitiveDetector::SetVerboseLevel(Int_t level)
 inline Hit* SensitiveDetector::GetHit() const
 { return fHit; }
 
+}
 }
 
 #endif //EX02_CALORIMETER_SD_H

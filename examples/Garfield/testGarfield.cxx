@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2015 Ivana Hrivnacova
+// Copyright (C) 2015 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -198,14 +198,14 @@ int main(int argc, char** argv)
   // end of code to process arguments
 
   // Create MC application (thread local)
-  Garfield::MCApplication* appl 
-    =  new Garfield::MCApplication("ExampleGarfield", 
-                                 "The exampleGarfield MC application");
+  VMC::Garfield::MCApplication* appl 
+    =  new VMC::Garfield::MCApplication("ExampleGarfield", 
+                                        "The exampleGarfield MC application");
 
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4 
-  Garfield::RunConfiguration* runConfiguration 
-    = new Garfield::RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics);
+  VMC::Garfield::RunConfiguration* runConfiguration 
+    = new VMC::Garfield::RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics);
 
   // TGeant4
   TGeant4* geant4

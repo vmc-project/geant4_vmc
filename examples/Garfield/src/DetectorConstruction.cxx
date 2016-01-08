@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -31,9 +31,11 @@
 using namespace std;
 
 /// \cond CLASSIMP
-ClassImp(Garfield::DetectorConstruction)
+ClassImp(VMC::Garfield::DetectorConstruction)
 /// \endcond
 
+namespace VMC
+{
 namespace Garfield
 {
 
@@ -79,7 +81,7 @@ void DetectorConstruction::Construct()
   // Al
   Double_t density;
   TGeoMaterial* matAl
-    = new TGeoMaterial("Lead", a = 26.98, z = 13., density = 2.699);
+    = new TGeoMaterial("Al", a = 26.98, z = 13., density = 2.699);
 
   // W
   TGeoMaterial* matW
@@ -99,7 +101,7 @@ void DetectorConstruction::Construct()
   
   // ArCO2_70_30
   TGeoMixture* matArCO2
-    = new TGeoMixture("ArCO2", 3, density=1.822-03);
+    = new TGeoMixture("ArCO2", 3, density=1.822e-03);
   matArCO2->AddElement(elAr, 0.7000); 
   matArCO2->AddElement(elC,  0.0819); 
   matArCO2->AddElement(elO,  0.2181);
@@ -237,4 +239,5 @@ void DetectorConstruction::Construct()
   gMC->SetRootGeometry();
 }
 
-} 
+}
+}

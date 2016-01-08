@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -43,7 +43,7 @@ void GarfieldPhysics::Dispose() {
 
 GarfieldPhysics::GarfieldPhysics() {
 	fMapParticlesEnergy = new MapParticlesEnergy();
-	fSecondaryElectrons = new std::vector<GarfieldElectron*>();
+	fSecondaryParticles = new std::vector<GarfieldParticle*>();
 	fMediumMagboltz = 0;
 	fSensor = 0;
 	fAvalanche = 0;
@@ -55,13 +55,13 @@ GarfieldPhysics::GarfieldPhysics() {
 	fGeometrySimple = 0;
 	fTube = 0;
 	createSecondariesInGeant4 = false;
-
+	fIonizationModel = "Geant4";
 }
 
 GarfieldPhysics::~GarfieldPhysics() {
 	delete fMapParticlesEnergy;
-	DeleteSecondaryElectrons();
-	delete fSecondaryElectrons;
+	DeleteSecondaryParticles();
+	delete fSecondaryParticles;
 	delete fMediumMagboltz;
 	delete fSensor;
 	delete fAvalanche;
@@ -74,20 +74,61 @@ GarfieldPhysics::~GarfieldPhysics() {
 	std::cout << "Deconstructor GarfieldPhysics" << std::endl;
 }
 
+std::string GarfieldPhysics::GetIonizationModel() {
+	return fIonizationModel;
+}
+
+void GarfieldPhysics::SetIonizationModel(std::string model, bool useDefaults) {
+	if (model != "Geant4" && model != "Heed") {
+
+		std::cout << "Unknown ionization model " << model << std::endl;
+		std::cout << "Using Geant4 as default model!" << std::endl;
+		model = "Geant4";
+	}
+	fIonizationModel = model;
+
+	if (fIonizationModel == "Geant4") {
+		if (useDefaults == true) {
+			//Particle types and energies for which the G4FastSimulationModel with Garfield++ is valid
+			this->AddParticleName("e-", 1e-6, 1e-3);
+			this->AddParticleName("gamma", 1e-6, 1e+8);
+		}
+
+	} else if (fIonizationModel == "Heed") {
+		if (useDefaults == true) {
+			//Particle types and energies for which the G4FastSimulationModel with Garfield++ is valid
+			this->AddParticleName("gamma", 1e-6, 1e+8);
+			this->AddParticleName("e-", 6e-2, 1e+7);
+			this->AddParticleName("e+", 6e-2, 1e+7);
+			this->AddParticleName("mu-", 1e+1, 1e+8);
+			this->AddParticleName("mu+", 1e+1, 1e+8);
+			this->AddParticleName("pi-", 2e+1, 1e+8);
+			this->AddParticleName("pi+", 2e+1, 1e+8);
+			this->AddParticleName("kaon-", 1e+1, 1e+8);
+			this->AddParticleName("kaon+", 1e+1, 1e+8);
+			this->AddParticleName("proton", 9.e+1, 1e+8);
+			this->AddParticleName("anti_proton", 9.e+1, 1e+8);
+			this->AddParticleName("deuteron", 2.e+2, 1e+8);
+			this->AddParticleName("alpha", 4.e+2, 1e+8);
+		}
+
+	}
+}
+
 void GarfieldPhysics::AddParticleName(const std::string particleName,
-		double ekin_min_keV, double ekin_max_keV) {
-	if (ekin_min_keV >= ekin_max_keV) {
-		std::cout << "Ekin_min=" << ekin_min_keV
-				<< " keV is larger than Ekin_max=" << ekin_max_keV << " keV"
+		double ekin_min_MeV, double ekin_max_MeV) {
+	if (ekin_min_MeV >= ekin_max_MeV) {
+		std::cout << "Ekin_min=" << ekin_min_MeV
+				<< " keV is larger than Ekin_max=" << ekin_max_MeV << " keV"
 				<< std::endl;
 		return;
 	}
 	std::cout << "Garfield model is applicable for G4Particle " << particleName
-			<< " between " << ekin_min_keV << " keV and " << ekin_max_keV
+			<< " between " << ekin_min_MeV << " keV and " << ekin_max_MeV
 			<< " keV" << std::endl;
 	fMapParticlesEnergy->insert(
 			std::make_pair(particleName,
-					std::make_pair(ekin_min_keV, ekin_max_keV)));
+					std::make_pair(ekin_min_MeV, ekin_max_MeV)));
 
 }
 
@@ -101,12 +142,12 @@ bool GarfieldPhysics::FindParticleName(std::string name) {
 }
 
 bool GarfieldPhysics::FindParticleNameEnergy(std::string name,
-		double ekin_keV) {
+		double ekin_MeV) {
 	MapParticlesEnergy::iterator it;
 	it = fMapParticlesEnergy->find(name);
 	if (it != fMapParticlesEnergy->end()) {
-		EnergyRange_keV range = it->second;
-		if (range.first <= ekin_keV && range.second >= ekin_keV) {
+		EnergyRange_MeV range = it->second;
+		if (range.first <= ekin_MeV && range.second >= ekin_MeV) {
 			return true;
 		}
 	}
@@ -127,8 +168,6 @@ void GarfieldPhysics::InitializePhysics() {
 	const double rPenning = 0.57;
 	const double lambdaPenning = 0.;
 	fMediumMagboltz->EnablePenningTransfer(rPenning, lambdaPenning, "ar");
-	// Load the ion mobilities.
-	fMediumMagboltz->LoadIonMobility("IonMobility_Ar+_Ar.txt");
 	fMediumMagboltz->LoadGasFile("ar_70_co2_30_1000mbar.gas");
 
 	fSensor = new Garfield::Sensor();
@@ -142,6 +181,7 @@ void GarfieldPhysics::InitializePhysics() {
 	fAvalanche->SetSensor(fSensor);
 
 	fTrackHeed = new Garfield::TrackHeed();
+	fTrackHeed->EnableDebugging();
 	fTrackHeed->SetSensor(fSensor);
 
 	fTrackHeed->EnableDeltaElectronTransport();
@@ -174,11 +214,11 @@ void GarfieldPhysics::CreateGeometry() {
 
 }
 
-void GarfieldPhysics::DoIt(std::string particleName, double ekin_keV,
+void GarfieldPhysics::DoIt(std::string particleName, double ekin_MeV,
 		double time, double x_cm, double y_cm, double z_cm, double dx,
 		double dy, double dz) {
 
-	DeleteSecondaryElectrons();
+	DeleteSecondaryParticles();
 
 	// Wire radius [cm]
 	const double rWire = 25.e-4;
@@ -187,7 +227,7 @@ void GarfieldPhysics::DoIt(std::string particleName, double ekin_keV,
 	// Half-length of the tube [cm]
 	const double lTube = 10.;
 
-	double eKin_eV = ekin_keV * 1000;
+	double eKin_eV = ekin_MeV * 1e+6;
 
 	double xc = 0., yc = 0., zc = 0., tc = 0.;
 	// Number of electrons produced in a collision
@@ -196,98 +236,149 @@ void GarfieldPhysics::DoIt(std::string particleName, double ekin_keV,
 	double ec = 0.;
 	// Dummy variable (not used at present)
 	double extra = 0.;
-	// Total energy loss along the track
-	double esum = 0.;
-	// Total number of electrons produced along the track
-	int nsum = 0;
-
 	fEnergyDeposit = 0;
-	fAvalancheSize = 0;
-	fGain = 0;
+	//fAvalancheSize = 0;
+	//fGain = 0;
 
-	fTrackHeed->SetParticle(particleName);
-	fTrackHeed->SetKineticEnergy(eKin_eV);
-	fTrackHeed->NewTrack(x_cm, y_cm, z_cm, time, dx, dy, dz);
-
-	while (fTrackHeed->GetCluster(xc, yc, zc, tc, nc, ec, extra)) {
-		if (zc < lTube && zc > -lTube && sqrt(xc * xc + yc * yc) < rTube) {
-			esum += ec;
-			nsum += nc;
-
-			for (int cl = 0; cl < nc; cl++) {
-				double xe, ye, ze, te;
-				double ee, dxe, dye, dze;
-				fTrackHeed->GetElectron(cl, xe, ye, ze, te, ee, dxe, dye, dze);
-
-				if (ze < lTube && ze > -lTube
-						&& sqrt(xe * xe + ye * ye) < rTube) {
-					if (createSecondariesInGeant4) {
-						double newTime = te;
-						if (newTime < time) {
-							newTime += time;
-						}
-						fSecondaryElectrons->push_back(
-								new GarfieldElectron(ee, newTime, xe, ye, ze,
-										dxe, dye, dze));
-					}
-
-					fDrift->DriftElectron(xe, ye, ze, te);
-
-					double xe1, ye1, ze1, te1;
-					double xe2, ye2, ze2, te2;
-
-					int status;
-					fDrift->GetElectronEndpoint(0, xe1, ye1, ze1, te1, xe2, ye2,
-							ze2, te2, status);
-
-					if (0 < xe2 && xe2 < rWire) {
-						xe2 += 2 * rWire;
-					}
-					if (0 > xe2 && xe2 > -rWire) {
-						xe2 += -2 * rWire;
-					}
-					if (0 < ye2 && ye2 < rWire) {
-						ye2 += 2 * rWire;
-					}
-					if (0 > ye2 && ye2 > -rWire) {
-						ye2 += -2 * rWire;
-					}
-
-					double e2 = 0.1;
-					fAvalanche->AvalancheElectron(xe2, ye2, ze2, te2, e2, 0, 0,
-							0);
-
-					int ne = 0, ni = 0;
-					fAvalanche->GetAvalancheSize(ne, ni);
-					fAvalancheSize += ne;
-
-				} else {
-					std::cout << "Info: electron outside gas at (" << xe << ","
-							<< ye << "," << ze << ")" << std::endl;
-				}
-			}
+	if (fIonizationModel != "Heed" || particleName == "gamma") {
+		if (particleName == "gamma") {
+			fTrackHeed->TransportPhoton(x_cm, y_cm, z_cm, time, eKin_eV, dx, dy,
+					dz, nc);
 		} else {
-			std::cout << "Info: cluster outside gas  at (" << xc << "," << yc
-					<< "," << zc << ")" << std::endl;
+			fTrackHeed->TransportDeltaElectron(x_cm, y_cm, z_cm, time, eKin_eV,
+					dx, dy, dz, nc);
+			fEnergyDeposit = eKin_eV;
+		}
+
+		for (int cl = 0; cl < nc; cl++) {
+			double xe, ye, ze, te;
+			double ee, dxe, dye, dze;
+			fTrackHeed->GetElectron(cl, xe, ye, ze, te, ee, dxe, dye, dze);
+			if (ze < lTube && ze > -lTube && sqrt(xe * xe + ye * ye) < rTube) {
+				nsum++;
+				if (particleName == "gamma") {
+					fEnergyDeposit += fTrackHeed->GetW();
+				}
+				// TO DO: add this histo in MCApplication
+				// analysisManager->FillH3(1, ze * 10, xe * 10, ye * 10);
+				if (createSecondariesInGeant4) {
+					double newTime = te;
+					if (newTime < time) {
+						newTime += time;
+					}
+					fSecondaryParticles->push_back(
+							new GarfieldParticle("e-",ee, newTime, xe, ye, ze, dxe,
+									dye, dze));
+				}
+
+				fDrift->DriftElectron(xe, ye, ze, te);
+
+				double xe1, ye1, ze1, te1;
+				double xe2, ye2, ze2, te2;
+
+				int status;
+				fDrift->GetElectronEndpoint(0, xe1, ye1, ze1, te1, xe2, ye2,
+						ze2, te2, status);
+
+				if (0 < xe2 && xe2 < rWire) {
+					xe2 += 2 * rWire;
+				}
+				if (0 > xe2 && xe2 > -rWire) {
+					xe2 += -2 * rWire;
+				}
+				if (0 < ye2 && ye2 < rWire) {
+					ye2 += 2 * rWire;
+				}
+				if (0 > ye2 && ye2 > -rWire) {
+					ye2 += -2 * rWire;
+				}
+
+				double e2 = 0.1;
+				fAvalanche->AvalancheElectron(xe2, ye2, ze2, te2, e2, 0, 0, 0);
+
+				int ne = 0, ni = 0;
+				fAvalanche->GetAvalancheSize(ne, ni);
+				fAvalancheSize += ne;
+
+			}
+		}
+	} else {
+		fTrackHeed->SetParticle(particleName);
+		fTrackHeed->SetKineticEnergy(eKin_eV);
+		fTrackHeed->NewTrack(x_cm, y_cm, z_cm, time, dx, dy, dz);
+
+		while (fTrackHeed->GetCluster(xc, yc, zc, tc, nc, ec, extra)) {
+			if (zc < lTube && zc > -lTube && sqrt(xc * xc + yc * yc) < rTube) {
+				nsum += nc;
+				fEnergyDeposit += ec;
+				for (int cl = 0; cl < nc; cl++) {
+					double xe, ye, ze, te;
+					double ee, dxe, dye, dze;
+					fTrackHeed->GetElectron(cl, xe, ye, ze, te, ee, dxe, dye,
+							dze);
+					if (ze < lTube && ze > -lTube
+							&& sqrt(xe * xe + ye * ye) < rTube) {
+                        // TO DO: add this histo in MCApplication
+						// analysisManager->FillH3(1, ze * 10, xe * 10, ye * 10);
+						if (createSecondariesInGeant4) {
+							double newTime = te;
+							if (newTime < time) {
+								newTime += time;
+							}
+							fSecondaryParticles->push_back(
+									new GarfieldParticle("e-", ee, newTime, xe, ye,
+											ze, dxe, dye, dze));
+						}
+
+						fDrift->DriftElectron(xe, ye, ze, te);
+
+						double xe1, ye1, ze1, te1;
+						double xe2, ye2, ze2, te2;
+
+						int status;
+						fDrift->GetElectronEndpoint(0, xe1, ye1, ze1, te1, xe2,
+								ye2, ze2, te2, status);
+
+						if (0 < xe2 && xe2 < rWire) {
+							xe2 += 2 * rWire;
+						}
+						if (0 > xe2 && xe2 > -rWire) {
+							xe2 += -2 * rWire;
+						}
+						if (0 < ye2 && ye2 < rWire) {
+							ye2 += 2 * rWire;
+						}
+						if (0 > ye2 && ye2 > -rWire) {
+							ye2 += -2 * rWire;
+						}
+
+						double e2 = 0.1;
+						fAvalanche->AvalancheElectron(xe2, ye2, ze2, te2, e2, 0,
+								0, 0);
+
+						int ne = 0, ni = 0;
+						fAvalanche->GetAvalancheSize(ne, ni);
+						fAvalancheSize += ne;
+
+					}
+				}
+
+			}
 		}
 	}
-	fGain = fAvalancheSize / nsum;
-	fEnergyDeposit = esum;
-
-	std::cout << "esum " << esum / 1000 << " keV  -  nsum " << nsum
-			<< " - nsum_avalanche " << fAvalancheSize << " - gain " << fGain
-			<< std::endl;
-
+	if ( nsum > 0 ) {
+  	  fGain = fAvalancheSize / nsum;
+  	}
 }
 
-std::vector<GarfieldElectron*>* GarfieldPhysics::GetSecondaryElectrons() {
-	return fSecondaryElectrons;
+std::vector<GarfieldParticle*>* GarfieldPhysics::GetSecondaryParticles() {
+	return fSecondaryParticles;
 }
 
-void GarfieldPhysics::DeleteSecondaryElectrons() {
-	if (!fSecondaryElectrons->empty()) {
-		fSecondaryElectrons->erase(fSecondaryElectrons->begin(),
-				fSecondaryElectrons->end());
+void GarfieldPhysics::DeleteSecondaryParticles() {
+	if (!fSecondaryParticles->empty()) {
+		fSecondaryParticles->erase(fSecondaryParticles->begin(),
+				fSecondaryParticles->end());
 	}
 }
 

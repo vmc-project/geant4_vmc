@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -21,6 +21,8 @@
 #include <TObject.h>
 #include <TVector3.h>
 
+namespace VMC
+{
 namespace Garfield
 {
 
@@ -83,6 +85,7 @@ class Hit : public TObject
   ClassDef(Hit,1) //Hit  
 };
 
+}
 }
 
 #endif //GARFIELD_HIT_H

@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -22,8 +22,8 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
 /// \param configMacro configuration macro name, default \ref Garfield/g3Config.C 
 
   // MC application
-  Garfield::MCApplication* appl 
-    =  new Garfield::MCApplication("ExampleGarfield", "The exampleGarfield MC application");
+  VMC::Garfield::MCApplication* appl 
+    =  new VMC::Garfield::MCApplication("ExampleGarfield", "The exampleGarfield MC application");
   appl->InitMC(configMacro);
 
   // visualization setting

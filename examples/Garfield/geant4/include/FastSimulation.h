@@ -1,9 +1,9 @@
-#ifndef GFLASH_FAST_SIMULATION_H
-#define GFLASH_FAST_SIMULATION_H
+#ifndef GARFIELD_FAST_SIMULATION_H
+#define GARFIELD_FAST_SIMULATION_H
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -20,6 +20,10 @@
 
 #include "TG4VUserFastSimulation.h"
 
+class GarfieldMessenger;
+
+namespace VMC
+{
 namespace Garfield
 {
 
@@ -36,8 +40,12 @@ class FastSimulation : public TG4VUserFastSimulation
 
     // methods
     virtual void Construct();
+
+  private:
+  	GarfieldMessenger* fMessenger;
 };
 
+}
 }
 
 #endif //GFLASH_FAST_SIMULATION_H

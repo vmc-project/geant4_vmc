@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -27,9 +27,11 @@
 #include <TTree.h>
 
 /// \cond CLASSIMP
-ClassImp(Garfield::SensitiveDetector)
+ClassImp(VMC::Garfield::SensitiveDetector)
 /// \endcond
 
+namespace VMC
+{
 namespace Garfield
 {
 
@@ -154,7 +156,11 @@ void SensitiveDetector::EndOfEvent()
   if (fVerboseLevel>0)  Print();
     
   // Reset hits collection
-  fHit->Reset();  
+  fHit->Reset();
+
+  // Reset data collected in Garfield
+  GarfieldPhysics* garfieldPhysics = GarfieldPhysics::GetInstance();
+  garfieldPhysics->Clear();
 }
 
 //_____________________________________________________________________________
@@ -175,3 +181,5 @@ void SensitiveDetector::Print(Option_t* /*option*/) const
 }
 
 }
+}
+

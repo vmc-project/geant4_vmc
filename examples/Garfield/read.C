@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -26,8 +26,8 @@ void read()
   gSystem->Load("libvmc_Garfield");
   
   // MC application
-  Garfield::MCApplication* appl 
-    =  new Garfield::MCApplication("ExampleGarfield", "The exampleGarfield MC application", kRead);
+  VMC::Garfield::MCApplication* appl 
+    =  new VMC::Garfield::MCApplication("ExampleGarfield", "The exampleGarfield MC application", kRead);
 
   for (Int_t i=0; i<5; i++) {
     cout << "   Event no " << i+1 << ":" << endl;

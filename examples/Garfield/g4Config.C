@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -22,19 +22,14 @@ void Config()
   // cout << "Constructing Garfield::RunConfiguration " << endl;
 
   // Run configuration
-  Garfield::RunConfiguration* runConfiguration 
-      = new Garfield::RunConfiguration("geomRootToGeant4", "FTFP_BERT");
+  VMC::Garfield::RunConfiguration* runConfiguration 
+      = new VMC::Garfield::RunConfiguration("geomRootToGeant4", "FTFP_BERT");
   
   cout << "Constructing TG4RunConfiguration " << endl;
 
-  // // Run configuration
-  // TG4RunConfiguration* runConfiguration 
-  //     = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT");
-
-
   // Run configuration with special cuts activated
-  // Garfield::RunConfiguration* runConfiguration 
-  //   = new Garfield::RunConfiguration("geomRootToGeant4", "FTFP_BERT", "specialCuts");
+  // VMC::Garfield::RunConfiguration* runConfiguration 
+  //   = new VMC::Garfield::RunConfiguration("geomRootToGeant4", "FTFP_BERT", "specialCuts");
 
   // TGeant4
   TGeant4* geant4

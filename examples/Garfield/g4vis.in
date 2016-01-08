@@ -1,6 +1,6 @@
 # #------------------------------------------------
 # The Virtual Monte Carlo examples
-# Copyright (C) 2007 - 2015 Ivana Hrivnacova
+# Copyright (C) 2007 - 2016 Ivana Hrivnacova
 # All rights reserved.
 #
 # For the licensing terms see geant4_vmc/LICENSE.
@@ -26,13 +26,13 @@
 # Set volumes visibility/colour
 /vis/geometry/set/visibility World 0 false
 /vis/geometry/set/colour Wire 0 red
-/vis/geometry/set/colour ThinWindow 0 blue
-/vis/geometry/set/colour DriftTube 0 green
+/vis/geometry/set/colour Tube 0 green
 /vis/geometry/set/colour Gas 0 yellow
 /vis/geometry/set/colour Absorber 0 cyan
 
 # Specify view angle:
 /vis/viewer/set/viewpointThetaPhi 90. 180.
+#/vis/viewer/set/viewpointThetaPhi 45. 60.
 
 # Specify zoom value:
 #/vis/viewer/zoom 0.5

@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -22,9 +22,11 @@
 using namespace std;
 
 /// \cond CLASSIMP
-ClassImp(Garfield::Hit)
+ClassImp(VMC::Garfield::Hit)
 /// \endcond
 
+namespace VMC
+{
 namespace Garfield
 {
 
@@ -51,11 +53,11 @@ void Hit::Print(Option_t* /*option*/) const
 {
 /// Print hit info
 
-  cout << "   Absorber: total energy [keV]: " << std::setw(7) << fEdepAbs * 1.0e06
-       << "       total track length: " << std::setw(7) << fTrackLengthAbs <<  endl 
-       << "        Gas: total energy [keV]: " << std::setw(7) << fEdepGas * 1.0e06 
-       << endl
-       << "             avalanche size: " << std::setw(7) << fAvalancheSize 
+  cout << "   Absorber: total energy: " << std::setw(7) << fEdepAbs * 1.0e03 << " MeV"
+       << "       total track length: " << std::setw(7) << fTrackLengthAbs <<  " cm" 
+       << endl 
+       << "        Gas: total energy: " << std::setw(7) << fEdepGas * 1.0e06  << " keV" 
+       << "           avalanche size: " << std::setw(7) << fAvalancheSize 
        << "       gain: " << std::setw(7) << fGain << endl;
 }
 
@@ -71,4 +73,5 @@ void Hit::Reset()
   fGain = 0.;
 }
 
+}
 }

@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -37,9 +37,11 @@
 using namespace std;
 
 /// \cond CLASSIMP
-ClassImp(Garfield::MCApplication)
+ClassImp(VMC::Garfield::MCApplication)
 /// \endcond
 
+namespace VMC
+{
 namespace Garfield
 {
 
@@ -286,7 +288,7 @@ void MCApplication::GeneratePrimaries()
   
   fVerbose.GeneratePrimaries();
 
-  TVector3 origin(0, 0., -500.);      
+  TVector3 origin;      
   fPrimaryGenerator->GeneratePrimaries(origin);
 }
 
@@ -374,21 +376,16 @@ void MCApplication::FinishEvent()
 {    
 /// User actions after finishing of an event
 
-  // VMC 
-
   fVerbose.FinishEvent();
 
   // update hit info from Garfield
   fSensitiveDetector->UpdateFromGarfield();
-
   fRootManager->Fill();
 
-// The application code
-
-  // reset hit
+  // reset data
   fSensitiveDetector->EndOfEvent();
-
   fStack->Reset();  
 }
 
+}
 }

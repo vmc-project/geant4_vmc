@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2016 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -18,6 +18,8 @@
 #include "RunConfiguration.h"
 #include "FastSimulation.h"
 
+namespace VMC
+{
 namespace Garfield
 {
 
@@ -53,4 +55,5 @@ TG4VUserFastSimulation*  RunConfiguration::CreateUserFastSimulation()
   return new FastSimulation();
 }
 
+}
 }
