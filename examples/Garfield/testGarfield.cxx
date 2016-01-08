@@ -236,12 +236,15 @@ int main(int argc, char** argv)
   if ( ! rootMacro.size() ) {
     appl->InitMC("");
 #ifdef USE_GEANT4
+  // Customise Geant4 setting
+  // (verbose level, global range cut, ..)
+  geant4->ProcessGeantMacro("g4config2.in");
   // Setting Geant4 visualization
   if ( g4VisMacro.size() ) {
     geant4->ProcessGeantMacro(g4VisMacro.data());
   }
 #endif
-    appl->RunMC(10);
+    appl->RunMC(5);
   }
   else {
     // Run from Root macro

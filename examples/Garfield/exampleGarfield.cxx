@@ -67,11 +67,14 @@ int main(int argc, char** argv)
   appl->InitMC("");
 
 #ifdef USE_GEANT4
+  // Customise Geant4 setting
+  // (verbose level, global range cut, ..)
+  geant4->ProcessGeantMacro("g4config2.in");
   // Setting Geant4 visualization
   geant4->ProcessGeantMacro("g4vis.in");
 #endif
 
-  appl->RunMC(10);
+  appl->RunMC(20);
 
   delete appl;
 }  
