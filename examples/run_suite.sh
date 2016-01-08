@@ -15,7 +15,7 @@
 
 CURDIR=`pwd`
 
-for EXAMPLE in E01 E02 E03 E06 A01
+for EXAMPLE in E01 E02 E03 E06 A01 Garfield Gflash TR
 do
   cd $CURDIR/$EXAMPLE
 

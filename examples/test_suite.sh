@@ -20,9 +20,10 @@ OUTDIR=$CURDIR/log
 PASSED="0"
 FAILED="0"
 
-# Set 1 to 0 if you want to skip given MC
+# Set 1 to 0 if you want to skip given MC or Garfield test
 TESTG3=1
 TESTG4=1
+TESTGARFIELD=1
 BUILDDIR=""
 
 # Root command with loading g3/g4 libraries
@@ -38,6 +39,8 @@ do
     "--g3=off" ) TESTG3=0 ;;
     "--g4=on"  ) TESTG4=1 ;;
     "--g4=off" ) TESTG4=0 ;;
+    "--garfield=on"  ) TESTGARFIELD=1 ;;
+    "--garfield=off" ) TESTGARFIELD=0 ;;
      --builddir=* ) BUILDDIR=${arg#--builddir=} ;;
     * ) echo "Unsupported option $arg chosen."
         echo "Usage:"
@@ -58,18 +61,23 @@ if [ "x${BUILDDIR}" != "x" ]; then
   export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${LIBS_FROM_BUILDDIR}
 fi
 
-for EXAMPLE in E01 E02 E03 E06 A01
+for EXAMPLE in E01 E02 E03 E06 A01 Garfield Gflash TR
 do
   OUT=$OUTDIR/$EXAMPLE
   if [ ! -d $OUT ]; then
     mkdir -p $OUT
   fi
-  
+
+  # skip Garfield if switch off
+  if [ "$EXAMPLE" = "Garfield" -a "$TESTGARFIELD" = "0" ]; then
+    continue 1
+  fi
+
   cd $CURDIR/$EXAMPLE
 
   echo "... Example $EXAMPLE"
   
-  if [ "$EXAMPLE" != "E03" -a "$EXAMPLE" != "A01" ]; then 
+  if [ "$EXAMPLE" = "E01" -o "$EXAMPLE" = "E02" -o "$EXAMPLE" = "E06" ]; then
   
     if [ "$TESTG3" = "1" ]; then
       echo "... Running test with G3, geometry via TGeo, TGeo navigation" 
@@ -334,10 +342,37 @@ do
       rm tmpfile
       if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
     fi  
-  fi  
+  fi
+
+  # new examples (without old geometry definition)
+  #
+  if [ "$EXAMPLE" = "Garfield" -o "$EXAMPLE" = "Gflash"  -o "$EXAMPLE" = "TR" ]; then
+
+    if [ "$TESTG3" = "1" ]; then
+      echo "... Running test with G3, geometry via TGeo, TGeo navigation"
+      TMP_FAILED="0"
+      $RUNG3 "test_$EXAMPLE.C(\"g3tgeoConfig.C\")" >& $OUT/test_g3_tgeo_tgeo.out
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+    fi
+
+    if [ "$TESTG4" = "1" ]; then
+      echo "... Running test with G4, geometry via TGeo, Native navigation"
+      TMP_FAILED="0"
+      $RUNG4 "test_$EXAMPLE.C(\"g4Config.C\")" >& $OUT/test_g4_tgeo_nat.out
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+
+      echo "... Running test with G4, geometry via TGeo, TGeo navigation"
+      TMP_FAILED="0"
+      $RUNG4 "test_$EXAMPLE.C(\"g4tgeoConfig.C\")" >& $OUT/test_g4_tgeo_tgeo.out
+      if [ "$?" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+    fi
+  fi
+
   echo " "
 done  
-  
+
 # Print summary message
 if [ "$FAILED" -eq "0" -a  "$PASSED" -ne "0" ]; then
   echo "... All ($PASSED) tests passed successfully."

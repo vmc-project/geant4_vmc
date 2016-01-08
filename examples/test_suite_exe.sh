@@ -27,9 +27,10 @@ G4EXEDIR=$CURDIR/../../geant4_vmc_install/bin
 PASSED="0"
 FAILED="0"
 
-# Set 1 to 0 if you want to skip given MC
+# Set 1 to 0 if you want to skip given MC or Garfield test
 TESTG3=1
 TESTG4=1
+TESTGARFIELD=1
 BUILDDIR=""
 
 # Process script arguments
@@ -41,6 +42,8 @@ do
     "--g3=off" ) TESTG3=0 ;;
     "--g4=on"  ) TESTG4=1 ;;
     "--g4=off" ) TESTG4=0 ;;
+    "--garfield=on"  ) TESTGARFIELD=1 ;;
+    "--garfield=off" ) TESTGARFIELD=0 ;;
      --builddir=* ) BUILDDIR=${arg#--builddir=} ;;
     * ) echo "Unsupported option $arg chosen."
         echo "Usage:"
@@ -61,11 +64,16 @@ if [ "x${BUILDDIR}" != "x" ]; then
   export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${LIBS_FROM_BUILDDIR}
 fi
 
-for EXAMPLE in E01 E02 E03 E06 A01
+for EXAMPLE in E01 E02 E03 E06 A01 Garfield Gflash TR
 do
   OUT=$OUTDIR/$EXAMPLE
   if [ ! -d $OUT ]; then
     mkdir -p $OUT
+  fi
+
+  # skip Garfield if switch off
+  if [ "$EXAMPLE" = "Garfield" -a "$TESTGARFIELD" = "0" ]; then
+    continue 1
   fi
 
   cd $CURDIR/$EXAMPLE
@@ -77,7 +85,7 @@ do
 
   echo "... Example $EXAMPLE"
   
-  if [ "$EXAMPLE" != "E03" -a "$EXAMPLE" != "A01" ]; then 
+  if [ "$EXAMPLE" = "E01" -o "$EXAMPLE" = "E02" -o "$EXAMPLE" = "E06" ]; then
     if [ "$TESTG3" = "1" ]; then
       EXE=$G3EXEDIR"/g3vmc_test"$EXAMPLE
       echo "... Running test with G3, geometry via TGeo, TGeo navigation"
@@ -345,9 +353,39 @@ do
     fi  
   fi  
 
+  # new examples (without old geomtry definition)
+  #
+  if [ "$EXAMPLE" = "Garfield" -o "$EXAMPLE" = "Gflash" -o "$EXAMPLE" = "TR" ]; then
+
+    if [ "$TESTG3" = "1" ]; then
+      EXE=$G3EXEDIR"/g3vmc_test"$EXAMPLE
+      echo "... Running test with G3, geometry via TGeo, TGeo navigation"
+      TMP_FAILED="0"
+      $EXE -g3g TGeant3TGeo -rm "test_$EXAMPLE.C(\"\")" >& $OUT/test_g3_tgeo_tgeo.out
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+    fi
+
+    if [ "$TESTG4" = "1" ]; then
+      EXE=$G4EXEDIR"/g4vmc_test"$EXAMPLE
+      echo "... Running test with G4, geometry via TGeo, Native navigation"
+      TMP_FAILED="0"
+      $EXE -g4g geomRootToGeant4 -g4vm "" -rm "test_$EXAMPLE.C(\"\")" >& $OUT/test_g4_tgeo_nat.out
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+
+      echo "... Running test with G4, geometry via TGeo, TGeo navigation"
+      TMP_FAILED="0"
+      $EXE -g4g geomRoot -g4vm "" -rm "test_$EXAMPLE.C(\"\")" >& $OUT/test_g4_tgeo_tgeo.out
+      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+    fi
+
+  fi
+
   echo " "
-done  
-  
+done
+
 # Print summary message
 if [ "$FAILED" -eq "0" -a  "$PASSED" -ne "0" ]; then
   echo "... All ($PASSED) tests passed successfully."

@@ -22,20 +22,26 @@ OUTDIR=$CURDIR/log_run_exe
 G3EXEDIR=$CURDIR/../../geant3_install/bin
 G4EXEDIR=$CURDIR/../../geant4_vmc_install/bin
 
-# Set 1 to 0 if you want to skip given MC
+# Set 1 to 0 if you want to skip given MC or Garfield test
 TESTG3=1
 TESTG4=1
+TESTGARFIELD=1
 
 # Recreate log directory only if running test for both G3 and G4
 if [ "$TESTG3" = "1" -a  "$TESTG4" = "1" ]; then
   rm -fr $OUTDIR
 fi  
 
-for EXAMPLE in E01 E02 E03 E06 A01
+for EXAMPLE in E01 E02 E03 E06 A01 Garfield Gflash TR
 do
   OUT=$OUTDIR/$EXAMPLE
   if [ ! -d $OUT ]; then
     mkdir -p $OUT
+  fi
+
+  # skip Garfield if switch off
+  if [ "$EXAMPLE" = "Garfield" -a "$TESTGARFIELD" = "0" ]; then
+    continue 1
   fi
 
   cd $CURDIR/$EXAMPLE
