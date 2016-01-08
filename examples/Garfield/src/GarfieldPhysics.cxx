@@ -56,6 +56,7 @@ GarfieldPhysics::GarfieldPhysics() {
 	fTube = 0;
 	createSecondariesInGeant4 = false;
 	fIonizationModel = "Geant4";
+	Clear();
 }
 
 GarfieldPhysics::~GarfieldPhysics() {
