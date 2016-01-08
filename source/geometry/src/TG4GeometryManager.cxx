@@ -77,6 +77,7 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fMCGeometry(0),
     fOpManager(0),
     fFastModelsManager(0),
+    fEmModelsManager(0),
     fUserGeometry(userGeometry),
     fFieldParameters(),
     fUserRegionConstruction(0),
@@ -104,6 +105,7 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
   fOpManager = new TG4OpGeometryManager();
 
   fFastModelsManager = new TG4ModelConfigurationManager("fastSimulation");
+  fEmModelsManager = new TG4ModelConfigurationManager("emModel");
   
   fgInstance = this;
 }
@@ -123,6 +125,7 @@ TG4GeometryManager::~TG4GeometryManager()
   delete fGeometryServices;
   delete fOpManager;
   delete fFastModelsManager;
+  delete fEmModelsManager;
 }
 
 //
@@ -715,8 +718,9 @@ void TG4GeometryManager::ConstructSDandField()
   // Call user class for geometry customization
   if ( fUserPostDetConstruction ) fUserPostDetConstruction->Construct();
 
-  // Construct regions with fast simulation
+  // Construct regions with fast simulation and EM models
   fFastModelsManager->CreateRegions();
+  fEmModelsManager->CreateRegions();
 
   // Initialize SD manager (create SDs)
   TG4SDManager::Instance()->Initialize();

@@ -57,6 +57,7 @@ class TG4GeometryManager : public TG4Verbose
     TVirtualMCGeometry*   GetMCGeometry() const;
     TG4OpGeometryManager* GetOpManager() const;
     TG4ModelConfigurationManager* GetFastModelsManager() const;
+    TG4ModelConfigurationManager* GetEmModelsManager() const;
 
     // functions for building geometry
     void ConstructGeometry();
@@ -128,6 +129,9 @@ class TG4GeometryManager : public TG4Verbose
     /// Fast simulation models manager
     TG4ModelConfigurationManager*  fFastModelsManager;
 
+    /// EM models manager
+    TG4ModelConfigurationManager*  fEmModelsManager;
+
     /// User geometry input
     G4String  fUserGeometry;
 
@@ -180,6 +184,11 @@ inline  TG4OpGeometryManager* TG4GeometryManager::GetOpManager() const {
 inline TG4ModelConfigurationManager* TG4GeometryManager::GetFastModelsManager() const {
   /// Return fast simulation models manager
   return fFastModelsManager;
+}
+
+inline TG4ModelConfigurationManager* TG4GeometryManager::GetEmModelsManager() const {
+  /// Return fast simulation models manager
+  return fEmModelsManager;
 }
 
 inline void TG4GeometryManager::SetLimitDensity(G4double density) {

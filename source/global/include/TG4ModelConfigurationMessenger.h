@@ -31,9 +31,8 @@ class G4UIcmdWithAString;
 /// - /mcPhysics/physicsName/setModel modelName
 /// - /mcPhysics/physicsName/setParticles particleName1 particleName2 ...
 /// - /mcPhysics/physicsName/setRegions regionName1 regionName2 ...
-/// where physicName = fastSimulationPhysics.
-///
-/// The messenger is intended to substitute also TG4EmModelPhysicsMessenger.
+/// - /mcPhysics/physicsName/setEmModel modelName  (deprecated)
+/// where physicName = fastSimulation, emModel
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -67,8 +66,11 @@ class TG4ModelConfigurationMessenger: public G4UImessenger
     /// command directory
     G4UIdirectory*         fDirectory;
 
-    /// setElossModel command
+    /// setModel command
     G4UIcmdWithAString*    fSetModelCmd;
+
+    /// setEmModel command (deprecated)
+    G4UIcmdWithAString*    fSetEmModelCmd;
 
     /// setParticles command
     G4UIcmdWithAString*    fSetParticlesCmd;

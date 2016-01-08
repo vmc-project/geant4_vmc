@@ -73,6 +73,16 @@ TG4ModelConfigurationMessenger::TG4ModelConfigurationMessenger(
   if ( availableModels.size() ) fSetModelCmd->SetCandidates(availableModels);
   fSetModelCmd->AvailableForStates(G4State_PreInit);
 
+  // setEmModel command = the same as setModel
+  // deprecated - kept for backward compatibility
+  commandName = dirName + "setEmModel";
+  fSetEmModelCmd = new G4UIcmdWithAString(commandName, this);
+  guidance = "The same as setModel, kept for backward compatibility.";
+  fSetEmModelCmd->SetGuidance(guidance);
+  fSetEmModelCmd->SetParameterName("EmModel", false);
+  if ( availableModels.size() ) fSetEmModelCmd->SetCandidates(availableModels);
+  fSetEmModelCmd->AvailableForStates(G4State_PreInit);
+
   // setParticles command
   commandName = dirName + "setParticles";
   fSetParticlesCmd = new G4UIcmdWithAString(commandName, this);
@@ -92,6 +102,7 @@ TG4ModelConfigurationMessenger::TG4ModelConfigurationMessenger(
   fSetRegionsCmd->SetGuidance(guidance);
   fSetRegionsCmd->SetParameterName("Regions", false);
   fSetParticlesCmd->AvailableForStates(G4State_PreInit);
+
 }
 
 //______________________________________________________________________________
@@ -100,6 +111,7 @@ TG4ModelConfigurationMessenger::~TG4ModelConfigurationMessenger()
 /// Destructor
   delete fDirectory;
   delete fSetModelCmd;
+  delete fSetEmModelCmd;
   delete fSetParticlesCmd;
   delete fSetRegionsCmd;
 }
@@ -114,7 +126,7 @@ void TG4ModelConfigurationMessenger::SetNewValue(G4UIcommand* command,
 {
 /// Apply command to the associated object.
 
-  if (command == fSetModelCmd) {
+  if (command == fSetModelCmd || command == fSetEmModelCmd ) {
     fSelectedModel = newValue;
     fModelConfigurationManager->SetModel(fSelectedModel);
   }

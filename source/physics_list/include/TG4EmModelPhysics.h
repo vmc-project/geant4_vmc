@@ -16,9 +16,7 @@
 /// \author I. Hrivnacova; IPN Orsay
 
 #include "TG4VPhysicsConstructor.h"
-#include "TG4EmModelPhysicsMessenger.h"
 
-#include <G4EmConfigurator.hh>
 #include <globals.hh>
 
 #include <vector>
@@ -36,7 +34,7 @@ enum TG4EmModel {
   kNoEmModel             ///< No extra EM model
 };  
 
-class TG4EmModelConfiguration;
+class TG4ModelConfiguration;
 
 class G4Region;
 
@@ -45,7 +43,7 @@ class G4Region;
 /// and/or fluctuations model.
 ///
 /// In this implementation, G4PAIModel, G4PAIPhotModel and a special
-/// UrbanMsc MOdel tuned for ALICE EMCAL are supported.
+/// UrbanMsc model tuned for ALICE EMCAL are supported.
 /// Other models available in Geant4 can be added on user
 /// requests.
 /// 
@@ -53,8 +51,8 @@ class G4Region;
 
 class TG4EmModelPhysics: public TG4VPhysicsConstructor
 {
-  public:
-    typedef std::vector<TG4EmModelConfiguration*> EmModelConfigurationVector;
+  // public:
+  //   typedef std::vector<TG4EmModelConfiguration*> EmModelConfigurationVector;
     
   public:
     TG4EmModelPhysics(const G4String& name = "EmModel");
@@ -66,13 +64,6 @@ class TG4EmModelPhysics: public TG4VPhysicsConstructor
     static TG4EmModel GetEmModel(const G4String& modelName);
     static G4String   GetEmModelName(G4int modelType);
     
-    // set methods
-    void SetEmModel(const G4String& modelName);
-    void SetEmModelParticles(const G4String& modelName,
-                    const G4String& particles);
-    void SetEmModelRegions(const G4String& modelName,
-                    const G4String& regions);
-
   protected:
     // methods
           // construct particle and physics
@@ -85,21 +76,10 @@ class TG4EmModelPhysics: public TG4VPhysicsConstructor
     /// Not implemented
     TG4EmModelPhysics& operator=(const TG4EmModelPhysics& right);
     
-    // methods
-    TG4EmModelConfiguration* GetEmModelConfiguration(
-                                const G4String& modelName,
-                                const G4String& functionName = "") const;
-    void CreateRegions();
-    void FillModelVectorFromMedia();
     void AddModel(TG4EmModel model,
                   const G4ParticleDefinition* particle, 
                   const G4String& regionName);
-    void AddModels();
-
-    // data members
-    TG4EmModelPhysicsMessenger  fMessenger;      ///< messenger
-    G4EmConfigurator            fEmConfigurator; ///< G4 EM configurator
-    EmModelConfigurationVector  fEmModels;       ///< registered EM models
+    void AddModels(const std::vector<TG4ModelConfiguration*>& models);
 };
 
 #endif //TG4_PROCESS_MAP_PHYSICS_H

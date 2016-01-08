@@ -13,24 +13,23 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4EmModelPhysics.h"
-#include "TG4EmModelConfiguration.h"
+#include "TG4ModelConfigurationManager.h"
+#include "TG4ModelConfiguration.h"
 #include "TG4SpecialUrbanMscModel.h"
+#include "TG4GeometryManager.h"
 #include "TG4GeometryServices.h"
-#include "TG4PhysicsManager.h"
-#include "TG4MediumMap.h"
-#include "TG4Medium.h"
-#include "TG4Limits.h"
-#include "TG4G3ControlVector.h"
 #include "TG4Globals.h"
 
 #include <TVirtualMCDecayer.h>
 #include <TVirtualMC.h>
 
 #include <G4TransportationManager.hh>
+#include <G4EmConfigurator.hh>
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
 #include <G4PAIModel.hh>
 #include <G4PAIPhotModel.hh>
+#include <G4LossTableManager.hh>
 #include <G4LogicalVolumeStore.hh>
 #include <G4RegionStore.hh>
 #include <G4AnalysisUtilities.hh>
@@ -88,137 +87,36 @@ G4String  TG4EmModelPhysics::GetEmModelName(G4int modelType)
 
 //_____________________________________________________________________________
 TG4EmModelPhysics::TG4EmModelPhysics(const G4String& name)
-  : TG4VPhysicsConstructor(name),
-    fMessenger(this),
-    fEmConfigurator(),
-    fEmModels()
+  : TG4VPhysicsConstructor(name)
+    // fMessenger(this),
+    // fEmModels()
 {
 /// Standard constructor
+
+  VerboseLevel(2);
 }
 
 //_____________________________________________________________________________
 TG4EmModelPhysics::TG4EmModelPhysics(G4int theVerboseLevel,
                                      const G4String& name)
-  : TG4VPhysicsConstructor(name, theVerboseLevel),
-    fMessenger(this),
-    fEmConfigurator(),
-    fEmModels()
+  : TG4VPhysicsConstructor(name, theVerboseLevel)
+    // fMessenger(this),
+    // fEmModels()
 {
 /// Standard constructor
+
+  VerboseLevel(2);
 }
 
 //_____________________________________________________________________________
 TG4EmModelPhysics::~TG4EmModelPhysics() 
 {
 /// Destructor
-
-  EmModelConfigurationVector::iterator it;
-  for ( it = fEmModels.begin(); it != fEmModels.end(); it++ ) {
-    delete *it;
-  }
 }
 
 //
 // private methods
 //
-
-//_____________________________________________________________________________
-TG4EmModelConfiguration* TG4EmModelPhysics::GetEmModelConfiguration(
-                            const G4String& modelName,
-                            const G4String& functionName) const
-{
-/// Return model configuration via specified model name;
-/// print warning if functionName is specified and configuration is not found
-
-  EmModelConfigurationVector::const_iterator it;
-  for ( it = fEmModels.begin(); it != fEmModels.end(); it++ ) {
-    if ( (*it)->GetModelName() == modelName ) return *it;
-  }
-
-  if ( functionName.size() ) {
-    TString text = "EM model ";
-    text +=  modelName.data();
-    text += " does not exist";
-    TG4Globals::Warning(
-      "TG4EmModelPhysics", functionName, text);
-  }
-
-  return 0;
-}
-
-//_____________________________________________________________________________
-void TG4EmModelPhysics::CreateRegions()
-{
-/// Create regions for all media with special EM models
-  
-  if ( VerboseLevel() > 1 ) {
-    G4cout << "TG4EmModelPhysics::CreateRegions" << G4endl;
-  }
-
-  // Get world default region 
-  G4LogicalVolume* worldLV 
-    = G4TransportationManager::GetTransportationManager()
-        ->GetNavigatorForTracking()->GetWorldVolume()->GetLogicalVolume();
-        // We cannot access world volume via geometry services as 
-        // the it is available here only after initialization
-
-  // Get default range cut values from physics manager
-  G4double rangeCutGam 
-    = TG4PhysicsManager::Instance()->GetCutForGamma();
-  G4double rangeCutEle 
-    = TG4PhysicsManager::Instance()->GetCutForElectron();
-  G4double rangeCutPos 
-    = TG4PhysicsManager::Instance()->GetCutForPositron();
-
-  // Loop over logical volumes
-  G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-  for (G4int i=0; i<G4int(lvStore->size()); i++) {
-    G4LogicalVolume* lv = (*lvStore)[i];
-    G4bool isWorld = ( lv == worldLV ) ;
-    
-    if ( isWorld ) continue;
-
-    TG4Medium* medium
-      = TG4GeometryServices::Instance()->GetMediumMap()->GetMedium(lv, false);
-
-    if ( ! medium ) continue;
-
-    G4String mediumName = medium->GetName();
-    G4String materialName = lv->GetMaterial()->GetName();
-
-    //G4cout << "Processing volume " << lv->GetName()
-    //      << ", medium " << mediumName
-    //      << ", material " << materialName << G4endl;
-
-    // Skip volumes with media which are not in the map  
-    G4bool isEmModelRegion = false;
-    EmModelConfigurationVector::const_iterator it;
-    for ( it = fEmModels.begin(); it != fEmModels.end(); it++ ) {
-      G4String regions = (*it)->GetRegions();
-      if ( regions.find(mediumName) != std::string::npos ) isEmModelRegion = true;
-    }
-
-    if ( ! isEmModelRegion ) continue;
-
-    // If region already exists, only add the logical volume
-    // and continue the loop   
-    G4Region* region 
-      = G4RegionStore::GetInstance()->GetRegion(materialName, false );
-    //G4cout << "Got region " << regionName << " " << region << G4endl;
-    
-    if ( ! region ) {
-      region = new G4Region(materialName);
-      G4ProductionCuts* dcuts = new G4ProductionCuts();
-      dcuts->SetProductionCut(rangeCutGam, 0);
-      dcuts->SetProductionCut(rangeCutEle, 1);
-      dcuts->SetProductionCut(rangeCutPos, 2);
-      region->SetProductionCuts(dcuts);
-      //G4cout << "Created region " << regionName << G4endl;
-    }   
-    
-    region->AddRootLogicalVolume(lv);
-  }  
-}    
 
 //_____________________________________________________________________________
 void TG4EmModelPhysics::AddModel(
@@ -294,40 +192,35 @@ void TG4EmModelPhysics::AddModel(
 
     for (G4int j=0; j<G4int(regionVector.size()); ++j) {
 
-      // Get material name (=region name)
-      TG4Medium* medium
-        = TG4GeometryServices::Instance()->GetMediumMap()->GetMedium(regionVector[j]);
-      G4String regionName
-        = medium->GetMaterial()->GetName();
+      G4String regionName = regionVector[j];
 
       if ( VerboseLevel() > 1 ) {
         G4cout << "Adding EM model: " << GetEmModelName(emModel)
                << " to particle: " << particle->GetParticleName()
                << " process: " << processName
-               << " medium: " << regionVector[j]
-               << " region: " << regionName
+               << " medium(=region): " << regionName
                << G4endl;
       }
 
-      fEmConfigurator.SetExtraEmModel(
-                        particle->GetParticleName(), processName, g4EmModel,
-                        regionName, 0.0, DBL_MAX, g4FluctModel);
+      G4LossTableManager::Instance()->EmConfigurator()
+        ->SetExtraEmModel(particle->GetParticleName(), processName, g4EmModel,
+                          regionName, 0.0, DBL_MAX, g4FluctModel);
     }
   }
 }                               
 
 //_____________________________________________________________________________
-void TG4EmModelPhysics::AddModels()
+void TG4EmModelPhysics::AddModels(const std::vector<TG4ModelConfiguration*>& models)
 {
 /// Loop over all particles and their processes and check if
 /// the process is present in the map
 
   if ( VerboseLevel() > 1 ) {
     G4cout << "TG4EmModelPhysics::AddModels" << G4endl;
-  }  
+  }
 
-  EmModelConfigurationVector::const_iterator it;
-  for ( it = fEmModels.begin(); it != fEmModels.end(); it++ ) {
+  std::vector<TG4ModelConfiguration*>::const_iterator it;
+  for ( it = models.begin(); it != models.end(); it++ ) {
 
     // Get model configuration
     TG4EmModel emModel = GetEmModel((*it)->GetModelName());
@@ -344,10 +237,10 @@ void TG4EmModelPhysics::AddModels()
       if ( particles != "all" &&
            particles.find(particle->GetParticleName()) == std::string::npos ) {
            continue;
-      }     
-                 
+      }
+
       AddModel(emModel, particle, regions);
-    }                
+    }
   }
 }
 
@@ -367,67 +260,33 @@ void TG4EmModelPhysics::ConstructProcess()
 /// Loop over all particles and their processes and check if
 /// the process is present in the map
 
-  // Do nothing if no models were set  
-  if ( fEmModels.size() == 0 ) return;
+  if ( VerboseLevel() > 1 ) {
+    G4cout << "TGEmModelPhysics::ConstructProcess " << G4endl;
+  }
 
-  // Create regions
-  CreateRegions();
+  // Get model configurations vector from geometry manager
+  TG4ModelConfigurationManager* emModelsManager
+    = TG4GeometryManager::Instance()->GetEmModelsManager();
+
+  const std::vector<TG4ModelConfiguration*>& models
+    = emModelsManager->GetVector();
+
+  // Do nothing if no models were set
+  if ( models.size() == 0 ) {
+    if ( VerboseLevel() > 1 ) {
+      G4cout << "No EM models are defined." << G4endl;
+    }
+    return;
+  }
 
   // Add user selected models to G4 EM configurator
-  AddModels();
-  
-  // Let G4 EM configurator to add all previously declared models to corresponding 
+  AddModels(models);
+
+  // Let G4 EM configurator to add all previously declared models to corresponding
   // processes
-  fEmConfigurator.AddModels();
-    
+  G4LossTableManager::Instance()->EmConfigurator()->AddModels();
+
   if ( VerboseLevel() > 0 ) {
     G4cout << "### Selected EmModels added to EM processes" << G4endl;
-  }    
-}
-
-//_____________________________________________________________________________
-void TG4EmModelPhysics::SetEmModel(const G4String& modelName)
-{
-/// Set an extra EM model with the given name.
-
-  if ( ! GetEmModelConfiguration(modelName) ) {
-    fEmModels.push_back(new TG4EmModelConfiguration(modelName));
-  }
-  else {
-    TString text = "Cannot create EM model ";
-    text +=  modelName.data();
-    text += " twice.";
-    TG4Globals::Warning(
-      "TG4EmModelPhysics", "CreateEmModel", text);
   }
 }
-
-//_____________________________________________________________________________
-void TG4EmModelPhysics::SetEmModelParticles(const G4String& modelName,
-                                            const G4String& particles)
-{
-/// Set particles for the extra EM model for given medium.
-
-  TG4EmModelConfiguration* emModelConfiguration
-    = GetEmModelConfiguration(modelName, "SetEmModelParticles");
-
-  if ( ! emModelConfiguration ) return;
-
-  emModelConfiguration->SetParticles(particles);
-}
-
-//_____________________________________________________________________________
-void TG4EmModelPhysics::SetEmModelRegions(const G4String& modelName,
-                                          const G4String& regions)
-{
-/// Set regions for the extra EM model for given medium.
-
-  TG4EmModelConfiguration* emModelConfiguration
-    = GetEmModelConfiguration(modelName, "SetEmModelRegions");
-
-  if ( ! emModelConfiguration ) return;
-
-  emModelConfiguration->SetRegions(regions);
-}
-
-
