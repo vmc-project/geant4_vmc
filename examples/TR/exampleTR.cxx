@@ -49,7 +49,7 @@ int main(int argc, char** argv)
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4 
   TG4RunConfiguration* runConfiguration 
-    = new TG4RunConfiguration("geomRootToGeant4", "emStandard");
+    = new TG4RunConfiguration("geomRootToGeant4", "emStandard", "", false, false);
 
   // TGeant4
   TGeant4* geant4

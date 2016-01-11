@@ -21,7 +21,7 @@ void Config()
 
   // Run configuration
   TG4RunConfiguration* runConfiguration 
-      = new TG4RunConfiguration("geomRootToGeant4", "emStandard");
+      = new TG4RunConfiguration("geomRootToGeant4", "emStandard", "", false, false);
   
   // Run configuration with special cuts activated
   // TG4RunConfiguration* runConfiguration 

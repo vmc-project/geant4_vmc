@@ -27,7 +27,7 @@ namespace Garfield
 RunConfiguration::RunConfiguration(const TString& geometry,
     	                           const TString& physicsList,
                                    const TString& specialProcess)
-  : TG4RunConfiguration(geometry, physicsList, specialProcess) 
+  : TG4RunConfiguration(geometry, physicsList, specialProcess, false, false)
 {
 /// Standard constructor
 /// \param geometry        Selection of geometry option

@@ -20,7 +20,7 @@ void Config()
 
   // Run configuration
   TG4RunConfiguration* runConfiguration
-      = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT", "gflash");
+      = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT", "gflash", false, false);
   
   // Run configuration with special cuts activated
   // Gflash::RunConfiguration* runConfiguration 

@@ -215,7 +215,7 @@ int main(int argc, char** argv)
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4 
   TG4RunConfiguration* runConfiguration 
-    = new TG4RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics);
+    = new TG4RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics, false, false);
 
   // TGeant4
   TGeant4* geant4
