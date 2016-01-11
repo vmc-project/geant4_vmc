@@ -30,9 +30,6 @@
 #include <TInterpreter.h>
 #include <TVirtualMCApplication.h>
 
-G4ThreadLocal 
-TG4SpecialControlsV2* TG4ActionInitialization::fgSpecialControls = 0;
-
 //_____________________________________________________________________________
 TG4ActionInitialization::TG4ActionInitialization(
                                   TG4RunConfiguration* runConfiguration)
@@ -67,9 +64,6 @@ TG4ActionInitialization::~TG4ActionInitialization()
     delete fStackingAction;
   }
 #endif
-
-  //delete fgSpecialControls;
-     // deleted via G4AutoDelete
 }
 
 //
@@ -191,11 +185,11 @@ void TG4ActionInitialization::Build() const
   //
   if (  fRunConfiguration->IsSpecialControls() ) {
     G4cout << "### TG4SpecialControlsV2 constructed" << G4endl;
-    fgSpecialControls = new TG4SpecialControlsV2();
-    G4AutoDelete::Register(fgSpecialControls);
+    TG4SpecialControlsV2* specialControls = new TG4SpecialControlsV2();
+       // special controls are deleted in TG4SteppingAction
  
-    trackingAction->SetSpecialControls(fgSpecialControls);
-    steppingAction->SetSpecialControls(fgSpecialControls);
+    trackingAction->SetSpecialControls(specialControls);
+    steppingAction->SetSpecialControls(specialControls);
   }
   //G4cout << "TG4ActionInitialization::Build done " << this << G4endl;
 }
