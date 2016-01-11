@@ -33,10 +33,11 @@
 #include <G4XTRGammaRadModel.hh>
 #include <G4XTRRegularRadModel.hh>
 #include <G4XTRTransparentRegRadModel.hh>
+#include <G4AutoDelete.hh>
 
 //_____________________________________________________________________________
 G4ThreadLocal 
-std::vector<G4VXTRenergyLoss*> TG4TransitionRadiationPhysics::fXtrProcesses;
+std::vector<G4VXTRenergyLoss*>* TG4TransitionRadiationPhysics::fXtrProcesses = 0;
 
 //_____________________________________________________________________________
 TG4TransitionRadiationPhysics::TG4TransitionRadiationPhysics(const G4String& name)
@@ -56,7 +57,7 @@ TG4TransitionRadiationPhysics::TG4TransitionRadiationPhysics(G4int theVerboseLev
 //_____________________________________________________________________________
 TG4TransitionRadiationPhysics::~TG4TransitionRadiationPhysics()
 {
-/// Desctructor
+/// Destructor
 }
 
 //
@@ -196,7 +197,12 @@ void TG4TransitionRadiationPhysics::ConstructProcess()
              << " in radiator " << radiators[i]->GetVolumeName() << G4endl;
     }  
 
-    fXtrProcesses.push_back(xtrProcess);
+    if ( ! fXtrProcesses ) {
+      fXtrProcesses = new std::vector<G4VXTRenergyLoss*>();
+      G4AutoDelete::Register(fXtrProcesses);
+    }
+
+    fXtrProcesses->push_back(xtrProcess);
     xtrProcess->SetVerboseLevel(VerboseLevel()); 
       // CHECK if better to decrement this
 
