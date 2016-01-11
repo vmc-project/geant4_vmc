@@ -19,7 +19,6 @@
 #include <G4Threading.hh>
 
 class TG4RunConfiguration;
-class TG4SpecialControlsV2;
 class TG4TrackingAction;
 class TG4SteppingAction;
 
@@ -55,10 +54,6 @@ class TG4ActionInitialization : public G4VUserActionInitialization
     /// Not implemented
     TG4ActionInitialization& operator=(const TG4ActionInitialization& right);
     
-    //  static/thread local data members
-    /// special controls manager
-    static G4ThreadLocal TG4SpecialControlsV2* fgSpecialControls; 
-
     //  data members
     TG4RunConfiguration*  fRunConfiguration; ///< run configuration
 

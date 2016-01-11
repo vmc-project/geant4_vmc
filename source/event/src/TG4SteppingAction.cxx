@@ -61,6 +61,8 @@ TG4SteppingAction::TG4SteppingAction()
 TG4SteppingAction::~TG4SteppingAction() 
 {
 /// Destructor
+
+  delete fSpecialControls;
 }
 
 //
