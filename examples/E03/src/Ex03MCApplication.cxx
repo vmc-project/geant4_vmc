@@ -93,7 +93,7 @@ Ex03MCApplication::Ex03MCApplication(const Ex03MCApplication& origin)
     fIsMaster(kFALSE)
 {
 /// Copy constructor for cloning application on workers (in multithreading mode)
-/// \param \origin   The source MC application
+/// \param origin   The source MC application
 
   // Create new user stack
   fStack = new Ex03MCStack(1000);

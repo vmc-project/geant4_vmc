@@ -1,6 +1,6 @@
 /*! 
 
-/// \file "Gflash/.README"
+/// \file "Gflash/.README.txt"
 /// \brief The Example Gflash README page
 
 \page README_Gflash Example Gflash

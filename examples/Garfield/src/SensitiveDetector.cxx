@@ -61,7 +61,6 @@ SensitiveDetector::SensitiveDetector(const SensitiveDetector& origin)
 /// Copy constructor (for cloning on worker thread in MT mode).
 /// Create hits collection.
 /// \param origin    The source object (on master).
-/// \param detector  The detector construction
 
   fHit = new Hit();
 }

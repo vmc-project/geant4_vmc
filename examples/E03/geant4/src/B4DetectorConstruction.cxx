@@ -25,7 +25,7 @@
 //
 // $Id: B4DetectorConstruction.cc 77601 2013-11-26 17:08:44Z gcosmo $
 // 
-/// \file B4DetectorConstruction.cc
+/// \file B4DetectorConstruction.cxx
 /// \brief Implementation of the B4DetectorConstruction class
 
 #include "B4DetectorConstruction.hh"

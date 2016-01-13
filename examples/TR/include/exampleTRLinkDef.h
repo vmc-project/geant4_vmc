@@ -7,7 +7,7 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file TR/include/ example03LinkDef.h
+/// \file TR/include/exampleTRLinkDef.h
 /// \brief The CINT link definitions for example TR classes
 
 #ifdef __CINT__

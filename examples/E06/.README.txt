@@ -1,6 +1,6 @@
 /*! 
 
-/// \file "E06/.README"
+/// \file "E06/.README.txt"
 /// \brief The Example E06 README page
 
 

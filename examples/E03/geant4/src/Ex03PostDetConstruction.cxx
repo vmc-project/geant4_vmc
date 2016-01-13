@@ -7,7 +7,7 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03PostDetConstruction.cc
+/// \file Ex03PostDetConstruction.cxx
 /// \brief Implementation of the Ex03PostDetConstruction class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n

@@ -25,7 +25,7 @@
 //
 // $Id: B5MagneticField.cc 77656 2013-11-27 08:52:57Z gcosmo $
 //
-/// \file B5MagneticField.cc
+/// \file B5MagneticField.cxx
 /// \brief Implementation of the B5MagneticField class
 
 #include "B5MagneticField.hh"

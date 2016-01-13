@@ -58,7 +58,6 @@ void A01LocalMagField::Field(const Double_t* /*x*/, Double_t* B)
 {
 /// Fill in the field value B in the given position at x.
 /// The local field is uniform in the associated volume.
-/// \param x   The position
 /// \param B   The field value (in kiloGauss) 
 
   B[0] = fB[0]; 

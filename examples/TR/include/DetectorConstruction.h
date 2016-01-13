@@ -10,7 +10,7 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file TR/include/ DetectorConstruction.h
+/// \file TR/include/DetectorConstruction.h
 /// \brief Definition of the DetectorConstruction class 
 ///
 /// Geant4 TestEm10 adapted to Virtual Monte Carlo.

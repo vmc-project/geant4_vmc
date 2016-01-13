@@ -19,7 +19,7 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
 /// Root interactive session
 /// Note that since Root 6 the libraries have to be loaded first
 /// via load_g3.C.
-/// \param configMacro configuration macro name, default \ref Garfield/g3Config.C 
+/// \param configMacro configuration macro name, default \ref Garfield/g3tgeoConfig.C
 
   // MC application
   VMC::Garfield::MCApplication* appl 

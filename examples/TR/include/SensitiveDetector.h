@@ -10,7 +10,7 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file TR/include/ SensitiveDetector.h
+/// \file TR/include/SensitiveDetector.h
 /// \brief Definition of the SensitiveDetector class 
 ///
 /// Geant4 TestEm10 adapted to Virtual Monte Carlo.

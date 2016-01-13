@@ -21,7 +21,5 @@ and also
   - TMCTemplateAutoLock - which provides a mechanism to create a mutex and locks/unlocks it.
    Can be used by applications to implement in a portable way a mutexing logic.
    It was extracted from G4AutoLock implementation for Linux platforms.
-  
-\endverbatim
 
 */

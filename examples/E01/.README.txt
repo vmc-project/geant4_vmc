@@ -1,6 +1,6 @@
 /*! 
 
-\file "E01/.README"
+\file "E01/.README.txt"
 \brief The Example E01 README page
 
 \page README_E01 Example E01

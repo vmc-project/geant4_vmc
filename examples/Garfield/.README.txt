@@ -23,7 +23,7 @@
   <pre>
   -DGarfield_DIR=path_to_garfield_installation
   -DGarfield_INC_DIR=path_to_garfield_source/Include
-  <pre>
+  </pre>
 
 \section garfield_s3 Macros
 

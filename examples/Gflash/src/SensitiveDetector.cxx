@@ -44,8 +44,7 @@ SensitiveDetector::SensitiveDetector(const char* name)
 {
 /// Standard constructor.
 /// Create hits collection.
-/// \param name      The calorimeter hits collection name
-/// \param detector  The detector construction
+/// \param name      The calorimeter name
 
   fCaloHitsCollection = new TClonesArray("VMC::Gflash::Hit", 500);
 }
@@ -60,7 +59,6 @@ SensitiveDetector::SensitiveDetector(const SensitiveDetector& origin)
 /// Copy constructor (for cloning on worker thread in MT mode).
 /// Create hits collection.
 /// \param origin    The source object (on master).
-/// \param detector  The detector construction
 
   fCaloHitsCollection = new TClonesArray("Gflash::Hit");
 }

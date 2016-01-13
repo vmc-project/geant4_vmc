@@ -7,7 +7,7 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file  example03LinkDef.h
+/// \file  exampleE03LinkDef.h
 /// \brief The CINT link definitions for example E03 classes
 
 #ifdef __CINT__
