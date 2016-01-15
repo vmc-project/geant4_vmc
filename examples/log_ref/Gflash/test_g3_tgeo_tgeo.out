@@ -1,0 +1,182 @@
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version   5.34/34    2 October 2015   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+ROOT 5.34/34 (v5-34-34@v5-34-34, Jan 14 2016, 12:53:45 on linuxx8664gcc)
+
+CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+
+Processing load_g3.C...
+Loading Geant3 libraries ... finished
+Processing test_Gflash.C("g3tgeoConfig.C")...
+Geant3 has been created.
+Info in <TGeoManager::TGeoManager>: Geometry Gflash_geometry, Gflash VMC example geometry created
+Info in <TGeoManager::SetTopVolume>: Top volume is ExpHall_log. Master volume is ExpHall_log
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoManager::CountLevels>: max level = 2, max placements = 100
+Info in <TGeoManager::CloseGeometry>: 102 nodes/ 3 volume UID's in Gflash VMC example geometry
+Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+There are 10 crystals per row in the calorimeter, so in total 100 crystals
+The have width of 3 cm and a lenght of 24 cm. The Material is PbWO4
+ Start generating event Nr 1
+Warning in <gufld>: Using deprecated function TVirtualMCApplication::Field().
+Warning in <gufld>: New TVirtualMagField interface should be used instead.
+
+******************************************
+Elapsed Time: 
+Real time 0:00:00, CP time 0.380
+
+******************************************
+ ------ ExGflashEventAction::End of event nr. 1  -----
+  79277 hits are stored in HitsCollection 
+   e1  12.1099   e3x3  47.3085   e5x5  47.9631 GeV
+ Total energy deposited in the calorimeter: 49.2475 (GeV)
+ Start generating event Nr 2
+
+******************************************
+Elapsed Time: 
+Real time 0:00:00, CP time 0.350
+
+******************************************
+ ------ ExGflashEventAction::End of event nr. 2  -----
+  81801 hits are stored in HitsCollection 
+   e1  12.7856   e3x3  47.7439   e5x5  48.3972 GeV
+ Total energy deposited in the calorimeter: 49.7455 (GeV)
+ Start generating event Nr 3
+
+******************************************
+Elapsed Time: 
+Real time 0:00:00, CP time 0.340
+
+******************************************
+ ------ ExGflashEventAction::End of event nr. 3  -----
+  81021 hits are stored in HitsCollection 
+   e1  12.7912   e3x3  47.8834   e5x5  48.534 GeV
+ Total energy deposited in the calorimeter: 49.7607 (GeV)
+ Start generating event Nr 4
+
+******************************************
+Elapsed Time: 
+Real time 0:00:00, CP time 0.340
+
+******************************************
+ ------ ExGflashEventAction::End of event nr. 4  -----
+  81096 hits are stored in HitsCollection 
+   e1  13.0915   e3x3  48.1738   e5x5  48.7312 GeV
+ Total energy deposited in the calorimeter: 49.8252 (GeV)
+ Start generating event Nr 5
+
+******************************************
+Elapsed Time: 
+Real time 0:00:00, CP time 0.320
+
+******************************************
+ ------ ExGflashEventAction::End of event nr. 5  -----
+  80853 hits are stored in HitsCollection 
+   e1  13.3362   e3x3  47.831   e5x5  48.4661 GeV
+ Total energy deposited in the calorimeter: 49.6353 (GeV)
+ Start generating event Nr 6
+
+******************************************
+Elapsed Time: 
+Real time 0:00:00, CP time 0.320
+
+******************************************
+ ------ ExGflashEventAction::End of event nr. 6  -----
+  80926 hits are stored in HitsCollection 
+   e1  12.4419   e3x3  47.8235   e5x5  48.5262 GeV
+ Total energy deposited in the calorimeter: 49.6767 (GeV)
+ Start generating event Nr 7
+
+******************************************
+Elapsed Time: 
+Real time 0:00:00, CP time 0.310
+
+******************************************
+ ------ ExGflashEventAction::End of event nr. 7  -----
+  81305 hits are stored in HitsCollection 
+   e1  12.3331   e3x3  47.8657   e5x5  48.4539 GeV
+ Total energy deposited in the calorimeter: 49.7486 (GeV)
+ Start generating event Nr 8
+
+******************************************
+Elapsed Time: 
+Real time 0:00:00, CP time 0.300
+
+******************************************
+ ------ ExGflashEventAction::End of event nr. 8  -----
+  81064 hits are stored in HitsCollection 
+   e1  12.5936   e3x3  48.1514   e5x5  48.6998 GeV
+ Total energy deposited in the calorimeter: 49.8487 (GeV)
+ Start generating event Nr 9
+
+******************************************
+Elapsed Time: 
+Real time 0:00:00, CP time 0.310
+
+******************************************
+ ------ ExGflashEventAction::End of event nr. 9  -----
+  81215 hits are stored in HitsCollection 
+   e1  12.3182   e3x3  47.6728   e5x5  48.4879 GeV
+ Total energy deposited in the calorimeter: 49.7685 (GeV)
+ Start generating event Nr 10
+
+******************************************
+Elapsed Time: 
+Real time 0:00:00, CP time 0.310
+
+******************************************
+ ------ ExGflashEventAction::End of event nr. 10  -----
+  80187 hits are stored in HitsCollection 
+   e1  12.5002   e3x3  47.734   e5x5  48.3778 GeV
+ Total energy deposited in the calorimeter: 49.5699 (GeV)
+
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   612266815    247E733F HEX
+
+ MZSTOR.  Initialize Store  0  in /GCBANK/
+          with Store/Table at absolute adrs   606821525   612266815
+                                        HEX    242B5C95    247E733F
+                                        HEX    FFACE78A           0
+                              relative adrs    -5445750           0
+          with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
+          This store has a fence of   16 words.
+
+ MZLOGL.  Set Log Level 0 for store  0
+1*****  GEANT Version  3.21/11 Released on 100298
+0*****  Correction Cradle Version  0.1100
+
+ MZDIV.   Initialize Division  Constant  in Store  0
+          NW/NWMAX=   20004000000,  MODE/KIND=  1  2
+          Division 20 initialized.
+
+ MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
+
+ MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+
+ Calculating cross section tables, see gphysi.dat for more information
+
+ Cross section calculation concluded successfully
+ **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
+ **** GTRIGI: IEVENT=      2 IDEVT=      2 Random Seeds =       4357           0
+ **** GTRIGI: IEVENT=      3 IDEVT=      3 Random Seeds =       4357           0
+ **** GTRIGI: IEVENT=      4 IDEVT=      4 Random Seeds =       4357           0
+ **** GTRIGI: IEVENT=      5 IDEVT=      5 Random Seeds =       4357           0
+ **** GTRIGI: IEVENT=      6 IDEVT=      6 Random Seeds =       4357           0
+ **** GTRIGI: IEVENT=      7 IDEVT=      7 Random Seeds =       4357           0
+ **** GTRIGI: IEVENT=      8 IDEVT=      8 Random Seeds =       4357           0
+ **** GTRIGI: IEVENT=      9 IDEVT=      9 Random Seeds =       4357           0
+ **** GTRIGI: IEVENT=     10 IDEVT=     10 Random Seeds =       4357           0
