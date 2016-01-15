@@ -82,6 +82,7 @@ Ex06MCApplication::Ex06MCApplication(const Ex06MCApplication& origin)
     fDetConstruction(origin.fDetConstruction),
     fPrimaryGenerator(0),
     fOldGeometry(origin.fOldGeometry),
+    fTestStackPopper(origin.fTestStackPopper),
     fIsMaster(kFALSE)
 {
 /// Copy constructor (for clonig on worker thread in MT mode).
