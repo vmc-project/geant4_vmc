@@ -1,6 +1,6 @@
 ------------------------------------------------
  The Virtual Monte Carlo package
- Copyright (C) 2007 - 2014 Ivana Hrivnacova
+ Copyright (C) 2007 - 2016 Ivana Hrivnacova
  All rights reserved.
 
  For the licensing terms see geant4_vmc/LICENSE.
@@ -9,6 +9,48 @@
      
 Tags (history):
 ===============
+  15/01/2016
+  v3-3:
+    All packages:
+    - Migration to Geant4 10.2
+
+    Geant4 VMC:
+      - Integration of fast simulation based on the Geant4 framework:
+        - Added TG4VUserFastSimulation base class for user defined
+          fast simulation models
+        - Added TG4GflashFastSimulation and its messenger:
+          this makes possible to activate Gflash fast simulation via an option in
+          the configuration macro
+      - Added support for transition radiation physics:
+        - Added TG4TransitionRadiation physics builder, according to
+          the Geant4 extended example TestEm10
+        - Added new command to define a radiator:
+          /mcDet/setRadiator ...
+      - Implemented command to override the default G4 production cuts table energy range:
+        - /mcPhysics/productionCutsTableEnergyRange
+          (used in the Garfield example)
+
+    Examples:
+      - Added new examples:
+        - Gflash - use of Geant4 GFlash fast simulation
+        - Garfield - integration of Garfield++ using Geant4 fast simulation framework
+        - TR - use of Geant4 transition radiation physics
+      - All new examples use features of Geant4; when run with Geant3 the Geant3
+        standard configuration & physics is used
+      - The examples should be run in sequential mode.
+
+    Fixes:
+    Geant4 VMC:
+      - Fix in TG4ParticlesManager::CreateDynamicParticle(TParticle*):
+        the particle polarization was not propagated from TParticle to Geant4;
+        this affected the particles added to tracking by the user via stackPopper
+      - Fixed deleting TG4SpecialControlsV2 instance in MT mode
+    Examples:
+      - In E06: fixed in cloning MCApplication on workers
+
+    Tested with Geant4 10.02 (with embedded CLHEP  2.3.1.1.)
+      Root 5.34/34 and Root 6.06/00, VGM 4.3, Garfield v1.0
+
   17/08/2015
   v3-2:
     Geant4 VMC:
