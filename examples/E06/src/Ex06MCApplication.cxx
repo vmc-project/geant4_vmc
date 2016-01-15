@@ -113,6 +113,7 @@ Ex06MCApplication::Ex06MCApplication()
     fDetConstruction(0),
     fPrimaryGenerator(0),
     fOldGeometry(kFALSE),
+    fTestStackPopper(kFALSE),
     fIsMaster(kTRUE)
 {    
 /// Default constructor
