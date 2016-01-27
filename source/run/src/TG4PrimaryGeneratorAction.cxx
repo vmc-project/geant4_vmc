@@ -135,12 +135,11 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
       // when event and then vertex is deleted)
       G4ThreeVector momentum 
         = particlesManager->GetParticleMomentum(particle);
+      G4double energy
+        = particle->Energy()*TG4G3Units::Energy();
       G4PrimaryParticle* primaryParticle 
         = new G4PrimaryParticle(particleDefinition, 
-                                momentum.x(), momentum.y(), momentum.z());
- 
-      // Set mass
-      primaryParticle->SetMass(particleDefinition->GetPDGMass());
+                                momentum.x(), momentum.y(), momentum.z(), energy);
 
       // Set charge
       G4double charge = particleDefinition->GetPDGCharge();
