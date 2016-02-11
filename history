@@ -9,6 +9,23 @@
      
 Tags (history):
 ===============
+  11/02/2016
+  v3-2-p1:
+    Patch release, including following fixes:
+    Geant4 VMC:
+      - Fix in transforming primaries from TParticle to G4PrimaryParticle:
+        - From Oliver Freyermuth (University of Bonn)
+          do not override the user defined mass with the PDG mass
+      - Fix in TG4ParticlesManager::CreateDynamicParticle(TParticle*):
+        the particle polarization was not propagated from TParticle to Geant4;
+        this affected the particles added to tracking by the user via stackPopper
+      - Fixed deleting TG4SpecialControlsV2 instance in MT mode
+    Examples:
+      - In E06: fixed in cloning MCApplication on workers
+
+    Tested with Geant4 10.01.p02 (with embedded CLHEP 2.2.0.4)
+      Root 5.34/26 and Root 6.04/02, VGM 4.3
+
   17/08/2015
   v3-2:
     Geant4 VMC:
