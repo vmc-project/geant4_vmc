@@ -44,8 +44,12 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
     fIsUserMaxStepCmd(),
     fIsMaxStepInLowDensityMaterialsCmd(0),
     fSetLimitDensityCmd(0),
-    fSetMaxStepInLowDensityMaterialsCmd(0)
-    
+    fSetMaxStepInLowDensityMaterialsCmd(0),
+    fSetNewRadiatorCmd(0),
+    fSetRadiatorLayerCmd(0),
+    fSetRadiatorStrawTubeCmd(0),
+    fSetRadiatorCmd(0),
+    fRadiatorDescription(0)
 {
 /// Standard constructor
 
@@ -158,6 +162,12 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fSetMaxStepInLowDensityMaterialsCmd->SetUnitCategory("Length");
   fSetMaxStepInLowDensityMaterialsCmd->AvailableForStates(G4State_PreInit);
 
+  CreateSetNewRadiatorCmd();
+  CreateSetRadiatorLayerCmd();
+  CreateSetRadiatorStrawTubeCmd();
+
+  // This command is now deprecated, will be removed in the next version.
+  // It is replaced with a simple setNewRadiator command.
   CreateSetRadiatorCmd();
 }
 
@@ -181,12 +191,81 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
   delete fIsMaxStepInLowDensityMaterialsCmd;
   delete fSetLimitDensityCmd;
   delete fSetMaxStepInLowDensityMaterialsCmd;
+  delete fSetNewRadiatorCmd;
+  delete fSetRadiatorLayerCmd;
+  delete fSetRadiatorStrawTubeCmd;
   delete fSetRadiatorCmd;
 }
 
 //
 // private methods
 //
+
+//_____________________________________________________________________________
+void TG4DetConstructionMessenger::CreateSetNewRadiatorCmd()
+{
+  G4UIparameter* volumeName = new G4UIparameter("volumeName", 's', false);
+  volumeName->SetGuidance("Radiator envelope.");
+
+  G4UIparameter* xtrModel = new G4UIparameter("xtrModel", 's', false);
+  xtrModel->SetGuidance("XTR model.");
+  //xtrModel->SetCandidates("gammaR gammaM strawR regR transpR regM");
+
+  G4UIparameter* foilNumber = new G4UIparameter("foilNumber", 'i', false);
+  foilNumber->SetGuidance("Number of foils");
+
+  G4UIparameter* strawTubeMaterial = new G4UIparameter("strawTubeMaterial", 's', true);
+  strawTubeMaterial->SetGuidance("Straw tube material name.");
+  strawTubeMaterial->SetDefaultValue("");
+
+  fSetNewRadiatorCmd = new G4UIcommand("/mcDet/setNewRadiator", this);
+  fSetNewRadiatorCmd->SetGuidance("Define new radiator.");
+  fSetNewRadiatorCmd->SetParameter(volumeName);
+  fSetNewRadiatorCmd->SetParameter(xtrModel);
+  fSetNewRadiatorCmd->SetParameter(foilNumber);
+  fSetNewRadiatorCmd->AvailableForStates(G4State_PreInit);
+}
+
+//_____________________________________________________________________________
+void TG4DetConstructionMessenger::CreateSetRadiatorLayerCmd()
+{
+  G4UIparameter* volumeName = new G4UIparameter("materialName", 's', false);
+  volumeName->SetGuidance("Layer material name.");
+
+  G4UIparameter* thickness = new G4UIparameter("thickness", 'd', false);
+  thickness->SetGuidance("The layer thickness (cm)");
+
+  G4UIparameter* fluctuation = new G4UIparameter("fluctuation", 'd', false);
+  fluctuation->SetGuidance(
+    "Parameter that defines the gas relative thickness fluctuation as 1/sqrt(param)");
+
+  fSetRadiatorLayerCmd = new G4UIcommand("/mcDet/setRadiatorLayer", this);
+  fSetRadiatorLayerCmd->SetGuidance("Define the radiator layer (foil/gass) properties.");
+  fSetRadiatorLayerCmd->SetParameter(volumeName);
+  fSetRadiatorLayerCmd->SetParameter(thickness);
+  fSetRadiatorLayerCmd->SetParameter(fluctuation);
+  fSetRadiatorLayerCmd->AvailableForStates(G4State_PreInit);
+}
+
+//_____________________________________________________________________________
+void TG4DetConstructionMessenger::CreateSetRadiatorStrawTubeCmd()
+{
+  G4UIparameter* gasMaterialName = new G4UIparameter("gasMaterialName", 's', false);
+  gasMaterialName->SetGuidance("Straw tube gas material name.");
+
+  G4UIparameter* wallThickness = new G4UIparameter("wallThickness", 'd', false);
+  wallThickness->SetGuidance("The mean straw tube wall thickness (cm)");
+
+  G4UIparameter* gasThickness = new G4UIparameter("gasThickness", 'd', false);
+  wallThickness->SetGuidance("The mean straw tube gass thickness (cm)");
+
+  fSetRadiatorStrawTubeCmd = new G4UIcommand("/mcDet/setRadiatorStrawTube", this);
+  fSetRadiatorStrawTubeCmd->SetGuidance("Define the radiator straw tube properties.");
+  fSetRadiatorStrawTubeCmd->SetParameter(gasMaterialName);
+  fSetRadiatorStrawTubeCmd->SetParameter(wallThickness);
+  fSetRadiatorStrawTubeCmd->SetParameter(gasThickness);
+  fSetRadiatorStrawTubeCmd->AvailableForStates(G4State_PreInit);
+}
 
 //_____________________________________________________________________________
 void TG4DetConstructionMessenger::CreateSetRadiatorCmd()
@@ -290,7 +369,75 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
       ->SetMaxStepInLowDensityMaterials(
           fSetMaxStepInLowDensityMaterialsCmd->GetNewDoubleValue(newValues));
   }
+  else if (command == fSetNewRadiatorCmd) {
+    // tokenize parameters in a vector
+    std::vector<G4String> parameters;
+    G4Analysis::Tokenize(newValues, parameters);
+
+    G4int counter = 0;
+    G4String volumeName = parameters[counter++];
+    G4String xtrModel = parameters[counter++];
+    G4int foilNumber = G4UIcommand::ConvertToInt(parameters[counter++]);
+
+    fRadiatorDescription
+      = TG4GeometryManager::Instance()->CreateRadiator(volumeName);
+    fRadiatorDescription->SetXtrModel(xtrModel);
+    fRadiatorDescription->SetFoilNumber(foilNumber);
+  }
+  else if (command == fSetRadiatorLayerCmd) {
+
+    if ( ! fRadiatorDescription ) {
+      TG4Globals::Warning(
+        "TG4DetConstructionMessenger", "SetNewValue",
+        TString("Radiator was not defined.")
+          + TG4Globals::Endl()
+          + TString("/mcDetector/setNewRadiator must be called first."));
+        return;
+    }
+
+    // tokenize parameters in a vector
+    std::vector<G4String> parameters;
+    G4Analysis::Tokenize(newValues, parameters);
+
+    G4int counter = 0;
+    G4String materialName = parameters[counter++];
+    G4double thickness = G4UIcommand::ConvertToDouble(parameters[counter++]);
+    G4double fluctuation = G4UIcommand::ConvertToDouble(parameters[counter++]);
+
+    // apply units
+    thickness *= TG4G3Units::Length();
+
+    fRadiatorDescription->SetLayer(materialName, thickness, fluctuation);
+  }
+  else if (command == fSetRadiatorStrawTubeCmd) {
+
+    if ( ! fRadiatorDescription ) {
+      TG4Globals::Warning(
+        "TG4DetConstructionMessenger", "SetNewValue",
+        TString("Radiator was not defined.")
+          + TG4Globals::Endl()
+          + TString("/mcDetector/setNewRadiator must be called first."));
+        return;
+    }
+
+    // tokenize parameters in a vector
+    std::vector<G4String> parameters;
+    G4Analysis::Tokenize(newValues, parameters);
+
+    G4int counter = 0;
+    G4String gasMaterialName = parameters[counter++];
+    G4double wallThickness = G4UIcommand::ConvertToDouble(parameters[counter++]);
+    G4double gasThickness = G4UIcommand::ConvertToDouble(parameters[counter++]);
+
+    // apply units
+    wallThickness *= TG4G3Units::Length();
+    gasThickness *= TG4G3Units::Length();
+
+    fRadiatorDescription->SetStrawTube(gasMaterialName, wallThickness, gasThickness);
+  }
   else if (command == fSetRadiatorCmd) {
+    // The following code is deprecated, will be removed in the next version
+
     // tokenize parameters in a vector
     std::vector<G4String> parameters;
     G4Analysis::Tokenize(newValues, parameters);
@@ -315,11 +462,11 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
     TG4RadiatorDescription* radiatorDescription
       = TG4GeometryManager::Instance()->CreateRadiator(volumeName);
     radiatorDescription->SetXtrModel(xtrModel);
-    radiatorDescription->SetFoilMaterialName(foilMaterial);
-    radiatorDescription->SetGasMaterialName(gasMaterial);
-    radiatorDescription->SetFoilThickness(foilThickness);
-    radiatorDescription->SetGasThickness(gasThickness);
     radiatorDescription->SetFoilNumber(foilNumber);
-    radiatorDescription->SetStrawTubeMaterialName(strawTubeMaterial);
+    radiatorDescription->SetLayer(foilMaterial, foilThickness, 100.);
+    radiatorDescription->SetLayer(gasMaterial, gasThickness, 100.);
+    if ( strawTubeMaterial.size() ) {
+      radiatorDescription->SetStrawTube(strawTubeMaterial, 0.53*CLHEP::mm, 3.14159*CLHEP::mm);
+    }
   }
 }

@@ -19,6 +19,7 @@
 #include <globals.hh>
 
 class TG4GeometryManager;
+class TG4RadiatorDescription;
 
 class G4UIcommand;
 class G4UIdirectory;
@@ -45,6 +46,11 @@ class G4UIcmdWithADoubleAndUnit;
 /// - /mcDet/setIsMaxStepInLowDensityMaterials true|false
 /// - /mcDet/setMaxStepInLowDensityMaterials value
 /// - /mcDet/setLimitDensity value
+/// - /mcDet/setNewRadiator volumeName xtrModel foilNumber
+/// - /mcDet/setRadiatorLayer materialName thickness fluctuation
+/// - /mcDet/setRadiatorStrawTube gasMaterialName wallThickness gassThickness
+///
+/// The following command is deprecated, it will be removed in the next version
 /// - /mcDet/setRadiator volumeName xtrModel foilMaterial gasMaterial foilDensity gasDensity foilNUmber
 ///
 /// \author I. Hrivnacova; IPN, Orsay
@@ -68,6 +74,10 @@ class TG4DetConstructionMessenger: public G4UImessenger
                                 const TG4DetConstructionMessenger &right);
 
     // methods
+    void CreateSetNewRadiatorCmd();
+    void CreateSetRadiatorLayerCmd();
+    void CreateSetRadiatorStrawTubeCmd();
+    /// The following command is deprecated, will be removed in the next version
     void CreateSetRadiatorCmd();
 
     // data members
@@ -119,8 +129,22 @@ class TG4DetConstructionMessenger: public G4UImessenger
     /// command: setMaxStepInLowDensityMaterials
     G4UIcmdWithADoubleAndUnit*  fSetMaxStepInLowDensityMaterialsCmd;
 
+    /// command: setNewRadiator
+    G4UIcommand*                fSetNewRadiatorCmd;
+
+    /// command: setRadiatorLayer
+    G4UIcommand*                fSetRadiatorLayerCmd;
+
+    /// command: setRadiatorStrawTube
+    G4UIcommand*                fSetRadiatorStrawTubeCmd;
+
     /// command: setRadiator
+    /// This command is now deprecated, will be removed in the next version.
+    /// It is replaced with a simpler setNewRadiator command.
     G4UIcommand*                fSetRadiatorCmd;
+
+    /// current radiator description
+    TG4RadiatorDescription*     fRadiatorDescription;
 };
 
 #endif //TG4_DET_CONSTRUCTION_MESSENGER_H

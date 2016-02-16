@@ -795,14 +795,15 @@ void TG4GeometryManager::CreateMagFieldParameters(const G4String& fieldVolName)
 
 //_____________________________________________________________________________
 TG4RadiatorDescription*
-TG4GeometryManager::CreateRadiator(const G4String volName)
+TG4GeometryManager::CreateRadiator(const G4String& volName)
 {
+/// Create radiator description with the given volume name
+
   TG4RadiatorDescription* radiatorDescription = new TG4RadiatorDescription(volName);
   fRadiators.push_back(radiatorDescription);
 
   return radiatorDescription;
 }
-
 
 //_____________________________________________________________________________
 void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,

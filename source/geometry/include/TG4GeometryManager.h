@@ -66,7 +66,7 @@ class TG4GeometryManager : public TG4Verbose
     void UpdateMagField();
     void CreateMagFieldParameters(const G4String& fieldVolName);
     TG4RadiatorDescription*
-         CreateRadiator(const G4String volName);
+         CreateRadiator(const G4String& volName);
     void SetUserLimits(const TG4G3CutVector& cuts,
                        const TG4G3ControlVector& controls) const;
     void SetIsLocalMagField(G4bool isLocalMagField);

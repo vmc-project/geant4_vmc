@@ -13,15 +13,15 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4RadiatorDescription.h"
+#include "TG4Globals.h"
 
 //_____________________________________________________________________________
 TG4RadiatorDescription::TG4RadiatorDescription(const G4String& volumeName)
   : fVolumeName(volumeName),
-    fFoilMaterialName(),
-    fGasMaterialName(),
-    fFoilThickness(0.),
-    fGasThickness(0.),
-    fFoilNumber(0)
+    fXtrModel(""),
+    fFoilNumber(0),
+    fLayers(),
+    fStrawTube({"", 0., 0.})
 {
 /// Default constructor
 }
@@ -30,4 +30,31 @@ TG4RadiatorDescription::TG4RadiatorDescription(const G4String& volumeName)
 TG4RadiatorDescription::~TG4RadiatorDescription() 
 {
 /// Destructor
+}
+
+//_____________________________________________________________________________
+void TG4RadiatorDescription::SetLayer(const G4String& materialName,
+	                              G4double thickness, G4double fluctuation)
+{
+  fLayers.push_back(std::make_tuple(materialName, thickness, fluctuation));
+}
+
+//_____________________________________________________________________________
+void TG4RadiatorDescription::SetStrawTube(const G4String& materialName,
+	                            G4double wallThickness, G4double gasThickness)
+{
+  fStrawTube = std::make_tuple(materialName, wallThickness, gasThickness);
+}
+
+//_____________________________________________________________________________
+TG4RadiatorDescription::Component TG4RadiatorDescription::GetLayer(G4int i) const
+{
+  if ( i >= G4int(fLayers.size()) ) {
+    TString text = "The layer ";
+    text += i;
+    text += " is not defined.";
+    TG4Globals::Warning("TG4RadiatorDescription", "GetLayer", text);
+    return std::make_tuple("", 0., 0.);
+  }
+  return fLayers[i];
 }

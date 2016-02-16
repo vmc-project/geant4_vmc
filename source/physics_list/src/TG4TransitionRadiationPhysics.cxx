@@ -72,9 +72,16 @@ TG4TransitionRadiationPhysics::CreateXTRProcess(TG4RadiatorDescription* radiator
 
   G4String xtrModel = radiatorDescription->GetXtrModel();
   G4String volumeName = radiatorDescription->GetVolumeName();
-  G4String foilMaterialName = radiatorDescription->GetFoilMaterialName();
-  G4String gasMaterialName = radiatorDescription->GetGasMaterialName();
-  G4String strawTubeMaterialName = radiatorDescription->GetStrawTubeMaterialName();
+
+  auto foilLayer = radiatorDescription->GetLayer(0);
+  auto gasLayer = radiatorDescription->GetLayer(1);
+  auto strawTube = radiatorDescription->GetStrawTube();
+
+  if (  xtrModel == "strawR" && ( ! std::get<0>(strawTube).size() ) ) {
+    TString text = "Straw tube parameters are not defined.";
+    TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess", text);
+    return 0;
+  }
 
   G4LogicalVolume* logicalVolume
     = TG4GeometryServices::Instance()->FindLogicalVolume(volumeName, true);
@@ -86,30 +93,30 @@ TG4TransitionRadiationPhysics::CreateXTRProcess(TG4RadiatorDescription* radiator
    return 0;
   }
 
-  G4Material* foilMaterial = G4Material::GetMaterial(foilMaterialName);
+  G4Material* foilMaterial = G4Material::GetMaterial(std::get<0>(foilLayer));
   if ( ! foilMaterial ) {
    TString text = "Foil material ";
-   text +=  foilMaterialName.data();
+   text += std::get<0>(foilLayer).data();
    text += " does not exist";
    TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess", text);
    return 0;
   }
 
-  G4Material* gasMaterial = G4Material::GetMaterial(gasMaterialName);
+  G4Material* gasMaterial = G4Material::GetMaterial(std::get<0>(gasLayer));
   if ( ! gasMaterial ) {
    TString text = "Gas material ";
-   text +=  foilMaterialName.data();
+   text +=  std::get<0>(gasLayer).data();
    text += " does not exist";
    TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess", text);
    return 0;
   }
 
   G4Material* strawTubeMaterial = 0;
-  if ( strawTubeMaterialName.size() ) {
-    strawTubeMaterial = G4Material::GetMaterial(strawTubeMaterialName);
+  if ( std::get<0>(strawTube).size() ) {
+    strawTubeMaterial = G4Material::GetMaterial(std::get<0>(strawTube));
     if ( ! strawTubeMaterial ) {
       TString text = "Straw tube material ";
-      text +=  strawTubeMaterialName.data();
+      text +=  std::get<0>(strawTube).data();
       text += " does not exist";
       TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess", text);
       return 0;
@@ -117,26 +124,29 @@ TG4TransitionRadiationPhysics::CreateXTRProcess(TG4RadiatorDescription* radiator
   }
 
   // Get remaining parameters
-  G4double foilThickness = radiatorDescription->GetFoilThickness();
-  G4double gasThickness = radiatorDescription->GetGasThickness();
   G4int foilNumber = radiatorDescription->GetFoilNumber();
+  G4double foilThickness, foilFluctuation;
+  G4double gasThickness, gasFluctuation;
+  std::tie(std::ignore, foilThickness, foilFluctuation) = foilLayer;
+  std::tie(std::ignore, gasThickness, gasFluctuation) = gasLayer;
 
   if ( xtrModel == "gammaR" ) {      
     return new G4GammaXTRadiator(
-                 logicalVolume, 100., 100.,
+                 logicalVolume, foilFluctuation, gasFluctuation,
                  foilMaterial, gasMaterial, foilThickness, gasThickness, foilNumber,
                  "GammaXTRadiator");
   }
   else if ( xtrModel == "gammaM" ) {
     return new G4XTRGammaRadModel(
-                 logicalVolume, 100., 100.,
+                 logicalVolume, foilFluctuation, gasFluctuation,
                  foilMaterial, gasMaterial, foilThickness, gasThickness, foilNumber,
                  "GammaXTRadiator");
   }
   else if ( xtrModel == "strawR" ) {
     return new G4StrawTubeXTRadiator(
                  logicalVolume,
-                 foilMaterial, gasMaterial, 0.53, 3.14159, strawTubeMaterial,
+                 foilMaterial, gasMaterial,
+                 std::get<1>(strawTube), std::get<2>(strawTube), strawTubeMaterial,
                  true, "StrawXTRadiator");
   }
   else if ( xtrModel == "regR" ) {      
