@@ -13,7 +13,7 @@
 /// \file TG4TransitionRadiationPhysics.h
 /// \brief Definition of the TG4TransitionRadiationPhysics class 
 ///
-/// According to TG4TransitionRadiationPhysics from Geant4
+/// According to TransitionRadiationPhysics from Geant4
 /// extended/electromagnetic/TestEm10 example.
 ///
 /// \author I. Hrivnacova; IPN Orsay
@@ -29,6 +29,14 @@ class TG4RadiatorDescription;
 class TG4TransitionRadiationMessenger;
 
 class G4VXTRenergyLoss;
+
+/// \ingroup physics_list
+/// \brief The builder for transition radiation processes.
+///
+/// According to TransitionRadiationPhysics from Geant4
+/// extended/electromagnetic/TestEm10 example.
+///
+/// \author I. Hrivnacova; IPN Orsay
 
 class TG4TransitionRadiationPhysics : public TG4VPhysicsConstructor
 {

@@ -17,14 +17,14 @@
 
 #include "TG4VUserFastSimulation.h"
 
+class TG4GflashFastSimulationMessenger;
+
+class GFlashShowerModel;
+
 /// \ingroup physics_list
 /// \brief Special class for definition of Gflash fast simulation model.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
-
-class TG4GflashFastSimulationMessenger;
-
-class GFlashShowerModel;
 
 class TG4GflashFastSimulation : public TG4VUserFastSimulation
 {

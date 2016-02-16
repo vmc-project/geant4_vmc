@@ -17,6 +17,8 @@
 
 #include <globals.hh>
 
+class G4VFastSimulationModel;
+
 /// \ingroup global
 /// \brief A helper class to hold a configuration of a special physics model.
 ///
@@ -24,12 +26,8 @@
 /// the special physics model (EM physics or fast simulation model)
 /// and the applicable regions (G4Region) defined via tracking media
 /// and particles.
-/// 
-/// This class is intended also to substitute TG4EmModelConfiguration.
 ///
 /// \author I. Hrivnacova; IPN Orsay
-
-class G4VFastSimulationModel;
 
 class TG4ModelConfiguration
 {
