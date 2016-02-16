@@ -235,9 +235,10 @@ void TG4DetConstructionMessenger::CreateSetRadiatorLayerCmd()
   G4UIparameter* thickness = new G4UIparameter("thickness", 'd', false);
   thickness->SetGuidance("The layer thickness (cm)");
 
-  G4UIparameter* fluctuation = new G4UIparameter("fluctuation", 'd', false);
-  fluctuation->SetGuidance(
-    "Parameter that defines the gas relative thickness fluctuation as 1/sqrt(param)");
+  G4UIparameter* fluctuation = new G4UIparameter("fluctuation", 'd', true);
+  G4String guidance = "Parameter that refers to the layer Gamma-distributed thickness.\n";
+  guidance += "The relative thickness fluctuation is ~ 1/sqrt(param)";
+  fluctuation->SetGuidance(guidance);
 
   fSetRadiatorLayerCmd = new G4UIcommand("/mcDet/setRadiatorLayer", this);
   fSetRadiatorLayerCmd->SetGuidance("Define the radiator layer (foil/gass) properties.");
@@ -402,7 +403,10 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
     G4int counter = 0;
     G4String materialName = parameters[counter++];
     G4double thickness = G4UIcommand::ConvertToDouble(parameters[counter++]);
-    G4double fluctuation = G4UIcommand::ConvertToDouble(parameters[counter++]);
+    G4double fluctuation = 0.;
+    if ( G4int(parameters.size()) > counter) {
+      fluctuation = G4UIcommand::ConvertToDouble(parameters[counter++]);
+    }
 
     // apply units
     thickness *= TG4G3Units::Length();

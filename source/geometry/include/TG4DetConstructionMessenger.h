@@ -47,7 +47,7 @@ class G4UIcmdWithADoubleAndUnit;
 /// - /mcDet/setMaxStepInLowDensityMaterials value
 /// - /mcDet/setLimitDensity value
 /// - /mcDet/setNewRadiator volumeName xtrModel foilNumber
-/// - /mcDet/setRadiatorLayer materialName thickness fluctuation
+/// - /mcDet/setRadiatorLayer materialName thickness [fluctuation]
 /// - /mcDet/setRadiatorStrawTube gasMaterialName wallThickness gassThickness
 ///
 /// The following command is deprecated, it will be removed in the next version

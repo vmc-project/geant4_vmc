@@ -73,41 +73,45 @@ TG4TransitionRadiationPhysics::CreateXTRProcess(TG4RadiatorDescription* radiator
   G4String xtrModel = radiatorDescription->GetXtrModel();
   G4String volumeName = radiatorDescription->GetVolumeName();
 
+  G4LogicalVolume* logicalVolume
+    = TG4GeometryServices::Instance()->FindLogicalVolume(volumeName, true);
+  if ( ! logicalVolume ) {
+   TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess",
+     TString("Volume ") + volumeName.data() + TString(" does not exist.")
+      + TG4Globals::Endl()
+      + TString("The XTR  process is not created."));
+   return 0;
+  }
+
   auto foilLayer = radiatorDescription->GetLayer(0);
   auto gasLayer = radiatorDescription->GetLayer(1);
   auto strawTube = radiatorDescription->GetStrawTube();
 
   if (  xtrModel == "strawR" && ( ! std::get<0>(strawTube).size() ) ) {
     TString text = "Straw tube parameters are not defined.";
-    TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess", text);
+    TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess",
+      TString("Straw tube parameters are not defined.")
+      + TG4Globals::Endl()
+      + TString("The XTR  process is not created."));
     return 0;
-  }
-
-  G4LogicalVolume* logicalVolume
-    = TG4GeometryServices::Instance()->FindLogicalVolume(volumeName, true);
-  if ( ! logicalVolume ) {
-   TString text = "Volume ";
-   text +=  volumeName.data();
-   text += " does not exist";
-   TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess", text);
-   return 0;
   }
 
   G4Material* foilMaterial = G4Material::GetMaterial(std::get<0>(foilLayer));
   if ( ! foilMaterial ) {
-   TString text = "Foil material ";
-   text += std::get<0>(foilLayer).data();
-   text += " does not exist";
-   TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess", text);
+   TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess",
+     TString("Foil material ") + std::get<0>(foilLayer).data() + TString(" does not exist.")
+      + TG4Globals::Endl()
+      + TString("The XTR  process is not created."));
+
    return 0;
   }
 
   G4Material* gasMaterial = G4Material::GetMaterial(std::get<0>(gasLayer));
   if ( ! gasMaterial ) {
-   TString text = "Gas material ";
-   text +=  std::get<0>(gasLayer).data();
-   text += " does not exist";
-   TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess", text);
+   TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess",
+     TString("Gas material ") + std::get<0>(gasLayer).data() + TString(" does not exist.")
+      + TG4Globals::Endl()
+      + TString("The XTR  process is not created."));
    return 0;
   }
 
@@ -115,10 +119,10 @@ TG4TransitionRadiationPhysics::CreateXTRProcess(TG4RadiatorDescription* radiator
   if ( std::get<0>(strawTube).size() ) {
     strawTubeMaterial = G4Material::GetMaterial(std::get<0>(strawTube));
     if ( ! strawTubeMaterial ) {
-      TString text = "Straw tube material ";
-      text +=  std::get<0>(strawTube).data();
-      text += " does not exist";
-      TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess", text);
+      TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess",
+        TString("Straw tube material ") + std::get<0>(strawTube).data() + TString(" does not exist.")
+        + TG4Globals::Endl()
+        + TString("The XTR  process is not created."));
       return 0;
     }
   }
@@ -129,6 +133,18 @@ TG4TransitionRadiationPhysics::CreateXTRProcess(TG4RadiatorDescription* radiator
   G4double gasThickness, gasFluctuation;
   std::tie(std::ignore, foilThickness, foilFluctuation) = foilLayer;
   std::tie(std::ignore, gasThickness, gasFluctuation) = gasLayer;
+
+  // Check if fluctuation parameters are defined when gamma models are selected
+  if ( ( xtrModel == "gammaR" || xtrModel == "gammaM" )  &&
+       ( foilFluctuation*gasFluctuation == 0. ) ) {
+      TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess",
+        TString("The gamma-distributed thickness parameter must be defined for both radiator layers")
+          + TG4Globals::Endl()
+          + TString("when gammaR or gammaM model is selected.")
+          + TG4Globals::Endl()
+          + TString("The XTR  process is not created."));
+      return 0;
+  }
 
   if ( xtrModel == "gammaR" ) {      
     return new G4GammaXTRadiator(
