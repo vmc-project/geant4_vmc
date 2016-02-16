@@ -25,5 +25,10 @@
 /control/cout/ignoreThreadsExcept 0
 
 # Define radiator
-/mcDet/setRadiator Radiator gammaM Mylar Air 0.002 0.025 220
+/mcDet/setNewRadiator Radiator gammaM 220
+/mcDet/setRadiatorLayer Mylar 0.002 100.
+/mcDet/setRadiatorLayer Air   0.025 100.
+
+# old way (now deprecated)
+#/mcDet/setRadiator Radiator gammaM Mylar Air 0.002 0.025 220
 
