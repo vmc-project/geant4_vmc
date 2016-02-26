@@ -345,6 +345,7 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
   // there are user tracks popped in the VMC stack
   if ( TG4StackPopper::Instance() &&
        step->GetTrack()->GetTrackStatus() != fAlive &&
+       step->GetTrack()->GetTrackStatus() != fSuspend  &&
        TG4StackPopper::Instance()->HasPoppedTracks()  ) {
 
     //G4cout << "!!! Modifying track status to get processed user tracks."
