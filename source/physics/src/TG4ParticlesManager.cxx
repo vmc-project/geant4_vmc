@@ -72,6 +72,8 @@ TG4ParticlesManager::TG4ParticlesManager()
 TG4ParticlesManager::~TG4ParticlesManager() 
 {
 /// Destructor
+
+  fgInstance = 0;
 }
 
 //

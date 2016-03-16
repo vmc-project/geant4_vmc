@@ -48,6 +48,7 @@ TG4SDServices::TG4SDServices()
 TG4SDServices::~TG4SDServices()
 {
 /// Destructor
+  fgInstance = 0;
 }
 
 //

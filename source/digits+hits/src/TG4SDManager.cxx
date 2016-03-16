@@ -51,6 +51,8 @@ TG4SDManager::~TG4SDManager()
 
   delete fSDConstruction;
   delete fSDServices;
+
+  fgInstance = 0;
 }
 
 //

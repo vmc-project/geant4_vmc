@@ -74,6 +74,8 @@ TG4G3Defaults::TG4G3Defaults()
 TG4G3Defaults::~TG4G3Defaults() 
 {
 /// Destructor
+
+  fgInstance = 0;
 }
 
 //

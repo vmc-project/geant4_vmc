@@ -82,6 +82,8 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
 TG4StepManager::~TG4StepManager() 
 {
 /// Destructor
+
+  fgInstance = 0;
 }
 
 //

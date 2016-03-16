@@ -69,6 +69,8 @@ TG4G3PhysicsManager::~TG4G3PhysicsManager()
   delete fControlVector;
   delete fIsCutVector;
   delete fIsControlVector;
+
+  fgInstance = 0;
 }
 
 //

@@ -126,6 +126,8 @@ TG4GeometryManager::~TG4GeometryManager()
   delete fOpManager;
   delete fFastModelsManager;
   delete fEmModelsManager;
+
+  fgInstance = 0;
 }
 
 //

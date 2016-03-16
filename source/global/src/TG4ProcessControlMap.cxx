@@ -41,6 +41,8 @@ TG4ProcessControlMap::TG4ProcessControlMap()
 TG4ProcessControlMap::~TG4ProcessControlMap() 
 {
 /// Destructor
+
+  fgInstance = 0;
 }
 
 //

@@ -81,6 +81,7 @@ TG4GeometryServices::~TG4GeometryServices()
 
   delete fMediumMap;
   delete fOpSurfaceMap;
+  fgInstance = 0;
 }
 
 //

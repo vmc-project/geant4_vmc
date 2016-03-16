@@ -136,7 +136,9 @@ TG4RunManager::~TG4RunManager()
 #endif
     delete fRunManager;
     if (fRootUIOwner) delete fRootUISession;
+    fgMasterInstance = 0;
   }
+  fgInstance = 0;
 }
 
 //
