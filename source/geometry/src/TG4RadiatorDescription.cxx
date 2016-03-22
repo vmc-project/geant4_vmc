@@ -21,7 +21,7 @@ TG4RadiatorDescription::TG4RadiatorDescription(const G4String& volumeName)
     fXtrModel(""),
     fFoilNumber(0),
     fLayers(),
-    fStrawTube({"", 0., 0.})
+    fStrawTube{"", 0., 0.}
 {
 /// Default constructor
 }
