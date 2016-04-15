@@ -56,7 +56,7 @@ class TG4TransitionRadiationPhysics : public TG4VPhysicsConstructor
 
   private:
     // methods
-    G4VXTRenergyLoss* CreateXTRProcess(TG4RadiatorDescription*);
+    G4bool CreateXTRProcess(TG4RadiatorDescription*);
 
     // static data members
     static G4ThreadLocal std::vector<G4VXTRenergyLoss*>* fXtrProcesses;

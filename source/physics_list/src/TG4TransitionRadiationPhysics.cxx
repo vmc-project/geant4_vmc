@@ -21,6 +21,7 @@
 #include "TG4GeometryServices.h"
 #include "TG4RadiatorDescription.h"
 
+#include <G4LogicalVolumeStore.hh>
 #include <G4VXTRenergyLoss.hh>
 #include <G4ProcessManager.hh>
 #include <G4Electron.hh>
@@ -65,23 +66,12 @@ TG4TransitionRadiationPhysics::~TG4TransitionRadiationPhysics()
 //
 
 //_____________________________________________________________________________
-G4VXTRenergyLoss* 
+G4bool
 TG4TransitionRadiationPhysics::CreateXTRProcess(TG4RadiatorDescription* radiatorDescription)
 {
 /// Create XTR process for the given radiatorDescription
 
   G4String xtrModel = radiatorDescription->GetXtrModel();
-  G4String volumeName = radiatorDescription->GetVolumeName();
-
-  G4LogicalVolume* logicalVolume
-    = TG4GeometryServices::Instance()->FindLogicalVolume(volumeName, true);
-  if ( ! logicalVolume ) {
-   TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess",
-     TString("Volume ") + volumeName.data() + TString(" does not exist.")
-      + TG4Globals::Endl()
-      + TString("The XTR  process is not created."));
-   return 0;
-  }
 
   auto foilLayer = radiatorDescription->GetLayer(0);
   auto gasLayer = radiatorDescription->GetLayer(1);
@@ -93,7 +83,7 @@ TG4TransitionRadiationPhysics::CreateXTRProcess(TG4RadiatorDescription* radiator
       TString("Straw tube parameters are not defined.")
       + TG4Globals::Endl()
       + TString("The XTR  process is not created."));
-    return 0;
+    return false;
   }
 
   G4Material* foilMaterial = G4Material::GetMaterial(std::get<0>(foilLayer));
@@ -102,8 +92,7 @@ TG4TransitionRadiationPhysics::CreateXTRProcess(TG4RadiatorDescription* radiator
      TString("Foil material ") + std::get<0>(foilLayer).data() + TString(" does not exist.")
       + TG4Globals::Endl()
       + TString("The XTR  process is not created."));
-
-   return 0;
+   return false;
   }
 
   G4Material* gasMaterial = G4Material::GetMaterial(std::get<0>(gasLayer));
@@ -112,7 +101,7 @@ TG4TransitionRadiationPhysics::CreateXTRProcess(TG4RadiatorDescription* radiator
      TString("Gas material ") + std::get<0>(gasLayer).data() + TString(" does not exist.")
       + TG4Globals::Endl()
       + TString("The XTR  process is not created."));
-   return 0;
+   return false;
   }
 
   G4Material* strawTubeMaterial = 0;
@@ -123,7 +112,7 @@ TG4TransitionRadiationPhysics::CreateXTRProcess(TG4RadiatorDescription* radiator
         TString("Straw tube material ") + std::get<0>(strawTube).data() + TString(" does not exist.")
         + TG4Globals::Endl()
         + TString("The XTR  process is not created."));
-      return 0;
+      return false;
     }
   }
 
@@ -143,53 +132,83 @@ TG4TransitionRadiationPhysics::CreateXTRProcess(TG4RadiatorDescription* radiator
           + TString("when gammaR or gammaM model is selected.")
           + TG4Globals::Endl()
           + TString("The XTR  process is not created."));
-      return 0;
+      return false;
   }
 
-  if ( xtrModel == "gammaR" ) {      
-    return new G4GammaXTRadiator(
-                 logicalVolume, foilFluctuation, gasFluctuation,
-                 foilMaterial, gasMaterial, foilThickness, gasThickness, foilNumber,
-                 "GammaXTRadiator");
+  G4bool isXtrProcess = false;
+  G4String volumeName = radiatorDescription->GetVolumeName();
+  G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
+  for (G4int i=0; i<G4int(lvStore->size()); ++i) {
+    G4LogicalVolume* logicalVolume = (*lvStore)[i];
+
+    if (logicalVolume->GetName() != volumeName) continue;
+
+    G4VXTRenergyLoss* xtrProcess = 0;
+    if ( xtrModel == "gammaR" ) {
+      xtrProcess = new G4GammaXTRadiator(
+                   logicalVolume, foilFluctuation, gasFluctuation,
+                   foilMaterial, gasMaterial, foilThickness, gasThickness, foilNumber,
+                   "GammaXTRadiator");
+    }
+    else if ( xtrModel == "gammaM" ) {
+      xtrProcess = new G4XTRGammaRadModel(
+                   logicalVolume, foilFluctuation, gasFluctuation,
+                   foilMaterial, gasMaterial, foilThickness, gasThickness, foilNumber,
+                   "GammaXTRadiator");
+    }
+    else if ( xtrModel == "strawR" ) {
+      xtrProcess = new G4StrawTubeXTRadiator(
+                   logicalVolume,
+                   foilMaterial, gasMaterial,
+                   std::get<1>(strawTube), std::get<2>(strawTube), strawTubeMaterial,
+                   true, "StrawXTRadiator");
+    }
+    else if ( xtrModel == "regR" ) {
+      xtrProcess = new G4RegularXTRadiator(
+                   logicalVolume,
+                   foilMaterial, gasMaterial, foilThickness, gasThickness, foilNumber,
+                   "RegularXTRadiator");
+    }
+    else if ( xtrModel == "transpR" ) {
+      xtrProcess = new G4TransparentRegXTRadiator(
+                   logicalVolume,
+                   foilMaterial, gasMaterial, foilThickness, gasThickness, foilNumber,
+                   "RegularXTRadiator");
+    }
+    else if ( xtrModel == "regM" ) {
+      xtrProcess = new G4XTRRegularRadModel(
+                   logicalVolume,
+                   foilMaterial, gasMaterial, foilThickness, gasThickness, foilNumber,
+                   "RegularXTRadiator");
+    }
+    else {
+      TString text = "XTR model <";
+      text +=  xtrModel.data();
+      text += " is not defined.";
+      TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess", text);
+    }
+
+    if ( xtrProcess ) {
+      fXtrProcesses->push_back(xtrProcess);
+      xtrProcess->SetVerboseLevel(VerboseLevel());
+          // CHECK if better to decrement this
+
+      // set process to e-, e+
+      G4Electron::Electron()->GetProcessManager()->AddDiscreteProcess(xtrProcess);
+      G4Positron::Positron()->GetProcessManager()->AddDiscreteProcess(xtrProcess);
+
+      isXtrProcess = true;
+    }
   }
-  else if ( xtrModel == "gammaM" ) {
-    return new G4XTRGammaRadModel(
-                 logicalVolume, foilFluctuation, gasFluctuation,
-                 foilMaterial, gasMaterial, foilThickness, gasThickness, foilNumber,
-                 "GammaXTRadiator");
+
+  if ( ! isXtrProcess ) {
+   TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess",
+     TString("Volume ") + volumeName.data() + TString(" does not exist.")
+      + TG4Globals::Endl()
+      + TString("The XTR  process is not created."));
   }
-  else if ( xtrModel == "strawR" ) {
-    return new G4StrawTubeXTRadiator(
-                 logicalVolume,
-                 foilMaterial, gasMaterial,
-                 std::get<1>(strawTube), std::get<2>(strawTube), strawTubeMaterial,
-                 true, "StrawXTRadiator");
-  }
-  else if ( xtrModel == "regR" ) {      
-    return new G4RegularXTRadiator(
-                 logicalVolume,
-                 foilMaterial, gasMaterial, foilThickness, gasThickness, foilNumber,
-                 "RegularXTRadiator");            
-  }
-  else if ( xtrModel == "transpR" ) {
-    return new G4TransparentRegXTRadiator(
-                 logicalVolume,
-                 foilMaterial, gasMaterial, foilThickness, gasThickness, foilNumber,
-                 "RegularXTRadiator");
-  }
-  else if ( xtrModel == "regM" ) {
-    return new G4XTRRegularRadModel(
-                 logicalVolume,
-                 foilMaterial, gasMaterial, foilThickness, gasThickness, foilNumber,
-                 "RegularXTRadiator");
-  } 
-  else {     
-    TString text = "XTR model <";
-    text +=  xtrModel.data();
-    text += " is not defined.";
-    TG4Globals::Warning("TG4TransitionRadiationPhysics", "CreateXTRProcess", text);
-    return 0;
-  }
+
+  return isXtrProcess;
 }
 
 //
@@ -212,29 +231,21 @@ void TG4TransitionRadiationPhysics::ConstructProcess()
   // nothing to be done if no radiators are defined
   if ( ! radiators.size() ) return;
 
+  if ( ! fXtrProcesses ) {
+    fXtrProcesses = new std::vector<G4VXTRenergyLoss*>();
+    G4AutoDelete::Register(fXtrProcesses);
+  }
+
   for (G4int i=0; i<G4int(radiators.size()); ++i) {
 
     // create XTR process
-    G4VXTRenergyLoss*  xtrProcess = CreateXTRProcess(radiators[i]);
-    if ( ! xtrProcess ) continue;
+    G4bool  isXtrProcess = CreateXTRProcess(radiators[i]);
+    if ( ! isXtrProcess ) continue;
 
     if (VerboseLevel() > 1) {
       G4cout << "Constructed XTR process " << radiators[i]->GetXtrModel() 
              << " in radiator " << radiators[i]->GetVolumeName() << G4endl;
     }  
-
-    if ( ! fXtrProcesses ) {
-      fXtrProcesses = new std::vector<G4VXTRenergyLoss*>();
-      G4AutoDelete::Register(fXtrProcesses);
-    }
-
-    fXtrProcesses->push_back(xtrProcess);
-    xtrProcess->SetVerboseLevel(VerboseLevel()); 
-      // CHECK if better to decrement this
-
-    // set process to e-, e+
-    G4Electron::Electron()->GetProcessManager()->AddDiscreteProcess(xtrProcess);
-    G4Positron::Positron()->GetProcessManager()->AddDiscreteProcess(xtrProcess);
   }
 
   if (VerboseLevel() > 0) {
