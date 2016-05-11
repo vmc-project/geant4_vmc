@@ -17,7 +17,8 @@ cmake_minimum_required(VERSION 2.6.4 FATAL_ERROR)
 #
 project(MTRoot)
 
-#---CMake Module Path
+#-------------------------------------------------------------------------------
+#
 set(CMAKE_MODULE_PATH 
     ${Geant4VMC_DIR}/cmake
     ${PROJECT_SOURCE_DIR}/../cmake
@@ -25,6 +26,9 @@ set(CMAKE_MODULE_PATH
 
 #--- Project version -----------------------------------------------------------
 include(Geant4VMCPackagesVersion)
+
+#--- Default project build mode ------------------------------------------------
+include(Geant4VMCPackagesBuildMode)
 
 #--- Options -------------------------------------------------------------------
 option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)  

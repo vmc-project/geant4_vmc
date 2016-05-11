@@ -28,6 +28,9 @@ set(CMAKE_MODULE_PATH
 #--- Project version -----------------------------------------------------------
 include(Geant4VMCPackagesVersion)
 
+#--- Default project build mode ------------------------------------------------
+include(Geant4VMCPackagesBuildMode)
+
 #--- Options -------------------------------------------------------------------
 option(G4Root_BUILD_TEST           "Build G4Root test" ON)
 option(Geant4VMC_USE_GEANT4_UI     "Build with Geant4 UI drivers" ON)
