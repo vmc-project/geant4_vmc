@@ -23,6 +23,13 @@
 #include <G4UserEventAction.hh>
 #include <globals.hh>
 
+class TG4TrackingAction;
+class TG4TrackManager;
+class TG4StateManager;
+
+class TVirtualMCApplication;
+class TVirtualMCStack;
+
 class G4Event;
 
 /// \ingroup event
@@ -38,9 +45,10 @@ class TG4EventAction : public G4UserEventAction,
     virtual ~TG4EventAction();
     
     // methods
+    void LateInitialize();
     virtual void BeginOfEventAction(const G4Event* event);
     virtual void EndOfEventAction(const G4Event* event);
-    
+
     // set methods
     void SetPrintMemory(G4bool printMemory);
     void SetSaveRandomStatus(G4bool saveRandomStatus);
@@ -58,10 +66,27 @@ class TG4EventAction : public G4UserEventAction,
     // data members
     TG4EventActionMessenger   fMessenger; ///< messenger
     TStopwatch  fTimer;          ///< timer
-    G4bool      fPrintMemory;    ///< control for printing memory usage 
 
-    /// control for saving random engine status for each event
-    G4bool      fSaveRandomStatus; 
+    /// Cached pointer to thread-local VMC application
+    TVirtualMCApplication*  fMCApplication;
+
+    /// Cached pointer to thread-local VMC stack
+    TVirtualMCStack*  fMCStack;
+
+    /// Cached pointer to thread-local tracking action
+    TG4TrackingAction*  fTrackingAction;
+
+    /// Cached pointer to thread-local track manager
+    TG4TrackManager*  fTrackManager;
+
+    /// Cached pointer to thread-local state manager
+    TG4StateManager*  fStateManager;
+
+    /// Control for printing memory usage
+    G4bool  fPrintMemory;
+
+    /// Control for saving random engine status for each event
+    G4bool  fSaveRandomStatus;
 };
 
 // inline methods

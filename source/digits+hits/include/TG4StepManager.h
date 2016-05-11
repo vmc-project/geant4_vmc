@@ -31,6 +31,8 @@
 #include <TMCProcess.h>
 
 class TG4Limits;
+class TG4TrackManager;
+class TG4SteppingAction;
 
 class G4Track;
 class G4SteppingManager;
@@ -58,6 +60,7 @@ class TG4StepManager
     static TG4StepManager* Instance();
         
     // methods
+    void LateInitialize();
     void StopTrack();
     void StopEvent();
     void StopRun();
@@ -185,6 +188,12 @@ class TG4StepManager
 
     /// division copy number offset
     G4int               fDivisionCopyNoOffset;
+
+    /// Cached pointer to thread-local track manager
+    TG4TrackManager*  fTrackManager;
+
+    /// Cached pointer to thread-local stepping action
+    TG4SteppingAction* fSteppingAction;
 };
 
 // inline methods

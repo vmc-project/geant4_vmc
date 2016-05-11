@@ -20,6 +20,8 @@
 
 class TG4StepManager;
 
+class TVirtualMCApplication;
+
 /// \ingroup digits_hits
 /// \brief Sensitive detector common to all logical volumes
 ///
@@ -50,8 +52,12 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
     G4int GetMediumID() const;
     
   protected:
-    // methods
-    TG4StepManager*  GetStepManager() const;
+    // data members
+    /// Cached pointer to thread-local step manager
+    TG4StepManager*  fStepManager;
+
+    /// Cached pointer to thread-local VMC application
+    TVirtualMCApplication*  fMCApplication;
 
   private:
     /// Not implemented
@@ -67,7 +73,6 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
     // data members
     G4int            fID;          ///< sensitive detector ID
     G4int            fMediumID;    ///< medium ID
-    TG4StepManager*  fStepManager; ///< the TG4StepManager instance
 };
 
 // inline methods
@@ -86,11 +91,6 @@ inline G4int TG4SensitiveDetector::GetMediumID() const {
   /// Returns medium ID
   return fMediumID;
 }  
-
-inline TG4StepManager*  TG4SensitiveDetector::GetStepManager() const {
-  /// Returns the TG4StepManager instance
-  return fStepManager;
-}
 
 #endif //TG4V_SENSITIVE_DETECTOR_H
 

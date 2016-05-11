@@ -68,22 +68,8 @@ void TG4CachedMagneticField::GetFieldValue(const G4double point[3], G4double* bf
                                 point[1] / TG4G3Units::Length(),
                                 point[2] / TG4G3Units::Length() };
 
-  if ( gMC->GetMagField() ) {
-    gMC->GetMagField()->Field(g3point, bfield);
-  }
-  else {  
-    static Bool_t warn = true;
-    if (warn) { 
-      TG4Globals::Warning(
-        "TG4CachedMagneticField", "GetFieldValue", 
-        TString("Using deprecated function TVirtualMCApplication::Field().")
-        + TG4Globals::Endl()
-        + TString("New TVirtualMagField interface should be used instead."));
-      warn = false;
-    }        
-
-    TVirtualMCApplication::Instance()->Field(g3point, bfield);
-  }  
+  // Call user field
+  fVirtualMagField->Field(g3point, bfield);
   
   // Set units
   for (G4int i=0; i<3; i++) bfield[i] = bfield[i] * TG4G3Units::Field();

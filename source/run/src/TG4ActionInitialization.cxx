@@ -88,7 +88,7 @@ void TG4ActionInitialization::Build() const
 {
 /// Build user actions defined on worker threads
 
- //G4cout << "TG4ActionInitialization::Build "  << this << G4endl;
+  //G4cout << "TG4ActionInitialization::Build "  << this << G4endl;
 
   G4UserEventAction* eventAction = 0;
   TG4TrackingAction* trackingAction = 0;

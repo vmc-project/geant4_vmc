@@ -23,11 +23,15 @@
 #include "TG4G3PhysicsManager.h"
 #include "TG4SpecialPhysicsList.h"
 #include "TG4StateManager.h"
+#include "TG4StepManager.h"
 #include "TG4ActionInitialization.h"
 #include "TG4WorkerInitialization.h"
 #include "TG4DetConstruction.h"
 #include "TG4PostDetConstruction.h"
 #include "TG4SDConstruction.h"
+#include "TG4EventAction.h"
+#include "TG4TrackingAction.h"
+#include "TG4SteppingAction.h"
 #include "TG4RegionsManager.h"
 
 #ifdef G4MULTITHREADED  
@@ -54,6 +58,17 @@
 #include <TRandom.h>
 #include <TVirtualMCApplication.h>
 
+namespace {
+
+TG4EventAction* GetEventAction()
+{
+  return dynamic_cast<TG4EventAction*> (
+           const_cast<G4UserEventAction*>(
+             G4RunManager::GetRunManager()->GetUserEventAction()));
+}
+
+}
+
 //_____________________________________________________________________________
 TG4RunManager* TG4RunManager::fgMasterInstance = 0;
 G4ThreadLocal TG4RunManager* TG4RunManager::fgInstance = 0;
@@ -77,7 +92,7 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
 
   if (VerboseLevel() > 1) {
     G4cout << "TG4RunManager::TG4RunManager " << this << G4endl;
-  }  
+  }
 
   if (fgInstance) {
     TG4Globals::Exception(
@@ -284,7 +299,8 @@ void TG4RunManager::CloneRootNavigatorForWorker()
 
   // Create G4Root navigator on worker
   TG4RootNavMgr* rootNavMgr = TG4RootNavMgr::GetInstance(*masterRootNavMgr);
-  G4cout << "TG4RootNavMgr has been created." << rootNavMgr << G4endl;
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4RootNavMgr has been created." << rootNavMgr << G4endl;
 
   //rootNavMgr->Initialize(new TG4PostDetConstruction());
   rootNavMgr->ConnectToG4();
@@ -410,6 +426,16 @@ void TG4RunManager::LateInitialize()
   // activate/inactivate physics processes
   TG4PhysicsManager::Instance()->SetProcessActivation();
   TG4PhysicsManager::Instance()->RetrieveOpBoundaryProcess();
+
+  // late initialize step manager
+  TG4StepManager::Instance()->LateInitialize();
+
+  // late initialize action classes
+  if ( GetEventAction() ) {
+    GetEventAction()->LateInitialize();
+    TG4TrackingAction::Instance()->LateInitialize();
+    TG4SteppingAction::Instance()->LateInitialize();
+  }
 
   // print statistics
   TG4GeometryServices::Instance()->PrintStatistics(true, false);  

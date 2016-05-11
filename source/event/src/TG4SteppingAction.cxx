@@ -39,6 +39,10 @@ TG4SteppingAction::TG4SteppingAction()
     fMessenger(this),
     fGeoTrackManager(),
     fSpecialControls(0), 
+    fMCApplication(0),
+    fTrackManager(0),
+    fStepManager(0),
+    fStackPopper(0),
     fMaxNofSteps(kMaxNofSteps),
     fStandardVerboseLevel(-1),
     fLoopVerboseLevel(1),
@@ -130,8 +134,8 @@ void TG4SteppingAction::ProcessTrackIfOutOfRegion(const G4Step* step)
     = step->GetPostStepPoint()->GetPosition();
   position /=  TG4G3Units::Length();  
 
-  if ( position.perp() > TVirtualMCApplication::Instance()->TrackingRmax() ||
-       std::abs(position.z()) > TVirtualMCApplication::Instance()->TrackingZmax()) {
+  if ( position.perp() > fMCApplication->TrackingRmax() ||
+       std::abs(position.z()) > fMCApplication->TrackingZmax()) {
  
     // print looping info
     if (fLoopVerboseLevel > 0) {
@@ -155,8 +159,7 @@ void TG4SteppingAction::ProcessTrackIfBelowCut(const G4Step* step)
        ( (*step->GetSecondary())[0]->GetCreatorProcess()->GetProcessName() == "muPairProd" ) ) {
   
     G4double minEtotPair
-      = TG4StepManager::Instance()
-        ->GetCurrentLimits()->GetCutVector()->GetMinEtotPair();
+      = fStepManager->GetCurrentLimits()->GetCutVector()->GetMinEtotPair();
         
     // G4cout <<  "minEtotPair[GeV]= " <<  minEtotPair << G4endl;     
         
@@ -165,12 +168,9 @@ void TG4SteppingAction::ProcessTrackIfBelowCut(const G4Step* step)
          (*step->GetSecondary())[1]->GetTotalEnergy() <  minEtotPair ) 
     {
       // G4cout << "In stepping action: going to flag pair to stop" << G4endl;   
-      TG4TrackManager::Instance()
-        ->SetParentToTrackInformation(step->GetTrack());
-      TG4TrackManager::Instance()
-        ->GetTrackInformation((*step->GetSecondary())[0])->SetStop(true);
-      TG4TrackManager::Instance()
-        ->GetTrackInformation((*step->GetSecondary())[1])->SetStop(true);
+      fTrackManager->SetParentToTrackInformation(step->GetTrack());
+      fTrackManager->GetTrackInformation((*step->GetSecondary())[0])->SetStop(true);
+      fTrackManager->GetTrackInformation((*step->GetSecondary())[1])->SetStop(true);
     }
   }        
 }        
@@ -188,8 +188,7 @@ void TG4SteppingAction::ProcessTrackOnBoundary(const G4Step* step)
   if ( step->GetTrack()->GetNextVolume() != 0) {
 
     // set back max step limit if it has been modified on fly by user
-    G4UserLimits* modifiedLimits
-      = TG4StepManager::Instance()->GetLimitsModifiedOnFly();
+    G4UserLimits* modifiedLimits = fStepManager->GetLimitsModifiedOnFly();
     
     if ( modifiedLimits ) { 
       G4UserLimits* nextLimits 
@@ -197,7 +196,7 @@ void TG4SteppingAction::ProcessTrackOnBoundary(const G4Step* step)
             ->GetPhysicalVolume()->GetLogicalVolume()->GetUserLimits();
 
       if ( nextLimits != modifiedLimits )
-        TG4StepManager::Instance()->SetMaxStepBack();
+        fStepManager->SetMaxStepBack();
     }    
 
 #ifdef MCDEBUG
@@ -276,8 +275,19 @@ void TG4SteppingAction::PrintTrackInfo(const G4Track* track) const
 //
 // public methods
 //
+
+//_____________________________________________________________________________
+void TG4SteppingAction::LateInitialize()
+{
+  fMCApplication = TVirtualMCApplication::Instance();
+  fTrackManager = TG4TrackManager::Instance();
+  fStepManager = TG4StepManager::Instance();
+  fStackPopper = TG4StackPopper::Instance();
+}
+
 #include "TGeoVolume.h"
 #include "TGeoManager.h"
+
 //_____________________________________________________________________________
 void TG4SteppingAction::UserSteppingAction(const G4Step* step)
 {
@@ -322,9 +332,10 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
     fGeoTrackManager.UpdateRootTrack(step);  
 
   // save secondaries
-  if ( TG4TrackManager::Instance()->GetTrackSaveControl() == kSaveInStep ) 
-    TG4TrackManager::Instance()
+  if ( fTrackManager->GetTrackSaveControl() == kSaveInStep ) {
+    fTrackManager
       ->SaveSecondaries(step->GetTrack(), step->GetSecondary());
+  }
     
   // apply special controls if init step or if crossing geometry border  
   if ( step->GetPostStepPoint()->GetStepStatus() == fGeomBoundary &&
@@ -343,14 +354,14 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
 
   // Force an exclusive stackPopper step if track is not alive and
   // there are user tracks popped in the VMC stack
-  if ( TG4StackPopper::Instance() &&
+  if ( fStackPopper &&
        step->GetTrack()->GetTrackStatus() != fAlive &&
        step->GetTrack()->GetTrackStatus() != fSuspend  &&
-       TG4StackPopper::Instance()->HasPoppedTracks()  ) {
+       fStackPopper->HasPoppedTracks()  ) {
 
     //G4cout << "!!! Modifying track status to get processed user tracks."
     //       << G4endl;
-    TG4StackPopper::Instance()
+    fStackPopper
       ->SetDoExclusiveStep(step->GetTrack()->GetTrackStatus());
     G4Track* track = const_cast<G4Track*>(step->GetTrack());
     //track->SetTrackStatus(fStopButAlive);

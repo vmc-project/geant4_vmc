@@ -30,6 +30,7 @@ G4ThreadLocal TG4StackPopper* TG4StackPopper::fgInstance = 0;
 //_____________________________________________________________________________
 TG4StackPopper::TG4StackPopper(const G4String& processName)
   : G4VProcess(processName, fUserDefined),
+    fMCStack(0),
     fNofDoneTracks(0),
     fDoExclusiveStep(false)
 {
@@ -42,6 +43,9 @@ TG4StackPopper::TG4StackPopper(const G4String& processName)
   }
 
   fgInstance = this;
+
+  // Cache thread-local pointers
+  fMCStack = gMC->GetStack();
 }
 
 //_____________________________________________________________________________
@@ -85,13 +89,11 @@ G4VParticleChange* TG4StackPopper::PostStepDoIt(const G4Track& track,
  
   aParticleChange.Initialize(track);
   
-  if ( gMC->GetStack()->GetNtrack() == fNofDoneTracks ) 
+  if ( fMCStack->GetNtrack() == fNofDoneTracks )
     return &aParticleChange;
 
-  TG4ParticlesManager* particlesManager = TG4ParticlesManager::Instance();
-  TVirtualMCStack* stack = gMC->GetStack();
-  Int_t currentTrackId = stack->GetCurrentTrackNumber();
-  Int_t nofTracksToPop = stack->GetNtrack()-fNofDoneTracks;
+  Int_t currentTrackId = fMCStack->GetCurrentTrackNumber();
+  Int_t nofTracksToPop = fMCStack->GetNtrack()-fNofDoneTracks;
   aParticleChange.SetNumberOfSecondaries(
                       aParticleChange.GetNumberOfSecondaries()+nofTracksToPop);
  
@@ -99,7 +101,7 @@ G4VParticleChange* TG4StackPopper::PostStepDoIt(const G4Track& track,
 
     // Pop particle from the stack
     G4int itrack;
-    TParticle* particle = stack->PopNextTrack(itrack);
+    TParticle* particle = fMCStack->PopNextTrack(itrack);
     ++fNofDoneTracks;
 
     if (!particle) {
@@ -115,7 +117,7 @@ G4VParticleChange* TG4StackPopper::PostStepDoIt(const G4Track& track,
 
     // Create dynamic particle
     G4DynamicParticle* dynamicParticle 
-      = particlesManager->CreateDynamicParticle(particle);
+      = TG4ParticlesManager::Instance()->CreateDynamicParticle(particle);
     if ( ! dynamicParticle ) {
       TG4Globals::Exception(
         "TG4StackPopper", "PostStepDoIt",
@@ -125,7 +127,7 @@ G4VParticleChange* TG4StackPopper::PostStepDoIt(const G4Track& track,
     // Define track
 
     G4ThreeVector position 
-      = particlesManager->GetParticlePosition(particle);
+      = TG4ParticlesManager::Instance()->GetParticlePosition(particle);
     G4double time = particle->T()*TG4G3Units::Time(); 
 
     G4Track* secondaryTrack  
@@ -147,7 +149,7 @@ G4VParticleChange* TG4StackPopper::PostStepDoIt(const G4Track& track,
 
   // Set back current track number in the track
   // (as stack may have changed it with popping particles)
-  stack->SetCurrentTrack(currentTrackId);
+  fMCStack->SetCurrentTrack(currentTrackId);
   
   // Set the kept track status if in exclusive step
   if ( fDoExclusiveStep ) {
@@ -172,7 +174,7 @@ void  TG4StackPopper::Reset()
 /// Reset the number of done tracks to the number od tracks in stack
 /// (when starting track)
 
-  fNofDoneTracks = gMC->GetStack()->GetNtrack();
+  fNofDoneTracks = fMCStack->GetNtrack();
 }                           
 
 //_____________________________________________________________________________

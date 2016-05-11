@@ -38,6 +38,11 @@ TG4EventAction::TG4EventAction()
   : TG4Verbose("eventAction"),
     fMessenger(this),
     fTimer(),
+    fMCApplication(0),
+    fMCStack(0),
+    fTrackingAction(0),
+    fTrackManager(0),
+    fStateManager(0),
     fPrintMemory(false),
     fSaveRandomStatus(false)
 {
@@ -55,16 +60,27 @@ TG4EventAction::~TG4EventAction()
 //
 
 //_____________________________________________________________________________
+void TG4EventAction::LateInitialize()
+{
+/// Cache thread-local pointers
+
+  fMCApplication = TVirtualMCApplication::Instance();
+  fMCStack = gMC->GetStack();
+  fTrackingAction = TG4TrackingAction::Instance();
+  fTrackManager = TG4TrackManager::Instance();
+  fStateManager = TG4StateManager::Instance();
+}
+
+//_____________________________________________________________________________
 void TG4EventAction::BeginOfEventAction(const G4Event* event)
 {
 /// Called by G4 kernel at the beginning of event.
 
   // reset the tracks counters
-  if (TG4TrackingAction::Instance()) 
-    TG4TrackingAction::Instance()->PrepareNewEvent();   
+  fTrackingAction->PrepareNewEvent();
     
   // fill primary particles in VMC stack if stack is empty
-  if ( gMC->GetStack()->GetNtrack() == 0 ) {
+  if ( fMCStack->GetNtrack() == 0 ) {
     if (VerboseLevel() > 0)
       G4cout << "Filling VMC stack with primaries" << G4endl;
     
@@ -73,7 +89,7 @@ void TG4EventAction::BeginOfEventAction(const G4Event* event)
       
       for (G4int ip=0; ip<vertex->GetNumberOfParticle(); ip++) {
         G4PrimaryParticle* particle = vertex->GetPrimary(ip);
-        TG4TrackManager::Instance()->PrimaryToStack(vertex, particle);
+        fTrackManager->PrimaryToStack(vertex, particle);
       }        
     }
   } 
@@ -99,8 +115,7 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
 /// Called by G4 kernel at the end of event.
 
   // finish the last primary track of the current event
-  TG4TrackingAction* trackingAction = TG4TrackingAction::Instance();
-  if (trackingAction) trackingAction->FinishPrimaryTrack();   
+  fTrackingAction->FinishPrimaryTrack();
 
   if (VerboseLevel() > 1) {
     G4cout << G4endl;
@@ -108,24 +123,22 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
   }
 
   if (VerboseLevel() > 2) {
-    G4int nofPrimaryTracks 
-      = gMC->GetStack()->GetNprimary();
-    G4int nofSavedTracks 
-      = gMC->GetStack()->GetNtrack();
+    G4int nofPrimaryTracks = fMCStack->GetNprimary();
+    G4int nofSavedTracks = fMCStack->GetNtrack();
    
     G4cout  << "    " << nofPrimaryTracks << 
                " primary tracks processed." << G4endl;
     G4cout  << "    " << nofSavedTracks << 
                " tracks saved." << G4endl;
 
-    G4int nofAllTracks = TG4TrackManager::Instance()->GetNofTracks();
+    G4int nofAllTracks = fTrackManager->GetNofTracks();
     G4cout  << "    " << nofAllTracks << 
                   " all tracks processed." << G4endl;
   }               
 
   // VMC application finish event
-  TVirtualMCApplication::Instance()->FinishEvent();    
-  TG4StateManager::Instance()->SetNewState(kNotInApplication);
+  fMCApplication->FinishEvent();
+  fStateManager->SetNewState(kNotInApplication);
 
   if (VerboseLevel() > 1) {
     // print time

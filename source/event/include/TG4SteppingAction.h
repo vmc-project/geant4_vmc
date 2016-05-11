@@ -23,6 +23,11 @@
 #include <globals.hh>
 
 class TG4SpecialControlsV2;
+class TG4TrackManager;
+class TG4StepManager;
+class TG4StackPopper;
+
+class TVirtualMCApplication;
 
 class G4Track;
 class G4Step;
@@ -53,6 +58,7 @@ class TG4SteppingAction : public G4UserSteppingAction
     static TG4SteppingAction* Instance();
 
     // methods
+    void LateInitialize();
     virtual void SteppingAction(const G4Step* step);
                   // the following method should not
                   // be overwritten in a derived class
@@ -101,6 +107,18 @@ class TG4SteppingAction : public G4UserSteppingAction
 
     /// the special controls manager
     TG4SpecialControlsV2*  fSpecialControls;
+
+    /// Cached pointer to thread-local VMC application
+    TVirtualMCApplication*  fMCApplication;
+
+    /// Cached pointer to thread-local track manager
+    TG4TrackManager*  fTrackManager;
+
+    /// Cached pointer to thread-local step manager
+    TG4StepManager*  fStepManager;
+
+    /// Cached pointer to thread-local stack popper
+    TG4StackPopper* fStackPopper;
 
     /// max number of allowed steps
     G4int  fMaxNofSteps;

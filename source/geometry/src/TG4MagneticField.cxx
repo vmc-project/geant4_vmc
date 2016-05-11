@@ -56,6 +56,13 @@ TG4MagneticField::TG4MagneticField(const TG4FieldParameters& parameters,
 {
 /// Default constructor
 
+  // Consistency check
+  if ( ! magField ) {
+    TG4Globals::Exception(
+      "TG4MagneticField", "TG4MagneticField:",
+      "No TVirtualMagField is defined.");
+  }
+
   Update(parameters);
 }
 
@@ -209,22 +216,8 @@ void TG4MagneticField::GetFieldValue(const G4double point[3], G4double* bfield) 
                                 point[1] / TG4G3Units::Length(),
                                 point[2] / TG4G3Units::Length() };
 
-  if ( fVirtualMagField ) {
-    fVirtualMagField->Field(g3point, bfield);
-  }
-  else {  
-    static Bool_t warn = true;
-    if (warn) { 
-      TG4Globals::Warning(
-        "TG4MagneticField", "GetFieldValue", 
-        TString("Using deprecated function TVirtualMCApplication::Field().")
-        + TG4Globals::Endl()
-        + TString("New TVirtualMagField interface should be used instead."));
-      warn = false;
-    }        
-
-    TVirtualMCApplication::Instance()->Field(g3point, bfield);
-  }  
+  // Call user field
+  fVirtualMagField->Field(g3point, bfield);
   
   // Set units
   for (G4int i=0; i<3; i++) bfield[i] = bfield[i] * TG4G3Units::Field();

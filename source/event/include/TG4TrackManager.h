@@ -22,6 +22,9 @@
 #include <G4TrackVector.hh>
 
 class TG4TrackInformation;
+class TG4StackPopper;
+
+class TVirtualMCStack;
 
 class G4Track;
 class G4PrimaryVertex;
@@ -47,6 +50,7 @@ class TG4TrackManager : public TG4Verbose
     static TG4TrackManager* Instance();
 
     // methods
+    void  LateInitialize();
     void  AddPrimaryParticleId(G4int id);
     G4int SetTrackInformation(const G4Track* aTrack, G4bool overWrite = false);
     void  SetParentToTrackInformation(const G4Track* aTrack);
@@ -85,6 +89,13 @@ class TG4TrackManager : public TG4Verbose
     G4TrackingManager*  fG4TrackingManager;  ///< G4 tracking manager
     std::vector<G4int>  fPrimaryParticleIds; ///< The VMC stack primary particle Ids
     TG4TrackSaveControl fTrackSaveControl;   ///< control of saving secondaries
+
+    /// Cached pointer to thread-local VMC stack
+    TVirtualMCStack*  fMCStack;
+
+    /// Cached pointer to thread-local stack popper
+    TG4StackPopper* fStackPopper;
+
     G4bool  fSaveDynamicCharge;     ///< control of saving dynamic charge of secondaries
     G4int   fTrackCounter;          ///< tracks counter
     G4int   fCurrentTrackID;        ///< current track ID

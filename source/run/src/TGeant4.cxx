@@ -1270,8 +1270,6 @@ Int_t TGeant4::CurrentEvent() const
 {
 /// Return the number of the current event.
 
-  if ( ! CheckApplicationState("CurrentEvent", kInEvent ) ) return 0;
-
   return fRunManager->CurrentEvent(); 
 } 
 

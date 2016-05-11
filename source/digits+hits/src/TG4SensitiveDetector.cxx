@@ -23,9 +23,10 @@ G4ThreadLocal G4int TG4SensitiveDetector::fgSDCounter = 0;
 //_____________________________________________________________________________
 TG4SensitiveDetector::TG4SensitiveDetector(G4String sdName, G4int mediumID)
   : G4VSensitiveDetector(sdName),
+    fStepManager(TG4StepManager::Instance()),
+    fMCApplication(TVirtualMCApplication::Instance()),
     fID(++fgSDCounter),
-    fMediumID(mediumID),
-    fStepManager(TG4StepManager::Instance())
+    fMediumID(mediumID)
 {
 /// Standard constructor with the specified \em name
 } 
@@ -46,7 +47,7 @@ void TG4SensitiveDetector::UserProcessHits(const G4Track* /*track*/,
 {
 /// Call VMC application stepping function.
 
-  TVirtualMCApplication::Instance()->Stepping();
+  fMCApplication->Stepping();
 }
 
 //_____________________________________________________________________________
@@ -56,7 +57,7 @@ G4bool TG4SensitiveDetector::ProcessHits(G4Step* step, G4TouchableHistory*)
 
   // let user sensitive detector process normal step
   fStepManager->SetStep(step, kNormalStep);
-  TVirtualMCApplication::Instance()->Stepping();
+  fMCApplication->Stepping();
 
   return true;
 }
@@ -69,7 +70,7 @@ G4bool TG4SensitiveDetector::ProcessHitsOnBoundary(G4Step* step)
 
   // let user sensitive detector process boundary step
   fStepManager->SetStep(step, kBoundary);
-  TVirtualMCApplication::Instance()->Stepping();
+  fMCApplication->Stepping();
 
   return true;
 }

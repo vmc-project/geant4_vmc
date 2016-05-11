@@ -27,7 +27,8 @@
 //_____________________________________________________________________________
 TG4VSpecialCuts::TG4VSpecialCuts(const G4String& processName)
   : G4VProcess(processName, fUserDefined),
-    fLossTableManager(G4LossTableManager::Instance())
+    fLossTableManager(G4LossTableManager::Instance()),
+    fTrackManager(TG4TrackManager::Instance())
 {
 /// Standard constructor
 }
@@ -68,7 +69,7 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
 
   // tracks flagged to stop
   TG4TrackInformation* trackInformation
-    = TG4TrackManager::Instance()->GetTrackInformation(&track); 
+    = fTrackManager->GetTrackInformation(&track);
   if ( trackInformation && trackInformation->IsStop() ) {
     return 0.;
   }  

@@ -42,6 +42,8 @@ TG4TrackManager::TG4TrackManager()
   : TG4Verbose("trackManager"),
     fG4TrackingManager(0),   
     fTrackSaveControl(kSaveInPreTrack),
+    fMCStack(0),
+    fStackPopper(0),
     fSaveDynamicCharge(false),
     fTrackCounter(0),
     fCurrentTrackID(0),
@@ -69,6 +71,15 @@ TG4TrackManager::~TG4TrackManager()
 //
 // public methods
 //
+
+//_____________________________________________________________________________
+void  TG4TrackManager::LateInitialize()
+{
+/// Cache thread-local pointers
+
+  fMCStack = gMC->GetStack();
+  fStackPopper = TG4StackPopper::Instance();
+}
 
 //_____________________________________________________________________________
 void  TG4TrackManager::AddPrimaryParticleId(G4int id)
@@ -118,7 +129,7 @@ G4int TG4TrackManager::SetTrackInformation(const G4Track* track, G4bool overWrit
     } 
     else { 
       if ( fTrackSaveControl != kDoNotSave ) {
-        trackIndex = gMC->GetStack()->GetNtrack();
+        trackIndex = fMCStack->GetNtrack();
         if ( overWrite ) trackIndex--;
       }  
       else   
@@ -133,7 +144,7 @@ G4int TG4TrackManager::SetTrackInformation(const G4Track* track, G4bool overWrit
   }  
 
   // set current track number
-  // gMC->GetStack()->SetCurrentTrack(trackIndex);
+  // fMCStack->SetCurrentTrack(trackIndex);
   ++fTrackCounter;
   
   return trackIndex;
@@ -258,7 +269,7 @@ void TG4TrackManager::TrackToStack(const G4Track* track, G4bool /*overWrite*/)
     mcProcess = kPPrimary;
   }
   else {  
-    mcProcess = TG4PhysicsManager::Instance()->GetMCProcess(kpProcess);  
+    mcProcess = TG4PhysicsManager::Instance()->GetMCProcess(kpProcess);
     // distinguish kPDeltaRay from kPEnergyLoss  
     if (mcProcess == kPEnergyLoss) mcProcess = kPDeltaRay;
   }  
@@ -276,16 +287,16 @@ void TG4TrackManager::TrackToStack(const G4Track* track, G4bool /*overWrite*/)
   G4int ntr;
 #ifdef STACK_WITH_KEEP_FLAG  
   // create particle 
-  gMC->GetStack()
+  fMCStack
     ->PushTrack(0, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
-                            polX, polY, polZ, mcProcess, ntr, weight, status,
-                            overWrite);  
+                polX, polY, polZ, mcProcess, ntr, weight, status,
+                overWrite);
         // Experimental code with flagging tracks in stack for overwrite; 
         // not yet available in distribution
 #else              
-  gMC->GetStack()
+  fMCStack
     ->PushTrack(0, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
-                            polX, polY, polZ, mcProcess, ntr, weight, status);  
+                polX, polY, polZ, mcProcess, ntr, weight, status);
 #endif
 }
 
@@ -300,8 +311,7 @@ void TG4TrackManager::PrimaryToStack(const G4PrimaryVertex* vertex,
      
   // PDG code
   G4int pdg 
-    = TG4ParticlesManager::Instance()
-      ->GetPDGEncoding(particle->GetG4code());
+    = TG4ParticlesManager::Instance()->GetPDGEncoding(particle->GetG4code());
 
   // track kinematics  
   G4ThreeVector momentum = particle->GetMomentum(); 
@@ -340,8 +350,8 @@ void TG4TrackManager::PrimaryToStack(const G4PrimaryVertex* vertex,
   
   G4int ntr;
   // create particle 
-  gMC->GetStack()->PushTrack(1, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
-                             polX, polY, polZ, mcProcess, ntr, weight, status);  
+  fMCStack->PushTrack(1, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t,
+                      polX, polY, polZ, mcProcess, ntr, weight, status);
 }                   
 
 
@@ -377,7 +387,7 @@ void TG4TrackManager::SaveSecondaries(const G4Track* track,
     TrackToStack(secondary);
                    
     // Notify a stack popper (if activated) about saving this secondary
-    if ( TG4StackPopper::Instance() ) TG4StackPopper::Instance()->Notify();
+    if ( fStackPopper ) fStackPopper->Notify();
     ++fNofSavedSecondaries;  
   }    
 }

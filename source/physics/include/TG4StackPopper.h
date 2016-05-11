@@ -17,6 +17,8 @@
 
 #include <G4VProcess.hh>
 
+class TVirtualMCStack;
+
 class G4Track;
 
 /// \ingroup physics
@@ -81,6 +83,9 @@ class TG4StackPopper: public G4VProcess
     
     /// this instance
     static G4ThreadLocal TG4StackPopper*  fgInstance;
+
+    /// Cached pointer to thread-local VMC stack
+    TVirtualMCStack*  fMCStack;
 
     /// the counter for popped tracks
     G4int  fNofDoneTracks;

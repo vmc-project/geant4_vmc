@@ -23,7 +23,12 @@
 
 class TG4TrackInformation;
 class TG4TrackManager;
+class TG4StepManager;
+class TG4StackPopper;
 class TG4SpecialControlsV2;
+
+class TVirtualMCApplication;
+class TVirtualMCStack;
 
 class G4Track;
 
@@ -48,6 +53,7 @@ class TG4TrackingAction : public G4UserTrackingAction,
     static TG4TrackingAction* Instance();
 
     // methods
+    void LateInitialize();
     virtual void PrepareNewEvent();
     virtual void PreTrackingAction(const G4Track* aTrack);
     virtual void PostTrackingAction(const G4Track* aTrack);
@@ -92,6 +98,18 @@ class TG4TrackingAction : public G4UserTrackingAction,
     /// track manager 
     TG4TrackManager*  fTrackManager;
     
+    /// Cached pointer to thread-local VMC application
+    TVirtualMCApplication*  fMCApplication;
+
+    /// Cached pointer to thread-local VMC stack
+    TVirtualMCStack*  fMCStack;
+
+    /// Cached pointer to thread-local step manager
+    TG4StepManager*  fStepManager;
+
+    /// Cached pointer to thread-local stack popper
+    TG4StackPopper* fStackPopper;
+
     /// current primary track ID 
     G4int   fPrimaryTrackID;
     

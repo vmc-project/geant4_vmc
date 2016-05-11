@@ -40,8 +40,8 @@ G4bool TG4GflashSensitiveDetector::ProcessHits(G4GFlashSpot* gflashSpot, G4Touch
 /// Call user defined sensitive detector
 
   // let user sensitive detector process Gflash step
-  GetStepManager()->SetStep(gflashSpot, kGflashSpot);
-  TVirtualMCApplication::Instance()->Stepping();
+  fStepManager->SetStep(gflashSpot, kGflashSpot);
+  fMCApplication->Stepping();
 
   return true;
 }

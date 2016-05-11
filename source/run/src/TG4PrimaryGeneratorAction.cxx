@@ -36,7 +36,7 @@
 
 //_____________________________________________________________________________
 TG4PrimaryGeneratorAction::TG4PrimaryGeneratorAction()
-  : TG4Verbose("primaryGeneratorAction") 
+  : TG4Verbose("primaryGeneratorAction")
 {
 /// Default constructor
 }
@@ -56,15 +56,13 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
 {
 /// Create a new G4PrimaryVertex objects for each TParticle
 /// in the VMC stack.
+
+  // Cache pointers to thread-local objects
+  TVirtualMCStack* mcStack = gMC->GetStack();
+  TG4ParticlesManager* particlesManager = TG4ParticlesManager::Instance();
+  TG4TrackManager* trackManager = TG4TrackManager::Instance();
   
-  TVirtualMCStack* stack = gMC->GetStack();  
-  if (!stack) {
-    TG4Globals::Exception(
-      "TG4PrimaryGeneratorAction", "TransformPrimaries",
-      "No VMC stack is defined.");
-  }  
-    
-  G4int nofParticles = stack->GetNtrack();
+  G4int nofParticles = mcStack->GetNtrack();
   if (nofParticles <= 0) {
     TG4Globals::Exception(
       "TG4PrimaryGeneratorAction", "TransformPrimaries",
@@ -76,8 +74,6 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
            << nofParticles << " particles" << G4endl; 
      
 
-  TG4ParticlesManager* particlesManager = TG4ParticlesManager::Instance();
-
   G4PrimaryVertex* previousVertex = 0;
   G4ThreeVector previousPosition = G4ThreeVector(); 
   G4double previousTime = 0.; 
@@ -85,14 +81,14 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
   for (G4int i=0; i<nofParticles; i++) {    
   
     // get the particle from the stack
-    TParticle* particle = stack->PopPrimaryForTracking(i);
+    TParticle* particle = mcStack->PopPrimaryForTracking(i);
     
     if (particle) {
       // only particles that didn't die (decay) in primary generator
       // will be transformed to G4 objects   
       
       // Pass this particle Id (in the VMC stack) to Track manager
-      TG4TrackManager::Instance()->AddPrimaryParticleId(i);
+      trackManager->AddPrimaryParticleId(i);
 
       // Get particle definition from TG4ParticlesManager
       //
@@ -182,12 +178,16 @@ void TG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
 {
 /// Generate primary particles by the selected generator.
 
+
+  // Cache pointer to thread-local MC application
+  TVirtualMCApplication* mcApplication = TVirtualMCApplication::Instance();
+
   // Begin of event
   TG4StateManager::Instance()->SetNewState(kInEvent);
-  TVirtualMCApplication::Instance()->BeginEvent();
+  mcApplication->BeginEvent();
 
   // Generate primaries and fill the VMC stack
-  TVirtualMCApplication::Instance()->GeneratePrimaries();
+  mcApplication->GeneratePrimaries();
   
   // Transform Root particle objects to G4 objects
   TransformPrimaries(event);

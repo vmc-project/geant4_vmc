@@ -19,6 +19,7 @@
 
 class TG4G3CutVector;
 class TG4Limits;
+class TG4TrackManager;
 
 class G4Track;
 class G4LossTableManager;
@@ -79,7 +80,12 @@ class TG4VSpecialCuts: public G4VProcess
     /// Not implemented
     TG4VSpecialCuts& operator = (const TG4VSpecialCuts& right);
 
-    G4LossTableManager*  fLossTableManager; ///< the G4LossTableManager instance
+    /// The G4LossTableManager instance
+    G4LossTableManager*  fLossTableManager;
+
+    /// Cached pointer to thread-local track manager
+    TG4TrackManager*  fTrackManager;
+
 
 };
 

@@ -44,6 +44,10 @@ TG4TrackingAction::TG4TrackingAction()
     fMessenger(this),
     fSpecialControls(0),
     fTrackManager(0),
+    fMCApplication(0),
+    fMCStack(0),
+    fStepManager(0),
+    fStackPopper(0),
     fPrimaryTrackID(0),
     fCurrentTrackID(0),
     fTrackSaveControl(kDoNotSave),
@@ -85,8 +89,7 @@ void TG4TrackingAction::UserProcessHits(const G4Track* track)
 /// (this ensures compatibility with G3 that
 /// makes first step of zero length)
 
-  TG4StepManager* stepManager = TG4StepManager::Instance();
-  G4VPhysicalVolume* pv = stepManager->GetCurrentPhysicalVolume();
+  G4VPhysicalVolume* pv = fStepManager->GetCurrentPhysicalVolume();
   
   if (!pv) {
     // was exception
@@ -129,13 +132,25 @@ void TG4TrackingAction::Verbose() const
 //
 
 //_____________________________________________________________________________
+void TG4TrackingAction::LateInitialize()
+{
+/// Cache thread-local pointers
+
+  fMCApplication = TVirtualMCApplication::Instance();
+  fMCStack = gMC->GetStack();
+  fStepManager = TG4StepManager::Instance();
+  fStackPopper = TG4StackPopper::Instance();
+
+  fTrackManager->LateInitialize();
+}
+
+//_____________________________________________________________________________
 void TG4TrackingAction::PrepareNewEvent()
 {
 /// Called by G4 kernel at the beginning of event.
 
   // set g4 stepping manager pointer and world volume
-  TG4StepManager* stepManager = TG4StepManager::Instance();
-  stepManager->SetSteppingManager(fpTrackingManager->GetSteppingManager());
+  fStepManager->SetSteppingManager(fpTrackingManager->GetSteppingManager());
   
   fTrackManager->SetG4TrackingManager(fpTrackingManager);
   fTrackManager->ResetPrimaryParticleIds();  
@@ -143,8 +158,7 @@ void TG4TrackingAction::PrepareNewEvent()
   if ( fTrackManager->GetTrackSaveControl() != kDoNotSave )
     fTrackManager->SetNofTracks(0);
   else  
-    fTrackManager
-      ->SetNofTracks(gMC->GetStack()->GetNtrack());
+    fTrackManager->SetNofTracks(fMCStack->GetNtrack());
     
   fCurrentTrackID = 0;
 }
@@ -171,26 +185,24 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
   if ( fSpecialControls ) fSpecialControls->StartTrack(track);
 
   // reset stack popper (if activated
-  if ( TG4StackPopper::Instance() )
-    TG4StackPopper::Instance()->Reset();
+  if ( fStackPopper ) fStackPopper->Reset();
 
   // set step manager status
   if ( isFirstStep ) {
-    TG4StepManager* stepManager = TG4StepManager::Instance();
-    stepManager->SetStep((G4Track*)track, kVertex);
+    fStepManager->SetStep((G4Track*)track, kVertex);
   }  
   
   // set track information
   G4int trackId 
     = fTrackManager->SetTrackInformation(track, fOverwriteLastTrack);
-  gMC->GetStack()->SetCurrentTrack(trackId);
+  fMCStack->SetCurrentTrack(trackId);
 
   if ( isFirstStep ) {
     if (track->GetParentID() == 0) {  
       fPrimaryTrackID = track->GetTrackID();
     
       // begin this primary track
-      TVirtualMCApplication::Instance()->BeginPrimary();
+      fMCApplication->BeginPrimary();
     
       // set saving flag
       fTrackSaveControl = kDoNotSave;
@@ -206,8 +218,7 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
       fTrackManager->TrackToStack(track, fOverwriteLastTrack);
 
       // Notify a stack popper (if activated) about saving this secondary
-      if ( TG4StackPopper::Instance() )
-        TG4StackPopper::Instance()->Notify();
+      if ( fStackPopper ) fStackPopper->Notify();
     }
   }      
 
@@ -218,7 +229,7 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
 
   // VMC application pre track action
   if ( isFirstStep ) {
-    TVirtualMCApplication::Instance()->PreTrack();
+    fMCApplication->PreTrack();
   
     // call pre-tracking action of derived class
     PreTrackingAction(track);
@@ -239,7 +250,7 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
   // the track will not be overwritten if it was flagged in the stack
   // to be kept or if it has produced any secondary particles.  
   fOverwriteLastTrack
-    =  ( ! gMC->GetStack()->GetKeepCurrentTrack() ) &&
+    =  ( ! fMCStack->GetKeepCurrentTrack() ) &&
        ( ! fpTrackingManager->GimmeSecondaries() ||
            fpTrackingManager->GimmeSecondaries()->size() == 0 );
         // Experimental code with flagging tracks in stack for overwrite; 
@@ -253,8 +264,8 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
     fSpecialControls->RestoreProcessActivations();
     
   // set back max step limit if it has been modified on fly by user
-  if ( TG4StepManager::Instance()->GetLimitsModifiedOnFly() )
-    TG4StepManager::Instance()->SetMaxStepBack();
+  if ( fStepManager->GetLimitsModifiedOnFly() )
+    fStepManager->SetMaxStepBack();
 
   // set parent track particle index to the secondary tracks 
   fTrackManager->SetParentToTrackInformation(track);
@@ -265,7 +276,7 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
   if ( track->GetTrackStatus() != fSuspend ) {
 
     // VMC application post track action
-    TVirtualMCApplication::Instance()->PostTrack();
+    fMCApplication->PostTrack();
 
     // call post-tracking action of derived class
     PostTrackingAction(track);
@@ -284,15 +295,14 @@ void TG4TrackingAction::FinishPrimaryTrack()
 
     // set special step manager status
     // not in both stepping, vertex stage
-    TG4StepManager* stepManager = TG4StepManager::Instance();
     G4Track* noTrack = 0;
-    stepManager->SetStep(noTrack, kVertex);
+    fStepManager->SetStep(noTrack, kVertex);
 
     // verbose
     Verbose();
 
     // VMC application finish primary track       
-    TVirtualMCApplication::Instance()->FinishPrimary();
+    fMCApplication->FinishPrimary();
   }
   
   fPrimaryTrackID = 0;
