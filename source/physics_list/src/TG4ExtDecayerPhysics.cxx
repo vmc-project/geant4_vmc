@@ -84,6 +84,7 @@ void TG4ExtDecayerPhysics::ConstructProcess()
      // But we may have a problem if there are more than one 
      // instances of G4Decay process
 
+  auto aParticleIterator = GetParticleIterator();
   aParticleIterator->reset();
   while ((*aParticleIterator)())
   {    

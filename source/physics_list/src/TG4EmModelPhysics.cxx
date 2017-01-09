@@ -228,6 +228,7 @@ void TG4EmModelPhysics::AddModels(const std::vector<TG4ModelConfiguration*>& mod
     G4String regions = (*it)->GetRegions();
     
     // Add selected models
+    auto aParticleIterator = GetParticleIterator();
     aParticleIterator->reset();
     while ((*aParticleIterator)()) {
       G4ParticleDefinition* particle = aParticleIterator->value();

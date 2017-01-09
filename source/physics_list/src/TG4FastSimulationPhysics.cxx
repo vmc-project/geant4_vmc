@@ -195,6 +195,7 @@ void TG4FastSimulationPhysics::AddFastSimulationProcess(
       = GetOrCreateFastSimulationProcess(modelName);
  
     // Add fast simulation process to selected particles 
+    auto aParticleIterator = GetParticleIterator();
     aParticleIterator->reset();
     while ((*aParticleIterator)()) {
       G4ParticleDefinition* particle = aParticleIterator->value();

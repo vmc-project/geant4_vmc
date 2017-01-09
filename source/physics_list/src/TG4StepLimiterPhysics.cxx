@@ -65,6 +65,7 @@ void TG4StepLimiterPhysics::ConstructProcess()
 
   fStepLimiterProcess = new G4StepLimiter();
 
+  auto aParticleIterator = GetParticleIterator();
   aParticleIterator->reset();
   while( (*aParticleIterator)() ){
 

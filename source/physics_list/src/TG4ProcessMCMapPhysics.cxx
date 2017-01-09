@@ -261,19 +261,12 @@ void TG4ProcessMCMapPhysics::ConstructProcess()
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
   G4bool success = true;
 
-#if G4VERSION_NUMBER < 1000
-  theParticleIterator->reset();
-  while ((*theParticleIterator)())
-  {
-    G4ProcessVector* processVector 
-      = theParticleIterator->value()->GetProcessManager()->GetProcessList();
-#else
+  auto aParticleIterator = GetParticleIterator();
   aParticleIterator->reset();
   while ((*aParticleIterator)())
   {
     G4ProcessVector* processVector 
       = aParticleIterator->value()->GetProcessManager()->GetProcessList();
-#endif
 
     for (G4int i=0; i<processVector->length(); i++) {
     

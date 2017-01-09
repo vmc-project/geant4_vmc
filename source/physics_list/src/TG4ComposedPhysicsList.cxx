@@ -217,6 +217,7 @@ void TG4ComposedPhysicsList::DumpAllProcesses() const
   G4cout << "Instantiated particles and processes: " << G4endl;
   G4cout << "===================================== " << G4endl;
  
+  auto theParticleIterator=GetParticleIterator();
   theParticleIterator->reset();
   while ((*theParticleIterator)())
   {

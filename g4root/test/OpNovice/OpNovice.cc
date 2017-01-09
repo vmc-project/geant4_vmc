@@ -78,7 +78,7 @@
 namespace {
   void PrintUsage() {
     G4cerr << " Usage: " << G4endl;
-    G4cerr << " OpNovice [-m macro ] [-u UIsession] [-t nThreads] [-r seed]"
+    G4cerr << " OpNovice [-m macro ] [-u UIsession] [-t nThreads] [-r seed] "
            // Added for G4Root
            << " [-g useG4Root]"
            << G4endl;
@@ -132,7 +132,7 @@ int main(int argc,char** argv)
 
   // Construct the default run manager
   //
-  
+
   // Added for G4Root - start
   if ( useG4Root ) {
      G4cout << "Using TGeo interface ..." << G4endl;
@@ -150,7 +150,7 @@ int main(int argc,char** argv)
   G4RunManager * runManager = new G4RunManager;
 #endif
 
- // Added for G4Root - start
+  // Added for G4Root - start
   if ( useG4Root ) {
      mgr->Initialize(OpNovicePostDetConstruction::GetInstance(), nThreads);
      mgr->ConnectToG4();

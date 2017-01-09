@@ -98,6 +98,7 @@ void TG4SpecialCutsPhysics::ConstructProcess()
 
   TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
 
+  auto aParticleIterator = GetParticleIterator();
   aParticleIterator->reset();
   while ((*aParticleIterator)())
   {

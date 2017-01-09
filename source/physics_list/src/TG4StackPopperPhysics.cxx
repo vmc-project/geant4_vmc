@@ -66,6 +66,7 @@ void TG4StackPopperPhysics::ConstructProcess()
 
   fStackPopperProcess = new TG4StackPopper();
 
+  auto aParticleIterator = GetParticleIterator();
   aParticleIterator->reset();
   while ( (*aParticleIterator)() ) {
 

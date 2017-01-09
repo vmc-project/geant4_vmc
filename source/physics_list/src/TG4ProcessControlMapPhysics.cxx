@@ -230,19 +230,13 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
   G4bool success = true;
 
-#if G4VERSION_NUMBER < 1000
-  theParticleIterator->reset();
-  while ((*theParticleIterator)())
-  {
-    G4ProcessVector* processVector 
-      = theParticleIterator->value()->GetProcessManager()->GetProcessList();
-#else
+  auto aParticleIterator = GetParticleIterator();
   aParticleIterator->reset();
   while ((*aParticleIterator)())
   {
     G4ProcessVector* processVector 
       = aParticleIterator->value()->GetProcessManager()->GetProcessList();
-#endif
+
     for (G4int i=0; i<processVector->length(); i++) {
     
       G4String processName = (*processVector)[i]->GetProcessName();
