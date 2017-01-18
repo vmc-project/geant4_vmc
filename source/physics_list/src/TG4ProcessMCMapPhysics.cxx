@@ -86,9 +86,10 @@ void TG4ProcessMCMapPhysics::FillMap()
 
   mcMap->Add("annihil", kPAnnihilation); 
 
-  mcMap->Add("conv", kPPair); 
-  mcMap->Add("muPairProd", kPPair); 
-  mcMap->Add("hPairProd", kPPair); 
+  mcMap->Add("conv", kPPair);
+  mcMap->Add("ePairProd", kPPair);
+  mcMap->Add("muPairProd", kPPair);
+  mcMap->Add("hPairProd", kPPair);
 
   mcMap->Add("nCapture", kPNCapture);
   mcMap->Add("HadronCapture", kPNCapture);

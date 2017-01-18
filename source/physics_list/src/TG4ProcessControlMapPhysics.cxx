@@ -83,9 +83,10 @@ void TG4ProcessControlMapPhysics::FillMap()
 
   controlMap->Add("annihil", kANNI); 
 
-  controlMap->Add("conv", kPAIR); 
-  controlMap->Add("muPairProd", kPAIR); 
-  controlMap->Add("hPairProd", kPAIR); 
+  controlMap->Add("conv", kPAIR);
+  controlMap->Add("ePairProd", kPAIR);
+  controlMap->Add("muPairProd", kPAIR);
+  controlMap->Add("hPairProd", kPAIR);
 
   controlMap->Add("nCapture", kHADR);
   controlMap->Add("HadronCapture", kHADR);
