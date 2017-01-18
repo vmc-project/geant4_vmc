@@ -29,7 +29,7 @@ set(CMAKE_MODULE_PATH
 include(Geant4VMCPackagesVersion)
 
 #--- Default project build mode ------------------------------------------------
-include(Geant4VMCPackagesBuildMode)
+include(VMCBuildMode)
 
 #--- Options -------------------------------------------------------------------
 option(G4Root_BUILD_TEST           "Build G4Root test" ON)

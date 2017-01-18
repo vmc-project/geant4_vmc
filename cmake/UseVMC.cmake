@@ -17,7 +17,12 @@
 #message(STATUS "Processing UseVMC.cmake")
 
 #-------------------------------------------------------------------------------
-# Defines include directories, compile definitions and link libraries
+# Default project build mode
+#
+include(VMCBuildMode)
+
+#-------------------------------------------------------------------------------
+# Define include directories, compile definitions and link libraries
 # (VMC_LIBRARIES) for all required and optional packages.
 #
 
@@ -54,19 +59,3 @@ if("${CMAKE_INSTALL_LIBDIR}" MATCHES "")
 endif()
 
 #message(STATUS "VMC_LIBRARIES ${VMC_LIBRARIES}")
-
-#-------------------------------------------------------------------------------
-# Make sure a default build type is used
-#
-if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "RelWithDebInfo" CACHE STRING
-      "Choose the type of build, options are: Debug Release RelWithDebInfo MinSizeRel."
-       FORCE)
-endif(NOT CMAKE_BUILD_TYPE)
-
-
-#-------------------------------------------------------------------------------
-# Always use '@rpath' in install names of libraries.
-#
-set(CMAKE_MACOSX_RPATH 1)
-

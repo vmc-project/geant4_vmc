@@ -28,7 +28,7 @@ set(CMAKE_MODULE_PATH
 include(Geant4VMCPackagesVersion)
 
 #--- Default project build mode ------------------------------------------------
-include(Geant4VMCPackagesBuildMode)
+include(VMCBuildMode)
 
 #--- Options -------------------------------------------------------------------
 option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)  
