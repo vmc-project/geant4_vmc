@@ -42,9 +42,9 @@ rm -fr $OUTDIR
 
 # The list of available PLs is printed by geant4_vmc when a non-existing
 # PL is selected
-# Lists in 10.2
+# Lists in 10.3
 #for PHYSICS_LIST in FTFP_BERT FTFP_BERT_TRV FTFP_BERT_HP FTFP_INCLXX FTFP_INCLXX_HP FTF_BIC LBE QBBC QGSP_BERT QGSP_BERT_HP QGSP_BIC QGSP_BIC_HP QGSP_BIC_AllHP QGSP_FTFP_BERT QGSP_INCLXX QGSP_INCLXX_HP QGS_BIC Shielding ShieldingLEND ShieldingM NuBeam
-# Lists in 10.2 (excluded QGSP_BIC_AllHP which causes exception)
+# Lists in 10.3 (excluded QGSP_BIC_AllHP which causes exception)
 for PHYSICS_LIST in FTFP_BERT FTFP_BERT_TRV FTFP_BERT_HP FTFP_INCLXX FTFP_INCLXX_HP FTF_BIC LBE QBBC QGSP_BERT QGSP_BERT_HP QGSP_BIC QGSP_BIC_HP QGSP_FTFP_BERT QGSP_INCLXX QGSP_INCLXX_HP QGS_BIC Shielding ShieldingLEND ShieldingM NuBeam
 do
   for EM in _ _EMV _EMX _EMY _EMZ _LIV _PEN __GS
