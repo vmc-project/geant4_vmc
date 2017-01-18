@@ -1,6 +1,6 @@
 #------------------------------------------------
 # The Virtual Monte Carlo packages
-# Copyright (C) 2014 Ivana Hrivnacova
+# Copyright (C) 2014 - 2017 Ivana Hrivnacova
 # All rights reserved.
 #
 # For the licensing terms see geant4_vmc/LICENSE.
@@ -10,7 +10,7 @@
 # Configuration file for CMake build for VMC applications.
 # It defines include directories, compile definitions and link libraries
 # (VMC_LIBRARIES) for all required and optional packages.
-# It also defined the default build mode a default build configuration.
+# It also defines the default build mode a default build configuration.
 #
 # I. Hrivnacova, 26/02/2014
 

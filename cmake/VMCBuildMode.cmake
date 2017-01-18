@@ -1,16 +1,17 @@
 #------------------------------------------------
-# The Geant4 Virtual Monte Carlo package
-# Copyright (C) 2016 Ivana Hrivnacova
+# The Virtual Monte Carlo packages
+# Copyright (C) 2017 Ivana Hrivnacova
 # All rights reserved.
 #
 # For the licensing terms see geant4_vmc/LICENSE.
 # Contact: root-vmc@cern.ch
 #-------------------------------------------------
 
-# Configuration file for CMake build for Geant4 VMC packages
-# which defines the default build mode if it has not been set
+# Configuration file for CMake build for VMC applications.
+# It defines the default build mode if it has not been set
+# and the RPATH policy.
 #
-# I. Hrivnacova, 11/05/2016
+# I. Hrivnacova, 18/01/2017
 
 #-------------------------------------------------------------------------------
 # Make sure a default build type is used
