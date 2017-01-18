@@ -1,0 +1,79 @@
+/*! 
+
+/// \file "ExGarfield/.README.txt"
+/// \brief The Example ExGarfield README page
+
+\page README_ExGarfield Example ExGarfield
+
+\section garfield_s1 Description
+
+  Garfield garfieldgpp example adapted to Virtual Monte Carlo.
+
+  It demonstrates:
+  - Integration of Garfield simulation model in Geant4 VMC simulation;
+    Garfield model is not used when running the example with Geant3.
+
+  See also the original Garfield example description at:
+    http://garfieldpp.web.cern.ch/garfieldpp/examples/geant4-interface/
+
+\section garfield_s2 Compilation:
+
+  The example requires Garfield installation;
+  the following CMake options have to be added in the CMake configuration:
+  <pre>
+  -DGarfield_DIR=path_to_garfield_installation
+  -DGarfield_INC_DIR=path_to_garfield_source/Include
+  </pre>
+
+\section garfield_s3 Macros
+
+  For running example with G4:
+  <pre>
+  \link       ExGarfield/load_g4.C load_g4.C      \endlink - macro to load the libraries to run the example with Geant4
+  \link        ExGarfield/run_g4.C run_g4.C       \endlink - macro for running example 
+  \link      ExGarfield/g4Config.C g4Config.C     \endlink - configuration macro for G4 with native geometry navigation (defaullt)
+  \link  ExGarfield/g4tgeoConfig.C g4tgeoConfig.C \endlink - configuration macro for G4 with TGeo geometry navigation
+   g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
+   g4config2.in  - macro for setting after initialization
+   g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
+  </pre>
+
+  Common macro (called by run_g3.C/run_g4.C):
+  <pre>
+  \link ExGarfield/set_vis.C set_vis.C\endlink - setting visualization
+  </pre>
+
+  For running example with G3:
+  (Note that Garfield is not used with Geant3 simulation.)
+  <pre>
+  \link      ExGarfield/load_g3.C load_g3.C     \endlink - macro to load the libraries to run the example with Geant3
+  \link       ExGarfield/run_g3.C run_g3.C      \endlink - macro for running example 
+  \link ExGarfield/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry
+  </pre>
+
+
+\section garfield_s4 To run example 
+
+  The environment variable HEED_DATABASE pointing to /garfield/Heed/heed++/database
+  directory has to be set.
+
+  <pre>
+  With G4:
+  root[0] .x \link ExGarfield/load_g4.C load_g4.C\endlink
+  root[1] .x \link ExGarfield/run_g4.C run_g4.C\endlink
+
+  With G4 + TGeo navigation:
+  root[0] .x \link ExGarfield/load_g4.C load_g4.C\endlink
+  root[1] .x \link ExGarfield/run_g4.C run_g4.C\endlink(\link ExGarfield/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);
+
+  With G3 + TGeo:
+  root[0] .x \link ExGarfield/load_g3.C load_g3.C\endlink
+  root[1] .x \link ExGarfield/run_g3.C run_g3.C\endlink
+  </pre>
+
+\section garfield_s5 Classes
+
+The documentation of all classes and the basic macros for this example
+is availabe on \link ExGarfield this page \endlink. 
+
+*/

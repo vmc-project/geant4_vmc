@@ -20,7 +20,7 @@ OUTDIR=$CURDIR/log
 PASSED="0"
 FAILED="0"
 
-# Set 1 to 0 if you want to skip given MC or Garfield test
+# Set 1 to 0 if you want to skip given MC or ExGarfield test
 TESTG3=1
 TESTG4=1
 TESTGARFIELD=1
@@ -61,15 +61,15 @@ if [ "x${BUILDDIR}" != "x" ]; then
   export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${LIBS_FROM_BUILDDIR}
 fi
 
-for EXAMPLE in E01 E02 E03 E06 A01 Garfield Gflash TR
+for EXAMPLE in E01 E02 E03 E06 A01 ExGarfield Gflash TR
 do
   OUT=$OUTDIR/$EXAMPLE
   if [ ! -d $OUT ]; then
     mkdir -p $OUT
   fi
 
-  # skip Garfield if switch off
-  if [ "$EXAMPLE" = "Garfield" -a "$TESTGARFIELD" = "0" ]; then
+  # skip ExGarfield if switch off
+  if [ "$EXAMPLE" = "ExGarfield" -a "$TESTGARFIELD" = "0" ]; then
     continue 1
   fi
 
@@ -346,7 +346,7 @@ do
 
   # new examples (without old geometry definition)
   #
-  if [ "$EXAMPLE" = "Garfield" -o "$EXAMPLE" = "Gflash"  -o "$EXAMPLE" = "TR" ]; then
+  if [ "$EXAMPLE" = "ExGarfield" -o "$EXAMPLE" = "Gflash"  -o "$EXAMPLE" = "TR" ]; then
 
     if [ "$TESTG3" = "1" ]; then
       echo "... Running test with G3, geometry via TGeo, TGeo navigation"

@@ -34,10 +34,8 @@ add_subdirectory(TR)
 #
 find_package(Garfield QUIET)
 if(Garfield_FOUND)
-  add_subdirectory(Garfield)
+  add_subdirectory(ExGarfield)
 else()
   message(STATUS "VMC Examples: Garfield package not found. ")
-  message(STATUS "Garfield example disabled")
+  message(STATUS "ExGarfield example disabled")
 endif()
-
-#add_custom_target(all DEPENDS E01 E02 E03 E05 E06 A01)

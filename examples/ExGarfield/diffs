@@ -1,0 +1,1126 @@
+diff --git a/examples/ExGarfield/.README.txt b/examples/ExGarfield/.README.txt
+index 4066171..cd3dfb7 100644
+--- a/examples/ExGarfield/.README.txt
++++ b/examples/ExGarfield/.README.txt
+@@ -1,9 +1,9 @@
+ /*! 
+ 
+-/// \file "Garfield/.README.txt"
+-/// \brief The Example Garfield README page
++/// \file "ExGarfield/.README.txt"
++/// \brief The Example ExGarfield README page
+ 
+-\page README_Garfield Example Garfield
++\page README_ExGarfield Example ExGarfield
+ 
+ \section garfield_s1 Description
+ 
+@@ -11,7 +11,7 @@
+ 
+   It demonstrates:
+   - Integration of Garfield simulation model in Geant4 VMC simulation;
+-    Garfield model in not used when running the example with Geant3.
++    Garfield model is not used when running the example with Geant3.
+ 
+   See also the original Garfield example description at:
+     http://garfieldpp.web.cern.ch/garfieldpp/examples/geant4-interface/
+@@ -29,10 +29,10 @@
+ 
+   For running example with G4:
+   <pre>
+-  \link       Garfield/load_g4.C load_g4.C      \endlink - macro to load the libraries to run the example with Geant4
+-  \link        Garfield/run_g4.C run_g4.C       \endlink - macro for running example 
+-  \link      Garfield/g4Config.C g4Config.C     \endlink - configuration macro for G4 with native geometry navigation (defaullt)
+-  \link  Garfield/g4tgeoConfig.C g4tgeoConfig.C \endlink - configuration macro for G4 with TGeo geometry navigation
++  \link       ExGarfield/load_g4.C load_g4.C      \endlink - macro to load the libraries to run the example with Geant4
++  \link        ExGarfield/run_g4.C run_g4.C       \endlink - macro for running example 
++  \link      ExGarfield/g4Config.C g4Config.C     \endlink - configuration macro for G4 with native geometry navigation (defaullt)
++  \link  ExGarfield/g4tgeoConfig.C g4tgeoConfig.C \endlink - configuration macro for G4 with TGeo geometry navigation
+    g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
+    g4config2.in  - macro for setting after initialization
+    g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
+@@ -40,15 +40,15 @@
+ 
+   Common macro (called by run_g3.C/run_g4.C):
+   <pre>
+-  \link Garfield/set_vis.C set_vis.C\endlink - setting visualization
++  \link ExGarfield/set_vis.C set_vis.C\endlink - setting visualization
+   </pre>
+ 
+   For running example with G3:
+   (Note that Garfield is not used with Geant3 simulation.)
+   <pre>
+-  \link      Garfield/load_g3.C load_g3.C     \endlink - macro to load the libraries to run the example with Geant3
+-  \link       Garfield/run_g3.C run_g3.C      \endlink - macro for running example 
+-  \link Garfield/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry
++  \link      ExGarfield/load_g3.C load_g3.C     \endlink - macro to load the libraries to run the example with Geant3
++  \link       ExGarfield/run_g3.C run_g3.C      \endlink - macro for running example 
++  \link ExGarfield/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry
+   </pre>
+ 
+ 
+@@ -59,21 +59,21 @@
+ 
+   <pre>
+   With G4:
+-  root[0] .x \link Garfield/load_g4.C load_g4.C\endlink
+-  root[1] .x \link Garfield/run_g4.C run_g4.C\endlink
++  root[0] .x \link ExGarfield/load_g4.C load_g4.C\endlink
++  root[1] .x \link ExGarfield/run_g4.C run_g4.C\endlink
+ 
+   With G4 + TGeo navigation:
+-  root[0] .x \link Garfield/load_g4.C load_g4.C\endlink
+-  root[1] .x \link Garfield/run_g4.C run_g4.C\endlink(\link Garfield/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);
++  root[0] .x \link ExGarfield/load_g4.C load_g4.C\endlink
++  root[1] .x \link ExGarfield/run_g4.C run_g4.C\endlink(\link ExGarfield/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);
+ 
+   With G3 + TGeo:
+-  root[0] .x \link Garfield/load_g3.C load_g3.C\endlink
+-  root[1] .x \link Garfield/run_g3.C run_g3.C\endlink
++  root[0] .x \link ExGarfield/load_g3.C load_g3.C\endlink
++  root[1] .x \link ExGarfield/run_g3.C run_g3.C\endlink
+   </pre>
+ 
+ \section garfield_s5 Classes
+ 
+ The documentation of all classes and the basic macros for this example
+-is availabe on \link Garfield this page \endlink. 
++is availabe on \link ExGarfield this page \endlink. 
+ 
+ */
+diff --git a/examples/ExGarfield/CMakeLists.txt b/examples/ExGarfield/CMakeLists.txt
+index f58e25c..fe7aa57 100644
+--- a/examples/ExGarfield/CMakeLists.txt
++++ b/examples/ExGarfield/CMakeLists.txt
+@@ -7,7 +7,7 @@
+ # Contact: root-vmc@cern.ch
+ #-------------------------------------------------
+ 
+-# CMake Configuration file for the VMC Garfield example
++# CMake Configuration file for the VMC ExGarfield example
+ # I. Hrivnacova, 31/01/2015
+ 
+ #----------------------------------------------------------------------------
+@@ -15,9 +15,9 @@
+ cmake_minimum_required(VERSION 2.6.4 FATAL_ERROR)
+ 
+ #----------------------------------------------------------------------------
+-# Project Garfield
++# Project ExGarfield
+ #
+-project(Garfield)
++project(ExGarfield)
+ 
+ #----------------------------------------------------------------------------
+ # Define unique names of libraries and executables based on project name
+diff --git a/examples/ExGarfield/README b/examples/ExGarfield/README
+index 6f98571..84e8c1d 100644
+--- a/examples/ExGarfield/README
++++ b/examples/ExGarfield/README
+@@ -8,7 +8,7 @@
+ -------------------------------------------------
+ 
+ 
+-Garfield example
++ExGarfield example
+ =================
+   Garfield garfieldgpp example adapted to Virtual Monte Carlo.
+ 
+diff --git a/examples/ExGarfield/exampleGarfield.cxx b/examples/ExGarfield/exampleGarfield.cxx
+index 9001bfb..cfd7df3 100644
+--- a/examples/ExGarfield/exampleGarfield.cxx
++++ b/examples/ExGarfield/exampleGarfield.cxx
+@@ -8,7 +8,7 @@
+ //-------------------------------------------------
+ 
+ /// \file exampleGarfield.cxx
+-/// \brief The Geant4 VMC example Garfield application executable
++/// \brief The Geant4 VMC example ExGarfield application executable
+ ///
+ /// \date 28/10/2015
+ /// \author I. Hrivnacova; IPN, Orsay
+@@ -39,14 +39,14 @@ int main(int argc, char** argv)
+ #endif
+ 
+   // Create MC application (thread local)
+-  VMC::Garfield::MCApplication* appl 
+-    =  new VMC::Garfield::MCApplication("ExampleGarfield", 
+-                                        "The exampleGarfield MC application");
++  VMC::ExGarfield::MCApplication* appl 
++    =  new VMC::ExExGarfield::MCApplication("ExampleExGarfield", 
++                                            "The exampleExGarfield MC application");
+ 
+ #ifdef USE_GEANT4
+   // RunConfiguration for Geant4 
+-  VMC::Garfield::RunConfiguration* runConfiguration 
+-    = new VMC::Garfield::RunConfiguration("geomRootToGeant4", "FTFP_BERT");
++  VMC::ExGarfield::RunConfiguration* runConfiguration 
++    = new VMC::ExGarfield::RunConfiguration("geomRootToGeant4", "FTFP_BERT");
+ 
+   // TGeant4
+   TGeant4* geant4
+diff --git a/examples/ExGarfield/g3tgeoConfig.C b/examples/ExGarfield/g3tgeoConfig.C
+index c402524..a02e561 100644
+--- a/examples/ExGarfield/g3tgeoConfig.C
++++ b/examples/ExGarfield/g3tgeoConfig.C
+@@ -7,13 +7,13 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \ingroup Garfield
+-/// \file Garfield/g3tgeoConfig.C
+-/// \brief Configuration macro for Geant3+TGeo VirtualMC for Garfield example 
++/// \ingroup ExGarfield
++/// \file ExGarfield/g3tgeoConfig.C
++/// \brief Configuration macro for Geant3+TGeo VirtualMC for ExGarfield example 
+ 
+ void Config()
+ {
+-/// The configuration function for Geant3+TGeo VMC for Garfield example
++/// The configuration function for Geant3+TGeo VMC for ExGarfield example
+ /// called during MC application initialization. 
+ 
+   TGeant3* geant3
+diff --git a/examples/ExGarfield/g4Config.C b/examples/ExGarfield/g4Config.C
+index 1d5bb8a..ecae4b4 100644
+--- a/examples/ExGarfield/g4Config.C
++++ b/examples/ExGarfield/g4Config.C
+@@ -7,29 +7,29 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \ingroup Garfield
+-/// \file Garfield/g4Config.C
+-/// \brief Configuration macro for Geant4 VirtualMC for Garfield example
++/// \ingroup ExGarfield
++/// \file ExGarfield/g4Config.C
++/// \brief Configuration macro for Geant4 VirtualMC for ExGarfield example
+ ///
+ /// For geometry defined with Root and Geant4 native navigation
+ 
+ void Config()
+ {
+-/// The configuration function for Geant4 VMC for Garfield example
++/// The configuration function for Geant4 VMC for ExGarfield example
+ /// called during MC application initialization. 
+ /// For geometry defined with Root and Geant4 native navigation
+ 
+-  // cout << "Constructing Garfield::RunConfiguration " << endl;
++  // cout << "Constructing ExGarfield::RunConfiguration " << endl;
+ 
+   // Run configuration
+-  VMC::Garfield::RunConfiguration* runConfiguration 
+-      = new VMC::Garfield::RunConfiguration("geomRootToGeant4", "FTFP_BERT");
++  VMC::ExGarfield::RunConfiguration* runConfiguration 
++      = new VMC::ExGarfield::RunConfiguration("geomRootToGeant4", "FTFP_BERT");
+   
+   cout << "Constructing TG4RunConfiguration " << endl;
+ 
+   // Run configuration with special cuts activated
+-  // VMC::Garfield::RunConfiguration* runConfiguration 
+-  //   = new VMC::Garfield::RunConfiguration("geomRootToGeant4", "FTFP_BERT", "specialCuts");
++  // VMC::ExGarfield::RunConfiguration* runConfiguration 
++  //   = new VMC::ExGarfield::RunConfiguration("geomRootToGeant4", "FTFP_BERT", "specialCuts");
+ 
+   // TGeant4
+   TGeant4* geant4
+diff --git a/examples/ExGarfield/g4config.in b/examples/ExGarfield/g4config.in
+index d40a08c..41ce700 100644
+--- a/examples/ExGarfield/g4config.in
++++ b/examples/ExGarfield/g4config.in
+@@ -8,7 +8,7 @@
+ #-------------------------------------------------
+ 
+ #
+-# Geant4 configuration macro for Garfield example
++# Geant4 configuration macro for ExGarfield example
+ # (called from Root macro g4Config.C)
+ 
+ /mcVerbose/all 0
+diff --git a/examples/ExGarfield/g4config2.in b/examples/ExGarfield/g4config2.in
+index 2222389..b25e1d6 100644
+--- a/examples/ExGarfield/g4config2.in
++++ b/examples/ExGarfield/g4config2.in
+@@ -8,7 +8,7 @@
+ #-------------------------------------------------
+ 
+ #
+-# Geant4 configuration macro for Garfield Example
++# Geant4 configuration macro for ExGarfield Example
+ # called after initialization from run_g4.C
+ #
+ 
+diff --git a/examples/ExGarfield/g4tgeoConfig.C b/examples/ExGarfield/g4tgeoConfig.C
+index 20e4d83..139a05a 100644
+--- a/examples/ExGarfield/g4tgeoConfig.C
++++ b/examples/ExGarfield/g4tgeoConfig.C
+@@ -7,25 +7,25 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \ingroup Garfield
+-/// \file Garfield/g4tgeoConfig.C
+-/// \brief Configuration macro for Geant4 VirtualMC for Garfield example
++/// \ingroup ExGarfield
++/// \file ExGarfield/g4tgeoConfig.C
++/// \brief Configuration macro for Geant4 VirtualMC for ExGarfield example
+ ///
+ /// For geometry defined with Root and selected G4Root navigation
+ 
+ void Config()
+ {
+-/// The configuration function for Geant4 VMC for Garfield example
++/// The configuration function for Geant4 VMC for ExGarfield example
+ /// called during MC application initialization. 
+ /// For geometry defined with Root and selected G4Root navigation
+ 
+   // Run configuration
+-  VMC::Garfield::RunConfiguration* runConfiguration 
+-    = new VMC::Garfield::RunConfiguration("geomRoot", "FTFP_BERT");
++  VMC::ExGarfield::RunConfiguration* runConfiguration 
++    = new VMC::ExGarfield::RunConfiguration("geomRoot", "FTFP_BERT");
+   
+   // Run configuration with special cuts activated
+-  // VMC::Garfield::RunConfiguration* runConfiguration 
+-  //   = new VMC::Garfield::RunConfiguration("geomRoot", "FTFP_BERT", "specialCuts");
++  // VMC::ExGarfield::RunConfiguration* runConfiguration 
++  //   = new VMC::ExGarfield::RunConfiguration("geomRoot", "FTFP_BERT", "specialCuts");
+   
+   // TGeant4
+   TGeant4* geant4
+diff --git a/examples/ExGarfield/g4vis.in b/examples/ExGarfield/g4vis.in
+index f929424..5740015 100644
+--- a/examples/ExGarfield/g4vis.in
++++ b/examples/ExGarfield/g4vis.in
+@@ -8,7 +8,7 @@
+ #-------------------------------------------------
+ 
+ #
+-# Geant4 macro for setting visualization for Garfield example
++# Geant4 macro for setting visualization for ExGarfield example
+ # (called from Root macro set_vis.C)
+ 
+ # Use these open statements to open selected visualization
+diff --git a/examples/ExGarfield/geant4/CMakeLists.txt b/examples/ExGarfield/geant4/CMakeLists.txt
+index bb28585..c551f6d 100644
+--- a/examples/ExGarfield/geant4/CMakeLists.txt
++++ b/examples/ExGarfield/geant4/CMakeLists.txt
+@@ -7,7 +7,7 @@
+ # Contact: root-vmc@cern.ch
+ #-------------------------------------------------
+ 
+-# CMake Configuration file for the VMC Garfield example Geant4 based code
++# CMake Configuration file for the VMC ExGarfield example Geant4 based code
+ # I. Hrivnacova, 28/04/2015
+ 
+ #----------------------------------------------------------------------------
+@@ -15,9 +15,9 @@
+ cmake_minimum_required(VERSION 2.6.4 FATAL_ERROR)
+ 
+ #----------------------------------------------------------------------------
+-# Project geant44Garfield
++# Project geant4ExGarfield
+ #
+-project(geant4Garfield)
++project(geant4ExGarfield)
+ 
+ #----------------------------------------------------------------------------
+ # CMake Module Path
+diff --git a/examples/ExGarfield/geant4/include/FastSimulation.h b/examples/ExGarfield/geant4/include/FastSimulation.h
+index c8a2f41..e3a9737 100644
+--- a/examples/ExGarfield/geant4/include/FastSimulation.h
++++ b/examples/ExGarfield/geant4/include/FastSimulation.h
+@@ -10,10 +10,10 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file Garfield/geant4/include/FastSimulation.h 
+-/// \brief Definition of the Garfield::FastSimulation class 
++/// \file ExGarfield/geant4/include/FastSimulation.h 
++/// \brief Definition of the ExGarfield::FastSimulation class 
+ ///
+-/// Garfield garfieldpp example adapted to Virtual Monte Carlo.
++/// ExGarfield garfieldpp example adapted to Virtual Monte Carlo.
+ ///
+ /// \date 28/10/2015
+ /// \author I. Hrivnacova; IPN, Orsay
+@@ -24,10 +24,10 @@ class GarfieldMessenger;
+ 
+ namespace VMC
+ {
+-namespace Garfield
++namespace ExGarfield
+ {
+ 
+-/// \ingroup Garfield
++/// \ingroup ExGarfield
+ /// \brief Special class for definition of fast simulation models
+ ///
+ /// \author I. Hrivnacova; IPN, Orsay
+diff --git a/examples/ExGarfield/geant4/include/GarfieldG4FastSimulationModel.h b/examples/ExGarfield/geant4/include/GarfieldG4FastSimulationModel.h
+index f86f187..1b8f6af 100644
+--- a/examples/ExGarfield/geant4/include/GarfieldG4FastSimulationModel.h
++++ b/examples/ExGarfield/geant4/include/GarfieldG4FastSimulationModel.h
+@@ -10,7 +10,7 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file  Garfield/geant4/include/GarfieldG4FastSimulationModel.h
++/// \file  ExGarfield/geant4/include/GarfieldG4FastSimulationModel.h
+ /// \brief Definition of the GarfieldG4FastSimulationModel class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+diff --git a/examples/ExGarfield/geant4/include/GarfieldMessenger.h b/examples/ExGarfield/geant4/include/GarfieldMessenger.h
+index 43a42dc..6bb6c78 100644
+--- a/examples/ExGarfield/geant4/include/GarfieldMessenger.h
++++ b/examples/ExGarfield/geant4/include/GarfieldMessenger.h
+@@ -10,7 +10,7 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file  Garfield/geant4/include/GarfieldMessenger.h
++/// \file  ExGarfield/geant4/include/GarfieldMessenger.h
+ /// \brief Definition of the GarfieldMessengerclass 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+diff --git a/examples/ExGarfield/geant4/include/RunConfiguration.h b/examples/ExGarfield/geant4/include/RunConfiguration.h
+index 77d079a..0b2fa35 100644
+--- a/examples/ExGarfield/geant4/include/RunConfiguration.h
++++ b/examples/ExGarfield/geant4/include/RunConfiguration.h
+@@ -10,8 +10,8 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file Garfield/geant4/include/RunConfiguration.h 
+-/// \brief Definition of the Garfield::RunConfiguration class 
++/// \file ExGarfield/geant4/include/RunConfiguration.h 
++/// \brief Definition of the ExGarfield::RunConfiguration class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+ ///
+@@ -22,10 +22,10 @@
+ 
+ namespace VMC
+ {
+-namespace Garfield
++namespace ExGarfield
+ {
+ 
+-/// \ingroup Garfield
++/// \ingroup ExGarfield
+ /// \brief User Geant4 VMC run configuration
+ ///
+ /// This class overrides the default Geant4 VMC dummy 
+diff --git a/examples/ExGarfield/geant4/include/geant4GarfieldLinkDef.h b/examples/ExGarfield/geant4/include/geant4GarfieldLinkDef.h
+index d7b361c..361d010 100644
+--- a/examples/ExGarfield/geant4/include/geant4GarfieldLinkDef.h
++++ b/examples/ExGarfield/geant4/include/geant4GarfieldLinkDef.h
+@@ -1,6 +1,6 @@
+ // $Id$
+ 
+-/// \file  geant4GarfieldLinkDef.h
++/// \file  geant4ExGarfieldLinkDef.h
+ /// \brief The CINT link definitions for example Garfield/geant4 classes
+ 
+ #ifdef __CINT__
+@@ -9,7 +9,7 @@
+ #pragma link off all classes;
+ #pragma link off all functions;
+  
+-#pragma link C++ class  VMC::Garfield::RunConfiguration+;
++#pragma link C++ class  VMC::ExGarfield::RunConfiguration+;
+ 
+ #endif
+ 
+diff --git a/examples/ExGarfield/geant4/src/FastSimulation.cxx b/examples/ExGarfield/geant4/src/FastSimulation.cxx
+index ba8e93d..c19c056 100644
+--- a/examples/ExGarfield/geant4/src/FastSimulation.cxx
++++ b/examples/ExGarfield/geant4/src/FastSimulation.cxx
+@@ -7,8 +7,8 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file Garfield/geant4/src/FastSimulation.cxx
+-/// \brief Implementation of the Garfield::FastSimulation class 
++/// \file ExGarfield/geant4/src/FastSimulation.cxx
++/// \brief Implementation of the ExGarfield::FastSimulation class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+ ///
+@@ -38,7 +38,7 @@ using namespace std;
+ 
+ namespace VMC
+ {
+-namespace Garfield
++namespace ExGarfield
+ {
+ 
+ //_____________________________________________________________________________
+diff --git a/examples/ExGarfield/geant4/src/GarfieldMessenger.cxx b/examples/ExGarfield/geant4/src/GarfieldMessenger.cxx
+index cb33210..aff6f51 100644
+--- a/examples/ExGarfield/geant4/src/GarfieldMessenger.cxx
++++ b/examples/ExGarfield/geant4/src/GarfieldMessenger.cxx
+@@ -7,7 +7,7 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file  Garfield/geant4/src/GarfieldG4FastSimulationModel.cxx
++/// \file  ExGarfield/geant4/src/GarfieldG4FastSimulationModel.cxx
+ /// \brief Implementation of the GarfieldG4FastSimulationModel class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+diff --git a/examples/ExGarfield/geant4/src/RunConfiguration.cxx b/examples/ExGarfield/geant4/src/RunConfiguration.cxx
+index cc8627d..a5c3784 100644
+--- a/examples/ExGarfield/geant4/src/RunConfiguration.cxx
++++ b/examples/ExGarfield/geant4/src/RunConfiguration.cxx
+@@ -7,8 +7,8 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file Garfield/geant4/src/RunConfiguration.cxx
+-/// \brief Implementation of the Garfield::RunConfiguration class 
++/// \file ExGarfield/geant4/src/RunConfiguration.cxx
++/// \brief Implementation of the ExGarfield::RunConfiguration class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+ ///
+@@ -20,7 +20,7 @@
+ 
+ namespace VMC
+ {
+-namespace Garfield
++namespace ExGarfield
+ {
+ 
+ //_____________________________________________________________________________
+diff --git a/examples/ExGarfield/include/DetectorConstruction.h b/examples/ExGarfield/include/DetectorConstruction.h
+index 5e031c2..caaac47 100644
+--- a/examples/ExGarfield/include/DetectorConstruction.h
++++ b/examples/ExGarfield/include/DetectorConstruction.h
+@@ -10,8 +10,8 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file  Garfield/include/DetectorConstruction.h
+-/// \brief Definition of the Garfield::DetectorConstruction class 
++/// \file  ExGarfield/include/DetectorConstruction.h
++/// \brief Definition of the ExGarfield::DetectorConstruction class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+ ///
+@@ -26,10 +26,10 @@
+ 
+ namespace VMC
+ {
+-namespace Garfield
++namespace ExGarfield
+ {
+ 
+-/// \ingroup Garfield
++/// \ingroup ExGarfield
+ /// \brief The detector construction (via TGeo )
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+diff --git a/examples/ExGarfield/include/GarfieldPhysics.h b/examples/ExGarfield/include/GarfieldPhysics.h
+index aa62440..d9291b3 100644
+--- a/examples/ExGarfield/include/GarfieldPhysics.h
++++ b/examples/ExGarfield/include/GarfieldPhysics.h
+@@ -10,7 +10,7 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file  Garfield/include/GarfieldPhysics.h
++/// \file  ExGarfield/include/GarfieldPhysics.h
+ /// \brief Definition of the GarfieldPhysics class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+diff --git a/examples/ExGarfield/include/Hit.h b/examples/ExGarfield/include/Hit.h
+index 51aabf6..b7f06bd 100644
+--- a/examples/ExGarfield/include/Hit.h
++++ b/examples/ExGarfield/include/Hit.h
+@@ -10,8 +10,8 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file Garfield/include/Hit.h 
+-/// \brief Definition of the Garfield::Hit class 
++/// \file ExGarfield/include/Hit.h 
++/// \brief Definition of the ExGarfield::Hit class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+ ///
+@@ -23,10 +23,10 @@
+ 
+ namespace VMC
+ {
+-namespace Garfield
++namespace ExGarfield
+ {
+ 
+-/// \ingroup Garfield
++/// \ingroup ExGarfield
+ /// \brief The calorimeter hit
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+diff --git a/examples/ExGarfield/include/MCApplication.h b/examples/ExGarfield/include/MCApplication.h
+index df5a93f..c396c89 100644
+--- a/examples/ExGarfield/include/MCApplication.h
++++ b/examples/ExGarfield/include/MCApplication.h
+@@ -10,8 +10,8 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file Garfield/include/MCApplication.h 
+-/// \brief Definition of the Garfield::MCApplication class 
++/// \file ExGarfield/include/MCApplication.h 
++/// \brief Definition of the ExGarfield::MCApplication class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+ ///
+@@ -31,12 +31,12 @@ class TVirtualMCRootManager;
+ 
+ namespace VMC
+ {
+-namespace Garfield
++namespace ExGarfield
+ {
+ 
+ class PrimaryGenerator;
+ 
+-/// \ingroup Garfield
++/// \ingroup ExGarfield
+ /// \brief Implementation of the TVirtualMCApplication
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+diff --git a/examples/ExGarfield/include/PrimaryGenerator.h b/examples/ExGarfield/include/PrimaryGenerator.h
+index 43d758e..f0c231c 100644
+--- a/examples/ExGarfield/include/PrimaryGenerator.h
++++ b/examples/ExGarfield/include/PrimaryGenerator.h
+@@ -10,8 +10,8 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file Garfield/include/PrimaryGenerator.h 
+-/// \brief Definition of the Garfield::PrimaryGenerator class 
++/// \file ExGarfield/include/PrimaryGenerator.h 
++/// \brief Definition of the ExGarfield::PrimaryGenerator class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+ ///
+@@ -24,12 +24,12 @@ class TVirtualMCStack;
+ 
+ namespace VMC
+ {
+-namespace Garfield
++namespace ExGarfield
+ {
+ 
+ class DetectorConstruction;
+ 
+-/// \ingroup Garfield
++/// \ingroup ExGarfield
+ /// \brief The primary generator
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+diff --git a/examples/ExGarfield/include/SensitiveDetector.h b/examples/ExGarfield/include/SensitiveDetector.h
+index 95e989d..f95ad22 100644
+--- a/examples/ExGarfield/include/SensitiveDetector.h
++++ b/examples/ExGarfield/include/SensitiveDetector.h
+@@ -10,8 +10,8 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file  Garfield/include/SensitiveDetector.h
+-/// \brief Definition of the Garfield::SensitiveDetector class 
++/// \file  ExGarfield/include/SensitiveDetector.h
++/// \brief Definition of the ExGarfield::SensitiveDetector class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+ ///
+@@ -22,12 +22,12 @@
+ 
+ namespace VMC
+ {
+-namespace Garfield
++namespace ExGarfield
+ {
+ 
+ class Hit;
+ 
+-/// \ingroup Garfield
++/// \ingroup ExGarfield
+ /// \brief The calorimeter sensitive detector
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+diff --git a/examples/ExGarfield/include/exampleExGarfieldLinkDef.h b/examples/ExGarfield/include/exampleExGarfieldLinkDef.h
+index 5724bf4..193ae8b 100644
+--- a/examples/ExGarfield/include/exampleExGarfieldLinkDef.h
++++ b/examples/ExGarfield/include/exampleExGarfieldLinkDef.h
+@@ -7,8 +7,8 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file  exampleGarfieldLinkDef.h
+-/// \brief The CINT link definitions for Garfield example classes
++/// \file  exampleExGarfieldLinkDef.h
++/// \brief The CINT link definitions for ExGarfield example classes
+ 
+ #ifdef __CINT__
+ 
+@@ -16,11 +16,11 @@
+ #pragma link off all classes;
+ #pragma link off all functions;
+  
+-#pragma link C++ class  VMC::Garfield::MCApplication+;
+-#pragma link C++ class  VMC::Garfield::DetectorConstruction+;
+-#pragma link C++ class  VMC::Garfield::Hit+;
+-#pragma link C++ class  VMC::Garfield::SensitiveDetector+;
+-#pragma link C++ class  VMC::Garfield::PrimaryGenerator+;
++#pragma link C++ class  VMC::ExGarfield::MCApplication+;
++#pragma link C++ class  VMC::ExGarfield::DetectorConstruction+;
++#pragma link C++ class  VMC::ExGarfield::Hit+;
++#pragma link C++ class  VMC::ExGarfield::SensitiveDetector+;
++#pragma link C++ class  VMC::ExGarfield::PrimaryGenerator+;
+ #pragma link C++ class  Ex03MCStack+;
+ #pragma link C++ class  std::stack<TParticle*,deque<TParticle*> >+;
+ 
+diff --git a/examples/ExGarfield/load_g3.C b/examples/ExGarfield/load_g3.C
+index 5549b02..fb455e3 100644
+--- a/examples/ExGarfield/load_g3.C
++++ b/examples/ExGarfield/load_g3.C
+@@ -7,9 +7,9 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \ingroup Garfield
+-/// \file Garfield/load_g3.C
+-/// \brief Macro for loading libraries to run Garfield example with Geant3. 
++/// \ingroup ExGarfield
++/// \file ExGarfield/load_g3.C
++/// \brief Macro for loading libraries to run ExGarfield example with Geant3. 
+ 
+ #include "../macro/g3libs.C"
+ 
+@@ -20,5 +20,5 @@ void load_g3()
+ 
+   // Load this example library
+   gSystem->Load("libmtroot");
+-  gSystem->Load("libvmc_Garfield");
++  gSystem->Load("libvmc_ExGarfield");
+ }  
+diff --git a/examples/ExGarfield/load_g4.C b/examples/ExGarfield/load_g4.C
+index 8c17542..3831182 100644
+--- a/examples/ExGarfield/load_g4.C
++++ b/examples/ExGarfield/load_g4.C
+@@ -7,9 +7,9 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \ingroup Garfield
+-/// \file Garfield/run_g4.C
+-/// \brief Macro for loading libraries to run ExampleGarfield with Geant4. 
++/// \ingroup ExGarfield
++/// \file ExGarfield/run_g4.C
++/// \brief Macro for loading libraries to run Example ExGarfield with Geant4. 
+ 
+ #include "../macro/g4libs.C"
+ 
+@@ -22,8 +22,8 @@ void load_g4()
+   gSystem->Load("libGarfield");
+ 
+   // Load this example library
+-  gSystem->Load("libvmc_Garfield");
++  gSystem->Load("libvmc_ExGarfield");
+ 
+   // Load library with a user run configuration
+-  gSystem->Load("libgeant4_Garfield");
++  gSystem->Load("libgeant4_ExGarfield");
+ }  
+diff --git a/examples/ExGarfield/physics.in b/examples/ExGarfield/physics.in
+index fa62152..01773c5 100644
+--- a/examples/ExGarfield/physics.in
++++ b/examples/ExGarfield/physics.in
+@@ -8,7 +8,7 @@
+ #-------------------------------------------------
+ 
+ #
+-# Geant4 configuration macro for Garfield example
++# Geant4 configuration macro for ExGarfield example
+ # Garfield physics configuration
+ # called from g4config.in)
+ 
+diff --git a/examples/ExGarfield/read.C b/examples/ExGarfield/read.C
+index 81a42fa..fc5e7ca 100644
+--- a/examples/ExGarfield/read.C
++++ b/examples/ExGarfield/read.C
+@@ -7,7 +7,7 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file Garfield/read.C
++/// \file ExGarfield/read.C
+ /// \brief Macro for reading the Garfield simulated data from Root file
+ 
+ #include "../macro/basiclibs.C"
+@@ -23,11 +23,11 @@ void read()
+   gSystem->Load("libGarfield");
+ 
+   // Load this example library
+-  gSystem->Load("libvmc_Garfield");
++  gSystem->Load("libvmc_ExGarfield");
+   
+   // MC application
+   VMC::Garfield::MCApplication* appl 
+-    =  new VMC::Garfield::MCApplication("ExampleGarfield", "The exampleGarfield MC application", kRead);
++    =  new VMC::ExGarfield::MCApplication("ExampleGarfield", "The example ExGarfield MC application", kRead);
+ 
+   for (Int_t i=0; i<5; i++) {
+     cout << "   Event no " << i+1 << ":" << endl;
+diff --git a/examples/ExGarfield/run_g3.C b/examples/ExGarfield/run_g3.C
+index 28a592c..0102f38 100644
+--- a/examples/ExGarfield/run_g3.C
++++ b/examples/ExGarfield/run_g3.C
+@@ -7,23 +7,23 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \ingroup Garfield
+-/// \file Garfield/run_g3.C
+-/// \brief Macro for running ExampleGarfield with Geant3 
++/// \ingroup ExGarfield
++/// \file ExGarfield/run_g3.C
++/// \brief Macro for running Example ExGarfield with Geant3 
+ 
+ #include "set_vis.C"
+ 
+ void run_g3(const TString& configMacro = "g3tgeoConfig.C") 
+ {
+-/// Macro function for running ExampleGarfield with Geant3 from
++/// Macro function for running Example ExGarfield with Geant3 from
+ /// Root interactive session
+ /// Note that since Root 6 the libraries have to be loaded first
+ /// via load_g3.C.
+-/// \param configMacro configuration macro name, default \ref Garfield/g3tgeoConfig.C
++/// \param configMacro configuration macro name, default \ref ExGarfield/g3tgeoConfig.C
+ 
+   // MC application
+   VMC::Garfield::MCApplication* appl 
+-    =  new VMC::Garfield::MCApplication("ExampleGarfield", "The exampleGarfield MC application");
++    =  new VMC::ExGarfield::MCApplication("ExampleExGarfield", "The example ExGarfield MC application");
+   appl->InitMC(configMacro);
+ 
+   // visualization setting
+diff --git a/examples/ExGarfield/run_g4.C b/examples/ExGarfield/run_g4.C
+index 07027f3..f0a983a 100644
+--- a/examples/ExGarfield/run_g4.C
++++ b/examples/ExGarfield/run_g4.C
+@@ -7,23 +7,23 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \ingroup Garfield
+-/// \file Garfield/run_g4.C
+-/// \brief Macro for running ExampleGarfield with Geant4. 
++/// \ingroup ExGarfield
++/// \file ExGarfield/run_g4.C
++/// \brief Macro for running Example ExGarfield with Geant4. 
+ 
+ #include "set_vis.C"
+ 
+ void run_g4(const TString& configMacro = "g4Config.C")
+ {
+-/// Macro function for running ExampleGarfield with Geant4 from
++/// Macro function for running Example ExGarfield with Geant4 from
+ /// Root interactive session
+ /// Note that since Root 6 the libraries have to be loaded first
+ /// via load_g4.C.
+-/// \param configMacro configuration macro name, default \ref Garfield/g4Config.C 
++/// \param configMacro configuration macro name, default \ref ExGarfield/g4Config.C 
+ 
+   // MC application
+-  VMC::Garfield::MCApplication* appl 
+-    =  new VMC::Garfield::MCApplication("ExampleGarfield", "The exampleGarfield MC application");
++  VMC::ExGarfield::MCApplication* appl 
++    =  new VMC::ExGarfield::MCApplication("ExampleExGarfield", "The example ExGarfield MC application");
+   appl->InitMC(configMacro);
+ 
+   // Customise Geant4 setting after initialization:
+diff --git a/examples/ExGarfield/set_vis.C b/examples/ExGarfield/set_vis.C
+index c8ddd1c..54d2b83 100644
+--- a/examples/ExGarfield/set_vis.C
++++ b/examples/ExGarfield/set_vis.C
+@@ -7,14 +7,14 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file Garfield/set_vis.C
+-/// \brief Macro for setting visualization for Garfield example 
++/// \file ExGarfield/set_vis.C
++/// \brief Macro for setting visualization for ExGarfield example 
+ 
+ #include "TVirtualMC.h"
+ 
+ void set_vis()
+ {
+-/// Macro for setting visualization for Garfield example 
++/// Macro for setting visualization for ExGarfield example 
+ 
+   if ( TString(gMC->GetName()) == "TGeant3TGeo" ) {
+     // Set drawing options
+diff --git a/examples/ExGarfield/src/DetectorConstruction.cxx b/examples/ExGarfield/src/DetectorConstruction.cxx
+index e42b304..37dd751 100644
+--- a/examples/ExGarfield/src/DetectorConstruction.cxx
++++ b/examples/ExGarfield/src/DetectorConstruction.cxx
+@@ -7,8 +7,8 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file Garfield/src/DetectorConstruction.cxx 
+-/// \brief Implementation of the Garfield::DetectorConstruction class 
++/// \file ExGarfield/src/DetectorConstruction.cxx 
++/// \brief Implementation of the ExGarfield::DetectorConstruction class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+ /// 
+@@ -31,12 +31,12 @@
+ using namespace std;
+ 
+ /// \cond CLASSIMP
+-ClassImp(VMC::Garfield::DetectorConstruction)
++ClassImp(VMC::ExGarfield::DetectorConstruction)
+ /// \endcond
+ 
+ namespace VMC
+ {
+-namespace Garfield
++namespace ExGarfield
+ {
+ 
+ //_____________________________________________________________________________
+@@ -62,7 +62,7 @@ void DetectorConstruction::Construct()
+   /// Construct geometry using TGeo modeller
+ 
+   // Create Root geometry manager 
+-  new TGeoManager("Garfield_geometry", "Garfield VMC example geometry");
++  new TGeoManager("Garfield_geometry", "ExGarfield VMC example geometry");
+ 
+   // Elements
+   //
+diff --git a/examples/ExGarfield/src/GarfieldPhysics.cxx b/examples/ExGarfield/src/GarfieldPhysics.cxx
+index e4d0c69..a035125 100644
+--- a/examples/ExGarfield/src/GarfieldPhysics.cxx
++++ b/examples/ExGarfield/src/GarfieldPhysics.cxx
+@@ -7,7 +7,7 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file  Garfield/src/GarfieldPhysics.cxx
++/// \file  ExGarfield/src/GarfieldPhysics.cxx
+ /// \brief Definition of the GarfieldPhysics class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+diff --git a/examples/ExGarfield/src/Hit.cxx b/examples/ExGarfield/src/Hit.cxx
+index 65c820a..5573f5f 100644
+--- a/examples/ExGarfield/src/Hit.cxx
++++ b/examples/ExGarfield/src/Hit.cxx
+@@ -7,8 +7,8 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file Garfield/src/Hit.cxx 
+-/// \brief Implementation of the Garfield::Hit class 
++/// \file ExExGarfield/src/Hit.cxx 
++/// \brief Implementation of the ExGarfield::Hit class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+ ///
+@@ -22,12 +22,12 @@
+ using namespace std;
+ 
+ /// \cond CLASSIMP
+-ClassImp(VMC::Garfield::Hit)
++ClassImp(VMC::ExGarfield::Hit)
+ /// \endcond
+ 
+ namespace VMC
+ {
+-namespace Garfield
++namespace ExGarfield
+ {
+ 
+ //_____________________________________________________________________________
+diff --git a/examples/ExGarfield/src/MCApplication.cxx b/examples/ExGarfield/src/MCApplication.cxx
+index 55b56c4..e4ab641 100644
+--- a/examples/ExGarfield/src/MCApplication.cxx
++++ b/examples/ExGarfield/src/MCApplication.cxx
+@@ -7,8 +7,8 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file Garfield/src/MCApplication.cxx 
+-/// \brief Implementation of the Garfield::MCApplication class 
++/// \file ExGarfield/src/MCApplication.cxx 
++/// \brief Implementation of the ExGarfield::MCApplication class 
+ ///
+ /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
+ ///
+@@ -37,12 +37,12 @@
+ using namespace std;
+ 
+ /// \cond CLASSIMP
+-ClassImp(VMC::Garfield::MCApplication)
++ClassImp(VMC::ExGarfield::MCApplication)
+ /// \endcond
+ 
+ namespace VMC
+ {
+-namespace Garfield
++namespace ExGarfield
+ {
+ 
+ //_____________________________________________________________________________
+diff --git a/examples/ExGarfield/src/PrimaryGenerator.cxx b/examples/ExGarfield/src/PrimaryGenerator.cxx
+index 80a0a5f..51fa11b 100644
+--- a/examples/ExGarfield/src/PrimaryGenerator.cxx
++++ b/examples/ExGarfield/src/PrimaryGenerator.cxx
+@@ -7,8 +7,8 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file Garfield/src/PrimaryGenerator.cxx 
+-/// \brief Implementation of the Garfield::PrimaryGenerator class 
++/// \file ExExExGarfield/src/PrimaryGenerator.cxx 
++/// \brief Implementation of the ExGarfield::PrimaryGenerator class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+ ///
+@@ -27,12 +27,12 @@
+ #include "PrimaryGenerator.h"
+ 
+ /// \cond CLASSIMP
+-ClassImp(VMC::Garfield::PrimaryGenerator)
++ClassImp(VMC::ExGarfield::PrimaryGenerator)
+ /// \endcond
+ 
+ namespace VMC
+ {
+-namespace Garfield
++namespace ExGarfield
+ {
+ 
+ //_____________________________________________________________________________
+diff --git a/examples/ExGarfield/src/SensitiveDetector.cxx b/examples/ExGarfield/src/SensitiveDetector.cxx
+index ffccc5e..7112035 100644
+--- a/examples/ExGarfield/src/SensitiveDetector.cxx
++++ b/examples/ExGarfield/src/SensitiveDetector.cxx
+@@ -7,8 +7,8 @@
+ // Contact: root-vmc@cern.ch
+ //-------------------------------------------------
+ 
+-/// \file Garfield/src/SensitiveDetector.cxx 
+-/// \brief Implementation of the Garfield::SensitiveDetector class 
++/// \file ExGarfield/src/SensitiveDetector.cxx 
++/// \brief Implementation of the ExGarfield::SensitiveDetector class 
+ ///
+ /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
+ ///
+@@ -27,12 +27,12 @@
+ #include <TTree.h>
+ 
+ /// \cond CLASSIMP
+-ClassImp(VMC::Garfield::SensitiveDetector)
++ClassImp(VMC::ExGarfield::SensitiveDetector)
+ /// \endcond
+ 
+ namespace VMC
+ {
+-namespace Garfield
++namespace ExGarfield
+ {
+ 
+ //_____________________________________________________________________________
+diff --git a/examples/ExGarfield/testGarfield.cxx b/examples/ExGarfield/testGarfield.cxx
+index c2640ed..3e2675f 100644
+--- a/examples/ExGarfield/testGarfield.cxx
++++ b/examples/ExGarfield/testGarfield.cxx
+@@ -8,7 +8,7 @@
+ //-------------------------------------------------
+ 
+ /// \file testGarfield.cxx
+-/// \brief The Geant4 VMC example Garfield test application
++/// \brief The Geant4 VMC example ExGarfield test application
+ ///
+ /// The Geant4 VMC test application
+ /// with explicitely instantiated TGeant3 or TGeant4 and linked 
+@@ -29,7 +29,7 @@
+ /// Note that the g4* and g3* options are available only when built
+ /// with the corresponding VMC_WITH_Geant4 or VMC_WITH_Geant3 option.
+ /// Root macro with arguments should be passed within '', eg.
+-///  --root-macro 'test_Garfield.C("",kFALSE)'
++///  --root-macro 'test_ExGarfield.C("",kFALSE)'
+ /// </pre>
+ ///
+ /// \date 28/10/2015
+@@ -200,14 +200,14 @@ int main(int argc, char** argv)
+   // end of code to process arguments
+ 
+   // Create MC application (thread local)
+-  VMC::Garfield::MCApplication* appl 
+-    =  new VMC::Garfield::MCApplication("ExampleGarfield", 
+-                                        "The exampleGarfield MC application");
++  VMC::ExGarfield::MCApplication* appl 
++    =  new VMC::ExGarfield::MCApplication("ExampleExGarfield", 
++                                          "The example ExGarfield MC application");
+ 
+ #ifdef USE_GEANT4
+   // RunConfiguration for Geant4 
+-  VMC::Garfield::RunConfiguration* runConfiguration 
+-    = new VMC::Garfield::RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics);
++  VMC::ExGarfield::RunConfiguration* runConfiguration 
++    = new VMC::ExGarfield::RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics);
+ 
+   // TGeant4
+   TGeant4* geant4
+diff --git a/examples/ExGarfield/test_Garfield.C b/examples/ExGarfield/test_Garfield.C
+index 8a402ab..fe50cab 100644
+--- a/examples/ExGarfield/test_Garfield.C
++++ b/examples/ExGarfield/test_Garfield.C
+@@ -8,16 +8,16 @@
+ //-------------------------------------------------
+ 
+ /// \ingroup Tests
+-/// \file test_Garfield.C
+-/// \brief Example Garfield Test macro 1
++/// \file test_ExGarfield.C
++/// \brief Example ExGarfield Test macro 1
+ ///
+-/// Running Example Garfield
++/// Running Example ExGarfield
+ 
+ //#include "set_vis.C"
+ 
+-void test_Garfield(const TString& configMacro)
++void test_ExGarfield(const TString& configMacro)
+ {
+-/// Macro function for testing example Garfield
++/// Macro function for testing example ExGarfield
+ /// \param configMacro  configuration macro loaded in initialization
+ /// 
+ /// Run 10 events and print the calorimeter hits.
+@@ -25,13 +25,13 @@ void test_Garfield(const TString& configMacro)
+   // Create application if it does not yet exist
+   Bool_t needDelete = kFALSE;
+   if ( ! TVirtualMCApplication::Instance() ) {
+-    new VMC::Garfield::MCApplication("ExampleGarfield", "The exampleGarfield MC application");
++    new VMC::ExGarfield::MCApplication("ExampleExGarfield", "The example ExGarfield MC application");
+     needDelete = kTRUE;
+   }  
+  
+   // MC application
+-  VMC::Garfield::MCApplication* appl
+-    = (VMC::Garfield::MCApplication*)TVirtualMCApplication::Instance();
++  VMC::ExGarfield::MCApplication* appl
++    = (VMC::ExGarfield::MCApplication*)TVirtualMCApplication::Instance();
+   appl->InitMC(configMacro);
+ 
+   // visualization setting
