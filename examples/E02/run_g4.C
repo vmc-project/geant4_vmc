@@ -11,6 +11,8 @@
 /// \file E02/run_g4.C
 /// \brief Macro for running Example02 with Geant4. 
 
+#include "TVirtualMC.h"
+
 void run_g4(const TString& configMacro = "g4Config.C") 
 {
 /// Macro function for running Example02 with Geant4 from

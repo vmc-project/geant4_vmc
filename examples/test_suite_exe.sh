@@ -22,7 +22,7 @@
 
 CURDIR=`pwd`
 OUTDIR=$CURDIR/log_exe
-G3EXEDIR=$CURDIR/../../geant3_install/bin
+G3EXEDIR=$CURDIR/../../g3examples_install/bin
 G4EXEDIR=$CURDIR/../../geant4_vmc_install/bin
 PASSED="0"
 FAILED="0"
