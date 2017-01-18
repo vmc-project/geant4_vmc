@@ -32,7 +32,7 @@ if [ "$TESTG3" = "1" -a  "$TESTG4" = "1" ]; then
   rm -fr $OUTDIR
 fi  
 
-for EXAMPLE in E01 E02 E03 E06 A01 Garfield Gflash TR
+for EXAMPLE in E01 E02 E03 E06 A01 ExGarfield Gflash TR
 do
   OUT=$OUTDIR/$EXAMPLE
   if [ ! -d $OUT ]; then
@@ -40,7 +40,7 @@ do
   fi
 
   # skip Garfield if switch off
-  if [ "$EXAMPLE" = "Garfield" -a "$TESTGARFIELD" = "0" ]; then
+  if [ "$EXAMPLE" = "ExGarfield" -a "$TESTGARFIELD" = "0" ]; then
     continue 1
   fi
 
@@ -51,7 +51,7 @@ do
     echo "... Running g3vmc_example$EXAMPLE"
     $EXE >& $OUT/g3vmc_example$EXAMPLE.out
   fi  
-  
+
   if [ "$TESTG4" = "1" ]; then
     EXE=$G4EXEDIR"/g4vmc_example"$EXAMPLE
     echo "... Running g4vmc_example$EXAMPLE"
