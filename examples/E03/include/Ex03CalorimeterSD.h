@@ -24,6 +24,7 @@
 
 class Ex03DetectorConstruction;
 class Ex03CalorHit;
+class TVirtualMC;
 
 /// \ingroup E03
 /// \brief The calorimeter sensitive detector
@@ -61,6 +62,7 @@ class Ex03CalorimeterSD : public TNamed
     void  ResetHits();
   
     // data members
+    TVirtualMC*    fMC;            ///< The VMC implementation
     Ex03DetectorConstruction*  fDetector; ///< Detector construction
     TClonesArray*  fCalCollection; ///< Hits collection 
     Int_t          fAbsorberVolId; ///< The absorber volume Id

@@ -37,6 +37,7 @@ using namespace std;
 Ex03CalorimeterSD::Ex03CalorimeterSD(const char* name, 
                                      Ex03DetectorConstruction* detector)
   : TNamed(name, ""),
+    fMC(0),
     fDetector(detector),
     fCalCollection(0),
     fAbsorberVolId(0),
@@ -59,6 +60,7 @@ Ex03CalorimeterSD::Ex03CalorimeterSD(const char* name,
 Ex03CalorimeterSD::Ex03CalorimeterSD(const Ex03CalorimeterSD& origin,
                                      Ex03DetectorConstruction* detector)
   : TNamed(origin),
+    fMC(0),
     fDetector(detector),
     fCalCollection(0),
     fAbsorberVolId(origin.fAbsorberVolId),
@@ -132,14 +134,20 @@ void Ex03CalorimeterSD::Initialize()
   
   if ( TVirtualMCRootManager::Instance() ) Register();
   
-  fAbsorberVolId = gMC->VolId("ABSO");
-  fGapVolId = gMC->VolId("GAPX");
+  // Keep the pointer to TVirtualMC object as a data member
+  // to avoid a possible performance penalty due to a frequent retrieval
+  // from the thread-local storage
+  fMC = gMC;
+
+  fAbsorberVolId = fMC->VolId("ABSO");
+  fGapVolId = fMC->VolId("GAPX");
 
   if ( fAbsorberVolId == 0 && fGapVolId == 0 ) {
     // Volume names are different in B4 detector construction
-    fAbsorberVolId = gMC->VolId("Abso");
-    fGapVolId = gMC->VolId("Gap");
+    fAbsorberVolId = fMC->VolId("Abso");
+    fGapVolId = fMC->VolId("Gap");
   }
+
 }
 
 //_____________________________________________________________________________
@@ -148,18 +156,18 @@ Bool_t Ex03CalorimeterSD::ProcessHits()
 /// Account energy deposit and track lengths for each layer in its hit.
 
   Int_t copyNo;
-  Int_t id = gMC->CurrentVolID(copyNo);
+  Int_t id = fMC->CurrentVolID(copyNo);
 
   if (id != fAbsorberVolId  &&  id != fGapVolId ) 
     return false;
 
-  gMC->CurrentVolOffID(2, copyNo);
-  //cout << "Got copyNo "<< copyNo << " " << gMC->CurrentVolPath() << endl;
+  fMC->CurrentVolOffID(2, copyNo);
+  //cout << "Got copyNo "<< copyNo << " " << fMC->CurrentVolPath() << endl;
   
-  Double_t edep = gMC->Edep();
+  Double_t edep = fMC->Edep();
 
   Double_t step = 0.;
-  if (gMC->TrackCharge() != 0.) step = gMC->TrackStep();
+  if (fMC->TrackCharge() != 0.) step = fMC->TrackStep();
   
   if ( ! GetHit(copyNo) ) {
     std::cerr << "No hit found for layer with copyNo = " << copyNo << endl;
