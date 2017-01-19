@@ -93,6 +93,13 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
       
   fgInstance = this; 
 
+  // Define fARGV, fARGC if not provided
+  if ( fARGC == 0 ) {
+    fARGC = 1;
+    fARGV = (char **)new char*[fARGC];
+    fARGV[0] = StrDup("undefined");
+  }
+
   G4bool isMaster = ! G4Threading::IsWorkerThread();
   
   if ( isMaster ) {
@@ -301,6 +308,7 @@ void TG4RunManager::CreateRootUI()
   fRootUISession = gROOT->GetApplication();
   if (fRootUISession) {
     fARGC = fRootUISession->Argc();
+    delete [] fARGV;
     fARGV = fRootUISession->Argv();
   }
 
@@ -311,11 +319,17 @@ void TG4RunManager::CreateRootUI()
   if ( ! fRootUISession ) {
     // copy only first command line argument (name of program)
     // (use the same way as in TApplication.cxx)
-    int argc = 1;
-    char** argv = (char **)new char*[argc];
-    argv[0] = StrDup(fARGV[0]);
+    char** argv = 0;
+    if ( fARGC > 0) {
+       argv = (char **)new char*[fARGC];
+    }
 
-    fRootUISession = new TRint("rootSession", &argc, argv, 0, 0);
+    // copy command line arguments, can be later accessed via Argc() and Argv()
+    for (int i = 0; i < fARGC; i++) {
+       argv[i] = StrDup(fARGV[i]);
+    }
+
+    fRootUISession = new TRint("rootSession", &fARGC, argv, 0, 0);
     fRootUIOwner = true;
   }
 }
@@ -458,7 +472,6 @@ void TG4RunManager::CreateGeantUI()
 
 #ifdef G4UI_USE
   // create session if it does not exist
-  // G4cout << fARGC << "  "  << fARGV << G4endl;
   fGeantUISession = new G4UIExecutive(fARGC, fARGV);
 #endif
 }
