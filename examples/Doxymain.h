@@ -19,7 +19,7 @@
 
   To demonstrate use of VirtualMC, several Geant4 examples and one
   Garfield example have been rewritten as VMC applications:
-  \ref E01, \ref E02, \ref E03, \ref E06, \ref A01, \ref Gflash, \ref Garfield.
+  \ref E01, \ref E02, \ref E03, \ref E06, \ref A01, \ref Gflash, \ref Garfield, \ref TR.
   
   The correspondence with the examples in Geant4  (since 10.00.x) is:
   - E01 - no equivalent
@@ -40,7 +40,7 @@
   - \ref README_E03
   - \ref README_E06
   - \ref README_A01
-  - \ref README_Garfield
+  - \ref README_ExGarfield
   - \ref README_Gflash
   - \ref README_TR
 
