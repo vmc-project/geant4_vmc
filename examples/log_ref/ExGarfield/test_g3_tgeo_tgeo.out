@@ -2,14 +2,14 @@
   *                                         *
   *        W E L C O M E  to  R O O T       *
   *                                         *
-  *   Version   5.34/34    2 October 2015   *
+  *   Version   5.34/36      5 April 2016   *
   *                                         *
   *  You are welcome to visit our Web site  *
   *          http://root.cern.ch            *
   *                                         *
   *******************************************
 
-ROOT 5.34/34 (v5-34-34@v5-34-34, Jan 14 2016, 12:53:45 on linuxx8664gcc)
+ROOT 5.34/36 (v5-34-36@v5-34-36, May 04 2016, 18:23:59 on macosx64)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -19,10 +19,10 @@ Processing load_g3.C...
 Loading Geant3 libraries ... finished
 RandomEngineRoot:
     Generator type: TRandom3
-    Seed: 2492103010
-Processing test_Garfield.C("g3tgeoConfig.C")...
+    Seed: 2308625910
+Processing test_ExGarfield.C("g3tgeoConfig.C")...
 Geant3 has been created.
-Info in <TGeoManager::TGeoManager>: Geometry Garfield_geometry, Garfield VMC example geometry created
+Info in <TGeoManager::TGeoManager>: Geometry Garfield_geometry, ExGarfield VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is World. Master volume is World
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
 Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
@@ -31,12 +31,10 @@ Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 2, max placements = 2
-Info in <TGeoManager::CloseGeometry>: 5 nodes/ 5 volume UID's in Garfield VMC example geometry
+Info in <TGeoManager::CloseGeometry>: 5 nodes/ 5 volume UID's in ExGarfield VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
-Info in <TGeoManager::Export>: Exporting Garfield_geometry Garfield VMC example geometry as root file. Optimizations streamed.
+Info in <TGeoManager::Export>: Exporting Garfield_geometry ExGarfield VMC example geometry as root file. Optimizations streamed.
  Start generating event Nr 1
-Warning in <gufld>: Using deprecated function TVirtualMCApplication::Field().
-Warning in <gufld>: New TVirtualMagField interface should be used instead.
    Absorber: total energy: 13.8293 MeV       total track length: 1.00011 cm
         Gas: total energy: 5.37171 keV           avalanche size:       0       gain:       0
  Start generating event Nr 2
@@ -52,13 +50,13 @@ Warning in <gufld>: New TVirtualMagField interface should be used instead.
    Absorber: total energy: 13.3199 MeV       total track length: 1.00011 cm
         Gas: total energy: 5.72095 keV           avalanche size:       0       gain:       0
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    21470015     1479B3F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    80073663     4C5D3BF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    16024725    21470015
-                                        HEX      F48495     1479B3F
-                                        HEX    FFACE78A           0
-                              relative adrs    -5445750           0
+          with Store/Table at absolute adrs    74663597    80073663
+                                        HEX     47346AD     4C5D3BF
+                                        HEX    FFAD7132           0
+                              relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
