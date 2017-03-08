@@ -26,7 +26,7 @@ Processing test_E03_1.C("g4Config.C", kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -827,7 +827,7 @@ Index : 2     used in the geometry : Yes
 ---> Begin of event: 5
    Absorber: total energy (MeV): 924.424       total track length (cm):  66.5307
    Gap:      total energy (MeV): 29.1367       total track length (cm):  14.2956
-Time of this run:   User=0.06s Real=0.07s Sys=0s
+Time of this run:   User=0.07s Real=0.06s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
@@ -858,7 +858,7 @@ Processing test_E03_2.C("g4Config.C", kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -2214,7 +2214,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  40.245       total track length (cm):    2.870
    Gap:      total energy (MeV):   6.055       total track length (cm):    3.263
-Time of this run:   User=0s Real=0.01s Sys=0s
+Time of this run:   User=0s Real=0s Sys=0.01s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
@@ -2246,7 +2246,7 @@ Processing test_E03_3.C("g4Config.C", kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -3111,7 +3111,7 @@ Processing test_E03_4.C("g4Config.C", kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -3947,7 +3947,7 @@ Processing test_E03_5.C("g4Config4.C", kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -4911,7 +4911,7 @@ Processing test_E03_6.C("g4Config5.C", kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -5696,5 +5696,5 @@ Index : 2     used in the geometry : Yes
 ---> Begin of event: 1
    Absorber: total energy (MeV): 604.901       total track length (cm):   34.952
    Gap:      total energy (MeV): 54.1301       total track length (cm):  19.0418
-Time of this run:   User=0s Real=0s Sys=0s
+Time of this run:   User=0.01s Real=0.01s Sys=0s
 Number of events processed: 1

@@ -27,7 +27,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -843,7 +843,7 @@ Index : 2     used in the geometry : Yes
 ---> Begin of event: 5
    Absorber: total energy (MeV): 923.728       total track length (cm):  64.7448
    Gap:      total energy (MeV): 29.1035       total track length (cm):  14.0928
-Time of this run:   User=0.06s Real=0.06s Sys=0s
+Time of this run:   User=0.07s Real=0.07s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
@@ -875,7 +875,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -2284,7 +2284,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  39.409       total track length (cm):    2.797
    Gap:      total energy (MeV):  10.065       total track length (cm):    5.404
-Time of this run:   User=0.01s Real=0s Sys=0s
+Time of this run:   User=0s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
@@ -2317,7 +2317,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -3198,7 +3198,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -4050,7 +4050,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -4999,7 +4999,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  12.698       total track length (cm):    0.968
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0s Real=0s Sys=0s
+Time of this run:   User=0s Real=0.01s Sys=0.01s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
@@ -5031,7 +5031,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -5832,5 +5832,5 @@ Index : 2     used in the geometry : Yes
 ---> Begin of event: 1
    Absorber: total energy (MeV): 614.741       total track length (cm):  35.3308
    Gap:      total energy (MeV): 36.7897       total track length (cm):  13.3155
-Time of this run:   User=0s Real=0s Sys=0s
+Time of this run:   User=0.01s Real=0s Sys=0s
 Number of events processed: 1

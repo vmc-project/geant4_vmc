@@ -26,7 +26,7 @@ Processing test_E06.C("g4Config.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -509,7 +509,7 @@ Number of optical photons produced in this event : 1672
 Number of optical photons produced in this event : 1719
 >>> Event 9
 Number of optical photons produced in this event : 1674
-Time of this run:   User=0.83s Real=0.82s Sys=0s
+Time of this run:   User=0.84s Real=0.84s Sys=0s
 Number of events processed: 10
 Number of optical photons produced in this run : 16945
   *******************************************
@@ -540,7 +540,7 @@ Processing test_E06_2.C("g4Config1.C", kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -1374,7 +1374,7 @@ Number of feedback photons produced in this event : 4827
 >>> Event 9
 Number of optical photons produced in this event : 1696
 Number of feedback photons produced in this event : 5190
-Time of this run:   User=0.92s Real=0.93s Sys=0s
+Time of this run:   User=0.94s Real=0.95s Sys=0s
 Number of events processed: 10
 Number of optical photons produced in this run : 15936
 Number of feedback photons produced in this run : 48823

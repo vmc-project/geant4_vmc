@@ -26,7 +26,7 @@ Processing test_TR.C("g4Config.C")...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -194,7 +194,7 @@ Lorentz Factor	XTR photon number
 8.085e+04	3.219
 9.283e+04	3.22
 
-total time for build X-ray TR energy loss tables = 11.15 s
+total time for build X-ray TR energy loss tables = 11.19 s
 
 msc:   for e+    SubType= 10
       RangeFactor= 0.04, stepLimitType: 1, latDisplacement: 1
@@ -280,7 +280,7 @@ Lorentz Factor	XTR photon number
 8.085e+04	3.219
 9.283e+04	3.22
 
-total time for build X-ray TR energy loss tables = 11.14 s
+total time for build X-ray TR energy loss tables = 11.16 s
 
 msc:   for proton    SubType= 10
       RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 0, polarAngleLimit(deg)= 180
@@ -599,7 +599,7 @@ Index : 2     used in the geometry : Yes
 --> Event 2000 starts.
 --> Event 3000 starts.
 --> Event 4000 starts.
-Time of this run:   User=1.75s Real=1.76s Sys=0.01s
+Time of this run:   User=1.78s Real=1.82s Sys=0.03s
 Number of events processed: 5000
  ================== run summary =====================
  End of Run TotNbofEvents = 5000

@@ -27,7 +27,7 @@ Info in <TGeoManager::TGeoManager>: Geometry VGM Root geometry, VGM Root geometr
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -890,7 +890,7 @@ Real time 0:00:00, CP time 0.040
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.050
+Real time 0:00:00, CP time 0.040
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 6  -----

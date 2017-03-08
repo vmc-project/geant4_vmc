@@ -9,6 +9,42 @@
      
 Tags (history):
 ===============
+  08/03/2017
+  v3-4:
+    All packages:
+    - Migration to Geant4 10.3.p01
+
+    Geant4 VMC:
+    - Implemented new commands to define radiator properties:
+      and removed hard-coded values from TG4TransitionRadiationPhysics.
+    - Changes for performance optimization (according to suggestion by S, Wenzel, CERN):
+      - Cache pointers to the thread-local static in data members of client classes
+    - Set the default build mode to RelWithDebInfo (thanks to S. Wenzel, CERN)
+
+    Examples:
+    - Example Garfield renamed to ExGarfield
+    - Example TR: Define radiator via new commands
+    - Example E03:
+      Changes for performance optimization (according to suggestion by S, Wenzel, CERN):
+      - Cache pointers to the thread-local static in data members of client classes
+
+    Fixes:
+    Geant4 VMC:
+    - Fix in transforming primaries from TParticle to G4PrimaryParticle:
+      do not override the user defined mass with the PDG mass
+      - thanks to Oliver Freyermuth (Physics Institute of the University of Bonn).
+    - Fixed in applying stack popper process
+      Do not force the exclusive step when the parent track is suspended;
+      this fixes the problem observed in ALICE simulation.
+    - Fixed compilation with gcc 4.9.3 and 5.3.0
+      - thanks to Oliver Freyermuth (Physics Institute of the University of Bonn).
+    - Fixed CMake warning (policy CMP0042)
+    - Fixed handling the default zero value for argv in TG4RunManager:
+      (JIRA bug report VMC-7)
+
+    Tested with Geant4 10.03.p01 (with embedded CLHEP   2.3.4.3.)
+      Root 5.34/36 and Root 6.08/06, VGM 4.4, Garfield v1.0
+
   15/01/2016
   v3-3:
     All packages:

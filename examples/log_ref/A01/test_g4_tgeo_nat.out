@@ -26,7 +26,7 @@ Processing test_A01_1.C("g4Config.C", kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -860,9 +860,9 @@ Chamber1 has 528 hits.
 Chamber2 has 541 hits.
 EmCalorimeter has 53 hits. Total Edep is 30809.3 (MeV)
 HadCalorimeter has 15 hits. Total Edep is 72.0037 (MeV)
-Time of this run:   User=4.39s Real=4.44s Sys=0.05s
+Time of this run:   User=4.55s Real=4.64s Sys=0.05s
 Number of events processed: 5
-Real time 0:00:05, CP time 5.240
+Real time 0:00:05, CP time 5.460
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
@@ -891,7 +891,7 @@ Processing test_A01_2.C("g4Config2.C", kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -1739,6 +1739,6 @@ Chamber1 has 521 hits.
 Chamber2 has 516 hits.
 EmCalorimeter has 52 hits. Total Edep is 29767.2 (MeV)
 HadCalorimeter has 14 hits. Total Edep is 74.1543 (MeV)
-Time of this run:   User=3.65s Real=3.7s Sys=0.04s
+Time of this run:   User=3.97s Real=4.03s Sys=0.05s
 Number of events processed: 5
-Real time 0:00:04, CP time 4.510
+Real time 0:00:04, CP time 4.900

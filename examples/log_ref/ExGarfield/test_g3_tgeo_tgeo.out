@@ -19,7 +19,7 @@ Processing load_g3.C...
 Loading Geant3 libraries ... finished
 RandomEngineRoot:
     Generator type: TRandom3
-    Seed: 2308625910
+    Seed: 1762522400
 Processing test_ExGarfield.C("g3tgeoConfig.C")...
 Geant3 has been created.
 Info in <TGeoManager::TGeoManager>: Geometry Garfield_geometry, ExGarfield VMC example geometry created
@@ -50,11 +50,11 @@ Info in <TGeoManager::Export>: Exporting Garfield_geometry ExGarfield VMC exampl
    Absorber: total energy: 13.3199 MeV       total track length: 1.00011 cm
         Gas: total energy: 5.72095 keV           avalanche size:       0       gain:       0
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    80073663     4C5D3BF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    22545343     15803BF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    74663597    80073663
-                                        HEX     47346AD     4C5D3BF
+          with Store/Table at absolute adrs    17135277    22545343
+                                        HEX     10576AD     15803BF
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

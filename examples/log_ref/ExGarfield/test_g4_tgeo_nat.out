@@ -24,13 +24,13 @@ Loading geant4vmc library ...
 Loading mtroot library ...
 RandomEngineRoot:
     Generator type: TRandom3
-    Seed: 4274485093
+    Seed: 1650622158
 Processing test_ExGarfield.C("g4Config.C")...
 Constructing TG4RunConfiguration 
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.3 ( 15 January 2016 )
+ Version 3.4 ( 8 March 2017 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -1577,5 +1577,5 @@ AvalancheMicroscopic::TransportElectron:
  Start generating event Nr 5
    Absorber: total energy:   20.99 MeV       total track length:   1.598 cm
         Gas: total energy:   17.37 keV           avalanche size:     590       gain:   4.836
-Time of this run:   User=10.01s Real=10.02s Sys=0.01s
+Time of this run:   User=10.12s Real=10.15s Sys=0.02s
 Number of events processed: 5

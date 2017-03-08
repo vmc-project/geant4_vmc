@@ -66,11 +66,11 @@ Number of optical photons produced in this event : 2301
 Number of optical photons produced in this event : 2210
 Number of optical photons produced in this run : 21239
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    53317567     32D8FBF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    45397951     2B4B7BF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    47907501    53317567
-                                        HEX     2DB02AD     32D8FBF
+          with Store/Table at absolute adrs    39987885    45397951
+                                        HEX     2622AAD     2B4B7BF
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -180,11 +180,11 @@ Number of feedback photons produced in this event : 1586
 Number of optical photons produced in this run : 20829
 Number of feedback photons produced in this run : 15827
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    63843263     3CE2BBF HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    77484991     49E53BF HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    58433197    63843263
-                                        HEX     37B9EAD     3CE2BBF
+          with Store/Table at absolute adrs    72074925    77484991
+                                        HEX     44BC6AD     49E53BF
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
