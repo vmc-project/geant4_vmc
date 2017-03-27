@@ -110,7 +110,8 @@ void TG4ActionInitialization::Build() const
         + "in order to run in multi-threading mode.");
     }
     TGeant4::MasterInstance()->CloneForWorker();
-    TVirtualMCApplication::Instance()->InitForWorker();
+    TVirtualMCApplication::Instance()->InitForWorker(); // deprecated
+    TVirtualMCApplication::Instance()->InitOnWorker();  // new
 
     // Create actions on workers
     eventAction = fRunConfiguration->CreateEventAction();

@@ -22,7 +22,7 @@
 #ifdef G4MULTITHREADED
 namespace {
   // Mutex to lock MCApplication::FinishRun
-  // G4Mutex finishRunMutex = G4MUTEX_INITIALIZER;
+  G4Mutex finishRunMutex = G4MUTEX_INITIALIZER;
   // Mutex to lock deleting MC application
   // G4Mutex deleteMutex = G4MUTEX_INITIALIZER;
   // Mutex to lock FinishRun & deleting MC application
@@ -56,7 +56,8 @@ void TG4WorkerInitialization::WorkerRunStart() const
 
   TG4RunManager::Instance()->LateInitialize();
 #ifdef G4MULTITHREADED
-  TVirtualMCApplication::Instance()->BeginWorkerRun();
+  TVirtualMCApplication::Instance()->BeginWorkerRun();  // deprecated
+  TVirtualMCApplication::Instance()->BeginRunOnWorker(); // new
 #endif
   //G4cout << "TG4WorkerInitialization::WorkerRunStart() end " << G4endl;
 }   
@@ -71,9 +72,10 @@ void TG4WorkerInitialization::WorkerRunEnd() const
   //G4cout << "TG4WorkerInitialization::WorkerRunEnd() " << G4endl;
 
 #ifdef G4MULTITHREADED
-  //G4AutoLock lm(&finishRunMutex);
-  //TVirtualMCApplication::Instance()->FinishWorkerRun();
-  //lm.unlock();
+  G4AutoLock lm(&finishRunMutex);
+  TVirtualMCApplication::Instance()->FinishWorkerRun();  // deprecated
+  TVirtualMCApplication::Instance()->FinishRunOnWorker(); // new
+  lm.unlock();
 #endif
 
   //G4cout << "TG4WorkerInitialization::WorkerRunEnd() end " << G4endl;
@@ -90,7 +92,8 @@ void TG4WorkerInitialization::WorkerStop() const
 
 #ifdef G4MULTITHREADED
   G4AutoLock lm(&stopWorkerMutex);
-  TVirtualMCApplication::Instance()->FinishWorkerRun();
+  // TVirtualMCApplication::Instance()->FinishWorkerRun();  // deprecated
+  // TVirtualMCApplication::Instance()->FinishRunOnWorker(); // new
   delete TVirtualMCApplication::Instance();
   lm.unlock();
 #endif
