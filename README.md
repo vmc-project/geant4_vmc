@@ -8,23 +8,27 @@
 -------------------------------------------------
 
 
-Geant4 VMC - VirtualMC implementation for Geant4
-=================================================
+Geant4 VMC 
+===========
 
-Files:
-------
-  README     - this file
-  history    - the tags history
-  source     - structured source code
-  g4root     - G4Root package 
-  mtroot     - MTRoot package
-  examples   - examples demonstrating use of VMC
+
+## Files and directories
+
+Geant4 VMC includes the implementation of the Virtual Monte Carlo (VMC) for Geant4
+and related packaged, see more: <br/>
+[https://root.cern.ch/vmc](https://root.cern.ch/vmc)
+
+      README     - this file
+      history    - the tags history
+      source     - structured source code
+      g4root     - G4Root package 
+      mtroot     - MTRoot package
+      examples   - examples demonstrating use of VMC
 	      
-Installation:
--------------
+## Installation
 
   Geant4 VMC requires ROOT and Geant4 installed, and optionally, it can be
-  built with VGM.
+  built with [http://ivana.home.cern.ch/ivana/VGM.html](VGM).
   
   Since version 3.00, Geant4 VMC is installed with CMake. To install
   geant4_vmc:
@@ -34,14 +38,18 @@ Installation:
      /mypath/geant4_vmc
 
   2. Create build directory alongside our source directory
+```bash
      $ cd /mypath
      $ mkdir geant4_vmc_build
      $ ls
      geant4_vmc geant4_vmc_build
+```
 
   3. To configure the build, change into the build directory and run CMake:
+```bash
      $ cd /mypath/geant4_vmc_build
      $ cmake -DCMAKE_INSTALL_PREFIX=/mypath/geant4_vmc_install /mypath/geant4_vmc
+```
 
      If ROOT and Geant4 environment was defined using thisroot.[c]sh and
      geant4.[c]sh scripts, there is no need to provide path to their installations.
@@ -51,12 +59,16 @@ Installation:
   4. After the configuration has run, CMake will have generated Unix Makefiles
      for building Geant4 VMC. To run the build, simply execute make in the build
      directory:
+```bash
      $ make -jN
+```
 
      where N is the number of parallel jobs you require (e.g. if your machine has a dual
      core processor, you could set N to 2).
      If you need more output to help resolve issues or simply for information, run make as
+```bash
      $ make -jN VERBOSE=1
+```
 
      Once the build has completed, you can install Geant4 VMC to the directory you specified
      earlier in CMAKE_INSTALL_PREFIX by running
@@ -65,8 +77,7 @@ Installation:
      This will build geant4_vmc, g4root and mtroot packages. For VMC examples see VMC
      examples installation page.
 
-Geant4 VMC Build Options
--------------------------
+## Build Options
 
   Geant4 VMC includes G4Root and MTRoot packages, which are independent from Geant4 VMC
   and can be build and used stand-alone. Use of G4Root, VGM, Geant4 G3toG4, UI and VIS
@@ -74,22 +85,22 @@ Geant4 VMC Build Options
 
   Overview of available options and their default values:
 
-    Geant4VMC_BUILD_G4Root       Build G4Root        ON
-    Geant4VMC_BUILD_MTRoot       Build MTRoot        ON
-    Geant4VMC_BUILD_Geant4VMC    Build Geant4VMC     ON
-    Geant4VMC_BUILD_EXAMPLES     Build VMC examples  ON
+      Geant4VMC_BUILD_G4Root       Build G4Root        ON
+      Geant4VMC_BUILD_MTRoot       Build MTRoot        ON
+      Geant4VMC_BUILD_Geant4VMC    Build Geant4VMC     ON
+      Geant4VMC_BUILD_EXAMPLES     Build VMC examples  ON
+  
+      Geant4VMC_USE_G4Root         Build with G4Root                ON
+      Geant4VMC_USE_VGM            Build with VGM                   OFF
+      Geant4VMC_USE_GEANT4_UI      Build with Geant4 UI drivers     ON
+      Geant4VMC_USE_GEANT4_VIS     Build with Geant4 Vis drivers    ON
+      Geant4VMC_USE_GEANT4_G3TOG4  Build with Geant4 G3toG4 library OFF
+  
+      Geant4VMC_INSTALL_EXAMPLES   Install examples    ON
 
-    Geant4VMC_USE_G4Root         Build with G4Root                ON
-    Geant4VMC_USE_VGM            Build with VGM                   OFF
-    Geant4VMC_USE_GEANT4_UI      Build with Geant4 UI drivers     ON
-    Geant4VMC_USE_GEANT4_VIS     Build with Geant4 Vis drivers    ON
-    Geant4VMC_USE_GEANT4_G3TOG4  Build with Geant4 G3toG4 library OFF
 
-    Geant4VMC_INSTALL_EXAMPLES   Install examples    ON
+## Required and optional packages:
 
-
-Required and optional packages:
--------------------------------
   Geant4 VMC requires the Root and Geant4 installations,
   and optionally VGM in case you want to run with Geant4
   native navigation with geometry defined via Root TGeo.
@@ -98,69 +109,77 @@ Required and optional packages:
   complementary ways:
 
   a) Via path to the CMake configuration file
-     ROOT_DIR              ... path to ROOTConfig.cmake
-     Geant4_DIR            ... path to Geant4Config.cmake
-     VGM_DIR               ... path to VGMConfig.cmake
+
+        ROOT_DIR              ... path to ROOTConfig.cmake
+        Geant4_DIR            ... path to Geant4Config.cmake
+        VGM_DIR               ... path to VGMConfig.cmake
 
   b) Using their configuration script which is available
      in your PATH (Geant4 and Root):
-     geant4-config         ... Geant4 configuration script
-     root-config           ... Root configuration script
+
+        geant4-config         ... Geant4 configuration script
+        root-config           ... Root configuration script
 
      To make these configuration scripts available in your PATH,
      you should source the relevant script from the packages
      installation:
-     bin/geant4.[c]sh      ... Geant4
-     bin/thisroot.[c]sh    ... Root
+
+        bin/geant4.[c]sh      ... Geant4
+        bin/thisroot.[c]sh    ... Root
 
   c) With the environment variable ROOTSYS (Root only)
-     ROOTSYS         ... path to Root
+
+        ROOTSYS         ... path to Root
 
   The compilation with VGM (optional) can be selected via the CMake option:
-     -DGeant4VMC_USE_VGM=ON
 
-
-Examples
-=========
+        -DGeant4VMC_USE_VGM=ON
   
-  Since Geant4 VMC 3.00, VMC examples are installed with CMake.
-  The VMC examples libraries require ROOT installation, the VMC examples programs are built
-  against Geant3 with VMC or Geant4 VMC libraries.
+
+## Examples
   
-  More details about provided configuration macros and tests
-  can be found in examples/README.
+Since Geant4 VMC 3.00, VMC examples are installed with CMake.
+The VMC examples libraries require ROOT installation, the VMC examples programs are built
+against Geant3 with VMC or Geant4 VMC libraries.
 
-  The instructions how to build and run examples are provided
-  in examples/README_INSTALL.
+More details about provided configuration macros and tests
+can be found in examples/README.
 
-Root and Geant4 UI
-===================
+The instructions how to build and run examples are provided
+in examples/README_INSTALL.
 
-   I. Switching UI
-   
-   When running Geant4 with Virtual MC a user can switch between
-   Root UI and Geant4 UI:
+##  Root and Geant4 UI
 
-   From Root to Geant4 UI:
-   root [0] ((TGeant4*)gMC)->StartGeantUI();
+#### Switching UI
 
-   From Geant4 to Root UI:
-   PreInit> /mcControl/root
+When running Geant4 with Virtual MC a user can switch between
+Root UI and Geant4 UI:
+
+From Root to Geant4 UI:
+
+      root [0] ((TGeant4*)gMC)->StartGeantUI();
+
+From Geant4 to Root UI:
+
+      PreInit> /mcControl/root
+
+#### Calling macros
+
+Call Geant4 macro "myMacro.in" from Root:
+
+      root [0] ((TGeant4*)gMC)->ProcessGeantMacro("myMacro.in");
+
+Call Root macro "myMacro.C" from Geant4:
+
+      PreInit> /mcControl/rootMacro myMacro
 
 
-   II. Calling macros
+#### Calling commands
 
-   Call Geant4 macro "myMacro.in" from Root:
-   root [0] ((TGeant4*)gMC)->ProcessGeantMacro("myMacro.in");
+Call Geant4 command from Root:
 
-   Call Root macro "myMacro.C" from Geant4:
-   PreInit> /mcControl/rootMacro myMacro
+      root [0] ((TGeant4*)gMC)->ProcessGeantCommand("/tracking/verbose 1");
 
+Call Root command from Geant4:
 
-   III. Calling commands
-
-   Call Geant4 command from Root:
-   root [0] ((TGeant4*)gMC)->ProcessGeantCommand("/tracking/verbose 1");
-
-   Call Root command from Geant4:
-   Idle> /mcControl/rootCmd TBrowser b;
+      Idle> /mcControl/rootCmd TBrowser b;
