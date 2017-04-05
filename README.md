@@ -1,26 +1,20 @@
-------------------------------------------------
- The Geant4 Virtual Monte Carlo package
- Copyright (C) 2007 - 2017 Ivana Hrivnacova
- All rights reserved.
-
- For the licensing terms see geant4_vmc/LICENSE.
- Contact: root-vmc@cern.ch
--------------------------------------------------
-
 
 Geant4 VMC 
 ===========
 
+Geant4 VMC implements the Virtual Monte Carlo (VMC) for Geant4, see more: <br/>
+[https://root.cern.ch/vmc](https://root.cern.ch/vmc)
+
+It also includes G4Root and MTRoot packages, which are independent from Geant4 VMC and can be build and used stand-alone.
+
+[![License: GPL v2](https://img.shields.io/badge/License-GPLv2-blue.svg)](http://www.gnu.org/licenses/gpl-2.0)
+
 
 ## Files and directories
 
-Geant4 VMC includes the implementation of the Virtual Monte Carlo (VMC) for Geant4
-and related packaged, see more: <br/>
-[https://root.cern.ch/vmc](https://root.cern.ch/vmc)
-
-      README     - this file
+      README.md  - this file
       history    - the tags history
-      source     - structured source code
+      source     - Geant4 VMC source code
       g4root     - G4Root package 
       mtroot     - MTRoot package
       examples   - examples demonstrating use of VMC
