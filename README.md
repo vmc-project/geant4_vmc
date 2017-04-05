@@ -44,11 +44,10 @@ It also includes G4Root and MTRoot packages, which are independent from Geant4 V
      $ cd /mypath/geant4_vmc_build
      $ cmake -DCMAKE_INSTALL_PREFIX=/mypath/geant4_vmc_install /mypath/geant4_vmc
 ```
-
      If ROOT and Geant4 environment was defined using thisroot.[c]sh and
-     geant4.[c]sh scripts, there is no need to provide path to their installations.
-     Otherwise, they can be provided using -DROOT_DIR and -DGeant4_DIR cmake
-     options.
+geant4.[c]sh scripts, there is no need to provide path to their installations.
+Otherwise, they can be provided using -DROOT_DIR and -DGeant4_DIR cmake
+options.
 
   4. After the configuration has run, CMake will have generated Unix Makefiles
      for building Geant4 VMC. To run the build, simply execute make in the build
