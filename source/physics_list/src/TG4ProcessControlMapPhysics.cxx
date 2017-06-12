@@ -81,12 +81,15 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("muBrems", kBREM); 
   controlMap->Add("hBrems", kBREM); 
 
-  controlMap->Add("annihil", kANNI); 
+  controlMap->Add("annihil", kANNI);
+  controlMap->Add("AnnihiToMuPair", kANNI);
+  controlMap->Add("ee2hadr", kANNI);
 
   controlMap->Add("conv", kPAIR);
   controlMap->Add("ePairProd", kPAIR);
   controlMap->Add("muPairProd", kPAIR);
   controlMap->Add("hPairProd", kPAIR);
+  controlMap->Add("GammaToMuPair", kPAIR);
 
   controlMap->Add("nCapture", kHADR);
   controlMap->Add("HadronCapture", kHADR);
