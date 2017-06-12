@@ -76,7 +76,7 @@ void TG4ComposedPhysicsList::ApplyGammaToMuonsCrossSectionFactor()
         = dynamic_cast<G4GammaConversionToMuons*>((*processVector)[i]);
       if ( gammaToMuMu ) {
         if ( VerboseLevel() > 0 ) {
-          G4cout << "### Set gamma to muons cross section factor user value "
+          G4cout << "### Set gamma to muons cross section factor user value: "
                  << fGammaToMuonsCrossSectionFactor
                  << G4endl;
         }
