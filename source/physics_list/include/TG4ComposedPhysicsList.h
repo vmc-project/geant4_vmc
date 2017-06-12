@@ -51,6 +51,7 @@ class TG4ComposedPhysicsList: public G4VUserPhysicsList,
     void SetCutForProton(G4double cut);
 
     void SetProductionCutsTableEnergyRange(G4double min, G4double max);
+    void SetGammaToMuonsCrossSectionFactor(G4double value);
 
     void PrintAllProcesses() const;
     void DumpAllProcesses() const;
@@ -64,6 +65,9 @@ class TG4ComposedPhysicsList: public G4VUserPhysicsList,
     /// Not implemented
     TG4ComposedPhysicsList& operator=(const TG4ComposedPhysicsList& right);
     
+    // methods
+    void ApplyGammaToMuonsCrossSectionFactor();
+
     // static data members
     static const G4double  fgkDefautCut; ///< the default cut value 
 
@@ -79,7 +83,17 @@ class TG4ComposedPhysicsList: public G4VUserPhysicsList,
 
     /// The production cuts table energy range maximum redefined by user
     G4double  fProductionCutsTableEnergyMax;
+
+    /// Gamma to muons cross section factor
+    G4double fGammaToMuonsCrossSectionFactor;
 };
+
+// inline methods
+
+inline void TG4ComposedPhysicsList::SetGammaToMuonsCrossSectionFactor(G4double value) {
+  /// Set gamma to muons cross section factor
+  fGammaToMuonsCrossSectionFactor = value;
+}
 
 #endif //TG4_COMPOSED_MODULAR_PHYSICS_H
 

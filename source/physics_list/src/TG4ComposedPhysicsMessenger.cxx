@@ -21,6 +21,7 @@
 #include "TG4ProcessMCMap.h"
 
 #include <G4UIdirectory.hh>
+#include <G4UIcmdWithADouble.hh>
 #include <G4UIcmdWithADoubleAndUnit.hh>
 #include <G4UIcmdWithoutParameter.hh>
 #include <G4UIcmdWithAString.hh>
@@ -40,6 +41,12 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
     fRangePositronCutCmd(0),
     fRangeProtonCutCmd(0),
     fRangeAllCutCmd(0),    
+    fSetGammaToMuonsCrossSectionFactorCmd(0),
+    fPrintProcessMCMapCmd(0),
+    fPrintProcessControlMapCmd(0),
+    fPrintVolumeLimitsCmd(0),
+    fPrintGlobalCutsCmd(0),
+    fPrintGlobalControlsCmd(0),
     fG4NeutronHPVerboseCmd(0),
     fG4HadronicProcessStoreVerboseCmd(0)
 { 
@@ -89,6 +96,14 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
   fRangeAllCutCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
   CreateProductionCutsTableEnergyRangeCmd();
+
+  fSetGammaToMuonsCrossSectionFactorCmd
+    = new G4UIcmdWithADouble("/mcPhysics/setGammaToMuonsCrossSectionFactor", this);
+  G4String guidance = "Set gamma to muons cross section factor";
+  fSetGammaToMuonsCrossSectionFactorCmd->SetGuidance(guidance);
+  fSetGammaToMuonsCrossSectionFactorCmd
+    ->SetParameterName("GammaToMuonsCrossSectionFactor", false);
+  fSetGammaToMuonsCrossSectionFactorCmd->AvailableForStates(G4State_PreInit);
 
   fPrintAllProcessesCmd 
     = new G4UIcmdWithoutParameter("/mcPhysics/printAllProcess", this);  
@@ -159,6 +174,7 @@ TG4ComposedPhysicsMessenger::~TG4ComposedPhysicsMessenger()
   delete fRangeProtonCutCmd;
   delete fRangeAllCutCmd;
   delete fProductionCutsTableEnergyRangeCmd;
+  delete fSetGammaToMuonsCrossSectionFactorCmd;
   delete fPrintAllProcessesCmd;
   delete fDumpAllProcessesCmd;
   delete fPrintProcessMCMapCmd;
@@ -256,6 +272,10 @@ void TG4ComposedPhysicsMessenger::SetNewValue(G4UIcommand* command,
     G4double maxEUnit  = G4UnitDefinition::GetValueOf(parameters[counter++]);
     fPhysicsList
       ->SetProductionCutsTableEnergyRange(minEnergy*minEUnit, maxEnergy*maxEUnit);
+  }
+  else if ( command == fSetGammaToMuonsCrossSectionFactorCmd ) {
+    G4double value = G4UIcommand::ConvertToDouble(newValue);
+    fPhysicsList->SetGammaToMuonsCrossSectionFactor(value);
   }
   else if (command == fPrintAllProcessesCmd) {
     fPhysicsList->PrintAllProcesses();

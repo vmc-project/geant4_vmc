@@ -25,6 +25,7 @@
 #include <G4Proton.hh>
 #include <G4RegionStore.hh>
 #include <G4SystemOfUnits.hh>
+#include <G4GammaConversionToMuons.hh>
 
 //_____________________________________________________________________________
 TG4ComposedPhysicsList::TG4ComposedPhysicsList()
@@ -34,7 +35,8 @@ TG4ComposedPhysicsList::TG4ComposedPhysicsList()
     fPhysicsLists(),
     fIsProductionCutsTableEnergyRange(false),
     fProductionCutsTableEnergyMin(0.),
-    fProductionCutsTableEnergyMax(0.)
+    fProductionCutsTableEnergyMax(0.),
+    fGammaToMuonsCrossSectionFactor(-1.)
 {
 /// Default constructor
 
@@ -51,6 +53,44 @@ TG4ComposedPhysicsList::~TG4ComposedPhysicsList()
 
   for ( G4int i=0; i<G4int(fPhysicsLists.size()); i++ )
     delete fPhysicsLists[i];
+}
+
+//
+// private methods
+//
+
+//_____________________________________________________________________________
+void TG4ComposedPhysicsList::ApplyGammaToMuonsCrossSectionFactor()
+{
+/// Apply gamma to muons cross section factor if defined by user
+/// if applicaple
+
+  if ( fGammaToMuonsCrossSectionFactor > 0. ) {
+    G4ParticleDefinition* gamma = G4Gamma::Gamma();
+    G4ProcessManager* processManager = gamma->GetProcessManager();
+    G4ProcessVector* processVector = processManager->GetProcessList();
+    G4bool done = false;
+    // get G4GammaConversionToMuons
+    for ( G4int i=0; i< processVector->length(); i++ ) {
+      G4GammaConversionToMuons* gammaToMuMu
+        = dynamic_cast<G4GammaConversionToMuons*>((*processVector)[i]);
+      if ( gammaToMuMu ) {
+        if ( VerboseLevel() > 0 ) {
+          G4cout << "### Set gamma to muons cross section factor user value "
+                 << fGammaToMuonsCrossSectionFactor
+                 << G4endl;
+        }
+        gammaToMuMu->SetCrossSecFactor(fGammaToMuonsCrossSectionFactor);
+        done = true;
+        break;
+      }
+    }
+    if ( ! done ) {
+      TG4Globals::Warning(
+        "TG4ComposedPhysicsList", "ApplyGammaToMuonsCrossSectionFactor",
+        "Cannot set gamma to muons cross section factor, GammaToMuons must be activated first.");
+    }
+  }
 }
 
 //
@@ -94,7 +134,11 @@ void TG4ComposedPhysicsList::ConstructProcess()
 
   for (G4int i=0; i<G4int(fPhysicsLists.size()); i++ ) {
     fPhysicsLists[i]->ConstructProcess();
-  }  
+  }
+
+  if ( fGammaToMuonsCrossSectionFactor > 0. ) {
+    ApplyGammaToMuonsCrossSectionFactor();
+  }
 
   if ( VerboseLevel() >1 )
     G4cout << "TG4ComposedPhysicsList::ConstructProcess done" << G4endl;
