@@ -190,10 +190,7 @@ class TG4StepManager
     G4int               fDivisionCopyNoOffset;
 
     /// Cached pointer to thread-local track manager
-    TG4TrackManager*  fTrackManager;
-
-    /// Cached pointer to thread-local stepping action
-    TG4SteppingAction* fSteppingAction;
+    TG4TrackManager*    fTrackManager;
 };
 
 // inline methods

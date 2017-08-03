@@ -40,7 +40,6 @@
 #include <TMath.h>
 
 G4ThreadLocal TG4StepManager* TG4StepManager::fgInstance = 0;
-//G4ThreadLocal G4String TG4StepManager::fgNameBuffer = "";
 
 //_____________________________________________________________________________
 TG4StepManager::TG4StepManager(const TString& userGeometry) 
@@ -53,8 +52,7 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
     fNameBuffer(),
     fCopyNoOffset(0),
     fDivisionCopyNoOffset(0),
-    fTrackManager(0),
-    fSteppingAction(0)
+    fTrackManager(0)
 {
 /// Standard constructor
 /// \param userGeometry  User selection of geometry definition and navigation 
@@ -205,7 +203,6 @@ TG4StepManager::GetCurrentOffPhysicalVolume(G4int off, G4bool warn) const
 void TG4StepManager::LateInitialize()
 {
   fTrackManager = TG4TrackManager::Instance();
-  fSteppingAction = TG4SteppingAction::Instance();
 }
 
 //_____________________________________________________________________________
@@ -298,7 +295,7 @@ void TG4StepManager::SetMaxNStep(Int_t maxNofSteps)
 {
 /// Set the maximum number of steps.
 
-  fSteppingAction->SetMaxNofSteps(TMath::Abs(maxNofSteps));
+  TG4SteppingAction::Instance()->SetMaxNofSteps(TMath::Abs(maxNofSteps));
 }
 
 //_____________________________________________________________________________
@@ -306,7 +303,7 @@ void TG4StepManager::SetCollectTracks(Bool_t collectTracks)
 {
 /// (In)Activate collecting TGeo tracks 
 
-  fSteppingAction->SetCollectTracks(collectTracks);
+  TG4SteppingAction::Instance()->SetCollectTracks(collectTracks);
 }  
 
 //_____________________________________________________________________________
@@ -337,7 +334,7 @@ Bool_t  TG4StepManager::IsCollectTracks() const
 {
 /// Return the info if collecting tracks is activated
 
-  return fSteppingAction->GetCollectTracks();
+  return TG4SteppingAction::Instance()->GetCollectTracks();
 }  
 
 //_____________________________________________________________________________
@@ -735,7 +732,7 @@ Int_t TG4StepManager::GetMaxNStep() const
 {   
 /// Return the maximum number of steps.
 
-  return fSteppingAction->GetMaxNofSteps();
+  return TG4SteppingAction::Instance()->GetMaxNofSteps();
 }
 
 //_____________________________________________________________________________
