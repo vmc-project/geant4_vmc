@@ -117,10 +117,12 @@ G4VParticleChange* TG4VSpecialCuts::PostStepDoIt(const G4Track& track,
                                                  const G4Step& /*step*/)
 {
 /// Kill the current particle, if requested by G4UserLimits.
+/// Set its status fStopButAlive (instead of previously used fStopAndKill
+/// to let execute the at rest processes (decay)
  
   aParticleChange.Initialize(track);
   aParticleChange.ProposeEnergy(0.) ;
   aParticleChange.ProposeLocalEnergyDeposit(track.GetKineticEnergy()) ;
-  aParticleChange.ProposeTrackStatus(fStopAndKill);
+  aParticleChange.ProposeTrackStatus(fStopButAlive);
   return &aParticleChange;
 }
