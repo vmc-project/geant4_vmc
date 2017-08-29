@@ -20,7 +20,6 @@
 #include <TMCOptical.h>
 #include <TArrayI.h>
 #include <TString.h>
-#include <RVersion.h>
 
 class TG4RunConfiguration;
 class TG4StateManager;
@@ -394,6 +393,6 @@ class TGeant4: public TVirtualMC
 #include "TGeant4.icc"
 
 #endif
-#endif // ROOT_VERSION_CODE
+#endif 
 #endif // TGEANT4_H
 
