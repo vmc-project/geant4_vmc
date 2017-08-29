@@ -16,6 +16,7 @@
 #include "TG4RunManager.h"
 
 #include <TVirtualMCApplication.h>
+#include <RVersion.h>
 
 #include <G4AutoLock.hh>
 
@@ -57,9 +58,11 @@ void TG4WorkerInitialization::WorkerRunStart() const
   TG4RunManager::Instance()->LateInitialize();
 #ifdef G4MULTITHREADED
   TVirtualMCApplication::Instance()->BeginWorkerRun();  // deprecated
+#if ( ROOT_VERSION_CODE >= ROOT_VERSION(6,10,0) )
   TVirtualMCApplication::Instance()->BeginRunOnWorker(); // new
 #endif
   //G4cout << "TG4WorkerInitialization::WorkerRunStart() end " << G4endl;
+#endif
 }   
 
 
@@ -74,7 +77,9 @@ void TG4WorkerInitialization::WorkerRunEnd() const
 #ifdef G4MULTITHREADED
   G4AutoLock lm(&finishRunMutex);
   TVirtualMCApplication::Instance()->FinishWorkerRun();  // deprecated
+#if ( ROOT_VERSION_CODE >= ROOT_VERSION(6,10,0) )
   TVirtualMCApplication::Instance()->FinishRunOnWorker(); // new
+#endif
   lm.unlock();
 #endif
 
