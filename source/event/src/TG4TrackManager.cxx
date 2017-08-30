@@ -77,7 +77,6 @@ void  TG4TrackManager::LateInitialize()
 {
 /// Cache thread-local pointers
 
-  fMCStack = gMC->GetStack();
   fStackPopper = TG4StackPopper::Instance();
 }
 

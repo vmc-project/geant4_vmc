@@ -63,6 +63,7 @@ class TG4TrackManager : public TG4Verbose
     void  SaveSecondaries(const G4Track* track, const G4TrackVector* secondaries);
 
     // set methods
+    void SetMCStack(TVirtualMCStack*  mcStack);
     void SetTrackSaveControl(TG4TrackSaveControl control);
     void SetSaveDynamicCharge(G4bool saveDynamicCharge);
     void SetNofTracks(G4int nofTracks);
@@ -108,6 +109,11 @@ class TG4TrackManager : public TG4Verbose
 inline TG4TrackManager* TG4TrackManager::Instance() { 
   /// Return this instance.
   return fgInstance; 
+}
+
+inline void TG4TrackManager::SetMCStack(TVirtualMCStack* mcStack) {
+  /// Set  cached pointer to thread-local VMC stack
+  fMCStack = mcStack;
 }
 
 inline void TG4TrackManager::SetTrackSaveControl(TG4TrackSaveControl control) { 

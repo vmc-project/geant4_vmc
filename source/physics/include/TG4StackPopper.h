@@ -71,6 +71,7 @@ class TG4StackPopper: public G4VProcess
 
     void Notify();
     void Reset();
+    void SetMCStack(TVirtualMCStack*  mcStack);
     void SetDoExclusiveStep(G4TrackStatus trackStatus);
 
     G4bool HasPoppedTracks() const;
@@ -113,7 +114,9 @@ inline G4bool TG4StackPopper::IsApplicable(
   return true;
 }
 
+inline void TG4StackPopper::SetMCStack(TVirtualMCStack*  mcStack) {
+  /// Set  cached pointer to thread-local VMC stack
+  fMCStack = mcStack;
+}
+
 #endif //TG4_STACK_POPPER_H
-
-
-

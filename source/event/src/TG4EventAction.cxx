@@ -65,7 +65,6 @@ void TG4EventAction::LateInitialize()
 /// Cache thread-local pointers
 
   fMCApplication = TVirtualMCApplication::Instance();
-  fMCStack = gMC->GetStack();
   fTrackingAction = TG4TrackingAction::Instance();
   fTrackManager = TG4TrackManager::Instance();
   fStateManager = TG4StateManager::Instance();

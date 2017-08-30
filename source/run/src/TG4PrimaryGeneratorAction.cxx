@@ -13,6 +13,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4PrimaryGeneratorAction.h"
+#include "TG4RunManager.h"
 #include "TG4ParticlesManager.h"
 #include "TG4TrackManager.h"
 #include "TG4StateManager.h"
@@ -164,7 +165,7 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
       if (VerboseLevel() > 1) {
         G4cout << i << "th primary particle: " << G4endl;
         primaryParticle->Print();
-      } 
+      }
     }   
   }
 }
@@ -185,6 +186,10 @@ void TG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
   // Begin of event
   TG4StateManager::Instance()->SetNewState(kInEvent);
   mcApplication->BeginEvent();
+
+  // Update cached pointer to MC stack which is set to MC in some application
+  // only in MCApplication::BeginEvent()
+  TG4RunManager::Instance()->CacheMCStack();
 
   // Generate primaries and fill the VMC stack
   mcApplication->GeneratePrimaries();

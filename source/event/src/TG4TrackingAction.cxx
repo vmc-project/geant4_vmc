@@ -137,7 +137,6 @@ void TG4TrackingAction::LateInitialize()
 /// Cache thread-local pointers
 
   fMCApplication = TVirtualMCApplication::Instance();
-  fMCStack = gMC->GetStack();
   fStepManager = TG4StepManager::Instance();
   fStackPopper = TG4StackPopper::Instance();
 

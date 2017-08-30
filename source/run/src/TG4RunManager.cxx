@@ -33,6 +33,8 @@
 #include "TG4TrackingAction.h"
 #include "TG4SteppingAction.h"
 #include "TG4RegionsManager.h"
+#include "TG4TrackManager.h"
+#include "TG4StackPopper.h"
 
 #ifdef G4MULTITHREADED  
 #include <G4MTRunManager.hh>
@@ -57,6 +59,7 @@
 #include <TGeoManager.h>
 #include <TRandom.h>
 #include <TVirtualMCApplication.h>
+#include <TVirtualMC.h>
 
 namespace {
 
@@ -86,7 +89,8 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
     fRootUIOwner(false),
     fARGC(argc),
     fARGV(argv),  
-    fUseRootRandom(true) 
+    fUseRootRandom(true),
+    fIsMCStackCached(false)
 {
 /// Standard constructor
 
@@ -464,6 +468,37 @@ void TG4RunManager::LateInitialize()
 
   if ( VerboseLevel() > 1 )
     G4cout << "TG4RunManager::LateInitialize done " << this << G4endl;
+}
+
+//_____________________________________________________________________________
+void TG4RunManager::CacheMCStack()
+{
+/// Cache the pointer to thread-local VMC stack
+
+  // Do only once
+  if ( fIsMCStackCached ) return;
+
+  // The VMC stack must be set to MC at this stage !!
+  TVirtualMCStack* mcStack = gMC->GetStack();
+  if ( ! mcStack ) {
+    TG4Globals::Exception("TG4RunManager", "CacheMCStack",
+     "VMC stack is not set");
+    return;
+  }
+
+  // Set stack to the event actions if they exists
+  // (on worker only if in MT mode)
+  if ( GetEventAction() ) {
+    GetEventAction()->SetMCStack(mcStack);
+    TG4TrackingAction::Instance()->SetMCStack(mcStack);
+    TG4TrackManager::Instance()->SetMCStack(mcStack);
+
+    if ( TG4StackPopper::Instance() ) {
+      TG4StackPopper::Instance()->SetMCStack(mcStack);
+    }
+  }
+
+  fIsMCStackCached = true;
 }
 
 //_____________________________________________________________________________

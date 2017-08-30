@@ -64,6 +64,7 @@ class TG4TrackingAction : public G4UserTrackingAction,
     void FinishPrimaryTrack();
 
     // set methods
+    void SetMCStack(TVirtualMCStack*  mcStack);
     void SetNewVerboseLevel(G4int level);
     void SetNewVerboseTrackID(G4int trackID);
     void SetSpecialControls(TG4SpecialControlsV2* specialControls);
@@ -145,6 +146,11 @@ inline void TG4TrackingAction::PreTrackingAction(const G4Track* /*aTrack*/) {
 inline void TG4TrackingAction::PostTrackingAction(const G4Track* /*aTrack*/) {
   /// Dummy post-tracking action that can be overriden
   /// in a user defined class
+}
+
+inline void TG4TrackingAction::SetMCStack(TVirtualMCStack* mcStack) {
+  /// Set  cached pointer to thread-local VMC stack
+  fMCStack = mcStack;
 }
 
 inline void TG4TrackingAction::SetSpecialControls(TG4SpecialControlsV2* specialControls) {

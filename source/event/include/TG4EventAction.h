@@ -50,6 +50,7 @@ class TG4EventAction : public G4UserEventAction,
     virtual void EndOfEventAction(const G4Event* event);
 
     // set methods
+    void SetMCStack(TVirtualMCStack*  mcStack);
     void SetPrintMemory(G4bool printMemory);
     void SetSaveRandomStatus(G4bool saveRandomStatus);
     
@@ -91,7 +92,12 @@ class TG4EventAction : public G4UserEventAction,
 
 // inline methods
 
-inline void TG4EventAction::SetPrintMemory(G4bool printMemory){ 
+inline void TG4EventAction::SetMCStack(TVirtualMCStack* mcStack) {
+  /// Set cached pointer to thread-local VMC stack
+  fMCStack = mcStack;
+}
+
+inline void TG4EventAction::SetPrintMemory(G4bool printMemory) {
   /// Set option for printing memory usage
   fPrintMemory = printMemory; 
 }
@@ -113,4 +119,3 @@ inline void TG4EventAction::SetSaveRandomStatus(G4bool saveRandomStatus) {
 
 #endif //TG4_EVENT_ACTION_H
 
-    

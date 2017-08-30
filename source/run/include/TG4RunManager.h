@@ -53,6 +53,7 @@ class TG4RunManager : public TG4Verbose
     // methods
     void Initialize();
     void LateInitialize();
+    void CacheMCStack();
     void ProcessEvent();
     Bool_t ProcessRun(G4int nofEvents);
 
@@ -107,6 +108,7 @@ class TG4RunManager : public TG4Verbose
     G4int                 fARGC;             ///< argc 
     char**                fARGV;             ///< argv
     G4bool                fUseRootRandom;    ///< the option to use Root random number seed
+    G4bool                fIsMCStackCached;  ///< the flag to cache MC stack only once
 };
 
 // inline methods
