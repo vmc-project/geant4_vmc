@@ -11,7 +11,7 @@
 # It defines the following variables
 #  MTRoot_INCLUDE_DIRS         - include directories for MTRoot
 #  MTRoot_LIBRARIES            - libraries to link against MTRoot
-#  CMAKE_INSTALL_LIBDIR        - library installation directory
+#  MTRoot_CMAKE_INSTALL_LIBDIR - library installation directory
 #
 # I. Hrivnacova, 13/06/2014
 
@@ -20,7 +20,7 @@ get_filename_component(_dir "${CMAKE_CURRENT_LIST_FILE}" PATH)
 get_filename_component(_prefix "${_dir}/../.." ABSOLUTE)
 
 # Import options
-set(CMAKE_INSTALL_LIBDIR @CMAKE_INSTALL_LIBDIR@)
+set(MTRoot_CMAKE_INSTALL_LIBDIR @CMAKE_INSTALL_LIBDIR@)
 
 # Import targets
 include("${_prefix}/@CMAKE_INSTALL_LIBDIR@/MTRoot-@Geant4VMCPackages_VERSION@/MTRootTargets.cmake")

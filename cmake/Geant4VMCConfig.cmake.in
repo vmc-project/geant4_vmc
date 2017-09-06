@@ -19,7 +19,7 @@
 #  Geant4VMC_USE_GEANT4_G3TOG4 - build option: with Geant4 G3toG4 library
 #  G4Root_INCLUDE_DIRS         - include directories for G4Root (if with internal G4Root)
 #  G4Root_LIBRARIES            - libraries to link against G4Root (if with internal G4Root)
-#  CMAKE_INSTALL_LIBDIR        - library installation directory
+#  Geant4VMC_CMAKE_INSTALL_LIBDIR - library installation directory
 #
 # I. Hrivnacova, 13/06/2014
 
@@ -34,7 +34,7 @@ set(Geant4VMC_USE_VGM    @Geant4VMC_USE_VGM@)
 set(Geant4VMC_USE_GEANT4_UI  @Geant4VMC_USE_GEANT4_UI@)
 set(Geant4VMC_USE_GEANT4_VIS @Geant4VMC_USE_GEANT4_VIS@)
 set(Geant4VMC_USE_GEANT4_G3TOG4 @Geant4VMC_USE_GEANT4_G3TOG4@)
-set(CMAKE_INSTALL_LIBDIR @CMAKE_INSTALL_LIBDIR@)
+set(Geant4VMC_CMAKE_INSTALL_LIBDIR @CMAKE_INSTALL_LIBDIR@)
 
 # Import targets
 if (Geant4VMC_USE_G4Root AND (NOT Geant4VMC_USE_EXTERN_G4Root))
