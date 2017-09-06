@@ -107,9 +107,12 @@ class TG4StepManager
         // dynamic properties
     void TrackPosition(TLorentzVector& position) const;
     void TrackPosition(Double_t& x, Double_t& y, Double_t& z) const;
+    void TrackPosition(Float_t& x, Float_t& y, Float_t& z) const;
     void TrackMomentum(TLorentzVector& momentum) const;
     void TrackMomentum(Double_t& px, Double_t& py, Double_t&pz, 
                        Double_t& etot) const;
+    void TrackMomentum(Float_t& px, Float_t& py, Float_t&pz,
+                       Float_t& etot) const;
     Double_t TrackStep() const;  
     Double_t TrackLength() const;   
     Double_t TrackTime() const;  

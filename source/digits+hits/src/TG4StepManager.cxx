@@ -790,6 +790,20 @@ void TG4StepManager::TrackPosition(Double_t& x, Double_t& y, Double_t& z) const
 }
 
 //_____________________________________________________________________________
+void TG4StepManager::TrackPosition(Float_t& x, Float_t& y, Float_t& z) const
+{
+/// Fill the current particle position in the world reference frame
+/// (position in the PostStepPoint) as float.
+
+  Double_t dx, dy, dz;
+  TrackPosition(dx, dy, dz);
+
+  x = static_cast<float>(dx);
+  y = static_cast<float>(dy);
+  z = static_cast<float>(dz);
+}
+
+//_____________________________________________________________________________
 void TG4StepManager::TrackMomentum(TLorentzVector& momentum) const
 {  
 /// Fill the current particle momentum (px, py, pz, Etot)
@@ -828,6 +842,22 @@ void TG4StepManager::TrackMomentum(Double_t& px, Double_t& py, Double_t&pz,
 
   etot = fTrack->GetDynamicParticle()->GetTotalEnergy();
   etot /= TG4G3Units::Energy();  
+}
+
+//_____________________________________________________________________________
+void TG4StepManager::TrackMomentum(Float_t& px, Float_t& py, Float_t&pz,
+                                   Float_t& etot) const
+{
+/// Fill the current particle momentum as float.
+/// Not updated in Gflash fast simulation.
+
+  Double_t dpx, dpy, dpz, detot;
+  TrackMomentum(dpx, dpy, dpz, detot);
+
+  px = static_cast<float>(dpx);
+  py = static_cast<float>(dpy);
+  pz = static_cast<float>(dpz);
+  etot = static_cast<float>(detot);
 }
 
 //_____________________________________________________________________________

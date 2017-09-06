@@ -221,40 +221,59 @@ inline Int_t TGeant4::GetMaxNStep() const
 
 //_____________________________________________________________________________
 inline void TGeant4::TrackPosition(TLorentzVector& position) const
-{ 
+{
 /// The current particle position (in the world reference frame)
 /// and the local time since the current track is created
 /// (position of the PostStepPoint).
 
-  fStepManager->TrackPosition(position); 
-} 
+  fStepManager->TrackPosition(position);
+}
 
 //_____________________________________________________________________________
 inline void TGeant4::TrackPosition(Double_t& x, Double_t& y, Double_t& z) const
-{ 
+{
 /// The current particle position (in the world reference frame)
 /// and the local time since the current track is created
 /// (position of the PostStepPoint).
 
-  fStepManager->TrackPosition(x, y, z); 
-} 
+  fStepManager->TrackPosition(x, y, z);
+}
+
+//_____________________________________________________________________________
+inline void TGeant4::TrackPosition(Float_t& x, Float_t& y, Float_t& z) const
+{
+/// The current particle position (in the world reference frame)
+/// and the local time since the current track is created
+/// (position of the PostStepPoint) as float.
+
+  fStepManager->TrackPosition(x, y, z);
+}
 
 //_____________________________________________________________________________
 inline void TGeant4::TrackMomentum(TLorentzVector& momentum) const
-{ 
+{
 /// The current particle "momentum" (px, py, pz, Etot).
 
-  fStepManager->TrackMomentum(momentum); 
-} 
+  fStepManager->TrackMomentum(momentum);
+}
 
 //_____________________________________________________________________________
 inline void TGeant4::TrackMomentum(Double_t& px, Double_t& py, Double_t& pz,
                                    Double_t& etot) const
-{ 
+{
 /// The current particle "momentum" (px, py, pz, Etot).
 
-  fStepManager->TrackMomentum(px, py, pz, etot); 
-} 
+  fStepManager->TrackMomentum(px, py, pz, etot);
+}
+
+//_____________________________________________________________________________
+inline void TGeant4::TrackMomentum(Float_t& px, Float_t& py, Float_t& pz,
+                                   Float_t& etot) const
+{
+/// The current particle "momentum" (px, py, pz, Etot) as float.
+
+  fStepManager->TrackMomentum(px, py, pz, etot);
+}
 
 //_____________________________________________________________________________
 inline Double_t TGeant4::TrackStep() const

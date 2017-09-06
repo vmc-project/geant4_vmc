@@ -270,9 +270,12 @@ class TGeant4: public TVirtualMC
         // dynamic properties
     virtual void    TrackPosition(TLorentzVector& position) const;
     virtual void    TrackPosition(Double_t& x, Double_t& y, Double_t& z) const;
+    virtual void    TrackPosition(Float_t& x, Float_t& y, Float_t& z) const;
     virtual void    TrackMomentum(TLorentzVector& momentum) const;
     virtual void    TrackMomentum(Double_t& px, Double_t& py, Double_t&pz,
                                   Double_t& etot) const;
+    virtual void    TrackMomentum(Float_t& px, Float_t& py, Float_t&pz,
+                                  Float_t& etot) const;
     virtual Double_t TrackStep() const;
     virtual Double_t TrackLength() const; 
     virtual Double_t TrackTime() const;
