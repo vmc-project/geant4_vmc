@@ -403,6 +403,18 @@ void Ex01MCApplication::Stepping()
   if (gMC->CurrentMedium() == fImedPb) cout <<  "Lead";      
 
   cout << endl;
+
+
+  // // Test other TVirtualMC::TrackPosition() functions
+
+  // Double_t dx, dy, dz;
+  // gMC->TrackPosition(dx, dy, dz);
+
+  // Float_t x, y, z;
+  // gMC->TrackPosition(x, y, z);
+
+  // cout << "Track position (double): "  << dx << " " << dy << " " << dz
+  //      << "  (float): "   << x << " " << y << " " << z << endl;
 }
 
 //_____________________________________________________________________________
