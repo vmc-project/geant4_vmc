@@ -37,6 +37,7 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
     fUpdateMagFieldCmd(0),
     fCreateMagFieldParametersCmd(0),
     fIsLocalMagFieldCmd(0),
+    fIsZeroMagFieldCmd(0),
     fSeparatorCmd(0),
     fPrintMaterialsCmd(0),
     fPrintMaterialsPropertiesCmd(0),
@@ -76,9 +77,21 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fIsLocalMagFieldCmd
     = new G4UIcmdWithABool("/mcDet/setIsLocalMagField", this);
   fIsLocalMagFieldCmd
-    ->SetGuidance("Get local magnetic field from Root geometry.");
+    ->SetGuidance("Get local magnetic fields from Root geometry.");
   fIsLocalMagFieldCmd->SetParameterName("IsLocalMagField", false);
   fIsLocalMagFieldCmd->AvailableForStates(G4State_PreInit);
+
+  fIsZeroMagFieldCmd
+    = new G4UIcmdWithABool("/mcDet/setIsZeroMagField", this);
+  guidance
+    = "(In)activate propagating 'ifield = 0' flag defined in tracking media.\n";
+  guidance
+    += "When activated: a zero local magnetic field is set to the volumes defined\n";
+  guidance
+    += " with tracking medium with 'ifield = 0'.";
+  fIsZeroMagFieldCmd->SetGuidance(guidance);
+  fIsZeroMagFieldCmd->SetParameterName("IsZeroMagField", false);
+  fIsZeroMagFieldCmd->AvailableForStates(G4State_PreInit);
 
   fSeparatorCmd = new G4UIcmdWithAString("/mcDet/volNameSeparator", this);
   guidance 
@@ -180,6 +193,7 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
   delete fUpdateMagFieldCmd;
   delete fCreateMagFieldParametersCmd;
   delete fIsLocalMagFieldCmd;
+  delete fIsZeroMagFieldCmd;
   delete fSeparatorCmd;
   delete fPrintMaterialsCmd;
   delete fPrintMaterialsPropertiesCmd;
@@ -329,6 +343,10 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
   else if (command == fIsLocalMagFieldCmd) {
     TG4GeometryManager::Instance()
       ->SetIsLocalMagField(fIsLocalMagFieldCmd->GetNewBoolValue(newValues));
+  }
+  else if (command == fIsZeroMagFieldCmd) {
+    TG4GeometryManager::Instance()
+      ->SetIsZeroMagField(fIsZeroMagFieldCmd->GetNewBoolValue(newValues));
   }
   else if( command == fSeparatorCmd ) { 
     char separator = newValues(0);

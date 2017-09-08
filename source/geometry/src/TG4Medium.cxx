@@ -21,13 +21,15 @@
 #include <G4UserLimits.hh>
 
 const G4String TG4Medium::fgkUndefinedName = "UndefinedMediumName";
+const G4int    TG4Medium::fgkDefaultIfield = 1;
 
 //_____________________________________________________________________________
 TG4Medium::TG4Medium(G4int id) 
   : fID(id),
     fName(fgkUndefinedName),
     fMaterial(0),
-    fLimits(0)
+    fLimits(0),
+    fIfield(fgkDefaultIfield)
 {
 /// Standard constructor from given id
 }

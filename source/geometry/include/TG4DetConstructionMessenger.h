@@ -35,6 +35,7 @@ class G4UIcmdWithADoubleAndUnit;
 /// - /mcDet/updateMagField
 /// - /mcDet/createMagFieldParameters fieldVolName
 /// - /mcDet/setIsLocalMagField true|false
+/// - /mcDet/setIsZeroMagField true|false
 /// - /mcDet/volNameSeparator [char]  - for geomVMCtoGeant4 only
 /// - /mcDet/printMaterials 
 /// - /mcDet/printMaterialsProperties 
@@ -95,6 +96,9 @@ class TG4DetConstructionMessenger: public G4UImessenger
 
     /// command: setIsLocalMagField
     G4UIcmdWithABool*           fIsLocalMagFieldCmd;
+
+    /// command: setIsZeroMagField
+    G4UIcmdWithABool*           fIsZeroMagFieldCmd;
 
     /// command: volumeNameSeparator
     G4UIcmdWithAString*         fSeparatorCmd;

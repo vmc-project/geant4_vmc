@@ -311,6 +311,7 @@ void TG4MCGeometry::Medium(Int_t& kmed, const char *name, Int_t nmat,
   // Add medium to the map (to keep its name which is not stored in G3toG4)
   TG4Medium* medium = fGeometryServices->GetMediumMap()->AddMedium(kmed);
   medium->SetName(name);
+  medium->SetIfield(ifield);
   
   if (nbuf > 0) {  
     TG4Globals::Warning(

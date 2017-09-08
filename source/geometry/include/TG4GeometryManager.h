@@ -70,6 +70,7 @@ class TG4GeometryManager : public TG4Verbose
     void SetUserLimits(const TG4G3CutVector& cuts,
                        const TG4G3ControlVector& controls) const;
     void SetIsLocalMagField(G4bool isLocalMagField);
+    void SetIsZeroMagField(G4bool isZeroMagField);
     void SetIsUserMaxStep(G4bool isUserMaxStep);
     void SetIsMaxStepInLowDensityMaterials(G4bool isMaxStep);
      
@@ -109,6 +110,7 @@ class TG4GeometryManager : public TG4Verbose
     void CreateMagField(TVirtualMagField* magField,
            TG4FieldParameters* fieldParameters, G4LogicalVolume* lv);
     void ConstructGlobalMagField();
+    void ConstructZeroMagFields();
     void ConstructLocalMagFields();
         
     // static data members
@@ -152,6 +154,9 @@ class TG4GeometryManager : public TG4Verbose
 
     /// option to activate getting local magnetic fields from Root geometry
     G4bool    fIsLocalMagField;
+
+    /// option to activate propagating 'ifield = 0' defined in tracking media
+    G4bool    fIsZeroMagField;
 
     /// info if a cached magnetic field is in use
     G4bool    fIsCachedMagneticField;

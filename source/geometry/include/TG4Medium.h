@@ -38,12 +38,14 @@ class TG4Medium
     void SetName(const G4String& name);
     void SetMaterial(G4Material* material);
     void SetLimits(G4UserLimits* limits);
+    void SetIfield(G4int ifield);
     
     // get methods
     G4int         GetID() const;
     G4String      GetName() const;
     G4Material*   GetMaterial() const;
     G4UserLimits* GetLimits() const;
+    G4int         GetIfield() const;
     
   private:
     /// Not implemented
@@ -55,15 +57,29 @@ class TG4Medium
 
     // static data members
     static const G4String  fgkUndefinedName; ///< the default (undefined) name
+    static const G4int     fgkDefaultIfield; ///< the default ifield value
   
     // data members
     G4int         fID;       ///< medium ID
     G4String      fName;     ///< medium name
     G4Material*   fMaterial; ///< material associated with this medium
     G4UserLimits* fLimits;   ///< user limits associated with this medium
+
+    /// G3 tracking medium parameter 'ifield'
+    /// -  0  no magnetic field
+    /// - -1  user decision in guswim
+    /// -  1  tracking performed with Runge Kutta
+    /// -  2  tracking performed with helix
+    /// -  3  constant magnetic field along z
+    G4int  fIfield;
 };
 
 // inline functions
+
+inline void TG4Medium::SetIfield(G4int ifield)
+{ /// Set G3 tracking medium parameter 'ifield'
+  fIfield = ifield;
+}
 
 inline G4int TG4Medium::GetID() const
 { /// Return ID 
@@ -85,8 +101,9 @@ inline G4UserLimits* TG4Medium::GetLimits() const
   return fLimits; 
 }
 
+inline G4int  TG4Medium::GetIfield() const
+{ /// Return G3 tracking medium parameter 'ifield'
+  return fIfield;
+}
+
 #endif //TG4_MEDIUM_H
-
-
-
-      

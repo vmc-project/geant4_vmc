@@ -36,6 +36,7 @@
 #include <G4ReflectionFactory.hh>
 #include <G4Material.hh>
 #include <G4TransportationManager.hh>
+#include <G4FieldManager.hh>
 #include <G4PVPlacement.hh>
 #include <G4SystemOfUnits.hh>
 #include <G4AutoDelete.hh>
@@ -83,6 +84,7 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fUserRegionConstruction(0),
     fUserPostDetConstruction(0),
     fIsLocalMagField(false),
+    fIsZeroMagField(false),
     fIsUserMaxStep(false),
     fIsMaxStepInLowDensityMaterials(true),
     fLimitDensity(fgDefaultLimitDensity),
@@ -348,9 +350,22 @@ void TG4GeometryManager::FillMediumMapFromG3()
     G4int mediumID = mediumEntry->GetID();
     
     if ( VerboseLevel() > 2 ) {
-      G4cout << "Adding medium ID=" << mediumID << G4endl; 
+      G4cout << "Getting medium ID=" << mediumID << G4endl;
     }
-    TG4Medium* medium = mediumMap->AddMedium(mediumID, false);
+    // Get medium from medium map
+    TG4Medium* medium = mediumMap->GetMedium(mediumID);
+
+    // Create a medium if it does not exist
+    // (This should not happen, but let's check it anyway)
+    if ( ! medium ) {
+      medium = mediumMap->AddMedium(mediumID, false);
+
+      TString message = "Medium ";
+      message += mediumID;
+      message += " was not found in medium map. New medium will be created";
+      TG4Globals::Warning("TG4GeometryManager", "FillMediumMapFromG3", message);
+    }
+
     medium->SetLimits(mediumEntry->GetLimits());
     medium->SetMaterial(mediumEntry->GetMaterial());
   }   
@@ -451,7 +466,7 @@ void TG4GeometryManager::FillMediumMapFromRoot()
     G4String mediumName = geoMedium->GetName();
     
     //Int_t isvol  = (Int_t) geoMedium->GetParam(0);
-    //Int_t ifield = (Int_t) geoMedium->GetParam(1);
+    Int_t ifield = (Int_t) geoMedium->GetParam(1);
     //Double_t fieldm = geoMedium->GetParam(2);
     //Double_t tmaxfd = geoMedium->GetParam(3);
     Double_t stemax = geoMedium->GetParam(4);
@@ -473,6 +488,7 @@ void TG4GeometryManager::FillMediumMapFromRoot()
     TG4Medium* medium = mediumMap->AddMedium(mediumId);
     medium->SetName(mediumName);
     medium->SetLimits(limits);
+    medium->SetIfield(ifield);
 
     G4String matName = geoMedium->GetMaterial()->GetName();
     G4Material* material = G4Material::GetMaterial(matName);
@@ -593,7 +609,79 @@ void TG4GeometryManager::ConstructGlobalMagField()
   // Create global magnetic field
   if ( gMC->GetMagField() ) {
     CreateMagField(gMC->GetMagField(), fFieldParameters[0], 0);
+
+    if ( fIsZeroMagField ) {
+      ConstructZeroMagFields();
+    }
   }
+}
+
+//_____________________________________________________________________________
+void TG4GeometryManager::ConstructZeroMagFields()
+{
+/// Loop over all logical volumes and set zero magnetic if the volume
+/// is associated with a tracking medium with ifield value = 0.
+/// This function is invoked only when a global magnetic field is defined.
+
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4GeometryManager::ConstructZeroMagFields()" << G4endl;
+
+  G4bool forceToAllDaughters = false;
+
+  // Set a dummy field manager to all LV first in order to avoid propagation
+  // of zero field to volume daughters
+  G4FieldManager* dummyFieldManager = new G4FieldManager();
+  G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
+  for (G4int i=0; i<G4int(lvStore->size()); i++) {
+    G4LogicalVolume* lv = (*lvStore)[i];
+    lv->SetFieldManager(dummyFieldManager, forceToAllDaughters);
+  }
+
+  // Set zero field manager to volumes associated with a tracking medium
+  // with ifield value = 0.
+  G4FieldManager* fieldManager = 0;
+  for (G4int i=0; i<G4int(lvStore->size()); i++) {
+
+    G4LogicalVolume* lv = (*lvStore)[i];
+
+    // skip volume without medium
+    TG4Medium* medium
+      = TG4GeometryServices::Instance()->GetMediumMap()->GetMedium(lv, false);
+    if ( ! medium ) continue;
+
+    // Skip volumes with ifield != 0
+    if ( medium->GetIfield() != 0 ) {
+      if ( VerboseLevel() > 1 ) {
+        G4cout << "Global field in logical volume: " << lv->GetName() << G4endl;
+      }
+      continue;
+    }
+
+    // create field manager if it does not exist yet
+    if ( ! fieldManager) {
+      fieldManager = new G4FieldManager();
+          // CHECK if we need to delete it
+      fieldManager->SetDetectorField(0);
+      fieldManager->CreateChordFinder(0);
+    }
+    lv->SetFieldManager(fieldManager, forceToAllDaughters);
+
+    if ( VerboseLevel() > 1 ) {
+      G4cout << "Zero magnetic field set to logical volume: " << lv->GetName() << G4endl;
+    }
+  }
+
+  // Remove the  dummy field manager to all LV without zero field
+  for (G4int i=0; i<G4int(lvStore->size()); i++) {
+    G4LogicalVolume* lv = (*lvStore)[i];
+
+    if ( lv->GetFieldManager() == dummyFieldManager ) {
+      lv->SetFieldManager(0, forceToAllDaughters);
+    }
+  }
+
+  // Delete the dummy field manager
+  delete dummyFieldManager;
 }
 
 //_____________________________________________________________________________
@@ -883,6 +971,18 @@ void TG4GeometryManager::SetIsLocalMagField(G4bool isLocalMagField)
            << std::boolalpha << isLocalMagField << G4endl;
 
   fIsLocalMagField = isLocalMagField;
+}
+
+//_____________________________________________________________________________
+void TG4GeometryManager::SetIsZeroMagField(G4bool isZeroMagField)
+{
+  /// (In)Activate propagating 'ifield = 0' parameter defined in tracking media
+
+  if ( VerboseLevel() > 1 )
+    G4cout << "TG4GeometryManager::SetIsZerolMagField: "
+           << std::boolalpha << isZeroMagField << G4endl;
+
+  fIsZeroMagField = isZeroMagField;
 }
 
 //_____________________________________________________________________________
