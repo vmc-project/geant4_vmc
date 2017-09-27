@@ -46,6 +46,7 @@ class TG4ExtDecayer : public G4VExtDecayer,
     virtual ~TG4ExtDecayer();
 
     virtual G4DecayProducts* ImportDecayProducts(const G4Track& track);
+    virtual void    withNeutrinos() {fWithNeutrinos = true;}
     
   private:
     /// Not implemented
@@ -56,6 +57,7 @@ class TG4ExtDecayer : public G4VExtDecayer,
     TG4ParticlesManager* fParticlesManager;  ///< particles manager 
     TVirtualMCDecayer*   fExternalDecayer;   ///< the external decayer
     TClonesArray*        fDecayProductsArray;///< array of decay products
+    bool    fWithNeutrinos; ///< follow also neutrinos 
 };
 
 #endif //TG4_EXT_DECAYER_H

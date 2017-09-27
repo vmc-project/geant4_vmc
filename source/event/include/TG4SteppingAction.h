@@ -158,7 +158,8 @@ inline void TG4SteppingAction::SetLoopVerboseLevel(G4int level) {
 
 inline void TG4SteppingAction::SetMaxNofSteps(G4int number) { 
   /// Set maximum number of steps allowed 
-  fMaxNofSteps = number; 
+  // fMaxNofSteps = number; 
+  std::cout<<"bypass setmaxnoofstep "<<number<<std::endl;
 }
 
 inline void TG4SteppingAction::SetSpecialControls(TG4SpecialControlsV2* specialControls)  { 
