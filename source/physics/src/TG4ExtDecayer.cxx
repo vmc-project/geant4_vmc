@@ -36,7 +36,8 @@ TG4ExtDecayer::TG4ExtDecayer(TVirtualMCDecayer* externalDecayer)
     TG4Verbose("extDecayer"),
     fParticlesManager(TG4ParticlesManager::Instance()),
     fExternalDecayer(externalDecayer),
-    fDecayProductsArray(0)
+    fDecayProductsArray(0),
+    fSkipNeutrino(false)
 {
 /// Standard constructor
 
@@ -107,10 +108,10 @@ G4DecayProducts* TG4ExtDecayer::ImportDecayProducts(const G4Track& track)
       
     G4int status = particle->GetStatusCode();
     G4int pdg = particle->GetPdgCode();
-    if ( status>0 && status<11 && 
-         abs(pdg)!=12 && abs(pdg)!=14 && abs(pdg)!=16 ) {
+    if ( ( status>0 && status<11 ) &&
+         ( ( ! fSkipNeutrino ) || ( abs(pdg)!=12 && abs(pdg)!=14 && abs(pdg)!=16 ) ) ) {
       // pass to tracking final particles only;
-      // skip neutrinos
+      // skip neutrinos if skipping option is active
 
       if (VerboseLevel()>1) {
         G4cout << "  " << i << "th particle PDG: " << pdg << "   ";

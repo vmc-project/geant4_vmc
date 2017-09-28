@@ -21,6 +21,7 @@
 class TG4ExtDecayerPhysics;
 
 class G4UIcmdWithAString;
+class G4UIcmdWithABool;
 
 /// \ingroup physics_list
 /// \brief Messenger class that defines commands for the stack popper
@@ -28,6 +29,7 @@ class G4UIcmdWithAString;
 ///
 /// Implements commands:
 /// - /mcPhysics/setExtDecayerSelection [particleName1 particleName2 ...]
+/// - /mcPhysics/skipExtDecayerNeutrino true|false
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -55,7 +57,10 @@ class TG4ExtDecayerMessenger: public G4UImessenger
     TG4ExtDecayerPhysics* fExtDecayerPhysics;
     
     /// setExtDecayerSelection command
-    G4UIcmdWithAString*    fSetSelectionCmd;
+    G4UIcmdWithAString*  fSetSelectionCmd;
+
+    /// skipExtDecayerNeutrino command
+    G4UIcmdWithABool*  fSkipNeutrinoCmd;
 };    
 
 #endif //TG4_EXT_DECAYER_MESSENGER_H

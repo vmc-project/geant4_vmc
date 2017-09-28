@@ -39,6 +39,7 @@ class TG4ExtDecayerPhysics: public TG4VPhysicsConstructor
 
     // set methods
     void SetSelection(const G4String& selection);
+    void SetSkipNeutrino(G4bool skipNeutrino);
 
   protected:
     // methods
@@ -55,7 +56,8 @@ class TG4ExtDecayerPhysics: public TG4VPhysicsConstructor
     // data members
     TG4ExtDecayerMessenger  fMessenger;  ///< messenger
     G4Decay*  fDecayProcess; ///< decay process
-    G4String  fSelection;    ///< particles selection 
+    G4String  fSelection;    ///< particles selection
+    G4bool    fSkipNeutrino; ///< option to skip importing neutrinos
 };
 
 // inline functions
@@ -65,6 +67,11 @@ inline void TG4ExtDecayerPhysics::SetSelection(const G4String& selection) {
   /// over using Geant4 decay table 
   fSelection = selection;
 }  
+
+inline void TG4ExtDecayerPhysics::SetSkipNeutrino(G4bool skipNeutrino) {
+  /// Set option to skip importing neutrinos
+  fSkipNeutrino = skipNeutrino;
+}
 
 #endif //TG4_EXT_DECAYER_PHYSICS_H
 

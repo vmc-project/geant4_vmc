@@ -46,6 +46,9 @@ class TG4ExtDecayer : public G4VExtDecayer,
     virtual ~TG4ExtDecayer();
 
     virtual G4DecayProducts* ImportDecayProducts(const G4Track& track);
+
+    // set methods
+    void SetSkipNeutrino(G4bool skipNeutrino);
     
   private:
     /// Not implemented
@@ -56,6 +59,14 @@ class TG4ExtDecayer : public G4VExtDecayer,
     TG4ParticlesManager* fParticlesManager;  ///< particles manager 
     TVirtualMCDecayer*   fExternalDecayer;   ///< the external decayer
     TClonesArray*        fDecayProductsArray;///< array of decay products
+    G4bool               fSkipNeutrino;      ///< option to skip importing neutrinos
 };
+
+// inline functions
+
+inline void TG4ExtDecayer::SetSkipNeutrino(G4bool skipNeutrino) {
+  /// Set option to skip importing neutrinos
+  fSkipNeutrino = skipNeutrino;
+}
 
 #endif //TG4_EXT_DECAYER_H

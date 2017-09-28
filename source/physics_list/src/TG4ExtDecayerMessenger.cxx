@@ -17,13 +17,15 @@
 
 #include <G4UIdirectory.hh>
 #include <G4UIcmdWithAString.hh>
+#include <G4UIcmdWithABool.hh>
 
 //______________________________________________________________________________
 TG4ExtDecayerMessenger::TG4ExtDecayerMessenger(
                             TG4ExtDecayerPhysics* extDecayerPhysics)
   : G4UImessenger(),
     fExtDecayerPhysics(extDecayerPhysics),
-    fSetSelectionCmd(0)
+    fSetSelectionCmd(0),
+    fSkipNeutrinoCmd(0)
 { 
 /// Standard constructor
 
@@ -35,6 +37,13 @@ TG4ExtDecayerMessenger::TG4ExtDecayerMessenger(
   fSetSelectionCmd->SetGuidance(guidance);
   fSetSelectionCmd->SetParameterName("ExtDecayerSelection", false);
   fSetSelectionCmd->AvailableForStates(G4State_PreInit);  
+
+  fSkipNeutrinoCmd
+    = new G4UIcmdWithABool("/mcPhysics/skipExtDecayerNeutrino", this);
+  guidance = "Skip importing neutrinos (default is false)";
+  fSkipNeutrinoCmd->SetGuidance(guidance);
+  fSkipNeutrinoCmd->SetParameterName("ExtDecayerSkipNeutrino", false);
+  fSkipNeutrinoCmd->AvailableForStates(G4State_PreInit);
 }
 
 //______________________________________________________________________________
@@ -43,6 +52,7 @@ TG4ExtDecayerMessenger::~TG4ExtDecayerMessenger()
 /// Destructor
 
   delete fSetSelectionCmd;
+  delete fSkipNeutrinoCmd;
 }
 
 //
@@ -51,12 +61,15 @@ TG4ExtDecayerMessenger::~TG4ExtDecayerMessenger()
 
 //______________________________________________________________________________
 void TG4ExtDecayerMessenger::SetNewValue(G4UIcommand* command,
-                                          G4String newValue)
+                                         G4String newValue)
 { 
 /// Apply command to the associated object.
   
   if ( command == fSetSelectionCmd ) {
-    G4cout << "TG4ExtDecayerMessenger::SetNewValue " << newValue << G4endl;
     fExtDecayerPhysics->SetSelection(newValue);
+  }
+  else if ( command == fSkipNeutrinoCmd ) {
+    fExtDecayerPhysics->SetSkipNeutrino(
+      fSkipNeutrinoCmd->GetNewBoolValue(newValue));
   }  
 }

@@ -28,7 +28,8 @@ TG4ExtDecayerPhysics::TG4ExtDecayerPhysics(const G4String& name)
   : TG4VPhysicsConstructor(name),
     fMessenger(this),
     fDecayProcess(0),
-    fSelection()     
+    fSelection(),
+    fSkipNeutrino(false)
 {
 /// Standard constructor
 }
@@ -39,7 +40,8 @@ TG4ExtDecayerPhysics::TG4ExtDecayerPhysics(G4int theVerboseLevel,
   : TG4VPhysicsConstructor(name, theVerboseLevel), 
     fMessenger(this),
     fDecayProcess(0),
-    fSelection()     
+    fSelection(),
+    fSkipNeutrino(false)
 {
 /// Standard constructor
 }
@@ -80,6 +82,7 @@ void TG4ExtDecayerPhysics::ConstructProcess()
   // Create Geant4 external decayer
   TG4ExtDecayer* tg4Decayer = new TG4ExtDecayer(mcDecayer);
   tg4Decayer->VerboseLevel(VerboseLevel()); 
+  tg4Decayer->SetSkipNeutrino(fSkipNeutrino);
      // The tg4Decayer is deleted in G4Decay destructor
      // But we may have a problem if there are more than one 
      // instances of G4Decay process
