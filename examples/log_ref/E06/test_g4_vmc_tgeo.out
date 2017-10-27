@@ -9,7 +9,7 @@
   *                                         *
   *******************************************
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, May 04 2016, 18:23:59 on macosx64)
+ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -46,7 +46,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-10-03-patch-01    (24-February-2017)
+ Geant4 version Name: geant4-10-03-patch-03    (20-October-2017)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -91,7 +91,7 @@ Global magnetic field created with stepper ClassicalRK4
 ### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 ### EM physics constructed. 
 G4OpticalPhysics:: Add Optical Physics Processes
-### Birks coeffitients used in run time
+### Birks coefficients used in run time
    Water     0.126 mm/MeV     0.0126 g/cm^2/MeV  massFactor=  85.0756 effCharge= 62.0606
   Cerenkov process:  used
     Max number of photons per step: 20
@@ -521,6 +521,6 @@ Number of optical photons produced in this event : 1672
 Number of optical photons produced in this event : 1719
 >>> Event 9
 Number of optical photons produced in this event : 1674
-Time of this run:   User=0.83s Real=0.82s Sys=0.01s
+Time of this run:   User=0.82s Real=0.83s Sys=0.01s
 Number of events processed: 10
 Number of optical photons produced in this run : 16945

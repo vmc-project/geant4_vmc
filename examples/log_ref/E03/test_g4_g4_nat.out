@@ -9,7 +9,7 @@
   *                                         *
   *******************************************
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, May 04 2016, 18:23:59 on macosx64)
+ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -32,7 +32,7 @@ Processing test_E03_1.C("g4Config1.C", kFALSE)...
 
 
 *************************************************************
- Geant4 version Name: geant4-10-03-patch-01    (24-February-2017)
+ Geant4 version Name: geant4-10-03-patch-03    (20-October-2017)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -749,6 +749,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon+Inelastic
@@ -763,6 +764,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon-Inelastic
@@ -874,7 +876,7 @@ Type of pre-compound inverse x-section              3
 Type of de-excitation inverse x-section             3
 Min excitation energy (keV)                         0.01
 Level density (1/MeV)                               0.1
-Time limit for long lived isomeres (ns)             1000
+Time limit for long lived isomeres (ns)             1e+12
 Use new data files                                  1
 Use complete data files                             0
 Correlated gamma emission flag                      0
@@ -927,7 +929,7 @@ Index : 2     used in the geometry : Yes
 ---> Begin of event: 5
    Absorber: total energy (MeV): 713.722       total track length (cm):  50.0497
    Gap:      total energy (MeV): 179.673       total track length (cm):  91.4274
-Time of this run:   User=0.05s Real=0.06s Sys=0.01s
+Time of this run:   User=0.06s Real=0.06s Sys=0s
 Number of events processed: 5
   *******************************************
   *                                         *
@@ -940,7 +942,7 @@ Number of events processed: 5
   *                                         *
   *******************************************
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, May 04 2016, 18:23:59 on macosx64)
+ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -964,7 +966,7 @@ Processing test_E03_2.C("g4Config1.C", kFALSE)...
 
 
 *************************************************************
- Geant4 version Name: geant4-10-03-patch-01    (24-February-2017)
+ Geant4 version Name: geant4-10-03-patch-03    (20-October-2017)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -1685,6 +1687,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon+Inelastic
@@ -1699,6 +1702,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon-Inelastic
@@ -1810,7 +1814,7 @@ Type of pre-compound inverse x-section              3
 Type of de-excitation inverse x-section             3
 Min excitation energy (keV)                         0.01
 Level density (1/MeV)                               0.1
-Time limit for long lived isomeres (ns)             1000
+Time limit for long lived isomeres (ns)             1e+12
 Use new data files                                  1
 Use complete data files                             0
 Correlated gamma emission flag                      0
@@ -2410,7 +2414,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  41.707       total track length (cm):    3.263
    Gap:      total energy (MeV):   6.904       total track length (cm):    3.746
-Time of this run:   User=0.01s Real=0s Sys=0s
+Time of this run:   User=0s Real=0.01s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
@@ -2424,7 +2428,7 @@ Number of events processed: 1
   *                                         *
   *******************************************
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, May 04 2016, 18:23:59 on macosx64)
+ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -2448,7 +2452,7 @@ Processing test_E03_3.C("g4Config1.C", kFALSE)...
 
 
 *************************************************************
- Geant4 version Name: geant4-10-03-patch-01    (24-February-2017)
+ Geant4 version Name: geant4-10-03-patch-03    (20-October-2017)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -3169,6 +3173,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon+Inelastic
@@ -3183,6 +3188,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon-Inelastic
@@ -3294,7 +3300,7 @@ Type of pre-compound inverse x-section              3
 Type of de-excitation inverse x-section             3
 Min excitation energy (keV)                         0.01
 Level density (1/MeV)                               0.1
-Time limit for long lived isomeres (ns)             1000
+Time limit for long lived isomeres (ns)             1e+12
 Use new data files                                  1
 Use complete data files                             0
 Correlated gamma emission flag                      0
@@ -3375,7 +3381,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.144
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.01s Real=0.01s Sys=0s
+Time of this run:   User=0s Real=0s Sys=0s
 Number of events processed: 1
 --- Finish Run MC 
   *******************************************
@@ -3389,7 +3395,7 @@ Number of events processed: 1
   *                                         *
   *******************************************
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, May 04 2016, 18:23:59 on macosx64)
+ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -3412,7 +3418,7 @@ Processing test_E03_4.C("g4Config1.C", kFALSE)...
 
 
 *************************************************************
- Geant4 version Name: geant4-10-03-patch-01    (24-February-2017)
+ Geant4 version Name: geant4-10-03-patch-03    (20-October-2017)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -4129,6 +4135,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon+Inelastic
@@ -4143,6 +4150,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon-Inelastic
@@ -4254,7 +4262,7 @@ Type of pre-compound inverse x-section              3
 Type of de-excitation inverse x-section             3
 Min excitation energy (keV)                         0.01
 Level density (1/MeV)                               0.1
-Time limit for long lived isomeres (ns)             1000
+Time limit for long lived isomeres (ns)             1e+12
 Use new data files                                  1
 Use complete data files                             0
 Correlated gamma emission flag                      0
@@ -4311,5 +4319,5 @@ Index : 2     used in the geometry : Yes
 
    Absorber: total energy (MeV): 1018.28       total track length (cm):  72.3549
    Gap:      total energy (MeV): 62.2367       total track length (cm):  31.2323
-Time of this run:   User=0.02s Real=0.02s Sys=0s
+Time of this run:   User=0.01s Real=0.02s Sys=0s
 Number of events processed: 1

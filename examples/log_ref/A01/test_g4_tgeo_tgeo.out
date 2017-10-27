@@ -9,7 +9,7 @@
   *                                         *
   *******************************************
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, May 04 2016, 18:23:59 on macosx64)
+ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -43,7 +43,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-10-03-patch-01    (24-February-2017)
+ Geant4 version Name: geant4-10-03-patch-03    (20-October-2017)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -653,6 +653,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon+Inelastic
@@ -667,6 +668,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon-Inelastic
@@ -778,7 +780,7 @@ Type of pre-compound inverse x-section              3
 Type of de-excitation inverse x-section             3
 Min excitation energy (keV)                         0.01
 Level density (1/MeV)                               0.1
-Time limit for long lived isomeres (ns)             1000
+Time limit for long lived isomeres (ns)             1e+12
 Use new data files                                  1
 Use complete data files                             0
 Correlated gamma emission flag                      0
@@ -838,43 +840,43 @@ Hodoscope1 has 4 hits.
 Hodoscope2 has 9 hits.
 Chamber1 has 534 hits.
 Chamber2 has 511 hits.
-EmCalorimeter has 41 hits. Total Edep is 91070.4 (MeV)
+EmCalorimeter has 41 hits. Total Edep is 91071.8 (MeV)
 HadCalorimeter has 5 hits. Total Edep is 14.9823 (MeV)
 
 >>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
+Hodoscope1 has 2 hits.
 Hodoscope2 has 4 hits.
-Chamber1 has 522 hits.
-Chamber2 has 523 hits.
-EmCalorimeter has 17 hits. Total Edep is 18088.7 (MeV)
-HadCalorimeter has 5 hits. Total Edep is 2579.85 (MeV)
+Chamber1 has 546 hits.
+Chamber2 has 526 hits.
+EmCalorimeter has 15 hits. Total Edep is 18505.1 (MeV)
+HadCalorimeter has 5 hits. Total Edep is 2552.84 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 8 hits.
-Chamber1 has 514 hits.
-Chamber2 has 494 hits.
-EmCalorimeter has 61 hits. Total Edep is 26877.9 (MeV)
-HadCalorimeter has 16 hits. Total Edep is 1970.84 (MeV)
+Hodoscope1 has 4 hits.
+Hodoscope2 has 13 hits.
+Chamber1 has 521 hits.
+Chamber2 has 486 hits.
+EmCalorimeter has 58 hits. Total Edep is 28472.1 (MeV)
+HadCalorimeter has 17 hits. Total Edep is 1617.35 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 7 hits.
-Chamber1 has 443 hits.
-Chamber2 has 127 hits.
-EmCalorimeter has 54 hits. Total Edep is 6760.73 (MeV)
-HadCalorimeter has 11 hits. Total Edep is 206.248 (MeV)
+Hodoscope1 has 8 hits.
+Hodoscope2 has 10 hits.
+Chamber1 has 445 hits.
+Chamber2 has 197 hits.
+EmCalorimeter has 58 hits. Total Edep is 8849.11 (MeV)
+HadCalorimeter has 9 hits. Total Edep is 186.013 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 2 hits.
-Hodoscope2 has 9 hits.
-Chamber1 has 534 hits.
-Chamber2 has 536 hits.
-EmCalorimeter has 49 hits. Total Edep is 27779.3 (MeV)
-HadCalorimeter has 16 hits. Total Edep is 209.253 (MeV)
-Time of this run:   User=4.76s Real=4.81s Sys=0.05s
+Hodoscope1 has 8 hits.
+Hodoscope2 has 6 hits.
+Chamber1 has 529 hits.
+Chamber2 has 525 hits.
+EmCalorimeter has 46 hits. Total Edep is 27233 (MeV)
+HadCalorimeter has 13 hits. Total Edep is 134.231 (MeV)
+Time of this run:   User=4.86s Real=4.97s Sys=0.1s
 Number of events processed: 5
-Real time 0:00:05, CP time 5.640
+Real time 0:00:05, CP time 5.810
   *******************************************
   *                                         *
   *        W E L C O M E  to  R O O T       *
@@ -886,7 +888,7 @@ Real time 0:00:05, CP time 5.640
   *                                         *
   *******************************************
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, May 04 2016, 18:23:59 on macosx64)
+ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -920,7 +922,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 Running TVirtualMCApplication::ConstructGeometry
 *************************************************************
- Geant4 version Name: geant4-10-03-patch-01    (24-February-2017)
+ Geant4 version Name: geant4-10-03-patch-03    (20-October-2017)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -1530,6 +1532,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon+Inelastic
@@ -1544,6 +1547,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon-Inelastic
@@ -1655,7 +1659,7 @@ Type of pre-compound inverse x-section              3
 Type of de-excitation inverse x-section             3
 Min excitation energy (keV)                         0.01
 Level density (1/MeV)                               0.1
-Time limit for long lived isomeres (ns)             1000
+Time limit for long lived isomeres (ns)             1e+12
 Use new data files                                  1
 Use complete data files                             0
 Correlated gamma emission flag                      0
@@ -1727,28 +1731,28 @@ EmCalorimeter has 14 hits. Total Edep is 18580.9 (MeV)
 HadCalorimeter has 5 hits. Total Edep is 2564.51 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 2 hits.
+Hodoscope1 has 3 hits.
 Hodoscope2 has 12 hits.
-Chamber1 has 515 hits.
-Chamber2 has 497 hits.
-EmCalorimeter has 62 hits. Total Edep is 27403.3 (MeV)
-HadCalorimeter has 15 hits. Total Edep is 1615.71 (MeV)
+Chamber1 has 529 hits.
+Chamber2 has 485 hits.
+EmCalorimeter has 67 hits. Total Edep is 25985.7 (MeV)
+HadCalorimeter has 15 hits. Total Edep is 2077.95 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 6 hits.
-Hodoscope2 has 9 hits.
-Chamber1 has 458 hits.
-Chamber2 has 175 hits.
-EmCalorimeter has 47 hits. Total Edep is 8524.73 (MeV)
-HadCalorimeter has 14 hits. Total Edep is 302.453 (MeV)
+Hodoscope2 has 5 hits.
+Chamber1 has 456 hits.
+Chamber2 has 176 hits.
+EmCalorimeter has 48 hits. Total Edep is 9000.91 (MeV)
+HadCalorimeter has 10 hits. Total Edep is 212.86 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 6 hits.
+Hodoscope1 has 3 hits.
 Hodoscope2 has 6 hits.
-Chamber1 has 529 hits.
-Chamber2 has 515 hits.
-EmCalorimeter has 52 hits. Total Edep is 27928.8 (MeV)
-HadCalorimeter has 16 hits. Total Edep is 111.394 (MeV)
-Time of this run:   User=4.43s Real=4.48s Sys=0.04s
+Chamber1 has 518 hits.
+Chamber2 has 512 hits.
+EmCalorimeter has 41 hits. Total Edep is 28626.2 (MeV)
+HadCalorimeter has 15 hits. Total Edep is 94.7168 (MeV)
+Time of this run:   User=4.42s Real=4.57s Sys=0.11s
 Number of events processed: 5
-Real time 0:00:05, CP time 5.290
+Real time 0:00:05, CP time 5.410

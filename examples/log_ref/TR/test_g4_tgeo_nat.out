@@ -9,7 +9,7 @@
   *                                         *
   *******************************************
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, May 04 2016, 18:23:59 on macosx64)
+ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -32,7 +32,7 @@ Processing test_TR.C("g4Config.C")...
 
 
 *************************************************************
- Geant4 version Name: geant4-10-03-patch-01    (24-February-2017)
+ Geant4 version Name: geant4-10-03-patch-03    (20-October-2017)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -194,7 +194,7 @@ Lorentz Factor	XTR photon number
 8.085e+04	3.219
 9.283e+04	3.22
 
-total time for build X-ray TR energy loss tables = 11.19 s
+total time for build X-ray TR energy loss tables = 11.59 s
 
 msc:   for e+    SubType= 10
       RangeFactor= 0.04, stepLimitType: 1, latDisplacement: 1
@@ -280,7 +280,7 @@ Lorentz Factor	XTR photon number
 8.085e+04	3.219
 9.283e+04	3.22
 
-total time for build X-ray TR energy loss tables = 11.16 s
+total time for build X-ray TR energy loss tables = 11.57 s
 
 msc:   for proton    SubType= 10
       RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 0, polarAngleLimit(deg)= 180
@@ -599,10 +599,10 @@ Index : 2     used in the geometry : Yes
 --> Event 2000 starts.
 --> Event 3000 starts.
 --> Event 4000 starts.
-Time of this run:   User=1.78s Real=1.82s Sys=0.03s
+Time of this run:   User=1.68s Real=1.7s Sys=0.02s
 Number of events processed: 5000
  ================== run summary =====================
  End of Run TotNbofEvents = 5000
- Mean energy deposit in absorber = 0.0486815 +-0.0191945  MeV 
- Total number of XTR gammas = 13805
- Total number of all gammas = 15872
+ Mean energy deposit in absorber = 0.0487568 +-0.0192409  MeV 
+ Total number of XTR gammas = 13804
+ Total number of all gammas = 15867

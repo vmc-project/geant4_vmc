@@ -9,7 +9,7 @@
   *                                         *
   *******************************************
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, May 04 2016, 18:23:59 on macosx64)
+ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -32,7 +32,7 @@ Processing test_E06.C("g4ConfigOld.C",kTRUE)...
 
 
 *************************************************************
- Geant4 version Name: geant4-10-03-patch-01    (24-February-2017)
+ Geant4 version Name: geant4-10-03-patch-03    (20-October-2017)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -72,7 +72,7 @@ The material properties EFFICIENCY set for optical surface AirSurface
 Global magnetic field created with stepper ClassicalRK4
 ### EM physics constructed. 
 G4OpticalPhysics:: Add Optical Physics Processes
-### Birks coeffitients used in run time
+### Birks coefficients used in run time
    Water     0.126 mm/MeV     0.0126 g/cm^2/MeV  massFactor=  85.127 effCharge= 62.0568
   Cerenkov process:  used
     Max number of photons per step: 20
@@ -502,6 +502,6 @@ Number of optical photons produced in this event : 1676
 Number of optical photons produced in this event : 1717
 >>> Event 9
 Number of optical photons produced in this event : 1671
-Time of this run:   User=0.82s Real=0.81s Sys=0s
+Time of this run:   User=0.84s Real=0.84s Sys=0s
 Number of events processed: 10
 Number of optical photons produced in this run : 17029

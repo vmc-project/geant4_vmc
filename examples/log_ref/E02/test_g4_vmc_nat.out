@@ -9,7 +9,7 @@
   *                                         *
   *******************************************
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, May 04 2016, 18:23:59 on macosx64)
+ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
 
 CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
 Type ? for help. Commands must be C++ statements.
@@ -32,7 +32,7 @@ Processing test_E02.C("g4ConfigOld.C",kTRUE)...
 
 
 *************************************************************
- Geant4 version Name: geant4-10-03-patch-01    (24-February-2017)
+ Geant4 version Name: geant4-10-03-patch-03    (20-October-2017)
                       Copyright : Geant4 Collaboration
                       Reference : NIM A 506 (2003), 250-303
                             WWW : http://cern.ch/geant4
@@ -640,6 +640,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon+Inelastic
@@ -654,6 +655,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon-Inelastic
@@ -765,7 +767,7 @@ Type of pre-compound inverse x-section              3
 Type of de-excitation inverse x-section             3
 Min excitation energy (keV)                         0.01
 Level density (1/MeV)                               0.1
-Time limit for long lived isomeres (ns)             1000
+Time limit for long lived isomeres (ns)             1e+12
 Use new data files                                  1
 Use complete data files                             0
 Correlated gamma emission flag                      0
@@ -1524,5 +1526,5 @@ TParticle: e-             p: 0.000510 0.000426 0.000413 Vertex: 2.131334e+00 5.6
 Mother:    gamma  with ID: 109
 Number of daughters: 0
 
-Time of this run:   User=0.02s Real=0.02s Sys=0s
+Time of this run:   User=0.02s Real=0.02s Sys=0.01s
 Number of events processed: 5
