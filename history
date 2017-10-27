@@ -9,6 +9,56 @@
      
 Tags (history):
 ===============
+  27/10/2017
+  v3-5:
+    Geant4 VMC:
+    - Implemented new TVirtualMC functions TrackPosition|Momentum(Float_t& ...)
+    - Added calls to new TVirtualMCApplication non-const functions for MT
+    - Let execute at rest processes when stopping a particle via user tracking cut:
+      this makes the behavior as in Geant3
+    - Added a new command which allows to activate skipping neutrinos in external decayer
+      (this feature is switched off by default since this version):
+      /mcPhysics/skipExtDecayerNeutrino true|false
+    - Take into account tracking medium parameter 'ifield = 0':
+      - Set zero magnetic field to logical volumes assoiciated with tracking medium
+        with 'ifield = 0' if global magnetic field is defined.
+      - The feature must be activated with a new command:
+        /mcDet/setIsZeroMagField true
+    - Added new command for setting gamma to muons cross section factor:
+      /mcPhysics/setGammaToMuonsCrossSectionFactor  value
+
+    MTRoot
+    - Do not include TMCAutoLock in MTRoot installation since Root version 6.08/06;
+      the class was moved in Root since this version
+
+    Fixes:
+    All packages:
+    - Fixes in CMake build:
+      - Handle also a case when -std flag is not defined in root-config --cflags
+      - Do not override CMAKE_INSTALL_LIBDIR (thanks to Dennis Klein, GSI)
+      - Add support for ROOT compiled with C++14 (thanks to Dario Berzano, CERN)
+    Geant4 VMC:
+    - Fixed implementations  for performance optimization applied in 3.4:
+      - Do not cache pointer to stepping action as this made calls to VMC functions
+        inavailable in initialization.
+      - Added new function TG4RunManager::CacheMCStack() called from
+        TG4PrimaryGeneratorAction::GeneratePrimaries so that the stack can
+        be defined by the user up to MCApplication::BeginEvent at latest
+    - Do not skip neutrinos in TG4ExtDecayer by default;
+      (requirement from Thomas Ruf, ShipSoft)
+    - Added AnnihiToMuPair, ee2hadr, GammaToMuPair processes in the VMC process maps
+      which were missing
+    Examples:
+    - Exclude ExGarfield from compilation and tests with Root 6
+      (as Garfield++ requires Root 5x)
+
+    Tested with Geant4 10.03.p03 (with embedded CLHEP   2.3.4.3.)
+      Root 5.34/36, 6.11/02 and 6.10/08(*), VGM 4.4, Garfield v1.0
+
+    (*) + fix in TGeoManager required when running in Geant4 multi-threaded mode
+        (git commit 971ef8af82)
+
+
   08/03/2017
   v3-4:
     All packages:
