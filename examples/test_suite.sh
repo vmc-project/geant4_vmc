@@ -21,10 +21,16 @@ PASSED="0"
 FAILED="0"
 
 # Set 1 to 0 if you want to skip given MC or ExGarfield test
-TESTG3=1
-TESTG4=1
-TESTGARFIELD=1
+TESTG3="1"
+TESTG4="1"
 BUILDDIR=""
+
+# Run Garfield only with Root 5
+TESTGARFIELD="1"
+ROOT_VERSION=`root-config --version`
+if [ ${ROOT_VERSION:0:1} = "6" ]; then
+  TESTGARFIELD="0"
+fi
 
 # Root command with loading g3/g4 libraries
 RUNG3="root.exe -b -q load_g3.C"
@@ -35,12 +41,12 @@ for arg in "${@}"
 do
   #echo "got: $arg"
   case $arg in
-    "--g3=on"  ) TESTG3=1 ;;
-    "--g3=off" ) TESTG3=0 ;;
-    "--g4=on"  ) TESTG4=1 ;;
-    "--g4=off" ) TESTG4=0 ;;
-    "--garfield=on"  ) TESTGARFIELD=1 ;;
-    "--garfield=off" ) TESTGARFIELD=0 ;;
+    "--g3=on"  ) TESTG3="1" ;;
+    "--g3=off" ) TESTG3="0" ;;
+    "--g4=on"  ) TESTG4="1" ;;
+    "--g4=off" ) TESTG4="0" ;;
+    "--garfield=on"  ) TESTGARFIELD="1" ;;
+    "--garfield=off" ) TESTGARFIELD="0" ;;
      --builddir=* ) BUILDDIR=${arg#--builddir=} ;;
     * ) echo "Unsupported option $arg chosen."
         echo "Usage:"

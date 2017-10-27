@@ -23,9 +23,15 @@ G3EXEDIR=$CURDIR/../../geant3_install/bin
 G4EXEDIR=$CURDIR/../../geant4_vmc_install/bin
 
 # Set 1 to 0 if you want to skip given MC or Garfield test
-TESTG3=1
-TESTG4=1
-TESTGARFIELD=1
+TESTG3="1"
+TESTG4="1"
+
+# Run Garfield only with Root 5
+TESTGARFIELD="1"
+ROOT_VERSION=`root-config --version`
+if [ ${ROOT_VERSION:0:1} = "6" ]; then
+  TESTGARFIELD="0"
+fi
 
 # Recreate log directory only if running test for both G3 and G4
 if [ "$TESTG3" = "1" -a  "$TESTG4" = "1" ]; then

@@ -41,6 +41,13 @@ set(CMAKE_MODULE_PATH
 #
 include(UseVMC)
 
+#----------------------------------------------------------------------------
+# Garfield++ is not supported with Root 6.x
+#
+if (ROOT_FOUND_VERSION GREATER 59999)
+  message("-- ExGarfield : This example requires Root 5, disabled")
+  return()
+endif()
 
 #----------------------------------------------------------------------------
 # Garfield package

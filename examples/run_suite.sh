@@ -15,9 +15,21 @@
 
 CURDIR=`pwd`
 
+# Run Garfield only with Root 5
+TESTGARFIELD="1"
+ROOT_VERSION=`root-config --version`
+if [ ${ROOT_VERSION:0:1} = "6" ]; then
+  TESTGARFIELD="0"
+fi
+
 for EXAMPLE in E01 E02 E03 E06 A01 ExGarfield Gflash TR
 do
   cd $CURDIR/$EXAMPLE
+
+  # skip Garfield if switch off
+  if [ "$EXAMPLE" = "ExGarfield" -a "$TESTGARFIELD" = "0" ]; then
+    continue 1
+  fi
 
   # run G3 - cannot be run with geometry defined via root 
   # echo "... Running example $EXAMPLE with G3" 
