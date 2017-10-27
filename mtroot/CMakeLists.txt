@@ -52,11 +52,29 @@ include_directories(
   ${CMAKE_CURRENT_BINARY_DIR})
 
 #----------------------------------------------------------------------------
-# Locate sources and headers for this project
+# Set sources and headers for this project
 # NB: headers are included so they will show up in IDEs
 #
-file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cxx)
-file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
+set(sources
+    ${PROJECT_SOURCE_DIR}/src/TMCRootManager.cxx
+    ${PROJECT_SOURCE_DIR}/src/TMCRootManagerImpl.cxx
+    ${PROJECT_SOURCE_DIR}/src/TMCRootManagerMT.cxx
+    ${PROJECT_SOURCE_DIR}/src/TVirtualMCRootManager.cxx
+    )
+if (ROOT_FOUND_VERSION LESS_EQUAL 60804)
+  set(sources ${sources} ${PROJECT_SOURCE_DIR}/src/TMCAutoLock.cxx)
+endif()
+
+set(headers
+    ${PROJECT_SOURCE_DIR}/include/TMCRootManager.h
+    ${PROJECT_SOURCE_DIR}/include/TMCRootManagerImpl.h
+    ${PROJECT_SOURCE_DIR}/include/TMCRootManagerMT.h
+    ${PROJECT_SOURCE_DIR}/include/TVirtualMCRootManager.h
+    )
+if (ROOT_FOUND_VERSION LESS_EQUAL 60804)
+  set(headers ${headers} ${PROJECT_SOURCE_DIR}/include/TMCAutoLock.h)
+endif()
+
 
 #---Add library-----------------------------------------------------------------
 add_library(mtroot ${sources} ${headers})
