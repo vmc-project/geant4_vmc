@@ -62,7 +62,7 @@ TG4G3Defaults::TG4G3Defaults()
   fControlVector.SetControl(kHADR, kActivate, fCutVector);   // 1
   fControlVector.SetControl(kMUNU, kInActivate, fCutVector); // 0
   fControlVector.SetControl(kDCAY, kActivate, fCutVector);   // 1
-  fControlVector.SetControl(kLOSS, kActivate2, fCutVector);  // 2
+  fControlVector.SetControl(kG3LOSS, kActivate2, fCutVector);  // 2
   fControlVector.SetControl(kMULS, kActivate, fCutVector);   // 1
   fControlVector.SetControl(kCKOV, kInActivate, fCutVector); // 0
   fControlVector.SetControl(kRAYL, kInActivate, fCutVector); // 0

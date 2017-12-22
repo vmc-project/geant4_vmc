@@ -141,7 +141,7 @@ TG4G3Control TG4G3ControlVector::GetControl(const G4String& controlName)
   else if (controlName == fgControlNameVector[kHADR]) return kHADR;
   else if (controlName == fgControlNameVector[kMUNU]) return kMUNU;
   else if (controlName == fgControlNameVector[kDCAY]) return kDCAY;
-  else if (controlName == fgControlNameVector[kLOSS]) return kLOSS;
+  else if (controlName == fgControlNameVector[kG3LOSS]) return kG3LOSS;
   else if (controlName == fgControlNameVector[kMULS]) return kMULS;
   else if (controlName == fgControlNameVector[kCKOV]) return kCKOV;
   else if (controlName == fgControlNameVector[kRAYL]) return kRAYL;
@@ -180,7 +180,7 @@ TG4G3ControlValue TG4G3ControlVector::GetControlValue(G4int value,
       return kActivate2;
       ;;
     case 3: case 4: case 5:
-      if (control == kLOSS) 
+      if (control == kG3LOSS)
         return kActivate;
       else
         return kUnsetControlValue;
@@ -210,7 +210,7 @@ G4bool TG4G3ControlVector::SetControl(TG4G3Control control,
 
   if (control == kDRAY) {
     if (controlValue == kActivate &&
-        GetControlValue(kLOSS) == kActivate2) {
+        GetControlValue(kG3LOSS) == kActivate2) {
       TG4Globals::Warning(
         "TG4Limits", "SetG3Control", "Cannot set DRAY=1 when LOSS=2.");    
       return false;
@@ -219,7 +219,7 @@ G4bool TG4G3ControlVector::SetControl(TG4G3Control control,
       cuts.SetDeltaRaysOn(true);
   }               
 
-  if (control == kLOSS && controlValue == kActivate2) {
+  if (control == kG3LOSS && controlValue == kActivate2) {
     SetControl(kDRAY, kInActivate, cuts);
     cuts.SetDeltaRaysOn(false);  
   }        
@@ -252,11 +252,11 @@ G4bool TG4G3ControlVector::Update(const TG4G3ControlVector& vector)
        result = true;
   }
   
-  // if both kLOSS values will have the same effect
+  // if both kG3LOSS values will have the same effect
   // unset this control
 
-  TG4G3ControlValue passed  = vector[kLOSS];
-  TG4G3ControlValue current = fControlVector[kLOSS];
+  TG4G3ControlValue passed  = vector[kG3LOSS];
+  TG4G3ControlValue current = fControlVector[kG3LOSS];
 
   if (passed  == kActivate2) passed = kActivate;
   if (current == kActivate2) current = kActivate;
@@ -264,11 +264,11 @@ G4bool TG4G3ControlVector::Update(const TG4G3ControlVector& vector)
            // kActivate, kActivate2 after Init phase
 
   if (current == passed) current = kUnsetControlValue;
-           // if both kLOSS values will have the same effect
+           // if both kG3LOSS values will have the same effect
            // unset this control
 
-  if (current != fControlVector[kLOSS]) {
-     fControlVector[kLOSS] = current;
+  if (current != fControlVector[kG3LOSS]) {
+     fControlVector[kG3LOSS] = current;
      result = true;
   }
   return result;     

@@ -95,7 +95,7 @@ void TG4G3PhysicsManager::SetProcess(TG4G3Control control,
 {
 /// Set control process control (in a G3-like way).
   
-  if (control == kDRAY || control == kLOSS) {
+  if (control == kDRAY || control == kG3LOSS) {
       SwitchIsCutVector(kDCUTE);
       SwitchIsCutVector(kDCUTM);
   }  
@@ -198,7 +198,7 @@ void TG4G3PhysicsManager::SwitchIsControlVector(TG4G3Control control)
            // any
            (*fIsControlVector)[kAny] = true; 
            break;
-    case kLOSS:
+    case kG3LOSS:
            // all charged particles
            (*fIsControlVector)[kElectron] = true; 
            (*fIsControlVector)[kEplus] = true; 

@@ -39,7 +39,6 @@
 #include <G4FieldManager.hh>
 #include <G4PVPlacement.hh>
 #include <G4SystemOfUnits.hh>
-#include <G4AutoDelete.hh>
 
 #include <TGeoManager.h>
 #include <TGeoVolume.h>
@@ -122,7 +121,7 @@ TG4GeometryManager::~TG4GeometryManager()
   }
 
   delete fgMagneticFields;
-     // magnetic field objects are deleted via G4AutoDelete;
+     // magnetic field objects are deleted via G4 kernel
 
   delete fGeometryServices;
   delete fOpManager;
@@ -130,6 +129,7 @@ TG4GeometryManager::~TG4GeometryManager()
   delete fEmModelsManager;
 
   fgInstance = 0;
+  fgMagneticFields = 0;
 }
 
 //
@@ -598,7 +598,6 @@ void TG4GeometryManager::CreateMagField(TVirtualMagField* magField,
   }
 
   fgMagneticFields->push_back(tg4MagneticField);
-  G4AutoDelete::Register(tg4MagneticField);
 }
 
 //_____________________________________________________________________________

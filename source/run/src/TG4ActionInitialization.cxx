@@ -24,8 +24,6 @@
 #include "TG4Globals.h"
 #include "TGeant4.h"
 
-#include <G4AutoDelete.hh>
-
 #include <TROOT.h>
 #include <TInterpreter.h>
 #include <TVirtualMCApplication.h>

@@ -66,10 +66,10 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("eCoulombScat", kMULS);
   controlMap->Add("nuclearStopping", kMULS);
 
-  controlMap->Add("eIoni", kLOSS); 
-  controlMap->Add("muIoni", kLOSS); 
-  controlMap->Add("hIoni", kLOSS); 
-  controlMap->Add("ionIoni", kLOSS); 
+  controlMap->Add("eIoni", kG3LOSS);
+  controlMap->Add("muIoni", kG3LOSS);
+  controlMap->Add("hIoni", kG3LOSS);
+  controlMap->Add("ionIoni", kG3LOSS);
 
   controlMap->Add("Decay", kDCAY); 
   controlMap->Add("RadioactiveDecay", kDCAY); 

@@ -115,7 +115,7 @@ enum TG4G3Control
   ///                 G4hIonisation/G4IhIonisation
   /// - Particles: charged 
   /// - Physics:   EM  
-  kLOSS,             
+  kG3LOSS,
 
   /// Multiple scattering   
   /// - G3 default value: 1

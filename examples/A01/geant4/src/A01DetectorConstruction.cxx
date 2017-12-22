@@ -47,7 +47,6 @@
 #include "G4FieldManager.hh"
 #include "G4TransportationManager.hh"
 #include "G4Mag_UsualEqRhs.hh"
-#include "G4AutoDelete.hh"
 
 #include "G4Material.hh"
 #include "G4Element.hh"
@@ -412,10 +411,6 @@ void A01DetectorConstruction::ConstructSDandField()
     fFieldMgr->CreateChordFinder(fMagneticField);
     G4bool forceToAllDaughters = true;
     fMagneticLogical->SetFieldManager(fFieldMgr, forceToAllDaughters);
-
-    // Register the field and its manager for deleting
-    G4AutoDelete::Register(fMagneticField);
-    G4AutoDelete::Register(fFieldMgr);
   }
 }
 
