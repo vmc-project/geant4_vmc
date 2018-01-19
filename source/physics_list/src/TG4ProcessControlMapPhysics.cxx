@@ -266,7 +266,8 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
            processName != "stackPopper" &&
            processName != "GammaXTRadiator" &&
            processName != "StrawXTRadiator" &&
-           processName != "RegularXTRadiator") {
+           processName != "RegularXTRadiator" &&
+           processName != "G4MaxTimeCuts" ) {
            
         G4String text = "Unknown process control for ";
         text += processName;

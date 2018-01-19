@@ -239,9 +239,10 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("specialCutForElectron", kPStop); 
   mcMap->Add("MinEkineCuts", kPStop); 
   mcMap->Add("G4MinEkineCuts", kPStop); 
-  mcMap->Add("MaxTimeCuts", kPStop); 
+  mcMap->Add("MaxTimeCuts", kPStop);
+  mcMap->Add("G4MaxTimeCuts", kPStop);
   mcMap->Add("stackPopper", kPUserDefined);   
-}  
+}
 //
 // protected methods
 //
