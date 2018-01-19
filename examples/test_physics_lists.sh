@@ -22,8 +22,8 @@ OUTDIR=$CURDIR/log/test_physics_lists
 # Define path to optional data files
 #
 # 10.4
-DATAPATH=/work/packages/geant4/data
-export G4LENDDATA=/Users/ivana/work/packages/geant4/data/GND_after2013/v1.3
+DATAPATH=/Users/ivana/work/packages/geant4/data
+export G4LENDDATA=$DATAPATH/GND_after2013/v1.3
 export G4PROTONHPDATA=$DATAPATH/G4TENDL1.3.2
 # 10.3
 # DATAPATH=/work/packages/geant4/data
