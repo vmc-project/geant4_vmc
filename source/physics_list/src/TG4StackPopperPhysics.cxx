@@ -73,6 +73,9 @@ void TG4StackPopperPhysics::ConstructProcess()
     G4ParticleDefinition* particle = aParticleIterator->value();
     G4ProcessManager* pmanager = particle->GetProcessManager();
 
+    // skip particles which do not have process manager
+    if ( ! pmanager ) continue;
+
     // add this as an option
     if ( fSelection.size() == 0 ||
          fSelection.find(particle->GetParticleName()) != std::string::npos ) {

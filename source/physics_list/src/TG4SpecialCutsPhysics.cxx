@@ -103,6 +103,10 @@ void TG4SpecialCutsPhysics::ConstructProcess()
   while ((*aParticleIterator)())
   {
     G4ParticleDefinition* particle = aParticleIterator->value();
+
+    // skip particles which do not have process manager
+    if ( ! particle->GetProcessManager() ) continue;
+
     TG4G3ParticleWSP particleWSP 
       = g3PhysicsManager->GetG3ParticleWSP(particle);
     G4String name =

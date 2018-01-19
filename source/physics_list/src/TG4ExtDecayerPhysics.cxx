@@ -93,6 +93,9 @@ void TG4ExtDecayerPhysics::ConstructProcess()
   {    
     G4ParticleDefinition* particle = aParticleIterator->value();
     G4ProcessManager* pmanager = particle->GetProcessManager();
+
+    // skip particles which do not have process manager
+    if ( ! pmanager ) continue;
     
     if ( fSelection.find(particle->GetParticleName()) != std::string::npos ) {
 

@@ -207,6 +207,9 @@ void TG4FastSimulationPhysics::AddFastSimulationProcess(
            continue;
       }
 
+      // skip particles which do not have process manager
+      if ( ! particle->GetProcessManager() ) continue;
+
       if ( VerboseLevel() > 2 ) {
         G4cout << "Adding model " << modelName
                << " to particle " <<  particle->GetParticleName() << G4endl;

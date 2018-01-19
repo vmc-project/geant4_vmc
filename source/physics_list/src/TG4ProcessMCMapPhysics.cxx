@@ -269,6 +269,9 @@ void TG4ProcessMCMapPhysics::ConstructProcess()
   aParticleIterator->reset();
   while ((*aParticleIterator)())
   {
+    // skip iteration if particle does not have a process manager
+    if ( ! aParticleIterator->value()->GetProcessManager() ) continue;
+
     G4ProcessVector* processVector 
       = aParticleIterator->value()->GetProcessManager()->GetProcessList();
 

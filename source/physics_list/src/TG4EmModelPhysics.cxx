@@ -127,6 +127,16 @@ void TG4EmModelPhysics::AddModel(
 /// Add selected EM model to given particle, process and region.
 /// If regionName is not set, the model is set to the world region.
 
+  if ( ! particle->GetProcessManager() ) {
+    TString message;
+    message = "Cannot add EM model to ";
+    message = particle->GetParticleName();
+    message += " : particle has not defined process manager";
+    TG4Globals::Warning(
+     "TG4EmModelPhysics", "AddMOdel", message);
+    return;
+  }
+
   // Get process name
   G4ProcessVector* processVector
     = particle->GetProcessManager()->GetProcessList();

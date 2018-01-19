@@ -282,6 +282,7 @@ void TG4PhysicsManager::SetSpecialControlsActivation()
     if ( ! particle ) continue;
 
     G4ProcessManager* processManager = particle->GetProcessManager(); 
+    if ( ! processManager ) continue;
       
     G4ProcessVector* processVector = processManager->GetProcessList();
   
