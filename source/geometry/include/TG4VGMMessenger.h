@@ -73,7 +73,12 @@ class TG4VGMMessenger: public G4UImessenger
     /// instances counter
     static G4int           fgCounter;
 
+    // methods
+    void CreateVGMExporter();
+
     // data members
+    G4String               fGeometryInput;  ///< The geometry input type (Root/Geant4)
+    G4String               fXmlFormat;      ///< The XML format
     VGM::IFactory*         fImportFactory;  ///< VGM factory for import
     Geant4GM::Factory*     fG4Factory;      ///< Geant4 VGM Factory
     RootGM::Factory*       fRootFactory;    ///< Root VGM Factory

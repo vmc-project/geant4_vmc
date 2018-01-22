@@ -39,6 +39,8 @@ G4int                    TG4VGMMessenger::fgCounter = 0;
 TG4VGMMessenger::TG4VGMMessenger(const G4String& xmlFormat,
                                  const G4String& userGeometry)
   : G4UImessenger(),
+    fGeometryInput(),
+    fXmlFormat(xmlFormat),
     fImportFactory(0),
     fG4Factory(0),
     fRootFactory(0),
@@ -50,23 +52,14 @@ TG4VGMMessenger::TG4VGMMessenger(const G4String& xmlFormat,
   if ( userGeometry == "geomVMCtoGeant4"  ||
        userGeometry == "geomRootToGeant4" ||
        userGeometry == "geomGeant4" ) {
-    fG4Factory = new Geant4GM::Factory();
-    fImportFactory = fG4Factory;
+    fGeometryInput = "geant4";
   }
 
   if ( userGeometry == "geomVMCtoRoot"    ||
        userGeometry == "geomRoot"      ) {
-    fRootFactory = new RootGM::Factory();
-    fImportFactory = fRootFactory;
+    fGeometryInput = "root";
   }  
   
-  fImportFactory->SetIgnore(true);
-
-  if (xmlFormat == "AGDD")
-    fXmlVGMExporter = new XmlVGM::AGDDExporter(fImportFactory);
-  if (xmlFormat == "GDML")
-    fXmlVGMExporter = new XmlVGM::GDMLExporter(fImportFactory);
-
   if (!fgDirectory) {
     fgDirectory = new G4UIdirectory("/vgm/");
     fgDirectory->SetGuidance("XML geometry generator control commands.");
@@ -139,6 +132,24 @@ TG4VGMMessenger::~TG4VGMMessenger()
   delete fSetNameSeparatorCmd;
 }
 
+// private methods
+
+//_____________________________________________________________________________
+void TG4VGMMessenger::CreateVGMExporter()
+{
+/// Create VGM exporter if it does not yet exist
+// ---
+
+  if ( ! fXmlVGMExporter ) {
+    // Create VGM exporter if not yet done
+    if ( fXmlFormat == "AGDD" ) {
+      fXmlVGMExporter = new XmlVGM::AGDDExporter(fImportFactory);
+    }
+    if ( fXmlFormat == "GDML" ) {
+      fXmlVGMExporter = new XmlVGM::GDMLExporter(fImportFactory);
+    }
+  }
+}
 
 // public methods
   
@@ -160,14 +171,20 @@ void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
       return;  
   }  
         
-  if ( fImportFactory == fG4Factory && !fG4Factory->Top()) {
+  if ( fGeometryInput == "geant4" && (! fG4Factory) ) {
     // Import Geant4 geometry in VGM
+    fG4Factory = new Geant4GM::Factory();
+    fImportFactory = fG4Factory;
+    fImportFactory->SetIgnore(true);
     // fG4Factory->SetDebug(1);
     fG4Factory->Import(TG4GeometryServices::Instance()->GetWorld());
   }
     
-  if ( fImportFactory == fRootFactory && !fRootFactory->Top()) {
+  if ( fGeometryInput == "root" && (! fRootFactory) ) {
     // Import Root geometry in VGM
+    fRootFactory = new RootGM::Factory();
+    fImportFactory = fRootFactory;
+    fImportFactory->SetIgnore(true);
     // fRootFactory->SetDebug(1);
     fRootFactory->Import(gGeoManager->GetTopNode());
   }  
@@ -182,6 +199,9 @@ void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
   }
 
   if ( command == fGenerateXMLCmd ) {    
+
+    CreateVGMExporter();
+
     if (newValues == "") 
       fXmlVGMExporter->GenerateXMLGeometry();
     else 
@@ -189,11 +209,13 @@ void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
   }        
 
   if (command == fSetXMLNumWidthCmd) {    
-      fXmlVGMExporter->SetNumWidth(fSetXMLNumWidthCmd->GetNewIntValue(newValues));
+    CreateVGMExporter();
+    fXmlVGMExporter->SetNumWidth(fSetXMLNumWidthCmd->GetNewIntValue(newValues));
   }        
 
   if (command == fSetXMLNumPrecisionCmd) {    
-      fXmlVGMExporter->SetNumPrecision(fSetXMLNumPrecisionCmd->GetNewIntValue(newValues));
+    CreateVGMExporter();
+    fXmlVGMExporter->SetNumPrecision(fSetXMLNumPrecisionCmd->GetNewIntValue(newValues));
   }        
 
 }
