@@ -405,4 +405,8 @@ echo " "
 
 cd $CURDIR
 
+# Clean-up generated files
+rm -f */Example*.root
+rm -f */gphysi.dat
+
 exit $FAILED

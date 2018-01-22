@@ -38,7 +38,7 @@ do
   # run G3 + TGeo navigation
   echo "... Running example $EXAMPLE with G3 + TGeo" 
   root.exe -q -b load_g3.C run_g3.C\(\"g3tgeoConfig.C\"\) >& run_g3tgeo.out
-  
+
   # run G4
   echo "... Running example $EXAMPLE with G4" 
   root.exe -q -b load_g4.C run_g4.C  >& run_g4.out
@@ -62,6 +62,9 @@ do
     root.exe -q -b load_g4.C run_g4.C\(\"g4Config2.C\"\)  >& run_g4pl.out
   fi
 
+  # clean-up generated files
+  rm -f Example*.root
+  rm -f gphysi.dat
 done
         
 cd $CURDIR

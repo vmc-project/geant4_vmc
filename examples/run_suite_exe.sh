@@ -64,6 +64,10 @@ do
     $EXE >& $OUT/g4vmc_example$EXAMPLE.out
   fi  
   echo " "
+
+  # clean-up generated files
+  rm -f Example*.root
+  rm -f gphysi.dat
 done  
   
 cd $CURDIR
