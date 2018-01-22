@@ -7,7 +7,7 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file ExExGarfield/src/Hit.cxx 
+/// \file ExGarfield/src/Hit.cxx
 /// \brief Implementation of the ExGarfield::Hit class 
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.

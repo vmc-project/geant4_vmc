@@ -7,7 +7,7 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file ExExExGarfield/src/PrimaryGenerator.cxx 
+/// \file ExGarfield/src/PrimaryGenerator.cxx
 /// \brief Implementation of the ExGarfield::PrimaryGenerator class 
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
