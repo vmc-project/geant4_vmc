@@ -1,19 +1,11 @@
-  *******************************************
-  *                                         *
-  *        W E L C O M E  to  R O O T       *
-  *                                         *
-  *   Version   5.34/36      5 April 2016   *
-  *                                         *
-  *  You are welcome to visit our Web site  *
-  *          http://root.cern.ch            *
-  *                                         *
-  *******************************************
+   ------------------------------------------------------------
+  | Welcome to ROOT 6.12/04                http://root.cern.ch |
+  |                               (c) 1995-2017, The ROOT Team |
+  | Built for macosx64                                         |
+  | From tag v6-12-04, 13 December 2017                        |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
+   ------------------------------------------------------------
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
-
-CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
-Type ? for help. Commands must be C++ statements.
-Enclose multiple statements between { }.
 
 Processing load_g3.C...
 Loading Geant3 libraries ... finished
@@ -56,11 +48,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 939.295       total track length (cm):  45.0105
    Gap:      total energy (MeV): 36.4053       total track length (cm):  15.9358
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    47919263     2DB309F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    97609567     5D1675F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    42509197    47919263
-                                        HEX     288A38D     2DB309F
+          with Store/Table at absolute adrs    92199501    97609567
+                                        HEX     57EDA4D     5D1675F
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -96,22 +88,14 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  **** GTRIGI: IEVENT=      5 IDEVT=      5 Random Seeds =       4357           0
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10
-  *******************************************
-  *                                         *
-  *        W E L C O M E  to  R O O T       *
-  *                                         *
-  *   Version   5.34/36      5 April 2016   *
-  *                                         *
-  *  You are welcome to visit our Web site  *
-  *          http://root.cern.ch            *
-  *                                         *
-  *******************************************
+   ------------------------------------------------------------
+  | Welcome to ROOT 6.12/04                http://root.cern.ch |
+  |                               (c) 1995-2017, The ROOT Team |
+  | Built for macosx64                                         |
+  | From tag v6-12-04, 13 December 2017                        |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
+   ------------------------------------------------------------
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
-
-CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
-Type ? for help. Commands must be C++ statements.
-Enclose multiple statements between { }.
 
 Processing load_g3.C...
 Loading Geant3 libraries ... finished
@@ -478,11 +462,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   3.967       total track length (cm):    2.241
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    20335775     1364C9F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    97791839     5D42F5F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    14925709    20335775
-                                        HEX      E3BF8D     1364C9F
+          with Store/Table at absolute adrs    92381773    97791839
+                                        HEX     581A24D     5D42F5F
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -504,22 +488,14 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
 
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
-  *******************************************
-  *                                         *
-  *        W E L C O M E  to  R O O T       *
-  *                                         *
-  *   Version   5.34/36      5 April 2016   *
-  *                                         *
-  *  You are welcome to visit our Web site  *
-  *          http://root.cern.ch            *
-  *                                         *
-  *******************************************
+   ------------------------------------------------------------
+  | Welcome to ROOT 6.12/04                http://root.cern.ch |
+  |                               (c) 1995-2017, The ROOT Team |
+  | Built for macosx64                                         |
+  | From tag v6-12-04, 13 December 2017                        |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
+   ------------------------------------------------------------
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
-
-CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
-Type ? for help. Commands must be C++ statements.
-Enclose multiple statements between { }.
 
 Processing load_g3.C...
 Loading Geant3 libraries ... finished
@@ -622,11 +598,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    40722591     26D609F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    86395743     5264B5F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    35312525    40722591
-                                        HEX     21AD38D     26D609F
+          with Store/Table at absolute adrs    80985677    86395743
+                                        HEX     4D3BE4D     5264B5F
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -648,22 +624,14 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
 
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
-  *******************************************
-  *                                         *
-  *        W E L C O M E  to  R O O T       *
-  *                                         *
-  *   Version   5.34/36      5 April 2016   *
-  *                                         *
-  *  You are welcome to visit our Web site  *
-  *          http://root.cern.ch            *
-  *                                         *
-  *******************************************
+   ------------------------------------------------------------
+  | Welcome to ROOT 6.12/04                http://root.cern.ch |
+  |                               (c) 1995-2017, The ROOT Team |
+  | Built for macosx64                                         |
+  | From tag v6-12-04, 13 December 2017                        |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
+   ------------------------------------------------------------
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
-
-CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
-Type ? for help. Commands must be C++ statements.
-Enclose multiple statements between { }.
 
 Processing load_g3.C...
 Loading Geant3 libraries ... finished
@@ -710,11 +678,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 1593.45       total track length (cm):  75.6226
    Gap:      total energy (MeV): 72.9199       total track length (cm):  35.7201
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    59421855     38AB49F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   111733599     6A8EB5F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    54011789    59421855
-                                        HEX     338278D     38AB49F
+          with Store/Table at absolute adrs   106323533   111733599
+                                        HEX     6565E4D     6A8EB5F
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -736,22 +704,14 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
 
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
-  *******************************************
-  *                                         *
-  *        W E L C O M E  to  R O O T       *
-  *                                         *
-  *   Version   5.34/36      5 April 2016   *
-  *                                         *
-  *  You are welcome to visit our Web site  *
-  *          http://root.cern.ch            *
-  *                                         *
-  *******************************************
+   ------------------------------------------------------------
+  | Welcome to ROOT 6.12/04                http://root.cern.ch |
+  |                               (c) 1995-2017, The ROOT Team |
+  | Built for macosx64                                         |
+  | From tag v6-12-04, 13 December 2017                        |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
+   ------------------------------------------------------------
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
-
-CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
-Type ? for help. Commands must be C++ statements.
-Enclose multiple statements between { }.
 
 Processing load_g3.C...
 Loading Geant3 libraries ... finished
@@ -1127,11 +1087,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   2.957       total track length (cm):    1.496
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    60166303     396109F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   123037535     755675F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    54756237    60166303
-                                        HEX     343838D     396109F
+          with Store/Table at absolute adrs   117627469   123037535
+                                        HEX     702DA4D     755675F
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
