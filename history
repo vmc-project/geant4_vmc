@@ -9,6 +9,20 @@
      
 Tags (history):
 ===============
+  22/01/2018
+  v3-6:
+    All packages:
+    - Migration to Geant4 10.4
+
+    Geant4 VMC:
+    - Improved VGM messenger: the VGM objects are created only when processing a
+      command. (This prevents from creating an empty ROOT geometry named VGM which
+      name may then persist in a user real geometry.)
+
+    Tested with Geant4 10.04 (with embedded CLHEP 2.4.0.0)
+      Root 6.12/04 and 5.34/36, VGM 4.4, Garfield v1.0
+
+
   27/10/2017
   v3-5:
     Geant4 VMC:

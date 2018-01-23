@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2014 - 2016 Ivana Hrivnacova
+// Copyright (C) 2014 - 2018 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -15,7 +15,7 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#define GEANT4_VMC_RELEASE "3.5"
-#define GEANT4_VMC_RELEASE_DATE "27 October 2017"
+#define GEANT4_VMC_RELEASE "3.6"
+#define GEANT4_VMC_RELEASE_DATE "23 January 2018"
 
 #endif //TG4_VERSION_H
