@@ -81,7 +81,19 @@ add_library(mtroot ${sources} ${headers})
 target_link_libraries(mtroot ${ROOT_LIBRARIES})
 
 #----Installation---------------------------------------------------------------
-install(DIRECTORY include/ DESTINATION include/mtroot)
+#install(DIRECTORY include/ DESTINATION include/mtroot)
+install(FILES
+        include/TMCRootManager.h
+        include/TMCRootManagerImpl.h
+        include/TMCRootManagerMT.h
+        include/TVirtualMCRootManager.h
+        DESTINATION include/mtroot)
+if (ROOT_FOUND_VERSION LESS_EQUAL 60804)
+  install(FILES
+        include/TMCAutoLock.h
+        DESTINATION include/mtroot)
+endif()
+
 install(TARGETS mtroot EXPORT MTRootTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 #--- Build project configuration -----------------------------------------------
