@@ -1,6 +1,6 @@
 #------------------------------------------------
 # The Geant4 Virtual Monte Carlo package
-# Copyright (C) 2014 - 2017 Ivana Hrivnacova
+# Copyright (C) 2014 - 2018 Ivana Hrivnacova
 # All rights reserved.
 #
 # For the licensing terms see geant4_vmc/LICENSE.
@@ -24,7 +24,7 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
 endif()
 
 #--- Define CMake requirements -------------------------------------------------
-cmake_minimum_required(VERSION 2.6.4 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 
 #--- Prepend our own CMake Modules to the search path --------------------------
 set(CMAKE_MODULE_PATH 

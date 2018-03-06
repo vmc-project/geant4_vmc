@@ -1,6 +1,6 @@
 #------------------------------------------------
 # The Geant4 Virtual Monte Carlo package
-# Copyright (C) 2014 Ivana Hrivnacova
+# Copyright (C) 2014 - 2018 Ivana Hrivnacova
 # All rights reserved.
 #
 # For the licensing terms see geant4_vmc/LICENSE.
@@ -11,7 +11,7 @@
 # I. Hrivnacova, 24/04/2014
 
 #---CMake required version -----------------------------------------------------
-cmake_minimum_required(VERSION 2.6.4 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 
 #---Project G4Root -------------------------------------------------------------
 #
