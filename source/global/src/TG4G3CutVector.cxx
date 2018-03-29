@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2018 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -290,15 +290,23 @@ G4double TG4G3CutVector::GetMinEkineForGamma(const G4Track& track) const
 /// Cut is not applied for "opticalphoton" which is treated in G4 as a 
 /// particle different from "gamma".
 
-  const G4VProcess* kpCreatorProcess = track.GetCreatorProcess();
-  G4String processName = "";
-  if (kpCreatorProcess) processName = kpCreatorProcess->GetProcessName();
+  // Special treatment of bremstrahlung threshold:
+  // apply the BCUT*  in the first step only
+  if ( track.GetCurrentStepNumber() == 1 ) {
 
-  if ( processName == "eBrem" ) {
-    return fCutVector[kBCUTE];
-  }     
-  else if ( processName == "muBrems" || processName == "hBrems" ) { 
-    return fCutVector[kBCUTM];
+    const G4VProcess* kpCreatorProcess = track.GetCreatorProcess();
+    G4String processName = "";
+    if (kpCreatorProcess) processName = kpCreatorProcess->GetProcessName();
+
+    if ( processName == "eBrem" ) {
+      return fCutVector[kBCUTE];
+    }
+    else if ( processName == "muBrems" || processName == "hBrems" ) {
+      return fCutVector[kBCUTM];
+    }
+    else {
+      return fCutVector[kCUTGAM];
+    }
   }
   else {
     return fCutVector[kCUTGAM];
@@ -315,41 +323,43 @@ G4double TG4G3CutVector::GetMinEkineForElectron(const G4Track& track) const
 ///           (default) 
 /// - 10 TeV - if e- is produced by ionisation and DRAY process is
 ///            switched off
-/// - 0.     - if  e- is produced by muon pair production.
-///            (The PPCUTM cut is applied on total energy of the e+e- pair)
 /// - CUTELE - in all other cases.
+/// The delta ray cuts are applied only in the track first step.
 
-  const G4VProcess* kpCreatorProcess = track.GetCreatorProcess();
-  G4String processName = "";
-  if (kpCreatorProcess) processName = kpCreatorProcess->GetProcessName();
+  // Special treatment of delta rays threashold:
+  // apply the DCUT* in the first step only
+  if ( track.GetCurrentStepNumber() == 1 ) {
 
-  if ( processName == "eIoni" ) {
-    // delta rays by e-, e+
-    if ( fDeltaRaysOn ) 
-      return fCutVector[kDCUTE];
-    else 
-      return fgkDCUTEOff;
-  }
-  else if ( processName == "muIoni" ) {
-    // delta rays by mu
-    if ( fDeltaRaysOn ) 
-      return fCutVector[kDCUTM];
-    else 
-      return fgkDCUTMOff;
-  }
-  else if ( processName == "hIoni" || processName == "ionIoni" ) {
-    // delta rays by other particles
-    if ( fDeltaRaysOn ) 
+    const G4VProcess* kpCreatorProcess = track.GetCreatorProcess();
+    G4String processName = "";
+    if (kpCreatorProcess) processName = kpCreatorProcess->GetProcessName();
+
+    if ( processName == "eIoni" ) {
+      // delta rays by e-, e+
+      if ( fDeltaRaysOn )
+        return fCutVector[kDCUTE];
+      else
+        return fgkDCUTEOff;
+    }
+    else if ( processName == "muIoni" ) {
+      // delta rays by mu
+      if ( fDeltaRaysOn )
+        return fCutVector[kDCUTM];
+      else
+        return fgkDCUTMOff;
+    }
+    else if ( processName == "hIoni" || processName == "ionIoni" ) {
+      // delta rays by other particles
+      if ( fDeltaRaysOn )
+        return fCutVector[kCUTELE];
+      else
+        return fgkDCUTMOff;
+    }
+    else {
       return fCutVector[kCUTELE];
-    else 
-      return fgkDCUTMOff;
+    }
   }
-  else if ( processName == "muPairProd" ) {
-    // direct pair production by muons
-    // the cut PPCUTM is applied on total energy of the e+e- pair 
-    return 0;
-  }  
-  else {   
+  else {
     return fCutVector[kCUTELE];
   }
 }
