@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2018 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -28,7 +28,8 @@ TG4SDManager* TG4SDManager::fgInstance = 0;
 //_____________________________________________________________________________
 TG4SDManager::TG4SDManager()
   : fSDConstruction(0),
-    fSDServices(0)
+    fSDServices(0),
+    fNameBuffer()
      
 {
 /// Default constructor
@@ -87,7 +88,8 @@ const char* TG4SDManager::VolName(Int_t id) const
 /// Return the name of the volume specified by volume ID
 /// ( = sensitive detector name)
 
-  return fSDServices->GetVolumeName(id);
+  fNameBuffer = fSDServices->GetVolumeName(id).c_str();
+  return fNameBuffer.data();
 }
 
 

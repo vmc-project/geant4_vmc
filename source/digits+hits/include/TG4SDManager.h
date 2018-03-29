@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2018 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -69,8 +69,9 @@ class TG4SDManager
     
     /// services related with sensitive detectors    
     TG4SDServices*      fSDServices;
-                                         
 
+    /// buffer for volume name
+    mutable G4String    fNameBuffer;
 };
 
 // inline methods
