@@ -1,6 +1,6 @@
 ------------------------------------------------
  The Virtual Monte Carlo package
- Copyright (C) 2007 - 2014 Ivana Hrivnacova
+ Copyright (C) 2007 - 2018 Ivana Hrivnacova
  All rights reserved.
 
  For the licensing terms see geant4_vmc/LICENSE.
@@ -9,6 +9,25 @@
      
 Tags (history):
 ===============
+  30/03/2018
+  v3-2-p2:
+    Patch release, including following fixes:
+    Geant4 VMC:
+      - Fixes in application of VMC cuts:
+        the DCUTE, DCUTM, BCUTE, BCUTM cuts are applied only in the track first step
+        what emulates a production cut
+        (This fixes the problem reported by ALICE, JIRA ALIROOT-7121)
+      - Fix in implementation of TVirtualMC::VolName(Int_t volId)
+        (thank to A. Morsch, CERN for reporting the problem)
+      - Fix in applying stack popper process:
+        Do not force the exclusive step when the parent track is suspended;
+        this fixes the problem observed in ALICE simulation when running with optical
+        processes with the default stacking of photons produced by Cerenkov
+        (secondaries are tracked before their parent track finishes).
+
+    Tested with Geant4 10.01.p03 (with embedded CLHEP 2.2.0.4)
+      Root 5.34/36 and Root 6.12/04, VGM 4.3
+
   11/02/2016
   v3-2-p1:
     Patch release, including following fixes:
