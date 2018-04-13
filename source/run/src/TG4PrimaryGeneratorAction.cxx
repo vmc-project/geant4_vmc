@@ -65,7 +65,7 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
   
   G4int nofParticles = mcStack->GetNtrack();
   if (nofParticles <= 0) {
-    TG4Globals::Exception(
+    TG4Globals::Warning(
       "TG4PrimaryGeneratorAction", "TransformPrimaries",
       "No primary particles found on the stack.");
   }  
