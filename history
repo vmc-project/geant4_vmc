@@ -9,6 +9,17 @@
      
 Tags (history):
 ===============
+  13/04/2018
+  v3-2-p3:
+    Patch release, including following fixes:
+    Geant4 VMC:
+      - Allow to proceed empty events: issue just a warning (instead of an exception)
+        when there are no particles to be tracked.
+        (Requested by ALICE)
+
+    Tested with Geant4 10.01.p03 (with embedded CLHEP 2.2.0.4)
+      Root 5.34/36 and Root 6.12/04, VGM 4.3
+
   30/03/2018
   v3-2-p2:
     Patch release, including following fixes:
