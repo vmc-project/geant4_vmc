@@ -9,6 +9,23 @@
      
 Tags (history):
 ===============
+16/04/2018
+  v3-5-p1:
+    Patch release, including following fixes:
+    Geant4 VMC:
+      - Allow to proceed empty events: issue just a warning (instead of an exception)
+        when there are no particles to be tracked.
+        (Requested by ALICE)
+      - Fixes in application of VMC cuts:
+        the DCUTE, DCUTM, BCUTE, BCUTM cuts are applied only in the track first step
+        what emulates a production cut
+        (This fixes the problem reported by ALICE, JIRA ALIROOT-7121)
+      - Fix in implementation of TVirtualMC::VolName(Int_t volId)
+        (thank to A. Morsch, CERN for reporting the problem)
+
+    Tested with Geant4 10.03.p03 (with embedded CLHEP 2.3.4.3.)
+      Root 5.34/36, 6.12/04, VGM 4.4, Garfield v1.0
+
   27/10/2017
   v3-5:
     Geant4 VMC:
