@@ -83,7 +83,7 @@ TG4TrackingAction::~TG4TrackingAction()
 //
 
 //_____________________________________________________________________________
-void TG4TrackingAction::UserProcessHits(const G4Track* track)
+void TG4TrackingAction::UserProcessHits(const G4Track* /*track*/)
 {
 /// Let sensitive detector process the vertex step
 /// (this ensures compatibility with G3 that
@@ -104,12 +104,12 @@ void TG4TrackingAction::UserProcessHits(const G4Track* track)
          ->GetSensitiveDetector(
               pv->GetLogicalVolume()->GetSensitiveDetector());
 
-  if (tsd) tsd->UserProcessHits((G4Track*)track, 0);
+  if (tsd) tsd->ProcessHitsOnTrackStart();
 #else
   TG4SensitiveDetector* tsd
     = (TG4SensitiveDetector*) pv->GetLogicalVolume()->GetSensitiveDetector();
 
-  if (tsd) tsd->UserProcessHits((G4Track*)track, 0);
+  if (tsd) tsd->ProcessHitsOnTrackStart();
 #endif  
 }
 

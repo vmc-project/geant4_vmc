@@ -17,6 +17,7 @@
 #include "TG4ParticlesManager.h"
 #include "TG4TrackManager.h"
 #include "TG4StateManager.h"
+#include "TG4SDServices.h"
 #include "TG4Globals.h"
 
 #include <G4Event.hh>
@@ -29,6 +30,7 @@
 #include <TVirtualMC.h>
 #include <TVirtualMCStack.h>
 #include <TVirtualMCApplication.h>
+#include <TVirtualMCSensitiveDetector.h>
 #include <TSystem.h>
 
 #include <math.h>
@@ -133,7 +135,14 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
     G4int nofAllTracks = fTrackManager->GetNofTracks();
     G4cout  << "    " << nofAllTracks << 
                   " all tracks processed." << G4endl;
-  }               
+  }
+
+  // User SDs finish event
+  if ( TG4SDServices::Instance()->GetUserSDs() ) {
+    for (auto& userSD : (*TG4SDServices::Instance()->GetUserSDs()) ) {
+      userSD->EndOfEvent();
+    }
+  }
 
   // VMC application finish event
   fMCApplication->FinishEvent();

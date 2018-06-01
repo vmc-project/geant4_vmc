@@ -901,6 +901,37 @@ Int_t TGeant4::VolId2Mate(Int_t id) const
 } 
 
 //
+// methods for sensitive detectors
+//
+
+//_____________________________________________________________________________
+void TGeant4::SetSensitiveDetector(const TString& volName, TVirtualMCSensitiveDetector* sd)
+{
+  if ( ! CheckApplicationState("SetSensitiveDetector", kConstructSD ) )
+    return;
+
+  fSDManager->SetSensitiveDetector(volName, sd);
+}
+
+//_____________________________________________________________________________
+TVirtualMCSensitiveDetector* TGeant4::GetSensitiveDetector(const TString& volName) const
+{
+  if ( ! CheckApplicationState("SetSensitiveDetector", kConstructSD, true ) )
+    return 0;
+
+  return fSDManager->GetSensitiveDetector(volName);
+}
+
+//_____________________________________________________________________________
+void TGeant4::SetExclusiveSDScoring(Bool_t exclusiveSDScoring)
+{
+  if ( ! CheckApplicationState("SetSensitiveDetector", kConstructSD, true ) )
+    return;
+
+  fSDManager->SetExclusiveSDScoring(exclusiveSDScoring);
+}
+
+//
 // methods for physics management
 //
  

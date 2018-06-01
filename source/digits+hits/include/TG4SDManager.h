@@ -22,6 +22,8 @@
 class TG4SDServices;
 class TG4SDConstruction;
 
+class TVirtualMCSensitiveDetector;
+
 /// \ingroup digits_hits
 /// \brief Geant4 implementation of the TVirtualMC interface methods                    
 /// for access to Geant4 geometry related with sensitive detectors.
@@ -48,6 +50,10 @@ class TG4SDManager
     const char*  VolDaughterName(const char* volName, Int_t i) const;
     Int_t        VolDaughterCopyNo(const char* volName, Int_t i) const;
     Int_t VolId2Mate(Int_t volumeId) const;
+
+    void SetSensitiveDetector(const TString& volName, TVirtualMCSensitiveDetector* sd);
+    TVirtualMCSensitiveDetector* GetSensitiveDetector(const TString& volName) const;
+    void SetExclusiveSDScoring(Bool_t exclusiveSDScoring);
 
     // get methods
     TG4SDConstruction* GetSDConstruction() const;

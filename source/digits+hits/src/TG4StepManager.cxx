@@ -942,6 +942,24 @@ Double_t TG4StepManager::Edep() const
 }
 
 //_____________________________________________________________________________
+Double_t TG4StepManager::NIELEdep() const
+{
+/// Return the non-ionizing energy deposit in this step.
+
+  if ( fStepStatus == kNormalStep ) {
+
+#ifdef MCDEBUG
+    CheckStep("NIELEdep");
+#endif
+
+    return fStep->GetNonIonizingEnergyDeposit()/TG4G3Units::Energy();
+  }
+
+  // return 0. in other cases (including kBoundary, kGflashSpot)
+  return 0;
+}
+
+//_____________________________________________________________________________
 Int_t TG4StepManager::TrackPid() const
 {   
 /// Return the current particle PDG encoding.

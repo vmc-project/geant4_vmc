@@ -36,6 +36,7 @@ class TGeoHMatrix;
 class TArrayD;
 class TString;
 class TVirtualMCApplication;
+class TVirtualMCSensitiveDetector;
 
 /// \ingroup run
 /// \brief Implementation of the TVirtualMC interface for Geant4.                      
@@ -190,6 +191,15 @@ class TGeant4: public TVirtualMC
     virtual Int_t VolId2Mate(Int_t id) const;
 
     //
+    // methods for sensitive detectors
+    // ------------------------------------------------
+    //
+
+    virtual void SetSensitiveDetector(const TString& volName, TVirtualMCSensitiveDetector* sd);
+    virtual TVirtualMCSensitiveDetector* GetSensitiveDetector(const TString& volName) const;
+    virtual void SetExclusiveSDScoring(Bool_t exclusiveSDScoring);
+
+    //
     // methods for physics management
     // ------------------------------------------------
     //
@@ -280,6 +290,7 @@ class TGeant4: public TVirtualMC
     virtual Double_t TrackLength() const; 
     virtual Double_t TrackTime() const;
     virtual Double_t Edep() const;
+    virtual Double_t NIELEdep() const;
         // static properties
     virtual Int_t    TrackPid() const;
     virtual Double_t TrackCharge() const;

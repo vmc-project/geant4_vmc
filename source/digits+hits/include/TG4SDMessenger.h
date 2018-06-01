@@ -22,15 +22,18 @@ class TG4SDConstruction;
 
 class G4UIcmdWithAString;
 class G4UIcmdWithABool;
+class G4UIcmdWithoutParameter;
 
 /// \ingroup physics_list
 /// \brief Messenger class that defines commands for the SD construction
 ///
 /// Implements commands:
 /// - /mcDet/addSDSelection volName1 [volName2 ...]
-/// - /mcDet/setSDSelectionFromTGeo  [true|false]
+/// - /mcDet/setSDSelectionFromTGeo  true|false
 /// - /mcDet/setSVLabel label 
-/// - /mcDet/setGflash  [true|false]
+/// - /mcDet/setGflash  true|false
+/// - /mcDet/setExclusiveSDScoring true|false
+/// - /mcDet/printUserSDs
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -68,6 +71,12 @@ class TG4SDMessenger: public G4UImessenger
 
     /// setGflash command
     G4UIcmdWithABool*   fSetGflashCmd;
-};    
+
+    /// setExclusiveSDScoring command
+    G4UIcmdWithABool*   fSetExclusiveSDScoringCmd;
+
+    /// command: printVolumes
+    G4UIcmdWithoutParameter*  fPrintUserSDsCmd;
+};
 
 #endif //TG4_SD_MESSENGER_H

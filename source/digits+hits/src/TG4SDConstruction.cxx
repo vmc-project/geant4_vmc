@@ -25,17 +25,19 @@
 #include <G4Threading.hh>
 
 #include <TVirtualMCApplication.h>
+#include <TVirtualMCSensitiveDetector.h>
 #include <TGeoManager.h>
 #include <TGeoVolume.h>
 
 #include <TVirtualMC.h>
 
-const G4String  TG4SDConstruction::fgkDefaultSVLabel = "SV";
+const G4String TG4SDConstruction::fgkDefaultSVLabel = "SV";
 
 //_____________________________________________________________________________
 TG4SDConstruction::TG4SDConstruction()
   : TG4Verbose("SDConstruction"),
     fMessenger(this),
+    fExclusiveSDScoring(false),
     fSelectionFromTGeo(false),
     fSVLabel(fgkDefaultSVLabel), 
     fSelection(),
@@ -55,47 +57,50 @@ TG4SDConstruction::~TG4SDConstruction()
 //
 
 //_____________________________________________________________________________
-G4int TG4SDConstruction::CreateSD(G4LogicalVolume* lv) const
+void TG4SDConstruction::CreateSD(G4LogicalVolume* lv,
+                                 TVirtualMCSensitiveDetector* userSD) const
 { 
 /// Create/retrieve a sensitive detector for the given logical volume.
-/// Return the ID of created/retrievd sensitive detector,
 
   TG4GeometryServices* geometryServices = TG4GeometryServices::Instance();
   G4SDManager* pSDManager = G4SDManager::GetSDMpointer();
 
-  G4String lvName = lv->GetName();   
-  G4String sdName = "/" + lvName;
+  G4String sdName;
+  if ( userSD ) {
+    sdName = userSD->GetName();
+  } else {
+    G4String lvName = lv->GetName();
+    sdName = "/" + lvName;
+    // cut copy number from sdName
+    sdName = geometryServices->UserVolumeName(sdName);
+  }
 
-  // cut copy number from sdName
-  sdName = geometryServices->UserVolumeName(sdName);
-  
   // create/retrieve the sensitive detector
-  G4VSensitiveDetector* sd = 0; 
+  G4VSensitiveDetector* sd = 0;
   sd = pSDManager->FindSensitiveDetector(sdName, false);
-  if (!sd) {
+  if ( ! sd ) {
 
     G4int mediumId = TG4GeometryServices::Instance()->GetMediumId(lv);
 
     TG4SensitiveDetector* newSD = 0;
     if ( fIsGflash ) {
       newSD = new TG4GflashSensitiveDetector(sdName, mediumId);
-    } else {
+    } else if ( userSD ) {
+      newSD = new TG4SensitiveDetector(userSD, mediumId, fExclusiveSDScoring);
+    } else  {
       newSD = new TG4SensitiveDetector(sdName, mediumId);
     }
     pSDManager->AddNewDetector(newSD);
 
     if (VerboseLevel() > 1) {
-      G4cout << "Sensitive detector " << sdName 
-             << "  ID="  << newSD->GetID() 
-             << "  medium ID="  << newSD->GetMediumID() 
+      G4cout << "Sensitive detector " << sdName
+             << "  ID="  << newSD->GetID()
+             << "  medium ID="  << newSD->GetMediumID()
              << " has been created." << G4endl;
     }
-                 
-    sd = newSD;  
-  }        
-  lv->SetSensitiveDetector(sd);             
-  
-  return ((TG4SensitiveDetector*)sd)->GetID();
+    sd = newSD;
+  }
+  lv->SetSensitiveDetector(sd);
 }
 
 //_____________________________________________________________________________
@@ -130,7 +135,64 @@ void  TG4SDConstruction::FillSDSelectionFromTGeo()
     TG4Globals::Warning(
       "TG4SDServices", "FillSDSelectionFromTGeo", text);
   }
-}        
+}
+
+//_____________________________________________________________________________
+void  TG4SDConstruction::MapVolumesToInstanceIds()
+{
+/// Define VMC volume Ids when new sensitive detectors framework is used.
+/// The volume Ids correspond to the Geant4 logical volume instance number.
+///
+/// A special care is needed whin combining the old way of geometry definition with the
+/// new sensitive detectors framework.  Note that in this case, if geometry is defined via
+/// the VMC functions like gsposp, then the "same" volume in the context of Geant3, which
+/// is represented by more than one logical volumes in Geant4, will have several volume ids.
+
+  G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
+  for ( G4int i=0; i<G4int(lvStore->size()); i++ ) {
+    G4LogicalVolume* lv = (*lvStore)[i];
+
+    if (VerboseLevel() > 1) {
+      G4cout << "Setting volId as instance Id "
+             << lv->GetInstanceID() + TG4SDServices::GetFirstVolumeId()
+             << " to " << lv->GetName() << G4endl;
+    }
+
+    TG4SDServices::Instance()->MapVolume(
+      lv,  lv->GetInstanceID() + TG4SDServices::GetFirstVolumeId(), false);
+  }
+}
+
+//_____________________________________________________________________________
+void  TG4SDConstruction::MapVolumesToSDIds()
+{
+/// Define VMC volume Ids if new sensitive detectors framework is not used, 
+/// The volume ID is defined via sensitive detector Id.
+/// The sensitive detector is associated with maximum one logical volume,
+/// that's why it can hold volume and medium Id.
+
+  // Set volume IDs to volumes which have not SD
+  G4int counter
+    = TG4SensitiveDetector::GetTotalNofSensitiveDetectors();
+
+  G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
+  for ( G4int i=0; i<G4int(lvStore->size()); i++ ) {
+    G4LogicalVolume* lv = (*lvStore)[i];
+
+    G4int id = 0;
+    if ( lv->GetSensitiveDetector() ) {
+      id = static_cast<TG4SensitiveDetector*>(lv->GetSensitiveDetector())->GetID();
+    } else {
+      id = counter++;
+    }
+
+    if (VerboseLevel() > 1) {
+      G4cout << "Setting volId as SD id " << id << " to " << lv->GetName() << G4endl;
+    }
+
+    TG4SDServices::Instance()->MapVolume(lv, id, true);
+  }
+}
 
 //
 // public methods
@@ -147,41 +209,76 @@ void TG4SDConstruction::Construct()
 
   G4bool isMaster = ! G4Threading::IsWorkerThread();
 
+  // Get volumes selected as SD in TGeo geometry
   if ( fSelectionFromTGeo && isMaster ) FillSDSelectionFromTGeo();
 
+  // Construct user SDs
+  TG4StateManager::Instance()->SetNewState(kConstructSD);
+  TVirtualMCApplication::Instance()->ConstructSensitiveDetectors();
+  TG4StateManager::Instance()->SetNewState(kNotInApplication);
+
+  G4bool isUserSD = false;
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
   
   for ( G4int i=0; i<G4int(lvStore->size()); i++ ) {
     G4LogicalVolume* lv = (*lvStore)[i];
-    // Create SD if selection is empty; 
-    // or if volume name is in selection if selection is defined
-    if ( ! fSelection.size() ||
-          fSelection.find(lv->GetName()) != fSelection.end() ) {
-      G4int sdID = CreateSD(lv);
-      if ( isMaster ) TG4SDServices::Instance()->MapVolume(lv, sdID);
+
+    // Check if a user SD is defined
+    TVirtualMCSensitiveDetector* userSD
+      = TG4SDServices::Instance()->GetUserSD(lv->GetName(), false);
+
+    // Create SD calling user sensitive detector
+
+    if ( userSD ) {
+      CreateSD(lv, userSD);
+      // if ( isMaster ) TG4SDServices::Instance()->MapVolume(lv, sdID);
+      isUserSD = true;
+    }
+    else {
+      // Create SD calling MCApplication::Stepping
+      // if exclusive scoring via user sensitive detectors is not activated and
+      // if selection is empty or if selection is defined and the volume name is in selection
+      if ( ( ! fExclusiveSDScoring ) &&
+           ( ! fSelection.size() ||
+             fSelection.find(lv->GetName()) != fSelection.end() ) ) {
+
+        CreateSD(lv, 0);
+      }
     }
   }    
 
-  if ( fSelection.size() ) {
-    // Set volume IDs to volumes which have not SD
-    G4int counter = TG4SensitiveDetector::GetTotalNofSensitiveDetectors();
-    for ( G4int i=0; i<G4int(lvStore->size()); i++ ) {
-      G4LogicalVolume* lv = (*lvStore)[i];
-      if ( ! lv->GetSensitiveDetector() ) 
-        if ( isMaster ) TG4SDServices::Instance()->MapVolume(lv, counter++);
+  // Define volume Ids if VMC SD is not defined for all volumes
+  // (either due to user defined SDs or user selection of sensitive volumes) 
+  if ( isMaster ) {
+    if ( isUserSD ) {
+      MapVolumesToInstanceIds();
     }
-  }    
-  
+    else {
+      MapVolumesToSDIds();
+    }
+  }
+
+  // Initialize user geometry
   TG4StateManager::Instance()->SetNewState(kInitGeometry);
   TVirtualMCApplication::Instance()->InitGeometry();
   TG4StateManager::Instance()->SetNewState(kNotInApplication);
+
+  // Initialize user SDs
+  if ( TG4SDServices::Instance()->GetUserSDs() ) {
+    for (auto& userSD : (*TG4SDServices::Instance()->GetUserSDs()) ) {
+      userSD->Initialize();
+    }
+  }
 
   if (VerboseLevel() > 1) {
     TG4SDServices::Instance()->PrintVolNameToIdMap();
     TG4SDServices::Instance()->PrintVolIdToLVMap();
     if ( fSelection.size() ) {
       TG4SDServices::Instance()->PrintSensitiveVolumes();
-    }  
+    }
+    if ( TG4SDServices::Instance()->GetUserSDs() ) {
+      TG4SDServices::Instance()->PrintUserSensitiveDetectors();
+    }
   }  
 
   if ( VerboseLevel() > 1 )

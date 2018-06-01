@@ -135,4 +135,30 @@ Int_t TG4SDManager::VolId2Mate(Int_t volumeId)  const
 
   return fSDServices->GetMediumId(volumeId);                                
 }
- 
+
+//_____________________________________________________________________________
+void TG4SDManager::SetSensitiveDetector(const TString& volName,
+                                        TVirtualMCSensitiveDetector* sd)
+{
+/// Set user sensitive detector to (a) volume(s) with the given name
+
+  fSDServices->MapUserSD(volName.Data(), sd);
+}
+
+//_____________________________________________________________________________
+TVirtualMCSensitiveDetector* TG4SDManager::GetSensitiveDetector(
+                                             const TString& volName) const
+{
+/// Return the user sensitive detector for a volume with the given name
+
+  return fSDServices->GetUserSD(volName.Data(), false);
+}
+
+//_____________________________________________________________________________
+void TG4SDManager::SetExclusiveSDScoring(Bool_t exclusiveSDScoring)
+{
+/// Set scoring option
+
+  fSDConstruction->SetExclusiveSDScoring(exclusiveSDScoring);
+}
+

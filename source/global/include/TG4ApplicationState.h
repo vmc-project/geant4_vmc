@@ -24,6 +24,7 @@ enum TG4ApplicationState
   kConstructGeometry,   ///< in ConstructGeometry
   kConstructOpGeometry, ///< in ConstructOpGeometry
   kMisalignGeometry,    ///< in MisalignGeometry
+  kConstructSD,         ///< in ConstructSensitiveDetectors
   kInitGeometry,        ///< in InitGeometry
   kAddParticles,        ///< in AddParticles
   kAddIons,             ///< in AddIons

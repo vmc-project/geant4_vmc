@@ -22,6 +22,8 @@
 
 class G4LogicalVolume;
 
+class TVirtualMCSensitiveDetector;
+
 /// \ingroup digits_hits
 /// \class TG4SDConstruction
 /// \brief Sensitive detector construction
@@ -49,19 +51,26 @@ class TG4SDConstruction : public TG4Verbose
     
     // set methods
     void AddSelection(const G4String& selection);
+    void SetExclusiveSDScoring(G4bool value);
     void SetSelectionFromTGeo(G4bool value);
     void SetSensitiveVolumeLabel(const G4String& label);
     void SetIsGflash(G4bool isGflash);
 
   private:
     // methods
-    G4int CreateSD(G4LogicalVolume* lv) const;
+    void  CreateSD(G4LogicalVolume* lv,
+                   TVirtualMCSensitiveDetector* userSD) const;
     void  FillSDSelectionFromTGeo();
+    void  MapVolumesToInstanceIds();
+    void  MapVolumesToSDIds();
     
     TG4SDMessenger  fMessenger;  ///< messenger
     
     /// default value of the sensitive volumes label
     static const G4String  fgkDefaultSVLabel; 
+
+    /// the flag to activate new scoring via user defined sensitive detectors
+    G4bool             fExclusiveSDScoring;
 
     /// the flag to activate retrieving sensitive volumes from TGeo
     G4bool             fSelectionFromTGeo;
@@ -83,6 +92,11 @@ inline const G4String& TG4SDConstruction::GetDefaultSVLabel() {
   /// (the string which is used to select sensitive volumes in TGeoGeometry)
   return fgkDefaultSVLabel;
 }  
+
+inline void TG4SDConstruction::SetExclusiveSDScoring(G4bool value) {
+  /// Set option to activate new scoring via user defined sensitive detectors
+  fExclusiveSDScoring = value;
+}
 
 inline void TG4SDConstruction::SetSelectionFromTGeo(G4bool value) {
   /// Set option to get the SD selection from TGeo

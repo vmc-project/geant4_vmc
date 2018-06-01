@@ -68,7 +68,8 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
     TG4Globals::Warning(
       "TG4PrimaryGeneratorAction", "TransformPrimaries",
       "No primary particles found on the stack.");
-  }  
+    return;
+  }
 
   if (VerboseLevel() > 1)
     G4cout << "TG4PrimaryGeneratorAction::TransformPrimaries: " 

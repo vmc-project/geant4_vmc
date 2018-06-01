@@ -311,6 +311,14 @@ inline Double_t TGeant4::Edep() const
 } 
 
 //_____________________________________________________________________________
+inline Double_t TGeant4::NIELEdep() const
+{
+/// Returns the total energy deposit in this step.
+
+  return fStepManager->NIELEdep();
+}
+
+//_____________________________________________________________________________
 inline Int_t TGeant4::TrackPid() const
 { 
 /// Returns the current particle PDG encoding.

@@ -14,10 +14,12 @@
 
 #include "TG4SDMessenger.h"
 #include "TG4SDConstruction.h"
+#include "TG4SDServices.h"
 
 #include <G4UIdirectory.hh>
 #include <G4UIcmdWithAString.hh>
 #include <G4UIcmdWithABool.hh>
+#include <G4UIcmdWithoutParameter.hh>
 
 //______________________________________________________________________________
 TG4SDMessenger::TG4SDMessenger(TG4SDConstruction* sdConstruction)
@@ -26,7 +28,9 @@ TG4SDMessenger::TG4SDMessenger(TG4SDConstruction* sdConstruction)
     fAddSDSelectionCmd(0),
     fSetSDSelectionFromTGeoCmd(0),
     fSetSVLabelCmd(0),
-    fSetGflashCmd(0)
+    fSetGflashCmd(0),
+    fSetExclusiveSDScoringCmd(0),
+    fPrintUserSDsCmd(0)
 { 
 /// Standard constructor
 
@@ -68,6 +72,21 @@ TG4SDMessenger::TG4SDMessenger(TG4SDConstruction* sdConstruction)
   fSetGflashCmd->SetGuidance(guidance);
   fSetGflashCmd->SetParameterName("Gflash", false);
   fSetGflashCmd->AvailableForStates(G4State_PreInit);
+
+  fSetExclusiveSDScoringCmd
+    = new G4UIcmdWithABool("/mcDet/setExclusiveSDScoring", this);
+  guidance
+    = "Activate scoring by user sensitive detectors only.\n";
+  guidance
+    += "The MC Application::Stepping() will be not called.";
+  fSetExclusiveSDScoringCmd->SetGuidance(guidance);
+  fSetExclusiveSDScoringCmd->SetParameterName("ExclusiveSDScoring", false);
+  fSetExclusiveSDScoringCmd->AvailableForStates(G4State_PreInit);
+
+  fPrintUserSDsCmd
+    = new G4UIcmdWithoutParameter("/mcDet/printUserSDs", this);
+  fPrintUserSDsCmd->SetGuidance("Prints user sensitive detectors.");
+  fPrintUserSDsCmd->AvailableForStates(G4State_Init, G4State_Idle);
 }
 
 //______________________________________________________________________________
@@ -79,6 +98,8 @@ TG4SDMessenger::~TG4SDMessenger()
   delete fSetSDSelectionFromTGeoCmd;
   delete fSetSVLabelCmd;
   delete fSetGflashCmd;
+  delete fSetExclusiveSDScoringCmd;
+  delete fPrintUserSDsCmd;
 }
 
 //
@@ -101,8 +122,15 @@ void TG4SDMessenger::SetNewValue(G4UIcommand* command,
   else if ( command == fSetSVLabelCmd ) {
     fSDConstruction->SetSensitiveVolumeLabel(newValue);
   }  
-  if ( command == fSetGflashCmd ) {
+  else if ( command == fSetGflashCmd ) {
     fSDConstruction->SetIsGflash(
                        fSetGflashCmd->GetNewBoolValue(newValue));
+  }
+  else if ( command == fSetExclusiveSDScoringCmd ) {
+    fSDConstruction->SetExclusiveSDScoring(
+                       fSetExclusiveSDScoringCmd->GetNewBoolValue(newValue));
+  }
+  else if ( command == fPrintUserSDsCmd ) {
+    TG4SDServices::Instance()->PrintUserSensitiveDetectors();
   }
 }

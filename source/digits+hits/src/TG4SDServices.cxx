@@ -21,18 +21,24 @@
 #include <G4LogicalVolumeStore.hh>
 #include <G4LogicalVolume.hh>
 #include <G4Material.hh>
+
+#include <TVirtualMCSensitiveDetector.h>
+
 #include <iomanip>
 
 TG4SDServices* TG4SDServices::fgInstance = 0;
+const G4int TG4SDServices::fgkFirstVolumeId = 1;
+
+G4ThreadLocal std::set<TVirtualMCSensitiveDetector*>*  TG4SDServices::fgUserSDs = 0;
+G4ThreadLocal std::map<G4String, TVirtualMCSensitiveDetector*>*  TG4SDServices::fgUserSDMap = 0;
 
 //_____________________________________________________________________________
 TG4SDServices::TG4SDServices()
   : fIsStopRun(false), 
     fVolNameToIdMap(),
     fVolIdToLVMap(),
-    fLVToVolIdMap()
-    
-   
+    fLVToVolIdMap(),
+    fIsUserSDs(false)
 {
 /// Default constructor
 
@@ -56,7 +62,7 @@ TG4SDServices::~TG4SDServices()
 //
 
 //_____________________________________________________________________________
-void TG4SDServices::MapVolume(G4LogicalVolume* lv, G4int id)
+void TG4SDServices::MapVolume(G4LogicalVolume* lv, G4int id, G4bool fillLVToVolIdMap)
 {
 /// Add the given volume in the maps.
 /// Do nothing if a given volume id or name is already present.
@@ -64,16 +70,51 @@ void TG4SDServices::MapVolume(G4LogicalVolume* lv, G4int id)
   // cut copy number from sdName
   G4String volName 
     = TG4GeometryServices::Instance()->UserVolumeName(lv->GetName());
-  
+
   if ( fVolNameToIdMap.find(volName) == fVolNameToIdMap.end() )
     fVolNameToIdMap[volName] = id;
   
   if ( fVolIdToLVMap.find(id) == fVolIdToLVMap.end() )  
     fVolIdToLVMap[id] = lv;
 
-  if ( fLVToVolIdMap.find(lv) == fLVToVolIdMap.end() )
-    fLVToVolIdMap[lv] = id;
+  if ( fillLVToVolIdMap ) {
+    if ( fLVToVolIdMap.find(lv) == fLVToVolIdMap.end() )
+      fLVToVolIdMap[lv] = id;
+  }
 }  
+
+//_____________________________________________________________________________
+void TG4SDServices::MapUserSD(const G4String& volumeName,
+                              TVirtualMCSensitiveDetector* userSD)
+{
+/// Add the given user sensitive detector in the map.
+/// Print a warning if a fiven volyme name is already present
+
+  // G4cout << "TG4SDServices::MapUserSD "
+  //        << volumeName << " " << userSD << G4endl;
+
+  // Create the map if it does not yet exist
+  if ( ! fgUserSDs ) {
+    fgUserSDs = new std::set<TVirtualMCSensitiveDetector*>();
+    fgUserSDMap = new std::map<G4String, TVirtualMCSensitiveDetector*>();
+    fIsUserSDs = true;
+  }
+
+  // Add the userSD in the vector only once
+  if ( fgUserSDs->find(userSD) == fgUserSDs->end() ) {
+    fgUserSDs->insert(userSD);
+  }
+
+  if ( fgUserSDMap->find(volumeName) == fgUserSDMap->end() ) {
+    (*fgUserSDMap)[volumeName] = userSD;
+  } else {
+    TG4Globals::Warning(
+      "TG4SDServices", "MapUserSD",
+      TString( "A sensitive detector for volume ") + TString(volumeName.data())
+      + TString(" has been already defined.") + TG4Globals::Endl()
+      + TString("Setting was ingored."));
+  }
+}
 
 //_____________________________________________________________________________
 void TG4SDServices::PrintStatistics(G4bool open, G4bool close) const
@@ -147,6 +188,28 @@ void TG4SDServices::PrintSensitiveVolumes() const
 }  
 
 //_____________________________________________________________________________
+void TG4SDServices::PrintUserSensitiveDetectors() const
+{
+/// Print volumes which have defined SD
+
+  G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
+
+  G4cout << "User sensitive detectors (volId, volName, sdName): " << G4endl;
+  for ( G4int i=0; i<G4int(lvStore->size()); i++ ) {
+    G4LogicalVolume* lv = (*lvStore)[i];
+    TVirtualMCSensitiveDetector* userSD
+      = static_cast<TG4SensitiveDetector*>(lv->GetSensitiveDetector())->GetUserSD();
+    if ( userSD ) {
+      G4cout << "   ";
+      G4cout << std::right << std::setw(4)  << GetVolumeID(lv) <<  "   ";
+      G4cout << std::left << std::setw(20) << lv->GetName() <<  "   ";
+      G4cout << std::left << std::setw(20) << userSD->GetName() <<  "   ";
+      G4cout << std::right << G4endl;
+    }
+  }
+}
+
+//_____________________________________________________________________________
 G4int TG4SDServices::GetVolumeID(const G4String& volName) const
 { 
 /// Return the volume identifier from volumes name map.
@@ -175,7 +238,9 @@ G4int TG4SDServices::GetVolumeID(G4LogicalVolume* logicalVolume) const
 /// The volume ID is defined via associated sensitive detector ID or
 /// is taken from a map (if user applies sentitive volumes selection.)
 
- // return logicalVolume->GetInstanceID();
+ if  ( fIsUserSDs ) {
+   return logicalVolume->GetInstanceID() + fgkFirstVolumeId;
+ }
 
 #ifdef MCDEBUG
   G4VSensitiveDetector* sd
@@ -183,47 +248,50 @@ G4int TG4SDServices::GetVolumeID(G4LogicalVolume* logicalVolume) const
 
   if (sd) {
     return GetSensitiveDetector(sd)->GetID();
-  }  
+  }
   else {
     std::map<G4LogicalVolume*, G4int>::const_iterator it;
     it = fLVToVolIdMap.find(logicalVolume);
     if ( it != fLVToVolIdMap.end() ) {
       return it->second;
-    }  
-    else {    
+    }
+    else {
       TG4Globals::Warning(
-      "TG4SDServices", "GetVolumeID", 
-      "Unknown Volume Id for " + TString(logicalVolume->GetName())); 
+      "TG4SDServices", "GetVolumeID",
+      "Unknown Volume Id for " + TString(logicalVolume->GetName()));
      return 0;
-    } 
-  }  
+    }
+  }
 #else
   G4VSensitiveDetector* sd
     = logicalVolume->GetSensitiveDetector();
-  if ( sd ) 
-    return ((TG4SensitiveDetector*)sd)->GetID(); 
+  if ( sd )
+    return ((TG4SensitiveDetector*)sd)->GetID();
   else {
     std::map<G4LogicalVolume*, G4int>::const_iterator it;
     it = fLVToVolIdMap.find(logicalVolume);
     if ( it != fLVToVolIdMap.end() ) {
       return it->second;
-    }  
+    }
     else {    
       TG4Globals::Warning(
-      "TG4SDServices", "GetVolumeID", 
-      "Unknown Volume Id for" + TString(logicalVolume->GetName())); 
+      "TG4SDServices", "GetVolumeID",
+      "Unknown Volume Id for" + TString(logicalVolume->GetName()));
      return 0;
-    } 
-  }  
-#endif   
-} 
-
+    }
+  }
+#endif
+}
 
 //_____________________________________________________________________________
 G4int TG4SDServices::GetMediumID(G4LogicalVolume* logicalVolume) const 
 {
 /// Return the medium ID for the specified logical volume.
- 
+
+ if  ( fIsUserSDs ) {
+  return TG4GeometryServices::Instance()->GetMediumId(logicalVolume);
+ }
+
 #ifdef MCDEBUG
   G4VSensitiveDetector* sd
     = logicalVolume->GetSensitiveDetector();
@@ -242,9 +310,30 @@ G4int TG4SDServices::GetMediumID(G4LogicalVolume* logicalVolume) const
   else {
     return TG4GeometryServices::Instance()->GetMediumId(logicalVolume);
   }  
-#endif   
+#endif
 } 
 
+//_____________________________________________________________________________
+TVirtualMCSensitiveDetector* TG4SDServices::GetUserSD(G4String volumeName,
+                                                      G4bool warn) const
+{
+
+  if ( ! fgUserSDMap ) return 0;
+
+  std::map<G4String, TVirtualMCSensitiveDetector*>::const_iterator it
+    = fgUserSDMap->find(volumeName);
+
+  if ( it == fgUserSDMap->end() ) {
+    if ( warn ) {
+      TG4Globals::Warning(
+        "TG4SDServices", "GetLogicalVolume",
+        "No sensitive detector is defined for volume " + TString(volumeName.data()));
+    }
+    return 0;
+  }
+
+  return it->second;
+}
 
 //_____________________________________________________________________________
 G4String TG4SDServices::GetVolumeName(G4int volumeId) const
@@ -394,9 +483,3 @@ Int_t  TG4SDServices::VolDaughterCopyNo(const char* volName, Int_t i) const
  
   return lv->GetDaughter(i)->GetCopyNo();
 }
-
- 
-
-
-
- 

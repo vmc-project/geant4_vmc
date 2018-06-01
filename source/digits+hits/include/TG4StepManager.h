@@ -117,6 +117,7 @@ class TG4StepManager
     Double_t TrackLength() const;   
     Double_t TrackTime() const;  
     Double_t Edep() const;
+    Double_t NIELEdep() const;
         // static properties
     Int_t TrackPid() const;
     Double_t TrackCharge() const;
@@ -159,7 +160,7 @@ class TG4StepManager
 
     // static data members
     static G4ThreadLocal TG4StepManager*  fgInstance;   ///< this instance
-    
+
     //
     // data members
     
