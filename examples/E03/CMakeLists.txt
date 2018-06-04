@@ -16,15 +16,15 @@
 cmake_minimum_required(VERSION 2.6.4 FATAL_ERROR)
 
 add_subdirectory(E03a)
+add_subdirectory(E03b)
 
 #----------------------------------------------------------------------------
 # E03b example requires ROOT version >= 6.13/04
 #
-find_package(ROOT QUIET)
-message(STATUS "Root version ${ROOT_FOUND_VERSION}")
-if (${ROOT_FOUND_VERSION} GREATER "61204" )
-  # change to 61302
-  add_subdirectory(E03b)
-else()
-  message(STATUS "VMC Examples: E03b example disabled")
-endif()
+#find_package(ROOT QUIET)
+#message(STATUS "Root version ${ROOT_FOUND_VERSION}")
+#if (${ROOT_FOUND_VERSION} GREATER "61302" )
+#  add_subdirectory(E03b)
+#else()
+#  message(STATUS "VMC Examples: E03b example disabled")
+#endif()
