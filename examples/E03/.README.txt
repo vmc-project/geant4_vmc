@@ -9,10 +9,16 @@
 
   The Geant4 ExampleN03 adapted to Virtual Monte Carlo
   and extended for testing some other VMC features.
+  Since Geant4 VMC v3.7, the example is provided in two variants:
+  - <a href="group__E03a.html">E03a </a> - scoring via sensitive volumes and
+           MCApplication::Stepping (old way)
+  - <a href="group__E03b.html">E03b</a> - scoring via sensitive detectors derived from new
+           TVirtualMCSensitiveDetector interface
 
   It demonstrates:
     - Geometry - divided volume (Gsdvn)
     - Definition of sensitive volumes
+    - Definition of VMC sensitive detectors (new since v3.7)
     - Physics - hadronics processes off
     - Particles cuts: 
         G4 cut in range: 1mm;
@@ -25,31 +31,22 @@
     - Verbosity
     - Geometry defined via Geant4 (G4)
     - User defined physics list (G4)
+        (Use of user own defined physics list is demonstrated on
+         the LHEP_BERT hadronics physics list provided in Geant4.)
     - User defined particles and ions (G3, G4)
     - User defined regions (G4)
     - User defined magnetic field equation of motion and/or its integrator (G4)
 
 
   See also description of in 
-    geant4/examples/novice/N03/README
-
-\section e03_s2 Compilation:
-
-  With G4:\n
-  An extra library with user defined Geant4 based classes has to be build:
-  <pre>
-  cd E03/geant4
-  gmake
-  </pre>
-
-  Use of user own defined physics list is demonstrated on
-  the LHEP_BERT hadronics physics list provided in Geant4.
+    geant4/examples/basic/B4
 
 \section e03_s3 Macros
 
   For running example with G3:
   <pre>
-  \link      E03/load_g3.C load_g3.C     \endlink - macro to load the libraries to run the example with Geant3
+  \link     E03/load_g3a.C load_g3a.C    \endlink - macro to load the libraries (variant E03a) to run the example with Geant3
+  \link     E03/load_g3b.C load_g3b.C    \endlink - macro to load the libraries (variant E03b) to run the example with Geant3
   \link       E03/run_g3.C run_g3.C      \endlink - macro for running example 
   \link E03/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry(default)
   \link     E03/g3Config.C g3Config.C    \endlink - configuration macro for G3 with native geometry
@@ -57,7 +54,8 @@
 
   For running example with G4:
   <pre>
-  \link       E03/load_g4.C load_g4.C      \endlink - macro to load the libraries to run the example with Geant4
+  \link      E03/load_g4a.C load_g4a.C     \endlink - macro to load the libraries (variant E03a) to run the example with Geant4
+  \link      E03/load_g4b.C load_g4b.C     \endlink - macro to load the libraries (variant E03b) to run the example with Geant4
   \link        E03/run_g4.C run_g4.C       \endlink - macro for running example 
   \link      E03/g4Config.C g4Config.C     \endlink - configuration macro - G4 native geometry navigation (default)
   \link     E03/g4Config1.C g4Config1.C    \endlink - configuration macro - geometry defined via Geant4
@@ -80,37 +78,39 @@
   \link E03/set_vis.C set_vis.C\endlink - setting visualization
   </pre>
 
-\section e03_s4 To run example 
+\section e03_s4 To run example (Ex03a)
 
   <pre>
   With G3 + TGeo:
-  root[0] .x \link E03/load_g3.C load_g3.C\endlink
+  root[0] .x \link E03/load_g3a.C load_g3a.C\endlink
   root[1] .x \link E03/run_g3.C run_g3.C\endlink
 
   With G4:
-  root[0] .x \link E03/load_g4.C load_g4.C\endlink
+  root[0] .x \link E03/load_g4a.C load_g4a.C\endlink
   root[1] .x \link E03/run_g4.C run_g4.C\endlink
 
   With G4 + TGeo navigation:
-  root[0] .x \link E03/load_g4.C load_g4.C\endlink
+  root[0] .x \link E03/load_g4a.C load_g4a.C\endlink
   root[1] .x \link E03/run_g4.C run_g4.C\endlink(\link E03/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);
 
   With G4 with geometry defined via Geant4:
-  root[0] .x \link E03/load_g4.C load_g4.C\endlink
+  root[0] .x \link E03/load_g4a.C load_g4a.C\endlink
   root[1] .x \link E03/run_g4.C run_g4.C\endlink(\link E03/g4Config1.C "g4Config1.C"\endlink);
 
   With G4 with user defined physics list:
-  root[0] .x \link E03/load_g4.C load_g4.C\endlink
+  root[0] .x \link E03/load_g4a.C load_g4a.C\endlink
   root[1] .x \link E03/run_g4.C run_g4.C\endlink(\link E03/g4Config2.C "g4Config2.C"\endlink);
 
   With G4 with user defined regions:
-  root[0] .x \link E03/load_g4.C load_g4.C\endlink
+  root[0] .x \link E03/load_g4a.C load_g4a.C\endlink
   root[1] .x \link E03/run_g4.C run_g4.C\endlink(\link E03/g4Config3.C "g4Config3.C"\endlink);
 
   With G4 + TGeo navigation with user defined regions:
-  root[0] .x \link E03/load_g4.C load_g4.C\endlink
+  root[0] .x \link E03/load_g4a.C load_g4a.C\endlink
   root[1] .x \link E03/run_g4.C run_g4.C\endlink(\link E03/g4tgeoConfig3.C "g4tgeoConfig3.C"\endlink);
   </pre>
+
+  To run the Ex03b variant, use load_g3b.C and load_g4b.C macros.
 
 \section e03_s5 Classes
 

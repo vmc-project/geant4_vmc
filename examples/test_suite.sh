@@ -35,6 +35,10 @@ fi
 # Root command with loading g3/g4 libraries
 RUNG3="root.exe -b -q load_g3.C"
 RUNG4="root.exe -b -q load_g4.C"
+RUNG3a="root.exe -b -q load_g3a.C"
+RUNG3b="root.exe -b -q load_g3b.C"
+RUNG4a="root.exe -b -q load_g4a.C"
+RUNG4b="root.exe -b -q load_g4b.C"
 
 # Process script arguments
 for arg in "${@}"
@@ -67,7 +71,7 @@ if [ "x${BUILDDIR}" != "x" ]; then
   export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${LIBS_FROM_BUILDDIR}
 fi
 
-for EXAMPLE in E01 E02 E03 E06 A01 ExGarfield Gflash TR
+for EXAMPLE in E01 E02 E03/E03a E06 A01 ExGarfield Gflash TR
 do
   OUT=$OUTDIR/$EXAMPLE
   if [ ! -d $OUT ]; then
@@ -147,167 +151,187 @@ do
   fi  
 
   if [ "$EXAMPLE" = "E03" ]; then 
-    # Run three macro + special configuration available only in E03 example
-    if [ "$TESTG3" = "1" ]; then
-      echo "... Running test with G3, geometry via TGeo, TGeo navigation" 
-      TMP_FAILED="0"
-      $RUNG3 "test_E03_1.C(\"g3tgeoConfig.C\", kFALSE)" >& $OUT/test_g3_tgeo_tgeo.out
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      $RUNG3 "test_E03_2.C(\"g3tgeoConfig.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
-      $RUNG3 "test_E03_3.C(\"g3tgeoConfig.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
-      $RUNG3 "test_E03_4.C(\"g3tgeoConfig.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
-      $RUNG3 "test_E03_5.C(\"g3tgeoConfig.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
-      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+    for OPTION in E03a E03b
+    do
+      OUT=$OUTDIR/$EXAMPLE/$OPTION
+      if [ ! -d $OUT ]; then
+        mkdir -p $OUT
+      fi
 
-      echo "... Running test with G3, geometry via VMC,  Native navigation" 
-      TMP_FAILED="0"
-      $RUNG3 "test_E03_1.C(\"g3Config.C\", kTRUE)" >& $OUT/test_g3_vmc_nat.out
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      $RUNG3 "test_E03_2.C(\"g3Config.C\", kTRUE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g3_vmc_nat.out
-      $RUNG3 "test_E03_3.C(\"g3Config.C\", kTRUE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g3_vmc_nat.out
-      $RUNG3 "test_E03_4.C(\"g3Config.C\", kTRUE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g3_vmc_nat.out
-      $RUNG3 "test_E03_5.C(\"g3Config.C\", kTRUE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g3_vmc_nat.out
-      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+      cd $CURDIR/$EXAMPLE
+      echo "... Example $EXAMPLE/$OPTION"
 
-      echo "... Running test with G3, geometry via VMC,  TGeo navigation" 
-      TMP_FAILED="0"
-      $RUNG3 "test_E03_1.C(\"g3tgeoConfig.C\", kTRUE)" >& $OUT/test_g3_vmc_tgeo.out
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      $RUNG3 "test_E03_2.C(\"g3tgeoConfig.C\", kTRUE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
-      $RUNG3 "test_E03_3.C(\"g3tgeoConfig.C\", kTRUE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
-      $RUNG3 "test_E03_4.C(\"g3tgeoConfig.C\", kTRUE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
-      $RUNG3 "test_E03_5.C(\"g3tgeoConfig.C\", kTRUE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
-      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
-    fi  
+      if [ "$OPTION" = "E03a" ]; then
+        RUNG3_OPT=$RUNG3a
+        RUNG4_OPT=$RUNG4a
+      fi
+      if [ "$OPTION" = "E03b" ]; then
+        RUNG3_OPT=$RUNG3b
+        RUNG4_OPT=$RUNG4b
+      fi
 
-    if [ "$TESTG4" = "1" ]; then
-      echo "... Running test with G4, geometry via TGeo, Native navigation" 
-      TMP_FAILED="0"
-      $RUNG4 "test_E03_1.C(\"g4Config.C\", kFALSE)" >& $OUT/test_g4_tgeo_nat.out
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      $RUNG4 "test_E03_2.C(\"g4Config.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_tgeo_nat.out
-      $RUNG4 "test_E03_3.C(\"g4Config.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_tgeo_nat.out
-      $RUNG4 "test_E03_4.C(\"g4Config.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_tgeo_nat.out
-      $RUNG4 "test_E03_5.C(\"g4Config4.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_tgeo_nat.out
-      $RUNG4 "test_E03_6.C(\"g4Config5.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_tgeo_nat.out
-      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+      # Run three macro + special configuration available only in E03 example
+      if [ "$TESTG3" = "1" ]; then
+        echo "... Running test with G3, geometry via TGeo, TGeo navigation"
+        TMP_FAILED="0"
+        $RUNG3_OPT "test_E03_1.C(\"g3tgeoConfig.C\", kFALSE)" >& $OUT/test_g3_tgeo_tgeo.out
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        $RUNG3_OPT "test_E03_2.C(\"g3tgeoConfig.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
+        $RUNG3_OPT "test_E03_3.C(\"g3tgeoConfig.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
+        $RUNG3_OPT "test_E03_4.C(\"g3tgeoConfig.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
+        $RUNG3_OPT "test_E03_5.C(\"g3tgeoConfig.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
+        if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
 
-      echo "... Running test with G4, geometry via TGeo, TGeo navigation" 
-      TMP_FAILED="0"
-      $RUNG4 "test_E03_1.C(\"g4tgeoConfig.C\", kFALSE)" >& $OUT/test_g4_tgeo_tgeo.out
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      $RUNG4 "test_E03_2.C(\"g4tgeoConfig.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
-      $RUNG4 "test_E03_3.C(\"g4tgeoConfig.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
-      $RUNG4 "test_E03_4.C(\"g4tgeoConfig.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
-      $RUNG4 "test_E03_5.C(\"g4tgeoConfig4.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
-      $RUNG4 "test_E03_6.C(\"g4tgeoConfig5.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
-      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+        echo "... Running test with G3, geometry via VMC,  Native navigation"
+        TMP_FAILED="0"
+        $RUNG3_OPT "test_E03_1.C(\"g3Config.C\", kTRUE)" >& $OUT/test_g3_vmc_nat.out
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        $RUNG3_OPT "test_E03_2.C(\"g3Config.C\", kTRUE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g3_vmc_nat.out
+        $RUNG3_OPT "test_E03_3.C(\"g3Config.C\", kTRUE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g3_vmc_nat.out
+        $RUNG3_OPT "test_E03_4.C(\"g3Config.C\", kTRUE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g3_vmc_nat.out
+        $RUNG3_OPT "test_E03_5.C(\"g3Config.C\", kTRUE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g3_vmc_nat.out
+        if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
 
-      echo "... Running test with G4, geometry via VMC,  Native navigation" 
-      TMP_FAILED="0"
-      $RUNG4 "test_E03_1.C(\"g4ConfigOld.C\", kTRUE)" >& $OUT/test_g4_vmc_nat.out
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      $RUNG4 "test_E03_2.C(\"g4ConfigOld.C\", kTRUE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_vmc_nat.out
-      $RUNG4 "test_E03_3.C(\"g4ConfigOld.C\", kTRUE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_vmc_nat.out
-      $RUNG4 "test_E03_4.C(\"g4ConfigOld.C\", kTRUE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_vmc_nat.out
-      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+        echo "... Running test with G3, geometry via VMC,  TGeo navigation"
+        TMP_FAILED="0"
+        $RUNG3_OPT "test_E03_1.C(\"g3tgeoConfig.C\", kTRUE)" >& $OUT/test_g3_vmc_tgeo.out
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        $RUNG3_OPT "test_E03_2.C(\"g3tgeoConfig.C\", kTRUE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
+        $RUNG3_OPT "test_E03_3.C(\"g3tgeoConfig.C\", kTRUE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
+        $RUNG3_OPT "test_E03_4.C(\"g3tgeoConfig.C\", kTRUE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
+        $RUNG3_OPT "test_E03_5.C(\"g3tgeoConfig.C\", kTRUE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
+        if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+      fi
 
-      echo "... Running test with G4, geometry via VMC,  TGeo navigation" 
-      TMP_FAILED="0"
-      $RUNG4 "test_E03_1.C(\"g4tgeoConfigOld.C\", kTRUE)" >& $OUT/test_g4_vmc_tgeo.out
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      $RUNG4 "test_E03_2.C(\"g4tgeoConfigOld.C\", kTRUE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
-      $RUNG4 "test_E03_3.C(\"g4tgeoConfigOld.C\", kTRUE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
-      $RUNG4 "test_E03_4.C(\"g4tgeoConfigOld.C\", kTRUE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
-      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+      if [ "$TESTG4" = "1" ]; then
+        echo "... Running test with G4, geometry via TGeo, Native navigation"
+        TMP_FAILED="0"
+        $RUNG4_OPT "test_E03_1.C(\"g4Config.C\", kFALSE)" >& $OUT/test_g4_tgeo_nat.out
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        $RUNG4_OPT "test_E03_2.C(\"g4Config.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+        $RUNG4_OPT "test_E03_3.C(\"g4Config.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+        $RUNG4_OPT "test_E03_4.C(\"g4Config.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+        $RUNG4_OPT "test_E03_5.C(\"g4Config4.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+        $RUNG4_OPT "test_E03_6.C(\"g4Config5.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_nat.out
+        if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
 
-      echo "... Running test with G4, geometry via G4,   Native navigation" 
-      TMP_FAILED="0"
-      $RUNG4 "test_E03_1.C(\"g4Config1.C\", kFALSE)" >& $OUT/test_g4_g4_nat.out
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      $RUNG4 "test_E03_2.C(\"g4Config1.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_g4_nat.out
-      $RUNG4 "test_E03_3.C(\"g4Config1.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_g4_nat.out
-      $RUNG4 "test_E03_4.C(\"g4Config1.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_g4_nat.out
-      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+        echo "... Running test with G4, geometry via TGeo, TGeo navigation"
+        TMP_FAILED="0"
+        $RUNG4_OPT "test_E03_1.C(\"g4tgeoConfig.C\", kFALSE)" >& $OUT/test_g4_tgeo_tgeo.out
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        $RUNG4_OPT "test_E03_2.C(\"g4tgeoConfig.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+        $RUNG4_OPT "test_E03_3.C(\"g4tgeoConfig.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+        $RUNG4_OPT "test_E03_4.C(\"g4tgeoConfig.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+        $RUNG4_OPT "test_E03_5.C(\"g4tgeoConfig4.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+        $RUNG4_OPT "test_E03_6.C(\"g4tgeoConfig5.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
+        if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
 
-      echo "... Running test with G4, geometry via TGeo, Native navigation, User physics list" 
-      TMP_FAILED="0"
-      $RUNG4 "test_E03_1.C(\"g4Config2.C\", kFALSE)" >& $OUT/test_g4_tgeo_nat_pl.out
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      $RUNG4 "test_E03_2.C(\"g4Config2.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_tgeo_nat_pl.out
-      $RUNG4 "test_E03_3.C(\"g4Config2.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_tgeo_nat_pl.out
-      $RUNG4 "test_E03_4.C(\"g4Config2.C\", kFALSE)" >& tmpfile
-      if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-      cat tmpfile >> $OUT/test_g4_tgeo_nat_pl.out
-      rm tmpfile
-      if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
-    fi 
+        echo "... Running test with G4, geometry via VMC,  Native navigation"
+        TMP_FAILED="0"
+        $RUNG4_OPT "test_E03_1.C(\"g4ConfigOld.C\", kTRUE)" >& $OUT/test_g4_vmc_nat.out
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        $RUNG4_OPT "test_E03_2.C(\"g4ConfigOld.C\", kTRUE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_vmc_nat.out
+        $RUNG4_OPT "test_E03_3.C(\"g4ConfigOld.C\", kTRUE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_vmc_nat.out
+        $RUNG4_OPT "test_E03_4.C(\"g4ConfigOld.C\", kTRUE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_vmc_nat.out
+        if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+
+        echo "... Running test with G4, geometry via VMC,  TGeo navigation"
+        TMP_FAILED="0"
+        $RUNG4_OPT "test_E03_1.C(\"g4tgeoConfigOld.C\", kTRUE)" >& $OUT/test_g4_vmc_tgeo.out
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        $RUNG4_OPT "test_E03_2.C(\"g4tgeoConfigOld.C\", kTRUE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
+        $RUNG4_OPT "test_E03_3.C(\"g4tgeoConfigOld.C\", kTRUE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
+        $RUNG4_OPT "test_E03_4.C(\"g4tgeoConfigOld.C\", kTRUE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
+        if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+
+        echo "... Running test with G4, geometry via G4,   Native navigation"
+        TMP_FAILED="0"
+        $RUNG4_OPT "test_E03_1.C(\"g4Config1.C\", kFALSE)" >& $OUT/test_g4_g4_nat.out
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        $RUNG4_OPT "test_E03_2.C(\"g4Config1.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_g4_nat.out
+        $RUNG4_OPT "test_E03_3.C(\"g4Config1.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_g4_nat.out
+        $RUNG4_OPT "test_E03_4.C(\"g4Config1.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_g4_nat.out
+        if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+
+        echo "... Running test with G4, geometry via TGeo, Native navigation, User physics list"
+        TMP_FAILED="0"
+        $RUNG4_OPT "test_E03_1.C(\"g4Config2.C\", kFALSE)" >& $OUT/test_g4_tgeo_nat_pl.out
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        $RUNG4_OPT "test_E03_2.C(\"g4Config2.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_nat_pl.out
+        $RUNG4_OPT "test_E03_3.C(\"g4Config2.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_nat_pl.out
+        $RUNG4_OPT "test_E03_4.C(\"g4Config2.C\", kFALSE)" >& tmpfile
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        cat tmpfile >> $OUT/test_g4_tgeo_nat_pl.out
+        rm tmpfile
+        if [ "$TMP_FAILED" -ne "0" ]; then FAILED=`expr $FAILED + 1`; else PASSED=`expr $PASSED + 1`; fi
+      fi
+    done
   fi   
 
   if [ "$EXAMPLE" = "A01" ]; then 
