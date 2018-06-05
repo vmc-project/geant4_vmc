@@ -71,7 +71,7 @@ if [ "x${BUILDDIR}" != "x" ]; then
   export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${LIBS_FROM_BUILDDIR}
 fi
 
-for EXAMPLE in E01 E02 E03/E03a E06 A01 ExGarfield Gflash TR
+for EXAMPLE in E01 E02 E03 E06 A01 ExGarfield Gflash TR
 do
   OUT=$OUTDIR/$EXAMPLE
   if [ ! -d $OUT ]; then
