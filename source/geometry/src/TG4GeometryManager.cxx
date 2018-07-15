@@ -34,6 +34,7 @@
 #include <G4ReflectionFactory.hh>
 #include <G4Material.hh>
 #include <G4TransportationManager.hh>
+#include <G4MonopoleFieldSetup.hh>
 #include <G4PVPlacement.hh>
 #include <G4SystemOfUnits.hh>
 #include <G4AutoDelete.hh>
@@ -582,6 +583,17 @@ void TG4GeometryManager::ConstructGlobalMagField()
   // Create global magnetic field
   if ( gMC->GetMagField() ) {
     CreateMagField(gMC->GetMagField(), fFieldParameters[0], 0);
+
+    // create monopole field
+    if ( fFieldParameters[0]->GetIsMonopole() ) {
+      G4cout << "Create G4MonopoleFieldSetup" << G4endl;
+      G4MonopoleFieldSetup*  monFieldSetup = G4MonopoleFieldSetup::GetMonopoleFieldSetup();
+      TG4MagneticField* magField = (*fgMagneticFields)[0];
+      monFieldSetup->SetMagneticField(magField);
+      monFieldSetup->SetDefaultEquation(magField->GetEquation());
+      monFieldSetup->SetDefaultStepper(magField->GetStepper());
+      monFieldSetup->InitialiseAll();
+    }
   }
 }
 

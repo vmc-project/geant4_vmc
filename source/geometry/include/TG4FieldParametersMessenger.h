@@ -26,6 +26,7 @@ class G4UIcmdWithoutParameter;
 class G4UIcmdWithAString;
 class G4UIcmdWithADouble;
 class G4UIcmdWithADoubleAndUnit;
+class G4UIcmdWithABool;
 
 /// \ingroup geometry
 /// \brief Messenger class that defines commands for TG4DetConstruction.
@@ -46,6 +47,7 @@ class G4UIcmdWithADoubleAndUnit;
 /// - /mcMagField/setMinimumEpsilonStep value
 /// - /mcMagField/setMaximumEpsilonStep value 
 /// - /mcMagField/setConstDistance value
+/// - /mcMagField/setIsMonopole true|false
 /// - /mcMagField/printParameters
 ///
 /// \author I. Hrivnacova; IPN, Orsay
@@ -101,6 +103,9 @@ class TG4FieldParametersMessenger: public G4UImessenger
 
     /// command: setConstDistance
     G4UIcmdWithADoubleAndUnit*  fSetConstDistanceCmd;
+
+    /// command: setIsMonopole
+    G4UIcmdWithABool*           fSetIsMonopoleCmd;
 
     /// command: printParameters
     G4UIcmdWithoutParameter*    fPrintParametersCmd;

@@ -110,6 +110,7 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/digits+hits/include 
   ${PROJECT_SOURCE_DIR}/physics/include 
   ${PROJECT_SOURCE_DIR}/physics_list/include 
+  ${PROJECT_SOURCE_DIR}/physics_monopole/include 
   ${PROJECT_SOURCE_DIR}/event/include 
   ${PROJECT_SOURCE_DIR}/run/include 
   ${PROJECT_SOURCE_DIR}/visualization/include 
@@ -135,6 +136,7 @@ file(GLOB sources
   ${PROJECT_SOURCE_DIR}/digits+hits/src/*.cxx 
   ${PROJECT_SOURCE_DIR}/physics/src/*.cxx 
   ${PROJECT_SOURCE_DIR}/physics_list/src/*.cxx 
+  ${PROJECT_SOURCE_DIR}/physics_monopole/src/*.cxx 
   ${PROJECT_SOURCE_DIR}/event/src/*.cxx 
   ${PROJECT_SOURCE_DIR}/run/src/*.cxx 
   ${PROJECT_SOURCE_DIR}/visualization/src/*.cxx)
@@ -152,6 +154,7 @@ install(DIRECTORY
   ${PROJECT_SOURCE_DIR}/digits+hits/include/ 
   ${PROJECT_SOURCE_DIR}/physics/include/
   ${PROJECT_SOURCE_DIR}/physics_list/include/ 
+  ${PROJECT_SOURCE_DIR}/physics_monopole/include/ 
   ${PROJECT_SOURCE_DIR}/event/include/
   ${PROJECT_SOURCE_DIR}/run/include/
   ${PROJECT_SOURCE_DIR}/visualization/include/ 

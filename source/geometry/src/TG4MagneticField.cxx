@@ -52,7 +52,9 @@ TG4MagneticField::TG4MagneticField(const TG4FieldParameters& parameters,
                                    G4LogicalVolume* lv)
   : G4MagneticField(),
     fVirtualMagField(magField),
-    fLogicalVolume(lv)
+    fLogicalVolume(lv),
+    fEquation(0),
+    fStepper(0)
 {
 /// Default constructor
 
@@ -249,25 +251,25 @@ void TG4MagneticField::Update(const TG4FieldParameters& parameters)
   fieldManager->SetDetectorField(this);
 
   // Create equation of motion (or get the user one if defined)
-  G4EquationOfMotion* equation = 0;
+  // G4EquationOfMotion* equation = 0;
   if ( parameters.GetEquationType() == kUserEquation ) {
-    equation = parameters.GetUserEquationOfMotion();
-    equation->SetFieldObj(this);
+    fEquation = parameters.GetUserEquationOfMotion();
+    fEquation->SetFieldObj(this);
   } else {
-    equation = CreateEquation(parameters.GetEquationType());
+    fEquation = CreateEquation(parameters.GetEquationType());
   }
 
   // Create stepper  (or get the user one if defined)
-  G4MagIntegratorStepper* stepper = 0;
+  // G4MagIntegratorStepper* stepper = 0;
   if ( parameters.GetStepperType() == kUserStepper ) {
-    stepper = parameters.GetUserStepper();
+    fStepper = parameters.GetUserStepper();
   } else {
-    stepper = CreateStepper(equation, parameters.GetStepperType());
+    fStepper = CreateStepper(fEquation, parameters.GetStepperType());
   }
 
   // Chord finder
   G4ChordFinder* chordFinder
-    = new G4ChordFinder(this, parameters.GetStepMinimum(), stepper);
+    = new G4ChordFinder(this, parameters.GetStepMinimum(), fStepper);
   chordFinder->SetDeltaChord(parameters.GetDeltaChord());
   fieldManager->SetChordFinder(chordFinder);
   

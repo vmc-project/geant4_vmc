@@ -158,6 +158,19 @@ void TG4ParticlesManager::DefineParticles()
                        0, 0, "Special", kspe+51);
   fParticleNameMap.AddInverse("opticalphoton","FeedbackPhoton");
 
+  // monopole
+  if ( !pdgDB->GetParticle(60000000) ) {
+    // mass = 100.*Gev  (set in physics list)
+    // magCharge = 1
+    // elCharge = 0
+    pdgDB->AddParticle("Monopole","Monopole", 100., kTRUE,
+                       0, 0, "Special", 60000000);
+  } else {
+    TG4Globals::Warning(
+      "TG4ParticlesManager", "DefineParticles",
+      "Cannot add monopole with PDG=60000000 in TDatabasePDG.");
+  }
+
   // generic ion
   // This particle should not appear in tracking (as it is commented 
   // in class G4GenericIon), but as it does, we map it anyway

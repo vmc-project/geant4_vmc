@@ -153,7 +153,8 @@ TG4FieldParameters::TG4FieldParameters(const G4String& volumeName)
     fStepper(kClassicalRK4),
     fUserEquation(0),
     fUserStepper(0),
-    fConstDistance(0)
+    fConstDistance(0),
+    fIsMonopole(false)
 {
 /// Default constructor
 
@@ -185,6 +186,7 @@ void TG4FieldParameters::PrintParameters() const
          << "  stepper type = "  << StepperTypeName(fStepper) << G4endl 
          << "  minStep = "       << fStepMinimum  << " mm" << G4endl
          << "  constDistance = " << fConstDistance  << " mm" << G4endl
+         << "  isMonopole = " << std::boolalpha << fIsMonopole << G4endl
          << "  deltaChord = "    << fDeltaChord   << " mm" << G4endl
          << "  deltaOneStep = "  << fDeltaOneStep << " mm" << G4endl
          << "  deltaIntersection = " << fDeltaIntersection << " mm" << G4endl

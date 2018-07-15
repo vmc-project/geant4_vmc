@@ -1,0 +1,52 @@
+/*! 
+
+\file "Monopole/.README"
+\brief The Example Monopole README page
+
+\page README_Monopole Example Monopole
+
+\section monopole_s1 Description
+
+  The Geant4 Monopole example adapted to Virtual Monte Carlo.
+
+  Demonstrates:
+  - Energy deposited by classical magnetic monopole.
+
+  Note that the current example version can be run only with Geant4.  
+
+  See also description of in 
+  - geant4/examples/exoticphysics/monopole/README
+  - http://geant4-userdoc.web.cern.ch/geant4-userdoc/Doxygen/examples_doc/html/Examplemonopole.html
+
+
+\section monopole_s2 Macros
+
+  For running example with G4:
+  <pre>
+  \link      Monopole/load_g4.C load_g4.C     \endlink - macro to load the libraries to run the example with Geant4
+  \link       Monopole/run_g4.C run_g4.C      \endlink - macro for running example 
+  \link Monopole/g4tgeoConfig.C g4tgeoConfig.C\endlink - configuration macro for G4 with TGeo geometry navigation (default)
+  \link     Monopole/g4Config.C g4Config.C    \endlink - configuration macro for G4 with native geometry navigation
+  </pre>
+  
+\section monopole_s3 To run example
+  
+  <pre>
+  With G4 + TGeo navigation:
+  root[0] .x \link Monopole/load_g4.C load_g4.C\endlink
+  root[1] .x \link Monopole/run_g4.C run_g4.C\endlink
+
+  With G4:
+  root[0] .x \link Monopole/load_g4.C load_g4.C\endlink
+  root[1] .x \link Monopole/run_g4.C run_g4.C(\link Monopole/g4Config.C "g4Config.C"\endlink);
+  
+  </pre>
+
+\section monopole_s4 Classes
+
+The documentation of all classes and the basic macros for this example
+is availabe on \link Monopole this page \endlink. 
+
+  
+*/
+  

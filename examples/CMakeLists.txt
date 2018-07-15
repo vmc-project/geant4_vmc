@@ -25,5 +25,6 @@ add_subdirectory(E02)
 add_subdirectory(E03)
 add_subdirectory(E06)
 add_subdirectory(A01)
+add_subdirectory(Monopole)
 
 #add_custom_target(all DEPENDS E01 E02 E03 E06 A01)

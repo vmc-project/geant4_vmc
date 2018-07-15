@@ -1,0 +1,27 @@
+# #------------------------------------------------
+# The Virtual Monte Carlo examples
+# Copyright (C) 2018 Ivana Hrivnacova
+# All rights reserved.
+#
+# For the licensing terms see geant4_vmc/LICENSE.
+# Contact: root-vmc@cern.ch
+#-------------------------------------------------
+
+#
+# Geant4 configuration macro for Example03
+# (called from Root macro g4Config.C)
+
+/mcVerbose/all 0
+/mcVerbose/runAction 1
+/mcVerbose/composedPhysicsList 2
+#/mcVerbose/trackManager 2
+/mcVerbose/geometryManager 5
+
+/control/cout/ignoreThreadsExcept 0
+
+#/mcTracking/saveSecondariesInStep true
+
+#/tracking/verbose 1
+
+/mcDet/setIsUserMaxStep true
+/mcPhysics/rangeCuts  700 um

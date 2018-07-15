@@ -55,6 +55,9 @@ class TG4MagneticField : public G4MagneticField
 
     virtual void PrintStatistics() const {}
 
+    // access to field setting
+    G4EquationOfMotion* GetEquation() const;
+    G4MagIntegratorStepper* GetStepper() const;
     
   protected:
     // methods
@@ -69,7 +72,23 @@ class TG4MagneticField : public G4MagneticField
     TVirtualMagField*  fVirtualMagField;
     /// The associated volume (if local field)
     G4LogicalVolume*   fLogicalVolume;
+    /// The equation of motion
+    G4EquationOfMotion* fEquation;
+    /// The magnetic integrator stepper
+    G4MagIntegratorStepper* fStepper;
 };
+
+// inline functions
+
+inline G4EquationOfMotion* TG4MagneticField::GetEquation() const {
+  /// Return the equation of motion
+  return fEquation;
+}
+
+inline G4MagIntegratorStepper* TG4MagneticField::GetStepper() const {
+  /// Return the magnetic integrator stepper
+  return fStepper;
+}
 
 #endif //TG4_MAGNETIC_FIELD_H
 

@@ -15,6 +15,7 @@
 #include "TG4ExtraPhysicsList.h"
 
 #include <G4EmExtraPhysics.hh>
+#include <G4MonopolePhysics.hh>
 #include <G4OpticalPhysics.hh>
 #include <G4RadioactiveDecayPhysics.hh>
 
@@ -41,7 +42,7 @@ G4String TG4ExtraPhysicsList::AvailableSelections()
 /// Return list of all available selections
 
   G4String selections;
-  selections += "extra optical radDecay ";
+  selections += "extra monopole optical radDecay ";
   
   return selections;
 }  
@@ -107,6 +108,12 @@ void TG4ExtraPhysicsList::Configure(const G4String& selection)
 #endif
     RegisterPhysics(extraPhysics);
   }  
+
+  // Monopole physics
+  if ( selection.contains("monopole") ) {
+    G4MonopolePhysics* g4MonopolePhysics = new G4MonopolePhysics();
+    RegisterPhysics(g4MonopolePhysics);
+  }
 
   // Optical physics
   if ( selection.contains("optical") ) {

@@ -106,6 +106,7 @@ class TG4FieldParameters
     void SetMinimumEpsilonStep(G4double value); 
     void SetMaximumEpsilonStep(G4double value); 
     void SetConstDistance(G4double value);
+    void SetIsMonopole(G4bool isMonopole);
 
     // get methods
     G4String  GetVolumeName() const;
@@ -122,6 +123,7 @@ class TG4FieldParameters
     G4double GetMinimumEpsilonStep() const; 
     G4double GetMaximumEpsilonStep() const; 
     G4double GetConstDistance() const;
+    G4bool   GetIsMonopole() const;
 
   private:
     // static data members
@@ -176,6 +178,10 @@ class TG4FieldParameters
 
     /// The distance within which the field is considered constant
     G4double  fConstDistance;
+
+    /// An option to create an extra monopole field integrator
+    /// which will be activated directly by G4MonopoleTransportation
+    G4bool fIsMonopole;
 };
 
 // inline functions
@@ -223,6 +229,12 @@ inline void TG4FieldParameters::SetMaximumEpsilonStep(G4double value) {
 /// Set the distance within which the field is considered constant
 inline void TG4FieldParameters::SetConstDistance(G4double value) {
   fConstDistance = value;
+}
+
+/// Set the option to create an extra monopole field integrator
+/// which will be activated directly by G4MonopoleTransportation
+inline void TG4FieldParameters::SetIsMonopole(G4bool isMonopole) {
+  fIsMonopole = isMonopole;
 }
 
 /// Return the name of associated volume, if local field
@@ -283,6 +295,12 @@ inline G4double TG4FieldParameters::GetMaximumEpsilonStep() const {
 /// Return the distance within which the field is considered constant
 inline G4double TG4FieldParameters::GetConstDistance() const {
   return fConstDistance;
+}
+
+/// Return the option to create an extra monopole field integrator
+/// which will be activated directly by G4MonopoleTransportation
+inline G4bool TG4FieldParameters::GetIsMonopole () const {
+  return fIsMonopole;
 }
 
 #endif //TG4_FIELD_PARAMETERS_H

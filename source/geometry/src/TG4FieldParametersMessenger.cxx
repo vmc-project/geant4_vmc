@@ -21,6 +21,7 @@
 #include <G4UIcmdWithAString.hh>
 #include <G4UIcmdWithADouble.hh>
 #include <G4UIcmdWithADoubleAndUnit.hh>
+#include <G4UIcmdWithABool.hh>
 
 //_____________________________________________________________________________
 TG4FieldParametersMessenger::TG4FieldParametersMessenger(
@@ -37,6 +38,7 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
     fSetMinimumEpsilonStepCmd(0),
     fSetMaximumEpsilonStepCmd(0),
     fSetConstDistanceCmd(0),
+    fSetIsMonopoleCmd(0),
     fPrintParametersCmd(0)
 {
 /// Standard constructor
@@ -145,6 +147,14 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
   fSetConstDistanceCmd->AvailableForStates(G4State_PreInit);
 
   commandName = directoryName;
+  commandName.append("setIsMonopole");
+  fSetIsMonopoleCmd = new G4UIcmdWithABool(commandName, this);
+  fSetIsMonopoleCmd
+    ->SetGuidance("Activate creating a special monopole field integration.");
+  fSetIsMonopoleCmd->SetParameterName("IsMonopole", false);
+  fSetIsMonopoleCmd->AvailableForStates(G4State_PreInit);
+
+  commandName = directoryName;
   commandName.append("printParameters");
   fPrintParametersCmd = new G4UIcmdWithoutParameter(commandName, this);
   fPrintParametersCmd->SetGuidance("Prints all accuracy parameters.");
@@ -166,6 +176,7 @@ TG4FieldParametersMessenger::~TG4FieldParametersMessenger()
   delete fSetMinimumEpsilonStepCmd;
   delete fSetMaximumEpsilonStepCmd;
   delete fSetConstDistanceCmd;
+  delete fSetIsMonopoleCmd;
 }
 
 //
@@ -223,6 +234,10 @@ void TG4FieldParametersMessenger::SetNewValue(G4UIcommand* command,
   if (command == fSetConstDistanceCmd) {
     fFieldParameters
       ->SetConstDistance(fSetConstDistanceCmd->GetNewDoubleValue(newValues));
+  }
+  if (command == fSetIsMonopoleCmd) {
+    fFieldParameters
+      ->SetIsMonopole(fSetIsMonopoleCmd->GetNewBoolValue(newValues));
   }
   else if (command == fPrintParametersCmd) {
     fFieldParameters->PrintParameters();
