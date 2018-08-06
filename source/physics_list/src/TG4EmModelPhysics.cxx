@@ -345,9 +345,14 @@ void TG4EmModelPhysics::AddModels()
            particles.find(particle->GetParticleName()) == std::string::npos ) {
            continue;
       }     
+
+      // skip also monopole (exoerimental)
+      if ( particle->GetParticleName() == "monopole" ) {
+        G4cout << "TG4EmModelPhysics::AddModels - skipping monopole" << G4endl;
+      }
                  
       AddModel(emModel, particle, regions);
-    }                
+    }
   }
 }
 
