@@ -114,14 +114,12 @@ void DetectorConstruction::ConstructMaterials()
     TGeoMaterial* material = (TGeoMaterial*)obj;
     // set step limit to other than world material
     if ( material->GetName() != TString("Galactic") ) {
-      cout << "setting stemax for " << material->GetName() << endl;
       param[4] = fMaxStepSize; 
     } else {
       param[4] = -0.01;
     }
     TGeoMedium* medium
       = new TGeoMedium(material->GetName(), ++mediumId, material, param);
-    cout << "Created medium " << medium->GetName() << ", " << mediumId << endl;
   }
 }    
 
@@ -133,10 +131,6 @@ void DetectorConstruction::ConstructGeometry()
   // Construct materials
   ConstructMaterials();
 
-  cout << "gGeoManager: " << gGeoManager << endl;
-
-  Double_t* ubuf = 0;
-  
   // Media Ids
   Int_t worldMediumId = gGeoManager->GetMedium(fWorldMaterial.Data())->GetId();
   Int_t absorberMediumId = gGeoManager->GetMedium(fAbsorberMaterial.Data())->GetId();
@@ -164,6 +158,7 @@ void DetectorConstruction::ConstructGeometry()
   Double_t posX =  0.;
   Double_t posY =  0.;
   Double_t posZ =  0.;
+  Double_t* ubuf = 0;
   gGeoManager->Node("Absorber", 1 ,"World", posX, posY, posZ, 0, kTRUE, ubuf);
 
   // close geometry

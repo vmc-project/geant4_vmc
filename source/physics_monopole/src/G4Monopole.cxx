@@ -77,7 +77,9 @@ G4Monopole::G4Monopole(
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 G4Monopole::~G4Monopole()
-{}
+{
+  theMonopole = 0;
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 //     

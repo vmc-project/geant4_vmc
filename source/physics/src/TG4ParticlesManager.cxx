@@ -21,6 +21,7 @@
 #include <G4DynamicParticle.hh>
 #include <G4ParticleTable.hh>
 #include <G4IonTable.hh>
+#include <G4Monopole.hh>
 #include "G4AutoLock.hh"
 #include <G4Version.hh>
  
@@ -158,19 +159,6 @@ void TG4ParticlesManager::DefineParticles()
                        0, 0, "Special", kspe+51);
   fParticleNameMap.AddInverse("opticalphoton","FeedbackPhoton");
 
-  // monopole
-  if ( !pdgDB->GetParticle(60000000) ) {
-    // mass = 100.*Gev  (set in physics list)
-    // magCharge = 1
-    // elCharge = 0
-    pdgDB->AddParticle("Monopole","Monopole", 100., kTRUE,
-                       0, 0, "Special", 60000000);
-  } else {
-    TG4Globals::Warning(
-      "TG4ParticlesManager", "DefineParticles",
-      "Cannot add monopole with PDG=60000000 in TDatabasePDG.");
-  }
-
   // generic ion
   // This particle should not appear in tracking (as it is commented 
   // in class G4GenericIon), but as it does, we map it anyway
@@ -242,6 +230,24 @@ void TG4ParticlesManager::DefineParticles()
     pdgDB->AddParticle("AntiHE3", "AntiHE3", 2.808391, kTRUE,
 		       0, -6, "Ion", particle->GetPDGEncoding());
   }                       
+
+  // monopole
+  particle = particleTable->FindParticle("monopole");
+  if ( particle ) {
+    if ( !pdgDB->GetParticle(60000000) ) {
+      G4cout << "Adding monnopole in TDatabase with mass " << particle->GetPDGMass()/GeV << G4endl;
+      pdgDB->AddParticle("Monopole","Monopole", 
+                         particle->GetPDGMass()/GeV, kTRUE,
+                         particle->GetPDGCharge()/eplus*3., 
+                         static_cast<G4Monopole*>(particle)->MagneticCharge()/eplus*3.,
+                         "Special", 60000000);
+      fParticleNameMap.Add("monopole","monopole");
+    } else {
+      TG4Globals::Warning(
+        "TG4ParticlesManager", "DefineParticles",
+        "Cannot add monopole with PDG=60000000 in TDatabasePDG.");
+    }
+  }
 
   // geantino
   fParticleNameMap.Add("geantino", "Rootino");

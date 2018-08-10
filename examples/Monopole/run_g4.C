@@ -7,11 +7,13 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
+#include "set_vis.C"
+
 /// \ingroup Monopole
 /// \file Monopole/run_g4.C
 /// \brief Macro for running Monopole example with Geant4. 
 
-void run_g4(const TString& configMacro = "g4tgeoConfig.C") 
+void run_g4(const TString& configMacro = "g4Config.C") 
 {
 /// Macro function for running Monopole example with Geant4 from
 /// Root interactive session.
@@ -23,6 +25,7 @@ void run_g4(const TString& configMacro = "g4tgeoConfig.C")
   VMC::Monopole::MCApplication* appl 
     = new VMC::Monopole::MCApplication("ExampleMonopole", "The example Monopole MC application");
 
+  // Set detector parameters
   // /testex/det/setMat G4_Si
   // /testex/det/setSizeX  10 cm
   // /testex/det/setSizeYZ 20 cm
@@ -37,6 +40,13 @@ void run_g4(const TString& configMacro = "g4tgeoConfig.C")
 
   // Initialize MC
   appl->InitMC(configMacro);
+
+  // Customise Geant4 setting after initialization:
+  // Physics list
+  ((TGeant4*)gMC)->ProcessGeantMacro("g4config2.in");
+
+  // Visualization setting
+  // set_vis();
 
   // Run MC
   appl->RunMC(100);

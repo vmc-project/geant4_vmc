@@ -8,14 +8,15 @@
 #-------------------------------------------------
 
 #
-# Geant4 configuration macro for Example03
+# Geant4 configuration macro for the Monopole example
 # (called from Root macro g4Config.C)
 
 /mcVerbose/all 0
 /mcVerbose/runAction 1
-/mcVerbose/composedPhysicsList 2
+/mcVerbose/composedPhysicsList 1
 #/mcVerbose/trackManager 2
-/mcVerbose/geometryManager 5
+#/mcVerbose/geometryManager 5
+/control/verbose 2
 
 /control/cout/ignoreThreadsExcept 0
 

@@ -18,6 +18,8 @@
 #include <Rtypes.h>
 #include <TString.h>
 
+#include <map>
+
 class TG4DetConstruction;
 class TG4TrackingAction;
 class TG4SteppingAction;
@@ -96,6 +98,7 @@ class TG4RunConfiguration
 
     // set methods
     void  SetMTApplication(Bool_t mtApplication);
+    void  SetParameter(const TString& name, Double_t value);
 
     // get methods
     TString  GetUserGeometry() const;
@@ -116,6 +119,11 @@ class TG4RunConfiguration
     Bool_t         fSpecialCuts;            ///< option for special cuts
     G4UImessenger* fAGDDMessenger;          //!< XML messenger
     G4UImessenger* fGDMLMessenger;          //!< XML messenger
+
+    /// The map of special parameters which need to be set before creating TGeant4
+    /// Actually used for monopole properties:
+    /// monopoleMass, monopoleElCharge, monopoleMagCharge
+    std::map<TString, Double_t>  fParameters; //! 
 
   private:
     /// Not implemented

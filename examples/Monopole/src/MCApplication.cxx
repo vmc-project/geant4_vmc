@@ -29,6 +29,7 @@
 #include <TGeoManager.h>
 #include <TGeoMaterial.h>
 #include <TRandom.h>
+#include <TDatabasePDG.h>
 #include <TH1.h>
 
 using namespace std;
@@ -205,14 +206,14 @@ void MCApplication::InitMC(const char* setup)
  
   // Create histograms
   // fHistograms.push_back(new TH1D("Edep_x", "Edep (MeV/mm) along absorber (mm)", numBins, 0, length));
-  fHistograms.push_back(new TH1D("h1", "h1", numBins, 0, length));
+  fHistograms.push_back(new TH1D("h1", "Edep (MeV/mm) along absorber (mm)", numBins, 0, length));
   // fHistograms.push_back(new TH1D("h2", "DEDX (MeV/mm) of proton", 100, -3., 7.));
   // fHistograms.push_back(new TH1D("h3", "DEDX (MeV/mm) of monopole", 100, -3., 7.));
   // fHistograms.push_back(new TH1D("h4", "Range(mm) of proton", 100, -3., 7.));
   // fHistograms.push_back(new TH1D("h5", "Range(mm) of monopole", 100, -3., 7.));
-  // control histograms
-  fHistograms.push_back(new TH1D("x", "x", 100, -10, 10));
-  fHistograms.push_back(new TH1D("Edep (MeV)", "Edep (Mev)", 100, 0, 100));
+  // Control histograms
+  // fHistograms.push_back(new TH1D("x", "x", 100, -10, 10));
+  // fHistograms.push_back(new TH1D("Edep (MeV)", "Edep (Mev)", 100, 0, 100));
 
   RegisterStack();  
 }
@@ -234,13 +235,19 @@ void MCApplication::FinishRun()
 {    
 /// Finish MC run.
 
-  //run conditions
+  // Get monopole mass from TDatabasePDG
+  TDatabasePDG* pdgDB = TDatabasePDG::Instance();
+  TParticlePDG* monopole = pdgDB->GetParticle(60000000);
+  Double_t mass = 0;
+  if ( monopole ) {
+    mass = monopole->Mass();
+  }
 
-  // Change hardcodede numbers in parameters
-  cout << "\n The run consists of " << fNofEvents << " monopole " << " of "
-       << "100 GeV " << " through " 
+  // run conditions
+  cout << "\n The run consists of " << fNofEvents << " monopole " 
+       << " of " << mass << " GeV " << " through " 
        << fDetConstruction->GetAbsorberSizeX() << " cm of "
-       <<  fDetConstruction->GetAbsorberMaterial() 
+       << fDetConstruction->GetAbsorberMaterial() 
        // << " (density: "  << G4BestUnit(density,"Volumic Mass") << ")" 
        << endl;
          
@@ -277,11 +284,6 @@ void MCApplication::FinishRun()
     }
   }
   G4cout << "### End of stopping power table" << G4endl;
-*/
-/*
-  // normalize histogram
-  G4double fac = (mm/MeV) / (nEvents * fBinLength);
-  fHisto->ScaleH1(0,fac);
 
   if(GetVerbose() > 0){
     G4cout << "Range table for " << matName << G4endl;
@@ -295,10 +297,12 @@ void MCApplication::FinishRun()
     fHisto->Fill(4, e, std::log10(calc.GetRange(ekin[i],"monopole",matName)/mm));
   }
 */
+  // normalize histogram
+  // G4double fac = (mm/MeV) / (nEvents * fBinLength);
+  Double_t fac = 1. / (fNofEvents * fBinSize * 10.);
+  fHistograms[0]->Scale(fac);
+
   if ( fRootManager ) {
-    fHistograms[0]->Write();
-    fHistograms[1]->Write();
-    fHistograms[2]->Write();
     fRootManager->WriteAll();
     fRootManager->Close();
   }
@@ -421,8 +425,10 @@ void MCApplication::PreTrack()
 /// User actions at beginning of each track.
 /// Print info message.
 
+  // Check the monopole properties set via configuration macro
   // cout << endl;
-  // cout << "Starting new track" << endl;
+  // std::cout << "&&&&& Track mass: " << gMC->TrackMass() << std::endl;
+  // std::cout << "&&&&& Track charge: " << gMC->TrackCharge() << std::endl;
 }
 
 //_____________________________________________________________________________
@@ -444,12 +450,8 @@ void MCApplication::Stepping()
 
   edep *= 1.e03;  // convert in MeV
 
-  // TLorentzVector position;
-  // gMC->TrackPosition(position);
-
   //Bragg curve
   Double_t x = position.X() * 10.; 
-  // Double_t dx = gMC->TrackStep() * 10.;
   Double_t dx = (position.X() - prevPosition.X())*10.;
   // cout << "prevPosition " 
   //      << prevPosition.X() << ", "  << prevPosition.Y() << ", "  << prevPosition.Z() << endl;
@@ -457,16 +459,12 @@ void MCApplication::Stepping()
   //      << position.X() << ", "  << position.Y() << ", "  << position.Z() << endl;
   // cout << "dx= " << dx << endl;
 
-  // x += dx*G4UniformRand() - fRunAction->GetOffsetX();
   Double_t random = gRandom->Uniform(0,1);
-  x += dx * random - fOffsetX;    // CHECK: us of TRandom
+  x += dx * random - fOffsetX;
 
-  // cout << "filling histo 0 " << x << " " << edep << endl;
   fHistograms[0]->Fill(x, edep);
-  // fHistograms[0]->Fill(x, edep/2.);  
-         // !!! without /2. we get histo with y values 2X bigger than G4 histo
-  fHistograms[1]->Fill(x);
-  fHistograms[2]->Fill(edep);
+  // fHistograms[1]->Fill(x);
+  // fHistograms[2]->Fill(edep);
 
   // keep position from previous step
   prevPosition = position;
