@@ -12,7 +12,7 @@ Tags (history):
   14/08/2018
   v3-2-p3-monopole:
     Special release with added monopole physics and example Monopole,
-    based on v3-2-p3 (used in the ALICE production) 
+    based on v3-2-p3 (used in the ALICE production)
 
     Tested with Geant4 10.01.p03 (with embedded CLHEP 2.2.0.4)
       Root 5.34/36 and VGM 4.3
