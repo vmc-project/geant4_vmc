@@ -34,7 +34,7 @@
 //_____________________________________________________________________________
 TG4ModelConfigurationManager::TG4ModelConfigurationManager(const G4String& name,
                                                 const G4String& availableModels)
-  : TG4Verbose(G4String(name).append("ConfigurationManager"), 4),
+  : TG4Verbose(G4String(name).append("ConfigurationManager")),
                // make the verbose name unique
     fMessenger(0),
     fName(name),
