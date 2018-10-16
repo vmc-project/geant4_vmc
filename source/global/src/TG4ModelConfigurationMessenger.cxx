@@ -101,8 +101,7 @@ TG4ModelConfigurationMessenger::TG4ModelConfigurationMessenger(
     + "("" = the model will be applied to the default world region.";
   fSetRegionsCmd->SetGuidance(guidance);
   fSetRegionsCmd->SetParameterName("Regions", false);
-  fSetParticlesCmd->AvailableForStates(G4State_PreInit);
-
+  fSetRegionsCmd->AvailableForStates(G4State_PreInit);
 }
 
 //______________________________________________________________________________

@@ -62,6 +62,9 @@ class TG4ModelConfigurationManager : public TG4Verbose
     /// Not implemented
     TG4ModelConfigurationManager& operator=(const TG4ModelConfigurationManager& right);
 
+    // methods
+    void SetRegionsNames();
+
     // data members
 
     /// Messenger

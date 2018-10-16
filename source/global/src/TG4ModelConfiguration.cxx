@@ -38,10 +38,22 @@ G4bool Contains(const G4String& name, const G4String& nameList)
 TG4ModelConfiguration::TG4ModelConfiguration(const G4String& modelName)
   : fModelName(modelName),
     fParticles(),
+    fRegionsMedia(),
     fRegions(),
     fFastSimulationModel(0)
 {
 /// Standard constructor
+}
+
+//_____________________________________________________________________________
+void TG4ModelConfiguration::Print() const
+{
+/// Print all data
+
+  G4cout << "Model configuration: " << fModelName << G4endl;
+  G4cout << "particles: " << fParticles << G4endl;
+  G4cout << "media:     " << fRegionsMedia << G4endl;
+  G4cout << "regions:   " << fRegions << G4endl;
 }
 
 //_____________________________________________________________________________
@@ -55,7 +67,7 @@ G4bool TG4ModelConfiguration::HasParticle(const G4String& particleName)
 //_____________________________________________________________________________
 G4bool TG4ModelConfiguration::HasRegion(const G4String& regionName)
 {
-/// Return true if given particle is in the regions list
+/// Return true if given regionName is in the regions list
 
   return Contains(regionName, fRegions);
 }
