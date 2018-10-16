@@ -1,0 +1,17 @@
+# #------------------------------------------------
+# The Virtual Monte Carlo examples
+# Copyright (C) 2018 Ivana Hrivnacova
+# All rights reserved.
+#
+# For the licensing terms see geant4_vmc/LICENSE.
+# Contact: root-vmc@cern.ch
+#-------------------------------------------------
+
+#
+# Geant4 configuration macro for the Monopole example
+# (called from Root macro g4Config.C after initialization)
+
+# Inactivate step limiter for all particles except monopole
+/process/inactivate StepLimiter all
+/particle/select monopole  
+/particle/process/activate 3

@@ -1,0 +1,44 @@
+------------------------------------------------
+ The Virtual Monte Carlo examples
+ Copyright (C) 2018 Ivana Hrivnacova
+ All rights reserved.
+
+ For the licensing terms see geant4_vmc/LICENSE.
+ Contact: root-vmc@cern.ch
+-------------------------------------------------
+
+
+Monopole example
+================
+  Geant4 Monopole example adapted to Virtual Monte Carlo.
+
+  Demonstrates:
+    Energy deposited by classical magnetic monopole.
+
+  Note that the current example version can be run only with Geant4.  
+
+  See also description of in 
+    geant4/examples/exoticphysics/monopole/README
+    http://geant4-userdoc.web.cern.ch/geant4-userdoc/Doxygen/examples_doc/html/Examplemonopole.html
+
+Macros:
+=======
+
+  For running example with G4:
+  
+  load_g4.C       - macro to load the libraries to run the example with Geant
+  run_g4.C        - macro for running example
+  g4tgeoConfig.C  - configuration macro for G4 with TGeo geometry navigation (default)
+  g4Config.C      - configuration macro for G4 with native geometry navigation
+  
+To run example:
+===============
+  
+  With G4 + TGeo navigation:
+  root[0] .x load_g4.C
+  root[1] .x run_g4.C("g4tgeoConfig.C");
+
+  With G4:
+  root[0] .x load_g4.C
+  root[1] .x run_g4.C
+  

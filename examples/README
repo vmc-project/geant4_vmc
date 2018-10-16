@@ -1,6 +1,6 @@
 ------------------------------------------------
  The Virtual Monte Carlo examples
- Copyright (C) 2007 - 2014 Ivana Hrivnacova
+ Copyright (C) 2007 - 2018 Ivana Hrivnacova
  All rights reserved.
 
  For the licensing terms see geant4_vmc/LICENSE.
@@ -20,11 +20,12 @@ Introduction
   E06 - extended/optical/OpNovice
   A01 - basic/B5
   Gflash - extended/parameterisation/gflash
+  Monopole - extended/exoticphysics/monopole
   TR  - extended/electromagnetic/TestEm10
 
   In previous versions of Geant4 (up to 9.6), these examples
   were provided as novice (N01, N02, N03, N06) and extended
-  (A01, gflash, TestEm10) examples.
+  (A01, gflash, monopole, TestEm10) examples.
 
   See more detail description in the README files
   within each example subdirectory.

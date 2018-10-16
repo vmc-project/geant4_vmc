@@ -72,10 +72,10 @@ void TG4VerboseMessenger::SetNewValueToAll(const G4String value) const
      = G4UImanager::GetUIpointer()->GetTree()->GetTree(fkDirectoryName);
 
    for (G4int i=0; i<cmdTree->GetCommandEntry(); i++) {
-     if (cmdTree->GetCommand(i+1)->GetCommandName() != "all") {    
+     if (cmdTree->GetCommand(i+1)->GetCommandName() != "all") {
         // skip the first command in the tree ("all")
-        cmdTree->GetCommand(i+1)->DoIt(value);     
-     }        
+        cmdTree->GetCommand(i+1)->DoIt(value);
+     }
    }
 }
 

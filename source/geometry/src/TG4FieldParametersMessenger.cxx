@@ -21,6 +21,7 @@
 #include <G4UIcmdWithAString.hh>
 #include <G4UIcmdWithADouble.hh>
 #include <G4UIcmdWithADoubleAndUnit.hh>
+#include <G4UIcmdWithABool.hh>
 
 //_____________________________________________________________________________
 TG4FieldParametersMessenger::TG4FieldParametersMessenger(
@@ -28,6 +29,7 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
   : G4UImessenger(),
     fFieldParameters(fieldParameters),
     fDirectory(0),
+    fFieldTypeCmd(0),
     fEquationTypeCmd(0),
     fStepperTypeCmd(0),
     fSetStepMinimumCmd(0),
@@ -37,6 +39,7 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
     fSetMinimumEpsilonStepCmd(0),
     fSetMaximumEpsilonStepCmd(0),
     fSetConstDistanceCmd(0),
+    fSetIsMonopoleCmd(0),
     fPrintParametersCmd(0)
 {
 /// Standard constructor
@@ -50,13 +53,28 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
   fDirectory->SetGuidance("Magnetic field control commands.");
 
   G4String commandName = directoryName;
+  commandName.append("fieldType");
+  fFieldTypeCmd = new G4UIcmdWithAString(commandName, this);
+  G4String guidance = "Select type of the field";
+  fFieldTypeCmd->SetGuidance(guidance);
+  fFieldTypeCmd->SetParameterName("FieldType", false);
+  G4String candidates;
+  for ( G4int i=kMagnetic; i<=kGravity; i++ ) {
+    FieldType ft = (FieldType)i;
+    candidates += TG4FieldParameters::FieldTypeName(ft);
+    candidates += " ";
+  }
+  fFieldTypeCmd->SetCandidates(candidates);
+  fFieldTypeCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+
+  commandName = directoryName;
   commandName.append("equationType");
   fEquationTypeCmd = new G4UIcmdWithAString(commandName, this);
-  G4String guidance 
+  guidance
     = "Select type of the equation of motion of a particle in a field";
   fEquationTypeCmd->SetGuidance(guidance);
   fEquationTypeCmd->SetParameterName("EquationType", false);
-  G4String candidates; 
+  candidates = "";
   for ( G4int i=kMagUsualEqRhs; i<=kEqEMFieldWithEDM; i++ ) {
     EquationType et = (EquationType)i;
     candidates += TG4FieldParameters::EquationTypeName(et);
@@ -145,6 +163,14 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
   fSetConstDistanceCmd->AvailableForStates(G4State_PreInit);
 
   commandName = directoryName;
+  commandName.append("setIsMonopole");
+  fSetIsMonopoleCmd = new G4UIcmdWithABool(commandName, this);
+  fSetIsMonopoleCmd
+    ->SetGuidance("Activate creating a special monopole field integration.");
+  fSetIsMonopoleCmd->SetParameterName("IsMonopole", false);
+  fSetIsMonopoleCmd->AvailableForStates(G4State_PreInit);
+
+  commandName = directoryName;
   commandName.append("printParameters");
   fPrintParametersCmd = new G4UIcmdWithoutParameter(commandName, this);
   fPrintParametersCmd->SetGuidance("Prints all accuracy parameters.");
@@ -157,6 +183,7 @@ TG4FieldParametersMessenger::~TG4FieldParametersMessenger()
 /// Destructor
 
   delete fDirectory;
+  delete fFieldTypeCmd;
   delete fEquationTypeCmd;
   delete fStepperTypeCmd;
   delete fSetStepMinimumCmd;
@@ -166,6 +193,7 @@ TG4FieldParametersMessenger::~TG4FieldParametersMessenger()
   delete fSetMinimumEpsilonStepCmd;
   delete fSetMaximumEpsilonStepCmd;
   delete fSetConstDistanceCmd;
+  delete fSetIsMonopoleCmd;
 }
 
 //
@@ -178,16 +206,25 @@ void TG4FieldParametersMessenger::SetNewValue(G4UIcommand* command,
 {
 /// Apply command to the associated object.
 
-  if( command == fEquationTypeCmd ) { 
+  if( command == fFieldTypeCmd ) {
+    for ( G4int i=kMagnetic; i<=kGravity; i++ ) {
+      FieldType ft = (FieldType)i;
+      if ( newValues == TG4FieldParameters::FieldTypeName(ft) ) {
+        fFieldParameters->SetFieldType(ft);
+        break;
+      }
+    }
+  }
+  else if( command == fEquationTypeCmd ) {
     for ( G4int i=kMagUsualEqRhs; i<=kEqEMFieldWithEDM; i++ ) {
       EquationType et = (EquationType)i;
       if ( newValues == TG4FieldParameters::EquationTypeName(et) ) {
         fFieldParameters->SetEquationType(et);
         break;
-      }  
-    }     
+      }
+    }
   }
-  else if( command == fStepperTypeCmd ) { 
+  else if( command == fStepperTypeCmd ) {
     for ( G4int i=kCashKarpRKF45; i<=kRKG3Stepper; i++ ) {
       StepperType st = (StepperType)i;
       if ( newValues == TG4FieldParameters::StepperTypeName(st) ) {
@@ -196,33 +233,37 @@ void TG4FieldParametersMessenger::SetNewValue(G4UIcommand* command,
       } 
     }   
   }
-  if (command == fSetStepMinimumCmd) {  
+  else if (command == fSetStepMinimumCmd) {
     fFieldParameters
       ->SetStepMinimum(fSetStepMinimumCmd->GetNewDoubleValue(newValues)); 
   }
-  if (command == fSetDeltaChordCmd) {  
+  else if (command == fSetDeltaChordCmd) {
     fFieldParameters
       ->SetDeltaChord(fSetDeltaChordCmd->GetNewDoubleValue(newValues)); 
   }
-  if (command == fSetDeltaOneStepCmd) {  
+  else if (command == fSetDeltaOneStepCmd) {
     fFieldParameters
       ->SetDeltaOneStep(fSetDeltaOneStepCmd->GetNewDoubleValue(newValues)); 
   }
-  if (command == fSetDeltaIntersectionCmd) {  
+  else if (command == fSetDeltaIntersectionCmd) {
     fFieldParameters
       ->SetDeltaIntersection(fSetDeltaIntersectionCmd->GetNewDoubleValue(newValues)); 
   }
-  if (command == fSetMinimumEpsilonStepCmd) {  
+  else if (command == fSetMinimumEpsilonStepCmd) {
     fFieldParameters
       ->SetMinimumEpsilonStep(fSetMinimumEpsilonStepCmd->GetNewDoubleValue(newValues)); 
   }
-  if (command == fSetMaximumEpsilonStepCmd) {  
+  else if (command == fSetMaximumEpsilonStepCmd) {
     fFieldParameters
       ->SetMaximumEpsilonStep(fSetMaximumEpsilonStepCmd->GetNewDoubleValue(newValues)); 
   }
-  if (command == fSetConstDistanceCmd) {
+  else if (command == fSetConstDistanceCmd) {
     fFieldParameters
       ->SetConstDistance(fSetConstDistanceCmd->GetNewDoubleValue(newValues));
+  }
+  else if (command == fSetIsMonopoleCmd) {
+    fFieldParameters
+      ->SetIsMonopole(fSetIsMonopoleCmd->GetNewBoolValue(newValues));
   }
   else if (command == fPrintParametersCmd) {
     fFieldParameters->PrintParameters();

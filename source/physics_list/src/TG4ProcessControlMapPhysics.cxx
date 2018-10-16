@@ -70,6 +70,7 @@ void TG4ProcessControlMapPhysics::FillMap()
   controlMap->Add("muIoni", kG3LOSS);
   controlMap->Add("hIoni", kG3LOSS);
   controlMap->Add("ionIoni", kG3LOSS);
+  controlMap->Add("mplIoni", kG3LOSS);
 
   controlMap->Add("Decay", kDCAY); 
   controlMap->Add("RadioactiveDecay", kDCAY); 
@@ -251,6 +252,7 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
 
       if ( controlMap->GetControl(processName) == kNoG3Controls &&
            processName != "Transportation" &&
+           processName != "MonopoleTransportation" &&
            processName != "PositronNuclear" && 
            processName != "positronNuclear" && 
            processName != "ElectroNuclear" &&
@@ -264,6 +266,7 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
            processName != "G4MinEkineCuts" && 
            processName != "MaxTimeCuts" && 
            processName != "stackPopper" &&
+           processName != "StepLimiter" &&
            processName != "GammaXTRadiator" &&
            processName != "StrawXTRadiator" &&
            processName != "RegularXTRadiator" &&

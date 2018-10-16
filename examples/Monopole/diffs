@@ -1,0 +1,13 @@
+83a84,85
+> Create G4MonopoleFieldSetup
+> G4MonopoleEquation::G4MonopoleEquation
+856c858
+< Time of this run:   User=24.030000s Real=24.071512s Sys=0.030000s
+---
+> Time of this run:   User=48.250000s Real=48.399231s Sys=0.080000s
+861,862c863,864
+<  projected Range= 7.7453 cm    rms= 0.010352 cm 
+< Real time 0:00:26, CP time 26.150
+---
+>  projected Range= 7.7482 cm    rms= 0.010893 cm 
+> Real time 0:00:50, CP time 50.440

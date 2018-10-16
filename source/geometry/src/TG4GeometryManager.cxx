@@ -22,7 +22,7 @@
 #include "TG4MediumMap.h"
 #include "TG4Medium.h"
 #include "TG4Limits.h"
-#include "TG4CachedMagneticField.h"
+#include "TG4Field.h"
 #include "TG4FieldParameters.h"
 #include "TG4RadiatorDescription.h"
 #include "TG4G3Units.h"
@@ -36,6 +36,7 @@
 #include <G4ReflectionFactory.hh>
 #include <G4Material.hh>
 #include <G4TransportationManager.hh>
+#include <G4MonopoleFieldSetup.hh>
 #include <G4FieldManager.hh>
 #include <G4PVPlacement.hh>
 #include <G4SystemOfUnits.hh>
@@ -67,7 +68,7 @@ TG4GeometryManager* TG4GeometryManager::fgInstance = 0;
 const G4double      TG4GeometryManager::fgDefaultLimitDensity = 0.001*(g/cm3);
 const G4double      TG4GeometryManager::fgDefaultMaxStep= 10*cm;
 
-G4ThreadLocal std::vector<TG4MagneticField*>* TG4GeometryManager::fgMagneticFields = 0;
+G4ThreadLocal std::vector<TG4Field*>* TG4GeometryManager::fgFields = 0;
 
 //_____________________________________________________________________________
 TG4GeometryManager::TG4GeometryManager(const TString& userGeometry) 
@@ -82,8 +83,8 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fFieldParameters(),
     fUserRegionConstruction(0),
     fUserPostDetConstruction(0),
-    fIsLocalMagField(false),
-    fIsZeroMagField(false),
+    fIsLocalField(false),
+    fIsZeroField(false),
     fIsUserMaxStep(false),
     fIsMaxStepInLowDensityMaterials(true),
     fLimitDensity(fgDefaultLimitDensity),
@@ -120,7 +121,7 @@ TG4GeometryManager::~TG4GeometryManager()
     delete fFieldParameters[i];
   }
 
-  delete fgMagneticFields;
+  delete fgFields;
      // magnetic field objects are deleted via G4 kernel
 
   delete fGeometryServices;
@@ -129,7 +130,7 @@ TG4GeometryManager::~TG4GeometryManager()
   delete fEmModelsManager;
 
   fgInstance = 0;
-  fgMagneticFields = 0;
+  fgFields = 0;
 }
 
 //
@@ -554,28 +555,23 @@ void TG4GeometryManager::FillMediumMap()
   }
 
   if ( fUserGeometry == "Geant4" )
-    FillMediumMapFromG4(); 
-}                   
+    FillMediumMapFromG4();
+}
 
 //_____________________________________________________________________________
-void TG4GeometryManager::CreateMagField(TVirtualMagField* magField,
-                                        TG4FieldParameters* fieldParameters,
-                                        G4LogicalVolume* lv)
+void TG4GeometryManager::CreateField(TVirtualMagField* magField,
+                                     TG4FieldParameters* fieldParameters,
+                                     G4LogicalVolume* lv)
 {
-/// Create magnetic field
+/// Create magnetic, electromagnetic or gravity field
 
-  TG4MagneticField* tg4MagneticField = 0;
-  G4bool isCachedMagneticField = false;
-  if ( fieldParameters->GetConstDistance() > 0. ) {
-    tg4MagneticField = new TG4CachedMagneticField(*fieldParameters, magField, lv);
-    isCachedMagneticField = true;
-  } else {
-    tg4MagneticField = new TG4MagneticField(*fieldParameters, magField, lv);
-    isCachedMagneticField = false;
-  }
+  TG4Field* tg4Field = new TG4Field(*fieldParameters, magField, lv);
 
   if ( VerboseLevel() > 0 ) {
-    G4String fieldType = "";
+    G4String fieldType
+      = TG4FieldParameters::FieldTypeName(fieldParameters->GetFieldType());
+    G4bool isCachedMagneticField
+      = (fieldParameters->GetConstDistance() > 0.);
     if ( ! lv ) {
       fieldType = "Global";
     } else {
@@ -587,43 +583,63 @@ void TG4GeometryManager::CreateMagField(TVirtualMagField* magField,
       fieldType.append(" cached");
     }
 
-    G4cout << fieldType << " magnetic field created with stepper ";
+    G4cout << fieldType << " field created with stepper ";
     G4cout << TG4FieldParameters::StepperTypeName(
                 fieldParameters->GetStepperType()) << G4endl;
   }
 
   // create magnetic field vector
-  if ( ! fgMagneticFields ) {
-    fgMagneticFields = new std::vector<TG4MagneticField*>();
+  if ( ! fgFields ) {
+    fgFields = new std::vector<TG4Field*>();
   }
 
-  fgMagneticFields->push_back(tg4MagneticField);
+  fgFields->push_back(tg4Field);
 }
 
 //_____________________________________________________________________________
-void TG4GeometryManager::ConstructGlobalMagField()
+void TG4GeometryManager::ConstructGlobalField()
 {
 /// Construct Geant4 global magnetic field from the field set to gMC
 
   // Create global magnetic field
   if ( gMC->GetMagField() ) {
-    CreateMagField(gMC->GetMagField(), fFieldParameters[0], 0);
+    CreateField(gMC->GetMagField(), fFieldParameters[0], 0);
 
-    if ( fIsZeroMagField ) {
-      ConstructZeroMagFields();
+    // create monopole field
+    if ( fFieldParameters[0]->GetIsMonopole() ) {
+      G4cout << "Create G4MonopoleFieldSetup" << G4endl;
+      G4MonopoleFieldSetup*  monFieldSetup = G4MonopoleFieldSetup::GetMonopoleFieldSetup();
+      TG4Field* tg4Field =  (*fgFields)[0];
+      G4Field* field = tg4Field->GetG4Field();
+      G4MagneticField* magField = dynamic_cast<G4MagneticField*>(field);
+      if ( ! magField ) {
+        // add warning
+        G4cerr
+          << "Wrong field type. Only magnetic field is supported in G4MonopoleFieldSetup."
+          << G4endl;
+      } else {
+        monFieldSetup->SetMagneticField(magField);
+        monFieldSetup->SetDefaultEquation(tg4Field->GetEquation());
+        monFieldSetup->SetDefaultStepper(tg4Field->GetStepper());
+        monFieldSetup->InitialiseAll();
+      }
+
+      if ( fIsZeroField ) {
+        ConstructZeroFields();
+      }
     }
   }
 }
 
 //_____________________________________________________________________________
-void TG4GeometryManager::ConstructZeroMagFields()
+void TG4GeometryManager::ConstructZeroFields()
 {
 /// Loop over all logical volumes and set zero magnetic if the volume
 /// is associated with a tracking medium with ifield value = 0.
 /// This function is invoked only when a global magnetic field is defined.
 
   if ( VerboseLevel() > 1 )
-    G4cout << "TG4GeometryManager::ConstructZeroMagFields()" << G4endl;
+    G4cout << "TG4GeometryManager::ConstructZeroFields()" << G4endl;
 
   G4bool forceToAllDaughters = false;
 
@@ -705,7 +721,7 @@ TG4FieldParameters* TG4GeometryManager::GetOrCreateFieldParameters(
 }
 
 //_____________________________________________________________________________
-void TG4GeometryManager::ConstructLocalMagFields()
+void TG4GeometryManager::ConstructLocalFields()
 {
 /// Construct Geant4 local magnetic field from Root geometry.
 
@@ -714,7 +730,7 @@ void TG4GeometryManager::ConstructLocalMagFields()
        ( fUserGeometry != "RootToGeant4" ) )  return;
 
   if ( VerboseLevel() > 1 )
-    G4cout << "TG4GeometryManager::ConstructLocalMagFields()" << G4endl;
+    G4cout << "TG4GeometryManager::ConstructLocalFields()" << G4endl;
 
   TIter next(gGeoManager->GetListOfVolumes());
   TGeoVolume* geoVolume;
@@ -728,7 +744,7 @@ void TG4GeometryManager::ConstructLocalMagFields()
     if ( ! magField ) {
       TString message = geoVolume->GetName();
       message += ": uknown field type will be ignored.";
-      TG4Globals::Warning("TG4GeometryManager", "ConstructLocalMagFields",
+      TG4Globals::Warning("TG4GeometryManager", "ConstructLocalFields",
         "No magnetic field is defined.");
       continue;
     }
@@ -742,7 +758,7 @@ void TG4GeometryManager::ConstructLocalMagFields()
     if ( ! lv ) {
       TString message = geoVolume->GetName();
       message += " volume not found in Geant4 geometry.";
-      TG4Globals::Warning("TG4GeometryManager", "ConstructLocalMagFields",
+      TG4Globals::Warning("TG4GeometryManager", "ConstructLocalFields",
         "No magnetic field is defined.");
       continue;
     }
@@ -751,7 +767,7 @@ void TG4GeometryManager::ConstructLocalMagFields()
     TG4FieldParameters* fieldParameters = GetOrCreateFieldParameters(volumeName);
 
     // Create magnetic field
-    CreateMagField(magField, fieldParameters, lv);
+    CreateField(magField, fieldParameters, lv);
   }
 }
 
@@ -814,11 +830,11 @@ void TG4GeometryManager::ConstructSDandField()
   // Initialize SD manager (create SDs)
   TG4SDManager::Instance()->Initialize();
 
-  // Create magnetic field
-  ConstructGlobalMagField();
+  // Create global field
+  ConstructGlobalField();
 
-  if ( fIsLocalMagField ) {
-    ConstructLocalMagFields();
+  if ( fIsLocalField ) {
+    ConstructLocalFields();
   }
 }
 
@@ -831,7 +847,7 @@ void TG4GeometryManager::FinishGeometry()
     G4cout << "TG4GeometryManager::FinishGeometry" << G4endl;
 
   // Create magnetic field
-  // ConstructMagField();  
+  // ConstructField();
 
   // Fill medium map if not yet done
   if ( fGeometryServices->GetMediumMap()->GetNofMedia() == 0 )
@@ -848,31 +864,31 @@ void TG4GeometryManager::FinishGeometry()
 }
 
 //_____________________________________________________________________________
-void TG4GeometryManager::UpdateMagField()
+void TG4GeometryManager::UpdateField()
 {
 /// Update magnetic field.
 /// This function must be called if the field parameters were changed
 /// in other than PreInit> phase.
 
-  if ( ! fgMagneticFields ) {
-    TG4Globals::Warning("TG4GeometryManager", "UpdateMagField",
+  if ( ! fgFields ) {
+    TG4Globals::Warning("TG4GeometryManager", "UpdateField",
       "No magnetic field is defined.");
      return;
   }
   
   if ( VerboseLevel() > 1 ) 
-    G4cout << "TG4GeometryManager::UpdateMagField" << G4endl;
+    G4cout << "TG4GeometryManager::UpdateField" << G4endl;
 
   // Only the parameters defined in TG4Magnetic field can be updated when
   // field already exists, so we can safely call the base class non virtual
   // method
-  for (G4int i=0; i<G4int(fgMagneticFields->size()); ++i) {
-    fgMagneticFields->at(i)->Update(*fFieldParameters[i]);
+  for (G4int i=0; i<G4int(fgFields->size()); ++i) {
+    fgFields->at(i)->Update(*fFieldParameters[i]);
   }
 }
 
 //_____________________________________________________________________________
-void TG4GeometryManager::CreateMagFieldParameters(const G4String& fieldVolName)
+void TG4GeometryManager::CreateFieldParameters(const G4String& fieldVolName)
 {
 /// Create local magnetic field parameters which can be then configured
 /// by the user via UI commands.
@@ -961,27 +977,27 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
 
 
 //_____________________________________________________________________________
-void TG4GeometryManager::SetIsLocalMagField(G4bool isLocalMagField)
+void TG4GeometryManager::SetIsLocalField(G4bool isLocalField)
 {
   /// (In)Activate use of local magnetic field(s)
 
   if ( VerboseLevel() > 1 )
-    G4cout << "TG4GeometryManager::SetIsLocalMagField: "
-           << std::boolalpha << isLocalMagField << G4endl;
+    G4cout << "TG4GeometryManager::SetIsLocalField: "
+           << std::boolalpha << isLocalField << G4endl;
 
-  fIsLocalMagField = isLocalMagField;
+  fIsLocalField = isLocalField;
 }
 
 //_____________________________________________________________________________
-void TG4GeometryManager::SetIsZeroMagField(G4bool isZeroMagField)
+void TG4GeometryManager::SetIsZeroField(G4bool isZeroField)
 {
   /// (In)Activate propagating 'ifield = 0' parameter defined in tracking media
 
   if ( VerboseLevel() > 1 )
-    G4cout << "TG4GeometryManager::SetIsZerolMagField: "
-           << std::boolalpha << isZeroMagField << G4endl;
+    G4cout << "TG4GeometryManager::SetIsZeroField: "
+           << std::boolalpha << isZeroField << G4endl;
 
-  fIsZeroMagField = isZeroMagField;
+  fIsZeroField = isZeroField;
 }
 
 //_____________________________________________________________________________
@@ -1064,9 +1080,9 @@ void TG4GeometryManager::PrintFieldStatistics() const
 /// Print field statistics.
 /// Currently only cached field print the cahching statistics.
 
-  if ( VerboseLevel() > 0 &&  fgMagneticFields ) {
-    for (G4int i=0; i<G4int(fgMagneticFields->size()); ++i) {
-       fgMagneticFields->at(i)->PrintStatistics();
+  if ( VerboseLevel() > 0 &&  fgFields ) {
+    for (G4int i=0; i<G4int(fgFields->size()); ++i) {
+       fgFields->at(i)->PrintStatistics();
     }
   }
 }

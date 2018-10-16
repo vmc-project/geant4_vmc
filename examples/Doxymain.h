@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2007 - 2018 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -19,7 +19,7 @@
 
   To demonstrate use of VirtualMC, several Geant4 examples and one
   Garfield example have been rewritten as VMC applications:
-  \ref E01, \ref E02, \ref E03, \ref E06, \ref A01, \ref Gflash, \ref ExGarfield, \ref TR.
+  \ref E01, \ref E02, \ref E03, \ref E06, \ref A01, \ref ExGarfield, \ref Gflash, \ref Monopole, \ref TR.
   
   The correspondence with the examples in Geant4  (since 10.00.x) is:
   - E01 - no equivalent
@@ -28,6 +28,7 @@
   - E06 - extended/optical/OpNovice
   - A01 - basic/B5
   - \ref Gflash - extended/parameterisation/gflash
+  - \ref Monopole - extended/exoticphysics/monopole
   - \ref TR - extended/electromagnetic/TestEm10
 
   In previous versions of Geant4 (up to 9.6), these examples
@@ -42,6 +43,7 @@
   - \ref README_A01
   - \ref README_ExGarfield
   - \ref README_Gflash
+  - \ref README_Monopole
   - \ref README_TR
 
 \section exa_s2 Geometry definition

@@ -51,8 +51,8 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
     fSpecialControls(false),
     fSpecialCuts(false),
     fAGDDMessenger(0),
-    fGDMLMessenger(0)
-    
+    fGDMLMessenger(0),
+    fParameters()
 {
 /// Standard constructor
 
@@ -221,8 +221,8 @@ G4VUserPhysicsList* TG4RunConfiguration::CreatePhysicsList()
     
   if ( extraSelection != "" ) {
     G4cout << "Adding ExtraPhysicsList " << extraSelection << G4endl;
-    builder->AddPhysicsList(new TG4ExtraPhysicsList(extraSelection));
-  }  
+    builder->AddPhysicsList(new TG4ExtraPhysicsList(extraSelection, fParameters));
+  }
     
   // add option here
   G4cout << "Adding SpecialPhysicsList " << fSpecialProcessSelection.Data() << G4endl;
@@ -313,6 +313,23 @@ void  TG4RunConfiguration::SetMTApplication(Bool_t mtApplication)
 /// Select running application in MT mode, if available.
 
   fMTApplication = mtApplication;
+}
+
+//_____________________________________________________________________________
+void  TG4RunConfiguration::SetParameter(const TString& name, Double_t value)
+{
+/// Set a special paremeter which can be then used later.
+/// Actually used for monopole properties:
+/// monopoleMass, monopoleElCharge, monopoleMagCharge
+
+  std::map<TString, Double_t>::iterator it = fParameters.find(name);
+
+  if ( it != fParameters.end() ) {
+    it->second = value;
+  }
+  else {
+    fParameters[name] = value;
+  }
 }
 
 //_____________________________________________________________________________

@@ -38,7 +38,24 @@ const G4double  TG4FieldParameters::fgkDefaultConstDistance = 0.;
 //
 
 //_____________________________________________________________________________
-G4String TG4FieldParameters::EquationTypeName(EquationType equation) 
+G4String TG4FieldParameters::FieldTypeName(FieldType field)
+{
+/// Return the field type as a string
+
+  switch ( field ) {
+    case kMagnetic:        return G4String("Magnetic");
+    case kElectroMagnetic: return G4String("ElectroMagnetic");
+    case kGravity:         return G4String("Gravity");
+  }
+
+  TG4Globals::Exception(
+    "TG4FieldParameters", "FieldTypeName:",
+    "Unknown field value.");
+  return G4String();
+}
+
+//_____________________________________________________________________________
+G4String TG4FieldParameters::EquationTypeName(EquationType equation)
 {
 /// Return the equation type as a string
 
@@ -88,6 +105,21 @@ G4String TG4FieldParameters::StepperTypeName(StepperType stepper)
 }      
 
 //_____________________________________________________________________________
+FieldType TG4FieldParameters::GetFieldType(const G4String& name)
+{
+/// Return the field type for given field type name
+
+  if ( name == FieldTypeName(kMagnetic) )        return kMagnetic;
+  if ( name == FieldTypeName(kElectroMagnetic) ) return kElectroMagnetic;
+  if ( name == FieldTypeName(kGravity) )         return kGravity;
+
+  TG4Globals::Exception(
+    "TG4FieldParameters", "GetFieldType:",
+    "Unknown field name.");
+  return kMagnetic;
+}
+
+//_____________________________________________________________________________
 EquationType TG4FieldParameters::GetEquationType(const G4String& name)
 {
 /// Return the equation type for given equation type name
@@ -104,7 +136,6 @@ EquationType TG4FieldParameters::GetEquationType(const G4String& name)
     "Unknown equation name.");
   return kMagUsualEqRhs; 
 }      
-
 
 //_____________________________________________________________________________
 StepperType  TG4FieldParameters::GetStepperType(const G4String& name)
@@ -149,11 +180,13 @@ TG4FieldParameters::TG4FieldParameters(const G4String& volumeName)
     fDeltaIntersection(fgkDefaultDeltaIntersection),
     fMinimumEpsilonStep(fgkDefaultMinimumEpsilonStep),
     fMaximumEpsilonStep(fgkDefaultMaximumEpsilonStep),
+    fField(kMagnetic),
     fEquation(kMagUsualEqRhs),
     fStepper(kClassicalRK4),
     fUserEquation(0),
     fUserStepper(0),
-    fConstDistance(0)
+    fConstDistance(0),
+    fIsMonopole(false)
 {
 /// Default constructor
 
@@ -181,10 +214,12 @@ void TG4FieldParameters::PrintParameters() const
   if ( fVolumeName.size() ) {
     G4cout << "  volume name = " << fVolumeName << G4endl;
   }
-  G4cout << "  equation type = " << EquationTypeName(fEquation) << G4endl
+  G4cout << "  field type = "    << FieldTypeName(fField) << G4endl
+         << "  equation type = " << EquationTypeName(fEquation) << G4endl
          << "  stepper type = "  << StepperTypeName(fStepper) << G4endl 
          << "  minStep = "       << fStepMinimum  << " mm" << G4endl
          << "  constDistance = " << fConstDistance  << " mm" << G4endl
+         << "  isMonopole = " << std::boolalpha << fIsMonopole << G4endl
          << "  deltaChord = "    << fDeltaChord   << " mm" << G4endl
          << "  deltaOneStep = "  << fDeltaOneStep << " mm" << G4endl
          << "  deltaIntersection = " << fDeltaIntersection << " mm" << G4endl

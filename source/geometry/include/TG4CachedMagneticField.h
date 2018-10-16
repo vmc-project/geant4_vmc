@@ -44,16 +44,17 @@ class TVirtualMagField;
 class TG4CachedMagneticField : public TG4MagneticField
 {
   public:
-    TG4CachedMagneticField(const TG4FieldParameters& parameters,
-                           TVirtualMagField* magField,
-                           G4LogicalVolume* lv = 0);
+    TG4CachedMagneticField(TVirtualMagField* magField,
+                           G4double constDistance);
     virtual ~TG4CachedMagneticField();
 
     virtual void GetFieldValue(const G4double point[3], G4double* bfield) const;
     
-    void Update(const TG4FieldParameters& parameters);
+    // virtual void Update(const TG4FieldParameters& parameters);
     virtual void PrintStatistics() const;
+
     void ClearCounter();
+    void SetConstDistance(G4double value);
     
   private:
     // data members
