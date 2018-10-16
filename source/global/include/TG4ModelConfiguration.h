@@ -22,7 +22,7 @@ class G4VFastSimulationModel;
 /// \ingroup global
 /// \brief A helper class to hold a configuration of a special physics model.
 ///
-/// The class holds the information abou the association of
+/// The class holds the information about the association of
 /// the special physics model (EM physics or fast simulation model)
 /// and the applicable regions (G4Region) defined via tracking media
 /// and particles.
@@ -34,14 +34,19 @@ class TG4ModelConfiguration
   public:
     TG4ModelConfiguration(const G4String& modelName);
     
+    // methods
+    void Print() const;
+
     // set methods
     void SetParticles(const G4String& particles);
+    void SetRegionsMedia(const G4String& regionsMedia);
     void SetRegions(const G4String& regions);
     void SetFastSimulationModel(G4VFastSimulationModel* fastSimulationModel);
 
     // get methods
     const G4String& GetModelName() const;
     const G4String& GetParticles() const;
+    const G4String& GetRegionsMedia() const;
     const G4String& GetRegions() const;
     G4VFastSimulationModel* GetFastSimulationModel() const;
 
@@ -57,7 +62,8 @@ class TG4ModelConfiguration
     // data members
     G4String  fModelName; ///< the EM model name
     G4String  fParticles; ///< the list of particle names
-    G4String  fRegions;   ///< the list of regions (=media)
+    G4String  fRegionsMedia;   ///< the list of regions media
+    G4String  fRegions;  ///< the list of created regions (per materials)
     G4VFastSimulationModel*  fFastSimulationModel; ///< fast simulation model
 };
 
@@ -68,8 +74,13 @@ inline void TG4ModelConfiguration::SetParticles(const G4String& particles) {
   fParticles = particles;
 }
 
-inline void TG4ModelConfiguration::SetRegions(const G4String& regions) {
+inline void TG4ModelConfiguration::SetRegionsMedia(const G4String& regionsMedia) {
   /// Set the list of regions
+  fRegionsMedia = regionsMedia;
+}
+
+inline void TG4ModelConfiguration::SetRegions(const G4String& regions) {
+  /// Set the list of created regions
   fRegions = regions;
 }
 
@@ -87,6 +98,11 @@ inline const G4String& TG4ModelConfiguration::GetModelName() const {
 inline const G4String& TG4ModelConfiguration::GetParticles() const {
   /// Return the list of particles
   return fParticles;
+}
+
+inline const G4String& TG4ModelConfiguration::GetRegionsMedia() const {
+  /// Return the list of regions
+  return fRegionsMedia;
 }
 
 inline const G4String& TG4ModelConfiguration::GetRegions() const {
