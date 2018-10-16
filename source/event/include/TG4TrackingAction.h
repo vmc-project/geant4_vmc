@@ -127,6 +127,10 @@ class TG4TrackingAction : public G4UserTrackingAction, public TG4Verbose
 
   /// track ID for which the new verbose level is applied
   G4int fNewVerboseTrackID;
+
+  /// Flag whether for a newly picked up particle the
+  /// TVirtualMCApplication::FinishPrimary should be called
+  G4bool fDoFinishPrimary;
 };
 
 // inline methods

@@ -52,6 +52,7 @@ class TG4EventAction : public G4UserEventAction, public TG4Verbose
   void SetMCStack(TVirtualMCStack* mcStack);
   void SetPrintMemory(G4bool printMemory);
   void SetSaveRandomStatus(G4bool saveRandomStatus);
+  void SetIsInterruptibleEvent(G4bool isInterruptible);
 
   // get methods
   G4bool GetPrintMemory() const;
@@ -87,6 +88,11 @@ class TG4EventAction : public G4UserEventAction, public TG4Verbose
 
   /// Control for saving random engine status for each event
   G4bool fSaveRandomStatus;
+
+  /// flag if event is interruptible meaning that GEANT4_VMC relies on
+  /// TVirtualMCApplication::BeginEvent() and ::FinishEvent() will be called
+  ///  from outside.
+  G4bool fIsInterruptibleEvent;
 };
 
 // inline methods
@@ -119,6 +125,12 @@ inline void TG4EventAction::SetSaveRandomStatus(G4bool saveRandomStatus)
 {
   /// Set option for saving random engine status for each event
   fSaveRandomStatus = saveRandomStatus;
+}
+
+inline void TG4EventAction::SetIsInterruptibleEvent(G4bool isInterruptible)
+{
+  /// Set option for saving random engine status for each event
+  fIsInterruptibleEvent = isInterruptible;
 }
 
 #endif // TG4_EVENT_ACTION_H

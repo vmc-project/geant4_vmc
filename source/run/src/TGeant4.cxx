@@ -169,6 +169,10 @@ TGeant4::TGeant4(const char* name, const char* title,
   if (isMaster) {
     fgMasterInstance = this;
     fgMasterApplicationInstance = TVirtualMCApplication::Instance();
+    configuration->SetUseExternalGeometryConstruction(
+      UseExternalGeometryConstruction());
+    configuration->SetUseExternalParticleGeneration(
+      UseExternalParticleGeneration());
   }
 
   // Inactivate MT mode if Geant4 is built in sequential mode
@@ -191,6 +195,8 @@ TGeant4::TGeant4(const char* name, const char* title,
   // create geometry manager - shared
   if (isMaster) {
     fGeometryManager = new TG4GeometryManager(fUserGeometry);
+    fGeometryManager->SetUseExternalGeometryConstruction(
+      UseExternalGeometryConstruction());
     // add verbose level
     // G4cout << "TG4GeometryManager has been created." << G4endl;
 
@@ -1172,6 +1178,26 @@ void TGeant4::ProcessEvent()
   /// Return exception
 
   fRunManager->ProcessEvent();
+}
+
+//_____________________________________________________________________________
+void TGeant4::ProcessEvent(Int_t eventId)
+{
+  /// Process one event passing eventId and flag whether that is interruptible
+  /// meaning that GEANT4_VMC relies on TVirtualMCApplication::BeginEvent() and
+  /// ::FinishEvent() will be called from outside.
+
+  fRunManager->ProcessEvent(eventId, kFALSE);
+}
+
+//_____________________________________________________________________________
+void TGeant4::ProcessEvent(Int_t eventId, Bool_t isInterruptible)
+{
+  /// Process one event passing eventId and flag whether that is interruptible
+  /// meaning that GEANT4_VMC relies on TVirtualMCApplication::BeginEvent() and
+  /// ::FinishEvent() will be called from outside.
+
+  fRunManager->ProcessEvent(eventId, isInterruptible);
 }
 
 //_____________________________________________________________________________

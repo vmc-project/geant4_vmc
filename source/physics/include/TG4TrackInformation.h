@@ -19,6 +19,8 @@
 #include <G4VUserTrackInformation.hh>
 #include <globals.hh>
 
+#include "TMCParticleStatus.h"
+
 class G4ParticleDefinition;
 
 /// \ingroup physics
@@ -49,16 +51,20 @@ class TG4TrackInformation : public G4VUserTrackInformation
   void SetParentParticleID(G4int parentParticleID);
   void SetPDGLifetime(G4double pdgLifetime);
   void SetPDGEncoding(G4int pdgEncoding);
+  void SetInitialTrackStatus(TMCParticleStatus* status);
   void SetIsUserTrack(G4bool isUserTrack);
   void SetStop(G4bool stop);
+  void SetInterrupt(G4bool interrupt);
 
   // get methods
   G4int GetTrackParticleID() const;
   G4int GetParentParticleID() const;
   G4double GetPDGLifetime() const;
   G4int GetPDGEncoding() const;
+  const TMCParticleStatus* GetInitialTrackStatus() const;
   G4bool IsUserTrack() const;
   G4bool IsStop() const;
+  G4bool IsInterrupt() const;
 
  private:
   // data members
@@ -69,6 +75,11 @@ class TG4TrackInformation : public G4VUserTrackInformation
   G4double fPDGEncoding;   ///< the particle PDG encoding
   G4bool fIsUserTrack;     ///< true if defined by user and not primary track
   G4bool fStop;            ///< true if track should be stopped
+  G4bool fInterrupt;       ///< true if track should be interrupted
+  /// Pointer holds some additional information on the particle status e.g. for
+  /// the case the track has already been transported up to the current point in
+  /// another engine.
+  TMCParticleStatus* fInitialTrackStatus;
 };
 
 // inline methods

@@ -42,6 +42,8 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
   const TString& physicsList, const TString& specialProcess,
   Bool_t specialStacking, Bool_t mtApplication)
   : fUserGeometry(userGeometry),
+    fUseExternalGeometryConstruction(false),
+    fUseExternalParticleGeneration(false),
     fPhysicsListSelection(physicsList),
     fSpecialProcessSelection(),
     fSpecialStacking(specialStacking),
@@ -319,6 +321,26 @@ void TG4RunConfiguration::SetParameter(const TString& name, Double_t value)
 }
 
 //_____________________________________________________________________________
+void TG4RunConfiguration::SetUseExternalGeometryConstruction(Bool_t value)
+{
+  /// Disables internal dispatch to TVirtualMCApplication::ConstructGeometry()
+  /// and hence rely on geometry construction being triggered from outside.
+
+  fUseExternalGeometryConstruction = value;
+}
+
+//_____________________________________________________________________________
+void TG4RunConfiguration::SetUseExternalParticleGeneration(Bool_t value)
+{
+  /// Disables internal dispatch to TVirtualMCApplication::GeneratePrimaries()
+  /// and tells the engine to not make any implicit assumptions on whether it's
+  /// a primary or a secondary. The track could have even been transported by
+  /// another engine to the current point.
+
+  fUseExternalParticleGeneration = value;
+}
+
+//_____________________________________________________________________________
 TString TG4RunConfiguration::GetUserGeometry() const
 {
   /// Return the way user geometry is built
@@ -360,4 +382,21 @@ Bool_t TG4RunConfiguration::IsMTApplication() const
   /// Return true if running in multi-threading mode is activated
 
   return fMTApplication;
+}
+
+//_____________________________________________________________________________
+Bool_t TG4RunConfiguration::UseExternalGeometryConstruction() const
+{
+  /// Disables internal dispatch to TVirtualMCApplication::ConstructGeometry()
+  /// and hence rely on geometry construction being trigeered from outside.
+
+  return fUseExternalGeometryConstruction;
+}
+
+//_____________________________________________________________________________
+Bool_t TG4RunConfiguration::UseExternalParticleGeneration() const
+{
+  /// Return true if running in multi-threading mode is activated
+
+  return fUseExternalParticleGeneration;
 }

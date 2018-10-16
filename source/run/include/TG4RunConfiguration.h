@@ -101,6 +101,8 @@ class TG4RunConfiguration
   // set methods
   void SetMTApplication(Bool_t mtApplication);
   void SetParameter(const TString& name, Double_t value);
+  void SetUseExternalGeometryConstruction(Bool_t value);
+  void SetUseExternalParticleGeneration(Bool_t value);
 
   // get methods
   TString GetUserGeometry() const;
@@ -109,18 +111,24 @@ class TG4RunConfiguration
   Bool_t IsSpecialControls() const;
   Bool_t IsSpecialCuts() const;
   Bool_t IsMTApplication() const;
+  Bool_t UseExternalGeometryConstruction() const;
+  Bool_t UseExternalParticleGeneration() const;
 
  protected:
   // data members
-  TString fUserGeometry;            ///< way of building geometry
-  TString fPhysicsListSelection;    ///< physics list selection
-  TString fSpecialProcessSelection; ///< special process selection
-  Bool_t fSpecialStacking;          ///< option for special stacking
-  Bool_t fMTApplication;            ///< option for MT mode if available
-  Bool_t fSpecialControls;          ///< option for special controls
-  Bool_t fSpecialCuts;              ///< option for special cuts
-  G4UImessenger* fAGDDMessenger;    //!< XML messenger
-  G4UImessenger* fGDMLMessenger;    //!< XML messenger
+  TString fUserGeometry; ///< way of building geometry
+  Bool_t
+    fUseExternalGeometryConstruction; ///< Rely on geometry is built externally
+  Bool_t fUseExternalParticleGeneration; ///< Rely on particles are pushed to
+                                         ///< stack externally
+  TString fPhysicsListSelection;         ///< physics list selection
+  TString fSpecialProcessSelection;      ///< special process selection
+  Bool_t fSpecialStacking;               ///< option for special stacking
+  Bool_t fMTApplication;                 ///< option for MT mode if available
+  Bool_t fSpecialControls;               ///< option for special controls
+  Bool_t fSpecialCuts;                   ///< option for special cuts
+  G4UImessenger* fAGDDMessenger;         //!< XML messenger
+  G4UImessenger* fGDMLMessenger;         //!< XML messenger
 
   /// The map of special parameters which need to be set before creating TGeant4
   /// Actually used for monopole properties:

@@ -1,0 +1,55 @@
+------------------------------------------------
+ The Virtual Monte Carlo examples
+ Copyright (C) 2007 - 2014 Ivana Hrivnacova
+ All rights reserved.
+
+ For the licensing terms see geant4_vmc/LICENSE.
+ Contact: root-vmc@cern.ch
+-------------------------------------------------
+
+
+Example03c
+==========
+  Geant4_VMC Example03 adapted to demonstrate the usage of sharing event
+  simulation between multiple engines.
+
+  Demonstrates:
+    Geometry - divided volume (Gsdvn), defined via TGeo only
+    Definition of sensitive volumes
+    Physics - hadronics processes off
+    Particles cuts
+      - G4 cut in range: 1mm
+        G3 cuts set to correspond to 1mm cut in range
+    Primary generator with randomized position (optional)
+      defined number of electrons with moving position and fixed direction
+    Calorimetry hits
+    Storing hits, particles stack in Root file
+    Drawing geometry (G3+TGeo, G4) + trajectories (G3+TGeo and G4)
+    Verbosity
+    Geometry defined via Geant4 (G4)
+    User defined physics list (G4)
+    User defined particles and ions (G3+TGeo, G4)
+    User defined regions (G4)
+    User defined magnetic field equation of motion and/or its integrator (G4)
+    The transport in a multi run is shared such that the ABSO and GAPX volumes
+      are simulated using different engines, namely one by GEANT3 and the other
+      one by GEANT4
+
+  See also description of in
+    geant4_vmc/examples/E03/README
+
+Macros:
+=======
+  load_multi.C     - macro to load the libraries
+  run_multi.C            - macro for running example
+
+  Common macro (called by run_g3.C/run_g4.C):
+
+  set_vis.C - setting visualization
+
+To run example with mixed engines:
+==================================
+
+  With G3 mixed with G4 both using TGeo navigation:
+  root[0] .x load_multi.C
+  root[1] .x run_multi.C

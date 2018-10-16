@@ -21,6 +21,8 @@ It also includes G4Root and MTRoot packages, which are independent from Geant4 V
 
 ## Installation
 
+**IMPORTANT NOTE**: This version currently only works when building against [this ROOT version](https://github.com/benedikt-voelkel/root/tree/v6-14-06-multi-engines-wip-mgr)
+
 Geant4 VMC requires ROOT and Geant4 installed, and optionally, it can be
 built with [VGM](http://ivana.home.cern.ch/ivana/VGM.html).
 

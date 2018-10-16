@@ -55,12 +55,16 @@ class TG4RunManager : public TG4Verbose
   void LateInitialize();
   void CacheMCStack();
   void ProcessEvent();
+  void ProcessEvent(G4int eventId, G4bool isInterruptible);
   Bool_t ProcessRun(G4int nofEvents);
   Bool_t FinishRun();
 
   // get methods
   Int_t CurrentEvent() const;
   Bool_t SecondariesAreOrdered() const;
+  Bool_t UseExternalGeometryConstruction() const;
+  Bool_t UseExternalParticleGeneration() const;
+  Bool_t IsInterruptibleEvent() const;
 
   //
   // methods for Geant4 only
@@ -114,6 +118,8 @@ class TG4RunManager : public TG4Verbose
   G4int
     fNEventsProcessed;  ///< Number of events processed in event-by-event mode
   G4bool fInProcessRun; ///< flag while being in BeamOn
+  G4bool fIsInterruptibleEvent; ///< Flag whether this event can be interrupted
+                                ///< and resumed
 };
 
 // inline methods

@@ -25,7 +25,9 @@ TG4TrackInformation::TG4TrackInformation()
     fPDGLifetime(-1.0),
     fPDGEncoding(0),
     fIsUserTrack(false),
-    fStop(false)
+    fStop(false),
+    fInterrupt(false),
+    fInitialTrackStatus(nullptr)
 {
   /// Default constructor
 }
@@ -38,7 +40,9 @@ TG4TrackInformation::TG4TrackInformation(G4int trackParticleID)
     fPDGLifetime(-1.0),
     fPDGEncoding(0),
     fIsUserTrack(false),
-    fStop(false)
+    fStop(false),
+    fInterrupt(false),
+    fInitialTrackStatus(nullptr)
 {
   /// Standard constructor
 }
@@ -73,6 +77,10 @@ void TG4TrackInformation::Print() const
 
   if (fIsUserTrack) G4cout << "  userTrack";
   if (fStop) G4cout << "  toStop";
+
+  if (fInitialTrackStatus) {
+    fInitialTrackStatus->Print();
+  }
 
   G4cout << G4endl;
 }

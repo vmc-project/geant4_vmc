@@ -40,6 +40,14 @@ inline void TGeant4::StopTrack()
 }
 
 //_____________________________________________________________________________
+inline void TGeant4::InterruptTrack()
+{
+  /// Interrupt track
+
+  fStepManager->InterruptTrack();
+}
+
+//_____________________________________________________________________________
 inline void TGeant4::StopEvent()
 {
   /// Aborts the current event processing.
@@ -302,6 +310,39 @@ inline Double_t TGeant4::Edep() const
   /// Returns the total energy deposit in this step.
 
   return fStepManager->Edep();
+}
+
+//_____________________________________________________________________________
+inline Int_t TGeant4::StepNumber() const
+{
+  /// Returns the current step number.
+
+  return fStepManager->StepNumber();
+}
+
+//_____________________________________________________________________________
+inline Double_t TGeant4::TrackWeight() const
+{
+  /// Returns the current weight.
+
+  return fStepManager->TrackWeight();
+}
+
+//_____________________________________________________________________________
+inline void TGeant4::TrackPolarization(
+  Double_t& polX, Double_t& polY, Double_t& polZ) const
+{
+  /// Returns the current polarization.
+
+  fStepManager->TrackPolarization(polX, polY, polZ);
+}
+
+//_____________________________________________________________________________
+inline void TGeant4::TrackPolarization(TVector3& pol) const
+{
+  /// Returns the current polarization.
+
+  fStepManager->TrackPolarization(pol);
 }
 
 //_____________________________________________________________________________

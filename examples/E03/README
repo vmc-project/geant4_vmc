@@ -17,6 +17,8 @@ Example03
            (old way)
   - E03b - scoring via sensitive detectors derived from new
            TVirtualMCSensitiveDetector interface
+  - E03c - adapted from E03a demonstrating the usage of sharing event
+           simulation amongs multiple different engines.
 
   Demonstrates:
     Geometry - divided volume (Gsdvn)
@@ -39,6 +41,18 @@ Example03
     User defined particles and ions (G3, G4)
     User defined regions (G4)
     User defined magnetic field equation of motion and/or its integrator (G4)
+
+    E03c specifics:
+    The simulation is configured such that the volume GAPX (ABSO) is
+    simulated by GEANT3 (GEANT4) and the volume ABSO (GAPX) is taken care
+    of by GEANT4 (GEANT3). Tracks are intercepted when necessary and
+    transferred automatically to the stack of the responsible engine. The
+    user stack is managed automatically as well and contains no
+    intermediate stages of transported particles.
+
+    This example contains the minimal addition of code necessary to
+    achieve this behaviour when compared to examples E03a/b.
+
 
   See also description of in
     geant4/examples/basic/B4
@@ -76,9 +90,10 @@ Macros:
   g4config2.in  - macro for G4 configuration using G4 commands (called from g4Config2.C)
   g4vis.in      - macro for G4 visualization settings (called from set_vis.C)
 
-  Common macro (called by run_g3.C/run_g4.C):
+  For running example with both G3 and G4 (E03c):
 
-  set_vis.C - setting visualization
+  load_multi.C    - macro to load all necessary libraries
+  run_multi.C     - macro for running example
 
 To run example (Ex03a)
 ======================
@@ -111,3 +126,10 @@ To run example (Ex03a)
   root[0] .x run_g4.C("g4tgeoConfig3.C");
 
   To run the Ex03b variant, use load_g3b.C and load_g4b.C macros.
+
+To run example (Ex03c)
+======================
+
+  With G3 and G4 + TGeo (no other geometry available):
+  root[0] .x load_multi.C
+  root[1] .x run_multi.C

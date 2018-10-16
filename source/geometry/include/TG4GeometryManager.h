@@ -60,6 +60,7 @@ class TG4GeometryManager : public TG4Verbose
   TG4ModelConfigurationManager* GetEmModelsManager() const;
 
   // functions for building geometry
+  void SetUseExternalGeometryConstruction(G4bool value);
   void ConstructGeometry();
   void ConstructSDandField();
   void FinishGeometry();
@@ -173,6 +174,9 @@ class TG4GeometryManager : public TG4Verbose
 
   /// max allowed step in materials with density < fLimitDensity
   G4double fMaxStepInLowDensityMaterials;
+
+  /// Rely on geometry has been constrcuted externally
+  G4bool fUseExternalGeometryConstruction;
 };
 
 // inline methods

@@ -23,6 +23,12 @@
 #include "TG4StepManager.h"
 #include "TG4TrackInformation.h"
 
+#ifdef USE_G4ROOT
+#include <TMCManager.h>
+#endif
+
+#include <TMCManagerStack.h>
+#include <TMCParticleStatus.h>
 #include <TVirtualMC.h>
 #include <TVirtualMCApplication.h>
 
@@ -42,6 +48,7 @@ TG4TrackManager::TG4TrackManager()
     fG4TrackingManager(0),
     fTrackSaveControl(kSaveInPreTrack),
     fMCStack(0),
+    fMCManagerStack(0),
     fStackPopper(0),
     fSaveDynamicCharge(false),
     fTrackCounter(0),
@@ -54,6 +61,16 @@ TG4TrackManager::TG4TrackManager()
     TG4Globals::Exception("TG4TrackManager", "TG4TrackManager",
       "Cannot create two instances of singleton.");
   }
+
+#ifdef USE_G4ROOT
+  // TG4RootNavMgr is instantiated (cloned for worker) during construction of
+  // TG4RunManager TG4RunManager obtains its G4RunManager during construction
+  // TG4ActionInitialization is passed to G4RunManager and used to construct
+  // TG4TrackingAction TG4TrackingAction instantiates TG4TrackManager
+  // ==> At this point the (thread-local) TG4RootNavMgr exists.
+  fRootNavMgr = TG4RootNavMgr::GetInstance();
+  fMCManager = TMCManager::Instance();
+#endif
 
   fgInstance = this;
 }
@@ -76,6 +93,15 @@ void TG4TrackManager::LateInitialize()
   /// Cache thread-local pointers
 
   fStackPopper = TG4StackPopper::Instance();
+#ifdef USE_G4ROOT
+  // Set recovery lambda
+  if (fMCManager) {
+    fRootNavMgr->SetGeometryRestoreFunction([this](Int_t g4TrackId) -> Bool_t {
+      return fMCManager->RestoreGeometryState(
+        fPrimaryParticleIds[g4TrackId - 1]);
+    });
+  }
+#endif
 }
 
 //_____________________________________________________________________________
@@ -89,7 +115,16 @@ void TG4TrackManager::AddPrimaryParticleId(G4int id)
 }
 
 //_____________________________________________________________________________
-G4int TG4TrackManager::SetTrackInformation(
+void TG4TrackManager::AddParticleStatus(const TMCParticleStatus* particleStatus)
+{
+  /// Adds the given VMC track ID along with particle status info to the
+  /// TG4TG4TrackManager
+  fPrimaryParticleIds.push_back(particleStatus->fId);
+  fParticlesStatus.push_back((TMCParticleStatus*)particleStatus);
+}
+
+//_____________________________________________________________________________
+TG4TrackInformation* TG4TrackManager::SetTrackInformation(
   const G4Track* track, G4bool overWrite)
 {
   /// Set track index in VMC stack to track information
@@ -124,9 +159,27 @@ G4int TG4TrackManager::SetTrackInformation(
       // in VMC track numbering starts from 0
       // trackIndex = trackID-1;
       trackIndex = fPrimaryParticleIds[trackID - 1];
+
+      // Set the initial status e.g. in case the track was transported to the
+      // current point before by another engine
+      // Double check whether there is a valid status
+      if (trackID <= static_cast<Int_t>(fParticlesStatus.size()) &&
+          fParticlesStatus[trackID - 1]) {
+        trackInfo->SetInitialTrackStatus(fParticlesStatus[trackID - 1]);
+        trackInfo->SetParentParticleID(
+          fParticlesStatus[trackID - 1]->fParentId);
+      }
     }
     else {
       if (fTrackSaveControl != kDoNotSave) {
+        // The track has not been pushed to the VMC stack yet. However, the
+        // assumption is made that this track will get the ID
+        // fMCStack->GetNtrack() + 1 although nothing is known about the
+        // track labeling done by the user implementation of VMC stack. If
+        // this was called from TG4TrackingAction::PreUserTrackingAction()
+        // the VMC track ID in the corresponding TG4TG4TrackInformation
+        // will be overwritten by TG4TrackManager::TrackToStack() giving it
+        // the true VMC track ID.
         trackIndex = fMCStack->GetNtrack();
         if (overWrite) trackIndex--;
       }
@@ -146,7 +199,7 @@ G4int TG4TrackManager::SetTrackInformation(
   // fMCStack->SetCurrentTrack(trackIndex);
   ++fTrackCounter;
 
-  return trackIndex;
+  return trackInfo;
 }
 
 //_____________________________________________________________________________
@@ -286,12 +339,15 @@ void TG4TrackManager::TrackToStack(const G4Track* track, G4bool /*overWrite*/)
   // create particle
   fMCStack->PushTrack(0, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t, polX,
     polY, polZ, mcProcess, ntr, weight, status, overWrite);
-  // Experimental code with flagging tracks in stack for overwrite;
-  // not yet available in distribution
+// Experimental code with flagging tracks in stack for overwrite;
+// not yet available in distribution
 #else
   fMCStack->PushTrack(0, motherIndex, pdg, px, py, pz, e, vx, vy, vz, t, polX,
     polY, polZ, mcProcess, ntr, weight, status);
 #endif
+  // Explicitly set the VMC particle Id in the track info hence not relying
+  // on a certain indexing on the user VMC stack
+  GetTrackInformation(track)->SetTrackParticleID(ntr);
 }
 
 //_____________________________________________________________________________
@@ -393,6 +449,14 @@ void TG4TrackManager::ResetPrimaryParticleIds()
   /// Clear the vector with the VMC stack primary particle Ids
 
   fPrimaryParticleIds.clear();
+}
+
+//_____________________________________________________________________________
+void TG4TrackManager::ResetParticlesStatus()
+{
+  /// Clear the vector with the VMC stack primary particle Ids
+
+  fParticlesStatus.clear();
 }
 
 //_____________________________________________________________________________
