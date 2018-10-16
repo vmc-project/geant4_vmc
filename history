@@ -1,6 +1,6 @@
 ------------------------------------------------
  The Geant4 Virtual Monte Carlo package
- Copyright (C) 2007 - 2017 Ivana Hrivnacova
+ Copyright (C) 2007 - 2018 Ivana Hrivnacova
  All rights reserved.
 
  For the licensing terms see geant4_vmc/LICENSE.
@@ -9,6 +9,18 @@
      
 Tags (history):
 ===============
+16/10/2018
+  v3-5-p2:
+    Patch release, including following fixes:
+    Geant4 VMC:
+      - Fixed creating regions with special physics via the command:
+        /mcPhysics/emModel/setRegions regionName
+        It was failing when the medium name was associated with a material
+        with a different name.
+
+    Tested with Geant4 10.03.p03 (with embedded CLHEP 2.3.4.3.)
+      Root 5.34/38, 6.14/04, VGM 4.4, Garfield v1.0
+
 16/04/2018
   v3-5-p1:
     Patch release, including following fixes:
