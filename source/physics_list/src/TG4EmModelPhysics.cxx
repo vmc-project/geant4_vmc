@@ -93,7 +93,7 @@ TG4EmModelPhysics::TG4EmModelPhysics(const G4String& name)
 {
 /// Standard constructor
 
-  VerboseLevel(2);
+  VerboseLevel(1);
 }
 
 //_____________________________________________________________________________
@@ -105,7 +105,7 @@ TG4EmModelPhysics::TG4EmModelPhysics(G4int theVerboseLevel,
 {
 /// Standard constructor
 
-  VerboseLevel(2);
+  VerboseLevel(1);
 }
 
 //_____________________________________________________________________________
@@ -163,7 +163,7 @@ void TG4EmModelPhysics::AddModel(
     if ( emModel == kPAIModel ) {
       // PAI
       G4PAIModel* pai = new G4PAIModel(particle, "PAIModel");
-      if ( verboseLevel > 1 ) {
+      if ( verboseLevel > 2 ) {
         G4cout << "New G4PAIModel" << G4endl;
       }
       g4EmModel = pai;
@@ -171,7 +171,7 @@ void TG4EmModelPhysics::AddModel(
     }
     else if ( emModel == kPAIPhotonModel ) {
       // PAIPhoton
-      if ( verboseLevel > 1 ) {
+      if ( verboseLevel > 2 ) {
         G4cout << "New G4PAIPhotModel" << G4endl;
       }
       G4PAIPhotModel* paiPhot = new G4PAIPhotModel(particle, "PAIPhotModel");
@@ -180,7 +180,7 @@ void TG4EmModelPhysics::AddModel(
     }
     else if ( emModel == kSpecialUrbanMscModel ) {
       // SpecialUrbanMsc
-      if ( verboseLevel > 1 ) {
+      if ( verboseLevel > 2 ) {
         G4cout << "New TG4SpecialUrbanMscModel" << G4endl;
       }
       g4EmModel = new TG4SpecialUrbanMscModel();
@@ -204,11 +204,11 @@ void TG4EmModelPhysics::AddModel(
 
       G4String regionName = regionVector[j];
 
-      if ( VerboseLevel() > 1 ) {
+      if ( VerboseLevel() > 2 ) {
         G4cout << "Adding EM model: " << GetEmModelName(emModel)
                << " to particle: " << particle->GetParticleName()
                << " process: " << processName
-               << " medium(=region): " << regionName
+               << " region(=material): " << regionName
                << G4endl;
       }
 
@@ -227,6 +227,10 @@ void TG4EmModelPhysics::AddModels(const std::vector<TG4ModelConfiguration*>& mod
 
   if ( VerboseLevel() > 1 ) {
     G4cout << "TG4EmModelPhysics::AddModels" << G4endl;
+    std::vector<TG4ModelConfiguration*>::const_iterator it;
+    for ( it = models.begin(); it != models.end(); it++ ) {
+      (*it)->Print();
+    }
   }
 
   std::vector<TG4ModelConfiguration*>::const_iterator it;
@@ -236,6 +240,16 @@ void TG4EmModelPhysics::AddModels(const std::vector<TG4ModelConfiguration*>& mod
     TG4EmModel emModel = GetEmModel((*it)->GetModelName());
     G4String particles = (*it)->GetParticles();
     G4String regions = (*it)->GetRegions();
+
+    if ( ! regions.size() ) {
+      // add warning
+      TString message;
+      message = "No regions are defined for ";
+      message += (*it)->GetModelName().data();
+      TG4Globals::Warning(
+       "TG4EmModelPhysics", "AddModels", message);
+      continue;
+    }
     
     // Add selected models
     auto aParticleIterator = GetParticleIterator();
@@ -271,7 +285,7 @@ void TG4EmModelPhysics::ConstructProcess()
 /// Loop over all particles and their processes and check if
 /// the process is present in the map
 
-  if ( VerboseLevel() > 1 ) {
+  if ( VerboseLevel() > 2 ) {
     G4cout << "TGEmModelPhysics::ConstructProcess " << G4endl;
   }
 
