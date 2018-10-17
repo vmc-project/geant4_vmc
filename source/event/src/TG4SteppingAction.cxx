@@ -199,23 +199,25 @@ void TG4SteppingAction::ProcessTrackOnBoundary(const G4Step* step)
         fStepManager->SetMaxStepBack();
     }    
 
+    if ( step->GetTrack()->GetTrackStatus() == fAlive ) {
 #ifdef MCDEBUG
-    TG4SensitiveDetector* tsd
-      = TG4SDServices::Instance()
-           ->GetSensitiveDetector(
-                step->GetPostStepPoint()->GetPhysicalVolume()
-                    ->GetLogicalVolume()->GetSensitiveDetector());
+      TG4SensitiveDetector* tsd
+        = TG4SDServices::Instance()
+             ->GetSensitiveDetector(
+                  step->GetPostStepPoint()->GetPhysicalVolume()
+                      ->GetLogicalVolume()->GetSensitiveDetector());
 
-    if (tsd) tsd->ProcessHitsOnBoundary((G4Step*)step);
+      if (tsd) tsd->ProcessHitsOnBoundary((G4Step*)step);
 #else
-    TG4SensitiveDetector* tsd
-      = (TG4SensitiveDetector*) step->GetPostStepPoint()->GetPhysicalVolume()
-          ->GetLogicalVolume()->GetSensitiveDetector();
+      TG4SensitiveDetector* tsd
+        = (TG4SensitiveDetector*) step->GetPostStepPoint()->GetPhysicalVolume()
+            ->GetLogicalVolume()->GetSensitiveDetector();
 
-    if (tsd) tsd->ProcessHitsOnBoundary((G4Step*)step);
-#endif     
+      if (tsd) tsd->ProcessHitsOnBoundary((G4Step*)step);
+#endif
+    }
   }
-}          
+}
 
 //
 // protected methods
