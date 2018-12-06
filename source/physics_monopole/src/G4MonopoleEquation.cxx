@@ -23,7 +23,7 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-/// \file exoticphysics/monopole/src/G4MonopoleEquation.cc
+/// \file G4MonopoleEquation.cxx
 /// \brief Implementation of the G4MonopoleEquation class
 //
 // $Id: G4MonopoleEquation.cc 108824 2018-03-09 11:05:41Z gcosmo $

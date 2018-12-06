@@ -23,7 +23,7 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-/// \file exoticphysics/monopole/src/G4Monopole.cc
+/// \file G4Monopole.cxx
 /// \brief Implementation of the G4Monopole class
 //
 // $Id: G4Monopole.cc 66817 2013-01-12 16:16:08Z gcosmo $

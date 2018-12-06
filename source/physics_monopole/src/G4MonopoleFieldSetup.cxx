@@ -23,7 +23,7 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-/// \file exoticphysics/monopole/src/G4MonopoleFieldSetup.cc
+/// \file G4MonopoleFieldSetup.cxx
 /// \brief Implementation of the G4MonopoleFieldSetup class
 //
 // $Id: G4MonopoleFieldSetup.cc 104872 2017-06-23 14:19:16Z gcosmo $
