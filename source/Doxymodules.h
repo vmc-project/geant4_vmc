@@ -35,9 +35,25 @@
 /** @} */
 
 /** @defgroup physics_list physics_list
- *  Category physics
+ *  Category physics_list
  *  @{
  */
+/** @} */
+
+/** @defgroup physics_monopole physics_monopole
+ *  Category physics_monopole
+ *  @{
+ */
+
+  class G4Monopole {};
+  class G4MonopoleEquation {};
+  class G4MonopoleFieldMessenger {};
+  class G4MonopoleFieldSetup {};
+  class G4MonopolePhysics {};
+  class G4MonopolePhysicsMessenger {};
+  class G4MonopoleTransportation {};
+  class G4MonopoleTransportation.icc
+
 /** @} */
 
 /** @defgroup event event 
