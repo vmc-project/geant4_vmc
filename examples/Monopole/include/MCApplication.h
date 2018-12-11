@@ -21,7 +21,7 @@
 #include <TGeoUniformMagField.h>
 
 class TVirtualMagField;
-class TVirtualMCRootManager;
+class TMCRootManager;
 class Ex03MCStack;
 
 namespace VMC
@@ -77,7 +77,7 @@ class MCApplication : public TVirtualMCApplication
     void  RegisterStack() const;
 
     // data members
-    mutable TVirtualMCRootManager* fRootManager; //!< Root manager
+    mutable TMCRootManager* fRootManager; //!< Root manager
     Ex03MCStack*           fStack;            ///< The VMC stack
     DetectorConstruction*  fDetConstruction;  ///< Dector construction
     TGeoUniformMagField*   fMagField;         ///< Magnetic field

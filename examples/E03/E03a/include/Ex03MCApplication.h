@@ -28,7 +28,7 @@
 class Ex03MCStack;
 class Ex03PrimaryGenerator;
 
-class TVirtualMCRootManager;
+class TMCRootManager;
 
 /// \ingroup E03a
 /// \brief Implementation of the TVirtualMCApplication
@@ -86,7 +86,7 @@ class Ex03MCApplication : public TVirtualMCApplication
     void RegisterStack() const;
   
     // data members
-    mutable TVirtualMCRootManager* fRootManager;//!< Root manager
+    mutable TMCRootManager* fRootManager;//!< Root manager
     Int_t                     fPrintModulo;     ///< The event modulus number to be printed 
     Int_t                     fEventNo;         ///< Event counter
     TMCVerbose                fVerbose;         ///< VMC verbose helper

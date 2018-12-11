@@ -161,6 +161,5 @@ void g4libs()
   // initialize Root threading  
   if ( isMT() ) {
     TThread::Initialize();
-    gInterpreter->SetProcessLineLock(false);
   }
 }

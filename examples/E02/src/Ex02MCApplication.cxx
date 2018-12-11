@@ -24,7 +24,7 @@
 #include <TInterpreter.h>
 #include <TVirtualMC.h>
 #include <TMCRootManager.h>
-#include <TMCRootManagerMT.h>
+#include <TMCRootManager.h>
 #include <TPDGCode.h>
 #include <TGeoManager.h>
 #include <TVirtualGeoTrack.h>
@@ -159,13 +159,13 @@ void Ex02MCApplication::InitMC(const char* setup)
   // Create Root manager
   if ( ! gMC->IsMT() ) {
     fRootManager
-      = new TMCRootManager(GetName(), TVirtualMCRootManager::kWrite);
+      = new TMCRootManager(GetName(), TMCRootManager::kWrite);
     //fRootManager->SetDebug(true);
   }
 #else
   // Create Root manager
   fRootManager
-    = new TMCRootManager(GetName(), TVirtualMCRootManager::kWrite);
+    = new TMCRootManager(GetName(), TMCRootManager::kWrite);
   //fRootManager->SetDebug(true);
 #endif
 
@@ -216,7 +216,7 @@ void Ex02MCApplication::InitForWorker() const
 
   // Create Root manager 
   fRootManager 
-    = new TMCRootManagerMT(GetName(), TVirtualMCRootManager::kWrite);
+    = new TMCRootManager(GetName(), TMCRootManager::kWrite);
   //fRootManager->SetDebug(true); 
   
   // Set data to MC
@@ -394,7 +394,7 @@ void  Ex02MCApplication::ReadEvent(Int_t i)
   
   if ( ! fRootManager ) {
     fRootManager 
-      = new TMCRootManager(GetName(), TVirtualMCRootManager::kRead);
+      = new TMCRootManager(GetName(), TMCRootManager::kRead);
   }     
 
   fTrackerSD->Register();

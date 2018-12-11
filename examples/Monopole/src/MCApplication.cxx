@@ -170,13 +170,13 @@ void MCApplication::InitMC(const char* setup)
   // Create Root manager
   if ( ! gMC->IsMT() ) {
     fRootManager
-      = new TMCRootManager(GetName(), TVirtualMCRootManager::kWrite);
+      = new TMCRootManager(GetName(), TMCRootManager::kWrite);
     //fRootManager->SetDebug(true);
   }
 #else
   // Create Root manager
   fRootManager
-    = new TMCRootManager(GetName(), TVirtualMCRootManager::kWrite);
+    = new TMCRootManager(GetName(), TMCRootManager::kWrite);
   //fRootManager->SetDebug(true);
 #endif
 
@@ -319,7 +319,7 @@ void MCApplication::InitForWorker() const
 {
   // Create Root manager
   fRootManager
-    = new TMCRootManagerMT(GetName(), TVirtualMCRootManager::kWrite);
+    = new TMCRootManager(GetName(), TMCRootManager::kWrite);
   //fRootManager->SetDebug(true);
 
   gMC->SetStack(fStack);

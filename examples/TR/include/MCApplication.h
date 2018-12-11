@@ -24,7 +24,7 @@
 
 class Ex03MCStack;
 
-class TVirtualMCRootManager;
+class TMCRootManager;
 
 namespace VMC
 {
@@ -89,7 +89,7 @@ class MCApplication : public TVirtualMCApplication
     void  BookHisto() const;
   
     // data members
-    mutable TVirtualMCRootManager* fRootManager; //!< Root manager
+    mutable TMCRootManager* fRootManager; //!< Root manager
     Int_t                  fPrintModulo;       ///< The event modulus number to be printed 
     Int_t                  fEventNo;           ///< Event counter
     TMCVerbose             fVerbose;           ///< VMC verbose helper
