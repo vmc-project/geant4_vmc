@@ -22,7 +22,7 @@
 #include "Ex02DetectorConstruction.h"
 #include "Ex02TrackerSD.h"
 
-#include <TVirtualMCRootManager.h>
+#include <TMCRootManager.h>
 
 class Ex02MCStack;
 
@@ -72,7 +72,7 @@ class Ex02MCApplication : public TVirtualMCApplication
     void RegisterStack() const;
     
     // data members
-    mutable TVirtualMCRootManager*   fRootManager;     //!< Root manager 
+    mutable TMCRootManager*   fRootManager;     //!< Root manager 
     Ex02MCStack*             fStack;           ///< VMC stack
     Ex02DetectorConstruction fDetConstruction; ///< Dector construction
     Ex02TrackerSD*           fTrackerSD;       ///< Tracker SD

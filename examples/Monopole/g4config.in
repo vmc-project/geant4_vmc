@@ -1,0 +1,29 @@
+# #------------------------------------------------
+# The Virtual Monte Carlo examples
+# Copyright (C) 2018 Ivana Hrivnacova
+# All rights reserved.
+#
+# For the licensing terms see geant4_vmc/LICENSE.
+# Contact: root-vmc@cern.ch
+#-------------------------------------------------
+
+#
+# Geant4 configuration macro for the Monopole example
+# (called from Root macro g4Config.C)
+
+/mcVerbose/all 0
+/mcVerbose/runAction 1
+/mcVerbose/composedPhysicsList 1
+#/mcVerbose/trackManager 2
+#/mcVerbose/geometryManager 2
+/control/verbose 2
+
+/control/cout/ignoreThreadsExcept 0
+
+#/tracking/verbose 1
+/run/printProgress 10
+
+/mcDet/setIsUserMaxStep true
+/mcMagField/setIsMonopole true
+/mcMagField/printParameters
+/mcPhysics/rangeCuts  700 um

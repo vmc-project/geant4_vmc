@@ -57,24 +57,11 @@ include_directories(
 #
 set(sources
     ${PROJECT_SOURCE_DIR}/src/TMCRootManager.cxx
-    ${PROJECT_SOURCE_DIR}/src/TMCRootManagerImpl.cxx
-    ${PROJECT_SOURCE_DIR}/src/TMCRootManagerMT.cxx
-    ${PROJECT_SOURCE_DIR}/src/TVirtualMCRootManager.cxx
     )
-if (ROOT_FOUND_VERSION LESS 60806)
-  set(sources ${sources} ${PROJECT_SOURCE_DIR}/src/TMCAutoLock.cxx)
-endif()
 
 set(headers
     ${PROJECT_SOURCE_DIR}/include/TMCRootManager.h
-    ${PROJECT_SOURCE_DIR}/include/TMCRootManagerImpl.h
-    ${PROJECT_SOURCE_DIR}/include/TMCRootManagerMT.h
-    ${PROJECT_SOURCE_DIR}/include/TVirtualMCRootManager.h
     )
-if (ROOT_FOUND_VERSION LESS 60806)
-  set(headers ${headers} ${PROJECT_SOURCE_DIR}/include/TMCAutoLock.h)
-endif()
-
 
 #---Add library-----------------------------------------------------------------
 add_library(mtroot ${sources} ${headers})
@@ -84,15 +71,7 @@ target_link_libraries(mtroot ${ROOT_LIBRARIES})
 #install(DIRECTORY include/ DESTINATION include/mtroot)
 install(FILES
         include/TMCRootManager.h
-        include/TMCRootManagerImpl.h
-        include/TMCRootManagerMT.h
-        include/TVirtualMCRootManager.h
         DESTINATION include/mtroot)
-if (ROOT_FOUND_VERSION LESS 60806)
-  install(FILES
-        include/TMCAutoLock.h
-        DESTINATION include/mtroot)
-endif()
 
 install(TARGETS mtroot EXPORT MTRootTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
 

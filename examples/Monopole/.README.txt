@@ -1,0 +1,52 @@
+/*! 
+
+/// \file "Monopole/.README.txt"
+/// \brief The Example Monopole README page
+
+\page README_Monopole Example Monopole
+
+\section monopole_s1 Description
+
+  Geant4 Monopole example adapted to Virtual Monte Carlo.
+
+  Demonstrates:
+    Energy deposited by classical magnetic monopole.
+
+  Note that the current example version can be run only with Geant4.  
+
+  See also the description of Geant4 example at 
+    http://geant4-userdoc.web.cern.ch/geant4-userdoc/Doxygen/examples_doc/html/Examplemonopole.html
+
+\section monopole_s3 Macros
+
+  For running example with G4:
+  <pre>
+  \link       Monopole/load_g4.C load_g4.C      \endlink - macro to load the libraries to run the example with Geant4
+  \link        Monopole/run_g4.C run_g4.C       \endlink - macro for running example 
+  \link      Monopole/g4Config.C g4Config.C     \endlink - configuration macro - G4 native geometry navigation (default)
+  \link  Monopole/g4tgeoConfig.C g4tgeoConfig.C \endlink - configuration macro - G4 with TGeo navigation 
+   g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
+   g4config2.in  - macro for G4 post-init configuration using G4 commands (called from run_g4.C)
+   g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
+  </pre>
+
+  No macros are provided for running example with G3.
+
+\section monopole_s4 To run example 
+
+  <pre>
+  With G4:
+  root[0] .x \link TR/load_g4.C load_g4.C\endlink
+  root[1] .x \link TR/run_g4.C run_g4.C\endlink
+
+  With G4 + TGeo navigation:
+  root[0] .x \link TR/load_g4.C load_g4.C\endlink
+  root[1] .x \link TR/run_g4.C run_g4.C\endlink(\link TR/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);
+  </pre>
+
+\section monopole_s5 Classes
+
+The documentation of all classes and the basic macros for this example
+is availabe on \link Monopole this page \endlink. 
+
+*/

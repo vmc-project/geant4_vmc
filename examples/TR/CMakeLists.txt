@@ -45,6 +45,7 @@ include(UseVMC)
 # Setup project include directories; compile definitions; link libraries
 #
 include_directories(
+  ${VMC_INCLUDE_DIR}
   ${PROJECT_SOURCE_DIR}/include 
   ${CMAKE_CURRENT_BINARY_DIR})
 

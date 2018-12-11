@@ -22,7 +22,7 @@
 
 #include <Riostream.h>
 #include <TVirtualMC.h>
-#include <TVirtualMCRootManager.h>
+#include <TMCRootManager.h>
 #include <TLorentzVector.h>
 #include <TTree.h>
 
@@ -94,7 +94,7 @@ void SensitiveDetector::Initialize()
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
   
-  if ( TVirtualMCRootManager::Instance() ) Register();  
+  if ( TMCRootManager::Instance() ) Register();  
   fAbsorberVolId = gMC->VolId("Absorber");
   fGasVolId = gMC->VolId("Gas");
 }
@@ -167,7 +167,7 @@ void SensitiveDetector::Register()
 {
 /// Register the hits collection in Root manager.
   
-  TVirtualMCRootManager::Instance()
+  TMCRootManager::Instance()
     ->Register("hit", "VMC::ExGarfield::Hit", &fHit);
 }
 

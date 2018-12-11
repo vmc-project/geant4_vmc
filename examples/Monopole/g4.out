@@ -1,0 +1,131 @@
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Possible C++ standard library mismatch, compiled with _LIBCPP_VERSION '4000'
+  Extraction of runtime standard library version was: '5000'
+   ------------------------------------------------------------
+  | Welcome to ROOT 6.12/06                http://root.cern.ch |
+  |                               (c) 1995-2017, The ROOT Team |
+  | Built for macosx64                                         |
+  | From tag v6-12-06, 9 February 2018                         |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
+   ------------------------------------------------------------
+
+
+Processing load_g4.C...
+Loading Geant4 libraries (using geant4-config) ...
+34
+Loading VGM libraries ... 
+Loading g4root library ...
+Loading geant4vmc library ...
+Loading mtroot library ...
+Processing run_g4.C...
+
+=============================================================
+ Geant4 Virtual Monte Carlo 
+ Version 3.6 ( 23 January 2018 )
+ WWW : http://root.cern.ch/drupal/content/geant4-vmc
+=============================================================
+
+
+**************************************************************
+ Geant4 version Name: geant4-10-04-ref-08    (31-August-2018)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+Adding HadronPhysicsList FTFP_BERT
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
+Adding ExtraPhysicsList monopole 
+Adding SpecialPhysicsList stepLimiter
+Monopole is created: m(GeV)= 100 Qel= 0 Qmag= 68.518
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Geant4 has been created.
+G4VUserPhysicsList::SetVerboseLevel  : Verbose level is set to 4
+G4VUserPhysicsList::SetVerboseLevel  : Verbose level is set to 4
+/control/cout/ignoreThreadsExcept 0
+#/mcTracking/saveSecondariesInStep true
+#/tracking/verbose 1
+/mcDet/setIsUserMaxStep true
+/mcMagField/setIsMonopole true
+/mcMagField/printParameters
+Magnetic field parameters: 
+  field type = Magnetic
+  equation type = MagUsualEqRhs
+  stepper type = ClassicalRK4
+  minStep = 0.01 mm
+  constDistance = 0 mm
+  isMonopole = true
+  deltaChord = 0.25 mm
+  deltaOneStep = 0.01 mm
+  deltaIntersection = 0.001 mm
+  epsMin = 5e-05
+  epsMax=  0.001
+#/mcPhysics/rangeCuts  700 um
+/control/verbose 2
+/mcVerbose/all 1
+/mcVerbose/geometryManager 1
+/mcVerbose/opGeometryManager 1
+/mcVerbose/regionsManager 2
+/mcTracking/loopVerbose 1
+/mcPhysics/rangeCuts 700 um
+Info in <TGeoManager::TGeoManager>: Geometry Monopole_geometry, Monopole VMC example geometry created
+Info in <TGeoManager::SetTopVolume>: Top volume is World. Master volume is World
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoManager::CountLevels>: max level = 1, max placements = 1
+Info in <TGeoManager::CloseGeometry>: 2 nodes/ 2 volume UID's in Monopole VMC example geometry
+Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+
+---------------------------------------------------------
+---> The Absorber is 10 of Si
+
+---------------------------------------------------------
+Converting Root geometry to Geant4 via VGM ... 
+G4 Stat: instantiated 2 logical volumes 
+                      1 physical volumes
+Global field created with stepper ClassicalRK4
+Create G4MonopoleFieldSetup
+G4MonopoleEquation::G4MonopoleEquation
+
+ FTFP_BERT : new threshold between BERT and FTFP is over the interval 
+ for pions :   3 to 12 GeV
+ for kaons :   3 to 12 GeV
+ for proton :  3 to 12 GeV
+ for neutron : 3 to 12 GeV
+
+### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
+### Hadron physics constructed. 
+G4MonopolePhysics::ConstructProcess
+### Extra physics constructed: Monopole Physics 
+### Processes mapped to VMC controls ok.
+### Step limiter physics constructed.
+### User particles physics constructed. 
+### Processes mapped to VMC codes ok.
+Available UI session types: [ Qt, GAG, tcsh, csh ]
+Warning in <TStreamerInfo::Build>: Ex03MCStack: stack<TParticle*,deque<TParticle*> > has no streamer or dictionary, data member "fStack" will not be saved
+Error in <TStreamerInfo::Build>: The class "stack<TParticle*,deque<TParticle*> >" is interpreted and for its data member "c" we do not have a dictionary for the collection "deque<TParticle*>". Because of this, we will not be able to read or write this data member.
+>>> Event: 0
+>>> Event: 10
+>>> Event: 20
+>>> Event: 30
+>>> Event: 40
+>>> Event: 50
+>>> Event: 60
+>>> Event: 70
+>>> Event: 80
+>>> Event: 90
+
+ The run consists of 100 monopole  of 100 GeV  through 10 cm of Si
+
+ projected Range= 7.7482 cm    rms= 0.010893 cm 
+Real time 0:05:13, CP time 313.210

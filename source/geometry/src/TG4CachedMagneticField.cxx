@@ -20,19 +20,16 @@
 #include <TVirtualMC.h>
 
 //_____________________________________________________________________________
-TG4CachedMagneticField::TG4CachedMagneticField(const TG4FieldParameters& parameters,
-                                               TVirtualMagField* magField,
-                                               G4LogicalVolume* lv)
-  : TG4MagneticField(parameters, magField, lv),
+TG4CachedMagneticField::TG4CachedMagneticField(TVirtualMagField* magField,
+                                               G4double constDistance)
+  : TG4MagneticField(magField),
     fLastLocation(),
     fLastValue(),
     fCallsCounter(0),
     fEvaluationsCounter(0),
-    fConstDistanceSquare(0)
+    fConstDistanceSquare(constDistance * constDistance)
 {
 /// Default constructor
-
-  Update(parameters);
 }
 
 //_____________________________________________________________________________
@@ -80,19 +77,18 @@ void TG4CachedMagneticField::GetFieldValue(const G4double point[3], G4double* bf
   fLastValue = G4ThreeVector(bfield[0], bfield[1], bfield[2]);
 }
 
-//_____________________________________________________________________________
-void TG4CachedMagneticField::Update(const TG4FieldParameters& parameters)
-{
-/// Update field with new field parameters
+// //_____________________________________________________________________________
+// void TG4CachedMagneticField::Update(const TG4FieldParameters& parameters)
+// {
+// /// Update field with new field parameters
 
-  // Update parameters in base class
-  TG4MagneticField::Update(parameters);
+//   // Update parameters in base class
+//   // TG4MagneticField::Update(parameters);
 
-  // Const distance square
-  fConstDistanceSquare
-    = parameters.GetConstDistance()*parameters.GetConstDistance();
-}
-
+//   // Const distance square
+//   fConstDistanceSquare
+//     = parameters.GetConstDistance()*parameters.GetConstDistance();
+// }
 
 //_____________________________________________________________________________
 void TG4CachedMagneticField::PrintStatistics() const
@@ -104,6 +100,14 @@ void TG4CachedMagneticField::PrintStatistics() const
 	   << "   Number of calls:        " << fCallsCounter << G4endl
 	   << "   Number of evaluations : " << fEvaluationsCounter << G4endl;
   }
+}
+
+//_____________________________________________________________________________
+void TG4CachedMagneticField::SetConstDistance(G4double value)
+{
+/// Set new const distance value
+
+   fConstDistanceSquare = value * value;
 }
 
 //_____________________________________________________________________________

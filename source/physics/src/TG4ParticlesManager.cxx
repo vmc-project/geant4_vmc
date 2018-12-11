@@ -21,7 +21,8 @@
 #include <G4DynamicParticle.hh>
 #include <G4ParticleTable.hh>
 #include <G4IonTable.hh>
-#include "G4AutoLock.hh"
+#include <G4Monopole.hh>
+#include <G4AutoLock.hh>
 #include <G4Version.hh>
  
 #include <TDatabasePDG.h>
@@ -231,6 +232,24 @@ void TG4ParticlesManager::DefineParticles()
     pdgDB->AddParticle("AntiHE3", "AntiHE3", 2.808391, kTRUE,
 		       0, -6, "Ion", particle->GetPDGEncoding());
   }                       
+
+  // monopole
+  particle = particleTable->FindParticle("monopole");
+  if ( particle ) {
+    if ( !pdgDB->GetParticle(60000000) ) {
+      G4cout << "Adding monnopole in TDatabase with mass " << particle->GetPDGMass()/GeV << G4endl;
+      pdgDB->AddParticle("Monopole","Monopole",
+                         particle->GetPDGMass()/GeV, kTRUE,
+                         particle->GetPDGCharge()/eplus*3.,
+                         static_cast<G4Monopole*>(particle)->MagneticCharge()/eplus*3.,
+                         "Special", 60000000);
+      fParticleNameMap.Add("monopole","monopole");
+    } else {
+      TG4Globals::Warning(
+        "TG4ParticlesManager", "DefineParticles",
+        "Cannot add monopole with PDG=60000000 in TDatabasePDG.");
+    }
+  }
 
   // geantino
   fParticleNameMap.Add("geantino", "Rootino");

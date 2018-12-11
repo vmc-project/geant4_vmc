@@ -26,11 +26,14 @@ class G4UIcmdWithoutParameter;
 class G4UIcmdWithAString;
 class G4UIcmdWithADouble;
 class G4UIcmdWithADoubleAndUnit;
+class G4UIcmdWithABool;
 
 /// \ingroup geometry
 /// \brief Messenger class that defines commands for TG4DetConstruction.
 ///
 /// Implements commands:
+/// - /mcMagField/fieldType fieldType     \n
+///       fieldType = Magnetic | ElectroMagnetic | Gravity
 /// - /mcMagField/equationType eqType     \n
 ///       eqType = MagUsualEqRhs | MagSpinEqRhs | EqMagElectric | EMFieldWithSpin | 
 ///                EqEMFieldWithEDM
@@ -46,6 +49,7 @@ class G4UIcmdWithADoubleAndUnit;
 /// - /mcMagField/setMinimumEpsilonStep value
 /// - /mcMagField/setMaximumEpsilonStep value 
 /// - /mcMagField/setConstDistance value
+/// - /mcMagField/setIsMonopole true|false
 /// - /mcMagField/printParameters
 ///
 /// \author I. Hrivnacova; IPN, Orsay
@@ -75,6 +79,9 @@ class TG4FieldParametersMessenger: public G4UImessenger
     //
     // commands data members
     
+    /// command: fieldType
+    G4UIcmdWithAString*         fFieldTypeCmd;
+
     /// command: equationType
     G4UIcmdWithAString*         fEquationTypeCmd;
     
@@ -101,6 +108,9 @@ class TG4FieldParametersMessenger: public G4UImessenger
 
     /// command: setConstDistance
     G4UIcmdWithADoubleAndUnit*  fSetConstDistanceCmd;
+
+    /// command: setIsMonopole
+    G4UIcmdWithABool*           fSetIsMonopoleCmd;
 
     /// command: printParameters
     G4UIcmdWithoutParameter*    fPrintParametersCmd;

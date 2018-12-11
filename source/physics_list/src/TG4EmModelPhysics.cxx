@@ -264,6 +264,12 @@ void TG4EmModelPhysics::AddModels(const std::vector<TG4ModelConfiguration*>& mod
            continue;
       }
 
+      // skip also monopole (experimental)
+      if ( particle->GetParticleName() == "monopole" ) {
+        G4cout << "TG4EmModelPhysics::AddModels - skipping monopole" << G4endl;
+        continue;
+      }
+
       AddModel(emModel, particle, regions);
     }
   }

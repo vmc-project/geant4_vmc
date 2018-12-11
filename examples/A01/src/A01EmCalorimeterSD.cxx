@@ -17,7 +17,7 @@
 
 #include <Riostream.h>
 #include <TVirtualMC.h>
-#include <TVirtualMCRootManager.h>
+#include <TMCRootManager.h>
 #include <TLorentzVector.h>
 #include <TTree.h>
 
@@ -110,7 +110,7 @@ void A01EmCalorimeterSD::Initialize()
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
   
-  if ( TVirtualMCRootManager::Instance() ) Register();
+  if ( TMCRootManager::Instance() ) Register();
   
   fVolId = gMC->VolId("cellLogical");
 }
@@ -180,7 +180,7 @@ void A01EmCalorimeterSD::Register()
 /// Register the hits collection in Root manager.
   
   if ( fWriteHits ) {
-    TVirtualMCRootManager::Instance()
+    TMCRootManager::Instance()
       ->Register(GetName(), "TClonesArray", &fCalCollection);
   }    
 }

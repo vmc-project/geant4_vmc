@@ -23,7 +23,7 @@
 
 #include <Riostream.h>
 #include <TVirtualMC.h>
-#include <TVirtualMCRootManager.h>
+#include <TMCRootManager.h>
 #include <TLorentzVector.h>
 #include <TTree.h>
 
@@ -134,7 +134,7 @@ void Ex03CalorimeterSD::Initialize()
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
   
-  if ( TVirtualMCRootManager::Instance() ) Register();
+  if ( TMCRootManager::Instance() ) Register();
 
   // Keep the pointer to TVirtualMC object as a data member
   // to avoid a possible performance penalty due to a frequent retrieval
@@ -201,7 +201,7 @@ void Ex03CalorimeterSD::Register()
 {
 /// Register the hits collection in Root manager.
   
-  TVirtualMCRootManager::Instance()
+  TMCRootManager::Instance()
     ->Register("hits", "TClonesArray", &fCalCollection);
 }
 

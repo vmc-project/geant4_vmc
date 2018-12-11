@@ -89,16 +89,16 @@ class TG4DetConstructionMessenger: public G4UImessenger
     // commands data members
     
     /// command: updateMagField     
-    G4UIcmdWithoutParameter*    fUpdateMagFieldCmd;
+    G4UIcmdWithoutParameter*    fUpdateFieldCmd;
     
     /// command: createMagFieldParameters
-    G4UIcmdWithAString*         fCreateMagFieldParametersCmd;
+    G4UIcmdWithAString*         fCreateFieldParametersCmd;
 
     /// command: setIsLocalMagField
-    G4UIcmdWithABool*           fIsLocalMagFieldCmd;
+    G4UIcmdWithABool*           fIsLocalFieldCmd;
 
     /// command: setIsZeroMagField
-    G4UIcmdWithABool*           fIsZeroMagFieldCmd;
+    G4UIcmdWithABool*           fIsZeroFieldCmd;
 
     /// command: volumeNameSeparator
     G4UIcmdWithAString*         fSeparatorCmd;

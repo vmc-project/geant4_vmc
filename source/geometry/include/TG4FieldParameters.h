@@ -23,6 +23,13 @@ class TG4FieldParametersMessenger;
 class G4EquationOfMotion;
 class G4MagIntegratorStepper;
 
+/// The available fields in Geant4
+enum FieldType {
+  kMagnetic,          ///< magnetic field
+  kElectroMagnetic,   ///< electromagnetic field
+  kGravity            ///< gravity field
+};
+
 /// The available equations of motion of a particle in a field  
 /// in Geant4
 enum EquationType {
@@ -88,12 +95,15 @@ class TG4FieldParameters
     // methods
     void PrintParameters() const;
     
+    static G4String FieldTypeName(FieldType field);
     static G4String EquationTypeName(EquationType equation); 
     static G4String StepperTypeName(StepperType stepper); 
+    static FieldType    GetFieldType(const G4String& name);
     static EquationType GetEquationType(const G4String& name);
     static StepperType  GetStepperType(const G4String& name);
     
     // set methods
+    void SetFieldType(FieldType field);
     void SetEquationType(EquationType equation);
     void SetStepperType(StepperType stepper);
     void SetUserEquationOfMotion(G4EquationOfMotion* equation);
@@ -106,10 +116,12 @@ class TG4FieldParameters
     void SetMinimumEpsilonStep(G4double value); 
     void SetMaximumEpsilonStep(G4double value); 
     void SetConstDistance(G4double value);
+    void SetIsMonopole(G4bool isMonopole);
 
     // get methods
     G4String  GetVolumeName() const;
 
+    FieldType GetFieldType() const;
     EquationType GetEquationType() const;
     StepperType  GetStepperType() const;
     G4EquationOfMotion*     GetUserEquationOfMotion() const;
@@ -122,6 +134,7 @@ class TG4FieldParameters
     G4double GetMinimumEpsilonStep() const; 
     G4double GetMaximumEpsilonStep() const; 
     G4double GetConstDistance() const;
+    G4bool   GetIsMonopole() const;
 
   private:
     // static data members
@@ -148,7 +161,7 @@ class TG4FieldParameters
 
     /// The name of associated volume, if local field
     G4String  fVolumeName;
-    
+
     /// Minimum step in G4ChordFinder 
     G4double  fStepMinimum; 
     /// Delta chord in G4ChordFinder
@@ -162,6 +175,9 @@ class TG4FieldParameters
     /// Maximum epsilon step in global field manager
     G4double  fMaximumEpsilonStep;
     
+    /// Type of field
+    FieldType  fField;
+
     /// Type of equation of motion of a particle in a field
     EquationType  fEquation; 
 
@@ -176,9 +192,18 @@ class TG4FieldParameters
 
     /// The distance within which the field is considered constant
     G4double  fConstDistance;
+
+    /// An option to create an extra monopole field integrator
+    /// which will be activated directly by G4MonopoleTransportation
+    G4bool fIsMonopole;
 };
 
 // inline functions
+
+/// Set type of field
+inline void TG4FieldParameters::SetFieldType(FieldType field) {
+  fField = field;
+}
 
 /// Set the type of equation of motion of a particle in a field
 inline void TG4FieldParameters::SetEquationType(EquationType equation) {
@@ -225,9 +250,20 @@ inline void TG4FieldParameters::SetConstDistance(G4double value) {
   fConstDistance = value;
 }
 
+/// Set the option to create an extra monopole field integrator
+/// which will be activated directly by G4MonopoleTransportation
+inline void TG4FieldParameters::SetIsMonopole(G4bool isMonopole) {
+  fIsMonopole = isMonopole;
+}
+
 /// Return the name of associated volume, if local field
 inline  G4String  TG4FieldParameters::GetVolumeName() const {
   return fVolumeName;
+}
+
+/// Return the type of field
+inline FieldType TG4FieldParameters::GetFieldType() const {
+  return fField;
 }
 
 /// Return the type of equation of motion of a particle in a field
@@ -285,5 +321,10 @@ inline G4double TG4FieldParameters::GetConstDistance() const {
   return fConstDistance;
 }
 
-#endif //TG4_FIELD_PARAMETERS_H
+/// Return the option to create an extra monopole field integrator
+/// which will be activated directly by G4MonopoleTransportation
+inline G4bool TG4FieldParameters::GetIsMonopole () const {
+  return fIsMonopole;
+}
 
+#endif //TG4_FIELD_PARAMETERS_H

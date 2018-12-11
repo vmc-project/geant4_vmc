@@ -31,7 +31,7 @@ class A01EmCalorimeterSD;
 class A01HadCalorimeterSD;
 class A01HodoscopeSD;
 
-class TVirtualMCRootManager;
+class TMCRootManager;
 
 /// \ingroup A01
 /// \brief Implementation of the TVirtualMCApplication
@@ -93,7 +93,7 @@ class A01MCApplication : public TVirtualMCApplication
     void RegisterStack() const;
   
     // data members
-    mutable TVirtualMCRootManager* fRootManager;//!< Root manager
+    mutable TMCRootManager* fRootManager;//!< Root manager
     Bool_t                    fWriteStack;      ///< Option to write stack
     Bool_t                    fWriteHits;       ///< Option to write hits
     /// Option to use local magnetic field (working only with Geant4 !)

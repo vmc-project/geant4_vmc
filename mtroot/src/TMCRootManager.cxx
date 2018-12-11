@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
-// Copyright (C) 2013, 2014 Ivana Hrivnacova
+// Copyright (C) 2013 - 2018 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -13,9 +13,36 @@
 /// \author I. Hrivnacova; IPN Orsay
 
 #include "TMCRootManager.h"
-#include "TMCRootManagerImpl.h"
+#include "TTree.h"
+#include "TFile.h"
+#include "TError.h"
+#include "TThread.h"
+#include "TMCAutoLock.h"
+#include "Riostream.h"
 
 #include <cstdio>
+
+namespace {
+  // Define mutexes per operation which modify shared data
+  TMCMutex createMutex = TMCMUTEX_INITIALIZER;
+  TMCMutex deleteMutex = TMCMUTEX_INITIALIZER;
+}
+
+//
+// static data, methods
+//
+
+                         Int_t  TMCRootManager::fgCounter = 0; 
+                        Bool_t  TMCRootManager::fgDebug = false;
+TMCThreadLocal TMCRootManager*  TMCRootManager::fgInstance = 0;
+
+//_____________________________________________________________________________
+TMCRootManager* TMCRootManager::Instance()
+{
+/// \return The singleton instance.
+
+  return fgInstance;
+}  
 
 //
 // ctors, dtor
@@ -23,15 +50,46 @@
 
 //_____________________________________________________________________________
 TMCRootManager::TMCRootManager(const char* projectName, 
-                               TVirtualMCRootManager::FileMode fileMode)
-  : TVirtualMCRootManager(),
-    fRootManager(new TMCRootManagerImpl(projectName, fileMode, -1))
+                               TMCRootManager::FileMode fileMode,
+                               Int_t threadRank)
+  : fFile(0),
+    fTree(0),
+    fIsClosed(false)
 {
 /// Standard constructor
 /// \param projectName  The project name (passed as the Root tree name)
 /// \param fileMode     Option for opening Root file (read or write mode)
+/// \param threadRank   The thread Id (-1 when sequential mode)
 
-  if ( fgDebug ) printf("TMCRootManager::TMCRootManager %p \n", this);
+  if ( fgDebug ) 
+    printf("TMCRootManager::TMCRootManager %p \n", this);
+
+  // lock mutex
+  TMCAutoLock lk(&createMutex);
+
+  // Set Id
+  fId = fgCounter;
+
+  // Increment counter
+  ++fgCounter;
+
+  // singleton instance
+  if ( fgInstance ) {
+      Fatal("TMCRootManager",
+            "Attempt to create two instances of singleton.");
+    return;
+  }  
+
+  fgInstance = this;
+
+  // open file and create a tree
+  OpenFile(projectName, fileMode, threadRank);
+
+  // unlock mutex
+  lk.unlock();
+
+  if ( fgDebug ) 
+    printf("Done TMCRootManagerMT::TMCRootManagerMT %p \n", this);
 }
 
 //_____________________________________________________________________________
@@ -39,9 +97,62 @@ TMCRootManager::~TMCRootManager()
 {
 /// Destructor
 
-  if ( fgDebug ) printf("TMCRootManager::~TMCRootManager %p \n", this);
-  delete fRootManager;
-  if ( fgDebug ) printf("Done TMCRootManager::~TMCRootManager %p \n", this);
+  if ( fgDebug ) 
+    printf("TMCRootManager::~TMCRootManager %p \n", this);
+
+  // lock mutex
+  TMCAutoLock lk(&deleteMutex);
+
+  if ( fFile && ! fIsClosed ) fFile->Close();
+  delete fFile;
+
+  --fgCounter;
+
+  // unlock mutex
+  lk.unlock();
+
+  if ( fgDebug ) 
+    printf("Done TMCRootManager::~TMCRootManager %p \n", this);
+}
+
+//
+// privatemethods
+//
+
+//_____________________________________________________________________________
+void TMCRootManager::OpenFile(const char* projectName, FileMode fileMode, 
+                              Int_t threadRank)
+{
+  TString fileName(projectName); 
+  if ( threadRank >= 0 ) {
+    fileName += "_";  
+    fileName += threadRank;
+  }  
+  fileName += ".root";
+
+  TString treeTitle(projectName);
+  treeTitle += " tree";
+
+  switch (fileMode) {
+    case TMCRootManager::kRead:
+      fFile = new TFile(fileName);
+      fTree = (TTree*) fFile->Get(projectName);
+      break;
+      
+    case TMCRootManager::kWrite:  
+      if ( fgDebug ) 
+        printf("Going to create Root file \n");
+      fFile = new TFile(fileName, "recreate");
+      if ( fgDebug ) 
+        printf("Done: file %p \n", fFile);
+
+      if ( fgDebug ) 
+        printf("Going to create TTree \n");
+      fTree = new TTree(projectName, treeTitle);
+      if ( fgDebug ) 
+        printf("Done: TTree %p \n", fTree);
+      ;;  
+  }
 }
 
 //
@@ -57,7 +168,11 @@ void  TMCRootManager::Register(const char* name, const char* className,
 /// \param className  The class name of the object
 /// \param objAddress The object address
 
-  fRootManager->Register(name, className, objAddress);
+  fFile->cd();
+  if ( ! fTree->GetBranch(name) ) 
+    fTree->Branch(name, className, objAddress, 32000, 99);
+  else  
+    fTree->GetBranch(name)->SetAddress(objAddress);
 }
 
 //_____________________________________________________________________________
@@ -77,15 +192,17 @@ void  TMCRootManager::Fill()
 {
 /// Fill the Root tree.
 
-  fRootManager->Fill();
+  fFile->cd();
+  fTree->Fill();
 }  
 
 //_____________________________________________________________________________
-void TMCRootManager::WriteAll()
+void TMCRootManager:: WriteAll()
 {
 /// Write the Root tree in the file.
 
-  fRootManager->WriteAll();
+  fFile->cd();
+  fFile->Write();
 }  
 
 //_____________________________________________________________________________
@@ -93,14 +210,21 @@ void TMCRootManager::Close()
 {
 /// Close the Root file.
 
-  fRootManager->Close();
+  if ( fIsClosed ) {
+    Error("Close", "The file was already closed.");
+    return;
+  }  
+    
+  fFile->cd();
+  fFile->Close();
+  fIsClosed = true;
 }  
 
 //_____________________________________________________________________________
-void TMCRootManager::WriteAndClose()
+void TMCRootManager:: WriteAndClose()
 {
-/// Write the Root tree in the file and close the file.
-
+/// Write the Root tree in the file and close the file
+  
   WriteAll();
   Close();
 }  
@@ -111,5 +235,5 @@ void  TMCRootManager::ReadEvent(Int_t i)
 /// Read the event data for \em i -th event for all connected branches.
 /// \param i  The event to be read
 
-  fRootManager->ReadEvent(i);
+  fTree->GetEntry(i);
 }

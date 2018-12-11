@@ -20,6 +20,12 @@
 #include <G4VModularPhysicsList.hh>
 #include <globals.hh>
 
+#include <TString.h>
+
+#include <map>
+
+class G4MonopolePhysics;
+
 /// \ingroup physics_list
 /// \brief The physics list with extra physics builders
 ///
@@ -41,7 +47,8 @@ class TG4ExtraPhysicsList: public G4VModularPhysicsList,
                            public TG4Verbose
 {
   public:
-    TG4ExtraPhysicsList(const G4String& selection);
+    TG4ExtraPhysicsList(const G4String& selection,
+                        const std::map<TString, Double_t>& parameters);
     virtual ~TG4ExtraPhysicsList();
   
     // static methods
@@ -71,7 +78,8 @@ class TG4ExtraPhysicsList: public G4VModularPhysicsList,
     TG4ExtraPhysicsList& operator=(const TG4ExtraPhysicsList& right);
 
     // methods
-    void Configure(const G4String& /*selection*/);
+    void Configure(const G4String& /*selection*/,
+                   const std::map<TString, Double_t>& parameters);
 };
 
 #endif //TG4_EXTRA_PHYSICS_LIST_H

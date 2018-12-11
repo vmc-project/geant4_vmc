@@ -13,8 +13,11 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4ExtraPhysicsList.h"
+#include "TG4G3Units.h"
+#include "TG4Globals.h"
 
 #include <G4EmExtraPhysics.hh>
+#include <G4MonopolePhysics.hh>
 #include <G4OpticalPhysics.hh>
 #include <G4RadioactiveDecayPhysics.hh>
 
@@ -31,6 +34,38 @@
 
 const G4double TG4ExtraPhysicsList::fgkDefaultCutValue = 1.0 * mm;
 
+namespace {
+
+//_____________________________________________________________________________
+void SetParameters(G4MonopolePhysics* monopolePhysics,
+                   const std::map<TString, Double_t>& parameters)
+{
+/// Set special parameters which need to be set before creating TGeant4
+/// Actually used for monopole properties:
+/// monopoleMass, monopoleElCharge, monopoleMagCharge
+
+  std::map<TString, Double_t>::const_iterator it;
+  for ( it = parameters.begin(); it != parameters.end(); it++ ) {
+    if ( it->first == "monopoleMass" ) {
+      monopolePhysics->SetMonopoleMass(it->second * TG4G3Units::Energy());
+    }
+    else if ( it->first == "monopoleElCharge"  ) {
+      monopolePhysics->SetElectricCharge(it->second * TG4G3Units::Charge());
+    }
+    else if ( it->first == "monopoleMagCharge"  ) {
+      monopolePhysics->SetMagneticCharge(it->second * TG4G3Units::Charge());
+    }
+    else {
+      TString text = "Invalid parameter name = ";
+      text += it->second;
+      TG4Globals::Warning(
+        "TG4ParticlesManager", "SetParameters", text);
+    }
+  }
+}
+
+}
+
 //
 // static methods
 //
@@ -41,7 +76,7 @@ G4String TG4ExtraPhysicsList::AvailableSelections()
 /// Return list of all available selections
 
   G4String selections;
-  selections += "extra optical radDecay ";
+  selections += "extra monopole optical radDecay ";
   
   return selections;
 }  
@@ -63,13 +98,14 @@ G4bool TG4ExtraPhysicsList::IsAvailableSelection(const G4String& selection)
 //
 
 //_____________________________________________________________________________
-TG4ExtraPhysicsList::TG4ExtraPhysicsList(const G4String& selection)
+TG4ExtraPhysicsList::TG4ExtraPhysicsList(const G4String& selection,
+                                         const std::map<TString, Double_t>& parameters)
   : G4VModularPhysicsList(),
     TG4Verbose("extraPhysicsList")
  {
 /// Default constructor
 
-  Configure(selection);
+  Configure(selection, parameters);
 
   defaultCutValue = fgkDefaultCutValue;
 
@@ -87,7 +123,8 @@ TG4ExtraPhysicsList::~TG4ExtraPhysicsList()
 //
 
 //_____________________________________________________________________________
-void TG4ExtraPhysicsList::Configure(const G4String& selection)
+void TG4ExtraPhysicsList::Configure(const G4String& selection,
+                                    const std::map<TString, Double_t>& parameters)
 {
 /// Create the selected physics constructors
 /// and registeres them in the modular physics list.
@@ -107,6 +144,13 @@ void TG4ExtraPhysicsList::Configure(const G4String& selection)
 #endif
     RegisterPhysics(extraPhysics);
   }  
+
+  // Monopole physics
+  if ( selection.contains("monopole") ) {
+    G4MonopolePhysics* monopolePhysics = new G4MonopolePhysics();
+    SetParameters(monopolePhysics, parameters);
+    RegisterPhysics(monopolePhysics);
+  }
 
   // Optical physics
   if ( selection.contains("optical") ) {

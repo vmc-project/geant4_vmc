@@ -20,7 +20,7 @@
 #include <iostream>
 
 #include <TVirtualMC.h>
-#include <TVirtualMCRootManager.h>
+#include <TMCRootManager.h>
 #include <TLorentzVector.h>
 #include <TTree.h>
 
@@ -105,7 +105,7 @@ void Ex02TrackerSD::Initialize()
     fTrackerCollection = new TClonesArray("Ex02TrackerHit");
 
     // Register to Root IO only if RootManager is instantiated
-    if ( TVirtualMCRootManager::Instance() ) Register();
+    if ( TMCRootManager::Instance() ) Register();
     registered = true;
   }   
 
@@ -165,7 +165,7 @@ void Ex02TrackerSD::Register()
 {
 /// Register the hits collection in the Root manager.
   
-  TVirtualMCRootManager::Instance()
+  TMCRootManager::Instance()
     ->Register("hits", "TClonesArray", &fTrackerCollection);
 }
 

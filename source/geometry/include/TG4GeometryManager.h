@@ -22,7 +22,7 @@
 
 #include <vector>
 
-class TG4MagneticField;
+class TG4Field;
 class TG4GeometryServices;
 class TG4OpGeometryManager;
 class TG4ModelConfigurationManager;
@@ -63,14 +63,14 @@ class TG4GeometryManager : public TG4Verbose
     void ConstructGeometry();
     void ConstructSDandField();
     void FinishGeometry();
-    void UpdateMagField();
-    void CreateMagFieldParameters(const G4String& fieldVolName);
+    void UpdateField();
+    void CreateFieldParameters(const G4String& fieldVolName);
     TG4RadiatorDescription*
          CreateRadiator(const G4String& volName);
     void SetUserLimits(const TG4G3CutVector& cuts,
                        const TG4G3ControlVector& controls) const;
-    void SetIsLocalMagField(G4bool isLocalMagField);
-    void SetIsZeroMagField(G4bool isZeroMagField);
+    void SetIsLocalField(G4bool isLocalField);
+    void SetIsZeroField(G4bool isZeroField);
     void SetIsUserMaxStep(G4bool isUserMaxStep);
     void SetIsMaxStepInLowDensityMaterials(G4bool isMaxStep);
      
@@ -107,11 +107,11 @@ class TG4GeometryManager : public TG4Verbose
     void FillMediumMapFromRoot();
     void FillMediumMap();
     TG4FieldParameters* GetOrCreateFieldParameters(const G4String& volumeName);
-    void CreateMagField(TVirtualMagField* magField,
+    void CreateField(TVirtualMagField* magField,
            TG4FieldParameters* fieldParameters, G4LogicalVolume* lv);
-    void ConstructGlobalMagField();
-    void ConstructZeroMagFields();
-    void ConstructLocalMagFields();
+    void ConstructGlobalField();
+    void ConstructZeroFields();
+    void ConstructLocalFields();
         
     // static data members
     static TG4GeometryManager*  fgInstance;     ///< this instance
@@ -137,11 +137,11 @@ class TG4GeometryManager : public TG4Verbose
     /// User geometry input
     G4String  fUserGeometry;
 
-    /// Magnetic field parameters
+    /// Field parameters
     std::vector<TG4FieldParameters*>  fFieldParameters;
 
-    /// Magnetic fields
-    static G4ThreadLocal std::vector<TG4MagneticField*>*  fgMagneticFields;
+    /// Fields
+    static G4ThreadLocal std::vector<TG4Field*>*  fgFields;
 
     /// Radiators
     std::vector<TG4RadiatorDescription*>  fRadiators;
@@ -153,10 +153,10 @@ class TG4GeometryManager : public TG4Verbose
     TG4VUserPostDetConstruction* fUserPostDetConstruction;
 
     /// option to activate getting local magnetic fields from Root geometry
-    G4bool    fIsLocalMagField;
+    G4bool    fIsLocalField;
 
     /// option to activate propagating 'ifield = 0' defined in tracking media
-    G4bool    fIsZeroMagField;
+    G4bool    fIsZeroField;
 
     /// info if a cached magnetic field is in use
     G4bool    fIsCachedMagneticField;

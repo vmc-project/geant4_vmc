@@ -72,7 +72,8 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("eIoni", kPEnergyLoss); 
   mcMap->Add("muIoni", kPEnergyLoss); 
   mcMap->Add("hIoni", kPEnergyLoss); 
-  mcMap->Add("ionIoni", kPEnergyLoss); 
+  mcMap->Add("ionIoni", kPEnergyLoss);
+  mcMap->Add("mplIoni", kPEnergyLoss);
 
   mcMap->Add("Decay", kPDecay); 
   mcMap->Add("RadioactiveDecay", kPDecay); 
@@ -226,6 +227,7 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("CHIPS_SynchrotronRadiation", kPSynchrotron);
 
   mcMap->Add("Transportation", kPTransportation);
+  mcMap->Add("MonopoleTransportation", kPTransportation);
   
   mcMap->Add("StepLimiter", kStepMax);
   mcMap->Add("specialCutForChargedHadron", kPStop); 

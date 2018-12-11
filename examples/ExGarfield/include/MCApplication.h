@@ -27,7 +27,7 @@
 #include <TStopwatch.h>
 
 class Ex03MCStack;
-class TVirtualMCRootManager;
+class TMCRootManager;
 
 namespace VMC
 {
@@ -86,7 +86,7 @@ class MCApplication : public TVirtualMCApplication
     void RegisterStack() const;
   
     // data members
-    mutable TVirtualMCRootManager* fRootManager; //!< Root manager
+    mutable TMCRootManager* fRootManager; //!< Root manager
     Int_t                 fEventNo;              ///< Event counter
     TMCVerbose            fVerbose;              ///< VMC verbose helper
     Ex03MCStack*          fStack;                ///< VMC stack

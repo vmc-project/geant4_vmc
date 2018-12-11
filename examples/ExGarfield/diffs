@@ -577,7 +577,7 @@ index df5a93f..c396c89 100644
  ///
  /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
  ///
-@@ -31,12 +31,12 @@ class TVirtualMCRootManager;
+@@ -31,12 +31,12 @@ class TMCRootManager;
  
  namespace VMC
  {
