@@ -118,8 +118,7 @@ void DetectorConstruction::ConstructMaterials()
     } else {
       param[4] = -0.01;
     }
-    TGeoMedium* medium
-      = new TGeoMedium(material->GetName(), ++mediumId, material, param);
+    new TGeoMedium(material->GetName(), ++mediumId, material, param);
   }
 }    
 
