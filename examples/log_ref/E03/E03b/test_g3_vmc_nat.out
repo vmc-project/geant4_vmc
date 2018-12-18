@@ -1,34 +1,26 @@
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
-Processing load_g3.C...
+Processing load_g3b.C...
 Loading Geant3 libraries ... finished
-Processing test_E03_1.C("g3tgeoConfig.C", kFALSE)...
+Processing test_E03_1.C("g3Config.C", kTRUE)...
+--------------------------------------------------------------
+ VMC Example E03b: new version with sensitive detectors
+--------------------------------------------------------------
 Geant3 has been created.
-Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
-Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
-Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
-Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
-Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
-Info in <TGeoManager::CloseGeometry>: Counting nodes...
-Info in <TGeoManager::Voxelize>: Voxelizing...
-Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
-Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
-Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
+Ex03MCApplication::ConstructSensitiveDetectors()
 
 ---> Begin of event: 1
-Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 936.678       total track length (cm):  41.6659
    Gap:      total energy (MeV): 17.9447       total track length (cm):  8.49278
 
@@ -48,11 +40,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 939.295       total track length (cm):  45.0105
    Gap:      total energy (MeV): 36.4053       total track length (cm):  15.9358
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    97609567     5D1675F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   119148423     71A0F87 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    92199501    97609567
-                                        HEX     57EDA4D     5D1675F
+          with Store/Table at absolute adrs   113738357   119148423
+                                        HEX     6C78275     71A0F87
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -69,6 +61,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+ GGCLOS: Start automatic volume ordering:
+
+ MZLINK.  Initialize Link Area  /GCHVIR/  for Store  0 NL/NS=     4     1
+
+ MZLINK.  Initialize Link Area  /GCDINA/  for Store  0 NL/NS=     4     4
 
  Calculating cross section tables, see gphysi.dat for more information
 
@@ -89,37 +86,30 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
-Processing load_g3.C...
+Processing load_g3b.C...
 Loading Geant3 libraries ... finished
-Processing test_E03_2.C("g3tgeoConfig.C", kFALSE)...
+Processing test_E03_2.C("g3Config.C", kTRUE)...
+--------------------------------------------------------------
+ VMC Example E03b: new version with sensitive detectors
+--------------------------------------------------------------
 --- Init MC 
 Geant3 has been created.
 --- Add particles 
 --- Add ions 
 --- Construct geometry 
-Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
-Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
-Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
-Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
-Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
-Info in <TGeoManager::CloseGeometry>: Counting nodes...
-Info in <TGeoManager::Voxelize>: Voxelizing...
-Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
-Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
-Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
+Ex03MCApplication::ConstructSensitiveDetectors()
 --- Init geometry 
 --- Run MC for 1 events
 --- Begin event 
@@ -456,17 +446,16 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   2    -3.000    0.314    0.049     0.4699    0.0709    0.038    0.103     GAPX  Multiple scattering
 #   3    -3.000    0.314    0.049     0.4699    0.0000    0.000    0.103     ABSO  No active process
 #   4    -3.000    0.314    0.049     0.0000    0.4699    0.000    0.103     ABSO  Energy threshold
---- Finish event 
-Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV):  46.033       total track length (cm):    1.916
    Gap:      total energy (MeV):   3.967       total track length (cm):    2.241
+--- Finish event 
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    97791839     5D42F5F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    80279431     4C8F787 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    92381773    97791839
-                                        HEX     581A24D     5D42F5F
+          with Store/Table at absolute adrs    74869365    80279431
+                                        HEX     4766A75     4C8F787
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -483,43 +472,41 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+ GGCLOS: Start automatic volume ordering:
+
+ MZLINK.  Initialize Link Area  /GCHVIR/  for Store  0 NL/NS=     4     1
+
+ MZLINK.  Initialize Link Area  /GCDINA/  for Store  0 NL/NS=     4     4
 
  Calculating cross section tables, see gphysi.dat for more information
 
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
-Processing load_g3.C...
+Processing load_g3b.C...
 Loading Geant3 libraries ... finished
-Processing test_E03_3.C("g3tgeoConfig.C", kFALSE)...
+Processing test_E03_3.C("g3Config.C", kTRUE)...
+--------------------------------------------------------------
+ VMC Example E03b: new version with sensitive detectors
+--------------------------------------------------------------
 --- Init MC 
 Geant3 has been created.
 --- Add particles 
 --- Add ions 
 --- Construct geometry 
-Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
-Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
-Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
-Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
-Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
-Info in <TGeoManager::CloseGeometry>: Counting nodes...
-Info in <TGeoManager::Voxelize>: Voxelizing...
-Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
-Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
-Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
+Ex03MCApplication::ConstructSensitiveDetectors()
 --- Init geometry 
 --- Run MC for 1 events
 --- Begin event 
@@ -592,17 +579,16 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  29     3.877   -5.000    0.179   285.3407    0.0000    0.959   12.398     ABSO  Transportation
 #  30     3.877   -5.000    0.179   285.3407    0.0000    0.000   12.398     WRLD  No active process
 #  31     6.146   -6.000    0.215   285.3407    0.0000    2.480   14.877     WRLD  Transportation
---- Finish event 
-Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 1120.783       total track length (cm):    0.101
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
+--- Finish event 
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    86395743     5264B5F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   118323079     70D7787 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    80985677    86395743
-                                        HEX     4D3BE4D     5264B5F
+          with Store/Table at absolute adrs   112913013   118323079
+                                        HEX     6BAEA75     70D7787
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -619,39 +605,37 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+ GGCLOS: Start automatic volume ordering:
+
+ MZLINK.  Initialize Link Area  /GCHVIR/  for Store  0 NL/NS=     4     1
+
+ MZLINK.  Initialize Link Area  /GCDINA/  for Store  0 NL/NS=     4     4
 
  Calculating cross section tables, see gphysi.dat for more information
 
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
-Processing load_g3.C...
+Processing load_g3b.C...
 Loading Geant3 libraries ... finished
-Processing test_E03_4.C("g3tgeoConfig.C", kFALSE)...
+Processing test_E03_4.C("g3Config.C", kTRUE)...
+--------------------------------------------------------------
+ VMC Example E03b: new version with sensitive detectors
+--------------------------------------------------------------
 Geant3 has been created.
-Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
-Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
-Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
-Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
-Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
-Info in <TGeoManager::CloseGeometry>: Counting nodes...
-Info in <TGeoManager::Voxelize>: Voxelizing...
-Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
-Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
-Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
+Ex03MCApplication::ConstructSensitiveDetectors()
 
 ---> Begin of event: 1
    Primary track ID = 4
@@ -674,15 +658,14 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
       Current track pi0  is a decay product of Parent ID = 0
       Current track pi0  is a decay product of Parent ID = 0
 
-Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 1593.45       total track length (cm):  75.6226
    Gap:      total energy (MeV): 72.9199       total track length (cm):  35.7201
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   111733599     6A8EB5F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    99395463     5ECA787 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   106323533   111733599
-                                        HEX     6565E4D     6A8EB5F
+          with Store/Table at absolute adrs    93985397    99395463
+                                        HEX     59A1A75     5ECA787
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -699,43 +682,41 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+ GGCLOS: Start automatic volume ordering:
+
+ MZLINK.  Initialize Link Area  /GCHVIR/  for Store  0 NL/NS=     4     1
+
+ MZLINK.  Initialize Link Area  /GCDINA/  for Store  0 NL/NS=     4     4
 
  Calculating cross section tables, see gphysi.dat for more information
 
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
-Processing load_g3.C...
+Processing load_g3b.C...
 Loading Geant3 libraries ... finished
-Processing test_E03_5.C("g3tgeoConfig.C", kFALSE)...
+Processing test_E03_5.C("g3Config.C", kTRUE)...
+--------------------------------------------------------------
+ VMC Example E03b: new version with sensitive detectors
+--------------------------------------------------------------
 --- Init MC 
 Geant3 has been created.
 --- Add particles 
 --- Add ions 
 --- Construct geometry 
-Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
-Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
-Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
-Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
-Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
-Info in <TGeoManager::CloseGeometry>: Counting nodes...
-Info in <TGeoManager::Voxelize>: Voxelizing...
-Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
-Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
-Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
+Ex03MCApplication::ConstructSensitiveDetectors()
 --- Init geometry 
 --- Run MC for 1 events
 --- Begin event 
@@ -1081,17 +1062,16 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  39     7.500    0.191   -0.045     1.9839    0.0000    0.500   15.001     GAPX  Transportation
 #  40     7.500    0.191   -0.045     1.9839    0.0000    0.000   15.001     WRLD  No active process
 #  41     9.000    0.210   -0.050     1.9839    0.0000    1.500   16.501     WRLD  Transportation
---- Finish event 
-Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV):  18.512       total track length (cm):    1.292
    Gap:      total energy (MeV):   2.957       total track length (cm):    1.496
+--- Finish event 
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   123037535     755675F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   108730247     67B1787 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   117627469   123037535
-                                        HEX     702DA4D     755675F
+          with Store/Table at absolute adrs   103320181   108730247
+                                        HEX     6288A75     67B1787
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -1108,6 +1088,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  MZLINK.  Initialize Link Area  /GCLINK/  for Store  0 NL/NS=    20    20
 
  MZLINK.  Initialize Link Area  /GCSLNK/  for Store  0 NL/NS=   100   100
+ GGCLOS: Start automatic volume ordering:
+
+ MZLINK.  Initialize Link Area  /GCHVIR/  for Store  0 NL/NS=     4     1
+
+ MZLINK.  Initialize Link Area  /GCDINA/  for Store  0 NL/NS=     4     4
 
  Calculating cross section tables, see gphysi.dat for more information
 

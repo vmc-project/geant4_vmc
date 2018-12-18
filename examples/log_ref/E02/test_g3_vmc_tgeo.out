@@ -1,8 +1,8 @@
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
@@ -123,11 +123,11 @@ Primary
 Number of daughters: 0
 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    98116447     5D9235F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    69084039     41E2387 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    92706381    98116447
-                                        HEX     586964D     5D9235F
+          with Store/Table at absolute adrs    63673973    69084039
+                                        HEX     3CB9675     41E2387
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

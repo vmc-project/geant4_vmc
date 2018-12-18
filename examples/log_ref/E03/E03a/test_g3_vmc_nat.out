@@ -1,24 +1,23 @@
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
-Processing load_g3.C...
+Processing load_g3a.C...
 Loading Geant3 libraries ... finished
 Processing test_E03_1.C("g3Config.C", kTRUE)...
+--------------------------------------------------------------
+ VMC Example E03
+--------------------------------------------------------------
 Geant3 has been created.
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
-MediumId: Medium Aerogel not found
-MediumId: Medium CarbonicGas not found
-MediumId: Medium WaterSteam not found
-MediumId: Medium Beam not found
 
 ---> Begin of event: 1
    Absorber: total energy (MeV): 936.678       total track length (cm):  41.6659
@@ -40,11 +39,11 @@ MediumId: Medium Beam not found
    Absorber: total energy (MeV): 939.295       total track length (cm):  45.0105
    Gap:      total energy (MeV): 36.4053       total track length (cm):  15.9358
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    79655775     4BF735F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    72360839     4502387 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    74245709    79655775
-                                        HEX     46CE64D     4BF735F
+          with Store/Table at absolute adrs    66950773    72360839
+                                        HEX     3FD9675     4502387
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -86,17 +85,20 @@ MediumId: Medium Beam not found
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
-Processing load_g3.C...
+Processing load_g3a.C...
 Loading Geant3 libraries ... finished
 Processing test_E03_2.C("g3Config.C", kTRUE)...
+--------------------------------------------------------------
+ VMC Example E03
+--------------------------------------------------------------
 --- Init MC 
 Geant3 has been created.
 --- Add particles 
@@ -107,10 +109,6 @@ Geant3 has been created.
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
 --- Init geometry 
-MediumId: Medium Aerogel not found
-MediumId: Medium CarbonicGas not found
-MediumId: Medium WaterSteam not found
-MediumId: Medium Beam not found
 --- Run MC for 1 events
 --- Begin event 
 
@@ -451,11 +449,11 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Gap:      total energy (MeV):   3.967       total track length (cm):    2.241
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    93961055     599BB5F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   111895431     6AB6387 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    88550989    93961055
-                                        HEX     5472E4D     599BB5F
+          with Store/Table at absolute adrs   106485365   111895431
+                                        HEX     658D675     6AB6387
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -483,17 +481,20 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
-Processing load_g3.C...
+Processing load_g3a.C...
 Loading Geant3 libraries ... finished
 Processing test_E03_3.C("g3Config.C", kTRUE)...
+--------------------------------------------------------------
+ VMC Example E03
+--------------------------------------------------------------
 --- Init MC 
 Geant3 has been created.
 --- Add particles 
@@ -504,10 +505,6 @@ Geant3 has been created.
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
 --- Init geometry 
-MediumId: Medium Aerogel not found
-MediumId: Medium CarbonicGas not found
-MediumId: Medium WaterSteam not found
-MediumId: Medium Beam not found
 --- Run MC for 1 events
 --- Begin event 
 
@@ -584,11 +581,11 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   120240991     72ABB5F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    62333831     3B72387 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   114830925   120240991
-                                        HEX     6D82E4D     72ABB5F
+          with Store/Table at absolute adrs    56923765    62333831
+                                        HEX     3649675     3B72387
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -616,26 +613,25 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
-Processing load_g3.C...
+Processing load_g3a.C...
 Loading Geant3 libraries ... finished
 Processing test_E03_4.C("g3Config.C", kTRUE)...
+--------------------------------------------------------------
+ VMC Example E03
+--------------------------------------------------------------
 Geant3 has been created.
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
-MediumId: Medium Aerogel not found
-MediumId: Medium CarbonicGas not found
-MediumId: Medium WaterSteam not found
-MediumId: Medium Beam not found
 
 ---> Begin of event: 1
    Primary track ID = 4
@@ -661,11 +657,11 @@ MediumId: Medium Beam not found
    Absorber: total energy (MeV): 1593.45       total track length (cm):  75.6226
    Gap:      total energy (MeV): 72.9199       total track length (cm):  35.7201
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    78984031     4B5335F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    95524743     5B19787 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    73573965    78984031
-                                        HEX     462A64D     4B5335F
+          with Store/Table at absolute adrs    90114677    95524743
+                                        HEX     55F0A75     5B19787
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -693,17 +689,20 @@ MediumId: Medium Beam not found
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
-Processing load_g3.C...
+Processing load_g3a.C...
 Loading Geant3 libraries ... finished
 Processing test_E03_5.C("g3Config.C", kTRUE)...
+--------------------------------------------------------------
+ VMC Example E03
+--------------------------------------------------------------
 --- Init MC 
 Geant3 has been created.
 --- Add particles 
@@ -714,10 +713,6 @@ Geant3 has been created.
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
 --- Init geometry 
-MediumId: Medium Aerogel not found
-MediumId: Medium CarbonicGas not found
-MediumId: Medium WaterSteam not found
-MediumId: Medium Beam not found
 --- Run MC for 1 events
 --- Begin event 
 
@@ -1067,11 +1062,11 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Gap:      total energy (MeV):   2.957       total track length (cm):    1.496
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   104228703     636675F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    79586183     4BE6387 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    98818637   104228703
-                                        HEX     5E3DA4D     636675F
+          with Store/Table at absolute adrs    74176117    79586183
+                                        HEX     46BD675     4BE6387
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

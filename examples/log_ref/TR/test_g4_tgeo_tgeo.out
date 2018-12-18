@@ -1,8 +1,8 @@
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
@@ -18,7 +18,7 @@ Processing test_TR.C("g4tgeoConfig.C")...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.6 ( 23 January 2018 )
+ Version 4.0 ( 18 December 2018 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -56,12 +56,14 @@ WorldMaterial = Air
 Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 isMaster=1
 Running TVirtualMCApplication::ConstructGeometry
-*************************************************************
- Geant4 version Name: geant4-10-04    (08-December-2017)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
+**************************************************************
+ Geant4 version Name: geant4-10-05    (7-December-2018)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
 
 Info in <TObject::Initialize>: Creating G4 hierarchy ...
 Info in <TGeoManager::ConvertReflections>: Converting reflections in: TR_geometry - TR VMC example geometry ...
@@ -119,8 +121,8 @@ compt:   for  gamma    SubType= 13  BuildTable= 1
 conv:   for  gamma    SubType= 14  BuildTable= 1
       Lambda table from 1.022 MeV to 100 TeV, 18 bins per decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-        BetheHeitler :  Emin=        0 eV    Emax=       80 GeV
-     BetheHeitlerLPM :  Emin=       80 GeV   Emax=      100 TeV
+        BetheHeitler :  Emin=        0 eV    Emax=       80 GeV   AngularGenUrban
+     BetheHeitlerLPM :  Emin=       80 GeV   Emax=      100 TeV   AngularGenUrban
 
 Rayl:   for  gamma    SubType= 11  BuildTable= 1
       Lambda table from 100 eV  to 100 keV, 7 bins per decade, spline: 0
@@ -146,8 +148,8 @@ eBrem:   for  e-    SubType= 3
       Lambda tables from threshold to 100 TeV, 7 bins per decade, spline: 1
       LPM flag: 1 for E > 1 GeV,  VertexHighEnergyTh(GeV)= 100000
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-             eBremSB :  Emin=        0 eV    Emax=        1 GeV   DipBustGen
-            eBremLPM :  Emin=        1 GeV   Emax=      100 TeV   DipBustGen
+             eBremSB :  Emin=        0 eV    Emax=        1 GeV   AngularGenUrban
+            eBremLPM :  Emin=        1 GeV   Emax=      100 TeV   AngularGenUrban
 
 CoulombScat:   for  e-, integral: 1     SubType= 1  BuildTable= 1
       Lambda table from 100 MeV to 100 TeV, 7 bins per decade, spline: 1
@@ -168,47 +170,50 @@ Lorentz Factor	XTR photon number
 322.9	0.03348
 370.5	0.04793
 425.3	0.0639
-488.2	0.08024
+488.2	0.08025
 560.3	0.1004
 643.2	0.1308
 738.3	0.1796
 847.6	0.2565
 973	0.3718
 1117	0.5155
-1282	0.6681
-1472	0.8312
-1690	1.189
-1940	1.625
-2228	1.975
-2558	2.342
-2936	2.501
-3371	2.761
-3871	2.754
-4444	3.001
-5102	3.271
-5858	3.276
-6726	3.238
-7722	3.211
-8866	3.198
-1.018e+04	3.191
-1.169e+04	3.187
-1.342e+04	3.187
-1.541e+04	3.19
-1.769e+04	3.194
-2.031e+04	3.198
-2.332e+04	3.201
-2.677e+04	3.205
-3.074e+04	3.207
-3.529e+04	3.21
-4.052e+04	3.212
-4.652e+04	3.214
-5.342e+04	3.216
-6.133e+04	3.217
-7.042e+04	3.218
-8.085e+04	3.219
-9.283e+04	3.22
+1282	0.6684
+1472	0.8334
+1690	1.157
+1940	1.952
+2228	1.83
+2558	1.885
+2936	2.221
+3371	2.678
+3871	2.995
+4444	3.039
+5102	2.903
+5858	3.006
+6726	3.221
+7722	3.467
+8866	3.203
+1.018e+04	3.198
+1.169e+04	3.199
+1.342e+04	3.201
+1.541e+04	3.204
+1.769e+04	3.207
+2.031e+04	3.21
+2.332e+04	3.213
+2.677e+04	3.215
+3.074e+04	3.217
+3.529e+04	3.22
+4.052e+04	3.222
+4.652e+04	3.223
+5.342e+04	3.225
+6.133e+04	3.226
+7.042e+04	3.227
+8.085e+04	3.228
+9.283e+04	3.228
 
-total time for build X-ray TR energy loss tables = 12.05 s
+total time for build X-ray TR energy loss tables = 44.69 s
+Build angle for energy distribution according the current radiator
+
+total time for build X-ray TR angle for energy loss tables = 13.46 s
 
 msc:   for e+    SubType= 10
       RangeFactor= 0.04, stepLimitType: 1, latDisplacement: 1
@@ -228,8 +233,8 @@ eBrem:   for  e+    SubType= 3
       Lambda tables from threshold to 100 TeV, 7 bins per decade, spline: 1
       LPM flag: 1 for E > 1 GeV,  VertexHighEnergyTh(GeV)= 100000
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-             eBremSB :  Emin=        0 eV    Emax=        1 GeV   DipBustGen
-            eBremLPM :  Emin=        1 GeV   Emax=      100 TeV   DipBustGen
+             eBremSB :  Emin=        0 eV    Emax=        1 GeV   AngularGenUrban
+            eBremLPM :  Emin=        1 GeV   Emax=      100 TeV   AngularGenUrban
 
 annihil:   for  e+, integral: 1     SubType= 5  BuildTable= 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -254,47 +259,50 @@ Lorentz Factor	XTR photon number
 322.9	0.03348
 370.5	0.04793
 425.3	0.0639
-488.2	0.08024
+488.2	0.08025
 560.3	0.1004
 643.2	0.1308
 738.3	0.1796
 847.6	0.2565
 973	0.3718
 1117	0.5155
-1282	0.6681
-1472	0.8312
-1690	1.189
-1940	1.625
-2228	1.975
-2558	2.342
-2936	2.501
-3371	2.761
-3871	2.754
-4444	3.001
-5102	3.271
-5858	3.276
-6726	3.238
-7722	3.211
-8866	3.198
-1.018e+04	3.191
-1.169e+04	3.187
-1.342e+04	3.187
-1.541e+04	3.19
-1.769e+04	3.194
-2.031e+04	3.198
-2.332e+04	3.201
-2.677e+04	3.205
-3.074e+04	3.207
-3.529e+04	3.21
-4.052e+04	3.212
-4.652e+04	3.214
-5.342e+04	3.216
-6.133e+04	3.217
-7.042e+04	3.218
-8.085e+04	3.219
-9.283e+04	3.22
+1282	0.6684
+1472	0.8334
+1690	1.157
+1940	1.952
+2228	1.83
+2558	1.885
+2936	2.221
+3371	2.678
+3871	2.995
+4444	3.039
+5102	2.903
+5858	3.006
+6726	3.221
+7722	3.467
+8866	3.203
+1.018e+04	3.198
+1.169e+04	3.199
+1.342e+04	3.201
+1.541e+04	3.204
+1.769e+04	3.207
+2.031e+04	3.21
+2.332e+04	3.213
+2.677e+04	3.215
+3.074e+04	3.217
+3.529e+04	3.22
+4.052e+04	3.222
+4.652e+04	3.223
+5.342e+04	3.225
+6.133e+04	3.226
+7.042e+04	3.227
+8.085e+04	3.228
+9.283e+04	3.228
 
-total time for build X-ray TR energy loss tables = 11.93 s
+total time for build X-ray TR energy loss tables = 44.71 s
+Build angle for energy distribution according the current radiator
+
+total time for build X-ray TR angle for energy loss tables = 13.47 s
 
 msc:   for proton    SubType= 10
       RangeFactor= 0.2, stepLimitType: 0, latDisplacement: 0
@@ -337,7 +345,7 @@ ionIoni:   for  GenericIon    SubType= 2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins per decade, spline: 1
       finalRange(mm)= 0.1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.02
-      Stopping Power data for 17 ion/material pairs 
+      Stopping Power data for 17 ion/material pairs
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             BraggIon :  Emin=        0 eV    Emax=        2 MeV
           BetheBloch :  Emin=        2 MeV   Emax=      100 TeV
@@ -613,10 +621,10 @@ Index : 2     used in the geometry : Yes
 --> Event 2000 starts.
 --> Event 3000 starts.
 --> Event 4000 starts.
-Time of this run:   User=2.38s Real=2.41s Sys=0.02s
+Time of this run:   User=3.620000s Real=3.698195s Sys=0.050000s
 Number of events processed: 5000
  ================== run summary =====================
  End of Run TotNbofEvents = 5000
- Mean energy deposit in absorber = 0.0488327 +-0.0190153  MeV 
- Total number of XTR gammas = 13640
- Total number of all gammas = 15590
+ Mean energy deposit in absorber = 0.0512201 +-0.0195843  MeV 
+ Total number of XTR gammas = 14821
+ Total number of all gammas = 16752

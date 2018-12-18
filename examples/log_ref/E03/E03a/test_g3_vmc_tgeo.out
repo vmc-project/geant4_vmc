@@ -1,15 +1,18 @@
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
-Processing load_g3.C...
+Processing load_g3a.C...
 Loading Geant3 libraries ... finished
 Processing test_E03_1.C("g3tgeoConfig.C", kTRUE)...
+--------------------------------------------------------------
+ VMC Example E03
+--------------------------------------------------------------
 Geant3 has been created.
 Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
@@ -26,10 +29,6 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
-MediumId: Medium Aerogel not found
-MediumId: Medium CarbonicGas not found
-MediumId: Medium WaterSteam not found
-MediumId: Medium Beam not found
 
 ---> Begin of event: 1
 Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
@@ -52,11 +51,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 939.295       total track length (cm):  45.0105
    Gap:      total energy (MeV): 36.4053       total track length (cm):  15.9358
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    82730847     4EE5F5F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    72529799     452B787 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    77320781    82730847
-                                        HEX     49BD24D     4EE5F5F
+          with Store/Table at absolute adrs    67119733    72529799
+                                        HEX     4002A75     452B787
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -93,17 +92,20 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
-Processing load_g3.C...
+Processing load_g3a.C...
 Loading Geant3 libraries ... finished
 Processing test_E03_2.C("g3tgeoConfig.C", kTRUE)...
+--------------------------------------------------------------
+ VMC Example E03
+--------------------------------------------------------------
 --- Init MC 
 Geant3 has been created.
 --- Add particles 
@@ -125,10 +127,6 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
 --- Init geometry 
-MediumId: Medium Aerogel not found
-MediumId: Medium CarbonicGas not found
-MediumId: Medium WaterSteam not found
-MediumId: Medium Beam not found
 --- Run MC for 1 events
 --- Begin event 
 
@@ -470,11 +468,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   3.967       total track length (cm):    2.241
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   112994143     6BC275F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    84938631     5100F87 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   107584077   112994143
-                                        HEX     6699A4D     6BC275F
+          with Store/Table at absolute adrs    79528565    84938631
+                                        HEX     4BD8275     5100F87
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -497,17 +495,20 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
-Processing load_g3.C...
+Processing load_g3a.C...
 Loading Geant3 libraries ... finished
 Processing test_E03_3.C("g3tgeoConfig.C", kTRUE)...
+--------------------------------------------------------------
+ VMC Example E03
+--------------------------------------------------------------
 --- Init MC 
 Geant3 has been created.
 --- Add particles 
@@ -529,10 +530,6 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
 --- Init geometry 
-MediumId: Medium Aerogel not found
-MediumId: Medium CarbonicGas not found
-MediumId: Medium WaterSteam not found
-MediumId: Medium Beam not found
 --- Run MC for 1 events
 --- Begin event 
 
@@ -610,11 +607,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   121981791     7454B5F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   104245127     636A787 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   116571725   121981791
-                                        HEX     6F2BE4D     7454B5F
+          with Store/Table at absolute adrs    98835061   104245127
+                                        HEX     5E41A75     636A787
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -637,17 +634,20 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
-Processing load_g3.C...
+Processing load_g3a.C...
 Loading Geant3 libraries ... finished
 Processing test_E03_4.C("g3tgeoConfig.C", kTRUE)...
+--------------------------------------------------------------
+ VMC Example E03
+--------------------------------------------------------------
 Geant3 has been created.
 Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
@@ -664,10 +664,6 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
-MediumId: Medium Aerogel not found
-MediumId: Medium CarbonicGas not found
-MediumId: Medium WaterSteam not found
-MediumId: Medium Beam not found
 
 ---> Begin of event: 1
    Primary track ID = 4
@@ -694,11 +690,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 1593.45       total track length (cm):  75.6226
    Gap:      total energy (MeV): 72.9199       total track length (cm):  35.7201
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    89446239     554D75F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    61213575     3A60B87 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    84036173    89446239
-                                        HEX     5024A4D     554D75F
+          with Store/Table at absolute adrs    55803509    61213575
+                                        HEX     3537E75     3A60B87
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -721,17 +717,20 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------
-  | Welcome to ROOT 6.12/04                http://root.cern.ch |
-  |                               (c) 1995-2017, The ROOT Team |
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
   | Built for macosx64                                         |
-  | From tag v6-12-04, 13 December 2017                        |
+  | From tag v6-14-06, 5 November 2018                         |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
-Processing load_g3.C...
+Processing load_g3a.C...
 Loading Geant3 libraries ... finished
 Processing test_E03_5.C("g3tgeoConfig.C", kTRUE)...
+--------------------------------------------------------------
+ VMC Example E03
+--------------------------------------------------------------
 --- Init MC 
 Geant3 has been created.
 --- Add particles 
@@ -753,10 +752,6 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
 --- Init geometry 
-MediumId: Medium Aerogel not found
-MediumId: Medium CarbonicGas not found
-MediumId: Medium WaterSteam not found
-MediumId: Medium Beam not found
 --- Run MC for 1 events
 --- Begin event 
 
@@ -1107,11 +1102,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   2.957       total track length (cm):    1.496
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    57726815     370D75F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    92126087     57DBB87 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    52316749    57726815
-                                        HEX     31E4A4D     370D75F
+          with Store/Table at absolute adrs    86716021    92126087
+                                        HEX     52B2E75     57DBB87
                                         HEX    FFAD7132           0
                               relative adrs    -5410510           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

@@ -1,19 +1,11 @@
-  *******************************************
-  *                                         *
-  *        W E L C O M E  to  R O O T       *
-  *                                         *
-  *   Version   5.34/36      5 April 2016   *
-  *                                         *
-  *  You are welcome to visit our Web site  *
-  *          http://root.cern.ch            *
-  *                                         *
-  *******************************************
+   ------------------------------------------------------------
+  | Welcome to ROOT 6.14/06                http://root.cern.ch |
+  |                               (c) 1995-2018, The ROOT Team |
+  | Built for macosx64                                         |
+  | From tag v6-14-06, 5 November 2018                         |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
+   ------------------------------------------------------------
 
-ROOT 5.34/36 (v5-34-36@v5-34-36, Sep 12 2017, 11:32:07 on macosx64)
-
-CINT/ROOT C/C++ Interpreter version 5.18.00, July 2, 2010
-Type ? for help. Commands must be C++ statements.
-Enclose multiple statements between { }.
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
@@ -24,12 +16,14 @@ Loading geant4vmc library ...
 Loading mtroot library ...
 RandomEngineRoot:
     Generator type: TRandom3
-    Seed: 116766778
+    Seed: 2122617915
+Heed:
+    Database path: /Users/ivana/work/projects/vmc/new_root6/garfieldpp/Heed/heed++/database
 Processing test_ExGarfield.C("g4tgeoConfig.C")...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 3.6 ( 23 January 2018 )
+ Version 4.0 ( 18 December 2018 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -50,12 +44,14 @@ Info in <TGeoManager::Export>: Exporting Garfield_geometry ExGarfield VMC exampl
 Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 isMaster=1
 Running TVirtualMCApplication::ConstructGeometry
-*************************************************************
- Geant4 version Name: geant4-10-04    (08-December-2017)
-                      Copyright : Geant4 Collaboration
-                      Reference : NIM A 506 (2003), 250-303
-                            WWW : http://cern.ch/geant4
-*************************************************************
+**************************************************************
+ Geant4 version Name: geant4-10-05    (7-December-2018)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
 
 Info in <TObject::Initialize>: Creating G4 hierarchy ...
 Info in <TGeoManager::ConvertReflections>: Converting reflections in: Garfield_geometry - ExGarfield VMC example geometry ...
@@ -636,94 +632,11 @@ G4PhysicsListHelper::RegisterProcess :Decay for xi_c0 with  type/subtype =6/201 
 ### User particles physics constructed. 
 TG4ProcessMCMapPhysics::ConstructProcess: 
 ### Processes mapped to VMC codes ok.
-TGEmModelPhysics::ConstructProcess 
 TG4EmModelPhysics::AddModels
-New G4PAIModel
-Adding EM model: PAI to particle: B+ process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: B- process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: D+ process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: D- process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: Ds+ process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: Ds- process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: GenericIon process: ionIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: He3 process: ionIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: alpha process: ionIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: anti_He3 process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: anti_alpha process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: anti_deuteron process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: anti_lambda_c+ process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: anti_omega- process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: anti_proton process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: anti_sigma+ process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: anti_sigma- process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: anti_sigma_c+ process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: anti_sigma_c++ process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: anti_triton process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: anti_xi- process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: anti_xi_c+ process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: deuteron process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: e+ process: eIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: e- process: eIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: kaon+ process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: kaon- process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: lambda_c+ process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: mu+ process: muIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: mu- process: muIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: omega- process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: pi+ process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: pi- process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: proton process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: sigma+ process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: sigma- process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: sigma_c+ process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: sigma_c++ process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: tau+ process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: tau- process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: triton process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: xi- process: hIoni medium(=region): ArCO2
-New G4PAIModel
-Adding EM model: PAI to particle: xi_c+ process: hIoni medium(=region): ArCO2
+Model configuration: PAI
+particles: all
+media:     ArCO2
+regions:   ArCO2 
 ### G4EmConfigurator::AddModels n= 43
 ### Selected EmModels added to EM processes
 TG4FastSimulationPhysics::ConstructProcess 
@@ -765,12 +678,12 @@ MediumMagboltz::ComputePhotonCollisionTable:
           1.00         ------------
           3.00         ------------
           5.00         ------------
-          7.00           192201.6040
-          9.00             2186.0406
+          7.00           192201.9746
+          9.00             2186.0412
          11.00               15.4051
          13.00               20.9412
          15.00               96.7932
-         17.00               13.8366
+         17.00               13.8367
          19.00               11.1880
 MediumMagboltz::EnablePenningTransfer:
     Penning transfer parameters for 44 excitation levels set to:
@@ -782,7 +695,7 @@ MediumMagboltz::LoadGasFile:
     Gas composition set to Ar/CO2 (70/30)
 end construct Garfield model.
 TG4FastSimulationPhysics::UpdateRegions
-Adding fast simulation model garfieldModel to regions ArCO2
+Adding fast simulation model garfieldModel to regions ArCO2 
 creating G4FastSimulationManager for the region
 TG4FastSimulationPhysics::AddFastSimulationProcess
 ... created fastSimulationProcess
@@ -816,8 +729,8 @@ compt:   for  gamma    SubType= 13  BuildTable= 1
 conv:   for  gamma    SubType= 14  BuildTable= 1
       Lambda table from 1.022 MeV to 100 TeV, 18 bins per decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-        BetheHeitler :  Emin=        0 eV    Emax=       80 GeV
-     BetheHeitlerLPM :  Emin=       80 GeV   Emax=      100 TeV
+        BetheHeitler :  Emin=        0 eV    Emax=       80 GeV   AngularGenUrban
+     BetheHeitlerLPM :  Emin=       80 GeV   Emax=      100 TeV   AngularGenUrban
 
 Rayl:   for  gamma    SubType= 11  BuildTable= 1
       Lambda table from 100 eV  to 100 keV, 7 bins per decade, spline: 0
@@ -845,8 +758,8 @@ eBrem:   for  e-    SubType= 3
       Lambda tables from threshold to 100 TeV, 7 bins per decade, spline: 1
       LPM flag: 1 for E > 1 GeV,  VertexHighEnergyTh(GeV)= 100000
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-             eBremSB :  Emin=        0 eV    Emax=        1 GeV   DipBustGen
-            eBremLPM :  Emin=        1 GeV   Emax=      100 TeV   DipBustGen
+             eBremSB :  Emin=        0 eV    Emax=        1 GeV   AngularGenUrban
+            eBremLPM :  Emin=        1 GeV   Emax=      100 TeV   AngularGenUrban
 
 CoulombScat:   for  e-, integral: 1     SubType= 1  BuildTable= 1
       Lambda table from 100 MeV to 100 TeV, 7 bins per decade, spline: 1
@@ -874,8 +787,8 @@ eBrem:   for  e+    SubType= 3
       Lambda tables from threshold to 100 TeV, 7 bins per decade, spline: 1
       LPM flag: 1 for E > 1 GeV,  VertexHighEnergyTh(GeV)= 100000
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-             eBremSB :  Emin=        0 eV    Emax=        1 GeV   DipBustGen
-            eBremLPM :  Emin=        1 GeV   Emax=      100 TeV   DipBustGen
+             eBremSB :  Emin=        0 eV    Emax=        1 GeV   AngularGenUrban
+            eBremLPM :  Emin=        1 GeV   Emax=      100 TeV   AngularGenUrban
 
 annihil:   for  e+, integral: 1     SubType= 5  BuildTable= 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -931,7 +844,7 @@ ionIoni:   for  GenericIon    SubType= 2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins per decade, spline: 1
       finalRange(mm)= 0.1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.02
-      Stopping Power data for 17 ion/material pairs 
+      Stopping Power data for 17 ion/material pairs
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             BraggIon :  Emin=        0 eV    Emax=        2 MeV
           BetheBloch :  Emin=        2 MeV   Emax=      100 TeV
@@ -1209,19 +1122,15 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
   Process: hadElastic
         Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
      Cr_sctns:        G4NeutronElasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: neutronInelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 12 GeV
      Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
   Process: nCapture
         Model:               nRadCapture: 0 eV  ---> 100 TeV
      Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
 
   Process: nKiller
 
@@ -1231,7 +1140,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
   Process: ionInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 4 GeV/n
         Model:                      FTFP: 2 GeV/n ---> 100 TeV/n
-     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -1239,13 +1148,13 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: He3Inelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 4 GeV/n
         Model:                      FTFP: 2 GeV/n ---> 100 TeV/n
-     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -1258,7 +1167,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
   Process: alphaInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 4 GeV/n
         Model:                      FTFP: 2 GeV/n ---> 100 TeV/n
-     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -1267,12 +1176,12 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: anti_He3Inelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
   Process: hFritiofCaptureAtRest
@@ -1283,12 +1192,12 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: anti_alphaInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
   Process: hFritiofCaptureAtRest
@@ -1299,12 +1208,12 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: anti_deuteronInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
   Process: hFritiofCaptureAtRest
@@ -1318,7 +1227,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: anti_neutronInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -1327,12 +1236,12 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
         Model:              AntiAElastic: 100 MeV ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: anti_protonInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
   Process: hFritiofCaptureAtRest
@@ -1343,12 +1252,12 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: anti_tritonInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
   Process: hFritiofCaptureAtRest
@@ -1363,7 +1272,7 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
   Process: dInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 4 GeV/n
         Model:                      FTFP: 2 GeV/n ---> 100 TeV/n
-     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -1372,7 +1281,6 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
   Process: positronNuclear
         Model:   G4ElectroVDNuclearModel: 0 eV  ---> 1 PeV
      Cr_sctns:          ElectroNuclearXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for e-
@@ -1380,7 +1288,6 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
   Process: electronNuclear
         Model:   G4ElectroVDNuclearModel: 0 eV  ---> 1 PeV
      Cr_sctns:          ElectroNuclearXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for gamma
@@ -1389,20 +1296,19 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
         Model:            BertiniCascade: 0 eV  ---> 3.5 GeV
         Model:           TheoFSGenerator: 3 GeV ---> 100 TeV
      Cr_sctns:            PhotoNuclearXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for kaon+
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
-     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon+Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 12 GeV
-     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
      Cr_sctns:  ChipsKaonPlusInelasticXS: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
@@ -1411,13 +1317,13 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
-     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon-Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 12 GeV
-     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
      Cr_sctns: ChipsKaonMinusInelasticXS: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
@@ -1459,15 +1365,11 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
         Model:              hElasticLHEP: 0 eV  ---> 1.0001 GeV
         Model:           hElasticGlauber: 1 GeV ---> 100 TeV
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: pi+Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 12 GeV
-     Cr_sctns:      G4CrossSectionPairGG: 0 eV  ---> 100 TeV
-                         G4CrossSectionPairGG: G4PiNuclearCrossSection cross sections 
-                           below 91 GeV, Glauber-Gribov above 
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+     Cr_sctns: Barashenkov-Glauber-Gribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for pi-
@@ -1476,15 +1378,11 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
         Model:              hElasticLHEP: 0 eV  ---> 1.0001 GeV
         Model:           hElasticGlauber: 1 GeV ---> 100 TeV
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: pi-Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 12 GeV
-     Cr_sctns:      G4CrossSectionPairGG: 0 eV  ---> 100 TeV
-                         G4CrossSectionPairGG: G4PiNuclearCrossSection cross sections 
-                           below 91 GeV, Glauber-Gribov above 
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+     Cr_sctns: Barashenkov-Glauber-Gribov: 0 eV  ---> 100 TeV
 
   Process: hBertiniCaptureAtRest
 
@@ -1493,14 +1391,12 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
 
   Process: hadElastic
         Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
-     Cr_sctns:      ChipsProtonElasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
   Process: protonInelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 12 GeV
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for triton
@@ -1512,29 +1408,10 @@ CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
   Process: tInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 4 GeV/n
         Model:                      FTFP: 2 GeV/n ---> 100 TeV/n
-     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ================================================================
-=======================================================================
-======       Pre-compound/De-excitation Physics Parameters     ========
-=======================================================================
-Type of pre-compound inverse x-section              3
-Pre-compound model active                           1
-Pre-compound low energy (MeV)                       0.1
-Type of de-excitation inverse x-section             3
-Type of de-excitation factory                       Evaporation
-Number of de-excitation channels                    8
-Min excitation energy (keV)                         0.01
-Min energy per nucleon for multifragmentation (MeV) 1e+05
-Level density (1/MeV)                               0.1
-Time limit for long lived isomeres (ns)             1e+12
-Internal e- conversion flag                         1
-Store e- internal conversion data                   0
-Electron internal conversion ID                     2
-Correlated gamma emission flag                      0
-Max 2J for sampling of angular correlations         10
-=======================================================================
 
 ========= Table of registered couples ==============================
 
@@ -1581,26 +1458,126 @@ Sensor::SetArea:
     -1.451 < x [cm] < 1.451
     -1.451 < y [cm] < 1.451
     -10 < z [cm] < 10
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0 cm
 TrackHeed::Setup:
     Cluster density:             28.11 cm-1
-    Stopping power (restricted): 2.293 - 2.293 keV/cm
+    Stopping power (restricted): 2.293 keV/cm
     Stopping power (incl. tail): 2.691 keV/cm
-    W value:                     28.05 eV
+    W value:                     28.67 eV
     Fano factor:                 0.19
     Min. ionization potential:   13.79 eV
    Absorber: total energy:   11.89 MeV       total track length:       1 cm
-        Gas: total energy:   8.086 keV           avalanche size:     157       gain:   5.065
+        Gas: total energy:   8.086 keV           avalanche size:     102       gain:   3.923
  Start generating event Nr 2
-   Absorber: total energy:   14.48 MeV       total track length:   1.154 cm
-        Gas: total energy:    40.3 keV           avalanche size:     761       gain:   4.786
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0 cm
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0 cm
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0 cm
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0 cm
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0 cm
+   Absorber: total energy:   14.48 MeV       total track length:   1.142 cm
+        Gas: total energy:   24.55 keV           avalanche size:     596       gain:    4.73
  Start generating event Nr 3
-   Absorber: total energy:   15.16 MeV       total track length:       1 cm
-        Gas: total energy:   15.18 keV           avalanche size:     541       gain:   4.704
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0 cm
+   Absorber: total energy:   12.84 MeV       total track length:       1 cm
+        Gas: total energy:   6.982 keV           avalanche size:     156       gain:   4.875
  Start generating event Nr 4
-   Absorber: total energy:   11.74 MeV       total track length:       1 cm
-        Gas: total energy:    5.57 keV           avalanche size:       0       gain:       0
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0 cm
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0 cm
+   Absorber: total energy:   13.97 MeV       total track length:    1.13 cm
+        Gas: total energy:   5.193 keV           avalanche size:     199       gain:   4.146
  Start generating event Nr 5
-   Absorber: total energy:   31.11 MeV       total track length:   2.465 cm
-        Gas: total energy:   4.063 keV           avalanche size:     100       gain:   4.348
-Time of this run:   User=8.7s Real=8.74s Sys=0.02s
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0 cm
+   Absorber: total energy:   22.84 MeV       total track length:   1.693 cm
+        Gas: total energy:   6.555 keV           avalanche size:     116       gain:   5.273
+Time of this run:   User=8.530000s Real=8.697945s Sys=0.140000s
 Number of events processed: 5
