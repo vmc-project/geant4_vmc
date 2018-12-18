@@ -7,6 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
+#include "TVirtualMC.h"
+
 #include "set_vis.C"
 
 /// \ingroup Monopole

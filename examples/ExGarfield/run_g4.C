@@ -11,6 +11,8 @@
 /// \file ExGarfield/run_g4.C
 /// \brief Macro for running Example ExGarfield with Geant4. 
 
+#include "TVirtualMC.h"
+
 #include "set_vis.C"
 
 void run_g4(const TString& configMacro = "g4Config.C")

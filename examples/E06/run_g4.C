@@ -11,6 +11,8 @@
 /// \file E06/run_g4.C
 /// \brief Macro for running Example06 with Geant4. 
 
+#include "TVirtualMC.h"
+
 //#include "optPhoton.C"
 
 void run_g4(const TString& configMacro = "g4Config.C") 
