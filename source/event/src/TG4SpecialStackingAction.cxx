@@ -28,7 +28,8 @@ TG4SpecialStackingAction::TG4SpecialStackingAction()
     TG4Verbose("stackingAction",1),
     fMessenger(this),
     fStage(0),
-    fSkipNeutrino(false)
+    fSkipNeutrino(false),
+    fWaitPrimary(true)
 {
 /// Default constructor
 
@@ -51,7 +52,7 @@ TG4SpecialStackingAction::ClassifyNewTrack(const G4Track* track)
 {
 /// Classify the new track.
 
-  if (fStage == 0) { 
+  if (fWaitPrimary && fStage == 0) { 
     // move all primaries to PrimaryStack
     return fPostpone;
   }  
@@ -81,7 +82,8 @@ void TG4SpecialStackingAction::NewStage()
            << " has been started." << G4endl;
   }
 
-  if (stackManager->GetNUrgentTrack() == 0 &&
+  if (fWaitPrimary &&
+      stackManager->GetNUrgentTrack() == 0 &&
       stackManager->GetNPostponedTrack() != 0 ) {
       
       stackManager->TransferOneStackedTrack(fPostpone, fUrgent);

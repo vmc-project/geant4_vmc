@@ -29,6 +29,7 @@ class G4UIcmdWithABool;
 ///
 /// Implements command:
 /// - /mcTracking/skipNeutrino [true|false]
+/// - /mcTracking/waitPrimary [true|false]
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -54,6 +55,7 @@ class TG4SpecialStackingActionMessenger: public G4UImessenger
     // data members
     TG4SpecialStackingAction*  fStackingAction;  ///< associated class  
     G4UIcmdWithABool*          fSkipNeutrinoCmd; ///< command: skipNeutrino
+    G4UIcmdWithABool*          fWaitPrimaryCmd;  ///< command: waitPrimary
 };
 
 #endif //TG4_SPECIAL_STACKING_ACTION_MESSENGER_H

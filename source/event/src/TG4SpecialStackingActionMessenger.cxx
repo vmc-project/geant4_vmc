@@ -24,7 +24,9 @@ TG4SpecialStackingActionMessenger::TG4SpecialStackingActionMessenger(
                                       TG4SpecialStackingAction* stackingAction)
   : G4UImessenger(),
     fStackingAction(stackingAction),
-    fSkipNeutrinoCmd(0)
+    fSkipNeutrinoCmd(0),
+    fWaitPrimaryCmd(0)
+
 {
 /// Standard constructor
 
@@ -33,6 +35,12 @@ TG4SpecialStackingActionMessenger::TG4SpecialStackingActionMessenger(
   fSkipNeutrinoCmd->SetGuidance("By default this option is false.");
   fSkipNeutrinoCmd->SetParameterName("SkipNeutrino", false);
   fSkipNeutrinoCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+
+  fWaitPrimaryCmd = new G4UIcmdWithABool("/mcTracking/waitPrimary", this);
+  fWaitPrimaryCmd->SetGuidance("Option to track all secondaries before starting the next primary.");
+  fWaitPrimaryCmd->SetGuidance("By default this option is true.");
+  fWaitPrimaryCmd->SetParameterName("WaitPrimary", true);
+  fWaitPrimaryCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 }
 
 //_____________________________________________________________________________
@@ -41,6 +49,7 @@ TG4SpecialStackingActionMessenger::~TG4SpecialStackingActionMessenger()
 /// Destructor
 
   delete fSkipNeutrinoCmd;
+  delete fWaitPrimaryCmd;
 }
 
 //
@@ -56,5 +65,9 @@ void TG4SpecialStackingActionMessenger::SetNewValue(G4UIcommand* command,
   if ( command == fSkipNeutrinoCmd ) { 
     fStackingAction
       ->SetSkipNeutrino(fSkipNeutrinoCmd->GetNewBoolValue(newValue)); 
+  }   
+  else if ( command == fWaitPrimaryCmd ) { 
+    fStackingAction
+      ->SetWaitPrimary(fWaitPrimaryCmd->GetNewBoolValue(newValue)); 
   }   
 }
