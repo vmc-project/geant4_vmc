@@ -9,6 +9,81 @@
      
 Tags (history):
 ===============
+  18/12/2018
+  v4-0:
+    All packages:
+    - Migration to Geant4 10.5
+    - Stopped support for Root 5.x version.
+
+    Geant4 VMC:
+    - Added support for user defined sensitive detectors and new TVirtualMC…::NIELEdep():
+      - Implemented new functions in TVirtualMC:
+          void SetSensitiveDetector(const TString &volName, TVirtualMCSensitiveDetector *sd);
+          TVirtualMCSensitiveDetector *GetSensitiveDetector(const TString &volName) const;
+          void SetExclusiveSDScoring(Bool_t exclusiveSDScoring);
+          TVirtualMC::NIELEdep() function
+      - Added new UI commands:
+          /mcDet/setExclusiveSDScoring true|false
+          /mcDet/printUserSDs
+    - Updated field classes for changes in Geant4 10.5:
+      - Added new TG4Field base class for magnetic, electromagnetic and gravity
+        fields which strength is defined via TVirtualMagField.
+      - Added new commands to select a field type and activate monopole field:
+        /mcMagField/fieldType fieldType
+            fieldType = Magnetic | ElectroMagnetic | Gravity
+        /mcMagField/setIsMonopole true|false
+    - Added monopole physics classes extracted from the Geant4 monopole
+      example in a new sub-category, physics_monopole
+    - Added TG4RunConfiguration::SetParameter(const TString& name, Double_t value)
+      for setting special parameters which need to be set before creating TGeant4,
+      actually used for monopole properties:
+      monopoleMass, monopoleElCharge, monopoleMagCharge
+    - Allow to proceed empty events:
+      In TG4PrimaryGeneratorAction: issue just a warning (instead of an exception)
+      when there are no particles to be tracked.
+      (Requested by ALICE)
+    - Added a new command to (in)activate special stacking mechanism:
+      /mcTracking/waitPrimary true|false
+      (The command is available only when the special stacking action is activated
+      in TG4RunConfiguration constructor (in g4Config.C))
+
+    MTRoot:
+    - Merged classes in a single TMCRootManager class and removed locking of
+      Root IO operations except for creating and deleting Root files.
+
+    Examples:
+    - Splitting E03 in two options:
+       E03a - scoring via sensitive volumes and MCApplication::Stepping (old way)
+       E03b - scoring via sensitive detectors derived from new TVirtualMCSensitiveDetector
+              interface
+    - Added Monopole example (working only with Geant4)
+
+    Fixes:
+    Geant4 VMC:
+      - Fixed creating regions with special physics via the command:
+        /mcPhysics/emModel/setRegions regionName
+        It was failing when the medium name was associated with a material
+        with a different name.
+      - Process the extra boundary step only for alive tracks.
+        (Thanks to Benedikt Volkel for pointing at this inconsistency.)
+      - Fixes in application of VMC cuts:
+        the DCUTE, DCUTM, BCUTE, BCUTM cuts are applied only in the track first step
+        what emulates a production cut
+        (This fixes the problem reported by ALICE, JIRA ALIROOT-7121)
+      - Fix in implementation of TVirtualMC::VolName(Int_t volId)
+        (Thank to A. Morsch, CERN for reporting the problem.)
+      - Fix in CMake:
+        Comparing the ROOT version with LESS instead of LESS_EQUAL, as it is not available
+        in CMake minimum version declared
+      - Fix for excluding TMCAutoLock in MTRoot installation.
+        TMCAutoLock was excluded from the library but TMCAutoLock.h was still present in
+        the installed include
+
+    Tested with Geant4 10.05 (with embedded CLHEP  2.4.1.0)
+      Root 6.14/06, VGM 4.4, Garfield master at 07c0ec50a0d3086b3 (*)
+
+    (*) with fixes in MR #1 in https://gitlab.cern.ch/garfield/garfieldpp
+
   22/01/2018
   v3-6:
     All packages:
