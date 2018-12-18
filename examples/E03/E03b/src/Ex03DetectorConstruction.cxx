@@ -31,6 +31,8 @@
 #include <TList.h>
 #include <TThread.h>
 
+#include <set>
+
 #include "Ex03DetectorConstruction.h"
 
 using namespace std;
@@ -380,108 +382,40 @@ void Ex03DetectorConstruction::SetCuts()
 {
 /// Set cuts for e-, gamma equivalent to 1mm cut in G4.
 
-  Int_t mediumId = gMC->MediumId("Aluminium");
-  if ( mediumId ) {
-    gMC->Gstpar(mediumId, "CUTGAM", 10.e-06);
-    gMC->Gstpar(mediumId, "BCUTE",  10.e-06);
-    gMC->Gstpar(mediumId, "CUTELE", 597.e-06);
-    gMC->Gstpar(mediumId, "DCUTE",  597.e-06);
-  }
+  // created material names
+  std::set<TString> createdMaterials;
+  createdMaterials.insert(fDefaultMaterial);
+  createdMaterials.insert(fAbsorberMaterial);
+  createdMaterials.insert(fGapMaterial);
 
-  mediumId = gMC->MediumId("liquidArgon");
-  if ( mediumId ) {
-    gMC->Gstpar(mediumId, "CUTGAM", 6.178e-06);
-    gMC->Gstpar(mediumId, "BCUTE",  6.178e-06);
-    gMC->Gstpar(mediumId, "CUTELE", 342.9e-06);
-    gMC->Gstpar(mediumId, "DCUTE",  342.9e-06);
-  }
+  // cuts for e-, gamma equivalent to 1mm cut in G4.
+  std::vector<MaterialCuts>  materialCutsVector
+    = { MaterialCuts("Aluminium", 10.e-06, 10.e-06, 597.e-06, 597.e-06),
+        MaterialCuts("liquidArgon", 6.178e-06, 6.178e-06, 342.9e-06, 342.9e-06),
+        MaterialCuts("Lead", 100.5e-06, 100.5e-06, 1.378e-03, 1.378e-03),
+        MaterialCuts("Water", 2.902e-06, 2.902e-06, 347.2e-06, 347.2e-06),
+        MaterialCuts("Scintillator", 2.369e-06, 2.369e-06, 355.8e-06, 355.8e-06),
+        MaterialCuts("Mylar", 2.978e-06, 2.978e-06, 417.5e-06, 417.5e-06),
+        MaterialCuts("quartz", 5.516e-06, 5.516e-06, 534.1e-06, 534.1e-06),
+        MaterialCuts("Air", 990.e-09, 990.e-09, 990.e-09, 990.e-09),
+        MaterialCuts("Aerogel", 1.706e-06, 1.706e-06, 119.0e-06, 119.0e-06),
+        MaterialCuts("CarbonicGas", 990.e-09, 990.e-09, 990.e-09, 990.e-09),
+        MaterialCuts("WaterSteam", 990.e-09, 990.e-09, 990.e-09, 990.e-09),
+        MaterialCuts("Galactic", 990.e-09, 990.e-09, 990.e-09, 990.e-09),
+        MaterialCuts("Beam", 990.e-09, 990.e-09, 990.e-09, 990.e-09) };
 
-  mediumId = gMC->MediumId("Lead");
-  if ( mediumId ) {
-    gMC->Gstpar(mediumId, "CUTGAM", 100.5e-06);
-    gMC->Gstpar(mediumId, "BCUTE",  100.5e-06);
-    gMC->Gstpar(mediumId, "CUTELE", 1.378e-03);
-    gMC->Gstpar(mediumId, "DCUTE",  1.378e-03);
-  }
-
-  mediumId = gMC->MediumId("Water");
-  if ( mediumId ) {
-    gMC->Gstpar(mediumId, "CUTGAM", 2.902e-06);
-    gMC->Gstpar(mediumId, "BCUTE",  2.902e-06);
-    gMC->Gstpar(mediumId, "CUTELE", 347.2e-06);
-    gMC->Gstpar(mediumId, "DCUTE",  347.2e-06);
-  }
-
-  mediumId = gMC->MediumId("Scintillator");
-  if ( mediumId ) {
-    gMC->Gstpar(mediumId, "CUTGAM", 2.369e-06);
-    gMC->Gstpar(mediumId, "BCUTE",  2.369e-06);
-    gMC->Gstpar(mediumId, "CUTELE", 355.8e-06);
-    gMC->Gstpar(mediumId, "DCUTE",  355.8e-06);
-  }
-
-  mediumId = gMC->MediumId("Mylar");      
-  if ( mediumId ) {
-    gMC->Gstpar(mediumId, "CUTGAM", 2.978e-06);
-    gMC->Gstpar(mediumId, "BCUTE",  2.978e-06);
-    gMC->Gstpar(mediumId, "CUTELE", 417.5e-06);
-    gMC->Gstpar(mediumId, "DCUTE",  417.5e-06);
-  }
-
-  mediumId = gMC->MediumId("quartz"); 
-  if ( mediumId ) {
-    gMC->Gstpar(mediumId, "CUTGAM", 5.516e-06);
-    gMC->Gstpar(mediumId, "BCUTE",  5.516e-06);
-    gMC->Gstpar(mediumId, "CUTELE", 534.1e-06);
-    gMC->Gstpar(mediumId, "DCUTE",  534.1e-06);
-  }
-
-  mediumId = gMC->MediumId("Air");
-  if ( mediumId ) {
-    gMC->Gstpar(mediumId, "CUTGAM", 990.e-09);
-    gMC->Gstpar(mediumId, "BCUTE",  990.e-09);
-    gMC->Gstpar(mediumId, "CUTELE", 990.e-09);
-    gMC->Gstpar(mediumId, "DCUTE",  990.e-09);
-  }
-
-  mediumId = gMC->MediumId("Aerogel");
-  if ( mediumId ) {
-    gMC->Gstpar(mediumId, "CUTGAM", 1.706e-06);
-    gMC->Gstpar(mediumId, "BCUTE",  1.706e-06);
-    gMC->Gstpar(mediumId, "CUTELE", 119.0e-06);
-    gMC->Gstpar(mediumId, "DCUTE",  119.0e-06);
-  }
-
-  mediumId = gMC->MediumId("CarbonicGas");
-  if ( mediumId ) {
-    gMC->Gstpar(mediumId, "CUTGAM", 990.e-09);
-    gMC->Gstpar(mediumId, "BCUTE",  990.e-09);
-    gMC->Gstpar(mediumId, "CUTELE", 990.e-09);
-    gMC->Gstpar(mediumId, "DCUTE",  990.e-09);
-  }
-
-  mediumId = gMC->MediumId("WaterSteam");
-  if ( mediumId ) {
-    gMC->Gstpar(mediumId, "CUTGAM", 990.e-09);
-    gMC->Gstpar(mediumId, "BCUTE",  990.e-09);
-    gMC->Gstpar(mediumId, "CUTELE", 990.e-09);
-    gMC->Gstpar(mediumId, "DCUTE",  990.e-09);
-  }
-
-  mediumId = gMC->MediumId("Galactic");
-  if ( mediumId ) {
-    gMC->Gstpar(mediumId, "CUTGAM", 990.e-09);
-    gMC->Gstpar(mediumId, "BCUTE",  990.e-09);
-    gMC->Gstpar(mediumId, "CUTELE", 990.e-09);
-    gMC->Gstpar(mediumId, "DCUTE",  990.e-09);
-  }
-
-  mediumId = gMC->MediumId("Beam");
-  if ( mediumId ) {
-    gMC->Gstpar(mediumId, "CUTGAM", 990.e-09);
-    gMC->Gstpar(mediumId, "BCUTE",  990.e-09);
-    gMC->Gstpar(mediumId, "CUTELE", 990.e-09);
-    gMC->Gstpar(mediumId, "DCUTE",  990.e-09);
+  // set VMC cutes for created media
+  for ( auto materialCuts : materialCutsVector ) {
+    // skip materials which were not created (to avoid warning)
+    if ( createdMaterials.find(materialCuts.fName) == createdMaterials.end() ) continue;
+    // set VMC cutes for the medium
+    Int_t mediumId = gMC->MediumId(materialCuts.fName);
+    if ( mediumId ) {
+      gMC->Gstpar(mediumId, "CUTGAM", materialCuts.fCUTGAM);
+      gMC->Gstpar(mediumId, "BCUTE",  materialCuts.fBCUTE);
+      gMC->Gstpar(mediumId, "CUTELE", materialCuts.fCUTELE);
+      gMC->Gstpar(mediumId, "DCUTE",  materialCuts.fDCUTE);
+    }
   }
 }    
 

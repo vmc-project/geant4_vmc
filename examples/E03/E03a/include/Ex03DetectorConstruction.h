@@ -79,6 +79,17 @@ class Ex03DetectorConstruction : public TObject
      Double_t GetGapThickness()const   { return fGapThickness; }
           
   private:      
+     // helper type for setting cuts
+     struct MaterialCuts {
+        MaterialCuts(TString name, Double_t p1, Double_t p2, Double_t p3, Double_t p4)
+          : fName(name), fCUTGAM(p1), fBCUTE(p2), fCUTELE(p3), fDCUTE(p4) {}
+        TString  fName;
+        Double_t fCUTGAM;
+        Double_t fBCUTE;
+        Double_t fCUTELE;
+        Double_t fDCUTE;
+     };
+
      // methods
      void  ComputeCalorParameters();
 
