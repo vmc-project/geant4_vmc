@@ -233,9 +233,11 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
     // call pre-tracking action of derived class
     PreTrackingAction(track);
 
-    // Let sensitive detector process vertex step
-    UserProcessHits(track);
-  }  
+    if ( track->GetTrackStatus() != fStopAndKill ) {
+      // Let sensitive detector process vertex step
+      UserProcessHits(track);
+    }
+  }
 }
 
 //_____________________________________________________________________________
