@@ -20,5 +20,6 @@
 /control/cout/ignoreThreadsExcept 0
 
 #/mcTracking/saveSecondariesInStep true
+#/mcPrimaryGenerator/skipUnknownParticles true
 
 #/tracking/verbose 1
