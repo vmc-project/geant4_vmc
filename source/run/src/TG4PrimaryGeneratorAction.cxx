@@ -13,6 +13,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4PrimaryGeneratorAction.h"
+#include "TG4PrimaryGeneratorMessenger.h"
 #include "TG4RunManager.h"
 #include "TG4ParticlesManager.h"
 #include "TG4TrackManager.h"
@@ -37,15 +38,21 @@
 
 //_____________________________________________________________________________
 TG4PrimaryGeneratorAction::TG4PrimaryGeneratorAction()
-  : TG4Verbose("primaryGeneratorAction")
+  : TG4Verbose("primaryGeneratorAction"),
+    fMessenger(0),
+    fSkipUnknownParticles(false)
 {
 /// Default constructor
+
+  fMessenger = new TG4PrimaryGeneratorMessenger(this);
 }
 
 //_____________________________________________________________________________
 TG4PrimaryGeneratorAction::~TG4PrimaryGeneratorAction() 
 {
 /// Destructor
+
+  delete fMessenger;
 }
 
 //
@@ -97,13 +104,21 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
         = particlesManager->GetParticleDefinition(particle, false);
 
       if (!particleDefinition) { 
-        TString text = "pdgEncoding=";
+        TString text = "G4ParticleTable::FindParticle() failed for ";
+        text += TString(particle->GetName());
+        text += "  pdgEncoding=";
         text += particle->GetPdgCode();
-        TG4Globals::Exception(
-         "TG4PrimaryGeneratorAction", "TransformPrimaries",
-         "G4ParticleTable::FindParticle() failed for " +
-         TString(particle->GetName()) + "  "  + text + "."); 
-      }        
+        text += ".";
+        if ( fSkipUnknownParticles ) {
+          TG4Globals::Warning(
+             "TG4PrimaryGeneratorAction", "TransformPrimaries", text);
+          continue;
+        } 
+        else {
+          TG4Globals::Exception(
+             "TG4PrimaryGeneratorAction", "TransformPrimaries", text);
+        }
+      }
 
       // Get/Create vertex
       G4ThreeVector position 
