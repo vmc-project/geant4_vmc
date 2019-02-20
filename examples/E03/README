@@ -12,7 +12,7 @@ Example03
 =========
   Geant4 ExampleN03 adapted to Virtual Monte Carlo
   and extended for testing some other VMC features.
-  Since Geant4 VMC v3.7, the example is provided in two variants:
+  Since Geant4 VMC v4.0, the example is provided in two variants:
   - E03a - scoring via sensitive volumes and MCApplication::Stepping
            (old way)
   - E03b - scoring via sensitive detectors derived from new
