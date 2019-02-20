@@ -41,7 +41,7 @@
  *  and extended for testing some other VMC features.
  *  See more on the \ref README_E03 page.
  *  The E03a example classes have their
- *  <a href="../examples_html/html_E03a/index.html">standalone documentation </a>
+ *  <a href="../html_E03a/html/index.html">standalone documentation </a>
  *  @ingroup E03
  *  @{
  */

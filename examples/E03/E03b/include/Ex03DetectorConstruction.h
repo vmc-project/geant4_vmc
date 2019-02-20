@@ -25,7 +25,7 @@
 #include <TObject.h>
 #include <TString.h>
 
-/// \ingroup E03a
+/// \ingroup E03b
 /// \brief The detector construction (via TGeo )
 ///
 /// \date 06/03/2003
