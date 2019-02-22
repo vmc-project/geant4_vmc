@@ -126,9 +126,6 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
     
     // create and configure G4 run manager
     ConfigureRunManager();
-    
-    // get/create Root UI
-    CreateRootUI();
   }  
   else {
     // Get G4 worker run manager 
