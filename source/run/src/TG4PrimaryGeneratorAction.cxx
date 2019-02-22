@@ -65,10 +65,13 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
 /// Create a new G4PrimaryVertex objects for each TParticle
 /// in the VMC stack.
 
+  // Clear the priamary particles info in  track manager
+  TG4TrackManager* trackManager = TG4TrackManager::Instance();
+  trackManager->ResetPrimaryParticleIds();
+
   // Cache pointers to thread-local objects
   TVirtualMCStack* mcStack = gMC->GetStack();
   TG4ParticlesManager* particlesManager = TG4ParticlesManager::Instance();
-  TG4TrackManager* trackManager = TG4TrackManager::Instance();
   
   G4int nofParticles = mcStack->GetNtrack();
   if (nofParticles <= 0) {
