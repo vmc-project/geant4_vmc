@@ -1,6 +1,6 @@
 #------------------------------------------------
 # The Geant4 Virtual Monte Carlo package
-# Copyright (C) 2014 - 2018 Ivana Hrivnacova
+# Copyright (C) 2014 - 2019 Ivana Hrivnacova
 # All rights reserved.
 #
 # For the licensing terms see geant4_vmc/LICENSE.
@@ -13,6 +13,6 @@
 
 set(Geant4VMCPackages_VERSION_MAJOR "3")
 set(Geant4VMCPackages_VERSION_MINOR "6")
-set(Geant4VMCPackages_VERSION_PATCH "1")
+set(Geant4VMCPackages_VERSION_PATCH "2")
 set(Geant4VMCPackages_VERSION
     ${Geant4VMCPackages_VERSION_MAJOR}.${Geant4VMCPackages_VERSION_MINOR}.${Geant4VMCPackages_VERSION_PATCH})
