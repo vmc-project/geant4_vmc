@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #------------------------------------------------
 # The Virtual Monte Carlo examples
 # Copyright (C) 2007 - 2014 Ivana Hrivnacova
@@ -11,7 +11,8 @@
 #
 # Run tests for all VMC examples and regenerate output files
 # Usage:
-# test_suite.sh [--g3=on|off] [--g4=on|off][--builddir=dir]
+# test_suite.sh [--g3=on|off] [--g4=on|off] [--garfield=on|off] [--examples="E01 E03 ..."]
+#               [--builddir=dir] [--help|-h] [--debug] [--cmp-ref]
 #
 # By I. Hrivnacova, IPN Orsay
 
@@ -40,12 +41,9 @@ TESTG3="1"
 TESTG4="1"
 BUILDDIR=""
 
-# Run Garfield only with Root 5
+# Run Garfield optionally
 TESTGARFIELD="1"
 ROOT_VERSION=`root-config --version`
-if [ ${ROOT_VERSION:0:1} = "6" ]; then
-  TESTGARFIELD="0"
-fi
 
 # Root command with loading g3/g4 libraries
 RUNG3="root.exe -b -q load_g3.C"
@@ -75,7 +73,7 @@ function start_test()
     echo "#######################"
     echo "---> START test $CURRENT_TEST"
   fi
-  echo "$user_message"
+  echo -n "$user_message"
 }
 
 function run_test_case()
@@ -115,7 +113,7 @@ function finish_test()
     PASSED=`expr $PASSED + 1`
   fi
 
-  echo -e "$exit_status_string"
+  echo -e " ... $exit_status_string"
 
   # Write log if requested
   if [[ "$log_file" != "" && "$CURRENT_LOG" != "" ]]
@@ -145,22 +143,14 @@ function compare_to_ref()
 function print_help()
 {
   echo "Usage:"
-  echo "test_suite.sh [--help|-h] [--debug] [--g3 on|off] [--g4 on|off] [--examples \"E01 E03 ...\"] [--builddir dir]"
+  echo "test_suite.sh [--g3=on|off] [--g4=on|off] [--garfield=on|off] [--examples=\"E01 E03 ...\"] [--builddir=dir] [--help|-h] [--debug] [--cmp-ref]"
 }
-
 
 # Process script arguments
 for arg in "${@}"
 do
   #echo "got: $arg"
   case $arg in
-    "--help" | "-h" ) print_help
-                      exit 0
-                      ;;
-    "--debug"        ) DEBUG="1" ;;
-    "--cmp-ref"      ) compare_to_ref
-                       exit 0
-                       ;;
     "--g3=on"        ) TESTG3="1" ;;
     "--g3=off"       ) TESTG3="0" ;;
     "--g4=on"        ) TESTG4="1" ;;
@@ -169,6 +159,13 @@ do
     "--garfield=off" ) TESTGARFIELD="0" ;;
      --examples=*    ) EXAMPLES=${arg#--examples=} ;;
      --builddir=*    ) BUILDDIR=${arg#--builddir=} ;;
+    "--help" | "-h" ) print_help
+                      exit 0
+                      ;;
+    "--debug"        ) DEBUG="1" ;;
+    "--cmp-ref"      ) compare_to_ref
+                       exit 0
+                       ;;
     *                ) echo "Unsupported option $arg chosen."
                        print_help
                        exit 1
