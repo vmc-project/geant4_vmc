@@ -10,6 +10,7 @@
 
 #
 # Run tests for all VMC examples and regenerate output files
+#
 # Usage:
 # test_suite.sh [--g3=on|off] [--g4=on|off] [--garfield=on|off] [--examples="E01 E03 ..."]
 #               [--builddir=dir] [--help|-h] [--debug] [--cmp-ref]
@@ -43,7 +44,6 @@ BUILDDIR=""
 
 # Run Garfield optionally
 TESTGARFIELD="1"
-ROOT_VERSION=`root-config --version`
 
 # Root command with loading g3/g4 libraries
 RUNG3="root.exe -b -q load_g3.C"
@@ -53,8 +53,9 @@ RUNG3_E03b="root.exe -b -q load_g3b.C"
 RUNG4_E03a="root.exe -b -q load_g4a.C"
 RUNG4_E03b="root.exe -b -q load_g4b.C"
 
-
-EXAMPLES="E01 E02 E03 E06 A01 ExGarfield Gflash TR"
+# The default list of examples (all)
+ALL_EXAMPLES="E01 E02 E03 E06 A01 ExGarfield Gflash Monopole TR"
+EXAMPLES="$ALL_EXAMPLES"
 
 STREAM_START_RED="\033[0;31m"
 STREAM_START_GREEN="\033[0;32m"
@@ -174,7 +175,7 @@ do
 done
 
 # Recreate log directory only if running test for both G3 and G4
-if [ "$TESTG3" = "1" -a  "$TESTG4" = "1" ]; then
+if [ "$TESTG3" = "1" -a  "$TESTG4" = "1" -a "$EXAMPLES" = "$ALL_EXAMPLES" ]; then
   rm -fr $OUTDIR
 fi
 
@@ -382,9 +383,9 @@ do
 
   # new examples (without old geometry definition)
   #
-  if [ "$EXAMPLE" = "ExGarfield" -o "$EXAMPLE" = "Gflash"  -o "$EXAMPLE" = "TR" ]; then
+  if [ "$EXAMPLE" = "ExGarfield" -o "$EXAMPLE" = "Gflash"  -o "$EXAMPLE" = "Monopole" -o "$EXAMPLE" = "TR" ]; then
 
-    if [ "$TESTG3" = "1" ]; then
+    if [ "$TESTG3" = "1" -a "$EXAMPLE" != "Monopole" ]; then
       start_test "... Running test with G3, geometry via TGeo, TGeo navigation"
       run_test_case "$RUNG3 test_$EXAMPLE.C(\"g3tgeoConfig.C\")"
       finish_test "$OUT/test_g3_tgeo_tgeo.out"

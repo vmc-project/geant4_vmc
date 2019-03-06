@@ -23,7 +23,7 @@
 ///   [-g4m,  --g4-macro]:           Geant4 macro
 ///   [-g4vm, --g4-vis-macro]:       Geant4 visualization macro
 ///   [-g3g,  --g3-geometry]:        Geant3 geometry option (TGeant3,TGeant3TGeo)
-///   [-r4m,  --root-macro]:         Root macro
+///   [-rm,   --root-macro]:         Root macro
 ///   [-v,    --verbose]:            verbose option (yes,no)
 ///
 /// Note that the g4* and g3* options are available only when built
@@ -72,7 +72,7 @@ void PrintUsage(std::string programName)
 #ifdef USE_GEANT3
   std::cerr << "   [-g3g,  --g3-geometry]:        Geant3 geometry option (TGeant3,TGeant3TGeo)" << std::endl;
 #endif
-  std::cerr << "   [-r4m,  --root-macro]:         Root macro" << std::endl;
+  std::cerr << "   [-rm,   --root-macro]:         Root macro" << std::endl;
   std::cerr << "   [-v,    --verbose]:            verbose option (yes,no)" << std::endl;
 }
 

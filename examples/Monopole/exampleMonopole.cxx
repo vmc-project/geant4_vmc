@@ -87,7 +87,12 @@ int main(int argc, char** argv)
   geant4->ProcessGeantMacro("g4config2.in");
 #endif
 
-  appl->RunMC(100);
+#ifdef USE_GEANT4
+  // Setting Geant4 visualization
+  geant4->ProcessGeantMacro("g4vis.in");
+#endif
+
+  appl->RunMC(5);
 
   delete appl;
 }  

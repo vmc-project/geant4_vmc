@@ -9,57 +9,91 @@
 #-------------------------------------------------
 
 #
-# Test all VMC examples and regenerate output files
+# Run tests for all VMC examples from run_g[3,4].C macros.
+# Only g4tgeoConfig.C and g3tgeoConfig.C configurations are tested.
+#
+# Usage:
+# run_suite.sh [--g3=on|off] [--g4=on|off] [--garfield=on|off] [--examples="E01 E03 ..."]
 #
 # by I. Hrivnacova, IPN Orsay
 
 CURDIR=`pwd`
+OUTDIR=$CURDIR/logs/run
 
-# Run Garfield only with Root 5
+# Options
+TESTG3="1"
+TESTG4="1"
 TESTGARFIELD="1"
-ROOT_VERSION=`root-config --version`
-if [ ${ROOT_VERSION:0:1} = "6" ]; then
-  TESTGARFIELD="0"
+
+# The default list of examples (all)
+ALL_EXAMPLES="E01 E02 E03 E06 A01 ExGarfield Gflash Monopole TR"
+EXAMPLES="$ALL_EXAMPLES"
+
+# Function arguments:
+# {1}  Load macro: g3[a,b], g4[a,b]
+# {2}  Run macro:  g3, g4
+# {3}  Config macro: g3, g3tgeo, g4, g4tgeo
+function run_mc()
+{
+  echo "    - with ${1}, config ${3}"
+  root.exe -q -b load_${1}.C run_${2}.C\(\"${3}Config.C\"\) >& $OUT/run_${3}.out
+}
+
+# Process script arguments
+for arg in "${@}"
+do
+  #echo "got: $arg"
+  case $arg in
+    "--g3=on"        ) TESTG3="1" ;;
+    "--g3=off"       ) TESTG3="0" ;;
+    "--g4=on"        ) TESTG4="1" ;;
+    "--g4=off"       ) TESTG4="0" ;;
+    "--garfield=on"  ) TESTGARFIELD="1" ;;
+    "--garfield=off" ) TESTGARFIELD="0" ;;
+     --examples=*    ) EXAMPLES=${arg#--examples=} ;;
+    *                ) echo "Unsupported option $arg chosen."
+                       echo "run_suite.sh [--g3=on|off] [--g4=on|off] [--garfield=on|off] [--examples=\"E01 E03 ...\"] "
+                       exit 1
+                       ;;
+  esac
+done
+
+# Recreate log directory only if running test for both G3 and G4
+if [ "$TESTG3" = "1" -a  "$TESTG4" = "1"  -a "$EXAMPLES" = "$ALL_EXAMPLES" ]; then
+  rm -fr $OUTDIR
 fi
 
-for EXAMPLE in E01 E02 E03 E06 A01 ExGarfield Gflash TR
+for EXAMPLE in $EXAMPLES
 do
   cd $CURDIR/$EXAMPLE
+  OUT=$OUTDIR/$EXAMPLE
+  if [ ! -d $OUT ]; then
+    mkdir -p $OUT
+  fi
 
   # skip Garfield if switch off
   if [ "$EXAMPLE" = "ExGarfield" -a "$TESTGARFIELD" = "0" ]; then
     continue 1
   fi
 
-  # run G3 - cannot be run with geometry defined via root 
-  # echo "... Running example $EXAMPLE with G3" 
-  # root.exe -q "run_g3.C" >& run_g3.out
-  
-  # run G3 + TGeo navigation
-  echo "... Running example $EXAMPLE with G3 + TGeo" 
-  root.exe -q -b load_g3.C run_g3.C\(\"g3tgeoConfig.C\"\) >& run_g3tgeo.out
+  echo "... Running example $EXAMPLE"
 
-  # run G4
-  echo "... Running example $EXAMPLE with G4" 
-  root.exe -q -b load_g4.C run_g4.C  >& run_g4.out
-
-  # run G4 + TGeo navigation
-  echo "... Running example $EXAMPLE with G4 + TGeo navigation" 
-  root.exe -q -b load_g4.C run_g4.C\(\"g4tgeoConfig.C\"\)  >& run_g4tgeo.out
-
-  # configuration available only in E03, A01 example
-  if [ "$EXAMPLE" = "E03" -o "$EXAMPLE" = "A01" ]; then 
-
-    # run G4 + geometry via G4
-    echo "... Running example $EXAMPLE with G4; geometry via G4" 
-    root.exe -q -b load_g4.C run_g4.C\(\"g4Config1.C\"\)  >& run_g4pl.out
+  if [ "$TESTG3" = "1" -a "$EXAMPLE" != "Monopole" ]; then
+    if [ "$EXAMPLE" = "E03" ]; then
+      run_mc g3a g3 g3tgeo
+      run_mc g3b g3 g3tgeo
+    else
+      run_mc g3 g4 g3tgeo
+    fi
   fi
-  
-  # configuration available only in E03 example
-  if [ "$EXAMPLE" = "E03" ]; then 
-    # run G4 + User physics list
-    echo "... Running example $EXAMPLE with G4; user PL" 
-    root.exe -q -b load_g4.C run_g4.C\(\"g4Config2.C\"\)  >& run_g4pl.out
+
+  if [ "$TESTG4" = "1" ]; then
+    if [ "$EXAMPLE" = "E03" ]; then
+      run_mc g4a g4 g4tgeo
+      run_mc g4b g4 g4tgeo
+    else
+      run_mc g4 g4 g4tgeo
+    fi
   fi
 
   # clean-up generated files

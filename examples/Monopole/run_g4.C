@@ -55,10 +55,10 @@ void run_g4(const TString& configMacro = "g4Config.C")
   // Run MC
   TStopwatch timer;
   timer.Start();  
-  appl->RunMC(1);
+  appl->RunMC(5);
   timer.Stop();
   timer.Print();
 
-  // delete appl;
+  delete appl;
 }
 

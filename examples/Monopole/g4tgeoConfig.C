@@ -38,7 +38,7 @@ void Config()
   TGeant4* geant4
     = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration);
 
-  cout << "TGeant4 has been created." << endl;
+  cout << "Geant4 has been created." << endl;
 
   // Customise Geant4 setting
   // (verbose level, global range cut, ..)

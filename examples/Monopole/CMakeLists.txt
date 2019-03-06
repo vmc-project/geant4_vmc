@@ -24,6 +24,7 @@ project(Monopole)
 #
 set(library_name vmc_${PROJECT_NAME})
 set(program_name example${PROJECT_NAME})
+set(test_name test${PROJECT_NAME})
 
 #----------------------------------------------------------------------------
 # CMake Module Path
@@ -101,7 +102,9 @@ endif(NOT MC_FOUND)
 # Add the executables, and link them to all libraries
 #
 add_executable(${MC_PREFIX}vmc_${program_name} ${program_name}.cxx)
+add_executable(${MC_PREFIX}vmc_${test_name} ${test_name}.cxx)
 target_link_libraries(${MC_PREFIX}vmc_${program_name} ${library_name} ${MC_LIBRARIES})
+target_link_libraries(${MC_PREFIX}vmc_${test_name} ${library_name} ${MC_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets
@@ -114,5 +117,6 @@ add_custom_target(${PROJECT_NAME} DEPENDS
 # Install the executables to 'bin'
 #
 if (VMC_INSTALL_EXAMPLES)
-  install(TARGETS ${MC_PREFIX}vmc_${program_name} DESTINATION bin)
+  install(TARGETS ${MC_PREFIX}vmc_${program_name} ${MC_PREFIX}vmc_${test_name}
+          DESTINATION bin)
 endif()
