@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4ExtDecayer.h
-/// \brief Definition of the TG4ExtDecayer class 
+/// \brief Definition of the TG4ExtDecayer class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -38,7 +38,7 @@ class TClonesArray;
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4ExtDecayer : public G4VExtDecayer, 
+class TG4ExtDecayer : public G4VExtDecayer,
                       public TG4Verbose
 {
   public:
@@ -49,14 +49,14 @@ class TG4ExtDecayer : public G4VExtDecayer,
 
     // set methods
     void SetSkipNeutrino(G4bool skipNeutrino);
-    
+
   private:
     /// Not implemented
     TG4ExtDecayer(const TG4ExtDecayer& right);
     /// Not implemented
     TG4ExtDecayer& operator=(const TG4ExtDecayer& right);
 
-    TG4ParticlesManager* fParticlesManager;  ///< particles manager 
+    TG4ParticlesManager* fParticlesManager;  ///< particles manager
     TVirtualMCDecayer*   fExternalDecayer;   ///< the external decayer
     TClonesArray*        fDecayProductsArray;///< array of decay products
     G4bool               fSkipNeutrino;      ///< option to skip importing neutrinos

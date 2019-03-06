@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01HodoscopeHit.h 
-/// \brief Definition of the A01HodoscopeHit class 
+/// \file A01HodoscopeHit.h
+/// \brief Definition of the A01HodoscopeHit class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo: \n
 ///
@@ -37,7 +37,7 @@ class A01HodoscopeHit : public TObject
     // methods
     virtual void Print(Option_t* option = "") const;
     void Reset();
-                 
+
     // set methods
     void SetID(Int_t id)       { fID = id; }
     void SetVolId(Int_t volId) { fVolID = volId; }
@@ -49,14 +49,14 @@ class A01HodoscopeHit : public TObject
     Int_t      GetVolId() const   { return fVolID; }
     Double_t   GetTime() const    { return fTime; }
     const TGeoHMatrix& GetTransformation() const { return fTransformation; }
-      
+
   private:
     Int_t        fID;    ///< The hit ID
     Int_t        fVolID; ///< The volume ID
     Double_t     fTime;  ///< The hit time
     TGeoHMatrix  fTransformation; ///< The transformation of the hit volume
-    
-  ClassDef(A01HodoscopeHit,1) //A01HodoscopeHit  
+
+  ClassDef(A01HodoscopeHit,1) //A01HodoscopeHit
 };
 
 #endif //A01_HODOSCOPE_HIT_H

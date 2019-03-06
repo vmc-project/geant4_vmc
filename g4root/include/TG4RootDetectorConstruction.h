@@ -10,8 +10,8 @@
  *************************************************************************/
 
 /// \file TG4RootDetectorConstruction.h
-/// \brief Definition of the TG4RootDetectorConstruction and 
-///        TVirtualUserPostDetConstruction classes 
+/// \brief Definition of the TG4RootDetectorConstruction and
+///        TVirtualUserPostDetConstruction classes
 ///
 /// \author A. Gheata; CERN
 
@@ -54,14 +54,14 @@ class TVirtualUserPostDetConstruction;
 /// \brief Builder creating a pseudo G4 geometry starting from a TGeo geometry.
 ///
 /// To invoke the method Construct() the ROOT geometry must be in memory.
-/// The G4 objects created are:                                          
-///  - TGeoElement               ---> G4Element                          
-///  - TGeoMaterial/TGeoMixture  ---> G4Material                         
-///  - TGeoMatrix                ---> G4RotationMatrix                   
-///  - TGeoVolume                ---> G4LogicalVolume                    
-///  - TGeoShape           ---> TG4RootSolid  : public G4Solid           
-///  - TGeoNode            ---> G4PVPlacement : public G4VPhysicalVolume 
-///                                                                      
+/// The G4 objects created are:
+///  - TGeoElement               ---> G4Element
+///  - TGeoMaterial/TGeoMixture  ---> G4Material
+///  - TGeoMatrix                ---> G4RotationMatrix
+///  - TGeoVolume                ---> G4LogicalVolume
+///  - TGeoShape           ---> TG4RootSolid  : public G4Solid
+///  - TGeoNode            ---> G4PVPlacement : public G4VPhysicalVolume
+///
 /// \author A. Gheata; CERN
 
 class TG4RootDetectorConstruction : public G4VUserDetectorConstruction {
@@ -128,7 +128,7 @@ public:
    TG4RootDetectorConstruction();
    TG4RootDetectorConstruction(TGeoManager *geom);
    virtual ~TG4RootDetectorConstruction();
-   
+
    virtual G4VPhysicalVolume *Construct();
    virtual void               ConstructSDandField();
 
@@ -147,7 +147,7 @@ public:
                          /// Return the flag Construct() called
    Bool_t                IsConstructed() const {return fIsConstructed;}
 
-   void                  Initialize(TVirtualUserPostDetConstruction *sdinit=0);         
+   void                  Initialize(TVirtualUserPostDetConstruction *sdinit=0);
 
 //   ClassDef(TG4RootDetectorConstruction,0)  // Class creating a G4 gometry based on ROOT geometry
 };
@@ -157,14 +157,14 @@ public:
 /// Like sensitive detectors, G4 material properties, user cuts,...
 ///
 /// \author A. Gheata; CERN
- 
+
 class TVirtualUserPostDetConstruction {
 public:
    TVirtualUserPostDetConstruction() {}           ///< Default ctor
    virtual ~TVirtualUserPostDetConstruction() {}  ///< Destructor
-   
-                         /// Initialize  
+
+                         /// Initialize
    virtual void          Initialize(TG4RootDetectorConstruction *dc) = 0;
    virtual void          InitializeSDandField() {}
-};   
+};
 #endif

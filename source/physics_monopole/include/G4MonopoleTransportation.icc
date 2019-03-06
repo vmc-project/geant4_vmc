@@ -66,11 +66,11 @@ inline G4double G4MonopoleTransportation::GetThresholdWarningEnergy() const
 {
   return fThreshold_Warning_Energy;
 }
- 
+
 inline G4double G4MonopoleTransportation::GetThresholdImportantEnergy() const
-{ 
+{
   return fThreshold_Important_Energy;
-} 
+}
 
 inline G4int G4MonopoleTransportation::GetThresholdTrials() const
 {
@@ -84,22 +84,22 @@ inline void G4MonopoleTransportation::SetThresholdWarningEnergy( G4double newEnW
 
 inline void G4MonopoleTransportation::SetThresholdImportantEnergy( G4double newEnImp )
 {
-  fThreshold_Important_Energy = newEnImp; 
+  fThreshold_Important_Energy = newEnImp;
 }
 
 inline void G4MonopoleTransportation::SetThresholdTrials(G4int newMaxTrials )
 {
-  fThresholdTrials = newMaxTrials; 
+  fThresholdTrials = newMaxTrials;
 }
 
-     // Get/Set parameters for killing loopers: 
-     //   Above 'important' energy a 'looping' particle in field will 
+     // Get/Set parameters for killing loopers:
+     //   Above 'important' energy a 'looping' particle in field will
      //   *NOT* be abandoned, except after fThresholdTrials attempts.
      // Below Warning energy, no verbosity for looping particles is issued
 
 inline G4double G4MonopoleTransportation::GetMaxEnergyKilled() const
 {
-  return fMaxEnergyKilled; 
+  return fMaxEnergyKilled;
 }
 
 inline G4double G4MonopoleTransportation::GetSumEnergyKilled() const
@@ -109,11 +109,11 @@ inline G4double G4MonopoleTransportation::GetSumEnergyKilled() const
 
 inline void G4MonopoleTransportation::ResetKilledStatistics(G4int report)
 {
-  if( report ) { 
+  if( report ) {
     G4cout << " G4MonopoleTransportation: Statistics for looping particles " << G4endl;
     G4cout << "   Sum of energy of loopers killed: " <<  fSumEnergyKilled << G4endl;
     G4cout << "   Max energy of loopers killed: " <<  fMaxEnergyKilled << G4endl;
-  } 
+  }
 
   fSumEnergyKilled= 0;
   fMaxEnergyKilled= -1.0*CLHEP::GeV;
@@ -121,6 +121,6 @@ inline void G4MonopoleTransportation::ResetKilledStatistics(G4int report)
      // Statistics for tracks killed (currently due to looping in field)
 
 inline void G4MonopoleTransportation::EnableShortStepOptimisation(G4bool optimiseShortStep)
-{ 
+{
   fShortStepOptimisation=optimiseShortStep;
 }

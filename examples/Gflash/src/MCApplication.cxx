@@ -58,18 +58,18 @@ MCApplication::MCApplication(const char *name, const char *title)
     fIsMaster(kTRUE)
 {
 /// Standard constructor
-/// \param name   The MC application name 
+/// \param name   The MC application name
 /// \param title  The MC application description
 
   // Create a user stack
   fStack = new Ex03MCStack(1000);
-  
+
   // Create detector construction
   fDetConstruction = new DetectorConstruction();
-  
+
   // Create a calorimeter SD
-  fSensitiveDetector = new SensitiveDetector("Calorimeter"); 
-  
+  fSensitiveDetector = new SensitiveDetector("Calorimeter");
+
   // Create a primary generator
   fPrimaryGenerator = new PrimaryGenerator(fStack);
 }
@@ -111,15 +111,15 @@ MCApplication::MCApplication()
     fSensitiveDetector(0),
     fPrimaryGenerator(0),
     fIsMaster(kTRUE)
-{    
+{
 /// Default constructor
 }
 
 //_____________________________________________________________________________
-MCApplication::~MCApplication() 
+MCApplication::~MCApplication()
 {
-/// Destructor  
-  
+/// Destructor
+
   //cout << "MCApplication::~MCApplication " << this << endl;
 
   delete fRootManager;
@@ -152,16 +152,16 @@ void MCApplication::ComputeEventStatistics() const
 {
 /// Compute event statisics
 
-  cout<<" ------ ExGflashEventAction::End of event nr. "<<fEventNo<<"  -----"<< endl;   
-  
-  TClonesArray* hitsCollection 
+  cout<<" ------ ExGflashEventAction::End of event nr. "<<fEventNo<<"  -----"<< endl;
+
+  TClonesArray* hitsCollection
    = fSensitiveDetector->GetHitsCollection();
 
   // Hits in sensitive Detector
   int n_hit = hitsCollection->GetEntriesFast();
   cout<<"  " << n_hit<< " hits are stored in HitsCollection "<<endl;
 
-  // Get (x,y,z) of vertex of initial particles  
+  // Get (x,y,z) of vertex of initial particles
   TVector3 vertexPosition = fPrimaryGenerator->GetVertexPosition();
   TVector3 vertexDirection = fPrimaryGenerator->GetVertexDirection();
 
@@ -169,7 +169,7 @@ void MCApplication::ComputeEventStatistics() const
   // Should be retrieved from detector construction
   Double_t energyincrystal[100];
   for (Int_t i=0; i<100; i++) energyincrystal[i]=0.;
-  
+
   // For all Hits in sensitive detector
   Double_t totE = 0;
   for (Int_t i=0; i<n_hit; i++) {
@@ -182,12 +182,12 @@ void MCApplication::ComputeEventStatistics() const
       energyincrystal[num] += estep;
       // cout << " Crystal Nummer " <<  num  << endl;
 
-      TVector3 hitpos = hit->GetPos();            
+      TVector3 hitpos = hit->GetPos();
       TVector3 l(hitpos);
       // distance from shower start
-      l = l - vertexPosition; 
+      l = l - vertexPosition;
       // projection on shower axis = longitudinal profile
-      TVector3 longitudinal(l);  
+      TVector3 longitudinal(l);
       // shower profiles (Radial)
       TVector3 radial(vertexPosition.Cross(l));
     }
@@ -202,28 +202,28 @@ void MCApplication::ComputeEventStatistics() const
       max = energyincrystal[i];
       index = i;
     }
-  }  
-  // cout << " NMAX  " << index << G4endl; 
+  }
+  // cout << " NMAX  " << index << G4endl;
 
   // 3x3 matrix of crystals around the crystal with the maximum energy deposit
   Double_t e3x3
     = energyincrystal[index]    + energyincrystal[index+1]  + energyincrystal[index-1]
     + energyincrystal[index-10] + energyincrystal[index-9]  + energyincrystal[index-11]
     + energyincrystal[index+10] + energyincrystal[index+11] + energyincrystal[index+9];
-  
-  // 5x5 matrix of crystals around the crystal with the maximum energy deposit  
+
+  // 5x5 matrix of crystals around the crystal with the maximum energy deposit
   Double_t e5x5
-     = energyincrystal[index] + energyincrystal[index+1] + energyincrystal[index-1] 
-     + energyincrystal[index+2] + energyincrystal[index-2] 
-     + energyincrystal[index-10] + energyincrystal[index-9] + energyincrystal[index-11] 
-     + energyincrystal[index-8] + energyincrystal[index-12] 
-     + energyincrystal[index+10] + energyincrystal[index+11] + energyincrystal[index+9] 
+     = energyincrystal[index] + energyincrystal[index+1] + energyincrystal[index-1]
+     + energyincrystal[index+2] + energyincrystal[index-2]
+     + energyincrystal[index-10] + energyincrystal[index-9] + energyincrystal[index-11]
+     + energyincrystal[index-8] + energyincrystal[index-12]
+     + energyincrystal[index+10] + energyincrystal[index+11] + energyincrystal[index+9]
      + energyincrystal[index+12] + energyincrystal[index+8];
-    
-  cout << "   e1  " << energyincrystal[index]  
-       << "   e3x3  " << e3x3<<  "   e5x5  "  << e5x5 << " GeV" << endl;  
-  
-  cout << " Total energy deposited in the calorimeter: " << totE << " (GeV)" << endl;  
+
+  cout << "   e1  " << energyincrystal[index]
+       << "   e3x3  " << e3x3<<  "   e5x5  "  << e5x5 << " GeV" << endl;
+
+  cout << " Total energy deposited in the calorimeter: " << totE << " (GeV)" << endl;
 }
 
 //
@@ -232,10 +232,10 @@ void MCApplication::ComputeEventStatistics() const
 
 //_____________________________________________________________________________
 void MCApplication::InitMC(const char* setup)
-{    
+{
 /// Initialize MC.
 /// The selection of the concrete MC is done in the macro.
-/// \param setup The name of the configuration macro 
+/// \param setup The name of the configuration macro
 
   fVerbose.InitMC();
 
@@ -246,8 +246,8 @@ void MCApplication::InitMC(const char* setup)
       Fatal("InitMC",
             "Processing Config() has failed. (No MC is instantiated.)");
     }
-  }  
- 
+  }
+
 // MT support available from root v 5.34/18
 #if ROOT_VERSION_CODE >= 336402
   // Create Root manager
@@ -262,17 +262,17 @@ void MCApplication::InitMC(const char* setup)
     = new TMCRootManager(GetName(), TMCRootManager::kWrite);
   //fRootManager->SetDebug(true);
 #endif
-  
+
   gMC->SetStack(fStack);
   gMC->Init();
-  gMC->BuildPhysics(); 
-  
+  gMC->BuildPhysics();
+
   RegisterStack();
-}                                   
+}
 
 //_____________________________________________________________________________
 void MCApplication::RunMC(Int_t nofEvents)
-{    
+{
 /// Run MC.
 /// \param nofEvents Number of events to be processed
 
@@ -284,7 +284,7 @@ void MCApplication::RunMC(Int_t nofEvents)
 
 //_____________________________________________________________________________
 void MCApplication::FinishRun()
-{    
+{
 /// Finish MC run.
 
   fVerbose.FinishRun();
@@ -328,65 +328,65 @@ void MCApplication::FinishWorkerRun() const
 }
 
 //_____________________________________________________________________________
-void MCApplication::ReadEvent(Int_t i) 
+void MCApplication::ReadEvent(Int_t i)
 {
 /// Read \em i -th event and prints hits.
-/// \param i The number of event to be read    
+/// \param i The number of event to be read
 
   fSensitiveDetector->Register();
   RegisterStack();
   fRootManager->ReadEvent(i);
-}  
-  
+}
+
 //_____________________________________________________________________________
 void MCApplication::ConstructGeometry()
-{    
+{
 /// Construct geometry using detector contruction class.
 /// The detector contruction class is using TGeo functions or
 /// TVirtualMC functions (if oldGeometry is selected)
 
   fVerbose.ConstructGeometry();
 
-  fDetConstruction->Construct();  
+  fDetConstruction->Construct();
 }
 
 //_____________________________________________________________________________
 void MCApplication::InitGeometry()
-{    
+{
 /// Initialize geometry
-  
+
   fVerbose.InitGeometry();
-  
+
   fSensitiveDetector->Initialize();
 }
 
 //_____________________________________________________________________________
 void MCApplication::GeneratePrimaries()
-{    
+{
 /// Fill the user stack (derived from TVirtualMCStack) with primary particles.
-  
+
   fVerbose.GeneratePrimaries();
 
-  TVector3 origin;		     
+  TVector3 origin;
   fPrimaryGenerator->GeneratePrimaries(origin);
 }
 
 //_____________________________________________________________________________
 void MCApplication::BeginEvent()
-{    
+{
 /// User actions at beginning of event
 
   fVerbose.BeginEvent();
 
   // Clear TGeo tracks (if filled)
-  if (   TString(gMC->GetName()) == "TGeant3TGeo" && 
+  if (   TString(gMC->GetName()) == "TGeant3TGeo" &&
          gGeoManager->GetListOfTracks() &&
          gGeoManager->GetTrack(0) &&
        ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
-       
-       gGeoManager->ClearTracks();	  
-       //if (gPad) gPad->Clear();	  
-  }    
+
+       gGeoManager->ClearTracks();
+       //if (gPad) gPad->Clear();
+  }
 
   fEventNo++;
   cout<<" Start generating event Nr "<< fEventNo << endl;
@@ -398,17 +398,17 @@ void MCApplication::BeginEvent()
 
 //_____________________________________________________________________________
 void MCApplication::BeginPrimary()
-{    
+{
 /// User actions at beginning of a primary track.
 /// If test for user defined decay is activated,
 /// the primary track ID is printed on the screen.
 
-  fVerbose.BeginPrimary();   
+  fVerbose.BeginPrimary();
 }
 
 //_____________________________________________________________________________
 void MCApplication::PreTrack()
-{    
+{
 /// User actions at beginning of each track
 /// If test for user defined decay is activated,
 /// the decay products of the primary track (K0Short)
@@ -419,7 +419,7 @@ void MCApplication::PreTrack()
 
 //_____________________________________________________________________________
 void MCApplication::Stepping()
-{    
+{
 /// User actions at each step
 
   // Work around for Fluka VMC, which does not call
@@ -431,8 +431,8 @@ void MCApplication::Stepping()
        gMC->GetStack()->GetCurrentTrackNumber() != trackId ) {
     fVerbose.PreTrack();
     trackId = gMC->GetStack()->GetCurrentTrackNumber();
-  }      
-    
+  }
+
   fVerbose.Stepping();
 
   fSensitiveDetector->ProcessHits();
@@ -440,7 +440,7 @@ void MCApplication::Stepping()
 
 //_____________________________________________________________________________
 void MCApplication::PostTrack()
-{    
+{
 /// User actions after finishing of each track
 
   fVerbose.PostTrack();
@@ -448,7 +448,7 @@ void MCApplication::PostTrack()
 
 //_____________________________________________________________________________
 void MCApplication::FinishPrimary()
-{    
+{
 /// User actions after finishing of a primary track
 
   fVerbose.FinishPrimary();
@@ -456,10 +456,10 @@ void MCApplication::FinishPrimary()
 
 //_____________________________________________________________________________
 void MCApplication::FinishEvent()
-{    
+{
 /// User actions after finishing of an event
 
-  // VMC 
+  // VMC
 
   fVerbose.FinishEvent();
 
@@ -481,7 +481,7 @@ void MCApplication::FinishEvent()
 
   fSensitiveDetector->EndOfEvent();
 
-  fStack->Reset();  
+  fStack->Reset();
 }
 
 }

@@ -11,11 +11,11 @@
 //-------------------------------------------------
 
 /// \file Ex02TrackerSD.h
-/// \brief Definition of the Ex02TrackerSD class 
+/// \brief Definition of the Ex02TrackerSD class
 ///
 /// Geant4 ExampleN02 adapted to Virtual Monte Carlo \n
 /// Id: ExN02TrackerSD.hh,v 1.6 2002/01/09 17:24:09 ranjard Exp  \n
-/// GEANT4 tag Name: geant4-04-00-patch-02 
+/// GEANT4 tag Name: geant4-04-00-patch-02
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -44,26 +44,26 @@ class Ex02TrackerSD : public TNamed
     void   EndOfEvent();
     void   Register();
     virtual void  Print(const Option_t* option = 0) const;
-    
+
     // set methods
     void SetVerboseLevel(Int_t level);
 
   private:
     // methods
     Ex02TrackerHit* AddHit();
-  
+
     // data members
-    TClonesArray*  fTrackerCollection; ///< Hits collection    
+    TClonesArray*  fTrackerCollection; ///< Hits collection
     Int_t          fSensitiveVolumeID; ///< Sensitive volume Id
     Int_t          fVerboseLevel;      ///< Verbosity level
-   
-  ClassDef(Ex02TrackerSD,1) //Ex02TrackerSD 
+
+  ClassDef(Ex02TrackerSD,1) //Ex02TrackerSD
 
 };
 
 /// Set verbose level
 /// \param level The new verbose level value
-inline void Ex02TrackerSD::SetVerboseLevel(Int_t level) 
+inline void Ex02TrackerSD::SetVerboseLevel(Int_t level)
 { fVerboseLevel = level; }
 
 

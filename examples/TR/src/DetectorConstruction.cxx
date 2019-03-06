@@ -7,12 +7,12 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file TR/src/DetectorConstruction.cxx 
-/// \brief Implementation of the DetectorConstruction class 
+/// \file TR/src/DetectorConstruction.cxx
+/// \brief Implementation of the DetectorConstruction class
 ///
 /// \date 18/12/2015
 /// \author I. Hrivnacova; IPN, Orsay
- 
+
 #include "DetectorConstruction.h"
 
 #include <TGeoManager.h>
@@ -57,12 +57,12 @@ void DetectorConstruction::ConstructGeometry()
   // Geometry parameters
   //
 
-  // Create Root geometry manager 
+  // Create Root geometry manager
   new TGeoManager("TR_geometry", "TR VMC example geometry");
 
   cout << "DetectorSimpleALICE setup" << endl;
 
-  Double_t cm = 1.0;  
+  Double_t cm = 1.0;
   Double_t mm = 0.1;              // milimeter -> cm
   Double_t micrometer = 1.0e-04;  // micrometer -> cm
   Double_t worldSizeZ = 400.*cm;
@@ -71,7 +71,7 @@ void DetectorConstruction::ConstructGeometry()
   // Radiator and detector parameters
 
   Double_t radThickness = 0.020*mm;
-  Double_t gasGap       = 0.250*mm;  
+  Double_t gasGap       = 0.250*mm;
   Double_t foilGasRatio = radThickness/(radThickness+gasGap);
   Int_t foilNumber      = 220;
 
@@ -88,12 +88,12 @@ void DetectorConstruction::ConstructGeometry()
   // Materials
   //
   TString name;      // Material name
-  Double_t a;        // Mass of a mole in g/mole   
+  Double_t a;        // Mass of a mole in g/mole
   Double_t z;        // Atomic number
   Double_t density;  // Material density in g/cm3
   Double_t fractionmass; // Fraction mass
 
-  // Elements  
+  // Elements
   TGeoElement* elH  = new TGeoElement("Hydrogen", "H",  z = 1,   a = 1.01);
   TGeoElement* elC  = new TGeoElement("Carbon"  , "C",  z = 6.,  a = 12.01);
   TGeoElement* elN  = new TGeoElement("Nitrogen", "N",  z = 7.,  a = 14.01);
@@ -103,9 +103,9 @@ void DetectorConstruction::ConstructGeometry()
   // Dry Air (average composition with Ar), STP
   TGeoMixture* matAir
     = new TGeoMixture("Air", 3, density = 1.2928e-03);
-  matAir->AddElement(elN,  fractionmass = 0.7557); 
-  matAir->AddElement(elO,  fractionmass = 0.2315); 
-  matAir->AddElement(elAr, fractionmass = 0.0128); 
+  matAir->AddElement(elN,  fractionmass = 0.7557);
+  matAir->AddElement(elO,  fractionmass = 0.2315);
+  matAir->AddElement(elAr, fractionmass = 0.0128);
 
   // Mylar
   TGeoMixture* matMylar
@@ -131,8 +131,8 @@ void DetectorConstruction::ConstructGeometry()
   matXe15CO2->AddElement(matCO2, fractionmass = 0.021);
 
   Double_t foilDensity = matMylar->GetDensity();
-  Double_t gasDensity  = matAir->GetDensity();  
-  Double_t totDensity  = foilDensity*foilGasRatio 
+  Double_t gasDensity  = matAir->GetDensity();
+  Double_t totDensity  = foilDensity*foilGasRatio
                        + gasDensity*(1.0-foilGasRatio);
 
   Double_t fractionFoil =  foilDensity*foilGasRatio/totDensity;
@@ -146,20 +146,20 @@ void DetectorConstruction::ConstructGeometry()
   // Tracking medias (defaut parameters)
   //
 
-  // Paremeters for tracking media  
+  // Paremeters for tracking media
   Double_t param[20];
   param[0] = 0;     // isvol  - Not used
   param[1] = 2;     // ifield - User defined magnetic field
   param[2] = 10.;   // fieldm - Maximum field value (in kiloGauss)
-  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection 
-  param[4] = -0.01; // stemax - Maximum displacement for multiple scat 
-  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS 
+  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection
+  param[4] = -0.01; // stemax - Maximum displacement for multiple scat
+  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS
   param[6] = .001;  // epsil - Tracking precision
   param[7] = -.8;   // stmin
   for ( Int_t i=8; i<20; ++i) param[i] = 0.;
 
   Int_t mediumId = 0;
-  TGeoMedium* medAir = new TGeoMedium("Air", ++mediumId, matAir, param); 
+  TGeoMedium* medAir = new TGeoMedium("Air", ++mediumId, matAir, param);
   TGeoMedium* medXe15CO2 = new TGeoMedium("Xe15CO2", ++mediumId, matXe15CO2, param);
   TGeoMedium* medRadiator = new TGeoMedium("Radiator", ++mediumId, matRadiator, param);
 
@@ -169,11 +169,11 @@ void DetectorConstruction::ConstructGeometry()
 
   // Volumes
   //
- 
-  TGeoShape* solidWorld 
+
+  TGeoShape* solidWorld
     = new TGeoBBox("World", worldSizeR, worldSizeR, worldSizeZ/2.);
- 
-  TGeoVolume* logicWorld 
+
+  TGeoVolume* logicWorld
     = new TGeoVolume( "World", solidWorld,  worldMedium);
 
   gGeoManager->SetTopVolume(logicWorld);
@@ -183,10 +183,10 @@ void DetectorConstruction::ConstructGeometry()
   Double_t radThick = foilNumber*(radThickness + gasGap) - gasGap + detGap;
   Double_t radZ = startZ + 0.5*radThick;
 
-  TGeoShape* solidRadiator 
+  TGeoShape* solidRadiator
     = new TGeoBBox("Radiator", 1.1*absorberRadius, 1.1*absorberRadius, 0.5*radThick);
 
-  TGeoVolume* logicRadiator 
+  TGeoVolume* logicRadiator
     = new TGeoVolume("Radiator", solidRadiator, radiatorMedium);
 
   logicWorld->AddNode(logicRadiator, 1, new TGeoTranslation(0, 0, radZ));
@@ -209,10 +209,10 @@ void DetectorConstruction::ConstructGeometry()
 
   // Absorber
 
-  TGeoShape* solidAbsorber 
+  TGeoShape* solidAbsorber
     = new TGeoBBox("Absorber", absorberRadius, absorberRadius, absorberThickness/2.);
 
-  TGeoVolume* logicAbsorber 
+  TGeoVolume* logicAbsorber
     = new TGeoVolume("Absorber", solidAbsorber, absorberMedium);
 
   Double_t windowZ = startZ + radThick + windowThick/2. + 15.0*mm;
@@ -227,7 +227,7 @@ void DetectorConstruction::ConstructGeometry()
 
   // close geometry
   gGeoManager->CloseGeometry();
-    
+
   // notify VMC about Root geometry
   gMC->SetRootGeometry();
 
@@ -241,13 +241,13 @@ void DetectorConstruction::ConstructGeometry()
 
   cout << "\n The  WORLD   is made of "
          << worldSizeZ/mm << "mm of " << worldMedium->GetName();
-  cout << ", the transverse size (R) of the world is " 
+  cout << ", the transverse size (R) of the world is "
          << worldSizeR/mm << " mm. " << endl;
   cout << " The ABSORBER is made of "
          << absorberThickness/mm << "mm of " << absorberMedium->GetName();
-  cout << ", the transverse size (R) is " 
+  cout << ", the transverse size (R) is "
          << absorberRadius/mm << " mm. " << endl;
-  cout << " Z position of the (middle of the) absorber " 
+  cout << " Z position of the (middle of the) absorber "
          << absorberZ/mm << "  mm." << endl;
 
   cout << "radZ = " << radZ/mm << " mm" << endl;

@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03MCApplication.cxx 
-/// \brief Implementation of the Ex03MCApplication class 
+/// \file Ex03MCApplication.cxx
+/// \brief Implementation of the Ex03MCApplication class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
@@ -58,7 +58,7 @@ Ex03MCApplication::Ex03MCApplication(const char *name, const char *title)
     fIsMaster(kTRUE)
 {
 /// Standard constructor
-/// \param name   The MC application name 
+/// \param name   The MC application name
 /// \param title  The MC application description
 
   cout << "--------------------------------------------------------------" << endl;
@@ -67,16 +67,16 @@ Ex03MCApplication::Ex03MCApplication(const char *name, const char *title)
 
   // Create a user stack
   fStack = new Ex03MCStack(1000);
-  
+
   // Create detector construction
   fDetConstruction = new Ex03DetectorConstruction();
-  
+
   // Create a calorimeter SD
-  fCalorimeterSD = new Ex03CalorimeterSD("Calorimeter", fDetConstruction); 
-  
+  fCalorimeterSD = new Ex03CalorimeterSD("Calorimeter", fDetConstruction);
+
   // Create a primary generator
   fPrimaryGenerator = new Ex03PrimaryGenerator(fStack);
-  
+
   // Constant magnetic field (in kiloGauss)
   fMagField = new TGeoUniformMagField();
 }
@@ -130,15 +130,15 @@ Ex03MCApplication::Ex03MCApplication()
     fOldGeometry(kFALSE),
     fIsControls(kFALSE),
     fIsMaster(kTRUE)
-{    
+{
 /// Default constructor
 }
 
 //_____________________________________________________________________________
-Ex03MCApplication::~Ex03MCApplication() 
+Ex03MCApplication::~Ex03MCApplication()
 {
-/// Destructor  
-  
+/// Destructor
+
   //cout << "Ex03MCApplication::~Ex03MCApplication " << this << endl;
 
   delete fRootManager;
@@ -173,10 +173,10 @@ void Ex03MCApplication::RegisterStack() const
 
 //_____________________________________________________________________________
 void Ex03MCApplication::InitMC(const char* setup)
-{    
+{
 /// Initialize MC.
 /// The selection of the concrete MC is done in the macro.
-/// \param setup The name of the configuration macro 
+/// \param setup The name of the configuration macro
 
   fVerbose.InitMC();
 
@@ -187,8 +187,8 @@ void Ex03MCApplication::InitMC(const char* setup)
       Fatal("InitMC",
             "Processing Config() has failed. (No MC is instantiated.)");
     }
-  }  
- 
+  }
+
 // MT support available from root v 5.34/18
 #if ROOT_VERSION_CODE >= 336402
   // Create Root manager
@@ -203,18 +203,18 @@ void Ex03MCApplication::InitMC(const char* setup)
     = new TMCRootManager(GetName(), TMCRootManager::kWrite);
   //fRootManager->SetDebug(true);
 #endif
-  
+
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);
   gMC->Init();
-  gMC->BuildPhysics(); 
-  
+  gMC->BuildPhysics();
+
   RegisterStack();
-}                                   
+}
 
 //_____________________________________________________________________________
 void Ex03MCApplication::RunMC(Int_t nofEvents)
-{    
+{
 /// Run MC.
 /// \param nofEvents Number of events to be processed
 
@@ -226,7 +226,7 @@ void Ex03MCApplication::RunMC(Int_t nofEvents)
 
 //_____________________________________________________________________________
 void Ex03MCApplication::FinishRun()
-{    
+{
 /// Finish MC run.
 
   fVerbose.FinishRun();
@@ -271,19 +271,19 @@ void Ex03MCApplication::FinishWorkerRun() const
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::ReadEvent(Int_t i) 
+void Ex03MCApplication::ReadEvent(Int_t i)
 {
 /// Read \em i -th event and prints hits.
-/// \param i The number of event to be read    
+/// \param i The number of event to be read
 
   fCalorimeterSD->Register();
   RegisterStack();
   fRootManager->ReadEvent(i);
-}  
-  
+}
+
 //_____________________________________________________________________________
 void Ex03MCApplication::ConstructGeometry()
-{    
+{
 /// Construct geometry using detector contruction class.
 /// The detector contruction class is using TGeo functions or
 /// TVirtualMC functions (if oldGeometry is selected)
@@ -291,25 +291,25 @@ void Ex03MCApplication::ConstructGeometry()
   fVerbose.ConstructGeometry();
 
   if ( ! fOldGeometry ) {
-    fDetConstruction->ConstructMaterials();  
-    fDetConstruction->ConstructGeometry();  
+    fDetConstruction->ConstructMaterials();
+    fDetConstruction->ConstructGeometry();
     //TGeoManager::Import("geometry.root");
     //gMC->SetRootGeometry();
   }
   else {
     Ex03DetectorConstructionOld detConstructionOld;
-    detConstructionOld.ConstructMaterials(); 
+    detConstructionOld.ConstructMaterials();
     detConstructionOld.ConstructGeometry();
-  }    
+  }
 }
 
 //_____________________________________________________________________________
 void Ex03MCApplication::InitGeometry()
-{    
+{
 /// Initialize geometry
-  
+
   fVerbose.InitGeometry();
-  
+
   fDetConstruction->SetCuts();
 
   if ( fIsControls )
@@ -320,18 +320,18 @@ void Ex03MCApplication::InitGeometry()
 
 //_____________________________________________________________________________
 void Ex03MCApplication::AddParticles()
-{    
+{
 /// Example of user defined particle with user defined decay mode
-  
+
   fVerbose.AddParticles();
-  
+
   // Define particle
   gMC->DefineParticle(1000020050, "He5", kPTHadron,
-                      5.03427 , 2.0, 0.002 , 
-                      "Ion", 0.0, 0, 1, 0, 0, 0, 0, 0, 5, kFALSE); 
+                      5.03427 , 2.0, 0.002 ,
+                      "Ion", 0.0, 0, 1, 0, 0, 0, 0, 0, 5, kFALSE);
 
   // Define the 2 body  phase space decay  for He5
-  Int_t mode[6][3];                  
+  Int_t mode[6][3];
   Float_t bratio[6];
 
   for (Int_t kz = 0; kz < 6; kz++) {
@@ -341,18 +341,18 @@ void Ex03MCApplication::AddParticles()
      mode[kz][2] = 0;
   }
   bratio[0] = 100.;
-  mode[0][0] = kNeutron;    // neutron (2112) 
+  mode[0][0] = kNeutron;    // neutron (2112)
   mode[0][1] = 1000020040 ; // alpha
 
   gMC->SetDecayMode(1000020050 ,bratio,mode);
-  
+
   // Overwrite a decay mode already defined in MCs
   // Kaon Short: 310 normally decays in two modes
   // pi+, pi-  68.61 %
   // pi0, pi0  31.39 %
-  // and we force only the mode pi0, pi0  
+  // and we force only the mode pi0, pi0
 
-  Int_t mode2[6][3];                  
+  Int_t mode2[6][3];
   Float_t bratio2[6];
 
   for (Int_t kz = 0; kz < 6; kz++) {
@@ -371,48 +371,48 @@ void Ex03MCApplication::AddParticles()
 
 //_____________________________________________________________________________
 void Ex03MCApplication::AddIons()
-{    
+{
 /// Example of user defined ion
-  
+
   fVerbose.AddIons();
-  
-  gMC->DefineIon("MyIon", 34, 70, 12, 0.); 
+
+  gMC->DefineIon("MyIon", 34, 70, 12, 0.);
 
 }
 
 //_____________________________________________________________________________
 void Ex03MCApplication::GeneratePrimaries()
-{    
+{
 /// Fill the user stack (derived from TVirtualMCStack) with primary particles.
-  
+
   fVerbose.GeneratePrimaries();
 
   TVector3 origin(fDetConstruction->GetWorldSizeX(),
                   fDetConstruction->GetCalorSizeYZ(),
                   fDetConstruction->GetCalorSizeYZ());
-		     
+
   fPrimaryGenerator->GeneratePrimaries(origin);
 }
 
 //_____________________________________________________________________________
 void Ex03MCApplication::BeginEvent()
-{    
+{
 /// User actions at beginning of event
 
   fVerbose.BeginEvent();
 
   // Clear TGeo tracks (if filled)
-  if (   TString(gMC->GetName()) == "TGeant3TGeo" && 
+  if (   TString(gMC->GetName()) == "TGeant3TGeo" &&
          gGeoManager->GetListOfTracks() &&
          gGeoManager->GetTrack(0) &&
        ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
-       
-       gGeoManager->ClearTracks();	  
-       //if (gPad) gPad->Clear();	  
-  }    
+
+       gGeoManager->ClearTracks();
+       //if (gPad) gPad->Clear();
+  }
 
   fEventNo++;
-  if (fEventNo % fPrintModulo == 0) { 
+  if (fEventNo % fPrintModulo == 0) {
     cout << "\n---> Begin of event: " << fEventNo << endl;
     // ??? How to do this in VMC
     // HepRandom::showEngineStatus();
@@ -421,50 +421,50 @@ void Ex03MCApplication::BeginEvent()
 
 //_____________________________________________________________________________
 void Ex03MCApplication::BeginPrimary()
-{    
+{
 /// User actions at beginning of a primary track.
 /// If test for user defined decay is activated,
 /// the primary track ID is printed on the screen.
 
   fVerbose.BeginPrimary();
 
-  if ( fPrimaryGenerator->GetUserDecay() ) {  
-    cout << "   Primary track ID = " 
+  if ( fPrimaryGenerator->GetUserDecay() ) {
+    cout << "   Primary track ID = "
          << fStack->GetCurrentTrackNumber() << endl;
-  }   
+  }
 }
 
 //_____________________________________________________________________________
 void Ex03MCApplication::PreTrack()
-{    
+{
 /// User actions at beginning of each track
 /// If test for user defined decay is activated,
 /// the decay products of the primary track (K0Short)
 /// are printed on the screen.
 
   fVerbose.PreTrack();
-  
+
   // print info about K0Short decay products
-  if ( fPrimaryGenerator->GetUserDecay() ) {  
+  if ( fPrimaryGenerator->GetUserDecay() ) {
     Int_t parentID = fStack->GetCurrentParentTrackNumber();
 
     if ( parentID >= 0 &&
          fStack->GetParticle(parentID)->GetPdgCode() == kK0Short  &&
-         fStack->GetCurrentTrack()->GetUniqueID() == kPDecay ) {  
+         fStack->GetCurrentTrack()->GetUniqueID() == kPDecay ) {
          // The production process is saved as TParticle unique ID
          // via Ex03MCStack
 
-      cout << "      Current track " 
+      cout << "      Current track "
            << fStack->GetCurrentTrack()->GetName()
            << "  is a decay product of Parent ID = "
            << fStack->GetCurrentParentTrackNumber() << endl;
-    }           
-  }          
+    }
+  }
 }
 
 //_____________________________________________________________________________
 void Ex03MCApplication::Stepping()
-{    
+{
 /// User actions at each step
 
   // Work around for Fluka VMC, which does not call
@@ -476,8 +476,8 @@ void Ex03MCApplication::Stepping()
        gMC->GetStack()->GetCurrentTrackNumber() != trackId ) {
     fVerbose.PreTrack();
     trackId = gMC->GetStack()->GetCurrentTrackNumber();
-  }      
-    
+  }
+
   fVerbose.Stepping();
 
   fCalorimeterSD->ProcessHits();
@@ -485,7 +485,7 @@ void Ex03MCApplication::Stepping()
 
 //_____________________________________________________________________________
 void Ex03MCApplication::PostTrack()
-{    
+{
 /// User actions after finishing of each track
 
   fVerbose.PostTrack();
@@ -493,19 +493,19 @@ void Ex03MCApplication::PostTrack()
 
 //_____________________________________________________________________________
 void Ex03MCApplication::FinishPrimary()
-{    
+{
 /// User actions after finishing of a primary track
 
   fVerbose.FinishPrimary();
 
-  if ( fPrimaryGenerator->GetUserDecay() ) {  
+  if ( fPrimaryGenerator->GetUserDecay() ) {
     cout << endl;
-  }   
+  }
 }
 
 //_____________________________________________________________________________
 void Ex03MCApplication::FinishEvent()
-{    
+{
 /// User actions after finishing of an event
 
   fVerbose.FinishEvent();
@@ -513,9 +513,9 @@ void Ex03MCApplication::FinishEvent()
   // Geant3 + TGeo
   // (use TGeo functions for visualization)
   if ( TString(gMC->GetName()) == "TGeant3TGeo") {
-  
-     // Draw volume 
-     gGeoManager->SetVisOption(0);	 
+
+     // Draw volume
+     gGeoManager->SetVisOption(0);
      gGeoManager->SetTopVisible();
      gGeoManager->GetTopVolume()->Draw();
 
@@ -525,18 +525,18 @@ void Ex03MCApplication::FinishEvent()
      if ( gGeoManager->GetListOfTracks() &&
           gGeoManager->GetTrack(0) &&
         ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
-       
+
        gGeoManager->DrawTracks("/*");  // this means all tracks
-    }	  
-  }    
- 
+    }
+  }
+
   fRootManager->Fill();
 
-  if (fEventNo % fPrintModulo == 0) 
+  if (fEventNo % fPrintModulo == 0)
     fCalorimeterSD->PrintTotal();
 
   fCalorimeterSD->EndOfEvent();
 
   fStack->Reset();
-} 
+}
 

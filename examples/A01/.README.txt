@@ -1,4 +1,4 @@
-/*! 
+/*!
 
 \file "A01/.README.txt"
 \brief The Example A01 README page
@@ -15,14 +15,14 @@
     - Geometry defined via Geant4 (G4) or Root file
     - Definition of sensitive volumes
     - Hodoscope, drift chamber and calorimeter detector types
-    - Particles cuts 
+    - Particles cuts
       - G4 cut in range: 1mm
       - G3 cuts set to correspond to 1mm cut in range
     - Primary generator with fixed position and momentum, optionally
         randomized momentum within a given interval
     - Storing hits, particles stack (from E03 exaample) in Root file
 
-  See also the description of the Geant4 example in 
+  See also the description of the Geant4 example in
     geant4/examples/extednded/analysis/A01/README
 
 \section a01_s3 Macros
@@ -30,14 +30,14 @@
   For running example with G3:
   <pre>
   \link      A01/load_g3.C load_g3.C     \endlink - macro to load the libraries to run the example with Geant3
-  \link       A01/run_g3.C run_g3.C      \endlink - macro for running example 
+  \link       A01/run_g3.C run_g3.C      \endlink - macro for running example
   \link A01/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry (default)
   </pre>
 
   For running example with G4:
   <pre>
   \link      A01/load_g4.C load_g4.C     \endlink - macro to load the libraries to run the example with Geant4
-  \link       A01/run_g4.C run_g4.C      \endlink - macro for running example 
+  \link       A01/run_g4.C run_g4.C      \endlink - macro for running example
   \link     A01/g4Config.C g4Config.C    \endlink - configuration macro for G4 with native geometry navigation (default)
   \link    A01/g4Config1.C g4Config1.C   \endlink - configuration macro - geometry defined via Geant4
   \link    A01/g4Config2.C g4Config2.C   \endlink - configuration macro - G4 with native geometry navigation with local magnetic field
@@ -45,25 +45,25 @@
   \link A01/g4tgeoConfig2.C g4tgeoConfig2.C\endlink - configuration macro - G4 with TGeo navigation with local magnetic field
    g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
    g4config2.in  - macro for G4 configuration using G4 commands (called from g4tgeoConfig2.C)
-   g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
+   g4vis.in      - macro for G4 visualization settings (called from set_vis.C)
   </pre>
 
   Common macro (called by run_g3.C/run_g4.C):
   <pre>
   \link A01/set_vis.C set_vis.C\endlink - setting visualization
   </pre>
-  
+
 \section a01_s4 To run example
-  
+
   <pre>
   With G3 + TGeo:
   root[0] .x \link A01/load_g3.C load_g3.C\endlink
   root[1] .x \link A01/run_g3.C run_g3.C\endlink
-  
+
   With G4:
   root[0] .x \link A01/load_g4.C load_g4.C\endlink
   root[1] .x \link A01/run_g4.C run_g4.C\endlink
-  
+
   With G4 + TGeo navigation:
   root[0] .x \link A01/load_g4.C load_g4.C\endlink
   root[1] .x \link A01/run_g4.C run_g4.C\endlink(\link A01/g4tgeoConfig.C "g4tgeoConfig.C"\endlink);
@@ -79,8 +79,8 @@
 \section a01_s5 Classes
 
 The documentation of all classes and the basic macros for this example
-is availabe on \link A01 this page \endlink. 
+is availabe on \link A01 this page \endlink.
 
-  
+
 */
-  
+

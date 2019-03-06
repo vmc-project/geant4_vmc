@@ -129,7 +129,7 @@ void TG4ModelConfigurationManager::SetRegionsNames()
 void TG4ModelConfigurationManager::CreateRegions()
 {
 /// Create regions for all registered models
-  
+
   if ( VerboseLevel() > 1 ) {
     G4cout << "TG4ModelConfigurationManager::CreateRegions" << G4endl;
   }
@@ -169,7 +169,7 @@ void TG4ModelConfigurationManager::CreateRegions()
     }
 
     // If region already exists, only add the logical volume
-    // and continue the loop 
+    // and continue the loop
     G4Region* region
       = G4RegionStore::GetInstance()->GetRegion(materialName, false );
 
@@ -189,7 +189,7 @@ void TG4ModelConfigurationManager::CreateRegions()
   }
 
   fCreateRegionsDone = true;
-}  
+}
 
 //_____________________________________________________________________________
 void TG4ModelConfigurationManager::SetModel(const G4String& modelName)
@@ -226,7 +226,7 @@ void TG4ModelConfigurationManager::SetModelParticles(const G4String& modelName,
     text +=  modelName.data();
     text += " is not defined.";
     TG4Globals::Warning(
-      "TG4ModelConfigurationManager", "SetModelParticles", 
+      "TG4ModelConfigurationManager", "SetModelParticles",
       text + TG4Globals::Endl()
       + TString("Setting will be ignored."));
     return;
@@ -249,7 +249,7 @@ void TG4ModelConfigurationManager::SetModelRegions(const G4String& modelName,
     text +=  modelName.data();
     text += " is not defined.";
     TG4Globals::Warning(
-      "TG4ModelConfigurationManager", "SetModelRegions", 
+      "TG4ModelConfigurationManager", "SetModelRegions",
       text + TG4Globals::Endl()
       + TString("Setting will be ignored."));
     return;
@@ -259,8 +259,8 @@ void TG4ModelConfigurationManager::SetModelRegions(const G4String& modelName,
 }
 
 //_____________________________________________________________________________
-TG4ModelConfiguration* 
-TG4ModelConfigurationManager::GetModelConfiguration(const G4String& modelName, 
+TG4ModelConfiguration*
+TG4ModelConfigurationManager::GetModelConfiguration(const G4String& modelName,
                                                     G4bool warn) const
 {
 /// Return the model configuration via specified model name;

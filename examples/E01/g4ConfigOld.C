@@ -15,13 +15,13 @@
 void Config()
 {
 /// The configuration function for Geant4 VMC for Example01
-/// called during MC application initialization. 
+/// called during MC application initialization.
 /// For geometry defined with VMC and selected Geant4 native navigation
 
-  // RunConfiguration for Geant4 
-  TG4RunConfiguration* runConfiguration 
+  // RunConfiguration for Geant4
+  TG4RunConfiguration* runConfiguration
     = new TG4RunConfiguration("geomVMCtoGeant4");
-  
+
   // TGeant4
   TGeant4* geant4
     = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration);

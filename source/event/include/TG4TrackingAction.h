@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4TrackingAction.h
-/// \brief Definition of the TG4TrackingAction class 
+/// \brief Definition of the TG4TrackingAction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -34,7 +34,7 @@ class G4Track;
 
 /// \ingroup event
 /// \brief Actions at the beginnig and at the end of track
-/// 
+///
 /// Class that ensures calling sensitive detector
 /// before track starts stepping.
 /// It also takes care of setting step status (kVertex)
@@ -43,12 +43,12 @@ class G4Track;
 /// \author I. Hrivnacova; IPN, Orsay
 
 class TG4TrackingAction : public G4UserTrackingAction,
-                          public TG4Verbose 
+                          public TG4Verbose
 {
   public:
     TG4TrackingAction();
     virtual ~TG4TrackingAction();
-   
+
     // static access method
     static TG4TrackingAction* Instance();
 
@@ -89,16 +89,16 @@ class TG4TrackingAction : public G4UserTrackingAction,
 
     //
     // data members
-    
+
     /// messenger
-    TG4TrackingActionMessenger  fMessenger; 
-    
+    TG4TrackingActionMessenger  fMessenger;
+
     /// the special controls manager
     TG4SpecialControlsV2*  fSpecialControls;
-    
-    /// track manager 
+
+    /// track manager
     TG4TrackManager*  fTrackManager;
-    
+
     /// Cached pointer to thread-local VMC application
     TVirtualMCApplication*  fMCApplication;
 
@@ -111,12 +111,12 @@ class TG4TrackingAction : public G4UserTrackingAction,
     /// Cached pointer to thread-local stack popper
     TG4StackPopper* fStackPopper;
 
-    /// current primary track ID 
+    /// current primary track ID
     G4int   fPrimaryTrackID;
-    
-    /// current track ID 
-    G4int   fCurrentTrackID; 
-    
+
+    /// current track ID
+    G4int   fCurrentTrackID;
+
     /// control of saving secondary tracks
     TG4TrackSaveControl  fTrackSaveControl;
 
@@ -125,7 +125,7 @@ class TG4TrackingAction : public G4UserTrackingAction,
 
     /// new /tracking/verbose level
     G4int   fNewVerboseLevel;
-    
+
     /// track ID for which the new verbose level is applied
     G4int   fNewVerboseTrackID;
 };
@@ -133,9 +133,9 @@ class TG4TrackingAction : public G4UserTrackingAction,
 
 // inline methods
 
-inline TG4TrackingAction* TG4TrackingAction::Instance() { 
+inline TG4TrackingAction* TG4TrackingAction::Instance() {
   /// Return this instance.
-  return fgInstance; 
+  return fgInstance;
 }
 
 inline void TG4TrackingAction::PreTrackingAction(const G4Track* /*aTrack*/) {
@@ -156,6 +156,6 @@ inline void TG4TrackingAction::SetMCStack(TVirtualMCStack* mcStack) {
 inline void TG4TrackingAction::SetSpecialControls(TG4SpecialControlsV2* specialControls) {
   /// Return special controls manager
   fSpecialControls = specialControls;
-}  
+}
 
 #endif //TG4_TRACKING_ACTION_H

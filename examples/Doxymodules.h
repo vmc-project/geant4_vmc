@@ -17,13 +17,13 @@
  *  See more on the \ref README_E01 page.
  *  \{
  */
- 
+
 /** \} */
 
 /** \defgroup E02 E02
  *  \brief The VMC example E02
  *
- *  The Geant4 ExampleN02 adapted to Virtual Monte Carlo. 
+ *  The Geant4 ExampleN02 adapted to Virtual Monte Carlo.
  *  See more on the \ref README_E02 page.
  *  \{
  */

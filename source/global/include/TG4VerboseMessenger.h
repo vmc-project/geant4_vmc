@@ -1,5 +1,5 @@
 #ifndef TG4_VERBOSE_MESSENGER_H
-#define TG4_VERBOSE_MESSENGER_H 
+#define TG4_VERBOSE_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4VerboseMessenger.h
-/// \brief Definition of the TG4VerboseMessenger class 
+/// \brief Definition of the TG4VerboseMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -28,7 +28,7 @@ class G4UIcmdWithAnInteger;
 /// \ingroup global
 /// \brief Messenger class that defines commands for the verbose classes.
 ///
-/// For all objects derived from TG4Verbose class implements the command 
+/// For all objects derived from TG4Verbose class implements the command
 /// - /mcVerbose/objectName [level]
 ///
 /// \author I. Hrivnacova; IPN, Orsay
@@ -45,15 +45,15 @@ class TG4VerboseMessenger: public G4UImessenger
   public:
     TG4VerboseMessenger(const G4String& directoryName);
     virtual ~TG4VerboseMessenger();
-   
-    // methods 
+
+    // methods
     G4UIcommand* AddCommand(TG4VVerbose* verbose, const G4String& cmdName);
             void RemoveCommand(TG4VVerbose* verbose, G4UIcommand* command);
     virtual void SetNewValue(G4UIcommand* command, G4String string);
-    
+
   private:
     /// Not implemented
-    TG4VerboseMessenger();  
+    TG4VerboseMessenger();
     /// Not implemented
     TG4VerboseMessenger(const TG4VerboseMessenger& right);
     /// Not implemented
@@ -61,11 +61,11 @@ class TG4VerboseMessenger: public G4UImessenger
 
     // methods
     void SetNewValueToAll(const G4String value) const;
-  
+
     // data members
     const G4String        fkDirectoryName;  ///< command directory name
     G4UIdirectory*        fDirectory;       ///< command directory
-    G4UIcmdWithAnInteger* fGlobalVerboseCmd;///< global verbose command 
+    G4UIcmdWithAnInteger* fGlobalVerboseCmd;///< global verbose command
     VerboseVector         fVerboseVector;   ///< associated verbose instances
     CommandVector         fCommandVector;   ///< verbose commands
 };

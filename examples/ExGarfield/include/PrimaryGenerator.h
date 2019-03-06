@@ -10,15 +10,15 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file ExGarfield/include/PrimaryGenerator.h 
-/// \brief Definition of the ExGarfield::PrimaryGenerator class 
+/// \file ExGarfield/include/PrimaryGenerator.h
+/// \brief Definition of the ExGarfield::PrimaryGenerator class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include <TVirtualMCApplication.h>
-#include <TVector3.h> 
+#include <TVector3.h>
 
 class TVirtualMCStack;
 
@@ -40,7 +40,7 @@ class DetectorConstruction;
 class PrimaryGenerator : public TObject
 {
   public:
-    PrimaryGenerator(TVirtualMCStack* stack); 
+    PrimaryGenerator(TVirtualMCStack* stack);
     PrimaryGenerator(const PrimaryGenerator& origin,
                      TVirtualMCStack* stack);
     PrimaryGenerator();
@@ -57,7 +57,7 @@ class PrimaryGenerator : public TObject
     // get methods
     TVector3 GetVertexPosition() const;
     TVector3 GetVertexDirection() const;
- 
+
   private:
     // methods
     void GenerateOnePrimary(const TVector3& origin);

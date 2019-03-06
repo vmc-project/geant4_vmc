@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01HadCalorHit.cxx 
-/// \brief Implementation of the A01HadCalorHit class 
+/// \file A01HadCalorHit.cxx
+/// \brief Implementation of the A01HadCalorHit class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo \n
 ///
@@ -26,7 +26,7 @@ ClassImp(A01HadCalorHit)
 /// \endcond
 
 //_____________________________________________________________________________
-A01HadCalorHit::A01HadCalorHit(Int_t icol, Int_t irow) 
+A01HadCalorHit::A01HadCalorHit(Int_t icol, Int_t irow)
   : TObject(),
     fColumnID(icol),
     fRowID(irow),
@@ -39,7 +39,7 @@ A01HadCalorHit::A01HadCalorHit(Int_t icol, Int_t irow)
 }
 
 //_____________________________________________________________________________
-A01HadCalorHit::A01HadCalorHit() 
+A01HadCalorHit::A01HadCalorHit()
   : TObject(),
     fColumnID(-1),
     fRowID(-1),
@@ -50,7 +50,7 @@ A01HadCalorHit::A01HadCalorHit()
 }
 
 //_____________________________________________________________________________
-A01HadCalorHit::~A01HadCalorHit() 
+A01HadCalorHit::~A01HadCalorHit()
 {
 /// Destructor
 }
@@ -60,7 +60,7 @@ void A01HadCalorHit::Print(Option_t* /*option*/) const
 {
 /// Print hit info
 
-  cout << "  Cell[" << fRowID << ", " << fColumnID << "] " << fEdep*1.0e03 
+  cout << "  Cell[" << fRowID << ", " << fColumnID << "] " << fEdep*1.0e03
        << " (MeV) " << endl;
 }
 

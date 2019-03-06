@@ -33,7 +33,7 @@ class TG4ModelConfiguration
 {
   public:
     TG4ModelConfiguration(const G4String& modelName);
-    
+
     // methods
     void Print() const;
 

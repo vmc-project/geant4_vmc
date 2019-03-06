@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4StepLimiterPhysics.h
-/// \brief Definition of the TG4StepLimiterPhysics class 
+/// \brief Definition of the TG4StepLimiterPhysics class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -47,7 +47,7 @@ class TG4StepLimiterPhysics: public TG4VPhysicsConstructor
     /// Not implemented
     TG4StepLimiterPhysics(const TG4StepLimiterPhysics& right);
     /// Not implemented
-    TG4StepLimiterPhysics& operator=(const TG4StepLimiterPhysics& right);  
+    TG4StepLimiterPhysics& operator=(const TG4StepLimiterPhysics& right);
 };
 
 #endif //TG4_STEP_LIMITER_PHYSICS_H

@@ -26,9 +26,9 @@ Bool_t isLibrary(const char* libName)
 
   if (TString(gSystem->DynamicPathName(libName, kTRUE)) != TString(""))
     return kTRUE;
-  else  
+  else
     return kFALSE;
-}    
+}
 
 void g3libs()
 {
@@ -37,7 +37,7 @@ void g3libs()
   // Load libraries required by Geant3
   gSystem->Load("libEG");
   gSystem->Load("libEGPythia6");
-  gSystem->Load("libPythia6");  
+  gSystem->Load("libPythia6");
 
   if (isLibrary("libdummies"))
      gSystem->Load("libdummies");

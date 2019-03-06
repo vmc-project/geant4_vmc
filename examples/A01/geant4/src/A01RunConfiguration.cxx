@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file A01RunConfiguration.cxx
-/// \brief Implementation of the A01RunConfiguration class 
+/// \brief Implementation of the A01RunConfiguration class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
 ///
@@ -50,4 +50,4 @@ G4VUserDetectorConstruction*  A01RunConfiguration::CreateDetectorConstruction()
 /// construction class from the Geant4 novice example N03 library.
 
   return new A01DetectorConstruction(fUseLocalMagField);
-}   
+}

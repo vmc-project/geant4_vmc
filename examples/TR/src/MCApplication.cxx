@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file TR/src/MCApplication.cxx 
-/// \brief Implementation of the MCApplication class 
+/// \file TR/src/MCApplication.cxx
+/// \brief Implementation of the MCApplication class
 ///
 /// Geant4 TestEm10 adapted to Virtual Monte Carlo.
 ///
@@ -65,21 +65,21 @@ MCApplication::MCApplication(const char *name, const char *title)
     fIsMaster(kTRUE)
 {
 /// Standard constructor
-/// \param name   The MC application name 
+/// \param name   The MC application name
 /// \param title  The MC application description
 
   // Create a user stack
   fStack = new Ex03MCStack(1000);
-  
+
   // Create detector construction
   fDetConstruction = new DetectorConstruction();
-  
+
   // Create a calorimeter SD
-  fSensitiveDetector = new SensitiveDetector("Absorber"); 
-  
+  fSensitiveDetector = new SensitiveDetector("Absorber");
+
   // Create a primary generator
   fPrimaryGenerator = new PrimaryGenerator(fStack);
-  
+
   // Constant magnetic field (in kiloGauss)
   fMagField = new TGeoUniformMagField();
 }
@@ -132,15 +132,15 @@ MCApplication::MCApplication()
     fOldGeometry(kFALSE),
     fIsControls(kFALSE),
     fIsMaster(kTRUE)
-{    
+{
 /// Default constructor
 }
 
 //_____________________________________________________________________________
-MCApplication::~MCApplication() 
+MCApplication::~MCApplication()
 {
-/// Destructor  
-  
+/// Destructor
+
   //cout << "MCApplication::~MCApplication " << this << endl;
 
   delete fRootManager;
@@ -186,10 +186,10 @@ void MCApplication::BookHisto() const
 
 //_____________________________________________________________________________
 void MCApplication::InitMC(const char* setup)
-{    
+{
 /// Initialize MC.
 /// The selection of the concrete MC is done in the macro.
-/// \param setup The name of the configuration macro 
+/// \param setup The name of the configuration macro
 
   fVerbose.InitMC();
 
@@ -200,8 +200,8 @@ void MCApplication::InitMC(const char* setup)
       Fatal("InitMC",
             "Processing Config() has failed. (No MC is instantiated.)");
     }
-  }  
- 
+  }
+
 // MT support available from root v 5.34/18
 #if ROOT_VERSION_CODE >= 336402
   // Create Root manager
@@ -218,18 +218,18 @@ void MCApplication::InitMC(const char* setup)
 #endif
   // Cretae histograms
   BookHisto();
-  
+
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);
   gMC->Init();
-  gMC->BuildPhysics(); 
-  
+  gMC->BuildPhysics();
+
   RegisterStack();
-}                                   
+}
 
 //_____________________________________________________________________________
 void MCApplication::RunMC(Int_t nofEvents)
-{    
+{
 /// Run MC.
 /// \param nofEvents Number of events to be processed
 
@@ -241,7 +241,7 @@ void MCApplication::RunMC(Int_t nofEvents)
 
 //_____________________________________________________________________________
 void MCApplication::FinishRun()
-{    
+{
 /// Finish MC run.
 
   fVerbose.FinishRun();
@@ -302,31 +302,31 @@ void MCApplication::FinishWorkerRun() const
 
 //_____________________________________________________________________________
 void MCApplication::ConstructGeometry()
-{    
+{
 /// Construct geometry using detector contruction class.
 /// The detector contruction class is using TGeo functions or
 /// TVirtualMC functions (if oldGeometry is selected)
 
   fVerbose.ConstructGeometry();
 
-  fDetConstruction->ConstructGeometry();  
+  fDetConstruction->ConstructGeometry();
 }
 
 //_____________________________________________________________________________
 void MCApplication::InitGeometry()
-{    
+{
 /// Initialize geometry
-  
+
   fVerbose.InitGeometry();
-  
+
   fSensitiveDetector->Initialize();
 }
 
 //_____________________________________________________________________________
 void MCApplication::GeneratePrimaries()
-{    
+{
 /// Fill the user stack (derived from TVirtualMCStack) with primary particles.
-  
+
   fVerbose.GeneratePrimaries();
 
   fPrimaryGenerator->GeneratePrimaries();
@@ -334,30 +334,30 @@ void MCApplication::GeneratePrimaries()
 
 //_____________________________________________________________________________
 void MCApplication::BeginEvent()
-{    
+{
 /// User actions at beginning of event
 
   fVerbose.BeginEvent();
 
   // Clear TGeo tracks (if filled)
-  if (   TString(gMC->GetName()) == "TGeant3TGeo" && 
+  if (   TString(gMC->GetName()) == "TGeant3TGeo" &&
          gGeoManager->GetListOfTracks() &&
          gGeoManager->GetTrack(0) &&
        ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
-       
-       gGeoManager->ClearTracks();	  
-       //if (gPad) gPad->Clear();	  
-  }    
+
+       gGeoManager->ClearTracks();
+       //if (gPad) gPad->Clear();
+  }
 
   fEventNo++;
-  if (fEventNo % fPrintModulo == 0) { 
+  if (fEventNo % fPrintModulo == 0) {
     cout << "\n---> Begin of event: " << fEventNo << endl;
   }
 }
 
 //_____________________________________________________________________________
 void MCApplication::BeginPrimary()
-{    
+{
 /// User actions at beginning of a primary track.
 
   fVerbose.BeginPrimary();
@@ -365,7 +365,7 @@ void MCApplication::BeginPrimary()
 
 //_____________________________________________________________________________
 void MCApplication::PreTrack()
-{    
+{
 /// User actions at beginning of each track.
 /// Fill spectra.
 
@@ -378,7 +378,7 @@ void MCApplication::PreTrack()
       = fStack->GetCurrentTrack()->GetUniqueID();
 
 // Available since 6.07/03 and 5.34/35
-// kpTransitionRadiation = 49 
+// kpTransitionRadiation = 49
 #if ( ( ROOT_VERSION_CODE >= ROOT_VERSION(6,7,3) ) || \
       ( ( ROOT_VERSION_CODE <= ROOT_VERSION(6,0,0) ) && ( ROOT_VERSION_CODE >= ROOT_VERSION(5,34,35) ) ) )
     if ( creatorProcess == kPTransitionRadiation ) {
@@ -400,7 +400,7 @@ void MCApplication::PreTrack()
 
 //_____________________________________________________________________________
 void MCApplication::Stepping()
-{    
+{
 /// User actions at each step
 
   // Work around for Fluka VMC, which does not call
@@ -412,8 +412,8 @@ void MCApplication::Stepping()
        gMC->GetStack()->GetCurrentTrackNumber() != trackId ) {
     fVerbose.PreTrack();
     trackId = gMC->GetStack()->GetCurrentTrackNumber();
-  }      
-    
+  }
+
   fVerbose.Stepping();
 
   fSensitiveDetector->ProcessHits();
@@ -421,7 +421,7 @@ void MCApplication::Stepping()
 
 //_____________________________________________________________________________
 void MCApplication::PostTrack()
-{    
+{
 /// User actions after finishing of each track
 
   fVerbose.PostTrack();
@@ -429,7 +429,7 @@ void MCApplication::PostTrack()
 
 //_____________________________________________________________________________
 void MCApplication::FinishPrimary()
-{    
+{
 /// User actions after finishing of a primary track
 
   fVerbose.FinishPrimary();
@@ -437,7 +437,7 @@ void MCApplication::FinishPrimary()
 
 //_____________________________________________________________________________
 void MCApplication::FinishEvent()
-{    
+{
 /// User actions after finishing of an event
 
   fVerbose.FinishEvent();
@@ -445,9 +445,9 @@ void MCApplication::FinishEvent()
   // Geant3 + TGeo
   // (use TGeo functions for visualization)
   // if ( TString(gMC->GetName()) == "TGeant3TGeo") {
-  
-  //    // Draw volume 
-  //    gGeoManager->SetVisOption(0);	 
+
+  //    // Draw volume
+  //    gGeoManager->SetVisOption(0);
   //    gGeoManager->SetTopVisible();
   //    gGeoManager->GetTopVolume()->Draw();
 
@@ -457,10 +457,10 @@ void MCApplication::FinishEvent()
   //    if ( gGeoManager->GetListOfTracks() &&
   //         gGeoManager->GetTrack(0) &&
   //       ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
-       
+
   //      gGeoManager->DrawTracks("/*");  // this means all tracks
-  //   }	  
-  // }    
+  //   }
+  // }
 
   // Fill Edep histogram in MeV
   // cout << "Filling in h0 " << fSensitiveDetector->GetHit(0)->GetEdep()*1e+03 << endl;

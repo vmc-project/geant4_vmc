@@ -49,6 +49,6 @@ void drawTracks()
    c2->cd(1);
    hist1->Draw();
    c2->cd(2);
-   hist2->Draw(); 
+   hist2->Draw();
 }
-      
+

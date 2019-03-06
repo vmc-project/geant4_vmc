@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4ExtDecayer.cxx
-/// \brief Implementation of the TG4ExtDecayer class 
+/// \brief Implementation of the TG4ExtDecayer class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -45,7 +45,7 @@ TG4ExtDecayer::TG4ExtDecayer(TVirtualMCDecayer* externalDecayer)
 }
 
 //_____________________________________________________________________________
-TG4ExtDecayer::~TG4ExtDecayer() 
+TG4ExtDecayer::~TG4ExtDecayer()
 {
 /// Destructor
 
@@ -66,19 +66,19 @@ G4DecayProducts* TG4ExtDecayer::ImportDecayProducts(const G4Track& track)
      G4cerr << "TG4ExtDecayer::ImportDecayProducts: " << G4endl
             << " No fExternalDecayer is defined." << G4endl;
     return 0;
-  }  
-  
+  }
+
   // get particle momentum
-  G4ThreeVector momentum = track.GetMomentum(); 
-  G4double etot = track.GetDynamicParticle()->GetTotalEnergy();;  
-  TLorentzVector p;    
+  G4ThreeVector momentum = track.GetMomentum();
+  G4double etot = track.GetDynamicParticle()->GetTotalEnergy();;
+  TLorentzVector p;
   p[0] = momentum.x() / TG4G3Units::Energy();
   p[1] = momentum.y() / TG4G3Units::Energy();
   p[2] = momentum.z() / TG4G3Units::Energy();
   p[3] = etot         / TG4G3Units::Energy();
-  
+
   // get particle PDG
-  // ask TG4ParticlesManager to get PDG encoding 
+  // ask TG4ParticlesManager to get PDG encoding
   // (in order to get PDG from extended TDatabasePDG
   // in case the standard PDG code is not defined)
   G4ParticleDefinition* particleDef = track.GetDefinition();
@@ -89,13 +89,13 @@ G4DecayProducts* TG4ExtDecayer::ImportDecayProducts(const G4Track& track)
   fExternalDecayer->Decay(pdgEncoding, &p);
   G4int nofParticles
     = fExternalDecayer->ImportParticles(fDecayProductsArray);
-  
+
   if (VerboseLevel()>1) {
     G4cout << "nofParticles: " <<  nofParticles << G4endl;
-  }  
+  }
 
-  // convert decay products TParticle type 
-  // to G4DecayProducts  
+  // convert decay products TParticle type
+  // to G4DecayProducts
   G4DecayProducts* decayProducts
     = new G4DecayProducts(*(track.GetDynamicParticle()));
 
@@ -105,7 +105,7 @@ G4DecayProducts* TG4ExtDecayer::ImportDecayProducts(const G4Track& track)
     // get particle from TClonesArray
     TParticle* particle
       = fParticlesManager->GetParticle(fDecayProductsArray, i);
-      
+
     G4int status = particle->GetStatusCode();
     G4int pdg = particle->GetPdgCode();
     if ( ( status>0 && status<11 ) &&
@@ -116,30 +116,30 @@ G4DecayProducts* TG4ExtDecayer::ImportDecayProducts(const G4Track& track)
       if (VerboseLevel()>1) {
         G4cout << "  " << i << "th particle PDG: " << pdg << "   ";
       }
-            
-      // create G4DynamicParticle 
-      G4DynamicParticle* dynamicParticle 
+
+      // create G4DynamicParticle
+      G4DynamicParticle* dynamicParticle
         = fParticlesManager->CreateDynamicParticle(particle);
 
       if (dynamicParticle) {
 
         if (VerboseLevel()>1) {
-          G4cout << "  G4 particle name: " 
+          G4cout << "  G4 particle name: "
                  << dynamicParticle->GetDefinition()->GetParticleName()
                  << G4endl;
-        }         
+        }
 
         // add dynamicParticle to decayProducts
         decayProducts->PushProducts(dynamicParticle);
-        
+
         counter++;
       }
-    }       
-  }                             
+    }
+  }
   if (VerboseLevel()>1) {
     G4cout << "nofParticles for tracking: " <<  counter << G4endl;
-  }  
-     
+  }
+
   return decayProducts;
 }
-    
+

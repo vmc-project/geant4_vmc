@@ -13,11 +13,11 @@
 
 #include "../macro/g4libs.C"
 
-void load_g4() 
+void load_g4()
 {
   // Load Geant4 + VMC libraries
   g4libs();
-  
+
   // Load this example library
   gSystem->Load("libvmc_E01");
-}  
+}

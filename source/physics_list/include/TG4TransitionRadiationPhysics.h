@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4TransitionRadiationPhysics.h
-/// \brief Definition of the TG4TransitionRadiationPhysics class 
+/// \brief Definition of the TG4TransitionRadiationPhysics class
 ///
 /// According to TransitionRadiationPhysics from Geant4
 /// extended/electromagnetic/TestEm10 example.
@@ -40,7 +40,7 @@ class G4VXTRenergyLoss;
 
 class TG4TransitionRadiationPhysics : public TG4VPhysicsConstructor
 {
-  public: 
+  public:
     TG4TransitionRadiationPhysics(const G4String& name = "TransitionRadiation");
     TG4TransitionRadiationPhysics(G4int theVerboseLevel,
                                   const G4String& name = "TransitionRadiation");

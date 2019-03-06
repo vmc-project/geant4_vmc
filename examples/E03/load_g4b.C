@@ -9,11 +9,11 @@
 
 /// \ingroup E03
 /// \file E03/run_g4.C
-/// \brief Macro for loading libraries to run ExamplE03 with Geant4. 
+/// \brief Macro for loading libraries to run ExamplE03 with Geant4.
 
 #include "../macro/g4libs.C"
 
-void load_g4b() 
+void load_g4b()
 {
   // Load Geant4 + VMC libraries
   g4libs();
@@ -24,4 +24,4 @@ void load_g4b()
 
   // Load library with a user run configuration
   gSystem->Load("libgeant4_E03b");
-}  
+}

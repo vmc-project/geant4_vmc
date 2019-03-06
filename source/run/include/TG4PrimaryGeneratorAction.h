@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4PrimaryGeneratorAction.h
-/// \brief Definition of the TG4PrimaryGeneratorAction class 
+/// \brief Definition of the TG4PrimaryGeneratorAction class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -25,7 +25,7 @@ class TG4PrimaryGeneratorMessenger;
 class G4Event;
 
 /// \ingroup run
-/// \brief Primary generator action defined via TVirtualMCStack 
+/// \brief Primary generator action defined via TVirtualMCStack
 /// and TVirtualMCApplication.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
@@ -54,17 +54,17 @@ class TG4PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction,
     /// Messenger
     TG4PrimaryGeneratorMessenger* fMessenger;
 
-    /// Option to skip particles which do not exist in Geant4 
+    /// Option to skip particles which do not exist in Geant4
     G4bool  fSkipUnknownParticles;
 };
 
 // inline functions
 
-/// Set the option to skip particles which do not exist in Geant4 
+/// Set the option to skip particles which do not exist in Geant4
 inline void TG4PrimaryGeneratorAction::SetSkipUnknownParticles(G4bool value)
 { fSkipUnknownParticles = value; }
 
-/// Return the option to skip particles which do not exist in Geant4 
+/// Return the option to skip particles which do not exist in Geant4
 inline  G4bool TG4PrimaryGeneratorAction::GetSkipUnknownParticles() const
 { return fSkipUnknownParticles; }
 

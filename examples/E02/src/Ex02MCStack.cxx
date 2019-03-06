@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex02MCStack.cxx 
-/// \brief Implementation of the Ex02MCStack class 
+/// \file Ex02MCStack.cxx
+/// \brief Implementation of the Ex02MCStack class
 ///
 /// Geant4 ExampleN02 adapted to Virtual Monte Carlo
 ///
@@ -34,7 +34,7 @@ Ex02MCStack::Ex02MCStack(Int_t size)
   : fParticles(0),
     fCurrentTrack(-1),
     fNPrimary(0),
-    fObjectNumber(0)    
+    fObjectNumber(0)
 {
 /// Standard constructor
 /// \param size  The stack size
@@ -47,13 +47,13 @@ Ex02MCStack::Ex02MCStack()
   : fParticles(0),
     fCurrentTrack(-1),
     fNPrimary(0),
-    fObjectNumber(0)    
+    fObjectNumber(0)
 {
 /// Default constructor
 }
 
 //_____________________________________________________________________________
-Ex02MCStack::~Ex02MCStack() 
+Ex02MCStack::~Ex02MCStack()
 {
 /// Destructor
 
@@ -71,10 +71,10 @@ void  Ex02MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
   		         Double_t vx, Double_t vy, Double_t vz, Double_t tof,
 		         Double_t polx, Double_t poly, Double_t polz,
 		         TMCProcess mech, Int_t& ntr, Double_t weight,
-		         Int_t is) 
+		         Int_t is)
 {
 /// Create a new particle and push into stack;
-/// adds it to the particles array (fParticles) and if not done to the 
+/// adds it to the particles array (fParticles) and if not done to the
 /// stack (fStack).
 /// \param toBeDone  1 if particles should go to tracking, 0 otherwise
 /// \param parent    number of the parent track, -1 if track is primary
@@ -97,29 +97,29 @@ void  Ex02MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
 
   const Int_t kFirstDaughter=-1;
   const Int_t kLastDaughter=-1;
-  
+
   TParticle* particleDef
     = new TParticle(pdg, is, parent, -1, kFirstDaughter, kLastDaughter,
 		     px, py, pz, e, vx, vy, vz, tof);
-   
+
   particleDef->SetPolarisation(polx, poly, polz);
   particleDef->SetWeight(weight);
   particleDef->SetUniqueID(mech);
 
   Ex02Particle* mother = 0;
-  if ( parent >= 0 ) 
+  if ( parent >= 0 )
     mother = GetParticle(parent);
   else
-    fNPrimary++;  
+    fNPrimary++;
 
   Ex02Particle* particle = new Ex02Particle(GetNtrack(), particleDef, mother);
   if (mother) mother->AddDaughter(particle);
   fParticles->Add(particle);
-    
-  if (toBeDone) fStack.push(particle);  
 
-  ntr = GetNtrack() - 1;   
-}			 
+  if (toBeDone) fStack.push(particle);
+
+  ntr = GetNtrack() - 1;
+}
 
 //_____________________________________________________________________________
 TParticle* Ex02MCStack::PopNextTrack(Int_t& itrack)
@@ -130,17 +130,17 @@ TParticle* Ex02MCStack::PopNextTrack(Int_t& itrack)
 
   itrack = -1;
   if  (fStack.empty()) return 0;
-		      
+
   Ex02Particle* particle = fStack.top();
   fStack.pop();
 
-  if (!particle) return 0;  
-  
+  if (!particle) return 0;
+
   itrack = particle->GetID();
   fCurrentTrack = itrack;
 
   return particle->GetParticle();
-}    
+}
 
 //_____________________________________________________________________________
 TParticle* Ex02MCStack::PopPrimaryForTracking(Int_t i)
@@ -150,13 +150,13 @@ TParticle* Ex02MCStack::PopPrimaryForTracking(Int_t i)
 /// \param i  The index of primary particle to be popped
 
   if (i < 0 || i >= fNPrimary)
-    Fatal("GetPrimaryForTracking", "Index out of range"); 
-  
+    Fatal("GetPrimaryForTracking", "Index out of range");
+
   return ((Ex02Particle*)fParticles->At(i))->GetParticle();
-}     
+}
 
 //_____________________________________________________________________________
-void Ex02MCStack::Print(Option_t* /*option*/) const 
+void Ex02MCStack::Print(Option_t* /*option*/) const
 {
 /// Print info for all particles.
 
@@ -167,7 +167,7 @@ void Ex02MCStack::Print(Option_t* /*option*/) const
   for (Int_t i=0; i<GetNtrack(); i++) {
     GetParticle(i)->Print();
     //GetParticle(i)->PrintDaughters();
-  }  
+  }
 }
 
 //_____________________________________________________________________________
@@ -181,21 +181,21 @@ void Ex02MCStack::Reset()
   //fParticles->Delete();
   fParticles->Clear();
 
-  //Restore Object count 
+  //Restore Object count
   //To save space in the table keeping track of all referenced objects
-  //we assume that our events do not address each other. We reset the 
+  //we assume that our events do not address each other. We reset the
   //object count to what it was at the beginning of the event
   TProcessID::SetObjectCount(fObjectNumber);
-}       
+}
 
 //_____________________________________________________________________________
-void  Ex02MCStack::SetCurrentTrack(Int_t track) 
+void  Ex02MCStack::SetCurrentTrack(Int_t track)
 {
 /// Set the current track number to a given value.
 /// \param  track The current track number
 
   fCurrentTrack = track;
-}     
+}
 
 //_____________________________________________________________________________
 void  Ex02MCStack::SetObjectNumber()
@@ -204,23 +204,23 @@ void  Ex02MCStack::SetObjectNumber()
 /// Tis value will be restored in Reset.
 
   fObjectNumber = TProcessID::GetObjectCount();
-}                         
+}
 
 //_____________________________________________________________________________
-Int_t  Ex02MCStack::GetNtrack() const 
+Int_t  Ex02MCStack::GetNtrack() const
 {
 /// \return  The total number of all tracks.
 
   return fParticles->GetEntriesFast();
-}  
+}
 
 //_____________________________________________________________________________
-Int_t  Ex02MCStack::GetNprimary() const 
+Int_t  Ex02MCStack::GetNprimary() const
 {
 /// \return  The total number of primary tracks.
 
   return fNPrimary;
-}  
+}
 
 //_____________________________________________________________________________
 TParticle* Ex02MCStack::GetCurrentTrack() const
@@ -228,36 +228,36 @@ TParticle* Ex02MCStack::GetCurrentTrack() const
 /// \return  The current track particle
 
   Ex02Particle* current = GetParticle(fCurrentTrack);
-  
-  if (current) 
+
+  if (current)
     return  current->GetParticle();
-  else 
+  else
     return 0;
 }
 
 //_____________________________________________________________________________
-Int_t  Ex02MCStack::GetCurrentTrackNumber() const 
+Int_t  Ex02MCStack::GetCurrentTrackNumber() const
 {
 /// \return  The current track number
 
   return fCurrentTrack;
-}  
+}
 
 //_____________________________________________________________________________
-Int_t  Ex02MCStack::GetCurrentParentTrackNumber() const 
+Int_t  Ex02MCStack::GetCurrentParentTrackNumber() const
 {
 /// \return  The current track parent ID.
 
   Ex02Particle* current = GetParticle(fCurrentTrack);
-  
-  if (!current) return -1; 
-  
+
+  if (!current) return -1;
+
   Ex02Particle* mother = current->GetMother();
-  
+
   if (!mother) return -1;
-    
+
   return  mother->GetID();
-}  
+}
 
 //_____________________________________________________________________________
 Ex02Particle*  Ex02MCStack::GetParticle(Int_t id) const
@@ -266,8 +266,8 @@ Ex02Particle*  Ex02MCStack::GetParticle(Int_t id) const
 /// \param id The index of the particle to be returned
 
   if (id < 0 || id >= fParticles->GetEntriesFast())
-    Fatal("GetParticle", "Index out of range"); 
-   
+    Fatal("GetParticle", "Index out of range");
+
   return (Ex02Particle*)fParticles->At(id);
 }
 

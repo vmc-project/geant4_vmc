@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4RunManager.h
-/// \brief Definition of the TG4RunManager.h class 
+/// \brief Definition of the TG4RunManager.h class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -32,7 +32,7 @@ class G4UIExecutive;
 class TApplication;
 
 /// \ingroup run
-/// \brief Geant4 implementation of the TVirtualMC interface methods                    
+/// \brief Geant4 implementation of the TVirtualMC interface methods
 /// for access to Geant4 at run level.
 ///
 /// It provides also methods for switching between Geant4 and
@@ -43,7 +43,7 @@ class TApplication;
 class TG4RunManager : public TG4Verbose
 {
   public:
-    TG4RunManager(TG4RunConfiguration* configuration, 
+    TG4RunManager(TG4RunConfiguration* configuration,
                   int argc = 0, char** argv = 0);
      virtual ~TG4RunManager();
 
@@ -62,7 +62,7 @@ class TG4RunManager : public TG4Verbose
     Bool_t  SecondariesAreOrdered() const;
 
     //
-    // methods for Geant4 only 
+    // methods for Geant4 only
     //
     void CreateGeantUI();
     void StartGeantUI();
@@ -71,8 +71,8 @@ class TG4RunManager : public TG4Verbose
     void ProcessRootMacro(G4String macroName);
     void ProcessGeantCommand(G4String command);
     void ProcessRootCommand(G4String command);
-    void UseG3Defaults();   
-    void UseRootRandom(G4bool useRootRandom);   
+    void UseG3Defaults();
+    void UseRootRandom(G4bool useRootRandom);
 
   private:
     /// Not implemented
@@ -88,24 +88,24 @@ class TG4RunManager : public TG4Verbose
     void FilterARGV(const G4String& option);
     void CreateRootUI();
     void SetRandomSeed();
-    
+
     // static data members
 
     /// master instance
-    static TG4RunManager*  fgMasterInstance; 
-    
+    static TG4RunManager*  fgMasterInstance;
+
     /// thread local instance
     static G4ThreadLocal TG4RunManager*  fgInstance; ///< this instance
-    
-    // data members    
+
+    // data members
     G4RunManager*         fRunManager;       ///< G4RunManager
     TG4RunMessenger       fMessenger;        ///< messenger
     TG4RunConfiguration*  fRunConfiguration; ///< TG4RunConfiguration
     TG4RegionsManager*    fRegionsManager;   ///< regions manager
-    G4UIExecutive*        fGeantUISession; ///< G4 UI 
-    TApplication*         fRootUISession;    ///< Root UI 
+    G4UIExecutive*        fGeantUISession; ///< G4 UI
+    TApplication*         fRootUISession;    ///< Root UI
     G4bool                fRootUIOwner;      ///< ownership of Root UI
-    G4int                 fARGC;             ///< argc 
+    G4int                 fARGC;             ///< argc
     char**                fARGV;             ///< argv
     G4bool                fUseRootRandom;    ///< the option to use Root random number seed
     G4bool                fIsMCStackCached;  ///< the flag to cache MC stack only once
@@ -113,15 +113,15 @@ class TG4RunManager : public TG4Verbose
 
 // inline methods
 
-inline TG4RunManager* TG4RunManager::Instance() { 
+inline TG4RunManager* TG4RunManager::Instance() {
   /// Return this instance
-  return fgInstance; 
+  return fgInstance;
 }
-    
+
 inline void TG4RunManager::UseRootRandom(G4bool useRootRandom) {
-  /// Set the option whether to use Root random number seed 
+  /// Set the option whether to use Root random number seed
   fUseRootRandom = useRootRandom;
-}   
+}
 
 #endif //TG4_RUN_MANAGER_H
 

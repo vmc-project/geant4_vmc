@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file ExGarfield/src/Hit.cxx
-/// \brief Implementation of the ExGarfield::Hit class 
+/// \brief Implementation of the ExGarfield::Hit class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 ///
@@ -31,7 +31,7 @@ namespace ExGarfield
 {
 
 //_____________________________________________________________________________
-Hit::Hit() 
+Hit::Hit()
   : TObject(),
     fEdepAbs(0),
     fEdepGas(0),
@@ -43,7 +43,7 @@ Hit::Hit()
 }
 
 //_____________________________________________________________________________
-Hit::~Hit() 
+Hit::~Hit()
 {
 /// Destructor
 }
@@ -54,10 +54,10 @@ void Hit::Print(Option_t* /*option*/) const
 /// Print hit info
 
   cout << "   Absorber: total energy: " << std::setw(7) << fEdepAbs * 1.0e03 << " MeV"
-       << "       total track length: " << std::setw(7) << fTrackLengthAbs <<  " cm" 
-       << endl 
-       << "        Gas: total energy: " << std::setw(7) << fEdepGas * 1.0e06  << " keV" 
-       << "           avalanche size: " << std::setw(7) << fAvalancheSize 
+       << "       total track length: " << std::setw(7) << fTrackLengthAbs <<  " cm"
+       << endl
+       << "        Gas: total energy: " << std::setw(7) << fEdepGas * 1.0e06  << " keV"
+       << "           avalanche size: " << std::setw(7) << fAvalancheSize
        << "       gain: " << std::setw(7) << fGain << endl;
 }
 

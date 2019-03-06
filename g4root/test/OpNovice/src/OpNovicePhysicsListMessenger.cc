@@ -28,7 +28,7 @@
 //
 //
 //
-// 
+//
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -42,7 +42,7 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 OpNovicePhysicsListMessenger::
-  OpNovicePhysicsListMessenger(OpNovicePhysicsList* pPhys) 
+  OpNovicePhysicsListMessenger(OpNovicePhysicsList* pPhys)
   : G4UImessenger(),
     fPhysicsList(pPhys)
 {
@@ -51,14 +51,14 @@ OpNovicePhysicsListMessenger::
 
   fPhysDir = new G4UIdirectory("/OpNovice/phys/");
   fPhysDir->SetGuidance("PhysicsList control");
- 
+
   fVerboseCmd = new G4UIcmdWithAnInteger("/OpNovice/phys/verbose",this);
   fVerboseCmd->SetGuidance("set verbose for physics processes");
   fVerboseCmd->SetParameterName("verbose",true);
   fVerboseCmd->SetDefaultValue(1);
   fVerboseCmd->SetRange("verbose>=0");
   fVerboseCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
- 
+
   fCerenkovCmd =
            new G4UIcmdWithAnInteger("/OpNovice/phys/cerenkovMaxPhotons",this);
   fCerenkovCmd->SetGuidance("set max nb of photons per step");

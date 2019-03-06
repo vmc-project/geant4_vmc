@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01PrimaryGenerator.h 
-/// \brief Definition of the A01PrimaryGenerator class 
+/// \file A01PrimaryGenerator.h
+/// \brief Definition of the A01PrimaryGenerator class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo: \n
 ///
@@ -33,9 +33,9 @@ class A01DetectorConstruction;
 class A01PrimaryGenerator : public TObject
 {
   public:
-    A01PrimaryGenerator(TVirtualMCStack* stack); 
-    A01PrimaryGenerator(const A01PrimaryGenerator& origin, 
-                        TVirtualMCStack* stack); 
+    A01PrimaryGenerator(TVirtualMCStack* stack);
+    A01PrimaryGenerator(const A01PrimaryGenerator& origin,
+                        TVirtualMCStack* stack);
     A01PrimaryGenerator();
     virtual ~A01PrimaryGenerator();
 
@@ -54,7 +54,7 @@ class A01PrimaryGenerator : public TObject
     Double_t GetSigmaMomentum() const { return fSigmaMomentum; }
     Double_t GetSigmaAngle() const { return fSigmaAngle; }
     Bool_t   GetRandomize() const { return fRandomizePrimary; }
- 
+
   private:
     // methods
     //void GeneratePrimary();
@@ -66,7 +66,7 @@ class A01PrimaryGenerator : public TObject
     Double_t   fMomentum;         ///< Default particle momentum
     Double_t   fSigmaMomentum;    ///< The sigma of particle momentum
     Double_t   fSigmaAngle;       ///< The sigma of particle direction
-    Bool_t     fRandomizePrimary; ///< Option to randomize primary particle type 
+    Bool_t     fRandomizePrimary; ///< Option to randomize primary particle type
 
   ClassDef(A01PrimaryGenerator,1)  //A01PrimaryGenerator
 };

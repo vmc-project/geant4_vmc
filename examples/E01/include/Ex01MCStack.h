@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file  Ex01MCStack.h
-/// \brief Definition of the Ex01MCStack class 
+/// \brief Definition of the Ex01MCStack class
 ///
 /// Geant4 ExampleN01 adapted to Virtual Monte Carlo
 ///
@@ -34,7 +34,7 @@ class Ex01MCStack : public TVirtualMCStack
   public:
     Ex01MCStack(Int_t size);
     Ex01MCStack();
-    virtual ~Ex01MCStack();     
+    virtual ~Ex01MCStack();
 
     // methods
     virtual void  PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
@@ -44,31 +44,31 @@ class Ex01MCStack : public TVirtualMCStack
 		      TMCProcess mech, Int_t& ntr, Double_t weight,
 		      Int_t is) ;
     virtual TParticle* PopNextTrack(Int_t& itrack);
-    virtual TParticle* PopPrimaryForTracking(Int_t i);    
-    
+    virtual TParticle* PopPrimaryForTracking(Int_t i);
+
     // set methods
-    virtual void  SetCurrentTrack(Int_t itrack);                           
+    virtual void  SetCurrentTrack(Int_t itrack);
 
     // get methods
     virtual Int_t  GetNtrack() const;
     virtual Int_t  GetNprimary() const;
-    virtual TParticle* GetCurrentTrack() const;    
+    virtual TParticle* GetCurrentTrack() const;
     virtual Int_t  GetCurrentTrackNumber() const;
     virtual Int_t  GetCurrentParentTrackNumber() const;
-    
+
   private:
     // methods
     Ex01Particle* GetParticle(Int_t id) const;
-  
+
     // data members
     std::stack<Ex01Particle*>  fStack;        //!< The stack of particles (transient)
     TObjArray*                 fParticles;    ///< The array of particle (persistent)
     Int_t                      fCurrentTrack; ///< The current track number
     Int_t                      fNPrimary;     ///< The number of primaries
-    
+
     ClassDef(Ex01MCStack,1) // Ex01MCStack
 };
 
-#endif //Ex01_STACK_H   
-   
+#endif //Ex01_STACK_H
+
 

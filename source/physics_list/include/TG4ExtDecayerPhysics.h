@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file TG4ExtDecayerPhysics.h 
-/// \brief Definition of the TG4ExtDecayerPhysics class 
+/// \file TG4ExtDecayerPhysics.h
+/// \brief Definition of the TG4ExtDecayerPhysics class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -52,7 +52,7 @@ class TG4ExtDecayerPhysics: public TG4VPhysicsConstructor
     TG4ExtDecayerPhysics(const TG4ExtDecayerPhysics& right);
     /// Not implemented
     TG4ExtDecayerPhysics& operator=(const TG4ExtDecayerPhysics& right);
-    
+
     // data members
     TG4ExtDecayerMessenger  fMessenger;  ///< messenger
     G4Decay*  fDecayProcess; ///< decay process
@@ -63,10 +63,10 @@ class TG4ExtDecayerPhysics: public TG4VPhysicsConstructor
 // inline functions
 
 inline void TG4ExtDecayerPhysics::SetSelection(const G4String& selection) {
-  /// Select particles for which the external decayer will have priority 
-  /// over using Geant4 decay table 
+  /// Select particles for which the external decayer will have priority
+  /// over using Geant4 decay table
   fSelection = selection;
-}  
+}
 
 inline void TG4ExtDecayerPhysics::SetSkipNeutrino(G4bool skipNeutrino) {
   /// Set option to skip importing neutrinos

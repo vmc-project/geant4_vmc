@@ -1,5 +1,5 @@
 #ifndef TG4_TRACKING_ACTION_MESSENGER_H
-#define TG4_TRACKING_ACTION_MESSENGER_H 
+#define TG4_TRACKING_ACTION_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4TrackingActionMessenger.h
-/// \brief Definition of the TG4TrackingActionMessenger class 
+/// \brief Definition of the TG4TrackingActionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -33,18 +33,18 @@ class G4UIcmdWithABool;
 /// - /mcTracking/newVerboseTrack [trackID]
 /// - /mcTracking/saveSecondaries [DoNotSave|SaveInPreTrack|SaveInStep]
 /// - /mcTracking/saveDynamicCharge [true|false]
-/// 
+///
 /// \author I. Hrivnacova; IPN, Orsay
- 
+
 class TG4TrackingActionMessenger: public G4UImessenger
 {
   public:
     TG4TrackingActionMessenger(TG4TrackingAction* trackingAction);
     virtual ~TG4TrackingActionMessenger();
-   
-    // methods 
+
+    // methods
     virtual void SetNewValue(G4UIcommand* command, G4String string);
-    
+
   private:
     /// Not implemented
     TG4TrackingActionMessenger();
@@ -55,7 +55,7 @@ class TG4TrackingActionMessenger: public G4UImessenger
                                const TG4TrackingActionMessenger& right);
 
     // data members
-    TG4TrackingAction*     fTrackingAction;    ///< associated class 
+    TG4TrackingAction*     fTrackingAction;    ///< associated class
     G4UIdirectory*         fTrackingDirectory; ///< command directory
     G4UIcmdWithAnInteger*  fNewVerboseCmd;     ///< command: newVerbose
     G4UIcmdWithAnInteger*  fNewVerboseTrackCmd;///< command: newVerboseTrack

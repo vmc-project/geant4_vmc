@@ -17,11 +17,11 @@
 
 void test_E03_1(const TString& configMacro, Bool_t oldGeometry)
 {
-/// Macro function for testing example E03 
-/// \param configMacro  configuration macro loaded in initialization 
-/// \param oldGeometry  if true - geometry is defined via VMC, otherwise 
+/// Macro function for testing example E03
+/// \param configMacro  configuration macro loaded in initialization
+/// \param oldGeometry  if true - geometry is defined via VMC, otherwise
 ///                     via TGeo
-/// 
+///
 /// Run 5 events with 20 primaries and print the calorimeter hits.
 
   // Create application if it does not yet exist
@@ -29,16 +29,16 @@ void test_E03_1(const TString& configMacro, Bool_t oldGeometry)
   if ( ! TVirtualMCApplication::Instance() ) {
     new Ex03MCApplication("Example03", "The example03 MC application");
     needDelete = kTRUE;
-  }  
- 
+  }
+
   // MC application
-  Ex03MCApplication* appl 
+  Ex03MCApplication* appl
     = (Ex03MCApplication*)TVirtualMCApplication::Instance();
   appl->GetPrimaryGenerator()->SetNofPrimaries(20);
   appl->SetPrintModulo(1);
 
   // Set geometry defined via VMC
-  appl->SetOldGeometry(oldGeometry);  
+  appl->SetOldGeometry(oldGeometry);
 
   appl->InitMC(configMacro);
 
@@ -48,4 +48,4 @@ void test_E03_1(const TString& configMacro, Bool_t oldGeometry)
   appl->RunMC(5);
 
   if ( needDelete ) delete appl;
-}  
+}

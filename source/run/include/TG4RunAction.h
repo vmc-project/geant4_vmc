@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4RunAction.h
-/// \brief Definition of the TG4RunAction class 
+/// \brief Definition of the TG4RunAction class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -43,7 +43,7 @@ class TG4RunAction : public G4UserRunAction,
     // methods
     virtual void BeginOfRunAction(const G4Run* run);
     virtual void EndOfRunAction(const G4Run* run);
-    
+
     // set methods
     void SetSaveRandomStatus(G4bool saveRandomStatus);
     void SetReadRandomStatus(G4bool readRandomStatus);
@@ -58,7 +58,7 @@ class TG4RunAction : public G4UserRunAction,
     // static data members
     /// default name of the random engine status file to be read in
     static const G4String  fgkDefaultRandomStatusFile;
-  
+
      // data members
     TG4RunActionMessenger   fMessenger; ///< messenger
     TG4CrossSectionManager  fCrossSectionManager; ///< cross section manager
@@ -72,12 +72,12 @@ class TG4RunAction : public G4UserRunAction,
 inline void TG4RunAction::SetSaveRandomStatus(G4bool saveRandomStatus) {
   /// Set option for saving random engine status
   fSaveRandomStatus = saveRandomStatus;
-}  
+}
 
 inline void TG4RunAction::SetReadRandomStatus(G4bool readRandomStatus) {
   /// Set option for reading random engine status
   fReadRandomStatus = readRandomStatus;
-}  
+}
 
 inline void TG4RunAction::SetRandomStatusFile(G4String RandomStatusFile) {
   /// Set random engine status file name

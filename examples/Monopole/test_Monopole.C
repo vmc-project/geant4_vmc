@@ -13,8 +13,8 @@
 
 void test_Monopole(const TString& configMacro)
 {
-/// Macro function for testing example Monopole 
-/// \param configMacro  configuration macro loaded in initialization 
+/// Macro function for testing example Monopole
+/// \param configMacro  configuration macro loaded in initialization
 
   // Create application if it does not yet exist
   Bool_t needDelete = kFALSE;

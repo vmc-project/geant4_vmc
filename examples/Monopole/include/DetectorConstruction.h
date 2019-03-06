@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file  DetectorConstruction.h
-/// \brief Definition of the DetectorConstruction class 
+/// \brief Definition of the DetectorConstruction class
 ///
 /// Geant4 monopole adapted to Virtual Monte Carlo: \n
 ///
@@ -36,23 +36,23 @@ namespace Monopole
 
 class DetectorConstruction : public TObject
 {
-  public:  
+  public:
     DetectorConstruction();
     virtual ~DetectorConstruction();
 
   public:
     void ConstructMaterials();
     void ConstructGeometry();
-    
+
     // set methods
     void SetAbsorberSizeX(Double_t sizeX);
-    void SetAbsorberSizeYZ(Double_t sizeYZ);              
-    void SetAbsorberMaterial(const TString& name);            
+    void SetAbsorberSizeYZ(Double_t sizeYZ);
+    void SetAbsorberMaterial(const TString& name);
     // void SetMagField(Double_t fieldValue);
     void SetMaxStepSize(Double_t maxStepSize);
     void SetGeometryInitialized(Bool_t geometryInitialized);
     // void UpdateGeometry();
-    
+
     //
     // get methods
     Double_t  GetWorldSizeX() const          { return fWorldSizeX; }
@@ -60,11 +60,11 @@ class DetectorConstruction : public TObject
     Double_t  GetMaxStepSize() const         { return fMaxStepSize; }
     TString   GetAbsorberMaterial() const    { return fAbsorberMaterial; }
     Bool_t    GetGeometryInitialized() const { return fGeometryInitialized; }
-          
+
   private:
     void PrintParameters();
 
-    // data members 
+    // data members
     TString   fWorldMaterial;
     TString   fAbsorberMaterial;
     Double_t  fAbsorberSizeX;

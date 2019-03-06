@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01DriftChamberHit.h 
-/// \brief Definition of the A01DriftChamberHit class 
+/// \file A01DriftChamberHit.h
+/// \brief Definition of the A01DriftChamberHit class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo: \n
 ///
@@ -37,7 +37,7 @@ class A01DriftChamberHit : public TObject
     // methods
     virtual void Print(Option_t* option = "") const;
     void Reset();
-                 
+
     // set methods
     void SetLayerID(Int_t id)    { fLayerID = id; }
     void SetTime(Double_t t)     { fTime = t; }
@@ -49,14 +49,14 @@ class A01DriftChamberHit : public TObject
     Double_t   GetTime() const     { return fTime; }
     TVector3   GetLocalPos() const { return fLocalPos; };
     TVector3   GetWorldPos() const { return fWorldPos; };
-      
+
   private:
     Int_t      fLayerID;  ///< The layer ID
-    Double_t   fTime;     ///< The hit time 
+    Double_t   fTime;     ///< The hit time
     TVector3   fLocalPos; ///< The local hit position
     TVector3   fWorldPos; ///< The global hit position
-    
-  ClassDef(A01DriftChamberHit,1) //A01DriftChamberHit  
+
+  ClassDef(A01DriftChamberHit,1) //A01DriftChamberHit
 };
 
 #endif //A01_DRIFT_CHAMBER_HIT_H

@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file ExGarfield/src/SensitiveDetector.cxx 
-/// \brief Implementation of the ExGarfield::SensitiveDetector class 
+/// \file ExGarfield/src/SensitiveDetector.cxx
+/// \brief Implementation of the ExGarfield::SensitiveDetector class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 ///
@@ -93,8 +93,8 @@ void SensitiveDetector::Initialize()
 {
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
-  
-  if ( TMCRootManager::Instance() ) Register();  
+
+  if ( TMCRootManager::Instance() ) Register();
   fAbsorberVolId = gMC->VolId("Absorber");
   fGasVolId = gMC->VolId("Gas");
 }
@@ -107,18 +107,18 @@ Bool_t SensitiveDetector::ProcessHits()
   Int_t copyNo;
   Int_t id = gMC->CurrentVolID(copyNo);
 
-  if (id != fAbsorberVolId  &&  id != fGasVolId ) 
+  if (id != fAbsorberVolId  &&  id != fGasVolId )
     return false;
 
   Double_t edep = gMC->Edep();
   Double_t step = 0.;
   if (gMC->TrackCharge() != 0.) step = gMC->TrackStep();
-  
+
   if (id == fAbsorberVolId) {
     fHit->AddEdepAbs(edep);
     fHit->AddTrackLengthAbs(step);
   }
-    
+
   if (id == fGasVolId) {
     fHit->AddEdepGas(edep);
   }
@@ -138,7 +138,7 @@ Bool_t  SensitiveDetector::UpdateFromGarfield()
   Double_t avalancheSize =  garfieldPhysics->GetAvalancheSize();
   Double_t gain = garfieldPhysics->GetGain();
 
-  // update hit 
+  // update hit
   fHit->AddEdepGas(edep);
   fHit->AddAvalancheSize(avalancheSize);
   fHit->AddGain(gain);
@@ -153,7 +153,7 @@ void SensitiveDetector::EndOfEvent()
 
 
   if (fVerboseLevel>0)  Print();
-    
+
   // Reset hits collection
   fHit->Reset();
 
@@ -166,7 +166,7 @@ void SensitiveDetector::EndOfEvent()
 void SensitiveDetector::Register()
 {
 /// Register the hits collection in Root manager.
-  
+
   TMCRootManager::Instance()
     ->Register("hit", "VMC::ExGarfield::Hit", &fHit);
 }
@@ -175,8 +175,8 @@ void SensitiveDetector::Register()
 void SensitiveDetector::Print(Option_t* /*option*/) const
 {
 /// Print the hit.
-  
-   fHit->Print();        
+
+   fHit->Print();
 }
 
 }

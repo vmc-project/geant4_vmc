@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4CachedMagneticField.cxx
-/// \brief Implementation of the TG4CachedMagneticField class 
+/// \brief Implementation of the TG4CachedMagneticField class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -33,7 +33,7 @@ TG4CachedMagneticField::TG4CachedMagneticField(TVirtualMagField* magField,
 }
 
 //_____________________________________________________________________________
-TG4CachedMagneticField::~TG4CachedMagneticField() 
+TG4CachedMagneticField::~TG4CachedMagneticField()
 {
 /// Destructor
 }
@@ -67,7 +67,7 @@ void TG4CachedMagneticField::GetFieldValue(const G4double point[3], G4double* bf
 
   // Call user field
   fVirtualMagField->Field(g3point, bfield);
-  
+
   // Set units
   for (G4int i=0; i<3; i++) bfield[i] = bfield[i] * TG4G3Units::Field();
 

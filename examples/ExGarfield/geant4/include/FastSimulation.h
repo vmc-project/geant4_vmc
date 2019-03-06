@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file ExGarfield/geant4/include/FastSimulation.h 
-/// \brief Definition of the ExGarfield::FastSimulation class 
+/// \file ExGarfield/geant4/include/FastSimulation.h
+/// \brief Definition of the ExGarfield::FastSimulation class
 ///
 /// ExGarfield garfieldpp example adapted to Virtual Monte Carlo.
 ///

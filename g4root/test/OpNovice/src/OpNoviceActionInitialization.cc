@@ -86,6 +86,6 @@ G4VSteppingVerbose*
                OpNoviceActionInitialization::InitializeSteppingVerbose() const
 {
   return new OpNoviceSteppingVerbose();
-}  
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

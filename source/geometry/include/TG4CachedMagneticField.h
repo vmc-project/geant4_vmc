@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4CachedMagneticField.h
-/// \brief Definition of the TG4CachedMagneticField class 
+/// \brief Definition of the TG4CachedMagneticField class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -49,13 +49,13 @@ class TG4CachedMagneticField : public TG4MagneticField
     virtual ~TG4CachedMagneticField();
 
     virtual void GetFieldValue(const G4double point[3], G4double* bfield) const;
-    
+
     // virtual void Update(const TG4FieldParameters& parameters);
     virtual void PrintStatistics() const;
 
     void ClearCounter();
     void SetConstDistance(G4double value);
-    
+
   private:
     // data members
     /// The last evaluated location

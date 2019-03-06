@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4OpSurfaceMap.h
-/// \brief Definition of the TG4OpSurfaceMap typedef 
+/// \brief Definition of the TG4OpSurfaceMap typedef
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 

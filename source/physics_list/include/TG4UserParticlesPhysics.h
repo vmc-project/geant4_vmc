@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4UserParticlesPhysics.h
-/// \brief Definition of the TG4UserParticlesPhysics class 
+/// \brief Definition of the TG4UserParticlesPhysics class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 

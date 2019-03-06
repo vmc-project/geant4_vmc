@@ -9,17 +9,17 @@
 
 /// \ingroup Gflash
 /// \file Gflash/run_g3.C
-/// \brief Macro for running ExampleGflash with Geant3 
+/// \brief Macro for running ExampleGflash with Geant3
 
 #include "set_vis.C"
 
-void run_g3(const TString& configMacro = "g3tgeoConfig.C") 
+void run_g3(const TString& configMacro = "g3tgeoConfig.C")
 {
 /// Macro function for running ExampleGflash with Geant3 from
 /// Root interactive session
 /// Note that since Root 6 the libraries have to be loaded first
 /// via load_g3.C.
-/// \param configMacro configuration macro name, default \ref Gflash/g3Config.C 
+/// \param configMacro configuration macro name, default \ref Gflash/g3Config.C
 
   // MC application
   VMC::Gflash::MCApplication* appl
@@ -30,6 +30,6 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
   set_vis();
 
   appl->RunMC(10);
-  
+
   delete appl;
-}  
+}

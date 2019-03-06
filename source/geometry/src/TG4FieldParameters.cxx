@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4FieldParameters.cxx
-/// \brief Implementation of the TG4FieldParameters class 
+/// \brief Implementation of the TG4FieldParameters class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -20,7 +20,7 @@
 #include <TVirtualMCApplication.h>
 #include <TVirtualMC.h>
 
-// Moved after Root includes to avoid shadowed variables 
+// Moved after Root includes to avoid shadowed variables
 // generated from short units names
 #include <G4SystemOfUnits.hh>
 
@@ -60,19 +60,19 @@ G4String TG4FieldParameters::EquationTypeName(EquationType equation)
 /// Return the equation type as a string
 
   switch ( equation ) {
-    case kMagUsualEqRhs:     return G4String("MagUsualEqRhs"); 
-    case kMagSpinEqRhs:      return G4String("MagSpinEqRhs"); 
+    case kMagUsualEqRhs:     return G4String("MagUsualEqRhs");
+    case kMagSpinEqRhs:      return G4String("MagSpinEqRhs");
     case kEqMagElectric:     return G4String("EqMagElectric");
-    case kEqEMFieldWithSpin: return G4String("EqEMFieldWithSpin"); 
-    case kEqEMFieldWithEDM:  return G4String("EqEMFieldWithEDM"); 
+    case kEqEMFieldWithSpin: return G4String("EqEMFieldWithSpin");
+    case kEqEMFieldWithEDM:  return G4String("EqEMFieldWithEDM");
     case kUserEquation:      return G4String("UserDefinedEq");
-  } 
-  
+  }
+
   TG4Globals::Exception(
     "TG4FieldParameters", "EquationTypeName:",
     "Unknown equation value.");
-  return G4String();  
-}      
+  return G4String();
+}
 
 //_____________________________________________________________________________
 G4String TG4FieldParameters::StepperTypeName(StepperType stepper)
@@ -96,13 +96,13 @@ G4String TG4FieldParameters::StepperTypeName(StepperType stepper)
     case kNystromRK4:         return G4String("NystromRK4");
     case kRKG3Stepper:        return G4String("RKG3_Stepper");
     case kUserStepper:        return G4String("UserDefinedStepper");
-  }  
-  
+  }
+
   TG4Globals::Exception(
     "TG4FieldParameters", "StepperTypeName:",
     "Unknown stepper value.");
-  return G4String();  
-}      
+  return G4String();
+}
 
 //_____________________________________________________________________________
 FieldType TG4FieldParameters::GetFieldType(const G4String& name)
@@ -124,18 +124,18 @@ EquationType TG4FieldParameters::GetEquationType(const G4String& name)
 {
 /// Return the equation type for given equation type name
 
-  if ( name == EquationTypeName(kMagUsualEqRhs) )     return kMagUsualEqRhs; 
-  if ( name == EquationTypeName(kMagSpinEqRhs) )      return kMagSpinEqRhs; 
+  if ( name == EquationTypeName(kMagUsualEqRhs) )     return kMagUsualEqRhs;
+  if ( name == EquationTypeName(kMagSpinEqRhs) )      return kMagSpinEqRhs;
   if ( name == EquationTypeName(kEqMagElectric) )     return kEqMagElectric;
-  if ( name == EquationTypeName(kEqEMFieldWithSpin) ) return kEqEMFieldWithSpin; 
-  if ( name == EquationTypeName(kEqEMFieldWithEDM) )  return kEqEMFieldWithEDM; 
+  if ( name == EquationTypeName(kEqEMFieldWithSpin) ) return kEqEMFieldWithSpin;
+  if ( name == EquationTypeName(kEqEMFieldWithEDM) )  return kEqEMFieldWithEDM;
   if ( name == EquationTypeName(kUserEquation) )      return kUserEquation;
-  
+
   TG4Globals::Exception(
     "TG4FieldParameters", "GetEquationType:",
     "Unknown equation name.");
-  return kMagUsualEqRhs; 
-}      
+  return kMagUsualEqRhs;
+}
 
 //_____________________________________________________________________________
 StepperType  TG4FieldParameters::GetStepperType(const G4String& name)
@@ -158,13 +158,13 @@ StepperType  TG4FieldParameters::GetStepperType(const G4String& name)
   if ( name == StepperTypeName(kNystromRK4) )         return kNystromRK4;
   if ( name == StepperTypeName(kRKG3Stepper) )        return kRKG3Stepper;
   if ( name == StepperTypeName(kUserStepper) )        return kUserStepper;
-  
+
   TG4Globals::Exception(
     "TG4FieldParameters", "GetStepperType:",
     "Unknown stepper name.");
-  return kClassicalRK4; 
-}      
-    
+  return kClassicalRK4;
+}
+
 //
 // ctors, dtor
 //
@@ -194,7 +194,7 @@ TG4FieldParameters::TG4FieldParameters(const G4String& volumeName)
 }
 
 //_____________________________________________________________________________
-TG4FieldParameters::~TG4FieldParameters() 
+TG4FieldParameters::~TG4FieldParameters()
 {
 /// Destructor
 
@@ -216,7 +216,7 @@ void TG4FieldParameters::PrintParameters() const
   }
   G4cout << "  field type = "    << FieldTypeName(fField) << G4endl
          << "  equation type = " << EquationTypeName(fEquation) << G4endl
-         << "  stepper type = "  << StepperTypeName(fStepper) << G4endl 
+         << "  stepper type = "  << StepperTypeName(fStepper) << G4endl
          << "  minStep = "       << fStepMinimum  << " mm" << G4endl
          << "  constDistance = " << fConstDistance  << " mm" << G4endl
          << "  isMonopole = " << std::boolalpha << fIsMonopole << G4endl

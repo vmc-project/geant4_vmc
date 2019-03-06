@@ -9,20 +9,20 @@
 
 /// \ingroup E03
 /// \file E03/run_g3.C
-/// \brief Macro for running Example03 with Geant3 
+/// \brief Macro for running Example03 with Geant3
 
 #include "set_vis.C"
 
-void run_g3(const TString& configMacro = "g3tgeoConfig.C") 
+void run_g3(const TString& configMacro = "g3tgeoConfig.C")
 {
 /// Macro function for running Example03 with Geant3 from
 /// Root interactive session
 /// Note that since Root 6 the libraries have to be loaded first
 /// via load_g3.C.
-/// \param configMacro configuration macro name, default \ref E03/g3Config.C 
+/// \param configMacro configuration macro name, default \ref E03/g3Config.C
 
   // MC application
-  Ex03MCApplication* appl 
+  Ex03MCApplication* appl
     =  new Ex03MCApplication("Example03", "The example03 MC application");
   appl->GetPrimaryGenerator()->SetNofPrimaries(20);
   appl->SetPrintModulo(1);
@@ -33,6 +33,6 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
   set_vis();
 
   appl->RunMC(5);
-  
+
   delete appl;
-}  
+}

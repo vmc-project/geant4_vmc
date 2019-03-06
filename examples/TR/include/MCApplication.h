@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file TR/include/MCApplication.h 
-/// \brief Definition of the MCApplication class 
+/// \file TR/include/MCApplication.h
+/// \brief Definition of the MCApplication class
 ///
 /// Geant4 TestEm10 adapted to Virtual Monte Carlo.
 ///
@@ -47,7 +47,7 @@ class MCApplication : public TVirtualMCApplication
     MCApplication(const char* name,  const char *title);
     MCApplication();
     virtual ~MCApplication();
-  
+
     // methods
     void InitMC(const char *setup);
     void RunMC(Int_t nofEvents);
@@ -56,7 +56,7 @@ class MCApplication : public TVirtualMCApplication
     virtual TVirtualMCApplication* CloneForWorker() const;
     virtual void InitForWorker() const;
     virtual void FinishWorkerRun() const;
- 
+
     virtual void ConstructGeometry();
     virtual void InitGeometry();
     virtual void GeneratePrimaries();
@@ -67,7 +67,7 @@ class MCApplication : public TVirtualMCApplication
     virtual void PostTrack();
     virtual void FinishPrimary();
     virtual void FinishEvent();
-    
+
     // set methods
     void  SetPrintModulo(Int_t value);
     void  SetVerboseLevel(Int_t verboseLevel);
@@ -81,16 +81,16 @@ class MCApplication : public TVirtualMCApplication
 
     // method for tests
     void SetOldGeometry(Bool_t oldGeometry = kTRUE);
- 
+
   private:
     // methods
     MCApplication(const MCApplication& origin);
     void  RegisterStack() const;
     void  BookHisto() const;
-  
+
     // data members
     mutable TMCRootManager* fRootManager; //!< Root manager
-    Int_t                  fPrintModulo;       ///< The event modulus number to be printed 
+    Int_t                  fPrintModulo;       ///< The event modulus number to be printed
     Int_t                  fEventNo;           ///< Event counter
     TMCVerbose             fVerbose;           ///< VMC verbose helper
     Ex03MCStack*           fStack;             ///< VMC stack
@@ -107,12 +107,12 @@ class MCApplication : public TVirtualMCApplication
 
 // inline functions
 
-/// Set the event modulus number to be printed 
+/// Set the event modulus number to be printed
 /// \param value  The new event modulus number value
-inline void  MCApplication::SetPrintModulo(Int_t value)  
+inline void  MCApplication::SetPrintModulo(Int_t value)
 { fPrintModulo = value; }
 
-/// Set verbosity 
+/// Set verbosity
 /// \param verboseLevel  The new verbose level value
 inline void  MCApplication::SetVerboseLevel(Int_t verboseLevel)
 { fVerbose.SetLevel(verboseLevel); }

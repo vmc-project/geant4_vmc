@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4StackPopperPhysics.h
-/// \brief Definition of the TG4StackPopperPhysics class 
+/// \brief Definition of the TG4StackPopperPhysics class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -34,7 +34,7 @@ class TG4StackPopperPhysics : public TG4VPhysicsConstructor
     TG4StackPopperPhysics(G4int theVerboseLevel,
                           const G4String& name = "StackPopper");
     virtual ~TG4StackPopperPhysics();
-    
+
     // set methods
     void SetSelection(const G4String& selection);
 
@@ -49,7 +49,7 @@ class TG4StackPopperPhysics : public TG4VPhysicsConstructor
     TG4StackPopperPhysics(const TG4StackPopperPhysics& right);
     /// Not implemented
     TG4StackPopperPhysics& operator=(const TG4StackPopperPhysics& right);
-    
+
     // data members
     TG4StackPopperMessenger  fMessenger;  ///< messenger
     TG4StackPopper*  fStackPopperProcess; ///< stack popper process
@@ -62,7 +62,7 @@ class TG4StackPopperPhysics : public TG4VPhysicsConstructor
 inline void TG4StackPopperPhysics::SetSelection(const G4String& selection) {
   /// Set particles selection
   fSelection = selection;
-}  
+}
 
 #endif //TG4_STACK_POPPER_PHYSICS_H
 

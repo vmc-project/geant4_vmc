@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TR/include/DetectorConstruction.h
-/// \brief Definition of the DetectorConstruction class 
+/// \brief Definition of the DetectorConstruction class
 ///
 /// Geant4 TestEm10 adapted to Virtual Monte Carlo.
 /// Only DetectorSimpleALICE is defined.
@@ -35,7 +35,7 @@ namespace TR
 
 class DetectorConstruction : public TObject
 {
-  public:  
+  public:
     DetectorConstruction();
     virtual ~DetectorConstruction();
 

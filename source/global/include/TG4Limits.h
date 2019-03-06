@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4Limits.h
-/// \brief Definition of the TG4Limits class 
+/// \brief Definition of the TG4Limits class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -27,7 +27,7 @@ class G4VProcess;
 
 /// \ingroup global
 /// \brief Extended G4UserLimits class.
-/// 
+///
 /// Class extends G4UserLimits base class with the
 /// vectors of kinetic energy cuts and control process flags
 /// data members.
@@ -37,20 +37,20 @@ class G4VProcess;
 class TG4Limits: public G4UserLimits
 {
   public:
-    TG4Limits(const TG4G3CutVector& cuts, 
+    TG4Limits(const TG4G3CutVector& cuts,
               const TG4G3ControlVector& controls);
     TG4Limits(const G4String& name,
-              const TG4G3CutVector& cuts, 
+              const TG4G3CutVector& cuts,
               const TG4G3ControlVector& controls);
     TG4Limits(const G4UserLimits& g4Limits,
-              const TG4G3CutVector& cuts, 
+              const TG4G3CutVector& cuts,
               const TG4G3ControlVector& controls);
     TG4Limits(const TG4Limits& right);
     virtual ~TG4Limits();
-    
+
     // operators
     TG4Limits& operator=(const TG4Limits& right);
-    
+
     // static methods
     static G4int GetNofLimits();
 
@@ -64,7 +64,7 @@ class TG4Limits: public G4UserLimits
     void SetCurrentMaxAllowedStep(G4double step);
     void SetDefaultMaxAllowedStep();
     void SetMaxAllowedStepBack();
-    
+
     // methods
     void Print() const;
 
@@ -83,53 +83,53 @@ class TG4Limits: public G4UserLimits
     G4double GetMinEkineForNeutralHadron(const G4Track& track) const;
     G4double GetMinEkineForMuon(const G4Track& track) const;
     G4double GetMinEkineForOther(const G4Track& track) const;
-    TG4G3ControlValue GetControl(G4VProcess* process) const; 
+    TG4G3ControlValue GetControl(G4VProcess* process) const;
 
   private:
     /// Not implemented
     TG4Limits();
 
     // methods
-    void Initialize(const TG4G3CutVector& cuts, 
+    void Initialize(const TG4G3CutVector& cuts,
                     const TG4G3ControlVector& controls);
-  
+
     // static data members
-    static G4int  fgCounter;           ///< counter 
+    static G4int  fgCounter;           ///< counter
 
     // data members
     G4String            fName;         ///< name
     G4bool              fIsCut;        ///< true if any cut value is set
     G4bool              fIsControl;    ///< true if any control value is set
     TG4G3CutVector      fCutVector;    ///< the vector of G3 cut values
-    TG4G3ControlVector  fControlVector;///< the vector of G3 control values 
-    G4double            fDefaultMaxStep; ///< the default max step value 
+    TG4G3ControlVector  fControlVector;///< the vector of G3 control values
+    G4double            fDefaultMaxStep; ///< the default max step value
 };
 
 // inline methods
 
-inline G4int TG4Limits::GetNofLimits() { 
+inline G4int TG4Limits::GetNofLimits() {
   /// Return the total number of all TG4Limits objects
-  return fgCounter; 
+  return fgCounter;
 }
 
-inline G4bool TG4Limits::IsCut() const  { 
+inline G4bool TG4Limits::IsCut() const  {
   /// Return true if any cut value is set
-  return fIsCut; 
+  return fIsCut;
 }
 
-inline G4bool TG4Limits::IsControl() const  { 
+inline G4bool TG4Limits::IsControl() const  {
   /// Return true if any control value is set
-  return fIsControl; 
+  return fIsControl;
 }
 
-inline void TG4Limits::SetName(const G4String& name) { 
+inline void TG4Limits::SetName(const G4String& name) {
   /// Set name
-  fName = name; 
+  fName = name;
 }
 
-inline G4String TG4Limits::GetName() const { 
+inline G4String TG4Limits::GetName() const {
   /// Return name
-  return fName; 
+  return fName;
 }
 
 inline G4double TG4Limits::GetMaxUserStep() const {
@@ -137,14 +137,14 @@ inline G4double TG4Limits::GetMaxUserStep() const {
   return fMaxStep;
 }
 
-inline const TG4G3CutVector* TG4Limits::GetCutVector() const { 
+inline const TG4G3CutVector* TG4Limits::GetCutVector() const {
   /// Return the vector of G3 cut values
-  return &fCutVector; 
+  return &fCutVector;
 }
 
-inline const TG4G3ControlVector* TG4Limits::GetControlVector() const { 
+inline const TG4G3ControlVector* TG4Limits::GetControlVector() const {
   /// Return the vector of G3 control values
-  return &fControlVector; 
+  return &fControlVector;
 }
 
 #endif //TG4_USER_LIMITS_H

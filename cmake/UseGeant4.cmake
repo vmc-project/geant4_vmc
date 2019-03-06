@@ -7,7 +7,7 @@
 # Contact: root-vmc@cern.ch
 #-------------------------------------------------
 
-# A temporary replacement of Geant4 UseGeant4.cmake 
+# A temporary replacement of Geant4 UseGeant4.cmake
 # to avoid overriding the compiler flags.
 # See: http://bugzilla-geant4.kek.jp/show_bug.cgi?id=1663
 # From:  Oliver Freyermuth, Institute of Physics University of Bonn

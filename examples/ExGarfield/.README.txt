@@ -1,4 +1,4 @@
-/*! 
+/*!
 
 /// \file "ExGarfield/.README.txt"
 /// \brief The Example ExGarfield README page
@@ -30,12 +30,12 @@
   For running example with G4:
   <pre>
   \link       ExGarfield/load_g4.C load_g4.C      \endlink - macro to load the libraries to run the example with Geant4
-  \link        ExGarfield/run_g4.C run_g4.C       \endlink - macro for running example 
+  \link        ExGarfield/run_g4.C run_g4.C       \endlink - macro for running example
   \link      ExGarfield/g4Config.C g4Config.C     \endlink - configuration macro for G4 with native geometry navigation (defaullt)
   \link  ExGarfield/g4tgeoConfig.C g4tgeoConfig.C \endlink - configuration macro for G4 with TGeo geometry navigation
    g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
    g4config2.in  - macro for setting after initialization
-   g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
+   g4vis.in      - macro for G4 visualization settings (called from set_vis.C)
   </pre>
 
   Common macro (called by run_g3.C/run_g4.C):
@@ -47,12 +47,12 @@
   (Note that Garfield is not used with Geant3 simulation.)
   <pre>
   \link      ExGarfield/load_g3.C load_g3.C     \endlink - macro to load the libraries to run the example with Geant3
-  \link       ExGarfield/run_g3.C run_g3.C      \endlink - macro for running example 
+  \link       ExGarfield/run_g3.C run_g3.C      \endlink - macro for running example
   \link ExGarfield/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry
   </pre>
 
 
-\section garfield_s4 To run example 
+\section garfield_s4 To run example
 
   The environment variable HEED_DATABASE pointing to /garfield/Heed/heed++/database
   directory has to be set.
@@ -74,6 +74,6 @@
 \section garfield_s5 Classes
 
 The documentation of all classes and the basic macros for this example
-is availabe on \link ExGarfield this page \endlink. 
+is availabe on \link ExGarfield this page \endlink.
 
 */

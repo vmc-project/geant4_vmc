@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file ExGarfield/geant4/src/FastSimulation.cxx
-/// \brief Implementation of the ExGarfield::FastSimulation class 
+/// \brief Implementation of the ExGarfield::FastSimulation class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 ///
@@ -42,7 +42,7 @@ namespace ExGarfield
 {
 
 //_____________________________________________________________________________
-FastSimulation::FastSimulation() 
+FastSimulation::FastSimulation()
   : TG4VUserFastSimulation(),
     fMessenger(0)
 {
@@ -56,13 +56,13 @@ FastSimulation::FastSimulation()
   // Set seed to Garfield random engine
   ::Garfield::randomEngine.Seed(1);
 
-  // Construct the Garfield messenger which defines the Garfield physics specific 
+  // Construct the Garfield messenger which defines the Garfield physics specific
   // command
   fMessenger = new GarfieldMessenger();
 
 /*
   // In the following calls users can select the particles and regions
-  // which the fast simulation model(s) will be applied to. 
+  // which the fast simulation model(s) will be applied to.
   // The setting is an alternative to the setting via UI commands
   // in physics.in macro.
 
@@ -72,7 +72,7 @@ FastSimulation::FastSimulation()
   SetModel("garfieldModel");
 
   // In the following calls users can select the particles and regions
-  // which the fast simulation model(s) will be applied to. 
+  // which the fast simulation model(s) will be applied to.
   // The setting can be done also interactively via UI commands.
   SetModelParticles("garfieldModel", "all");
   SetModelRegions("garfieldModel", "AirB");
@@ -125,7 +125,7 @@ void  FastSimulation::Construct()
   G4cout << "Construct Garfield model." << G4endl;
 
   // Create the fast simulation model
-  GarfieldG4FastSimulationModel* garfieldModel 
+  GarfieldG4FastSimulationModel* garfieldModel
     = new GarfieldG4FastSimulationModel("garfieldModel");
 
   // Register the model in the VMC framework

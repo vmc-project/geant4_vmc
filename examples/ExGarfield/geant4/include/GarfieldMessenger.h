@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file  ExGarfield/geant4/include/GarfieldMessenger.h
-/// \brief Definition of the GarfieldMessengerclass 
+/// \brief Definition of the GarfieldMessengerclass
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 /// This class is imported from garfieldpp example.

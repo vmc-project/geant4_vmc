@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4GeometryManager.h
-/// \brief Definition of the TG4GeometryManager class 
+/// \brief Definition of the TG4GeometryManager class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -73,7 +73,7 @@ class TG4GeometryManager : public TG4Verbose
     void SetIsZeroField(G4bool isZeroField);
     void SetIsUserMaxStep(G4bool isUserMaxStep);
     void SetIsMaxStepInLowDensityMaterials(G4bool isMaxStep);
-     
+
     // set user region construction
     void SetUserRegionConstruction(
             TG4VUserRegionConstruction* userRegionConstruction);
@@ -81,7 +81,7 @@ class TG4GeometryManager : public TG4Verbose
             TG4VUserPostDetConstruction* userPostDetConstruction);
     void SetUserEquationOfMotion(G4EquationOfMotion* equation, G4String volumeName="");
     void SetUserStepper(G4MagIntegratorStepper* stepper, G4String volumeName="");
-            
+
     void SetLimitDensity(G4double density);
     void SetMaxStepInLowDensityMaterials(G4double maxStep);
 
@@ -98,7 +98,7 @@ class TG4GeometryManager : public TG4Verbose
     TG4GeometryManager& operator=(const TG4GeometryManager& right);
 
     // methods
-    void CreateMCGeometry(); 
+    void CreateMCGeometry();
     void ConstructG4GeometryViaVMC();
     void ConstructG4GeometryViaVGM();
     void ConstructG4Geometry();
@@ -112,21 +112,21 @@ class TG4GeometryManager : public TG4Verbose
     void ConstructGlobalField();
     void ConstructZeroFields();
     void ConstructLocalFields();
-        
+
     // static data members
     static TG4GeometryManager*  fgInstance;     ///< this instance
-    
-    /// default material density limit for setting max allowed step 
-    static const G4double  fgDefaultLimitDensity; 
-    
+
+    /// default material density limit for setting max allowed step
+    static const G4double  fgDefaultLimitDensity;
+
     /// default max allowed step in materials with density < fLimitDensity
-    static const G4double  fgDefaultMaxStep; 
+    static const G4double  fgDefaultMaxStep;
 
     // data members
     TG4DetConstructionMessenger  fMessenger; ///< messenger
     TG4GeometryServices*  fGeometryServices; ///< geometry services
     TVirtualMCGeometry*   fMCGeometry;       ///< VirtualMC geometry
-    TG4OpGeometryManager* fOpManager;        ///< optical geometry manager    
+    TG4OpGeometryManager* fOpManager;        ///< optical geometry manager
 
     /// Fast simulation models manager
     TG4ModelConfigurationManager*  fFastModelsManager;
@@ -162,23 +162,23 @@ class TG4GeometryManager : public TG4Verbose
     G4bool    fIsCachedMagneticField;
 
     /// option to activate max step defined in tracking media
-    G4bool    fIsUserMaxStep; 
+    G4bool    fIsUserMaxStep;
 
-    /// option to activate max step defined in low density materials           
-    G4bool    fIsMaxStepInLowDensityMaterials; 
-    
-    /// material density limit for setting max allowed step 
-    G4double  fLimitDensity;     
-    
+    /// option to activate max step defined in low density materials
+    G4bool    fIsMaxStepInLowDensityMaterials;
+
+    /// material density limit for setting max allowed step
+    G4double  fLimitDensity;
+
     /// max allowed step in materials with density < fLimitDensity
-    G4double  fMaxStepInLowDensityMaterials;                                     
+    G4double  fMaxStepInLowDensityMaterials;
 };
 
 // inline methods
 
-inline TG4GeometryManager* TG4GeometryManager::Instance() { 
+inline TG4GeometryManager* TG4GeometryManager::Instance() {
   /// Return this instance
-  return fgInstance; 
+  return fgInstance;
 }
 
 inline  TG4OpGeometryManager* TG4GeometryManager::GetOpManager() const {
@@ -199,12 +199,12 @@ inline TG4ModelConfigurationManager* TG4GeometryManager::GetEmModelsManager() co
 inline void TG4GeometryManager::SetLimitDensity(G4double density) {
   /// Set the material density limit for setting max allowed step
   fLimitDensity = density;
-}  
+}
 
 inline void TG4GeometryManager::SetMaxStepInLowDensityMaterials(G4double maxStep) {
   /// Set max allowed step value in materials with density < fLimitDensity
   fMaxStepInLowDensityMaterials = maxStep;
-}  
+}
 
 inline const std::vector<TG4RadiatorDescription*>& TG4GeometryManager::GetRadiators() const {
   /// Return the vectpr of defined radiators

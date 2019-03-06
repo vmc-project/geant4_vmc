@@ -105,7 +105,7 @@ void OpNoviceSteppingVerbose::StepInfo()
                             fN2ndariesPostStepDoIt;
       if(tN2ndariesTot>0){
         G4cout << "    :----- List of 2ndaries - "
-               << "#SpawnInStep=" << std::setw(3) << tN2ndariesTot 
+               << "#SpawnInStep=" << std::setw(3) << tN2ndariesTot
                << "(Rest="  << std::setw(2) << fN2ndariesAtRestDoIt
                << ",Along=" << std::setw(2) << fN2ndariesAlongStepDoIt
                << ",Post="  << std::setw(2) << fN2ndariesPostStepDoIt
@@ -129,7 +129,7 @@ void OpNoviceSteppingVerbose::StepInfo()
                  << (*fSecondary)[lp1]->GetDefinition()->GetParticleName();
           G4cout << G4endl;
         }
- 
+
         G4cout << "    :-----------------------------"
                << "----------------------------------"
                << "-- EndOf2ndaries Info ---------------"
@@ -152,7 +152,7 @@ void OpNoviceSteppingVerbose::TrackingStarted()
 
     G4cout << std::setw( 5) << "Step#"      << " "
            << std::setw( 6) << "X"          << "    "
-           << std::setw( 6) << "Y"          << "    "  
+           << std::setw( 6) << "Y"          << "    "
            << std::setw( 6) << "Z"          << "    "
            << std::setw( 9) << "KineE"      << " "
            << std::setw( 9) << "dEStep"     << " "

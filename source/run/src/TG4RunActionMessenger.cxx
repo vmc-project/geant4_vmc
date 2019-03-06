@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4RunActionMessenger.cxx
-/// \brief Implementation of the TG4RunActionMessenger class 
+/// \brief Implementation of the TG4RunActionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -28,7 +28,7 @@ TG4RunActionMessenger::TG4RunActionMessenger(TG4RunAction* runAction)
     fSaveRandomStatusCmd(0),
     fReadRandomStatusCmd(0),
     fRandomStatusFileCmd(0)
-{ 
+{
 /// Standard constructor
 
   fRunDirectory = new G4UIdirectory("/mcRun/");
@@ -52,7 +52,7 @@ TG4RunActionMessenger::TG4RunActionMessenger(TG4RunAction* runAction)
 }
 
 //_____________________________________________________________________________
-TG4RunActionMessenger::~TG4RunActionMessenger() 
+TG4RunActionMessenger::~TG4RunActionMessenger()
 {
 /// Destructor
 
@@ -67,21 +67,21 @@ TG4RunActionMessenger::~TG4RunActionMessenger()
 //
 
 //_____________________________________________________________________________
-void TG4RunActionMessenger::SetNewValue(G4UIcommand* command, 
+void TG4RunActionMessenger::SetNewValue(G4UIcommand* command,
        G4String newValue)
-{ 
+{
 /// Apply command to the associated object.
 
   if(command == fSaveRandomStatusCmd)
-  { 
-    fRunAction->SetSaveRandomStatus(fSaveRandomStatusCmd->GetNewBoolValue(newValue)); 
-  }   
+  {
+    fRunAction->SetSaveRandomStatus(fSaveRandomStatusCmd->GetNewBoolValue(newValue));
+  }
   else if(command == fReadRandomStatusCmd)
-  { 
-    fRunAction->SetReadRandomStatus(fReadRandomStatusCmd->GetNewBoolValue(newValue)); 
-  }   
+  {
+    fRunAction->SetReadRandomStatus(fReadRandomStatusCmd->GetNewBoolValue(newValue));
+  }
   else if(command == fRandomStatusFileCmd)
-  { 
-    fRunAction->SetRandomStatusFile(newValue); 
-  }   
+  {
+    fRunAction->SetRandomStatusFile(newValue);
+  }
 }

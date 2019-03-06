@@ -1,4 +1,4 @@
-/*! 
+/*!
 
 /// \file "TR/.README.txt"
 /// \brief The ExampleTR README page
@@ -27,18 +27,18 @@
   For running example with G4:
   <pre>
   \link       TR/load_g4.C load_g4.C      \endlink - macro to load the libraries to run the example with Geant4
-  \link        TR/run_g4.C run_g4.C       \endlink - macro for running example 
+  \link        TR/run_g4.C run_g4.C       \endlink - macro for running example
   \link      TR/g4Config.C g4Config.C     \endlink - configuration macro - G4 native geometry navigation (default)
-  \link  TR/g4tgeoConfig.C g4tgeoConfig.C \endlink - configuration macro - G4 with TGeo navigation 
+  \link  TR/g4tgeoConfig.C g4tgeoConfig.C \endlink - configuration macro - G4 with TGeo navigation
    g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
    g4config2.in  - macro for G4 post-init configuration using G4 commands (called from run_g4.C)
-   g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
+   g4vis.in      - macro for G4 visualization settings (called from set_vis.C)
   </pre>
 
   For running example with G3:
   <pre>
   \link      TR/load_g3.C load_g3.C     \endlink - macro to load the libraries to run the example with Geant3
-  \link       TR/run_g3.C run_g3.C      \endlink - macro for running example 
+  \link       TR/run_g3.C run_g3.C      \endlink - macro for running example
   \link TR/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry
   </pre>
 
@@ -47,7 +47,7 @@
   \link TR/set_vis.C set_vis.C\endlink - setting visualization
   </pre>
 
-\section etr_s4 To run example 
+\section etr_s4 To run example
 
   <pre>
   With G4:
@@ -66,6 +66,6 @@
 \section etr_s5 Classes
 
 The documentation of all classes and the basic macros for this example
-is availabe on \link TR this page \endlink. 
+is availabe on \link TR this page \endlink.
 
 */

@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/sh
 #------------------------------------------------
 # The Virtual Monte Carlo examples
 # Copyright (C) 2007 - 2014 Ivana Hrivnacova
@@ -54,63 +54,63 @@ do
     if [ ! -d $OUTDIR ]; then
       mkdir -p $OUTDIR
     fi
-  
+
     cd $CURDIR/E03
     G4PHYSICS_LIST=$PHYSICS_LIST
     if [ ! $EM = "_" ]; then
       G4PHYSICS_LIST="$G4PHYSICS_LIST""$EM"
     fi
-    export G4PHYSICS_LIST=$G4PHYSICS_LIST     
+    export G4PHYSICS_LIST=$G4PHYSICS_LIST
 
     # Run test
-    echo "... Running test with $G4PHYSICS_LIST" 
+    echo "... Running test with $G4PHYSICS_LIST"
     root.exe -q -b load_g4a.C test_E03_pl.C\(\"g4ConfigEnv.C\"\) >& $OUTDIR/TMP.out
     EXIT_STATUS=$?
-  
+
     # Extract warnings
     cat $OUTDIR/TMP.out | grep "Unknown process code" >& $OUTDIR/processCode_$G4PHYSICS_LIST.out
     cat $OUTDIR/TMP.out | grep "Unknown process control" >& $OUTDIR/processControl_$G4PHYSICS_LIST.out
     cat $OUTDIR/TMP.out | grep "G4Exception" >& $OUTDIR/exception_$G4PHYSICS_LIST.out
     # grep for DATA only if an execption was issued
-    if [ -s $OUTDIR/exception_$G4PHYSICS_LIST.out  ]; then 
+    if [ -s $OUTDIR/exception_$G4PHYSICS_LIST.out  ]; then
       cat $OUTDIR/TMP.out | grep "DATA" >& $OUTDIR/missingData_$G4PHYSICS_LIST.out
     fi
 
     # Keep output only if program finished with an error or include G4Exception
     if [ "$EXIT_STATUS" = "0" ]; then
-      if [ ! -s $OUTDIR/exception_$G4PHYSICS_LIST.out  ]; then 
+      if [ ! -s $OUTDIR/exception_$G4PHYSICS_LIST.out  ]; then
         #mv $OUTDIR/TMP.out $OUTDIR/normalExit_$G4PHYSICS_LIST.out
         rm $OUTDIR/TMP.out
-      else  
+      else
         mv $OUTDIR/TMP.out $OUTDIR/exception_$G4PHYSICS_LIST.out
-      fi  
+      fi
     else
       mv $OUTDIR/TMP.out $OUTDIR/errorExit_$G4PHYSICS_LIST.out
-    fi   
-  
+    fi
+
     # Remove files with zero size
     #
-    if [ ! -s $OUTDIR/processCode_$G4PHYSICS_LIST.out  ]; then 
+    if [ ! -s $OUTDIR/processCode_$G4PHYSICS_LIST.out  ]; then
       rm $OUTDIR/processCode_$G4PHYSICS_LIST.out
     fi
 
-    if [ ! -s $OUTDIR/processControl_$G4PHYSICS_LIST.out  ]; then 
+    if [ ! -s $OUTDIR/processControl_$G4PHYSICS_LIST.out  ]; then
       rm $OUTDIR/processControl_$G4PHYSICS_LIST.out
     fi
 
-    if [ ! -s $OUTDIR/exception_$G4PHYSICS_LIST.out  ]; then 
+    if [ ! -s $OUTDIR/exception_$G4PHYSICS_LIST.out  ]; then
       rm $OUTDIR/exception_$G4PHYSICS_LIST.out
     else
       # check missingData only if an execption was issued
-      if [ ! -s $OUTDIR/missingData_$G4PHYSICS_LIST.out  ]; then 
+      if [ ! -s $OUTDIR/missingData_$G4PHYSICS_LIST.out  ]; then
         rm $OUTDIR/missingData_$G4PHYSICS_LIST.out
       fi
     fi
-  
+
     echo " "
   done
-done  
-  
+done
+
 cd $CURDIR
 
 # Clean-up generated files

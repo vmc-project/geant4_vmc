@@ -18,45 +18,45 @@ Example A01
     Geometry defined via Geant4 (G4) or Root file
     Definition of sensitive volumes
     Hodoscope, drift chamber and calorimeter detector types
-    Particles cuts 
+    Particles cuts
       - G4 cut in range: 1mm
         G3 cuts set to correspond to 1mm cut in range
     Primary generator with fixed position and momentum, optionally
         randomized momentum within a given interval
     Storing hits, particles stack (from E03 exaample) in Root file
 
-  See also the description of the Geant4 example in 
+  See also the description of the Geant4 example in
     geant4/examples/extednded/analysis/A01/README
 
 Macros:
 -------
 
   For running example with G3:
-  
+
   load_g3.C       - macro to load the libraries to run the example with Geant3
   run_g3.C        - macro for running example
   g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry(default)
 
   For running example with G4:
-  
+
   load_g4.C       - macro to load the libraries to run the example with Geant
   run_g4.C        - macro for running example
   g4Config.C      - configuration macro - geometry option geomRootToGeant4 (default)
   g4Config1.C     - configuration macro - geometry defined via Geant4 (geomGeant4)
   g4Config2.C     - configuration macro - geometry option geomRootToGeant4 with local magnetic field
-  g4tgeoConfig.C  - configuration macro - G4 with TGeo navigation 
+  g4tgeoConfig.C  - configuration macro - G4 with TGeo navigation
   g4tgeoConfig2.C - configuration macro - G4 with TGeo navigation with local magnetic field
   g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
   g4config2.in  - macro for G4 configuration using G4 commands (called from g4tgeoConfig2.C)
-  g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
+  g4vis.in      - macro for G4 visualization settings (called from set_vis.C)
 
   Common macro (called by run_g3.C/run_g4.C):
-  
+
   set_vis.C - setting visualization
 
-To run example 
+To run example
 ---------------
-  
+
   With G3 + TGeo:
   root[0] .x load_g3.C
   root[1] .x run_g3.C

@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file  A01RootDetectorConstruction.h
-/// \brief Definition of the A01RootDetectorConstruction class 
+/// \brief Definition of the A01RootDetectorConstruction class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo: \n
 ///
@@ -28,7 +28,7 @@
 
 class A01RootDetectorConstruction : public TObject
 {
-  public:  
+  public:
     A01RootDetectorConstruction(const TString& geometryFileName);
     virtual ~A01RootDetectorConstruction();
 
@@ -36,15 +36,15 @@ class A01RootDetectorConstruction : public TObject
      void ConstructGeometry();
 
      void SetUseLocalMagField(Bool_t localMagField);
-          
-  private:      
-     // data members  
+
+  private:
+     // data members
 
      TString fGeometryFileName; ///< The root geometry file name
 
      /// Option to use local magnetic field (working only with Geant4 !)
      Bool_t  fUseLocalMagField;
-     
+
   ClassDef(A01RootDetectorConstruction,1) //A01RootDetectorConstruction
 };
 

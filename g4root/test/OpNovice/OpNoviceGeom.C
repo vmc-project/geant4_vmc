@@ -29,7 +29,7 @@ void OpNoviceGeom()
 // Water
 //
   TGeoElement *H = new TGeoElement("Hydrogen", "H", z=1 , a=1.01);
-  TGeoMixture *water = new TGeoMixture("Water", 2, density=1.0); 
+  TGeoMixture *water = new TGeoMixture("Water", 2, density=1.0);
   water->AddElement(H,2);
   water->AddElement(O,1);
   TGeoMedium *medwater = new TGeoMedium("Water", 2, water);
@@ -55,12 +55,12 @@ void OpNoviceGeom()
   bubbleAir_log->SetLineColor(kCyan);
   bubbleAir_log->SetTransparency(70);
   waterTank_log->AddNode(bubbleAir_log, 0, new TGeoTranslation(0,2500,0));
-  
+
   geom->CloseGeometry();
   geom->SetTopVisible(true);
   geom->Export("OpNoviceGeom.root");
 }
-  
-  
-  
-   
+
+
+
+

@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4UICmdWithAComplexString.h
-/// \brief Definition of the TG4UICmdWithAComplexString class 
+/// \brief Definition of the TG4UICmdWithAComplexString class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -19,8 +19,8 @@
 
 /// \ingroup global
 /// \brief G4 command that takes up to three string values.
-/// 
-/// Concrete class of G4UIcommand. 
+///
+/// Concrete class of G4UIcommand.
 /// The command defined by this class takes up to three string values.
 /// General information of G4UIcommand is given in G4UIcommand.hh.
 ///
@@ -29,9 +29,9 @@
 class TG4UICmdWithAComplexString : public G4UIcommand
 {
   public:
-    TG4UICmdWithAComplexString(const G4String& theCommandPath, 
+    TG4UICmdWithAComplexString(const G4String& theCommandPath,
                                G4UImessenger* theMessenger);
-    virtual ~TG4UICmdWithAComplexString();                               
+    virtual ~TG4UICmdWithAComplexString();
 
     // set methods
     void SetParameterName(const G4String& name, G4bool omittable);

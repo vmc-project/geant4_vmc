@@ -119,7 +119,7 @@ do
   fi
 
   echo "... Example $EXAMPLE"
-  
+
   if [ "$EXAMPLE" = "E01" -o "$EXAMPLE" = "E02" -o "$EXAMPLE" = "E06" ]; then
     if [ "$TESTG3" = "1" ]; then
       EXE=$EXEDIR"g3vmc_test"$EXAMPLE
@@ -142,7 +142,7 @@ do
       start_test "... Running test with G3, geometry via VMC,  TGeo navigation"
       $EXE -g3g TGeant3TGeo -rm "test_$EXAMPLE.C(\"\", kTRUE)" >& $OUT/test_g3_vmc_tgeo.out
       evaluate_test "$?"
-    fi  
+    fi
     if [ "$TESTG4" = "1" ]; then
       EXE=$EXEDIR"g4vmc_test"$EXAMPLE
       TMP_FAILED="0"
@@ -178,8 +178,8 @@ do
       start_test "... Running test with G4, geometry via VMC,  TGeo navigation"
       $EXE -g4g geomVMCtoRoot -g4vm "" -rm "test_$EXAMPLE.C(\"\", kTRUE)" >& $OUT/test_g4_vmc_tgeo.out
       evaluate_test "$?"
-    fi  
-  fi  
+    fi
+  fi
 
   if [ "$EXAMPLE" = "E03" ]; then
     for OPTION in E03a E03b
@@ -357,13 +357,13 @@ do
     done
   fi
 
-  if [ "$EXAMPLE" = "A01" ]; then 
+  if [ "$EXAMPLE" = "A01" ]; then
     if [ "$TESTG3" = "1" ]; then
       EXE=$EXEDIR"g3vmc_test"$EXAMPLE
       start_test "... Running test with G3, geometry via TGeo, TGeo navigation"
       $EXE -g3g TGeant3TGeo -rm "test_A01_1.C(\"\", kFALSE)" >& $OUT/test_g3_tgeo_tgeo.out
       evaluate_test "$?"
-    fi  
+    fi
     if [ "$TESTG4" = "1" ]; then
       EXE=$EXEDIR"g4vmc_test"$EXAMPLE
       start_test "... Running test with G4, geometry via TGeo, Native navigation"
@@ -395,8 +395,8 @@ do
       cat tmpfile >> $OUT/test_g4_g4_nat.out
       rm tmpfile
       evaluate_test "$TMP_FAILED"
-    fi  
-  fi  
+    fi
+  fi
 
   # new examples (without old geomtry definition)
   #

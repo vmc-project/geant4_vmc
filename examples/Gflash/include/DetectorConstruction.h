@@ -38,7 +38,7 @@ namespace Gflash
 
 class DetectorConstruction : public TObject
 {
-  public:  
+  public:
     DetectorConstruction();
     virtual ~DetectorConstruction();
 

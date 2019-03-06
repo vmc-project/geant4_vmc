@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4TrackInformation.cxx
-/// \brief Implementation of the TG4TrackInformation class 
+/// \brief Implementation of the TG4TrackInformation class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -31,33 +31,33 @@ TG4TrackInformation::TG4TrackInformation()
 }
 
 //_____________________________________________________________________________
-TG4TrackInformation::TG4TrackInformation(G4int trackParticleID) 
+TG4TrackInformation::TG4TrackInformation(G4int trackParticleID)
   : G4VUserTrackInformation(),
     fTrackParticleID(trackParticleID),
     fParentParticleID(-1),
-    fPDGLifetime(-1.0), 
+    fPDGLifetime(-1.0),
     fPDGEncoding(0),
     fIsUserTrack(false),
     fStop(false)
 {
 /// Standard constructor
-}    
+}
 /*
 //_____________________________________________________________________________
-TG4TrackInformation::TG4TrackInformation(G4int  trackParticleID, 
+TG4TrackInformation::TG4TrackInformation(G4int  trackParticleID,
                                          G4int  parentParticleID)
   : G4VUserTrackInformation(),
     fTrackParticleID(trackParticleID),
     fParentParticleID(parentParticleID)
 {
 //
-}    
+}
 */
 //_____________________________________________________________________________
 TG4TrackInformation::~TG4TrackInformation()
 {
 /// Destructor
-}    
+}
 
 //
 // public methods

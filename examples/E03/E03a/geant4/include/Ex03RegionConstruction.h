@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03RegionConstruction.h 
-/// \brief Definition of the Ex03RegionConstruction class 
+/// \file Ex03RegionConstruction.h
+/// \brief Definition of the Ex03RegionConstruction class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///

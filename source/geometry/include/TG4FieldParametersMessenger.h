@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4FieldParametersMessenger.h
-/// \brief Definition of the TG4FieldParametersMessenger class 
+/// \brief Definition of the TG4FieldParametersMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -35,19 +35,19 @@ class G4UIcmdWithABool;
 /// - /mcMagField/fieldType fieldType     \n
 ///       fieldType = Magnetic | ElectroMagnetic | Gravity
 /// - /mcMagField/equationType eqType     \n
-///       eqType = MagUsualEqRhs | MagSpinEqRhs | EqMagElectric | EMFieldWithSpin | 
+///       eqType = MagUsualEqRhs | MagSpinEqRhs | EqMagElectric | EMFieldWithSpin |
 ///                EqEMFieldWithEDM
 /// - /mcMagField/stepperType stepperType \n
-///       stepperType = CashKarpRKF45 | ClassicalRK4 | ExplicitEuler | ImplicitEuler | 
-///                     SimpleHeum | SimpleRunge | ConstRK4 | ExactHelixStepper | 
-///                     HelixExplicitEuler | HelixHeum | HelixImplicitEuler | 
+///       stepperType = CashKarpRKF45 | ClassicalRK4 | ExplicitEuler | ImplicitEuler |
+///                     SimpleHeum | SimpleRunge | ConstRK4 | ExactHelixStepper |
+///                     HelixExplicitEuler | HelixHeum | HelixImplicitEuler |
 ///                     HelixMixedStepper | HelixSimpleRunge | NystromRK4 | RKG3Stepper
 /// - /mcMagField/setStepMinimum value
 /// - /mcMagField/setDeltaChord  value
 /// - /mcMagField/setDeltaOneStep value
 /// - /mcMagField/setDeltaIntersection value
 /// - /mcMagField/setMinimumEpsilonStep value
-/// - /mcMagField/setMaximumEpsilonStep value 
+/// - /mcMagField/setMaximumEpsilonStep value
 /// - /mcMagField/setConstDistance value
 /// - /mcMagField/setIsMonopole true|false
 /// - /mcMagField/printParameters
@@ -62,7 +62,7 @@ class TG4FieldParametersMessenger: public G4UImessenger
 
     // methods
     virtual void SetNewValue(G4UIcommand* command, G4String newValues);
-    
+
   private:
     /// Not implemented
     TG4FieldParametersMessenger();
@@ -75,34 +75,34 @@ class TG4FieldParametersMessenger: public G4UImessenger
     // \data members
     TG4FieldParameters* fFieldParameters; ///< associated class
     G4UIdirectory*      fDirectory;       ///< command directory
-    
+
     //
     // commands data members
-    
+
     /// command: fieldType
     G4UIcmdWithAString*         fFieldTypeCmd;
 
     /// command: equationType
     G4UIcmdWithAString*         fEquationTypeCmd;
-    
+
     /// command: stepperType
     G4UIcmdWithAString*         fStepperTypeCmd;
-    
-    /// command: setStepMinimum 
+
+    /// command: setStepMinimum
     G4UIcmdWithADoubleAndUnit*  fSetStepMinimumCmd;
-    
-    /// command: setDeltaChord 
+
+    /// command: setDeltaChord
     G4UIcmdWithADoubleAndUnit*  fSetDeltaChordCmd;
-    
+
     /// command: setDeltaOneStep
     G4UIcmdWithADoubleAndUnit*  fSetDeltaOneStepCmd;
-    
+
     /// command: setDeltaIntersection
     G4UIcmdWithADoubleAndUnit*  fSetDeltaIntersectionCmd;
-    
+
     /// command: setMinimumEpsilon
     G4UIcmdWithADouble*         fSetMinimumEpsilonStepCmd;
-    
+
     /// command: setMaximumEpsilon
     G4UIcmdWithADouble*         fSetMaximumEpsilonStepCmd;
 

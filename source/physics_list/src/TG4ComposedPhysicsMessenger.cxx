@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4ComposedPhysicsMessenger.cxx
-/// \brief Implementation of the TG4ComposedPhysicsMessenger class 
+/// \brief Implementation of the TG4ComposedPhysicsMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -36,11 +36,11 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
                                    TG4ComposedPhysicsList* physicsList)
   : G4UImessenger(),
     fPhysicsList(physicsList),
-    fRangeGammaCutCmd(0),   
+    fRangeGammaCutCmd(0),
     fRangeElectronCutCmd(0),
     fRangePositronCutCmd(0),
     fRangeProtonCutCmd(0),
-    fRangeAllCutCmd(0),    
+    fRangeAllCutCmd(0),
     fSetGammaToMuonsCrossSectionFactorCmd(0),
     fPrintProcessMCMapCmd(0),
     fPrintProcessControlMapCmd(0),
@@ -49,35 +49,35 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
     fPrintGlobalControlsCmd(0),
     fG4NeutronHPVerboseCmd(0),
     fG4HadronicProcessStoreVerboseCmd(0)
-{ 
+{
 /// Standard constructor
 
   fDirectory = new G4UIdirectory("/mcPhysics/");
   fDirectory->SetGuidance("TGeant4 physics control commands.");
 
-  fRangeGammaCutCmd 
-    = new G4UIcmdWithADoubleAndUnit("/mcPhysics/rangeCutForGamma", this);  
+  fRangeGammaCutCmd
+    = new G4UIcmdWithADoubleAndUnit("/mcPhysics/rangeCutForGamma", this);
   fRangeGammaCutCmd->SetGuidance("Set range cut for gamma");
   fRangeGammaCutCmd->SetParameterName("GammaCut",false);
   fRangeGammaCutCmd->SetUnitCategory("Length");
   fRangeGammaCutCmd->SetRange("GammaCut>0.0");
   fRangeGammaCutCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
-  fRangeElectronCutCmd 
-    = new G4UIcmdWithADoubleAndUnit("/mcPhysics/rangeCutForElectron", this);  
+  fRangeElectronCutCmd
+    = new G4UIcmdWithADoubleAndUnit("/mcPhysics/rangeCutForElectron", this);
   fRangeElectronCutCmd->SetGuidance("Set range cut for electron.");
   fRangeElectronCutCmd->SetParameterName("ElectronCut", false);
   fRangeElectronCutCmd->SetUnitCategory("Length");
   fRangeElectronCutCmd->SetRange("ElectronCut>0.0");
   fRangeElectronCutCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
-  
-  fRangePositronCutCmd 
-    = new G4UIcmdWithADoubleAndUnit("/mcPhysics/rangeCutForPositron", this);  
+
+  fRangePositronCutCmd
+    = new G4UIcmdWithADoubleAndUnit("/mcPhysics/rangeCutForPositron", this);
   fRangePositronCutCmd->SetGuidance("Set range cut for positron.");
   fRangePositronCutCmd->SetParameterName("PositronCut", false);
   fRangePositronCutCmd->SetUnitCategory("Length");
   fRangePositronCutCmd->SetRange("PositronCut>0.0");
-  fRangePositronCutCmd->AvailableForStates(G4State_PreInit, G4State_Idle);  
+  fRangePositronCutCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
   fRangeProtonCutCmd
     = new G4UIcmdWithADoubleAndUnit("/mcPhysics/rangeCutForProton", this);
@@ -87,8 +87,8 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
   fRangeProtonCutCmd->SetRange("ProtonCut>0.0");
   fRangeProtonCutCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
-  fRangeAllCutCmd 
-    = new G4UIcmdWithADoubleAndUnit("/mcPhysics/rangeCuts", this);  
+  fRangeAllCutCmd
+    = new G4UIcmdWithADoubleAndUnit("/mcPhysics/rangeCuts", this);
   fRangeAllCutCmd->SetGuidance("Set range cut for all.");
   fRangeAllCutCmd->SetParameterName("AllCut", false);
   fRangeAllCutCmd->SetUnitCategory("Length");
@@ -105,15 +105,15 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
     ->SetParameterName("GammaToMuonsCrossSectionFactor", false);
   fSetGammaToMuonsCrossSectionFactorCmd->AvailableForStates(G4State_PreInit);
 
-  fPrintAllProcessesCmd 
-    = new G4UIcmdWithoutParameter("/mcPhysics/printAllProcess", this);  
+  fPrintAllProcessesCmd
+    = new G4UIcmdWithoutParameter("/mcPhysics/printAllProcess", this);
   fPrintAllProcessesCmd->SetGuidance("Print names for all instantiated processes.");
-  fPrintAllProcessesCmd->AvailableForStates(G4State_Idle);  
+  fPrintAllProcessesCmd->AvailableForStates(G4State_Idle);
 
-  fDumpAllProcessesCmd 
-    = new G4UIcmdWithoutParameter("/mcPhysics/dumpAllProcess", this);  
+  fDumpAllProcessesCmd
+    = new G4UIcmdWithoutParameter("/mcPhysics/dumpAllProcess", this);
   fDumpAllProcessesCmd->SetGuidance("Dump all instantiated processes.");
-  fDumpAllProcessesCmd->AvailableForStates(G4State_Idle);  
+  fDumpAllProcessesCmd->AvailableForStates(G4State_Idle);
 
   fPrintProcessMCMapCmd
      = new G4UIcmdWithoutParameter("/mcPhysics/printProcessMCMap", this);
@@ -163,7 +163,7 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
 }
 
 //______________________________________________________________________________
-TG4ComposedPhysicsMessenger::~TG4ComposedPhysicsMessenger() 
+TG4ComposedPhysicsMessenger::~TG4ComposedPhysicsMessenger()
 {
 /// Destructor
 
@@ -226,20 +226,20 @@ void TG4ComposedPhysicsMessenger::CreateProductionCutsTableEnergyRangeCmd()
 //______________________________________________________________________________
 void TG4ComposedPhysicsMessenger::SetNewValue(G4UIcommand* command,
                                               G4String newValue)
-{ 
+{
 /// Apply command to the associated object.
-  
-  if( command == fRangeGammaCutCmd ) { 
+
+  if( command == fRangeGammaCutCmd ) {
     G4double cut = fRangeGammaCutCmd->GetNewDoubleValue(newValue);
     TG4PhysicsManager::Instance()->SetCutForGamma(cut);
     fPhysicsList->SetCutForGamma(cut);
   }
-  else if ( command == fRangeElectronCutCmd ) { 
+  else if ( command == fRangeElectronCutCmd ) {
     G4double cut = fRangeElectronCutCmd->GetNewDoubleValue(newValue);
     TG4PhysicsManager::Instance()->SetCutForElectron(cut);
     fPhysicsList->SetCutForElectron(cut);
   }
-  else if ( command == fRangePositronCutCmd ) { 
+  else if ( command == fRangePositronCutCmd ) {
     G4double cut = fRangePositronCutCmd->GetNewDoubleValue(newValue);
     TG4PhysicsManager::Instance()->SetCutForPositron(cut);
     fPhysicsList->SetCutForPositron(cut);
@@ -279,25 +279,25 @@ void TG4ComposedPhysicsMessenger::SetNewValue(G4UIcommand* command,
   }
   else if (command == fPrintAllProcessesCmd) {
     fPhysicsList->PrintAllProcesses();
-  }  
+  }
   else if (command == fDumpAllProcessesCmd) {
     fPhysicsList->DumpAllProcesses();
-  }  
+  }
   else if (command == fPrintProcessMCMapCmd) {
     TG4ProcessMCMap::Instance()->PrintAll();
-  }  
+  }
   else if (command == fPrintProcessControlMapCmd) {
     TG4ProcessControlMap::Instance()->PrintAll();
-  }  
+  }
   else if (command == fPrintVolumeLimitsCmd) {
     TG4GeometryServices::Instance()->PrintVolumeLimits(newValue);
-  }  
+  }
   else if (command == fPrintGlobalCutsCmd) {
     TG4G3PhysicsManager::Instance()->GetCutVector()->Print();
-  }  
+  }
   else if (command == fPrintGlobalControlsCmd) {
     TG4G3PhysicsManager::Instance()->GetControlVector()->Print();
-  }  
+  }
   else if (command == fG4NeutronHPVerboseCmd) {
     G4NeutronHPManager::GetInstance()
       ->SetVerboseLevel(

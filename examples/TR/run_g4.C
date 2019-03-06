@@ -9,7 +9,7 @@
 
 /// \ingroup TR
 /// \file TR/run_g4.C
-/// \brief Macro for running Example TR with Geant4. 
+/// \brief Macro for running Example TR with Geant4.
 
 #include "TVirtualMC.h"
 
@@ -21,7 +21,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
 /// Root interactive session
 /// Note that since Root 6 the libraries have to be loaded first
 /// via load_g4.C.
-/// \param configMacro configuration macro name, default \ref TR/g4Config.C 
+/// \param configMacro configuration macro name, default \ref TR/g4Config.C
 
   // MC application
   VMC::TR::MCApplication* appl
@@ -43,4 +43,4 @@ void run_g4(const TString& configMacro = "g4Config.C")
   appl->RunMC(5000);
 
   delete appl;
-}  
+}

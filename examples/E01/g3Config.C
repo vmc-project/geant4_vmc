@@ -9,12 +9,12 @@
 
 
 /// \file E01/g3Config.C
-/// \brief Configuration macro for Geant3 VMC for Example01 
+/// \brief Configuration macro for Geant3 VMC for Example01
 
 void Config()
 {
 /// The configuration function for Geant3 VMC for Example01
-/// called during MC application initialization. 
+/// called during MC application initialization.
 
   new  TGeant3("C++ Interface to Geant3");
 

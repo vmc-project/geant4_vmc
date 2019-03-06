@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4VPhysicsConstructor.h
-/// \brief Definition of the TG4VPhysicsConstructor class 
+/// \brief Definition of the TG4VPhysicsConstructor class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 

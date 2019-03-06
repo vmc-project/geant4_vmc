@@ -15,22 +15,22 @@ void test_E03_pl(const TString& configMacro = "g4ConfigEnv.C")
 {
 /// Macro function for running Example03 with Geant4 from
 /// Root interactive session
-/// \param configMacro configuration macro name, default \ref E03/g4Config.C 
+/// \param configMacro configuration macro name, default \ref E03/g4Config.C
 
   // Create application if it does not yet exist
   Bool_t needDelete = kFALSE;
   if ( ! TVirtualMCApplication::Instance() ) {
     new Ex03MCApplication("Example03", "The example03 MC application");
     needDelete = kTRUE;
-  }  
- 
+  }
+
   // MC application
-  Ex03MCApplication* appl 
+  Ex03MCApplication* appl
     = (Ex03MCApplication*)TVirtualMCApplication::Instance();
   appl->InitMC(configMacro);
-  
+
   appl->RunMC(1);
-  
+
   if ( needDelete ) delete appl;
 }
 

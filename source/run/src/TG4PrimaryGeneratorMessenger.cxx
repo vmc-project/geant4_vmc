@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4PrimaryGeneratorMessenger.cxx
-/// \brief Implementation of the TG4PrimaryGeneratorMessenger class 
+/// \brief Implementation of the TG4PrimaryGeneratorMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -26,7 +26,7 @@ TG4PrimaryGeneratorMessenger::TG4PrimaryGeneratorMessenger(TG4PrimaryGeneratorAc
     fPrimaryGeneratorAction(action),
     fDirectory(0),
     fSkipUnknownParticlesCmd(0)
-{ 
+{
 /// Standard constructor
 
   fDirectory = new G4UIdirectory("/mcPrimaryGenerator/");
@@ -39,7 +39,7 @@ TG4PrimaryGeneratorMessenger::TG4PrimaryGeneratorMessenger(TG4PrimaryGeneratorAc
 }
 
 //_____________________________________________________________________________
-TG4PrimaryGeneratorMessenger::~TG4PrimaryGeneratorMessenger() 
+TG4PrimaryGeneratorMessenger::~TG4PrimaryGeneratorMessenger()
 {
 /// Destructor
 
@@ -53,7 +53,7 @@ TG4PrimaryGeneratorMessenger::~TG4PrimaryGeneratorMessenger()
 
 //_____________________________________________________________________________
 void TG4PrimaryGeneratorMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
-{ 
+{
 /// Apply command to the associated object.
 
   if (command == fSkipUnknownParticlesCmd) {

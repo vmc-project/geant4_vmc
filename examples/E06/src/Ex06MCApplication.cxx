@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file Ex06MCApplication.cxx
-/// \brief Implementation of the Ex06MCApplication class 
+/// \brief Implementation of the Ex06MCApplication class
 ///
 /// Geant4 ExampleN06 adapted to Virtual Monte Carlo
 ///
@@ -37,7 +37,7 @@ ClassImp(Ex06MCApplication)
 /// \endcond
 
 //_____________________________________________________________________________
-Ex06MCApplication::Ex06MCApplication(const char *name, const char *title) 
+Ex06MCApplication::Ex06MCApplication(const char *name, const char *title)
   : TVirtualMCApplication(name,title),
     fGammaCounter(0),
     fFeedbackCounter(0),
@@ -53,18 +53,18 @@ Ex06MCApplication::Ex06MCApplication(const char *name, const char *title)
     fIsMaster(kTRUE)
 {
 /// Standard constructor
-/// \param name   The MC application name 
+/// \param name   The MC application name
 /// \param title  The MC application description
 
   // Create a user stack
   fStack = new Ex03MCStack(1000);
-  
+
   // create magnetic field (with zero value)
-  fMagField = new TGeoUniformMagField(); 
+  fMagField = new TGeoUniformMagField();
 
   // Create detector construction
   fDetConstruction = new Ex06DetectorConstruction();
-  
+
   // Create a primary generator
   fPrimaryGenerator = new Ex06PrimaryGenerator(fStack);
 }
@@ -115,15 +115,15 @@ Ex06MCApplication::Ex06MCApplication()
     fOldGeometry(kFALSE),
     fTestStackPopper(kFALSE),
     fIsMaster(kTRUE)
-{    
+{
 /// Default constructor
 }
 
 //_____________________________________________________________________________
-Ex06MCApplication::~Ex06MCApplication() 
+Ex06MCApplication::~Ex06MCApplication()
 {
-/// Destructor  
-  
+/// Destructor
+
 
   //cout << "Ex06MCApplication::~Ex06MCApplication " << this << endl;
 
@@ -142,10 +142,10 @@ Ex06MCApplication::~Ex06MCApplication()
 
 //_____________________________________________________________________________
 void Ex06MCApplication::InitMC(const char* setup)
-{    
+{
 /// Initialize MC.
 /// The selection of the concrete MC is done in the macro.
-/// \param setup The name of the configuration macro 
+/// \param setup The name of the configuration macro
 
   fVerbose.InitMC();
 
@@ -156,17 +156,17 @@ void Ex06MCApplication::InitMC(const char* setup)
       Fatal("InitMC",
             "Processing Config() has failed. (No MC is instantiated.)");
     }
-  }  
- 
+  }
+
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);
   gMC->Init();
-  gMC->BuildPhysics(); 
+  gMC->BuildPhysics();
 }
 
 //_____________________________________________________________________________
 void Ex06MCApplication::RunMC(Int_t nofEvents)
-{    
+{
 /// Run MC.
 /// \param nofEvents Number of events to be processed
 
@@ -204,60 +204,60 @@ void Ex06MCApplication::Merge(TVirtualMCApplication* localMCApplication)
   fRunGammaCounter += ex06LocalMCApplication->fRunGammaCounter;
   fRunFeedbackCounter += ex06LocalMCApplication->fRunFeedbackCounter;
 }
- 
+
 //_____________________________________________________________________________
 void Ex06MCApplication::ConstructGeometry()
-{    
+{
 /// Construct geometry using detector contruction class.
 /// The detector contruction class is using TGeo functions or
 /// TVirtualMC functions (if oldGeometry is selected)
 
   fVerbose.ConstructGeometry();
 
-  // Cannot use Root geometry if not supported with 
+  // Cannot use Root geometry if not supported with
   // selected MC
   if ( !fOldGeometry && ! gMC->IsRootGeometrySupported() ) {
     cerr << "Selected MC does not support TGeo geometry"<< endl;
     cerr << "Exiting program"<< endl;
     exit(1);
-  } 
+  }
 
   if ( ! fOldGeometry ) {
     cout << "Geometry will be defined via TGeo" << endl;
-    fDetConstruction->ConstructMaterials();  
-    fDetConstruction->ConstructGeometry();  
+    fDetConstruction->ConstructMaterials();
+    fDetConstruction->ConstructGeometry();
   }
   else {
     cout << "Geometry will be defined via VMC" << endl;
     Ex06DetectorConstructionOld detConstructionOld;
-    detConstructionOld.ConstructMaterials(); 
+    detConstructionOld.ConstructMaterials();
     detConstructionOld.ConstructGeometry();
-  }    
+  }
 }
 
 //_____________________________________________________________________________
 void Ex06MCApplication::ConstructOpGeometry()
-{    
+{
 /// Define material optical properties
 
   fVerbose.ConstructGeometry();
 
-  fDetConstruction->ConstructOpGeometry();  
+  fDetConstruction->ConstructOpGeometry();
 }
 
 //_____________________________________________________________________________
 void Ex06MCApplication::InitGeometry()
-{    
+{
 /// Initialize geometry
-  
+
   fVerbose.InitGeometry();
 }
 
 //_____________________________________________________________________________
 void Ex06MCApplication::GeneratePrimaries()
-{    
+{
 /// Fill the user stack (derived from TVirtualMCStack) with primary particles.
-  
+
   fVerbose.GeneratePrimaries();
 
   fPrimaryGenerator->GeneratePrimaries();
@@ -265,7 +265,7 @@ void Ex06MCApplication::GeneratePrimaries()
 
 //_____________________________________________________________________________
 void Ex06MCApplication::BeginEvent()
-{    
+{
 /// User actions at beginning of event
 
   fVerbose.BeginEvent();
@@ -276,7 +276,7 @@ void Ex06MCApplication::BeginEvent()
 
 //_____________________________________________________________________________
 void Ex06MCApplication::BeginPrimary()
-{    
+{
 /// User actions at beginning of a primary track
 
   fVerbose.BeginPrimary();
@@ -284,11 +284,11 @@ void Ex06MCApplication::BeginPrimary()
 
 //_____________________________________________________________________________
 void Ex06MCApplication::PreTrack()
-{    
+{
 /// User actions at beginning of each track
 
   fVerbose.PreTrack();
-  
+
   if (gMC->TrackPid() == 50000050 ) {
     fGammaCounter++;
     fRunGammaCounter++;
@@ -301,7 +301,7 @@ void Ex06MCApplication::PreTrack()
 
 //_____________________________________________________________________________
 void Ex06MCApplication::Stepping()
-{    
+{
 /// User actions at each step
 
   fVerbose.Stepping();
@@ -379,7 +379,7 @@ void Ex06MCApplication::GenerateFeedback(Int_t nofPhotons,
 
 //_____________________________________________________________________________
 void Ex06MCApplication::PostTrack()
-{    
+{
 /// User actions after finishing of each track
 
   fVerbose.PostTrack();
@@ -387,7 +387,7 @@ void Ex06MCApplication::PostTrack()
 
 //_____________________________________________________________________________
 void Ex06MCApplication::FinishPrimary()
-{    
+{
 /// User actions after finishing of a primary track
 
   fVerbose.FinishPrimary();
@@ -395,17 +395,17 @@ void Ex06MCApplication::FinishPrimary()
 
 //_____________________________________________________________________________
 void Ex06MCApplication::FinishEvent()
-{    
+{
 /// User actions after finishing of an event
 
   fVerbose.FinishEvent();
-  
+
   // Geant3 + TGeo
   // (use TGeo functions for visualization)
   if ( TString(gMC->GetName()) == "TGeant3TGeo") {
-  
-     // Draw volume 
-     gGeoManager->SetVisOption(0);	 
+
+     // Draw volume
+     gGeoManager->SetVisOption(0);
      gGeoManager->SetTopVisible();
      gGeoManager->GetTopVolume()->Draw();
 
@@ -415,10 +415,10 @@ void Ex06MCApplication::FinishEvent()
      if ( gGeoManager->GetListOfTracks() &&
           gGeoManager->GetTrack(0) &&
         ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
-       
+
        gGeoManager->DrawTracks("/*");  // this means all tracks
-    }	  
-  }    
+    }
+  }
 
   cout << "Number of optical photons produced in this event : "
        << fGammaCounter << endl;
@@ -428,7 +428,7 @@ void Ex06MCApplication::FinishEvent()
          << fFeedbackCounter << endl;
   }
   fStack->Reset();
-} 
+}
 
 //_____________________________________________________________________________
 void Ex06MCApplication::FinishRun()

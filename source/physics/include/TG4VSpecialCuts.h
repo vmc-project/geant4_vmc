@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4VSpecialCuts.h
-/// \brief Definition of the TG4VSpecialCuts class 
+/// \brief Definition of the TG4VSpecialCuts class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -25,8 +25,8 @@ class G4Track;
 class G4LossTableManager;
 
 /// \ingroup physics
-/// \brief Abstract base class for a special process that activates 
-/// kinetic energy cuts.                                                     
+/// \brief Abstract base class for a special process that activates
+/// kinetic energy cuts.
 ///
 /// The pure virtual functions GetMinEkine have to be implemented
 /// by derived classes specific for each particle type
@@ -44,14 +44,14 @@ class TG4VSpecialCuts: public G4VProcess
                      /// Return the kinetic energy limit
     virtual G4double GetMinEkine(const TG4Limits& limits,
                                  const G4Track& track) const = 0;
-    
+
     virtual G4double PostStepGetPhysicalInteractionLength(
                          const G4Track& track, G4double previousStepSize,
                          G4ForceCondition* condition);
 
-    virtual G4VParticleChange* PostStepDoIt(const G4Track& track, 
+    virtual G4VParticleChange* PostStepDoIt(const G4Track& track,
                          const G4Step& step);
-                            
+
                      /// Not implemented
     virtual G4double AlongStepGetPhysicalInteractionLength(
                          const G4Track&, G4double, G4double, G4double&,
@@ -66,7 +66,7 @@ class TG4VSpecialCuts: public G4VProcess
     virtual G4double AtRestGetPhysicalInteractionLength(const G4Track&,
                          G4ForceCondition* )
                          { return -1.0; }
-                            
+
                      /// Not implemented
     virtual G4VParticleChange* AtRestDoIt(
                          const G4Track&, const G4Step&)
@@ -74,7 +74,7 @@ class TG4VSpecialCuts: public G4VProcess
 
   private:
     /// Not implemented
-    TG4VSpecialCuts();                   
+    TG4VSpecialCuts();
     /// Not implemented
     TG4VSpecialCuts(const TG4VSpecialCuts& right);
     /// Not implemented

@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file MCApplication.h
-/// \brief Definition of the MCApplication class 
+/// \brief Definition of the MCApplication class
 ///
 /// Geant4 Monopole example adapted to Virtual Monte Carlo
 ///
@@ -43,19 +43,19 @@ class MCApplication : public TVirtualMCApplication
     MCApplication(const char *name, const char *title);
     MCApplication();
     virtual ~MCApplication();
-  
+
     // static access method
-    static MCApplication* Instance(); 
+    static MCApplication* Instance();
 
     // methods
     void InitMC(const char *setup);
     void RunMC(Int_t nofEvents);
     void FinishRun();
-            
-    // virtual TVirtualMCApplication* CloneForWorker() const; 
-    // virtual void InitForWorker() const; 
+
+    // virtual TVirtualMCApplication* CloneForWorker() const;
+    // virtual void InitForWorker() const;
     // virtual void FinishWorkerRun() const
-    
+
     virtual void ConstructGeometry();
     virtual void InitGeometry();
     virtual void GeneratePrimaries();
@@ -71,7 +71,7 @@ class MCApplication : public TVirtualMCApplication
 
     DetectorConstruction* GetDetectorConstruction() const;
 
-  private:  
+  private:
     // methods
     MCApplication(const MCApplication& origin);
     void  RegisterStack() const;
@@ -96,11 +96,11 @@ class MCApplication : public TVirtualMCApplication
 
 /// \return The MC application instance
 inline MCApplication* MCApplication::Instance()
-{ 
-  return (MCApplication*)(TVirtualMCApplication::Instance()); 
+{
+  return (MCApplication*)(TVirtualMCApplication::Instance());
 }
 
-/// \return the detector construction 
+/// \return the detector construction
 inline DetectorConstruction* MCApplication::GetDetectorConstruction() const
 {
   return fDetConstruction;

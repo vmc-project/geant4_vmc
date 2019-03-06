@@ -28,16 +28,16 @@ Ex03PostDetConstruction::Ex03PostDetConstruction()
 
 //_____________________________________________________________________________
 Ex03PostDetConstruction::~Ex03PostDetConstruction()
-{ 
+{
 }
 
 //_____________________________________________________________________________
 void Ex03PostDetConstruction::Construct()
-{ 
+{
   // Create "user" equation of motion;
-  // G4Mag_UsualEqRhs eqution and G4NystromRK4 stepper should be replaced with users 
+  // G4Mag_UsualEqRhs eqution and G4NystromRK4 stepper should be replaced with users
   // own objects
-  G4cout << "Create user defined equation of motion and stepper" << G4endl; 
+  G4cout << "Create user defined equation of motion and stepper" << G4endl;
   G4Mag_EqRhs* equation = new G4Mag_UsualEqRhs(0);
   G4MagIntegratorStepper* stepper = new G4NystromRK4(equation);
 

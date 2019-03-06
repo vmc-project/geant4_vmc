@@ -31,7 +31,7 @@
 int main(int argc, char** argv)
 {
   // Initialize Root threading.
-  // (Multi-threading is triggered automatically if Geant4 was built 
+  // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
    TThread::Initialize();
@@ -39,13 +39,13 @@ int main(int argc, char** argv)
 #endif
 
   // Create MC application (thread local)
-  VMC::ExGarfield::MCApplication* appl 
-    =  new VMC::ExGarfield::MCApplication("ExampleExGarfield", 
+  VMC::ExGarfield::MCApplication* appl
+    =  new VMC::ExGarfield::MCApplication("ExampleExGarfield",
                                             "The exampleExGarfield MC application");
 
 #ifdef USE_GEANT4
-  // RunConfiguration for Geant4 
-  VMC::ExGarfield::RunConfiguration* runConfiguration 
+  // RunConfiguration for Geant4
+  VMC::ExGarfield::RunConfiguration* runConfiguration
     = new VMC::ExGarfield::RunConfiguration("geomRootToGeant4", "FTFP_BERT");
 
   // TGeant4
@@ -58,7 +58,7 @@ int main(int argc, char** argv)
   // + verbose level, global range cuts, etc.
   geant4->ProcessGeantMacro("g4config.in");
 #endif
-  
+
 #ifdef USE_GEANT3
   new TGeant3TGeo("C++ Interface to Geant3");
 #endif
@@ -77,4 +77,4 @@ int main(int argc, char** argv)
   appl->RunMC(5);
 
   delete appl;
-}  
+}

@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03RunConfiguration1.h 
-/// \brief Definition of the Ex03RunConfiguration1 class 
+/// \file Ex03RunConfiguration1.h
+/// \brief Definition of the Ex03RunConfiguration1 class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///

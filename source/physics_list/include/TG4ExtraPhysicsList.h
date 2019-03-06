@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4ExtraPhysicsList.h
-/// \brief Definition of the TG4ExtraPhysicsList class 
+/// \brief Definition of the TG4ExtraPhysicsList class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -30,12 +30,12 @@ class G4MonopolePhysics;
 /// \brief The physics list with extra physics builders
 ///
 /// The physics list is implemented as modular physics list
-/// with the following physics builders: 
+/// with the following physics builders:
 /// G4EmExtraPhysics,  G4OpticalPhysics and G4RadioactiveDecayPhysics
 ///
 /// The builders are activated according to the user selection.
 /// The EM extra physics processes are not activated by default.
-/// If extra builder is selected, they can be then switched on using 
+/// If extra builder is selected, they can be then switched on using
 /// the following Geant4 commands:
 /// - /physics_engine/tailor/SyncRadiation on
 /// - /physics_engine/tailor/GammaNuclear on
@@ -50,23 +50,23 @@ class TG4ExtraPhysicsList: public G4VModularPhysicsList,
     TG4ExtraPhysicsList(const G4String& selection,
                         const std::map<TString, Double_t>& parameters);
     virtual ~TG4ExtraPhysicsList();
-  
+
     // static methods
     static G4String AvailableSelections();
     static G4bool   IsAvailableSelection(const G4String& selection);
- 
+
     // methods
     virtual void  ConstructProcess();
 
                   /// No cuts are set here
     virtual void  SetCuts() {}
-    
+
     virtual G4int VerboseLevel() const;
     virtual void  VerboseLevel(G4int level);
 
     // set methods
     void SetRangeCut(G4double value);
-    
+
   protected:
     // static data members
     static const G4double  fgkDefaultCutValue; ///< default cut value

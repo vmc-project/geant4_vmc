@@ -50,7 +50,7 @@ class MCApplication : public TVirtualMCApplication
     MCApplication(const char* name,  const char* title);
     MCApplication();
     virtual ~MCApplication();
-  
+
     // methods
     void InitMC(const char *setup);
     void RunMC(Int_t nofEvents);
@@ -60,7 +60,7 @@ class MCApplication : public TVirtualMCApplication
     virtual TVirtualMCApplication* CloneForWorker() const;
     virtual void InitForWorker() const;
     virtual void FinishWorkerRun() const;
- 
+
     virtual void ConstructGeometry();
     virtual void InitGeometry();
     virtual void GeneratePrimaries();
@@ -71,7 +71,7 @@ class MCApplication : public TVirtualMCApplication
     virtual void PostTrack();
     virtual void FinishPrimary();
     virtual void FinishEvent();
-    
+
     // set methods
     void  SetVerboseLevel(Int_t verboseLevel);
 
@@ -79,13 +79,13 @@ class MCApplication : public TVirtualMCApplication
     DetectorConstruction* GetDetectorConstruction() const;
     SensitiveDetector*    GetCalorimeterSD() const;
     PrimaryGenerator*     GetPrimaryGenerator() const;
- 
+
   private:
     // methods
     MCApplication(const MCApplication& origin);
     void RegisterStack() const;
     void ComputeEventStatistics() const;
-  
+
     // data members
     mutable TMCRootManager* fRootManager; //!< Root manager
     Int_t                     fEventNo;          ///< Event counter
@@ -102,7 +102,7 @@ class MCApplication : public TVirtualMCApplication
 
 // inline functions
 
-/// Set verbosity 
+/// Set verbosity
 /// \param verboseLevel  The new verbose level value
 inline void  MCApplication::SetVerboseLevel(Int_t verboseLevel)
 { fVerbose.SetLevel(verboseLevel); }

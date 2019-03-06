@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01DriftChamberHit.cxx 
-/// \brief Implementation of the A01DriftChamberHit class 
+/// \file A01DriftChamberHit.cxx
+/// \brief Implementation of the A01DriftChamberHit class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo
 ///
@@ -26,7 +26,7 @@ ClassImp(A01DriftChamberHit)
 /// \endcond
 
 //_____________________________________________________________________________
-A01DriftChamberHit::A01DriftChamberHit(Int_t z) 
+A01DriftChamberHit::A01DriftChamberHit(Int_t z)
   : TObject(),
     fLayerID(z),
     fTime(0.),
@@ -38,7 +38,7 @@ A01DriftChamberHit::A01DriftChamberHit(Int_t z)
 }
 
 //_____________________________________________________________________________
-A01DriftChamberHit::A01DriftChamberHit() 
+A01DriftChamberHit::A01DriftChamberHit()
   : TObject(),
     fLayerID(-1),
     fTime(0.),
@@ -49,7 +49,7 @@ A01DriftChamberHit::A01DriftChamberHit()
 }
 
 //_____________________________________________________________________________
-A01DriftChamberHit::~A01DriftChamberHit() 
+A01DriftChamberHit::~A01DriftChamberHit()
 {
 /// Destructor
 }
@@ -59,8 +59,8 @@ void A01DriftChamberHit::Print(Option_t* /*option*/) const
 {
 /// Print hit info
 
-  cout << "  Layer[" << fLayerID << "] : time " << fTime*1e+09 
-       << " (nsec) --- local (x,y) " << fLocalPos.X()*10. << ", " << fLocalPos.Y()*10 
+  cout << "  Layer[" << fLayerID << "] : time " << fTime*1e+09
+       << " (nsec) --- local (x,y) " << fLocalPos.X()*10. << ", " << fLocalPos.Y()*10
        << " (mm)" << endl;
 }
 

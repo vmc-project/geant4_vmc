@@ -32,7 +32,7 @@ namespace {
 // static data, methods
 //
 
-                         Int_t  TMCRootManager::fgCounter = 0; 
+                         Int_t  TMCRootManager::fgCounter = 0;
                         Bool_t  TMCRootManager::fgDebug = false;
 TMCThreadLocal TMCRootManager*  TMCRootManager::fgInstance = 0;
 
@@ -42,14 +42,14 @@ TMCRootManager* TMCRootManager::Instance()
 /// \return The singleton instance.
 
   return fgInstance;
-}  
+}
 
 //
 // ctors, dtor
 //
 
 //_____________________________________________________________________________
-TMCRootManager::TMCRootManager(const char* projectName, 
+TMCRootManager::TMCRootManager(const char* projectName,
                                TMCRootManager::FileMode fileMode,
                                Int_t threadRank)
   : fFile(0),
@@ -61,7 +61,7 @@ TMCRootManager::TMCRootManager(const char* projectName,
 /// \param fileMode     Option for opening Root file (read or write mode)
 /// \param threadRank   The thread Id (-1 when sequential mode)
 
-  if ( fgDebug ) 
+  if ( fgDebug )
     printf("TMCRootManager::TMCRootManager %p \n", this);
 
   // lock mutex
@@ -78,7 +78,7 @@ TMCRootManager::TMCRootManager(const char* projectName,
       Fatal("TMCRootManager",
             "Attempt to create two instances of singleton.");
     return;
-  }  
+  }
 
   fgInstance = this;
 
@@ -88,16 +88,16 @@ TMCRootManager::TMCRootManager(const char* projectName,
   // unlock mutex
   lk.unlock();
 
-  if ( fgDebug ) 
+  if ( fgDebug )
     printf("Done TMCRootManagerMT::TMCRootManagerMT %p \n", this);
 }
 
 //_____________________________________________________________________________
-TMCRootManager::~TMCRootManager() 
+TMCRootManager::~TMCRootManager()
 {
 /// Destructor
 
-  if ( fgDebug ) 
+  if ( fgDebug )
     printf("TMCRootManager::~TMCRootManager %p \n", this);
 
   // lock mutex
@@ -111,7 +111,7 @@ TMCRootManager::~TMCRootManager()
   // unlock mutex
   lk.unlock();
 
-  if ( fgDebug ) 
+  if ( fgDebug )
     printf("Done TMCRootManager::~TMCRootManager %p \n", this);
 }
 
@@ -120,14 +120,14 @@ TMCRootManager::~TMCRootManager()
 //
 
 //_____________________________________________________________________________
-void TMCRootManager::OpenFile(const char* projectName, FileMode fileMode, 
+void TMCRootManager::OpenFile(const char* projectName, FileMode fileMode,
                               Int_t threadRank)
 {
-  TString fileName(projectName); 
+  TString fileName(projectName);
   if ( threadRank >= 0 ) {
-    fileName += "_";  
+    fileName += "_";
     fileName += threadRank;
-  }  
+  }
   fileName += ".root";
 
   TString treeTitle(projectName);
@@ -138,20 +138,20 @@ void TMCRootManager::OpenFile(const char* projectName, FileMode fileMode,
       fFile = new TFile(fileName);
       fTree = (TTree*) fFile->Get(projectName);
       break;
-      
-    case TMCRootManager::kWrite:  
-      if ( fgDebug ) 
+
+    case TMCRootManager::kWrite:
+      if ( fgDebug )
         printf("Going to create Root file \n");
       fFile = new TFile(fileName, "recreate");
-      if ( fgDebug ) 
+      if ( fgDebug )
         printf("Done: file %p \n", fFile);
 
-      if ( fgDebug ) 
+      if ( fgDebug )
         printf("Going to create TTree \n");
       fTree = new TTree(projectName, treeTitle);
-      if ( fgDebug ) 
+      if ( fgDebug )
         printf("Done: TTree %p \n", fTree);
-      ;;  
+      ;;
   }
 }
 
@@ -160,7 +160,7 @@ void TMCRootManager::OpenFile(const char* projectName, FileMode fileMode,
 //
 
 //_____________________________________________________________________________
-void  TMCRootManager::Register(const char* name, const char* className, 
+void  TMCRootManager::Register(const char* name, const char* className,
                                 void* objAddress)
 {
 /// Create a branch and associates it with the given address.
@@ -169,14 +169,14 @@ void  TMCRootManager::Register(const char* name, const char* className,
 /// \param objAddress The object address
 
   fFile->cd();
-  if ( ! fTree->GetBranch(name) ) 
+  if ( ! fTree->GetBranch(name) )
     fTree->Branch(name, className, objAddress, 32000, 99);
-  else  
+  else
     fTree->GetBranch(name)->SetAddress(objAddress);
 }
 
 //_____________________________________________________________________________
-void  TMCRootManager::Register(const char* name, const char* className, 
+void  TMCRootManager::Register(const char* name, const char* className,
                                 const void* objAddress)
 {
 /// Create a branch and associates it with the given address.
@@ -194,7 +194,7 @@ void  TMCRootManager::Fill()
 
   fFile->cd();
   fTree->Fill();
-}  
+}
 
 //_____________________________________________________________________________
 void TMCRootManager:: WriteAll()
@@ -203,7 +203,7 @@ void TMCRootManager:: WriteAll()
 
   fFile->cd();
   fFile->Write();
-}  
+}
 
 //_____________________________________________________________________________
 void TMCRootManager::Close()
@@ -213,21 +213,21 @@ void TMCRootManager::Close()
   if ( fIsClosed ) {
     Error("Close", "The file was already closed.");
     return;
-  }  
-    
+  }
+
   fFile->cd();
   fFile->Close();
   fIsClosed = true;
-}  
+}
 
 //_____________________________________________________________________________
 void TMCRootManager:: WriteAndClose()
 {
 /// Write the Root tree in the file and close the file
-  
+
   WriteAll();
   Close();
-}  
+}
 
 //_____________________________________________________________________________
 void  TMCRootManager::ReadEvent(Int_t i)

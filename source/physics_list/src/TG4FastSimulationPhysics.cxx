@@ -73,7 +73,7 @@ void TG4FastSimulationPhysics::UpdateRegions(
 
   if ( VerboseLevel() > 1 ) {
     G4cout << "TG4FastSimulationPhysics::UpdateRegions" << G4endl;
-  }        
+  }
 
   // Process fast models configurations
   std::vector<TG4ModelConfiguration*>::const_iterator it;
@@ -134,7 +134,7 @@ void TG4FastSimulationPhysics::UpdateRegions(
           G4cout << "creating G4FastSimulationManager for the region" << G4endl;
         }
         // TO DO: CHECK THIS
-        G4bool isUnique = false; 
+        G4bool isUnique = false;
         fastSimulationManager = new G4FastSimulationManager(region, isUnique);
       }
       fastSimulationManager->AddFastSimulationModel(fastSimulationModel);
@@ -143,7 +143,7 @@ void TG4FastSimulationPhysics::UpdateRegions(
 }
 
 //_____________________________________________________________________________
-G4FastSimulationManagerProcess* 
+G4FastSimulationManagerProcess*
 TG4FastSimulationPhysics::GetOrCreateFastSimulationProcess(const G4String& modelName)
 {
 /// Get thread-local fast simulation process and create one if it does
@@ -179,9 +179,9 @@ void TG4FastSimulationPhysics::AddFastSimulationProcess(
 
   if ( VerboseLevel() > 1 ) {
     G4cout << "TG4FastSimulationPhysics::AddFastSimulationProcess" << G4endl;
-  }  
+  }
 
-  // Process fast models configurations    
+  // Process fast models configurations
   std::vector<TG4ModelConfiguration*>::const_iterator it;
   for ( it = models.begin(); it != models.end(); it++ ) {
 
@@ -191,16 +191,16 @@ void TG4FastSimulationPhysics::AddFastSimulationProcess(
 
 
     // Get or create fast simulation process
-    G4FastSimulationManagerProcess* fastSimulationProcess 
+    G4FastSimulationManagerProcess* fastSimulationProcess
       = GetOrCreateFastSimulationProcess(modelName);
- 
-    // Add fast simulation process to selected particles 
+
+    // Add fast simulation process to selected particles
     auto aParticleIterator = GetParticleIterator();
     aParticleIterator->reset();
     while ((*aParticleIterator)()) {
       G4ParticleDefinition* particle = aParticleIterator->value();
       G4String particleName = particle->GetParticleName();
-      
+
       // skip particles which are not in selection
       if ( particles != "all" &&
            ( ! (*it)->HasParticle(particleName) ) ) {
@@ -215,7 +215,7 @@ void TG4FastSimulationPhysics::AddFastSimulationProcess(
                << " to particle " <<  particle->GetParticleName() << G4endl;
       }
 
-      // Set the process to the particle process manager     
+      // Set the process to the particle process manager
       particle->GetProcessManager()->AddDiscreteProcess(fastSimulationProcess);
     }
   }
@@ -239,14 +239,14 @@ void TG4FastSimulationPhysics::ConstructProcess()
   }
 
   // Get model configurations vector from geometry manager
-  TG4ModelConfigurationManager* fastModelsManager 
+  TG4ModelConfigurationManager* fastModelsManager
     = TG4GeometryManager::Instance()->GetFastModelsManager();
 
-  const std::vector<TG4ModelConfiguration*>& models 
+  const std::vector<TG4ModelConfiguration*>& models
     = fastModelsManager->GetVector();
 
 
-  // Do nothing if no models were set  
+  // Do nothing if no models were set
   if ( models.size() == 0 ) {
     if ( VerboseLevel() > 1 ) {
       G4cout << "No fast simulation models are defined." << G4endl;
@@ -275,7 +275,7 @@ void TG4FastSimulationPhysics::ConstructProcess()
 //
 
 //_____________________________________________________________________________
-void TG4FastSimulationPhysics::SetUserFastSimulation(TG4VUserFastSimulation* fastSimulation) 
+void TG4FastSimulationPhysics::SetUserFastSimulation(TG4VUserFastSimulation* fastSimulation)
 {
 /// Set user fast simulation class.
 /// Print a warning if fUserFastSimulation is already defined and ignore setting.

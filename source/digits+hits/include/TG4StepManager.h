@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4StepManager.h
-/// \brief Definition of the TG4StepManager class 
+/// \brief Definition of the TG4StepManager class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -42,7 +42,7 @@ class G4VTouchable;
 class TLorentzVector;
 
 /// \ingroup digits_hits
-/// \brief Geant4 implementation of the TVirtualMC interface methods                    
+/// \brief Geant4 implementation of the TVirtualMC interface methods
 /// for access to Geant4 at step level.
 ///
 /// The public methods that do not implement TVirtualMC methods
@@ -58,13 +58,13 @@ class TG4StepManager
 
     // static access method
     static TG4StepManager* Instance();
-        
+
     // methods
     void LateInitialize();
     void StopTrack();
     void StopEvent();
     void StopRun();
-    
+
     // set methods
     void SetStep(G4Step* step, TG4StepStatus status);    // G4 specific
     void SetStep(G4Track* track, TG4StepStatus status);  // G4 specific
@@ -72,18 +72,18 @@ class TG4StepManager
     void SetSteppingManager(G4SteppingManager* manager); // G4 specific
     void SetMaxStep(Double_t step);
     void SetMaxStepBack();                               // G4 specific
-    void SetMaxNStep(Int_t maxNofSteps); 
+    void SetMaxNStep(Int_t maxNofSteps);
     void SetCollectTracks(Bool_t collectTracks);
     void ForceDecayTime(Float_t pdg);
-    
+
     // get methods
     G4Track* GetTrack() const;                            // G4 specific
     G4Step*  GetStep() const;                             // G4 specific
     TG4StepStatus GetStepStatus() const;                  // G4 specific
     TG4Limits*    GetLimitsModifiedOnFly() const;         // G4 specific
     Bool_t   IsCollectTracks() const;
-        
-        // tracking volume(s) 
+
+        // tracking volume(s)
     G4VPhysicalVolume* GetCurrentPhysicalVolume() const;  // G4 specific
     TG4Limits* GetCurrentLimits() const;  // G4 specific
     Int_t CurrentVolID(Int_t& copyNo) const;
@@ -93,7 +93,7 @@ class TG4StepManager
     const char* CurrentVolPath();
     Bool_t CurrentBoundaryNormal(
                     Double_t &x, Double_t &y, Double_t &z) const;
-    Int_t  CurrentMaterial(Float_t &a, Float_t &z, Float_t &dens, 
+    Int_t  CurrentMaterial(Float_t &a, Float_t &z, Float_t &dens,
                     Float_t &radl, Float_t &absl) const;
     Int_t CurrentMedium() const;
     void Gmtod(Double_t* xm, Double_t* xd, Int_t iflag);
@@ -103,19 +103,19 @@ class TG4StepManager
     Double_t MaxStep() const;
     Int_t GetMaxNStep() const;
 
-        // tracking particle 
+        // tracking particle
         // dynamic properties
     void TrackPosition(TLorentzVector& position) const;
     void TrackPosition(Double_t& x, Double_t& y, Double_t& z) const;
     void TrackPosition(Float_t& x, Float_t& y, Float_t& z) const;
     void TrackMomentum(TLorentzVector& momentum) const;
-    void TrackMomentum(Double_t& px, Double_t& py, Double_t&pz, 
+    void TrackMomentum(Double_t& px, Double_t& py, Double_t&pz,
                        Double_t& etot) const;
     void TrackMomentum(Float_t& px, Float_t& py, Float_t&pz,
                        Float_t& etot) const;
-    Double_t TrackStep() const;  
-    Double_t TrackLength() const;   
-    Double_t TrackTime() const;  
+    Double_t TrackStep() const;
+    Double_t TrackLength() const;
+    Double_t TrackTime() const;
     Double_t Edep() const;
     Double_t NIELEdep() const;
         // static properties
@@ -137,8 +137,8 @@ class TG4StepManager
         // secondaries
     Int_t NSecondaries() const;
     void GetSecondary(Int_t index, Int_t& particleId,
-                      TLorentzVector& position, TLorentzVector& momentum);      
-    TMCProcess ProdProcess(Int_t isec) const; 
+                      TLorentzVector& position, TLorentzVector& momentum);
+    TMCProcess ProdProcess(Int_t isec) const;
     Int_t StepProcesses(TArrayI &proc) const;
 
   private:
@@ -152,9 +152,9 @@ class TG4StepManager
     void CheckStep(const G4String& method) const;
     void CheckGflashSpot(const G4String& method) const;
     void CheckSteppingManager() const;
-    void SetTLorentzVector(G4ThreeVector xyz, G4double t, 
-                           TLorentzVector& lv) const;    
-    const G4VTouchable* GetCurrentTouchable() const; 
+    void SetTLorentzVector(G4ThreeVector xyz, G4double t,
+                           TLorentzVector& lv) const;
+    const G4VTouchable* GetCurrentTouchable() const;
     G4VPhysicalVolume*  GetCurrentOffPhysicalVolume(
                            G4int off, G4bool warn = false) const;
 
@@ -163,30 +163,30 @@ class TG4StepManager
 
     //
     // data members
-    
+
     /// current track
     G4Track*            fTrack;
-    
+
     /// current step
     G4Step*             fStep;
 
     /// current Gflash spot
     G4GFlashSpot*       fGflashSpot;
-    
-    /// \brief step status 
-    /// \details that decides whether track properties will be returned from 
+
+    /// \brief step status
+    /// \details that decides whether track properties will be returned from
     /// PreStepPoint or PostStepPoint
-    TG4StepStatus       fStepStatus; 
-    
+    TG4StepStatus       fStepStatus;
+
     /// \brief limits which step limit was modified during tracking
     TG4Limits*          fLimitsModifiedOnFly;
-    
-    /// G4SteppingManager  
+
+    /// G4SteppingManager
     G4SteppingManager*  fSteppingManager;
 
     /// buffer for current volume name or path
     mutable G4String    fNameBuffer;
-    
+
     /// volume copy number offset
     G4int               fCopyNoOffset;
 
@@ -199,18 +199,18 @@ class TG4StepManager
 
 // inline methods
 
-inline TG4StepManager* TG4StepManager::Instance() { 
+inline TG4StepManager* TG4StepManager::Instance() {
   /// Return this instance.
   return fgInstance;
 }
 
-inline void TG4StepManager::SetStep(G4Step* step, TG4StepStatus status) { 
-  /// Set current step and step status. 
+inline void TG4StepManager::SetStep(G4Step* step, TG4StepStatus status) {
+  /// Set current step and step status.
   fTrack = step->GetTrack(); fStep = step; fStepStatus = status; fGflashSpot = 0;
 }
 
-inline void TG4StepManager::SetStep(G4Track* track, TG4StepStatus status) { 
-  /// Set current track and step status. 
+inline void TG4StepManager::SetStep(G4Track* track, TG4StepStatus status) {
+  /// Set current track and step status.
   fTrack = track; fStep = 0; fStepStatus = status;  fGflashSpot = 0;
 }
 
@@ -220,9 +220,9 @@ inline void TG4StepManager::SetStep(G4GFlashSpot* gflashSpot, TG4StepStatus stat
   fStep = 0; fStepStatus = status;  fGflashSpot = gflashSpot;
 }
 
-inline void TG4StepManager::SetSteppingManager(G4SteppingManager* manager) { 
-  /// Set G4 stepping manger. 
-  fSteppingManager = manager; 
+inline void TG4StepManager::SetSteppingManager(G4SteppingManager* manager) {
+  /// Set G4 stepping manger.
+  fSteppingManager = manager;
 
   /// Set navigator !!!
   //G4cout << "SetNavigator:"
@@ -233,25 +233,25 @@ inline void TG4StepManager::SetSteppingManager(G4SteppingManager* manager) {
 		   ->GetNavigatorForTracking());
 }
 
-inline G4Track* TG4StepManager::GetTrack() const { 
-  /// Return current track manger. 
-  return fTrack; 
+inline G4Track* TG4StepManager::GetTrack() const {
+  /// Return current track manger.
+  return fTrack;
 }
 
-inline G4Step* TG4StepManager::GetStep() const { 
-  /// Return current step. 
-  return fStep; 
+inline G4Step* TG4StepManager::GetStep() const {
+  /// Return current step.
+  return fStep;
 }
 
-inline TG4StepStatus TG4StepManager::GetStepStatus() const { 
-  /// Return current step status. 
-  return fStepStatus; 
+inline TG4StepStatus TG4StepManager::GetStepStatus() const {
+  /// Return current step status.
+  return fStepStatus;
 }
 
 inline TG4Limits* TG4StepManager::GetLimitsModifiedOnFly() const {
   /// Return limits that has been modified on fly
   return fLimitsModifiedOnFly;
 }
-  
+
 #endif //TG4_STEP_MANAGER_H
 

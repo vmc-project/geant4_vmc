@@ -13,11 +13,11 @@
 
 #include "../macro/g3libs.C"
 
-void load_g3() 
+void load_g3()
 {
   // Load Geant3 + VMC libraries
   g3libs();
-  
+
   // Load this example library
   gSystem->Load("libvmc_E01");
-}  
+}

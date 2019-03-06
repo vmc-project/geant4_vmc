@@ -15,9 +15,9 @@
 
 void test_A01_1(const TString& configMacro, Bool_t oldGeometry)
 {
-/// Macro function for testing example A01 
-/// \param configMacro  configuration macro loaded in initialization 
-/// \param oldGeometry  if true - geometry is defined via VMC, otherwise 
+/// Macro function for testing example A01
+/// \param configMacro  configuration macro loaded in initialization
+/// \param oldGeometry  if true - geometry is defined via VMC, otherwise
 ///                     via TGeo
 
   // Create application if it does not yet exist
@@ -25,10 +25,10 @@ void test_A01_1(const TString& configMacro, Bool_t oldGeometry)
   if ( ! TVirtualMCApplication::Instance() ) {
     new A01MCApplication("ExampleA01", "The exampleA01 MC application");
     needDelete = kTRUE;
-  }  
+  }
 
   // MC application
-  A01MCApplication* appl 
+  A01MCApplication* appl
     = (A01MCApplication*)TVirtualMCApplication::Instance();
   appl->GetPrimaryGenerator()->SetNofPrimaries(100);
   appl->SetWriteStack(true);
@@ -37,10 +37,10 @@ void test_A01_1(const TString& configMacro, Bool_t oldGeometry)
   appl->InitMC(configMacro);
 
   TStopwatch timer;
-  timer.Start();  
+  timer.Start();
   appl->RunMC(5);
   timer.Stop();
   timer.Print();
-  
+
   if ( needDelete ) delete appl;
-}  
+}

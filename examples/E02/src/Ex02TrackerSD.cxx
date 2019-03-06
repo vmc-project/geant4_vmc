@@ -7,12 +7,12 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex02TrackerSD.cxx 
-/// \brief Implementation of the Ex02TrackerSD class 
+/// \file Ex02TrackerSD.cxx
+/// \brief Implementation of the Ex02TrackerSD class
 ///
 /// Geant4 ExampleN02 adapted to Virtual Monte Carlo \n
 /// Id: ExN02TrackerSD.cc,v 1.6 2002/01/09 17:24:10 ranjard Exp \n
-/// GEANT4 tag Name: geant4-04-00-patch-02 
+/// GEANT4 tag Name: geant4-04-00-patch-02
 ///
 /// \date 21/04/2002
 /// \author I. Hrivnacova; IPN, Orsay
@@ -96,7 +96,7 @@ void Ex02TrackerSD::Initialize()
 {
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
-  
+
   static __thread Bool_t registered = false;
   if ( ! registered ) {
     //cout << "... creating TClonesArray" << endl;
@@ -107,7 +107,7 @@ void Ex02TrackerSD::Initialize()
     // Register to Root IO only if RootManager is instantiated
     if ( TMCRootManager::Instance() ) Register();
     registered = true;
-  }   
+  }
 
   fSensitiveVolumeID = gMC->VolId("CHMB");
 }
@@ -125,7 +125,7 @@ Bool_t Ex02TrackerSD::ProcessHits()
   Double_t edep = gMC->Edep();
 
   if (edep==0.) return false;
-  
+
   Ex02TrackerHit* newHit = AddHit();
 
   // Track ID
@@ -141,7 +141,7 @@ Bool_t Ex02TrackerSD::ProcessHits()
   TLorentzVector pos;
   gMC->TrackPosition(pos);
   newHit->SetPos (TVector3(pos.X(), pos.Y(), pos.Z()));
-  
+
   //newHit->Print();
   //newHit->Draw();
 
@@ -155,16 +155,16 @@ void Ex02TrackerSD::EndOfEvent()
 /// and delete hits afterwards.
 
   if (fVerboseLevel>0)  Print();
-    
+
   // Reset hits collection
-  fTrackerCollection->Clear();  
+  fTrackerCollection->Clear();
 }
 
 //_____________________________________________________________________________
 void Ex02TrackerSD::Register()
 {
 /// Register the hits collection in the Root manager.
-  
+
   TMCRootManager::Instance()
     ->Register("hits", "TClonesArray", &fTrackerCollection);
 }
@@ -173,11 +173,11 @@ void Ex02TrackerSD::Register()
 void Ex02TrackerSD::Print(const Option_t* /*option*/) const
 {
 /// Print the hits collection.
-  
+
    Int_t nofHits = fTrackerCollection->GetEntriesFast();
-     
-   cout << "\n-------->Hits Collection: in this event they are " << nofHits 
+
+   cout << "\n-------->Hits Collection: in this event they are " << nofHits
         << " hits in the tracker chambers: " << endl;
-	    
-   for (Int_t i=0; i<nofHits; i++) (*fTrackerCollection)[i]->Print();          
+
+   for (Int_t i=0; i<nofHits; i++) (*fTrackerCollection)[i]->Print();
 }

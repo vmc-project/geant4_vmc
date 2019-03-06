@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file Ex03RunConfiguration1.cxx
-/// \brief Implementation of the Ex03RunConfiguration1 class 
+/// \brief Implementation of the Ex03RunConfiguration1 class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
 ///
@@ -20,7 +20,7 @@
 //_____________________________________________________________________________
 Ex03RunConfiguration1::Ex03RunConfiguration1(const TString& physicsList,
                                              const TString& specialProcess)
-  : TG4RunConfiguration("geomGeant4", physicsList, specialProcess) 
+  : TG4RunConfiguration("geomGeant4", physicsList, specialProcess)
 {
 /// Standard constructor
 /// \param physicsList     Selection of physics
@@ -49,4 +49,4 @@ G4VUserDetectorConstruction*  Ex03RunConfiguration1::CreateDetectorConstruction(
 /// construction class from the Geant4 novice example N03 library.
 
   return new B4DetectorConstruction();
-}   
+}

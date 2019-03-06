@@ -8,16 +8,16 @@
 //-------------------------------------------------
 
 /// \file E03/set_vis.C
-/// \brief Macro for setting visualization for Example03 
+/// \brief Macro for setting visualization for Example03
 
 #include "TVirtualMC.h"
 
 void set_vis()
 {
-/// Macro for setting visualization for Example03 
+/// Macro for setting visualization for Example03
 
   if (TString(gMC->GetName()) == "TGeant4") {
     // Setting Geant4 visualization
    ((TGeant4*)gMC)->ProcessGeantMacro("g4vis.in");
-  }  
-}  
+  }
+}

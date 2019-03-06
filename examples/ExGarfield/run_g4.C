@@ -9,7 +9,7 @@
 
 /// \ingroup ExGarfield
 /// \file ExGarfield/run_g4.C
-/// \brief Macro for running Example ExGarfield with Geant4. 
+/// \brief Macro for running Example ExGarfield with Geant4.
 
 #include "TVirtualMC.h"
 
@@ -21,10 +21,10 @@ void run_g4(const TString& configMacro = "g4Config.C")
 /// Root interactive session
 /// Note that since Root 6 the libraries have to be loaded first
 /// via load_g4.C.
-/// \param configMacro configuration macro name, default \ref ExGarfield/g4Config.C 
+/// \param configMacro configuration macro name, default \ref ExGarfield/g4Config.C
 
   // MC application
-  VMC::ExGarfield::MCApplication* appl 
+  VMC::ExGarfield::MCApplication* appl
     =  new VMC::ExGarfield::MCApplication("ExampleExGarfield", "The example ExGarfield MC application");
   appl->InitMC(configMacro);
 
@@ -38,6 +38,6 @@ void run_g4(const TString& configMacro = "g4Config.C")
   //((TGeant4*)gMC)->StartGeantUI();
 
   appl->RunMC(5);
-  
+
   //delete appl;
-}  
+}

@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4OpticalPhysics.h
-/// \brief Definition of the TG4OpticalPhysics class 
+/// \brief Definition of the TG4OpticalPhysics class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -63,13 +63,13 @@ class TG4OpticalPhysics: public TG4VPhysicsConstructor
     TG4OpticalPhysics(const TG4OpticalPhysics& right);
     /// Not implemented
     TG4OpticalPhysics& operator=(const TG4OpticalPhysics& right);
-    
+
     // methods
     void PrintStatistics() const;
 
     //
     // static data members
-    
+
     /// Default value for processes verbose level
     static const G4int  fgkDefaultVerboseLevel;
 
@@ -78,42 +78,42 @@ class TG4OpticalPhysics: public TG4VPhysicsConstructor
 
     /// Default value for max change of beta per step
     static const G4double  fgkDefaultMaxBetaChange;
-          
+
     /// Default value for scintillation yield factor
     static const G4double  fgkDefaultYieldFactor;
-          
+
     /// Default value for optical surface model
     static const G4OpticalSurfaceModel  fgkDefaultSurfaceModel;
 
     //
     // data members
-    
+
     /// messenger
     TG4OpticalPhysicsMessenger  fMessenger;
-    
+
     /// The vector of optical processes
     std::vector<G4VProcess*>    fProcesses;
 
     /// The vector of processes activations
-    std::vector<G4bool>         fProcessActivation; 
-    
+    std::vector<G4bool>         fProcessActivation;
+
     /// The vector of processes verbose level
-    std::vector<G4int>          fProcessVerbose; 
-    
+    std::vector<G4int>          fProcessVerbose;
+
     /// max number of Cerenkov photons per step
-    G4int                       fMaxNumPhotons;   
+    G4int                       fMaxNumPhotons;
 
     /// max change of beta per step
-    G4double                    fMaxBetaChange;   
+    G4double                    fMaxBetaChange;
 
     /// scintillation yield factor
-    G4double                    fYieldFactor;   
+    G4double                    fYieldFactor;
 
     /// the optical surface model (glisur or unified)
-    G4OpticalSurfaceModel       fSurfaceModel;   
+    G4OpticalSurfaceModel       fSurfaceModel;
 
     /// option to track secondaries before finishing their parent track
-    G4bool                      fTrackSecondariesFirst;   
+    G4bool                      fTrackSecondariesFirst;
 };
 
 #endif //TG4_OPTICAL_PHYSICS_H

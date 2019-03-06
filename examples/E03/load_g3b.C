@@ -9,7 +9,7 @@
 
 /// \ingroup E03
 /// \file E03/load_g3.C
-/// \brief Macro for loading libraries to run Example03 with Geant3. 
+/// \brief Macro for loading libraries to run Example03 with Geant3.
 
 #include "../macro/g3libs.C"
 
@@ -21,4 +21,4 @@ void load_g3b()
   // Load this example library
   gSystem->Load("libmtroot");
   gSystem->Load("libvmc_E03b");
-}  
+}

@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4ActionInitialization.cxx
-/// \brief Implementation of the TG4ActionInitialization class 
+/// \brief Implementation of the TG4ActionInitialization class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -77,7 +77,7 @@ void TG4ActionInitialization::BuildForMaster() const
   //G4cout << "TG4ActionInitialization::BuildForMaster " << this << G4endl;
 
   G4UserRunAction* runAction = fRunConfiguration->CreateRunAction();
-  if ( runAction ) SetUserAction(runAction);  
+  if ( runAction ) SetUserAction(runAction);
 
   //G4cout << "TG4ActionInitialization::BuildForMaster end " << G4endl;
 }
@@ -189,7 +189,7 @@ void TG4ActionInitialization::Build() const
     G4cout << "### TG4SpecialControlsV2 constructed" << G4endl;
     TG4SpecialControlsV2* specialControls = new TG4SpecialControlsV2();
        // special controls are deleted in TG4SteppingAction
- 
+
     trackingAction->SetSpecialControls(specialControls);
     steppingAction->SetSpecialControls(specialControls);
   }

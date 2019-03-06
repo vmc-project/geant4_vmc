@@ -1,5 +1,5 @@
 #ifndef TG4_CROSS_SECTION_MESSENGER_H
-#define TG4_CROSS_SECTION_MESSENGER_H 
+#define TG4_CROSS_SECTION_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4CrossSectionMessenger.h
-/// \brief Definition of the TG4CrossSectionMessenger class 
+/// \brief Definition of the TG4CrossSectionMessenger class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -51,27 +51,27 @@ class TG4CrossSectionMessenger: public G4UImessenger
   public:
     TG4CrossSectionMessenger(TG4CrossSectionManager* crossSectionManager);
     virtual ~TG4CrossSectionMessenger();
-   
-    // methods 
+
+    // methods
     virtual void SetNewValue(G4UIcommand* command, G4String string);
-    
+
   private:
     /// Not implemented
-    TG4CrossSectionMessenger();  
+    TG4CrossSectionMessenger();
     /// Not implemented
     TG4CrossSectionMessenger(const TG4CrossSectionMessenger& right);
     /// Not implemented
     TG4CrossSectionMessenger& operator=(const TG4CrossSectionMessenger& right);
 
     // data members
-    TG4CrossSectionManager*  fCrossSectionManager; ///< associated class   
+    TG4CrossSectionManager*  fCrossSectionManager; ///< associated class
     G4UIdirectory*  fDirectory;  ///< command directory
 
     G4UIcmdWithABool*           fMakeHistogramsCmd; ///< command: makeHistograms
-    G4UIcmdWithAString*         fParticleCmd;   ///< command: setParticle 
-    G4UIcmdWithAString*         fElementCmd;    ///< command: setElement 
-    G4UIcmdWithAnInteger*       fNofBinsECmd;   ///< command: setNofBinsE 
-    G4UIcmdWithAnInteger*       fNofBinsPCmd;   ///< command: setNofBinsP 
+    G4UIcmdWithAString*         fParticleCmd;   ///< command: setParticle
+    G4UIcmdWithAString*         fElementCmd;    ///< command: setElement
+    G4UIcmdWithAnInteger*       fNofBinsECmd;   ///< command: setNofBinsE
+    G4UIcmdWithAnInteger*       fNofBinsPCmd;   ///< command: setNofBinsP
     G4UIcmdWithADoubleAndUnit*  fMinKinECmd;    ///< command: setMinKinE
     G4UIcmdWithADoubleAndUnit*  fMaxKinECmd;    ///< command: setMaxKinE
     G4UIcmdWithADoubleAndUnit*  fKinECmd;       ///< command: setMinKinE
@@ -79,7 +79,7 @@ class TG4CrossSectionMessenger: public G4UImessenger
     G4UIcmdWithADoubleAndUnit*  fMaxMomentumCmd;///< command: setMaxMomentum
     G4UIcmdWithADoubleAndUnit*  fMomentumCmd;   ///< command: setMomentum
     G4UIcmdWithAString*         fLabelCmd;      ///< command: setLabel
-    G4UIcmdWithAString*         fPrintCmd;      ///< command: printCrossSection 
+    G4UIcmdWithAString*         fPrintCmd;      ///< command: printCrossSection
 };
 
 #endif //TG4_CROSS_SECTION_MESSENGER_H

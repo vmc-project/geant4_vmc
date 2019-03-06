@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4ComposedPhysicsList.h
-/// \brief Definition of the TG4ComposedPhysicsList class 
+/// \brief Definition of the TG4ComposedPhysicsList class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -27,7 +27,7 @@
 /// \brief The Geant4 VMC physics list builder
 ///
 /// The helper class which allows to combine more physics list
-/// together.    
+/// together.
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -37,10 +37,10 @@ class TG4ComposedPhysicsList: public G4VUserPhysicsList,
   public:
     TG4ComposedPhysicsList();
     virtual ~TG4ComposedPhysicsList();
-  
-    // methods  
+
+    // methods
     void AddPhysicsList(G4VUserPhysicsList* physicsList);
-    
+
     virtual void ConstructParticle();
     virtual void ConstructProcess();
     virtual void SetCuts();
@@ -58,18 +58,18 @@ class TG4ComposedPhysicsList: public G4VUserPhysicsList,
 
     virtual G4int VerboseLevel() const;
     virtual void  VerboseLevel(G4int level);
-    
+
   private:
     /// Not implemented
     TG4ComposedPhysicsList(const TG4ComposedPhysicsList& right);
     /// Not implemented
     TG4ComposedPhysicsList& operator=(const TG4ComposedPhysicsList& right);
-    
+
     // methods
     void ApplyGammaToMuonsCrossSectionFactor();
 
     // static data members
-    static const G4double  fgkDefautCut; ///< the default cut value 
+    static const G4double  fgkDefautCut; ///< the default cut value
 
     // data members
     TG4ComposedPhysicsMessenger       fMessenger;    ///< messenger

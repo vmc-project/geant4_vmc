@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/sh
 #------------------------------------------------
 # The Virtual Monte Carlo examples
 # Copyright (C) 2014 Ivana Hrivnacova
@@ -63,7 +63,7 @@ done
 # Recreate log directory only if running test for both G3 and G4
 if [ "$TESTG3" = "1" -a  "$TESTG4" = "1"  -a "$EXAMPLES" = "$ALL_EXAMPLES" ]; then
   rm -fr $OUTDIR
-fi  
+fi
 
 for EXAMPLE in $EXAMPLES
 do
@@ -78,7 +78,7 @@ do
   fi
 
   cd $CURDIR/$EXAMPLE
-  
+
   if [ "$TESTG3" = "1" -a "$EXAMPLE" != "Monopole" ]; then
     if [ "$EXAMPLE" = "E03" ]; then
       run_mc_exe g3a
@@ -86,7 +86,7 @@ do
     else
       run_mc_exe g3
     fi
-  fi  
+  fi
 
   if [ "$TESTG4" = "1" ]; then
     if [ "$EXAMPLE" = "E03" ]; then
@@ -95,12 +95,12 @@ do
     else
       run_mc_exe g4
     fi
-  fi  
+  fi
   echo " "
 
   # clean-up generated files
   rm -f Example*.root
   rm -f gphysi.dat
-done  
-  
+done
+
 cd $CURDIR

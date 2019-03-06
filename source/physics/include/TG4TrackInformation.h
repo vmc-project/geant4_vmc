@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4TrackInformation.h
-/// \brief Definition of the TG4TrackInformation class 
+/// \brief Definition of the TG4TrackInformation class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -33,16 +33,16 @@ class TG4TrackInformation : public G4VUserTrackInformation
     TG4TrackInformation(G4int trackParticleID);
     //TG4TrackInformation(G4int trackParticleID, G4int parentParticleID);
     virtual ~TG4TrackInformation();
-   
+
     // operators required by G4
-    
+
                  /// Override \em new operator for G4Allocator
     inline void *operator new(size_t);
                  /// Override \em delete operator for G4Allocator
     inline void operator delete(void *trackInformation);
-      
+
     // methods
-    virtual void Print() const;  
+    virtual void Print() const;
 
     // set methods
     void SetTrackParticleID(G4int trackParticleID);
@@ -62,7 +62,7 @@ class TG4TrackInformation : public G4VUserTrackInformation
 
   private:
     // data members
-    
+
     G4int    fTrackParticleID; ///< the index of track particle in VMC stack
     G4int    fParentParticleID;///< the index of parent track in VMC stack
     G4double fPDGLifetime;     ///< the original particle PDG lifetime

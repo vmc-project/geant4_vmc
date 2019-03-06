@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4WorkerInitialization.h
-/// \brief Definition of the TG4WorkerInitialization class 
+/// \brief Definition of the TG4WorkerInitialization class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -28,7 +28,7 @@ class TG4WorkerInitialization : public G4UserWorkerInitialization
     TG4WorkerInitialization();
     virtual ~TG4WorkerInitialization();
 
-    // methods 
+    // methods
     //
     //virtual void WorkerInitialize() const;
     // This method is called after the tread is created but before the
@@ -51,9 +51,9 @@ class TG4WorkerInitialization : public G4UserWorkerInitialization
     // finished but before the synchronization over threads.
 
     virtual void WorkerStop() const;
-    // This method is called once at the end of simulation job. 
+    // This method is called once at the end of simulation job.
     // Implement here a clean up action.
- 
+
   private:
     /// Not implemented
     TG4WorkerInitialization(const TG4WorkerInitialization& right);

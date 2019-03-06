@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4MCGeometry.cxx
-/// \brief Implementation of the TG4MCGeometry class 
+/// \brief Implementation of the TG4MCGeometry class
 ///
 /// C++ interface to Geant3 basic routines for building Geant4 geometry
 /// by V. Berejnoi, 25.2.1999;                                           \n
@@ -26,7 +26,7 @@
 #include "TG4Globals.h"
 
 #ifdef USE_G3TOG4
-#include <G3toG4.hh> 
+#include <G3toG4.hh>
 #include <G3MatTable.hh>
 #endif
 
@@ -74,38 +74,38 @@ TG4MCGeometry::TG4MCGeometry()
   if ( !fGeometryServices ) {
     TG4Globals::Exception(
       "TG4MCGeometry", "TG4MCGeometry",
-      "TG4GeometryServices have to be defined first"); 
+      "TG4GeometryServices have to be defined first");
   }
 }
 
 //_____________________________________________________________________________
-TG4MCGeometry::~TG4MCGeometry() 
+TG4MCGeometry::~TG4MCGeometry()
 {
 /// Destructor
 }
 
 //
-// public methods 
+// public methods
 //
 
 //_____________________________________________________________________________
-void TG4MCGeometry::Material(Int_t& kmat, const char* name, Double_t a, 
-          Double_t z, Double_t dens, Double_t radl, Double_t absl, Float_t* buf, 
+void TG4MCGeometry::Material(Int_t& kmat, const char* name, Double_t a,
+          Double_t z, Double_t dens, Double_t radl, Double_t absl, Float_t* buf,
           Int_t nwbuf)
 {
 /// Create material.                                                         \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate.
 
-    G4double* bufin = fGeometryServices->CreateG4doubleArray(buf, nwbuf); 
+    G4double* bufin = fGeometryServices->CreateG4doubleArray(buf, nwbuf);
     Material(kmat, name, a, z, dens, radl, absl, bufin, nwbuf);
     delete [] bufin;
 }
-  
- 
+
+
 #ifdef USE_G3TOG4
 //_____________________________________________________________________________
-void TG4MCGeometry::Material(Int_t& kmat, const char* name, Double_t a, 
-          Double_t z, Double_t dens, Double_t radl, Double_t /*absl*/, Double_t* buf, 
+void TG4MCGeometry::Material(Int_t& kmat, const char* name, Double_t a,
+          Double_t z, Double_t dens, Double_t radl, Double_t /*absl*/, Double_t* buf,
           Int_t nwbuf)
 {
 /// Create material.                                                         \n
@@ -115,31 +115,31 @@ void TG4MCGeometry::Material(Int_t& kmat, const char* name, Double_t a,
     G4String namein = fGeometryServices->CutMaterialName(name);
 
     // create new material only if it does not yet exist
-    G4Material* material = fGeometryServices->FindMaterial(a, z, dens); 
+    G4Material* material = fGeometryServices->FindMaterial(a, z, dens);
     if (material) {
       // verbose
       if (VerboseLevel() > 1) {
         G4cout << "!!! Material " << namein << " already exists as "
                << material->GetName() << G4endl;
-      }               
-      G3Mat.put(kmat, material);            
-    }                 
+      }
+      G3Mat.put(kmat, material);
+    }
     else
-      G4gsmate(kmat, namein, a, z, dens, radl, nwbuf, buf); 
-      
+      G4gsmate(kmat, namein, a, z, dens, radl, nwbuf, buf);
+
     // save the original material name
-    fMaterialNameVector.push_back(namein);  
+    fMaterialNameVector.push_back(namein);
 
     if (nwbuf > 0) {
       TG4Globals::Warning(
         "TG4MCGeometry", "Material",
         "User defined parameters for material " + TString(namein) +
-        " are ignored by Geant4.");        
+        " are ignored by Geant4.");
     }
 }
 #else
 //_____________________________________________________________________________
-void TG4MCGeometry::Material(Int_t&, const char*, Double_t, 
+void TG4MCGeometry::Material(Int_t&, const char*, Double_t,
           Double_t, Double_t, Double_t, Double_t, Double_t*,Int_t)
 {
 /// Create material.                                                         \n
@@ -148,44 +148,44 @@ void TG4MCGeometry::Material(Int_t&, const char*, Double_t,
   TG4Globals::Exception("TG4MCGeometry", "Material",
      "This method requires Geant4 installation with G3toG4.");
 }
-#endif      
-  
- 
+#endif
+
+
 //_____________________________________________________________________________
-void TG4MCGeometry::Mixture(Int_t& kmat, const char *name, Float_t *a, 
+void TG4MCGeometry::Mixture(Int_t& kmat, const char *name, Float_t *a,
           Float_t *z, Double_t dens, Int_t nlmat, Float_t *wmat)
-{ 
+{
 /// Create material composed of more elements.                            \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate
 
    G4cout << "TG4MCGeometry::Mixture Fl" << G4endl;
    G4cout << fGeometryServices << G4endl;
 
-   G4double* ain = fGeometryServices->CreateG4doubleArray(a, abs(nlmat)); 
-   G4double* zin = fGeometryServices->CreateG4doubleArray(z, abs(nlmat)); 
-   G4double* wmatin = fGeometryServices->CreateG4doubleArray(wmat, abs(nlmat)); 
+   G4double* ain = fGeometryServices->CreateG4doubleArray(a, abs(nlmat));
+   G4double* zin = fGeometryServices->CreateG4doubleArray(z, abs(nlmat));
+   G4double* wmatin = fGeometryServices->CreateG4doubleArray(wmat, abs(nlmat));
 
    Mixture(kmat, name, ain, zin, dens, nlmat, wmatin);
 
    // !!! in Geant3:
-   // After a call with ratios by number (negative number of elements), 
-   // the ratio array is changed to the ratio by weight, so all successive 
-   // calls with the same array must specify the number of elements as 
+   // After a call with ratios by number (negative number of elements),
+   // the ratio array is changed to the ratio by weight, so all successive
+   // calls with the same array must specify the number of elements as
    // positive
-   
+
    // wmatin may be modified
-   for (G4int i=0; i<abs(nlmat); i++) wmat[i] = wmatin[i]; 
+   for (G4int i=0; i<abs(nlmat); i++) wmat[i] = wmatin[i];
 
    delete [] ain;
    delete [] zin;
    delete [] wmatin;
-} 
+}
 
 #ifdef USE_G3TOG4
 //_____________________________________________________________________________
-void TG4MCGeometry::Mixture(Int_t& kmat, const char *name, Double_t* a, 
+void TG4MCGeometry::Mixture(Int_t& kmat, const char *name, Double_t* a,
           Double_t* z, Double_t dens, Int_t nlmat, Double_t* wmat)
-{ 
+{
 /// Create material composed of more elements.                            \n
 /// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate
 /// Available only with USE_G3TOG4 option.
@@ -195,84 +195,42 @@ void TG4MCGeometry::Mixture(Int_t& kmat, const char *name, Double_t* a,
    G4cout << namein << G4endl;
 
    // create new material only if it does not yet exist
-   G4Material* material 
-     = fGeometryServices->FindMaterial(a, z, dens, nlmat, wmat); 
+   G4Material* material
+     = fGeometryServices->FindMaterial(a, z, dens, nlmat, wmat);
    if (material) {
      // verbose
      if (VerboseLevel() > 1) {
        G4cout << "!!! Material " << namein << " already exists as "
               << material->GetName() << G4endl;
-     }              
-     G3Mat.put(kmat, material);            
-   }  
-   else 
+     }
+     G3Mat.put(kmat, material);
+   }
+   else
      G4gsmixt(kmat, namein, a, z, dens, nlmat, wmat);
-     
+
     // save the original material name
-    fMaterialNameVector.push_back(namein);  
-} 
+    fMaterialNameVector.push_back(namein);
+}
 #else
 //_____________________________________________________________________________
-void TG4MCGeometry::Mixture(Int_t&, const char*, Double_t*, 
+void TG4MCGeometry::Mixture(Int_t&, const char*, Double_t*,
           Double_t*, Double_t, Int_t, Double_t*)
-{ 
+{
 /// Create material composed of more elements.                            \n
 /// Not available without USE_G3TOG4 option.
 
   TG4Globals::Exception("TG4MCGeometry", "Mixture",
      "This method requires Geant4 installation with G3toG4.");
 }
-#endif      
+#endif
 
 //_____________________________________________________________________________
-void TG4MCGeometry::Medium(Int_t& kmed, const char *name, Int_t nmat, 
-          Int_t isvol, Int_t ifield, Double_t fieldm, Double_t tmaxfd, 
-          Double_t stemax, Double_t deemax, Double_t epsil, 
+void TG4MCGeometry::Medium(Int_t& kmed, const char *name, Int_t nmat,
+          Int_t isvol, Int_t ifield, Double_t fieldm, Double_t tmaxfd,
+          Double_t stemax, Double_t deemax, Double_t epsil,
           Double_t stmin, Float_t* ubuf, Int_t nbuf)
-{ 
-/// Create a temporary "medium" that is used for 
-/// assigning corresponding parameters to G4 objects:
-/// - NTMED is stored as a second material index;
-/// - ISVOL is used for builing G3SensVolVector;
-/// - STEMAX is passed in G4UserLimits
-/// - !! The other parameters (IFIELD, FIELDM, TMAXFD, DEEMAX, EPSIL, STMIN)
-/// are ignored by Geant4.
-///
-///  Geant3 desription: 
-///  ==================
-///  - NTMED  Tracking medium number
-///  - NAME   Tracking medium name
-///  - NMAT   Material number
-///  - ISVOL  Sensitive volume flag
-///  - IFIELD Magnetic field
-///  - FIELDM Max. field value (Kilogauss)
-///  - TMAXFD Max. angle due to field (deg/step)
-///  - STEMAX Max. step allowed
-///  - DEEMAX Max. fraction of energy lost in a step
-///  - EPSIL  Tracking precision (cm)
-///  - STMIN  Min. step due to continuos processes (cm)
-///
-///  - IFIELD = 0 if no magnetic field; 
-///  - IFIELD = -1 if user decision in GUSWIM;
-///  - IFIELD = 1 if tracking performed with GRKUTA; 
-///  - IFIELD = 2 if tracking performed with GHELIX; 
-///  - IFIELD = 3 if tracking performed with GHELX3.  
-
-  G4double* bufin = fGeometryServices->CreateG4doubleArray(ubuf, nbuf); 
-  Medium(kmed, name, nmat, isvol, ifield, fieldm, tmaxfd, stemax, deemax, epsil, 
-         stmin, bufin, nbuf);
-  delete [] bufin;         
-} 
-
-
-#ifdef USE_G3TOG4
-//_____________________________________________________________________________
-void TG4MCGeometry::Medium(Int_t& kmed, const char *name, Int_t nmat, 
-          Int_t isvol, Int_t ifield, Double_t fieldm, Double_t tmaxfd, 
-          Double_t stemax, Double_t deemax, Double_t epsil, 
-          Double_t stmin, Double_t* /*ubuf*/, Int_t nbuf)
-{ 
-/// Create a temporary "medium" that is used for 
+{
+/// Create a temporary "medium" that is used for
 /// assigning corresponding parameters to G4 objects:
 /// - NTMED is stored as a second material index;
 /// - ISVOL is used for builing G3SensVolVector;
@@ -294,16 +252,58 @@ void TG4MCGeometry::Medium(Int_t& kmed, const char *name, Int_t nmat,
 ///  - EPSIL  Tracking precision (cm)
 ///  - STMIN  Min. step due to continuos processes (cm)
 ///
-///  - IFIELD = 0 if no magnetic field; 
+///  - IFIELD = 0 if no magnetic field;
 ///  - IFIELD = -1 if user decision in GUSWIM;
-///  - IFIELD = 1 if tracking performed with GRKUTA; 
-///  - IFIELD = 2 if tracking performed with GHELIX; 
-///  - IFIELD = 3 if tracking performed with GHELX3.  
+///  - IFIELD = 1 if tracking performed with GRKUTA;
+///  - IFIELD = 2 if tracking performed with GHELIX;
+///  - IFIELD = 3 if tracking performed with GHELX3.
+
+  G4double* bufin = fGeometryServices->CreateG4doubleArray(ubuf, nbuf);
+  Medium(kmed, name, nmat, isvol, ifield, fieldm, tmaxfd, stemax, deemax, epsil,
+         stmin, bufin, nbuf);
+  delete [] bufin;
+}
+
+
+#ifdef USE_G3TOG4
+//_____________________________________________________________________________
+void TG4MCGeometry::Medium(Int_t& kmed, const char *name, Int_t nmat,
+          Int_t isvol, Int_t ifield, Double_t fieldm, Double_t tmaxfd,
+          Double_t stemax, Double_t deemax, Double_t epsil,
+          Double_t stmin, Double_t* /*ubuf*/, Int_t nbuf)
+{
+/// Create a temporary "medium" that is used for
+/// assigning corresponding parameters to G4 objects:
+/// - NTMED is stored as a second material index;
+/// - ISVOL is used for builing G3SensVolVector;
+/// - STEMAX is passed in G4UserLimits
+/// - !! The other parameters (IFIELD, FIELDM, TMAXFD, DEEMAX, EPSIL, STMIN)
+/// are ignored by Geant4.
+///
+///  Geant3 desription:
+///  ==================
+///  - NTMED  Tracking medium number
+///  - NAME   Tracking medium name
+///  - NMAT   Material number
+///  - ISVOL  Sensitive volume flag
+///  - IFIELD Magnetic field
+///  - FIELDM Max. field value (Kilogauss)
+///  - TMAXFD Max. angle due to field (deg/step)
+///  - STEMAX Max. step allowed
+///  - DEEMAX Max. fraction of energy lost in a step
+///  - EPSIL  Tracking precision (cm)
+///  - STMIN  Min. step due to continuos processes (cm)
+///
+///  - IFIELD = 0 if no magnetic field;
+///  - IFIELD = -1 if user decision in GUSWIM;
+///  - IFIELD = 1 if tracking performed with GRKUTA;
+///  - IFIELD = 2 if tracking performed with GHELIX;
+///  - IFIELD = 3 if tracking performed with GHELX3.
 /// Available only with USE_G3TOG4 option.
 
   G4String namein = fGeometryServices->CutMaterialName(name);
 
-  G4gstmed(kmed, name, nmat, isvol, ifield, fieldm, tmaxfd, stemax, deemax, 
+  G4gstmed(kmed, name, nmat, isvol, ifield, fieldm, tmaxfd, stemax, deemax,
        epsil, stmin, 0, stemax > 0.);
      // instead of the nbuf argument the bool is passed
      // in order to pass stemax into G4UserLimits
@@ -312,32 +312,32 @@ void TG4MCGeometry::Medium(Int_t& kmed, const char *name, Int_t nmat,
   TG4Medium* medium = fGeometryServices->GetMediumMap()->AddMedium(kmed);
   medium->SetName(name);
   medium->SetIfield(ifield);
-  
-  if (nbuf > 0) {  
+
+  if (nbuf > 0) {
     TG4Globals::Warning(
-      "TG4MCGeometry", "Medium", 
+      "TG4MCGeometry", "Medium",
       "User defined parameters for medium " + TString(namein) +
-      " are ignored by Geant4.");  
+      " are ignored by Geant4.");
   }
-} 
+}
 #else
 //_____________________________________________________________________________
-void TG4MCGeometry::Medium(Int_t&, const char *, Int_t, 
-          Int_t, Int_t, Double_t, Double_t, Double_t, Double_t, Double_t, 
+void TG4MCGeometry::Medium(Int_t&, const char *, Int_t,
+          Int_t, Int_t, Double_t, Double_t, Double_t, Double_t, Double_t,
           Double_t, Double_t*, Int_t)
-{          
+{
 /// Create a temporary "medium".
 /// Not available without USE_G3TOG4 option.
 
   TG4Globals::Exception("TG4MCGeometry", "Medium",
      "This method requires Geant4 installation with G3toG4.");
-}     
-#endif      
+}
+#endif
 
 
 #ifdef USE_G3TOG4
 //_____________________________________________________________________________
-void TG4MCGeometry::Matrix(Int_t& krot, Double_t thetaX, Double_t phiX, 
+void TG4MCGeometry::Matrix(Int_t& krot, Double_t thetaX, Double_t phiX,
            Double_t thetaY, Double_t phiY, Double_t thetaZ, Double_t phiZ)
 {
 /// Create rotation matrix.
@@ -347,7 +347,7 @@ void TG4MCGeometry::Matrix(Int_t& krot, Double_t thetaX, Double_t phiX,
 }
 #else
 //_____________________________________________________________________________
-void TG4MCGeometry::Matrix(Int_t&, Double_t, Double_t, 
+void TG4MCGeometry::Matrix(Int_t&, Double_t, Double_t,
            Double_t, Double_t, Double_t, Double_t)
 {
 /// Create rotation matrix.
@@ -355,11 +355,11 @@ void TG4MCGeometry::Matrix(Int_t&, Double_t, Double_t,
 
   TG4Globals::Exception("TG4MCGeometry", "Matrix",
      "This method requires Geant4 installation with G3toG4.");
-}     
-#endif      
+}
+#endif
 
 //_____________________________________________________________________________
-void TG4MCGeometry::Ggclos() 
+void TG4MCGeometry::Ggclos()
 {
 /// Set the top VTE in temporary G3 volume table.
 /// Close geometry output file (if fWriteGeometry is set true).
@@ -369,19 +369,19 @@ void TG4MCGeometry::Ggclos()
 ///  close out the geometry
 
 #ifdef USE_G3TOG4
-  G4ggclos();        
+  G4ggclos();
 #else
   TG4Globals::Exception("TG4MCGeometry", "Ggclos()",
      "This method requires Geant4 installation with G3toG4.");
-#endif      
-} 
- 
+#endif
+}
+
 
 #ifdef USE_G3TOG4
 //_____________________________________________________________________________
-Int_t TG4MCGeometry::Gsvolu(const char *name, const char *shape, 
-          Int_t nmed, Double_t* upar, Int_t npar) 
-{ 
+Int_t TG4MCGeometry::Gsvolu(const char *name, const char *shape,
+          Int_t nmed, Double_t* upar, Int_t npar)
+{
 ///  Geant3 desription:                                                     \n
 ///  ==================                                                     \n
 ///  - NAME   Volume name
@@ -392,17 +392,17 @@ Int_t TG4MCGeometry::Gsvolu(const char *name, const char *shape,
 ///
 ///  It creates a new volume in the JVOLUM data structure.
 ///  Available only with USE_G3TOG4 option.
-// ---  
+// ---
 
-  G4gsvolu(fGeometryServices->CutName(name), 
+  G4gsvolu(fGeometryServices->CutName(name),
            fGeometryServices->CutName(shape), nmed, upar, npar);
   return 0;
-} 
+}
 #else
 //_____________________________________________________________________________
-Int_t TG4MCGeometry::Gsvolu(const char *, const char *, 
-          Int_t, Double_t*, Int_t) 
-{ 
+Int_t TG4MCGeometry::Gsvolu(const char *, const char *,
+          Int_t, Double_t*, Int_t)
+{
 /// It creates a new volume in the JVOLUM data structure.
 /// Not available without USE_G3TOG4 option.
 
@@ -410,16 +410,16 @@ Int_t TG4MCGeometry::Gsvolu(const char *, const char *,
      "This method requires Geant4 installation with G3toG4.");
   return 0;
 }
-#endif      
+#endif
 
 
 //_____________________________________________________________________________
-Int_t TG4MCGeometry::Gsvolu(const char *name, const char *shape, 
-          Int_t nmed, Float_t *upar, Int_t npar) 
-{ 
+Int_t TG4MCGeometry::Gsvolu(const char *name, const char *shape,
+          Int_t nmed, Float_t *upar, Int_t npar)
+{
 /// Single precision interface.
 
-  G4double* parin = fGeometryServices->CreateG4doubleArray(upar, npar); 
+  G4double* parin = fGeometryServices->CreateG4doubleArray(upar, npar);
 
   G4int result
    = Gsvolu(name, shape, nmed, parin, npar);
@@ -427,14 +427,14 @@ Int_t TG4MCGeometry::Gsvolu(const char *name, const char *shape,
   delete [] parin;
 
   return result;
-} 
+}
 
 
 #ifdef USE_G3TOG4
 //_____________________________________________________________________________
-void  TG4MCGeometry::Gsdvn(const char *name, const char *mother, 
-           Int_t ndiv, Int_t iaxis) 
-{ 
+void  TG4MCGeometry::Gsdvn(const char *name, const char *mother,
+           Int_t ndiv, Int_t iaxis)
+{
 ///  Geant3 desription:
 ///  ==================
 ///  - NAME   Volume name
@@ -447,28 +447,28 @@ void  TG4MCGeometry::Gsdvn(const char *name, const char *mother,
 ///  Available only with USE_G3TOG4 option.
 //  ---
 
-  G4gsdvn(fGeometryServices->CutName(name), 
+  G4gsdvn(fGeometryServices->CutName(name),
           fGeometryServices->CutName(mother), ndiv, iaxis);
-} 
+}
 #else
 //_____________________________________________________________________________
-void  TG4MCGeometry::Gsdvn(const char *, const char *, Int_t, Int_t) 
-{ 
+void  TG4MCGeometry::Gsdvn(const char *, const char *, Int_t, Int_t)
+{
 /// It divides a previously defined volume.
 /// Not available without USE_G3TOG4 option.
 //  ---
 
   TG4Globals::Exception("TG4MCGeometry", "Gsdvn",
      "This method requires Geant4 installation with G3toG4.");
-} 
-#endif      
- 
- 
+}
+#endif
+
+
 #ifdef USE_G3TOG4
 //_____________________________________________________________________________
-void  TG4MCGeometry::Gsdvn2(const char *name, const char *mother, 
-           Int_t ndiv, Int_t iaxis, Double_t c0i, Int_t numed) 
-{ 
+void  TG4MCGeometry::Gsdvn2(const char *name, const char *mother,
+           Int_t ndiv, Int_t iaxis, Double_t c0i, Int_t numed)
+{
 ///  Geant3 desription:                                                       \n
 ///  ==================                                                       \n
 ///  Divides mother into ndiv divisions called name
@@ -478,12 +478,12 @@ void  TG4MCGeometry::Gsdvn2(const char *name, const char *mother,
 
   G4gsdvn2(fGeometryServices->CutName(name),
              fGeometryServices->CutName(mother), ndiv, iaxis, c0i, numed);
-} 
+}
 #else
 //_____________________________________________________________________________
-void  TG4MCGeometry::Gsdvn2(const char *, const char *, 
-           Int_t, Int_t, Double_t, Int_t) 
-{ 
+void  TG4MCGeometry::Gsdvn2(const char *, const char *,
+           Int_t, Int_t, Double_t, Int_t)
+{
 ///  Geant3 desription:                                                       \n
 ///  ==================                                                       \n
 ///  Divides mother into ndiv divisions called name
@@ -492,94 +492,94 @@ void  TG4MCGeometry::Gsdvn2(const char *, const char *,
 
   TG4Globals::Exception("TG4MCGeometry", "Gsdvn2",
      "This method requires Geant4 installation with G3toG4.");
-}     
-#endif      
- 
- 
+}
+#endif
+
+
 #ifdef USE_G3TOG4
 //_____________________________________________________________________________
-void  TG4MCGeometry::Gsdvt(const char *name, const char *mother, 
+void  TG4MCGeometry::Gsdvt(const char *name, const char *mother,
            Double_t step, Int_t iaxis, Int_t numed, Int_t ndvmx)
-{ 
+{
 ///  Geant3 desription:                                                       \n
 ///  ==================                                                       \n
 ///  Divides MOTHER into divisions called NAME along
-///  axis IAXIS in steps of STEP. If not exactly divisible 
-///  will make as many as possible and will centre them 
-///  with respect to the mother. Divisions will have medium 
+///  axis IAXIS in steps of STEP. If not exactly divisible
+///  will make as many as possible and will centre them
+///  with respect to the mother. Divisions will have medium
 ///  number NUMED. If NUMED is 0, NUMED of MOTHER is taken.
 ///  NDVMX is the expected maximum number of divisions
-///  (If 0, no protection tests are performed) 
+///  (If 0, no protection tests are performed)
 ///  Available only with USE_G3TOG4 option.
 
-  G4gsdvt(fGeometryServices->CutName(name), 
+  G4gsdvt(fGeometryServices->CutName(name),
           fGeometryServices->CutName(mother), step, iaxis, numed, ndvmx);
 }
 #else
 //_____________________________________________________________________________
-void  TG4MCGeometry::Gsdvt(const char *, const char *, 
+void  TG4MCGeometry::Gsdvt(const char *, const char *,
            Double_t, Int_t, Int_t, Int_t)
-{ 
+{
 ///  Divides MOTHER into divisions called NAME along
-///  axis IAXIS in steps of STEP. 
+///  axis IAXIS in steps of STEP.
 ///  Not available without USE_G3TOG4 option.
 
   TG4Globals::Exception("TG4MCGeometry", "Gsdvt",
      "This method requires Geant4 installation with G3toG4.");
-} 
-#endif      
- 
- 
+}
+#endif
+
+
 #ifdef USE_G3TOG4
 //_____________________________________________________________________________
-void  TG4MCGeometry::Gsdvt2(const char *name, const char *mother, 
+void  TG4MCGeometry::Gsdvt2(const char *name, const char *mother,
            Double_t step, Int_t iaxis, Double_t c0, Int_t numed, Int_t ndvmx)
-{ 
+{
 ///  Geant3 desription:                                                      \n
 ///  ==================                                                      \n
 ///  Create a new volume by dividing an existing one
-///                                                                    
-///  Divides MOTHER into divisions called NAME along          
-///  axis IAXIS starting at coordinate value C0 with step    
-///  size STEP.                                                              \n       
-///  The new volume created will have medium number NUMED.    
-///  If NUMED is 0, NUMED of mother is taken.                                \n               
-///  NDVMX is the expected maximum number of divisions        
-///  (If 0, no protection tests are performed)              
+///
+///  Divides MOTHER into divisions called NAME along
+///  axis IAXIS starting at coordinate value C0 with step
+///  size STEP.                                                              \n
+///  The new volume created will have medium number NUMED.
+///  If NUMED is 0, NUMED of mother is taken.                                \n
+///  NDVMX is the expected maximum number of divisions
+///  (If 0, no protection tests are performed)
 ///  Available only with USE_G3TOG4 option.
 
-  G4gsdvt2(fGeometryServices->CutName(name), 
+  G4gsdvt2(fGeometryServices->CutName(name),
            fGeometryServices->CutName(mother), step, iaxis, c0, numed, ndvmx);
-} 
+}
 #else
 //_____________________________________________________________________________
-void  TG4MCGeometry::Gsdvt2(const char *, const char *, 
+void  TG4MCGeometry::Gsdvt2(const char *, const char *,
            Double_t, Int_t, Double_t, Int_t, Int_t)
-{ 
-///  Divides MOTHER into divisions called NAME along          
-///  axis IAXIS starting at coordinate value C0 with step    
-///  size STEP.                                                              \n       
+{
+///  Divides MOTHER into divisions called NAME along
+///  axis IAXIS starting at coordinate value C0 with step
+///  size STEP.                                                              \n
 ///  Not available without USE_G3TOG4 option.
 
 
   TG4Globals::Exception("TG4MCGeometry", "Gsdvt",
      "This method requires Geant4 installation with G3toG4.");
-} 
-#endif      
- 
- 
+}
+#endif
+
+
 //_____________________________________________________________________________
-void  TG4MCGeometry::Gsord(const char* /*name*/, Int_t /*iax*/) 
-{ 
+void  TG4MCGeometry::Gsord(const char* /*name*/, Int_t /*iax*/)
+{
 /// No corresponding action in G4.
 ///
 ///  Geant3 desription:                                                      \n
 ///  ==================                                                      \n
-///    Flags volume CHNAME whose contents will have to be ordered 
+///    Flags volume CHNAME whose contents will have to be ordered
 ///    along axis IAX, by setting the search flag to -IAX
-///    -       IAX = 1    X axis 
-///    -       IAX = 2    Y axis 
-///    -       IAX = 3    Z axis 
+///    -       IAX = 1    X axis
+///    -       IAX = 2    Y axis
+///    -       IAX = 3    Z axis
 ///    -       IAX = 4    Rxy (static ordering only  -> GTMEDI)
 ///    -       IAX = 14   Rxy (also dynamic ordering -> GTNEXT)
 ///    -       IAX = 5    Rxyz (static ordering only -> GTMEDI)
@@ -589,15 +589,15 @@ void  TG4MCGeometry::Gsord(const char* /*name*/, Int_t /*iax*/)
 
   TG4Globals::Warning(
     "TG4MCGeometry", "Gsord", "Dummy method.");
-} 
- 
- 
+}
+
+
 #ifdef USE_G3TOG4
 //_____________________________________________________________________________
-void  TG4MCGeometry::Gspos(const char *vname, Int_t num, 
-          const char *vmoth, Double_t x, Double_t y, Double_t z, Int_t irot, 
-          const char *vonly) 
-{ 
+void  TG4MCGeometry::Gspos(const char *vname, Int_t num,
+          const char *vmoth, Double_t x, Double_t y, Double_t z, Int_t irot,
+          const char *vonly)
+{
 ///  Geant3 desription:                                                      \n
 ///  ==================                                                      \n
 ///  Position a volume into an existing one
@@ -613,118 +613,118 @@ void  TG4MCGeometry::Gspos(const char *vname, Int_t num,
 ///
 ///  It positions a previously defined volume in the mother.
 ///  Available only with USE_G3TOG4 option.
-// ---  
+// ---
 
   G4gspos(fGeometryServices->CutName(vname), ++num,
           fGeometryServices->CutName(vmoth), x, y, z, irot, vonly);
 }
 #else
 //_____________________________________________________________________________
-void  TG4MCGeometry::Gspos(const char *, Int_t, 
-          const char *, Double_t, Double_t, Double_t, Int_t, const char *) 
+void  TG4MCGeometry::Gspos(const char *, Int_t,
+          const char *, Double_t, Double_t, Double_t, Int_t, const char *)
 {
 ///  Position a volume into an existing one
 ///  Not available without USE_G3TOG4 option.
-// ---  
+// ---
 
   TG4Globals::Exception("TG4MCGeometry", "Gspos",
      "This method requires Geant4 installation with G3toG4.");
-} 
-#endif      
- 
+}
+#endif
+
 #ifdef USE_G3TOG4
 //_____________________________________________________________________________
-void  TG4MCGeometry::Gsposp(const char *name, Int_t nr, 
-           const char *mother, Double_t x, Double_t y, Double_t z, Int_t irot, 
-           const char *konly, Double_t* upar, Int_t np ) 
-{ 
+void  TG4MCGeometry::Gsposp(const char *name, Int_t nr,
+           const char *mother, Double_t x, Double_t y, Double_t z, Int_t irot,
+           const char *konly, Double_t* upar, Int_t np )
+{
 ///  Geant3 desription:                                                      \n
 ///  ==================                                                      \n
 ///  Place a copy of generic volume NAME with user number
 ///  NR inside MOTHER, with its parameters UPAR(1..NP)
 ///  Available only with USE_G3TOG4 option.
 
-  G4gsposp(fGeometryServices->CutName(name), ++nr, 
-           fGeometryServices->CutName(mother), x, y, z, irot, konly, 
+  G4gsposp(fGeometryServices->CutName(name), ++nr,
+           fGeometryServices->CutName(mother), x, y, z, irot, konly,
            upar, np);
-} 
+}
 #else
 //_____________________________________________________________________________
-void  TG4MCGeometry::Gsposp(const char *, Int_t, 
-          const char *, Double_t, Double_t, Double_t, Int_t, 
-          const char *, Double_t*, Int_t) 
-{ 
+void  TG4MCGeometry::Gsposp(const char *, Int_t,
+          const char *, Double_t, Double_t, Double_t, Int_t,
+          const char *, Double_t*, Int_t)
+{
 ///  Place a copy of generic volume NAME with user number
 ///  NR inside MOTHER, with its parameters UPAR(1..NP)
 ///  Not available without USE_G3TOG4 option.
 
  TG4Globals::Exception("TG4MCGeometry", "Gsposp",
      "This method requires Geant4 installation with G3toG4.");
-}     
-#endif      
- 
- 
+}
+#endif
+
+
 //_____________________________________________________________________________
-void  TG4MCGeometry::Gsposp(const char *name, Int_t nr, 
-           const char *mother, Double_t x, Double_t y, Double_t z, Int_t irot, 
-           const char *konly, Float_t *upar, Int_t np ) 
-{ 
+void  TG4MCGeometry::Gsposp(const char *name, Int_t nr,
+           const char *mother, Double_t x, Double_t y, Double_t z, Int_t irot,
+           const char *konly, Float_t *upar, Int_t np )
+{
 /// Single precision interface.
 
-   G4double* parin = fGeometryServices->CreateG4doubleArray(upar, np); 
+   G4double* parin = fGeometryServices->CreateG4doubleArray(upar, np);
    Gsposp(name, nr, mother, x, y, z, irot, konly, parin, np);
    delete [] parin;
-} 
- 
- 
+}
+
+
 #ifdef USE_G3TOG4
 //_____________________________________________________________________________
-void  TG4MCGeometry::Gsbool(const char* onlyVolName, 
+void  TG4MCGeometry::Gsbool(const char* onlyVolName,
            const char* manyVolName)
-{ 
+{
 /// Help for resolving MANY.
-/// Specify the ONLY volume that overlaps with the 
+/// Specify the ONLY volume that overlaps with the
 /// specified MANY and has to be substracted.
 /// Available only with USE_G3TOG4 option.
-// ---  
+// ---
 
   G4gsbool(onlyVolName, manyVolName);
-} 
+}
 #else
 //_____________________________________________________________________________
 void  TG4MCGeometry::Gsbool(const char*, const char*)
-{ 
+{
 /// Help for resolving MANY.
 /// Not available without USE_G3TOG4 option.
-// ---  
+// ---
 
   TG4Globals::Exception("TG4MCGeometry", "Gsbool",
      "This method requires Geant4 installation with G3toG4.");
-}     
-#endif      
- 
+}
+#endif
+
 //_____________________________________________________________________________
-Bool_t TG4MCGeometry::GetTransformation(const TString& volumePath, 
+Bool_t TG4MCGeometry::GetTransformation(const TString& volumePath,
                               TGeoHMatrix& matrix)
-{                         
+{
 /// Return the transformation matrix between the volume specified by
 /// the path volumePath and the first volume in the path.
 
   G4String path = volumePath.Data();
 
   G4String volName;
-  G4int copyNo; 
-  path = fGeometryServices->CutVolumePath(path, volName, copyNo);     
+  G4int copyNo;
+  path = fGeometryServices->CutVolumePath(path, volName, copyNo);
 
   // Get the first volume
   G4VPhysicalVolume* pvTop = 0;
   if ( fGeometryServices->GetWorld()->GetName() == volName) {
     // Check world volume first
-    pvTop = fGeometryServices->GetWorld();  
-  }        
-  else  
+    pvTop = fGeometryServices->GetWorld();
+  }
+  else
     pvTop = fGeometryServices->FindPhysicalVolume(volName, copyNo, true);
-   
+
   if ( ! pvTop ) {
     TG4Globals::Warning(
       "TG4MCGeometry", "GetTransformation:",
@@ -736,42 +736,42 @@ Bool_t TG4MCGeometry::GetTransformation(const TString& volumePath,
   //
   G4VPhysicalVolume* pvMother = pvTop;
   G4Transform3D transform;
-  
+
   while ( path.length() > 0 ) {
     // Extract next volume name & copyNo
-    path = fGeometryServices->CutVolumePath(path, volName, copyNo);     
-  
+    path = fGeometryServices->CutVolumePath(path, volName, copyNo);
+
     // Find daughter
-    G4VPhysicalVolume* pvDaughter 
+    G4VPhysicalVolume* pvDaughter
       = fGeometryServices
         ->FindDaughter(volName, copyNo, pvMother->GetLogicalVolume(), true);
-        
+
     if ( !pvDaughter ) {
       TG4Globals::Warning(
         "TG4MCGeometry", "GetTransformation",
-        "Daughter volume " + TString(volName) + " in " + volumePath + 
+        "Daughter volume " + TString(volName) + " in " + volumePath +
         " does not exist.");
       return false;
     }
-    
+
     transform = transform * G4Transform3D(*pvDaughter->GetObjectRotation(),
                                             pvDaughter->GetObjectTranslation());
-    pvMother = pvDaughter; 
-  }   
-  
+    pvMother = pvDaughter;
+  }
+
   // put transform in TGeoHMatrix here
   fGeometryServices->Convert(transform, matrix);
   return true;
-}                         
-   
+}
+
 //_____________________________________________________________________________
-Bool_t TG4MCGeometry::GetShape(const TString& volumePath, 
+Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
                               TString& shapeType, TArrayD& par)
-{                         
+{
 /// Return the name of the shape and its parameters for the volume
 /// specified by the volume name.
 
-   // Get volume & copyNo   
+   // Get volume & copyNo
    G4String path = volumePath.Data();
    G4int last1 = path.rfind('/');
    G4int last2 = path.rfind('_');
@@ -784,25 +784,25 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
    // Find physical volume
    G4VPhysicalVolume* pv
      = fGeometryServices->FindPhysicalVolume(volName, copyNo, true);
-   
+
    if ( ! pv ) {
      TG4Globals::Warning(
        "TG4MCGeometry", "GetShape",
        "Physical volume " + volumePath + " does not exist.");
      return false;
-   } 
-     
+   }
+
    // Get solid
    G4VSolid* solid = pv->GetLogicalVolume()->GetSolid();
-   
+
    // Get constituent solid if reflected solid
    Bool_t isReflected = false;
    G4ReflectedSolid* reflSolid = dynamic_cast<G4ReflectedSolid*>(solid);
    if ( reflSolid ) {
      solid = reflSolid->GetConstituentMovedSolid();
      isReflected = true;
-   }  
-   
+   }
+
    Int_t npar;
 
    if ( solid->GetEntityType() == "G4Box" ) {
@@ -815,7 +815,7 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
       par.AddAt(box->GetZHalfLength()/cm, 2);
       return kTRUE;
    }
-      
+
    if ( solid->GetEntityType() == "G4Cons" ) {
       shapeType = "CONS";
       npar = 7;
@@ -828,17 +828,17 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
         par.AddAt(cons->GetInnerRadiusPlusZ()/cm,  3);
         par.AddAt(cons->GetOuterRadiusPlusZ()/cm,  4);
       }
-      else {        
+      else {
         par.AddAt(cons->GetInnerRadiusPlusZ()/cm, 1);
         par.AddAt(cons->GetOuterRadiusPlusZ()/cm, 2);
         par.AddAt(cons->GetInnerRadiusMinusZ()/cm,  3);
         par.AddAt(cons->GetOuterRadiusMinusZ()/cm,  4);
-      }        
+      }
       par.AddAt(cons->GetStartPhiAngle()/deg,    5);
       par.AddAt(cons->GetDeltaPhiAngle()/deg,    6);
       return kTRUE;
-   }   
-   
+   }
+
    if ( solid->GetEntityType() == "G4EllipticalTube" ) {
       shapeType = "ELTU";
       npar = 3;
@@ -848,8 +848,8 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
       par.AddAt(eltu->GetDy()/cm, 1);
       par.AddAt(eltu->GetDz()/cm, 2);
       return kTRUE;
-   }   
-   
+   }
+
    // Add to G3toG4, VGM
    if ( solid->GetEntityType() == "G4Hype" ) {
       shapeType = "HYPE";
@@ -862,9 +862,9 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
       par.AddAt(hype->GetInnerStereo(), 3);    // ?? unit
       par.AddAt(hype->GetOuterStereo(), 4);    // ?? unit
       return kTRUE;
-   }   
+   }
 
-   // Add G4Orb   
+   // Add G4Orb
 
    if ( solid->GetEntityType() == "G4Para" ) {
       shapeType = "PARA";
@@ -875,14 +875,14 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
       par.AddAt(para->GetYHalfLength()/cm, 1);
       par.AddAt(para->GetZHalfLength()/cm, 2);
       par.AddAt(atan(para->GetTanAlpha())/deg,  3);
-      if ( !isReflected) 
+      if ( !isReflected)
         par.AddAt(para->GetSymAxis().theta()/deg, 4);
       else
         par.AddAt((M_PI - para->GetSymAxis().theta())/deg, 4);
       par.AddAt(para->GetSymAxis().phi()/deg,   5);
       return kTRUE;
-   }   
-   
+   }
+
    if ( solid->GetEntityType() == "G4Polycone" ) {
       shapeType = "PCON";
       G4Polycone *pcon = (G4Polycone*)solid;
@@ -896,15 +896,15 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
       par.AddAt((pcon->GetEndPhi() - pcon->GetStartPhi())/deg, 1);
       par.AddAt(pcon->GetOriginalParameters()->Num_z_planes, 2);
       for (Int_t i=0; i<nz; i++) {
-         if ( !isReflected ) 
+         if ( !isReflected )
            par.AddAt(z[i]/cm,    3+3*i);
-         else 
+         else
            par.AddAt(- z[i]/cm,    3+3*i);
          par.AddAt(rmin[i]/cm, 3+3*i+1);
          par.AddAt(rmax[i]/cm, 3+3*i+2);
-      }   
-      return kTRUE; 
-   }   
+      }
+      return kTRUE;
+   }
 
    if ( solid->GetEntityType() == "G4Polyhedra" ) {
       shapeType = "PGON";
@@ -920,15 +920,15 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
       par.AddAt(pgon->GetOriginalParameters()->numSide, 2);
       par.AddAt(pgon->GetOriginalParameters()->Num_z_planes, 3);
       for (Int_t i=0; i<nz; i++) {
-         if ( !isReflected ) 
+         if ( !isReflected )
            par.AddAt(z[i]/cm,   4+3*i);
-         else 
+         else
            par.AddAt(- z[i]/cm, 4+3*i);
          par.AddAt(rmin[i]/cm, 4+3*i+1);
          par.AddAt(rmax[i]/cm, 4+3*i+2);
-      }   
-      return kTRUE; 
-   }   
+      }
+      return kTRUE;
+   }
 
    if ( solid->GetEntityType() == "G4Sphere" ) {
       shapeType = "SPHE";
@@ -937,15 +937,15 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
       G4Sphere *sphe = (G4Sphere*)solid;
       par.AddAt(sphe->GetInsideRadius()/cm,     0);
       par.AddAt(sphe->GetOuterRadius()/cm,      1);
-      if ( !isReflected ) 
+      if ( !isReflected )
         par.AddAt(sphe->GetStartThetaAngle()/deg, 2);
-      else        
+      else
         par.AddAt((M_PI - sphe->GetStartThetaAngle())/deg, 2);
       par.AddAt(sphe->GetStartPhiAngle()/deg,   3);
       par.AddAt(sphe->GetStartPhiAngle()/deg,   4);
       par.AddAt(sphe->GetDeltaPhiAngle()/deg,   5);
       return kTRUE;
-   }   
+   }
 
    // Add G4Torus
 
@@ -955,7 +955,7 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
       par.Set(npar);
       G4Trap *trap = (G4Trap*)solid;
       par.AddAt(trap->GetZHalfLength()/cm,       0);
-      if (!isReflected ) { 
+      if (!isReflected ) {
         par.AddAt(trap->GetSymAxis().theta()/deg,  1);
         par.AddAt(trap->GetSymAxis().phi()/deg,    2);
         par.AddAt(trap->GetYHalfLength1()/cm,      3);
@@ -965,8 +965,8 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
         par.AddAt(trap->GetYHalfLength2()/cm,      7);
         par.AddAt(trap->GetXHalfLength3()/cm,      8);
         par.AddAt(trap->GetXHalfLength4()/cm,      9);
-      }        
-      else {        
+      }
+      else {
         par.AddAt(-(trap->GetSymAxis().theta())/deg, 1);
         par.AddAt(-(trap->GetSymAxis().phi())/deg,   2);
         par.AddAt(trap->GetYHalfLength2()/cm,      3);
@@ -977,9 +977,9 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
         par.AddAt(trap->GetXHalfLength1()/cm,      8);
         par.AddAt(trap->GetXHalfLength2()/cm,      9);
         par.AddAt(atan(trap->GetTanAlpha1())/deg, 10);
-      }        
+      }
       return kTRUE;
-   }   
+   }
 
    if ( solid->GetEntityType() == "G4Trd" ) {
       shapeType = "TRD2";
@@ -992,7 +992,7 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
         par.AddAt(trd2->GetYHalfLength1()/cm, 2);
         par.AddAt(trd2->GetYHalfLength2()/cm, 3);
       }
-      else {        
+      else {
         par.AddAt(trd2->GetXHalfLength2()/cm, 0);
         par.AddAt(trd2->GetXHalfLength1()/cm, 1);
         par.AddAt(trd2->GetYHalfLength2()/cm, 2);
@@ -1000,7 +1000,7 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
       }
       par.AddAt(trd2->GetZHalfLength()/cm,  4);
       return kTRUE;
-   }   
+   }
 
    if ( solid->GetEntityType() == "G4Tubs" ) {
       shapeType = "TUBS";
@@ -1013,7 +1013,7 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
       par.AddAt(tubs->GetStartPhiAngle()/deg, 3);
       par.AddAt(tubs->GetDeltaPhiAngle()/deg, 4);
       return kTRUE;
-   }   
+   }
 
    // To do: add to VGM
    if ( solid->GetEntityType() == "G4TwistedTrap" ) {
@@ -1048,20 +1048,20 @@ Bool_t TG4MCGeometry::GetShape(const TString& volumePath,
       }
       par.AddAt(trap->GetPhiTwist()/deg,            11);
       return kTRUE;
-  }   
+  }
 
   TG4Globals::Warning(
     "TG4MCGeometry", "GetShape",
      "Shape " + TString(solid->GetEntityType()) + " not implemented.");
   return false;
-}  
+}
 
 //_____________________________________________________________________________
 Bool_t TG4MCGeometry::GetMaterial(const TString& volumeName,
                                TString& name, Int_t& imat,
                               Double_t& a, Double_t& z, Double_t& density,
                               Double_t& radl, Double_t& inter, TArrayD& par)
-{                         
+{
 /// Return the material parameters for the volume specified by
 /// the volume name.
 
@@ -1073,14 +1073,14 @@ Bool_t TG4MCGeometry::GetMaterial(const TString& volumeName,
       "TG4MCGeometry", "GetMaterial",
       "Logical volume " + volumeName + " does not exist.");
     return false;
-  }  
+  }
 
   G4Material* material = lv->GetMaterial();
   imat = material->GetIndex();
   name = material->GetName();
   a = fGeometryServices->GetEffA(material);
   z = fGeometryServices->GetEffZ(material);
-    
+
   density = material->GetDensity();
   density /= TG4G3Units::MassDensity();
 
@@ -1088,11 +1088,11 @@ Bool_t TG4MCGeometry::GetMaterial(const TString& volumeName,
   radl /= TG4G3Units::Length();
 
   // the following parameters are not defined in Geant4
-  inter = 0.; 
+  inter = 0.;
   par.Set(0);
   return true;
-}                                        
-                     
+}
+
 //_____________________________________________________________________________
 Bool_t TG4MCGeometry::GetMedium(const TString& volumeName,
                               TString& name, Int_t& imed,
@@ -1100,7 +1100,7 @@ Bool_t TG4MCGeometry::GetMedium(const TString& volumeName,
                               Double_t& fieldm, Double_t& tmaxfd, Double_t& stemax,
                               Double_t& deemax, Double_t& epsil, Double_t& stmin,
                               TArrayD& par)
-{                         
+{
 /// Return the medium parameters for the volume specified by the
 /// volume name.
 
@@ -1112,23 +1112,23 @@ Bool_t TG4MCGeometry::GetMedium(const TString& volumeName,
       "TG4MCGeometry", "GetMaterial",
       "Logical volume " + volumeName + " does not exist.");
     return false;
-  } 
-   
+  }
+
   imed = fGeometryServices->GetMediumId(lv);
   nmat = lv->GetMaterial()->GetIndex();
-  
+
   TG4Limits* limits = fGeometryServices->GetLimits(lv->GetUserLimits());
   if (limits) {
     name = limits->GetName();
     stemax = limits->GetMaxUserStep();
-  }  
-  else  
-    stemax = 0.; 
+  }
+  else
+    stemax = 0.;
 
   // the following parameters are not defined in Geant4
   isvol = 0;
   ifield = 0;
-  fieldm = 0; 
+  fieldm = 0;
   tmaxfd = 0.;
   deemax = 0.;
   epsil = 0.;
@@ -1136,7 +1136,7 @@ Bool_t TG4MCGeometry::GetMedium(const TString& volumeName,
   par.Set(0);
 
   return true;
-}                                        
+}
 
 //_____________________________________________________________________________
 Int_t TG4MCGeometry::MediumId(const Text_t* mediumName) const
@@ -1145,16 +1145,16 @@ Int_t TG4MCGeometry::MediumId(const Text_t* mediumName) const
 
   TG4MediumMap* mediumMap = TG4GeometryServices::Instance()->GetMediumMap();
   TG4Medium* medium = mediumMap->GetMedium(G4String(mediumName), false);
-  
+
   if ( ! medium ) {
     TG4Globals::Warning(
-      "TG4MCGeometry", "MediumId", 
+      "TG4MCGeometry", "MediumId",
       "Medium " + TString(mediumName) + " not found.");
     return 0;
-  }    
+  }
 
   return medium->GetID();
-}                   
+}
 
 
 //
@@ -1163,24 +1163,24 @@ Int_t TG4MCGeometry::MediumId(const Text_t* mediumName) const
 
 
 //_____________________________________________________________________________
-Int_t TG4MCGeometry::VolId(const Text_t* /*volName*/) const 
+Int_t TG4MCGeometry::VolId(const Text_t* /*volName*/) const
 {
 /// Not implemented here - not used for geometry building
 
   TG4Globals::Exception(
     "TG4MCGeometry", "VolId", "Not implemented.");
   return 0;
-}    
+}
 
 //_____________________________________________________________________________
-const char* TG4MCGeometry::VolName(Int_t /*id*/) const 
+const char* TG4MCGeometry::VolName(Int_t /*id*/) const
 {
 /// Not implemented here - not used for geometry building
 
   TG4Globals::Exception(
     "TG4MCGeometry", "VolName", "Not implemented.");
   return "";
-}    
+}
 
 
 //_____________________________________________________________________________
@@ -1191,7 +1191,7 @@ Int_t TG4MCGeometry::NofVolumes() const
   TG4Globals::Exception(
     "TG4MCGeometry", "NofVolumes", "Not implemented.");
   return 0;
-}    
+}
 
 
 //_____________________________________________________________________________
@@ -1202,11 +1202,11 @@ Int_t TG4MCGeometry::NofVolDaughters(const char* /*volName*/) const
   TG4Globals::Exception(
     "TG4MCGeometry", "NofVolDaughters", "Not implemented.");
   return 0;
-}    
+}
 
 
 //_____________________________________________________________________________
-const char*  TG4MCGeometry::VolDaughterName(const char* /*volName*/, 
+const char*  TG4MCGeometry::VolDaughterName(const char* /*volName*/,
                   Int_t /*i*/) const
 {
 /// Not implemented here - not used for geometry building
@@ -1214,11 +1214,11 @@ const char*  TG4MCGeometry::VolDaughterName(const char* /*volName*/,
   TG4Globals::Exception(
     "TG4MCGeometry", "VolDaughterName", "Not implemented.");
   return "";
-}    
+}
 
 
 //_____________________________________________________________________________
-Int_t TG4MCGeometry::VolDaughterCopyNo(const char* /*volName*/, 
+Int_t TG4MCGeometry::VolDaughterCopyNo(const char* /*volName*/,
                   Int_t /*i*/) const
 {
 /// Not implemented here - not used for geometry building
@@ -1226,7 +1226,7 @@ Int_t TG4MCGeometry::VolDaughterCopyNo(const char* /*volName*/,
   TG4Globals::Exception(
     "TG4MCGeometry", "VolDaughterCopyNo", "Not implemented.");
   return 0;
-}    
+}
 
 
 //_____________________________________________________________________________
@@ -1237,5 +1237,5 @@ Int_t TG4MCGeometry::VolId2Mate(Int_t /*id*/) const
   TG4Globals::Exception(
     "TG4MCGeometry", "VolId2Mate", "Not implemented.");
   return 0;
-}    
+}
 

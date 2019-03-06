@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4Medium.cxx
-/// \brief Implementation of the TG4Medium class 
+/// \brief Implementation of the TG4Medium class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -24,7 +24,7 @@ const G4String TG4Medium::fgkUndefinedName = "UndefinedMediumName";
 const G4int    TG4Medium::fgkDefaultIfield = 1;
 
 //_____________________________________________________________________________
-TG4Medium::TG4Medium(G4int id) 
+TG4Medium::TG4Medium(G4int id)
   : fID(id),
     fName(fgkUndefinedName),
     fMaterial(0),
@@ -35,7 +35,7 @@ TG4Medium::TG4Medium(G4int id)
 }
 
 //_____________________________________________________________________________
-TG4Medium::~TG4Medium() 
+TG4Medium::~TG4Medium()
 {
 /// Destructor
 }
@@ -48,10 +48,10 @@ void TG4Medium::Print() const
   G4cout << "ID = " << fID
          << "  name = "<< fName
          << "  limits = " << fLimits;
- 
+
   TG4Limits* limits =  dynamic_cast<TG4Limits*> (fLimits);
   if (limits) limits->Print();
-}         
+}
 
 //_____________________________________________________________________________
 void TG4Medium::SetName(const G4String& name)
@@ -61,11 +61,11 @@ void TG4Medium::SetName(const G4String& name)
 
   if ( fName != fgkUndefinedName &&  fName != name ) {
     TG4Globals::Warning(
-      "TG4Medium", "SetName", 
+      "TG4Medium", "SetName",
       "Reseting name " + TString(fName) + " to " + TString(name));
-  }  
+  }
   fName = name;
-}  
+}
 
 //_____________________________________________________________________________
 void TG4Medium::SetMaterial(G4Material* material)
@@ -77,11 +77,11 @@ void TG4Medium::SetMaterial(G4Material* material)
     G4cout << fMaterial->GetName() << " " << material->GetName() << G4endl;
     TG4Globals::Warning(
       "TG4Medium", "SetMaterial",
-      "Reseting material " + TString(fMaterial->GetName()) + 
+      "Reseting material " + TString(fMaterial->GetName()) +
       " to " + TString(material->GetName()));
-  }  
+  }
   fMaterial = material;
-}  
+}
 
 //_____________________________________________________________________________
 void TG4Medium::SetLimits(G4UserLimits* limits)
@@ -91,6 +91,6 @@ void TG4Medium::SetLimits(G4UserLimits* limits)
   // if ( fLimits && fLimits != limits ) {
   //  TG4Globals::Warning(
   //    "TG4Medium", "SetLimits", "Reseting medium limits");
-  //}  
+  //}
   fLimits = limits;
-}  
+}

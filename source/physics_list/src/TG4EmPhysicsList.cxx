@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4EmPhysicsList.cxx
-/// \brief Implementation of the TG4EmPhysicsList class 
+/// \brief Implementation of the TG4EmPhysicsList class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -41,9 +41,9 @@ G4String TG4EmPhysicsList::AvailableSelections()
 
   G4String selections;
   selections += "emStandard ";
-  
+
   return selections;
-}  
+}
 
 //_____________________________________________________________________________
 G4bool TG4EmPhysicsList::IsAvailableSelection(const G4String& selection)
@@ -53,9 +53,9 @@ G4bool TG4EmPhysicsList::IsAvailableSelection(const G4String& selection)
   G4String available = AvailableSelections();
   G4String checkSelection = selection;
   checkSelection += " ";
-  
+
   return available.contains(checkSelection);
-}  
+}
 
 //
 // ctors, dtor
@@ -76,7 +76,7 @@ TG4EmPhysicsList::TG4EmPhysicsList(const G4String& selection)
 }
 
 //_____________________________________________________________________________
-TG4EmPhysicsList::~TG4EmPhysicsList() 
+TG4EmPhysicsList::~TG4EmPhysicsList()
 {
 /// Destructor
 
@@ -99,7 +99,7 @@ void TG4EmPhysicsList::Configure(const G4String& /*selection*/)
 
   // decay physics
   RegisterPhysics(new G4DecayPhysics());
-}    
+}
 
 //
 // public methods
@@ -113,12 +113,12 @@ void TG4EmPhysicsList::ConstructProcess()
   // create processes for registered physics
   G4VModularPhysicsList::ConstructProcess();
 
-  if (VerboseLevel() > 0) 
+  if (VerboseLevel() > 0)
     G4cout << "### EM physics constructed. " << G4endl;
 }
 
 //_____________________________________________________________________________
-G4int TG4EmPhysicsList::VerboseLevel() const 
+G4int TG4EmPhysicsList::VerboseLevel() const
 {
 /// Return verbose level (via TG4VVerbose)
 
@@ -127,9 +127,9 @@ G4int TG4EmPhysicsList::VerboseLevel() const
 
 
 //_____________________________________________________________________________
-void TG4EmPhysicsList::VerboseLevel(G4int level) 
+void TG4EmPhysicsList::VerboseLevel(G4int level)
 {
-/// Set the specified level to both TG4Verbose and 
+/// Set the specified level to both TG4Verbose and
 /// G4VModularPhysicsList.
 /// The verbose level is also propagated to registered physics contructors.
 
@@ -142,7 +142,7 @@ void TG4EmPhysicsList::VerboseLevel(G4int level)
     if ( verbose )
       verbose->VerboseLevel(level);
     else
-      (*it)->SetVerboseLevel(level);  
+      (*it)->SetVerboseLevel(level);
   }
 }
 
@@ -155,4 +155,4 @@ void TG4EmPhysicsList::SetRangeCut(G4double value)
 /// the cut value in later phases.
 
   defaultCutValue = value;
-}  
+}

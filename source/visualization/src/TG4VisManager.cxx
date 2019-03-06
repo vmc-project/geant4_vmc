@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4VisManager.cxx
-/// \brief Implementation of the TG4VisManager class 
+/// \brief Implementation of the TG4VisManager class
 ///
 /// According to visualization/management/include/MyVisManager.*
 /// by John Allison 24th January 1998 \n
@@ -20,7 +20,7 @@
 /// Added AliMC implementation \n
 /// A. Gheata, 22.2.00
 ///
-/// Added OpenGL*Win32, RayTracer (as replacement of RayX) drivers 
+/// Added OpenGL*Win32, RayTracer (as replacement of RayX) drivers
 /// based on G4 suggestions.\n
 /// I. Gonzalez, 4.4.2000
 ///
@@ -45,16 +45,16 @@
 //_____________________________________________________________________________
 TG4VisManager::TG4VisManager(G4int verboseLevel)
   : fColourFlag(true),
-    fVerboseLevel(verboseLevel) 
+    fVerboseLevel(verboseLevel)
 {
 /// Standard constructor
 }
 
 //_____________________________________________________________________________
-TG4VisManager::~TG4VisManager() 
+TG4VisManager::~TG4VisManager()
 {
 /// Destructor
-}  
+}
 
 //
 // private methods
@@ -68,7 +68,7 @@ G4bool TG4VisManager::Contains(const LogicalVolumesVector& lvVector,
 
   LogicalVolumesVector::const_iterator i;
 
-  for (i = lvVector.begin(); i != lvVector.end(); i++) 
+  for (i = lvVector.begin(); i != lvVector.end(); i++)
     if (*i == lv) return true;
 
   return false;
@@ -82,7 +82,7 @@ G4bool TG4VisManager::Contains(const PhysicalVolumesVector& pvVector,
 
   PhysicalVolumesVector::const_iterator i;
 
-  for (i = pvVector.begin(); i != pvVector.end(); i++) 
+  for (i = pvVector.begin(); i != pvVector.end(); i++)
     if (*i == pv) return true;
 
   return false;
@@ -92,40 +92,40 @@ G4bool TG4VisManager::Contains(const PhysicalVolumesVector& pvVector,
 TG4VisManager::LogicalVolumesVector TG4VisManager::GetLVList(G4String name)
 {
 /// Get function returning the list of logical volumes
-/// associated to NAME; G4 built clones of a G3 volume (identified 
-/// with NAME_NUMBER will be added to the list)  
+/// associated to NAME; G4 built clones of a G3 volume (identified
+/// with NAME_NUMBER will be added to the list)
 ///  NAME can be the name of a logical or physical volume
 
  LogicalVolumesVector lvList;
  G4LogicalVolumeStore* pLVStore = G4LogicalVolumeStore::GetInstance();
- G4LogicalVolume* pLV = 0; 
+ G4LogicalVolume* pLV = 0;
  if (pLVStore)
  {
    for (G4int i=0; i<G4int(pLVStore->size()); i++)
    {
-     pLV = (*pLVStore)[i];  
-     if (CaseInsensitiveEqual(name,pLV->GetName())) 
+     pLV = (*pLVStore)[i];
+     if (CaseInsensitiveEqual(name,pLV->GetName()))
      {
        if (!Contains(lvList, pLV)) lvList.push_back(pLV);
      }
    }
- }  
+ }
  if (lvList.size()>0) return lvList;
 
  G4PhysicalVolumeStore* pPVStore = G4PhysicalVolumeStore::GetInstance();
  G4VPhysicalVolume* pPV = 0;
- if (pPVStore) 
+ if (pPVStore)
  {
    for (G4int i=0; i<G4int(pPVStore->size()); i++)
    {
-     pPV = (*pPVStore)[i]; 
-     if (CaseInsensitiveEqual(name,pPV->GetName())) 
+     pPV = (*pPVStore)[i];
+     if (CaseInsensitiveEqual(name,pPV->GetName()))
      {
        pLV = pPV->GetLogicalVolume();
        if (!Contains(lvList, pLV)) lvList.push_back(pLV);
-     }     
+     }
    }
- }  
+ }
  return lvList;
 }
 
@@ -144,7 +144,7 @@ TG4VisManager::PhysicalVolumesVector TG4VisManager::GetPVList(G4String name)
     if (CaseInsensitiveEqual(name,pPV->GetName()))
     {
       if (!Contains(pvList, pPV)) pvList.push_back(pPV);
-    }  
+    }
   }
   return pvList;
 }
@@ -168,35 +168,35 @@ G4bool TG4VisManager::CaseInsensitiveEqual(const G4String string1,
   {
     if (string2(i) == '_') return true;
     return false;
-  }    
+  }
   return true;
 }
- 
+
 
 //_____________________________________________________________________________
-void TG4VisManager::SetAtt4Daughters(G4LogicalVolume* const lv, 
+void TG4VisManager::SetAtt4Daughters(G4LogicalVolume* const lv,
                                      const TG4G3Attribute att, const G4int val)
 {
 /// Iterator for setting a visual attribute for all daughters
 
-  SetG4Attribute(lv,att,val);  
-  
+  SetG4Attribute(lv,att,val);
+
   G4String lvName = lv->GetName();
   G4int nOfDaughters = lv->GetNoDaughters();
   if (nOfDaughters>0)
   {
     G4String previousName = "";
-    for (G4int i=0; i<nOfDaughters; i++) 
-    { 
-      G4LogicalVolume* lvd = lv->GetDaughter(i)->GetLogicalVolume(); 
+    for (G4int i=0; i<nOfDaughters; i++)
+    {
+      G4LogicalVolume* lvd = lv->GetDaughter(i)->GetLogicalVolume();
       G4String currentName = lvd->GetName();
       if (currentName != lvName && currentName != previousName)
       {
         SetAtt4Daughters(lvd, att, val);
         previousName = currentName;
-      } 
+      }
     }
-  }   
+  }
 }
 
 
@@ -215,7 +215,7 @@ G4bool TG4VisManager::IsSharedVisAttributes(const G4LogicalVolume* pLV)
     pLVCurrent = (*pLVStore)[i];
     if (pLVCurrent != pLV)
     {
-      if (pLVCurrent->GetVisAttributes() == pVisAtt) 
+      if (pLVCurrent->GetVisAttributes() == pVisAtt)
       {
         return true;
       }
@@ -230,11 +230,11 @@ void TG4VisManager::SetG4Attribute(G4LogicalVolume* const lv,
                                    const TG4G3Attribute att, const G4int val)
 {
 /// Set the G4 attribute fo volume LV accordingly to the G3 description
-/// of (att- val)    
+/// of (att- val)
 // --
 
  if (!lv) return;
- // Dupplicating old vis. attributes    
+ // Dupplicating old vis. attributes
  const G4VisAttributes* visAttributes = lv->GetVisAttributes();
  G4VisAttributes* newVisAttributes;
  if (!visAttributes)
@@ -255,7 +255,7 @@ void TG4VisManager::SetG4Attribute(G4LogicalVolume* const lv,
  G4double lineWidth = 1.0;
  G4bool isForceDrawingStyle(false);
  G4VisAttributes::ForcedDrawingStyle drawingStyle = G4VisAttributes::wireframe;
- 
+
  // a 'hardcopy' of old vis attributes is needed because the copy constructor
  // resets to defaults some of the data members of G4VisAttributes class
  if (visAttributes)
@@ -263,16 +263,16 @@ void TG4VisManager::SetG4Attribute(G4LogicalVolume* const lv,
    isVisible              = visAttributes->IsVisible();
    isDaughtersInvisible = visAttributes->IsDaughtersInvisible();
    red   = visAttributes->GetColour().GetRed();
-   green = visAttributes->GetColour().GetGreen(); 
+   green = visAttributes->GetColour().GetGreen();
    blue         = visAttributes->GetColour().GetBlue();         // old RGB components
    lineStyle = visAttributes->GetLineStyle();
    lineWidth = visAttributes->GetLineWidth();
    isForceDrawingStyle = visAttributes->IsForceDrawingStyle();
-   if (isForceDrawingStyle) 
+   if (isForceDrawingStyle)
        drawingStyle = visAttributes->GetForcedDrawingStyle();
-   
+
  }
- G4double luminosityBin(0.04),  // bin for luminosity 
+ G4double luminosityBin(0.04),  // bin for luminosity
           luminosity(0);         // colour luminosity
 
  // Delete old vis. attributes if they are not shared
@@ -285,20 +285,20 @@ void TG4VisManager::SetG4Attribute(G4LogicalVolume* const lv,
    switch (val)
    {
     case  0:
-     isVisible = false; 
+     isVisible = false;
      break;
     case  1:
-     isVisible = true;  
+     isVisible = true;
      break;
     case -1:
-     isVisible = false; 
+     isVisible = false;
      break;
     case -2:
-     isVisible = false; 
+     isVisible = false;
      break;
     default:
-     isVisible = false; 
-   }       
+     isVisible = false;
+   }
    break;
   case kLSTY:
    switch (kAbsVal)
@@ -315,12 +315,12 @@ void TG4VisManager::SetG4Attribute(G4LogicalVolume* const lv,
                  << "ATT = 1,2,3 means line unbroken, dashed or dotted" << G4endl
              << "any other value resets to the default : unbroken" << G4endl;
      lineStyle = G4VisAttributes::unbroken;
-   }       
+   }
    break;
   case kLWID:
    lineWidth = kAbsVal;
    if (lineWidth > 7) lineWidth = 7;
-   if (fVerboseLevel > 0) 
+   if (fVerboseLevel > 0)
        G4cout << "TG4VisManager::Gsatt() Usage for LWID :" << G4endl
               << "  The VAL you supply means the width of lines in pixels "
               << "for the screen and in 0.1*mm for paper." << G4endl
@@ -334,22 +334,22 @@ void TG4VisManager::SetG4Attribute(G4LogicalVolume* const lv,
     {
      case 1:
        red=0; green=0; blue=0;            //black
-       break;                           
+       break;
      case 2:
        red=1; green=0; blue=0;            //red
-       break;                           
+       break;
      case 3:
        red=0; green=1; blue=0;            //green
-       break;                           
+       break;
      case 4:
        red=0; green=0; blue=1;            //blue
-       break;                           
+       break;
      case 5:
        red=1; green=1; blue=0;            //yellow
-       break;                           
+       break;
      case 6:
        red=1; green=0; blue=1;            //violet
-       break;                           
+       break;
      case 7:
        red=0; green=1; blue=1;            //lightblue (almost !)
     }
@@ -411,11 +411,11 @@ void TG4VisManager::SetG4Attribute(G4LogicalVolume* const lv,
                 << "+/- 1 : forces wireframe drawing (default)" << G4endl
                 << "+/- 2 : forces solid drawing" << G4endl
                 << "other values sets the drawing style to solid"
-                << G4endl;                
+                << G4endl;
      drawingStyle = G4VisAttributes::solid;
    }
    default:
-     ;;      
+     ;;
  }
  // Register vis. attributes
  newVisAttributes->SetVisibility(isVisible);
@@ -423,14 +423,14 @@ void TG4VisManager::SetG4Attribute(G4LogicalVolume* const lv,
  newVisAttributes->SetColour(red,green,blue);
  newVisAttributes->SetLineStyle(lineStyle);
  newVisAttributes->SetLineWidth(lineWidth);
- if (drawingStyle == G4VisAttributes::wireframe) 
+ if (drawingStyle == G4VisAttributes::wireframe)
        newVisAttributes->SetForceWireframe(isForceDrawingStyle);
- if (drawingStyle == G4VisAttributes::solid) 
+ if (drawingStyle == G4VisAttributes::solid)
        newVisAttributes->SetForceSolid(isForceDrawingStyle);
- 
+
  lv->SetVisAttributes(newVisAttributes);
-} 
-  
+}
+
 //
 // functions for drawing
 //
@@ -451,7 +451,7 @@ void TG4VisManager::SetColors()
 /// Function for setting default volume colours
 
   G4LogicalVolumeStore* pLVStore = G4LogicalVolumeStore::GetInstance();
-  const G4LogicalVolume* pLV = 0; 
+  const G4LogicalVolume* pLV = 0;
   // parse the LV tree and set colours according to material density
   for (G4int i=0; i<G4int(pLVStore->size()); i++)
   {
@@ -463,11 +463,11 @@ void TG4VisManager::SetColors()
     G4String nState = "Undefined";
     G4int colour = 1;                        //black by default
     G4double luminosity = 0.;
-    if (kState == kStateUndefined) 
+    if (kState == kStateUndefined)
     {
       nState = "Undefined";
     }
-    if (kState == kStateSolid) 
+    if (kState == kStateSolid)
     {
       nState = "Solid";
       if (density < 2)
@@ -496,13 +496,13 @@ void TG4VisManager::SetColors()
         luminosity = 9 - 9*(density-15)/5;
       }
     }
-    if (kState == kStateLiquid) 
+    if (kState == kStateLiquid)
     {
       nState = "Liquid";
       colour = 142;        //violet
       luminosity = 25 - 25*density/2;
     }
-    if (kState == kStateGas) 
+    if (kState == kStateGas)
     {
       nState = "Gas";
       if (density < 0.001)  {colour = 42;}        //yellow
@@ -516,27 +516,27 @@ void TG4VisManager::SetColors()
     //  Setting the corresponding colour
     Gsatt(pLV->GetName(),"COLO",colour);
   }
-} 
-  
+}
+
 
 //_____________________________________________________________________________
 void TG4VisManager::Gsatt(const char* name, const char* att, Int_t val)
 {
 /// Geant3 description :
-///  
+///
 ///   - NAME   Volume name
 ///   - IOPT   Name of the attribute to be set
 ///   - IVAL   Value to which the attribute is to be set
-///  
+///
 ///   - name= "*" stands for all the volumes.
 ///   - iopt can be chosen among the following :
 ///     kWORK, kSEEN, kLSTY, kLWID, kCOLO, kFILL, kSET, kDET, kDTYP
 
  G4int ival = val;
- G4LogicalVolume* lv = 0; 
+ G4LogicalVolume* lv = 0;
  LogicalVolumesVector lvList;
  G4String sname(name),
-          satt(att);                
+          satt(att);
 
  // seek for known attributes
  TG4G3Attribute attribute = kUNKNOWN;
@@ -547,13 +547,13 @@ void TG4VisManager::Gsatt(const char* name, const char* att, Int_t val)
      "G3Attribute " + TString(satt) + " not used in G4");
    return;
  }
- if (CaseInsensitiveEqual(att,"SEEN"))        attribute = kSEEN;  
- if (CaseInsensitiveEqual(att,"LSTY"))        attribute = kLSTY;  
+ if (CaseInsensitiveEqual(att,"SEEN"))        attribute = kSEEN;
+ if (CaseInsensitiveEqual(att,"LSTY"))        attribute = kLSTY;
  if (CaseInsensitiveEqual(att,"LWID"))        attribute = kLWID;
- if (CaseInsensitiveEqual(att,"COLO"))        attribute = kCOLO;  
- if (CaseInsensitiveEqual(att,"FILL"))        attribute = kFILL;  
+ if (CaseInsensitiveEqual(att,"COLO"))        attribute = kCOLO;
+ if (CaseInsensitiveEqual(att,"FILL"))        attribute = kFILL;
 
- if ( CaseInsensitiveEqual(att,"SET") || 
+ if ( CaseInsensitiveEqual(att,"SET") ||
       CaseInsensitiveEqual(att,"DET") ||
       CaseInsensitiveEqual(att,"DTYP") )
  {
@@ -569,13 +569,13 @@ void TG4VisManager::Gsatt(const char* name, const char* att, Int_t val)
      "G3Attribute " + TString(satt) + " unknown");
    return;
  }
- G4bool         doForDaughters(false),                // tree iterator flag 
-         doForAll(false),                // activated if NAME is "*" 
+ G4bool         doForDaughters(false),                // tree iterator flag
+         doForAll(false),                // activated if NAME is "*"
          topVisible(false);                // activated for kSEEN/-2
  if (sname == "*")        doForAll = true;
  if (val < 0 && sname!="*") doForDaughters = true;
  if (attribute==kSEEN && val==-2) topVisible = true;
- 
+
  // parse all the tree
  if (doForAll)
  {
@@ -604,7 +604,7 @@ void TG4VisManager::Gsatt(const char* name, const char* att, Int_t val)
    {
      lv = lvList[i];
      SetAtt4Daughters(lv,attribute,ival);
-   }     
+   }
  }
  else
  {
@@ -612,24 +612,24 @@ void TG4VisManager::Gsatt(const char* name, const char* att, Int_t val)
    {
      lv = lvList[i];
      SetG4Attribute(lv,attribute,ival);
-   }     
+   }
  }
- if (topVisible) 
+ if (topVisible)
  {
    for (G4int i=0; i<G4int(G4int(lvList.size())); i++)
    {
      lv = lvList[i];
-     SetG4Attribute(lv,attribute,1); 
+     SetG4Attribute(lv,attribute,1);
    }
- }       
-} 
+ }
+}
 
 
 //_____________________________________________________________________________
-void TG4VisManager::Gdraw(const char* /*name*/, 
+void TG4VisManager::Gdraw(const char* /*name*/,
                     Float_t /*theta*/, Float_t /*phi*/, Float_t /*psi*/,
                     Float_t /*u0*/, Float_t /*v0*/, Float_t /*ul*/, Float_t /*vl*/)
-{ 
+{
 /// Draw the physical volume NAME and all descendents;                       \n
 /// Mandatory : the graphics system, scene and view must be
 ///        initialized, e.g. "/vis~/create_view/new_graphics_system OGLSX";
@@ -638,7 +638,7 @@ void TG4VisManager::Gdraw(const char* /*name*/,
 /// The result will be a centered view drawing of the designated volume,
 ///        lights moving with camera, viewpoint direction given by theta/phi
 ///        and rotation on the screen given by psi;                             \n
-/// The u0, v0, ul, vl factors are ignored since the object will be 
+/// The u0, v0, ul, vl factors are ignored since the object will be
 ///         automatically centered and will be confortable in the window
 ///        at any viewing angle.
 ///
@@ -646,17 +646,17 @@ void TG4VisManager::Gdraw(const char* /*name*/,
 
 /*
   G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
-  if (!pVVisManager) { 
+  if (!pVVisManager) {
     TG4Globals::Warning(
        "TG4VisManager", "Gdraw", "Ignored - No graphics driver is built.");
     return;
-  }     
+  }
   if (NeedSetColours())
   {
     SetColors();
     SetColourFlag(false);
   }
-  
+
   const G4double kRad = M_PI/180.;
   PhysicalVolumesVector pvList;
   G4String sname(name);
@@ -677,33 +677,33 @@ void TG4VisManager::Gdraw(const char* /*name*/,
   // if (!fpScene->IsEmpty()) fpScene->Clear();
           // G4Scene::Clear() function not available since Geant4 8.1
 
-  // create and add object's model list to the runtime-duration model 
+  // create and add object's model list to the runtime-duration model
   // list and draw it
-  // (it is deleted in the VisManager destructor within 
+  // (it is deleted in the VisManager destructor within
   // all the vectors of the scene)
   for (G4int i=0; i<G4int(pvList.size()); i++)
-  { 
+  {
     pPV = pvList[i];
     successful = fpScene->AddRunDurationModel(new G4PhysicalVolumeModel(pPV));
-    if (!successful) 
+    if (!successful)
     {
       TG4Globals::Warning(
-        "TG4VisManager", "Gdraw", 
+        "TG4VisManager", "Gdraw",
         "Could not add " + TString(pPV->GetName()) + " to the drawing list."
-        + TG4Globals::Endl() + 
+        + TG4Globals::Endl() +
         "Probably it is already in the list.");
-    }  
+    }
   }
   // get the standard target point of the scene
   const G4Point3D kTargetPoint = fpScene->GetStandardTargetPoint();
 
   // set the viewpoint and the rotation on the screen
-  G4Vector3D viewpointDirection(sin(theta*kRad)*cos(phi*kRad), 
-                                sin(theta*kRad)*sin(phi*kRad), cos(theta*kRad)); 
-  G4Vector3D upVector(sin(psi*kRad), cos(psi*kRad),0);                               
+  G4Vector3D viewpointDirection(sin(theta*kRad)*cos(phi*kRad),
+                                sin(theta*kRad)*sin(phi*kRad), cos(theta*kRad));
+  G4Vector3D upVector(sin(psi*kRad), cos(psi*kRad),0);
 
   // set and register view parameters to the viewer
-  
+
   G4ViewParameters vp;;
   vp.SetLightsMoveWithCamera(true);
   vp.SetViewGeom();
@@ -723,9 +723,9 @@ void TG4VisManager::Gdraw(const char* /*name*/,
     fpViewer->DrawView();
     fpViewer->ShowView();
   }
-  else 
+  else
     TG4Globals::Warning(
-      "TG4VisManager", "Gdraw", "Ignored - Failed to register volume"); 
+      "TG4VisManager", "Gdraw", "Ignored - Failed to register volume");
 */
 
   TG4Globals::Warning("TG4VisManager", "Gdraw", "Not implemented");

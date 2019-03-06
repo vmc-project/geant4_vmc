@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01EmCalorHit.cxx 
-/// \brief Implementation of the A01EmCalorHit class 
+/// \file A01EmCalorHit.cxx
+/// \brief Implementation of the A01EmCalorHit class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo \n
 ///
@@ -26,7 +26,7 @@ ClassImp(A01EmCalorHit)
 /// \endcond
 
 //_____________________________________________________________________________
-A01EmCalorHit::A01EmCalorHit(Int_t z) 
+A01EmCalorHit::A01EmCalorHit(Int_t z)
   : TObject(),
     fCellID(z),
     fVolID(-1),
@@ -38,7 +38,7 @@ A01EmCalorHit::A01EmCalorHit(Int_t z)
 }
 
 //_____________________________________________________________________________
-A01EmCalorHit::A01EmCalorHit() 
+A01EmCalorHit::A01EmCalorHit()
   : TObject(),
     fCellID(-1),
     fVolID(-1),
@@ -49,7 +49,7 @@ A01EmCalorHit::A01EmCalorHit()
 }
 
 //_____________________________________________________________________________
-A01EmCalorHit::~A01EmCalorHit() 
+A01EmCalorHit::~A01EmCalorHit()
 {
 /// Destructor
 }

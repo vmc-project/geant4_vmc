@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file TR/src/SensitiveDetector.cxx 
-/// \brief Implementation of the SensitiveDetector class 
+/// \file TR/src/SensitiveDetector.cxx
+/// \brief Implementation of the SensitiveDetector class
 ///
 /// Geant4 TestEm10 adapted to Virtual Monte Carlo.
 ///
@@ -78,7 +78,7 @@ SensitiveDetector::~SensitiveDetector()
 void SensitiveDetector::Initialize()
 {
 /// Set sensitive volumes.
-  
+
   fAbsorberVolId = gMC->VolId("Absorber");
 }
 
@@ -90,7 +90,7 @@ Bool_t SensitiveDetector::ProcessHits()
   Int_t copyNo;
   Int_t id = gMC->CurrentVolID(copyNo);
 
-  if (id != fAbsorberVolId ) 
+  if (id != fAbsorberVolId )
     return false;
 
   fEdep += gMC->Edep();
@@ -104,17 +104,17 @@ void SensitiveDetector::EndOfEvent()
 /// Print the enrgy deposit (if verbose) and reset hits afterwards.
 
   if (fVerboseLevel>1)  Print();
-    
+
   // Reset the accumulated values.
-  fEdep = 0.;  
+  fEdep = 0.;
 }
 
 //_____________________________________________________________________________
 void SensitiveDetector::Print(Option_t* /*option*/) const
 {
 /// Print the energy deposit.
-  
-  cout << "\n-------->Edep: in this event [MeV]: " << fEdep*1e+03 
+
+  cout << "\n-------->Edep: in this event [MeV]: " << fEdep*1e+03
        << endl << endl;
 }
 

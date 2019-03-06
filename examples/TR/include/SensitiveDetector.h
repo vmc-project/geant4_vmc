@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TR/include/SensitiveDetector.h
-/// \brief Definition of the SensitiveDetector class 
+/// \brief Definition of the SensitiveDetector class
 ///
 /// Geant4 TestEm10 adapted to Virtual Monte Carlo.
 ///
@@ -44,7 +44,7 @@ class SensitiveDetector : public TNamed
     Bool_t  ProcessHits();
     void    EndOfEvent();
     virtual void  Print(Option_t* option = "") const;
-    
+
     // set methods
     void SetVerboseLevel(Int_t level);
 
@@ -56,13 +56,13 @@ class SensitiveDetector : public TNamed
     Double_t  fEdep;          ///< Energy deposit
     Int_t     fAbsorberVolId; ///< The absorber volume Id
     Int_t     fVerboseLevel;  ///< Verbosity level
-   
-  ClassDef(SensitiveDetector,1) //SensitiveDetector 
+
+  ClassDef(SensitiveDetector,1) //SensitiveDetector
 };
 
 /// Set verbose level
 /// \param level The new verbose level value
-inline void SensitiveDetector::SetVerboseLevel(Int_t level) 
+inline void SensitiveDetector::SetVerboseLevel(Int_t level)
 { fVerboseLevel = level; }
 
 /// Return energy deposit

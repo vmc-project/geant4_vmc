@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4ProcessMCMap.h
-/// \brief Definition of the TG4ProcessMCMap class 
+/// \brief Definition of the TG4ProcessMCMap class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -24,7 +24,7 @@
 class G4VProcess;
 
 /// \ingroup physics
-/// \brief Maps G4 process names to TMCProcess code 
+/// \brief Maps G4 process names to TMCProcess code
 ///
 /// Singleton map container for associated pairs
 /// of G4 process name and TMCProcess code.
@@ -51,8 +51,8 @@ class TG4ProcessMCMap
     static TG4ProcessMCMap* Instance();
 
     // methods
-    G4bool Add(G4VProcess* process,  TMCProcess second);  
-    G4bool Add(G4String processName, TMCProcess second);  
+    G4bool Add(G4VProcess* process,  TMCProcess second);
+    G4bool Add(G4String processName, TMCProcess second);
     void PrintAll() const;
     void Clear();
 
@@ -67,7 +67,7 @@ class TG4ProcessMCMap
     TG4ProcessMCMap(const TG4ProcessMCMap& right);
     /// Not implemented
     TG4ProcessMCMap& operator=(const TG4ProcessMCMap& right);
-  
+
     // methods
     G4bool IsDefined(const G4String& processName);
 
@@ -81,9 +81,9 @@ class TG4ProcessMCMap
 
 // inline methods
 
-inline TG4ProcessMCMap* TG4ProcessMCMap::Instance() { 
+inline TG4ProcessMCMap* TG4ProcessMCMap::Instance() {
   /// Return this instance
-  return fgInstance; 
+  return fgInstance;
 }
 
 #endif //TG4_PROCESS_MC_MAP_H

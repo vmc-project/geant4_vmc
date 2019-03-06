@@ -17,20 +17,20 @@
 
 void test_E03_3(const TString& configMacro, Bool_t oldGeometry)
 {
-/// Macro function for testing example E03 
-/// \param configMacro  configuration macro loaded in initialization 
-/// \param oldGeometry  if true - geometry is defined via VMC, otherwise 
+/// Macro function for testing example E03
+/// \param configMacro  configuration macro loaded in initialization
+/// \param oldGeometry  if true - geometry is defined via VMC, otherwise
 ///                     via TGeo
-/// 
-/// Run user defined primary particles with verbosity level switched on 
+///
+/// Run user defined primary particles with verbosity level switched on
 
   // Create application if it does not yet exist
   Bool_t needDelete = kFALSE;
   if ( ! TVirtualMCApplication::Instance() ) {
     new Ex03MCApplication("Example03", "The example03 MC application");
     needDelete = kTRUE;
-  }  
- 
+  }
+
   // MC application
   Ex03MCApplication* appl
     = (Ex03MCApplication*)TVirtualMCApplication::Instance();
@@ -40,7 +40,7 @@ void test_E03_3(const TString& configMacro, Bool_t oldGeometry)
   appl->SetVerboseLevel(3);
 
   // Set geometry defined via VMC
-  appl->SetOldGeometry(oldGeometry);  
+  appl->SetOldGeometry(oldGeometry);
 
   appl->InitMC(configMacro);
 
@@ -50,4 +50,4 @@ void test_E03_3(const TString& configMacro, Bool_t oldGeometry)
   appl->RunMC(1);
 
   if ( needDelete ) delete appl;
-}  
+}

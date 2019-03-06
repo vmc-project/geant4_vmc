@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4ProcessControlMap.h
-/// \brief Definition of the TG4ProcessControlMap class 
+/// \brief Definition of the TG4ProcessControlMap class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -25,7 +25,7 @@ class G4VProcess;
 /// \ingroup global
 /// \brief Maps G4 process names to TG4G3Control
 ///
-/// Singleton map container for associated pairs G4 process name 
+/// Singleton map container for associated pairs G4 process name
 /// and TG4G3Control.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
@@ -33,13 +33,13 @@ class G4VProcess;
 class TG4ProcessControlMap
 {
   public:
-    /// The map of TG4G3Controls to strings 
+    /// The map of TG4G3Controls to strings
     typedef std::map<G4String, TG4G3Control, std::less<G4String> >  Map;
 
-    /// The iterator for the map of TG4G3Controls to strings 
+    /// The iterator for the map of TG4G3Controls to strings
     typedef Map::iterator  MapIterator;
 
-    /// The constant iterator for the map of TG4G3Controls to strings 
+    /// The constant iterator for the map of TG4G3Controls to strings
     typedef Map::const_iterator MapConstIterator;
 
   public:
@@ -50,8 +50,8 @@ class TG4ProcessControlMap
     static TG4ProcessControlMap* Instance();
 
     // methods
-    G4bool Add(G4VProcess* process,  TG4G3Control second);  
-    G4bool Add(G4String processName, TG4G3Control second);  
+    G4bool Add(G4VProcess* process,  TG4G3Control second);
+    G4bool Add(G4String processName, TG4G3Control second);
     void PrintAll() const;
     void Clear();
 
@@ -66,7 +66,7 @@ class TG4ProcessControlMap
     TG4ProcessControlMap(const TG4ProcessControlMap& right);
     /// Not implemented
     TG4ProcessControlMap& operator=(const TG4ProcessControlMap& right);
-  
+
     // methods
      G4bool IsDefined(const G4String& processName);
 
@@ -79,9 +79,9 @@ class TG4ProcessControlMap
 
 // inline methods
 
-inline TG4ProcessControlMap* TG4ProcessControlMap::Instance() { 
+inline TG4ProcessControlMap* TG4ProcessControlMap::Instance() {
   /// Return this instance
-  return fgInstance; 
+  return fgInstance;
 }
 
 #endif //TG4_PROCESS_CONTROL_MAP_H

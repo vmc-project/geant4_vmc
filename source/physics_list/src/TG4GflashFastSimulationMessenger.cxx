@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4GflashFastSimulationMessenger.cxx
-/// \brief Implementation of the TG4GflashFastSimulationMessenger class 
+/// \brief Implementation of the TG4GflashFastSimulationMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -24,18 +24,18 @@ TG4GflashFastSimulationMessenger::TG4GflashFastSimulationMessenger(
   : G4UImessenger(),
     fGflashFastSimulation(gflashFastSimulation),
     fSetGflashMaterialCmd(0)
-{ 
+{
 /// Standard constructor
 
-  fSetGflashMaterialCmd 
-    = new G4UIcmdWithAString("/mcPhysics/setGflashMaterial", this);  
+  fSetGflashMaterialCmd
+    = new G4UIcmdWithAString("/mcPhysics/setGflashMaterial", this);
   fSetGflashMaterialCmd->SetGuidance("Set  material for shower parameterisation");
   fSetGflashMaterialCmd->SetParameterName("ExtDecayerSelection", false);
-  fSetGflashMaterialCmd->AvailableForStates(G4State_PreInit);  
+  fSetGflashMaterialCmd->AvailableForStates(G4State_PreInit);
 }
 
 //______________________________________________________________________________
-TG4GflashFastSimulationMessenger::~TG4GflashFastSimulationMessenger() 
+TG4GflashFastSimulationMessenger::~TG4GflashFastSimulationMessenger()
 {
 /// Destructor
 
@@ -49,10 +49,10 @@ TG4GflashFastSimulationMessenger::~TG4GflashFastSimulationMessenger()
 //______________________________________________________________________________
 void TG4GflashFastSimulationMessenger::SetNewValue(G4UIcommand* command,
                                           G4String newValue)
-{ 
+{
 /// Apply command to the associated object.
-  
+
   if ( command == fSetGflashMaterialCmd ) {
     fGflashFastSimulation->SetMaterialName(newValue);
-  }  
+  }
 }

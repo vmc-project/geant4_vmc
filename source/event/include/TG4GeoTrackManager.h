@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4GeoTrackManager.h
-/// \brief Definition of the TG4GeoTrackManager class 
+/// \brief Definition of the TG4GeoTrackManager class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -28,7 +28,7 @@ class TVirtualGeoTrack;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4GeoTrackManager : public TG4Verbose 
+class TG4GeoTrackManager : public TG4Verbose
 {
   public:
     TG4GeoTrackManager();
@@ -44,12 +44,12 @@ class TG4GeoTrackManager : public TG4Verbose
     TG4GeoTrackManager& operator=(const TG4GeoTrackManager& right);
 
     // static data members
-    /// minimum point distance to store a point in TGeo track 
-    static const G4double  fgkMinPointDistance; 
+    /// minimum point distance to store a point in TGeo track
+    static const G4double  fgkMinPointDistance;
 
     //
     // data members
-    
+
     /// control to collect Root tracks
     G4bool fCollectTracks;
 

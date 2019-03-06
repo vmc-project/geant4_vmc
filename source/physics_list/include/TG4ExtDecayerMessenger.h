@@ -1,5 +1,5 @@
 #ifndef TG4_EXT_DECAYR_MESSENGER_H
-#define TG4_EXT_DECAYR_MESSENGER_H 
+#define TG4_EXT_DECAYR_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4ExtDecayerMessenger.h
-/// \brief Definition of the TG4ExtDecayerMessenger class 
+/// \brief Definition of the TG4ExtDecayerMessenger class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -36,15 +36,15 @@ class G4UIcmdWithABool;
 class TG4ExtDecayerMessenger: public G4UImessenger
 {
   public:
-    TG4ExtDecayerMessenger(TG4ExtDecayerPhysics* extDecayerPhysics); 
+    TG4ExtDecayerMessenger(TG4ExtDecayerPhysics* extDecayerPhysics);
     virtual ~TG4ExtDecayerMessenger();
-   
-    // methods 
+
+    // methods
     virtual void SetNewValue(G4UIcommand* command, G4String string);
-    
+
   private:
     /// Not implemented
-    TG4ExtDecayerMessenger();  
+    TG4ExtDecayerMessenger();
     /// Not implemented
     TG4ExtDecayerMessenger(const TG4ExtDecayerMessenger& right);
     /// Not implemented
@@ -52,15 +52,15 @@ class TG4ExtDecayerMessenger: public G4UImessenger
 
     //
     // data members
-    
+
     /// associated class
     TG4ExtDecayerPhysics* fExtDecayerPhysics;
-    
+
     /// setExtDecayerSelection command
     G4UIcmdWithAString*  fSetSelectionCmd;
 
     /// skipExtDecayerNeutrino command
     G4UIcmdWithABool*  fSkipNeutrinoCmd;
-};    
+};
 
 #endif //TG4_EXT_DECAYER_MESSENGER_H

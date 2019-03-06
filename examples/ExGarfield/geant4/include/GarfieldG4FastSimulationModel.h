@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file  ExGarfield/geant4/include/GarfieldG4FastSimulationModel.h
-/// \brief Definition of the GarfieldG4FastSimulationModel class 
+/// \brief Definition of the GarfieldG4FastSimulationModel class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 /// This class is imported from garfieldpp example.

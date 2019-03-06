@@ -9,20 +9,20 @@
 
 /// \ingroup A01
 /// \file A01/run_g3.C
-/// \brief Macro for running Example A01 with Geant3 
+/// \brief Macro for running Example A01 with Geant3
 
 #include "set_vis.C"
 
-void run_g3(const TString& configMacro = "g3tgeoConfig.C") 
+void run_g3(const TString& configMacro = "g3tgeoConfig.C")
 {
 /// Macro function for running Example A01 with Geant3 from
 /// Root interactive session
 /// Note that since Root 6 the libraries have to be loaded first
 /// via load_g4.C.
-/// \param configMacro configuration macro name, default \ref E03/g3Config.C 
+/// \param configMacro configuration macro name, default \ref E03/g3Config.C
 
   // MC application
-  A01MCApplication* appl 
+  A01MCApplication* appl
     =  new A01MCApplication("ExampleA01", "The exampleA01 MC application");
   appl->GetPrimaryGenerator()->SetRandomize(false);
   appl->SetWriteStack(true);
@@ -34,10 +34,10 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
   set_vis();
 
   TStopwatch timer;
-  timer.Start();  
+  timer.Start();
   appl->RunMC(5);
   timer.Stop();
   timer.Print();
-  
+
   delete appl;
-}  
+}

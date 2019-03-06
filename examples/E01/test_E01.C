@@ -15,9 +15,9 @@
 
 void test_E01(const TString& configMacro, Bool_t oldGeometry)
 {
-/// Macro function for testing example E01 
-/// \param configMacro   configuration macro loaded in initialization 
-/// \param oldGeometry   if true - geometry is defined via VMC, otherwise 
+/// Macro function for testing example E01
+/// \param configMacro   configuration macro loaded in initialization
+/// \param oldGeometry   if true - geometry is defined via VMC, otherwise
 ///                      via TGeo
 
   // Create application if it does not yet exist
@@ -25,21 +25,21 @@ void test_E01(const TString& configMacro, Bool_t oldGeometry)
   if ( ! TVirtualMCApplication::Instance() ) {
     new Ex01MCApplication("Example01", "The example01 MC application");
     needDelete = kTRUE;
-  }  
+  }
 
   // Set geometry defined via VMC
   Ex01MCApplication* appl
     = (Ex01MCApplication*)TVirtualMCApplication::Instance();
-  appl->SetOldGeometry(oldGeometry);  
+  appl->SetOldGeometry(oldGeometry);
 
   // Initialize MC
   appl->InitMC(configMacro);
-  
+
   // Run MC
   appl->RunMC(1);
-  
+
   // Test VMC geometry getters
   appl->TestVMCGeometryGetters();
-  
+
   if ( needDelete ) delete appl;
 }

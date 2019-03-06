@@ -41,7 +41,7 @@
 
 OpNoviceSteppingAction::OpNoviceSteppingAction()
 : G4UserSteppingAction()
-{ 
+{
   fScintillationCounter = 0;
   fCerenkovCounter      = 0;
   fEventNumber = -1;

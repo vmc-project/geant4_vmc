@@ -20,7 +20,7 @@
 
 #include <globals.hh>
 
-enum TG4CrossSectionType { 
+enum TG4CrossSectionType {
   kElastic,        ///< elastic cross section
   kInelastic,      ///< inelastic cross section
   kCapture,        ///< capture cross section

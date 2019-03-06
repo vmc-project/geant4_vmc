@@ -51,7 +51,7 @@ class TG4VUserFastSimulation
     /// Method to be utilized to register each fast simulation model
     void Register(G4VFastSimulationModel* fastSimulationModel);
 
-  private:    
+  private:
     /// Not implemented
     TG4VUserFastSimulation(const TG4VUserFastSimulation& right);
     /// Not implemented

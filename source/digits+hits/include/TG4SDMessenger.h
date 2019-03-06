@@ -1,5 +1,5 @@
 #ifndef TG4_SD_MESSENGER_H
-#define TG4_SD_MESSENGER_H 
+#define TG4_SD_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4SDMessenger.h
-/// \brief Definition of the TG4SDMessenger class 
+/// \brief Definition of the TG4SDMessenger class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -30,7 +30,7 @@ class G4UIcmdWithoutParameter;
 /// Implements commands:
 /// - /mcDet/addSDSelection volName1 [volName2 ...]
 /// - /mcDet/setSDSelectionFromTGeo  true|false
-/// - /mcDet/setSVLabel label 
+/// - /mcDet/setSVLabel label
 /// - /mcDet/setGflash  true|false
 /// - /mcDet/setExclusiveSDScoring true|false
 /// - /mcDet/printUserSDs
@@ -40,15 +40,15 @@ class G4UIcmdWithoutParameter;
 class TG4SDMessenger: public G4UImessenger
 {
   public:
-    TG4SDMessenger(TG4SDConstruction* sdConstruction); 
+    TG4SDMessenger(TG4SDConstruction* sdConstruction);
     virtual ~TG4SDMessenger();
-   
-    // methods 
+
+    // methods
     virtual void SetNewValue(G4UIcommand* command, G4String string);
-    
+
   private:
     /// Not implemented
-    TG4SDMessenger();  
+    TG4SDMessenger();
     /// Not implemented
     TG4SDMessenger(const TG4SDMessenger& right);
     /// Not implemented
@@ -56,13 +56,13 @@ class TG4SDMessenger: public G4UImessenger
 
     //
     // data members
-    
+
     /// associated class
     TG4SDConstruction*  fSDConstruction;
-    
+
     /// addSDSelection command
     G4UIcmdWithAString* fAddSDSelectionCmd;
-    
+
     /// getSDSelectionFromTGeo command
     G4UIcmdWithABool*   fSetSDSelectionFromTGeoCmd;
 

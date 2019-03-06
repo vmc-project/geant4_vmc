@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4ExtDecayerMessenger.cxx
-/// \brief Implementation of the TG4ExtDecayerMessenger class 
+/// \brief Implementation of the TG4ExtDecayerMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -26,17 +26,17 @@ TG4ExtDecayerMessenger::TG4ExtDecayerMessenger(
     fExtDecayerPhysics(extDecayerPhysics),
     fSetSelectionCmd(0),
     fSkipNeutrinoCmd(0)
-{ 
+{
 /// Standard constructor
 
-  fSetSelectionCmd 
-    = new G4UIcmdWithAString("/mcPhysics/setExtDecayerSelection", this);  
-  G4String guidance 
+  fSetSelectionCmd
+    = new G4UIcmdWithAString("/mcPhysics/setExtDecayerSelection", this);
+  G4String guidance
     = "Select particles for which the external decayer will ";
-  guidance = guidance + "have priority over using Geant4 decay table";   
+  guidance = guidance + "have priority over using Geant4 decay table";
   fSetSelectionCmd->SetGuidance(guidance);
   fSetSelectionCmd->SetParameterName("ExtDecayerSelection", false);
-  fSetSelectionCmd->AvailableForStates(G4State_PreInit);  
+  fSetSelectionCmd->AvailableForStates(G4State_PreInit);
 
   fSkipNeutrinoCmd
     = new G4UIcmdWithABool("/mcPhysics/skipExtDecayerNeutrino", this);
@@ -47,7 +47,7 @@ TG4ExtDecayerMessenger::TG4ExtDecayerMessenger(
 }
 
 //______________________________________________________________________________
-TG4ExtDecayerMessenger::~TG4ExtDecayerMessenger() 
+TG4ExtDecayerMessenger::~TG4ExtDecayerMessenger()
 {
 /// Destructor
 
@@ -62,14 +62,14 @@ TG4ExtDecayerMessenger::~TG4ExtDecayerMessenger()
 //______________________________________________________________________________
 void TG4ExtDecayerMessenger::SetNewValue(G4UIcommand* command,
                                          G4String newValue)
-{ 
+{
 /// Apply command to the associated object.
-  
+
   if ( command == fSetSelectionCmd ) {
     fExtDecayerPhysics->SetSelection(newValue);
   }
   else if ( command == fSkipNeutrinoCmd ) {
     fExtDecayerPhysics->SetSkipNeutrino(
       fSkipNeutrinoCmd->GetNewBoolValue(newValue));
-  }  
+  }
 }

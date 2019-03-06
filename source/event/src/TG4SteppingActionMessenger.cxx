@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4SteppingActionMessenger.cxx
-/// \brief Implementation of the TG4SteppingActionMessenger class 
+/// \brief Implementation of the TG4SteppingActionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -45,7 +45,7 @@ TG4SteppingActionMessenger::TG4SteppingActionMessenger(
 }
 
 //_____________________________________________________________________________
-TG4SteppingActionMessenger::~TG4SteppingActionMessenger() 
+TG4SteppingActionMessenger::~TG4SteppingActionMessenger()
 {
 /// Destructor
 
@@ -58,17 +58,17 @@ TG4SteppingActionMessenger::~TG4SteppingActionMessenger()
 //
 
 //_____________________________________________________________________________
-void TG4SteppingActionMessenger::SetNewValue(G4UIcommand* command, 
+void TG4SteppingActionMessenger::SetNewValue(G4UIcommand* command,
        G4String newValue)
-{ 
+{
 /// Apply command to the associated object.
 
-  if(command == fLoopVerboseCmd) { 
+  if(command == fLoopVerboseCmd) {
     fSteppingAction
-      ->SetLoopVerboseLevel(fLoopVerboseCmd->GetNewIntValue(newValue)); 
-  }   
-  else if(command == fMaxNofStepsCmd) { 
+      ->SetLoopVerboseLevel(fLoopVerboseCmd->GetNewIntValue(newValue));
+  }
+  else if(command == fMaxNofStepsCmd) {
     fSteppingAction
-      ->SetMaxNofSteps(fMaxNofStepsCmd->GetNewIntValue(newValue)); 
-  }   
+      ->SetMaxNofSteps(fMaxNofStepsCmd->GetNewIntValue(newValue));
+  }
 }

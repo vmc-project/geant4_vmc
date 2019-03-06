@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4TrackManager.h
-/// \brief Definition of the TG4TrackManager class 
+/// \brief Definition of the TG4TrackManager class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -32,20 +32,20 @@ class G4PrimaryParticle;
 
 /// \ingroup event
 /// \brief The class for storing G4 tracks in VMC sack
-/// 
+///
 /// It provides methods for storing G4 primary particles
-/// and secondary tracks and utility functions for updating 
+/// and secondary tracks and utility functions for updating
 /// TG4TrackInformation, which hold the info about
-/// correspondence between Geant4 and VMC stack numbering 
+/// correspondence between Geant4 and VMC stack numbering
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4TrackManager : public TG4Verbose 
+class TG4TrackManager : public TG4Verbose
 {
   public:
     TG4TrackManager();
     virtual ~TG4TrackManager();
-   
+
     // static access method
     static TG4TrackManager* Instance();
 
@@ -106,9 +106,9 @@ class TG4TrackManager : public TG4Verbose
 
 // inline methods
 
-inline TG4TrackManager* TG4TrackManager::Instance() { 
+inline TG4TrackManager* TG4TrackManager::Instance() {
   /// Return this instance.
-  return fgInstance; 
+  return fgInstance;
 }
 
 inline void TG4TrackManager::SetMCStack(TVirtualMCStack* mcStack) {
@@ -116,42 +116,42 @@ inline void TG4TrackManager::SetMCStack(TVirtualMCStack* mcStack) {
   fMCStack = mcStack;
 }
 
-inline void TG4TrackManager::SetTrackSaveControl(TG4TrackSaveControl control) { 
+inline void TG4TrackManager::SetTrackSaveControl(TG4TrackSaveControl control) {
   /// Set control for saving secondaries in the VMC stack
   fTrackSaveControl = control;
 }
 
 inline void TG4TrackManager::SetSaveDynamicCharge(G4bool saveDynamicCharge) {
-  /// Set control of saving dynamic charge of secondaries (in TParticle::fStatus) 
+  /// Set control of saving dynamic charge of secondaries (in TParticle::fStatus)
   fSaveDynamicCharge = saveDynamicCharge;
-}  
+}
 
 inline void TG4TrackManager::SetNofTracks(G4int nofTracks) {
   /// Set number of tracks
   fTrackCounter = nofTracks;
-}  
+}
 
 inline void TG4TrackManager::SetG4TrackingManager(
                        G4TrackingManager* trackingManager) {
   /// Set G4 tracking manager
   fG4TrackingManager = trackingManager;
-}  
+}
 
 inline TG4TrackSaveControl  TG4TrackManager::GetTrackSaveControl() const
 {
   /// Return control of saving secondaries
-  return fTrackSaveControl; 
-}  
+  return fTrackSaveControl;
+}
 
 inline G4bool  TG4TrackManager::GetSaveDynamicCharge() const
 {
   /// Return the control of saving dynamic charge of secondaries
-  return fSaveDynamicCharge; 
-}  
+  return fSaveDynamicCharge;
+}
 
-inline G4int TG4TrackManager::GetNofTracks() const { 
-  /// Return track counter = current number of tracks (in event)  
-  return fTrackCounter; 
+inline G4int TG4TrackManager::GetNofTracks() const {
+  /// Return track counter = current number of tracks (in event)
+  return fTrackCounter;
 }
 
 #endif //TG4_TRACK_MANAGER_H

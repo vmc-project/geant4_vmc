@@ -18,10 +18,10 @@
 #include <G4VUserDetectorConstruction.hh>
 
 /// \ingroup geometry
-/// \brief The abstract base class for user defined class to customize 
+/// \brief The abstract base class for user defined class to customize
 /// geometry.
 ///
-/// An implemented use case is a user customization of magnetic field 
+/// An implemented use case is a user customization of magnetic field
 /// equation of motion and its stepper.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
@@ -35,12 +35,12 @@ class TG4VUserPostDetConstruction
     ///  Method to be overriden by user
     virtual void Construct() = 0;
 
-  private:    
+  private:
     /// Not implemented
     TG4VUserPostDetConstruction(const TG4VUserPostDetConstruction& right);
     /// Not implemented
     TG4VUserPostDetConstruction& operator=(const TG4VUserPostDetConstruction& right);
-}; 
+};
 
 #endif //TG4_V_USER_POST_DET_CONSTRUCTION_H
 

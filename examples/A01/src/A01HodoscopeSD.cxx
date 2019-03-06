@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01HodoscopeSD.cxx 
-/// \brief Implementation of the A01HodoscopeSD class 
+/// \file A01HodoscopeSD.cxx
+/// \brief Implementation of the A01HodoscopeSD class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo \n
 ///
@@ -111,16 +111,16 @@ void A01HodoscopeSD::Initialize()
 {
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
-  
+
   if ( TMCRootManager::Instance() ) Register();
-  
+
   fVolId = gMC->VolId(fVolName.Data());
 }
 
 //_____________________________________________________________________________
 Bool_t A01HodoscopeSD::ProcessHits()
 {
-/// Account hit time; create a new hit per detector cell if it does not yet 
+/// Account hit time; create a new hit per detector cell if it does not yet
 /// exist
 
   Int_t copyNo;
@@ -129,7 +129,7 @@ Bool_t A01HodoscopeSD::ProcessHits()
 
   Double_t edep = gMC->Edep();
   if ( edep == 0. ) return false;
-  
+
   Double_t hitTime = gMC->TrackTime();
 
   // check if this finger already has a hit
@@ -141,23 +141,23 @@ Bool_t A01HodoscopeSD::ProcessHits()
       ix = i;
       break;
     }
-  }              
+  }
 
   if ( ix >= 0 ) {
     // if it has, then take the earlier time
     A01HodoscopeHit* hit = GetHit(ix);
     if ( hit->GetTime() > hitTime ) {
-      hit->SetTime(hitTime); 
+      hit->SetTime(hitTime);
     }
   }
   else {
     // Debug printing
-    //cout << "** Hodoscope: Create hit in nofHits, copyNo, hitTime[s] " 
+    //cout << "** Hodoscope: Create hit in nofHits, copyNo, hitTime[s] "
     //     << nofHits << ", " << copyNo << ", " << hitTime << endl;
     //cout << "gMC->CurrentVolName(): " << gMC->CurrentVolName() << endl;
 
     // if not, create a new hit and set it to the collection
-    A01HodoscopeHit* hit 
+    A01HodoscopeHit* hit
       = new ((*fHitsCollection)[nofHits]) A01HodoscopeHit(copyNo, hitTime);
     hit->SetVolId(id);
 
@@ -174,33 +174,33 @@ void A01HodoscopeSD::EndOfEvent()
 /// Print hits collection (if verbose) and reset hits afterwards.
 
   if (fVerboseLevel>0)  Print();
-    
+
   // Reset hits collection
-  fHitsCollection->Clear();  
+  fHitsCollection->Clear();
 }
 
 //_____________________________________________________________________________
 void A01HodoscopeSD::Register()
 {
 /// Register the hits collection in Root manager.
-  
+
   if ( fWriteHits ) {
     TMCRootManager::Instance()
       ->Register(GetName(), "TClonesArray", &fHitsCollection);
-  }    
+  }
 }
 
 //_____________________________________________________________________________
 void A01HodoscopeSD::Print(Option_t* /*option*/) const
 {
 /// Print the hits collection.
-  
+
    Int_t nofHits = fHitsCollection->GetEntriesFast();
    cout << GetName() << " has " << nofHits << " hits." << endl;
 
    if ( fVerboseLevel > 1 ) {
-     for (Int_t i=0; i<nofHits; i++) (*fHitsCollection)[i]->Print(); 
-   }   
+     for (Int_t i=0; i<nofHits; i++) (*fHitsCollection)[i]->Print();
+   }
 }
 
 /*
@@ -208,7 +208,7 @@ void A01HodoscopeSD::Print(Option_t* /*option*/) const
 void A01HodoscopeSD::PrintTotal() const
 {
 /// Print the total values for all layers.
-  
+
   Double_t totEAbs=0.;
   Double_t totLAbs=0.;
   Double_t totEGap=0.;
@@ -216,18 +216,18 @@ void A01HodoscopeSD::PrintTotal() const
 
   Int_t nofHits = fHitsCollection->GetEntriesFast();
   for (Int_t i=0; i<nofHits; i++) {
-    totEAbs += GetHit(i)->GetEdepAbs(); 
+    totEAbs += GetHit(i)->GetEdepAbs();
     totLAbs += GetHit(i)->GetTrakAbs();
-    totEGap += GetHit(i)->GetEdepGap(); 
+    totEGap += GetHit(i)->GetEdepGap();
     totLGap += GetHit(i)->GetTrakGap();
   }
 
-  cout << "   Absorber: total energy (MeV): " 
+  cout << "   Absorber: total energy (MeV): "
        << setw(7) << totEAbs * 1.0e03
-       << "       total track length (cm):  " 
+       << "       total track length (cm):  "
        << setw(7) << totLAbs
        << endl
-       << "   Gap:      total energy (MeV): " 
+       << "   Gap:      total energy (MeV): "
        << setw(7) << totEGap * 1.0e03
        << "       total track length (cm):  "
        << setw(7) << totLGap

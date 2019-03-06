@@ -16,7 +16,7 @@
 void Config()
 {
 /// The configuration function for Geant4 VMC for Example A01
-/// called during MC application initialization. 
+/// called during MC application initialization.
 /// For geometry defined with Geant4 in a user run configuration.
 
 
@@ -27,13 +27,13 @@ void Config()
 
 
   // Run configuration with user geometry construction via Geant4
-  A01RunConfiguration* runConfiguration 
+  A01RunConfiguration* runConfiguration
     = new A01RunConfiguration("FTFP_BERT");
   runConfiguration->SetUseLocalMagField(useLocalMagField);
-  
+
   // Run configuration with user geometry construction via Geant4
   // + special cuts activated
-  //A01RunConfiguration1* runConfiguration 
+  //A01RunConfiguration1* runConfiguration
   //  = new A01RunConfiguration1("FTFP_BERT", "specialCuts");
 
   // TGeant4

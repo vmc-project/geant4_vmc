@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4SteppingAction.h
-/// \brief Definition of the TG4SteppingAction class 
+/// \brief Definition of the TG4SteppingAction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -34,7 +34,7 @@ class G4Step;
 
 /// \ingroup event
 /// \brief Actions at each step
-/// 
+///
 /// This class ensures the additional call to the sensitive detector
 /// when track crosses a geometrical boundary.
 /// It also enables to define a maximum number of steps
@@ -43,9 +43,9 @@ class G4Step;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4SteppingAction : public G4UserSteppingAction 
+class TG4SteppingAction : public G4UserSteppingAction
 {
-  enum { 
+  enum {
     kMaxNofSteps = 30000,
     kMaxNofLoopSteps = 5
   };
@@ -53,7 +53,7 @@ class TG4SteppingAction : public G4UserSteppingAction
   public:
     TG4SteppingAction();
     virtual ~TG4SteppingAction();
-   
+
     // static access method
     static TG4SteppingAction* Instance();
 
@@ -98,11 +98,11 @@ class TG4SteppingAction : public G4UserSteppingAction
 
     //
     // data members
-    
-    /// messenger    
+
+    /// messenger
     TG4SteppingActionMessenger  fMessenger;
-    
-    /// manager for collecting TGeo tracks    
+
+    /// manager for collecting TGeo tracks
     TG4GeoTrackManager  fGeoTrackManager;
 
     /// the special controls manager
@@ -122,17 +122,17 @@ class TG4SteppingAction : public G4UserSteppingAction
 
     /// max number of allowed steps
     G4int  fMaxNofSteps;
-    
+
     /// standard tracking verbose level
     G4int  fStandardVerboseLevel;
-    
+
     /// tracking verbose level for looping particles
     G4int  fLoopVerboseLevel;
-    
-    /// counter of step in looping    
+
+    /// counter of step in looping
     G4int  fLoopStepCounter;
-    
-    /// control of cut on e+e- pair 
+
+    /// control of cut on e+e- pair
     G4bool fIsPairCut;
 
     /// control to collect Root tracks
@@ -141,59 +141,59 @@ class TG4SteppingAction : public G4UserSteppingAction
 
 // inline methods
 
-inline TG4SteppingAction* TG4SteppingAction::Instance() { 
+inline TG4SteppingAction* TG4SteppingAction::Instance() {
   /// Return this instance
-  return fgInstance; 
+  return fgInstance;
 }
 
 inline void TG4SteppingAction::SteppingAction(const G4Step* /*step*/) {
   /// Dummy stepping action that can be overriden
   /// in a user defined class
-}  
-
-inline void TG4SteppingAction::SetLoopVerboseLevel(G4int level) { 
-  /// Set loop verbose level (applied when a track is looping) 
-  fLoopVerboseLevel = level; 
 }
 
-inline void TG4SteppingAction::SetMaxNofSteps(G4int number) { 
-  /// Set maximum number of steps allowed 
-  fMaxNofSteps = number; 
+inline void TG4SteppingAction::SetLoopVerboseLevel(G4int level) {
+  /// Set loop verbose level (applied when a track is looping)
+  fLoopVerboseLevel = level;
 }
 
-inline void TG4SteppingAction::SetSpecialControls(TG4SpecialControlsV2* specialControls)  { 
+inline void TG4SteppingAction::SetMaxNofSteps(G4int number) {
+  /// Set maximum number of steps allowed
+  fMaxNofSteps = number;
+}
+
+inline void TG4SteppingAction::SetSpecialControls(TG4SpecialControlsV2* specialControls)  {
   /// Set special controls manager
-  fSpecialControls = specialControls; 
+  fSpecialControls = specialControls;
 }
 
 inline void TG4SteppingAction::SetIsPairCut(G4bool isPairCut) {
   /// Set control for e+e- pair cut
   fIsPairCut = isPairCut;
-}  
+}
 
 inline void TG4SteppingAction::SetCollectTracks(G4bool collectTracks) {
   /// (In)Activate collecting Root tracks
   fCollectTracks = collectTracks;
-}  
-
-inline G4int TG4SteppingAction::GetMaxNofSteps() const { 
-  /// Get maximum number of steps allowed 
-  return fMaxNofSteps; 
 }
 
-inline G4int TG4SteppingAction::GetLoopVerboseLevel() const { 
-  /// Get loop verbose level (applied when a track is looping) 
-  return fLoopVerboseLevel; 
+inline G4int TG4SteppingAction::GetMaxNofSteps() const {
+  /// Get maximum number of steps allowed
+  return fMaxNofSteps;
 }
 
-inline G4bool TG4SteppingAction::GetIsPairCut() const { 
+inline G4int TG4SteppingAction::GetLoopVerboseLevel() const {
+  /// Get loop verbose level (applied when a track is looping)
+  return fLoopVerboseLevel;
+}
+
+inline G4bool TG4SteppingAction::GetIsPairCut() const {
   /// Return control for saving secondaries in the VMC stack
-  return fIsPairCut; 
+  return fIsPairCut;
 }
 
 inline G4bool TG4SteppingAction::GetCollectTracks() const {
   /// Return the info if collecting Root tracks is activated
   return fCollectTracks;
-}  
+}
 
 #endif //TG4_STEPPING_ACTION_H

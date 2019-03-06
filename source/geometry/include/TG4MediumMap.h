@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4MediumMap.h
-/// \brief Definition of the TG4MediumMap class 
+/// \brief Definition of the TG4MediumMap class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -26,7 +26,7 @@ class G4Material;
 
 /// \ingroup geometry
 /// \brief The map of media to logical volumes
-/// 
+///
 /// \author I. Hrivnacova; IPN, Orsay
 
 class TG4MediumMap
@@ -56,10 +56,10 @@ class TG4MediumMap
 
     //
     // data members
-    
+
     /// map of medias to their IDs
     std::map<G4int, TG4Medium*>             fIdMap;
-    
+
     /// map of medias to the logical volumes
     std::map<G4LogicalVolume*, TG4Medium*>  fLVMap;
 

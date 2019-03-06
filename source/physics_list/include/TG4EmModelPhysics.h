@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4EmModelPhysics.h
-/// \brief Definition of the TG4EmModelPhysics class 
+/// \brief Definition of the TG4EmModelPhysics class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -32,7 +32,7 @@ enum TG4EmModel {
   kPAIPhotonModel,       ///< PAIPhot model
   kSpecialUrbanMscModel, ///< Special UrbanMsc model adapted for ALICE EMCAL
   kNoEmModel             ///< No extra EM model
-};  
+};
 
 class TG4ModelConfiguration;
 
@@ -46,24 +46,24 @@ class G4Region;
 /// UrbanMsc model tuned for ALICE EMCAL are supported.
 /// Other models available in Geant4 can be added on user
 /// requests.
-/// 
+///
 /// \author I. Hrivnacova; IPN Orsay
 
 class TG4EmModelPhysics: public TG4VPhysicsConstructor
 {
   // public:
   //   typedef std::vector<TG4EmModelConfiguration*> EmModelConfigurationVector;
-    
+
   public:
     TG4EmModelPhysics(const G4String& name = "EmModel");
     TG4EmModelPhysics(G4int theVerboseLevel,
                       const G4String& name = "EmModel");
     virtual ~TG4EmModelPhysics();
-    
+
     // static methods
     static TG4EmModel GetEmModel(const G4String& modelName);
     static G4String   GetEmModelName(G4int modelType);
-    
+
   protected:
     // methods
           // construct particle and physics
@@ -75,9 +75,9 @@ class TG4EmModelPhysics: public TG4VPhysicsConstructor
     TG4EmModelPhysics(const TG4EmModelPhysics& right);
     /// Not implemented
     TG4EmModelPhysics& operator=(const TG4EmModelPhysics& right);
-    
+
     void AddModel(TG4EmModel model,
-                  const G4ParticleDefinition* particle, 
+                  const G4ParticleDefinition* particle,
                   const G4String& regionName);
     void AddModels(const std::vector<TG4ModelConfiguration*>& models);
 };

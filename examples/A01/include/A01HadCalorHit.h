@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01HadCalorHit.h 
-/// \brief Definition of the A01HadCalorHit class 
+/// \file A01HadCalorHit.h
+/// \brief Definition of the A01HadCalorHit class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo: \n
 ///
@@ -37,7 +37,7 @@ class A01HadCalorHit : public TObject
     // methods
     virtual void Print(Option_t* option = "") const;
     void Reset();
-                 
+
     // set methods
     void SetColumnID(Int_t z)  { fColumnID = z; }
     void SetRowID(Int_t volId) { fRowID = volId; }
@@ -50,14 +50,14 @@ class A01HadCalorHit : public TObject
     Int_t      GetRowID() const   { return fRowID; }
     Double_t   GetEdep() const    { return fEdep; }
     const TGeoHMatrix& GetTransformation() const { return fTransformation; }
-      
+
   private:
     Int_t        fColumnID; ///< The column ID
     Int_t        fRowID;    ///< The row ID
     Double_t     fEdep;     ///< The energy deposit
     TGeoHMatrix  fTransformation; ///< The transformation of the hit volume
-    
-  ClassDef(A01HadCalorHit,1) //A01HadCalorHit  
+
+  ClassDef(A01HadCalorHit,1) //A01HadCalorHit
 };
 
 #endif //A01_HAD_CALOR_HIT_H

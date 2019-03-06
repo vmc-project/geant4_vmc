@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4ActionInitialization.h
-/// \brief Definition of the TG4ActionInitialization class 
+/// \brief Definition of the TG4ActionInitialization class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -41,7 +41,7 @@ class TG4ActionInitialization : public G4VUserActionInitialization
     TG4ActionInitialization(TG4RunConfiguration* runConfiguration);
     virtual ~TG4ActionInitialization();
 
-    // methods 
+    // methods
     //
     virtual void BuildForMaster() const;
     virtual void Build() const;
@@ -53,7 +53,7 @@ class TG4ActionInitialization : public G4VUserActionInitialization
     TG4ActionInitialization(const TG4ActionInitialization& right);
     /// Not implemented
     TG4ActionInitialization& operator=(const TG4ActionInitialization& right);
-    
+
     //  data members
     TG4RunConfiguration*  fRunConfiguration; ///< run configuration
 

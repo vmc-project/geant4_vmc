@@ -12,7 +12,7 @@
 
 #include "../macro/basiclibs.C"
 
-void read() 
+void read()
 {
 /// Macro for reading the E03 simulated data from Root file
 
@@ -21,9 +21,9 @@ void read()
 
   // Load this example library
   gSystem->Load("libexample03");
-  
+
   // MC application
-  Ex03MCApplication* appl 
+  Ex03MCApplication* appl
     =  new Ex03MCApplication("Example03", "The example03 MC application", kRead);
 
   for (Int_t i=0; i<5; i++) {
@@ -31,5 +31,5 @@ void read()
     appl->ReadEvent(i);
     appl->GetCalorimeterSD()->PrintTotal();
     cout << endl;
-  }  
-}  
+  }
+}

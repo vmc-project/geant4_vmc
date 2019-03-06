@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4G3Units.cxx
-/// \brief Implementation of the TG4G3Units class 
+/// \brief Implementation of the TG4G3Units class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -29,7 +29,7 @@ const G4double TG4G3Units::fgkAtomicWeight = g/mole;
 const G4double TG4G3Units::fgkField   = kilogauss;
 
 //_____________________________________________________________________________
-TG4G3Units::~TG4G3Units() 
+TG4G3Units::~TG4G3Units()
 {
 /// Destructor
 }

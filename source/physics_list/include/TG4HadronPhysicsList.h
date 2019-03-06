@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4HadronPhysicsList.h
-/// \brief Definition of the TG4HadronPhysicsList class 
+/// \brief Definition of the TG4HadronPhysicsList class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -23,9 +23,9 @@
 class TG4OpticalPhysics;
 
 /// \ingroup physics_list
-/// \brief The hadron physics list helper class 
+/// \brief The hadron physics list helper class
 ///
-/// The hadron physics list instatiates the Geant4 hadron physics list 
+/// The hadron physics list instatiates the Geant4 hadron physics list
 /// selected by its name in the constructor
 ///
 /// \author I. Hrivnacova; IPN Orsay
@@ -36,12 +36,12 @@ class TG4HadronPhysicsList: public G4VUserPhysicsList,
   public:
     TG4HadronPhysicsList(const G4String& selection);
     virtual ~TG4HadronPhysicsList();
-  
+
     // static methods
     static G4String AvailableHadronSelections();
     static G4String AvailableEMSelections();
     static G4bool   IsAvailableSelection(const G4String& selection);
- 
+
     // methods
     virtual void ConstructParticle();
     virtual void ConstructProcess();
@@ -54,7 +54,7 @@ class TG4HadronPhysicsList: public G4VUserPhysicsList,
 
     // set methods
     void SetRangeCut(G4double value);
-    
+
   protected:
     // static data members
     static const G4double  fgkDefaultCutValue; ///< default cut value
@@ -67,7 +67,7 @@ class TG4HadronPhysicsList: public G4VUserPhysicsList,
 
     // methods
     void Configure(const G4String& selection);
-    
+
     // data members
 
     /// the physics list according to user selection

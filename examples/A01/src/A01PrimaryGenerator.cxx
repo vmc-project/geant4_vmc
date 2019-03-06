@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01PrimaryGenerator.cxx 
-/// \brief Implementation of the A01PrimaryGenerator class 
+/// \file A01PrimaryGenerator.cxx
+/// \brief Implementation of the A01PrimaryGenerator class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo \n
 ///
@@ -33,15 +33,15 @@ ClassImp(A01PrimaryGenerator)
 /// \endcond
 
 //_____________________________________________________________________________
-A01PrimaryGenerator::A01PrimaryGenerator(TVirtualMCStack* stack) 
+A01PrimaryGenerator::A01PrimaryGenerator(TVirtualMCStack* stack)
   : TObject(),
     fStack(stack),
     fNofPrimaries(1),
-    fDefaultParticle(kMuonPlus),  
+    fDefaultParticle(kMuonPlus),
     fMomentum(1.),           // 1 GeV
     fSigmaMomentum(50.e-03), // 50 MeV;
     fSigmaAngle(2.),         // 2 deg
-    fRandomizePrimary(true)    
+    fRandomizePrimary(true)
 {
 /// Standard constructor
 /// \param stack  The VMC stack
@@ -49,15 +49,15 @@ A01PrimaryGenerator::A01PrimaryGenerator(TVirtualMCStack* stack)
 
 //_____________________________________________________________________________
 A01PrimaryGenerator::A01PrimaryGenerator(const A01PrimaryGenerator& origin,
-                                         TVirtualMCStack* stack) 
+                                         TVirtualMCStack* stack)
   : TObject(origin),
     fStack(stack),
     fNofPrimaries(origin.fNofPrimaries),
-    fDefaultParticle(origin.fDefaultParticle),  
-    fMomentum(origin.fMomentum),           
-    fSigmaMomentum(origin.fSigmaMomentum), 
+    fDefaultParticle(origin.fDefaultParticle),
+    fMomentum(origin.fMomentum),
+    fSigmaMomentum(origin.fSigmaMomentum),
     fSigmaAngle(origin.fSigmaAngle),
-    fRandomizePrimary(origin.fRandomizePrimary)    
+    fRandomizePrimary(origin.fRandomizePrimary)
 {
 /// Copy constructor (for clonig on worker thread in MT mode).
 /// \param origin    The source object (on master).
@@ -69,19 +69,19 @@ A01PrimaryGenerator::A01PrimaryGenerator()
   : TObject(),
     fStack(0),
     fNofPrimaries(0),
-    fDefaultParticle(kMuonPlus),  
+    fDefaultParticle(kMuonPlus),
     fMomentum(1.),           // 1 GeV
     fSigmaMomentum(50.e-03), // 50 MeV;
     fSigmaAngle(2.),         // 2 deg
     fRandomizePrimary(true)
-{    
+{
 /// Default constructor
 }
 
 //_____________________________________________________________________________
-A01PrimaryGenerator::~A01PrimaryGenerator() 
+A01PrimaryGenerator::~A01PrimaryGenerator()
 {
-/// Destructor  
+/// Destructor
 }
 
 //
@@ -90,19 +90,19 @@ A01PrimaryGenerator::~A01PrimaryGenerator()
 
 //_____________________________________________________________________________
 void A01PrimaryGenerator::GeneratePrimaries()
-{    
+{
 /// Fill the user stack (derived from TVirtualMCStack) with primary particles.
 /// All primaries in one event have the same properties.
 
   // Track ID (filled by stack)
   Int_t ntr;
- 
+
   // Option: to be tracked
-  Int_t toBeDone = 1; 
- 
-  Int_t pdg  = fDefaultParticle;  
+  Int_t toBeDone = 1;
+
+  Int_t pdg  = fDefaultParticle;
   if(fRandomizePrimary) {
-     //Int_t i = (Int_t)(2.*gMC->GetRandom()->Rndm());    
+     //Int_t i = (Int_t)(2.*gMC->GetRandom()->Rndm());
      //Int_t i = (Int_t)(2.*0.3);
      static Int_t counter = 0;
      Int_t i = (counter++)%5;
@@ -127,37 +127,37 @@ void A01PrimaryGenerator::GeneratePrimaries()
          pdg = kPositron;
          break;
      }
-  }   
+  }
 
   // Polarization
-  Double_t polx = 0.; 
-  Double_t poly = 0.; 
-  Double_t polz = 0.; 
+  Double_t polx = 0.;
+  Double_t poly = 0.;
+  Double_t polz = 0.;
 
   // Position
-  Double_t vx  = 0;  
-  Double_t vy  = 0.; 
-  Double_t vz = -800.0; //- 8.*m;  
+  Double_t vx  = 0;
+  Double_t vy  = 0.;
+  Double_t vz = -800.0; //- 8.*m;
   Double_t tof = 0.;
 
   // Particle momentum
-  TDatabasePDG* databasePDG = TDatabasePDG::Instance(); 
+  TDatabasePDG* databasePDG = TDatabasePDG::Instance();
   TParticlePDG* particlePDG = databasePDG->GetParticle(pdg);
   Double_t mass = particlePDG->Mass();
   //Double_t pp = fMomentum + (gMC->GetRandom()->Rndm()-0.5)*fSigmaMomentum;
   Double_t pp = fMomentum + (0.3-0.5)*fSigmaMomentum;
-  Double_t e = TMath::Sqrt(pp*pp+mass*mass); 
- 
+  Double_t e = TMath::Sqrt(pp*pp+mass*mass);
+
   //Double_t angle = (gMC->GetRandom()->Rndm()-0.5)*fSigmaAngle;
   Double_t angle = (0.3-0.5)*fSigmaAngle;
   Double_t px, py, pz;
-  px = pp*TMath::Sin(angle*TMath::DegToRad()); 
-  py = 0.; 
-  pz = pp*TMath::Cos(angle*TMath::DegToRad()); 
- 
-  for (Int_t i=0; i<fNofPrimaries; i++) { 
-    // Add particle to stack 
-    fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
+  px = pp*TMath::Sin(angle*TMath::DegToRad());
+  py = 0.;
+  pz = pp*TMath::Cos(angle*TMath::DegToRad());
+
+  for (Int_t i=0; i<fNofPrimaries; i++) {
+    // Add particle to stack
+    fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz,
                       kPPrimary, ntr, 1., 0);
   }
 }

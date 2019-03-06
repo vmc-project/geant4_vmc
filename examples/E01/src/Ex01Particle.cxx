@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file Ex01Particle.cxx
-/// \brief Implementation of the Ex01Particle class 
+/// \brief Implementation of the Ex01Particle class
 ///
 /// Geant4 ExampleN01 adapted to Virtual Monte Carlo
 ///
@@ -29,7 +29,7 @@ Ex01Particle::Ex01Particle(Int_t id, TParticle* particle)
   : fID(id),
     fParticle(particle),
     fMother(0),
-    fDaughters(0)    
+    fDaughters(0)
 {
 /// Standard constructor
 /// \param  id        The particle id
@@ -41,7 +41,7 @@ Ex01Particle::Ex01Particle(Int_t id, TParticle* particle, Ex01Particle* mother)
   : fID(id),
     fParticle(particle),
     fMother(mother),
-    fDaughters(0)    
+    fDaughters(0)
 {
 /// Standard constructor
 /// \param  id        The particle id
@@ -54,13 +54,13 @@ Ex01Particle::Ex01Particle()
   : fID(0),
     fParticle(0),
     fMother(0),
-    fDaughters(0)    
+    fDaughters(0)
 {
 /// Default constructor
 }
 
 //_____________________________________________________________________________
-Ex01Particle::~Ex01Particle() 
+Ex01Particle::~Ex01Particle()
 {
 /// Destructor
 
@@ -78,9 +78,9 @@ void Ex01Particle::AddDaughter(Ex01Particle* particle)
 /// \param particle  The daughter particle
 
   if (!fDaughters) fDaughters = new TObjArray();
-  
+
   fDaughters->Add(particle);
-}  
+}
 
 //_____________________________________________________________________________
 void Ex01Particle::SetMother(Ex01Particle* particle)
@@ -89,7 +89,7 @@ void Ex01Particle::SetMother(Ex01Particle* particle)
 /// \param  particle  The mother particle
 
   fMother = particle;
-}  
+}
 
 //_____________________________________________________________________________
 Int_t  Ex01Particle:: GetID() const
@@ -97,7 +97,7 @@ Int_t  Ex01Particle:: GetID() const
 /// \return The particle Id.
 
   return fID;
-}  
+}
 
 
 //_____________________________________________________________________________
@@ -106,7 +106,7 @@ TParticle*  Ex01Particle::GetParticle() const
 /// \return The particle definition (TParticle).
 
   return fParticle;
-}  
+}
 
 //_____________________________________________________________________________
 Ex01Particle* Ex01Particle::GetMother() const
@@ -114,7 +114,7 @@ Ex01Particle* Ex01Particle::GetMother() const
 /// \return The particle mother.
 
   return fMother;
-}  
+}
 
 //_____________________________________________________________________________
 Int_t Ex01Particle::GetNofDaughters() const
@@ -122,9 +122,9 @@ Int_t Ex01Particle::GetNofDaughters() const
 /// \return The number of daughters.
 
   if (!fDaughters) return 0;
-  
+
   return fDaughters->GetEntriesFast();
-}  
+}
 
 //_____________________________________________________________________________
 Ex01Particle* Ex01Particle::GetDaughter(Int_t i) const
@@ -135,5 +135,5 @@ Ex01Particle* Ex01Particle::GetDaughter(Int_t i) const
   // add test if i
 
   return (Ex01Particle*) fDaughters->At(i);
-}  
+}
 

@@ -37,7 +37,7 @@
 // Created:     1996-04-30
 // Author:      Juliet Armstrong
 // mail:        gum@triumf.ca
-//     
+//
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 /// \file OpNoviceGeom.cc
@@ -107,7 +107,7 @@ int main(int argc,char** argv)
   TGeoManager *geom = 0;
   TG4RootNavMgr *mgr = 0;
   // Added for G4Root - end
-  
+
   G4long myseed = 345354;
   for ( G4int i=1; i<argc; i=i+2 ) {
      if      ( G4String(argv[i]) == "-m" ) macro   = argv[i+1];
@@ -139,7 +139,7 @@ int main(int argc,char** argv)
      geom = TGeoManager::Import("OpNoviceGeom.root");
      mgr = TG4RootNavMgr::GetInstance(geom);
   } else {
-     G4cout << "Using G4 native ..." << G4endl;  
+     G4cout << "Using G4 native ..." << G4endl;
   }
   // Added for G4Root - end
 
@@ -154,7 +154,7 @@ int main(int argc,char** argv)
   if ( useG4Root ) {
      mgr->Initialize(OpNovicePostDetConstruction::GetInstance(), nThreads);
      mgr->ConnectToG4();
-  }   
+  }
   // Added for G4Root - end
 
   // Seed the random number generator manually
@@ -166,7 +166,7 @@ int main(int argc,char** argv)
   // Added for G4Root - start
   if ( ! useG4Root ) {
     runManager->SetUserInitialization(new OpNoviceDetectorConstruction());
-  }  
+  }
   // Added for G4Root - end
 
   // Physics list
@@ -189,8 +189,8 @@ int main(int argc,char** argv)
 
   // Get the pointer to the User Interface manager
   //
-  G4UImanager* UImanager = G4UImanager::GetUIpointer(); 
-   
+  G4UImanager* UImanager = G4UImanager::GetUIpointer();
+
   if ( macro.size() ) {
      // Batch mode
      G4String command = "/control/execute ";

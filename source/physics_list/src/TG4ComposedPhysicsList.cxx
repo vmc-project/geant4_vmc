@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4ComposedPhysicsList.cxx
-/// \brief Implementation of the TG4ComposedPhysicsList class 
+/// \brief Implementation of the TG4ComposedPhysicsList class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -42,12 +42,12 @@ TG4ComposedPhysicsList::TG4ComposedPhysicsList()
 
   if ( VerboseLevel() >1 )
     G4cout << "TG4ComposedPhysicsList::TG4ComposedPhysicsList" << G4endl;
-  
+
   SetVerboseLevel(TG4VVerbose::VerboseLevel());
 }
 
 //_____________________________________________________________________________
-TG4ComposedPhysicsList::~TG4ComposedPhysicsList() 
+TG4ComposedPhysicsList::~TG4ComposedPhysicsList()
 {
 /// Destructor
 
@@ -103,7 +103,7 @@ void TG4ComposedPhysicsList::AddPhysicsList(G4VUserPhysicsList* physicsList)
 /// Add physics list in the list
 
   fPhysicsLists.push_back(physicsList);
-}  
+}
 
 //_____________________________________________________________________________
 void TG4ComposedPhysicsList::ConstructParticle()
@@ -130,7 +130,7 @@ void TG4ComposedPhysicsList::ConstructProcess()
 
   // lock physics manager
   TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
-  g3PhysicsManager->Lock();  
+  g3PhysicsManager->Lock();
 
   for (G4int i=0; i<G4int(fPhysicsLists.size()); i++ ) {
     fPhysicsLists[i]->ConstructProcess();
@@ -243,14 +243,14 @@ void TG4ComposedPhysicsList::PrintAllProcesses() const
 
   G4cout << "Instantiated processes: " << G4endl;
   G4cout << "======================= " << G4endl;
- 
+
   G4ProcessTable* processTable = G4ProcessTable::GetProcessTable();
-  G4ProcessTable::G4ProcNameVector* processNameList 
+  G4ProcessTable::G4ProcNameVector* processNameList
     = processTable->GetNameList();
 
   for (G4int i=0; i<G4int(processNameList->size()); i++){
     G4cout << "   " << (*processNameList)[i] << G4endl;
-  }  
+  }
 }
 
 //_____________________________________________________________________________
@@ -260,29 +260,29 @@ void TG4ComposedPhysicsList::DumpAllProcesses() const
 
   G4cout << "Instantiated particles and processes: " << G4endl;
   G4cout << "===================================== " << G4endl;
- 
+
   auto theParticleIterator=GetParticleIterator();
   theParticleIterator->reset();
   while ((*theParticleIterator)())
   {
     // print particle name
-    G4cout << "Particle: " 
+    G4cout << "Particle: "
            << theParticleIterator->value()->GetParticleName()
            << G4endl;
 
     // dump particle processes
-    G4ProcessVector* processVector 
+    G4ProcessVector* processVector
       = theParticleIterator->value()->GetProcessManager()->GetProcessList();
     for (G4int i=0; i<processVector->length(); i++)
       (*processVector)[i]->DumpInfo();
-      
-    G4cout << G4endl;  
-  }  
+
+    G4cout << G4endl;
+  }
 }
 
 
 //_____________________________________________________________________________
-G4int TG4ComposedPhysicsList::VerboseLevel() const 
+G4int TG4ComposedPhysicsList::VerboseLevel() const
 {
 /// Return verbose level (via TG4VVerbose)
 
@@ -291,20 +291,20 @@ G4int TG4ComposedPhysicsList::VerboseLevel() const
 
 
 //_____________________________________________________________________________
-void TG4ComposedPhysicsList::VerboseLevel(G4int level) 
+void TG4ComposedPhysicsList::VerboseLevel(G4int level)
 {
-/// Set the specified level to both TG4Verbose and 
+/// Set the specified level to both TG4Verbose and
 /// G4VUserPhysicsList.
 /// The verbose level is also propagated to registered physics lists.
 
   TG4VVerbose::VerboseLevel(level);
   SetVerboseLevel(level);
-  
+
   for (G4int i=0; i<G4int(fPhysicsLists.size()); i++ ) {
     TG4Verbose* verbose = dynamic_cast<TG4Verbose*>(fPhysicsLists[i]);
-    if ( verbose ) 
+    if ( verbose )
       verbose->VerboseLevel(level);
-    else  
+    else
       fPhysicsLists[i]->SetVerboseLevel(level);
-  }  
+  }
 }

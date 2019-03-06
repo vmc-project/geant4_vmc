@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file  A01LocalMagField.cxx
-/// \brief Implementation of the A01LocalMagField class 
+/// \brief Implementation of the A01LocalMagField class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo \n
 ///
@@ -54,13 +54,13 @@ A01LocalMagField::~A01LocalMagField()
 
 
 //______________________________________________________________________________
-void A01LocalMagField::Field(const Double_t* /*x*/, Double_t* B) 
+void A01LocalMagField::Field(const Double_t* /*x*/, Double_t* B)
 {
 /// Fill in the field value B in the given position at x.
 /// The local field is uniform in the associated volume.
-/// \param B   The field value (in kiloGauss) 
+/// \param B   The field value (in kiloGauss)
 
-  B[0] = fB[0]; 
-  B[1] = fB[1]; 
+  B[0] = fB[0];
+  B[1] = fB[1];
   B[2] = fB[2];
 }

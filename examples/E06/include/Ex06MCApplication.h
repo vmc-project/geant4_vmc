@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file Ex06MCApplication.h
-/// \brief Definition of the Ex06MCApplication class 
+/// \brief Definition of the Ex06MCApplication class
 ///
 /// Geant4 ExampleN06 adapted to Virtual Monte Carlo \n
 ///
@@ -40,14 +40,14 @@ class Ex06MCApplication : public TVirtualMCApplication
     Ex06MCApplication(const char* name,  const char *title);
     Ex06MCApplication();
     virtual ~Ex06MCApplication();
-  
+
     // static access method
-    static Ex06MCApplication* Instance(); 
+    static Ex06MCApplication* Instance();
 
     // methods
     void InitMC(const char *setup);
     void RunMC(Int_t nofEvents);
- 
+
     virtual TVirtualMCApplication* CloneForWorker() const;
     virtual void InitForWorker() const;
     virtual void Merge(TVirtualMCApplication* localMCApplication);
@@ -64,13 +64,13 @@ class Ex06MCApplication : public TVirtualMCApplication
     virtual void FinishPrimary();
     virtual void FinishEvent();
             void FinishRun();
-    
+
     // set methods
     void  SetVerboseLevel(Int_t verboseLevel);
- 
+
     // get methods
     Ex06PrimaryGenerator*  GetPrimaryGenerator() const;
- 
+
     // method for tests
     void SetOldGeometry(Bool_t oldGeometry = kTRUE);
     void SetTestStackPopper(Bool_t option = kFALSE);
@@ -89,7 +89,7 @@ class Ex06MCApplication : public TVirtualMCApplication
     Int_t                     fRunFeedbackCounter; ///< Feedback photons counter2
     TMCVerbose                fVerbose;         ///< VMC verbose helper
     Ex03MCStack*              fStack;           ///< VMC stack
-    TVirtualMagField*         fMagField;        ///< The magnetic field 
+    TVirtualMagField*         fMagField;        ///< The magnetic field
     Ex06DetectorConstruction* fDetConstruction; ///< Dector construction
     Ex06PrimaryGenerator*     fPrimaryGenerator;///< Primary generator
     Bool_t                    fOldGeometry;     ///< Option for geometry definition
@@ -101,11 +101,11 @@ class Ex06MCApplication : public TVirtualMCApplication
 
 // inline functions
 
-/// \return The singleton instance 
+/// \return The singleton instance
 inline Ex06MCApplication* Ex06MCApplication::Instance()
 { return (Ex06MCApplication*)(TVirtualMCApplication::Instance()); }
 
-/// Set verbosity 
+/// Set verbosity
 /// \param verboseLevel  The new verbose level value
 inline void  Ex06MCApplication::SetVerboseLevel(Int_t verboseLevel)
 { fVerbose.SetLevel(verboseLevel); }

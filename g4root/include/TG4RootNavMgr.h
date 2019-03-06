@@ -10,7 +10,7 @@
  *************************************************************************/
 
 /// \file TG4RootNavMgr.h
-/// \brief Definition of the TG4RootNavMgr class 
+/// \brief Definition of the TG4RootNavMgr class
 ///
 /// \author A. Gheata; CERN
 
@@ -42,18 +42,18 @@ protected:
    Bool_t                fConnected;  ///< Flags connection to G4
 
    TG4RootNavMgr();
-   TG4RootNavMgr(TGeoManager *geom, TG4RootDetectorConstruction *detConstruction=0);   
+   TG4RootNavMgr(TGeoManager *geom, TG4RootDetectorConstruction *detConstruction=0);
 
 private:
    static G4ThreadLocal TG4RootNavMgr *fRootNavMgr; ///< Static pointer to singleton
-   static TG4RootNavMgr *fgMasterInstance; 
+   static TG4RootNavMgr *fgMasterInstance;
 
 public:
    static TG4RootNavMgr *GetInstance(TGeoManager *geom=0);
    static TG4RootNavMgr *GetInstance(const TG4RootNavMgr& navMgr);
    static TG4RootNavMgr *GetMasterInstance();
    virtual ~TG4RootNavMgr();
-   
+
    Bool_t                ConnectToG4();
    void                  Initialize(TVirtualUserPostDetConstruction *sdinit=0, Int_t nthreads=1);
    void                  LocateGlobalPointAndSetup(Double_t *pt, Double_t *dir=0);

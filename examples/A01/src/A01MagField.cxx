@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file  A01MagField.cxx
-/// \brief Implementation of the A01MagField class 
+/// \brief Implementation of the A01MagField class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo \n
 ///
@@ -54,11 +54,11 @@ A01MagField::~A01MagField()
 
 
 //______________________________________________________________________________
-void A01MagField::Field(const Double_t* x, Double_t* B) 
+void A01MagField::Field(const Double_t* x, Double_t* B)
 {
 /// Fill in the field value B in the given position at x.
 /// \param x   The position
-/// \param B   The field value (in kiloGauss) 
+/// \param B   The field value (in kiloGauss)
 
   //G4VSolid* magneticSolid = new G4Tubs("magneticTubs",0.,1.*m,1.*m,0.,360.*deg);
   //G4VSolid* magneticSolid = new G4Tubs("magneticTubs",0.,1.*m,1.*m,0.,360.*deg);
@@ -69,13 +69,13 @@ void A01MagField::Field(const Double_t* x, Double_t* B)
 
   if ( TMath::Sqrt(x[0]*x[0] + x[2]*x[2]) <= 100.00 &&
        TMath::Abs(x[1]) <= 100.00 ) {
-    B[0] = fB[0]; 
-    B[1] = fB[1]; 
+    B[0] = fB[0];
+    B[1] = fB[1];
     B[2] = fB[2];
   }
   else {
-    B[0] = 0.; 
-    B[1] = 0.; 
+    B[0] = 0.;
+    B[1] = 0.;
     B[2] = 0.;
-  }   
+  }
 }

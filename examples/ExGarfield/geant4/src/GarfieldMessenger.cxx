@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file  ExGarfield/geant4/src/GarfieldG4FastSimulationModel.cxx
-/// \brief Implementation of the GarfieldG4FastSimulationModel class 
+/// \brief Implementation of the GarfieldG4FastSimulationModel class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 /// This class is imported from garfieldpp example.
@@ -27,10 +27,10 @@
 #include "G4UIcmdWithADoubleAndUnit.hh"
 #include "G4UIcmdWithoutParameter.hh"
 
-GarfieldMessenger::GarfieldMessenger() 
-  :     G4UImessenger(), 
-		fExampleDir(0), fGarfieldPhysicsDir(0), 
-		fIonizationModelCmd(0), fGarfieldParticleCmd(0) 
+GarfieldMessenger::GarfieldMessenger()
+  :     G4UImessenger(),
+		fExampleDir(0), fGarfieldPhysicsDir(0),
+		fIonizationModelCmd(0), fGarfieldParticleCmd(0)
 {
 	fExampleDir = new G4UIdirectory("/exampleGarfield/");
 	fExampleDir->SetGuidance("Commands specific to this example");

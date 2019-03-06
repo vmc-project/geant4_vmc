@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4SensitiveDetector.h
-/// \brief Definition of the TG4SensitiveDetector class 
+/// \brief Definition of the TG4SensitiveDetector class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -27,7 +27,7 @@ class TVirtualMCSensitiveDetector;
 /// \brief Sensitive detector class for calling a user defined stepping function.
 ///
 /// This class adds the integer identifier data member to G4VSensitiveDetector
-/// and keeps the medium ID of the associated volume.  
+/// and keeps the medium ID of the associated volume.
 /// It also takes care of setting the step status (kBoundary, kNormalStep)
 /// and passing G4Step to TG4StepManager and for calling a user defined
 /// stepping function either via a user MC application stepping function
@@ -51,12 +51,12 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
 
     // static get method
     static G4int GetTotalNofSensitiveDetectors();
-    
+
     // get methods
     G4int GetID() const;
     G4int GetMediumID() const;
     TVirtualMCSensitiveDetector* GetUserSD() const;
-    
+
   protected:
     void  UserProcessHits();
 
@@ -70,7 +70,7 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
 
   private:
     /// Not implemented
-    TG4SensitiveDetector(); 
+    TG4SensitiveDetector();
     /// Not implemented
     TG4SensitiveDetector(const TG4SensitiveDetector& right);
     /// Not implemented
@@ -82,20 +82,20 @@ class TG4SensitiveDetector : public G4VSensitiveDetector
     // data members
     G4int            fID;          ///< sensitive detector ID
     G4int            fMediumID;    ///< medium ID
-    /// map logical volume -> volume id 
+    /// map logical volume -> volume id
     std::map<G4LogicalVolume*, G4int>  fLVToVolIdMap;
 };
 
 // inline methods
 
-inline G4int TG4SensitiveDetector::GetTotalNofSensitiveDetectors() { 
+inline G4int TG4SensitiveDetector::GetTotalNofSensitiveDetectors() {
   /// Returns the total number of sensitive detectors.
-  return fgSDCounter; 
+  return fgSDCounter;
 }
 
-inline G4int TG4SensitiveDetector::GetID() const { 
+inline G4int TG4SensitiveDetector::GetID() const {
   /// Returns sensitive detector ID.
-  return fID; 
+  return fID;
 }
 
 inline G4int TG4SensitiveDetector::GetMediumID() const {

@@ -10,7 +10,7 @@
  *************************************************************************/
 
 /// \file TG4RootNavMgr.cxx
-/// \brief Implementation of the TG4RootNavMgr class 
+/// \brief Implementation of the TG4RootNavMgr class
 ///
 /// \author A. Gheata; CERN
 
@@ -28,7 +28,7 @@
 /// \endcond
 
 G4ThreadLocal TG4RootNavMgr *TG4RootNavMgr::fRootNavMgr = 0;
-TG4RootNavMgr *TG4RootNavMgr::fgMasterInstance = 0; 
+TG4RootNavMgr *TG4RootNavMgr::fgMasterInstance = 0;
 
 //______________________________________________________________________________
 TG4RootNavMgr::TG4RootNavMgr()
@@ -57,7 +57,7 @@ TG4RootNavMgr::TG4RootNavMgr(TGeoManager *geom,
    }
    else {
      SetNavigator(new TG4RootNavigator(detConstruction));
-   }  
+   }
 }
 
 //______________________________________________________________________________
@@ -67,11 +67,11 @@ TG4RootNavMgr::~TG4RootNavMgr()
 //   if (fNavigator) delete fNavigator;
    if (fDetConstruction) delete fDetConstruction;
    fRootNavMgr = 0;
-   
+
    G4bool isMaster = ! G4Threading::IsWorkerThread();
    if ( isMaster ) {
      fgMasterInstance = 0;
-   }  
+   }
 }
 
 //______________________________________________________________________________
@@ -81,12 +81,12 @@ TG4RootNavMgr *TG4RootNavMgr::GetInstance(TGeoManager *geom)
    if (fRootNavMgr) return fRootNavMgr;
    // Check if we have to create one.
    if (!geom) return NULL;
-   fRootNavMgr = new TG4RootNavMgr(geom);  
+   fRootNavMgr = new TG4RootNavMgr(geom);
    G4bool isMaster = ! G4Threading::IsWorkerThread();
    Printf("isMaster=%d", isMaster);
    if ( isMaster ) {
-    fgMasterInstance = fRootNavMgr; 
-   } 
+    fgMasterInstance = fRootNavMgr;
+   }
    return fRootNavMgr;
 }
 
@@ -99,17 +99,17 @@ TG4RootNavMgr *TG4RootNavMgr::GetInstance(const TG4RootNavMgr& navMgr)
    fRootNavMgr = new TG4RootNavMgr(navMgr.fGeometry, navMgr.fDetConstruction);
    G4bool isMaster = ! G4Threading::IsWorkerThread();
    if ( isMaster ) {
-    fgMasterInstance = fRootNavMgr; 
-   } 
+    fgMasterInstance = fRootNavMgr;
+   }
    return fRootNavMgr;
 }
 
 //_____________________________________________________________________________
-TG4RootNavMgr *TG4RootNavMgr::GetMasterInstance() 
-{ 
+TG4RootNavMgr *TG4RootNavMgr::GetMasterInstance()
+{
 /// Get master instance
-  return fgMasterInstance; 
-}    
+  return fgMasterInstance;
+}
 
 //______________________________________________________________________________
 Bool_t TG4RootNavMgr::ConnectToG4()
@@ -118,16 +118,16 @@ Bool_t TG4RootNavMgr::ConnectToG4()
    if (fConnected) {
       Info("ConnectToG4", "Already connected");
       return kTRUE;
-   }   
+   }
    if (!fDetConstruction) {
       Error("ConnectToG4", "No detector construction set !");
       return kFALSE;
-   }   
-   
+   }
+
    if (!fNavigator) {
       Error("ConnectToG4", "Navigator has to be created befor connecting to G4 !!!");
       return kFALSE;
-   }   
+   }
 
    G4RunManager *runManager = G4RunManager::GetRunManager();
    if (!runManager) {
@@ -139,7 +139,7 @@ Bool_t TG4RootNavMgr::ConnectToG4()
    Info("ConnectToG4", "ROOT detector construction class connected to G4RunManager");
    fConnected = kTRUE;
    return kTRUE;
-}   
+}
 
 //______________________________________________________________________________
 void TG4RootNavMgr::SetNavigator(TG4RootNavigator *nav)
@@ -148,7 +148,7 @@ void TG4RootNavMgr::SetNavigator(TG4RootNavigator *nav)
    if (fConnected) {
       Error("SetNavigator", "Navigator set after instantiation of G4RunManager. Won't set!!!");
       return;
-   }   
+   }
    G4TransportationManager *trMgr = G4TransportationManager::GetTransportationManager();
 //   G4Navigator *oldNav = trMgr->GetNavigatorForTracking();
    trMgr->SetNavigatorForTracking(nav);
@@ -166,7 +166,7 @@ void TG4RootNavMgr::SetNavigator(TG4RootNavigator *nav)
 //______________________________________________________________________________
 void TG4RootNavMgr::Initialize(TVirtualUserPostDetConstruction *sdinit, Int_t nthreads)
 {
-/// Construct G4 geometry based on TGeo geometry. 
+/// Construct G4 geometry based on TGeo geometry.
    Info("Initialize", "Creating G4 hierarchy ...");
    if (fDetConstruction) fDetConstruction->Initialize(sdinit);
    if (nthreads>1) gGeoManager->SetMaxThreads(nthreads);
@@ -184,7 +184,7 @@ void TG4RootNavMgr::LocateGlobalPointAndSetup(Double_t *pt, Double_t *dir)
       fNavigator->LocateGlobalPointAndSetup(point);
    }
    fNavigator->PrintState();
-}   
+}
 
 //______________________________________________________________________________
 void TG4RootNavMgr::SetVerboseLevel(Int_t level)

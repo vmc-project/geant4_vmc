@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4HadronPhysicsList.cxx
-/// \brief Implementation of the TG4HadronPhysicsList class 
+/// \brief Implementation of the TG4HadronPhysicsList class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -37,12 +37,12 @@ G4String TG4HadronPhysicsList::AvailableHadronSelections()
   G4String selections;
   for ( G4int i=0; i<G4int(availablePhysLists.size()); ++i ) {
     selections += availablePhysLists[i];
-    selections += " ";    
-  }  
-  //selections += "ShieldingLEND "; 
+    selections += " ";
+  }
+  //selections += "ShieldingLEND ";
 
   return selections;
-}  
+}
 
 //_____________________________________________________________________________
 G4String TG4HadronPhysicsList::AvailableEMSelections()
@@ -56,11 +56,11 @@ G4String TG4HadronPhysicsList::AvailableEMSelections()
   G4String selections;
   for ( G4int i=0; i<G4int(availablePhysListsEM.size()); ++i ) {
     selections += availablePhysListsEM[i];
-    selections += " ";    
-  }  
+    selections += " ";
+  }
 
   return selections;
-}  
+}
 
 //_____________________________________________________________________________
 G4bool TG4HadronPhysicsList::IsAvailableSelection(const G4String& selection)
@@ -69,7 +69,7 @@ G4bool TG4HadronPhysicsList::IsAvailableSelection(const G4String& selection)
 
   G4PhysListFactory physListFactory;
   return physListFactory.IsReferencePhysList(selection);
-}  
+}
 
 //
 // ctors, dtor
@@ -90,7 +90,7 @@ TG4HadronPhysicsList::TG4HadronPhysicsList(const G4String& selection)
 }
 
 //_____________________________________________________________________________
-TG4HadronPhysicsList::~TG4HadronPhysicsList() 
+TG4HadronPhysicsList::~TG4HadronPhysicsList()
 {
 /// Destructor
 
@@ -111,7 +111,7 @@ void TG4HadronPhysicsList::Configure(const G4String& sel)
   G4PhysListFactory phyListFactory;
 
   fPhysicsList = phyListFactory.GetReferencePhysList(sel);
-}    
+}
 
 //
 // public methods
@@ -134,12 +134,12 @@ void TG4HadronPhysicsList::ConstructProcess()
   // create processes for registered physics
   fPhysicsList->ConstructProcess();
 
-  if (VerboseLevel() > 0) 
+  if (VerboseLevel() > 0)
     G4cout << "### Hadron physics constructed. " << G4endl;
 }
 
 //_____________________________________________________________________________
-G4int TG4HadronPhysicsList::VerboseLevel() const 
+G4int TG4HadronPhysicsList::VerboseLevel() const
 {
 /// Return verbose level (via TG4VVerbose)
 
@@ -147,9 +147,9 @@ G4int TG4HadronPhysicsList::VerboseLevel() const
 }
 
 //_____________________________________________________________________________
-void TG4HadronPhysicsList::VerboseLevel(G4int level) 
+void TG4HadronPhysicsList::VerboseLevel(G4int level)
 {
-/// Set the specified level to both TG4Verbose and 
+/// Set the specified level to both TG4Verbose and
 /// G4VModularPhysicsList.
 /// The verbose level is also propagated to the registered physics list.
 
@@ -166,4 +166,4 @@ void TG4HadronPhysicsList::SetRangeCut(G4double value)
 /// the cut value in later phases.
 
   defaultCutValue = value;
-}  
+}

@@ -11,7 +11,7 @@
 /// \brief The Geant4 VMC example Monopole application executable
 ///
 /// The Geant4 VMC application executable
-/// with explicitely instantiated TGeant3 or TGeant4 and linked 
+/// with explicitely instantiated TGeant3 or TGeant4 and linked
 /// with all libraries.
 ///
 /// \date 15/07/2018
@@ -36,9 +36,9 @@ int main(int argc, char** argv)
   std::cerr << "Monopole example: Geant3 is not supported." << std::endl;
   return 1;
 #endif
-  
+
   // Initialize Root threading.
-  // (Multi-threading is triggered automatically if Geant4 was built 
+  // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
    TThread::Initialize();
@@ -46,7 +46,7 @@ int main(int argc, char** argv)
 #endif
 
   // Create MC application
-  VMC::Monopole::MCApplication* appl 
+  VMC::Monopole::MCApplication* appl
     =  new VMC::Monopole::MCApplication("ExampleMonopole",
                                         "The exampleMonopole MC application");
   // Set detector parameters
@@ -63,8 +63,8 @@ int main(int argc, char** argv)
   appl->SetBinSize(0.02);
 
 #ifdef USE_GEANT4
-  // RunConfiguration for Geant4 
-  TG4RunConfiguration* runConfiguration 
+  // RunConfiguration for Geant4
+  TG4RunConfiguration* runConfiguration
     = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT+monopole", "stepLimiter");
 
   // TGeant4
@@ -75,9 +75,9 @@ int main(int argc, char** argv)
 
   // Customise Geant4 setting
   // (verbose level, global range cut, ..)
-  geant4->ProcessGeantMacro("g4config.in");  
+  geant4->ProcessGeantMacro("g4config.in");
 #endif
-  
+
   // Run from this main
   appl->InitMC("");
 
@@ -95,4 +95,4 @@ int main(int argc, char** argv)
   appl->RunMC(5);
 
   delete appl;
-}  
+}

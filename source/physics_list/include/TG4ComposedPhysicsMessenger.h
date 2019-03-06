@@ -1,5 +1,5 @@
 #ifndef TG4_COMPOSED_PHYSICS_MESSENGER_H
-#define TG4_COMPOSED_PHYSICS_MESSENGER_H 
+#define TG4_COMPOSED_PHYSICS_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file TG4ComposedPhysicsMessenger.h 
-/// \brief Definition of the TG4ComposedPhysicsMessenger class 
+/// \file TG4ComposedPhysicsMessenger.h
+/// \brief Definition of the TG4ComposedPhysicsMessenger class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -28,7 +28,7 @@ class G4UIcmdWithAString;
 class G4UIcmdWithAnInteger;
 
 /// \ingroup physics_list
-/// \brief Messenger class that defines commands for Geant4 VMC composed 
+/// \brief Messenger class that defines commands for Geant4 VMC composed
 ///        physics list and related classes
 ///
 /// Implements commands:
@@ -52,15 +52,15 @@ class G4UIcmdWithAnInteger;
 class TG4ComposedPhysicsMessenger : public G4UImessenger
 {
   public:
-    TG4ComposedPhysicsMessenger(TG4ComposedPhysicsList* physicsList); 
+    TG4ComposedPhysicsMessenger(TG4ComposedPhysicsList* physicsList);
     virtual ~TG4ComposedPhysicsMessenger();
-   
-    // methods 
+
+    // methods
     virtual void SetNewValue(G4UIcommand* command, G4String string);
-    
+
   private:
     /// Not implemented
-    TG4ComposedPhysicsMessenger();  
+    TG4ComposedPhysicsMessenger();
     /// Not implemented
     TG4ComposedPhysicsMessenger(const TG4ComposedPhysicsMessenger& right);
     /// Not implemented
@@ -71,12 +71,12 @@ class TG4ComposedPhysicsMessenger : public G4UImessenger
 
     //
     // data members
-    
+
     /// associated class
-    TG4ComposedPhysicsList*     fPhysicsList; 
-    
+    TG4ComposedPhysicsList*     fPhysicsList;
+
     /// command directory
-    G4UIdirectory*              fDirectory; 
+    G4UIdirectory*              fDirectory;
 
     /// rangeCutForGamma command
     G4UIcmdWithADoubleAndUnit*  fRangeGammaCutCmd;
@@ -95,17 +95,17 @@ class TG4ComposedPhysicsMessenger : public G4UImessenger
 
     /// productionCutsTableEnergyRange command
     G4UIcommand*                fProductionCutsTableEnergyRangeCmd;
-    
+
     /// setGammaToMuonsCrossSectionFactor
     G4UIcmdWithADouble*  fSetGammaToMuonsCrossSectionFactorCmd;
 
-    /// printAllProcess command 
+    /// printAllProcess command
     G4UIcmdWithoutParameter*    fPrintAllProcessesCmd;
 
-    /// dumpAllProcess command      
+    /// dumpAllProcess command
     G4UIcmdWithoutParameter*    fDumpAllProcessesCmd;
 
-    /// printProcessMCMap command                   
+    /// printProcessMCMap command
     G4UIcmdWithoutParameter*    fPrintProcessMCMapCmd;
 
     /// printProcessControlsMap command
@@ -125,6 +125,6 @@ class TG4ComposedPhysicsMessenger : public G4UImessenger
 
     /// g4HadronicProcessStoreVerbose command
     G4UIcmdWithAnInteger*       fG4HadronicProcessStoreVerboseCmd;
-};     
+};
 
 #endif //TG4_COMPOSED_PHYSICS_MESSENGER_H

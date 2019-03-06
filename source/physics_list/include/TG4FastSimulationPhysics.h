@@ -54,7 +54,7 @@ class TG4FastSimulationPhysics : public TG4VPhysicsConstructor
     // methods
           // construct particle and physics
     virtual void ConstructParticle();
-  public: 
+  public:
     virtual void ConstructProcess();
 
   private:
@@ -64,7 +64,7 @@ class TG4FastSimulationPhysics : public TG4VPhysicsConstructor
     TG4FastSimulationPhysics& operator=(const TG4FastSimulationPhysics& right);
 
     // methods
-    G4FastSimulationManagerProcess* 
+    G4FastSimulationManagerProcess*
       GetOrCreateFastSimulationProcess(const G4String& modelName);
 
     void UpdateRegions(const std::vector<TG4ModelConfiguration*>& models);

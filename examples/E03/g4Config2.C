@@ -17,16 +17,16 @@
 void Config()
 {
 /// The configuration function for Geant4 VMC for Example02
-/// called during MC application initialization. 
+/// called during MC application initialization.
 /// For geometry defined with Root, selected Geant4 native navigation
 /// and a user defined physics list in a user run configuration
 
   // Run configuration with user physics list
-  Ex03RunConfiguration2* runConfiguration 
+  Ex03RunConfiguration2* runConfiguration
     = new Ex03RunConfiguration2("geomRootToGeant4");
 
   // Run configuration with user physics list and special cuts activated
-  // Ex03RunConfiguration2* runConfiguration 
+  // Ex03RunConfiguration2* runConfiguration
   //  = new Ex03RunConfiguration2("geomRootToGeant4", "specialCuts");
 
   // TGeant4
@@ -34,7 +34,7 @@ void Config()
     = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration);
 
   cout << "Geant4 has been created." << endl;
-  
+
   // Customise Geant4 setting
   // (verbose level, global range cut, ..)
   geant4->ProcessGeantMacro("g4config2.in");

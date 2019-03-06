@@ -11,11 +11,11 @@
 //-------------------------------------------------
 
 /// \file Ex06PrimaryGenerator.h
-/// \brief Definition of the Ex06PrimaryGenerator class 
+/// \brief Definition of the Ex06PrimaryGenerator class
 ///
 /// Geant4 ExampleN06 adapted to Virtual Monte Carlo \n
 /// Id: ExN06PrimaryGeneratorAction.hh,v 1.4 2003/01/23 15:34:23 maire Exp \n
-/// GEANT4 tag Name: geant4-07-00-cand-01 
+/// GEANT4 tag Name: geant4-07-00-cand-01
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -33,7 +33,7 @@ class TVector3;
 class Ex06PrimaryGenerator : public TObject
 {
   public:
-    Ex06PrimaryGenerator(TVirtualMCStack* stack); 
+    Ex06PrimaryGenerator(TVirtualMCStack* stack);
     Ex06PrimaryGenerator(const Ex06PrimaryGenerator& origin,
                          TVirtualMCStack* stack);
     Ex06PrimaryGenerator();
@@ -48,14 +48,14 @@ class Ex06PrimaryGenerator : public TObject
     void SetDirection(Double_t dirX, Double_t dirY, Double_t dirZ);
     void SetOptPhotonPolar(Double_t angle);
     void SetNofPrimaries(Int_t nofPrimaries);
- 
+
   private:
     // methods
     void GeneratePrimary();
 
     // data members
     TVirtualMCStack*  fStack;        ///< VMC stack
-    Int_t             fPdg;          ///< Particle PDG encoding 
+    Int_t             fPdg;          ///< Particle PDG encoding
     Double_t          fKinEnergy;    ///< Particle kinetic energy
     Double_t          fDirX;         ///< Particle direction - x component
     Double_t          fDirY;         ///< Particle direction - y component
@@ -80,8 +80,8 @@ inline void Ex06PrimaryGenerator::SetKinEnergy(Double_t kinEnergy)
 
 /// Set photon polarization
 /// \param angle  The new polarization angle (in degrees)
-inline void Ex06PrimaryGenerator::SetOptPhotonPolar(Double_t angle) 
-{ fPolAngle = angle; }  
+inline void Ex06PrimaryGenerator::SetOptPhotonPolar(Double_t angle)
+{ fPolAngle = angle; }
 
 /// Set the number of particles to be generated
 /// \param nofPrimaries The number of particles to be generated

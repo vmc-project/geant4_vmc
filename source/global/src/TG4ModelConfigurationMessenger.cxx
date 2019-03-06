@@ -18,7 +18,7 @@
 #include <G4UIdirectory.hh>
 #include <G4UIcmdWithAString.hh>
 
-#include <locale> 
+#include <locale>
 
 //
 // utility methods
@@ -53,7 +53,7 @@ TG4ModelConfigurationMessenger::TG4ModelConfigurationMessenger(
    fSetModelCmd(0),
    fSetParticlesCmd(0),
    fSetRegionsCmd(0)
-{ 
+{
 /// Standard constructor
 
   G4String physicsName = fModelConfigurationManager->GetName();

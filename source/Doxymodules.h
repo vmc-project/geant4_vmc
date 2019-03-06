@@ -56,7 +56,7 @@
 
 /** @} */
 
-/** @defgroup event event 
+/** @defgroup event event
  *  Category event
  *  @{
  */

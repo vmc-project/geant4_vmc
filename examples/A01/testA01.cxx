@@ -11,7 +11,7 @@
 /// \brief The Geant4 VMC example A01 test application
 ///
 /// The Geant4 VMC test application
-/// with explicitely instantiated TGeant3 or TGeant4 and linked 
+/// with explicitely instantiated TGeant3 or TGeant4 and linked
 /// with all libraries.
 ///
 /// Usage:
@@ -140,7 +140,7 @@ void PrintG3Configuration(
 int main(int argc, char** argv)
 {
   // Initialize Root threading.
-  // (Multi-threading is triggered automatically if Geant4 was built 
+  // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
    TThread::Initialize();
@@ -216,8 +216,8 @@ int main(int argc, char** argv)
   // end of code to process arguments
 
   // Create MC application (thread local)
-  A01MCApplication* appl 
-    =  new A01MCApplication("ExampleA01", 
+  A01MCApplication* appl
+    =  new A01MCApplication("ExampleA01",
                             "The exampleA01 MC application");
 #ifdef USE_GEANT4
   // Local magnetic field option
@@ -226,7 +226,7 @@ int main(int argc, char** argv)
     appl->SetUseLocalMagField(true);
   }
 
-  // RunConfiguration for Geant4 
+  // RunConfiguration for Geant4
   TG4RunConfiguration* runConfiguration = 0;
   if ( ! g4UserClass.size() ) {
     runConfiguration
@@ -257,7 +257,7 @@ int main(int argc, char** argv)
     geant4->ProcessGeantMacro(g4Macro.data());
   }
 #endif
-  
+
 #ifdef USE_GEANT3
   if ( g3Geometry == "TGeant3" ) {
     new TGeant3("C++ Interface to Geant3");
@@ -295,4 +295,4 @@ int main(int argc, char** argv)
   }
 
   delete appl;
-}  
+}

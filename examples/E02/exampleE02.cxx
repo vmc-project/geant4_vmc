@@ -31,7 +31,7 @@
 int main(int argc, char** argv)
 {
   // Initialize Root threading.
-  // (Multi-threading is triggered automatically if Geant4 was built 
+  // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
    TThread::Initialize();
@@ -39,13 +39,13 @@ int main(int argc, char** argv)
 #endif
 
   // Create MC application (thread local)
-  Ex02MCApplication* appl 
-    =  new Ex02MCApplication("ExampleE02", 
+  Ex02MCApplication* appl
+    =  new Ex02MCApplication("ExampleE02",
                              "The exampleE02 MC application");
 
 #ifdef USE_GEANT4
-  // RunConfiguration for Geant4 
-  TG4RunConfiguration* runConfiguration 
+  // RunConfiguration for Geant4
+  TG4RunConfiguration* runConfiguration
     = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT");
 
   // TGeant4
@@ -57,9 +57,9 @@ int main(int argc, char** argv)
   // (verbose level, global range cut, ..)
   geant4->ProcessGeantMacro("g4config.in");
 #endif
-  
+
 #ifdef USE_GEANT3
-  TGeant3* geant3 
+  TGeant3* geant3
     = new TGeant3TGeo("C++ Interface to Geant3");
   geant3->SetHADR(0);
 #endif
@@ -74,4 +74,4 @@ int main(int argc, char** argv)
   appl->RunMC(5);
 
   delete appl;
-}  
+}

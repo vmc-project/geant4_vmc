@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4Field.h
-/// \brief Definition of the TG4Field class 
+/// \brief Definition of the TG4Field class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -29,11 +29,11 @@ class G4LogicalVolume;
 class TVirtualMagField;
 
 /// \ingroup geometry
-/// \brief The base class for magnetic, electromagnetic and gravity 
+/// \brief The base class for magnetic, electromagnetic and gravity
 /// fields which strenght is defined via TVirtualMagField.
 ///
 /// The equation of motion motion of a particle in a field  and the
-/// integration method is set according to the selection in 
+/// integration method is set according to the selection in
 /// TG4FieldParameters, as well as other accuracy parameters.
 /// The default values in TG4FieldParameters correspond to defaults
 /// set in Geant4 (taken from Geant4 9.3 release.)
@@ -58,7 +58,7 @@ class TG4Field
     G4Field* GetG4Field() const;
     G4EquationOfMotion* GetEquation() const;
     G4MagIntegratorStepper* GetStepper() const;
-    
+
   private:
     // methods
     G4Field* CreateG4Field(const TG4FieldParameters& parameters,
@@ -71,7 +71,7 @@ class TG4Field
 
     // data
     /// Geant4 field
-    G4Field*  fG4Field; 
+    G4Field*  fG4Field;
     /// The associated TGeo magnetic field
     TVirtualMagField*  fVirtualMagField;
     /// The associated volume (if local field)

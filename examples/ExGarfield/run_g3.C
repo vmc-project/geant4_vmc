@@ -9,11 +9,11 @@
 
 /// \ingroup ExGarfield
 /// \file ExGarfield/run_g3.C
-/// \brief Macro for running Example ExGarfield with Geant3 
+/// \brief Macro for running Example ExGarfield with Geant3
 
 #include "set_vis.C"
 
-void run_g3(const TString& configMacro = "g3tgeoConfig.C") 
+void run_g3(const TString& configMacro = "g3tgeoConfig.C")
 {
 /// Macro function for running Example ExGarfield with Geant3 from
 /// Root interactive session
@@ -22,7 +22,7 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
 /// \param configMacro configuration macro name, default \ref ExGarfield/g3tgeoConfig.C
 
   // MC application
-  VMC::Garfield::MCApplication* appl 
+  VMC::Garfield::MCApplication* appl
     =  new VMC::ExGarfield::MCApplication("ExampleExGarfield", "The example ExGarfield MC application");
   appl->InitMC(configMacro);
 
@@ -30,6 +30,6 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
   set_vis();
 
   appl->RunMC(5);
-  
+
   delete appl;
-}  
+}

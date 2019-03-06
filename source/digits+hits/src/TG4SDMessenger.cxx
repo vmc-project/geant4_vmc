@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4SDMessenger.cxx
-/// \brief Implementation of the TG4SDMessenger class 
+/// \brief Implementation of the TG4SDMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -31,39 +31,39 @@ TG4SDMessenger::TG4SDMessenger(TG4SDConstruction* sdConstruction)
     fSetGflashCmd(0),
     fSetExclusiveSDScoringCmd(0),
     fPrintUserSDsCmd(0)
-{ 
+{
 /// Standard constructor
 
-  fAddSDSelectionCmd 
-    = new G4UIcmdWithAString("/mcDet/addSDSelection", this);  
+  fAddSDSelectionCmd
+    = new G4UIcmdWithAString("/mcDet/addSDSelection", this);
   G4String guidance
     = "Selects volumes which will be make sensitive \n";
   guidance += "(When any selection is applied MCApllication::Stepping() is called only ";
   guidance += "from the selected volumes.)";
   fAddSDSelectionCmd->SetGuidance(guidance);
   fAddSDSelectionCmd->SetParameterName("SDSelection", false);
-  fAddSDSelectionCmd->AvailableForStates(G4State_PreInit);  
+  fAddSDSelectionCmd->AvailableForStates(G4State_PreInit);
 
-  fSetSDSelectionFromTGeoCmd 
-    = new G4UIcmdWithABool("/mcDet/setSDSelectionFromTGeo", this);  
+  fSetSDSelectionFromTGeoCmd
+    = new G4UIcmdWithABool("/mcDet/setSDSelectionFromTGeo", this);
   guidance
     = "Get sensitive volumes selection from TGeo geometry. \n";
   guidance += "(When any selection is applied MCApllication::Stepping() is called only ";
   guidance += "from the selected volumes.)";
-  fSetSDSelectionFromTGeoCmd->SetGuidance(guidance); 
+  fSetSDSelectionFromTGeoCmd->SetGuidance(guidance);
   fSetSDSelectionFromTGeoCmd->SetParameterName("SDSelectionFromTGeo", false);
-  fSetSDSelectionFromTGeoCmd->AvailableForStates(G4State_PreInit);  
+  fSetSDSelectionFromTGeoCmd->AvailableForStates(G4State_PreInit);
 
-  fSetSVLabelCmd 
-    = new G4UIcmdWithAString("/mcDet/setSVLabel", this);  
+  fSetSVLabelCmd
+    = new G4UIcmdWithAString("/mcDet/setSVLabel", this);
   guidance
     = "Set the string which is used in TGeoVolume::SetOption  \n";
   guidance += "(to label sensitive volumes (default is \"";
   guidance += TG4SDConstruction::GetDefaultSVLabel();
   guidance += "\".)";
-  fSetSVLabelCmd->SetGuidance(guidance); 
+  fSetSVLabelCmd->SetGuidance(guidance);
   fSetSVLabelCmd->SetParameterName("SVLabel", false);
-  fSetSVLabelCmd->AvailableForStates(G4State_PreInit);  
+  fSetSVLabelCmd->AvailableForStates(G4State_PreInit);
 
   fSetGflashCmd
     = new G4UIcmdWithABool("/mcDet/setGflash", this);
@@ -90,7 +90,7 @@ TG4SDMessenger::TG4SDMessenger(TG4SDConstruction* sdConstruction)
 }
 
 //______________________________________________________________________________
-TG4SDMessenger::~TG4SDMessenger() 
+TG4SDMessenger::~TG4SDMessenger()
 {
 /// Destructor
 
@@ -109,19 +109,19 @@ TG4SDMessenger::~TG4SDMessenger()
 //______________________________________________________________________________
 void TG4SDMessenger::SetNewValue(G4UIcommand* command,
                                           G4String newValue)
-{ 
+{
 /// Apply command to the associated object.
-  
+
   if ( command == fAddSDSelectionCmd ) {
     fSDConstruction->AddSelection(newValue);
-  }  
+  }
   else if ( command == fSetSDSelectionFromTGeoCmd ) {
     fSDConstruction->SetSelectionFromTGeo(
                        fSetSDSelectionFromTGeoCmd->GetNewBoolValue(newValue));
-  }  
+  }
   else if ( command == fSetSVLabelCmd ) {
     fSDConstruction->SetSensitiveVolumeLabel(newValue);
-  }  
+  }
   else if ( command == fSetGflashCmd ) {
     fSDConstruction->SetIsGflash(
                        fSetGflashCmd->GetNewBoolValue(newValue));

@@ -16,7 +16,7 @@
 #include "TPolyLine3D.h"
 //#include "TFile.h"
 
-// This class defines optical properties which are normally defined in the 
+// This class defines optical properties which are normally defined in the
 // user detector construction class and connects them to the GEANT4 geometry
 // objects which are internally created based on the ROOT geometry.
 
@@ -30,7 +30,7 @@ OpNovicePostDetConstruction::OpNovicePostDetConstruction()
 // Ctor.
    fTracks = new TObjArray();
    fCurrent = 0;
-}   
+}
 
 //______________________________________________________________________________
 OpNovicePostDetConstruction::~OpNovicePostDetConstruction()
@@ -39,7 +39,7 @@ OpNovicePostDetConstruction::~OpNovicePostDetConstruction()
    fTracks->Delete();
    delete fTracks;
 }
-   
+
 //______________________________________________________________________________
 OpNovicePostDetConstruction *OpNovicePostDetConstruction::GetInstance()
 {
@@ -48,7 +48,7 @@ OpNovicePostDetConstruction *OpNovicePostDetConstruction::GetInstance()
    fgInstance = new OpNovicePostDetConstruction();
    return fgInstance;
 }
-   
+
 //______________________________________________________________________________
 void OpNovicePostDetConstruction::NewTrack(Double_t x, Double_t y, Double_t z)
 {
@@ -58,7 +58,7 @@ void OpNovicePostDetConstruction::NewTrack(Double_t x, Double_t y, Double_t z)
    fCurrent->SetLineColor(kRed);
 //   fCurrent->SetLineWidth(2);
    AddPoint(x,y,z);
-}   
+}
 
 //______________________________________________________________________________
 void OpNovicePostDetConstruction::AddPoint(Double_t x, Double_t y, Double_t z)
@@ -66,7 +66,7 @@ void OpNovicePostDetConstruction::AddPoint(Double_t x, Double_t y, Double_t z)
 // Add a new point on the current track.
    if (!fCurrent) return;
    fCurrent->SetNextPoint(0.1*x,0.1*y,0.1*z);
-}   
+}
 
 //______________________________________________________________________________
 void OpNovicePostDetConstruction::WriteTracks(const char */*filename*/)
@@ -80,9 +80,9 @@ void OpNovicePostDetConstruction::WriteTracks(const char */*filename*/)
    trfile->Write();
    trfile->Close();
    delete trfile;
-*/   
+*/
 }
-      
+
 //______________________________________________________________________________
 void OpNovicePostDetConstruction::Initialize(TG4RootDetectorConstruction *dc)
 {
@@ -220,7 +220,7 @@ void OpNovicePostDetConstruction::Initialize(TG4RootDetectorConstruction *dc)
 
   G4MaterialPropertiesTable* myMPT2 = new G4MaterialPropertiesTable();
   myMPT2->AddProperty("RINDEX", photonEnergy, refractiveIndex2, nEntries);
-  G4Material *air = dc->GetG4Material(geom->GetMaterial("Air"));  
+  G4Material *air = dc->GetG4Material(geom->GetMaterial("Air"));
   air->SetMaterialPropertiesTable(myMPT2);
 
 // ------------- Surfaces --------------
@@ -290,7 +290,7 @@ void OpNovicePostDetConstruction::Initialize(TG4RootDetectorConstruction *dc)
   G4VPhysicalVolume *pVol;
   for (pos=pStore->begin(); pos != pStore->end(); pos++) {
      pVol = *pos;
-     G4cout << "physical volume: " << pVol->GetName() << "  copyNo: " << pVol->GetCopyNo() << G4endl;     
+     G4cout << "physical volume: " << pVol->GetName() << "  copyNo: " << pVol->GetCopyNo() << G4endl;
   }
-  
+
 }

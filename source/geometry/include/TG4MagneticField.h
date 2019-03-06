@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4MagneticField.h
-/// \brief Definition of the TG4MagneticField class 
+/// \brief Definition of the TG4MagneticField class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -31,7 +31,7 @@ class TVirtualMagField;
 /// \brief The magnetic field defined via TVirtualMagField.
 ///
 /// The equation of motion motion of a particle in a field  and the
-/// integration method is set according to the selection in 
+/// integration method is set according to the selection in
 /// TG4FieldParameters, as well as other accuracy parameters.
 /// The default values in TG4FieldParameters correspond to defaults
 /// set in Geant4 (taken from Geant4 9.3 release.)
@@ -49,7 +49,7 @@ class TG4MagneticField : public G4MagneticField
     virtual void GetFieldValue(const G4double point[3], G4double* bfield) const;
 
     virtual void PrintStatistics() const {}
-    
+
   protected:
     // data
     /// The associated TGeo magnetic field

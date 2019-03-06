@@ -8,16 +8,16 @@
 //-------------------------------------------------
 
 /// \file E03/g3Config.C
-/// \brief Configuration macro for Geant3 VirtualMC for Example03 
+/// \brief Configuration macro for Geant3 VirtualMC for Example03
 
 void Config()
 {
 /// The configuration function for Geant3 VMC for Example03
-/// called during MC application initialization. 
+/// called during MC application initialization.
 
   TGeant3* geant3
-    = new  TGeant3("C++ Interface to Geant3"); 
-  
+    = new  TGeant3("C++ Interface to Geant3");
+
   cout << "Geant3 has been created." << endl;
 
   gMC->SetProcess("DRAY",1);

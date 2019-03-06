@@ -95,10 +95,10 @@ inline  G4String TG4ModelConfigurationManager::GetAvailableModels() const {
   return fAvailableModels;
 }
 
-inline const TG4ModelConfigurationManager::ModelConfigurationVector& 
+inline const TG4ModelConfigurationManager::ModelConfigurationVector&
 TG4ModelConfigurationManager::GetVector() const {
   /// Return the vector of registered model configurations
-  return fVector; 
+  return fVector;
 }
 
 #endif //TG4_MODEL_CONFIGURATION_MANAGER_H

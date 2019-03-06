@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4MCGeometry.h
-/// \brief Definition of the TG4MCGeometry class 
+/// \brief Definition of the TG4MCGeometry class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -38,9 +38,9 @@ class TArrayD;
 class TString;
 
 /// \ingroup geometry
-/// \brief Geant4 implementation of the TVirtualMCGeometry interface 
+/// \brief Geant4 implementation of the TVirtualMCGeometry interface
 ///
-/// This interfaces defines methods for building geometry a la geant3 
+/// This interfaces defines methods for building geometry a la geant3
 /// and is implemented with use og G3toG4
 ///
 /// \author: V. Berejnoi, CERN; I. Hrivnacova, IPN Orsay
@@ -54,61 +54,61 @@ class TG4MCGeometry :  public TVirtualMCGeometry,
 
     //
     // methods (from the base class)
-    
+
     // detector composition
-    virtual void  Material(Int_t& kmat, const char* name, Double_t a, 
+    virtual void  Material(Int_t& kmat, const char* name, Double_t a,
                      Double_t z, Double_t dens, Double_t radl, Double_t absl,
                      Float_t* buf, Int_t nwbuf);
-    virtual void  Material(Int_t& kmat, const char* name, Double_t a, 
+    virtual void  Material(Int_t& kmat, const char* name, Double_t a,
                      Double_t z, Double_t dens, Double_t radl, Double_t absl,
                      Double_t* buf, Int_t nwbuf);
-    virtual void  Mixture(Int_t& kmat, const char *name, Float_t *a, 
+    virtual void  Mixture(Int_t& kmat, const char *name, Float_t *a,
                      Float_t *z, Double_t dens, Int_t nlmat, Float_t *wmat);
-    virtual void  Mixture(Int_t& kmat, const char *name, Double_t *a, 
+    virtual void  Mixture(Int_t& kmat, const char *name, Double_t *a,
                      Double_t *z, Double_t dens, Int_t nlmat, Double_t *wmat);
-    virtual void  Medium(Int_t& kmed, const char *name, Int_t nmat, 
-                     Int_t isvol, Int_t ifield, Double_t fieldm, Double_t tmaxfd, 
-                     Double_t stemax, Double_t deemax, Double_t epsil, 
+    virtual void  Medium(Int_t& kmed, const char *name, Int_t nmat,
+                     Int_t isvol, Int_t ifield, Double_t fieldm, Double_t tmaxfd,
+                     Double_t stemax, Double_t deemax, Double_t epsil,
                      Double_t stmin, Float_t* ubuf, Int_t nbuf);
-    virtual void  Medium(Int_t& kmed, const char *name, Int_t nmat, 
-                     Int_t isvol, Int_t ifield, Double_t fieldm, Double_t tmaxfd, 
-                     Double_t stemax, Double_t deemax, Double_t epsil, 
+    virtual void  Medium(Int_t& kmed, const char *name, Int_t nmat,
+                     Int_t isvol, Int_t ifield, Double_t fieldm, Double_t tmaxfd,
+                     Double_t stemax, Double_t deemax, Double_t epsil,
                      Double_t stmin, Double_t* ubuf, Int_t nbuf);
-    virtual void  Matrix(Int_t& krot, Double_t thetaX, Double_t phiX, 
-                     Double_t thetaY, Double_t phiY, Double_t thetaZ, 
+    virtual void  Matrix(Int_t& krot, Double_t thetaX, Double_t phiX,
+                     Double_t thetaY, Double_t phiY, Double_t thetaZ,
                      Double_t phiZ);
 
-    // functions from GBASE 
-    virtual void  Ggclos(); 
+    // functions from GBASE
+    virtual void  Ggclos();
 
 
-    // functions from GGEOM 
-    virtual Int_t Gsvolu(const char *name, const char *shape, Int_t nmed,  
-                         Double_t *upar, Int_t np); 
-    virtual Int_t Gsvolu(const char *name, const char *shape, Int_t nmed,  
-                         Float_t *upar, Int_t np); 
-    virtual void  Gsdvn(const char *name, const char *mother, Int_t ndiv, 
+    // functions from GGEOM
+    virtual Int_t Gsvolu(const char *name, const char *shape, Int_t nmed,
+                         Double_t *upar, Int_t np);
+    virtual Int_t Gsvolu(const char *name, const char *shape, Int_t nmed,
+                         Float_t *upar, Int_t np);
+    virtual void  Gsdvn(const char *name, const char *mother, Int_t ndiv,
                         Int_t iaxis);
-    virtual void  Gsdvn2(const char *name, const char *mother, Int_t ndiv, 
-                         Int_t iaxis, Double_t c0i, Int_t numed); 
+    virtual void  Gsdvn2(const char *name, const char *mother, Int_t ndiv,
+                         Int_t iaxis, Double_t c0i, Int_t numed);
     virtual void  Gsdvt(const char *name, const char *mother, Double_t step,
-                         Int_t iaxis, Int_t numed, Int_t ndvmx); 
-    virtual void  Gsdvt2(const char *name, const char *mother, Double_t step, 
-                         Int_t iaxis, Double_t c0, Int_t numed, Int_t ndvmx); 
+                         Int_t iaxis, Int_t numed, Int_t ndvmx);
+    virtual void  Gsdvt2(const char *name, const char *mother, Double_t step,
+                         Int_t iaxis, Double_t c0, Int_t numed, Int_t ndvmx);
 
-    virtual void  Gsord(const char *name, Int_t iax); 
-    virtual void  Gspos(const char *name, Int_t nr, const char *mother,  
-                        Double_t x, Double_t y, Double_t z, Int_t irot, 
-                        const char *konly); 
-    virtual void  Gsposp(const char *name, Int_t nr, const char *mother,  
+    virtual void  Gsord(const char *name, Int_t iax);
+    virtual void  Gspos(const char *name, Int_t nr, const char *mother,
+                        Double_t x, Double_t y, Double_t z, Int_t irot,
+                        const char *konly);
+    virtual void  Gsposp(const char *name, Int_t nr, const char *mother,
                          Double_t x, Double_t y, Double_t z, Int_t irot,
-                         const char *konly, Double_t *upar, Int_t np); 
-    virtual void  Gsposp(const char *name, Int_t nr, const char *mother,  
+                         const char *konly, Double_t *upar, Int_t np);
+    virtual void  Gsposp(const char *name, Int_t nr, const char *mother,
                          Double_t x, Double_t y, Double_t z, Int_t irot,
-                         const char *konly, Float_t *upar, Int_t np); 
+                         const char *konly, Float_t *upar, Int_t np);
     virtual void  Gsbool(const char* onlyVolName, const char* manyVolName);
-        
-                         
+
+
     // functions for access to geometry
     virtual Bool_t GetTransformation(const TString& volumePath,
                          TGeoHMatrix& matrix);
@@ -129,7 +129,7 @@ class TG4MCGeometry :  public TVirtualMCGeometry,
     //
     // Not implemented functions from the base class
     // (these functions are implemented in SDmanager)
-    //                 
+    //
 
     virtual Int_t VolId(const Text_t* volName) const;
     virtual const char* VolName(Int_t id) const;
@@ -147,12 +147,12 @@ class TG4MCGeometry :  public TVirtualMCGeometry,
 
     //
     // data members
-    
+
     /// geometry services
     TG4GeometryServices*  fGeometryServices;
-    
+
     /// vector of material names sorted in the order of materials in G3Mat
-    TG4StringVector  fMaterialNameVector; 
+    TG4StringVector  fMaterialNameVector;
 };
 
 #endif //TG4_VMC_GEOMETRY_MANAGER_H

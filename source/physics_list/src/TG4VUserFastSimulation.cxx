@@ -27,7 +27,7 @@ TG4VUserFastSimulation::TG4VUserFastSimulation()
 {
 /// Default constructor
 
-  fFastModelsManager 
+  fFastModelsManager
     = TG4GeometryManager::Instance()->GetFastModelsManager();
 }
 

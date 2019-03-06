@@ -12,7 +12,7 @@
 ///
 /// New macro for loading Geant4 and Geant4 VMC libraries
 /// with using geant4-config script provided in Geant4.
-/// Besides loading libraries, the macro also resets 
+/// Besides loading libraries, the macro also resets
 /// FPE mask to 0, in order to make sure than FPE for
 /// FE_OVERFLOW is disabled what is required for Geant4.
 
@@ -31,7 +31,7 @@
 void loadg4libs()
 {
 /// Macro function for loading Geant4 libraries
-/// from list of libraries build by geant4-config --libs 
+/// from list of libraries build by geant4-config --libs
 
   FILE* pipe = gSystem->OpenPipe("geant4-config --libs", "r");
   std::string all_lines;
@@ -39,7 +39,7 @@ void loadg4libs()
   while ( fgets(line, sizeof(line), pipe ) != NULL ) {
     all_lines += line;
   }
-  
+
   TString all_lines_t(all_lines.data());
   all_lines_t.Remove(all_lines_t.First('\n'));
   //cout << all_lines_t.Data() << endl;
@@ -60,13 +60,13 @@ void loadg4libs()
   for (Int_t i=libs->GetEntriesFast()-1; i>=0; i-- ) {
     TString lib = ((TObjString*)libs->At(i))->GetString();
     lib.ReplaceAll("-l", "lib");
-    //cout << "Loading |" << lib.Data() << "|" << endl; 
+    //cout << "Loading |" << lib.Data() << "|" << endl;
     if(lib.BeginsWith("lib"))
       gSystem->Load(lib.Data());
-  } 
-  
-  gSystem->SetFPEMask(0); 
-}   
+  }
+
+  gSystem->SetFPEMask(0);
+}
 
 Bool_t isLibrary(const char* libName)
 {
@@ -75,36 +75,36 @@ Bool_t isLibrary(const char* libName)
 
   if (TString(gSystem->DynamicPathName(libName, kTRUE)) != TString(""))
     return kTRUE;
-  else  
+  else
     return kFALSE;
-}    
+}
 
 Bool_t isBatch()
 {
 /// Helper function which testes if Root was started in batch mode
 
-  for ( Int_t i=0; i<gApplication->Argc(); ++i ) 
+  for ( Int_t i=0; i<gApplication->Argc(); ++i )
     if ( TString(gROOT->GetApplication()->Argv(i)) == "-b" ) return true;
-  
+
   return false;
-}    
+}
 
 Bool_t isSet(const char* variable)
 {
-/// Helper function which checks if the specified environment variable 
+/// Helper function which checks if the specified environment variable
 /// is set.
 /// \param variable  The environment variable name
 
   TString value = gSystem->Getenv(variable);
   if ( value != "") return true;
-  
+
   return false;
-}  
+}
 
 Bool_t isMT()
 {
 /// Macro function for detecting if Geant4 libraries
-/// are built in multi-threading mode via 
+/// are built in multi-threading mode via
 /// geant4-config --has-feature multithreading
 
   FILE* pipe = gSystem->OpenPipe("geant4-config  --has-feature multithreading", "r");
@@ -112,22 +112,22 @@ Bool_t isMT()
   fgets(line, sizeof(line), pipe);
   TString answer = line;
   answer.Remove(answer.First('\n'));
-  
+
   return ( answer == "yes");
-}  
+}
 
 void vgmlibs()
-{ 
+{
 /// Function for loading VGM libraries.
 
-  if ( isSet("USE_VGM") ) { 
+  if ( isSet("USE_VGM") ) {
     cout << "Loading VGM libraries ... " << endl;
     gSystem->Load("libClhepVGM");
     gSystem->Load("libBaseVGM");
     gSystem->Load("libGeant4GM");
     gSystem->Load("libRootGM");
     gSystem->Load("libXmlVGM");
-  }  
+  }
 }
 
 void g4libs()
@@ -138,27 +138,27 @@ void g4libs()
 
   // VGM librares
   vgmlibs();
-  
+
   // G4Root library (if available)
   cout << "Loading g4root library ..." << endl;
   gSystem->Load("libg4root");
-    
+
   // Geant4 VMC library
   cout << "Loading geant4vmc library ..." << endl;
   gSystem->Load("libgeant4vmc");
 
-  // Geant4 VMC GUI library 
+  // Geant4 VMC GUI library
   // (if available and Root is not running in batch mode)
   if ( isLibrary("libgeant4vmc_gui") && ! isBatch() ) {
     cout << "Loading geant4vmc_gui library ... " << endl;
     gSystem->Load("libgeant4vmc_gui");
-  }  
+  }
 
   // mtroot library (make optional)
   cout << "Loading mtroot library ..." << endl;
   gSystem->Load("libmtroot");
-  
-  // initialize Root threading  
+
+  // initialize Root threading
   if ( isMT() ) {
     TThread::Initialize();
   }

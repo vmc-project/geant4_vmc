@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01DriftChamberSD.cxx 
-/// \brief Implementation of the A01DriftChamberSD class 
+/// \file A01DriftChamberSD.cxx
+/// \brief Implementation of the A01DriftChamberSD class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo \n
 ///
@@ -108,9 +108,9 @@ void A01DriftChamberSD::Initialize()
 {
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
-  
+
   if ( TMCRootManager::Instance() ) Register();
-  
+
   fVolId = gMC->VolId(fVolName.Data());
 }
 
@@ -125,9 +125,9 @@ Bool_t A01DriftChamberSD::ProcessHits()
 
   Double_t charge = gMC->TrackCharge();
   if ( charge == 0. ) return false;
-  
+
   if ( ! gMC->IsTrackEntering() ) return false;
-  
+
   // get copyNo in mother
   gMC->CurrentVolOffID(1,copyNo);
 
@@ -136,17 +136,17 @@ Bool_t A01DriftChamberSD::ProcessHits()
   Double_t localPos[3];
   gMC->TrackPosition(globalPos[0], globalPos[1], globalPos[2]);
   gMC->Gmtod(globalPos, localPos, 1);
-  
+
   // Debug printing
-  //cout << "** Drift Chamber: Create hit in DriftChamber copyNo, worldPos[cm] " 
-  //     << copyNo << ", " 
+  //cout << "** Drift Chamber: Create hit in DriftChamber copyNo, worldPos[cm] "
+  //     << copyNo << ", "
   //     << globalPos[0] << ", " << globalPos[1] << ", " << globalPos[2] << endl;
   //cout << "gMC->CurrentVolOffName(1): " << gMC->CurrentVolOffName(1) << endl;
-  //cout << "localPos[cm] "     
+  //cout << "localPos[cm] "
   //     << localPos[0] << ", " << localPos[1] << ", " << localPos[2] << endl;
 
   Int_t nofHits = fHitsCollection->GetEntriesFast();
-  A01DriftChamberHit* hit 
+  A01DriftChamberHit* hit
     = new ((*fHitsCollection)[nofHits]) A01DriftChamberHit(copyNo);
 
   hit->SetWorldPos(TVector3(globalPos[0], globalPos[1], globalPos[2]));
@@ -162,27 +162,27 @@ void A01DriftChamberSD::EndOfEvent()
 /// Print hits collection (if verbose) and reset hits afterwards.
 
   if ( fVerboseLevel > 0 )  Print();
-    
+
   // Reset hits collection
-  fHitsCollection->Clear();  
+  fHitsCollection->Clear();
 }
 
 //_____________________________________________________________________________
 void A01DriftChamberSD::Register()
 {
 /// Register the hits collection in Root manager.
-  
+
   if ( fWriteHits ) {
     TMCRootManager::Instance()
       ->Register(GetName(), "TClonesArray", &fHitsCollection);
-  }    
+  }
 }
 
 //_____________________________________________________________________________
 void A01DriftChamberSD::Print(Option_t* /*option*/) const
 {
 /// Print the hits collection.
-  
+
    Int_t nofHits = fHitsCollection->GetEntriesFast();
    cout << GetName() << " has " << nofHits << " hits." << endl;
    if ( fVerboseLevel > 1 ) {
@@ -192,5 +192,5 @@ void A01DriftChamberSD::Print(Option_t* /*option*/) const
          if (hit->GetLayerID()==i2) hit->Print();
        }
      }
-   }      
+   }
 }

@@ -36,7 +36,7 @@ namespace Gflash
 {
 
 //_____________________________________________________________________________
-PrimaryGenerator::PrimaryGenerator(TVirtualMCStack* stack) 
+PrimaryGenerator::PrimaryGenerator(TVirtualMCStack* stack)
   : TObject(),
     fStack(stack),
     fNofPrimaries(1),
@@ -68,14 +68,14 @@ PrimaryGenerator::PrimaryGenerator()
     fNofPrimaries(0),
     fVertexPosition(),
     fVertexDirection()
-{    
+{
 /// Default constructor
 }
 
 //_____________________________________________________________________________
-PrimaryGenerator::~PrimaryGenerator() 
+PrimaryGenerator::~PrimaryGenerator()
 {
-/// Destructor  
+/// Destructor
 }
 
 //
@@ -84,52 +84,52 @@ PrimaryGenerator::~PrimaryGenerator()
 
 //_____________________________________________________________________________
 void PrimaryGenerator::GenerateOnePrimary(const TVector3& origin)
-{    
-/// Add one primary particle (kElectron) to the user stack 
+{
+/// Add one primary particle (kElectron) to the user stack
 /// (derived from TVirtualMCStack).
 /// \param origin  The track position
-  
+
  // Track ID (filled by stack)
  Int_t ntr;
- 
+
  // Option: to be tracked
- Int_t toBeDone = 1; 
- 
+ Int_t toBeDone = 1;
+
  // PDG
  Int_t pdg  = kElectron;
 
  // Polarization
- Double_t polx = 0.; 
- Double_t poly = 0.; 
- Double_t polz = 0.; 
+ Double_t polx = 0.;
+ Double_t poly = 0.;
+ Double_t polz = 0.;
 
  // Position
- Double_t vx  = origin.X(); 
- Double_t vy  = origin.Y(); 
+ Double_t vx  = origin.X();
+ Double_t vy  = origin.Y();
  Double_t vz =  origin.Z();
  Double_t tof = 0.;
  fVertexPosition = origin;
 
  // Energy (in GeV)
- Double_t kinEnergy = 50.;  
- Double_t mass = 0.51099906*1e-03; 
+ Double_t kinEnergy = 50.;
+ Double_t mass = 0.51099906*1e-03;
  Double_t e  = mass + kinEnergy;
- Double_t pmag = sqrt(e*e - mass*mass); 
- 
+ Double_t pmag = sqrt(e*e - mass*mass);
+
  // Particle momentum
  Double_t px, py, pz;
- px = pmag*fVertexDirection.X(); 
- py = pmag*fVertexDirection.Y();  
- pz = pmag*fVertexDirection.Z(); 
+ px = pmag*fVertexDirection.X();
+ py = pmag*fVertexDirection.Y();
+ pz = pmag*fVertexDirection.Z();
 
  // Randomize position
  // if (fIsRandom) {
  //   vy = origin.Y()*(gRandom->Rndm() - 0.5);
  //   vz = origin.Z()*(gRandom->Rndm() - 0.5);
- // }  
+ // }
 
- // Add particle to stack 
- fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
+ // Add particle to stack
+ fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz,
                   kPPrimary, ntr, 1., 0);
 }
 
@@ -140,7 +140,7 @@ void PrimaryGenerator::GenerateOnePrimary(const TVector3& origin)
 
 //_____________________________________________________________________________
 void PrimaryGenerator::GeneratePrimaries(const TVector3& origin)
-{    
+{
 /// Fill the user stack (derived from TVirtualMCStack) with primary particles.
 
   for (Int_t i=0; i<fNofPrimaries; i++) GenerateOnePrimary(origin);

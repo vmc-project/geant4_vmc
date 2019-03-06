@@ -1,4 +1,4 @@
-/*! 
+/*!
 
 /// \file "E03/.README.txt"
 /// \brief The Example E03 README page
@@ -20,7 +20,7 @@
     - Definition of sensitive volumes
     - Definition of VMC sensitive detectors (new since v3.7)
     - Physics - hadronics processes off
-    - Particles cuts: 
+    - Particles cuts:
         G4 cut in range: 1mm;
         G3 cuts set to correspond to 1mm cut in range
     - Primary generator with randomized position (optional),
@@ -38,7 +38,7 @@
     - User defined magnetic field equation of motion and/or its integrator (G4)
 
 
-  See also description of in 
+  See also description of in
     geant4/examples/basic/B4
 
 \section e03_s3 Macros
@@ -47,7 +47,7 @@
   <pre>
   \link     E03/load_g3a.C load_g3a.C    \endlink - macro to load the libraries (variant E03a) to run the example with Geant3
   \link     E03/load_g3b.C load_g3b.C    \endlink - macro to load the libraries (variant E03b) to run the example with Geant3
-  \link       E03/run_g3.C run_g3.C      \endlink - macro for running example 
+  \link       E03/run_g3.C run_g3.C      \endlink - macro for running example
   \link E03/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry(default)
   \link     E03/g3Config.C g3Config.C    \endlink - configuration macro for G3 with native geometry
   </pre>
@@ -56,21 +56,21 @@
   <pre>
   \link      E03/load_g4a.C load_g4a.C     \endlink - macro to load the libraries (variant E03a) to run the example with Geant4
   \link      E03/load_g4b.C load_g4b.C     \endlink - macro to load the libraries (variant E03b) to run the example with Geant4
-  \link        E03/run_g4.C run_g4.C       \endlink - macro for running example 
+  \link        E03/run_g4.C run_g4.C       \endlink - macro for running example
   \link      E03/g4Config.C g4Config.C     \endlink - configuration macro - G4 native geometry navigation (default)
   \link     E03/g4Config1.C g4Config1.C    \endlink - configuration macro - geometry defined via Geant4
   \link     E03/g4Config2.C g4Config2.C    \endlink - configuration macro - user defined physics list (LHEP_BERT)
   \link     E03/g4Config3.C g4Config3.C    \endlink - configuration macro - user defined regions
   \link     E03/g4Config4.C g4Config4.C    \endlink - configuration macro - activation of VMC cuts and process controls
   \link     E03/g4Config5.C g4Config5.C    \endlink - configuration macro - activation of user defined magnetic field equation of motion and/or its integrator
-  \link  E03/g4tgeoConfig.C g4tgeoConfig.C \endlink - configuration macro - G4 with TGeo navigation 
-  \link E03/g4tgeoConfig3.C g4tgeoConfig3.C\endlink - configuration macro - user defined regions, G4 with TGeo navigation 
+  \link  E03/g4tgeoConfig.C g4tgeoConfig.C \endlink - configuration macro - G4 with TGeo navigation
+  \link E03/g4tgeoConfig3.C g4tgeoConfig3.C\endlink - configuration macro - user defined regions, G4 with TGeo navigation
   \link E03/g4tgeoConfig4.C g4tgeoConfig4.C\endlink - configuration macro - activation of VMC cuts and process controls, TGeo navigation
   \link E03/g4tgeoConfig5.C g4tgeoConfig5.C\endlink - configuration macro - activation of user defined magnetic field equation of motion and/or its integrator
   \link E03/g4ConfigEnv.C   g4ConfigEnv.C  \endlink - configuration macro - physics list defined via environment variable
    g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
    g4config2.in  - macro for G4 configuration using G4 commands (called from g4Config2.C)
-   g4vis.in      - macro for G4 visualization settings (called from set_vis.C) 
+   g4vis.in      - macro for G4 visualization settings (called from set_vis.C)
   </pre>
 
   Common macro (called by run_g3.C/run_g4.C):
@@ -115,6 +115,6 @@
 \section e03_s5 Classes
 
 The documentation of all classes and the basic macros for this example
-is availabe on \link E03 this page \endlink. 
+is availabe on \link E03 this page \endlink.
 
 */

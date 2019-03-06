@@ -28,7 +28,7 @@
 using namespace std;
 
 //_____________________________________________________________________________
-TG4GflashFastSimulation::TG4GflashFastSimulation() 
+TG4GflashFastSimulation::TG4GflashFastSimulation()
   : TG4VUserFastSimulation(),
     fMessenger(0),
     fMaterialName(),
@@ -36,7 +36,7 @@ TG4GflashFastSimulation::TG4GflashFastSimulation()
 {
 /// Standard constructor
 
-  // create the model in contsructor 
+  // create the model in contsructor
   // to make available its messenger commands
   fGflashShowerModel = new GFlashShowerModel("GflashShowerModel");
               // region will be set via the model configuration
@@ -62,7 +62,7 @@ void  TG4GflashFastSimulation::Construct()
 
   if ( ! fMaterialName.size() ) {
     TG4Globals::Warning(
-      "TG4GflashFastSimulation", "Construct", 
+      "TG4GflashFastSimulation", "Construct",
       "The material for Gflash parameterisation is not defined.");
     return;
   }

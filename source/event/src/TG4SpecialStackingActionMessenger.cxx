@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4SpecialStackingActionMessenger.cxx
-/// \brief Implementation of the TG4SpecialStackingActionMessenger class 
+/// \brief Implementation of the TG4SpecialStackingActionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -44,7 +44,7 @@ TG4SpecialStackingActionMessenger::TG4SpecialStackingActionMessenger(
 }
 
 //_____________________________________________________________________________
-TG4SpecialStackingActionMessenger::~TG4SpecialStackingActionMessenger() 
+TG4SpecialStackingActionMessenger::~TG4SpecialStackingActionMessenger()
 {
 /// Destructor
 
@@ -57,17 +57,17 @@ TG4SpecialStackingActionMessenger::~TG4SpecialStackingActionMessenger()
 //
 
 //_____________________________________________________________________________
-void TG4SpecialStackingActionMessenger::SetNewValue(G4UIcommand* command, 
+void TG4SpecialStackingActionMessenger::SetNewValue(G4UIcommand* command,
                                                     G4String newValue)
-{ 
+{
 /// Apply command to the associated object.
 
-  if ( command == fSkipNeutrinoCmd ) { 
+  if ( command == fSkipNeutrinoCmd ) {
     fStackingAction
-      ->SetSkipNeutrino(fSkipNeutrinoCmd->GetNewBoolValue(newValue)); 
-  }   
-  else if ( command == fWaitPrimaryCmd ) { 
+      ->SetSkipNeutrino(fSkipNeutrinoCmd->GetNewBoolValue(newValue));
+  }
+  else if ( command == fWaitPrimaryCmd ) {
     fStackingAction
-      ->SetWaitPrimary(fWaitPrimaryCmd->GetNewBoolValue(newValue)); 
-  }   
+      ->SetWaitPrimary(fWaitPrimaryCmd->GetNewBoolValue(newValue));
+  }
 }

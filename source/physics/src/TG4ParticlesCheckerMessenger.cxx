@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4ParticlesCheckerMessenger.cxx
-/// \brief Implementation of the TG4ParticlesCheckerMessenger class 
+/// \brief Implementation of the TG4ParticlesCheckerMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -31,12 +31,12 @@ TG4ParticlesCheckerMessenger::TG4ParticlesCheckerMessenger(
     fParticlesChecker(particlesChecker),
     fDirectory(0),
     fSelectedProperty(""),
-    fCheckParticlesCmd(0),  
-    fCheckParticleCmd(0),  
-    fSelectPropertyCmd(0),  
+    fCheckParticlesCmd(0),
+    fCheckParticleCmd(0),
+    fSelectPropertyCmd(0),
     fSetCheckingCmd(0),
     fSetPrecisionCmd(0)
-{ 
+{
 /// Standard constructor
 
   fDirectory = new G4UIdirectory("/mcParticlesChecker/");
@@ -67,7 +67,7 @@ TG4ParticlesCheckerMessenger::TG4ParticlesCheckerMessenger(
 }
 
 //_____________________________________________________________________________
-TG4ParticlesCheckerMessenger::~TG4ParticlesCheckerMessenger() 
+TG4ParticlesCheckerMessenger::~TG4ParticlesCheckerMessenger()
 {
 /// Destructor
 
@@ -86,8 +86,8 @@ TG4ParticlesCheckerMessenger::~TG4ParticlesCheckerMessenger()
 //_____________________________________________________________________________
 void TG4ParticlesCheckerMessenger::Init()
 {
-/// Initialize the object. 
-/// We have to to this separately from the constructor as we need to get properties 
+/// Initialize the object.
+/// We have to to this separately from the constructor as we need to get properties
 /// from the particle checker, which are set after pnly after construction of its
 /// messenger.
 
@@ -98,28 +98,28 @@ void TG4ParticlesCheckerMessenger::Init()
   for ( it = availableProperties.begin(); it != availableProperties.end(); it++ ) {
     candidates = candidates + TG4ParticlesChecker::GetParticlePropertyName(*it);
     candidates = candidates + G4String(" ");
-  }  
+  }
   fSelectPropertyCmd->SetCandidates(candidates);
-  
+
   G4String guidance = "Select particle property to be checked.\n";
   guidance = guidance + "Available: ";
   guidance = guidance + candidates;
   fSelectPropertyCmd->SetGuidance(guidance);
-}   
+}
 
 //_____________________________________________________________________________
 void TG4ParticlesCheckerMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
-{ 
+{
 /// Apply command to the associated object.
 
   if ( command == fCheckParticlesCmd ) {
-    fParticlesChecker->CheckParticles(); 
+    fParticlesChecker->CheckParticles();
   }
   else if ( command == fCheckParticleCmd ) {
-    fParticlesChecker->CheckParticle(fCheckParticleCmd->GetNewIntValue(newValue)); 
+    fParticlesChecker->CheckParticle(fCheckParticleCmd->GetNewIntValue(newValue));
   }
-  else if (command == fSelectPropertyCmd) { 
-    fSelectedProperty = newValue; 
+  else if (command == fSelectPropertyCmd) {
+    fSelectedProperty = newValue;
   }
   else if (command == fSetCheckingCmd) {
     if ( fSelectedProperty == "" ) {
@@ -128,12 +128,12 @@ void TG4ParticlesCheckerMessenger::SetNewValue(G4UIcommand* command, G4String ne
       TG4Globals::Warning("TG4ParticlesCheckerMessenger", "SetNewValue",
                           "The particle property has not been yet seleceted.");
       return;
-    }                      
+    }
     fParticlesChecker
-      ->SetChecking(TG4ParticlesChecker::GetParticleProperty(fSelectedProperty), 
-                    fSetCheckingCmd->GetNewBoolValue(newValue));                      
+      ->SetChecking(TG4ParticlesChecker::GetParticleProperty(fSelectedProperty),
+                    fSetCheckingCmd->GetNewBoolValue(newValue));
   }
   else if (command == fSetPrecisionCmd) {
-    fParticlesChecker->SetPrecision(fSetPrecisionCmd->GetNewDoubleValue(newValue)); 
+    fParticlesChecker->SetPrecision(fSetPrecisionCmd->GetNewDoubleValue(newValue));
   }
 }

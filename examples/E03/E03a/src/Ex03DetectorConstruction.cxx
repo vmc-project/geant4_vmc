@@ -7,13 +7,13 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03DetectorConstruction.cxx 
-/// \brief Implementation of the Ex03DetectorConstruction class 
+/// \file Ex03DetectorConstruction.cxx
+/// \brief Implementation of the Ex03DetectorConstruction class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
 /// Id: ExN03DetectorConstruction.cc,v 1.11 2002/01/09 17:24:12 ranjard Exp \n
 ///
-/// 11/12/2008: 
+/// 11/12/2008:
 /// - Updated materials definition using directly Root objects
 /// - Added new materials according to:
 ///   Id: ExN03DetectorConstruction.cc,v 1.24 2008/08/12 20:00:03 gum Exp
@@ -22,7 +22,7 @@
 ///
 /// \date 06/03/2002
 /// \author I. Hrivnacova; IPN, Orsay
- 
+
 #include <Riostream.h>
 #include <TGeoManager.h>
 #include <TGeoElement.h>
@@ -63,7 +63,7 @@ Ex03DetectorConstruction::Ex03DetectorConstruction()
    fGapThickness      = 0.5;
    fNbOfLayers        = 10;
    fCalorSizeYZ       = 10.;
-   
+
    ComputeCalorParameters();
 }
 
@@ -84,8 +84,8 @@ void Ex03DetectorConstruction::ComputeCalorParameters()
 
   fLayerThickness = fAbsorberThickness + fGapThickness;
   fCalorThickness = fNbOfLayers*fLayerThickness;
-     
-  fWorldSizeX  = 1.2*fCalorThickness; 
+
+  fWorldSizeX  = 1.2*fCalorThickness;
   fWorldSizeYZ = 1.2*fCalorSizeYZ;
 }
 
@@ -102,32 +102,32 @@ void Ex03DetectorConstruction::ConstructMaterials()
   // Tracking medias (defaut parameters)
   //
 
-  // Create Root geometry manager 
+  // Create Root geometry manager
   new TGeoManager("E03_geometry", "E03 VMC example geometry");
 
 //--------- Material definition ---------
 
   TString name;      // Material name
-  Double_t a;        // Mass of a mole in g/mole   
+  Double_t a;        // Mass of a mole in g/mole
   Double_t z;        // Atomic number
   Double_t density;  // Material density in g/cm3
- 
+
 //
 // define simple materials
 //
 
-  new TGeoMaterial("Aluminium", a=26.98, z=13., density=2.700); 
+  new TGeoMaterial("Aluminium", a=26.98, z=13., density=2.700);
 
   new TGeoMaterial("liquidArgon", a=39.95, z=18., density=1.390);
 
-  new TGeoMaterial("Lead", a=207.19, z=82., density=11.35); 
+  new TGeoMaterial("Lead", a=207.19, z=82., density=11.35);
 
 //
 // define a material from elements.   case 1: chemical molecule
 //
 
   // Elements
-  
+
   TGeoElement* elH  = new TGeoElement("Hydrogen", "H", z= 1,  a= 1.01);
   TGeoElement* elC  = new TGeoElement("Carbon"  , "C", z= 6., a= 12.01);
   TGeoElement* elN  = new TGeoElement("Nitrogen", "N", z= 7., a= 14.01);
@@ -136,7 +136,7 @@ void Ex03DetectorConstruction::ConstructMaterials()
 
 
 /*
-  // define an Element from isotopes, by relative abundance 
+  // define an Element from isotopes, by relative abundance
   // (cannot be done with TGeo)
 
   G4Isotope* U5 = new G4Isotope("U235", iz=92, n=235, a=235.01*g/mole);
@@ -149,27 +149,27 @@ void Ex03DetectorConstruction::ConstructMaterials()
 
   TGeoMixture* matH2O
     = new TGeoMixture("Water", 2, density=1.000);
-  matH2O->AddElement(elH, 2);  
-  matH2O->AddElement(elO, 1);  
-  // overwrite computed meanExcitationEnergy with ICRU recommended value 
+  matH2O->AddElement(elH, 2);
+  matH2O->AddElement(elO, 1);
+  // overwrite computed meanExcitationEnergy with ICRU recommended value
   // (cannot be done with TGeo)
   // H2O->GetIonisation()->SetMeanExcitationEnergy(75.0*eV);
 
   TGeoMixture* matSci
     = new TGeoMixture("Scintillator", 2, density=1.032);
-  matSci->AddElement(elC,  9); 
-  matSci->AddElement(elH, 10); 
+  matSci->AddElement(elC,  9);
+  matSci->AddElement(elH, 10);
 
   TGeoMixture* matMyl
     = new TGeoMixture("Mylar", 3, density=1.397);
-  matMyl->AddElement(elC, 10); 
-  matMyl->AddElement(elH,  8); 
-  matMyl->AddElement(elO,  4); 
+  matMyl->AddElement(elC, 10);
+  matMyl->AddElement(elH,  8);
+  matMyl->AddElement(elO,  4);
 
   TGeoMixture* matSiO2
     = new TGeoMixture("quartz", 2, density=2.200);
-  matSiO2->AddElement(elSi, 1); 
-  matSiO2->AddElement(elO, 2); 
+  matSiO2->AddElement(elSi, 1);
+  matSiO2->AddElement(elO, 2);
 
 //
 // define a material from elements.   case 2: mixture by fractional mass
@@ -177,8 +177,8 @@ void Ex03DetectorConstruction::ConstructMaterials()
 
   TGeoMixture* matAir
     = new TGeoMixture("Air", 2, density=1.29e-03);
-  matAir->AddElement(elN, 0.7); 
-  matAir->AddElement(elO, 0.3); 
+  matAir->AddElement(elN, 0.7);
+  matAir->AddElement(elO, 0.3);
 
 //
 // Define a material from elements and/or others materials (mixture of mixtures)
@@ -186,9 +186,9 @@ void Ex03DetectorConstruction::ConstructMaterials()
 
   TGeoMixture* matAerog
     = new TGeoMixture("Aerogel", 3, density=0.200);
-  matAerog->AddElement(matSiO2, 0.625); 
-  matAerog->AddElement(matH2O,  0.374); 
-  matAerog->AddElement(elC,     0.001); 
+  matAerog->AddElement(matSiO2, 0.625);
+  matAerog->AddElement(matH2O,  0.374);
+  matAerog->AddElement(elC,     0.001);
 
 //
 // examples of gas in non STP conditions
@@ -196,8 +196,8 @@ void Ex03DetectorConstruction::ConstructMaterials()
 
   TGeoMixture* matCO2
     = new TGeoMixture("CarbonicGas", 2, density=1.842e-03);
-  matCO2-> AddElement(elC, 1); 
-  matCO2-> AddElement(elO, 2); 
+  matCO2-> AddElement(elC, 1);
+  matCO2-> AddElement(elO, 2);
 
   Double_t atmosphere = 6.32421e+08;
   Double_t pressure   = 50.*atmosphere;
@@ -205,11 +205,11 @@ void Ex03DetectorConstruction::ConstructMaterials()
   matCO2->SetPressure(pressure);
   matCO2->SetTemperature(temperature);
   matCO2->SetState(TGeoMaterial::kMatStateGas);
-  
+
 
   TGeoMixture* matSteam
     = new TGeoMixture("WaterSteam", 1, density=0.3e-03);
-  matSteam->AddElement(matH2O, 1.0);  
+  matSteam->AddElement(matH2O, 1.0);
 
   pressure    = 2.*atmosphere;
   temperature = 500.;
@@ -221,11 +221,11 @@ void Ex03DetectorConstruction::ConstructMaterials()
 // examples of vacuum
 //
 
-  new TGeoMaterial("Galactic", a=1.e-16, z=1.e-16, density=1.e-16); 
+  new TGeoMaterial("Galactic", a=1.e-16, z=1.e-16, density=1.e-16);
 
   TGeoMixture* matBeam
     = new TGeoMixture("Beam", 1, density=1.e-5);
-  matBeam->AddElement(matAir, 1.0);  
+  matBeam->AddElement(matAir, 1.0);
 
   pressure    = 2.*atmosphere;
   temperature = STP_temperature;
@@ -237,47 +237,47 @@ void Ex03DetectorConstruction::ConstructMaterials()
   // Tracking media
   //
 
-  // Paremeter for tracking media  
+  // Paremeter for tracking media
   Double_t param[20];
   param[0] = 0;     // isvol  - Not used
   param[1] = 2;     // ifield - User defined magnetic field
   param[2] = 10.;   // fieldm - Maximum field value (in kiloGauss)
-  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection 
-  param[4] = -0.01; // stemax - Maximum displacement for multiple scat 
-  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS 
+  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection
+  param[4] = -0.01; // stemax - Maximum displacement for multiple scat
+  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS
   param[6] = .001;  // epsil - Tracking precision
   param[7] = -.8;   // stmin
   for ( Int_t i=8; i<20; ++i) param[i] = 0.;
-  
+
   Int_t mediumId = 0;
   TList* materials = gGeoManager->GetListOfMaterials();
   TIter next(materials);
   while (TObject *obj = next()) {
-    TGeoMaterial* material = (TGeoMaterial*)obj;    
+    TGeoMaterial* material = (TGeoMaterial*)obj;
     new TGeoMedium(material->GetName(), ++mediumId, material, param);
   }
 
-}    
+}
 
 //_____________________________________________________________________________
 void Ex03DetectorConstruction::ConstructGeometry()
 {
 /// Contruct volumes using TGeo modeller
 
-  // Complete the Calor parameters definition 
+  // Complete the Calor parameters definition
   ComputeCalorParameters();
-   
+
   Double_t* ubuf = 0;
-  
+
   // Media Ids
   Int_t defaultMediumId = gGeoManager->GetMedium(fDefaultMaterial.Data())->GetId();
   Int_t absorberMediumId = gGeoManager->GetMedium(fAbsorberMaterial.Data())->GetId();
   Int_t gapMediumId = gGeoManager->GetMedium(fGapMaterial.Data())->GetId();
 
-  //     
+  //
   // World
   //
-  
+
   Double_t world[3];
   world[0] = fWorldSizeX/2.;
   world[1] = fWorldSizeYZ/2.;
@@ -285,11 +285,11 @@ void Ex03DetectorConstruction::ConstructGeometry()
   TGeoVolume *top = gGeoManager->Volume("WRLD", "BOX", defaultMediumId, world, 3);
   gGeoManager->SetTopVolume(top);
 
-  //                               
+  //
   // Calorimeter
-  //  
-  if (fCalorThickness > 0.)  { 
-  
+  //
+  if (fCalorThickness > 0.)  {
+
     Double_t calo[3];
     calo[0] = fCalorThickness/2.;
     calo[1] = fCalorSizeYZ/2.;
@@ -300,14 +300,14 @@ void Ex03DetectorConstruction::ConstructGeometry()
     Double_t posY =  0.;
     Double_t posZ =  0.;
     gGeoManager->Node("CALO", 1 ,"WRLD", posX, posY, posZ, 0, kTRUE, ubuf);
-  
+
     // Divide  calorimeter along X axis to place layers
-    // 
+    //
     Double_t start =  - calo[0];
     Double_t width = fCalorThickness/fNbOfLayers;
     gGeoManager->Division("CELL", "CALO", 1, fNbOfLayers, start, width);
 
-    //                                 
+    //
     // Layer
     //
     Double_t layer[3];
@@ -320,11 +320,11 @@ void Ex03DetectorConstruction::ConstructGeometry()
     posY =  0.;
     posZ =  0.;
     gGeoManager->Node("LAYE", 1 ,"CELL", posX, posY, posZ, 0, kTRUE, ubuf);
-  }  
-  
-  //                               
+  }
+
+  //
   // Absorber
-  //  
+  //
 
   if (fAbsorberThickness > 0.) {
 
@@ -338,13 +338,13 @@ void Ex03DetectorConstruction::ConstructGeometry()
     Double_t posY =  0.;
     Double_t posZ =  0.;
     gGeoManager->Node("ABSO", 1 ,"LAYE", posX, posY, posZ, 0, kTRUE, ubuf);
-  }  
-  
-  //                                 
+  }
+
+  //
   // Gap
   //
-  
-  if (fGapThickness > 0.) {     
+
+  if (fGapThickness > 0.) {
 
     Double_t gap[3];
     gap[0] = fGapThickness/2;
@@ -356,10 +356,10 @@ void Ex03DetectorConstruction::ConstructGeometry()
     Double_t posY =  0.;
     Double_t posZ =  0.;
     gGeoManager->Node("GAPX", 1 ,"LAYE", posX, posY, posZ, 0, kTRUE, ubuf);
-  } 
+  }
 
-/*   
-  //                                        
+/*
+  //
   // Visualization attributes
   //
   logicWorld->SetVisAttributes (G4VisAttributes::Invisible);
@@ -370,10 +370,10 @@ void Ex03DetectorConstruction::ConstructGeometry()
 
   // close geometry
   gGeoManager->CloseGeometry();
-    
+
   // notify VMC about Root geometry
   gMC->SetRootGeometry();
-  
+
   PrintCalorParameters();
 }
 
@@ -417,7 +417,7 @@ void Ex03DetectorConstruction::SetCuts()
       gMC->Gstpar(mediumId, "DCUTE",  materialCuts.fDCUTE);
     }
   }
-}    
+}
 
 //_____________________________________________________________________________
 void Ex03DetectorConstruction::SetControls()
@@ -443,9 +443,9 @@ void Ex03DetectorConstruction::PrintCalorParameters()
 
   cout << "\n------------------------------------------------------------"
        << "\n---> The calorimeter is " << fNbOfLayers << " layers of: [ "
-       << fAbsorberThickness << "cm of " << fAbsorberMaterial  
+       << fAbsorberThickness << "cm of " << fAbsorberMaterial
        << " + "
-       << fGapThickness << "cm of " << fGapMaterial << " ] " 
+       << fGapThickness << "cm of " << fGapMaterial << " ] "
        << "\n------------------------------------------------------------\n";
 }
 
@@ -492,7 +492,7 @@ void Ex03DetectorConstruction::SetCalorSizeYZ(Double_t value)
 /// \param value The new calorimeter tranverse size
 
   fCalorSizeYZ = value;
-}  
+}
 
 //_____________________________________________________________________________
 void Ex03DetectorConstruction::SetAbsorberThickness(Double_t value)
@@ -501,7 +501,7 @@ void Ex03DetectorConstruction::SetAbsorberThickness(Double_t value)
 /// \param value The new absorber thickness
 
   fAbsorberThickness = value;
-}  
+}
 
 //_____________________________________________________________________________
 void Ex03DetectorConstruction::SetGapThickness(Double_t value)
@@ -510,7 +510,7 @@ void Ex03DetectorConstruction::SetGapThickness(Double_t value)
 /// \param value The new gap thickness
 
   fGapThickness = value;
-}  
+}
 
 /*
 //_____________________________________________________________________________

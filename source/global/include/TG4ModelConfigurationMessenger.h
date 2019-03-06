@@ -1,5 +1,5 @@
 #ifndef TG4_MODEL_CONFIGURATION_MESSENGER_H
-#define TG4_MODEL_CONFIGURATION_MESSENGER_H 
+#define TG4_MODEL_CONFIGURATION_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -24,7 +24,7 @@ class G4UIdirectory;
 class G4UIcmdWithAString;
 
 /// \ingroup physics_list
-/// \brief Messenger class that defines commands for the special physica 
+/// \brief Messenger class that defines commands for the special physica
 /// models
 ///
 /// Implements commands:

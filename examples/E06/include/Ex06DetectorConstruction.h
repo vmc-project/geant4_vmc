@@ -11,11 +11,11 @@
 //-------------------------------------------------
 
 /// \file Ex06DetectorConstruction.h
-/// \brief Definition of the Ex06DetectorConstruction class 
+/// \brief Definition of the Ex06DetectorConstruction class
 ///
 /// Geant4 ExampleN06 adapted to Virtual Monte Carlo \n
-/// Id: ExN06DetectorConstruction.hh,v 1.4 2003/01/23 15:34:23 maire Exp 
-/// GEANT4 tag Name: geant4-07-00-cand-01 
+/// Id: ExN06DetectorConstruction.hh,v 1.4 2003/01/23 15:34:23 maire Exp
+/// GEANT4 tag Name: geant4-07-00-cand-01
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -33,7 +33,7 @@
 
 class Ex06DetectorConstruction : public TObject
 {
-  public:  
+  public:
     Ex06DetectorConstruction();
     virtual ~Ex06DetectorConstruction();
 
@@ -41,15 +41,15 @@ class Ex06DetectorConstruction : public TObject
      void ConstructMaterials();
      void ConstructGeometry();
      void ConstructOpGeometry();
-     
-  private:      
-     // data members  
+
+  private:
+     // data members
      Double_t fExpHallSize; ///< The experimental hall size
      Double_t fTankSize;    ///< The tank size
      Double_t fBubbleSize;  ///< The bubble size
      Int_t    fImedAir;     ///< The Air medium Id
      Int_t    fImedWater;   ///< The Water medium Id
-     
+
   ClassDef(Ex06DetectorConstruction,1) //Ex06DetectorConstruction
 };
 

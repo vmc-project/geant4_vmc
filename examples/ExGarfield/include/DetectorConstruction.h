@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file  ExGarfield/include/DetectorConstruction.h
-/// \brief Definition of the ExGarfield::DetectorConstruction class 
+/// \brief Definition of the ExGarfield::DetectorConstruction class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 ///
@@ -38,7 +38,7 @@ namespace ExGarfield
 
 class DetectorConstruction : public TObject
 {
-  public:  
+  public:
     DetectorConstruction();
     virtual ~DetectorConstruction();
 

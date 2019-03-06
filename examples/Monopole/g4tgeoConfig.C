@@ -16,18 +16,18 @@
 void Config()
 {
 /// The configuration function for Geant4 VMC for Monopole example
-/// called during MC application initialization. 
+/// called during MC application initialization.
 /// For geometry defined with Root and selected G4Root navigation
 
   // RunConfiguration for Geant4
-  TG4RunConfiguration* runConfiguration 
+  TG4RunConfiguration* runConfiguration
     = new TG4RunConfiguration("geomRoot", "FTFP_BERT+monopole", "stepLimiter");
 
   // ALICE physics configuration
-  // TG4RunConfiguration* runConfiguration 
-  //   = new TG4RunConfiguration("geomRoot", "FTFP_INCLXX_EMV+optical+monopole", 
+  // TG4RunConfiguration* runConfiguration
+  //   = new TG4RunConfiguration("geomRoot", "FTFP_INCLXX_EMV+optical+monopole",
   //                             "specialCuts+stackPopper+stepLimiter", true);
-  
+
   // Define monopole properties
   // (uncomment the lines below to change the defaults)
   runConfiguration->SetParameter("monopoleMass", 100.);
@@ -46,15 +46,15 @@ void Config()
 
   // Customization of Geant4 VMC (ALICE)
   //
-  // geant4->ProcessGeantCommand("/control/verbose 2");  
-  // geant4->ProcessGeantCommand("/mcVerbose/all 1");  
-  // geant4->ProcessGeantCommand("/tracking/verbose 1");  
-  // geant4->ProcessGeantCommand("/mcVerbose/geometryManager 1");  
-  // geant4->ProcessGeantCommand("/mcVerbose/opGeometryManager 1");  
-  // geant4->ProcessGeantCommand("/mcTracking/loopVerbose 1");     
-  // geant4->ProcessGeantCommand("/mcPhysics/rangeCuts 0.01 mm"); 
-  
-  // geant4->ProcessGeantCommand("/mcVerbose/composedPhysicsList 2");  
+  // geant4->ProcessGeantCommand("/control/verbose 2");
+  // geant4->ProcessGeantCommand("/mcVerbose/all 1");
+  // geant4->ProcessGeantCommand("/tracking/verbose 1");
+  // geant4->ProcessGeantCommand("/mcVerbose/geometryManager 1");
+  // geant4->ProcessGeantCommand("/mcVerbose/opGeometryManager 1");
+  // geant4->ProcessGeantCommand("/mcTracking/loopVerbose 1");
+  // geant4->ProcessGeantCommand("/mcPhysics/rangeCuts 0.01 mm");
+
+  // geant4->ProcessGeantCommand("/mcVerbose/composedPhysicsList 2");
   // // geant4->ProcessGeantCommand("/mcTracking/skipNeutrino true");
   // geant4->ProcessGeantCommand("/mcDet/setIsMaxStepInLowDensityMaterials true");
   // geant4->ProcessGeantCommand("/mcDet/setMaxStepInLowDensityMaterials 10 m");

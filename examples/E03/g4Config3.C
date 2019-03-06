@@ -16,11 +16,11 @@
 void Config()
 {
 /// The configuration function for Geant4 VMC for Example03
-/// called during MC application initialization. 
+/// called during MC application initialization.
 /// It demonstrates activation of user defined regions.
 
   // Run configuration with user defined regions
-  Ex03RunConfiguration3* runConfiguration 
+  Ex03RunConfiguration3* runConfiguration
     = new Ex03RunConfiguration3("geomRootToGeant4", "FTFP_BERT");
 
   // TGeant4

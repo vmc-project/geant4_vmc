@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03RunConfiguration3.h 
-/// \brief Definition of the Ex03RunConfiguration3 class 
+/// \file Ex03RunConfiguration3.h
+/// \brief Definition of the Ex03RunConfiguration3 class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
@@ -22,7 +22,7 @@
 /// \ingroup E03
 /// \brief User Geant4 VMC run configuration
 ///
-/// This class demonstrates how to add to Geant4 VMC geometry construction 
+/// This class demonstrates how to add to Geant4 VMC geometry construction
 /// user defined regions
 ///
 /// \author I. Hrivnacova; IPN, Orsay

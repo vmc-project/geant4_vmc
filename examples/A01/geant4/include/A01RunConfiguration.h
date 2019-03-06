@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01RunConfiguration.h 
-/// \brief Definition of the A01RunConfiguration class 
+/// \file A01RunConfiguration.h
+/// \brief Definition of the A01RunConfiguration class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///

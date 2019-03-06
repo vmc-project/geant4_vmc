@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4G3Defaults.cxx
-/// \brief Implementation of the TG4G3Defaults class 
+/// \brief Implementation of the TG4G3Defaults class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -24,7 +24,7 @@
 G4ThreadLocal TG4G3Defaults* TG4G3Defaults::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4G3Defaults::TG4G3Defaults() 
+TG4G3Defaults::TG4G3Defaults()
   : fCutVector(),
     fControlVector()
 {
@@ -32,11 +32,11 @@ TG4G3Defaults::TG4G3Defaults()
 
   if (fgInstance) {
     TG4Globals::Exception(
-      "TG4G3Defaults", "TG4G3Defaults", 
+      "TG4G3Defaults", "TG4G3Defaults",
       "Cannot create two instances of singleton.");
   }
-      
-  fgInstance = this;  
+
+  fgInstance = this;
 
   // fill cut vector with default values
 
@@ -69,9 +69,9 @@ TG4G3Defaults::TG4G3Defaults()
   fControlVector.SetControl(kLABS, kInActivate, fCutVector); // 0
   fControlVector.SetControl(kSYNC, kInActivate, fCutVector); // 0
 }
-  
+
 //_____________________________________________________________________________
-TG4G3Defaults::~TG4G3Defaults() 
+TG4G3Defaults::~TG4G3Defaults()
 {
 /// Destructor
 
@@ -88,7 +88,7 @@ G4double TG4G3Defaults::CutValue(G4int g3Cut) const
 /// Return the G3 default value for the specified cut.
 
   return fCutVector[g3Cut];
-}          
+}
 
 //_____________________________________________________________________________
 TG4G3ControlValue TG4G3Defaults::ControlValue(G4int control) const
@@ -96,16 +96,16 @@ TG4G3ControlValue TG4G3Defaults::ControlValue(G4int control) const
 /// Return the G3 default value for the specified control.
 
   return fControlVector[control];
-}          
+}
 
 //_____________________________________________________________________________
 G4bool TG4G3Defaults::IsDefaultCut(TG4G3Cut cut, G4double value) const
 {
 /// Test if the parameter value is equal to the G3 default value.
 
-  if (std::abs(value*GeV - CutValue(cut)) > TG4G3CutVector::Tolerance()) 
+  if (std::abs(value*GeV - CutValue(cut)) > TG4G3CutVector::Tolerance())
     return false;
-  else  
+  else
     return true;
 }
 
@@ -115,8 +115,8 @@ G4bool TG4G3Defaults::IsDefaultControl(TG4G3Control control,
 {
 /// Test if the parameter value is equal to the G3 default value.
 
-  if (value == ControlValue(control)) 
+  if (value == ControlValue(control))
     return true;
-  else  
+  else
     return false;
 }

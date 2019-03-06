@@ -26,7 +26,7 @@ TG4VUserRegionConstruction::TG4VUserRegionConstruction()
 }
 
 //_____________________________________________________________________________
-TG4VUserRegionConstruction::~TG4VUserRegionConstruction() 
+TG4VUserRegionConstruction::~TG4VUserRegionConstruction()
 {
 /// Destructor
 }

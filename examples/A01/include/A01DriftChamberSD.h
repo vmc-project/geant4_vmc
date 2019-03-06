@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file  A01DriftChamberSD.h
-/// \brief Definition of the A01DriftChamberSD class 
+/// \brief Definition of the A01DriftChamberSD class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo: \n
 ///
@@ -42,8 +42,8 @@ class A01DriftChamberSD : public TNamed
     void    Register();
     virtual void  Print(Option_t* option = "") const;
     //void    PrintTotal() const;
-    
-    
+
+
     // set methods
     void SetWriteHits(Bool_t writeHits);
     void SetVerboseLevel(Int_t level);
@@ -53,13 +53,13 @@ class A01DriftChamberSD : public TNamed
 
   private:
     // data members
-    TClonesArray*  fHitsCollection; ///< Hits collection 
+    TClonesArray*  fHitsCollection; ///< Hits collection
     TString        fVolName;        ///< The sensitive volume name
     Int_t          fVolId;          ///< The calorimeter volume Id
     Bool_t         fWriteHits;      ///< Option to write hits
     Int_t          fVerboseLevel;   ///< Verbosity level
-   
-  ClassDef(A01DriftChamberSD,1) //A01DriftChamberSD 
+
+  ClassDef(A01DriftChamberSD,1) //A01DriftChamberSD
 
 };
 
@@ -70,7 +70,7 @@ inline void  A01DriftChamberSD::SetWriteHits(Bool_t writeHits)
 
 /// Set verbose level
 /// \param level The new verbose level value
-inline void A01DriftChamberSD::SetVerboseLevel(Int_t level) 
+inline void A01DriftChamberSD::SetVerboseLevel(Int_t level)
 { fVerboseLevel = level; }
 
 #endif //A01_DRIFT_CHAMBER_SD_H

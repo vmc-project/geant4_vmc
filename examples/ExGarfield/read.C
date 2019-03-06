@@ -12,7 +12,7 @@
 
 #include "../macro/basiclibs.C"
 
-void read() 
+void read()
 {
 /// Macro for reading the Garfield simulated data from Root file
 
@@ -24,9 +24,9 @@ void read()
 
   // Load this example library
   gSystem->Load("libvmc_ExGarfield");
-  
+
   // MC application
-  VMC::Garfield::MCApplication* appl 
+  VMC::Garfield::MCApplication* appl
     =  new VMC::ExGarfield::MCApplication("ExampleGarfield", "The example ExGarfield MC application", kRead);
 
   for (Int_t i=0; i<5; i++) {
@@ -34,5 +34,5 @@ void read()
     appl->ReadEvent(i);
     appl->GetCalorimeterSD()->PrintTotal();
     cout << endl;
-  }  
-}  
+  }
+}

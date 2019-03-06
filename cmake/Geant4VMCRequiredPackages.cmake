@@ -30,6 +30,6 @@ find_package(Geant4 REQUIRED ${_components})
 
 #-- VGM (optional) -------------------------------------------------------------
 if (Geant4VMC_USE_VGM)
-  find_package(VGM REQUIRED)      
+  find_package(VGM REQUIRED)
 endif()
 

@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4RunMessenger.cxx
-/// \brief Implementation of the TG4RunMessenger class 
+/// \brief Implementation of the TG4RunMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -27,12 +27,12 @@ TG4RunMessenger::TG4RunMessenger(TG4RunManager* runManager)
   : G4UImessenger(),
     fRunManager(runManager),
     fDirectory(0),
-    fRootCmd(0),            
-    fRootMacroCmd(0),  
+    fRootCmd(0),
+    fRootMacroCmd(0),
     fRootCommandCmd(0),
     fUseRootRandomCmd(0),
     fG3DefaultsCmd(0)
-{ 
+{
 /// Standard constructor
 
   fDirectory = new G4UIdirectory("/mcControl/");
@@ -40,20 +40,20 @@ TG4RunMessenger::TG4RunMessenger(TG4RunManager* runManager)
 
   fRootCmd = new G4UIcmdWithoutParameter("/mcControl/root", this);
   fRootCmd->SetGuidance("Switch to Root interactive shell.");
-  fRootCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle, 
+  fRootCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle,
                                G4State_GeomClosed, G4State_EventProc);
 
   fRootMacroCmd = new G4UIcmdWithAString("/mcControl/rootMacro", this);
   fRootMacroCmd->SetGuidance("Process Root macro with given name (from file name.C)");
   fRootMacroCmd->SetParameterName("macroName", true);
-  fRootMacroCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle, 
+  fRootMacroCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle,
                                     G4State_GeomClosed, G4State_EventProc);
 
   fRootCommandCmd = new TG4UICmdWithAComplexString("/mcControl/rootCmd", this);
   fRootCommandCmd->SetGuidance("Process Root command");
   fRootCommandCmd->SetParameterName("command", false);
   fRootCommandCmd->SetDefaultValue(" ");
-  fRootCommandCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle, 
+  fRootCommandCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle,
                                       G4State_GeomClosed, G4State_EventProc);
 
   fUseRootRandomCmd = new G4UIcmdWithABool("/mcControl/useRootRandom", this);
@@ -69,7 +69,7 @@ TG4RunMessenger::TG4RunMessenger(TG4RunManager* runManager)
 }
 
 //_____________________________________________________________________________
-TG4RunMessenger::~TG4RunMessenger() 
+TG4RunMessenger::~TG4RunMessenger()
 {
 /// Destructor
 
@@ -87,22 +87,22 @@ TG4RunMessenger::~TG4RunMessenger()
 
 //_____________________________________________________________________________
 void TG4RunMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
-{ 
+{
 /// Apply command to the associated object.
 
   if (command == fRootCmd) {
-    fRunManager->StartRootUI(); 
+    fRunManager->StartRootUI();
   }
-  else if (command == fRootMacroCmd) {  
-    fRunManager->ProcessRootMacro(newValue); 
+  else if (command == fRootMacroCmd) {
+    fRunManager->ProcessRootMacro(newValue);
   }
   else if (command == fRootCommandCmd) {
-    fRunManager->ProcessRootCommand(newValue); 
+    fRunManager->ProcessRootCommand(newValue);
   }
-  else if (command == fUseRootRandomCmd) {  
-    fRunManager->UseRootRandom(fUseRootRandomCmd->GetNewBoolValue(newValue)); 
+  else if (command == fUseRootRandomCmd) {
+    fRunManager->UseRootRandom(fUseRootRandomCmd->GetNewBoolValue(newValue));
   }
   else if (command == fG3DefaultsCmd) {
-    fRunManager->UseG3Defaults(); 
+    fRunManager->UseG3Defaults();
   }
 }

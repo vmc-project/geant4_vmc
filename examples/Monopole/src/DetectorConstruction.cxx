@@ -7,14 +7,14 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file DetectorConstruction.cxx 
-/// \brief Implementation of the DetectorConstruction class 
+/// \file DetectorConstruction.cxx
+/// \brief Implementation of the DetectorConstruction class
 ///
 /// Geant4 Monopole example adapted to Virtual Monte Carlo \n
 ///
 /// \date 15/07/2018
 /// \author I. Hrivnacova; IPN, Orsay
- 
+
 #include <Riostream.h>
 #include <TGeoManager.h>
 #include <TGeoElement.h>
@@ -40,7 +40,7 @@ DetectorConstruction::DetectorConstruction()
   : TObject(),
     fWorldMaterial("Galactic"),
     fAbsorberMaterial("Aluminium"),
-    fAbsorberSizeX(10.),                 
+    fAbsorberSizeX(10.),
     fAbsorberSizeYZ(10.),
     fWorldSizeX(1.2 * fAbsorberSizeX),
     fWorldSizeYZ(1.2 * fAbsorberSizeYZ),
@@ -73,40 +73,40 @@ void DetectorConstruction::ConstructMaterials()
   // Tracking medias (defaut parameters)
   //
 
-  // Create Root geometry manager 
+  // Create Root geometry manager
   new TGeoManager("Monopole_geometry", "Monopole VMC example geometry");
 
 //--------- Material definition ---------
 
   TString name;      // Material name
-  Double_t a;        // Mass of a mole in g/mole   
+  Double_t a;        // Mass of a mole in g/mole
   Double_t z;        // Atomic number
   Double_t density;  // Material density in g/cm3
- 
+
 //
 // define simple materials
 //
 
-  new TGeoMaterial("Aluminium", a=26.98, z=13., density=2.700); 
-  new TGeoMaterial("Si", a=28.085, z=14., density=2.330); 
-  new TGeoMaterial("Galactic", a=1.e-16, z=1.e-16, density=1.e-16); 
+  new TGeoMaterial("Aluminium", a=26.98, z=13., density=2.700);
+  new TGeoMaterial("Si", a=28.085, z=14., density=2.330);
+  new TGeoMaterial("Galactic", a=1.e-16, z=1.e-16, density=1.e-16);
 
   //
   // Tracking media
   //
 
-  // Paremeter for tracking media  
+  // Paremeter for tracking media
   Double_t param[20];
   param[0] = 0;     // isvol  - Not used
   param[1] = 2;     // ifield - User defined magnetic field
   param[2] = 10.;   // fieldm - Maximum field value (in kiloGauss)
-  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection 
-  param[4] = -0.01; // stemax - Maximum displacement for multiple scat 
-  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS 
+  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection
+  param[4] = -0.01; // stemax - Maximum displacement for multiple scat
+  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS
   param[6] = .001;  // epsil - Tracking precision
   param[7] = -.8;   // stmin
   for ( Int_t i=8; i<20; ++i) param[i] = 0.;
-  
+
   Int_t mediumId = 0;
   TList* materials = gGeoManager->GetListOfMaterials();
   TIter next(materials);
@@ -114,13 +114,13 @@ void DetectorConstruction::ConstructMaterials()
     TGeoMaterial* material = (TGeoMaterial*)obj;
     // set step limit to other than world material
     if ( material->GetName() != TString("Galactic") ) {
-      param[4] = fMaxStepSize; 
+      param[4] = fMaxStepSize;
     } else {
       param[4] = -0.01;
     }
     new TGeoMedium(material->GetName(), ++mediumId, material, param);
   }
-}    
+}
 
 //_____________________________________________________________________________
 void DetectorConstruction::ConstructGeometry()
@@ -134,10 +134,10 @@ void DetectorConstruction::ConstructGeometry()
   Int_t worldMediumId = gGeoManager->GetMedium(fWorldMaterial.Data())->GetId();
   Int_t absorberMediumId = gGeoManager->GetMedium(fAbsorberMaterial.Data())->GetId();
 
-  //     
+  //
   // World
   //
-  
+
   Double_t world[3];
   world[0] = fWorldSizeX/2.;
   world[1] = fWorldSizeYZ/2.;
@@ -145,9 +145,9 @@ void DetectorConstruction::ConstructGeometry()
   TGeoVolume *top = gGeoManager->Volume("World", "BOX", worldMediumId, world, 3);
   gGeoManager->SetTopVolume(top);
 
-  //                               
+  //
   // Absorber
-  //  
+  //
   Double_t absorber[3];
   absorber[0] = fAbsorberSizeX/2.;
   absorber[1] = fAbsorberSizeYZ/2.;
@@ -162,10 +162,10 @@ void DetectorConstruction::ConstructGeometry()
 
   // close geometry
   gGeoManager->CloseGeometry();
-    
+
   // notify VMC about Root geometry
   gMC->SetRootGeometry();
-  
+
   PrintParameters();
 }
 
@@ -185,13 +185,13 @@ void DetectorConstruction::SetAbsorberSizeX(Double_t value)
     cerr << "Geometry alredy initialized: cannot set absorber sizeX" << endl;
     return;
   }
-  
+
   if ( value > 0.0 ) {
-    fAbsorberSizeX = value; 
+    fAbsorberSizeX = value;
     fWorldSizeX = 1.2 * fAbsorberSizeX;
   }
 }
-  
+
 //_____________________________________________________________________________
 void DetectorConstruction::SetAbsorberSizeYZ(Double_t value)
 {
@@ -199,17 +199,17 @@ void DetectorConstruction::SetAbsorberSizeYZ(Double_t value)
     cerr << "Geometry alredy initialized: cannot set absorber sizeXY" << endl;
     return;
   }
-  
+
   if ( value > 0.0 ) {
-    fAbsorberSizeYZ = value; 
+    fAbsorberSizeYZ = value;
     fWorldSizeYZ = 1.2 * fAbsorberSizeYZ;
   }
-}  
+}
 
 //_____________________________________________________________________________
 void DetectorConstruction::SetAbsorberMaterial(const TString& name)
 {
-  // search the material by its name   
+  // search the material by its name
   if ( fGeometryInitialized ) {
     cerr << "Geometry alredy initialized: cannot set absorber material" << endl;
     return;
@@ -225,9 +225,9 @@ void DetectorConstruction::SetAbsorberMaterial(const TString& name)
 //   fMonFieldSetup->SetMagField(fieldValue);
 
 //   //apply a global uniform magnetic field along Z axis
-//   G4FieldManager * fieldMgr = 
+//   G4FieldManager * fieldMgr =
 //     G4TransportationManager::GetTransportationManager()->GetFieldManager();
-    
+
 //   if (fMagField) { delete fMagField; }    //delete the existing magn field
 
 //   if (fieldValue != 0.)                   // create a new one if non nul
@@ -259,7 +259,7 @@ void DetectorConstruction::SetAbsorberMaterial(const TString& name)
 //   if(bNewFieldValue&&fZMagFieldValue!=0.)
 //     fMonFieldSetup->SetMagField(fZMagFieldValue, true);
 
-//   if ( bNewFieldValue ) { 
+//   if ( bNewFieldValue ) {
 //     // Create global magnetic field messenger.
 //     // Uniform magnetic field is then created automatically if
 //     // the field value is not zero.
@@ -267,14 +267,14 @@ void DetectorConstruction::SetAbsorberMaterial(const TString& name)
 //     if(fZMagFieldValue!=0.)
 //       {
 //         G4ThreeVector fieldValue = G4ThreeVector(0.,0.,fZMagFieldValue);
-//         G4GlobalMagFieldMessenger* msg =  
+//         G4GlobalMagFieldMessenger* msg =
 //                               new G4GlobalMagFieldMessenger(fieldValue);
 //         msg->SetVerboseLevel(1);
 //         G4AutoDelete::Register(msg);
-//         fFieldMessenger.Put( msg );        
+//         fFieldMessenger.Put( msg );
 //       }
 //   }
-  
+
 // }
 
 //_____________________________________________________________________________

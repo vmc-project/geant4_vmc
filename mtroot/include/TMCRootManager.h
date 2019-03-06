@@ -28,25 +28,25 @@ class TTree;
 class TMCRootManager
 {
   public:
-    /// Root file mode 
-    enum FileMode { 
-      kRead,   // Read mode 
+    /// Root file mode
+    enum FileMode {
+      kRead,   // Read mode
       kWrite   // Write mode
     };
 
   public:
     // static access method
-    static TMCRootManager* Instance(); 
+    static TMCRootManager* Instance();
 
     // static method for activating debug mode
-    static void SetDebug(Bool_t debug); 
+    static void SetDebug(Bool_t debug);
     static Bool_t GetDebug();
 
-    TMCRootManager(const char* projectName, 
-                   FileMode fileMode = kWrite, 
+    TMCRootManager(const char* projectName,
+                   FileMode fileMode = kWrite,
                    Int_t threadRank = -1);
-    virtual ~TMCRootManager();     
-  
+    virtual ~TMCRootManager();
+
     // methods
     void  Register(const char* name, const char* className, void* objAddress);
     void  Register(const char* name, const char* className, const void* objAddress);
@@ -55,12 +55,12 @@ class TMCRootManager
     void  Close();
     void  WriteAndClose();
     void  ReadEvent(Int_t i);
-    
+
   private:
     // not implemented
     TMCRootManager(const TMCRootManager& rhs);
     TMCRootManager& operator=(const TMCRootManager& rhs);
-    
+
     // global static data members
     static  Int_t   fgCounter;   // The counter of instances
     // static data members
@@ -70,15 +70,15 @@ class TMCRootManager
     static  TMCThreadLocal TMCRootManager* fgInstance; // singleton instance
 #else
     static                 TMCRootManager* fgInstance; // singleton instance
-#endif 
+#endif
 
     // Methods
     void OpenFile(const char* projectName, FileMode fileMode, Int_t threadRank);
 
-    // data members 
-    Int_t   fId;         // This manager ID 
+    // data members
+    Int_t   fId;         // This manager ID
     TFile*  fFile;       // Root output file
-    TTree*  fTree;       // Root output tree 
+    TTree*  fTree;       // Root output tree
     Bool_t  fIsClosed;   // Info whether its file was closed
 };
 
@@ -86,10 +86,10 @@ class TMCRootManager
 
 inline void TMCRootManager::SetDebug(Bool_t debug) {
   fgDebug = debug;
-}  
-  
+}
+
 inline Bool_t TMCRootManager::GetDebug() {
   return fgDebug;
-}  
+}
 
 #endif //ROOT_TMCRootManager

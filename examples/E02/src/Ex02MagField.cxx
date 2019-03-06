@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file  Ex02MagField.cxx
-/// \brief Implementation of the Ex02MagField class 
+/// \brief Implementation of the Ex02MagField class
 ///
 /// Geant4 ExampleN02 adapted to Virtual Monte Carlo
 ///
@@ -53,19 +53,19 @@ Ex02MagField::~Ex02MagField()
 
 
 //______________________________________________________________________________
-void Ex02MagField::Field(const Double_t* /*x*/, Double_t* B) 
+void Ex02MagField::Field(const Double_t* /*x*/, Double_t* B)
 {
 /// Fill in the field value B in the given position at x.
-/// (In case of a uniform magnetic field the value B does not depend on 
-/// the position x ) 
+/// (In case of a uniform magnetic field the value B does not depend on
+/// the position x )
 /// \param x   The position
-/// \param B   he field value (in kiloGauss) 
+/// \param B   he field value (in kiloGauss)
 
 
-  //cout << "+++ Getting field in " 
+  //cout << "+++ Getting field in "
   //     << gMC->CurrentVolName() << " "  << gMC->CurrentMedium() << endl;
-       
-  B[0] = fB[0]; 
-  B[1] = fB[1]; 
+
+  B[0] = fB[0];
+  B[1] = fB[1];
   B[2] = fB[2];
 }

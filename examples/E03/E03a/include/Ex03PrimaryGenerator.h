@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03PrimaryGenerator.h 
-/// \brief Definition of the Ex03PrimaryGenerator class 
+/// \file Ex03PrimaryGenerator.h
+/// \brief Definition of the Ex03PrimaryGenerator class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo: \n
 /// Id: ExN03PrimaryGeneratorAction.hh,v 1.5 2002/01/09 17:24:11 ranjard Exp
@@ -36,16 +36,16 @@ class Ex03PrimaryGenerator : public TObject
 {
   public:
     /// Predefined primary generators
-    enum Type { 
+    enum Type {
       kDefault,    ///< default (e-)
       kUser,       ///< user defined particle and ion
       kUserDecay,  ///< particle with user defined decay (K0Short)
       kAnti,       ///< light anti-nuclei (with Geant4 only)
       kTestField   ///< mu+ with a suitable energy to test magnetic field
-    }; 
+    };
 
   public:
-    Ex03PrimaryGenerator(TVirtualMCStack* stack); 
+    Ex03PrimaryGenerator(TVirtualMCStack* stack);
     Ex03PrimaryGenerator(const Ex03PrimaryGenerator& origin,
                          TVirtualMCStack* stack);
     Ex03PrimaryGenerator();
@@ -61,7 +61,7 @@ class Ex03PrimaryGenerator : public TObject
 
     // get methods
     Bool_t GetUserDecay() const;
- 
+
   private:
     // methods
     void GeneratePrimary1(const TVector3& origin);

@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4IntMap.cxx
-/// \brief Implementation of the TG4IntMap class 
+/// \brief Implementation of the TG4IntMap class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -26,7 +26,7 @@ TG4IntMap::TG4IntMap()
 }
 
 //_____________________________________________________________________________
-TG4IntMap::~TG4IntMap() 
+TG4IntMap::~TG4IntMap()
 {
 /// Destructor
 }
@@ -41,9 +41,9 @@ G4bool TG4IntMap::IsDefined(const G4String& first)
 /// Return true if the first is already in the map.
 
   MapIterator i = fMap.find(first);
-  if (i == fMap.end()) 
+  if (i == fMap.end())
     return false;
-  else                 
+  else
     return true;
 }
 
@@ -53,11 +53,11 @@ G4bool TG4IntMap::IsDefined(const G4String& first)
 
 //_____________________________________________________________________________
 G4bool TG4IntMap::Add(const G4String& first, G4int second)
-{  
+{
 /// Add pair (name, int number) to the map.
 
   if (!IsDefined(first)) {
-    // insert into map 
+    // insert into map
     // only in case it is not yet here
     fMap[first] = second;
     return true;
@@ -75,12 +75,12 @@ G4int TG4IntMap::GetSecond(const G4String& name, G4bool warn)
     if (warn) {
       TG4Globals::Warning(
         "TG4IntMap", "GetSecond", TString(name) + " is not defined.");
-    }  
+    }
     return 0;
-  }  
-  else {                
+  }
+  else {
     return (*i).second;
-  }  
+  }
 }
 //_____________________________________________________________________________
 G4int TG4IntMap::GetSize() const
@@ -88,7 +88,7 @@ G4int TG4IntMap::GetSize() const
 /// Get map size.
 
   return fMap.size();
-}  
+}
 
 //_____________________________________________________________________________
 void TG4IntMap::PrintAll() const
@@ -101,16 +101,16 @@ void TG4IntMap::PrintAll() const
     for (MapConstIterator i=fMap.begin(); i != fMap.end(); i++) {
       const G4String& first  = (*i).first;
       G4int second = (*i).second;
-      G4cout << "Map element " << std::setw(3) << counter++ << "   " 
+      G4cout << "Map element " << std::setw(3) << counter++ << "   "
              << first << "   " << second << G4endl;
     }
   }
 }
 
 //_____________________________________________________________________________
-void TG4IntMap::Clear() 
+void TG4IntMap::Clear()
 {
 /// Clear the map.
 
   if (fMap.size()>0) fMap.clear();
-}  
+}

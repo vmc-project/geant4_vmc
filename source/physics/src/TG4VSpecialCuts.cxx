@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4VSpecialCuts.cxx
-/// \brief Implementation of the TG4VSpecialCuts class 
+/// \brief Implementation of the TG4VSpecialCuts class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -34,7 +34,7 @@ TG4VSpecialCuts::TG4VSpecialCuts(const G4String& processName)
 }
 
 //_____________________________________________________________________________
-TG4VSpecialCuts::~TG4VSpecialCuts() 
+TG4VSpecialCuts::~TG4VSpecialCuts()
 {
 /// Destructor
 }
@@ -48,22 +48,22 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
                            const G4Track& track, G4double /*previousStepSize*/,
                            G4ForceCondition* condition)
 {
-/// Return the Step-size (actual length) which is allowed 
+/// Return the Step-size (actual length) which is allowed
 /// by this process.
 
   // set condition
   *condition = NotForced;
   G4double proposedStep = DBL_MAX;
-  
+
   // get limits
 #ifdef MCDEBUG
-  TG4Limits* limits 
+  TG4Limits* limits
      = TG4GeometryServices::Instance()
          ->GetLimits(track.GetVolume()->GetLogicalVolume()->GetUserLimits());
-#else  
-  TG4Limits* limits 
+#else
+  TG4Limits* limits
     = (TG4Limits*) track.GetVolume()->GetLogicalVolume()->GetUserLimits();
-#endif    
+#endif
 
   if (!limits) return proposedStep;
 
@@ -72,14 +72,14 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
     = fTrackManager->GetTrackInformation(&track);
   if ( trackInformation && trackInformation->IsStop() ) {
     return 0.;
-  }  
+  }
 
   // min kinetic energy (from limits)
   G4double minEkine = GetMinEkine(*limits, track);
   if ( track.GetKineticEnergy() <= minEkine ) return 0.;
 
   // max track length
-  proposedStep 
+  proposedStep
     = (limits->GetUserMaxTrackLength(track) - track.GetTrackLength());
   if (proposedStep < 0.) return 0.;
 
@@ -99,7 +99,7 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
   G4double rmin = limits->GetUserMinRange(track);
   if (rmin > DBL_MIN) {
     G4ParticleDefinition* particle = track.GetDefinition();
-    if ( ( particle->GetPDGCharge() != 0. ) && 
+    if ( ( particle->GetPDGCharge() != 0. ) &&
          ( particle->GetPDGMass() > 0.0 ) )  {
       G4double ekin = track.GetKineticEnergy();
       const G4MaterialCutsCouple* couple = track.GetMaterialCutsCouple();
@@ -107,19 +107,19 @@ G4double TG4VSpecialCuts::PostStepGetPhysicalInteractionLength(
       G4double temp = rangeNow - rmin;
       if ( temp < 0. ) { return 0.; }
       if ( proposedStep > temp ) { proposedStep = temp; }
-    }         
+    }
   }
   return proposedStep;
 }
 
 //_____________________________________________________________________________
-G4VParticleChange* TG4VSpecialCuts::PostStepDoIt(const G4Track& track, 
+G4VParticleChange* TG4VSpecialCuts::PostStepDoIt(const G4Track& track,
                                                  const G4Step& /*step*/)
 {
 /// Kill the current particle, if requested by G4UserLimits.
 /// Set its status fStopButAlive (instead of previously used fStopAndKill
 /// to let execute the at rest processes (decay)
- 
+
   aParticleChange.Initialize(track);
   aParticleChange.ProposeEnergy(0.) ;
   aParticleChange.ProposeLocalEnergyDeposit(track.GetKineticEnergy()) ;

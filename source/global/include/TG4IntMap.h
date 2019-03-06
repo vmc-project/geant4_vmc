@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4IntMap.h
-/// \brief Definition of the TG4IntMap class 
+/// \brief Definition of the TG4IntMap class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -40,14 +40,14 @@ class TG4IntMap
     virtual ~TG4IntMap();
 
     // methods
-    G4bool Add(const G4String& first, G4int second);  
+    G4bool Add(const G4String& first, G4int second);
     G4int GetSecond(const G4String& name, G4bool warn = true);
     G4int GetSize() const;
     void PrintAll() const;
     void Clear();
 
   protected:
-  
+
   private:
     /// Not implemented
     TG4IntMap(const TG4IntMap& right);
@@ -56,7 +56,7 @@ class TG4IntMap
 
     // methods
     G4bool IsDefined(const G4String& first);
-  
+
     // data members
     Map  fMap; ///< map container
 };

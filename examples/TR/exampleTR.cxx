@@ -32,7 +32,7 @@
 int main(int argc, char** argv)
 {
   // Initialize Root threading.
-  // (Multi-threading is triggered automatically if Geant4 was built 
+  // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
    TThread::Initialize();
@@ -47,8 +47,8 @@ int main(int argc, char** argv)
   appl->SetPrintModulo(10000);
 
 #ifdef USE_GEANT4
-  // RunConfiguration for Geant4 
-  TG4RunConfiguration* runConfiguration 
+  // RunConfiguration for Geant4
+  TG4RunConfiguration* runConfiguration
     = new TG4RunConfiguration("geomRootToGeant4", "emStandard", "", false, false);
 
   // TGeant4
@@ -60,7 +60,7 @@ int main(int argc, char** argv)
   // (verbose level, global range cut, ..)
   geant4->ProcessGeantMacro("g4config.in");
 #endif
-  
+
 #ifdef USE_GEANT3
   new TGeant3TGeo("C++ Interface to Geant3");
   gMC->SetProcess("DRAY",1);
@@ -82,4 +82,4 @@ int main(int argc, char** argv)
   appl->RunMC(5000);
 
   delete appl;
-}  
+}

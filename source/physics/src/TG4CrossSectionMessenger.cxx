@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4CrossSectionMessenger.cxx
-/// \brief Implementation of the TG4CrossSectionMessenger class 
+/// \brief Implementation of the TG4CrossSectionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -30,9 +30,9 @@ TG4CrossSectionMessenger::TG4CrossSectionMessenger(
   : G4UImessenger(),
     fCrossSectionManager(crossSectionManager),
     fDirectory(0),
-    fMakeHistogramsCmd(0),  
-    fParticleCmd(0),  
-    fElementCmd(0),  
+    fMakeHistogramsCmd(0),
+    fParticleCmd(0),
+    fElementCmd(0),
     fNofBinsECmd(0),
     fNofBinsPCmd(0),
     fMinKinECmd(0),
@@ -41,9 +41,9 @@ TG4CrossSectionMessenger::TG4CrossSectionMessenger(
     fMinMomentumCmd(0),
     fMaxMomentumCmd(0),
     fMomentumCmd(0),
-    fLabelCmd(0),  
+    fLabelCmd(0),
     fPrintCmd(0)
-{ 
+{
 /// Standard constructor
 
   fDirectory = new G4UIdirectory("/mcCrossSection/");
@@ -116,13 +116,13 @@ TG4CrossSectionMessenger::TG4CrossSectionMessenger(
   for ( G4int i=0; i<kNoCrossSectionType; i++ ) {
     candidates += TG4CrossSectionTypeName(i);
     candidates += G4String(" ");
-  }  
+  }
   fPrintCmd->SetCandidates(candidates);
   fPrintCmd->AvailableForStates(G4State_Idle);
 }
 
 //_____________________________________________________________________________
-TG4CrossSectionMessenger::~TG4CrossSectionMessenger() 
+TG4CrossSectionMessenger::~TG4CrossSectionMessenger()
 {
 /// Destructor
 
@@ -148,26 +148,26 @@ TG4CrossSectionMessenger::~TG4CrossSectionMessenger()
 
 //_____________________________________________________________________________
 void TG4CrossSectionMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
-{ 
+{
 /// Apply command to the associated object.
 
   if ( command == fMakeHistogramsCmd ) {
-    fCrossSectionManager->SetMakeHistograms(fMakeHistogramsCmd->GetNewBoolValue(newValue)); 
+    fCrossSectionManager->SetMakeHistograms(fMakeHistogramsCmd->GetNewBoolValue(newValue));
   }
   else if ( command == fParticleCmd ) {
-    fCrossSectionManager->SetParticleName(newValue); 
+    fCrossSectionManager->SetParticleName(newValue);
   }
-  else if (command == fElementCmd) {  
-    fCrossSectionManager->SetElementName(newValue); 
+  else if (command == fElementCmd) {
+    fCrossSectionManager->SetElementName(newValue);
   }
   else if (command == fNofBinsECmd) {
-    fCrossSectionManager->SetNumberOfBinsE(fNofBinsECmd->GetNewIntValue(newValue)); 
+    fCrossSectionManager->SetNumberOfBinsE(fNofBinsECmd->GetNewIntValue(newValue));
   }
   else if (command == fNofBinsPCmd) {
-    fCrossSectionManager->SetNumberOfBinsP(fNofBinsPCmd->GetNewIntValue(newValue)); 
+    fCrossSectionManager->SetNumberOfBinsP(fNofBinsPCmd->GetNewIntValue(newValue));
   }
   else if (command == fMinKinECmd) {
-    fCrossSectionManager->SetMinKinEnergy(fMinKinECmd->GetNewDoubleValue(newValue));  
+    fCrossSectionManager->SetMinKinEnergy(fMinKinECmd->GetNewDoubleValue(newValue));
   }
   else if (command == fMaxKinECmd) {
     fCrossSectionManager->SetMaxKinEnergy(fMaxKinECmd->GetNewDoubleValue(newValue));
@@ -176,7 +176,7 @@ void TG4CrossSectionMessenger::SetNewValue(G4UIcommand* command, G4String newVal
     fCrossSectionManager->SetKinEnergy(fKinECmd->GetNewDoubleValue(newValue));
   }
   else if (command == fMinMomentumCmd) {
-    fCrossSectionManager->SetMinMomentum(fMinMomentumCmd->GetNewDoubleValue(newValue));  
+    fCrossSectionManager->SetMinMomentum(fMinMomentumCmd->GetNewDoubleValue(newValue));
   }
   else if (command == fMaxMomentumCmd) {
     fCrossSectionManager->SetMaxMomentum(fMaxMomentumCmd->GetNewDoubleValue(newValue));
@@ -184,13 +184,13 @@ void TG4CrossSectionMessenger::SetNewValue(G4UIcommand* command, G4String newVal
   else if (command == fMomentumCmd) {
     fCrossSectionManager->SetMomentum(fMomentumCmd->GetNewDoubleValue(newValue));
   }
-  else if (command == fLabelCmd) {  
-    fCrossSectionManager->SetLabel(newValue); 
+  else if (command == fLabelCmd) {
+    fCrossSectionManager->SetLabel(newValue);
   }
   else if (command == fPrintCmd) {
     if ( newValue == "All" )
       fCrossSectionManager->PrintCrossSections();
-    else 
+    else
       fCrossSectionManager->PrintCrossSection(GetCrossSectionType(newValue));
   }
 }

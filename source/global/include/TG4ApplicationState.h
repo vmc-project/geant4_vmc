@@ -10,7 +10,7 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file TG4ApplicationState.h 
+/// \file TG4ApplicationState.h
 /// \brief Definition of the enumeration TG4ApplicationState
 ///
 /// \author I. Hrivnacova; IPN, Orsay

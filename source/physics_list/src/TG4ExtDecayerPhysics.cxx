@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4ExtDecayerPhysics.cxx
-/// \brief Implementation of the TG4ExtDecayerPhysics class 
+/// \brief Implementation of the TG4ExtDecayerPhysics class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -37,7 +37,7 @@ TG4ExtDecayerPhysics::TG4ExtDecayerPhysics(const G4String& name)
 //_____________________________________________________________________________
 TG4ExtDecayerPhysics::TG4ExtDecayerPhysics(G4int theVerboseLevel,
                                            const G4String& name)
-  : TG4VPhysicsConstructor(name, theVerboseLevel), 
+  : TG4VPhysicsConstructor(name, theVerboseLevel),
     fMessenger(this),
     fDecayProcess(0),
     fSelection(),
@@ -47,7 +47,7 @@ TG4ExtDecayerPhysics::TG4ExtDecayerPhysics(G4int theVerboseLevel,
 }
 
 //_____________________________________________________________________________
-TG4ExtDecayerPhysics::~TG4ExtDecayerPhysics() 
+TG4ExtDecayerPhysics::~TG4ExtDecayerPhysics()
 {
 /// Destructor
 
@@ -71,61 +71,61 @@ void TG4ExtDecayerPhysics::ConstructProcess()
 /// to all decay processes if External decayer is set
 
   // Check if VMC decayer is defined
-  TVirtualMCDecayer* mcDecayer = gMC->GetDecayer(); 
+  TVirtualMCDecayer* mcDecayer = gMC->GetDecayer();
   if ( ! mcDecayer ) {
     // TG4Globals::Warning(
     //  "TG4ExtDecayerPhysics", "ConstructProcess",
     //  "No VMC external decayer defined.");
     return;
-  }  
-      
+  }
+
   // Create Geant4 external decayer
   TG4ExtDecayer* tg4Decayer = new TG4ExtDecayer(mcDecayer);
-  tg4Decayer->VerboseLevel(VerboseLevel()); 
+  tg4Decayer->VerboseLevel(VerboseLevel());
   tg4Decayer->SetSkipNeutrino(fSkipNeutrino);
      // The tg4Decayer is deleted in G4Decay destructor
-     // But we may have a problem if there are more than one 
+     // But we may have a problem if there are more than one
      // instances of G4Decay process
 
   auto aParticleIterator = GetParticleIterator();
   aParticleIterator->reset();
   while ((*aParticleIterator)())
-  {    
+  {
     G4ParticleDefinition* particle = aParticleIterator->value();
     G4ProcessManager* pmanager = particle->GetProcessManager();
 
     // skip particles which do not have process manager
     if ( ! pmanager ) continue;
-    
+
     if ( fSelection.find(particle->GetParticleName()) != std::string::npos ) {
 
       if ( VerboseLevel() > 1 ) {
-        G4cout << "Switching off Geant4 decay table for: " 
-               <<  particle->GetParticleName() 
+        G4cout << "Switching off Geant4 decay table for: "
+               <<  particle->GetParticleName()
                << G4endl;
-      } 
+      }
 
       // Unset the decay table for particles in a selection;
       // for the particles in selection, the external decayer
       // will have a priority over Geant4 decay table
       particle->SetDecayTable(0);
-    }          
+    }
 
     if ( VerboseLevel() > 1 ) {
-      G4cout << "Setting ext decayer for: " 
-             <<  aParticleIterator->value()->GetParticleName() 
+      G4cout << "Setting ext decayer for: "
+             <<  aParticleIterator->value()->GetParticleName()
              << G4endl;
-    } 
-    
+    }
+
     G4ProcessVector* processVector = pmanager->GetProcessList();
     for (G4int i=0; i<processVector->length(); i++) {
-    
+
       G4Decay* decay = dynamic_cast<G4Decay*>((*processVector)[i]);
       if ( decay ) decay->SetExtDecayer(tg4Decayer);
-    }              
+    }
   }
 
   if ( VerboseLevel() > 0 ) {
     G4cout << "### " << "External decayer physics constructed." << G4endl;
-  }  
+  }
 }

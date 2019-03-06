@@ -8,13 +8,13 @@
 //-------------------------------------------------
 
 /// \file TR/set_vis.C
-/// \brief Macro for setting visualization for Example TR 
+/// \brief Macro for setting visualization for Example TR
 
 #include "TVirtualMC.h"
 
 void set_vis()
 {
-/// Macro for setting visualization for Example TR 
+/// Macro for setting visualization for Example TR
 
   if ( TString(gMC->GetName()) == "TGeant3TGeo" ) {
     // Set drawing options
@@ -24,10 +24,10 @@ void set_vis()
     vol = gGeoManager->GetVolume("Absorber");
     if (vol) vol->SetLineColor(kYellow);
     gMC->SetCollectTracks(kTRUE);
-  }    
+  }
 
   if (TString(gMC->GetName()) == "TGeant4") {
     // Setting Geant4 visualization
    ((TGeant4*)gMC)->ProcessGeantMacro("g4vis.in");
-  }  
-}  
+  }
+}

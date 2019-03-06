@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file Ex03RunConfiguration4.cxx
-/// \brief Implementation of the Ex03RunConfiguration4 class 
+/// \brief Implementation of the Ex03RunConfiguration4 class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
 ///
@@ -25,7 +25,7 @@ Ex03RunConfiguration4::Ex03RunConfiguration4(const TString& userGeometry,
                                              Bool_t specialStacking,
                                              Bool_t mtApplication)
   : TG4RunConfiguration(userGeometry, physicsList, specialProcess,
-  	                    specialStacking, mtApplication) 
+  	                    specialStacking, mtApplication)
 {
 /// Standard constructor
 }
@@ -46,4 +46,4 @@ TG4VUserPostDetConstruction*  Ex03RunConfiguration4::CreateUserPostDetConstructi
 /// User defined detector construction
 
   return new Ex03PostDetConstruction();
-}   
+}

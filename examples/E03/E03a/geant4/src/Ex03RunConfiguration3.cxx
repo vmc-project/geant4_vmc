@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file Ex03RunConfiguration3.cxx
-/// \brief Implementation of the Ex03RunConfiguration3 class 
+/// \brief Implementation of the Ex03RunConfiguration3 class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
 ///
@@ -21,14 +21,14 @@
 Ex03RunConfiguration3::Ex03RunConfiguration3(const TString& userGeometry,
                                              const TString& physicsList,
                                              const TString& specialProcess)
-  : TG4RunConfiguration(userGeometry, physicsList, specialProcess) 
+  : TG4RunConfiguration(userGeometry, physicsList, specialProcess)
 {
 /// Standard constructor
 /// \param userGeometry    Selection of geometry defintion
 /// \param physicsList     Selection of physics
 /// \param specialProcess  Selection of the special processes
 ///
-/// The option for geometry selection has to be set here to 
+/// The option for geometry selection has to be set here to
 /// "geomVMCtoGeant4, "geomRootToGeant4 or "geomGeant4",
 /// as user regions can be defined only with Geant4 native
 /// geomeytry navigation.
@@ -53,4 +53,4 @@ TG4VUserRegionConstruction*  Ex03RunConfiguration3::CreateUserRegionConstruction
 /// construction class from the Geant4 novice example N03 library.
 
   return new Ex03RegionConstruction();
-}   
+}

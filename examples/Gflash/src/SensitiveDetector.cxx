@@ -104,8 +104,8 @@ void SensitiveDetector::Initialize()
 {
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
-  
-  if ( TMCRootManager::Instance() ) Register();  
+
+  if ( TMCRootManager::Instance() ) Register();
   fCrystalVolId = gMC->VolId("Crystal_log");
 }
 
@@ -119,21 +119,21 @@ Bool_t SensitiveDetector::ProcessHits()
 
   if (id != fCrystalVolId ) return false;
 
-  //cout << "In crystal " << copyNo << endl; 
+  //cout << "In crystal " << copyNo << endl;
 
   Double_t edep = gMC->Edep();
-  // cout << "  edep [keV]" << edep*1.e06 << endl; 
+  // cout << "  edep [keV]" << edep*1.e06 << endl;
   Double_t xpos;
   Double_t ypos;
   Double_t zpos;
   gMC->TrackPosition(xpos, ypos, zpos);
 
   Int_t next = fCaloHitsCollection->GetEntriesFast();
-  Hit* caloHit = new ((*fCaloHitsCollection)[next]) Hit();  
+  Hit* caloHit = new ((*fCaloHitsCollection)[next]) Hit();
   caloHit->SetEdep(edep);
   caloHit->SetPos(TVector3(xpos, ypos, zpos));
   caloHit->SetCrystalNum(copyNo);
-  
+
   return true;
 }
 
@@ -143,16 +143,16 @@ void SensitiveDetector::EndOfEvent()
 /// Print hits collection (if verbose) and reset hits afterwards.
 
   if (fVerboseLevel>1)  Print();
-    
+
   // Reset hits collection
-  fCaloHitsCollection->Clear();  
+  fCaloHitsCollection->Clear();
 }
 
 //_____________________________________________________________________________
 void SensitiveDetector::Register()
 {
 /// Register the hits collection in Root manager.
-  
+
   TMCRootManager::Instance()
     ->Register("hits", "TClonesArray", &fCaloHitsCollection);
 }
@@ -161,27 +161,27 @@ void SensitiveDetector::Register()
 void SensitiveDetector::Print(Option_t* /*option*/) const
 {
 /// Print the hits collection.
-  
+
    Int_t nofHits = fCaloHitsCollection->GetEntriesFast();
-     
+
    cout << "\n-------->Hits Collection: in this event: " << endl;
-	    
-   for (Int_t i=0; i<nofHits; i++) (*fCaloHitsCollection)[i]->Print();          
+
+   for (Int_t i=0; i<nofHits; i++) (*fCaloHitsCollection)[i]->Print();
 }
 
 //_____________________________________________________________________________
 void SensitiveDetector::PrintTotal() const
 {
 /// Print the total values for all layers.
-  
+
   Double_t totEdep = 0.;
-  
+
   Int_t nofHits = fCaloHitsCollection->GetEntriesFast();
   for (Int_t i=0; i<nofHits; i++) {
-    totEdep += GetHit(i)->GetEdep(); 
+    totEdep += GetHit(i)->GetEdep();
   }
 
-  cout << "   Calorimeter: total energy (MeV): " 
+  cout << "   Calorimeter: total energy (MeV): "
        << setw(7) << totEdep * 1.0e03 << endl;
 }
 

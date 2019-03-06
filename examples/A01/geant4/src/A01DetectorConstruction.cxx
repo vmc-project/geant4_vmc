@@ -33,8 +33,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01DetectorConstruction.cxx 
-/// \brief Implementation of the A01DetectorConstruction class 
+/// \file A01DetectorConstruction.cxx
+/// \brief Implementation of the A01DetectorConstruction class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo
 
@@ -127,7 +127,7 @@ G4VPhysicalVolume* A01DetectorConstruction::Construct()
     = G4Material::GetMaterial("G4_PLASTIC_SC_VINYLTOLUENE");
   G4Material* csI = G4Material::GetMaterial("G4_CESIUM_IODIDE");
   G4Material* lead = G4Material::GetMaterial("G4_Pb");
-    
+
   // Option to switch on/off checking of volumes overlaps
   //
   G4bool checkOverlaps = true;
@@ -142,15 +142,15 @@ G4VPhysicalVolume* A01DetectorConstruction::Construct()
                         false,0,checkOverlaps);
 
   // Tube with Local Magnetic field
-   
+
   G4VSolid* magneticSolid
     = new G4Tubs("magneticTubs",0.,1.*m,1.*m,0.,360.*deg);
 
   fMagneticLogical
     = new G4LogicalVolume(magneticSolid, air, "magneticLogical");
- 
-  // placement of Tube 
- 
+
+  // placement of Tube
+
   G4RotationMatrix* fieldRot = new G4RotationMatrix();
   fieldRot->rotateX(90.*deg);
   new G4PVPlacement(fieldRot,G4ThreeVector(),fMagneticLogical,
@@ -380,7 +380,7 @@ G4VPhysicalVolume* A01DetectorConstruction::Construct()
   Geant4GM::Factory g4Factory;
   g4Factory.SetDebug(1);
   g4Factory.Import(worldPhysical);
-  
+
   // Export VGM geometry to Root
   //
   RootGM::Factory rtFactory;
@@ -399,7 +399,7 @@ G4VPhysicalVolume* A01DetectorConstruction::Construct()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void A01DetectorConstruction::ConstructSDandField()
-{ 
+{
   // Added for VMC (construct SDs)
   TG4GeometryManager::Instance()->ConstructSDandField();
 

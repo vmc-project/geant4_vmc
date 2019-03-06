@@ -43,22 +43,22 @@ class Hit : public TObject
     virtual void Print(Option_t* option = "") const;
     void Reset();
 
-    // set methods   
+    // set methods
     void SetEdep(Double_t de)      { fEdep = de; };
     void SetPos(TVector3 xyz)      { fPos = xyz; };
     void SetCrystalNum(Int_t num)  { fCrystalNumber=num; };
 
-    // get methods   
+    // get methods
     Double_t  GetEdep() const       { return fEdep; };
-    Int_t     GetCrystalNum() const { return fCrystalNumber; };  
+    Int_t     GetCrystalNum() const { return fCrystalNumber; };
     TVector3  GetPos() const        { return fPos; };
-      
+
   private:
     Double_t  fEdep;     ///< Energy deposit in the absorber
     TVector3  fPos;      ///< Cell position
     Int_t     fCrystalNumber;   ///< Crystal number
-    
-  ClassDef(Hit,1) //Hit  
+
+  ClassDef(Hit,1) //Hit
 };
 
 }

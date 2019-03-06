@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4DetConstructionMessenger.h
-/// \brief Definition of the TG4DetConstructionMessenger class 
+/// \brief Definition of the TG4DetConstructionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -37,8 +37,8 @@ class G4UIcmdWithADoubleAndUnit;
 /// - /mcDet/setIsLocalMagField true|false
 /// - /mcDet/setIsZeroMagField true|false
 /// - /mcDet/volNameSeparator [char]  - for geomVMCtoGeant4 only
-/// - /mcDet/printMaterials 
-/// - /mcDet/printMaterialsProperties 
+/// - /mcDet/printMaterials
+/// - /mcDet/printMaterialsProperties
 /// - /mcDet/printMedia
 /// - /mcDet/printVolumes
 /// - /mcDet/printCuts cutName
@@ -64,7 +64,7 @@ class TG4DetConstructionMessenger: public G4UImessenger
 
     // methods
     virtual void SetNewValue(G4UIcommand* command, G4String newValues);
-    
+
   private:
     /// Not implemented
     TG4DetConstructionMessenger();
@@ -84,13 +84,13 @@ class TG4DetConstructionMessenger: public G4UImessenger
     // data members
     TG4GeometryManager*  fGeometryManager; ///< associated class
     G4UIdirectory*       fDirectory;       ///< command directory
-    
+
     //
     // commands data members
-    
-    /// command: updateMagField     
+
+    /// command: updateMagField
     G4UIcmdWithoutParameter*    fUpdateFieldCmd;
-    
+
     /// command: createMagFieldParameters
     G4UIcmdWithAString*         fCreateFieldParametersCmd;
 
@@ -102,31 +102,31 @@ class TG4DetConstructionMessenger: public G4UImessenger
 
     /// command: volumeNameSeparator
     G4UIcmdWithAString*         fSeparatorCmd;
-    
-    /// command: printMatrials     
+
+    /// command: printMatrials
     G4UIcmdWithoutParameter*    fPrintMaterialsCmd;
-    
-    /// command: printMaterialsProperties     
+
+    /// command: printMaterialsProperties
     G4UIcmdWithoutParameter*    fPrintMaterialsPropertiesCmd;
-    
-    /// command: printMedia     
+
+    /// command: printMedia
     G4UIcmdWithoutParameter*    fPrintMediaCmd;
-    
-    /// command: printVolumes  
-    G4UIcmdWithoutParameter*    fPrintVolumesCmd;  
 
-    /// command: printCuts  
-    G4UIcmdWithAString*         fPrintCutsCmd;  
+    /// command: printVolumes
+    G4UIcmdWithoutParameter*    fPrintVolumesCmd;
 
-    /// command: printControls  
-    G4UIcmdWithAString*         fPrintControlsCmd;  
-    
+    /// command: printCuts
+    G4UIcmdWithAString*         fPrintCutsCmd;
+
+    /// command: printControls
+    G4UIcmdWithAString*         fPrintControlsCmd;
+
     /// command: setIsUserMaxStep
     G4UIcmdWithABool*           fIsUserMaxStepCmd;
-    
+
     /// command: setIsMaxStepInLowDensityMaterials
     G4UIcmdWithABool*           fIsMaxStepInLowDensityMaterialsCmd;
-    
+
     /// command: setLimitDensity
     G4UIcmdWithADoubleAndUnit*  fSetLimitDensityCmd;
 

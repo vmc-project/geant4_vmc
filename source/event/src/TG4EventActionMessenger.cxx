@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4EventActionMessenger.cxx
-/// \brief Implementation of the TG4EventActionMessenger class 
+/// \brief Implementation of the TG4EventActionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -24,9 +24,9 @@ TG4EventActionMessenger::TG4EventActionMessenger(TG4EventAction* eventAction)
   : G4UImessenger(),
     fEventAction(eventAction),
     fEventDirectory(0),
-    fPrintMemoryCmd(0), 
+    fPrintMemoryCmd(0),
     fSaveRandomStatusCmd(0)
-{ 
+{
 /// Standard constructor
 
   fEventDirectory = new G4UIdirectory("/mcEvent/");
@@ -44,7 +44,7 @@ TG4EventActionMessenger::TG4EventActionMessenger(TG4EventAction* eventAction)
 }
 
 //_____________________________________________________________________________
-TG4EventActionMessenger::~TG4EventActionMessenger() 
+TG4EventActionMessenger::~TG4EventActionMessenger()
 {
 /// Destructor
 
@@ -58,17 +58,17 @@ TG4EventActionMessenger::~TG4EventActionMessenger()
 //
 
 //_____________________________________________________________________________
-void TG4EventActionMessenger::SetNewValue(G4UIcommand* command, 
+void TG4EventActionMessenger::SetNewValue(G4UIcommand* command,
        G4String newValue)
-{ 
+{
 /// Apply command to the associated object.
 
   if ( command == fPrintMemoryCmd )
-  { 
-    fEventAction->SetPrintMemory(fPrintMemoryCmd->GetNewBoolValue(newValue)); 
-  }   
+  {
+    fEventAction->SetPrintMemory(fPrintMemoryCmd->GetNewBoolValue(newValue));
+  }
   else if ( command == fSaveRandomStatusCmd )
-  { 
-    fEventAction->SetSaveRandomStatus(fSaveRandomStatusCmd->GetNewBoolValue(newValue)); 
-  }   
+  {
+    fEventAction->SetSaveRandomStatus(fSaveRandomStatusCmd->GetNewBoolValue(newValue));
+  }
 }

@@ -9,7 +9,7 @@
 
 /// \ingroup A01
 /// \file A01/run_g4.C
-/// \brief Macro for running Example A01 with Geant4. 
+/// \brief Macro for running Example A01 with Geant4.
 
 #include "set_vis.C"
 
@@ -19,10 +19,10 @@ void run_g4(const TString& configMacro = "g4Config.C")
 /// Root interactive session
 /// Note that since Root 6 the libraries have to be loaded first
 /// via load_g4.C.
-/// \param configMacro configuration macro name, default \ref E03/g4Config.C 
+/// \param configMacro configuration macro name, default \ref E03/g4Config.C
 
   // MC application
-  A01MCApplication* appl 
+  A01MCApplication* appl
     =  new A01MCApplication("ExampleA01", "The exampleA01 MC application");
   appl->GetPrimaryGenerator()->SetRandomize(false);
   appl->SetWriteStack(true);
@@ -40,10 +40,10 @@ void run_g4(const TString& configMacro = "g4Config.C")
   //((TGeant4*)gMC)->StartGeantUI();
 
   TStopwatch timer;
-  timer.Start();  
+  timer.Start();
   appl->RunMC(5);
   timer.Stop();
   timer.Print();
-  
+
   delete appl;
-}  
+}

@@ -36,7 +36,7 @@
 //
 // Modified:
 //
-//  12.07.10  S.Burdin (changed the magnetic and electric charge variables 
+//  12.07.10  S.Burdin (changed the magnetic and electric charge variables
 //            from integer to double)
 //----------------------------------------------------------------------------
 //
@@ -101,10 +101,10 @@ void G4MonopolePhysics::ConstructProcess()
   if(verboseLevel > 0) {
     G4cout << "G4MonopolePhysics::ConstructProcess" << G4endl;
   }
-  
+
   G4PhysicsListHelper* ph = G4PhysicsListHelper::GetPhysicsListHelper();
   G4ProcessManager* pmanager = fMpl->GetProcessManager();
-  
+
   // defined monopole parameters and binning
 
   G4double magn = fMpl->MagneticCharge();
@@ -113,7 +113,7 @@ void G4MonopolePhysics::ConstructProcess()
   G4double emax = std::max(10.*TeV, fMonopoleMass*100);
   G4int nbin = G4lrint(10*std::log10(emax/emin));
 
-  // dedicated trasporation 
+  // dedicated trasporation
   if(magn != 0.0) {
     G4int idxt(0);
     pmanager->RemoveProcess(idxt);

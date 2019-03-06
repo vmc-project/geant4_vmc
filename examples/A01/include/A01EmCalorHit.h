@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01EmCalorHit.h 
-/// \brief Definition of the A01EmCalorHit class 
+/// \file A01EmCalorHit.h
+/// \brief Definition of the A01EmCalorHit class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo: \n
 ///
@@ -37,7 +37,7 @@ class A01EmCalorHit : public TObject
     // methods
     virtual void Print(Option_t* option = "") const;
     void Reset();
-                 
+
     // set methods
     void SetCellID(Int_t z)    { fCellID = z; }
     void SetVolId(Int_t volId) { fVolID = volId; }
@@ -50,16 +50,16 @@ class A01EmCalorHit : public TObject
     Int_t      GetVolId() const   { return fVolID; }
     Double_t   GetEdep() const    { return fEdep; }
     const TGeoHMatrix& GetTransformation() const { return fTransformation; }
-      
+
   private:
     Int_t GetCellID(Int_t column, Int_t row) const;
-  
+
     Int_t        fCellID; ///< The cell ID
     Int_t        fVolID;  ///< The volume ID
     Double_t     fEdep;   ///< The energy deposit
     TGeoHMatrix  fTransformation; ///< The transformation of the hit volume
-    
-  ClassDef(A01EmCalorHit,1) //A01EmCalorHit  
+
+  ClassDef(A01EmCalorHit,1) //A01EmCalorHit
 };
 
 #endif //A01_EM_CALOR_HIT_H

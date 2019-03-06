@@ -5,10 +5,10 @@
 /// \brief The main page for G4Root code documenation
 
 
-/*! \mainpage G4Root interface 
+/*! \mainpage G4Root interface
 
 This package is an interface allowing running native GEANT4 with a ROOT
-geometry. In fact it is just the G4 navigation that uses directly the 
+geometry. In fact it is just the G4 navigation that uses directly the
 TGeo geometry. The package contains:
 
   -# A manager class: TG4RootNavMgr. This is a TObject-based class allowing

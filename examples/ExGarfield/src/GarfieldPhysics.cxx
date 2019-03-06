@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file  ExGarfield/src/GarfieldPhysics.cxx
-/// \brief Definition of the GarfieldPhysics class 
+/// \brief Definition of the GarfieldPhysics class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 /// This class is imported from garfieldpp example with no modification

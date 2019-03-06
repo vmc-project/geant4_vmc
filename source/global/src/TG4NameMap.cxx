@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4NameMap.cxx
-/// \brief Implementation of the TG4NameMap class 
+/// \brief Implementation of the TG4NameMap class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -21,16 +21,16 @@
 G4String TG4NameMap::fgUndefined = "Undefined";
 
 //_____________________________________________________________________________
-TG4NameMap::TG4NameMap() 
+TG4NameMap::TG4NameMap()
   : fMap(),
     fInverseMap(),
-    fSecond(fgUndefined) 
+    fSecond(fgUndefined)
 {
 /// Default constructor
 }
 
 //_____________________________________________________________________________
-TG4NameMap::~TG4NameMap() 
+TG4NameMap::~TG4NameMap()
 {
 /// Destructor
 }
@@ -41,12 +41,12 @@ TG4NameMap::~TG4NameMap()
 
 //_____________________________________________________________________________
 G4bool TG4NameMap::Add(const G4String& first, const G4String& second)
-{  
+{
 /// Add names pair to the map.
 /// fSecond is not used in this add method.
 
   if (GetSecond(first) == fgUndefined) {
-    // insert into map 
+    // insert into map
     // only in case it is not yet here
     fMap[first] = second;
     fInverseMap[second] = first;
@@ -57,11 +57,11 @@ G4bool TG4NameMap::Add(const G4String& first, const G4String& second)
 
 //_____________________________________________________________________________
 G4bool TG4NameMap::AddInverse(const G4String& first, const G4String& second)
-{  
+{
 /// Add names pair only to the inverse map.
 
   if (GetFirst(second) == fgUndefined) {
-    // insert into map 
+    // insert into map
     // only in case it is not yet here
     fInverseMap[second] = first;
     return true;
@@ -71,11 +71,11 @@ G4bool TG4NameMap::AddInverse(const G4String& first, const G4String& second)
 
 //_____________________________________________________________________________
 G4bool TG4NameMap::AddName(const G4String& name)
-{  
+{
 /// Add name to the map.
 
   if (GetSecond(name) == fgUndefined) {
-    // insert into map 
+    // insert into map
     // only in case it is not yet here
     fMap[name] = fSecond;
     fInverseMap[fSecond] = name;
@@ -90,9 +90,9 @@ const G4String& TG4NameMap::GetFirst(const G4String& second) const
 /// Get first name associated with given second name.
 
   MapConstIterator i = fInverseMap.find(second);
-  if (i == fInverseMap.end()) 
+  if (i == fInverseMap.end())
     return fgUndefined;
-  else                 
+  else
     return (*i).second;
 }
 
@@ -102,9 +102,9 @@ const G4String& TG4NameMap::GetSecond(const G4String& first) const
 /// Get second name associated with given first name.
 
   MapConstIterator i = fMap.find(first);
-  if (i == fMap.end()) 
+  if (i == fMap.end())
     return fgUndefined;
-  else                 
+  else
     return (*i).second;
 }
 
@@ -119,7 +119,7 @@ void TG4NameMap::PrintAll() const
     for (MapConstIterator i=fMap.begin(); i != fMap.end(); i++) {
       const G4String& first  = (*i).first;
       const G4String& second = (*i).second;
-      G4cout << "Map element " << std::setw(3) << counter++ << "   " 
+      G4cout << "Map element " << std::setw(3) << counter++ << "   "
              << first << "   " << second << G4endl;
     }
   }
@@ -130,18 +130,18 @@ void TG4NameMap::PrintAll() const
     for (MapConstIterator i=fInverseMap.begin(); i != fInverseMap.end(); i++) {
       const G4String& first  = (*i).first;
       const G4String& second = (*i).second;
-      G4cout << "Map element " << std::setw(3) << counter++ << "   " 
+      G4cout << "Map element " << std::setw(3) << counter++ << "   "
              << first << "   " << second << G4endl;
     }
   }
 }
 
 //_____________________________________________________________________________
-void TG4NameMap::Clear() 
+void TG4NameMap::Clear()
 {
 /// Clear the map.
 
   fMap.clear();
   fInverseMap.clear();
   fSecond = fgUndefined;
-}  
+}

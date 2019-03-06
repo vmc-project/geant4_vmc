@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4ProcessMCMapPhysics.h
-/// \brief Definition of the TG4ProcessMCMapPhysics class 
+/// \brief Definition of the TG4ProcessMCMapPhysics class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 

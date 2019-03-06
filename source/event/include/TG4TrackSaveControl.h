@@ -20,7 +20,7 @@
 
 #include <globals.hh>
 
-enum TG4TrackSaveControl { 
+enum TG4TrackSaveControl {
   kDoNotSave,       ///< do not save
   kSaveInPreTrack,  ///< save in pre-track
   kSaveInStep       ///< save in step

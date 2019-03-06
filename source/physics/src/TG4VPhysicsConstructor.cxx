@@ -8,9 +8,9 @@
 //-------------------------------------------------
 
 /// \file TG4VPhysicsConstructor.cxx
-/// \brief Implementation of the TG4VPhysicsConstructor class 
+/// \brief Implementation of the TG4VPhysicsConstructor class
 ///
-/// According to ExN04IonPhysics.cc,v 1.1.2.1 2001/06/28 19:07:37 gunter Exp 
+/// According to ExN04IonPhysics.cc,v 1.1.2.1 2001/06/28 19:07:37 gunter Exp
 /// GEANT4 tag Name: geant4-06-00
 ///
 /// \author I. Hrivnacova; IPN, Orsay
@@ -40,7 +40,7 @@ TG4VPhysicsConstructor::TG4VPhysicsConstructor(const G4String& name,
 }
 
 //_____________________________________________________________________________
-TG4VPhysicsConstructor::~TG4VPhysicsConstructor() 
+TG4VPhysicsConstructor::~TG4VPhysicsConstructor()
 {
 /// Destructor
 }
@@ -56,8 +56,8 @@ void TG4VPhysicsConstructor::VerboseLevel(G4int level)
 /// level and TG4Verbose level.
 
    TG4Verbose::VerboseLevel(level);
-   
-   // verbose in G4VPhysicsConstructor 
+
+   // verbose in G4VPhysicsConstructor
    SetVerboseLevel(level);
 }
 

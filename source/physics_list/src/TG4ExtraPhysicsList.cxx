@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4ExtraPhysicsList.cxx
-/// \brief Implementation of the TG4ExtraPhysicsList class 
+/// \brief Implementation of the TG4ExtraPhysicsList class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -77,9 +77,9 @@ G4String TG4ExtraPhysicsList::AvailableSelections()
 
   G4String selections;
   selections += "extra monopole optical radDecay ";
-  
+
   return selections;
-}  
+}
 
 //_____________________________________________________________________________
 G4bool TG4ExtraPhysicsList::IsAvailableSelection(const G4String& selection)
@@ -89,9 +89,9 @@ G4bool TG4ExtraPhysicsList::IsAvailableSelection(const G4String& selection)
   G4String available = AvailableSelections();
   G4String checkSelection = selection;
   checkSelection += " ";
-  
+
   return available.contains(checkSelection);
-}  
+}
 
 //
 // ctors, dtor
@@ -113,7 +113,7 @@ TG4ExtraPhysicsList::TG4ExtraPhysicsList(const G4String& selection,
 }
 
 //_____________________________________________________________________________
-TG4ExtraPhysicsList::~TG4ExtraPhysicsList() 
+TG4ExtraPhysicsList::~TG4ExtraPhysicsList()
 {
 /// Destructor
 }
@@ -143,7 +143,7 @@ void TG4ExtraPhysicsList::Configure(const G4String& selection,
     extraPhysics->MuonNuclear(state);
 #endif
     RegisterPhysics(extraPhysics);
-  }  
+  }
 
   // Monopole physics
   if ( selection.contains("monopole") ) {
@@ -156,13 +156,13 @@ void TG4ExtraPhysicsList::Configure(const G4String& selection,
   if ( selection.contains("optical") ) {
     G4OpticalPhysics* g4OpticalPhysics = new G4OpticalPhysics();
     RegisterPhysics(g4OpticalPhysics);
-  }  
+  }
 
   // Radioactive decay physics
   if ( selection.contains("radDecay") ) {
     RegisterPhysics(new G4RadioactiveDecayPhysics());
-  }  
-}    
+  }
+}
 
 //
 // public methods
@@ -179,19 +179,19 @@ void TG4ExtraPhysicsList::ConstructProcess()
   for (itr = G4MT_physicsVector->begin(); itr!= G4MT_physicsVector->end(); ++itr) {
     (*itr)->ConstructProcess();
   }
-  
-  if ( VerboseLevel() > 0 ) { 
+
+  if ( VerboseLevel() > 0 ) {
     G4cout << "### Extra physics constructed: ";
     G4PhysConstVector::iterator it;
     for ( it = G4MT_physicsVector->begin(); it != G4MT_physicsVector->end(); ++it ) {
       G4cout << (*it)->GetPhysicsName() << " ";
     }
     G4cout << G4endl;
-  }    
+  }
 }
 
 //_____________________________________________________________________________
-G4int TG4ExtraPhysicsList::VerboseLevel() const 
+G4int TG4ExtraPhysicsList::VerboseLevel() const
 {
 /// Return verbose level (via TG4VVerbose)
 
@@ -200,22 +200,22 @@ G4int TG4ExtraPhysicsList::VerboseLevel() const
 
 
 //_____________________________________________________________________________
-void TG4ExtraPhysicsList::VerboseLevel(G4int level) 
+void TG4ExtraPhysicsList::VerboseLevel(G4int level)
 {
-/// Set the specified level to both TG4Verbose and 
+/// Set the specified level to both TG4Verbose and
 /// G4VModularPhysicsList.
 /// The verbose level is also propagated to registered physics contructors.
 
   TG4VVerbose::VerboseLevel(level);
   SetVerboseLevel(level);
-  
+
   G4PhysConstVector::iterator it;
   for ( it = G4MT_physicsVector->begin(); it != G4MT_physicsVector->end(); ++it ) {
     TG4Verbose* verbose = dynamic_cast<TG4Verbose*>(*it);
     if ( verbose )
       verbose->VerboseLevel(level);
     else
-      (*it)->SetVerboseLevel(level);  
+      (*it)->SetVerboseLevel(level);
   }
 }
 
@@ -228,4 +228,4 @@ void TG4ExtraPhysicsList::SetRangeCut(G4double value)
 /// the cut value in later phases.
 
   defaultCutValue = value;
-}  
+}

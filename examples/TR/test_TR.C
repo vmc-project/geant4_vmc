@@ -19,7 +19,7 @@ void test_TR(const TString& configMacro)
 {
 /// Macro function for testing example TR
 /// \param configMacro  configuration macro loaded in initialization
-/// 
+///
 /// Run 5000 events and print the Mean energy deposit in absorber.
 
   // Create application if it does not yet exist
@@ -27,8 +27,8 @@ void test_TR(const TString& configMacro)
   if ( ! TVirtualMCApplication::Instance() ) {
     new VMC::TR::MCApplication("ExampleTR", "The exampleTR MC application");
     needDelete = kTRUE;
-  }  
- 
+  }
+
   // MC application
   VMC::TR::MCApplication* appl
     = (VMC::TR::MCApplication*)TVirtualMCApplication::Instance();
@@ -42,4 +42,4 @@ void test_TR(const TString& configMacro)
   appl->RunMC(5000);
 
   if ( needDelete ) delete appl;
-}  
+}

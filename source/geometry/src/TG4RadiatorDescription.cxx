@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4RadiatorDescription.cxx
-/// \brief Implementation of the TG4RadiatorDescription class 
+/// \brief Implementation of the TG4RadiatorDescription class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -27,7 +27,7 @@ TG4RadiatorDescription::TG4RadiatorDescription(const G4String& volumeName)
 }
 
 //_____________________________________________________________________________
-TG4RadiatorDescription::~TG4RadiatorDescription() 
+TG4RadiatorDescription::~TG4RadiatorDescription()
 {
 /// Destructor
 }

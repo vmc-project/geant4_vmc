@@ -19,7 +19,7 @@ void test_ExGarfield(const TString& configMacro)
 {
 /// Macro function for testing example ExGarfield
 /// \param configMacro  configuration macro loaded in initialization
-/// 
+///
 /// Run 10 events and print the calorimeter hits.
 
   // Create application if it does not yet exist
@@ -27,8 +27,8 @@ void test_ExGarfield(const TString& configMacro)
   if ( ! TVirtualMCApplication::Instance() ) {
     new VMC::ExGarfield::MCApplication("ExampleExGarfield", "The example ExGarfield MC application");
     needDelete = kTRUE;
-  }  
- 
+  }
+
   // MC application
   VMC::ExGarfield::MCApplication* appl
     = (VMC::ExGarfield::MCApplication*)TVirtualMCApplication::Instance();
@@ -40,4 +40,4 @@ void test_ExGarfield(const TString& configMacro)
   appl->RunMC(5);
 
   if ( needDelete ) delete appl;
-}  
+}

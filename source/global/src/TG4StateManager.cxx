@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4StateManager.cxx
-/// \brief Implementation of the TG4StateManager class 
+/// \brief Implementation of the TG4StateManager class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -31,18 +31,18 @@ G4String TG4StateManager::GetStateName(TG4ApplicationState state)
     case kAddParticles:         return "AddParticles";
     case kAddIons:              return "AddIons";
     case kInEvent:              return "InEvent";
-    case kNotInApplication:   
+    case kNotInApplication:
     default:                    return "NotInApplication";
   }
-}  
+}
 
 
 //_____________________________________________________________________________
-TG4StateManager::TG4StateManager() 
+TG4StateManager::TG4StateManager()
   : TG4Verbose("stateManager"),
     fCurrentState(kNotInApplication),
     fPreviousState(kNotInApplication)
-  
+
 {
 /// Standard constructor
 
@@ -51,12 +51,12 @@ TG4StateManager::TG4StateManager()
       "TG4StateManager", "TG4StateManager:",
       "Cannot create two instances of singleton.");
   }
-  
+
   fgInstance = this;
 }
 
 //_____________________________________________________________________________
-TG4StateManager::~TG4StateManager() 
+TG4StateManager::~TG4StateManager()
 {
 /// Destructor
 
@@ -64,18 +64,18 @@ TG4StateManager::~TG4StateManager()
 }
 
 //_____________________________________________________________________________
-void TG4StateManager::SetNewState(TG4ApplicationState state) 
+void TG4StateManager::SetNewState(TG4ApplicationState state)
 {
 /// Set application state
 
   if ( VerboseLevel() > 1 ) {
-    G4cout << "**** TG4StateManager::SetNewState: " 
+    G4cout << "**** TG4StateManager::SetNewState: "
            << GetStateName(state) << "****" << G4endl;
-  }         
-  
+  }
+
   fPreviousState = fCurrentState;
   fCurrentState = state;
-}  
-  
+}
+
 
 

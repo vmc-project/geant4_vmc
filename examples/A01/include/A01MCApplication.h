@@ -10,15 +10,15 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01MCApplication.h 
-/// \brief Definition of the A01MCApplication class 
+/// \file A01MCApplication.h
+/// \brief Definition of the A01MCApplication class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include <TVirtualMCApplication.h>
-#include <TGeoUniformMagField.h> 
+#include <TGeoUniformMagField.h>
 #include "TMCVerbose.h"
 
 #include "A01RootDetectorConstruction.h"
@@ -55,7 +55,7 @@ class A01MCApplication : public TVirtualMCApplication
     virtual TVirtualMCApplication* CloneForWorker() const;
     virtual void InitForWorker() const;
     virtual void FinishWorkerRun() const;
- 
+
     virtual void ConstructGeometry();
     virtual void InitGeometry();
     virtual void AddParticles();
@@ -68,30 +68,30 @@ class A01MCApplication : public TVirtualMCApplication
     virtual void PostTrack();
     virtual void FinishPrimary();
     virtual void FinishEvent();
-    
+
     // set methods
     void  SetCuts();
     void  SetWriteStack(Bool_t writeStack);
     void  SetWriteHits(Bool_t writeHits);
     void  SetUseLocalMagField(Bool_t localMagField);
     void  SetVerboseLevel(Int_t verboseLevel);
-    
+
     // get methods
     A01RootDetectorConstruction* GetDetectorConstruction() const;
     A01PrimaryGenerator*         GetPrimaryGenerator() const;
     A01DriftChamberSD*           GetDriftChamberSD1() const;
-    A01DriftChamberSD*           GetDriftChamberSD2() const; 
-    A01EmCalorimeterSD*          GetEmCalorimeterSD() const; 
+    A01DriftChamberSD*           GetDriftChamberSD2() const;
+    A01EmCalorimeterSD*          GetEmCalorimeterSD() const;
     A01HadCalorimeterSD*         GetHadCalorimeterSD() const;
-    A01HodoscopeSD*              GetHodoscopeSD1() const;    
+    A01HodoscopeSD*              GetHodoscopeSD1() const;
     A01HodoscopeSD*              GetHodoscopeSD2() const;
     Bool_t  GetUseLocalMagField() const;
- 
+
   private:
     // methods
     A01MCApplication(const A01MCApplication& origin);
     void RegisterStack() const;
-  
+
     // data members
     mutable TMCRootManager* fRootManager;//!< Root manager
     Bool_t                    fWriteStack;      ///< Option to write stack
@@ -119,9 +119,9 @@ class A01MCApplication : public TVirtualMCApplication
 /// (In)Activate writing stack on file
 /// \param writeStack  The new value of the option
 inline void  A01MCApplication::SetWriteStack(Bool_t writeStack)
-{ fWriteStack = writeStack; } 
+{ fWriteStack = writeStack; }
 
-/// Set verbosity 
+/// Set verbosity
 /// \param verboseLevel  The new verbose level value
 inline void  A01MCApplication::SetVerboseLevel(Int_t verboseLevel)
 { fVerbose.SetLevel(verboseLevel); }
@@ -146,7 +146,7 @@ inline A01DriftChamberSD* A01MCApplication::GetDriftChamberSD1() const
 /// \return The Drift Chamber 2 SD
 inline A01DriftChamberSD* A01MCApplication::GetDriftChamberSD2() const
 { return fDriftChamberSD2; }
- 
+
 /// \return The Em Calorimeter SD
 inline A01EmCalorimeterSD* A01MCApplication::GetEmCalorimeterSD() const
 { return fEmCalorimeterSD; }
@@ -155,10 +155,10 @@ inline A01EmCalorimeterSD* A01MCApplication::GetEmCalorimeterSD() const
 inline A01HadCalorimeterSD* A01MCApplication::GetHadCalorimeterSD() const
 { return fHadCalorimeterSD; }
 
-/// \return The Hodoscope 1 SD 
+/// \return The Hodoscope 1 SD
 inline A01HodoscopeSD* A01MCApplication::GetHodoscopeSD1() const
 { return fHodoscopeSD1; }
-    
+
 /// \return The Hodoscope 2 SD
 inline A01HodoscopeSD* A01MCApplication::GetHodoscopeSD2() const
 { return fHodoscopeSD2; }

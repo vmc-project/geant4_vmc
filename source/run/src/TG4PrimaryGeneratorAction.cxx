@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4PrimaryGeneratorAction.cxx
-/// \brief Implementation of the TG4PrimaryGeneratorAction class 
+/// \brief Implementation of the TG4PrimaryGeneratorAction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -32,7 +32,7 @@
 #include <TVirtualMCStack.h>
 #include <TParticle.h>
 
-// Moved after Root includes to avoid shadowed variables 
+// Moved after Root includes to avoid shadowed variables
 // generated from short units names
 #include <G4SystemOfUnits.hh>
 
@@ -48,7 +48,7 @@ TG4PrimaryGeneratorAction::TG4PrimaryGeneratorAction()
 }
 
 //_____________________________________________________________________________
-TG4PrimaryGeneratorAction::~TG4PrimaryGeneratorAction() 
+TG4PrimaryGeneratorAction::~TG4PrimaryGeneratorAction()
 {
 /// Destructor
 
@@ -72,7 +72,7 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
   // Cache pointers to thread-local objects
   TVirtualMCStack* mcStack = gMC->GetStack();
   TG4ParticlesManager* particlesManager = TG4ParticlesManager::Instance();
-  
+
   G4int nofParticles = mcStack->GetNtrack();
   if (nofParticles <= 0) {
     TG4Globals::Warning(
@@ -82,23 +82,23 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
   }
 
   if (VerboseLevel() > 1)
-    G4cout << "TG4PrimaryGeneratorAction::TransformPrimaries: " 
-           << nofParticles << " particles" << G4endl; 
-     
+    G4cout << "TG4PrimaryGeneratorAction::TransformPrimaries: "
+           << nofParticles << " particles" << G4endl;
+
 
   G4PrimaryVertex* previousVertex = 0;
-  G4ThreeVector previousPosition = G4ThreeVector(); 
-  G4double previousTime = 0.; 
-  
-  for (G4int i=0; i<nofParticles; i++) {    
-  
+  G4ThreeVector previousPosition = G4ThreeVector();
+  G4double previousTime = 0.;
+
+  for (G4int i=0; i<nofParticles; i++) {
+
     // get the particle from the stack
     TParticle* particle = mcStack->PopPrimaryForTracking(i);
-    
+
     if (particle) {
       // only particles that didn't die (decay) in primary generator
-      // will be transformed to G4 objects   
-      
+      // will be transformed to G4 objects
+
       // Pass this particle Id (in the VMC stack) to Track manager
       trackManager->AddPrimaryParticleId(i);
 
@@ -107,7 +107,7 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
       G4ParticleDefinition* particleDefinition
         = particlesManager->GetParticleDefinition(particle, false);
 
-      if (!particleDefinition) { 
+      if (!particleDefinition) {
         TString text = "G4ParticleTable::FindParticle() failed for ";
         text += TString(particle->GetName());
         text += "  pdgEncoding=";
@@ -117,7 +117,7 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
           TG4Globals::Warning(
              "TG4PrimaryGeneratorAction", "TransformPrimaries", text);
           continue;
-        } 
+        }
         else {
           TG4Globals::Exception(
              "TG4PrimaryGeneratorAction", "TransformPrimaries", text);
@@ -125,17 +125,17 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
       }
 
       // Get/Create vertex
-      G4ThreeVector position 
+      G4ThreeVector position
         = particlesManager->GetParticlePosition(particle);
-      G4double time = particle->T()*TG4G3Units::Time(); 
+      G4double time = particle->T()*TG4G3Units::Time();
       G4PrimaryVertex* vertex;
-      if ( i==0 || previousVertex ==0 || 
+      if ( i==0 || previousVertex ==0 ||
            position != previousPosition || time != previousTime ) {
-        // Create a new vertex 
-        // in case position and time of gun particle are different from 
+        // Create a new vertex
+        // in case position and time of gun particle are different from
         // previous values
         // (vertex objects are destroyed in G4EventManager::ProcessOneEvent()
-        // when event is deleted)  
+        // when event is deleted)
         vertex = new G4PrimaryVertex(position, time);
         event->AddPrimaryVertex(vertex);
 
@@ -143,18 +143,18 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
         previousPosition = position;
         previousTime = time;
       }
-      else 
+      else
         vertex = previousVertex;
 
       // Create a primary particle and add it to the vertex
       // (primaryParticle objects are destroyed in G4EventManager::ProcessOneEvent()
       // when event and then vertex is deleted)
-      G4ThreeVector momentum 
+      G4ThreeVector momentum
         = particlesManager->GetParticleMomentum(particle);
       G4double energy
         = particle->Energy()*TG4G3Units::Energy();
-      G4PrimaryParticle* primaryParticle 
-        = new G4PrimaryParticle(particleDefinition, 
+      G4PrimaryParticle* primaryParticle
+        = new G4PrimaryParticle(particleDefinition,
                                 momentum.x(), momentum.y(), momentum.z(), energy);
 
       // Set charge
@@ -164,19 +164,19 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
         // Get dynamic charge defined by user
         TG4UserIon* userIon = particlesManager->GetUserIon(particle->GetName(), false);
         if ( userIon ) charge = userIon->GetQ() * eplus;
-      }       
+      }
       primaryParticle->SetCharge(charge);
-      
+
       // Set polarization
       TVector3 polarization;
       particle->GetPolarisation(polarization);
       primaryParticle
-        ->SetPolarization(polarization.X(), polarization.Y(), polarization.Z()); 
-        
+        ->SetPolarization(polarization.X(), polarization.Y(), polarization.Z());
+
       // Set weight
       G4double weight =  particle->GetWeight();
-      primaryParticle->SetWeight(weight); 
-        
+      primaryParticle->SetWeight(weight);
+
       // Add primary particle to the vertex
       vertex->SetPrimary(primaryParticle);
 
@@ -185,7 +185,7 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
         G4cout << i << "th primary particle: " << G4endl;
         primaryParticle->Print();
       }
-    }   
+    }
   }
 }
 
@@ -212,7 +212,7 @@ void TG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
 
   // Generate primaries and fill the VMC stack
   mcApplication->GeneratePrimaries();
-  
+
   // Transform Root particle objects to G4 objects
   TransformPrimaries(event);
 }

@@ -16,14 +16,14 @@
 void Config()
 {
 /// The configuration function for Geant4 VMC for Gflash example
-/// called during MC application initialization. 
+/// called during MC application initialization.
 
   // Run configuration
   TG4RunConfiguration* runConfiguration
       = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT", "gflash", false, false);
-  
+
   // Run configuration with special cuts activated
-  // Gflash::RunConfiguration* runConfiguration 
+  // Gflash::RunConfiguration* runConfiguration
   //   = new Gflash::RunConfiguration("geomRootToGeant4", "FTFP_BERT", "specialCuts");
 
   // TGeant4
@@ -31,7 +31,7 @@ void Config()
     = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration);
 
   cout << "Geant4 has been created." << endl;
-  
+
   // Customise Geant4 setting
   // Fast simulation model configuration
   // + verbose level, global range cuts, etc.

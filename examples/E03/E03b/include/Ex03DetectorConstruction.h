@@ -11,10 +11,10 @@
 //-------------------------------------------------
 
 /// \file  Ex03DetectorConstruction.h
-/// \brief Definition of the Ex03DetectorConstruction class 
+/// \brief Definition of the Ex03DetectorConstruction class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo: \n
-/// Id: ExN03DetectorConstruction.hh,v 1.5 2002/01/09 17:24:11 ranjard Exp 
+/// Id: ExN03DetectorConstruction.hh,v 1.5 2002/01/09 17:24:11 ranjard Exp
 /// GEANT4 tag $Name:  $
 ///
 /// \author I. Hrivnacova; IPN, Orsay
@@ -33,7 +33,7 @@
 
 class Ex03DetectorConstruction : public TObject
 {
-  public:  
+  public:
     Ex03DetectorConstruction();
     virtual ~Ex03DetectorConstruction();
 
@@ -42,18 +42,18 @@ class Ex03DetectorConstruction : public TObject
      void ConstructGeometry();
      void SetCuts();
      void SetControls();
-     void PrintCalorParameters(); 
+     void PrintCalorParameters();
      //void UpdateGeometry();
-     
+
      // set methods
-     void SetNbOfLayers (Int_t value);  
-     void SetDefaultMaterial(const TString& materialName);     
-     void SetAbsorberMaterial(const TString& materialName);     
-     void SetGapMaterial(const TString& materialName );     
-     void SetCalorSizeYZ(Double_t value);          
-     void SetAbsorberThickness(Double_t value);     
+     void SetNbOfLayers (Int_t value);
+     void SetDefaultMaterial(const TString& materialName);
+     void SetAbsorberMaterial(const TString& materialName);
+     void SetGapMaterial(const TString& materialName );
+     void SetCalorSizeYZ(Double_t value);
+     void SetAbsorberThickness(Double_t value);
      void SetGapThickness(Double_t value);
-     
+
      //
      // get methods
 
@@ -61,7 +61,7 @@ class Ex03DetectorConstruction : public TObject
      Int_t    GetNbOfLayers() const    { return fNbOfLayers; }
 
      /// \return The world size x component
-     Double_t GetWorldSizeX() const    { return fWorldSizeX; } 
+     Double_t GetWorldSizeX() const    { return fWorldSizeX; }
 
      /// \return The world size y,z component
      Double_t GetWorldSizeYZ() const   { return fWorldSizeYZ; }
@@ -70,15 +70,15 @@ class Ex03DetectorConstruction : public TObject
      Double_t GetCalorSizeYZ() const   { return fCalorSizeYZ; }
 
      /// \return The calorimeter thickness
-     Double_t GetCalorThickness()const { return fCalorThickness; } 
+     Double_t GetCalorThickness()const { return fCalorThickness; }
 
      /// \return The absorber thickness
-     Double_t GetAbsorberThickness()const { return fAbsorberThickness; }      
+     Double_t GetAbsorberThickness()const { return fAbsorberThickness; }
 
      /// \return The gap thickness
      Double_t GetGapThickness()const   { return fGapThickness; }
-          
-  private:      
+
+  private:
      // helper type for setting cuts
      struct MaterialCuts {
         MaterialCuts(TString name, Double_t p1, Double_t p2, Double_t p3, Double_t p4)
@@ -93,7 +93,7 @@ class Ex03DetectorConstruction : public TObject
      // methods
      void  ComputeCalorParameters();
 
-     // data members  
+     // data members
      Int_t     fNbOfLayers;       ///< The number of calorimeter layers
      Double_t  fWorldSizeX;       ///< The world size x component
      Double_t  fWorldSizeYZ;      ///< The world size y,z component
@@ -102,11 +102,11 @@ class Ex03DetectorConstruction : public TObject
      Double_t  fLayerThickness;   ///< The calorimeter layer thickness
      Double_t  fAbsorberThickness;///< The absorber thickness
      Double_t  fGapThickness;     ///< The gap thickness
-     
+
      TString   fDefaultMaterial;  ///< The default material name
      TString   fAbsorberMaterial; ///< The absorber material name
      TString   fGapMaterial;      ///< The gap material name
-     
+
   ClassDef(Ex03DetectorConstruction,1) //Ex03DetectorConstruction
 };
 

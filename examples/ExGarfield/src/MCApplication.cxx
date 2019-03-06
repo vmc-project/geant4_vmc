@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file ExGarfield/src/MCApplication.cxx 
-/// \brief Implementation of the ExGarfield::MCApplication class 
+/// \file ExGarfield/src/MCApplication.cxx
+/// \brief Implementation of the ExGarfield::MCApplication class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
@@ -58,18 +58,18 @@ MCApplication::MCApplication(const char *name, const char *title)
     fIsMaster(kTRUE)
 {
 /// Standard constructor
-/// \param name   The MC application name 
+/// \param name   The MC application name
 /// \param title  The MC application description
 
   // Create a user stack
   fStack = new Ex03MCStack(1000);
-  
+
   // Create detector construction
   fDetConstruction = new DetectorConstruction();
-  
+
   // Create a calorimeter SD
-  fSensitiveDetector = new SensitiveDetector("Calorimeter"); 
-  
+  fSensitiveDetector = new SensitiveDetector("Calorimeter");
+
   // Create a primary generator
   fPrimaryGenerator = new PrimaryGenerator(fStack);
 }
@@ -111,15 +111,15 @@ MCApplication::MCApplication()
     fSensitiveDetector(0),
     fPrimaryGenerator(0),
     fIsMaster(kTRUE)
-{    
+{
 /// Default constructor
 }
 
 //_____________________________________________________________________________
-MCApplication::~MCApplication() 
+MCApplication::~MCApplication()
 {
-/// Destructor  
-  
+/// Destructor
+
   //cout << "MCApplication::~MCApplication " << this << endl;
 
   delete fRootManager;
@@ -153,10 +153,10 @@ void MCApplication::RegisterStack() const
 
 //_____________________________________________________________________________
 void MCApplication::InitMC(const char* setup)
-{    
+{
 /// Initialize MC.
 /// The selection of the concrete MC is done in the macro.
-/// \param setup The name of the configuration macro 
+/// \param setup The name of the configuration macro
 
   fVerbose.InitMC();
 
@@ -167,8 +167,8 @@ void MCApplication::InitMC(const char* setup)
       Fatal("InitMC",
             "Processing Config() has failed. (No MC is instantiated.)");
     }
-  }  
- 
+  }
+
 // MT support available from root v 5.34/18
 #if ROOT_VERSION_CODE >= 336402
   // Create Root manager
@@ -183,17 +183,17 @@ void MCApplication::InitMC(const char* setup)
     = new TMCRootManager(GetName(), TMCRootManager::kWrite);
   //fRootManager->SetDebug(true);
 #endif
-  
+
   gMC->SetStack(fStack);
   gMC->Init();
-  gMC->BuildPhysics(); 
-  
+  gMC->BuildPhysics();
+
   RegisterStack();
-}                                   
+}
 
 //_____________________________________________________________________________
 void MCApplication::RunMC(Int_t nofEvents)
-{    
+{
 /// Run MC.
 /// \param nofEvents Number of events to be processed
 
@@ -205,7 +205,7 @@ void MCApplication::RunMC(Int_t nofEvents)
 
 //_____________________________________________________________________________
 void MCApplication::FinishRun()
-{    
+{
 /// Finish MC run.
 
   fVerbose.FinishRun();
@@ -249,65 +249,65 @@ void MCApplication::FinishWorkerRun() const
 }
 
 //_____________________________________________________________________________
-void MCApplication::ReadEvent(Int_t i) 
+void MCApplication::ReadEvent(Int_t i)
 {
 /// Read \em i -th event and prints hits.
-/// \param i The number of event to be read    
+/// \param i The number of event to be read
 
   fSensitiveDetector->Register();
   RegisterStack();
   fRootManager->ReadEvent(i);
-}  
-  
+}
+
 //_____________________________________________________________________________
 void MCApplication::ConstructGeometry()
-{    
+{
 /// Construct geometry using detector contruction class.
 /// The detector contruction class is using TGeo functions or
 /// TVirtualMC functions (if oldGeometry is selected)
 
   fVerbose.ConstructGeometry();
 
-  fDetConstruction->Construct();  
+  fDetConstruction->Construct();
 }
 
 //_____________________________________________________________________________
 void MCApplication::InitGeometry()
-{    
+{
 /// Initialize geometry
-  
+
   fVerbose.InitGeometry();
-  
+
   fSensitiveDetector->Initialize();
 }
 
 //_____________________________________________________________________________
 void MCApplication::GeneratePrimaries()
-{    
+{
 /// Fill the user stack (derived from TVirtualMCStack) with primary particles.
-  
+
   fVerbose.GeneratePrimaries();
 
-  TVector3 origin;      
+  TVector3 origin;
   fPrimaryGenerator->GeneratePrimaries(origin);
 }
 
 //_____________________________________________________________________________
 void MCApplication::BeginEvent()
-{    
+{
 /// User actions at beginning of event
 
   fVerbose.BeginEvent();
 
   // Clear TGeo tracks (if filled)
-  if (   TString(gMC->GetName()) == "TGeant3TGeo" && 
+  if (   TString(gMC->GetName()) == "TGeant3TGeo" &&
          gGeoManager->GetListOfTracks() &&
          gGeoManager->GetTrack(0) &&
        ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
-       
-       gGeoManager->ClearTracks();	  
-       //if (gPad) gPad->Clear();	  
-  }    
+
+       gGeoManager->ClearTracks();
+       //if (gPad) gPad->Clear();
+  }
 
   fEventNo++;
   cout<<" Start generating event Nr "<< fEventNo << endl;
@@ -315,17 +315,17 @@ void MCApplication::BeginEvent()
 
 //_____________________________________________________________________________
 void MCApplication::BeginPrimary()
-{    
+{
 /// User actions at beginning of a primary track.
 /// If test for user defined decay is activated,
 /// the primary track ID is printed on the screen.
 
-  fVerbose.BeginPrimary();   
+  fVerbose.BeginPrimary();
 }
 
 //_____________________________________________________________________________
 void MCApplication::PreTrack()
-{    
+{
 /// User actions at beginning of each track
 /// If test for user defined decay is activated,
 /// the decay products of the primary track (K0Short)
@@ -336,7 +336,7 @@ void MCApplication::PreTrack()
 
 //_____________________________________________________________________________
 void MCApplication::Stepping()
-{    
+{
 /// User actions at each step
 
   // Work around for Fluka VMC, which does not call
@@ -348,8 +348,8 @@ void MCApplication::Stepping()
        gMC->GetStack()->GetCurrentTrackNumber() != trackId ) {
     fVerbose.PreTrack();
     trackId = gMC->GetStack()->GetCurrentTrackNumber();
-  }      
-    
+  }
+
   fVerbose.Stepping();
 
   fSensitiveDetector->ProcessHits();
@@ -357,7 +357,7 @@ void MCApplication::Stepping()
 
 //_____________________________________________________________________________
 void MCApplication::PostTrack()
-{    
+{
 /// User actions after finishing of each track
 
   fVerbose.PostTrack();
@@ -365,7 +365,7 @@ void MCApplication::PostTrack()
 
 //_____________________________________________________________________________
 void MCApplication::FinishPrimary()
-{    
+{
 /// User actions after finishing of a primary track
 
   fVerbose.FinishPrimary();
@@ -373,7 +373,7 @@ void MCApplication::FinishPrimary()
 
 //_____________________________________________________________________________
 void MCApplication::FinishEvent()
-{    
+{
 /// User actions after finishing of an event
 
   fVerbose.FinishEvent();
@@ -384,7 +384,7 @@ void MCApplication::FinishEvent()
 
   // reset data
   fSensitiveDetector->EndOfEvent();
-  fStack->Reset();  
+  fStack->Reset();
 }
 
 }

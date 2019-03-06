@@ -24,5 +24,5 @@ void basiclibs()
   gSystem->Load("libGeom");
   gSystem->Load("libVMC");
   gSystem->Load("libPhysics");
-  gSystem->Load("libTree");  
-}  
+  gSystem->Load("libTree");
+}

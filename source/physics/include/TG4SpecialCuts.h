@@ -11,10 +11,10 @@
 //-------------------------------------------------
 
 /// \file TG4SpecialCuts.h
-/// \brief Definition of the TG4SpecialCutsFor* classes  
+/// \brief Definition of the TG4SpecialCutsFor* classes
 ///
-/// The specifications of TG4VSpecialCuts process class 
-/// for different particle types. They implement only 
+/// The specifications of TG4VSpecialCuts process class
+/// for different particle types. They implement only
 /// the GetMinEkine() abstract function.
 ///
 /// \author I. Hrivnacova; IPN Orsay
@@ -80,7 +80,7 @@ class TG4SpecialCutsForEplus: public TG4VSpecialCuts
     // methods
     virtual G4double GetMinEkine(const TG4Limits& limits,
                                  const G4Track& track) const;
-    virtual G4VParticleChange* PostStepDoIt(const G4Track& track, 
+    virtual G4VParticleChange* PostStepDoIt(const G4Track& track,
                                             const G4Step& /*step*/);
 };
 

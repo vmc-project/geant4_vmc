@@ -1,5 +1,5 @@
 #ifndef TG4_EVENT_ACTION_H
-#define TG4_EVENT_ACTION_H 
+#define TG4_EVENT_ACTION_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4EventAction.h
-/// \brief Definition of the TG4EventAction class 
+/// \brief Definition of the TG4EventAction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -43,7 +43,7 @@ class TG4EventAction : public G4UserEventAction,
   public:
     TG4EventAction();
     virtual ~TG4EventAction();
-    
+
     // methods
     void LateInitialize();
     virtual void BeginOfEventAction(const G4Event* event);
@@ -53,7 +53,7 @@ class TG4EventAction : public G4UserEventAction,
     void SetMCStack(TVirtualMCStack*  mcStack);
     void SetPrintMemory(G4bool printMemory);
     void SetSaveRandomStatus(G4bool saveRandomStatus);
-    
+
     // get methods
     G4bool  GetPrintMemory() const;
     G4bool  GetSaveRandomStatus() const;
@@ -99,10 +99,10 @@ inline void TG4EventAction::SetMCStack(TVirtualMCStack* mcStack) {
 
 inline void TG4EventAction::SetPrintMemory(G4bool printMemory) {
   /// Set option for printing memory usage
-  fPrintMemory = printMemory; 
+  fPrintMemory = printMemory;
 }
 
-inline G4bool TG4EventAction::GetPrintMemory() const {   
+inline G4bool TG4EventAction::GetPrintMemory() const {
   /// Return the option for printing memory usage
   return fPrintMemory;
 }

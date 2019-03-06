@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4SpecialCutsPhysics.cxx
-/// \brief Implementation of the TG4SpecialCutsPhysics class 
+/// \brief Implementation of the TG4SpecialCutsPhysics class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -57,7 +57,7 @@ TG4SpecialCutsPhysics::TG4SpecialCutsPhysics(
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsPhysics::~TG4SpecialCutsPhysics() 
+TG4SpecialCutsPhysics::~TG4SpecialCutsPhysics()
 {
 /// Destructor
 
@@ -84,7 +84,7 @@ void TG4SpecialCutsPhysics::ConstructParticle()
 void TG4SpecialCutsPhysics::ConstructProcess()
 {
 /// Add TG4SpecialCuts "process" that activates
-/// the kinetic energy cuts defined in 
+/// the kinetic energy cuts defined in
 /// the vector of cuts (PhysicsManager::fCutVector) or in TG4Limits.
 
   // create processes
@@ -107,19 +107,19 @@ void TG4SpecialCutsPhysics::ConstructProcess()
     // skip particles which do not have process manager
     if ( ! particle->GetProcessManager() ) continue;
 
-    TG4G3ParticleWSP particleWSP 
+    TG4G3ParticleWSP particleWSP
       = g3PhysicsManager->GetG3ParticleWSP(particle);
     G4String name =
       g3PhysicsManager->GetG3ParticleWSPName(particleWSP);
-      
+
     // uncomment this to see all particles "WSP"
-    //G4cout << "Iterating particle: " 
+    //G4cout << "Iterating particle: "
     //       << particle->GetParticleName() << " " << particleWSP << " "
     //       << name << G4endl;
 
     if ( (particleWSP !=kNofParticlesWSP) ) {
       // special process is created in any case
-   
+
       G4ProcessManager* pManager = particle->GetProcessManager();
       switch (particleWSP) {
         case kGamma:
@@ -128,16 +128,16 @@ void TG4SpecialCutsPhysics::ConstructProcess()
         case kElectron:
           pManager->AddDiscreteProcess(fSpecialCutsForElectron);
               break;
-        case kEplus:  
+        case kEplus:
           pManager->AddDiscreteProcess(fSpecialCutsForEplus);
               break;
-        case kChargedHadron:  
+        case kChargedHadron:
           pManager->AddDiscreteProcess(fSpecialCutsForChargedHadron);
               break;
-        case kNeutralHadron:  
+        case kNeutralHadron:
           pManager->AddDiscreteProcess(fSpecialCutsForNeutralHadron);
               break;
-        case kMuon:  
+        case kMuon:
           pManager->AddDiscreteProcess(fSpecialCutsForMuon);
               break;
         case kAny:
@@ -147,10 +147,10 @@ void TG4SpecialCutsPhysics::ConstructProcess()
               // cannot happen
               break;
       }
-    }    
+    }
   }
 
-  if (VerboseLevel() > 0) 
+  if (VerboseLevel() > 0)
     G4cout << "### Special Cuts constructed. " << G4endl;
 }
 

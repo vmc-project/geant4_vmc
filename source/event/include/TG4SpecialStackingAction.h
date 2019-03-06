@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4SpecialStackingAction.h
-/// \brief Definition of the TG4SpecialStackingAction class 
+/// \brief Definition of the TG4SpecialStackingAction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -24,10 +24,10 @@ class G4Track;
 class G4TrackStack;
 
 /// \ingroup event
-/// \brief Defines a special stacking mechanism 
-/// 
+/// \brief Defines a special stacking mechanism
+///
 /// Class that defines a special stacking mechanism,
-/// with which all secondaries produced by a primary particle 
+/// with which all secondaries produced by a primary particle
 /// and its daughters are tracked before starting a new primary
 /// (activated by default).
 /// The class is also used for skipping neutrina
@@ -48,11 +48,11 @@ class TG4SpecialStackingAction : public G4UserStackingAction,
     G4ClassificationOfNewTrack ClassifyNewTrack(const G4Track* track);
     void NewStage();
     void PrepareNewEvent();
-    
+
     // set method
     void SetSkipNeutrino(G4bool value);
     void SetWaitPrimary(G4bool value);
-    
+
     // get method
     G4bool GetSkipNeutrino() const;
     G4bool GetWaitPrimary() const;
@@ -67,10 +67,10 @@ class TG4SpecialStackingAction : public G4UserStackingAction,
     TG4SpecialStackingActionMessenger  fMessenger; ///< messenger
     /// Stage number
     G4int   fStage;
-    /// Option to skip tracking of all neutrina  
+    /// Option to skip tracking of all neutrina
     G4bool  fSkipNeutrino;
     /// Option to let the next primary wait until all secondaries of previous primary are tracked
-    G4bool  fWaitPrimary; 
+    G4bool  fWaitPrimary;
 };
 
 // inline functions
@@ -78,11 +78,11 @@ class TG4SpecialStackingAction : public G4UserStackingAction,
 /// Set the option for skipping neutrino
 inline void TG4SpecialStackingAction::SetSkipNeutrino(G4bool value)
 { fSkipNeutrino = value; }
-    
+
 /// Set the option to let the next primary wait until all secondaries of previous primary are tracked
 inline void TG4SpecialStackingAction::SetWaitPrimary(G4bool value)
 { fWaitPrimary = value; }
-    
+
 /// Return the option for skipping neutrino
 inline G4bool TG4SpecialStackingAction::GetSkipNeutrino() const
 { return fSkipNeutrino; }

@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01HadCalorimeterSD.cxx 
-/// \brief Implementation of the A01HadCalorimeterSD class 
+/// \file A01HadCalorimeterSD.cxx
+/// \brief Implementation of the A01HadCalorimeterSD class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo \n
 ///
@@ -32,9 +32,9 @@ ClassImp(A01HadCalorimeterSD)
 
 using namespace std;
 
-const Int_t A01HadCalorimeterSD::fgkNofColumns = 10; 
-const Int_t A01HadCalorimeterSD::fgkNofRows = 2; 
- 
+const Int_t A01HadCalorimeterSD::fgkNofColumns = 10;
+const Int_t A01HadCalorimeterSD::fgkNofRows = 2;
+
 //_____________________________________________________________________________
 A01HadCalorimeterSD::A01HadCalorimeterSD(const char* name)
   : TNamed(name, ""),
@@ -53,7 +53,7 @@ A01HadCalorimeterSD::A01HadCalorimeterSD(const char* name)
     for (Int_t iRow=0; iRow<fgkNofRows; ++iRow) {
       new ((*fCalCollection)[counter++]) A01HadCalorHit();
     }
-  }    
+  }
 }
 
 //_____________________________________________________________________________
@@ -74,7 +74,7 @@ A01HadCalorimeterSD::A01HadCalorimeterSD(const A01HadCalorimeterSD& origin)
     for (Int_t iRow=0; iRow<fgkNofRows; ++iRow) {
       new ((*fCalCollection)[counter++]) A01HadCalorHit();
     }
-  }    
+  }
 }
 
 //_____________________________________________________________________________
@@ -115,9 +115,9 @@ void  A01HadCalorimeterSD::ResetHits()
 {
 /// Reset all hits in the hits collection.
 
-  for (Int_t i=0; i<fCalCollection->GetEntriesFast(); i++) 
+  for (Int_t i=0; i<fCalCollection->GetEntriesFast(); i++)
     GetHit(i)->Reset();
-} 
+}
 
 //
 // public methods
@@ -128,9 +128,9 @@ void A01HadCalorimeterSD::Initialize()
 {
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
-  
+
   if ( TMCRootManager::Instance() ) Register();
-  
+
   fVolId = gMC->VolId("HadCalScintiLogical");
 }
 
@@ -145,12 +145,12 @@ Bool_t A01HadCalorimeterSD::ProcessHits()
 
   Double_t edep = gMC->Edep();
   if ( edep == 0. ) return false;
-  
+
   Int_t rowNo;
   gMC->CurrentVolOffID(2, rowNo);
   Int_t columnNo;
   gMC->CurrentVolOffID(3, columnNo);
-  // VMC adopts Root numbering of divisions starting from 1 
+  // VMC adopts Root numbering of divisions starting from 1
   rowNo--;
   columnNo--;
   Int_t hitID = fgkNofRows*columnNo + rowNo;
@@ -160,16 +160,16 @@ Bool_t A01HadCalorimeterSD::ProcessHits()
     std::cerr << "No hit found for layer with "
               << "rowNo = " << rowNo << " columnNo = " << columnNo << endl;
     return false;
-  }  
-  
+  }
+
   // check if it is the first touch
   if ( hit->GetColumnID() < 0 ) {
     // Debug printing (to check hits indexing)
-    //cout << "HadCalorimeter: First Add in hit in (column, row): " 
+    //cout << "HadCalorimeter: First Add in hit in (column, row): "
     //     << columnNo << ", " << rowNo << endl;
-    //cout << "gMC->CurrentVolOffName(2), gMC->CurrentVolOffName(3): " 
+    //cout << "gMC->CurrentVolOffName(2), gMC->CurrentVolOffName(3): "
     //     << gMC->CurrentVolOffName(2) << ", "  << gMC->CurrentVolOffName(3) << endl;
-  
+
     // fill volume information
     hit->SetRowID(rowNo);
     hit->SetColumnID(columnNo);
@@ -190,41 +190,41 @@ void A01HadCalorimeterSD::EndOfEvent()
 /// Print hits collection (if verbose) and reset hits afterwards.
 
   if ( fVerboseLevel > 0 )  PrintTotal();
-    
+
   // Reset hits collection
-  ResetHits();  
+  ResetHits();
 }
 
 //_____________________________________________________________________________
 void A01HadCalorimeterSD::Register()
 {
 /// Register the hits collection in Root manager.
-  
+
   if ( fWriteHits ) {
     TMCRootManager::Instance()
       ->Register(GetName(), "TClonesArray", &fCalCollection);
-  }    
+  }
 }
 
 //_____________________________________________________________________________
 void A01HadCalorimeterSD::Print(Option_t* /*option*/) const
 {
 /// Print the hits collection.
-  
+
    Int_t nofHits = fCalCollection->GetEntriesFast();
-     
+
    cout << "\n-------->Hits Collection: in this event: " << endl;
-	    
+
    if ( fVerboseLevel > 1 ) {
-     for (Int_t i=0; i<nofHits; i++) (*fCalCollection)[i]->Print();   
-   }         
+     for (Int_t i=0; i<nofHits; i++) (*fCalCollection)[i]->Print();
+   }
 }
 
 //_____________________________________________________________________________
 void A01HadCalorimeterSD::PrintTotal() const
 {
 /// Print the total values for all layers.
-  
+
   Int_t nofHits = 0;
   Double_t totalEdep = 0.;
   for (Int_t i=0; i<fgkNofColumns*fgkNofRows; ++i) {

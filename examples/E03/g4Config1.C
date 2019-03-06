@@ -16,16 +16,16 @@
 void Config()
 {
 /// The configuration function for Geant4 VMC for Example03
-/// called during MC application initialization. 
+/// called during MC application initialization.
 /// For geometry defined with Geant4 in a user run configuration.
 
   // Run configuration with user geometry construction via Geant4
-  Ex03RunConfiguration1* runConfiguration 
+  Ex03RunConfiguration1* runConfiguration
     = new Ex03RunConfiguration1("FTFP_BERT");
-  
+
   // Run configuration with user geometry construction via Geant4
   // + special cuts activated
-  // Ex03RunConfiguration1* runConfiguration 
+  // Ex03RunConfiguration1* runConfiguration
   //   = new Ex03RunConfiguration1("FTFP_BERT", "specialCuts");
 
   // TGeant4

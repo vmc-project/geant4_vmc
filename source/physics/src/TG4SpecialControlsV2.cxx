@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4SpecialControlsV2.cxx
-/// \brief Implementation of the TG4SpecialControlsV2 class 
+/// \brief Implementation of the TG4SpecialControlsV2 class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -36,13 +36,13 @@ TG4SpecialControlsV2::TG4SpecialControlsV2()
 }
 
 //_____________________________________________________________________________
-TG4SpecialControlsV2::~TG4SpecialControlsV2() 
+TG4SpecialControlsV2::~TG4SpecialControlsV2()
 {
 /// Destructor
 }
 
 //
-// private methods   
+// private methods
 //
 
 //_____________________________________________________________________________
@@ -52,32 +52,32 @@ void TG4SpecialControlsV2::SetSwitch()
 
   // get limits
 #ifdef MCDEBUG
-  TG4Limits* limits 
+  TG4Limits* limits
      = TG4GeometryServices::Instance()
          ->GetLimits(fkTrack->GetNextVolume()->GetLogicalVolume()->GetUserLimits());
-#else  
-  TG4Limits* limits 
+#else
+  TG4Limits* limits
     = (TG4Limits*) fkTrack->GetNextVolume()->GetLogicalVolume()->GetUserLimits();
-#endif    
+#endif
 
   if ( ! limits ) {
     TG4Globals::Warning(
-      "TG4SpecialControlsV2", "SetSwitch", 
-      "No limits defined in " + 
+      "TG4SpecialControlsV2", "SetSwitch",
+      "No limits defined in " +
       TString(fkTrack->GetNextVolume()->GetLogicalVolume()->GetName()));
-    return;   
-  }  
+    return;
+  }
 
   if ( fSwitch != kUnswitch ) {
     if  ( limits->IsControl() ) {
       // particle is exiting a logical volume with special controls
-      // and entering another logical volume with special controls 
+      // and entering another logical volume with special controls
       fSwitch = kReswitch;
       if (VerboseLevel() > 1)  G4cout << "kReswitch" << G4endl;
     }
     else {
       // particle is exiting a logical volume with special controls
-      // and entering a logical volume without special controls 
+      // and entering a logical volume without special controls
       fSwitch = kUnswitch;
       if (VerboseLevel() > 1)  G4cout << "kUnswitch" << G4endl;
     }
@@ -87,26 +87,26 @@ void TG4SpecialControlsV2::SetSwitch()
     // that have not yet been set
     fSwitch = kSwitch;
     if (VerboseLevel() > 1) G4cout << "kSwitch" << G4endl;
-  }    
+  }
 }
 
 //_____________________________________________________________________________
 void TG4SpecialControlsV2::Reset()
 {
 /// Reset the buffers to the initial state.
-                            
+
   fSwitch = kUnswitch;
 
   // clear buffers
   fSwitchedProcesses.clear();
   fSwitchedControls.clear();
-  fProcessActivations.clear(); 
+  fProcessActivations.clear();
 }
 
 //
-// public methods   
+// public methods
 //
-          
+
 //_____________________________________________________________________________
 void TG4SpecialControlsV2::StartTrack(const G4Track* track)
 {
@@ -114,15 +114,15 @@ void TG4SpecialControlsV2::StartTrack(const G4Track* track)
 
   // check applicability
   G4ParticleDefinition* particle = track->GetDefinition();
-  TG4G3ParticleWSP particleWSP 
+  TG4G3ParticleWSP particleWSP
       = TG4G3PhysicsManager::Instance()->GetG3ParticleWSP(particle);
 
   if ( particleWSP == kNofParticlesWSP ) {
     fIsApplicable = false;
     fkTrack = 0;
     return;
-  }  
-  
+  }
+
   // set applicability, current track
   fIsApplicable = true;
   fkTrack = track;
@@ -134,7 +134,7 @@ void TG4SpecialControlsV2::StartTrack(const G4Track* track)
 
   for (G4int i=0; i<processVector->length(); i++) {
     fProcessActivations.push_back(processManager->GetProcessActivation(i));
-  }  
+  }
 
   // apply controls
   ApplyControls();
@@ -150,9 +150,9 @@ void TG4SpecialControlsV2::ApplyControls()
 #ifdef MCDEBUG
   if ( ! fkTrack ) {
     TG4Globals::Exception(
-      "TG4SpecialControlsV2", "ApplyControls", "No track is set."); 
+      "TG4SpecialControlsV2", "ApplyControls", "No track is set.");
   }
-#endif    
+#endif
 
   SetSwitch();
 
@@ -161,11 +161,11 @@ void TG4SpecialControlsV2::ApplyControls()
   G4ProcessVector* processVector = processManager->GetProcessList();
 
   if ( fSwitch == kUnswitch || fSwitch == kReswitch ) {
-  
+
     // set processes activation back
     for ( G4int i=0; i<fSwitchedProcesses.length(); i++ ) {
       if ( VerboseLevel() > 1 ) {
-        G4cout << "Reset process activation back in " 
+        G4cout << "Reset process activation back in "
                << fkTrack->GetNextVolume()->GetName()
                << G4endl;
       }
@@ -179,7 +179,7 @@ void TG4SpecialControlsV2::ApplyControls()
   if ( fSwitch == kSwitch || fSwitch == kReswitch ) {
 
     // set TG4Limits processes controls
-    TG4Limits* limits 
+    TG4Limits* limits
     = (TG4Limits*) fkTrack->GetNextVolume()->GetLogicalVolume()->GetUserLimits();
 
     for ( G4int i=0; i<processVector->length(); i++ ) {
@@ -187,37 +187,37 @@ void TG4SpecialControlsV2::ApplyControls()
       TG4G3ControlValue control = limits->GetControl((*processVector)[i]);
       G4bool activation = processManager->GetProcessActivation(i);
 
-      if (   control != kUnsetControlValue && 
+      if (   control != kUnsetControlValue &&
            ! TG4Globals::Compare(activation, control) ) {
 
         // store the current processes controls
         if (VerboseLevel() > 1) {
           G4cout << "Something goes to fSwitchedProcesses" << G4endl;
-        }  
+        }
         fSwitchedProcesses.insert((*processVector)[i]);
         fSwitchedControls.push_back(activation);
 
         // set new process activation
         if (control == kInActivate) {
           if (VerboseLevel() > 1) {
-            G4cout << "Set process inactivation for " 
-                   << (*processVector)[i]->GetProcessName() << " in " 
+            G4cout << "Set process inactivation for "
+                   << (*processVector)[i]->GetProcessName() << " in "
                        << fkTrack->GetNextVolume()->GetName()
                    << G4endl;
           }
           processManager->SetProcessActivation(i,false);
-        }  
+        }
         else {
-          // ((control == kActivate) || (control == kActivate2)) 
+          // ((control == kActivate) || (control == kActivate2))
           if (VerboseLevel() > 1) {
-            G4cout << "Set process activation for " 
-                   << (*processVector)[i]->GetProcessName() << " in " 
+            G4cout << "Set process activation for "
+                   << (*processVector)[i]->GetProcessName() << " in "
                    << fkTrack->GetNextVolume()->GetName()
                    << G4endl;
           }
           processManager->SetProcessActivation(i,true);
         }
-      }         
+      }
     }
   }
 }
@@ -235,9 +235,9 @@ void TG4SpecialControlsV2::RestoreProcessActivations()
   for (G4int i=0; i<processVector->length(); i++) {
     if ( processManager->GetProcessActivation(i) != fProcessActivations[i] ) {
       processManager->SetProcessActivation(i,fProcessActivations[i]);
-    }  
+    }
   }
-  
+
   Reset();
 }
 

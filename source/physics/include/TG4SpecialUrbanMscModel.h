@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4SpecialUrbanMscModel.h
-/// \brief Definition of the TG4SpecialUrbanMscModel class 
+/// \brief Definition of the TG4SpecialUrbanMscModel class
 ///
 /// \author Vladimir Ivanchenko, Laszlo Urban
 
@@ -102,7 +102,7 @@ public:
   G4double ComputeCrossSectionPerAtom(const G4ParticleDefinition* particle,
 				      G4double KineticEnergy,
 				      G4double AtomicNumber,
-				      G4double AtomicWeight=0., 
+				      G4double AtomicWeight=0.,
 				      G4double cut =0.,
 				      G4double emax=DBL_MAX);
 
@@ -115,7 +115,7 @@ public:
 
   G4double ComputeTrueStepLength(G4double geomStepLength);
 
-  inline G4double ComputeTheta0(G4double truePathLength, 
+  inline G4double ComputeTheta0(G4double truePathLength,
 				G4double KineticEnergy);
 
 private:
@@ -125,7 +125,7 @@ private:
   inline void SetParticle(const G4ParticleDefinition*);
 
   inline void UpdateCache();
-  
+
   inline G4double SimpleScattering(G4double xmeanth, G4double x2meanth);
 
   inline G4double LatCorrelation();
@@ -174,7 +174,7 @@ private:
   G4double stepmin;
 
   G4double currentKinEnergy;
-  G4double currentRange; 
+  G4double currentRange;
   G4double rangeinit;
   G4double currentRadLength;
 
@@ -216,7 +216,7 @@ void TG4SpecialUrbanMscModel::SetParticle(const G4ParticleDefinition* p)
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 inline
-void TG4SpecialUrbanMscModel::UpdateCache()                                   
+void TG4SpecialUrbanMscModel::UpdateCache()
 {
     lnZ = G4Log(Zeff);
     // correction in theta0 formula
@@ -233,8 +233,8 @@ void TG4SpecialUrbanMscModel::UpdateCache()
     coeffc4  = 1.7888e-2 + Z13*(1.9659e-2 - Z13*2.6664e-3);
 
     Z2   = Zeff*Zeff;
-    Z23  = Z13*Z13;               
-                                              
+    Z23  = Z13*Z13;
+
     Zold = Zeff;
 }
 
@@ -285,7 +285,7 @@ G4double TG4SpecialUrbanMscModel::LatCorrelation()
 {
   static const G4double kappa = 2.5;
   static const G4double kappami1 = 1.5;
-  
+
   G4double latcorr = 0.;
   if((currentTau >= tausmall) && !insideskin)
   {

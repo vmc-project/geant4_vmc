@@ -13,18 +13,18 @@
 
 /// \ingroup Monopole
 /// \file Monopole/run_g4.C
-/// \brief Macro for running Monopole example with Geant4. 
+/// \brief Macro for running Monopole example with Geant4.
 
-void run_g4(const TString& configMacro = "g4Config.C") 
+void run_g4(const TString& configMacro = "g4Config.C")
 {
 /// Macro function for running Monopole example with Geant4 from
 /// Root interactive session.
 /// Note that since Root 6 the libraries have to be loaded first
 /// via load_g4.C.
-/// \param configMacro configuration macro name, default \ref Monopole/g4Config.C 
+/// \param configMacro configuration macro name, default \ref Monopole/g4Config.C
 
   // MC application
-  VMC::Monopole::MCApplication* appl 
+  VMC::Monopole::MCApplication* appl
     = new VMC::Monopole::MCApplication("ExampleMonopole", "The example Monopole MC application");
 
   // Set detector parameters
@@ -54,7 +54,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
 
   // Run MC
   TStopwatch timer;
-  timer.Start();  
+  timer.Start();
   appl->RunMC(5);
   timer.Stop();
   timer.Print();

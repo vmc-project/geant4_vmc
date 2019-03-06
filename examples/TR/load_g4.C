@@ -9,11 +9,11 @@
 
 /// \ingroup TR
 /// \file TR/run_g4.C
-/// \brief Macro for loading libraries to run ExamplTR with Geant4. 
+/// \brief Macro for loading libraries to run ExamplTR with Geant4.
 
 #include "../macro/g4libs.C"
 
-void load_g4() 
+void load_g4()
 {
   // Load Geant4 + VMC libraries
   g4libs();
@@ -21,4 +21,4 @@ void load_g4()
   // Load this example library
   gSystem->Load("libmtroot");
   gSystem->Load("libvmc_TR");
-}  
+}

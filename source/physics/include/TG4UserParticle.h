@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4UserParticle.h
-/// \brief Definition of the TG4UserParticle class 
+/// \brief Definition of the TG4UserParticle class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -32,23 +32,23 @@ class TG4UserParticle : public G4ParticleDefinition
   public:
     TG4UserParticle(
        const G4String& name,
-       TMCParticleType mcType,        
+       TMCParticleType mcType,
        G4double        mass,
-       G4double        width,        
-       G4double        charge,   
-       G4int           iSpin,        
-       G4int           iParity,    
-       G4int           iConjugation, 
-       G4int           iIsospin,   
-       G4int           iIsospin3,    
+       G4double        width,
+       G4double        charge,
+       G4int           iSpin,
+       G4int           iParity,
+       G4int           iConjugation,
+       G4int           iIsospin,
+       G4int           iIsospin3,
        G4int           gParity,
-       const G4String& pType,        
-       G4int           lepton,      
-       G4int           baryon,       
+       const G4String& pType,
+       G4int           lepton,
+       G4int           baryon,
        G4int           encoding,
-       G4bool          stable,       
+       G4bool          stable,
        G4double        lifetime,
-       G4DecayTable    *decaytable,  
+       G4DecayTable    *decaytable,
        G4bool          shortlived,
        const G4String& subType ="",
        G4int           anti_encoding =0,
@@ -56,14 +56,14 @@ class TG4UserParticle : public G4ParticleDefinition
        G4double        excitation = 0.0
     );
     virtual ~TG4UserParticle();
-  
+
     TMCParticleType  GetMCType() const;
-    G4double         GetExcitationEnergy() const ; 
+    G4double         GetExcitationEnergy() const ;
 
   private:
     /// Not implemented
     TG4UserParticle();
-    
+
     // data members
     TMCParticleType  fMCType;           ///< particle MC type
     G4double         fExcitationEnergy; ///< excitation energy

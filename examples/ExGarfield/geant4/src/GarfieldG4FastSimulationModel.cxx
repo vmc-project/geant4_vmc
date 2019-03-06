@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file  Garfield/geant4/src/GarfieldG4FastSimulationModel.cxx
-/// \brief Implementation of the GarfieldG4FastSimulationModel class 
+/// \brief Implementation of the GarfieldG4FastSimulationModel class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 /// This class is imported from garfieldpp example.

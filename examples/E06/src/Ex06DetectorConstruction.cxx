@@ -7,16 +7,16 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex06DetectorConstruction.cxx 
-/// \brief Implementation of the Ex06DetectorConstruction class 
+/// \file Ex06DetectorConstruction.cxx
+/// \brief Implementation of the Ex06DetectorConstruction class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
-/// Id: ExN06DetectorConstruction.cc,v 1.14 2004/03/17 22:41:12 gum Exp 
-/// GEANT4 tag Name: geant4-07-00-cand-01 
+/// Id: ExN06DetectorConstruction.cc,v 1.14 2004/03/17 22:41:12 gum Exp
+/// GEANT4 tag Name: geant4-07-00-cand-01
 ///
 /// \date 16/05/2005
 /// \author I. Hrivnacova; IPN, Orsay
- 
+
 #include <Riostream.h>
 #include <TVirtualMC.h>
 #include <TGeoManager.h>
@@ -55,30 +55,30 @@ void Ex06DetectorConstruction::ConstructMaterials()
 {
 /// Construct materials using TGeo modeller
 
-  // Create Root geometry manager 
+  // Create Root geometry manager
   new TGeoManager("E06_geometry", "E06 VMC example geometry");
 
-  Double_t a;        // Mass of a mole in g/mole   
+  Double_t a;        // Mass of a mole in g/mole
   Double_t z;        // Atomic number
   Double_t density;  // Material density in g/cm3
- 
+
   // Elements
-  
+
   TGeoElement* elH  = new TGeoElement("Hydrogen", "H", z= 1,  a= 1.01);
   TGeoElement* elN  = new TGeoElement("Nitrogen", "N", z= 7., a= 14.01);
   TGeoElement* elO  = new TGeoElement("Oxygen"  , "O", z= 8., a= 16.00);
-  
+
   // Materials
 
   TGeoMixture* matAir
     = new TGeoMixture("Air", 2, density = 1.29e-03);
-  matAir->AddElement(elN, 0.7); 
-  matAir->AddElement(elO, 0.3); 
+  matAir->AddElement(elN, 0.7);
+  matAir->AddElement(elO, 0.3);
 
   TGeoMixture* matH2O
     = new TGeoMixture("Water", 2, density = 1.000);
-  matH2O->AddElement(elH, 2);  
-  matH2O->AddElement(elO, 1);  
+  matH2O->AddElement(elH, 2);
+  matH2O->AddElement(elO, 1);
 
   // Tracking media
 
@@ -86,19 +86,19 @@ void Ex06DetectorConstruction::ConstructMaterials()
   param[0] = 0;     // isvol  - Not used
   param[1] = 2;     // ifield - User defined magnetic field
   param[2] = 10.;   // fieldm - Maximum field value (in kiloGauss)
-  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection 
-  param[4] = -0.01; // stemax - Maximum displacement for multiple scat 
-  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS 
+  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection
+  param[4] = -0.01; // stemax - Maximum displacement for multiple scat
+  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS
   param[6] = .001;  // epsil - Tracking precision
   param[7] = -.8;   // stmin
   for ( Int_t i=8; i<20; ++i) param[i] = 0.;
 
   fImedAir = 1;
   new TGeoMedium("Air", fImedAir, matAir, param);
-  
+
   fImedWater = 2;
   new TGeoMedium("Water", fImedWater, matH2O, param);
-}    
+}
 
 //_____________________________________________________________________________
 void Ex06DetectorConstruction::ConstructGeometry()
@@ -113,31 +113,31 @@ void Ex06DetectorConstruction::ConstructGeometry()
   expHall[0] = fExpHallSize;
   expHall[1] = fExpHallSize;
   expHall[2] = fExpHallSize;
-  TGeoVolume* expHallV 
+  TGeoVolume* expHallV
     = gGeoManager->Volume("WRLD","BOX", fImedAir, expHall, 3);
   gGeoManager->SetTopVolume(expHallV);
-   
+
 // The Water Tank
-//	
+//
   Double_t waterTank[3];
   waterTank[0] = fTankSize;
   waterTank[1] = fTankSize;
   waterTank[2] = fTankSize;
   gGeoManager->Volume("TANK","BOX", fImedWater, waterTank, 3);
-   
+
   Double_t posX =  0.;
   Double_t posY =  0.;
   Double_t posZ =  0.;
   gGeoManager->Node("TANK", 1 ,"WRLD", posX, posY, posZ, 0, kTRUE, ubuf);
-  
-// The Air Bubble 
-//	
+
+// The Air Bubble
+//
   Double_t bubbleAir[3];
   bubbleAir[0] = fBubbleSize;
   bubbleAir[1] = fBubbleSize;
   bubbleAir[2] = fBubbleSize;
   gGeoManager->Volume("BUBL","BOX", fImedAir, bubbleAir, 3);
-   
+
   posX =  0.;
   posY =  250.;
   posZ =  0.;
@@ -149,7 +149,7 @@ void Ex06DetectorConstruction::ConstructGeometry()
   // notify VMC about Root geometry
   gMC->SetRootGeometry();
 }
-    
+
 //_____________________________________________________________________________
 void Ex06DetectorConstruction::ConstructOpGeometry()
 {
@@ -171,10 +171,10 @@ void Ex06DetectorConstruction::ConstructOpGeometry()
               2.757e-09, 2.820e-09, 2.885e-09, 2.954e-09,
               3.026e-09, 3.102e-09, 3.181e-09, 3.265e-09,
               3.353e-09, 3.446e-09, 3.545e-09, 3.649e-09,
-              3.760e-09, 3.877e-09, 4.002e-09, 4.136e-09 }; 
+              3.760e-09, 3.877e-09, 4.002e-09, 4.136e-09 };
 //
 // Water
-//	      
+//
   Double_t refractiveIndex1[nEntries] =
             { 1.3435, 1.344,  1.3445, 1.345,  1.3455,
               1.346,  1.3465, 1.347,  1.3475, 1.348,
@@ -215,11 +215,11 @@ void Ex06DetectorConstruction::ConstructOpGeometry()
               7.00, 6.00, 5.00, 4.00 };
 
   gMC->SetCerenkov(fImedWater, nEntries, photonEnergy,
-                   absorption1, efficiency1, refractiveIndex1); 
-                   
-  gMC->SetMaterialProperty(fImedWater, 
+                   absorption1, efficiency1, refractiveIndex1);
+
+  gMC->SetMaterialProperty(fImedWater,
                            "FASTCOMPONENT", nEntries, photonEnergy, scintilFast);
-  gMC->SetMaterialProperty(fImedWater, 
+  gMC->SetMaterialProperty(fImedWater,
                            "SLOWCOMPONENT", nEntries, photonEnergy, scintilSlow);
 
   gMC->SetMaterialProperty(fImedWater, "SCINTILLATIONYIELD", 50.e03);  // 50./MeV
@@ -275,7 +275,7 @@ void Ex06DetectorConstruction::ConstructOpGeometry()
   // gforward, gbackward, forward backward ratio
   Double_t mieWaterConst[3] = { 0.99, 0.99, 0.8 };
 
-  gMC->SetMaterialProperty(fImedWater, 
+  gMC->SetMaterialProperty(fImedWater,
                            "MIEHG", nEntriesWater, energyWater, mieWater);
   gMC->SetMaterialProperty(fImedWater, "MIEHG_FORWARD", mieWaterConst[0]);
   gMC->SetMaterialProperty(fImedWater, "MIEHG_BACKWARD", mieWaterConst[1]);
@@ -289,21 +289,21 @@ void Ex06DetectorConstruction::ConstructOpGeometry()
 //
 // Water Tank
 //
-  gMC->DefineOpSurface("WaterSurface", 
+  gMC->DefineOpSurface("WaterSurface",
                         kUnified, kDielectric_dielectric, kGround, 1.0);
 			          // CHECK default value of sigma alpha
-  gMC->SetBorderSurface("WaterSurface", 
+  gMC->SetBorderSurface("WaterSurface",
                        "TANK", 1, "WRLD", 1, "WaterSurface");
-                                  // the world copyNo is in VMC always 1 
-                       				  
-  
+                                  // the world copyNo is in VMC always 1
+
+
 // Air Bubble
 //
-  gMC->DefineOpSurface("AirSurface", 
+  gMC->DefineOpSurface("AirSurface",
                         kGlisur, kDielectric_dielectric, kPolished, 1.0);
 			          // CHECK default value of sigma alpha
-  gMC->SetSkinSurface("AirSurface", "BUBL", "AirSurface");				  
-  
+  gMC->SetSkinSurface("AirSurface", "BUBL", "AirSurface");
+
 
 //
 // Generate & Add Material Properties Table attached to the optical surfaces
@@ -311,27 +311,27 @@ void Ex06DetectorConstruction::ConstructOpGeometry()
   const Int_t num = 2;
   Double_t ephoton[num] = { 2.038e-09, 4.144e-09 };
 
-  // OpticalWaterSurface 
+  // OpticalWaterSurface
   Double_t refractiveIndex[num] = { 1.35, 1.40 };
   Double_t specularLobe[num]    = { 0.3, 0.3 };
   Double_t specularSpike[num]   = { 0.2, 0.2 };
   Double_t backscatter[num]     = { 0.2, 0.2 };
-  gMC->SetMaterialProperty("WaterSurface", 
-                           "RINDEX", num, ephoton, refractiveIndex);  
-  gMC->SetMaterialProperty("WaterSurface", 
-                           "SPECULARLOBECONSTANT", num, ephoton, specularLobe);  
-  gMC->SetMaterialProperty("WaterSurface", 
-                           "SPECULARSPIKECONSTANT", num, ephoton, specularSpike);  
-  gMC->SetMaterialProperty("WaterSurface", 
-                           "BACKSCATTERCONSTANT", num, ephoton, backscatter);  
+  gMC->SetMaterialProperty("WaterSurface",
+                           "RINDEX", num, ephoton, refractiveIndex);
+  gMC->SetMaterialProperty("WaterSurface",
+                           "SPECULARLOBECONSTANT", num, ephoton, specularLobe);
+  gMC->SetMaterialProperty("WaterSurface",
+                           "SPECULARSPIKECONSTANT", num, ephoton, specularSpike);
+  gMC->SetMaterialProperty("WaterSurface",
+                           "BACKSCATTERCONSTANT", num, ephoton, backscatter);
 
 
   //OpticalAirSurface
   Double_t reflectivity[num] = { 0.3, 0.5 };
   Double_t efficiency[num]   = { 0.8, 1.0 };
-  gMC->SetMaterialProperty("AirSurface", 
-                           "REFLECTIVITY", num, ephoton, reflectivity);  
-  gMC->SetMaterialProperty("AirSurface", 
-                           "EFFICIENCY", num, ephoton, efficiency);  
+  gMC->SetMaterialProperty("AirSurface",
+                           "REFLECTIVITY", num, ephoton, reflectivity);
+  gMC->SetMaterialProperty("AirSurface",
+                           "EFFICIENCY", num, ephoton, efficiency);
 }
 

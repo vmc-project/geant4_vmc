@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file MCApplication.cxx
-/// \brief Implementation of the MCApplication class 
+/// \brief Implementation of the MCApplication class
 ///
 /// Geant4 Monopole example adapted to Virtual Monte Carlo \n
 ///
@@ -53,7 +53,7 @@ namespace Monopole
 std::vector<TH1D*>  fHistograms;
 
 //_____________________________________________________________________________
-MCApplication::MCApplication(const char *name, const char *title) 
+MCApplication::MCApplication(const char *name, const char *title)
   : TVirtualMCApplication(name,title),
     fRootManager(0),
     fStack(0),
@@ -68,15 +68,15 @@ MCApplication::MCApplication(const char *name, const char *title)
     fIsMaster(kTRUE)
 {
 /// Standard constructor
-/// \param name   The MC application name 
+/// \param name   The MC application name
 /// \param title  The MC application description
 
   // Create a user stack
   fStack = new Ex03MCStack(1000);
-  
+
   // Create detector construction
   fDetConstruction = new DetectorConstruction();
-  
+
   // Constant magnetic field (in kiloGauss)
   fMagField = new TGeoUniformMagField(0, 0, 2);
 }
@@ -115,14 +115,14 @@ MCApplication::MCApplication()
     fImedAl(0),
     fNofEvents(0),
     fIsMaster(kTRUE)
-{    
+{
 /// Default constructor
 }
 
 //_____________________________________________________________________________
-MCApplication::~MCApplication() 
+MCApplication::~MCApplication()
 {
-/// Destructor  
+/// Destructor
 
   delete fStack;
   if ( fIsMaster) delete fDetConstruction;
@@ -151,10 +151,10 @@ void MCApplication::RegisterStack() const
 
 //_____________________________________________________________________________
 void MCApplication::InitMC(const char* setup)
-{    
+{
 /// Initialize MC.
 /// The selection of the concrete MC is done in the macro.
-/// \param setup The name of the configuration macro 
+/// \param setup The name of the configuration macro
 
   if ( TString(setup) != "" ) {
     gROOT->LoadMacro(setup);
@@ -200,9 +200,9 @@ void MCApplication::InitMC(const char* setup)
   // Define offset for filling histogram
   fOffsetX = -0.5 * length;  // in mm
 
-  // cout << "numBins, length, offsetX " 
+  // cout << "numBins, length, offsetX "
   //      << numBins << ", " << length << ", " << fOffsetX << endl;
- 
+
   // Create histograms
   // fHistograms.push_back(new TH1D("Edep_x", "Edep (MeV/mm) along absorber (mm)", numBins, 0, length));
   fHistograms.push_back(new TH1D("h1", "Edep (MeV/mm) along absorber (mm)", numBins, 0, length));
@@ -214,12 +214,12 @@ void MCApplication::InitMC(const char* setup)
   // fHistograms.push_back(new TH1D("x", "x", 100, -10, 10));
   // fHistograms.push_back(new TH1D("Edep (MeV)", "Edep (Mev)", 100, 0, 100));
 
-  RegisterStack();  
+  RegisterStack();
 }
 
 //__________________________________________________________________________
 void MCApplication::RunMC(Int_t nofEvents)
-{    
+{
 /// Run MC.
 /// \param nofEvents Number of events to be processed
 
@@ -230,7 +230,7 @@ void MCApplication::RunMC(Int_t nofEvents)
 
 //_____________________________________________________________________________
 void MCApplication::FinishRun()
-{    
+{
 /// Finish MC run.
 
   // Get monopole mass from TDatabasePDG
@@ -242,21 +242,21 @@ void MCApplication::FinishRun()
   }
 
   // run conditions
-  cout << "\n The run consists of " << fNofEvents << " monopole " 
-       << " of " << mass << " GeV " << " through " 
+  cout << "\n The run consists of " << fNofEvents << " monopole "
+       << " of " << mass << " GeV " << " through "
        << fDetConstruction->GetAbsorberSizeX() << " cm of "
-       << fDetConstruction->GetAbsorberMaterial() 
-       // << " (density: "  << G4BestUnit(density,"Volumic Mass") << ")" 
+       << fDetConstruction->GetAbsorberMaterial()
+       // << " (density: "  << G4BestUnit(density,"Volumic Mass") << ")"
        << endl;
-         
+
   //compute projected range and straggling
 
   fProjRange /= fNofEvents; fProjRange2 /= fNofEvents;
-  Double_t rms = fProjRange2 - fProjRange * fProjRange;        
-  if (rms>0.) { rms = std::sqrt(rms); } 
+  Double_t rms = fProjRange2 - fProjRange * fProjRange;
+  if (rms>0.) { rms = std::sqrt(rms); }
   else { rms = 0.; }
 
-  cout.precision(5);       
+  cout.precision(5);
   cout << "\n projected Range= " << fProjRange << " cm "
        << "   rms= "             << rms << " cm " << endl;
 
@@ -267,9 +267,9 @@ void MCApplication::FinishRun()
   G4int i;
   for(i = 0; i < 100; ++i) {
     ekin[i] = std::pow(10., 0.1*G4double(i)) * keV;
-    dedxproton[i] = 
+    dedxproton[i] =
       calc.ComputeElectronicDEDX(ekin[i], "proton", matName);
-    dedxmp[i] = 
+    dedxmp[i] =
       calc.ComputeElectronicDEDX(ekin[i], "monopole", matName);
   }
 
@@ -309,13 +309,13 @@ void MCApplication::FinishRun()
 /*
 
 //_____________________________________________________________________________
-TVirtualMCApplication* MCApplication::CloneForWorker() const 
+TVirtualMCApplication* MCApplication::CloneForWorker() const
 {
   return new MCApplication(*this);
 }
 
 //_____________________________________________________________________________
-void MCApplication::InitForWorker() const 
+void MCApplication::InitForWorker() const
 {
   // Create Root manager
   fRootManager
@@ -341,81 +341,81 @@ void MCApplication::FinishWorkerRun() const
 
 //_____________________________________________________________________________
 void MCApplication::ConstructGeometry()
-{    
+{
 /// Construct geometry using detector contruction class.
 /// The detector contruction class is using TGeo functions.
-  
-  fDetConstruction->ConstructGeometry();  
+
+  fDetConstruction->ConstructGeometry();
 }
 
 //_____________________________________________________________________________
 void MCApplication::InitGeometry()
-{    
+{
 /// Initialize geometry.
-  
+
   fImedAl = gMC->MediumId("Aluminium");
 }
 
 //_____________________________________________________________________________
 void MCApplication::GeneratePrimaries()
-{    
+{
 /// Fill the user stack (derived from TVirtualMCStack) with primary particles.
-  
+
  // Track ID (filled by stack)
  Int_t ntr;
- 
+
  // Option: to be tracked
- Int_t toBeDone = 1; 
- 
+ Int_t toBeDone = 1;
+
  // Monopole
  Int_t pdg  = 60000000;
- 
+
  // Polarization
- Double_t polx = 0.; 
- Double_t poly = 0.; 
- Double_t polz = 0.; 
+ Double_t polx = 0.;
+ Double_t poly = 0.;
+ Double_t polz = 0.;
 
  // Position
  Double_t vx  = -0.5*(fDetConstruction->GetWorldSizeX()) + 1e-10; // + 1*um
- Double_t vy  = 0.; 
- Double_t vz  = 0.; 
+ Double_t vy  = 0.;
+ Double_t vz  = 0.;
  Double_t tof = 0.08;
 
  // Energy (in GeV)
- Double_t kinEnergy = 100.;  
- Double_t mass = 100.; 
+ Double_t kinEnergy = 100.;
+ Double_t mass = 100.;
  Double_t e  = mass + kinEnergy;
- 
+
  // Particle momentum
  Double_t px, py, pz;
- px = sqrt(e*e - mass*mass); 
- py = 0.; 
- pz = 0.; 
+ px = sqrt(e*e - mass*mass);
+ py = 0.;
+ pz = 0.;
 
 
- // Add particle to stack 
- fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz, 
+ // Add particle to stack
+ fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz,
                   kPPrimary, ntr, 1., 0);
 
 }
 
 //_____________________________________________________________________________
 void MCApplication::BeginEvent()
-{    
+{
 /// User actions at beginning of event.
 /// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void MCApplication::BeginPrimary()
-{    
+{
 /// User actions at beginning of a primary track.
 /// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void MCApplication::PreTrack()
-{    
+{
 /// User actions at beginning of each track.
 /// Print info message.
 
@@ -427,29 +427,29 @@ void MCApplication::PreTrack()
 
 //_____________________________________________________________________________
 void MCApplication::Stepping()
-{    
+{
 /// User actions at each step.
 /// Print track position, the current volume and current medium names.
-  
+
   static TLorentzVector prevPosition;
 
   TLorentzVector position;
   gMC->TrackPosition(position);
 
   Double_t edep = gMC->Edep();
-  if (edep <= 0.) { 
+  if (edep <= 0.) {
     prevPosition = position;
-    return; 
+    return;
   }
 
   edep *= 1.e03;  // convert in MeV
 
   //Bragg curve
-  Double_t x = position.X() * 10.; 
+  Double_t x = position.X() * 10.;
   Double_t dx = (position.X() - prevPosition.X())*10.;
-  // cout << "prevPosition " 
+  // cout << "prevPosition "
   //      << prevPosition.X() << ", "  << prevPosition.Y() << ", "  << prevPosition.Z() << endl;
-  // cout << "position " 
+  // cout << "position "
   //      << position.X() << ", "  << position.Y() << ", "  << position.Z() << endl;
   // cout << "dx= " << dx << endl;
 
@@ -466,7 +466,7 @@ void MCApplication::Stepping()
 
 //_____________________________________________________________________________
 void MCApplication::PostTrack()
-{    
+{
 /// User actions after finishing of each track
 
   // Skip secondary tracks
@@ -482,19 +482,19 @@ void MCApplication::PostTrack()
 
 //_____________________________________________________________________________
 void MCApplication::FinishPrimary()
-{    
+{
 /// User actions after finishing of a primary track.
 /// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void MCApplication::FinishEvent()
-{    
+{
 /// User actions after finishing of an event
 
   // fRootManager->Fill();
   fStack->Reset();
-} 
+}
 
 //_____________________________________________________________________________
 void MCApplication::SetBinSize(Double_t binSize)
@@ -505,7 +505,7 @@ void MCApplication::SetBinSize(Double_t binSize)
     cerr << "Geometry alredy initialized: cannot set Edep histogram bin size" << endl;
     return;
   }
-  
+
   fBinSize = binSize;
 }
 

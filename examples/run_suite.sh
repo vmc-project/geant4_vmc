@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/sh
 #------------------------------------------------
 # The Virtual Monte Carlo examples
 # Copyright (C) 2007 - 2014 Ivana Hrivnacova
@@ -100,5 +100,5 @@ do
   rm -f Example*.root
   rm -f gphysi.dat
 done
-        
+
 cd $CURDIR

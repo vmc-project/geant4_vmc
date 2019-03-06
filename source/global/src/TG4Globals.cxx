@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4Globals.cxx
-/// \brief Implementation of the TG4Globals class 
+/// \brief Implementation of the TG4Globals class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -20,11 +20,11 @@ const TString TG4Globals::fgkEndl = "x\n";
 const char    TG4Globals::fgkTokenSeparator = '+';
 
 //_____________________________________________________________________________
-TG4Globals::~TG4Globals() 
+TG4Globals::~TG4Globals()
 {
 /// Destructor
 }
-  
+
 //
 // public static methods
 //
@@ -39,8 +39,8 @@ void TG4Globals::Exception(const TString& className,const TString& methodName,
   newText += text + "\n";
   newText += "*** TG4Exception: Aborting execution ***";
   newText.ReplaceAll("x\n", "\n    ");
-  
-  G4cerr << newText.Data() << G4endl << G4endl;   
+
+  G4cerr << newText.Data() << G4endl << G4endl;
   abort();
 }
 
@@ -55,8 +55,8 @@ void TG4Globals::Warning(const TString& className,const TString& methodName,
   newText += text + "\n";
   newText += "+++++++++++++++++++++++";
   newText.ReplaceAll("x\n", "\n    ");
-  
-  G4cerr << newText.Data() << G4endl << G4endl;   
+
+  G4cerr << newText.Data() << G4endl << G4endl;
 }
 
 //_____________________________________________________________________________
@@ -66,13 +66,13 @@ void TG4Globals::AppendNumberToString(G4String& s, G4int a)
 
   const char* kpNumber="0123456789";
   G4String p=""; G4String q="";
-  do 
+  do
   {
     G4int b=a/10;
     G4int c=a%10;
     p=kpNumber[c];
     q=p.append(q);
-    a=b;        
+    a=b;
   } while (a>0);
   s.append(q);
 }
@@ -88,24 +88,24 @@ G4bool TG4Globals::Compare(G4bool activation, TG4G3ControlValue controlValue)
     TG4Globals::Warning(
       "TG4Globals", "Compare", "Control value = kUnset.");
     return false;
-  }    
+  }
 
   if (controlValue == kActivate || controlValue == kActivate2)
     return activation;
   else
-    return !activation;  
-}  
+    return !activation;
+}
 
 //_____________________________________________________________________________
 void TG4Globals::PrintStars(G4bool emptyLineFirst)
 {
 /// Print stars.
-  
+
 
   if (emptyLineFirst)  G4cout << G4endl;
-  
+
   G4cout << "**********************************************" << G4endl;
-     
+
   if (!emptyLineFirst) G4cout << G4endl;
 }
 
@@ -113,18 +113,18 @@ void TG4Globals::PrintStars(G4bool emptyLineFirst)
 G4String TG4Globals::Help()
 {
 /// Return VMC mailing list address.
-  
+
   return G4String("vmc@root.cern.ch");
-}  
-  
+}
+
 //_____________________________________________________________________________
 G4String TG4Globals::GetToken(Int_t i, const TString& s)
 {
 /// Tokenize the given string and return the i-th token
 
-  std::vector<G4String> tokens;  
+  std::vector<G4String> tokens;
   std::string ss = s.Data();
-  
+
 /*
   std::string::size_type idx0 = 0;
   std::string::size_type idx1 = ss.find(fgkTokenSeparator,idx0);
@@ -147,9 +147,9 @@ G4String TG4Globals::GetToken(Int_t i, const TString& s)
   while ( idx0 <= ss.length() );
 
 
-  
-  if ( i < 0 || i >= Int_t(tokens.size()) ) 
+
+  if ( i < 0 || i >= Int_t(tokens.size()) )
     return "";
   else
     return tokens[i];
-}        
+}

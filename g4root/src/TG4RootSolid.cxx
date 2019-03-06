@@ -10,7 +10,7 @@
  *************************************************************************/
 
 /// \file TG4RootSolid.cxx
-/// \brief Implementation of the TG4RootSolid class 
+/// \brief Implementation of the TG4RootSolid class
 ///
 /// \author A. Gheata; CERN
 
@@ -45,7 +45,7 @@ TG4RootSolid::TG4RootSolid(TGeoShape *shape)
 /// Constructor.
    fShape = shape;
 }
-   
+
 //______________________________________________________________________________
 G4bool TG4RootSolid::CalculateExtent(const EAxis /*pAxis*/,
                                      const G4VoxelLimits& /*pVoxelLimit*/,
@@ -58,7 +58,7 @@ G4bool TG4RootSolid::CalculateExtent(const EAxis /*pAxis*/,
    G4cout << "Warning: TG4RootSolid::CalculateExtent() not implemented" << G4endl;
    return false;
 }
-   
+
 //______________________________________________________________________________
 EInside TG4RootSolid::Inside(const G4ThreeVector& p) const
 {
@@ -74,7 +74,7 @@ EInside TG4RootSolid::Inside(const G4ThreeVector& p) const
    if (TMath::Abs(safety) < 0.5*kCarTolerance) return kSurface;
    if (in) return kInside;
    return kOutside;
-}   
+}
 
 //______________________________________________________________________________
 G4ThreeVector TG4RootSolid::SurfaceNormal(const G4ThreeVector& p) const
@@ -85,8 +85,8 @@ G4ThreeVector TG4RootSolid::SurfaceNormal(const G4ThreeVector& p) const
    pt[0] = p.x()*gCm; pt[1] = p.y()*gCm; pt[2] = p.z()*gCm;
    dir[0] = 0.0;  dir[1] =0.0;   dir[2] = 1.0;
    fShape->ComputeNormal(pt,dir,norm);
-   pt[0] += norm[0] * 2.* kCarTolerance; 
-   pt[1] += norm[1] * 2.* kCarTolerance; 
+   pt[0] += norm[0] * 2.* kCarTolerance;
+   pt[1] += norm[1] * 2.* kCarTolerance;
    pt[2] += norm[2] * 2.* kCarTolerance;
    // Do a trick that should work if the point p is on the surface...
    G4ThreeVector n(norm[0], norm[1], norm[2]);
@@ -94,7 +94,7 @@ G4ThreeVector TG4RootSolid::SurfaceNormal(const G4ThreeVector& p) const
    if (!in) return n;
    n.set(-norm[0], -norm[1], -norm[2]);
    return n;
-}   
+}
 
 //______________________________________________________________________________
 G4double TG4RootSolid::DistanceToIn(const G4ThreeVector& p, const G4ThreeVector& v) const
@@ -110,7 +110,7 @@ G4double TG4RootSolid::DistanceToIn(const G4ThreeVector& p, const G4ThreeVector&
    G4double dist = fShape->DistFromOutside(pt,dir,3)*cm;
    if (dist < TGeoShape::Big()) return dist;
    return kInfinity;
-}      
+}
 
 //______________________________________________________________________________
 G4double TG4RootSolid::DistanceToIn(const G4ThreeVector& p) const
@@ -121,7 +121,7 @@ G4double TG4RootSolid::DistanceToIn(const G4ThreeVector& p) const
    pt[0] = p.x()*gCm; pt[1] = p.y()*gCm; pt[2] = p.z()*gCm;
    G4double safety = fShape->Safety(pt, kFALSE)*cm;
    return safety;
-}      
+}
 
 //______________________________________________________________________________
 G4double TG4RootSolid::DistanceToOut(const G4ThreeVector& p,
@@ -155,13 +155,13 @@ G4double TG4RootSolid::DistanceToOut(const G4ThreeVector& p,
       pt[0] += dist*dir[0];
       pt[1] += dist*dir[1];
       pt[2] += dist*dir[2];
-   }   
+   }
    if (calcNorm) {
       fShape->ComputeNormal(pt,dir,norm);
       *n = G4ThreeVector(norm[0],norm[1],norm[2]);
    }
    return dist;
-}         
+}
 
 //______________________________________________________________________________
 G4double TG4RootSolid::DistanceToOut(const G4ThreeVector& p) const
@@ -201,7 +201,7 @@ G4GeometryType TG4RootSolid::GetEntityType() const
 /// Provide identification of the class of an object.
 /// (required for persistency and STEP interface)
    return G4String(fShape->ClassName());
-}   
+}
 
 //______________________________________________________________________________
 G4ThreeVector TG4RootSolid::GetPointOnSurface() const
@@ -261,7 +261,7 @@ G4Polyhedron* TG4RootSolid::CreatePolyhedron () const
   G4double dz = ((TGeoBBox*)fShape)->GetDZ()*cm;
   return new G4PolyhedronBox (dx, dy, dz);
 }
-   
+
 #if G4VERSION_NUMBER < 1000
 //______________________________________________________________________________
 G4NURBS* TG4RootSolid::CreateNURBS() const
@@ -270,8 +270,8 @@ G4NURBS* TG4RootSolid::CreateNURBS() const
 /// to delete it).  A null pointer means "not created".
    return NULL;
 }
-#endif   
-   
+#endif
+
 //______________________________________________________________________________
 G4Polyhedron* TG4RootSolid::GetPolyhedron () const
 {

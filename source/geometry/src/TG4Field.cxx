@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4Field.cxx
-/// \brief Implementation of the TG4Field class 
+/// \brief Implementation of the TG4Field class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -73,7 +73,7 @@ TG4Field::TG4Field(const TG4FieldParameters& parameters,
 }
 
 //_____________________________________________________________________________
-TG4Field::~TG4Field() 
+TG4Field::~TG4Field()
 {
 /// Destructor
 }
@@ -106,7 +106,7 @@ G4Field* TG4Field::CreateG4Field(const TG4FieldParameters& parameters,
 }
 
 //_____________________________________________________________________________
-G4EquationOfMotion* 
+G4EquationOfMotion*
 TG4Field::CreateEquation(EquationType equation)
 {
 /// Set the equation of motion of a particle in a field
@@ -117,7 +117,7 @@ TG4Field::CreateEquation(EquationType equation)
     magField = dynamic_cast<G4MagneticField*>(fG4Field);
     if ( ! magField) {
      // add warning
-     return 0;    
+     return 0;
     }
   }
 
@@ -127,7 +127,7 @@ TG4Field::CreateEquation(EquationType equation)
     elMagField = dynamic_cast<G4ElectroMagneticField*>(fG4Field);
     if ( ! elMagField) {
        // add warning
-     return 0;    
+     return 0;
     }
   }
 
@@ -137,35 +137,35 @@ TG4Field::CreateEquation(EquationType equation)
      return new G4Mag_UsualEqRhs(magField);
      break;
 
-   case kMagSpinEqRhs: 
-     return new G4Mag_SpinEqRhs(magField); 
-     break;      
+   case kMagSpinEqRhs:
+     return new G4Mag_SpinEqRhs(magField);
+     break;
 
    case kEqMagElectric:
       return new G4EqMagElectricField(elMagField);
-      break;      
-                     
+      break;
+
     case kEqEMFieldWithSpin:
-      return new G4EqEMFieldWithSpin(elMagField); 
-      break;      
-                     
+      return new G4EqEMFieldWithSpin(elMagField);
+      break;
+
     case kEqEMFieldWithEDM:
-      return new G4EqEMFieldWithEDM(elMagField); 
+      return new G4EqEMFieldWithEDM(elMagField);
       break;
     case kUserEquation:
       // nothing to be done
       return 0;
       break;
-  } 
-  
+  }
+
   TG4Globals::Exception(
     "TG4Field", "CreateEquation:",
     "Unknown equation type.");
-  return 0;        
-}                     
-                     
+  return 0;
+}
+
 //_____________________________________________________________________________
-G4MagIntegratorStepper* 
+G4MagIntegratorStepper*
 TG4Field::CreateStepper(G4EquationOfMotion* equation,
                                 StepperType stepper)
 {
@@ -177,9 +177,9 @@ TG4Field::CreateStepper(G4EquationOfMotion* equation,
     TG4Globals::Exception(
       "TG4Field", "CreateStepper:",
       "The stepper type requires equation of motion of G4Mag_EqRhs type.");
-    return 0;  
+    return 0;
   }
-  
+
   switch ( stepper ) {
     case kCashKarpRKF45:
       return new G4CashKarpRKF45(equation);
@@ -188,55 +188,55 @@ TG4Field::CreateStepper(G4EquationOfMotion* equation,
     case kClassicalRK4:
       return new G4ClassicalRK4(equation);
       break;
-           
+
     case kExplicitEuler:
       return new G4ExplicitEuler(equation);
       break;
-           
+
     case kImplicitEuler:
       return new G4ImplicitEuler(equation);
       break;
-           
-    case kSimpleHeum:    
+
+    case kSimpleHeum:
       return new G4SimpleHeum(equation);
       break;
 
-    case kSimpleRunge: 
+    case kSimpleRunge:
       return new G4SimpleRunge(equation);
       break;
-           
+
     case kConstRK4:
       return new G4ConstRK4(eqRhs);
       break;
-              
-    case kExactHelixStepper: 
+
+    case kExactHelixStepper:
       return new G4ExactHelixStepper(eqRhs);
       break;
-               
+
     case kHelixExplicitEuler:
       return new G4HelixExplicitEuler(eqRhs);
       break;
-               
+
     case kHelixHeum:
       return new G4HelixHeum(eqRhs);
       break;
-               
+
     case kHelixImplicitEuler:
       return new G4HelixImplicitEuler(eqRhs);
       break;
-           
+
     case kHelixMixedStepper:
       return new G4HelixMixedStepper(eqRhs);
       break;
-               
-    case kHelixSimpleRunge:  
+
+    case kHelixSimpleRunge:
       return new G4HelixSimpleRunge(eqRhs);
       break;
-               
-    case kNystromRK4:   
+
+    case kNystromRK4:
       return new G4NystromRK4(eqRhs);
       break;
-           
+
     case kRKG3Stepper:
       return new G4RKG3_Stepper(eqRhs);
       break;
@@ -244,13 +244,13 @@ TG4Field::CreateStepper(G4EquationOfMotion* equation,
       // nothing to be done
       return 0;
       break;
-  }  
-  
+  }
+
   TG4Globals::Exception(
     "TG4Field", "CreateStepper:",
     "Unknown stepper type.");
-  return 0;  
-}      
+  return 0;
+}
 
 //
 // public methods
@@ -302,9 +302,9 @@ void TG4Field::Update(const TG4FieldParameters& parameters)
     chordFinder->SetDeltaChord(parameters.GetDeltaChord());
   }
   else if ( parameters.GetFieldType() == kElectroMagnetic ) {
-    G4MagInt_Driver* intDriver 
+    G4MagInt_Driver* intDriver
       = new G4MagInt_Driver(parameters.GetStepMinimum(), fStepper, fStepper->GetNumberOfVariables());
-    if ( intDriver ) { 
+    if ( intDriver ) {
       // Chord finder
       chordFinder = new G4ChordFinder(intDriver);
     }

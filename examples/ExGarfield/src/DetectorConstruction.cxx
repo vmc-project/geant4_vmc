@@ -7,14 +7,14 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file ExGarfield/src/DetectorConstruction.cxx 
-/// \brief Implementation of the ExGarfield::DetectorConstruction class 
+/// \file ExGarfield/src/DetectorConstruction.cxx
+/// \brief Implementation of the ExGarfield::DetectorConstruction class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
-/// 
+///
 /// \date 28/10/2015
 /// \author I. Hrivnacova; IPN, Orsay
- 
+
 #include <Riostream.h>
 #include <TGeoManager.h>
 #include <TGeoElement.h>
@@ -61,7 +61,7 @@ void DetectorConstruction::Construct()
 {
   /// Construct geometry using TGeo modeller
 
-  // Create Root geometry manager 
+  // Create Root geometry manager
   new TGeoManager("Garfield_geometry", "ExGarfield VMC example geometry");
 
   // Elements
@@ -94,37 +94,37 @@ void DetectorConstruction::Construct()
   // Air
   TGeoMixture* matAir
     = new TGeoMixture("AirA", 4, density=1.205e-03);
-  matAir->AddElement(elC,  0.0001); 
-  matAir->AddElement(elN,  0.7553); 
-  matAir->AddElement(elO,  0.2318); 
+  matAir->AddElement(elC,  0.0001);
+  matAir->AddElement(elN,  0.7553);
+  matAir->AddElement(elO,  0.2318);
   matAir->AddElement(elAr, 0.0128);
-  
+
   // ArCO2_70_30
   TGeoMixture* matArCO2
     = new TGeoMixture("ArCO2", 3, density=1.822e-03);
-  matArCO2->AddElement(elAr, 0.7000); 
-  matArCO2->AddElement(elC,  0.0819); 
+  matArCO2->AddElement(elAr, 0.7000);
+  matArCO2->AddElement(elC,  0.0819);
   matArCO2->AddElement(elO,  0.2181);
 
   // Kapton
   TGeoMixture* matKapton
     = new TGeoMixture("Kapton", 4, density=1.413);
-  matKapton->AddElement(elO, 0.2092); 
-  matKapton->AddElement(elC, 0.6911); 
-  matKapton->AddElement(elN, 0.0733); 
-  matKapton->AddElement(elH, 0.0264); 
+  matKapton->AddElement(elO, 0.2092);
+  matKapton->AddElement(elC, 0.6911);
+  matKapton->AddElement(elN, 0.0733);
+  matKapton->AddElement(elH, 0.0264);
 
   // Tracking medias (defaut parameters)
   //
 
-  // Paremeters for tracking media  
+  // Paremeters for tracking media
   Double_t param[20];
   param[0] = 0;     // isvol  - Not used
   param[1] = 2;     // ifield - User defined magnetic field
   param[2] = 10.;   // fieldm - Maximum field value (in kiloGauss)
-  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection 
-  param[4] = -0.01; // stemax - Maximum displacement for multiple scat 
-  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS 
+  param[3] = -20.;  // tmaxfd - Maximum angle due to field deflection
+  param[4] = -0.01; // stemax - Maximum displacement for multiple scat
+  param[5] = -.3;   // deemax - Maximum fractional energy loss, DLS
   param[6] = .001;  // epsil - Tracking precision
   param[7] = -.8;   // stmin
   for ( Int_t i=8; i<20; ++i) param[i] = 0.;
@@ -133,7 +133,7 @@ void DetectorConstruction::Construct()
   TGeoMedium* medAl = new TGeoMedium("Al", ++mediumId, matAl, param);
   TGeoMedium* medW  = new TGeoMedium("W",  ++mediumId, matW,  param);
   TGeoMedium* medPb = new TGeoMedium("Pb", ++mediumId, matPb, param);
-  TGeoMedium* medAir = new TGeoMedium("AirA", ++mediumId, matAir, param); 
+  TGeoMedium* medAir = new TGeoMedium("AirA", ++mediumId, matAir, param);
   TGeoMedium* medArCO2 = new TGeoMedium("ArCO2", ++mediumId, matArCO2, param);
 
   TGeoMedium* defaultMedium = medAir;
@@ -141,7 +141,7 @@ void DetectorConstruction::Construct()
   TGeoMedium* gasMedium = medArCO2;
   TGeoMedium* cathodeMedium = medAl;
   TGeoMedium* wireMedium = medW;
- 
+
   // Volumes
   //
 
@@ -159,28 +159,28 @@ void DetectorConstruction::Construct()
   //
   // World
   //
-  TGeoShape* worldS 
+  TGeoShape* worldS
     = new TGeoBBox("World",             // its name
-                   0.5 * worldSizeXYZ, 
-                   0.5 * worldSizeXYZ, 
+                   0.5 * worldSizeXYZ,
+                   0.5 * worldSizeXYZ,
                    0.5 * worldSizeXYZ); // its size
 
-  TGeoVolume* worldLV 
-    = new TGeoVolume("World", worldS, defaultMedium); 
+  TGeoVolume* worldLV
+    = new TGeoVolume("World", worldS, defaultMedium);
 
   gGeoManager->SetTopVolume(worldLV);
 
   //
   // Absorber
   //
-  TGeoShape* absorberS 
+  TGeoShape* absorberS
     = new TGeoBBox(
            "Absorber",            // its name
             0.5 * absorberThicknessXY, 0.5 * absorberThicknessXY,
             0.5 * absorberThicknessZ); // its size
 
-  TGeoVolume* absorberLV 
-    = new TGeoVolume("Absorber", absorberS, absorberMedium); 
+  TGeoVolume* absorberLV
+    = new TGeoVolume("Absorber", absorberS, absorberMedium);
 
   Double_t xpos = 0;
   Double_t ypos = 0;
@@ -190,11 +190,11 @@ void DetectorConstruction::Construct()
   //
   // Drift tube
   //
-  TGeoShape* tubeS 
+  TGeoShape* tubeS
     = new TGeoTube("Tube",  0, tubeRadius, tubeHalfLength + tubeThickness);
 
-  TGeoVolume* tubeLV 
-    = new TGeoVolume( "Tube", tubeS, cathodeMedium); 
+  TGeoVolume* tubeLV
+    = new TGeoVolume( "Tube", tubeS, cathodeMedium);
 
   TGeoRotation* rotY = new TGeoRotation();
   rotY->RotateY(-90.);
@@ -205,11 +205,11 @@ void DetectorConstruction::Construct()
   //
   // Drift Tube Gas
   //
-  TGeoShape* gasS 
+  TGeoShape* gasS
     = new TGeoTube(
-            "Gas", wireRadius, tubeRadius-tubeThickness, tubeHalfLength); 
+            "Gas", wireRadius, tubeRadius-tubeThickness, tubeHalfLength);
 
-  TGeoVolume* gasLV 
+  TGeoVolume* gasLV
     = new TGeoVolume( "Gas", gasS, gasMedium);
 
   ypos = 0.;
@@ -219,11 +219,11 @@ void DetectorConstruction::Construct()
   //
   // Wire
   //
-  TGeoShape* wireS 
+  TGeoShape* wireS
     = new TGeoTube("Wire", 0, wireRadius, tubeHalfLength);
 
-  TGeoVolume* wireLV 
-    = new TGeoVolume("Wire", wireS, wireMedium); 
+  TGeoVolume* wireLV
+    = new TGeoVolume("Wire", wireS, wireMedium);
 
   ypos = 0.;
   zpos = 0.;
@@ -234,7 +234,7 @@ void DetectorConstruction::Construct()
 
   // write geometry
   gGeoManager->Export("geometry.root");
-    
+
   // notify VMC about Root geometry
   gMC->SetRootGeometry();
 }

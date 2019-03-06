@@ -19,7 +19,7 @@ void test_Gflash(const TString& configMacro)
 {
 /// Macro function for testing example Gflash
 /// \param configMacro  configuration macro loaded in initialization
-/// 
+///
 /// Run 10 events and print the calorimeter hits.
 
   // Create application if it does not yet exist
@@ -27,8 +27,8 @@ void test_Gflash(const TString& configMacro)
   if ( ! TVirtualMCApplication::Instance() ) {
     new VMC::Gflash::MCApplication("ExampleGflash", "The exampleGflash MC application");
     needDelete = kTRUE;
-  }  
- 
+  }
+
   // MC application
   VMC::Gflash::MCApplication* appl
     = (VMC::Gflash::MCApplication*)TVirtualMCApplication::Instance();
@@ -40,4 +40,4 @@ void test_Gflash(const TString& configMacro)
   appl->RunMC(10);
 
   if ( needDelete ) delete appl;
-}  
+}

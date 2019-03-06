@@ -15,15 +15,15 @@
 void Config()
 {
 /// The configuration function for Geant4 VMC for Example03
-/// called during MC application initialization. 
+/// called during MC application initialization.
 /// For geometry defined with VMC and selected Geant4 native navigation
 
   // Run configuration
-  TG4RunConfiguration* runConfiguration 
+  TG4RunConfiguration* runConfiguration
       = new TG4RunConfiguration("geomVMCtoGeant4", "FTFP_BERT");
-    
+
   // Run configuration with special cuts activated
-  // TG4RunConfiguration2* runConfiguration 
+  // TG4RunConfiguration2* runConfiguration
   //  = new TG4RunConfiguration2("geomVMCToGeant4", "FTFP_BERT", "specialCuts");
 
   // TGeant4
@@ -31,7 +31,7 @@ void Config()
     = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration);
 
   cout << "Geant4 has been created." << endl;
-  
+
   // Customise Geant4 setting
   // (verbose level, global range cut, ..)
   geant4->ProcessGeantMacro("g4config.in");

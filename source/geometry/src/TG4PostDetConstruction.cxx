@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4PostDetConstruction.cxx
-/// \brief Implementation of the TG4PostDetConstruction class 
+/// \brief Implementation of the TG4PostDetConstruction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -26,7 +26,7 @@ TG4PostDetConstruction::TG4PostDetConstruction()
 }
 
 //_____________________________________________________________________________
-TG4PostDetConstruction::~TG4PostDetConstruction() 
+TG4PostDetConstruction::~TG4PostDetConstruction()
 {
 /// Destructor
 }
@@ -37,12 +37,12 @@ TG4PostDetConstruction::~TG4PostDetConstruction()
 
 //_____________________________________________________________________________
 void TG4PostDetConstruction::Initialize(TG4RootDetectorConstruction* /*dc*/)
-{ 
+{
 /// Construct geometry using the VMC application.
 // --
 
   G4cout << "TG4PostDetConstruction::Initialize" << G4endl;
-  TG4GeometryManager::Instance()->ConstructGeometry();  
+  TG4GeometryManager::Instance()->ConstructGeometry();
 }
 
 //_____________________________________________________________________________

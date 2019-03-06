@@ -8,10 +8,10 @@
 //-------------------------------------------------
 
 /// \file TG4TrackingActionMessenger.cxx
-/// \brief Implementation of the TG4TrackingActionMessenger class 
+/// \brief Implementation of the TG4TrackingActionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
- 
+
 #include "TG4TrackingActionMessenger.h"
 #include "TG4TrackingAction.h"
 #include "TG4TrackManager.h"
@@ -69,7 +69,7 @@ TG4TrackingActionMessenger::TG4TrackingActionMessenger(
 }
 
 //_____________________________________________________________________________
-TG4TrackingActionMessenger::~TG4TrackingActionMessenger() 
+TG4TrackingActionMessenger::~TG4TrackingActionMessenger()
 {
 /// Destructor
 
@@ -85,29 +85,29 @@ TG4TrackingActionMessenger::~TG4TrackingActionMessenger()
 //
 
 //_____________________________________________________________________________
-void TG4TrackingActionMessenger::SetNewValue(G4UIcommand* command, 
+void TG4TrackingActionMessenger::SetNewValue(G4UIcommand* command,
        G4String newValue)
-{ 
+{
 /// Apply command to the associated object.
 
-  if(command == fNewVerboseCmd) { 
+  if(command == fNewVerboseCmd) {
     fTrackingAction
-      ->SetNewVerboseLevel(fNewVerboseCmd->GetNewIntValue(newValue)); 
-  }   
-  else if(command == fNewVerboseTrackCmd) { 
+      ->SetNewVerboseLevel(fNewVerboseCmd->GetNewIntValue(newValue));
+  }
+  else if(command == fNewVerboseTrackCmd) {
     fTrackingAction
-      ->SetNewVerboseTrackID(fNewVerboseTrackCmd->GetNewIntValue(newValue)); 
-  }   
-  else if(command == fSaveSecondariesCmd) { 
+      ->SetNewVerboseTrackID(fNewVerboseTrackCmd->GetNewIntValue(newValue));
+  }
+  else if(command == fSaveSecondariesCmd) {
     if ( newValue == "DoNotSave" )
       TG4TrackManager::Instance()->SetTrackSaveControl(kDoNotSave);
-    else if ( newValue == "SaveInPreTrack" )   
+    else if ( newValue == "SaveInPreTrack" )
       TG4TrackManager::Instance()->SetTrackSaveControl(kSaveInPreTrack);
-    else if ( newValue == "SaveInStep" )   
+    else if ( newValue == "SaveInStep" )
       TG4TrackManager::Instance()->SetTrackSaveControl(kSaveInStep);
-  }   
-  else if(command == fSaveDynamicChargeCmd) { 
+  }
+  else if(command == fSaveDynamicChargeCmd) {
     TG4TrackManager::Instance()->SetSaveDynamicCharge(
                                    fSaveDynamicChargeCmd->GetNewBoolValue(newValue));
-  }   
+  }
 }

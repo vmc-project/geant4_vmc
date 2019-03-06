@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4RunAction.cxx
-/// \brief Implementation of the TG4RunAction class 
+/// \brief Implementation of the TG4RunAction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -44,7 +44,7 @@ TG4RunAction::TG4RunAction()
   : G4UserRunAction(),
     TG4Verbose("runAction"),
     fMessenger(this),
-    fCrossSectionManager(), 
+    fCrossSectionManager(),
     fTimer(0),
     fRunID(-1),
     fSaveRandomStatus(false),
@@ -60,7 +60,7 @@ TG4RunAction::TG4RunAction()
 }
 
 //_____________________________________________________________________________
-TG4RunAction::~TG4RunAction() 
+TG4RunAction::~TG4RunAction()
 {
 /// Destructor
 
@@ -80,29 +80,29 @@ void TG4RunAction::BeginOfRunAction(const G4Run* run)
 /// Called by G4 kernel at the beginning of run.
 
   fRunID++;
-  
+
   if (VerboseLevel() > 0) {
     G4cout << "### Run " << run->GetRunID() << " start." << G4endl;
   }
-    
+
   if ( TG4RegionsManager::Instance() ) {
     if ( TG4RegionsManager::Instance()->IsCheck() ) {
       TG4RegionsManager::Instance()->CheckRegions();
-    }  
+    }
     if ( TG4RegionsManager::Instance()->IsPrint() ) {
       TG4RegionsManager::Instance()->PrintRegions();
-    }  
-  }  
+    }
+  }
 
   // activate random number status
   if ( fSaveRandomStatus) {
     G4UImanager::GetUIpointer()->ApplyCommand("/random/setSavingFlag true");
     if ( VerboseLevel() > 0)
-      G4cout << "Activated saving random status " << G4endl;  
+      G4cout << "Activated saving random status " << G4endl;
       CLHEP::HepRandom::showEngineStatus();
-      G4cout << G4endl;  
-  }    
-    
+      G4cout << G4endl;
+  }
+
   if ( fReadRandomStatus) {
     // restore event random number status from a file
     CLHEP::HepRandom::showEngineStatus();
@@ -110,11 +110,11 @@ void TG4RunAction::BeginOfRunAction(const G4Run* run)
     command += fRandomStatusFile;
     G4UImanager::GetUIpointer()->ApplyCommand(command.data());
     if ( VerboseLevel() > 0) {
-      G4cout << "Resetting random engine from " << fRandomStatusFile << G4endl;  
+      G4cout << "Resetting random engine from " << fRandomStatusFile << G4endl;
       CLHEP::HepRandom::showEngineStatus();
-      G4cout << G4endl;  
-    }         
-  }  
+      G4cout << G4endl;
+    }
+  }
 
   fTimer->Start();
 }
@@ -134,12 +134,12 @@ void TG4RunAction::EndOfRunAction(const G4Run* run)
 
   if ( fCrossSectionManager.IsMakeHistograms() ) {
     fCrossSectionManager.MakeHistograms();
-  }  
+  }
 
   fTimer->Stop();
 
   if (VerboseLevel() > 0) {
     G4cout << "Time of this run:   " << *fTimer << G4endl;
     G4cout << "Number of events processed: " << run->GetNumberOfEvent() << G4endl;
-  }    
-}    
+  }
+}

@@ -11,7 +11,7 @@
 /// \brief The Geant4 VMC example E06 test application
 ///
 /// The Geant4 VMC test application
-/// with explicitely instantiated TGeant3 or TGeant4 and linked 
+/// with explicitely instantiated TGeant3 or TGeant4 and linked
 /// with all libraries.
 ///
 /// Usage:
@@ -137,7 +137,7 @@ void PrintG3Configuration(
 int main(int argc, char** argv)
 {
   // Initialize Root threading.
-  // (Multi-threading is triggered automatically if Geant4 was built 
+  // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
    TThread::Initialize();
@@ -209,11 +209,11 @@ int main(int argc, char** argv)
   // end of code to process arguments
 
   // Create MC application (thread local)
-  Ex06MCApplication* appl 
-    =  new Ex06MCApplication("ExampleE06", 
+  Ex06MCApplication* appl
+    =  new Ex06MCApplication("ExampleE06",
                              "The exampleE06 MC application");
-  appl->GetPrimaryGenerator()->SetNofPrimaries(10);  
-  //appl->SetVerboseLevel(3);  
+  appl->GetPrimaryGenerator()->SetNofPrimaries(10);
+  //appl->SetVerboseLevel(3);
 
 #ifdef USE_GEANT4
   if ( g4Geometry.find("VMC") != std::string::npos) {
@@ -227,8 +227,8 @@ int main(int argc, char** argv)
 #endif
 
 #ifdef USE_GEANT4
-  // RunConfiguration for Geant4 
-  TG4RunConfiguration* runConfiguration 
+  // RunConfiguration for Geant4
+  TG4RunConfiguration* runConfiguration
     = new TG4RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics);
 
   // TGeant4
@@ -243,7 +243,7 @@ int main(int argc, char** argv)
     geant4->ProcessGeantMacro(g4Macro.data());
   }
 #endif
-  
+
 #ifdef USE_GEANT3
   TGeant3* geant3 = 0;
   if ( g3Geometry == "TGeant3" ) {
@@ -260,14 +260,14 @@ int main(int argc, char** argv)
   gMC->SetCut("CUTELE",10e-06);
   gMC->SetCut("CUTGAM",10e-06);
   geant3->SetSWIT(4,1000);
-      // reduce printing from GTREVE_ROOT (sets one printing per 1000 tracks) 
+      // reduce printing from GTREVE_ROOT (sets one printing per 1000 tracks)
 #endif
 
   // Run example
   if ( ! rootMacro.size() ) {
     // Initialize MC
     appl->InitMC("");
-  
+
     // Activate storing tracks
     // gMC->SetCollectTracks(kTRUE);
 
@@ -282,7 +282,7 @@ int main(int argc, char** argv)
       geant4->ProcessGeantMacro(g4VisMacro.data());
     }
 #endif
-  
+
     // Run MC
     appl->RunMC(5);
   }
@@ -292,4 +292,4 @@ int main(int argc, char** argv)
   }
 
   delete appl;
-}  
+}

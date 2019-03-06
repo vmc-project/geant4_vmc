@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4SensitiveDetector.cxx
-/// \brief Implementation of the TG4SensitiveDetector class 
+/// \brief Implementation of the TG4SensitiveDetector class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -51,7 +51,7 @@ TG4SensitiveDetector::TG4SensitiveDetector(
 }
 
 //_____________________________________________________________________________
-TG4SensitiveDetector::~TG4SensitiveDetector() 
+TG4SensitiveDetector::~TG4SensitiveDetector()
 {
 /// Destructor
 }
@@ -93,7 +93,7 @@ G4bool TG4SensitiveDetector::ProcessHits(G4Step* step, G4TouchableHistory*)
 //_____________________________________________________________________________
 G4bool TG4SensitiveDetector::ProcessHitsOnBoundary(G4Step* step)
 {
-/// Call user defined sensitive detector 
+/// Call user defined sensitive detector
 /// when crossing a geometrical boundary.
 
   // let user sensitive detector process boundary step

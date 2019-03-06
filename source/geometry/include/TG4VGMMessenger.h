@@ -13,7 +13,7 @@
 //-------------------------------------------------
 
 /// \file TG4VGMMessenger.h
-/// \brief Definition of the TG4VGMMessenger class 
+/// \brief Definition of the TG4VGMMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -52,7 +52,7 @@ class TG4VGMMessenger: public G4UImessenger
 
     // methods
     virtual void SetNewValue(G4UIcommand* command, G4String newValues);
-    
+
   private:
     /// Not implemented
     TG4VGMMessenger();
@@ -63,13 +63,13 @@ class TG4VGMMessenger: public G4UImessenger
 
     //
     // static data members
-    
+
     /// command directory
     static G4UIdirectory*  fgDirectory;
-    
+
     ///  command: /xml/generateRoot
     static G4UIcmdWithoutParameter* fgGenerateRootCmd;
-    
+
     /// instances counter
     static G4int           fgCounter;
 

@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4DetConstructionMessenger.cxx
-/// \brief Implementation of the TG4DetConstructionMessenger class 
+/// \brief Implementation of the TG4DetConstructionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -94,52 +94,52 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fIsZeroFieldCmd->AvailableForStates(G4State_PreInit);
 
   fSeparatorCmd = new G4UIcmdWithAString("/mcDet/volNameSeparator", this);
-  guidance 
+  guidance
     = "Override the default value of the volume name separator in g3tog4\n";
   fSeparatorCmd->SetGuidance(guidance);
   fSeparatorCmd->SetParameterName("VolNameSeparator", true);
   fSeparatorCmd->AvailableForStates(G4State_PreInit);
 
-  fPrintMaterialsCmd 
+  fPrintMaterialsCmd
     = new G4UIcmdWithoutParameter("/mcDet/printMaterials", this);
   fPrintMaterialsCmd->SetGuidance("Prints all materials.");
-  fPrintMaterialsCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);   
+  fPrintMaterialsCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
-  fPrintMaterialsPropertiesCmd 
+  fPrintMaterialsPropertiesCmd
     = new G4UIcmdWithoutParameter("/mcDet/printMaterialsProperties", this);
   fPrintMaterialsPropertiesCmd->SetGuidance("Prints all material properties for all materials.");
-  fPrintMaterialsPropertiesCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);   
+  fPrintMaterialsPropertiesCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
-  fPrintMediaCmd 
+  fPrintMediaCmd
     = new G4UIcmdWithoutParameter("/mcDet/printMedia", this);
   fPrintMediaCmd->SetGuidance("Prints all media.");
-  fPrintMediaCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);   
+  fPrintMediaCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
-  fPrintVolumesCmd 
+  fPrintVolumesCmd
     = new G4UIcmdWithoutParameter("/mcDet/printVolumes", this);
   fPrintVolumesCmd->SetGuidance("Prints all volumes.");
-  fPrintVolumesCmd->AvailableForStates(G4State_Idle);   
+  fPrintVolumesCmd->AvailableForStates(G4State_Idle);
 
-  fPrintCutsCmd 
+  fPrintCutsCmd
     = new G4UIcmdWithAString("/mcDet/printCuts", this);
   fPrintCutsCmd
     ->SetGuidance("Prints the cut value for given CutName for all tracking media");
   fPrintCutsCmd->SetParameterName("CutName", false);
-  fPrintCutsCmd->AvailableForStates(G4State_Idle);   
+  fPrintCutsCmd->AvailableForStates(G4State_Idle);
 
-  fPrintControlsCmd 
+  fPrintControlsCmd
     = new G4UIcmdWithAString("/mcDet/printControls", this);
   fPrintControlsCmd
     ->SetGuidance("Prints the control value for given ControlName for all tracking media");
   fPrintControlsCmd->SetParameterName("ControlName", false);
-  fPrintControlsCmd->AvailableForStates(G4State_Idle);   
+  fPrintControlsCmd->AvailableForStates(G4State_Idle);
 
   fIsUserMaxStepCmd
     = new G4UIcmdWithABool("/mcDet/setIsUserMaxStep", this);
   fIsUserMaxStepCmd
     ->SetGuidance("Active user step limits defined in tracking media.");
   fIsUserMaxStepCmd->SetParameterName("IsUserMaxStep", false);
-  fIsUserMaxStepCmd->AvailableForStates(G4State_PreInit);  
+  fIsUserMaxStepCmd->AvailableForStates(G4State_PreInit);
 
   fIsMaxStepInLowDensityMaterialsCmd
     = new G4UIcmdWithABool("/mcDet/setIsMaxStepInLowDensityMaterials", this);
@@ -147,9 +147,9 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
     ->SetGuidance("Active user step limits defined in tracking media.");
   fIsMaxStepInLowDensityMaterialsCmd
     ->SetParameterName("IsMaxStepInLowDensityMaterials", false);
-  fIsMaxStepInLowDensityMaterialsCmd->AvailableForStates(G4State_PreInit);  
+  fIsMaxStepInLowDensityMaterialsCmd->AvailableForStates(G4State_PreInit);
 
-  fSetLimitDensityCmd 
+  fSetLimitDensityCmd
     = new G4UIcmdWithADoubleAndUnit("/mcDet/setLimitDensity", this);
   fSetLimitDensityCmd
     ->SetGuidance("Set the material density limit for setting max allowed step");
@@ -161,8 +161,8 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
   fSetLimitDensityCmd->SetDefaultUnit("g/cm3");
   fSetLimitDensityCmd->SetUnitCategory("Volumic Mass");
   fSetLimitDensityCmd->AvailableForStates(G4State_PreInit);
-  
-  fSetMaxStepInLowDensityMaterialsCmd 
+
+  fSetMaxStepInLowDensityMaterialsCmd
     = new G4UIcmdWithADoubleAndUnit("/mcDet/setMaxStepInLowDensityMaterials", this);
   fSetMaxStepInLowDensityMaterialsCmd
     ->SetGuidance("Set max allowed step value in materials with density below the density limit");
@@ -185,7 +185,7 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
 }
 
 //_____________________________________________________________________________
-TG4DetConstructionMessenger::~TG4DetConstructionMessenger() 
+TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
 {
 /// Destructor
 
@@ -199,8 +199,8 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
   delete fPrintMaterialsPropertiesCmd;
   delete fPrintMediaCmd;
   delete fPrintVolumesCmd;
-  delete fPrintCutsCmd; 
-  delete fPrintControlsCmd; 
+  delete fPrintCutsCmd;
+  delete fPrintControlsCmd;
   delete fIsUserMaxStepCmd;
   delete fIsMaxStepInLowDensityMaterialsCmd;
   delete fSetLimitDensityCmd;
@@ -327,16 +327,16 @@ void TG4DetConstructionMessenger::CreateSetRadiatorCmd()
 //
 // public methods
 //
-  
+
 //_____________________________________________________________________________
-void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command, 
+void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
                                               G4String newValues)
 {
 /// Apply command to the associated object.
 
   if (command == fUpdateFieldCmd) {
     TG4GeometryManager::Instance()->UpdateField();
-  }    
+  }
   else if( command == fCreateFieldParametersCmd ) {
     TG4GeometryManager::Instance()->CreateFieldParameters(newValues);
   }
@@ -348,41 +348,41 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
     TG4GeometryManager::Instance()
       ->SetIsZeroField(fIsZeroFieldCmd->GetNewBoolValue(newValues));
   }
-  else if( command == fSeparatorCmd ) { 
+  else if( command == fSeparatorCmd ) {
     char separator = newValues(0);
     TG4GeometryServices::Instance()->SetG3toG4Separator(separator);
   }
   else if (command == fPrintMaterialsCmd) {
     TG4GeometryServices::Instance()->PrintMaterials();
-  }    
+  }
   else if (command == fPrintMaterialsPropertiesCmd) {
     TG4GeometryServices::Instance()->PrintMaterialsProperties();
-  }    
+  }
   else if (command == fPrintMediaCmd) {
     TG4GeometryServices::Instance()->PrintMedia();
-  }    
+  }
   else if (command == fPrintVolumesCmd) {
     TG4GeometryServices::Instance()->PrintLogicalVolumeStore();
-  }    
+  }
   else if (command == fPrintCutsCmd) {
     TG4GeometryServices::Instance()->PrintCuts(newValues);
-  }    
+  }
   else if (command == fPrintControlsCmd) {
     TG4GeometryServices::Instance()->PrintControls(newValues);
-  } 
+  }
   else if (command == fIsUserMaxStepCmd) {
     TG4GeometryManager::Instance()
       ->SetIsUserMaxStep(fIsUserMaxStepCmd->GetNewBoolValue(newValues));
-  }    
+  }
   else if (command == fIsMaxStepInLowDensityMaterialsCmd) {
     TG4GeometryManager::Instance()
       ->SetIsMaxStepInLowDensityMaterials(
           fIsMaxStepInLowDensityMaterialsCmd->GetNewBoolValue(newValues));
-  }    
+  }
   else if (command == fSetLimitDensityCmd) {
     TG4GeometryManager::Instance()
       ->SetLimitDensity(fSetLimitDensityCmd->GetNewDoubleValue(newValues));
-  } 
+  }
   else if (command == fSetMaxStepInLowDensityMaterialsCmd) {
     TG4GeometryManager::Instance()
       ->SetMaxStepInLowDensityMaterials(

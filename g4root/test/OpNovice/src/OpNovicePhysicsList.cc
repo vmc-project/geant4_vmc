@@ -66,10 +66,10 @@ G4ThreadLocal G4OpAbsorption* OpNovicePhysicsList::fAbsorptionProcess = 0;
 G4ThreadLocal G4OpRayleigh* OpNovicePhysicsList::fRayleighScatteringProcess = 0;
 G4ThreadLocal G4OpMieHG* OpNovicePhysicsList::fMieHGScatteringProcess = 0;
 G4ThreadLocal G4OpBoundaryProcess* OpNovicePhysicsList::fBoundaryProcess = 0;
- 
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-OpNovicePhysicsList::OpNovicePhysicsList() 
+OpNovicePhysicsList::OpNovicePhysicsList()
  : G4VUserPhysicsList()
 {
   fMessenger = new OpNovicePhysicsListMessenger(this);
@@ -101,7 +101,7 @@ void OpNovicePhysicsList::ConstructParticle()
   rConstructor.ConstructParticle();
 
   G4IonConstructor iConstructor;
-  iConstructor.ConstructParticle(); 
+  iConstructor.ConstructParticle();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -235,7 +235,7 @@ void OpNovicePhysicsList::ConstructOp()
   fRayleighScatteringProcess->SetVerboseLevel(fVerboseLevel);
   fMieHGScatteringProcess->SetVerboseLevel(fVerboseLevel);
   fBoundaryProcess->SetVerboseLevel(fVerboseLevel);
-  
+
   // Use Birks Correction in the Scintillation process
   if(G4Threading::IsMasterThread())
   {

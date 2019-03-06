@@ -13,9 +13,9 @@
 
 void test_E06_2(const TString& configMacro, Bool_t oldGeometry)
 {
-/// Macro function for testing example E06 
-/// \param configMacro  configuration macro loaded in initialization 
-/// \param oldGeometry  if true - geometry is defined via VMC, otherwise 
+/// Macro function for testing example E06
+/// \param configMacro  configuration macro loaded in initialization
+/// \param oldGeometry  if true - geometry is defined via VMC, otherwise
 ///                     via TGeo
 ///
 /// Stack popper test.
@@ -26,21 +26,21 @@ void test_E06_2(const TString& configMacro, Bool_t oldGeometry)
   if ( ! TVirtualMCApplication::Instance() ) {
     new Ex06MCApplication("Example06", "The example06 MC application");
     needDelete = kTRUE;
-  }  
+  }
 
   // MC application
   Ex06MCApplication* appl
     = (Ex06MCApplication*)TVirtualMCApplication::Instance();
-  appl->GetPrimaryGenerator()->SetNofPrimaries(100);  
-  appl->SetTestStackPopper(true);  
-    
+  appl->GetPrimaryGenerator()->SetNofPrimaries(100);
+  appl->SetTestStackPopper(true);
+
   // Set geometry defined via VMC
-  appl->SetOldGeometry(oldGeometry);  
+  appl->SetOldGeometry(oldGeometry);
 
 
  // Initialize MC
   appl->InitMC(configMacro);
-  
+
   if ( TString(gMC->GetName()) == "TGeant4" ) {
     // Customise Geant4 setting after initialization:
     // Physics list
@@ -49,6 +49,6 @@ void test_E06_2(const TString& configMacro, Bool_t oldGeometry)
 
   // Run MC
   appl->RunMC(10);
-    
+
   if ( needDelete ) delete appl;
-}  
+}

@@ -10,7 +10,7 @@
  *************************************************************************/
 
 /// \file TG4RootNavigator.h
-/// \brief Definition of the TG4RootNavigator class 
+/// \brief Definition of the TG4RootNavigator class
 ///
 /// \author A. Gheata; CERN
 
@@ -30,7 +30,7 @@ class TG4RootDetectorConstruction;
 
 /// \brief GEANT4 navigator using directly a TGeo geometry.
 ///
-/// All navigation methods requred by G4 tracking are implemented by 
+/// All navigation methods requred by G4 tracking are implemented by
 /// this class by invoking the corresponding functionality of ROOT
 /// geometry modeler.
 ///
@@ -52,17 +52,17 @@ protected:
 private:
    G4VPhysicalVolume *SynchronizeHistory();
    TGeoNode          *SynchronizeGeoManager();
-      
+
 public:
    TG4RootNavigator();
    TG4RootNavigator(TG4RootDetectorConstruction *dc);
    virtual ~TG4RootNavigator();
 
    void              SetDetectorConstruction(TG4RootDetectorConstruction *dc);
-   
+
    /// Return the navigation history
    G4NavigationHistory *GetHistory() {return &fHistory;}
-   
+
    // Virtual methods for navigation
    virtual  G4double ComputeStep(const G4ThreeVector &pGlobalPoint,
                                 const G4ThreeVector &pDirection,

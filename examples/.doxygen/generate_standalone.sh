@@ -1,15 +1,15 @@
 #!/bin/sh
 
-# Script to generate standalone Doxygen documentation 
+# Script to generate standalone Doxygen documentation
 # for the examples with non unique class names.
 
 CURDIR=`pwd`
 
 BACK_PATH="../../../doc/examples_html"
 
-# generate documentation 
+# generate documentation
 # {1} example directory
-generate() { 
+generate() {
   echo "processing ${1}"
   cd ../${1}
   EXAMPLE_NAME=${PWD##*/}
@@ -23,6 +23,6 @@ generate() {
 # process examples with standalone documentation
 for DIR in E03/E03a; do
   generate ${DIR} ${BACK_PATH2}
-done  
- 
+done
+
 cd $CURDIR

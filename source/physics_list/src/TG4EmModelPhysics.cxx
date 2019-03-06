@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4EmModelPhysics.cxx
-/// \brief Implementation of the TG4EmModelPhysics class 
+/// \brief Implementation of the TG4EmModelPhysics class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -43,25 +43,25 @@ TG4EmModel TG4EmModelPhysics::GetEmModel(const G4String& modelName)
 {
 /// Return the model tope for given model name
 
-  if ( modelName == GetEmModelName(kPAIModel) ) {       
+  if ( modelName == GetEmModelName(kPAIModel) ) {
     return kPAIModel;
-  }  
+  }
   else if ( modelName == GetEmModelName(kPAIPhotonModel) ) {
     return kPAIPhotonModel;
-  }  
+  }
   else if ( modelName == GetEmModelName(kSpecialUrbanMscModel) ) {
     return kSpecialUrbanMscModel;
   }
-  else if ( modelName == GetEmModelName(kNoEmModel) ) {      
-    return kNoEmModel; 
-  }  
+  else if ( modelName == GetEmModelName(kNoEmModel) ) {
+    return kNoEmModel;
+  }
   else {
     TG4Globals::Exception(
-      "TG4EmModelPhysics", "GetEmModel", 
+      "TG4EmModelPhysics", "GetEmModel",
       TString(modelName.data()) + " unknown model name.");
      return kNoEmModel;
   }
-}       
+}
 
 //_____________________________________________________________________________
 G4String  TG4EmModelPhysics::GetEmModelName(G4int modelType)
@@ -75,12 +75,12 @@ G4String  TG4EmModelPhysics::GetEmModelName(G4int modelType)
     case kNoEmModel:            return "";
     default:
       TG4Globals::Exception(
-        "TG4EmModelPhysics", "GetEmModelName", 
+        "TG4EmModelPhysics", "GetEmModelName",
         TString("Unknown model type ") + TString(modelType));
        return kNoEmModel;
   }
-}    
-    
+}
+
 //
 // ctors, dtor
 //
@@ -109,7 +109,7 @@ TG4EmModelPhysics::TG4EmModelPhysics(G4int theVerboseLevel,
 }
 
 //_____________________________________________________________________________
-TG4EmModelPhysics::~TG4EmModelPhysics() 
+TG4EmModelPhysics::~TG4EmModelPhysics()
 {
 /// Destructor
 }
@@ -121,9 +121,9 @@ TG4EmModelPhysics::~TG4EmModelPhysics()
 //_____________________________________________________________________________
 void TG4EmModelPhysics::AddModel(
                            TG4EmModel emModel,
-                           const G4ParticleDefinition* particle, 
+                           const G4ParticleDefinition* particle,
                            const G4String& regions)
-{ 
+{
 /// Add selected EM model to given particle, process and region.
 /// If regionName is not set, the model is set to the world region.
 
@@ -217,7 +217,7 @@ void TG4EmModelPhysics::AddModel(
                           regionName, 0.0, DBL_MAX, g4FluctModel);
     }
   }
-}                               
+}
 
 //_____________________________________________________________________________
 void TG4EmModelPhysics::AddModels(const std::vector<TG4ModelConfiguration*>& models)
@@ -250,14 +250,14 @@ void TG4EmModelPhysics::AddModels(const std::vector<TG4ModelConfiguration*>& mod
        "TG4EmModelPhysics", "AddModels", message);
       continue;
     }
-    
+
     // Add selected models
     auto aParticleIterator = GetParticleIterator();
     aParticleIterator->reset();
     while ((*aParticleIterator)()) {
       G4ParticleDefinition* particle = aParticleIterator->value();
       G4String particleName = particle->GetParticleName();
-      
+
       // skip particles which are not in selection
       if ( particles != "all" &&
            particles.find(particle->GetParticleName()) == std::string::npos ) {

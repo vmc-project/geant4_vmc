@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4StepLimiterPhysics.cxx
-/// \brief Implementation of the TG4StepLimiterPhysics class 
+/// \brief Implementation of the TG4StepLimiterPhysics class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -25,7 +25,7 @@
 //_____________________________________________________________________________
 TG4StepLimiterPhysics::TG4StepLimiterPhysics(const G4String& name)
   : TG4VPhysicsConstructor(name),
-    fStepLimiterProcess(0) 
+    fStepLimiterProcess(0)
 {
 /// Standard constructor
 }
@@ -33,14 +33,14 @@ TG4StepLimiterPhysics::TG4StepLimiterPhysics(const G4String& name)
 //_____________________________________________________________________________
 TG4StepLimiterPhysics::TG4StepLimiterPhysics(G4int theVerboseLevel,
                                              const G4String& name)
-  : TG4VPhysicsConstructor(name, theVerboseLevel), 
-    fStepLimiterProcess(0) 
+  : TG4VPhysicsConstructor(name, theVerboseLevel),
+    fStepLimiterProcess(0)
 {
 /// Standard constructor
 }
 
 //_____________________________________________________________________________
-TG4StepLimiterPhysics::~TG4StepLimiterPhysics() 
+TG4StepLimiterPhysics::~TG4StepLimiterPhysics()
 {
 /// Destructor
 
@@ -54,7 +54,7 @@ TG4StepLimiterPhysics::~TG4StepLimiterPhysics()
 //_____________________________________________________________________________
 void TG4StepLimiterPhysics::ConstructParticle()
 {
-/// No particles instatiated 
+/// No particles instatiated
 
 }
 
@@ -76,8 +76,8 @@ void TG4StepLimiterPhysics::ConstructProcess()
 
     pmanager ->AddProcess(fStepLimiterProcess, -1, -1, 6);
   }
-  
+
   if (VerboseLevel() > 0) {
     G4cout << "### Step limiter physics constructed." << G4endl;
-  }  
+  }
 }

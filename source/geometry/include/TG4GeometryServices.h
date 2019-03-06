@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4GeometryServices.h
-/// \brief Definition of the TG4GeometryServices class 
+/// \brief Definition of the TG4GeometryServices class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -47,9 +47,9 @@ class TGeoHMatrix;
 
 /// \ingroup geometry
 /// \brief Services for accessing to Geant4 geometry
-/// 
+///
 /// The class provides service methods for accessing to Geant4 geometry,
-/// namely using VMC volumes and materials identifiers. 
+/// namely using VMC volumes and materials identifiers.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -63,24 +63,24 @@ class TG4GeometryServices : public TG4Verbose
     static TG4GeometryServices* Instance();
 
     // methods
-           // utilities  
+           // utilities
     G4double* CreateG4doubleArray(Float_t* array, G4int size) const;
     G4double* CreateG4doubleArray(Double_t* array, G4int size) const;
     G4String  CutName(const char* name) const;
     G4String  CutMaterialName(const char* name) const;
-    G4String  CutVolumePath(const G4String& volumePath, 
-                            G4String& volName, G4int& copyNo) const; 
+    G4String  CutVolumePath(const G4String& volumePath,
+                            G4String& volName, G4int& copyNo) const;
     const G4String& UserVolumeName(const G4String& name) const;
 
-    G4OpticalSurfaceModel  SurfaceModel(EMCOpSurfaceModel model) const;                                            
+    G4OpticalSurfaceModel  SurfaceModel(EMCOpSurfaceModel model) const;
     G4SurfaceType          SurfaceType(EMCOpSurfaceType surfType) const;
-    G4OpticalSurfaceFinish SurfaceFinish(EMCOpSurfaceFinish finish) const; 
-    void  Convert(const G4Transform3D& transform, TGeoHMatrix& matrix) const;                                           
+    G4OpticalSurfaceFinish SurfaceFinish(EMCOpSurfaceFinish finish) const;
+    void  Convert(const G4Transform3D& transform, TGeoHMatrix& matrix) const;
 
     G4Material* MixMaterials(G4String name, G4double density,
-                             const TG4StringVector& matNames, 
+                             const TG4StringVector& matNames,
                              const TG4doubleVector& matWeights);
-           // printing 
+           // printing
     void PrintLimits(const G4String& name) const;
     void PrintVolumeLimits(const G4String& volumeName) const;
     void PrintStatistics(G4bool open, G4bool close) const;
@@ -100,9 +100,9 @@ class TG4GeometryServices : public TG4Verbose
 
     // get methods
            // volumes
-    Int_t NofG3Volumes() const; 
-    Int_t NofG4LogicalVolumes() const; 
-    Int_t NofG4PhysicalVolumes() const; 
+    Int_t NofG3Volumes() const;
+    Int_t NofG4LogicalVolumes() const;
+    Int_t NofG4PhysicalVolumes() const;
     G4VPhysicalVolume* GetWorld() const;
 
     TG4Limits* GetLimits(G4UserLimits* limits) const;
@@ -110,26 +110,26 @@ class TG4GeometryServices : public TG4Verbose
                          const TG4G3CutVector& cuts,
                          const TG4G3ControlVector& controls) const;
 
-    G4LogicalVolume*   FindLogicalVolume(const G4String& name, 
+    G4LogicalVolume*   FindLogicalVolume(const G4String& name,
                                        G4bool silent = false) const;
     G4VPhysicalVolume* FindPhysicalVolume(const G4String& name, G4int copyNo,
                                        G4bool silent = false) const;
     G4VPhysicalVolume* FindDaughter(const G4String& name, G4int copyNo,
                                        G4LogicalVolume* mlv,
                                        G4bool silent = false) const;
-    TG4Limits*         FindLimits(const G4String& name, 
+    TG4Limits*         FindLimits(const G4String& name,
                                        G4bool silent = false) const;
-    TG4Limits*         FindLimits2(const G4String& name, 
+    TG4Limits*         FindLimits2(const G4String& name,
                                        G4bool silent = false) const;
-    TG4Limits*         FindLimits(const G4Material*, 
+    TG4Limits*         FindLimits(const G4Material*,
                                        G4bool silent = false) const;
 
           // materials
-    G4int    GetMediumId(G4LogicalVolume* lv) const;    
+    G4int    GetMediumId(G4LogicalVolume* lv) const;
     G4double GetEffA(G4Material* material) const;
     G4double GetEffZ(G4Material* material) const;
     G4Material* FindMaterial(G4double a, G4double z, G4double density) const;
-    G4Material* FindMaterial(G4double* a, G4double* z, G4double density, 
+    G4Material* FindMaterial(G4double* a, G4double* z, G4double density,
                              G4int nmat, G4double* wmat) const;
 
     TG4MediumMap*    GetMediumMap() const;
@@ -141,10 +141,10 @@ class TG4GeometryServices : public TG4Verbose
     /// Not implemented
     TG4GeometryServices& operator=(const TG4GeometryServices& right);
 
-    // methods        
+    // methods
     G4bool IsG3Volume(const G4String& lvName) const;
     G4bool CompareElement(G4double a, G4double z, const G4Element* elem) const;
-    G4bool CompareMaterial(G4int nofElements, G4double density, 
+    G4bool CompareMaterial(G4int nofElements, G4double density,
                            const G4Material* material) const;
     G4double* ConvertAtomWeight(G4int nmat, G4double* a, G4double* wmat) const;
 #if G4VERSION_NUMBER >= 930
@@ -155,17 +155,17 @@ class TG4GeometryServices : public TG4Verbose
     static             G4String  fgBuffer;     ///< string buffer
     static const G4double  fgkAZTolerance;     ///< A,Z tolerance
     static const G4double  fgkDensityTolerance;///< density tolerance (percentual)
- 
+
     //
     // data members
-    
+
     /// info if user geometry is defined via G3toG4
-    G4bool             fIsG3toG4; 
-    
+    G4bool             fIsG3toG4;
+
     /// map of madia
     TG4MediumMap*      fMediumMap;
-    
-    /// map of optical surfaces names to their objects 
+
+    /// map of optical surfaces names to their objects
     TG4OpSurfaceMap*   fOpSurfaceMap;
 
     /// top physical volume (world)
@@ -174,35 +174,35 @@ class TG4GeometryServices : public TG4Verbose
 
 // inline methods
 
-inline TG4GeometryServices* TG4GeometryServices::Instance() { 
+inline TG4GeometryServices* TG4GeometryServices::Instance() {
   /// Return this instance
-  return fgInstance; 
+  return fgInstance;
 }
 
-inline void TG4GeometryServices::SetWorld(G4VPhysicalVolume* world) { 
+inline void TG4GeometryServices::SetWorld(G4VPhysicalVolume* world) {
   /// Set the world physical volume
-  fWorld = world; 
+  fWorld = world;
 }
 
 inline void TG4GeometryServices::SetIsG3toG4(G4bool isG3toG4) {
   /// Set the info if user geometry is defined via G3toG4
   fIsG3toG4 = isG3toG4;
-}  
+}
 
 inline G4VPhysicalVolume* TG4GeometryServices::GetWorld() const {
   /// Set the world physical volume
-  return fWorld; 
+  return fWorld;
 }
 
 inline TG4MediumMap* TG4GeometryServices::GetMediumMap() const {
   /// Return the medium map
   return fMediumMap;
-}  
+}
 
 inline TG4OpSurfaceMap* TG4GeometryServices::GetOpSurfaceMap() const{
   /// Return the medium map
   return fOpSurfaceMap;
-}  
+}
 
 #endif //TG4_GEOMETRY_SERVICES_H
 

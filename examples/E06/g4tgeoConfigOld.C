@@ -15,17 +15,17 @@
 void Config()
 {
 /// The configuration function for Geant4 VMC for Example06
-/// called during MC application initialization. 
+/// called during MC application initialization.
 /// For geometry defined with VMC and selected Geant4 native navigation
 
   // Default Geant4 VMC run configuration
-  TG4RunConfiguration* runConfiguration 
+  TG4RunConfiguration* runConfiguration
     = new TG4RunConfiguration("geomVMCtoRoot", "emStandard+optical");
-  
+
   // TGeant4
   TGeant4* geant4
     = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration);
-  
+
   // Customise Geant4 setting
   // (verbose level, global range cut, ..)
   geant4->ProcessGeantMacro("g4config.in");

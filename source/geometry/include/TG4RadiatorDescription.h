@@ -11,8 +11,8 @@
 //-------------------------------------------------
 
 /// \file TG4RadiatorDescription.h
-/// \brief Definition of the TG4RadiatorDescription class 
-/// 
+/// \brief Definition of the TG4RadiatorDescription class
+///
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include <globals.hh>
@@ -39,7 +39,7 @@ class TG4RadiatorDescription
 
     // methods
     void PrintParameters() const;
-    
+
     // set methods
     void SetVolumeName(const G4String& name);
     void SetXtrModel(const G4String& name);
@@ -57,7 +57,7 @@ class TG4RadiatorDescription
   private:
     /// The name of associated volume
     G4String  fVolumeName;
-    
+
     /// The transition radiation process model
     G4String  fXtrModel;
 

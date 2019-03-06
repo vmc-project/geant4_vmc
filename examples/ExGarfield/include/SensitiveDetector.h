@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file  ExGarfield/include/SensitiveDetector.h
-/// \brief Definition of the ExGarfield::SensitiveDetector class 
+/// \brief Definition of the ExGarfield::SensitiveDetector class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 ///
@@ -51,7 +51,7 @@ class SensitiveDetector : public TNamed
     void    EndOfEvent();
     void    Register();
     virtual void  Print(Option_t* option = "") const;
-    
+
     // set methods
     void SetVerboseLevel(Int_t level);
 
@@ -64,14 +64,14 @@ class SensitiveDetector : public TNamed
     Int_t    fAbsorberVolId;  ///< The absorber volume Id
     Int_t    fGasVolId;       ///< The gas volume Id
     Int_t    fVerboseLevel;   ///< Verbosity level
-   
-  ClassDef(SensitiveDetector,1) //SensitiveDetector 
+
+  ClassDef(SensitiveDetector,1) //SensitiveDetector
 
 };
 
 /// Set verbose level
 /// \param level The new verbose level value
-inline void SensitiveDetector::SetVerboseLevel(Int_t level) 
+inline void SensitiveDetector::SetVerboseLevel(Int_t level)
 { fVerboseLevel = level; }
 
 /// Return the hits collection

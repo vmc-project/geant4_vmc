@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4PostDetConstruction.h
-/// \brief Definition of the TG4PostDetConstruction class 
+/// \brief Definition of the TG4PostDetConstruction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -36,12 +36,12 @@ class TG4PostDetConstruction : public TVirtualUserPostDetConstruction
     virtual void Initialize(TG4RootDetectorConstruction *dc);
     virtual void InitializeSDandField();
 
-  private:    
+  private:
     /// Not implemented
     TG4PostDetConstruction(const TG4PostDetConstruction& right);
     /// Not implemented
     TG4PostDetConstruction& operator=(const TG4PostDetConstruction& right);
-}; 
+};
 
 #endif //USE_G4ROOT
 

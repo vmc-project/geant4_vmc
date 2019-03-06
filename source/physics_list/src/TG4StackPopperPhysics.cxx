@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4StackPopperPhysics.cxx
-/// \brief Implementation of the TG4StackPopperPhysics class 
+/// \brief Implementation of the TG4StackPopperPhysics class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -23,7 +23,7 @@ TG4StackPopperPhysics::TG4StackPopperPhysics(const G4String& name)
   : TG4VPhysicsConstructor(name),
     fMessenger(this),
     fStackPopperProcess(0),
-    fSelection() 
+    fSelection()
 {
 /// Standard constructor
 }
@@ -31,16 +31,16 @@ TG4StackPopperPhysics::TG4StackPopperPhysics(const G4String& name)
 //_____________________________________________________________________________
 TG4StackPopperPhysics::TG4StackPopperPhysics(G4int theVerboseLevel,
                                              const G4String& name)
-  : TG4VPhysicsConstructor(name, theVerboseLevel), 
+  : TG4VPhysicsConstructor(name, theVerboseLevel),
     fMessenger(this),
-    fStackPopperProcess(0), 
-    fSelection() 
+    fStackPopperProcess(0),
+    fSelection()
 {
 /// Standard constructor
 }
 
 //_____________________________________________________________________________
-TG4StackPopperPhysics::~TG4StackPopperPhysics() 
+TG4StackPopperPhysics::~TG4StackPopperPhysics()
 {
 /// Destructor
 
@@ -54,7 +54,7 @@ TG4StackPopperPhysics::~TG4StackPopperPhysics()
 //_____________________________________________________________________________
 void TG4StackPopperPhysics::ConstructParticle()
 {
-/// No particles instatiated 
+/// No particles instatiated
 
 }
 
@@ -81,15 +81,15 @@ void TG4StackPopperPhysics::ConstructProcess()
          fSelection.find(particle->GetParticleName()) != std::string::npos ) {
 
       if (VerboseLevel() > 1) {
-        G4cout << "Adding StackPopper process to " 
+        G4cout << "Adding StackPopper process to "
                <<  particle->GetParticleName() << G4endl;
-      }         
-             
+      }
+
       pmanager->AddProcess(fStackPopperProcess);
       pmanager->SetProcessOrdering(fStackPopperProcess,idxPostStep);
     }
   }
-  
+
   if (VerboseLevel() > 0) {
     G4cout << "### Stack popper physics constructed." << G4endl;
   }

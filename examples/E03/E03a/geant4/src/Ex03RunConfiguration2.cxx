@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file Ex03RunConfiguration2.cxx
-/// \brief Implementation of the Ex03RunConfiguration2 class 
+/// \brief Implementation of the Ex03RunConfiguration2 class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
 ///
@@ -55,17 +55,17 @@ G4VUserPhysicsList*  Ex03RunConfiguration2::CreatePhysicsList()
 /// LHEP_BERT physics list should be replaced with user own physics list
 
   TG4ComposedPhysicsList* builder = new TG4ComposedPhysicsList();
-  
+
   // User physics list
   G4cout << "Adding user physics list " << G4endl;
   builder->AddPhysicsList(new QGSP_BERT());
-    
+
   G4cout << "Adding SpecialPhysicsList " << G4endl;
   builder->AddPhysicsList(new TG4SpecialPhysicsList(
                                  fSpecialProcessSelection.Data()));
-  
-  return builder;  
-}  
+
+  return builder;
+}
 
 
 /*
@@ -75,7 +75,7 @@ G4VUserDetectorConstruction*  Ex03RunConfiguration2::CreateDetectorConstruction(
 /// Create detector construction
 
   return new ExN03DetectorConstruction();
-}   
+}
 
 
 //_____________________________________________________________________________
@@ -84,5 +84,5 @@ G4VUserPrimaryGeneratorAction* Ex03RunConfiguration2::CreatePrimaryGenerator()
 /// Create primary generator
 
   return new ExN03PrimaryGeneratorAction();
-}  
+}
 */

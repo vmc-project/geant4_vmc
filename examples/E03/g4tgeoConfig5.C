@@ -17,16 +17,16 @@
 void Config()
 {
 /// The configuration function for Geant4 VMC for Example03
-/// called during MC application initialization. 
+/// called during MC application initialization.
 /// For geometry with a user defined magnetic field equation of motion and integrator.
-  
+
   // Run configuration with user geometry construction via Geant4
-  Ex03RunConfiguration4* runConfiguration 
+  Ex03RunConfiguration4* runConfiguration
     = new Ex03RunConfiguration4("geomRoot", "FTFP_BERT");
-  
+
   // Run configuration with user geometry construction via Geant4
   // + special cuts activated
-  // Ex03RunConfiguration4* runConfiguration 
+  // Ex03RunConfiguration4* runConfiguration
   //   = new Ex03RunConfiguration4("geomRootToGeant4", "FTFP_BERT", "specialCuts");
 
   // TGeant4

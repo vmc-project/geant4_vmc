@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03CalorimeterSD.cxx 
-/// \brief Implementation of the Ex03CalorimeterSD class 
+/// \file Ex03CalorimeterSD.cxx
+/// \brief Implementation of the Ex03CalorimeterSD class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
 /// Id: ExN03CalorimeterSD.cc,v 1.6 2002/01/09 17:24:12 ranjard Exp \n
@@ -34,7 +34,7 @@ ClassImp(Ex03CalorimeterSD)
 using namespace std;
 
 //_____________________________________________________________________________
-Ex03CalorimeterSD::Ex03CalorimeterSD(const char* name, 
+Ex03CalorimeterSD::Ex03CalorimeterSD(const char* name,
                                      Ex03DetectorConstruction* detector)
   : TNamed(name, ""),
     fMC(0),
@@ -75,7 +75,7 @@ Ex03CalorimeterSD::Ex03CalorimeterSD(const Ex03CalorimeterSD& origin,
 /// \param detector  The detector construction
 
   fCalCollection = new TClonesArray("Ex03CalorHit", 500);
-  for (Int_t i=0; i<fDetector->GetNbOfLayers()+1; i++) 
+  for (Int_t i=0; i<fDetector->GetNbOfLayers()+1; i++)
     new ((*fCalCollection)[i]) Ex03CalorHit();
 }
 
@@ -118,9 +118,9 @@ void  Ex03CalorimeterSD::ResetHits()
 {
 /// Reset all hits in the hits collection.
 
-  for (Int_t i=0; i<fCalCollection->GetEntriesFast(); i++) 
+  for (Int_t i=0; i<fCalCollection->GetEntriesFast(); i++)
     GetHit(i)->Reset();
-} 
+}
 
 //
 // public methods
@@ -131,9 +131,9 @@ void Ex03CalorimeterSD::Initialize()
 {
 /// Register hits collection in the Root manager;
 /// set sensitive volumes.
-  
+
   if ( TMCRootManager::Instance() ) Register();
-  
+
   // Keep the pointer to TVirtualMC object as a data member
   // to avoid a possible performance penalty due to a frequent retrieval
   // from the thread-local storage
@@ -158,26 +158,26 @@ Bool_t Ex03CalorimeterSD::ProcessHits()
   Int_t copyNo;
   Int_t id = fMC->CurrentVolID(copyNo);
 
-  if (id != fAbsorberVolId  &&  id != fGapVolId ) 
+  if (id != fAbsorberVolId  &&  id != fGapVolId )
     return false;
 
   fMC->CurrentVolOffID(2, copyNo);
   //cout << "Got copyNo "<< copyNo << " " << fMC->CurrentVolPath() << endl;
-  
+
   Double_t edep = fMC->Edep();
 
   Double_t step = 0.;
   if (fMC->TrackCharge() != 0.) step = fMC->TrackStep();
-  
+
   if ( ! GetHit(copyNo) ) {
     std::cerr << "No hit found for layer with copyNo = " << copyNo << endl;
     return false;
-  }  
-  
+  }
+
   if (id == fAbsorberVolId) {
     GetHit(copyNo)->AddAbs(edep,step);
   }
-    
+
   if (id == fGapVolId) {
     GetHit(copyNo)->AddGap(edep,step);
   }
@@ -191,16 +191,16 @@ void Ex03CalorimeterSD::EndOfEvent()
 /// Print hits collection (if verbose) and reset hits afterwards.
 
   if (fVerboseLevel>1)  Print();
-    
+
   // Reset hits collection
-  ResetHits();  
+  ResetHits();
 }
 
 //_____________________________________________________________________________
 void Ex03CalorimeterSD::Register()
 {
 /// Register the hits collection in Root manager.
-  
+
   TMCRootManager::Instance()
     ->Register("hits", "TClonesArray", &fCalCollection);
 }
@@ -209,19 +209,19 @@ void Ex03CalorimeterSD::Register()
 void Ex03CalorimeterSD::Print(Option_t* /*option*/) const
 {
 /// Print the hits collection.
-  
+
    Int_t nofHits = fCalCollection->GetEntriesFast();
-     
+
    cout << "\n-------->Hits Collection: in this event: " << endl;
-	    
-   for (Int_t i=0; i<nofHits; i++) (*fCalCollection)[i]->Print();          
+
+   for (Int_t i=0; i<nofHits; i++) (*fCalCollection)[i]->Print();
 }
 
 //_____________________________________________________________________________
 void Ex03CalorimeterSD::PrintTotal() const
 {
 /// Print the total values for all layers.
-  
+
   Double_t totEAbs=0.;
   Double_t totLAbs=0.;
   Double_t totEGap=0.;
@@ -229,18 +229,18 @@ void Ex03CalorimeterSD::PrintTotal() const
 
   Int_t nofHits = fCalCollection->GetEntriesFast();
   for (Int_t i=0; i<nofHits; i++) {
-    totEAbs += GetHit(i)->GetEdepAbs(); 
+    totEAbs += GetHit(i)->GetEdepAbs();
     totLAbs += GetHit(i)->GetTrakAbs();
-    totEGap += GetHit(i)->GetEdepGap(); 
+    totEGap += GetHit(i)->GetEdepGap();
     totLGap += GetHit(i)->GetTrakGap();
   }
 
-  cout << "   Absorber: total energy (MeV): " 
+  cout << "   Absorber: total energy (MeV): "
        << setw(7) << totEAbs * 1.0e03
-       << "       total track length (cm):  " 
+       << "       total track length (cm):  "
        << setw(7) << totLAbs
        << endl
-       << "   Gap:      total energy (MeV): " 
+       << "   Gap:      total energy (MeV): "
        << setw(7) << totEGap * 1.0e03
        << "       total track length (cm):  "
        << setw(7) << totLGap

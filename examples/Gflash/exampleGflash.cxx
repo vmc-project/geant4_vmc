@@ -31,7 +31,7 @@
 int main(int argc, char** argv)
 {
   // Initialize Root threading.
-  // (Multi-threading is triggered automatically if Geant4 was built 
+  // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
    TThread::Initialize();
@@ -44,7 +44,7 @@ int main(int argc, char** argv)
                                       "The exampleGflash MC application");
 
 #ifdef USE_GEANT4
-  // RunConfiguration for Geant4 
+  // RunConfiguration for Geant4
   TG4RunConfiguration* runConfiguration
     = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT", "gflash", false, false);
 
@@ -58,7 +58,7 @@ int main(int argc, char** argv)
   // + verbose level, global range cuts, etc.
   geant4->ProcessGeantMacro("g4config.in");
 #endif
-  
+
 #ifdef USE_GEANT3
   new TGeant3TGeo("C++ Interface to Geant3");
 #endif
@@ -74,4 +74,4 @@ int main(int argc, char** argv)
   appl->RunMC(10);
 
   delete appl;
-}  
+}

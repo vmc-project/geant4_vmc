@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4Medium.h
-/// \brief Definition of the TG4Medium class 
+/// \brief Definition of the TG4Medium class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -30,23 +30,23 @@ class TG4Medium
   public:
     TG4Medium(G4int id);
     virtual ~TG4Medium();
-    
+
     // methods
     void Print() const;
-    
+
     // set methods
     void SetName(const G4String& name);
     void SetMaterial(G4Material* material);
     void SetLimits(G4UserLimits* limits);
     void SetIfield(G4int ifield);
-    
+
     // get methods
     G4int         GetID() const;
     G4String      GetName() const;
     G4Material*   GetMaterial() const;
     G4UserLimits* GetLimits() const;
     G4int         GetIfield() const;
-    
+
   private:
     /// Not implemented
     TG4Medium();
@@ -58,7 +58,7 @@ class TG4Medium
     // static data members
     static const G4String  fgkUndefinedName; ///< the default (undefined) name
     static const G4int     fgkDefaultIfield; ///< the default ifield value
-  
+
     // data members
     G4int         fID;       ///< medium ID
     G4String      fName;     ///< medium name
@@ -82,23 +82,23 @@ inline void TG4Medium::SetIfield(G4int ifield)
 }
 
 inline G4int TG4Medium::GetID() const
-{ /// Return ID 
-  return fID; 
+{ /// Return ID
+  return fID;
 }
 
 inline G4String TG4Medium::GetName() const
 { /// Return name
-  return fName; 
+  return fName;
 }
 
 inline G4Material* TG4Medium::GetMaterial() const
 { /// Return material
-  return fMaterial; 
+  return fMaterial;
 }
 
 inline G4UserLimits* TG4Medium::GetLimits() const
 { /// Return user limits
-  return fLimits; 
+  return fLimits;
 }
 
 inline G4int  TG4Medium::GetIfield() const

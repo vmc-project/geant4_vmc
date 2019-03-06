@@ -46,7 +46,7 @@
     $ cd /mypath/example_build_g3
     $ cmake -DCMAKE_INSTALL_PREFIX=/mypath/examples_install_g3 \
         -DVMC_WITH_Geant3=ON \
-        -DGeant3_DIR=/mypath/geant3_install/lib64/Geant3-2.0.0 \  
+        -DGeant3_DIR=/mypath/geant3_install/lib64/Geant3-2.0.0 \
         /mypath/geant4_vmc/examples
 
     If ROOT and Geant4 environment was defined using thisroot.[c]sh and
@@ -59,7 +59,7 @@
 
     where N is the number of parallel jobs you require (e.g. if your machine has a dual
     core processor, you could set N to 2).
-   
+
     If you need more output to help resolve issues or simply for information, run make as
     $ make -jN VERBOSE=1
 
@@ -119,13 +119,13 @@
  --------------------------------------
 
  The examples can be also run by calling the executable from the examples
- installation directory: 
+ installation directory:
  $ cd geant4_vmc/examples/E01
  $ /mypath/examples_install_g4/E01/exampleE01
 
  For keeping maximum simplicity of the code, a fixed configuration is defined
  in the examples main() function. More flexible version of the main() function
- is provided in the test programs which default configuration options can be 
+ is provided in the test programs which default configuration options can be
  changed by running the program with selected command line options, eg.
 
  $ testE01

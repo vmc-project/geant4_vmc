@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4GeoTrackManager.cxx
-/// \brief Implementation of the TG4GeoTrackManager class 
+/// \brief Implementation of the TG4GeoTrackManager class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -24,10 +24,10 @@
 #include <TDatabasePDG.h>
 
 // static data members
-const G4double  TG4GeoTrackManager::fgkMinPointDistance = 0.01; 
+const G4double  TG4GeoTrackManager::fgkMinPointDistance = 0.01;
 
 //_____________________________________________________________________________
-TG4GeoTrackManager::TG4GeoTrackManager() 
+TG4GeoTrackManager::TG4GeoTrackManager()
   : TG4Verbose("geoTrackManager"),
     fCollectTracks(kFALSE),
     fCurrentTGeoTrack(0),
@@ -37,7 +37,7 @@ TG4GeoTrackManager::TG4GeoTrackManager()
 }
 
 //_____________________________________________________________________________
-TG4GeoTrackManager::~TG4GeoTrackManager() 
+TG4GeoTrackManager::~TG4GeoTrackManager()
 {
 /// Destructor
 }
@@ -51,15 +51,15 @@ void TG4GeoTrackManager::UpdateRootTrack(const G4Step* step)
 {
 /// Update the TGeo track with a current step point
 
-   G4Track* track = step->GetTrack();  
+   G4Track* track = step->GetTrack();
    G4int stepNumber = track->GetCurrentStepNumber();
-   
+
    if ( stepNumber == 1 ) {
      // Find and update parent track if it exists
-     Int_t trackNumber 
+     Int_t trackNumber
        = gMC->GetStack()->GetCurrentTrackNumber();
-     Int_t parentTrackNumber 
-       = gMC->GetStack()->GetCurrentParentTrackNumber(); 
+     Int_t parentTrackNumber
+       = gMC->GetStack()->GetCurrentParentTrackNumber();
      Int_t pdg = gMC->TrackPid();
      if ( parentTrackNumber >= 0 ) {
        fParentTGeoTrack = gGeoManager->FindTrackWithId(parentTrackNumber);
@@ -67,15 +67,15 @@ void TG4GeoTrackManager::UpdateRootTrack(const G4Step* step)
          TString text = "No parent track with id=";
          text += parentTrackNumber;
          TG4Globals::Exception("TG4GeoTrackManager", "UpdateRootTrack", text);
-       } 
+       }
        fCurrentTGeoTrack = fParentTGeoTrack->AddDaughter(trackNumber, pdg);
        gGeoManager->SetCurrentTrack(fCurrentTGeoTrack);
-       
+
        if ( VerboseLevel() > 1 ) {
          G4cout << "New TGeo track with id=" << trackNumber
                 << "  pdg=" << pdg
                 << "  parent=" << parentTrackNumber << G4endl;
-       }         
+       }
      }
      else {
        Int_t itrack = gGeoManager->AddTrack(trackNumber, pdg);
@@ -84,8 +84,8 @@ void TG4GeoTrackManager::UpdateRootTrack(const G4Step* step)
        if ( VerboseLevel() > 1 ) {
          G4cout << "New primary TGeo track with id=" << trackNumber
                 << "  pdg=" << pdg << G4endl;
-       }         
-     }  
+       }
+     }
      TParticlePDG* particle = TDatabasePDG::Instance()->GetParticle(pdg);
      if ( particle ) {
        fCurrentTGeoTrack->SetName(particle->GetName());
@@ -104,12 +104,12 @@ void TG4GeoTrackManager::UpdateRootTrack(const G4Step* step)
       if ( rdist < fgkMinPointDistance ) skipPoint=kTRUE;
    }
    if ( skipPoint ) return;
-   
+
    // Add point to the track
    G4double time = gMC->TrackTime();
    fCurrentTGeoTrack->AddPoint(x, y, z, time);
    if ( VerboseLevel() > 2 ) {
-     G4cout << "Added point (x,y,z,t)=" 
+     G4cout << "Added point (x,y,z,t)="
             << x << ", " << y << ", " << z << ", " << time << G4endl;
-   }         
+   }
 }

@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file Ex02MCApplication.h
-/// \brief Definition of the Ex02MCApplication class 
+/// \brief Definition of the Ex02MCApplication class
 ///
 /// Geant4 ExampleN02 adapted to Virtual Monte Carlo
 ///
@@ -45,9 +45,9 @@ class Ex02MCApplication : public TVirtualMCApplication
     void InitMC(const char *setup);
     void RunMC(Int_t nofEvents);
     void FinishRun();
- 
-    virtual TVirtualMCApplication* CloneForWorker() const; 
-    virtual void InitForWorker() const; 
+
+    virtual TVirtualMCApplication* CloneForWorker() const;
+    virtual void InitForWorker() const;
     virtual void FinishWorkerRun() const;
 
     virtual void ConstructGeometry();
@@ -60,7 +60,7 @@ class Ex02MCApplication : public TVirtualMCApplication
     virtual void PostTrack();
     virtual void FinishPrimary();
     virtual void FinishEvent();
-    
+
     void   ReadEvent(Int_t i);
 
     // method for tests
@@ -70,9 +70,9 @@ class Ex02MCApplication : public TVirtualMCApplication
     // methods
     Ex02MCApplication(const Ex02MCApplication& origin);
     void RegisterStack() const;
-    
+
     // data members
-    mutable TMCRootManager*   fRootManager;     //!< Root manager 
+    mutable TMCRootManager*   fRootManager;     //!< Root manager
     Ex02MCStack*             fStack;           ///< VMC stack
     Ex02DetectorConstruction fDetConstruction; ///< Dector construction
     Ex02TrackerSD*           fTrackerSD;       ///< Tracker SD

@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4SpecialCutsPhysics.h
-/// \brief Definition of the TG4SpecialCutsPhysics class 
+/// \brief Definition of the TG4SpecialCutsPhysics class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -45,7 +45,7 @@ class TG4SpecialCutsPhysics: public TG4VPhysicsConstructor
           // construct particle and physics
     virtual void ConstructParticle();
     virtual void ConstructProcess();
-    
+
   private:
     /// Not implemented
     TG4SpecialCutsPhysics(const TG4SpecialCutsPhysics& right);
@@ -54,25 +54,25 @@ class TG4SpecialCutsPhysics: public TG4VPhysicsConstructor
 
     //
     // data members
-    
+
     /// the special cuts process for gamma
     TG4SpecialCutsForGamma*          fSpecialCutsForGamma;
-    
+
     /// the special cuts process for e-
     TG4SpecialCutsForElectron*       fSpecialCutsForElectron;
-    
-    /// the special cuts process for e+ 
+
+    /// the special cuts process for e+
     TG4SpecialCutsForEplus*          fSpecialCutsForEplus;
-    
+
     /// the special cuts process for charged hadron
     TG4SpecialCutsForChargedHadron*  fSpecialCutsForChargedHadron;
-    
+
     /// the special cuts process for neutral hadron
     TG4SpecialCutsForNeutralHadron*  fSpecialCutsForNeutralHadron;
-    
+
     /// the special cuts process for muon
-    TG4SpecialCutsForMuon*           fSpecialCutsForMuon; 
-    
+    TG4SpecialCutsForMuon*           fSpecialCutsForMuon;
+
     /// the special cuts process for other particles
     TG4SpecialCutsForOther*          fSpecialCutsForOther;
 };

@@ -43,10 +43,10 @@ class TG4GflashFastSimulation : public TG4VUserFastSimulation
     TG4GflashFastSimulationMessenger* fMessenger; ///< Messenger
 
   	/// The name of material for shower parameterisation
-  	G4String  fMaterialName; 
+  	G4String  fMaterialName;
 
     /// Gflash shower model
-    GFlashShowerModel* fGflashShowerModel; 
+    GFlashShowerModel* fGflashShowerModel;
 };
 
 // inline functions

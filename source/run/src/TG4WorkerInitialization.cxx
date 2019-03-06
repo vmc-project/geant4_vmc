@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4WorkerInitialization.cxx
-/// \brief Implementation of the TG4WorkerInitialization class 
+/// \brief Implementation of the TG4WorkerInitialization class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -63,7 +63,7 @@ void TG4WorkerInitialization::WorkerRunStart() const
 #endif
   //G4cout << "TG4WorkerInitialization::WorkerRunStart() end " << G4endl;
 #endif
-}   
+}
 
 
 //_____________________________________________________________________________

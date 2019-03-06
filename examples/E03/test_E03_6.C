@@ -18,22 +18,22 @@
 
 void test_E03_6(const TString& configMacro, Bool_t oldGeometry)
 {
-/// Macro function for testing example E03 
-/// \param configMacro  configuration macro loaded in initialization 
-///                     (g4Config5.C or g4tgeoConfig5.C)  
-/// \param oldGeometry  if true - geometry is defined via VMC, otherwise 
+/// Macro function for testing example E03
+/// \param configMacro  configuration macro loaded in initialization
+///                     (g4Config5.C or g4tgeoConfig5.C)
+/// \param oldGeometry  if true - geometry is defined via VMC, otherwise
 ///                     via TGeo
-/// 
+///
 /// Activate user defined magnetic field equation of motion and stepper
-/// and run an event of 5 muons.  
+/// and run an event of 5 muons.
 
   // Create application if it does not yet exist
   Bool_t needDelete = kFALSE;
   if ( ! TVirtualMCApplication::Instance() ) {
     new Ex03MCApplication("Example03", "The example03 MC application");
     needDelete = kTRUE;
-  }  
- 
+  }
+
   // MC application
   Ex03MCApplication* appl
     = (Ex03MCApplication*)TVirtualMCApplication::Instance();
@@ -42,7 +42,7 @@ void test_E03_6(const TString& configMacro, Bool_t oldGeometry)
   appl->SetField(20);  // Set field value in z-direction to 20 kGauss (2tesla)
 
   // Set geometry defined via VMC
-  appl->SetOldGeometry(oldGeometry);  
+  appl->SetOldGeometry(oldGeometry);
 
   appl->InitMC(configMacro);
 
@@ -54,4 +54,4 @@ void test_E03_6(const TString& configMacro, Bool_t oldGeometry)
 
   // Inactivate this code to check curving of trajectories in field
   if ( needDelete ) delete appl;
-}  
+}

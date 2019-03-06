@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4VGMMessenger.cxx
-/// \brief Implementation of the TG4VGMMessenger class 
+/// \brief Implementation of the TG4VGMMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -58,17 +58,17 @@ TG4VGMMessenger::TG4VGMMessenger(const G4String& xmlFormat,
   if ( userGeometry == "geomVMCtoRoot"    ||
        userGeometry == "geomRoot"      ) {
     fGeometryInput = "root";
-  }  
-  
+  }
+
   if (!fgDirectory) {
     fgDirectory = new G4UIdirectory("/vgm/");
     fgDirectory->SetGuidance("XML geometry generator control commands.");
-    
+
     G4String cmdName("/vgm/generateRoot");
     fgGenerateRootCmd = new G4UIcmdWithoutParameter(cmdName, this);
     fgGenerateRootCmd->SetGuidance("Export geometry in Root file");
-    fgGenerateRootCmd->AvailableForStates(G4State_Idle); 
-  }  
+    fgGenerateRootCmd->AvailableForStates(G4State_Idle);
+  }
 
   G4String cmdName("/vgm/generate");
   cmdName = cmdName + xmlFormat;
@@ -78,39 +78,39 @@ TG4VGMMessenger::TG4VGMMessenger(const G4String& xmlFormat,
   fGenerateXMLCmd->SetGuidance("if no name is given - the whole world is processed.");
   fGenerateXMLCmd->SetParameterName("lvName", true);
   fGenerateXMLCmd->SetDefaultValue("");
-  fGenerateXMLCmd->AvailableForStates(G4State_Idle); 
+  fGenerateXMLCmd->AvailableForStates(G4State_Idle);
 
   cmdName = G4String("/vgm/set") + xmlFormat + G4String("NumWidth");
   fSetXMLNumWidthCmd = new G4UIcmdWithAnInteger(cmdName, this);
   fSetXMLNumWidthCmd->SetGuidance("Set number with for XML generation");
   fSetXMLNumWidthCmd->SetParameterName("xmlNumWidth", false);
-  fSetXMLNumWidthCmd->AvailableForStates(G4State_Idle); 
+  fSetXMLNumWidthCmd->AvailableForStates(G4State_Idle);
 
   cmdName = G4String("/vgm/set") + xmlFormat + G4String("NumPrecision");
   fSetXMLNumPrecisionCmd = new G4UIcmdWithAnInteger(cmdName, this);
   fSetXMLNumPrecisionCmd->SetGuidance("Set number precision for XML generation");
   fSetXMLNumPrecisionCmd->SetParameterName("xmlNumPrecision", false);
-  fSetXMLNumPrecisionCmd->AvailableForStates(G4State_Idle); 
+  fSetXMLNumPrecisionCmd->AvailableForStates(G4State_Idle);
 
   fSetAssembliesInNamesCmd = new G4UIcmdWithABool("/vgm/setAssembliesInNames", this);
   fSetAssembliesInNamesCmd->SetGuidance("Activate/inactivate including the names of Root assemblies");
   fSetAssembliesInNamesCmd->SetGuidance("in volume names when exporting Root geometry.");
   fSetAssembliesInNamesCmd->SetParameterName("assembliesInNames", false);
-  fSetAssembliesInNamesCmd->AvailableForStates(G4State_PreInit); 
+  fSetAssembliesInNamesCmd->AvailableForStates(G4State_PreInit);
 
   fSetNameSeparatorCmd = new G4UIcmdWithAString("/vgm/setNameSeparator", this);
   fSetNameSeparatorCmd->SetGuidance("Set the name separator used when ");
-  fSetNameSeparatorCmd->SetGuidance("including the names of Root assemblies in volume names"); 
+  fSetNameSeparatorCmd->SetGuidance("including the names of Root assemblies in volume names");
   fSetNameSeparatorCmd->SetGuidance("when exporting Root geometry is activated .");
   fSetNameSeparatorCmd->SetParameterName("nameSeparatoe", false);
-  fSetNameSeparatorCmd->AvailableForStates(G4State_PreInit); 
+  fSetNameSeparatorCmd->AvailableForStates(G4State_PreInit);
 
-  fgCounter++; 
+  fgCounter++;
 }
 
 
 //_____________________________________________________________________________
-TG4VGMMessenger::~TG4VGMMessenger() 
+TG4VGMMessenger::~TG4VGMMessenger()
 {
 /// Destructor
 
@@ -124,7 +124,7 @@ TG4VGMMessenger::~TG4VGMMessenger()
     delete fgGenerateRootCmd;
     fgDirectory = 0;
     fgGenerateRootCmd = 0;
-  }  
+  }
   delete fGenerateXMLCmd;
   delete fSetXMLNumWidthCmd;
   delete fSetXMLNumPrecisionCmd;
@@ -152,25 +152,25 @@ void TG4VGMMessenger::CreateVGMExporter()
 }
 
 // public methods
-  
+
 //_____________________________________________________________________________
 void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
 {
 /// Applies command to the associated object.
 // ---
-  
-  if ( command == fSetAssembliesInNamesCmd ) {    
+
+  if ( command == fSetAssembliesInNamesCmd ) {
       RootGM::Placement::SetIncludeAssembliesInNames(
         fSetAssembliesInNamesCmd->GetNewBoolValue(newValues));
-      return;  
-  }        
+      return;
+  }
 
-  if ( command == fSetNameSeparatorCmd ) { 
+  if ( command == fSetNameSeparatorCmd ) {
       RootGM::Placement::SetNameSeparator(
         newValues.at(0));
-      return;  
-  }  
-        
+      return;
+  }
+
   if ( fGeometryInput == "geant4" && (! fG4Factory) ) {
     // Import Geant4 geometry in VGM
     fG4Factory = new Geant4GM::Factory();
@@ -179,7 +179,7 @@ void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
     // fG4Factory->SetDebug(1);
     fG4Factory->Import(TG4GeometryServices::Instance()->GetWorld());
   }
-    
+
   if ( fGeometryInput == "root" && (! fRootFactory) ) {
     // Import Root geometry in VGM
     fRootFactory = new RootGM::Factory();
@@ -187,36 +187,36 @@ void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
     fImportFactory->SetIgnore(true);
     // fRootFactory->SetDebug(1);
     fRootFactory->Import(gGeoManager->GetTopNode());
-  }  
+  }
 
-  if ( command == fgGenerateRootCmd ) { 
+  if ( command == fgGenerateRootCmd ) {
     if (!fRootFactory) {
       fRootFactory = new RootGM::Factory();
       fG4Factory->Export(fRootFactory);
       gGeoManager->CloseGeometry();
     }
-    gGeoManager->Export("geometry.root");  
+    gGeoManager->Export("geometry.root");
   }
 
-  if ( command == fGenerateXMLCmd ) {    
+  if ( command == fGenerateXMLCmd ) {
 
     CreateVGMExporter();
 
-    if (newValues == "") 
+    if (newValues == "")
       fXmlVGMExporter->GenerateXMLGeometry();
-    else 
+    else
       fXmlVGMExporter->GenerateXMLGeometry(newValues);
-  }        
+  }
 
-  if (command == fSetXMLNumWidthCmd) {    
+  if (command == fSetXMLNumWidthCmd) {
     CreateVGMExporter();
     fXmlVGMExporter->SetNumWidth(fSetXMLNumWidthCmd->GetNewIntValue(newValues));
-  }        
+  }
 
-  if (command == fSetXMLNumPrecisionCmd) {    
+  if (command == fSetXMLNumPrecisionCmd) {
     CreateVGMExporter();
     fXmlVGMExporter->SetNumPrecision(fSetXMLNumPrecisionCmd->GetNewIntValue(newValues));
-  }        
+  }
 
 }
 

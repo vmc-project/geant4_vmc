@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file ExGarfield/geant4/src/RunConfiguration.cxx
-/// \brief Implementation of the ExGarfield::RunConfiguration class 
+/// \brief Implementation of the ExGarfield::RunConfiguration class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 ///

@@ -9,16 +9,16 @@
 
 /// \ingroup Gflash
 /// \file Gflash/g3tgeoConfig.C
-/// \brief Configuration macro for Geant3+TGeo VirtualMC for Gflash example 
+/// \brief Configuration macro for Geant3+TGeo VirtualMC for Gflash example
 
 void Config()
 {
 /// The configuration function for Geant3+TGeo VMC for Gflash example
-/// called during MC application initialization. 
+/// called during MC application initialization.
 
   TGeant3* geant3
-    = new TGeant3TGeo("C++ Interface to Geant3 with TGeo geometry"); 
-  
+    = new TGeant3TGeo("C++ Interface to Geant3 with TGeo geometry");
+
   cout << "Geant3 has been created." << endl;
 }
 

@@ -25,8 +25,8 @@ G4String TG4CrossSectionTypeName(G4int type)
     case kFission:        return "Fission";
     case kChargeExchange: return "ChargeExchange";
     default:              return "Undefined";
-  }      
-}    
+  }
+}
 
 //_____________________________________________________________________________
 TG4CrossSectionType GetCrossSectionType(G4int type)
@@ -38,23 +38,23 @@ TG4CrossSectionType GetCrossSectionType(G4int type)
     case kFission:        return kFission;
     case kChargeExchange: return kChargeExchange;
     default:              return kNoCrossSectionType;
-  }      
-}    
+  }
+}
 
 //_____________________________________________________________________________
 TG4CrossSectionType GetCrossSectionType(G4String name)
 {
-  if ( name == TG4CrossSectionTypeName(kElastic) ) 
+  if ( name == TG4CrossSectionTypeName(kElastic) )
     return kElastic;
-  else if ( name == TG4CrossSectionTypeName(kInelastic) )  
+  else if ( name == TG4CrossSectionTypeName(kInelastic) )
     return kInelastic;
-  else if ( name == TG4CrossSectionTypeName(kCapture) )  
+  else if ( name == TG4CrossSectionTypeName(kCapture) )
     return kCapture;
-  else if ( name == TG4CrossSectionTypeName(kFission) )  
+  else if ( name == TG4CrossSectionTypeName(kFission) )
     return kFission;
-  else if ( name == TG4CrossSectionTypeName(kChargeExchange) )  
+  else if ( name == TG4CrossSectionTypeName(kChargeExchange) )
     return kChargeExchange;
   else
     return kNoCrossSectionType;
-}      
-    
+}
+

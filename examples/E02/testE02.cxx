@@ -11,7 +11,7 @@
 /// \brief The Geant4 VMC example E02 test application
 ///
 /// The Geant4 VMC test application
-/// with explicitely instantiated TGeant3 or TGeant4 and linked 
+/// with explicitely instantiated TGeant3 or TGeant4 and linked
 /// with all libraries.
 ///
 /// Usage:
@@ -129,7 +129,7 @@ void PrintG3Configuration(
 int main(int argc, char** argv)
 {
   // Initialize Root threading.
-  // (Multi-threading is triggered automatically if Geant4 was built 
+  // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
    TThread::Initialize();
@@ -198,8 +198,8 @@ int main(int argc, char** argv)
   // end of code to process arguments
 
   // Create MC application (thread local)
-  Ex02MCApplication* appl 
-    =  new Ex02MCApplication("ExampleE02", 
+  Ex02MCApplication* appl
+    =  new Ex02MCApplication("ExampleE02",
                              "The exampleE02 MC application");
 
 #ifdef USE_GEANT4
@@ -214,8 +214,8 @@ int main(int argc, char** argv)
 #endif
 
 #ifdef USE_GEANT4
-  // RunConfiguration for Geant4 
-  TG4RunConfiguration* runConfiguration 
+  // RunConfiguration for Geant4
+  TG4RunConfiguration* runConfiguration
     = new TG4RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics);
 
   // TGeant4
@@ -230,7 +230,7 @@ int main(int argc, char** argv)
     geant4->ProcessGeantMacro(g4Macro.data());
   }
 #endif
-  
+
 #ifdef USE_GEANT3
   TGeant3* geant3 = 0;
   if ( g3Geometry == "TGeant3" ) {
@@ -264,4 +264,4 @@ int main(int argc, char** argv)
   }
 
   delete appl;
-}  
+}

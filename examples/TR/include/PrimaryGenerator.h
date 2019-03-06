@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file TR/include/PrimaryGenerator.h 
-/// \brief Definition of the PrimaryGenerator class 
+/// \file TR/include/PrimaryGenerator.h
+/// \brief Definition of the PrimaryGenerator class
 ///
 /// Geant4 TestEm10 adapted to Virtual Monte Carlo.
 ///
@@ -35,7 +35,7 @@ namespace TR
 class PrimaryGenerator : public TObject
 {
   public:
-    PrimaryGenerator(TVirtualMCStack* stack); 
+    PrimaryGenerator(TVirtualMCStack* stack);
     PrimaryGenerator(const PrimaryGenerator& origin,
                      TVirtualMCStack* stack);
     PrimaryGenerator();
@@ -45,7 +45,7 @@ class PrimaryGenerator : public TObject
     virtual void GeneratePrimaries();
 
     void  SetNofPrimaries(Int_t nofPrimaries);
- 
+
   private:
     // methods
     void GenerateOnePrimary();

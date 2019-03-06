@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4G3ControlVector.cxx
-/// \brief Implementation of the TG4G3ControlVector class 
+/// \brief Implementation of the TG4G3ControlVector class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -36,12 +36,12 @@ TG4G3ControlVector::TG4G3ControlVector()
 {
 /// Default constructor
 
-  // initialize fControlVector 
-  for (G4int i=0; i<=kNoG3Controls; i++) 
-    fControlVector.push_back(kUnsetControlValue); 
-  
+  // initialize fControlVector
+  for (G4int i=0; i<=kNoG3Controls; i++)
+    fControlVector.push_back(kUnsetControlValue);
+
   // fill name vector
-  if (fgControlNameVector.size() == 0) FillControlNameVector(); 
+  if (fgControlNameVector.size() == 0) FillControlNameVector();
 }
 
 //_____________________________________________________________________________
@@ -51,11 +51,11 @@ TG4G3ControlVector::TG4G3ControlVector(const TG4G3ControlVector& right)
 /// Copy constructor
 
   // copy stuff
-  *this = right;  
+  *this = right;
 }
 
 //_____________________________________________________________________________
-TG4G3ControlVector::~TG4G3ControlVector() 
+TG4G3ControlVector::~TG4G3ControlVector()
 {
 /// Destructor
 }
@@ -73,33 +73,33 @@ TG4G3ControlVector& TG4G3ControlVector::operator=(
   // check assignement to self
   if (this == &right) return *this;
 
-  // initialize fControlVector 
-  for (G4int i=0; i<=kNoG3Controls; i++) 
+  // initialize fControlVector
+  for (G4int i=0; i<=kNoG3Controls; i++)
     fControlVector[i] = right.fControlVector[i];
-  
-  return *this;   
-}  
+
+  return *this;
+}
 
 //_____________________________________________________________________________
 TG4G3ControlValue TG4G3ControlVector::operator[](G4int index) const
 {
-/// Element access operator 
+/// Element access operator
 
   if (index <= kNoG3Controls)
     return fControlVector[index];
   else {
     TG4Globals::Exception(
       "TG4G3ControlVector", "operator[]", "Index out of the vector scope");
-    return kUnsetControlValue;  
-  }    
-}  
+    return kUnsetControlValue;
+  }
+}
 
 //
 // private methods
 //
 
 //_____________________________________________________________________________
-void TG4G3ControlVector::FillControlNameVector() 
+void TG4G3ControlVector::FillControlNameVector()
 {
 /// Define fControlNameVector.
 
@@ -156,11 +156,11 @@ const G4String& TG4G3ControlVector::GetControlName(TG4G3Control control)
 /// Return name of a specified cut.
 
   // fill name vector
-  if (fgControlNameVector.size() == 0) 
-    TG4G3ControlVector::FillControlNameVector(); 
+  if (fgControlNameVector.size() == 0)
+    TG4G3ControlVector::FillControlNameVector();
 
   return fgControlNameVector[control];
-}  
+}
 
 //_____________________________________________________________________________
 TG4G3ControlValue TG4G3ControlVector::GetControlValue(G4int value,
@@ -170,7 +170,7 @@ TG4G3ControlValue TG4G3ControlVector::GetControlValue(G4int value,
 /// special treatment for LOSS values 3,4,5.
 
   switch (value) {
-    case kInActivate: 
+    case kInActivate:
       return kInActivate;
       ;;
     case kActivate:
@@ -184,23 +184,23 @@ TG4G3ControlValue TG4G3ControlVector::GetControlValue(G4int value,
         return kActivate;
       else
         return kUnsetControlValue;
-      ;;                        
-  }    
+      ;;
+  }
   return kUnsetControlValue;
-}    
+}
 
 //_____________________________________________________________________________
-TG4G3ControlValue TG4G3ControlVector::GetControlValue(G4double value, 
+TG4G3ControlValue TG4G3ControlVector::GetControlValue(G4double value,
                                                       TG4G3Control control)
 {
 /// Conversion G4double -> G3ControlValue
 
   return TG4G3ControlVector::GetControlValue((G4int)value, control);
-}    
+}
 
 
 //_____________________________________________________________________________
-G4bool TG4G3ControlVector::SetControl(TG4G3Control control, 
+G4bool TG4G3ControlVector::SetControl(TG4G3Control control,
                                       TG4G3ControlValue controlValue,
                                       TG4G3CutVector& cuts)
 {
@@ -212,17 +212,17 @@ G4bool TG4G3ControlVector::SetControl(TG4G3Control control,
     if (controlValue == kActivate &&
         GetControlValue(kG3LOSS) == kActivate2) {
       TG4Globals::Warning(
-        "TG4Limits", "SetG3Control", "Cannot set DRAY=1 when LOSS=2.");    
+        "TG4Limits", "SetG3Control", "Cannot set DRAY=1 when LOSS=2.");
       return false;
     }
-    else 
+    else
       cuts.SetDeltaRaysOn(true);
-  }               
+  }
 
   if (control == kG3LOSS && controlValue == kActivate2) {
     SetControl(kDRAY, kInActivate, cuts);
-    cuts.SetDeltaRaysOn(false);  
-  }        
+    cuts.SetDeltaRaysOn(false);
+  }
 
   fControlVector[control] = controlValue;
   return true;
@@ -233,7 +233,7 @@ void TG4G3ControlVector::SetG3Defaults()
 {
 /// Set G3 default values for all controls.
 
-  for (G4int i=0; i<=kNoG3Controls; i++) 
+  for (G4int i=0; i<=kNoG3Controls; i++)
     fControlVector[i] = TG4G3Defaults::Instance()->ControlValue(i);
 }
 
@@ -251,7 +251,7 @@ G4bool TG4G3ControlVector::Update(const TG4G3ControlVector& vector)
       fControlVector[kDRAY] = kUnsetControlValue;
        result = true;
   }
-  
+
   // if both kG3LOSS values will have the same effect
   // unset this control
 
@@ -260,7 +260,7 @@ G4bool TG4G3ControlVector::Update(const TG4G3ControlVector& vector)
 
   if (passed  == kActivate2) passed = kActivate;
   if (current == kActivate2) current = kActivate;
-           // there is no need to distinguish 
+           // there is no need to distinguish
            // kActivate, kActivate2 after Init phase
 
   if (current == passed) current = kUnsetControlValue;
@@ -271,7 +271,7 @@ G4bool TG4G3ControlVector::Update(const TG4G3ControlVector& vector)
      fControlVector[kG3LOSS] = current;
      result = true;
   }
-  return result;     
+  return result;
 }
 
 //_____________________________________________________________________________
@@ -281,44 +281,44 @@ G4String TG4G3ControlVector::Format() const
 
 #if __GNUC__ >= 3
   std::ostringstream tmpStream;
-#else  
+#else
   std::strstream tmpStream;
 #endif
 
-  tmpStream << "  G3 control vector:" << G4endl; 
-  for (G4int i=0; i<kNoG3Controls; i++) 
+  tmpStream << "  G3 control vector:" << G4endl;
+  for (G4int i=0; i<kNoG3Controls; i++)
     //if (i != kDRAY) {
-      tmpStream << "    " << fgControlNameVector[i] 
-                << " control value: " << fControlVector[i] << G4endl; 
-    //}             
-    
-  return tmpStream.str();  
-}           
+      tmpStream << "    " << fgControlNameVector[i]
+                << " control value: " << fControlVector[i] << G4endl;
+    //}
+
+  return tmpStream.str();
+}
 
 //_____________________________________________________________________________
 void TG4G3ControlVector::Print() const
 {
 /// Print the controls.
 
-  G4cout << Format();             
-}           
+  G4cout << Format();
+}
 
 //_____________________________________________________________________________
-TG4G3ControlValue 
-TG4G3ControlVector::GetControlValue(G4VProcess* process) const 
+TG4G3ControlValue
+TG4G3ControlVector::GetControlValue(G4VProcess* process) const
 {
 /// Return the control value for the particle associated with
 /// the specified process.
 
-  TG4G3Control control 
+  TG4G3Control control
     = TG4ProcessControlMap::Instance()->GetControl(process);
-    
+
   return fControlVector[control];
 }
 
 //_____________________________________________________________________________
-TG4G3ControlValue 
-TG4G3ControlVector::GetControlValue(TG4G3Control control) const 
+TG4G3ControlValue
+TG4G3ControlVector::GetControlValue(TG4G3Control control) const
 {
 /// Return the control value for the particle associated with
 /// the specified process.
@@ -331,8 +331,8 @@ G4bool TG4G3ControlVector::IsControl() const
 {
 /// Return true if any of controls is set.
 
-  for (G4int i=0; i<kNoG3Controls; i++) 
+  for (G4int i=0; i<kNoG3Controls; i++)
     if (fControlVector[i] != kUnsetControlValue) return true;
-    
-  return false;  
-}  
+
+  return false;
+}

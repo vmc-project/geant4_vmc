@@ -9,7 +9,7 @@
 
 /// \ingroup Gflash
 /// \file Gflash/load_g3.C
-/// \brief Macro for loading libraries to run Gflash example with Geant3. 
+/// \brief Macro for loading libraries to run Gflash example with Geant3.
 
 #include "../macro/g3libs.C"
 
@@ -21,4 +21,4 @@ void load_g3()
   // Load this example library
   gSystem->Load("libmtroot");
   gSystem->Load("libvmc_Gflash");
-}  
+}

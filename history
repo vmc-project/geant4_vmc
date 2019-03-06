@@ -6,7 +6,7 @@
  For the licensing terms see geant4_vmc/LICENSE.
  Contact: root-vmc@cern.ch
 -------------------------------------------------
-     
+
 Tags (history):
 ===============
   18/12/2018
@@ -234,7 +234,7 @@ Tags (history):
         /mcMagneticField/setConstDistance value unit
       The cached magnetic field is created automatically when
       the ConstDistance parameter is set to a non zero value.
-    - Added a possibility to include a user defined magnetic field equation of motion 
+    - Added a possibility to include a user defined magnetic field equation of motion
       and its integrator
     - Integrated a new special UrbanMsc model adapted for ALICE EMCAL by V. Ivantchenko
       and introduced a new set of commands (which do not allow invalid configurations):
@@ -243,7 +243,7 @@ Tags (history):
         /mcPhysics/emModel/setRegions regionName1 regionName2 ...
 
     Examples:
-    - E03: Added a test configuration for including a user defined magnetic field equation 
+    - E03: Added a test configuration for including a user defined magnetic field equation
            of motion and its integrator in example E03 and included the test in test suites
     - E06: Added test for adding tracks in VMC stack by user (in E06 example)
     - A01: Implemented option for use of local magnetic field and
@@ -375,15 +375,15 @@ Tags (history):
       Developments:
       - Migration to Geant4 multi-threading
       Fixes:
-      - Fixed SetDecayMode(): do not fill empty channels (as this causes 
+      - Fixed SetDecayMode(): do not fill empty channels (as this causes
         problems in MT)
-      - Added protection for zero return from G4ParticleTable::GetParticle(i) 
+      - Added protection for zero return from G4ParticleTable::GetParticle(i)
       - Fixed implementation of special controls
       - Fixed compilation with NO_G3TOG4
-    Examples:  
+    Examples:
       Developments:
       - Migration to Geant4 multi-threading
-      - Added examples and examples tests main functions and CMake 
+      - Added examples and examples tests main functions and CMake
         configuration files for bulding programs linked with all libraries
 
     Tested with Geant4 10.00.p01 (with embedded CLHEP 2.1.4.1)
@@ -402,63 +402,63 @@ Tags (history):
     - TG4SpecialStackingAction adapted for G4SmartTrackStack
       (in Geant4 since 9.6.x);  secondaries are not ordered even
        when the special stacking is activated
-    - Added filtering of Geant4 compiler flags in makefiles 
+    - Added filtering of Geant4 compiler flags in makefiles
       (needed for Geant4 10.0)
 
     Fixes:
     - Fixed filling optical photon status in TVirtualMC::StepProcess()
     - Fixed setting of PAI model to selected particles in TG4EmModelPhysics
-    - Fixed missing initialization in TG4RegionsManager  
+    - Fixed missing initialization in TG4RegionsManager
       (thanks to O. Freyermuth)
-    - Fixed g4libs.C to handle correctly using external CLHEP 
+    - Fixed g4libs.C to handle correctly using external CLHEP
       (thanks to I. Das)
     - Fixed TG4TrackingAction to work properly with the default stacking of
-      optical photons  
+      optical photons
     - Fixed compiler warnings issued with Geant4 compiler flags not
       enabled by default (mainly shadowed variables)
 
     Tested with Geant4 10.00 (with embedded CLHEP 2.1.4.1)
-      + patch provided at http://bugzilla-geant4.kek.jp/show_bug.cgi?id=1537, 
+      + patch provided at http://bugzilla-geant4.kek.jp/show_bug.cgi?id=1537,
       Root 5.34/13, VGM 3.06
 
   14/12/2012
   v2-14:
     Migration to Geant4 9.6
     Geant4 VMC:
-    Developments:    
+    Developments:
     - Implemented commands for activating saving random number status
-      and restoring it from a file: 
-    - Improved TG4VSpecialCuts: reorganized code to avoid unnecessary 
+      and restoring it from a file:
+    - Improved TG4VSpecialCuts: reorganized code to avoid unnecessary
       calculations before tests
     - Removed obsolete features:
       classes  TG4LVStructure, TG4LVTree, TG4LVTreeMessenger;
       methood TG4EventAction::DisplayEvent; command /mcEvent/drawTracks
     - Added an option to exclude G3toG4 dependent code which can be activated
-      by setting NO_G3TOG4 environment variable 
+      by setting NO_G3TOG4 environment variable
     G4Root:
     - Added TG4RootNavigator::GetGlobalExitNormal(), required with Geant4 9.6.
       (A. Gheata)
-      
+
     Fixes:
     - Fixed mapping between Rootino and geantino;
-      user can now introduce chargedgeantino by setting the title 
+      user can now introduce chargedgeantino by setting the title
       "ChargedRootino" to Rootino particle.
-    - Fixed bug in TVirtualMC::Gdtom() implementation 
-    - Fixed units in stacking particles 
-    - Fix in TVirtualMC::GetSecondary implementation: get track global time 
+    - Fixed bug in TVirtualMC::Gdtom() implementation
+    - Fixed units in stacking particles
+    - Fix in TVirtualMC::GetSecondary implementation: get track global time
       instead of the local one
-    - Fixes to support Geant4 native geometries: handling copyNo, taking into 
-      account the user limits 
-    - Fixed units in material optical properties  
- 
+    - Fixes to support Geant4 native geometries: handling copyNo, taking into
+      account the user limits
+    - Fixed units in material optical properties
+
     Examples:
     - Added new A01 example
-    - Improved g4vis.in macros and removed use of gean4_vmc commands 
+    - Improved g4vis.in macros and removed use of gean4_vmc commands
       (now removed)
-    - In E02, E03: Default physics list changed to FTFP_BERT to be consistent 
+    - In E02, E03: Default physics list changed to FTFP_BERT to be consistent
       with the examples in Geant4 9.6
- 
-    Tested with Geant4 9.6 (with embedded CLHEP 2.1.3.1), 
+
+    Tested with Geant4 9.6 (with embedded CLHEP 2.1.3.1),
       Root 5.34/03, VGM 3.06
 
 
@@ -466,7 +466,7 @@ Tags (history):
   v2-13:
     Migration to Geant4 9.5:
     In Makefiles: use of geant4-config if G4INSTALL is not defined
-    
+
     Geant4 VMC:
     Developments:
     - Implemented a possibility to select sensitive volumes by the user;
@@ -486,8 +486,8 @@ Tags (history):
       (the medium ID is now added in TG4SensitiveDetector object)
 
     Fixes:
-    - Fix in GetSecondary(..) (bug reported by L. Zambelli) 
-      there was missing conversion of units in the returned value of particle 
+    - Fix in GetSecondary(..) (bug reported by L. Zambelli)
+      there was missing conversion of units in the returned value of particle
       momentum.
     - Fixing compilation with G4UI_NONE and G4VIS_NONE
 
@@ -496,50 +496,50 @@ Tags (history):
       the macro based on liblist renamed to g4libs_old.C;
       previous g4libs_old.C (explicit loading) removed
     - E06:
-      - Added setting parameters for Optical Mie Scattering (according N06)  
+      - Added setting parameters for Optical Mie Scattering (according N06)
       - Updated configuration optical processes using G4 commands
       - Removed special setting for G3 (it was causing G4 exception
         and seems not to be needed for G3)
-    
-    Tested with Geant4 9.5 (with embedded CLHEP 2.1.1.0), 
+
+    Tested with Geant4 9.5 (with embedded CLHEP 2.1.1.0),
       Root 5.30/04 and Root 5.32/00 + patch in root/etc from rev.42474,
       VGM 3.05
 
   14/07/2011
   v2-12:
     Migration to Root v5.30/00 and Geant4 9.5.b01
-    
+
     Geant4 VMC:
     Developments:
     - Implemented new TVirtualMC functions:
       Bool_t GetMaterial(Int_t imat, ...);
       ... which replaced the current Gfmate(...) functions
-    - Mapping physics processes from 9.4.p02 
-    - Adding light anti-ions (ani_deuteron, anti_triton, anti_alpha, anti_He3) 
-      so that users do not to define them themselves via 
+    - Mapping physics processes from 9.4.p02
+    - Adding light anti-ions (ani_deuteron, anti_triton, anti_alpha, anti_He3)
+      so that users do not to define them themselves via
       TVirtualMC::DefineParticle.
 
     Fixes:
     - Coverity defects
-    - Fix in TG4ParticlesManager for handling particles which have 
-      no equivalent in TDatabasePDG: the particle is now added in TDatabasePDG 
+    - Fix in TG4ParticlesManager for handling particles which have
+      no equivalent in TDatabasePDG: the particle is now added in TDatabasePDG
       without issuing an exception
 
     Examples:
     - Adding a test for testing all available G4 physics lists
     - Adding a test for the new function GetMaterial() in E01
-    - Removing code calling Geant3 visualization functions from all 
+    - Removing code calling Geant3 visualization functions from all
       examples code and macros
-    - Adding a primary generator with anti_nuclei in E03 and added this test 
+    - Adding a primary generator with anti_nuclei in E03 and added this test
       in test_suite
-    
-    Tested with Geant4 9.4.p02 and 9.5.b01, CLHEP 2.1.0.1, 
+
+    Tested with Geant4 9.4.p02 and 9.5.b01, CLHEP 2.1.0.1,
       Root 5.28/00e and Root 5.30/00, VGM 3.04
 
   22/12/2010
   v2-11:
     Migration to Geant4 9.4 release.
-    
+
     Tested with Geant4 9.4, CLHEP 2.1.0.1, Root 5.28/00, VGM 3.04
 
   02/10/2010
@@ -550,73 +550,73 @@ Tags (history):
       virtual void   SetCollectTracks(...);
       virtual Bool_t IsCollectTracks() const;
       virtual Bool_t CurrentBoundaryNormal(...) const;
-   - Added new TG4EmModelPhysics which allows user selection of an extra 
+   - Added new TG4EmModelPhysics which allows user selection of an extra
       EM energy loss and fluctuations models.
-   -  Adding a utility class, TG4ParticlesChecker, for comparing particles 
-      properties defined in Root and Geant4 and its messenger 
+   -  Adding a utility class, TG4ParticlesChecker, for comparing particles
+      properties defined in Root and Geant4 and its messenger
       TG4ParticlesCheckerMessenger.
-    - Implemented commands to allow user to customise the setting of the 
+    - Implemented commands to allow user to customise the setting of the
       the max allowed step in materials with a density below a limit value
-    - Added a possbility to switch off passing the random number seed from 
-      TRandom in CLHEP::HepRandom; this allows using standard Geant4 commands 
+    - Added a possbility to switch off passing the random number seed from
+      TRandom in CLHEP::HepRandom; this allows using standard Geant4 commands
       for saving and restoring the random number generator status
-    - Mapped processed used in CHIPS and QBBC physics lists   
+    - Mapped processed used in CHIPS and QBBC physics lists
     - Migration to Geant4 9.4.b01:
-      - updated TG4UserParticlesPhysics, mapped processes present in new 
+      - updated TG4UserParticlesPhysics, mapped processes present in new
 
     Fixes:
     - Fixed the time of flight returned via TVirtualMC::TrackPosition():
-      return the global track time (= time since the event in which the track 
-      belongs is created) instead of local track time (= the local time since 
+      return the global track time (= time since the event in which the track
+      belongs is created) instead of local track time (= the local time since
       the current track is created) in order to be consistent with Geant3.
-    
+
     Tested with Geant4 9.3.p02, CLHEP 2.0.4.5, Root 5.27/06, VGM 3.03
-            and Geant4 9.4.b01, CLHEP 2.0.4.6  
+            and Geant4 9.4.b01, CLHEP 2.0.4.6
 
     Examples:
       Removed macros for running examples with Fluka
 
-    Tested with Geant3 1.11, Geant4 VMC 2.10 
+    Tested with Geant3 1.11, Geant4 VMC 2.10
 
   20/05/2010
   v2-9:
     G4Root
-      - Moved from Root in Geant4 VMC 
-      
+      - Moved from Root in Geant4 VMC
+
     Geant4 VMC:
     Improvements:
       - Added new class TG4FieldParameters which allows customization of Geant4
         magnetic field integrator and accuracy parameters.
         (See E02/g4config.in an example of new commands.)
       - Added new class TG4CrossSectionManager which allows inspecting
-        hadronic cross sections. 
+        hadronic cross sections.
         (See: http://root.cern.ch/drupal/content/physics-list)
       - The available hadron physics lists names are now taken directly from
-        G4PhysListFactory.   
-        
+        G4PhysListFactory.
+
     Fixes:
-      - In TG4RegionsManager: 
-        - set the range cuts to result always to an energy cut below the user 
+      - In TG4RegionsManager:
+        - set the range cuts to result always to an energy cut below the user
           cut value.
         - set ranges also for the world volume
-        - increased the maximum order of search ranges (to 1km) 
+        - increased the maximum order of search ranges (to 1km)
         - fixed CheckCut method (the cut from range must be <= VMC cut)
       - In TG4StepManager:
-        - Adding its own G4Navigator object, which is used for LocateGlobalPoint... 
+        - Adding its own G4Navigator object, which is used for LocateGlobalPoint...
           calls in pre-track phase.
           (Fixes the problem reported by A. Robert.)
-      - In TG4OpGeometryManager, TG4OpticalPhysics 
+      - In TG4OpGeometryManager, TG4OpticalPhysics
         - Do not set RINDEX material property if defined with zero values.
-          (The zero value is a Geant3 convention to define material as metal 
-          which was not adopted in Geant4, where 0 values cause unpredictable 
+          (The zero value is a Geant3 convention to define material as metal
+          which was not adopted in Geant4, where 0 values cause unpredictable
           behavior in G4OpBoundary process.)
-        - The Raileigh and boundary processes were not added to opticalphoton 
+        - The Raileigh and boundary processes were not added to opticalphoton
           process manager.
-      - Fix in applying MCApplication::TrackingRMax,TrackingZMax.  
-      
+      - Fix in applying MCApplication::TrackingRMax,TrackingZMax.
+
     Examples:
-      - Frozen testing examples with Fluka.     
-          
+      - Frozen testing examples with Fluka.
+
     Tested with Geant4 9.3.p01, CLHEP 2.0.4.5, Root 5.26/00b, VGM 3.03;
 
   21/01/2010
@@ -627,24 +627,24 @@ Tags (history):
          Implemented new command for user customization
          of optical physics list;
          Changed/added the default parameters:
-           fgkDefaultMaxNumPhotons = 20; 
-           fgkDefaultMaxBetaChange = 1.0; 
-           fgkDefaultYieldFactor = 1.0;  
+           fgkDefaultMaxNumPhotons = 20;
+           fgkDefaultMaxBetaChange = 1.0;
+           fgkDefaultYieldFactor = 1.0;
        - Passing the random number seed from TRandom in CLHEP::HepRandom
          (on the request from FairRoot)
        - Added an option to print memory usage at the end of event
-       - Added an option to print all regions 
+       - Added an option to print all regions
        - New, faster implementation of VMC functions:
            Int_t VolId(const Text_t* volName) const;
            const char* VolName(Int_t id) const;
-    
+
     Fixes:
       - Fixes in applying VMC cuts:
         - fixed processes names in TG4G3CutVector
         - fix in applying PPCUTM: the cut is now applied as a limit
-          to the total energy of e+e- pair procuced by muon; 
+          to the total energy of e+e- pair procuced by muon;
           the cut is not applied for e+e- pair from gamma conversion
-      - Fix in handling feedback photons: keep the feedback photon 
+      - Fix in handling feedback photons: keep the feedback photon
           PDG encoding which is different from opticalphoton
       - Fix in applying max step limit
       - Fix in TG4RunConfiguration constructor:
@@ -654,14 +654,14 @@ Tags (history):
           Thanks to V. Di Benedetto for reporting this problem.
       - Fixed handling of particle weights
           Thanks to Vito Di Benedetto for pointing at this.
-          
+
     Tested with Geant4 9.3, CLHEP 2.0.4.5, Root 5.26/00, VGM 3.02;
 
     Examples:
        - Added an example of magnetic field class Ex02MagField in E02
-         
-    Tested with Geant3 1.11, Geant4 VMC 2.8, Fluka VMC 0.4 
-             
+
+    Tested with Geant3 1.11, Geant4 VMC 2.8, Fluka VMC 0.4
+
 
   15/07/2009
   v2-7:
@@ -678,16 +678,16 @@ Tags (history):
         The process TG4SpecialControls is replaced with a manager class
         TG4SpecialControlsV2, which functions are colled from tracking
         and stepping functions.
-      - When using special stacking action, neutrinos are not killed 
+      - When using special stacking action, neutrinos are not killed
         by default, but optionally. This options can be set via a command:
         /mcTracking/skipNeutrino  [true|false]
        Fixes:
       - Fix in applying special controls (the original processes activation
-        was not always restored when particle got out from a given tracking 
+        was not always restored when particle got out from a given tracking
         medium or stopped).
-      - Fix in applying SetMaxStep (the original step limit was not always 
-        restored when particle got out from a given tracking 
-        medium or stopped). 
+      - Fix in applying SetMaxStep (the original step limit was not always
+        restored when particle got out from a given tracking
+        medium or stopped).
 
      Tested with Geant4 9.2.p01, CLHEP 2.0.4.2, Root 5.24/00, VGM 3.02;
 
@@ -695,32 +695,32 @@ Tags (history):
       - Fixes in E02 example: fixing a problem reported by A, Robert,
         when using stack for a large events, links to mother particles
         get lost after a few hundreds of events.
- 
-     Tested with Geant3 1.11, Geant4 VMC 2.7, Fluka VMC 0.4 
+
+     Tested with Geant3 1.11, Geant4 VMC 2.7, Fluka VMC 0.4
 
   06/03/2009
   v2-6:
     Geant4 VMC:
        - Adaptation to the new TGeo mag field interface
        - Implemented TVirtualMC::SetUserDecay
-       - Including the names of Root assemblies in volume names 
+       - Including the names of Root assemblies in volume names
          when exporting Root geometry in Geant4 (optinal)
        - Removing G4VisManager inheritance from TG4VisManager;
          G4VisExecutive is now used for instatiating G4 visualzation
-         drivers   
-      Fixes: 
+         drivers
+      Fixes:
        - Fix in mapping primary particles Ids in TG4TrackManager.
        - Increase copyNo from divisions by 1 when running with G4 native
          geometry (to be compatible with TGeo numbering.)
-       - Migration to gcc 4.3.2 
-   
+       - Migration to gcc 4.3.2
+
     Examples:
-      - Migration to the new TGeo mag field interface 
+      - Migration to the new TGeo mag field interface
       - Material definition using directly Root objects,
       - Added test for user decay (in E03)
       - Macro g4libs.C replaced with a new one using Geant4 liblist;
-        thanks to Ch.H. Christensen and D. Naumov for this development. 
-    
+        thanks to Ch.H. Christensen and D. Naumov for this development.
+
     Tested with Geant4 9.2, CLHEP 2.0.4.2, Root 5.23/02, VGM 3.02
 
   21/07/2008
@@ -732,19 +732,19 @@ Tags (history):
         which the external decayer will have a priority over
         using Geant4 decay table; the new command:
         /mcPhysics/setExtDecayerSelection [particleName1 ..]
-      - Fix in applying CUTELE (problem reported by Stefano Sparato) 
+      - Fix in applying CUTELE (problem reported by Stefano Sparato)
       - Fixing problem (undefined symbols) when running in batch mode
         (reported by Mohammad Al-Turrany)
       - Implemented TVirtualMC::ForceDecayTime()
       - Improved and completed documentation
-      - Plus other minor fixes and corrections  
-   
+      - Plus other minor fixes and corrections
+
     Examples:
       - Adding macros for running with Fluka
       - In E03: added an example for user defined regions in Geant4
       - Adding setting FPE mask to zero, in order to make sure than FPE for
         FE_OVERFLOW is disabled what is required for Geant4.
-    
+
     Tested with Geant4 9.1.p02, CLHEP 2.0.3.2, Root 5.20/00, VGM 3.01
 
   18/12/2007
@@ -756,20 +756,20 @@ Tags (history):
         - The classes used for selecting/building physics list
           are now moved in a new directory physics_list
         - The physics constructor classes were renamed
-          from  TG4PhysicsConstructorXYZ to TG4XYZPhysics 
-        - Some command defined in /mcPhysics were changed 
+          from  TG4PhysicsConstructorXYZ to TG4XYZPhysics
+        - Some command defined in /mcPhysics were changed
           with these modifications
       - Implemented new TVirtualMC functions for user defined
         particles, including their decay channels:
           DefineParticle()
           SetDecayMode()
       - Revised TMCProcess constants, adding new constants
-        needed for Geant4 physics in root/vmc    
-    
+        needed for Geant4 physics in root/vmc
+
     Examples:
-      - In E03: added an example for adding particles and ions      
+      - In E03: added an example for adding particles and ions
         thanks to Mohammad Al-Turany
-    
+
     Tested with Geant4 9.1, CLHEP 2.0.3.2, Root 5.17/08, VGM 3.00
 
   03/07/2007
@@ -779,9 +779,9 @@ Tags (history):
         boundary process with the status Detection
         required by ALICE - thanks to Andrei Gheata
       - Migration to Geant4 9.0
-      
+
      Tested with Geant4 9.0, CLHEP 2.0.3.1, Root 5.16/00, VGM 2.09
-               
+
 
   30/05/2007:
   v2-2:
@@ -797,7 +797,7 @@ Tags (history):
         The saving secondaries in stepping can be selected via
         command: /mcTracking/saveSecondariesInStep true
       - Implemented calls to a new VMC application function
-        TVirtualMCApplication::MisalignGeometry()  
+        TVirtualMCApplication::MisalignGeometry()
 
      Tested with Geant4 8.3, CLHEP 2.0.3.1, Root 5.15/08, VGM 2.09
 
@@ -808,8 +808,8 @@ Tags (history):
         of MC; the calls to VMC are now checked with respect to
         the application state and a warning is issued of the call happens
         at wrong time.
-      - A few fixes for running with G4Root navigation   
- 
+      - A few fixes for running with G4Root navigation
+
      Tested with Geant4 8.2.p01, CLHEP 2.0.3.1, Root 5.15/04, VGM 2.08.04
 
   18/12/2006
@@ -826,13 +826,13 @@ Tags (history):
         - geomGeant4        - geometry defined via Geant4, G4 native navigation
      - Restructuring code in geometry category:
        - Implementation of the VMC functions for building geometry
-         now in TG4MCGeometry : TVirtualMCGeometry; 
+         now in TG4MCGeometry : TVirtualMCGeometry;
        - TGeant4 instatiates either TG4MCGeometry or TGeoMCGeometry
-         depending on user choice 
+         depending on user choice
      - Migration to Geant4 8.2:
          Updated TG4ParticlesManager - PDG codes for nuclei now
          defined in Geant4, these codes are used when storing particles
-         in the VMC stack  
+         in the VMC stack
 
     Examples:
        - In all example geometry is now by default defined via in Root;
@@ -841,10 +841,10 @@ Tags (history):
        - Getting media Id needded for setting cuts or optical properties
          via new function TVirtualMC::MediumId(const Text_t* mediumName)
        - Updated test_suite to include all ways of geometry
-         definition/naviagtion, added new run_suite.sh to test run_*C macros            
-        
+         definition/naviagtion, added new run_suite.sh to test run_*C macros
+
     Tested with Geant4 8.2, CLHEP 2.0.3.1, Root 5.14/00, VGM 2.08.04
-    
+
 
   06/07/2006
   v1-9:
@@ -866,7 +866,7 @@ Tags (history):
         in a user derived class it now sufficient to override only the
         TG4RunConfiguration::CreatePhysicsList() method.
       - New way of selecting physics via TG4PhysicsListOptions
-      - Migration to CLHEP 2.0.2.2 
+      - Migration to CLHEP 2.0.2.2
 
     Tested with Geant4 8.0, CLHEP 1.9.2.2 and 2.0.2.2, Root 5.08/00, VGM 2.07
 
@@ -877,9 +877,9 @@ Tags (history):
        and material properties for optical physics
      - Added possibility to define maximum number of optical photons
        per step by user (command /mcPhysics/setCerenkovMaxPhotons)
-     
+
     Examples:
-     - Added E06 example which demonstrates Cherenkov and optical photon 
+     - Added E06 example which demonstrates Cherenkov and optical photon
        processes
 
     Tested with Geant4 7.0 and 7.1, Root 5.02/00, VGM 2.05
@@ -896,9 +896,9 @@ Tags (history):
         old g4toxml convertor is disabled.
       - Fixed setting cuts and G3 controls via special cuts and
         special control processes.
-      
+
     Tested with Geant4 7.0, Root 4.03/02, VGM 2.03
- 
+
 
   04/01/2005
   v1-5:
@@ -911,15 +911,15 @@ Tags (history):
     Examples:
       Added test_suite.sh to test automatically all examples with
       all MCs; added configuration macros for TGeant3TGeo.
-      
+
     Tested with Geant4 7.0, Root 4.02/00
- 
+
 
   05/10/2004
   v1-4:
     Geant4_vmc:
       Updated for modifications in TVirtualMC;
-      corrections in Gmtod(), Gdtom() functions 
+      corrections in Gmtod(), Gdtom() functions
 
     Convertors
     g4toxml:
@@ -927,9 +927,9 @@ Tags (history):
       the TOP.xml file is not needed anymore.
     roottog4:
       Added support for composite shapes;
-      Added support for divisions in reflected mothers; 
+      Added support for divisions in reflected mothers;
       Corrections in mapping tracking media Ids to G4 logical volumes
-    
+
     Platform names have been changed according to root-config --arch;
     this changes also the target lib and tmp directories names.
     Tested with Geant4 6.2, Root 4.01/02
@@ -940,29 +940,29 @@ Tags (history):
     Convertors:
     g4toxml:
       Design updated to support two XML format: AGDD and GDML (new);
-      the command for XML file generation changed to 
+      the command for XML file generation changed to
         /xml/generateAGDD [volName]
-        /xml/generateGDML [volName] 
+        /xml/generateGDML [volName]
 
     roottog4:
        Bug fixes in sphere (rmax); polycone and polyhedra solids
        (do not modify original parameters of TGeo shapes).
-    
+
     Tested with Geant4 6.1, Root 3.10/02 and Root 4.00/03.
 
-    
+
   18/12/2003:
   v1-2:
     Geant4_vmc:
     Update to Geant4 6.0 (removal of g4std, G4std);
     updated physics contructors according to novice examples in
-    Geant4 6.0. 
+    Geant4 6.0.
 
     Convertors - g4toxml:
-    Corrected export of reflected volumes. 
+    Corrected export of reflected volumes.
 
     Tested with Geant4 6.0, Root 3.10/01.
-    
+
 
   10/10/2003:
   v1-1:
@@ -973,7 +973,7 @@ Tags (history):
     DefineParticle(..)
     DefineIon(..)
     ParticleName(..) const
-    ParticleMass(..) const	  
+    ParticleMass(..) const
     Double_t  ParticleCharge(..) const
     Double_t  ParticleLifeTime(..) const
     TMCParticleType ParticleMCType(..) const
@@ -981,9 +981,9 @@ Tags (history):
     Examples:
     Update to changes in VMC:
     removed functions TrackingRmax, TrackingZmax (not needed if default is used);
-    removed calls to gMC->DefineParticles() in InitMC 
-    (this function is going to be removed from TVirtualMC).  
-   
+    removed calls to gMC->DefineParticles() in InitMC
+    (this function is going to be removed from TVirtualMC).
+
     Tested with Geant4 5.2, Root 3.10/01.
 
   21/07/2003:
@@ -998,12 +998,12 @@ Tags (history):
     Updated for changes in TVirtualMCStack;
     modifications to support geometry defined via TGeo
     using roottog4 convertor.
-    
+
     Examples:
     In E01 added new functions for building geometry via TGeo
     as an alternative to old way via VMC;
-    update for changes in TVirtualStack.  
-    
+    update for changes in TVirtualStack.
+
     Tested with Geant4 5.2, Root 3.05/06.
 
   03/06/2003:
@@ -1012,24 +1012,24 @@ Tags (history):
     Enabled a user defined physics list:
     TG4VRunConfiguration can be overriden by a user own
     class instantiating a user own physics list
-    (derived from G4VUserPhysicsList). 
+    (derived from G4VUserPhysicsList).
     Update for Geant4 5.1.
 
     Examples:
     Corrected deleting of MC application
     (to avoid warning from deleting static G4 objects when exiting Root)
-    
+
     Tested with Geant4 5.1, Root 3.05/04.
 
   13/03/2003:
   v0-4:
     geant4_vmc:
     Saving secondary particles to MC stack made optional
-    (added /mcTracking/saveSecondaries command); 
+    (added /mcTracking/saveSecondaries command);
     a few corrections.
-    
+
     Examples:
-    New example E03;    
+    New example E03;
     Corrected implementation in the examples stack classes
     - fixed meaning of the argument done (renamed toBeDone)
     to be consistent with TGeant3 implementation;
@@ -1044,16 +1044,16 @@ Tags (history):
 
   18/12/2002:
   v0-2:
-    Update for new Geant4 version; 
+    Update for new Geant4 version;
     a few corrections (mainly in makefiles).
     Tested with Geant4 5.0, Root 3.04/01.
 
-  12/10/2002:  
+  12/10/2002:
   v0-1:
     The first released version;
     tested with Geant4 4.1 + patch01, Root 3.03/09.
-     
-  20/09/2002:   
+
+  20/09/2002:
   First revision:
     Implementation of TVirtualMC interface (in Root) for Geant4;
     source: AliRoot/TGeant4.

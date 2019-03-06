@@ -11,7 +11,7 @@
 /// \brief The Geant4 VMC example TR test application
 ///
 /// The Geant4 VMC test application
-/// with explicitely instantiated TGeant3 or TGeant4 and linked 
+/// with explicitely instantiated TGeant3 or TGeant4 and linked
 /// with all libraries.
 ///
 /// <pre>
@@ -135,7 +135,7 @@ void PrintG3Configuration(
 int main(int argc, char** argv)
 {
   // Initialize Root threading.
-  // (Multi-threading is triggered automatically if Geant4 was built 
+  // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
    TThread::Initialize();
@@ -213,8 +213,8 @@ int main(int argc, char** argv)
   appl->SetPrintModulo(10000);
 
 #ifdef USE_GEANT4
-  // RunConfiguration for Geant4 
-  TG4RunConfiguration* runConfiguration 
+  // RunConfiguration for Geant4
+  TG4RunConfiguration* runConfiguration
     = new TG4RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics, false, false);
 
   // TGeant4
@@ -228,7 +228,7 @@ int main(int argc, char** argv)
     geant4->ProcessGeantMacro(g4Macro.data());
   }
 #endif
-  
+
 #ifdef USE_GEANT3
   if ( g3Geometry == "TGeant3" ) {
     new TGeant3("C++ Interface to Geant3");
@@ -267,4 +267,4 @@ int main(int argc, char** argv)
   }
 
   delete appl;
-}  
+}

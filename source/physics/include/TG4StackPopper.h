@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4StackPopper.h
-/// \brief Definition of the TG4StackPopper class 
+/// \brief Definition of the TG4StackPopper class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -22,8 +22,8 @@ class TVirtualMCStack;
 class G4Track;
 
 /// \ingroup physics
-/// \brief The process which pops particles defined by user from 
-///        the VMC stack and passes them to tracking  
+/// \brief The process which pops particles defined by user from
+///        the VMC stack and passes them to tracking
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -32,7 +32,7 @@ class TG4StackPopper: public G4VProcess
   public:
     TG4StackPopper(const G4String& processName = "stackPopper");
     virtual ~TG4StackPopper();
-    
+
     // static access method
     static TG4StackPopper* Instance();
 
@@ -81,7 +81,7 @@ class TG4StackPopper: public G4VProcess
     TG4StackPopper(const TG4StackPopper& right);
     /// Not implemented
     TG4StackPopper& operator = (const TG4StackPopper& right);
-    
+
     /// this instance
     static G4ThreadLocal TG4StackPopper*  fgInstance;
 
@@ -103,9 +103,9 @@ class TG4StackPopper: public G4VProcess
 
 // inline methods
 
-inline TG4StackPopper* TG4StackPopper::Instance() { 
+inline TG4StackPopper* TG4StackPopper::Instance() {
   /// Return this instance.
-  return fgInstance; 
+  return fgInstance;
 }
 
 inline G4bool TG4StackPopper::IsApplicable(

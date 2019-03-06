@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file  TG4SDServices.h
-/// \brief Definition of the  TG4SDServices class 
+/// \brief Definition of the  TG4SDServices class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -66,12 +66,12 @@ class TG4SDServices
     G4int GetVolumeID(G4LogicalVolume* volume) const;
     G4int GetMediumID(G4LogicalVolume* volume) const;
     G4String         GetVolumeName(G4int volumeId) const;
-    G4LogicalVolume* GetLogicalVolume(G4int volumeId, G4bool warn = true) const;   
+    G4LogicalVolume* GetLogicalVolume(G4int volumeId, G4bool warn = true) const;
     G4int            GetMediumId(G4int volumeId) const;
     TVirtualMCSensitiveDetector* GetUserSD(G4String volumeName, G4bool warn = true) const;
-    G4bool  GetIsStopRun() const; 
+    G4bool  GetIsStopRun() const;
           // SDs
-    Int_t NofSensitiveDetectors() const; 
+    Int_t NofSensitiveDetectors() const;
     TG4SensitiveDetector* GetSensitiveDetector(G4VSensitiveDetector* sd) const;
     std::set<TVirtualMCSensitiveDetector*>* GetUserSDs() const;
 
@@ -91,15 +91,15 @@ class TG4SDServices
 
     static const G4int fgkFirstVolumeId; ///< the first volume id
 
-    G4bool  fIsStopRun; ///< info about run stopping by user  
+    G4bool  fIsStopRun; ///< info about run stopping by user
 
-    /// map volume name -> volume id 
+    /// map volume name -> volume id
     std::map<G4String, G4int> fVolNameToIdMap;
 
     /// map volume id ->  logical volume
     std::map<G4int, G4LogicalVolume*>  fVolIdToLVMap;
 
-    /// map logical volume -> volume id 
+    /// map logical volume -> volume id
     std::map<G4LogicalVolume*, G4int>  fLVToVolIdMap;
 
     /// vector of user SDs
@@ -114,9 +114,9 @@ class TG4SDServices
 
 // inline methods
 
-inline TG4SDServices* TG4SDServices::Instance() { 
+inline TG4SDServices* TG4SDServices::Instance() {
   /// Returns this instance.
-  return fgInstance; 
+  return fgInstance;
 }
 
 inline G4int TG4SDServices::GetFirstVolumeId() {
@@ -124,14 +124,14 @@ inline G4int TG4SDServices::GetFirstVolumeId() {
   return fgkFirstVolumeId;
 }
 
-inline void TG4SDServices::SetIsStopRun(G4bool isStopRun) { 
+inline void TG4SDServices::SetIsStopRun(G4bool isStopRun) {
   /// Sets flag for notifying about stopping run by a user.
-  fIsStopRun = isStopRun; 
+  fIsStopRun = isStopRun;
 }
 
-inline G4bool TG4SDServices::GetIsStopRun() const { 
+inline G4bool TG4SDServices::GetIsStopRun() const {
   /// Returns flag for notifying about stopping run by a user.
-  return fIsStopRun; 
+  return fIsStopRun;
 }
 
 inline std::set<TVirtualMCSensitiveDetector*>* TG4SDServices::GetUserSDs() const {

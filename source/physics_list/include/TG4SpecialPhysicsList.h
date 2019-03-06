@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4SpecialPhysicsList.h
-/// \brief Definition of the TG4SpecialPhysicsList class 
+/// \brief Definition of the TG4SpecialPhysicsList class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -27,10 +27,10 @@ class TG4FastSimulationPhysics;
 class TG4VUserFastSimulation;
 
 /// \ingroup physics_list
-/// \brief The Geant4 VMC special physics list helper class 
+/// \brief The Geant4 VMC special physics list helper class
 ///
-/// The special physics list instatiates the Geant4 VMC special processes 
-/// according to the selection passed in the constructor  
+/// The special physics list instatiates the Geant4 VMC special processes
+/// according to the selection passed in the constructor
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -41,12 +41,12 @@ class TG4SpecialPhysicsList: public G4VModularPhysicsList,
     TG4SpecialPhysicsList(const G4String& selection);
     TG4SpecialPhysicsList();
     virtual ~TG4SpecialPhysicsList();
-  
+
     // static methods
     static TG4SpecialPhysicsList* Instance();
     static G4String AvailableSelections();
     static G4bool   IsAvailableSelection(const G4String& selection);
-  
+
     // methods
     virtual void ConstructProcess();
 
@@ -61,7 +61,7 @@ class TG4SpecialPhysicsList: public G4VModularPhysicsList,
 
     // get methods
     G4bool IsSpecialCuts() const;
-    
+
   protected:
     // data members
     /// Stack popper physics builder
@@ -87,16 +87,16 @@ class TG4SpecialPhysicsList: public G4VModularPhysicsList,
 
     // methods
     void Configure(const G4String& selection);
-    
+
     // static data members
     static G4ThreadLocal TG4SpecialPhysicsList*  fgInstance; ///< this instance
 };
 
 // inline methods
 
-inline TG4SpecialPhysicsList* TG4SpecialPhysicsList::Instance() { 
+inline TG4SpecialPhysicsList* TG4SpecialPhysicsList::Instance() {
   /// Return this instance
-  return fgInstance; 
+  return fgInstance;
 }
 
 inline G4bool TG4SpecialPhysicsList::IsSpecialCuts() const {

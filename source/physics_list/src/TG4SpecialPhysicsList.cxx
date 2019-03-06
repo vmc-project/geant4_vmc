@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4SpecialPhysicsList.cxx
-/// \brief Implementation of the TG4SpecialPhysicsList class 
+/// \brief Implementation of the TG4SpecialPhysicsList class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -55,9 +55,9 @@ G4String TG4SpecialPhysicsList::AvailableSelections()
   selections += "specialCuts ";
   selections += "stackPopper ";
   selections += "gflash ";
-  
+
   return selections;
-}  
+}
 
 //_____________________________________________________________________________
 G4bool TG4SpecialPhysicsList::IsAvailableSelection(const G4String& selection)
@@ -66,14 +66,14 @@ G4bool TG4SpecialPhysicsList::IsAvailableSelection(const G4String& selection)
 
   G4int itoken = 0;
   TString token = TG4Globals::GetToken(itoken, selection);
-     
+
   while ( token != "" ) {
-    if ( ! AvailableSelections().contains(token.Data()) ) return false; 
-    token = TG4Globals::GetToken(++itoken, selection); 
-  }        
-  
+    if ( ! AvailableSelections().contains(token.Data()) ) return false;
+    token = TG4Globals::GetToken(++itoken, selection);
+  }
+
   return true;
-}  
+}
 
 //
 // ctors, dtor
@@ -97,7 +97,7 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList(const G4String& selection)
       "TG4SpecialPhysicsList", "TG4SpecialPhysicsList",
       "Cannot create two instances of singleton.");
   }
-  fgInstance = this;  
+  fgInstance = this;
 
   Configure(selection);
 
@@ -123,14 +123,14 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList()
 }
 
 //_____________________________________________________________________________
-TG4SpecialPhysicsList::~TG4SpecialPhysicsList() 
+TG4SpecialPhysicsList::~TG4SpecialPhysicsList()
 {
 /// Destructor
 
   //delete fExtDecayer;
        // fExtDecayer is deleted in G4Decay destructor
 
-  fgInstance = 0; 
+  fgInstance = 0;
 }
 
 //
@@ -153,19 +153,19 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
   G4bool isGflash = false;
   while ( token != "" ) {
 
-    if ( token == "specialCuts" ) { 
+    if ( token == "specialCuts" ) {
       // G4cout << "Registering special cuts physics" << G4endl;
       RegisterPhysics(new TG4SpecialCutsPhysics(tg4VerboseLevel));
       fIsSpecialCuts = true;
-    }  
-    else if ( token == "stepLimiter" ) { 
+    }
+    else if ( token == "stepLimiter" ) {
       // G4cout << "Registering step limiter physics" << G4endl;
       RegisterPhysics(new TG4StepLimiterPhysics(tg4VerboseLevel));
-    }  
-    else if ( token == "stackPopper" ) {    
+    }
+    else if ( token == "stackPopper" ) {
       // G4cout << "Registering stack popper physics" << G4endl;
       fStackPopperPhysics
-        = new TG4StackPopperPhysics(tg4VerboseLevel); 
+        = new TG4StackPopperPhysics(tg4VerboseLevel);
       RegisterPhysics(fStackPopperPhysics);
     }
     else if ( token == "gflash") {
@@ -175,12 +175,12 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
       TG4Globals::Warning("TG4SpecialPhysicsList", "Configure",
         "Unrecognized option " + token);
     }
-    token = TG4Globals::GetToken(++itoken, selection); 
-  }  
+    token = TG4Globals::GetToken(++itoken, selection);
+  }
   RegisterPhysics(new TG4UserParticlesPhysics(tg4VerboseLevel));
   RegisterPhysics(new TG4ExtDecayerPhysics(tg4VerboseLevel));
   RegisterPhysics(new TG4ProcessMCMapPhysics(tg4VerboseLevel));
-  
+
   fEmModelPhysics = new TG4EmModelPhysics(tg4VerboseLevel);
   RegisterPhysics(fEmModelPhysics);
   fFastSimulationPhysics = new TG4FastSimulationPhysics(tg4VerboseLevel);
@@ -188,7 +188,7 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
   if ( isGflash) {
     fFastSimulationPhysics->SetUserFastSimulation(new TG4GflashFastSimulation());
   }
-}    
+}
 
 //
 // public methods
@@ -201,7 +201,7 @@ void TG4SpecialPhysicsList::ConstructProcess()
 
   // lock physics manager
   TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
-  g3PhysicsManager->Lock();  
+  g3PhysicsManager->Lock();
 
   // create processes for registered physics
   // To avoid call AddTransportation twice we do not call directly
@@ -214,7 +214,7 @@ void TG4SpecialPhysicsList::ConstructProcess()
 }
 
 //_____________________________________________________________________________
-G4int TG4SpecialPhysicsList::VerboseLevel() const 
+G4int TG4SpecialPhysicsList::VerboseLevel() const
 {
 /// Return verbose level (via TG4VVerbose)
 
@@ -222,27 +222,27 @@ G4int TG4SpecialPhysicsList::VerboseLevel() const
 }
 
 //_____________________________________________________________________________
-void TG4SpecialPhysicsList::VerboseLevel(G4int level) 
+void TG4SpecialPhysicsList::VerboseLevel(G4int level)
 {
-/// Set the specified level to both TG4Verbose and 
+/// Set the specified level to both TG4Verbose and
 /// G4VModularPhysicsList.
 /// The verbose level is also propagated to registered physics contructors.
 
   TG4VVerbose::VerboseLevel(level);
   SetVerboseLevel(level);
-  
+
   G4PhysConstVector::iterator it;
   for ( it = G4MT_physicsVector->begin(); it != G4MT_physicsVector->end(); ++it ) {
     TG4Verbose* verbose = dynamic_cast<TG4Verbose*>(*it);
     if ( verbose )
       verbose->VerboseLevel(level);
     else
-      (*it)->SetVerboseLevel(level);  
+      (*it)->SetVerboseLevel(level);
   }
 }
 
 //_____________________________________________________________________________
-void TG4SpecialPhysicsList::SetUserFastSimulation(TG4VUserFastSimulation* fastSimulation) 
+void TG4SpecialPhysicsList::SetUserFastSimulation(TG4VUserFastSimulation* fastSimulation)
 {
 /// Set user fast simulation
 

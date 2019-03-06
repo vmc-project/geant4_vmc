@@ -7,12 +7,12 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex02ChamberParameterisation.cxx 
-/// \brief Implementation of the Ex02ChamberParameterisation class 
+/// \file Ex02ChamberParameterisation.cxx
+/// \brief Implementation of the Ex02ChamberParameterisation class
 ///
 /// Geant4 ExampleN02 adapted to Virtual Monte Carlo \n
 /// Id: Ex02ChamberParameterisation.cc,v 1.7 2002/01/09 17:24:09 ranjard Exp \n
-/// GEANT4 tag Name: geant4-04-00-patch-02 
+/// GEANT4 tag Name: geant4-04-00-patch-02
 ///
 /// \date 21/04/2002
 /// \author I. Hrivnacova; IPN, Orsay
@@ -27,27 +27,27 @@ ClassImp(Ex02ChamberParameterisation)
 
 //_____________________________________________________________________________
 Ex02ChamberParameterisation::Ex02ChamberParameterisation(
-                                 Int_t    noChambers, 
-                                 Double_t startZ,      
-                                 Double_t spacingZ,   
-                                 Double_t widthChamber, 
-                                 Double_t lengthInitial, 
+                                 Int_t    noChambers,
+                                 Double_t startZ,
+                                 Double_t spacingZ,
+                                 Double_t widthChamber,
+                                 Double_t lengthInitial,
                                  Double_t lengthFinal )
-  : TObject(),				 
-    fNoChambers(noChambers), 
-    fStartZ(startZ), 
+  : TObject(),
+    fNoChambers(noChambers),
+    fStartZ(startZ),
     fHalfWidth(widthChamber*0.5),
     fSpacing(spacingZ),
     fHalfLengthFirst(lengthInitial*0.5),
-    fHalfLengthIncr(0) 
+    fHalfLengthIncr(0)
 {
 /// Standard constructor
 /// \param noChambers    Number of chambers
 /// \param startZ        The Z of the center of first chamber
 /// \param spacingZ      The distance between the chambers' centers
 /// \param widthChamber  The width of each tracker chamber
-/// \param lengthInitial The first chamber length 
-/// \param lengthFinal   The last chamber length 
+/// \param lengthInitial The first chamber length
+/// \param lengthFinal   The last chamber length
 
    if( noChambers > 0 ){
       fHalfLengthIncr =  0.5 * (lengthFinal-lengthInitial)/noChambers;
@@ -56,7 +56,7 @@ Ex02ChamberParameterisation::Ex02ChamberParameterisation(
               "Ex02ChamberParameterisation construction: Width>Spacing");
       }
    }
-   
+
 }
 
 //_____________________________________________________________________________

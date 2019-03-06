@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4SDConstruction.cxx
-/// \brief Implementation of the TG4SDConstruction class 
+/// \brief Implementation of the TG4SDConstruction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -39,7 +39,7 @@ TG4SDConstruction::TG4SDConstruction()
     fMessenger(this),
     fExclusiveSDScoring(false),
     fSelectionFromTGeo(false),
-    fSVLabel(fgkDefaultSVLabel), 
+    fSVLabel(fgkDefaultSVLabel),
     fSelection(),
     fIsGflash(false)
 {
@@ -59,7 +59,7 @@ TG4SDConstruction::~TG4SDConstruction()
 //_____________________________________________________________________________
 void TG4SDConstruction::CreateSD(G4LogicalVolume* lv,
                                  TVirtualMCSensitiveDetector* userSD) const
-{ 
+{
 /// Create/retrieve a sensitive detector for the given logical volume.
 
   TG4GeometryServices* geometryServices = TG4GeometryServices::Instance();
@@ -112,19 +112,19 @@ void  TG4SDConstruction::FillSDSelectionFromTGeo()
 
   if ( ! gGeoManager ) {
     TG4Globals::Exception(
-      "TG4SDServices", "FillSDSelectionFromTGeo", 
+      "TG4SDServices", "FillSDSelectionFromTGeo",
       "TGeo manager not defined.");
   }
-  
+
   TObjArray* volumes = gGeoManager->GetListOfVolumes();
   TIterator* it = volumes->MakeIterator();
   TGeoVolume* volume = 0;
   while ( ( volume = (static_cast<TGeoVolume*>(it->Next())) ) ) {
     if ( TString(volume->GetOption()) == TString(fSVLabel.data()) ) {
-      G4cout << "Adding volume " << volume->GetName() << " in SD selection" 
-             << G4endl; 
+      G4cout << "Adding volume " << volume->GetName() << " in SD selection"
+             << G4endl;
       fSelection.insert(volume->GetName());
-    }  
+    }
   }
 
   if ( ! fSelection.size() ) {
@@ -166,7 +166,7 @@ void  TG4SDConstruction::MapVolumesToInstanceIds()
 //_____________________________________________________________________________
 void  TG4SDConstruction::MapVolumesToSDIds()
 {
-/// Define VMC volume Ids if new sensitive detectors framework is not used, 
+/// Define VMC volume Ids if new sensitive detectors framework is not used,
 /// The volume ID is defined via sensitive detector Id.
 /// The sensitive detector is associated with maximum one logical volume,
 /// that's why it can hold volume and medium Id.
@@ -200,7 +200,7 @@ void  TG4SDConstruction::MapVolumesToSDIds()
 
 //_____________________________________________________________________________
 void TG4SDConstruction::Construct()
-{ 
+{
 /// Create sensitive detectors and initialize the VMC application.
 /// Sensitive detectors are set to all logical volumes
 
@@ -219,7 +219,7 @@ void TG4SDConstruction::Construct()
 
   G4bool isUserSD = false;
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-  
+
   for ( G4int i=0; i<G4int(lvStore->size()); i++ ) {
     G4LogicalVolume* lv = (*lvStore)[i];
 
@@ -245,10 +245,10 @@ void TG4SDConstruction::Construct()
         CreateSD(lv, 0);
       }
     }
-  }    
+  }
 
   // Define volume Ids if VMC SD is not defined for all volumes
-  // (either due to user defined SDs or user selection of sensitive volumes) 
+  // (either due to user defined SDs or user selection of sensitive volumes)
   if ( isMaster ) {
     if ( isUserSD ) {
       MapVolumesToInstanceIds();
@@ -279,7 +279,7 @@ void TG4SDConstruction::Construct()
     if ( TG4SDServices::Instance()->GetUserSDs() ) {
       TG4SDServices::Instance()->PrintUserSensitiveDetectors();
     }
-  }  
+  }
 
   if ( VerboseLevel() > 1 )
     G4cout << "TG4SDConstruction::Construct done" << G4endl;
@@ -291,12 +291,12 @@ void TG4SDConstruction::AddSelection(const G4String& selection)
 /// Add the selection in the set of volume names which will be
 /// made sensitive.
 
-  std::istringstream is(selection);  
+  std::istringstream is(selection);
   G4String token;
   while ( is >> token ) {
     if (VerboseLevel() > 1) {
       G4cout << "Adding volume " << token <<  " in SD selection." << G4endl;
-    }  
+    }
     fSelection.insert(token);
-  }  
-}  
+  }
+}

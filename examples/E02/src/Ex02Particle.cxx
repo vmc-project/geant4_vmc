@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex02Particle.cxx 
-/// \brief Implementation of the Ex02Particle class 
+/// \file Ex02Particle.cxx
+/// \brief Implementation of the Ex02Particle class
 ///
 /// Geant4 ExampleN02 adapted to Virtual Monte Carlo
 ///
@@ -33,7 +33,7 @@ Ex02Particle::Ex02Particle(Int_t id, TParticle* particle)
   : fID(id),
     fParticle(particle),
     fMother(),
-    fDaughters()    
+    fDaughters()
 {
 /// Standard constructor
 /// \param  id        The particle id
@@ -45,7 +45,7 @@ Ex02Particle::Ex02Particle(Int_t id, TParticle* particle, Ex02Particle* mother)
   : fID(id),
     fParticle(particle),
     fMother(mother),
-    fDaughters()    
+    fDaughters()
 {
 /// Standard constructor
 /// \param  id        The particle id
@@ -58,13 +58,13 @@ Ex02Particle::Ex02Particle()
   : fID(0),
     fParticle(0),
     fMother(),
-    fDaughters()    
+    fDaughters()
 {
 /// Default constructor
 }
 
 //_____________________________________________________________________________
-Ex02Particle::~Ex02Particle() 
+Ex02Particle::~Ex02Particle()
 {
 /// Destructor
 
@@ -82,7 +82,7 @@ void Ex02Particle::SetMother(Ex02Particle* particle)
 /// \param  particle  The mother particle
 
   fMother.SetObject(particle);
-}  
+}
 
 //_____________________________________________________________________________
 void Ex02Particle::AddDaughter(Ex02Particle* particle)
@@ -91,7 +91,7 @@ void Ex02Particle::AddDaughter(Ex02Particle* particle)
 /// \param particle  The daughter particle
 
   fDaughters.Add(particle);
-}  
+}
 
 //_____________________________________________________________________________
 void Ex02Particle::Print(Option_t* /*option*/) const
@@ -100,18 +100,18 @@ void Ex02Particle::Print(Option_t* /*option*/) const
 
   cout << "Track ID:  " << fID << endl;
 
-  fParticle->Print();  
-  
+  fParticle->Print();
+
   if (GetMother()) {
-    cout << "Mother:    " << GetMother()->GetParticle()->GetName() 
+    cout << "Mother:    " << GetMother()->GetParticle()->GetName()
                           << "  with ID: " << GetMother()->GetID() << endl;
   }
-  else			    
-    cout << "Primary    " << endl; 
-    
+  else
+    cout << "Primary    " << endl;
+
   cout << "Number of daughters: " << GetNofDaughters() << endl;
-  cout << endl;			  
-}  
+  cout << endl;
+}
 
 //_____________________________________________________________________________
 void Ex02Particle::PrintDaughters() const
@@ -120,13 +120,13 @@ void Ex02Particle::PrintDaughters() const
 
   for (Int_t i=0; i<GetNofDaughters(); i++)  {
     cout << i << "th daughter: " << endl;
-    if ( GetDaughter(i) ) 
+    if ( GetDaughter(i) )
       GetDaughter(i)->Print();
     else
-      cout << "0x0"; 
-  }  
-  cout << endl;			  
-}  
+      cout << "0x0";
+  }
+  cout << endl;
+}
 
 //_____________________________________________________________________________
 Int_t  Ex02Particle:: GetID() const
@@ -134,7 +134,7 @@ Int_t  Ex02Particle:: GetID() const
 /// \return The particle Id.
 
   return fID;
-}  
+}
 
 
 //_____________________________________________________________________________
@@ -143,7 +143,7 @@ TParticle*  Ex02Particle::GetParticle() const
 /// \return The particle definition (TParticle).
 
   return fParticle;
-}  
+}
 
 //_____________________________________________________________________________
 Ex02Particle* Ex02Particle::GetMother() const
@@ -151,7 +151,7 @@ Ex02Particle* Ex02Particle::GetMother() const
 /// \return The particle mother.
 
   return (Ex02Particle*) fMother.GetObject();
-}  
+}
 
 //_____________________________________________________________________________
 Int_t Ex02Particle::GetNofDaughters() const
@@ -159,7 +159,7 @@ Int_t Ex02Particle::GetNofDaughters() const
 /// \return The number of daughters.
 
   return fDaughters.GetEntriesFast();
-}  
+}
 
 //_____________________________________________________________________________
 Ex02Particle* Ex02Particle::GetDaughter(Int_t i) const
@@ -168,8 +168,8 @@ Ex02Particle* Ex02Particle::GetDaughter(Int_t i) const
 /// \param i  The daughter index
 
   if (i < 0 || i >= GetNofDaughters())
-    Fatal("GetDaughter", "Index out of range"); 
+    Fatal("GetDaughter", "Index out of range");
 
   return (Ex02Particle*) fDaughters.At(i);
-}  
+}
 

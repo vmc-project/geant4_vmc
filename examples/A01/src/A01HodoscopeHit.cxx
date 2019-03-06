@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01HodoscopeHit.cxx 
-/// \brief Implementation of the A01HodoscopeHit class 
+/// \file A01HodoscopeHit.cxx
+/// \brief Implementation of the A01HodoscopeHit class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo \n
 ///
@@ -26,7 +26,7 @@ ClassImp(A01HodoscopeHit)
 /// \endcond
 
 //_____________________________________________________________________________
-A01HodoscopeHit::A01HodoscopeHit(Int_t id, Double_t t) 
+A01HodoscopeHit::A01HodoscopeHit(Int_t id, Double_t t)
   : TObject(),
     fID(id),
     fVolID(-1),
@@ -39,7 +39,7 @@ A01HodoscopeHit::A01HodoscopeHit(Int_t id, Double_t t)
 }
 
 //_____________________________________________________________________________
-A01HodoscopeHit::A01HodoscopeHit() 
+A01HodoscopeHit::A01HodoscopeHit()
   : TObject(),
     fID(-1),
     fVolID(-1),
@@ -50,7 +50,7 @@ A01HodoscopeHit::A01HodoscopeHit()
 }
 
 //_____________________________________________________________________________
-A01HodoscopeHit::~A01HodoscopeHit() 
+A01HodoscopeHit::~A01HodoscopeHit()
 {
 /// Destructor
 }

@@ -10,7 +10,7 @@
  *************************************************************************/
 
 /// \file TG4RootSolid.h
-/// \brief Definition of the TG4RootSolid class 
+/// \brief Definition of the TG4RootSolid class
 ///
 /// \author A. Gheata; CERN
 
@@ -28,9 +28,9 @@
 
 class TGeoShape;
 
-/// \brief GEANT4 solid implemented by a ROOT shape. 
+/// \brief GEANT4 solid implemented by a ROOT shape.
 ///
-/// Visualization methods not implemented.     
+/// Visualization methods not implemented.
 ///
 /// \author A. Gheata; CERN
 
@@ -71,12 +71,12 @@ public:
    virtual G4Polyhedron* CreatePolyhedron () const;
 #if G4VERSION_NUMBER < 1000
    virtual G4NURBS*      CreateNURBS      () const;
-#endif   
+#endif
    virtual G4Polyhedron* GetPolyhedron () const;
    virtual const G4VSolid* GetConstituentSolid(G4int no) const;
    virtual       G4VSolid* GetConstituentSolid(G4int no);
-   virtual const G4DisplacedSolid* GetDisplacedSolidPtr() const; 
-   virtual       G4DisplacedSolid* GetDisplacedSolidPtr(); 
+   virtual const G4DisplacedSolid* GetDisplacedSolidPtr() const;
+   virtual       G4DisplacedSolid* GetDisplacedSolidPtr();
 
 //   ClassDef(TG4RootSolid,0)  // Class defining a G4Solid based on a ROOT shape
 };

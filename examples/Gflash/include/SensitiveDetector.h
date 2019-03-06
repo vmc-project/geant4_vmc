@@ -51,7 +51,7 @@ class SensitiveDetector : public TNamed
     void    Register();
     virtual void  Print(Option_t* option = "") const;
     void    PrintTotal() const;
-    
+
     // set methods
     void SetVerboseLevel(Int_t level);
 
@@ -61,17 +61,17 @@ class SensitiveDetector : public TNamed
 
   private:
     // data members
-    TClonesArray*  fCaloHitsCollection;   ///< Hits collection 
+    TClonesArray*  fCaloHitsCollection;   ///< Hits collection
     Int_t          fCrystalVolId;         ///< The crystal volume Id
     Int_t          fVerboseLevel;         ///< Verbosity level
-   
-  ClassDef(SensitiveDetector,1) //SensitiveDetector 
+
+  ClassDef(SensitiveDetector,1) //SensitiveDetector
 
 };
 
 /// Set verbose level
 /// \param level The new verbose level value
-inline void SensitiveDetector::SetVerboseLevel(Int_t level) 
+inline void SensitiveDetector::SetVerboseLevel(Int_t level)
 { fVerboseLevel = level; }
 
 /// Return the hits collection

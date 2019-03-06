@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01MCApplication.cxx 
-/// \brief Implementation of the A01MCApplication class 
+/// \file A01MCApplication.cxx
+/// \brief Implementation of the A01MCApplication class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo
 ///
@@ -48,7 +48,7 @@ ClassImp(A01MCApplication)
 /// \endcond
 
 //_____________________________________________________________________________
-A01MCApplication::A01MCApplication(const char *name, const char *title) 
+A01MCApplication::A01MCApplication(const char *name, const char *title)
   : TVirtualMCApplication(name,title),
     fRootManager(0),
     fWriteStack(true),
@@ -68,26 +68,26 @@ A01MCApplication::A01MCApplication(const char *name, const char *title)
     fIsMaster(kTRUE)
 {
 /// Standard constructor
-/// \param name   The MC application name 
+/// \param name   The MC application name
 /// \param title  The MC application description
 
   // Create a user stack
   fStack = new Ex03MCStack(1000);
-  
+
   // Create detector construction
   fDetConstruction = new A01RootDetectorConstruction("A01geometry.root");
-  
+
   // Create SDs
   fDriftChamberSD1 = new A01DriftChamberSD("Chamber1", "wirePlane1Logical");
   fDriftChamberSD2 = new A01DriftChamberSD("Chamber2", "wirePlane2Logical");
-  fEmCalorimeterSD = new A01EmCalorimeterSD("EmCalorimeter"); 
-  fHadCalorimeterSD = new A01HadCalorimeterSD("HadCalorimeter"); 
+  fEmCalorimeterSD = new A01EmCalorimeterSD("EmCalorimeter");
+  fHadCalorimeterSD = new A01HadCalorimeterSD("HadCalorimeter");
   fHodoscopeSD1 = new A01HodoscopeSD("Hodoscope1", "hodoscope1Logical");
   fHodoscopeSD2 = new A01HodoscopeSD("Hodoscope2", "hodoscope2Logical");
-  
+
   // Create a primary generator
   fPrimaryGenerator = new A01PrimaryGenerator(fStack);
-  
+
   // Constant magnetic field (in kiloGauss)
   // field value: 1.0*tesla (= 10.0 kiloGauss) in y
   if ( ! fUseLocalMagField ) {
@@ -96,7 +96,7 @@ A01MCApplication::A01MCApplication(const char *name, const char *title)
 }
 
 //_____________________________________________________________________________
-A01MCApplication::A01MCApplication(const A01MCApplication& origin) 
+A01MCApplication::A01MCApplication(const A01MCApplication& origin)
   : TVirtualMCApplication(origin.GetName(),origin.GetTitle()),
     fRootManager(0),
     fWriteStack(origin.fWriteStack),
@@ -120,18 +120,18 @@ A01MCApplication::A01MCApplication(const A01MCApplication& origin)
 
   // Create a user stack
   fStack = new Ex03MCStack(1000);
-  
+
   // Create SDs
   fDriftChamberSD1 = new A01DriftChamberSD(*(origin.fDriftChamberSD1));
   fDriftChamberSD2 = new A01DriftChamberSD(*(origin.fDriftChamberSD2));
-  fEmCalorimeterSD = new A01EmCalorimeterSD(*(origin.fEmCalorimeterSD)); 
-  fHadCalorimeterSD = new A01HadCalorimeterSD(*(origin.fHadCalorimeterSD)); 
+  fEmCalorimeterSD = new A01EmCalorimeterSD(*(origin.fEmCalorimeterSD));
+  fHadCalorimeterSD = new A01HadCalorimeterSD(*(origin.fHadCalorimeterSD));
   fHodoscopeSD1 = new A01HodoscopeSD(*(origin.fHodoscopeSD1));
   fHodoscopeSD2 = new A01HodoscopeSD(*(origin.fHodoscopeSD2));
-  
+
   // Create a primary generator
   fPrimaryGenerator = new A01PrimaryGenerator(*(origin.fPrimaryGenerator), fStack);
-  
+
   // Constant magnetic field (in kiloGauss)
   // field value: 1.0*tesla (= 10.0 kiloGauss) in y
   if ( ! fUseLocalMagField ) {
@@ -157,15 +157,15 @@ A01MCApplication::A01MCApplication()
     fPrimaryGenerator(0),
     fMagField(0),
     fIsMaster(kTRUE)
-{    
+{
 /// Default constructor
 }
 
 //_____________________________________________________________________________
-A01MCApplication::~A01MCApplication() 
+A01MCApplication::~A01MCApplication()
 {
-/// Destructor  
-  
+/// Destructor
+
   //cout << "A01MCApplication::~A01MCApplication " << this << endl;
 
   delete fRootManager;
@@ -195,9 +195,9 @@ void A01MCApplication::RegisterStack() const
 
   if ( fWriteStack && fRootManager ) {
     //cout << "A01MCApplication::RegisterStack: " << endl;
-    fRootManager->Register("stack", "Ex03MCStack", &fStack);   
-  }  
-}  
+    fRootManager->Register("stack", "Ex03MCStack", &fStack);
+  }
+}
 
 //
 // public methods
@@ -205,10 +205,10 @@ void A01MCApplication::RegisterStack() const
 
 //_____________________________________________________________________________
 void A01MCApplication::InitMC(const char* setup)
-{    
+{
 /// Initialize MC.
 /// The selection of the concrete MC is done in the macro.
-/// \param setup The name of the configuration macro 
+/// \param setup The name of the configuration macro
 
   fVerbose.InitMC();
 
@@ -219,8 +219,8 @@ void A01MCApplication::InitMC(const char* setup)
       Fatal("InitMC",
             "Processing Config() has failed. (No MC is instantiated.)");
     }
-  }  
- 
+  }
+
 // MT support available from root v 5.34/18
 #if ROOT_VERSION_CODE >= 336402
   // Create Root manager
@@ -242,14 +242,14 @@ void A01MCApplication::InitMC(const char* setup)
 
   // Init MC
   gMC->Init();
-  gMC->BuildPhysics(); 
-  
+  gMC->BuildPhysics();
+
   RegisterStack();
-}                                   
+}
 
 //_____________________________________________________________________________
 void A01MCApplication::RunMC(Int_t nofEvents)
-{    
+{
 /// Run MC.
 /// \param nofEvents Number of events to be processed
 
@@ -261,7 +261,7 @@ void A01MCApplication::RunMC(Int_t nofEvents)
 
 //_____________________________________________________________________________
 void A01MCApplication::FinishRun()
-{    
+{
 /// Finish MC run.
 
   fVerbose.FinishRun();
@@ -270,7 +270,7 @@ void A01MCApplication::FinishRun()
      ( fWriteStack || fWriteHits ) ) {
     fRootManager->WriteAll();
     fRootManager->Close();
-  } 
+  }
 }
 
 //_____________________________________________________________________________
@@ -308,10 +308,10 @@ void A01MCApplication::FinishWorkerRun() const
 }
 
 //_____________________________________________________________________________
-void A01MCApplication::ReadEvent(Int_t i) 
+void A01MCApplication::ReadEvent(Int_t i)
 {
 /// Read \em i -th event and print hits.
-/// \param i The number of event to be read    
+/// \param i The number of event to be read
 
   fDriftChamberSD1->Register();
   fDriftChamberSD2->Register();
@@ -321,27 +321,27 @@ void A01MCApplication::ReadEvent(Int_t i)
   fHodoscopeSD2->Register();
   RegisterStack();
   fRootManager->ReadEvent(i);
-}  
-  
+}
+
 //_____________________________________________________________________________
 void A01MCApplication::ConstructGeometry()
-{    
+{
 /// Construct geometry using detector contruction class.
 
   fVerbose.ConstructGeometry();
-  fDetConstruction->ConstructGeometry();  
+  fDetConstruction->ConstructGeometry();
 }
 
 //_____________________________________________________________________________
 void A01MCApplication::InitGeometry()
-{    
+{
 /// Initialize geometry
-  
+
   fVerbose.InitGeometry();
-  
+
   // Set cuts in G3 equivalent to 1mm cut in G4
   if ( TString(gMC->GetName()) == "TGeant3TGeo" ) SetCuts();
- 
+
   fDriftChamberSD1->Initialize();
   fDriftChamberSD2->Initialize();
   fEmCalorimeterSD->Initialize();
@@ -352,50 +352,50 @@ void A01MCApplication::InitGeometry()
 
 //_____________________________________________________________________________
 void A01MCApplication::AddParticles()
-{    
+{
 /// Nothing to be done
-  
+
   fVerbose.AddParticles();
 }
 
 //_____________________________________________________________________________
 void A01MCApplication::AddIons()
-{    
+{
 /// Nothing to be done
-  
+
   fVerbose.AddIons();
 }
 
 //_____________________________________________________________________________
 void A01MCApplication::GeneratePrimaries()
-{    
+{
 /// Fill the user stack (derived from TVirtualMCStack) with primary particles.
-  
+
   fVerbose.GeneratePrimaries();
   fPrimaryGenerator->GeneratePrimaries();
 }
 
 //_____________________________________________________________________________
 void A01MCApplication::BeginEvent()
-{    
+{
 /// User actions at beginning of event
 
   fVerbose.BeginEvent();
 
   // Clear TGeo tracks (if filled)
-  if (   TString(gMC->GetName()) == "TGeant3TGeo" && 
+  if (   TString(gMC->GetName()) == "TGeant3TGeo" &&
          gGeoManager->GetListOfTracks() &&
          gGeoManager->GetTrack(0) &&
        ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
-       
-       gGeoManager->ClearTracks();	  
-       //if (gPad) gPad->Clear();	  
-  }    
+
+       gGeoManager->ClearTracks();
+       //if (gPad) gPad->Clear();
+  }
 }
 
 //_____________________________________________________________________________
 void A01MCApplication::BeginPrimary()
-{    
+{
 /// User actions at beginning of a primary track.
 
   fVerbose.BeginPrimary();
@@ -403,7 +403,7 @@ void A01MCApplication::BeginPrimary()
 
 //_____________________________________________________________________________
 void A01MCApplication::PreTrack()
-{    
+{
 /// User actions at beginning of each track
 
   fVerbose.PreTrack();
@@ -411,7 +411,7 @@ void A01MCApplication::PreTrack()
 
 //_____________________________________________________________________________
 void A01MCApplication::Stepping()
-{    
+{
 /// User actions at each step
 
   fVerbose.Stepping();
@@ -425,7 +425,7 @@ void A01MCApplication::Stepping()
 
 //_____________________________________________________________________________
 void A01MCApplication::PostTrack()
-{    
+{
 /// User actions after finishing each track
 
   fVerbose.PostTrack();
@@ -433,7 +433,7 @@ void A01MCApplication::PostTrack()
 
 //_____________________________________________________________________________
 void A01MCApplication::FinishPrimary()
-{    
+{
 /// User actions after finishing each primary track
 
   fVerbose.FinishPrimary();
@@ -441,7 +441,7 @@ void A01MCApplication::FinishPrimary()
 
 //_____________________________________________________________________________
 void A01MCApplication::FinishEvent()
-{    
+{
 /// User actions after finishing an event
 
   fVerbose.FinishEvent();
@@ -449,9 +449,9 @@ void A01MCApplication::FinishEvent()
   // Geant3 + TGeo
   // (use TGeo functions for visualization)
   if ( TString(gMC->GetName()) == "TGeant3TGeo") {
-  
-     // Draw volume 
-     gGeoManager->SetVisOption(0);	 
+
+     // Draw volume
+     gGeoManager->SetVisOption(0);
      gGeoManager->SetTopVisible();
      gGeoManager->GetTopVolume()->Draw();
 
@@ -461,23 +461,23 @@ void A01MCApplication::FinishEvent()
      if ( gGeoManager->GetListOfTracks() &&
           gGeoManager->GetTrack(0) &&
         ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
-       
+
        gGeoManager->DrawTracks("/*");  // this means all tracks
-    }	  
-  }    
- 
+    }
+  }
+
   if ( fWriteStack || fWriteHits ) {
     fRootManager->Fill();
-  }  
+  }
 
   // Print info about primary particle
   TParticle* primary = fStack->GetParticle(0);
   cout << endl
-       << ">>> Event " << gMC->CurrentEvent() 
+       << ">>> Event " << gMC->CurrentEvent()
        << " >>> Simulation truth : "
-       << primary->GetPDG()->GetName() << " (" 
-       << primary->Px()*1e03 << ", " 
-       << primary->Py()*1e03 << ", " 
+       << primary->GetPDG()->GetName() << " ("
+       << primary->Px()*1e03 << ", "
+       << primary->Py()*1e03 << ", "
        << primary->Pz()*1e03 << ") MeV" << endl;
 
   // Call detectors
@@ -489,22 +489,22 @@ void A01MCApplication::FinishEvent()
   fHadCalorimeterSD->EndOfEvent();
 
   fStack->Reset();
-} 
+}
 
 //_____________________________________________________________________________
 void  A01MCApplication::SetWriteHits(Bool_t writeHits)
-{ 
+{
 /// (In)Activate writing hits on file and propagate this option
 /// to all SDs
 /// \param writeHits  The new value of the option
 
-  fWriteHits = writeHits; 
+  fWriteHits = writeHits;
   fHodoscopeSD1->SetWriteHits(writeHits);
   fHodoscopeSD2->SetWriteHits(writeHits);
   fDriftChamberSD1->SetWriteHits(writeHits);
   fDriftChamberSD2->SetWriteHits(writeHits);
   fEmCalorimeterSD->SetWriteHits(writeHits);
-  fHadCalorimeterSD->SetWriteHits(writeHits);  
+  fHadCalorimeterSD->SetWriteHits(writeHits);
 }
 
 //_____________________________________________________________________________
@@ -533,7 +533,7 @@ void A01MCApplication::SetCuts()
     gMC->Gstpar(mediumId, "CUTELE", 990.e-09);
     gMC->Gstpar(mediumId, "DCUTE",  990.e-09);
   }
-  
+
   mediumId = gMC->MediumId("G4_Galactic");
   if ( mediumId ) {
     gMC->Gstpar(mediumId, "CUTGAM", 990.e-09);
@@ -574,5 +574,5 @@ void A01MCApplication::SetCuts()
     gMC->Gstpar(mediumId, "DCUTE", 1.36749e-03);
   }
 
-}    
+}
 

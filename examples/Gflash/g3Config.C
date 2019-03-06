@@ -8,16 +8,16 @@
 //-------------------------------------------------
 
 /// \file Gflash/g3Config.C
-/// \brief Configuration macro for Geant3 VirtualMC for Gflash example 
+/// \brief Configuration macro for Geant3 VirtualMC for Gflash example
 
 void Config()
 {
 /// The configuration function for Geant3 VMC for Gflash example
-/// called during MC application initialization. 
+/// called during MC application initialization.
 
   TGeant3* geant3
-    = new  TGeant3("C++ Interface to Geant3"); 
-  
+    = new  TGeant3("C++ Interface to Geant3");
+
   cout << "Geant3 has been created." << endl;
 }
 

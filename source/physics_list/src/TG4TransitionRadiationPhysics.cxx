@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4TransitionRadiationPhysics.cxx
-/// \brief Implementation of the TG4TransitionRadiationPhysics class 
+/// \brief Implementation of the TG4TransitionRadiationPhysics class
 ///
 /// According to TG4TransitionRadiationPhysics from Geant4
 /// extended/electromagnetic/TestEm10 example.
@@ -37,7 +37,7 @@
 #include <G4AutoDelete.hh>
 
 //_____________________________________________________________________________
-G4ThreadLocal 
+G4ThreadLocal
 std::vector<G4VXTRenergyLoss*>* TG4TransitionRadiationPhysics::fXtrProcesses = 0;
 
 //_____________________________________________________________________________
@@ -218,7 +218,7 @@ TG4TransitionRadiationPhysics::CreateXTRProcess(TG4RadiatorDescription* radiator
 //_____________________________________________________________________________
 void TG4TransitionRadiationPhysics::ConstructParticle()
 {
-/// No particles instatiated 
+/// No particles instatiated
 
 }
 
@@ -243,9 +243,9 @@ void TG4TransitionRadiationPhysics::ConstructProcess()
     if ( ! isXtrProcess ) continue;
 
     if (VerboseLevel() > 1) {
-      G4cout << "Constructed XTR process " << radiators[i]->GetXtrModel() 
+      G4cout << "Constructed XTR process " << radiators[i]->GetXtrModel()
              << " in radiator " << radiators[i]->GetVolumeName() << G4endl;
-    }  
+    }
   }
 
   if (VerboseLevel() > 0) {

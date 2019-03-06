@@ -12,7 +12,7 @@
 
 #include "../macro/basiclibs.C"
 
-void read() 
+void read()
 {
 /// Macro for reading the Gflash simulated data from Root file
 
@@ -21,7 +21,7 @@ void read()
 
   // Load this example library
   gSystem->Load("libexampleGflash");
-  
+
   // MC application
   VMC::Gflash::MCApplication* appl
     =  new VMC::Gflash::MCApplication("ExampleGflash", "The exampleGflash MC application", kRead);
@@ -31,5 +31,5 @@ void read()
     appl->ReadEvent(i);
     appl->GetCalorimeterSD()->PrintTotal();
     cout << endl;
-  }  
-}  
+  }
+}

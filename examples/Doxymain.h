@@ -7,7 +7,7 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/*! 
+/*!
 
 /// \file Doxymain.h
 /// \brief The main page for the VMC examples code documenation
@@ -20,7 +20,7 @@
   To demonstrate use of VirtualMC, several Geant4 examples and one
   Garfield example have been rewritten as VMC applications:
   \ref E01, \ref E02, \ref E03, \ref E06, \ref A01, \ref ExGarfield, \ref Gflash, \ref Monopole, \ref TR.
-  
+
   The correspondence with the examples in Geant4  (since 10.00.x) is:
   - E01 - no equivalent
   - E02 - basic/B2
@@ -48,85 +48,85 @@
 
 \section exa_s2 Geometry definition
 
-  The VirtualMC defines since beginning the methods for geometry 
-  construction in the Geant3 style (the functions have the same names and 
+  The VirtualMC defines since beginning the methods for geometry
+  construction in the Geant3 style (the functions have the same names and
   the same parameters sequence as the functions in Geant3).
   This made the transition from a Geant3 application to VMC easier.
-  
+
   Since the integration of the TGeo geometry modeller,
   users have a possibility to define geometry directly via TGeo,
   with more user-friendly interfaces.
 
-  All VMC examples define by default geometry via TGeo (since 
+  All VMC examples define by default geometry via TGeo (since
   Geant4 VMC version 2.0).
-  The equivalent geometry definition via TVirtualMC 
+  The equivalent geometry definition via TVirtualMC
   interface can be activated by setting the option "oldGeometry"
   to the MC application (via Ex0NMCApplication::SetOldGeometry(kTRUE)).
 
 \section exa_s3 Macros for running examples
 
-  In all examples there are provides macros: 
-<pre>  
+  In all examples there are provides macros:
+<pre>
 run_g3.C   - for running the example with Geant3
-run_g4.C   - for running the example with Geant4      
-</pre>  
+run_g4.C   - for running the example with Geant4
+</pre>
 
   Since Geant4 VMC 3.0 loading of libraries was separated from run_g3[g4].C
-  macros in new macros: 
-<pre>  
+  macros in new macros:
+<pre>
 load_g3.C   - loading all libraries needed to run the example with Geant3
-load_g4.C   - loading all libraries needed to run the example with Geant4    
-</pre>  
-  
+load_g4.C   - loading all libraries needed to run the example with Geant4
+</pre>
+
 \section exa_s4 Configuration macros:
 
   The selection of the concrete MC, geometry navigation
   and eventually other options is done in the configuration
   macros.
   The following configuration macros are provided with
-  the examples: 
-<pre>  
-g3Config.C      - for G3 with native geometry 
+  the examples:
+<pre>
+g3Config.C      - for G3 with native geometry
 g3tgeoConfig.C  - for G3 with TGeo geometry (default)
 
 g4Config.C      - for G4 with native geometry navigation (default)
 g4tgeoConfig.C  - for G4 with TGeo geometry navigation
-xyzOld.C        - the same as above but for geometry defined via VMC 
+xyzOld.C        - the same as above but for geometry defined via VMC
 
 g4config.in  - macro for G4 configuration using G4 commands
 g4vis.in     - macro for G4 visualization settings
-</pre>  
+</pre>
 
-\section exa_s5 To run an example: 
-<pre>  
+\section exa_s5 To run an example:
+<pre>
 With G3 + TGeo:
-root[0] .x load_g3.C  
-root[1] .x run_g3.C  
+root[0] .x load_g3.C
+root[1] .x run_g3.C
 
 With G4:
-root[0] .x load_g4.C  
-root[1] .x run_g4.C  
+root[0] .x load_g4.C
+root[1] .x run_g4.C
 
 With G4 + TGeo navigation:
-root[0] .x load_g4.C  
-root[1] .x run_g4.C("g4tgeoConfig.C"); 
-</pre>  
-  
+root[0] .x load_g4.C
+root[1] .x run_g4.C("g4tgeoConfig.C");
+</pre>
+
 \section exa_s6 Test macros:
 
-  To test all possible configurations, a test macro (or a set of macros) 
-  is provided for each example: 
-<pre>  
+  To test all possible configurations, a test macro (or a set of macros)
+  is provided for each example:
+<pre>
 test_EN.C(const TString& configMacro, Bool_t oldGeometry)
-</pre>  
+</pre>
   with parameters:
-     - configMacro: configuration macro loaded in initialization 
+     - configMacro: configuration macro loaded in initialization
      - oldGeometry: if true - geometry is defined via VMC, otherwise via TGeo
-     
-  The tests with all configurations can be run via the test suite: 
-<pre>  
+
+  The tests with all configurations can be run via the test suite:
+<pre>
 test_suite.sh
-</pre>  
+</pre>
   which saves all test outputs in the files which names correspond
   to test run configuration:
 <pre>
@@ -140,12 +140,12 @@ test_g4_vmc_tgeo.out  - G4, geometry defined via VMC,  TGeo navigation
 </pre>
   The files are saved in log/E0N directory.
   The reference output files, which are updated with each release,
-  can be found at log_ref directory.  
-   
-  All run_*.C macros can be run via run suite script: 
-<pre>  
+  can be found at log_ref directory.
+
+  All run_*.C macros can be run via run suite script:
+<pre>
 run_suite.sh
-</pre>  
+</pre>
   which saves all output in run_*.out files.
-  
+
 */

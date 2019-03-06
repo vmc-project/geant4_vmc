@@ -30,7 +30,7 @@ class G4Material;
 class G4Element;
 
 //
-// basic container types 
+// basic container types
 
 /// \ingroup global
 /// The vector of booleans
@@ -54,12 +54,12 @@ typedef std::map <G4int, G4int> TG4intMap;
 
 /// \ingroup global
 /// The set of strings
-typedef std::set <G4String, std::less<G4String> > TG4StringSet; 
+typedef std::set <G4String, std::less<G4String> > TG4StringSet;
 
 /// \ingroup global
 /// \brief Basic types and functions of general use.
 ///
-/// Class provides the basic types and functions of general use. 
+/// Class provides the basic types and functions of general use.
 /// It is protected from instantiating (only static data members
 /// and static methods are defined).
 ///
@@ -73,7 +73,7 @@ class TG4Globals
     // static methods
     static void Exception(const TString& className,const TString& methodName,
                           const TString& text);
-      // Global error function prints string to cerr, an 
+      // Global error function prints string to cerr, an
       // program - according to G4Exception.cc
 
     static void Warning(const TString& className,const TString& methodName,
@@ -86,15 +86,15 @@ class TG4Globals
     static G4bool Compare(G4bool activation, TG4G3ControlValue controlValue);
     static void PrintStars(G4bool emptyLineFirst);
     static G4String Help();
-    
+
     static G4String  GetToken(Int_t i, const TString& s);
 
   private:
-    TG4Globals();  
+    TG4Globals();
 
     static const TString fgkEndl;           ///< Special endl
     static const char    fgkTokenSeparator; ///< Separator in GetToken() method
-};  
+};
 
 // inline functions
 
@@ -102,7 +102,7 @@ inline TString  TG4Globals::Endl()
 {
   /// Special endl which is then reformatted in Warning and Exception
   return fgkEndl;
-}  
+}
 
 
 #endif //ALGLOBALS_H

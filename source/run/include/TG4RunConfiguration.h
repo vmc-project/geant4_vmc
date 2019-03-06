@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4RunConfiguration.h
-/// \brief Definition of the TG4RunConfiguration class 
+/// \brief Definition of the TG4RunConfiguration class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -63,7 +63,7 @@ class G4UImessenger;
 ///
 /// The third argument activates the special processes in the TG4SpecialPhysicsList,
 /// which implement VMC features:
-/// - stepLimiter       - step limiter (default) 
+/// - stepLimiter       - step limiter (default)
 /// - specialCuts       - VMC cuts
 /// - specialControls   - VMC controls for activation/inactivation selected processes
 /// - stackPopper       - stackPopper process
@@ -72,7 +72,7 @@ class G4UImessenger;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4RunConfiguration 
+class TG4RunConfiguration
 {
   public:
     TG4RunConfiguration(const TString& userGeometry,
@@ -82,18 +82,18 @@ class TG4RunConfiguration
                         Bool_t mtApplication = true);
     virtual ~TG4RunConfiguration();
 
-    // methods 
+    // methods
     //
     virtual G4VUserDetectorConstruction*   CreateDetectorConstruction();
     virtual G4VUserPhysicsList*            CreatePhysicsList();
     virtual G4VUserPrimaryGeneratorAction* CreatePrimaryGenerator();
 
-    virtual G4UserRunAction*      CreateRunAction();  
-    virtual G4UserEventAction*    CreateEventAction(); 
+    virtual G4UserRunAction*      CreateRunAction();
+    virtual G4UserEventAction*    CreateEventAction();
     virtual TG4TrackingAction*    CreateTrackingAction();
     virtual TG4SteppingAction*    CreateSteppingAction();
-    virtual G4UserStackingAction* CreateStackingAction(); 
-    
+    virtual G4UserStackingAction* CreateStackingAction();
+
     virtual TG4VUserRegionConstruction*   CreateUserRegionConstruction();
     virtual TG4VUserPostDetConstruction*  CreateUserPostDetConstruction();
     virtual TG4VUserFastSimulation*       CreateUserFastSimulation();
@@ -141,7 +141,7 @@ class TG4RunConfiguration
 inline TString TG4RunConfiguration::GetPhysicsListSelection() const {
   /// Return physics list selection
   return fPhysicsListSelection;
-}  
+}
 
 #endif //TG4V_RUN_CONFIGURATION_H
 

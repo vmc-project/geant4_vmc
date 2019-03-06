@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4RegionsMessenger.cxx
-/// \brief Implementation of the TG4RegionsMessenger class 
+/// \brief Implementation of the TG4RegionsMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -26,7 +26,7 @@ TG4RegionsMessenger::TG4RegionsMessenger(TG4RegionsManager* runManager)
     fRegionsManager(runManager),
     fDirectory(0),
     fDumpRegionCmd(0)
-{ 
+{
 /// Standard constructor
 
   fDirectory = new G4UIdirectory("/mcRegions/");
@@ -76,7 +76,7 @@ TG4RegionsMessenger::TG4RegionsMessenger(TG4RegionsManager* runManager)
 }
 
 //_____________________________________________________________________________
-TG4RegionsMessenger::~TG4RegionsMessenger() 
+TG4RegionsMessenger::~TG4RegionsMessenger()
 {
 /// Destructor
 
@@ -97,7 +97,7 @@ TG4RegionsMessenger::~TG4RegionsMessenger()
 
 //_____________________________________________________________________________
 void TG4RegionsMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
-{ 
+{
 /// Apply command to the associated object.
 
   if (command == fDumpRegionCmd) {

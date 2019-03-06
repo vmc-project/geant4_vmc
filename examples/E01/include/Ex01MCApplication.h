@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file Ex01MCApplication.h
-/// \brief Definition of the Ex01MCApplication class 
+/// \brief Definition of the Ex01MCApplication class
 ///
 /// Geant4 ExampleN01 adapted to Virtual Monte Carlo
 ///
@@ -34,17 +34,17 @@ class Ex01MCApplication : public TVirtualMCApplication
     Ex01MCApplication(const char *name, const char *title);
     Ex01MCApplication();
     virtual ~Ex01MCApplication();
-  
+
     // static access method
-    static Ex01MCApplication* Instance(); 
+    static Ex01MCApplication* Instance();
 
     // methods
     void InitMC(const char *setup);
     void RunMC(Int_t nofEvents);
     void FinishRun();
-            
-    virtual TVirtualMCApplication* CloneForWorker() const; 
-    virtual void InitForWorker() const; 
+
+    virtual TVirtualMCApplication* CloneForWorker() const;
+    virtual void InitForWorker() const;
     virtual void ConstructGeometry();
     virtual void InitGeometry();
     virtual void GeneratePrimaries();
@@ -64,10 +64,10 @@ class Ex01MCApplication : public TVirtualMCApplication
     // methods
     void ConstructMaterials();
     void ConstructVolumes();
-  
+
     // data members
     TVirtualMCStack*  fStack;       ///< The VMC stack
-    TVirtualMagField* fMagField;    ///< The magnetic field 
+    TVirtualMagField* fMagField;    ///< The magnetic field
     Int_t             fImedAr;      ///< The Argon gas medium Id
     Int_t             fImedAl;      ///< The Aluminium medium Id
     Int_t             fImedPb;      ///< The Lead medium Id
@@ -79,15 +79,15 @@ class Ex01MCApplication : public TVirtualMCApplication
 // inline functions
 
 inline Ex01MCApplication* Ex01MCApplication::Instance()
-{ 
+{
   /// \return The MC application instance
-  return (Ex01MCApplication*)(TVirtualMCApplication::Instance()); 
+  return (Ex01MCApplication*)(TVirtualMCApplication::Instance());
 }
 
 inline void Ex01MCApplication::SetOldGeometry(Bool_t oldGeometry)
-{ 
+{
   /// Select old geometry definition (via TVirtualMC)
-  fOldGeometry = oldGeometry; 
+  fOldGeometry = oldGeometry;
 }
 
 #endif //EX01_MC_APPLICATION_H

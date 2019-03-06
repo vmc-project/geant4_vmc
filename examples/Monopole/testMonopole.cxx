@@ -11,7 +11,7 @@
 /// \brief The Geant4 VMC example Monopole test application
 ///
 /// The Geant4 VMC test application
-/// with explicitely instantiated TGeant4 and linked 
+/// with explicitely instantiated TGeant4 and linked
 /// with all libraries.
 ///
 /// <pre>
@@ -112,7 +112,7 @@ void PrintG4Configuration(
 int main(int argc, char** argv)
 {
   // Initialize Root threading.
-  // (Multi-threading is triggered automatically if Geant4 was built 
+  // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
    TThread::Initialize();
@@ -190,8 +190,8 @@ int main(int argc, char** argv)
   appl->SetBinSize(0.02);
 
 #ifdef USE_GEANT4
-  // RunConfiguration for Geant4 
-  TG4RunConfiguration* runConfiguration 
+  // RunConfiguration for Geant4
+  TG4RunConfiguration* runConfiguration
     = new TG4RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics, false, false);
 
   // TGeant4
@@ -204,7 +204,7 @@ int main(int argc, char** argv)
     geant4->ProcessGeantMacro(g4Macro.data());
   }
 #endif
-  
+
   // Run example
   if ( ! rootMacro.size() ) {
     appl->InitMC("");
@@ -227,4 +227,4 @@ int main(int argc, char** argv)
   }
 
   delete appl;
-}  
+}
