@@ -65,7 +65,7 @@ int main(int argc, char** argv)
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4
   TG4RunConfiguration* runConfiguration
-    = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT+monopole", "stepLimiter");
+    = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT+monopole", "stepLimiter", false, false);
 
   // TGeant4
   TGeant4* geant4

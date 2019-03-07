@@ -20,8 +20,11 @@ void Config()
 /// For geometry defined with Root and selected Geant4 native navigation
 
   // RunConfiguration for Geant4
+  Bool_t specialStacking = false;
+  Bool_t mtApplication = false;
   TG4RunConfiguration* runConfiguration
-    = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT+monopole", "stepLimiter");
+    = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT+monopole", "stepLimiter",
+                              specialStacking, mtApplication);
 
   // Define monopole properties
   // (uncomment the lines below to change the defaults)
