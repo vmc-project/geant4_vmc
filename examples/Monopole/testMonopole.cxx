@@ -150,9 +150,12 @@ int main(int argc, char** argv)
               std::string(argv[i]) == "-g4vm") g4VisMacro = argv[i+1];
     else if ( std::string(argv[i]) == "--g4-session" ||
               std::string(argv[i]) == "-g4s")  g4Session = argv[i+1];
-#endif
     else if ( std::string(argv[i]) == "--root-macro" ||
               std::string(argv[i]) == "-rm")   rootMacro = argv[i+1];
+#else
+    if ( std::string(argv[i]) == "--root-macro" ||
+              std::string(argv[i]) == "-rm")   rootMacro = argv[i+1];
+#endif
     else if ( std::string(argv[i]) == "--verbose" ||
               std::string(argv[i]) == "-v")    verbose = argv[i+1];
     else {
