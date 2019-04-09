@@ -9,6 +9,16 @@
      
 Tags (history):
 ===============
+  09/04/2019
+  v3-6-p3:
+    Patch release, including following fixes:
+    Geant4 VMC:
+      Implemented TGeant4 and TG4RunManager::ProcessEvent()
+      - This allows event-by-event processing in TGeant4.
+      - Added TGeant4::FinishEvent(). This function has to be called by the user after all events
+        have been processed.
+      - Thanks to Benedikt Volkel, CERN
+
   25/02/2019
   v3-6-p2:
     Patch release, including following fixes:
