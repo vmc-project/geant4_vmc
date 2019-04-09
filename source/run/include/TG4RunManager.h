@@ -56,6 +56,7 @@ class TG4RunManager : public TG4Verbose
     void CacheMCStack();
     void ProcessEvent();
     Bool_t ProcessRun(G4int nofEvents);
+    Bool_t FinishRun();
 
     // get methods
     Int_t   CurrentEvent() const;
@@ -109,6 +110,9 @@ class TG4RunManager : public TG4Verbose
     char**                fARGV;             ///< argv
     G4bool                fUseRootRandom;    ///< the option to use Root random number seed
     G4bool                fIsMCStackCached;  ///< the flag to cache MC stack only once
+    G4bool                fHasEventByEventInitialization; ///< Flag event-by-event processing
+    G4int                 fNEventsProcessed; ///< Number of events processed in event-by-event mode
+    G4bool                fInProcessRun;     ///< flag while being in BeamOn
 };
 
 // inline methods
