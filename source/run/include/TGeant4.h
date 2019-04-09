@@ -334,6 +334,7 @@ class TGeant4: public TVirtualMC
     virtual void   InitMT(Int_t threadRank);
     virtual void   ProcessEvent();
     virtual Bool_t ProcessRun(Int_t nofEvents);
+    Bool_t         FinishRun();
     virtual void   SetCollectTracks(Bool_t collectTracks);
     virtual Bool_t IsCollectTracks() const;
     virtual Bool_t IsMT() const;

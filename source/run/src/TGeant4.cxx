@@ -1218,6 +1218,14 @@ Bool_t TGeant4::ProcessRun(Int_t nofEvents)
 }  
 
 //_____________________________________________________________________________
+Bool_t TGeant4::FinishRun()
+{
+/// Process Geant4 run.
+
+  return fRunManager->FinishRun();
+}
+
+//_____________________________________________________________________________
 void TGeant4::SetCollectTracks(Bool_t collectTracks)
 {
 /// (In)Activate collecting TGeo tracks 

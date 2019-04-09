@@ -90,7 +90,10 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
     fARGC(argc),
     fARGV(argv),  
     fUseRootRandom(true),
-    fIsMCStackCached(false)
+    fIsMCStackCached(false),
+    fHasEventByEventInitialization(false),
+    fNEventsProcessed(0),
+    fInProcessRun(false)
 {
 /// Standard constructor
 
@@ -501,28 +504,66 @@ void TG4RunManager::CacheMCStack()
 //_____________________________________________________________________________
 void TG4RunManager::ProcessEvent()
 {
-/// Not yet implemented.
+/// Replaying what is done in G4RunManager::BeamOn in order to initialize a run only
+/// once and process single events on user request
 
-  TG4Globals::Warning(
-    "TG4RunManager", "ProcessEvent", "Not implemented.");
+  if(!fHasEventByEventInitialization) {
+    if(!fRunManager->ConfirmBeamOnCondition()) {
+      TG4Globals::Warning("TG4RunManager", "ProcessEvent",
+                         "Bad beam condition in G4RunManager. No event processed.");
+      return;
+    }
+    fRunManager->ConstructScoringWorlds();
+    fRunManager->RunInitialization();
+    fHasEventByEventInitialization = true;
+  }
+  fRunManager->ProcessOneEvent(fNEventsProcessed++);
+  fRunManager->TerminateOneEvent();
 }
-    
+
 //_____________________________________________________________________________
 Bool_t TG4RunManager::ProcessRun(G4int nofEvents)
 {
 /// Process Geant4 run.
 
-  fRunManager->BeamOn(nofEvents); 
+  // Runinit for per-event processing ==> Don't allow for process run.
+  if(fHasEventByEventInitialization) {
+    TG4Globals::Warning("TG4RunManager", "ProcessRun",
+                        "Current run is terminated first, then the requested run is processed");
+    FinishRun();
+  }
+  fInProcessRun = true;
+  fRunManager->BeamOn(nofEvents);
+  fInProcessRun = false;
+  fNEventsProcessed = nofEvents;
+  return FinishRun();
+}
 
+//_____________________________________________________________________________
+Bool_t TG4RunManager::FinishRun()
+{
+  if(!fHasEventByEventInitialization) {
+    if(fInProcessRun) {
+      TG4Globals::Warning("TG4RunManager", "FinishRun",
+                          "You are processing a run. To stop it, call StopRun()");
+      return false;
+    } else {
+      fNEventsProcessed = 0;
+    }
+  } else {
+    fRunManager->RunTermination();
+    fHasEventByEventInitialization = false;
+    fNEventsProcessed = 0;
+  }
   // Pring field statistics
   TG4GeometryManager::Instance()->PrintFieldStatistics();
 
   G4bool result = ! TG4SDServices::Instance()->GetIsStopRun();
   TG4SDServices::Instance()->SetIsStopRun(false);
-  
+
   return result;
 }
-    
+
 //_____________________________________________________________________________
 void TG4RunManager::CreateGeantUI()
 {
