@@ -48,8 +48,8 @@ enum EquationType
                       ///  in a combined electric and magnetic field
   kEqEMFieldWithEDM,  ///< G4EqEMFieldWithEDM: Equation of motion in a combined
                       /// electric and magnetic field, with spin tracking for
-                     /// both MDM and EDM terms
-  kUserEquation ///< User defined equation of motion
+                      /// both MDM and EDM terms
+  kUserEquation       ///< User defined equation of motion
 };
 
 /// The available integrator of particle's equation of motion

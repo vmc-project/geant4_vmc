@@ -38,7 +38,7 @@
 #include <G4MonopoleFieldSetup.hh>
 #include <G4PVPlacement.hh>
 #include <G4ReflectionFactory.hh>
-#include <G4SystemOfUnits.hh>
+//#include <G4SystemOfUnits.hh>
 #include <G4TransportationManager.hh>
 
 #include <TGeoMCGeometry.h>
@@ -48,6 +48,10 @@
 #include <TList.h>
 #include <TVirtualMC.h>
 #include <TVirtualMCApplication.h>
+
+// Moved after ROOT includes to avoid warnings about shadowing variables
+// from CLHEP units
+#include <G4SystemOfUnits.hh>
 
 #ifdef USE_G3TOG4
 #include <G3MatTable.hh>
