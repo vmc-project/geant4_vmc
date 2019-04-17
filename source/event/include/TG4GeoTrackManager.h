@@ -30,34 +30,34 @@ class TVirtualGeoTrack;
 
 class TG4GeoTrackManager : public TG4Verbose
 {
-  public:
-    TG4GeoTrackManager();
-    virtual ~TG4GeoTrackManager();
+ public:
+  TG4GeoTrackManager();
+  virtual ~TG4GeoTrackManager();
 
-    // methods
-    void UpdateRootTrack(const G4Step* step);
+  // methods
+  void UpdateRootTrack(const G4Step* step);
 
-  private:
-    /// Not implemented
-    TG4GeoTrackManager(const TG4GeoTrackManager& right);
-    /// Not implemented
-    TG4GeoTrackManager& operator=(const TG4GeoTrackManager& right);
+ private:
+  /// Not implemented
+  TG4GeoTrackManager(const TG4GeoTrackManager& right);
+  /// Not implemented
+  TG4GeoTrackManager& operator=(const TG4GeoTrackManager& right);
 
-    // static data members
-    /// minimum point distance to store a point in TGeo track
-    static const G4double  fgkMinPointDistance;
+  // static data members
+  /// minimum point distance to store a point in TGeo track
+  static const G4double fgkMinPointDistance;
 
-    //
-    // data members
+  //
+  // data members
 
-    /// control to collect Root tracks
-    G4bool fCollectTracks;
+  /// control to collect Root tracks
+  G4bool fCollectTracks;
 
-    /// current Root track
-    TVirtualGeoTrack* fCurrentTGeoTrack;
+  /// current Root track
+  TVirtualGeoTrack* fCurrentTGeoTrack;
 
-    /// parent of the current Root track
-    TVirtualGeoTrack* fParentTGeoTrack;
+  /// parent of the current Root track
+  TVirtualGeoTrack* fParentTGeoTrack;
 };
 
-#endif //TG4_GEO_TRAK_MANAGER_H
+#endif // TG4_GEO_TRAK_MANAGER_H

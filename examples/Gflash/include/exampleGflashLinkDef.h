@@ -16,17 +16,12 @@
 #pragma link off all classes;
 #pragma link off all functions;
 
-#pragma link C++ class  VMC::Gflash::MCApplication+;
-#pragma link C++ class  VMC::Gflash::DetectorConstruction+;
-#pragma link C++ class  VMC::Gflash::Hit+;
-#pragma link C++ class  VMC::Gflash::SensitiveDetector+;
-#pragma link C++ class  VMC::Gflash::PrimaryGenerator+;
-#pragma link C++ class  Ex03MCStack+;
-#pragma link C++ class  std::stack<TParticle*,deque<TParticle*> >+;
+#pragma link C++ class VMC::Gflash::MCApplication + ;
+#pragma link C++ class VMC::Gflash::DetectorConstruction + ;
+#pragma link C++ class VMC::Gflash::Hit + ;
+#pragma link C++ class VMC::Gflash::SensitiveDetector + ;
+#pragma link C++ class VMC::Gflash::PrimaryGenerator + ;
+#pragma link C++ class Ex03MCStack + ;
+#pragma link C++ class std::stack < TParticle*, deque < TParticle*>> + ;
 
 #endif
-
-
-
-
-

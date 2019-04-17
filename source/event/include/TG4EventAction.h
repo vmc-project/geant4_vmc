@@ -15,8 +15,8 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include "TG4Verbose.h"
 #include "TG4EventActionMessenger.h"
+#include "TG4Verbose.h"
 
 #include <TStopwatch.h>
 
@@ -37,85 +37,88 @@ class G4Event;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4EventAction : public G4UserEventAction,
-                       public TG4Verbose
+class TG4EventAction : public G4UserEventAction, public TG4Verbose
 {
-  public:
-    TG4EventAction();
-    virtual ~TG4EventAction();
+ public:
+  TG4EventAction();
+  virtual ~TG4EventAction();
 
-    // methods
-    void LateInitialize();
-    virtual void BeginOfEventAction(const G4Event* event);
-    virtual void EndOfEventAction(const G4Event* event);
+  // methods
+  void LateInitialize();
+  virtual void BeginOfEventAction(const G4Event* event);
+  virtual void EndOfEventAction(const G4Event* event);
 
-    // set methods
-    void SetMCStack(TVirtualMCStack*  mcStack);
-    void SetPrintMemory(G4bool printMemory);
-    void SetSaveRandomStatus(G4bool saveRandomStatus);
+  // set methods
+  void SetMCStack(TVirtualMCStack* mcStack);
+  void SetPrintMemory(G4bool printMemory);
+  void SetSaveRandomStatus(G4bool saveRandomStatus);
 
-    // get methods
-    G4bool  GetPrintMemory() const;
-    G4bool  GetSaveRandomStatus() const;
+  // get methods
+  G4bool GetPrintMemory() const;
+  G4bool GetSaveRandomStatus() const;
 
-  private:
-    /// Not implemented
-    TG4EventAction(const TG4EventAction& right);
-    /// Not implemented
-    TG4EventAction& operator=(const TG4EventAction& right);
+ private:
+  /// Not implemented
+  TG4EventAction(const TG4EventAction& right);
+  /// Not implemented
+  TG4EventAction& operator=(const TG4EventAction& right);
 
-    // data members
-    TG4EventActionMessenger   fMessenger; ///< messenger
-    TStopwatch  fTimer;          ///< timer
+  // data members
+  TG4EventActionMessenger fMessenger; ///< messenger
+  TStopwatch fTimer;                  ///< timer
 
-    /// Cached pointer to thread-local VMC application
-    TVirtualMCApplication*  fMCApplication;
+  /// Cached pointer to thread-local VMC application
+  TVirtualMCApplication* fMCApplication;
 
-    /// Cached pointer to thread-local VMC stack
-    TVirtualMCStack*  fMCStack;
+  /// Cached pointer to thread-local VMC stack
+  TVirtualMCStack* fMCStack;
 
-    /// Cached pointer to thread-local tracking action
-    TG4TrackingAction*  fTrackingAction;
+  /// Cached pointer to thread-local tracking action
+  TG4TrackingAction* fTrackingAction;
 
-    /// Cached pointer to thread-local track manager
-    TG4TrackManager*  fTrackManager;
+  /// Cached pointer to thread-local track manager
+  TG4TrackManager* fTrackManager;
 
-    /// Cached pointer to thread-local state manager
-    TG4StateManager*  fStateManager;
+  /// Cached pointer to thread-local state manager
+  TG4StateManager* fStateManager;
 
-    /// Control for printing memory usage
-    G4bool  fPrintMemory;
+  /// Control for printing memory usage
+  G4bool fPrintMemory;
 
-    /// Control for saving random engine status for each event
-    G4bool  fSaveRandomStatus;
+  /// Control for saving random engine status for each event
+  G4bool fSaveRandomStatus;
 };
 
 // inline methods
 
-inline void TG4EventAction::SetMCStack(TVirtualMCStack* mcStack) {
+inline void TG4EventAction::SetMCStack(TVirtualMCStack* mcStack)
+{
   /// Set cached pointer to thread-local VMC stack
   fMCStack = mcStack;
 }
 
-inline void TG4EventAction::SetPrintMemory(G4bool printMemory) {
+inline void TG4EventAction::SetPrintMemory(G4bool printMemory)
+{
   /// Set option for printing memory usage
   fPrintMemory = printMemory;
 }
 
-inline G4bool TG4EventAction::GetPrintMemory() const {
+inline G4bool TG4EventAction::GetPrintMemory() const
+{
   /// Return the option for printing memory usage
   return fPrintMemory;
 }
 
-inline G4bool TG4EventAction::GetSaveRandomStatus() const {
+inline G4bool TG4EventAction::GetSaveRandomStatus() const
+{
   /// Return the option for printing memory usage
   return fSaveRandomStatus;
 }
 
-inline void TG4EventAction::SetSaveRandomStatus(G4bool saveRandomStatus) {
+inline void TG4EventAction::SetSaveRandomStatus(G4bool saveRandomStatus)
+{
   /// Set option for saving random engine status for each event
   fSaveRandomStatus = saveRandomStatus;
 }
 
-#endif //TG4_EVENT_ACTION_H
-
+#endif // TG4_EVENT_ACTION_H

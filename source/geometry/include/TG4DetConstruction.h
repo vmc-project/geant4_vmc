@@ -27,24 +27,23 @@ class G4VPhysicalVolume;
 
 class TG4DetConstruction : public G4VUserDetectorConstruction
 {
-  public:
-    TG4DetConstruction();
-    virtual ~TG4DetConstruction();
+ public:
+  TG4DetConstruction();
+  virtual ~TG4DetConstruction();
 
-    // methods
-    virtual G4VPhysicalVolume* Construct();
-    virtual void ConstructSDandField();
+  // methods
+  virtual G4VPhysicalVolume* Construct();
+  virtual void ConstructSDandField();
 
-    void SlaveTG4DetConstruction();
+  void SlaveTG4DetConstruction();
 
-  private:
-    /// Not implemented
-    TG4DetConstruction(const TG4DetConstruction& right);
-    /// Not implemented
-    TG4DetConstruction& operator=(const TG4DetConstruction& right);
+ private:
+  /// Not implemented
+  TG4DetConstruction(const TG4DetConstruction& right);
+  /// Not implemented
+  TG4DetConstruction& operator=(const TG4DetConstruction& right);
 
-    G4VPhysicalVolume* fWorld;
+  G4VPhysicalVolume* fWorld;
 };
 
-#endif //TG4_DET_CONSTRUCTION_H
-
+#endif // TG4_DET_CONSTRUCTION_H

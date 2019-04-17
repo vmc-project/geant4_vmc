@@ -30,55 +30,56 @@ class G4FastSimulationManagerProcess;
 /// \brief Physics builder which activates selected fast simulation models.
 ///
 /// The fast simulation models are constructed via user fast simulation class
-/// derived from TG4VUserFastSimulation, created via user run conficuration class.
-/// The call is triggered from TG4RunManager, after geometry and physics manager
-/// have been instantiated.
+/// derived from TG4VUserFastSimulation, created via user run conficuration
+/// class. The call is triggered from TG4RunManager, after geometry and physics
+/// manager have been instantiated.
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
 class TG4FastSimulationPhysics : public TG4VPhysicsConstructor
 {
-  public:
-    typedef std::map<G4String, G4FastSimulationManagerProcess*> ProcessMap;
+ public:
+  typedef std::map<G4String, G4FastSimulationManagerProcess*> ProcessMap;
 
-  public:
-    TG4FastSimulationPhysics(const G4String& name = "FastSimulation");
-    TG4FastSimulationPhysics(G4int theVerboseLevel,
-                             const G4String& name = "FastSimulation");
-    virtual ~TG4FastSimulationPhysics();
+ public:
+  TG4FastSimulationPhysics(const G4String& name = "FastSimulation");
+  TG4FastSimulationPhysics(
+    G4int theVerboseLevel, const G4String& name = "FastSimulation");
+  virtual ~TG4FastSimulationPhysics();
 
-    // set methods
-    void SetUserFastSimulation(TG4VUserFastSimulation* userFastSimulation);
+  // set methods
+  void SetUserFastSimulation(TG4VUserFastSimulation* userFastSimulation);
 
-  protected:
-    // methods
-          // construct particle and physics
-    virtual void ConstructParticle();
-  public:
-    virtual void ConstructProcess();
+ protected:
+  // methods
+  // construct particle and physics
+  virtual void ConstructParticle();
 
-  private:
-    /// Not implemented
-    TG4FastSimulationPhysics(const TG4FastSimulationPhysics& right);
-    /// Not implemented
-    TG4FastSimulationPhysics& operator=(const TG4FastSimulationPhysics& right);
+ public:
+  virtual void ConstructProcess();
 
-    // methods
-    G4FastSimulationManagerProcess*
-      GetOrCreateFastSimulationProcess(const G4String& modelName);
+ private:
+  /// Not implemented
+  TG4FastSimulationPhysics(const TG4FastSimulationPhysics& right);
+  /// Not implemented
+  TG4FastSimulationPhysics& operator=(const TG4FastSimulationPhysics& right);
 
-    void UpdateRegions(const std::vector<TG4ModelConfiguration*>& models);
-    void AddFastSimulationProcess(const std::vector<TG4ModelConfiguration*>& models);
+  // methods
+  G4FastSimulationManagerProcess* GetOrCreateFastSimulationProcess(
+    const G4String& modelName);
 
-    // static data members
-    /// fast simulation processes map
-    static G4ThreadLocal ProcessMap* fgProcessMap;
+  void UpdateRegions(const std::vector<TG4ModelConfiguration*>& models);
+  void AddFastSimulationProcess(
+    const std::vector<TG4ModelConfiguration*>& models);
 
-    // data members
+  // static data members
+  /// fast simulation processes map
+  static G4ThreadLocal ProcessMap* fgProcessMap;
 
-    /// the user fast simulation
-    TG4VUserFastSimulation* fUserFastSimulation;
+  // data members
+
+  /// the user fast simulation
+  TG4VUserFastSimulation* fUserFastSimulation;
 };
 
-#endif //TG4_FAST_SIMULATION_PHYSICS_H
-
+#endif // TG4_FAST_SIMULATION_PHYSICS_H

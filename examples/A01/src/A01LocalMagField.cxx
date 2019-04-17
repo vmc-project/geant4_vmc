@@ -20,45 +20,43 @@
 
 /// \cond CLASSIMP
 ClassImp(A01LocalMagField)
-/// \endcond
+  /// \endcond
 
-//______________________________________________________________________________
-A01LocalMagField::A01LocalMagField(Double_t Bx, Double_t By, Double_t Bz)
+  //______________________________________________________________________________
+  A01LocalMagField::A01LocalMagField(Double_t Bx, Double_t By, Double_t Bz)
   : TVirtualMagField("A01 magnetic field")
 {
-/// Standard constructor
-/// \param Bx   The x component of the field value (in kiloGauss)
-/// \param By   The y component of the field value (in kiloGauss)
-/// \param Bz   The z component of the field value (in kiloGauss)
+  /// Standard constructor
+  /// \param Bx   The x component of the field value (in kiloGauss)
+  /// \param By   The y component of the field value (in kiloGauss)
+  /// \param Bz   The z component of the field value (in kiloGauss)
 
-   fB[0] = Bx;
-   fB[1] = By;
-   fB[2] = Bz;
+  fB[0] = Bx;
+  fB[1] = By;
+  fB[2] = Bz;
 }
 
 //______________________________________________________________________________
-A01LocalMagField::A01LocalMagField()
-  : TVirtualMagField()
+A01LocalMagField::A01LocalMagField() : TVirtualMagField()
 {
-/// Default constructor
-   fB[0] = 0.;
-   fB[1] = 0.;
-   fB[2] = 0.;
+  /// Default constructor
+  fB[0] = 0.;
+  fB[1] = 0.;
+  fB[2] = 0.;
 }
 
 //______________________________________________________________________________
 A01LocalMagField::~A01LocalMagField()
 {
-/// Destructor
+  /// Destructor
 }
-
 
 //______________________________________________________________________________
 void A01LocalMagField::Field(const Double_t* /*x*/, Double_t* B)
 {
-/// Fill in the field value B in the given position at x.
-/// The local field is uniform in the associated volume.
-/// \param B   The field value (in kiloGauss)
+  /// Fill in the field value B in the given position at x.
+  /// The local field is uniform in the associated volume.
+  /// \param B   The field value (in kiloGauss)
 
   B[0] = fB[0];
   B[1] = fB[1];

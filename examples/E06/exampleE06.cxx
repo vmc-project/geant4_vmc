@@ -25,8 +25,8 @@
 #include "TGeant3TGeo.h"
 #endif
 
-#include "TThread.h"
 #include "TInterpreter.h"
+#include "TThread.h"
 
 /// Application main program
 int main(int argc, char** argv)
@@ -35,26 +35,24 @@ int main(int argc, char** argv)
   // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
-   TThread::Initialize();
-   gInterpreter->SetProcessLineLock(false);
+  TThread::Initialize();
+  gInterpreter->SetProcessLineLock(false);
 #endif
 
   // Create MC application (thread local)
-  Ex06MCApplication* appl
-    =  new Ex06MCApplication("ExampleE06",
-                             "The exampleE06 MC application");
+  Ex06MCApplication* appl =
+    new Ex06MCApplication("ExampleE06", "The exampleE06 MC application");
   appl->GetPrimaryGenerator()->SetNofPrimaries(10);
-  //appl->SetVerboseLevel(3);
+  // appl->SetVerboseLevel(3);
 
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4
-  TG4RunConfiguration* runConfiguration
-    = new TG4RunConfiguration("geomRootToGeant4", "emStandard+optical");
+  TG4RunConfiguration* runConfiguration =
+    new TG4RunConfiguration("geomRootToGeant4", "emStandard+optical");
 
   // TGeant4
-  TGeant4* geant4
-    = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration,
-                  argc, argv);
+  TGeant4* geant4 = new TGeant4(
+    "TGeant4", "The Geant4 Monte Carlo", runConfiguration, argc, argv);
 
   // Customise Geant4 setting
   // (verbose level, global range cut, ..)
@@ -62,13 +60,12 @@ int main(int argc, char** argv)
 #endif
 
 #ifdef USE_GEANT3
-  TGeant3* geant3
-    = new TGeant3TGeo("C++ Interface to Geant3");
-  gMC->SetProcess("CKOV",1);
-  gMC->SetCut("CUTELE",10e-06);
-  gMC->SetCut("CUTGAM",10e-06);
-  geant3->SetSWIT(4,1000);
-      // reduce printing from GTREVE_ROOT (sets one printing per 1000 tracks)
+  TGeant3* geant3 = new TGeant3TGeo("C++ Interface to Geant3");
+  gMC->SetProcess("CKOV", 1);
+  gMC->SetCut("CUTELE", 10e-06);
+  gMC->SetCut("CUTGAM", 10e-06);
+  geant3->SetSWIT(4, 1000);
+  // reduce printing from GTREVE_ROOT (sets one printing per 1000 tracks)
 #endif
 
   // Run example

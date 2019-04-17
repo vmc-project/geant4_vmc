@@ -20,22 +20,19 @@
 const G4int TG4VVerbose::fgkDefaultVerboseLevel = 1;
 
 //_____________________________________________________________________________
-TG4VVerbose::TG4VVerbose()
-  : fVerboseLevel(fgkDefaultVerboseLevel)
+TG4VVerbose::TG4VVerbose() : fVerboseLevel(fgkDefaultVerboseLevel)
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
-TG4VVerbose::TG4VVerbose(G4int verboseLevel)
-  : fVerboseLevel(verboseLevel)
+TG4VVerbose::TG4VVerbose(G4int verboseLevel) : fVerboseLevel(verboseLevel)
 {
-/// Standard constructor
+  /// Standard constructor
 }
 
 //_____________________________________________________________________________
 TG4VVerbose::~TG4VVerbose()
 {
-/// Destructor
+  /// Destructor
 }
-

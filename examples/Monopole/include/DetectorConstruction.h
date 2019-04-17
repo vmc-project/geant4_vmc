@@ -36,54 +36,56 @@ namespace Monopole
 
 class DetectorConstruction : public TObject
 {
-  public:
-    DetectorConstruction();
-    virtual ~DetectorConstruction();
+ public:
+  DetectorConstruction();
+  virtual ~DetectorConstruction();
 
-  public:
-    void ConstructMaterials();
-    void ConstructGeometry();
+ public:
+  void ConstructMaterials();
+  void ConstructGeometry();
 
-    // set methods
-    void SetAbsorberSizeX(Double_t sizeX);
-    void SetAbsorberSizeYZ(Double_t sizeYZ);
-    void SetAbsorberMaterial(const TString& name);
-    // void SetMagField(Double_t fieldValue);
-    void SetMaxStepSize(Double_t maxStepSize);
-    void SetGeometryInitialized(Bool_t geometryInitialized);
-    // void UpdateGeometry();
+  // set methods
+  void SetAbsorberSizeX(Double_t sizeX);
+  void SetAbsorberSizeYZ(Double_t sizeYZ);
+  void SetAbsorberMaterial(const TString& name);
+  // void SetMagField(Double_t fieldValue);
+  void SetMaxStepSize(Double_t maxStepSize);
+  void SetGeometryInitialized(Bool_t geometryInitialized);
+  // void UpdateGeometry();
 
-    //
-    // get methods
-    Double_t  GetWorldSizeX() const          { return fWorldSizeX; }
-    Double_t  GetAbsorberSizeX() const       { return fAbsorberSizeX; }
-    Double_t  GetMaxStepSize() const         { return fMaxStepSize; }
-    TString   GetAbsorberMaterial() const    { return fAbsorberMaterial; }
-    Bool_t    GetGeometryInitialized() const { return fGeometryInitialized; }
+  //
+  // get methods
+  Double_t GetWorldSizeX() const { return fWorldSizeX; }
+  Double_t GetAbsorberSizeX() const { return fAbsorberSizeX; }
+  Double_t GetMaxStepSize() const { return fMaxStepSize; }
+  TString GetAbsorberMaterial() const { return fAbsorberMaterial; }
+  Bool_t GetGeometryInitialized() const { return fGeometryInitialized; }
 
-  private:
-    void PrintParameters();
+ private:
+  void PrintParameters();
 
-    // data members
-    TString   fWorldMaterial;
-    TString   fAbsorberMaterial;
-    Double_t  fAbsorberSizeX;
-    Double_t  fAbsorberSizeYZ;
-    Double_t  fWorldSizeX;
-    Double_t  fWorldSizeYZ;
-    Double_t  fMaxStepSize;
-    Bool_t    fGeometryInitialized;
+  // data members
+  TString fWorldMaterial;
+  TString fAbsorberMaterial;
+  Double_t fAbsorberSizeX;
+  Double_t fAbsorberSizeYZ;
+  Double_t fWorldSizeX;
+  Double_t fWorldSizeYZ;
+  Double_t fMaxStepSize;
+  Bool_t fGeometryInitialized;
 
-  ClassDef(DetectorConstruction,1) //DetectorConstruction
+  ClassDef(DetectorConstruction, 1) // DetectorConstruction
 };
 
 // inline functions
 
-inline void DetectorConstruction::SetGeometryInitialized(Bool_t geometryInitialized) {
+inline void DetectorConstruction::SetGeometryInitialized(
+  Bool_t geometryInitialized)
+{
   fGeometryInitialized = geometryInitialized;
 }
 
-}
-}
+} // namespace Monopole
+} // namespace VMC
 
-#endif //DETECTOR_CONSTRUCTION_H
+#endif // DETECTOR_CONSTRUCTION_H

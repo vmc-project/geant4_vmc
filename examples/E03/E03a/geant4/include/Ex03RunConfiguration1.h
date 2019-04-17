@@ -29,14 +29,13 @@
 
 class Ex03RunConfiguration1 : public TG4RunConfiguration
 {
-  public:
-    Ex03RunConfiguration1(const TString& physicsList = "FTFP_BERT",
-                          const TString& specialProcess = "stepLimiter");
-    virtual ~Ex03RunConfiguration1();
+ public:
+  Ex03RunConfiguration1(const TString& physicsList = "FTFP_BERT",
+    const TString& specialProcess = "stepLimiter");
+  virtual ~Ex03RunConfiguration1();
 
-    // methods
-    virtual G4VUserDetectorConstruction*  CreateDetectorConstruction();
+  // methods
+  virtual G4VUserDetectorConstruction* CreateDetectorConstruction();
 };
 
-#endif //EX03_RUN_CONFIGURATION1_H
-
+#endif // EX03_RUN_CONFIGURATION1_H

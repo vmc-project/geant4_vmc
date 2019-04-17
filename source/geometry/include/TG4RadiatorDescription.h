@@ -17,8 +17,8 @@
 
 #include <globals.hh>
 
-#include <vector>
 #include <tuple>
+#include <vector>
 
 /// \ingroup geometry
 /// \brief The radiator description
@@ -30,76 +30,92 @@
 
 class TG4RadiatorDescription
 {
-  public:
-    using Component = std::tuple<G4String, G4double, G4double>;
+ public:
+  using Component = std::tuple<G4String, G4double, G4double>;
 
-  public:
-    TG4RadiatorDescription(const G4String& volumeName = "");
-    virtual ~TG4RadiatorDescription();
+ public:
+  TG4RadiatorDescription(const G4String& volumeName = "");
+  virtual ~TG4RadiatorDescription();
 
-    // methods
-    void PrintParameters() const;
+  // methods
+  void PrintParameters() const;
 
-    // set methods
-    void SetVolumeName(const G4String& name);
-    void SetXtrModel(const G4String& name);
-    void SetFoilNumber(G4int foilNumber);
-    void SetLayer(const G4String& materialName, G4double thickness, G4double fluctuation);
-    void SetStrawTube(const G4String& materialName, G4double wallThickness, G4double gasThickness);
+  // set methods
+  void SetVolumeName(const G4String& name);
+  void SetXtrModel(const G4String& name);
+  void SetFoilNumber(G4int foilNumber);
+  void SetLayer(
+    const G4String& materialName, G4double thickness, G4double fluctuation);
+  void SetStrawTube(const G4String& materialName, G4double wallThickness,
+    G4double gasThickness);
 
-    // get methods
-    G4String  GetVolumeName() const;
-    G4String  GetXtrModel() const;
-    G4int     GetFoilNumber() const;
-    Component GetLayer(G4int i) const;
-    Component GetStrawTube() const;
+  // get methods
+  G4String GetVolumeName() const;
+  G4String GetXtrModel() const;
+  G4int GetFoilNumber() const;
+  Component GetLayer(G4int i) const;
+  Component GetStrawTube() const;
 
-  private:
-    /// The name of associated volume
-    G4String  fVolumeName;
+ private:
+  /// The name of associated volume
+  G4String fVolumeName;
 
-    /// The transition radiation process model
-    G4String  fXtrModel;
+  /// The transition radiation process model
+  G4String fXtrModel;
 
-    /// The number of foils
-    G4int   fFoilNumber;
+  /// The number of foils
+  G4int fFoilNumber;
 
-    /// The layer parameters
-    std::vector<Component> fLayers;
+  /// The layer parameters
+  std::vector<Component> fLayers;
 
-    /// The straw tube parameters
-    Component fStrawTube;
- };
+  /// The straw tube parameters
+  Component fStrawTube;
+};
 
 // inline functions
 
 /// Set the name of associated volume
 inline void TG4RadiatorDescription::SetVolumeName(const G4String& name)
-{  fVolumeName = name; }
+{
+  fVolumeName = name;
+}
 
 /// Set the transition radiation process model
-inline void  TG4RadiatorDescription::SetXtrModel(const G4String& name)
-{ fXtrModel = name; }
+inline void TG4RadiatorDescription::SetXtrModel(const G4String& name)
+{
+  fXtrModel = name;
+}
 
 /// Set the number of foils
 inline void TG4RadiatorDescription::SetFoilNumber(G4int foilNumber)
-{  fFoilNumber = foilNumber; }
+{
+  fFoilNumber = foilNumber;
+}
 
 /// Return the name of associated volume
-inline G4String  TG4RadiatorDescription::GetVolumeName() const
-{ return fVolumeName; }
+inline G4String TG4RadiatorDescription::GetVolumeName() const
+{
+  return fVolumeName;
+}
 
 /// Return the transition radiation process model
-inline G4String  TG4RadiatorDescription::GetXtrModel() const
-{ return fXtrModel; }
+inline G4String TG4RadiatorDescription::GetXtrModel() const
+{
+  return fXtrModel;
+}
 
 /// Return the number of foils
-inline G4int  TG4RadiatorDescription::GetFoilNumber() const
-{  return fFoilNumber; }
+inline G4int TG4RadiatorDescription::GetFoilNumber() const
+{
+  return fFoilNumber;
+}
 
 /// Return the straw tube parameters
-inline TG4RadiatorDescription::Component TG4RadiatorDescription::GetStrawTube() const
-{ return fStrawTube; }
+inline TG4RadiatorDescription::Component
+TG4RadiatorDescription::GetStrawTube() const
+{
+  return fStrawTube;
+}
 
-#endif //TG4_RADIATOR_DESCRIPTION_H
-
+#endif // TG4_RADIATOR_DESCRIPTION_H

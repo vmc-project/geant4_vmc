@@ -181,11 +181,10 @@ enum TG4G3ControlValue
   kInActivate = 0,
 
   /// process is activated WITH generation of secondaries
-  kActivate   = 1,
+  kActivate = 1,
 
   /// process is activated WITHOUT generation of secondaries
-  kActivate2  = 2
+  kActivate2 = 2
 };
 
-#endif //TG4_G3_CONTROL_H
-
+#endif // TG4_G3_CONTROL_H

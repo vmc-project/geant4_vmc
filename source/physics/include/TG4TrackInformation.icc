@@ -18,83 +18,95 @@ extern G4ThreadLocal G4Allocator<TG4TrackInformation>* gTrackInfoAllocator;
 
 inline void* TG4TrackInformation::operator new(size_t)
 {
-/// Override "new" for "G4Allocator".
+  /// Override "new" for "G4Allocator".
 
-  if ( ! gTrackInfoAllocator ) {
+  if (!gTrackInfoAllocator) {
     gTrackInfoAllocator = new G4Allocator<TG4TrackInformation>;
   }
 
-  void *trackInfo;
-  trackInfo = (void *) (*gTrackInfoAllocator).MallocSingle();
+  void* trackInfo;
+  trackInfo = (void*)(*gTrackInfoAllocator).MallocSingle();
   return trackInfo;
 }
 
-inline void TG4TrackInformation::operator delete(void *trackInfo)
+inline void TG4TrackInformation::operator delete(void* trackInfo)
 {
-/// Override "delete" for "G4Allocator".
+  /// Override "delete" for "G4Allocator".
 
-  (*gTrackInfoAllocator).FreeSingle((TG4TrackInformation *) trackInfo);
+  (*gTrackInfoAllocator).FreeSingle((TG4TrackInformation*)trackInfo);
 }
 
 // inline methods
 
-inline void TG4TrackInformation::SetTrackParticleID(G4int trackParticleID) {
+inline void TG4TrackInformation::SetTrackParticleID(G4int trackParticleID)
+{
   /// Set track particle ID.= the index of track particle in VMC stack
   fTrackParticleID = trackParticleID;
 }
 
-inline void TG4TrackInformation::SetParentParticleID(G4int parentParticleID) {
+inline void TG4TrackInformation::SetParentParticleID(G4int parentParticleID)
+{
   /// Set parent particle ID = the index of parent particle in VMC stack
   fParentParticleID = parentParticleID;
 }
 
-inline void TG4TrackInformation::SetPDGLifetime(G4double pdgLifeTime) {
+inline void TG4TrackInformation::SetPDGLifetime(G4double pdgLifeTime)
+{
   /// Set the PDG lifetime, if not yet done for this track.
   /// Do nothing if called for the second time.
-  if ( fPDGLifetime < 0 ) fPDGLifetime = pdgLifeTime;
+  if (fPDGLifetime < 0) fPDGLifetime = pdgLifeTime;
 }
 
-inline void TG4TrackInformation::SetPDGEncoding(G4int pdgEncoding) {
+inline void TG4TrackInformation::SetPDGEncoding(G4int pdgEncoding)
+{
   /// Set the PDG encoding.
   fPDGEncoding = pdgEncoding;
 }
 
-inline void TG4TrackInformation::SetIsUserTrack(G4bool isUserTrack) {
+inline void TG4TrackInformation::SetIsUserTrack(G4bool isUserTrack)
+{
   /// Set info that the track was poped from the VMC stack
   fIsUserTrack = isUserTrack;
 }
 
-inline void TG4TrackInformation::SetStop(G4bool stop) {
+inline void TG4TrackInformation::SetStop(G4bool stop)
+{
   /// Set info that the track should be stopped
   fStop = stop;
 }
 
-inline G4int TG4TrackInformation::GetTrackParticleID() const {
+inline G4int TG4TrackInformation::GetTrackParticleID() const
+{
   /// Return track particle ID.= the index of track particle in VMC stack
   return fTrackParticleID;
 }
 
-inline G4int TG4TrackInformation::GetParentParticleID() const {
+inline G4int TG4TrackInformation::GetParentParticleID() const
+{
   /// Return parent particle ID = the index of parent particle in VMC stack
   return fParentParticleID;
 }
 
-inline G4double TG4TrackInformation::GetPDGLifetime() const {
+inline G4double TG4TrackInformation::GetPDGLifetime() const
+{
   /// Return the original PDG lifetime for this track
   return fPDGLifetime;
 }
 
-inline G4int TG4TrackInformation::GetPDGEncoding() const {
+inline G4int TG4TrackInformation::GetPDGEncoding() const
+{
   /// Return the PDG encoding for this track
   return fPDGEncoding;
 }
 
-inline G4bool TG4TrackInformation::IsUserTrack() const {
+inline G4bool TG4TrackInformation::IsUserTrack() const
+{
   /// Return the info if the track was poped from the VMC stack
   return fIsUserTrack;
 }
 
-inline G4bool TG4TrackInformation::IsStop() const {
+inline G4bool TG4TrackInformation::IsStop() const
+{
   /// Return the info if the track should be stopped
   return fStop;
 }

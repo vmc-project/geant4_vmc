@@ -9,11 +9,6 @@
 #pragma link off all classes;
 #pragma link off all functions;
 
-#pragma link C++ class  VMC::ExGarfield::RunConfiguration+;
+#pragma link C++ class VMC::ExGarfield::RunConfiguration + ;
 
 #endif
-
-
-
-
-

@@ -30,49 +30,47 @@ class TG4OpticalPhysics;
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4HadronPhysicsList: public G4VUserPhysicsList,
-                            public TG4Verbose
+class TG4HadronPhysicsList : public G4VUserPhysicsList, public TG4Verbose
 {
-  public:
-    TG4HadronPhysicsList(const G4String& selection);
-    virtual ~TG4HadronPhysicsList();
+ public:
+  TG4HadronPhysicsList(const G4String& selection);
+  virtual ~TG4HadronPhysicsList();
 
-    // static methods
-    static G4String AvailableHadronSelections();
-    static G4String AvailableEMSelections();
-    static G4bool   IsAvailableSelection(const G4String& selection);
+  // static methods
+  static G4String AvailableHadronSelections();
+  static G4String AvailableEMSelections();
+  static G4bool IsAvailableSelection(const G4String& selection);
 
-    // methods
-    virtual void ConstructParticle();
-    virtual void ConstructProcess();
+  // methods
+  virtual void ConstructParticle();
+  virtual void ConstructProcess();
 
-                  /// No cuts are set here
-    virtual void SetCuts() {}
+  /// No cuts are set here
+  virtual void SetCuts() {}
 
-    virtual G4int VerboseLevel() const;
-    virtual void  VerboseLevel(G4int level);
+  virtual G4int VerboseLevel() const;
+  virtual void VerboseLevel(G4int level);
 
-    // set methods
-    void SetRangeCut(G4double value);
+  // set methods
+  void SetRangeCut(G4double value);
 
-  protected:
-    // static data members
-    static const G4double  fgkDefaultCutValue; ///< default cut value
+ protected:
+  // static data members
+  static const G4double fgkDefaultCutValue; ///< default cut value
 
-  private:
-    /// Not implemented
-    TG4HadronPhysicsList(const TG4HadronPhysicsList& right);
-    /// Not implemented
-    TG4HadronPhysicsList& operator=(const TG4HadronPhysicsList& right);
+ private:
+  /// Not implemented
+  TG4HadronPhysicsList(const TG4HadronPhysicsList& right);
+  /// Not implemented
+  TG4HadronPhysicsList& operator=(const TG4HadronPhysicsList& right);
 
-    // methods
-    void Configure(const G4String& selection);
+  // methods
+  void Configure(const G4String& selection);
 
-    // data members
+  // data members
 
-    /// the physics list according to user selection
-    G4VUserPhysicsList*  fPhysicsList;
+  /// the physics list according to user selection
+  G4VUserPhysicsList* fPhysicsList;
 };
 
-#endif //TG4_HADRON_PHYSICS_LIST_H
-
+#endif // TG4_HADRON_PHYSICS_LIST_H

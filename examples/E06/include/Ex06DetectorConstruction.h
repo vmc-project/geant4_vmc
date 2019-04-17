@@ -33,24 +33,24 @@
 
 class Ex06DetectorConstruction : public TObject
 {
-  public:
-    Ex06DetectorConstruction();
-    virtual ~Ex06DetectorConstruction();
+ public:
+  Ex06DetectorConstruction();
+  virtual ~Ex06DetectorConstruction();
 
-  public:
-     void ConstructMaterials();
-     void ConstructGeometry();
-     void ConstructOpGeometry();
+ public:
+  void ConstructMaterials();
+  void ConstructGeometry();
+  void ConstructOpGeometry();
 
-  private:
-     // data members
-     Double_t fExpHallSize; ///< The experimental hall size
-     Double_t fTankSize;    ///< The tank size
-     Double_t fBubbleSize;  ///< The bubble size
-     Int_t    fImedAir;     ///< The Air medium Id
-     Int_t    fImedWater;   ///< The Water medium Id
+ private:
+  // data members
+  Double_t fExpHallSize; ///< The experimental hall size
+  Double_t fTankSize;    ///< The tank size
+  Double_t fBubbleSize;  ///< The bubble size
+  Int_t fImedAir;        ///< The Air medium Id
+  Int_t fImedWater;      ///< The Water medium Id
 
-  ClassDef(Ex06DetectorConstruction,1) //Ex06DetectorConstruction
+  ClassDef(Ex06DetectorConstruction, 1) // Ex06DetectorConstruction
 };
 
-#endif //EX06_DETECTOR_CONSTRUCTION_H
+#endif // EX06_DETECTOR_CONSTRUCTION_H

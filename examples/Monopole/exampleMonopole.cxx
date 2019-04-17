@@ -17,16 +17,16 @@
 /// \date 15/07/2018
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include "MCApplication.h"
 #include "DetectorConstruction.h"
+#include "MCApplication.h"
 
 #ifdef USE_GEANT4
 #include "TG4RunConfiguration.h"
 #include "TGeant4.h"
 #endif
 
-#include "TThread.h"
 #include "TInterpreter.h"
+#include "TThread.h"
 
 /// Application main program
 int main(int argc, char** argv)
@@ -41,21 +41,21 @@ int main(int argc, char** argv)
   // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
-   TThread::Initialize();
-   gInterpreter->SetProcessLineLock(false);
+  TThread::Initialize();
+  gInterpreter->SetProcessLineLock(false);
 #endif
 
   // Create MC application
-  VMC::Monopole::MCApplication* appl
-    =  new VMC::Monopole::MCApplication("ExampleMonopole",
-                                        "The exampleMonopole MC application");
+  VMC::Monopole::MCApplication* appl = new VMC::Monopole::MCApplication(
+    "ExampleMonopole", "The exampleMonopole MC application");
   // Set detector parameters
   // /testex/det/setMat G4_Si
   // /testex/det/setSizeX  10 cm
   // /testex/det/setSizeYZ 20 cm
   // /testex/det/setStepSize 0.2 mm
   // /testex/run/binSize 0.2 mm
-  VMC::Monopole::DetectorConstruction* detector = appl->GetDetectorConstruction();
+  VMC::Monopole::DetectorConstruction* detector =
+    appl->GetDetectorConstruction();
   detector->SetAbsorberMaterial("Si");
   detector->SetAbsorberSizeX(10);
   detector->SetAbsorberSizeYZ(20);
@@ -64,13 +64,12 @@ int main(int argc, char** argv)
 
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4
-  TG4RunConfiguration* runConfiguration
-    = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT+monopole", "stepLimiter", false, false);
+  TG4RunConfiguration* runConfiguration = new TG4RunConfiguration(
+    "geomRootToGeant4", "FTFP_BERT+monopole", "stepLimiter", false, false);
 
   // TGeant4
-  TGeant4* geant4
-    = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration,
-                  argc, argv);
+  TGeant4* geant4 = new TGeant4(
+    "TGeant4", "The Geant4 Monte Carlo", runConfiguration, argc, argv);
   std::cout << "Geant4 has been created." << std::endl;
 
   // Customise Geant4 setting

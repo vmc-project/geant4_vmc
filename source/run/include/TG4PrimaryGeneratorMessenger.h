@@ -33,30 +33,31 @@ class G4UIcmdWithABool;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4PrimaryGeneratorMessenger: public G4UImessenger
+class TG4PrimaryGeneratorMessenger : public G4UImessenger
 {
-  public:
-    TG4PrimaryGeneratorMessenger(TG4PrimaryGeneratorAction* action);
-    virtual ~TG4PrimaryGeneratorMessenger();
+ public:
+  TG4PrimaryGeneratorMessenger(TG4PrimaryGeneratorAction* action);
+  virtual ~TG4PrimaryGeneratorMessenger();
 
-    // methods
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-  private:
-    /// Not implemented
-    TG4PrimaryGeneratorMessenger();
-    /// Not implemented
-    TG4PrimaryGeneratorMessenger(const TG4PrimaryGeneratorMessenger& right);
-    /// Not implemented
-    TG4PrimaryGeneratorMessenger& operator=(const TG4PrimaryGeneratorMessenger& right);
+ private:
+  /// Not implemented
+  TG4PrimaryGeneratorMessenger();
+  /// Not implemented
+  TG4PrimaryGeneratorMessenger(const TG4PrimaryGeneratorMessenger& right);
+  /// Not implemented
+  TG4PrimaryGeneratorMessenger& operator=(
+    const TG4PrimaryGeneratorMessenger& right);
 
-    // data members
-    TG4PrimaryGeneratorAction*  fPrimaryGeneratorAction; ///< associated class
-    G4UIdirectory*         fDirectory;      ///< command directory
+  // data members
+  TG4PrimaryGeneratorAction* fPrimaryGeneratorAction; ///< associated class
+  G4UIdirectory* fDirectory;                          ///< command directory
 
-    /// command: /mcPrimaryGenerator/skipUnknownParticles
-    G4UIcmdWithABool*      fSkipUnknownParticlesCmd;
-    /// command: /mcRegions/applyForElectron true|false
+  /// command: /mcPrimaryGenerator/skipUnknownParticles
+  G4UIcmdWithABool* fSkipUnknownParticlesCmd;
+  /// command: /mcRegions/applyForElectron true|false
 };
 
-#endif //TG4_PRIMARY_GENERATOR_MESSENGER
+#endif // TG4_PRIMARY_GENERATOR_MESSENGER

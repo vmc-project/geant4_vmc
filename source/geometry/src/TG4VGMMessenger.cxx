@@ -23,21 +23,21 @@
 #include <XmlVGM/AGDDExporter.h>
 #include <XmlVGM/GDMLExporter.h>
 
-#include <G4UIdirectory.hh>
-#include <G4UIcmdWithoutParameter.hh>
+#include <G4UIcmdWithABool.hh>
 #include <G4UIcmdWithAString.hh>
 #include <G4UIcmdWithAnInteger.hh>
-#include <G4UIcmdWithABool.hh>
+#include <G4UIcmdWithoutParameter.hh>
+#include <G4UIdirectory.hh>
 
 #include <TGeoManager.h>
 
-G4UIdirectory*           TG4VGMMessenger::fgDirectory = 0;
+G4UIdirectory* TG4VGMMessenger::fgDirectory = 0;
 G4UIcmdWithoutParameter* TG4VGMMessenger::fgGenerateRootCmd = 0;
-G4int                    TG4VGMMessenger::fgCounter = 0;
+G4int TG4VGMMessenger::fgCounter = 0;
 
 //_____________________________________________________________________________
-TG4VGMMessenger::TG4VGMMessenger(const G4String& xmlFormat,
-                                 const G4String& userGeometry)
+TG4VGMMessenger::TG4VGMMessenger(
+  const G4String& xmlFormat, const G4String& userGeometry)
   : G4UImessenger(),
     fGeometryInput(),
     fXmlFormat(xmlFormat),
@@ -47,16 +47,14 @@ TG4VGMMessenger::TG4VGMMessenger(const G4String& xmlFormat,
     fXmlVGMExporter(0),
     fGenerateXMLCmd()
 {
-/// Standard constructor
+  /// Standard constructor
 
-  if ( userGeometry == "geomVMCtoGeant4"  ||
-       userGeometry == "geomRootToGeant4" ||
-       userGeometry == "geomGeant4" ) {
+  if (userGeometry == "geomVMCtoGeant4" || userGeometry == "geomRootToGeant4" ||
+      userGeometry == "geomGeant4") {
     fGeometryInput = "geant4";
   }
 
-  if ( userGeometry == "geomVMCtoRoot"    ||
-       userGeometry == "geomRoot"      ) {
+  if (userGeometry == "geomVMCtoRoot" || userGeometry == "geomRoot") {
     fGeometryInput = "root";
   }
 
@@ -74,8 +72,10 @@ TG4VGMMessenger::TG4VGMMessenger(const G4String& xmlFormat,
   cmdName = cmdName + xmlFormat;
   fGenerateXMLCmd = new G4UIcmdWithAString(cmdName, this);
   fGenerateXMLCmd->SetGuidance("Generate geometry XML file");
-  fGenerateXMLCmd->SetGuidance("starting from a logical volume specified by name;");
-  fGenerateXMLCmd->SetGuidance("if no name is given - the whole world is processed.");
+  fGenerateXMLCmd->SetGuidance(
+    "starting from a logical volume specified by name;");
+  fGenerateXMLCmd->SetGuidance(
+    "if no name is given - the whole world is processed.");
   fGenerateXMLCmd->SetParameterName("lvName", true);
   fGenerateXMLCmd->SetDefaultValue("");
   fGenerateXMLCmd->AvailableForStates(G4State_Idle);
@@ -88,38 +88,43 @@ TG4VGMMessenger::TG4VGMMessenger(const G4String& xmlFormat,
 
   cmdName = G4String("/vgm/set") + xmlFormat + G4String("NumPrecision");
   fSetXMLNumPrecisionCmd = new G4UIcmdWithAnInteger(cmdName, this);
-  fSetXMLNumPrecisionCmd->SetGuidance("Set number precision for XML generation");
+  fSetXMLNumPrecisionCmd->SetGuidance(
+    "Set number precision for XML generation");
   fSetXMLNumPrecisionCmd->SetParameterName("xmlNumPrecision", false);
   fSetXMLNumPrecisionCmd->AvailableForStates(G4State_Idle);
 
-  fSetAssembliesInNamesCmd = new G4UIcmdWithABool("/vgm/setAssembliesInNames", this);
-  fSetAssembliesInNamesCmd->SetGuidance("Activate/inactivate including the names of Root assemblies");
-  fSetAssembliesInNamesCmd->SetGuidance("in volume names when exporting Root geometry.");
+  fSetAssembliesInNamesCmd =
+    new G4UIcmdWithABool("/vgm/setAssembliesInNames", this);
+  fSetAssembliesInNamesCmd->SetGuidance(
+    "Activate/inactivate including the names of Root assemblies");
+  fSetAssembliesInNamesCmd->SetGuidance(
+    "in volume names when exporting Root geometry.");
   fSetAssembliesInNamesCmd->SetParameterName("assembliesInNames", false);
   fSetAssembliesInNamesCmd->AvailableForStates(G4State_PreInit);
 
   fSetNameSeparatorCmd = new G4UIcmdWithAString("/vgm/setNameSeparator", this);
   fSetNameSeparatorCmd->SetGuidance("Set the name separator used when ");
-  fSetNameSeparatorCmd->SetGuidance("including the names of Root assemblies in volume names");
-  fSetNameSeparatorCmd->SetGuidance("when exporting Root geometry is activated .");
+  fSetNameSeparatorCmd->SetGuidance(
+    "including the names of Root assemblies in volume names");
+  fSetNameSeparatorCmd->SetGuidance(
+    "when exporting Root geometry is activated .");
   fSetNameSeparatorCmd->SetParameterName("nameSeparatoe", false);
   fSetNameSeparatorCmd->AvailableForStates(G4State_PreInit);
 
   fgCounter++;
 }
 
-
 //_____________________________________________________________________________
 TG4VGMMessenger::~TG4VGMMessenger()
 {
-/// Destructor
+  /// Destructor
 
   delete fG4Factory;
   delete fRootFactory;
   delete fXmlVGMExporter;
 
   fgCounter--;
-  if (fgCounter==0) {
+  if (fgCounter == 0) {
     delete fgDirectory;
     delete fgGenerateRootCmd;
     fgDirectory = 0;
@@ -137,15 +142,15 @@ TG4VGMMessenger::~TG4VGMMessenger()
 //_____________________________________________________________________________
 void TG4VGMMessenger::CreateVGMExporter()
 {
-/// Create VGM exporter if it does not yet exist
-// ---
+  /// Create VGM exporter if it does not yet exist
+  // ---
 
-  if ( ! fXmlVGMExporter ) {
+  if (!fXmlVGMExporter) {
     // Create VGM exporter if not yet done
-    if ( fXmlFormat == "AGDD" ) {
+    if (fXmlFormat == "AGDD") {
       fXmlVGMExporter = new XmlVGM::AGDDExporter(fImportFactory);
     }
-    if ( fXmlFormat == "GDML" ) {
+    if (fXmlFormat == "GDML") {
       fXmlVGMExporter = new XmlVGM::GDMLExporter(fImportFactory);
     }
   }
@@ -156,22 +161,21 @@ void TG4VGMMessenger::CreateVGMExporter()
 //_____________________________________________________________________________
 void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
 {
-/// Applies command to the associated object.
-// ---
+  /// Applies command to the associated object.
+  // ---
 
-  if ( command == fSetAssembliesInNamesCmd ) {
-      RootGM::Placement::SetIncludeAssembliesInNames(
-        fSetAssembliesInNamesCmd->GetNewBoolValue(newValues));
-      return;
+  if (command == fSetAssembliesInNamesCmd) {
+    RootGM::Placement::SetIncludeAssembliesInNames(
+      fSetAssembliesInNamesCmd->GetNewBoolValue(newValues));
+    return;
   }
 
-  if ( command == fSetNameSeparatorCmd ) {
-      RootGM::Placement::SetNameSeparator(
-        newValues.at(0));
-      return;
+  if (command == fSetNameSeparatorCmd) {
+    RootGM::Placement::SetNameSeparator(newValues.at(0));
+    return;
   }
 
-  if ( fGeometryInput == "geant4" && (! fG4Factory) ) {
+  if (fGeometryInput == "geant4" && (!fG4Factory)) {
     // Import Geant4 geometry in VGM
     fG4Factory = new Geant4GM::Factory();
     fImportFactory = fG4Factory;
@@ -180,7 +184,7 @@ void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
     fG4Factory->Import(TG4GeometryServices::Instance()->GetWorld());
   }
 
-  if ( fGeometryInput == "root" && (! fRootFactory) ) {
+  if (fGeometryInput == "root" && (!fRootFactory)) {
     // Import Root geometry in VGM
     fRootFactory = new RootGM::Factory();
     fImportFactory = fRootFactory;
@@ -189,7 +193,7 @@ void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
     fRootFactory->Import(gGeoManager->GetTopNode());
   }
 
-  if ( command == fgGenerateRootCmd ) {
+  if (command == fgGenerateRootCmd) {
     if (!fRootFactory) {
       fRootFactory = new RootGM::Factory();
       fG4Factory->Export(fRootFactory);
@@ -198,7 +202,7 @@ void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
     gGeoManager->Export("geometry.root");
   }
 
-  if ( command == fGenerateXMLCmd ) {
+  if (command == fGenerateXMLCmd) {
 
     CreateVGMExporter();
 
@@ -215,9 +219,9 @@ void TG4VGMMessenger::SetNewValue(G4UIcommand* command, G4String newValues)
 
   if (command == fSetXMLNumPrecisionCmd) {
     CreateVGMExporter();
-    fXmlVGMExporter->SetNumPrecision(fSetXMLNumPrecisionCmd->GetNewIntValue(newValues));
+    fXmlVGMExporter->SetNumPrecision(
+      fSetXMLNumPrecisionCmd->GetNewIntValue(newValues));
   }
-
 }
 
-#endif //USE_VGM
+#endif // USE_VGM

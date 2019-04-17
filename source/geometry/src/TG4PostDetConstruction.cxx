@@ -22,13 +22,13 @@
 TG4PostDetConstruction::TG4PostDetConstruction()
   : TVirtualUserPostDetConstruction()
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
 TG4PostDetConstruction::~TG4PostDetConstruction()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -38,8 +38,8 @@ TG4PostDetConstruction::~TG4PostDetConstruction()
 //_____________________________________________________________________________
 void TG4PostDetConstruction::Initialize(TG4RootDetectorConstruction* /*dc*/)
 {
-/// Construct geometry using the VMC application.
-// --
+  /// Construct geometry using the VMC application.
+  // --
 
   G4cout << "TG4PostDetConstruction::Initialize" << G4endl;
   TG4GeometryManager::Instance()->ConstructGeometry();
@@ -48,8 +48,8 @@ void TG4PostDetConstruction::Initialize(TG4RootDetectorConstruction* /*dc*/)
 //_____________________________________________________________________________
 void TG4PostDetConstruction::InitializeSDandField()
 {
-/// Construct geometry using the VMC application.
-// --
+  /// Construct geometry using the VMC application.
+  // --
 
   G4cout << "TG4PostDetConstruction::InitializeSDandField" << G4endl;
   TG4GeometryManager::Instance()->ConstructSDandField();

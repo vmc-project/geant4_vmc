@@ -23,72 +23,66 @@
 
 /// \cond CLASSIMP
 ClassImp(Ex02ChamberParameterisation)
-/// \endcond
+  /// \endcond
 
-//_____________________________________________________________________________
-Ex02ChamberParameterisation::Ex02ChamberParameterisation(
-                                 Int_t    noChambers,
-                                 Double_t startZ,
-                                 Double_t spacingZ,
-                                 Double_t widthChamber,
-                                 Double_t lengthInitial,
-                                 Double_t lengthFinal )
+  //_____________________________________________________________________________
+  Ex02ChamberParameterisation::Ex02ChamberParameterisation(Int_t noChambers,
+    Double_t startZ, Double_t spacingZ, Double_t widthChamber,
+    Double_t lengthInitial, Double_t lengthFinal)
   : TObject(),
     fNoChambers(noChambers),
     fStartZ(startZ),
-    fHalfWidth(widthChamber*0.5),
+    fHalfWidth(widthChamber * 0.5),
     fSpacing(spacingZ),
-    fHalfLengthFirst(lengthInitial*0.5),
+    fHalfLengthFirst(lengthInitial * 0.5),
     fHalfLengthIncr(0)
 {
-/// Standard constructor
-/// \param noChambers    Number of chambers
-/// \param startZ        The Z of the center of first chamber
-/// \param spacingZ      The distance between the chambers' centers
-/// \param widthChamber  The width of each tracker chamber
-/// \param lengthInitial The first chamber length
-/// \param lengthFinal   The last chamber length
+  /// Standard constructor
+  /// \param noChambers    Number of chambers
+  /// \param startZ        The Z of the center of first chamber
+  /// \param spacingZ      The distance between the chambers' centers
+  /// \param widthChamber  The width of each tracker chamber
+  /// \param lengthInitial The first chamber length
+  /// \param lengthFinal   The last chamber length
 
-   if( noChambers > 0 ){
-      fHalfLengthIncr =  0.5 * (lengthFinal-lengthInitial)/noChambers;
-      if (spacingZ < widthChamber) {
-        Fatal("Ex02ChamberParameterisation",
-              "Ex02ChamberParameterisation construction: Width>Spacing");
-      }
-   }
-
+  if (noChambers > 0) {
+    fHalfLengthIncr = 0.5 * (lengthFinal - lengthInitial) / noChambers;
+    if (spacingZ < widthChamber) {
+      Fatal("Ex02ChamberParameterisation",
+        "Ex02ChamberParameterisation construction: Width>Spacing");
+    }
+  }
 }
 
 //_____________________________________________________________________________
 Ex02ChamberParameterisation::~Ex02ChamberParameterisation()
 {
-/// Destructor
+  /// Destructor
 }
 
-
 //_____________________________________________________________________________
-void Ex02ChamberParameterisation::ComputeTransformation (
-                                     Int_t copyNo, Double_t* position) const
+void Ex02ChamberParameterisation::ComputeTransformation(
+  Int_t copyNo, Double_t* position) const
 {
-/// Compute the chamber position
-/// \param copyNo    The chamber copy number
-/// \param position  The computed chamber position
+  /// Compute the chamber position
+  /// \param copyNo    The chamber copy number
+  /// \param position  The computed chamber position
 
   position[0] = 0.;
   position[1] = 0.;
-  position[2] = fStartZ + (copyNo+1) * fSpacing;
+  position[2] = fStartZ + (copyNo + 1) * fSpacing;
 }
 
 //_____________________________________________________________________________
 void Ex02ChamberParameterisation::ComputeDimensions(
-                                      Int_t copyNo, Double_t* dimension) const
+  Int_t copyNo, Double_t* dimension) const
 {
 
-/// Compute the chamber dimensions
-/// \param copyNo     The chamber copy number
-/// \param dimension  The computed chamber dimensions
+  /// Compute the chamber dimensions
+  /// \param copyNo     The chamber copy number
+  /// \param dimension  The computed chamber dimensions
 
-  Double_t  halfLength= fHalfLengthFirst + copyNo * fHalfLengthIncr;
+  Double_t halfLength = fHalfLengthFirst + copyNo * fHalfLengthIncr;
   dimension[0] = halfLength;
   dimension[1] = halfLength;
   dimension[2] = fHalfWidth;

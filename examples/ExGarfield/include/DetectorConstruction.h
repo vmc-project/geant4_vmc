@@ -38,17 +38,17 @@ namespace ExGarfield
 
 class DetectorConstruction : public TObject
 {
-  public:
-    DetectorConstruction();
-    virtual ~DetectorConstruction();
+ public:
+  DetectorConstruction();
+  virtual ~DetectorConstruction();
 
-  public:
-    void Construct();
+ public:
+  void Construct();
 
-  ClassDef(DetectorConstruction,1) //DetectorConstruction
+  ClassDef(DetectorConstruction, 1) // DetectorConstruction
 };
 
-}
-}
+} // namespace ExGarfield
+} // namespace VMC
 
-#endif //GARFIELD_DETECTOR_CONSTRUCTION_H
+#endif // GARFIELD_DETECTOR_CONSTRUCTION_H

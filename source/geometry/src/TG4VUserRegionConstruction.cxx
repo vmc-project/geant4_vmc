@@ -22,11 +22,11 @@
 //_____________________________________________________________________________
 TG4VUserRegionConstruction::TG4VUserRegionConstruction()
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
 TG4VUserRegionConstruction::~TG4VUserRegionConstruction()
 {
-/// Destructor
+  /// Destructor
 }

@@ -35,18 +35,17 @@ namespace ExGarfield
 
 class RunConfiguration : public TG4RunConfiguration
 {
-  public:
-    RunConfiguration(const TString& geometry,
-    	             const TString& physicsList = "FTFP_BERT",
-                     const TString& specialProcess = "stepLimiter");
-    virtual ~RunConfiguration();
+ public:
+  RunConfiguration(const TString& geometry,
+    const TString& physicsList = "FTFP_BERT",
+    const TString& specialProcess = "stepLimiter");
+  virtual ~RunConfiguration();
 
-    // methods
-    virtual TG4VUserFastSimulation*  CreateUserFastSimulation();
+  // methods
+  virtual TG4VUserFastSimulation* CreateUserFastSimulation();
 };
 
-}
-}
+} // namespace ExGarfield
+} // namespace VMC
 
-#endif //GFLASH_RUN_CONFIGURATION1_H
-
+#endif // GFLASH_RUN_CONFIGURATION1_H

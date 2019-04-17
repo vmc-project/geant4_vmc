@@ -13,11 +13,11 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4ProcessControlMapPhysics.h"
-#include "TG4ProcessControlMap.h"
 #include "TG4Globals.h"
+#include "TG4ProcessControlMap.h"
 
-#include <TVirtualMCDecayer.h>
 #include <TVirtualMC.h>
+#include <TVirtualMCDecayer.h>
 
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
@@ -27,18 +27,17 @@
 TG4ProcessControlMapPhysics::TG4ProcessControlMapPhysics(const G4String& name)
   : TG4VPhysicsConstructor(name)
 {
-/// Standard constructor
+  /// Standard constructor
 
   FillMap();
 }
 
 //_____________________________________________________________________________
 TG4ProcessControlMapPhysics::TG4ProcessControlMapPhysics(
-                                           G4int theVerboseLevel,
-                                           const G4String& name)
+  G4int theVerboseLevel, const G4String& name)
   : TG4VPhysicsConstructor(name, theVerboseLevel)
 {
-/// Standard constructor
+  /// Standard constructor
 
   FillMap();
 }
@@ -46,7 +45,7 @@ TG4ProcessControlMapPhysics::TG4ProcessControlMapPhysics(
 //_____________________________________________________________________________
 TG4ProcessControlMapPhysics::~TG4ProcessControlMapPhysics()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -56,7 +55,7 @@ TG4ProcessControlMapPhysics::~TG4ProcessControlMapPhysics()
 //_____________________________________________________________________________
 void TG4ProcessControlMapPhysics::FillMap()
 {
-/// Fill the process control map with known G4 process names
+  /// Fill the process control map with known G4 process names
 
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
 
@@ -223,54 +222,45 @@ void TG4ProcessControlMapPhysics::FillMap()
 //_____________________________________________________________________________
 void TG4ProcessControlMapPhysics::ConstructParticle()
 {
-/// Instantiate particles - nothing to be done here
+  /// Instantiate particles - nothing to be done here
 }
 
 //_____________________________________________________________________________
 void TG4ProcessControlMapPhysics::ConstructProcess()
 {
-/// Loop over all particles and their processes and check if
-/// the process is present in the map
+  /// Loop over all particles and their processes and check if
+  /// the process is present in the map
 
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
   G4bool success = true;
 
   auto aParticleIterator = GetParticleIterator();
   aParticleIterator->reset();
-  while ((*aParticleIterator)())
-  {
+  while ((*aParticleIterator)()) {
     // skip iteration if particle does not have a process manager
-    if ( ! aParticleIterator->value()->GetProcessManager() ) continue;
+    if (!aParticleIterator->value()->GetProcessManager()) continue;
 
-    G4ProcessVector* processVector
-      = aParticleIterator->value()->GetProcessManager()->GetProcessList();
+    G4ProcessVector* processVector =
+      aParticleIterator->value()->GetProcessManager()->GetProcessList();
 
-
-    for (G4int i=0; i<processVector->length(); i++) {
+    for (G4int i = 0; i < processVector->length(); i++) {
 
       G4String processName = (*processVector)[i]->GetProcessName();
 
-      if ( controlMap->GetControl(processName) == kNoG3Controls &&
-           processName != "Transportation" &&
-           processName != "MonopoleTransportation" &&
-           processName != "PositronNuclear" &&
-           processName != "positronNuclear" &&
-           processName != "ElectroNuclear" &&
-           processName != "electronNuclear" &&
-           processName != "photoNuclear" &&
-           processName != "photonNuclear" &&
-           processName != "Scintillation" &&
-           processName != "OpMieHG" &&
-           processName != "OpWLS" &&
-           processName != "MinEkineCuts" &&
-           processName != "G4MinEkineCuts" &&
-           processName != "MaxTimeCuts" &&
-           processName != "stackPopper" &&
-           processName != "StepLimiter" &&
-           processName != "GammaXTRadiator" &&
-           processName != "StrawXTRadiator" &&
-           processName != "RegularXTRadiator" &&
-           processName != "G4MaxTimeCuts" ) {
+      if (controlMap->GetControl(processName) == kNoG3Controls &&
+          processName != "Transportation" &&
+          processName != "MonopoleTransportation" &&
+          processName != "PositronNuclear" &&
+          processName != "positronNuclear" && processName != "ElectroNuclear" &&
+          processName != "electronNuclear" && processName != "photoNuclear" &&
+          processName != "photonNuclear" && processName != "Scintillation" &&
+          processName != "OpMieHG" && processName != "OpWLS" &&
+          processName != "MinEkineCuts" && processName != "G4MinEkineCuts" &&
+          processName != "MaxTimeCuts" && processName != "stackPopper" &&
+          processName != "StepLimiter" && processName != "GammaXTRadiator" &&
+          processName != "StrawXTRadiator" &&
+          processName != "RegularXTRadiator" &&
+          processName != "G4MaxTimeCuts") {
 
         G4String text = "Unknown process control for ";
         text += processName;
@@ -281,8 +271,8 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
     }
   }
 
-  if ( VerboseLevel() > 0 ) {
-    if ( success )
+  if (VerboseLevel() > 0) {
+    if (success)
       G4cout << "### Processes mapped to VMC controls ok." << G4endl;
     else
       G4cout << "### Processes mapped to VMC controls: some proceess unknown."

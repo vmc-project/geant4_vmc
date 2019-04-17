@@ -24,8 +24,8 @@
 #include "TGeant3TGeo.h"
 #endif
 
-#include "TThread.h"
 #include "TInterpreter.h"
+#include "TThread.h"
 
 /// Application main program
 int main(int argc, char** argv)
@@ -34,24 +34,22 @@ int main(int argc, char** argv)
   // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
-   TThread::Initialize();
-   gInterpreter->SetProcessLineLock(false);
+  TThread::Initialize();
+  gInterpreter->SetProcessLineLock(false);
 #endif
 
   // Create MC application (thread local)
-  Ex02MCApplication* appl
-    =  new Ex02MCApplication("ExampleE02",
-                             "The exampleE02 MC application");
+  Ex02MCApplication* appl =
+    new Ex02MCApplication("ExampleE02", "The exampleE02 MC application");
 
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4
-  TG4RunConfiguration* runConfiguration
-    = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT");
+  TG4RunConfiguration* runConfiguration =
+    new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT");
 
   // TGeant4
-   TGeant4* geant4
-    = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration,
-                  argc, argv);
+  TGeant4* geant4 = new TGeant4(
+    "TGeant4", "The Geant4 Monte Carlo", runConfiguration, argc, argv);
 
   // Customise Geant4 setting
   // (verbose level, global range cut, ..)
@@ -59,8 +57,7 @@ int main(int argc, char** argv)
 #endif
 
 #ifdef USE_GEANT3
-  TGeant3* geant3
-    = new TGeant3TGeo("C++ Interface to Geant3");
+  TGeant3* geant3 = new TGeant3TGeo("C++ Interface to Geant3");
   geant3->SetHADR(0);
 #endif
 

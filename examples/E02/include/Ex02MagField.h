@@ -33,20 +33,20 @@
 
 class Ex02MagField : public TVirtualMagField
 {
-public:
-   Ex02MagField(Double_t Bx, Double_t By, Double_t Bz);
-   Ex02MagField();
-   virtual ~Ex02MagField();
+ public:
+  Ex02MagField(Double_t Bx, Double_t By, Double_t Bz);
+  Ex02MagField();
+  virtual ~Ex02MagField();
 
-   virtual void Field(const Double_t* x, Double_t* B);
+  virtual void Field(const Double_t* x, Double_t* B);
 
-private:
-   Ex02MagField(const Ex02MagField&);
-   Ex02MagField& operator=(const Ex02MagField&);
+ private:
+  Ex02MagField(const Ex02MagField&);
+  Ex02MagField& operator=(const Ex02MagField&);
 
-   Double_t  fB[3]; ///< Magnetic field vector
+  Double_t fB[3]; ///< Magnetic field vector
 
-   ClassDef(Ex02MagField, 1)  // Uniform magnetic field
+  ClassDef(Ex02MagField, 1) // Uniform magnetic field
 };
 
-#endif //EX02_MAG_FIELD_H
+#endif // EX02_MAG_FIELD_H

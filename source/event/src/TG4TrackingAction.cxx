@@ -13,22 +13,21 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4TrackingAction.h"
+#include "TG4GeometryServices.h"
+#include "TG4Globals.h"
+#include "TG4ParticlesManager.h"
+#include "TG4PhysicsManager.h"
+#include "TG4SDServices.h"
+#include "TG4SensitiveDetector.h"
+#include "TG4SpecialControlsV2.h"
+#include "TG4StackPopper.h"
+#include "TG4StepManager.h"
 #include "TG4TrackInformation.h"
 #include "TG4TrackManager.h"
-#include "TG4StepManager.h"
-#include "TG4PhysicsManager.h"
-#include "TG4ParticlesManager.h"
-#include "TG4StackPopper.h"
-#include "TG4SensitiveDetector.h"
-#include "TG4GeometryServices.h"
-#include "TG4SDServices.h"
-#include "TG4SpecialControlsV2.h"
-#include "TG4Globals.h"
 
+#include <TMCProcess.h>
 #include <TVirtualMC.h>
 #include <TVirtualMCApplication.h>
-#include <TVirtualMC.h>
-#include <TMCProcess.h>
 
 #include <G4TrackVector.hh>
 #include <G4TrackingManager.hh>
@@ -40,7 +39,7 @@ G4ThreadLocal TG4TrackingAction* TG4TrackingAction::fgInstance = 0;
 //_____________________________________________________________________________
 TG4TrackingAction::TG4TrackingAction()
   : G4UserTrackingAction(),
-    TG4Verbose("trackingAction",2),
+    TG4Verbose("trackingAction", 2),
     fMessenger(this),
     fSpecialControls(0),
     fTrackManager(0),
@@ -55,11 +54,10 @@ TG4TrackingAction::TG4TrackingAction()
     fNewVerboseLevel(0),
     fNewVerboseTrackID(-1)
 {
-/// Default constructor
+  /// Default constructor
 
   if (fgInstance) {
-    TG4Globals::Exception(
-      "TG4TrackingAction", "TG4TrackingAction",
+    TG4Globals::Exception("TG4TrackingAction", "TG4TrackingAction",
       "Cannot create two instances of singleton.");
   }
 
@@ -71,7 +69,7 @@ TG4TrackingAction::TG4TrackingAction()
 //_____________________________________________________________________________
 TG4TrackingAction::~TG4TrackingAction()
 {
-/// Destructor
+  /// Destructor
 
   fgInstance = 0;
 
@@ -85,9 +83,9 @@ TG4TrackingAction::~TG4TrackingAction()
 //_____________________________________________________________________________
 void TG4TrackingAction::UserProcessHits(const G4Track* /*track*/)
 {
-/// Let sensitive detector process the vertex step
-/// (this ensures compatibility with G3 that
-/// makes first step of zero length)
+  /// Let sensitive detector process the vertex step
+  /// (this ensures compatibility with G3 that
+  /// makes first step of zero length)
 
   G4VPhysicalVolume* pv = fStepManager->GetCurrentPhysicalVolume();
 
@@ -99,15 +97,13 @@ void TG4TrackingAction::UserProcessHits(const G4Track* /*track*/)
   }
 
 #ifdef MCDEBUG
-  TG4SensitiveDetector* tsd
-    = TG4SDServices::Instance()
-         ->GetSensitiveDetector(
-              pv->GetLogicalVolume()->GetSensitiveDetector());
+  TG4SensitiveDetector* tsd = TG4SDServices::Instance()->GetSensitiveDetector(
+    pv->GetLogicalVolume()->GetSensitiveDetector());
 
   if (tsd) tsd->ProcessHitsOnTrackStart();
 #else
-  TG4SensitiveDetector* tsd
-    = (TG4SensitiveDetector*) pv->GetLogicalVolume()->GetSensitiveDetector();
+  TG4SensitiveDetector* tsd =
+    (TG4SensitiveDetector*)pv->GetLogicalVolume()->GetSensitiveDetector();
 
   if (tsd) tsd->ProcessHitsOnTrackStart();
 #endif
@@ -116,12 +112,12 @@ void TG4TrackingAction::UserProcessHits(const G4Track* /*track*/)
 //_____________________________________________________________________________
 void TG4TrackingAction::Verbose() const
 {
-/// Print primary track ID with a frequence defined
-/// by verbose level.
+  /// Print primary track ID with a frequence defined
+  /// by verbose level.
 
-  if ( ( VerboseLevel() == 1 &&  fPrimaryTrackID % 100 == 0 ) ||
-       ( VerboseLevel() == 2 &&  fPrimaryTrackID % 10  == 0 ) ||
-         VerboseLevel() == 3 ) {
+  if ((VerboseLevel() == 1 && fPrimaryTrackID % 100 == 0) ||
+      (VerboseLevel() == 2 && fPrimaryTrackID % 10 == 0) ||
+      VerboseLevel() == 3) {
 
     G4cout << "$$$X Primary track " << fPrimaryTrackID << G4endl;
   }
@@ -134,7 +130,7 @@ void TG4TrackingAction::Verbose() const
 //_____________________________________________________________________________
 void TG4TrackingAction::LateInitialize()
 {
-/// Cache thread-local pointers
+  /// Cache thread-local pointers
 
   fMCApplication = TVirtualMCApplication::Instance();
   fStepManager = TG4StepManager::Instance();
@@ -146,14 +142,14 @@ void TG4TrackingAction::LateInitialize()
 //_____________________________________________________________________________
 void TG4TrackingAction::PrepareNewEvent()
 {
-/// Called by G4 kernel at the beginning of event.
+  /// Called by G4 kernel at the beginning of event.
 
   // set g4 stepping manager pointer and world volume
   fStepManager->SetSteppingManager(fpTrackingManager->GetSteppingManager());
 
   fTrackManager->SetG4TrackingManager(fpTrackingManager);
 
-  if ( fTrackManager->GetTrackSaveControl() != kDoNotSave )
+  if (fTrackManager->GetTrackSaveControl() != kDoNotSave)
     fTrackManager->SetNofTracks(0);
   else
     fTrackManager->SetNofTracks(fMCStack->GetNtrack());
@@ -164,15 +160,15 @@ void TG4TrackingAction::PrepareNewEvent()
 //_____________________________________________________________________________
 void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
 {
-/// Called by G4 kernel before starting tracking.
+  /// Called by G4 kernel before starting tracking.
 
   // do not call this function more than once
-  if ( track->GetTrackID() == fCurrentTrackID ) return;
+  if (track->GetTrackID() == fCurrentTrackID) return;
 
   // keep this track number for the check above
   fCurrentTrackID = track->GetTrackID();
 
-  G4bool isFirstStep = ( track->GetCurrentStepNumber() == 0 );
+  G4bool isFirstStep = (track->GetCurrentStepNumber() == 0);
 
   // finish previous primary track first
   if (track->GetParentID() == 0 && isFirstStep) {
@@ -180,22 +176,22 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
   }
 
   // initialize special controls manager
-  if ( fSpecialControls ) fSpecialControls->StartTrack(track);
+  if (fSpecialControls) fSpecialControls->StartTrack(track);
 
   // reset stack popper (if activated
-  if ( fStackPopper ) fStackPopper->Reset();
+  if (fStackPopper) fStackPopper->Reset();
 
   // set step manager status
-  if ( isFirstStep ) {
+  if (isFirstStep) {
     fStepManager->SetStep((G4Track*)track, kVertex);
   }
 
   // set track information
-  G4int trackId
-    = fTrackManager->SetTrackInformation(track, fOverwriteLastTrack);
+  G4int trackId =
+    fTrackManager->SetTrackInformation(track, fOverwriteLastTrack);
   fMCStack->SetCurrentTrack(trackId);
 
-  if ( isFirstStep ) {
+  if (isFirstStep) {
     if (track->GetParentID() == 0) {
       fPrimaryTrackID = track->GetTrackID();
 
@@ -207,32 +203,33 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
     }
     else {
       // set saving flag
-      fTrackSaveControl = ( fTrackManager->IsUserTrack(track) ) ?
-        kDoNotSave : fTrackManager->GetTrackSaveControl();
+      fTrackSaveControl = (fTrackManager->IsUserTrack(track))
+                            ? kDoNotSave
+                            : fTrackManager->GetTrackSaveControl();
     }
 
     // save track in stack
-    if ( fTrackSaveControl == kSaveInPreTrack ) {
+    if (fTrackSaveControl == kSaveInPreTrack) {
       fTrackManager->TrackToStack(track, fOverwriteLastTrack);
 
       // Notify a stack popper (if activated) about saving this secondary
-      if ( fStackPopper ) fStackPopper->Notify();
+      if (fStackPopper) fStackPopper->Notify();
     }
   }
 
   // verbose
-  if ( track->GetTrackID() == fNewVerboseTrackID) {
+  if (track->GetTrackID() == fNewVerboseTrackID) {
     fpTrackingManager->SetVerboseLevel(fNewVerboseLevel);
   }
 
   // VMC application pre track action
-  if ( isFirstStep ) {
+  if (isFirstStep) {
     fMCApplication->PreTrack();
 
     // call pre-tracking action of derived class
     PreTrackingAction(track);
 
-    if ( track->GetTrackStatus() != fStopAndKill ) {
+    if (track->GetTrackStatus() != fStopAndKill) {
       // Let sensitive detector process vertex step
       UserProcessHits(track);
     }
@@ -242,30 +239,28 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
 //_____________________________________________________________________________
 void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
 {
-/// Called by G4 kernel after finishing tracking.
+  /// Called by G4 kernel after finishing tracking.
 
 #ifdef STACK_WITH_KEEP_FLAG
   // Remember whether this track should be kept in the stack
   // or can be overwritten:
   // the track will not be overwritten if it was flagged in the stack
   // to be kept or if it has produced any secondary particles.
-  fOverwriteLastTrack
-    =  ( ! fMCStack->GetKeepCurrentTrack() ) &&
-       ( ! fpTrackingManager->GimmeSecondaries() ||
-           fpTrackingManager->GimmeSecondaries()->size() == 0 );
-        // Experimental code with flagging tracks in stack for overwrite;
-        // not yet available in distribution
+  fOverwriteLastTrack = (!fMCStack->GetKeepCurrentTrack()) &&
+                        (!fpTrackingManager->GimmeSecondaries() ||
+                          fpTrackingManager->GimmeSecondaries()->size() == 0);
+  // Experimental code with flagging tracks in stack for overwrite;
+  // not yet available in distribution
 #else
   fOverwriteLastTrack = false;
 #endif
 
   // restore processes activation
-  if ( fSpecialControls && fSpecialControls->IsApplicable() )
+  if (fSpecialControls && fSpecialControls->IsApplicable())
     fSpecialControls->RestoreProcessActivations();
 
   // set back max step limit if it has been modified on fly by user
-  if ( fStepManager->GetLimitsModifiedOnFly() )
-    fStepManager->SetMaxStepBack();
+  if (fStepManager->GetLimitsModifiedOnFly()) fStepManager->SetMaxStepBack();
 
   // set parent track particle index to the secondary tracks
   fTrackManager->SetParentToTrackInformation(track);
@@ -273,7 +268,7 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
   // restore particle lifetime if it was modified by user
   fTrackManager->SetBackPDGLifetime(track);
 
-  if ( track->GetTrackStatus() != fSuspend ) {
+  if (track->GetTrackStatus() != fSuspend) {
 
     // VMC application post track action
     fMCApplication->PostTrack();
@@ -286,12 +281,13 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
 //_____________________________________________________________________________
 void TG4TrackingAction::FinishPrimaryTrack()
 {
-/// Call VMC application to finish a primary track.                          \n
-/// !! This method has to be also called from the EventAction::EndOfEventAction()
-/// for storing the last primary track of the current event.
-// ---
+  /// Call VMC application to finish a primary track. \n
+  /// !! This method has to be also called from the
+  /// EventAction::EndOfEventAction() for storing the last primary track of the
+  /// current event.
+  // ---
 
-  if (fPrimaryTrackID>0) {
+  if (fPrimaryTrackID > 0) {
 
     // set special step manager status
     // not in both stepping, vertex stage
@@ -311,8 +307,8 @@ void TG4TrackingAction::FinishPrimaryTrack()
 //_____________________________________________________________________________
 void TG4TrackingAction::SetNewVerboseLevel(G4int level)
 {
-/// Set the new verbose level that will be set when the track with
-/// specified track ID (fNewVerboseTrackID) starts tracking.
+  /// Set the new verbose level that will be set when the track with
+  /// specified track ID (fNewVerboseTrackID) starts tracking.
 
   fNewVerboseLevel = level;
 }
@@ -320,8 +316,8 @@ void TG4TrackingAction::SetNewVerboseLevel(G4int level)
 //_____________________________________________________________________________
 void TG4TrackingAction::SetNewVerboseTrackID(G4int trackID)
 {
-/// Set the trackID for which the new verbose level (fNewVerboseLevel)
-/// will be applied.
+  /// Set the trackID for which the new verbose level (fNewVerboseLevel)
+  /// will be applied.
 
   fNewVerboseTrackID = trackID;
 }
@@ -329,7 +325,7 @@ void TG4TrackingAction::SetNewVerboseTrackID(G4int trackID)
 //_____________________________________________________________________________
 G4int TG4TrackingAction::GetNewVerboseLevel() const
 {
-/// Return new /tracking/verbose level
+  /// Return new /tracking/verbose level
 
   return fNewVerboseLevel;
 }
@@ -337,7 +333,7 @@ G4int TG4TrackingAction::GetNewVerboseLevel() const
 //_____________________________________________________________________________
 G4int TG4TrackingAction::GetNewVerboseTrackID() const
 {
-/// Return track ID for which the new verbose level is applied
+  /// Return track ID for which the new verbose level is applied
 
   return fNewVerboseTrackID;
 }
@@ -345,7 +341,7 @@ G4int TG4TrackingAction::GetNewVerboseTrackID() const
 //_____________________________________________________________________________
 TG4TrackManager* TG4TrackingAction::GetTrackManager() const
 {
-/// Return track manager
+  /// Return track manager
 
   return fTrackManager;
 }

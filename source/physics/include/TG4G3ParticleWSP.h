@@ -21,15 +21,14 @@
 
 enum TG4G3ParticleWSP
 {
-  kGamma,           ///< kPAIR, kCOMP, kPHOT, kPHIS
-  kElectron,        ///< kDRAY, kBREM, kMULS, kG3LOSS
-  kEplus,           ///< kDRAY, kBREM, kMULS, kG3LOSS, kANNI
-  kNeutralHadron,   ///< kHADR
-  kChargedHadron,   ///< kDRAY, kMULS, kG3LOSS, kHADR,
-  kMuon,            ///< kDRAY, kBREM, kMULS, kG3LOSS, kMUNU
-  kAny,             ///< kDCAY
-  kNofParticlesWSP  ///< not a particle with a special control
+  kGamma,          ///< kPAIR, kCOMP, kPHOT, kPHIS
+  kElectron,       ///< kDRAY, kBREM, kMULS, kG3LOSS
+  kEplus,          ///< kDRAY, kBREM, kMULS, kG3LOSS, kANNI
+  kNeutralHadron,  ///< kHADR
+  kChargedHadron,  ///< kDRAY, kMULS, kG3LOSS, kHADR,
+  kMuon,           ///< kDRAY, kBREM, kMULS, kG3LOSS, kMUNU
+  kAny,            ///< kDCAY
+  kNofParticlesWSP ///< not a particle with a special control
 };
 
-#endif //TG4_G3_PARTICLE_WSP_H
-
+#endif // TG4_G3_PARTICLE_WSP_H

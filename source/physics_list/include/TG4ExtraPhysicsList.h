@@ -43,44 +43,42 @@ class G4MonopolePhysics;
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4ExtraPhysicsList: public G4VModularPhysicsList,
-                           public TG4Verbose
+class TG4ExtraPhysicsList : public G4VModularPhysicsList, public TG4Verbose
 {
-  public:
-    TG4ExtraPhysicsList(const G4String& selection,
-                        const std::map<TString, Double_t>& parameters);
-    virtual ~TG4ExtraPhysicsList();
+ public:
+  TG4ExtraPhysicsList(
+    const G4String& selection, const std::map<TString, Double_t>& parameters);
+  virtual ~TG4ExtraPhysicsList();
 
-    // static methods
-    static G4String AvailableSelections();
-    static G4bool   IsAvailableSelection(const G4String& selection);
+  // static methods
+  static G4String AvailableSelections();
+  static G4bool IsAvailableSelection(const G4String& selection);
 
-    // methods
-    virtual void  ConstructProcess();
+  // methods
+  virtual void ConstructProcess();
 
-                  /// No cuts are set here
-    virtual void  SetCuts() {}
+  /// No cuts are set here
+  virtual void SetCuts() {}
 
-    virtual G4int VerboseLevel() const;
-    virtual void  VerboseLevel(G4int level);
+  virtual G4int VerboseLevel() const;
+  virtual void VerboseLevel(G4int level);
 
-    // set methods
-    void SetRangeCut(G4double value);
+  // set methods
+  void SetRangeCut(G4double value);
 
-  protected:
-    // static data members
-    static const G4double  fgkDefaultCutValue; ///< default cut value
+ protected:
+  // static data members
+  static const G4double fgkDefaultCutValue; ///< default cut value
 
-  private:
-    /// Not implemented
-    TG4ExtraPhysicsList(const TG4ExtraPhysicsList& right);
-    /// Not implemented
-    TG4ExtraPhysicsList& operator=(const TG4ExtraPhysicsList& right);
+ private:
+  /// Not implemented
+  TG4ExtraPhysicsList(const TG4ExtraPhysicsList& right);
+  /// Not implemented
+  TG4ExtraPhysicsList& operator=(const TG4ExtraPhysicsList& right);
 
-    // methods
-    void Configure(const G4String& /*selection*/,
-                   const std::map<TString, Double_t>& parameters);
+  // methods
+  void Configure(const G4String& /*selection*/,
+    const std::map<TString, Double_t>& parameters);
 };
 
-#endif //TG4_EXTRA_PHYSICS_LIST_H
-
+#endif // TG4_EXTRA_PHYSICS_LIST_H

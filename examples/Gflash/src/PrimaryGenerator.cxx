@@ -15,136 +15,136 @@
 /// \date 28/10/2015
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include <TVirtualMC.h>
-#include <TVirtualMCStack.h>
-#include <TVirtualMCApplication.h>
-#include <TRandom.h>
-#include <TPDGCode.h>
-#include <TVector3.h>
-#include <TParticlePDG.h>
 #include <TDatabasePDG.h>
+#include <TPDGCode.h>
+#include <TParticlePDG.h>
+#include <TRandom.h>
+#include <TVector3.h>
+#include <TVirtualMC.h>
+#include <TVirtualMCApplication.h>
+#include <TVirtualMCStack.h>
 
 #include "PrimaryGenerator.h"
 
 /// \cond CLASSIMP
 ClassImp(VMC::Gflash::PrimaryGenerator)
-/// \endcond
+  /// \endcond
 
-namespace VMC
+  namespace VMC
 {
-namespace Gflash
-{
+  namespace Gflash
+  {
 
-//_____________________________________________________________________________
-PrimaryGenerator::PrimaryGenerator(TVirtualMCStack* stack)
-  : TObject(),
-    fStack(stack),
-    fNofPrimaries(1),
-    fVertexPosition(),
-    fVertexDirection(TVector3(0,0,1))
-{
-/// Standard constructor
-/// \param stack  The VMC stack
-}
+  //_____________________________________________________________________________
+  PrimaryGenerator::PrimaryGenerator(TVirtualMCStack* stack)
+    : TObject(),
+      fStack(stack),
+      fNofPrimaries(1),
+      fVertexPosition(),
+      fVertexDirection(TVector3(0, 0, 1))
+  {
+    /// Standard constructor
+    /// \param stack  The VMC stack
+  }
 
-//_____________________________________________________________________________
-PrimaryGenerator::PrimaryGenerator(const PrimaryGenerator& origin,
-                                           TVirtualMCStack* stack)
-  : TObject(origin),
-    fStack(stack),
-    fNofPrimaries(origin.fNofPrimaries),
-    fVertexPosition(origin.fVertexPosition),
-    fVertexDirection(origin.fVertexDirection)
-{
-/// Copy constructor (for clonig on worker thread in MT mode).
-/// \param origin    The source object (on master).
-/// \param stack  The VMC stack
-}
+  //_____________________________________________________________________________
+  PrimaryGenerator::PrimaryGenerator(
+    const PrimaryGenerator& origin, TVirtualMCStack* stack)
+    : TObject(origin),
+      fStack(stack),
+      fNofPrimaries(origin.fNofPrimaries),
+      fVertexPosition(origin.fVertexPosition),
+      fVertexDirection(origin.fVertexDirection)
+  {
+    /// Copy constructor (for clonig on worker thread in MT mode).
+    /// \param origin    The source object (on master).
+    /// \param stack  The VMC stack
+  }
 
-//_____________________________________________________________________________
-PrimaryGenerator::PrimaryGenerator()
-  : TObject(),
-    fStack(0),
-    fNofPrimaries(0),
-    fVertexPosition(),
-    fVertexDirection()
-{
-/// Default constructor
-}
+  //_____________________________________________________________________________
+  PrimaryGenerator::PrimaryGenerator()
+    : TObject(),
+      fStack(0),
+      fNofPrimaries(0),
+      fVertexPosition(),
+      fVertexDirection()
+  {
+    /// Default constructor
+  }
 
-//_____________________________________________________________________________
-PrimaryGenerator::~PrimaryGenerator()
-{
-/// Destructor
-}
+  //_____________________________________________________________________________
+  PrimaryGenerator::~PrimaryGenerator()
+  {
+    /// Destructor
+  }
 
-//
-// private methods
-//
+  //
+  // private methods
+  //
 
-//_____________________________________________________________________________
-void PrimaryGenerator::GenerateOnePrimary(const TVector3& origin)
-{
-/// Add one primary particle (kElectron) to the user stack
-/// (derived from TVirtualMCStack).
-/// \param origin  The track position
+  //_____________________________________________________________________________
+  void PrimaryGenerator::GenerateOnePrimary(const TVector3& origin)
+  {
+    /// Add one primary particle (kElectron) to the user stack
+    /// (derived from TVirtualMCStack).
+    /// \param origin  The track position
 
- // Track ID (filled by stack)
- Int_t ntr;
+    // Track ID (filled by stack)
+    Int_t ntr;
 
- // Option: to be tracked
- Int_t toBeDone = 1;
+    // Option: to be tracked
+    Int_t toBeDone = 1;
 
- // PDG
- Int_t pdg  = kElectron;
+    // PDG
+    Int_t pdg = kElectron;
 
- // Polarization
- Double_t polx = 0.;
- Double_t poly = 0.;
- Double_t polz = 0.;
+    // Polarization
+    Double_t polx = 0.;
+    Double_t poly = 0.;
+    Double_t polz = 0.;
 
- // Position
- Double_t vx  = origin.X();
- Double_t vy  = origin.Y();
- Double_t vz =  origin.Z();
- Double_t tof = 0.;
- fVertexPosition = origin;
+    // Position
+    Double_t vx = origin.X();
+    Double_t vy = origin.Y();
+    Double_t vz = origin.Z();
+    Double_t tof = 0.;
+    fVertexPosition = origin;
 
- // Energy (in GeV)
- Double_t kinEnergy = 50.;
- Double_t mass = 0.51099906*1e-03;
- Double_t e  = mass + kinEnergy;
- Double_t pmag = sqrt(e*e - mass*mass);
+    // Energy (in GeV)
+    Double_t kinEnergy = 50.;
+    Double_t mass = 0.51099906 * 1e-03;
+    Double_t e = mass + kinEnergy;
+    Double_t pmag = sqrt(e * e - mass * mass);
 
- // Particle momentum
- Double_t px, py, pz;
- px = pmag*fVertexDirection.X();
- py = pmag*fVertexDirection.Y();
- pz = pmag*fVertexDirection.Z();
+    // Particle momentum
+    Double_t px, py, pz;
+    px = pmag * fVertexDirection.X();
+    py = pmag * fVertexDirection.Y();
+    pz = pmag * fVertexDirection.Z();
 
- // Randomize position
- // if (fIsRandom) {
- //   vy = origin.Y()*(gRandom->Rndm() - 0.5);
- //   vz = origin.Z()*(gRandom->Rndm() - 0.5);
- // }
+    // Randomize position
+    // if (fIsRandom) {
+    //   vy = origin.Y()*(gRandom->Rndm() - 0.5);
+    //   vz = origin.Z()*(gRandom->Rndm() - 0.5);
+    // }
 
- // Add particle to stack
- fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz,
-                  kPPrimary, ntr, 1., 0);
-}
+    // Add particle to stack
+    fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx,
+      poly, polz, kPPrimary, ntr, 1., 0);
+  }
 
+  //
+  // public methods
+  //
 
-//
-// public methods
-//
+  //_____________________________________________________________________________
+  void PrimaryGenerator::GeneratePrimaries(const TVector3& origin)
+  {
+    /// Fill the user stack (derived from TVirtualMCStack) with primary
+    /// particles.
 
-//_____________________________________________________________________________
-void PrimaryGenerator::GeneratePrimaries(const TVector3& origin)
-{
-/// Fill the user stack (derived from TVirtualMCStack) with primary particles.
+    for (Int_t i = 0; i < fNofPrimaries; i++) GenerateOnePrimary(origin);
+  }
 
-  for (Int_t i=0; i<fNofPrimaries; i++) GenerateOnePrimary(origin);
-}
-
-}
+  } // namespace Gflash
 }

@@ -30,50 +30,50 @@ class TVirtualMagField;
 
 class Ex01MCApplication : public TVirtualMCApplication
 {
-  public:
-    Ex01MCApplication(const char *name, const char *title);
-    Ex01MCApplication();
-    virtual ~Ex01MCApplication();
+ public:
+  Ex01MCApplication(const char* name, const char* title);
+  Ex01MCApplication();
+  virtual ~Ex01MCApplication();
 
-    // static access method
-    static Ex01MCApplication* Instance();
+  // static access method
+  static Ex01MCApplication* Instance();
 
-    // methods
-    void InitMC(const char *setup);
-    void RunMC(Int_t nofEvents);
-    void FinishRun();
+  // methods
+  void InitMC(const char* setup);
+  void RunMC(Int_t nofEvents);
+  void FinishRun();
 
-    virtual TVirtualMCApplication* CloneForWorker() const;
-    virtual void InitForWorker() const;
-    virtual void ConstructGeometry();
-    virtual void InitGeometry();
-    virtual void GeneratePrimaries();
-    virtual void BeginEvent();
-    virtual void BeginPrimary();
-    virtual void PreTrack();
-    virtual void Stepping();
-    virtual void PostTrack();
-    virtual void FinishPrimary();
-    virtual void FinishEvent();
+  virtual TVirtualMCApplication* CloneForWorker() const;
+  virtual void InitForWorker() const;
+  virtual void ConstructGeometry();
+  virtual void InitGeometry();
+  virtual void GeneratePrimaries();
+  virtual void BeginEvent();
+  virtual void BeginPrimary();
+  virtual void PreTrack();
+  virtual void Stepping();
+  virtual void PostTrack();
+  virtual void FinishPrimary();
+  virtual void FinishEvent();
 
-    // methods for tests
-    void SetOldGeometry(Bool_t oldGeometry = kTRUE);
-    void TestVMCGeometryGetters();
+  // methods for tests
+  void SetOldGeometry(Bool_t oldGeometry = kTRUE);
+  void TestVMCGeometryGetters();
 
-  private:
-    // methods
-    void ConstructMaterials();
-    void ConstructVolumes();
+ private:
+  // methods
+  void ConstructMaterials();
+  void ConstructVolumes();
 
-    // data members
-    TVirtualMCStack*  fStack;       ///< The VMC stack
-    TVirtualMagField* fMagField;    ///< The magnetic field
-    Int_t             fImedAr;      ///< The Argon gas medium Id
-    Int_t             fImedAl;      ///< The Aluminium medium Id
-    Int_t             fImedPb;      ///< The Lead medium Id
-    Bool_t            fOldGeometry; ///< Option for geometry definition
+  // data members
+  TVirtualMCStack* fStack;     ///< The VMC stack
+  TVirtualMagField* fMagField; ///< The magnetic field
+  Int_t fImedAr;               ///< The Argon gas medium Id
+  Int_t fImedAl;               ///< The Aluminium medium Id
+  Int_t fImedPb;               ///< The Lead medium Id
+  Bool_t fOldGeometry;         ///< Option for geometry definition
 
-  ClassDef(Ex01MCApplication,1)  //Interface to MonteCarlo application
+  ClassDef(Ex01MCApplication, 1) // Interface to MonteCarlo application
 };
 
 // inline functions
@@ -90,5 +90,4 @@ inline void Ex01MCApplication::SetOldGeometry(Bool_t oldGeometry)
   fOldGeometry = oldGeometry;
 }
 
-#endif //EX01_MC_APPLICATION_H
-
+#endif // EX01_MC_APPLICATION_H

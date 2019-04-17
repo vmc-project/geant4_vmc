@@ -18,7 +18,6 @@
 #include <G4MagneticField.hh>
 #include <globals.hh>
 
-
 class TG4FieldParameters;
 
 class G4EquationOfMotion;
@@ -42,19 +41,18 @@ class TVirtualMagField;
 
 class TG4MagneticField : public G4MagneticField
 {
-  public:
-    TG4MagneticField(TVirtualMagField* magField);
-    virtual ~TG4MagneticField();
+ public:
+  TG4MagneticField(TVirtualMagField* magField);
+  virtual ~TG4MagneticField();
 
-    virtual void GetFieldValue(const G4double point[3], G4double* bfield) const;
+  virtual void GetFieldValue(const G4double point[3], G4double* bfield) const;
 
-    virtual void PrintStatistics() const {}
+  virtual void PrintStatistics() const {}
 
-  protected:
-    // data
-    /// The associated TGeo magnetic field
-    TVirtualMagField*  fVirtualMagField;
+ protected:
+  // data
+  /// The associated TGeo magnetic field
+  TVirtualMagField* fVirtualMagField;
 };
 
-#endif //TG4_MAGNETIC_FIELD_H
-
+#endif // TG4_MAGNETIC_FIELD_H

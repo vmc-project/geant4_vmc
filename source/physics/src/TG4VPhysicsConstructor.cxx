@@ -20,21 +20,19 @@
 
 //_____________________________________________________________________________
 TG4VPhysicsConstructor::TG4VPhysicsConstructor(const G4String& name)
-  : G4VPhysicsConstructor(name),
-    TG4Verbose(G4String("physics" + name))
+  : G4VPhysicsConstructor(name), TG4Verbose(G4String("physics" + name))
 {
-/// Standard constructor
+  /// Standard constructor
 
   VerboseLevel(1);
 }
 
 //_____________________________________________________________________________
-TG4VPhysicsConstructor::TG4VPhysicsConstructor(const G4String& name,
-                                               G4int theVerboseLevel)
-  : G4VPhysicsConstructor(name),
-    TG4Verbose(G4String("physics" + name))
+TG4VPhysicsConstructor::TG4VPhysicsConstructor(
+  const G4String& name, G4int theVerboseLevel)
+  : G4VPhysicsConstructor(name), TG4Verbose(G4String("physics" + name))
 {
-/// Standard constructor
+  /// Standard constructor
 
   VerboseLevel(theVerboseLevel);
 }
@@ -42,7 +40,7 @@ TG4VPhysicsConstructor::TG4VPhysicsConstructor(const G4String& name,
 //_____________________________________________________________________________
 TG4VPhysicsConstructor::~TG4VPhysicsConstructor()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -52,20 +50,19 @@ TG4VPhysicsConstructor::~TG4VPhysicsConstructor()
 //_____________________________________________________________________________
 void TG4VPhysicsConstructor::VerboseLevel(G4int level)
 {
-/// Set the same value to G4VPhysicsConstructor verbose
-/// level and TG4Verbose level.
+  /// Set the same value to G4VPhysicsConstructor verbose
+  /// level and TG4Verbose level.
 
-   TG4Verbose::VerboseLevel(level);
+  TG4Verbose::VerboseLevel(level);
 
-   // verbose in G4VPhysicsConstructor
-   SetVerboseLevel(level);
+  // verbose in G4VPhysicsConstructor
+  SetVerboseLevel(level);
 }
-
 
 //_____________________________________________________________________________
 G4int TG4VPhysicsConstructor::VerboseLevel() const
 {
-/// Return TG4Verbose level value.
+  /// Return TG4Verbose level value.
 
-   return TG4Verbose::VerboseLevel();
+  return TG4Verbose::VerboseLevel();
 }

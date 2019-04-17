@@ -46,79 +46,86 @@ class PrimaryGenerator;
 
 class MCApplication : public TVirtualMCApplication
 {
-  public:
-    MCApplication(const char* name,  const char* title);
-    MCApplication();
-    virtual ~MCApplication();
+ public:
+  MCApplication(const char* name, const char* title);
+  MCApplication();
+  virtual ~MCApplication();
 
-    // methods
-    void InitMC(const char *setup);
-    void RunMC(Int_t nofEvents);
-    void FinishRun();
-    void ReadEvent(Int_t i);
+  // methods
+  void InitMC(const char* setup);
+  void RunMC(Int_t nofEvents);
+  void FinishRun();
+  void ReadEvent(Int_t i);
 
-    virtual TVirtualMCApplication* CloneForWorker() const;
-    virtual void InitForWorker() const;
-    virtual void FinishWorkerRun() const;
+  virtual TVirtualMCApplication* CloneForWorker() const;
+  virtual void InitForWorker() const;
+  virtual void FinishWorkerRun() const;
 
-    virtual void ConstructGeometry();
-    virtual void InitGeometry();
-    virtual void GeneratePrimaries();
-    virtual void BeginEvent();
-    virtual void BeginPrimary();
-    virtual void PreTrack();
-    virtual void Stepping();
-    virtual void PostTrack();
-    virtual void FinishPrimary();
-    virtual void FinishEvent();
+  virtual void ConstructGeometry();
+  virtual void InitGeometry();
+  virtual void GeneratePrimaries();
+  virtual void BeginEvent();
+  virtual void BeginPrimary();
+  virtual void PreTrack();
+  virtual void Stepping();
+  virtual void PostTrack();
+  virtual void FinishPrimary();
+  virtual void FinishEvent();
 
-    // set methods
-    void  SetVerboseLevel(Int_t verboseLevel);
+  // set methods
+  void SetVerboseLevel(Int_t verboseLevel);
 
-    // get methods
-    DetectorConstruction* GetDetectorConstruction() const;
-    SensitiveDetector*    GetCalorimeterSD() const;
-    PrimaryGenerator*     GetPrimaryGenerator() const;
+  // get methods
+  DetectorConstruction* GetDetectorConstruction() const;
+  SensitiveDetector* GetCalorimeterSD() const;
+  PrimaryGenerator* GetPrimaryGenerator() const;
 
-  private:
-    // methods
-    MCApplication(const MCApplication& origin);
-    void RegisterStack() const;
+ private:
+  // methods
+  MCApplication(const MCApplication& origin);
+  void RegisterStack() const;
 
-    // data members
-    mutable TMCRootManager* fRootManager; //!< Root manager
-    Int_t                 fEventNo;              ///< Event counter
-    TMCVerbose            fVerbose;              ///< VMC verbose helper
-    Ex03MCStack*          fStack;                ///< VMC stack
-    DetectorConstruction* fDetConstruction;      ///< Dector construction
-    SensitiveDetector*    fSensitiveDetector;    ///< Calorimeter SD
-    PrimaryGenerator*     fPrimaryGenerator;     ///< Primary generator
-    Bool_t                fIsMaster;             ///< If is on master thread
+  // data members
+  mutable TMCRootManager* fRootManager;   //!< Root manager
+  Int_t fEventNo;                         ///< Event counter
+  TMCVerbose fVerbose;                    ///< VMC verbose helper
+  Ex03MCStack* fStack;                    ///< VMC stack
+  DetectorConstruction* fDetConstruction; ///< Dector construction
+  SensitiveDetector* fSensitiveDetector;  ///< Calorimeter SD
+  PrimaryGenerator* fPrimaryGenerator;    ///< Primary generator
+  Bool_t fIsMaster;                       ///< If is on master thread
 
-  ClassDef(MCApplication,1)  //Interface to MonteCarlo application
+  ClassDef(MCApplication, 1) // Interface to MonteCarlo application
 };
 
 // inline functions
 
 /// Set verbosity
 /// \param verboseLevel  The new verbose level value
-inline void  MCApplication::SetVerboseLevel(Int_t verboseLevel)
-{ fVerbose.SetLevel(verboseLevel); }
+inline void MCApplication::SetVerboseLevel(Int_t verboseLevel)
+{
+  fVerbose.SetLevel(verboseLevel);
+}
 
 /// \return The detector construction
 inline DetectorConstruction* MCApplication::GetDetectorConstruction() const
-{ return fDetConstruction; }
+{
+  return fDetConstruction;
+}
 
 /// \return The calorimeter sensitive detector
 inline SensitiveDetector* MCApplication::GetCalorimeterSD() const
-{ return fSensitiveDetector; }
+{
+  return fSensitiveDetector;
+}
 
 /// \return The primary generator
 inline PrimaryGenerator* MCApplication::GetPrimaryGenerator() const
-{ return fPrimaryGenerator; }
-
+{
+  return fPrimaryGenerator;
 }
-}
 
-#endif //GARFIELD_MC_APPLICATION_H
+} // namespace ExGarfield
+} // namespace VMC
 
+#endif // GARFIELD_MC_APPLICATION_H

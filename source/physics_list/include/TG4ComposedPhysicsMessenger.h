@@ -51,80 +51,81 @@ class G4UIcmdWithAnInteger;
 
 class TG4ComposedPhysicsMessenger : public G4UImessenger
 {
-  public:
-    TG4ComposedPhysicsMessenger(TG4ComposedPhysicsList* physicsList);
-    virtual ~TG4ComposedPhysicsMessenger();
+ public:
+  TG4ComposedPhysicsMessenger(TG4ComposedPhysicsList* physicsList);
+  virtual ~TG4ComposedPhysicsMessenger();
 
-    // methods
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-  private:
-    /// Not implemented
-    TG4ComposedPhysicsMessenger();
-    /// Not implemented
-    TG4ComposedPhysicsMessenger(const TG4ComposedPhysicsMessenger& right);
-    /// Not implemented
-    TG4ComposedPhysicsMessenger& operator=(const TG4ComposedPhysicsMessenger& right);
+ private:
+  /// Not implemented
+  TG4ComposedPhysicsMessenger();
+  /// Not implemented
+  TG4ComposedPhysicsMessenger(const TG4ComposedPhysicsMessenger& right);
+  /// Not implemented
+  TG4ComposedPhysicsMessenger& operator=(
+    const TG4ComposedPhysicsMessenger& right);
 
-    // methods
-    void CreateProductionCutsTableEnergyRangeCmd();
+  // methods
+  void CreateProductionCutsTableEnergyRangeCmd();
 
-    //
-    // data members
+  //
+  // data members
 
-    /// associated class
-    TG4ComposedPhysicsList*     fPhysicsList;
+  /// associated class
+  TG4ComposedPhysicsList* fPhysicsList;
 
-    /// command directory
-    G4UIdirectory*              fDirectory;
+  /// command directory
+  G4UIdirectory* fDirectory;
 
-    /// rangeCutForGamma command
-    G4UIcmdWithADoubleAndUnit*  fRangeGammaCutCmd;
+  /// rangeCutForGamma command
+  G4UIcmdWithADoubleAndUnit* fRangeGammaCutCmd;
 
-    /// rangeCutForElectron command
-    G4UIcmdWithADoubleAndUnit*  fRangeElectronCutCmd;
+  /// rangeCutForElectron command
+  G4UIcmdWithADoubleAndUnit* fRangeElectronCutCmd;
 
-    /// rangeCutForPositron command
-    G4UIcmdWithADoubleAndUnit*  fRangePositronCutCmd;
+  /// rangeCutForPositron command
+  G4UIcmdWithADoubleAndUnit* fRangePositronCutCmd;
 
-    /// rangeCutForProton command
-    G4UIcmdWithADoubleAndUnit*  fRangeProtonCutCmd;
+  /// rangeCutForProton command
+  G4UIcmdWithADoubleAndUnit* fRangeProtonCutCmd;
 
-    /// rangeCuts command
-    G4UIcmdWithADoubleAndUnit*  fRangeAllCutCmd;
+  /// rangeCuts command
+  G4UIcmdWithADoubleAndUnit* fRangeAllCutCmd;
 
-    /// productionCutsTableEnergyRange command
-    G4UIcommand*                fProductionCutsTableEnergyRangeCmd;
+  /// productionCutsTableEnergyRange command
+  G4UIcommand* fProductionCutsTableEnergyRangeCmd;
 
-    /// setGammaToMuonsCrossSectionFactor
-    G4UIcmdWithADouble*  fSetGammaToMuonsCrossSectionFactorCmd;
+  /// setGammaToMuonsCrossSectionFactor
+  G4UIcmdWithADouble* fSetGammaToMuonsCrossSectionFactorCmd;
 
-    /// printAllProcess command
-    G4UIcmdWithoutParameter*    fPrintAllProcessesCmd;
+  /// printAllProcess command
+  G4UIcmdWithoutParameter* fPrintAllProcessesCmd;
 
-    /// dumpAllProcess command
-    G4UIcmdWithoutParameter*    fDumpAllProcessesCmd;
+  /// dumpAllProcess command
+  G4UIcmdWithoutParameter* fDumpAllProcessesCmd;
 
-    /// printProcessMCMap command
-    G4UIcmdWithoutParameter*    fPrintProcessMCMapCmd;
+  /// printProcessMCMap command
+  G4UIcmdWithoutParameter* fPrintProcessMCMapCmd;
 
-    /// printProcessControlsMap command
-    G4UIcmdWithoutParameter*    fPrintProcessControlMapCmd;
+  /// printProcessControlsMap command
+  G4UIcmdWithoutParameter* fPrintProcessControlMapCmd;
 
-    /// printVolumeLimits command
-    G4UIcmdWithAString*         fPrintVolumeLimitsCmd;
+  /// printVolumeLimits command
+  G4UIcmdWithAString* fPrintVolumeLimitsCmd;
 
-    /// printGeneralCuts command
-    G4UIcmdWithoutParameter*    fPrintGlobalCutsCmd;
+  /// printGeneralCuts command
+  G4UIcmdWithoutParameter* fPrintGlobalCutsCmd;
 
-    /// printGeneralControls command
-    G4UIcmdWithoutParameter*    fPrintGlobalControlsCmd;
+  /// printGeneralControls command
+  G4UIcmdWithoutParameter* fPrintGlobalControlsCmd;
 
-    /// g4NeutronHPVerbose command
-    G4UIcmdWithAnInteger*       fG4NeutronHPVerboseCmd;
+  /// g4NeutronHPVerbose command
+  G4UIcmdWithAnInteger* fG4NeutronHPVerboseCmd;
 
-    /// g4HadronicProcessStoreVerbose command
-    G4UIcmdWithAnInteger*       fG4HadronicProcessStoreVerboseCmd;
+  /// g4HadronicProcessStoreVerbose command
+  G4UIcmdWithAnInteger* fG4HadronicProcessStoreVerboseCmd;
 };
 
-#endif //TG4_COMPOSED_PHYSICS_MESSENGER_H
+#endif // TG4_COMPOSED_PHYSICS_MESSENGER_H

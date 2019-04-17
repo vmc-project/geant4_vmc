@@ -24,7 +24,8 @@ class TVirtualMCApplication;
 class TVirtualMCSensitiveDetector;
 
 /// \ingroup digits_hits
-/// \brief Sensitive detector class for calling a user defined stepping function.
+/// \brief Sensitive detector class for calling a user defined stepping
+/// function.
 ///
 /// This class adds the integer identifier data member to G4VSensitiveDetector
 /// and keeps the medium ID of the associated volume.
@@ -37,77 +38,79 @@ class TVirtualMCSensitiveDetector;
 
 class TG4SensitiveDetector : public G4VSensitiveDetector
 {
-  public:
-    TG4SensitiveDetector(G4String sdName, G4int mediumID);
-    TG4SensitiveDetector(TVirtualMCSensitiveDetector* userSD, G4int mediumID,
-                         G4bool exclusiveSD);
-    virtual ~TG4SensitiveDetector();
+ public:
+  TG4SensitiveDetector(G4String sdName, G4int mediumID);
+  TG4SensitiveDetector(
+    TVirtualMCSensitiveDetector* userSD, G4int mediumID, G4bool exclusiveSD);
+  virtual ~TG4SensitiveDetector();
 
-    // methods
-    virtual G4bool ProcessHits(G4Step* step, G4TouchableHistory* history);
-    virtual G4bool ProcessHitsOnBoundary(G4Step* step);
-    virtual void ProcessHitsOnTrackStart();
-        // Was user process hits
+  // methods
+  virtual G4bool ProcessHits(G4Step* step, G4TouchableHistory* history);
+  virtual G4bool ProcessHitsOnBoundary(G4Step* step);
+  virtual void ProcessHitsOnTrackStart();
+  // Was user process hits
 
-    // static get method
-    static G4int GetTotalNofSensitiveDetectors();
+  // static get method
+  static G4int GetTotalNofSensitiveDetectors();
 
-    // get methods
-    G4int GetID() const;
-    G4int GetMediumID() const;
-    TVirtualMCSensitiveDetector* GetUserSD() const;
+  // get methods
+  G4int GetID() const;
+  G4int GetMediumID() const;
+  TVirtualMCSensitiveDetector* GetUserSD() const;
 
-  protected:
-    void  UserProcessHits();
+ protected:
+  void UserProcessHits();
 
-    // data members
-    /// Cached pointer to thread-local step manager
-    TG4StepManager*  fStepManager;
-    /// Cached pointer to thread-local VMC application
-    TVirtualMCApplication*  fMCApplication;
-    /// User sensitive detector
-    TVirtualMCSensitiveDetector*  fUserSD;
+  // data members
+  /// Cached pointer to thread-local step manager
+  TG4StepManager* fStepManager;
+  /// Cached pointer to thread-local VMC application
+  TVirtualMCApplication* fMCApplication;
+  /// User sensitive detector
+  TVirtualMCSensitiveDetector* fUserSD;
 
-  private:
-    /// Not implemented
-    TG4SensitiveDetector();
-    /// Not implemented
-    TG4SensitiveDetector(const TG4SensitiveDetector& right);
-    /// Not implemented
-    TG4SensitiveDetector& operator=(const TG4SensitiveDetector &right);
+ private:
+  /// Not implemented
+  TG4SensitiveDetector();
+  /// Not implemented
+  TG4SensitiveDetector(const TG4SensitiveDetector& right);
+  /// Not implemented
+  TG4SensitiveDetector& operator=(const TG4SensitiveDetector& right);
 
-    // data members
-    static G4ThreadLocal G4int fgSDCounter; ///< sensitive detector counter
+  // data members
+  static G4ThreadLocal G4int fgSDCounter; ///< sensitive detector counter
 
-    // data members
-    G4int            fID;          ///< sensitive detector ID
-    G4int            fMediumID;    ///< medium ID
-    /// map logical volume -> volume id
-    std::map<G4LogicalVolume*, G4int>  fLVToVolIdMap;
+  // data members
+  G4int fID;       ///< sensitive detector ID
+  G4int fMediumID; ///< medium ID
+  /// map logical volume -> volume id
+  std::map<G4LogicalVolume*, G4int> fLVToVolIdMap;
 };
 
 // inline methods
 
-inline G4int TG4SensitiveDetector::GetTotalNofSensitiveDetectors() {
+inline G4int TG4SensitiveDetector::GetTotalNofSensitiveDetectors()
+{
   /// Returns the total number of sensitive detectors.
   return fgSDCounter;
 }
 
-inline G4int TG4SensitiveDetector::GetID() const {
+inline G4int TG4SensitiveDetector::GetID() const
+{
   /// Returns sensitive detector ID.
   return fID;
 }
 
-inline G4int TG4SensitiveDetector::GetMediumID() const {
+inline G4int TG4SensitiveDetector::GetMediumID() const
+{
   /// Returns medium ID
   return fMediumID;
 }
 
-inline TVirtualMCSensitiveDetector* TG4SensitiveDetector::GetUserSD() const {
+inline TVirtualMCSensitiveDetector* TG4SensitiveDetector::GetUserSD() const
+{
   /// Returns user SD
   return fUserSD;
 }
 
-#endif //TG4_SENSITIVE_DETECTOR_H
-
-
+#endif // TG4_SENSITIVE_DETECTOR_H

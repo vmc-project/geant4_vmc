@@ -18,4 +18,4 @@
 #define GEANT4_VMC_RELEASE "4.0"
 #define GEANT4_VMC_RELEASE_DATE "18 December 2018"
 
-#endif //TG4_VERSION_H
+#endif // TG4_VERSION_H

@@ -16,12 +16,12 @@
 #include "TG4GflashFastSimulationMessenger.h"
 #include "TG4Globals.h"
 
-#include <G4RegionStore.hh>
 #include <G4Material.hh>
-#include <GFlashHomoShowerParameterisation.hh>
-#include <GFlashShowerModel.hh>
+#include <G4RegionStore.hh>
 #include <GFlashHitMaker.hh>
+#include <GFlashHomoShowerParameterisation.hh>
 #include <GFlashParticleBounds.hh>
+#include <GFlashShowerModel.hh>
 
 #include <Riostream.h>
 
@@ -34,12 +34,12 @@ TG4GflashFastSimulation::TG4GflashFastSimulation()
     fMaterialName(),
     fGflashShowerModel(0)
 {
-/// Standard constructor
+  /// Standard constructor
 
   // create the model in contsructor
   // to make available its messenger commands
   fGflashShowerModel = new GFlashShowerModel("GflashShowerModel");
-              // region will be set via the model configuration
+  // region will be set via the model configuration
 
   fMessenger = new TG4GflashFastSimulationMessenger(this);
 }
@@ -47,7 +47,7 @@ TG4GflashFastSimulation::TG4GflashFastSimulation()
 //_____________________________________________________________________________
 TG4GflashFastSimulation::~TG4GflashFastSimulation()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -55,26 +55,24 @@ TG4GflashFastSimulation::~TG4GflashFastSimulation()
 //
 
 //_____________________________________________________________________________
-void  TG4GflashFastSimulation::Construct()
+void TG4GflashFastSimulation::Construct()
 {
-/// This function must be overriden in user class and users should create
-/// the simulation models and register them to VMC framework
+  /// This function must be overriden in user class and users should create
+  /// the simulation models and register them to VMC framework
 
-  if ( ! fMaterialName.size() ) {
-    TG4Globals::Warning(
-      "TG4GflashFastSimulation", "Construct",
+  if (!fMaterialName.size()) {
+    TG4Globals::Warning("TG4GflashFastSimulation", "Construct",
       "The material for Gflash parameterisation is not defined.");
     return;
   }
 
   // Get material from G4MaterialTable
-  G4Material*  material = G4Material::GetMaterial(fMaterialName);
-  if ( ! material ) {
+  G4Material* material = G4Material::GetMaterial(fMaterialName);
+  if (!material) {
     TString text = "The material ";
     text += fMaterialName.data();
     text += " was not found.";
-    TG4Globals::Warning(
-      "TG4GflashFastSimulation", "Construct", text);
+    TG4Globals::Warning("TG4GflashFastSimulation", "Construct", text);
     return;
   }
 
@@ -99,7 +97,7 @@ void  TG4GflashFastSimulation::Construct()
   // Register model in VMC frameworks
   Register(fGflashShowerModel);
 
-  G4cout<<"end configuring shower parameterization."<<G4endl;
+  G4cout << "end configuring shower parameterization." << G4endl;
   //
   // end Initializing shower model
 }

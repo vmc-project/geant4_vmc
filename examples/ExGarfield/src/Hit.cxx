@@ -23,55 +23,57 @@ using namespace std;
 
 /// \cond CLASSIMP
 ClassImp(VMC::ExGarfield::Hit)
-/// \endcond
+  /// \endcond
 
-namespace VMC
+  namespace VMC
 {
-namespace ExGarfield
-{
+  namespace ExGarfield
+  {
 
-//_____________________________________________________________________________
-Hit::Hit()
-  : TObject(),
-    fEdepAbs(0),
-    fEdepGas(0),
-    fTrackLengthAbs(0),
-    fAvalancheSize(0),
-    fGain(0)
-{
-/// Default constructor
-}
+  //_____________________________________________________________________________
+  Hit::Hit()
+    : TObject(),
+      fEdepAbs(0),
+      fEdepGas(0),
+      fTrackLengthAbs(0),
+      fAvalancheSize(0),
+      fGain(0)
+  {
+    /// Default constructor
+  }
 
-//_____________________________________________________________________________
-Hit::~Hit()
-{
-/// Destructor
-}
+  //_____________________________________________________________________________
+  Hit::~Hit()
+  {
+    /// Destructor
+  }
 
-//_____________________________________________________________________________
-void Hit::Print(Option_t* /*option*/) const
-{
-/// Print hit info
+  //_____________________________________________________________________________
+  void Hit::Print(Option_t* /*option*/) const
+  {
+    /// Print hit info
 
-  cout << "   Absorber: total energy: " << std::setw(7) << fEdepAbs * 1.0e03 << " MeV"
-       << "       total track length: " << std::setw(7) << fTrackLengthAbs <<  " cm"
-       << endl
-       << "        Gas: total energy: " << std::setw(7) << fEdepGas * 1.0e06  << " keV"
-       << "           avalanche size: " << std::setw(7) << fAvalancheSize
-       << "       gain: " << std::setw(7) << fGain << endl;
-}
+    cout << "   Absorber: total energy: " << std::setw(7) << fEdepAbs * 1.0e03
+         << " MeV"
+         << "       total track length: " << std::setw(7) << fTrackLengthAbs
+         << " cm" << endl
+         << "        Gas: total energy: " << std::setw(7) << fEdepGas * 1.0e06
+         << " keV"
+         << "           avalanche size: " << std::setw(7) << fAvalancheSize
+         << "       gain: " << std::setw(7) << fGain << endl;
+  }
 
-//_____________________________________________________________________________
-void Hit::Reset()
-{
-/// Reset accounted values.
+  //_____________________________________________________________________________
+  void Hit::Reset()
+  {
+    /// Reset accounted values.
 
-  fEdepAbs = 0.;
-  fEdepGas = 0.;
-  fTrackLengthAbs = 0.;
-  fAvalancheSize = 0.;
-  fGain = 0.;
-}
+    fEdepAbs = 0.;
+    fEdepGas = 0.;
+    fTrackLengthAbs = 0.;
+    fAvalancheSize = 0.;
+    fGain = 0.;
+  }
 
-}
+  } // namespace ExGarfield
 }

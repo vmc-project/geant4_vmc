@@ -31,74 +31,76 @@ class TG4ModelConfigurationMessenger;
 
 class TG4ModelConfigurationManager : public TG4Verbose
 {
-  public:
-    typedef std::vector<TG4ModelConfiguration*> ModelConfigurationVector;
+ public:
+  typedef std::vector<TG4ModelConfiguration*> ModelConfigurationVector;
 
-  public:
-    TG4ModelConfigurationManager(const G4String& name,
-                                 const G4String& availableModels = "");
-    virtual ~TG4ModelConfigurationManager();
+ public:
+  TG4ModelConfigurationManager(
+    const G4String& name, const G4String& availableModels = "");
+  virtual ~TG4ModelConfigurationManager();
 
-    // methods
-    void CreateRegions();
+  // methods
+  void CreateRegions();
 
-    // set methods
-    void SetModel(const G4String& modelName);
-    void SetModelParticles(const G4String& modelName,
-                   const G4String& particles);
-    void SetModelRegions(const G4String& modelName,
-                   const G4String& regions);
+  // set methods
+  void SetModel(const G4String& modelName);
+  void SetModelParticles(const G4String& modelName, const G4String& particles);
+  void SetModelRegions(const G4String& modelName, const G4String& regions);
 
-    // get methods
-    G4String GetName() const;
-    G4String GetAvailableModels() const;
-    TG4ModelConfiguration* GetModelConfiguration(const G4String& modelName,
-                              G4bool warn = true) const;
-    const ModelConfigurationVector&  GetVector() const;
+  // get methods
+  G4String GetName() const;
+  G4String GetAvailableModels() const;
+  TG4ModelConfiguration* GetModelConfiguration(
+    const G4String& modelName, G4bool warn = true) const;
+  const ModelConfigurationVector& GetVector() const;
 
-  private:
-    /// Not implemented
-    TG4ModelConfigurationManager(const TG4ModelConfigurationManager& right);
-    /// Not implemented
-    TG4ModelConfigurationManager& operator=(const TG4ModelConfigurationManager& right);
+ private:
+  /// Not implemented
+  TG4ModelConfigurationManager(const TG4ModelConfigurationManager& right);
+  /// Not implemented
+  TG4ModelConfigurationManager& operator=(
+    const TG4ModelConfigurationManager& right);
 
-    // methods
-    void SetRegionsNames();
+  // methods
+  void SetRegionsNames();
 
-    // data members
+  // data members
 
-    /// Messenger
-    TG4ModelConfigurationMessenger* fMessenger;  ///< messenger
+  /// Messenger
+  TG4ModelConfigurationMessenger* fMessenger; ///< messenger
 
-    /// The associated physics builder name
-    G4String fName;
+  /// The associated physics builder name
+  G4String fName;
 
-    /// List of available models
-    G4String fAvailableModels;
+  /// List of available models
+  G4String fAvailableModels;
 
-    /// Vector of registered model configurations
-    ModelConfigurationVector  fVector;
+  /// Vector of registered model configurations
+  ModelConfigurationVector fVector;
 
-    /// Info whether regions were constructed
-    G4bool  fCreateRegionsDone;
+  /// Info whether regions were constructed
+  G4bool fCreateRegionsDone;
 };
 
 // inline functions
 
-inline  G4String TG4ModelConfigurationManager::GetName() const {
+inline G4String TG4ModelConfigurationManager::GetName() const
+{
   /// Return the associated physics builder name
   return fName;
 }
 
-inline  G4String TG4ModelConfigurationManager::GetAvailableModels() const {
+inline G4String TG4ModelConfigurationManager::GetAvailableModels() const
+{
   /// Return the list of available models
   return fAvailableModels;
 }
 
 inline const TG4ModelConfigurationManager::ModelConfigurationVector&
-TG4ModelConfigurationManager::GetVector() const {
+TG4ModelConfigurationManager::GetVector() const
+{
   /// Return the vector of registered model configurations
   return fVector;
 }
 
-#endif //TG4_MODEL_CONFIGURATION_MANAGER_H
+#endif // TG4_MODEL_CONFIGURATION_MANAGER_H

@@ -24,25 +24,23 @@
 
 //_____________________________________________________________________________
 TG4StepLimiterPhysics::TG4StepLimiterPhysics(const G4String& name)
-  : TG4VPhysicsConstructor(name),
-    fStepLimiterProcess(0)
+  : TG4VPhysicsConstructor(name), fStepLimiterProcess(0)
 {
-/// Standard constructor
+  /// Standard constructor
 }
 
 //_____________________________________________________________________________
-TG4StepLimiterPhysics::TG4StepLimiterPhysics(G4int theVerboseLevel,
-                                             const G4String& name)
-  : TG4VPhysicsConstructor(name, theVerboseLevel),
-    fStepLimiterProcess(0)
+TG4StepLimiterPhysics::TG4StepLimiterPhysics(
+  G4int theVerboseLevel, const G4String& name)
+  : TG4VPhysicsConstructor(name, theVerboseLevel), fStepLimiterProcess(0)
 {
-/// Standard constructor
+  /// Standard constructor
 }
 
 //_____________________________________________________________________________
 TG4StepLimiterPhysics::~TG4StepLimiterPhysics()
 {
-/// Destructor
+  /// Destructor
 
   delete fStepLimiterProcess;
 }
@@ -54,27 +52,26 @@ TG4StepLimiterPhysics::~TG4StepLimiterPhysics()
 //_____________________________________________________________________________
 void TG4StepLimiterPhysics::ConstructParticle()
 {
-/// No particles instatiated
-
+  /// No particles instatiated
 }
 
 //_____________________________________________________________________________
 void TG4StepLimiterPhysics::ConstructProcess()
 {
-/// Set step limiter process to all particles
+  /// Set step limiter process to all particles
 
   fStepLimiterProcess = new G4StepLimiter();
 
   auto aParticleIterator = GetParticleIterator();
   aParticleIterator->reset();
-  while( (*aParticleIterator)() ){
+  while ((*aParticleIterator)()) {
 
     G4ParticleDefinition* particle = aParticleIterator->value();
     G4ProcessManager* pmanager = particle->GetProcessManager();
 
-    if ( ! pmanager ) continue;
+    if (!pmanager) continue;
 
-    pmanager ->AddProcess(fStepLimiterProcess, -1, -1, 6);
+    pmanager->AddProcess(fStepLimiterProcess, -1, -1, 6);
   }
 
   if (VerboseLevel() > 0) {

@@ -16,17 +16,12 @@
 #pragma link off all classes;
 #pragma link off all functions;
 
-#pragma link C++ class  VMC::ExGarfield::MCApplication+;
-#pragma link C++ class  VMC::ExGarfield::DetectorConstruction+;
-#pragma link C++ class  VMC::ExGarfield::Hit+;
-#pragma link C++ class  VMC::ExGarfield::SensitiveDetector+;
-#pragma link C++ class  VMC::ExGarfield::PrimaryGenerator+;
-#pragma link C++ class  Ex03MCStack+;
-#pragma link C++ class  std::stack<TParticle*,deque<TParticle*> >+;
+#pragma link C++ class VMC::ExGarfield::MCApplication + ;
+#pragma link C++ class VMC::ExGarfield::DetectorConstruction + ;
+#pragma link C++ class VMC::ExGarfield::Hit + ;
+#pragma link C++ class VMC::ExGarfield::SensitiveDetector + ;
+#pragma link C++ class VMC::ExGarfield::PrimaryGenerator + ;
+#pragma link C++ class Ex03MCStack + ;
+#pragma link C++ class std::stack < TParticle*, deque < TParticle*>> + ;
 
 #endif
-
-
-
-
-

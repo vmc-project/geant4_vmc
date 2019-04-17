@@ -40,43 +40,43 @@ class G4UIcmdWithABool;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4RegionsMessenger: public G4UImessenger
+class TG4RegionsMessenger : public G4UImessenger
 {
-  public:
-    TG4RegionsMessenger(TG4RegionsManager* runManager);
-    virtual ~TG4RegionsMessenger();
+ public:
+  TG4RegionsMessenger(TG4RegionsManager* runManager);
+  virtual ~TG4RegionsMessenger();
 
-    // methods
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-  private:
-    /// Not implemented
-    TG4RegionsMessenger();
-    /// Not implemented
-    TG4RegionsMessenger(const TG4RegionsMessenger& right);
-    /// Not implemented
-    TG4RegionsMessenger& operator=(const TG4RegionsMessenger& right);
+ private:
+  /// Not implemented
+  TG4RegionsMessenger();
+  /// Not implemented
+  TG4RegionsMessenger(const TG4RegionsMessenger& right);
+  /// Not implemented
+  TG4RegionsMessenger& operator=(const TG4RegionsMessenger& right);
 
-    // data members
-    TG4RegionsManager*     fRegionsManager; ///< associated class
-    G4UIdirectory*         fDirectory;      ///< command directory
+  // data members
+  TG4RegionsManager* fRegionsManager; ///< associated class
+  G4UIdirectory* fDirectory;          ///< command directory
 
-    /// command: /mcRegions/dump [lvName]
-    G4UIcmdWithAString*    fDumpRegionCmd;
-    /// command: /mcRegions/applyForGamma true|false
-    G4UIcmdWithAnInteger*  fSetRangePrecisionCmd;
-    /// command: /mcRegions/applyForGamma true|false
-    G4UIcmdWithABool*      fApplyForGammaCmd;
-    /// command: /mcRegions/applyForElectron true|false
-    G4UIcmdWithABool*      fApplyForElectronCmd;
-    /// command: /mcRegions/applyForPositron true|false
-    G4UIcmdWithABool*      fApplyForPositronCmd;
-    /// command: /mcRegions/applyForProton true|false
-    G4UIcmdWithABool*      fApplyForProtonCmd;
-    /// command: /mcRegions/check [true|false]
-    G4UIcmdWithABool*      fSetCheckCmd;
-    /// command: /mcRegions/print [true|false]
-    G4UIcmdWithABool*      fSetPrintCmd;
+  /// command: /mcRegions/dump [lvName]
+  G4UIcmdWithAString* fDumpRegionCmd;
+  /// command: /mcRegions/applyForGamma true|false
+  G4UIcmdWithAnInteger* fSetRangePrecisionCmd;
+  /// command: /mcRegions/applyForGamma true|false
+  G4UIcmdWithABool* fApplyForGammaCmd;
+  /// command: /mcRegions/applyForElectron true|false
+  G4UIcmdWithABool* fApplyForElectronCmd;
+  /// command: /mcRegions/applyForPositron true|false
+  G4UIcmdWithABool* fApplyForPositronCmd;
+  /// command: /mcRegions/applyForProton true|false
+  G4UIcmdWithABool* fApplyForProtonCmd;
+  /// command: /mcRegions/check [true|false]
+  G4UIcmdWithABool* fSetCheckCmd;
+  /// command: /mcRegions/print [true|false]
+  G4UIcmdWithABool* fSetPrintCmd;
 };
 
-#endif //TG4_RUN_MESSENGER_H
+#endif // TG4_RUN_MESSENGER_H

@@ -15,8 +15,8 @@
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-#include "TG4Verbose.h"
 #include "TG4ComposedPhysicsMessenger.h"
+#include "TG4Verbose.h"
 
 #include <G4VUserPhysicsList.hh>
 #include <globals.hh>
@@ -31,69 +31,69 @@
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4ComposedPhysicsList: public G4VUserPhysicsList,
-                              public TG4Verbose
+class TG4ComposedPhysicsList : public G4VUserPhysicsList, public TG4Verbose
 {
-  public:
-    TG4ComposedPhysicsList();
-    virtual ~TG4ComposedPhysicsList();
+ public:
+  TG4ComposedPhysicsList();
+  virtual ~TG4ComposedPhysicsList();
 
-    // methods
-    void AddPhysicsList(G4VUserPhysicsList* physicsList);
+  // methods
+  void AddPhysicsList(G4VUserPhysicsList* physicsList);
 
-    virtual void ConstructParticle();
-    virtual void ConstructProcess();
-    virtual void SetCuts();
+  virtual void ConstructParticle();
+  virtual void ConstructProcess();
+  virtual void SetCuts();
 
-    void SetCutForGamma(G4double cut);
-    void SetCutForElectron(G4double cut);
-    void SetCutForPositron(G4double cut);
-    void SetCutForProton(G4double cut);
+  void SetCutForGamma(G4double cut);
+  void SetCutForElectron(G4double cut);
+  void SetCutForPositron(G4double cut);
+  void SetCutForProton(G4double cut);
 
-    void SetProductionCutsTableEnergyRange(G4double min, G4double max);
-    void SetGammaToMuonsCrossSectionFactor(G4double value);
+  void SetProductionCutsTableEnergyRange(G4double min, G4double max);
+  void SetGammaToMuonsCrossSectionFactor(G4double value);
 
-    void PrintAllProcesses() const;
-    void DumpAllProcesses() const;
+  void PrintAllProcesses() const;
+  void DumpAllProcesses() const;
 
-    virtual G4int VerboseLevel() const;
-    virtual void  VerboseLevel(G4int level);
+  virtual G4int VerboseLevel() const;
+  virtual void VerboseLevel(G4int level);
 
-  private:
-    /// Not implemented
-    TG4ComposedPhysicsList(const TG4ComposedPhysicsList& right);
-    /// Not implemented
-    TG4ComposedPhysicsList& operator=(const TG4ComposedPhysicsList& right);
+ private:
+  /// Not implemented
+  TG4ComposedPhysicsList(const TG4ComposedPhysicsList& right);
+  /// Not implemented
+  TG4ComposedPhysicsList& operator=(const TG4ComposedPhysicsList& right);
 
-    // methods
-    void ApplyGammaToMuonsCrossSectionFactor();
+  // methods
+  void ApplyGammaToMuonsCrossSectionFactor();
 
-    // static data members
-    static const G4double  fgkDefautCut; ///< the default cut value
+  // static data members
+  static const G4double fgkDefautCut; ///< the default cut value
 
-    // data members
-    TG4ComposedPhysicsMessenger       fMessenger;    ///< messenger
-    std::vector<G4VUserPhysicsList*>  fPhysicsLists; ///< physics lists
+  // data members
+  TG4ComposedPhysicsMessenger fMessenger;         ///< messenger
+  std::vector<G4VUserPhysicsList*> fPhysicsLists; ///< physics lists
 
-    /// Info if the production cuts table energy range is redefined by user
-    G4bool  fIsProductionCutsTableEnergyRange;
+  /// Info if the production cuts table energy range is redefined by user
+  G4bool fIsProductionCutsTableEnergyRange;
 
-    /// The production cuts table energy range minimum redefined by user
-    G4double  fProductionCutsTableEnergyMin;
+  /// The production cuts table energy range minimum redefined by user
+  G4double fProductionCutsTableEnergyMin;
 
-    /// The production cuts table energy range maximum redefined by user
-    G4double  fProductionCutsTableEnergyMax;
+  /// The production cuts table energy range maximum redefined by user
+  G4double fProductionCutsTableEnergyMax;
 
-    /// Gamma to muons cross section factor
-    G4double fGammaToMuonsCrossSectionFactor;
+  /// Gamma to muons cross section factor
+  G4double fGammaToMuonsCrossSectionFactor;
 };
 
 // inline methods
 
-inline void TG4ComposedPhysicsList::SetGammaToMuonsCrossSectionFactor(G4double value) {
+inline void TG4ComposedPhysicsList::SetGammaToMuonsCrossSectionFactor(
+  G4double value)
+{
   /// Set gamma to muons cross section factor
   fGammaToMuonsCrossSectionFactor = value;
 }
 
-#endif //TG4_COMPOSED_MODULAR_PHYSICS_H
-
+#endif // TG4_COMPOSED_MODULAR_PHYSICS_H

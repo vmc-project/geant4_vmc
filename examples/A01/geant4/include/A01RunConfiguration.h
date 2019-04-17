@@ -29,20 +29,20 @@
 
 class A01RunConfiguration : public TG4RunConfiguration
 {
-  public:
-    A01RunConfiguration(const TString& physicsList = "emStandard",
-                        const TString& specialProcess = "stepLimiter");
-    virtual ~A01RunConfiguration();
+ public:
+  A01RunConfiguration(const TString& physicsList = "emStandard",
+    const TString& specialProcess = "stepLimiter");
+  virtual ~A01RunConfiguration();
 
-    // methods
-    virtual G4VUserDetectorConstruction*  CreateDetectorConstruction();
+  // methods
+  virtual G4VUserDetectorConstruction* CreateDetectorConstruction();
 
-    // set methods
-    void  SetUseLocalMagField(Bool_t localMagField);
+  // set methods
+  void SetUseLocalMagField(Bool_t localMagField);
 
-  private:
-    /// Option to use local magnetic field
-    Bool_t  fUseLocalMagField;
+ private:
+  /// Option to use local magnetic field
+  Bool_t fUseLocalMagField;
 };
 
 // inline functions
@@ -50,6 +50,8 @@ class A01RunConfiguration : public TG4RunConfiguration
 /// Set the option to use local magnetic field (working only with Geant4 !)
 /// \param localMagField  The new value of the option
 inline void A01RunConfiguration::SetUseLocalMagField(Bool_t localMagField)
-{ fUseLocalMagField = localMagField; }
+{
+  fUseLocalMagField = localMagField;
+}
 
-#endif //A01_RUN_CONFIGURATION1_H
+#endif // A01_RUN_CONFIGURATION1_H

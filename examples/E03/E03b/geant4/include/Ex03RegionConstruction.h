@@ -26,13 +26,12 @@
 
 class Ex03RegionConstruction : public TG4VUserRegionConstruction
 {
-  public:
-    Ex03RegionConstruction();
-    virtual ~Ex03RegionConstruction();
+ public:
+  Ex03RegionConstruction();
+  virtual ~Ex03RegionConstruction();
 
-    // methods
-    virtual void Construct();
+  // methods
+  virtual void Construct();
 };
 
-#endif //EX03_REGION_CONSTRUCTION_H
-
+#endif // EX03_REGION_CONSTRUCTION_H

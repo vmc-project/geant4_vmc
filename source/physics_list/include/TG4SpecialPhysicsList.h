@@ -34,75 +34,75 @@ class TG4VUserFastSimulation;
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4SpecialPhysicsList: public G4VModularPhysicsList,
-                             public TG4Verbose
+class TG4SpecialPhysicsList : public G4VModularPhysicsList, public TG4Verbose
 {
-  public:
-    TG4SpecialPhysicsList(const G4String& selection);
-    TG4SpecialPhysicsList();
-    virtual ~TG4SpecialPhysicsList();
+ public:
+  TG4SpecialPhysicsList(const G4String& selection);
+  TG4SpecialPhysicsList();
+  virtual ~TG4SpecialPhysicsList();
 
-    // static methods
-    static TG4SpecialPhysicsList* Instance();
-    static G4String AvailableSelections();
-    static G4bool   IsAvailableSelection(const G4String& selection);
+  // static methods
+  static TG4SpecialPhysicsList* Instance();
+  static G4String AvailableSelections();
+  static G4bool IsAvailableSelection(const G4String& selection);
 
-    // methods
-    virtual void ConstructProcess();
+  // methods
+  virtual void ConstructProcess();
 
-                  /// No cuts are set here
-    virtual void SetCuts() {}
+  /// No cuts are set here
+  virtual void SetCuts() {}
 
-    virtual G4int VerboseLevel() const;
-    virtual void  VerboseLevel(G4int level);
+  virtual G4int VerboseLevel() const;
+  virtual void VerboseLevel(G4int level);
 
-    // set methods
-    void SetUserFastSimulation(TG4VUserFastSimulation* fastSimulation);
+  // set methods
+  void SetUserFastSimulation(TG4VUserFastSimulation* fastSimulation);
 
-    // get methods
-    G4bool IsSpecialCuts() const;
+  // get methods
+  G4bool IsSpecialCuts() const;
 
-  protected:
-    // data members
-    /// Stack popper physics builder
-    TG4StackPopperPhysics*  fStackPopperPhysics;
+ protected:
+  // data members
+  /// Stack popper physics builder
+  TG4StackPopperPhysics* fStackPopperPhysics;
 
-    /// Transition radiation physics builder
-    TG4TransitionRadiationPhysics*  fTransitionRadiationPhysics;
+  /// Transition radiation physics builder
+  TG4TransitionRadiationPhysics* fTransitionRadiationPhysics;
 
-    /// EM models physics builder
-    TG4EmModelPhysics*  fEmModelPhysics;
+  /// EM models physics builder
+  TG4EmModelPhysics* fEmModelPhysics;
 
-    /// Fast simulation physics builder
-    TG4FastSimulationPhysics* fFastSimulationPhysics;
+  /// Fast simulation physics builder
+  TG4FastSimulationPhysics* fFastSimulationPhysics;
 
-    /// Option for special cuts
-    G4bool  fIsSpecialCuts;
+  /// Option for special cuts
+  G4bool fIsSpecialCuts;
 
-  private:
-    /// Not implemented
-    TG4SpecialPhysicsList(const TG4SpecialPhysicsList& right);
-    /// Not implemented
-    TG4SpecialPhysicsList& operator=(const TG4SpecialPhysicsList& right);
+ private:
+  /// Not implemented
+  TG4SpecialPhysicsList(const TG4SpecialPhysicsList& right);
+  /// Not implemented
+  TG4SpecialPhysicsList& operator=(const TG4SpecialPhysicsList& right);
 
-    // methods
-    void Configure(const G4String& selection);
+  // methods
+  void Configure(const G4String& selection);
 
-    // static data members
-    static G4ThreadLocal TG4SpecialPhysicsList*  fgInstance; ///< this instance
+  // static data members
+  static G4ThreadLocal TG4SpecialPhysicsList* fgInstance; ///< this instance
 };
 
 // inline methods
 
-inline TG4SpecialPhysicsList* TG4SpecialPhysicsList::Instance() {
+inline TG4SpecialPhysicsList* TG4SpecialPhysicsList::Instance()
+{
   /// Return this instance
   return fgInstance;
 }
 
-inline G4bool TG4SpecialPhysicsList::IsSpecialCuts() const {
+inline G4bool TG4SpecialPhysicsList::IsSpecialCuts() const
+{
   /// Return true if specialCuts are selected
   return fIsSpecialCuts;
 }
 
-#endif //TG4_SPECIAL_PHYSICS_LIST_H
-
+#endif // TG4_SPECIAL_PHYSICS_LIST_H

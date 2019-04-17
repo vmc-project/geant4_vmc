@@ -32,4 +32,4 @@ enum TG4ApplicationState
   kNotInApplication     ///< not in VMC application
 };
 
-#endif //TG4_APPLICATION_STATE_H
+#endif // TG4_APPLICATION_STATE_H

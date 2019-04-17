@@ -25,30 +25,27 @@
 
 /// \cond CLASSIMP
 ClassImp(Ex01DetectorConstructionOld)
-/// \endcond
+  /// \endcond
 
-using namespace std;
+  using namespace std;
 
 //_____________________________________________________________________________
 Ex01DetectorConstructionOld::Ex01DetectorConstructionOld()
-  : TObject(),
-    fImedAr(0),
-    fImedAl(0),
-    fImedPb(0)
+  : TObject(), fImedAr(0), fImedAl(0), fImedPb(0)
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
 Ex01DetectorConstructionOld::~Ex01DetectorConstructionOld()
 {
-/// Destructor
+  /// Destructor
 }
 
 //_____________________________________________________________________________
 void Ex01DetectorConstructionOld::ConstructMaterials()
 {
-/// Construct materials using VMC functions
+  /// Construct materials using VMC functions
 
   Double_t a;
   Double_t z;
@@ -73,9 +70,9 @@ void Ex01DetectorConstructionOld::ConstructMaterials()
   Int_t imatAl;
   gMC->Material(imatAl, "Aluminium", a, z, density, radl, absl, ubuf, 0);
   // user defined parameters (only for test)
-  //Float_t ubuf2[3];
-  //ubuf2[0]=5.5; ubuf2[1]=6.5; ubuf2[2] = 7.5;
-  //gMC->Material(imatAl, "Aluminium", a, z, density, radl, absl, ubuf2, 3);
+  // Float_t ubuf2[3];
+  // ubuf2[0]=5.5; ubuf2[1]=6.5; ubuf2[2] = 7.5;
+  // gMC->Material(imatAl, "Aluminium", a, z, density, radl, absl, ubuf2, 3);
 
   a = 207.19;
   z = 82.;
@@ -89,22 +86,25 @@ void Ex01DetectorConstructionOld::ConstructMaterials()
   // Tracking medias
   //
 
-  Int_t ifield = 0;          // No magnetic field
-  Double_t fieldm = 0.;      //
-  Double_t epsil  = .001;    // Tracking precision,
-  Double_t stemax = -0.01;   // Maximum displacement for multiple scat
-  Double_t tmaxfd = -20.;    // Maximum angle due to field deflection
-  Double_t deemax = -.3;     // Maximum fractional energy loss, DLS
-  Double_t stmin  = -.8;
-  gMC->Medium(fImedAr, "ArgonGas",  imatAr, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0);
-  gMC->Medium(fImedAl, "Aluminium", imatAl, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0);
-  gMC->Medium(fImedPb, "Lead", imatLead, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0);
+  Int_t ifield = 0;        // No magnetic field
+  Double_t fieldm = 0.;    //
+  Double_t epsil = .001;   // Tracking precision,
+  Double_t stemax = -0.01; // Maximum displacement for multiple scat
+  Double_t tmaxfd = -20.;  // Maximum angle due to field deflection
+  Double_t deemax = -.3;   // Maximum fractional energy loss, DLS
+  Double_t stmin = -.8;
+  gMC->Medium(fImedAr, "ArgonGas", imatAr, 0, ifield, fieldm, tmaxfd, stemax,
+    deemax, epsil, stmin, ubuf, 0);
+  gMC->Medium(fImedAl, "Aluminium", imatAl, 0, ifield, fieldm, tmaxfd, stemax,
+    deemax, epsil, stmin, ubuf, 0);
+  gMC->Medium(fImedPb, "Lead", imatLead, 0, ifield, fieldm, tmaxfd, stemax,
+    deemax, epsil, stmin, ubuf, 0);
 }
 
 //_____________________________________________________________________________
 void Ex01DetectorConstructionOld::ConstructVolumes()
 {
-/// Construct volumes using VMC functions
+  /// Construct volumes using VMC functions
 
   //------------------------------ experimental hall (world volume)
   //------------------------------ beam line along x axis
@@ -113,7 +113,7 @@ void Ex01DetectorConstructionOld::ConstructVolumes()
   expHall[0] = 300.;
   expHall[1] = 100.;
   expHall[2] = 100.;
-  gMC->Gsvolu("EXPH","BOX", fImedAr, expHall, 3);
+  gMC->Gsvolu("EXPH", "BOX", fImedAr, expHall, 3);
 
   //------------------------------ a tracker tube
 
@@ -121,12 +121,12 @@ void Ex01DetectorConstructionOld::ConstructVolumes()
   trackerTube[0] = 0.;
   trackerTube[1] = 60.;
   trackerTube[2] = 50.;
-  gMC->Gsvolu("TRTU","TUBE", fImedAl, trackerTube, 3);
+  gMC->Gsvolu("TRTU", "TUBE", fImedAl, trackerTube, 3);
 
   Double_t posX = -100.;
-  Double_t posY =  0.;
-  Double_t posZ =  0.;
-  gMC->Gspos("TRTU", 1 ,"EXPH", posX, posY, posZ, 0, "ONLY");
+  Double_t posY = 0.;
+  Double_t posZ = 0.;
+  gMC->Gspos("TRTU", 1, "EXPH", posX, posY, posZ, 0, "ONLY");
 
   //------------------------------ a calorimeter block
 
@@ -134,12 +134,12 @@ void Ex01DetectorConstructionOld::ConstructVolumes()
   calBox[0] = 100.;
   calBox[1] = 50.;
   calBox[2] = 50.;
-  gMC->Gsvolu("CALB","BOX", fImedPb, calBox, 3);
+  gMC->Gsvolu("CALB", "BOX", fImedPb, calBox, 3);
 
   posX = 100.;
   posY = 0.;
   posZ = 0.;
-  gMC->Gspos("CALB", 1 ,"EXPH", posX, posY, posZ, 0, "ONLY");
+  gMC->Gspos("CALB", 1, "EXPH", posX, posY, posZ, 0, "ONLY");
 
   //------------------------------ calorimeter layers
 
@@ -147,12 +147,12 @@ void Ex01DetectorConstructionOld::ConstructVolumes()
   layerBox[0] = 1.;
   layerBox[1] = 40.;
   layerBox[2] = 40.;
-  gMC->Gsvolu("LAYB","BOX", fImedAl, layerBox, 3);
+  gMC->Gsvolu("LAYB", "BOX", fImedAl, layerBox, 3);
 
-  for (Int_t i=0; i<19; i++) {
-    posX = (i-9) * 10.;
+  for (Int_t i = 0; i < 19; i++) {
+    posX = (i - 9) * 10.;
     posY = 0.;
     posZ = 0.;
-    gMC->Gspos("LAYB", i ,"CALB", posX, posY, posZ, 0, "ONLY");
+    gMC->Gspos("LAYB", i, "CALB", posX, posY, posZ, 0, "ONLY");
   }
 }

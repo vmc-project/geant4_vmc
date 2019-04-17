@@ -46,40 +46,40 @@ class G4UIcmdWithADoubleAndUnit;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4CrossSectionMessenger: public G4UImessenger
+class TG4CrossSectionMessenger : public G4UImessenger
 {
-  public:
-    TG4CrossSectionMessenger(TG4CrossSectionManager* crossSectionManager);
-    virtual ~TG4CrossSectionMessenger();
+ public:
+  TG4CrossSectionMessenger(TG4CrossSectionManager* crossSectionManager);
+  virtual ~TG4CrossSectionMessenger();
 
-    // methods
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-  private:
-    /// Not implemented
-    TG4CrossSectionMessenger();
-    /// Not implemented
-    TG4CrossSectionMessenger(const TG4CrossSectionMessenger& right);
-    /// Not implemented
-    TG4CrossSectionMessenger& operator=(const TG4CrossSectionMessenger& right);
+ private:
+  /// Not implemented
+  TG4CrossSectionMessenger();
+  /// Not implemented
+  TG4CrossSectionMessenger(const TG4CrossSectionMessenger& right);
+  /// Not implemented
+  TG4CrossSectionMessenger& operator=(const TG4CrossSectionMessenger& right);
 
-    // data members
-    TG4CrossSectionManager*  fCrossSectionManager; ///< associated class
-    G4UIdirectory*  fDirectory;  ///< command directory
+  // data members
+  TG4CrossSectionManager* fCrossSectionManager; ///< associated class
+  G4UIdirectory* fDirectory;                    ///< command directory
 
-    G4UIcmdWithABool*           fMakeHistogramsCmd; ///< command: makeHistograms
-    G4UIcmdWithAString*         fParticleCmd;   ///< command: setParticle
-    G4UIcmdWithAString*         fElementCmd;    ///< command: setElement
-    G4UIcmdWithAnInteger*       fNofBinsECmd;   ///< command: setNofBinsE
-    G4UIcmdWithAnInteger*       fNofBinsPCmd;   ///< command: setNofBinsP
-    G4UIcmdWithADoubleAndUnit*  fMinKinECmd;    ///< command: setMinKinE
-    G4UIcmdWithADoubleAndUnit*  fMaxKinECmd;    ///< command: setMaxKinE
-    G4UIcmdWithADoubleAndUnit*  fKinECmd;       ///< command: setMinKinE
-    G4UIcmdWithADoubleAndUnit*  fMinMomentumCmd;///< command: setMinMomentum
-    G4UIcmdWithADoubleAndUnit*  fMaxMomentumCmd;///< command: setMaxMomentum
-    G4UIcmdWithADoubleAndUnit*  fMomentumCmd;   ///< command: setMomentum
-    G4UIcmdWithAString*         fLabelCmd;      ///< command: setLabel
-    G4UIcmdWithAString*         fPrintCmd;      ///< command: printCrossSection
+  G4UIcmdWithABool* fMakeHistogramsCmd;       ///< command: makeHistograms
+  G4UIcmdWithAString* fParticleCmd;           ///< command: setParticle
+  G4UIcmdWithAString* fElementCmd;            ///< command: setElement
+  G4UIcmdWithAnInteger* fNofBinsECmd;         ///< command: setNofBinsE
+  G4UIcmdWithAnInteger* fNofBinsPCmd;         ///< command: setNofBinsP
+  G4UIcmdWithADoubleAndUnit* fMinKinECmd;     ///< command: setMinKinE
+  G4UIcmdWithADoubleAndUnit* fMaxKinECmd;     ///< command: setMaxKinE
+  G4UIcmdWithADoubleAndUnit* fKinECmd;        ///< command: setMinKinE
+  G4UIcmdWithADoubleAndUnit* fMinMomentumCmd; ///< command: setMinMomentum
+  G4UIcmdWithADoubleAndUnit* fMaxMomentumCmd; ///< command: setMaxMomentum
+  G4UIcmdWithADoubleAndUnit* fMomentumCmd;    ///< command: setMomentum
+  G4UIcmdWithAString* fLabelCmd;              ///< command: setLabel
+  G4UIcmdWithAString* fPrintCmd;              ///< command: printCrossSection
 };
 
-#endif //TG4_CROSS_SECTION_MESSENGER_H
+#endif // TG4_CROSS_SECTION_MESSENGER_H

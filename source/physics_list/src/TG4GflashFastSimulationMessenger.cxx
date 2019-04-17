@@ -15,21 +15,22 @@
 #include "TG4GflashFastSimulationMessenger.h"
 #include "TG4GflashFastSimulation.h"
 
-#include <G4UIdirectory.hh>
 #include <G4UIcmdWithAString.hh>
+#include <G4UIdirectory.hh>
 
 //______________________________________________________________________________
 TG4GflashFastSimulationMessenger::TG4GflashFastSimulationMessenger(
-                                    TG4GflashFastSimulation* gflashFastSimulation)
+  TG4GflashFastSimulation* gflashFastSimulation)
   : G4UImessenger(),
     fGflashFastSimulation(gflashFastSimulation),
     fSetGflashMaterialCmd(0)
 {
-/// Standard constructor
+  /// Standard constructor
 
-  fSetGflashMaterialCmd
-    = new G4UIcmdWithAString("/mcPhysics/setGflashMaterial", this);
-  fSetGflashMaterialCmd->SetGuidance("Set  material for shower parameterisation");
+  fSetGflashMaterialCmd =
+    new G4UIcmdWithAString("/mcPhysics/setGflashMaterial", this);
+  fSetGflashMaterialCmd->SetGuidance(
+    "Set  material for shower parameterisation");
   fSetGflashMaterialCmd->SetParameterName("ExtDecayerSelection", false);
   fSetGflashMaterialCmd->AvailableForStates(G4State_PreInit);
 }
@@ -37,7 +38,7 @@ TG4GflashFastSimulationMessenger::TG4GflashFastSimulationMessenger(
 //______________________________________________________________________________
 TG4GflashFastSimulationMessenger::~TG4GflashFastSimulationMessenger()
 {
-/// Destructor
+  /// Destructor
 
   delete fSetGflashMaterialCmd;
 }
@@ -47,12 +48,12 @@ TG4GflashFastSimulationMessenger::~TG4GflashFastSimulationMessenger()
 //
 
 //______________________________________________________________________________
-void TG4GflashFastSimulationMessenger::SetNewValue(G4UIcommand* command,
-                                          G4String newValue)
+void TG4GflashFastSimulationMessenger::SetNewValue(
+  G4UIcommand* command, G4String newValue)
 {
-/// Apply command to the associated object.
+  /// Apply command to the associated object.
 
-  if ( command == fSetGflashMaterialCmd ) {
+  if (command == fSetGflashMaterialCmd) {
     fGflashFastSimulation->SetMaterialName(newValue);
   }
 }

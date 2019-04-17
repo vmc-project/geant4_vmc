@@ -33,32 +33,26 @@
 
 class Ex02ChamberParameterisation : public TObject
 {
-  public:
-    Ex02ChamberParameterisation(Int_t    noChambers,
-                                Double_t startZ,
-                                Double_t spacingZ,
-                                Double_t widthChamber,
-                                Double_t lengthInitial,
-                                Double_t lengthFinal );
+ public:
+  Ex02ChamberParameterisation(Int_t noChambers, Double_t startZ,
+    Double_t spacingZ, Double_t widthChamber, Double_t lengthInitial,
+    Double_t lengthFinal);
 
-    virtual ~Ex02ChamberParameterisation();
+  virtual ~Ex02ChamberParameterisation();
 
-    // methods
-    void ComputeTransformation (Int_t copyNo, Double_t* position) const;
-    void ComputeDimensions (Int_t copyNo, Double_t* dimension) const;
+  // methods
+  void ComputeTransformation(Int_t copyNo, Double_t* position) const;
+  void ComputeDimensions(Int_t copyNo, Double_t* dimension) const;
 
+ private:
+  Int_t fNoChambers;         ///< Number of chambers
+  Double_t fStartZ;          ///< The Z of the center of first chamber
+  Double_t fHalfWidth;       ///< The half-width of each tracker chamber
+  Double_t fSpacing;         ///< The distance between the chambers' centers
+  Double_t fHalfLengthFirst; ///< The first half-length
+  Double_t fHalfLengthIncr;  ///< The Increment for the half-length
 
-  private:
-    Int_t     fNoChambers;      ///< Number of chambers
-    Double_t  fStartZ;          ///< The Z of the center of first chamber
-    Double_t  fHalfWidth;       ///< The half-width of each tracker chamber
-    Double_t  fSpacing;         ///< The distance between the chambers' centers
-    Double_t  fHalfLengthFirst; ///< The first half-length
-    Double_t  fHalfLengthIncr;  ///< The Increment for the half-length
-
-  ClassDef(Ex02ChamberParameterisation,1) //Ex02ChamberParameterisation
+  ClassDef(Ex02ChamberParameterisation, 1) // Ex02ChamberParameterisation
 };
 
 #endif
-
-

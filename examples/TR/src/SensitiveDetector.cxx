@@ -17,14 +17,14 @@
 
 #include "SensitiveDetector.h"
 
-#include <TVirtualMC.h>
 #include <Riostream.h>
+#include <TVirtualMC.h>
 
 /// \cond CLASSIMP
 ClassImp(VMC::TR::SensitiveDetector)
-/// \endcond
+  /// \endcond
 
-using namespace std;
+  using namespace std;
 
 namespace VMC
 {
@@ -33,13 +33,10 @@ namespace TR
 
 //_____________________________________________________________________________
 SensitiveDetector::SensitiveDetector(const char* name)
-  : TNamed(name, ""),
-    fEdep(0.),
-    fAbsorberVolId(0),
-    fVerboseLevel(1)
+  : TNamed(name, ""), fEdep(0.), fAbsorberVolId(0), fVerboseLevel(1)
 {
-/// Standard constructor.
-/// \param name      The sensitive detector name
+  /// Standard constructor.
+  /// \param name      The sensitive detector name
 }
 
 //_____________________________________________________________________________
@@ -49,25 +46,22 @@ SensitiveDetector::SensitiveDetector(const SensitiveDetector& origin)
     fAbsorberVolId(origin.fAbsorberVolId),
     fVerboseLevel(origin.fVerboseLevel)
 {
-/// Copy constructor (for clonig on worker thread in MT mode).
-/// Create hits collection.
-/// \param origin    The source object (on master).
+  /// Copy constructor (for clonig on worker thread in MT mode).
+  /// Create hits collection.
+  /// \param origin    The source object (on master).
 }
 
 //_____________________________________________________________________________
 SensitiveDetector::SensitiveDetector()
-  : TNamed(),
-    fEdep(0.),
-    fAbsorberVolId(0),
-    fVerboseLevel(1)
+  : TNamed(), fEdep(0.), fAbsorberVolId(0), fVerboseLevel(1)
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
 SensitiveDetector::~SensitiveDetector()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -77,7 +71,7 @@ SensitiveDetector::~SensitiveDetector()
 //_____________________________________________________________________________
 void SensitiveDetector::Initialize()
 {
-/// Set sensitive volumes.
+  /// Set sensitive volumes.
 
   fAbsorberVolId = gMC->VolId("Absorber");
 }
@@ -85,13 +79,12 @@ void SensitiveDetector::Initialize()
 //_____________________________________________________________________________
 Bool_t SensitiveDetector::ProcessHits()
 {
-/// Account energy deposit.
+  /// Account energy deposit.
 
   Int_t copyNo;
   Int_t id = gMC->CurrentVolID(copyNo);
 
-  if (id != fAbsorberVolId )
-    return false;
+  if (id != fAbsorberVolId) return false;
 
   fEdep += gMC->Edep();
 
@@ -101,9 +94,9 @@ Bool_t SensitiveDetector::ProcessHits()
 //_____________________________________________________________________________
 void SensitiveDetector::EndOfEvent()
 {
-/// Print the enrgy deposit (if verbose) and reset hits afterwards.
+  /// Print the enrgy deposit (if verbose) and reset hits afterwards.
 
-  if (fVerboseLevel>1)  Print();
+  if (fVerboseLevel > 1) Print();
 
   // Reset the accumulated values.
   fEdep = 0.;
@@ -112,11 +105,11 @@ void SensitiveDetector::EndOfEvent()
 //_____________________________________________________________________________
 void SensitiveDetector::Print(Option_t* /*option*/) const
 {
-/// Print the energy deposit.
+  /// Print the energy deposit.
 
-  cout << "\n-------->Edep: in this event [MeV]: " << fEdep*1e+03
-       << endl << endl;
+  cout << "\n-------->Edep: in this event [MeV]: " << fEdep * 1e+03 << endl
+       << endl;
 }
 
-}
-}
+} // namespace TR
+} // namespace VMC

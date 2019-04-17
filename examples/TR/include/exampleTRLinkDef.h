@@ -16,16 +16,11 @@
 #pragma link off all classes;
 #pragma link off all functions;
 
-#pragma link C++ class  Ex03MCStack+;
-#pragma link C++ class  VMC::TR::SensitiveDetector+;
-#pragma link C++ class  VMC::TR::DetectorConstruction+;
-#pragma link C++ class  VMC::TR::MCApplication+;
-#pragma link C++ class  VMC::TR::PrimaryGenerator+;
-#pragma link C++ class  std::stack<TParticle*,deque<TParticle*> >+;
+#pragma link C++ class Ex03MCStack + ;
+#pragma link C++ class VMC::TR::SensitiveDetector + ;
+#pragma link C++ class VMC::TR::DetectorConstruction + ;
+#pragma link C++ class VMC::TR::MCApplication + ;
+#pragma link C++ class VMC::TR::PrimaryGenerator + ;
+#pragma link C++ class std::stack < TParticle*, deque < TParticle*>> + ;
 
 #endif
-
-
-
-
-

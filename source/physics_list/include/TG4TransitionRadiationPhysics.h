@@ -18,7 +18,6 @@
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-
 #include "TG4VPhysicsConstructor.h"
 
 #include <globals.hh>
@@ -40,34 +39,26 @@ class G4VXTRenergyLoss;
 
 class TG4TransitionRadiationPhysics : public TG4VPhysicsConstructor
 {
-  public:
-    TG4TransitionRadiationPhysics(const G4String& name = "TransitionRadiation");
-    TG4TransitionRadiationPhysics(G4int theVerboseLevel,
-                                  const G4String& name = "TransitionRadiation");
-    virtual ~TG4TransitionRadiationPhysics();
+ public:
+  TG4TransitionRadiationPhysics(const G4String& name = "TransitionRadiation");
+  TG4TransitionRadiationPhysics(
+    G4int theVerboseLevel, const G4String& name = "TransitionRadiation");
+  virtual ~TG4TransitionRadiationPhysics();
 
-    // set methods
-    void SetXtrModel(const G4String& name);
+  // set methods
+  void SetXtrModel(const G4String& name);
 
-  protected:
-    // methods
-    virtual void ConstructParticle();
-    virtual void ConstructProcess();
+ protected:
+  // methods
+  virtual void ConstructParticle();
+  virtual void ConstructProcess();
 
-  private:
-    // methods
-    G4bool CreateXTRProcess(TG4RadiatorDescription*);
+ private:
+  // methods
+  G4bool CreateXTRProcess(TG4RadiatorDescription*);
 
-    // static data members
-    static G4ThreadLocal std::vector<G4VXTRenergyLoss*>* fXtrProcesses;
+  // static data members
+  static G4ThreadLocal std::vector<G4VXTRenergyLoss*>* fXtrProcesses;
 };
 
-#endif  //TG4_TRANSITION_RADIATION_PHYSICS_H
-
-
-
-
-
-
-
-
+#endif // TG4_TRANSITION_RADIATION_PHYSICS_H

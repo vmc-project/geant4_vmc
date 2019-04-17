@@ -25,7 +25,7 @@ namespace VMC
 namespace TR
 {
 
-//struct RadiatorDescription;
+// struct RadiatorDescription;
 
 /// \ingroup TR
 /// \brief The detector construction (via TGeo )
@@ -35,17 +35,17 @@ namespace TR
 
 class DetectorConstruction : public TObject
 {
-  public:
-    DetectorConstruction();
-    virtual ~DetectorConstruction();
+ public:
+  DetectorConstruction();
+  virtual ~DetectorConstruction();
 
-    // methods
-    void ConstructGeometry();
+  // methods
+  void ConstructGeometry();
 
-  ClassDef(DetectorConstruction,1) //DetectorConstruction
+  ClassDef(DetectorConstruction, 1) // DetectorConstruction
 };
 
-}
-}
+} // namespace TR
+} // namespace VMC
 
-#endif //DETECTOR_CONSTRUCTION_H
+#endif // DETECTOR_CONSTRUCTION_H

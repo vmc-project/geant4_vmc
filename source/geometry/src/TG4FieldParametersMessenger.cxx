@@ -12,20 +12,19 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-
 #include "TG4FieldParametersMessenger.h"
 #include "TG4FieldParameters.h"
 
-#include <G4UIdirectory.hh>
-#include <G4UIcmdWithoutParameter.hh>
-#include <G4UIcmdWithAString.hh>
+#include <G4UIcmdWithABool.hh>
 #include <G4UIcmdWithADouble.hh>
 #include <G4UIcmdWithADoubleAndUnit.hh>
-#include <G4UIcmdWithABool.hh>
+#include <G4UIcmdWithAString.hh>
+#include <G4UIcmdWithoutParameter.hh>
+#include <G4UIdirectory.hh>
 
 //_____________________________________________________________________________
 TG4FieldParametersMessenger::TG4FieldParametersMessenger(
-                                   TG4FieldParameters* fieldParameters)
+  TG4FieldParameters* fieldParameters)
   : G4UImessenger(),
     fFieldParameters(fieldParameters),
     fDirectory(0),
@@ -42,10 +41,10 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
     fSetIsMonopoleCmd(0),
     fPrintParametersCmd(0)
 {
-/// Standard constructor
+  /// Standard constructor
 
   G4String directoryName = "/mcMagField/";
-  if ( fieldParameters->GetVolumeName() != "" )  {
+  if (fieldParameters->GetVolumeName() != "") {
     directoryName.append(fieldParameters->GetVolumeName());
     directoryName.append("/");
   }
@@ -59,45 +58,48 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
   fFieldTypeCmd->SetGuidance(guidance);
   fFieldTypeCmd->SetParameterName("FieldType", false);
   G4String candidates;
-  for ( G4int i=kMagnetic; i<=kGravity; i++ ) {
+  for (G4int i = kMagnetic; i <= kGravity; i++) {
     FieldType ft = (FieldType)i;
     candidates += TG4FieldParameters::FieldTypeName(ft);
     candidates += " ";
   }
   fFieldTypeCmd->SetCandidates(candidates);
-  fFieldTypeCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  fFieldTypeCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
   commandName = directoryName;
   commandName.append("equationType");
   fEquationTypeCmd = new G4UIcmdWithAString(commandName, this);
-  guidance
-    = "Select type of the equation of motion of a particle in a field";
+  guidance = "Select type of the equation of motion of a particle in a field";
   fEquationTypeCmd->SetGuidance(guidance);
   fEquationTypeCmd->SetParameterName("EquationType", false);
   candidates = "";
-  for ( G4int i=kMagUsualEqRhs; i<=kEqEMFieldWithEDM; i++ ) {
+  for (G4int i = kMagUsualEqRhs; i <= kEqEMFieldWithEDM; i++) {
     EquationType et = (EquationType)i;
     candidates += TG4FieldParameters::EquationTypeName(et);
     candidates += " ";
   }
   fEquationTypeCmd->SetCandidates(candidates);
-  fEquationTypeCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  fEquationTypeCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
   commandName = directoryName;
   commandName.append("stepperType");
   fStepperTypeCmd = new G4UIcmdWithAString(commandName, this);
-  guidance
-    = "Select type of the the integrator of particle's equation of motion in a field";
+  guidance =
+    "Select type of the the integrator of particle's equation of motion in a "
+    "field";
   fStepperTypeCmd->SetGuidance(guidance);
   fStepperTypeCmd->SetParameterName("StepperType", false);
   candidates = "";
-  for ( G4int i=kCashKarpRKF45; i<=kRKG3Stepper; i++ ) {
+  for (G4int i = kCashKarpRKF45; i <= kRKG3Stepper; i++) {
     StepperType st = (StepperType)i;
     candidates += TG4FieldParameters::StepperTypeName(st);
     candidates += " ";
   }
   fStepperTypeCmd->SetCandidates(candidates);
-  fStepperTypeCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  fStepperTypeCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
   commandName = directoryName;
   commandName.append("setStepMinimum");
@@ -106,7 +108,8 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
   fSetStepMinimumCmd->SetParameterName("StepMinimum", false);
   fSetStepMinimumCmd->SetDefaultUnit("mm");
   fSetStepMinimumCmd->SetUnitCategory("Length");
-  fSetStepMinimumCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  fSetStepMinimumCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
   commandName = directoryName;
   commandName.append("setDeltaChord");
@@ -115,47 +118,56 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
   fSetDeltaChordCmd->SetParameterName("DeltaChord", false);
   fSetDeltaChordCmd->SetDefaultUnit("mm");
   fSetDeltaChordCmd->SetUnitCategory("Length");
-  fSetDeltaChordCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  fSetDeltaChordCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
   commandName = directoryName;
   commandName.append("setDeltaOneStep");
   fSetDeltaOneStepCmd = new G4UIcmdWithADoubleAndUnit(commandName, this);
-  fSetDeltaOneStepCmd->SetGuidance("Set delta one step in global field manager");
+  fSetDeltaOneStepCmd->SetGuidance(
+    "Set delta one step in global field manager");
   fSetDeltaOneStepCmd->SetParameterName("DeltaOneStep", false);
   fSetDeltaOneStepCmd->SetDefaultUnit("mm");
   fSetDeltaOneStepCmd->SetUnitCategory("Length");
-  fSetDeltaOneStepCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  fSetDeltaOneStepCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
   commandName = directoryName;
   commandName.append("setDeltaIntersection");
   fSetDeltaIntersectionCmd = new G4UIcmdWithADoubleAndUnit(commandName, this);
-  fSetDeltaIntersectionCmd->SetGuidance("Set delta intersection in global field manager");
+  fSetDeltaIntersectionCmd->SetGuidance(
+    "Set delta intersection in global field manager");
   fSetDeltaIntersectionCmd->SetParameterName("DeltaIntersection", false);
   fSetDeltaIntersectionCmd->SetDefaultUnit("mm");
   fSetDeltaIntersectionCmd->SetUnitCategory("Length");
-  fSetDeltaIntersectionCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  fSetDeltaIntersectionCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
   commandName = directoryName;
   commandName.append("setMinimumEpsilonStep");
   fSetMinimumEpsilonStepCmd = new G4UIcmdWithADouble(commandName, this);
-  fSetMinimumEpsilonStepCmd->SetGuidance("Set minimum epsilon step in global field manager");
+  fSetMinimumEpsilonStepCmd->SetGuidance(
+    "Set minimum epsilon step in global field manager");
   fSetMinimumEpsilonStepCmd->SetParameterName("MinimumEpsilonStep", false);
-  fSetMinimumEpsilonStepCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  fSetMinimumEpsilonStepCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
   commandName = directoryName;
   commandName.append("setMaximumEpsilonStep");
   fSetMaximumEpsilonStepCmd = new G4UIcmdWithADouble(commandName, this);
-  fSetMaximumEpsilonStepCmd->SetGuidance("Set maximum epsilon step in global field manager");
+  fSetMaximumEpsilonStepCmd->SetGuidance(
+    "Set maximum epsilon step in global field manager");
   fSetMaximumEpsilonStepCmd->SetParameterName("MaximumEpsilonStep", false);
-  fSetMaximumEpsilonStepCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  fSetMaximumEpsilonStepCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
   commandName = directoryName;
   commandName.append("setConstDistance");
   fSetConstDistanceCmd = new G4UIcmdWithADoubleAndUnit(commandName, this);
-  fSetConstDistanceCmd
-    ->SetGuidance("Set the distance within which the field is considered constant.");
-  fSetConstDistanceCmd
-    ->SetGuidance("Non-zero value will trigger creating a cached magnetic field.");
+  fSetConstDistanceCmd->SetGuidance(
+    "Set the distance within which the field is considered constant.");
+  fSetConstDistanceCmd->SetGuidance(
+    "Non-zero value will trigger creating a cached magnetic field.");
   fSetConstDistanceCmd->SetParameterName("ConstDistance", false);
   fSetConstDistanceCmd->SetDefaultUnit("mm");
   fSetConstDistanceCmd->SetUnitCategory("Length");
@@ -165,8 +177,8 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
   commandName = directoryName;
   commandName.append("setIsMonopole");
   fSetIsMonopoleCmd = new G4UIcmdWithABool(commandName, this);
-  fSetIsMonopoleCmd
-    ->SetGuidance("Activate creating a special monopole field integration.");
+  fSetIsMonopoleCmd->SetGuidance(
+    "Activate creating a special monopole field integration.");
   fSetIsMonopoleCmd->SetParameterName("IsMonopole", false);
   fSetIsMonopoleCmd->AvailableForStates(G4State_PreInit);
 
@@ -174,13 +186,14 @@ TG4FieldParametersMessenger::TG4FieldParametersMessenger(
   commandName.append("printParameters");
   fPrintParametersCmd = new G4UIcmdWithoutParameter(commandName, this);
   fPrintParametersCmd->SetGuidance("Prints all accuracy parameters.");
-  fPrintParametersCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  fPrintParametersCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 }
 
 //_____________________________________________________________________________
 TG4FieldParametersMessenger::~TG4FieldParametersMessenger()
 {
-/// Destructor
+  /// Destructor
 
   delete fDirectory;
   delete fFieldTypeCmd;
@@ -201,69 +214,69 @@ TG4FieldParametersMessenger::~TG4FieldParametersMessenger()
 //
 
 //_____________________________________________________________________________
-void TG4FieldParametersMessenger::SetNewValue(G4UIcommand* command,
-                                               G4String newValues)
+void TG4FieldParametersMessenger::SetNewValue(
+  G4UIcommand* command, G4String newValues)
 {
-/// Apply command to the associated object.
+  /// Apply command to the associated object.
 
-  if( command == fFieldTypeCmd ) {
-    for ( G4int i=kMagnetic; i<=kGravity; i++ ) {
+  if (command == fFieldTypeCmd) {
+    for (G4int i = kMagnetic; i <= kGravity; i++) {
       FieldType ft = (FieldType)i;
-      if ( newValues == TG4FieldParameters::FieldTypeName(ft) ) {
+      if (newValues == TG4FieldParameters::FieldTypeName(ft)) {
         fFieldParameters->SetFieldType(ft);
         break;
       }
     }
   }
-  else if( command == fEquationTypeCmd ) {
-    for ( G4int i=kMagUsualEqRhs; i<=kEqEMFieldWithEDM; i++ ) {
+  else if (command == fEquationTypeCmd) {
+    for (G4int i = kMagUsualEqRhs; i <= kEqEMFieldWithEDM; i++) {
       EquationType et = (EquationType)i;
-      if ( newValues == TG4FieldParameters::EquationTypeName(et) ) {
+      if (newValues == TG4FieldParameters::EquationTypeName(et)) {
         fFieldParameters->SetEquationType(et);
         break;
       }
     }
   }
-  else if( command == fStepperTypeCmd ) {
-    for ( G4int i=kCashKarpRKF45; i<=kRKG3Stepper; i++ ) {
+  else if (command == fStepperTypeCmd) {
+    for (G4int i = kCashKarpRKF45; i <= kRKG3Stepper; i++) {
       StepperType st = (StepperType)i;
-      if ( newValues == TG4FieldParameters::StepperTypeName(st) ) {
+      if (newValues == TG4FieldParameters::StepperTypeName(st)) {
         fFieldParameters->SetStepperType(st);
         break;
       }
     }
   }
   else if (command == fSetStepMinimumCmd) {
-    fFieldParameters
-      ->SetStepMinimum(fSetStepMinimumCmd->GetNewDoubleValue(newValues));
+    fFieldParameters->SetStepMinimum(
+      fSetStepMinimumCmd->GetNewDoubleValue(newValues));
   }
   else if (command == fSetDeltaChordCmd) {
-    fFieldParameters
-      ->SetDeltaChord(fSetDeltaChordCmd->GetNewDoubleValue(newValues));
+    fFieldParameters->SetDeltaChord(
+      fSetDeltaChordCmd->GetNewDoubleValue(newValues));
   }
   else if (command == fSetDeltaOneStepCmd) {
-    fFieldParameters
-      ->SetDeltaOneStep(fSetDeltaOneStepCmd->GetNewDoubleValue(newValues));
+    fFieldParameters->SetDeltaOneStep(
+      fSetDeltaOneStepCmd->GetNewDoubleValue(newValues));
   }
   else if (command == fSetDeltaIntersectionCmd) {
-    fFieldParameters
-      ->SetDeltaIntersection(fSetDeltaIntersectionCmd->GetNewDoubleValue(newValues));
+    fFieldParameters->SetDeltaIntersection(
+      fSetDeltaIntersectionCmd->GetNewDoubleValue(newValues));
   }
   else if (command == fSetMinimumEpsilonStepCmd) {
-    fFieldParameters
-      ->SetMinimumEpsilonStep(fSetMinimumEpsilonStepCmd->GetNewDoubleValue(newValues));
+    fFieldParameters->SetMinimumEpsilonStep(
+      fSetMinimumEpsilonStepCmd->GetNewDoubleValue(newValues));
   }
   else if (command == fSetMaximumEpsilonStepCmd) {
-    fFieldParameters
-      ->SetMaximumEpsilonStep(fSetMaximumEpsilonStepCmd->GetNewDoubleValue(newValues));
+    fFieldParameters->SetMaximumEpsilonStep(
+      fSetMaximumEpsilonStepCmd->GetNewDoubleValue(newValues));
   }
   else if (command == fSetConstDistanceCmd) {
-    fFieldParameters
-      ->SetConstDistance(fSetConstDistanceCmd->GetNewDoubleValue(newValues));
+    fFieldParameters->SetConstDistance(
+      fSetConstDistanceCmd->GetNewDoubleValue(newValues));
   }
   else if (command == fSetIsMonopoleCmd) {
-    fFieldParameters
-      ->SetIsMonopole(fSetIsMonopoleCmd->GetNewBoolValue(newValues));
+    fFieldParameters->SetIsMonopole(
+      fSetIsMonopoleCmd->GetNewBoolValue(newValues));
   }
   else if (command == fPrintParametersCmd) {
     fFieldParameters->PrintParameters();

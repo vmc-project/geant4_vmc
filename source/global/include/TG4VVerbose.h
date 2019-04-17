@@ -32,39 +32,41 @@ class G4UImessenger;
 
 class TG4VVerbose
 {
-  public:
-    TG4VVerbose();
-    TG4VVerbose(G4int verboseLevel);
-    virtual ~TG4VVerbose();
+ public:
+  TG4VVerbose();
+  TG4VVerbose(G4int verboseLevel);
+  virtual ~TG4VVerbose();
 
-    // set methods
-    virtual void  VerboseLevel(G4int level);
+  // set methods
+  virtual void VerboseLevel(G4int level);
 
-    // get methods
-    virtual G4int VerboseLevel() const;
+  // get methods
+  virtual G4int VerboseLevel() const;
 
-  private:
-    // methods
-    /// Create messenger
-    virtual G4UImessenger* CreateMessenger() = 0;
+ private:
+  // methods
+  /// Create messenger
+  virtual G4UImessenger* CreateMessenger() = 0;
 
-    // static data members
-    static const G4int  fgkDefaultVerboseLevel; ///< default verbose level
+  // static data members
+  static const G4int fgkDefaultVerboseLevel; ///< default verbose level
 
-    // data members
-    G4int  fVerboseLevel; ///< verbose level
+  // data members
+  G4int fVerboseLevel; ///< verbose level
 };
 
 // inline methods
 
-inline void TG4VVerbose::VerboseLevel(G4int level) {
+inline void TG4VVerbose::VerboseLevel(G4int level)
+{
   /// Set level of verbosity
-  fVerboseLevel =  level;
+  fVerboseLevel = level;
 }
 
-inline G4int TG4VVerbose::VerboseLevel() const {
+inline G4int TG4VVerbose::VerboseLevel() const
+{
   /// Return level of verbosity
   return fVerboseLevel;
 }
 
-#endif //TG4_V_VERBOSE_H
+#endif // TG4_V_VERBOSE_H

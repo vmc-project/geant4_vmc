@@ -13,10 +13,10 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4UserParticlesPhysics.h"
-#include "TG4UserParticle.h"
+#include "TG4Globals.h"
 #include "TG4ParticlesManager.h"
 #include "TG4StateManager.h"
-#include "TG4Globals.h"
+#include "TG4UserParticle.h"
 #include "TGeant4.h"
 
 #include <G4ProcessManager.hh>
@@ -25,45 +25,44 @@
 #include "G4GammaConversion.hh"
 #include "G4PhotoElectricEffect.hh"
 
-#include "G4eMultipleScattering.hh"
-#include "G4eIonisation.hh"
 #include "G4eBremsstrahlung.hh"
+#include "G4eIonisation.hh"
+#include "G4eMultipleScattering.hh"
 #include "G4eplusAnnihilation.hh"
 
-#include "G4MuIonisation.hh"
 #include "G4MuBremsstrahlung.hh"
+#include "G4MuIonisation.hh"
 #include "G4MuPairProduction.hh"
 
-#include "G4hMultipleScattering.hh"
 #include "G4hIonisation.hh"
+#include "G4hMultipleScattering.hh"
 #include <G4ionIonisation.hh>
 
 #include <G4OpAbsorption.hh>
-#include <G4OpRayleigh.hh>
 #include <G4OpBoundaryProcess.hh>
+#include <G4OpRayleigh.hh>
 
 #include <TVirtualMCApplication.h>
-
 
 //_____________________________________________________________________________
 TG4UserParticlesPhysics::TG4UserParticlesPhysics(const G4String& name)
   : TG4VPhysicsConstructor(name)
 {
-/// Standard constructor
+  /// Standard constructor
 }
 
 //_____________________________________________________________________________
-TG4UserParticlesPhysics::TG4UserParticlesPhysics(G4int theVerboseLevel,
-                                     const G4String& name)
+TG4UserParticlesPhysics::TG4UserParticlesPhysics(
+  G4int theVerboseLevel, const G4String& name)
   : TG4VPhysicsConstructor(name, theVerboseLevel)
 {
-/// Standard constructor
+  /// Standard constructor
 }
 
 //_____________________________________________________________________________
 TG4UserParticlesPhysics::~TG4UserParticlesPhysics()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -73,7 +72,7 @@ TG4UserParticlesPhysics::~TG4UserParticlesPhysics()
 //_____________________________________________________________________________
 void TG4UserParticlesPhysics::ConstructParticle()
 {
-/// Add user defined particles
+  /// Add user defined particles
 
   TG4StateManager::Instance()->SetNewState(kAddParticles);
   TVirtualMCApplication::Instance()->AddParticles();
@@ -83,18 +82,17 @@ void TG4UserParticlesPhysics::ConstructParticle()
 //_____________________________________________________________________________
 void TG4UserParticlesPhysics::ConstructProcess()
 {
-/// Add physics processes (ionization, multiple scattering) to
-/// user defined particles according to the particle type
+  /// Add physics processes (ionization, multiple scattering) to
+  /// user defined particles according to the particle type
 
   TG4ParticlesManager* particlesManager = TG4ParticlesManager::Instance();
 
-
-  for ( G4int i=0; i<particlesManager->GetNofUserParticles(); ++i ) {
+  for (G4int i = 0; i < particlesManager->GetNofUserParticles(); ++i) {
 
     TG4UserParticle* userParticle = particlesManager->GetUserParticle(i);
     G4ProcessManager* processManager = userParticle->GetProcessManager();
 
-    switch ( userParticle->GetMCType() ) {
+    switch (userParticle->GetMCType()) {
 
       case kPTGamma:
         // From G4EmStandardPhysics
@@ -106,31 +104,29 @@ void TG4UserParticlesPhysics::ConstructProcess()
       case kPTElectron:
         // From G4EmStandardPhysics
         processManager->AddProcess(new G4eMultipleScattering, -1, 1, 1);
-        processManager->AddProcess(new G4eIonisation,        -1, 2, 2);
-        processManager->AddProcess(new G4eBremsstrahlung(),  -1, 3, 3);
+        processManager->AddProcess(new G4eIonisation, -1, 2, 2);
+        processManager->AddProcess(new G4eBremsstrahlung(), -1, 3, 3);
         break;
 
       case kPTNeutron:
-        TG4Globals::Warning(
-          "TG4UserParticlesPhysics", "ConstructProcess",
+        TG4Globals::Warning("TG4UserParticlesPhysics", "ConstructProcess",
           "No hadronic processes are built for user defined particles.");
-         break;
+        break;
 
       case kPTHadron:
         // From G4EmStandardPhysics
         processManager->AddProcess(new G4hMultipleScattering, -1, 1, 1);
-        processManager->AddProcess(new G4hIonisation,         -1, 2, 2);
-        TG4Globals::Warning(
-          "TG4UserParticlesPhysics", "ConstructProcess",
+        processManager->AddProcess(new G4hIonisation, -1, 2, 2);
+        TG4Globals::Warning("TG4UserParticlesPhysics", "ConstructProcess",
           "No hadronic processes are built for user defined particles.");
         break;
 
       case kPTMuon:
         // From G4EmStandardPhysics
-        processManager->AddProcess(new G4hMultipleScattering,-1, 1, 1);
-        processManager->AddProcess(new G4MuIonisation,       -1, 2, 2);
-        processManager->AddProcess(new G4MuBremsstrahlung,   -1, 3, 3);
-        processManager->AddProcess(new G4MuPairProduction,   -1, 4, 4);
+        processManager->AddProcess(new G4hMultipleScattering, -1, 1, 1);
+        processManager->AddProcess(new G4MuIonisation, -1, 2, 2);
+        processManager->AddProcess(new G4MuBremsstrahlung, -1, 3, 3);
+        processManager->AddProcess(new G4MuPairProduction, -1, 4, 4);
         break;
 
       case kPTGeantino:
@@ -149,9 +145,8 @@ void TG4UserParticlesPhysics::ConstructProcess()
       case kPTIon:
         // From G4EmStandardPhysics
         processManager->AddProcess(new G4hMultipleScattering, -1, 1, 1);
-        processManager->AddProcess(new G4ionIonisation,       -1, 2, 2);
-        TG4Globals::Warning(
-          "TG4UserParticlesPhysics", "ConstructProcess",
+        processManager->AddProcess(new G4ionIonisation, -1, 2, 2);
+        TG4Globals::Warning("TG4UserParticlesPhysics", "ConstructProcess",
           "No hadronic processes are built for user defined particles.");
         break;
 

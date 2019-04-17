@@ -15,10 +15,10 @@
 #include "TG4RegionsMessenger.h"
 #include "TG4RegionsManager.h"
 
-#include <G4UIdirectory.hh>
+#include <G4UIcmdWithABool.hh>
 #include <G4UIcmdWithAString.hh>
 #include <G4UIcmdWithAnInteger.hh>
-#include <G4UIcmdWithABool.hh>
+#include <G4UIdirectory.hh>
 
 //_____________________________________________________________________________
 TG4RegionsMessenger::TG4RegionsMessenger(TG4RegionsManager* runManager)
@@ -27,7 +27,7 @@ TG4RegionsMessenger::TG4RegionsMessenger(TG4RegionsManager* runManager)
     fDirectory(0),
     fDumpRegionCmd(0)
 {
-/// Standard constructor
+  /// Standard constructor
 
   fDirectory = new G4UIdirectory("/mcRegions/");
   fDirectory->SetGuidance("TGeant4 regions commands.");
@@ -38,8 +38,10 @@ TG4RegionsMessenger::TG4RegionsMessenger(TG4RegionsManager* runManager)
   fDumpRegionCmd->SetDefaultValue(" ");
   fDumpRegionCmd->AvailableForStates(G4State_Idle, G4State_EventProc);
 
-  fSetRangePrecisionCmd = new G4UIcmdWithAnInteger("/mcRegions/setRangePrecision", this);
-  fSetRangePrecisionCmd->SetGuidance("Set the precision for calculating ranges");
+  fSetRangePrecisionCmd =
+    new G4UIcmdWithAnInteger("/mcRegions/setRangePrecision", this);
+  fSetRangePrecisionCmd->SetGuidance(
+    "Set the precision for calculating ranges");
   fSetRangePrecisionCmd->SetParameterName("RangePrecision", false);
   fSetRangePrecisionCmd->AvailableForStates(G4State_PreInit, G4State_Init);
 
@@ -48,23 +50,27 @@ TG4RegionsMessenger::TG4RegionsMessenger(TG4RegionsManager* runManager)
   fApplyForGammaCmd->SetParameterName("ApplyForGamma", false);
   fApplyForGammaCmd->AvailableForStates(G4State_PreInit, G4State_Init);
 
-  fApplyForElectronCmd = new G4UIcmdWithABool("/mcRegions/applyForElectron", this);
+  fApplyForElectronCmd =
+    new G4UIcmdWithABool("/mcRegions/applyForElectron", this);
   fApplyForElectronCmd->SetGuidance("Switch on|off applying range cuts for e-");
   fApplyForElectronCmd->SetParameterName("ApplyForElectron", false);
   fApplyForElectronCmd->AvailableForStates(G4State_PreInit, G4State_Init);
 
-  fApplyForPositronCmd = new G4UIcmdWithABool("/mcRegions/applyForPositron", this);
+  fApplyForPositronCmd =
+    new G4UIcmdWithABool("/mcRegions/applyForPositron", this);
   fApplyForPositronCmd->SetGuidance("Switch on|off applying range cuts for e+");
   fApplyForPositronCmd->SetParameterName("ApplyForPositron", false);
   fApplyForPositronCmd->AvailableForStates(G4State_PreInit, G4State_Init);
 
   fApplyForProtonCmd = new G4UIcmdWithABool("/mcRegions/applyForProton", this);
-  fApplyForProtonCmd->SetGuidance("Switch on|off applying range cuts for protons");
+  fApplyForProtonCmd->SetGuidance(
+    "Switch on|off applying range cuts for protons");
   fApplyForProtonCmd->SetParameterName("ApplyForProton", false);
   fApplyForProtonCmd->AvailableForStates(G4State_PreInit, G4State_Init);
 
   fSetCheckCmd = new G4UIcmdWithABool("/mcRegions/check", this);
-  fSetCheckCmd->SetGuidance("Switch on|off check if region properties are consistent");
+  fSetCheckCmd->SetGuidance(
+    "Switch on|off check if region properties are consistent");
   fSetCheckCmd->SetGuidance("with energy cuts defined in limits");
   fSetCheckCmd->SetParameterName("IsCheck", false);
   fSetCheckCmd->AvailableForStates(G4State_PreInit, G4State_Init);
@@ -78,7 +84,7 @@ TG4RegionsMessenger::TG4RegionsMessenger(TG4RegionsManager* runManager)
 //_____________________________________________________________________________
 TG4RegionsMessenger::~TG4RegionsMessenger()
 {
-/// Destructor
+  /// Destructor
 
   delete fDirectory;
   delete fDumpRegionCmd;
@@ -98,25 +104,30 @@ TG4RegionsMessenger::~TG4RegionsMessenger()
 //_____________________________________________________________________________
 void TG4RegionsMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
 {
-/// Apply command to the associated object.
+  /// Apply command to the associated object.
 
   if (command == fDumpRegionCmd) {
     fRegionsManager->DumpRegion(newValue);
   }
   else if (command == fSetRangePrecisionCmd) {
-    fRegionsManager->SetRangePrecision(fSetRangePrecisionCmd->GetNewIntValue(newValue));
+    fRegionsManager->SetRangePrecision(
+      fSetRangePrecisionCmd->GetNewIntValue(newValue));
   }
   else if (command == fApplyForGammaCmd) {
-    fRegionsManager->SetApplyForGamma(fApplyForGammaCmd->GetNewBoolValue(newValue));
+    fRegionsManager->SetApplyForGamma(
+      fApplyForGammaCmd->GetNewBoolValue(newValue));
   }
   else if (command == fApplyForElectronCmd) {
-    fRegionsManager->SetApplyForGamma(fApplyForElectronCmd->GetNewBoolValue(newValue));
+    fRegionsManager->SetApplyForGamma(
+      fApplyForElectronCmd->GetNewBoolValue(newValue));
   }
   else if (command == fApplyForPositronCmd) {
-    fRegionsManager->SetApplyForPositron(fApplyForPositronCmd->GetNewBoolValue(newValue));
+    fRegionsManager->SetApplyForPositron(
+      fApplyForPositronCmd->GetNewBoolValue(newValue));
   }
   else if (command == fApplyForProtonCmd) {
-    fRegionsManager->SetApplyForProton(fApplyForProtonCmd->GetNewBoolValue(newValue));
+    fRegionsManager->SetApplyForProton(
+      fApplyForProtonCmd->GetNewBoolValue(newValue));
   }
   else if (command == fSetCheckCmd) {
     fRegionsManager->SetCheck(fSetCheckCmd->GetNewBoolValue(newValue));

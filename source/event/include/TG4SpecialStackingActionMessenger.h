@@ -33,29 +33,29 @@ class G4UIcmdWithABool;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4SpecialStackingActionMessenger: public G4UImessenger
+class TG4SpecialStackingActionMessenger : public G4UImessenger
 {
-  public:
-    TG4SpecialStackingActionMessenger(TG4SpecialStackingAction* stackingAction);
-    virtual ~TG4SpecialStackingActionMessenger();
+ public:
+  TG4SpecialStackingActionMessenger(TG4SpecialStackingAction* stackingAction);
+  virtual ~TG4SpecialStackingActionMessenger();
 
-    // methods
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-  private:
-    /// Not implemented
-    TG4SpecialStackingActionMessenger();
-    /// Not implemented
-    TG4SpecialStackingActionMessenger(
-                               const TG4SpecialStackingActionMessenger& right);
-    /// Not implemented
-    TG4SpecialStackingActionMessenger& operator=(
-                               const TG4SpecialStackingActionMessenger& right);
+ private:
+  /// Not implemented
+  TG4SpecialStackingActionMessenger();
+  /// Not implemented
+  TG4SpecialStackingActionMessenger(
+    const TG4SpecialStackingActionMessenger& right);
+  /// Not implemented
+  TG4SpecialStackingActionMessenger& operator=(
+    const TG4SpecialStackingActionMessenger& right);
 
-    // data members
-    TG4SpecialStackingAction*  fStackingAction;  ///< associated class
-    G4UIcmdWithABool*          fSkipNeutrinoCmd; ///< command: skipNeutrino
-    G4UIcmdWithABool*          fWaitPrimaryCmd;  ///< command: waitPrimary
+  // data members
+  TG4SpecialStackingAction* fStackingAction; ///< associated class
+  G4UIcmdWithABool* fSkipNeutrinoCmd;        ///< command: skipNeutrino
+  G4UIcmdWithABool* fWaitPrimaryCmd;         ///< command: waitPrimary
 };
 
-#endif //TG4_SPECIAL_STACKING_ACTION_MESSENGER_H
+#endif // TG4_SPECIAL_STACKING_ACTION_MESSENGER_H

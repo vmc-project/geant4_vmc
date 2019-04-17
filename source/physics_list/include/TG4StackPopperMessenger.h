@@ -31,31 +31,31 @@ class G4UIcmdWithAString;
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4StackPopperMessenger: public G4UImessenger
+class TG4StackPopperMessenger : public G4UImessenger
 {
-  public:
-    TG4StackPopperMessenger(TG4StackPopperPhysics* stackPopperPhysics);
-    virtual ~TG4StackPopperMessenger();
+ public:
+  TG4StackPopperMessenger(TG4StackPopperPhysics* stackPopperPhysics);
+  virtual ~TG4StackPopperMessenger();
 
-    // methods
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-  private:
-    /// Not implemented
-    TG4StackPopperMessenger();
-    /// Not implemented
-    TG4StackPopperMessenger(const TG4StackPopperMessenger& right);
-    /// Not implemented
-    TG4StackPopperMessenger& operator=(const TG4StackPopperMessenger& right);
+ private:
+  /// Not implemented
+  TG4StackPopperMessenger();
+  /// Not implemented
+  TG4StackPopperMessenger(const TG4StackPopperMessenger& right);
+  /// Not implemented
+  TG4StackPopperMessenger& operator=(const TG4StackPopperMessenger& right);
 
-    //
-    // data members
+  //
+  // data members
 
-    /// associated class
-    TG4StackPopperPhysics* fStackPopperPhysics;
+  /// associated class
+  TG4StackPopperPhysics* fStackPopperPhysics;
 
-    /// setStackPopperSelection command
-    G4UIcmdWithAString*    fSetSelectionCmd;
+  /// setStackPopperSelection command
+  G4UIcmdWithAString* fSetSelectionCmd;
 };
 
-#endif //TG4_STACK_POPPER_MESSENGER_H
+#endif // TG4_STACK_POPPER_MESSENGER_H

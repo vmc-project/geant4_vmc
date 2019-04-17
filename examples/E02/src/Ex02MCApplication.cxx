@@ -16,29 +16,28 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "Ex02MCApplication.h"
-#include "Ex02MCStack.h"
 #include "Ex02DetectorConstructionOld.h"
+#include "Ex02MCStack.h"
 #include "Ex02MagField.h"
 
-#include <TROOT.h>
+#include <Riostream.h>
+#include <TGeoManager.h>
 #include <TInterpreter.h>
-#include <TVirtualMC.h>
-#include <TMCRootManager.h>
 #include <TMCRootManager.h>
 #include <TPDGCode.h>
-#include <TGeoManager.h>
+#include <TROOT.h>
 #include <TVirtualGeoTrack.h>
-#include <Riostream.h>
+#include <TVirtualMC.h>
 
 using namespace std;
 
 /// \cond CLASSIMP
 ClassImp(Ex02MCApplication)
-/// \endcond
+  /// \endcond
 
-//_____________________________________________________________________________
-Ex02MCApplication::Ex02MCApplication(const char *name, const char *title)
-  : TVirtualMCApplication(name,title),
+  //_____________________________________________________________________________
+  Ex02MCApplication::Ex02MCApplication(const char* name, const char* title)
+  : TVirtualMCApplication(name, title),
     fRootManager(0),
     fStack(0),
     fDetConstruction(),
@@ -46,11 +45,11 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title)
     fMagField(0),
     fOldGeometry(kFALSE)
 {
-/// Standard constructor
-/// \param name   The MC application name
-/// \param title  The MC application description
+  /// Standard constructor
+  /// \param name   The MC application name
+  /// \param title  The MC application description
 
-  //cout << "Ex02MCApplication::Ex02MCApplication " << this << endl;
+  // cout << "Ex02MCApplication::Ex02MCApplication " << this << endl;
 
   // Create application data
 
@@ -66,7 +65,7 @@ Ex02MCApplication::Ex02MCApplication(const char *name, const char *title)
 
 //_____________________________________________________________________________
 Ex02MCApplication::Ex02MCApplication(const Ex02MCApplication& origin)
-  : TVirtualMCApplication(origin.GetName(),origin.GetTitle()),
+  : TVirtualMCApplication(origin.GetName(), origin.GetTitle()),
     fRootManager(0),
     fStack(0),
     fDetConstruction(origin.fDetConstruction),
@@ -74,10 +73,10 @@ Ex02MCApplication::Ex02MCApplication(const Ex02MCApplication& origin)
     fMagField(0),
     fOldGeometry(kFALSE)
 {
-/// Copy constructor (for clonig on worker thread in MT mode).
-/// \param origin  The source object (on master).
+  /// Copy constructor (for clonig on worker thread in MT mode).
+  /// \param origin  The source object (on master).
 
-  //cout << "Ex02MCApplication::Ex02MCApplication " << this << endl;
+  // cout << "Ex02MCApplication::Ex02MCApplication " << this << endl;
 
   // Create application data
 
@@ -101,15 +100,15 @@ Ex02MCApplication::Ex02MCApplication()
     fMagField(0),
     fOldGeometry(kFALSE)
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
 Ex02MCApplication::~Ex02MCApplication()
 {
-/// Destructor
+  /// Destructor
 
-  //cout << "Ex02MCApplication::~Ex02MCApplication " << this << endl;
+  // cout << "Ex02MCApplication::~Ex02MCApplication " << this << endl;
 
   delete fRootManager;
   delete fStack;
@@ -117,7 +116,7 @@ Ex02MCApplication::~Ex02MCApplication()
   delete fMagField;
   delete gMC;
 
-  //cout << "Done Ex02MCApplication::~Ex02MCApplication " << this << endl;
+  // cout << "Done Ex02MCApplication::~Ex02MCApplication " << this << endl;
 }
 
 //
@@ -126,10 +125,10 @@ Ex02MCApplication::~Ex02MCApplication()
 //_____________________________________________________________________________
 void Ex02MCApplication::RegisterStack() const
 {
-/// Register stack in the Root manager.
+  /// Register stack in the Root manager.
 
-  if ( fRootManager ) {
-    //cout << "Ex02MCApplication::RegisterStack: " << endl;
+  if (fRootManager) {
+    // cout << "Ex02MCApplication::RegisterStack: " << endl;
     fRootManager->Register("stack", "Ex02MCStack", &fStack);
   }
 }
@@ -141,32 +140,30 @@ void Ex02MCApplication::RegisterStack() const
 //_____________________________________________________________________________
 void Ex02MCApplication::InitMC(const char* setup)
 {
-/// Initialize MC from Config.C macro
-/// The selection of the concrete MC is done in the macro.
-/// \param setup The name of the configuration macro
+  /// Initialize MC from Config.C macro
+  /// The selection of the concrete MC is done in the macro.
+  /// \param setup The name of the configuration macro
 
-  if ( TString(setup) != "" ) {
+  if (TString(setup) != "") {
     gROOT->LoadMacro(setup);
     gInterpreter->ProcessLine("Config()");
-    if ( ! gMC ) {
-      Fatal("InitMC",
-            "Processing Config() has failed. (No MC is instantiated.)");
+    if (!gMC) {
+      Fatal(
+        "InitMC", "Processing Config() has failed. (No MC is instantiated.)");
     }
   }
 
 // MT support available from root v 5.34/18
 #if ROOT_VERSION_CODE >= 336402
   // Create Root manager
-  if ( ! gMC->IsMT() ) {
-    fRootManager
-      = new TMCRootManager(GetName(), TMCRootManager::kWrite);
-    //fRootManager->SetDebug(true);
+  if (!gMC->IsMT()) {
+    fRootManager = new TMCRootManager(GetName(), TMCRootManager::kWrite);
+    // fRootManager->SetDebug(true);
   }
 #else
   // Create Root manager
-  fRootManager
-    = new TMCRootManager(GetName(), TMCRootManager::kWrite);
-  //fRootManager->SetDebug(true);
+  fRootManager = new TMCRootManager(GetName(), TMCRootManager::kWrite);
+  // fRootManager->SetDebug(true);
 #endif
 
   // Set data to MC
@@ -183,8 +180,8 @@ void Ex02MCApplication::InitMC(const char* setup)
 //_____________________________________________________________________________
 void Ex02MCApplication::RunMC(Int_t nofEvents)
 {
-/// Run MC.
-/// \param nofEvents Number of events to be processed
+  /// Run MC.
+  /// \param nofEvents Number of events to be processed
 
   gMC->ProcessRun(nofEvents);
   FinishRun();
@@ -193,11 +190,11 @@ void Ex02MCApplication::RunMC(Int_t nofEvents)
 //_____________________________________________________________________________
 void Ex02MCApplication::FinishRun()
 {
-/// Finish MC run.
+  /// Finish MC run.
 
-  //cout << "Ex02MCApplication::FinishRun: " << endl;
-  if ( fRootManager ) {
-    //fRootManager->WriteAndClose();
+  // cout << "Ex02MCApplication::FinishRun: " << endl;
+  if (fRootManager) {
+    // fRootManager->WriteAndClose();
     fRootManager->WriteAll();
     fRootManager->Close();
   }
@@ -212,12 +209,11 @@ TVirtualMCApplication* Ex02MCApplication::CloneForWorker() const
 //_____________________________________________________________________________
 void Ex02MCApplication::InitForWorker() const
 {
-  //cout << "Ex02MCApplication::InitForWorker " << this << endl;
+  // cout << "Ex02MCApplication::InitForWorker " << this << endl;
 
   // Create Root manager
-  fRootManager
-    = new TMCRootManager(GetName(), TMCRootManager::kWrite);
-  //fRootManager->SetDebug(true);
+  fRootManager = new TMCRootManager(GetName(), TMCRootManager::kWrite);
+  // fRootManager->SetDebug(true);
 
   // Set data to MC
   gMC->SetStack(fStack);
@@ -229,8 +225,8 @@ void Ex02MCApplication::InitForWorker() const
 //_____________________________________________________________________________
 void Ex02MCApplication::FinishWorkerRun() const
 {
-  //cout << "Ex02MCApplication::FinishWorkerRun: " << endl;
-  if ( fRootManager ) {
+  // cout << "Ex02MCApplication::FinishWorkerRun: " << endl;
+  if (fRootManager) {
     fRootManager->WriteAll();
     fRootManager->Close();
   }
@@ -239,19 +235,19 @@ void Ex02MCApplication::FinishWorkerRun() const
 //_____________________________________________________________________________
 void Ex02MCApplication::ConstructGeometry()
 {
-/// Construct geometry using detector contruction class.
-/// The detector contruction class is using TGeo functions or
-/// TVirtualMC functions (if oldGeometry is selected)
+  /// Construct geometry using detector contruction class.
+  /// The detector contruction class is using TGeo functions or
+  /// TVirtualMC functions (if oldGeometry is selected)
 
   // Cannot use Root geometry if not supported with
   // selected MC
-  if ( !fOldGeometry && ! gMC->IsRootGeometrySupported() ) {
-    cerr << "Selected MC does not support TGeo geometry"<< endl;
-    cerr << "Exiting program"<< endl;
+  if (!fOldGeometry && !gMC->IsRootGeometrySupported()) {
+    cerr << "Selected MC does not support TGeo geometry" << endl;
+    cerr << "Exiting program" << endl;
     exit(1);
   }
 
-  if ( ! fOldGeometry ) {
+  if (!fOldGeometry) {
     cout << "Geometry will be defined via TGeo" << endl;
     fDetConstruction.ConstructMaterials();
     fDetConstruction.ConstructGeometry();
@@ -267,7 +263,7 @@ void Ex02MCApplication::ConstructGeometry()
 //_____________________________________________________________________________
 void Ex02MCApplication::InitGeometry()
 {
-/// Initialize geometry
+  /// Initialize geometry
 
   fTrackerSD->Initialize();
 }
@@ -275,50 +271,50 @@ void Ex02MCApplication::InitGeometry()
 //_____________________________________________________________________________
 void Ex02MCApplication::GeneratePrimaries()
 {
-/// Fill the user stack (derived from TVirtualMCStack) with primary particles.
+  /// Fill the user stack (derived from TVirtualMCStack) with primary particles.
 
- // Track ID (filled by stack)
- Int_t ntr;
+  // Track ID (filled by stack)
+  Int_t ntr;
 
- // Option: to be tracked
- Int_t toBeDone = 1;
+  // Option: to be tracked
+  Int_t toBeDone = 1;
 
- // Particle type
- //Int_t pdg  = 0;    // geantino
- Int_t pdg  = kProton;
+  // Particle type
+  // Int_t pdg  = 0;    // geantino
+  Int_t pdg = kProton;
 
- // Polarization
- Double_t polx = 0.;
- Double_t poly = 0.;
- Double_t polz = 0.;
+  // Polarization
+  Double_t polx = 0.;
+  Double_t poly = 0.;
+  Double_t polz = 0.;
 
- // Position
- Double_t vx  = 0.;
- Double_t vy  = 0.;
- Double_t vz = -0.5*(fDetConstruction.GetWorldFullLength());
- Double_t tof = 0.;
+  // Position
+  Double_t vx = 0.;
+  Double_t vy = 0.;
+  Double_t vz = -0.5 * (fDetConstruction.GetWorldFullLength());
+  Double_t tof = 0.;
 
- // Energy
- Double_t kinEnergy = 3.0;
- Double_t mass = 0.9382723;
- Double_t e  = mass + kinEnergy;
+  // Energy
+  Double_t kinEnergy = 3.0;
+  Double_t mass = 0.9382723;
+  Double_t e = mass + kinEnergy;
 
- // Momentum
- Double_t px, py, pz;
- px = 0.;
- py = 0.;
- pz = sqrt(e*e - mass*mass);
+  // Momentum
+  Double_t px, py, pz;
+  px = 0.;
+  py = 0.;
+  pz = sqrt(e * e - mass * mass);
 
- // Add particle to stack
- fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz,
-                  kPPrimary, ntr, 1., 0);
+  // Add particle to stack
+  fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx,
+    poly, polz, kPPrimary, ntr, 1., 0);
 }
 
 //_____________________________________________________________________________
 void Ex02MCApplication::BeginEvent()
 {
-/// User actions at beginning of event.
-/// Nothing to be done this example
+  /// User actions at beginning of event.
+  /// Nothing to be done this example
 
   fStack->SetObjectNumber();
 }
@@ -326,21 +322,21 @@ void Ex02MCApplication::BeginEvent()
 //_____________________________________________________________________________
 void Ex02MCApplication::BeginPrimary()
 {
-/// User actions at beginning of a primary track.
-/// Nothing to be done this example
+  /// User actions at beginning of a primary track.
+  /// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void Ex02MCApplication::PreTrack()
 {
-/// User actions at beginning of each track.
-/// Nothing to be done this example
+  /// User actions at beginning of each track.
+  /// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void Ex02MCApplication::Stepping()
 {
-/// User actions at each step
+  /// User actions at each step
 
   fTrackerSD->ProcessHits();
 }
@@ -348,34 +344,33 @@ void Ex02MCApplication::Stepping()
 //_____________________________________________________________________________
 void Ex02MCApplication::PostTrack()
 {
-/// User actions at each step.
-/// Nothing to be done this example
+  /// User actions at each step.
+  /// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void Ex02MCApplication::FinishPrimary()
 {
-/// User actions after finishing of a primary track.
-/// Nothing to be done this example
+  /// User actions after finishing of a primary track.
+  /// Nothing to be done this example
 }
 
 //_____________________________________________________________________________
 void Ex02MCApplication::FinishEvent()
 {
-/// User actions after finishing of an event
-/// Nothing to be done this example
+  /// User actions after finishing of an event
+  /// Nothing to be done this example
 
   // Geant4 own visualization is activated via G4 macro (g4config.in)
 
   // TGeo visualization
-  if ( gGeoManager &&
-       gGeoManager->GetListOfTracks() &&
-       gGeoManager->GetTrack(0) &&
-       ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints() ) {
+  if (gGeoManager && gGeoManager->GetListOfTracks() &&
+      gGeoManager->GetTrack(0) &&
+      ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints()) {
 
-     gGeoManager->SetVisOption(0);
-     gGeoManager->SetTopVisible();
-     gGeoManager->DrawTracks("/*");  // this means all tracks
+    gGeoManager->SetVisOption(0);
+    gGeoManager->SetTopVisible();
+    gGeoManager->DrawTracks("/*"); // this means all tracks
   }
 
   fRootManager->Fill();
@@ -387,14 +382,13 @@ void Ex02MCApplication::FinishEvent()
 }
 
 //_____________________________________________________________________________
-void  Ex02MCApplication::ReadEvent(Int_t i)
+void Ex02MCApplication::ReadEvent(Int_t i)
 {
-/// Read \em i -th event and prints hits.
-/// \param i The number of event to be read
+  /// Read \em i -th event and prints hits.
+  /// \param i The number of event to be read
 
-  if ( ! fRootManager ) {
-    fRootManager
-      = new TMCRootManager(GetName(), TMCRootManager::kRead);
+  if (!fRootManager) {
+    fRootManager = new TMCRootManager(GetName(), TMCRootManager::kRead);
   }
 
   fTrackerSD->Register();

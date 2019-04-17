@@ -41,35 +41,35 @@ class G4UIcmdWithADouble;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4ParticlesCheckerMessenger: public G4UImessenger
+class TG4ParticlesCheckerMessenger : public G4UImessenger
 {
-  public:
-    TG4ParticlesCheckerMessenger(TG4ParticlesChecker* particlesChecker);
-    virtual ~TG4ParticlesCheckerMessenger();
+ public:
+  TG4ParticlesCheckerMessenger(TG4ParticlesChecker* particlesChecker);
+  virtual ~TG4ParticlesCheckerMessenger();
 
-    // methods
-    void Init();
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
+  // methods
+  void Init();
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
+ private:
+  /// Not implemented
+  TG4ParticlesCheckerMessenger();
+  /// Not implemented
+  TG4ParticlesCheckerMessenger(const TG4ParticlesCheckerMessenger& right);
+  /// Not implemented
+  TG4ParticlesCheckerMessenger& operator=(
+    const TG4ParticlesCheckerMessenger& right);
 
-  private:
-    /// Not implemented
-    TG4ParticlesCheckerMessenger();
-    /// Not implemented
-    TG4ParticlesCheckerMessenger(const TG4ParticlesCheckerMessenger& right);
-    /// Not implemented
-    TG4ParticlesCheckerMessenger& operator=(const TG4ParticlesCheckerMessenger& right);
+  // data members
+  TG4ParticlesChecker* fParticlesChecker; ///< associated class
+  G4UIdirectory* fDirectory;              ///< command directory
+  G4String fSelectedProperty;             ///< selected property
 
-    // data members
-    TG4ParticlesChecker*  fParticlesChecker; ///< associated class
-    G4UIdirectory*        fDirectory;        ///< command directory
-    G4String              fSelectedProperty; ///< selected property
-
-    G4UIcmdWithoutParameter*  fCheckParticlesCmd;   ///< command: checkParticles
-    G4UIcmdWithAnInteger*     fCheckParticleCmd;    ///< command: checkParticle
-    G4UIcmdWithAString*       fSelectPropertyCmd;   ///< command: selectProperty
-    G4UIcmdWithABool*         fSetCheckingCmd;      ///< command: setChecking
-    G4UIcmdWithADouble*       fSetPrecisionCmd;     ///< command: setPrecision
+  G4UIcmdWithoutParameter* fCheckParticlesCmd; ///< command: checkParticles
+  G4UIcmdWithAnInteger* fCheckParticleCmd;     ///< command: checkParticle
+  G4UIcmdWithAString* fSelectPropertyCmd;      ///< command: selectProperty
+  G4UIcmdWithABool* fSetCheckingCmd;           ///< command: setChecking
+  G4UIcmdWithADouble* fSetPrecisionCmd;        ///< command: setPrecision
 };
 
-#endif //TG4_PARTICLES_CHECKER_MESSENGER_H
+#endif // TG4_PARTICLES_CHECKER_MESSENGER_H

@@ -29,31 +29,31 @@
 
 class TG4UserIon
 {
-  public:
-             /// Standard constructor
-    TG4UserIon(const G4String& name, G4int pdgEncoding, G4int Q)
-      : fName(name), fPdgEncoding(pdgEncoding), fQ(Q) {}
+ public:
+  /// Standard constructor
+  TG4UserIon(const G4String& name, G4int pdgEncoding, G4int Q)
+    : fName(name), fPdgEncoding(pdgEncoding), fQ(Q)
+  {}
 
-             /// Destructor
-    ~TG4UserIon() {}
+  /// Destructor
+  ~TG4UserIon() {}
 
-    // methods
+  // methods
 
-             /// Return the ion name defined by user
-    G4String GetName() const { return fName; }
+  /// Return the ion name defined by user
+  G4String GetName() const { return fName; }
 
-             /// Return the ion PDG encoding
-    G4int    GetPdgEncoding() const { return fPdgEncoding; }
+  /// Return the ion PDG encoding
+  G4int GetPdgEncoding() const { return fPdgEncoding; }
 
-             /// Return the ion charge
-    G4int    GetQ() const { return fQ; }
+  /// Return the ion charge
+  G4int GetQ() const { return fQ; }
 
-  private:
-    // data members
-    G4String fName;        ///< ion name defined by user
-    G4int    fPdgEncoding; ///< PDG encoding
-    G4int    fQ;           ///< charge
+ private:
+  // data members
+  G4String fName;     ///< ion name defined by user
+  G4int fPdgEncoding; ///< PDG encoding
+  G4int fQ;           ///< charge
 };
 
-#endif //TG4_USER_ION_H
-
+#endif // TG4_USER_ION_H

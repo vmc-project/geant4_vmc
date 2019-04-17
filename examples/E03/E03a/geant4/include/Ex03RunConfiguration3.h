@@ -29,15 +29,14 @@
 
 class Ex03RunConfiguration3 : public TG4RunConfiguration
 {
-  public:
-    Ex03RunConfiguration3(const TString& userGeometry,
-                          const TString& physicsList = "FTFP_BERT",
-                          const TString& specialProcess = "stepLimiter");
-    virtual ~Ex03RunConfiguration3();
+ public:
+  Ex03RunConfiguration3(const TString& userGeometry,
+    const TString& physicsList = "FTFP_BERT",
+    const TString& specialProcess = "stepLimiter");
+  virtual ~Ex03RunConfiguration3();
 
-    // methods
-    virtual TG4VUserRegionConstruction*  CreateUserRegionConstruction();
+  // methods
+  virtual TG4VUserRegionConstruction* CreateUserRegionConstruction();
 };
 
-#endif //EX03_RUN_CONFIGURATION3_H
-
+#endif // EX03_RUN_CONFIGURATION3_H

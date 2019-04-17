@@ -28,22 +28,21 @@ class TG4PostDetConstruction;
 
 class TG4PostDetConstruction : public TVirtualUserPostDetConstruction
 {
-  public:
-    TG4PostDetConstruction();
-    virtual ~TG4PostDetConstruction();
+ public:
+  TG4PostDetConstruction();
+  virtual ~TG4PostDetConstruction();
 
-    // methods
-    virtual void Initialize(TG4RootDetectorConstruction *dc);
-    virtual void InitializeSDandField();
+  // methods
+  virtual void Initialize(TG4RootDetectorConstruction* dc);
+  virtual void InitializeSDandField();
 
-  private:
-    /// Not implemented
-    TG4PostDetConstruction(const TG4PostDetConstruction& right);
-    /// Not implemented
-    TG4PostDetConstruction& operator=(const TG4PostDetConstruction& right);
+ private:
+  /// Not implemented
+  TG4PostDetConstruction(const TG4PostDetConstruction& right);
+  /// Not implemented
+  TG4PostDetConstruction& operator=(const TG4PostDetConstruction& right);
 };
 
-#endif //USE_G4ROOT
+#endif // USE_G4ROOT
 
-#endif //TG4_DET_CONSTRUCTION_H
-
+#endif // TG4_DET_CONSTRUCTION_H

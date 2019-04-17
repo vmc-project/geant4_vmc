@@ -18,16 +18,17 @@
 #include <TVirtualMCApplication.h>
 
 //_____________________________________________________________________________
-TG4GflashSensitiveDetector::TG4GflashSensitiveDetector(G4String sdName, G4int mediumId)
+TG4GflashSensitiveDetector::TG4GflashSensitiveDetector(
+  G4String sdName, G4int mediumId)
   : TG4SensitiveDetector(sdName, mediumId)
 {
-/// Standard constructor with the specified \em name
+  /// Standard constructor with the specified \em name
 }
 
 //_____________________________________________________________________________
 TG4GflashSensitiveDetector::~TG4GflashSensitiveDetector()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -35,9 +36,10 @@ TG4GflashSensitiveDetector::~TG4GflashSensitiveDetector()
 //
 
 //_____________________________________________________________________________
-G4bool TG4GflashSensitiveDetector::ProcessHits(G4GFlashSpot* gflashSpot, G4TouchableHistory*)
+G4bool TG4GflashSensitiveDetector::ProcessHits(
+  G4GFlashSpot* gflashSpot, G4TouchableHistory*)
 {
-/// Call user defined sensitive detector
+  /// Call user defined sensitive detector
 
   // let user sensitive detector process Gflash step
   fStepManager->SetStep(gflashSpot, kGflashSpot);

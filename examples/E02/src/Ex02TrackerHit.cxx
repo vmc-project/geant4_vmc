@@ -23,24 +23,21 @@
 
 /// \cond CLASSIMP
 ClassImp(Ex02TrackerHit)
-/// \endcond
+  /// \endcond
 
-using namespace std;
+  using namespace std;
 
 //_____________________________________________________________________________
 Ex02TrackerHit::Ex02TrackerHit()
-  : fTrackID(-1),
-    fChamberNb(-1),
-    fEdep(0.),
-    fPos()
+  : fTrackID(-1), fChamberNb(-1), fEdep(0.), fPos()
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
 Ex02TrackerHit::~Ex02TrackerHit()
 {
-/// Destructor
+  /// Destructor
 }
 
 /*
@@ -64,13 +61,9 @@ void Ex02TrackerHit::Draw()
 //_____________________________________________________________________________
 void Ex02TrackerHit::Print(const Option_t* /*opt*/) const
 {
-/// Printing
+  /// Printing
 
-  cout << "  trackID: " << fTrackID
-       << "  chamberNb: " << fChamberNb
-       << "  energy deposit (keV): " << fEdep * 1.0e06
-       << "  position (cm): ("
-       << fPos[0] << ", " << fPos[1] << ", " << fPos[2] << ")"
-       << endl;
+  cout << "  trackID: " << fTrackID << "  chamberNb: " << fChamberNb
+       << "  energy deposit (keV): " << fEdep * 1.0e06 << "  position (cm): ("
+       << fPos[0] << ", " << fPos[1] << ", " << fPos[2] << ")" << endl;
 }
-

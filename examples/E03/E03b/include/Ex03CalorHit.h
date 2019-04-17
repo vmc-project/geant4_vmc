@@ -30,44 +30,50 @@
 
 class Ex03CalorHit : public TObject
 {
-  public:
-    Ex03CalorHit();
-    virtual ~Ex03CalorHit();
+ public:
+  Ex03CalorHit();
+  virtual ~Ex03CalorHit();
 
-    // methods
-    virtual void Print(Option_t* option = "") const;
+  // methods
+  virtual void Print(Option_t* option = "") const;
 
-         /// Add energy deposit and track length in the absorber
-         /// \param de  Enery deposit
-         /// \param dl  Track length
-    void AddAbs(Double_t de, Double_t dl) { fEdepAbs += de; fTrackLengthAbs += dl; }
+  /// Add energy deposit and track length in the absorber
+  /// \param de  Enery deposit
+  /// \param dl  Track length
+  void AddAbs(Double_t de, Double_t dl)
+  {
+    fEdepAbs += de;
+    fTrackLengthAbs += dl;
+  }
 
-         /// Add energy deposit and track length in the gap
-         /// \param de  Enery deposit
-         /// \param dl  Track length
-    void AddGap(Double_t de, Double_t dl) { fEdepGap += de; fTrackLengthGap += dl; }
+  /// Add energy deposit and track length in the gap
+  /// \param de  Enery deposit
+  /// \param dl  Track length
+  void AddGap(Double_t de, Double_t dl)
+  {
+    fEdepGap += de;
+    fTrackLengthGap += dl;
+  }
 
-    void Reset();
+  void Reset();
 
-    // get methods
-             /// \return The energy deposit in the absorber
-    Double_t GetEdepAbs() { return fEdepAbs; };
-             /// \return The track length in the absorber
-    Double_t GetTrakAbs() { return fTrackLengthAbs; };
-             /// \return The energy deposit in the gap
-    Double_t GetEdepGap() { return fEdepGap; };
-             /// \return The track length in the gap
-    Double_t GetTrakGap() { return fTrackLengthGap; };
+  // get methods
+  /// \return The energy deposit in the absorber
+  Double_t GetEdepAbs() { return fEdepAbs; };
+  /// \return The track length in the absorber
+  Double_t GetTrakAbs() { return fTrackLengthAbs; };
+  /// \return The energy deposit in the gap
+  Double_t GetEdepGap() { return fEdepGap; };
+  /// \return The track length in the gap
+  Double_t GetTrakGap() { return fTrackLengthGap; };
 
-  private:
-    Double_t fEdepAbs;        ///< Energy deposit in the absorber
-    Double_t fTrackLengthAbs; ///< Track length in the absorber
-    Double_t fEdepGap;        ///< Energy deposit in the gap
-    Double_t fTrackLengthGap; ///< Track length in the gap
+ private:
+  Double_t fEdepAbs;        ///< Energy deposit in the absorber
+  Double_t fTrackLengthAbs; ///< Track length in the absorber
+  Double_t fEdepGap;        ///< Energy deposit in the gap
+  Double_t fTrackLengthGap; ///< Track length in the gap
 
-  ClassDef(Ex03CalorHit,1) //Ex03CalorHit
+  ClassDef(Ex03CalorHit, 1) // Ex03CalorHit
 };
 
-#endif //EX03_CALOR_HIT_H
-
-
+#endif // EX03_CALOR_HIT_H

@@ -19,8 +19,8 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include <TNamed.h>
 #include <TClonesArray.h>
+#include <TNamed.h>
 
 class Ex02TrackerHit;
 
@@ -32,40 +32,39 @@ class Ex02TrackerHit;
 
 class Ex02TrackerSD : public TNamed
 {
-  public:
-    Ex02TrackerSD(const char* name);
-    Ex02TrackerSD(const Ex02TrackerSD& origin);
-    Ex02TrackerSD();
-    virtual ~Ex02TrackerSD();
+ public:
+  Ex02TrackerSD(const char* name);
+  Ex02TrackerSD(const Ex02TrackerSD& origin);
+  Ex02TrackerSD();
+  virtual ~Ex02TrackerSD();
 
-    // methods
-    void   Initialize();
-    Bool_t  ProcessHits();
-    void   EndOfEvent();
-    void   Register();
-    virtual void  Print(const Option_t* option = 0) const;
+  // methods
+  void Initialize();
+  Bool_t ProcessHits();
+  void EndOfEvent();
+  void Register();
+  virtual void Print(const Option_t* option = 0) const;
 
-    // set methods
-    void SetVerboseLevel(Int_t level);
+  // set methods
+  void SetVerboseLevel(Int_t level);
 
-  private:
-    // methods
-    Ex02TrackerHit* AddHit();
+ private:
+  // methods
+  Ex02TrackerHit* AddHit();
 
-    // data members
-    TClonesArray*  fTrackerCollection; ///< Hits collection
-    Int_t          fSensitiveVolumeID; ///< Sensitive volume Id
-    Int_t          fVerboseLevel;      ///< Verbosity level
+  // data members
+  TClonesArray* fTrackerCollection; ///< Hits collection
+  Int_t fSensitiveVolumeID;         ///< Sensitive volume Id
+  Int_t fVerboseLevel;              ///< Verbosity level
 
-  ClassDef(Ex02TrackerSD,1) //Ex02TrackerSD
-
+  ClassDef(Ex02TrackerSD, 1) // Ex02TrackerSD
 };
 
 /// Set verbose level
 /// \param level The new verbose level value
 inline void Ex02TrackerSD::SetVerboseLevel(Int_t level)
-{ fVerboseLevel = level; }
+{
+  fVerboseLevel = level;
+}
 
-
-#endif //EX02_TRACKER_SD_H
-
+#endif // EX02_TRACKER_SD_H

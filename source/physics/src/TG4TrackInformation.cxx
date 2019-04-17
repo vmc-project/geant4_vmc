@@ -27,7 +27,7 @@ TG4TrackInformation::TG4TrackInformation()
     fIsUserTrack(false),
     fStop(false)
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
@@ -40,7 +40,7 @@ TG4TrackInformation::TG4TrackInformation(G4int trackParticleID)
     fIsUserTrack(false),
     fStop(false)
 {
-/// Standard constructor
+  /// Standard constructor
 }
 /*
 //_____________________________________________________________________________
@@ -56,7 +56,7 @@ TG4TrackInformation::TG4TrackInformation(G4int  trackParticleID,
 //_____________________________________________________________________________
 TG4TrackInformation::~TG4TrackInformation()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -66,13 +66,13 @@ TG4TrackInformation::~TG4TrackInformation()
 //_____________________________________________________________________________
 void TG4TrackInformation::Print() const
 {
-/// Print track information.
+  /// Print track information.
 
   G4cout << "TrackParticleID: " << fTrackParticleID << "   "
          << "ParentParticleID: " << fParentParticleID;
 
-  if ( fIsUserTrack ) G4cout << "  userTrack";
-  if ( fStop )        G4cout << "  toStop";
+  if (fIsUserTrack) G4cout << "  userTrack";
+  if (fStop) G4cout << "  toStop";
 
   G4cout << G4endl;
 }

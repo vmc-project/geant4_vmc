@@ -23,55 +23,46 @@ using namespace std;
 
 /// \cond CLASSIMP
 ClassImp(A01HadCalorHit)
-/// \endcond
+  /// \endcond
 
-//_____________________________________________________________________________
-A01HadCalorHit::A01HadCalorHit(Int_t icol, Int_t irow)
-  : TObject(),
-    fColumnID(icol),
-    fRowID(irow),
-    fEdep(0.),
-    fTransformation()
+  //_____________________________________________________________________________
+  A01HadCalorHit::A01HadCalorHit(Int_t icol, Int_t irow)
+  : TObject(), fColumnID(icol), fRowID(irow), fEdep(0.), fTransformation()
 {
-/// Standard constructor
-/// \param icol  Volume cell column number
-/// \param irow  Volume cell row number
+  /// Standard constructor
+  /// \param icol  Volume cell column number
+  /// \param irow  Volume cell row number
 }
 
 //_____________________________________________________________________________
 A01HadCalorHit::A01HadCalorHit()
-  : TObject(),
-    fColumnID(-1),
-    fRowID(-1),
-    fEdep(0.),
-    fTransformation()
+  : TObject(), fColumnID(-1), fRowID(-1), fEdep(0.), fTransformation()
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
 A01HadCalorHit::~A01HadCalorHit()
 {
-/// Destructor
+  /// Destructor
 }
 
 //_____________________________________________________________________________
 void A01HadCalorHit::Print(Option_t* /*option*/) const
 {
-/// Print hit info
+  /// Print hit info
 
-  cout << "  Cell[" << fRowID << ", " << fColumnID << "] " << fEdep*1.0e03
+  cout << "  Cell[" << fRowID << ", " << fColumnID << "] " << fEdep * 1.0e03
        << " (MeV) " << endl;
 }
 
 //_____________________________________________________________________________
 void A01HadCalorHit::Reset()
 {
-/// Reset all accounted values.
+  /// Reset all accounted values.
 
   fColumnID = -1;
   fRowID = -1;
   fEdep = 0.;
   fTransformation = TGeoHMatrix();
 }
-

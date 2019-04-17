@@ -18,8 +18,8 @@
 #include "TG4FieldParameters.h"
 #include "TG4MagneticField.h"
 
-#include <globals.hh>
 #include <G4ThreeVector.hh>
+#include <globals.hh>
 
 class TG4FieldParameters;
 
@@ -30,7 +30,8 @@ class G4LogicalVolume;
 class TVirtualMagField;
 
 /// \ingroup geometry
-/// \brief The cached magnetic field defined by the TVirtualMCApplication field map.
+/// \brief The cached magnetic field defined by the TVirtualMCApplication field
+/// map.
 ///
 /// Overrides TG4MagneticField::GetFieldValue();
 /// it uses the value from a previous call in case the distance of the
@@ -43,31 +44,30 @@ class TVirtualMagField;
 
 class TG4CachedMagneticField : public TG4MagneticField
 {
-  public:
-    TG4CachedMagneticField(TVirtualMagField* magField,
-                           G4double constDistance);
-    virtual ~TG4CachedMagneticField();
+ public:
+  TG4CachedMagneticField(TVirtualMagField* magField, G4double constDistance);
+  virtual ~TG4CachedMagneticField();
 
-    virtual void GetFieldValue(const G4double point[3], G4double* bfield) const;
+  virtual void GetFieldValue(const G4double point[3], G4double* bfield) const;
 
-    // virtual void Update(const TG4FieldParameters& parameters);
-    virtual void PrintStatistics() const;
+  // virtual void Update(const TG4FieldParameters& parameters);
+  virtual void PrintStatistics() const;
 
-    void ClearCounter();
-    void SetConstDistance(G4double value);
+  void ClearCounter();
+  void SetConstDistance(G4double value);
 
-  private:
-    // data members
-    /// The last evaluated location
-    mutable G4ThreeVector  fLastLocation;
-    /// The last evaluated value
-    mutable G4ThreeVector  fLastValue;
-    /// The counter of calls to GetFieldValue()
-    mutable G4int fCallsCounter;
-    /// The counter of field value evaluations in GetFieldValue()
-    mutable G4int fEvaluationsCounter;
-    /// The square of the distance within which the field is considered constant
-    G4double fConstDistanceSquare;
+ private:
+  // data members
+  /// The last evaluated location
+  mutable G4ThreeVector fLastLocation;
+  /// The last evaluated value
+  mutable G4ThreeVector fLastValue;
+  /// The counter of calls to GetFieldValue()
+  mutable G4int fCallsCounter;
+  /// The counter of field value evaluations in GetFieldValue()
+  mutable G4int fEvaluationsCounter;
+  /// The square of the distance within which the field is considered constant
+  G4double fConstDistanceSquare;
 };
 
-#endif //TG4_CACHED_MAGNETIC_FIELD_H
+#endif // TG4_CACHED_MAGNETIC_FIELD_H

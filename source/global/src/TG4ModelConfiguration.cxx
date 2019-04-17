@@ -14,14 +14,15 @@
 
 #include "TG4ModelConfiguration.h"
 
-namespace {
+namespace
+{
 
 G4bool Contains(const G4String& name, const G4String& nameList)
 {
-// Append a space to both searched name and the list
-// in order to exclude a match for names which are only substrings of
-// some name present in the list.
-// Eg. when Air2 is in the list and Air is checked for a presence
+  // Append a space to both searched name and the list
+  // in order to exclude a match for names which are only substrings of
+  // some name present in the list.
+  // Eg. when Air2 is in the list and Air is checked for a presence
 
   G4String checkName(name);
   checkName.append(" ");
@@ -29,10 +30,10 @@ G4bool Contains(const G4String& name, const G4String& nameList)
   G4String checkNameList(nameList);
   checkNameList.append(" ");
 
-  return ( checkNameList.find(checkName) != std::string::npos );
+  return (checkNameList.find(checkName) != std::string::npos);
 }
 
-}
+} // namespace
 
 //_____________________________________________________________________________
 TG4ModelConfiguration::TG4ModelConfiguration(const G4String& modelName)
@@ -42,13 +43,13 @@ TG4ModelConfiguration::TG4ModelConfiguration(const G4String& modelName)
     fRegions(),
     fFastSimulationModel(0)
 {
-/// Standard constructor
+  /// Standard constructor
 }
 
 //_____________________________________________________________________________
 void TG4ModelConfiguration::Print() const
 {
-/// Print all data
+  /// Print all data
 
   G4cout << "Model configuration: " << fModelName << G4endl;
   G4cout << "particles: " << fParticles << G4endl;
@@ -59,7 +60,7 @@ void TG4ModelConfiguration::Print() const
 //_____________________________________________________________________________
 G4bool TG4ModelConfiguration::HasParticle(const G4String& particleName)
 {
-/// Return true if given particle is in the particles list
+  /// Return true if given particle is in the particles list
 
   return Contains(particleName, fParticles);
 }
@@ -67,7 +68,7 @@ G4bool TG4ModelConfiguration::HasParticle(const G4String& particleName)
 //_____________________________________________________________________________
 G4bool TG4ModelConfiguration::HasRegion(const G4String& regionName)
 {
-/// Return true if given regionName is in the regions list
+  /// Return true if given regionName is in the regions list
 
   return Contains(regionName, fRegions);
 }

@@ -17,10 +17,10 @@
 /// \date 16/05/2005
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include <TParticle.h>
+#include <Riostream.h>
 #include <TClonesArray.h>
 #include <TError.h>
-#include <Riostream.h>
+#include <TParticle.h>
 
 #include "Ex03MCStack.h"
 
@@ -28,33 +28,28 @@ using namespace std;
 
 /// \cond CLASSIMP
 ClassImp(Ex03MCStack)
-/// \endcond
+  /// \endcond
 
-//_____________________________________________________________________________
-Ex03MCStack::Ex03MCStack(Int_t size)
-  : fParticles(0),
-    fCurrentTrack(-1),
-    fNPrimary(0)
+  //_____________________________________________________________________________
+  Ex03MCStack::Ex03MCStack(Int_t size)
+  : fParticles(0), fCurrentTrack(-1), fNPrimary(0)
 {
-/// Standard constructor
-/// \param size  The stack size
+  /// Standard constructor
+  /// \param size  The stack size
 
   fParticles = new TClonesArray("TParticle", size);
 }
 
 //_____________________________________________________________________________
-Ex03MCStack::Ex03MCStack()
-  : fParticles(0),
-    fCurrentTrack(-1),
-    fNPrimary(0)
+Ex03MCStack::Ex03MCStack() : fParticles(0), fCurrentTrack(-1), fNPrimary(0)
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
 Ex03MCStack::~Ex03MCStack()
 {
-/// Destructor
+  /// Destructor
 
   if (fParticles) fParticles->Delete();
   delete fParticles;
@@ -65,51 +60,47 @@ Ex03MCStack::~Ex03MCStack()
 // public methods
 
 //_____________________________________________________________________________
-void  Ex03MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
-  	                 Double_t px, Double_t py, Double_t pz, Double_t e,
-  		         Double_t vx, Double_t vy, Double_t vz, Double_t tof,
-		         Double_t polx, Double_t poly, Double_t polz,
-		         TMCProcess mech, Int_t& ntr, Double_t weight,
-		         Int_t is)
+void Ex03MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
+  Double_t px, Double_t py, Double_t pz, Double_t e, Double_t vx, Double_t vy,
+  Double_t vz, Double_t tof, Double_t polx, Double_t poly, Double_t polz,
+  TMCProcess mech, Int_t& ntr, Double_t weight, Int_t is)
 {
-/// Create a new particle with specified properties,
-/// adds it to the particles array (fParticles) and if not done to the
-/// stack (fStack).
-/// Use TParticle::fMother[1] to store Track ID.
-/// \param toBeDone  1 if particles should go to tracking, 0 otherwise
-/// \param parent    number of the parent track, -1 if track is primary
-/// \param pdg       PDG encoding
-/// \param px        particle momentum - x component [GeV/c]
-/// \param py        particle momentum - y component [GeV/c]
-/// \param pz        particle momentum - z component [GeV/c]
-/// \param e         total energy [GeV]
-/// \param vx        position - x component [cm]
-/// \param vy        position - y component  [cm]
-/// \param vz        position - z component  [cm]
-/// \param tof       time of flight [s]
-/// \param polx      polarization - x component
-/// \param poly      polarization - y component
-/// \param polz      polarization - z component
-/// \param mech      creator process VMC code
-/// \param ntr       track number (is filled by the stack
-/// \param weight    particle weight
-/// \param is        generation status code
+  /// Create a new particle with specified properties,
+  /// adds it to the particles array (fParticles) and if not done to the
+  /// stack (fStack).
+  /// Use TParticle::fMother[1] to store Track ID.
+  /// \param toBeDone  1 if particles should go to tracking, 0 otherwise
+  /// \param parent    number of the parent track, -1 if track is primary
+  /// \param pdg       PDG encoding
+  /// \param px        particle momentum - x component [GeV/c]
+  /// \param py        particle momentum - y component [GeV/c]
+  /// \param pz        particle momentum - z component [GeV/c]
+  /// \param e         total energy [GeV]
+  /// \param vx        position - x component [cm]
+  /// \param vy        position - y component  [cm]
+  /// \param vz        position - z component  [cm]
+  /// \param tof       time of flight [s]
+  /// \param polx      polarization - x component
+  /// \param poly      polarization - y component
+  /// \param polz      polarization - z component
+  /// \param mech      creator process VMC code
+  /// \param ntr       track number (is filled by the stack
+  /// \param weight    particle weight
+  /// \param is        generation status code
 
-  const Int_t kFirstDaughter=-1;
-  const Int_t kLastDaughter=-1;
+  const Int_t kFirstDaughter = -1;
+  const Int_t kLastDaughter = -1;
 
   TClonesArray& particlesRef = *fParticles;
   Int_t trackId = GetNtrack();
-  TParticle* particle
-    = new(particlesRef[trackId])
-      TParticle(pdg, is, parent, trackId, kFirstDaughter, kLastDaughter,
-		px, py, pz, e, vx, vy, vz, tof);
+  TParticle* particle = new (particlesRef[trackId]) TParticle(pdg, is, parent,
+    trackId, kFirstDaughter, kLastDaughter, px, py, pz, e, vx, vy, vz, tof);
 
   particle->SetPolarisation(polx, poly, polz);
   particle->SetWeight(weight);
   particle->SetUniqueID(mech);
 
-  if (parent<0) fNPrimary++;
+  if (parent < 0) fNPrimary++;
 
   if (toBeDone) fStack.push(particle);
 
@@ -119,12 +110,12 @@ void  Ex03MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
 //_____________________________________________________________________________
 TParticle* Ex03MCStack::PopNextTrack(Int_t& itrack)
 {
-/// Get next particle for tracking from the stack.
-/// \return       The popped particle object
-/// \param track  The index of the popped track
+  /// Get next particle for tracking from the stack.
+  /// \return       The popped particle object
+  /// \param track  The index of the popped track
 
   itrack = -1;
-  if  (fStack.empty()) return 0;
+  if (fStack.empty()) return 0;
 
   TParticle* particle = fStack.top();
   fStack.pop();
@@ -140,9 +131,9 @@ TParticle* Ex03MCStack::PopNextTrack(Int_t& itrack)
 //_____________________________________________________________________________
 TParticle* Ex03MCStack::PopPrimaryForTracking(Int_t i)
 {
-/// Return \em i -th particle in fParticles.
-/// \return   The popped primary particle object
-/// \param i  The index of primary particle to be popped
+  /// Return \em i -th particle in fParticles.
+  /// \return   The popped primary particle object
+  /// \param i  The index of primary particle to be popped
 
   if (i < 0 || i >= fNPrimary)
     Fatal("GetPrimaryForTracking", "Index out of range");
@@ -153,20 +144,19 @@ TParticle* Ex03MCStack::PopPrimaryForTracking(Int_t i)
 //_____________________________________________________________________________
 void Ex03MCStack::Print(Option_t* /*option*/) const
 {
-/// Print info for all particles.
+  /// Print info for all particles.
 
   cout << "Ex03MCStack Info  " << endl;
-  cout << "Total number of particles:   " <<  GetNtrack() << endl;
-  cout << "Number of primary particles: " <<  GetNprimary() << endl;
+  cout << "Total number of particles:   " << GetNtrack() << endl;
+  cout << "Number of primary particles: " << GetNprimary() << endl;
 
-  for (Int_t i=0; i<GetNtrack(); i++)
-    GetParticle(i)->Print();
+  for (Int_t i = 0; i < GetNtrack(); i++) GetParticle(i)->Print();
 }
 
 //_____________________________________________________________________________
 void Ex03MCStack::Reset()
 {
-/// Delete contained particles, reset particles array and stack.
+  /// Delete contained particles, reset particles array and stack.
 
   fCurrentTrack = -1;
   fNPrimary = 0;
@@ -174,34 +164,34 @@ void Ex03MCStack::Reset()
 }
 
 //_____________________________________________________________________________
-void  Ex03MCStack::SetCurrentTrack(Int_t track)
+void Ex03MCStack::SetCurrentTrack(Int_t track)
 {
-/// Set the current track number to a given value.
-/// \param  track The current track number
+  /// Set the current track number to a given value.
+  /// \param  track The current track number
 
   fCurrentTrack = track;
 }
 
 //_____________________________________________________________________________
-Int_t  Ex03MCStack::GetNtrack() const
+Int_t Ex03MCStack::GetNtrack() const
 {
-/// \return  The total number of all tracks.
+  /// \return  The total number of all tracks.
 
   return fParticles->GetEntriesFast();
 }
 
 //_____________________________________________________________________________
-Int_t  Ex03MCStack::GetNprimary() const
+Int_t Ex03MCStack::GetNprimary() const
 {
-/// \return  The total number of primary tracks.
+  /// \return  The total number of primary tracks.
 
   return fNPrimary;
 }
 
 //_____________________________________________________________________________
-TParticle*  Ex03MCStack::GetCurrentTrack() const
+TParticle* Ex03MCStack::GetCurrentTrack() const
 {
-/// \return  The current track particle
+  /// \return  The current track particle
 
   TParticle* current = GetParticle(fCurrentTrack);
 
@@ -212,17 +202,17 @@ TParticle*  Ex03MCStack::GetCurrentTrack() const
 }
 
 //_____________________________________________________________________________
-Int_t  Ex03MCStack::GetCurrentTrackNumber() const
+Int_t Ex03MCStack::GetCurrentTrackNumber() const
 {
-/// \return  The current track number
+  /// \return  The current track number
 
   return fCurrentTrack;
 }
 
 //_____________________________________________________________________________
-Int_t  Ex03MCStack::GetCurrentParentTrackNumber() const
+Int_t Ex03MCStack::GetCurrentParentTrackNumber() const
 {
-/// \return  The current track parent ID.
+  /// \return  The current track parent ID.
 
   TParticle* current = GetCurrentTrack();
 
@@ -233,15 +223,13 @@ Int_t  Ex03MCStack::GetCurrentParentTrackNumber() const
 }
 
 //_____________________________________________________________________________
-TParticle*  Ex03MCStack::GetParticle(Int_t id) const
+TParticle* Ex03MCStack::GetParticle(Int_t id) const
 {
-/// \return   The \em id -th particle in fParticles
-/// \param id The index of the particle to be returned
+  /// \return   The \em id -th particle in fParticles
+  /// \param id The index of the particle to be returned
 
   if (id < 0 || id >= fParticles->GetEntriesFast())
     Fatal("GetParticle", "Index out of range");
 
   return (TParticle*)fParticles->At(id);
 }
-
-

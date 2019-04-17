@@ -21,14 +21,14 @@
 
 #include <TVirtualMC.h>
 
-#include "Ex02DetectorConstructionOld.h"
 #include "Ex02ChamberParameterisation.h"
+#include "Ex02DetectorConstructionOld.h"
 
 /// \cond CLASSIMP
 ClassImp(Ex02DetectorConstructionOld)
-/// \endcond
+  /// \endcond
 
-using namespace std;
+  using namespace std;
 
 //_____________________________________________________________________________
 Ex02DetectorConstructionOld::Ex02DetectorConstructionOld()
@@ -36,7 +36,7 @@ Ex02DetectorConstructionOld::Ex02DetectorConstructionOld()
     fWorldLength(0.),
     fTargetLength(0.),
     fTrackerLength(0.),
-    fNofChambers(0) ,
+    fNofChambers(0),
     fChamberWidth(0.),
     fChamberSpacing(0.),
     fImedAir(0),
@@ -44,35 +44,36 @@ Ex02DetectorConstructionOld::Ex02DetectorConstructionOld()
     fImedXe(0)
 
 {
-/// Default constuctor
+  /// Default constuctor
 
-  //fpMagField = new ExN02MagneticField();
+  // fpMagField = new ExN02MagneticField();
 
-//--------- Sizes of the principal geometrical components (solids)  ---------
+  //--------- Sizes of the principal geometrical components (solids)  ---------
 
   fNofChambers = 5;
-  fChamberWidth =   20;
+  fChamberWidth = 20;
   fChamberSpacing = 80;
 
-  fTrackerLength = (fNofChambers+1)*fChamberSpacing; // Full length of Tracker
-  fTargetLength  = 5.0;                              // Full length of Target
-  fWorldLength= 1.2 *(fTargetLength+fTrackerLength);
+  fTrackerLength =
+    (fNofChambers + 1) * fChamberSpacing; // Full length of Tracker
+  fTargetLength = 5.0;                    // Full length of Target
+  fWorldLength = 1.2 * (fTargetLength + fTrackerLength);
 }
 
 //_____________________________________________________________________________
 Ex02DetectorConstructionOld::~Ex02DetectorConstructionOld()
 {
-/// Destructor
+  /// Destructor
 
-  //delete fpMagField;
+  // delete fpMagField;
 }
 
 //_____________________________________________________________________________
 void Ex02DetectorConstructionOld::ConstructMaterials()
 {
-/// Construct materials using VMC functions
+  /// Construct materials using VMC functions
 
-//--------- Material definition ---------
+  //--------- Material definition ---------
 
   Double_t a;
   Double_t z;
@@ -81,9 +82,9 @@ void Ex02DetectorConstructionOld::ConstructMaterials()
   Double_t absl;
   Float_t* ubuf = 0;
 
-  Double_t a2[2] = { 14.01, 16.00};
-  Double_t z2[2] = {  7.0,   8.0};
-  Double_t w2[2] = {  0.7,   0.3};
+  Double_t a2[2] = { 14.01, 16.00 };
+  Double_t z2[2] = { 7.0, 8.0 };
+  Double_t w2[2] = { 0.7, 0.3 };
   density = 1.29e-03;
   Int_t imatAir;
   gMC->Mixture(imatAir, "Air", a2, z2, density, 2, w2);
@@ -99,9 +100,9 @@ void Ex02DetectorConstructionOld::ConstructMaterials()
   a = 131.29;
   z = 54.;
   density = 5.458e-03;
-  //pressure    = 1*atmosphere;
-  //temperature = 293.15*kelvin;
-  radl =  1553.9;
+  // pressure    = 1*atmosphere;
+  // temperature = 293.15*kelvin;
+  radl = 1553.9;
   absl = 0.1;
   Int_t imatXe;
   gMC->Material(imatXe, "XenonGas", a, z, density, radl, absl, ubuf, 0);
@@ -110,16 +111,19 @@ void Ex02DetectorConstructionOld::ConstructMaterials()
   // Tracking medias
   //
 
-  Int_t ifield = 2;          // User defined magnetic field
-  Double_t fieldm = 10.;     // Maximum field value (in kiloGauss)
-  Double_t epsil  = .001;    // Tracking precision,
-  Double_t stemax = -0.01;   // Maximum displacement for multiple scat
-  Double_t tmaxfd = -20.;    // Maximum angle due to field deflection
-  Double_t deemax = -.3;     // Maximum fractional energy loss, DLS
-  Double_t stmin  = -.8;
-  gMC->Medium(fImedAir, "Air",  imatAir, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0);
-  gMC->Medium(fImedPb, "Lead", imatPb, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0);
-  gMC->Medium(fImedXe, "XenonGas", imatXe, 0, ifield, fieldm, tmaxfd, stemax, deemax, epsil, stmin, ubuf, 0);
+  Int_t ifield = 2;        // User defined magnetic field
+  Double_t fieldm = 10.;   // Maximum field value (in kiloGauss)
+  Double_t epsil = .001;   // Tracking precision,
+  Double_t stemax = -0.01; // Maximum displacement for multiple scat
+  Double_t tmaxfd = -20.;  // Maximum angle due to field deflection
+  Double_t deemax = -.3;   // Maximum fractional energy loss, DLS
+  Double_t stmin = -.8;
+  gMC->Medium(fImedAir, "Air", imatAir, 0, ifield, fieldm, tmaxfd, stemax,
+    deemax, epsil, stmin, ubuf, 0);
+  gMC->Medium(fImedPb, "Lead", imatPb, 0, ifield, fieldm, tmaxfd, stemax,
+    deemax, epsil, stmin, ubuf, 0);
+  gMC->Medium(fImedXe, "XenonGas", imatXe, 0, ifield, fieldm, tmaxfd, stemax,
+    deemax, epsil, stmin, ubuf, 0);
 
   // Print all the materials defined.
   //
@@ -130,23 +134,23 @@ void Ex02DetectorConstructionOld::ConstructMaterials()
 //_____________________________________________________________________________
 void Ex02DetectorConstructionOld::ConstructGeometry()
 {
-/// Construct volumes using VMC functions
+  /// Construct volumes using VMC functions
 
-//--------- Sizes of the principal geometrical components (solids)  ---------
+  //--------- Sizes of the principal geometrical components (solids)  ---------
 
-  Int_t targetMater  = fImedPb;
+  Int_t targetMater = fImedPb;
   Int_t chamberMater = fImedXe;
 
-  Double_t targetSize  = 0.5*fTargetLength;    // Half length of the Target
-  Double_t trackerSize = 0.5*fTrackerLength;   // Half length of the Tracker
+  Double_t targetSize = 0.5 * fTargetLength;   // Half length of the Target
+  Double_t trackerSize = 0.5 * fTrackerLength; // Half length of the Tracker
 
-//--------- Definitions of Solids, Logical Volumes, Physical Volumes ---------
+  //--------- Definitions of Solids, Logical Volumes, Physical Volumes ---------
 
   //------------------------------
   // World
   //------------------------------
 
-  Double_t halfWorldLength = 0.5*fWorldLength;
+  Double_t halfWorldLength = 0.5 * fWorldLength;
 
   Double_t world[3];
   world[0] = halfWorldLength;
@@ -164,15 +168,15 @@ void Ex02DetectorConstructionOld::ConstructGeometry()
   target[2] = targetSize;
   gMC->Gsvolu("TARG", "BOX", targetMater, target, 3);
 
-  Double_t posX =  0.;
-  Double_t posY =  0.;
-  Double_t posZ =  -(targetSize+trackerSize);
-  gMC->Gspos("TARG", 1 ,"WRLD", posX, posY, posZ, 0, "ONLY");
+  Double_t posX = 0.;
+  Double_t posY = 0.;
+  Double_t posZ = -(targetSize + trackerSize);
+  gMC->Gspos("TARG", 1, "WRLD", posX, posY, posZ, 0, "ONLY");
 
-  cout << "Target is " << fTargetLength << " cm"
+  cout << "Target is " << fTargetLength
+       << " cm"
        //<< " of " << TargetMater->GetName()
-       << " of lead "
-       << endl;
+       << " of lead " << endl;
 
   //------------------------------
   // Tracker
@@ -187,7 +191,7 @@ void Ex02DetectorConstructionOld::ConstructGeometry()
   posX = 0.;
   posY = 0.;
   posZ = 0.;
-  gMC->Gspos("TRAK", 1 ,"WRLD", posX, posY, posZ, 0, "ONLY");
+  gMC->Gspos("TRAK", 1, "WRLD", posX, posY, posZ, 0, "ONLY");
 
   //------------------------------
   // Tracker segments
@@ -201,60 +205,58 @@ void Ex02DetectorConstructionOld::ConstructGeometry()
   chamber[0] = -1;
   chamber[1] = -1;
   chamber[2] = -1;
-  gMC->Gsvolu("CHMB","BOX", chamberMater, chamber, 0);
+  gMC->Gsvolu("CHMB", "BOX", chamberMater, chamber, 0);
 
-  Double_t firstPosition = -trackerSize + 0.5*fChamberWidth;
-  Double_t firstLength = fTrackerLength/10;
-  Double_t lastLength  = fTrackerLength;
-  Ex02ChamberParameterisation* chamberParam
-    = new Ex02ChamberParameterisation(
-			   fNofChambers,          // NoChambers
-			   firstPosition,         // Z of center of first
-			   fChamberSpacing,        // Z spacing of centers
-			   fChamberWidth,          // Width Chamber
-			   firstLength,           // lengthInitial
-			   lastLength);           // lengthFinal
-  for (Int_t i=0; i<fNofChambers; i++) {
+  Double_t firstPosition = -trackerSize + 0.5 * fChamberWidth;
+  Double_t firstLength = fTrackerLength / 10;
+  Double_t lastLength = fTrackerLength;
+  Ex02ChamberParameterisation* chamberParam =
+    new Ex02ChamberParameterisation(fNofChambers, // NoChambers
+      firstPosition,                              // Z of center of first
+      fChamberSpacing,                            // Z spacing of centers
+      fChamberWidth,                              // Width Chamber
+      firstLength,                                // lengthInitial
+      lastLength);                                // lengthFinal
+  for (Int_t i = 0; i < fNofChambers; i++) {
     Double_t pos[3];
     Double_t dim[3];
     chamberParam->ComputeTransformation(i, pos);
     chamberParam->ComputeDimensions(i, dim);
-    gMC->Gsposp("CHMB", i ,"TRAK", pos[0], pos[1], pos[2], 0, "ONLY", dim, 3);
+    gMC->Gsposp("CHMB", i, "TRAK", pos[0], pos[1], pos[2], 0, "ONLY", dim, 3);
   }
 
-  cout << "There are " << fNofChambers
-       << " chambers in the tracker region. "
-       << "The chambers are " << fChamberWidth/10. << " mm of "
+  cout << "There are " << fNofChambers << " chambers in the tracker region. "
+       << "The chambers are " << fChamberWidth / 10.
+       << " mm of "
        //<< ChamberMater->GetName()
        << "Xenon gas"
-       << "\n The distance between chamber is "
-       << fChamberSpacing << " cm"
+       << "\n The distance between chamber is " << fChamberSpacing << " cm"
        << endl;
 
   //------------------------------------------------
   // Sensitive detectors
   //------------------------------------------------
-/*
+  /*
 
-  G4SDManager* SDman = G4SDManager::GetSDMpointer();
+    G4SDManager* SDman = G4SDManager::GetSDMpointer();
 
-  G4String trackerChamberSDname = "ExN02/TrackerChamberSD";
-  ExN02TrackerSD* aTrackerSD = new ExN02TrackerSD( trackerChamberSDname );
-  SDman->AddNewDetector( aTrackerSD );
-  logicChamber->SetSensitiveDetector( aTrackerSD );
-*/
+    G4String trackerChamberSDname = "ExN02/TrackerChamberSD";
+    ExN02TrackerSD* aTrackerSD = new ExN02TrackerSD( trackerChamberSDname );
+    SDman->AddNewDetector( aTrackerSD );
+    logicChamber->SetSensitiveDetector( aTrackerSD );
+  */
 
-//--------- Visualization attributes -------------------------------
-/*
-  G4VisAttributes* BoxVisAtt= new G4VisAttributes(G4Colour(1.0,1.0,1.0));
-  logicWorld  ->SetVisAttributes(BoxVisAtt);
-  logicTarget ->SetVisAttributes(BoxVisAtt);
-  logicTracker->SetVisAttributes(BoxVisAtt);
+  //--------- Visualization attributes -------------------------------
+  /*
+    G4VisAttributes* BoxVisAtt= new G4VisAttributes(G4Colour(1.0,1.0,1.0));
+    logicWorld  ->SetVisAttributes(BoxVisAtt);
+    logicTarget ->SetVisAttributes(BoxVisAtt);
+    logicTracker->SetVisAttributes(BoxVisAtt);
 
-  G4VisAttributes* ChamberVisAtt = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
-  logicChamber->SetVisAttributes(ChamberVisAtt);
-*/
-//--------- example of User Limits -------------------------------
+    G4VisAttributes* ChamberVisAtt = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+    logicChamber->SetVisAttributes(ChamberVisAtt);
+  */
+  //--------- example of User Limits -------------------------------
 
   // below is an example of how to set tracking constraints in a given
   // logical volume(see also in N02PhysicsList how to setup the process
@@ -264,21 +266,22 @@ void Ex02DetectorConstructionOld::ConstructGeometry()
   // Double_t maxTime = 0.1*ns, minEkin = 10*MeV;
   // logicTracker->SetUserLimits(new G4UserLimits(maxStep,maxLength,maxTime,
   //                                               minEkin));
-
 }
 
 //_____________________________________________________________________________
-void Ex02DetectorConstructionOld::SetTargetMaterial(const TString& /*materialName*/)
+void Ex02DetectorConstructionOld::SetTargetMaterial(
+  const TString& /*materialName*/)
 {
-/// Set target material (not available with VMC)
+  /// Set target material (not available with VMC)
 
   Warning("SetTargetMaterial", "Not available in virtual Monte Carlo");
 }
 
 //_____________________________________________________________________________
-void Ex02DetectorConstructionOld::SetChamberMaterial(const TString& /*materialName*/)
+void Ex02DetectorConstructionOld::SetChamberMaterial(
+  const TString& /*materialName*/)
 {
-/// Set chamber material (not available with VMC)
+  /// Set chamber material (not available with VMC)
 
   Warning("SetTargetMaterial", "Not available in virtual Monte Carlo");
 }

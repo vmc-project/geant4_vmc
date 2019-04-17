@@ -44,60 +44,59 @@ class TVirtualMagField;
 
 class TG4Field
 {
-  public:
-    TG4Field(const TG4FieldParameters& parameters,
-             TVirtualMagField* magField,
-             G4LogicalVolume* lv = 0);
-    virtual ~TG4Field();
+ public:
+  TG4Field(const TG4FieldParameters& parameters, TVirtualMagField* magField,
+    G4LogicalVolume* lv = 0);
+  virtual ~TG4Field();
 
-    virtual void Update(const TG4FieldParameters& parameters);
+  virtual void Update(const TG4FieldParameters& parameters);
 
-    virtual void PrintStatistics() const {}
+  virtual void PrintStatistics() const {}
 
-    // access to field setting
-    G4Field* GetG4Field() const;
-    G4EquationOfMotion* GetEquation() const;
-    G4MagIntegratorStepper* GetStepper() const;
+  // access to field setting
+  G4Field* GetG4Field() const;
+  G4EquationOfMotion* GetEquation() const;
+  G4MagIntegratorStepper* GetStepper() const;
 
-  private:
-    // methods
-    G4Field* CreateG4Field(const TG4FieldParameters& parameters,
-                           TVirtualMagField* magField);
-    G4EquationOfMotion* CreateEquation(
-                           EquationType equation);
-    G4MagIntegratorStepper*  CreateStepper(
-                           G4EquationOfMotion* equation,
-                           StepperType stepper);
+ private:
+  // methods
+  G4Field* CreateG4Field(
+    const TG4FieldParameters& parameters, TVirtualMagField* magField);
+  G4EquationOfMotion* CreateEquation(EquationType equation);
+  G4MagIntegratorStepper* CreateStepper(
+    G4EquationOfMotion* equation, StepperType stepper);
 
-    // data
-    /// Geant4 field
-    G4Field*  fG4Field;
-    /// The associated TGeo magnetic field
-    TVirtualMagField*  fVirtualMagField;
-    /// The associated volume (if local field)
-    G4LogicalVolume*   fLogicalVolume;
-    /// The equation of motion
-    G4EquationOfMotion* fEquation;
-    /// The magnetic integrator stepper
-    G4MagIntegratorStepper* fStepper;
+  // data
+  /// Geant4 field
+  G4Field* fG4Field;
+  /// The associated TGeo magnetic field
+  TVirtualMagField* fVirtualMagField;
+  /// The associated volume (if local field)
+  G4LogicalVolume* fLogicalVolume;
+  /// The equation of motion
+  G4EquationOfMotion* fEquation;
+  /// The magnetic integrator stepper
+  G4MagIntegratorStepper* fStepper;
 };
 
 // inline functions
 
-inline G4Field* TG4Field::GetG4Field() const {
+inline G4Field* TG4Field::GetG4Field() const
+{
   /// Return the instantiated field
   return fG4Field;
 }
 
-inline G4EquationOfMotion* TG4Field::GetEquation() const {
+inline G4EquationOfMotion* TG4Field::GetEquation() const
+{
   /// Return the equation of motion
   return fEquation;
 }
 
-inline G4MagIntegratorStepper* TG4Field::GetStepper() const {
+inline G4MagIntegratorStepper* TG4Field::GetStepper() const
+{
   /// Return the magnetic integrator stepper
   return fStepper;
 }
 
-#endif //TG4_FIELD_H
-
+#endif // TG4_FIELD_H

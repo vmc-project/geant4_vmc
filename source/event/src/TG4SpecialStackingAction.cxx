@@ -15,23 +15,23 @@
 #include "TG4SpecialStackingAction.h"
 #include "TG4Globals.h"
 
+#include <G4StackManager.hh>
+#include <G4StackedTrack.hh>
 #include <G4Track.hh>
 #include <G4TrackStack.hh>
-#include <G4StackedTrack.hh>
-#include <G4StackManager.hh>
 
 #include <TPDGCode.h>
 
 //_____________________________________________________________________________
 TG4SpecialStackingAction::TG4SpecialStackingAction()
   : G4UserStackingAction(),
-    TG4Verbose("stackingAction",1),
+    TG4Verbose("stackingAction", 1),
     fMessenger(this),
     fStage(0),
     fSkipNeutrino(false),
     fWaitPrimary(true)
 {
-/// Default constructor
+  /// Default constructor
 
   G4cout << "### TG4SpecialStackingAction activated" << G4endl;
 }
@@ -39,7 +39,7 @@ TG4SpecialStackingAction::TG4SpecialStackingAction()
 //_____________________________________________________________________________
 TG4SpecialStackingAction::~TG4SpecialStackingAction()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -47,21 +47,20 @@ TG4SpecialStackingAction::~TG4SpecialStackingAction()
 //
 
 //_____________________________________________________________________________
-G4ClassificationOfNewTrack
-TG4SpecialStackingAction::ClassifyNewTrack(const G4Track* track)
+G4ClassificationOfNewTrack TG4SpecialStackingAction::ClassifyNewTrack(
+  const G4Track* track)
 {
-/// Classify the new track.
+  /// Classify the new track.
 
   if (fWaitPrimary && fStage == 0) {
     // move all primaries to PrimaryStack
     return fPostpone;
   }
 
-  if ( fSkipNeutrino ) {
+  if (fSkipNeutrino) {
     G4int pdgCode = track->GetDefinition()->GetPDGEncoding();
-    if  ( pdgCode ==  kNuE || pdgCode ==  kNuEBar ||
-          pdgCode ==  kNuMu || pdgCode == kNuMuBar ||
-	  pdgCode ==  kNuTau || pdgCode == kNuTauBar ) {
+    if (pdgCode == kNuE || pdgCode == kNuEBar || pdgCode == kNuMu ||
+        pdgCode == kNuMuBar || pdgCode == kNuTau || pdgCode == kNuTauBar) {
 
       return fKill;
     }
@@ -73,7 +72,7 @@ TG4SpecialStackingAction::ClassifyNewTrack(const G4Track* track)
 //_____________________________________________________________________________
 void TG4SpecialStackingAction::NewStage()
 {
-/// Called by G4 kernel at the new stage of stacking.
+  /// Called by G4 kernel at the new stage of stacking.
 
   fStage++;
 
@@ -82,21 +81,18 @@ void TG4SpecialStackingAction::NewStage()
            << " has been started." << G4endl;
   }
 
-  if (fWaitPrimary &&
-      stackManager->GetNUrgentTrack() == 0 &&
-      stackManager->GetNPostponedTrack() != 0 ) {
+  if (fWaitPrimary && stackManager->GetNUrgentTrack() == 0 &&
+      stackManager->GetNPostponedTrack() != 0) {
 
-      stackManager->TransferOneStackedTrack(fPostpone, fUrgent);
+    stackManager->TransferOneStackedTrack(fPostpone, fUrgent);
   }
 }
 
 //_____________________________________________________________________________
 void TG4SpecialStackingAction::PrepareNewEvent()
 {
-///  Since transition to G4SmartTrackStack in Geant4 9.6.x
-///  secondaries are not ordered even when the special stacking is activated.
+  ///  Since transition to G4SmartTrackStack in Geant4 9.6.x
+  ///  secondaries are not ordered even when the special stacking is activated.
 
   fStage = 0;
 }
-
-

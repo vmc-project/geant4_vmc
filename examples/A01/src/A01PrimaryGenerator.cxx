@@ -15,25 +15,24 @@
 /// \date 12/05/2012
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include <TVirtualMC.h>
-#include <TVirtualMCStack.h>
-#include <TVirtualMCApplication.h>
-#include <TRandom.h>
-#include <TPDGCode.h>
-#include <TVector3.h>
-#include <TParticlePDG.h>
+#include <Riostream.h>
 #include <TDatabasePDG.h>
 #include <TPDGCode.h>
-#include <Riostream.h>
+#include <TParticlePDG.h>
+#include <TRandom.h>
+#include <TVector3.h>
+#include <TVirtualMC.h>
+#include <TVirtualMCApplication.h>
+#include <TVirtualMCStack.h>
 
 #include "A01PrimaryGenerator.h"
 
 /// \cond CLASSIMP
 ClassImp(A01PrimaryGenerator)
-/// \endcond
+  /// \endcond
 
-//_____________________________________________________________________________
-A01PrimaryGenerator::A01PrimaryGenerator(TVirtualMCStack* stack)
+  //_____________________________________________________________________________
+  A01PrimaryGenerator::A01PrimaryGenerator(TVirtualMCStack* stack)
   : TObject(),
     fStack(stack),
     fNofPrimaries(1),
@@ -43,13 +42,13 @@ A01PrimaryGenerator::A01PrimaryGenerator(TVirtualMCStack* stack)
     fSigmaAngle(2.),         // 2 deg
     fRandomizePrimary(true)
 {
-/// Standard constructor
-/// \param stack  The VMC stack
+  /// Standard constructor
+  /// \param stack  The VMC stack
 }
 
 //_____________________________________________________________________________
-A01PrimaryGenerator::A01PrimaryGenerator(const A01PrimaryGenerator& origin,
-                                         TVirtualMCStack* stack)
+A01PrimaryGenerator::A01PrimaryGenerator(
+  const A01PrimaryGenerator& origin, TVirtualMCStack* stack)
   : TObject(origin),
     fStack(stack),
     fNofPrimaries(origin.fNofPrimaries),
@@ -59,9 +58,9 @@ A01PrimaryGenerator::A01PrimaryGenerator(const A01PrimaryGenerator& origin,
     fSigmaAngle(origin.fSigmaAngle),
     fRandomizePrimary(origin.fRandomizePrimary)
 {
-/// Copy constructor (for clonig on worker thread in MT mode).
-/// \param origin    The source object (on master).
-/// \param stack  The VMC stack
+  /// Copy constructor (for clonig on worker thread in MT mode).
+  /// \param origin    The source object (on master).
+  /// \param stack  The VMC stack
 }
 
 //_____________________________________________________________________________
@@ -75,13 +74,13 @@ A01PrimaryGenerator::A01PrimaryGenerator()
     fSigmaAngle(2.),         // 2 deg
     fRandomizePrimary(true)
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
 A01PrimaryGenerator::~A01PrimaryGenerator()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -91,8 +90,8 @@ A01PrimaryGenerator::~A01PrimaryGenerator()
 //_____________________________________________________________________________
 void A01PrimaryGenerator::GeneratePrimaries()
 {
-/// Fill the user stack (derived from TVirtualMCStack) with primary particles.
-/// All primaries in one event have the same properties.
+  /// Fill the user stack (derived from TVirtualMCStack) with primary particles.
+  /// All primaries in one event have the same properties.
 
   // Track ID (filled by stack)
   Int_t ntr;
@@ -100,33 +99,32 @@ void A01PrimaryGenerator::GeneratePrimaries()
   // Option: to be tracked
   Int_t toBeDone = 1;
 
-  Int_t pdg  = fDefaultParticle;
-  if(fRandomizePrimary) {
-     //Int_t i = (Int_t)(2.*gMC->GetRandom()->Rndm());
-     //Int_t i = (Int_t)(2.*0.3);
-     static Int_t counter = 0;
-     Int_t i = (counter++)%5;
-     switch(i)
-     {
-       case 0:
-         pdg = kPositron;
-         break;
-       case 1:
-         pdg = kMuonPlus;
-         break;
-       case 2:
-         pdg = kPiPlus;
-         break;
-       case 3:
-         pdg = kKPlus;
-         break;
-       case 4:
-         pdg = kProton;
-         break;
-       default:
-         pdg = kPositron;
-         break;
-     }
+  Int_t pdg = fDefaultParticle;
+  if (fRandomizePrimary) {
+    // Int_t i = (Int_t)(2.*gMC->GetRandom()->Rndm());
+    // Int_t i = (Int_t)(2.*0.3);
+    static Int_t counter = 0;
+    Int_t i = (counter++) % 5;
+    switch (i) {
+      case 0:
+        pdg = kPositron;
+        break;
+      case 1:
+        pdg = kMuonPlus;
+        break;
+      case 2:
+        pdg = kPiPlus;
+        break;
+      case 3:
+        pdg = kKPlus;
+        break;
+      case 4:
+        pdg = kProton;
+        break;
+      default:
+        pdg = kPositron;
+        break;
+    }
   }
 
   // Polarization
@@ -135,8 +133,8 @@ void A01PrimaryGenerator::GeneratePrimaries()
   Double_t polz = 0.;
 
   // Position
-  Double_t vx  = 0;
-  Double_t vy  = 0.;
+  Double_t vx = 0;
+  Double_t vy = 0.;
   Double_t vz = -800.0; //- 8.*m;
   Double_t tof = 0.;
 
@@ -144,20 +142,20 @@ void A01PrimaryGenerator::GeneratePrimaries()
   TDatabasePDG* databasePDG = TDatabasePDG::Instance();
   TParticlePDG* particlePDG = databasePDG->GetParticle(pdg);
   Double_t mass = particlePDG->Mass();
-  //Double_t pp = fMomentum + (gMC->GetRandom()->Rndm()-0.5)*fSigmaMomentum;
-  Double_t pp = fMomentum + (0.3-0.5)*fSigmaMomentum;
-  Double_t e = TMath::Sqrt(pp*pp+mass*mass);
+  // Double_t pp = fMomentum + (gMC->GetRandom()->Rndm()-0.5)*fSigmaMomentum;
+  Double_t pp = fMomentum + (0.3 - 0.5) * fSigmaMomentum;
+  Double_t e = TMath::Sqrt(pp * pp + mass * mass);
 
-  //Double_t angle = (gMC->GetRandom()->Rndm()-0.5)*fSigmaAngle;
-  Double_t angle = (0.3-0.5)*fSigmaAngle;
+  // Double_t angle = (gMC->GetRandom()->Rndm()-0.5)*fSigmaAngle;
+  Double_t angle = (0.3 - 0.5) * fSigmaAngle;
   Double_t px, py, pz;
-  px = pp*TMath::Sin(angle*TMath::DegToRad());
+  px = pp * TMath::Sin(angle * TMath::DegToRad());
   py = 0.;
-  pz = pp*TMath::Cos(angle*TMath::DegToRad());
+  pz = pp * TMath::Cos(angle * TMath::DegToRad());
 
-  for (Int_t i=0; i<fNofPrimaries; i++) {
+  for (Int_t i = 0; i < fNofPrimaries; i++) {
     // Add particle to stack
-    fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx, poly, polz,
-                      kPPrimary, ntr, 1., 0);
+    fStack->PushTrack(toBeDone, -1, pdg, px, py, pz, e, vx, vy, vz, tof, polx,
+      poly, polz, kPPrimary, ntr, 1., 0);
   }
 }

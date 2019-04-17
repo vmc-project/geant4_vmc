@@ -76,8 +76,8 @@ enum TG4G3Cut
   /// - G3 default value: ??
   kTOFMAX,
 
-   /// Invalid value
+  /// Invalid value
   kNoG3Cuts
 };
 
-#endif //TG4_G3_CUT_H
+#endif // TG4_G3_CUT_H

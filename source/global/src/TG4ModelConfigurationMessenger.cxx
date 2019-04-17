@@ -15,8 +15,8 @@
 #include "TG4ModelConfigurationMessenger.h"
 #include "TG4ModelConfigurationManager.h"
 
-#include <G4UIdirectory.hh>
 #include <G4UIcmdWithAString.hh>
+#include <G4UIdirectory.hh>
 
 #include <locale>
 
@@ -24,7 +24,8 @@
 // utility methods
 //
 
-namespace {
+namespace
+{
 
 //______________________________________________________________________________
 G4String GetDirectoryName(const G4String& baseName)
@@ -32,11 +33,11 @@ G4String GetDirectoryName(const G4String& baseName)
   std::string name(baseName);
   // convert first letter to lower case
   std::locale loc;
-  name.replace(0, 1, 1, std::tolower(name[0],loc));
+  name.replace(0, 1, 1, std::tolower(name[0], loc));
   return "/mcPhysics/" + name + "/";
 }
 
-}
+} // namespace
 
 //
 // ctors, dtor
@@ -44,17 +45,16 @@ G4String GetDirectoryName(const G4String& baseName)
 
 //______________________________________________________________________________
 TG4ModelConfigurationMessenger::TG4ModelConfigurationMessenger(
-                                    TG4ModelConfigurationManager* manager,
-                                    const G4String& availableModels)
- : G4UImessenger(),
-   fModelConfigurationManager(manager),
-   fSelectedModel(),
-   fDirectory(0),
-   fSetModelCmd(0),
-   fSetParticlesCmd(0),
-   fSetRegionsCmd(0)
+  TG4ModelConfigurationManager* manager, const G4String& availableModels)
+  : G4UImessenger(),
+    fModelConfigurationManager(manager),
+    fSelectedModel(),
+    fDirectory(0),
+    fSetModelCmd(0),
+    fSetParticlesCmd(0),
+    fSetRegionsCmd(0)
 {
-/// Standard constructor
+  /// Standard constructor
 
   G4String physicsName = fModelConfigurationManager->GetName();
 
@@ -67,10 +67,10 @@ TG4ModelConfigurationMessenger::TG4ModelConfigurationMessenger(
   // setModel command
   G4String commandName = dirName + "setModel";
   fSetModelCmd = new G4UIcmdWithAString(commandName, this);
-  guidance = "Define an extra "  + physicsName;
+  guidance = "Define an extra " + physicsName;
   fSetModelCmd->SetGuidance(guidance);
   fSetModelCmd->SetParameterName("Model", false);
-  if ( availableModels.size() ) fSetModelCmd->SetCandidates(availableModels);
+  if (availableModels.size()) fSetModelCmd->SetCandidates(availableModels);
   fSetModelCmd->AvailableForStates(G4State_PreInit);
 
   // setEmModel command = the same as setModel
@@ -80,15 +80,14 @@ TG4ModelConfigurationMessenger::TG4ModelConfigurationMessenger(
   guidance = "The same as setModel, kept for backward compatibility.";
   fSetEmModelCmd->SetGuidance(guidance);
   fSetEmModelCmd->SetParameterName("EmModel", false);
-  if ( availableModels.size() ) fSetEmModelCmd->SetCandidates(availableModels);
+  if (availableModels.size()) fSetEmModelCmd->SetCandidates(availableModels);
   fSetEmModelCmd->AvailableForStates(G4State_PreInit);
 
   // setParticles command
   commandName = dirName + "setParticles";
   fSetParticlesCmd = new G4UIcmdWithAString(commandName, this);
-  guidance
-    = "Set particles for the selected extra " + physicsName + "\n"
-    + "(all = select all particles which the model is applicable.)";
+  guidance = "Set particles for the selected extra " + physicsName + "\n" +
+             "(all = select all particles which the model is applicable.)";
   fSetParticlesCmd->SetGuidance(guidance.c_str());
   fSetParticlesCmd->SetParameterName("Particles", false);
   fSetParticlesCmd->AvailableForStates(G4State_PreInit);
@@ -96,9 +95,10 @@ TG4ModelConfigurationMessenger::TG4ModelConfigurationMessenger(
   // setRegions command
   commandName = dirName + "setRegions";
   fSetRegionsCmd = new G4UIcmdWithAString(commandName, this);
-  guidance
-    = "Set tracking media names (regions) for the selected extra " + physicsName+ "\n"
-    + "("" = the model will be applied to the default world region.";
+  guidance = "Set tracking media names (regions) for the selected extra " +
+             physicsName + "\n" +
+             "("
+             " = the model will be applied to the default world region.";
   fSetRegionsCmd->SetGuidance(guidance);
   fSetRegionsCmd->SetParameterName("Regions", false);
   fSetRegionsCmd->AvailableForStates(G4State_PreInit);
@@ -107,7 +107,7 @@ TG4ModelConfigurationMessenger::TG4ModelConfigurationMessenger(
 //______________________________________________________________________________
 TG4ModelConfigurationMessenger::~TG4ModelConfigurationMessenger()
 {
-/// Destructor
+  /// Destructor
   delete fDirectory;
   delete fSetModelCmd;
   delete fSetEmModelCmd;
@@ -120,12 +120,12 @@ TG4ModelConfigurationMessenger::~TG4ModelConfigurationMessenger()
 //
 
 //______________________________________________________________________________
-void TG4ModelConfigurationMessenger::SetNewValue(G4UIcommand* command,
-                                                 G4String newValue)
+void TG4ModelConfigurationMessenger::SetNewValue(
+  G4UIcommand* command, G4String newValue)
 {
-/// Apply command to the associated object.
+  /// Apply command to the associated object.
 
-  if (command == fSetModelCmd || command == fSetEmModelCmd ) {
+  if (command == fSetModelCmd || command == fSetEmModelCmd) {
     fSelectedModel = newValue;
     fModelConfigurationManager->SetModel(fSelectedModel);
   }

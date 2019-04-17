@@ -15,9 +15,9 @@
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-#include "TG4Verbose.h"
-#include "TG4Globals.h"
 #include "TG4G3Control.h"
+#include "TG4Globals.h"
+#include "TG4Verbose.h"
 
 // clang-format off
 #include <G4VProcess.hh>
@@ -43,59 +43,60 @@
 class TG4SpecialControlsV2 : public TG4Verbose
 {
   /// The action to be performed in the current step
-  enum Switch {
-    kSwitch,  ///< switch the process activation
-    kReswitch,///< switch the process activation back
-    kUnswitch ///< do not switch the process activation
+  enum Switch
+  {
+    kSwitch,   ///< switch the process activation
+    kReswitch, ///< switch the process activation back
+    kUnswitch  ///< do not switch the process activation
   };
 
-  public:
-    TG4SpecialControlsV2();
-    virtual ~TG4SpecialControlsV2();
+ public:
+  TG4SpecialControlsV2();
+  virtual ~TG4SpecialControlsV2();
 
-    // methods
-    void StartTrack(const G4Track* track);
-    void ApplyControls();
-    void RestoreProcessActivations();
+  // methods
+  void StartTrack(const G4Track* track);
+  void ApplyControls();
+  void RestoreProcessActivations();
 
-    // get methods
-    Bool_t IsApplicable() const;
+  // get methods
+  Bool_t IsApplicable() const;
 
-  private:
-    /// Not implemented
-    TG4SpecialControlsV2(const TG4SpecialControlsV2& right);
-    /// Not implemented
-    TG4SpecialControlsV2& operator = (const TG4SpecialControlsV2& right);
+ private:
+  /// Not implemented
+  TG4SpecialControlsV2(const TG4SpecialControlsV2& right);
+  /// Not implemented
+  TG4SpecialControlsV2& operator=(const TG4SpecialControlsV2& right);
 
-    // methods
-    void  SetSwitch();
-    void  Reset();
+  // methods
+  void SetSwitch();
+  void Reset();
 
-    // data members
+  // data members
 
-    /// Applicability for the current track
-    G4bool  fIsApplicable;
+  /// Applicability for the current track
+  G4bool fIsApplicable;
 
-    /// The current track
-    const G4Track*  fkTrack;
+  /// The current track
+  const G4Track* fkTrack;
 
-    /// The action to be performed in the current step
-    Switch fSwitch;
+  /// The action to be performed in the current step
+  Switch fSwitch;
 
-    /// Vector of the processes the activation of which is changed by this process
-    G4ProcessVector  fSwitchedProcesses;
+  /// Vector of the processes the activation of which is changed by this process
+  G4ProcessVector fSwitchedProcesses;
 
-    /// Vector for storing the current values of the processes activation
-    TG4boolVector  fSwitchedControls;
+  /// Vector for storing the current values of the processes activation
+  TG4boolVector fSwitchedControls;
 
-    /// vector of the origin process activations
-    TG4boolVector  fProcessActivations;
+  /// vector of the origin process activations
+  TG4boolVector fProcessActivations;
 };
 
-inline Bool_t TG4SpecialControlsV2::IsApplicable() const {
+inline Bool_t TG4SpecialControlsV2::IsApplicable() const
+{
   /// Return true if special controls are applicable for the current track
   return fIsApplicable;
 }
 
-#endif //TG4_SPECIAL_CONTROLS_V2_H
-
+#endif // TG4_SPECIAL_CONTROLS_V2_H

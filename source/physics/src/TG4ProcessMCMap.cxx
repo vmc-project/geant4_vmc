@@ -16,21 +16,19 @@
 #include "TG4G3PhysicsManager.h"
 #include "TG4Globals.h"
 
+#include "globals.hh"
 #include <G4VProcess.hh>
 #include <iomanip>
-#include "globals.hh"
 
 TG4ProcessMCMap* TG4ProcessMCMap::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4ProcessMCMap::TG4ProcessMCMap()
-  : fMap()
+TG4ProcessMCMap::TG4ProcessMCMap() : fMap()
 {
-/// Default constructor
+  /// Default constructor
 
   if (fgInstance) {
-    TG4Globals::Exception(
-      "TG4ProcessMCMap", "TG4ProcessMCMap",
+    TG4Globals::Exception("TG4ProcessMCMap", "TG4ProcessMCMap",
       "Cannot create two instances of singleton.");
   }
 
@@ -40,7 +38,7 @@ TG4ProcessMCMap::TG4ProcessMCMap()
 //_____________________________________________________________________________
 TG4ProcessMCMap::~TG4ProcessMCMap()
 {
-/// Destructor
+  /// Destructor
 
   fgInstance = 0;
 }
@@ -52,7 +50,7 @@ TG4ProcessMCMap::~TG4ProcessMCMap()
 //_____________________________________________________________________________
 G4bool TG4ProcessMCMap::IsDefined(const G4String& processName)
 {
-/// Return true if the first is already in the map.
+  /// Return true if the first is already in the map.
 
   if (fMap.find(processName) == fMap.end())
     return false;
@@ -67,7 +65,7 @@ G4bool TG4ProcessMCMap::IsDefined(const G4String& processName)
 //_____________________________________________________________________________
 G4bool TG4ProcessMCMap::Add(G4VProcess* process, TMCProcess mcProcess)
 {
-/// Add the pair to the map.
+  /// Add the pair to the map.
 
   if (!process) return false;
 
@@ -77,7 +75,7 @@ G4bool TG4ProcessMCMap::Add(G4VProcess* process, TMCProcess mcProcess)
 //_____________________________________________________________________________
 G4bool TG4ProcessMCMap::Add(G4String processName, TMCProcess mcProcess)
 {
-/// Add the pair to the map.
+  /// Add the pair to the map.
 
   if (!IsDefined(processName)) {
     // insert into map
@@ -91,18 +89,17 @@ G4bool TG4ProcessMCMap::Add(G4String processName, TMCProcess mcProcess)
 //_____________________________________________________________________________
 void TG4ProcessMCMap::PrintAll() const
 {
-/// Dump the whole map.
+  /// Dump the whole map.
 
   if (fMap.size()) {
-    G4cout << "Dump of TG4ProcessMCMap - " << fMap.size() << " entries:" << G4endl;
+    G4cout << "Dump of TG4ProcessMCMap - " << fMap.size()
+           << " entries:" << G4endl;
     G4int counter = 0;
-    for (MapConstIterator i=fMap.begin(); i != fMap.end(); i++) {
+    for (MapConstIterator i = fMap.begin(); i != fMap.end(); i++) {
       G4String processName = (*i).first;
       TMCProcess mcProcess = (*i).second;
       G4cout << "Map element " << std::setw(3) << counter++ << "   "
-             << processName << "   "
-             << TMCProcessName[mcProcess]
-             << G4endl;
+             << processName << "   " << TMCProcessName[mcProcess] << G4endl;
     }
   }
 }
@@ -110,7 +107,7 @@ void TG4ProcessMCMap::PrintAll() const
 //_____________________________________________________________________________
 void TG4ProcessMCMap::Clear()
 {
-/// Clear the map.
+  /// Clear the map.
 
   fMap.clear();
 }
@@ -118,7 +115,7 @@ void TG4ProcessMCMap::Clear()
 //_____________________________________________________________________________
 TMCProcess TG4ProcessMCMap::GetMCProcess(const G4VProcess* process) const
 {
-/// Return TMCProcess code for the process with a given name.
+  /// Return TMCProcess code for the process with a given name.
 
   if (!process) return kPNoProcess;
 
@@ -128,7 +125,7 @@ TMCProcess TG4ProcessMCMap::GetMCProcess(const G4VProcess* process) const
 //_____________________________________________________________________________
 TMCProcess TG4ProcessMCMap::GetMCProcess(const G4String& processName) const
 {
-/// Return TMCProcess code for the process with a given name.
+  /// Return TMCProcess code for the process with a given name.
 
   MapConstIterator i = fMap.find(processName);
   if (i == fMap.end())
@@ -140,7 +137,7 @@ TMCProcess TG4ProcessMCMap::GetMCProcess(const G4String& processName) const
 //_____________________________________________________________________________
 G4String TG4ProcessMCMap::GetMCProcessName(const G4VProcess* process) const
 {
-/// Return TMCProcess code for the process with a given name.
+  /// Return TMCProcess code for the process with a given name.
 
   if (!process) return TMCProcessName[kPNoProcess];
 
@@ -150,8 +147,7 @@ G4String TG4ProcessMCMap::GetMCProcessName(const G4VProcess* process) const
 //_____________________________________________________________________________
 G4String TG4ProcessMCMap::GetMCProcessName(const G4String& processName) const
 {
-/// Return TMCProcess code for the process with a given name.
+  /// Return TMCProcess code for the process with a given name.
 
   return TMCProcessName[GetMCProcess(processName)];
 }
-

@@ -17,52 +17,42 @@
 
 #include "Ex01Particle.h"
 
-#include <TParticle.h>
 #include <TObjArray.h>
+#include <TParticle.h>
 
 /// \cond CLASSIMP
 ClassImp(Ex01Particle)
-/// \endcond
+  /// \endcond
 
-//_____________________________________________________________________________
-Ex01Particle::Ex01Particle(Int_t id, TParticle* particle)
-  : fID(id),
-    fParticle(particle),
-    fMother(0),
-    fDaughters(0)
+  //_____________________________________________________________________________
+  Ex01Particle::Ex01Particle(Int_t id, TParticle* particle)
+  : fID(id), fParticle(particle), fMother(0), fDaughters(0)
 {
-/// Standard constructor
-/// \param  id        The particle id
-/// \param  particle  The particle definition (TParticle)
+  /// Standard constructor
+  /// \param  id        The particle id
+  /// \param  particle  The particle definition (TParticle)
 }
 
 //_____________________________________________________________________________
 Ex01Particle::Ex01Particle(Int_t id, TParticle* particle, Ex01Particle* mother)
-  : fID(id),
-    fParticle(particle),
-    fMother(mother),
-    fDaughters(0)
+  : fID(id), fParticle(particle), fMother(mother), fDaughters(0)
 {
-/// Standard constructor
-/// \param  id        The particle id
-/// \param  particle  The particle definition (TParticle)
-/// \param  mother    The particle mother
+  /// Standard constructor
+  /// \param  id        The particle id
+  /// \param  particle  The particle definition (TParticle)
+  /// \param  mother    The particle mother
 }
 
 //_____________________________________________________________________________
-Ex01Particle::Ex01Particle()
-  : fID(0),
-    fParticle(0),
-    fMother(0),
-    fDaughters(0)
+Ex01Particle::Ex01Particle() : fID(0), fParticle(0), fMother(0), fDaughters(0)
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
 Ex01Particle::~Ex01Particle()
 {
-/// Destructor
+  /// Destructor
 
   if (fDaughters) delete fDaughters;
 }
@@ -74,8 +64,8 @@ Ex01Particle::~Ex01Particle()
 //_____________________________________________________________________________
 void Ex01Particle::AddDaughter(Ex01Particle* particle)
 {
-/// Add particles daughter
-/// \param particle  The daughter particle
+  /// Add particles daughter
+  /// \param particle  The daughter particle
 
   if (!fDaughters) fDaughters = new TObjArray();
 
@@ -85,25 +75,24 @@ void Ex01Particle::AddDaughter(Ex01Particle* particle)
 //_____________________________________________________________________________
 void Ex01Particle::SetMother(Ex01Particle* particle)
 {
-/// Set particle mother
-/// \param  particle  The mother particle
+  /// Set particle mother
+  /// \param  particle  The mother particle
 
   fMother = particle;
 }
 
 //_____________________________________________________________________________
-Int_t  Ex01Particle:: GetID() const
+Int_t Ex01Particle::GetID() const
 {
-/// \return The particle Id.
+  /// \return The particle Id.
 
   return fID;
 }
 
-
 //_____________________________________________________________________________
-TParticle*  Ex01Particle::GetParticle() const
+TParticle* Ex01Particle::GetParticle() const
 {
-/// \return The particle definition (TParticle).
+  /// \return The particle definition (TParticle).
 
   return fParticle;
 }
@@ -111,7 +100,7 @@ TParticle*  Ex01Particle::GetParticle() const
 //_____________________________________________________________________________
 Ex01Particle* Ex01Particle::GetMother() const
 {
-/// \return The particle mother.
+  /// \return The particle mother.
 
   return fMother;
 }
@@ -119,7 +108,7 @@ Ex01Particle* Ex01Particle::GetMother() const
 //_____________________________________________________________________________
 Int_t Ex01Particle::GetNofDaughters() const
 {
-/// \return The number of daughters.
+  /// \return The number of daughters.
 
   if (!fDaughters) return 0;
 
@@ -129,11 +118,10 @@ Int_t Ex01Particle::GetNofDaughters() const
 //_____________________________________________________________________________
 Ex01Particle* Ex01Particle::GetDaughter(Int_t i) const
 {
-/// \return   \em i -th daughter
-/// \param i  The daughter index
+  /// \return   \em i -th daughter
+  /// \param i  The daughter index
 
   // add test if i
 
-  return (Ex01Particle*) fDaughters->At(i);
+  return (Ex01Particle*)fDaughters->At(i);
 }
-

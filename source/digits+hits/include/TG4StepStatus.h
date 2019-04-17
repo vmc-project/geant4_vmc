@@ -32,12 +32,12 @@
 ///                  point
 ///  - kGflashStep - returns track properties in a Gflash spot
 ///                  point
-enum TG4StepStatus {
+enum TG4StepStatus
+{
   kVertex,     ///<  in track vertex
   kBoundary,   ///<  when crossing geometrical boundary
   kNormalStep, ///<  in post step point
   kGflashSpot  ///<  in post step point with Gflash
 };
 
-#endif //TG4_STEP_STATUS_H
-
+#endif // TG4_STEP_STATUS_H

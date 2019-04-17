@@ -12,15 +12,13 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-
-
 #include "TG4ProcessMCMapPhysics.h"
-#include "TG4ProcessMCMap.h"
 #include "TG4Globals.h"
+#include "TG4ProcessMCMap.h"
 
-#include <TVirtualMCDecayer.h>
-#include <TVirtualMC.h>
 #include <RVersion.h>
+#include <TVirtualMC.h>
+#include <TVirtualMCDecayer.h>
 
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
@@ -30,17 +28,17 @@
 TG4ProcessMCMapPhysics::TG4ProcessMCMapPhysics(const G4String& name)
   : TG4VPhysicsConstructor(name)
 {
-/// Standard constructor
+  /// Standard constructor
 
   FillMap();
 }
 
 //_____________________________________________________________________________
-TG4ProcessMCMapPhysics::TG4ProcessMCMapPhysics(G4int theVerboseLevel,
-                                               const G4String& name)
+TG4ProcessMCMapPhysics::TG4ProcessMCMapPhysics(
+  G4int theVerboseLevel, const G4String& name)
   : TG4VPhysicsConstructor(name, theVerboseLevel)
 {
-/// Standard constructor
+  /// Standard constructor
 
   FillMap();
 }
@@ -48,7 +46,7 @@ TG4ProcessMCMapPhysics::TG4ProcessMCMapPhysics(G4int theVerboseLevel,
 //_____________________________________________________________________________
 TG4ProcessMCMapPhysics::~TG4ProcessMCMapPhysics()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -58,7 +56,7 @@ TG4ProcessMCMapPhysics::~TG4ProcessMCMapPhysics()
 //_____________________________________________________________________________
 void TG4ProcessMCMapPhysics::FillMap()
 {
-/// Fill the process codes map with known G4 process names
+  /// Fill the process codes map with known G4 process names
 
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
 
@@ -212,12 +210,13 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("OpMieHG", kPLightScattering);
   mcMap->Add("OpWLS", kPNull);
 // Available since 6.07/03 and 5.34/35
-#if ( ( ROOT_VERSION_CODE >= ROOT_VERSION(6,7,3) ) || \
-      ( ( ROOT_VERSION_CODE <= ROOT_VERSION(6,0,0) ) && ( ROOT_VERSION_CODE >= ROOT_VERSION(5,34,35) ) ) )
+#if ((ROOT_VERSION_CODE >= ROOT_VERSION(6, 7, 3)) ||  \
+     ((ROOT_VERSION_CODE <= ROOT_VERSION(6, 0, 0)) && \
+       (ROOT_VERSION_CODE >= ROOT_VERSION(5, 34, 35))))
   mcMap->Add("GammaXTRadiator", kPTransitionRadiation);
   mcMap->Add("StrawXTRadiator", kPTransitionRadiation);
   mcMap->Add("RegularXTRadiator", kPTransitionRadiation);
-#else             // Add kPOpticalWavelengthShifting in TMCProcess.h
+#else // Add kPOpticalWavelengthShifting in TMCProcess.h
   mcMap->Add("GammaXTRadiator", kPNull);
   mcMap->Add("StrawXTRadiator", kPNull);
   mcMap->Add("RegularXTRadiator", kPNull);
@@ -252,16 +251,16 @@ void TG4ProcessMCMapPhysics::FillMap()
 //_____________________________________________________________________________
 void TG4ProcessMCMapPhysics::ConstructParticle()
 {
-/// Instantiate particles - nothing to be done here
+  /// Instantiate particles - nothing to be done here
 }
 
 //_____________________________________________________________________________
 void TG4ProcessMCMapPhysics::ConstructProcess()
 {
-/// Loop over all particles and their processes and check if
-/// the process is present in the map
+  /// Loop over all particles and their processes and check if
+  /// the process is present in the map
 
-  if ( VerboseLevel() > 1 ) {
+  if (VerboseLevel() > 1) {
     G4cout << "TG4ProcessMCMapPhysics::ConstructProcess: " << G4endl;
   }
 
@@ -270,37 +269,35 @@ void TG4ProcessMCMapPhysics::ConstructProcess()
 
   auto aParticleIterator = GetParticleIterator();
   aParticleIterator->reset();
-  while ((*aParticleIterator)())
-  {
+  while ((*aParticleIterator)()) {
     // skip iteration if particle does not have a process manager
-    if ( ! aParticleIterator->value()->GetProcessManager() ) continue;
+    if (!aParticleIterator->value()->GetProcessManager()) continue;
 
-    G4ProcessVector* processVector
-      = aParticleIterator->value()->GetProcessManager()->GetProcessList();
+    G4ProcessVector* processVector =
+      aParticleIterator->value()->GetProcessManager()->GetProcessList();
 
-    for (G4int i=0; i<processVector->length(); i++) {
+    for (G4int i = 0; i < processVector->length(); i++) {
 
       G4String processName = (*processVector)[i]->GetProcessName();
 
-      if ( mcMap->GetMCProcess(processName) == kPNoProcess
-#if ( ! ( ROOT_VERSION_CODE >= ROOT_VERSION(6,7,3) ) && \
-      ! ( ( ROOT_VERSION_CODE <= ROOT_VERSION(6,0,0) ) && ( ROOT_VERSION_CODE >= ROOT_VERSION(5,34,34) ) ) )
-           && processName != "GammaXTRadiator"
-           && processName != "StrawXTRadiator"
-           && processName != "RegularXTRadiator"
+      if (mcMap->GetMCProcess(processName) == kPNoProcess
+#if (!(ROOT_VERSION_CODE >= ROOT_VERSION(6, 7, 3)) &&  \
+     !((ROOT_VERSION_CODE <= ROOT_VERSION(6, 0, 0)) && \
+       (ROOT_VERSION_CODE >= ROOT_VERSION(5, 34, 34))))
+          && processName != "GammaXTRadiator" &&
+          processName != "StrawXTRadiator" && processName != "RegularXTRadiator"
 #endif
-          ) {
+      ) {
         G4String text = "Unknown process code for ";
         text += processName;
-        TG4Globals::Warning(
-          "TG4ProcessMCMapPhysics", "ConstructProcess", text);
+        TG4Globals::Warning("TG4ProcessMCMapPhysics", "ConstructProcess", text);
         success = false;
       }
     }
   }
 
-  if ( VerboseLevel() > 0 ) {
-    if ( success )
+  if (VerboseLevel() > 0) {
+    if (success)
       G4cout << "### Processes mapped to VMC codes ok." << G4endl;
     else
       G4cout << "### Processes mapped to VMC codes: some proceesses unknown."

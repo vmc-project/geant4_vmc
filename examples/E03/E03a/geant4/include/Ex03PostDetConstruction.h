@@ -25,13 +25,12 @@
 
 class Ex03PostDetConstruction : public TG4VUserPostDetConstruction
 {
-  public:
-    Ex03PostDetConstruction();
-    virtual ~Ex03PostDetConstruction();
+ public:
+  Ex03PostDetConstruction();
+  virtual ~Ex03PostDetConstruction();
 
-  public:
-    virtual void Construct();
+ public:
+  virtual void Construct();
 };
 
-#endif //EX03_POST_DET_CONSTRUCTION_H
-
+#endif // EX03_POST_DET_CONSTRUCTION_H

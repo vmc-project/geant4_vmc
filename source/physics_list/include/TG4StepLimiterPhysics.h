@@ -26,29 +26,28 @@ class G4StepLimiter;
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4StepLimiterPhysics: public TG4VPhysicsConstructor
+class TG4StepLimiterPhysics : public TG4VPhysicsConstructor
 {
-  public:
-    TG4StepLimiterPhysics(const G4String& name = "StepLimiter");
-    TG4StepLimiterPhysics(G4int theVerboseLevel,
-                          const G4String& name = "StepLimiter");
-    virtual ~TG4StepLimiterPhysics();
+ public:
+  TG4StepLimiterPhysics(const G4String& name = "StepLimiter");
+  TG4StepLimiterPhysics(
+    G4int theVerboseLevel, const G4String& name = "StepLimiter");
+  virtual ~TG4StepLimiterPhysics();
 
-  protected:
-    // methods
-          // construct particle and physics
-    virtual void ConstructParticle();
-    virtual void ConstructProcess();
+ protected:
+  // methods
+  // construct particle and physics
+  virtual void ConstructParticle();
+  virtual void ConstructProcess();
 
-    // data members
-    G4StepLimiter* fStepLimiterProcess; ///< step limiter process
+  // data members
+  G4StepLimiter* fStepLimiterProcess; ///< step limiter process
 
-  private:
-    /// Not implemented
-    TG4StepLimiterPhysics(const TG4StepLimiterPhysics& right);
-    /// Not implemented
-    TG4StepLimiterPhysics& operator=(const TG4StepLimiterPhysics& right);
+ private:
+  /// Not implemented
+  TG4StepLimiterPhysics(const TG4StepLimiterPhysics& right);
+  /// Not implemented
+  TG4StepLimiterPhysics& operator=(const TG4StepLimiterPhysics& right);
 };
 
-#endif //TG4_STEP_LIMITER_PHYSICS_H
-
+#endif // TG4_STEP_LIMITER_PHYSICS_H

@@ -29,13 +29,12 @@ TG4SensitiveDetector::TG4SensitiveDetector(G4String sdName, G4int mediumID)
     fID(++fgSDCounter),
     fMediumID(mediumID)
 {
-/// Standard constructor with the specified \em name
+  /// Standard constructor with the specified \em name
 }
 
 //_____________________________________________________________________________
 TG4SensitiveDetector::TG4SensitiveDetector(
-                             TVirtualMCSensitiveDetector* userSD, G4int mediumID,
-                             G4bool exclusiveSD)
+  TVirtualMCSensitiveDetector* userSD, G4int mediumID, G4bool exclusiveSD)
   : G4VSensitiveDetector(userSD->GetName()),
     fStepManager(TG4StepManager::Instance()),
     fMCApplication(0),
@@ -43,9 +42,9 @@ TG4SensitiveDetector::TG4SensitiveDetector(
     fID(++fgSDCounter),
     fMediumID(mediumID)
 {
-/// Standard constructor with the specified \em name
+  /// Standard constructor with the specified \em name
 
-  if ( ! exclusiveSD ) {
+  if (!exclusiveSD) {
     fMCApplication = TVirtualMCApplication::Instance();
   }
 }
@@ -53,7 +52,7 @@ TG4SensitiveDetector::TG4SensitiveDetector(
 //_____________________________________________________________________________
 TG4SensitiveDetector::~TG4SensitiveDetector()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -63,13 +62,13 @@ TG4SensitiveDetector::~TG4SensitiveDetector()
 //_____________________________________________________________________________
 void TG4SensitiveDetector::UserProcessHits()
 {
-/// Call user SD and/or VMC application stepping function.
+  /// Call user SD and/or VMC application stepping function.
 
-  if ( fUserSD ) {
+  if (fUserSD) {
     fUserSD->ProcessHits();
   }
 
-  if ( fMCApplication ) {
+  if (fMCApplication) {
     fMCApplication->Stepping();
   }
 }
@@ -81,7 +80,7 @@ void TG4SensitiveDetector::UserProcessHits()
 //_____________________________________________________________________________
 G4bool TG4SensitiveDetector::ProcessHits(G4Step* step, G4TouchableHistory*)
 {
-/// Call user defined sensitive detector.
+  /// Call user defined sensitive detector.
 
   // let user sensitive detector process normal step
   fStepManager->SetStep(step, kNormalStep);
@@ -93,8 +92,8 @@ G4bool TG4SensitiveDetector::ProcessHits(G4Step* step, G4TouchableHistory*)
 //_____________________________________________________________________________
 G4bool TG4SensitiveDetector::ProcessHitsOnBoundary(G4Step* step)
 {
-/// Call user defined sensitive detector
-/// when crossing a geometrical boundary.
+  /// Call user defined sensitive detector
+  /// when crossing a geometrical boundary.
 
   // let user sensitive detector process boundary step
   fStepManager->SetStep(step, kBoundary);
@@ -106,7 +105,7 @@ G4bool TG4SensitiveDetector::ProcessHitsOnBoundary(G4Step* step)
 //_____________________________________________________________________________
 void TG4SensitiveDetector::ProcessHitsOnTrackStart()
 {
-/// Call VMC application stepping function.
+  /// Call VMC application stepping function.
 
   UserProcessHits();
 }

@@ -18,26 +18,25 @@
 
 //_____________________________________________________________________________
 TG4UICmdWithAComplexString::TG4UICmdWithAComplexString(
-                               const G4String& theCommandPath,
-                               G4UImessenger* theMessenger)
+  const G4String& theCommandPath, G4UImessenger* theMessenger)
   : G4UIcommand(theCommandPath, theMessenger)
 {
-/// Standard constructor.
-/// The command string with full path directory
-/// and the pointer to the messenger must be given.
+  /// Standard constructor.
+  /// The command string with full path directory
+  /// and the pointer to the messenger must be given.
 
-  G4UIparameter* first  = new G4UIparameter('s');
+  G4UIparameter* first = new G4UIparameter('s');
   SetParameter(first);
   G4UIparameter* second = new G4UIparameter('s');
   SetParameter(second);
-  G4UIparameter* third  = new G4UIparameter('s');
+  G4UIparameter* third = new G4UIparameter('s');
   SetParameter(third);
 }
 
 //_____________________________________________________________________________
 TG4UICmdWithAComplexString::~TG4UICmdWithAComplexString()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -45,16 +44,16 @@ TG4UICmdWithAComplexString::~TG4UICmdWithAComplexString()
 //
 
 //_____________________________________________________________________________
-void TG4UICmdWithAComplexString::SetParameterName(const G4String& name,
-                                                  G4bool omittable)
+void TG4UICmdWithAComplexString::SetParameterName(
+  const G4String& name, G4bool omittable)
 {
-/// Set the parameter names for the parameters.
-/// The "omittable" is set only for the first parameter,
-/// for the second and third it is always true.
-/// The "currentAsDefault" flag is valid only if "omittable" is true.
-/// If this flag is true, the current values are used as the default values
-/// when user ommits the parameters. If this flag is false, the values
-/// given by the next SetDefaultValue() method are used.
+  /// Set the parameter names for the parameters.
+  /// The "omittable" is set only for the first parameter,
+  /// for the second and third it is always true.
+  /// The "currentAsDefault" flag is valid only if "omittable" is true.
+  /// If this flag is true, the current values are used as the default values
+  /// when user ommits the parameters. If this flag is false, the values
+  /// given by the next SetDefaultValue() method are used.
 
   G4UIparameter* first = GetParameter(0);
   first->SetParameterName(name);
@@ -77,10 +76,10 @@ void TG4UICmdWithAComplexString::SetParameterName(const G4String& name,
 //_____________________________________________________________________________
 void TG4UICmdWithAComplexString::SetDefaultValue(const G4String& defaultValue)
 {
-/// Set the default values of the parameters.
-/// These default values are used when user of this command ommits
-/// some of the parameter values, and "ommitable" is true and
-/// "currentAsDefault" is false.
+  /// Set the default values of the parameters.
+  /// These default values are used when user of this command ommits
+  /// some of the parameter values, and "ommitable" is true and
+  /// "currentAsDefault" is false.
 
   G4UIparameter* first = GetParameter(0);
   first->SetDefaultValue(defaultValue);
@@ -93,10 +92,10 @@ void TG4UICmdWithAComplexString::SetDefaultValue(const G4String& defaultValue)
 }
 
 //_____________________________________________________________________________
-G4String TG4UICmdWithAComplexString::GetNewStringValue(const G4String& paramString)
+G4String TG4UICmdWithAComplexString::GetNewStringValue(
+  const G4String& paramString)
 {
-/// Return the parameter string
+  /// Return the parameter string
 
   return paramString;
 }
-

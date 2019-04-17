@@ -19,8 +19,8 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include <TVirtualMCSensitiveDetector.h>
 #include <TClonesArray.h>
+#include <TVirtualMCSensitiveDetector.h>
 
 class Ex03DetectorConstruction;
 class Ex03CalorHit;
@@ -34,55 +34,56 @@ class TVirtualMC;
 
 class Ex03CalorimeterSD : public TVirtualMCSensitiveDetector
 {
-  public:
-    Ex03CalorimeterSD(const char* name,
-                      Ex03DetectorConstruction* detector);
-    Ex03CalorimeterSD(const Ex03CalorimeterSD& origin,
-                      Ex03DetectorConstruction* detector);
-    Ex03CalorimeterSD();
-    virtual ~Ex03CalorimeterSD();
+ public:
+  Ex03CalorimeterSD(const char* name, Ex03DetectorConstruction* detector);
+  Ex03CalorimeterSD(
+    const Ex03CalorimeterSD& origin, Ex03DetectorConstruction* detector);
+  Ex03CalorimeterSD();
+  virtual ~Ex03CalorimeterSD();
 
-    // methods
-    void    Initialize();
-    virtual void  ProcessHits();
-    void    EndOfEvent();
-    void    Register();
-    virtual void  Print(Option_t* option = "") const;
-    void    PrintTotal() const;
+  // methods
+  void Initialize();
+  virtual void ProcessHits();
+  void EndOfEvent();
+  void Register();
+  virtual void Print(Option_t* option = "") const;
+  void PrintTotal() const;
 
+  // set methods
+  void SetVerboseLevel(Int_t level);
+  void SetPrintModulo(Int_t value);
 
-    // set methods
-    void SetVerboseLevel(Int_t level);
-    void SetPrintModulo(Int_t value);
+  // get methods
+  Ex03CalorHit* GetHit(Int_t i) const;
 
-    // get methods
-    Ex03CalorHit* GetHit(Int_t i) const;
+ private:
+  // methods
+  void ResetHits();
 
-  private:
-    // methods
-    void  ResetHits();
+  // data members
+  TVirtualMC* fMC;                     ///< The VMC implementation
+  Ex03DetectorConstruction* fDetector; ///< Detector construction
+  TClonesArray* fCalCollection;        ///< Hits collection
+  Int_t fAbsorberVolId;                ///< The absorber volume Id
+  Int_t fGapVolId;                     ///< The gap volume Id
+  Int_t fVerboseLevel;                 ///< Verbosity level
+  Int_t fPrintModulo; ///< The event modulus number to be printed
 
-    // data members
-    TVirtualMC*    fMC;            ///< The VMC implementation
-    Ex03DetectorConstruction*  fDetector; ///< Detector construction
-    TClonesArray*  fCalCollection; ///< Hits collection
-    Int_t          fAbsorberVolId; ///< The absorber volume Id
-    Int_t          fGapVolId;      ///< The gap volume Id
-    Int_t          fVerboseLevel;  ///< Verbosity level
-    Int_t          fPrintModulo;   ///< The event modulus number to be printed
-
-  ClassDef(Ex03CalorimeterSD,1) //Ex03CalorimeterSD
-
+  ClassDef(Ex03CalorimeterSD, 1) // Ex03CalorimeterSD
 };
 
 /// Set verbose level
 /// \param level The new verbose level value
 inline void Ex03CalorimeterSD::SetVerboseLevel(Int_t level)
-{ fVerboseLevel = level; }
+{
+  fVerboseLevel = level;
+}
 
 /// Set the event modulus number to be printed
 /// \param value  The new event modulus number value
-inline void  Ex03CalorimeterSD::SetPrintModulo(Int_t value)
-{ fPrintModulo = value; }
+inline void Ex03CalorimeterSD::SetPrintModulo(Int_t value)
+{
+  fPrintModulo = value;
+}
 
-#endif //EX02_CALORIMETER_SD_H
+#endif // EX02_CALORIMETER_SD_H

@@ -22,23 +22,21 @@
 /// \ingroup E03
 /// \brief User Geant4 VMC run configuration
 ///
-/// This class demonstrates inclusion of a user defined detector construction class
-/// with a user defined magnetic field equation of motion and/or its integrator.
-/// \author I. Hrivnacova; IPN, Orsay
+/// This class demonstrates inclusion of a user defined detector construction
+/// class with a user defined magnetic field equation of motion and/or its
+/// integrator. \author I. Hrivnacova; IPN, Orsay
 
 class Ex03RunConfiguration4 : public TG4RunConfiguration
 {
-  public:
-    Ex03RunConfiguration4(const TString& userGeometry,
-                         const TString& physicsList = "emStandard",
-                         const TString& specialProcess = "stepLimiter",
-                         Bool_t specialStacking = false,
-                         Bool_t mtApplication = true);
-    virtual ~Ex03RunConfiguration4();
+ public:
+  Ex03RunConfiguration4(const TString& userGeometry,
+    const TString& physicsList = "emStandard",
+    const TString& specialProcess = "stepLimiter",
+    Bool_t specialStacking = false, Bool_t mtApplication = true);
+  virtual ~Ex03RunConfiguration4();
 
-    // methods
-    virtual TG4VUserPostDetConstruction*  CreateUserPostDetConstruction();
+  // methods
+  virtual TG4VUserPostDetConstruction* CreateUserPostDetConstruction();
 };
 
-#endif //EX03_RUN_CONFIGURATION4_H
-
+#endif // EX03_RUN_CONFIGURATION4_H

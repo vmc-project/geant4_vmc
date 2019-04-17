@@ -15,20 +15,19 @@
 #include "TG4IntMap.h"
 #include "TG4Globals.h"
 
-#include "iomanip"
 #include "globals.hh"
+#include "iomanip"
 
 //_____________________________________________________________________________
-TG4IntMap::TG4IntMap()
-  : fMap()
+TG4IntMap::TG4IntMap() : fMap()
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
 TG4IntMap::~TG4IntMap()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -38,7 +37,7 @@ TG4IntMap::~TG4IntMap()
 //_____________________________________________________________________________
 G4bool TG4IntMap::IsDefined(const G4String& first)
 {
-/// Return true if the first is already in the map.
+  /// Return true if the first is already in the map.
 
   MapIterator i = fMap.find(first);
   if (i == fMap.end())
@@ -54,7 +53,7 @@ G4bool TG4IntMap::IsDefined(const G4String& first)
 //_____________________________________________________________________________
 G4bool TG4IntMap::Add(const G4String& first, G4int second)
 {
-/// Add pair (name, int number) to the map.
+  /// Add pair (name, int number) to the map.
 
   if (!IsDefined(first)) {
     // insert into map
@@ -68,7 +67,7 @@ G4bool TG4IntMap::Add(const G4String& first, G4int second)
 //_____________________________________________________________________________
 G4int TG4IntMap::GetSecond(const G4String& name, G4bool warn)
 {
-/// Get second name associated with given name.
+  /// Get second name associated with given name.
 
   MapIterator i = fMap.find(name);
   if (i == fMap.end()) {
@@ -85,7 +84,7 @@ G4int TG4IntMap::GetSecond(const G4String& name, G4bool warn)
 //_____________________________________________________________________________
 G4int TG4IntMap::GetSize() const
 {
-/// Get map size.
+  /// Get map size.
 
   return fMap.size();
 }
@@ -93,16 +92,16 @@ G4int TG4IntMap::GetSize() const
 //_____________________________________________________________________________
 void TG4IntMap::PrintAll() const
 {
-/// Dump the whole map.
+  /// Dump the whole map.
 
   if (fMap.size()) {
     G4cout << "Dump of TG4IntMap - " << fMap.size() << " entries:" << G4endl;
     G4int counter = 0;
-    for (MapConstIterator i=fMap.begin(); i != fMap.end(); i++) {
-      const G4String& first  = (*i).first;
+    for (MapConstIterator i = fMap.begin(); i != fMap.end(); i++) {
+      const G4String& first = (*i).first;
       G4int second = (*i).second;
-      G4cout << "Map element " << std::setw(3) << counter++ << "   "
-             << first << "   " << second << G4endl;
+      G4cout << "Map element " << std::setw(3) << counter++ << "   " << first
+             << "   " << second << G4endl;
     }
   }
 }
@@ -110,7 +109,7 @@ void TG4IntMap::PrintAll() const
 //_____________________________________________________________________________
 void TG4IntMap::Clear()
 {
-/// Clear the map.
+  /// Clear the map.
 
-  if (fMap.size()>0) fMap.clear();
+  if (fMap.size() > 0) fMap.clear();
 }

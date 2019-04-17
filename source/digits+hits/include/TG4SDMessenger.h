@@ -37,46 +37,46 @@ class G4UIcmdWithoutParameter;
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4SDMessenger: public G4UImessenger
+class TG4SDMessenger : public G4UImessenger
 {
-  public:
-    TG4SDMessenger(TG4SDConstruction* sdConstruction);
-    virtual ~TG4SDMessenger();
+ public:
+  TG4SDMessenger(TG4SDConstruction* sdConstruction);
+  virtual ~TG4SDMessenger();
 
-    // methods
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-  private:
-    /// Not implemented
-    TG4SDMessenger();
-    /// Not implemented
-    TG4SDMessenger(const TG4SDMessenger& right);
-    /// Not implemented
-    TG4SDMessenger& operator=(const TG4SDMessenger& right);
+ private:
+  /// Not implemented
+  TG4SDMessenger();
+  /// Not implemented
+  TG4SDMessenger(const TG4SDMessenger& right);
+  /// Not implemented
+  TG4SDMessenger& operator=(const TG4SDMessenger& right);
 
-    //
-    // data members
+  //
+  // data members
 
-    /// associated class
-    TG4SDConstruction*  fSDConstruction;
+  /// associated class
+  TG4SDConstruction* fSDConstruction;
 
-    /// addSDSelection command
-    G4UIcmdWithAString* fAddSDSelectionCmd;
+  /// addSDSelection command
+  G4UIcmdWithAString* fAddSDSelectionCmd;
 
-    /// getSDSelectionFromTGeo command
-    G4UIcmdWithABool*   fSetSDSelectionFromTGeoCmd;
+  /// getSDSelectionFromTGeo command
+  G4UIcmdWithABool* fSetSDSelectionFromTGeoCmd;
 
-    /// setSVLabel command
-    G4UIcmdWithAString* fSetSVLabelCmd;
+  /// setSVLabel command
+  G4UIcmdWithAString* fSetSVLabelCmd;
 
-    /// setGflash command
-    G4UIcmdWithABool*   fSetGflashCmd;
+  /// setGflash command
+  G4UIcmdWithABool* fSetGflashCmd;
 
-    /// setExclusiveSDScoring command
-    G4UIcmdWithABool*   fSetExclusiveSDScoringCmd;
+  /// setExclusiveSDScoring command
+  G4UIcmdWithABool* fSetExclusiveSDScoringCmd;
 
-    /// command: printVolumes
-    G4UIcmdWithoutParameter*  fPrintUserSDsCmd;
+  /// command: printVolumes
+  G4UIcmdWithoutParameter* fPrintUserSDsCmd;
 };
 
-#endif //TG4_SD_MESSENGER_H
+#endif // TG4_SD_MESSENGER_H

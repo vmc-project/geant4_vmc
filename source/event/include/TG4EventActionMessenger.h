@@ -31,29 +31,28 @@ class G4UIcmdWithABool;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4EventActionMessenger: public G4UImessenger
+class TG4EventActionMessenger : public G4UImessenger
 {
-  public:
-    TG4EventActionMessenger(TG4EventAction* eventAction);
-    virtual ~TG4EventActionMessenger();
+ public:
+  TG4EventActionMessenger(TG4EventAction* eventAction);
+  virtual ~TG4EventActionMessenger();
 
-    // methods
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-  private:
-    /// Not implemented
-    TG4EventActionMessenger();
-    /// Not implemented
-    TG4EventActionMessenger(const TG4EventActionMessenger& right);
-    /// Not implemented
-    TG4EventActionMessenger& operator=(
-                            const TG4EventActionMessenger& right);
+ private:
+  /// Not implemented
+  TG4EventActionMessenger();
+  /// Not implemented
+  TG4EventActionMessenger(const TG4EventActionMessenger& right);
+  /// Not implemented
+  TG4EventActionMessenger& operator=(const TG4EventActionMessenger& right);
 
-    // data members
-    TG4EventAction*        fEventAction;    ///< associated class
-    G4UIdirectory*         fEventDirectory; ///< command directory
-    G4UIcmdWithABool*      fPrintMemoryCmd; ///< command: printMemory
-    G4UIcmdWithABool*      fSaveRandomStatusCmd; ///< command: saveRandom
+  // data members
+  TG4EventAction* fEventAction;           ///< associated class
+  G4UIdirectory* fEventDirectory;         ///< command directory
+  G4UIcmdWithABool* fPrintMemoryCmd;      ///< command: printMemory
+  G4UIcmdWithABool* fSaveRandomStatusCmd; ///< command: saveRandom
 };
 
-#endif //TG4_EVENT_ACTION_MESSENGER_H
+#endif // TG4_EVENT_ACTION_MESSENGER_H

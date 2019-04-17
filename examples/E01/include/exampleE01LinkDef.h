@@ -16,14 +16,9 @@
 #pragma link off all classes;
 #pragma link off all functions;
 
-#pragma link C++ class  Ex01MCApplication+;
-#pragma link C++ class  Ex01MCStack+;
-#pragma link C++ class  Ex01DetectorConstructionOld+;
-#pragma link C++ class  Ex01Particle+;
+#pragma link C++ class Ex01MCApplication + ;
+#pragma link C++ class Ex01MCStack + ;
+#pragma link C++ class Ex01DetectorConstructionOld + ;
+#pragma link C++ class Ex01Particle + ;
 
 #endif
-
-
-
-
-

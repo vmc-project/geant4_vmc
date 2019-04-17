@@ -36,31 +36,31 @@ class G4UIcmdWithABool;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4TrackingActionMessenger: public G4UImessenger
+class TG4TrackingActionMessenger : public G4UImessenger
 {
-  public:
-    TG4TrackingActionMessenger(TG4TrackingAction* trackingAction);
-    virtual ~TG4TrackingActionMessenger();
+ public:
+  TG4TrackingActionMessenger(TG4TrackingAction* trackingAction);
+  virtual ~TG4TrackingActionMessenger();
 
-    // methods
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-  private:
-    /// Not implemented
-    TG4TrackingActionMessenger();
-    /// Not implemented
-    TG4TrackingActionMessenger(const TG4TrackingActionMessenger& right);
-    /// Not implemented
-    TG4TrackingActionMessenger& operator=(
-                               const TG4TrackingActionMessenger& right);
+ private:
+  /// Not implemented
+  TG4TrackingActionMessenger();
+  /// Not implemented
+  TG4TrackingActionMessenger(const TG4TrackingActionMessenger& right);
+  /// Not implemented
+  TG4TrackingActionMessenger& operator=(
+    const TG4TrackingActionMessenger& right);
 
-    // data members
-    TG4TrackingAction*     fTrackingAction;    ///< associated class
-    G4UIdirectory*         fTrackingDirectory; ///< command directory
-    G4UIcmdWithAnInteger*  fNewVerboseCmd;     ///< command: newVerbose
-    G4UIcmdWithAnInteger*  fNewVerboseTrackCmd;///< command: newVerboseTrack
-    G4UIcmdWithAString*    fSaveSecondariesCmd;///< command: saveSecondaries
-    G4UIcmdWithABool*      fSaveDynamicChargeCmd; ///< command: saveDynamicCharge
+  // data members
+  TG4TrackingAction* fTrackingAction;        ///< associated class
+  G4UIdirectory* fTrackingDirectory;         ///< command directory
+  G4UIcmdWithAnInteger* fNewVerboseCmd;      ///< command: newVerbose
+  G4UIcmdWithAnInteger* fNewVerboseTrackCmd; ///< command: newVerboseTrack
+  G4UIcmdWithAString* fSaveSecondariesCmd;   ///< command: saveSecondaries
+  G4UIcmdWithABool* fSaveDynamicChargeCmd;   ///< command: saveDynamicCharge
 };
 
-#endif //TG4_TRACKING_ACTION_MESSENGER_H
+#endif // TG4_TRACKING_ACTION_MESSENGER_H

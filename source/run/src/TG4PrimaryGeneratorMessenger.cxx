@@ -15,25 +15,28 @@
 #include "TG4PrimaryGeneratorMessenger.h"
 #include "TG4PrimaryGeneratorAction.h"
 
-#include <G4UIdirectory.hh>
+#include <G4UIcmdWithABool.hh>
 #include <G4UIcmdWithAString.hh>
 #include <G4UIcmdWithAnInteger.hh>
-#include <G4UIcmdWithABool.hh>
+#include <G4UIdirectory.hh>
 
 //_____________________________________________________________________________
-TG4PrimaryGeneratorMessenger::TG4PrimaryGeneratorMessenger(TG4PrimaryGeneratorAction* action)
+TG4PrimaryGeneratorMessenger::TG4PrimaryGeneratorMessenger(
+  TG4PrimaryGeneratorAction* action)
   : G4UImessenger(),
     fPrimaryGeneratorAction(action),
     fDirectory(0),
     fSkipUnknownParticlesCmd(0)
 {
-/// Standard constructor
+  /// Standard constructor
 
   fDirectory = new G4UIdirectory("/mcPrimaryGenerator/");
   fDirectory->SetGuidance("TGeant4 primary generator action commands.");
 
-  fSkipUnknownParticlesCmd = new G4UIcmdWithABool("/mcPrimaryGenerator/skipUnknownParticles", this);
-  fSkipUnknownParticlesCmd->SetGuidance("Switch on|off applying range cuts for gamma");
+  fSkipUnknownParticlesCmd =
+    new G4UIcmdWithABool("/mcPrimaryGenerator/skipUnknownParticles", this);
+  fSkipUnknownParticlesCmd->SetGuidance(
+    "Switch on|off applying range cuts for gamma");
   fSkipUnknownParticlesCmd->SetParameterName("ApplyForGamma", false);
   fSkipUnknownParticlesCmd->AvailableForStates(G4State_PreInit, G4State_Init);
 }
@@ -41,7 +44,7 @@ TG4PrimaryGeneratorMessenger::TG4PrimaryGeneratorMessenger(TG4PrimaryGeneratorAc
 //_____________________________________________________________________________
 TG4PrimaryGeneratorMessenger::~TG4PrimaryGeneratorMessenger()
 {
-/// Destructor
+  /// Destructor
 
   delete fDirectory;
   delete fSkipUnknownParticlesCmd;
@@ -52,12 +55,13 @@ TG4PrimaryGeneratorMessenger::~TG4PrimaryGeneratorMessenger()
 //
 
 //_____________________________________________________________________________
-void TG4PrimaryGeneratorMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
+void TG4PrimaryGeneratorMessenger::SetNewValue(
+  G4UIcommand* command, G4String newValue)
 {
-/// Apply command to the associated object.
+  /// Apply command to the associated object.
 
   if (command == fSkipUnknownParticlesCmd) {
-    fPrimaryGeneratorAction
-      ->SetSkipUnknownParticles(fSkipUnknownParticlesCmd->GetNewBoolValue(newValue));
+    fPrimaryGeneratorAction->SetSkipUnknownParticles(
+      fSkipUnknownParticlesCmd->GetNewBoolValue(newValue));
   }
 }

@@ -71,4 +71,4 @@ enum TG4G3Attribute
   kUNKNOWN
 };
 
-#endif //TG4_G3_ATTRIBUTE_H
+#endif // TG4_G3_ATTRIBUTE_H

@@ -17,8 +17,8 @@
 
 #include "Ex02Particle.h"
 
-#include <TParticle.h>
 #include <TObjArray.h>
+#include <TParticle.h>
 
 #include <iostream>
 
@@ -26,47 +26,37 @@ using namespace std;
 
 /// \cond CLASSIMP
 ClassImp(Ex02Particle)
-/// \endcond
+  /// \endcond
 
-//_____________________________________________________________________________
-Ex02Particle::Ex02Particle(Int_t id, TParticle* particle)
-  : fID(id),
-    fParticle(particle),
-    fMother(),
-    fDaughters()
+  //_____________________________________________________________________________
+  Ex02Particle::Ex02Particle(Int_t id, TParticle* particle)
+  : fID(id), fParticle(particle), fMother(), fDaughters()
 {
-/// Standard constructor
-/// \param  id        The particle id
-/// \param  particle  The particle definition (TParticle)
+  /// Standard constructor
+  /// \param  id        The particle id
+  /// \param  particle  The particle definition (TParticle)
 }
 
 //_____________________________________________________________________________
 Ex02Particle::Ex02Particle(Int_t id, TParticle* particle, Ex02Particle* mother)
-  : fID(id),
-    fParticle(particle),
-    fMother(mother),
-    fDaughters()
+  : fID(id), fParticle(particle), fMother(mother), fDaughters()
 {
-/// Standard constructor
-/// \param  id        The particle id
-/// \param  particle  The particle definition (TParticle)
-/// \param  mother    The particle mother
+  /// Standard constructor
+  /// \param  id        The particle id
+  /// \param  particle  The particle definition (TParticle)
+  /// \param  mother    The particle mother
 }
 
 //_____________________________________________________________________________
-Ex02Particle::Ex02Particle()
-  : fID(0),
-    fParticle(0),
-    fMother(),
-    fDaughters()
+Ex02Particle::Ex02Particle() : fID(0), fParticle(0), fMother(), fDaughters()
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
 Ex02Particle::~Ex02Particle()
 {
-/// Destructor
+  /// Destructor
 
   delete fParticle;
 }
@@ -78,8 +68,8 @@ Ex02Particle::~Ex02Particle()
 //_____________________________________________________________________________
 void Ex02Particle::SetMother(Ex02Particle* particle)
 {
-/// Set particle mother
-/// \param  particle  The mother particle
+  /// Set particle mother
+  /// \param  particle  The mother particle
 
   fMother.SetObject(particle);
 }
@@ -87,8 +77,8 @@ void Ex02Particle::SetMother(Ex02Particle* particle)
 //_____________________________________________________________________________
 void Ex02Particle::AddDaughter(Ex02Particle* particle)
 {
-/// Add particles daughter
-/// \param particle  The daughter particle
+  /// Add particles daughter
+  /// \param particle  The daughter particle
 
   fDaughters.Add(particle);
 }
@@ -96,7 +86,7 @@ void Ex02Particle::AddDaughter(Ex02Particle* particle)
 //_____________________________________________________________________________
 void Ex02Particle::Print(Option_t* /*option*/) const
 {
-/// Print particle properties.
+  /// Print particle properties.
 
   cout << "Track ID:  " << fID << endl;
 
@@ -104,7 +94,7 @@ void Ex02Particle::Print(Option_t* /*option*/) const
 
   if (GetMother()) {
     cout << "Mother:    " << GetMother()->GetParticle()->GetName()
-                          << "  with ID: " << GetMother()->GetID() << endl;
+         << "  with ID: " << GetMother()->GetID() << endl;
   }
   else
     cout << "Primary    " << endl;
@@ -116,11 +106,11 @@ void Ex02Particle::Print(Option_t* /*option*/) const
 //_____________________________________________________________________________
 void Ex02Particle::PrintDaughters() const
 {
-/// Print particles daughters.
+  /// Print particles daughters.
 
-  for (Int_t i=0; i<GetNofDaughters(); i++)  {
+  for (Int_t i = 0; i < GetNofDaughters(); i++) {
     cout << i << "th daughter: " << endl;
-    if ( GetDaughter(i) )
+    if (GetDaughter(i))
       GetDaughter(i)->Print();
     else
       cout << "0x0";
@@ -129,18 +119,17 @@ void Ex02Particle::PrintDaughters() const
 }
 
 //_____________________________________________________________________________
-Int_t  Ex02Particle:: GetID() const
+Int_t Ex02Particle::GetID() const
 {
-/// \return The particle Id.
+  /// \return The particle Id.
 
   return fID;
 }
 
-
 //_____________________________________________________________________________
-TParticle*  Ex02Particle::GetParticle() const
+TParticle* Ex02Particle::GetParticle() const
 {
-/// \return The particle definition (TParticle).
+  /// \return The particle definition (TParticle).
 
   return fParticle;
 }
@@ -148,15 +137,15 @@ TParticle*  Ex02Particle::GetParticle() const
 //_____________________________________________________________________________
 Ex02Particle* Ex02Particle::GetMother() const
 {
-/// \return The particle mother.
+  /// \return The particle mother.
 
-  return (Ex02Particle*) fMother.GetObject();
+  return (Ex02Particle*)fMother.GetObject();
 }
 
 //_____________________________________________________________________________
 Int_t Ex02Particle::GetNofDaughters() const
 {
-/// \return The number of daughters.
+  /// \return The number of daughters.
 
   return fDaughters.GetEntriesFast();
 }
@@ -164,12 +153,11 @@ Int_t Ex02Particle::GetNofDaughters() const
 //_____________________________________________________________________________
 Ex02Particle* Ex02Particle::GetDaughter(Int_t i) const
 {
-/// \return   \em i -th daughter
-/// \param i  The daughter index
+  /// \return   \em i -th daughter
+  /// \param i  The daughter index
 
   if (i < 0 || i >= GetNofDaughters())
     Fatal("GetDaughter", "Index out of range");
 
-  return (Ex02Particle*) fDaughters.At(i);
+  return (Ex02Particle*)fDaughters.At(i);
 }
-

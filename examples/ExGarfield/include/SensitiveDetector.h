@@ -17,8 +17,8 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include <TNamed.h>
 #include <TClonesArray.h>
+#include <TNamed.h>
 
 namespace VMC
 {
@@ -35,51 +35,49 @@ class Hit;
 /// \date 28/10/2015
 /// \author I. Hrivnacova; IPN, Orsay
 
-
 class SensitiveDetector : public TNamed
 {
-  public:
-    SensitiveDetector(const char* name);
-    SensitiveDetector(const SensitiveDetector& origin);
-    SensitiveDetector();
-    virtual ~SensitiveDetector();
+ public:
+  SensitiveDetector(const char* name);
+  SensitiveDetector(const SensitiveDetector& origin);
+  SensitiveDetector();
+  virtual ~SensitiveDetector();
 
-    // methods
-    void    Initialize();
-    Bool_t  ProcessHits();
-    Bool_t  UpdateFromGarfield();
-    void    EndOfEvent();
-    void    Register();
-    virtual void  Print(Option_t* option = "") const;
+  // methods
+  void Initialize();
+  Bool_t ProcessHits();
+  Bool_t UpdateFromGarfield();
+  void EndOfEvent();
+  void Register();
+  virtual void Print(Option_t* option = "") const;
 
-    // set methods
-    void SetVerboseLevel(Int_t level);
+  // set methods
+  void SetVerboseLevel(Int_t level);
 
-    // get methods
-    Hit* GetHit() const;
+  // get methods
+  Hit* GetHit() const;
 
-  private:
-    // data members
-    Hit*     fHit;            ///< The detector hit
-    Int_t    fAbsorberVolId;  ///< The absorber volume Id
-    Int_t    fGasVolId;       ///< The gas volume Id
-    Int_t    fVerboseLevel;   ///< Verbosity level
+ private:
+  // data members
+  Hit* fHit;            ///< The detector hit
+  Int_t fAbsorberVolId; ///< The absorber volume Id
+  Int_t fGasVolId;      ///< The gas volume Id
+  Int_t fVerboseLevel;  ///< Verbosity level
 
-  ClassDef(SensitiveDetector,1) //SensitiveDetector
-
+  ClassDef(SensitiveDetector, 1) // SensitiveDetector
 };
 
 /// Set verbose level
 /// \param level The new verbose level value
 inline void SensitiveDetector::SetVerboseLevel(Int_t level)
-{ fVerboseLevel = level; }
+{
+  fVerboseLevel = level;
+}
 
 /// Return the hits collection
-inline Hit* SensitiveDetector::GetHit() const
-{ return fHit; }
+inline Hit* SensitiveDetector::GetHit() const { return fHit; }
 
-}
-}
+} // namespace ExGarfield
+} // namespace VMC
 
-#endif //EX02_CALORIMETER_SD_H
-
+#endif // EX02_CALORIMETER_SD_H

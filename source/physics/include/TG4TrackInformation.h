@@ -15,8 +15,8 @@
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-#include <G4VUserTrackInformation.hh>
 #include <G4Allocator.hh>
+#include <G4VUserTrackInformation.hh>
 #include <globals.hh>
 
 class G4ParticleDefinition;
@@ -28,50 +28,50 @@ class G4ParticleDefinition;
 
 class TG4TrackInformation : public G4VUserTrackInformation
 {
-  public:
-    TG4TrackInformation();
-    TG4TrackInformation(G4int trackParticleID);
-    //TG4TrackInformation(G4int trackParticleID, G4int parentParticleID);
-    virtual ~TG4TrackInformation();
+ public:
+  TG4TrackInformation();
+  TG4TrackInformation(G4int trackParticleID);
+  // TG4TrackInformation(G4int trackParticleID, G4int parentParticleID);
+  virtual ~TG4TrackInformation();
 
-    // operators required by G4
+  // operators required by G4
 
-                 /// Override \em new operator for G4Allocator
-    inline void *operator new(size_t);
-                 /// Override \em delete operator for G4Allocator
-    inline void operator delete(void *trackInformation);
+  /// Override \em new operator for G4Allocator
+  inline void* operator new(size_t);
+  /// Override \em delete operator for G4Allocator
+  inline void operator delete(void* trackInformation);
 
-    // methods
-    virtual void Print() const;
+  // methods
+  virtual void Print() const;
 
-    // set methods
-    void SetTrackParticleID(G4int trackParticleID);
-    void SetParentParticleID(G4int parentParticleID);
-    void SetPDGLifetime(G4double pdgLifetime);
-    void SetPDGEncoding(G4int pdgEncoding);
-    void SetIsUserTrack(G4bool isUserTrack);
-    void SetStop(G4bool stop);
+  // set methods
+  void SetTrackParticleID(G4int trackParticleID);
+  void SetParentParticleID(G4int parentParticleID);
+  void SetPDGLifetime(G4double pdgLifetime);
+  void SetPDGEncoding(G4int pdgEncoding);
+  void SetIsUserTrack(G4bool isUserTrack);
+  void SetStop(G4bool stop);
 
-    // get methods
-    G4int  GetTrackParticleID() const;
-    G4int  GetParentParticleID() const;
-    G4double GetPDGLifetime() const;
-    G4int  GetPDGEncoding() const;
-    G4bool IsUserTrack() const;
-    G4bool IsStop() const;
+  // get methods
+  G4int GetTrackParticleID() const;
+  G4int GetParentParticleID() const;
+  G4double GetPDGLifetime() const;
+  G4int GetPDGEncoding() const;
+  G4bool IsUserTrack() const;
+  G4bool IsStop() const;
 
-  private:
-    // data members
+ private:
+  // data members
 
-    G4int    fTrackParticleID; ///< the index of track particle in VMC stack
-    G4int    fParentParticleID;///< the index of parent track in VMC stack
-    G4double fPDGLifetime;     ///< the original particle PDG lifetime
-    G4double fPDGEncoding;     ///< the particle PDG encoding
-    G4bool   fIsUserTrack;     ///< true if defined by user and not primary track
-    G4bool   fStop;            ///< true if track should be stopped
+  G4int fTrackParticleID;  ///< the index of track particle in VMC stack
+  G4int fParentParticleID; ///< the index of parent track in VMC stack
+  G4double fPDGLifetime;   ///< the original particle PDG lifetime
+  G4double fPDGEncoding;   ///< the particle PDG encoding
+  G4bool fIsUserTrack;     ///< true if defined by user and not primary track
+  G4bool fStop;            ///< true if track should be stopped
 };
 
 // inline methods
 #include "TG4TrackInformation.icc"
 
-#endif //TG4_TRACK_INFORMATION_H
+#endif // TG4_TRACK_INFORMATION_H

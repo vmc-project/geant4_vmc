@@ -31,31 +31,34 @@ class G4UIcmdWithAString;
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4GflashFastSimulationMessenger: public G4UImessenger
+class TG4GflashFastSimulationMessenger : public G4UImessenger
 {
-  public:
-    TG4GflashFastSimulationMessenger(TG4GflashFastSimulation* gflashFastSimulation);
-    virtual ~TG4GflashFastSimulationMessenger();
+ public:
+  TG4GflashFastSimulationMessenger(
+    TG4GflashFastSimulation* gflashFastSimulation);
+  virtual ~TG4GflashFastSimulationMessenger();
 
-    // methods
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-  private:
-    /// Not implemented
-    TG4GflashFastSimulationMessenger();
-    /// Not implemented
-    TG4GflashFastSimulationMessenger(const TG4GflashFastSimulationMessenger& right);
-    /// Not implemented
-    TG4GflashFastSimulationMessenger& operator=(const TG4GflashFastSimulationMessenger& right);
+ private:
+  /// Not implemented
+  TG4GflashFastSimulationMessenger();
+  /// Not implemented
+  TG4GflashFastSimulationMessenger(
+    const TG4GflashFastSimulationMessenger& right);
+  /// Not implemented
+  TG4GflashFastSimulationMessenger& operator=(
+    const TG4GflashFastSimulationMessenger& right);
 
-    //
-    // data members
+  //
+  // data members
 
-    /// associated class
-    TG4GflashFastSimulation* fGflashFastSimulation;
+  /// associated class
+  TG4GflashFastSimulation* fGflashFastSimulation;
 
-    /// setExtDecayerSelection command
-    G4UIcmdWithAString*    fSetGflashMaterialCmd;
+  /// setExtDecayerSelection command
+  G4UIcmdWithAString* fSetGflashMaterialCmd;
 };
 
-#endif //TG4_GFLASH_FAST_SIMULATION_MESSENGER_H
+#endif // TG4_GFLASH_FAST_SIMULATION_MESSENGER_H

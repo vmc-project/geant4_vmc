@@ -14,27 +14,26 @@
 
 #include "TG4VUserFastSimulation.h"
 #include "TG4GeometryManager.h"
-#include "TG4ModelConfigurationManager.h"
-#include "TG4ModelConfiguration.h"
 #include "TG4Globals.h"
+#include "TG4ModelConfiguration.h"
+#include "TG4ModelConfigurationManager.h"
 
 #include <G4VFastSimulationModel.hh>
 
 //_____________________________________________________________________________
 TG4VUserFastSimulation::TG4VUserFastSimulation()
- :// fModelNames(),
-   fFastModelsManager(0)
+  : // fModelNames(),
+    fFastModelsManager(0)
 {
-/// Default constructor
+  /// Default constructor
 
-  fFastModelsManager
-    = TG4GeometryManager::Instance()->GetFastModelsManager();
+  fFastModelsManager = TG4GeometryManager::Instance()->GetFastModelsManager();
 }
 
 //_____________________________________________________________________________
 TG4VUserFastSimulation::~TG4VUserFastSimulation()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -48,37 +47,39 @@ void TG4VUserFastSimulation::SetModel(const G4String& modelName)
 }
 
 //_____________________________________________________________________________
-void TG4VUserFastSimulation::SetModelParticles(const G4String& modelName,
-                                               const G4String& particles)
+void TG4VUserFastSimulation::SetModelParticles(
+  const G4String& modelName, const G4String& particles)
 {
   fFastModelsManager->SetModelParticles(modelName, particles);
 }
 
 //_____________________________________________________________________________
-void TG4VUserFastSimulation::SetModelRegions(const G4String& modelName,
-                                             const G4String& regions)
+void TG4VUserFastSimulation::SetModelRegions(
+  const G4String& modelName, const G4String& regions)
 {
   fFastModelsManager->SetModelRegions(modelName, regions);
 }
 
 //_____________________________________________________________________________
-void TG4VUserFastSimulation::Register(G4VFastSimulationModel* fastSimulationModel)
+void TG4VUserFastSimulation::Register(
+  G4VFastSimulationModel* fastSimulationModel)
 {
-/// Register the user fast simulation model
+  /// Register the user fast simulation model
 
   // check that model configuration exists
-  TG4ModelConfiguration* modelConfiguration
-    = fFastModelsManager->GetModelConfiguration(fastSimulationModel->GetName());
-  if ( ! modelConfiguration ) {
+  TG4ModelConfiguration* modelConfiguration =
+    fFastModelsManager->GetModelConfiguration(fastSimulationModel->GetName());
+  if (!modelConfiguration) {
     TString text = "The fast simulation model ";
     text += fastSimulationModel->GetName().data();
     text += " configuration was not found.";
-    TG4Globals::Warning(
-      "TG4VUserFastSimulation", "Register",
-      text + TG4Globals::Endl()
-      + TString("The model configuration has to set firts.") + TG4Globals::Endl()
-      + TString("/mcPhysics/fastSimulation/setModel command or SetModel() function."));
-  	return;
+    TG4Globals::Warning("TG4VUserFastSimulation", "Register",
+      text + TG4Globals::Endl() +
+        TString("The model configuration has to set firts.") +
+        TG4Globals::Endl() +
+        TString("/mcPhysics/fastSimulation/setModel command or SetModel() "
+                "function."));
+    return;
   }
 
   modelConfiguration->SetFastSimulationModel(fastSimulationModel);

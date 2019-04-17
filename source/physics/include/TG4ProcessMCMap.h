@@ -15,8 +15,8 @@
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-#include <map>
 #include <globals.hh>
+#include <map>
 
 #include <Rtypes.h>
 #include <TMCProcess.h>
@@ -33,57 +33,58 @@ class G4VProcess;
 
 class TG4ProcessMCMap
 {
-  public:
-    /// The map of TMCProcess to strings
-    typedef std::map<G4String, TMCProcess, std::less<G4String> >  Map;
+ public:
+  /// The map of TMCProcess to strings
+  typedef std::map<G4String, TMCProcess, std::less<G4String> > Map;
 
-    /// The iterator for the map of TMCProcess to strings
-    typedef Map::iterator  MapIterator;
+  /// The iterator for the map of TMCProcess to strings
+  typedef Map::iterator MapIterator;
 
-    /// The constant iterator for the map of TMCProcess to strings
-    typedef Map::const_iterator  MapConstIterator;
+  /// The constant iterator for the map of TMCProcess to strings
+  typedef Map::const_iterator MapConstIterator;
 
-  public:
-    TG4ProcessMCMap();
-    virtual ~TG4ProcessMCMap();
+ public:
+  TG4ProcessMCMap();
+  virtual ~TG4ProcessMCMap();
 
-    // static access method
-    static TG4ProcessMCMap* Instance();
+  // static access method
+  static TG4ProcessMCMap* Instance();
 
-    // methods
-    G4bool Add(G4VProcess* process,  TMCProcess second);
-    G4bool Add(G4String processName, TMCProcess second);
-    void PrintAll() const;
-    void Clear();
+  // methods
+  G4bool Add(G4VProcess* process, TMCProcess second);
+  G4bool Add(G4String processName, TMCProcess second);
+  void PrintAll() const;
+  void Clear();
 
-    // get methods
-    TMCProcess  GetMCProcess(const G4VProcess* process) const;
-    TMCProcess  GetMCProcess(const G4String& processName) const;
-    G4String    GetMCProcessName(const G4VProcess* process) const;
-    G4String    GetMCProcessName(const G4String& processName) const;
+  // get methods
+  TMCProcess GetMCProcess(const G4VProcess* process) const;
+  TMCProcess GetMCProcess(const G4String& processName) const;
+  G4String GetMCProcessName(const G4VProcess* process) const;
+  G4String GetMCProcessName(const G4String& processName) const;
 
-  private:
-    /// Not implemented
-    TG4ProcessMCMap(const TG4ProcessMCMap& right);
-    /// Not implemented
-    TG4ProcessMCMap& operator=(const TG4ProcessMCMap& right);
+ private:
+  /// Not implemented
+  TG4ProcessMCMap(const TG4ProcessMCMap& right);
+  /// Not implemented
+  TG4ProcessMCMap& operator=(const TG4ProcessMCMap& right);
 
-    // methods
-    G4bool IsDefined(const G4String& processName);
+  // methods
+  G4bool IsDefined(const G4String& processName);
 
-    // static data members
-    // MT COMMON
-    static TG4ProcessMCMap*  fgInstance; ///< this instance
+  // static data members
+  // MT COMMON
+  static TG4ProcessMCMap* fgInstance; ///< this instance
 
-    // data members
-    Map  fMap; ///< map container
+  // data members
+  Map fMap; ///< map container
 };
 
 // inline methods
 
-inline TG4ProcessMCMap* TG4ProcessMCMap::Instance() {
+inline TG4ProcessMCMap* TG4ProcessMCMap::Instance()
+{
   /// Return this instance
   return fgInstance;
 }
 
-#endif //TG4_PROCESS_MC_MAP_H
+#endif // TG4_PROCESS_MC_MAP_H

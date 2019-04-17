@@ -33,34 +33,34 @@ class G4UIcmdWithABool;
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4ExtDecayerMessenger: public G4UImessenger
+class TG4ExtDecayerMessenger : public G4UImessenger
 {
-  public:
-    TG4ExtDecayerMessenger(TG4ExtDecayerPhysics* extDecayerPhysics);
-    virtual ~TG4ExtDecayerMessenger();
+ public:
+  TG4ExtDecayerMessenger(TG4ExtDecayerPhysics* extDecayerPhysics);
+  virtual ~TG4ExtDecayerMessenger();
 
-    // methods
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-  private:
-    /// Not implemented
-    TG4ExtDecayerMessenger();
-    /// Not implemented
-    TG4ExtDecayerMessenger(const TG4ExtDecayerMessenger& right);
-    /// Not implemented
-    TG4ExtDecayerMessenger& operator=(const TG4ExtDecayerMessenger& right);
+ private:
+  /// Not implemented
+  TG4ExtDecayerMessenger();
+  /// Not implemented
+  TG4ExtDecayerMessenger(const TG4ExtDecayerMessenger& right);
+  /// Not implemented
+  TG4ExtDecayerMessenger& operator=(const TG4ExtDecayerMessenger& right);
 
-    //
-    // data members
+  //
+  // data members
 
-    /// associated class
-    TG4ExtDecayerPhysics* fExtDecayerPhysics;
+  /// associated class
+  TG4ExtDecayerPhysics* fExtDecayerPhysics;
 
-    /// setExtDecayerSelection command
-    G4UIcmdWithAString*  fSetSelectionCmd;
+  /// setExtDecayerSelection command
+  G4UIcmdWithAString* fSetSelectionCmd;
 
-    /// skipExtDecayerNeutrino command
-    G4UIcmdWithABool*  fSkipNeutrinoCmd;
+  /// skipExtDecayerNeutrino command
+  G4UIcmdWithABool* fSkipNeutrinoCmd;
 };
 
-#endif //TG4_EXT_DECAYER_MESSENGER_H
+#endif // TG4_EXT_DECAYER_MESSENGER_H

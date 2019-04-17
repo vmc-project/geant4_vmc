@@ -30,37 +30,37 @@
 
 class Ex02DetectorConstructionOld : public TObject
 {
-  public:
-    Ex02DetectorConstructionOld();
-    virtual ~Ex02DetectorConstructionOld();
+ public:
+  Ex02DetectorConstructionOld();
+  virtual ~Ex02DetectorConstructionOld();
 
-  public:
-     void ConstructMaterials();
-     void ConstructGeometry();
+ public:
+  void ConstructMaterials();
+  void ConstructGeometry();
 
-     // set methods
-     void SetTargetMaterial (const TString& name);
-     void SetChamberMaterial(const TString& name);
+  // set methods
+  void SetTargetMaterial(const TString& name);
+  void SetChamberMaterial(const TString& name);
 
-              /// \return The tracker full length
-     Double_t GetTrackerFullLength() {return fTrackerLength;};
-              /// \return The target full length
-     Double_t GetTargetFullLength()  {return fTargetLength;};
-              /// \return The world full length
-     Double_t GetWorldFullLength()   {return fWorldLength;};
+  /// \return The tracker full length
+  Double_t GetTrackerFullLength() { return fTrackerLength; };
+  /// \return The target full length
+  Double_t GetTargetFullLength() { return fTargetLength; };
+  /// \return The world full length
+  Double_t GetWorldFullLength() { return fWorldLength; };
 
-  private:
-     Double_t  fWorldLength;   ///< Full length of the world volume
-     Double_t  fTargetLength;  ///< Full length of Target
-     Double_t  fTrackerLength; ///< Full length of Tracker
-     Int_t     fNofChambers;   ///< Nb of chambers in the tracker region
-     Double_t  fChamberWidth;  ///< Width of the chambers
-     Double_t  fChamberSpacing;///< Distance between chambers
-     Int_t     fImedAir;       ///< The Air medium Id
-     Int_t     fImedPb;        ///< The Lead medium Id
-     Int_t     fImedXe;        ///< The Xenon gas medium Id
+ private:
+  Double_t fWorldLength;    ///< Full length of the world volume
+  Double_t fTargetLength;   ///< Full length of Target
+  Double_t fTrackerLength;  ///< Full length of Tracker
+  Int_t fNofChambers;       ///< Nb of chambers in the tracker region
+  Double_t fChamberWidth;   ///< Width of the chambers
+  Double_t fChamberSpacing; ///< Distance between chambers
+  Int_t fImedAir;           ///< The Air medium Id
+  Int_t fImedPb;            ///< The Lead medium Id
+  Int_t fImedXe;            ///< The Xenon gas medium Id
 
-  ClassDef(Ex02DetectorConstructionOld,1) //Ex02DetectorConstructionOld
+  ClassDef(Ex02DetectorConstructionOld, 1) // Ex02DetectorConstructionOld
 };
 
-#endif //EX02_DETECTOR_CONSTRUCTION_OLD_H
+#endif // EX02_DETECTOR_CONSTRUCTION_OLD_H

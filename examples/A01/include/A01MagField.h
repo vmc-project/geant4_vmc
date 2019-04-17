@@ -28,20 +28,20 @@
 
 class A01MagField : public TVirtualMagField
 {
-public:
-   A01MagField(Double_t Bx, Double_t By, Double_t Bz);
-   A01MagField();
-   virtual ~A01MagField();
+ public:
+  A01MagField(Double_t Bx, Double_t By, Double_t Bz);
+  A01MagField();
+  virtual ~A01MagField();
 
-   virtual void Field(const Double_t* /*x*/, Double_t* B);
+  virtual void Field(const Double_t* /*x*/, Double_t* B);
 
-private:
-   A01MagField(const A01MagField&);
-   A01MagField& operator=(const A01MagField&);
+ private:
+  A01MagField(const A01MagField&);
+  A01MagField& operator=(const A01MagField&);
 
-   Double_t  fB[3]; ///< Magnetic field vector
+  Double_t fB[3]; ///< Magnetic field vector
 
-   ClassDef(A01MagField, 1)  // Uniform magnetic field
+  ClassDef(A01MagField, 1) // Uniform magnetic field
 };
 
-#endif //A01_MAG_FIELD_H
+#endif // A01_MAG_FIELD_H

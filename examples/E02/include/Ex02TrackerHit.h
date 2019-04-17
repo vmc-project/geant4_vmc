@@ -30,57 +30,55 @@
 
 class Ex02TrackerHit : public TObject
 {
-  public:
-    Ex02TrackerHit();
-    virtual ~Ex02TrackerHit();
+ public:
+  Ex02TrackerHit();
+  virtual ~Ex02TrackerHit();
 
-    // methods
-    //void Draw();
-    virtual void Print(const Option_t* option = "") const;
+  // methods
+  // void Draw();
+  virtual void Print(const Option_t* option = "") const;
 
-    //
-    // set methods
+  //
+  // set methods
 
-    /// Set track Id
-    /// \param track The new track Id value
-    void SetTrackID  (Int_t track)  { fTrackID = track; };
+  /// Set track Id
+  /// \param track The new track Id value
+  void SetTrackID(Int_t track) { fTrackID = track; };
 
-    /// Set chamber number
-    /// \param chamb The new chamber number value
-    void SetChamberNb(Int_t chamb)  { fChamberNb = chamb; };
+  /// Set chamber number
+  /// \param chamb The new chamber number value
+  void SetChamberNb(Int_t chamb) { fChamberNb = chamb; };
 
-    /// Set energy deposit
-    /// \param de The new energy deposit value
-    void SetEdep     (Double_t de)  { fEdep = de; };
+  /// Set energy deposit
+  /// \param de The new energy deposit value
+  void SetEdep(Double_t de) { fEdep = de; };
 
-    /// Set position
-    /// \param xyz The new position value
-    void SetPos      (TVector3 xyz) { fPos = xyz; };
+  /// Set position
+  /// \param xyz The new position value
+  void SetPos(TVector3 xyz) { fPos = xyz; };
 
-    //
-    // get methods
+  //
+  // get methods
 
-    /// \return The track Id
-    Int_t GetTrackID()   { return fTrackID; };
+  /// \return The track Id
+  Int_t GetTrackID() { return fTrackID; };
 
-    /// \return The chamber number
-    Int_t GetChamberNb() { return fChamberNb; };
+  /// \return The chamber number
+  Int_t GetChamberNb() { return fChamberNb; };
 
-    /// \return The energy deposit
-    Double_t GetEdep()   { return fEdep; };
+  /// \return The energy deposit
+  Double_t GetEdep() { return fEdep; };
 
-    /// \return The track position
-    TVector3 GetPos()    { return fPos; };
+  /// \return The track position
+  TVector3 GetPos() { return fPos; };
 
-  private:
-    Int_t      fTrackID;   ///< Track Id
-    Int_t      fChamberNb; ///< Chamber number
-    Double_t   fEdep;      ///< Energy deposit
-    TVector3   fPos;       ///< Track position
+ private:
+  Int_t fTrackID;   ///< Track Id
+  Int_t fChamberNb; ///< Chamber number
+  Double_t fEdep;   ///< Energy deposit
+  TVector3 fPos;    ///< Track position
 
-  ClassDef(Ex02TrackerHit,1) //Ex02TrackerHit
+  ClassDef(Ex02TrackerHit, 1) // Ex02TrackerHit
 };
 
-#endif //EX02_TRACKER_HIT_H
-
-
+#endif // EX02_TRACKER_HIT_H

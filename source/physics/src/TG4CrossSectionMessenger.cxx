@@ -17,16 +17,16 @@
 #include "TG4Globals.h"
 #include "TG4UICmdWithAComplexString.h"
 
-#include <G4UIdirectory.hh>
-#include <G4UIcmdWithoutParameter.hh>
 #include <G4UIcmdWithABool.hh>
+#include <G4UIcmdWithADoubleAndUnit.hh>
 #include <G4UIcmdWithAString.hh>
 #include <G4UIcmdWithAnInteger.hh>
-#include <G4UIcmdWithADoubleAndUnit.hh>
+#include <G4UIcmdWithoutParameter.hh>
+#include <G4UIdirectory.hh>
 
 //_____________________________________________________________________________
 TG4CrossSectionMessenger::TG4CrossSectionMessenger(
-                             TG4CrossSectionManager* crossSectionManager)
+  TG4CrossSectionManager* crossSectionManager)
   : G4UImessenger(),
     fCrossSectionManager(crossSectionManager),
     fDirectory(0),
@@ -44,15 +44,18 @@ TG4CrossSectionMessenger::TG4CrossSectionMessenger(
     fLabelCmd(0),
     fPrintCmd(0)
 {
-/// Standard constructor
+  /// Standard constructor
 
   fDirectory = new G4UIdirectory("/mcCrossSection/");
   fDirectory->SetGuidance("Cross section manager commands.");
 
-  fMakeHistogramsCmd = new G4UIcmdWithABool("/mcCrossSection/makeHistograms", this);
-  fMakeHistogramsCmd->SetGuidance("Activate creating histograms with cross sections");
+  fMakeHistogramsCmd =
+    new G4UIcmdWithABool("/mcCrossSection/makeHistograms", this);
+  fMakeHistogramsCmd->SetGuidance(
+    "Activate creating histograms with cross sections");
   fMakeHistogramsCmd->SetParameterName("MakeHistograms", true);
-  fMakeHistogramsCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  fMakeHistogramsCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
   fParticleCmd = new G4UIcmdWithAString("/mcCrossSection/setParticle", this);
   fParticleCmd->SetGuidance("Set particle name");
@@ -74,12 +77,14 @@ TG4CrossSectionMessenger::TG4CrossSectionMessenger(
   fNofBinsPCmd->SetParameterName("nofBinsE", false);
   fNofBinsPCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
-  fMinKinECmd = new G4UIcmdWithADoubleAndUnit("/mcCrossSection/setMinKinE", this);
+  fMinKinECmd =
+    new G4UIcmdWithADoubleAndUnit("/mcCrossSection/setMinKinE", this);
   fMinKinECmd->SetGuidance("Set minimum kinetic energy");
   fMinKinECmd->SetParameterName("minKinE", false);
   fMinKinECmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
-  fMaxKinECmd = new G4UIcmdWithADoubleAndUnit("/mcCrossSection/setMaxKinE", this);
+  fMaxKinECmd =
+    new G4UIcmdWithADoubleAndUnit("/mcCrossSection/setMaxKinE", this);
   fMaxKinECmd->SetGuidance("Set minimum kinetic energy");
   fMaxKinECmd->SetParameterName("minKinE", false);
   fMaxKinECmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
@@ -89,31 +94,38 @@ TG4CrossSectionMessenger::TG4CrossSectionMessenger(
   fKinECmd->SetParameterName("minKinE", false);
   fKinECmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
-  fMinMomentumCmd = new G4UIcmdWithADoubleAndUnit("/mcCrossSection/setMinMomentum", this);
+  fMinMomentumCmd =
+    new G4UIcmdWithADoubleAndUnit("/mcCrossSection/setMinMomentum", this);
   fMinMomentumCmd->SetGuidance("Set minimum momentum");
   fMinMomentumCmd->SetParameterName("minMomentum", false);
-  fMinMomentumCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  fMinMomentumCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
-  fMaxMomentumCmd = new G4UIcmdWithADoubleAndUnit("/mcCrossSection/setMaxMomentum", this);
+  fMaxMomentumCmd =
+    new G4UIcmdWithADoubleAndUnit("/mcCrossSection/setMaxMomentum", this);
   fMaxMomentumCmd->SetGuidance("Set maximum momentum");
   fMaxMomentumCmd->SetParameterName("maxMomentum", false);
-  fMaxMomentumCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  fMaxMomentumCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
-  fMomentumCmd = new G4UIcmdWithADoubleAndUnit("/mcCrossSection/setMomentum", this);
+  fMomentumCmd =
+    new G4UIcmdWithADoubleAndUnit("/mcCrossSection/setMomentum", this);
   fMomentumCmd->SetGuidance("Set current momentum");
   fMomentumCmd->SetParameterName("Momentum", false);
   fMomentumCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
   fLabelCmd = new G4UIcmdWithAString("/mcCrossSection/setLabel", this);
-  fLabelCmd->SetGuidance("Set label which will be put at the beginning of histograms title");
+  fLabelCmd->SetGuidance(
+    "Set label which will be put at the beginning of histograms title");
   fLabelCmd->SetParameterName("Label", true);
   fLabelCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
 
   fPrintCmd = new G4UIcmdWithAString("/mcCrossSection/printCrossSection", this);
-  fPrintCmd->SetGuidance("Print selected cross section for current kinetic energy");
+  fPrintCmd->SetGuidance(
+    "Print selected cross section for current kinetic energy");
   fPrintCmd->SetParameterName("crossSectionType", false);
   G4String candidates("All ");
-  for ( G4int i=0; i<kNoCrossSectionType; i++ ) {
+  for (G4int i = 0; i < kNoCrossSectionType; i++) {
     candidates += TG4CrossSectionTypeName(i);
     candidates += G4String(" ");
   }
@@ -124,7 +136,7 @@ TG4CrossSectionMessenger::TG4CrossSectionMessenger(
 //_____________________________________________________________________________
 TG4CrossSectionMessenger::~TG4CrossSectionMessenger()
 {
-/// Destructor
+  /// Destructor
 
   delete fDirectory;
   delete fMakeHistogramsCmd;
@@ -147,48 +159,57 @@ TG4CrossSectionMessenger::~TG4CrossSectionMessenger()
 //
 
 //_____________________________________________________________________________
-void TG4CrossSectionMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
+void TG4CrossSectionMessenger::SetNewValue(
+  G4UIcommand* command, G4String newValue)
 {
-/// Apply command to the associated object.
+  /// Apply command to the associated object.
 
-  if ( command == fMakeHistogramsCmd ) {
-    fCrossSectionManager->SetMakeHistograms(fMakeHistogramsCmd->GetNewBoolValue(newValue));
+  if (command == fMakeHistogramsCmd) {
+    fCrossSectionManager->SetMakeHistograms(
+      fMakeHistogramsCmd->GetNewBoolValue(newValue));
   }
-  else if ( command == fParticleCmd ) {
+  else if (command == fParticleCmd) {
     fCrossSectionManager->SetParticleName(newValue);
   }
   else if (command == fElementCmd) {
     fCrossSectionManager->SetElementName(newValue);
   }
   else if (command == fNofBinsECmd) {
-    fCrossSectionManager->SetNumberOfBinsE(fNofBinsECmd->GetNewIntValue(newValue));
+    fCrossSectionManager->SetNumberOfBinsE(
+      fNofBinsECmd->GetNewIntValue(newValue));
   }
   else if (command == fNofBinsPCmd) {
-    fCrossSectionManager->SetNumberOfBinsP(fNofBinsPCmd->GetNewIntValue(newValue));
+    fCrossSectionManager->SetNumberOfBinsP(
+      fNofBinsPCmd->GetNewIntValue(newValue));
   }
   else if (command == fMinKinECmd) {
-    fCrossSectionManager->SetMinKinEnergy(fMinKinECmd->GetNewDoubleValue(newValue));
+    fCrossSectionManager->SetMinKinEnergy(
+      fMinKinECmd->GetNewDoubleValue(newValue));
   }
   else if (command == fMaxKinECmd) {
-    fCrossSectionManager->SetMaxKinEnergy(fMaxKinECmd->GetNewDoubleValue(newValue));
+    fCrossSectionManager->SetMaxKinEnergy(
+      fMaxKinECmd->GetNewDoubleValue(newValue));
   }
   else if (command == fKinECmd) {
     fCrossSectionManager->SetKinEnergy(fKinECmd->GetNewDoubleValue(newValue));
   }
   else if (command == fMinMomentumCmd) {
-    fCrossSectionManager->SetMinMomentum(fMinMomentumCmd->GetNewDoubleValue(newValue));
+    fCrossSectionManager->SetMinMomentum(
+      fMinMomentumCmd->GetNewDoubleValue(newValue));
   }
   else if (command == fMaxMomentumCmd) {
-    fCrossSectionManager->SetMaxMomentum(fMaxMomentumCmd->GetNewDoubleValue(newValue));
+    fCrossSectionManager->SetMaxMomentum(
+      fMaxMomentumCmd->GetNewDoubleValue(newValue));
   }
   else if (command == fMomentumCmd) {
-    fCrossSectionManager->SetMomentum(fMomentumCmd->GetNewDoubleValue(newValue));
+    fCrossSectionManager->SetMomentum(
+      fMomentumCmd->GetNewDoubleValue(newValue));
   }
   else if (command == fLabelCmd) {
     fCrossSectionManager->SetLabel(newValue);
   }
   else if (command == fPrintCmd) {
-    if ( newValue == "All" )
+    if (newValue == "All")
       fCrossSectionManager->PrintCrossSections();
     else
       fCrossSectionManager->PrintCrossSection(GetCrossSectionType(newValue));

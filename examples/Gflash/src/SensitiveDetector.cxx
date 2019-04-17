@@ -19,16 +19,16 @@
 #include "Hit.h"
 
 #include <Riostream.h>
-#include <TVirtualMC.h>
-#include <TMCRootManager.h>
 #include <TLorentzVector.h>
+#include <TMCRootManager.h>
 #include <TTree.h>
+#include <TVirtualMC.h>
 
 /// \cond CLASSIMP
 ClassImp(VMC::Gflash::SensitiveDetector)
-/// \endcond
+  /// \endcond
 
-using namespace std;
+  using namespace std;
 
 namespace VMC
 {
@@ -37,14 +37,11 @@ namespace Gflash
 
 //_____________________________________________________________________________
 SensitiveDetector::SensitiveDetector(const char* name)
-  : TNamed(name, ""),
-    fCaloHitsCollection(0),
-    fCrystalVolId(),
-    fVerboseLevel(1)
+  : TNamed(name, ""), fCaloHitsCollection(0), fCrystalVolId(), fVerboseLevel(1)
 {
-/// Standard constructor.
-/// Create hits collection.
-/// \param name      The calorimeter name
+  /// Standard constructor.
+  /// Create hits collection.
+  /// \param name      The calorimeter name
 
   fCaloHitsCollection = new TClonesArray("VMC::Gflash::Hit", 500);
 }
@@ -56,27 +53,24 @@ SensitiveDetector::SensitiveDetector(const SensitiveDetector& origin)
     fCrystalVolId(),
     fVerboseLevel(origin.fVerboseLevel)
 {
-/// Copy constructor (for cloning on worker thread in MT mode).
-/// Create hits collection.
-/// \param origin    The source object (on master).
+  /// Copy constructor (for cloning on worker thread in MT mode).
+  /// Create hits collection.
+  /// \param origin    The source object (on master).
 
   fCaloHitsCollection = new TClonesArray("Gflash::Hit");
 }
 
 //_____________________________________________________________________________
 SensitiveDetector::SensitiveDetector()
-  : TNamed(),
-    fCaloHitsCollection(0),
-    fCrystalVolId(),
-    fVerboseLevel(0)
+  : TNamed(), fCaloHitsCollection(0), fCrystalVolId(), fVerboseLevel(0)
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
 SensitiveDetector::~SensitiveDetector()
 {
-/// Destructor
+  /// Destructor
 
   if (fCaloHitsCollection) fCaloHitsCollection->Delete();
   delete fCaloHitsCollection;
@@ -89,8 +83,8 @@ SensitiveDetector::~SensitiveDetector()
 //_____________________________________________________________________________
 Hit* SensitiveDetector::GetHit(Int_t i) const
 {
-/// \return   The hit for the specified layer.
-/// \param i  The layer number
+  /// \return   The hit for the specified layer.
+  /// \param i  The layer number
 
   return (Hit*)fCaloHitsCollection->At(i);
 }
@@ -102,24 +96,24 @@ Hit* SensitiveDetector::GetHit(Int_t i) const
 //_____________________________________________________________________________
 void SensitiveDetector::Initialize()
 {
-/// Register hits collection in the Root manager;
-/// set sensitive volumes.
+  /// Register hits collection in the Root manager;
+  /// set sensitive volumes.
 
-  if ( TMCRootManager::Instance() ) Register();
+  if (TMCRootManager::Instance()) Register();
   fCrystalVolId = gMC->VolId("Crystal_log");
 }
 
 //_____________________________________________________________________________
 Bool_t SensitiveDetector::ProcessHits()
 {
-/// Account energy deposit and track lengths for each layer in its hit.
+  /// Account energy deposit and track lengths for each layer in its hit.
 
   Int_t copyNo;
   Int_t id = gMC->CurrentVolID(copyNo);
 
-  if (id != fCrystalVolId ) return false;
+  if (id != fCrystalVolId) return false;
 
-  //cout << "In crystal " << copyNo << endl;
+  // cout << "In crystal " << copyNo << endl;
 
   Double_t edep = gMC->Edep();
   // cout << "  edep [keV]" << edep*1.e06 << endl;
@@ -140,9 +134,9 @@ Bool_t SensitiveDetector::ProcessHits()
 //_____________________________________________________________________________
 void SensitiveDetector::EndOfEvent()
 {
-/// Print hits collection (if verbose) and reset hits afterwards.
+  /// Print hits collection (if verbose) and reset hits afterwards.
 
-  if (fVerboseLevel>1)  Print();
+  if (fVerboseLevel > 1) Print();
 
   // Reset hits collection
   fCaloHitsCollection->Clear();
@@ -151,39 +145,39 @@ void SensitiveDetector::EndOfEvent()
 //_____________________________________________________________________________
 void SensitiveDetector::Register()
 {
-/// Register the hits collection in Root manager.
+  /// Register the hits collection in Root manager.
 
-  TMCRootManager::Instance()
-    ->Register("hits", "TClonesArray", &fCaloHitsCollection);
+  TMCRootManager::Instance()->Register(
+    "hits", "TClonesArray", &fCaloHitsCollection);
 }
 
 //_____________________________________________________________________________
 void SensitiveDetector::Print(Option_t* /*option*/) const
 {
-/// Print the hits collection.
+  /// Print the hits collection.
 
-   Int_t nofHits = fCaloHitsCollection->GetEntriesFast();
+  Int_t nofHits = fCaloHitsCollection->GetEntriesFast();
 
-   cout << "\n-------->Hits Collection: in this event: " << endl;
+  cout << "\n-------->Hits Collection: in this event: " << endl;
 
-   for (Int_t i=0; i<nofHits; i++) (*fCaloHitsCollection)[i]->Print();
+  for (Int_t i = 0; i < nofHits; i++) (*fCaloHitsCollection)[i]->Print();
 }
 
 //_____________________________________________________________________________
 void SensitiveDetector::PrintTotal() const
 {
-/// Print the total values for all layers.
+  /// Print the total values for all layers.
 
   Double_t totEdep = 0.;
 
   Int_t nofHits = fCaloHitsCollection->GetEntriesFast();
-  for (Int_t i=0; i<nofHits; i++) {
+  for (Int_t i = 0; i < nofHits; i++) {
     totEdep += GetHit(i)->GetEdep();
   }
 
-  cout << "   Calorimeter: total energy (MeV): "
-       << setw(7) << totEdep * 1.0e03 << endl;
+  cout << "   Calorimeter: total energy (MeV): " << setw(7) << totEdep * 1.0e03
+       << endl;
 }
 
-}
-}
+} // namespace Gflash
+} // namespace VMC
