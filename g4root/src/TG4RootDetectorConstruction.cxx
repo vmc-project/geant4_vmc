@@ -14,6 +14,11 @@
 ///
 /// \author A. Gheata; CERN
 
+#include "TG4RootDetectorConstruction.h"
+#include "TG4RootNavMgr.h"
+#include "TG4RootNavigator.h"
+#include "TG4RootSolid.h"
+
 #include "G4FieldManager.hh"
 #include "G4GeometryManager.hh"
 #include "G4LogicalVolumeStore.hh"
@@ -24,13 +29,10 @@
 #include "G4SolidStore.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4UnitsTable.hh"
+
 #include "TGeoManager.h"
 #include "TGeoMatrix.h"
 
-#include "TG4RootDetectorConstruction.h"
-#include "TG4RootNavMgr.h"
-#include "TG4RootNavigator.h"
-#include "TG4RootSolid.h"
 #include "TList.h"
 
 // ClassImp(TG4RootDetectorConstruction)

@@ -18,21 +18,11 @@
 #ifndef ROOT_TG4RootDetectorConstruction
 #define ROOT_TG4RootDetectorConstruction
 
-#ifndef G4VUserDetectorConstruction_h
-#include "G4VUserDetectorConstruction.hh"
-#endif
-
-#ifndef G4ROTATIONMATRIX_HH
 #include "G4RotationMatrix.hh"
-#endif
+#include "G4VUserDetectorConstruction.hh"
 
-#ifndef ROOT_TGeoManager
 #include "TGeoManager.h"
-#endif
-
-#ifndef ROOT_TGeoNode
 #include "TGeoNode.h"
-#endif
 
 #include <map>
 
