@@ -19,9 +19,12 @@
 #include "TG4Globals.h"
 #include "TG4G3Control.h"
 
+// clang-format off
 #include <G4VProcess.hh>
 #include <G4ProcessVector.hh>
 #include <globals.hh>
+// clang-format on
+
 #include <vector>
 
 /// \ingroup physics
