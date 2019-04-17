@@ -17,13 +17,8 @@
 #ifndef ROOT_TG4RootSolid
 #define ROOT_TG4RootSolid
 
-#ifndef G4VERSION_HH
-#include "G4Version.hh"
-#endif
-
-#ifndef G4VSOLID_HH
 #include "G4VSolid.hh"
-#endif
+#include "G4Version.hh"
 
 class TGeoShape;
 

@@ -17,11 +17,12 @@
 #include "TG4RootNavMgr.h"
 #include "TG4RootDetectorConstruction.h"
 #include "TG4RootNavigator.h"
-#include "TGeoManager.h"
 
 #include "G4PropagatorInField.hh"
 #include "G4RunManager.hh"
 #include "G4TransportationManager.hh"
+
+#include "TGeoManager.h"
 
 /// \cond CLASSIMP
 // ClassImp(TG4RootNavMgr)

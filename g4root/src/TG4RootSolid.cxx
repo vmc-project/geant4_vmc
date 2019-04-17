@@ -14,8 +14,7 @@
 ///
 /// \author A. Gheata; CERN
 
-#include "TGeoBBox.h"
-#include "TGeoShape.h"
+#include "TG4RootSolid.h"
 
 #include "G4AffineTransform.hh"
 #include "G4Polyhedron.hh"
@@ -27,11 +26,16 @@
 #include "G4NURBS.hh"
 #include "G4NURBSbox.hh"
 #endif
-#include "G4SystemOfUnits.hh"
+// #include "G4SystemOfUnits.hh"
 #include "G4VisExtent.hh"
 
-#include "TG4RootSolid.h"
+#include "TGeoBBox.h"
+#include "TGeoShape.h"
 #include "TMath.h"
+
+// Moved after ROOT includes to avoid warnings about shadowing variables
+// from CLHEP units
+#include <G4SystemOfUnits.hh>
 
 // ClassImp(TG4RootSolid)
 

@@ -17,9 +17,7 @@
 #ifndef ROOT_TG4RootNavigator
 #define ROOT_TG4RootNavigator
 
-#ifndef G4NAVIGATOR_HH
 #include "G4Navigator.hh"
-#endif
 
 #include <Rtypes.h>
 

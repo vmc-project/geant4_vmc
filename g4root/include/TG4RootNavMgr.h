@@ -17,11 +17,9 @@
 #ifndef ROOT_TG4RootNavMgr
 #define ROOT_TG4RootNavMgr
 
-#ifndef ROOT_TObject
-#include "TObject.h"
-#endif
-
 #include "G4Threading.hh"
+
+#include "TObject.h"
 
 class TGeoManager;
 class TG4RootNavigator;
