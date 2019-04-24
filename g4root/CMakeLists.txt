@@ -20,10 +20,10 @@ project(G4Root)
 #-------------------------------------------------------------------------------
 # CMake Module Path
 #
-set(CMAKE_MODULE_PATH 
+set(CMAKE_MODULE_PATH
     ${Geant4VMC_DIR}/cmake
     ${PROJECT_SOURCE_DIR}/../cmake
-    ${CMAKE_MODULE_PATH}) 
+    ${CMAKE_MODULE_PATH})
 
 #--- Project version -----------------------------------------------------------
 include(Geant4VMCPackagesVersion)
@@ -40,7 +40,7 @@ option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 #-- ROOT (required) ------------------------------------------------------------
 if(NOT ROOT_FOUND)
   find_package(ROOT REQUIRED)
-endif()  
+endif()
 include_directories(${ROOT_INCLUDE_DIRS})
 
 #-- Geant4 (required) ----------------------------------------------------------
@@ -68,7 +68,7 @@ endif()
 # Setup project include directories; compile definitions; link libraries
 #
 include_directories(
-  ${PROJECT_SOURCE_DIR}/include 
+  ${PROJECT_SOURCE_DIR}/include
   ${CMAKE_CURRENT_BINARY_DIR})
 
 #----------------------------------------------------------------------------

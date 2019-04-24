@@ -20,10 +20,10 @@ project(Geant4VMC)
 #-------------------------------------------------------------------------------
 # CMake Module Path
 #
-set(CMAKE_MODULE_PATH 
+set(CMAKE_MODULE_PATH
     ${Geant4VMC_DIR}/cmake
     ${PROJECT_SOURCE_DIR}/../cmake
-    ${CMAKE_MODULE_PATH}) 
+    ${CMAKE_MODULE_PATH})
 
 #--- Project version -----------------------------------------------------------
 include(Geant4VMCPackagesVersion)
@@ -49,7 +49,7 @@ mark_as_advanced(Geant4VMC_USE_EXTERN_G4Root)
 #-- ROOT (required) ------------------------------------------------------------
 if(NOT ROOT_FOUND)
   find_package(ROOT REQUIRED)
-endif(NOT ROOT_FOUND)  
+endif(NOT ROOT_FOUND)
 include_directories(${ROOT_INCLUDE_DIRS})
 
 #-- Geant4 (required) ----------------------------------------------------------
@@ -91,8 +91,8 @@ endif(Geant4VMC_USE_G4Root)
 #-- VGM (optional) -------------------------------------------------------------
 if (Geant4VMC_USE_VGM)
   if(NOT VGM_FOUND)
-    find_package(VGM REQUIRED)      
-  endif(NOT VGM_FOUND)  
+    find_package(VGM REQUIRED)
+  endif(NOT VGM_FOUND)
   include_directories(${VGM_INCLUDE_DIRS})
   add_definitions(-DUSE_VGM)
 else(Geant4VMC_USE_VGM)
@@ -108,15 +108,15 @@ endif()
 # Setup project include directories; compile definitions; link libraries
 #
 include_directories(
-  ${PROJECT_SOURCE_DIR}/global/include 
-  ${PROJECT_SOURCE_DIR}/geometry/include 
-  ${PROJECT_SOURCE_DIR}/digits+hits/include 
-  ${PROJECT_SOURCE_DIR}/physics/include 
-  ${PROJECT_SOURCE_DIR}/physics_list/include 
+  ${PROJECT_SOURCE_DIR}/global/include
+  ${PROJECT_SOURCE_DIR}/geometry/include
+  ${PROJECT_SOURCE_DIR}/digits+hits/include
+  ${PROJECT_SOURCE_DIR}/physics/include
+  ${PROJECT_SOURCE_DIR}/physics_list/include
   ${PROJECT_SOURCE_DIR}/physics_monopole/include
-  ${PROJECT_SOURCE_DIR}/event/include 
-  ${PROJECT_SOURCE_DIR}/run/include 
-  ${PROJECT_SOURCE_DIR}/visualization/include 
+  ${PROJECT_SOURCE_DIR}/event/include
+  ${PROJECT_SOURCE_DIR}/run/include
+  ${PROJECT_SOURCE_DIR}/visualization/include
   ${CMAKE_CURRENT_BINARY_DIR})
 
 #----------------------------------------------------------------------------
@@ -133,15 +133,15 @@ ROOT_GENERATE_DICTIONARY(
 # Locate sources and headers for this project
 # NB: headers are included so they will show up in IDEs
 #
-file(GLOB sources 
-  ${PROJECT_SOURCE_DIR}/global/src/*.cxx 
-  ${PROJECT_SOURCE_DIR}/geometry/src/*.cxx 
-  ${PROJECT_SOURCE_DIR}/digits+hits/src/*.cxx 
-  ${PROJECT_SOURCE_DIR}/physics/src/*.cxx 
-  ${PROJECT_SOURCE_DIR}/physics_list/src/*.cxx 
+file(GLOB sources
+  ${PROJECT_SOURCE_DIR}/global/src/*.cxx
+  ${PROJECT_SOURCE_DIR}/geometry/src/*.cxx
+  ${PROJECT_SOURCE_DIR}/digits+hits/src/*.cxx
+  ${PROJECT_SOURCE_DIR}/physics/src/*.cxx
+  ${PROJECT_SOURCE_DIR}/physics_list/src/*.cxx
   ${PROJECT_SOURCE_DIR}/physics_monopole/src/*.cxx
-  ${PROJECT_SOURCE_DIR}/event/src/*.cxx 
-  ${PROJECT_SOURCE_DIR}/run/src/*.cxx 
+  ${PROJECT_SOURCE_DIR}/event/src/*.cxx
+  ${PROJECT_SOURCE_DIR}/run/src/*.cxx
   ${PROJECT_SOURCE_DIR}/visualization/src/*.cxx)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/*/include/*.h ${PROJECT_SOURCE_DIR}/include/*.h)
 
@@ -151,16 +151,16 @@ add_library(geant4vmc ${sources} ${CMAKE_SHARED_LIBRARY_PREFIX}geant4vmc_dict.cx
 target_link_libraries(geant4vmc ${G4Root_LIBRARIES} ${VGM_LIBRARIES} ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} -lVMC -lEG)
 
 #----Installation---------------------------------------------------------------
-install(DIRECTORY 
+install(DIRECTORY
   ${PROJECT_SOURCE_DIR}/global/include/
-  ${PROJECT_SOURCE_DIR}/geometry/include/ 
-  ${PROJECT_SOURCE_DIR}/digits+hits/include/ 
+  ${PROJECT_SOURCE_DIR}/geometry/include/
+  ${PROJECT_SOURCE_DIR}/digits+hits/include/
   ${PROJECT_SOURCE_DIR}/physics/include/
-  ${PROJECT_SOURCE_DIR}/physics_list/include/ 
+  ${PROJECT_SOURCE_DIR}/physics_list/include/
   ${PROJECT_SOURCE_DIR}/physics_monopole/include/
   ${PROJECT_SOURCE_DIR}/event/include/
   ${PROJECT_SOURCE_DIR}/run/include/
-  ${PROJECT_SOURCE_DIR}/visualization/include/ 
+  ${PROJECT_SOURCE_DIR}/visualization/include/
   DESTINATION include/geant4vmc)
 install(TARGETS geant4vmc EXPORT Geant4VMCTargets
   DESTINATION ${CMAKE_INSTALL_LIBDIR})

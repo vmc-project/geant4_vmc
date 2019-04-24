@@ -10,9 +10,9 @@ set(program_name g4root_${PROJECT_NAME})
 
 #----------------------------------------------------------------------------
 # Add path to Find modules in Geant4 VMC installation
-set(CMAKE_MODULE_PATH 
+set(CMAKE_MODULE_PATH
     ${Geant4VMC_DIR}/Modules
-    ${CMAKE_MODULE_PATH}) 
+    ${CMAKE_MODULE_PATH})
 
 #----------------------------------------------------------------------------
 # Find Geant4 package, activating all available UI and Vis drivers by default
@@ -49,7 +49,7 @@ include(${Geant4_USE_FILE})
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
 #
-include_directories(${PROJECT_SOURCE_DIR}/include 
+include_directories(${PROJECT_SOURCE_DIR}/include
                     ${Geant4_INCLUDE_DIR}
                     ${ROOT_INCLUDE_DIRS}
                     ${G4Root_INCLUDE_DIRS})
@@ -70,7 +70,7 @@ target_link_libraries(${program_name} ${Geant4_LIBRARIES} ${G4Root_LIBRARIES} ${
 set(OpNovice_SCRIPTS
     OpNoviceGeom.root
     OpNoviceGeom.C
-    drawTracks.C 
+    drawTracks.C
     OpNovice.out
     OpNovice.in
     optPhoton.mac

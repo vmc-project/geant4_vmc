@@ -29,10 +29,10 @@ set(test_name test${PROJECT_NAME})
 #----------------------------------------------------------------------------
 # CMake Module Path
 #
-set(CMAKE_MODULE_PATH 
+set(CMAKE_MODULE_PATH
     ${Geant4VMC_DIR}/Modules
     ${Geant3_DIR}/Modules
-    ${CMAKE_MODULE_PATH}) 
+    ${CMAKE_MODULE_PATH})
 
 #----------------------------------------------------------------------------
 # VMC Configuration file
@@ -45,7 +45,7 @@ include(UseVMC)
 #
 include_directories(
   ${VMC_INCLUDE_DIR}
-  ${PROJECT_SOURCE_DIR}/include 
+  ${PROJECT_SOURCE_DIR}/include
   ${CMAKE_CURRENT_BINARY_DIR})
 
 #----------------------------------------------------------------------------

@@ -30,10 +30,10 @@ set(test_name test${PROJECT_NAME})
 #----------------------------------------------------------------------------
 # CMake Module Path
 #
-set(CMAKE_MODULE_PATH 
+set(CMAKE_MODULE_PATH
     ${Geant4VMC_DIR}/Modules
     ${Geant3_DIR}/Modules
-    ${CMAKE_MODULE_PATH}) 
+    ${CMAKE_MODULE_PATH})
 
 #----------------------------------------------------------------------------
 # VMC Configuration file
@@ -50,7 +50,7 @@ find_package(Garfield)
 # Setup project include directories; compile definitions; link libraries
 #
 include_directories(
-  ${PROJECT_SOURCE_DIR}/include 
+  ${PROJECT_SOURCE_DIR}/include
   ${CMAKE_CURRENT_BINARY_DIR}
   ${Garfield_INCLUDE_DIRS})
 
@@ -140,7 +140,7 @@ add_custom_target(${PROJECT_NAME} DEPENDS
 # Install the executables to 'bin'
 #
 if (VMC_INSTALL_EXAMPLES)
-  install(TARGETS ${MC_PREFIX}vmc_${program_name} ${MC_PREFIX}vmc_${test_name} 
+  install(TARGETS ${MC_PREFIX}vmc_${program_name} ${MC_PREFIX}vmc_${test_name}
           DESTINATION bin)
 endif()
 

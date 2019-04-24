@@ -10,15 +10,15 @@
 # CMake Configuration file for the VMC examples
 # I. Hrivnacova, 31/01/2014
 
-#---Adding examples subdirectories explicitly 
+#---Adding examples subdirectories explicitly
 #   and a custom target to for building all VMC examples -------------
 
 cmake_minimum_required(VERSION 2.6.4 FATAL_ERROR)
 
-set(CMAKE_MODULE_PATH 
+set(CMAKE_MODULE_PATH
     ${Geant4VMC_DIR}/Modules
     ${Geant3_DIR}/Modules
-    ${CMAKE_MODULE_PATH}) 
+    ${CMAKE_MODULE_PATH})
 
 
 add_subdirectory(E01)

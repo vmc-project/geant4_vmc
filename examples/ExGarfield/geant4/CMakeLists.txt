@@ -22,9 +22,9 @@ project(geant4ExGarfield)
 #----------------------------------------------------------------------------
 # CMake Module Path
 #
-set(CMAKE_MODULE_PATH 
+set(CMAKE_MODULE_PATH
     ${Geant4VMC_DIR}/Modules
-    ${CMAKE_MODULE_PATH}) 
+    ${CMAKE_MODULE_PATH})
 
 #----------------------------------------------------------------------------
 # MC Configuration file
@@ -42,7 +42,7 @@ find_package(Garfield)
 # Setup project include directories; compile definitions; link libraries
 #
 include_directories(
-  ${PROJECT_SOURCE_DIR}/include 
+  ${PROJECT_SOURCE_DIR}/include
   ${CMAKE_CURRENT_BINARY_DIR}
   ${Garfield_INCLUDE_DIRS})
 

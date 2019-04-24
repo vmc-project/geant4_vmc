@@ -31,10 +31,10 @@ set(test_name test${PROJECT_NAME})
 # CMake Module Path
 # (for building MC independent code)
 #
-set(CMAKE_MODULE_PATH 
+set(CMAKE_MODULE_PATH
     ${Geant4VMC_DIR}/Modules
     ${Geant3_DIR}/Modules
-    ${CMAKE_MODULE_PATH}) 
+    ${CMAKE_MODULE_PATH})
 
 #----------------------------------------------------------------------------
 # VMC Configuration file
@@ -45,7 +45,7 @@ include(UseVMC)
 # Setup project include directories; compile definitions; link libraries
 #
 include_directories(
-  ${PROJECT_SOURCE_DIR}/include 
+  ${PROJECT_SOURCE_DIR}/include
   ${CMAKE_CURRENT_BINARY_DIR})
 
 #----------------------------------------------------------------------------

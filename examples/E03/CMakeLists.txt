@@ -10,7 +10,7 @@
 # CMake Configuration file for the VMC E03 examples
 # I. Hrivnacova, 04/06/2018
 
-#---Adding examples subdirectories explicitly 
+#---Adding examples subdirectories explicitly
 #   and a custom target to for building all VMC examples -------------
 
 cmake_minimum_required(VERSION 2.6.4 FATAL_ERROR)
