@@ -26,6 +26,9 @@ endif()
 #--- Define CMake requirements -------------------------------------------------
 cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 
+#--- Allow compiling with non Apple Clang on macOS -----------------------------
+cmake_policy(SET CMP0025 NEW)
+
 #--- Prepend our own CMake Modules to the search path --------------------------
 set(CMAKE_MODULE_PATH
     ${CMAKE_SOURCE_DIR}/cmake
