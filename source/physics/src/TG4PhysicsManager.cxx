@@ -238,7 +238,7 @@ void TG4PhysicsManager::SetProcessActivation(
   G4String strActivation = "Activate   ";
   if (!activation) strActivation = "Inactivate ";
 
-  if (TG4VVerbose::VerboseLevel() > 1) {
+  if (TG4Verbose::VerboseLevel() > 1) {
     G4cout << strActivation << " process "
            << (*processManager->GetProcessList())[processId]->GetProcessName()
            << " for " << processManager->GetParticleType()->GetParticleName()

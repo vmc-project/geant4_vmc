@@ -43,7 +43,7 @@ TG4ComposedPhysicsList::TG4ComposedPhysicsList()
   if (VerboseLevel() > 1)
     G4cout << "TG4ComposedPhysicsList::TG4ComposedPhysicsList" << G4endl;
 
-  SetVerboseLevel(TG4VVerbose::VerboseLevel());
+  SetVerboseLevel(TG4Verbose::VerboseLevel());
 }
 
 //_____________________________________________________________________________
@@ -281,9 +281,9 @@ void TG4ComposedPhysicsList::DumpAllProcesses() const
 //_____________________________________________________________________________
 G4int TG4ComposedPhysicsList::VerboseLevel() const
 {
-  /// Return verbose level (via TG4VVerbose)
+  /// Return verbose level (via TG4Verbose)
 
-  return TG4VVerbose::VerboseLevel();
+  return TG4Verbose::VerboseLevel();
 }
 
 //_____________________________________________________________________________
@@ -293,7 +293,7 @@ void TG4ComposedPhysicsList::VerboseLevel(G4int level)
   /// G4VUserPhysicsList.
   /// The verbose level is also propagated to registered physics lists.
 
-  TG4VVerbose::VerboseLevel(level);
+  TG4Verbose::VerboseLevel(level);
   SetVerboseLevel(level);
 
   for (G4int i = 0; i < G4int(fPhysicsLists.size()); i++) {

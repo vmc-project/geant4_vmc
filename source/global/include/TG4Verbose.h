@@ -15,7 +15,6 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include "TG4VVerbose.h"
 #include "TG4VerboseMessenger.h"
 
 #include <globals.hh>
@@ -33,12 +32,18 @@ class G4UIcommand;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4Verbose : public TG4VVerbose
+class TG4Verbose
 {
  public:
   TG4Verbose(const G4String& cmdName);
   TG4Verbose(const G4String& cmdName, G4int verboseLevel);
   virtual ~TG4Verbose();
+
+  // set methods
+  virtual void VerboseLevel(G4int level);
+
+  // get methods
+  virtual G4int VerboseLevel() const;
 
  private:
   /// Not implemented
@@ -49,15 +54,31 @@ class TG4Verbose : public TG4VVerbose
   TG4Verbose& operator=(const TG4Verbose& right);
 
   // methods
-  virtual TG4VerboseMessenger* CreateMessenger();
+  TG4VerboseMessenger* CreateMessenger();
 
   // static data members
-  static const G4String fgkDirectoryName;                ///< directory name
-  static G4ThreadLocal G4int fgCounter;                  ///< object counter
+  static const G4int fgkDefaultVerboseLevel; ///< default verbose level
+  static const G4String fgkDirectoryName;    ///< directory name
+  static G4ThreadLocal G4int fgCounter;      ///< object counter
   static G4ThreadLocal TG4VerboseMessenger* fgMessenger; ///< messenger
 
   // data members
+  G4int fVerboseLevel;   ///< verbose level
   G4UIcommand* fCommand; ///< verbose command
 };
+
+// inline methods
+
+inline void TG4Verbose::VerboseLevel(G4int level)
+{
+  /// Set level of verbosity
+  fVerboseLevel = level;
+}
+
+inline G4int TG4Verbose::VerboseLevel() const
+{
+  /// Return level of verbosity
+  return fVerboseLevel;
+}
 
 #endif // TG4_VERBOSE_H

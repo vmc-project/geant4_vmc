@@ -109,7 +109,7 @@ TG4ExtraPhysicsList::TG4ExtraPhysicsList(
 
   defaultCutValue = fgkDefaultCutValue;
 
-  SetVerboseLevel(TG4VVerbose::VerboseLevel());
+  SetVerboseLevel(TG4Verbose::VerboseLevel());
 }
 
 //_____________________________________________________________________________
@@ -195,9 +195,9 @@ void TG4ExtraPhysicsList::ConstructProcess()
 //_____________________________________________________________________________
 G4int TG4ExtraPhysicsList::VerboseLevel() const
 {
-  /// Return verbose level (via TG4VVerbose)
+  /// Return verbose level (via TG4Verbose)
 
-  return TG4VVerbose::VerboseLevel();
+  return TG4Verbose::VerboseLevel();
 }
 
 //_____________________________________________________________________________
@@ -207,7 +207,7 @@ void TG4ExtraPhysicsList::VerboseLevel(G4int level)
   /// G4VModularPhysicsList.
   /// The verbose level is also propagated to registered physics contructors.
 
-  TG4VVerbose::VerboseLevel(level);
+  TG4Verbose::VerboseLevel(level);
   SetVerboseLevel(level);
 
   G4PhysConstVector::iterator it;

@@ -19,7 +19,7 @@
 #include <globals.hh>
 #include <vector>
 
-class TG4VVerbose;
+class TG4Verbose;
 
 class G4UIdirectory;
 class G4UIcommand;
@@ -37,7 +37,7 @@ class TG4VerboseMessenger : public G4UImessenger
 {
  public:
   /// The vector of TG4 verbose objects
-  typedef std::vector<TG4VVerbose*> VerboseVector;
+  typedef std::vector<TG4Verbose*> VerboseVector;
 
   /// The vector of G4 commands with an integer
   typedef std::vector<G4UIcmdWithAnInteger*> CommandVector;
@@ -47,8 +47,8 @@ class TG4VerboseMessenger : public G4UImessenger
   virtual ~TG4VerboseMessenger();
 
   // methods
-  G4UIcommand* AddCommand(TG4VVerbose* verbose, const G4String& cmdName);
-  void RemoveCommand(TG4VVerbose* verbose, G4UIcommand* command);
+  G4UIcommand* AddCommand(TG4Verbose* verbose, const G4String& cmdName);
+  void RemoveCommand(TG4Verbose* verbose, G4UIcommand* command);
   virtual void SetNewValue(G4UIcommand* command, G4String string);
 
  private:

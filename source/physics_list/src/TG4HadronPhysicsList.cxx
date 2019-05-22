@@ -84,7 +84,7 @@ TG4HadronPhysicsList::TG4HadronPhysicsList(const G4String& selection)
 
   defaultCutValue = fgkDefaultCutValue;
 
-  SetVerboseLevel(TG4VVerbose::VerboseLevel());
+  SetVerboseLevel(TG4Verbose::VerboseLevel());
 }
 
 //_____________________________________________________________________________
@@ -139,9 +139,9 @@ void TG4HadronPhysicsList::ConstructProcess()
 //_____________________________________________________________________________
 G4int TG4HadronPhysicsList::VerboseLevel() const
 {
-  /// Return verbose level (via TG4VVerbose)
+  /// Return verbose level (via TG4Verbose)
 
-  return TG4VVerbose::VerboseLevel();
+  return TG4Verbose::VerboseLevel();
 }
 
 //_____________________________________________________________________________
@@ -151,7 +151,7 @@ void TG4HadronPhysicsList::VerboseLevel(G4int level)
   /// G4VModularPhysicsList.
   /// The verbose level is also propagated to the registered physics list.
 
-  TG4VVerbose::VerboseLevel(level);
+  TG4Verbose::VerboseLevel(level);
   fPhysicsList->SetVerboseLevel(level);
 }
 

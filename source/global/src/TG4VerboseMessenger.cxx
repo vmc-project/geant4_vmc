@@ -13,7 +13,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4VerboseMessenger.h"
-#include "TG4VVerbose.h"
+#include "TG4Verbose.h"
 
 #include <G4UIcmdWithAnInteger.hh>
 #include <G4UIcommandTree.hh>
@@ -85,7 +85,7 @@ void TG4VerboseMessenger::SetNewValueToAll(const G4String value) const
 
 //_____________________________________________________________________________
 G4UIcommand* TG4VerboseMessenger::AddCommand(
-  TG4VVerbose* verbose, const G4String& cmdName)
+  TG4Verbose* verbose, const G4String& cmdName)
 {
   /// Add the command specified by cmdName and associate verbose object.
   //--
@@ -111,7 +111,7 @@ G4UIcommand* TG4VerboseMessenger::AddCommand(
 
 //_____________________________________________________________________________
 void TG4VerboseMessenger::RemoveCommand(
-  TG4VVerbose* verbose, G4UIcommand* command)
+  TG4Verbose* verbose, G4UIcommand* command)
 {
   /// Remove the specified verbose and associate command
   //--

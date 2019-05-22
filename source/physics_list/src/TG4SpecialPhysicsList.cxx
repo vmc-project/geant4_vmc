@@ -101,7 +101,7 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList(const G4String& selection)
 
   Configure(selection);
 
-  SetVerboseLevel(TG4VVerbose::VerboseLevel());
+  SetVerboseLevel(TG4Verbose::VerboseLevel());
 }
 
 //_____________________________________________________________________________
@@ -119,7 +119,7 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList()
 
   Configure("");
 
-  SetVerboseLevel(TG4VVerbose::VerboseLevel());
+  SetVerboseLevel(TG4Verbose::VerboseLevel());
 }
 
 //_____________________________________________________________________________
@@ -143,7 +143,7 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
   /// Create the selected physics constructors
   /// and registeres them in the modular physics list.
 
-  Int_t tg4VerboseLevel = TG4VVerbose::VerboseLevel();
+  Int_t tg4VerboseLevel = TG4Verbose::VerboseLevel();
 
   RegisterPhysics(new TG4TransitionRadiationPhysics(tg4VerboseLevel));
   RegisterPhysics(new TG4ProcessControlMapPhysics(tg4VerboseLevel));
@@ -217,9 +217,9 @@ void TG4SpecialPhysicsList::ConstructProcess()
 //_____________________________________________________________________________
 G4int TG4SpecialPhysicsList::VerboseLevel() const
 {
-  /// Return verbose level (via TG4VVerbose)
+  /// Return verbose level (via TG4Verbose)
 
-  return TG4VVerbose::VerboseLevel();
+  return TG4Verbose::VerboseLevel();
 }
 
 //_____________________________________________________________________________
@@ -229,7 +229,7 @@ void TG4SpecialPhysicsList::VerboseLevel(G4int level)
   /// G4VModularPhysicsList.
   /// The verbose level is also propagated to registered physics contructors.
 
-  TG4VVerbose::VerboseLevel(level);
+  TG4Verbose::VerboseLevel(level);
   SetVerboseLevel(level);
 
   G4PhysConstVector::iterator it;
