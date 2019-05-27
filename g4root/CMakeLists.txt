@@ -17,6 +17,11 @@ cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 #
 project(G4Root)
 
+#----------------------------------------------------------------------------
+# Define installed names
+#
+set(library_name g4root)
+
 #-------------------------------------------------------------------------------
 # CMake Module Path
 #
@@ -37,10 +42,7 @@ option(Geant4VMC_USE_GEANT4_UI     "Build with Geant4 UI drivers" ON)
 option(Geant4VMC_USE_GEANT4_VIS    "Build with Geant4 Vis drivers" ON)
 option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 
-#-- ROOT (required) ------------------------------------------------------------
-if(NOT ROOT_FOUND)
-  find_package(ROOT REQUIRED)
-endif()
+#-- Includes --------------------------------------------------------------------
 include_directories(${ROOT_INCLUDE_DIRS})
 
 #-- Geant4 (required) ----------------------------------------------------------
@@ -79,12 +81,12 @@ file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cxx)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 
 #---Add library-----------------------------------------------------------------
-add_library(g4root ${sources} ${headers})
-target_link_libraries(g4root ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} -lVMC -lEG)
+add_library(${library_name} ${sources} ${headers})
+target_link_libraries(${library_name} ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
 
 #----Installation---------------------------------------------------------------
-install(DIRECTORY include/ DESTINATION include/g4root)
-install(TARGETS g4root EXPORT G4RootTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(DIRECTORY include/ DESTINATION include/${library_name})
+install(TARGETS ${library_name} EXPORT G4RootTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 #--- Build project configuration -----------------------------------------------
 include(G4RootBuildProject)

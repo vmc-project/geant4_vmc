@@ -139,6 +139,12 @@ void g4libs()
   // VGM librares
   vgmlibs();
 
+  // VMC library (optional)
+  if ( isLibrary("libVMCLibrary") ) {
+    cout << "Loading VMC library ..." << endl;
+    gSystem->Load("libVMCLibrary");
+  }
+
   // G4Root library (if available)
   cout << "Loading g4root library ..." << endl;
   gSystem->Load("libg4root");
@@ -146,13 +152,6 @@ void g4libs()
   // Geant4 VMC library
   cout << "Loading geant4vmc library ..." << endl;
   gSystem->Load("libgeant4vmc");
-
-  // Geant4 VMC GUI library
-  // (if available and Root is not running in batch mode)
-  if ( isLibrary("libgeant4vmc_gui") && ! isBatch() ) {
-    cout << "Loading geant4vmc_gui library ... " << endl;
-    gSystem->Load("libgeant4vmc_gui");
-  }
 
   // mtroot library (make optional)
   cout << "Loading mtroot library ..." << endl;

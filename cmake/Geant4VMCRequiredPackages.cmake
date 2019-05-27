@@ -12,8 +12,25 @@
 #
 # I. Hrivnacova, 13/06/2014
 
+#message(STATUS Processing Geant4VMCRequiredPackages)
+
 #-- ROOT (required) ------------------------------------------------------------
-find_package(ROOT REQUIRED)
+find_package(ROOT CONFIG REQUIRED)
+include(${ROOT_USE_FILE})
+set (ROOT_LIBRARIES ${ROOT_LIBRARIES} -lEG -lGeom)
+
+#-- VMC (required) ------------------------------------------------------------
+if(ROOT_vmc_FOUND)
+  message(STATUS "Using VMC built with ROOT")
+  set(VMC_LIBRARIES "VMC")
+else()
+  find_package(VMC CONFIG REQUIRED)
+  if(NOT VMC_FIND_QUIETLY)
+    message(STATUS "Found VMC ${VMC_VERSION} in ${VMC_DIR}")
+    #message(STATUS VMC_INCLUDE_DIRS ${VMC_INCLUDE_DIRS})
+    #message(STATUS VMC_LIBRARIES ${VMC_LIBRARIES})
+  endif()
+endif()
 
 #-- Geant4 (required) ----------------------------------------------------------
 set(_components)

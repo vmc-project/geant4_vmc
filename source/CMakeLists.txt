@@ -17,6 +17,11 @@ cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 #
 project(Geant4VMC)
 
+#----------------------------------------------------------------------------
+# Define installed names
+#
+set(library_name geant4vmc)
+
 #-------------------------------------------------------------------------------
 # CMake Module Path
 #
@@ -46,11 +51,9 @@ if ((NOT Geant4VMC_BUILD_G4Root) AND Geant4VMC_USE_G4Root)
 endif()
 mark_as_advanced(Geant4VMC_USE_EXTERN_G4Root)
 
-#-- ROOT (required) ------------------------------------------------------------
-if(NOT ROOT_FOUND)
-  find_package(ROOT REQUIRED)
-endif(NOT ROOT_FOUND)
+#-- Includes --------------------------------------------------------------------
 include_directories(${ROOT_INCLUDE_DIRS})
+include_directories(${VMC_INCLUDE_DIRS})
 
 #-- Geant4 (required) ----------------------------------------------------------
 if(NOT Geant4_FOUND)
@@ -123,11 +126,17 @@ include_directories(
 # Generate Root dictionaries
 #
 ROOT_GENERATE_DICTIONARY(
-  ${CMAKE_SHARED_LIBRARY_PREFIX}geant4vmc
-  with_rootmap
+  ${library_name}_dict
   ${CMAKE_CURRENT_SOURCE_DIR}/run/include/TG4RunConfiguration.h
   ${CMAKE_CURRENT_SOURCE_DIR}/run/include/TGeant4.h
-  LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/geant4vmcLinkDef.h)
+  LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/${library_name}LinkDef.h)
+
+# Files produced by the dictionary generation
+SET(root_dict
+  ${library_name}_dict.cxx)
+SET(root_dict_libs
+  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${library_name}_dict_rdict.pcm
+  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${library_name}_dict.rootmap)
 
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
@@ -146,9 +155,10 @@ file(GLOB sources
 file(GLOB headers ${PROJECT_SOURCE_DIR}/*/include/*.h ${PROJECT_SOURCE_DIR}/include/*.h)
 
 #---Add library-----------------------------------------------------------------
-add_library(geant4vmc ${sources} ${CMAKE_SHARED_LIBRARY_PREFIX}geant4vmc_dict.cxx ${headers})
+add_library(${library_name} ${sources} ${root_dict} ${headers})
 # Make g4root optional
-target_link_libraries(geant4vmc ${G4Root_LIBRARIES} ${VGM_LIBRARIES} ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} -lVMC -lEG)
+target_link_libraries(${library_name} ${G4Root_LIBRARIES}
+  ${VGM_LIBRARIES} ${VMC_LIBRARIES} ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
 
 #----Installation---------------------------------------------------------------
 install(DIRECTORY
@@ -161,17 +171,11 @@ install(DIRECTORY
   ${PROJECT_SOURCE_DIR}/event/include/
   ${PROJECT_SOURCE_DIR}/run/include/
   ${PROJECT_SOURCE_DIR}/visualization/include/
-  DESTINATION include/geant4vmc)
-install(TARGETS geant4vmc EXPORT Geant4VMCTargets
+  DESTINATION include/${library_name})
+install(TARGETS ${library_name} EXPORT Geant4VMCTargets 
   DESTINATION ${CMAKE_INSTALL_LIBDIR})
-
-# Install dictionary map (only if ROOT 6.x
-if (${ROOT_FOUND_VERSION} GREATER 59999)
-  install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}geant4vmc_dict_rdict.pcm
-    ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}geant4vmc.rootmap
-    DESTINATION ${CMAKE_INSTALL_LIBDIR})
-endif()
+install(FILES ${root_dict_libs} 
+  DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 #--- Build project configuration -----------------------------------------------
 include(Geant4VMCBuildProject)
