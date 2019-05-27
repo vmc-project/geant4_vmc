@@ -43,10 +43,17 @@ include_directories(
 # Generate Root dictionaries
 #
 ROOT_GENERATE_DICTIONARY(
-  ${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}
-  no_rootmap
+  ${g4library_name}_dict
   ${CMAKE_CURRENT_SOURCE_DIR}/include/A01RunConfiguration.h
   LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}LinkDef.h)
+
+# Files produced by the dictionary generation
+set(root_dict
+  ${g4library_name}_dict.cxx)
+set(root_dict_lib
+  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}_dict_rdict.pcm)
+#set(root_map
+#  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}_dict.rootmap)
 
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
@@ -58,8 +65,8 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 #----------------------------------------------------------------------------
 # Add the example library
 #
-add_library(${g4library_name} ${sources} ${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}_dict.cxx ${headers})
-target_link_libraries(${g4library_name} ${VMC_LIBRARIES} ${MC_LIBRARIES})
+add_library(${g4library_name} ${sources} ${root_dict} ${headers})
+target_link_libraries(${g4library_name} ${VMCPackages_LIBRARIES} ${MCPackages_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Add program to the project targets
@@ -68,14 +75,11 @@ target_link_libraries(${g4library_name} ${VMC_LIBRARIES} ${MC_LIBRARIES})
 add_custom_target(${PROJECT_NAME} DEPENDS ${g4library_name})
 
 #----------------------------------------------------------------------------
-# Install the library and dictionary map (if Root 6.x)
+# Install the library and dictionary map
 # to CMAKE_INSTALL_LIBDIR directory
 #
 if (VMC_INSTALL_EXAMPLES)
   install(TARGETS ${g4library_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
-  # dictionary map (only if ROOT 6.x)
-  if (${ROOT_FOUND_VERSION} GREATER 59999)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}_dict_rdict.pcm
-      DESTINATION ${CMAKE_INSTALL_LIBDIR})
-  endif()
+  install(FILES ${root_dict_lib} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+#  install(FILES ${root_map} DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()

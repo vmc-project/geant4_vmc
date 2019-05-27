@@ -16,13 +16,28 @@
 
 #endif
 
+Bool_t isLibrary(const char* libName)
+{
+/// Helper function which testes the existence of the given library
+/// \param libName  The library name
+
+  if (TString(gSystem->DynamicPathName(libName, kTRUE)) != TString(""))
+    return kTRUE;
+  else
+    return kFALSE;
+}
+
 void basiclibs()
 {
 /// Macro function for loading basic libraries used with all MCs
 
   gSystem->Load("libRIO");
   gSystem->Load("libGeom");
-  gSystem->Load("libVMC");
   gSystem->Load("libPhysics");
   gSystem->Load("libTree");
+
+  if ( isLibrary("libVMC") ) {
+    // VMC library in ROOT (optional)
+    gSystem->Load("libVMC");
+  }
 }

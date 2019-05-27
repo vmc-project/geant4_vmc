@@ -18,6 +18,11 @@ cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 project(MTRoot)
 
 #-------------------------------------------------------------------------------
+# Define installed names
+#
+set(library_name mtroot)
+
+#-------------------------------------------------------------------------------
 #
 set(CMAKE_MODULE_PATH
     ${Geant4VMC_DIR}/cmake
@@ -33,11 +38,9 @@ include(VMCBuildMode)
 #--- Options -------------------------------------------------------------------
 option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 
-#-- ROOT (required) ------------------------------------------------------------
-if(NOT ROOT_FOUND)
-  find_package(ROOT REQUIRED)
-endif()
+#-- Includes -------------------------------------------------------------------
 include_directories(${ROOT_INCLUDE_DIRS})
+include_directories(${VMC_INCLUDE_DIRS})
 
 #--- Utility to defined installation lib directory -----------------------------
 if("${CMAKE_INSTALL_LIBDIR}" MATCHES "")
@@ -64,16 +67,16 @@ set(headers
     )
 
 #---Add library-----------------------------------------------------------------
-add_library(mtroot ${sources} ${headers})
-target_link_libraries(mtroot ${ROOT_LIBRARIES})
+add_library(${library_name} ${sources} ${headers})
+target_link_libraries(${library_name} ${ROOT_LIBRARIES} ${VMCPackages_LIBRARIES})
 
 #----Installation---------------------------------------------------------------
-#install(DIRECTORY include/ DESTINATION include/mtroot)
+#install(DIRECTORY include/ DESTINATION include/${library_name})
 install(FILES
         include/TMCRootManager.h
-        DESTINATION include/mtroot)
+        DESTINATION include/${library_name})
 
-install(TARGETS mtroot EXPORT MTRootTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(TARGETS ${library_name} EXPORT MTRootTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 #--- Build project configuration -----------------------------------------------
 include(MTRootBuildProject)

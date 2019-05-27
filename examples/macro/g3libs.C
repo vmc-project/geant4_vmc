@@ -39,6 +39,12 @@ void g3libs()
   gSystem->Load("libEGPythia6");
   gSystem->Load("libPythia6");
 
+  // VMC library (optional)
+  if ( isLibrary("libVMCLibrary") ) {
+    cout << "Loading VMC library ..." << endl;
+    gSystem->Load("libVMCLibrary");
+  }
+
   if (isLibrary("libdummies"))
      gSystem->Load("libdummies");
                    // libdummies.so needed from geant3_+vmc version 0.5
