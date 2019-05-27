@@ -11,6 +11,8 @@
 /// \file E02/run_g3.C
 /// \brief Macro for running Example02 with Geant3
 
+#include "TVirtualMC.h"
+
 void run_g3(const TString& configMacro = "g3tgeoConfig.C")
 {
 /// Macro function for running Example02 with Geant3 from
