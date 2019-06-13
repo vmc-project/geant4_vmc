@@ -509,6 +509,18 @@ void Ex03MCApplication::FinishPrimary()
 }
 
 //_____________________________________________________________________________
+void Ex03MCApplication::EndOfEvent()
+{
+  /// User actions et the end of event before SD's end of event
+
+  cout << "Ex03MCApplication::EndOfEvent" << endl;
+
+  fVerbose.EndOfEvent();
+
+  fRootManager->Fill();
+}
+
+//_____________________________________________________________________________
 void Ex03MCApplication::FinishEvent()
 {
   /// User actions after finishing of an event
@@ -533,8 +545,6 @@ void Ex03MCApplication::FinishEvent()
       gGeoManager->DrawTracks("/*"); // this means all tracks
     }
   }
-
-  fRootManager->Fill();
 
   // if (fEventNo % fPrintModulo == 0)
   //   fCalorimeterSD->PrintTotal();

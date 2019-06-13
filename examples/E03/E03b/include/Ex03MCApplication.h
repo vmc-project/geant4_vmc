@@ -65,6 +65,7 @@ class Ex03MCApplication : public TVirtualMCApplication
   virtual void Stepping();
   virtual void PostTrack();
   virtual void FinishPrimary();
+  virtual void EndOfEvent();
   virtual void FinishEvent();
 
   // set methods

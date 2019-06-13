@@ -27,6 +27,7 @@
 #include <G4VVisManager.hh>
 #include <Randomize.hh>
 
+#include <RVersion.h>
 #include <TSystem.h>
 #include <TVirtualMC.h>
 #include <TVirtualMCApplication.h>
@@ -133,6 +134,11 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
     G4int nofAllTracks = fTrackManager->GetNofTracks();
     G4cout << "    " << nofAllTracks << " all tracks processed." << G4endl;
   }
+
+#if ROOT_VERSION_CODE >= ROOT_VERSION(6, 18, 0)
+  // VMC application end of event
+  fMCApplication->EndOfEvent();
+#endif
 
   // User SDs finish event
   if (TG4SDServices::Instance()->GetUserSDs()) {
