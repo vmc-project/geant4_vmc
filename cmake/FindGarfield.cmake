@@ -24,7 +24,7 @@ set(Garfield_HEED_INC_DIR "" CACHE PATH "Alternative directory for Garfield Heed
 set(Garfield_LIB_DIR "" CACHE PATH "Alternative directory for Garfield libraries")
 
 find_path(Garfield_INCLUDE_DIR Sensor.hh
-          HINTS ${Garfield_DIR}/include ${Garfield_INC_DIR}
+          HINTS ${Garfield_DIR}/include/Garfield ${Garfield_INC_DIR}
           $ENV{GARFIELD_HOME}/Include)
 #message(STATUS Garfield_INCLUDE_DIR ${Garfield_INCLUDE_DIR})
 
