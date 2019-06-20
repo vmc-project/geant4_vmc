@@ -241,6 +241,8 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("MaxTimeCuts", kPStop);
   mcMap->Add("G4MaxTimeCuts", kPStop);
   mcMap->Add("stackPopper", kPUserDefined);
+
+  mcMap->Add("biasWrapper(0)", kPNull);
 }
 //
 // protected methods

@@ -108,14 +108,15 @@ endif()
 # Setup project include directories; compile definitions; link libraries
 #
 include_directories(
-  ${PROJECT_SOURCE_DIR}/global/include 
-  ${PROJECT_SOURCE_DIR}/geometry/include 
-  ${PROJECT_SOURCE_DIR}/digits+hits/include 
-  ${PROJECT_SOURCE_DIR}/physics/include 
-  ${PROJECT_SOURCE_DIR}/physics_list/include 
-  ${PROJECT_SOURCE_DIR}/event/include 
-  ${PROJECT_SOURCE_DIR}/run/include 
-  ${PROJECT_SOURCE_DIR}/visualization/include 
+  ${PROJECT_SOURCE_DIR}/biasing/include
+  ${PROJECT_SOURCE_DIR}/global/include
+  ${PROJECT_SOURCE_DIR}/geometry/include
+  ${PROJECT_SOURCE_DIR}/digits+hits/include
+  ${PROJECT_SOURCE_DIR}/physics/include
+  ${PROJECT_SOURCE_DIR}/physics_list/include
+  ${PROJECT_SOURCE_DIR}/event/include
+  ${PROJECT_SOURCE_DIR}/run/include
+  ${PROJECT_SOURCE_DIR}/visualization/include
   ${CMAKE_CURRENT_BINARY_DIR})
 
 #----------------------------------------------------------------------------
@@ -132,14 +133,15 @@ ROOT_GENERATE_DICTIONARY(
 # Locate sources and headers for this project
 # NB: headers are included so they will show up in IDEs
 #
-file(GLOB sources 
-  ${PROJECT_SOURCE_DIR}/global/src/*.cxx 
-  ${PROJECT_SOURCE_DIR}/geometry/src/*.cxx 
-  ${PROJECT_SOURCE_DIR}/digits+hits/src/*.cxx 
-  ${PROJECT_SOURCE_DIR}/physics/src/*.cxx 
-  ${PROJECT_SOURCE_DIR}/physics_list/src/*.cxx 
-  ${PROJECT_SOURCE_DIR}/event/src/*.cxx 
-  ${PROJECT_SOURCE_DIR}/run/src/*.cxx 
+file(GLOB sources
+  ${PROJECT_SOURCE_DIR}/biasing/src/*.cxx
+  ${PROJECT_SOURCE_DIR}/global/src/*.cxx
+  ${PROJECT_SOURCE_DIR}/geometry/src/*.cxx
+  ${PROJECT_SOURCE_DIR}/digits+hits/src/*.cxx
+  ${PROJECT_SOURCE_DIR}/physics/src/*.cxx
+  ${PROJECT_SOURCE_DIR}/physics_list/src/*.cxx
+  ${PROJECT_SOURCE_DIR}/event/src/*.cxx
+  ${PROJECT_SOURCE_DIR}/run/src/*.cxx
   ${PROJECT_SOURCE_DIR}/visualization/src/*.cxx)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/*/include/*.h ${PROJECT_SOURCE_DIR}/include/*.h)
 

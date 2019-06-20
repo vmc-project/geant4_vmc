@@ -14,6 +14,7 @@
 
 #include "TG4GeometryManager.h"
 #include "TG4CachedMagneticField.h"
+#include "TG4BiasingManager.h"
 #include "TG4FieldParameters.h"
 #include "TG4G3ControlVector.h"
 #include "TG4G3CutVector.h"
@@ -79,6 +80,7 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fOpManager(0),
     fFastModelsManager(0),
     fEmModelsManager(0),
+    fBiasingManager(0),
     fUserGeometry(userGeometry),
     fFieldParameters(),
     fUserRegionConstruction(0),
@@ -107,6 +109,7 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
 
   fFastModelsManager = new TG4ModelConfigurationManager("fastSimulation");
   fEmModelsManager = new TG4ModelConfigurationManager("emModel");
+  fBiasingManager = new TG4BiasingManager("biasing");
 
   fgInstance = this;
 }
@@ -127,6 +130,7 @@ TG4GeometryManager::~TG4GeometryManager()
   delete fOpManager;
   delete fFastModelsManager;
   delete fEmModelsManager;
+  delete fBiasingManager;
 
   fgInstance = 0;
   fgMagneticFields = 0;
@@ -791,6 +795,9 @@ void TG4GeometryManager::ConstructSDandField()
   // Construct regions with fast simulation and EM models
   fFastModelsManager->CreateRegions();
   fEmModelsManager->CreateRegions();
+
+  // Construct biasing operator
+  fBiasingManager->CreateBiasingOperator();
 
   // Initialize SD manager (create SDs)
   TG4SDManager::Instance()->Initialize();

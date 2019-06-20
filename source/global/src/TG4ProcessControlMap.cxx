@@ -81,6 +81,9 @@ G4bool TG4ProcessControlMap::Add(G4String processName, TG4G3Control control)
     // insert into map
     // only in case it is not yet here
     fMap[processName] = control;
+    // when biasing then process name is wrapped
+    // TO DO: add only if biasing is activated
+    fMap[G4String("biasWrapper(") + processName + G4String(")")] = control;
     return true;
   }
   return false;

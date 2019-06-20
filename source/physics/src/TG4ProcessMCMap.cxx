@@ -81,6 +81,9 @@ G4bool TG4ProcessMCMap::Add(G4String processName, TMCProcess mcProcess)
     // insert into map
     // only in case it is not yet here
     fMap[processName] = mcProcess;
+    // when biasing then process name is wrapped
+    // TO DO: add only if biasing is activated
+    fMap[G4String("biasWrapper(") + processName + G4String(")")] = mcProcess;
     return true;
   }
   return false;

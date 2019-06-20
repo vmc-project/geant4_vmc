@@ -54,15 +54,16 @@ class TG4ModelConfigurationManager : public TG4Verbose
     const G4String& modelName, G4bool warn = true) const;
   const ModelConfigurationVector& GetVector() const;
 
+ protected:
+  // methods
+  void SetRegionsNames();
+
  private:
   /// Not implemented
   TG4ModelConfigurationManager(const TG4ModelConfigurationManager& right);
   /// Not implemented
   TG4ModelConfigurationManager& operator=(
     const TG4ModelConfigurationManager& right);
-
-  // methods
-  void SetRegionsNames();
 
   // data members
 
