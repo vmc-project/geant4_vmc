@@ -381,21 +381,22 @@ void Ex03DetectorConstruction::SetCuts()
   createdMaterials.insert(fAbsorberMaterial);
   createdMaterials.insert(fGapMaterial);
 
-  // cuts for e-, gamma equivalent to 1mm cut in G4.
+  // Cuts for e-, gamma equivalent to 1mm cut in G4,
+  // or 10keV (minimal value accepted by Geant3) if lower
   std::vector<MaterialCuts> materialCutsVector = {
     MaterialCuts("Aluminium", 10.e-06, 10.e-06, 597.e-06, 597.e-06),
-    MaterialCuts("liquidArgon", 6.178e-06, 6.178e-06, 342.9e-06, 342.9e-06),
+    MaterialCuts("liquidArgon", 10.e-06, 10.e-06, 342.9e-06, 342.9e-06),
     MaterialCuts("Lead", 100.5e-06, 100.5e-06, 1.378e-03, 1.378e-03),
-    MaterialCuts("Water", 2.902e-06, 2.902e-06, 347.2e-06, 347.2e-06),
-    MaterialCuts("Scintillator", 2.369e-06, 2.369e-06, 355.8e-06, 355.8e-06),
-    MaterialCuts("Mylar", 2.978e-06, 2.978e-06, 417.5e-06, 417.5e-06),
-    MaterialCuts("quartz", 5.516e-06, 5.516e-06, 534.1e-06, 534.1e-06),
-    MaterialCuts("Air", 990.e-09, 990.e-09, 990.e-09, 990.e-09),
-    MaterialCuts("Aerogel", 1.706e-06, 1.706e-06, 119.0e-06, 119.0e-06),
-    MaterialCuts("CarbonicGas", 990.e-09, 990.e-09, 990.e-09, 990.e-09),
-    MaterialCuts("WaterSteam", 990.e-09, 990.e-09, 990.e-09, 990.e-09),
-    MaterialCuts("Galactic", 990.e-09, 990.e-09, 990.e-09, 990.e-09),
-    MaterialCuts("Beam", 990.e-09, 990.e-09, 990.e-09, 990.e-09)
+    MaterialCuts("Water", 10.e-06, 10.e-06, 347.2e-06, 347.2e-06),
+    MaterialCuts("Scintillator", 10.e-06, 10.e-06, 355.8e-06, 355.8e-06),
+    MaterialCuts("Mylar", 10.e-06, 10.e-06, 417.5e-06, 417.5e-06),
+    MaterialCuts("quartz", 10.e-06, 10.e-06, 534.1e-06, 534.1e-06),
+    MaterialCuts("Air", 10.e-06, 10.e-06, 10.e-06, 10.e-06),
+    MaterialCuts("Aerogel", 10.e-06, 10.e-06, 119.0e-06, 119.0e-06),
+    MaterialCuts("CarbonicGas", 10.e-09, 10.e-06, 10.e-06, 10.e-06),
+    MaterialCuts("WaterSteam", 10.e-06, 10.e-06, 10.e-06, 10.e-06),
+    MaterialCuts("Galactic", 10.e-06, 10.e-06, 10.e-06, 10.e-06),
+    MaterialCuts("Beam", 10.e-06, 10.e-06, 10.e-06, 10.e-06)
   };
 
   // set VMC cutes for created media
