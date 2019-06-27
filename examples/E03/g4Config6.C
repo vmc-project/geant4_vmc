@@ -37,7 +37,17 @@ void Config()
   // Verbosity
   geant4->ProcessGeantCommand("/tracking/verbose 1");
 
-  // Define media with the INCXX physics
+  // Define  PAI
+  geant4->ProcessGeantCommand("/mcPhysics/emModel/setEmModel  PAI");
+  geant4->ProcessGeantCommand("/mcPhysics/emModel/setRegions  liquidArgon");
+  geant4->ProcessGeantCommand("/mcPhysics/emModel/setParticles  all");
+
+  // Precise Msc
+  geant4->ProcessGeantCommand("/mcPhysics/emModel/setEmModel  SpecialUrbanMsc");
+  geant4->ProcessGeantCommand("/mcPhysics/emModel/setRegions  liquidArgon");
+  geant4->ProcessGeantCommand("/mcPhysics/emModel/setParticles  e- e+");
+
+  //Define media with the INCXX physics
   geant4->ProcessGeantCommand("/mcVerbose/biasingConfigurationManager 3");
   geant4->ProcessGeantCommand("/mcPhysics/biasing/setModel inclxx");
   geant4->ProcessGeantCommand("/mcPhysics/biasing/setRegions Lead");

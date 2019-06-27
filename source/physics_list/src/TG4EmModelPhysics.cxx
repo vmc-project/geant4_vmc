@@ -24,6 +24,7 @@
 #include <TVirtualMCDecayer.h>
 
 #include <G4AnalysisUtilities.hh>
+#include <G4BiasingProcessInterface.hh>
 #include <G4EmConfigurator.hh>
 #include <G4LogicalVolumeStore.hh>
 #include <G4LossTableManager.hh>
@@ -143,6 +144,11 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
     G4String processName;
     G4String currentProcessName = (*processVector)[i]->GetProcessName();
 
+    if (VerboseLevel() > 2) {
+      G4cout << "TG4EmModelPhysics::AddModel, processing " << currentProcessName
+             << G4endl;
+    }
+
     // PAI applied to ionisation
     if (currentProcessName.contains("Ioni") &&
         (emModel == kPAIModel || emModel == kPAIPhotonModel)) {
@@ -156,6 +162,16 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
     }
 
     if (!processName.size()) continue;
+
+    // Get the physics process if it is wrapped with biasing
+    G4BiasingProcessInterface* biasingProcess =
+      dynamic_cast<G4BiasingProcessInterface*>((*processVector)[i]);
+    if (biasingProcess) {
+      processName = biasingProcess->GetWrappedProcess()->GetProcessName();
+      if (VerboseLevel() > 2) {
+        G4cout << "Unwrapping biasing process: " << processName << G4endl;
+      }
+    }
 
     // CreateEM model
     //
