@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4StateManager.h
-/// \brief Definition of the TG4StateManager class 
+/// \brief Definition of the TG4StateManager class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -29,50 +29,51 @@ class TG4StateManager;
 
 class TG4StateManager : public TG4Verbose
 {
-  public:
-    TG4StateManager();
-    virtual ~TG4StateManager();
+ public:
+  TG4StateManager();
+  virtual ~TG4StateManager();
 
-    // static access method
-    static TG4StateManager* Instance();
-    static G4String GetStateName(TG4ApplicationState state);
+  // static access method
+  static TG4StateManager* Instance();
+  static G4String GetStateName(TG4ApplicationState state);
 
-    // methods
-    void SetNewState(TG4ApplicationState state);
-    TG4ApplicationState GetCurrentState() const;
-    TG4ApplicationState GetPreviousState() const;
-     
-  private:
-    /// Not implemented
-    TG4StateManager(const TG4StateManager& right);
-    /// Not implemented
-    TG4StateManager& operator=(const TG4StateManager& right);
+  // methods
+  void SetNewState(TG4ApplicationState state);
+  TG4ApplicationState GetCurrentState() const;
+  TG4ApplicationState GetPreviousState() const;
 
-    // static data members
-    static G4ThreadLocal TG4StateManager* fgInstance; ///< this instance
+ private:
+  /// Not implemented
+  TG4StateManager(const TG4StateManager& right);
+  /// Not implemented
+  TG4StateManager& operator=(const TG4StateManager& right);
 
-    // data members
-    TG4ApplicationState  fCurrentState; ///< the current application state 
-    TG4ApplicationState  fPreviousState;///< the previous application state
+  // static data members
+  static G4ThreadLocal TG4StateManager* fgInstance; ///< this instance
+
+  // data members
+  TG4ApplicationState fCurrentState;  ///< the current application state
+  TG4ApplicationState fPreviousState; ///< the previous application state
 };
 
 // inline methods
 
-
-inline TG4StateManager* TG4StateManager::Instance() { 
+inline TG4StateManager* TG4StateManager::Instance()
+{
   /// Return this instance
-  return fgInstance; 
+  return fgInstance;
 }
 
-inline  TG4ApplicationState TG4StateManager::GetCurrentState() const {
+inline TG4ApplicationState TG4StateManager::GetCurrentState() const
+{
   /// Return application state
   return fCurrentState;
-}  
+}
 
-inline  TG4ApplicationState TG4StateManager::GetPreviousState() const {
+inline TG4ApplicationState TG4StateManager::GetPreviousState() const
+{
   /// Return application state
   return fPreviousState;
-}  
+}
 
-#endif //TG4_STATE_MANAGER_H
-
+#endif // TG4_STATE_MANAGER_H

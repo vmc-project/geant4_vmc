@@ -8,17 +8,17 @@
 //-------------------------------------------------
 
 /// \file TG4RunActionMessenger.cxx
-/// \brief Implementation of the TG4RunActionMessenger class 
+/// \brief Implementation of the TG4RunActionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4RunActionMessenger.h"
-#include "TG4RunAction.h"
 #include "TG4Globals.h"
+#include "TG4RunAction.h"
 
-#include <G4UIdirectory.hh>
-#include <G4UIcmdWithAString.hh>
 #include <G4UIcmdWithABool.hh>
+#include <G4UIcmdWithAString.hh>
+#include <G4UIdirectory.hh>
 
 //_____________________________________________________________________________
 TG4RunActionMessenger::TG4RunActionMessenger(TG4RunAction* runAction)
@@ -28,33 +28,38 @@ TG4RunActionMessenger::TG4RunActionMessenger(TG4RunAction* runAction)
     fSaveRandomStatusCmd(0),
     fReadRandomStatusCmd(0),
     fRandomStatusFileCmd(0)
-{ 
-/// Standard constructor
+{
+  /// Standard constructor
 
   fRunDirectory = new G4UIdirectory("/mcRun/");
   fRunDirectory->SetGuidance("TG4RunAction control commands.");
 
   fSaveRandomStatusCmd = new G4UIcmdWithABool("/mcRun/saveRandom", this);
-  fSaveRandomStatusCmd->SetGuidance("Save random engine status in start of event");
+  fSaveRandomStatusCmd->SetGuidance(
+    "Save random engine status in start of event");
   fSaveRandomStatusCmd->SetParameterName("SaveRandom", false);
-  fSaveRandomStatusCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  fSaveRandomStatusCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
   fReadRandomStatusCmd = new G4UIcmdWithABool("/mcRun/readRandom", this);
-  fReadRandomStatusCmd->SetGuidance("Read random engine status from a file in start of event");
+  fReadRandomStatusCmd->SetGuidance(
+    "Read random engine status from a file in start of event");
   fReadRandomStatusCmd->SetParameterName("ReadRandom", false);
-  fReadRandomStatusCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
+  fReadRandomStatusCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
   fRandomStatusFileCmd = new G4UIcmdWithAString("/mcRun/setRandomFile", this);
-  fRandomStatusFileCmd->SetGuidance("Set the name of the random engine status file to be read in");
+  fRandomStatusFileCmd->SetGuidance(
+    "Set the name of the random engine status file to be read in");
   fRandomStatusFileCmd->SetParameterName("RandomFile", false);
-  fRandomStatusFileCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);
-
+  fRandomStatusFileCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 }
 
 //_____________________________________________________________________________
-TG4RunActionMessenger::~TG4RunActionMessenger() 
+TG4RunActionMessenger::~TG4RunActionMessenger()
 {
-/// Destructor
+  /// Destructor
 
   delete fRunDirectory;
   delete fSaveRandomStatusCmd;
@@ -67,21 +72,19 @@ TG4RunActionMessenger::~TG4RunActionMessenger()
 //
 
 //_____________________________________________________________________________
-void TG4RunActionMessenger::SetNewValue(G4UIcommand* command, 
-       G4String newValue)
-{ 
-/// Apply command to the associated object.
+void TG4RunActionMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
+{
+  /// Apply command to the associated object.
 
-  if(command == fSaveRandomStatusCmd)
-  { 
-    fRunAction->SetSaveRandomStatus(fSaveRandomStatusCmd->GetNewBoolValue(newValue)); 
-  }   
-  else if(command == fReadRandomStatusCmd)
-  { 
-    fRunAction->SetReadRandomStatus(fReadRandomStatusCmd->GetNewBoolValue(newValue)); 
-  }   
-  else if(command == fRandomStatusFileCmd)
-  { 
-    fRunAction->SetRandomStatusFile(newValue); 
-  }   
+  if (command == fSaveRandomStatusCmd) {
+    fRunAction->SetSaveRandomStatus(
+      fSaveRandomStatusCmd->GetNewBoolValue(newValue));
+  }
+  else if (command == fReadRandomStatusCmd) {
+    fRunAction->SetReadRandomStatus(
+      fReadRandomStatusCmd->GetNewBoolValue(newValue));
+  }
+  else if (command == fRandomStatusFileCmd) {
+    fRunAction->SetRandomStatusFile(newValue);
+  }
 }

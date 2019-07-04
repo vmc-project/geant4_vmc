@@ -27,37 +27,40 @@ class TMCRootManagerImpl;
 
 class TMCRootManagerMT : public TVirtualMCRootManager
 {
-  public:
-    TMCRootManagerMT(const char* projectName, FileMode fileMode = kWrite);
-    virtual ~TMCRootManagerMT();     
-  
-    // methods
-    virtual void  Register(const char* name, const char* className, void* objAddress);
-    virtual void  Register(const char* name, const char* className, const void* objAddress);
-    virtual void  Fill();
-    virtual void  WriteAll();
-    virtual void  Close();
-    virtual void  WriteAndClose();
-    virtual void  ReadEvent(Int_t i);
-    
-  private:
-    // not implemented
-    TMCRootManagerMT(const TMCRootManagerMT& rhs);
-    TMCRootManagerMT& operator=(const TMCRootManagerMT& rhs);
-    
-    // methods
-    void  FillWithLock();
-    void  FillWithTmpLock();
-    void  FillWithoutLock();
+ public:
+  TMCRootManagerMT(const char* projectName, FileMode fileMode = kWrite);
+  virtual ~TMCRootManagerMT();
 
-    // global static data members
-    static  Int_t    fgCounter;         // The counter of instances
-    static  Bool_t   fgIsFillLock;      // The if the Fill should be locked 
-    static  std::vector<Bool_t>* fgIsFillLocks; // The info per thread if the Fill should be locked
+  // methods
+  virtual void Register(
+    const char* name, const char* className, void* objAddress);
+  virtual void Register(
+    const char* name, const char* className, const void* objAddress);
+  virtual void Fill();
+  virtual void WriteAll();
+  virtual void Close();
+  virtual void WriteAndClose();
+  virtual void ReadEvent(Int_t i);
 
-    // data members 
-    Int_t                fId;           // This manager ID 
-    TMCRootManagerImpl*  fRootManager;  // The Root manager
+ private:
+  // not implemented
+  TMCRootManagerMT(const TMCRootManagerMT& rhs);
+  TMCRootManagerMT& operator=(const TMCRootManagerMT& rhs);
+
+  // methods
+  void FillWithLock();
+  void FillWithTmpLock();
+  void FillWithoutLock();
+
+  // global static data members
+  static Int_t fgCounter;     // The counter of instances
+  static Bool_t fgIsFillLock; // The if the Fill should be locked
+  static std::vector<Bool_t>*
+    fgIsFillLocks; // The info per thread if the Fill should be locked
+
+  // data members
+  Int_t fId;                        // This manager ID
+  TMCRootManagerImpl* fRootManager; // The Root manager
 };
 
-#endif //ROOT_TMCRootManagerMT
+#endif // ROOT_TMCRootManagerMT

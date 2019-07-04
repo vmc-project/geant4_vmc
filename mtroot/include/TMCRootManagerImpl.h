@@ -29,31 +29,31 @@ class TTree;
 
 class TMCRootManagerImpl
 {
-  public:
-    TMCRootManagerImpl(const char* projectName, 
-                       TVirtualMCRootManager::FileMode fileMode 
-                         = TVirtualMCRootManager::kWrite, 
-                       Int_t threadRank = -1);
-    virtual ~TMCRootManagerImpl();     
-  
-    // methods
-    void  Register(const char* name, const char* className, void* objAddress);
-    void  Register(const char* name, const char* className, const void* objAddress);
-    void  Fill();
-    void  WriteAll();
-    void  Close();
-    void  WriteAndClose();
-    void  ReadEvent(Int_t i);
-    
-  private:
-    // not implemented
-    TMCRootManagerImpl(const TMCRootManagerImpl& rhs);
-    TMCRootManagerImpl& operator=(const TMCRootManagerImpl& rhs);
-    
-    // data members
-    TFile*  fFile;       // Root output file
-    TTree*  fTree;       // Root output tree 
-    Bool_t  fIsClosed;   // Info whether its file was closed
+ public:
+  TMCRootManagerImpl(const char* projectName,
+    TVirtualMCRootManager::FileMode fileMode = TVirtualMCRootManager::kWrite,
+    Int_t threadRank = -1);
+  virtual ~TMCRootManagerImpl();
+
+  // methods
+  void Register(const char* name, const char* className, void* objAddress);
+  void Register(
+    const char* name, const char* className, const void* objAddress);
+  void Fill();
+  void WriteAll();
+  void Close();
+  void WriteAndClose();
+  void ReadEvent(Int_t i);
+
+ private:
+  // not implemented
+  TMCRootManagerImpl(const TMCRootManagerImpl& rhs);
+  TMCRootManagerImpl& operator=(const TMCRootManagerImpl& rhs);
+
+  // data members
+  TFile* fFile;     // Root output file
+  TTree* fTree;     // Root output tree
+  Bool_t fIsClosed; // Info whether its file was closed
 };
 
-#endif //ROOT_TMCRootManagerImpl
+#endif // ROOT_TMCRootManagerImpl

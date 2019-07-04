@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file TR/include/PrimaryGenerator.h 
-/// \brief Definition of the PrimaryGenerator class 
+/// \file TR/include/PrimaryGenerator.h
+/// \brief Definition of the PrimaryGenerator class
 ///
 /// Geant4 TestEm10 adapted to Virtual Monte Carlo.
 ///
@@ -34,37 +34,38 @@ namespace TR
 
 class PrimaryGenerator : public TObject
 {
-  public:
-    PrimaryGenerator(TVirtualMCStack* stack); 
-    PrimaryGenerator(const PrimaryGenerator& origin,
-                     TVirtualMCStack* stack);
-    PrimaryGenerator();
-    virtual ~PrimaryGenerator();
+ public:
+  PrimaryGenerator(TVirtualMCStack* stack);
+  PrimaryGenerator(const PrimaryGenerator& origin, TVirtualMCStack* stack);
+  PrimaryGenerator();
+  virtual ~PrimaryGenerator();
 
-    // methods
-    virtual void GeneratePrimaries();
+  // methods
+  virtual void GeneratePrimaries();
 
-    void  SetNofPrimaries(Int_t nofPrimaries);
- 
-  private:
-    // methods
-    void GenerateOnePrimary();
+  void SetNofPrimaries(Int_t nofPrimaries);
 
-    // data members
-    TVirtualMCStack*  fStack;         ///< VMC stack
-    Int_t             fNofPrimaries;  ///< Number of primary particles
+ private:
+  // methods
+  void GenerateOnePrimary();
 
-  ClassDef(PrimaryGenerator,1)  //PrimaryGenerator
+  // data members
+  TVirtualMCStack* fStack; ///< VMC stack
+  Int_t fNofPrimaries;     ///< Number of primary particles
+
+  ClassDef(PrimaryGenerator, 1) // PrimaryGenerator
 };
 
 // inline functions
 
 /// Set the number of particles to be generated
 /// \param nofPrimaries The number of particles to be generated
-inline void  PrimaryGenerator::SetNofPrimaries(Int_t nofPrimaries)
-{ fNofPrimaries = nofPrimaries; }
-
+inline void PrimaryGenerator::SetNofPrimaries(Int_t nofPrimaries)
+{
+  fNofPrimaries = nofPrimaries;
 }
-}
 
-#endif //PRIMARY_GENERATOR_H
+} // namespace TR
+} // namespace VMC
+
+#endif // PRIMARY_GENERATOR_H

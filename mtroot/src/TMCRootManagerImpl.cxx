@@ -13,12 +13,12 @@
 /// \author I. Hrivnacova; IPN Orsay
 
 #include "TMCRootManagerImpl.h"
-#include "TVirtualMCRootManager.h"
-#include "TTree.h"
-#include "TFile.h"
-#include "TError.h"
-#include "TThread.h"
 #include "Riostream.h"
+#include "TError.h"
+#include "TFile.h"
+#include "TThread.h"
+#include "TTree.h"
+#include "TVirtualMCRootManager.h"
 
 #include <cstdio>
 
@@ -27,26 +27,23 @@
 //
 
 //_____________________________________________________________________________
-TMCRootManagerImpl::TMCRootManagerImpl(const char* projectName, 
-                                       TVirtualMCRootManager::FileMode fileMode,
-                                       Int_t threadRank)
-  : fFile(0),
-    fTree(0),
-    fIsClosed(false)
+TMCRootManagerImpl::TMCRootManagerImpl(const char* projectName,
+  TVirtualMCRootManager::FileMode fileMode, Int_t threadRank)
+  : fFile(0), fTree(0), fIsClosed(false)
 {
-/// Standard constructor
-/// \param projectName  The project name (passed as the Root tree name)
-/// \param fileMode     Option for opening Root file (read or write mode)
-/// \param threadRank   The thread Id (-1 when sequential mode)
+  /// Standard constructor
+  /// \param projectName  The project name (passed as the Root tree name)
+  /// \param fileMode     Option for opening Root file (read or write mode)
+  /// \param threadRank   The thread Id (-1 when sequential mode)
 
-  if ( TVirtualMCRootManager::GetDebug() ) 
+  if (TVirtualMCRootManager::GetDebug())
     printf("TMCRootManagerImpl::TMCRootManagerImpl %p \n", this);
 
-  TString fileName(projectName); 
-  if ( threadRank >= 0 ) {
-    fileName += "_";  
+  TString fileName(projectName);
+  if (threadRank >= 0) {
+    fileName += "_";
     fileName += threadRank;
-  }  
+  }
   fileName += ".root";
 
   TString treeTitle(projectName);
@@ -55,40 +52,38 @@ TMCRootManagerImpl::TMCRootManagerImpl(const char* projectName,
   switch (fileMode) {
     case TVirtualMCRootManager::kRead:
       fFile = new TFile(fileName);
-      fTree = (TTree*) fFile->Get(projectName);
+      fTree = (TTree*)fFile->Get(projectName);
       break;
-      
-    case TVirtualMCRootManager::kWrite:  
-      if ( TVirtualMCRootManager::GetDebug() ) 
+
+    case TVirtualMCRootManager::kWrite:
+      if (TVirtualMCRootManager::GetDebug())
         printf("Going to create Root file \n");
       fFile = new TFile(fileName, "recreate");
-      if ( TVirtualMCRootManager::GetDebug() ) 
-        printf("Done: file %p \n", fFile);
+      if (TVirtualMCRootManager::GetDebug()) printf("Done: file %p \n", fFile);
 
-      if ( TVirtualMCRootManager::GetDebug() ) 
-        printf("Going to create TTree \n");
+      if (TVirtualMCRootManager::GetDebug()) printf("Going to create TTree \n");
       fTree = new TTree(projectName, treeTitle);
-      if ( TVirtualMCRootManager::GetDebug() ) 
-        printf("Done: TTree %p \n", fTree);
-      ;;  
+      if (TVirtualMCRootManager::GetDebug()) printf("Done: TTree %p \n", fTree);
+      ;
+      ;
   }
 
-  if ( TVirtualMCRootManager::GetDebug() ) 
+  if (TVirtualMCRootManager::GetDebug())
     printf("Done TMCRootManagerImpl::TMCRootManagerImpl %p \n", this);
 }
 
 //_____________________________________________________________________________
-TMCRootManagerImpl::~TMCRootManagerImpl() 
+TMCRootManagerImpl::~TMCRootManagerImpl()
 {
-/// Destructor
+  /// Destructor
 
-  if ( TVirtualMCRootManager::GetDebug() ) 
+  if (TVirtualMCRootManager::GetDebug())
     printf("TMCRootManagerImpl::~TMCRootManagerImpl %p \n", this);
 
-  if ( fFile && ! fIsClosed ) fFile->Close();
+  if (fFile && !fIsClosed) fFile->Close();
   delete fFile;
 
-  if ( TVirtualMCRootManager::GetDebug() ) 
+  if (TVirtualMCRootManager::GetDebug())
     printf("Done TMCRootManagerImpl::~TMCRootManagerImpl %p \n", this);
 }
 
@@ -97,80 +92,80 @@ TMCRootManagerImpl::~TMCRootManagerImpl()
 //
 
 //_____________________________________________________________________________
-void  TMCRootManagerImpl::Register(const char* name, const char* className, 
-                                void* objAddress)
+void TMCRootManagerImpl::Register(
+  const char* name, const char* className, void* objAddress)
 {
-/// Create a branch and associates it with the given address.
-/// \param name       The branch name
-/// \param className  The class name of the object
-/// \param objAddress The object address
+  /// Create a branch and associates it with the given address.
+  /// \param name       The branch name
+  /// \param className  The class name of the object
+  /// \param objAddress The object address
 
   fFile->cd();
-  if ( ! fTree->GetBranch(name) ) 
+  if (!fTree->GetBranch(name))
     fTree->Branch(name, className, objAddress, 32000, 99);
-  else  
+  else
     fTree->GetBranch(name)->SetAddress(objAddress);
 }
 
 //_____________________________________________________________________________
-void  TMCRootManagerImpl::Register(const char* name, const char* className, 
-                                const void* objAddress)
+void TMCRootManagerImpl::Register(
+  const char* name, const char* className, const void* objAddress)
 {
-/// Create a branch and associates it with the given address.
-/// \param name       The branch name
-/// \param className  The class name of the object
-/// \param objAddress The object address
+  /// Create a branch and associates it with the given address.
+  /// \param name       The branch name
+  /// \param className  The class name of the object
+  /// \param objAddress The object address
 
   Register(name, className, const_cast<void*>(objAddress));
 }
 
 //_____________________________________________________________________________
-void  TMCRootManagerImpl::Fill()
+void TMCRootManagerImpl::Fill()
 {
-/// Fill the Root tree.
+  /// Fill the Root tree.
 
   fFile->cd();
   fTree->Fill();
-}  
+}
 
 //_____________________________________________________________________________
-void TMCRootManagerImpl:: WriteAll()
+void TMCRootManagerImpl::WriteAll()
 {
-/// Write the Root tree in the file.
+  /// Write the Root tree in the file.
 
   fFile->cd();
   fFile->Write();
-}  
+}
 
 //_____________________________________________________________________________
 void TMCRootManagerImpl::Close()
 {
-/// Close the Root file.
+  /// Close the Root file.
 
-  if ( fIsClosed ) {
+  if (fIsClosed) {
     Error("Close", "The file was alerady closed.");
     return;
-  }  
-    
+  }
+
   fFile->cd();
   fFile->Close();
   fIsClosed = true;
-}  
+}
 
 //_____________________________________________________________________________
-void TMCRootManagerImpl:: WriteAndClose()
+void TMCRootManagerImpl::WriteAndClose()
 {
-/// Write the Root tree in the file and close the file
-  
+  /// Write the Root tree in the file and close the file
+
   WriteAll();
   Close();
-}  
+}
 
 //_____________________________________________________________________________
-void  TMCRootManagerImpl::ReadEvent(Int_t i)
+void TMCRootManagerImpl::ReadEvent(Int_t i)
 {
-/// Read the event data for \em i -th event for all connected branches.
-/// \param i  The event to be read
+  /// Read the event data for \em i -th event for all connected branches.
+  /// \param i  The event to be read
 
   fTree->GetEntry(i);
 }

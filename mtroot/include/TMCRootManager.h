@@ -25,27 +25,29 @@ class TMCRootManagerImpl;
 
 class TMCRootManager : public TVirtualMCRootManager
 {
-  public:
-    TMCRootManager(const char* projectName, 
-                   FileMode fileMode = TVirtualMCRootManager::kWrite);
-    virtual ~TMCRootManager();     
+ public:
+  TMCRootManager(
+    const char* projectName, FileMode fileMode = TVirtualMCRootManager::kWrite);
+  virtual ~TMCRootManager();
 
-    // methods
-    virtual void  Register(const char* name, const char* className, void* objAddress);
-    virtual void  Register(const char* name, const char* className, const void* objAddress);
-    virtual void  Fill();
-    virtual void  Close();
-    virtual void  WriteAll();
-    virtual void  WriteAndClose();
-    virtual void  ReadEvent(Int_t i);
-    
-  private:
-    // not implemented
-    TMCRootManager(const TMCRootManager& rhs);
-    TMCRootManager& operator=(const TMCRootManager& rhs);
+  // methods
+  virtual void Register(
+    const char* name, const char* className, void* objAddress);
+  virtual void Register(
+    const char* name, const char* className, const void* objAddress);
+  virtual void Fill();
+  virtual void Close();
+  virtual void WriteAll();
+  virtual void WriteAndClose();
+  virtual void ReadEvent(Int_t i);
 
-    // data members 
-    TMCRootManagerImpl*  fRootManager;  // The Root manager
+ private:
+  // not implemented
+  TMCRootManager(const TMCRootManager& rhs);
+  TMCRootManager& operator=(const TMCRootManager& rhs);
+
+  // data members
+  TMCRootManagerImpl* fRootManager; // The Root manager
 };
 
-#endif //ROOT_TMCRootManager
+#endif // ROOT_TMCRootManager

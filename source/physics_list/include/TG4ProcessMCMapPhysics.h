@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4ProcessMCMapPhysics.h
-/// \brief Definition of the TG4ProcessMCMapPhysics class 
+/// \brief Definition of the TG4ProcessMCMapPhysics class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -25,28 +25,27 @@ class G4Decay;
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4ProcessMCMapPhysics: public TG4VPhysicsConstructor
+class TG4ProcessMCMapPhysics : public TG4VPhysicsConstructor
 {
-  public:
-    TG4ProcessMCMapPhysics(const G4String& name = "ProcessMCMap");
-    TG4ProcessMCMapPhysics(G4int theVerboseLevel,
-                           const G4String& name = "ProcessMCMap");
-    virtual ~TG4ProcessMCMapPhysics();
+ public:
+  TG4ProcessMCMapPhysics(const G4String& name = "ProcessMCMap");
+  TG4ProcessMCMapPhysics(
+    G4int theVerboseLevel, const G4String& name = "ProcessMCMap");
+  virtual ~TG4ProcessMCMapPhysics();
 
-  protected:
-    // methods
-          // construct particle and physics
-    virtual void ConstructParticle();
-    virtual void ConstructProcess();
+ protected:
+  // methods
+  // construct particle and physics
+  virtual void ConstructParticle();
+  virtual void ConstructProcess();
 
-  private:
-    /// Not implemented
-    TG4ProcessMCMapPhysics(const TG4ProcessMCMapPhysics& right);
-    /// Not implemented
-    TG4ProcessMCMapPhysics& operator=(const TG4ProcessMCMapPhysics& right);
+ private:
+  /// Not implemented
+  TG4ProcessMCMapPhysics(const TG4ProcessMCMapPhysics& right);
+  /// Not implemented
+  TG4ProcessMCMapPhysics& operator=(const TG4ProcessMCMapPhysics& right);
 
-    void FillMap();
+  void FillMap();
 };
 
-#endif //TG4_PROCESS_MAP_PHYSICS_H
-
+#endif // TG4_PROCESS_MAP_PHYSICS_H

@@ -10,7 +10,7 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file TG4ApplicationState.h 
+/// \file TG4ApplicationState.h
 /// \brief Definition of the enumeration TG4ApplicationState
 ///
 /// \author I. Hrivnacova; IPN, Orsay
@@ -31,4 +31,4 @@ enum TG4ApplicationState
   kNotInApplication     ///< not in VMC application
 };
 
-#endif //TG4_APPLICATION_STATE_H
+#endif // TG4_APPLICATION_STATE_H

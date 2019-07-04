@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4VSpecialCuts.h
-/// \brief Definition of the TG4VSpecialCuts class 
+/// \brief Definition of the TG4VSpecialCuts class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -25,8 +25,8 @@ class G4Track;
 class G4LossTableManager;
 
 /// \ingroup physics
-/// \brief Abstract base class for a special process that activates 
-/// kinetic energy cuts.                                                     
+/// \brief Abstract base class for a special process that activates
+/// kinetic energy cuts.
 ///
 /// The pure virtual functions GetMinEkine have to be implemented
 /// by derived classes specific for each particle type
@@ -34,62 +34,62 @@ class G4LossTableManager;
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4VSpecialCuts: public G4VProcess
+class TG4VSpecialCuts : public G4VProcess
 {
-  public:
-    TG4VSpecialCuts(const G4String& processName);
-    virtual ~TG4VSpecialCuts();
+ public:
+  TG4VSpecialCuts(const G4String& processName);
+  virtual ~TG4VSpecialCuts();
 
-    // methods
-                     /// Return the kinetic energy limit
-    virtual G4double GetMinEkine(const TG4Limits& limits,
-                                 const G4Track& track) const = 0;
-    
-    virtual G4double PostStepGetPhysicalInteractionLength(
-                         const G4Track& track, G4double previousStepSize,
-                         G4ForceCondition* condition);
+  // methods
+  /// Return the kinetic energy limit
+  virtual G4double GetMinEkine(
+    const TG4Limits& limits, const G4Track& track) const = 0;
 
-    virtual G4VParticleChange* PostStepDoIt(const G4Track& track, 
-                         const G4Step& step);
-                            
-                     /// Not implemented
-    virtual G4double AlongStepGetPhysicalInteractionLength(
-                         const G4Track&, G4double, G4double, G4double&,
-                         G4GPILSelection*)
-                         { return -1.0; }
+  virtual G4double PostStepGetPhysicalInteractionLength(const G4Track& track,
+    G4double previousStepSize, G4ForceCondition* condition);
 
-                     /// Not implemented
-    virtual G4VParticleChange* AlongStepDoIt(const G4Track&, const G4Step&)
-                         { return 0; }
+  virtual G4VParticleChange* PostStepDoIt(
+    const G4Track& track, const G4Step& step);
 
-                     /// Not implemented
-    virtual G4double AtRestGetPhysicalInteractionLength(const G4Track&,
-                         G4ForceCondition* )
-                         { return -1.0; }
-                            
-                     /// Not implemented
-    virtual G4VParticleChange* AtRestDoIt(
-                         const G4Track&, const G4Step&)
-                         { return 0; }
+  /// Not implemented
+  virtual G4double AlongStepGetPhysicalInteractionLength(
+    const G4Track&, G4double, G4double, G4double&, G4GPILSelection*)
+  {
+    return -1.0;
+  }
 
-  private:
-    /// Not implemented
-    TG4VSpecialCuts();                   
-    /// Not implemented
-    TG4VSpecialCuts(const TG4VSpecialCuts& right);
-    /// Not implemented
-    TG4VSpecialCuts& operator = (const TG4VSpecialCuts& right);
+  /// Not implemented
+  virtual G4VParticleChange* AlongStepDoIt(const G4Track&, const G4Step&)
+  {
+    return 0;
+  }
 
-    /// The G4LossTableManager instance
-    G4LossTableManager*  fLossTableManager;
+  /// Not implemented
+  virtual G4double AtRestGetPhysicalInteractionLength(
+    const G4Track&, G4ForceCondition*)
+  {
+    return -1.0;
+  }
 
-    /// Cached pointer to thread-local track manager
-    TG4TrackManager*  fTrackManager;
+  /// Not implemented
+  virtual G4VParticleChange* AtRestDoIt(const G4Track&, const G4Step&)
+  {
+    return 0;
+  }
 
+ private:
+  /// Not implemented
+  TG4VSpecialCuts();
+  /// Not implemented
+  TG4VSpecialCuts(const TG4VSpecialCuts& right);
+  /// Not implemented
+  TG4VSpecialCuts& operator=(const TG4VSpecialCuts& right);
 
+  /// The G4LossTableManager instance
+  G4LossTableManager* fLossTableManager;
+
+  /// Cached pointer to thread-local track manager
+  TG4TrackManager* fTrackManager;
 };
 
-#endif //TG4_SPECIAL_CUTS_H
-
-
-
+#endif // TG4_SPECIAL_CUTS_H

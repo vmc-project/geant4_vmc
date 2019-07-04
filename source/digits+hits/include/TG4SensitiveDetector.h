@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4SensitiveDetector.h
-/// \brief Definition of the TG4SensitiveDetector class 
+/// \brief Definition of the TG4SensitiveDetector class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -26,7 +26,7 @@ class TVirtualMCApplication;
 /// \brief Sensitive detector common to all logical volumes
 ///
 /// This class adds integer identifier data member to G4VSensitiveDetector
-/// and keeps the medium ID of the associated volume.  
+/// and keeps the medium ID of the associated volume.
 /// It also takes care of setting step status (kBoundary, kNormalStep)
 /// and passing G4Step to TG4StepManager and for calling a user application
 /// stepping function.
@@ -35,63 +35,64 @@ class TVirtualMCApplication;
 
 class TG4SensitiveDetector : public G4VSensitiveDetector
 {
-  public:
-    TG4SensitiveDetector(G4String sdName, G4int mediumID);
-    virtual ~TG4SensitiveDetector();
+ public:
+  TG4SensitiveDetector(G4String sdName, G4int mediumID);
+  virtual ~TG4SensitiveDetector();
 
-    // methods
-    virtual void UserProcessHits(const G4Track* track,const G4Step* step);
-    virtual G4bool ProcessHits(G4Step* step, G4TouchableHistory* history);
-    virtual G4bool ProcessHitsOnBoundary(G4Step* step);
- 
-    // static get method
-    static G4int GetTotalNofSensitiveDetectors();
-    
-    // get methods
-    G4int GetID() const;
-    G4int GetMediumID() const;
-    
-  protected:
-    // data members
-    /// Cached pointer to thread-local step manager
-    TG4StepManager*  fStepManager;
+  // methods
+  virtual void UserProcessHits(const G4Track* track, const G4Step* step);
+  virtual G4bool ProcessHits(G4Step* step, G4TouchableHistory* history);
+  virtual G4bool ProcessHitsOnBoundary(G4Step* step);
 
-    /// Cached pointer to thread-local VMC application
-    TVirtualMCApplication*  fMCApplication;
+  // static get method
+  static G4int GetTotalNofSensitiveDetectors();
 
-  private:
-    /// Not implemented
-    TG4SensitiveDetector(); 
-    /// Not implemented
-    TG4SensitiveDetector(const TG4SensitiveDetector& right);
-    /// Not implemented
-    TG4SensitiveDetector& operator=(const TG4SensitiveDetector &right);
+  // get methods
+  G4int GetID() const;
+  G4int GetMediumID() const;
 
-    // data members
-    static G4ThreadLocal G4int fgSDCounter; ///< sensitive detector counter
+ protected:
+  // data members
+  /// Cached pointer to thread-local step manager
+  TG4StepManager* fStepManager;
 
-    // data members
-    G4int            fID;          ///< sensitive detector ID
-    G4int            fMediumID;    ///< medium ID
+  /// Cached pointer to thread-local VMC application
+  TVirtualMCApplication* fMCApplication;
+
+ private:
+  /// Not implemented
+  TG4SensitiveDetector();
+  /// Not implemented
+  TG4SensitiveDetector(const TG4SensitiveDetector& right);
+  /// Not implemented
+  TG4SensitiveDetector& operator=(const TG4SensitiveDetector& right);
+
+  // data members
+  static G4ThreadLocal G4int fgSDCounter; ///< sensitive detector counter
+
+  // data members
+  G4int fID;       ///< sensitive detector ID
+  G4int fMediumID; ///< medium ID
 };
 
 // inline methods
 
-inline G4int TG4SensitiveDetector::GetTotalNofSensitiveDetectors() { 
+inline G4int TG4SensitiveDetector::GetTotalNofSensitiveDetectors()
+{
   /// Returns the total number of sensitive detectors.
-  return fgSDCounter; 
+  return fgSDCounter;
 }
 
-inline G4int TG4SensitiveDetector::GetID() const { 
+inline G4int TG4SensitiveDetector::GetID() const
+{
   /// Returns sensitive detector ID.
-  return fID; 
+  return fID;
 }
 
-inline G4int TG4SensitiveDetector::GetMediumID() const {
+inline G4int TG4SensitiveDetector::GetMediumID() const
+{
   /// Returns medium ID
   return fMediumID;
-}  
+}
 
-#endif //TG4V_SENSITIVE_DETECTOR_H
-
-
+#endif // TG4V_SENSITIVE_DETECTOR_H

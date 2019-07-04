@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4TrackInformation.cxx
-/// \brief Implementation of the TG4TrackInformation class 
+/// \brief Implementation of the TG4TrackInformation class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -27,37 +27,37 @@ TG4TrackInformation::TG4TrackInformation()
     fIsUserTrack(false),
     fStop(false)
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
-TG4TrackInformation::TG4TrackInformation(G4int trackParticleID) 
+TG4TrackInformation::TG4TrackInformation(G4int trackParticleID)
   : G4VUserTrackInformation(),
     fTrackParticleID(trackParticleID),
     fParentParticleID(-1),
-    fPDGLifetime(-1.0), 
+    fPDGLifetime(-1.0),
     fPDGEncoding(0),
     fIsUserTrack(false),
     fStop(false)
 {
-/// Standard constructor
-}    
+  /// Standard constructor
+}
 /*
 //_____________________________________________________________________________
-TG4TrackInformation::TG4TrackInformation(G4int  trackParticleID, 
+TG4TrackInformation::TG4TrackInformation(G4int  trackParticleID,
                                          G4int  parentParticleID)
   : G4VUserTrackInformation(),
     fTrackParticleID(trackParticleID),
     fParentParticleID(parentParticleID)
 {
 //
-}    
+}
 */
 //_____________________________________________________________________________
 TG4TrackInformation::~TG4TrackInformation()
 {
-/// Destructor
-}    
+  /// Destructor
+}
 
 //
 // public methods
@@ -66,13 +66,13 @@ TG4TrackInformation::~TG4TrackInformation()
 //_____________________________________________________________________________
 void TG4TrackInformation::Print() const
 {
-/// Print track information.
+  /// Print track information.
 
   G4cout << "TrackParticleID: " << fTrackParticleID << "   "
          << "ParentParticleID: " << fParentParticleID;
 
-  if ( fIsUserTrack ) G4cout << "  userTrack";
-  if ( fStop )        G4cout << "  toStop";
+  if (fIsUserTrack) G4cout << "  userTrack";
+  if (fStop) G4cout << "  toStop";
 
   G4cout << G4endl;
 }

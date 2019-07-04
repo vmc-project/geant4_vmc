@@ -1,5 +1,5 @@
 #ifndef TG4_SD_MESSENGER_H
-#define TG4_SD_MESSENGER_H 
+#define TG4_SD_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4SDMessenger.h
-/// \brief Definition of the TG4SDMessenger class 
+/// \brief Definition of the TG4SDMessenger class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -29,45 +29,45 @@ class G4UIcmdWithABool;
 /// Implements commands:
 /// - /mcDet/addSDSelection volName1 [volName2 ...]
 /// - /mcDet/setSDSelectionFromTGeo  [true|false]
-/// - /mcDet/setSVLabel label 
+/// - /mcDet/setSVLabel label
 /// - /mcDet/setGflash  [true|false]
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4SDMessenger: public G4UImessenger
+class TG4SDMessenger : public G4UImessenger
 {
-  public:
-    TG4SDMessenger(TG4SDConstruction* sdConstruction); 
-    virtual ~TG4SDMessenger();
-   
-    // methods 
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
-    
-  private:
-    /// Not implemented
-    TG4SDMessenger();  
-    /// Not implemented
-    TG4SDMessenger(const TG4SDMessenger& right);
-    /// Not implemented
-    TG4SDMessenger& operator=(const TG4SDMessenger& right);
+ public:
+  TG4SDMessenger(TG4SDConstruction* sdConstruction);
+  virtual ~TG4SDMessenger();
 
-    //
-    // data members
-    
-    /// associated class
-    TG4SDConstruction*  fSDConstruction;
-    
-    /// addSDSelection command
-    G4UIcmdWithAString* fAddSDSelectionCmd;
-    
-    /// getSDSelectionFromTGeo command
-    G4UIcmdWithABool*   fSetSDSelectionFromTGeoCmd;
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-    /// setSVLabel command
-    G4UIcmdWithAString* fSetSVLabelCmd;
+ private:
+  /// Not implemented
+  TG4SDMessenger();
+  /// Not implemented
+  TG4SDMessenger(const TG4SDMessenger& right);
+  /// Not implemented
+  TG4SDMessenger& operator=(const TG4SDMessenger& right);
 
-    /// setGflash command
-    G4UIcmdWithABool*   fSetGflashCmd;
-};    
+  //
+  // data members
 
-#endif //TG4_SD_MESSENGER_H
+  /// associated class
+  TG4SDConstruction* fSDConstruction;
+
+  /// addSDSelection command
+  G4UIcmdWithAString* fAddSDSelectionCmd;
+
+  /// getSDSelectionFromTGeo command
+  G4UIcmdWithABool* fSetSDSelectionFromTGeoCmd;
+
+  /// setSVLabel command
+  G4UIcmdWithAString* fSetSVLabelCmd;
+
+  /// setGflash command
+  G4UIcmdWithABool* fSetGflashCmd;
+};
+
+#endif // TG4_SD_MESSENGER_H

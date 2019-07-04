@@ -8,37 +8,37 @@
 //-------------------------------------------------
 
 /// \file TG4SpecialStackingAction.cxx
-/// \brief Implementation of the TG4SpecialStackingAction class 
+/// \brief Implementation of the TG4SpecialStackingAction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4SpecialStackingAction.h"
 #include "TG4Globals.h"
 
+#include <G4StackManager.hh>
+#include <G4StackedTrack.hh>
 #include <G4Track.hh>
 #include <G4TrackStack.hh>
-#include <G4StackedTrack.hh>
-#include <G4StackManager.hh>
 
 #include <TPDGCode.h>
 
 //_____________________________________________________________________________
 TG4SpecialStackingAction::TG4SpecialStackingAction()
   : G4UserStackingAction(),
-    TG4Verbose("stackingAction",1),
+    TG4Verbose("stackingAction", 1),
     fMessenger(this),
     fStage(0),
     fSkipNeutrino(false)
 {
-/// Default constructor
+  /// Default constructor
 
   G4cout << "### TG4SpecialStackingAction activated" << G4endl;
 }
 
 //_____________________________________________________________________________
-TG4SpecialStackingAction::~TG4SpecialStackingAction() 
+TG4SpecialStackingAction::~TG4SpecialStackingAction()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -46,55 +46,52 @@ TG4SpecialStackingAction::~TG4SpecialStackingAction()
 //
 
 //_____________________________________________________________________________
-G4ClassificationOfNewTrack 
-TG4SpecialStackingAction::ClassifyNewTrack(const G4Track* track)
+G4ClassificationOfNewTrack TG4SpecialStackingAction::ClassifyNewTrack(
+  const G4Track* track)
 {
-/// Classify the new track.
+  /// Classify the new track.
 
-  if (fStage == 0) { 
+  if (fStage == 0) {
     // move all primaries to PrimaryStack
     return fPostpone;
-  }  
-  
-  if ( fSkipNeutrino ) {
-    G4int pdgCode = track->GetDefinition()->GetPDGEncoding();
-    if  ( pdgCode ==  kNuE || pdgCode ==  kNuEBar ||
-          pdgCode ==  kNuMu || pdgCode == kNuMuBar ||
-	  pdgCode ==  kNuTau || pdgCode == kNuTauBar ) {
-
-      return fKill;
-    }           
   }
 
-  return fUrgent;          
+  if (fSkipNeutrino) {
+    G4int pdgCode = track->GetDefinition()->GetPDGEncoding();
+    if (pdgCode == kNuE || pdgCode == kNuEBar || pdgCode == kNuMu ||
+        pdgCode == kNuMuBar || pdgCode == kNuTau || pdgCode == kNuTauBar) {
+
+      return fKill;
+    }
+  }
+
+  return fUrgent;
 }
 
 //_____________________________________________________________________________
 void TG4SpecialStackingAction::NewStage()
 {
-/// Called by G4 kernel at the new stage of stacking.
+  /// Called by G4 kernel at the new stage of stacking.
 
   fStage++;
-  
+
   if (VerboseLevel() > 1) {
-    G4cout << "TG4SpecialStackingAction::NewStage " << fStage 
+    G4cout << "TG4SpecialStackingAction::NewStage " << fStage
            << " has been started." << G4endl;
   }
 
   if (stackManager->GetNUrgentTrack() == 0 &&
-      stackManager->GetNPostponedTrack() != 0 ) {
-      
-      stackManager->TransferOneStackedTrack(fPostpone, fUrgent);
+      stackManager->GetNPostponedTrack() != 0) {
+
+    stackManager->TransferOneStackedTrack(fPostpone, fUrgent);
   }
 }
-    
+
 //_____________________________________________________________________________
 void TG4SpecialStackingAction::PrepareNewEvent()
 {
-///  Since transition to G4SmartTrackStack in Geant4 9.6.x 
-///  secondaries are not ordered even when the special stacking is activated.
+  ///  Since transition to G4SmartTrackStack in Geant4 9.6.x
+  ///  secondaries are not ordered even when the special stacking is activated.
 
   fStage = 0;
 }
-
-

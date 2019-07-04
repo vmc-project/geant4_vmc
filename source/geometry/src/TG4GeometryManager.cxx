@@ -8,54 +8,54 @@
 //-------------------------------------------------
 
 /// \file TG4GeometryManager.cxx
-/// \brief Implementation of the TG4GeometryManager class 
+/// \brief Implementation of the TG4GeometryManager class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4GeometryManager.h"
-#include "TG4GeometryServices.h"
-#include "TG4SDManager.h"
-#include "TG4MCGeometry.h"
-#include "TG4OpGeometryManager.h"
-#include "TG4ModelConfigurationManager.h"
-#include "TG4StateManager.h"
-#include "TG4MediumMap.h"
-#include "TG4Medium.h"
-#include "TG4Limits.h"
 #include "TG4CachedMagneticField.h"
 #include "TG4FieldParameters.h"
-#include "TG4RadiatorDescription.h"
-#include "TG4G3Units.h"
-#include "TG4G3CutVector.h"
 #include "TG4G3ControlVector.h"
-#include "TG4VUserRegionConstruction.h"
-#include "TG4VUserPostDetConstruction.h"
+#include "TG4G3CutVector.h"
+#include "TG4G3Units.h"
+#include "TG4GeometryServices.h"
 #include "TG4Globals.h"
+#include "TG4Limits.h"
+#include "TG4MCGeometry.h"
+#include "TG4Medium.h"
+#include "TG4MediumMap.h"
+#include "TG4ModelConfigurationManager.h"
+#include "TG4OpGeometryManager.h"
+#include "TG4RadiatorDescription.h"
+#include "TG4SDManager.h"
+#include "TG4StateManager.h"
+#include "TG4VUserPostDetConstruction.h"
+#include "TG4VUserRegionConstruction.h"
 
-#include <G4LogicalVolumeStore.hh>
-#include <G4ReflectionFactory.hh>
-#include <G4Material.hh>
-#include <G4TransportationManager.hh>
 #include <G4FieldManager.hh>
+#include <G4LogicalVolumeStore.hh>
+#include <G4Material.hh>
 #include <G4PVPlacement.hh>
+#include <G4ReflectionFactory.hh>
 #include <G4SystemOfUnits.hh>
+#include <G4TransportationManager.hh>
 
-#include <TGeoManager.h>
-#include <TGeoVolume.h>
-#include <TGeoMedium.h>
 #include <TGeoMCGeometry.h>
+#include <TGeoManager.h>
+#include <TGeoMedium.h>
+#include <TGeoVolume.h>
+#include <TList.h>
 #include <TVirtualMC.h>
 #include <TVirtualMCApplication.h>
-#include <TList.h>
 
 #ifdef USE_G3TOG4
-#include <G3toG4.hh> 
-#include <G3toG4MANY.hh>
-#include <G3toG4BuildTree.hh>
 #include <G3MatTable.hh>
 #include <G3MedTable.hh>
-#include <G3VolTable.hh>
 #include <G3SensVolVector.hh>
+#include <G3VolTable.hh>
+#include <G3toG4.hh>
+#include <G3toG4BuildTree.hh>
+#include <G3toG4MANY.hh>
 #endif
 
 #ifdef USE_VGM
@@ -64,13 +64,14 @@
 #endif
 
 TG4GeometryManager* TG4GeometryManager::fgInstance = 0;
-const G4double      TG4GeometryManager::fgDefaultLimitDensity = 0.001*(g/cm3);
-const G4double      TG4GeometryManager::fgDefaultMaxStep= 10*cm;
+const G4double TG4GeometryManager::fgDefaultLimitDensity = 0.001 * (g / cm3);
+const G4double TG4GeometryManager::fgDefaultMaxStep = 10 * cm;
 
-G4ThreadLocal std::vector<TG4MagneticField*>* TG4GeometryManager::fgMagneticFields = 0;
+G4ThreadLocal std::vector<TG4MagneticField*>*
+  TG4GeometryManager::fgMagneticFields = 0;
 
 //_____________________________________________________________________________
-TG4GeometryManager::TG4GeometryManager(const TString& userGeometry) 
+TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
   : TG4Verbose("geometryManager"),
     fMessenger(this),
     fGeometryServices(new TG4GeometryServices()),
@@ -88,14 +89,13 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fIsMaxStepInLowDensityMaterials(true),
     fLimitDensity(fgDefaultLimitDensity),
     fMaxStepInLowDensityMaterials(fgDefaultMaxStep)
-     
-{
-/// Standard constructor
 
-  if ( fgInstance ) {
-    TG4Globals::Exception(
-      "TG4GeometryManager", "TG4GeometryManager:",
-      "Cannot create two instances of singleton.");
+{
+  /// Standard constructor
+
+  if (fgInstance) {
+    TG4Globals::Exception("TG4GeometryManager",
+      "TG4GeometryManager:", "Cannot create two instances of singleton.");
   }
 
   // Field parameters for global field
@@ -107,21 +107,21 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
 
   fFastModelsManager = new TG4ModelConfigurationManager("fastSimulation");
   fEmModelsManager = new TG4ModelConfigurationManager("emModel");
-  
+
   fgInstance = this;
 }
 
 //_____________________________________________________________________________
-TG4GeometryManager::~TG4GeometryManager() 
+TG4GeometryManager::~TG4GeometryManager()
 {
-/// Destructor
+  /// Destructor
 
-  for (G4int i=0; i<G4int(fFieldParameters.size()); ++i) {
+  for (G4int i = 0; i < G4int(fFieldParameters.size()); ++i) {
     delete fFieldParameters[i];
   }
 
   delete fgMagneticFields;
-     // magnetic field objects are deleted via G4 kernel
+  // magnetic field objects are deleted via G4 kernel
 
   delete fGeometryServices;
   delete fOpManager;
@@ -135,221 +135,208 @@ TG4GeometryManager::~TG4GeometryManager()
 //
 // private methods
 //
- 
+
 //_____________________________________________________________________________
 void TG4GeometryManager::CreateMCGeometry()
 {
-/// Create MC geometry
+  /// Create MC geometry
 
-  if ( fUserGeometry == "VMCtoGeant4" || 
-       fUserGeometry == "Geant4"      || 
-       fUserGeometry == "RootToGeant4" ) {
+  if (fUserGeometry == "VMCtoGeant4" || fUserGeometry == "Geant4" ||
+      fUserGeometry == "RootToGeant4") {
     fMCGeometry = new TG4MCGeometry();
-  }  
-    
-  if ( fUserGeometry == "VMCtoRoot" || 
-       fUserGeometry == "Root") {
-    if ( !gGeoManager) new TGeoManager("TGeo", "Root geometry manager");    
-    fMCGeometry = new TGeoMCGeometry();
-  }  
-}    
+  }
 
+  if (fUserGeometry == "VMCtoRoot" || fUserGeometry == "Root") {
+    if (!gGeoManager) new TGeoManager("TGeo", "Root geometry manager");
+    fMCGeometry = new TGeoMCGeometry();
+  }
+}
 
 //_____________________________________________________________________________
 void TG4GeometryManager::ConstructG4GeometryViaVMC()
 {
-/// Create G4 geometry objects according to the G3VolTable 
+  /// Create G4 geometry objects according to the G3VolTable
 
 #ifdef USE_G3TOG4
-  if ( VerboseLevel() > 1 ) 
+  if (VerboseLevel() > 1)
     G4cout << "TG4GeometryManager::ConstructG4GeometryViaVMC" << G4endl;
 
   // check if G4 tables were filled
-/*
-  if ( ! TG4G3MCGeometry::Instance()->IsGeometryDefined() ) {
-    TG4Globals::Exception(
-      "TG4GeometryManager", "ConstructG4GeometryViaVMC",
-      "Geometry was not defined via VMC.");          
-  }    
-*/  
+  /*
+    if ( ! TG4G3MCGeometry::Instance()->IsGeometryDefined() ) {
+      TG4Globals::Exception(
+        "TG4GeometryManager", "ConstructG4GeometryViaVMC",
+        "Geometry was not defined via VMC.");
+    }
+  */
   // pass info about using G3toG4 to geometry services
   fGeometryServices->SetIsG3toG4(true);
 
   // set the first entry in the G3Vol table
-  G4ggclos();        
+  G4ggclos();
   G3VolTableEntry* first = G3Vol.GetFirstVTE();
-  
+
   // transform MANY to Boolean solids
   G3toG4MANY(first);
-  
+
   // create G4 geometry
-  G3toG4BuildTree(first,0);  
-  
+  G3toG4BuildTree(first, 0);
+
   // fill medium map
   // FillMediumMapFromG3();
 
   // position the first entry with copyNo = 1
   // (in Geant3 the top volume cannot be positioned)
-  // 
+  //
   if (!fGeometryServices->GetWorld()) {
-    G4VPhysicalVolume* world
-       = new G4PVPlacement(0, G4ThreeVector(), first->GetName(), 
-                           first->GetLV(), 0, false, 1);
-    fGeometryServices->SetWorld(world);                            
+    G4VPhysicalVolume* world = new G4PVPlacement(
+      0, G4ThreeVector(), first->GetName(), first->GetLV(), 0, false, 1);
+    fGeometryServices->SetWorld(world);
   }
 
   // print G3 volume table statistics
   G3Vol.VTEStat();
 
 #else
-  TG4Globals::Exception(
-    "TG4GeometryManager", "ConstructG4GeometryViaVMC",
+  TG4Globals::Exception("TG4GeometryManager", "ConstructG4GeometryViaVMC",
     "Geant4 VMC has been installed without G3toG4." + TG4Globals::Endl() +
-    "Geometry construction via VMC is not supported.");
+      "Geometry construction via VMC is not supported.");
 #endif
 }
 
 //_____________________________________________________________________________
 void TG4GeometryManager::ConstructG4GeometryViaVGM()
 {
-/// Convert Root geometry to G4 geometry objects
-/// using roottog4 convertor.
+  /// Convert Root geometry to G4 geometry objects
+  /// using roottog4 convertor.
 
 #ifdef USE_VGM
-  if ( VerboseLevel() > 1 ) 
+  if (VerboseLevel() > 1)
     G4cout << "TG4GeometryManager::ConstructG4GeometryViaVGM" << G4endl;
 
- // Check Root manager
+  // Check Root manager
   if (!gGeoManager) {
-    TG4Globals::Exception(
-      "TG4GeometryManager", "ConstructG4GeometryViaVGM",
-      "Geometry was not defined via Root.");          
-  }    
+    TG4Globals::Exception("TG4GeometryManager", "ConstructG4GeometryViaVGM",
+      "Geometry was not defined via Root.");
+  }
 
-  // Get and eventually also set the Root top volume 
+  // Get and eventually also set the Root top volume
   TGeoVolume* topVolume = gGeoManager->GetTopVolume();
-  if ( ! topVolume ) {
+  if (!topVolume) {
     topVolume = (TGeoVolume*)gGeoManager->GetListOfVolumes()->First();
-    if ( ! topVolume ) {
-      TG4Globals::Exception(
-        "TG4GeometryManager", "ConstructG4GeometryViaVGM",
-        "Root top volume not found.");        
-    }    
+    if (!topVolume) {
+      TG4Globals::Exception("TG4GeometryManager", "ConstructG4GeometryViaVGM",
+        "Root top volume not found.");
+    }
     gGeoManager->SetTopVolume(topVolume);
-  }  
+  }
 
   // Close Root geometry
-  if (!gGeoManager->IsClosed()) gGeoManager->CloseGeometry();  
+  if (!gGeoManager->IsClosed()) gGeoManager->CloseGeometry();
 
   // Convert Root geometry to G4
-  if (VerboseLevel()>0)
+  if (VerboseLevel() > 0)
     G4cout << "Converting Root geometry to Geant4 via VGM ... " << G4endl;
-  
+
   // import Root geometry in VGM
   RootGM::Factory rootFactory;
-  if ( VerboseLevel() > 1 ) rootFactory.SetDebug(1);
+  if (VerboseLevel() > 1) rootFactory.SetDebug(1);
   rootFactory.SetIgnore(true);
   rootFactory.Import(gGeoManager->GetTopNode());
-    
+
   // export Root VGM geometry in Geant4
   Geant4GM::Factory g4Factory;
-  if ( VerboseLevel() > 1 ) g4Factory.SetDebug(1);
+  if (VerboseLevel() > 1) g4Factory.SetDebug(1);
   rootFactory.Export(&g4Factory);
-    
+
   G4VPhysicalVolume* g4World = g4Factory.World();
   fGeometryServices->SetWorld(g4World);
-    
+
 #else
-  TG4Globals::Exception(
-    "TG4GeometryManager", "ConstructG4GeometryViaVGM",
+  TG4Globals::Exception("TG4GeometryManager", "ConstructG4GeometryViaVGM",
     "Geant4 VMC has been installed without VGM." + TG4Globals::Endl() +
-    "Root geometry conversion is not supported.");
+      "Root geometry conversion is not supported.");
 #endif
-}                   
+}
 
 //_____________________________________________________________________________
 void TG4GeometryManager::ConstructG4Geometry()
 {
-/// Construct Geant4 geometry depending on user geometry source
+  /// Construct Geant4 geometry depending on user geometry source
 
-  if ( VerboseLevel() > 1 ) {
-    G4cout << "TG4GeometryManager::ConstructG4Geometry: " 
+  if (VerboseLevel() > 1) {
+    G4cout << "TG4GeometryManager::ConstructG4Geometry: "
            << "userGeometry=" << fUserGeometry << G4endl;
-  }           
- 
+  }
 
-  // VMC application construct geometry 
-  if ( fUserGeometry == "VMCtoGeant4" ) {
+  // VMC application construct geometry
+  if (fUserGeometry == "VMCtoGeant4") {
 
-    if ( VerboseLevel() > 1 ) 
+    if (VerboseLevel() > 1)
       G4cout << "Running TVirtualMCApplication::ConstructGeometry" << G4endl;
 
     TG4StateManager::Instance()->SetNewState(kConstructGeometry);
-    TVirtualMCApplication::Instance()->ConstructGeometry(); 
+    TVirtualMCApplication::Instance()->ConstructGeometry();
     TG4StateManager::Instance()->SetNewState(kMisalignGeometry);
-    TVirtualMCApplication::Instance()->MisalignGeometry(); 
+    TVirtualMCApplication::Instance()->MisalignGeometry();
     TG4StateManager::Instance()->SetNewState(kNotInApplication);
-  }    
+  }
 
-  // VMC application construct geometry 
-  if ( fUserGeometry == "RootToGeant4" ) {
+  // VMC application construct geometry
+  if (fUserGeometry == "RootToGeant4") {
 
-    if ( VerboseLevel() > 1 ) 
+    if (VerboseLevel() > 1)
       G4cout << "Running TVirtualMCApplication::ConstructGeometry" << G4endl;
 
     TG4StateManager::Instance()->SetNewState(kConstructGeometry);
-    TVirtualMCApplication::Instance()->ConstructGeometry(); 
+    TVirtualMCApplication::Instance()->ConstructGeometry();
     TG4StateManager::Instance()->SetNewState(kNotInApplication);
-    
+
     // If Root geometry was not closed by user
     // we have to do it here
-    if ( ! gGeoManager->IsClosed() ) {
-      TGeoVolume *top = (TGeoVolume*)gGeoManager->GetListOfVolumes()->First();
+    if (!gGeoManager->IsClosed()) {
+      TGeoVolume* top = (TGeoVolume*)gGeoManager->GetListOfVolumes()->First();
       gGeoManager->SetTopVolume(top);
-      gGeoManager->CloseGeometry();  
-    }  
-    
+      gGeoManager->CloseGeometry();
+    }
+
     TG4StateManager::Instance()->SetNewState(kMisalignGeometry);
-    TVirtualMCApplication::Instance()->MisalignGeometry(); 
+    TVirtualMCApplication::Instance()->MisalignGeometry();
     TG4StateManager::Instance()->SetNewState(kNotInApplication);
-  }    
+  }
 
   // Build G4 geometry
-  if ( fUserGeometry == "VMCtoGeant4" ) 
+  if (fUserGeometry == "VMCtoGeant4") ConstructG4GeometryViaVMC();
 
-    ConstructG4GeometryViaVMC();
-  
-  if ( fUserGeometry == "RootToGeant4" ) 
-    ConstructG4GeometryViaVGM();
+  if (fUserGeometry == "RootToGeant4") ConstructG4GeometryViaVGM();
 
   // print G4 geometry statistics
-  if ( VerboseLevel() > 0 ) {
-    G4cout << "G4 Stat: instantiated " 
-           << fGeometryServices->NofG4LogicalVolumes()  
-           << " logical volumes \n"
-           << "                      " 
-           << fGeometryServices->NofG4PhysicalVolumes() 
-           << " physical volumes" << G4endl;
-  }           
-}                   
+  if (VerboseLevel() > 0) {
+    G4cout << "G4 Stat: instantiated "
+           << fGeometryServices->NofG4LogicalVolumes() << " logical volumes \n"
+           << "                      "
+           << fGeometryServices->NofG4PhysicalVolumes() << " physical volumes"
+           << G4endl;
+  }
+}
 
 //_____________________________________________________________________________
 void TG4GeometryManager::FillMediumMapFromG3()
 {
-/// Map G3 tracking medium IDs to volumes names.
+  /// Map G3 tracking medium IDs to volumes names.
 
 #ifdef USE_G3TOG4
-  if ( VerboseLevel() > 1 ) 
+  if (VerboseLevel() > 1)
     G4cout << "TG4GeometryManager::FillMediumMapFromG3()" << G4endl;
 
   TG4MediumMap* mediumMap = fGeometryServices->GetMediumMap();
- 
+
   // Create medium for each medium entry
-   for ( G4int i=0; i<G4int(G3Med.GetSize()); i++ ) {
+  for (G4int i = 0; i < G4int(G3Med.GetSize()); i++) {
     G3MedTableEntry* mediumEntry = G3Med.GetMTE(i);
     G4int mediumID = mediumEntry->GetID();
-    
-    if ( VerboseLevel() > 2 ) {
+
+    if (VerboseLevel() > 2) {
       G4cout << "Getting medium ID=" << mediumID << G4endl;
     }
     // Get medium from medium map
@@ -357,7 +344,7 @@ void TG4GeometryManager::FillMediumMapFromG3()
 
     // Create a medium if it does not exist
     // (This should not happen, but let's check it anyway)
-    if ( ! medium ) {
+    if (!medium) {
       medium = mediumMap->AddMedium(mediumID, false);
 
       TString message = "Medium ";
@@ -368,123 +355,121 @@ void TG4GeometryManager::FillMediumMapFromG3()
 
     medium->SetLimits(mediumEntry->GetLimits());
     medium->SetMaterial(mediumEntry->GetMaterial());
-  }   
+  }
 
-  if ( VerboseLevel() > 2 ) 
-    G3Vol.PrintAll();
-    
+  if (VerboseLevel() > 2) G3Vol.PrintAll();
+
   // Map media to logical volumes
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-  for ( G4int i=0; i<G4int(lvStore->size()); i++) {
-    G4LogicalVolume* lv  = (*lvStore)[i];
+  for (G4int i = 0; i < G4int(lvStore->size()); i++) {
+    G4LogicalVolume* lv = (*lvStore)[i];
 
-    // Get medium ID from G3 tables    
-    G4String name  = lv->GetName();
+    // Get medium ID from G3 tables
+    G4String name = lv->GetName();
     G4String g3Name(name);
     // Filter out the reflected volume name extension
-    // added by reflection factory 
+    // added by reflection factory
     G4String ext = G4ReflectionFactory::Instance()->GetVolumesNameExtension();
     if (name.find(ext)) g3Name = g3Name.substr(0, g3Name.find(ext));
     G4int mediumID = G3Vol.GetVTE(g3Name)->GetNmed();
-    
-    if ( VerboseLevel() > 2 ) 
-      G4cout << "Mapping medium Id " << mediumID << " to LV "<< name << G4endl; 
+
+    if (VerboseLevel() > 2)
+      G4cout << "Mapping medium Id " << mediumID << " to LV " << name << G4endl;
 
     // Map medium to LV
     mediumMap->MapMedium(lv, mediumID);
   }
 
-  // clear G3 tables 
-  G3Vol.Clear();  
-  G3SensVol.clear(); 
+  // clear G3 tables
+  G3Vol.Clear();
+  G3SensVol.clear();
   G3Mat.Clear();
   G3Med.Clear();
 #else
-  TG4Globals::Exception(
-    "TG4GeometryManager", "FillMediumMapFromG3",
+  TG4Globals::Exception("TG4GeometryManager", "FillMediumMapFromG3",
     "Geant4 VMC has been installed without G3toG4." + TG4Globals::Endl() +
-    "Geometry construction via VMC is not supported.");
+      "Geometry construction via VMC is not supported.");
 #endif
-}    
+}
 
 //_____________________________________________________________________________
 void TG4GeometryManager::FillMediumMapFromG4()
 {
-/// Map G4 materials in the medium map;
-/// the materialIndex is used to define medium ID.
+  /// Map G4 materials in the medium map;
+  /// the materialIndex is used to define medium ID.
 
-  if ( VerboseLevel() > 1 ) 
+  if (VerboseLevel() > 1)
     G4cout << "TG4GeometryManager::FillMediumMapFromG4()" << G4endl;
 
   TG4MediumMap* mediumMap = fGeometryServices->GetMediumMap();
 
   // Create medium for each material
   const G4MaterialTable* materialTable = G4Material::GetMaterialTable();
-  for ( G4int i=0; i<G4int(materialTable->size()); i++ ) {
+  for (G4int i = 0; i < G4int(materialTable->size()); i++) {
     G4Material* material = (*materialTable)[i];
 
-    if ( VerboseLevel() > 2 ) {
-      G4cout << "Adding medium name= " << material->GetName() 
-             << " Id="  << material->GetIndex() << G4endl; 
-    }             
-    TG4Medium* medium = mediumMap->AddMedium(material->GetIndex()); 
+    if (VerboseLevel() > 2) {
+      G4cout << "Adding medium name= " << material->GetName()
+             << " Id=" << material->GetIndex() << G4endl;
+    }
+    TG4Medium* medium = mediumMap->AddMedium(material->GetIndex());
     medium->SetName(material->GetName());
     medium->SetMaterial(material);
-  }    
-    
+  }
+
   // Map media to logical volumes
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-  for ( G4int i=0; i<G4int(lvStore->size()); i++ ) {
-    G4LogicalVolume* lv  = (*lvStore)[i];
+  for (G4int i = 0; i < G4int(lvStore->size()); i++) {
+    G4LogicalVolume* lv = (*lvStore)[i];
     G4int mediumID = lv->GetMaterial()->GetIndex();
 
-    if ( VerboseLevel() > 2 ) {
-      G4cout << "Mapping medium Id=" << mediumID << " to LV= " << lv->GetName() 
-             << G4endl; 
-    }             
-    mediumMap->MapMedium(lv, mediumID);   
+    if (VerboseLevel() > 2) {
+      G4cout << "Mapping medium Id=" << mediumID << " to LV= " << lv->GetName()
+             << G4endl;
+    }
+    mediumMap->MapMedium(lv, mediumID);
   }
-}    
+}
 
 //_____________________________________________________________________________
 void TG4GeometryManager::FillMediumMapFromRoot()
 {
-/// Map Root tracking media in the medium map
+  /// Map Root tracking media in the medium map
 
-  if ( VerboseLevel() > 1 ) 
+  if (VerboseLevel() > 1)
     G4cout << "TG4GeometryManager::FillMediumMapFromRoot()" << G4endl;
 
   // fGeometryServices->PrintLogicalVolumeStore();
-  
+
   TG4MediumMap* mediumMap = fGeometryServices->GetMediumMap();
- 
+
   // Create TG4 medium for each TGeo madium
   TIter next(gGeoManager->GetListOfMedia());
   TGeoMedium* geoMedium;
-  while ( ( geoMedium = (TGeoMedium*)next() ) )  {
-    Int_t mediumId = geoMedium->GetId(); 
+  while ((geoMedium = (TGeoMedium*)next())) {
+    Int_t mediumId = geoMedium->GetId();
     G4String mediumName = geoMedium->GetName();
-    
-    //Int_t isvol  = (Int_t) geoMedium->GetParam(0);
-    Int_t ifield = (Int_t) geoMedium->GetParam(1);
-    //Double_t fieldm = geoMedium->GetParam(2);
-    //Double_t tmaxfd = geoMedium->GetParam(3);
+
+    // Int_t isvol  = (Int_t) geoMedium->GetParam(0);
+    Int_t ifield = (Int_t)geoMedium->GetParam(1);
+    // Double_t fieldm = geoMedium->GetParam(2);
+    // Double_t tmaxfd = geoMedium->GetParam(3);
     Double_t stemax = geoMedium->GetParam(4);
-    //Double_t deemax = geoMedium->GetParam(5);
-    //Double_t epsil  = geoMedium->GetParam(6);
-    //Double_t stmin  = geoMedium->GetParam(7);
-              
-   // Only stemax parameter is passed to G4 if it is positive
+    // Double_t deemax = geoMedium->GetParam(5);
+    // Double_t epsil  = geoMedium->GetParam(6);
+    // Double_t stmin  = geoMedium->GetParam(7);
+
+    // Only stemax parameter is passed to G4 if it is positive
     G4UserLimits* limits = 0;
-    if ( stemax > 0 ) {
+    if (stemax > 0) {
       limits = new G4UserLimits();
-      limits->SetMaxAllowedStep(stemax*cm);
-    } 
-    
-    if ( VerboseLevel() > 2 ) {
+      limits->SetMaxAllowedStep(stemax * cm);
+    }
+
+    if (VerboseLevel() > 2) {
       G4cout << "Adding medium Id=" << mediumId << " name=" << mediumName
-             << " limits=" << limits << G4endl; 
-    }             
+             << " limits=" << limits << G4endl;
+    }
     TG4Medium* medium = mediumMap->AddMedium(mediumId);
     medium->SetName(mediumName);
     medium->SetLimits(limits);
@@ -492,108 +477,104 @@ void TG4GeometryManager::FillMediumMapFromRoot()
 
     G4String matName = geoMedium->GetMaterial()->GetName();
     G4Material* material = G4Material::GetMaterial(matName);
-    if ( ! material ) {
-      TG4Globals::Exception(
-        "TG4GeometryManager", "FillMediumMapFromRoot",
+    if (!material) {
+      TG4Globals::Exception("TG4GeometryManager", "FillMediumMapFromRoot",
         "Material " + TString(matName) + " not found.");
     }
     medium->SetMaterial(material);
-  }   
+  }
 
   // Map media to logical volumes
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-  for (G4int i=0; i<G4int(lvStore->size()); i++ ) {
-    G4LogicalVolume* lv  = (*lvStore)[i];
-    G4String volName =lv->GetName(); 
+  for (G4int i = 0; i < G4int(lvStore->size()); i++) {
+    G4LogicalVolume* lv = (*lvStore)[i];
+    G4String volName = lv->GetName();
 
     // Filter out the reflected volumes name extension
-    // added by reflection factory 
+    // added by reflection factory
     G4String ext = G4ReflectionFactory::Instance()->GetVolumesNameExtension();
     if (volName.find(ext)) volName = volName.substr(0, volName.find(ext));
-    
-    TGeoVolume* geoVolume = gGeoManager->GetVolume(volName.data());
-    
-    if ( ! geoVolume) {
-      TG4Globals::Exception(
-        "TG4GeometryManager", "FillMediumMapFromRoot",
-        "Root volume " + TString(volName) + " not found"); 
-    }  
-    
-    // skip assemblies
-    if ( geoVolume && geoVolume->IsAssembly() )
-      continue;
 
-    if ( geoVolume && ! geoVolume->GetMedium() ) {
-      TG4Globals::Exception(
-        "TG4GeometryManager", "FillMediumMapFromRoot",
+    TGeoVolume* geoVolume = gGeoManager->GetVolume(volName.data());
+
+    if (!geoVolume) {
+      TG4Globals::Exception("TG4GeometryManager", "FillMediumMapFromRoot",
+        "Root volume " + TString(volName) + " not found");
+    }
+
+    // skip assemblies
+    if (geoVolume && geoVolume->IsAssembly()) continue;
+
+    if (geoVolume && !geoVolume->GetMedium()) {
+      TG4Globals::Exception("TG4GeometryManager", "FillMediumMapFromRoot",
         "Root volume " + TString(volName) + " has not medium defined.");
-    }  
-    
+    }
+
     G4int mediumID = geoVolume->GetMedium()->GetId();
-    
-    if ( VerboseLevel() > 2 ) {
-      G4cout << "Mapping medium Id=" << mediumID << " to LV="<< volName 
-             << G4endl; 
-    }             
-    mediumMap->MapMedium(lv, mediumID);   
+
+    if (VerboseLevel() > 2) {
+      G4cout << "Mapping medium Id=" << mediumID << " to LV=" << volName
+             << G4endl;
+    }
+    mediumMap->MapMedium(lv, mediumID);
   }
-}    
+}
 
 //_____________________________________________________________________________
 void TG4GeometryManager::FillMediumMap()
 {
-/// Fill medium map depending on user geometry source
+  /// Fill medium map depending on user geometry source
 
-  if ( fUserGeometry == "VMCtoGeant4" )
-    FillMediumMapFromG3(); 
+  if (fUserGeometry == "VMCtoGeant4") FillMediumMapFromG3();
 
-  if ( fUserGeometry == "VMCtoRoot" ||
-       fUserGeometry == "Root"  || 
-       fUserGeometry == "RootToGeant4" ) {
+  if (fUserGeometry == "VMCtoRoot" || fUserGeometry == "Root" ||
+      fUserGeometry == "RootToGeant4") {
     FillMediumMapFromRoot();
   }
 
-  if ( fUserGeometry == "Geant4" )
-    FillMediumMapFromG4(); 
-}                   
+  if (fUserGeometry == "Geant4") FillMediumMapFromG4();
+}
 
 //_____________________________________________________________________________
 void TG4GeometryManager::CreateMagField(TVirtualMagField* magField,
-                                        TG4FieldParameters* fieldParameters,
-                                        G4LogicalVolume* lv)
+  TG4FieldParameters* fieldParameters, G4LogicalVolume* lv)
 {
-/// Create magnetic field
+  /// Create magnetic field
 
   TG4MagneticField* tg4MagneticField = 0;
   G4bool isCachedMagneticField = false;
-  if ( fieldParameters->GetConstDistance() > 0. ) {
-    tg4MagneticField = new TG4CachedMagneticField(*fieldParameters, magField, lv);
+  if (fieldParameters->GetConstDistance() > 0.) {
+    tg4MagneticField =
+      new TG4CachedMagneticField(*fieldParameters, magField, lv);
     isCachedMagneticField = true;
-  } else {
+  }
+  else {
     tg4MagneticField = new TG4MagneticField(*fieldParameters, magField, lv);
     isCachedMagneticField = false;
   }
 
-  if ( VerboseLevel() > 0 ) {
+  if (VerboseLevel() > 0) {
     G4String fieldType = "";
-    if ( ! lv ) {
+    if (!lv) {
       fieldType = "Global";
-    } else {
+    }
+    else {
       fieldType = "Local (in ";
       fieldType.append(lv->GetName());
       fieldType.append(")");
     }
-    if ( isCachedMagneticField ) {
+    if (isCachedMagneticField) {
       fieldType.append(" cached");
     }
 
     G4cout << fieldType << " magnetic field created with stepper ";
     G4cout << TG4FieldParameters::StepperTypeName(
-                fieldParameters->GetStepperType()) << G4endl;
+                fieldParameters->GetStepperType())
+           << G4endl;
   }
 
   // create magnetic field vector
-  if ( ! fgMagneticFields ) {
+  if (!fgMagneticFields) {
     fgMagneticFields = new std::vector<TG4MagneticField*>();
   }
 
@@ -603,13 +584,13 @@ void TG4GeometryManager::CreateMagField(TVirtualMagField* magField,
 //_____________________________________________________________________________
 void TG4GeometryManager::ConstructGlobalMagField()
 {
-/// Construct Geant4 global magnetic field from the field set to gMC
+  /// Construct Geant4 global magnetic field from the field set to gMC
 
   // Create global magnetic field
-  if ( gMC->GetMagField() ) {
+  if (gMC->GetMagField()) {
     CreateMagField(gMC->GetMagField(), fFieldParameters[0], 0);
 
-    if ( fIsZeroMagField ) {
+    if (fIsZeroMagField) {
       ConstructZeroMagFields();
     }
   }
@@ -618,11 +599,11 @@ void TG4GeometryManager::ConstructGlobalMagField()
 //_____________________________________________________________________________
 void TG4GeometryManager::ConstructZeroMagFields()
 {
-/// Loop over all logical volumes and set zero magnetic if the volume
-/// is associated with a tracking medium with ifield value = 0.
-/// This function is invoked only when a global magnetic field is defined.
+  /// Loop over all logical volumes and set zero magnetic if the volume
+  /// is associated with a tracking medium with ifield value = 0.
+  /// This function is invoked only when a global magnetic field is defined.
 
-  if ( VerboseLevel() > 1 )
+  if (VerboseLevel() > 1)
     G4cout << "TG4GeometryManager::ConstructZeroMagFields()" << G4endl;
 
   G4bool forceToAllDaughters = false;
@@ -631,7 +612,7 @@ void TG4GeometryManager::ConstructZeroMagFields()
   // of zero field to volume daughters
   G4FieldManager* dummyFieldManager = new G4FieldManager();
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-  for (G4int i=0; i<G4int(lvStore->size()); i++) {
+  for (G4int i = 0; i < G4int(lvStore->size()); i++) {
     G4LogicalVolume* lv = (*lvStore)[i];
     lv->SetFieldManager(dummyFieldManager, forceToAllDaughters);
   }
@@ -639,42 +620,43 @@ void TG4GeometryManager::ConstructZeroMagFields()
   // Set zero field manager to volumes associated with a tracking medium
   // with ifield value = 0.
   G4FieldManager* fieldManager = 0;
-  for (G4int i=0; i<G4int(lvStore->size()); i++) {
+  for (G4int i = 0; i < G4int(lvStore->size()); i++) {
 
     G4LogicalVolume* lv = (*lvStore)[i];
 
     // skip volume without medium
-    TG4Medium* medium
-      = TG4GeometryServices::Instance()->GetMediumMap()->GetMedium(lv, false);
-    if ( ! medium ) continue;
+    TG4Medium* medium =
+      TG4GeometryServices::Instance()->GetMediumMap()->GetMedium(lv, false);
+    if (!medium) continue;
 
     // Skip volumes with ifield != 0
-    if ( medium->GetIfield() != 0 ) {
-      if ( VerboseLevel() > 1 ) {
+    if (medium->GetIfield() != 0) {
+      if (VerboseLevel() > 1) {
         G4cout << "Global field in logical volume: " << lv->GetName() << G4endl;
       }
       continue;
     }
 
     // create field manager if it does not exist yet
-    if ( ! fieldManager) {
+    if (!fieldManager) {
       fieldManager = new G4FieldManager();
-          // CHECK if we need to delete it
+      // CHECK if we need to delete it
       fieldManager->SetDetectorField(0);
       fieldManager->CreateChordFinder(0);
     }
     lv->SetFieldManager(fieldManager, forceToAllDaughters);
 
-    if ( VerboseLevel() > 1 ) {
-      G4cout << "Zero magnetic field set to logical volume: " << lv->GetName() << G4endl;
+    if (VerboseLevel() > 1) {
+      G4cout << "Zero magnetic field set to logical volume: " << lv->GetName()
+             << G4endl;
     }
   }
 
   // Remove the  dummy field manager to all LV without zero field
-  for (G4int i=0; i<G4int(lvStore->size()); i++) {
+  for (G4int i = 0; i < G4int(lvStore->size()); i++) {
     G4LogicalVolume* lv = (*lvStore)[i];
 
-    if ( lv->GetFieldManager() == dummyFieldManager ) {
+    if (lv->GetFieldManager() == dummyFieldManager) {
       lv->SetFieldManager(0, forceToAllDaughters);
     }
   }
@@ -685,15 +667,15 @@ void TG4GeometryManager::ConstructZeroMagFields()
 
 //_____________________________________________________________________________
 TG4FieldParameters* TG4GeometryManager::GetOrCreateFieldParameters(
-                                          const G4String& volumeName)
+  const G4String& volumeName)
 {
-/// Get field parameters with the given volumeName or create them if they
-/// do not exist yet
+  /// Get field parameters with the given volumeName or create them if they
+  /// do not exist yet
 
   // Get user field parameters
   TG4FieldParameters* fieldParameters = 0;
-  for (G4int i=0; i<G4int(fFieldParameters.size()); ++i) {
-    if ( fFieldParameters[i]->GetVolumeName() == volumeName ) {
+  for (G4int i = 0; i < G4int(fFieldParameters.size()); ++i) {
+    if (fFieldParameters[i]->GetVolumeName() == volumeName) {
       return fFieldParameters[i];
     }
   }
@@ -707,25 +689,24 @@ TG4FieldParameters* TG4GeometryManager::GetOrCreateFieldParameters(
 //_____________________________________________________________________________
 void TG4GeometryManager::ConstructLocalMagFields()
 {
-/// Construct Geant4 local magnetic field from Root geometry.
+  /// Construct Geant4 local magnetic field from Root geometry.
 
   // Supported only for geomRoot and geomRootToGeant4.
-  if ( ( fUserGeometry != "Root" ) &&
-       ( fUserGeometry != "RootToGeant4" ) )  return;
+  if ((fUserGeometry != "Root") && (fUserGeometry != "RootToGeant4")) return;
 
-  if ( VerboseLevel() > 1 )
+  if (VerboseLevel() > 1)
     G4cout << "TG4GeometryManager::ConstructLocalMagFields()" << G4endl;
 
   TIter next(gGeoManager->GetListOfVolumes());
   TGeoVolume* geoVolume;
-  while ( ( geoVolume = (TGeoVolume*)next() ) )  {
+  while ((geoVolume = (TGeoVolume*)next())) {
 
-    if ( ! geoVolume->GetField() ) continue;
+    if (!geoVolume->GetField()) continue;
 
     // Get field
-    TVirtualMagField* magField
-      = dynamic_cast<TVirtualMagField*>(geoVolume->GetField());
-    if ( ! magField ) {
+    TVirtualMagField* magField =
+      dynamic_cast<TVirtualMagField*>(geoVolume->GetField());
+    if (!magField) {
       TString message = geoVolume->GetName();
       message += ": uknown field type will be ignored.";
       TG4Globals::Warning("TG4GeometryManager", "ConstructLocalMagFields",
@@ -737,9 +718,9 @@ void TG4GeometryManager::ConstructLocalMagFields()
     G4String volumeName = geoVolume->GetName();
 
     // Get Geant4 volume
-    G4LogicalVolume* lv
-      = TG4GeometryServices::Instance()->FindLogicalVolume(volumeName);
-    if ( ! lv ) {
+    G4LogicalVolume* lv =
+      TG4GeometryServices::Instance()->FindLogicalVolume(volumeName);
+    if (!lv) {
       TString message = geoVolume->GetName();
       message += " volume not found in Geant4 geometry.";
       TG4Globals::Warning("TG4GeometryManager", "ConstructLocalMagFields",
@@ -748,7 +729,8 @@ void TG4GeometryManager::ConstructLocalMagFields()
     }
 
     // Get or create user field parameters
-    TG4FieldParameters* fieldParameters = GetOrCreateFieldParameters(volumeName);
+    TG4FieldParameters* fieldParameters =
+      GetOrCreateFieldParameters(volumeName);
 
     // Create magnetic field
     CreateMagField(magField, fieldParameters, lv);
@@ -758,54 +740,53 @@ void TG4GeometryManager::ConstructLocalMagFields()
 //
 // public methods
 //
- 
-//_____________________________________________________________________________
-TVirtualMCGeometry*  TG4GeometryManager::GetMCGeometry() const
-{
-/// Return the instance of MC geometry;
-/// give exception if no object is instantiated
 
-  if ( ! fMCGeometry ) {
+//_____________________________________________________________________________
+TVirtualMCGeometry* TG4GeometryManager::GetMCGeometry() const
+{
+  /// Return the instance of MC geometry;
+  /// give exception if no object is instantiated
+
+  if (!fMCGeometry) {
     TG4Globals::Exception(
-      "TG4GeometryManager", "GetMCGeometry",
-      "No MC geometry defined.");
+      "TG4GeometryManager", "GetMCGeometry", "No MC geometry defined.");
   }
-  
+
   return fMCGeometry;
-}      
+}
 
 //_____________________________________________________________________________
 void TG4GeometryManager::ConstructGeometry()
 {
-/// Construct Geant4 geometry depending on user geometry source
+  /// Construct Geant4 geometry depending on user geometry source
 
-  // Construct G4 geometry 
+  // Construct G4 geometry
   ConstructG4Geometry();
 
   // Fill medium map
-  FillMediumMap(); 
+  FillMediumMap();
 
   // VMC application construct geometry for optical processes
   TG4StateManager::Instance()->SetNewState(kConstructOpGeometry);
-  TVirtualMCApplication::Instance()->ConstructOpGeometry();   
+  TVirtualMCApplication::Instance()->ConstructOpGeometry();
   TG4StateManager::Instance()->SetNewState(kNotInApplication);
 
   // Construct user regions
-  if ( fUserRegionConstruction ) fUserRegionConstruction->Construct();
-}                   
+  if (fUserRegionConstruction) fUserRegionConstruction->Construct();
+}
 
 #include "TG4SDManager.h"
 
 //_____________________________________________________________________________
 void TG4GeometryManager::ConstructSDandField()
 {
-/// Construct Geant4 geometry depending on user geometry source
+  /// Construct Geant4 geometry depending on user geometry source
 
-  if ( VerboseLevel() > 1 ) 
-     G4cout << "TG4GeometryManager::ConstructSDandField() " << G4endl; 
+  if (VerboseLevel() > 1)
+    G4cout << "TG4GeometryManager::ConstructSDandField() " << G4endl;
 
   // Call user class for geometry customization
-  if ( fUserPostDetConstruction ) fUserPostDetConstruction->Construct();
+  if (fUserPostDetConstruction) fUserPostDetConstruction->Construct();
 
   // Construct regions with fast simulation and EM models
   fFastModelsManager->CreateRegions();
@@ -817,7 +798,7 @@ void TG4GeometryManager::ConstructSDandField()
   // Create magnetic field
   ConstructGlobalMagField();
 
-  if ( fIsLocalMagField ) {
+  if (fIsLocalMagField) {
     ConstructLocalMagFields();
   }
 }
@@ -825,48 +806,47 @@ void TG4GeometryManager::ConstructSDandField()
 //_____________________________________________________________________________
 void TG4GeometryManager::FinishGeometry()
 {
-/// Finish geometry construction after G4 run initialization
+  /// Finish geometry construction after G4 run initialization
 
-  if ( VerboseLevel() > 1 ) 
+  if (VerboseLevel() > 1)
     G4cout << "TG4GeometryManager::FinishGeometry" << G4endl;
 
   // Create magnetic field
-  // ConstructMagField();  
+  // ConstructMagField();
 
   // Fill medium map if not yet done
-  if ( fGeometryServices->GetMediumMap()->GetNofMedia() == 0 )
-    FillMediumMap(); 
+  if (fGeometryServices->GetMediumMap()->GetNofMedia() == 0) FillMediumMap();
 
   // Set world to geometry services
   fGeometryServices->SetWorld(
     G4TransportationManager::GetTransportationManager()
-      ->GetNavigatorForTracking()->GetWorldVolume());
-    
-  if ( VerboseLevel() > 1 ) 
-    G4cout << "TG4GeometryManager::FinishGeometry done" << G4endl;
+      ->GetNavigatorForTracking()
+      ->GetWorldVolume());
 
+  if (VerboseLevel() > 1)
+    G4cout << "TG4GeometryManager::FinishGeometry done" << G4endl;
 }
 
 //_____________________________________________________________________________
 void TG4GeometryManager::UpdateMagField()
 {
-/// Update magnetic field.
-/// This function must be called if the field parameters were changed
-/// in other than PreInit> phase.
+  /// Update magnetic field.
+  /// This function must be called if the field parameters were changed
+  /// in other than PreInit> phase.
 
-  if ( ! fgMagneticFields ) {
-    TG4Globals::Warning("TG4GeometryManager", "UpdateMagField",
-      "No magnetic field is defined.");
-     return;
+  if (!fgMagneticFields) {
+    TG4Globals::Warning(
+      "TG4GeometryManager", "UpdateMagField", "No magnetic field is defined.");
+    return;
   }
-  
-  if ( VerboseLevel() > 1 ) 
+
+  if (VerboseLevel() > 1)
     G4cout << "TG4GeometryManager::UpdateMagField" << G4endl;
 
   // Only the parameters defined in TG4Magnetic field can be updated when
   // field already exists, so we can safely call the base class non virtual
   // method
-  for (G4int i=0; i<G4int(fgMagneticFields->size()); ++i) {
+  for (G4int i = 0; i < G4int(fgMagneticFields->size()); ++i) {
     fgMagneticFields->at(i)->Update(*fFieldParameters[i]);
   }
 }
@@ -874,44 +854,44 @@ void TG4GeometryManager::UpdateMagField()
 //_____________________________________________________________________________
 void TG4GeometryManager::CreateMagFieldParameters(const G4String& fieldVolName)
 {
-/// Create local magnetic field parameters which can be then configured
-/// by the user via UI commands.
-/// The parameters are used in geometry only if a local magnetic field is
-/// associated with the volumes with the given name
+  /// Create local magnetic field parameters which can be then configured
+  /// by the user via UI commands.
+  /// The parameters are used in geometry only if a local magnetic field is
+  /// associated with the volumes with the given name
 
   fFieldParameters.push_back(new TG4FieldParameters(fieldVolName));
 }
 
 //_____________________________________________________________________________
-TG4RadiatorDescription*
-TG4GeometryManager::CreateRadiator(const G4String& volName)
+TG4RadiatorDescription* TG4GeometryManager::CreateRadiator(
+  const G4String& volName)
 {
-/// Create radiator description with the given volume name
+  /// Create radiator description with the given volume name
 
-  TG4RadiatorDescription* radiatorDescription = new TG4RadiatorDescription(volName);
+  TG4RadiatorDescription* radiatorDescription =
+    new TG4RadiatorDescription(volName);
   fRadiators.push_back(radiatorDescription);
 
   return radiatorDescription;
 }
 
 //_____________________________________________________________________________
-void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
-                               const TG4G3ControlVector& controls) const
+void TG4GeometryManager::SetUserLimits(
+  const TG4G3CutVector& cuts, const TG4G3ControlVector& controls) const
 {
-/// Set user limits defined in G3MedTable for all logical volumes.
+  /// Set user limits defined in G3MedTable for all logical volumes.
 
-  if ( VerboseLevel() > 1 ) 
+  if (VerboseLevel() > 1)
     G4cout << "TG4GeometryManager::SetUserLimits" << G4endl;
 
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
 
-  for (G4int i=0; i<G4int(lvStore->size()); i++) {
+  for (G4int i = 0; i < G4int(lvStore->size()); i++) {
     G4LogicalVolume* lv = (*lvStore)[i];
-    TG4Medium* medium 
-      = fGeometryServices->GetMediumMap()->GetMedium(lv, false);
-      
-    if ( !medium) continue;  
-      
+    TG4Medium* medium = fGeometryServices->GetMediumMap()->GetMedium(lv, false);
+
+    if (!medium) continue;
+
     // get limits if already exist
     TG4Limits* tg4Limits = 0;
     G4UserLimits* limits = medium->GetLimits();
@@ -919,55 +899,53 @@ void TG4GeometryManager::SetUserLimits(const TG4G3CutVector& cuts,
 
     // get tracking medium name
     G4String name = medium->GetName();
-    
+
     if (tg4Limits) {
       tg4Limits->SetName(name);
-    }  
+    }
     else {
       // Check if the step below is needed
-      tg4Limits = fGeometryServices->FindLimits2(name, true);  
+      tg4Limits = fGeometryServices->FindLimits2(name, true);
       if (!tg4Limits) {
-         tg4Limits = new TG4Limits(name, cuts, controls);
-      } 
+        tg4Limits = new TG4Limits(name, cuts, controls);
+      }
     }
-    
+
     // set new limits back to medium
     medium->SetLimits(tg4Limits);
-    
-    // inactivate max step defined by user 
+
+    // inactivate max step defined by user
     // if its activation was not asked explicitely
-    if ( ! fIsUserMaxStep )
-      tg4Limits->SetMaxAllowedStep(DBL_MAX); 
+    if (!fIsUserMaxStep) tg4Limits->SetMaxAllowedStep(DBL_MAX);
 
     // limit max step for low density materials (< AIR)
-    if ( fIsMaxStepInLowDensityMaterials &&
-         lv->GetMaterial()->GetDensity() < fLimitDensity )
+    if (fIsMaxStepInLowDensityMaterials &&
+        lv->GetMaterial()->GetDensity() < fLimitDensity)
       tg4Limits->SetMaxAllowedStep(fMaxStepInLowDensityMaterials);
-      
+
     // set max step the default value
-    tg4Limits->SetDefaultMaxAllowedStep(); 
-      
-    // update controls in limits according to the setup 
+    tg4Limits->SetDefaultMaxAllowedStep();
+
+    // update controls in limits according to the setup
     // in the passed vector
     tg4Limits->Update(controls);
 
     // set limits to logical volume
     lv->SetUserLimits(tg4Limits);
-  } 
+  }
 
-  if ( VerboseLevel() > 1 ) 
+  if (VerboseLevel() > 1)
     G4cout << "TG4GeometryManager::SetUserLimits done" << G4endl;
 }
-
 
 //_____________________________________________________________________________
 void TG4GeometryManager::SetIsLocalMagField(G4bool isLocalMagField)
 {
   /// (In)Activate use of local magnetic field(s)
 
-  if ( VerboseLevel() > 1 )
-    G4cout << "TG4GeometryManager::SetIsLocalMagField: "
-           << std::boolalpha << isLocalMagField << G4endl;
+  if (VerboseLevel() > 1)
+    G4cout << "TG4GeometryManager::SetIsLocalMagField: " << std::boolalpha
+           << isLocalMagField << G4endl;
 
   fIsLocalMagField = isLocalMagField;
 }
@@ -977,83 +955,85 @@ void TG4GeometryManager::SetIsZeroMagField(G4bool isZeroMagField)
 {
   /// (In)Activate propagating 'ifield = 0' parameter defined in tracking media
 
-  if ( VerboseLevel() > 1 )
-    G4cout << "TG4GeometryManager::SetIsZerolMagField: "
-           << std::boolalpha << isZeroMagField << G4endl;
+  if (VerboseLevel() > 1)
+    G4cout << "TG4GeometryManager::SetIsZerolMagField: " << std::boolalpha
+           << isZeroMagField << G4endl;
 
   fIsZeroMagField = isZeroMagField;
 }
 
 //_____________________________________________________________________________
-void TG4GeometryManager::SetIsUserMaxStep(G4bool isUserMaxStep) 
+void TG4GeometryManager::SetIsUserMaxStep(G4bool isUserMaxStep)
 {
   /// (In)Activate the max step defined by user in tracking media
-  
-  if ( VerboseLevel() > 0 ) 
-    G4cout << "TG4GeometryManager::SetIsUserMaxStep: " 
-           << std::boolalpha << isUserMaxStep << G4endl; 
+
+  if (VerboseLevel() > 0)
+    G4cout << "TG4GeometryManager::SetIsUserMaxStep: " << std::boolalpha
+           << isUserMaxStep << G4endl;
 
   fIsUserMaxStep = isUserMaxStep;
-}  
+}
 
 //_____________________________________________________________________________
-void TG4GeometryManager::SetIsMaxStepInLowDensityMaterials(G4bool isMaxStep) 
+void TG4GeometryManager::SetIsMaxStepInLowDensityMaterials(G4bool isMaxStep)
 {
-  /// (In)Activate the max step defined in low density materials 
+  /// (In)Activate the max step defined in low density materials
 
-  if ( VerboseLevel() > 0 ) 
-    G4cout << "TG4GeometryManager::SetIsMaxStepInLowDensityMaterials: " 
-           << std::boolalpha << isMaxStep << G4endl; 
+  if (VerboseLevel() > 0)
+    G4cout << "TG4GeometryManager::SetIsMaxStepInLowDensityMaterials: "
+           << std::boolalpha << isMaxStep << G4endl;
 
   fIsMaxStepInLowDensityMaterials = isMaxStep;
-}  
+}
 
 //_____________________________________________________________________________
 void TG4GeometryManager::SetUserRegionConstruction(
-                            TG4VUserRegionConstruction* userRegionConstruction)
+  TG4VUserRegionConstruction* userRegionConstruction)
 {
-/// Set user region construction
+  /// Set user region construction
 
   fUserRegionConstruction = userRegionConstruction;
 }
 
 //_____________________________________________________________________________
 void TG4GeometryManager::SetUserPostDetConstruction(
-                            TG4VUserPostDetConstruction* userPostDetConstruction)
+  TG4VUserPostDetConstruction* userPostDetConstruction)
 {
-/// Set user region construction
+  /// Set user region construction
 
   fUserPostDetConstruction = userPostDetConstruction;
 }
 
 //_____________________________________________________________________________
 void TG4GeometryManager::SetUserEquationOfMotion(
-                           G4EquationOfMotion* equation, G4String volumeName)
+  G4EquationOfMotion* equation, G4String volumeName)
 {
-  if ( ! volumeName.size() ) {
+  if (!volumeName.size()) {
     // global field
     fFieldParameters[0]->SetUserEquationOfMotion(equation);
   }
   else {
     // local field
     // Get or create user field parameters
-    TG4FieldParameters* fieldParameters = GetOrCreateFieldParameters(volumeName);
+    TG4FieldParameters* fieldParameters =
+      GetOrCreateFieldParameters(volumeName);
     fieldParameters->SetUserEquationOfMotion(equation);
   }
 }
 
 //_____________________________________________________________________________
 void TG4GeometryManager::SetUserStepper(
-                           G4MagIntegratorStepper* stepper, G4String volumeName)
+  G4MagIntegratorStepper* stepper, G4String volumeName)
 {
-  if ( ! volumeName.size() ) {
+  if (!volumeName.size()) {
     // global field
     fFieldParameters[0]->SetUserStepper(stepper);
   }
   else {
     // local field
     // Get or create user field parameters
-    TG4FieldParameters* fieldParameters = GetOrCreateFieldParameters(volumeName);
+    TG4FieldParameters* fieldParameters =
+      GetOrCreateFieldParameters(volumeName);
     fieldParameters->SetUserStepper(stepper);
   }
 }
@@ -1061,12 +1041,12 @@ void TG4GeometryManager::SetUserStepper(
 //_____________________________________________________________________________
 void TG4GeometryManager::PrintFieldStatistics() const
 {
-/// Print field statistics.
-/// Currently only cached field print the cahching statistics.
+  /// Print field statistics.
+  /// Currently only cached field print the cahching statistics.
 
-  if ( VerboseLevel() > 0 &&  fgMagneticFields ) {
-    for (G4int i=0; i<G4int(fgMagneticFields->size()); ++i) {
-       fgMagneticFields->at(i)->PrintStatistics();
+  if (VerboseLevel() > 0 && fgMagneticFields) {
+    for (G4int i = 0; i < G4int(fgMagneticFields->size()); ++i) {
+      fgMagneticFields->at(i)->PrintStatistics();
     }
   }
 }

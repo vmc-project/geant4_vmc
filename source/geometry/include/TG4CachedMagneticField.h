@@ -11,15 +11,15 @@
 //-------------------------------------------------
 
 /// \file TG4CachedMagneticField.h
-/// \brief Definition of the TG4CachedMagneticField class 
+/// \brief Definition of the TG4CachedMagneticField class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4FieldParameters.h"
 #include "TG4MagneticField.h"
 
-#include <globals.hh>
 #include <G4ThreeVector.hh>
+#include <globals.hh>
 
 class TG4FieldParameters;
 
@@ -30,7 +30,8 @@ class G4LogicalVolume;
 class TVirtualMagField;
 
 /// \ingroup geometry
-/// \brief The cached magnetic field defined by the TVirtualMCApplication field map.
+/// \brief The cached magnetic field defined by the TVirtualMCApplication field
+/// map.
 ///
 /// Overrides TG4MagneticField::GetFieldValue();
 /// it uses the value from a previous call in case the distance of the
@@ -43,30 +44,29 @@ class TVirtualMagField;
 
 class TG4CachedMagneticField : public TG4MagneticField
 {
-  public:
-    TG4CachedMagneticField(const TG4FieldParameters& parameters,
-                           TVirtualMagField* magField,
-                           G4LogicalVolume* lv = 0);
-    virtual ~TG4CachedMagneticField();
+ public:
+  TG4CachedMagneticField(const TG4FieldParameters& parameters,
+    TVirtualMagField* magField, G4LogicalVolume* lv = 0);
+  virtual ~TG4CachedMagneticField();
 
-    virtual void GetFieldValue(const G4double point[3], G4double* bfield) const;
-    
-    void Update(const TG4FieldParameters& parameters);
-    virtual void PrintStatistics() const;
-    void ClearCounter();
-    
-  private:
-    // data members
-    /// The last evaluated location
-    mutable G4ThreeVector  fLastLocation;
-    /// The last evaluated value
-    mutable G4ThreeVector  fLastValue;
-    /// The counter of calls to GetFieldValue()
-    mutable G4int fCallsCounter;
-    /// The counter of field value evaluations in GetFieldValue()
-    mutable G4int fEvaluationsCounter;
-    /// The square of the distance within which the field is considered constant
-    G4double fConstDistanceSquare;
+  virtual void GetFieldValue(const G4double point[3], G4double* bfield) const;
+
+  void Update(const TG4FieldParameters& parameters);
+  virtual void PrintStatistics() const;
+  void ClearCounter();
+
+ private:
+  // data members
+  /// The last evaluated location
+  mutable G4ThreeVector fLastLocation;
+  /// The last evaluated value
+  mutable G4ThreeVector fLastValue;
+  /// The counter of calls to GetFieldValue()
+  mutable G4int fCallsCounter;
+  /// The counter of field value evaluations in GetFieldValue()
+  mutable G4int fEvaluationsCounter;
+  /// The square of the distance within which the field is considered constant
+  G4double fConstDistanceSquare;
 };
 
-#endif //TG4_CACHED_MAGNETIC_FIELD_H
+#endif // TG4_CACHED_MAGNETIC_FIELD_H

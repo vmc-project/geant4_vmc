@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file Ex02MCApplication.h
-/// \brief Definition of the Ex02MCApplication class 
+/// \brief Definition of the Ex02MCApplication class
 ///
 /// Geant4 ExampleN02 adapted to Virtual Monte Carlo
 ///
@@ -36,50 +36,50 @@ class TVirtualMagField;
 
 class Ex02MCApplication : public TVirtualMCApplication
 {
-  public:
-    Ex02MCApplication(const char* name,  const char *title);
-    Ex02MCApplication();
-    virtual ~Ex02MCApplication();
+ public:
+  Ex02MCApplication(const char* name, const char* title);
+  Ex02MCApplication();
+  virtual ~Ex02MCApplication();
 
-    // methods
-    void InitMC(const char *setup);
-    void RunMC(Int_t nofEvents);
-    void FinishRun();
- 
-    virtual TVirtualMCApplication* CloneForWorker() const; 
-    virtual void InitForWorker() const; 
-    virtual void FinishWorkerRun() const;
+  // methods
+  void InitMC(const char* setup);
+  void RunMC(Int_t nofEvents);
+  void FinishRun();
 
-    virtual void ConstructGeometry();
-    virtual void InitGeometry();
-    virtual void GeneratePrimaries();
-    virtual void BeginEvent();
-    virtual void BeginPrimary();
-    virtual void PreTrack();
-    virtual void Stepping();
-    virtual void PostTrack();
-    virtual void FinishPrimary();
-    virtual void FinishEvent();
-    
-    void   ReadEvent(Int_t i);
+  virtual TVirtualMCApplication* CloneForWorker() const;
+  virtual void InitForWorker() const;
+  virtual void FinishWorkerRun() const;
 
-    // method for tests
-    void SetOldGeometry(Bool_t oldGeometry = kTRUE);
+  virtual void ConstructGeometry();
+  virtual void InitGeometry();
+  virtual void GeneratePrimaries();
+  virtual void BeginEvent();
+  virtual void BeginPrimary();
+  virtual void PreTrack();
+  virtual void Stepping();
+  virtual void PostTrack();
+  virtual void FinishPrimary();
+  virtual void FinishEvent();
 
-  private:
-    // methods
-    Ex02MCApplication(const Ex02MCApplication& origin);
-    void RegisterStack() const;
-    
-    // data members
-    mutable TVirtualMCRootManager*   fRootManager;     //!< Root manager 
-    Ex02MCStack*             fStack;           ///< VMC stack
-    Ex02DetectorConstruction fDetConstruction; ///< Dector construction
-    Ex02TrackerSD*           fTrackerSD;       ///< Tracker SD
-    TVirtualMagField*        fMagField;        ///< Magnetic field
-    Bool_t                   fOldGeometry;     ///< Option for geometry definition
+  void ReadEvent(Int_t i);
 
-  ClassDef(Ex02MCApplication,1)  //Interface to MonteCarlo application
+  // method for tests
+  void SetOldGeometry(Bool_t oldGeometry = kTRUE);
+
+ private:
+  // methods
+  Ex02MCApplication(const Ex02MCApplication& origin);
+  void RegisterStack() const;
+
+  // data members
+  mutable TVirtualMCRootManager* fRootManager; //!< Root manager
+  Ex02MCStack* fStack;                         ///< VMC stack
+  Ex02DetectorConstruction fDetConstruction;   ///< Dector construction
+  Ex02TrackerSD* fTrackerSD;                   ///< Tracker SD
+  TVirtualMagField* fMagField;                 ///< Magnetic field
+  Bool_t fOldGeometry; ///< Option for geometry definition
+
+  ClassDef(Ex02MCApplication, 1) // Interface to MonteCarlo application
 };
 
 // inline functions
@@ -87,7 +87,8 @@ class Ex02MCApplication : public TVirtualMCApplication
 /// Switch on/off the old geometry definition  (via VMC functions)
 /// \param oldGeometry  If true, geometry definition via VMC functions
 inline void Ex02MCApplication::SetOldGeometry(Bool_t oldGeometry)
-{ fOldGeometry = oldGeometry; }
+{
+  fOldGeometry = oldGeometry;
+}
 
-#endif //EX02_MC_APPLICATION_H
-
+#endif // EX02_MC_APPLICATION_H

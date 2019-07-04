@@ -20,18 +20,17 @@
 #include "TG4VUserPostDetConstruction.h"
 #include "globals.hh"
 
-/// Post detector construction class which integrates  
+/// Post detector construction class which integrates
 /// user defined magnetic field equation of motion and integrator
 
 class Ex03PostDetConstruction : public TG4VUserPostDetConstruction
 {
-  public:
-    Ex03PostDetConstruction();
-    virtual ~Ex03PostDetConstruction();
+ public:
+  Ex03PostDetConstruction();
+  virtual ~Ex03PostDetConstruction();
 
-  public:
-    virtual void Construct();
+ public:
+  virtual void Construct();
 };
 
-#endif //EX03_POST_DET_CONSTRUCTION_H
-
+#endif // EX03_POST_DET_CONSTRUCTION_H

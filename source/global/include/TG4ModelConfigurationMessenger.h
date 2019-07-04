@@ -1,5 +1,5 @@
 #ifndef TG4_MODEL_CONFIGURATION_MESSENGER_H
-#define TG4_MODEL_CONFIGURATION_MESSENGER_H 
+#define TG4_MODEL_CONFIGURATION_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -24,7 +24,7 @@ class G4UIdirectory;
 class G4UIcmdWithAString;
 
 /// \ingroup physics_list
-/// \brief Messenger class that defines commands for the special physica 
+/// \brief Messenger class that defines commands for the special physica
 /// models
 ///
 /// Implements commands:
@@ -36,47 +36,48 @@ class G4UIcmdWithAString;
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4ModelConfigurationMessenger: public G4UImessenger
+class TG4ModelConfigurationMessenger : public G4UImessenger
 {
-  public:
-    TG4ModelConfigurationMessenger(TG4ModelConfigurationManager* manager,
-                                   const G4String& availableModels);
-    virtual ~TG4ModelConfigurationMessenger();
+ public:
+  TG4ModelConfigurationMessenger(
+    TG4ModelConfigurationManager* manager, const G4String& availableModels);
+  virtual ~TG4ModelConfigurationMessenger();
 
-    // methods
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-  private:
-    /// Not implemented
-    TG4ModelConfigurationMessenger();
-    /// Not implemented
-    TG4ModelConfigurationMessenger(const TG4ModelConfigurationMessenger& right);
-    /// Not implemented
-    TG4ModelConfigurationMessenger& operator=(const TG4ModelConfigurationMessenger& right);
+ private:
+  /// Not implemented
+  TG4ModelConfigurationMessenger();
+  /// Not implemented
+  TG4ModelConfigurationMessenger(const TG4ModelConfigurationMessenger& right);
+  /// Not implemented
+  TG4ModelConfigurationMessenger& operator=(
+    const TG4ModelConfigurationMessenger& right);
 
-    //
-    // data members
+  //
+  // data members
 
-    /// associated class
-    TG4ModelConfigurationManager*  fModelConfigurationManager;
+  /// associated class
+  TG4ModelConfigurationManager* fModelConfigurationManager;
 
-    /// current model name
-    G4String               fSelectedModel;
+  /// current model name
+  G4String fSelectedModel;
 
-    /// command directory
-    G4UIdirectory*         fDirectory;
+  /// command directory
+  G4UIdirectory* fDirectory;
 
-    /// setModel command
-    G4UIcmdWithAString*    fSetModelCmd;
+  /// setModel command
+  G4UIcmdWithAString* fSetModelCmd;
 
-    /// setEmModel command (deprecated)
-    G4UIcmdWithAString*    fSetEmModelCmd;
+  /// setEmModel command (deprecated)
+  G4UIcmdWithAString* fSetEmModelCmd;
 
-    /// setParticles command
-    G4UIcmdWithAString*    fSetParticlesCmd;
+  /// setParticles command
+  G4UIcmdWithAString* fSetParticlesCmd;
 
-    /// setRegions command
-    G4UIcmdWithAString*    fSetRegionsCmd;
+  /// setRegions command
+  G4UIcmdWithAString* fSetRegionsCmd;
 };
 
-#endif //TG4_MODEL_CONFIGURATIONS_MESSENGER_H
+#endif // TG4_MODEL_CONFIGURATIONS_MESSENGER_H

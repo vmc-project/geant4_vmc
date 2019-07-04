@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4DetConstruction.h
-/// \brief Definition of the TG4DetConstruction class 
+/// \brief Definition of the TG4DetConstruction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -20,31 +20,30 @@
 class G4VPhysicalVolume;
 
 /// \ingroup geometry
-/// \brief Detector construction for building geometry using 
+/// \brief Detector construction for building geometry using
 /// TVirtualMCApplication.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
 class TG4DetConstruction : public G4VUserDetectorConstruction
 {
-  public:
-    TG4DetConstruction();
-    virtual ~TG4DetConstruction();
+ public:
+  TG4DetConstruction();
+  virtual ~TG4DetConstruction();
 
-    // methods
-    virtual G4VPhysicalVolume* Construct();
-    virtual void ConstructSDandField();
-    
-    void SlaveTG4DetConstruction();
+  // methods
+  virtual G4VPhysicalVolume* Construct();
+  virtual void ConstructSDandField();
 
-  private:    
-    /// Not implemented
-    TG4DetConstruction(const TG4DetConstruction& right);
-    /// Not implemented
-    TG4DetConstruction& operator=(const TG4DetConstruction& right);
-    
-    G4VPhysicalVolume* fWorld;
-}; 
+  void SlaveTG4DetConstruction();
 
-#endif //TG4_DET_CONSTRUCTION_H
+ private:
+  /// Not implemented
+  TG4DetConstruction(const TG4DetConstruction& right);
+  /// Not implemented
+  TG4DetConstruction& operator=(const TG4DetConstruction& right);
 
+  G4VPhysicalVolume* fWorld;
+};
+
+#endif // TG4_DET_CONSTRUCTION_H

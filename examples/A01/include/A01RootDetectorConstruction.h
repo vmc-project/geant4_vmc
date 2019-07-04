@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file  A01RootDetectorConstruction.h
-/// \brief Definition of the A01RootDetectorConstruction class 
+/// \brief Definition of the A01RootDetectorConstruction class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo: \n
 ///
@@ -28,31 +28,34 @@
 
 class A01RootDetectorConstruction : public TObject
 {
-  public:  
-    A01RootDetectorConstruction(const TString& geometryFileName);
-    virtual ~A01RootDetectorConstruction();
+ public:
+  A01RootDetectorConstruction(const TString& geometryFileName);
+  virtual ~A01RootDetectorConstruction();
 
-  public:
-     void ConstructGeometry();
+ public:
+  void ConstructGeometry();
 
-     void SetUseLocalMagField(Bool_t localMagField);
-          
-  private:      
-     // data members  
+  void SetUseLocalMagField(Bool_t localMagField);
 
-     TString fGeometryFileName; ///< The root geometry file name
+ private:
+  // data members
 
-     /// Option to use local magnetic field (working only with Geant4 !)
-     Bool_t  fUseLocalMagField;
-     
-  ClassDef(A01RootDetectorConstruction,1) //A01RootDetectorConstruction
+  TString fGeometryFileName; ///< The root geometry file name
+
+  /// Option to use local magnetic field (working only with Geant4 !)
+  Bool_t fUseLocalMagField;
+
+  ClassDef(A01RootDetectorConstruction, 1) // A01RootDetectorConstruction
 };
 
 // inline functions
 
 /// Set the option to use local magnetic field (working only with Geant4 !)
 /// \param localMagField  The new value of the option
-inline void  A01RootDetectorConstruction::SetUseLocalMagField(Bool_t localMagField)
-{ fUseLocalMagField = localMagField; }
+inline void A01RootDetectorConstruction::SetUseLocalMagField(
+  Bool_t localMagField)
+{
+  fUseLocalMagField = localMagField;
+}
 
-#endif //A01_DETECTOR_CONSTRUCTION_H
+#endif // A01_DETECTOR_CONSTRUCTION_H

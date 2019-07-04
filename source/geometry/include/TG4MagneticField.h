@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4MagneticField.h
-/// \brief Definition of the TG4MagneticField class 
+/// \brief Definition of the TG4MagneticField class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -32,7 +32,7 @@ class TVirtualMagField;
 /// \brief The magnetic field defined by the TVirtualMCApplication field map.
 ///
 /// The equation of motion motion of a particle in a field  and the
-/// integration method is set according to the selection in 
+/// integration method is set according to the selection in
 /// TG4FieldParameters, as well as other accuracy parameters.
 /// The default values in TG4FieldParameters correspond to defaults
 /// set in Geant4 (taken from Geant4 9.3 release.)
@@ -43,33 +43,28 @@ class TVirtualMagField;
 
 class TG4MagneticField : public G4MagneticField
 {
-  public:
-    TG4MagneticField(const TG4FieldParameters& parameters,
-                     TVirtualMagField* magField,
-                     G4LogicalVolume* lv = 0);
-    virtual ~TG4MagneticField();
+ public:
+  TG4MagneticField(const TG4FieldParameters& parameters,
+    TVirtualMagField* magField, G4LogicalVolume* lv = 0);
+  virtual ~TG4MagneticField();
 
-    virtual void GetFieldValue(const G4double point[3], G4double* bfield) const;
+  virtual void GetFieldValue(const G4double point[3], G4double* bfield) const;
 
-    void Update(const TG4FieldParameters& parameters);
+  void Update(const TG4FieldParameters& parameters);
 
-    virtual void PrintStatistics() const {}
+  virtual void PrintStatistics() const {}
 
-    
-  protected:
-    // methods
-    G4EquationOfMotion*      CreateEquation(
-                                   EquationType equation);
-    G4MagIntegratorStepper*  CreateStepper(
-                                   G4EquationOfMotion* equation,
-                                   StepperType stepper);
+ protected:
+  // methods
+  G4EquationOfMotion* CreateEquation(EquationType equation);
+  G4MagIntegratorStepper* CreateStepper(
+    G4EquationOfMotion* equation, StepperType stepper);
 
-    // data
-    /// The associated TGeo magnetic field
-    TVirtualMagField*  fVirtualMagField;
-    /// The associated volume (if local field)
-    G4LogicalVolume*   fLogicalVolume;
+  // data
+  /// The associated TGeo magnetic field
+  TVirtualMagField* fVirtualMagField;
+  /// The associated volume (if local field)
+  G4LogicalVolume* fLogicalVolume;
 };
 
-#endif //TG4_MAGNETIC_FIELD_H
-
+#endif // TG4_MAGNETIC_FIELD_H

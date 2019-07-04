@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4VVerbose.cxx
-/// \brief Implementation of the TG4VVerbose class 
+/// \brief Implementation of the TG4VVerbose class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -20,22 +20,19 @@
 const G4int TG4VVerbose::fgkDefaultVerboseLevel = 1;
 
 //_____________________________________________________________________________
-TG4VVerbose::TG4VVerbose()
-  : fVerboseLevel(fgkDefaultVerboseLevel) 
+TG4VVerbose::TG4VVerbose() : fVerboseLevel(fgkDefaultVerboseLevel)
 {
-/// Default constructor
-}
-  
-//_____________________________________________________________________________
-TG4VVerbose::TG4VVerbose(G4int verboseLevel) 
-  : fVerboseLevel(verboseLevel) 
-{
-/// Standard constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
-TG4VVerbose::~TG4VVerbose() 
+TG4VVerbose::TG4VVerbose(G4int verboseLevel) : fVerboseLevel(verboseLevel)
 {
-/// Destructor
+  /// Standard constructor
 }
 
+//_____________________________________________________________________________
+TG4VVerbose::~TG4VVerbose()
+{
+  /// Destructor
+}

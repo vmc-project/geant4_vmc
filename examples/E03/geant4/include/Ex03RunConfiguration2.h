@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03RunConfiguration2.h 
-/// \brief Definition of the Ex03RunConfiguration2 class 
+/// \file Ex03RunConfiguration2.h
+/// \brief Definition of the Ex03RunConfiguration2 class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
@@ -29,17 +29,16 @@
 
 class Ex03RunConfiguration2 : public TG4RunConfiguration
 {
-  public:
-    Ex03RunConfiguration2(const TString& userGeometry,
-                          const TString& specialProcess = "stepLimiter" );
-    virtual ~Ex03RunConfiguration2();
+ public:
+  Ex03RunConfiguration2(
+    const TString& userGeometry, const TString& specialProcess = "stepLimiter");
+  virtual ~Ex03RunConfiguration2();
 
-    // methods
-    virtual G4VUserPhysicsList*  CreatePhysicsList();
+  // methods
+  virtual G4VUserPhysicsList* CreatePhysicsList();
 
-    //virtual G4VUserDetectorConstruction*   CreateDetectorConstruction();
-    //virtual G4VUserPrimaryGeneratorAction* CreatePrimaryGenerator();
+  // virtual G4VUserDetectorConstruction*   CreateDetectorConstruction();
+  // virtual G4VUserPrimaryGeneratorAction* CreatePrimaryGenerator();
 };
 
-#endif //EX03_RUN_CONFIGURATION2_H
-
+#endif // EX03_RUN_CONFIGURATION2_H

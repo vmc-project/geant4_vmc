@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file ExGarfield/geant4/include/RunConfiguration.h 
-/// \brief Definition of the ExGarfield::RunConfiguration class 
+/// \file ExGarfield/geant4/include/RunConfiguration.h
+/// \brief Definition of the ExGarfield::RunConfiguration class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 ///
@@ -28,25 +28,24 @@ namespace ExGarfield
 /// \ingroup ExGarfield
 /// \brief User Geant4 VMC run configuration
 ///
-/// This class overrides the default Geant4 VMC dummy 
+/// This class overrides the default Geant4 VMC dummy
 /// fast simulation construction with the user class.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
 class RunConfiguration : public TG4RunConfiguration
 {
-  public:
-    RunConfiguration(const TString& geometry,
-    	             const TString& physicsList = "FTFP_BERT",
-                     const TString& specialProcess = "stepLimiter");
-    virtual ~RunConfiguration();
+ public:
+  RunConfiguration(const TString& geometry,
+    const TString& physicsList = "FTFP_BERT",
+    const TString& specialProcess = "stepLimiter");
+  virtual ~RunConfiguration();
 
-    // methods
-    virtual TG4VUserFastSimulation*  CreateUserFastSimulation();
+  // methods
+  virtual TG4VUserFastSimulation* CreateUserFastSimulation();
 };
 
-}
-}
+} // namespace ExGarfield
+} // namespace VMC
 
-#endif //GFLASH_RUN_CONFIGURATION1_H
-
+#endif // GFLASH_RUN_CONFIGURATION1_H

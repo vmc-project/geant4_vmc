@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01DriftChamberHit.cxx 
-/// \brief Implementation of the A01DriftChamberHit class 
+/// \file A01DriftChamberHit.cxx
+/// \brief Implementation of the A01DriftChamberHit class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo
 ///
@@ -23,55 +23,46 @@ using namespace std;
 
 /// \cond CLASSIMP
 ClassImp(A01DriftChamberHit)
-/// \endcond
+  /// \endcond
 
-//_____________________________________________________________________________
-A01DriftChamberHit::A01DriftChamberHit(Int_t z) 
-  : TObject(),
-    fLayerID(z),
-    fTime(0.),
-    fLocalPos(),
-    fWorldPos()
+  //_____________________________________________________________________________
+  A01DriftChamberHit::A01DriftChamberHit(Int_t z)
+  : TObject(), fLayerID(z), fTime(0.), fLocalPos(), fWorldPos()
 {
-/// Standard constructor
-/// \param z  The layer id
+  /// Standard constructor
+  /// \param z  The layer id
 }
 
 //_____________________________________________________________________________
-A01DriftChamberHit::A01DriftChamberHit() 
-  : TObject(),
-    fLayerID(-1),
-    fTime(0.),
-    fLocalPos(),
-    fWorldPos()
+A01DriftChamberHit::A01DriftChamberHit()
+  : TObject(), fLayerID(-1), fTime(0.), fLocalPos(), fWorldPos()
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
-A01DriftChamberHit::~A01DriftChamberHit() 
+A01DriftChamberHit::~A01DriftChamberHit()
 {
-/// Destructor
+  /// Destructor
 }
 
 //_____________________________________________________________________________
 void A01DriftChamberHit::Print(Option_t* /*option*/) const
 {
-/// Print hit info
+  /// Print hit info
 
-  cout << "  Layer[" << fLayerID << "] : time " << fTime*1e+09 
-       << " (nsec) --- local (x,y) " << fLocalPos.X()*10. << ", " << fLocalPos.Y()*10 
-       << " (mm)" << endl;
+  cout << "  Layer[" << fLayerID << "] : time " << fTime * 1e+09
+       << " (nsec) --- local (x,y) " << fLocalPos.X() * 10. << ", "
+       << fLocalPos.Y() * 10 << " (mm)" << endl;
 }
 
 //_____________________________________________________________________________
 void A01DriftChamberHit::Reset()
 {
-/// Reset all accounted values.
+  /// Reset all accounted values.
 
   fLayerID = -1;
   fTime = 0.;
   fLocalPos = TVector3();
   fWorldPos = TVector3();
 }
-

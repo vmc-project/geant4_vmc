@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4RadiatorDescription.cxx
-/// \brief Implementation of the TG4RadiatorDescription class 
+/// \brief Implementation of the TG4RadiatorDescription class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -21,35 +21,36 @@ TG4RadiatorDescription::TG4RadiatorDescription(const G4String& volumeName)
     fXtrModel(""),
     fFoilNumber(0),
     fLayers(),
-    fStrawTube{"", 0., 0.}
+    fStrawTube{ "", 0., 0. }
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
-TG4RadiatorDescription::~TG4RadiatorDescription() 
+TG4RadiatorDescription::~TG4RadiatorDescription()
 {
-/// Destructor
+  /// Destructor
 }
 
 //_____________________________________________________________________________
-void TG4RadiatorDescription::SetLayer(const G4String& materialName,
-	                              G4double thickness, G4double fluctuation)
+void TG4RadiatorDescription::SetLayer(
+  const G4String& materialName, G4double thickness, G4double fluctuation)
 {
   fLayers.push_back(std::make_tuple(materialName, thickness, fluctuation));
 }
 
 //_____________________________________________________________________________
-void TG4RadiatorDescription::SetStrawTube(const G4String& materialName,
-	                            G4double wallThickness, G4double gasThickness)
+void TG4RadiatorDescription::SetStrawTube(
+  const G4String& materialName, G4double wallThickness, G4double gasThickness)
 {
   fStrawTube = std::make_tuple(materialName, wallThickness, gasThickness);
 }
 
 //_____________________________________________________________________________
-TG4RadiatorDescription::Component TG4RadiatorDescription::GetLayer(G4int i) const
+TG4RadiatorDescription::Component TG4RadiatorDescription::GetLayer(
+  G4int i) const
 {
-  if ( i >= G4int(fLayers.size()) ) {
+  if (i >= G4int(fLayers.size())) {
     TString text = "The layer ";
     text += i;
     text += " is not defined.";

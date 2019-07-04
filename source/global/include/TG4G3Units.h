@@ -11,14 +11,14 @@
 //-------------------------------------------------
 
 /// \file TG4G3Units.h
-/// \brief Definition of the TG4G3Units class 
+/// \brief Definition of the TG4G3Units class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include <globals.hh>
 
 /// \ingroup global
-/// \brief G3 default units of physical quantities; 
+/// \brief G3 default units of physical quantities;
 ///
 /// All physical quantities returned by VMC are expressed in these units.
 ///
@@ -26,82 +26,89 @@
 
 class TG4G3Units
 {
-  public:
-    virtual ~TG4G3Units();
+ public:
+  virtual ~TG4G3Units();
 
-    // static get methods
-    static G4double Length(); 
-    static G4double Angle(); 
-    static G4double Time(); 
-    static G4double Charge(); 
-    static G4double Energy(); 
-    static G4double Mass(); 
-    static G4double MassDensity(); 
-    static G4double AtomicWeight();     
-    static G4double Field(); 
-      
-  private:
-    TG4G3Units();      
+  // static get methods
+  static G4double Length();
+  static G4double Angle();
+  static G4double Time();
+  static G4double Charge();
+  static G4double Energy();
+  static G4double Mass();
+  static G4double MassDensity();
+  static G4double AtomicWeight();
+  static G4double Field();
 
-    // static data members  
-    static const G4double fgkLength;       ///< G3 length unit 
-    static const G4double fgkAngle;        ///< G3 angle unit 
-    static const G4double fgkTime;         ///< G3 time unit 
-    static const G4double fgkCharge;       ///< G3 charge unit  
-    static const G4double fgkEnergy;       ///< G3 energy unit  
-    static const G4double fgkMass;         ///< G3 mass unit
-    static const G4double fgkMassDensity;  ///< G3 mass density unit 
-    static const G4double fgkAtomicWeight; ///< G3 atomic weight unit  
-    static const G4double fgkField;        ///< G3 magnetic field unit 
-};     
+ private:
+  TG4G3Units();
+
+  // static data members
+  static const G4double fgkLength;       ///< G3 length unit
+  static const G4double fgkAngle;        ///< G3 angle unit
+  static const G4double fgkTime;         ///< G3 time unit
+  static const G4double fgkCharge;       ///< G3 charge unit
+  static const G4double fgkEnergy;       ///< G3 energy unit
+  static const G4double fgkMass;         ///< G3 mass unit
+  static const G4double fgkMassDensity;  ///< G3 mass density unit
+  static const G4double fgkAtomicWeight; ///< G3 atomic weight unit
+  static const G4double fgkField;        ///< G3 magnetic field unit
+};
 
 // inline methods
 
-inline G4double TG4G3Units::Length() { 
+inline G4double TG4G3Units::Length()
+{
   /// Return G3 length unit
-  return fgkLength; 
+  return fgkLength;
 }
 
-inline G4double TG4G3Units::Angle() { 
+inline G4double TG4G3Units::Angle()
+{
   /// Return G3 angle unit
-  return fgkAngle; 
+  return fgkAngle;
 }
 
-inline G4double TG4G3Units::Time() { 
+inline G4double TG4G3Units::Time()
+{
   /// Return G3 time unit
-  return fgkTime; 
+  return fgkTime;
 }
 
-inline G4double TG4G3Units::Charge() { 
+inline G4double TG4G3Units::Charge()
+{
   /// Return G3 chanrge unit
-  return fgkCharge; 
+  return fgkCharge;
 }
 
-inline G4double TG4G3Units::Energy() { 
+inline G4double TG4G3Units::Energy()
+{
   /// Return G3 energy unit
-  return fgkEnergy; 
+  return fgkEnergy;
 }
 
-inline G4double TG4G3Units::Mass() { 
+inline G4double TG4G3Units::Mass()
+{
   /// Return G3 mass unit
-  return fgkMass; 
+  return fgkMass;
 }
 
-inline G4double TG4G3Units::MassDensity()  
-{ 
+inline G4double TG4G3Units::MassDensity()
+{
   /// Return G3 mass density unit
-  return fgkMassDensity; 
+  return fgkMassDensity;
 }
 
-inline G4double TG4G3Units::AtomicWeight() { 
+inline G4double TG4G3Units::AtomicWeight()
+{
   /// Return G3 atomic weight unit
-  return fgkAtomicWeight; 
+  return fgkAtomicWeight;
 }
 
-inline G4double TG4G3Units::Field() 
-{ 
+inline G4double TG4G3Units::Field()
+{
   /// Return G3 magnetic field unit
-  return fgkField; 
+  return fgkField;
 }
 
-#endif //TG4_G3_UNITS_H
+#endif // TG4_G3_UNITS_H

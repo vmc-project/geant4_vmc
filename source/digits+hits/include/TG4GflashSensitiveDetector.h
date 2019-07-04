@@ -15,8 +15,8 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include "TG4SensitiveDetector.h"
 #include "G4VGFlashSensitiveDetector.hh"
+#include "TG4SensitiveDetector.h"
 
 #include <globals.hh>
 
@@ -30,21 +30,22 @@ class G4GFlashSpot;
 class TG4GflashSensitiveDetector : public TG4SensitiveDetector,
                                    public G4VGFlashSensitiveDetector
 {
-  public:
-    TG4GflashSensitiveDetector(G4String sdName, G4int mediumID);
-    virtual ~TG4GflashSensitiveDetector();
+ public:
+  TG4GflashSensitiveDetector(G4String sdName, G4int mediumID);
+  virtual ~TG4GflashSensitiveDetector();
 
-    // methods
-    using  TG4SensitiveDetector::ProcessHits;
-    virtual G4bool ProcessHits(G4GFlashSpot* gflashSpot, G4TouchableHistory*);
+  // methods
+  using TG4SensitiveDetector::ProcessHits;
+  virtual G4bool ProcessHits(G4GFlashSpot* gflashSpot, G4TouchableHistory*);
 
-  private:
-    /// Not implemented
-    TG4GflashSensitiveDetector();
-    /// Not implemented
-    TG4GflashSensitiveDetector(const TG4GflashSensitiveDetector& right);
-    /// Not implemented
-    TG4GflashSensitiveDetector& operator=(const TG4GflashSensitiveDetector &right);
+ private:
+  /// Not implemented
+  TG4GflashSensitiveDetector();
+  /// Not implemented
+  TG4GflashSensitiveDetector(const TG4GflashSensitiveDetector& right);
+  /// Not implemented
+  TG4GflashSensitiveDetector& operator=(
+    const TG4GflashSensitiveDetector& right);
 };
 
-#endif //TG4_GFLASH_SENSITIVE_DETECTOR_H
+#endif // TG4_GFLASH_SENSITIVE_DETECTOR_H

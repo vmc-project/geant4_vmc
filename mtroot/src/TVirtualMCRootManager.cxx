@@ -19,16 +19,16 @@
 // static data, methods
 //
 
-                               Bool_t  TVirtualMCRootManager::fgDebug = false;
-TMCThreadLocal TVirtualMCRootManager*  TVirtualMCRootManager::fgInstance = 0;
+Bool_t TVirtualMCRootManager::fgDebug = false;
+TMCThreadLocal TVirtualMCRootManager* TVirtualMCRootManager::fgInstance = 0;
 
 //_____________________________________________________________________________
 TVirtualMCRootManager* TVirtualMCRootManager::Instance()
 {
-/// \return The singleton instance.
+  /// \return The singleton instance.
 
   return fgInstance;
-}  
+}
 
 //
 // ctors, dtor
@@ -37,22 +37,21 @@ TVirtualMCRootManager* TVirtualMCRootManager::Instance()
 //_____________________________________________________________________________
 TVirtualMCRootManager::TVirtualMCRootManager()
 {
-/// Default constructor
+  /// Default constructor
 
-  if ( fgInstance ) {
-      Fatal("TVirtualMCRootManager",
-            "Attempt to create two instances of singleton.");
+  if (fgInstance) {
+    Fatal(
+      "TVirtualMCRootManager", "Attempt to create two instances of singleton.");
     return;
-  }  
+  }
 
   fgInstance = this;
 }
 
 //_____________________________________________________________________________
-TVirtualMCRootManager::~TVirtualMCRootManager() 
+TVirtualMCRootManager::~TVirtualMCRootManager()
 {
-/// Destructor
+  /// Destructor
 
   fgInstance = 0;
 }
-

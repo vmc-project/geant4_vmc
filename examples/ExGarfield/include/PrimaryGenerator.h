@@ -10,15 +10,15 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file ExGarfield/include/PrimaryGenerator.h 
-/// \brief Definition of the ExGarfield::PrimaryGenerator class 
+/// \file ExGarfield/include/PrimaryGenerator.h
+/// \brief Definition of the ExGarfield::PrimaryGenerator class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
+#include <TVector3.h>
 #include <TVirtualMCApplication.h>
-#include <TVector3.h> 
 
 class TVirtualMCStack;
 
@@ -39,65 +39,73 @@ class DetectorConstruction;
 
 class PrimaryGenerator : public TObject
 {
-  public:
-    PrimaryGenerator(TVirtualMCStack* stack); 
-    PrimaryGenerator(const PrimaryGenerator& origin,
-                     TVirtualMCStack* stack);
-    PrimaryGenerator();
-    virtual ~PrimaryGenerator();
+ public:
+  PrimaryGenerator(TVirtualMCStack* stack);
+  PrimaryGenerator(const PrimaryGenerator& origin, TVirtualMCStack* stack);
+  PrimaryGenerator();
+  virtual ~PrimaryGenerator();
 
-    // methods
-    virtual void GeneratePrimaries(const TVector3& worldSize);
+  // methods
+  virtual void GeneratePrimaries(const TVector3& worldSize);
 
-    // set methods
-    void  SetNofPrimaries(Int_t nofPrimaries);
-    void  SetVertexPosition(TVector3 position);
-    void  SetVertexDirection(TVector3 direction);
+  // set methods
+  void SetNofPrimaries(Int_t nofPrimaries);
+  void SetVertexPosition(TVector3 position);
+  void SetVertexDirection(TVector3 direction);
 
-    // get methods
-    TVector3 GetVertexPosition() const;
-    TVector3 GetVertexDirection() const;
- 
-  private:
-    // methods
-    void GenerateOnePrimary(const TVector3& origin);
+  // get methods
+  TVector3 GetVertexPosition() const;
+  TVector3 GetVertexDirection() const;
 
-    // data members
-    TVirtualMCStack*  fStack;   ///< VMC stack
-    Int_t     fNofPrimaries;    ///< Number of primary particles
-    TVector3  fVertexPosition;  ///< Vertex position
-    TVector3  fVertexDirection; ///< Vertex direction
+ private:
+  // methods
+  void GenerateOnePrimary(const TVector3& origin);
 
-  ClassDef(PrimaryGenerator,1)  //PrimaryGenerator
+  // data members
+  TVirtualMCStack* fStack;   ///< VMC stack
+  Int_t fNofPrimaries;       ///< Number of primary particles
+  TVector3 fVertexPosition;  ///< Vertex position
+  TVector3 fVertexDirection; ///< Vertex direction
+
+  ClassDef(PrimaryGenerator, 1) // PrimaryGenerator
 };
 
 // inline functions
 
 /// Set the number of particles to be generated
 /// \param nofPrimaries The number of particles to be generated
-inline void  PrimaryGenerator::SetNofPrimaries(Int_t nofPrimaries)
-{ fNofPrimaries = nofPrimaries; }
+inline void PrimaryGenerator::SetNofPrimaries(Int_t nofPrimaries)
+{
+  fNofPrimaries = nofPrimaries;
+}
 
 /// Set the Vertex position
 /// \param position The Vertex position
-inline void  PrimaryGenerator::SetVertexPosition(TVector3 position)
-{ fVertexPosition = position; }
+inline void PrimaryGenerator::SetVertexPosition(TVector3 position)
+{
+  fVertexPosition = position;
+}
 
 /// Set the Vertex direction
 /// \param direction The Vertex direction
-inline void  PrimaryGenerator::SetVertexDirection(TVector3 direction)
-{ fVertexDirection = direction; }
+inline void PrimaryGenerator::SetVertexDirection(TVector3 direction)
+{
+  fVertexDirection = direction;
+}
 
 /// Return the Vertex position
 inline TVector3 PrimaryGenerator::GetVertexPosition() const
-{ return fVertexPosition; }
+{
+  return fVertexPosition;
+}
 
 /// Return the Vertex direction
 inline TVector3 PrimaryGenerator::GetVertexDirection() const
-{ return fVertexDirection; }
-
+{
+  return fVertexDirection;
 }
-}
 
-#endif //GARFIELD_PRIMARY_GENERATOR_H
+} // namespace ExGarfield
+} // namespace VMC
 
+#endif // GARFIELD_PRIMARY_GENERATOR_H

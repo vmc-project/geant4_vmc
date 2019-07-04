@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file  TG4SDServices.h
-/// \brief Definition of the  TG4SDServices class 
+/// \brief Definition of the  TG4SDServices class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -37,78 +37,80 @@ class G4VSensitiveDetector;
 
 class TG4SDServices
 {
-  public:
-    TG4SDServices();
-    virtual ~TG4SDServices();
+ public:
+  TG4SDServices();
+  virtual ~TG4SDServices();
 
-    // static methods
-    static TG4SDServices* Instance();
+  // static methods
+  static TG4SDServices* Instance();
 
-    // methods
-    void MapVolume(G4LogicalVolume* lv, G4int id);
-    void PrintStatistics(G4bool open, G4bool close) const;
-    void PrintVolNameToIdMap() const;
-    void PrintVolIdToLVMap() const;
-    void PrintSensitiveVolumes() const;
+  // methods
+  void MapVolume(G4LogicalVolume* lv, G4int id);
+  void PrintStatistics(G4bool open, G4bool close) const;
+  void PrintVolNameToIdMap() const;
+  void PrintVolIdToLVMap() const;
+  void PrintSensitiveVolumes() const;
 
-    // set methods
-    void SetIsStopRun(G4bool stopRun);
+  // set methods
+  void SetIsStopRun(G4bool stopRun);
 
-    // get methods
-          // volume IDs conversions
-    G4int GetVolumeID(const G4String& volumeName) const;
-    G4int GetVolumeID(G4LogicalVolume* volume) const;
-    G4int GetMediumID(G4LogicalVolume* volume) const;
-    G4String         GetVolumeName(G4int volumeId) const;
-    G4LogicalVolume* GetLogicalVolume(G4int volumeId, G4bool warn = true) const;   
-    G4int            GetMediumId(G4int volumeId) const;
-    G4bool  GetIsStopRun() const; 
-          // SDs
-    Int_t NofSensitiveDetectors() const; 
-    TG4SensitiveDetector* GetSensitiveDetector(G4VSensitiveDetector* sd) const;  
+  // get methods
+  // volume IDs conversions
+  G4int GetVolumeID(const G4String& volumeName) const;
+  G4int GetVolumeID(G4LogicalVolume* volume) const;
+  G4int GetMediumID(G4LogicalVolume* volume) const;
+  G4String GetVolumeName(G4int volumeId) const;
+  G4LogicalVolume* GetLogicalVolume(G4int volumeId, G4bool warn = true) const;
+  G4int GetMediumId(G4int volumeId) const;
+  G4bool GetIsStopRun() const;
+  // SDs
+  Int_t NofSensitiveDetectors() const;
+  TG4SensitiveDetector* GetSensitiveDetector(G4VSensitiveDetector* sd) const;
 
-          // Daughters
-    Int_t NofVolDaughters(const char* volName) const;
-    const char*  VolDaughterName(const char* volName, Int_t i) const;
-    Int_t        VolDaughterCopyNo(const char* volName, Int_t i) const;
+  // Daughters
+  Int_t NofVolDaughters(const char* volName) const;
+  const char* VolDaughterName(const char* volName, Int_t i) const;
+  Int_t VolDaughterCopyNo(const char* volName, Int_t i) const;
 
-  private:
-    /// Not implemented
-    TG4SDServices(const TG4SDServices& right);
-    /// Not implemented
-    TG4SDServices& operator=(const TG4SDServices& right);
+ private:
+  /// Not implemented
+  TG4SDServices(const TG4SDServices& right);
+  /// Not implemented
+  TG4SDServices& operator=(const TG4SDServices& right);
 
-    // static data members
-    static TG4SDServices* fgInstance; ///< this instance
+  // static data members
+  static TG4SDServices* fgInstance; ///< this instance
 
-    G4bool  fIsStopRun; ///< info about run stopping by user  
+  G4bool fIsStopRun; ///< info about run stopping by user
 
-    /// map volume name -> volume id 
-    std::map<G4String, G4int> fVolNameToIdMap;
+  /// map volume name -> volume id
+  std::map<G4String, G4int> fVolNameToIdMap;
 
-    /// map volume id ->  logical volume
-    std::map<G4int, G4LogicalVolume*>  fVolIdToLVMap;
+  /// map volume id ->  logical volume
+  std::map<G4int, G4LogicalVolume*> fVolIdToLVMap;
 
-    /// map logical volume -> volume id 
-    std::map<G4LogicalVolume*, G4int>  fLVToVolIdMap;
+  /// map logical volume -> volume id
+  std::map<G4LogicalVolume*, G4int> fLVToVolIdMap;
 };
 
 // inline methods
 
-inline TG4SDServices* TG4SDServices::Instance() { 
+inline TG4SDServices* TG4SDServices::Instance()
+{
   /// Returns this instance.
-  return fgInstance; 
+  return fgInstance;
 }
 
-inline void TG4SDServices::SetIsStopRun(G4bool isStopRun) { 
+inline void TG4SDServices::SetIsStopRun(G4bool isStopRun)
+{
   /// Sets flag for notifying about stopping run by a user.
-  fIsStopRun = isStopRun; 
+  fIsStopRun = isStopRun;
 }
 
-inline G4bool TG4SDServices::GetIsStopRun() const { 
+inline G4bool TG4SDServices::GetIsStopRun() const
+{
   /// Returns flag for notifying about stopping run by a user.
-  return fIsStopRun; 
+  return fIsStopRun;
 }
 
-#endif //TG4_SD_SERVICES_H
-
+#endif // TG4_SD_SERVICES_H

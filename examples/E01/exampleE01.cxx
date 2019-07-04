@@ -11,7 +11,7 @@
 /// \brief The Geant4 VMC example E01 application executable
 ///
 /// The Geant4 VMC application executable
-/// with explicitely instantiated TGeant3 or TGeant4 and linked 
+/// with explicitely instantiated TGeant3 or TGeant4 and linked
 /// with all libraries.
 ///
 /// \date 26/02/2014
@@ -28,41 +28,39 @@
 #include "TGeant3TGeo.h"
 #endif
 
-#include "TThread.h"
 #include "TInterpreter.h"
+#include "TThread.h"
 
 /// Application main program
 int main(int argc, char** argv)
 {
   // Initialize Root threading.
-  // (Multi-threading is triggered automatically if Geant4 was built 
+  // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
-   TThread::Initialize();
-   gInterpreter->SetProcessLineLock(false);
+  TThread::Initialize();
+  gInterpreter->SetProcessLineLock(false);
 #endif
 
   // Create MC application
-  Ex01MCApplication* appl 
-    =  new Ex01MCApplication("ExampleE01",
-                             "The exampleE01 MC application");
+  Ex01MCApplication* appl =
+    new Ex01MCApplication("ExampleE01", "The exampleE01 MC application");
 
 #ifdef USE_GEANT4
-  // RunConfiguration for Geant4 
-  TG4RunConfiguration* runConfiguration 
-    = new TG4RunConfiguration("geomRootToGeant4");
+  // RunConfiguration for Geant4
+  TG4RunConfiguration* runConfiguration =
+    new TG4RunConfiguration("geomRootToGeant4");
 
   // TGeant4
-  TGeant4* geant4
-    = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration,
-                  argc, argv);
+  TGeant4* geant4 = new TGeant4(
+    "TGeant4", "The Geant4 Monte Carlo", runConfiguration, argc, argv);
 
   // Customise Geant4 setting
   // (verbose level, global range cut, ..)
   // geant4->ProcessGeantMacro("g4config.in");
-  geant4->ProcessGeantCommand("/mcVerbose/all 1");  
+  geant4->ProcessGeantCommand("/mcVerbose/all 1");
 #endif
-  
+
 #ifdef USE_GEANT3
   TGeant3* geant3 = new TGeant3TGeo("C++ Interface to Geant3");
   geant3->SetHADR(0);
@@ -73,4 +71,4 @@ int main(int argc, char** argv)
   appl->RunMC(1);
 
   delete appl;
-}  
+}
