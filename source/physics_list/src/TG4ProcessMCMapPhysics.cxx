@@ -25,22 +25,23 @@
 #include <G4Version.hh>
 
 //_____________________________________________________________________________
-TG4ProcessMCMapPhysics::TG4ProcessMCMapPhysics(const G4String& name)
+TG4ProcessMCMapPhysics::TG4ProcessMCMapPhysics(
+  G4bool isBiasing, const G4String& name)
   : TG4VPhysicsConstructor(name)
 {
   /// Standard constructor
 
-  FillMap();
+  FillMap(isBiasing);
 }
 
 //_____________________________________________________________________________
 TG4ProcessMCMapPhysics::TG4ProcessMCMapPhysics(
-  G4int theVerboseLevel, const G4String& name)
+  G4bool isBiasing, G4int theVerboseLevel, const G4String& name)
   : TG4VPhysicsConstructor(name, theVerboseLevel)
 {
   /// Standard constructor
 
-  FillMap();
+  FillMap(isBiasing);
 }
 
 //_____________________________________________________________________________
@@ -54,11 +55,12 @@ TG4ProcessMCMapPhysics::~TG4ProcessMCMapPhysics()
 //
 
 //_____________________________________________________________________________
-void TG4ProcessMCMapPhysics::FillMap()
+void TG4ProcessMCMapPhysics::FillMap(G4bool isBiasing)
 {
   /// Fill the process codes map with known G4 process names
 
   TG4ProcessMCMap* mcMap = TG4ProcessMCMap::Instance();
+  mcMap->SetIsBiasing(isBiasing);
 
   mcMap->Add("msc", kPMultipleScattering);
   mcMap->Add("muMsc", kPMultipleScattering);

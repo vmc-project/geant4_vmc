@@ -81,7 +81,7 @@ G4bool TG4SpecialPhysicsList::IsAvailableSelection(const G4String& selection)
 //
 
 //_____________________________________________________________________________
-TG4SpecialPhysicsList::TG4SpecialPhysicsList(const G4String& selection)
+TG4SpecialPhysicsList::TG4SpecialPhysicsList(const G4String& selection, G4bool isBiasing)
   : G4VModularPhysicsList(),
     TG4Verbose("specialPhysicsList"),
     fStackPopperPhysics(0),
@@ -99,7 +99,7 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList(const G4String& selection)
   }
   fgInstance = this;
 
-  Configure(selection);
+  Configure(selection, isBiasing);
 
   SetVerboseLevel(TG4VVerbose::VerboseLevel());
 }
@@ -117,7 +117,7 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList()
 
   G4cout << "TG4SpecialPhysicsList::TG4SpecialPhysicsList" << G4endl;
 
-  Configure("");
+  Configure("", false);
 
   SetVerboseLevel(TG4VVerbose::VerboseLevel());
 }
@@ -138,7 +138,7 @@ TG4SpecialPhysicsList::~TG4SpecialPhysicsList()
 //
 
 //_____________________________________________________________________________
-void TG4SpecialPhysicsList::Configure(const G4String& selection)
+void TG4SpecialPhysicsList::Configure(const G4String& selection, G4bool isBiasing)
 {
   /// Create the selected physics constructors
   /// and registeres them in the modular physics list.
@@ -146,7 +146,7 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
   Int_t tg4VerboseLevel = TG4VVerbose::VerboseLevel();
 
   RegisterPhysics(new TG4TransitionRadiationPhysics(tg4VerboseLevel));
-  RegisterPhysics(new TG4ProcessControlMapPhysics(tg4VerboseLevel));
+  RegisterPhysics(new TG4ProcessControlMapPhysics(isBiasing, tg4VerboseLevel));
 
   G4int itoken = 0;
   TString token = TG4Globals::GetToken(itoken, selection);
@@ -178,7 +178,7 @@ void TG4SpecialPhysicsList::Configure(const G4String& selection)
   }
   RegisterPhysics(new TG4UserParticlesPhysics(tg4VerboseLevel));
   RegisterPhysics(new TG4ExtDecayerPhysics(tg4VerboseLevel));
-  RegisterPhysics(new TG4ProcessMCMapPhysics(tg4VerboseLevel));
+  RegisterPhysics(new TG4ProcessMCMapPhysics(isBiasing, tg4VerboseLevel));
 
   fEmModelPhysics = new TG4EmModelPhysics(tg4VerboseLevel);
   RegisterPhysics(fEmModelPhysics);

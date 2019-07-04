@@ -37,7 +37,7 @@ class TG4VUserFastSimulation;
 class TG4SpecialPhysicsList : public G4VModularPhysicsList, public TG4Verbose
 {
  public:
-  TG4SpecialPhysicsList(const G4String& selection);
+  TG4SpecialPhysicsList(const G4String& selection, G4bool isBiasing = false);
   TG4SpecialPhysicsList();
   virtual ~TG4SpecialPhysicsList();
 
@@ -85,7 +85,7 @@ class TG4SpecialPhysicsList : public G4VModularPhysicsList, public TG4Verbose
   TG4SpecialPhysicsList& operator=(const TG4SpecialPhysicsList& right);
 
   // methods
-  void Configure(const G4String& selection);
+  void Configure(const G4String& selection, G4bool isBiasing);
 
   // static data members
   static G4ThreadLocal TG4SpecialPhysicsList* fgInstance; ///< this instance

@@ -54,6 +54,7 @@ class TG4ProcessControlMap
   G4bool Add(G4String processName, TG4G3Control second);
   void PrintAll() const;
   void Clear();
+  void SetIsBiasing(G4bool value);
 
   // get methods
   TG4G3Control GetControl(const G4VProcess* process);
@@ -75,6 +76,7 @@ class TG4ProcessControlMap
 
   // data members
   Map fMap; ///< map container
+  G4bool fIsBiasing; ///< info whether biasing is activated
 };
 
 // inline methods
@@ -83,6 +85,12 @@ inline TG4ProcessControlMap* TG4ProcessControlMap::Instance()
 {
   /// Return this instance
   return fgInstance;
+}
+
+inline void TG4ProcessControlMap::SetIsBiasing(G4bool value)
+{
+  /// Set info whether biasing is activated
+  fIsBiasing = value;
 }
 
 #endif // TG4_PROCESS_CONTROL_MAP_H

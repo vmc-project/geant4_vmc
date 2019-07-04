@@ -54,7 +54,7 @@ ProposeFinalStateBiasingOperation( const G4Track* , const G4BiasingProcessInterf
          callingProcess->GetWrappedProcess()->GetProcessName() == "neutronInelastic" || 
          callingProcess->GetWrappedProcess()->GetProcessName() == "pi+Inelastic"     || 
          callingProcess->GetWrappedProcess()->GetProcessName() == "pi-Inelastic" ) ) {
-    G4cout << "In TG4BiasingOperator: Returning " << fBiasingOperation << G4endl;
+    // G4cout << "In TG4BiasingOperator: Returning " << fBiasingOperation << G4endl;
     return fBiasingOperation;
   } else {  
     // G4cout << "In TG4BiasingOperator: Returning 0 " << G4endl;

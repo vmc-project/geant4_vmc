@@ -23,7 +23,7 @@
 TG4ProcessControlMap* TG4ProcessControlMap::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4ProcessControlMap::TG4ProcessControlMap() : fMap()
+TG4ProcessControlMap::TG4ProcessControlMap() : fMap(), fIsBiasing(false)
 {
   /// Default constructor
 
@@ -81,9 +81,10 @@ G4bool TG4ProcessControlMap::Add(G4String processName, TG4G3Control control)
     // insert into map
     // only in case it is not yet here
     fMap[processName] = control;
-    // when biasing then process name is wrapped
-    // TO DO: add only if biasing is activated
-    fMap[G4String("biasWrapper(") + processName + G4String(")")] = control;
+    if (fIsBiasing) {
+      // when biasing then process name is wrapped
+      fMap[G4String("biasWrapper(") + processName + G4String(")")] = control;
+    }
     return true;
   }
   return false;

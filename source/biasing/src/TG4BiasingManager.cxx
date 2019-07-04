@@ -91,19 +91,15 @@ void TG4BiasingManager::CreateBiasingOperator()
     G4String materialName = lv->GetMaterial()->GetName();
 
     if (VerboseLevel() > 2) {
-      G4cout << "Processing volume " << lv->GetName() << ", material "
+      G4cout << "Biasing manager: processing volume " << lv->GetName() << ", material "
              << materialName << G4endl;
     }
 
     // Skip volumes with materials which are not in the regions list
     if (!modelConfiguration->HasRegion(materialName)) { 
       if (VerboseLevel() > 2) {
-        G4cout << "Material " << materialName << " is not in selection"
+        G4cout << "   Material " << materialName << " is not in selection"
                << G4endl;
-        G4cout << "modelConfiguration->GetRegionsMedia(): " 
-               <<  modelConfiguration->GetRegionsMedia() << G4endl;              
-        G4cout << "modelConfiguration->GetRegions(): " 
-               <<  modelConfiguration->GetRegions() << G4endl;              
       }
       continue;
     }
