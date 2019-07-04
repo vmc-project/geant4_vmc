@@ -9,6 +9,14 @@
      
 Tags (history):
 ===============
+  04/07/2019
+  v3-6-p4:
+    Special patch release, no fixes wrt the previous tag.
+    All packages:
+      Added script and configuration file for clang-format and applied formatting
+      to all  .h, .icc, .cxx files in examples, g4root, mtroot, source
+      (except files for Doxygen)
+
   09/04/2019
   v3-6-p3:
     Patch release, including following fixes:
