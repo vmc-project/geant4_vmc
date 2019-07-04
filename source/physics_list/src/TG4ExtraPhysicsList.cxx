@@ -15,6 +15,7 @@
 #include "TG4ExtraPhysicsList.h"
 
 #include <G4EmExtraPhysics.hh>
+#include <G4GenericBiasingPhysics.hh>
 #include <G4OpticalPhysics.hh>
 #include <G4RadioactiveDecayPhysics.hh>
 
@@ -42,7 +43,7 @@ G4String TG4ExtraPhysicsList::AvailableSelections()
   /// Return list of all available selections
 
   G4String selections;
-  selections += "extra optical radDecay ";
+  selections += "biasing extra optical radDecay ";
 
   return selections;
 }
@@ -91,6 +92,17 @@ void TG4ExtraPhysicsList::Configure(const G4String& selection)
 {
   /// Create the selected physics constructors
   /// and registeres them in the modular physics list.
+
+  // Generic biasing physics
+  if (selection.contains("biasing")) {
+    G4GenericBiasingPhysics* biasingPhysics = new G4GenericBiasingPhysics;
+    // we may need to make this configurable later
+    biasingPhysics->Bias( "proton" );
+    biasingPhysics->Bias( "neutron" );
+    biasingPhysics->Bias( "pi+" );
+    biasingPhysics->Bias( "pi-" );
+    RegisterPhysics(biasingPhysics);
+  }
 
   // Extra electromagnetic physics
   if (selection.contains("extra")) {

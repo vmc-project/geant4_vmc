@@ -24,22 +24,23 @@
 #include <G4Version.hh>
 
 //_____________________________________________________________________________
-TG4ProcessControlMapPhysics::TG4ProcessControlMapPhysics(const G4String& name)
+TG4ProcessControlMapPhysics::TG4ProcessControlMapPhysics(
+  G4bool isBiasing, const G4String& name)
   : TG4VPhysicsConstructor(name)
 {
   /// Standard constructor
 
-  FillMap();
+  FillMap(isBiasing);
 }
 
 //_____________________________________________________________________________
 TG4ProcessControlMapPhysics::TG4ProcessControlMapPhysics(
-  G4int theVerboseLevel, const G4String& name)
+  G4bool isBiasing, G4int theVerboseLevel, const G4String& name)
   : TG4VPhysicsConstructor(name, theVerboseLevel)
 {
   /// Standard constructor
 
-  FillMap();
+  FillMap(isBiasing);
 }
 
 //_____________________________________________________________________________
@@ -53,11 +54,12 @@ TG4ProcessControlMapPhysics::~TG4ProcessControlMapPhysics()
 //
 
 //_____________________________________________________________________________
-void TG4ProcessControlMapPhysics::FillMap()
+void TG4ProcessControlMapPhysics::FillMap(G4bool isBiasing)
 {
   /// Fill the process control map with known G4 process names
 
   TG4ProcessControlMap* controlMap = TG4ProcessControlMap::Instance();
+  controlMap->SetIsBiasing(isBiasing);
 
   controlMap->Add("msc", kMULS);
   controlMap->Add("muMsc", kMULS);
@@ -212,6 +214,8 @@ void TG4ProcessControlMapPhysics::FillMap()
 
   controlMap->Add("SynRad", kSYNC);
   controlMap->Add("CHIPS_SynchrotronRadiation", kSYNC);
+
+  controlMap->Add("biasWrapper(0)", kNoG3Controls);
 }
 
 //
@@ -257,7 +261,7 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
           processName != "GammaXTRadiator" &&
           processName != "StrawXTRadiator" &&
           processName != "RegularXTRadiator" &&
-          processName != "G4MaxTimeCuts") {
+          processName != "G4MaxTimeCuts" && processName != "biasWrapper(0)") {
 
         G4String text = "Unknown process control for ";
         text += processName;

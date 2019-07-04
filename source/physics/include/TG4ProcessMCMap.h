@@ -55,6 +55,7 @@ class TG4ProcessMCMap
   G4bool Add(G4String processName, TMCProcess second);
   void PrintAll() const;
   void Clear();
+  void SetIsBiasing(G4bool value);
 
   // get methods
   TMCProcess GetMCProcess(const G4VProcess* process) const;
@@ -77,6 +78,7 @@ class TG4ProcessMCMap
 
   // data members
   Map fMap; ///< map container
+  G4bool fIsBiasing; ///< info whether biasing is activated
 };
 
 // inline methods
@@ -85,6 +87,12 @@ inline TG4ProcessMCMap* TG4ProcessMCMap::Instance()
 {
   /// Return this instance
   return fgInstance;
+}
+
+inline void TG4ProcessMCMap::SetIsBiasing(G4bool value)
+{
+  /// Set info whether biasing is activated
+  fIsBiasing = value;
 }
 
 #endif // TG4_PROCESS_MC_MAP_H

@@ -28,9 +28,10 @@ class G4Decay;
 class TG4ProcessMCMapPhysics : public TG4VPhysicsConstructor
 {
  public:
-  TG4ProcessMCMapPhysics(const G4String& name = "ProcessMCMap");
   TG4ProcessMCMapPhysics(
-    G4int theVerboseLevel, const G4String& name = "ProcessMCMap");
+    G4bool isBiasing, const G4String& name = "ProcessMCMap");
+  TG4ProcessMCMapPhysics(
+    G4bool isBiasing, G4int theVerboseLevel, const G4String& name = "ProcessMCMap");
   virtual ~TG4ProcessMCMapPhysics();
 
  protected:
@@ -45,7 +46,7 @@ class TG4ProcessMCMapPhysics : public TG4VPhysicsConstructor
   /// Not implemented
   TG4ProcessMCMapPhysics& operator=(const TG4ProcessMCMapPhysics& right);
 
-  void FillMap();
+  void FillMap(G4bool isBiasing);
 };
 
 #endif // TG4_PROCESS_MAP_PHYSICS_H

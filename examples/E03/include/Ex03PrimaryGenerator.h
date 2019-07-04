@@ -42,7 +42,8 @@ class Ex03PrimaryGenerator : public TObject
     kUser,      ///< user defined particle and ion
     kUserDecay, ///< particle with user defined decay (K0Short)
     kAnti,      ///< light anti-nuclei (with Geant4 only)
-    kTestField  ///< mu+ with a suitable energy to test magnetic field
+    kTestField, ///< mu+ with a suitable energy to test magnetic field
+    kPion       ///< pi- ith a suitable energy to test biasing
   };
 
  public:
@@ -70,6 +71,7 @@ class Ex03PrimaryGenerator : public TObject
   void GeneratePrimary3(const TVector3& origin);
   void GeneratePrimary4(const TVector3& origin);
   void GeneratePrimary5(const TVector3& origin);
+  void GeneratePrimary6(const TVector3& origin);
 
   // data members
   TVirtualMCStack* fStack; ///< VMC stack
