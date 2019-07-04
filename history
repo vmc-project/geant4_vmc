@@ -10,6 +10,13 @@
 Tags (history):
 ===============
   04/07/2019
+  v3-6-p4-inclxx-biasing:
+    Special release with added special biasing which allows to activate INCLXX hadronic
+    model in selected media.
+    - Added biasing category in source with new classes TG4BiasingManager, TG4BiasingOperation, TG4BiasingOperator (the last two provided by A. Ribon, CERN)
+    - Added new test in E03: test_E03_7.C, with g4Config6.C and g4tgeoConfig6.C and extended E03PrimaryGenerator class with kPion option
+
+  04/07/2019
   v3-6-p4:
     Special patch release, no fixes wrt the previous tag.
     All packages:
