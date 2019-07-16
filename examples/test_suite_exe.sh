@@ -189,6 +189,10 @@ do
         mkdir -p $OUT
       fi
 
+      if [ "x${BUILDDIR}" != "x" ]; then
+        EXEDIR=${BUILDDIR}/examples/$EXAMPLE/$OPTION/
+      fi
+
       cd $CURDIR/$EXAMPLE
       start_test "... Example $EXAMPLE/$OPTION"
 
