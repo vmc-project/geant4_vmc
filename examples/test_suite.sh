@@ -182,7 +182,7 @@ fi
 # Set path to shared libraries if --builddir is provided via the option
 if [ "x${BUILDDIR}" != "x" ]; then
   LIBS_FROM_BUILDDIR=$(find ${BUILDDIR} -iname "*.so" -exec dirname {} \; | tr '\r\n' ':')
-  LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${LIBS_FROM_BUILDDIR}
+  export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${LIBS_FROM_BUILDDIR}
 fi
 
 # Create tmp dir from scratch
