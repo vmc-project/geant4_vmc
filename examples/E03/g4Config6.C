@@ -22,7 +22,7 @@ void Config()
 
   // Run configuration with added biasing physics
   TG4RunConfiguration* runConfiguration
-     = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT+biasing");
+     = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT_EMV+biasing");
 
   // TGeant4
   TGeant4* geant4

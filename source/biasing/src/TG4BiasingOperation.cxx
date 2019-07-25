@@ -13,7 +13,6 @@
 /// \author Alberto Ribon, CERN
 
 #include "TG4BiasingOperation.h"
-
 #include "G4BiasingProcessInterface.hh"
 #include "G4VParticleChange.hh"
 #include "G4ProtonInelasticProcess.hh"
@@ -40,6 +39,8 @@ TG4BiasingOperation::TG4BiasingOperation( G4String name ) : G4VBiasingOperation(
   fPionMinusInelasticProcess = new G4PionMinusInelasticProcess;
 
   // Set the energy ranges
+  const G4double minPreco = 0.0;
+  const G4double maxPreco = 2.0 * CLHEP::MeV;
   const G4double maxBERT = 12.0 * CLHEP::GeV;
   const G4double minINCLXX = 1.0 * CLHEP::MeV;
   const G4double minFTFP = 3.0 * CLHEP::GeV;
@@ -48,40 +49,47 @@ TG4BiasingOperation::TG4BiasingOperation( G4String name ) : G4VBiasingOperation(
 
   // Create the hadronic models (to replace FTFP_BERT with "FTFP_INCLXX", 
   // keeping the same energy ranges for the transition between models).
+  // Notice that it is better to create the models here from scratch,
+  // instead of reusing the existing ones, because we might pick up the
+  // existing ones associated to the wrong particles...
   // --- FTFP model ---
-  G4HadronicInteraction* p = G4HadronicInteractionRegistry::Instance()->FindModel( "FTFP" );
-  G4TheoFSGenerator* theHighEnergyModel = static_cast< G4TheoFSGenerator* >( p );
-  if ( ! theHighEnergyModel ) {
-    G4FTFModel* theStringModel = new G4FTFModel;
-    G4LundStringFragmentation* theLund = new G4LundStringFragmentation;
-    G4ExcitedStringDecay* theStringDecay = new G4ExcitedStringDecay( theLund );
-    theStringModel->SetFragmentationModel( theStringDecay );
-    G4GeneratorPrecompoundInterface* thePrecoInterface = new G4GeneratorPrecompoundInterface;
-    theHighEnergyModel = new G4TheoFSGenerator( "FTFP" );
-    theHighEnergyModel->SetHighEnergyGenerator( theStringModel );
-    theHighEnergyModel->SetTransport( thePrecoInterface );
-    theHighEnergyModel->SetMinEnergy( minFTFP );
-    theHighEnergyModel->SetMaxEnergy( maxFTFP );
-  }
+  G4FTFModel* theStringModel = new G4FTFModel;
+  G4LundStringFragmentation* theLund = new G4LundStringFragmentation;
+  G4ExcitedStringDecay* theStringDecay = new G4ExcitedStringDecay( theLund );
+  theStringModel->SetFragmentationModel( theStringDecay );
+  G4GeneratorPrecompoundInterface* thePrecoInterface = new G4GeneratorPrecompoundInterface;
+  G4TheoFSGenerator* theHighEnergyModel = new G4TheoFSGenerator( "FTFP" );
+  theHighEnergyModel->SetHighEnergyGenerator( theStringModel );
+  theHighEnergyModel->SetTransport( thePrecoInterface );
+  theHighEnergyModel->SetMinEnergy( minFTFP );
+  theHighEnergyModel->SetMaxEnergy( maxFTFP );
+  // Preco : create a new model to be used only for INCLXX for nucleons
+  G4VPreCompoundModel* thePreCompoundModel = new G4PreCompoundModel;
+  thePreCompoundModel->SetMinEnergy( minPreco );
+  thePreCompoundModel->SetMaxEnergy( maxPreco );  
+  // --- Preco ---
   // --- INCLXX model ---
-  p = G4HadronicInteractionRegistry::Instance()->FindModel( "PRECO" );
-  G4VPreCompoundModel* thePreCompoundModel = static_cast< G4VPreCompoundModel* >( p );
-  if ( ! thePreCompoundModel ) {
-    thePreCompoundModel = new G4PreCompoundModel;
-  }
+  // The instance for nucleons:
   G4INCLXXInterface* theInclxxModel = new G4INCLXXInterface( thePreCompoundModel );
   theInclxxModel->SetMinEnergy( minINCLXX );
   theInclxxModel->SetMaxEnergy( maxBERT );  // Use the same as for Bertini
+  // The instance for pions:
+  G4INCLXXInterface* theInclxxModel_forPions = new G4INCLXXInterface;
+  theInclxxModel_forPions->SetMinEnergy( minPreco );
+  theInclxxModel_forPions->SetMaxEnergy( maxBERT );  // Use the same as for Bertini
 
   // Register the models
   fProtonInelasticProcess->RegisterMe( theHighEnergyModel );
   fProtonInelasticProcess->RegisterMe( theInclxxModel );
+  fProtonInelasticProcess->RegisterMe( thePreCompoundModel );
   fNeutronInelasticProcess->RegisterMe( theHighEnergyModel );
   fNeutronInelasticProcess->RegisterMe( theInclxxModel );
+  fNeutronInelasticProcess->RegisterMe( thePreCompoundModel );
   fPionPlusInelasticProcess->RegisterMe( theHighEnergyModel );
-  fPionPlusInelasticProcess->RegisterMe( theInclxxModel );
+  fPionPlusInelasticProcess->RegisterMe( theInclxxModel_forPions );
   fPionMinusInelasticProcess->RegisterMe( theHighEnergyModel );
-  fPionMinusInelasticProcess->RegisterMe( theInclxxModel );
+  fPionMinusInelasticProcess->RegisterMe( theInclxxModel_forPions );
+
 }
 
 
