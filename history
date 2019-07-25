@@ -9,6 +9,15 @@
      
 Tags (history):
 ===============
+  25/07/2019
+  v3-6-p4-inclxx-biasing-p1:
+    - Fix in TG4BiasingOperation (by Alberto Ribon, CERN):
+      Added precompound model for low energy range; this fixes FatalException (had005)
+        ===> GetHadronicInteraction: No Model found
+      observed in ALICE tests 
+    - Added _EMV option to physics list in E03/g4Config6.C to test the same PL as used 
+      by ALICE.
+
   04/07/2019
   v3-6-p4-inclxx-biasing:
     Special release with added special biasing which allows to activate INCLXX hadronic
