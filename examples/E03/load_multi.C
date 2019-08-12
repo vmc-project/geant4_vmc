@@ -11,16 +11,16 @@
 /// \file E03/run_g4.C
 /// \brief Macro for loading libraries to run ExamplE03 with Geant4.
 
-#include "../macro/g3g4libs.C"
+#include "../macro/g3libs.C"
+#include "../macro/g4libs.C"
 
 void load_multi()
 {
-  // Load Geant4 + VMC libraries
+  // Load Geant3 and Geant4 + VMC libraries
   g3libs();
   g4libs();
 
   // Load this example library
-  gSystem->Load("libmtroot");
   gSystem->Load("libvmc_E03c");
 
   // Load library with a user run configuration

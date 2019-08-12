@@ -92,8 +92,7 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fIsUserMaxStep(false),
     fIsMaxStepInLowDensityMaterials(true),
     fLimitDensity(fgDefaultLimitDensity),
-    fMaxStepInLowDensityMaterials(fgDefaultMaxStep),
-    fUseExternalGeometryConstruction(false)
+    fMaxStepInLowDensityMaterials(fgDefaultMaxStep)
 
 {
   /// Standard constructor
@@ -288,7 +287,7 @@ void TG4GeometryManager::ConstructG4Geometry()
   }
 
   // VMC application construct geometry
-  if (fUserGeometry == "RootToGeant4" && !fUseExternalGeometryConstruction) {
+  if (fUserGeometry == "RootToGeant4") {
     if (VerboseLevel() > 1)
       G4cout << "Running TVirtualMCApplication::ConstructGeometry" << G4endl;
 
@@ -771,12 +770,6 @@ TVirtualMCGeometry* TG4GeometryManager::GetMCGeometry() const
   }
 
   return fMCGeometry;
-}
-
-//_____________________________________________________________________________
-void TG4GeometryManager::SetUseExternalGeometryConstruction(G4bool value)
-{
-  fUseExternalGeometryConstruction = value;
 }
 
 //_____________________________________________________________________________

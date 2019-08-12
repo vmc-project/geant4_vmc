@@ -119,7 +119,6 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
   // finish the last primary track of the current event
   // G4cout << "Finish primary from event action" << G4endl;
   fTrackingAction->FinishPrimaryTrack();
-  // G4cout << "Finish primary from event action" << G4endl;
 
   if (VerboseLevel() > 1) {
     G4cout << G4endl;

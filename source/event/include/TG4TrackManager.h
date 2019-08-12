@@ -125,8 +125,8 @@ class TG4TrackManager : public TG4Verbose
   G4int fNofSavedSecondaries; ///< number of secondaries already saved
 #ifdef USE_G4ROOT
   TG4RootNavMgr* fRootNavMgr; ///< Pointer to RootNavMgr to communicate
-                              ///< geometry states aka TGeoBranchArrays
-  TMCManager* fMCManager;     ///< Cached primarily to restore geometry
+                              ///< geometry states recovery
+  TMCManager* fMCManager;     ///< Cached to request geometry state recovery
 #endif
 };
 
@@ -176,7 +176,9 @@ inline void TG4TrackManager::SetG4TrackingManager(
   /// Set G4 tracking manager
   fG4TrackingManager = trackingManager;
 #ifdef USE_G4ROOT
-  fRootNavMgr->SetG4TrackingManager(fG4TrackingManager);
+  if (fRootNavMgr) {
+    fRootNavMgr->SetG4TrackingManager(fG4TrackingManager);
+  }
 #endif
 }
 

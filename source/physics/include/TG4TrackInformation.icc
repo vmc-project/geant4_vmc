@@ -13,6 +13,8 @@
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
+#include "TMCParticleStatus.h"
+
 /// Geant4 allocator for TG4TrackInformation objects
 extern G4ThreadLocal G4Allocator<TG4TrackInformation>* gTrackInfoAllocator;
 

@@ -30,6 +30,7 @@ class G4RunManager;
 class G4UIExecutive;
 
 class TApplication;
+class TGeant4;
 
 /// \ingroup run
 /// \brief Geant4 implementation of the TVirtualMC interface methods
@@ -43,8 +44,8 @@ class TApplication;
 class TG4RunManager : public TG4Verbose
 {
  public:
-  TG4RunManager(
-    TG4RunConfiguration* configuration, int argc = 0, char** argv = 0);
+  TG4RunManager(TGeant4* geant4vmc, TG4RunConfiguration* configuration,
+    int argc = 0, char** argv = 0);
   virtual ~TG4RunManager();
 
   // static access method
@@ -62,9 +63,6 @@ class TG4RunManager : public TG4Verbose
   // get methods
   Int_t CurrentEvent() const;
   Bool_t SecondariesAreOrdered() const;
-  Bool_t UseExternalGeometryConstruction() const;
-  Bool_t UseExternalParticleGeneration() const;
-  Bool_t IsInterruptibleEvent() const;
 
   //
   // methods for Geant4 only
@@ -103,6 +101,7 @@ class TG4RunManager : public TG4Verbose
   static G4ThreadLocal TG4RunManager* fgInstance; ///< this instance
 
   // data members
+  TGeant4* fGeant4vmc;                    ///< Cache pointer to GEANT4VMC
   G4RunManager* fRunManager;              ///< G4RunManager
   TG4RunMessenger fMessenger;             ///< messenger
   TG4RunConfiguration* fRunConfiguration; ///< TG4RunConfiguration
@@ -118,8 +117,6 @@ class TG4RunManager : public TG4Verbose
   G4int
     fNEventsProcessed;  ///< Number of events processed in event-by-event mode
   G4bool fInProcessRun; ///< flag while being in BeamOn
-  G4bool fIsInterruptibleEvent; ///< Flag whether this event can be interrupted
-                                ///< and resumed
 };
 
 // inline methods

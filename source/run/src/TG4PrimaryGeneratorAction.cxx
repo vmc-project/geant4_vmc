@@ -13,6 +13,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4PrimaryGeneratorAction.h"
+#include "TG4EventAction.h"
 #include "TG4G3Units.h"
 #include "TG4Globals.h"
 #include "TG4ParticlesManager.h"
@@ -26,6 +27,7 @@
 #include <G4IonTable.hh>
 #include <G4ParticleDefinition.hh>
 #include <G4ParticleTable.hh>
+#include <G4RunManager.hh>
 
 #include <TMCManagerStack.h>
 #include <TMCParticleStatus.h>
@@ -38,14 +40,25 @@
 // generated from short units names
 #include <G4SystemOfUnits.hh>
 
+namespace
+{
+
+TG4EventAction* GetEventAction()
+{
+  return dynamic_cast<TG4EventAction*>(const_cast<G4UserEventAction*>(
+    G4RunManager::GetRunManager()->GetUserEventAction()));
+}
+
+} // namespace
+
 //_____________________________________________________________________________
 TG4PrimaryGeneratorAction::TG4PrimaryGeneratorAction()
   : TG4Verbose("primaryGeneratorAction"),
     fMessenger(0),
-    fParticlesManager(nullptr),
-    fTrackManager(nullptr),
-    fMCStack(nullptr),
-    fMCManagerStack(nullptr),
+    fParticlesManager(0),
+    fTrackManager(0),
+    fMCStack(0),
+    fMCManagerStack(0),
     fCached(false),
     fSkipUnknownParticles(false)
 {
@@ -90,18 +103,19 @@ G4bool TG4PrimaryGeneratorAction::CheckParticleDefinition(
   const TParticle* particle) const
 {
   if (!particleDefinition) {
-    TString text = "G4ParticleTable::FindParticle() failed for ";
+    TString text =
+      "TG4PrimaryGeneratorAction::CheckParticleDefinition() failed for ";
     text += TString(particle->GetName());
     text += "  pdgEncoding=";
     text += particle->GetPdgCode();
     text += ".";
     if (fSkipUnknownParticles) {
       TG4Globals::Warning(
-        "TG4PrimaryGeneratorAction", "TransformPrimaries", text);
+        "TG4PrimaryGeneratorAction", "CheckParticleDefinition", text);
     }
     else {
       TG4Globals::Exception(
-        "TG4PrimaryGeneratorAction", "TransformPrimaries", text);
+        "TG4PrimaryGeneratorAction", "CheckParticleDefinition", text);
     }
     return false;
   }
@@ -159,7 +173,6 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
   /// Create a new G4PrimaryVertex objects for each TParticle
   /// in the VMC stack.
 
-  // Cache pointers to thread-local objects
   CheckVMCStack(fMCStack);
 
   G4int nofParticles = fMCStack->GetNtrack();
@@ -188,7 +201,7 @@ void TG4PrimaryGeneratorAction::TransformPrimaries(G4Event* event)
         continue;
       }
 
-      // Current particle's poasition and time
+      // Current particle's position and time
       G4ThreeVector position = fParticlesManager->GetParticlePosition(particle);
       G4double time = particle->T() * TG4G3Units::Time();
 
@@ -218,7 +231,6 @@ void TG4PrimaryGeneratorAction::TransformTracks(G4Event* event)
   /// Create a new G4PrimaryVertex objects for each TParticle
   /// in the VMC stack.
 
-  // Cache pointers to thread-local objects
   // The TMCManagerStack has additional info on the current track status,
   // e.g. kinematics and geometry state.
   // Calling TG4PrimaryGeneratorAction::TransformTracks implies that
@@ -227,12 +239,12 @@ void TG4PrimaryGeneratorAction::TransformTracks(G4Event* event)
   CheckVMCStack(fMCManagerStack);
 
   if (VerboseLevel() > 1)
-    G4cout << "TG4PrimaryGeneratorAction::TransformPrimaries: "
+    G4cout << "TG4PrimaryGeneratorAction::TransformTracks: "
            << fMCManagerStack->GetNtrack() << " particles" << G4endl;
 
   G4PrimaryVertex* previousVertex = 0;
 
-  const TParticle* particle = nullptr;
+  const TParticle* particle = 0;
 
   Int_t trackId = -1;
 
@@ -255,7 +267,7 @@ void TG4PrimaryGeneratorAction::TransformTracks(G4Event* event)
         continue;
       }
 
-      // Current particle's poasition and time
+      // Current particle's position and time
       const TLorentzVector& particlePosition = particleStatus->fPosition;
       G4ThreeVector position(particlePosition.X() * TG4G3Units::Length(),
         particlePosition.Y() * TG4G3Units::Length(),
@@ -293,9 +305,11 @@ void TG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
 {
   /// Generate primary particles by the selected generator.
 
+  // Cache pointers to thread-local objects
   TG4RunManager* runManager = TG4RunManager::Instance();
-  // Cache pointer to thread-local MC application
+  TG4EventAction* eventAction = GetEventAction();
   TVirtualMCApplication* mcApplication = TVirtualMCApplication::Instance();
+  TVirtualMC* vmc = gMC;
 
   // Begin of event
   TG4StateManager::Instance()->SetNewState(kInEvent);
@@ -303,14 +317,14 @@ void TG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
   if (!fCached) {
     fParticlesManager = TG4ParticlesManager::Instance();
     fTrackManager = TG4TrackManager::Instance();
-    fMCStack = gMC->GetStack();
-    fMCManagerStack = gMC->GetManagerStack();
+    fMCStack = vmc->GetStack();
+    fMCManagerStack = vmc->GetManagerStack();
     fCached = true;
   }
 
   // If TG4RunManager::IsInterruptibleEvent(), rely on BeginEvent() has been
   // called already.
-  if (!runManager->IsInterruptibleEvent()) {
+  if (!eventAction->IsInterruptibleEvent()) {
     mcApplication->BeginEvent();
   }
 
@@ -323,7 +337,7 @@ void TG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
   fTrackManager->ResetParticlesStatus();
 
   // Don't generate primaries if this is a complex interruptible event
-  if (!runManager->UseExternalParticleGeneration()) {
+  if (!vmc->UseExternalParticleGeneration()) {
     // Generate primaries and fill the VMC stack
     mcApplication->GeneratePrimaries();
     TransformPrimaries(event);

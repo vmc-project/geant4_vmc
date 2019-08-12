@@ -57,6 +57,7 @@ class TG4EventAction : public G4UserEventAction, public TG4Verbose
   // get methods
   G4bool GetPrintMemory() const;
   G4bool GetSaveRandomStatus() const;
+  G4bool IsInterruptibleEvent() const;
 
  private:
   /// Not implemented
@@ -121,6 +122,12 @@ inline G4bool TG4EventAction::GetSaveRandomStatus() const
   return fSaveRandomStatus;
 }
 
+inline G4bool TG4EventAction::IsInterruptibleEvent() const
+{
+  /// Return whether the current event is flagged as being interruptible
+  return fIsInterruptibleEvent;
+}
+
 inline void TG4EventAction::SetSaveRandomStatus(G4bool saveRandomStatus)
 {
   /// Set option for saving random engine status for each event
@@ -129,7 +136,7 @@ inline void TG4EventAction::SetSaveRandomStatus(G4bool saveRandomStatus)
 
 inline void TG4EventAction::SetIsInterruptibleEvent(G4bool isInterruptible)
 {
-  /// Set option for saving random engine status for each event
+  /// Flag whether the current event is interruptible
   fIsInterruptibleEvent = isInterruptible;
 }
 

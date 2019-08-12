@@ -35,6 +35,7 @@
 #include "TG4TrackManager.h"
 #include "TG4TrackingAction.h"
 #include "TG4WorkerInitialization.h"
+#include "TGeant4.h"
 
 #ifdef G4MULTITHREADED
 #include <G4MTRunManager.hh>
@@ -59,7 +60,7 @@
 #include <TROOT.h>
 #include <TRandom.h>
 #include <TRint.h>
-#include <TVirtualMC.h>
+//#include <TVirtualMC.h>
 #include <TVirtualMCApplication.h>
 
 namespace
@@ -78,9 +79,10 @@ TG4RunManager* TG4RunManager::fgMasterInstance = 0;
 G4ThreadLocal TG4RunManager* TG4RunManager::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4RunManager::TG4RunManager(
+TG4RunManager::TG4RunManager(TGeant4* geant4vmc,
   TG4RunConfiguration* runConfiguration, int argc, char** argv)
   : TG4Verbose("runManager"),
+    fGeant4vmc(geant4vmc),
     fRunManager(0),
     fMessenger(this),
     fRunConfiguration(runConfiguration),
@@ -94,8 +96,7 @@ TG4RunManager::TG4RunManager(
     fIsMCStackCached(false),
     fHasEventByEventInitialization(false),
     fNEventsProcessed(0),
-    fInProcessRun(false),
-    fIsInterruptibleEvent(false)
+    fInProcessRun(false)
 {
   /// Standard constructor
 
@@ -194,7 +195,7 @@ void TG4RunManager::ConfigureRunManager()
 #ifdef USE_G4ROOT
   TG4RootNavMgr* rootNavMgr = 0;
   if (userGeometry == "VMCtoRoot" || userGeometry == "Root") {
-    if (!fRunConfiguration->UseExternalGeometryConstruction()) {
+    if (!fGeant4vmc->UseExternalGeometryConstruction()) {
       // Construct geometry via VMC application
       if (TG4GeometryManager::Instance()->VerboseLevel() > 0)
         G4cout << "Running TVirtualMCApplication::ConstructGeometry"
@@ -479,14 +480,14 @@ void TG4RunManager::CacheMCStack()
   if (fIsMCStackCached) return;
 
   // The VMC stack must be set to MC at this stage !!
-  TVirtualMCStack* mcStack = gMC->GetStack();
+  TVirtualMCStack* mcStack = fGeant4vmc->GetStack();
   if (!mcStack) {
     TG4Globals::Exception(
       "TG4RunManager", "CacheMCStack", "VMC stack is not set");
     return;
   }
 
-  TMCManagerStack* mcManagerStack = gMC->GetManagerStack();
+  TMCManagerStack* mcManagerStack = fGeant4vmc->GetManagerStack();
   // Set stack to the event actions if they exists
   // (on worker only if in MT mode)
   if (GetEventAction()) {
@@ -497,7 +498,6 @@ void TG4RunManager::CacheMCStack()
 
     if (TG4StackPopper::Instance()) {
       TG4StackPopper::Instance()->SetMCStack(mcStack);
-      // TG4StackPopper::Instance()->SetMCManagerStack(mcManagerStack);
     }
   }
 
@@ -505,14 +505,19 @@ void TG4RunManager::CacheMCStack()
 }
 
 //_____________________________________________________________________________
-void TG4RunManager::ProcessEvent() { ProcessEvent(fNEventsProcessed++, false); }
+void TG4RunManager::ProcessEvent()
+{
+  /// Process one event using internal event counter
+
+  ProcessEvent(fNEventsProcessed++, false);
+}
 
 //_____________________________________________________________________________
 void TG4RunManager::ProcessEvent(G4int eventId, G4bool isInterruptible)
 {
+  /// Process one event using event ID given as argument
 
-  // Replay what is done in GEANT4 BeamOn
-
+  // First, replay what is done in G4RunManager::BeamOn(...) explicitly
   if (!fHasEventByEventInitialization) {
     G4bool cond = fRunManager->ConfirmBeamOnCondition();
     if (!cond) {
@@ -524,8 +529,10 @@ void TG4RunManager::ProcessEvent(G4int eventId, G4bool isInterruptible)
     fRunManager->RunInitialization();
     fHasEventByEventInitialization = true;
   }
-  fIsInterruptibleEvent = isInterruptible;
   GetEventAction()->SetIsInterruptibleEvent(isInterruptible);
+
+  // Explicitly call the following 2 methods which are otherwise called from
+  // G4RunManager::BeamOn(...)
   fRunManager->ProcessOneEvent(eventId);
   fRunManager->TerminateOneEvent();
 }
@@ -705,28 +712,4 @@ Bool_t TG4RunManager::SecondariesAreOrdered() const
   ///  secondaries are not ordered even when the special stacking is activated.
 
   return false;
-}
-
-//_____________________________________________________________________________
-Bool_t TG4RunManager::UseExternalGeometryConstruction() const
-{
-  /// Return whether to rely on VMC stack will be filled from outside
-
-  return fRunConfiguration->UseExternalGeometryConstruction();
-}
-
-//_____________________________________________________________________________
-Bool_t TG4RunManager::UseExternalParticleGeneration() const
-{
-  /// Return whether to rely on VMC stack will be filled from outside
-
-  return fRunConfiguration->UseExternalParticleGeneration();
-}
-
-//_____________________________________________________________________________
-Bool_t TG4RunManager::IsInterruptibleEvent() const
-{
-  /// Return whether this event can be interrupted and resumed
-
-  return fIsInterruptibleEvent;
 }

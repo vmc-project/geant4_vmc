@@ -269,8 +269,8 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
   fOverwriteLastTrack = (!fMCStack->GetKeepCurrentTrack()) &&
                         (!fpTrackingManager->GimmeSecondaries() ||
                           fpTrackingManager->GimmeSecondaries()->size() == 0);
-// Experimental code with flagging tracks in stack for overwrite;
-// not yet available in distribution
+  // Experimental code with flagging tracks in stack for overwrite;
+  // not yet available in distribution
 #else
   fOverwriteLastTrack = false;
 #endif

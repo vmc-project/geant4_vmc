@@ -28,6 +28,19 @@
 
 #endif
 
+namespace g4libutilities {
+  Bool_t isLibrary(const char* libName)
+  {
+  /// Helper function which testes the existence of the given library
+  /// \param libName  The library name
+
+    if (TString(gSystem->DynamicPathName(libName, kTRUE)) != TString(""))
+      return kTRUE;
+    else
+      return kFALSE;
+  }
+}
+
 void loadg4libs()
 {
 /// Macro function for loading Geant4 libraries
@@ -66,17 +79,6 @@ void loadg4libs()
   }
 
   gSystem->SetFPEMask(0);
-}
-
-Bool_t isLibrary(const char* libName)
-{
-/// Helper function which testes the existence of the given library
-/// \param libName  The library name
-
-  if (TString(gSystem->DynamicPathName(libName, kTRUE)) != TString(""))
-    return kTRUE;
-  else
-    return kFALSE;
 }
 
 Bool_t isBatch()
@@ -140,7 +142,7 @@ void g4libs()
   vgmlibs();
 
   // VMC library (optional)
-  if ( isLibrary("libVMCLibrary") ) {
+  if ( g4libutilities::isLibrary("libVMCLibrary") ) {
     cout << "Loading VMC library ..." << endl;
     gSystem->Load("libVMCLibrary");
   }

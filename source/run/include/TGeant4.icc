@@ -313,6 +313,14 @@ inline Double_t TGeant4::Edep() const
 }
 
 //_____________________________________________________________________________
+inline Double_t TGeant4::NIELEdep() const
+{
+  /// Returns the total energy deposit in this step.
+
+  return fStepManager->NIELEdep();
+}
+
+//_____________________________________________________________________________
 inline Int_t TGeant4::StepNumber() const
 {
   /// Returns the current step number.
@@ -343,14 +351,6 @@ inline void TGeant4::TrackPolarization(TVector3& pol) const
   /// Returns the current polarization.
 
   fStepManager->TrackPolarization(pol);
-}
-
-//_____________________________________________________________________________
-inline Double_t TGeant4::NIELEdep() const
-{
-  /// Returns the total energy deposit in this step.
-
-  return fStepManager->NIELEdep();
 }
 
 //_____________________________________________________________________________

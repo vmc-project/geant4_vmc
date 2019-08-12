@@ -19,9 +19,8 @@
 #include <G4VUserTrackInformation.hh>
 #include <globals.hh>
 
-#include "TMCParticleStatus.h"
-
 class G4ParticleDefinition;
+class TMCParticleStatus;
 
 /// \ingroup physics
 /// \brief Defines additional track information.

@@ -169,10 +169,6 @@ TGeant4::TGeant4(const char* name, const char* title,
   if (isMaster) {
     fgMasterInstance = this;
     fgMasterApplicationInstance = TVirtualMCApplication::Instance();
-    configuration->SetUseExternalGeometryConstruction(
-      UseExternalGeometryConstruction());
-    configuration->SetUseExternalParticleGeneration(
-      UseExternalParticleGeneration());
   }
 
   // Inactivate MT mode if Geant4 is built in sequential mode
@@ -195,8 +191,6 @@ TGeant4::TGeant4(const char* name, const char* title,
   // create geometry manager - shared
   if (isMaster) {
     fGeometryManager = new TG4GeometryManager(fUserGeometry);
-    fGeometryManager->SetUseExternalGeometryConstruction(
-      UseExternalGeometryConstruction());
     // add verbose level
     // G4cout << "TG4GeometryManager has been created." << G4endl;
 
@@ -222,7 +216,7 @@ TGeant4::TGeant4(const char* name, const char* title,
   // G4cout << "TG4StepManager has been created." << G4endl;
 
   // create run manager
-  fRunManager = new TG4RunManager(configuration, argc, argv);
+  fRunManager = new TG4RunManager(this, configuration, argc, argv);
   // add verbose level
   // G4cout << "TG4RunManager has been created." << G4endl;
 

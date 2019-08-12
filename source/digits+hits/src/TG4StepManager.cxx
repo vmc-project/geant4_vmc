@@ -55,7 +55,7 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
     fCopyNoOffset(0),
     fDivisionCopyNoOffset(0),
     fTrackManager(0),
-    fInitialVMCTrackStatus(nullptr)
+    fInitialVMCTrackStatus(0)
 {
   /// Standard constructor
   /// \param userGeometry  User selection of geometry definition and navigation
@@ -227,7 +227,7 @@ void TG4StepManager::StopTrack()
 //_____________________________________________________________________________
 void TG4StepManager::InterruptTrack()
 {
-  /// Interrupt the current track and skips to the next.
+  /// Interrupt the current track and skip to the next.
 
   if (fTrack) {
     fTrack->SetTrackStatus(fStopAndKill);
@@ -971,6 +971,8 @@ Double_t TG4StepManager::NIELEdep() const
 //_____________________________________________________________________________
 Int_t TG4StepManager::StepNumber() const
 {
+  /// Return the current step number
+
   if (!fInitialVMCTrackStatus) {
     return fTrack->GetCurrentStepNumber();
   }
@@ -978,12 +980,19 @@ Int_t TG4StepManager::StepNumber() const
 }
 
 //_____________________________________________________________________________
-Double_t TG4StepManager::TrackWeight() const { return fTrack->GetWeight(); }
+Double_t TG4StepManager::TrackWeight() const
+{
+  /// Return the track weight
+
+  return fTrack->GetWeight();
+}
 
 //_____________________________________________________________________________
 void TG4StepManager::TrackPolarization(
   Double_t& polX, Double_t& polY, Double_t& polZ) const
 {
+  /// Get the track polarization
+
   const G4ThreeVector& pol = fTrack->GetPolarization();
   polX = pol.x();
   polY = pol.y();
@@ -993,6 +1002,8 @@ void TG4StepManager::TrackPolarization(
 //_____________________________________________________________________________
 void TG4StepManager::TrackPolarization(TVector3& pol) const
 {
+  /// Get the track polarization
+
   const G4ThreeVector& polG4 = fTrack->GetPolarization();
   pol[0] = polG4.x();
   pol[1] = polG4.y();

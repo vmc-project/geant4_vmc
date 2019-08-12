@@ -19,15 +19,17 @@
 
 #endif
 
-Bool_t isLibrary(const char* libName)
-{
-/// Helper function which testes the existence of the given library
-/// \param libName  The library name
+namespace g3libutilities {
+  Bool_t isLibrary(const char* libName)
+  {
+  /// Helper function which testes the existence of the given library
+  /// \param libName  The library name
 
-  if (TString(gSystem->DynamicPathName(libName, kTRUE)) != TString(""))
-    return kTRUE;
-  else
-    return kFALSE;
+    if (TString(gSystem->DynamicPathName(libName, kTRUE)) != TString(""))
+      return kTRUE;
+    else
+      return kFALSE;
+  }
 }
 
 void g3libs()
@@ -40,12 +42,12 @@ void g3libs()
   gSystem->Load("libPythia6");
 
   // VMC library (optional)
-  if ( isLibrary("libVMCLibrary") ) {
+  if ( g3libutilities::isLibrary("libVMCLibrary") ) {
     cout << "Loading VMC library ..." << endl;
     gSystem->Load("libVMCLibrary");
   }
 
-  if (isLibrary("libdummies"))
+  if (g3libutilities::isLibrary("libdummies"))
      gSystem->Load("libdummies");
                    // libdummies.so needed from geant3_+vmc version 0.5
 
@@ -54,4 +56,3 @@ void g3libs()
 
   cout << "Loading Geant3 libraries ... finished" << endl;
 }
-
