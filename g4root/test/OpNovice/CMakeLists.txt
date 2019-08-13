@@ -44,7 +44,9 @@ endif()
 #----------------------------------------------------------------------------
 # Setup Geant4 include directories and compile definitions
 #
-include(${Geant4_USE_FILE})
+# Workaround for upstream bug: http://bugzilla-geant4.kek.jp/show_bug.cgi?id=1663
+#include(${Geant4_USE_FILE})
+include(UseGeant4)
 
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
