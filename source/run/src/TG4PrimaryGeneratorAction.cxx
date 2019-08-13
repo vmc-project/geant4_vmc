@@ -337,7 +337,7 @@ void TG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
   fTrackManager->ResetParticlesStatus();
 
   // Don't generate primaries if this is a complex interruptible event
-  if (!vmc->UseExternalParticleGeneration()) {
+  if (!fMCManagerStack) {
     // Generate primaries and fill the VMC stack
     mcApplication->GeneratePrimaries();
     TransformPrimaries(event);

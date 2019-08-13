@@ -27,7 +27,6 @@ class TGeoManager;
 class TGeoNavigator;
 class TGeoNode;
 class TG4RootDetectorConstruction;
-class TGeoBranchArray;
 class G4TrackingManager;
 
 /// \brief GEANT4 navigator using directly a TGeo geometry.

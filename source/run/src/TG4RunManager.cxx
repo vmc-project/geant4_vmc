@@ -35,7 +35,6 @@
 #include "TG4TrackManager.h"
 #include "TG4TrackingAction.h"
 #include "TG4WorkerInitialization.h"
-#include "TGeant4.h"
 
 #ifdef G4MULTITHREADED
 #include <G4MTRunManager.hh>
@@ -56,11 +55,12 @@
 
 #include <TGeoManager.h>
 #include <TInterpreter.h>
+#include <TMCManager.h>
 #include <TMCManagerStack.h>
 #include <TROOT.h>
 #include <TRandom.h>
 #include <TRint.h>
-//#include <TVirtualMC.h>
+#include <TVirtualMC.h>
 #include <TVirtualMCApplication.h>
 
 namespace
@@ -79,10 +79,9 @@ TG4RunManager* TG4RunManager::fgMasterInstance = 0;
 G4ThreadLocal TG4RunManager* TG4RunManager::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4RunManager::TG4RunManager(TGeant4* geant4vmc,
+TG4RunManager::TG4RunManager(
   TG4RunConfiguration* runConfiguration, int argc, char** argv)
   : TG4Verbose("runManager"),
-    fGeant4vmc(geant4vmc),
     fRunManager(0),
     fMessenger(this),
     fRunConfiguration(runConfiguration),
@@ -195,7 +194,7 @@ void TG4RunManager::ConfigureRunManager()
 #ifdef USE_G4ROOT
   TG4RootNavMgr* rootNavMgr = 0;
   if (userGeometry == "VMCtoRoot" || userGeometry == "Root") {
-    if (!fGeant4vmc->UseExternalGeometryConstruction()) {
+    if (!TMCManager::Instance()) {
       // Construct geometry via VMC application
       if (TG4GeometryManager::Instance()->VerboseLevel() > 0)
         G4cout << "Running TVirtualMCApplication::ConstructGeometry"
@@ -480,14 +479,14 @@ void TG4RunManager::CacheMCStack()
   if (fIsMCStackCached) return;
 
   // The VMC stack must be set to MC at this stage !!
-  TVirtualMCStack* mcStack = fGeant4vmc->GetStack();
+  TVirtualMCStack* mcStack = gMC->GetStack();
   if (!mcStack) {
     TG4Globals::Exception(
       "TG4RunManager", "CacheMCStack", "VMC stack is not set");
     return;
   }
 
-  TMCManagerStack* mcManagerStack = fGeant4vmc->GetManagerStack();
+  TMCManagerStack* mcManagerStack = gMC->GetManagerStack();
   // Set stack to the event actions if they exists
   // (on worker only if in MT mode)
   if (GetEventAction()) {

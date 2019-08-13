@@ -27,7 +27,6 @@ class TGeoManager;
 class TG4RootNavigator;
 class TG4RootDetectorConstruction;
 class TVirtualUserPostDetConstruction;
-class TGeoBranchArray;
 class G4TrackingManager;
 
 /// \brief Manager class creating a G4Navigator based on a ROOT geometry.

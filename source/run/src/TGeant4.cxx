@@ -216,7 +216,7 @@ TGeant4::TGeant4(const char* name, const char* title,
   // G4cout << "TG4StepManager has been created." << G4endl;
 
   // create run manager
-  fRunManager = new TG4RunManager(this, configuration, argc, argv);
+  fRunManager = new TG4RunManager(configuration, argc, argv);
   // add verbose level
   // G4cout << "TG4RunManager has been created." << G4endl;
 

@@ -17,7 +17,6 @@
 #include "TG4RootNavMgr.h"
 #include "TG4RootDetectorConstruction.h"
 #include "TG4RootNavigator.h"
-#include "TGeoBranchArray.h"
 
 #include "G4PropagatorInField.hh"
 #include "G4RunManager.hh"

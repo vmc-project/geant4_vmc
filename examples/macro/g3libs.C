@@ -19,7 +19,7 @@
 
 #endif
 
-namespace g3libutilities {
+namespace g3libUtilities {
   Bool_t isLibrary(const char* libName)
   {
   /// Helper function which testes the existence of the given library
@@ -42,12 +42,12 @@ void g3libs()
   gSystem->Load("libPythia6");
 
   // VMC library (optional)
-  if ( g3libutilities::isLibrary("libVMCLibrary") ) {
+  if ( g3libUtilities::isLibrary("libVMCLibrary") ) {
     cout << "Loading VMC library ..." << endl;
     gSystem->Load("libVMCLibrary");
   }
 
-  if (g3libutilities::isLibrary("libdummies"))
+  if (g3libUtilities::isLibrary("libdummies"))
      gSystem->Load("libdummies");
                    // libdummies.so needed from geant3_+vmc version 0.5
 

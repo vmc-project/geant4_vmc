@@ -28,7 +28,7 @@
 
 #endif
 
-namespace g4libutilities {
+namespace g4libUtilities {
   Bool_t isLibrary(const char* libName)
   {
   /// Helper function which testes the existence of the given library
@@ -142,7 +142,7 @@ void g4libs()
   vgmlibs();
 
   // VMC library (optional)
-  if ( g4libutilities::isLibrary("libVMCLibrary") ) {
+  if ( g4libUtilities::isLibrary("libVMCLibrary") ) {
     cout << "Loading VMC library ..." << endl;
     gSystem->Load("libVMCLibrary");
   }
