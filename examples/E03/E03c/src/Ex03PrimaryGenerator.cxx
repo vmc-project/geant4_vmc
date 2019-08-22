@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2014 - 2018 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -14,14 +14,16 @@
 /// Id: ExN03PrimaryGeneratorAction.cc,v 1.6 2002/01/09 17:24:13 ranjard Exp \n
 /// GEANT4 tag Name: geant4-05-00
 ///
-/// \date 30/04/2019
-/// \author Benedikt Volkel, CERN
+/// \date 06/03/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <TDatabasePDG.h>
 #include <TPDGCode.h>
 #include <TParticlePDG.h>
 #include <TRandom.h>
 #include <TVector3.h>
+#include <TVirtualMC.h>
+#include <TVirtualMCApplication.h>
 #include <TVirtualMCStack.h>
 
 #include "Ex03PrimaryGenerator.h"
@@ -37,6 +39,7 @@ ClassImp(Ex03PrimaryGenerator)
     fIsRandom(false),
     fPrimaryType(kDefault),
     fNofPrimaries(1)
+
 {
   /// Standard constructor
   /// \param stack  The VMC stack

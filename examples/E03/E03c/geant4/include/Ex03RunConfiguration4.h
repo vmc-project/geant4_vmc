@@ -15,7 +15,7 @@
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
-/// \author Benedikt Volkel, CERN
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4RunConfiguration.h"
 
@@ -24,9 +24,7 @@
 ///
 /// This class demonstrates inclusion of a user defined detector construction
 /// class with a user defined magnetic field equation of motion and/or its
-/// integrator.
-///
-///\author Benedikt Volkel, CERN
+/// integrator. \author I. Hrivnacova; IPN, Orsay
 
 class Ex03RunConfiguration4 : public TG4RunConfiguration
 {

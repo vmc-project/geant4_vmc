@@ -15,14 +15,14 @@
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
-/// \author Benedikt Volkel, CERN
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4VUserRegionConstruction.h"
 
 /// \ingroup E03c
 /// \brief Special class for definition of regions
 ///
-/// \author Benedikt Volkel, CERN
+/// \author I. Hrivnacova; IPN, Orsay
 
 class Ex03RegionConstruction : public TG4VUserRegionConstruction
 {

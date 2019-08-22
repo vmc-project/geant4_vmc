@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2014 - 2018 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -20,10 +20,8 @@
 ///   GEANT4 tag Name: geant4-09-01-ref-09
 /// - Changed cuts in SetCuts() according to Geant4 09-01-ref-09
 ///
-/// \date 30/04/2019
-/// \author Benedikt Volkel, CERN
-
-#include <set>
+/// \date 06/03/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <Riostream.h>
 #include <TGeoElement.h>
@@ -33,6 +31,8 @@
 #include <TMCManager.h>
 #include <TThread.h>
 #include <TVirtualMC.h>
+
+#include <set>
 
 #include "Ex03DetectorConstruction.h"
 
@@ -58,6 +58,7 @@ ClassImp(Ex03DetectorConstruction)
     fGapMaterial("liquidArgon"),
     fMC(nullptr),
     fConnectedToMCManager(kFALSE)
+
 {
   /// Default constuctor
 
@@ -111,7 +112,7 @@ void Ex03DetectorConstruction::ConstructMaterials()
   //
 
   // Create Root geometry manager
-  new TGeoManager("E03c_geometry", "E03c VMC example geometry");
+  new TGeoManager("E03_geometry", "E03 VMC example geometry");
 
   //--------- Material definition ---------
 
@@ -384,29 +385,28 @@ void Ex03DetectorConstruction::SetCuts()
     fMC = gMC;
   }
 
-  std::cerr << "Set cuts for " << fMC->GetName() << std::endl;
-
   // created material names
   std::set<TString> createdMaterials;
   createdMaterials.insert(fDefaultMaterial);
   createdMaterials.insert(fAbsorberMaterial);
   createdMaterials.insert(fGapMaterial);
 
-  // cuts for e-, gamma equivalent to 1mm cut in G4.
+  // Cuts for e-, gamma equivalent to 1mm cut in G4,
+  // or 10keV (minimal value accepted by Geant3) if lower
   std::vector<MaterialCuts> materialCutsVector = {
     MaterialCuts("Aluminium", 10.e-06, 10.e-06, 597.e-06, 597.e-06),
-    MaterialCuts("liquidArgon", 6.178e-06, 6.178e-06, 342.9e-06, 342.9e-06),
+    MaterialCuts("liquidArgon", 10.e-06, 10.e-06, 342.9e-06, 342.9e-06),
     MaterialCuts("Lead", 100.5e-06, 100.5e-06, 1.378e-03, 1.378e-03),
-    MaterialCuts("Water", 2.902e-06, 2.902e-06, 347.2e-06, 347.2e-06),
-    MaterialCuts("Scintillator", 2.369e-06, 2.369e-06, 355.8e-06, 355.8e-06),
-    MaterialCuts("Mylar", 2.978e-06, 2.978e-06, 417.5e-06, 417.5e-06),
-    MaterialCuts("quartz", 5.516e-06, 5.516e-06, 534.1e-06, 534.1e-06),
-    MaterialCuts("Air", 990.e-09, 990.e-09, 990.e-09, 990.e-09),
-    MaterialCuts("Aerogel", 1.706e-06, 1.706e-06, 119.0e-06, 119.0e-06),
-    MaterialCuts("CarbonicGas", 990.e-09, 990.e-09, 990.e-09, 990.e-09),
-    MaterialCuts("WaterSteam", 990.e-09, 990.e-09, 990.e-09, 990.e-09),
-    MaterialCuts("Galactic", 990.e-09, 990.e-09, 990.e-09, 990.e-09),
-    MaterialCuts("Beam", 990.e-09, 990.e-09, 990.e-09, 990.e-09)
+    MaterialCuts("Water", 10.e-06, 10.e-06, 347.2e-06, 347.2e-06),
+    MaterialCuts("Scintillator", 10.e-06, 10.e-06, 355.8e-06, 355.8e-06),
+    MaterialCuts("Mylar", 10.e-06, 10.e-06, 417.5e-06, 417.5e-06),
+    MaterialCuts("quartz", 10.e-06, 10.e-06, 534.1e-06, 534.1e-06),
+    MaterialCuts("Air", 10.e-06, 10.e-06, 10.e-06, 10.e-06),
+    MaterialCuts("Aerogel", 10.e-06, 10.e-06, 119.0e-06, 119.0e-06),
+    MaterialCuts("CarbonicGas", 10.e-09, 10.e-06, 10.e-06, 10.e-06),
+    MaterialCuts("WaterSteam", 10.e-06, 10.e-06, 10.e-06, 10.e-06),
+    MaterialCuts("Galactic", 10.e-06, 10.e-06, 10.e-06, 10.e-06),
+    MaterialCuts("Beam", 10.e-06, 10.e-06, 10.e-06, 10.e-06)
   };
 
   // set VMC cutes for created media
@@ -438,7 +438,7 @@ void Ex03DetectorConstruction::SetControls()
     fMC = gMC;
   }
 
-  Int_t mediumId = fMC->MediumId("Lead");
+  Int_t mediumId = gMC->MediumId("Lead");
   if (mediumId) {
     fMC->Gstpar(mediumId, "COMP", 0);
     fMC->Gstpar(mediumId, "PAIR", 0);

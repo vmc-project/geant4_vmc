@@ -15,7 +15,7 @@
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
-/// \author Benedikt Volkel, CERN
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4RunConfiguration.h"
 
@@ -25,7 +25,7 @@
 /// This class overrides setting of the default Geant4 VMC physics list
 /// with the LHEP_BERT hadronics physics list
 ///
-/// \author Benedikt Volkel, CERN
+/// \author I. Hrivnacova; IPN, Orsay
 
 class Ex03RunConfiguration2 : public TG4RunConfiguration
 {

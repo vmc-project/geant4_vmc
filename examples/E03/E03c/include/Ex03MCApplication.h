@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2014 - 2018 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -35,7 +35,7 @@ class TMCRootManager;
 /// \ingroup E03c
 /// \brief Implementation of the TVirtualMCApplication
 ///
-/// \date 30/04/2019
+/// \date 21/08/2019
 /// \author Benedikt Volkel, CERN
 
 class Ex03MCApplication : public TVirtualMCApplication
@@ -51,7 +51,6 @@ class Ex03MCApplication : public TVirtualMCApplication
   void InitMC(std::initializer_list<const char*> setupMacros);
   void RunMC(Int_t nofEvents);
   void FinishRun();
-  void ExportGeometry(const char* path) const;
   void ReadEvent(Int_t i);
 
   virtual TVirtualMCApplication* CloneForWorker() const;

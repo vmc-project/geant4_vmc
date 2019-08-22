@@ -60,7 +60,7 @@ class TG4PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction,
   G4bool CheckVMCStack(TVirtualMCStack* stack) const;
   G4bool CheckParticleDefinition(const G4ParticleDefinition* particleDefinition,
     const TParticle* particle) const;
-  G4bool GetProperCharge(const G4ParticleDefinition* particleDefinition,
+  G4double GetProperCharge(const G4ParticleDefinition* particleDefinition,
     const TParticle* particle) const;
   G4PrimaryVertex* AddParticleToVertex(G4Event* event, G4PrimaryVertex* vertex,
     const G4ParticleDefinition* particleDefinition,

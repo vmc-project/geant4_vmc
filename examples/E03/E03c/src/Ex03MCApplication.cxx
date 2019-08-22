@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2014 - 2018 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -12,7 +12,7 @@
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
-/// \date 30/04/2019
+/// \date 21/08/2019
 /// \author Benedikt Volkel, CERN
 
 #include "Ex03MCApplication.h"
@@ -109,11 +109,7 @@ Ex03MCApplication::Ex03MCApplication(const Ex03MCApplication& origin)
     fPrimaryGenerator(0),
     fMagField(0),
     fOldGeometry(origin.fOldGeometry),
-    fIsMaster(kFALSE),
-    fIsMultiRun(origin.fIsMultiRun),
-    fSplitSimulation(origin.fSplitSimulation),
-    fG3Id(origin.fG3Id),
-    fG4Id(origin.fG4Id)
+    fIsMaster(kFALSE)
 {
   /// Copy constructor for cloning application on workers (in multithreading
   /// mode) \param origin   The source MC application
@@ -132,10 +128,6 @@ Ex03MCApplication::Ex03MCApplication(const Ex03MCApplication& origin)
   // Constant magnetic field (in kiloGauss)
   fMagField = new TGeoUniformMagField(origin.fMagField->GetFieldValue()[0],
     origin.fMagField->GetFieldValue()[1], origin.fMagField->GetFieldValue()[2]);
-  if (fIsMultiRun) {
-    RequestMCManager();
-    fMCManager->SetUserStack(fStack);
-  }
 }
 
 //_____________________________________________________________________________
@@ -347,18 +339,6 @@ void Ex03MCApplication::FinishRun()
     fRootManager->WriteAll();
     fRootManager->Close();
   }
-}
-
-//_____________________________________________________________________________
-void Ex03MCApplication::ExportGeometry(const char* path) const
-{
-  if (!gGeoManager || !gGeoManager->IsClosed()) {
-    Warning(
-      "ExportGeometry", "TGeoManager not existing or geometry not closed yet.");
-    return;
-  }
-  Info("ExportGeometry", "Export geometry to %s.", path);
-  gGeoManager->Export(path);
 }
 
 //_____________________________________________________________________________

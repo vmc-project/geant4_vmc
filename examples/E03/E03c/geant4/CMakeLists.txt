@@ -8,7 +8,7 @@
 #-------------------------------------------------
 
 # CMake Configuration file for the VMC E03 example Geant4 based code
-# Benedikt Volkel, CERN, 09/04/2019
+# I. Hrivnacova, 28/04/2014
 
 #----------------------------------------------------------------------------
 # Setup the project

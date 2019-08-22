@@ -12,7 +12,7 @@
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
 ///
-/// \author Benedikt Volkel, CERN
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "Ex03RegionConstruction.h"
 

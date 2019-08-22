@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2014 - 2018 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -14,8 +14,8 @@
 /// Id: ExN03CalorimeterSD.cc,v 1.6 2002/01/09 17:24:12 ranjard Exp \n
 /// GEANT4 tag $Name:  $
 ///
-/// \date 30/04/2019
-/// \author Benedikt Volkel, CERN
+/// \date 06/03/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "Ex03CalorimeterSD.h"
 #include "Ex03CalorHit.h"
@@ -37,13 +37,14 @@ ClassImp(Ex03CalorimeterSD)
 //_____________________________________________________________________________
 Ex03CalorimeterSD::Ex03CalorimeterSD(
   const char* name, Ex03DetectorConstruction* detector)
-  : TNamed(name, ""),
+  : TVirtualMCSensitiveDetector(name, ""),
     fMC(0),
     fDetector(detector),
     fCalCollection(0),
     fAbsorberVolId(0),
     fGapVolId(0),
-    fVerboseLevel(1)
+    fVerboseLevel(1),
+    fPrintModulo(1)
 {
   /// Standard constructor.
   /// Create hits collection and an empty hit for each layer
@@ -60,13 +61,14 @@ Ex03CalorimeterSD::Ex03CalorimeterSD(
 //_____________________________________________________________________________
 Ex03CalorimeterSD::Ex03CalorimeterSD(
   const Ex03CalorimeterSD& origin, Ex03DetectorConstruction* detector)
-  : TNamed(origin),
+  : TVirtualMCSensitiveDetector(origin),
     fMC(0),
     fDetector(detector),
     fCalCollection(0),
     fAbsorberVolId(origin.fAbsorberVolId),
     fGapVolId(origin.fGapVolId),
-    fVerboseLevel(origin.fVerboseLevel)
+    fVerboseLevel(origin.fVerboseLevel),
+    fPrintModulo(origin.fPrintModulo)
 {
   /// Copy constructor (for clonig on worker thread in MT mode).
   /// Create hits collection and an empty hit for each layer
@@ -82,7 +84,7 @@ Ex03CalorimeterSD::Ex03CalorimeterSD(
 
 //_____________________________________________________________________________
 Ex03CalorimeterSD::Ex03CalorimeterSD()
-  : TNamed(),
+  : TVirtualMCSensitiveDetector(),
     fDetector(0),
     fCalCollection(0),
     fAbsorberVolId(0),
@@ -138,6 +140,7 @@ void Ex03CalorimeterSD::Initialize()
   // Keep the pointer to TVirtualMC object as a data member
   // to avoid a possible performance penalty due to a frequent retrieval
   // from the thread-local storage
+  fMC = gMC;
   if (TMCManager::Instance()) {
     TMCManager::Instance()->ConnectEnginePointer(fMC);
   }
@@ -156,17 +159,16 @@ void Ex03CalorimeterSD::Initialize()
 }
 
 //_____________________________________________________________________________
-Bool_t Ex03CalorimeterSD::ProcessHits()
+void Ex03CalorimeterSD::ProcessHits()
 {
   /// Account energy deposit and track lengths for each layer in its hit.
 
   Int_t copyNo;
   Int_t id = fMC->CurrentVolID(copyNo);
 
-  if (id != fAbsorberVolId && id != fGapVolId) return false;
+  if (id != fAbsorberVolId && id != fGapVolId) return;
 
   fMC->CurrentVolOffID(2, copyNo);
-  // cout << "Got copyNo "<< copyNo << " " << fMC->CurrentVolPath() << endl;
 
   Double_t edep = fMC->Edep();
 
@@ -174,8 +176,7 @@ Bool_t Ex03CalorimeterSD::ProcessHits()
   if (fMC->TrackCharge() != 0.) step = fMC->TrackStep();
 
   if (!GetHit(copyNo)) {
-    std::cerr << "No hit found for layer with copyNo = " << copyNo << endl;
-    return false;
+    return;
   }
 
   if (id == fAbsorberVolId) {
@@ -185,14 +186,16 @@ Bool_t Ex03CalorimeterSD::ProcessHits()
   if (id == fGapVolId) {
     GetHit(copyNo)->AddGap(edep, step);
   }
-
-  return true;
 }
 
 //_____________________________________________________________________________
 void Ex03CalorimeterSD::EndOfEvent()
 {
   /// Print hits collection (if verbose) and reset hits afterwards.
+
+  if (gMC->CurrentEvent() % fPrintModulo == 0) {
+    PrintTotal();
+  }
 
   if (fVerboseLevel > 1) Print();
 

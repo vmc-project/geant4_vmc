@@ -13,18 +13,14 @@
 
 #include "set_vis.C"
 
-void run_multi(const TString& configMacro1 = "g3tgeoConfig.C", const TString& configMacro2 = "g4tgeoConfig4.C")
+void run_multi(const TString& configMacro1 = "g3tgeoConfig.C", const TString& configMacro2 = "g4tgeoConfig4Seq.C")
 {
-/// Macro function for running Example03 with Geant3 from
+/// Macro function for running Example03c with Geant3 and Geant4 together from
 /// Root interactive session
 /// Note that since Root 6 the libraries have to be loaded first
-/// via load_g3.C.
-/// \param configMacro configuration macro name, default \ref E03/g3Config.C
+/// via load_multi.C.
+/// \param configMacro configuration macro names, default \ref E03/g3tgeoConfig.C and E03/g4tgeoConfig4Seq.C
 
-#ifdef G4MULTITHREADED
-   std::cerr << "G4 compiled with multithreading enabled. Not running with multi-engines."
-   exit(0);
-#endif
 
 // MC application
   auto appl = new Ex03MCApplication("Example03", "The example03 MC application", kTRUE, kTRUE);
@@ -38,7 +34,6 @@ void run_multi(const TString& configMacro1 = "g3tgeoConfig.C", const TString& co
   // set_vis();
 
   appl->RunMC(1);
-  appl->ExportGeometry("geometry.root");
 
   delete appl;
 }

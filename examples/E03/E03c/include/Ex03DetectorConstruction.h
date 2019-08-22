@@ -3,7 +3,7 @@
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2014 - 2018 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -17,7 +17,7 @@
 /// Id: ExN03DetectorConstruction.hh,v 1.5 2002/01/09 17:24:11 ranjard Exp
 /// GEANT4 tag $Name:  $
 ///
-/// \author Benedikt Volkel, CERN
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <map>
 
@@ -30,8 +30,8 @@ class TVirtualMC;
 /// \ingroup E03c
 /// \brief The detector construction (via TGeo )
 ///
-/// \date 30/04/2019
-/// \author Benedikt Volkel, CERN
+/// \date 06/03/2003
+/// \author I. Hrivnacova; IPN, Orsay
 
 class Ex03DetectorConstruction : public TObject
 {

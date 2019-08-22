@@ -20,7 +20,7 @@
 #include <globals.hh>
 
 class G4ParticleDefinition;
-class TMCParticleStatus;
+struct TMCParticleStatus;
 
 /// \ingroup physics
 /// \brief Defines additional track information.

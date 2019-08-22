@@ -15,7 +15,7 @@
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
-/// \author Benedikt Volkel, CERN
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4VUserPostDetConstruction.h"
 #include "globals.hh"

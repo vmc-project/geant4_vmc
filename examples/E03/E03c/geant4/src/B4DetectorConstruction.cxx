@@ -156,9 +156,8 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
   //
   // Calorimeter
   //
-  G4VSolid* calorimeterS = new G4Box("Calorimeter", // its name
-    calorSizeXY / 2, calorSizeXY / 2,
-    calorThickness / 2); // its size
+  G4VSolid* calorimeterS = new G4Box("Calorimeter",        // its name
+    calorSizeXY / 2, calorSizeXY / 2, calorThickness / 2); // its size
 
   G4LogicalVolume* calorLV = new G4LogicalVolume(calorimeterS, // its solid
     defaultMaterial,                                           // its material
@@ -176,9 +175,8 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
   //
   // Layer
   //
-  G4VSolid* layerS = new G4Box("Layer", // its name
-    calorSizeXY / 2, calorSizeXY / 2,
-    layerThickness / 2); // its size
+  G4VSolid* layerS = new G4Box("Layer",                    // its name
+    calorSizeXY / 2, calorSizeXY / 2, layerThickness / 2); // its size
 
   G4LogicalVolume* layerLV = new G4LogicalVolume(layerS, // its solid
     defaultMaterial,                                     // its material
@@ -194,9 +192,8 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
   //
   // Absorber
   //
-  G4VSolid* absorberS = new G4Box("Abso", // its name
-    calorSizeXY / 2, calorSizeXY / 2,
-    absoThickness / 2); // its size
+  G4VSolid* absorberS = new G4Box("Abso",                 // its name
+    calorSizeXY / 2, calorSizeXY / 2, absoThickness / 2); // its size
 
   G4LogicalVolume* absorberLV = new G4LogicalVolume(absorberS, // its solid
     absorberMaterial,                                          // its material

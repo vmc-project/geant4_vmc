@@ -45,7 +45,7 @@ namespace
 
 TG4EventAction* GetEventAction()
 {
-  return dynamic_cast<TG4EventAction*>(const_cast<G4UserEventAction*>(
+  return static_cast<TG4EventAction*>(const_cast<G4UserEventAction*>(
     G4RunManager::GetRunManager()->GetUserEventAction()));
 }
 
@@ -123,7 +123,7 @@ G4bool TG4PrimaryGeneratorAction::CheckParticleDefinition(
 }
 
 //_____________________________________________________________________________
-G4bool TG4PrimaryGeneratorAction::GetProperCharge(
+G4double TG4PrimaryGeneratorAction::GetProperCharge(
   const G4ParticleDefinition* particleDefinition,
   const TParticle* particle) const
 {

@@ -1,6 +1,6 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2014 Ivana Hrivnacova
+// Copyright (C) 2014 - 2018 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
@@ -12,8 +12,8 @@
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
-/// \date 30/04/2019
-/// \author Benedikt Volkel, CERN
+/// \date 06/03/2002
+/// \author I. Hrivnacova; IPN, Orsay
 
 #include <Riostream.h>
 #include <TClonesArray.h>
