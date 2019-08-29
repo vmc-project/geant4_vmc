@@ -20,19 +20,19 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include <TClonesArray.h>
-#include <TVirtualMCSensitiveDetector.h>
+#include <TNamed.h>
 
 class Ex03DetectorConstruction;
 class Ex03CalorHit;
 class TVirtualMC;
 
-/// \ingroup E03b
+/// \ingroup E03a
 /// \brief The calorimeter sensitive detector
 ///
 /// \date 06/03/2003
 /// \author I. Hrivnacova; IPN, Orsay
 
-class Ex03CalorimeterSD : public TVirtualMCSensitiveDetector
+class Ex03CalorimeterSD : public TNamed
 {
  public:
   Ex03CalorimeterSD(const char* name, Ex03DetectorConstruction* detector);
@@ -43,7 +43,7 @@ class Ex03CalorimeterSD : public TVirtualMCSensitiveDetector
 
   // methods
   void Initialize();
-  virtual void ProcessHits();
+  Bool_t ProcessHits();
   void EndOfEvent();
   void Register();
   virtual void Print(Option_t* option = "") const;
@@ -51,7 +51,6 @@ class Ex03CalorimeterSD : public TVirtualMCSensitiveDetector
 
   // set methods
   void SetVerboseLevel(Int_t level);
-  void SetPrintModulo(Int_t value);
 
   // get methods
   Ex03CalorHit* GetHit(Int_t i) const;
@@ -67,7 +66,6 @@ class Ex03CalorimeterSD : public TVirtualMCSensitiveDetector
   Int_t fAbsorberVolId;                ///< The absorber volume Id
   Int_t fGapVolId;                     ///< The gap volume Id
   Int_t fVerboseLevel;                 ///< Verbosity level
-  Int_t fPrintModulo; ///< The event modulus number to be printed
 
   ClassDef(Ex03CalorimeterSD, 1) // Ex03CalorimeterSD
 };
@@ -77,13 +75,6 @@ class Ex03CalorimeterSD : public TVirtualMCSensitiveDetector
 inline void Ex03CalorimeterSD::SetVerboseLevel(Int_t level)
 {
   fVerboseLevel = level;
-}
-
-/// Set the event modulus number to be printed
-/// \param value  The new event modulus number value
-inline void Ex03CalorimeterSD::SetPrintModulo(Int_t value)
-{
-  fPrintModulo = value;
 }
 
 #endif // EX02_CALORIMETER_SD_H
