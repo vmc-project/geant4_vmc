@@ -639,7 +639,8 @@ void Ex03MCApplication::FinishEvent()
 
   fRootManager->Fill();
 
-  if (fEventNo % fPrintModulo == 0) fCalorimeterSD->PrintTotal();
+  // if (fEventNo % fPrintModulo == 0)
+  //   fCalorimeterSD->PrintTotal();
 
   fCalorimeterSD->EndOfEvent();
 
