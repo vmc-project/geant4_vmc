@@ -15,7 +15,7 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#define GEANT4_VMC_RELEASE "3.6.p4.inclxx-biasing-p1"
-#define GEANT4_VMC_RELEASE_DATE "25 July 2019"
+#define GEANT4_VMC_RELEASE "3.6.p4.inclxx-biasing-p2"
+#define GEANT4_VMC_RELEASE_DATE "4 September 2019"
 
 #endif // TG4_VERSION_H

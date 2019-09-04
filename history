@@ -9,6 +9,19 @@
      
 Tags (history):
 ===============
+  04/09/2019
+  v3-6-p4-inclxx-biasing-p2:
+    Enhanced commands for setting regions with extra physics:
+    - Added "setOneRegion" command to supports name with spaces
+    - Added support for abc* pattern
+    - The setRegions and setOneRegions commands can be called
+      more times
+      Examples:
+      /mcPhysics/biasing/setRegions ITS*
+           # set biasing to all media starting with ITS
+      /mcPhysics/biasing/setOneRegion ITS_SPD-BUS CU KAPTON$
+           #set biasing to "ITS_SPD-BUS CU KAPTON$" medium
+
   25/07/2019
   v3-6-p4-inclxx-biasing-p1:
     - Fix in TG4BiasingOperation (by Alberto Ribon, CERN):
