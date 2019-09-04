@@ -77,7 +77,7 @@ class TG4EmModelPhysics : public TG4VPhysicsConstructor
   TG4EmModelPhysics& operator=(const TG4EmModelPhysics& right);
 
   void AddModel(TG4EmModel model, const G4ParticleDefinition* particle,
-    const G4String& regionName);
+    const std::vector<G4String>& regions);
   void AddModels(const std::vector<TG4ModelConfiguration*>& models);
 };
 

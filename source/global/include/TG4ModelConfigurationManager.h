@@ -45,7 +45,8 @@ class TG4ModelConfigurationManager : public TG4Verbose
   // set methods
   void SetModel(const G4String& modelName);
   void SetModelParticles(const G4String& modelName, const G4String& particles);
-  void SetModelRegions(const G4String& modelName, const G4String& regions);
+  void SetModelRegions(const G4String& modelName, const G4String& regionsMedia);
+  void SetOneModelRegion(const G4String& modelName, const G4String& regionMedium);
 
   // get methods
   G4String GetName() const;

@@ -18,6 +18,7 @@
 #include "globals.hh"
 
 #include <map>
+#include <vector>
 
 class TG4Medium;
 
@@ -47,6 +48,8 @@ class TG4MediumMap
   TG4Medium* GetMedium(const G4String& name, G4bool warn = true) const;
   TG4Medium* GetMedium(G4LogicalVolume* lv, G4bool warn = true) const;
   TG4Medium* GetMedium(const G4Material* material, G4bool warn = true) const;
+  void GetMedia(const G4String& namePattern, std::vector<TG4Medium*>& media,
+    G4bool warn = true) const;
 
  private:
   /// Not implemented

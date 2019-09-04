@@ -17,6 +17,8 @@
 
 #include <globals.hh>
 
+#include <vector>
+
 class G4VFastSimulationModel;
 
 /// \ingroup global
@@ -40,14 +42,15 @@ class TG4ModelConfiguration
   // set methods
   void SetParticles(const G4String& particles);
   void SetRegionsMedia(const G4String& regionsMedia);
-  void SetRegions(const G4String& regions);
+  void SetOneRegionMedium(const G4String& regionMedium);
+  void SetOneRegion(const G4String& region);
   void SetFastSimulationModel(G4VFastSimulationModel* fastSimulationModel);
 
   // get methods
   const G4String& GetModelName() const;
   const G4String& GetParticles() const;
-  const G4String& GetRegionsMedia() const;
-  const G4String& GetRegions() const;
+  const std::vector<G4String>& GetRegionsMedia() const;
+  const std::vector<G4String>& GetRegions() const;
   G4VFastSimulationModel* GetFastSimulationModel() const;
 
   G4bool HasParticle(const G4String& particleName);
@@ -62,8 +65,8 @@ class TG4ModelConfiguration
   // data members
   G4String fModelName;    ///< the EM model name
   G4String fParticles;    ///< the list of particle names
-  G4String fRegionsMedia; ///< the list of regions media
-  G4String fRegions;      ///< the list of created regions (per materials)
+  std::vector<G4String> fRegionsMedia; ///< the vector of regions media
+  std::vector<G4String> fRegions;      ///< the vector of created regions (per materials)
   G4VFastSimulationModel* fFastSimulationModel; ///< fast simulation model
 };
 
@@ -73,18 +76,6 @@ inline void TG4ModelConfiguration::SetParticles(const G4String& particles)
 {
   /// Set the list of particles
   fParticles = particles;
-}
-
-inline void TG4ModelConfiguration::SetRegionsMedia(const G4String& regionsMedia)
-{
-  /// Set the list of regions
-  fRegionsMedia = regionsMedia;
-}
-
-inline void TG4ModelConfiguration::SetRegions(const G4String& regions)
-{
-  /// Set the list of created regions
-  fRegions = regions;
 }
 
 inline void TG4ModelConfiguration::SetFastSimulationModel(
@@ -106,13 +97,13 @@ inline const G4String& TG4ModelConfiguration::GetParticles() const
   return fParticles;
 }
 
-inline const G4String& TG4ModelConfiguration::GetRegionsMedia() const
+inline const std::vector<G4String>& TG4ModelConfiguration::GetRegionsMedia() const
 {
   /// Return the list of regions
   return fRegionsMedia;
 }
 
-inline const G4String& TG4ModelConfiguration::GetRegions() const
+inline const std::vector<G4String>& TG4ModelConfiguration::GetRegions() const
 {
   /// Return the list of regions
   return fRegions;

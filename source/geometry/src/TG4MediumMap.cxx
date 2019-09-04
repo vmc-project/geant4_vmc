@@ -207,3 +207,32 @@ TG4Medium* TG4MediumMap::GetMedium(
 
   return it->second;
 }
+
+//_____________________________________________________________________________
+void TG4MediumMap::GetMedia(const G4String& namePattern, std::vector<TG4Medium*>& media,
+    G4bool warn) const
+{
+  /// Fill the 'media' vector with media which name matches the pattern.
+  /// Only ABC* pattern is supported.
+
+  // Strip pattern
+  std::string pattern = namePattern;
+  if ( pattern.find("*") != std::string::npos ) {
+    pattern.erase(pattern.find("*"));
+  }
+  
+  G4bool found = false;
+  std::map<G4int, TG4Medium*>::const_iterator it;
+  for (it = fIdMap.begin(); it != fIdMap.end(); ++it) {
+    if (it->second->GetName().find(pattern) != std::string::npos) {
+      media.push_back(it->second);
+      found = true;
+    }
+  }
+
+  // Give warning if not found
+  if (warn && (!found)) {
+    TG4Globals::Warning("TG4MediumMap", "GetMedia",
+      "No medium with name pattern " + TString(namePattern) + " was found.");
+  }
+}

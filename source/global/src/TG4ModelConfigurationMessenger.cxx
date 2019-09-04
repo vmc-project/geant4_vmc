@@ -102,6 +102,17 @@ TG4ModelConfigurationMessenger::TG4ModelConfigurationMessenger(
   fSetRegionsCmd->SetGuidance(guidance);
   fSetRegionsCmd->SetParameterName("Regions", false);
   fSetRegionsCmd->AvailableForStates(G4State_PreInit);
+
+  // setOneRegion command
+  commandName = dirName + "setOneRegion";
+  fSetOneRegionCmd = new G4UIcmdWithAString(commandName, this);
+  guidance = "Set one tracking medium name (regions) for the selected extra " +
+             physicsName + "\n" +
+             "("
+             " = the model will be applied to the default world region.";
+  fSetOneRegionCmd->SetGuidance(guidance);
+  fSetOneRegionCmd->SetParameterName("Region", false);
+  fSetOneRegionCmd->AvailableForStates(G4State_PreInit);
 }
 
 //______________________________________________________________________________
@@ -113,6 +124,7 @@ TG4ModelConfigurationMessenger::~TG4ModelConfigurationMessenger()
   delete fSetEmModelCmd;
   delete fSetParticlesCmd;
   delete fSetRegionsCmd;
+  delete fSetOneRegionCmd;
 }
 
 //
@@ -134,5 +146,8 @@ void TG4ModelConfigurationMessenger::SetNewValue(
   }
   else if (command == fSetRegionsCmd) {
     fModelConfigurationManager->SetModelRegions(fSelectedModel, newValue);
+  }
+  else if (command == fSetOneRegionCmd) {
+    fModelConfigurationManager->SetOneModelRegion(fSelectedModel, newValue);
   }
 }
