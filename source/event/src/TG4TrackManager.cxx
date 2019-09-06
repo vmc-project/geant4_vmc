@@ -96,6 +96,7 @@ void TG4TrackManager::LateInitialize()
 
   fStackPopper = TG4StackPopper::Instance();
 #ifdef USE_G4ROOT
+#ifndef USE_ROOT_VMC
   // Set recovery lambda
   if (fMCManager && fRootNavMgr) {
     fRootNavMgr->SetGeometryRestoreFunction([this](Int_t g4TrackId) -> Bool_t {
@@ -103,6 +104,7 @@ void TG4TrackManager::LateInitialize()
         fPrimaryParticleIds[g4TrackId - 1]);
     });
   }
+#endif
 #endif
 }
 
