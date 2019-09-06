@@ -1,33 +1,28 @@
 //------------------------------------------------
 // The Virtual Monte Carlo examples
-// Copyright (C) 2007 - 2015 Ivana Hrivnacova
+// Copyright (C) 2007 - 2014 Ivana Hrivnacova
 // All rights reserved.
 //
 // For the licensing terms see geant4_vmc/LICENSE.
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file TR/set_vis.C
-/// \brief Macro for setting visualization for Example TR
+/// \file E03/set_g3_vis.C
+/// \brief Macro for setting visualization for Example03
 
 #include "TVirtualMC.h"
 
-void set_vis()
+void set_g3_vis()
 {
-/// Macro for setting visualization for Example TR
+/// Macro for setting G3 visualization for Example03
 
+  // Set drawing options
   if ( TString(gMC->GetName()) == "TGeant3TGeo" ) {
-    // Set drawing options
     TGeoVolume* vol;
-    vol = gGeoManager->GetVolume("Radiator");
+    vol = gGeoManager->GetVolume("ABSO");
     if (vol) vol->SetLineColor(kMagenta);
-    vol = gGeoManager->GetVolume("Absorber");
+    vol = gGeoManager->GetVolume("GAPX");
     if (vol) vol->SetLineColor(kYellow);
     gMC->SetCollectTracks(kTRUE);
-  }
-
-  if (TString(gMC->GetName()) == "TGeant4") {
-    // Setting Geant4 visualization
-   ((TGeant4*)gMC)->ProcessGeantMacro("g4vis.in");
   }
 }

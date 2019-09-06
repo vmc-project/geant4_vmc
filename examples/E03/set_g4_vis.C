@@ -7,17 +7,14 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file E03/set_vis.C
-/// \brief Macro for setting visualization for Example03
+/// \file E03/set_g4_vis.C
+/// \brief Macro for setting G4 visualization for Example03
 
 #include "TVirtualMC.h"
 
-void set_vis()
+void set_g4_vis()
 {
-/// Macro for setting visualization for Example03
+/// Macro for setting G4 visualization for Example03
 
-  if (TString(gMC->GetName()) == "TGeant4") {
-    // Setting Geant4 visualization
-   ((TGeant4*)gMC)->ProcessGeantMacro("g4vis.in");
-  }
+  ((TGeant4*)gMC)->ProcessGeantMacro("g4vis.in");
 }

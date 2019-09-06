@@ -9,7 +9,7 @@
 
 #include "TVirtualMC.h"
 
-#include "set_vis.C"
+#include "set_g4_vis.C"
 
 /// \ingroup Monopole
 /// \file Monopole/run_g4.C
@@ -50,7 +50,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
   // ((TGeant4*)gMC)->StartGeantUI();
 
   // Visualization setting
-  set_vis();
+  set_g4_vis();
 
   // Run MC
   TStopwatch timer;

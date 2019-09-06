@@ -11,7 +11,7 @@
 /// \file E03/run_g3.C
 /// \brief Macro for running Example03 with Geant3
 
-#include "set_vis.C"
+#include "set_g3_vis.C"
 
 void run_g3(const TString& configMacro = "g3tgeoConfig.C")
 {
@@ -30,7 +30,7 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
   appl->InitMC(configMacro);
 
   // visualization setting
-  set_vis();
+  set_g3_vis();
 
   appl->RunMC(5);
 

@@ -13,7 +13,7 @@
 
 #include "TVirtualMC.h"
 
-#include "set_vis.C"
+#include "set_g4_vis.C"
 
 void run_g4(const TString& configMacro = "g4Config.C")
 {
@@ -32,7 +32,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
   ((TGeant4*)gMC)->ProcessGeantMacro("g4config2.in");
 
   // Visualization setting
-  set_vis();
+  set_g4_vis();
 
   // Enter in Geant4 interactive session
   //((TGeant4*)gMC)->StartGeantUI();

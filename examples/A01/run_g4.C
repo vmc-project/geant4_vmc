@@ -11,7 +11,7 @@
 /// \file A01/run_g4.C
 /// \brief Macro for running Example A01 with Geant4.
 
-#include "set_vis.C"
+#include "set_g4_vis.C"
 
 void run_g4(const TString& configMacro = "g4Config.C")
 {
@@ -34,7 +34,7 @@ void run_g4(const TString& configMacro = "g4Config.C")
   appl->InitMC(configMacro);
 
   // visualization setting
-  set_vis();
+  set_g4_vis();
 
   // Enter in Geant4 interactive session
   //((TGeant4*)gMC)->StartGeantUI();
