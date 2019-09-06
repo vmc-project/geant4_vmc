@@ -11,7 +11,8 @@
 /// \file E03/run_g3.C
 /// \brief Macro for running Example03 with mixed GEANT3 and GEANT4
 
-#include "set_vis.C"
+// #include "set_g3_vis.C"
+// #include "set_g4_vis.C"
 
 void run_multi(const TString& configMacro1 = "g3tgeoConfig.C", const TString& configMacro2 = "g4tgeoConfig4Seq.C")
 {
@@ -24,16 +25,18 @@ void run_multi(const TString& configMacro1 = "g3tgeoConfig.C", const TString& co
 
 // MC application
   auto appl = new Ex03MCApplication("Example03", "The example03 MC application", kTRUE, kTRUE);
-  appl->SetVerboseLevel(4);
+  // appl->SetVerboseLevel(4);
   appl->GetPrimaryGenerator()->SetNofPrimaries(20);
   appl->SetPrintModulo(1);
 
   appl->InitMC({configMacro1.Data(), configMacro2.Data()});
 
   // visualization setting
-  // set_vis();
+  // Not available with multi engine run
+  // set_g3_vis();
+  // set_g4_vis();
 
-  appl->RunMC(1);
+  appl->RunMC(5);
 
   delete appl;
 }
