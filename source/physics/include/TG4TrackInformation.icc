@@ -13,6 +13,8 @@
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
+#include "TMCParticleStatus.h"
+
 /// Geant4 allocator for TG4TrackInformation objects
 extern G4ThreadLocal G4Allocator<TG4TrackInformation>* gTrackInfoAllocator;
 
@@ -63,6 +65,13 @@ inline void TG4TrackInformation::SetPDGEncoding(G4int pdgEncoding)
   fPDGEncoding = pdgEncoding;
 }
 
+inline void TG4TrackInformation::SetInitialTrackStatus(
+  TMCParticleStatus* status)
+{
+  /// set initial status of the particle on the VMC stack all at once
+  fInitialTrackStatus = status;
+}
+
 inline void TG4TrackInformation::SetIsUserTrack(G4bool isUserTrack)
 {
   /// Set info that the track was poped from the VMC stack
@@ -73,6 +82,13 @@ inline void TG4TrackInformation::SetStop(G4bool stop)
 {
   /// Set info that the track should be stopped
   fStop = stop;
+}
+
+inline void TG4TrackInformation::SetInterrupt(G4bool interrupt)
+{
+  /// Set info if the track should be interrupted so no hooks like
+  /// TVirtualMCApplication::PostTrack() are called.
+  fInterrupt = interrupt;
 }
 
 inline G4int TG4TrackInformation::GetTrackParticleID() const
@@ -99,6 +115,12 @@ inline G4int TG4TrackInformation::GetPDGEncoding() const
   return fPDGEncoding;
 }
 
+inline const TMCParticleStatus*
+TG4TrackInformation::GetInitialTrackStatus() const
+{
+  return fInitialTrackStatus;
+}
+
 inline G4bool TG4TrackInformation::IsUserTrack() const
 {
   /// Return the info if the track was poped from the VMC stack
@@ -109,4 +131,11 @@ inline G4bool TG4TrackInformation::IsStop() const
 {
   /// Return the info if the track should be stopped
   return fStop;
+}
+
+inline G4bool TG4TrackInformation::IsInterrupt() const
+{
+  /// Return the info if the track should be interrupted so no hooks like
+  /// TVirtualMCApplication::PostTrack() are called.
+  return fInterrupt;
 }

@@ -225,6 +225,7 @@ class TGeant4 : public TVirtualMC
 
   // action methods
   virtual void StopTrack();
+  virtual void InterruptTrack();
   virtual void StopEvent();
   virtual void StopRun();
 
@@ -271,6 +272,11 @@ class TGeant4 : public TVirtualMC
   virtual Double_t TrackTime() const;
   virtual Double_t Edep() const;
   virtual Double_t NIELEdep() const;
+  virtual Int_t StepNumber() const;
+  virtual Double_t TrackWeight() const;
+  virtual void TrackPolarization(
+    Double_t& polX, Double_t& polY, Double_t& polZ) const;
+  virtual void TrackPolarization(TVector3& pol) const;
   // static properties
   virtual Int_t TrackPid() const;
   virtual Double_t TrackCharge() const;
@@ -324,6 +330,8 @@ class TGeant4 : public TVirtualMC
   virtual void Init();
   virtual void InitMT(Int_t threadRank);
   virtual void ProcessEvent();
+  virtual void ProcessEvent(Int_t eventId);
+  virtual void ProcessEvent(Int_t eventId, Bool_t isInterruptible);
   virtual Bool_t ProcessRun(Int_t nofEvents);
   Bool_t FinishRun();
   virtual void SetCollectTracks(Bool_t collectTracks);

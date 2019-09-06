@@ -17,6 +17,8 @@
 #ifndef ROOT_TG4RootNavigator
 #define ROOT_TG4RootNavigator
 
+#include <functional>
+
 #include "G4Navigator.hh"
 
 #include <Rtypes.h>
@@ -25,6 +27,7 @@ class TGeoManager;
 class TGeoNavigator;
 class TGeoNode;
 class TG4RootDetectorConstruction;
+class G4TrackingManager;
 
 /// \brief GEANT4 navigator using directly a TGeo geometry.
 ///
@@ -38,10 +41,10 @@ class TG4RootNavigator : public G4Navigator
 {
 
  protected:
-  TGeoManager* fGeometry;    ///< TGeo geometry manager
-  TGeoNavigator* fNavigator; ///< TGeo navigator
-  TG4RootDetectorConstruction*
-    fDetConstruction; ///< G4Root detector construction
+  TGeoManager* fGeometry;                        ///< TGeo geometry manager
+  TGeoNavigator* fNavigator;                     ///< TGeo navigator
+  TG4RootDetectorConstruction* fDetConstruction; ///< G4Root detector
+                                                 /// construction
 
   Bool_t fStepEntering;      ///< Next step is entering daughter
   Bool_t fStepExiting;       ///< Next step is exiting current volume
@@ -49,6 +52,9 @@ class TG4RootNavigator : public G4Navigator
   G4ThreeVector fSafetyOrig; ///< Last computed safety origin
   G4double fLastSafety;      ///< Last computed safety
   Int_t fNzeroSteps;         ///< Number of zero steps in ComputeStep
+  G4TrackingManager* fG4TrackingManager; ///< Store pointer to G4TrackingManager
+  std::function<Bool_t(Int_t)> fRestoreGeoStateFunction; ///< Function pointer
+                                                         /// to restore geometry
  private:
   G4VPhysicalVolume* SynchronizeHistory();
   TGeoNode* SynchronizeGeoManager();
@@ -97,6 +103,15 @@ class TG4RootNavigator : public G4Navigator
   //   Normals are not available for replica volumes (returns valid= false)
   // These methods takes full care about how to calculate this normal,
   // but if the surfaces are not convex it will return valid=false.
+
+  /// Set current G4TrackingManager
+  void SetG4TrackingManager(G4TrackingManager* trackingManager);
+
+  /// Store and call the given function to request the restoring of the geometry
+  /// status. Returns true if the geometry was restored, otherwise the node has
+  /// to be found manually.
+  void SetGeometryRestoreFunction(
+    std::function<Bool_t(Int_t)> restoreGeoStateFunction);
 
   //   ClassDef(TG4RootNavigator,0)  // Class defining a G4Navigator based on
   //   ROOT geometry

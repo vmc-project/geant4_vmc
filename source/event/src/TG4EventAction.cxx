@@ -47,7 +47,8 @@ TG4EventAction::TG4EventAction()
     fTrackManager(0),
     fStateManager(0),
     fPrintMemory(false),
-    fSaveRandomStatus(false)
+    fSaveRandomStatus(false),
+    fIsInterruptibleEvent(false)
 {
   /// Default constructor
 }
@@ -116,6 +117,7 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
   /// Called by G4 kernel at the end of event.
 
   // finish the last primary track of the current event
+  // G4cout << "Finish primary from event action" << G4endl;
   fTrackingAction->FinishPrimaryTrack();
 
   if (VerboseLevel() > 1) {
@@ -148,7 +150,9 @@ void TG4EventAction::EndOfEventAction(const G4Event* event)
   }
 
   // VMC application finish event
-  fMCApplication->FinishEvent();
+  if (!fIsInterruptibleEvent) {
+    fMCApplication->FinishEvent();
+  }
   fStateManager->SetNewState(kNotInApplication);
 
   if (VerboseLevel() > 1) {

@@ -22,6 +22,9 @@
 #include "G4SystemOfUnits.hh"
 
 // ClassImp(TG4RootNavigator)
+// To get the current track in case to restore a geometry status
+#include "G4Track.hh"
+#include "G4TrackingManager.hh"
 
 /// constant for conversion cm <-> mm
 static const double gCm = 1. / cm;
@@ -39,7 +42,9 @@ TG4RootNavigator::TG4RootNavigator()
     fNextPoint(),
     fSafetyOrig(),
     fLastSafety(0),
-    fNzeroSteps(0)
+    fNzeroSteps(0),
+    fG4TrackingManager(nullptr),
+    fRestoreGeoStateFunction(nullptr)
 {
   /// Dummy ctor.
 }
@@ -55,7 +60,9 @@ TG4RootNavigator::TG4RootNavigator(TG4RootDetectorConstruction* dc)
     fNextPoint(),
     fSafetyOrig(),
     fLastSafety(0),
-    fNzeroSteps(0)
+    fNzeroSteps(0),
+    fG4TrackingManager(nullptr),
+    fRestoreGeoStateFunction(nullptr)
 {
   /// Default ctor.
   fSafetyOrig.set(kInfinity, kInfinity, kInfinity);
@@ -350,6 +357,17 @@ G4VPhysicalVolume* TG4RootNavigator::LocateGlobalPointAndSetup(
 
   static Long64_t ilocate = 0;
   ilocate++;
+
+  // Flag if geometry state was recovered.
+  Bool_t isGeoStateRestored = kFALSE;
+  // Try recstore geometry for those G4Tracks which are treated as primaries
+  // since they might have been transferred to GEANT4 from another engine
+  if (fG4TrackingManager && fRestoreGeoStateFunction &&
+      fG4TrackingManager->GetTrack()->GetParentID() == 0) {
+    Int_t currG4TrackId = fG4TrackingManager->GetTrack()->GetTrackID();
+    isGeoStateRestored = fRestoreGeoStateFunction(currG4TrackId);
+  }
+
 #ifdef G4ROOT_DEBUG
   G4cout.precision(12);
   G4cout << "LocateGlobalPointAndSetup #" << ilocate
@@ -397,7 +415,7 @@ G4VPhysicalVolume* TG4RootNavigator::LocateGlobalPointAndSetup(
     fNavigator->CdNext();
     fNavigator->CrossBoundaryAndLocate(fStepEntering, skip);
   }
-  else {
+  else if (!isGeoStateRestored) {
     //      if (!relativeSearch) fNavigator->CdTop();
     fNavigator->FindNode();
   }
@@ -559,4 +577,17 @@ G4ThreeVector TG4RootNavigator::GetGlobalExitNormal(
   G4cout << "GetGlobalExitNormal: " << normal << G4endl;
 #endif
   return normal;
+}
+
+//______________________________________________________________________________
+void TG4RootNavigator::SetG4TrackingManager(G4TrackingManager* trackingManager)
+{
+  fG4TrackingManager = trackingManager;
+}
+
+//______________________________________________________________________________
+void TG4RootNavigator::SetGeometryRestoreFunction(
+  std::function<Bool_t(Int_t)> restoreGeoStateFunction)
+{
+  fRestoreGeoStateFunction = restoreGeoStateFunction;
 }

@@ -14,6 +14,8 @@
            MCApplication::Stepping (old way)
   - <a href="group__E03b.html">E03b</a> - scoring via sensitive detectors derived from new
            TVirtualMCSensitiveDetector interface
+  - <a href="group__E03c.html">E03c</a> - adapted from E03a demonstrating the usage of sharing event
+          simulation amongs multiple different engines.
 
   It demonstrates:
     - Geometry - divided volume (Gsdvn)
@@ -36,6 +38,17 @@
     - User defined particles and ions (G3, G4)
     - User defined regions (G4)
     - User defined magnetic field equation of motion and/or its integrator (G4)
+
+    E03c specifics:
+    The simulation is configured such that the volume GAPX (ABSO) is
+    simulated by GEANT3 (GEANT4) and the volume ABSO (GAPX) is taken care
+    of by GEANT4 (GEANT3). Tracks are intercepted when necessary and
+    transferred automatically to the stack of the responsible engine. The
+    user stack is managed automatically as well and contains no
+    intermediate stages of transported particles.
+
+    This example contains the minimal addition of code necessary to
+    achieve this behaviour when compared to examples E03a/b.
 
 
   See also description of in
@@ -111,6 +124,14 @@
   </pre>
 
   To run the Ex03b variant, use load_g3b.C and load_g4b.C macros.
+
+\section e03_s4 To run example (Ex03c)
+
+  <pre>
+  With G3 and G4 + TGeo (no other geometry available):
+  root[0] .x \link E03/load_multi.C load_multi.C\endlink
+  root[1] .x \link E03/run_multi.C run_multi.C\endlink
+  </pre>
 
 \section e03_s5 Classes
 

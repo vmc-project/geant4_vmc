@@ -17,6 +17,8 @@ cmake_minimum_required(VERSION 2.6.4 FATAL_ERROR)
 
 add_subdirectory(E03a)
 add_subdirectory(E03b)
+add_subdirectory(E03c)
+
 
 #----------------------------------------------------------------------------
 # E03b example requires ROOT version >= 6.13/04

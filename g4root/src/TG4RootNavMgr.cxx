@@ -210,3 +210,16 @@ void TG4RootNavMgr::PrintG4State() const
   G4NavigationHistory* history = fNavigator->GetHistory();
   G4cout << *history << G4endl;
 }
+
+//______________________________________________________________________________
+void TG4RootNavMgr::SetG4TrackingManager(G4TrackingManager* trackingManager)
+{
+  fNavigator->SetG4TrackingManager(trackingManager);
+}
+
+//______________________________________________________________________________
+void TG4RootNavMgr::SetGeometryRestoreFunction(
+  std::function<Bool_t(Int_t)> restoreGeoStateFunction)
+{
+  fNavigator->SetGeometryRestoreFunction(restoreGeoStateFunction);
+}

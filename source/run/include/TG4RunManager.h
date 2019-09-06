@@ -30,6 +30,7 @@ class G4RunManager;
 class G4UIExecutive;
 
 class TApplication;
+class TMCManager;
 
 /// \ingroup run
 /// \brief Geant4 implementation of the TVirtualMC interface methods
@@ -55,6 +56,7 @@ class TG4RunManager : public TG4Verbose
   void LateInitialize();
   void CacheMCStack();
   void ProcessEvent();
+  void ProcessEvent(G4int eventId, G4bool isInterruptible);
   Bool_t ProcessRun(G4int nofEvents);
   Bool_t FinishRun();
 

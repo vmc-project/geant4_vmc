@@ -55,6 +55,8 @@
 
 #include <TGeoManager.h>
 #include <TInterpreter.h>
+#include <TMCManager.h>
+#include <TMCManagerStack.h>
 #include <TROOT.h>
 #include <TRandom.h>
 #include <TRint.h>
@@ -192,27 +194,28 @@ void TG4RunManager::ConfigureRunManager()
 #ifdef USE_G4ROOT
   TG4RootNavMgr* rootNavMgr = 0;
   if (userGeometry == "VMCtoRoot" || userGeometry == "Root") {
+    if (!TMCManager::Instance()) {
+      // Construct geometry via VMC application
+      if (TG4GeometryManager::Instance()->VerboseLevel() > 0)
+        G4cout << "Running TVirtualMCApplication::ConstructGeometry"
+               << std::endl;
 
-    // Construct geometry via VMC application
-    if (TG4GeometryManager::Instance()->VerboseLevel() > 0)
-      G4cout << "Running TVirtualMCApplication::ConstructGeometry";
+      TG4StateManager::Instance()->SetNewState(kConstructGeometry);
+      TVirtualMCApplication::Instance()->ConstructGeometry();
+      TG4StateManager::Instance()->SetNewState(kNotInApplication);
 
-    TG4StateManager::Instance()->SetNewState(kConstructGeometry);
-    TVirtualMCApplication::Instance()->ConstructGeometry();
-    TG4StateManager::Instance()->SetNewState(kNotInApplication);
+      // Set top volume and close Root geometry if not yet done
+      if (!gGeoManager->IsClosed()) {
+        TGeoVolume* top = (TGeoVolume*)gGeoManager->GetListOfVolumes()->First();
+        gGeoManager->SetTopVolume(top);
+        gGeoManager->CloseGeometry();
+      }
 
-    // Set top volume and close Root geometry if not yet done
-    if (!gGeoManager->IsClosed()) {
-      TGeoVolume* top = (TGeoVolume*)gGeoManager->GetListOfVolumes()->First();
-      gGeoManager->SetTopVolume(top);
-      gGeoManager->CloseGeometry();
+      // Now that we have the ideal geometry, call application misalignment code
+      TG4StateManager::Instance()->SetNewState(kMisalignGeometry);
+      TVirtualMCApplication::Instance()->MisalignGeometry();
+      TG4StateManager::Instance()->SetNewState(kNotInApplication);
     }
-
-    // Now that we have the ideal geometry, call application misalignment code
-    TG4StateManager::Instance()->SetNewState(kMisalignGeometry);
-    TVirtualMCApplication::Instance()->MisalignGeometry();
-    TG4StateManager::Instance()->SetNewState(kNotInApplication);
-
     // Pass geometry to G4Root navigator
     rootNavMgr = TG4RootNavMgr::GetInstance(gGeoManager);
   }
@@ -483,12 +486,14 @@ void TG4RunManager::CacheMCStack()
     return;
   }
 
+  TMCManagerStack* mcManagerStack = gMC->GetManagerStack();
   // Set stack to the event actions if they exists
   // (on worker only if in MT mode)
   if (GetEventAction()) {
     GetEventAction()->SetMCStack(mcStack);
     TG4TrackingAction::Instance()->SetMCStack(mcStack);
     TG4TrackManager::Instance()->SetMCStack(mcStack);
+    TG4TrackManager::Instance()->SetMCManagerStack(mcManagerStack);
 
     if (TG4StackPopper::Instance()) {
       TG4StackPopper::Instance()->SetMCStack(mcStack);
@@ -501,11 +506,20 @@ void TG4RunManager::CacheMCStack()
 //_____________________________________________________________________________
 void TG4RunManager::ProcessEvent()
 {
-  /// Replaying what is done in G4RunManager::BeamOn in order to initialize a
-  /// run only once and process single events on user request
+  /// Process one event using internal event counter
 
+  ProcessEvent(fNEventsProcessed++, false);
+}
+
+//_____________________________________________________________________________
+void TG4RunManager::ProcessEvent(G4int eventId, G4bool isInterruptible)
+{
+  /// Process one event using event ID given as argument
+
+  // First, replay what is done in G4RunManager::BeamOn(...) explicitly
   if (!fHasEventByEventInitialization) {
-    if (!fRunManager->ConfirmBeamOnCondition()) {
+    G4bool cond = fRunManager->ConfirmBeamOnCondition();
+    if (!cond) {
       TG4Globals::Warning("TG4RunManager", "ProcessEvent",
         "Bad beam condition in G4RunManager. No event processed.");
       return;
@@ -514,7 +528,11 @@ void TG4RunManager::ProcessEvent()
     fRunManager->RunInitialization();
     fHasEventByEventInitialization = true;
   }
-  fRunManager->ProcessOneEvent(fNEventsProcessed++);
+  GetEventAction()->SetIsInterruptibleEvent(isInterruptible);
+
+  // Explicitly call the following 2 methods which are otherwise called from
+  // G4RunManager::BeamOn(...)
+  fRunManager->ProcessOneEvent(eventId);
   fRunManager->TerminateOneEvent();
 }
 

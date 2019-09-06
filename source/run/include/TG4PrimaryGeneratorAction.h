@@ -20,9 +20,17 @@
 #include <G4VUserPrimaryGeneratorAction.hh>
 #include <globals.hh>
 
+class TVirtualMCStack;
+class TMCManagerStack;
+class TParticle;
+
 class TG4PrimaryGeneratorMessenger;
+class TG4ParticlesManager;
+class TG4TrackManager;
 
 class G4Event;
+class G4ParticleDefinition;
+class G4PrimaryVertex;
 
 /// \ingroup run
 /// \brief Primary generator action defined via TVirtualMCStack
@@ -48,12 +56,32 @@ class TG4PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction,
 
  private:
   // methods
+
+  G4bool CheckVMCStack(TVirtualMCStack* stack) const;
+  G4bool CheckParticleDefinition(const G4ParticleDefinition* particleDefinition,
+    const TParticle* particle) const;
+  G4double GetProperCharge(const G4ParticleDefinition* particleDefinition,
+    const TParticle* particle) const;
+  G4PrimaryVertex* AddParticleToVertex(G4Event* event, G4PrimaryVertex* vertex,
+    const G4ParticleDefinition* particleDefinition,
+    const G4ThreeVector& position, G4double time, const G4ThreeVector& momentum,
+    G4double energy, const G4ThreeVector& polarization, G4double charge,
+    G4double weight) const;
   void TransformPrimaries(G4Event* event);
+  void TransformTracks(G4Event* event);
 
   // data members
   /// Messenger
   TG4PrimaryGeneratorMessenger* fMessenger;
-
+  /// Thread-local particles manager
+  TG4ParticlesManager* fParticlesManager;
+  /// Thread-local track manager
+  TG4TrackManager* fTrackManager;
+  /// Thread-local stacks
+  TVirtualMCStack* fMCStack;
+  TMCManagerStack* fMCManagerStack;
+  /// Flag whether thread-local variables have been cached
+  G4bool fCached;
   /// Option to skip particles which do not exist in Geant4
   G4bool fSkipUnknownParticles;
 };

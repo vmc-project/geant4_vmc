@@ -25,6 +25,7 @@
 #include "TG4TrackInformation.h"
 #include "TG4TrackManager.h"
 
+#include <TMCParticleStatus.h>
 #include <TMCProcess.h>
 #include <TVirtualMC.h>
 #include <TVirtualMCApplication.h>
@@ -52,7 +53,8 @@ TG4TrackingAction::TG4TrackingAction()
     fTrackSaveControl(kDoNotSave),
     fOverwriteLastTrack(false),
     fNewVerboseLevel(0),
-    fNewVerboseTrackID(-1)
+    fNewVerboseTrackID(-1),
+    fDoFinishPrimary(true)
 {
   /// Default constructor
 
@@ -181,22 +183,36 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
   // reset stack popper (if activated
   if (fStackPopper) fStackPopper->Reset();
 
-  // set step manager status
-  if (isFirstStep) {
-    fStepManager->SetStep((G4Track*)track, kVertex);
-  }
-
   // set track information
-  G4int trackId =
+  TG4TrackInformation* trackInfo =
     fTrackManager->SetTrackInformation(track, fOverwriteLastTrack);
-  fMCStack->SetCurrentTrack(trackId);
+
+  fStepManager->SetInitialVMCTrackStatus(nullptr);
+
+  TMCParticleStatus* particleStatus =
+    const_cast<TMCParticleStatus*>(trackInfo->GetInitialTrackStatus());
 
   if (isFirstStep) {
+    // set step manager status
+    fStepManager->SetStep((G4Track*)track, kVertex);
+    fStepManager->SetInitialVMCTrackStatus(particleStatus);
+
     if (track->GetParentID() == 0) {
       fPrimaryTrackID = track->GetTrackID();
 
-      // begin this primary track
-      fMCApplication->BeginPrimary();
+      // begin this primary track if the VMC particle is actually a primary and
+      // only if it has initial step number == 0
+      if (!particleStatus ||
+          (particleStatus->fStepNumber == 0 && particleStatus->fParentId < 0)) {
+        fMCStack->SetCurrentTrack(trackInfo->GetTrackParticleID());
+        fMCApplication->BeginPrimary();
+      }
+
+      fDoFinishPrimary = true;
+      if (particleStatus && particleStatus->fParentId > -1) {
+        // Flag that to be a
+        fDoFinishPrimary = false;
+      }
 
       // set saving flag
       fTrackSaveControl = kDoNotSave;
@@ -217,6 +233,8 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
     }
   }
 
+  fMCStack->SetCurrentTrack(trackInfo->GetTrackParticleID());
+
   // verbose
   if (track->GetTrackID() == fNewVerboseTrackID) {
     fpTrackingManager->SetVerboseLevel(fNewVerboseLevel);
@@ -224,7 +242,9 @@ void TG4TrackingAction::PreUserTrackingAction(const G4Track* track)
 
   // VMC application pre track action
   if (isFirstStep) {
-    fMCApplication->PreTrack();
+    if (!particleStatus || particleStatus->fStepNumber == 0) {
+      fMCApplication->PreTrack();
+    }
 
     // call pre-tracking action of derived class
     PreTrackingAction(track);
@@ -268,13 +288,23 @@ void TG4TrackingAction::PostUserTrackingAction(const G4Track* track)
   // restore particle lifetime if it was modified by user
   fTrackManager->SetBackPDGLifetime(track);
 
-  if (track->GetTrackStatus() != fSuspend) {
+  // Do this only if the track was not interrupted but either stopped or for all
+  // other reasons the transport has been finished.
+  auto trackInfo = fTrackManager->GetTrackInformation(track);
+  if (track->GetTrackStatus() != fSuspend && !trackInfo->IsInterrupt()) {
 
     // VMC application post track action
     fMCApplication->PostTrack();
 
     // call post-tracking action of derived class
     PostTrackingAction(track);
+  }
+  const TMCParticleStatus* particleStatus = trackInfo->GetInitialTrackStatus();
+  // If this is an interrupted primary, when we pick up the next primary,
+  // this one is not finished yet...
+  if (particleStatus && particleStatus->fParentId < 0 &&
+      trackInfo->IsInterrupt()) {
+    fDoFinishPrimary = false;
   }
 }
 
@@ -298,7 +328,10 @@ void TG4TrackingAction::FinishPrimaryTrack()
     Verbose();
 
     // VMC application finish primary track
-    fMCApplication->FinishPrimary();
+    if (fDoFinishPrimary) {
+      fMCApplication->FinishPrimary();
+      fDoFinishPrimary = false;
+    }
   }
 
   fPrimaryTrackID = 0;

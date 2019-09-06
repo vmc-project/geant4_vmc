@@ -40,6 +40,8 @@ class G4VPhysicalVolume;
 class G4VTouchable;
 
 class TLorentzVector;
+class TVector3;
+struct TMCParticleStatus;
 
 /// \ingroup digits_hits
 /// \brief Geant4 implementation of the TVirtualMC interface methods
@@ -62,6 +64,7 @@ class TG4StepManager
   // methods
   void LateInitialize();
   void StopTrack();
+  void InterruptTrack();
   void StopEvent();
   void StopRun();
 
@@ -75,6 +78,7 @@ class TG4StepManager
   void SetMaxNStep(Int_t maxNofSteps);
   void SetCollectTracks(Bool_t collectTracks);
   void ForceDecayTime(Float_t pdg);
+  void SetInitialVMCTrackStatus(TMCParticleStatus* status);
 
   // get methods
   G4Track* GetTrack() const;                 // G4 specific
@@ -117,6 +121,10 @@ class TG4StepManager
   Double_t TrackTime() const;
   Double_t Edep() const;
   Double_t NIELEdep() const;
+  Int_t StepNumber() const;
+  Double_t TrackWeight() const;
+  void TrackPolarization(Double_t& polX, Double_t& polY, Double_t& polZ) const;
+  void TrackPolarization(TVector3& pol) const;
   // static properties
   Int_t TrackPid() const;
   Double_t TrackCharge() const;
@@ -194,6 +202,9 @@ class TG4StepManager
 
   /// Cached pointer to thread-local track manager
   TG4TrackManager* fTrackManager;
+
+  /// The initial status of a VMC track when it was popped from the VMC stack
+  TMCParticleStatus* fInitialVMCTrackStatus;
 };
 
 // inline methods

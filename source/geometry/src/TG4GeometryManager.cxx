@@ -288,7 +288,6 @@ void TG4GeometryManager::ConstructG4Geometry()
 
   // VMC application construct geometry
   if (fUserGeometry == "RootToGeant4") {
-
     if (VerboseLevel() > 1)
       G4cout << "Running TVirtualMCApplication::ConstructGeometry" << G4endl;
 

@@ -1175,6 +1175,26 @@ void TGeant4::ProcessEvent()
 }
 
 //_____________________________________________________________________________
+void TGeant4::ProcessEvent(Int_t eventId)
+{
+  /// Process one event passing eventId and flag whether that is interruptible
+  /// meaning that GEANT4_VMC relies on TVirtualMCApplication::BeginEvent() and
+  /// ::FinishEvent() will be called from outside.
+
+  fRunManager->ProcessEvent(eventId, kFALSE);
+}
+
+//_____________________________________________________________________________
+void TGeant4::ProcessEvent(Int_t eventId, Bool_t isInterruptible)
+{
+  /// Process one event passing eventId and flag whether that is interruptible
+  /// meaning that GEANT4_VMC relies on TVirtualMCApplication::BeginEvent() and
+  /// ::FinishEvent() will be called from outside.
+
+  fRunManager->ProcessEvent(eventId, isInterruptible);
+}
+
+//_____________________________________________________________________________
 Bool_t TGeant4::ProcessRun(Int_t nofEvents)
 {
   /// Process Geant4 run.

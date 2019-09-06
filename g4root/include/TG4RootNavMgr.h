@@ -17,6 +17,8 @@
 #ifndef ROOT_TG4RootNavMgr
 #define ROOT_TG4RootNavMgr
 
+#include <functional>
+
 #include "G4Threading.hh"
 
 #include "TObject.h"
@@ -25,6 +27,7 @@ class TGeoManager;
 class TG4RootNavigator;
 class TG4RootDetectorConstruction;
 class TVirtualUserPostDetConstruction;
+class G4TrackingManager;
 
 /// \brief Manager class creating a G4Navigator based on a ROOT geometry.
 ///
@@ -36,19 +39,19 @@ class TG4RootNavMgr : public TObject
  protected:
   TGeoManager* fGeometry;       ///< Pointer to TGeo geometry
   TG4RootNavigator* fNavigator; ///< G4 navigator working with TGeo
-  TG4RootDetectorConstruction*
-    fDetConstruction; ///< G4 geometry built based on ROOT one
-  TVirtualUserPostDetConstruction*
-    fPostDetDetConstruction; ///< User defined initialization
-  Bool_t fConnected;         ///< Flags connection to G4
+  TG4RootDetectorConstruction* fDetConstruction; ///< G4 geometry built based on
+                                                 /// ROOT one
+  TVirtualUserPostDetConstruction* fPostDetDetConstruction; ///< User defined
+                                                            /// initialization
+  Bool_t fConnected; ///< Flags connection to G4
 
   TG4RootNavMgr();
   TG4RootNavMgr(
     TGeoManager* geom, TG4RootDetectorConstruction* detConstruction = 0);
 
  private:
-  static G4ThreadLocal TG4RootNavMgr*
-    fRootNavMgr; ///< Static pointer to singleton
+  static G4ThreadLocal TG4RootNavMgr* fRootNavMgr; ///< Static pointer to
+                                                   /// singleton
   static TG4RootNavMgr* fgMasterInstance;
 
  public:
@@ -74,6 +77,12 @@ class TG4RootNavMgr : public TObject
   {
     return fDetConstruction;
   }
+  /// Forward current G4TrackingManager
+  void SetG4TrackingManager(G4TrackingManager* trackingManager);
+
+  /// Forward the given function to the TG4RootNavigator
+  void SetGeometryRestoreFunction(
+    std::function<Bool_t(Int_t)> restoreGeoStateFunction);
 
   // ClassDef(TG4RootNavMgr,0)  // Class crreating a G4Navigator based on ROOT
   // geometry

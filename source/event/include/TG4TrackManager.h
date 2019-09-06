@@ -18,6 +18,10 @@
 #include "TG4TrackSaveControl.h"
 #include "TG4Verbose.h"
 
+#ifdef USE_G4ROOT
+#include <TG4RootNavMgr.h>
+#endif
+
 #include <G4TrackVector.hh>
 #include <G4UserTrackingAction.hh>
 
@@ -25,10 +29,15 @@ class TG4TrackInformation;
 class TG4StackPopper;
 
 class TVirtualMCStack;
+class TMCManagerStack;
 
 class G4Track;
 class G4PrimaryVertex;
 class G4PrimaryParticle;
+struct TMCParticleStatus;
+#ifdef USE_G4ROOT
+class TMCManager;
+#endif
 
 /// \ingroup event
 /// \brief The class for storing G4 tracks in VMC sack
@@ -52,7 +61,9 @@ class TG4TrackManager : public TG4Verbose
   // methods
   void LateInitialize();
   void AddPrimaryParticleId(G4int id);
-  G4int SetTrackInformation(const G4Track* aTrack, G4bool overWrite = false);
+  void AddParticleStatus(const TMCParticleStatus* particleStatus);
+  TG4TrackInformation* SetTrackInformation(
+    const G4Track* aTrack, G4bool overWrite = false);
   void SetParentToTrackInformation(const G4Track* aTrack);
   void SetBackPDGLifetime(const G4Track* aTrack);
 
@@ -64,11 +75,13 @@ class TG4TrackManager : public TG4Verbose
 
   // set methods
   void SetMCStack(TVirtualMCStack* mcStack);
+  void SetMCManagerStack(TMCManagerStack* mcManagerStack);
   void SetTrackSaveControl(TG4TrackSaveControl control);
   void SetSaveDynamicCharge(G4bool saveDynamicCharge);
   void SetNofTracks(G4int nofTracks);
   void SetG4TrackingManager(G4TrackingManager* trackingManager);
   void ResetPrimaryParticleIds();
+  void ResetParticlesStatus();
 
   // get methods
   TG4TrackInformation* GetTrackInformation(const G4Track* track) const;
@@ -87,22 +100,34 @@ class TG4TrackManager : public TG4Verbose
   static G4ThreadLocal TG4TrackManager* fgInstance; ///< this instance
 
   // data members
-  G4TrackingManager* fG4TrackingManager; ///< G4 tracking manager
-  std::vector<G4int>
-    fPrimaryParticleIds;                 ///< The VMC stack primary particle Ids
+  G4TrackingManager* fG4TrackingManager;  ///< G4 tracking manager
+  std::vector<G4int> fPrimaryParticleIds; ///< The VMC stack primary particle
+                                          /// Ids
+  std::vector<TMCParticleStatus*> fParticlesStatus; ///< The VMC stack
+                                                    /// particles status
+                                                    /// information
   TG4TrackSaveControl fTrackSaveControl; ///< control of saving secondaries
 
   /// Cached pointer to thread-local VMC stack
   TVirtualMCStack* fMCStack;
 
+  /// Cached pointer to thread-local TMCManagerStack with additional info on
+  /// current transport status
+  TMCManagerStack* fMCManagerStack;
+
   /// Cached pointer to thread-local stack popper
   TG4StackPopper* fStackPopper;
 
-  G4bool
-    fSaveDynamicCharge;  ///< control of saving dynamic charge of secondaries
-  G4int fTrackCounter;   ///< tracks counter
-  G4int fCurrentTrackID; ///< current track ID
+  G4bool fSaveDynamicCharge;  ///< control of saving dynamic charge of
+                              /// secondaries
+  G4int fTrackCounter;        ///< tracks counter
+  G4int fCurrentTrackID;      ///< current track ID
   G4int fNofSavedSecondaries; ///< number of secondaries already saved
+#ifdef USE_G4ROOT
+  TG4RootNavMgr* fRootNavMgr; ///< Pointer to RootNavMgr to communicate
+                              ///< geometry states recovery
+  TMCManager* fMCManager;     ///< Cached to request geometry state recovery
+#endif
 };
 
 // inline methods
@@ -117,6 +142,13 @@ inline void TG4TrackManager::SetMCStack(TVirtualMCStack* mcStack)
 {
   /// Set  cached pointer to thread-local VMC stack
   fMCStack = mcStack;
+}
+
+inline void TG4TrackManager::SetMCManagerStack(TMCManagerStack* mcManagerStack)
+{
+  /// Set cached pointer to thread-local TMCManagerStack with additional info on
+  /// current transport status
+  fMCManagerStack = mcManagerStack;
 }
 
 inline void TG4TrackManager::SetTrackSaveControl(TG4TrackSaveControl control)
@@ -143,6 +175,11 @@ inline void TG4TrackManager::SetG4TrackingManager(
 {
   /// Set G4 tracking manager
   fG4TrackingManager = trackingManager;
+#ifdef USE_G4ROOT
+  if (fRootNavMgr) {
+    fRootNavMgr->SetG4TrackingManager(fG4TrackingManager);
+  }
+#endif
 }
 
 inline TG4TrackSaveControl TG4TrackManager::GetTrackSaveControl() const

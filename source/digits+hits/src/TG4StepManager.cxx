@@ -37,7 +37,9 @@
 #include <G4VTouchable.hh>
 
 #include <TLorentzVector.h>
+#include <TMCParticleStatus.h>
 #include <TMath.h>
+#include <TVector3.h>
 
 G4ThreadLocal TG4StepManager* TG4StepManager::fgInstance = 0;
 
@@ -52,7 +54,8 @@ TG4StepManager::TG4StepManager(const TString& userGeometry)
     fNameBuffer(),
     fCopyNoOffset(0),
     fDivisionCopyNoOffset(0),
-    fTrackManager(0)
+    fTrackManager(0),
+    fInitialVMCTrackStatus(0)
 {
   /// Standard constructor
   /// \param userGeometry  User selection of geometry definition and navigation
@@ -222,6 +225,21 @@ void TG4StepManager::StopTrack()
 }
 
 //_____________________________________________________________________________
+void TG4StepManager::InterruptTrack()
+{
+  /// Interrupt the current track and skip to the next.
+
+  if (fTrack) {
+    fTrack->SetTrackStatus(fStopAndKill);
+    fTrackManager->GetTrackInformation(fTrack)->SetInterrupt(true);
+  }
+  else {
+    TG4Globals::Warning("TG4StepManager", "InterruptTrack()",
+      "There is no current track to be interrupted.");
+  }
+}
+
+//_____________________________________________________________________________
 void TG4StepManager::StopEvent()
 {
   /// Abort the current event processing.
@@ -318,6 +336,15 @@ void TG4StepManager::ForceDecayTime(Float_t time)
 
   // Set new lifetime value
   particle->SetPDGLifeTime(time * TG4G3Units::Time());
+}
+
+//_____________________________________________________________________________
+void TG4StepManager::SetInitialVMCTrackStatus(TMCParticleStatus* status)
+{
+  /// A transported track obtained from the VMC stack might already have a
+  /// history and therefore e.g. a step number != 0
+
+  fInitialVMCTrackStatus = status;
 }
 
 //_____________________________________________________________________________
@@ -865,8 +892,11 @@ Double_t TG4StepManager::TrackLength() const
 #ifdef MCDEBUG
   CheckTrack();
 #endif
-
-  return fTrack->GetTrackLength() / TG4G3Units::Length();
+  if (!fInitialVMCTrackStatus) {
+    return fTrack->GetTrackLength() / TG4G3Units::Length();
+  }
+  return fTrack->GetTrackLength() / TG4G3Units::Length() +
+         fInitialVMCTrackStatus->fTrackLength;
 }
 
 //_____________________________________________________________________________
@@ -936,6 +966,48 @@ Double_t TG4StepManager::NIELEdep() const
 
   // return 0. in other cases (including kBoundary, kGflashSpot)
   return 0;
+}
+
+//_____________________________________________________________________________
+Int_t TG4StepManager::StepNumber() const
+{
+  /// Return the current step number
+
+  if (!fInitialVMCTrackStatus) {
+    return fTrack->GetCurrentStepNumber();
+  }
+  return fTrack->GetCurrentStepNumber() + fInitialVMCTrackStatus->fStepNumber;
+}
+
+//_____________________________________________________________________________
+Double_t TG4StepManager::TrackWeight() const
+{
+  /// Return the track weight
+
+  return fTrack->GetWeight();
+}
+
+//_____________________________________________________________________________
+void TG4StepManager::TrackPolarization(
+  Double_t& polX, Double_t& polY, Double_t& polZ) const
+{
+  /// Get the track polarization
+
+  const G4ThreeVector& pol = fTrack->GetPolarization();
+  polX = pol.x();
+  polY = pol.y();
+  polZ = pol.z();
+}
+
+//_____________________________________________________________________________
+void TG4StepManager::TrackPolarization(TVector3& pol) const
+{
+  /// Get the track polarization
+
+  const G4ThreeVector& polG4 = fTrack->GetPolarization();
+  pol[0] = polG4.x();
+  pol[1] = polG4.y();
+  pol[2] = polG4.z();
 }
 
 //_____________________________________________________________________________
