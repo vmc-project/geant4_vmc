@@ -7,17 +7,17 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03CalorimeterSD.cxx
-/// \brief Implementation of the Ex03CalorimeterSD class
+/// \file Ex03bCalorimeterSD.cxx
+/// \brief Implementation of the Ex03bCalorimeterSD class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
 /// Id: ExN03CalorimeterSD.cc,v 1.6 2002/01/09 17:24:12 ranjard Exp \n
 /// GEANT4 tag $Name:  $
 ///
-/// \date 06/03/2002
+/// \date 18/12/2018
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include "Ex03CalorimeterSD.h"
+#include "Ex03bCalorimeterSD.h"
 #include "Ex03CalorHit.h"
 #include "Ex03DetectorConstruction.h"
 
@@ -28,13 +28,13 @@
 #include <TVirtualMC.h>
 
 /// \cond CLASSIMP
-ClassImp(Ex03CalorimeterSD)
+ClassImp(Ex03bCalorimeterSD)
   /// \endcond
 
   using namespace std;
 
 //_____________________________________________________________________________
-Ex03CalorimeterSD::Ex03CalorimeterSD(
+Ex03bCalorimeterSD::Ex03bCalorimeterSD(
   const char* name, Ex03DetectorConstruction* detector)
   : TVirtualMCSensitiveDetector(name, ""),
     fMC(0),
@@ -58,8 +58,8 @@ Ex03CalorimeterSD::Ex03CalorimeterSD(
 }
 
 //_____________________________________________________________________________
-Ex03CalorimeterSD::Ex03CalorimeterSD(
-  const Ex03CalorimeterSD& origin, Ex03DetectorConstruction* detector)
+Ex03bCalorimeterSD::Ex03bCalorimeterSD(
+  const Ex03bCalorimeterSD& origin, Ex03DetectorConstruction* detector)
   : TVirtualMCSensitiveDetector(origin),
     fMC(0),
     fDetector(detector),
@@ -82,7 +82,7 @@ Ex03CalorimeterSD::Ex03CalorimeterSD(
 }
 
 //_____________________________________________________________________________
-Ex03CalorimeterSD::Ex03CalorimeterSD()
+Ex03bCalorimeterSD::Ex03bCalorimeterSD()
   : TVirtualMCSensitiveDetector(),
     fDetector(0),
     fCalCollection(0),
@@ -94,7 +94,7 @@ Ex03CalorimeterSD::Ex03CalorimeterSD()
 }
 
 //_____________________________________________________________________________
-Ex03CalorimeterSD::~Ex03CalorimeterSD()
+Ex03bCalorimeterSD::~Ex03bCalorimeterSD()
 {
   /// Destructor
 
@@ -107,7 +107,7 @@ Ex03CalorimeterSD::~Ex03CalorimeterSD()
 //
 
 //_____________________________________________________________________________
-Ex03CalorHit* Ex03CalorimeterSD::GetHit(Int_t i) const
+Ex03CalorHit* Ex03bCalorimeterSD::GetHit(Int_t i) const
 {
   /// \return   The hit for the specified layer.
   /// \param i  The layer number
@@ -116,7 +116,7 @@ Ex03CalorHit* Ex03CalorimeterSD::GetHit(Int_t i) const
 }
 
 //_____________________________________________________________________________
-void Ex03CalorimeterSD::ResetHits()
+void Ex03bCalorimeterSD::ResetHits()
 {
   /// Reset all hits in the hits collection.
 
@@ -129,7 +129,7 @@ void Ex03CalorimeterSD::ResetHits()
 //
 
 //_____________________________________________________________________________
-void Ex03CalorimeterSD::Initialize()
+void Ex03bCalorimeterSD::Initialize()
 {
   /// Register hits collection in the Root manager;
   /// set sensitive volumes.
@@ -152,7 +152,7 @@ void Ex03CalorimeterSD::Initialize()
 }
 
 //_____________________________________________________________________________
-void Ex03CalorimeterSD::ProcessHits()
+void Ex03bCalorimeterSD::ProcessHits()
 {
   /// Account energy deposit and track lengths for each layer in its hit.
 
@@ -182,7 +182,7 @@ void Ex03CalorimeterSD::ProcessHits()
 }
 
 //_____________________________________________________________________________
-void Ex03CalorimeterSD::EndOfEvent()
+void Ex03bCalorimeterSD::EndOfEvent()
 {
   /// Print hits collection (if verbose) and reset hits afterwards.
 
@@ -197,7 +197,7 @@ void Ex03CalorimeterSD::EndOfEvent()
 }
 
 //_____________________________________________________________________________
-void Ex03CalorimeterSD::Register()
+void Ex03bCalorimeterSD::Register()
 {
   /// Register the hits collection in Root manager.
 
@@ -205,7 +205,7 @@ void Ex03CalorimeterSD::Register()
 }
 
 //_____________________________________________________________________________
-void Ex03CalorimeterSD::Print(Option_t* /*option*/) const
+void Ex03bCalorimeterSD::Print(Option_t* /*option*/) const
 {
   /// Print the hits collection.
 
@@ -217,7 +217,7 @@ void Ex03CalorimeterSD::Print(Option_t* /*option*/) const
 }
 
 //_____________________________________________________________________________
-void Ex03CalorimeterSD::PrintTotal() const
+void Ex03bCalorimeterSD::PrintTotal() const
 {
   /// Print the total values for all layers.
 

@@ -7,7 +7,7 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file testE03.cxx
+/// \file testE03b.cxx
 /// \brief The Geant4 VMC example E03 test application
 ///
 /// The Geant4 VMC test application
@@ -16,7 +16,7 @@
 ///
 /// <pre>
 /// Usage:
-/// testE03
+/// testE03b
 ///   [-g4g,  --g4-geometry]:        Geant4 VMC geometry option
 ///   [-g4pl, --g4-physics-list]:    Geant4 physics list selection
 ///   [-g4sp, --g4-special-physics]: Geant4 special physics selection
@@ -36,7 +36,7 @@
 /// \date 26/02/2014
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include "Ex03MCApplication.h"
+#include "Ex03bMCApplication.h"
 
 #ifdef USE_GEANT4
 #include "Ex03RunConfiguration1.h"
@@ -226,8 +226,8 @@ int main(int argc, char** argv)
   // end of code to process arguments
 
   // Create MC application (thread local)
-  Ex03MCApplication* appl =
-    new Ex03MCApplication("ExampleE03", "The exampleE03 MC application");
+  Ex03bMCApplication* appl =
+    new Ex03bMCApplication("ExampleE03", "The exampleE03 MC application");
 
 #ifdef USE_GEANT4
   if (g4Geometry.find("VMC") != std::string::npos) {

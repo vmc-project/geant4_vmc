@@ -9,7 +9,7 @@
 
 #
 # Geant4 macro for setting visualization for the Monopole example
-# (called from Root macro set_vis.C)
+# (called from Root macro set_g4_vis.C)
 
 # Use these open statements to open selected visualization
 /vis/open OGL

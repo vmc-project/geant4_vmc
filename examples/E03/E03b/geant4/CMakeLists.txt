@@ -15,7 +15,7 @@
 cmake_minimum_required(VERSION 2.6.4 FATAL_ERROR)
 
 #----------------------------------------------------------------------------
-# Project g4E03
+# Project geant4E03b
 #
 project(geant4E03b)
 
@@ -79,7 +79,7 @@ target_link_libraries(${g4library_name} ${VMCPackages_LIBRARIES} ${MCPackages_LI
 add_custom_target(${PROJECT_NAME} DEPENDS ${g4library_name})
 
 #----------------------------------------------------------------------------
-# Install the library and dictionary map (if Root 6.x)
+# Install the library and dictionary map
 # to CMAKE_INSTALL_LIBDIR directory
 #
 if (VMC_INSTALL_EXAMPLES)

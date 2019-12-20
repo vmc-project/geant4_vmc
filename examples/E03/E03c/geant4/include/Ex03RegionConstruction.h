@@ -19,7 +19,7 @@
 
 #include "TG4VUserRegionConstruction.h"
 
-/// \ingroup E03c
+/// \ingroup E03
 /// \brief Special class for definition of regions
 ///
 /// \author I. Hrivnacova; IPN, Orsay

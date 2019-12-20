@@ -33,19 +33,17 @@ Macros:
   run_g4.C       - macro for running example
   g4Config.C     - configuration macro - G4 native geometry navigation (default)
   g4tgeoConfig.C - configuration macro - G4 with TGeo navigation
+  set_g4_vis.C   - setting Geant4 visualization
   g4config.in    - macro for G4 configuration using G4 commands (called from g4Config.C)
   g4config2.in   - macro for G4 post-init configuration using G4 commands  (called from run_g4.C)
-  g4vis.in       - macro for G4 visualization settings (called from set_vis.C)
+  g4vis.in       - macro for G4 visualization settings (called from set_g4_vis.C)
 
   For running example with G3:
 
   load_g3.C       - macro to load the libraries to run the example with Geant3
   run_g3.C        - macro for running example
   g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry
-
-  Common macro (called by run_g3.C/run_g4.C):
-
-  set_vis.C - setting visualization
+  set_g3_vis.C    - setting Geant3 TGeo visualization
 
 To run example
 ===============

@@ -16,7 +16,7 @@
 
 void Config()
 {
-/// The configuration function for Geant4 VMC for Example02
+/// The configuration function for Geant4 VMC for Example03
 /// called during MC application initialization.
 /// For geometry defined with Root, selected Geant4 native navigation
 /// and a user defined physics list in a user run configuration

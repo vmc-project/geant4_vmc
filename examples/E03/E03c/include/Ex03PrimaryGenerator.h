@@ -24,9 +24,9 @@
 class TVirtualMCStack;
 class TVector3;
 
-class Ex03DetectorConstruction;
+class Ex03cDetectorConstruction;
 
-/// \ingroup E03c
+/// \ingroup E03
 /// \brief The primary generator
 ///
 /// \date 06/03/2003

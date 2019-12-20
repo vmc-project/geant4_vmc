@@ -26,7 +26,7 @@ class TVector3;
 
 class Ex03DetectorConstruction;
 
-/// \ingroup E03b
+/// \ingroup E03
 /// \brief The primary generator
 ///
 /// \date 06/03/2003

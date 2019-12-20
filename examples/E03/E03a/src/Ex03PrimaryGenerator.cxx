@@ -108,7 +108,8 @@ void Ex03PrimaryGenerator::GeneratePrimary1(const TVector3& origin)
   Double_t tof = 0.;
 
   // Energy (in GeV)
-  Double_t kinEnergy = 0.050;
+  Double_t kinEnergy = 5.;
+  // Double_t kinEnergy = 0.050;
   Double_t mass = 0.51099906 * 1e-03;
   Double_t e = mass + kinEnergy;
 

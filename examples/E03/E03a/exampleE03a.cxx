@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file exampleE03.cxx
-/// \brief The Geant4 VMC example E03 application executable
+/// \file exampleE03a.cxx
+/// \brief The Geant4 VMC example E03a application executable
 ///
 /// \date 26/02/2014
 /// \author I. Hrivnacova; IPN, Orsay

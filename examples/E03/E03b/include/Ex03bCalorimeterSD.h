@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file  Ex03CalorimeterSD.h
-/// \brief Definition of the Ex03CalorimeterSD class
+/// \file  Ex03bCalorimeterSD.h
+/// \brief Definition of the Ex03bCalorimeterSD class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo: \n
 /// Id: ExN03CalorimeterSD.hh,v 1.4 2002/01/09 17:24:11 ranjard Exp
@@ -20,30 +20,33 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include <TClonesArray.h>
-#include <TNamed.h>
+#include <TVirtualMCSensitiveDetector.h>
 
 class Ex03DetectorConstruction;
 class Ex03CalorHit;
 class TVirtualMC;
 
-/// \ingroup E03a
+/// \ingroup E03
 /// \brief The calorimeter sensitive detector
 ///
-/// \date 06/03/2003
+/// A variant of the Ex03CalorimeterSD:
+/// a sensitive detector class derived fron the new
+/// TVirtualMCSensitiveDetector interface
+///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class Ex03CalorimeterSD : public TNamed
+class Ex03bCalorimeterSD : public TVirtualMCSensitiveDetector
 {
  public:
-  Ex03CalorimeterSD(const char* name, Ex03DetectorConstruction* detector);
-  Ex03CalorimeterSD(
-    const Ex03CalorimeterSD& origin, Ex03DetectorConstruction* detector);
-  Ex03CalorimeterSD();
-  virtual ~Ex03CalorimeterSD();
+  Ex03bCalorimeterSD(const char* name, Ex03DetectorConstruction* detector);
+  Ex03bCalorimeterSD(
+    const Ex03bCalorimeterSD& origin, Ex03DetectorConstruction* detector);
+  Ex03bCalorimeterSD();
+  virtual ~Ex03bCalorimeterSD();
 
   // methods
   void Initialize();
-  Bool_t ProcessHits();
+  virtual void ProcessHits();
   void EndOfEvent();
   void Register();
   virtual void Print(Option_t* option = "") const;
@@ -51,6 +54,7 @@ class Ex03CalorimeterSD : public TNamed
 
   // set methods
   void SetVerboseLevel(Int_t level);
+  void SetPrintModulo(Int_t value);
 
   // get methods
   Ex03CalorHit* GetHit(Int_t i) const;
@@ -66,15 +70,23 @@ class Ex03CalorimeterSD : public TNamed
   Int_t fAbsorberVolId;                ///< The absorber volume Id
   Int_t fGapVolId;                     ///< The gap volume Id
   Int_t fVerboseLevel;                 ///< Verbosity level
+  Int_t fPrintModulo; ///< The event modulus number to be printed
 
-  ClassDef(Ex03CalorimeterSD, 1) // Ex03CalorimeterSD
+  ClassDef(Ex03bCalorimeterSD, 1) // Ex03bCalorimeterSD
 };
 
 /// Set verbose level
 /// \param level The new verbose level value
-inline void Ex03CalorimeterSD::SetVerboseLevel(Int_t level)
+inline void Ex03bCalorimeterSD::SetVerboseLevel(Int_t level)
 {
   fVerboseLevel = level;
+}
+
+/// Set the event modulus number to be printed
+/// \param value  The new event modulus number value
+inline void Ex03bCalorimeterSD::SetPrintModulo(Int_t value)
+{
+  fPrintModulo = value;
 }
 
 #endif // EX02_CALORIMETER_SD_H

@@ -8,8 +8,8 @@
 //-------------------------------------------------
 
 /// \ingroup Tests
-/// \file test_EME_multi.C
-/// \brief Example EME Test macro for mixed engine run
+/// \file test_E03_multi.C
+/// \brief Example E03 Test macro for mixed engine run
 ///
 /// Running Example03
 
@@ -17,7 +17,7 @@
 
 void test_E03_multi(const TString& configMacro1, const TString& configMacro2, Int_t level=0)
 {
-/// Macro function for testing example EME
+/// Macro function for testing example E03c
 /// \param configMacro  configuration macro loaded in initialization
 ///
 /// Run 5 events with 20 primaries and print the calorimeter hits.

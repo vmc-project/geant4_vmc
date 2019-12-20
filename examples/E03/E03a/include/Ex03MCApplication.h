@@ -30,7 +30,7 @@ class Ex03PrimaryGenerator;
 
 class TMCRootManager;
 
-/// \ingroup E03a
+/// \ingroup E03
 /// \brief Implementation of the TVirtualMCApplication
 ///
 /// \date 06/03/2003

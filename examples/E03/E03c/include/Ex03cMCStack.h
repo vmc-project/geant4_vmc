@@ -10,12 +10,12 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file  Ex03MCStack.h
-/// \brief Definition of the Ex03MCStack class
+/// \file  Ex03cMCStack.h
+/// \brief Definition of the Ex03cMCStack class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
-/// \author I. Hrivnacova; IPN, Orsay
+/// \author Benedikt Volkel, CERN
 
 #include <TVirtualMCStack.h>
 
@@ -24,18 +24,21 @@
 class TParticle;
 class TClonesArray;
 
-/// \ingroup E03c
+/// \ingroup E03
 /// \brief Implementation of the TVirtualMCStack interface
 ///
-/// \date 06/03/2003
-/// \author I. Hrivnacova; IPN, Orsay
+/// A variant of the Ex03CalorimeterSD class
+/// updated for multiple engine runs.
+///
+/// \date 21/08/2019
+/// \author Benedikt Volkel, CERN
 
-class Ex03MCStack : public TVirtualMCStack
+class Ex03cMCStack : public TVirtualMCStack
 {
  public:
-  Ex03MCStack(Int_t size);
-  Ex03MCStack();
-  virtual ~Ex03MCStack();
+  Ex03cMCStack(Int_t size);
+  Ex03cMCStack();
+  virtual ~Ex03cMCStack();
 
   // methods
   virtual void PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg, Double_t px,
@@ -65,7 +68,7 @@ class Ex03MCStack : public TVirtualMCStack
   Int_t fCurrentTrack;           ///< The current track number
   Int_t fNPrimary;               ///< The number of primaries
 
-  ClassDef(Ex03MCStack, 1) // Ex03MCStack
+  ClassDef(Ex03cMCStack, 1) // Ex03cMCStack
 };
 
 #endif // EX03_STACK_H

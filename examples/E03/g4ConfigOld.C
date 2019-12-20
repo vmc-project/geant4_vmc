@@ -7,6 +7,7 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
+/// \ingroup E03
 /// \file E03/g4ConfigOld.C
 /// \brief Configuration macro for Geant4 VirtualMC for Example03
 ///

@@ -16,11 +16,12 @@
 #pragma link off all classes;
 #pragma link off all functions;
 
-#pragma link C++ class Ex03MCApplication + ;
-#pragma link C++ class Ex03MCStack + ;
-#pragma link C++ class Ex03DetectorConstruction + ;
+#pragma link C++ class Ex03cMCApplication + ;
+#pragma link C++ typedef Ex03MCApplication;
+#pragma link C++ class Ex03cMCStack + ;
+#pragma link C++ class Ex03cDetectorConstruction + ;
 #pragma link C++ class Ex03CalorHit + ;
-#pragma link C++ class Ex03CalorimeterSD + ;
+#pragma link C++ class Ex03cCalorimeterSD + ;
 #pragma link C++ class Ex03PrimaryGenerator + ;
 #pragma link C++ class std::stack < TParticle*, deque < TParticle*>> + ;
 

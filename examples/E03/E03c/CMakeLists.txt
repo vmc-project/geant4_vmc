@@ -53,12 +53,12 @@ include_directories(
 #
 ROOT_GENERATE_DICTIONARY(
   ${library_name}_dict
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03MCApplication.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03MCStack.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03DetectorConstruction.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03CalorHit.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03CalorimeterSD.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03PrimaryGenerator.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03cDetectorConstruction.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03cCalorimeterSD.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03cMCApplication.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03cMCStack.h
   LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/${program_name}LinkDef.h)
 
 # Files produced by the dictionary generation

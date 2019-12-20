@@ -64,14 +64,17 @@ Macros:
 
   load_g3a.C      - macro to load the libraries (variant E03a) to run the example with Geant3
   load_g3b.C      - macro to load the libraries (variant E03b) to run the example with Geant3
+  load_g3c.C      - macro to load the libraries (variant E03c) to run the example with Geant3
   run_g3.C        - macro for running example
   g3tgeoConfig.C  - configuration macro for G3 with TGeo geometry(default)
   g3Config.C      - configuration macro for G3 with native geometry
+  set_g3_vis.C    - setting Geant3 TGeo visualization
 
   For running example with G4:
 
-  load_g4a.C      - macro to load the libraries (variant E03a) to run the example with Geant
-  load_g4b.C      - macro to load the libraries (variant E03b) to run the example with Geant
+  load_g4a.C      - macro to load the libraries (variant E03a) to run the example with Geant4
+  load_g4b.C      - macro to load the libraries (variant E03b) to run the example with Geant4
+  load_g4c.C      - macro to load the libraries (variant E03c) to run the example with Geant4
   run_g4.C        - macro for running example
   g4Config.C      - configuration macro - G4 native geometry navigation (default)
   g4Config1.C     - configuration macro - geometry defined via Geant4
@@ -86,9 +89,10 @@ Macros:
   g4Config5.C     - configuration macro - activation of user defined magnetic field equation of motion
                                           and/or its integrator, TGeo navigation
   g4ConfigEnv.C   - configuration macro - physics list defined via environment variable
+  set_g4_vis.C  - setting Geant4 visualization
   g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
   g4config2.in  - macro for G4 configuration using G4 commands (called from g4Config2.C)
-  g4vis.in      - macro for G4 visualization settings (called from set_vis.C)
+  g4vis.in      - macro for G4 visualization settings (called from set_g4_vis.C)
 
   For running example with both G3 and G4 (E03c):
 

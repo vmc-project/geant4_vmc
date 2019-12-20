@@ -7,13 +7,13 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03MCStack.cxx
-/// \brief Implementation of the Ex03MCStack class
+/// \file Ex03cMCStack.cxx
+/// \brief Implementation of the Ex03cMCStack class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
-/// \date 06/03/2002
-/// \author I. Hrivnacova; IPN, Orsay
+/// \date 21/08/2019
+/// \author Benedikt Volkel, CERN
 
 #include <Riostream.h>
 #include <TClonesArray.h>
@@ -22,16 +22,16 @@
 
 #include "TMCManager.h"
 
-#include "Ex03MCStack.h"
+#include "Ex03cMCStack.h"
 
 using namespace std;
 
 /// \cond CLASSIMP
-ClassImp(Ex03MCStack)
+ClassImp(Ex03cMCStack)
   /// \endcond
 
   //_____________________________________________________________________________
-  Ex03MCStack::Ex03MCStack(Int_t size)
+  Ex03cMCStack::Ex03cMCStack(Int_t size)
   : fParticles(0), fCurrentTrack(-1), fNPrimary(0)
 {
   /// Standard constructor
@@ -41,13 +41,13 @@ ClassImp(Ex03MCStack)
 }
 
 //_____________________________________________________________________________
-Ex03MCStack::Ex03MCStack() : fParticles(0), fCurrentTrack(-1), fNPrimary(0)
+Ex03cMCStack::Ex03cMCStack() : fParticles(0), fCurrentTrack(-1), fNPrimary(0)
 {
   /// Default constructor
 }
 
 //_____________________________________________________________________________
-Ex03MCStack::~Ex03MCStack()
+Ex03cMCStack::~Ex03cMCStack()
 {
   /// Destructor
 
@@ -60,7 +60,7 @@ Ex03MCStack::~Ex03MCStack()
 // public methods
 
 //_____________________________________________________________________________
-void Ex03MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
+void Ex03cMCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
   Double_t px, Double_t py, Double_t pz, Double_t e, Double_t vx, Double_t vy,
   Double_t vz, Double_t tof, Double_t polx, Double_t poly, Double_t polz,
   TMCProcess mech, Int_t& ntr, Double_t weight, Int_t is)
@@ -114,7 +114,7 @@ void Ex03MCStack::PushTrack(Int_t toBeDone, Int_t parent, Int_t pdg,
 }
 
 //_____________________________________________________________________________
-TParticle* Ex03MCStack::PopNextTrack(Int_t& itrack)
+TParticle* Ex03cMCStack::PopNextTrack(Int_t& itrack)
 {
   /// Get next particle for tracking from the stack.
   /// \return       The popped particle object
@@ -135,7 +135,7 @@ TParticle* Ex03MCStack::PopNextTrack(Int_t& itrack)
 }
 
 //_____________________________________________________________________________
-TParticle* Ex03MCStack::PopPrimaryForTracking(Int_t i)
+TParticle* Ex03cMCStack::PopPrimaryForTracking(Int_t i)
 {
   /// Return \em i -th particle in fParticles.
   /// \return   The popped primary particle object
@@ -148,11 +148,11 @@ TParticle* Ex03MCStack::PopPrimaryForTracking(Int_t i)
 }
 
 //_____________________________________________________________________________
-void Ex03MCStack::Print(Option_t* /*option*/) const
+void Ex03cMCStack::Print(Option_t* /*option*/) const
 {
   /// Print info for all particles.
 
-  cout << "Ex03MCStack Info  " << endl;
+  cout << "Ex03cMCStack Info  " << endl;
   cout << "Total number of particles:   " << GetNtrack() << endl;
   cout << "Number of primary particles: " << GetNprimary() << endl;
 
@@ -160,7 +160,7 @@ void Ex03MCStack::Print(Option_t* /*option*/) const
 }
 
 //_____________________________________________________________________________
-void Ex03MCStack::Reset()
+void Ex03cMCStack::Reset()
 {
   /// Delete contained particles, reset particles array and stack.
 
@@ -170,7 +170,7 @@ void Ex03MCStack::Reset()
 }
 
 //_____________________________________________________________________________
-void Ex03MCStack::SetCurrentTrack(Int_t track)
+void Ex03cMCStack::SetCurrentTrack(Int_t track)
 {
   /// Set the current track number to a given value.
   /// \param  track The current track number
@@ -179,7 +179,7 @@ void Ex03MCStack::SetCurrentTrack(Int_t track)
 }
 
 //_____________________________________________________________________________
-Int_t Ex03MCStack::GetNtrack() const
+Int_t Ex03cMCStack::GetNtrack() const
 {
   /// \return  The total number of all tracks.
 
@@ -187,7 +187,7 @@ Int_t Ex03MCStack::GetNtrack() const
 }
 
 //_____________________________________________________________________________
-Int_t Ex03MCStack::GetNprimary() const
+Int_t Ex03cMCStack::GetNprimary() const
 {
   /// \return  The total number of primary tracks.
 
@@ -195,7 +195,7 @@ Int_t Ex03MCStack::GetNprimary() const
 }
 
 //_____________________________________________________________________________
-TParticle* Ex03MCStack::GetCurrentTrack() const
+TParticle* Ex03cMCStack::GetCurrentTrack() const
 {
   /// \return  The current track particle
 
@@ -208,7 +208,7 @@ TParticle* Ex03MCStack::GetCurrentTrack() const
 }
 
 //_____________________________________________________________________________
-Int_t Ex03MCStack::GetCurrentTrackNumber() const
+Int_t Ex03cMCStack::GetCurrentTrackNumber() const
 {
   /// \return  The current track number
 
@@ -216,7 +216,7 @@ Int_t Ex03MCStack::GetCurrentTrackNumber() const
 }
 
 //_____________________________________________________________________________
-Int_t Ex03MCStack::GetCurrentParentTrackNumber() const
+Int_t Ex03cMCStack::GetCurrentParentTrackNumber() const
 {
   /// \return  The current track parent ID.
 
@@ -229,7 +229,7 @@ Int_t Ex03MCStack::GetCurrentParentTrackNumber() const
 }
 
 //_____________________________________________________________________________
-TParticle* Ex03MCStack::GetParticle(Int_t id) const
+TParticle* Ex03cMCStack::GetParticle(Int_t id) const
 {
   /// \return   The \em id -th particle in fParticles
   /// \param id The index of the particle to be returned

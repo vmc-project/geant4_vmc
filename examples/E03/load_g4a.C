@@ -8,8 +8,8 @@
 //-------------------------------------------------
 
 /// \ingroup E03
-/// \file E03/run_g4.C
-/// \brief Macro for loading libraries to run ExamplE03 with Geant4.
+/// \file E03/load_g4a.C
+/// \brief Macro for loading libraries to run exampl E03a with Geant4.
 
 #include "../macro/g4libs.C"
 

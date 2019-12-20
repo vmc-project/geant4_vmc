@@ -36,7 +36,7 @@
 /// \date 30/04/2019
 /// Benedikt Volkel, CERN
 
-#include "Ex03MCApplication.h"
+#include "Ex03cMCApplication.h"
 
 #ifdef USE_GEANT4
 #include "Ex03RunConfiguration1.h"
@@ -206,8 +206,8 @@ int main(int argc, char** argv)
   // end of code to process arguments
 
   // Create MC application (thread local)
-  Ex03MCApplication* appl =
-    new Ex03MCApplication("ExampleE03c", "The exampleE03c MC application");
+  Ex03cMCApplication* appl =
+    new Ex03cMCApplication("ExampleE03c", "The exampleE03c MC application");
 
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4

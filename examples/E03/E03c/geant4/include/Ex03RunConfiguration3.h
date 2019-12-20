@@ -19,7 +19,7 @@
 
 #include "TG4RunConfiguration.h"
 
-/// \ingroup E03c
+/// \ingroup E03
 /// \brief User Geant4 VMC run configuration
 ///
 /// This class demonstrates how to add to Geant4 VMC geometry construction

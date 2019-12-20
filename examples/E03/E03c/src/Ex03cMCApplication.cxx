@@ -7,20 +7,21 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03MCApplication.cxx
-/// \brief Implementation of the Ex03MCApplication class
+/// \file Ex03cMCApplication.cxx
+/// \brief Implementation of the Ex03cMCApplication class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
-/// \date 06/03/2002
-/// \author I. Hrivnacova; IPN, Orsay
+/// \date 21/08/2019
+/// \author Benedikt Volkel, CERN
 
-#include "Ex03MCApplication.h"
-#include "Ex03DetectorConstructionOld.h"
-#include "Ex03MCStack.h"
+#include "Ex03cMCApplication.h"
+#include "Ex03cMCStack.h"
 #include "Ex03PrimaryGenerator.h"
 
 #include <TMCRootManager.h>
+
+#include <TMCManager.h>
 
 #include <Riostream.h>
 #include <TGeoManager.h>
@@ -30,18 +31,22 @@
 #include <TParticle.h>
 #include <TROOT.h>
 #include <TRandom.h>
+#include <TTimer.h>
 #include <TVector3.h>
 #include <TVirtualGeoTrack.h>
 #include <TVirtualMC.h>
 
+#include <TLorentzVector.h>
+
 using namespace std;
 
 /// \cond CLASSIMP
-ClassImp(Ex03MCApplication)
+ClassImp(Ex03cMCApplication)
   /// \endcond
 
   //_____________________________________________________________________________
-  Ex03MCApplication::Ex03MCApplication(const char* name, const char* title)
+  Ex03cMCApplication::Ex03cMCApplication(
+    const char* name, const char* title, Bool_t isMulti, Bool_t splitSimulation)
   : TVirtualMCApplication(name, title),
     fRootManager(0),
     fPrintModulo(1),
@@ -54,36 +59,45 @@ ClassImp(Ex03MCApplication)
     fMagField(0),
     fOldGeometry(kFALSE),
     fIsControls(kFALSE),
-    fIsMaster(kTRUE)
+    fIsMaster(kTRUE),
+    fIsMultiRun(isMulti),
+    fSplitSimulation(splitSimulation),
+    fG3Id(-1),
+    fG4Id(-1)
 {
   /// Standard constructor
   /// \param name   The MC application name
   /// \param title  The MC application description
 
-  cout << "--------------------------------------------------------------"
-       << endl;
-  cout << " VMC Example E03b: new version with sensitive detectors" << endl;
-  cout << "--------------------------------------------------------------"
-       << endl;
+  if (splitSimulation && !isMulti) {
+    Fatal("Ex03cMCApplication",
+      "Cannot split simulation between engines without \"isMulti\" being "
+      "switched on");
+  }
 
   // Create a user stack
-  fStack = new Ex03MCStack(1000);
+  fStack = new Ex03cMCStack(1000);
 
   // Create detector construction
-  fDetConstruction = new Ex03DetectorConstruction();
+  fDetConstruction = new Ex03cDetectorConstruction();
 
   // Create a calorimeter SD
-  // fCalorimeterSD = new Ex03CalorimeterSD("Calorimeter", fDetConstruction);
+  fCalorimeterSD = new Ex03cCalorimeterSD("Calorimeter", fDetConstruction);
 
   // Create a primary generator
   fPrimaryGenerator = new Ex03PrimaryGenerator(fStack);
 
   // Constant magnetic field (in kiloGauss)
   fMagField = new TGeoUniformMagField();
+
+  if (isMulti) {
+    RequestMCManager();
+    fMCManager->SetUserStack(fStack);
+  }
 }
 
 //_____________________________________________________________________________
-Ex03MCApplication::Ex03MCApplication(const Ex03MCApplication& origin)
+Ex03cMCApplication::Ex03cMCApplication(const Ex03cMCApplication& origin)
   : TVirtualMCApplication(origin.GetName(), origin.GetTitle()),
     fRootManager(0),
     fPrintModulo(origin.fPrintModulo),
@@ -101,11 +115,11 @@ Ex03MCApplication::Ex03MCApplication(const Ex03MCApplication& origin)
   /// mode) \param origin   The source MC application
 
   // Create new user stack
-  fStack = new Ex03MCStack(1000);
+  fStack = new Ex03cMCStack(1000);
 
   // Create a calorimeter SD
-  // fCalorimeterSD
-  //   = new Ex03CalorimeterSD(*(origin.fCalorimeterSD), fDetConstruction);
+  fCalorimeterSD =
+    new Ex03cCalorimeterSD(*(origin.fCalorimeterSD), fDetConstruction);
 
   // Create a primary generator
   fPrimaryGenerator =
@@ -117,7 +131,7 @@ Ex03MCApplication::Ex03MCApplication(const Ex03MCApplication& origin)
 }
 
 //_____________________________________________________________________________
-Ex03MCApplication::Ex03MCApplication()
+Ex03cMCApplication::Ex03cMCApplication()
   : TVirtualMCApplication(),
     fRootManager(0),
     fPrintModulo(1),
@@ -129,17 +143,21 @@ Ex03MCApplication::Ex03MCApplication()
     fMagField(0),
     fOldGeometry(kFALSE),
     fIsControls(kFALSE),
-    fIsMaster(kTRUE)
+    fIsMaster(kTRUE),
+    fIsMultiRun(kFALSE),
+    fSplitSimulation(kFALSE),
+    fG3Id(-1),
+    fG4Id(-1)
 {
   /// Default constructor
 }
 
 //_____________________________________________________________________________
-Ex03MCApplication::~Ex03MCApplication()
+Ex03cMCApplication::~Ex03cMCApplication()
 {
   /// Destructor
 
-  // cout << "Ex03MCApplication::~Ex03MCApplication " << this << endl;
+  // cout << "Ex03cMCApplication::~Ex03cMCApplication " << this << endl;
 
   delete fRootManager;
   delete fStack;
@@ -147,9 +165,11 @@ Ex03MCApplication::~Ex03MCApplication()
   delete fCalorimeterSD;
   delete fPrimaryGenerator;
   delete fMagField;
-  delete gMC;
+  if (!fIsMultiRun) {
+    delete fMC;
+  }
 
-  // cout << "Done Ex03MCApplication::~Ex03MCApplication " << this << endl;
+  // cout << "Done Ex03cMCApplication::~Ex03cMCApplication " << this << endl;
 }
 
 //
@@ -157,13 +177,13 @@ Ex03MCApplication::~Ex03MCApplication()
 //
 
 //_____________________________________________________________________________
-void Ex03MCApplication::RegisterStack() const
+void Ex03cMCApplication::RegisterStack() const
 {
   /// Register stack in the Root manager.
 
   if (fRootManager) {
-    // cout << "Ex03MCApplication::RegisterStack: " << endl;
-    fRootManager->Register("stack", "Ex03MCStack", &fStack);
+    // cout << "Ex03cMCApplication::RegisterStack: " << endl;
+    fRootManager->Register("stack", "Ex03cMCStack", &fStack);
   }
 }
 
@@ -172,7 +192,7 @@ void Ex03MCApplication::RegisterStack() const
 //
 
 //_____________________________________________________________________________
-void Ex03MCApplication::InitMC(const char* setup)
+void Ex03cMCApplication::InitMC(const char* setup)
 {
   /// Initialize MC.
   /// The selection of the concrete MC is done in the macro.
@@ -183,7 +203,7 @@ void Ex03MCApplication::InitMC(const char* setup)
   if (TString(setup) != "") {
     gROOT->LoadMacro(setup);
     gInterpreter->ProcessLine("Config()");
-    if (!gMC) {
+    if (!fMC) {
       Fatal(
         "InitMC", "Processing Config() has failed. (No MC is instantiated.)");
     }
@@ -192,43 +212,129 @@ void Ex03MCApplication::InitMC(const char* setup)
 // MT support available from root v 5.34/18
 #if ROOT_VERSION_CODE >= 336402
   // Create Root manager
-  if (!gMC->IsMT()) {
+  if (!fMC->IsMT()) {
     fRootManager = new TMCRootManager(GetName(), TMCRootManager::kWrite);
     // fRootManager->SetDebug(true);
   }
 #else
   // Create Root manager
   fRootManager = new TMCRootManager(GetName(), TMCRootManager::kWrite);
-  // fRootManager->SetDebug(true);
+// fRootManager->SetDebug(true);
 #endif
 
-  gMC->SetStack(fStack);
-  gMC->SetMagField(fMagField);
-  gMC->Init();
-  gMC->BuildPhysics();
+  fMC->SetStack(fStack);
+  fMC->SetRootGeometry();
+  fMC->SetMagField(fMagField);
+  fMC->Init();
+  fMC->BuildPhysics();
 
   RegisterStack();
+
+  Info("InitMC", "Single run initialised");
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::RunMC(Int_t nofEvents)
+void Ex03cMCApplication::InitMC(std::initializer_list<const char*> setupMacros)
+{
+  /// Initialize MC.
+  /// The selection of the concrete MC is done in the macro.
+  /// \param setup The name of the configuration macro
+
+  fVerbose.InitMC();
+
+  if (!fIsMultiRun) {
+    Fatal("InitMC",
+      "Initialisation of multiple engines not supported in single run");
+  }
+
+  if (setupMacros.size() > 0) {
+    for (const char* setup : setupMacros) {
+      gROOT->LoadMacro(setup);
+      gInterpreter->ProcessLine("Config()");
+      if (!fMC) {
+        Fatal(
+          "InitMC", "Processing Config() has failed. (No MC is instantiated.)");
+      }
+      // gInterpreter->UnloadAllSharedLibraryMaps();
+      gInterpreter->UnloadFile(setup);
+    }
+  }
+
+// MT support available from root v 5.34/18
+#if ROOT_VERSION_CODE >= 336402
+  // Create Root manager
+  if (!fMC->IsMT()) {
+    fRootManager = new TMCRootManager(GetName(), TMCRootManager::kWrite);
+    // fRootManager->SetDebug(true);
+  }
+#else
+  // Create Root manager
+  fRootManager = new TMCRootManager(GetName(), TMCRootManager::kWrite);
+// fRootManager->SetDebug(true);
+#endif
+
+  fMCManager->Init([this](TVirtualMC* mc) {
+    mc->SetRootGeometry();
+    mc->SetMagField(this->fMagField);
+    mc->Init();
+    mc->BuildPhysics();
+  });
+  RegisterStack();
+
+  Info("InitMC", "Multi run initialised");
+  fG3Id = fMCManager->GetEngineId("TGeant3TGeo");
+  fG4Id = fMCManager->GetEngineId("TGeant4");
+  std::cout << "Engine IDs\n"
+            << "TGeant3TGeo: " << fG3Id << "\n"
+            << "TGeant4: " << fG4Id << std::endl;
+}
+
+//_____________________________________________________________________________
+void Ex03cMCApplication::RunMC(Int_t nofEvents)
 {
   /// Run MC.
   /// \param nofEvents Number of events to be processed
 
   fVerbose.RunMC(nofEvents);
 
-  gMC->ProcessRun(nofEvents);
+  // Prepare a timer
+  TTimer timer;
+
+  if (!fIsMultiRun) {
+    Info("RunMC", "Start single run");
+    std::cout << "Simulation entirely done with engine " << fMC->GetName()
+              << std::endl;
+    timer.Start();
+    fMC->ProcessRun(nofEvents);
+  }
+  else {
+    Info("RunMC", "Start multi run");
+    if (fSplitSimulation) {
+      std::cout << "GAPX simulated with engine "
+                << fMCManager->GetEngine(0)->GetName() << "\n"
+                << "ABSO simulated with engine "
+                << fMCManager->GetEngine(1)->GetName() << std::endl;
+    }
+    else {
+      std::cout << "Simulation entirely done with engine "
+                << fMCManager->GetCurrentEngine()->GetName() << std::endl;
+    }
+    timer.Start();
+    fMCManager->Run(nofEvents);
+  }
+  timer.Stop();
+  Info("RunMC", "Transport finished.");
+  timer.Print();
   FinishRun();
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::FinishRun()
+void Ex03cMCApplication::FinishRun()
 {
   /// Finish MC run.
 
   fVerbose.FinishRun();
-  // cout << "Ex03MCApplication::FinishRun: " << endl;
+  // cout << "Ex03cMCApplication::FinishRun: " << endl;
   if (fRootManager) {
     fRootManager->WriteAll();
     fRootManager->Close();
@@ -236,31 +342,31 @@ void Ex03MCApplication::FinishRun()
 }
 
 //_____________________________________________________________________________
-TVirtualMCApplication* Ex03MCApplication::CloneForWorker() const
+TVirtualMCApplication* Ex03cMCApplication::CloneForWorker() const
 {
-  return new Ex03MCApplication(*this);
+  return new Ex03cMCApplication(*this);
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::InitForWorker() const
+void Ex03cMCApplication::InitForWorker() const
 {
-  // cout << "Ex03MCApplication::InitForWorker " << this << endl;
+  // cout << "Ex03cMCApplication::InitForWorker " << this << endl;
 
   // Create Root manager
   fRootManager = new TMCRootManager(GetName(), TMCRootManager::kWrite);
   // fRootManager->SetDebug(true);
 
   // Set data to MC
-  gMC->SetStack(fStack);
-  gMC->SetMagField(fMagField);
+  fMC->SetStack(fStack);
+  fMC->SetMagField(fMagField);
 
   RegisterStack();
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::FinishWorkerRun() const
+void Ex03cMCApplication::FinishWorkerRun() const
 {
-  // cout << "Ex03MCApplication::FinishWorkerRun: " << endl;
+  // cout << "Ex03cMCApplication::FinishWorkerRun: " << endl;
   if (fRootManager) {
     fRootManager->WriteAll();
     fRootManager->Close();
@@ -268,7 +374,7 @@ void Ex03MCApplication::FinishWorkerRun() const
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::ReadEvent(Int_t i)
+void Ex03cMCApplication::ReadEvent(Int_t i)
 {
   /// Read \em i -th event and prints hits.
   /// \param i The number of event to be read
@@ -279,7 +385,7 @@ void Ex03MCApplication::ReadEvent(Int_t i)
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::ConstructGeometry()
+void Ex03cMCApplication::ConstructGeometry()
 {
   /// Construct geometry using detector contruction class.
   /// The detector contruction class is using TGeo functions or
@@ -287,37 +393,17 @@ void Ex03MCApplication::ConstructGeometry()
 
   fVerbose.ConstructGeometry();
 
-  if (!fOldGeometry) {
-    fDetConstruction->ConstructMaterials();
-    fDetConstruction->ConstructGeometry();
-    // TGeoManager::Import("geometry.root");
-    // gMC->SetRootGeometry();
+  if (fOldGeometry) {
+    Fatal("ConstructGeometry", "Cannot run with old geomtry");
   }
-  else {
-    Ex03DetectorConstructionOld detConstructionOld;
-    detConstructionOld.ConstructMaterials();
-    detConstructionOld.ConstructGeometry();
-  }
+  fDetConstruction->ConstructMaterials();
+  fDetConstruction->ConstructGeometry();
+  // TGeoManager::Import("geometry.root");
+  // fMC->SetRootGeometry();
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::ConstructSensitiveDetectors()
-{
-  /// Create sensitive detectors and attach them to sensitive volumes
-
-  cout << "Ex03MCApplication::ConstructSensitiveDetectors()" << endl;
-
-  Ex03CalorimeterSD* calorimeterSD =
-    new Ex03CalorimeterSD("Calorimeter", fDetConstruction);
-  calorimeterSD->SetPrintModulo(fPrintModulo);
-
-  // Set SD to ABSO, GAPX
-  gMC->SetSensitiveDetector("ABSO", calorimeterSD);
-  gMC->SetSensitiveDetector("GAPX", calorimeterSD);
-}
-
-//_____________________________________________________________________________
-void Ex03MCApplication::InitGeometry()
+void Ex03cMCApplication::InitGeometry()
 {
   /// Initialize geometry
 
@@ -327,19 +413,15 @@ void Ex03MCApplication::InitGeometry()
 
   if (fIsControls) fDetConstruction->SetControls();
 
-  // fCalorimeterSD->Initialize();
+  fCalorimeterSD->Initialize();
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::AddParticles()
+void Ex03cMCApplication::AddParticles()
 {
   /// Example of user defined particle with user defined decay mode
 
   fVerbose.AddParticles();
-
-  // Define particle
-  gMC->DefineParticle(1000020050, "He5", kPTHadron, 5.03427, 2.0, 0.002, "Ion",
-    0.0, 0, 1, 0, 0, 0, 0, 0, 5, kFALSE);
 
   // Define the 2 body  phase space decay  for He5
   Int_t mode[6][3];
@@ -354,8 +436,6 @@ void Ex03MCApplication::AddParticles()
   bratio[0] = 100.;
   mode[0][0] = kNeutron;   // neutron (2112)
   mode[0][1] = 1000020040; // alpha
-
-  gMC->SetDecayMode(1000020050, bratio, mode);
 
   // Overwrite a decay mode already defined in MCs
   // Kaon Short: 310 normally decays in two modes
@@ -376,21 +456,24 @@ void Ex03MCApplication::AddParticles()
   mode2[0][0] = kPi0; // pi0 (111)
   mode2[0][1] = kPi0; // pi0 (111)
 
-  gMC->SetDecayMode(kK0Short, bratio2, mode2);
+  // Define particle
+  fMC->DefineParticle(1000020050, "He5", kPTHadron, 5.03427, 2.0, 0.002, "Ion",
+    0.0, 0, 1, 0, 0, 0, 0, 0, 5, kFALSE);
+  fMC->SetDecayMode(1000020050, bratio, mode);
+  fMC->SetDecayMode(kK0Short, bratio2, mode2);
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::AddIons()
+void Ex03cMCApplication::AddIons()
 {
   /// Example of user defined ion
 
   fVerbose.AddIons();
-
-  gMC->DefineIon("MyIon", 34, 70, 12, 0.);
+  fMC->DefineIon("MyIon", 34, 70, 12, 0.);
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::GeneratePrimaries()
+void Ex03cMCApplication::GeneratePrimaries()
 {
   /// Fill the user stack (derived from TVirtualMCStack) with primary particles.
 
@@ -403,14 +486,14 @@ void Ex03MCApplication::GeneratePrimaries()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::BeginEvent()
+void Ex03cMCApplication::BeginEvent()
 {
   /// User actions at beginning of event
 
   fVerbose.BeginEvent();
 
   // Clear TGeo tracks (if filled)
-  if (TString(gMC->GetName()) == "TGeant3TGeo" &&
+  if (!fIsMultiRun && TString(fMC->GetName()) == "TGeant3TGeo" &&
       gGeoManager->GetListOfTracks() && gGeoManager->GetTrack(0) &&
       ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints()) {
 
@@ -427,7 +510,7 @@ void Ex03MCApplication::BeginEvent()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::BeginPrimary()
+void Ex03cMCApplication::BeginPrimary()
 {
   /// User actions at beginning of a primary track.
   /// If test for user defined decay is activated,
@@ -441,7 +524,7 @@ void Ex03MCApplication::BeginPrimary()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::PreTrack()
+void Ex03cMCApplication::PreTrack()
 {
   /// User actions at beginning of each track
   /// If test for user defined decay is activated,
@@ -458,7 +541,7 @@ void Ex03MCApplication::PreTrack()
         fStack->GetParticle(parentID)->GetPdgCode() == kK0Short &&
         fStack->GetCurrentTrack()->GetUniqueID() == kPDecay) {
       // The production process is saved as TParticle unique ID
-      // via Ex03MCStack
+      // via Ex03cMCStack
 
       cout << "      Current track " << fStack->GetCurrentTrack()->GetName()
            << "  is a decay product of Parent ID = "
@@ -468,36 +551,56 @@ void Ex03MCApplication::PreTrack()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::Stepping()
+void Ex03cMCApplication::Stepping()
 {
   /// User actions at each step
 
-  // Work around for Fluka VMC, which does not call
-  // MCApplication::PreTrack()
-  //
-  // cout << "Ex03MCApplication::Stepping" << this << endl;
-  static Int_t trackId = 0;
-  if (TString(gMC->GetName()) == "TFluka" &&
-      gMC->GetStack()->GetCurrentTrackNumber() != trackId) {
-    fVerbose.PreTrack();
-    trackId = gMC->GetStack()->GetCurrentTrackNumber();
-  }
-
   fVerbose.Stepping();
 
-  // fCalorimeterSD->ProcessHits();
+  fCalorimeterSD->ProcessHits();
+
+  TLorentzVector pos;
+  TLorentzVector mom;
+
+  fMC->TrackPosition(pos);
+  fMC->TrackMomentum(mom);
+
+  if (fVerbose.GetLevel() > 2) {
+
+    std::cout << "Current engine " << fMC->GetName() << "\n"
+              << "Track ID=" << fStack->GetCurrentTrackNumber() << "\n"
+              << "Momentum\n"
+              << "E=" << mom.T() << ", Px=" << mom.X() << ", Py=" << mom.Y()
+              << ", Pz=" << mom.Z() << std::endl;
+  }
+
+  // Now transfer track
+  if (fSplitSimulation) {
+    Int_t targetId = -1;
+    if (fMC->GetId() == 0 && strcmp(fMC->CurrentVolName(), "ABSO") == 0) {
+      targetId = 1;
+    }
+    else if (fMC->GetId() == 1 && strcmp(fMC->CurrentVolName(), "GAPX") == 0) {
+      targetId = 0;
+    }
+    if (targetId > -1) {
+      if (fVerbose.GetLevel() > 2) {
+        Info("Stepping", "Transfer track");
+      }
+      fMCManager->TransferTrack(targetId);
+    }
+  }
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::PostTrack()
+void Ex03cMCApplication::PostTrack()
 {
   /// User actions after finishing of each track
-
   fVerbose.PostTrack();
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::FinishPrimary()
+void Ex03cMCApplication::FinishPrimary()
 {
   /// User actions after finishing of a primary track
 
@@ -509,19 +612,7 @@ void Ex03MCApplication::FinishPrimary()
 }
 
 //_____________________________________________________________________________
-void Ex03MCApplication::EndOfEvent()
-{
-  /// User actions et the end of event before SD's end of event
-
-  cout << "Ex03MCApplication::EndOfEvent" << endl;
-
-  fVerbose.EndOfEvent();
-
-  fRootManager->Fill();
-}
-
-//_____________________________________________________________________________
-void Ex03MCApplication::FinishEvent()
+void Ex03cMCApplication::FinishEvent()
 {
   /// User actions after finishing of an event
 
@@ -529,7 +620,7 @@ void Ex03MCApplication::FinishEvent()
 
   // Geant3 + TGeo
   // (use TGeo functions for visualization)
-  if (TString(gMC->GetName()) == "TGeant3TGeo") {
+  if (!fIsMultiRun && TString(fMC->GetName()) == "TGeant3TGeo") {
 
     // Draw volume
     gGeoManager->SetVisOption(0);
@@ -538,7 +629,7 @@ void Ex03MCApplication::FinishEvent()
 
     // Draw tracks (if filled)
     // Available when this feature is activated via
-    // gMC->SetCollectTracks(kTRUE);
+    // fMC->SetCollectTracks(kTRUE);
     if (gGeoManager->GetListOfTracks() && gGeoManager->GetTrack(0) &&
         ((TVirtualGeoTrack*)gGeoManager->GetTrack(0))->HasPoints()) {
 
@@ -546,10 +637,11 @@ void Ex03MCApplication::FinishEvent()
     }
   }
 
-  // if (fEventNo % fPrintModulo == 0)
-  //   fCalorimeterSD->PrintTotal();
+  fRootManager->Fill();
 
-  // fCalorimeterSD->EndOfEvent();
+  if (fEventNo % fPrintModulo == 0) fCalorimeterSD->PrintTotal();
+
+  fCalorimeterSD->EndOfEvent();
 
   fStack->Reset();
 }

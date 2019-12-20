@@ -7,21 +7,14 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03DetectorConstruction.cxx
-/// \brief Implementation of the Ex03DetectorConstruction class
+/// \file Ex03cDetectorConstruction.cxx
+/// \brief Implementation of the Ex03cDetectorConstruction class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
 /// Id: ExN03DetectorConstruction.cc,v 1.11 2002/01/09 17:24:12 ranjard Exp \n
 ///
-/// 11/12/2008:
-/// - Updated materials definition using directly Root objects
-/// - Added new materials according to:
-///   Id: ExN03DetectorConstruction.cc,v 1.24 2008/08/12 20:00:03 gum Exp
-///   GEANT4 tag Name: geant4-09-01-ref-09
-/// - Changed cuts in SetCuts() according to Geant4 09-01-ref-09
-///
-/// \date 06/03/2002
-/// \author I. Hrivnacova; IPN, Orsay
+/// \date 21/08/2019
+/// \author Benedikt Volkel, CERN
 
 #include <Riostream.h>
 #include <TGeoElement.h>
@@ -34,16 +27,16 @@
 
 #include <set>
 
-#include "Ex03DetectorConstruction.h"
+#include "Ex03cDetectorConstruction.h"
 
 using namespace std;
 
 /// \cond CLASSIMP
-ClassImp(Ex03DetectorConstruction)
+ClassImp(Ex03cDetectorConstruction)
   /// \endcond
 
   //_____________________________________________________________________________
-  Ex03DetectorConstruction::Ex03DetectorConstruction()
+  Ex03cDetectorConstruction::Ex03cDetectorConstruction()
   : TObject(),
     fNbOfLayers(0),
     fWorldSizeX(0.),
@@ -77,7 +70,7 @@ ClassImp(Ex03DetectorConstruction)
 }
 
 //_____________________________________________________________________________
-Ex03DetectorConstruction::~Ex03DetectorConstruction()
+Ex03cDetectorConstruction::~Ex03cDetectorConstruction()
 {
   /// Destructor
 }
@@ -87,7 +80,7 @@ Ex03DetectorConstruction::~Ex03DetectorConstruction()
 //
 
 //_____________________________________________________________________________
-void Ex03DetectorConstruction::ComputeCalorParameters()
+void Ex03cDetectorConstruction::ComputeCalorParameters()
 {
   /// Compute derived parameters of the calorimeter
 
@@ -103,7 +96,7 @@ void Ex03DetectorConstruction::ComputeCalorParameters()
 //
 
 //_____________________________________________________________________________
-void Ex03DetectorConstruction::ConstructMaterials()
+void Ex03cDetectorConstruction::ConstructMaterials()
 {
   /// Construct materials using TGeo modeller
 
@@ -258,7 +251,7 @@ void Ex03DetectorConstruction::ConstructMaterials()
 }
 
 //_____________________________________________________________________________
-void Ex03DetectorConstruction::ConstructGeometry()
+void Ex03cDetectorConstruction::ConstructGeometry()
 {
   /// Contruct volumes using TGeo modeller
 
@@ -377,7 +370,7 @@ void Ex03DetectorConstruction::ConstructGeometry()
 }
 
 //_____________________________________________________________________________
-void Ex03DetectorConstruction::SetCuts()
+void Ex03cDetectorConstruction::SetCuts()
 {
   /// Set cuts for e-, gamma equivalent to 1mm cut in G4.
 
@@ -426,7 +419,7 @@ void Ex03DetectorConstruction::SetCuts()
 }
 
 //_____________________________________________________________________________
-void Ex03DetectorConstruction::SetControls()
+void Ex03cDetectorConstruction::SetControls()
 {
   /// This function demonstrate how to inactivate physics processes via VMC
   /// controls. Here gamma processes are inactivated in Lead medium. Note that
@@ -447,7 +440,7 @@ void Ex03DetectorConstruction::SetControls()
 }
 
 //_____________________________________________________________________________
-void Ex03DetectorConstruction::PrintCalorParameters()
+void Ex03cDetectorConstruction::PrintCalorParameters()
 {
   /// Print calorimeter parameters
 
@@ -459,7 +452,7 @@ void Ex03DetectorConstruction::PrintCalorParameters()
 }
 
 //_____________________________________________________________________________
-void Ex03DetectorConstruction::SetNbOfLayers(Int_t value)
+void Ex03cDetectorConstruction::SetNbOfLayers(Int_t value)
 {
   /// Set the number of layers.
   /// \param value  The new number of calorimeter layers
@@ -468,7 +461,7 @@ void Ex03DetectorConstruction::SetNbOfLayers(Int_t value)
 }
 
 //_____________________________________________________________________________
-void Ex03DetectorConstruction::SetDefaultMaterial(const TString& materialName)
+void Ex03cDetectorConstruction::SetDefaultMaterial(const TString& materialName)
 {
   /// Set default material
   /// \param materialName  The new default material name.
@@ -477,7 +470,7 @@ void Ex03DetectorConstruction::SetDefaultMaterial(const TString& materialName)
 }
 
 //_____________________________________________________________________________
-void Ex03DetectorConstruction::SetAbsorberMaterial(const TString& materialName)
+void Ex03cDetectorConstruction::SetAbsorberMaterial(const TString& materialName)
 {
   /// Set absorer material
   /// \param materialName  The new absorber material name.
@@ -486,7 +479,7 @@ void Ex03DetectorConstruction::SetAbsorberMaterial(const TString& materialName)
 }
 
 //_____________________________________________________________________________
-void Ex03DetectorConstruction::SetGapMaterial(const TString& materialName)
+void Ex03cDetectorConstruction::SetGapMaterial(const TString& materialName)
 {
   /// Set gap material
   /// \param materialName  The new gap material name.
@@ -495,7 +488,7 @@ void Ex03DetectorConstruction::SetGapMaterial(const TString& materialName)
 }
 
 //_____________________________________________________________________________
-void Ex03DetectorConstruction::SetCalorSizeYZ(Double_t value)
+void Ex03cDetectorConstruction::SetCalorSizeYZ(Double_t value)
 {
   /// Change the transverse size and recompute the calorimeter parameters
   /// \param value The new calorimeter tranverse size
@@ -504,7 +497,7 @@ void Ex03DetectorConstruction::SetCalorSizeYZ(Double_t value)
 }
 
 //_____________________________________________________________________________
-void Ex03DetectorConstruction::SetAbsorberThickness(Double_t value)
+void Ex03cDetectorConstruction::SetAbsorberThickness(Double_t value)
 {
   /// Change the absorber thickness and recompute the calorimeter parameters
   /// \param value The new absorber thickness
@@ -513,7 +506,7 @@ void Ex03DetectorConstruction::SetAbsorberThickness(Double_t value)
 }
 
 //_____________________________________________________________________________
-void Ex03DetectorConstruction::SetGapThickness(Double_t value)
+void Ex03cDetectorConstruction::SetGapThickness(Double_t value)
 {
   /// Change the gap thickness and recompute the calorimeter parameters
   /// \param value The new gap thickness
@@ -523,7 +516,7 @@ void Ex03DetectorConstruction::SetGapThickness(Double_t value)
 
 /*
 //_____________________________________________________________________________
-void Ex03DetectorConstruction::UpdateGeometry()
+void Ex03cDetectorConstruction::UpdateGeometry()
 {
 // Not available in VMC
 }

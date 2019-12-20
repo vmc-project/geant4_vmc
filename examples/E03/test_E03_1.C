@@ -45,7 +45,11 @@ void test_E03_1(const TString& configMacro, Bool_t oldGeometry)
   // visualization setting
   // set_vis();
 
-  appl->RunMC(5);
+  TStopwatch timer;
+  timer.Start();
+  appl->RunMC(100);
+  timer.Stop();
+  timer.Print();
 
   if ( needDelete ) delete appl;
 }

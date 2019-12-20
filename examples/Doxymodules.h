@@ -34,30 +34,6 @@
  *  \{
  */
 
-/** @defgroup E03a
- * \brief The VMC example E03a - variant with scoring via sensitive volumes and MCApplication::Stepping (old way)
- *
- *  The Geant4 ExampleN03 adapted to Virtual Monte Carlo
- *  and extended for testing some other VMC features.
- *  See more on the \ref README_E03 page.
- *  The E03a example classes have their
- *  <a href="../html_E03a/html/index.html">standalone documentation </a>
- *  @ingroup E03
- *  @{
- */
-/** \} */
-
-/** @defgroup E03b
- * \brief  The VMC example E03b - variant with scoring via user sensitive detectors derived from new TVirtualMCSensitiveDetector interface
- *
- *  The Geant4 ExampleN03 adapted to Virtual Monte Carlo
- *  and extended for testing some other VMC features.
- *  See more on the \ref README_E03 page.
- * @ingroup E03
- *  @{
- */
-/** \} */
-
 /** \} */
 
 /** \defgroup E06 E06

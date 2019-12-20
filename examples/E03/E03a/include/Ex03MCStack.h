@@ -24,7 +24,7 @@
 class TParticle;
 class TClonesArray;
 
-/// \ingroup E03a
+/// \ingroup E03
 /// \brief Implementation of the TVirtualMCStack interface
 ///
 /// \date 06/03/2003

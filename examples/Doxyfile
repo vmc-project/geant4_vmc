@@ -762,8 +762,7 @@ INPUT                  = Doxymain.h \
                          Doxymodules.h \
                          E01 \
                          E02 \
-                         E03/.README.txt \
-                         E03/E03b \
+                         E03 \
                          E06 \
                          A01 \
                          ExGarfield \
@@ -809,7 +808,24 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                = E06/include/Ex03MCStack.h \
+EXCLUDE                = \
+                         E03/E03b/geant4 \
+                         E03/E03b/include/Ex03CalorHit.h \
+                         E03/E03b/include/Ex03DetectorConstruction.h \
+                         E03/E03b/include/Ex03DetectorConstructionOld.h \
+                         E03/E03b/include/Ex03MCStack.h \
+                         E03/E03b/include/Ex03PrimaryGenerator.h \
+                         E03/E03b/src/Ex03CalorHit.cxx \
+                         E03/E03b/src/Ex03DetectorConstruction.cxx \
+                         E03/E03b/src/Ex03DetectorConstructionOld.cxx \
+                         E03/E03b/src/Ex03MCStack.cxx \
+                         E03/E03b/src/Ex03PrimaryGenerator.cxx \
+                         E03/E03c/geant4 \
+                         E03/E03c/include/Ex03CalorHit.h \
+                         E03/E03c/include/Ex03PrimaryGenerator.h \
+                         E03/E03c/src/Ex03CalorHit.cxx \
+                         E03/E03c/src/Ex03PrimaryGenerator.cxx \
+                         E06/include/Ex03MCStack.h \
                          E06/src/Ex03MCStack.cxx \
                          TR/include/Ex03MCStack.h \
                          TR/src/Ex03MCStack.cxx

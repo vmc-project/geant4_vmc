@@ -7,6 +7,7 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
+/// \ingroup E03
 /// \file E03/g3Config.C
 /// \brief Configuration macro for Geant3 VirtualMC for Example03
 

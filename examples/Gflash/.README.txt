@@ -26,8 +26,9 @@
   \link        Gflash/run_g4.C run_g4.C       \endlink - macro for running example
   \link      Gflash/g4Config.C g4Config.C     \endlink - configuration macro for G4 native geometry navigation (default)
   \link  Gflash/g4tgeoConfig.C g4tgeoConfig.C \endlink - configuration macro for G4 with TGeo navigation
+  \link    Gflash/set_g4_vis.C set_g4_vis.C   \endlink - setting Geant4 visualization (called by run_g4.C)
    g4config.in   - macro for G4 configuration using G4 commands (called from g4Config.C)
-   g4vis.in      - macro for G4 visualization settings (called from set_vis.C)
+   g4vis.in      - macro for G4 visualization settings (called from set_g4_vis.C)
   </pre>
 
   For running example with G3:
@@ -35,12 +36,8 @@
   \link      Gflash/load_g3.C load_g3.C     \endlink - macro to load the libraries to run the example with Geant3
   \link       Gflash/run_g3.C run_g3.C      \endlink - macro for running example
   \link Gflash/g3tgeoConfig.C g3tgeoConfig.C\endlink - configuration macro for G3 with TGeo geometry(default)
-  </pre>
-
-  Common macro (called by run_g3.C/run_g4.C):
-  <pre>
-  \link Gflash/set_vis.C set_vis.C\endlink - setting visualization
-  </pre>
+  \link   Gflash/set_g3_vis.C set_g3_vis.C  \endlink - setting Geant3 TGeo visualization (called by run_g3.C)
+ </pre>
 
 \section gflash_s3 To run example
 

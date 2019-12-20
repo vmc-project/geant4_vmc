@@ -7,6 +7,7 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
+/// \ingroup E03
 /// \file E03/read.C
 /// \brief Macro for reading the E03 simulated data from Root file
 

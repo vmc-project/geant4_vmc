@@ -22,7 +22,7 @@
 #include <TObject.h>
 #include <TVector3.h>
 
-/// \ingroup E03c
+/// \ingroup E03
 /// \brief The calorimeter hit
 ///
 /// \date 06/03/2003

@@ -10,40 +10,43 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file  Ex03CalorimeterSD.h
-/// \brief Definition of the Ex03CalorimeterSD class
+/// \file  Ex03cCalorimeterSD.h
+/// \brief Definition of the Ex03cCalorimeterSD class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo: \n
 /// Id: ExN03CalorimeterSD.hh,v 1.4 2002/01/09 17:24:11 ranjard Exp
 /// GEANT4 tag Name: geant4-05-00
 ///
-/// \author I. Hrivnacova; IPN, Orsay
+/// \author Benedikt Volkel, CERN
 
 #include <TClonesArray.h>
-#include <TVirtualMCSensitiveDetector.h>
+#include <TNamed.h>
 
-class Ex03DetectorConstruction;
+class Ex03cDetectorConstruction;
 class Ex03CalorHit;
 class TVirtualMC;
 
-/// \ingroup E03b
+/// \ingroup E03
 /// \brief The calorimeter sensitive detector
 ///
-/// \date 06/03/2003
-/// \author I. Hrivnacova; IPN, Orsay
+/// A variant of the Ex03CalorimeterSD class
+/// updated for multiple engine runs.
+///
+/// \date 21/08/2019
+/// \author Benedikt Volkel, CERN
 
-class Ex03CalorimeterSD : public TVirtualMCSensitiveDetector
+class Ex03cCalorimeterSD : public TNamed
 {
  public:
-  Ex03CalorimeterSD(const char* name, Ex03DetectorConstruction* detector);
-  Ex03CalorimeterSD(
-    const Ex03CalorimeterSD& origin, Ex03DetectorConstruction* detector);
-  Ex03CalorimeterSD();
-  virtual ~Ex03CalorimeterSD();
+  Ex03cCalorimeterSD(const char* name, Ex03cDetectorConstruction* detector);
+  Ex03cCalorimeterSD(
+    const Ex03cCalorimeterSD& origin, Ex03cDetectorConstruction* detector);
+  Ex03cCalorimeterSD();
+  virtual ~Ex03cCalorimeterSD();
 
   // methods
   void Initialize();
-  virtual void ProcessHits();
+  Bool_t ProcessHits();
   void EndOfEvent();
   void Register();
   virtual void Print(Option_t* option = "") const;
@@ -51,7 +54,6 @@ class Ex03CalorimeterSD : public TVirtualMCSensitiveDetector
 
   // set methods
   void SetVerboseLevel(Int_t level);
-  void SetPrintModulo(Int_t value);
 
   // get methods
   Ex03CalorHit* GetHit(Int_t i) const;
@@ -62,28 +64,20 @@ class Ex03CalorimeterSD : public TVirtualMCSensitiveDetector
 
   // data members
   TVirtualMC* fMC;                     ///< The VMC implementation
-  Ex03DetectorConstruction* fDetector; ///< Detector construction
+  Ex03cDetectorConstruction* fDetector; ///< Detector construction
   TClonesArray* fCalCollection;        ///< Hits collection
   Int_t fAbsorberVolId;                ///< The absorber volume Id
   Int_t fGapVolId;                     ///< The gap volume Id
   Int_t fVerboseLevel;                 ///< Verbosity level
-  Int_t fPrintModulo; ///< The event modulus number to be printed
 
-  ClassDef(Ex03CalorimeterSD, 1) // Ex03CalorimeterSD
+  ClassDef(Ex03cCalorimeterSD, 1) // Ex03cCalorimeterSD
 };
 
 /// Set verbose level
 /// \param level The new verbose level value
-inline void Ex03CalorimeterSD::SetVerboseLevel(Int_t level)
+inline void Ex03cCalorimeterSD::SetVerboseLevel(Int_t level)
 {
   fVerboseLevel = level;
-}
-
-/// Set the event modulus number to be printed
-/// \param value  The new event modulus number value
-inline void Ex03CalorimeterSD::SetPrintModulo(Int_t value)
-{
-  fPrintModulo = value;
 }
 
 #endif // EX02_CALORIMETER_SD_H

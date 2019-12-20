@@ -7,14 +7,14 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file ExGarfield/set_vis.C
-/// \brief Macro for setting visualization for ExGarfield example
+/// \file ExGarfield/set_g3_vis.C
+/// \brief Macro for setting G3 visualization for ExGarfield example
 
 #include "TVirtualMC.h"
 
-void set_vis()
+void set_g3_vis()
 {
-/// Macro for setting visualization for ExGarfield example
+/// Macro for setting G3 visualization for ExGarfield example
 
   if ( TString(gMC->GetName()) == "TGeant3TGeo" ) {
     // Set drawing options

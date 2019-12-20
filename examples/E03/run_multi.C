@@ -8,8 +8,8 @@
 //-------------------------------------------------
 
 /// \ingroup E03
-/// \file E03/run_g3.C
-/// \brief Macro for running Example03 with mixed GEANT3 and GEANT4
+/// \file E03/run_multi.C
+/// \brief Macro for running Example03 with mixed Geant3 and Geant4.
 
 // #include "set_g3_vis.C"
 // #include "set_g4_vis.C"

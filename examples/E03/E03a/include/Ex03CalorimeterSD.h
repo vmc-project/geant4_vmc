@@ -26,7 +26,7 @@ class Ex03DetectorConstruction;
 class Ex03CalorHit;
 class TVirtualMC;
 
-/// \ingroup E03a
+/// \ingroup E03
 /// \brief The calorimeter sensitive detector
 ///
 /// \date 06/03/2003

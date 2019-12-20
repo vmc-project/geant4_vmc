@@ -7,13 +7,13 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file exampleE03.cxx
+/// \file exampleE03b.cxx
 /// \brief The Geant4 VMC example E03 application executable
 ///
 /// \date 26/02/2014
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include "Ex03MCApplication.h"
+#include "Ex03bMCApplication.h"
 
 #ifdef USE_GEANT4
 #include "TG4RunConfiguration.h"
@@ -39,8 +39,8 @@ int main(int argc, char** argv)
 #endif
 
   // Create MC application (thread local)
-  Ex03MCApplication* appl =
-    new Ex03MCApplication("ExampleE03", "The exampleE03 MC application");
+  Ex03bMCApplication* appl =
+    new Ex03bMCApplication("ExampleE03", "The exampleE03 MC application");
 
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4

@@ -10,14 +10,14 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file  Ex03DetectorConstruction.h
-/// \brief Definition of the Ex03DetectorConstruction class
+/// \file  Ex03cDetectorConstruction.h
+/// \brief Definition of the Ex03cDetectorConstruction class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo: \n
 /// Id: ExN03DetectorConstruction.hh,v 1.5 2002/01/09 17:24:11 ranjard Exp
 /// GEANT4 tag $Name:  $
 ///
-/// \author I. Hrivnacova; IPN, Orsay
+/// \author Benedikt Volkel, CERN
 
 #include <map>
 
@@ -27,17 +27,20 @@
 
 class TVirtualMC;
 
-/// \ingroup E03c
+/// \ingroup E03
 /// \brief The detector construction (via TGeo )
 ///
-/// \date 06/03/2003
-/// \author I. Hrivnacova; IPN, Orsay
+/// A variant of the Ex03DetectorConstruction class
+/// updated for multiple engine runs.
+///
+/// \date 21/08/2019
+/// \author Benedikt Volkel, CERN
 
-class Ex03DetectorConstruction : public TObject
+class Ex03cDetectorConstruction : public TObject
 {
  public:
-  Ex03DetectorConstruction();
-  virtual ~Ex03DetectorConstruction();
+  Ex03cDetectorConstruction();
+  virtual ~Ex03cDetectorConstruction();
 
  public:
   void ConstructMaterials();
@@ -116,7 +119,7 @@ class Ex03DetectorConstruction : public TObject
   Bool_t fConnectedToMCManager; ///< Set flag if fMC is connected to and
                                 ///< updated by TMCManager
 
-  ClassDef(Ex03DetectorConstruction, 1) // Ex03DetectorConstruction
+  ClassDef(Ex03cDetectorConstruction, 1) // Ex03cDetectorConstruction
 };
 
 #endif // EX03_DETECTOR_CONSTRUCTION_H

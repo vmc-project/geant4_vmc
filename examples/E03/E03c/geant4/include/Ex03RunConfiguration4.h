@@ -19,7 +19,7 @@
 
 #include "TG4RunConfiguration.h"
 
-/// \ingroup E03c
+/// \ingroup E03
 /// \brief User Geant4 VMC run configuration
 ///
 /// This class demonstrates inclusion of a user defined detector construction

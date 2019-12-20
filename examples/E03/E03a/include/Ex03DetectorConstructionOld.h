@@ -25,7 +25,7 @@
 #include <TObject.h>
 #include <TString.h>
 
-/// \ingroup E03a
+/// \ingroup E03
 /// \brief The old detector construction (via VMC functions)
 ///
 /// \date 06/03/2003

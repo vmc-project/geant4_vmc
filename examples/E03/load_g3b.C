@@ -8,8 +8,8 @@
 //-------------------------------------------------
 
 /// \ingroup E03
-/// \file E03/load_g3.C
-/// \brief Macro for loading libraries to run Example03 with Geant3.
+/// \file E03/load_g3b.C
+/// \brief Macro for loading libraries to run example E03b with Geant3.
 
 #include "../macro/g3libs.C"
 
