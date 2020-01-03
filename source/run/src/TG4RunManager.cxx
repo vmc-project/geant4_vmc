@@ -254,7 +254,7 @@ void TG4RunManager::ConfigureRunManager()
     rootNavMgr->Initialize(new TG4PostDetConstruction(), nthreads);
     rootNavMgr->ConnectToG4();
 #else
-    TG4Globals::Exception("TG4RunManager", "ConfigureRunManagerTG4MCGeometry",
+    TG4Globals::Exception("TG4RunManager", "ConfigureRunManager",
       "geomVMCtoRoot and geomRoot options require Geant4 VMC built with "
       "G4Root.");
 #endif

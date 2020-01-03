@@ -19,7 +19,6 @@
 #include "TG4ModelConfigurationManager.h"
 #include "TG4VUserFastSimulation.h"
 
-#include <G4AnalysisUtilities.hh>
 #include <G4FastSimulationManagerProcess.hh>
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
@@ -79,13 +78,17 @@ void TG4FastSimulationPhysics::UpdateRegions(
 
     // Get model configuration
     G4String modelName = (*it)->GetModelName();
-    G4String regions = (*it)->GetRegions();
+    const std::vector<G4String>& regions = (*it)->GetRegions();
     G4VFastSimulationModel* fastSimulationModel =
       (*it)->GetFastSimulationModel();
 
     if (VerboseLevel() > 1) {
-      G4cout << "Adding fast simulation model " << modelName << " to regions "
-             << regions << G4endl;
+      G4cout << "Adding fast simulation model " << modelName << " to regions ";
+      std::vector<G4String>::const_iterator itm;
+      for (itm = regions.begin(); itm != regions.end(); itm++) {
+        G4cout << (*itm) << " ";
+      }
+      G4cout << G4endl;
     }
 
     if (!fastSimulationModel) {
@@ -104,19 +107,14 @@ void TG4FastSimulationPhysics::UpdateRegions(
       continue;
     }
 
-    std::vector<G4String> regionVector;
-    // use analysis utility to tokenize regions
-    G4Analysis::Tokenize(regions, regionVector);
-
-    for (G4int j = 0; j < G4int(regionVector.size()); ++j) {
+    for (G4int j = 0; j < G4int(regions.size()); ++j) {
 
       // Get region
-      G4Region* region =
-        G4RegionStore::GetInstance()->GetRegion(regionVector[j]);
+      G4Region* region = G4RegionStore::GetInstance()->GetRegion(regions[j]);
 
       if (!region) {
         TString text = "The region ";
-        text += regionVector[j].data();
+        text += regions[j].data();
         text += " was not found.";
         TG4Globals::Warning("TG4FastSimulationPhysics", "UpdateRegions", text);
         continue;

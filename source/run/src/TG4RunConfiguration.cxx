@@ -159,6 +159,7 @@ G4VUserPhysicsList* TG4RunConfiguration::CreatePhysicsList()
   G4String extraSelection;
   G4String token;
   G4bool isValid = true;
+  G4bool isBiasing = false;
   while (
     (token = TG4Globals::GetToken(itoken++, fPhysicsListSelection)) != "") {
     // The first token must be either EM or Hadronic physics list
@@ -207,13 +208,16 @@ G4VUserPhysicsList* TG4RunConfiguration::CreatePhysicsList()
     G4cout << "Adding ExtraPhysicsList " << extraSelection << G4endl;
     builder->AddPhysicsList(
       new TG4ExtraPhysicsList(extraSelection, fParameters));
+    if (extraSelection.contains("biasing")) {
+      isBiasing = true;
+    }
   }
 
   // add option here
   G4cout << "Adding SpecialPhysicsList " << fSpecialProcessSelection.Data()
          << G4endl;
   builder->AddPhysicsList(
-    new TG4SpecialPhysicsList(fSpecialProcessSelection.Data()));
+    new TG4SpecialPhysicsList(fSpecialProcessSelection.Data(), isBiasing));
 
   return builder;
 }

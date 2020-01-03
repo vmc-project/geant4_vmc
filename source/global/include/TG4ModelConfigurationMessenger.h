@@ -31,6 +31,7 @@ class G4UIcmdWithAString;
 /// - /mcPhysics/physicsName/setModel modelName
 /// - /mcPhysics/physicsName/setParticles particleName1 particleName2 ...
 /// - /mcPhysics/physicsName/setRegions regionName1 regionName2 ...
+/// - /mcPhysics/physicsName/setOneRegion regionName
 /// - /mcPhysics/physicsName/setEmModel modelName  (deprecated)
 /// where physicName = fastSimulation, emModel
 ///
@@ -78,6 +79,9 @@ class TG4ModelConfigurationMessenger : public G4UImessenger
 
   /// setRegions command
   G4UIcmdWithAString* fSetRegionsCmd;
+
+  /// setRegion command
+  G4UIcmdWithAString* fSetOneRegionCmd;
 };
 
 #endif // TG4_MODEL_CONFIGURATIONS_MESSENGER_H

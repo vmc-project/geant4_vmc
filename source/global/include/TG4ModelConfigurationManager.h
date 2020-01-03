@@ -45,7 +45,9 @@ class TG4ModelConfigurationManager : public TG4Verbose
   // set methods
   void SetModel(const G4String& modelName);
   void SetModelParticles(const G4String& modelName, const G4String& particles);
-  void SetModelRegions(const G4String& modelName, const G4String& regions);
+  void SetModelRegions(const G4String& modelName, const G4String& regionsMedia);
+  void SetOneModelRegion(
+    const G4String& modelName, const G4String& regionMedium);
 
   // get methods
   G4String GetName() const;
@@ -54,15 +56,16 @@ class TG4ModelConfigurationManager : public TG4Verbose
     const G4String& modelName, G4bool warn = true) const;
   const ModelConfigurationVector& GetVector() const;
 
+ protected:
+  // methods
+  void SetRegionsNames();
+
  private:
   /// Not implemented
   TG4ModelConfigurationManager(const TG4ModelConfigurationManager& right);
   /// Not implemented
   TG4ModelConfigurationManager& operator=(
     const TG4ModelConfigurationManager& right);
-
-  // methods
-  void SetRegionsNames();
 
   // data members
 

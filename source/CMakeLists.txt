@@ -111,6 +111,7 @@ endif()
 # Setup project include directories; compile definitions; link libraries
 #
 include_directories(
+  ${PROJECT_SOURCE_DIR}/biasing/include
   ${PROJECT_SOURCE_DIR}/global/include
   ${PROJECT_SOURCE_DIR}/geometry/include
   ${PROJECT_SOURCE_DIR}/digits+hits/include
@@ -143,6 +144,7 @@ SET(root_dict_libs
 # NB: headers are included so they will show up in IDEs
 #
 file(GLOB sources
+  ${PROJECT_SOURCE_DIR}/biasing/src/*.cxx
   ${PROJECT_SOURCE_DIR}/global/src/*.cxx
   ${PROJECT_SOURCE_DIR}/geometry/src/*.cxx
   ${PROJECT_SOURCE_DIR}/digits+hits/src/*.cxx

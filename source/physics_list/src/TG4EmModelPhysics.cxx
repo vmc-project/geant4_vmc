@@ -23,7 +23,7 @@
 #include <TVirtualMC.h>
 #include <TVirtualMCDecayer.h>
 
-#include <G4AnalysisUtilities.hh>
+#include <G4BiasingProcessInterface.hh>
 #include <G4EmConfigurator.hh>
 #include <G4LogicalVolumeStore.hh>
 #include <G4LossTableManager.hh>
@@ -122,7 +122,7 @@ TG4EmModelPhysics::~TG4EmModelPhysics()
 
 //_____________________________________________________________________________
 void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
-  const G4ParticleDefinition* particle, const G4String& regions)
+  const G4ParticleDefinition* particle, const std::vector<G4String>& regions)
 {
   /// Add selected EM model to given particle, process and region.
   /// If regionName is not set, the model is set to the world region.
@@ -143,6 +143,11 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
     G4String processName;
     G4String currentProcessName = (*processVector)[i]->GetProcessName();
 
+    if (VerboseLevel() > 2) {
+      G4cout << "TG4EmModelPhysics::AddModel, processing " << currentProcessName
+             << G4endl;
+    }
+
     // PAI applied to ionisation
     if (currentProcessName.contains("Ioni") &&
         (emModel == kPAIModel || emModel == kPAIPhotonModel)) {
@@ -157,10 +162,21 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
 
     if (!processName.size()) continue;
 
+    // Get the physics process if it is wrapped with biasing
+    G4BiasingProcessInterface* biasingProcess =
+      dynamic_cast<G4BiasingProcessInterface*>((*processVector)[i]);
+    if (biasingProcess) {
+      processName = biasingProcess->GetWrappedProcess()->GetProcessName();
+      if (VerboseLevel() > 2) {
+        G4cout << "Unwrapping biasing process: " << processName << G4endl;
+      }
+    }
+
     // CreateEM model
     //
     G4VEmModel* g4EmModel = 0;
     G4VEmFluctuationModel* g4FluctModel = 0;
+
     if (emModel == kPAIModel) {
       // PAI
       G4PAIModel* pai = new G4PAIModel(particle, "PAIModel");
@@ -188,22 +204,9 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
       g4FluctModel = 0;
     }
 
-    // Get regions
-    std::vector<G4String> regionVector;
-    if (regions.size()) {
-      // use analysis utility to tokenize regions
-      G4Analysis::Tokenize(regions, regionVector);
-    }
-    else {
-      // Get world default region
-      G4LogicalVolume* worldLV =
-        TG4GeometryServices::Instance()->GetWorld()->GetLogicalVolume();
-      regionVector.push_back(worldLV->GetRegion()->GetName());
-    }
+    for (G4int j = 0; j < G4int(regions.size()); ++j) {
 
-    for (G4int j = 0; j < G4int(regionVector.size()); ++j) {
-
-      G4String regionName = regionVector[j];
+      G4String regionName = regions[j];
 
       if (VerboseLevel() > 2) {
         G4cout << "Adding EM model: " << GetEmModelName(emModel)
@@ -211,6 +214,17 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
                << " process: " << processName
                << " region(=material): " << regionName << G4endl;
       }
+
+      G4LossTableManager::Instance()->EmConfigurator()->SetExtraEmModel(
+        particle->GetParticleName(), processName, g4EmModel, regionName, 0.0,
+        DBL_MAX, g4FluctModel);
+    }
+
+    if (!regions.size()) {
+      // If no regions were defined, set the model to the default region.
+      G4LogicalVolume* worldLV =
+        TG4GeometryServices::Instance()->GetWorld()->GetLogicalVolume();
+      G4String regionName = worldLV->GetRegion()->GetName();
 
       G4LossTableManager::Instance()->EmConfigurator()->SetExtraEmModel(
         particle->GetParticleName(), processName, g4EmModel, regionName, 0.0,
@@ -240,7 +254,7 @@ void TG4EmModelPhysics::AddModels(
     // Get model configuration
     TG4EmModel emModel = GetEmModel((*it)->GetModelName());
     G4String particles = (*it)->GetParticles();
-    G4String regions = (*it)->GetRegions();
+    const std::vector<G4String>& regions = (*it)->GetRegions();
 
     if (!regions.size()) {
       // add warning

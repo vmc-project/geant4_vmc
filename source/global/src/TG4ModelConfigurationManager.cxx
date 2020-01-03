@@ -22,7 +22,6 @@
 #include "TG4ModelConfigurationMessenger.h"
 #include "TG4PhysicsManager.h"
 
-#include <G4AnalysisUtilities.hh>
 #include <G4LogicalVolume.hh>
 #include <G4LogicalVolumeStore.hh>
 #include <G4Material.hh>
@@ -81,45 +80,52 @@ void TG4ModelConfigurationManager::SetRegionsNames()
   ModelConfigurationVector::iterator it;
   for (it = fVector.begin(); it != fVector.end(); it++) {
 
-    G4String regionsMedia = (*it)->GetRegionsMedia();
-
-    // Get regions as a vector
-    std::vector<G4String> mediaVector;
-    if (regionsMedia.size()) {
-      // use analysis utility to tokenize regions
-      G4Analysis::Tokenize((*it)->GetRegionsMedia(), mediaVector);
-    }
+    const std::vector<G4String>& mediaNames = (*it)->GetRegionsMedia();
 
     // Process the vector and generate a new list with material names
-    G4String regionsAsMaterials;
     std::vector<G4String>::const_iterator itr;
-    for (itr = mediaVector.begin(); itr != mediaVector.end(); itr++) {
-      TG4Medium* medium = mediumMap->GetMedium(*itr);
-      if (!medium) {
-        // Add warning
-        TString text = "Medium ";
-        text += (*itr).data();
-        text += " not found.";
-        text += TG4Globals::Endl();
-        text += "The special physics model will not be applied.";
-        TG4Globals::Warning(
-          "TG4ModelConfigurationManager", "SetRegionsNames", text);
-        continue;
+    for (itr = mediaNames.begin(); itr != mediaNames.end(); itr++) {
+
+      std::vector<TG4Medium*> media;
+      G4bool isPattern = (*itr).find("*") != std::string::npos;
+      if (isPattern) {
+        // G4cout << "processing " << (*itr) << " as pattern." << G4endl;
+        mediumMap->GetMedia(*itr, media);
+      }
+      else {
+        // G4cout << "processing " << (*itr) << " as single medium." << G4endl;
+        TG4Medium* medium = mediumMap->GetMedium(*itr);
+        if (!medium) {
+          // Add warning
+          TString text = "Medium ";
+          text += (*itr).data();
+          text += " not found.";
+          text += TG4Globals::Endl();
+          text += "The special physics model will not be applied.";
+          TG4Globals::Warning(
+            "TG4ModelConfigurationManager", "SetRegionsNames", text);
+          continue;
+        }
+        media.push_back(medium);
       }
 
-      G4String materialName = medium->GetMaterial()->GetName();
-      if (regionsAsMaterials.find(materialName) == std::string::npos) {
-        regionsAsMaterials.append(materialName);
-        regionsAsMaterials.append(" ");
+      std::vector<TG4Medium*>::const_iterator itrm;
+      for (itrm = media.begin(); itrm != media.end(); itrm++) {
+        G4String materialName = (*itrm)->GetMaterial()->GetName();
+        (*it)->SetOneRegion(materialName);
       }
     }
 
     if (VerboseLevel() > 1) {
-      G4cout << "TG4ModelConfigurationManager::SetRegionsNames: "
-             << regionsAsMaterials << G4endl;
+      // Print the new regions names corresponding to materials
+      G4cout << "TG4ModelConfigurationManager::SetRegionsNames: ";
+      const std::vector<G4String>& regions = (*it)->GetRegions();
+      std::vector<G4String>::const_iterator itm;
+      for (itm = regions.begin(); itm != regions.end(); itm++) {
+        G4cout << "\'" << (*itm) << "\' ";
+      }
+      G4cout << G4endl;
     }
-
-    (*it)->SetRegions(regionsAsMaterials);
   }
 }
 
@@ -240,7 +246,7 @@ void TG4ModelConfigurationManager::SetModelParticles(
 void TG4ModelConfigurationManager::SetModelRegions(
   const G4String& modelName, const G4String& regionsMedia)
 {
-  /// Set regions for the physics model for given medium.
+  /// Set regions for the physics model for given media.
 
   TG4ModelConfiguration* modelConfiguration =
     GetModelConfiguration(modelName, "SetModelRegions");
@@ -255,6 +261,26 @@ void TG4ModelConfigurationManager::SetModelRegions(
   }
 
   modelConfiguration->SetRegionsMedia(regionsMedia);
+}
+
+//_____________________________________________________________________________
+void TG4ModelConfigurationManager::SetOneModelRegion(
+  const G4String& modelName, const G4String& regionMedium)
+{
+  /// Set regions for the physics model for the given medium.
+
+  TG4ModelConfiguration* modelConfiguration =
+    GetModelConfiguration(modelName, "SetModelRegions");
+
+  if (!modelConfiguration) {
+    TString text = "The model configuration ";
+    text += modelName.data();
+    text += " is not defined.";
+    TG4Globals::Warning("TG4ModelConfigurationManager", "SetModelRegions",
+      text + TG4Globals::Endl() + TString("Setting will be ignored."));
+    return;
+  }
+  modelConfiguration->SetOneRegionMedium(regionMedium);
 }
 
 //_____________________________________________________________________________

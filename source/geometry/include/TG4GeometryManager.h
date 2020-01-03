@@ -26,6 +26,7 @@ class TG4Field;
 class TG4GeometryServices;
 class TG4OpGeometryManager;
 class TG4ModelConfigurationManager;
+class TG4BiasingManager;
 class TG4G3CutVector;
 class TG4G3ControlVector;
 class TG4VUserRegionConstruction;
@@ -134,6 +135,9 @@ class TG4GeometryManager : public TG4Verbose
 
   /// EM models manager
   TG4ModelConfigurationManager* fEmModelsManager;
+
+  /// Biasing manager
+  TG4BiasingManager* fBiasingManager;
 
   /// User geometry input
   G4String fUserGeometry;
