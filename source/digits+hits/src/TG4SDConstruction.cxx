@@ -62,6 +62,11 @@ void TG4SDConstruction::CreateSD(
 {
   /// Create/retrieve a sensitive detector for the given logical volume.
 
+  if (VerboseLevel() > 2) {
+    G4cout << "TG4SDConstruction::CreateSD:  lv=" << lv->GetName()
+      << " userSD=" << userSD << G4endl;
+  }
+
   TG4GeometryServices* geometryServices = TG4GeometryServices::Instance();
   G4SDManager* pSDManager = G4SDManager::GetSDMpointer();
 
@@ -86,19 +91,34 @@ void TG4SDConstruction::CreateSD(
     TG4SensitiveDetector* newSD = 0;
     if (fIsGflash) {
       newSD = new TG4GflashSensitiveDetector(sdName, mediumId);
+      if (VerboseLevel() > 2) {
+        G4cout << "Created TG4GflashSensitiveDetector with sdName=" << sdName
+          << " mediumId=" << mediumId << G4endl;
+      }
     }
     else if (userSD) {
       newSD = new TG4SensitiveDetector(userSD, mediumId, fExclusiveSDScoring);
+      if (VerboseLevel() > 2) {
+        G4cout << "Created TG4SensitiveDetector with userSD=" << userSD << " mediumId="
+          << mediumId << " exclusiveSoring=" << fExclusiveSDScoring << G4endl;
+      }
     }
     else {
       newSD = new TG4SensitiveDetector(sdName, mediumId);
+      if (VerboseLevel() > 2) {
+        G4cout << "Created TG4SensitiveDetector with sdName=" << sdName << " mediumId="
+          << mediumId << G4endl;
+      }
     }
     pSDManager->AddNewDetector(newSD);
-
     if (VerboseLevel() > 1) {
       G4cout << "Sensitive detector " << sdName << "  ID=" << newSD->GetID()
-             << "  medium ID=" << newSD->GetMediumID() << " has been created."
-             << G4endl;
+        << "  medium ID=" << newSD->GetMediumID() << " has been created." << G4endl;
+    } else {
+      if (VerboseLevel() > 2) {
+        G4cout << "Sensitive detector " << sdName << ", " << sd << " already exists."
+          << G4endl;
+      }
     }
     sd = newSD;
   }
