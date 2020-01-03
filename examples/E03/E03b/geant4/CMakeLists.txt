@@ -51,12 +51,9 @@ ROOT_GENERATE_DICTIONARY(
   LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}LinkDef.h)
 
 # Files produced by the dictionary generation
-SET(root_dict
+set(root_dict
   ${g4library_name}_dict.cxx)
-#SET(root_dict_libs
-#  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}_dict_rdict.pcm
-#  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}_dict.rootmap)
-SET(root_dict_libs
+set(root_dict_lib
   ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}_dict_rdict.pcm)
 
 #----------------------------------------------------------------------------

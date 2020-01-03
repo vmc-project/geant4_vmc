@@ -78,6 +78,7 @@ class Ex03cMCApplication : public TVirtualMCApplication
   void SetVerboseLevel(Int_t verboseLevel);
   void SetControls(Bool_t isConstrols);
   void SetField(Double_t bz);
+  void SetDebug(Bool_t debug);
 
   // get methods
   Ex03cDetectorConstruction* GetDetectorConstruction() const;
@@ -109,6 +110,7 @@ class Ex03cMCApplication : public TVirtualMCApplication
   Bool_t fSplitSimulation; ///< Split geometry given user criteria
   Int_t fG3Id;             ///< engine ID of Geant3
   Int_t fG4Id;             ///< engine ID of Geant4
+  Bool_t fDebug;           ///< debug option for multiple run
 
   ClassDef(Ex03cMCApplication, 1) // Interface to MonteCarlo application
 };
@@ -132,11 +134,17 @@ inline void Ex03cMCApplication::SetVerboseLevel(Int_t verboseLevel)
   fVerbose.SetLevel(verboseLevel);
 }
 
-// Set magnetic field
-// \param bz  The new field value in z
+/// Set magnetic field
+/// \param bz  The new field value in z
 inline void Ex03cMCApplication::SetField(Double_t bz)
 {
   fMagField->SetFieldValue(0., 0., bz);
+}
+
+/// Set debug option for multiple run
+inline void Ex03cMCApplication::SetDebug(Bool_t debug)
+{
+  fDebug = debug;
 }
 
 /// \return The detector construction

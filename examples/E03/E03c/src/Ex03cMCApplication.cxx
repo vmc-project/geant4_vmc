@@ -63,7 +63,8 @@ ClassImp(Ex03cMCApplication)
     fIsMultiRun(isMulti),
     fSplitSimulation(splitSimulation),
     fG3Id(-1),
-    fG4Id(-1)
+    fG4Id(-1),
+    fDebug(false)
 {
   /// Standard constructor
   /// \param name   The MC application name
@@ -74,6 +75,12 @@ ClassImp(Ex03cMCApplication)
       "Cannot split simulation between engines without \"isMulti\" being "
       "switched on");
   }
+
+  cout << "--------------------------------------------------------------"
+       << endl;
+  cout << " VMC Example E03b: new version with sensitive detectors" << endl;
+  cout << "--------------------------------------------------------------"
+       << endl;
 
   // Create a user stack
   fStack = new Ex03cMCStack(1000);
@@ -109,7 +116,13 @@ Ex03cMCApplication::Ex03cMCApplication(const Ex03cMCApplication& origin)
     fPrimaryGenerator(0),
     fMagField(0),
     fOldGeometry(origin.fOldGeometry),
-    fIsMaster(kFALSE)
+    fIsControls(origin.fIsControls),
+    fIsMaster(kFALSE),
+    fIsMultiRun(origin.fIsMultiRun),
+    fSplitSimulation(origin.fSplitSimulation),
+    fG3Id(origin.fG3Id),
+    fG4Id(origin.fG4Id),
+    fDebug(origin.fDebug)
 {
   /// Copy constructor for cloning application on workers (in multithreading
   /// mode) \param origin   The source MC application
@@ -147,7 +160,8 @@ Ex03cMCApplication::Ex03cMCApplication()
     fIsMultiRun(kFALSE),
     fSplitSimulation(kFALSE),
     fG3Id(-1),
-    fG4Id(-1)
+    fG4Id(-1),
+    fDebug(kFALSE)
 {
   /// Default constructor
 }
@@ -230,7 +244,9 @@ void Ex03cMCApplication::InitMC(const char* setup)
 
   RegisterStack();
 
-  Info("InitMC", "Single run initialised");
+  if (fDebug) {
+    Info("InitMC", "Single run initialised");
+  }
 }
 
 //_____________________________________________________________________________
@@ -281,12 +297,14 @@ void Ex03cMCApplication::InitMC(std::initializer_list<const char*> setupMacros)
   });
   RegisterStack();
 
-  Info("InitMC", "Multi run initialised");
   fG3Id = fMCManager->GetEngineId("TGeant3TGeo");
   fG4Id = fMCManager->GetEngineId("TGeant4");
-  std::cout << "Engine IDs\n"
-            << "TGeant3TGeo: " << fG3Id << "\n"
-            << "TGeant4: " << fG4Id << std::endl;
+  if (fDebug) {
+    Info("InitMC", "Multi run initialised");
+    std::cout << "Engine IDs\n"
+              << "TGeant3TGeo: " << fG3Id << "\n"
+              << "TGeant4: " << fG4Id << std::endl;
+  }
 }
 
 //_____________________________________________________________________________
@@ -301,30 +319,36 @@ void Ex03cMCApplication::RunMC(Int_t nofEvents)
   TTimer timer;
 
   if (!fIsMultiRun) {
-    Info("RunMC", "Start single run");
-    std::cout << "Simulation entirely done with engine " << fMC->GetName()
-              << std::endl;
-    timer.Start();
+    if (fDebug) {
+      Info("RunMC", "Start single run");
+      std::cout << "Simulation entirely done with engine " << fMC->GetName()
+                << std::endl;
+      timer.Start();
+    }
     fMC->ProcessRun(nofEvents);
   }
   else {
-    Info("RunMC", "Start multi run");
-    if (fSplitSimulation) {
-      std::cout << "GAPX simulated with engine "
-                << fMCManager->GetEngine(0)->GetName() << "\n"
-                << "ABSO simulated with engine "
-                << fMCManager->GetEngine(1)->GetName() << std::endl;
+    if (fDebug) {
+      Info("RunMC", "Start multi run");
+      if (fSplitSimulation) {
+        std::cout << "GAPX simulated with engine "
+                  << fMCManager->GetEngine(0)->GetName() << "\n"
+                  << "ABSO simulated with engine "
+                  << fMCManager->GetEngine(1)->GetName() << std::endl;
+      }
+      else {
+        std::cout << "Simulation entirely done with engine "
+                  << fMCManager->GetCurrentEngine()->GetName() << std::endl;
+      }
+      timer.Start();
     }
-    else {
-      std::cout << "Simulation entirely done with engine "
-                << fMCManager->GetCurrentEngine()->GetName() << std::endl;
-    }
-    timer.Start();
     fMCManager->Run(nofEvents);
   }
-  timer.Stop();
-  Info("RunMC", "Transport finished.");
-  timer.Print();
+  if (fDebug) {
+    timer.Stop();
+    Info("RunMC", "Transport finished.");
+    timer.Print();
+  }
   FinishRun();
 }
 
@@ -565,8 +589,7 @@ void Ex03cMCApplication::Stepping()
   fMC->TrackPosition(pos);
   fMC->TrackMomentum(mom);
 
-  if (fVerbose.GetLevel() > 2) {
-
+  if (fDebug) {
     std::cout << "Current engine " << fMC->GetName() << "\n"
               << "Track ID=" << fStack->GetCurrentTrackNumber() << "\n"
               << "Momentum\n"
@@ -584,7 +607,7 @@ void Ex03cMCApplication::Stepping()
       targetId = 0;
     }
     if (targetId > -1) {
-      if (fVerbose.GetLevel() > 2) {
+      if (fDebug) {
         Info("Stepping", "Transfer track");
       }
       fMCManager->TransferTrack(targetId);
