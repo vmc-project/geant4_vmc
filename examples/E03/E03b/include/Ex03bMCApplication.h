@@ -19,8 +19,8 @@
 
 #include <TVirtualMCApplication.h>
 
-#include "Ex03bCalorimeterSD.h"
 #include "Ex03DetectorConstruction.h"
+#include "Ex03bCalorimeterSD.h"
 
 #include <TGeoUniformMagField.h>
 #include <TMCVerbose.h>
@@ -97,7 +97,7 @@ class Ex03bMCApplication : public TVirtualMCApplication
   TMCVerbose fVerbose; ///< VMC verbose helper
   Ex03MCStack* fStack; ///< VMC stack
   Ex03DetectorConstruction* fDetConstruction; ///< Dector construction
-  Ex03bCalorimeterSD* fCalorimeterSD;          ///< Calorimeter SD
+  Ex03bCalorimeterSD* fCalorimeterSD;         ///< Calorimeter SD
   Ex03PrimaryGenerator* fPrimaryGenerator;    ///< Primary generator
   TGeoUniformMagField* fMagField;             ///< Magnetic field
   Bool_t fOldGeometry; ///< Option for geometry definition

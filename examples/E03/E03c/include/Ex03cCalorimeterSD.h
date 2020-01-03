@@ -63,12 +63,12 @@ class Ex03cCalorimeterSD : public TNamed
   void ResetHits();
 
   // data members
-  TVirtualMC* fMC;                     ///< The VMC implementation
+  TVirtualMC* fMC;                      ///< The VMC implementation
   Ex03cDetectorConstruction* fDetector; ///< Detector construction
-  TClonesArray* fCalCollection;        ///< Hits collection
-  Int_t fAbsorberVolId;                ///< The absorber volume Id
-  Int_t fGapVolId;                     ///< The gap volume Id
-  Int_t fVerboseLevel;                 ///< Verbosity level
+  TClonesArray* fCalCollection;         ///< Hits collection
+  Int_t fAbsorberVolId;                 ///< The absorber volume Id
+  Int_t fGapVolId;                      ///< The gap volume Id
+  Int_t fVerboseLevel;                  ///< Verbosity level
 
   ClassDef(Ex03cCalorimeterSD, 1) // Ex03cCalorimeterSD
 };

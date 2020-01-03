@@ -37,7 +37,7 @@ class TMCRootManager;
 ///
 /// A variant of the Ex03MCApplication class
 /// updated for multiple engine runs.
-/// 
+///
 /// \date 21/08/2019
 /// \author Benedikt Volkel, CERN
 
@@ -94,14 +94,14 @@ class Ex03cMCApplication : public TVirtualMCApplication
 
   // data members
   mutable TMCRootManager* fRootManager; //!< Root manager
-  Int_t fPrintModulo;  ///< The event modulus number to be printed
-  Int_t fEventNo;      ///< Event counter
-  TMCVerbose fVerbose; ///< VMC verbose helper
+  Int_t fPrintModulo;   ///< The event modulus number to be printed
+  Int_t fEventNo;       ///< Event counter
+  TMCVerbose fVerbose;  ///< VMC verbose helper
   Ex03cMCStack* fStack; ///< VMC stack
   Ex03cDetectorConstruction* fDetConstruction; ///< Dector construction
   Ex03cCalorimeterSD* fCalorimeterSD;          ///< Calorimeter SD
-  Ex03PrimaryGenerator* fPrimaryGenerator;    ///< Primary generator
-  TGeoUniformMagField* fMagField;             ///< Magnetic field
+  Ex03PrimaryGenerator* fPrimaryGenerator;     ///< Primary generator
+  TGeoUniformMagField* fMagField;              ///< Magnetic field
   Bool_t fOldGeometry;     ///< Option for geometry definition
   Bool_t fIsControls;      ///< Option to activate special controls
   Bool_t fIsMaster;        ///< If is on master thread

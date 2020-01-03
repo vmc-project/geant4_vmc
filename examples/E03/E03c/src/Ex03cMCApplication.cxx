@@ -16,8 +16,8 @@
 /// \author Benedikt Volkel, CERN
 
 #include "Ex03cMCApplication.h"
-#include "Ex03cMCStack.h"
 #include "Ex03PrimaryGenerator.h"
+#include "Ex03cMCStack.h"
 
 #include <TMCRootManager.h>
 
