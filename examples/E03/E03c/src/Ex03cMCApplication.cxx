@@ -78,7 +78,7 @@ ClassImp(Ex03cMCApplication)
 
   cout << "--------------------------------------------------------------"
        << endl;
-  cout << " VMC Example E03b: new version with sensitive detectors" << endl;
+  cout << " VMC Example E03c: new version with multiple engines" << endl;
   cout << "--------------------------------------------------------------"
        << endl;
 
