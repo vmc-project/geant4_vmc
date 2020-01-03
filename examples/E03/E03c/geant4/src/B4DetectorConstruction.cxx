@@ -142,12 +142,12 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
 
   G4LogicalVolume* worldLV = new G4LogicalVolume(worldS, // its solid
     defaultMaterial,                                     // its material
-    "World");                                            // its name
+    "WRLD");                                             // its name
 
   G4VPhysicalVolume* worldPV = new G4PVPlacement(0, // no rotation
     G4ThreeVector(),                                // at (0,0,0)
     worldLV,                                        // its logical volume
-    "World",                                        // its name
+    "WRLD",                                         // its name
     0,                                              // its mother  volume
     false,                                          // no boolean operation
     0,                                              // copy number
@@ -161,12 +161,12 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
 
   G4LogicalVolume* calorLV = new G4LogicalVolume(calorimeterS, // its solid
     defaultMaterial,                                           // its material
-    "Calorimeter");                                            // its name
+    "CALO");                                                   // its name
 
   new G4PVPlacement(0, // no rotation
     G4ThreeVector(),   // at (0,0,0)
     calorLV,           // its logical volume
-    "Calorimeter",     // its name
+    "CALO",            // its name
     worldLV,           // its mother  volume
     false,             // no boolean operation
     0,                 // copy number
@@ -180,9 +180,9 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
 
   G4LogicalVolume* layerLV = new G4LogicalVolume(layerS, // its solid
     defaultMaterial,                                     // its material
-    "Layer");                                            // its name
+    "LAYE");                                             // its name
 
-  new G4PVReplica("Layer", // its name
+  new G4PVReplica("LAYE",  // its name
     layerLV,               // its logical volume
     calorLV,               // its mother
     kZAxis,                // axis of replication
@@ -197,12 +197,12 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
 
   G4LogicalVolume* absorberLV = new G4LogicalVolume(absorberS, // its solid
     absorberMaterial,                                          // its material
-    "Abso");                                                   // its name
+    "ABSO");                                                   // its name
 
   fAbsorberPV = new G4PVPlacement(0,          // no rotation
     G4ThreeVector(0., 0., -gapThickness / 2), // its position
     absorberLV,                               // its logical volume
-    "Abso",                                   // its name
+    "ABSO",                                   // its name
     layerLV,                                  // its mother  volume
     false,                                    // no boolean operation
     0,                                        // copy number
@@ -216,12 +216,12 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
 
   G4LogicalVolume* gapLV = new G4LogicalVolume(gapS, // its solid
     gapMaterial,                                     // its material
-    "Gap");                                          // its name
+    "GAPX");                                         // its name
 
   fGapPV = new G4PVPlacement(0,               // no rotation
     G4ThreeVector(0., 0., absoThickness / 2), // its position
     gapLV,                                    // its logical volume
-    "Gap",                                    // its name
+    "GAPX",                                   // its name
     layerLV,                                  // its mother  volume
     false,                                    // no boolean operation
     0,                                        // copy number

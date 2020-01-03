@@ -305,7 +305,10 @@ void Ex03bMCApplication::ConstructSensitiveDetectors()
 {
   /// Create sensitive detectors and attach them to sensitive volumes
 
-  cout << "Ex03bMCApplication::ConstructSensitiveDetectors()" << endl;
+  // fVerbose.ConstructSensitiveDetectors();
+  if (fVerbose.GetLevel() >0) {
+    std::cout << "--- Construct sensitive detectors" << std::endl;
+  }
 
   Ex03bCalorimeterSD* calorimeterSD =
     new Ex03bCalorimeterSD("Calorimeter", fDetConstruction);
@@ -512,8 +515,6 @@ void Ex03bMCApplication::FinishPrimary()
 void Ex03bMCApplication::EndOfEvent()
 {
   /// User actions et the end of event before SD's end of event
-
-  cout << "Ex03bMCApplication::EndOfEvent" << endl;
 
   fVerbose.EndOfEvent();
 

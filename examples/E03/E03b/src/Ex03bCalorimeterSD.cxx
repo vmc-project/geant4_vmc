@@ -143,12 +143,6 @@ void Ex03bCalorimeterSD::Initialize()
 
   fAbsorberVolId = fMC->VolId("ABSO");
   fGapVolId = fMC->VolId("GAPX");
-
-  if (fAbsorberVolId == 0 && fGapVolId == 0) {
-    // Volume names are different in B4 detector construction
-    fAbsorberVolId = fMC->VolId("Abso");
-    fGapVolId = fMC->VolId("Gap");
-  }
 }
 
 //_____________________________________________________________________________
