@@ -38,6 +38,7 @@ class TMCRootManager;
 /// A variant of the Ex03MCApplication class
 /// updated for multiple engine runs.
 ///
+
 /// \date 21/08/2019
 /// \author Benedikt Volkel, CERN
 
@@ -52,6 +53,7 @@ class Ex03cMCApplication : public TVirtualMCApplication
   // methods
   void InitMC(const char* setup);
   void InitMC(std::initializer_list<const char*> setupMacros);
+  void InitMC();
   void RunMC(Int_t nofEvents);
   void FinishRun();
   void ReadEvent(Int_t i);
@@ -78,7 +80,7 @@ class Ex03cMCApplication : public TVirtualMCApplication
   void SetVerboseLevel(Int_t verboseLevel);
   void SetControls(Bool_t isConstrols);
   void SetField(Double_t bz);
-  void SetDebug(Bool_t debug);
+  void SetDebug(Int_t debug);
 
   // get methods
   Ex03cDetectorConstruction* GetDetectorConstruction() const;
@@ -110,7 +112,7 @@ class Ex03cMCApplication : public TVirtualMCApplication
   Bool_t fSplitSimulation; ///< Split geometry given user criteria
   Int_t fG3Id;             ///< engine ID of Geant3
   Int_t fG4Id;             ///< engine ID of Geant4
-  Bool_t fDebug;           ///< debug option for multiple run
+  Int_t fDebug;           ///< debug option for multiple run
 
   ClassDef(Ex03cMCApplication, 1) // Interface to MonteCarlo application
 };
@@ -142,7 +144,7 @@ inline void Ex03cMCApplication::SetField(Double_t bz)
 }
 
 /// Set debug option for multiple run
-inline void Ex03cMCApplication::SetDebug(Bool_t debug)
+inline void Ex03cMCApplication::SetDebug(Int_t debug)
 {
   fDebug = debug;
 }

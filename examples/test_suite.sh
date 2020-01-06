@@ -40,6 +40,8 @@ DEBUG="0"
 # Set 1 to 0 if you want to skip given MC or ExGarfield test
 TESTG3="1"
 TESTG4="1"
+TESTMULTI="1"
+TEST_OLDGEOM="1"
 BUILDDIR=""
 
 # Run Garfield optionally
@@ -50,8 +52,11 @@ RUNG3="root.exe -b -q load_g3.C"
 RUNG4="root.exe -b -q load_g4.C"
 RUNG3_E03a="root.exe -b -q load_g3a.C"
 RUNG3_E03b="root.exe -b -q load_g3b.C"
+RUNG3_E03c="root.exe -b -q load_g3c.C"
 RUNG4_E03a="root.exe -b -q load_g4a.C"
 RUNG4_E03b="root.exe -b -q load_g4b.C"
+RUNG4_E03c="root.exe -b -q load_g4c.C"
+RUNMULTI="root.exe -b -q load_multi.C"
 
 # The default list of examples (all)
 ALL_EXAMPLES="E01 E02 E03 E06 A01 ExGarfield Gflash Monopole TR"
@@ -156,6 +161,8 @@ do
     "--g3=off"       ) TESTG3="0" ;;
     "--g4=on"        ) TESTG4="1" ;;
     "--g4=off"       ) TESTG4="0" ;;
+    "--multi=on"     ) TESTMULTI="1" ;;
+    "--multi=off"    ) TESTMULTI="0" ;;
     "--garfield=on"  ) TESTGARFIELD="1" ;;
     "--garfield=off" ) TESTGARFIELD="0" ;;
      --examples=*    ) EXAMPLES=${arg#--examples=} ;;
@@ -259,7 +266,7 @@ do
 
   if [ "$EXAMPLE" = "E03" ]; then
 
-    for OPTION in E03a E03b
+    for OPTION in E03a E03b E03c
     do
 
       OUT_SUB=$OUT/$OPTION
@@ -278,6 +285,11 @@ do
         RUNG3_OPT=$RUNG3_E03b
         RUNG4_OPT=$RUNG4_E03b
       fi
+      if [ "$OPTION" = "E03c" ]; then
+        RUNG3_OPT=$RUNG3_E03c
+        RUNG4_OPT=$RUNG4_E03c
+        TEST_OLDGEOM="0"
+      fi
 
       # Run three macro + special configuration available only in E03 example
       if [ "$TESTG3" = "1" ]; then
@@ -289,21 +301,23 @@ do
         run_test_case "$RUNG3_OPT test_E03_5.C(\"g3tgeoConfig.C\",kFALSE)"
         finish_test "$OUT_SUB/test_g3_tgeo_tgeo.out"
 
-        start_test "... Running test with G3, geometry via VMC, Native navigation"
-        run_test_case "$RUNG3_OPT test_E03_1.C(\"g3Config.C\",kTRUE)"
-        run_test_case "$RUNG3_OPT test_E03_2.C(\"g3Config.C\",kTRUE)"
-        run_test_case "$RUNG3_OPT test_E03_3.C(\"g3Config.C\",kTRUE)"
-        run_test_case "$RUNG3_OPT test_E03_4.C(\"g3Config.C\",kTRUE)"
-        run_test_case "$RUNG3_OPT test_E03_5.C(\"g3Config.C\",kTRUE)"
-        finish_test "$OUT_SUB/test_g3_vmc_nat.out"
+        if [ "$TEST_OLDGEOM" = "1" ]; then
+          start_test "... Running test with G3, geometry via VMC, Native navigation"
+          run_test_case "$RUNG3_OPT test_E03_1.C(\"g3Config.C\",kTRUE)"
+          run_test_case "$RUNG3_OPT test_E03_2.C(\"g3Config.C\",kTRUE)"
+          run_test_case "$RUNG3_OPT test_E03_3.C(\"g3Config.C\",kTRUE)"
+          run_test_case "$RUNG3_OPT test_E03_4.C(\"g3Config.C\",kTRUE)"
+          run_test_case "$RUNG3_OPT test_E03_5.C(\"g3Config.C\",kTRUE)"
+          finish_test "$OUT_SUB/test_g3_vmc_nat.out"
 
-        start_test "... Running test with G3, geometry via VMC, TGeo navigation"
-        run_test_case "$RUNG3_OPT test_E03_1.C(\"g3tgeoConfig.C\",kTRUE)"
-        run_test_case "$RUNG3_OPT test_E03_2.C(\"g3tgeoConfig.C\",kTRUE)"
-        run_test_case "$RUNG3_OPT test_E03_3.C(\"g3tgeoConfig.C\",kTRUE)"
-        run_test_case "$RUNG3_OPT test_E03_4.C(\"g3tgeoConfig.C\",kTRUE)"
-        run_test_case "$RUNG3_OPT test_E03_5.C(\"g3tgeoConfig.C\",kTRUE)"
+          start_test "... Running test with G3, geometry via VMC, TGeo navigation"
+          run_test_case "$RUNG3_OPT test_E03_1.C(\"g3tgeoConfig.C\",kTRUE)"
+          run_test_case "$RUNG3_OPT test_E03_2.C(\"g3tgeoConfig.C\",kTRUE)"
+          run_test_case "$RUNG3_OPT test_E03_3.C(\"g3tgeoConfig.C\",kTRUE)"
+          run_test_case "$RUNG3_OPT test_E03_4.C(\"g3tgeoConfig.C\",kTRUE)"
+          run_test_case "$RUNG3_OPT test_E03_5.C(\"g3tgeoConfig.C\",kTRUE)"
         finish_test "$OUT_SUB/test_g3_vmc_tgeo.out"
+        fi
       fi
 
       if [ "$TESTG4" = "1" ]; then
@@ -327,19 +341,21 @@ do
         run_test_case "$RUNG4_OPT test_E03_7.C(\"g4tgeoConfig6.C\",kFALSE)"
         finish_test "$OUT_SUB/test_g4_tgeo_tgeo.out"
 
-        start_test "... Running test with G4, geometry via VMC, G4 navigation"
-        run_test_case "$RUNG4_OPT test_E03_1.C(\"g4ConfigOld.C\",kTRUE)"
-        run_test_case "$RUNG4_OPT test_E03_2.C(\"g4ConfigOld.C\",kTRUE)"
-        run_test_case "$RUNG4_OPT test_E03_3.C(\"g4ConfigOld.C\",kTRUE)"
-        run_test_case "$RUNG4_OPT test_E03_4.C(\"g4ConfigOld.C\",kTRUE)"
-        finish_test "$OUT_SUB/test_g4_vmc_nat.out"
+        if [ "$TEST_OLDGEOM" = "1" ]; then
+          start_test "... Running test with G4, geometry via VMC, G4 navigation"
+          run_test_case "$RUNG4_OPT test_E03_1.C(\"g4ConfigOld.C\",kTRUE)"
+          run_test_case "$RUNG4_OPT test_E03_2.C(\"g4ConfigOld.C\",kTRUE)"
+          run_test_case "$RUNG4_OPT test_E03_3.C(\"g4ConfigOld.C\",kTRUE)"
+          run_test_case "$RUNG4_OPT test_E03_4.C(\"g4ConfigOld.C\",kTRUE)"
+          finish_test "$OUT_SUB/test_g4_vmc_nat.out"
 
-        start_test "... Running test with G4, geometry via VMC, TGeo navigation"
-        run_test_case "$RUNG4_OPT test_E03_1.C(\"g4tgeoConfigOld.C\",kTRUE)"
-        run_test_case "$RUNG4_OPT test_E03_2.C(\"g4tgeoConfigOld.C\",kTRUE)"
-        run_test_case "$RUNG4_OPT test_E03_3.C(\"g4tgeoConfigOld.C\",kTRUE)"
-        run_test_case "$RUNG4_OPT test_E03_4.C(\"g4tgeoConfigOld.C\",kTRUE)"
-        finish_test "$OUT_SUB/test_g4_vmc_tgeo.out"
+          start_test "... Running test with G4, geometry via VMC, TGeo navigation"
+          run_test_case "$RUNG4_OPT test_E03_1.C(\"g4tgeoConfigOld.C\",kTRUE)"
+          run_test_case "$RUNG4_OPT test_E03_2.C(\"g4tgeoConfigOld.C\",kTRUE)"
+          run_test_case "$RUNG4_OPT test_E03_3.C(\"g4tgeoConfigOld.C\",kTRUE)"
+          run_test_case "$RUNG4_OPT test_E03_4.C(\"g4tgeoConfigOld.C\",kTRUE)"
+          finish_test "$OUT_SUB/test_g4_vmc_tgeo.out"
+        fi
 
         start_test "... Running test with G4, geometry via G4, Native navigation"
         run_test_case "$RUNG4_OPT test_E03_1.C(\"g4Config1.C\",kFALSE)"
@@ -354,6 +370,15 @@ do
         run_test_case "$RUNG4_OPT test_E03_3.C(\"g4Config2.C\",kFALSE)"
         run_test_case "$RUNG4_OPT test_E03_4.C(\"g4Config2.C\",kFALSE)"
         finish_test "$OUT_SUB/test_g4_tgeo_nat_pl.out"
+      fi
+      if [ "$TESTMULTI" = "1" -a "$OPTION" = "E03c" ]; then
+        start_test "... Running test with multiple engines G3+G4"
+        run_test_case "$RUNMULTI test_E03_multi.C(\"g3tgeoConfig.C\",\"g4tgeoConfig4Seq.C\")"
+        finish_test "$OUT_SUB/test_mult_g3_g4.out"
+
+        start_test "... Running test with multiple engines G4+G3"
+        run_test_case "$RUNMULTI test_E03_multi.C(\"g4tgeoConfig4Seq.C\",\"g3tgeoConfig.C\")"
+        finish_test "$OUT_SUB/test_mult_g4_g3.out"
       fi
     done
   fi

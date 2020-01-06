@@ -14,6 +14,7 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "Ex03MCApplication.h"
+#include "Ex03PrimaryGenerator.h"
 
 #ifdef USE_GEANT4
 #include "TG4RunConfiguration.h"
@@ -41,6 +42,8 @@ int main(int argc, char** argv)
   // Create MC application (thread local)
   Ex03MCApplication* appl =
     new Ex03MCApplication("ExampleE03", "The exampleE03 MC application");
+  appl->GetPrimaryGenerator()->SetNofPrimaries(20);
+  appl->SetPrintModulo(1);
 
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4

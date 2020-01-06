@@ -27,6 +27,8 @@ FAILED="0"
 # Set 1 to 0 if you want to skip given MC or ExGarfield test
 TESTG3="1"
 TESTG4="1"
+TESTMULTI="1"
+TEST_OLDGEOM="1"
 BUILDDIR=""
 
 # Run Garfield only with Root 5
@@ -75,6 +77,8 @@ do
     "--g3=off" ) TESTG3="0" ;;
     "--g4=on"  ) TESTG4="1" ;;
     "--g4=off" ) TESTG4="0" ;;
+    "--multi=on"     ) TESTMULTI="1" ;;
+    "--multi=off"    ) TESTMULTI="0" ;;
     "--garfield=on"  ) TESTGARFIELD="1" ;;
     "--garfield=off" ) TESTGARFIELD="0" ;;
      --examples=*    ) EXAMPLES=${arg#--examples=} ;;
@@ -182,7 +186,7 @@ do
   fi
 
   if [ "$EXAMPLE" = "E03" ]; then
-    for OPTION in E03a E03b
+    for OPTION in E03a E03b E03c
     do
       OUT=$OUTDIR/$EXAMPLE/$OPTION
       if [ ! -d $OUT ]; then
@@ -191,6 +195,10 @@ do
 
       if [ "x${BUILDDIR}" != "x" ]; then
         EXEDIR=${BUILDDIR}/examples/$EXAMPLE/$OPTION/
+      fi
+
+      if [ "$OPTION" = "E03c" ]; then
+        TEST_OLDGEOM="0"
       fi
 
       cd $CURDIR/$EXAMPLE
@@ -217,41 +225,43 @@ do
         cat tmpfile >> $OUT/test_g3_tgeo_tgeo.out
         evaluate_test "$TMP_FAILED"
 
-        start_test "... Running test with G3, geometry via VMC,  Native navigation"
-        TMP_FAILED="0"
-        $EXE -g3g TGeant3 -rm "test_E03_1.C(\"\", kTRUE)" >& $OUT/test_g3_vmc_nat.out
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        $EXE -g3g TGeant3 -rm "test_E03_2.C(\"\", kTRUE)" >& tmpfile
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        cat tmpfile >> $OUT/test_g3_vmc_nat.out
-        $EXE -g3g TGeant3 -rm "test_E03_3.C(\"\", kTRUE)" >& tmpfile
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        cat tmpfile >> $OUT/test_g3_vmc_nat.out
-        $EXE -g3g TGeant3 -rm "test_E03_4.C(\"\", kTRUE)" >& tmpfile
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        cat tmpfile >> $OUT/test_g3_vmc_nat.out
-        $EXE -g3g TGeant3 -rm "test_E03_5.C(\"\", kTRUE)" >& tmpfile
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        cat tmpfile >> $OUT/test_g3_vmc_nat.out
-        evaluate_test "$TMP_FAILED"
+        if [ "$TEST_OLDGEOM" = "1" ]; then
+          start_test "... Running test with G3, geometry via VMC,  Native navigation"
+          TMP_FAILED="0"
+          $EXE -g3g TGeant3 -rm "test_E03_1.C(\"\", kTRUE)" >& $OUT/test_g3_vmc_nat.out
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          $EXE -g3g TGeant3 -rm "test_E03_2.C(\"\", kTRUE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g3_vmc_nat.out
+          $EXE -g3g TGeant3 -rm "test_E03_3.C(\"\", kTRUE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g3_vmc_nat.out
+          $EXE -g3g TGeant3 -rm "test_E03_4.C(\"\", kTRUE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g3_vmc_nat.out
+          $EXE -g3g TGeant3 -rm "test_E03_5.C(\"\", kTRUE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g3_vmc_nat.out
+          evaluate_test "$TMP_FAILED"
 
-        start_test "... Running test with G3, geometry via VMC,  TGeo navigation"
-        TMP_FAILED="0"
-        $EXE -g3g TGeant3TGeo -rm "test_E03_1.C(\"\", kTRUE)" >& $OUT/test_g3_vmc_tgeo.out
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        $EXE -g3g TGeant3TGeo -rm "test_E03_2.C(\"\", kTRUE)" >& tmpfile
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
-        $EXE -g3g TGeant3TGeo -rm "test_E03_3.C(\"\", kTRUE)" >& tmpfile
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
-        $EXE -g3g TGeant3TGeo -rm "test_E03_4.C(\"\", kTRUE)" >& tmpfile
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
-        $EXE -g3g TGeant3TGeo -rm "test_E03_5.C(\"\", kTRUE)" >& tmpfile
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
-        evaluate_test "$TMP_FAILED"
+          start_test "... Running test with G3, geometry via VMC,  TGeo navigation"
+          TMP_FAILED="0"
+          $EXE -g3g TGeant3TGeo -rm "test_E03_1.C(\"\", kTRUE)" >& $OUT/test_g3_vmc_tgeo.out
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          $EXE -g3g TGeant3TGeo -rm "test_E03_2.C(\"\", kTRUE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
+          $EXE -g3g TGeant3TGeo -rm "test_E03_3.C(\"\", kTRUE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
+          $EXE -g3g TGeant3TGeo -rm "test_E03_4.C(\"\", kTRUE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
+          $EXE -g3g TGeant3TGeo -rm "test_E03_5.C(\"\", kTRUE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g3_vmc_tgeo.out
+          evaluate_test "$TMP_FAILED"
+        fi
       fi
       # Run all macros + special configuration available only in E03 test
       if [ "$TESTG4" = "1" ]; then
@@ -298,35 +308,37 @@ do
         cat tmpfile >> $OUT/test_g4_tgeo_tgeo.out
         evaluate_test "$TMP_FAILED"
 
-        start_test "... Running test with G4, geometry via VMC,  Native navigation"
-        TMP_FAILED="0"
-        $EXE -g4g geomVMCtoGeant4 -g4vm "" -rm "test_E03_1.C(\"\", kTRUE)" >& $OUT/test_g4_vmc_nat.out
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        $EXE -g4g geomVMCtoGeant4 -g4vm "" -rm "test_E03_2.C(\"\", kTRUE)" >& tmpfile
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        cat tmpfile >> $OUT/test_g4_vmc_nat.out
-        $EXE -g4g geomVMCtoGeant4 -g4vm "" -rm "test_E03_3.C(\"\", kTRUE)" >& tmpfile
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        cat tmpfile >> $OUT/test_g4_vmc_nat.out
-        $EXE -g4g geomVMCtoGeant4 -g4vm "" -rm "test_E03_4.C(\"\", kTRUE)" >& tmpfile
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        cat tmpfile >> $OUT/test_g4_vmc_nat.out
-        evaluate_test "$TMP_FAILED"
+        if [ "$TEST_OLDGEOM" = "1" ]; then
+          start_test "... Running test with G4, geometry via VMC,  Native navigation"
+          TMP_FAILED="0"
+          $EXE -g4g geomVMCtoGeant4 -g4vm "" -rm "test_E03_1.C(\"\", kTRUE)" >& $OUT/test_g4_vmc_nat.out
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          $EXE -g4g geomVMCtoGeant4 -g4vm "" -rm "test_E03_2.C(\"\", kTRUE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g4_vmc_nat.out
+          $EXE -g4g geomVMCtoGeant4 -g4vm "" -rm "test_E03_3.C(\"\", kTRUE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g4_vmc_nat.out
+          $EXE -g4g geomVMCtoGeant4 -g4vm "" -rm "test_E03_4.C(\"\", kTRUE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g4_vmc_nat.out
+          evaluate_test "$TMP_FAILED"
 
-        start_test "... Running test with G4, geometry via VMC,  TGeo navigation"
-        TMP_FAILED="0"
-        $EXE -g4g geomVMCtoRoot -g4vm "" -rm "test_E03_1.C(\"\", kTRUE)" >& $OUT/test_g4_vmc_tgeo.out
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        $EXE -g4g geomVMCtoRoot -g4vm "" -rm "test_E03_2.C(\"\", kTRUE)" >& tmpfile
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
-        $EXE -g4g geomVMCtoRoot -g4vm "" -rm "test_E03_3.C(\"\", kTRUE)" >& tmpfile
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
-        $EXE -g4g geomVMCtoRoot -g4vm "" -rm "test_E03_4.C(\"\", kTRUE)" >& tmpfile
-        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
-        cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
-        evaluate_test "$TMP_FAILED"
+          start_test "... Running test with G4, geometry via VMC,  TGeo navigation"
+          TMP_FAILED="0"
+          $EXE -g4g geomVMCtoRoot -g4vm "" -rm "test_E03_1.C(\"\", kTRUE)" >& $OUT/test_g4_vmc_tgeo.out
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          $EXE -g4g geomVMCtoRoot -g4vm "" -rm "test_E03_2.C(\"\", kTRUE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
+          $EXE -g4g geomVMCtoRoot -g4vm "" -rm "test_E03_3.C(\"\", kTRUE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
+          $EXE -g4g geomVMCtoRoot -g4vm "" -rm "test_E03_4.C(\"\", kTRUE)" >& tmpfile
+          if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+          cat tmpfile >> $OUT/test_g4_vmc_tgeo.out
+          evaluate_test "$TMP_FAILED"
+        fi
 
         start_test "... Running test with G4, geometry via G4,   Native navigation"
         TMP_FAILED="0"
@@ -356,6 +368,20 @@ do
         $EXE -g4uc physics-list -g4vm "" -rm "test_E03_4.C(\"\", kFALSE)" >& tmpfile
         if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
         cat tmpfile >> $OUT/test_g4_g4_nat_pl.out
+        evaluate_test "$TMP_FAILED"
+      fi
+
+      if [ "$TESTMULTI" = "1" -a "$OPTION" = "E03c" ]; then
+        EXE=$EXEDIR"multivmc_test"$OPTION
+        start_test "... Running test with multiple engines G3+G4"
+        TMP_FAILED="0"
+        $EXE -g3g TGeant3TGeo -g4g geomRoot -g4vm "" -rm test_E03_multi.C\(\"\",\"\"\) -fe "g3" >& $OUT/test_mult_g3_g4.out
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
+        evaluate_test "$TMP_FAILED"
+
+        start_test "... Running test with multiple engines G4+G3"
+        $EXE -g3g TGeant3TGeo -g4g geomRoot -g4vm "" -rm test_E03_multi.C\(\"\",\"\"\) -fe "g4" >& $OUT/test_mult_g4_g3.out
+        if [ "$?" -ne "0" ]; then TMP_FAILED="1" ; fi
         evaluate_test "$TMP_FAILED"
       fi
     done

@@ -41,12 +41,20 @@ void test_E03_multi(const TString& configMacro1, const TString& configMacro2, In
   appl->GetPrimaryGenerator()->SetNofPrimaries(20);
   appl->SetPrintModulo(1);
 
-  appl->InitMC({configMacro1.Data(), configMacro2.Data()});
+  if (configMacro1.IsNull() && configMacro2.IsNull()) {
+    appl->InitMC();
+  } else {
+    appl->InitMC({configMacro1.Data(), configMacro2.Data()});
+  }
 
   // visualization setting
   // set_vis();
 
+  TStopwatch timer;
+  timer.Start();
   appl->RunMC(5);
+  timer.Stop();
+  timer.Print();
 
   if ( needDelete ) delete appl;
 }

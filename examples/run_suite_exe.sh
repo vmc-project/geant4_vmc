@@ -24,6 +24,7 @@ OUTDIR=$CURDIR/logs/run_exe
 # Set 1 to 0 if you want to skip given MC or Garfield test
 TESTG3="1"
 TESTG4="1"
+TESTMULTI="1"
 
 # Run Garfield optionally
 TESTGARFIELD="1"
@@ -40,6 +41,13 @@ function run_mc_exe()
   ${1}vmc_example$EXAMPLE >& $OUT/${1}vmc_example$EXAMPLE.out
 }
 
+# Function arguments:
+# {1}  Run macro:  g3[q,b], g4[a,b]
+function run_mc_exe_option()
+{
+  echo "... Running ${1}vmc_example$EXAMPLE${2}"
+  ${1}vmc_example$EXAMPLE${2} >& $OUT/${1}vmc_example$EXAMPLE${2}.out
+}
 
 # Process script arguments
 for arg in "${@}"
@@ -50,6 +58,8 @@ do
     "--g3=off"       ) TESTG3="0" ;;
     "--g4=on"        ) TESTG4="1" ;;
     "--g4=off"       ) TESTG4="0" ;;
+    "--multi=on"     ) TESTMULTI="1" ;;
+    "--multi=off"    ) TESTMULTI="0" ;;
     "--garfield=on"  ) TESTGARFIELD="1" ;;
     "--garfield=off" ) TESTGARFIELD="0" ;;
      --examples=*    ) EXAMPLES=${arg#--examples=} ;;
@@ -81,8 +91,9 @@ do
 
   if [ "$TESTG3" = "1" -a "$EXAMPLE" != "Monopole" ]; then
     if [ "$EXAMPLE" = "E03" ]; then
-      run_mc_exe g3a
-      run_mc_exe g3b
+      run_mc_exe_option g3 a
+      run_mc_exe_option g3 b
+      run_mc_exe_option g3 c
     else
       run_mc_exe g3
     fi
@@ -90,10 +101,16 @@ do
 
   if [ "$TESTG4" = "1" ]; then
     if [ "$EXAMPLE" = "E03" ]; then
-      run_mc_exe g4a
-      run_mc_exe g4b
+      run_mc_exe_option g4 a
+      run_mc_exe_option g4 b
+      run_mc_exe_option g4 c
     else
       run_mc_exe g4
+    fi
+  fi
+  if [ "$TESTMULTI" = "1" ]; then
+    if [ "$EXAMPLE" = "E03" ]; then
+      run_mc_exe_option multi c
     fi
   fi
   echo " "

@@ -37,6 +37,7 @@
 /// Benedikt Volkel, CERN
 
 #include "Ex03cMCApplication.h"
+#include "Ex03PrimaryGenerator.h"
 
 #ifdef USE_GEANT4
 #include "Ex03RunConfiguration1.h"
@@ -58,6 +59,23 @@
 #include <iostream>
 #include <string>
 
+// Define application parameters in global space
+#ifdef USE_GEANT4
+std::string g4Geometry = "geomRoot";
+std::string g4PhysicsList = "FTFP_BERT";
+std::string g4SpecialPhysics = "stepLimiter";
+std::string g4Macro = "g4config.in";
+std::string g4VisMacro = "g4vis.in";
+std::string g4Session = "";
+std::string g4UserClass = "";
+#endif
+#ifdef USE_GEANT3
+std::string g3Geometry = "TGeant3TGeo";
+#endif
+std::string firstEngine = "g3";
+std::string rootMacro = "";
+std::string verbose = "yes";
+
 namespace
 {
 
@@ -68,6 +86,7 @@ void PrintUsage(const std::string& programName)
     << "\nUsage:\n"
     << " " << programName << "\n"
 #ifdef USE_GEANT4
+    << "   [-g4g,  --g4-geometry]:        Geant4 VMC geometry option\n"
     << "   [-g4pl, --g4-physics-list]:    Geant4 physics list selection\n"
     << "   [-g4sp, --g4-special-physics]: Geant4 special physics selection\n"
     << "   [-g4m,  --g4-macro]:           Geant4 macro\n"
@@ -76,21 +95,26 @@ void PrintUsage(const std::string& programName)
     << "                                  (geometry, regions, physics-list, "
        "field)\n"
 #endif
+#ifdef USE_GEANT3
+    << "   [-g3g,  --g3-geometry]:        Geant3 geometry option (TGeant3[TGeo])\n"
+#endif
     << "   [-r4m,  --root-macro]:         Root macro\n"
-    << "   [-v,    --verbose]:            verbose option (yes,no)" << std::endl;
+    << "   [-v,    --verbose]:            verbose option (yes,no)\n"
+#ifdef USE_MULTI
+    << "   [-fe,   --first-engine]:       first engine (g3,g4)\n"
+#endif
+    << std::endl;
 }
 
-#ifdef USE_GEANT4
 /// Prints selected configuration on output stream (Geant4)
-void PrintG4Configuration(const std::string& programName,
-  const std::string& g4Geometry, const std::string& g4PhysicsList,
-  const std::string& g4SpecialPhysics, const std::string& g4Macro,
-  const std::string& g4VisMacro, const std::string& g4Session,
-  const std::string& g4UserClass, const std::string& rootMacro)
+void PrintConfiguration(const std::string& programName)
 {
-  std::cout << " Running " << programName << " with options:" << std::endl;
-  std::cout << "   --g4-geometry:        " << g4Geometry << std::endl;
-  std::cout << "   --g4-physics-list:    " << g4PhysicsList << std::endl;
+  std::cout
+    << " Running " << programName << " with options:" << std::endl;
+#ifdef USE_GEANT4
+  std::cout
+    << "   --g4-geometry:        " << g4Geometry << std::endl
+    << "   --g4-physics-list:    " << g4PhysicsList << std::endl;
   if (g4SpecialPhysics.size()) {
     std::cout << "   --g4-special-physics: " << g4SpecialPhysics << std::endl;
   }
@@ -106,26 +130,69 @@ void PrintG4Configuration(const std::string& programName,
   if (g4UserClass.size()) {
     std::cout << "   --g4-user-class:      " << g4UserClass << std::endl;
   }
+#endif
+#ifdef USE_GEANT3
+  std::cout << "   --g3-geometry:        " << g3Geometry << std::endl;
+#endif
+#ifdef USE_MULTI
+  std::cout << "   --first-engine:       " << firstEngine << std::endl;
+#endif
   if (rootMacro.size()) {
     std::cout << "   --root-macro:         " << rootMacro << std::endl;
   }
 }
-#endif
 
-#ifdef USE_GEANT3
-/// Prints selected configuration on output stream (Geant3)
-void PrintG3Configuration(const std::string& programName,
-  const std::string& g3Geometry, const std::string& rootMacro)
+void CreateGeant4(int argc, char** argv)
 {
-  std::cout << " Running: \n"
-            << " " << programName << "\n"
-            << "     --g3-geometry:        " << g3Geometry << "\n";
-  if (rootMacro.size()) {
-    std::cout << "     --root-macro]:    " << rootMacro;
+#ifdef USE_GEANT4
+  // RunConfiguration for Geant4
+  TG4RunConfiguration* runConfiguration = 0;
+  if (!g4UserClass.size()) {
+    runConfiguration =
+      new TG4RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics, false, false);
   }
-  std::cout << std::endl;
-}
+  else if (g4UserClass == "geometry") {
+    runConfiguration =
+      new Ex03RunConfiguration1(g4PhysicsList, g4SpecialPhysics);
+  }
+  else if (g4UserClass == "physics-list") {
+    runConfiguration = new Ex03RunConfiguration2(g4Geometry, g4SpecialPhysics);
+  }
+  else if (g4UserClass == "regions") {
+    runConfiguration =
+      new Ex03RunConfiguration3(g4Geometry, g4PhysicsList, g4SpecialPhysics);
+  }
+  else if (g4UserClass == "field") {
+    runConfiguration =
+      new Ex03RunConfiguration4(g4Geometry, g4PhysicsList, g4SpecialPhysics, false, false);
+  }
+  else {
+    PrintUsage("testE03s");
+    return;
+  }
+
+  // TGeant4
+  TGeant4* geant4 = new TGeant4(
+    "TGeant4", "The Geant4 Monte Carlo", runConfiguration, argc, argv);
+
+  // Customise Geant4 setting
+  // (verbose level, global range cut, ..)
+  if (g4Macro.size()) {
+    geant4->ProcessGeantMacro(g4Macro.data());
+  }
 #endif
+}
+
+void CreateGeant3()
+{
+#ifdef USE_GEANT3
+  TGeant3TGeo* geant3
+    = new TGeant3TGeo("C++ Interface to Geant3");
+  geant3->SetProcess("DRAY", 1);
+  geant3->SetProcess("LOSS", 1);
+  geant3->SetProcess("HADR", 0);
+#endif
+}
 
 } // namespace
 
@@ -141,32 +208,19 @@ int main(int argc, char** argv)
 #endif
 
 // Process arguments
-// This code is generic with the exception of the start values and
-// the program name
-#ifdef USE_GEANT4
-  std::string g4Geometry = "geomRoot";
-  std::string g4PhysicsList = "FTFP_BERT";
-  std::string g4SpecialPhysics = "stepLimiter";
-  std::string g4Macro = "g4config.in";
-  std::string g4VisMacro = "g4vis.in";
-  std::string g4Session = "";
-  std::string g4UserClass = "";
-#endif
-#ifdef USE_GEANT3
-  std::string g3Geometry = "TGeant3TGeo";
-#endif
-  std::string rootMacro = "";
-  std::string verbose = "yes";
-
   for (Int_t i = 1; i < argc; i = i + 2) {
-    std::cout << "processing " << argv[i] << " with " << argv[i + 1]
-              << std::endl;
-    if (std::string(argv[i]) == "--verbose" || std::string(argv[i]) == "-v")
-      verbose = argv[i + 1];
-    else if (std::string(argv[i]) == "--root-macro" ||
+    std::cout
+      << "processing " << argv[i] << " with " << argv[i + 1] << std::endl;
+    if (std::string(argv[i]) == "--root-macro" ||
              std::string(argv[i]) == "-rm")
       rootMacro = argv[i + 1];
+    else if (std::string(argv[i]) == "--verbose" ||
+             std::string(argv[i]) == "-v")
+      verbose = argv[i + 1];
 #ifdef USE_GEANT4
+    else if (std::string(argv[i]) == "--g4-geometry" ||
+        std::string(argv[i]) == "-g4g")
+      g4Geometry = argv[i + 1];
     else if (std::string(argv[i]) == "--g4-physics-list" ||
              std::string(argv[i]) == "-g4pl")
       g4PhysicsList = argv[i + 1];
@@ -187,6 +241,16 @@ int main(int argc, char** argv)
              std::string(argv[i]) == "-g4uc")
       g4UserClass = argv[i + 1];
 #endif
+#ifdef USE_GEANT3
+    else if (std::string(argv[i]) == "--g3-geometry" ||
+        std::string(argv[i]) == "-g3g")
+      g3Geometry = argv[i + 1];
+#endif
+#ifdef USE_MULTI
+    else if (std::string(argv[i]) == "--first-engine" ||
+             std::string(argv[i]) == "-fe")
+      firstEngine = argv[i + 1];
+#endif
     else {
       PrintUsage("testE03c");
       return 1;
@@ -194,80 +258,52 @@ int main(int argc, char** argv)
   }
 
   if (verbose == "yes") {
-#ifdef USE_GEANT4
-    PrintG4Configuration("testE03", g4Geometry, g4PhysicsList, g4SpecialPhysics,
-      g4Macro, g4VisMacro, g4Session, g4UserClass, rootMacro);
-#endif
-#ifdef USE_GEANT3
-    PrintG3Configuration("testE03", g3Geometry, rootMacro);
-#endif
+    PrintConfiguration("testE03c");
   }
   //
   // end of code to process arguments
 
+  Bool_t isMulti = false;
+  Int_t debug = 0;
+#ifdef USE_MULTI
+  isMulti = true;
+  debug = 1;
+#endif
+
   // Create MC application (thread local)
   Ex03cMCApplication* appl =
-    new Ex03cMCApplication("ExampleE03c", "The exampleE03c MC application");
+    new Ex03cMCApplication("ExampleE03", "The exampleE03 MC application", isMulti, isMulti);
+  appl->SetDebug(debug);
 
-#ifdef USE_GEANT4
-  // RunConfiguration for Geant4
-  TG4RunConfiguration* runConfiguration = 0;
-  if (!g4UserClass.size()) {
-    runConfiguration =
-      new TG4RunConfiguration(g4Geometry, g4PhysicsList, g4SpecialPhysics);
-  }
-  else if (g4UserClass == "geometry") {
-    runConfiguration =
-      new Ex03RunConfiguration1(g4PhysicsList, g4SpecialPhysics);
-  }
-  else if (g4UserClass == "physics-list") {
-    runConfiguration = new Ex03RunConfiguration2(g4Geometry, g4SpecialPhysics);
-  }
-  else if (g4UserClass == "regions") {
-    runConfiguration =
-      new Ex03RunConfiguration3(g4Geometry, g4PhysicsList, g4SpecialPhysics);
-  }
-  else if (g4UserClass == "field") {
-    runConfiguration =
-      new Ex03RunConfiguration4(g4Geometry, g4PhysicsList, g4SpecialPhysics);
-  }
-  else {
-    PrintUsage("testE03");
-    return 1;
+  if (firstEngine == "g3") {
+    CreateGeant3();
+    CreateGeant4(argc, argv);
+  } else {
+    CreateGeant4(argc, argv);
+    CreateGeant3();
   }
 
-  // TGeant4
-  TGeant4* geant4 = new TGeant4(
-    "TGeant4", "The Geant4 Monte Carlo", runConfiguration, argc, argv);
-
-  // Customise Geant4 setting
-  // (verbose level, global range cut, ..)
-  if (g4Macro.size()) {
-    geant4->ProcessGeantMacro(g4Macro.data());
-  }
-#endif
-
-#ifdef USE_GEANT3
-
-  new TGeant3TGeo("C++ Interface to Geant3");
-  gMC->SetProcess("DRAY", 1);
-  gMC->SetProcess("LOSS", 1);
-  gMC->SetProcess("HADR", 0);
-#endif
-
-  // Run example
   if (!rootMacro.size()) {
-    appl->InitMC("");
-#ifdef USE_GEANT4
-    // Setting Geant4 visualization
-    if (g4VisMacro.size()) {
-      geant4->ProcessGeantMacro(g4VisMacro.data());
-    }
+    // Run example without Root macro
+#ifdef USE_MULTI
+     appl->InitMC();
+#else
+     appl->InitMC("");
 #endif
+
+    // Setting Geant4 visualization
+// #ifdef USE_GEANT4
+// #ifndef USE_MULTI
+//     if (g4VisMacro.size()) {
+//       geant4->ProcessGeantMacro(g4VisMacro.data());
+//     }
+// #endif
+// #endif
     appl->RunMC(5);
   }
   else {
     // Run from Root macro
+    std::cout << "Go to call macro" << std::endl;
     gROOT->Macro(rootMacro.data());
   }
 

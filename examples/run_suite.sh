@@ -23,6 +23,7 @@ OUTDIR=$CURDIR/logs/run
 # Options
 TESTG3="1"
 TESTG4="1"
+TESTMULTI="1"
 TESTGARFIELD="1"
 
 # The default list of examples (all)
@@ -36,7 +37,13 @@ EXAMPLES="$ALL_EXAMPLES"
 function run_mc()
 {
   echo "    - with ${1}, config ${3}"
-  root.exe -q -b load_${1}.C run_${2}.C\(\"${3}Config.C\"\) >& $OUT/run_${3}.out
+  root.exe -q -b load_${1}.C run_${2}.C\(\"${3}Config.C\"\) >& $OUT/run_${1}.out
+}
+
+function run_multi()
+{
+  echo "    - with multiple engines"
+  root.exe -q -b load_multi.C run_multi.C >& $OUT/run_multi.out
 }
 
 # Process script arguments
@@ -48,6 +55,8 @@ do
     "--g3=off"       ) TESTG3="0" ;;
     "--g4=on"        ) TESTG4="1" ;;
     "--g4=off"       ) TESTG4="0" ;;
+    "--multi=on"     ) TESTMULTI="1" ;;
+    "--multi=off"    ) TESTMULTI="0" ;;
     "--garfield=on"  ) TESTGARFIELD="1" ;;
     "--garfield=off" ) TESTGARFIELD="0" ;;
      --examples=*    ) EXAMPLES=${arg#--examples=} ;;
@@ -82,8 +91,9 @@ do
     if [ "$EXAMPLE" = "E03" ]; then
       run_mc g3a g3 g3tgeo
       run_mc g3b g3 g3tgeo
+      run_mc g3c g3 g3tgeo
     else
-      run_mc g3 g4 g3tgeo
+      run_mc g3 g3 g3tgeo
     fi
   fi
 
@@ -91,8 +101,15 @@ do
     if [ "$EXAMPLE" = "E03" ]; then
       run_mc g4a g4 g4tgeo
       run_mc g4b g4 g4tgeo
+      run_mc g4c g4 g4tgeo
     else
       run_mc g4 g4 g4tgeo
+    fi
+  fi
+
+  if [ "$TESTMULTI" = "1" ]; then
+    if [ "$EXAMPLE" = "E03" ]; then
+      run_multi
     fi
   fi
 

@@ -20,7 +20,9 @@ set(CMAKE_MODULE_PATH
     ${Geant3_DIR}/Modules
     ${CMAKE_MODULE_PATH})
 
-
+if(VMC_WITH_Multi)
+add_subdirectory(E03)
+else()
 add_subdirectory(E01)
 add_subdirectory(E02)
 add_subdirectory(E03)
@@ -39,4 +41,5 @@ if(Garfield_FOUND)
 else()
   message(STATUS "VMC Examples: Garfield package not found. ")
   message(STATUS "ExGarfield example disabled")
+endif()
 endif()

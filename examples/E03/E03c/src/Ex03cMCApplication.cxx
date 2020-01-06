@@ -64,7 +64,7 @@ ClassImp(Ex03cMCApplication)
     fSplitSimulation(splitSimulation),
     fG3Id(-1),
     fG4Id(-1),
-    fDebug(false)
+    fDebug(0)
 {
   /// Standard constructor
   /// \param name   The MC application name
@@ -161,7 +161,7 @@ Ex03cMCApplication::Ex03cMCApplication()
     fSplitSimulation(kFALSE),
     fG3Id(-1),
     fG4Id(-1),
-    fDebug(kFALSE)
+    fDebug(0)
 {
   /// Default constructor
 }
@@ -209,8 +209,9 @@ void Ex03cMCApplication::RegisterStack() const
 void Ex03cMCApplication::InitMC(const char* setup)
 {
   /// Initialize MC.
-  /// The selection of the concrete MC is done in the macro.
-  /// \param setup The name of the configuration macro
+  /// The selection (and creation) of the concrete MC is done in the macro.
+  /// If no macro is provided, the MC must be created before calling this function.
+  /// \param setup The name of the configuration macro.
 
   fVerbose.InitMC();
 
@@ -244,7 +245,7 @@ void Ex03cMCApplication::InitMC(const char* setup)
 
   RegisterStack();
 
-  if (fDebug) {
+  if (fDebug>0) {
     Info("InitMC", "Single run initialised");
   }
 }
@@ -253,8 +254,8 @@ void Ex03cMCApplication::InitMC(const char* setup)
 void Ex03cMCApplication::InitMC(std::initializer_list<const char*> setupMacros)
 {
   /// Initialize MC.
-  /// The selection of the concrete MC is done in the macro.
-  /// \param setup The name of the configuration macro
+  /// New function for initialization with multiple engines.
+  /// \param setupMacros The names of the configuration macros.
 
   fVerbose.InitMC();
 
@@ -274,6 +275,21 @@ void Ex03cMCApplication::InitMC(std::initializer_list<const char*> setupMacros)
       // gInterpreter->UnloadAllSharedLibraryMaps();
       gInterpreter->UnloadFile(setup);
     }
+  }
+
+  InitMC();
+}
+
+//_____________________________________________________________________________
+void Ex03cMCApplication::InitMC()
+{
+  /// Initialize MC.
+  /// New function for initialization with multiple engines.
+  /// The MCs must be created before calling this function.
+
+  if (!fIsMultiRun) {
+    Fatal("InitMC",
+      "Initialisation of multiple engines not supported in single run");
   }
 
 // MT support available from root v 5.34/18
@@ -299,7 +315,7 @@ void Ex03cMCApplication::InitMC(std::initializer_list<const char*> setupMacros)
 
   fG3Id = fMCManager->GetEngineId("TGeant3TGeo");
   fG4Id = fMCManager->GetEngineId("TGeant4");
-  if (fDebug) {
+  if (fDebug>0) {
     Info("InitMC", "Multi run initialised");
     std::cout << "Engine IDs\n"
               << "TGeant3TGeo: " << fG3Id << "\n"
@@ -319,7 +335,7 @@ void Ex03cMCApplication::RunMC(Int_t nofEvents)
   TTimer timer;
 
   if (!fIsMultiRun) {
-    if (fDebug) {
+    if (fDebug>0) {
       Info("RunMC", "Start single run");
       std::cout << "Simulation entirely done with engine " << fMC->GetName()
                 << std::endl;
@@ -328,7 +344,7 @@ void Ex03cMCApplication::RunMC(Int_t nofEvents)
     fMC->ProcessRun(nofEvents);
   }
   else {
-    if (fDebug) {
+    if (fDebug>0) {
       Info("RunMC", "Start multi run");
       if (fSplitSimulation) {
         std::cout << "GAPX simulated with engine "
@@ -344,7 +360,7 @@ void Ex03cMCApplication::RunMC(Int_t nofEvents)
     }
     fMCManager->Run(nofEvents);
   }
-  if (fDebug) {
+  if (fDebug>0) {
     timer.Stop();
     Info("RunMC", "Transport finished.");
     timer.Print();
@@ -589,7 +605,7 @@ void Ex03cMCApplication::Stepping()
   fMC->TrackPosition(pos);
   fMC->TrackMomentum(mom);
 
-  if (fDebug) {
+  if (fDebug>1) {
     std::cout << "Current engine " << fMC->GetName() << "\n"
               << "Track ID=" << fStack->GetCurrentTrackNumber() << "\n"
               << "Momentum\n"
@@ -607,7 +623,7 @@ void Ex03cMCApplication::Stepping()
       targetId = 0;
     }
     if (targetId > -1) {
-      if (fDebug) {
+      if (fDebug>1) {
         Info("Stepping", "Transfer track");
       }
       fMCManager->TransferTrack(targetId);
