@@ -23,9 +23,4 @@ void set_g3_vis()
     if (vol) vol->SetLineColor(kYellow);
     gMC->SetCollectTracks(kTRUE);
   }
-
-  if (TString(gMC->GetName()) == "TGeant4") {
-    // Setting Geant4 visualization
-   ((TGeant4*)gMC)->ProcessGeantMacro("g4vis.in");
-  }
 }

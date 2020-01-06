@@ -22,7 +22,7 @@ void run_g3(const TString& configMacro = "g3tgeoConfig.C")
 /// \param configMacro configuration macro name, default \ref ExGarfield/g3tgeoConfig.C
 
   // MC application
-  VMC::Garfield::MCApplication* appl
+  VMC::ExGarfield::MCApplication* appl
     =  new VMC::ExGarfield::MCApplication("ExampleExGarfield", "The example ExGarfield MC application");
   appl->InitMC(configMacro);
 
