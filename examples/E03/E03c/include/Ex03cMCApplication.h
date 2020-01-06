@@ -112,7 +112,7 @@ class Ex03cMCApplication : public TVirtualMCApplication
   Bool_t fSplitSimulation; ///< Split geometry given user criteria
   Int_t fG3Id;             ///< engine ID of Geant3
   Int_t fG4Id;             ///< engine ID of Geant4
-  Int_t fDebug;           ///< debug option for multiple run
+  Int_t fDebug;            ///< debug option for multiple run
 
   ClassDef(Ex03cMCApplication, 1) // Interface to MonteCarlo application
 };
@@ -144,10 +144,7 @@ inline void Ex03cMCApplication::SetField(Double_t bz)
 }
 
 /// Set debug option for multiple run
-inline void Ex03cMCApplication::SetDebug(Int_t debug)
-{
-  fDebug = debug;
-}
+inline void Ex03cMCApplication::SetDebug(Int_t debug) { fDebug = debug; }
 
 /// \return The detector construction
 inline Ex03cDetectorConstruction*

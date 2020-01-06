@@ -13,8 +13,8 @@
 /// \date 30/04/2019
 /// \author Benedikt Volkel, CERN
 
-#include "Ex03cMCApplication.h"
 #include "Ex03PrimaryGenerator.h"
+#include "Ex03cMCApplication.h"
 
 #ifdef USE_GEANT4
 #include "TG4RunConfiguration.h"
@@ -47,8 +47,8 @@ int main(int argc, char** argv)
 #endif
 
   // Create MC application (thread local)
-  Ex03cMCApplication* appl =
-    new Ex03cMCApplication("ExampleE03", "The exampleE03 MC application", isMulti, isMulti);
+  Ex03cMCApplication* appl = new Ex03cMCApplication(
+    "ExampleE03", "The exampleE03 MC application", isMulti, isMulti);
   appl->GetPrimaryGenerator()->SetNofPrimaries(20);
   appl->SetPrintModulo(1);
   appl->SetDebug(debug);
@@ -56,7 +56,7 @@ int main(int argc, char** argv)
 #ifdef USE_GEANT4
   // RunConfiguration for Geant4
   TG4RunConfiguration* runConfiguration =
-    new TG4RunConfiguration("geomRoot", "FTFP_BERT","",false, false);
+    new TG4RunConfiguration("geomRoot", "FTFP_BERT", "", false, false);
 
   // TGeant4
   TGeant4* geant4 = new TGeant4(
@@ -68,8 +68,8 @@ int main(int argc, char** argv)
 #endif
 
 #ifdef USE_GEANT3
-  TGeant3TGeo* geant3
-    = new TGeant3TGeo("C++ Interface to Geant3 with TGeo geometry");
+  TGeant3TGeo* geant3 =
+    new TGeant3TGeo("C++ Interface to Geant3 with TGeo geometry");
   geant3->SetProcess("DRAY", 1);
   geant3->SetProcess("LOSS", 1);
   geant3->SetProcess("HADR", 0);

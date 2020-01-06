@@ -306,7 +306,7 @@ void Ex03bMCApplication::ConstructSensitiveDetectors()
   /// Create sensitive detectors and attach them to sensitive volumes
 
   // fVerbose.ConstructSensitiveDetectors();
-  if (fVerbose.GetLevel() >0) {
+  if (fVerbose.GetLevel() > 0) {
     std::cout << "--- Construct sensitive detectors" << std::endl;
   }
 

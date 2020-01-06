@@ -64,7 +64,7 @@ void TG4SDConstruction::CreateSD(
 
   if (VerboseLevel() > 2) {
     G4cout << "TG4SDConstruction::CreateSD:  lv=" << lv->GetName()
-      << " userSD=" << userSD << G4endl;
+           << " userSD=" << userSD << G4endl;
   }
 
   TG4GeometryServices* geometryServices = TG4GeometryServices::Instance();
@@ -93,31 +93,34 @@ void TG4SDConstruction::CreateSD(
       newSD = new TG4GflashSensitiveDetector(sdName, mediumId);
       if (VerboseLevel() > 2) {
         G4cout << "Created TG4GflashSensitiveDetector with sdName=" << sdName
-          << " mediumId=" << mediumId << G4endl;
+               << " mediumId=" << mediumId << G4endl;
       }
     }
     else if (userSD) {
       newSD = new TG4SensitiveDetector(userSD, mediumId, fExclusiveSDScoring);
       if (VerboseLevel() > 2) {
-        G4cout << "Created TG4SensitiveDetector with userSD=" << userSD << " mediumId="
-          << mediumId << " exclusiveSoring=" << fExclusiveSDScoring << G4endl;
+        G4cout << "Created TG4SensitiveDetector with userSD=" << userSD
+               << " mediumId=" << mediumId
+               << " exclusiveSoring=" << fExclusiveSDScoring << G4endl;
       }
     }
     else {
       newSD = new TG4SensitiveDetector(sdName, mediumId);
       if (VerboseLevel() > 2) {
-        G4cout << "Created TG4SensitiveDetector with sdName=" << sdName << " mediumId="
-          << mediumId << G4endl;
+        G4cout << "Created TG4SensitiveDetector with sdName=" << sdName
+               << " mediumId=" << mediumId << G4endl;
       }
     }
     pSDManager->AddNewDetector(newSD);
     if (VerboseLevel() > 1) {
       G4cout << "Sensitive detector " << sdName << "  ID=" << newSD->GetID()
-        << "  medium ID=" << newSD->GetMediumID() << " has been created." << G4endl;
-    } else {
+             << "  medium ID=" << newSD->GetMediumID() << " has been created."
+             << G4endl;
+    }
+    else {
       if (VerboseLevel() > 2) {
-        G4cout << "Sensitive detector " << sdName << ", " << sd << " already exists."
-          << G4endl;
+        G4cout << "Sensitive detector " << sdName << ", " << sd
+               << " already exists." << G4endl;
       }
     }
     sd = newSD;

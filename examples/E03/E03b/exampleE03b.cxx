@@ -13,8 +13,8 @@
 /// \date 26/02/2014
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include "Ex03bMCApplication.h"
 #include "Ex03PrimaryGenerator.h"
+#include "Ex03bMCApplication.h"
 
 #ifdef USE_GEANT4
 #include "TG4RunConfiguration.h"

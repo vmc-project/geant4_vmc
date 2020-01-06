@@ -182,12 +182,12 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
     defaultMaterial,                                     // its material
     "LAYE");                                             // its name
 
-  new G4PVReplica("LAYE",  // its name
-    layerLV,               // its logical volume
-    calorLV,               // its mother
-    kZAxis,                // axis of replication
-    nofLayers,             // number of replica
-    layerThickness);       // witdth of replica
+  new G4PVReplica("LAYE", // its name
+    layerLV,              // its logical volume
+    calorLV,              // its mother
+    kZAxis,               // axis of replication
+    nofLayers,            // number of replica
+    layerThickness);      // witdth of replica
 
   //
   // Absorber
