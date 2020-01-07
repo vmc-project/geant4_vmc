@@ -22,15 +22,17 @@
 
 class TG4FieldParameters;
 
+class G4ChordFinder;
 class G4EquationOfMotion;
 class G4MagIntegratorStepper;
 class G4LogicalVolume;
+class G4VIntegrationDriver;
 
 class TVirtualMagField;
 
 /// \ingroup geometry
-/// \brief The base class for magnetic, electromagnetic and gravity
-/// fields which strenght is defined via TVirtualMagField.
+/// \brief The class for constructing magnetic, electromagnetic and gravity
+/// fields which strength is defined via TVirtualMagField.
 ///
 /// The equation of motion motion of a particle in a field  and the
 /// integration method is set according to the selection in
@@ -57,6 +59,7 @@ class TG4Field
   G4Field* GetG4Field() const;
   G4EquationOfMotion* GetEquation() const;
   G4MagIntegratorStepper* GetStepper() const;
+  G4VIntegrationDriver*  GetIntegrationDriver() const;
 
  private:
   // methods
@@ -65,6 +68,8 @@ class TG4Field
   G4EquationOfMotion* CreateEquation(EquationType equation);
   G4MagIntegratorStepper* CreateStepper(
     G4EquationOfMotion* equation, StepperType stepper);
+  G4VIntegrationDriver* CreateFSALStepperAndDriver(
+    G4EquationOfMotion* equation, StepperType stepper, G4double minStep);
 
   // data
   /// Geant4 field
@@ -77,6 +82,10 @@ class TG4Field
   G4EquationOfMotion* fEquation;
   /// The magnetic integrator stepper
   G4MagIntegratorStepper* fStepper;
+  /// The magnetic integrator driver
+  G4VIntegrationDriver* fDriver;
+  /// Chord finder
+  G4ChordFinder* fChordFinder;
 };
 
 // inline functions

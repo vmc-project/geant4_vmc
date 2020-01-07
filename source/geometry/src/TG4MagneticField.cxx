@@ -14,37 +14,8 @@
 
 #include "TG4MagneticField.h"
 #include "TG4G3Units.h"
-#include "TG4Globals.h"
 
-#include <TVirtualMCApplication.h>
 #include <TVirtualMagField.h>
-
-#include <G4CashKarpRKF45.hh>
-#include <G4ChordFinder.hh>
-#include <G4ClassicalRK4.hh>
-#include <G4ConstRK4.hh>
-#include <G4EqEMFieldWithEDM.hh>
-#include <G4EqEMFieldWithSpin.hh>
-#include <G4EqMagElectricField.hh>
-#include <G4ExactHelixStepper.hh>
-#include <G4ExplicitEuler.hh>
-#include <G4FieldManager.hh>
-#include <G4HelixExplicitEuler.hh>
-#include <G4HelixHeum.hh>
-#include <G4HelixImplicitEuler.hh>
-#include <G4HelixMixedStepper.hh>
-#include <G4HelixSimpleRunge.hh>
-#include <G4ImplicitEuler.hh>
-#include <G4MagErrorStepper.hh>
-#include <G4MagHelicalStepper.hh>
-#include <G4Mag_EqRhs.hh>
-#include <G4Mag_SpinEqRhs.hh>
-#include <G4Mag_UsualEqRhs.hh>
-#include <G4NystromRK4.hh>
-#include <G4RKG3_Stepper.hh>
-#include <G4SimpleHeum.hh>
-#include <G4SimpleRunge.hh>
-#include <G4TransportationManager.hh>
 
 //_____________________________________________________________________________
 TG4MagneticField::TG4MagneticField(TVirtualMagField* magField)

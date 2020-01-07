@@ -23,17 +23,24 @@
 #include <TVirtualMCApplication.h>
 #include <TVirtualMagField.h>
 
-#include "G4MagIntegratorDriver.hh"
+#include "G4SystemOfUnits.hh"
+
+#include "G4BogackiShampine23.hh"
+#include "G4BogackiShampine45.hh"
 #include <G4CashKarpRKF45.hh>
 #include <G4ChordFinder.hh>
 #include <G4ClassicalRK4.hh>
 #include <G4ConstRK4.hh>
+#include "G4DormandPrince745.hh"
+#include "G4DormandPrinceRK56.hh"
+#include "G4DormandPrinceRK78.hh"
 #include <G4EqEMFieldWithEDM.hh>
 #include <G4EqEMFieldWithSpin.hh>
 #include <G4EqMagElectricField.hh>
 #include <G4ExactHelixStepper.hh>
 #include <G4ExplicitEuler.hh>
 #include <G4FieldManager.hh>
+#include <G4FSALIntegrationDriver.hh>
 #include <G4HelixExplicitEuler.hh>
 #include <G4HelixHeum.hh>
 #include <G4HelixImplicitEuler.hh>
@@ -42,19 +49,26 @@
 #include <G4ImplicitEuler.hh>
 #include <G4MagErrorStepper.hh>
 #include <G4MagHelicalStepper.hh>
+#include "G4MagIntegratorDriver.hh"
 #include <G4Mag_EqRhs.hh>
 #include <G4Mag_SpinEqRhs.hh>
 #include <G4Mag_UsualEqRhs.hh>
 #include <G4NystromRK4.hh>
 #include <G4RKG3_Stepper.hh>
+#include <G4RK547FEq1.hh>
+#include <G4RK547FEq2.hh>
+#include <G4RK547FEq3.hh>
 #include <G4SimpleHeum.hh>
 #include <G4SimpleRunge.hh>
+#include "G4TsitourasRK45.hh"
 #include <G4TransportationManager.hh>
+#include <G4VIntegrationDriver.hh>
 
 //_____________________________________________________________________________
 TG4Field::TG4Field(const TG4FieldParameters& parameters,
   TVirtualMagField* magField, G4LogicalVolume* lv)
-  : fVirtualMagField(magField), fLogicalVolume(lv), fEquation(0), fStepper(0)
+  : fVirtualMagField(magField),
+    fLogicalVolume(lv), fEquation(0), fStepper(0), fDriver(0), fChordFinder(0)
 {
   /// Default constructor
 
@@ -71,6 +85,8 @@ TG4Field::TG4Field(const TG4FieldParameters& parameters,
 TG4Field::~TG4Field()
 {
   /// Destructor
+  delete fChordFinder;
+  delete fStepper;
 }
 
 //
@@ -167,19 +183,39 @@ G4MagIntegratorStepper* TG4Field::CreateStepper(
 
   // Check steppers which require equation of motion of G4Mag_EqRhs type
   G4Mag_EqRhs* eqRhs = dynamic_cast<G4Mag_EqRhs*>(equation);
-  if (!eqRhs && stepper > kSimpleRunge) {
+  if (!eqRhs && stepper > kTsitourasRK45) {
     TG4Globals::Exception("TG4Field", "CreateStepper:",
       "The stepper type requires equation of motion of G4Mag_EqRhs type.");
     return 0;
   }
 
   switch (stepper) {
+    case kBogackiShampine23:
+      return new G4BogackiShampine23(equation);
+      break;
+
+    case kBogackiShampine45:
+      return new G4BogackiShampine45(equation);
+      break;
+
     case kCashKarpRKF45:
       return new G4CashKarpRKF45(equation);
       break;
 
     case kClassicalRK4:
       return new G4ClassicalRK4(equation);
+      break;
+
+    case kDormandPrince745:
+      return new G4DormandPrince745(equation);
+      break;
+
+    case kDormandPrinceRK56:
+      return new G4DormandPrinceRK56(equation);
+      break;
+
+    case kDormandPrinceRK78:
+      return new G4DormandPrinceRK78(equation);
       break;
 
     case kExplicitEuler:
@@ -196,6 +232,10 @@ G4MagIntegratorStepper* TG4Field::CreateStepper(
 
     case kSimpleRunge:
       return new G4SimpleRunge(equation);
+      break;
+
+    case kTsitourasRK45:
+      return new G4TsitourasRK45(equation);
       break;
 
     case kConstRK4:
@@ -237,10 +277,33 @@ G4MagIntegratorStepper* TG4Field::CreateStepper(
       // nothing to be done
       return 0;
       break;
+    default:
+      TG4Globals::Exception("TG4Field", "CreateStepper:", "Incorrect stepper type.");
+      return 0;
   }
+}
 
-  TG4Globals::Exception("TG4Field", "CreateStepper:", "Unknown stepper type.");
-  return 0;
+//_____________________________________________________________________________
+G4VIntegrationDriver* TG4Field::CreateFSALStepperAndDriver(
+    G4EquationOfMotion* equation, StepperType stepperType, G4double minStep)
+{
+  /// Set the FSAL integrator of particle's equation of motion
+
+  switch (stepperType) {
+    case kRK547FEq1:
+      return new G4FSALIntegrationDriver<G4RK547FEq1>(minStep, new G4RK547FEq1(equation));
+
+    case kRK547FEq2:
+      return new G4FSALIntegrationDriver<G4RK547FEq2>(minStep, new G4RK547FEq2(equation));
+
+    case kRK547FEq3:
+      return new G4FSALIntegrationDriver<G4RK547FEq3>(minStep, new G4RK547FEq3(equation));
+
+    default:
+      TG4Globals::Exception("TG4Field", "CreateFSALStepperAndDriver",
+        "Incorrect stepper type.");
+      return 0;
+  }
 }
 
 //
@@ -276,34 +339,59 @@ void TG4Field::Update(const TG4FieldParameters& parameters)
     fEquation->SetFieldObj(fG4Field);
   }
   else {
+    delete fEquation;
+    fEquation = nullptr;
     fEquation = CreateEquation(parameters.GetEquationType());
   }
 
   // Create stepper  (or get the user one if defined)
   if (parameters.GetStepperType() == kUserStepper) {
+    // User stepper
     fStepper = parameters.GetUserStepper();
   }
+  else if (parameters.GetStepperType() >= kRK547FEq1) {
+    // FSAL stepper
+    delete fDriver;
+    delete fStepper;
+    fDriver = nullptr;
+    fStepper = nullptr;
+    fDriver = CreateFSALStepperAndDriver(
+      fEquation, parameters.GetStepperType(), parameters.GetStepMinimum());
+    if (fDriver) {
+      fStepper = fDriver->GetStepper();
+    }
+  }
   else {
+    // Normal stepper
+    delete fStepper;
+    fStepper = nullptr;
     fStepper = CreateStepper(fEquation, parameters.GetStepperType());
   }
 
   // Chord finder
-  G4ChordFinder* chordFinder = 0;
+  delete fChordFinder;
   if (parameters.GetFieldType() == kMagnetic) {
-    // Chord finder
-    chordFinder = new G4ChordFinder(static_cast<G4MagneticField*>(fG4Field),
-      parameters.GetStepMinimum(), fStepper);
-    chordFinder->SetDeltaChord(parameters.GetDeltaChord());
+    if (fDriver) {
+      fChordFinder = new G4ChordFinder(fDriver);
+    }
+    else {
+      // Chord finder
+      fChordFinder = new G4ChordFinder(static_cast<G4MagneticField*>(fG4Field),
+        parameters.GetStepMinimum(), fStepper);
+    }
+    fChordFinder->SetDeltaChord(parameters.GetDeltaChord());
   }
   else if (parameters.GetFieldType() == kElectroMagnetic) {
     G4MagInt_Driver* intDriver = new G4MagInt_Driver(
       parameters.GetStepMinimum(), fStepper, fStepper->GetNumberOfVariables());
     if (intDriver) {
       // Chord finder
-      chordFinder = new G4ChordFinder(intDriver);
+      fChordFinder = new G4ChordFinder(intDriver);
     }
   }
-  fieldManager->SetChordFinder(chordFinder);
+  fieldManager->SetChordFinder(fChordFinder);
+  fieldManager->SetDetectorField(static_cast<G4MagneticField*>(fG4Field));
+
 
   fieldManager->SetMinimumEpsilonStep(parameters.GetMinimumEpsilonStep());
   fieldManager->SetMaximumEpsilonStep(parameters.GetMaximumEpsilonStep());

@@ -86,10 +86,20 @@ G4String TG4FieldParameters::StepperTypeName(StepperType stepper)
   /// Return the stepper type as a string
 
   switch (stepper) {
+    case kBogackiShampine23:
+      return G4String("BogackiShampine23");
+    case kBogackiShampine45:
+      return G4String("BogackiShampine45");
     case kCashKarpRKF45:
       return G4String("CashKarpRKF45");
     case kClassicalRK4:
       return G4String("ClassicalRK4");
+    case kDormandPrince745:
+      return G4String("DormandPrince745");
+    case kDormandPrinceRK56:
+      return G4String("DormandPrinceRK56");
+    case kDormandPrinceRK78:
+      return G4String("DormandPrinceRK78");
     case kExplicitEuler:
       return G4String("ExplicitEuler");
     case kImplicitEuler:
@@ -116,8 +126,16 @@ G4String TG4FieldParameters::StepperTypeName(StepperType stepper)
       return G4String("NystromRK4");
     case kRKG3Stepper:
       return G4String("RKG3_Stepper");
+    case kTsitourasRK45:
+      return G4String("TsitourasRK45");
     case kUserStepper:
       return G4String("UserDefinedStepper");
+    case kRK547FEq1:
+      return G4String("RK547FEq1");
+    case kRK547FEq2:
+      return G4String("RK547FEq2");
+    case kRK547FEq3:
+      return G4String("RK547FEq3");
   }
 
   TG4Globals::Exception(
@@ -160,9 +178,13 @@ EquationType TG4FieldParameters::GetEquationType(const G4String& name)
 StepperType TG4FieldParameters::GetStepperType(const G4String& name)
 {
   /// Return the stepper type for given stepper type name
-
+  if (name == StepperTypeName(kBogackiShampine23)) return kBogackiShampine23;
+  if (name == StepperTypeName(kBogackiShampine45)) return kBogackiShampine45;
   if (name == StepperTypeName(kCashKarpRKF45)) return kCashKarpRKF45;
   if (name == StepperTypeName(kClassicalRK4)) return kClassicalRK4;
+  if (name == StepperTypeName(kDormandPrince745)) return kDormandPrince745;
+  if (name == StepperTypeName(kDormandPrinceRK56)) return kDormandPrinceRK56;
+  if (name == StepperTypeName(kDormandPrinceRK78)) return kDormandPrinceRK78;
   if (name == StepperTypeName(kExplicitEuler)) return kExplicitEuler;
   if (name == StepperTypeName(kImplicitEuler)) return kImplicitEuler;
   if (name == StepperTypeName(kSimpleHeum)) return kSimpleHeum;
@@ -176,6 +198,10 @@ StepperType TG4FieldParameters::GetStepperType(const G4String& name)
   if (name == StepperTypeName(kHelixSimpleRunge)) return kHelixSimpleRunge;
   if (name == StepperTypeName(kNystromRK4)) return kNystromRK4;
   if (name == StepperTypeName(kRKG3Stepper)) return kRKG3Stepper;
+  if (name == StepperTypeName(kRK547FEq1)) return kRK547FEq1;
+  if (name == StepperTypeName(kRK547FEq2)) return kRK547FEq2;
+  if (name == StepperTypeName(kRK547FEq3)) return kRK547FEq3;
+  if (name == StepperTypeName(kTsitourasRK45)) return kTsitourasRK45;
   if (name == StepperTypeName(kUserStepper)) return kUserStepper;
 
   TG4Globals::Exception(
@@ -199,7 +225,7 @@ TG4FieldParameters::TG4FieldParameters(const G4String& volumeName)
     fMaximumEpsilonStep(fgkDefaultMaximumEpsilonStep),
     fField(kMagnetic),
     fEquation(kMagUsualEqRhs),
-    fStepper(kClassicalRK4),
+    fStepper(kDormandPrince745),
     fUserEquation(0),
     fUserStepper(0),
     fConstDistance(0),

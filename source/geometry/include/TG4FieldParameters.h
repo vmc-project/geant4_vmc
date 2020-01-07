@@ -57,12 +57,18 @@ enum EquationType
 enum StepperType
 {
   // steppers with equation of motion of generic type (G4EquationOfMotion)
-  kCashKarpRKF45, ///< G4CashKarpRKF45
-  kClassicalRK4,  ///< G4ClassicalRK4
-  kExplicitEuler, ///< G4ExplicitEuler
-  kImplicitEuler, ///< G4ImplicitEuler
-  kSimpleHeum,    ///< G4SimpleHeum
-  kSimpleRunge,   ///< G4SimpleRunge
+  kCashKarpRKF45,     ///< G4CashKarpRKF45
+  kClassicalRK4,      ///< G4ClassicalRK4
+  kBogackiShampine23, ///< G4BogackiShampine23
+  kBogackiShampine45, ///< G4BogackiShampine45
+  kDormandPrince745,  ///< G4DormandPrince745
+  kDormandPrinceRK56, ///< G4DormandPrinceRK56
+  kDormandPrinceRK78, ///< G4DormandPrinceRK78
+  kExplicitEuler,     ///< G4ExplicitEuler
+  kImplicitEuler,     ///< G4ImplicitEuler
+  kSimpleHeum,        ///< G4SimpleHeum
+  kSimpleRunge,       ///< G4SimpleRunge
+  kTsitourasRK45,     ///< G4TsitourasRK45
 
   // steppers with equation of motion of G4Mag_UsualEqRhs type
   kConstRK4,           ///< G4ConstRK4
@@ -74,7 +80,12 @@ enum StepperType
   kHelixSimpleRunge,   ///< G4HelixSimpleRunge
   kNystromRK4,         ///< G4NystromRK4
   kRKG3Stepper,        ///< G4RKG3_Stepper
-  kUserStepper         ///< User defined stepper
+  kUserStepper,        ///< User defined stepper
+
+  // FSAL steppers
+  kRK547FEq1, ///< G4RK547FEq1
+  kRK547FEq2, ///< G4RK547FEq2
+  kRK547FEq3  ///< G4RK547FEq3
 };
 
 /// \ingroup geometry
