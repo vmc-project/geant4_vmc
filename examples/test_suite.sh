@@ -40,7 +40,6 @@ DEBUG="0"
 # Set 1 to 0 if you want to skip given MC or ExGarfield test
 TESTG3="1"
 TESTG4="1"
-TESTMULTI="1"
 TEST_OLDGEOM="1"
 BUILDDIR=""
 
@@ -161,8 +160,6 @@ do
     "--g3=off"       ) TESTG3="0" ;;
     "--g4=on"        ) TESTG4="1" ;;
     "--g4=off"       ) TESTG4="0" ;;
-    "--multi=on"     ) TESTMULTI="1" ;;
-    "--multi=off"    ) TESTMULTI="0" ;;
     "--garfield=on"  ) TESTGARFIELD="1" ;;
     "--garfield=off" ) TESTGARFIELD="0" ;;
      --examples=*    ) EXAMPLES=${arg#--examples=} ;;
@@ -371,7 +368,7 @@ do
         run_test_case "$RUNG4_OPT test_E03_4.C(\"g4Config2.C\",kFALSE)"
         finish_test "$OUT_SUB/test_g4_tgeo_nat_pl.out"
       fi
-      if [ "$TESTMULTI" = "1" -a "$OPTION" = "E03c" ]; then
+      if [ "$TESTG3" = "1" -a "$TESTG4" = "1" -a "$OPTION" = "E03c" ]; then
         start_test "... Running test with multiple engines G3+G4"
         run_test_case "$RUNMULTI test_E03_multi.C(\"g3tgeoConfig.C\",\"g4tgeoConfig4Seq.C\")"
         finish_test "$OUT_SUB/test_mult_g3_g4.out"

@@ -27,7 +27,6 @@ FAILED="0"
 # Set 1 to 0 if you want to skip given MC or ExGarfield test
 TESTG3="1"
 TESTG4="1"
-TESTMULTI="1"
 TEST_OLDGEOM="1"
 BUILDDIR=""
 
@@ -77,8 +76,6 @@ do
     "--g3=off" ) TESTG3="0" ;;
     "--g4=on"  ) TESTG4="1" ;;
     "--g4=off" ) TESTG4="0" ;;
-    "--multi=on"     ) TESTMULTI="1" ;;
-    "--multi=off"    ) TESTMULTI="0" ;;
     "--garfield=on"  ) TESTGARFIELD="1" ;;
     "--garfield=off" ) TESTGARFIELD="0" ;;
      --examples=*    ) EXAMPLES=${arg#--examples=} ;;
@@ -371,7 +368,7 @@ do
         evaluate_test "$TMP_FAILED"
       fi
 
-      if [ "$TESTMULTI" = "1" -a "$OPTION" = "E03c" ]; then
+      if [ "$TESTG3" = "1" -a  "$TESTG4" = "1" -a "$OPTION" = "E03c" ]; then
         EXE=$EXEDIR"multivmc_test"$OPTION
         start_test "... Running test with multiple engines G3+G4"
         TMP_FAILED="0"
