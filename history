@@ -10,6 +10,21 @@
 Tags (history):
 ===============
   04/09/2019
+  v3-6-p5-inclxx-biasing-p2:
+    Patch release, including following fixes:
+    Geant4 VMC:
+      Fix in TGeant4::Mixture(Int_t& kmat, const char* name, Float_t* ...):
+      When using geometry defined via Root or via VMC with Root navigation,
+      this function is delegated to TGeoMCGeometry class defined in Root/vmc, where
+      'wmat' values were not updated when the function is called with nlmat<0, as they
+      should be to mimic the Geant3 behavior.
+      The bug in Root is fixed in the patches for versions 6.18/06 and 6.20/00,
+      the older versions are fixed with this work-around.
+
+    Tested with Geant4 10.04.p03 (with embedded CLHEP 2.3.4.3.)
+      Root 6.18/04, VGM 4.6
+
+  04/09/2019
   v3-6-p4-inclxx-biasing-p2:
     Enhanced commands for setting regions with extra physics:
     - Added "setOneRegion" command to supports name with spaces
