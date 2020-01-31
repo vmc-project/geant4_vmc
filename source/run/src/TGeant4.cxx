@@ -380,7 +380,24 @@ void TGeant4::Mixture(Int_t& kmat, const char *name, Float_t *a,
 
    fGeometryManager->GetMCGeometry()
      ->Mixture(kmat, name, a, z, dens, nlmat, wmat); 
-} 
+
+#if (ROOT_VERSION_CODE < ROOT_VERSION(6, 18, 5))
+  // Work around for a problem in TGeoMCGeometry where the wmat values
+  // were not properly updated when  nlmat < 0 (fixed in ROOt v6.18/06)
+  if (nlmat > 0) return;
+  if (fUserGeometry == "VMCtoRoot" || fUserGeometry == "Root") {
+    G4cout << "TGeant4::Mixture: work-around for updating wmat values" << G4endl;
+    G4int nmat = - nlmat;
+    G4double amol = 0;
+    for (G4int i = 0; i < nmat; ++i) {
+      amol += a[i] * wmat[i];
+    }
+    for (G4int i = 0; i < nmat; i++) {
+      wmat[i] *= a[i] / amol;
+    }
+  }
+#endif
+}
 
 //_____________________________________________________________________________
 void TGeant4::Mixture(Int_t& kmat, const char *name, Double_t *a, 
