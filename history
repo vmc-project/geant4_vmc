@@ -9,6 +9,21 @@
      
 Tags (history):
 ===============
+  31/01/2020
+  v4-0-p2:
+    Patch release, including following fixes:
+    Geant4 VMC:
+      Fix in TGeant4::Mixture(Int_t& kmat, const char* name, Float_t* ...):
+      When using geometry defined via Root or via VMC with Root navigation,
+      this function is delegated to TGeoMCGeometry class defined in Root/vmc, where
+      'wmat' values were not updated when the function is called with nlmat<0, as they
+      should be to mimic the Geant3 behavior.
+      The bug in Root is fixed in the patches for versions 6.18/06 and 6.20/00,
+      the older versions are fixed with this work-around.
+
+    Tested with Geant4 10.05.p01 (with embedded CLHEP 2.4.1.0)
+      Root 6.18/04, VGM 4.6
+
   22/02/2019
   v4-0-p1:
     Patch release, including following fixes:
