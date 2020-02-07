@@ -38,6 +38,29 @@ include(VMCBuildMode)
 #--- Options -------------------------------------------------------------------
 option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 
+#-- ROOT (required) ------------------------------------------------------------
+if (NOT ROOT_FOUND)
+  find_package(ROOT CONFIG REQUIRED COMPONENTS EG Geom REQUIRED)
+  set(ROOT_DEPS ROOT::Core ROOT::RIO ROOT::Tree ROOT::Rint ROOT::Physics
+    ROOT::MathCore ROOT::Thread ROOT::Geom ROOT::EG)
+endif()
+
+#-- VMC (required) ------------------------------------------------------------
+if (NOT VMC_FOUND)
+  if(ROOT_vmc_FOUND)
+    message(STATUS "Using VMC built with ROOT")
+    set(VMC_LIBRARIES ROOT::VMC)
+    message(STATUS "Adding -DUSE_ROOT_VMC")
+    add_definitions(-DUSE_ROOT_VMC)
+  else()
+    find_package(VMC CONFIG REQUIRED)
+  #  set(VMC_DEPS VMCLibrary)
+    if(NOT VMC_FIND_QUIETLY)
+      message(STATUS "Found VMC ${VMC_VERSION} in ${VMC_DIR}")
+    endif()
+  endif()
+endif()
+
 #-- Includes -------------------------------------------------------------------
 include_directories(${ROOT_INCLUDE_DIRS})
 include_directories(${VMC_INCLUDE_DIRS})
@@ -68,7 +91,8 @@ set(headers
 
 #---Add library-----------------------------------------------------------------
 add_library(${library_name} ${sources} ${headers})
-target_link_libraries(${library_name} ${ROOT_LIBRARIES} ${VMCPackages_LIBRARIES})
+target_link_libraries(${library_name} ${ROOT_DEPS})
+target_include_directories(${library_name} INTERFACE $<INSTALL_INTERFACE:include/${library_name}>)
 
 #----Installation---------------------------------------------------------------
 #install(DIRECTORY include/ DESTINATION include/${library_name})

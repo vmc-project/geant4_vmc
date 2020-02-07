@@ -68,7 +68,7 @@ if(NOT Geant4_FOUND)
   if(Geant4VMC_USE_GEANT4_G3TOG4)
     list(APPEND _components g3tog4)
   endif()
-  find_package(Geant4 REQUIRED ${_components})
+  find_package(Geant4 CONFIG REQUIRED ${_components})
 endif(NOT Geant4_FOUND)
 # Workaround for upstream bug: http://bugzilla-geant4.kek.jp/show_bug.cgi?id=1663
 #include(${Geant4_USE_FILE})
@@ -84,7 +84,7 @@ if (Geant4VMC_USE_G4Root)
     set(G4Root_LIBRARIES g4root)
   else()
     if(NOT G4Root_FOUND)
-      find_package(G4Root REQUIRED)
+      find_package(G4Root CONFIG REQUIRED)
     endif()
     include_directories(${G4Root_INCLUDE_DIRS})
   endif()
@@ -94,7 +94,7 @@ endif(Geant4VMC_USE_G4Root)
 #-- VGM (optional) -------------------------------------------------------------
 if (Geant4VMC_USE_VGM)
   if(NOT VGM_FOUND)
-    find_package(VGM REQUIRED)
+    find_package(VGM CONFIG REQUIRED)
   endif(NOT VGM_FOUND)
   include_directories(${VGM_INCLUDE_DIRS})
   add_definitions(-DUSE_VGM)
@@ -160,7 +160,8 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/*/include/*.h ${PROJECT_SOURCE_DIR}/incl
 add_library(${library_name} ${sources} ${root_dict} ${headers})
 # Make g4root optional
 target_link_libraries(${library_name} ${G4Root_LIBRARIES}
-  ${VGM_LIBRARIES} ${VMC_LIBRARIES} ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
+  ${VGM_LIBRARIES} ${VMC_LIBRARIES} ${Geant4_LIBRARIES} ${ROOT_DEPS})
+target_include_directories(${library_name} INTERFACE $<INSTALL_INTERFACE:include/${library_name}>)
 
 #----Installation---------------------------------------------------------------
 install(DIRECTORY

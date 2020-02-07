@@ -15,22 +15,22 @@
 #message(STATUS Processing Geant4VMCRequiredPackages)
 
 #-- ROOT (required) ------------------------------------------------------------
-find_package(ROOT CONFIG REQUIRED)
+find_package(ROOT CONFIG REQUIRED COMPONENTS EG Geom REQUIRED)
+set(ROOT_DEPS ROOT::Core ROOT::RIO ROOT::Tree ROOT::Rint ROOT::Physics
+    ROOT::MathCore ROOT::Thread ROOT::Geom ROOT::EG)
 include(${ROOT_USE_FILE})
-set (ROOT_LIBRARIES ${ROOT_LIBRARIES} -lEG -lGeom)
 
 #-- VMC (required) ------------------------------------------------------------
 if(ROOT_vmc_FOUND)
   message(STATUS "Using VMC built with ROOT")
-  set(VMC_LIBRARIES "VMC")
+  set(VMC_LIBRARIES ROOT::VMC)
   message(STATUS "Adding -DUSE_ROOT_VMC")
   add_definitions(-DUSE_ROOT_VMC)
 else()
   find_package(VMC CONFIG REQUIRED)
+#  set(VMC_DEPS VMCLibrary)
   if(NOT VMC_FIND_QUIETLY)
     message(STATUS "Found VMC ${VMC_VERSION} in ${VMC_DIR}")
-    #message(STATUS VMC_INCLUDE_DIRS ${VMC_INCLUDE_DIRS})
-    #message(STATUS VMC_LIBRARIES ${VMC_LIBRARIES})
   endif()
 endif()
 
@@ -45,10 +45,10 @@ endif()
 if(Geant4VMC_USE_GEANT4_G3TOG4)
   list(APPEND _components g3tog4)
 endif()
-find_package(Geant4 REQUIRED ${_components})
+find_package(Geant4 CONFIG REQUIRED ${_components})
 
 #-- VGM (optional) -------------------------------------------------------------
 if (Geant4VMC_USE_VGM)
-  find_package(VGM REQUIRED)
+  find_package(VGM CONFIG REQUIRED)
 endif()
 

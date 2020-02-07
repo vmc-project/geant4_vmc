@@ -42,6 +42,13 @@ option(Geant4VMC_USE_GEANT4_UI     "Build with Geant4 UI drivers" ON)
 option(Geant4VMC_USE_GEANT4_VIS    "Build with Geant4 Vis drivers" ON)
 option(BUILD_SHARED_LIBS "Build the dynamic libraries" ON)
 
+#-- ROOT (required) ------------------------------------------------------------
+if (NOT ROOT_FOUND)
+  find_package(ROOT CONFIG REQUIRED COMPONENTS EG Geom REQUIRED)
+  set(ROOT_DEPS ROOT::Core ROOT::RIO ROOT::Tree ROOT::Rint ROOT::Physics
+    ROOT::MathCore ROOT::Thread ROOT::Geom ROOT::EG)
+endif()
+
 #-- Includes --------------------------------------------------------------------
 include_directories(${ROOT_INCLUDE_DIRS})
 
@@ -55,7 +62,7 @@ if(NOT Geant4_FOUND)
   if(Geant4VMC_USE_GEANT4_VIS)
     list(APPEND _components vis_all)
   endif()
-  find_package(Geant4 REQUIRED ${_components})
+  find_package(Geant4 CONFIG REQUIRED ${_components})
 endif()
 # Workaround for upstream bug: http://bugzilla-geant4.kek.jp/show_bug.cgi?id=1663
 #include(${Geant4_USE_FILE})
@@ -82,7 +89,8 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.h)
 
 #---Add library-----------------------------------------------------------------
 add_library(${library_name} ${sources} ${headers})
-target_link_libraries(${library_name} ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
+target_link_libraries(${library_name} ${Geant4_LIBRARIES} ${VMC_LIBRARIES} ${ROOT_DEPS})
+target_include_directories(${library_name} INTERFACE $<INSTALL_INTERFACE:include/${library_name}>)
 
 #----Installation---------------------------------------------------------------
 install(DIRECTORY include/ DESTINATION include/${library_name})

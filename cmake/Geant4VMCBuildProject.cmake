@@ -22,7 +22,7 @@ foreach(_mod CMakeMacroParseArguments UseGeant4 UseVMC UseMC VMCBuildMode VMCIns
 endforeach()
 
 # Find modules
-foreach(_find_mod Garfield Geant4 VMCPackages MCPackages)
+foreach(_find_mod Garfield VMCPackages MCPackages)
   configure_file(
     ${PROJECT_SOURCE_DIR}/../cmake/Find${_find_mod}.cmake
     ${PROJECT_BINARY_DIR}/Modules/Find${_find_mod}.cmake
