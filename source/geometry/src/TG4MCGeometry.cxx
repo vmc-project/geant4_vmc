@@ -151,9 +151,6 @@ void TG4MCGeometry::Mixture(Int_t& kmat, const char* name, Float_t* a,
   /// Create material composed of more elements.                            \n
   /// !! Parameters radl, absl, buf, nwbuf are ignored in G4gsmate
 
-  G4cout << "TG4MCGeometry::Mixture Fl" << G4endl;
-  G4cout << fGeometryServices << G4endl;
-
   G4double* ain = fGeometryServices->CreateG4doubleArray(a, abs(nlmat));
   G4double* zin = fGeometryServices->CreateG4doubleArray(z, abs(nlmat));
   G4double* wmatin = fGeometryServices->CreateG4doubleArray(wmat, abs(nlmat));
@@ -184,8 +181,6 @@ void TG4MCGeometry::Mixture(Int_t& kmat, const char* name, Double_t* a,
   /// Available only with USE_G3TOG4 option.
 
   G4String namein = fGeometryServices->CutMaterialName(name);
-
-  G4cout << namein << G4endl;
 
   // create new material only if it does not yet exist
   G4Material* material =
