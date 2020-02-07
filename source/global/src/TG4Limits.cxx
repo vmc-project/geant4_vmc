@@ -303,17 +303,6 @@ G4double TG4Limits::GetMinEkineForElectron(const G4Track& track) const
 }
 
 //_____________________________________________________________________________
-G4double TG4Limits::GetMinEkineForEplus(const G4Track& track) const
-{
-  /// Return the cut value for e-.
-
-  if (fIsCut)
-    return fCutVector.GetMinEkineForEplus(track);
-  else
-    return fMinEkine;
-}
-
-//_____________________________________________________________________________
 G4double TG4Limits::GetMinEkineForChargedHadron(const G4Track& track) const
 {
   /// Return the cut value for charged hadron.
@@ -342,17 +331,6 @@ G4double TG4Limits::GetMinEkineForMuon(const G4Track& track) const
 
   if (fIsCut)
     return fCutVector.GetMinEkineForMuon(track);
-  else
-    return fMinEkine;
-}
-
-//_____________________________________________________________________________
-G4double TG4Limits::GetMinEkineForOther(const G4Track& track) const
-{
-  /// Return the cut value for other particle.
-
-  if (fIsCut)
-    return fCutVector.GetMinEkineForOther(track);
   else
     return fMinEkine;
 }

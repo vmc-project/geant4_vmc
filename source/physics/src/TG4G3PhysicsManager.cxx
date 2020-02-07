@@ -127,8 +127,9 @@ void TG4G3PhysicsManager::SwitchIsCutVector(TG4G3Cut cut)
       (*fIsCutVector)[kElectron] = true;
       break;
     case kPPCUTM:
-      (*fIsCutVector)[kElectron] = true;
-      (*fIsCutVector)[kEplus] = true;
+      // (*fIsCutVector)[kElectron] = true;
+      // (*fIsCutVector)[kEplus] = true;
+      // PPCUTM is not applied with special cuts process
       break;
     case kCUTNEU:
       (*fIsCutVector)[kNeutralHadron] = true;
