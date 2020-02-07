@@ -56,11 +56,9 @@ class TG4G3CutVector
   // get methods
   G4double GetMinEkineForGamma(const G4Track& track) const;
   G4double GetMinEkineForElectron(const G4Track& track) const;
-  G4double GetMinEkineForEplus(const G4Track& track) const;
   G4double GetMinEkineForChargedHadron(const G4Track& track) const;
   G4double GetMinEkineForNeutralHadron(const G4Track& track) const;
   G4double GetMinEkineForMuon(const G4Track& track) const;
-  G4double GetMinEkineForOther(const G4Track& track) const;
   G4double GetMinEtotPair() const;
   G4bool IsCut() const;
 

@@ -64,26 +64,6 @@ class TG4SpecialCutsForElectron : public TG4VSpecialCuts
 };
 
 /// \ingroup physics
-/// \class TG4SpecialCutsForEplus
-/// \brief Special process that activates kinetic energy cuts
-/// for e+.
-///
-/// \author I. Hrivnacova; IPN Orsay
-
-class TG4SpecialCutsForEplus : public TG4VSpecialCuts
-{
- public:
-  TG4SpecialCutsForEplus(const G4String& processName = "specialCutForEplus");
-  virtual ~TG4SpecialCutsForEplus();
-
-  // methods
-  virtual G4double GetMinEkine(
-    const TG4Limits& limits, const G4Track& track) const;
-  virtual G4VParticleChange* PostStepDoIt(
-    const G4Track& track, const G4Step& /*step*/);
-};
-
-/// \ingroup physics
 /// \class TG4SpecialCutsForGamma
 /// \brief Special process that activates kinetic energy cuts
 /// for gamma.
@@ -139,21 +119,29 @@ class TG4SpecialCutsForNeutralHadron : public TG4VSpecialCuts
 };
 
 /// \ingroup physics
-/// \class TG4SpecialCutsForOther
-/// \brief Special process that activates the kinetic energy cuts
-/// for other (than specified in TParticleWSP) particles.
+/// \class TG4SpecialCutsForNeutron
+/// \brief Special process that activates kinetic energy cuts
+/// for neutrons,
+///
+/// This process overrides also the default PostStepDoIt() and
+/// sets the particle status to fStopAndKill instead of fStopButAlive.
+/// It is activated in TG4SpeialCutsPhysics only when neutron killer
+/// process was applied by Geant4 physics list.
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4SpecialCutsForOther : public TG4VSpecialCuts
+class TG4SpecialCutsForNeutron : public TG4VSpecialCuts
 {
  public:
-  TG4SpecialCutsForOther(const G4String& processName = "specialCutForOther");
-  virtual ~TG4SpecialCutsForOther();
+  TG4SpecialCutsForNeutron(
+    const G4String& processName = "specialCutForNeutron");
+  virtual ~TG4SpecialCutsForNeutron();
 
   // methods
   virtual G4double GetMinEkine(
     const TG4Limits& limits, const G4Track& track) const;
+  virtual G4VParticleChange* PostStepDoIt(
+    const G4Track& track, const G4Step& /*step*/);
 };
 
 #endif // TG4_SPECIAL_CUTS_H

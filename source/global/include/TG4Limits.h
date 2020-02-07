@@ -75,11 +75,9 @@ class TG4Limits : public G4UserLimits
   virtual G4double GetUserMinEkine(const G4Track& track);
   G4double GetMinEkineForGamma(const G4Track& track) const;
   G4double GetMinEkineForElectron(const G4Track& track) const;
-  G4double GetMinEkineForEplus(const G4Track& track) const;
   G4double GetMinEkineForChargedHadron(const G4Track& track) const;
   G4double GetMinEkineForNeutralHadron(const G4Track& track) const;
   G4double GetMinEkineForMuon(const G4Track& track) const;
-  G4double GetMinEkineForOther(const G4Track& track) const;
   TG4G3ControlValue GetControl(G4VProcess* process) const;
 
  private:
