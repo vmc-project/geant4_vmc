@@ -82,6 +82,21 @@ void Ex01DetectorConstructionOld::ConstructMaterials()
   Int_t imatLead;
   gMC->Material(imatLead, "Lead", a, z, density, radl, absl, ubuf, 0);
 
+  // Polyethylene
+  // Mixture defined with the negative number of component, to test updating
+  // wmat. (If nlmat < 0 then wmat contains the number of atoms of a given kind
+  // into the molecule of the compound. In this case, wmat in output is changed
+  // to relative weights.)
+  Float_t apoly[2] = { 12.01, 1. };
+  Float_t zpoly[2] = { 6., 1. };
+  Float_t wpoly[2] = { .33, .67 };
+  Int_t imatPoly;
+  cout << "imatPoly"
+       << " wpoly: " << wpoly[0] << ", " << wpoly[1] << endl;
+  gMC->Mixture(imatPoly, "POLYETHYLEN0$", apoly, zpoly, .95, -2, wpoly);
+  cout << "imatPoly"
+       << " wpoly: " << wpoly[0] << ", " << wpoly[1] << endl;
+
   //
   // Tracking medias
   //
