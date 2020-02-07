@@ -374,16 +374,6 @@ G4double TG4G3CutVector::GetMinEkineForElectron(const G4Track& track) const
 }
 
 //_____________________________________________________________________________
-G4double TG4G3CutVector::GetMinEkineForEplus(const G4Track& /*track*/) const
-{
-  /// Return the cut value for e+.                              \n
-  /// No special cut is applied to e+;
-  /// the PPCUTM cut is applied on total energy of the e+e- pair.
-
-  return 0;
-}
-
-//_____________________________________________________________________________
 G4double TG4G3CutVector::GetMinEkineForChargedHadron(
   const G4Track& /*track*/) const
 {
@@ -407,14 +397,6 @@ G4double TG4G3CutVector::GetMinEkineForMuon(const G4Track& /*track*/) const
   /// Return the cut value for muon (CUTMUO)
 
   return fCutVector[kCUTMUO];
-}
-
-//_____________________________________________________________________________
-G4double TG4G3CutVector::GetMinEkineForOther(const G4Track& /*track*/) const
-{
-  /// No cut is applied for other particles.
-
-  return 0.;
 }
 
 //_____________________________________________________________________________

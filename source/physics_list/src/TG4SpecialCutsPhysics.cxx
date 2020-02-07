@@ -20,6 +20,7 @@
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
 #include <G4VProcess.hh>
+#include <G4Neutron.hh>
 
 #include <TMCProcess.h>
 
@@ -28,11 +29,10 @@ TG4SpecialCutsPhysics::TG4SpecialCutsPhysics(const G4String& name)
   : TG4VPhysicsConstructor(name),
     fSpecialCutsForGamma(0),
     fSpecialCutsForElectron(0),
-    fSpecialCutsForEplus(0),
     fSpecialCutsForChargedHadron(0),
     fSpecialCutsForNeutralHadron(0),
-    fSpecialCutsForMuon(0),
-    fSpecialCutsForOther(0)
+    fSpecialCutsForNeutron(0),
+    fSpecialCutsForMuon(0)
 {
   /// Standard constructor
 }
@@ -43,11 +43,10 @@ TG4SpecialCutsPhysics::TG4SpecialCutsPhysics(
   : TG4VPhysicsConstructor(name, theVerboseLevel),
     fSpecialCutsForGamma(0),
     fSpecialCutsForElectron(0),
-    fSpecialCutsForEplus(0),
     fSpecialCutsForChargedHadron(0),
     fSpecialCutsForNeutralHadron(0),
-    fSpecialCutsForMuon(0),
-    fSpecialCutsForOther(0)
+    fSpecialCutsForNeutron(0),
+    fSpecialCutsForMuon(0)
 {
   /// Standard constructor
 }
@@ -59,11 +58,10 @@ TG4SpecialCutsPhysics::~TG4SpecialCutsPhysics()
 
   delete fSpecialCutsForGamma;
   delete fSpecialCutsForElectron;
-  delete fSpecialCutsForEplus;
   delete fSpecialCutsForChargedHadron;
   delete fSpecialCutsForNeutralHadron;
+  delete fSpecialCutsForNeutron;
   delete fSpecialCutsForMuon;
-  delete fSpecialCutsForOther;
 }
 
 //
@@ -86,11 +84,10 @@ void TG4SpecialCutsPhysics::ConstructProcess()
   // create processes
   fSpecialCutsForGamma = new TG4SpecialCutsForGamma();
   fSpecialCutsForElectron = new TG4SpecialCutsForElectron();
-  fSpecialCutsForEplus = new TG4SpecialCutsForEplus();
   fSpecialCutsForChargedHadron = new TG4SpecialCutsForChargedHadron();
   fSpecialCutsForNeutralHadron = new TG4SpecialCutsForNeutralHadron();
+  fSpecialCutsForNeutron = new TG4SpecialCutsForNeutron();
   fSpecialCutsForMuon = new TG4SpecialCutsForMuon();
-  fSpecialCutsForOther = new TG4SpecialCutsForOther();
 
   TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
 
@@ -121,23 +118,35 @@ void TG4SpecialCutsPhysics::ConstructProcess()
         case kElectron:
           pManager->AddDiscreteProcess(fSpecialCutsForElectron);
           break;
-        case kEplus:
-          pManager->AddDiscreteProcess(fSpecialCutsForEplus);
-          break;
         case kChargedHadron:
           pManager->AddDiscreteProcess(fSpecialCutsForChargedHadron);
           break;
-        case kNeutralHadron:
-          pManager->AddDiscreteProcess(fSpecialCutsForNeutralHadron);
+        case kNeutralHadron: {
+          G4bool isNeutronWithKiller = false;
+          if (particle == G4Neutron::Definition() ) {
+            G4ProcessVector* processes = pManager->GetProcessList();
+            for (G4int i = 0; i < processes->size(); ++i) {
+              if ( (*processes)[i]->GetProcessName() == "nKiller") {
+                isNeutronWithKiller = true;
+                break;
+              }
+            }
+          }
+          if (isNeutronWithKiller) {
+            pManager->AddDiscreteProcess(fSpecialCutsForNeutron);
+          }
+          else {
+            pManager->AddDiscreteProcess(fSpecialCutsForNeutralHadron);
+          }
           break;
+        }
         case kMuon:
           pManager->AddDiscreteProcess(fSpecialCutsForMuon);
           break;
+        case kEplus:
         case kAny:
-          pManager->AddDiscreteProcess(fSpecialCutsForOther);
-          break;
         case kNofParticlesWSP:
-          // cannot happen
+          // nothing to be done
           break;
       }
     }

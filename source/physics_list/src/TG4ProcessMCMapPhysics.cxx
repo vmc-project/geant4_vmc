@@ -231,13 +231,10 @@ void TG4ProcessMCMapPhysics::FillMap()
   mcMap->Add("StepLimiter", kStepMax);
   mcMap->Add("specialCutForChargedHadron", kPStop);
   mcMap->Add("specialCutForElectron", kPStop);
-  mcMap->Add("specialCutForEplus", kPStop);
   mcMap->Add("specialCutForGamma", kPStop);
   mcMap->Add("specialCutForMuon", kPStop);
   mcMap->Add("specialCutForNeutralHadron", kPStop);
-  mcMap->Add("specialCutForForOther", kPStop);
-  mcMap->Add("specialCutForElectron", kPStop);
-  mcMap->Add("specialCutForElectron", kPStop);
+  mcMap->Add("specialCutForNeutron", kPStop);
   mcMap->Add("MinEkineCuts", kPStop);
   mcMap->Add("G4MinEkineCuts", kPStop);
   mcMap->Add("MaxTimeCuts", kPStop);
