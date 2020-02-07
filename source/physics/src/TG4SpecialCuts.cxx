@@ -71,46 +71,6 @@ G4double TG4SpecialCutsForElectron::GetMinEkine(
 }
 
 //
-//  Class TG4SpecialCutsForEplus implementation
-//
-
-//_____________________________________________________________________________
-TG4SpecialCutsForEplus::TG4SpecialCutsForEplus(const G4String& processName)
-  : TG4VSpecialCuts(processName)
-{
-  /// Standard and default constructor
-}
-
-//_____________________________________________________________________________
-TG4SpecialCutsForEplus::~TG4SpecialCutsForEplus()
-{
-  /// Destructor
-}
-
-//_____________________________________________________________________________
-G4double TG4SpecialCutsForEplus::GetMinEkine(
-  const TG4Limits& limits, const G4Track& track) const
-{
-  /// Return the min kinetic energy cut from limits.
-
-  return limits.GetMinEkineForEplus(track);
-}
-
-//_____________________________________________________________________________
-G4VParticleChange* TG4SpecialCutsForEplus::PostStepDoIt(
-  const G4Track& track, const G4Step& /*step*/)
-{
-  /// Override method from G4VSpecialCuts and set energy deposit
-  /// to total e+ energy
-
-  aParticleChange.Initialize(track);
-  aParticleChange.ProposeEnergy(0.);
-  aParticleChange.ProposeLocalEnergyDeposit(track.GetTotalEnergy());
-  aParticleChange.ProposeTrackStatus(fStopAndKill);
-  return &aParticleChange;
-}
-
-//
 //  Class TG4SpecialCutsForGamma implementation
 //
 
@@ -190,27 +150,43 @@ G4double TG4SpecialCutsForNeutralHadron::GetMinEkine(
 }
 
 //
-//  Class TG4SpecialCutsForOther implementation
+//  Class TG4SpecialCutsForNeutralHadron implementation
 //
 
 //_____________________________________________________________________________
-TG4SpecialCutsForOther::TG4SpecialCutsForOther(const G4String& processName)
+TG4SpecialCutsForNeutron::TG4SpecialCutsForNeutron(
+  const G4String& processName)
   : TG4VSpecialCuts(processName)
 {
   /// Standard and default constructor
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsForOther::~TG4SpecialCutsForOther()
+TG4SpecialCutsForNeutron::~TG4SpecialCutsForNeutron()
 {
   /// Destructor
 }
 
 //_____________________________________________________________________________
-G4double TG4SpecialCutsForOther::GetMinEkine(
+G4double TG4SpecialCutsForNeutron::GetMinEkine(
   const TG4Limits& limits, const G4Track& track) const
 {
   /// Return the min kinetic energy cut from limits.
 
-  return limits.GetMinEkineForOther(track);
+  return limits.GetMinEkineForNeutralHadron(track);
+}
+
+//_____________________________________________________________________________
+G4VParticleChange* TG4SpecialCutsForNeutron::PostStepDoIt(
+  const G4Track& track, const G4Step& /*step*/)
+{
+  /// Override method from G4VSpecialCuts and set trcack status
+  /// fStopAndKill to neutrons
+
+  aParticleChange.Initialize(track);
+  aParticleChange.ProposeEnergy(0.);
+  aParticleChange.ProposeLocalEnergyDeposit(track.GetKineticEnergy());
+  aParticleChange.ProposeTrackStatus(fStopAndKill);
+
+  return &aParticleChange;
 }

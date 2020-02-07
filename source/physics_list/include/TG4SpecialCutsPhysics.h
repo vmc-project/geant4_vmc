@@ -21,11 +21,10 @@
 
 class TG4SpecialCutsForGamma;
 class TG4SpecialCutsForElectron;
-class TG4SpecialCutsForEplus;
 class TG4SpecialCutsForChargedHadron;
 class TG4SpecialCutsForNeutralHadron;
+class TG4SpecialCutsForNeutron;
 class TG4SpecialCutsForMuon;
-class TG4SpecialCutsForOther;
 
 /// \ingroup physics_list
 /// \brief The builder for special cuts process.
@@ -61,20 +60,17 @@ class TG4SpecialCutsPhysics : public TG4VPhysicsConstructor
   /// the special cuts process for e-
   TG4SpecialCutsForElectron* fSpecialCutsForElectron;
 
-  /// the special cuts process for e+
-  TG4SpecialCutsForEplus* fSpecialCutsForEplus;
-
   /// the special cuts process for charged hadron
   TG4SpecialCutsForChargedHadron* fSpecialCutsForChargedHadron;
 
   /// the special cuts process for neutral hadron
   TG4SpecialCutsForNeutralHadron* fSpecialCutsForNeutralHadron;
 
+  /// the special cuts process for neutron
+  TG4SpecialCutsForNeutron* fSpecialCutsForNeutron;
+
   /// the special cuts process for muon
   TG4SpecialCutsForMuon* fSpecialCutsForMuon;
-
-  /// the special cuts process for other particles
-  TG4SpecialCutsForOther* fSpecialCutsForOther;
 };
 
 #endif // TG4_SPECIAL_CUTS_PHYSICS_H
