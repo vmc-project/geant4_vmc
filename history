@@ -9,6 +9,18 @@
      
 Tags (history):
 ===============
+  10/02/2020
+  v3-6-p6:
+    Patch release, including following fixes:
+    Geant4 VMC:
+      Fixes in applying cuts:
+      - Do not let neutron decay if it is stopped with a specialCut and has assigned
+        the neutron killer process.
+      - Removed special cut processes which never apply a cut (ForEplus, ForOther).
+
+    Tested with Geant4 10.04.p03 (with embedded CLHEP 2.3.4.3.)
+      Root 6.18/04, VGM 4.4 and 4.6
+
   31/01/2020
   v3-6-p5:
     Patch release, including following fixes:
@@ -22,7 +34,7 @@ Tags (history):
       the older versions are fixed with this work-around.
 
     Tested with Geant4 10.04.p03 (with embedded CLHEP 2.3.4.3.)
-      Root 6.18/04, VGM 4.6
+      Root 6.18/04, VGM 4.4
 
   04/07/2019
   v3-6-p4:
