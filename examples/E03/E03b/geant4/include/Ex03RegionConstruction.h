@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file Ex03RegionConstruction.h 
-/// \brief Definition of the Ex03RegionConstruction class 
+/// \file Ex03RegionConstruction.h
+/// \brief Definition of the Ex03RegionConstruction class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo
 ///
@@ -26,13 +26,12 @@
 
 class Ex03RegionConstruction : public TG4VUserRegionConstruction
 {
-  public:
-    Ex03RegionConstruction();
-    virtual ~Ex03RegionConstruction();
+ public:
+  Ex03RegionConstruction();
+  virtual ~Ex03RegionConstruction();
 
-    // methods
-    virtual void Construct();
+  // methods
+  virtual void Construct();
 };
 
-#endif //EX03_REGION_CONSTRUCTION_H
-
+#endif // EX03_REGION_CONSTRUCTION_H

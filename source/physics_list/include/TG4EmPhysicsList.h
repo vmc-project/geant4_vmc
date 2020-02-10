@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4EmPhysicsList.h
-/// \brief Definition of the TG4EmPhysicsList class 
+/// \brief Definition of the TG4EmPhysicsList class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -21,50 +21,48 @@
 #include <globals.hh>
 
 /// \ingroup physics_list
-/// \brief The standard EM physics list 
+/// \brief The standard EM physics list
 ///
 /// The EM physics list is implemented as modular physics list
-/// with registered G4EmStandardPhysics and G4DecayPhysics 
+/// with registered G4EmStandardPhysics and G4DecayPhysics
 /// builders,
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4EmPhysicsList: public G4VModularPhysicsList,
-                        public TG4Verbose
+class TG4EmPhysicsList : public G4VModularPhysicsList, public TG4Verbose
 {
-  public:
-    TG4EmPhysicsList(const G4String& selection = "emStandard");
-    virtual ~TG4EmPhysicsList();
-  
-    // static methods
-    static G4String AvailableSelections();
-    static G4bool   IsAvailableSelection(const G4String& selection);
- 
-    // methods
-    virtual void  ConstructProcess();
+ public:
+  TG4EmPhysicsList(const G4String& selection = "emStandard");
+  virtual ~TG4EmPhysicsList();
 
-                  /// No cuts are set here
-    virtual void  SetCuts() {}
-    
-    virtual G4int VerboseLevel() const;
-    virtual void  VerboseLevel(G4int level);
+  // static methods
+  static G4String AvailableSelections();
+  static G4bool IsAvailableSelection(const G4String& selection);
 
-    // set methods
-    void SetRangeCut(G4double value);
-    
-  protected:
-    // static data members
-    static const G4double  fgkDefaultCutValue; ///< default cut value
+  // methods
+  virtual void ConstructProcess();
 
-  private:
-    /// Not implemented
-    TG4EmPhysicsList(const TG4EmPhysicsList& right);
-    /// Not implemented
-    TG4EmPhysicsList& operator=(const TG4EmPhysicsList& right);
+  /// No cuts are set here
+  virtual void SetCuts() {}
 
-    // methods
-    void Configure(const G4String& /*selection*/);
+  virtual G4int VerboseLevel() const;
+  virtual void VerboseLevel(G4int level);
+
+  // set methods
+  void SetRangeCut(G4double value);
+
+ protected:
+  // static data members
+  static const G4double fgkDefaultCutValue; ///< default cut value
+
+ private:
+  /// Not implemented
+  TG4EmPhysicsList(const TG4EmPhysicsList& right);
+  /// Not implemented
+  TG4EmPhysicsList& operator=(const TG4EmPhysicsList& right);
+
+  // methods
+  void Configure(const G4String& /*selection*/);
 };
 
-#endif //TG4_MODULAR_PHYSICS_LIST_H
-
+#endif // TG4_MODULAR_PHYSICS_LIST_H

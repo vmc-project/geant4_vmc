@@ -11,13 +11,13 @@
 //-------------------------------------------------
 
 /// \file TG4TrackingAction.h
-/// \brief Definition of the TG4TrackingAction class 
+/// \brief Definition of the TG4TrackingAction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include "TG4Verbose.h"
-#include "TG4TrackingActionMessenger.h"
 #include "TG4TrackSaveControl.h"
+#include "TG4TrackingActionMessenger.h"
+#include "TG4Verbose.h"
 
 #include <G4UserTrackingAction.hh>
 
@@ -34,7 +34,7 @@ class G4Track;
 
 /// \ingroup event
 /// \brief Actions at the beginnig and at the end of track
-/// 
+///
 /// Class that ensures calling sensitive detector
 /// before track starts stepping.
 /// It also takes care of setting step status (kVertex)
@@ -42,120 +42,124 @@ class G4Track;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4TrackingAction : public G4UserTrackingAction,
-                          public TG4Verbose 
+class TG4TrackingAction : public G4UserTrackingAction, public TG4Verbose
 {
-  public:
-    TG4TrackingAction();
-    virtual ~TG4TrackingAction();
-   
-    // static access method
-    static TG4TrackingAction* Instance();
+ public:
+  TG4TrackingAction();
+  virtual ~TG4TrackingAction();
 
-    // methods
-    void LateInitialize();
-    virtual void PrepareNewEvent();
-    virtual void PreTrackingAction(const G4Track* aTrack);
-    virtual void PostTrackingAction(const G4Track* aTrack);
-                  // the following methods should not
-                  // be overwritten in a derived class
-    virtual void PreUserTrackingAction(const G4Track* aTrack);
-    virtual void PostUserTrackingAction(const G4Track* aTrack);
-    void FinishPrimaryTrack();
+  // static access method
+  static TG4TrackingAction* Instance();
 
-    // set methods
-    void SetMCStack(TVirtualMCStack*  mcStack);
-    void SetNewVerboseLevel(G4int level);
-    void SetNewVerboseTrackID(G4int trackID);
-    void SetSpecialControls(TG4SpecialControlsV2* specialControls);
+  // methods
+  void LateInitialize();
+  virtual void PrepareNewEvent();
+  virtual void PreTrackingAction(const G4Track* aTrack);
+  virtual void PostTrackingAction(const G4Track* aTrack);
+  // the following methods should not
+  // be overwritten in a derived class
+  virtual void PreUserTrackingAction(const G4Track* aTrack);
+  virtual void PostUserTrackingAction(const G4Track* aTrack);
+  void FinishPrimaryTrack();
 
-    // get methods
-    G4int GetNewVerboseLevel() const;
-    G4int GetNewVerboseTrackID() const;
-    TG4TrackManager* GetTrackManager() const;
+  // set methods
+  void SetMCStack(TVirtualMCStack* mcStack);
+  void SetNewVerboseLevel(G4int level);
+  void SetNewVerboseTrackID(G4int trackID);
+  void SetSpecialControls(TG4SpecialControlsV2* specialControls);
 
-  private:
-    /// Not implemented
-    TG4TrackingAction(const TG4TrackingAction& right);
-    /// Not implemented
-    TG4TrackingAction& operator=(const TG4TrackingAction& right);
+  // get methods
+  G4int GetNewVerboseLevel() const;
+  G4int GetNewVerboseTrackID() const;
+  TG4TrackManager* GetTrackManager() const;
 
-    // methods
-    void UserProcessHits(const G4Track* aTrack);
-    void Verbose() const;
+ private:
+  /// Not implemented
+  TG4TrackingAction(const TG4TrackingAction& right);
+  /// Not implemented
+  TG4TrackingAction& operator=(const TG4TrackingAction& right);
 
-    // static data members
-    static G4ThreadLocal TG4TrackingAction*   fgInstance; ///< this instance
+  // methods
+  void UserProcessHits(const G4Track* aTrack);
+  void Verbose() const;
 
-    //
-    // data members
-    
-    /// messenger
-    TG4TrackingActionMessenger  fMessenger; 
-    
-    /// the special controls manager
-    TG4SpecialControlsV2*  fSpecialControls;
-    
-    /// track manager 
-    TG4TrackManager*  fTrackManager;
-    
-    /// Cached pointer to thread-local VMC application
-    TVirtualMCApplication*  fMCApplication;
+  // static data members
+  static G4ThreadLocal TG4TrackingAction* fgInstance; ///< this instance
 
-    /// Cached pointer to thread-local VMC stack
-    TVirtualMCStack*  fMCStack;
+  //
+  // data members
 
-    /// Cached pointer to thread-local step manager
-    TG4StepManager*  fStepManager;
+  /// messenger
+  TG4TrackingActionMessenger fMessenger;
 
-    /// Cached pointer to thread-local stack popper
-    TG4StackPopper* fStackPopper;
+  /// the special controls manager
+  TG4SpecialControlsV2* fSpecialControls;
 
-    /// current primary track ID 
-    G4int   fPrimaryTrackID;
-    
-    /// current track ID 
-    G4int   fCurrentTrackID; 
-    
-    /// control of saving secondary tracks
-    TG4TrackSaveControl  fTrackSaveControl;
+  /// track manager
+  TG4TrackManager* fTrackManager;
 
-    /// control of saving current track
-    G4bool  fOverwriteLastTrack;
+  /// Cached pointer to thread-local VMC application
+  TVirtualMCApplication* fMCApplication;
 
-    /// new /tracking/verbose level
-    G4int   fNewVerboseLevel;
-    
-    /// track ID for which the new verbose level is applied
-    G4int   fNewVerboseTrackID;
+  /// Cached pointer to thread-local VMC stack
+  TVirtualMCStack* fMCStack;
+
+  /// Cached pointer to thread-local step manager
+  TG4StepManager* fStepManager;
+
+  /// Cached pointer to thread-local stack popper
+  TG4StackPopper* fStackPopper;
+
+  /// current primary track ID
+  G4int fPrimaryTrackID;
+
+  /// current track ID
+  G4int fCurrentTrackID;
+
+  /// control of saving secondary tracks
+  TG4TrackSaveControl fTrackSaveControl;
+
+  /// control of saving current track
+  G4bool fOverwriteLastTrack;
+
+  /// new /tracking/verbose level
+  G4int fNewVerboseLevel;
+
+  /// track ID for which the new verbose level is applied
+  G4int fNewVerboseTrackID;
 };
-
 
 // inline methods
 
-inline TG4TrackingAction* TG4TrackingAction::Instance() { 
+inline TG4TrackingAction* TG4TrackingAction::Instance()
+{
   /// Return this instance.
-  return fgInstance; 
+  return fgInstance;
 }
 
-inline void TG4TrackingAction::PreTrackingAction(const G4Track* /*aTrack*/) {
+inline void TG4TrackingAction::PreTrackingAction(const G4Track* /*aTrack*/)
+{
   /// Dummy pre-tracking action that can be overriden
   /// in a user defined class
 }
 
-inline void TG4TrackingAction::PostTrackingAction(const G4Track* /*aTrack*/) {
+inline void TG4TrackingAction::PostTrackingAction(const G4Track* /*aTrack*/)
+{
   /// Dummy post-tracking action that can be overriden
   /// in a user defined class
 }
 
-inline void TG4TrackingAction::SetMCStack(TVirtualMCStack* mcStack) {
+inline void TG4TrackingAction::SetMCStack(TVirtualMCStack* mcStack)
+{
   /// Set  cached pointer to thread-local VMC stack
   fMCStack = mcStack;
 }
 
-inline void TG4TrackingAction::SetSpecialControls(TG4SpecialControlsV2* specialControls) {
+inline void TG4TrackingAction::SetSpecialControls(
+  TG4SpecialControlsV2* specialControls)
+{
   /// Return special controls manager
   fSpecialControls = specialControls;
-}  
+}
 
-#endif //TG4_TRACKING_ACTION_H
+#endif // TG4_TRACKING_ACTION_H

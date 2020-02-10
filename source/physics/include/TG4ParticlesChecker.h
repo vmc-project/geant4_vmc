@@ -11,12 +11,12 @@
 //-------------------------------------------------
 
 /// \file TG4ParticlesChecker.h
-/// \brief Definition of the TG4ParticlesChecker class 
+/// \brief Definition of the TG4ParticlesChecker class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-#include "TG4Verbose.h"
 #include "TG4ParticlesCheckerMessenger.h"
+#include "TG4Verbose.h"
 
 #include <set>
 
@@ -25,8 +25,8 @@ class G4ParticleDefinition;
 class TParticlePDG;
 
 /// \ingroup physics
-/// \brief A helper class for comparing the basic particles properties in between
-/// Root and Geant4
+/// \brief A helper class for comparing the basic particles properties in
+/// between Root and Geant4
 ///
 /// Verbose level:
 /// - 1 : standard output
@@ -37,97 +37,101 @@ class TParticlePDG;
 
 class TG4ParticlesChecker : public TG4Verbose
 {
-  public:
-    /// The enumeration of "checkable" particle properties 
-    enum ParticleProperty {
-      kName,     ///< mass 
-      kMass,     ///< mass 
-      kCharge,   ///< charge
-      kLifetime, ///< lifetime
-      kWidth,    ///< width
-      kParity,   ///< parity
-      kSpin,     ///< spin
-      kIsospin,  ///< isospin
-      kIsospin3, ///< isospin3
-      kNone      ///< no property
-    };  
+ public:
+  /// The enumeration of "checkable" particle properties
+  enum ParticleProperty
+  {
+    kName,     ///< mass
+    kMass,     ///< mass
+    kCharge,   ///< charge
+    kLifetime, ///< lifetime
+    kWidth,    ///< width
+    kParity,   ///< parity
+    kSpin,     ///< spin
+    kIsospin,  ///< isospin
+    kIsospin3, ///< isospin3
+    kNone      ///< no property
+  };
 
-  public:
-    TG4ParticlesChecker();
-    ~TG4ParticlesChecker();
+ public:
+  TG4ParticlesChecker();
+  ~TG4ParticlesChecker();
 
-    static G4String GetParticlePropertyName(ParticleProperty property);
-    static ParticleProperty GetParticleProperty(const G4String& propertyName);
-    
-    G4bool CheckParticles() const;                       
-    G4bool CheckParticle(G4int pdgEncoding) const;     
+  static G4String GetParticlePropertyName(ParticleProperty property);
+  static ParticleProperty GetParticleProperty(const G4String& propertyName);
 
-    // set methods
-    void SetChecking(ParticleProperty property, G4bool check);
-    void SetPrecision(G4double precision);
-    
-    // get methods
-    const std::set<ParticleProperty>& GetAvailableProperties() const;
-    const std::set<ParticleProperty>& GetCheckedProperties() const;
-    
-  private:
-    /// Not implemented
-    TG4ParticlesChecker(const TG4ParticlesChecker& right);
-    /// Not implemented
-    TG4ParticlesChecker& operator=(const TG4ParticlesChecker& right);
+  G4bool CheckParticles() const;
+  G4bool CheckParticle(G4int pdgEncoding) const;
 
-    // methods
-    G4bool IsEqualRel(G4double dx, G4double dy, G4double epsilon) const;    
+  // set methods
+  void SetChecking(ParticleProperty property, G4bool check);
+  void SetPrecision(G4double precision);
 
-    G4double GetPropertyValue(ParticleProperty property, 
-                              G4ParticleDefinition* g4Particle) const;                     
-    G4double GetPropertyValue(ParticleProperty property, 
-                              TParticlePDG* rtParticle) const;                     
+  // get methods
+  const std::set<ParticleProperty>& GetAvailableProperties() const;
+  const std::set<ParticleProperty>& GetCheckedProperties() const;
 
-    void PrintCheckedProperties() const;                  
+ private:
+  /// Not implemented
+  TG4ParticlesChecker(const TG4ParticlesChecker& right);
+  /// Not implemented
+  TG4ParticlesChecker& operator=(const TG4ParticlesChecker& right);
 
-    G4bool CheckName(G4ParticleDefinition* g4Particle, TParticlePDG* rtParticle) const;
-    G4bool CheckProperty(ParticleProperty property,
-                         G4ParticleDefinition* g4Particle, TParticlePDG* rtParticle) const;
-    G4bool CheckParticle(G4ParticleDefinition* g4Particle, TParticlePDG* rtParticle) const;
+  // methods
+  G4bool IsEqualRel(G4double dx, G4double dy, G4double epsilon) const;
 
+  G4double GetPropertyValue(
+    ParticleProperty property, G4ParticleDefinition* g4Particle) const;
+  G4double GetPropertyValue(
+    ParticleProperty property, TParticlePDG* rtParticle) const;
 
-    // static data members
-    static const G4double fgkDefaultPrecision;  ///< default precision
+  void PrintCheckedProperties() const;
 
-    // data members
+  G4bool CheckName(
+    G4ParticleDefinition* g4Particle, TParticlePDG* rtParticle) const;
+  G4bool CheckProperty(ParticleProperty property,
+    G4ParticleDefinition* g4Particle, TParticlePDG* rtParticle) const;
+  G4bool CheckParticle(
+    G4ParticleDefinition* g4Particle, TParticlePDG* rtParticle) const;
 
-    /// messenger for this class
-    TG4ParticlesCheckerMessenger  fMessenger; 
-    
-    /// set of available properties
-    std::set<ParticleProperty>    fAvailableProperties;
+  // static data members
+  static const G4double fgkDefaultPrecision; ///< default precision
 
-    /// set of properties selected for checking
-    std::set<ParticleProperty>    fCheckedProperties; 
-    
-    /// precision for checking 
-    G4double fPrecision; 
-};    
+  // data members
+
+  /// messenger for this class
+  TG4ParticlesCheckerMessenger fMessenger;
+
+  /// set of available properties
+  std::set<ParticleProperty> fAvailableProperties;
+
+  /// set of properties selected for checking
+  std::set<ParticleProperty> fCheckedProperties;
+
+  /// precision for checking
+  G4double fPrecision;
+};
 
 // inline functions
 
-inline void TG4ParticlesChecker::SetPrecision(G4double precision) {
+inline void TG4ParticlesChecker::SetPrecision(G4double precision)
+{
   /// Set the precision for checking.
   fPrecision = precision;
-}  
+}
 
-inline const std::set<TG4ParticlesChecker::ParticleProperty>& 
-TG4ParticlesChecker::GetAvailableProperties() const {
+inline const std::set<TG4ParticlesChecker::ParticleProperty>&
+TG4ParticlesChecker::GetAvailableProperties() const
+{
   /// Return the set of available properties
   return fAvailableProperties;
-}  
+}
 
-inline const std::set<TG4ParticlesChecker::ParticleProperty>& 
-TG4ParticlesChecker::GetCheckedProperties() const {
-  /// Return the set of properties selected for checking 
+inline const std::set<TG4ParticlesChecker::ParticleProperty>&
+TG4ParticlesChecker::GetCheckedProperties() const
+{
+  /// Return the set of properties selected for checking
   return fCheckedProperties;
-}  
-    
-#endif //TG4_PARTICLES_CHECKER_H
+}
 
+#endif // TG4_PARTICLES_CHECKER_H

@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4DetConstruction.cxx
-/// \brief Implementation of the TG4DetConstruction class 
+/// \brief Implementation of the TG4DetConstruction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -21,16 +21,15 @@
 
 //_____________________________________________________________________________
 TG4DetConstruction::TG4DetConstruction()
-  : G4VUserDetectorConstruction(),
-    fWorld(0)
+  : G4VUserDetectorConstruction(), fWorld(0)
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
-TG4DetConstruction::~TG4DetConstruction() 
+TG4DetConstruction::~TG4DetConstruction()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -39,23 +38,23 @@ TG4DetConstruction::~TG4DetConstruction()
 
 //_____________________________________________________________________________
 G4VPhysicalVolume* TG4DetConstruction::Construct()
-{ 
-/// Construct geometry is delegated to TG4GeometryManager
-// --
+{
+  /// Construct geometry is delegated to TG4GeometryManager
+  // --
 
   // Build G4 geometry
   TG4GeometryManager::Instance()->ConstructGeometry();
 
-  fWorld = TG4GeometryServices::Instance()->GetWorld();  
-  
-  return fWorld;    
+  fWorld = TG4GeometryServices::Instance()->GetWorld();
+
+  return fWorld;
 }
 
 //_____________________________________________________________________________
 void TG4DetConstruction::ConstructSDandField()
-{ 
-/// Construct SDandField is delegated to TG4GeometryManager
-// --
+{
+  /// Construct SDandField is delegated to TG4GeometryManager
+  // --
 
   TG4GeometryManager::Instance()->ConstructSDandField();
 }

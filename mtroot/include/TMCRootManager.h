@@ -15,8 +15,8 @@
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-#include <Rtypes.h>
 #include "TMCtls.h"
+#include <Rtypes.h>
 
 class TParticle;
 class TFile;
@@ -27,69 +27,66 @@ class TTree;
 
 class TMCRootManager
 {
-  public:
-    /// Root file mode 
-    enum FileMode { 
-      kRead,   // Read mode 
-      kWrite   // Write mode
-    };
+ public:
+  /// Root file mode
+  enum FileMode
+  {
+    kRead, // Read mode
+    kWrite // Write mode
+  };
 
-  public:
-    // static access method
-    static TMCRootManager* Instance(); 
+ public:
+  // static access method
+  static TMCRootManager* Instance();
 
-    // static method for activating debug mode
-    static void SetDebug(Bool_t debug); 
-    static Bool_t GetDebug();
+  // static method for activating debug mode
+  static void SetDebug(Bool_t debug);
+  static Bool_t GetDebug();
 
-    TMCRootManager(const char* projectName, 
-                   FileMode fileMode = kWrite, 
-                   Int_t threadRank = -1);
-    virtual ~TMCRootManager();     
-  
-    // methods
-    void  Register(const char* name, const char* className, void* objAddress);
-    void  Register(const char* name, const char* className, const void* objAddress);
-    void  Fill();
-    void  WriteAll();
-    void  Close();
-    void  WriteAndClose();
-    void  ReadEvent(Int_t i);
-    
-  private:
-    // not implemented
-    TMCRootManager(const TMCRootManager& rhs);
-    TMCRootManager& operator=(const TMCRootManager& rhs);
-    
-    // global static data members
-    static  Int_t   fgCounter;   // The counter of instances
-    // static data members
-    static  Bool_t  fgDebug; // Option to activate debug printings
+  TMCRootManager(
+    const char* projectName, FileMode fileMode = kWrite, Int_t threadRank = -1);
+  virtual ~TMCRootManager();
+
+  // methods
+  void Register(const char* name, const char* className, void* objAddress);
+  void Register(
+    const char* name, const char* className, const void* objAddress);
+  void Fill();
+  void WriteAll();
+  void Close();
+  void WriteAndClose();
+  void ReadEvent(Int_t i);
+
+ private:
+  // not implemented
+  TMCRootManager(const TMCRootManager& rhs);
+  TMCRootManager& operator=(const TMCRootManager& rhs);
+
+  // global static data members
+  static Int_t fgCounter; // The counter of instances
+  // static data members
+  static Bool_t fgDebug; // Option to activate debug printings
 
 #if !defined(__CINT__)
-    static  TMCThreadLocal TMCRootManager* fgInstance; // singleton instance
+  static TMCThreadLocal TMCRootManager* fgInstance; // singleton instance
 #else
-    static                 TMCRootManager* fgInstance; // singleton instance
-#endif 
+  static TMCRootManager* fgInstance; // singleton instance
+#endif
 
-    // Methods
-    void OpenFile(const char* projectName, FileMode fileMode, Int_t threadRank);
+  // Methods
+  void OpenFile(const char* projectName, FileMode fileMode, Int_t threadRank);
 
-    // data members 
-    Int_t   fId;         // This manager ID 
-    TFile*  fFile;       // Root output file
-    TTree*  fTree;       // Root output tree 
-    Bool_t  fIsClosed;   // Info whether its file was closed
+  // data members
+  Int_t fId;        // This manager ID
+  TFile* fFile;     // Root output file
+  TTree* fTree;     // Root output tree
+  Bool_t fIsClosed; // Info whether its file was closed
 };
 
 // inline functions
 
-inline void TMCRootManager::SetDebug(Bool_t debug) {
-  fgDebug = debug;
-}  
-  
-inline Bool_t TMCRootManager::GetDebug() {
-  return fgDebug;
-}  
+inline void TMCRootManager::SetDebug(Bool_t debug) { fgDebug = debug; }
 
-#endif //ROOT_TMCRootManager
+inline Bool_t TMCRootManager::GetDebug() { return fgDebug; }
+
+#endif // ROOT_TMCRootManager

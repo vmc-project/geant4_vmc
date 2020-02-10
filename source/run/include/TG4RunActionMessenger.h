@@ -1,5 +1,5 @@
 #ifndef TG4_RUN_ACTION_MESSENGER_H
-#define TG4_RUN_ACTION_MESSENGER_H 
+#define TG4_RUN_ACTION_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4RunActionMessenger.h
-/// \brief Definition of the TG4RunActionMessenger class 
+/// \brief Definition of the TG4RunActionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -33,34 +33,34 @@ class G4UIcmdWithABool;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4RunActionMessenger: public G4UImessenger
+class TG4RunActionMessenger : public G4UImessenger
 {
-  public:
-    TG4RunActionMessenger(TG4RunAction* runAction);
-    virtual ~TG4RunActionMessenger();
-   
-    // methods 
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
-    
-  private:
-    /// Not implemented
-    TG4RunActionMessenger();
-    /// Not implemented
-    TG4RunActionMessenger(const TG4RunActionMessenger& right);
-    /// Not implemented
-    TG4RunActionMessenger& operator=(const TG4RunActionMessenger& right);
+ public:
+  TG4RunActionMessenger(TG4RunAction* runAction);
+  virtual ~TG4RunActionMessenger();
 
-    // data members
-    TG4RunAction*        fRunAction;    ///< associated class
-    G4UIdirectory*       fRunDirectory; ///< command directory
-    G4UIcmdWithABool*    fSaveRandomStatusCmd; ///< command: saveRandom
-    G4UIcmdWithABool*    fReadRandomStatusCmd; ///< command: readRandom
-    G4UIcmdWithAString*  fRandomStatusFileCmd; ///< command: setRandomFile
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
+
+ private:
+  /// Not implemented
+  TG4RunActionMessenger();
+  /// Not implemented
+  TG4RunActionMessenger(const TG4RunActionMessenger& right);
+  /// Not implemented
+  TG4RunActionMessenger& operator=(const TG4RunActionMessenger& right);
+
+  // data members
+  TG4RunAction* fRunAction;                 ///< associated class
+  G4UIdirectory* fRunDirectory;             ///< command directory
+  G4UIcmdWithABool* fSaveRandomStatusCmd;   ///< command: saveRandom
+  G4UIcmdWithABool* fReadRandomStatusCmd;   ///< command: readRandom
+  G4UIcmdWithAString* fRandomStatusFileCmd; ///< command: setRandomFile
 };
 
-#endif //TG4_RUN_ACTION_MESSENGER_H
+#endif // TG4_RUN_ACTION_MESSENGER_H
 #ifndef TG4_RUN_ACTION_MESSENGER_H
-#define TG4_RUN_ACTION_MESSENGER_H 
+#define TG4_RUN_ACTION_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -72,7 +72,7 @@ class TG4RunActionMessenger: public G4UImessenger
 //-------------------------------------------------
 
 /// \file TG4RunActionMessenger.h
-/// \brief Definition of the TG4RunActionMessenger class 
+/// \brief Definition of the TG4RunActionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -94,29 +94,29 @@ class G4UIcmdWithABool;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4RunActionMessenger: public G4UImessenger
+class TG4RunActionMessenger : public G4UImessenger
 {
-  public:
-    TG4RunActionMessenger(TG4RunAction* runAction);
-    virtual ~TG4RunActionMessenger();
-   
-    // methods 
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
-    
-  private:
-    /// Not implemented
-    TG4RunActionMessenger();
-    /// Not implemented
-    TG4RunActionMessenger(const TG4RunActionMessenger& right);
-    /// Not implemented
-    TG4RunActionMessenger& operator=(const TG4RunActionMessenger& right);
+ public:
+  TG4RunActionMessenger(TG4RunAction* runAction);
+  virtual ~TG4RunActionMessenger();
 
-    // data members
-    TG4RunAction*        fRunAction;    ///< associated class
-    G4UIdirectory*       fRunDirectory; ///< command directory
-    G4UIcmdWithABool*    fSaveRandomStatusCmd; ///< command: saveRandom
-    G4UIcmdWithABool*    fReadRandomStatusCmd; ///< command: readRandom
-    G4UIcmdWithAString*  fRandomStatusFileCmd; ///< command: setRandomFile
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
+
+ private:
+  /// Not implemented
+  TG4RunActionMessenger();
+  /// Not implemented
+  TG4RunActionMessenger(const TG4RunActionMessenger& right);
+  /// Not implemented
+  TG4RunActionMessenger& operator=(const TG4RunActionMessenger& right);
+
+  // data members
+  TG4RunAction* fRunAction;                 ///< associated class
+  G4UIdirectory* fRunDirectory;             ///< command directory
+  G4UIcmdWithABool* fSaveRandomStatusCmd;   ///< command: saveRandom
+  G4UIcmdWithABool* fReadRandomStatusCmd;   ///< command: readRandom
+  G4UIcmdWithAString* fRandomStatusFileCmd; ///< command: setRandomFile
 };
 
-#endif //TG4_RUN_ACTION_MESSENGER_H
+#endif // TG4_RUN_ACTION_MESSENGER_H

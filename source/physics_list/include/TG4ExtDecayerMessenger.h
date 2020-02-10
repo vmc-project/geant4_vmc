@@ -1,5 +1,5 @@
 #ifndef TG4_EXT_DECAYR_MESSENGER_H
-#define TG4_EXT_DECAYR_MESSENGER_H 
+#define TG4_EXT_DECAYR_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4ExtDecayerMessenger.h
-/// \brief Definition of the TG4ExtDecayerMessenger class 
+/// \brief Definition of the TG4ExtDecayerMessenger class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -33,34 +33,34 @@ class G4UIcmdWithABool;
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4ExtDecayerMessenger: public G4UImessenger
+class TG4ExtDecayerMessenger : public G4UImessenger
 {
-  public:
-    TG4ExtDecayerMessenger(TG4ExtDecayerPhysics* extDecayerPhysics); 
-    virtual ~TG4ExtDecayerMessenger();
-   
-    // methods 
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
-    
-  private:
-    /// Not implemented
-    TG4ExtDecayerMessenger();  
-    /// Not implemented
-    TG4ExtDecayerMessenger(const TG4ExtDecayerMessenger& right);
-    /// Not implemented
-    TG4ExtDecayerMessenger& operator=(const TG4ExtDecayerMessenger& right);
+ public:
+  TG4ExtDecayerMessenger(TG4ExtDecayerPhysics* extDecayerPhysics);
+  virtual ~TG4ExtDecayerMessenger();
 
-    //
-    // data members
-    
-    /// associated class
-    TG4ExtDecayerPhysics* fExtDecayerPhysics;
-    
-    /// setExtDecayerSelection command
-    G4UIcmdWithAString*  fSetSelectionCmd;
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-    /// skipExtDecayerNeutrino command
-    G4UIcmdWithABool*  fSkipNeutrinoCmd;
-};    
+ private:
+  /// Not implemented
+  TG4ExtDecayerMessenger();
+  /// Not implemented
+  TG4ExtDecayerMessenger(const TG4ExtDecayerMessenger& right);
+  /// Not implemented
+  TG4ExtDecayerMessenger& operator=(const TG4ExtDecayerMessenger& right);
 
-#endif //TG4_EXT_DECAYER_MESSENGER_H
+  //
+  // data members
+
+  /// associated class
+  TG4ExtDecayerPhysics* fExtDecayerPhysics;
+
+  /// setExtDecayerSelection command
+  G4UIcmdWithAString* fSetSelectionCmd;
+
+  /// skipExtDecayerNeutrino command
+  G4UIcmdWithABool* fSkipNeutrinoCmd;
+};
+
+#endif // TG4_EXT_DECAYER_MESSENGER_H

@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file ExGarfield/geant4/include/FastSimulation.h 
-/// \brief Definition of the ExGarfield::FastSimulation class 
+/// \file ExGarfield/geant4/include/FastSimulation.h
+/// \brief Definition of the ExGarfield::FastSimulation class
 ///
 /// ExGarfield garfieldpp example adapted to Virtual Monte Carlo.
 ///
@@ -34,19 +34,18 @@ namespace ExGarfield
 
 class FastSimulation : public TG4VUserFastSimulation
 {
-  public:
-    FastSimulation();
-    virtual ~FastSimulation();
+ public:
+  FastSimulation();
+  virtual ~FastSimulation();
 
-    // methods
-    virtual void Construct();
+  // methods
+  virtual void Construct();
 
-  private:
-  	GarfieldMessenger* fMessenger;
+ private:
+  GarfieldMessenger* fMessenger;
 };
 
-}
-}
+} // namespace ExGarfield
+} // namespace VMC
 
-#endif //GFLASH_FAST_SIMULATION_H
-
+#endif // GFLASH_FAST_SIMULATION_H

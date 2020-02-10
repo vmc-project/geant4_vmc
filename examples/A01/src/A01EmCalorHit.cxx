@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file A01EmCalorHit.cxx 
-/// \brief Implementation of the A01EmCalorHit class 
+/// \file A01EmCalorHit.cxx
+/// \brief Implementation of the A01EmCalorHit class
 ///
 /// Geant4 example A01 adapted to Virtual Monte Carlo \n
 ///
@@ -23,53 +23,44 @@ using namespace std;
 
 /// \cond CLASSIMP
 ClassImp(A01EmCalorHit)
-/// \endcond
+  /// \endcond
 
-//_____________________________________________________________________________
-A01EmCalorHit::A01EmCalorHit(Int_t z) 
-  : TObject(),
-    fCellID(z),
-    fVolID(-1),
-    fEdep(0.),
-    fTransformation()
+  //_____________________________________________________________________________
+  A01EmCalorHit::A01EmCalorHit(Int_t z)
+  : TObject(), fCellID(z), fVolID(-1), fEdep(0.), fTransformation()
 {
-/// Standard constructor
-/// \param z   The cell ID
+  /// Standard constructor
+  /// \param z   The cell ID
 }
 
 //_____________________________________________________________________________
-A01EmCalorHit::A01EmCalorHit() 
-  : TObject(),
-    fCellID(-1),
-    fVolID(-1),
-    fEdep(0.),
-    fTransformation()
+A01EmCalorHit::A01EmCalorHit()
+  : TObject(), fCellID(-1), fVolID(-1), fEdep(0.), fTransformation()
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
-A01EmCalorHit::~A01EmCalorHit() 
+A01EmCalorHit::~A01EmCalorHit()
 {
-/// Destructor
+  /// Destructor
 }
 
 //_____________________________________________________________________________
 void A01EmCalorHit::Print(Option_t* /*option*/) const
 {
-/// Print hit info
+  /// Print hit info
 
-  cout << "  Cell[" << fCellID << "] " << fEdep*1.0e03 << " (MeV)" << endl;
+  cout << "  Cell[" << fCellID << "] " << fEdep * 1.0e03 << " (MeV)" << endl;
 }
 
 //_____________________________________________________________________________
 void A01EmCalorHit::Reset()
 {
-/// Reset all accounted values.
+  /// Reset all accounted values.
 
   fCellID = -1;
   fVolID = -1;
   fEdep = 0.;
   fTransformation = TGeoHMatrix();
 }
-

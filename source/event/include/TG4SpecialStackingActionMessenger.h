@@ -1,5 +1,5 @@
 #ifndef TG4_SPECIAL_STACKING_ACTION_MESSENGER_H
-#define TG4_SPECIAL_STACKING_ACTION_MESSENGER_H 
+#define TG4_SPECIAL_STACKING_ACTION_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4SpecialStackingActionMessenger.h
-/// \brief Definition of the TG4SpecialStackingActionMessenger class 
+/// \brief Definition of the TG4SpecialStackingActionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -33,29 +33,29 @@ class G4UIcmdWithABool;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4SpecialStackingActionMessenger: public G4UImessenger
+class TG4SpecialStackingActionMessenger : public G4UImessenger
 {
-  public:
-    TG4SpecialStackingActionMessenger(TG4SpecialStackingAction* stackingAction);
-    virtual ~TG4SpecialStackingActionMessenger();
-   
-    // methods 
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
-    
-  private:
-    /// Not implemented
-    TG4SpecialStackingActionMessenger();
-    /// Not implemented
-    TG4SpecialStackingActionMessenger(
-                               const TG4SpecialStackingActionMessenger& right);
-    /// Not implemented
-    TG4SpecialStackingActionMessenger& operator=(
-                               const TG4SpecialStackingActionMessenger& right);
+ public:
+  TG4SpecialStackingActionMessenger(TG4SpecialStackingAction* stackingAction);
+  virtual ~TG4SpecialStackingActionMessenger();
 
-    // data members
-    TG4SpecialStackingAction*  fStackingAction;  ///< associated class  
-    G4UIcmdWithABool*          fSkipNeutrinoCmd; ///< command: skipNeutrino
-    G4UIcmdWithABool*          fWaitPrimaryCmd;  ///< command: waitPrimary
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
+
+ private:
+  /// Not implemented
+  TG4SpecialStackingActionMessenger();
+  /// Not implemented
+  TG4SpecialStackingActionMessenger(
+    const TG4SpecialStackingActionMessenger& right);
+  /// Not implemented
+  TG4SpecialStackingActionMessenger& operator=(
+    const TG4SpecialStackingActionMessenger& right);
+
+  // data members
+  TG4SpecialStackingAction* fStackingAction; ///< associated class
+  G4UIcmdWithABool* fSkipNeutrinoCmd;        ///< command: skipNeutrino
+  G4UIcmdWithABool* fWaitPrimaryCmd;         ///< command: waitPrimary
 };
 
-#endif //TG4_SPECIAL_STACKING_ACTION_MESSENGER_H
+#endif // TG4_SPECIAL_STACKING_ACTION_MESSENGER_H

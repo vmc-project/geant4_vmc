@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4DetConstructionMessenger.h
-/// \brief Definition of the TG4DetConstructionMessenger class 
+/// \brief Definition of the TG4DetConstructionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -37,8 +37,8 @@ class G4UIcmdWithADoubleAndUnit;
 /// - /mcDet/setIsLocalMagField true|false
 /// - /mcDet/setIsZeroMagField true|false
 /// - /mcDet/volNameSeparator [char]  - for geomVMCtoGeant4 only
-/// - /mcDet/printMaterials 
-/// - /mcDet/printMaterialsProperties 
+/// - /mcDet/printMaterials
+/// - /mcDet/printMaterialsProperties
 /// - /mcDet/printMedia
 /// - /mcDet/printVolumes
 /// - /mcDet/printCuts cutName
@@ -52,104 +52,104 @@ class G4UIcmdWithADoubleAndUnit;
 /// - /mcDet/setRadiatorStrawTube gasMaterialName wallThickness gassThickness
 ///
 /// The following command is deprecated, it will be removed in the next version
-/// - /mcDet/setRadiator volumeName xtrModel foilMaterial gasMaterial foilDensity gasDensity foilNUmber
+/// - /mcDet/setRadiator volumeName xtrModel foilMaterial gasMaterial
+/// foilDensity gasDensity foilNUmber
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4DetConstructionMessenger: public G4UImessenger
+class TG4DetConstructionMessenger : public G4UImessenger
 {
-  public:
-    TG4DetConstructionMessenger(TG4GeometryManager* geometryManager);
-    virtual ~TG4DetConstructionMessenger();
+ public:
+  TG4DetConstructionMessenger(TG4GeometryManager* geometryManager);
+  virtual ~TG4DetConstructionMessenger();
 
-    // methods
-    virtual void SetNewValue(G4UIcommand* command, G4String newValues);
-    
-  private:
-    /// Not implemented
-    TG4DetConstructionMessenger();
-    /// Not implemented
-    TG4DetConstructionMessenger(const TG4DetConstructionMessenger& right);
-    /// Not implemented
-    TG4DetConstructionMessenger& operator=(
-                                const TG4DetConstructionMessenger &right);
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String newValues);
 
-    // methods
-    void CreateSetNewRadiatorCmd();
-    void CreateSetRadiatorLayerCmd();
-    void CreateSetRadiatorStrawTubeCmd();
-    /// The following command is deprecated, will be removed in the next version
-    void CreateSetRadiatorCmd();
+ private:
+  /// Not implemented
+  TG4DetConstructionMessenger();
+  /// Not implemented
+  TG4DetConstructionMessenger(const TG4DetConstructionMessenger& right);
+  /// Not implemented
+  TG4DetConstructionMessenger& operator=(
+    const TG4DetConstructionMessenger& right);
 
-    // data members
-    TG4GeometryManager*  fGeometryManager; ///< associated class
-    G4UIdirectory*       fDirectory;       ///< command directory
-    
-    //
-    // commands data members
-    
-    /// command: updateMagField     
-    G4UIcmdWithoutParameter*    fUpdateFieldCmd;
-    
-    /// command: createMagFieldParameters
-    G4UIcmdWithAString*         fCreateFieldParametersCmd;
+  // methods
+  void CreateSetNewRadiatorCmd();
+  void CreateSetRadiatorLayerCmd();
+  void CreateSetRadiatorStrawTubeCmd();
+  /// The following command is deprecated, will be removed in the next version
+  void CreateSetRadiatorCmd();
 
-    /// command: setIsLocalMagField
-    G4UIcmdWithABool*           fIsLocalFieldCmd;
+  // data members
+  TG4GeometryManager* fGeometryManager; ///< associated class
+  G4UIdirectory* fDirectory;            ///< command directory
 
-    /// command: setIsZeroMagField
-    G4UIcmdWithABool*           fIsZeroFieldCmd;
+  //
+  // commands data members
 
-    /// command: volumeNameSeparator
-    G4UIcmdWithAString*         fSeparatorCmd;
-    
-    /// command: printMatrials     
-    G4UIcmdWithoutParameter*    fPrintMaterialsCmd;
-    
-    /// command: printMaterialsProperties     
-    G4UIcmdWithoutParameter*    fPrintMaterialsPropertiesCmd;
-    
-    /// command: printMedia     
-    G4UIcmdWithoutParameter*    fPrintMediaCmd;
-    
-    /// command: printVolumes  
-    G4UIcmdWithoutParameter*    fPrintVolumesCmd;  
+  /// command: updateMagField
+  G4UIcmdWithoutParameter* fUpdateFieldCmd;
 
-    /// command: printCuts  
-    G4UIcmdWithAString*         fPrintCutsCmd;  
+  /// command: createMagFieldParameters
+  G4UIcmdWithAString* fCreateFieldParametersCmd;
 
-    /// command: printControls  
-    G4UIcmdWithAString*         fPrintControlsCmd;  
-    
-    /// command: setIsUserMaxStep
-    G4UIcmdWithABool*           fIsUserMaxStepCmd;
-    
-    /// command: setIsMaxStepInLowDensityMaterials
-    G4UIcmdWithABool*           fIsMaxStepInLowDensityMaterialsCmd;
-    
-    /// command: setLimitDensity
-    G4UIcmdWithADoubleAndUnit*  fSetLimitDensityCmd;
+  /// command: setIsLocalMagField
+  G4UIcmdWithABool* fIsLocalFieldCmd;
 
-    /// command: setMaxStepInLowDensityMaterials
-    G4UIcmdWithADoubleAndUnit*  fSetMaxStepInLowDensityMaterialsCmd;
+  /// command: setIsZeroMagField
+  G4UIcmdWithABool* fIsZeroFieldCmd;
 
-    /// command: setNewRadiator
-    G4UIcommand*                fSetNewRadiatorCmd;
+  /// command: volumeNameSeparator
+  G4UIcmdWithAString* fSeparatorCmd;
 
-    /// command: setRadiatorLayer
-    G4UIcommand*                fSetRadiatorLayerCmd;
+  /// command: printMatrials
+  G4UIcmdWithoutParameter* fPrintMaterialsCmd;
 
-    /// command: setRadiatorStrawTube
-    G4UIcommand*                fSetRadiatorStrawTubeCmd;
+  /// command: printMaterialsProperties
+  G4UIcmdWithoutParameter* fPrintMaterialsPropertiesCmd;
 
-    /// command: setRadiator
-    /// This command is now deprecated, will be removed in the next version.
-    /// It is replaced with a simpler setNewRadiator command.
-    G4UIcommand*                fSetRadiatorCmd;
+  /// command: printMedia
+  G4UIcmdWithoutParameter* fPrintMediaCmd;
 
-    /// current radiator description
-    TG4RadiatorDescription*     fRadiatorDescription;
+  /// command: printVolumes
+  G4UIcmdWithoutParameter* fPrintVolumesCmd;
+
+  /// command: printCuts
+  G4UIcmdWithAString* fPrintCutsCmd;
+
+  /// command: printControls
+  G4UIcmdWithAString* fPrintControlsCmd;
+
+  /// command: setIsUserMaxStep
+  G4UIcmdWithABool* fIsUserMaxStepCmd;
+
+  /// command: setIsMaxStepInLowDensityMaterials
+  G4UIcmdWithABool* fIsMaxStepInLowDensityMaterialsCmd;
+
+  /// command: setLimitDensity
+  G4UIcmdWithADoubleAndUnit* fSetLimitDensityCmd;
+
+  /// command: setMaxStepInLowDensityMaterials
+  G4UIcmdWithADoubleAndUnit* fSetMaxStepInLowDensityMaterialsCmd;
+
+  /// command: setNewRadiator
+  G4UIcommand* fSetNewRadiatorCmd;
+
+  /// command: setRadiatorLayer
+  G4UIcommand* fSetRadiatorLayerCmd;
+
+  /// command: setRadiatorStrawTube
+  G4UIcommand* fSetRadiatorStrawTubeCmd;
+
+  /// command: setRadiator
+  /// This command is now deprecated, will be removed in the next version.
+  /// It is replaced with a simpler setNewRadiator command.
+  G4UIcommand* fSetRadiatorCmd;
+
+  /// current radiator description
+  TG4RadiatorDescription* fRadiatorDescription;
 };
 
-#endif //TG4_DET_CONSTRUCTION_MESSENGER_H
-
+#endif // TG4_DET_CONSTRUCTION_MESSENGER_H

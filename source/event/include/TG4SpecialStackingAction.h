@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4SpecialStackingAction.h
-/// \brief Definition of the TG4SpecialStackingAction class 
+/// \brief Definition of the TG4SpecialStackingAction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -24,10 +24,10 @@ class G4Track;
 class G4TrackStack;
 
 /// \ingroup event
-/// \brief Defines a special stacking mechanism 
-/// 
+/// \brief Defines a special stacking mechanism
+///
 /// Class that defines a special stacking mechanism,
-/// with which all secondaries produced by a primary particle 
+/// with which all secondaries produced by a primary particle
 /// and its daughters are tracked before starting a new primary
 /// (activated by default).
 /// The class is also used for skipping neutrina
@@ -37,59 +37,67 @@ class G4TrackStack;
 
 #include "TG4SpecialStackingActionMessenger.h"
 
-class TG4SpecialStackingAction : public G4UserStackingAction,
-                                 public TG4Verbose
+class TG4SpecialStackingAction : public G4UserStackingAction, public TG4Verbose
 {
-  public:
-    TG4SpecialStackingAction();
-    virtual ~TG4SpecialStackingAction();
+ public:
+  TG4SpecialStackingAction();
+  virtual ~TG4SpecialStackingAction();
 
-    // methods
-    G4ClassificationOfNewTrack ClassifyNewTrack(const G4Track* track);
-    void NewStage();
-    void PrepareNewEvent();
-    
-    // set method
-    void SetSkipNeutrino(G4bool value);
-    void SetWaitPrimary(G4bool value);
-    
-    // get method
-    G4bool GetSkipNeutrino() const;
-    G4bool GetWaitPrimary() const;
+  // methods
+  G4ClassificationOfNewTrack ClassifyNewTrack(const G4Track* track);
+  void NewStage();
+  void PrepareNewEvent();
 
-  private:
-    /// Not implemented
-    TG4SpecialStackingAction(const TG4SpecialStackingAction& right);
-    /// Not implemented
-    TG4SpecialStackingAction& operator=(const TG4SpecialStackingAction& right);
+  // set method
+  void SetSkipNeutrino(G4bool value);
+  void SetWaitPrimary(G4bool value);
 
-    // data members
-    TG4SpecialStackingActionMessenger  fMessenger; ///< messenger
-    /// Stage number
-    G4int   fStage;
-    /// Option to skip tracking of all neutrina  
-    G4bool  fSkipNeutrino;
-    /// Option to let the next primary wait until all secondaries of previous primary are tracked
-    G4bool  fWaitPrimary; 
+  // get method
+  G4bool GetSkipNeutrino() const;
+  G4bool GetWaitPrimary() const;
+
+ private:
+  /// Not implemented
+  TG4SpecialStackingAction(const TG4SpecialStackingAction& right);
+  /// Not implemented
+  TG4SpecialStackingAction& operator=(const TG4SpecialStackingAction& right);
+
+  // data members
+  TG4SpecialStackingActionMessenger fMessenger; ///< messenger
+  /// Stage number
+  G4int fStage;
+  /// Option to skip tracking of all neutrina
+  G4bool fSkipNeutrino;
+  /// Option to let the next primary wait until all secondaries of previous
+  /// primary are tracked
+  G4bool fWaitPrimary;
 };
 
 // inline functions
 
 /// Set the option for skipping neutrino
 inline void TG4SpecialStackingAction::SetSkipNeutrino(G4bool value)
-{ fSkipNeutrino = value; }
-    
-/// Set the option to let the next primary wait until all secondaries of previous primary are tracked
+{
+  fSkipNeutrino = value;
+}
+
+/// Set the option to let the next primary wait until all secondaries of
+/// previous primary are tracked
 inline void TG4SpecialStackingAction::SetWaitPrimary(G4bool value)
-{ fWaitPrimary = value; }
-    
+{
+  fWaitPrimary = value;
+}
+
 /// Return the option for skipping neutrino
 inline G4bool TG4SpecialStackingAction::GetSkipNeutrino() const
-{ return fSkipNeutrino; }
+{
+  return fSkipNeutrino;
+}
 
 /// Return the option for skipping neutrino
 inline G4bool TG4SpecialStackingAction::GetWaitPrimary() const
-{ return fWaitPrimary; }
+{
+  return fWaitPrimary;
+}
 
-#endif //TG4_STACKING_ACTION_H
-
+#endif // TG4_STACKING_ACTION_H

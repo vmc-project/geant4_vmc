@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4SDManager.h
-/// \brief Definition of the TG4SDManager class 
+/// \brief Definition of the TG4SDManager class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -25,72 +25,75 @@ class TG4SDConstruction;
 class TVirtualMCSensitiveDetector;
 
 /// \ingroup digits_hits
-/// \brief Geant4 implementation of the TVirtualMC interface methods                    
+/// \brief Geant4 implementation of the TVirtualMC interface methods
 /// for access to Geant4 geometry related with sensitive detectors.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
 class TG4SDManager
 {
-  public:
-    TG4SDManager();
-    virtual ~TG4SDManager();
+ public:
+  TG4SDManager();
+  virtual ~TG4SDManager();
 
-    // static methods
-    static TG4SDManager* Instance();
+  // static methods
+  static TG4SDManager* Instance();
 
-    // methods
-    void Initialize();
-    
-    // TVirtualMC methods
-    Int_t VolId(const Text_t* volName) const;                
-    const char* VolName(Int_t id) const;
-    Int_t NofVolumes() const; 
-    Int_t NofVolDaughters(const char* volName) const;
-    const char*  VolDaughterName(const char* volName, Int_t i) const;
-    Int_t        VolDaughterCopyNo(const char* volName, Int_t i) const;
-    Int_t VolId2Mate(Int_t volumeId) const;
+  // methods
+  void Initialize();
 
-    void SetSensitiveDetector(const TString& volName, TVirtualMCSensitiveDetector* sd);
-    TVirtualMCSensitiveDetector* GetSensitiveDetector(const TString& volName) const;
-    void SetExclusiveSDScoring(Bool_t exclusiveSDScoring);
+  // TVirtualMC methods
+  Int_t VolId(const Text_t* volName) const;
+  const char* VolName(Int_t id) const;
+  Int_t NofVolumes() const;
+  Int_t NofVolDaughters(const char* volName) const;
+  const char* VolDaughterName(const char* volName, Int_t i) const;
+  Int_t VolDaughterCopyNo(const char* volName, Int_t i) const;
+  Int_t VolId2Mate(Int_t volumeId) const;
 
-    // get methods
-    TG4SDConstruction* GetSDConstruction() const;
+  void SetSensitiveDetector(
+    const TString& volName, TVirtualMCSensitiveDetector* sd);
+  TVirtualMCSensitiveDetector* GetSensitiveDetector(
+    const TString& volName) const;
+  void SetExclusiveSDScoring(Bool_t exclusiveSDScoring);
 
-  private:
-    /// Not implemented
-    TG4SDManager(const TG4SDManager& right);
-    /// Not implemented
-    TG4SDManager& operator=(const TG4SDManager& right);
+  // get methods
+  TG4SDConstruction* GetSDConstruction() const;
 
-    // static data members
-    static TG4SDManager* fgInstance; ///< this instance
-    
-    //
-    // data members
-    
-    /// sensitive detectors construction 
-    TG4SDConstruction*  fSDConstruction;
-    
-    /// services related with sensitive detectors    
-    TG4SDServices*      fSDServices;
+ private:
+  /// Not implemented
+  TG4SDManager(const TG4SDManager& right);
+  /// Not implemented
+  TG4SDManager& operator=(const TG4SDManager& right);
 
-    /// buffer for volume name
-    mutable G4String    fNameBuffer;
+  // static data members
+  static TG4SDManager* fgInstance; ///< this instance
+
+  //
+  // data members
+
+  /// sensitive detectors construction
+  TG4SDConstruction* fSDConstruction;
+
+  /// services related with sensitive detectors
+  TG4SDServices* fSDServices;
+
+  /// buffer for volume name
+  mutable G4String fNameBuffer;
 };
 
 // inline methods
 
-inline TG4SDManager* TG4SDManager::Instance() { 
+inline TG4SDManager* TG4SDManager::Instance()
+{
   /// Return this instance
-  return fgInstance; 
+  return fgInstance;
 }
 
-inline TG4SDConstruction* TG4SDManager::GetSDConstruction() const { 
+inline TG4SDConstruction* TG4SDManager::GetSDConstruction() const
+{
   /// Return sensitive detctor construction
-  return fSDConstruction; 
+  return fSDConstruction;
 }
 
-#endif //TG4_SD_MANAGER_H
-
+#endif // TG4_SD_MANAGER_H

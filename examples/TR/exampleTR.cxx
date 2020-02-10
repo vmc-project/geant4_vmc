@@ -25,47 +25,45 @@
 #include "TGeant3TGeo.h"
 #endif
 
-#include "TThread.h"
 #include "TInterpreter.h"
+#include "TThread.h"
 
 /// Application main program
 int main(int argc, char** argv)
 {
   // Initialize Root threading.
-  // (Multi-threading is triggered automatically if Geant4 was built 
+  // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
-   TThread::Initialize();
-   gInterpreter->SetProcessLineLock(false);
+  TThread::Initialize();
+  gInterpreter->SetProcessLineLock(false);
 #endif
 
   // Create MC application (thread local)
-  VMC::TR::MCApplication* appl
-    =  new VMC::TR::MCApplication("ExampleTR",
-                                  "The exampleTR MC application");
+  VMC::TR::MCApplication* appl =
+    new VMC::TR::MCApplication("ExampleTR", "The exampleTR MC application");
   appl->GetPrimaryGenerator()->SetNofPrimaries(1);
   appl->SetPrintModulo(10000);
 
 #ifdef USE_GEANT4
-  // RunConfiguration for Geant4 
-  TG4RunConfiguration* runConfiguration 
-    = new TG4RunConfiguration("geomRootToGeant4", "emStandard", "", false, false);
+  // RunConfiguration for Geant4
+  TG4RunConfiguration* runConfiguration =
+    new TG4RunConfiguration("geomRootToGeant4", "emStandard", "", false, false);
 
   // TGeant4
-  TGeant4* geant4
-    = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration,
-                  argc, argv);
+  TGeant4* geant4 = new TGeant4(
+    "TGeant4", "The Geant4 Monte Carlo", runConfiguration, argc, argv);
 
   // Customise Geant4 setting
   // (verbose level, global range cut, ..)
   geant4->ProcessGeantMacro("g4config.in");
 #endif
-  
+
 #ifdef USE_GEANT3
   new TGeant3TGeo("C++ Interface to Geant3");
-  gMC->SetProcess("DRAY",1);
-  gMC->SetProcess("LOSS",1);
-  gMC->SetProcess("HADR",0);
+  gMC->SetProcess("DRAY", 1);
+  gMC->SetProcess("LOSS", 1);
+  gMC->SetProcess("HADR", 0);
 #endif
 
   // Run example
@@ -82,4 +80,4 @@ int main(int argc, char** argv)
   appl->RunMC(5000);
 
   delete appl;
-}  
+}

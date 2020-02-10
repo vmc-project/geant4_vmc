@@ -1,5 +1,5 @@
 #ifndef TG4_COMPOSED_PHYSICS_MESSENGER_H
-#define TG4_COMPOSED_PHYSICS_MESSENGER_H 
+#define TG4_COMPOSED_PHYSICS_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file TG4ComposedPhysicsMessenger.h 
-/// \brief Definition of the TG4ComposedPhysicsMessenger class 
+/// \file TG4ComposedPhysicsMessenger.h
+/// \brief Definition of the TG4ComposedPhysicsMessenger class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -28,7 +28,7 @@ class G4UIcmdWithAString;
 class G4UIcmdWithAnInteger;
 
 /// \ingroup physics_list
-/// \brief Messenger class that defines commands for Geant4 VMC composed 
+/// \brief Messenger class that defines commands for Geant4 VMC composed
 ///        physics list and related classes
 ///
 /// Implements commands:
@@ -51,80 +51,81 @@ class G4UIcmdWithAnInteger;
 
 class TG4ComposedPhysicsMessenger : public G4UImessenger
 {
-  public:
-    TG4ComposedPhysicsMessenger(TG4ComposedPhysicsList* physicsList); 
-    virtual ~TG4ComposedPhysicsMessenger();
-   
-    // methods 
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
-    
-  private:
-    /// Not implemented
-    TG4ComposedPhysicsMessenger();  
-    /// Not implemented
-    TG4ComposedPhysicsMessenger(const TG4ComposedPhysicsMessenger& right);
-    /// Not implemented
-    TG4ComposedPhysicsMessenger& operator=(const TG4ComposedPhysicsMessenger& right);
+ public:
+  TG4ComposedPhysicsMessenger(TG4ComposedPhysicsList* physicsList);
+  virtual ~TG4ComposedPhysicsMessenger();
 
-    // methods
-    void CreateProductionCutsTableEnergyRangeCmd();
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-    //
-    // data members
-    
-    /// associated class
-    TG4ComposedPhysicsList*     fPhysicsList; 
-    
-    /// command directory
-    G4UIdirectory*              fDirectory; 
+ private:
+  /// Not implemented
+  TG4ComposedPhysicsMessenger();
+  /// Not implemented
+  TG4ComposedPhysicsMessenger(const TG4ComposedPhysicsMessenger& right);
+  /// Not implemented
+  TG4ComposedPhysicsMessenger& operator=(
+    const TG4ComposedPhysicsMessenger& right);
 
-    /// rangeCutForGamma command
-    G4UIcmdWithADoubleAndUnit*  fRangeGammaCutCmd;
+  // methods
+  void CreateProductionCutsTableEnergyRangeCmd();
 
-    /// rangeCutForElectron command
-    G4UIcmdWithADoubleAndUnit*  fRangeElectronCutCmd;
+  //
+  // data members
 
-    /// rangeCutForPositron command
-    G4UIcmdWithADoubleAndUnit*  fRangePositronCutCmd;
+  /// associated class
+  TG4ComposedPhysicsList* fPhysicsList;
 
-    /// rangeCutForProton command
-    G4UIcmdWithADoubleAndUnit*  fRangeProtonCutCmd;
+  /// command directory
+  G4UIdirectory* fDirectory;
 
-    /// rangeCuts command
-    G4UIcmdWithADoubleAndUnit*  fRangeAllCutCmd;
+  /// rangeCutForGamma command
+  G4UIcmdWithADoubleAndUnit* fRangeGammaCutCmd;
 
-    /// productionCutsTableEnergyRange command
-    G4UIcommand*                fProductionCutsTableEnergyRangeCmd;
-    
-    /// setGammaToMuonsCrossSectionFactor
-    G4UIcmdWithADouble*  fSetGammaToMuonsCrossSectionFactorCmd;
+  /// rangeCutForElectron command
+  G4UIcmdWithADoubleAndUnit* fRangeElectronCutCmd;
 
-    /// printAllProcess command 
-    G4UIcmdWithoutParameter*    fPrintAllProcessesCmd;
+  /// rangeCutForPositron command
+  G4UIcmdWithADoubleAndUnit* fRangePositronCutCmd;
 
-    /// dumpAllProcess command      
-    G4UIcmdWithoutParameter*    fDumpAllProcessesCmd;
+  /// rangeCutForProton command
+  G4UIcmdWithADoubleAndUnit* fRangeProtonCutCmd;
 
-    /// printProcessMCMap command                   
-    G4UIcmdWithoutParameter*    fPrintProcessMCMapCmd;
+  /// rangeCuts command
+  G4UIcmdWithADoubleAndUnit* fRangeAllCutCmd;
 
-    /// printProcessControlsMap command
-    G4UIcmdWithoutParameter*    fPrintProcessControlMapCmd;
+  /// productionCutsTableEnergyRange command
+  G4UIcommand* fProductionCutsTableEnergyRangeCmd;
 
-    /// printVolumeLimits command
-    G4UIcmdWithAString*         fPrintVolumeLimitsCmd;
+  /// setGammaToMuonsCrossSectionFactor
+  G4UIcmdWithADouble* fSetGammaToMuonsCrossSectionFactorCmd;
 
-    /// printGeneralCuts command
-    G4UIcmdWithoutParameter*    fPrintGlobalCutsCmd;
+  /// printAllProcess command
+  G4UIcmdWithoutParameter* fPrintAllProcessesCmd;
 
-    /// printGeneralControls command
-    G4UIcmdWithoutParameter*    fPrintGlobalControlsCmd;
+  /// dumpAllProcess command
+  G4UIcmdWithoutParameter* fDumpAllProcessesCmd;
 
-    /// g4NeutronHPVerbose command
-    G4UIcmdWithAnInteger*       fG4NeutronHPVerboseCmd;
+  /// printProcessMCMap command
+  G4UIcmdWithoutParameter* fPrintProcessMCMapCmd;
 
-    /// g4HadronicProcessStoreVerbose command
-    G4UIcmdWithAnInteger*       fG4HadronicProcessStoreVerboseCmd;
-};     
+  /// printProcessControlsMap command
+  G4UIcmdWithoutParameter* fPrintProcessControlMapCmd;
 
-#endif //TG4_COMPOSED_PHYSICS_MESSENGER_H
+  /// printVolumeLimits command
+  G4UIcmdWithAString* fPrintVolumeLimitsCmd;
+
+  /// printGeneralCuts command
+  G4UIcmdWithoutParameter* fPrintGlobalCutsCmd;
+
+  /// printGeneralControls command
+  G4UIcmdWithoutParameter* fPrintGlobalControlsCmd;
+
+  /// g4NeutronHPVerbose command
+  G4UIcmdWithAnInteger* fG4NeutronHPVerboseCmd;
+
+  /// g4HadronicProcessStoreVerbose command
+  G4UIcmdWithAnInteger* fG4HadronicProcessStoreVerboseCmd;
+};
+
+#endif // TG4_COMPOSED_PHYSICS_MESSENGER_H

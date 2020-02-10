@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4ExtraPhysicsList.cxx
-/// \brief Implementation of the TG4ExtraPhysicsList class 
+/// \brief Implementation of the TG4ExtraPhysicsList class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -30,41 +30,42 @@
 #include <G4StateManager.hh>
 // This macros change the references to fields that are now encapsulated
 // in the class G4VMPLData.
-#define G4MT_physicsVector ((G4VMPLsubInstanceManager.offset[g4vmplInstanceID]).physicsVector)
+#define G4MT_physicsVector \
+  ((G4VMPLsubInstanceManager.offset[g4vmplInstanceID]).physicsVector)
 
 const G4double TG4ExtraPhysicsList::fgkDefaultCutValue = 1.0 * mm;
 
-namespace {
+namespace
+{
 
 //_____________________________________________________________________________
 void SetParameters(G4MonopolePhysics* monopolePhysics,
-                   const std::map<TString, Double_t>& parameters)
+  const std::map<TString, Double_t>& parameters)
 {
-/// Set special parameters which need to be set before creating TGeant4
-/// Actually used for monopole properties:
-/// monopoleMass, monopoleElCharge, monopoleMagCharge
+  /// Set special parameters which need to be set before creating TGeant4
+  /// Actually used for monopole properties:
+  /// monopoleMass, monopoleElCharge, monopoleMagCharge
 
   std::map<TString, Double_t>::const_iterator it;
-  for ( it = parameters.begin(); it != parameters.end(); it++ ) {
-    if ( it->first == "monopoleMass" ) {
+  for (it = parameters.begin(); it != parameters.end(); it++) {
+    if (it->first == "monopoleMass") {
       monopolePhysics->SetMonopoleMass(it->second * TG4G3Units::Energy());
     }
-    else if ( it->first == "monopoleElCharge"  ) {
+    else if (it->first == "monopoleElCharge") {
       monopolePhysics->SetElectricCharge(it->second * TG4G3Units::Charge());
     }
-    else if ( it->first == "monopoleMagCharge"  ) {
+    else if (it->first == "monopoleMagCharge") {
       monopolePhysics->SetMagneticCharge(it->second * TG4G3Units::Charge());
     }
     else {
       TString text = "Invalid parameter name = ";
       text += it->second;
-      TG4Globals::Warning(
-        "TG4ParticlesManager", "SetParameters", text);
+      TG4Globals::Warning("TG4ParticlesManager", "SetParameters", text);
     }
   }
 }
 
-}
+} // namespace
 
 //
 // static methods
@@ -73,37 +74,36 @@ void SetParameters(G4MonopolePhysics* monopolePhysics,
 //_____________________________________________________________________________
 G4String TG4ExtraPhysicsList::AvailableSelections()
 {
-/// Return list of all available selections
+  /// Return list of all available selections
 
   G4String selections;
   selections += "extra monopole optical radDecay ";
-  
+
   return selections;
-}  
+}
 
 //_____________________________________________________________________________
 G4bool TG4ExtraPhysicsList::IsAvailableSelection(const G4String& selection)
 {
-/// Return list of all available selections
+  /// Return list of all available selections
 
   G4String available = AvailableSelections();
   G4String checkSelection = selection;
   checkSelection += " ";
-  
+
   return available.contains(checkSelection);
-}  
+}
 
 //
 // ctors, dtor
 //
 
 //_____________________________________________________________________________
-TG4ExtraPhysicsList::TG4ExtraPhysicsList(const G4String& selection,
-                                         const std::map<TString, Double_t>& parameters)
-  : G4VModularPhysicsList(),
-    TG4Verbose("extraPhysicsList")
- {
-/// Default constructor
+TG4ExtraPhysicsList::TG4ExtraPhysicsList(
+  const G4String& selection, const std::map<TString, Double_t>& parameters)
+  : G4VModularPhysicsList(), TG4Verbose("extraPhysicsList")
+{
+  /// Default constructor
 
   Configure(selection, parameters);
 
@@ -113,9 +113,9 @@ TG4ExtraPhysicsList::TG4ExtraPhysicsList(const G4String& selection,
 }
 
 //_____________________________________________________________________________
-TG4ExtraPhysicsList::~TG4ExtraPhysicsList() 
+TG4ExtraPhysicsList::~TG4ExtraPhysicsList()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -123,14 +123,14 @@ TG4ExtraPhysicsList::~TG4ExtraPhysicsList()
 //
 
 //_____________________________________________________________________________
-void TG4ExtraPhysicsList::Configure(const G4String& selection,
-                                    const std::map<TString, Double_t>& parameters)
+void TG4ExtraPhysicsList::Configure(
+  const G4String& selection, const std::map<TString, Double_t>& parameters)
 {
-/// Create the selected physics constructors
-/// and registeres them in the modular physics list.
+  /// Create the selected physics constructors
+  /// and registeres them in the modular physics list.
 
   // Extra electromagnetic physics
-  if ( selection.contains("extra") ) {
+  if (selection.contains("extra")) {
     G4EmExtraPhysics* extraPhysics = new G4EmExtraPhysics();
 #if G4VERSION_NUMBER >= 1012
     extraPhysics->Synch(false);
@@ -143,26 +143,26 @@ void TG4ExtraPhysicsList::Configure(const G4String& selection,
     extraPhysics->MuonNuclear(state);
 #endif
     RegisterPhysics(extraPhysics);
-  }  
+  }
 
   // Monopole physics
-  if ( selection.contains("monopole") ) {
+  if (selection.contains("monopole")) {
     G4MonopolePhysics* monopolePhysics = new G4MonopolePhysics();
     SetParameters(monopolePhysics, parameters);
     RegisterPhysics(monopolePhysics);
   }
 
   // Optical physics
-  if ( selection.contains("optical") ) {
+  if (selection.contains("optical")) {
     G4OpticalPhysics* g4OpticalPhysics = new G4OpticalPhysics();
     RegisterPhysics(g4OpticalPhysics);
-  }  
+  }
 
   // Radioactive decay physics
-  if ( selection.contains("radDecay") ) {
+  if (selection.contains("radDecay")) {
     RegisterPhysics(new G4RadioactiveDecayPhysics());
-  }  
-}    
+  }
+}
 
 //
 // public methods
@@ -171,61 +171,63 @@ void TG4ExtraPhysicsList::Configure(const G4String& selection,
 //_____________________________________________________________________________
 void TG4ExtraPhysicsList::ConstructProcess()
 {
-/// Call base class method + add verbose info
+  /// Call base class method + add verbose info
 
   // create processes for registered physics
   // G4VModularPhysicsList::ConstructProcess();
   G4PhysConstVector::iterator itr;
-  for (itr = G4MT_physicsVector->begin(); itr!= G4MT_physicsVector->end(); ++itr) {
+  for (itr = G4MT_physicsVector->begin(); itr != G4MT_physicsVector->end();
+       ++itr) {
     (*itr)->ConstructProcess();
   }
-  
-  if ( VerboseLevel() > 0 ) { 
+
+  if (VerboseLevel() > 0) {
     G4cout << "### Extra physics constructed: ";
     G4PhysConstVector::iterator it;
-    for ( it = G4MT_physicsVector->begin(); it != G4MT_physicsVector->end(); ++it ) {
+    for (it = G4MT_physicsVector->begin(); it != G4MT_physicsVector->end();
+         ++it) {
       G4cout << (*it)->GetPhysicsName() << " ";
     }
     G4cout << G4endl;
-  }    
+  }
 }
 
 //_____________________________________________________________________________
-G4int TG4ExtraPhysicsList::VerboseLevel() const 
+G4int TG4ExtraPhysicsList::VerboseLevel() const
 {
-/// Return verbose level (via TG4VVerbose)
+  /// Return verbose level (via TG4VVerbose)
 
   return TG4VVerbose::VerboseLevel();
 }
 
-
 //_____________________________________________________________________________
-void TG4ExtraPhysicsList::VerboseLevel(G4int level) 
+void TG4ExtraPhysicsList::VerboseLevel(G4int level)
 {
-/// Set the specified level to both TG4Verbose and 
-/// G4VModularPhysicsList.
-/// The verbose level is also propagated to registered physics contructors.
+  /// Set the specified level to both TG4Verbose and
+  /// G4VModularPhysicsList.
+  /// The verbose level is also propagated to registered physics contructors.
 
   TG4VVerbose::VerboseLevel(level);
   SetVerboseLevel(level);
-  
+
   G4PhysConstVector::iterator it;
-  for ( it = G4MT_physicsVector->begin(); it != G4MT_physicsVector->end(); ++it ) {
+  for (it = G4MT_physicsVector->begin(); it != G4MT_physicsVector->end();
+       ++it) {
     TG4Verbose* verbose = dynamic_cast<TG4Verbose*>(*it);
-    if ( verbose )
+    if (verbose)
       verbose->VerboseLevel(level);
     else
-      (*it)->SetVerboseLevel(level);  
+      (*it)->SetVerboseLevel(level);
   }
 }
 
 //_____________________________________________________________________________
 void TG4ExtraPhysicsList::SetRangeCut(G4double value)
 {
-/// Reset the default cut to a given value.                                 \n
-/// !!! Should be used only in PreInit phase,
-/// use SetDefaultCutValue() method of base class to reset
-/// the cut value in later phases.
+  /// Reset the default cut to a given value.                                 \n
+  /// !!! Should be used only in PreInit phase,
+  /// use SetDefaultCutValue() method of base class to reset
+  /// the cut value in later phases.
 
   defaultCutValue = value;
-}  
+}

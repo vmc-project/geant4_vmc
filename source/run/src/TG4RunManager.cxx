@@ -8,43 +8,43 @@
 //-------------------------------------------------
 
 /// \file TG4RunManager.cxx
-/// \brief Implementation of the TG4RunManager class 
+/// \brief Implementation of the TG4RunManager class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4RunManager.h"
-#include "TG4RunConfiguration.h"
-#include "TG4Globals.h"
+#include "TG4ActionInitialization.h"
+#include "TG4DetConstruction.h"
+#include "TG4EventAction.h"
+#include "TG4G3PhysicsManager.h"
 #include "TG4GeometryManager.h"
 #include "TG4GeometryServices.h"
+#include "TG4Globals.h"
+#include "TG4PhysicsManager.h"
+#include "TG4PostDetConstruction.h"
+#include "TG4RegionsManager.h"
+#include "TG4RunConfiguration.h"
+#include "TG4SDConstruction.h"
 #include "TG4SDManager.h"
 #include "TG4SDServices.h"
-#include "TG4PhysicsManager.h"
-#include "TG4G3PhysicsManager.h"
 #include "TG4SpecialPhysicsList.h"
+#include "TG4StackPopper.h"
 #include "TG4StateManager.h"
 #include "TG4StepManager.h"
-#include "TG4ActionInitialization.h"
-#include "TG4WorkerInitialization.h"
-#include "TG4DetConstruction.h"
-#include "TG4PostDetConstruction.h"
-#include "TG4SDConstruction.h"
-#include "TG4EventAction.h"
-#include "TG4TrackingAction.h"
 #include "TG4SteppingAction.h"
-#include "TG4RegionsManager.h"
 #include "TG4TrackManager.h"
-#include "TG4StackPopper.h"
+#include "TG4TrackingAction.h"
+#include "TG4WorkerInitialization.h"
 
-#ifdef G4MULTITHREADED  
+#ifdef G4MULTITHREADED
 #include <G4MTRunManager.hh>
 #else
 #include <G4RunManager.hh>
 #endif
 
-#include <Randomize.hh>
-#include <G4UIsession.hh>
 #include <G4UImanager.hh>
+#include <G4UIsession.hh>
+#include <Randomize.hh>
 #ifdef G4UI_USE
 #include <G4UIExecutive.hh>
 #endif
@@ -53,32 +53,32 @@
 #include <TG4RootNavMgr.h>
 #endif
 
-#include <TROOT.h> 
-#include <TRint.h>
-#include <TInterpreter.h>
 #include <TGeoManager.h>
+#include <TInterpreter.h>
+#include <TROOT.h>
 #include <TRandom.h>
-#include <TVirtualMCApplication.h>
+#include <TRint.h>
 #include <TVirtualMC.h>
+#include <TVirtualMCApplication.h>
 
-namespace {
+namespace
+{
 
 TG4EventAction* GetEventAction()
 {
-  return dynamic_cast<TG4EventAction*> (
-           const_cast<G4UserEventAction*>(
-             G4RunManager::GetRunManager()->GetUserEventAction()));
+  return dynamic_cast<TG4EventAction*>(const_cast<G4UserEventAction*>(
+    G4RunManager::GetRunManager()->GetUserEventAction()));
 }
 
-}
+} // namespace
 
 //_____________________________________________________________________________
 TG4RunManager* TG4RunManager::fgMasterInstance = 0;
 G4ThreadLocal TG4RunManager* TG4RunManager::fgInstance = 0;
 
 //_____________________________________________________________________________
-TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration, 
-                             int argc, char** argv)                  
+TG4RunManager::TG4RunManager(
+  TG4RunConfiguration* runConfiguration, int argc, char** argv)
   : TG4Verbose("runManager"),
     fRunManager(0),
     fMessenger(this),
@@ -88,73 +88,71 @@ TG4RunManager::TG4RunManager(TG4RunConfiguration* runConfiguration,
     fRootUISession(0),
     fRootUIOwner(false),
     fARGC(argc),
-    fARGV(argv),  
+    fARGV(argv),
     fUseRootRandom(true),
     fIsMCStackCached(false),
     fHasEventByEventInitialization(false),
     fNEventsProcessed(0),
     fInProcessRun(false)
 {
-/// Standard constructor
+  /// Standard constructor
 
   if (VerboseLevel() > 1) {
     G4cout << "TG4RunManager::TG4RunManager " << this << G4endl;
   }
 
   if (fgInstance) {
-    TG4Globals::Exception(
-      "TG4RunManager", "TG4RunManager",
+    TG4Globals::Exception("TG4RunManager", "TG4RunManager",
       "Cannot create two instances of singleton.");
   }
-      
+
   if (!fRunConfiguration) {
-    TG4Globals::Exception(
-      "TG4RunManager", "TG4RunManager",
+    TG4Globals::Exception("TG4RunManager", "TG4RunManager",
       "Cannot create instance without runConfiguration.");
   }
-      
-  fgInstance = this; 
+
+  fgInstance = this;
 
   // Define fARGV, fARGC if not provided
-  if ( fARGC == 0 ) {
+  if (fARGC == 0) {
     fARGC = 1;
-    fARGV = (char **)new char*[fARGC];
+    fARGV = (char**)new char*[fARGC];
     fARGV[0] = StrDup("undefined");
   }
 
-  G4bool isMaster = ! G4Threading::IsWorkerThread();
-  
-  if ( isMaster ) {
+  G4bool isMaster = !G4Threading::IsWorkerThread();
+
+  if (isMaster) {
     fgMasterInstance = this;
-    
+
     // create and configure G4 run manager
     ConfigureRunManager();
-  }  
+  }
   else {
-    // Get G4 worker run manager 
+    // Get G4 worker run manager
     fRunManager = G4RunManager::GetRunManager();
-    
+
     // Clone G4Root navigator if needed
     CloneRootNavigatorForWorker();
 
     fRegionsManager = fgMasterInstance->fRegionsManager;
     fRootUISession = fgMasterInstance->fRootUISession;
     fGeantUISession = fgMasterInstance->fGeantUISession;
-  }     
+  }
 
   if (VerboseLevel() > 1) {
     G4cout << "TG4RunManager has been created." << this << G4endl;
-  }  
+  }
 }
 
 //_____________________________________________________________________________
-TG4RunManager::~TG4RunManager() 
+TG4RunManager::~TG4RunManager()
 {
-/// Destructor
+  /// Destructor
 
-  G4bool isMaster = ! G4Threading::IsWorkerThread();
+  G4bool isMaster = !G4Threading::IsWorkerThread();
 
-  if ( isMaster ) {
+  if (isMaster) {
     delete fRunConfiguration;
     delete fRegionsManager;
 #ifdef G4UI_USE
@@ -174,48 +172,47 @@ TG4RunManager::~TG4RunManager()
 //_____________________________________________________________________________
 void TG4RunManager::ConfigureRunManager()
 {
-/// Set the user action classes defined by TG4RunConfiguration to G4RunManager.
+  /// Set the user action classes defined by TG4RunConfiguration to
+  /// G4RunManager.
 
   // Geometry construction and navigator
   //
-  if ( VerboseLevel() > 1 )
+  if (VerboseLevel() > 1)
     G4cout << "TG4RunManager::ConfigureRunManager " << this << G4endl;
 
   TString userGeometry = fRunConfiguration->GetUserGeometry();
-  
-  TG4GeometryManager::Instance()
-    ->SetUserRegionConstruction(
-        fRunConfiguration->CreateUserRegionConstruction());
 
-  TG4GeometryManager::Instance()
-    ->SetUserPostDetConstruction(
-        fRunConfiguration->CreateUserPostDetConstruction());
-    
+  TG4GeometryManager::Instance()->SetUserRegionConstruction(
+    fRunConfiguration->CreateUserRegionConstruction());
+
+  TG4GeometryManager::Instance()->SetUserPostDetConstruction(
+    fRunConfiguration->CreateUserPostDetConstruction());
+
   // Root navigator
 #ifdef USE_G4ROOT
   TG4RootNavMgr* rootNavMgr = 0;
-  if ( userGeometry == "VMCtoRoot" || userGeometry == "Root" ) {
+  if (userGeometry == "VMCtoRoot" || userGeometry == "Root") {
 
     // Construct geometry via VMC application
-    if ( TG4GeometryManager::Instance()->VerboseLevel() > 0 ) 
-      G4cout << "Running TVirtualMCApplication::ConstructGeometry"; 
+    if (TG4GeometryManager::Instance()->VerboseLevel() > 0)
+      G4cout << "Running TVirtualMCApplication::ConstructGeometry";
 
     TG4StateManager::Instance()->SetNewState(kConstructGeometry);
     TVirtualMCApplication::Instance()->ConstructGeometry();
     TG4StateManager::Instance()->SetNewState(kNotInApplication);
-    
+
     // Set top volume and close Root geometry if not yet done
-    if ( ! gGeoManager->IsClosed() ) {
-      TGeoVolume *top = (TGeoVolume*)gGeoManager->GetListOfVolumes()->First();
+    if (!gGeoManager->IsClosed()) {
+      TGeoVolume* top = (TGeoVolume*)gGeoManager->GetListOfVolumes()->First();
       gGeoManager->SetTopVolume(top);
-      gGeoManager->CloseGeometry();  
+      gGeoManager->CloseGeometry();
     }
-      
+
     // Now that we have the ideal geometry, call application misalignment code
     TG4StateManager::Instance()->SetNewState(kMisalignGeometry);
     TVirtualMCApplication::Instance()->MisalignGeometry();
     TG4StateManager::Instance()->SetNewState(kNotInApplication);
-    
+
     // Pass geometry to G4Root navigator
     rootNavMgr = TG4RootNavMgr::GetInstance(gGeoManager);
   }
@@ -223,73 +220,72 @@ void TG4RunManager::ConfigureRunManager()
 
   // G4 run manager
 #ifdef G4MULTITHREADED
-  if (  fRunConfiguration->IsMTApplication() ) {
-     fRunManager = new G4MTRunManager();
-     fRunManager
-       ->SetUserInitialization(new TG4WorkerInitialization());
-   }
-   else {
-     fRunManager =  new G4RunManager();
-   }
+  if (fRunConfiguration->IsMTApplication()) {
+    fRunManager = new G4MTRunManager();
+    fRunManager->SetUserInitialization(new TG4WorkerInitialization());
+  }
+  else {
+    fRunManager = new G4RunManager();
+  }
 #else
-  fRunManager =  new G4RunManager();
+  fRunManager = new G4RunManager();
 #endif
   if (VerboseLevel() > 1) {
     G4cout << "G4RunManager has been created." << G4endl;
   }
 
-  if ( userGeometry != "VMCtoRoot" && userGeometry != "Root" ) {
-    fRunManager
-      ->SetUserInitialization(fRunConfiguration->CreateDetectorConstruction());
-    if ( VerboseLevel() > 1 )
+  if (userGeometry != "VMCtoRoot" && userGeometry != "Root") {
+    fRunManager->SetUserInitialization(
+      fRunConfiguration->CreateDetectorConstruction());
+    if (VerboseLevel() > 1)
       G4cout << "CreateDetectorConstruction done." << G4endl;
-  }    
+  }
   else {
 #ifdef USE_G4ROOT
     G4int nthreads = 1;
 #ifdef G4MULTITHREADED
-    if (  fRunConfiguration->IsMTApplication() ) {
+    if (fRunConfiguration->IsMTApplication()) {
       nthreads = G4MTRunManager::GetMasterRunManager()->GetNumberOfThreads();
     }
 #endif
     rootNavMgr->Initialize(new TG4PostDetConstruction(), nthreads);
-    rootNavMgr->ConnectToG4();  
+    rootNavMgr->ConnectToG4();
 #else
-   TG4Globals::Exception("TG4RunManager", "ConfigureRunManagerTG4MCGeometry",
-     "geomVMCtoRoot and geomRoot options require Geant4 VMC built with G4Root.");
+    TG4Globals::Exception("TG4RunManager", "ConfigureRunManagerTG4MCGeometry",
+      "geomVMCtoRoot and geomRoot options require Geant4 VMC built with "
+      "G4Root.");
 #endif
-  }  
-    
+  }
+
   // Other mandatory classes
-  //  
-  fRunManager
-    ->SetUserInitialization(fRunConfiguration->CreatePhysicsList());
-  if ( VerboseLevel() > 1 )
-    G4cout << "CreatePhysicsList done." << G4endl;
+  //
+  fRunManager->SetUserInitialization(fRunConfiguration->CreatePhysicsList());
+  if (VerboseLevel() > 1) G4cout << "CreatePhysicsList done." << G4endl;
 
   // User fast simulation
-  TG4VUserFastSimulation* userFastSimulation
-    = fRunConfiguration->CreateUserFastSimulation();
-  if ( userFastSimulation ) {
-    if ( TG4SpecialPhysicsList::Instance() ) {
-      TG4SpecialPhysicsList::Instance()->SetUserFastSimulation(userFastSimulation);
-    } else {
-      TG4Globals::Warning(
-        "TG4RunManager", "ConfigureRunManager",
+  TG4VUserFastSimulation* userFastSimulation =
+    fRunConfiguration->CreateUserFastSimulation();
+  if (userFastSimulation) {
+    if (TG4SpecialPhysicsList::Instance()) {
+      TG4SpecialPhysicsList::Instance()->SetUserFastSimulation(
+        userFastSimulation);
+    }
+    else {
+      TG4Globals::Warning("TG4RunManager", "ConfigureRunManager",
         "TG4SpecialPhysicsList  must be instantiated to use fast simulation");
     }
   }
- 
-  fRunManager
-    ->SetUserInitialization(new TG4ActionInitialization(fRunConfiguration));      
-  if ( VerboseLevel() > 1 )
+
+  fRunManager->SetUserInitialization(
+    new TG4ActionInitialization(fRunConfiguration));
+  if (VerboseLevel() > 1)
     G4cout << "Create ActionInitialization done." << G4endl;
-  
+
   // Regions manager
   //
   fRegionsManager = new TG4RegionsManager();
-  
-  if ( VerboseLevel() > 1 )
+
+  if (VerboseLevel() > 1)
     G4cout << "TG4RunManager::ConfigureRunManager done " << this << G4endl;
 }
 
@@ -300,9 +296,9 @@ void TG4RunManager::CloneRootNavigatorForWorker()
   //
 #ifdef USE_G4ROOT
   TString userGeometry = fRunConfiguration->GetUserGeometry();
-  if ( userGeometry != "VMCtoRoot" && userGeometry != "Root" )  return;
+  if (userGeometry != "VMCtoRoot" && userGeometry != "Root") return;
 
-  if ( VerboseLevel() > 1 )
+  if (VerboseLevel() > 1)
     G4cout << "TG4RunManager::CloneRootNavigatorForWorker " << this << G4endl;
 
   // Master Root navigator
@@ -310,27 +306,28 @@ void TG4RunManager::CloneRootNavigatorForWorker()
 
   // Create G4Root navigator on worker
   TG4RootNavMgr* rootNavMgr = TG4RootNavMgr::GetInstance(*masterRootNavMgr);
-  if ( VerboseLevel() > 1 )
+  if (VerboseLevel() > 1)
     G4cout << "TG4RootNavMgr has been created." << rootNavMgr << G4endl;
 
-  //rootNavMgr->Initialize(new TG4PostDetConstruction());
+  // rootNavMgr->Initialize(new TG4PostDetConstruction());
   rootNavMgr->ConnectToG4();
 
-  if ( VerboseLevel() > 1 )
-    G4cout << "TG4RunManager::CloneRootNavigatorForWorker done " << this << G4endl;
+  if (VerboseLevel() > 1)
+    G4cout << "TG4RunManager::CloneRootNavigatorForWorker done " << this
+           << G4endl;
 #endif
 }
 
 //_____________________________________________________________________________
 void TG4RunManager::CreateRootUI()
 {
-/// Get/Create Root interactive session
+  /// Get/Create Root interactive session
 
   // get Root UI session if it exists
   fRootUISession = gROOT->GetApplication();
   if (fRootUISession) {
     fARGC = fRootUISession->Argc();
-    delete [] fARGV;
+    delete[] fARGV;
     fARGV = fRootUISession->Argv();
   }
 
@@ -338,17 +335,17 @@ void TG4RunManager::CreateRootUI()
   FilterARGV("-splash");
 
   // create root UI if it does not exist
-  if ( ! fRootUISession ) {
+  if (!fRootUISession) {
     // copy only first command line argument (name of program)
     // (use the same way as in TApplication.cxx)
     char** argv = 0;
-    if ( fARGC > 0) {
-       argv = (char **)new char*[fARGC];
+    if (fARGC > 0) {
+      argv = (char**)new char*[fARGC];
     }
 
     // copy command line arguments, can be later accessed via Argc() and Argv()
     for (int i = 0; i < fARGC; i++) {
-       argv[i] = StrDup(fARGV[i]);
+      argv[i] = StrDup(fARGV[i]);
     }
 
     fRootUISession = new TRint("rootSession", &fARGC, argv, 0, 0);
@@ -359,30 +356,30 @@ void TG4RunManager::CreateRootUI()
 //_____________________________________________________________________________
 void TG4RunManager::FilterARGV(const G4String& arg)
 {
-/// Filter out the option argument from the arguments list fARGV,
-/// if present.
+  /// Filter out the option argument from the arguments list fARGV,
+  /// if present.
 
   if (fARGC <= 1) return;
 
   G4bool isArg = false;
-  for (G4int i=0; i<fARGC; i++) {
+  for (G4int i = 0; i < fARGC; i++) {
     if (G4String(fARGV[i]) == arg) isArg = true;
-    if (isArg && i+1 < fARGC) fARGV[i] = fARGV[i+1];  
+    if (isArg && i + 1 < fARGC) fARGV[i] = fARGV[i + 1];
   }
 
   if (isArg) fARGC--;
-} 
- 
+}
+
 //_____________________________________________________________________________
 void TG4RunManager::SetRandomSeed()
 {
-/// Pass the random number seed from fRandom to Geant4 random number
-/// generator
+  /// Pass the random number seed from fRandom to Geant4 random number
+  /// generator
 
   long seeds[10];
-  seeds[0] = gRandom->GetSeed();    
-  seeds[1] = gRandom->GetSeed();    
-  seeds[2] = 0;    
+  seeds[0] = gRandom->GetSeed();
+  seeds[1] = gRandom->GetSeed();
+  seeds[2] = 0;
   CLHEP::HepRandom::setTheSeeds(seeds);
 }
 
@@ -391,54 +388,54 @@ void TG4RunManager::SetRandomSeed()
 //_____________________________________________________________________________
 void TG4RunManager::Initialize()
 {
-/// Initialize G4.
+  /// Initialize G4.
 
-  if ( VerboseLevel() > 1 )
+  if (VerboseLevel() > 1)
     G4cout << "TG4RunManager::Initialize " << this << G4endl;
 
   // create G4RunManager
-  //ConfigureRunManager();
+  // ConfigureRunManager();
 
   // initialize Geant4
   fRunManager->Initialize();
 
   // finish geometry
   TG4GeometryManager::Instance()->FinishGeometry();
-  
+
   // initialize SD manager
   // TG4SDManager::Instance()->Initialize();
 
-  if ( VerboseLevel() > 1 )
+  if (VerboseLevel() > 1)
     G4cout << "TG4RunManager::Initialize done " << this << G4endl;
 }
 
 //_____________________________________________________________________________
 void TG4RunManager::LateInitialize()
 {
-/// Finish initialization of G4 after the G4Run initialization
-/// is finished. 
+  /// Finish initialization of G4 after the G4Run initialization
+  /// is finished.
 
-  if ( VerboseLevel() > 1 )
+  if (VerboseLevel() > 1)
     G4cout << "TG4RunManager::LateInitialize " << this << G4endl;
 
-  G4bool isMaster = ! G4Threading::IsWorkerThread();
+  G4bool isMaster = !G4Threading::IsWorkerThread();
 
-  // define particles 
+  // define particles
   TG4PhysicsManager::Instance()->DefineParticles();
 
   // set user limits
-  if ( isMaster ) {
-    TG4GeometryManager::Instance()
-      ->SetUserLimits(*TG4G3PhysicsManager::Instance()->GetCutVector(),
-                      *TG4G3PhysicsManager::Instance()->GetControlVector());
+  if (isMaster) {
+    TG4GeometryManager::Instance()->SetUserLimits(
+      *TG4G3PhysicsManager::Instance()->GetCutVector(),
+      *TG4G3PhysicsManager::Instance()->GetControlVector());
 
-  // pass info if cut on e+e- pair is activated to stepping action  
-  // TO DO LATER - Stepping Action NOT AVAILABLE                  
-  //((TG4SteppingAction*)fRunManager->GetUserSteppingAction())
-  //  ->SetIsPairCut((*TG4G3PhysicsManager::Instance()->GetIsCutVector())[kEplus]);                   
+    // pass info if cut on e+e- pair is activated to stepping action
+    // TO DO LATER - Stepping Action NOT AVAILABLE
+    //((TG4SteppingAction*)fRunManager->GetUserSteppingAction())
+    //  ->SetIsPairCut((*TG4G3PhysicsManager::Instance()->GetIsCutVector())[kEplus]);
 
     // convert tracking cuts in range cuts per regions
-    if ( fRunConfiguration->IsSpecialCuts() ) fRegionsManager->DefineRegions();
+    if (fRunConfiguration->IsSpecialCuts()) fRegionsManager->DefineRegions();
   }
 
   // activate/inactivate physics processes
@@ -449,51 +446,51 @@ void TG4RunManager::LateInitialize()
   TG4StepManager::Instance()->LateInitialize();
 
   // late initialize action classes
-  if ( GetEventAction() ) {
+  if (GetEventAction()) {
     GetEventAction()->LateInitialize();
     TG4TrackingAction::Instance()->LateInitialize();
     TG4SteppingAction::Instance()->LateInitialize();
   }
 
   // print statistics
-  TG4GeometryServices::Instance()->PrintStatistics(true, false);  
-  TG4SDServices::Instance()->PrintStatistics(false, true);  
+  TG4GeometryServices::Instance()->PrintStatistics(true, false);
+  TG4SDServices::Instance()->PrintStatistics(false, true);
 
   if (VerboseLevel() > 2) {
-    TG4GeometryServices::Instance()->PrintLogicalVolumeStore();  
+    TG4GeometryServices::Instance()->PrintLogicalVolumeStore();
   }
-  
-  // set the random number seed
-  if ( fUseRootRandom ) SetRandomSeed();
 
-  if ( VerboseLevel() > 1 )
+  // set the random number seed
+  if (fUseRootRandom) SetRandomSeed();
+
+  if (VerboseLevel() > 1)
     G4cout << "TG4RunManager::LateInitialize done " << this << G4endl;
 }
 
 //_____________________________________________________________________________
 void TG4RunManager::CacheMCStack()
 {
-/// Cache the pointer to thread-local VMC stack
+  /// Cache the pointer to thread-local VMC stack
 
   // Do only once
-  if ( fIsMCStackCached ) return;
+  if (fIsMCStackCached) return;
 
   // The VMC stack must be set to MC at this stage !!
   TVirtualMCStack* mcStack = gMC->GetStack();
-  if ( ! mcStack ) {
-    TG4Globals::Exception("TG4RunManager", "CacheMCStack",
-     "VMC stack is not set");
+  if (!mcStack) {
+    TG4Globals::Exception(
+      "TG4RunManager", "CacheMCStack", "VMC stack is not set");
     return;
   }
 
   // Set stack to the event actions if they exists
   // (on worker only if in MT mode)
-  if ( GetEventAction() ) {
+  if (GetEventAction()) {
     GetEventAction()->SetMCStack(mcStack);
     TG4TrackingAction::Instance()->SetMCStack(mcStack);
     TG4TrackManager::Instance()->SetMCStack(mcStack);
 
-    if ( TG4StackPopper::Instance() ) {
+    if (TG4StackPopper::Instance()) {
       TG4StackPopper::Instance()->SetMCStack(mcStack);
     }
   }
@@ -504,13 +501,13 @@ void TG4RunManager::CacheMCStack()
 //_____________________________________________________________________________
 void TG4RunManager::ProcessEvent()
 {
-/// Replaying what is done in G4RunManager::BeamOn in order to initialize a run only
-/// once and process single events on user request
+  /// Replaying what is done in G4RunManager::BeamOn in order to initialize a
+  /// run only once and process single events on user request
 
-  if(!fHasEventByEventInitialization) {
-    if(!fRunManager->ConfirmBeamOnCondition()) {
+  if (!fHasEventByEventInitialization) {
+    if (!fRunManager->ConfirmBeamOnCondition()) {
       TG4Globals::Warning("TG4RunManager", "ProcessEvent",
-                         "Bad beam condition in G4RunManager. No event processed.");
+        "Bad beam condition in G4RunManager. No event processed.");
       return;
     }
     fRunManager->ConstructScoringWorlds();
@@ -524,12 +521,12 @@ void TG4RunManager::ProcessEvent()
 //_____________________________________________________________________________
 Bool_t TG4RunManager::ProcessRun(G4int nofEvents)
 {
-/// Process Geant4 run.
+  /// Process Geant4 run.
 
   // Runinit for per-event processing ==> Don't allow for process run.
-  if(fHasEventByEventInitialization) {
+  if (fHasEventByEventInitialization) {
     TG4Globals::Warning("TG4RunManager", "ProcessRun",
-                        "Current run is terminated first, then the requested run is processed");
+      "Current run is terminated first, then the requested run is processed");
     FinishRun();
   }
   fInProcessRun = true;
@@ -542,15 +539,17 @@ Bool_t TG4RunManager::ProcessRun(G4int nofEvents)
 //_____________________________________________________________________________
 Bool_t TG4RunManager::FinishRun()
 {
-  if(!fHasEventByEventInitialization) {
-    if(fInProcessRun) {
+  if (!fHasEventByEventInitialization) {
+    if (fInProcessRun) {
       TG4Globals::Warning("TG4RunManager", "FinishRun",
-                          "You are processing a run. To stop it, call StopRun()");
+        "You are processing a run. To stop it, call StopRun()");
       return false;
-    } else {
+    }
+    else {
       fNEventsProcessed = 0;
     }
-  } else {
+  }
+  else {
     fRunManager->RunTermination();
     fHasEventByEventInitialization = false;
     fNEventsProcessed = 0;
@@ -558,7 +557,7 @@ Bool_t TG4RunManager::FinishRun()
   // Pring field statistics
   TG4GeometryManager::Instance()->PrintFieldStatistics();
 
-  G4bool result = ! TG4SDServices::Instance()->GetIsStopRun();
+  G4bool result = !TG4SDServices::Instance()->GetIsStopRun();
   TG4SDServices::Instance()->SetIsStopRun(false);
 
   return result;
@@ -567,9 +566,9 @@ Bool_t TG4RunManager::FinishRun()
 //_____________________________________________________________________________
 void TG4RunManager::CreateGeantUI()
 {
-/// Create interactive Geant4.
+  /// Create interactive Geant4.
 
-  if ( fGeantUISession ) return;
+  if (fGeantUISession) return;
 
 #ifdef G4UI_USE
   // create session if it does not exist
@@ -579,18 +578,18 @@ void TG4RunManager::CreateGeantUI()
 
 //_____________________________________________________________________________
 void TG4RunManager::StartGeantUI()
-{ 
-/// Start interactive/batch Geant4.
+{
+  /// Start interactive/batch Geant4.
 
-  if ( ! fGeantUISession ) CreateGeantUI();
-  
-  if ( fGeantUISession ) {  
+  if (!fGeantUISession) CreateGeantUI();
+
+  if (fGeantUISession) {
 #ifdef G4UI_USE
     // interactive session
     G4cout << "Welcome (back) in Geant4" << G4endl;
     fGeantUISession->GetSession()->SessionStart();
     G4cout << "Welcome (back) in Root" << G4endl;
-#endif    
+#endif
   }
   else {
     G4cout << "Geant4 UI not available." << G4endl;
@@ -600,29 +599,29 @@ void TG4RunManager::StartGeantUI()
 //_____________________________________________________________________________
 void TG4RunManager::StartRootUI()
 {
-/// Start interactive Root.
+  /// Start interactive Root.
 
   if (!fRootUISession) CreateRootUI();
-  if (fRootUISession) { 
+  if (fRootUISession) {
     G4cout << "Welcome (back) in Root" << G4endl;
     fRootUISession->Run(kTRUE);
     G4cout << "Welcome (back) in Geant4" << G4endl;
   }
 }
- 
+
 //_____________________________________________________________________________
 void TG4RunManager::ProcessGeantMacro(G4String macroName)
 {
-/// Process Geant4 macro.
+  /// Process Geant4 macro.
 
   G4String command = "/control/execute " + macroName;
   ProcessGeantCommand(command);
 }
- 
+
 //_____________________________________________________________________________
 void TG4RunManager::ProcessRootMacro(G4String macroName)
 {
-/// Process Root macro.
+  /// Process Root macro.
 
   // load macro file
   G4String macroFile = macroName;
@@ -638,42 +637,41 @@ void TG4RunManager::ProcessRootMacro(G4String macroName)
 //_____________________________________________________________________________
 void TG4RunManager::ProcessGeantCommand(G4String command)
 {
-/// Process Geant4 command.
+  /// Process Geant4 command.
 
-  G4UImanager* pUI = G4UImanager::GetUIpointer();  
+  G4UImanager* pUI = G4UImanager::GetUIpointer();
   G4int result = pUI->ApplyCommand(command);
 
   // From G4UIbatch::ExecCommand():
-  switch ( result )  {
+  switch (result) {
     case fCommandSucceeded:
       break;
     case fCommandNotFound:
-      G4cerr << "***** COMMAND NOT FOUND <"
-             << command << "> *****" << G4endl;
+      G4cerr << "***** COMMAND NOT FOUND <" << command << "> *****" << G4endl;
       break;
     case fIllegalApplicationState:
-      G4cerr << "***** Illegal application state <"
-             << command << "> *****" << G4endl;
+      G4cerr << "***** Illegal application state <" << command << "> *****"
+             << G4endl;
       break;
     default:
-      G4int pn = result%100;
-      G4cerr << "***** Illegal parameter (" << pn << ") <"
-             << command << "> *****" << G4endl;
+      G4int pn = result % 100;
+      G4cerr << "***** Illegal parameter (" << pn << ") <" << command
+             << "> *****" << G4endl;
   }
 }
 
 //_____________________________________________________________________________
 void TG4RunManager::ProcessRootCommand(G4String command)
 {
-/// Process Root command.
+  /// Process Root command.
 
   gInterpreter->ProcessLine(command);
 }
 
 //_____________________________________________________________________________
-void TG4RunManager::UseG3Defaults() 
+void TG4RunManager::UseG3Defaults()
 {
-/// Control G3 defaults usage.
+  /// Control G3 defaults usage.
 
   TG4G3PhysicsManager::Instance()->SetG3DefaultCuts();
   TG4G3PhysicsManager::Instance()->SetG3DefaultControls();
@@ -682,18 +680,17 @@ void TG4RunManager::UseG3Defaults()
 //_____________________________________________________________________________
 Int_t TG4RunManager::CurrentEvent() const
 {
-/// Return the number of the current event.
+  /// Return the number of the current event.
 
   G4int eventID = fRunManager->GetCurrentEvent()->GetEventID();
   return eventID;
 }
 
 //_____________________________________________________________________________
-Bool_t  TG4RunManager::SecondariesAreOrdered() const 
+Bool_t TG4RunManager::SecondariesAreOrdered() const
 {
-///  Since transition to G4SmartTrackStack in Geant4 9.6.x 
-///  secondaries are not ordered even when the special stacking is activated.
+  ///  Since transition to G4SmartTrackStack in Geant4 9.6.x
+  ///  secondaries are not ordered even when the special stacking is activated.
 
   return false;
-}  
-
+}

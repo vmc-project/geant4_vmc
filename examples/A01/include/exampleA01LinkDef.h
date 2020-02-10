@@ -15,26 +15,21 @@
 #pragma link off all globals;
 #pragma link off all classes;
 #pragma link off all functions;
- 
-#pragma link C++ class  A01MCApplication+;
-#pragma link C++ class  Ex03MCStack+;
-#pragma link C++ class  A01MagField+;
-#pragma link C++ class  A01LocalMagField+;
-#pragma link C++ class  A01DriftChamberHit+;
-#pragma link C++ class  A01EmCalorHit+;
-#pragma link C++ class  A01HadCalorHit+;
-#pragma link C++ class  A01HodoscopeHit+;
-#pragma link C++ class  A01DriftChamberSD+;
-#pragma link C++ class  A01EmCalorimeterSD+;
-#pragma link C++ class  A01HadCalorimeterSD+;
-#pragma link C++ class  A01HodoscopeSD+;
-#pragma link C++ class  A01PrimaryGenerator+;
-#pragma link C++ class  A01RootDetectorConstruction+;
-#pragma link C++ class  std::stack<TParticle*,deque<TParticle*> >+;
+
+#pragma link C++ class A01MCApplication + ;
+#pragma link C++ class Ex03MCStack + ;
+#pragma link C++ class A01MagField + ;
+#pragma link C++ class A01LocalMagField + ;
+#pragma link C++ class A01DriftChamberHit + ;
+#pragma link C++ class A01EmCalorHit + ;
+#pragma link C++ class A01HadCalorHit + ;
+#pragma link C++ class A01HodoscopeHit + ;
+#pragma link C++ class A01DriftChamberSD + ;
+#pragma link C++ class A01EmCalorimeterSD + ;
+#pragma link C++ class A01HadCalorimeterSD + ;
+#pragma link C++ class A01HodoscopeSD + ;
+#pragma link C++ class A01PrimaryGenerator + ;
+#pragma link C++ class A01RootDetectorConstruction + ;
+#pragma link C++ class std::stack < TParticle*, deque < TParticle*>> + ;
 
 #endif
-
-
-
-
-

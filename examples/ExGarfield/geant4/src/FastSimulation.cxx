@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file ExGarfield/geant4/src/FastSimulation.cxx
-/// \brief Implementation of the ExGarfield::FastSimulation class 
+/// \brief Implementation of the ExGarfield::FastSimulation class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 ///
@@ -22,14 +22,14 @@
 
 #include <Random.hh>
 
-#include <G4RegionStore.hh>
-#include <G4Material.hh>
-#include <GFlashHomoShowerParameterisation.hh>
 #include <G4FastSimulationManager.hh>
-#include <GFlashShowerModel.hh>
-#include <GFlashHitMaker.hh>
-#include <GFlashParticleBounds.hh>
+#include <G4Material.hh>
 #include <G4NistManager.hh>
+#include <G4RegionStore.hh>
+#include <GFlashHitMaker.hh>
+#include <GFlashHomoShowerParameterisation.hh>
+#include <GFlashParticleBounds.hh>
+#include <GFlashShowerModel.hh>
 #include <Randomize.hh>
 
 #include <Riostream.h>
@@ -42,11 +42,9 @@ namespace ExGarfield
 {
 
 //_____________________________________________________________________________
-FastSimulation::FastSimulation() 
-  : TG4VUserFastSimulation(),
-    fMessenger(0)
+FastSimulation::FastSimulation() : TG4VUserFastSimulation(), fMessenger(0)
 {
-/// Standard constructor
+  /// Standard constructor
 
   cout << "FastSimulation::FastSimulation" << endl;
 
@@ -56,55 +54,57 @@ FastSimulation::FastSimulation()
   // Set seed to Garfield random engine
   ::Garfield::randomEngine.Seed(1);
 
-  // Construct the Garfield messenger which defines the Garfield physics specific 
-  // command
+  // Construct the Garfield messenger which defines the Garfield physics
+  // specific command
   fMessenger = new GarfieldMessenger();
 
-/*
-  // In the following calls users can select the particles and regions
-  // which the fast simulation model(s) will be applied to. 
-  // The setting is an alternative to the setting via UI commands
-  // in physics.in macro.
+  /*
+    // In the following calls users can select the particles and regions
+    // which the fast simulation model(s) will be applied to.
+    // The setting is an alternative to the setting via UI commands
+    // in physics.in macro.
 
-  // Create fast simulation model configuration.
-  // This will generate UI commands which can be used to set particles
-  // and regions where the model will be applied
-  SetModel("garfieldModel");
+    // Create fast simulation model configuration.
+    // This will generate UI commands which can be used to set particles
+    // and regions where the model will be applied
+    SetModel("garfieldModel");
 
-  // In the following calls users can select the particles and regions
-  // which the fast simulation model(s) will be applied to. 
-  // The setting can be done also interactively via UI commands.
-  SetModelParticles("garfieldModel", "all");
-  SetModelRegions("garfieldModel", "AirB");
+    // In the following calls users can select the particles and regions
+    // which the fast simulation model(s) will be applied to.
+    // The setting can be done also interactively via UI commands.
+    SetModelParticles("garfieldModel", "all");
+    SetModelRegions("garfieldModel", "AirB");
 
-  // Enable GarfieldModel for different particle types and energy ranges
-  double minEnergy_keV = 100;
-  double maxEnergy_keV = 1e+12;
+    // Enable GarfieldModel for different particle types and energy ranges
+    double minEnergy_keV = 100;
+    double maxEnergy_keV = 1e+12;
 
-  //GarfieldPhysics* garfieldPhysics = GarfieldPhysics::GetInstance();
-  //garfieldPhysics->AddParticleName("e-", minEnergy_keV, maxEnergy_keV);
-  //garfieldPhysics->AddParticleName("e+", minEnergy_keV, maxEnergy_keV);
+    //GarfieldPhysics* garfieldPhysics = GarfieldPhysics::GetInstance();
+    //garfieldPhysics->AddParticleName("e-", minEnergy_keV, maxEnergy_keV);
+    //garfieldPhysics->AddParticleName("e+", minEnergy_keV, maxEnergy_keV);
 
-  //garfieldPhysics->AddParticleName("mu-", minEnergy_keV, maxEnergy_keV);
-  garfieldPhysics->AddParticleName("mu+", minEnergy_keV, maxEnergy_keV);
+    //garfieldPhysics->AddParticleName("mu-", minEnergy_keV, maxEnergy_keV);
+    garfieldPhysics->AddParticleName("mu+", minEnergy_keV, maxEnergy_keV);
 
-  //garfieldPhysics->AddParticleName("pi-", minEnergy_keV, maxEnergy_keV);
-  //garfieldPhysics->AddParticleName("pi+", minEnergy_keV, maxEnergy_keV);
-  //garfieldPhysics->AddParticleName("kaon-", minEnergy_keV, maxEnergy_keV);
-  //garfieldPhysics->AddParticleName("kaon+", minEnergy_keV, maxEnergy_keV);
-  //garfieldPhysics->AddParticleName("proton", minEnergy_keV, maxEnergy_keV);
-  //garfieldPhysics->AddParticleName("anti_proton", minEnergy_keV, maxEnergy_keV);
-  //garfieldPhysics->AddParticleName("deuteron", minEnergy_keV, maxEnergy_keV);
-  //garfieldPhysics->AddParticleName("alpha", minEnergy_keV, maxEnergy_keV);
+    //garfieldPhysics->AddParticleName("pi-", minEnergy_keV, maxEnergy_keV);
+    //garfieldPhysics->AddParticleName("pi+", minEnergy_keV, maxEnergy_keV);
+    //garfieldPhysics->AddParticleName("kaon-", minEnergy_keV, maxEnergy_keV);
+    //garfieldPhysics->AddParticleName("kaon+", minEnergy_keV, maxEnergy_keV);
+    //garfieldPhysics->AddParticleName("proton", minEnergy_keV, maxEnergy_keV);
+    //garfieldPhysics->AddParticleName("anti_proton", minEnergy_keV,
+    maxEnergy_keV);
+    //garfieldPhysics->AddParticleName("deuteron", minEnergy_keV,
+    maxEnergy_keV);
+    //garfieldPhysics->AddParticleName("alpha", minEnergy_keV, maxEnergy_keV);
 
-  //garfieldPhysics->EnableCreateSecondariesInGeant4(false);
-*/
+    //garfieldPhysics->EnableCreateSecondariesInGeant4(false);
+  */
 }
 
 //_____________________________________________________________________________
 FastSimulation::~FastSimulation()
 {
-/// Destructor
+  /// Destructor
 
   // can't we just delete the instance ??
   GarfieldPhysics::Dispose();
@@ -117,25 +117,24 @@ FastSimulation::~FastSimulation()
 //
 
 //_____________________________________________________________________________
-void  FastSimulation::Construct()
+void FastSimulation::Construct()
 {
-/// This function must be overriden in user class and users should create
-/// the simulation models and register them to VMC framework
+  /// This function must be overriden in user class and users should create
+  /// the simulation models and register them to VMC framework
 
   G4cout << "Construct Garfield model." << G4endl;
 
   // Create the fast simulation model
-  GarfieldG4FastSimulationModel* garfieldModel 
-    = new GarfieldG4FastSimulationModel("garfieldModel");
+  GarfieldG4FastSimulationModel* garfieldModel =
+    new GarfieldG4FastSimulationModel("garfieldModel");
 
   // Register the model in the VMC framework
   Register(garfieldModel);
 
-  G4cout<<"end construct Garfield model."<<G4endl;
+  G4cout << "end construct Garfield model." << G4endl;
   //
   // end Initializing shower model
 }
 
-}
-}
-
+} // namespace ExGarfield
+} // namespace VMC

@@ -1,5 +1,5 @@
 #ifndef TG4_CROSS_SECTION_MESSENGER_H
-#define TG4_CROSS_SECTION_MESSENGER_H 
+#define TG4_CROSS_SECTION_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4CrossSectionMessenger.h
-/// \brief Definition of the TG4CrossSectionMessenger class 
+/// \brief Definition of the TG4CrossSectionMessenger class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -46,40 +46,40 @@ class G4UIcmdWithADoubleAndUnit;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4CrossSectionMessenger: public G4UImessenger
+class TG4CrossSectionMessenger : public G4UImessenger
 {
-  public:
-    TG4CrossSectionMessenger(TG4CrossSectionManager* crossSectionManager);
-    virtual ~TG4CrossSectionMessenger();
-   
-    // methods 
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
-    
-  private:
-    /// Not implemented
-    TG4CrossSectionMessenger();  
-    /// Not implemented
-    TG4CrossSectionMessenger(const TG4CrossSectionMessenger& right);
-    /// Not implemented
-    TG4CrossSectionMessenger& operator=(const TG4CrossSectionMessenger& right);
+ public:
+  TG4CrossSectionMessenger(TG4CrossSectionManager* crossSectionManager);
+  virtual ~TG4CrossSectionMessenger();
 
-    // data members
-    TG4CrossSectionManager*  fCrossSectionManager; ///< associated class   
-    G4UIdirectory*  fDirectory;  ///< command directory
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
 
-    G4UIcmdWithABool*           fMakeHistogramsCmd; ///< command: makeHistograms
-    G4UIcmdWithAString*         fParticleCmd;   ///< command: setParticle 
-    G4UIcmdWithAString*         fElementCmd;    ///< command: setElement 
-    G4UIcmdWithAnInteger*       fNofBinsECmd;   ///< command: setNofBinsE 
-    G4UIcmdWithAnInteger*       fNofBinsPCmd;   ///< command: setNofBinsP 
-    G4UIcmdWithADoubleAndUnit*  fMinKinECmd;    ///< command: setMinKinE
-    G4UIcmdWithADoubleAndUnit*  fMaxKinECmd;    ///< command: setMaxKinE
-    G4UIcmdWithADoubleAndUnit*  fKinECmd;       ///< command: setMinKinE
-    G4UIcmdWithADoubleAndUnit*  fMinMomentumCmd;///< command: setMinMomentum
-    G4UIcmdWithADoubleAndUnit*  fMaxMomentumCmd;///< command: setMaxMomentum
-    G4UIcmdWithADoubleAndUnit*  fMomentumCmd;   ///< command: setMomentum
-    G4UIcmdWithAString*         fLabelCmd;      ///< command: setLabel
-    G4UIcmdWithAString*         fPrintCmd;      ///< command: printCrossSection 
+ private:
+  /// Not implemented
+  TG4CrossSectionMessenger();
+  /// Not implemented
+  TG4CrossSectionMessenger(const TG4CrossSectionMessenger& right);
+  /// Not implemented
+  TG4CrossSectionMessenger& operator=(const TG4CrossSectionMessenger& right);
+
+  // data members
+  TG4CrossSectionManager* fCrossSectionManager; ///< associated class
+  G4UIdirectory* fDirectory;                    ///< command directory
+
+  G4UIcmdWithABool* fMakeHistogramsCmd;       ///< command: makeHistograms
+  G4UIcmdWithAString* fParticleCmd;           ///< command: setParticle
+  G4UIcmdWithAString* fElementCmd;            ///< command: setElement
+  G4UIcmdWithAnInteger* fNofBinsECmd;         ///< command: setNofBinsE
+  G4UIcmdWithAnInteger* fNofBinsPCmd;         ///< command: setNofBinsP
+  G4UIcmdWithADoubleAndUnit* fMinKinECmd;     ///< command: setMinKinE
+  G4UIcmdWithADoubleAndUnit* fMaxKinECmd;     ///< command: setMaxKinE
+  G4UIcmdWithADoubleAndUnit* fKinECmd;        ///< command: setMinKinE
+  G4UIcmdWithADoubleAndUnit* fMinMomentumCmd; ///< command: setMinMomentum
+  G4UIcmdWithADoubleAndUnit* fMaxMomentumCmd; ///< command: setMaxMomentum
+  G4UIcmdWithADoubleAndUnit* fMomentumCmd;    ///< command: setMomentum
+  G4UIcmdWithAString* fLabelCmd;              ///< command: setLabel
+  G4UIcmdWithAString* fPrintCmd;              ///< command: printCrossSection
 };
 
-#endif //TG4_CROSS_SECTION_MESSENGER_H
+#endif // TG4_CROSS_SECTION_MESSENGER_H

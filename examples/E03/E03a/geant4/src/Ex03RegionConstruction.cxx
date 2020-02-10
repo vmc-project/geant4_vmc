@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file Ex03RegionConstruction.cxx
-/// \brief Implementation of the Ex03RegionConstruction class 
+/// \brief Implementation of the Ex03RegionConstruction class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo \n
 ///
@@ -19,21 +19,20 @@
 #include "TG4GeometryServices.h"
 
 #include "G4LogicalVolume.hh"
-#include "G4Region.hh"
 #include "G4ProductionCuts.hh"
+#include "G4Region.hh"
 #include "G4SystemOfUnits.hh"
 
 //_____________________________________________________________________________
-Ex03RegionConstruction::Ex03RegionConstruction() 
-  : TG4VUserRegionConstruction()
+Ex03RegionConstruction::Ex03RegionConstruction() : TG4VUserRegionConstruction()
 {
-/// Standard constructor
+  /// Standard constructor
 }
 
 //_____________________________________________________________________________
 Ex03RegionConstruction::~Ex03RegionConstruction()
 {
-/// Destructor
+  /// Destructor
 }
 
 //
@@ -41,23 +40,24 @@ Ex03RegionConstruction::~Ex03RegionConstruction()
 //
 
 //_____________________________________________________________________________
-void  Ex03RegionConstruction::Construct()
+void Ex03RegionConstruction::Construct()
 {
-/// Definition of regions
+  /// Definition of regions
 
-  G4LogicalVolume* logicalVolume 
-    = TG4GeometryServices::Instance()->FindLogicalVolume("LAYE");
-  if ( ! logicalVolume )  {
+  G4LogicalVolume* logicalVolume =
+    TG4GeometryServices::Instance()->FindLogicalVolume("LAYE");
+  if (!logicalVolume) {
     G4cerr << "Logical volume LAYE not found" << G4endl;
     return;
-  }     
-
+  }
 
   G4Region* testRegion = new G4Region("Test_region");
   testRegion->AddRootLogicalVolume(logicalVolume);
   testRegion->SetProductionCuts(new G4ProductionCuts());
 
-  std::vector<double> cuts; 
-  cuts.push_back(1.0*cm);cuts.push_back(1.0*cm);cuts.push_back(1.0*cm);
+  std::vector<double> cuts;
+  cuts.push_back(1.0 * cm);
+  cuts.push_back(1.0 * cm);
+  cuts.push_back(1.0 * cm);
   testRegion->GetProductionCuts()->SetProductionCuts(cuts);
-}   
+}

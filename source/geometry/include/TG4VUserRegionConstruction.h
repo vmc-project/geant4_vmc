@@ -24,19 +24,19 @@
 
 class TG4VUserRegionConstruction
 {
-  public:
-    TG4VUserRegionConstruction();
-    virtual ~TG4VUserRegionConstruction();
+ public:
+  TG4VUserRegionConstruction();
+  virtual ~TG4VUserRegionConstruction();
 
-    ///  Method to be overriden by user
-    virtual void Construct() = 0;
+  ///  Method to be overriden by user
+  virtual void Construct() = 0;
 
-  private:    
-    /// Not implemented
-    TG4VUserRegionConstruction(const TG4VUserRegionConstruction& right);
-    /// Not implemented
-    TG4VUserRegionConstruction& operator=(const TG4VUserRegionConstruction& right);
-}; 
+ private:
+  /// Not implemented
+  TG4VUserRegionConstruction(const TG4VUserRegionConstruction& right);
+  /// Not implemented
+  TG4VUserRegionConstruction& operator=(
+    const TG4VUserRegionConstruction& right);
+};
 
-#endif //TG4_V_USER_REGION_CONSTRUCTION_H
-
+#endif // TG4_V_USER_REGION_CONSTRUCTION_H

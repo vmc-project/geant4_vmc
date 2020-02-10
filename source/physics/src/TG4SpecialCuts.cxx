@@ -8,7 +8,7 @@
 //-------------------------------------------------
 
 /// \file TG4SpecialCuts.cxx
-/// \brief Implementation of the TG4SpecialCutsFor* classes 
+/// \brief Implementation of the TG4SpecialCutsFor* classes
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -21,53 +21,54 @@
 
 //_____________________________________________________________________________
 TG4SpecialCutsForChargedHadron::TG4SpecialCutsForChargedHadron(
-                                                 const G4String& processName)
-  : TG4VSpecialCuts(processName) 
+  const G4String& processName)
+  : TG4VSpecialCuts(processName)
 {
-/// Standard constructor
+  /// Standard constructor
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsForChargedHadron::~TG4SpecialCutsForChargedHadron() 
+TG4SpecialCutsForChargedHadron::~TG4SpecialCutsForChargedHadron()
 {
-/// Destructor
+  /// Destructor
 }
 
 //_____________________________________________________________________________
-G4double TG4SpecialCutsForChargedHadron::GetMinEkine(const TG4Limits& limits,
-                                                     const G4Track& track) const
-{                                             
-/// Return the min kinetic energy cut from limits.
-// --- 
+G4double TG4SpecialCutsForChargedHadron::GetMinEkine(
+  const TG4Limits& limits, const G4Track& track) const
+{
+  /// Return the min kinetic energy cut from limits.
+  // ---
 
   return limits.GetMinEkineForChargedHadron(track);
-}  
+}
 
 //
 //  Class TG4SpecialCutsForElectron implementation
 //
 
 //_____________________________________________________________________________
-TG4SpecialCutsForElectron::TG4SpecialCutsForElectron(const G4String& processName)
+TG4SpecialCutsForElectron::TG4SpecialCutsForElectron(
+  const G4String& processName)
   : TG4VSpecialCuts(processName)
 {
-/// Standard and default constructor
+  /// Standard and default constructor
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsForElectron::~TG4SpecialCutsForElectron() 
+TG4SpecialCutsForElectron::~TG4SpecialCutsForElectron()
 {
-/// Destructor
+  /// Destructor
 }
 
 //_____________________________________________________________________________
-G4double TG4SpecialCutsForElectron::GetMinEkine(const TG4Limits& limits,
-                                                const G4Track& track) const
-{                                             
-/// Return the min kinetic energy cut from limits.
+G4double TG4SpecialCutsForElectron::GetMinEkine(
+  const TG4Limits& limits, const G4Track& track) const
+{
+  /// Return the min kinetic energy cut from limits.
 
   return limits.GetMinEkineForElectron(track);
-}  
+}
 
 //
 //  Class TG4SpecialCutsForEplus implementation
@@ -75,36 +76,36 @@ G4double TG4SpecialCutsForElectron::GetMinEkine(const TG4Limits& limits,
 
 //_____________________________________________________________________________
 TG4SpecialCutsForEplus::TG4SpecialCutsForEplus(const G4String& processName)
-  : TG4VSpecialCuts(processName) 
+  : TG4VSpecialCuts(processName)
 {
-/// Standard and default constructor
+  /// Standard and default constructor
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsForEplus::~TG4SpecialCutsForEplus() 
+TG4SpecialCutsForEplus::~TG4SpecialCutsForEplus()
 {
-/// Destructor
+  /// Destructor
 }
 
 //_____________________________________________________________________________
-G4double TG4SpecialCutsForEplus::GetMinEkine(const TG4Limits& limits,
-                                             const G4Track& track) const
-{                                             
-/// Return the min kinetic energy cut from limits.
+G4double TG4SpecialCutsForEplus::GetMinEkine(
+  const TG4Limits& limits, const G4Track& track) const
+{
+  /// Return the min kinetic energy cut from limits.
 
   return limits.GetMinEkineForEplus(track);
-}  
+}
 
 //_____________________________________________________________________________
-G4VParticleChange* TG4SpecialCutsForEplus::PostStepDoIt(const G4Track& track, 
-                                                 const G4Step& /*step*/)
+G4VParticleChange* TG4SpecialCutsForEplus::PostStepDoIt(
+  const G4Track& track, const G4Step& /*step*/)
 {
-/// Override method from G4VSpecialCuts and set energy deposit
-/// to total e+ energy
- 
+  /// Override method from G4VSpecialCuts and set energy deposit
+  /// to total e+ energy
+
   aParticleChange.Initialize(track);
-  aParticleChange.ProposeEnergy(0.) ;
-  aParticleChange.ProposeLocalEnergyDeposit(track.GetTotalEnergy()) ;
+  aParticleChange.ProposeEnergy(0.);
+  aParticleChange.ProposeLocalEnergyDeposit(track.GetTotalEnergy());
   aParticleChange.ProposeTrackStatus(fStopAndKill);
   return &aParticleChange;
 }
@@ -117,23 +118,23 @@ G4VParticleChange* TG4SpecialCutsForEplus::PostStepDoIt(const G4Track& track,
 TG4SpecialCutsForGamma::TG4SpecialCutsForGamma(const G4String& processName)
   : TG4VSpecialCuts(processName)
 {
-/// Standard and default constructor
+  /// Standard and default constructor
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsForGamma::~TG4SpecialCutsForGamma() 
+TG4SpecialCutsForGamma::~TG4SpecialCutsForGamma()
 {
-/// Destructor
+  /// Destructor
 }
 
 //_____________________________________________________________________________
-G4double TG4SpecialCutsForGamma::GetMinEkine(const TG4Limits& limits,
-                                             const G4Track& track) const
-{                                             
-/// Return the min kinetic energy cut from limits.
+G4double TG4SpecialCutsForGamma::GetMinEkine(
+  const TG4Limits& limits, const G4Track& track) const
+{
+  /// Return the min kinetic energy cut from limits.
 
   return limits.GetMinEkineForGamma(track);
-}  
+}
 
 //
 //  Class TG4SpecialCutsForMuon implementation
@@ -141,25 +142,25 @@ G4double TG4SpecialCutsForGamma::GetMinEkine(const TG4Limits& limits,
 
 //_____________________________________________________________________________
 TG4SpecialCutsForMuon::TG4SpecialCutsForMuon(const G4String& processName)
-  : TG4VSpecialCuts(processName) 
+  : TG4VSpecialCuts(processName)
 {
-/// Standard and default constructor
+  /// Standard and default constructor
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsForMuon::~TG4SpecialCutsForMuon() 
+TG4SpecialCutsForMuon::~TG4SpecialCutsForMuon()
 {
-/// Destructor
+  /// Destructor
 }
 
 //_____________________________________________________________________________
-G4double TG4SpecialCutsForMuon::GetMinEkine(const TG4Limits& limits,
-                                            const G4Track& track) const
-{                                             
-/// Return the min kinetic energy cut from limits.
+G4double TG4SpecialCutsForMuon::GetMinEkine(
+  const TG4Limits& limits, const G4Track& track) const
+{
+  /// Return the min kinetic energy cut from limits.
 
   return limits.GetMinEkineForMuon(track);
-}  
+}
 
 //
 //  Class TG4SpecialCutsForNeutralHadron implementation
@@ -167,26 +168,26 @@ G4double TG4SpecialCutsForMuon::GetMinEkine(const TG4Limits& limits,
 
 //_____________________________________________________________________________
 TG4SpecialCutsForNeutralHadron::TG4SpecialCutsForNeutralHadron(
-                                              const G4String& processName)
+  const G4String& processName)
   : TG4VSpecialCuts(processName)
 {
-/// Standard and default constructor
+  /// Standard and default constructor
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsForNeutralHadron::~TG4SpecialCutsForNeutralHadron() 
+TG4SpecialCutsForNeutralHadron::~TG4SpecialCutsForNeutralHadron()
 {
-/// Destructor
+  /// Destructor
 }
 
 //_____________________________________________________________________________
-G4double TG4SpecialCutsForNeutralHadron::GetMinEkine(const TG4Limits& limits,
-                                                     const G4Track& track) const
-{                                             
-/// Return the min kinetic energy cut from limits.
+G4double TG4SpecialCutsForNeutralHadron::GetMinEkine(
+  const TG4Limits& limits, const G4Track& track) const
+{
+  /// Return the min kinetic energy cut from limits.
 
   return limits.GetMinEkineForNeutralHadron(track);
-}  
+}
 
 //
 //  Class TG4SpecialCutsForOther implementation
@@ -196,20 +197,20 @@ G4double TG4SpecialCutsForNeutralHadron::GetMinEkine(const TG4Limits& limits,
 TG4SpecialCutsForOther::TG4SpecialCutsForOther(const G4String& processName)
   : TG4VSpecialCuts(processName)
 {
-/// Standard and default constructor
+  /// Standard and default constructor
 }
 
 //_____________________________________________________________________________
-TG4SpecialCutsForOther::~TG4SpecialCutsForOther() 
+TG4SpecialCutsForOther::~TG4SpecialCutsForOther()
 {
-/// Destructor
+  /// Destructor
 }
 
 //_____________________________________________________________________________
-G4double TG4SpecialCutsForOther::GetMinEkine(const TG4Limits& limits,
-                                             const G4Track& track) const
-{                                             
-/// Return the min kinetic energy cut from limits.
+G4double TG4SpecialCutsForOther::GetMinEkine(
+  const TG4Limits& limits, const G4Track& track) const
+{
+  /// Return the min kinetic energy cut from limits.
 
   return limits.GetMinEkineForOther(track);
-}  
+}

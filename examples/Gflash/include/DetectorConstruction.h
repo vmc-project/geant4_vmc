@@ -38,21 +38,21 @@ namespace Gflash
 
 class DetectorConstruction : public TObject
 {
-  public:  
-    DetectorConstruction();
-    virtual ~DetectorConstruction();
+ public:
+  DetectorConstruction();
+  virtual ~DetectorConstruction();
 
-  public:
-    void Construct();
-    // void ConstructSDandField();
+ public:
+  void Construct();
+  // void ConstructSDandField();
 
-    // const G4VPhysicalVolume* GetCristal(int num__crystal)
-    // {return fCrystal_phys[num__crystal];};
+  // const G4VPhysicalVolume* GetCristal(int num__crystal)
+  // {return fCrystal_phys[num__crystal];};
 
-  ClassDef(DetectorConstruction,1) //DetectorConstruction
+  ClassDef(DetectorConstruction, 1) // DetectorConstruction
 };
 
-}
-}
+} // namespace Gflash
+} // namespace VMC
 
-#endif //GFLASH_DETECTOR_CONSTRUCTION_H
+#endif // GFLASH_DETECTOR_CONSTRUCTION_H

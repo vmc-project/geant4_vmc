@@ -7,8 +7,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file ExGarfield/src/SensitiveDetector.cxx 
-/// \brief Implementation of the ExGarfield::SensitiveDetector class 
+/// \file ExGarfield/src/SensitiveDetector.cxx
+/// \brief Implementation of the ExGarfield::SensitiveDetector class
 ///
 /// Garfield garfieldpp example adapted to Virtual Monte Carlo.
 ///
@@ -21,164 +21,152 @@
 #include "GarfieldPhysics.h"
 
 #include <Riostream.h>
-#include <TVirtualMC.h>
-#include <TMCRootManager.h>
 #include <TLorentzVector.h>
+#include <TMCRootManager.h>
 #include <TTree.h>
+#include <TVirtualMC.h>
 
 /// \cond CLASSIMP
 ClassImp(VMC::ExGarfield::SensitiveDetector)
-/// \endcond
+  /// \endcond
 
-namespace VMC
+  namespace VMC
 {
-namespace ExGarfield
-{
+  namespace ExGarfield
+  {
 
-//_____________________________________________________________________________
-SensitiveDetector::SensitiveDetector(const char* name)
-  : TNamed(name, ""),
-    fHit(0),
-    fAbsorberVolId(),
-    fGasVolId(),
-    fVerboseLevel(1)
-{
-/// Standard constructor.
-/// Create hits collection.
-/// \param name      The calorimeter hits collection name
+  //_____________________________________________________________________________
+  SensitiveDetector::SensitiveDetector(const char* name)
+    : TNamed(name, ""), fHit(0), fAbsorberVolId(), fGasVolId(), fVerboseLevel(1)
+  {
+    /// Standard constructor.
+    /// Create hits collection.
+    /// \param name      The calorimeter hits collection name
 
-  fHit = new Hit();
-}
-
-//_____________________________________________________________________________
-SensitiveDetector::SensitiveDetector(const SensitiveDetector& origin)
-  : TNamed(origin),
-    fHit(0),
-    fAbsorberVolId(),
-    fGasVolId(),
-    fVerboseLevel(origin.fVerboseLevel)
-{
-/// Copy constructor (for cloning on worker thread in MT mode).
-/// Create hits collection.
-/// \param origin    The source object (on master).
-
-  fHit = new Hit();
-}
-
-//_____________________________________________________________________________
-SensitiveDetector::SensitiveDetector()
-  : TNamed(),
-    fHit(0),
-    fAbsorberVolId(),
-    fGasVolId(),
-    fVerboseLevel(0)
-{
-/// Default constructor
-}
-
-//_____________________________________________________________________________
-SensitiveDetector::~SensitiveDetector()
-{
-/// Destructor
-
-  delete fHit;
-}
-
-//
-// public methods
-//
-
-//_____________________________________________________________________________
-void SensitiveDetector::Initialize()
-{
-/// Register hits collection in the Root manager;
-/// set sensitive volumes.
-  
-  if ( TMCRootManager::Instance() ) Register();  
-  fAbsorberVolId = gMC->VolId("Absorber");
-  fGasVolId = gMC->VolId("Gas");
-}
-
-//_____________________________________________________________________________
-Bool_t SensitiveDetector::ProcessHits()
-{
-/// Account energy deposit and track lengths for each layer in its hit.
-
-  Int_t copyNo;
-  Int_t id = gMC->CurrentVolID(copyNo);
-
-  if (id != fAbsorberVolId  &&  id != fGasVolId ) 
-    return false;
-
-  Double_t edep = gMC->Edep();
-  Double_t step = 0.;
-  if (gMC->TrackCharge() != 0.) step = gMC->TrackStep();
-  
-  if (id == fAbsorberVolId) {
-    fHit->AddEdepAbs(edep);
-    fHit->AddTrackLengthAbs(step);
+    fHit = new Hit();
   }
-    
-  if (id == fGasVolId) {
+
+  //_____________________________________________________________________________
+  SensitiveDetector::SensitiveDetector(const SensitiveDetector& origin)
+    : TNamed(origin),
+      fHit(0),
+      fAbsorberVolId(),
+      fGasVolId(),
+      fVerboseLevel(origin.fVerboseLevel)
+  {
+    /// Copy constructor (for cloning on worker thread in MT mode).
+    /// Create hits collection.
+    /// \param origin    The source object (on master).
+
+    fHit = new Hit();
+  }
+
+  //_____________________________________________________________________________
+  SensitiveDetector::SensitiveDetector()
+    : TNamed(), fHit(0), fAbsorberVolId(), fGasVolId(), fVerboseLevel(0)
+  {
+    /// Default constructor
+  }
+
+  //_____________________________________________________________________________
+  SensitiveDetector::~SensitiveDetector()
+  {
+    /// Destructor
+
+    delete fHit;
+  }
+
+  //
+  // public methods
+  //
+
+  //_____________________________________________________________________________
+  void SensitiveDetector::Initialize()
+  {
+    /// Register hits collection in the Root manager;
+    /// set sensitive volumes.
+
+    if (TMCRootManager::Instance()) Register();
+    fAbsorberVolId = gMC->VolId("Absorber");
+    fGasVolId = gMC->VolId("Gas");
+  }
+
+  //_____________________________________________________________________________
+  Bool_t SensitiveDetector::ProcessHits()
+  {
+    /// Account energy deposit and track lengths for each layer in its hit.
+
+    Int_t copyNo;
+    Int_t id = gMC->CurrentVolID(copyNo);
+
+    if (id != fAbsorberVolId && id != fGasVolId) return false;
+
+    Double_t edep = gMC->Edep();
+    Double_t step = 0.;
+    if (gMC->TrackCharge() != 0.) step = gMC->TrackStep();
+
+    if (id == fAbsorberVolId) {
+      fHit->AddEdepAbs(edep);
+      fHit->AddTrackLengthAbs(step);
+    }
+
+    if (id == fGasVolId) {
+      fHit->AddEdepGas(edep);
+    }
+
+    return true;
+  }
+
+  //_____________________________________________________________________________
+  Bool_t SensitiveDetector::UpdateFromGarfield()
+  {
+    /// Update the collected hit information from Garfield interface
+
+    GarfieldPhysics* garfieldPhysics = GarfieldPhysics::GetInstance();
+
+    // get energy deposit from Garfield, convert it in GeV
+    Double_t edep = garfieldPhysics->GetEnergyDeposit_MeV() * 1e-03;
+    Double_t avalancheSize = garfieldPhysics->GetAvalancheSize();
+    Double_t gain = garfieldPhysics->GetGain();
+
+    // update hit
     fHit->AddEdepGas(edep);
+    fHit->AddAvalancheSize(avalancheSize);
+    fHit->AddGain(gain);
+
+    return true;
   }
 
-  return true;
+  //_____________________________________________________________________________
+  void SensitiveDetector::EndOfEvent()
+  {
+    /// Print hits collection (if verbose) and reset hits afterwards.
+
+    if (fVerboseLevel > 0) Print();
+
+    // Reset hits collection
+    fHit->Reset();
+
+    // Reset data collected in Garfield
+    GarfieldPhysics* garfieldPhysics = GarfieldPhysics::GetInstance();
+    garfieldPhysics->Clear();
+  }
+
+  //_____________________________________________________________________________
+  void SensitiveDetector::Register()
+  {
+    /// Register the hits collection in Root manager.
+
+    TMCRootManager::Instance()->Register("hit", "VMC::ExGarfield::Hit", &fHit);
+  }
+
+  //_____________________________________________________________________________
+  void SensitiveDetector::Print(Option_t* /*option*/) const
+  {
+    /// Print the hit.
+
+    fHit->Print();
+  }
+
+  } // namespace ExGarfield
 }
-
-//_____________________________________________________________________________
-Bool_t  SensitiveDetector::UpdateFromGarfield()
-{
-/// Update the collected hit information from Garfield interface
-
-  GarfieldPhysics* garfieldPhysics = GarfieldPhysics::GetInstance();
-
-  // get energy deposit from Garfield, convert it in GeV
-  Double_t edep = garfieldPhysics->GetEnergyDeposit_MeV()*1e-03;
-  Double_t avalancheSize =  garfieldPhysics->GetAvalancheSize();
-  Double_t gain = garfieldPhysics->GetGain();
-
-  // update hit 
-  fHit->AddEdepGas(edep);
-  fHit->AddAvalancheSize(avalancheSize);
-  fHit->AddGain(gain);
-
-  return true;
-}
-
-//_____________________________________________________________________________
-void SensitiveDetector::EndOfEvent()
-{
-/// Print hits collection (if verbose) and reset hits afterwards.
-
-
-  if (fVerboseLevel>0)  Print();
-    
-  // Reset hits collection
-  fHit->Reset();
-
-  // Reset data collected in Garfield
-  GarfieldPhysics* garfieldPhysics = GarfieldPhysics::GetInstance();
-  garfieldPhysics->Clear();
-}
-
-//_____________________________________________________________________________
-void SensitiveDetector::Register()
-{
-/// Register the hits collection in Root manager.
-  
-  TMCRootManager::Instance()
-    ->Register("hit", "VMC::ExGarfield::Hit", &fHit);
-}
-
-//_____________________________________________________________________________
-void SensitiveDetector::Print(Option_t* /*option*/) const
-{
-/// Print the hit.
-  
-   fHit->Print();        
-}
-
-}
-}
-

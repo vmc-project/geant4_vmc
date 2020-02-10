@@ -11,22 +11,22 @@
 /// \brief The Geant4 VMC example Monopole application executable
 ///
 /// The Geant4 VMC application executable
-/// with explicitely instantiated TGeant3 or TGeant4 and linked 
+/// with explicitely instantiated TGeant3 or TGeant4 and linked
 /// with all libraries.
 ///
 /// \date 15/07/2018
 /// \author I. Hrivnacova; IPN, Orsay
 
-#include "MCApplication.h"
 #include "DetectorConstruction.h"
+#include "MCApplication.h"
 
 #ifdef USE_GEANT4
 #include "TG4RunConfiguration.h"
 #include "TGeant4.h"
 #endif
 
-#include "TThread.h"
 #include "TInterpreter.h"
+#include "TThread.h"
 
 /// Application main program
 int main(int argc, char** argv)
@@ -36,26 +36,26 @@ int main(int argc, char** argv)
   std::cerr << "Monopole example: Geant3 is not supported." << std::endl;
   return 1;
 #endif
-  
+
   // Initialize Root threading.
-  // (Multi-threading is triggered automatically if Geant4 was built 
+  // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
-   TThread::Initialize();
-   gInterpreter->SetProcessLineLock(false);
+  TThread::Initialize();
+  gInterpreter->SetProcessLineLock(false);
 #endif
 
   // Create MC application
-  VMC::Monopole::MCApplication* appl 
-    =  new VMC::Monopole::MCApplication("ExampleMonopole",
-                                        "The exampleMonopole MC application");
+  VMC::Monopole::MCApplication* appl = new VMC::Monopole::MCApplication(
+    "ExampleMonopole", "The exampleMonopole MC application");
   // Set detector parameters
   // /testex/det/setMat G4_Si
   // /testex/det/setSizeX  10 cm
   // /testex/det/setSizeYZ 20 cm
   // /testex/det/setStepSize 0.2 mm
   // /testex/run/binSize 0.2 mm
-  VMC::Monopole::DetectorConstruction* detector = appl->GetDetectorConstruction();
+  VMC::Monopole::DetectorConstruction* detector =
+    appl->GetDetectorConstruction();
   detector->SetAbsorberMaterial("Si");
   detector->SetAbsorberSizeX(10);
   detector->SetAbsorberSizeYZ(20);
@@ -63,21 +63,20 @@ int main(int argc, char** argv)
   appl->SetBinSize(0.02);
 
 #ifdef USE_GEANT4
-  // RunConfiguration for Geant4 
-  TG4RunConfiguration* runConfiguration 
-    = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT+monopole", "stepLimiter");
+  // RunConfiguration for Geant4
+  TG4RunConfiguration* runConfiguration = new TG4RunConfiguration(
+    "geomRootToGeant4", "FTFP_BERT+monopole", "stepLimiter");
 
   // TGeant4
-  TGeant4* geant4
-    = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration,
-                  argc, argv);
+  TGeant4* geant4 = new TGeant4(
+    "TGeant4", "The Geant4 Monte Carlo", runConfiguration, argc, argv);
   std::cout << "Geant4 has been created." << std::endl;
 
   // Customise Geant4 setting
   // (verbose level, global range cut, ..)
-  geant4->ProcessGeantMacro("g4config.in");  
+  geant4->ProcessGeantMacro("g4config.in");
 #endif
-  
+
   // Run from this main
   appl->InitMC("");
 
@@ -90,4 +89,4 @@ int main(int argc, char** argv)
   appl->RunMC(100);
 
   delete appl;
-}  
+}

@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TR/include/SensitiveDetector.h
-/// \brief Definition of the SensitiveDetector class 
+/// \brief Definition of the SensitiveDetector class
 ///
 /// Geant4 TestEm10 adapted to Virtual Monte Carlo.
 ///
@@ -33,44 +33,44 @@ namespace TR
 
 class SensitiveDetector : public TNamed
 {
-  public:
-    SensitiveDetector(const char* name);
-    SensitiveDetector(const SensitiveDetector& origin);
-    SensitiveDetector();
-    virtual ~SensitiveDetector();
+ public:
+  SensitiveDetector(const char* name);
+  SensitiveDetector(const SensitiveDetector& origin);
+  SensitiveDetector();
+  virtual ~SensitiveDetector();
 
-    // methods
-    void    Initialize();
-    Bool_t  ProcessHits();
-    void    EndOfEvent();
-    virtual void  Print(Option_t* option = "") const;
-    
-    // set methods
-    void SetVerboseLevel(Int_t level);
+  // methods
+  void Initialize();
+  Bool_t ProcessHits();
+  void EndOfEvent();
+  virtual void Print(Option_t* option = "") const;
 
-    // get methods
-    Double_t GetEdep() const;
+  // set methods
+  void SetVerboseLevel(Int_t level);
 
-  private:
-    // data members
-    Double_t  fEdep;          ///< Energy deposit
-    Int_t     fAbsorberVolId; ///< The absorber volume Id
-    Int_t     fVerboseLevel;  ///< Verbosity level
-   
-  ClassDef(SensitiveDetector,1) //SensitiveDetector 
+  // get methods
+  Double_t GetEdep() const;
+
+ private:
+  // data members
+  Double_t fEdep;       ///< Energy deposit
+  Int_t fAbsorberVolId; ///< The absorber volume Id
+  Int_t fVerboseLevel;  ///< Verbosity level
+
+  ClassDef(SensitiveDetector, 1) // SensitiveDetector
 };
 
 /// Set verbose level
 /// \param level The new verbose level value
-inline void SensitiveDetector::SetVerboseLevel(Int_t level) 
-{ fVerboseLevel = level; }
+inline void SensitiveDetector::SetVerboseLevel(Int_t level)
+{
+  fVerboseLevel = level;
+}
 
 /// Return energy deposit
-inline Double_t SensitiveDetector::GetEdep() const
-{ return fEdep; }
+inline Double_t SensitiveDetector::GetEdep() const { return fEdep; }
 
-}
-}
+} // namespace TR
+} // namespace VMC
 
-#endif //SENSITIVE_DETECTOR_H
-
+#endif // SENSITIVE_DETECTOR_H

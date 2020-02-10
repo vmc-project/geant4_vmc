@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4RunConfiguration.h
-/// \brief Definition of the TG4RunConfiguration class 
+/// \brief Definition of the TG4RunConfiguration class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -61,87 +61,87 @@ class G4UImessenger;
 /// - XYZ                - selected hadron physics list ( XYZ = LHEP, QGSP, ...)
 /// - XYZ+optical        - selected hadron physics list + optical physics
 ///
-/// The third argument activates the special processes in the TG4SpecialPhysicsList,
-/// which implement VMC features:
-/// - stepLimiter       - step limiter (default) 
+/// The third argument activates the special processes in the
+/// TG4SpecialPhysicsList, which implement VMC features:
+/// - stepLimiter       - step limiter (default)
 /// - specialCuts       - VMC cuts
-/// - specialControls   - VMC controls for activation/inactivation selected processes
+/// - specialControls   - VMC controls for activation/inactivation selected
+/// processes
 /// - stackPopper       - stackPopper process
 /// When more than one options are selected, they should be separated with '+'
 /// character: eg. stepLimit+specialCuts.
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4RunConfiguration 
+class TG4RunConfiguration
 {
-  public:
-    TG4RunConfiguration(const TString& userGeometry,
-                        const TString& physicsList = "emStandard",
-                        const TString& specialProcess = "stepLimiter",
-                        Bool_t specialStacking = false,
-                        Bool_t mtApplication = true);
-    virtual ~TG4RunConfiguration();
+ public:
+  TG4RunConfiguration(const TString& userGeometry,
+    const TString& physicsList = "emStandard",
+    const TString& specialProcess = "stepLimiter",
+    Bool_t specialStacking = false, Bool_t mtApplication = true);
+  virtual ~TG4RunConfiguration();
 
-    // methods 
-    //
-    virtual G4VUserDetectorConstruction*   CreateDetectorConstruction();
-    virtual G4VUserPhysicsList*            CreatePhysicsList();
-    virtual G4VUserPrimaryGeneratorAction* CreatePrimaryGenerator();
+  // methods
+  //
+  virtual G4VUserDetectorConstruction* CreateDetectorConstruction();
+  virtual G4VUserPhysicsList* CreatePhysicsList();
+  virtual G4VUserPrimaryGeneratorAction* CreatePrimaryGenerator();
 
-    virtual G4UserRunAction*      CreateRunAction();  
-    virtual G4UserEventAction*    CreateEventAction(); 
-    virtual TG4TrackingAction*    CreateTrackingAction();
-    virtual TG4SteppingAction*    CreateSteppingAction();
-    virtual G4UserStackingAction* CreateStackingAction(); 
-    
-    virtual TG4VUserRegionConstruction*   CreateUserRegionConstruction();
-    virtual TG4VUserPostDetConstruction*  CreateUserPostDetConstruction();
-    virtual TG4VUserFastSimulation*       CreateUserFastSimulation();
+  virtual G4UserRunAction* CreateRunAction();
+  virtual G4UserEventAction* CreateEventAction();
+  virtual TG4TrackingAction* CreateTrackingAction();
+  virtual TG4SteppingAction* CreateSteppingAction();
+  virtual G4UserStackingAction* CreateStackingAction();
 
-    // set methods
-    void  SetMTApplication(Bool_t mtApplication);
-    void  SetParameter(const TString& name, Double_t value);
+  virtual TG4VUserRegionConstruction* CreateUserRegionConstruction();
+  virtual TG4VUserPostDetConstruction* CreateUserPostDetConstruction();
+  virtual TG4VUserFastSimulation* CreateUserFastSimulation();
 
-    // get methods
-    TString  GetUserGeometry() const;
-    TString  GetPhysicsListSelection() const;
-    Bool_t   IsSpecialStacking() const;
-    Bool_t   IsSpecialControls() const;
-    Bool_t   IsSpecialCuts() const;
-    Bool_t   IsMTApplication() const;
+  // set methods
+  void SetMTApplication(Bool_t mtApplication);
+  void SetParameter(const TString& name, Double_t value);
 
-  protected:
-    // data members
-    TString        fUserGeometry;           ///< way of building geometry
-    TString        fPhysicsListSelection;   ///< physics list selection
-    TString        fSpecialProcessSelection;///< special process selection
-    Bool_t         fSpecialStacking;        ///< option for special stacking
-    Bool_t         fMTApplication;          ///< option for MT mode if available
-    Bool_t         fSpecialControls;        ///< option for special controls
-    Bool_t         fSpecialCuts;            ///< option for special cuts
-    G4UImessenger* fAGDDMessenger;          //!< XML messenger
-    G4UImessenger* fGDMLMessenger;          //!< XML messenger
+  // get methods
+  TString GetUserGeometry() const;
+  TString GetPhysicsListSelection() const;
+  Bool_t IsSpecialStacking() const;
+  Bool_t IsSpecialControls() const;
+  Bool_t IsSpecialCuts() const;
+  Bool_t IsMTApplication() const;
 
-    /// The map of special parameters which need to be set before creating TGeant4
-    /// Actually used for monopole properties:
-    /// monopoleMass, monopoleElCharge, monopoleMagCharge
-    std::map<TString, Double_t>  fParameters; //!
+ protected:
+  // data members
+  TString fUserGeometry;            ///< way of building geometry
+  TString fPhysicsListSelection;    ///< physics list selection
+  TString fSpecialProcessSelection; ///< special process selection
+  Bool_t fSpecialStacking;          ///< option for special stacking
+  Bool_t fMTApplication;            ///< option for MT mode if available
+  Bool_t fSpecialControls;          ///< option for special controls
+  Bool_t fSpecialCuts;              ///< option for special cuts
+  G4UImessenger* fAGDDMessenger;    //!< XML messenger
+  G4UImessenger* fGDMLMessenger;    //!< XML messenger
 
-  private:
-    /// Not implemented
-    TG4RunConfiguration();
-    /// Not implemented
-    TG4RunConfiguration(const TG4RunConfiguration& right);
-    /// Not implemented
-    TG4RunConfiguration& operator=(const TG4RunConfiguration& right);
+  /// The map of special parameters which need to be set before creating TGeant4
+  /// Actually used for monopole properties:
+  /// monopoleMass, monopoleElCharge, monopoleMagCharge
+  std::map<TString, Double_t> fParameters; //!
+
+ private:
+  /// Not implemented
+  TG4RunConfiguration();
+  /// Not implemented
+  TG4RunConfiguration(const TG4RunConfiguration& right);
+  /// Not implemented
+  TG4RunConfiguration& operator=(const TG4RunConfiguration& right);
 };
 
 // inline functions
 
-inline TString TG4RunConfiguration::GetPhysicsListSelection() const {
+inline TString TG4RunConfiguration::GetPhysicsListSelection() const
+{
   /// Return physics list selection
   return fPhysicsListSelection;
-}  
+}
 
-#endif //TG4V_RUN_CONFIGURATION_H
-
+#endif // TG4V_RUN_CONFIGURATION_H

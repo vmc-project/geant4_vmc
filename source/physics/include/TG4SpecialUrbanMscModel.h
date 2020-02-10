@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4SpecialUrbanMscModel.h
-/// \brief Definition of the TG4SpecialUrbanMscModel class 
+/// \brief Definition of the TG4SpecialUrbanMscModel class
 ///
 /// \author Vladimir Ivanchenko, Laszlo Urban
 
@@ -64,10 +64,10 @@
 
 #include <CLHEP/Units/SystemOfUnits.h>
 
-#include "G4VMscModel.hh"
-#include "G4MscStepLimitType.hh"
-#include "G4Log.hh"
 #include "G4Exp.hh"
+#include "G4Log.hh"
+#include "G4MscStepLimitType.hh"
+#include "G4VMscModel.hh"
 #include "G4Version.hh"
 
 class G4ParticleChangeForMSC;
@@ -79,7 +79,7 @@ namespace CLHEP
 class HepRandomEngine;
 }
 
-static const G4double c_highland = 13.6*CLHEP::MeV ;
+static const G4double c_highland = 13.6 * CLHEP::MeV;
 
 /// \ingroup physics
 /// \brief Laszlo Urban model adapted for ALICE EMCAL requirements
@@ -89,8 +89,7 @@ static const G4double c_highland = 13.6*CLHEP::MeV ;
 class TG4SpecialUrbanMscModel : public G4VMscModel
 {
 
-public:
-
+ public:
   TG4SpecialUrbanMscModel(const G4String& nam = "ALICEUrbanMsc");
 
   virtual ~TG4SpecialUrbanMscModel();
@@ -100,53 +99,49 @@ public:
   void StartTracking(G4Track*);
 
   G4double ComputeCrossSectionPerAtom(const G4ParticleDefinition* particle,
-				      G4double KineticEnergy,
-				      G4double AtomicNumber,
-				      G4double AtomicWeight=0., 
-				      G4double cut =0.,
-				      G4double emax=DBL_MAX);
+    G4double KineticEnergy, G4double AtomicNumber, G4double AtomicWeight = 0.,
+    G4double cut = 0., G4double emax = DBL_MAX);
 
   G4ThreeVector& SampleScattering(const G4ThreeVector&, G4double safety);
 
-  G4double ComputeTruePathLengthLimit(const G4Track& track,
-				      G4double& currentMinimalStep);
+  G4double ComputeTruePathLengthLimit(
+    const G4Track& track, G4double& currentMinimalStep);
 
   G4double ComputeGeomPathLength(G4double truePathLength);
 
   G4double ComputeTrueStepLength(G4double geomStepLength);
 
-  inline G4double ComputeTheta0(G4double truePathLength, 
-				G4double KineticEnergy);
+  inline G4double ComputeTheta0(
+    G4double truePathLength, G4double KineticEnergy);
 
-private:
-
+ private:
   G4double SampleCosineTheta(G4double trueStepLength, G4double KineticEnergy);
 
   inline void SetParticle(const G4ParticleDefinition*);
 
   inline void UpdateCache();
-  
+
   inline G4double SimpleScattering(G4double xmeanth, G4double x2meanth);
 
   inline G4double LatCorrelation();
 
   //  hide assignment operator
-  TG4SpecialUrbanMscModel & operator=(const  TG4SpecialUrbanMscModel &right);
-  TG4SpecialUrbanMscModel(const  TG4SpecialUrbanMscModel&);
+  TG4SpecialUrbanMscModel& operator=(const TG4SpecialUrbanMscModel& right);
+  TG4SpecialUrbanMscModel(const TG4SpecialUrbanMscModel&);
 
 #if G4VERSION_NUMBER >= 1020
-  CLHEP::HepRandomEngine*     rndmEngineMod;
+  CLHEP::HepRandomEngine* rndmEngineMod;
 #endif
 
   const G4ParticleDefinition* particle;
-  G4ParticleChangeForMSC*     fParticleChange;
+  G4ParticleChangeForMSC* fParticleChange;
 
   const G4MaterialCutsCouple* couple;
-  G4LossTableManager*         theManager;
+  G4LossTableManager* theManager;
 
   G4double mass;
-  G4double charge,ChargeSquare;
-  G4double masslimite,lambdalimit,fr;
+  G4double charge, ChargeSquare;
+  G4double masslimite, lambdalimit, fr;
 
   G4double taubig;
   G4double tausmall;
@@ -154,7 +149,7 @@ private:
   G4double currentTau;
   G4double tlimit;
   G4double tlimitmin;
-  G4double tlimitminfix,tlimitminfix2;
+  G4double tlimitminfix, tlimitminfix2;
   G4double tgeom;
 
   G4double geombig;
@@ -169,137 +164,136 @@ private:
   G4double lambdaeff;
   G4double tPathLength;
   G4double zPathLength;
-  G4double par1,par2,par3;
+  G4double par1, par2, par3;
 
   G4double stepmin;
 
   G4double currentKinEnergy;
-  G4double currentRange; 
+  G4double currentRange;
   G4double rangeinit;
   G4double currentRadLength;
 
-  G4double theta0max,rellossmax;
+  G4double theta0max, rellossmax;
   G4double third;
 
-  G4int    currentMaterialIndex;
+  G4int currentMaterialIndex;
 
   G4double y;
   G4double Zold;
-  G4double Zeff,Z2,Z23,lnZ;
-  G4double coeffth1,coeffth2;
-  G4double coeffc1,coeffc2,coeffc3,coeffc4;
+  G4double Zeff, Z2, Z23, lnZ;
+  G4double coeffth1, coeffth2;
+  G4double coeffc1, coeffc2, coeffc3, coeffc4;
 
-  G4bool   firstStep;
-  G4bool   inside;
-  G4bool   insideskin;
+  G4bool firstStep;
+  G4bool inside;
+  G4bool insideskin;
 
-  G4bool   latDisplasmentbackup ;
+  G4bool latDisplasmentbackup;
 
   G4double rangecut;
-  G4double drr,finalr;
+  G4double drr, finalr;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-inline
-void TG4SpecialUrbanMscModel::SetParticle(const G4ParticleDefinition* p)
+inline void TG4SpecialUrbanMscModel::SetParticle(const G4ParticleDefinition* p)
 {
   if (p != particle) {
     particle = p;
     mass = p->GetPDGMass();
-    charge = p->GetPDGCharge()/CLHEP::eplus;
-    ChargeSquare = charge*charge;
+    charge = p->GetPDGCharge() / CLHEP::eplus;
+    ChargeSquare = charge * charge;
   }
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-inline
-void TG4SpecialUrbanMscModel::UpdateCache()                                   
+inline void TG4SpecialUrbanMscModel::UpdateCache()
 {
-    lnZ = G4Log(Zeff);
-    // correction in theta0 formula
-    G4double w = G4Exp(lnZ/6.);
-    G4double facz = 0.990395+w*(-0.168386+w*0.093286) ;
-    coeffth1 = facz*(1. - 8.7780e-2/Zeff);
-    coeffth2 = facz*(4.0780e-2 + 1.7315e-4*Zeff);
+  lnZ = G4Log(Zeff);
+  // correction in theta0 formula
+  G4double w = G4Exp(lnZ / 6.);
+  G4double facz = 0.990395 + w * (-0.168386 + w * 0.093286);
+  coeffth1 = facz * (1. - 8.7780e-2 / Zeff);
+  coeffth2 = facz * (4.0780e-2 + 1.7315e-4 * Zeff);
 
-    // tail parameters
-    G4double Z13 = w*w;
-    coeffc1  = 2.3785    - Z13*(4.1981e-1 - Z13*6.3100e-2);
-    coeffc2  = 4.7526e-1 + Z13*(1.7694    - Z13*3.3885e-1);
-    coeffc3  = 2.3683e-1 - Z13*(1.8111    - Z13*3.2774e-1);
-    coeffc4  = 1.7888e-2 + Z13*(1.9659e-2 - Z13*2.6664e-3);
+  // tail parameters
+  G4double Z13 = w * w;
+  coeffc1 = 2.3785 - Z13 * (4.1981e-1 - Z13 * 6.3100e-2);
+  coeffc2 = 4.7526e-1 + Z13 * (1.7694 - Z13 * 3.3885e-1);
+  coeffc3 = 2.3683e-1 - Z13 * (1.8111 - Z13 * 3.2774e-1);
+  coeffc4 = 1.7888e-2 + Z13 * (1.9659e-2 - Z13 * 2.6664e-3);
 
-    Z2   = Zeff*Zeff;
-    Z23  = Z13*Z13;               
-                                              
-    Zold = Zeff;
+  Z2 = Zeff * Zeff;
+  Z23 = Z13 * Z13;
+
+  Zold = Zeff;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-inline
-G4double TG4SpecialUrbanMscModel::ComputeTheta0(G4double trueStepLength,
-					G4double KineticEnergy)
+inline G4double TG4SpecialUrbanMscModel::ComputeTheta0(
+  G4double trueStepLength, G4double KineticEnergy)
 {
   // for all particles take the width of the central part
   //  from a  parametrization similar to the Highland formula
   // ( Highland formula: Particle Physics Booklet, July 2002, eq. 26.10)
-  G4double invbetacp = std::sqrt((currentKinEnergy+mass)*(KineticEnergy+mass)/
-				 (currentKinEnergy*(currentKinEnergy+2.*mass)*
-				  KineticEnergy*(KineticEnergy+2.*mass)));
-  y = trueStepLength/currentRadLength;
-  G4double theta0 = c_highland*std::abs(charge)*std::sqrt(y)*invbetacp;
+  G4double invbetacp =
+    std::sqrt((currentKinEnergy + mass) * (KineticEnergy + mass) /
+              (currentKinEnergy * (currentKinEnergy + 2. * mass) *
+                KineticEnergy * (KineticEnergy + 2. * mass)));
+  y = trueStepLength / currentRadLength;
+  G4double theta0 = c_highland * std::abs(charge) * std::sqrt(y) * invbetacp;
   y = G4Log(y);
   // correction factor from e- scattering data
-  theta0 *= (coeffth1+coeffth2*y);
+  theta0 *= (coeffth1 + coeffth2 * y);
   return theta0;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-inline
-G4double TG4SpecialUrbanMscModel::SimpleScattering(G4double xmeanth, G4double x2meanth)
+inline G4double TG4SpecialUrbanMscModel::SimpleScattering(
+  G4double xmeanth, G4double x2meanth)
 {
   // 'large angle scattering'
   // 2 model functions with correct xmean and x2mean
-  G4double a = (2.*xmeanth+9.*x2meanth-3.)/(2.*xmeanth-3.*x2meanth+1.);
-  G4double prob = (a+2.)*xmeanth/a;
+  G4double a =
+    (2. * xmeanth + 9. * x2meanth - 3.) / (2. * xmeanth - 3. * x2meanth + 1.);
+  G4double prob = (a + 2.) * xmeanth / a;
 
   // sampling
   G4double cth = 1.;
-  if(rndmEngineMod->flat() < prob) {
-    cth = -1.+2.*G4Exp(G4Log(rndmEngineMod->flat())/(a+1.));
-  } else {
-    cth = -1.+2.*rndmEngineMod->flat();
+  if (rndmEngineMod->flat() < prob) {
+    cth = -1. + 2. * G4Exp(G4Log(rndmEngineMod->flat()) / (a + 1.));
+  }
+  else {
+    cth = -1. + 2. * rndmEngineMod->flat();
   }
   return cth;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-inline
-G4double TG4SpecialUrbanMscModel::LatCorrelation()
+inline G4double TG4SpecialUrbanMscModel::LatCorrelation()
 {
   static const G4double kappa = 2.5;
   static const G4double kappami1 = 1.5;
-  
+
   G4double latcorr = 0.;
-  if((currentTau >= tausmall) && !insideskin)
-  {
-    if(currentTau < taulim)
-      latcorr = lambdaeff*kappa*currentTau*currentTau*
-                (1.-(kappa+1.)*currentTau*third)*third;
-    else
-    {
+  if ((currentTau >= tausmall) && !insideskin) {
+    if (currentTau < taulim)
+      latcorr = lambdaeff * kappa * currentTau * currentTau *
+                (1. - (kappa + 1.) * currentTau * third) * third;
+    else {
       G4double etau = 0.;
-      if(currentTau < taubig) { etau = G4Exp(-currentTau); }
-      latcorr = -kappa*currentTau;
-      latcorr = G4Exp(latcorr)/kappami1;
-      latcorr += 1.-kappa*etau/kappami1 ;
-      latcorr *= 2.*lambdaeff*third;
+      if (currentTau < taubig) {
+        etau = G4Exp(-currentTau);
+      }
+      latcorr = -kappa * currentTau;
+      latcorr = G4Exp(latcorr) / kappami1;
+      latcorr += 1. - kappa * etau / kappami1;
+      latcorr *= 2. * lambdaeff * third;
     }
   }
   return latcorr;
@@ -308,4 +302,3 @@ G4double TG4SpecialUrbanMscModel::LatCorrelation()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #endif
-

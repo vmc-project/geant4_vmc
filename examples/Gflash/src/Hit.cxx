@@ -21,9 +21,9 @@
 
 /// \cond CLASSIMP
 ClassImp(VMC::Gflash::Hit)
-/// \endcond
+  /// \endcond
 
-using namespace std;
+  using namespace std;
 
 namespace VMC
 {
@@ -31,25 +31,21 @@ namespace Gflash
 {
 
 //_____________________________________________________________________________
-Hit::Hit() 
-  : TObject(),
-    fEdep(0),
-    fPos(),
-    fCrystalNumber(0)
+Hit::Hit() : TObject(), fEdep(0), fPos(), fCrystalNumber(0)
 {
-/// Default constructor
+  /// Default constructor
 }
 
 //_____________________________________________________________________________
-Hit::~Hit() 
+Hit::~Hit()
 {
-/// Destructor
+  /// Destructor
 }
 
 //_____________________________________________________________________________
 void Hit::Print(Option_t* /*option*/) const
 {
-/// Print hit info
+  /// Print hit info
 
   cout << "In crystal: " << fCrystalNumber << ":" << endl
        << "   energy deposit (keV): " << fEdep * 1.0e06 << endl;
@@ -58,12 +54,12 @@ void Hit::Print(Option_t* /*option*/) const
 //_____________________________________________________________________________
 void Hit::Reset()
 {
-/// Reset accounted values.
+  /// Reset accounted values.
 
   fEdep = 0.;
   fPos = TVector3();
   fCrystalNumber = 0;
 }
 
-}
-}
+} // namespace Gflash
+} // namespace VMC

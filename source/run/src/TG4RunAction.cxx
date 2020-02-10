@@ -8,33 +8,34 @@
 //-------------------------------------------------
 
 /// \file TG4RunAction.cxx
-/// \brief Implementation of the TG4RunAction class 
+/// \brief Implementation of the TG4RunAction class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include <G4Timer.hh>
-   // in order to avoid the odd dependency for the
-   // times system function this include must be the first
+// in order to avoid the odd dependency for the
+// times system function this include must be the first
 
-#include "TG4RunAction.h"
-#include "TGeant4.h"
 #include "TG4Globals.h"
 #include "TG4RegionsManager.h"
+#include "TG4RunAction.h"
+#include "TGeant4.h"
 
-#include <G4Run.hh>
-#include <Randomize.hh>
-#include <G4UImanager.hh>
 #include "G4AutoLock.hh"
+#include <G4Run.hh>
+#include <G4UImanager.hh>
+#include <Randomize.hh>
 
 #include <TObjArray.h>
 
 // mutex in a file scope
 
 #ifdef G4MULTITHREADED
-namespace {
-  //Mutex to lock master application when merging data
-  G4Mutex mergeMutex = G4MUTEX_INITIALIZER;
-}
+namespace
+{
+// Mutex to lock master application when merging data
+G4Mutex mergeMutex = G4MUTEX_INITIALIZER;
+} // namespace
 #endif
 
 const G4String TG4RunAction::fgkDefaultRandomStatusFile = "currentRun.rndm";
@@ -44,27 +45,27 @@ TG4RunAction::TG4RunAction()
   : G4UserRunAction(),
     TG4Verbose("runAction"),
     fMessenger(this),
-    fCrossSectionManager(), 
+    fCrossSectionManager(),
     fTimer(0),
     fRunID(-1),
     fSaveRandomStatus(false),
     fReadRandomStatus(false),
     fRandomStatusFile(fgkDefaultRandomStatusFile)
 {
-/// Default constructor
+  /// Default constructor
 
-  if ( VerboseLevel() > 1 )
+  if (VerboseLevel() > 1)
     G4cout << "TG4RunAction::TG4RunAction " << this << G4endl;
 
   fTimer = new G4Timer;
 }
 
 //_____________________________________________________________________________
-TG4RunAction::~TG4RunAction() 
+TG4RunAction::~TG4RunAction()
 {
-/// Destructor
+  /// Destructor
 
-  if ( VerboseLevel() > 1 )
+  if (VerboseLevel() > 1)
     G4cout << "TG4RunAction::~TG4RunAction " << this << G4endl;
 
   delete fTimer;
@@ -77,44 +78,44 @@ TG4RunAction::~TG4RunAction()
 //_____________________________________________________________________________
 void TG4RunAction::BeginOfRunAction(const G4Run* run)
 {
-/// Called by G4 kernel at the beginning of run.
+  /// Called by G4 kernel at the beginning of run.
 
   fRunID++;
-  
+
   if (VerboseLevel() > 0) {
     G4cout << "### Run " << run->GetRunID() << " start." << G4endl;
   }
-    
-  if ( TG4RegionsManager::Instance() ) {
-    if ( TG4RegionsManager::Instance()->IsCheck() ) {
+
+  if (TG4RegionsManager::Instance()) {
+    if (TG4RegionsManager::Instance()->IsCheck()) {
       TG4RegionsManager::Instance()->CheckRegions();
-    }  
-    if ( TG4RegionsManager::Instance()->IsPrint() ) {
+    }
+    if (TG4RegionsManager::Instance()->IsPrint()) {
       TG4RegionsManager::Instance()->PrintRegions();
-    }  
-  }  
+    }
+  }
 
   // activate random number status
-  if ( fSaveRandomStatus) {
+  if (fSaveRandomStatus) {
     G4UImanager::GetUIpointer()->ApplyCommand("/random/setSavingFlag true");
-    if ( VerboseLevel() > 0)
-      G4cout << "Activated saving random status " << G4endl;  
-      CLHEP::HepRandom::showEngineStatus();
-      G4cout << G4endl;  
-  }    
-    
-  if ( fReadRandomStatus) {
+    if (VerboseLevel() > 0)
+      G4cout << "Activated saving random status " << G4endl;
+    CLHEP::HepRandom::showEngineStatus();
+    G4cout << G4endl;
+  }
+
+  if (fReadRandomStatus) {
     // restore event random number status from a file
     CLHEP::HepRandom::showEngineStatus();
     G4String command("/random/resetEngineFrom ");
     command += fRandomStatusFile;
     G4UImanager::GetUIpointer()->ApplyCommand(command.data());
-    if ( VerboseLevel() > 0) {
-      G4cout << "Resetting random engine from " << fRandomStatusFile << G4endl;  
+    if (VerboseLevel() > 0) {
+      G4cout << "Resetting random engine from " << fRandomStatusFile << G4endl;
       CLHEP::HepRandom::showEngineStatus();
-      G4cout << G4endl;  
-    }         
-  }  
+      G4cout << G4endl;
+    }
+  }
 
   fTimer->Start();
 }
@@ -122,24 +123,25 @@ void TG4RunAction::BeginOfRunAction(const G4Run* run)
 //_____________________________________________________________________________
 void TG4RunAction::EndOfRunAction(const G4Run* run)
 {
-/// Called by G4 kernel at the end of run.
-
+  /// Called by G4 kernel at the end of run.
 
 #ifdef G4MULTITHREADED
   // Merge user application data
   G4AutoLock lm(&mergeMutex);
-  TGeant4::MasterApplicationInstance()->Merge(TVirtualMCApplication::Instance());
+  TGeant4::MasterApplicationInstance()->Merge(
+    TVirtualMCApplication::Instance());
   lm.unlock();
 #endif
 
-  if ( fCrossSectionManager.IsMakeHistograms() ) {
+  if (fCrossSectionManager.IsMakeHistograms()) {
     fCrossSectionManager.MakeHistograms();
-  }  
+  }
 
   fTimer->Stop();
 
   if (VerboseLevel() > 0) {
     G4cout << "Time of this run:   " << *fTimer << G4endl;
-    G4cout << "Number of events processed: " << run->GetNumberOfEvent() << G4endl;
-  }    
-}    
+    G4cout << "Number of events processed: " << run->GetNumberOfEvent()
+           << G4endl;
+  }
+}

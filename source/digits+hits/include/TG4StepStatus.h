@@ -18,8 +18,8 @@
 /// \ingroup digits_hits
 /// \enum TG4StepStatus
 /// \brief Step status enumeration
-/// 
-/// In orded to take into account different stepping 
+///
+/// In orded to take into account different stepping
 /// mechanism in G3 and G4 three states of TG4StepManager
 /// are defined:
 ///  - kVertex     - returns track properties in the vertex
@@ -32,12 +32,12 @@
 ///                  point
 ///  - kGflashStep - returns track properties in a Gflash spot
 ///                  point
-enum TG4StepStatus { 
+enum TG4StepStatus
+{
   kVertex,     ///<  in track vertex
   kBoundary,   ///<  when crossing geometrical boundary
   kNormalStep, ///<  in post step point
   kGflashSpot  ///<  in post step point with Gflash
 };
 
-#endif //TG4_STEP_STATUS_H
-
+#endif // TG4_STEP_STATUS_H

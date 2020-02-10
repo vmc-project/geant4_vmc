@@ -24,41 +24,39 @@
 #include "TGeant3TGeo.h"
 #endif
 
-#include "TThread.h"
 #include "TInterpreter.h"
+#include "TThread.h"
 
 /// Application main program
 int main(int argc, char** argv)
 {
   // Initialize Root threading.
-  // (Multi-threading is triggered automatically if Geant4 was built 
+  // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
-   TThread::Initialize();
-   gInterpreter->SetProcessLineLock(false);
+  TThread::Initialize();
+  gInterpreter->SetProcessLineLock(false);
 #endif
 
   // Create MC application (thread local)
-  VMC::Gflash::MCApplication* appl
-    =  new VMC::Gflash::MCApplication("ExampleGflash",
-                                      "The exampleGflash MC application");
+  VMC::Gflash::MCApplication* appl = new VMC::Gflash::MCApplication(
+    "ExampleGflash", "The exampleGflash MC application");
 
 #ifdef USE_GEANT4
-  // RunConfiguration for Geant4 
-  TG4RunConfiguration* runConfiguration
-    = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT", "gflash", false, false);
+  // RunConfiguration for Geant4
+  TG4RunConfiguration* runConfiguration = new TG4RunConfiguration(
+    "geomRootToGeant4", "FTFP_BERT", "gflash", false, false);
 
   // TGeant4
-  TGeant4* geant4
-    = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration,
-                  argc, argv);
+  TGeant4* geant4 = new TGeant4(
+    "TGeant4", "The Geant4 Monte Carlo", runConfiguration, argc, argv);
 
   // Customise Geant4 setting
   // Fast simulation model configuration
   // + verbose level, global range cuts, etc.
   geant4->ProcessGeantMacro("g4config.in");
 #endif
-  
+
 #ifdef USE_GEANT3
   new TGeant3TGeo("C++ Interface to Geant3");
 #endif
@@ -74,4 +72,4 @@ int main(int argc, char** argv)
   appl->RunMC(10);
 
   delete appl;
-}  
+}

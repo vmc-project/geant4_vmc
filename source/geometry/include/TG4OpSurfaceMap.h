@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4OpSurfaceMap.h
-/// \brief Definition of the TG4OpSurfaceMap typedef 
+/// \brief Definition of the TG4OpSurfaceMap typedef
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -20,6 +20,6 @@
 /// \ingroup geometry
 /// \brief The map between optical surfaces names and their objects.
 
-typedef std::map<G4String, G4OpticalSurface*>  TG4OpSurfaceMap;
+typedef std::map<G4String, G4OpticalSurface*> TG4OpSurfaceMap;
 
 #endif

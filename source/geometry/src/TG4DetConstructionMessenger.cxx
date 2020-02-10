@@ -8,29 +8,28 @@
 //-------------------------------------------------
 
 /// \file TG4DetConstructionMessenger.cxx
-/// \brief Implementation of the TG4DetConstructionMessenger class 
+/// \brief Implementation of the TG4DetConstructionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-
 #include "TG4DetConstructionMessenger.h"
 #include "TG4DetConstruction.h"
-#include "TG4GeometryManager.h"
-#include "TG4RadiatorDescription.h"
-#include "TG4GeometryServices.h"
 #include "TG4G3Units.h"
+#include "TG4GeometryManager.h"
+#include "TG4GeometryServices.h"
 #include "TG4Globals.h"
+#include "TG4RadiatorDescription.h"
 
-#include <G4UIdirectory.hh>
-#include <G4UIcmdWithoutParameter.hh>
-#include <G4UIcmdWithABool.hh>
-#include <G4UIcmdWithAString.hh>
-#include <G4UIcmdWithADoubleAndUnit.hh>
 #include <G4AnalysisUtilities.hh>
+#include <G4UIcmdWithABool.hh>
+#include <G4UIcmdWithADoubleAndUnit.hh>
+#include <G4UIcmdWithAString.hh>
+#include <G4UIcmdWithoutParameter.hh>
+#include <G4UIdirectory.hh>
 
 //_____________________________________________________________________________
 TG4DetConstructionMessenger::TG4DetConstructionMessenger(
-                                   TG4GeometryManager* geometryManager)
+  TG4GeometryManager* geometryManager)
   : G4UImessenger(),
     fGeometryManager(geometryManager),
     fDirectory(0),
@@ -52,125 +51,124 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
     fSetRadiatorCmd(0),
     fRadiatorDescription(0)
 {
-/// Standard constructor
+  /// Standard constructor
 
   fDirectory = new G4UIdirectory("/mcDet/");
   fDirectory->SetGuidance("Detector construction control commands.");
 
-  fUpdateFieldCmd
-    = new G4UIcmdWithoutParameter("/mcDet/updateMagField", this);
+  fUpdateFieldCmd = new G4UIcmdWithoutParameter("/mcDet/updateMagField", this);
   G4String guidance = "Update magnetic field.\n";
-  guidance += "This command must be called if the field parameters were changed \n";
+  guidance +=
+    "This command must be called if the field parameters were changed \n";
   guidance += "in the Idle state.";
   fUpdateFieldCmd->SetGuidance(guidance);
   fUpdateFieldCmd->AvailableForStates(G4State_Idle);
 
-  fCreateFieldParametersCmd
-    = new G4UIcmdWithAString("/mcDet/createMagFieldParameters", this);
-  fCreateFieldParametersCmd
-    ->SetGuidance("Create parameters (and their commands) for a local magnetic field \n");
-  fCreateFieldParametersCmd
-    ->SetGuidance("associated with the volume with the given name.");
+  fCreateFieldParametersCmd =
+    new G4UIcmdWithAString("/mcDet/createMagFieldParameters", this);
+  fCreateFieldParametersCmd->SetGuidance(
+    "Create parameters (and their commands) for a local magnetic field \n");
+  fCreateFieldParametersCmd->SetGuidance(
+    "associated with the volume with the given name.");
   fCreateFieldParametersCmd->SetParameterName("FieldVolName", false);
   fCreateFieldParametersCmd->AvailableForStates(G4State_PreInit);
 
-  fIsLocalFieldCmd
-    = new G4UIcmdWithABool("/mcDet/setIsLocalMagField", this);
-  fIsLocalFieldCmd
-    ->SetGuidance("Get local magnetic fields from Root geometry.");
+  fIsLocalFieldCmd = new G4UIcmdWithABool("/mcDet/setIsLocalMagField", this);
+  fIsLocalFieldCmd->SetGuidance(
+    "Get local magnetic fields from Root geometry.");
   fIsLocalFieldCmd->SetParameterName("IsLocalField", false);
   fIsLocalFieldCmd->AvailableForStates(G4State_PreInit);
 
-  fIsZeroFieldCmd
-    = new G4UIcmdWithABool("/mcDet/setIsZeroMagField", this);
-  guidance
-    = "(In)activate propagating 'ifield = 0' flag defined in tracking media.\n";
-  guidance
-    += "When activated: a zero local magnetic field is set to the volumes defined\n";
-  guidance
-    += " with tracking medium with 'ifield = 0'.";
+  fIsZeroFieldCmd = new G4UIcmdWithABool("/mcDet/setIsZeroMagField", this);
+  guidance =
+    "(In)activate propagating 'ifield = 0' flag defined in tracking media.\n";
+  guidance +=
+    "When activated: a zero local magnetic field is set to the volumes "
+    "defined\n";
+  guidance += " with tracking medium with 'ifield = 0'.";
   fIsZeroFieldCmd->SetGuidance(guidance);
   fIsZeroFieldCmd->SetParameterName("IsZeroField", false);
   fIsZeroFieldCmd->AvailableForStates(G4State_PreInit);
 
   fSeparatorCmd = new G4UIcmdWithAString("/mcDet/volNameSeparator", this);
-  guidance 
-    = "Override the default value of the volume name separator in g3tog4\n";
+  guidance =
+    "Override the default value of the volume name separator in g3tog4\n";
   fSeparatorCmd->SetGuidance(guidance);
   fSeparatorCmd->SetParameterName("VolNameSeparator", true);
   fSeparatorCmd->AvailableForStates(G4State_PreInit);
 
-  fPrintMaterialsCmd 
-    = new G4UIcmdWithoutParameter("/mcDet/printMaterials", this);
+  fPrintMaterialsCmd =
+    new G4UIcmdWithoutParameter("/mcDet/printMaterials", this);
   fPrintMaterialsCmd->SetGuidance("Prints all materials.");
-  fPrintMaterialsCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);   
+  fPrintMaterialsCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
-  fPrintMaterialsPropertiesCmd 
-    = new G4UIcmdWithoutParameter("/mcDet/printMaterialsProperties", this);
-  fPrintMaterialsPropertiesCmd->SetGuidance("Prints all material properties for all materials.");
-  fPrintMaterialsPropertiesCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);   
+  fPrintMaterialsPropertiesCmd =
+    new G4UIcmdWithoutParameter("/mcDet/printMaterialsProperties", this);
+  fPrintMaterialsPropertiesCmd->SetGuidance(
+    "Prints all material properties for all materials.");
+  fPrintMaterialsPropertiesCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
-  fPrintMediaCmd 
-    = new G4UIcmdWithoutParameter("/mcDet/printMedia", this);
+  fPrintMediaCmd = new G4UIcmdWithoutParameter("/mcDet/printMedia", this);
   fPrintMediaCmd->SetGuidance("Prints all media.");
-  fPrintMediaCmd->AvailableForStates(G4State_PreInit, G4State_Init, G4State_Idle);   
+  fPrintMediaCmd->AvailableForStates(
+    G4State_PreInit, G4State_Init, G4State_Idle);
 
-  fPrintVolumesCmd 
-    = new G4UIcmdWithoutParameter("/mcDet/printVolumes", this);
+  fPrintVolumesCmd = new G4UIcmdWithoutParameter("/mcDet/printVolumes", this);
   fPrintVolumesCmd->SetGuidance("Prints all volumes.");
-  fPrintVolumesCmd->AvailableForStates(G4State_Idle);   
+  fPrintVolumesCmd->AvailableForStates(G4State_Idle);
 
-  fPrintCutsCmd 
-    = new G4UIcmdWithAString("/mcDet/printCuts", this);
-  fPrintCutsCmd
-    ->SetGuidance("Prints the cut value for given CutName for all tracking media");
+  fPrintCutsCmd = new G4UIcmdWithAString("/mcDet/printCuts", this);
+  fPrintCutsCmd->SetGuidance(
+    "Prints the cut value for given CutName for all tracking media");
   fPrintCutsCmd->SetParameterName("CutName", false);
-  fPrintCutsCmd->AvailableForStates(G4State_Idle);   
+  fPrintCutsCmd->AvailableForStates(G4State_Idle);
 
-  fPrintControlsCmd 
-    = new G4UIcmdWithAString("/mcDet/printControls", this);
-  fPrintControlsCmd
-    ->SetGuidance("Prints the control value for given ControlName for all tracking media");
+  fPrintControlsCmd = new G4UIcmdWithAString("/mcDet/printControls", this);
+  fPrintControlsCmd->SetGuidance(
+    "Prints the control value for given ControlName for all tracking media");
   fPrintControlsCmd->SetParameterName("ControlName", false);
-  fPrintControlsCmd->AvailableForStates(G4State_Idle);   
+  fPrintControlsCmd->AvailableForStates(G4State_Idle);
 
-  fIsUserMaxStepCmd
-    = new G4UIcmdWithABool("/mcDet/setIsUserMaxStep", this);
-  fIsUserMaxStepCmd
-    ->SetGuidance("Active user step limits defined in tracking media.");
+  fIsUserMaxStepCmd = new G4UIcmdWithABool("/mcDet/setIsUserMaxStep", this);
+  fIsUserMaxStepCmd->SetGuidance(
+    "Active user step limits defined in tracking media.");
   fIsUserMaxStepCmd->SetParameterName("IsUserMaxStep", false);
-  fIsUserMaxStepCmd->AvailableForStates(G4State_PreInit);  
+  fIsUserMaxStepCmd->AvailableForStates(G4State_PreInit);
 
-  fIsMaxStepInLowDensityMaterialsCmd
-    = new G4UIcmdWithABool("/mcDet/setIsMaxStepInLowDensityMaterials", this);
-  fIsMaxStepInLowDensityMaterialsCmd
-    ->SetGuidance("Active user step limits defined in tracking media.");
-  fIsMaxStepInLowDensityMaterialsCmd
-    ->SetParameterName("IsMaxStepInLowDensityMaterials", false);
-  fIsMaxStepInLowDensityMaterialsCmd->AvailableForStates(G4State_PreInit);  
+  fIsMaxStepInLowDensityMaterialsCmd =
+    new G4UIcmdWithABool("/mcDet/setIsMaxStepInLowDensityMaterials", this);
+  fIsMaxStepInLowDensityMaterialsCmd->SetGuidance(
+    "Active user step limits defined in tracking media.");
+  fIsMaxStepInLowDensityMaterialsCmd->SetParameterName(
+    "IsMaxStepInLowDensityMaterials", false);
+  fIsMaxStepInLowDensityMaterialsCmd->AvailableForStates(G4State_PreInit);
 
-  fSetLimitDensityCmd 
-    = new G4UIcmdWithADoubleAndUnit("/mcDet/setLimitDensity", this);
-  fSetLimitDensityCmd
-    ->SetGuidance("Set the material density limit for setting max allowed step");
-  fSetLimitDensityCmd
-    ->SetGuidance("Note that setting step limits has to be activated first via:\n");
-  fSetLimitDensityCmd
-    ->SetGuidance("/mcDet/setIsMaxStepInLowDensityMaterials true");
+  fSetLimitDensityCmd =
+    new G4UIcmdWithADoubleAndUnit("/mcDet/setLimitDensity", this);
+  fSetLimitDensityCmd->SetGuidance(
+    "Set the material density limit for setting max allowed step");
+  fSetLimitDensityCmd->SetGuidance(
+    "Note that setting step limits has to be activated first via:\n");
+  fSetLimitDensityCmd->SetGuidance(
+    "/mcDet/setIsMaxStepInLowDensityMaterials true");
   fSetLimitDensityCmd->SetParameterName("LimitDensity", false);
   fSetLimitDensityCmd->SetDefaultUnit("g/cm3");
   fSetLimitDensityCmd->SetUnitCategory("Volumic Mass");
   fSetLimitDensityCmd->AvailableForStates(G4State_PreInit);
-  
-  fSetMaxStepInLowDensityMaterialsCmd 
-    = new G4UIcmdWithADoubleAndUnit("/mcDet/setMaxStepInLowDensityMaterials", this);
-  fSetMaxStepInLowDensityMaterialsCmd
-    ->SetGuidance("Set max allowed step value in materials with density below the density limit");
-  fSetMaxStepInLowDensityMaterialsCmd
-    ->SetGuidance("Note that setting step limits has to be activated first via:\n");
-  fSetMaxStepInLowDensityMaterialsCmd
-    ->SetGuidance("/mcDet/setIsMaxStepInLowDensityMaterials true");
-  fSetMaxStepInLowDensityMaterialsCmd->SetParameterName("MaxStepInLowDensityMaterials", false);
+
+  fSetMaxStepInLowDensityMaterialsCmd = new G4UIcmdWithADoubleAndUnit(
+    "/mcDet/setMaxStepInLowDensityMaterials", this);
+  fSetMaxStepInLowDensityMaterialsCmd->SetGuidance(
+    "Set max allowed step value in materials with density below the density "
+    "limit");
+  fSetMaxStepInLowDensityMaterialsCmd->SetGuidance(
+    "Note that setting step limits has to be activated first via:\n");
+  fSetMaxStepInLowDensityMaterialsCmd->SetGuidance(
+    "/mcDet/setIsMaxStepInLowDensityMaterials true");
+  fSetMaxStepInLowDensityMaterialsCmd->SetParameterName(
+    "MaxStepInLowDensityMaterials", false);
   fSetMaxStepInLowDensityMaterialsCmd->SetDefaultUnit("mm");
   fSetMaxStepInLowDensityMaterialsCmd->SetUnitCategory("Length");
   fSetMaxStepInLowDensityMaterialsCmd->AvailableForStates(G4State_PreInit);
@@ -185,9 +183,9 @@ TG4DetConstructionMessenger::TG4DetConstructionMessenger(
 }
 
 //_____________________________________________________________________________
-TG4DetConstructionMessenger::~TG4DetConstructionMessenger() 
+TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
 {
-/// Destructor
+  /// Destructor
 
   delete fDirectory;
   delete fUpdateFieldCmd;
@@ -199,8 +197,8 @@ TG4DetConstructionMessenger::~TG4DetConstructionMessenger()
   delete fPrintMaterialsPropertiesCmd;
   delete fPrintMediaCmd;
   delete fPrintVolumesCmd;
-  delete fPrintCutsCmd; 
-  delete fPrintControlsCmd; 
+  delete fPrintCutsCmd;
+  delete fPrintControlsCmd;
   delete fIsUserMaxStepCmd;
   delete fIsMaxStepInLowDensityMaterialsCmd;
   delete fSetLimitDensityCmd;
@@ -223,12 +221,13 @@ void TG4DetConstructionMessenger::CreateSetNewRadiatorCmd()
 
   G4UIparameter* xtrModel = new G4UIparameter("xtrModel", 's', false);
   xtrModel->SetGuidance("XTR model.");
-  //xtrModel->SetCandidates("gammaR gammaM strawR regR transpR regM");
+  // xtrModel->SetCandidates("gammaR gammaM strawR regR transpR regM");
 
   G4UIparameter* foilNumber = new G4UIparameter("foilNumber", 'i', false);
   foilNumber->SetGuidance("Number of foils");
 
-  G4UIparameter* strawTubeMaterial = new G4UIparameter("strawTubeMaterial", 's', true);
+  G4UIparameter* strawTubeMaterial =
+    new G4UIparameter("strawTubeMaterial", 's', true);
   strawTubeMaterial->SetGuidance("Straw tube material name.");
   strawTubeMaterial->SetDefaultValue("");
 
@@ -250,12 +249,14 @@ void TG4DetConstructionMessenger::CreateSetRadiatorLayerCmd()
   thickness->SetGuidance("The layer thickness (cm)");
 
   G4UIparameter* fluctuation = new G4UIparameter("fluctuation", 'd', true);
-  G4String guidance = "Parameter that refers to the layer Gamma-distributed thickness.\n";
+  G4String guidance =
+    "Parameter that refers to the layer Gamma-distributed thickness.\n";
   guidance += "The relative thickness fluctuation is ~ 1/sqrt(param)";
   fluctuation->SetGuidance(guidance);
 
   fSetRadiatorLayerCmd = new G4UIcommand("/mcDet/setRadiatorLayer", this);
-  fSetRadiatorLayerCmd->SetGuidance("Define the radiator layer (foil/gass) properties.");
+  fSetRadiatorLayerCmd->SetGuidance(
+    "Define the radiator layer (foil/gass) properties.");
   fSetRadiatorLayerCmd->SetParameter(volumeName);
   fSetRadiatorLayerCmd->SetParameter(thickness);
   fSetRadiatorLayerCmd->SetParameter(fluctuation);
@@ -265,7 +266,8 @@ void TG4DetConstructionMessenger::CreateSetRadiatorLayerCmd()
 //_____________________________________________________________________________
 void TG4DetConstructionMessenger::CreateSetRadiatorStrawTubeCmd()
 {
-  G4UIparameter* gasMaterialName = new G4UIparameter("gasMaterialName", 's', false);
+  G4UIparameter* gasMaterialName =
+    new G4UIparameter("gasMaterialName", 's', false);
   gasMaterialName->SetGuidance("Straw tube gas material name.");
 
   G4UIparameter* wallThickness = new G4UIparameter("wallThickness", 'd', false);
@@ -274,8 +276,10 @@ void TG4DetConstructionMessenger::CreateSetRadiatorStrawTubeCmd()
   G4UIparameter* gasThickness = new G4UIparameter("gasThickness", 'd', false);
   wallThickness->SetGuidance("The mean straw tube gass thickness (cm)");
 
-  fSetRadiatorStrawTubeCmd = new G4UIcommand("/mcDet/setRadiatorStrawTube", this);
-  fSetRadiatorStrawTubeCmd->SetGuidance("Define the radiator straw tube properties.");
+  fSetRadiatorStrawTubeCmd =
+    new G4UIcommand("/mcDet/setRadiatorStrawTube", this);
+  fSetRadiatorStrawTubeCmd->SetGuidance(
+    "Define the radiator straw tube properties.");
   fSetRadiatorStrawTubeCmd->SetParameter(gasMaterialName);
   fSetRadiatorStrawTubeCmd->SetParameter(wallThickness);
   fSetRadiatorStrawTubeCmd->SetParameter(gasThickness);
@@ -290,7 +294,7 @@ void TG4DetConstructionMessenger::CreateSetRadiatorCmd()
 
   G4UIparameter* xtrModel = new G4UIparameter("xtrModel", 's', false);
   xtrModel->SetGuidance("XTR model.");
-  //xtrModel->SetCandidates("gammaR gammaM strawR regR transpR regM");
+  // xtrModel->SetCandidates("gammaR gammaM strawR regR transpR regM");
 
   G4UIparameter* foilMaterial = new G4UIparameter("foilMaterial", 's', false);
   foilMaterial->SetGuidance("Foil material name.");
@@ -307,7 +311,8 @@ void TG4DetConstructionMessenger::CreateSetRadiatorCmd()
   G4UIparameter* foilNumber = new G4UIparameter("foilNumber", 'i', false);
   foilNumber->SetGuidance("Number of foils");
 
-  G4UIparameter* strawTubeMaterial = new G4UIparameter("strawTubeMaterial", 's', true);
+  G4UIparameter* strawTubeMaterial =
+    new G4UIparameter("strawTubeMaterial", 's', true);
   strawTubeMaterial->SetGuidance("Straw tube material name.");
   strawTubeMaterial->SetDefaultValue("");
 
@@ -327,66 +332,64 @@ void TG4DetConstructionMessenger::CreateSetRadiatorCmd()
 //
 // public methods
 //
-  
+
 //_____________________________________________________________________________
-void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command, 
-                                              G4String newValues)
+void TG4DetConstructionMessenger::SetNewValue(
+  G4UIcommand* command, G4String newValues)
 {
-/// Apply command to the associated object.
+  /// Apply command to the associated object.
 
   if (command == fUpdateFieldCmd) {
     TG4GeometryManager::Instance()->UpdateField();
-  }    
-  else if( command == fCreateFieldParametersCmd ) {
+  }
+  else if (command == fCreateFieldParametersCmd) {
     TG4GeometryManager::Instance()->CreateFieldParameters(newValues);
   }
   else if (command == fIsLocalFieldCmd) {
-    TG4GeometryManager::Instance()
-      ->SetIsLocalField(fIsLocalFieldCmd->GetNewBoolValue(newValues));
+    TG4GeometryManager::Instance()->SetIsLocalField(
+      fIsLocalFieldCmd->GetNewBoolValue(newValues));
   }
   else if (command == fIsZeroFieldCmd) {
-    TG4GeometryManager::Instance()
-      ->SetIsZeroField(fIsZeroFieldCmd->GetNewBoolValue(newValues));
+    TG4GeometryManager::Instance()->SetIsZeroField(
+      fIsZeroFieldCmd->GetNewBoolValue(newValues));
   }
-  else if( command == fSeparatorCmd ) { 
+  else if (command == fSeparatorCmd) {
     char separator = newValues(0);
     TG4GeometryServices::Instance()->SetG3toG4Separator(separator);
   }
   else if (command == fPrintMaterialsCmd) {
     TG4GeometryServices::Instance()->PrintMaterials();
-  }    
+  }
   else if (command == fPrintMaterialsPropertiesCmd) {
     TG4GeometryServices::Instance()->PrintMaterialsProperties();
-  }    
+  }
   else if (command == fPrintMediaCmd) {
     TG4GeometryServices::Instance()->PrintMedia();
-  }    
+  }
   else if (command == fPrintVolumesCmd) {
     TG4GeometryServices::Instance()->PrintLogicalVolumeStore();
-  }    
+  }
   else if (command == fPrintCutsCmd) {
     TG4GeometryServices::Instance()->PrintCuts(newValues);
-  }    
+  }
   else if (command == fPrintControlsCmd) {
     TG4GeometryServices::Instance()->PrintControls(newValues);
-  } 
+  }
   else if (command == fIsUserMaxStepCmd) {
-    TG4GeometryManager::Instance()
-      ->SetIsUserMaxStep(fIsUserMaxStepCmd->GetNewBoolValue(newValues));
-  }    
+    TG4GeometryManager::Instance()->SetIsUserMaxStep(
+      fIsUserMaxStepCmd->GetNewBoolValue(newValues));
+  }
   else if (command == fIsMaxStepInLowDensityMaterialsCmd) {
-    TG4GeometryManager::Instance()
-      ->SetIsMaxStepInLowDensityMaterials(
-          fIsMaxStepInLowDensityMaterialsCmd->GetNewBoolValue(newValues));
-  }    
+    TG4GeometryManager::Instance()->SetIsMaxStepInLowDensityMaterials(
+      fIsMaxStepInLowDensityMaterialsCmd->GetNewBoolValue(newValues));
+  }
   else if (command == fSetLimitDensityCmd) {
-    TG4GeometryManager::Instance()
-      ->SetLimitDensity(fSetLimitDensityCmd->GetNewDoubleValue(newValues));
-  } 
+    TG4GeometryManager::Instance()->SetLimitDensity(
+      fSetLimitDensityCmd->GetNewDoubleValue(newValues));
+  }
   else if (command == fSetMaxStepInLowDensityMaterialsCmd) {
-    TG4GeometryManager::Instance()
-      ->SetMaxStepInLowDensityMaterials(
-          fSetMaxStepInLowDensityMaterialsCmd->GetNewDoubleValue(newValues));
+    TG4GeometryManager::Instance()->SetMaxStepInLowDensityMaterials(
+      fSetMaxStepInLowDensityMaterialsCmd->GetNewDoubleValue(newValues));
   }
   else if (command == fSetNewRadiatorCmd) {
     // tokenize parameters in a vector
@@ -398,20 +401,18 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
     G4String xtrModel = parameters[counter++];
     G4int foilNumber = G4UIcommand::ConvertToInt(parameters[counter++]);
 
-    fRadiatorDescription
-      = TG4GeometryManager::Instance()->CreateRadiator(volumeName);
+    fRadiatorDescription =
+      TG4GeometryManager::Instance()->CreateRadiator(volumeName);
     fRadiatorDescription->SetXtrModel(xtrModel);
     fRadiatorDescription->SetFoilNumber(foilNumber);
   }
   else if (command == fSetRadiatorLayerCmd) {
 
-    if ( ! fRadiatorDescription ) {
-      TG4Globals::Warning(
-        "TG4DetConstructionMessenger", "SetNewValue",
-        TString("Radiator was not defined.")
-          + TG4Globals::Endl()
-          + TString("/mcDetector/setNewRadiator must be called first."));
-        return;
+    if (!fRadiatorDescription) {
+      TG4Globals::Warning("TG4DetConstructionMessenger", "SetNewValue",
+        TString("Radiator was not defined.") + TG4Globals::Endl() +
+          TString("/mcDetector/setNewRadiator must be called first."));
+      return;
     }
 
     // tokenize parameters in a vector
@@ -422,7 +423,7 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
     G4String materialName = parameters[counter++];
     G4double thickness = G4UIcommand::ConvertToDouble(parameters[counter++]);
     G4double fluctuation = 0.;
-    if ( G4int(parameters.size()) > counter) {
+    if (G4int(parameters.size()) > counter) {
       fluctuation = G4UIcommand::ConvertToDouble(parameters[counter++]);
     }
 
@@ -433,13 +434,11 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
   }
   else if (command == fSetRadiatorStrawTubeCmd) {
 
-    if ( ! fRadiatorDescription ) {
-      TG4Globals::Warning(
-        "TG4DetConstructionMessenger", "SetNewValue",
-        TString("Radiator was not defined.")
-          + TG4Globals::Endl()
-          + TString("/mcDetector/setNewRadiator must be called first."));
-        return;
+    if (!fRadiatorDescription) {
+      TG4Globals::Warning("TG4DetConstructionMessenger", "SetNewValue",
+        TString("Radiator was not defined.") + TG4Globals::Endl() +
+          TString("/mcDetector/setNewRadiator must be called first."));
+      return;
     }
 
     // tokenize parameters in a vector
@@ -448,14 +447,16 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
 
     G4int counter = 0;
     G4String gasMaterialName = parameters[counter++];
-    G4double wallThickness = G4UIcommand::ConvertToDouble(parameters[counter++]);
+    G4double wallThickness =
+      G4UIcommand::ConvertToDouble(parameters[counter++]);
     G4double gasThickness = G4UIcommand::ConvertToDouble(parameters[counter++]);
 
     // apply units
     wallThickness *= TG4G3Units::Length();
     gasThickness *= TG4G3Units::Length();
 
-    fRadiatorDescription->SetStrawTube(gasMaterialName, wallThickness, gasThickness);
+    fRadiatorDescription->SetStrawTube(
+      gasMaterialName, wallThickness, gasThickness);
   }
   else if (command == fSetRadiatorCmd) {
     // The following code is deprecated, will be removed in the next version
@@ -469,11 +470,12 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
     G4String xtrModel = parameters[counter++];
     G4String foilMaterial = parameters[counter++];
     G4String gasMaterial = parameters[counter++];
-    G4double foilThickness = G4UIcommand::ConvertToDouble(parameters[counter++]);
+    G4double foilThickness =
+      G4UIcommand::ConvertToDouble(parameters[counter++]);
     G4double gasThickness = G4UIcommand::ConvertToDouble(parameters[counter++]);
     G4int foilNumber = G4UIcommand::ConvertToInt(parameters[counter++]);
     G4String strawTubeMaterial;
-    if ( G4int(parameters.size()) > counter) {
+    if (G4int(parameters.size()) > counter) {
       strawTubeMaterial = parameters[counter++];
     }
 
@@ -481,14 +483,15 @@ void TG4DetConstructionMessenger::SetNewValue(G4UIcommand* command,
     foilThickness *= TG4G3Units::Length();
     gasThickness *= TG4G3Units::Length();
 
-    TG4RadiatorDescription* radiatorDescription
-      = TG4GeometryManager::Instance()->CreateRadiator(volumeName);
+    TG4RadiatorDescription* radiatorDescription =
+      TG4GeometryManager::Instance()->CreateRadiator(volumeName);
     radiatorDescription->SetXtrModel(xtrModel);
     radiatorDescription->SetFoilNumber(foilNumber);
     radiatorDescription->SetLayer(foilMaterial, foilThickness, 100.);
     radiatorDescription->SetLayer(gasMaterial, gasThickness, 100.);
-    if ( strawTubeMaterial.size() ) {
-      radiatorDescription->SetStrawTube(strawTubeMaterial, 0.53*CLHEP::mm, 3.14159*CLHEP::mm);
+    if (strawTubeMaterial.size()) {
+      radiatorDescription->SetStrawTube(
+        strawTubeMaterial, 0.53 * CLHEP::mm, 3.14159 * CLHEP::mm);
     }
   }
 }

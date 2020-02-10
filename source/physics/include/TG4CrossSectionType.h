@@ -20,13 +20,14 @@
 
 #include <globals.hh>
 
-enum TG4CrossSectionType { 
-  kElastic,        ///< elastic cross section
-  kInelastic,      ///< inelastic cross section
-  kCapture,        ///< capture cross section
-  kFission,        ///< fission cross section
-  kChargeExchange, ///< charge exchane cross  section
-  kNoCrossSectionType  ///< no cross section type
+enum TG4CrossSectionType
+{
+  kElastic,           ///< elastic cross section
+  kInelastic,         ///< inelastic cross section
+  kCapture,           ///< capture cross section
+  kFission,           ///< fission cross section
+  kChargeExchange,    ///< charge exchane cross  section
+  kNoCrossSectionType ///< no cross section type
 };
 
 /// Return name for given cross section type
@@ -38,4 +39,4 @@ TG4CrossSectionType GetCrossSectionType(G4int type);
 /// Return the cross section type by name
 TG4CrossSectionType GetCrossSectionType(G4String name);
 
-#endif //TG4_OPTICAL_PROCESS_H
+#endif // TG4_OPTICAL_PROCESS_H

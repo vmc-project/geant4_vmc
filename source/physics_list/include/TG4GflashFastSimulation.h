@@ -28,32 +28,34 @@ class GFlashShowerModel;
 
 class TG4GflashFastSimulation : public TG4VUserFastSimulation
 {
-  public:
-    TG4GflashFastSimulation();
-    virtual ~TG4GflashFastSimulation();
+ public:
+  TG4GflashFastSimulation();
+  virtual ~TG4GflashFastSimulation();
 
-    // methods
-    virtual void Construct();
+  // methods
+  virtual void Construct();
 
-    // set methods
-    void SetMaterialName(const G4String& materialName);
+  // set methods
+  void SetMaterialName(const G4String& materialName);
 
-  private:
-  	// data members
-    TG4GflashFastSimulationMessenger* fMessenger; ///< Messenger
+ private:
+  // data members
+  TG4GflashFastSimulationMessenger* fMessenger; ///< Messenger
 
-  	/// The name of material for shower parameterisation
-  	G4String  fMaterialName; 
+  /// The name of material for shower parameterisation
+  G4String fMaterialName;
 
-    /// Gflash shower model
-    GFlashShowerModel* fGflashShowerModel; 
+  /// Gflash shower model
+  GFlashShowerModel* fGflashShowerModel;
 };
 
 // inline functions
 
 /// Set the name of material for shower parameterisation
-inline void TG4GflashFastSimulation::SetMaterialName(const G4String& materialName)
-{ fMaterialName = materialName; }
+inline void TG4GflashFastSimulation::SetMaterialName(
+  const G4String& materialName)
+{
+  fMaterialName = materialName;
+}
 
-#endif //TG4_GFLASH_FAST_SIMULATION_H
-
+#endif // TG4_GFLASH_FAST_SIMULATION_H

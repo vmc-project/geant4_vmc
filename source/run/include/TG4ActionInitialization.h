@@ -11,12 +11,12 @@
 //-------------------------------------------------
 
 /// \file TG4ActionInitialization.h
-/// \brief Definition of the TG4ActionInitialization class 
+/// \brief Definition of the TG4ActionInitialization class
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-#include <G4VUserActionInitialization.hh>
 #include <G4Threading.hh>
+#include <G4VUserActionInitialization.hh>
 
 class TG4RunConfiguration;
 class TG4TrackingAction;
@@ -37,31 +37,30 @@ class TG4UserStackingAction;
 
 class TG4ActionInitialization : public G4VUserActionInitialization
 {
-  public:
-    TG4ActionInitialization(TG4RunConfiguration* runConfiguration);
-    virtual ~TG4ActionInitialization();
+ public:
+  TG4ActionInitialization(TG4RunConfiguration* runConfiguration);
+  virtual ~TG4ActionInitialization();
 
-    // methods 
-    //
-    virtual void BuildForMaster() const;
-    virtual void Build() const;
+  // methods
+  //
+  virtual void BuildForMaster() const;
+  virtual void Build() const;
 
-  private:
-    /// Not implemented
-    TG4ActionInitialization();
-    /// Not implemented
-    TG4ActionInitialization(const TG4ActionInitialization& right);
-    /// Not implemented
-    TG4ActionInitialization& operator=(const TG4ActionInitialization& right);
-    
-    //  data members
-    TG4RunConfiguration*  fRunConfiguration; ///< run configuration
+ private:
+  /// Not implemented
+  TG4ActionInitialization();
+  /// Not implemented
+  TG4ActionInitialization(const TG4ActionInitialization& right);
+  /// Not implemented
+  TG4ActionInitialization& operator=(const TG4ActionInitialization& right);
 
-    G4UserEventAction*    fEventAction;    ///< event action
-    TG4TrackingAction*    fTrackingAction; ///< tracking action
-    TG4SteppingAction*    fSteppingAction; ///< steping action
-    G4UserStackingAction* fStackingAction; ///< stacking action
+  //  data members
+  TG4RunConfiguration* fRunConfiguration; ///< run configuration
+
+  G4UserEventAction* fEventAction;       ///< event action
+  TG4TrackingAction* fTrackingAction;    ///< tracking action
+  TG4SteppingAction* fSteppingAction;    ///< steping action
+  G4UserStackingAction* fStackingAction; ///< stacking action
 };
 
-#endif //TG4_ACTION_INITIALIZATION_H
-
+#endif // TG4_ACTION_INITIALIZATION_H

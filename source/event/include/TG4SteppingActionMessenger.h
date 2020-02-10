@@ -1,5 +1,5 @@
 #ifndef TG4_STEPPING_ACTION_MESSENGER_H
-#define TG4_STEPPING_ACTION_MESSENGER_H 
+#define TG4_STEPPING_ACTION_MESSENGER_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -11,7 +11,7 @@
 //-------------------------------------------------
 
 /// \file TG4SteppingActionMessenger.h
-/// \brief Definition of the TG4SteppingActionMessenger class 
+/// \brief Definition of the TG4SteppingActionMessenger class
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -32,28 +32,28 @@ class G4UIcmdWithAnInteger;
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-class TG4SteppingActionMessenger: public G4UImessenger
+class TG4SteppingActionMessenger : public G4UImessenger
 {
-  public:
-    TG4SteppingActionMessenger(TG4SteppingAction* steppingAction);
-    virtual ~TG4SteppingActionMessenger();
-   
-    // methods 
-    virtual void SetNewValue(G4UIcommand* command, G4String string);
-    
-  private:
-    /// Not implemented
-    TG4SteppingActionMessenger();
-    /// Not implemented
-    TG4SteppingActionMessenger(const TG4SteppingActionMessenger& right);
-    /// Not implemented
-    TG4SteppingActionMessenger& operator=(
-                               const TG4SteppingActionMessenger& right);
+ public:
+  TG4SteppingActionMessenger(TG4SteppingAction* steppingAction);
+  virtual ~TG4SteppingActionMessenger();
 
-    // data members
-    TG4SteppingAction*     fSteppingAction;    ///< associated class  
-    G4UIcmdWithAnInteger*  fLoopVerboseCmd;    ///< command: loopVerbose
-    G4UIcmdWithAnInteger*  fMaxNofStepsCmd;    ///< command: maxNofSteps
+  // methods
+  virtual void SetNewValue(G4UIcommand* command, G4String string);
+
+ private:
+  /// Not implemented
+  TG4SteppingActionMessenger();
+  /// Not implemented
+  TG4SteppingActionMessenger(const TG4SteppingActionMessenger& right);
+  /// Not implemented
+  TG4SteppingActionMessenger& operator=(
+    const TG4SteppingActionMessenger& right);
+
+  // data members
+  TG4SteppingAction* fSteppingAction;    ///< associated class
+  G4UIcmdWithAnInteger* fLoopVerboseCmd; ///< command: loopVerbose
+  G4UIcmdWithAnInteger* fMaxNofStepsCmd; ///< command: maxNofSteps
 };
 
-#endif //TG4_STEPPING_ACTION_MESSENGER_H
+#endif // TG4_STEPPING_ACTION_MESSENGER_H
