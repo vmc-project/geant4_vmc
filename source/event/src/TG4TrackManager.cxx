@@ -95,8 +95,9 @@ void TG4TrackManager::LateInitialize()
   /// Cache thread-local pointers
 
   fStackPopper = TG4StackPopper::Instance();
-#ifdef USE_G4ROOT
-#ifndef USE_ROOT_VMC
+
+#if ( defined(USE_G4ROOT) && \
+    (!defined(USE_ROOT_VMC) || (ROOT_VERSION_CODE >= ROOT_VERSION(6, 18, 6))))
   // Set recovery lambda
   if (fMCManager && fRootNavMgr) {
     fRootNavMgr->SetGeometryRestoreFunction([this](Int_t g4TrackId) -> Bool_t {
@@ -104,7 +105,6 @@ void TG4TrackManager::LateInitialize()
         fPrimaryParticleIds[g4TrackId - 1]);
     });
   }
-#endif
 #endif
 }
 
