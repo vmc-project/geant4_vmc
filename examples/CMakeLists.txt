@@ -20,6 +20,9 @@ set(CMAKE_MODULE_PATH
     ${Geant3_DIR}/Modules
     ${CMAKE_MODULE_PATH})
 
+#--- Project definitions -------------------------------------------------------
+project(VMCExamples)
+
 if(VMC_WITH_Multi)
 add_subdirectory(E03)
 else()
