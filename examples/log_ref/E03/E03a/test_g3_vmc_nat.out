@@ -1,18 +1,31 @@
    ------------------------------------------------------------
-  | Welcome to ROOT 6.14/06                http://root.cern.ch |
-  |                               (c) 1995-2018, The ROOT Team |
-  | Built for macosx64                                         |
-  | From tag v6-14-06, 5 November 2018                         |
+  | Welcome to ROOT 6.18/04                  https://root.cern |
+  |                               (c) 1995-2019, The ROOT Team |
+  | Built for macosx64 on Dec 20 2019, 12:31:00                |
+  | From tags/v6-18-04@v6-18-04                                |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
 Processing load_g3a.C...
+Loading VMC library ...
 Loading Geant3 libraries ... finished
-Processing test_E03_1.C("g3Config.C", kTRUE)...
+Processing test_E03_1.C("g3Config.C",kTRUE)...
 --------------------------------------------------------------
  VMC Example E03
 --------------------------------------------------------------
+
+=============================================================
+ Virtual Monte Carlo Library
+ Version 1.0 ( 24 February 2020 )
+=============================================================
+
+=============================================================
+ Geant3 Virtual Monte Carlo 
+ Version 3.0 ( 24 February 2020 )
+ WWW : https://vmc-project.github.io/
+=============================================================
+
 Geant3 has been created.
 
 ------------------------------------------------------------
@@ -20,32 +33,32 @@ Geant3 has been created.
 ------------------------------------------------------------
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 936.678       total track length (cm):  41.6659
-   Gap:      total energy (MeV): 17.9447       total track length (cm):  8.49278
+   Absorber: total energy (MeV): 926.898       total track length (cm):  41.4657
+   Gap:      total energy (MeV): 29.2679       total track length (cm):  13.2931
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV):  917.23       total track length (cm):  41.3365
-   Gap:      total energy (MeV): 31.8076       total track length (cm):  14.2473
+   Absorber: total energy (MeV): 922.158       total track length (cm):  41.6598
+   Gap:      total energy (MeV): 22.0369       total track length (cm):  9.25102
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 917.339       total track length (cm):     42.3
-   Gap:      total energy (MeV): 28.6839       total track length (cm):  13.0283
+   Absorber: total energy (MeV): 949.015       total track length (cm):  42.9079
+   Gap:      total energy (MeV):  26.191       total track length (cm):  12.1379
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 915.661       total track length (cm):  41.0336
-   Gap:      total energy (MeV): 35.9846       total track length (cm):  15.6429
+   Absorber: total energy (MeV): 926.432       total track length (cm):  41.5391
+   Gap:      total energy (MeV): 25.4686       total track length (cm):   11.481
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 939.295       total track length (cm):  45.0105
-   Gap:      total energy (MeV): 36.4053       total track length (cm):  15.9358
+   Absorber: total energy (MeV): 928.902       total track length (cm):  42.4529
+   Gap:      total energy (MeV): 24.8971       total track length (cm):  10.8086
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    72360839     4502387 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   121171975     738F007 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    66950773    72360839
-                                        HEX     3FD9675     4502387
-                                        HEX    FFAD7132           0
-                              relative adrs    -5410510           0
+          with Store/Table at absolute adrs   115761901   121171975
+                                        HEX     6E662ED     738F007
+                                        HEX    FFAD712A           0
+                              relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -85,21 +98,34 @@ Geant3 has been created.
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10
    ------------------------------------------------------------
-  | Welcome to ROOT 6.14/06                http://root.cern.ch |
-  |                               (c) 1995-2018, The ROOT Team |
-  | Built for macosx64                                         |
-  | From tag v6-14-06, 5 November 2018                         |
+  | Welcome to ROOT 6.18/04                  https://root.cern |
+  |                               (c) 1995-2019, The ROOT Team |
+  | Built for macosx64 on Dec 20 2019, 12:31:00                |
+  | From tags/v6-18-04@v6-18-04                                |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
 Processing load_g3a.C...
+Loading VMC library ...
 Loading Geant3 libraries ... finished
-Processing test_E03_2.C("g3Config.C", kTRUE)...
+Processing test_E03_2.C("g3Config.C",kTRUE)...
 --------------------------------------------------------------
  VMC Example E03
 --------------------------------------------------------------
 --- Init MC 
+
+=============================================================
+ Virtual Monte Carlo Library
+ Version 1.0 ( 24 February 2020 )
+=============================================================
+
+=============================================================
+ Geant3 Virtual Monte Carlo 
+ Version 3.0 ( 24 February 2020 )
+ WWW : https://vmc-project.github.io/
+=============================================================
+
 Geant3 has been created.
 --- Add particles 
 --- Add ions 
@@ -137,13 +163,13 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  14    -6.292   -0.091    0.567     2.6406    0.9717    0.464    3.256     GAPX  Multiple scattering
 #  15    -6.212   -0.341    0.664     2.0431    0.5976    0.339    3.595     GAPX  Multiple scattering
 #  16    -6.074   -0.469    0.634     1.6797    0.3634    0.234    3.829     GAPX  Multiple scattering
-#  17    -6.069   -0.593    0.581     1.4088    0.2709    0.166    3.995     GAPX  Multiple scattering
-#  18    -6.029   -0.571    0.492     1.1891    0.2197    0.123    4.118     GAPX  Multiple scattering
-#  19    -6.062   -0.591    0.428     1.0370    0.1521    0.093    4.210     GAPX  Multiple scattering
-#  20    -6.003   -0.601    0.424     0.8556    0.1814    0.073    4.284     GAPX  Multiple scattering
-#  21    -6.000   -0.603    0.423     0.8361    0.0195    0.004    4.288     GAPX  Multiple scattering
-#  22    -6.000   -0.603    0.423     0.8361    0.0000    0.000    4.288     ABSO  No active process
-#  23    -6.000   -0.603    0.423     0.0000    0.8361    0.000    4.288     ABSO  Energy threshold
+#  17    -6.070   -0.593    0.581     1.4088    0.2709    0.166    3.995     GAPX  Multiple scattering
+#  18    -6.029   -0.571    0.492     1.1889    0.2199    0.123    4.117     GAPX  Multiple scattering
+#  19    -6.062   -0.591    0.428     1.0369    0.1521    0.093    4.210     GAPX  Multiple scattering
+#  20    -6.003   -0.601    0.424     0.8555    0.1814    0.073    4.284     GAPX  Multiple scattering
+#  21    -6.000   -0.602    0.423     0.8360    0.0195    0.004    4.288     GAPX  Multiple scattering
+#  22    -6.000   -0.602    0.423     0.8360    0.0000    0.000    4.288     ABSO  No active process
+#  23    -6.000   -0.602    0.423     0.0000    0.8360    0.000    4.288     ABSO  Energy threshold
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 9     Parent ID = 0
@@ -393,10 +419,10 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   0    -0.253    4.467    0.944     2.2713    0.0000    0.000    0.000     GAPX  No active process
 #   1    -0.092    4.627    0.957     1.8214    0.4499    0.278    0.278     GAPX  Multiple scattering
 #   2    -0.022    4.765    0.954     1.5464    0.2750    0.190    0.468     GAPX  Multiple scattering
-#   3    -0.003    4.880    0.976     1.3235    0.2228    0.145    0.613     GAPX  Multiple scattering
-#   4     0.000    4.907    0.979     1.2856    0.0379    0.029    0.642     GAPX  Multiple scattering
-#   5     0.000    4.907    0.979     1.2856    0.0000    0.000    0.642     ABSO  No active process
-#   6     0.000    4.907    0.979     0.0000    1.2856    0.000    0.642     ABSO  Energy threshold
+#   3    -0.003    4.880    0.976     1.3234    0.2230    0.145    0.613     GAPX  Multiple scattering
+#   4     0.000    4.907    0.979     1.2854    0.0379    0.029    0.642     GAPX  Multiple scattering
+#   5     0.000    4.907    0.979     1.2854    0.0000    0.000    0.642     ABSO  No active process
+#   6     0.000    4.907    0.979     0.0000    1.2854    0.000    0.642     ABSO  Energy threshold
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 1     Parent ID = 0
@@ -445,17 +471,17 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   3    -3.000    0.314    0.049     0.4699    0.0000    0.000    0.103     ABSO  No active process
 #   4    -3.000    0.314    0.049     0.0000    0.4699    0.000    0.103     ABSO  Energy threshold
 --- Finish event 
-   Absorber: total energy (MeV):  46.033       total track length (cm):    1.916
-   Gap:      total energy (MeV):   3.967       total track length (cm):    2.241
+   Absorber: total energy (MeV):  46.032       total track length (cm):    1.916
+   Gap:      total energy (MeV):   3.968       total track length (cm):    2.241
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   111895431     6AB6387 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    69495815     4246C07 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   106485365   111895431
-                                        HEX     658D675     6AB6387
-                                        HEX    FFAD7132           0
-                              relative adrs    -5410510           0
+          with Store/Table at absolute adrs    64085741    69495815
+                                        HEX     3D1DEED     4246C07
+                                        HEX    FFAD712A           0
+                              relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -481,21 +507,34 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------
-  | Welcome to ROOT 6.14/06                http://root.cern.ch |
-  |                               (c) 1995-2018, The ROOT Team |
-  | Built for macosx64                                         |
-  | From tag v6-14-06, 5 November 2018                         |
+  | Welcome to ROOT 6.18/04                  https://root.cern |
+  |                               (c) 1995-2019, The ROOT Team |
+  | Built for macosx64 on Dec 20 2019, 12:31:00                |
+  | From tags/v6-18-04@v6-18-04                                |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
 Processing load_g3a.C...
+Loading VMC library ...
 Loading Geant3 libraries ... finished
-Processing test_E03_3.C("g3Config.C", kTRUE)...
+Processing test_E03_3.C("g3Config.C",kTRUE)...
 --------------------------------------------------------------
  VMC Example E03
 --------------------------------------------------------------
 --- Init MC 
+
+=============================================================
+ Virtual Monte Carlo Library
+ Version 1.0 ( 24 February 2020 )
+=============================================================
+
+=============================================================
+ Geant3 Virtual Monte Carlo 
+ Version 3.0 ( 24 February 2020 )
+ WWW : https://vmc-project.github.io/
+=============================================================
+
 Geant3 has been created.
 --- Add particles 
 --- Add ions 
@@ -581,13 +620,13 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    62333831     3B72387 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    92388359     581BC07 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    56923765    62333831
-                                        HEX     3649675     3B72387
-                                        HEX    FFAD7132           0
-                              relative adrs    -5410510           0
+          with Store/Table at absolute adrs    86978285    92388359
+                                        HEX     52F2EED     581BC07
+                                        HEX    FFAD712A           0
+                              relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -613,20 +652,33 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------
-  | Welcome to ROOT 6.14/06                http://root.cern.ch |
-  |                               (c) 1995-2018, The ROOT Team |
-  | Built for macosx64                                         |
-  | From tag v6-14-06, 5 November 2018                         |
+  | Welcome to ROOT 6.18/04                  https://root.cern |
+  |                               (c) 1995-2019, The ROOT Team |
+  | Built for macosx64 on Dec 20 2019, 12:31:00                |
+  | From tags/v6-18-04@v6-18-04                                |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
 Processing load_g3a.C...
+Loading VMC library ...
 Loading Geant3 libraries ... finished
-Processing test_E03_4.C("g3Config.C", kTRUE)...
+Processing test_E03_4.C("g3Config.C",kTRUE)...
 --------------------------------------------------------------
  VMC Example E03
 --------------------------------------------------------------
+
+=============================================================
+ Virtual Monte Carlo Library
+ Version 1.0 ( 24 February 2020 )
+=============================================================
+
+=============================================================
+ Geant3 Virtual Monte Carlo 
+ Version 3.0 ( 24 February 2020 )
+ WWW : https://vmc-project.github.io/
+=============================================================
+
 Geant3 has been created.
 
 ------------------------------------------------------------
@@ -635,35 +687,35 @@ Geant3 has been created.
 
 ---> Begin of event: 1
    Primary track ID = 4
-      Current track pi0  is a decay product of Parent ID = 4
-      Current track pi0  is a decay product of Parent ID = 4
 
+      Current track pi0  is a decay product of Parent ID = 4
+      Current track pi0  is a decay product of Parent ID = 4
    Primary track ID = 3
-      Current track pi0  is a decay product of Parent ID = 3
-      Current track pi0  is a decay product of Parent ID = 3
 
+      Current track pi0  is a decay product of Parent ID = 3
+      Current track pi0  is a decay product of Parent ID = 3
    Primary track ID = 2
-      Current track pi0  is a decay product of Parent ID = 2
-      Current track pi0  is a decay product of Parent ID = 2
 
+      Current track pi0  is a decay product of Parent ID = 2
+      Current track pi0  is a decay product of Parent ID = 2
    Primary track ID = 1
-      Current track pi0  is a decay product of Parent ID = 1
-      Current track pi0  is a decay product of Parent ID = 1
 
+      Current track pi0  is a decay product of Parent ID = 1
+      Current track pi0  is a decay product of Parent ID = 1
    Primary track ID = 0
+
       Current track pi0  is a decay product of Parent ID = 0
       Current track pi0  is a decay product of Parent ID = 0
+   Absorber: total energy (MeV): 1590.61       total track length (cm):  76.8102
+   Gap:      total energy (MeV): 56.8953       total track length (cm):  28.4161
 
-   Absorber: total energy (MeV): 1593.45       total track length (cm):  75.6226
-   Gap:      total energy (MeV): 72.9199       total track length (cm):  35.7201
-
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    95524743     5B19787 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    84923399     50FD407 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    90114677    95524743
-                                        HEX     55F0A75     5B19787
-                                        HEX    FFAD7132           0
-                              relative adrs    -5410510           0
+          with Store/Table at absolute adrs    79513325    84923399
+                                        HEX     4BD46ED     50FD407
+                                        HEX    FFAD712A           0
+                              relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -689,21 +741,34 @@ Geant3 has been created.
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------
-  | Welcome to ROOT 6.14/06                http://root.cern.ch |
-  |                               (c) 1995-2018, The ROOT Team |
-  | Built for macosx64                                         |
-  | From tag v6-14-06, 5 November 2018                         |
+  | Welcome to ROOT 6.18/04                  https://root.cern |
+  |                               (c) 1995-2019, The ROOT Team |
+  | Built for macosx64 on Dec 20 2019, 12:31:00                |
+  | From tags/v6-18-04@v6-18-04                                |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
 Processing load_g3a.C...
+Loading VMC library ...
 Loading Geant3 libraries ... finished
-Processing test_E03_5.C("g3Config.C", kTRUE)...
+Processing test_E03_5.C("g3Config.C",kTRUE)...
 --------------------------------------------------------------
  VMC Example E03
 --------------------------------------------------------------
 --- Init MC 
+
+=============================================================
+ Virtual Monte Carlo Library
+ Version 1.0 ( 24 February 2020 )
+=============================================================
+
+=============================================================
+ Geant3 Virtual Monte Carlo 
+ Version 3.0 ( 24 February 2020 )
+ WWW : https://vmc-project.github.io/
+=============================================================
+
 Geant3 has been created.
 --- Add particles 
 --- Add ions 
@@ -741,13 +806,13 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  14    -6.292   -0.091    0.567     2.6406    0.9717    0.464    3.256     GAPX  Multiple scattering
 #  15    -6.212   -0.341    0.664     2.0431    0.5976    0.339    3.595     GAPX  Multiple scattering
 #  16    -6.074   -0.469    0.634     1.6797    0.3634    0.234    3.829     GAPX  Multiple scattering
-#  17    -6.069   -0.593    0.581     1.4088    0.2709    0.166    3.995     GAPX  Multiple scattering
-#  18    -6.029   -0.571    0.492     1.1891    0.2197    0.123    4.118     GAPX  Multiple scattering
-#  19    -6.062   -0.591    0.428     1.0370    0.1521    0.093    4.210     GAPX  Multiple scattering
-#  20    -6.003   -0.601    0.424     0.8556    0.1814    0.073    4.284     GAPX  Multiple scattering
-#  21    -6.000   -0.603    0.423     0.8361    0.0195    0.004    4.288     GAPX  Multiple scattering
-#  22    -6.000   -0.603    0.423     0.8361    0.0000    0.000    4.288     ABSO  No active process
-#  23    -6.000   -0.603    0.423     0.0000    0.8361    0.000    4.288     ABSO  Energy threshold
+#  17    -6.070   -0.593    0.581     1.4088    0.2709    0.166    3.995     GAPX  Multiple scattering
+#  18    -6.029   -0.571    0.492     1.1889    0.2199    0.123    4.117     GAPX  Multiple scattering
+#  19    -6.062   -0.591    0.428     1.0369    0.1521    0.093    4.210     GAPX  Multiple scattering
+#  20    -6.003   -0.601    0.424     0.8555    0.1814    0.073    4.284     GAPX  Multiple scattering
+#  21    -6.000   -0.602    0.423     0.8360    0.0195    0.004    4.288     GAPX  Multiple scattering
+#  22    -6.000   -0.602    0.423     0.8360    0.0000    0.000    4.288     ABSO  No active process
+#  23    -6.000   -0.602    0.423     0.0000    0.8360    0.000    4.288     ABSO  Energy threshold
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 9     Parent ID = 0
@@ -1062,13 +1127,13 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Gap:      total energy (MeV):   2.957       total track length (cm):    1.496
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    79586183     4BE6387 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   120887303     7349807 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    74176117    79586183
-                                        HEX     46BD675     4BE6387
-                                        HEX    FFAD7132           0
-                              relative adrs    -5410510           0
+          with Store/Table at absolute adrs   115477229   120887303
+                                        HEX     6E20AED     7349807
+                                        HEX    FFAD712A           0
+                              relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 

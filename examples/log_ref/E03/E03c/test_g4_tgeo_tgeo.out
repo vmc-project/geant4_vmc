@@ -7,7 +7,7 @@
    ------------------------------------------------------------
 
 
-Processing load_g4a.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -15,9 +15,9 @@ Loading VMC library ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_1.C("g4Config.C",kFALSE)...
+Processing test_E03_1.C("g4tgeoConfig.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 
 =============================================================
@@ -31,26 +31,9 @@ Processing test_E03_1.C("g4Config.C",kFALSE)...
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
-
-**************************************************************
- Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
-                       Copyright : Geant4 Collaboration
-                      References : NIM A 506 (2003), 250-303
-                                 : IEEE-TNS 53 (2006), 270-278
-                                 : NIM A 835 (2016), 186-225
-                             WWW : http://geant4.org/
-**************************************************************
-
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
-
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList stepLimiter
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Geant4 has been created.
-Processing Config() done.
+Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
+Running TVirtualMCApplication::ConstructGeometry
+Warning in <TGeoManager::Init>: Deleting previous geometry: TGeo/Root geometry manager
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -62,10 +45,44 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
+isMaster=1
+
+**************************************************************
+ Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+Info in <TObject::Initialize>: Creating G4 hierarchy ...
+Info in <TGeoManager::ConvertReflections>: Converting reflections in: E03_geometry - E03 VMC example geometry ...
+Info in <TGeoManager::ConvertReflections>: Done
+===> GEANT4 materials created and mapped to TGeo ones...
+===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
+### INFO: TG4RootDetectorConstruction::Construct() finished
+TG4PostDetConstruction::Initialize
+G4 Stat: instantiated 6 logical volumes 
+                      14 physical volumes
+Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
+Adding HadronPhysicsList FTFP_BERT
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
+Adding SpecialPhysicsList stepLimiter
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Geant4 has been created.
+TG4RootDetectorConstruction::ConstructSDandField
+TG4PostDetConstruction::InitializeSDandField
+### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 
  FTFP_BERT : new threshold between BERT and FTFP is over the interval 
  for pions :   3 to 12 GeV
@@ -89,7 +106,7 @@ Available UI session types: [ GAG, tcsh, csh ]
 **********************************************
     GEANT4 Geometry statistics: 
               6 logical volumes
-              5 physical volumes
+             14 physical volumes
              13 materials
               3 user limits
               6 sensitive detectors
@@ -793,25 +810,25 @@ Index : 2     used in the geometry : Yes
 ### Run 0 start.
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 931.505       total track length (cm):  67.4191
-   Gap:      total energy (MeV): 28.5432       total track length (cm):  13.5556
+   Absorber: total energy (MeV): 889.821       total track length (cm):  64.0694
+   Gap:      total energy (MeV): 36.9205       total track length (cm):  18.2977
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV):  897.76       total track length (cm):   63.994
-   Gap:      total energy (MeV): 25.8308       total track length (cm):  12.0087
+   Absorber: total energy (MeV): 946.471       total track length (cm):  67.8149
+   Gap:      total energy (MeV): 22.4383       total track length (cm):  11.3514
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 881.013       total track length (cm):  63.0601
-   Gap:      total energy (MeV): 17.7147       total track length (cm):  8.92377
+   Absorber: total energy (MeV): 919.468       total track length (cm):  66.1173
+   Gap:      total energy (MeV):  20.753       total track length (cm):  9.86782
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 920.486       total track length (cm):  66.4989
-   Gap:      total energy (MeV): 43.0602       total track length (cm):  20.9946
+   Absorber: total energy (MeV):  914.63       total track length (cm):  65.7155
+   Gap:      total energy (MeV): 32.9498       total track length (cm):  15.9733
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 881.201       total track length (cm):  64.1475
-   Gap:      total energy (MeV): 29.0096       total track length (cm):   14.069
-Time of this run:   User=0.070000s Real=0.079270s Sys=0.010000s
+   Absorber: total energy (MeV): 926.361       total track length (cm):  66.9158
+   Gap:      total energy (MeV): 38.0507       total track length (cm):  19.3483
+Time of this run:   User=0.110000s Real=0.113047s Sys=0.000000s
 Number of events processed: 5
    ------------------------------------------------------------
   | Welcome to ROOT 6.18/04                  https://root.cern |
@@ -822,7 +839,7 @@ Number of events processed: 5
    ------------------------------------------------------------
 
 
-Processing load_g4a.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -830,9 +847,9 @@ Loading VMC library ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_2.C("g4Config.C",kFALSE)...
+Processing test_E03_2.C("g4tgeoConfig.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 --- Init MC 
 
@@ -847,28 +864,10 @@ Processing test_E03_2.C("g4Config.C",kFALSE)...
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
-
-**************************************************************
- Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
-                       Copyright : Geant4 Collaboration
-                      References : NIM A 506 (2003), 250-303
-                                 : IEEE-TNS 53 (2006), 270-278
-                                 : NIM A 835 (2016), 186-225
-                             WWW : http://geant4.org/
-**************************************************************
-
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
-
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList stepLimiter
---- Add particles 
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Geant4 has been created.
-Processing Config() done.
+Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
+Running TVirtualMCApplication::ConstructGeometry
 --- Construct geometry 
+Warning in <TGeoManager::Init>: Deleting previous geometry: TGeo/Root geometry manager
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -880,11 +879,46 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
+isMaster=1
+
+**************************************************************
+ Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+Info in <TObject::Initialize>: Creating G4 hierarchy ...
+Info in <TGeoManager::ConvertReflections>: Converting reflections in: E03_geometry - E03 VMC example geometry ...
+Info in <TGeoManager::ConvertReflections>: Done
+===> GEANT4 materials created and mapped to TGeo ones...
+===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
+### INFO: TG4RootDetectorConstruction::Construct() finished
+TG4PostDetConstruction::Initialize
+G4 Stat: instantiated 6 logical volumes 
+                      14 physical volumes
+Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
+Adding HadronPhysicsList FTFP_BERT
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
+Adding SpecialPhysicsList stepLimiter
+--- Add particles 
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Geant4 has been created.
+TG4RootDetectorConstruction::ConstructSDandField
+TG4PostDetConstruction::InitializeSDandField
 --- Init geometry 
+### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 
  FTFP_BERT : new threshold between BERT and FTFP is over the interval 
  for pions :   3 to 12 GeV
@@ -909,7 +943,7 @@ Available UI session types: [ GAG, tcsh, csh ]
 **********************************************
     GEANT4 Geometry statistics: 
               6 logical volumes
-              5 physical volumes
+             14 physical volumes
              13 materials
               3 user limits
               6 sensitive detectors
@@ -2165,7 +2199,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  48.317       total track length (cm):    3.634
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.000000s Real=0.006011s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.007049s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------
@@ -2177,7 +2211,7 @@ Number of events processed: 1
    ------------------------------------------------------------
 
 
-Processing load_g4a.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -2185,9 +2219,9 @@ Loading VMC library ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_3.C("g4Config.C",kFALSE)...
+Processing test_E03_3.C("g4tgeoConfig.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 --- Init MC 
 
@@ -2202,28 +2236,10 @@ Processing test_E03_3.C("g4Config.C",kFALSE)...
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
-
-**************************************************************
- Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
-                       Copyright : Geant4 Collaboration
-                      References : NIM A 506 (2003), 250-303
-                                 : IEEE-TNS 53 (2006), 270-278
-                                 : NIM A 835 (2016), 186-225
-                             WWW : http://geant4.org/
-**************************************************************
-
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
-
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList stepLimiter
---- Add particles 
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Geant4 has been created.
-Processing Config() done.
+Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
+Running TVirtualMCApplication::ConstructGeometry
 --- Construct geometry 
+Warning in <TGeoManager::Init>: Deleting previous geometry: TGeo/Root geometry manager
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -2235,11 +2251,46 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
+isMaster=1
+
+**************************************************************
+ Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+Info in <TObject::Initialize>: Creating G4 hierarchy ...
+Info in <TGeoManager::ConvertReflections>: Converting reflections in: E03_geometry - E03 VMC example geometry ...
+Info in <TGeoManager::ConvertReflections>: Done
+===> GEANT4 materials created and mapped to TGeo ones...
+===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
+### INFO: TG4RootDetectorConstruction::Construct() finished
+TG4PostDetConstruction::Initialize
+G4 Stat: instantiated 6 logical volumes 
+                      14 physical volumes
+Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
+Adding HadronPhysicsList FTFP_BERT
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
+Adding SpecialPhysicsList stepLimiter
+--- Add particles 
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Geant4 has been created.
+TG4RootDetectorConstruction::ConstructSDandField
+TG4PostDetConstruction::InitializeSDandField
 --- Init geometry 
+### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 
  FTFP_BERT : new threshold between BERT and FTFP is over the interval 
  for pions :   3 to 12 GeV
@@ -2264,7 +2315,7 @@ Available UI session types: [ GAG, tcsh, csh ]
 **********************************************
     GEANT4 Geometry statistics: 
               6 logical volumes
-              5 physical volumes
+             14 physical volumes
              13 materials
               3 user limits
               6 sensitive detectors
@@ -3015,7 +3066,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.145
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.000000s Real=0.001307s Sys=0.000000s
+Time of this run:   User=0.010000s Real=0.001373s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------
@@ -3027,7 +3078,7 @@ Number of events processed: 1
    ------------------------------------------------------------
 
 
-Processing load_g4a.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -3035,9 +3086,9 @@ Loading VMC library ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_4.C("g4Config.C",kFALSE)...
+Processing test_E03_4.C("g4tgeoConfig.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 
 =============================================================
@@ -3051,26 +3102,9 @@ Processing test_E03_4.C("g4Config.C",kFALSE)...
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
-
-**************************************************************
- Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
-                       Copyright : Geant4 Collaboration
-                      References : NIM A 506 (2003), 250-303
-                                 : IEEE-TNS 53 (2006), 270-278
-                                 : NIM A 835 (2016), 186-225
-                             WWW : http://geant4.org/
-**************************************************************
-
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
-
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList stepLimiter
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Geant4 has been created.
-Processing Config() done.
+Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
+Running TVirtualMCApplication::ConstructGeometry
+Warning in <TGeoManager::Init>: Deleting previous geometry: TGeo/Root geometry manager
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -3082,10 +3116,44 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
+isMaster=1
+
+**************************************************************
+ Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+Info in <TObject::Initialize>: Creating G4 hierarchy ...
+Info in <TGeoManager::ConvertReflections>: Converting reflections in: E03_geometry - E03 VMC example geometry ...
+Info in <TGeoManager::ConvertReflections>: Done
+===> GEANT4 materials created and mapped to TGeo ones...
+===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
+### INFO: TG4RootDetectorConstruction::Construct() finished
+TG4PostDetConstruction::Initialize
+G4 Stat: instantiated 6 logical volumes 
+                      14 physical volumes
+Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
+Adding HadronPhysicsList FTFP_BERT
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
+Adding SpecialPhysicsList stepLimiter
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Geant4 has been created.
+TG4RootDetectorConstruction::ConstructSDandField
+TG4PostDetConstruction::InitializeSDandField
+### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 
  FTFP_BERT : new threshold between BERT and FTFP is over the interval 
  for pions :   3 to 12 GeV
@@ -3109,7 +3177,7 @@ Available UI session types: [ GAG, tcsh, csh ]
 **********************************************
     GEANT4 Geometry statistics: 
               6 logical volumes
-              5 physical volumes
+             14 physical volumes
              13 materials
               3 user limits
               6 sensitive detectors
@@ -3833,9 +3901,9 @@ Index : 2     used in the geometry : Yes
       Current track pi0  is a decay product of Parent ID = 0
       Current track pi0  is a decay product of Parent ID = 0
 
-   Absorber: total energy (MeV): 1451.53       total track length (cm):  104.214
-   Gap:      total energy (MeV): 80.9693       total track length (cm):  39.7536
-Time of this run:   User=0.020000s Real=0.026104s Sys=0.000000s
+   Absorber: total energy (MeV): 1260.07       total track length (cm):  90.8192
+   Gap:      total energy (MeV): 112.554       total track length (cm):  55.4558
+Time of this run:   User=0.040000s Real=0.035845s Sys=0.000000s
 Number of events processed: 1
    ------------------------------------------------------------
   | Welcome to ROOT 6.18/04                  https://root.cern |
@@ -3846,7 +3914,7 @@ Number of events processed: 1
    ------------------------------------------------------------
 
 
-Processing load_g4a.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -3854,9 +3922,9 @@ Loading VMC library ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_5.C("g4Config4.C",kFALSE)...
+Processing test_E03_5.C("g4tgeoConfig4.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 --- Init MC 
 
@@ -3871,28 +3939,10 @@ Processing test_E03_5.C("g4Config4.C",kFALSE)...
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
-
-**************************************************************
- Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
-                       Copyright : Geant4 Collaboration
-                      References : NIM A 506 (2003), 250-303
-                                 : IEEE-TNS 53 (2006), 270-278
-                                 : NIM A 835 (2016), 186-225
-                             WWW : http://geant4.org/
-**************************************************************
-
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
-
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList specialCuts+
---- Add particles 
-### TG4SpecialControlsV2 constructed
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Geant4 has been created.
+Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
+Running TVirtualMCApplication::ConstructGeometry
 --- Construct geometry 
+Warning in <TGeoManager::Init>: Deleting previous geometry: TGeo/Root geometry manager
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -3904,11 +3954,47 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
+isMaster=1
+
+**************************************************************
+ Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+Info in <TObject::Initialize>: Creating G4 hierarchy ...
+Info in <TGeoManager::ConvertReflections>: Converting reflections in: E03_geometry - E03 VMC example geometry ...
+Info in <TGeoManager::ConvertReflections>: Done
+===> GEANT4 materials created and mapped to TGeo ones...
+===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
+### INFO: TG4RootDetectorConstruction::Construct() finished
+TG4PostDetConstruction::Initialize
+G4 Stat: instantiated 6 logical volumes 
+                      14 physical volumes
+Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
+Adding HadronPhysicsList FTFP_BERT
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
+Adding SpecialPhysicsList specialCuts+
+--- Add particles 
+### TG4SpecialControlsV2 constructed
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Geant4 has been created.
+TG4RootDetectorConstruction::ConstructSDandField
+TG4PostDetConstruction::InitializeSDandField
 --- Init geometry 
+### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 
  FTFP_BERT : new threshold between BERT and FTFP is over the interval 
  for pions :   3 to 12 GeV
@@ -3936,7 +4022,7 @@ G4ProcessManager::GetAttribute(): particle[neutron]
 **********************************************
     GEANT4 Geometry statistics: 
               6 logical volumes
-              5 physical volumes
+             14 physical volumes
              13 materials
               3 user limits
               6 sensitive detectors
@@ -4795,8 +4881,8 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   9    -0.500   -0.966    3.460     0.2860    0.0000    1.444    3.914     ABSO  Transportation
 #  10    -0.500   -0.966    3.460     0.2860    0.0000    0.000    3.914     GAPX  No active process
 #  11    -0.279   -1.174    3.559     0.1631    0.0000    0.320    4.234     GAPX  Compton scattering
-#  12     0.000   -0.407    3.632     0.1631    0.0000    0.819    5.053     GAPX  Transportation
-#  13     0.000   -0.407    3.632     0.1631    0.0000    0.000    5.053     ABSO  No active process
+#  12    -0.000   -0.407    3.632     0.1631    0.0000    0.819    5.053     GAPX  Transportation
+#  13    -0.000   -0.407    3.632     0.1631    0.0000    0.000    5.053     ABSO  No active process
 #  14     0.090   -0.160    3.655     0.1631    0.0000    0.264    5.317     ABSO  Rayleigh effect
 #  15     0.194    2.652    4.409     0.1631    0.0000    2.913    8.230     ABSO  Rayleigh effect
 #  16     0.263    3.543    4.601     0.1631    0.0000    0.914    9.144     ABSO  Rayleigh effect
@@ -5076,7 +5162,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  19.872       total track length (cm):    1.580
    Gap:      total energy (MeV):   2.867       total track length (cm):    0.837
-Time of this run:   User=0.000000s Real=0.006425s Sys=0.000000s
+Time of this run:   User=0.010000s Real=0.008279s Sys=0.010000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------
@@ -5088,7 +5174,7 @@ Number of events processed: 1
    ------------------------------------------------------------
 
 
-Processing load_g4a.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -5096,9 +5182,9 @@ Loading VMC library ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_6.C("g4Config5.C",kFALSE)...
+Processing test_E03_6.C("g4tgeoConfig5.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 
 =============================================================
@@ -5112,25 +5198,9 @@ Processing test_E03_6.C("g4Config5.C",kFALSE)...
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
-
-**************************************************************
- Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
-                       Copyright : Geant4 Collaboration
-                      References : NIM A 506 (2003), 250-303
-                                 : IEEE-TNS 53 (2006), 270-278
-                                 : NIM A 835 (2016), 186-225
-                             WWW : http://geant4.org/
-**************************************************************
-
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
-
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList stepLimiter
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Geant4 has been created.
+Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
+Running TVirtualMCApplication::ConstructGeometry
+Warning in <TGeoManager::Init>: Deleting previous geometry: TGeo/Root geometry manager
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -5142,11 +5212,45 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
+isMaster=1
+
+**************************************************************
+ Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+Info in <TObject::Initialize>: Creating G4 hierarchy ...
+Info in <TGeoManager::ConvertReflections>: Converting reflections in: E03_geometry - E03 VMC example geometry ...
+Info in <TGeoManager::ConvertReflections>: Done
+===> GEANT4 materials created and mapped to TGeo ones...
+===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
+### INFO: TG4RootDetectorConstruction::Construct() finished
+TG4PostDetConstruction::Initialize
+G4 Stat: instantiated 6 logical volumes 
+                      14 physical volumes
+Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
+Adding HadronPhysicsList FTFP_BERT
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
+Adding SpecialPhysicsList stepLimiter
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Geant4 has been created.
+TG4RootDetectorConstruction::ConstructSDandField
+TG4PostDetConstruction::InitializeSDandField
 Create user defined equation of motion and stepper
+### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 
  FTFP_BERT : new threshold between BERT and FTFP is over the interval 
  for pions :   3 to 12 GeV
@@ -5170,7 +5274,7 @@ Available UI session types: [ GAG, tcsh, csh ]
 **********************************************
     GEANT4 Geometry statistics: 
               6 logical volumes
-              5 physical volumes
+             14 physical volumes
              13 materials
               3 user limits
               6 sensitive detectors
@@ -5874,9 +5978,9 @@ Index : 2     used in the geometry : Yes
 ### Run 0 start.
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 596.174       total track length (cm):  34.3108
+   Absorber: total energy (MeV): 596.174       total track length (cm):  34.3098
    Gap:      total energy (MeV): 35.4217       total track length (cm):  13.7506
-Time of this run:   User=0.000000s Real=0.003636s Sys=0.000000s
+Time of this run:   User=0.010000s Real=0.004849s Sys=0.000000s
 Number of events processed: 1
    ------------------------------------------------------------
   | Welcome to ROOT 6.18/04                  https://root.cern |
@@ -5887,7 +5991,7 @@ Number of events processed: 1
    ------------------------------------------------------------
 
 
-Processing load_g4a.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -5895,9 +5999,9 @@ Loading VMC library ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_7.C("g4Config6.C",kFALSE)...
+Processing test_E03_7.C("g4tgeoConfig6.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 
 =============================================================
@@ -5911,27 +6015,9 @@ Processing test_E03_7.C("g4Config6.C",kFALSE)...
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
-
-**************************************************************
- Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
-                       Copyright : Geant4 Collaboration
-                      References : NIM A 506 (2003), 250-303
-                                 : IEEE-TNS 53 (2006), 270-278
-                                 : NIM A 835 (2016), 186-225
-                             WWW : http://geant4.org/
-**************************************************************
-
-Adding HadronPhysicsList FTFP_BERT_EMV
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT_EMV>  EMoption= 1
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
-
-<<< Reference Physics List FTFP_BERT_EMV is built
-
-Adding ExtraPhysicsList biasing 
-Adding SpecialPhysicsList stepLimiter
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Geant4 has been created.
-TG4ModelConfigurationManager::SetModel: inclxx
+Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
+Running TVirtualMCApplication::ConstructGeometry
+Warning in <TGeoManager::Init>: Deleting previous geometry: TGeo/Root geometry manager
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -5943,10 +6029,45 @@ Info in <TGeoManager::CloseGeometry>: Building cache...
 Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
+Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4TransportationManager
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
+isMaster=1
+
+**************************************************************
+ Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+Info in <TObject::Initialize>: Creating G4 hierarchy ...
+Info in <TGeoManager::ConvertReflections>: Converting reflections in: E03_geometry - E03 VMC example geometry ...
+Info in <TGeoManager::ConvertReflections>: Done
+===> GEANT4 materials created and mapped to TGeo ones...
+===> GEANT4 physical volumes created and mapped to TGeo hierarchy...
+### INFO: TG4RootDetectorConstruction::Construct() finished
+TG4PostDetConstruction::Initialize
+G4 Stat: instantiated 6 logical volumes 
+                      14 physical volumes
+Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
+Adding HadronPhysicsList FTFP_BERT
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
+Adding ExtraPhysicsList biasing 
+Adding SpecialPhysicsList stepLimiter
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Geant4 has been created.
+TG4ModelConfigurationManager::SetModel: inclxx
+TG4RootDetectorConstruction::ConstructSDandField
+TG4PostDetConstruction::InitializeSDandField
 TG4BiasingManager::CreateBiasingOperator
 TG4ModelConfigurationManager::SetRegionsNames: 'Lead' 
 
@@ -5973,6 +6094,7 @@ Biasing manager: processing volume ABSO, material Lead
 Biasing operator attached to lv ABSO
 Biasing manager: processing volume GAPX, material liquidArgon
    Material liquidArgon is not in selection
+### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 
  FTFP_BERT : new threshold between BERT and FTFP is over the interval 
  for pions :   3 to 12 GeV
@@ -5992,56 +6114,53 @@ Biasing manager: processing volume GAPX, material liquidArgon
 
 ### User particles physics constructed. 
 ### Processes mapped to VMC codes ok.
-### G4EmConfigurator::AddModels n= 46
-### G4EmConfigurator WARNING: fails to find a process <hIoni> for pi+
-### G4EmConfigurator WARNING: fails to find a process <hIoni> for pi-
-### G4EmConfigurator WARNING: fails to find a process <hIoni> for proton
-### Selected EmModels added to EM processes
 Available UI session types: [ GAG, tcsh, csh ]
 
 **********************************************
     GEANT4 Geometry statistics: 
               6 logical volumes
-              5 physical volumes
+             14 physical volumes
              13 materials
               3 user limits
               6 sensitive detectors
 **********************************************
 
 
-phot:  for gamma applyCuts:1  SubType=12 BuildTable=0
+phot:  for gamma SubType=12 BuildTable=0
       LambdaPrime table from 200 keV to 100 TeV in 61 bins 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
  LivermorePhElectric : Emin=    0 eV  Emax=  100 TeV  SauterGavrila Fluo
 
-compt:  for gamma applyCuts:1  SubType=13 BuildTable=1
+compt:  for gamma SubType=13 BuildTable=1
       Lambda table from 100 eV  to 1 MeV, 7 bins/decade, spline: 1
       LambdaPrime table from 1 MeV to 100 TeV in 56 bins 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
        Klein-Nishina : Emin=    0 eV  Emax=  100 TeV
 
-conv:  for gamma applyCuts:1  SubType=14 BuildTable=1
+conv:  for gamma SubType=14 BuildTable=1
       Lambda table from 1.022 MeV to 100 TeV, 18 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         BetheHeitler : Emin=    0 eV  Emax=   80 GeV  ModifiedTsai
      BetheHeitlerLPM : Emin=   80 GeV Emax=  100 TeV  ModifiedTsai
 
+Rayl:  for gamma SubType=11 BuildTable=1
+      Lambda table from 100 eV  to 100 keV, 7 bins/decade, spline: 0
+      LambdaPrime table from 100 keV to 100 TeV in 63 bins 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+   LivermoreRayleigh : Emin=    0 eV  Emax=  100 TeV  CullenGenerator
+
 msc:  for e-  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 1
+      RangeFactor= 0.04, stepLimType: 1, latDisp: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 MeV Nbins=42 100 eV  - 100 MeV
         WentzelVIUni : Emin=  100 MeV Emax=  100 TeV Nbins=42 100 MeV - 100 TeV
-      ===== EM models for the G4Region  liquidArgon ======
-       ALICEUrbanMsc : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
 
 eIoni:  for e-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      StepFunction=(0.8, 1 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.2, 1 mm), integ: 1, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         MollerBhabha : Emin=    0 eV  Emax=  100 TeV
-      ===== EM models for the G4Region  liquidArgon ======
-            PAIModel : Emin=    0 eV  Emax=  100 TeV  deltaVI
 
 eBrem:  for e-  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -6051,28 +6170,24 @@ eBrem:  for e-  SubType=3
              eBremSB : Emin=    0 eV  Emax=    1 GeV  ModifiedTsai
             eBremLPM : Emin=    1 GeV Emax=  100 TeV  ModifiedTsai
 
-CoulombScat:  for e-, integral:1  applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for e-, integral:1  SubType=1 BuildTable=1
       Lambda table from 100 MeV to 100 TeV, 7 bins/decade, spline: 1
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
   eCoulombScattering : Emin=  100 MeV Emax=  100 TeV
 
 msc:  for e+  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 1
+      RangeFactor= 0.04, stepLimType: 1, latDisp: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 MeV Nbins=42 100 eV  - 100 MeV
         WentzelVIUni : Emin=  100 MeV Emax=  100 TeV Nbins=42 100 MeV - 100 TeV
-      ===== EM models for the G4Region  liquidArgon ======
-       ALICEUrbanMsc : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
 
 eIoni:  for e+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      StepFunction=(0.8, 1 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.2, 1 mm), integ: 1, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         MollerBhabha : Emin=    0 eV  Emax=  100 TeV
-      ===== EM models for the G4Region  liquidArgon ======
-            PAIModel : Emin=    0 eV  Emax=  100 TeV  deltaVI
 
 eBrem:  for e+  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -6082,11 +6197,11 @@ eBrem:  for e+  SubType=3
              eBremSB : Emin=    0 eV  Emax=    1 GeV  ModifiedTsai
             eBremLPM : Emin=    1 GeV Emax=  100 TeV  ModifiedTsai
 
-annihil:  for e+, integral:1  applyCuts:1  SubType=5 BuildTable=0
+annihil:  for e+, integral:1  SubType=5 BuildTable=0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             eplus2gg : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for e+, integral:1  applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for e+, integral:1  SubType=1 BuildTable=1
       Lambda table from 100 MeV to 100 TeV, 7 bins/decade, spline: 1
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -6118,7 +6233,7 @@ hPairProd:  for proton  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for proton, integral:1  applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for proton, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -6137,8 +6252,6 @@ ionIoni:  for GenericIon  SubType=2
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             BraggIon : Emin=    0 eV  Emax=    2 MeV
           BetheBloch : Emin=    2 MeV Emax=  100 TeV
-      ===== EM models for the G4Region  liquidArgon ======
-            PAIModel : Emin=    0 eV  Emax=  100 TeV  deltaVI
 
 msc:  for alpha  SubType= 10
       RangeFactor= 0.2, stepLimType: 0, latDisp: 0
@@ -6152,8 +6265,6 @@ ionIoni:  for alpha  SubType=2
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             BraggIon : Emin=    0 eV  Emax=7.9452 MeV
           BetheBloch : Emin=7.9452 MeV Emax=  100 TeV
-      ===== EM models for the G4Region  liquidArgon ======
-            PAIModel : Emin=    0 eV  Emax=  100 TeV  deltaVI
 
 msc:  for anti_proton  SubType= 10
       RangeFactor= 0.2, stepLimType: 0, latDisp: 0
@@ -6167,8 +6278,6 @@ hIoni:  for anti_proton  SubType=2
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             ICRU73QO : Emin=    0 eV  Emax=    2 MeV
           BetheBloch : Emin=    2 MeV Emax=  100 TeV
-      ===== EM models for the G4Region  liquidArgon ======
-            PAIModel : Emin=    0 eV  Emax=  100 TeV  deltaVI
 
 hBrems:  for anti_proton  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -6183,7 +6292,7 @@ hPairProd:  for anti_proton  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for anti_proton, integral:1  applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for anti_proton, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -6201,8 +6310,6 @@ hIoni:  for kaon+  SubType=2
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                Bragg : Emin=    0 eV  Emax=1.05231 MeV
           BetheBloch : Emin=1.05231 MeV Emax=  100 TeV
-      ===== EM models for the G4Region  liquidArgon ======
-            PAIModel : Emin=    0 eV  Emax=  100 TeV  deltaVI
 
 hBrems:  for kaon+  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -6217,7 +6324,7 @@ hPairProd:  for kaon+  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for kaon+, integral:1  applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for kaon+, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -6235,8 +6342,6 @@ hIoni:  for kaon-  SubType=2
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             ICRU73QO : Emin=    0 eV  Emax=1.05231 MeV
           BetheBloch : Emin=1.05231 MeV Emax=  100 TeV
-      ===== EM models for the G4Region  liquidArgon ======
-            PAIModel : Emin=    0 eV  Emax=  100 TeV  deltaVI
 
 hBrems:  for kaon-  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -6251,7 +6356,7 @@ hPairProd:  for kaon-  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for kaon-, integral:1  applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for kaon-, integral:1  SubType=1 BuildTable=1
       Used Lambda table of kaon+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -6270,8 +6375,6 @@ muIoni:  for mu+  SubType=2
                Bragg : Emin=    0 eV  Emax=  200 keV
           BetheBloch : Emin=  200 keV Emax=    1 GeV
         MuBetheBloch : Emin=    1 GeV Emax=  100 TeV
-      ===== EM models for the G4Region  liquidArgon ======
-            PAIModel : Emin=    0 eV  Emax=  100 TeV  deltaVI
 
 muBrems:  for mu+  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -6286,7 +6389,7 @@ muPairProd:  for mu+  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for mu+, integral:1  applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for mu+, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -6305,8 +6408,6 @@ muIoni:  for mu-  SubType=2
             ICRU73QO : Emin=    0 eV  Emax=  200 keV
           BetheBloch : Emin=  200 keV Emax=    1 GeV
         MuBetheBloch : Emin=    1 GeV Emax=  100 TeV
-      ===== EM models for the G4Region  liquidArgon ======
-            PAIModel : Emin=    0 eV  Emax=  100 TeV  deltaVI
 
 muBrems:  for mu-  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -6321,7 +6422,7 @@ muPairProd:  for mu-  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for mu-, integral:1  applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for mu-, integral:1  SubType=1 BuildTable=1
       Used Lambda table of mu+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -6353,7 +6454,7 @@ hPairProd:  for pi+  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for pi+, integral:1  applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for pi+, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -6385,7 +6486,7 @@ hPairProd:  for pi-  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
       Used Lambda table of pi+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -6715,7 +6816,7 @@ Index : 2     used in the geometry : Yes
  Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
  Energy thresholds :  gamma  6.19986 keV    e-  344.855 keV    e+  333.46 keV proton 100 keV
  Region(s) which use this couple : 
-    liquidArgon
+    DefaultRegionForTheWorld
 
 ====================================================================
 
@@ -6775,13 +6876,13 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0    -12.1    -5.18    -1.19     0.511        0        0         0        ABSO initStep
     1       -5    -10.5     9.96     0.511        0     14.2      14.2        GAPX Transportation
-    2        0    -14.2     17.8     0.511        0       10      24.3        ABSO Transportation
+    2 8.88e-16    -14.2     17.8     0.511        0       10      24.3        ABSO Transportation
     3       10    -21.6     33.6     0.511        0     20.1      44.3        GAPX Transportation
     4       15    -25.4     41.4     0.511        0       10      54.4        ABSO Transportation
     5     15.9      -26     42.9     0.501  0.00969     1.85      56.2        ABSO biasWrapper(hadElastic)
     6       15    -25.7       41     0.501        0     2.09      58.3        GAPX Transportation
     7       10    -23.7       31     0.501        0     11.4      69.7        ABSO Transportation
-    8        0    -19.6       11     0.501        0     22.7      92.4        GAPX Transportation
+    8 -1.78e-15    -19.6       11     0.501        0     22.7      92.4        GAPX Transportation
     9       -5    -17.6     1.02     0.501        0     11.4       104        ABSO Transportation
    10      -15    -13.6      -19     0.501        0     22.7       126        GAPX Transportation
    11      -20    -11.6      -29     0.501        0     11.4       138        ABSO Transportation
@@ -6809,7 +6910,44 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0    -12.1    -5.18    -1.19     0.833        0        0         0        ABSO initStep
-    1    -11.6    -5.05    -1.01         0    0.833    0.524     0.524        ABSO phot
+    1    -11.9    -5.12     -1.1      0.81        0     0.25      0.25        ABSO compt
+    2    -6.33    -4.69     0.39     0.745        0     5.74      5.99        ABSO compt
+    3       -5    -4.92    0.434     0.745        0     1.35      7.34        GAPX Transportation
+    4 8.88e-16    -5.75    0.596     0.745        0     5.07      12.4        ABSO Transportation
+    5     3.06    -6.27    0.695     0.329        0      3.1      15.5        ABSO compt
+    6     3.17    -5.92    0.631         0   0.0883    0.368      15.9        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 22,   Parent ID = 15
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0     3.17    -5.92    0.631     0.241        0        0         0        ABSO initStep
+    1     3.16    -5.92    0.633         0    0.241    0.108     0.108        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 21,   Parent ID = 15
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0     3.06    -6.27    0.695     0.416        0        0         0        ABSO initStep
+    1     3.07    -6.28    0.697         0    0.416    0.237     0.237        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 20,   Parent ID = 15
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -6.33    -4.69     0.39     0.065        0        0         0        ABSO initStep
+    1    -6.33    -4.69    0.391         0    0.065   0.0137    0.0137        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 19,   Parent ID = 15
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -11.9    -5.12     -1.1    0.0226        0        0         0        ABSO initStep
+    1    -11.9    -5.12     -1.1         0   0.0226  0.00248   0.00248        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 14,   Parent ID = 1
@@ -6819,36 +6957,10 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
     0    -12.1    -5.18    -1.19      2.05        0        0         0        ABSO initStep
     1      -15    -6.42     4.62      2.05        0     6.62      6.62        GAPX Transportation
     2      -20    -8.55     14.6      2.05        0     11.4        18        ABSO Transportation
-    3    -22.8    -9.75     20.2         0    0.291     6.39      24.4        ABSO conv
-
-*********************************************************************************************************
-* G4Track Information:   Particle = e+,   Track ID = 19,   Parent ID = 14
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -22.8    -9.75     20.2     0.737        0        0         0        ABSO initStep
-    1    -22.8    -9.79     20.2         0    0.737    0.504     0.504        ABSO eIoni
-    2    -22.8    -9.79     20.2         0        0        0     0.504        ABSO annihil
-
-*********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 21,   Parent ID = 19
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -22.8    -9.79     20.2     0.511        0        0         0        ABSO initStep
-    1      -30    -8.32     21.2     0.511        0     7.39      7.39        GAPX Transportation
-    2      -35     -7.3     21.9     0.511        0     5.15      12.5        ABSO Transportation
-    3      -43    -5.67       23     0.304    0.207     8.24      20.8        ABSO compt
-    4    -44.2    -7.89     23.7         0    0.304     2.64      23.4        ABSO phot
-
-*********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 20,   Parent ID = 19
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -22.8    -9.79     20.2     0.511        0        0         0        ABSO initStep
-    1    -22.7    -9.82     20.2     0.225    0.286    0.154     0.154        ABSO compt
-    2    -22.8    -9.36     21.7         0    0.225     1.59      1.75        ABSO phot
+    3      -30    -12.8     34.5      2.05        0     22.7      40.7        GAPX Transportation
+    4      -35    -14.9     44.5      2.05        0     11.4        52        ABSO Transportation
+    5    -37.8    -16.1       50      2.05        0     6.27      58.3        WRLD Transportation
+    6    -42.8    -18.3       60      2.05        0     11.4      69.7  OutOfWorld Transportation
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 13,   Parent ID = 1
@@ -6858,17 +6970,25 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
     0    -12.1    -5.18    -1.19      2.51        0        0         0        ABSO initStep
     1       -5    -5.24      2.8      2.51        0     8.13      8.13        GAPX Transportation
     2        0    -5.28     5.61      2.51        0     5.74      13.9        ABSO Transportation
-    3       10    -5.37     11.2      2.51        0     11.5      25.3        GAPX Transportation
-    4       15    -5.41       14      2.51        0     5.74      31.1        ABSO Transportation
-    5       25     -5.5     19.7      2.51        0     11.5      42.5        GAPX Transportation
-    6       30    -5.54     22.5      2.51        0     5.74      48.3        ABSO Transportation
-    7       40    -5.63     28.1      2.51        0     11.5      59.7        GAPX Transportation
-    8       45    -5.67     30.9      2.51        0     5.74      65.5        ABSO Transportation
-    9       55    -5.76     36.5      2.51        0     11.5        77        GAPX Transportation
-   10       60     -5.8     39.3      2.51        0     5.74      82.7        ABSO Transportation
-   11       70    -5.89     44.9      2.51        0     11.5      94.2        GAPX Transportation
-   12       75    -5.93     47.8      2.51        0     5.74      99.9        WRLD Transportation
-   13       90    -6.06     56.2      2.51        0     17.2       117  OutOfWorld Transportation
+    3    0.136    -5.28     5.68         0   0.0883    0.156        14        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 23,   Parent ID = 13
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    0.136    -5.28     5.68      2.42        0        0         0        ABSO initStep
+    1    0.212    -5.28     5.69      2.32    0.104   0.0884    0.0884        ABSO msc
+    2    0.308    -5.24     5.68      2.21    0.113    0.116     0.205        ABSO msc
+    3    0.393    -5.13     5.63      2.04    0.166    0.158     0.363        ABSO msc
+    4    0.293    -4.95      5.7      1.66    0.378    0.239     0.602        ABSO msc
+    5     0.26    -4.88      5.8      1.52    0.138    0.161     0.763        ABSO msc
+    6    0.279    -4.96      5.9      1.36    0.163    0.153     0.916        ABSO msc
+    7    0.392    -4.94     5.91      1.23    0.134    0.144      1.06        ABSO msc
+    8    0.319    -4.82        6      1.03    0.201    0.194      1.25        ABSO msc
+    9    0.269    -4.84     6.11     0.816    0.211    0.176      1.43        ABSO msc
+   10    0.342    -4.89     6.18     0.647    0.169    0.162      1.59        ABSO msc
+   11    0.335    -4.91     6.19         0    0.647    0.427      2.02        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = proton,   Track ID = 12,   Parent ID = 1
@@ -6876,18 +6996,17 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0    -12.1    -5.18    -1.19      47.7        0        0         0        ABSO initStep
-    1      -12    -5.97   -0.616      40.7     6.98    0.988     0.988        ABSO biasWrapper(hIoni)
-    2      -12    -6.65   -0.211      34.4      6.3    0.792      1.78        ABSO biasWrapper(hIoni)
-    3    -11.9    -7.22   0.0777      28.8     5.62    0.634      2.41        ABSO biasWrapper(hIoni)
-    4      -12    -7.68    0.275      23.5     5.34    0.509      2.92        ABSO biasWrapper(hIoni)
-    5      -12    -8.06    0.418      18.7     4.75    0.405      3.33        ABSO biasWrapper(hIoni)
-    6      -12    -8.09    0.427      18.3     0.43   0.0316      3.36        ABSO biasWrapper(CoulombScat)
-    7      -12     -8.4    0.498      13.5     4.74    0.317      3.68        ABSO biasWrapper(hIoni)
-    8      -12     -8.6    0.524      9.74     3.79    0.204      3.88        ABSO biasWrapper(CoulombScat)
-    9      -12    -8.65    0.523      8.66     1.09   0.0516      3.93        ABSO biasWrapper(CoulombScat)
-   10    -12.1    -8.82    0.526      4.02     4.64    0.177      4.11        ABSO biasWrapper(hIoni)
-   11    -12.1    -8.89    0.523   0.00799     4.01   0.0755      4.19        ABSO biasWrapper(hIoni)
-   12    -12.1    -8.89    0.523         0  0.00799 0.000323      4.19        ABSO biasWrapper(hIoni)
+    1      -12    -5.97   -0.616      40.6     7.07    0.988     0.988        ABSO biasWrapper(hIoni)
+    2      -12    -6.64   -0.202      34.2     6.46     0.79      1.78        ABSO biasWrapper(hIoni)
+    3    -11.9     -7.2   0.0779      28.5     5.63    0.628      2.41        ABSO biasWrapper(hIoni)
+    4    -11.9    -7.64    0.313      23.7     4.86    0.504      2.91        ABSO biasWrapper(hIoni)
+    5    -11.9       -8    0.507      18.9     4.73    0.409      3.32        ABSO biasWrapper(hIoni)
+    6    -11.9    -8.28    0.682      14.3     4.61    0.328      3.65        ABSO biasWrapper(hIoni)
+    7    -11.9    -8.48    0.832      9.88     4.46    0.258       3.9        ABSO biasWrapper(hIoni)
+    8    -11.9    -8.65    0.934      5.35     4.53    0.195       4.1        ABSO biasWrapper(hIoni)
+    9    -11.9    -8.73     1.01     0.185     5.16    0.115      4.21        ABSO biasWrapper(hIoni)
+   10    -11.9    -8.74     1.01    0.0483    0.137  0.00179      4.22        ABSO biasWrapper(hIoni)
+   11    -11.9    -8.74     1.01         0   0.0483  0.00082      4.22        ABSO biasWrapper(hIoni)
 
 *********************************************************************************************************
 * G4Track Information:   Particle = neutron,   Track ID = 11,   Parent ID = 1
@@ -6895,8 +7014,10 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0    -12.1    -5.18    -1.19      56.2        0        0         0        ABSO initStep
-    1    -5.56     37.9       50      56.2        0     67.2      67.2        WRLD Transportation
-    2    -4.29     46.3       60      56.2        0     13.1      80.3  OutOfWorld Transportation
+    1    -9.29     13.3     20.7      56.2 0.000348     28.8      28.8        ABSO biasWrapper(hadElastic)
+    2    -7.34     32.3     42.6      56.2   0.0148     29.1      57.8        ABSO biasWrapper(hadElastic)
+    3    -8.39     37.2       50      56.2        0     8.94      66.8        WRLD Transportation
+    4     -9.8     43.8       60      56.2        0       12      78.8  OutOfWorld Transportation
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 10,   Parent ID = 1
@@ -6906,60 +7027,70 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
     0    -12.1    -5.18    -1.19      5.67        0        0         0        ABSO initStep
     1      -15    -1.91    -2.17      5.67        0     4.49      4.49        GAPX Transportation
     2      -20      3.7    -3.86      5.67        0      7.7      12.2        ABSO Transportation
-    3      -30     14.9    -7.23      5.67        0     15.4      27.6        GAPX Transportation
-    4      -35     20.5    -8.92      5.67        0      7.7      35.3        ABSO Transportation
-    5      -45     31.7    -12.3      5.67        0     15.4      50.7        GAPX Transportation
-    6      -50     37.3      -14      5.67        0      7.7      58.4        ABSO Transportation
-    7    -56.2     44.2    -16.1     0.591        0     9.47      67.9        ABSO compt
-    8    -58.4     44.1    -13.5         0    0.591      3.4      71.3        ABSO phot
+    3    -22.9     6.96    -4.84      1.64        0     4.48      16.7        ABSO compt
+    4    -24.1     32.5    -16.8     0.312        0     28.3      44.9        ABSO compt
+    5    -23.9     32.4      -17     0.312        0    0.297      45.2        ABSO Rayl
+    6    -22.9     31.7    -18.1         0   0.0883     1.62      46.8        ABSO phot
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 22,   Parent ID = 10
+* G4Track Information:   Particle = e-,   Track ID = 26,   Parent ID = 10
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -56.2     44.2    -16.1      5.08        0        0         0        ABSO initStep
-    1    -56.4     44.9    -15.8      3.65     1.04     1.04      1.04        ABSO eBrem
-    2    -56.3       45    -15.5      2.15     1.18     1.04      2.08        ABSO eBrem
-    3    -56.4     44.9    -15.3      0.69     1.26     1.31      3.39        ABSO eBrem
-    4    -56.4     44.9    -15.3     0.316     0.27    0.224      3.61        ABSO eBrem
-    5    -56.4     44.9    -15.3         0    0.316    0.161      3.77        ABSO eIoni
+    0    -22.9     31.7    -18.1     0.224        0        0         0        ABSO initStep
+    1    -22.9     31.7    -18.1         0    0.224   0.0963    0.0963        ABSO eIoni
 
 *********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 26,   Parent ID = 22
+* G4Track Information:   Particle = e-,   Track ID = 25,   Parent ID = 10
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -56.4     44.9    -15.3     0.104        0        0         0        ABSO initStep
-    1    -56.4     44.9    -15.4    0.0847   0.0193    0.114     0.114        ABSO compt
-    2      -55     45.9    -15.4         0   0.0847     1.72      1.83        ABSO phot
+    0    -24.1     32.5    -16.8      1.33        0        0         0        ABSO initStep
+    1    -24.1     32.6    -16.9    0.0312     1.29     1.01      1.01        ABSO eIoni
+    2    -24.1     32.6    -16.9         0   0.0312  0.00416      1.01        ABSO eIoni
 
 *********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 25,   Parent ID = 22
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -56.4     44.9    -15.3     0.206        0        0         0        ABSO initStep
-    1    -55.6     43.4    -13.8         0    0.206     2.26      2.26        ABSO phot
-
-*********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 24,   Parent ID = 22
+* G4Track Information:   Particle = e-,   Track ID = 24,   Parent ID = 10
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -56.3       45    -15.5     0.315        0        0         0        ABSO initStep
-    1    -56.4     44.8    -14.8     0.145     0.17    0.707     0.707        ABSO compt
-    2    -56.3     44.9    -14.9         0    0.145    0.224     0.931        ABSO phot
+    0    -22.9     6.96    -4.84      4.04        0        0         0        ABSO initStep
+    1    -22.9     6.97    -4.84      3.67  0.00874  0.00659   0.00659        ABSO eBrem
+    2    -23.2     7.18    -4.89      1.65     2.02     1.92      1.93        ABSO eIoni
+    3    -23.3     7.12     -4.9     0.248     1.15    0.812      2.74        ABSO eBrem
+    4    -23.4     7.12     -4.9         0    0.248    0.112      2.85        ABSO eIoni
 
 *********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 23,   Parent ID = 22
+* G4Track Information:   Particle = gamma,   Track ID = 28,   Parent ID = 24
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -56.4     44.9    -15.8     0.389        0        0         0        ABSO initStep
-    1    -55.7     44.7    -5.59     0.367   0.0221     10.3      10.3        ABSO compt
-    2    -56.2     44.5    -4.03       0.2    0.166     1.66      11.9        ABSO compt
-    3    -56.3     44.5    -4.08         0      0.2    0.134        12        ABSO phot
+    0    -23.3     7.12     -4.9     0.253        0        0         0        ABSO initStep
+    1    -23.5     7.26    -4.77         0   0.0158    0.217     0.217        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 29,   Parent ID = 28
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -23.5     7.26    -4.77     0.237        0        0         0        ABSO initStep
+    1    -23.5     7.27    -4.77         0    0.237    0.105     0.105        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = gamma,   Track ID = 27,   Parent ID = 24
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -22.9     6.97    -4.84     0.356        0        0         0        ABSO initStep
+    1    -25.6     8.17     -4.9         0  0.00382      2.9       2.9        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 30,   Parent ID = 27
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -25.6     8.17     -4.9     0.352        0        0         0        ABSO initStep
+    1    -25.6     8.18    -4.89         0    0.352    0.187     0.187        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 9,   Parent ID = 1
@@ -6967,67 +7098,96 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0    -12.1    -5.18    -1.19      3.54        0        0         0        ABSO initStep
-    1      -15    -4.41     11.8      3.54        0     13.3      13.3        GAPX Transportation
-    2      -15     -4.4       12         0        0    0.219      13.5        GAPX conv
+    1    -14.1    -4.65     7.77         0        0     9.19      9.19        ABSO conv
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e+,   Track ID = 28,   Parent ID = 9
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0      -15     -4.4       12      1.79        0        0         0        GAPX initStep
-    1    -15.2    -4.15     12.9      1.63    0.162     0.98      0.98        GAPX msc
-    2      -15    -4.23       13      1.56   0.0681    0.231      1.21        ABSO Transportation
-    3    -14.9    -4.35       13      1.31    0.252    0.206      1.42        ABSO msc
-    4    -14.8    -4.36     12.9      1.06    0.247    0.227      1.64        ABSO msc
-    5    -14.7     -4.4     12.8      0.89    0.172    0.217      1.86        ABSO msc
-    6    -14.6    -4.25     12.7     0.624    0.266    0.296      2.16        ABSO msc
-    7    -14.6    -4.11     12.5     0.376    0.248    0.266      2.42        ABSO msc
-    8    -14.6     -4.1     12.5         0    0.376    0.202      2.62        ABSO eIoni
-    9    -14.6     -4.1     12.5         0        0        0      2.62        ABSO annihil
-
-*********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 30,   Parent ID = 28
+* G4Track Information:   Particle = e+,   Track ID = 32,   Parent ID = 9
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -14.6     -4.1     12.5     0.511        0        0         0        ABSO initStep
-    1    -14.6    -3.98     12.6         0    0.511    0.146     0.146        ABSO phot
+    0    -14.1    -4.65     7.77      1.83        0        0         0        ABSO initStep
+    1    -14.1    -4.63     7.91      1.28     0.25    0.242     0.242        ABSO eBrem
+    2    -14.2    -4.65     7.98         0     1.28    0.985      1.23        ABSO eIoni
+    3    -14.2    -4.65     7.98         0        0        0      1.23        ABSO annihil
 
 *********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 29,   Parent ID = 28
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -14.6     -4.1     12.5     0.511        0        0         0        ABSO initStep
-    1    -14.7    -6.58     11.1         0    0.511     2.87      2.87        ABSO phot
-
-*********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 27,   Parent ID = 9
+* G4Track Information:   Particle = gamma,   Track ID = 35,   Parent ID = 32
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0      -15     -4.4       12      0.73        0        0         0        GAPX initStep
-    1    -15.1    -4.43     12.1      0.71   0.0205    0.134     0.134        GAPX msc
-    2    -15.2    -4.43     12.2     0.664    0.046    0.127     0.261        GAPX msc
-    3    -15.2    -4.39     12.3     0.649   0.0145    0.127     0.388        GAPX msc
-    4    -15.2     -4.5     12.3     0.632   0.0171    0.127     0.515        GAPX msc
-    5    -15.1    -4.59     12.3     0.611   0.0207    0.127     0.642        GAPX msc
-    6      -15    -4.65     12.4     0.534   0.0772    0.127     0.769        GAPX msc
-    7      -15    -4.66     12.4     0.534 0.000339  0.00826     0.777        ABSO Transportation
-    8      -15    -4.66     12.4     0.396     0.02   0.0204     0.797        ABSO eBrem
-    9      -15    -4.68     12.4     0.273    0.123     0.07     0.867        ABSO msc
-   10      -15    -4.69     12.4      0.19   0.0834    0.069     0.936        ABSO msc
-   11    -14.9    -4.68     12.4    0.0274    0.162   0.0745      1.01        ABSO msc
-   12    -14.9    -4.68     12.4         0   0.0274  0.00336      1.01        ABSO eIoni
+    0    -14.2    -4.65     7.98     0.511        0        0         0        ABSO initStep
+    1    -11.9    -3.57     12.6         0   0.0883     5.32      5.32        ABSO phot
 
 *********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 31,   Parent ID = 27
+* G4Track Information:   Particle = e-,   Track ID = 36,   Parent ID = 35
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0      -15    -4.66     12.4     0.118        0        0         0        ABSO initStep
-    1    -14.6    -4.58     12.5         0    0.118    0.374     0.374        ABSO phot
+    0    -11.9    -3.57     12.6     0.423        0        0         0        ABSO initStep
+    1    -11.9    -3.56     12.7         0    0.423    0.242     0.242        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = gamma,   Track ID = 34,   Parent ID = 32
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -14.2    -4.65     7.98     0.511        0        0         0        ABSO initStep
+    1      -15       -5     6.47     0.511        0     1.73      1.73        GAPX Transportation
+    2      -20    -7.32    -3.52     0.511        0     11.4      13.1        ABSO Transportation
+    3    -20.1    -7.39    -3.81         0   0.0158    0.336      13.5        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 37,   Parent ID = 34
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -20.1    -7.39    -3.81     0.495        0        0         0        ABSO initStep
+    1    -20.2    -7.43    -3.83     0.409   0.0864   0.0861    0.0861        ABSO msc
+    2    -20.2    -7.43    -3.82         0    0.409    0.231     0.317        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = gamma,   Track ID = 33,   Parent ID = 32
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -14.1    -4.63     7.91     0.305        0        0         0        ABSO initStep
+    1    -14.4    -4.84      8.1     0.305        0    0.367     0.367        ABSO Rayl
+    2      -15    -5.59     8.54     0.305        0     1.07      1.43        GAPX Transportation
+    3      -20    -11.7     12.2     0.305        0     8.71      10.1        ABSO Transportation
+    4    -20.7    -12.6     12.7         0   0.0883     1.22      11.4        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 38,   Parent ID = 33
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -20.7    -12.6     12.7     0.217        0        0         0        ABSO initStep
+    1    -20.7    -12.6     12.7         0    0.217   0.0918    0.0918        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 31,   Parent ID = 9
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -14.1    -4.65     7.77     0.688        0        0         0        ABSO initStep
+    1    -14.1    -4.66      7.8     0.359    0.225    0.203     0.203        ABSO eBrem
+    2    -14.1    -4.66     7.79         0    0.359    0.193     0.396        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = gamma,   Track ID = 39,   Parent ID = 31
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -14.1    -4.66      7.8     0.104        0        0         0        ABSO initStep
+    1      -14    -4.72     7.67         0   0.0158    0.151     0.151        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 40,   Parent ID = 39
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0      -14    -4.72     7.67    0.0886        0        0         0        ABSO initStep
+    1      -14    -4.72     7.67         0   0.0886   0.0226    0.0226        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 8,   Parent ID = 1
@@ -7037,8 +7197,33 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
     0    -12.1    -5.18    -1.19     0.425        0        0         0        ABSO initStep
     1      -15    -5.65    -6.07     0.425        0     5.71      5.71        GAPX Transportation
     2      -20    -6.47    -14.5     0.425        0     9.79      15.5        ABSO Transportation
-    3    -23.9    -7.11      -21     0.372   0.0533     7.69      23.2        ABSO compt
-    4    -25.9    -5.47    -23.4         0    0.372     3.47      26.7        ABSO phot
+    3    -23.5    -7.04    -20.4     0.243        0     6.91      22.4        ABSO compt
+    4    -22.2    -8.25    -21.3     0.155        0     2.01      24.4        ABSO compt
+    5    -22.4    -8.46    -21.2         0   0.0158    0.313      24.7        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 43,   Parent ID = 8
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -22.4    -8.46    -21.2     0.139        0        0         0        ABSO initStep
+    1    -22.4    -8.46    -21.2         0    0.139   0.0464    0.0464        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 42,   Parent ID = 8
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -22.2    -8.25    -21.3    0.0881        0        0         0        ABSO initStep
+    1    -22.2    -8.25    -21.3         0   0.0881   0.0224    0.0224        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 41,   Parent ID = 8
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -23.5    -7.04    -20.4     0.182        0        0         0        ABSO initStep
+    1    -23.5    -7.04    -20.4         0    0.182   0.0704    0.0704        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 7,   Parent ID = 1
@@ -7046,7 +7231,15 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0    -12.1    -5.18    -1.19     0.231        0        0         0        ABSO initStep
-    1    -12.9    -5.45    -1.66         0    0.231     0.98      0.98        ABSO phot
+    1    -13.3    -5.57    -1.86         0   0.0883      1.4       1.4        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 44,   Parent ID = 7
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -13.3    -5.57    -1.86     0.143        0        0         0        ABSO initStep
+    1    -13.3    -5.57    -1.86         0    0.143   0.0482    0.0482        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 6,   Parent ID = 1
@@ -7054,7 +7247,15 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0    -12.1    -5.18    -1.19     0.139        0        0         0        ABSO initStep
-    1    -12.1    -5.26    -1.16         0    0.139   0.0981    0.0981        ABSO phot
+    1    -12.2    -5.48    -1.08         0   0.0883    0.337     0.337        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 45,   Parent ID = 6
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -12.2    -5.48    -1.08     0.051        0        0         0        ABSO initStep
+    1    -12.2    -5.48    -1.08         0    0.051   0.0092    0.0092        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 5,   Parent ID = 1
@@ -7062,7 +7263,16 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0    -12.1    -5.18    -1.19    0.0904        0        0         0        ABSO initStep
-    1    -12.1    -5.09    -1.14         0   0.0904    0.106     0.106        ABSO phot
+    1    -12.1    -5.15    -1.17    0.0904        0   0.0324    0.0324        ABSO Rayl
+    2    -12.1    -5.05    -1.14         0   0.0883    0.108      0.14        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 46,   Parent ID = 5
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -12.1    -5.05    -1.14    0.0021        0        0         0        ABSO initStep
+    1    -12.1    -5.05    -1.14         0   0.0021 8.11e-05  8.11e-05        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 4,   Parent ID = 1
@@ -7070,7 +7280,15 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0    -12.1    -5.18    -1.19     0.183        0        0         0        ABSO initStep
-    1    -12.1    -5.04    -1.13         0    0.183    0.153     0.153        ABSO phot
+    1    -12.2     -4.9    -1.08         0   0.0883    0.314     0.314        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 47,   Parent ID = 4
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -12.2     -4.9    -1.08    0.0952        0        0         0        ABSO initStep
+    1    -12.2     -4.9    -1.08         0   0.0952   0.0253    0.0253        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 3,   Parent ID = 1
@@ -7078,7 +7296,15 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0    -12.1    -5.18    -1.19    0.0154        0        0         0        ABSO initStep
-    1    -12.1    -5.18    -1.18         0   0.0154  0.00682   0.00682        ABSO phot
+    1    -12.1    -5.18    -1.18         0  0.00305  0.00353   0.00353        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 48,   Parent ID = 3
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -12.1    -5.18    -1.18    0.0123        0        0         0        ABSO initStep
+    1    -12.1    -5.18    -1.18         0   0.0123 0.000964  0.000964        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = e-,   Track ID = 2,   Parent ID = 1
@@ -7087,7 +7313,7 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0    -12.1    -5.18    -1.19    0.0964        0        0         0        ABSO initStep
     1    -12.1    -5.17    -1.19         0   0.0964   0.0259    0.0259        ABSO eIoni
-   Absorber: total energy (MeV): 153.094       total track length (cm):  5.40477
-   Gap:      total energy (MeV): 8.47787       total track length (cm):  2.22564
-Time of this run:   User=0.010000s Real=0.007306s Sys=0.000000s
+   Absorber: total energy (MeV): 153.998       total track length (cm):  5.73042
+   Gap:      total energy (MeV): 8.05158       total track length (cm):  2.02682
+Time of this run:   User=0.000000s Real=0.007120s Sys=0.000000s
 Number of events processed: 1

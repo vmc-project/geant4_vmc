@@ -7,7 +7,7 @@
    ------------------------------------------------------------
 
 
-Processing load_g4b.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -15,9 +15,9 @@ Loading VMC library ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_1.C("g4ConfigOld.C",kTRUE)...
+Processing test_E03_1.C("g4Config2.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03b: new version with sensitive detectors
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 
 =============================================================
@@ -41,49 +41,42 @@ Processing test_E03_1.C("g4ConfigOld.C",kTRUE)...
                              WWW : http://geant4.org/
 **************************************************************
 
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+Adding user physics list 
+<<< Geant4 Physics List simulation engine: QGSP_BERT 4.0
 
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList stepLimiter
+Adding SpecialPhysicsList 
 Visualization Manager instantiating with verbosity "warnings (3)"...
 Geant4 has been created.
+Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
+Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
+Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
+Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
-G4ggclos: setting top-level VolTableEntry
-Instantiated 6 volume table entries 
-                      4 positions.
-
- FTFP_BERT : new threshold between BERT and FTFP is over the interval 
- for pions :   3 to 12 GeV
- for kaons :   3 to 12 GeV
- for proton :  3 to 12 GeV
- for neutron : 3 to 12 GeV
-
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
-### Hadron physics constructed. 
-### Processes mapped to VMC controls ok.
-### Step limiter physics constructed.
 ++++  TG4Warning:  ++++
     TG4UserParticlesPhysics::ConstructProcess:
     No hadronic processes are built for user defined particles.
 +++++++++++++++++++++++
 
-### User particles physics constructed. 
-### Processes mapped to VMC codes ok.
 Available UI session types: [ GAG, tcsh, csh ]
 
 **********************************************
     GEANT4 Geometry statistics: 
               6 logical volumes
               5 physical volumes
-              9 materials
+             13 materials
               3 user limits
-              5 sensitive detectors
+              6 sensitive detectors
 **********************************************
 
 
@@ -464,8 +457,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:        G4NeutronElasticXS: 0 eV  ---> 100 TeV
 
   Process: neutronInelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
 
   Process: nCapture
@@ -648,8 +642,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon+Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
      Cr_sctns:  ChipsKaonPlusInelasticXS: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
@@ -663,8 +658,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon-Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
      Cr_sctns: ChipsKaonMinusInelasticXS: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
@@ -709,8 +705,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
   Process: pi+Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns: Barashenkov-Glauber-Gribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -722,8 +719,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
   Process: pi-Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns: Barashenkov-Glauber-Gribov: 0 eV  ---> 100 TeV
 
   Process: hBertiniCaptureAtRest
@@ -736,8 +734,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
   Process: protonInelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -755,54 +754,28 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ================================================================
-
-========= Table of registered couples ==============================
-
-Index : 0     used in the geometry : Yes
- Material : Galactic
- Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  990 eV     e-  990 eV     e+  990 eV  proton 100 keV
- Region(s) which use this couple : 
-    DefaultRegionForTheWorld
-
-Index : 1     used in the geometry : Yes
- Material : Lead
- Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  101.843 keV    e-  1.36749 MeV    e+  1.27862 MeV proton 100 keV
- Region(s) which use this couple : 
-    DefaultRegionForTheWorld
-
-Index : 2     used in the geometry : Yes
- Material : liquidArgon
- Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  6.19986 keV    e-  344.855 keV    e+  333.46 keV proton 100 keV
- Region(s) which use this couple : 
-    DefaultRegionForTheWorld
-
-====================================================================
-
 ### Run 0 start.
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 917.634       total track length (cm):  66.0488
-   Gap:      total energy (MeV): 32.5125       total track length (cm):  15.6528
+   Absorber: total energy (MeV): 931.505       total track length (cm):  67.4191
+   Gap:      total energy (MeV): 28.5432       total track length (cm):  13.5556
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV): 921.267       total track length (cm):  66.8237
-   Gap:      total energy (MeV): 39.4946       total track length (cm):  19.3263
+   Absorber: total energy (MeV):  897.76       total track length (cm):   63.994
+   Gap:      total energy (MeV): 25.8308       total track length (cm):  12.0087
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 935.327       total track length (cm):  66.4877
-   Gap:      total energy (MeV): 21.7811       total track length (cm):  10.4282
+   Absorber: total energy (MeV): 881.013       total track length (cm):  63.0601
+   Gap:      total energy (MeV): 17.7147       total track length (cm):  8.92377
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 932.527       total track length (cm):  67.9669
-   Gap:      total energy (MeV): 31.0819       total track length (cm):  15.6009
+   Absorber: total energy (MeV): 920.486       total track length (cm):  66.4989
+   Gap:      total energy (MeV): 43.0602       total track length (cm):  20.9946
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV):  942.77       total track length (cm):   68.458
-   Gap:      total energy (MeV): 21.5634       total track length (cm):  10.8196
-Time of this run:   User=0.080000s Real=0.080910s Sys=0.000000s
+   Absorber: total energy (MeV): 881.201       total track length (cm):  64.1475
+   Gap:      total energy (MeV): 29.0096       total track length (cm):   14.069
+Time of this run:   User=0.080000s Real=0.083254s Sys=0.010000s
 Number of events processed: 5
    ------------------------------------------------------------
   | Welcome to ROOT 6.18/04                  https://root.cern |
@@ -813,7 +786,7 @@ Number of events processed: 5
    ------------------------------------------------------------
 
 
-Processing load_g4b.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -821,9 +794,9 @@ Loading VMC library ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_2.C("g4ConfigOld.C",kTRUE)...
+Processing test_E03_2.C("g4Config2.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03b: new version with sensitive detectors
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 --- Init MC 
 
@@ -848,44 +821,36 @@ Processing test_E03_2.C("g4ConfigOld.C",kTRUE)...
                              WWW : http://geant4.org/
 **************************************************************
 
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+Adding user physics list 
+<<< Geant4 Physics List simulation engine: QGSP_BERT 4.0
 
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList stepLimiter
+Adding SpecialPhysicsList 
 --- Add particles 
 Visualization Manager instantiating with verbosity "warnings (3)"...
 Geant4 has been created.
 --- Construct geometry 
+Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
+Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
+Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
+Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
-G4ggclos: setting top-level VolTableEntry
-Instantiated 6 volume table entries 
-                      4 positions.
---- Construct sensitive detectors
 --- Init geometry 
-
- FTFP_BERT : new threshold between BERT and FTFP is over the interval 
- for pions :   3 to 12 GeV
- for kaons :   3 to 12 GeV
- for proton :  3 to 12 GeV
- for neutron : 3 to 12 GeV
-
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
-### Hadron physics constructed. 
-### Processes mapped to VMC controls ok.
-### Step limiter physics constructed.
 ++++  TG4Warning:  ++++
     TG4UserParticlesPhysics::ConstructProcess:
     No hadronic processes are built for user defined particles.
 +++++++++++++++++++++++
 
-### User particles physics constructed. 
-### Processes mapped to VMC codes ok.
 Available UI session types: [ GAG, tcsh, csh ]
 --- Add ions 
 
@@ -893,9 +858,9 @@ Available UI session types: [ GAG, tcsh, csh ]
     GEANT4 Geometry statistics: 
               6 logical volumes
               5 physical volumes
-              9 materials
+             13 materials
               3 user limits
-              5 sensitive detectors
+              6 sensitive detectors
 **********************************************
 
 --- Run MC for 1 events
@@ -1277,8 +1242,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:        G4NeutronElasticXS: 0 eV  ---> 100 TeV
 
   Process: neutronInelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
 
   Process: nCapture
@@ -1461,8 +1427,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon+Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
      Cr_sctns:  ChipsKaonPlusInelasticXS: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
@@ -1476,8 +1443,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon-Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
      Cr_sctns: ChipsKaonMinusInelasticXS: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
@@ -1522,8 +1490,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
   Process: pi+Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns: Barashenkov-Glauber-Gribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -1535,8 +1504,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
   Process: pi-Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns: Barashenkov-Glauber-Gribov: 0 eV  ---> 100 TeV
 
   Process: hBertiniCaptureAtRest
@@ -1549,8 +1519,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
   Process: protonInelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -1568,32 +1539,6 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ================================================================
-
-========= Table of registered couples ==============================
-
-Index : 0     used in the geometry : Yes
- Material : Galactic
- Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  990 eV     e-  990 eV     e+  990 eV  proton 100 keV
- Region(s) which use this couple : 
-    DefaultRegionForTheWorld
-
-Index : 1     used in the geometry : Yes
- Material : Lead
- Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  101.843 keV    e-  1.36749 MeV    e+  1.27862 MeV proton 100 keV
- Region(s) which use this couple : 
-    DefaultRegionForTheWorld
-
-Index : 2     used in the geometry : Yes
- Material : liquidArgon
- Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  6.19986 keV    e-  344.855 keV    e+  333.46 keV proton 100 keV
- Region(s) which use this couple : 
-    DefaultRegionForTheWorld
-
-====================================================================
-
 ### Run 0 start.
 --- Begin event 
 
@@ -1614,7 +1559,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   6    -6.879    0.152    0.189    36.3470    2.1313    0.176    2.190     ABSO  Bremstrahlung
 #   7    -6.831    0.177    0.225    33.4453    1.7258    0.066    2.256     ABSO  Bremstrahlung
 #   8    -6.747    0.219    0.265    31.5750    1.5570    0.102    2.358     ABSO  Bremstrahlung
-#   9    -6.742    0.221    0.269    21.7192    0.0762    0.007    2.365     ABSO  Bremstrahlung
+#   9    -6.742    0.221    0.268    21.7192    0.0762    0.007    2.365     ABSO  Bremstrahlung
 #  10    -6.699    0.235    0.287    13.2195    0.5332    0.049    2.413     ABSO  Bremstrahlung
 #  11    -6.678    0.236    0.299     9.9119    0.2339    0.025    2.438     ABSO  Bremstrahlung
 #  12    -6.545    0.225    0.393     5.4745    3.1883    0.269    2.707     ABSO  Bremstrahlung
@@ -1622,8 +1567,8 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  14    -6.544    0.223    0.399     4.4635    0.0315    0.004    2.714     ABSO  Bremstrahlung
 #  15    -6.547    0.193    0.426     3.6491    0.5610    0.054    2.768     ABSO  Bremstrahlung
 #  16    -6.553    0.259    0.387     1.5979    2.0512    0.192    2.959     ABSO  Energy loss
-#  17    -6.609    0.241    0.381     0.2768    1.3212    0.121    3.080     ABSO  Energy loss
-#  18    -6.609    0.241    0.381     0.0000    0.2768    0.013    3.093     ABSO  Energy loss
+#  17    -6.609    0.241    0.381     0.2767    1.3212    0.121    3.080     ABSO  Energy loss
+#  18    -6.609    0.241    0.381     0.0000    0.2767    0.013    3.093     ABSO  Energy loss
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 1     Parent ID = 0
@@ -1646,10 +1591,10 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   0    -6.544    0.223    0.399     0.2101    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.546    0.199    0.469     0.2101    0.0000    0.074    0.074     ABSO  Rayleigh effect
 #   2    -6.537    0.168    0.517     0.2101    0.0000    0.057    0.132     ABSO  Rayleigh effect
-#   3    -6.500    0.092    0.615     0.2101    0.0000    0.129    0.261     ABSO  Transportation
+#   3    -6.500    0.092    0.615     0.2101    0.0000    0.130    0.261     ABSO  Transportation
 #   4    -6.500    0.092    0.615     0.2101    0.0000    0.000    0.261     GAPX  No active process
-#   5    -6.000   -0.946    1.953     0.2101    0.0000    1.766    2.027     GAPX  Transportation
-#   6    -6.000   -0.946    1.953     0.2101    0.0000    0.000    2.027     ABSO  No active process
+#   5    -6.000   -0.947    1.953     0.2101    0.0000    1.766    2.027     GAPX  Transportation
+#   6    -6.000   -0.947    1.953     0.2101    0.0000    0.000    2.027     ABSO  No active process
 #   7    -5.945   -1.061    2.100     0.0000    0.0883    0.194    2.221     ABSO  Photoelectric effect
 
 ****************************************************************************************************
@@ -1666,8 +1611,8 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   0    -6.544    0.224    0.396     0.7456    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.500    0.176    0.535     0.7456    0.0000    0.154    0.154     ABSO  Transportation
 #   2    -6.500    0.176    0.535     0.7456    0.0000    0.000    0.154     GAPX  No active process
-#   3    -6.000   -0.370    2.114     0.7456    0.0000    1.744    1.897     GAPX  Transportation
-#   4    -6.000   -0.370    2.114     0.7456    0.0000    0.000    1.897     ABSO  No active process
+#   3    -6.000   -0.370    2.114     0.7456    0.0000    1.744    1.898     GAPX  Transportation
+#   4    -6.000   -0.370    2.114     0.7456    0.0000    0.000    1.898     ABSO  No active process
 #   5    -5.796   -0.593    2.757     0.0000    0.0883    0.711    2.608     ABSO  Photoelectric effect
 
 ****************************************************************************************************
@@ -1702,8 +1647,8 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   3    -6.500    0.171    0.464     1.0919    0.0000    0.000    0.101     GAPX  No active process
 #   4    -6.000   -0.457    1.124     1.0919    0.0000    1.039    1.140     GAPX  Transportation
 #   5    -6.000   -0.457    1.124     1.0919    0.0000    0.000    1.140     ABSO  No active process
-#   6    -5.723   -0.804    1.489     0.5192    0.0000    0.576    1.716     ABSO  Compton scattering
-#   7    -5.721   -0.804    1.490     0.2574    0.0000    0.002    1.717     ABSO  Compton scattering
+#   6    -5.723   -0.804    1.489     0.5192    0.0000    0.575    1.716     ABSO  Compton scattering
+#   7    -5.722   -0.804    1.490     0.2574    0.0000    0.002    1.717     ABSO  Compton scattering
 #   8    -5.719   -0.904    1.546     0.2574    0.0000    0.115    1.832     ABSO  Rayleigh effect
 #   9    -5.717   -0.941    1.572     0.0000    0.0883    0.045    1.877     ABSO  Photoelectric effect
 
@@ -1718,7 +1663,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
   Particle = e-     Track ID = 11     Parent ID = 9
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.721   -0.804    1.490     0.2619    0.0000    0.000    0.000     ABSO  No active process
+#   0    -5.722   -0.804    1.490     0.2619    0.0000    0.000    0.000     ABSO  No active process
 #   1    -5.721   -0.804    1.489     0.0000    0.2619    0.012    0.012     ABSO  Energy loss
 
 ****************************************************************************************************
@@ -1774,8 +1719,8 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -5.716    0.518    0.765     2.5353    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.694    0.522    0.771     0.8308    1.7045    0.161    0.161     ABSO  Energy loss
-#   2    -5.691    0.524    0.769     0.0000    0.8308    0.058    0.220     ABSO  Energy loss
+#   1    -5.694    0.522    0.771     0.8307    1.7046    0.161    0.161     ABSO  Energy loss
+#   2    -5.691    0.524    0.769     0.0000    0.8307    0.058    0.220     ABSO  Energy loss
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 19     Parent ID = 0
@@ -1802,9 +1747,9 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -5.327    0.548    1.262     7.4654    0.0000    0.000    0.000     ABSO  No active process
 #   1    -5.237    0.561    1.326     4.4123    2.9079    0.249    0.249     ABSO  Bremstrahlung
-#   2    -5.198    0.534    1.350     2.0947    2.3176    0.209    0.458     ABSO  Energy loss
-#   3    -5.214    0.536    1.342     0.6988    1.3959    0.145    0.603     ABSO  Energy loss
-#   4    -5.216    0.534    1.342     0.0000    0.6988    0.047    0.650     ABSO  Energy loss
+#   2    -5.199    0.534    1.350     2.0947    2.3176    0.209    0.458     ABSO  Energy loss
+#   3    -5.214    0.536    1.342     0.6987    1.3959    0.145    0.603     ABSO  Energy loss
+#   4    -5.216    0.534    1.342     0.0000    0.6987    0.047    0.650     ABSO  Energy loss
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 22     Parent ID = 21
@@ -1824,7 +1769,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
   Particle = gamma     Track ID = 24     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.742    0.221    0.269     9.7796    0.0000    0.000    0.000     ABSO  No active process
+#   0    -6.742    0.221    0.268     9.7796    0.0000    0.000    0.000     ABSO  No active process
 #   1    -6.500    0.316    0.428     9.7796    0.0000    0.305    0.305     ABSO  Transportation
 #   2    -6.500    0.316    0.428     9.7796    0.0000    0.000    0.305     GAPX  No active process
 #   3    -6.000    0.513    0.757     9.7796    0.0000    0.630    0.935     GAPX  Transportation
@@ -1869,13 +1814,13 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -5.784    0.597    0.895     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.646    1.376    0.923     0.0000    0.0883    0.792    0.792     ABSO  Photoelectric effect
+#   1    -5.647    1.376    0.923     0.0000    0.0883    0.791    0.791     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 30     Parent ID = 29
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.646    1.376    0.923     0.4227    0.0000    0.000    0.000     ABSO  No active process
+#   0    -5.647    1.376    0.923     0.4227    0.0000    0.000    0.000     ABSO  No active process
 #   1    -5.647    1.378    0.924     0.0000    0.4227    0.023    0.023     ABSO  Bremstrahlung
 
 ****************************************************************************************************
@@ -1904,7 +1849,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -5.719    0.555    0.828     0.1758    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.718    0.555    0.828     0.0000    0.1758    0.007    0.007     ABSO  Energy loss
+#   1    -5.719    0.555    0.828     0.0000    0.1758    0.007    0.007     ABSO  Energy loss
 
 ****************************************************************************************************
   Particle = e-     Track ID = 35     Parent ID = 24
@@ -1935,42 +1880,42 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -5.759    0.585    0.903     4.4606    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.101   -0.722    1.128     1.9844    0.0000    1.480    1.480     ABSO  Compton scattering
+#   1    -5.101   -0.721    1.128     1.9844    0.0000    1.480    1.480     ABSO  Compton scattering
 #   2    -5.000   -0.888    1.050     1.9844    0.0000    0.210    1.690     ABSO  Transportation
 #   3    -5.000   -0.888    1.050     1.9844    0.0000    0.000    1.690     GAPX  No active process
 #   4    -4.500   -1.717    0.660     1.9844    0.0000    1.043    2.733     GAPX  Transportation
 #   5    -4.500   -1.717    0.660     1.9844    0.0000    0.000    2.733     ABSO  No active process
-#   6    -3.500   -3.373   -0.119     1.9844    0.0000    2.086    4.819     ABSO  Transportation
-#   7    -3.500   -3.373   -0.119     1.9844    0.0000    0.000    4.819     GAPX  No active process
-#   8    -3.000   -4.202   -0.509     1.9844    0.0000    1.043    5.862     GAPX  Transportation
-#   9    -3.000   -4.202   -0.509     1.9844    0.0000    0.000    5.862     ABSO  No active process
-#  10    -2.521   -4.995   -0.882     0.2278    0.0000    0.998    6.861     ABSO  Compton scattering
-#  11    -2.559   -4.915   -0.861     0.0000    0.0883    0.091    6.952     ABSO  Photoelectric effect
+#   6    -3.500   -3.374   -0.119     1.9844    0.0000    2.086    4.819     ABSO  Transportation
+#   7    -3.500   -3.374   -0.119     1.9844    0.0000    0.000    4.819     GAPX  No active process
+#   8    -3.000   -4.202   -0.509     1.9844    0.0000    1.043    5.863     GAPX  Transportation
+#   9    -3.000   -4.202   -0.509     1.9844    0.0000    0.000    5.863     ABSO  No active process
+#  10    -2.522   -4.995   -0.882     0.2278    0.0000    0.998    6.861     ABSO  Compton scattering
+#  11    -2.560   -4.915   -0.861     0.0000    0.0883    0.091    6.952     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 39     Parent ID = 38
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.559   -4.915   -0.861     0.1396    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.559   -4.915   -0.860     0.0000    0.1396    0.005    0.005     ABSO  Energy loss
+#   0    -2.560   -4.915   -0.861     0.1396    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.560   -4.915   -0.860     0.0000    0.1396    0.005    0.005     ABSO  Energy loss
 
 ****************************************************************************************************
   Particle = e-     Track ID = 40     Parent ID = 38
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.521   -4.995   -0.882     1.7566    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.520   -5.000   -0.883     1.6883    0.0683    0.006    0.006     ABSO  Multiple scattering
-#   2    -2.520   -5.000   -0.884     1.6832    0.0051    0.001    0.007     ABSO  Transportation
-#   3    -2.520   -5.000   -0.884     1.6832    0.0000    0.000    0.007     WRLD  No active process
-#   4    -2.759   -6.000   -1.528     1.6832    0.0000    1.213    1.220     WRLD  Transportation
+#   0    -2.522   -4.995   -0.882     1.7566    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.520   -4.999   -0.883     1.6883    0.0683    0.006    0.006     ABSO  Multiple scattering
+#   2    -2.520   -5.000   -0.884     1.6828    0.0055    0.001    0.007     ABSO  Transportation
+#   3    -2.520   -5.000   -0.884     1.6828    0.0000    0.000    0.007     WRLD  No active process
+#   4    -2.769   -6.000   -1.521     1.6828    0.0000    1.212    1.219     WRLD  Transportation
 
 ****************************************************************************************************
   Particle = e-     Track ID = 41     Parent ID = 38
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.101   -0.722    1.128     2.4761    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.093   -0.739    1.139     0.3054    2.1707    0.159    0.159     ABSO  Energy loss
-#   2    -5.093   -0.738    1.139     0.0000    0.3054    0.015    0.175     ABSO  Energy loss
+#   0    -5.101   -0.721    1.128     2.4761    0.0000    0.000    0.000     ABSO  No active process
+#   1    -5.093   -0.739    1.139     0.3054    2.1708    0.159    0.159     ABSO  Energy loss
+#   2    -5.093   -0.738    1.139     0.0000    0.3054    0.015    0.174     ABSO  Energy loss
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 42     Parent ID = 0
@@ -2010,7 +1955,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -5.340    0.833    1.228     0.5093    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.339    0.835    1.229     0.0000    0.5093    0.031    0.031     ABSO  Energy loss
+#   1    -5.339    0.835    1.228     0.0000    0.5093    0.031    0.031     ABSO  Energy loss
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 47     Parent ID = 0
@@ -2129,7 +2074,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   2    -6.500    0.265    0.157     0.6443    0.0000    0.000    0.692     GAPX  No active process
 #   3    -6.000    0.431    0.240     0.6443    0.0000    0.533    1.225     GAPX  Transportation
 #   4    -6.000    0.431    0.240     0.6443    0.0000    0.000    1.225     ABSO  No active process
-#   5    -5.289    0.668    0.357     0.5395    0.0000    0.758    1.984     ABSO  Compton scattering
+#   5    -5.289    0.668    0.357     0.5395    0.0000    0.758    1.983     ABSO  Compton scattering
 #   6    -5.031    0.889    0.267     0.0000    0.0883    0.351    2.335     ABSO  Photoelectric effect
 
 ****************************************************************************************************
@@ -2145,11 +2090,10 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -5.289    0.668    0.357     0.1048    0.0000    0.000    0.000     ABSO  No active process
 #   1    -5.289    0.668    0.357     0.0000    0.1048    0.003    0.003     ABSO  Energy loss
---- End of event 
-   Absorber: total energy (MeV):  48.317       total track length (cm):    3.635
-   Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish event 
-Time of this run:   User=0.010000s Real=0.006391s Sys=0.000000s
+   Absorber: total energy (MeV):  48.317       total track length (cm):    3.634
+   Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
+Time of this run:   User=0.000000s Real=0.006252s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------
@@ -2161,7 +2105,7 @@ Number of events processed: 1
    ------------------------------------------------------------
 
 
-Processing load_g4b.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -2169,9 +2113,9 @@ Loading VMC library ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_3.C("g4ConfigOld.C",kTRUE)...
+Processing test_E03_3.C("g4Config2.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03b: new version with sensitive detectors
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 --- Init MC 
 
@@ -2196,44 +2140,36 @@ Processing test_E03_3.C("g4ConfigOld.C",kTRUE)...
                              WWW : http://geant4.org/
 **************************************************************
 
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+Adding user physics list 
+<<< Geant4 Physics List simulation engine: QGSP_BERT 4.0
 
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList stepLimiter
+Adding SpecialPhysicsList 
 --- Add particles 
 Visualization Manager instantiating with verbosity "warnings (3)"...
 Geant4 has been created.
 --- Construct geometry 
+Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
+Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
+Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
+Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
-G4ggclos: setting top-level VolTableEntry
-Instantiated 6 volume table entries 
-                      4 positions.
---- Construct sensitive detectors
 --- Init geometry 
-
- FTFP_BERT : new threshold between BERT and FTFP is over the interval 
- for pions :   3 to 12 GeV
- for kaons :   3 to 12 GeV
- for proton :  3 to 12 GeV
- for neutron : 3 to 12 GeV
-
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
-### Hadron physics constructed. 
-### Processes mapped to VMC controls ok.
-### Step limiter physics constructed.
 ++++  TG4Warning:  ++++
     TG4UserParticlesPhysics::ConstructProcess:
     No hadronic processes are built for user defined particles.
 +++++++++++++++++++++++
 
-### User particles physics constructed. 
-### Processes mapped to VMC codes ok.
 Available UI session types: [ GAG, tcsh, csh ]
 --- Add ions 
 
@@ -2241,9 +2177,9 @@ Available UI session types: [ GAG, tcsh, csh ]
     GEANT4 Geometry statistics: 
               6 logical volumes
               5 physical volumes
-              9 materials
+             13 materials
               3 user limits
-              5 sensitive detectors
+              6 sensitive detectors
 **********************************************
 
 --- Run MC for 1 events
@@ -2625,8 +2561,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:        G4NeutronElasticXS: 0 eV  ---> 100 TeV
 
   Process: neutronInelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
 
   Process: nCapture
@@ -2809,8 +2746,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon+Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
      Cr_sctns:  ChipsKaonPlusInelasticXS: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
@@ -2824,8 +2762,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon-Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
      Cr_sctns: ChipsKaonMinusInelasticXS: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
@@ -2870,8 +2809,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
   Process: pi+Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns: Barashenkov-Glauber-Gribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -2883,8 +2823,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
   Process: pi-Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns: Barashenkov-Glauber-Gribov: 0 eV  ---> 100 TeV
 
   Process: hBertiniCaptureAtRest
@@ -2897,8 +2838,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
   Process: protonInelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -2916,32 +2858,6 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ================================================================
-
-========= Table of registered couples ==============================
-
-Index : 0     used in the geometry : Yes
- Material : Galactic
- Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  990 eV     e-  990 eV     e+  990 eV  proton 100 keV
- Region(s) which use this couple : 
-    DefaultRegionForTheWorld
-
-Index : 1     used in the geometry : Yes
- Material : Lead
- Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  101.843 keV    e-  1.36749 MeV    e+  1.27862 MeV proton 100 keV
- Region(s) which use this couple : 
-    DefaultRegionForTheWorld
-
-Index : 2     used in the geometry : Yes
- Material : liquidArgon
- Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  6.19986 keV    e-  344.855 keV    e+  333.46 keV proton 100 keV
- Region(s) which use this couple : 
-    DefaultRegionForTheWorld
-
-====================================================================
-
 ### Run 0 start.
 --- Begin event 
 
@@ -2966,9 +2882,9 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   0    -9.000    0.000    0.000    50.0000    0.0000    0.000    0.000     WRLD  No active process
 #   1    -7.500    0.000    0.000    50.0000    0.0000    1.500    1.500     WRLD  Transportation
 #   2    -7.500    0.000    0.000    50.0000    0.0000    0.000    1.500     ABSO  No active process
-#   3    -7.479    0.000    0.000    29.0322   20.9678    0.021    1.521     ABSO  Energy loss
-#   4    -7.465    0.000    0.000     6.3464   22.6858    0.014    1.536     ABSO  Energy loss
-#   5    -7.463    0.001    0.000     0.0000    6.3464    0.002    1.537     ABSO  Energy loss
+#   3    -7.479    0.000    0.000    29.0315   20.9685    0.021    1.521     ABSO  Energy loss
+#   4    -7.465    0.000    0.000     6.3449   22.6866    0.014    1.536     ABSO  Energy loss
+#   5    -7.463    0.001    0.000     0.0000    6.3449    0.002    1.537     ABSO  Energy loss
 #   6    -7.463    0.001    0.000     0.0000    0.0000    0.000    1.537     ABSO  Decay
 
 ****************************************************************************************************
@@ -2983,16 +2899,15 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.463    0.001    0.000    81.9564    0.0000    0.000    0.000     ABSO  No active process
-#   1    -7.439    0.027   -0.004    63.3113   18.6450    0.035    0.035     ABSO  Energy loss
-#   2    -7.420    0.047   -0.005    45.4650   17.8463    0.028    0.063     ABSO  Energy loss
-#   3    -7.408    0.065   -0.008    27.7585   17.7066    0.022    0.085     ABSO  Energy loss
-#   4    -7.399    0.077   -0.009     8.2556   19.5028    0.015    0.100     ABSO  Energy loss
-#   5    -7.398    0.079   -0.009     0.0000    8.2556    0.003    0.103     ABSO  Energy loss
---- End of event 
+#   1    -7.439    0.027   -0.004    63.3109   18.6455    0.035    0.035     ABSO  Energy loss
+#   2    -7.420    0.047   -0.005    45.4642   17.8468    0.028    0.063     ABSO  Energy loss
+#   3    -7.408    0.065   -0.008    27.7570   17.7071    0.022    0.085     ABSO  Energy loss
+#   4    -7.399    0.077   -0.009     8.2535   19.5035    0.015    0.100     ABSO  Energy loss
+#   5    -7.398    0.079   -0.009     0.0000    8.2535    0.003    0.103     ABSO  Energy loss
+--- Finish event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.145
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
---- Finish event 
-Time of this run:   User=0.000000s Real=0.001639s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.001246s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------
@@ -3004,7 +2919,7 @@ Number of events processed: 1
    ------------------------------------------------------------
 
 
-Processing load_g4b.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -3012,9 +2927,9 @@ Loading VMC library ...
 Loading g4root library ...
 Loading geant4vmc library ...
 Loading mtroot library ...
-Processing test_E03_4.C("g4ConfigOld.C",kTRUE)...
+Processing test_E03_4.C("g4Config2.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03b: new version with sensitive detectors
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 
 =============================================================
@@ -3038,49 +2953,42 @@ Processing test_E03_4.C("g4ConfigOld.C",kTRUE)...
                              WWW : http://geant4.org/
 **************************************************************
 
-Adding HadronPhysicsList FTFP_BERT
-G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+Adding user physics list 
+<<< Geant4 Physics List simulation engine: QGSP_BERT 4.0
 
-<<< Reference Physics List FTFP_BERT is built
-
-Adding SpecialPhysicsList stepLimiter
+Adding SpecialPhysicsList 
 Visualization Manager instantiating with verbosity "warnings (3)"...
 Geant4 has been created.
+Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
+Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
+Info in <TGeoManager::CheckGeometry>: Fixing runtime shapes...
+Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
+Info in <TGeoManager::CloseGeometry>: Counting nodes...
+Info in <TGeoManager::Voxelize>: Voxelizing...
+Info in <TGeoManager::CloseGeometry>: Building cache...
+Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
+Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
+Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
 ------------------------------------------------------------
 ---> The calorimeter is 10 layers of: [ 1cm of Lead + 0.5cm of liquidArgon ] 
 ------------------------------------------------------------
-G4ggclos: setting top-level VolTableEntry
-Instantiated 6 volume table entries 
-                      4 positions.
-
- FTFP_BERT : new threshold between BERT and FTFP is over the interval 
- for pions :   3 to 12 GeV
- for kaons :   3 to 12 GeV
- for proton :  3 to 12 GeV
- for neutron : 3 to 12 GeV
-
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
-### Hadron physics constructed. 
-### Processes mapped to VMC controls ok.
-### Step limiter physics constructed.
 ++++  TG4Warning:  ++++
     TG4UserParticlesPhysics::ConstructProcess:
     No hadronic processes are built for user defined particles.
 +++++++++++++++++++++++
 
-### User particles physics constructed. 
-### Processes mapped to VMC codes ok.
 Available UI session types: [ GAG, tcsh, csh ]
 
 **********************************************
     GEANT4 Geometry statistics: 
               6 logical volumes
               5 physical volumes
-              9 materials
+             13 materials
               3 user limits
-              5 sensitive detectors
+              6 sensitive detectors
 **********************************************
 
 
@@ -3461,8 +3369,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:        G4NeutronElasticXS: 0 eV  ---> 100 TeV
 
   Process: neutronInelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
 
   Process: nCapture
@@ -3645,8 +3554,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon+Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
      Cr_sctns:  ChipsKaonPlusInelasticXS: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
@@ -3660,8 +3570,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon-Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
      Cr_sctns: ChipsKaonMinusInelasticXS: 0 eV  ---> 100 TeV
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
@@ -3706,8 +3617,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
   Process: pi+Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns: Barashenkov-Glauber-Gribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -3719,8 +3631,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
   Process: pi-Inelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns: Barashenkov-Glauber-Gribov: 0 eV  ---> 100 TeV
 
   Process: hBertiniCaptureAtRest
@@ -3733,8 +3646,9 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
   Process: protonInelastic
-        Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:                      QGSP: 12 GeV ---> 100 TeV
+        Model:                      FTFP: 9.5 GeV ---> 25 GeV
+        Model:            BertiniCascade: 0 eV  ---> 9.9 GeV
      Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -3752,32 +3666,6 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ================================================================
-
-========= Table of registered couples ==============================
-
-Index : 0     used in the geometry : Yes
- Material : Galactic
- Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  990 eV     e-  990 eV     e+  990 eV  proton 100 keV
- Region(s) which use this couple : 
-    DefaultRegionForTheWorld
-
-Index : 1     used in the geometry : Yes
- Material : Lead
- Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  101.843 keV    e-  1.36749 MeV    e+  1.27862 MeV proton 100 keV
- Region(s) which use this couple : 
-    DefaultRegionForTheWorld
-
-Index : 2     used in the geometry : Yes
- Material : liquidArgon
- Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  6.19986 keV    e-  344.855 keV    e+  333.46 keV proton 100 keV
- Region(s) which use this couple : 
-    DefaultRegionForTheWorld
-
-====================================================================
-
 ### Run 0 start.
 
 ---> Begin of event: 1
@@ -3786,6 +3674,8 @@ Index : 2     used in the geometry : Yes
       Current track pi0  is a decay product of Parent ID = 4
 
    Primary track ID = 3
+      Current track pi0  is a decay product of Parent ID = 3
+      Current track pi0  is a decay product of Parent ID = 3
 
    Primary track ID = 2
       Current track pi0  is a decay product of Parent ID = 2
@@ -3799,7 +3689,7 @@ Index : 2     used in the geometry : Yes
       Current track pi0  is a decay product of Parent ID = 0
       Current track pi0  is a decay product of Parent ID = 0
 
-   Absorber: total energy (MeV): 1413.06       total track length (cm):  89.8007
-   Gap:      total energy (MeV): 55.5465       total track length (cm):  27.9565
-Time of this run:   User=0.030000s Real=0.026691s Sys=0.000000s
+   Absorber: total energy (MeV): 1451.53       total track length (cm):  104.214
+   Gap:      total energy (MeV): 80.9693       total track length (cm):  39.7536
+Time of this run:   User=0.020000s Real=0.029030s Sys=0.010000s
 Number of events processed: 1

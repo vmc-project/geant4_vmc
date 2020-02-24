@@ -1,15 +1,28 @@
    ------------------------------------------------------------
-  | Welcome to ROOT 6.14/06                http://root.cern.ch |
-  |                               (c) 1995-2018, The ROOT Team |
-  | Built for macosx64                                         |
-  | From tag v6-14-06, 5 November 2018                         |
+  | Welcome to ROOT 6.18/04                  https://root.cern |
+  |                               (c) 1995-2019, The ROOT Team |
+  | Built for macosx64 on Dec 20 2019, 12:31:00                |
+  | From tags/v6-18-04@v6-18-04                                |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
 Processing load_g3.C...
+Loading VMC library ...
 Loading Geant3 libraries ... finished
-Processing test_E02.C("g3tgeoConfig.C", kFALSE)...
+Processing test_E02.C("g3tgeoConfig.C",kFALSE)...
+
+=============================================================
+ Virtual Monte Carlo Library
+ Version 1.0 ( 24 February 2020 )
+=============================================================
+
+=============================================================
+ Geant3 Virtual Monte Carlo 
+ Version 3.0 ( 24 February 2020 )
+ WWW : https://vmc-project.github.io/
+=============================================================
+
 Geant3 has been created.
 Geometry will be defined via TGeo
 Info in <TGeoManager::TGeoManager>: Geometry E02_geometry, E02 VMC example geometry created
@@ -123,13 +136,13 @@ Primary
 Number of daughters: 0
 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    77866887     4A42787 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    82850823     4F03407 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    72456821    77866887
-                                        HEX     4519A75     4A42787
-                                        HEX    FFAD7132           0
-                              relative adrs    -5410510           0
+          with Store/Table at absolute adrs    77440749    82850823
+                                        HEX     49DA6ED     4F03407
+                                        HEX    FFAD712A           0
+                              relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 

@@ -1,15 +1,28 @@
    ------------------------------------------------------------
-  | Welcome to ROOT 6.14/06                http://root.cern.ch |
-  |                               (c) 1995-2018, The ROOT Team |
-  | Built for macosx64                                         |
-  | From tag v6-14-06, 5 November 2018                         |
+  | Welcome to ROOT 6.18/04                  https://root.cern |
+  |                               (c) 1995-2019, The ROOT Team |
+  | Built for macosx64 on Dec 20 2019, 12:31:00                |
+  | From tags/v6-18-04@v6-18-04                                |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
 Processing load_g3.C...
+Loading VMC library ...
 Loading Geant3 libraries ... finished
-Processing test_E06.C("g3tgeoConfig.C", kFALSE)...
+Processing test_E06.C("g3tgeoConfig.C",kFALSE)...
+
+=============================================================
+ Virtual Monte Carlo Library
+ Version 1.0 ( 24 February 2020 )
+=============================================================
+
+=============================================================
+ Geant3 Virtual Monte Carlo 
+ Version 3.0 ( 24 February 2020 )
+ WWW : https://vmc-project.github.io/
+=============================================================
+
 Geant3TGeo has been created.
 Geometry will be defined via TGeo
 Info in <TGeoManager::TGeoManager>: Geometry E06_geometry, E06 VMC example geometry created
@@ -58,13 +71,13 @@ Number of optical photons produced in this event : 2301
 Number of optical photons produced in this event : 2210
 Number of optical photons produced in this run : 21239
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    65829767     3EC7B87 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    38246407     2479807 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    60419701    65829767
-                                        HEX     399EE75     3EC7B87
-                                        HEX    FFAD7132           0
-                              relative adrs    -5410510           0
+          with Store/Table at absolute adrs    32836333    38246407
+                                        HEX     1F50AED     2479807
+                                        HEX    FFAD712A           0
+                              relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -94,17 +107,30 @@ Number of optical photons produced in this run : 21239
  **** GTRIGI: IEVENT=      9 IDEVT=      9 Random Seeds =       4357           0
  **** GTRIGI: IEVENT=     10 IDEVT=     10 Random Seeds =       4357           0
    ------------------------------------------------------------
-  | Welcome to ROOT 6.14/06                http://root.cern.ch |
-  |                               (c) 1995-2018, The ROOT Team |
-  | Built for macosx64                                         |
-  | From tag v6-14-06, 5 November 2018                         |
+  | Welcome to ROOT 6.18/04                  https://root.cern |
+  |                               (c) 1995-2019, The ROOT Team |
+  | Built for macosx64 on Dec 20 2019, 12:31:00                |
+  | From tags/v6-18-04@v6-18-04                                |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
 Processing load_g3.C...
+Loading VMC library ...
 Loading Geant3 libraries ... finished
-Processing test_E06_2.C("g3tgeoConfig.C", kFALSE)...
+Processing test_E06_2.C("g3tgeoConfig.C",kFALSE)...
+
+=============================================================
+ Virtual Monte Carlo Library
+ Version 1.0 ( 24 February 2020 )
+=============================================================
+
+=============================================================
+ Geant3 Virtual Monte Carlo 
+ Version 3.0 ( 24 February 2020 )
+ WWW : https://vmc-project.github.io/
+=============================================================
+
 Geant3TGeo has been created.
 Geometry will be defined via TGeo
 Info in <TGeoManager::TGeoManager>: Geometry E06_geometry, E06 VMC example geometry created
@@ -164,13 +190,13 @@ Number of feedback photons produced in this event : 1586
 Number of optical photons produced in this run : 20829
 Number of feedback photons produced in this run : 15827
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    79156103     4B7D387 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    44089351     2A0C007 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    73746037    79156103
-                                        HEX     4654675     4B7D387
-                                        HEX    FFAD7132           0
-                              relative adrs    -5410510           0
+          with Store/Table at absolute adrs    38679277    44089351
+                                        HEX     24E32ED     2A0C007
+                                        HEX    FFAD712A           0
+                              relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 

@@ -1,15 +1,28 @@
    ------------------------------------------------------------
-  | Welcome to ROOT 6.14/06                http://root.cern.ch |
-  |                               (c) 1995-2018, The ROOT Team |
-  | Built for macosx64                                         |
-  | From tag v6-14-06, 5 November 2018                         |
+  | Welcome to ROOT 6.18/04                  https://root.cern |
+  |                               (c) 1995-2019, The ROOT Team |
+  | Built for macosx64 on Dec 20 2019, 12:31:00                |
+  | From tags/v6-18-04@v6-18-04                                |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
 Processing load_g3.C...
+Loading VMC library ...
 Loading Geant3 libraries ... finished
-Processing test_A01_1.C("g3tgeoConfig.C", kFALSE)...
+Processing test_A01_1.C("g3tgeoConfig.C",kFALSE)...
+
+=============================================================
+ Virtual Monte Carlo Library
+ Version 1.0 ( 24 February 2020 )
+=============================================================
+
+=============================================================
+ Geant3 Virtual Monte Carlo 
+ Version 3.0 ( 24 February 2020 )
+ WWW : https://vmc-project.github.io/
+=============================================================
+
 Geant3 has been created.
 Info in <TGeoManager::Import>: Reading geometry from file: A01geometry.root
 Info in <TGeoManager::CloseGeometry>: Geometry loaded from file...
@@ -53,13 +66,13 @@ Chamber2 has 189 hits.
 EmCalorimeter has 33 hits. Total Edep is 6315.77 (MeV)
 HadCalorimeter has 11 hits. Total Edep is 270.462 (MeV)
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   117619591     702BB87 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    69581831     425BC07 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   112209525   117619591
-                                        HEX     6B02E75     702BB87
-                                        HEX    FFAD7132           0
-                              relative adrs    -5410510           0
+          with Store/Table at absolute adrs    64171757    69581831
+                                        HEX     3D32EED     425BC07
+                                        HEX    FFAD712A           0
+                              relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -138,7 +151,7 @@ Chamber1 has 516 hits.
 Chamber2 has 523 hits.
 EmCalorimeter has 26 hits. Total Edep is 27277.1 (MeV)
 HadCalorimeter has 3 hits. Total Edep is 7.41226 (MeV)
-Real time 0:00:02, CP time 2.210
+Real time 0:00:01, CP time 1.630
  GTREVE_ROOT : Transporting primary track No         30
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10

@@ -7,7 +7,7 @@
    ------------------------------------------------------------
 
 
-Processing load_g4a.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -17,7 +17,7 @@ Loading geant4vmc library ...
 Loading mtroot library ...
 Processing test_E03_1.C("g4Config.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 
 =============================================================
@@ -811,7 +811,7 @@ Index : 2     used in the geometry : Yes
 ---> Begin of event: 5
    Absorber: total energy (MeV): 881.201       total track length (cm):  64.1475
    Gap:      total energy (MeV): 29.0096       total track length (cm):   14.069
-Time of this run:   User=0.070000s Real=0.079270s Sys=0.010000s
+Time of this run:   User=0.080000s Real=0.083371s Sys=0.000000s
 Number of events processed: 5
    ------------------------------------------------------------
   | Welcome to ROOT 6.18/04                  https://root.cern |
@@ -822,7 +822,7 @@ Number of events processed: 5
    ------------------------------------------------------------
 
 
-Processing load_g4a.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -832,7 +832,7 @@ Loading geant4vmc library ...
 Loading mtroot library ...
 Processing test_E03_2.C("g4Config.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 --- Init MC 
 
@@ -2165,7 +2165,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  48.317       total track length (cm):    3.634
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.000000s Real=0.006011s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.006210s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------
@@ -2177,7 +2177,7 @@ Number of events processed: 1
    ------------------------------------------------------------
 
 
-Processing load_g4a.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -2187,7 +2187,7 @@ Loading geant4vmc library ...
 Loading mtroot library ...
 Processing test_E03_3.C("g4Config.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 --- Init MC 
 
@@ -3015,7 +3015,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.145
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.000000s Real=0.001307s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.001291s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------
@@ -3027,7 +3027,7 @@ Number of events processed: 1
    ------------------------------------------------------------
 
 
-Processing load_g4a.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -3037,7 +3037,7 @@ Loading geant4vmc library ...
 Loading mtroot library ...
 Processing test_E03_4.C("g4Config.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 
 =============================================================
@@ -3835,7 +3835,7 @@ Index : 2     used in the geometry : Yes
 
    Absorber: total energy (MeV): 1451.53       total track length (cm):  104.214
    Gap:      total energy (MeV): 80.9693       total track length (cm):  39.7536
-Time of this run:   User=0.020000s Real=0.026104s Sys=0.000000s
+Time of this run:   User=0.030000s Real=0.030180s Sys=0.000000s
 Number of events processed: 1
    ------------------------------------------------------------
   | Welcome to ROOT 6.18/04                  https://root.cern |
@@ -3846,7 +3846,7 @@ Number of events processed: 1
    ------------------------------------------------------------
 
 
-Processing load_g4a.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -3856,7 +3856,7 @@ Loading geant4vmc library ...
 Loading mtroot library ...
 Processing test_E03_5.C("g4Config4.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 --- Init MC 
 
@@ -5076,7 +5076,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  19.872       total track length (cm):    1.580
    Gap:      total energy (MeV):   2.867       total track length (cm):    0.837
-Time of this run:   User=0.000000s Real=0.006425s Sys=0.000000s
+Time of this run:   User=0.010000s Real=0.007155s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------
@@ -5088,7 +5088,7 @@ Number of events processed: 1
    ------------------------------------------------------------
 
 
-Processing load_g4a.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -5098,7 +5098,7 @@ Loading geant4vmc library ...
 Loading mtroot library ...
 Processing test_E03_6.C("g4Config5.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 
 =============================================================
@@ -5876,7 +5876,7 @@ Index : 2     used in the geometry : Yes
 ---> Begin of event: 1
    Absorber: total energy (MeV): 596.174       total track length (cm):  34.3108
    Gap:      total energy (MeV): 35.4217       total track length (cm):  13.7506
-Time of this run:   User=0.000000s Real=0.003636s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.004292s Sys=0.000000s
 Number of events processed: 1
    ------------------------------------------------------------
   | Welcome to ROOT 6.18/04                  https://root.cern |
@@ -5887,7 +5887,7 @@ Number of events processed: 1
    ------------------------------------------------------------
 
 
-Processing load_g4a.C...
+Processing load_g4c.C...
 Loading Geant4 libraries (using geant4-config) ...
 34
 Loading VGM libraries ... 
@@ -5897,7 +5897,7 @@ Loading geant4vmc library ...
 Loading mtroot library ...
 Processing test_E03_7.C("g4Config6.C",kFALSE)...
 --------------------------------------------------------------
- VMC Example E03
+ VMC Example E03c: new version with multiple engines
 --------------------------------------------------------------
 
 =============================================================
@@ -7089,5 +7089,5 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
     1    -12.1    -5.17    -1.19         0   0.0964   0.0259    0.0259        ABSO eIoni
    Absorber: total energy (MeV): 153.094       total track length (cm):  5.40477
    Gap:      total energy (MeV): 8.47787       total track length (cm):  2.22564
-Time of this run:   User=0.010000s Real=0.007306s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.007218s Sys=0.000000s
 Number of events processed: 1

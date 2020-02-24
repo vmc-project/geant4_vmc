@@ -1,15 +1,28 @@
    ------------------------------------------------------------
-  | Welcome to ROOT 6.14/06                http://root.cern.ch |
-  |                               (c) 1995-2018, The ROOT Team |
-  | Built for macosx64                                         |
-  | From tag v6-14-06, 5 November 2018                         |
+  | Welcome to ROOT 6.18/04                  https://root.cern |
+  |                               (c) 1995-2019, The ROOT Team |
+  | Built for macosx64 on Dec 20 2019, 12:31:00                |
+  | From tags/v6-18-04@v6-18-04                                |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
    ------------------------------------------------------------
 
 
 Processing load_g3.C...
+Loading VMC library ...
 Loading Geant3 libraries ... finished
 Processing test_Gflash.C("g3tgeoConfig.C")...
+
+=============================================================
+ Virtual Monte Carlo Library
+ Version 1.0 ( 24 February 2020 )
+=============================================================
+
+=============================================================
+ Geant3 Virtual Monte Carlo 
+ Version 3.0 ( 24 February 2020 )
+ WWW : https://vmc-project.github.io/
+=============================================================
+
 Geant3 has been created.
 Info in <TGeoManager::TGeoManager>: Geometry Gflash_geometry, Gflash VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is ExpHall_log. Master volume is ExpHall_log
@@ -28,7 +41,7 @@ The have width of 3 cm and a lenght of 24 cm. The Material is PbWO4
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.220
+Real time 0:00:00, CP time 0.190
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 1  -----
@@ -39,7 +52,7 @@ Real time 0:00:00, CP time 0.220
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.200
+Real time 0:00:00, CP time 0.160
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 2  -----
@@ -50,7 +63,7 @@ Real time 0:00:00, CP time 0.200
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.180
+Real time 0:00:00, CP time 0.160
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 3  -----
@@ -61,7 +74,7 @@ Real time 0:00:00, CP time 0.180
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.200
+Real time 0:00:00, CP time 0.170
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 4  -----
@@ -72,7 +85,7 @@ Real time 0:00:00, CP time 0.200
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.190
+Real time 0:00:00, CP time 0.170
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 5  -----
@@ -83,7 +96,7 @@ Real time 0:00:00, CP time 0.190
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.190
+Real time 0:00:00, CP time 0.170
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 6  -----
@@ -94,7 +107,7 @@ Real time 0:00:00, CP time 0.190
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.200
+Real time 0:00:00, CP time 0.170
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 7  -----
@@ -105,7 +118,7 @@ Real time 0:00:00, CP time 0.200
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.190
+Real time 0:00:00, CP time 0.160
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 8  -----
@@ -116,7 +129,7 @@ Real time 0:00:00, CP time 0.190
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.200
+Real time 0:00:00, CP time 0.160
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 9  -----
@@ -127,7 +140,7 @@ Real time 0:00:00, CP time 0.200
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.200
+Real time 0:00:00, CP time 0.160
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 10  -----
@@ -135,13 +148,13 @@ Real time 0:00:00, CP time 0.200
    e1  12.9978   e3x3  47.947   e5x5  48.6028 GeV
  Total energy deposited in the calorimeter: 49.7586 (GeV)
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    96946055     5C74787 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   126394375     788A007 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    91535989    96946055
-                                        HEX     574BA75     5C74787
-                                        HEX    FFAD7132           0
-                              relative adrs    -5410510           0
+          with Store/Table at absolute adrs   120984301   126394375
+                                        HEX     73612ED     788A007
+                                        HEX    FFAD712A           0
+                              relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
