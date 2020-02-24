@@ -9,6 +9,92 @@
 
 Tags (history):
 ===============
+  24/02/2020
+  v5-0:
+    All packages:
+    - Added support for building against VMC stand-alone
+    - Updated CMake to make the installation relocatable:
+      - Removed the obsolete find modules for Geant4 and require CMake config for all required packages
+      - Avoid hard-coded library paths in the targets:
+      - Added the list of selected ROOT libraries which we depend on (ROOT_DEPS)
+      - Added target_include_directories
+    - Added script and configuration file for clang-format and applied formatting
+      to all  .h, .icc, .cxx files in examples, g4root, mtroot, source
+      (except files for Doxygen)
+    - Removed trailing whitespaces from all .h, .hh, .icc, .cxx, .cc, .C, .sh, -README-, history, CMake files
+    - Upgraded license to GPL 3.0
+
+    Geant4 VMC:
+    - Implemented Multiple-engine usage: with this update GEANT4_VMC becomes capable
+      of running together with other engines sharing the simulation of one event.
+    - Implemented special biasing that allows to activate INCLXX hadronic model in selected media.
+    - Improved commands for setting special physics models:
+      - Added "setOneRegion" command to supports names with spaces
+      - Added support for abc* pattern
+      For example:
+      /mcPhysics/biasing/setRegions ITS*
+         # set biasing to all media starting with ITS
+      /mcPhysics/biasing/setOneRegion ITS_SPD-BUS CU KAPTON$
+         #set biasing to "ITS_SPD-BUS CU KAPTON$" medium
+    - Added recent magnetic field steppers and  set the default to G4DormandPrince745 (as in Geant4)
+      - Added steppers:
+        G4BogackiShampine[23,45], G4DormandPrince[745,RK56,RK78], G4TsitourasRK45
+        and FSAL steppers: G4RK547FEq[1,2,3]
+     - Code clean-up in TG4MagneticField
+     - Fixed deleting objects in TG4Field
+    - Take into account new TVirtualMCApplication::EndOfEvent(), called by MC at the end of
+      event before SD's end of event
+    - Implemented TGeant4::ProcessEvent() and added TGeant4::FinishEvent()
+      This allows event-by-event processing in TGeant4. The FinishEvent() function has to be called by the user after all events have been processed.
+    - Added a new command
+      /mcPrimaryGenerator/skipUnknownParticles true|false:
+      it permits to skip unknown particles (not defined in Geant4) instead of aborting the execution with an exception
+    - Simplified TG4Verbose class
+
+    Examples:
+    - E01: Added test for gMC->Mixture(.. Float_t) to control a recent bug fix in TGeoMCGeometry
+    - Added new E03 example variant: E03c to demonstrate/test multiple engine mode
+    - Improved E03: Added [b,c] to the names of classes specific to the example variants
+    - Modularise examples test suites and added new command line args of test_suite.sh:
+      --examples, --debug, --cmp-ref
+
+    Fixes:
+    Geant4 VMC:
+    - Fixes in applying cuts:
+      - Do not let neutron decay if it is stopped with a specialCut and has assigned the neutron
+        killer process.
+      - Removed special cut processes which never apply a cut (ForEplus, ForOther).
+    - Removed creating Root UI at initialisation :
+      this should hopefully fix the break when running in batch mode without GUI observed in ALICE tests on MAC OSX
+    - Fixed resetting the primary particles ids
+      (thanks to B. Volkel (CERN) for reporting this problems)
+    - Fixed stopping a track if called from MCApplication::PreTrack()
+      (thanks to B. Volkel, CERN, for reporting this problem)
+    - Allow compiling with non Apple Clang on macOS
+
+    G4Root
+    - OpNovice: Use "UseGeant4" instead of ${Geant4_USE_FILE}
+      (thanks to Oliver Freyermuth (Physics Institute of the University of Bonn))
+
+    Examples:
+    - Test suites:
+      - Add missing "export" of LD_LIBRARY_PATH in test_suite.sh
+      - Use correct path to executables for E03 sub-examples
+      (thanks to Oliver Freyermuth (Physics Institute of the University of Bonn))
+    - E03:
+      - Fixed cut values: Applied the low limit 10keV (the minimal value accepted by Geant3)
+      - Fixed generation of dictionary map files
+    - ExGarfield: Fixed G3 macros
+    - Monopole: Fixed failure when built with Geant4 MT
+
+    Tested with VMC 1.0 (*), Geant4 10.5.p01 (with embedded CLHEP  2.4.1.0)
+      Root 6.18/04 (*), VGM 4.6, Garfield master at c5efc3e352101b59e
+
+  (*) VMC 1.0 is ahead of the vmc in ROOT 6.18/04,
+  it includes fixes scheduled for the next ROOT tags 6.18/06 and 6.20/00.
+  For this reason, the new multiple engine mode works correctly only with the
+  VMC stand-alone or with vmc in ROOT master or v6-18-patches or v6-20-patches.
+
   18/12/2018
   v4-0:
     All packages:

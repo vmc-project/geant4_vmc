@@ -11,7 +11,7 @@
 #
 # I. Hrivnacova, 13/06/2014
 
-set(Geant4VMCPackages_VERSION_MAJOR "4")
+set(Geant4VMCPackages_VERSION_MAJOR "5")
 set(Geant4VMCPackages_VERSION_MINOR "0")
 set(Geant4VMCPackages_VERSION_PATCH "0")
 set(Geant4VMCPackages_VERSION
