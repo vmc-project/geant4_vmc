@@ -7,7 +7,7 @@ Geant4 VMC implements the Virtual Monte Carlo (VMC) for Geant4, see more: <br/>
 
 It also includes G4Root and MTRoot packages, which are independent from Geant4 VMC and can be build and used stand-alone.
 
-[![License: GPL v2](https://img.shields.io/badge/License-GPLv2-blue.svg)](http://www.gnu.org/licenses/gpl-2.0)
+[![License: GPL v2](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
 
 ## Files and directories
