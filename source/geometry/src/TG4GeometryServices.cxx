@@ -528,7 +528,7 @@ void TG4GeometryServices::PrintLogicalVolumeStore() const
            << "  material: " << lv->GetMaterial()->GetName() << "  " << address
            << G4endl;
 
-    for (G4int j = 0; j < lv->GetNoDaughters(); j++) {
+    for (size_t j = 0; j < lv->GetNoDaughters(); j++) {
       void* addressd = lv->GetDaughter(j)->GetLogicalVolume()->GetMaterial();
       G4cout << "  Daughter: " << std::setw(5) << j << "  "
              << lv->GetDaughter(j) << "  " << lv->GetDaughter(j)->GetName()
@@ -847,7 +847,7 @@ G4VPhysicalVolume* TG4GeometryServices::FindDaughter(
   /// Find daughter specified by name and copyNo in the given
   /// mother logical volume
 
-  for (G4int i = 0; i < mlv->GetNoDaughters(); i++) {
+  for (size_t i = 0; i < mlv->GetNoDaughters(); i++) {
     G4VPhysicalVolume* dpv = mlv->GetDaughter(i);
     if (UserVolumeName(dpv->GetName()) == name && dpv->GetCopyNo() == copyNo)
       return dpv;

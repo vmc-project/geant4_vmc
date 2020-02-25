@@ -139,7 +139,7 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
   // Get process name
   G4ProcessVector* processVector =
     particle->GetProcessManager()->GetProcessList();
-  for (G4int i = 0; i < processVector->length(); i++) {
+  for (size_t i = 0; i < processVector->length(); i++) {
     G4String processName;
     G4String currentProcessName = (*processVector)[i]->GetProcessName();
 

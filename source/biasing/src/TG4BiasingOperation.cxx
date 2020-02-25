@@ -19,10 +19,11 @@
 #include "G4PionPlusInelasticProcess.hh"
 #include "G4ProtonInelasticProcess.hh"
 #include "G4VParticleChange.hh"
-// #include "G4HadronicParameters.hh"
+#include "G4HadronicParameters.hh"
 #include "G4ExcitedStringDecay.hh"
 #include "G4FTFModel.hh"
 #include "G4GeneratorPrecompoundInterface.hh"
+#include "G4HadronInelasticDataSet.hh"
 #include "G4HadronicInteractionRegistry.hh"
 #include "G4INCLXXInterface.hh"
 #include "G4LundStringFragmentation.hh"
@@ -45,8 +46,7 @@ TG4BiasingOperation::TG4BiasingOperation(G4String name)
   const G4double maxBERT = 12.0 * CLHEP::GeV;
   const G4double minINCLXX = 1.0 * CLHEP::MeV;
   const G4double minFTFP = 3.0 * CLHEP::GeV;
-  // const G4double maxFTFP = G4HadronicParameters::Instance()->GetMaxEnergy();
-  const G4double maxFTFP = 100.0 * CLHEP::TeV;
+  const G4double maxFTFP = G4HadronicParameters::Instance()->GetMaxEnergy();
 
   // Create the hadronic models (to replace FTFP_BERT with "FTFP_INCLXX",
   // keeping the same energy ranges for the transition between models).
@@ -92,6 +92,15 @@ TG4BiasingOperation::TG4BiasingOperation(G4String name)
   fPionPlusInelasticProcess->RegisterMe(theInclxxModel_forPions);
   fPionMinusInelasticProcess->RegisterMe(theHighEnergyModel);
   fPionMinusInelasticProcess->RegisterMe(theInclxxModel_forPions);
+
+  // Register the cross sections: this is mandatory starting from G4 10.6
+  // because the default Gheisha inelastic cross sections have been removed.
+  // It is convenient to use the Gheisha inelastic cross sections here
+  // because they do not require any special initialization.
+  fProtonInelasticProcess->AddDataSet( new G4HadronInelasticDataSet );
+  fNeutronInelasticProcess->AddDataSet( new G4HadronInelasticDataSet );
+  fPionPlusInelasticProcess->AddDataSet( new G4HadronInelasticDataSet );
+  fPionMinusInelasticProcess->AddDataSet( new G4HadronInelasticDataSet );
 }
 
 TG4BiasingOperation::~TG4BiasingOperation() {}

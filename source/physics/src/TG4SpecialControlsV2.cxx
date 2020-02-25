@@ -130,7 +130,7 @@ void TG4SpecialControlsV2::StartTrack(const G4Track* track)
     track->GetDefinition()->GetProcessManager();
   G4ProcessVector* processVector = processManager->GetProcessList();
 
-  for (G4int i = 0; i < processVector->length(); i++) {
+  for (size_t i = 0; i < processVector->length(); i++) {
     fProcessActivations.push_back(processManager->GetProcessActivation(i));
   }
 
@@ -160,7 +160,7 @@ void TG4SpecialControlsV2::ApplyControls()
   if (fSwitch == kUnswitch || fSwitch == kReswitch) {
 
     // set processes activation back
-    for (G4int i = 0; i < fSwitchedProcesses.length(); i++) {
+    for (size_t i = 0; i < fSwitchedProcesses.length(); i++) {
       if (VerboseLevel() > 1) {
         G4cout << "Reset process activation back in "
                << fkTrack->GetNextVolume()->GetName() << G4endl;
@@ -178,7 +178,7 @@ void TG4SpecialControlsV2::ApplyControls()
     TG4Limits* limits =
       (TG4Limits*)fkTrack->GetNextVolume()->GetLogicalVolume()->GetUserLimits();
 
-    for (G4int i = 0; i < processVector->length(); i++) {
+    for (size_t i = 0; i < processVector->length(); i++) {
 
       TG4G3ControlValue control = limits->GetControl((*processVector)[i]);
       G4bool activation = processManager->GetProcessActivation(i);
@@ -226,7 +226,7 @@ void TG4SpecialControlsV2::RestoreProcessActivations()
     fkTrack->GetDefinition()->GetProcessManager();
   G4ProcessVector* processVector = processManager->GetProcessList();
 
-  for (G4int i = 0; i < processVector->length(); i++) {
+  for (size_t i = 0; i < processVector->length(); i++) {
     if (processManager->GetProcessActivation(i) != fProcessActivations[i]) {
       processManager->SetProcessActivation(i, fProcessActivations[i]);
     }

@@ -29,10 +29,7 @@
 #include <G4ApplicationState.hh>
 #include <G4StateManager.hh>
 #include <G4Threading.hh>
-
-#ifdef G4VIS_USE
 #include <G4VisExecutive.hh>
-#endif
 
 #include <TVirtualMCGeometry.h>
 
@@ -220,7 +217,6 @@ TGeant4::TGeant4(const char* name, const char* title,
   // add verbose level
   // G4cout << "TG4RunManager has been created." << G4endl;
 
-#ifdef G4VIS_USE
   if (isMaster) {
     // create visualization managers
     fVisManager = new TG4VisManager();
@@ -230,7 +226,6 @@ TGeant4::TGeant4(const char* name, const char* title,
     fVisManager = fgMasterInstance->fVisManager;
     fVisExecutive = fgMasterInstance->fVisExecutive;
   }
-#endif
 
 #ifdef MCDEBUG
   G4cout << "Debug mode is switched on." << G4endl;
@@ -261,12 +256,10 @@ TGeant4::~TGeant4()
     delete fPhysicsManager;
   }
   delete fStepManager;
-#ifdef G4VIS_USE
   if (isMaster) {
     delete fVisManager;
     delete fVisExecutive;
   }
-#endif
   // G4cout << "TGeant4::~TGeant4 done " << this << G4endl;
 }
 
@@ -1089,7 +1082,6 @@ TMCParticleType TGeant4::ParticleMCType(Int_t pdg) const
 // methods for visualization
 //
 
-#ifdef G4VIS_USE
 //_____________________________________________________________________________
 void TGeant4::DrawOneSpec(const char* name)
 {
@@ -1115,35 +1107,6 @@ void TGeant4::Gdraw(const char* name, Double_t theta, Double_t phi,
   fVisManager->Gdraw(name, theta, phi, psi, u0, v0, ul, vl);
 }
 
-#else
-//_____________________________________________________________________________
-void TGeant4::DrawOneSpec(const char* /*name*/)
-{
-  /// Function not enabled in no visualization mode
-
-  TG4Globals::Warning("TGeant4", "DrawOneSpec", "No visualization available.");
-}
-
-//_____________________________________________________________________________
-void TGeant4::Gsatt(const char* /*name*/, const char* /*att*/, Int_t /*val*/)
-{
-  /// Function not enabled in no visualization mode
-
-  TG4Globals::Warning("TGeant4", "Gsatt", "No visualization available.");
-}
-
-//_____________________________________________________________________________
-void TGeant4::Gdraw(const char* /*p1*/, Double_t /*theta*/, Double_t /*phi*/,
-  Double_t /*psi*/, Double_t /*u0*/, Double_t /*v0*/, Double_t /*ul*/,
-  Double_t /*vl*/)
-{
-  /// Function not enabled in no visualization mode
-
-  TG4Globals::Warning("TGeant4", "Gdraw", "No visualization available.");
-}
-
-#endif // G4VIS_USE
-
 //
 // methods for run control
 //
@@ -1155,10 +1118,8 @@ void TGeant4::Init()
 
   fRunManager->Initialize();
 
-#ifdef G4VIS_USE
   fVisExecutive->SetVerboseLevel(0);
   fVisExecutive->Initialize();
-#endif
 
   fRunManager->CreateGeantUI();
 }

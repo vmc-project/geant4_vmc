@@ -15,8 +15,6 @@
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-#ifdef G4VIS_USE
-
 #include "TG4G3Attribute.h"
 
 #include <G4VisManager.hh>
@@ -121,5 +119,4 @@ inline void TG4VisManager::SetColourFlag(G4bool value)
   fColourFlag = value;
 }
 
-#endif // G4VIS_USE
 #endif // TG4_VIS_MANAGER_H

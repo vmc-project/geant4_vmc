@@ -75,6 +75,7 @@ void TG4ProcessControlMapPhysics::FillMap(G4bool isBiasing)
 
   controlMap->Add("Decay", kDCAY);
   controlMap->Add("RadioactiveDecay", kDCAY);
+  controlMap->Add("RadioactiveDecayBase", kDCAY);
 
   controlMap->Add("compt", kCOMP);
   controlMap->Add("phot", kPHOT);
@@ -95,6 +96,7 @@ void TG4ProcessControlMapPhysics::FillMap(G4bool isBiasing)
 
   controlMap->Add("nCapture", kHADR);
   controlMap->Add("HadronCapture", kHADR);
+  controlMap->Add("hFritiofWithBinaryCascadeCaptureAtRest", kHADR);
   controlMap->Add("nFission", kHADR);
   controlMap->Add("HadronFission", kHADR);
 
@@ -154,6 +156,7 @@ void TG4ProcessControlMapPhysics::FillMap(G4bool isBiasing)
   controlMap->Add("AntiSigmaPlusInelastic", kHADR);
   controlMap->Add("anti_sigma+Inelastic", kHADR);
   controlMap->Add("sigma0Inelastic", kHADR);
+  controlMap->Add("anti_sigma0Inelastic", kHADR);
   controlMap->Add("XiMinusInelastic", kHADR);
   controlMap->Add("xi-Inelastic", kHADR);
   controlMap->Add("AntiXiMinusInelastic", kHADR);
@@ -217,6 +220,7 @@ void TG4ProcessControlMapPhysics::FillMap(G4bool isBiasing)
   controlMap->Add("CHIPS_SynchrotronRadiation", kSYNC);
 
   controlMap->Add("biasWrapper(0)", kNoG3Controls);
+  controlMap->Add("GammaGeneralProc", kNoG3Controls);
 }
 
 //
@@ -247,7 +251,7 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
     G4ProcessVector* processVector =
       aParticleIterator->value()->GetProcessManager()->GetProcessList();
 
-    for (G4int i = 0; i < processVector->length(); i++) {
+    for (size_t i = 0; i < processVector->length(); i++) {
 
       G4String processName = (*processVector)[i]->GetProcessName();
 
@@ -264,7 +268,8 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
           processName != "StepLimiter" && processName != "GammaXTRadiator" &&
           processName != "StrawXTRadiator" &&
           processName != "RegularXTRadiator" &&
-          processName != "G4MaxTimeCuts" && processName != "biasWrapper(0)") {
+          processName != "G4MaxTimeCuts" && processName != "biasWrapper(0)" &&
+          processName != "GammaGeneralProc") {
 
         G4String text = "Unknown process control for ";
         text += processName;

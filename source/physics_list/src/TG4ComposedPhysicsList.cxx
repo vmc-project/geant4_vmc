@@ -71,7 +71,7 @@ void TG4ComposedPhysicsList::ApplyGammaToMuonsCrossSectionFactor()
     G4ProcessVector* processVector = processManager->GetProcessList();
     G4bool done = false;
     // get G4GammaConversionToMuons
-    for (G4int i = 0; i < processVector->length(); i++) {
+    for (size_t i = 0; i < processVector->length(); i++) {
       G4GammaConversionToMuons* gammaToMuMu =
         dynamic_cast<G4GammaConversionToMuons*>((*processVector)[i]);
       if (gammaToMuMu) {
@@ -271,7 +271,7 @@ void TG4ComposedPhysicsList::DumpAllProcesses() const
     // dump particle processes
     G4ProcessVector* processVector =
       theParticleIterator->value()->GetProcessManager()->GetProcessList();
-    for (G4int i = 0; i < processVector->length(); i++)
+    for (size_t i = 0; i < processVector->length(); i++)
       (*processVector)[i]->DumpInfo();
 
     G4cout << G4endl;

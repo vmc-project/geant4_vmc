@@ -125,7 +125,7 @@ void TG4SpecialCutsPhysics::ConstructProcess()
           G4bool isNeutronWithKiller = false;
           if (particle == G4Neutron::Definition() ) {
             G4ProcessVector* processes = pManager->GetProcessList();
-            for (G4int i = 0; i < processes->size(); ++i) {
+            for (size_t i = 0; i < processes->size(); ++i) {
               if ( (*processes)[i]->GetProcessName() == "nKiller") {
                 isNeutronWithKiller = true;
                 break;

@@ -29,8 +29,6 @@
 ///
 /// \author I. Hrivnacova, IPN Orsay; A, Gheata
 
-#ifdef G4VIS_USE
-
 #include "TG4VisManager.h"
 #include "TG4Globals.h"
 
@@ -703,4 +701,3 @@ void TG4VisManager::Gdraw(const char* /*name*/, Float_t /*theta*/,
 
   TG4Globals::Warning("TG4VisManager", "Gdraw", "Not implemented");
 }
-#endif // G4VIS_USE

@@ -277,7 +277,7 @@ void TG4PhysicsManager::SetSpecialControlsActivation()
     // activate or inactivate processes according to
     // global setting in the control vector in G3 physics manager
     //
-    for (G4int j = 0; j < processVector->length(); j++) {
+    for (size_t j = 0; j < processVector->length(); j++) {
 
       TG4G3ControlValue control =
         controlVector->GetControlValue((*processVector)[j]);

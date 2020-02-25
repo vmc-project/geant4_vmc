@@ -77,6 +77,7 @@ void TG4ProcessMCMapPhysics::FillMap(G4bool isBiasing)
 
   mcMap->Add("Decay", kPDecay);
   mcMap->Add("RadioactiveDecay", kPDecay);
+  mcMap->Add("RadioactiveDecayBase", kPDecay);
 
   mcMap->Add("compt", kPCompton);
   mcMap->Add("phot", kPPhotoelectric);
@@ -97,6 +98,7 @@ void TG4ProcessMCMapPhysics::FillMap(G4bool isBiasing)
 
   mcMap->Add("nCapture", kPNCapture);
   mcMap->Add("HadronCapture", kPNCapture);
+  mcMap->Add("hFritiofWithBinaryCascadeCaptureAtRest", kPNCapture);
   mcMap->Add("nFission", kPNuclearFission);
   mcMap->Add("HadronFission", kPNuclearFission);
 
@@ -156,6 +158,7 @@ void TG4ProcessMCMapPhysics::FillMap(G4bool isBiasing)
   mcMap->Add("AntiSigmaPlusInelastic", kPHInhelastic);
   mcMap->Add("anti_sigma+Inelastic", kPHInhelastic);
   mcMap->Add("sigma0Inelastic", kPHInhelastic);
+  mcMap->Add("anti_sigma0Inelastic", kPHInhelastic);
   mcMap->Add("XiMinusInelastic", kPHInhelastic);
   mcMap->Add("xi-Inelastic", kPHInhelastic);
   mcMap->Add("AntiXiMinusInelastic", kPHInhelastic);
@@ -244,6 +247,7 @@ void TG4ProcessMCMapPhysics::FillMap(G4bool isBiasing)
   mcMap->Add("stackPopper", kPUserDefined);
 
   mcMap->Add("biasWrapper(0)", kPNull);
+  mcMap->Add("GammaGeneralProc", kPNull);
 }
 //
 // protected methods
@@ -277,7 +281,7 @@ void TG4ProcessMCMapPhysics::ConstructProcess()
     G4ProcessVector* processVector =
       aParticleIterator->value()->GetProcessManager()->GetProcessList();
 
-    for (G4int i = 0; i < processVector->length(); i++) {
+    for (size_t i = 0; i < processVector->length(); i++) {
 
       G4String processName = (*processVector)[i]->GetProcessName();
 
