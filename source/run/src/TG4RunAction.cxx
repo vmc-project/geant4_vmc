@@ -21,7 +21,8 @@
 #include "TG4RunAction.h"
 #include "TGeant4.h"
 
-#include "G4AutoLock.hh"
+#include <G4Types.hh>
+#include <G4AutoLock.hh>
 #include <G4Run.hh>
 #include <G4UImanager.hh>
 #include <Randomize.hh>

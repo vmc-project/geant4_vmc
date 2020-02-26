@@ -36,6 +36,7 @@
 #include "TG4TrackingAction.h"
 #include "TG4WorkerInitialization.h"
 
+#include <G4Types.hh>
 #ifdef G4MULTITHREADED
 #include <G4MTRunManager.hh>
 #else

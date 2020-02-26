@@ -45,6 +45,7 @@
 ///
 /// \author A. Gheata; CERN
 
+#include "G4Types.hh"
 #ifdef G4MULTITHREADED
 #include "G4MTRunManager.hh"
 #else
@@ -66,13 +67,8 @@
 #include "TG4RootNavMgr.h"
 // Added for G4Root - end
 
-#ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
-#endif
-
-#ifdef G4UI_USE
 #include "G4UIExecutive.hh"
-#endif
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 namespace {
@@ -178,14 +174,12 @@ int main(int argc,char** argv)
   //
   runManager->Initialize();
 
-#ifdef G4VIS_USE
   // Initialize visualization
   //
   G4VisManager* visManager = new G4VisExecutive;
   // G4VisExecutive can take a verbosity argument - see /vis/verbose guidance.
   // G4VisManager* visManager = new G4VisExecutive("Quiet");
   visManager->Initialize();
-#endif
 
   // Get the pointer to the User Interface manager
   //
@@ -198,18 +192,12 @@ int main(int argc,char** argv)
   }
   else // Define UI session for interactive mode
   {
-#ifdef G4UI_USE
      G4UIExecutive * ui = new G4UIExecutive(argc,argv,session);
-#ifdef G4VIS_USE
      UImanager->ApplyCommand("/control/execute vis.mac");
-#else
-     UImanager->ApplyCommand("/control/execute OpNovice.in");
-#endif
      if (ui->IsGUI())
         UImanager->ApplyCommand("/control/execute gui.mac");
      ui->SessionStart();
      delete ui;
-#endif
   }
 
   // Job termination
@@ -217,9 +205,7 @@ int main(int argc,char** argv)
   //                 owned and deleted by the run manager, so they should not
   //                 be deleted in the main() program !
 
-#ifdef G4VIS_USE
   delete visManager;
-#endif
   delete runManager;
 
   return 0;

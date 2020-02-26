@@ -17,6 +17,7 @@
 #include "TG4UserIon.h"
 #include "TG4UserParticle.h"
 
+#include <G4Types.hh>
 #include <G4AutoLock.hh>
 #include <G4DynamicParticle.hh>
 #include <G4IonTable.hh>
