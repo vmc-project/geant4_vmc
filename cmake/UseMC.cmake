@@ -40,7 +40,8 @@ if(VMC_WITH_Geant4)
   add_definitions(-DUSE_GEANT4)
   # Workaround for upstream bug: http://bugzilla-geant4.kek.jp/show_bug.cgi?id=1663
   #include(${Geant4_USE_FILE})
-  include(UseGeant4)
+
+  include(${Geant4_USE_FILE})
 
   if(Geant4VMC_FOUND)
      # build outside Geant4VMC

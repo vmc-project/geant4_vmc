@@ -72,7 +72,8 @@ if(NOT Geant4_FOUND)
 endif(NOT Geant4_FOUND)
 # Workaround for upstream bug: http://bugzilla-geant4.kek.jp/show_bug.cgi?id=1663
 #include(${Geant4_USE_FILE})
-include(UseGeant4)
+
+include(${Geant4_USE_FILE})
 if (Geant4VMC_USE_GEANT4_G3TOG4)
   add_definitions(-DUSE_G3TOG4)
 endif()
