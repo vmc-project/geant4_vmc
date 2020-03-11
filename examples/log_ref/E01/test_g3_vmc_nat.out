@@ -1,10 +1,10 @@
-   ------------------------------------------------------------
-  | Welcome to ROOT 6.18/04                  https://root.cern |
-  |                               (c) 1995-2019, The ROOT Team |
-  | Built for macosx64 on Dec 20 2019, 12:31:00                |
-  | From tags/v6-18-04@v6-18-04                                |
-  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
-   ------------------------------------------------------------
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
+  | From tags/v6-20-00@v6-20-00                                      |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
 
 
 Processing load_g3.C...
@@ -326,11 +326,11 @@ GetMaterial: Volume name XYZ not found
 VolId: Volume XYZ not found
 GetMedium: Volume name XYZ not found
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    74935303     4776C07 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    69574663     425A007 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    69525229    74935303
-                                        HEX     424DEED     4776C07
+          with Store/Table at absolute adrs    64164589    69574663
+                                        HEX     3D312ED     425A007
                                         HEX    FFAD712A           0
                               relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

@@ -1,10 +1,10 @@
-   ------------------------------------------------------------
-  | Welcome to ROOT 6.18/04                  https://root.cern |
-  |                               (c) 1995-2019, The ROOT Team |
-  | Built for macosx64 on Dec 20 2019, 12:31:00                |
-  | From tags/v6-18-04@v6-18-04                                |
-  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
-   ------------------------------------------------------------
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
+  | From tags/v6-20-00@v6-20-00                                      |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
 
 
 Processing load_g4.C...
@@ -24,7 +24,7 @@ Processing test_E06.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.0 ( 24 February 2020 )
+ Version 5.1 ( 11 March 2020 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -47,7 +47,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
+ Geant4 version Name: geant4-10-06-patch-01    (14-February-2020)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -157,8 +157,7 @@ compt:  for gamma SubType=13 BuildTable=1
 conv:  for gamma SubType=14 BuildTable=1
       Lambda table from 1.022 MeV to 100 TeV, 18 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-        BetheHeitler : Emin=    0 eV  Emax=   80 GeV  ModifiedTsai
-     BetheHeitlerLPM : Emin=   80 GeV Emax=  100 TeV  ModifiedTsai
+     BetheHeitlerLPM : Emin=    0 eV  Emax=  100 TeV  ModifiedTsai
 
 Rayl:  for gamma SubType=11 BuildTable=1
       Lambda table from 100 eV  to 100 keV, 7 bins/decade, spline: 0
@@ -529,35 +528,35 @@ Index : 1     used in the geometry : Yes
 
 ### Run 0 start.
 >>> Event 0
-Number of optical photons produced in this event : 1797
+Number of optical photons produced in this event : 1683
 >>> Event 1
-Number of optical photons produced in this event : 1701
+Number of optical photons produced in this event : 1674
 >>> Event 2
-Number of optical photons produced in this event : 1734
+Number of optical photons produced in this event : 1702
 >>> Event 3
-Number of optical photons produced in this event : 1605
+Number of optical photons produced in this event : 1675
 >>> Event 4
-Number of optical photons produced in this event : 1645
+Number of optical photons produced in this event : 1686
 >>> Event 5
-Number of optical photons produced in this event : 1701
+Number of optical photons produced in this event : 1632
 >>> Event 6
-Number of optical photons produced in this event : 1736
+Number of optical photons produced in this event : 1657
 >>> Event 7
-Number of optical photons produced in this event : 1677
+Number of optical photons produced in this event : 1689
 >>> Event 8
-Number of optical photons produced in this event : 1651
+Number of optical photons produced in this event : 1728
 >>> Event 9
-Number of optical photons produced in this event : 1645
-Time of this run:   User=0.900000s Real=0.900438s Sys=0.010000s
+Number of optical photons produced in this event : 1764
+Time of this run:   User=0.920000s Real=0.914832s Sys=0.000000s
 Number of events processed: 10
-Number of optical photons produced in this run : 16892
-   ------------------------------------------------------------
-  | Welcome to ROOT 6.18/04                  https://root.cern |
-  |                               (c) 1995-2019, The ROOT Team |
-  | Built for macosx64 on Dec 20 2019, 12:31:00                |
-  | From tags/v6-18-04@v6-18-04                                |
-  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
-   ------------------------------------------------------------
+Number of optical photons produced in this run : 16890
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
+  | From tags/v6-20-00@v6-20-00                                      |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
 
 
 Processing load_g4.C...
@@ -577,7 +576,7 @@ Processing test_E06_2.C("g4tgeoConfig1.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.0 ( 24 February 2020 )
+ Version 5.1 ( 11 March 2020 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -600,7 +599,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-10-05-patch-01    (17-April-2019)
+ Geant4 version Name: geant4-10-06-patch-01    (14-February-2020)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -639,7 +638,7 @@ The material properties EFFICIENCY set for optical surface AirSurface
 Info in <TObject::ConnectToG4>: ROOT detector construction class connected to G4RunManager
 Adding HadronPhysicsList FTFP_BERT_EMV
 G4PhysListFactory::GetReferencePhysList <FTFP_BERT_EMV>  EMoption= 1
-<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+<<< Geant4 Physics List simulation engine: FTFP_BERT
 
 <<< Reference Physics List FTFP_BERT_EMV is built
 
@@ -670,10 +669,10 @@ Global field created with stepper DormandPrince745
 ### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 
  FTFP_BERT : new threshold between BERT and FTFP is over the interval 
- for pions :   3 to 12 GeV
- for kaons :   3 to 12 GeV
- for proton :  3 to 12 GeV
- for neutron : 3 to 12 GeV
+ for pions :   3 to 6 GeV
+ for kaons :   3 to 6 GeV
+ for proton :  3 to 6 GeV
+ for neutron : 3 to 6 GeV
 
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 ### Hadron physics constructed. 
@@ -723,8 +722,7 @@ compt:  for gamma applyCuts:1  SubType=13 BuildTable=1
 conv:  for gamma applyCuts:1  SubType=14 BuildTable=1
       Lambda table from 1.022 MeV to 100 TeV, 18 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-        BetheHeitler : Emin=    0 eV  Emax=   80 GeV  ModifiedTsai
-     BetheHeitlerLPM : Emin=   80 GeV Emax=  100 TeV  ModifiedTsai
+     BetheHeitlerLPM : Emin=    0 eV  Emax=  100 TeV  ModifiedTsai
 
 msc:  for e-  SubType= 10
       RangeFactor= 0.2, stepLimType: 0, latDisp: 1
@@ -1081,7 +1079,7 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
 
   Process: neutronInelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
 
   Process: nCapture
@@ -1094,10 +1092,9 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
                            Hadronic Processes for GenericIon
 
   Process: ionInelastic
-        Model:  Binary Light Ion Cascade: 0 eV /n ---> 4 GeV/n
-        Model:                      FTFP: 2 GeV/n ---> 100 TeV/n
+        Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
+        Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for He3
@@ -1105,13 +1102,11 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: He3Inelastic
-        Model:  Binary Light Ion Cascade: 0 eV /n ---> 4 GeV/n
-        Model:                      FTFP: 2 GeV/n ---> 100 TeV/n
+        Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
+        Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for alpha
@@ -1119,13 +1114,11 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: alphaInelastic
-        Model:  Binary Light Ion Cascade: 0 eV /n ---> 4 GeV/n
-        Model:                      FTFP: 2 GeV/n ---> 100 TeV/n
+        Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
+        Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for anti_He3
@@ -1134,12 +1127,10 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: anti_He3Inelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
   Process: hFritiofCaptureAtRest
 
@@ -1150,12 +1141,10 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: anti_alphaInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
   Process: hFritiofCaptureAtRest
 
@@ -1166,12 +1155,10 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: anti_deuteronInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
   Process: hFritiofCaptureAtRest
 
@@ -1179,13 +1166,15 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
                            Hadronic Processes for anti_neutron
 
   Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+        Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
+        Model:              AntiAElastic: 100 MeV ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
 
   Process: anti_neutronInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: hFritiofCaptureAtRest
 
 ---------------------------------------------------
                            Hadronic Processes for anti_proton
@@ -1194,12 +1183,10 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
         Model:              AntiAElastic: 100 MeV ---> 100 TeV
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: anti_protonInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
   Process: hFritiofCaptureAtRest
 
@@ -1210,12 +1197,10 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: anti_tritonInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
   Process: hFritiofCaptureAtRest
 
@@ -1225,18 +1210,16 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: dInelastic
-        Model:  Binary Light Ion Cascade: 0 eV /n ---> 4 GeV/n
-        Model:                      FTFP: 2 GeV/n ---> 100 TeV/n
+        Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
+        Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for e+
 
-  Process: positronNuclear
+  Process: electronNuclear
         Model:   G4ElectroVDNuclearModel: 0 eV  ---> 1 PeV
      Cr_sctns:          ElectroNuclearXS: 0 eV  ---> 100 TeV
 
@@ -1251,7 +1234,7 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
                            Hadronic Processes for gamma
 
   Process: photonNuclear
-        Model:            BertiniCascade: 0 eV  ---> 3.5 GeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
         Model:           TheoFSGenerator: 3 GeV ---> 100 TeV
      Cr_sctns:            PhotoNuclearXS: 0 eV  ---> 100 TeV
 
@@ -1261,14 +1244,11 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon+Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
-     Cr_sctns:  ChipsKaonPlusInelasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for kaon-
@@ -1276,14 +1256,11 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: kaon-Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
-     Cr_sctns: ChipsKaonMinusInelasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
   Process: hBertiniCaptureAtRest
 
@@ -1292,13 +1269,12 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
   Process: lambdaInelastic
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
-        Model:                      FTFP: 2 GeV ---> 100 TeV
-     Cr_sctns:   ChipsHyperonInelasticXS: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+        Model:                      FTFP: 3 GeV ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for mu+
@@ -1320,27 +1296,25 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
                            Hadronic Processes for pi+
 
   Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 1.0001 GeV
-        Model:           hElasticGlauber: 1 GeV ---> 100 TeV
-     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+        Model:           hElasticGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
   Process: pi+Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
-     Cr_sctns: Barashenkov-Glauber-Gribov: 0 eV  ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+     Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for pi-
 
   Process: hadElastic
-        Model:              hElasticLHEP: 0 eV  ---> 1.0001 GeV
-        Model:           hElasticGlauber: 1 GeV ---> 100 TeV
-     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+        Model:           hElasticGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
   Process: pi-Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
-     Cr_sctns: Barashenkov-Glauber-Gribov: 0 eV  ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+     Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
   Process: hBertiniCaptureAtRest
 
@@ -1349,12 +1323,12 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
 
   Process: hadElastic
         Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
-     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+     Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
   Process: protonInelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
-        Model:            BertiniCascade: 0 eV  ---> 12 GeV
-     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+     Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
                            Hadronic Processes for triton
@@ -1362,15 +1336,37 @@ CoulombScat:  for pi-, integral:1  applyCuts:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
-     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
 
   Process: tInelastic
-        Model:  Binary Light Ion Cascade: 0 eV /n ---> 4 GeV/n
-        Model:                      FTFP: 2 GeV/n ---> 100 TeV/n
+        Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
+        Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
-     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
 
 ================================================================
+=======================================================================
+======       Pre-compound/De-excitation Physics Parameters     ========
+=======================================================================
+Type of pre-compound inverse x-section              3
+Pre-compound model active                           1
+Pre-compound excitation low energy (MeV)            0.1
+Pre-compound excitation high energy (MeV)           30
+Type of de-excitation inverse x-section             3
+Type of de-excitation factory                       Evaporation+GEM
+Number of de-excitation channels                    68
+Min excitation energy (keV)                         0.01
+Min energy per nucleon for multifragmentation (MeV) 2e+05
+Limit excitation energy for Fermi BreakUp (MeV)     20
+Level density (1/MeV)                               0.075
+Use simple level density model                      1
+Use discrete excitation energy of the residual      0
+Time limit for long lived isomeres (ns)             1e+12
+Internal e- conversion flag                         1
+Store e- internal conversion data                   0
+Electron internal conversion ID                     2
+Correlated gamma emission flag                      0
+Max 2J for sampling of angular correlations         10
+Upload data before 1st event for                Z < 9
+=======================================================================
 
 ========= Table of registered couples ==============================
 
@@ -1392,36 +1388,36 @@ Index : 1     used in the geometry : Yes
 
 ### Run 0 start.
 >>> Event 0
-Number of optical photons produced in this event : 1691
-Number of feedback photons produced in this event : 5173
+Number of optical photons produced in this event : 1700
+Number of feedback photons produced in this event : 5203
 >>> Event 1
-Number of optical photons produced in this event : 1634
-Number of feedback photons produced in this event : 5003
->>> Event 2
-Number of optical photons produced in this event : 1618
-Number of feedback photons produced in this event : 4956
->>> Event 3
-Number of optical photons produced in this event : 1661
-Number of feedback photons produced in this event : 5084
->>> Event 4
-Number of optical photons produced in this event : 1615
-Number of feedback photons produced in this event : 4946
->>> Event 5
 Number of optical photons produced in this event : 1617
-Number of feedback photons produced in this event : 4955
+Number of feedback photons produced in this event : 4953
+>>> Event 2
+Number of optical photons produced in this event : 1636
+Number of feedback photons produced in this event : 5010
+>>> Event 3
+Number of optical photons produced in this event : 1670
+Number of feedback photons produced in this event : 5112
+>>> Event 4
+Number of optical photons produced in this event : 1563
+Number of feedback photons produced in this event : 4789
+>>> Event 5
+Number of optical photons produced in this event : 1624
+Number of feedback photons produced in this event : 4973
 >>> Event 6
-Number of optical photons produced in this event : 1723
-Number of feedback photons produced in this event : 5272
+Number of optical photons produced in this event : 1572
+Number of feedback photons produced in this event : 4816
 >>> Event 7
-Number of optical photons produced in this event : 1645
-Number of feedback photons produced in this event : 5036
+Number of optical photons produced in this event : 1572
+Number of feedback photons produced in this event : 4816
 >>> Event 8
-Number of optical photons produced in this event : 1750
-Number of feedback photons produced in this event : 5351
+Number of optical photons produced in this event : 1554
+Number of feedback photons produced in this event : 4764
 >>> Event 9
-Number of optical photons produced in this event : 1552
-Number of feedback photons produced in this event : 4756
-Time of this run:   User=1.320000s Real=1.326220s Sys=0.010000s
+Number of optical photons produced in this event : 1555
+Number of feedback photons produced in this event : 4766
+Time of this run:   User=1.410000s Real=1.416778s Sys=0.000000s
 Number of events processed: 10
-Number of optical photons produced in this run : 16506
-Number of feedback photons produced in this run : 50532
+Number of optical photons produced in this run : 16063
+Number of feedback photons produced in this run : 49202

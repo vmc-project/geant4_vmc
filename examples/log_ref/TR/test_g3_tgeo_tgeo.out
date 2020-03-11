@@ -1,10 +1,10 @@
-   ------------------------------------------------------------
-  | Welcome to ROOT 6.18/04                  https://root.cern |
-  |                               (c) 1995-2019, The ROOT Team |
-  | Built for macosx64 on Dec 20 2019, 12:31:00                |
-  | From tags/v6-18-04@v6-18-04                                |
-  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
-   ------------------------------------------------------------
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
+  | From tags/v6-20-00@v6-20-00                                      |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
 
 
 Processing load_g3.C...
@@ -54,11 +54,11 @@ fRadiatorMat = radiatorMat
 WorldMaterial = Air
 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    91602951     575C007 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   112165895     6AF8407 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    86192877    91602951
-                                        HEX     52332ED     575C007
+          with Store/Table at absolute adrs   106755821   112165895
+                                        HEX     65CF6ED     6AF8407
                                         HEX    FFAD712A           0
                               relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

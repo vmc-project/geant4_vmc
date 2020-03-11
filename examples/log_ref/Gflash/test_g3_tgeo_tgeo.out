@@ -1,10 +1,10 @@
-   ------------------------------------------------------------
-  | Welcome to ROOT 6.18/04                  https://root.cern |
-  |                               (c) 1995-2019, The ROOT Team |
-  | Built for macosx64 on Dec 20 2019, 12:31:00                |
-  | From tags/v6-18-04@v6-18-04                                |
-  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
-   ------------------------------------------------------------
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
+  | From tags/v6-20-00@v6-20-00                                      |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
 
 
 Processing load_g3.C...
@@ -41,7 +41,7 @@ The have width of 3 cm and a lenght of 24 cm. The Material is PbWO4
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.190
+Real time 0:00:00, CP time 0.200
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 1  -----
@@ -52,7 +52,7 @@ Real time 0:00:00, CP time 0.190
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.160
+Real time 0:00:00, CP time 0.180
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 2  -----
@@ -63,7 +63,7 @@ Real time 0:00:00, CP time 0.160
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.160
+Real time 0:00:00, CP time 0.170
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 3  -----
@@ -96,7 +96,7 @@ Real time 0:00:00, CP time 0.170
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.170
+Real time 0:00:00, CP time 0.190
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 6  -----
@@ -140,7 +140,7 @@ Real time 0:00:00, CP time 0.160
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.160
+Real time 0:00:00, CP time 0.200
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 10  -----
@@ -148,11 +148,11 @@ Real time 0:00:00, CP time 0.160
    e1  12.9978   e3x3  47.947   e5x5  48.6028 GeV
  Total energy deposited in the calorimeter: 49.7586 (GeV)
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   126394375     788A007 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    29782023     1C67007 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   120984301   126394375
-                                        HEX     73612ED     788A007
+          with Store/Table at absolute adrs    24371949    29782023
+                                        HEX     173E2ED     1C67007
                                         HEX    FFAD712A           0
                               relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

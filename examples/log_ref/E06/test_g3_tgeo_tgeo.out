@@ -1,10 +1,10 @@
-   ------------------------------------------------------------
-  | Welcome to ROOT 6.18/04                  https://root.cern |
-  |                               (c) 1995-2019, The ROOT Team |
-  | Built for macosx64 on Dec 20 2019, 12:31:00                |
-  | From tags/v6-18-04@v6-18-04                                |
-  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
-   ------------------------------------------------------------
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
+  | From tags/v6-20-00@v6-20-00                                      |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
 
 
 Processing load_g3.C...
@@ -71,11 +71,11 @@ Number of optical photons produced in this event : 2301
 Number of optical photons produced in this event : 2210
 Number of optical photons produced in this run : 21239
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    38246407     2479807 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   113481735     6C39807 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    32836333    38246407
-                                        HEX     1F50AED     2479807
+          with Store/Table at absolute adrs   108071661   113481735
+                                        HEX     6710AED     6C39807
                                         HEX    FFAD712A           0
                               relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -106,13 +106,13 @@ Number of optical photons produced in this run : 21239
  **** GTRIGI: IEVENT=      8 IDEVT=      8 Random Seeds =       4357           0
  **** GTRIGI: IEVENT=      9 IDEVT=      9 Random Seeds =       4357           0
  **** GTRIGI: IEVENT=     10 IDEVT=     10 Random Seeds =       4357           0
-   ------------------------------------------------------------
-  | Welcome to ROOT 6.18/04                  https://root.cern |
-  |                               (c) 1995-2019, The ROOT Team |
-  | Built for macosx64 on Dec 20 2019, 12:31:00                |
-  | From tags/v6-18-04@v6-18-04                                |
-  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q' |
-   ------------------------------------------------------------
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
+  | From tags/v6-20-00@v6-20-00                                      |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
 
 
 Processing load_g3.C...
@@ -190,11 +190,11 @@ Number of feedback photons produced in this event : 1586
 Number of optical photons produced in this run : 20829
 Number of feedback photons produced in this run : 15827
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    44089351     2A0C007 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    67721223     4095807 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    38679277    44089351
-                                        HEX     24E32ED     2A0C007
+          with Store/Table at absolute adrs    62311149    67721223
+                                        HEX     3B6CAED     4095807
                                         HEX    FFAD712A           0
                               relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
