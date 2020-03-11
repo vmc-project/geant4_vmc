@@ -15,7 +15,7 @@
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
-#define GEANT4_VMC_RELEASE "5.0"
-#define GEANT4_VMC_RELEASE_DATE "24 February 2020"
+#define GEANT4_VMC_RELEASE "5.1"
+#define GEANT4_VMC_RELEASE_DATE "11 March 2020"
 
 #endif // TG4_VERSION_H

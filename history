@@ -9,6 +9,17 @@
 
 Tags (history):
 ===============
+  11/03/2020
+  v5-1:
+    All packages:
+    - Migration to Geant4 10.6.p01
+      - Removed G4VIS_USE, G4UI_USE pre-processor options
+      - Updated CMake for using Geant4 cmake use file and removed UseGeant4.cmake.
+      - Updated size_t types in loops, process maps, TG4BiasingOperation
+
+    Tested with VMC 1.0, Geant4 10.6.p01 (with embedded CLHEP 2.4.1.3)
+      Root 6.20/00, VGM 4.8, Garfield master at 940d64b1a5be99a64
+
   24/02/2020
   v5-0:
     All packages:
