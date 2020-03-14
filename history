@@ -9,6 +9,15 @@
 
 Tags (history):
 ===============
+  14/03/2020
+  v5-0-p1:
+    Patch release, including following fixes:
+    Geant4 VMC, Examples:
+    - Fixed generation of root dictionary maps
+
+    Tested with VMC 1.0.p1, Geant4 10.5.p01 (with embedded CLHEP  2.4.1.0)
+      Root 6.20/00, VGM 4.6, Garfield master at c5efc3e352101b59e
+
   24/02/2020
   v5-0:
     All packages:
