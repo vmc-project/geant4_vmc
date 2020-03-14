@@ -131,14 +131,15 @@ ROOT_GENERATE_DICTIONARY(
   ${library_name}_dict
   ${CMAKE_CURRENT_SOURCE_DIR}/run/include/TG4RunConfiguration.h
   ${CMAKE_CURRENT_SOURCE_DIR}/run/include/TGeant4.h
+  MODULE ${library_name}
   LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/${library_name}LinkDef.h)
 
 # Files produced by the dictionary generation
 SET(root_dict
   ${library_name}_dict.cxx)
 SET(root_dict_libs
-  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${library_name}_dict_rdict.pcm
-  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${library_name}_dict.rootmap)
+  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${library_name}_rdict.pcm
+  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${library_name}.rootmap)
 
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project

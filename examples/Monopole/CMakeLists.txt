@@ -55,15 +55,15 @@ ROOT_GENERATE_DICTIONARY(
   ${CMAKE_CURRENT_SOURCE_DIR}/include/MCApplication.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/DetectorConstruction.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03MCStack.h
+  MODULE ${library_name}
   LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/${program_name}LinkDef.h)
 
 # Files produced by the dictionary generation
 set(root_dict
   ${library_name}_dict.cxx)
 set(root_dict_lib
-  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${library_name}_dict_rdict.pcm)
-#set(root_map
-#  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${library_name}_dict.rootmap)
+  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${library_name}_rdict.pcm)
+#  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${library_name}.rootmap)
 
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
@@ -85,7 +85,6 @@ target_link_libraries(${library_name} ${VMCPackages_LIBRARIES})
 if (VMC_INSTALL_EXAMPLES)
   install(TARGETS ${library_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
   install(FILES ${root_dict_lib} DESTINATION ${CMAKE_INSTALL_LIBDIR})
-#  install(FILES ${root_map} DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()
 
 #----------------------------------------------------------------------------
