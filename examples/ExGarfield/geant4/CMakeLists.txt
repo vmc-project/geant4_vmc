@@ -52,15 +52,15 @@ include_directories(
 ROOT_GENERATE_DICTIONARY(
   ${g4library_name}_dict
   ${CMAKE_CURRENT_SOURCE_DIR}/include/RunConfiguration.h
+  MODULE ${g4library_name}
   LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}LinkDef.h)
 
 # Files produced by the dictionary generation
 set(root_dict
   ${g4library_name}_dict.cxx)
 set(root_dict_lib
-  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}_dict_rdict.pcm)
-#set(root_map
-#  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}_dict.rootmap)
+  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}_rdict.pcm)
+#  ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${g4library_name}.rootmap)
 
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
@@ -88,5 +88,4 @@ add_custom_target(${PROJECT_NAME} DEPENDS ${g4library_name})
 if (VMC_INSTALL_EXAMPLES)
   install(TARGETS ${g4library_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
   install(FILES ${root_dict_lib} DESTINATION ${CMAKE_INSTALL_LIBDIR})
-#  install(FILES ${root_map} DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()
