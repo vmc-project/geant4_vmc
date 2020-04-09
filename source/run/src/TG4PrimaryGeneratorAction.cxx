@@ -317,7 +317,6 @@ void TG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
   if (!fCached) {
     fParticlesManager = TG4ParticlesManager::Instance();
     fTrackManager = TG4TrackManager::Instance();
-    fMCStack = vmc->GetStack();
     fMCManagerStack = vmc->GetManagerStack();
     fCached = true;
   }
@@ -328,8 +327,9 @@ void TG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
     mcApplication->BeginEvent();
   }
 
-  // Update cached pointer to MC stack which is set to MC in some application
-  // only in MCApplication::BeginEvent()
+  // Update cached pointer to MC stack which can changed in some applications
+  // in MCApplication::BeginEvent()
+  fMCStack = vmc->GetStack();
   runManager->CacheMCStack();
 
   // Clear cached VMC stack info from former event
