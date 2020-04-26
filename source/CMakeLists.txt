@@ -132,6 +132,9 @@ ROOT_GENERATE_DICTIONARY(
   TG4RunConfiguration.h
   TGeant4.h
   MODULE ${library_name}
+  OPTIONS "-I${CMAKE_INSTALL_PREFIX}/include/${library_name}"
+    -excludePath "${CMAKE_CURRENT_BINARY_DIR}"
+    -excludePath "${PROJECT_SOURCE_DIR}"
   LINKDEF ${library_name}LinkDef.h)
 
 # Files produced by the dictionary generation
