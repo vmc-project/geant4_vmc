@@ -53,17 +53,17 @@ include_directories(
 #
 ROOT_GENERATE_DICTIONARY(
   ${library_name}_dict
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex02MCApplication.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex02MCStack.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex02Particle.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex02ChamberParameterisation.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex02DetectorConstruction.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex02DetectorConstructionOld.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex02MagField.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex02TrackerHit.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex02TrackerSD.h
+  Ex02MCApplication.h
+  Ex02MCStack.h
+  Ex02Particle.h
+  Ex02ChamberParameterisation.h
+  Ex02DetectorConstruction.h
+  Ex02DetectorConstructionOld.h
+  Ex02MagField.h
+  Ex02TrackerHit.h
+  Ex02TrackerSD.h
   MODULE ${library_name}
-  LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/${program_name}LinkDef.h)
+  LINKDEF include/${program_name}LinkDef.h)
 
 # Files produced by the dictionary generation
 set(root_dict

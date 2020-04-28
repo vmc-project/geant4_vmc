@@ -44,12 +44,12 @@ include_directories(
 #
 ROOT_GENERATE_DICTIONARY(
   ${g4library_name}_dict
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03RunConfiguration1.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03RunConfiguration2.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03RunConfiguration3.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03RunConfiguration4.h
+  Ex03RunConfiguration1.h
+  Ex03RunConfiguration2.h
+  Ex03RunConfiguration3.h
+  Ex03RunConfiguration4.h
   MODULE ${g4library_name}
-  LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}LinkDef.h)
+  LINKDEF include/${PROJECT_NAME}LinkDef.h)
 
 # Files produced by the dictionary generation
 set(root_dict

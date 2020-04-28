@@ -44,9 +44,9 @@ include_directories(
 #
 ROOT_GENERATE_DICTIONARY(
   ${g4library_name}_dict
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01RunConfiguration.h
+  A01RunConfiguration.h
   MODULE ${g4library_name}
-  LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}LinkDef.h)
+  LINKDEF include/${PROJECT_NAME}LinkDef.h)
 
 # Files produced by the dictionary generation
 set(root_dict
