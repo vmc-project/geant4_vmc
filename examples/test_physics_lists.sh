@@ -19,6 +19,14 @@
 CURDIR=`pwd`
 OUTDIR=$CURDIR/log/test_physics_lists
 
+# When running on Mac with SIP enabled, the LD_LIBRARY_PATH must be defined
+# via another env variable
+RUN_ENV=""
+if [[ ${ROOT_LD_LIBRARY_PATH} ]]
+then
+  RUN_ENV="env LD_LIBRARY_PATH=${ROOT_LD_LIBRARY_PATH} "
+fi
+
 # Define path to optional data files
 #
 # 10.4
@@ -64,7 +72,7 @@ do
 
     # Run test
     echo "... Running test with $G4PHYSICS_LIST"
-    root.exe -q -b load_g4a.C test_E03_pl.C\(\"g4ConfigEnv.C\"\) >& $OUTDIR/TMP.out
+    $RUN_ENV root.exe -q -b load_g4a.C test_E03_pl.C\(\"g4ConfigEnv.C\"\) >& $OUTDIR/TMP.out
     EXIT_STATUS=$?
 
     # Extract warnings

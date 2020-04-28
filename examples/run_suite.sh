@@ -26,6 +26,14 @@ TESTG4="1"
 TESTMULTI="1"
 TESTGARFIELD="1"
 
+# When running on Mac with SIP enabled, the LD_LIBRARY_PATH must be defined
+# via another env variable
+RUN_ENV=""
+if [[ ${ROOT_LD_LIBRARY_PATH} ]]
+then
+  RUN_ENV="env LD_LIBRARY_PATH=${ROOT_LD_LIBRARY_PATH} "
+fi
+
 # The default list of examples (all)
 ALL_EXAMPLES="E01 E02 E03 E06 A01 ExGarfield Gflash Monopole TR"
 EXAMPLES="$ALL_EXAMPLES"
@@ -37,13 +45,13 @@ EXAMPLES="$ALL_EXAMPLES"
 function run_mc()
 {
   echo "    - with ${1}, config ${3}"
-  root.exe -q -b load_${1}.C run_${2}.C\(\"${3}Config.C\"\) >& $OUT/run_${1}.out
+  $RUN_ENV root.exe -q -b load_${1}.C run_${2}.C\(\"${3}Config.C\"\) >& $OUT/run_${1}.out
 }
 
 function run_multi()
 {
   echo "    - with multiple engines"
-  root.exe -q -b load_multi.C run_multi.C >& $OUT/run_multi.out
+  $RUN_env root.exe -q -b load_multi.C run_multi.C >& $OUT/run_multi.out
 }
 
 # Process script arguments
