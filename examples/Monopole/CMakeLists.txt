@@ -52,11 +52,11 @@ include_directories(
 #
 ROOT_GENERATE_DICTIONARY(
   ${library_name}_dict
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/MCApplication.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/DetectorConstruction.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03MCStack.h
+  MCApplication.h
+  DetectorConstruction.h
+  Ex03MCStack.h
   MODULE ${library_name}
-  LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/${program_name}LinkDef.h)
+  LINKDEF include/${program_name}LinkDef.h)
 
 # Files produced by the dictionary generation
 set(root_dict
