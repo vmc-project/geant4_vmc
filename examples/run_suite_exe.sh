@@ -26,6 +26,14 @@ TESTG3="1"
 TESTG4="1"
 TESTMULTI="1"
 
+# When running on Mac with SIP enabled, the LD_LIBRARY_PATH must be defined
+# via another env variable
+RUN_ENV=""
+if [[ ${ROOT_LD_LIBRARY_PATH} ]]
+then
+  RUN_ENV="env LD_LIBRARY_PATH=${ROOT_LD_LIBRARY_PATH} "
+fi
+
 # Run Garfield optionally
 TESTGARFIELD="1"
 
@@ -38,7 +46,7 @@ EXAMPLES="$ALL_EXAMPLES"
 function run_mc_exe()
 {
   echo "... Running ${1}vmc_example$EXAMPLE"
-  ${1}vmc_example$EXAMPLE >& $OUT/${1}vmc_example$EXAMPLE.out
+  $RUN_ENV ${1}vmc_example$EXAMPLE >& $OUT/${1}vmc_example$EXAMPLE.out
 }
 
 # Function arguments:
@@ -46,7 +54,7 @@ function run_mc_exe()
 function run_mc_exe_option()
 {
   echo "... Running ${1}vmc_example$EXAMPLE${2}"
-  ${1}vmc_example$EXAMPLE${2} >& $OUT/${1}vmc_example$EXAMPLE${2}.out
+  $RUN_ENV ${1}vmc_example$EXAMPLE${2} >& $OUT/${1}vmc_example$EXAMPLE${2}.out
 }
 
 # Process script arguments

@@ -33,6 +33,14 @@ BUILDDIR=""
 # Run Garfield only with Root 5
 TESTGARFIELD="1"
 
+# When running on Mac with SIP enabled, the LD_LIBRARY_PATH must be defined
+# via another env variable
+RUN_ENV=""
+if [[ ${ROOT_LD_LIBRARY_PATH} ]]
+then
+  RUN_ENV="env LD_LIBRARY_PATH=${ROOT_LD_LIBRARY_PATH} "
+fi
+
 # The default list of examples (all)
 ALL_EXAMPLES="E01 E02 E03 E06 A01 ExGarfield Gflash Monopole TR"
 EXAMPLES="$ALL_EXAMPLES"
@@ -116,7 +124,9 @@ do
   cd $CURDIR/$EXAMPLE
 
   if [ "x${BUILDDIR}" != "x" ]; then
-    EXEDIR=${BUILDDIR}/examples/$EXAMPLE/
+    EXEDIR="$RUN_ENV ${BUILDDIR}/examples/$EXAMPLE/"
+  else
+    EXEDIR="$RUN_ENV "    
   fi
 
   echo "... Example $EXAMPLE"

@@ -46,6 +46,14 @@ BUILDDIR=""
 # Run Garfield optionally
 TESTGARFIELD="1"
 
+# When running on Mac with SIP enabled, the LD_LIBRARY_PATH must be defined
+# via another env variable
+RUN_ENV=""
+if [[ ${ROOT_LD_LIBRARY_PATH} ]]
+then
+  RUN_ENV="env LD_LIBRARY_PATH=${ROOT_LD_LIBRARY_PATH} "
+fi
+
 # Root command with loading g3/g4 libraries
 RUNG3="root.exe -b -q load_g3.C"
 RUNG4="root.exe -b -q load_g4.C"
@@ -91,7 +99,7 @@ function run_test_case()
     then
       echo "Exactly 1 argument requried for run_test_case(), namely a run string"
     else
-      local run_string="$1"
+      local run_string="$RUN_ENV $1"
       local log_file_tmp=$TMPDIR/test_${CURRENT_TEST}_tmp.out
       CURRENT_TEST_CASE=`expr $CURRENT_TEST_CASE + 1`
       if [[ "$DEBUG" == "1" ]]
