@@ -53,13 +53,13 @@ include_directories(
 #
 ROOT_GENERATE_DICTIONARY(
   ${library_name}_dict
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex06MCApplication.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03MCStack.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex06DetectorConstruction.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex06DetectorConstructionOld.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex06PrimaryGenerator.h
+  Ex06MCApplication.h
+  Ex03MCStack.h
+  Ex06DetectorConstruction.h
+  Ex06DetectorConstructionOld.h
+  Ex06PrimaryGenerator.h
   MODULE ${library_name}
-  LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/${program_name}LinkDef.h)
+  LINKDEF include/${program_name}LinkDef.h)
 
 # Files produced by the dictionary generation
 set(root_dict

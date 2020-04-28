@@ -53,22 +53,22 @@ include_directories(
 #
 ROOT_GENERATE_DICTIONARY(
   ${library_name}_dict
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01MCApplication.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Ex03MCStack.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01MagField.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01LocalMagField.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01DriftChamberHit.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01EmCalorHit.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01HadCalorHit.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01HodoscopeHit.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01DriftChamberSD.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01EmCalorimeterSD.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01HadCalorimeterSD.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01HodoscopeSD.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01PrimaryGenerator.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/A01RootDetectorConstruction.h
+  A01MCApplication.h
+  Ex03MCStack.h
+  A01MagField.h
+  A01LocalMagField.h
+  A01DriftChamberHit.h
+  A01EmCalorHit.h
+  A01HadCalorHit.h
+  A01HodoscopeHit.h
+  A01DriftChamberSD.h
+  A01EmCalorimeterSD.h
+  A01HadCalorimeterSD.h
+  A01HodoscopeSD.h
+  A01PrimaryGenerator.h
+  A01RootDetectorConstruction.h
   MODULE ${library_name}
-  LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/${program_name}LinkDef.h)
+  LINKDEF include/${program_name}LinkDef.h)
 
 # Files produced by the dictionary generation
 set(root_dict
