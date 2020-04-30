@@ -9,6 +9,24 @@
 
 Tags (history):
 ===============
+30/04/2020
+  v5-1-p1:
+    Patch release, including following fixes:
+    Geant4 VMC:
+    - Fixed caching pointers in TG4PrimaryGeneratorAction:
+      this fixes a break in AliRoot where the stack is passed to MC only in BeginEvent()
+    - Fixed generation of root dictionary maps
+    - Restored the dictionaries relocability, improve security and clean up for packaging
+      (Thanks to Christian Tacke, GSI.)
+
+    Examples:
+    - Fixed generation of root dictionary maps
+    - Restored the dictionaries relocability
+    - Delete examples rootmap files in the build directory
+
+    Tested with VMC 1.0.p2, Geant4 10.6.p01 (with embedded CLHEP 2.4.1.3)
+      Root 6.20/00, VGM 4.8, Garfield master at 940d64b1a5be99a64
+
   11/03/2020
   v5-1:
     All packages:
