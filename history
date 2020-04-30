@@ -9,6 +9,20 @@
 
 Tags (history):
 ===============
+  30/04/2020
+  v5-0-p3:
+    Patch release, including following fixes:
+    Geant4 VMC:
+    - Restored the dictionaries relocability, improve security and clean up for packaging
+      (Thanks to Christian Tacke, GSI.)
+
+    Examples:
+    - Restored the dictionaries relocability
+    - Delete examples rootmap files in the build directory
+
+    Tested with VMC 1.0.p2, Geant4 10.5.p01 (with embedded CLHEP  2.4.1.0)
+      Root 6.20/00, VGM 4.7, Garfield master at c5efc3e352101b59e
+
   09/04/2020
   v5-0-p2:
     Patch release, including following fixes:
