@@ -609,10 +609,10 @@ void TG4GeometryManager::ConstructGlobalField()
         monFieldSetup->SetDefaultStepper(tg4Field->GetStepper());
         monFieldSetup->InitialiseAll();
       }
+    }
 
-      if (fIsZeroField) {
-        ConstructZeroFields();
-      }
+    if (fIsZeroField) {
+      ConstructZeroFields();
     }
   }
 }
