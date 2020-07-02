@@ -9,6 +9,15 @@
 
 Tags (history):
 ===============
+  02/07/2020
+  v5-0-p4:
+    Patch release, including following fixes:
+    Geant4 VMC:
+    - Fix in applying zero magnetic fields.
+
+    Tested with VMC 1.0.p2, Geant4 10.5.p01 (with embedded CLHEP  2.4.1.0)
+      Root 6.20/00, VGM 4.7, Garfield master at c5efc3e352101b59e
+
   30/04/2020
   v5-0-p3:
     Patch release, including following fixes:
