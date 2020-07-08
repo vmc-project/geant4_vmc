@@ -9,6 +9,24 @@
 
 Tags (history):
 ===============
+  08/07/2020
+  v5-0-p5:
+    Patch release, with back-ported developments from master
+    in order to make them available with Geant4 10.5.px:
+    Geant4 VMC:
+    - Added commands for user control of the parameters for killing looping particles:
+        /mcPhysics/useLowLooperThresholds
+        /mcPhysics/useHighLooperThresholds
+        /mcRun/setLooperThresholdWarningEnergy value unit
+        /mcRun/setLooperThresholImportantEnergy value unit
+        /mcRun/setNumberOfLooperThresholdTrials value
+    - Increase RunAction verbosity level to 3:
+      Level 2 just adds printing of summary of looping thresholds;
+      level 3 adds all other debug printings
+
+    Tested with VMC 1.0.p2, Geant4 10.5.p01 (with embedded CLHEP  2.4.1.0)
+      Root 6.22/00, VGM 4.7, Garfield master at c5efc3e352101b59e
+
   02/07/2020
   v5-0-p4:
     Patch release, including following fixes:
