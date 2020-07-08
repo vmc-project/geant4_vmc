@@ -22,6 +22,8 @@ class TG4RunAction;
 class G4UIdirectory;
 class G4UIcmdWithAString;
 class G4UIcmdWithABool;
+class G4UIcmdWithADoubleAndUnit;
+class G4UIcmdWithAnInteger;
 
 /// \ingroup event
 /// \brief Messenger class that defines commands for TG4RunAction.
@@ -30,6 +32,9 @@ class G4UIcmdWithABool;
 /// - /mcRun/saveRandom [true|false]
 /// - /mcRun/readRandom [true|false]
 /// - /mcRun/setRandomFile fileName
+/// - /mcRun/setLooperThresholdWarningEnergy value unit
+/// - /mcRun/setLooperThresholImportantEnergy value unit
+/// - /mcRun/setNumberOfLooperThresholdTrials value
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -56,6 +61,15 @@ class TG4RunActionMessenger : public G4UImessenger
   G4UIcmdWithABool* fSaveRandomStatusCmd;   ///< command: saveRandom
   G4UIcmdWithABool* fReadRandomStatusCmd;   ///< command: readRandom
   G4UIcmdWithAString* fRandomStatusFileCmd; ///< command: setRandomFile
+
+  /// setLooperThresholdWarningEnergy command
+  G4UIcmdWithADoubleAndUnit* fSetLooperThresholdWarningEnergyCmd;
+
+  /// setLooperThresholImportantEnergy command
+  G4UIcmdWithADoubleAndUnit* fSetLooperThresholdImportantEnergyCmd;
+
+  /// setNumberOfLooperThresholdTrials
+  G4UIcmdWithAnInteger* fSetNumberOfLooperThresholdTrialsCmd;
 };
 
 #endif // TG4_RUN_ACTION_MESSENGER_H

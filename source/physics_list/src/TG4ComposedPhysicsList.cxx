@@ -19,13 +19,28 @@
 #include <G4Electron.hh>
 #include <G4Gamma.hh>
 #include <G4GammaConversionToMuons.hh>
+#include <G4PhysicsListHelper.hh>
 #include <G4Positron.hh>
 #include <G4ProcessManager.hh>
 #include <G4ProcessTable.hh>
 #include <G4Proton.hh>
 #include <G4RegionStore.hh>
 #include <G4SystemOfUnits.hh>
+#include <G4Transportation.hh>
 #include <G4VUserPhysicsList.hh>
+
+namespace {
+
+G4Transportation*
+FindTransportation(const G4ParticleDefinition* particleDefinition)
+{
+  const auto* processManager = particleDefinition->GetProcessManager();
+  return dynamic_cast<G4Transportation*>(processManager->GetProcess("Transportation"));
+}
+
+}
+
+const G4double TG4ComposedPhysicsList::fgkDefautLooperThresholdsLevel = 1;
 
 //_____________________________________________________________________________
 TG4ComposedPhysicsList::TG4ComposedPhysicsList()
@@ -36,7 +51,8 @@ TG4ComposedPhysicsList::TG4ComposedPhysicsList()
     fIsProductionCutsTableEnergyRange(false),
     fProductionCutsTableEnergyMin(0.),
     fProductionCutsTableEnergyMax(0.),
-    fGammaToMuonsCrossSectionFactor(-1.)
+    fGammaToMuonsCrossSectionFactor(-1.),
+    fLooperThresholdsLevel(fgkDefautLooperThresholdsLevel)
 {
   /// Default constructor
 
@@ -93,6 +109,35 @@ void TG4ComposedPhysicsList::ApplyGammaToMuonsCrossSectionFactor()
   }
 }
 
+//_____________________________________________________________________________
+void TG4ComposedPhysicsList::SetLooperThresholds()
+{
+  /// Apply the looper thresholds level
+  auto plHelper = G4PhysicsListHelper::GetPhysicsListHelper();
+  if ( fLooperThresholdsLevel == 0 ) {
+    if (VerboseLevel() > 0) {
+      G4cout << "### Use low looper thresholds" << G4endl;
+    }
+    plHelper->UseLowLooperThresholds();
+  }
+  else if ( fLooperThresholdsLevel == 1 ) {
+    // Do nothing: Geant4 defaults
+  }
+  else if ( fLooperThresholdsLevel == 2 ) {
+    if (VerboseLevel() > 0) {
+      G4cout << "### Use high looper thresholds" << G4endl;
+    }
+    plHelper->UseHighLooperThresholds();
+  }
+  else {
+    TString message = "The level";
+    message += fLooperThresholdsLevel;
+    message += " is not supported (the value must be 0, 1 or 2.)";
+    TG4Globals::Warning("TG4ComposedPhysicsList",
+      "SetPresetLooperThresholds", message);
+  }
+}
+
 //
 // public methods
 //
@@ -132,6 +177,9 @@ void TG4ComposedPhysicsList::ConstructProcess()
   TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
   g3PhysicsManager->Lock();
 
+  // set looper thresholds level
+  SetLooperThresholds();
+
   for (G4int i = 0; i < G4int(fPhysicsLists.size()); i++) {
     fPhysicsLists[i]->ConstructProcess();
   }
@@ -141,6 +189,14 @@ void TG4ComposedPhysicsList::ConstructProcess()
   }
 
   if (VerboseLevel() > 1)
+    if ( fLooperThresholdsLevel != fgkDefautLooperThresholdsLevel ) {
+      // Print looper thresholds
+      auto transportation = FindTransportation(G4Electron::Electron());
+      if ( transportation ) {
+        transportation->ReportLooperThresholds();
+      }
+    }
+
     G4cout << "TG4ComposedPhysicsList::ConstructProcess done" << G4endl;
 }
 

@@ -159,6 +159,18 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
     "HadronicProcessStoreVerbose", false);
   fG4HadronicProcessStoreVerboseCmd->AvailableForStates(
     G4State_PreInit, G4State_Idle);
+
+  fUseLowLooperThresholdsCmd =
+    new G4UIcmdWithoutParameter("/mcPhysics/useLowLooperThresholds", this);
+  fUseLowLooperThresholdsCmd->SetGuidance(
+    "Set lower thresholds for killing particles looping in magnetic field.");
+  fUseLowLooperThresholdsCmd->AvailableForStates(G4State_PreInit);
+
+  fUseHighLooperThresholdsCmd =
+    new G4UIcmdWithoutParameter("/mcPhysics/useHighLooperThresholds", this);
+  fUseHighLooperThresholdsCmd->SetGuidance(
+    "Set higher thresholds for killing particles looping in magnetic field.");
+  fUseHighLooperThresholdsCmd->AvailableForStates(G4State_PreInit);
 }
 
 //______________________________________________________________________________
@@ -183,6 +195,8 @@ TG4ComposedPhysicsMessenger::~TG4ComposedPhysicsMessenger()
   delete fPrintGlobalControlsCmd;
   delete fG4NeutronHPVerboseCmd;
   delete fG4HadronicProcessStoreVerboseCmd;
+  delete fUseLowLooperThresholdsCmd;
+  delete fUseHighLooperThresholdsCmd;
 }
 
 //
@@ -303,5 +317,11 @@ void TG4ComposedPhysicsMessenger::SetNewValue(
   else if (command == fG4HadronicProcessStoreVerboseCmd) {
     G4HadronicProcessStore::Instance()->SetVerbose(
       fG4HadronicProcessStoreVerboseCmd->GetNewIntValue(newValue));
+  }
+  else if (command == fUseLowLooperThresholdsCmd) {
+    fPhysicsList->SetLooperThresholdsLevel(0);
+  }
+  else if (command == fUseHighLooperThresholdsCmd) {
+    fPhysicsList->SetLooperThresholdsLevel(2);
   }
 }

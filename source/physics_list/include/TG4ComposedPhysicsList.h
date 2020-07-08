@@ -51,6 +51,7 @@ class TG4ComposedPhysicsList : public G4VUserPhysicsList, public TG4Verbose
 
   void SetProductionCutsTableEnergyRange(G4double min, G4double max);
   void SetGammaToMuonsCrossSectionFactor(G4double value);
+  void SetLooperThresholdsLevel(G4int level);
 
   void PrintAllProcesses() const;
   void DumpAllProcesses() const;
@@ -66,9 +67,10 @@ class TG4ComposedPhysicsList : public G4VUserPhysicsList, public TG4Verbose
 
   // methods
   void ApplyGammaToMuonsCrossSectionFactor();
+  void SetLooperThresholds();
 
   // static data members
-  static const G4double fgkDefautCut; ///< the default cut value
+  static const G4double fgkDefautLooperThresholdsLevel; ///< the default cut value
 
   // data members
   TG4ComposedPhysicsMessenger fMessenger;         ///< messenger
@@ -85,6 +87,9 @@ class TG4ComposedPhysicsList : public G4VUserPhysicsList, public TG4Verbose
 
   /// Gamma to muons cross section factor
   G4double fGammaToMuonsCrossSectionFactor;
+
+  /// Looper threshold level (can have valuee 0,1,2)
+  G4int fLooperThresholdsLevel;
 };
 
 // inline methods
@@ -94,6 +99,13 @@ inline void TG4ComposedPhysicsList::SetGammaToMuonsCrossSectionFactor(
 {
   /// Set gamma to muons cross section factor
   fGammaToMuonsCrossSectionFactor = value;
+}
+
+inline void TG4ComposedPhysicsList::SetLooperThresholdsLevel(
+  G4int level)
+{
+  /// Set gamma to muons cross section factor
+  fLooperThresholdsLevel = level;
 }
 
 #endif // TG4_COMPOSED_MODULAR_PHYSICS_H

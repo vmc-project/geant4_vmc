@@ -46,12 +46,19 @@ class TG4RunAction : public G4UserRunAction, public TG4Verbose
   void SetSaveRandomStatus(G4bool saveRandomStatus);
   void SetReadRandomStatus(G4bool readRandomStatus);
   void SetRandomStatusFile(G4String RandomStatusFile);
+  void SetThresholdWarningEnergy(G4double value);
+  void SetThresholdImportantEnergy(G4double value);
+  void SetNumberOfThresholdTrials(G4int value);
 
  private:
   /// Not implemented
   TG4RunAction(const TG4RunAction& right);
   /// Not implemented
   TG4RunAction& operator=(const TG4RunAction& right);
+
+  // methods
+  void ChangeLooperParameters(const G4ParticleDefinition* particleDefinition);
+  void PrintLooperParameters() const;
 
   // static data members
   /// default name of the random engine status file to be read in
@@ -65,6 +72,16 @@ class TG4RunAction : public G4UserRunAction, public TG4Verbose
   G4bool fSaveRandomStatus;   ///< control for saving random engine status
   G4bool fReadRandomStatus;   ///< control for reading random engine status
   G4String fRandomStatusFile; ///< random engine status file name
+
+  /// Energy threshold for warnings about killing looping tracks
+  G4double fThresholdWarningEnergy;
+
+  /// Important energy threshold:
+  /// it enables tracks above its value to survive a chosen number of ‘tracking’ steps
+  G4double fThresholdImportantEnergy;
+
+  /// Number of trials to propagate a looping track
+  G4int fNumberOfThresholdTrials;
 };
 
 inline void TG4RunAction::SetSaveRandomStatus(G4bool saveRandomStatus)
@@ -84,5 +101,21 @@ inline void TG4RunAction::SetRandomStatusFile(G4String RandomStatusFile)
   /// Set random engine status file name
   fRandomStatusFile = RandomStatusFile;
 }
+
+inline void TG4RunAction::SetThresholdWarningEnergy(G4double value)
+{
+  fThresholdWarningEnergy = value;
+}
+
+inline void TG4RunAction::SetThresholdImportantEnergy(G4double value)
+{
+  fThresholdImportantEnergy = value;
+}
+
+inline void TG4RunAction::SetNumberOfThresholdTrials(G4int value)
+{
+  fNumberOfThresholdTrials = value;
+}
+
 
 #endif // TG4_RUN_ACTION_H

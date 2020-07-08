@@ -46,6 +46,8 @@ class G4UIcmdWithAnInteger;
 /// - /mcPhysics/printGlobalControls
 /// - /mcPhysics/g4NeutronHPVerbose
 /// - /mcPhysics/g4HadronicProcessStoreVerbose
+/// - /mcPhysics/useLowLooperThresholds
+/// - /mcPhysics/useHighLooperThresholds
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
@@ -126,6 +128,12 @@ class TG4ComposedPhysicsMessenger : public G4UImessenger
 
   /// g4HadronicProcessStoreVerbose command
   G4UIcmdWithAnInteger* fG4HadronicProcessStoreVerboseCmd;
+
+  /// useLowerLooperThresholds command
+  G4UIcmdWithoutParameter* fUseLowLooperThresholdsCmd;
+
+  /// useHigherLooperThresholds command
+  G4UIcmdWithoutParameter* fUseHighLooperThresholdsCmd;
 };
 
 #endif // TG4_COMPOSED_PHYSICS_MESSENGER_H
