@@ -154,7 +154,8 @@ void TG4GeometryManager::CreateMCGeometry()
     fMCGeometry = new TG4MCGeometry();
   }
 
-  if (fUserGeometry == "VMCtoRoot" || fUserGeometry == "Root") {
+  if (fUserGeometry == "VMCtoRoot" || fUserGeometry == "Root" ||
+      fUserGeometry == "VMC+RootToGeant4" ) {
     if (!gGeoManager) new TGeoManager("TGeo", "Root geometry manager");
     fMCGeometry = new TGeoMCGeometry();
   }
@@ -291,7 +292,8 @@ void TG4GeometryManager::ConstructG4Geometry()
   }
 
   // VMC application construct geometry
-  if (fUserGeometry == "RootToGeant4") {
+  if (fUserGeometry == "RootToGeant4" ||
+      fUserGeometry == "VMC+RootToGeant4") {
     if (VerboseLevel() > 1)
       G4cout << "Running TVirtualMCApplication::ConstructGeometry" << G4endl;
 
@@ -315,7 +317,8 @@ void TG4GeometryManager::ConstructG4Geometry()
   // Build G4 geometry
   if (fUserGeometry == "VMCtoGeant4") ConstructG4GeometryViaVMC();
 
-  if (fUserGeometry == "RootToGeant4") ConstructG4GeometryViaVGM();
+  if (fUserGeometry == "RootToGeant4" ||
+      fUserGeometry == "VMC+RootToGeant4") ConstructG4GeometryViaVGM();
 
   // print G4 geometry statistics
   if (VerboseLevel() > 0) {
@@ -535,7 +538,7 @@ void TG4GeometryManager::FillMediumMap()
   if (fUserGeometry == "VMCtoGeant4") FillMediumMapFromG3();
 
   if (fUserGeometry == "VMCtoRoot" || fUserGeometry == "Root" ||
-      fUserGeometry == "RootToGeant4") {
+      fUserGeometry == "RootToGeant4" || fUserGeometry == "VMC+RootToGeant4" ) {
     FillMediumMapFromRoot();
   }
 
