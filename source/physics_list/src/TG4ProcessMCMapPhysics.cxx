@@ -246,6 +246,7 @@ void TG4ProcessMCMapPhysics::FillMap(G4bool isBiasing)
   mcMap->Add("G4MaxTimeCuts", kPStop);
   mcMap->Add("stackPopper", kPUserDefined);
 
+  mcMap->Add("biasLimiter", kPNull);
   mcMap->Add("biasWrapper(0)", kPNull);
   mcMap->Add("GammaGeneralProc", kPNull);
 }

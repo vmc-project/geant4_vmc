@@ -219,6 +219,7 @@ void TG4ProcessControlMapPhysics::FillMap(G4bool isBiasing)
   controlMap->Add("SynRad", kSYNC);
   controlMap->Add("CHIPS_SynchrotronRadiation", kSYNC);
 
+  controlMap->Add("biasLimiter", kNoG3Controls);
   controlMap->Add("biasWrapper(0)", kNoG3Controls);
   controlMap->Add("GammaGeneralProc", kNoG3Controls);
 }
@@ -269,7 +270,7 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
           processName != "StrawXTRadiator" &&
           processName != "RegularXTRadiator" &&
           processName != "G4MaxTimeCuts" && processName != "biasWrapper(0)" &&
-          processName != "GammaGeneralProc") {
+          processName != "GammaGeneralProc" && processName != "biasLimiter") {
 
         G4String text = "Unknown process control for ";
         text += processName;
