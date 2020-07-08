@@ -21,8 +21,13 @@
 #include "TG4RunAction.h"
 #include "TGeant4.h"
 
-#include "G4AutoLock.hh"
+#include <G4Types.hh>
+#include <G4AutoLock.hh>
+#include <G4Electron.hh>
+#include <G4Positron.hh>
 #include <G4Run.hh>
+#include <G4SystemOfUnits.hh>
+#include <G4Transportation.hh>
 #include <G4UImanager.hh>
 #include <Randomize.hh>
 
@@ -30,13 +35,22 @@
 
 // mutex in a file scope
 
-#ifdef G4MULTITHREADED
 namespace
 {
+
+#ifdef G4MULTITHREADED
 // Mutex to lock master application when merging data
 G4Mutex mergeMutex = G4MUTEX_INITIALIZER;
-} // namespace
 #endif
+
+G4Transportation*
+FindTransportation(const G4ParticleDefinition* particleDefinition)
+{
+  const auto* processManager = particleDefinition->GetProcessManager();
+  return dynamic_cast<G4Transportation*>(processManager->GetProcess("Transportation"));
+}
+
+} // namespace
 
 const G4String TG4RunAction::fgkDefaultRandomStatusFile = "currentRun.rndm";
 
@@ -50,7 +64,10 @@ TG4RunAction::TG4RunAction()
     fRunID(-1),
     fSaveRandomStatus(false),
     fReadRandomStatus(false),
-    fRandomStatusFile(fgkDefaultRandomStatusFile)
+    fRandomStatusFile(fgkDefaultRandomStatusFile),
+    fThresholdWarningEnergy(-1.0),
+    fThresholdImportantEnergy(-1.0),
+    fNumberOfThresholdTrials(0)
 {
   /// Default constructor
 
@@ -69,6 +86,69 @@ TG4RunAction::~TG4RunAction()
     G4cout << "TG4RunAction::~TG4RunAction " << this << G4endl;
 
   delete fTimer;
+}
+
+//
+// private methods
+//
+
+//_____________________________________________________________________________
+void TG4RunAction::ChangeLooperParameters(
+  const G4ParticleDefinition* particleDefinition)
+{
+  // Nothing to be done if no parameters change
+  if ( fThresholdWarningEnergy < 0. && fThresholdImportantEnergy < 0. &&
+       fNumberOfThresholdTrials == 0 ) {
+    return;
+  }
+
+  auto* transportation = FindTransportation(particleDefinition);
+  if (! transportation ) {
+    TG4Globals::Warning("TG4RunAction",
+      "ChangeLooperParameters",
+      "Cannot set parameters. Transportation process not found.");
+    return;
+  }
+
+  if ( fThresholdWarningEnergy >= 0. )  {
+    if (VerboseLevel() > 1) {
+      G4cout << "ChangeLooperParameters: ThresholdWarningEnergy [keV] = "
+             << fThresholdWarningEnergy/keV << G4endl;
+    }
+    transportation->SetThresholdWarningEnergy(fThresholdWarningEnergy);
+  }
+
+  if ( fThresholdImportantEnergy >= 0. )  {
+    if (VerboseLevel() > 1) {
+      G4cout << "ChangeLooperParameters: ThresholdImportantEnergy [keV] = "
+             << fThresholdImportantEnergy/keV << G4endl;
+    }
+    transportation->SetThresholdImportantEnergy(fThresholdImportantEnergy);
+  }
+
+  if ( fNumberOfThresholdTrials > 0 ) {
+    if (VerboseLevel() > 1) {
+      G4cout << "ChangeLooperParameters: NumberOfThresholdTrials = "
+             << fNumberOfThresholdTrials << G4endl;
+    }
+    transportation->SetThresholdTrials(fNumberOfThresholdTrials);
+  }
+}
+
+//_____________________________________________________________________________
+void TG4RunAction::PrintLooperParameters() const
+{
+  /// Print looping thresholds parameters
+
+  auto transportation = FindTransportation(G4Electron::Definition());
+  if ( transportation ) {
+    G4cout << "ThresholdWarningEnergy [MeV] = "
+           << transportation->GetThresholdWarningEnergy()/MeV << G4endl;
+    G4cout << "ThresholdImportantEnergy [MeV] = "
+           << transportation->GetThresholdImportantEnergy()/MeV << G4endl;
+    G4cout << "NumberOfThresholdTrials = "
+           << transportation->GetThresholdTrials() << G4endl;
+  }
 }
 
 //
@@ -115,6 +195,16 @@ void TG4RunAction::BeginOfRunAction(const G4Run* run)
       CLHEP::HepRandom::showEngineStatus();
       G4cout << G4endl;
     }
+  }
+
+  // set looper thresholds parameters
+  // (only if defaults are overriden by user)
+  ChangeLooperParameters(G4Electron::Electron());
+  ChangeLooperParameters(G4Positron::Positron());
+
+  // Print looping threshold parameters
+  if (VerboseLevel() > 1) {
+    PrintLooperParameters();
   }
 
   fTimer->Start();

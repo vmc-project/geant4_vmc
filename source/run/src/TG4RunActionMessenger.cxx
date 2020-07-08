@@ -17,7 +17,9 @@
 #include "TG4RunAction.h"
 
 #include <G4UIcmdWithABool.hh>
+#include <G4UIcmdWithADoubleAndUnit.hh>
 #include <G4UIcmdWithAString.hh>
+#include <G4UIcmdWithAnInteger.hh>
 #include <G4UIdirectory.hh>
 
 //_____________________________________________________________________________
@@ -27,7 +29,11 @@ TG4RunActionMessenger::TG4RunActionMessenger(TG4RunAction* runAction)
     fRunDirectory(0),
     fSaveRandomStatusCmd(0),
     fReadRandomStatusCmd(0),
-    fRandomStatusFileCmd(0)
+    fRandomStatusFileCmd(0),
+    fSetLooperThresholdWarningEnergyCmd(0),
+    fSetLooperThresholdImportantEnergyCmd(0),
+    fSetNumberOfLooperThresholdTrialsCmd(0)
+
 {
   /// Standard constructor
 
@@ -54,6 +60,35 @@ TG4RunActionMessenger::TG4RunActionMessenger(TG4RunAction* runAction)
   fRandomStatusFileCmd->SetParameterName("RandomFile", false);
   fRandomStatusFileCmd->AvailableForStates(
     G4State_PreInit, G4State_Init, G4State_Idle);
+
+  fSetLooperThresholdWarningEnergyCmd = new G4UIcmdWithADoubleAndUnit(
+    "/mcRun/setLooperThresholdWarningEnergy", this);
+  G4String guidance =
+    "Set energy threshold for warnings about killing looping tracks";
+  fSetLooperThresholdWarningEnergyCmd->SetGuidance(guidance);
+  fSetLooperThresholdWarningEnergyCmd->SetUnitCategory("Energy");
+  fSetLooperThresholdWarningEnergyCmd->SetParameterName(
+    "LooperThresholdWarningEnergy", false);
+  fSetLooperThresholdWarningEnergyCmd->AvailableForStates(G4State_PreInit);
+
+  fSetLooperThresholdImportantEnergyCmd = new G4UIcmdWithADoubleAndUnit(
+    "/mcRun/setLooperThresholdImportantEnergy", this);
+  guidance = "Set important energy threshold: ";
+  fSetLooperThresholdImportantEnergyCmd->SetGuidance(guidance);
+  guidance = "it enables tracks above its value to survive a chosen number of ‘tracking’ steps";
+  fSetLooperThresholdImportantEnergyCmd->SetGuidance(guidance);
+  fSetLooperThresholdImportantEnergyCmd->SetUnitCategory("Energy");
+  fSetLooperThresholdImportantEnergyCmd->SetParameterName(
+    "LooperThresholdImportantEnergy", false);
+  fSetLooperThresholdImportantEnergyCmd->AvailableForStates(G4State_PreInit);
+
+  fSetNumberOfLooperThresholdTrialsCmd = new G4UIcmdWithAnInteger(
+    "/mcRun/setNumberOfLooperThresholdTrials", this);
+  guidance = "Set number of trials to propagate a looping track";
+  fSetNumberOfLooperThresholdTrialsCmd->SetGuidance(guidance);
+  fSetNumberOfLooperThresholdTrialsCmd->SetParameterName(
+    "NumberOfLooperThresholdTrials", false);
+  fSetNumberOfLooperThresholdTrialsCmd->AvailableForStates(G4State_PreInit);
 }
 
 //_____________________________________________________________________________
@@ -65,6 +100,9 @@ TG4RunActionMessenger::~TG4RunActionMessenger()
   delete fSaveRandomStatusCmd;
   delete fReadRandomStatusCmd;
   delete fRandomStatusFileCmd;
+  delete fSetLooperThresholdWarningEnergyCmd;
+  delete fSetLooperThresholdImportantEnergyCmd;
+  delete fSetNumberOfLooperThresholdTrialsCmd;
 }
 
 //
@@ -86,5 +124,17 @@ void TG4RunActionMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
   }
   else if (command == fRandomStatusFileCmd) {
     fRunAction->SetRandomStatusFile(newValue);
+  }
+  else if (command == fSetLooperThresholdWarningEnergyCmd) {
+    G4double value = G4UIcommand::ConvertToDouble(newValue);
+    fRunAction->SetThresholdWarningEnergy(value);
+  }
+  else if (command == fSetLooperThresholdImportantEnergyCmd) {
+    G4double value = G4UIcommand::ConvertToDouble(newValue);
+    fRunAction->SetThresholdImportantEnergy(value);
+  }
+  else if (command == fSetNumberOfLooperThresholdTrialsCmd) {
+    G4double value = G4UIcommand::ConvertToInt(newValue);
+    fRunAction->SetNumberOfThresholdTrials(value);
   }
 }
