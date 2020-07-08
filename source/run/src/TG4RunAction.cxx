@@ -71,7 +71,7 @@ TG4RunAction::TG4RunAction()
 {
   /// Default constructor
 
-  if (VerboseLevel() > 1)
+  if (VerboseLevel() > 2)
     G4cout << "TG4RunAction::TG4RunAction " << this << G4endl;
 
   fTimer = new G4Timer;
@@ -82,7 +82,7 @@ TG4RunAction::~TG4RunAction()
 {
   /// Destructor
 
-  if (VerboseLevel() > 1)
+  if (VerboseLevel() > 2)
     G4cout << "TG4RunAction::~TG4RunAction " << this << G4endl;
 
   delete fTimer;
@@ -111,7 +111,7 @@ void TG4RunAction::ChangeLooperParameters(
   }
 
   if ( fThresholdWarningEnergy >= 0. )  {
-    if (VerboseLevel() > 1) {
+    if (VerboseLevel() > 2) {
       G4cout << "ChangeLooperParameters: ThresholdWarningEnergy [keV] = "
              << fThresholdWarningEnergy/keV << G4endl;
     }
@@ -119,7 +119,7 @@ void TG4RunAction::ChangeLooperParameters(
   }
 
   if ( fThresholdImportantEnergy >= 0. )  {
-    if (VerboseLevel() > 1) {
+    if (VerboseLevel() > 2) {
       G4cout << "ChangeLooperParameters: ThresholdImportantEnergy [keV] = "
              << fThresholdImportantEnergy/keV << G4endl;
     }
@@ -127,7 +127,7 @@ void TG4RunAction::ChangeLooperParameters(
   }
 
   if ( fNumberOfThresholdTrials > 0 ) {
-    if (VerboseLevel() > 1) {
+    if (VerboseLevel() > 2) {
       G4cout << "ChangeLooperParameters: NumberOfThresholdTrials = "
              << fNumberOfThresholdTrials << G4endl;
     }
