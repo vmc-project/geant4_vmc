@@ -9,6 +9,16 @@
      
 Tags (history):
 ===============
+  23/07/2020
+  v3-6-p6-inclxx-biasing-p3:
+    Patch release, including following fixes:
+    Geant4 VMC:
+    - Fix in FindROOT.cmake:
+      Moved setting ROOT_FOUND_VER SION after all attempts of finding ROOT.
+
+    Tested with Geant4 10.04.p03 (with embedded CLHEP 2.3.4.3.)
+      Root 6.18/04, VGM 4.4
+
   10/02/2020
   v3-6-p6-inclxx-biasing-p2:
     Patch release, including following fixes:
