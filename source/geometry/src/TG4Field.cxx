@@ -49,7 +49,7 @@
 #include <G4ImplicitEuler.hh>
 #include <G4MagErrorStepper.hh>
 #include <G4MagHelicalStepper.hh>
-#include "G4MagIntegratorDriver.hh"
+#include <G4MagIntegratorDriver.hh>
 #include <G4Mag_EqRhs.hh>
 #include <G4Mag_SpinEqRhs.hh>
 #include <G4Mag_UsualEqRhs.hh>
