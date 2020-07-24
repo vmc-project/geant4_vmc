@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | Welcome to ROOT 6.22/00                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
-  | From tags/v6-20-00@v6-20-00                                      |
+  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
+  | From tags/v6-22-00@v6-22-00                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -19,12 +19,12 @@ Processing test_E06.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0 ( 24 February 2020 )
+ Version 1.0.p3 ( 21 July 2020 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.1 ( 11 March 2020 )
+ Version 5.2 ( 24 July 2020 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -47,7 +47,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-10-06-patch-01    (14-February-2020)
+ Geant4 version Name: geant4-10-06-patch-02    (29-May-2020)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -131,6 +131,7 @@ G4OpticalPhysics:: Add Optical Physics Processes
 ### Step limiter physics constructed.
 ### User particles physics constructed. 
 ### Processes mapped to VMC codes ok.
+TG4ComposedPhysicsList::ConstructProcess done
 Available UI session types: [ GAG, tcsh, csh ]
 
 **********************************************
@@ -547,14 +548,14 @@ Number of optical photons produced in this event : 1689
 Number of optical photons produced in this event : 1728
 >>> Event 9
 Number of optical photons produced in this event : 1764
-Time of this run:   User=0.920000s Real=0.914832s Sys=0.000000s
+Time of this run:   User=0.870000s Real=0.866774s Sys=0.000000s
 Number of events processed: 10
 Number of optical photons produced in this run : 16890
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | Welcome to ROOT 6.22/00                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
-  | From tags/v6-20-00@v6-20-00                                      |
+  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
+  | From tags/v6-22-00@v6-22-00                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -571,12 +572,12 @@ Processing test_E06_2.C("g4tgeoConfig1.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0 ( 24 February 2020 )
+ Version 1.0.p3 ( 21 July 2020 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.1 ( 11 March 2020 )
+ Version 5.2 ( 24 July 2020 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -599,7 +600,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-10-06-patch-01    (14-February-2020)
+ Geant4 version Name: geant4-10-06-patch-02    (29-May-2020)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -696,6 +697,7 @@ G4OpticalPhysics:: Add Optical Physics Processes
 ### Stack popper physics constructed.
 ### User particles physics constructed. 
 ### Processes mapped to VMC codes ok.
+TG4ComposedPhysicsList::ConstructProcess done
 Available UI session types: [ GAG, tcsh, csh ]
 
 **********************************************
@@ -1359,7 +1361,7 @@ Limit excitation energy for Fermi BreakUp (MeV)     20
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
-Time limit for long lived isomeres (ns)             1e+12
+Time limit for long lived isomeres (ns)             1000
 Internal e- conversion flag                         1
 Store e- internal conversion data                   0
 Electron internal conversion ID                     2
@@ -1417,7 +1419,7 @@ Number of feedback photons produced in this event : 4764
 >>> Event 9
 Number of optical photons produced in this event : 1555
 Number of feedback photons produced in this event : 4766
-Time of this run:   User=1.410000s Real=1.416778s Sys=0.000000s
+Time of this run:   User=1.310000s Real=1.315528s Sys=0.010000s
 Number of events processed: 10
 Number of optical photons produced in this run : 16063
 Number of feedback photons produced in this run : 49202

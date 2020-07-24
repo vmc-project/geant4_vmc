@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | Welcome to ROOT 6.22/00                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
-  | From tags/v6-20-00@v6-20-00                                      |
+  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
+  | From tags/v6-22-00@v6-22-00                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -14,12 +14,12 @@ Processing test_E06.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0 ( 24 February 2020 )
+ Version 1.0.p3 ( 21 July 2020 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.0 ( 24 February 2020 )
+ Version 3.6 ( 24 July 2020 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -71,11 +71,11 @@ Number of optical photons produced in this event : 2301
 Number of optical photons produced in this event : 2210
 Number of optical photons produced in this run : 21239
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   113481735     6C39807 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    93258279     58F0227 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   108071661   113481735
-                                        HEX     6710AED     6C39807
+          with Store/Table at absolute adrs    87848205    93258279
+                                        HEX     53C750D     58F0227
                                         HEX    FFAD712A           0
                               relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -107,10 +107,10 @@ Number of optical photons produced in this run : 21239
  **** GTRIGI: IEVENT=      9 IDEVT=      9 Random Seeds =       4357           0
  **** GTRIGI: IEVENT=     10 IDEVT=     10 Random Seeds =       4357           0
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | Welcome to ROOT 6.22/00                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
-  | From tags/v6-20-00@v6-20-00                                      |
+  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
+  | From tags/v6-22-00@v6-22-00                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -122,12 +122,12 @@ Processing test_E06_2.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0 ( 24 February 2020 )
+ Version 1.0.p3 ( 21 July 2020 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.0 ( 24 February 2020 )
+ Version 3.6 ( 24 July 2020 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -190,11 +190,11 @@ Number of feedback photons produced in this event : 1586
 Number of optical photons produced in this run : 20829
 Number of feedback photons produced in this run : 15827
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    67721223     4095807 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   156571175     9551627 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    62311149    67721223
-                                        HEX     3B6CAED     4095807
+          with Store/Table at absolute adrs   151161101   156571175
+                                        HEX     902890D     9551627
                                         HEX    FFAD712A           0
                               relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

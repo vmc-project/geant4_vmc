@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | Welcome to ROOT 6.22/00                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
-  | From tags/v6-20-00@v6-20-00                                      |
+  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
+  | From tags/v6-22-00@v6-22-00                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -19,18 +19,18 @@ Processing test_E06.C("g4ConfigOld.C",kTRUE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0 ( 24 February 2020 )
+ Version 1.0.p3 ( 21 July 2020 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.1 ( 11 March 2020 )
+ Version 5.2 ( 24 July 2020 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-10-06-patch-01    (14-February-2020)
+ Geant4 version Name: geant4-10-06-patch-02    (29-May-2020)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -107,6 +107,7 @@ G4OpticalPhysics:: Add Optical Physics Processes
 ### Step limiter physics constructed.
 ### User particles physics constructed. 
 ### Processes mapped to VMC codes ok.
+TG4ComposedPhysicsList::ConstructProcess done
 Available UI session types: [ GAG, tcsh, csh ]
 
 **********************************************
@@ -523,6 +524,6 @@ Number of optical photons produced in this event : 1792
 Number of optical photons produced in this event : 1727
 >>> Event 9
 Number of optical photons produced in this event : 1628
-Time of this run:   User=0.830000s Real=0.830105s Sys=0.000000s
+Time of this run:   User=0.800000s Real=0.795182s Sys=0.000000s
 Number of events processed: 10
 Number of optical photons produced in this run : 17103

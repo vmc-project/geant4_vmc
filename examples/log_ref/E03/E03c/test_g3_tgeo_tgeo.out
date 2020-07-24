@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | Welcome to ROOT 6.22/00                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
-  | From tags/v6-20-00@v6-20-00                                      |
+  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
+  | From tags/v6-22-00@v6-22-00                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -17,12 +17,12 @@ Processing test_E03_1.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0 ( 24 February 2020 )
+ Version 1.0.p3 ( 21 July 2020 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.0 ( 24 February 2020 )
+ Version 3.6 ( 24 July 2020 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -64,11 +64,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 875.573       total track length (cm):  39.9255
    Gap:      total energy (MeV): 20.9186       total track length (cm):  8.56264
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    95537159     5B1C807 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   153468455     925BE27 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    90127085    95537159
-                                        HEX     55F3AED     5B1C807
+          with Store/Table at absolute adrs   148058381   153468455
+                                        HEX     8D3310D     925BE27
                                         HEX    FFAD712A           0
                               relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -105,10 +105,10 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | Welcome to ROOT 6.22/00                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
-  | From tags/v6-20-00@v6-20-00                                      |
+  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
+  | From tags/v6-22-00@v6-22-00                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -124,12 +124,12 @@ Processing test_E03_2.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0 ( 24 February 2020 )
+ Version 1.0.p3 ( 21 July 2020 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.0 ( 24 February 2020 )
+ Version 3.6 ( 24 July 2020 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -494,11 +494,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   3.968       total track length (cm):    2.241
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    62198791     3B51407 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   138663463     843D627 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    56788717    62198791
-                                        HEX     36286ED     3B51407
+          with Store/Table at absolute adrs   133253389   138663463
+                                        HEX     7F1490D     843D627
                                         HEX    FFAD712A           0
                               relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -521,10 +521,10 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | Welcome to ROOT 6.22/00                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
-  | From tags/v6-20-00@v6-20-00                                      |
+  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
+  | From tags/v6-22-00@v6-22-00                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -540,12 +540,12 @@ Processing test_E03_3.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0 ( 24 February 2020 )
+ Version 1.0.p3 ( 21 July 2020 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.0 ( 24 February 2020 )
+ Version 3.6 ( 24 July 2020 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -646,11 +646,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    85840903     51DD407 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    92743207     5872627 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    80430829    85840903
-                                        HEX     4CB46ED     51DD407
+          with Store/Table at absolute adrs    87333133    92743207
+                                        HEX     534990D     5872627
                                         HEX    FFAD712A           0
                               relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -673,10 +673,10 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | Welcome to ROOT 6.22/00                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
-  | From tags/v6-20-00@v6-20-00                                      |
+  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
+  | From tags/v6-22-00@v6-22-00                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -691,12 +691,12 @@ Processing test_E03_4.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0 ( 24 February 2020 )
+ Version 1.0.p3 ( 21 July 2020 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.0 ( 24 February 2020 )
+ Version 3.6 ( 24 July 2020 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -719,34 +719,34 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 
 ---> Begin of event: 1
    Primary track ID = 4
+      Current track pi0  is a decay product of Parent ID = 4
+      Current track pi0  is a decay product of Parent ID = 4
 
-      Current track pi0  is a decay product of Parent ID = 4
-      Current track pi0  is a decay product of Parent ID = 4
    Primary track ID = 3
+      Current track pi0  is a decay product of Parent ID = 3
+      Current track pi0  is a decay product of Parent ID = 3
 
-      Current track pi0  is a decay product of Parent ID = 3
-      Current track pi0  is a decay product of Parent ID = 3
    Primary track ID = 2
+      Current track pi0  is a decay product of Parent ID = 2
+      Current track pi0  is a decay product of Parent ID = 2
 
-      Current track pi0  is a decay product of Parent ID = 2
-      Current track pi0  is a decay product of Parent ID = 2
    Primary track ID = 1
+      Current track pi0  is a decay product of Parent ID = 1
+      Current track pi0  is a decay product of Parent ID = 1
 
-      Current track pi0  is a decay product of Parent ID = 1
-      Current track pi0  is a decay product of Parent ID = 1
    Primary track ID = 0
+      Current track pi0  is a decay product of Parent ID = 0
+      Current track pi0  is a decay product of Parent ID = 0
 
-      Current track pi0  is a decay product of Parent ID = 0
-      Current track pi0  is a decay product of Parent ID = 0
 Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
-   Absorber: total energy (MeV): 1590.61       total track length (cm):    76.81
-   Gap:      total energy (MeV): 56.8821       total track length (cm):  28.4087
+   Absorber: total energy (MeV): 1330.27       total track length (cm):  65.3392
+   Gap:      total energy (MeV): 58.2202       total track length (cm):  29.0487
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   123375623     75A9007 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   125362727     778E227 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   117965549   123375623
-                                        HEX     70802ED     75A9007
+          with Store/Table at absolute adrs   119952653   125362727
+                                        HEX     726550D     778E227
                                         HEX    FFAD712A           0
                               relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -769,10 +769,10 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | Welcome to ROOT 6.22/00                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
-  | From tags/v6-20-00@v6-20-00                                      |
+  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
+  | From tags/v6-22-00@v6-22-00                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -788,12 +788,12 @@ Processing test_E03_5.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0 ( 24 February 2020 )
+ Version 1.0.p3 ( 21 July 2020 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.0 ( 24 February 2020 )
+ Version 3.6 ( 24 July 2020 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -1167,11 +1167,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   2.957       total track length (cm):    1.496
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    77241351     49A9C07 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    94531111     5A26E27 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    71831277    77241351
-                                        HEX     4480EED     49A9C07
+          with Store/Table at absolute adrs    89121037    94531111
+                                        HEX     54FE10D     5A26E27
                                         HEX    FFAD712A           0
                               relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

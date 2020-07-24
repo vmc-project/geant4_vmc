@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | Welcome to ROOT 6.22/00                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
-  | From tags/v6-20-00@v6-20-00                                      |
+  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
+  | From tags/v6-22-00@v6-22-00                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -19,12 +19,12 @@ Processing test_A01_1.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0 ( 24 February 2020 )
+ Version 1.0.p3 ( 21 July 2020 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.1 ( 11 March 2020 )
+ Version 5.2 ( 24 July 2020 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -42,7 +42,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-10-06-patch-01    (14-February-2020)
+ Geant4 version Name: geant4-10-06-patch-02    (29-May-2020)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -86,6 +86,7 @@ Global field created with stepper DormandPrince745
 ### Step limiter physics constructed.
 ### User particles physics constructed. 
 ### Processes mapped to VMC codes ok.
+TG4ComposedPhysicsList::ConstructProcess done
 Available UI session types: [ GAG, tcsh, csh ]
 
 **********************************************
@@ -755,7 +756,7 @@ Limit excitation energy for Fermi BreakUp (MeV)     20
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
-Time limit for long lived isomeres (ns)             1e+12
+Time limit for long lived isomeres (ns)             1000
 Internal e- conversion flag                         1
 Store e- internal conversion data                   0
 Electron internal conversion ID                     2
@@ -829,36 +830,36 @@ EmCalorimeter has 18 hits. Total Edep is 18669.3 (MeV)
 HadCalorimeter has 4 hits. Total Edep is 2704.28 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 2 hits.
+Hodoscope1 has 5 hits.
 Hodoscope2 has 14 hits.
-Chamber1 has 536 hits.
-Chamber2 has 499 hits.
-EmCalorimeter has 62 hits. Total Edep is 33359.5 (MeV)
-HadCalorimeter has 17 hits. Total Edep is 1831.79 (MeV)
+Chamber1 has 517 hits.
+Chamber2 has 508 hits.
+EmCalorimeter has 60 hits. Total Edep is 34401.7 (MeV)
+HadCalorimeter has 17 hits. Total Edep is 1918.54 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 9 hits.
-Hodoscope2 has 7 hits.
-Chamber1 has 484 hits.
-Chamber2 has 185 hits.
-EmCalorimeter has 44 hits. Total Edep is 7938.83 (MeV)
-HadCalorimeter has 15 hits. Total Edep is 323.149 (MeV)
+Hodoscope1 has 7 hits.
+Hodoscope2 has 8 hits.
+Chamber1 has 421 hits.
+Chamber2 has 167 hits.
+EmCalorimeter has 43 hits. Total Edep is 9132.15 (MeV)
+HadCalorimeter has 13 hits. Total Edep is 392.668 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 4 hits.
-Hodoscope2 has 10 hits.
-Chamber1 has 521 hits.
-Chamber2 has 514 hits.
-EmCalorimeter has 47 hits. Total Edep is 27877.4 (MeV)
-HadCalorimeter has 10 hits. Total Edep is 48.0447 (MeV)
-Time of this run:   User=6.270000s Real=6.346753s Sys=0.060000s
+Hodoscope1 has 3 hits.
+Hodoscope2 has 7 hits.
+Chamber1 has 529 hits.
+Chamber2 has 532 hits.
+EmCalorimeter has 53 hits. Total Edep is 28833.5 (MeV)
+HadCalorimeter has 12 hits. Total Edep is 111.6 (MeV)
+Time of this run:   User=6.050000s Real=6.162459s Sys=0.070000s
 Number of events processed: 5
-Real time 0:00:08, CP time 8.350
+Real time 0:00:08, CP time 8.120
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | Welcome to ROOT 6.22/00                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
-  | From tags/v6-20-00@v6-20-00                                      |
+  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
+  | From tags/v6-22-00@v6-22-00                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -875,12 +876,12 @@ Processing test_A01_2.C("g4tgeoConfig2.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0 ( 24 February 2020 )
+ Version 1.0.p3 ( 21 July 2020 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.1 ( 11 March 2020 )
+ Version 5.2 ( 24 July 2020 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -898,7 +899,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-10-06-patch-01    (14-February-2020)
+ Geant4 version Name: geant4-10-06-patch-02    (29-May-2020)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -942,6 +943,7 @@ Local (in magneticLogical) field created with stepper DormandPrince745
 ### Step limiter physics constructed.
 ### User particles physics constructed. 
 ### Processes mapped to VMC codes ok.
+TG4ComposedPhysicsList::ConstructProcess done
 Available UI session types: [ GAG, tcsh, csh ]
 
 **********************************************
@@ -1611,7 +1613,7 @@ Limit excitation energy for Fermi BreakUp (MeV)     20
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
-Time limit for long lived isomeres (ns)             1e+12
+Time limit for long lived isomeres (ns)             1000
 Internal e- conversion flag                         1
 Store e- internal conversion data                   0
 Electron internal conversion ID                     2
@@ -1685,28 +1687,28 @@ EmCalorimeter has 16 hits. Total Edep is 18605.2 (MeV)
 HadCalorimeter has 5 hits. Total Edep is 2646.53 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 2 hits.
-Hodoscope2 has 10 hits.
-Chamber1 has 527 hits.
-Chamber2 has 499 hits.
-EmCalorimeter has 68 hits. Total Edep is 31207.6 (MeV)
-HadCalorimeter has 15 hits. Total Edep is 1802.31 (MeV)
+Hodoscope1 has 4 hits.
+Hodoscope2 has 13 hits.
+Chamber1 has 521 hits.
+Chamber2 has 488 hits.
+EmCalorimeter has 60 hits. Total Edep is 28532 (MeV)
+HadCalorimeter has 18 hits. Total Edep is 1915.43 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 11 hits.
-Hodoscope2 has 7 hits.
-Chamber1 has 411 hits.
-Chamber2 has 125 hits.
-EmCalorimeter has 53 hits. Total Edep is 6753.74 (MeV)
-HadCalorimeter has 13 hits. Total Edep is 257.714 (MeV)
+Hodoscope1 has 4 hits.
+Hodoscope2 has 5 hits.
+Chamber1 has 445 hits.
+Chamber2 has 181 hits.
+EmCalorimeter has 46 hits. Total Edep is 7151.66 (MeV)
+HadCalorimeter has 13 hits. Total Edep is 694.267 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 13 hits.
-Chamber1 has 531 hits.
-Chamber2 has 526 hits.
-EmCalorimeter has 47 hits. Total Edep is 28419.6 (MeV)
-HadCalorimeter has 12 hits. Total Edep is 115.054 (MeV)
-Time of this run:   User=5.760000s Real=5.828936s Sys=0.050000s
+Hodoscope1 has 4 hits.
+Hodoscope2 has 7 hits.
+Chamber1 has 529 hits.
+Chamber2 has 532 hits.
+EmCalorimeter has 49 hits. Total Edep is 28806.4 (MeV)
+HadCalorimeter has 18 hits. Total Edep is 117.063 (MeV)
+Time of this run:   User=5.640000s Real=5.717918s Sys=0.050000s
 Number of events processed: 5
-Real time 0:00:07, CP time 7.800
+Real time 0:00:07, CP time 7.760

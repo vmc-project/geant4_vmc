@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | Welcome to ROOT 6.22/00                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
-  | From tags/v6-20-00@v6-20-00                                      |
+  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
+  | From tags/v6-22-00@v6-22-00                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -40,12 +40,12 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0 ( 24 February 2020 )
+ Version 1.0.p3 ( 21 July 2020 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.1 ( 11 March 2020 )
+ Version 5.2 ( 24 July 2020 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -53,7 +53,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-10-06-patch-01    (14-February-2020)
+ Geant4 version Name: geant4-10-06-patch-02    (29-May-2020)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -84,12 +84,12 @@ Geant4 has been created.
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0 ( 24 February 2020 )
+ Version 1.0.p3 ( 21 July 2020 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.0 ( 24 February 2020 )
+ Version 3.6 ( 23 July 2020 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -115,6 +115,7 @@ TG4PostDetConstruction::InitializeSDandField
 
 ### User particles physics constructed. 
 ### Processes mapped to VMC codes ok.
+TG4ComposedPhysicsList::ConstructProcess done
 Available UI session types: [ GAG, tcsh, csh ]
 G4ProcessManager::GetAttribute(): particle[neutron]
   index out of range 
@@ -790,7 +791,7 @@ Limit excitation energy for Fermi BreakUp (MeV)     20
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
-Time limit for long lived isomeres (ns)             1e+12
+Time limit for long lived isomeres (ns)             1000
 Internal e- conversion flag                         1
 Store e- internal conversion data                   0
 Electron internal conversion ID                     2
@@ -848,11 +849,11 @@ Info in <TMCManager::Run>: Start event 4
 
 ---> Begin of event: 4
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    38590471     24CD807 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   127268391     795F627 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    33180397    38590471
-                                        HEX     1FA4AED     24CD807
+          with Store/Table at absolute adrs   121858317   127268391
+                                        HEX     743690D     795F627
                                         HEX    FFAD712A           0
                               relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -920,7 +921,7 @@ Info in <TMCManager::Run>: Start event 5
 ---> Begin of event: 5
    Absorber: total energy (MeV):  909.36       total track length (cm):  41.0359
    Gap:      total energy (MeV): 34.6438       total track length (cm):  16.0225
-Real time 0:00:01, CP time 1.370
+Real time 0:00:01, CP time 1.390
  GTREVE_ROOT : Transporting primary track No         10
  GTREVE_ROOT : Transporting primary track No         20
  **** GTRIGI: IEVENT=      4 IDEVT=      4 Random Seeds =       4357           0

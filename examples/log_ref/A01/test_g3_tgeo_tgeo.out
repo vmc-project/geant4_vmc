@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.20/00                        https://root.cern |
+  | Welcome to ROOT 6.22/00                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 05 2020, 11:55:00                      |
-  | From tags/v6-20-00@v6-20-00                                      |
+  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
+  | From tags/v6-22-00@v6-22-00                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -14,12 +14,12 @@ Processing test_A01_1.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0 ( 24 February 2020 )
+ Version 1.0.p3 ( 21 July 2020 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.0 ( 24 February 2020 )
+ Version 3.6 ( 24 July 2020 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -59,18 +59,18 @@ EmCalorimeter has 43 hits. Total Edep is 22898.1 (MeV)
 HadCalorimeter has 10 hits. Total Edep is 965.519 (MeV)
 
 >>> Event 4 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 7 hits.
-Hodoscope2 has 6 hits.
-Chamber1 has 419 hits.
-Chamber2 has 189 hits.
-EmCalorimeter has 33 hits. Total Edep is 6315.77 (MeV)
-HadCalorimeter has 11 hits. Total Edep is 270.462 (MeV)
+Hodoscope1 has 5 hits.
+Hodoscope2 has 7 hits.
+Chamber1 has 439 hits.
+Chamber2 has 154 hits.
+EmCalorimeter has 33 hits. Total Edep is 5437.59 (MeV)
+HadCalorimeter has 10 hits. Total Edep is 189.851 (MeV)
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   117800967     7058007 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    96551463     5C14227 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   112390893   117800967
-                                        HEX     6B2F2ED     7058007
+          with Store/Table at absolute adrs    91141389    96551463
+                                        HEX     56EB50D     5C14227
                                         HEX    FFAD712A           0
                               relative adrs    -5410518           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -145,12 +145,12 @@ HadCalorimeter has 11 hits. Total Edep is 270.462 (MeV)
  GTREVE_ROOT : Transporting primary track No         40
 
 >>> Event 5 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 5 hits.
+Hodoscope1 has 2 hits.
 Hodoscope2 has 4 hits.
-Chamber1 has 516 hits.
-Chamber2 has 523 hits.
-EmCalorimeter has 26 hits. Total Edep is 27277.1 (MeV)
-HadCalorimeter has 3 hits. Total Edep is 7.41226 (MeV)
+Chamber1 has 535 hits.
+Chamber2 has 494 hits.
+EmCalorimeter has 27 hits. Total Edep is 24749.3 (MeV)
+HadCalorimeter has 4 hits. Total Edep is 17.5224 (MeV)
 Real time 0:00:01, CP time 1.660
  GTREVE_ROOT : Transporting primary track No         30
  GTREVE_ROOT : Transporting primary track No         20
