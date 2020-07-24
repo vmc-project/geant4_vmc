@@ -9,6 +9,34 @@
 
 Tags (history):
 ===============
+  24/07/2020
+  v5-2:
+    Geant4 VMC:
+    - Added geometry option geomVMC+RootToGeant4:
+      For geometries defined with both VMC and ROOT and Geant4 native navigation.
+    - Added commands for user control of the parameters for killing looping
+      particles:
+      /mcPhysics/useLowLooperThresholds
+      /mcPhysics/useHighLooperThresholds
+      /mcRun/setLooperThresholdWarningEnergy value unit
+      /mcRun/setLooperThresholImportantEnergy value unit
+      /mcRun/setNumberOfLooperThresholdTrials value
+    - Increase RunAction verbosity level to 3
+      Level 2 just adds printing of summary of looping thresholds;
+      level 3 adds all other debug printings
+
+    Fixes:
+    Geant4 VMC:
+    - Fixed caching pointers in TG4PrimaryGeneratorAction
+    - Fix in applying zero magnetic fields
+    Geant4 VMC, Examples:
+    - Fixed generation of root dictionary maps
+    - Restored the dictionaries relocability, improve security and clean up for packaging
+      (Thanks to Christian Tacke, GSI.)
+  
+    Tested with VMC 1.0.p3, Geant4 10.6.p02 (with embedded CLHEP 2.4.1.3)
+      Root 6.22/00, VGM 4.8, Garfield master at 17a26cca556f50f16
+
   11/03/2020
   v5-1:
     All packages:
