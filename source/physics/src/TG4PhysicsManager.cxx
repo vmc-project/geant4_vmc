@@ -324,8 +324,8 @@ void TG4PhysicsManager::SetSpecialCutsActivation()
     TG4G3ParticleWSP particleWSP = g3PhysicsManager->GetG3ParticleWSP(particle);
     G4String name = g3PhysicsManager->GetG3ParticleWSPName(particleWSP);
 
-    if ((particleWSP != kNofParticlesWSP) &&
-        (particleWSP != kEplus) && (particleWSP != kAny)) {
+    if ((particleWSP != kNofParticlesWSP) && (particleWSP != kEplus) &&
+        (particleWSP != kAny)) {
       // special process is activated in case
       // cutVector (vector of kinetic energy cuts) is set
       // or the special cut is set by TG4Limits

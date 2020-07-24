@@ -61,7 +61,8 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
     TG4Globals::Exception("TG4RunConfiguration", "TG4RunConfiguration",
       "User geometry " + userGeometry + " not recognized." +
         TG4Globals::Endl() + "Available options:" + TG4Globals::Endl() +
-        "geomVMCtoGeant4 geomVMCtoRoot geomRoot geomRootToGeant4 geomVMC+RootToGeant4 geomGeant4");
+        "geomVMCtoGeant4 geomVMCtoRoot geomRoot geomRootToGeant4 "
+        "geomVMC+RootToGeant4 geomGeant4");
   }
 
   G4int itoken = 0;

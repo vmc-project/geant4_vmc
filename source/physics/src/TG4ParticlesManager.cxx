@@ -17,13 +17,13 @@
 #include "TG4UserIon.h"
 #include "TG4UserParticle.h"
 
-#include <G4Types.hh>
 #include <G4AutoLock.hh>
 #include <G4DynamicParticle.hh>
 #include <G4IonTable.hh>
 #include <G4Monopole.hh>
 #include <G4ParticleDefinition.hh>
 #include <G4ParticleTable.hh>
+#include <G4Types.hh>
 #include <G4Version.hh>
 
 #include <TClonesArray.h>

@@ -18,8 +18,8 @@
 #include <RVersion.h>
 #include <TVirtualMCApplication.h>
 
-#include <G4Types.hh>
 #include <G4AutoLock.hh>
+#include <G4Types.hh>
 
 #ifdef G4MULTITHREADED
 namespace

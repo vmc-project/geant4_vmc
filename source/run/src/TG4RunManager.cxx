@@ -43,10 +43,10 @@
 #include <G4RunManager.hh>
 #endif
 
+#include <G4UIExecutive.hh>
 #include <G4UImanager.hh>
 #include <G4UIsession.hh>
 #include <Randomize.hh>
-#include <G4UIExecutive.hh>
 
 #ifdef USE_G4ROOT
 #include <TG4RootNavMgr.h>

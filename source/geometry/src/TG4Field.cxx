@@ -39,8 +39,8 @@
 #include <G4EqMagElectricField.hh>
 #include <G4ExactHelixStepper.hh>
 #include <G4ExplicitEuler.hh>
-#include <G4FieldManager.hh>
 #include <G4FSALIntegrationDriver.hh>
+#include <G4FieldManager.hh>
 #include <G4HelixExplicitEuler.hh>
 #include <G4HelixHeum.hh>
 #include <G4HelixImplicitEuler.hh>
@@ -54,21 +54,25 @@
 #include <G4Mag_SpinEqRhs.hh>
 #include <G4Mag_UsualEqRhs.hh>
 #include <G4NystromRK4.hh>
-#include <G4RKG3_Stepper.hh>
 #include <G4RK547FEq1.hh>
 #include <G4RK547FEq2.hh>
 #include <G4RK547FEq3.hh>
+#include <G4RKG3_Stepper.hh>
 #include <G4SimpleHeum.hh>
 #include <G4SimpleRunge.hh>
-#include <G4TsitourasRK45.hh>
 #include <G4TransportationManager.hh>
+#include <G4TsitourasRK45.hh>
 #include <G4VIntegrationDriver.hh>
 
 //_____________________________________________________________________________
 TG4Field::TG4Field(const TG4FieldParameters& parameters,
   TVirtualMagField* magField, G4LogicalVolume* lv)
   : fVirtualMagField(magField),
-    fLogicalVolume(lv), fEquation(0), fStepper(0), fDriver(0), fChordFinder(0)
+    fLogicalVolume(lv),
+    fEquation(0),
+    fStepper(0),
+    fDriver(0),
+    fChordFinder(0)
 {
   /// Default constructor
 
@@ -278,30 +282,34 @@ G4MagIntegratorStepper* TG4Field::CreateStepper(
       return 0;
       break;
     default:
-      TG4Globals::Exception("TG4Field", "CreateStepper:", "Incorrect stepper type.");
+      TG4Globals::Exception(
+        "TG4Field", "CreateStepper:", "Incorrect stepper type.");
       return 0;
   }
 }
 
 //_____________________________________________________________________________
 G4VIntegrationDriver* TG4Field::CreateFSALStepperAndDriver(
-    G4EquationOfMotion* equation, StepperType stepperType, G4double minStep)
+  G4EquationOfMotion* equation, StepperType stepperType, G4double minStep)
 {
   /// Set the FSAL integrator of particle's equation of motion
 
   switch (stepperType) {
     case kRK547FEq1:
-      return new G4FSALIntegrationDriver<G4RK547FEq1>(minStep, new G4RK547FEq1(equation));
+      return new G4FSALIntegrationDriver<G4RK547FEq1>(
+        minStep, new G4RK547FEq1(equation));
 
     case kRK547FEq2:
-      return new G4FSALIntegrationDriver<G4RK547FEq2>(minStep, new G4RK547FEq2(equation));
+      return new G4FSALIntegrationDriver<G4RK547FEq2>(
+        minStep, new G4RK547FEq2(equation));
 
     case kRK547FEq3:
-      return new G4FSALIntegrationDriver<G4RK547FEq3>(minStep, new G4RK547FEq3(equation));
+      return new G4FSALIntegrationDriver<G4RK547FEq3>(
+        minStep, new G4RK547FEq3(equation));
 
     default:
-      TG4Globals::Exception("TG4Field", "CreateFSALStepperAndDriver",
-        "Incorrect stepper type.");
+      TG4Globals::Exception(
+        "TG4Field", "CreateFSALStepperAndDriver", "Incorrect stepper type.");
       return 0;
   }
 }
@@ -391,7 +399,6 @@ void TG4Field::Update(const TG4FieldParameters& parameters)
   }
   fieldManager->SetChordFinder(fChordFinder);
   fieldManager->SetDetectorField(static_cast<G4MagneticField*>(fG4Field));
-
 
   fieldManager->SetMinimumEpsilonStep(parameters.GetMinimumEpsilonStep());
   fieldManager->SetMaximumEpsilonStep(parameters.GetMaximumEpsilonStep());

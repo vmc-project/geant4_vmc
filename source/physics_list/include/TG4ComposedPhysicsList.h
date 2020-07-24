@@ -70,7 +70,8 @@ class TG4ComposedPhysicsList : public G4VUserPhysicsList, public TG4Verbose
   void SetLooperThresholds();
 
   // static data members
-  static const G4double fgkDefautLooperThresholdsLevel; ///< the default cut value
+  static const G4double
+    fgkDefautLooperThresholdsLevel; ///< the default cut value
 
   // data members
   TG4ComposedPhysicsMessenger fMessenger;         ///< messenger
@@ -101,8 +102,7 @@ inline void TG4ComposedPhysicsList::SetGammaToMuonsCrossSectionFactor(
   fGammaToMuonsCrossSectionFactor = value;
 }
 
-inline void TG4ComposedPhysicsList::SetLooperThresholdsLevel(
-  G4int level)
+inline void TG4ComposedPhysicsList::SetLooperThresholdsLevel(G4int level)
 {
   /// Set gamma to muons cross section factor
   fLooperThresholdsLevel = level;

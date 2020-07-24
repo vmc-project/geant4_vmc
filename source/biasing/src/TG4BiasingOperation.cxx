@@ -14,20 +14,20 @@
 
 #include "TG4BiasingOperation.h"
 #include "G4BiasingProcessInterface.hh"
-#include "G4NeutronInelasticProcess.hh"
-#include "G4PionMinusInelasticProcess.hh"
-#include "G4PionPlusInelasticProcess.hh"
-#include "G4ProtonInelasticProcess.hh"
-#include "G4VParticleChange.hh"
-#include "G4HadronicParameters.hh"
 #include "G4ExcitedStringDecay.hh"
 #include "G4FTFModel.hh"
 #include "G4GeneratorPrecompoundInterface.hh"
 #include "G4HadronInelasticDataSet.hh"
 #include "G4HadronicInteractionRegistry.hh"
+#include "G4HadronicParameters.hh"
 #include "G4INCLXXInterface.hh"
 #include "G4LundStringFragmentation.hh"
+#include "G4NeutronInelasticProcess.hh"
+#include "G4PionMinusInelasticProcess.hh"
+#include "G4PionPlusInelasticProcess.hh"
+#include "G4ProtonInelasticProcess.hh"
 #include "G4TheoFSGenerator.hh"
+#include "G4VParticleChange.hh"
 #include "G4VPreCompoundModel.hh"
 
 TG4BiasingOperation::TG4BiasingOperation(G4String name)
@@ -97,10 +97,10 @@ TG4BiasingOperation::TG4BiasingOperation(G4String name)
   // because the default Gheisha inelastic cross sections have been removed.
   // It is convenient to use the Gheisha inelastic cross sections here
   // because they do not require any special initialization.
-  fProtonInelasticProcess->AddDataSet( new G4HadronInelasticDataSet );
-  fNeutronInelasticProcess->AddDataSet( new G4HadronInelasticDataSet );
-  fPionPlusInelasticProcess->AddDataSet( new G4HadronInelasticDataSet );
-  fPionMinusInelasticProcess->AddDataSet( new G4HadronInelasticDataSet );
+  fProtonInelasticProcess->AddDataSet(new G4HadronInelasticDataSet);
+  fNeutronInelasticProcess->AddDataSet(new G4HadronInelasticDataSet);
+  fPionPlusInelasticProcess->AddDataSet(new G4HadronInelasticDataSet);
+  fPionMinusInelasticProcess->AddDataSet(new G4HadronInelasticDataSet);
 }
 
 TG4BiasingOperation::~TG4BiasingOperation() {}

@@ -154,8 +154,7 @@ G4double TG4SpecialCutsForNeutralHadron::GetMinEkine(
 //
 
 //_____________________________________________________________________________
-TG4SpecialCutsForNeutron::TG4SpecialCutsForNeutron(
-  const G4String& processName)
+TG4SpecialCutsForNeutron::TG4SpecialCutsForNeutron(const G4String& processName)
   : TG4VSpecialCuts(processName)
 {
   /// Standard and default constructor

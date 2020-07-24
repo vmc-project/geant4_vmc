@@ -17,10 +17,10 @@
 #include "TG4ProcessMCMap.h"
 #include "TG4SpecialCuts.h"
 
+#include <G4Neutron.hh>
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>
 #include <G4VProcess.hh>
-#include <G4Neutron.hh>
 
 #include <TMCProcess.h>
 
@@ -123,10 +123,10 @@ void TG4SpecialCutsPhysics::ConstructProcess()
           break;
         case kNeutralHadron: {
           G4bool isNeutronWithKiller = false;
-          if (particle == G4Neutron::Definition() ) {
+          if (particle == G4Neutron::Definition()) {
             G4ProcessVector* processes = pManager->GetProcessList();
             for (size_t i = 0; i < processes->size(); ++i) {
-              if ( (*processes)[i]->GetProcessName() == "nKiller") {
+              if ((*processes)[i]->GetProcessName() == "nKiller") {
                 isNeutronWithKiller = true;
                 break;
               }

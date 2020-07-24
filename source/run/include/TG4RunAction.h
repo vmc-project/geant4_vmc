@@ -77,7 +77,8 @@ class TG4RunAction : public G4UserRunAction, public TG4Verbose
   G4double fThresholdWarningEnergy;
 
   /// Important energy threshold:
-  /// it enables tracks above its value to survive a chosen number of ‘tracking’ steps
+  /// it enables tracks above its value to survive a chosen number of ‘tracking’
+  /// steps
   G4double fThresholdImportantEnergy;
 
   /// Number of trials to propagate a looping track
@@ -116,6 +117,5 @@ inline void TG4RunAction::SetNumberOfThresholdTrials(G4int value)
 {
   fNumberOfThresholdTrials = value;
 }
-
 
 #endif // TG4_RUN_ACTION_H

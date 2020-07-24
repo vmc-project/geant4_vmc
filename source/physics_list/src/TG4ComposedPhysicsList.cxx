@@ -29,16 +29,18 @@
 #include <G4Transportation.hh>
 #include <G4VUserPhysicsList.hh>
 
-namespace {
+namespace
+{
 
-G4Transportation*
-FindTransportation(const G4ParticleDefinition* particleDefinition)
+G4Transportation* FindTransportation(
+  const G4ParticleDefinition* particleDefinition)
 {
   const auto* processManager = particleDefinition->GetProcessManager();
-  return dynamic_cast<G4Transportation*>(processManager->GetProcess("Transportation"));
+  return dynamic_cast<G4Transportation*>(
+    processManager->GetProcess("Transportation"));
 }
 
-}
+} // namespace
 
 const G4double TG4ComposedPhysicsList::fgkDefautLooperThresholdsLevel = 1;
 
@@ -114,16 +116,16 @@ void TG4ComposedPhysicsList::SetLooperThresholds()
 {
   /// Apply the looper thresholds level
   auto plHelper = G4PhysicsListHelper::GetPhysicsListHelper();
-  if ( fLooperThresholdsLevel == 0 ) {
+  if (fLooperThresholdsLevel == 0) {
     if (VerboseLevel() > 0) {
       G4cout << "### Use low looper thresholds" << G4endl;
     }
     plHelper->UseLowLooperThresholds();
   }
-  else if ( fLooperThresholdsLevel == 1 ) {
+  else if (fLooperThresholdsLevel == 1) {
     // Do nothing: Geant4 defaults
   }
-  else if ( fLooperThresholdsLevel == 2 ) {
+  else if (fLooperThresholdsLevel == 2) {
     if (VerboseLevel() > 0) {
       G4cout << "### Use high looper thresholds" << G4endl;
     }
@@ -133,8 +135,8 @@ void TG4ComposedPhysicsList::SetLooperThresholds()
     TString message = "The level";
     message += fLooperThresholdsLevel;
     message += " is not supported (the value must be 0, 1 or 2.)";
-    TG4Globals::Warning("TG4ComposedPhysicsList",
-      "SetPresetLooperThresholds", message);
+    TG4Globals::Warning(
+      "TG4ComposedPhysicsList", "SetPresetLooperThresholds", message);
   }
 }
 
@@ -189,15 +191,15 @@ void TG4ComposedPhysicsList::ConstructProcess()
   }
 
   if (VerboseLevel() > 1)
-    if ( fLooperThresholdsLevel != fgkDefautLooperThresholdsLevel ) {
+    if (fLooperThresholdsLevel != fgkDefautLooperThresholdsLevel) {
       // Print looper thresholds
       auto transportation = FindTransportation(G4Electron::Electron());
-      if ( transportation ) {
+      if (transportation) {
         transportation->ReportLooperThresholds();
       }
     }
 
-    G4cout << "TG4ComposedPhysicsList::ConstructProcess done" << G4endl;
+  G4cout << "TG4ComposedPhysicsList::ConstructProcess done" << G4endl;
 }
 
 //_____________________________________________________________________________

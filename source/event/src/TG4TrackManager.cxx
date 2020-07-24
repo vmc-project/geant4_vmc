@@ -96,8 +96,8 @@ void TG4TrackManager::LateInitialize()
 
   fStackPopper = TG4StackPopper::Instance();
 
-#if ( defined(USE_G4ROOT) && \
-    (!defined(USE_ROOT_VMC) || (ROOT_VERSION_CODE >= ROOT_VERSION(6, 18, 6))))
+#if (defined(USE_G4ROOT) && (!defined(USE_ROOT_VMC) || \
+                              (ROOT_VERSION_CODE >= ROOT_VERSION(6, 18, 6))))
   // Set recovery lambda
   if (fMCManager && fRootNavMgr) {
     fRootNavMgr->SetGeometryRestoreFunction([this](Int_t g4TrackId) -> Bool_t {

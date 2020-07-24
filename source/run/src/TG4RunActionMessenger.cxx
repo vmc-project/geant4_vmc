@@ -75,15 +75,17 @@ TG4RunActionMessenger::TG4RunActionMessenger(TG4RunAction* runAction)
     "/mcRun/setLooperThresholdImportantEnergy", this);
   guidance = "Set important energy threshold: ";
   fSetLooperThresholdImportantEnergyCmd->SetGuidance(guidance);
-  guidance = "it enables tracks above its value to survive a chosen number of ‘tracking’ steps";
+  guidance =
+    "it enables tracks above its value to survive a chosen number of "
+    "‘tracking’ steps";
   fSetLooperThresholdImportantEnergyCmd->SetGuidance(guidance);
   fSetLooperThresholdImportantEnergyCmd->SetUnitCategory("Energy");
   fSetLooperThresholdImportantEnergyCmd->SetParameterName(
     "LooperThresholdImportantEnergy", false);
   fSetLooperThresholdImportantEnergyCmd->AvailableForStates(G4State_PreInit);
 
-  fSetNumberOfLooperThresholdTrialsCmd = new G4UIcmdWithAnInteger(
-    "/mcRun/setNumberOfLooperThresholdTrials", this);
+  fSetNumberOfLooperThresholdTrialsCmd =
+    new G4UIcmdWithAnInteger("/mcRun/setNumberOfLooperThresholdTrials", this);
   guidance = "Set number of trials to propagate a looping track";
   fSetNumberOfLooperThresholdTrialsCmd->SetGuidance(guidance);
   fSetNumberOfLooperThresholdTrialsCmd->SetParameterName(

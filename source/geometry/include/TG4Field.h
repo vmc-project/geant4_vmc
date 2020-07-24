@@ -59,7 +59,7 @@ class TG4Field
   G4Field* GetG4Field() const;
   G4EquationOfMotion* GetEquation() const;
   G4MagIntegratorStepper* GetStepper() const;
-  G4VIntegrationDriver*  GetIntegrationDriver() const;
+  G4VIntegrationDriver* GetIntegrationDriver() const;
 
  private:
   // methods
