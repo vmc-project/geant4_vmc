@@ -9,6 +9,17 @@
      
 Tags (history):
 ===============
+  25/07/2020
+  v3-6-p6-inclxx-biasing-p4:
+    Patch release, including following fixes:
+    Geant4 VMC:
+    - Fix in mtroot/CMakeLists.txt:
+      Replaced LESS_EQUAL with NOT GREATER to be compatible with the minimal 
+      CMake version,
+
+    Tested with Geant4 10.04.p03 (with embedded CLHEP 2.3.4.3.)
+      Root 6.18/04, VGM 4.4
+
   23/07/2020
   v3-6-p6-inclxx-biasing-p3:
     Patch release, including following fixes:
