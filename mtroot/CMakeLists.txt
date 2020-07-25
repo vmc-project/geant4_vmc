@@ -71,7 +71,7 @@ set(headers
     ${PROJECT_SOURCE_DIR}/include/TMCRootManagerMT.h
     ${PROJECT_SOURCE_DIR}/include/TVirtualMCRootManager.h
     )
-if (ROOT_FOUND_VERSION LESS_EQUAL 60804)
+if (NOT ROOT_FOUND_VERSION GREATER 60804)
   set(headers ${headers} ${PROJECT_SOURCE_DIR}/include/TMCAutoLock.h)
 endif()
 
