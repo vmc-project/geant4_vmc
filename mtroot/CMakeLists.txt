@@ -61,7 +61,7 @@ set(sources
     ${PROJECT_SOURCE_DIR}/src/TMCRootManagerMT.cxx
     ${PROJECT_SOURCE_DIR}/src/TVirtualMCRootManager.cxx
     )
-if (ROOT_FOUND_VERSION LESS_EQUAL 60804)
+if (NOT ROOT_FOUND_VERSION GREATER 60804)
   set(sources ${sources} ${PROJECT_SOURCE_DIR}/src/TMCAutoLock.cxx)
 endif()
 
