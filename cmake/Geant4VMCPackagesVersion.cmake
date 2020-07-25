@@ -13,6 +13,6 @@
 
 set(Geant4VMCPackages_VERSION_MAJOR "3")
 set(Geant4VMCPackages_VERSION_MINOR "6")
-set(Geant4VMCPackages_VERSION_PATCH "6-inclxx-biasing-p4")
+set(Geant4VMCPackages_VERSION_PATCH "6-inclxx-biasing-p5")
 set(Geant4VMCPackages_VERSION
     ${Geant4VMCPackages_VERSION_MAJOR}.${Geant4VMCPackages_VERSION_MINOR}.${Geant4VMCPackages_VERSION_PATCH})
