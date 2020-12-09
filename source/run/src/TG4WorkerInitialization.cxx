@@ -20,6 +20,7 @@
 
 #include <G4AutoLock.hh>
 #include <G4Types.hh>
+#include <G4Threading.hh>
 
 #ifdef G4MULTITHREADED
 namespace

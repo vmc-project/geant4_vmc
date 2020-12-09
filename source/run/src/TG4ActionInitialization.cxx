@@ -30,6 +30,7 @@
 #include <TVirtualMCApplication.h>
 
 #include <G4Types.hh>
+#include <G4Threading.hh>
 
 //_____________________________________________________________________________
 TG4ActionInitialization::TG4ActionInitialization(

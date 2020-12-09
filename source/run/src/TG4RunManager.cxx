@@ -37,6 +37,7 @@
 #include "TG4WorkerInitialization.h"
 
 #include <G4Types.hh>
+#include <G4Threading.hh>
 #ifdef G4MULTITHREADED
 #include <G4MTRunManager.hh>
 #else

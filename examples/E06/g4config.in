@@ -32,8 +32,8 @@
 
 # Set parameters for Cerenkov
 #
-/process/optical/defaults/cerenkov/setMaxPhotons 20
-/process/optical/defaults/cerenkov/setMaxBetaChange 0.1
+/process/optical/cerenkov/setMaxPhotons 20
+/process/optical/cerenkov/setMaxBetaChange 0.1
 /process/optical/setTrackSecondariesFirst Cerenkov false
 
 #/tracking/verbose 1
