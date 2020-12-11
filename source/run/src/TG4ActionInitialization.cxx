@@ -29,8 +29,8 @@
 #include <TROOT.h>
 #include <TVirtualMCApplication.h>
 
-#include <G4Types.hh>
 #include <G4Threading.hh>
+#include <G4Types.hh>
 
 //_____________________________________________________________________________
 TG4ActionInitialization::TG4ActionInitialization(

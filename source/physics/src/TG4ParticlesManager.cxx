@@ -23,9 +23,9 @@
 #include <G4Monopole.hh>
 #include <G4ParticleDefinition.hh>
 #include <G4ParticleTable.hh>
+#include <G4Threading.hh>
 #include <G4Types.hh>
 #include <G4Version.hh>
-#include <G4Threading.hh>
 
 #include <TClonesArray.h>
 #include <TDatabasePDG.h>

@@ -26,10 +26,10 @@
 #include <G4Positron.hh>
 #include <G4Run.hh>
 #include <G4SystemOfUnits.hh>
+#include <G4Threading.hh>
 #include <G4Transportation.hh>
 #include <G4Types.hh>
 #include <G4UImanager.hh>
-#include <G4Threading.hh>
 #include <Randomize.hh>
 
 #include <TObjArray.h>

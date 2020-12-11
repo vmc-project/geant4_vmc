@@ -295,10 +295,10 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
           processName != "electronNuclear" && processName != "photoNuclear" &&
           processName != "photonNuclear" && processName != "Scintillation" &&
           processName != "OpMieHG" && processName != "OpWLS" &&
-          processName != "OpWLS2" &&
-          processName != "MinEkineCuts" && processName != "G4MinEkineCuts" &&
-          processName != "MaxTimeCuts" && processName != "stackPopper" &&
-          processName != "StepLimiter" && processName != "GammaXTRadiator" &&
+          processName != "OpWLS2" && processName != "MinEkineCuts" &&
+          processName != "G4MinEkineCuts" && processName != "MaxTimeCuts" &&
+          processName != "stackPopper" && processName != "StepLimiter" &&
+          processName != "GammaXTRadiator" &&
           processName != "StrawXTRadiator" &&
           processName != "RegularXTRadiator" &&
           processName != "G4MaxTimeCuts" && processName != "biasWrapper(0)" &&
