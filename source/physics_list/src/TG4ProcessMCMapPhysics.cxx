@@ -244,6 +244,7 @@ void TG4ProcessMCMapPhysics::FillMap(G4bool isBiasing)
   mcMap->Add("OpBoundary", kPLightScattering);
   mcMap->Add("OpMieHG", kPLightScattering);
   mcMap->Add("OpWLS", kPNull);
+  mcMap->Add("OpWLS2", kPNull);
 // Available since 6.07/03 and 5.34/35
 #if ((ROOT_VERSION_CODE >= ROOT_VERSION(6, 7, 3)) ||  \
      ((ROOT_VERSION_CODE <= ROOT_VERSION(6, 0, 0)) && \

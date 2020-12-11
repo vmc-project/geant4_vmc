@@ -468,7 +468,7 @@ G4int TG4ParticlesManager::GetPDGEncoding(G4ParticleDefinition* particle)
 
   // Get PDG encoding from G4 particle definition
   G4int pdgEncoding = particle->GetPDGEncoding();
-  if (pdgEncoding) {
+  if (pdgEncoding && (pdgEncoding != -22)) {
     // Add particle to TDatabasePDG
     if (!TDatabasePDG::Instance()->GetParticle(pdgEncoding))
       AddParticleToPdgDatabase(particle->GetParticleName(), particle);

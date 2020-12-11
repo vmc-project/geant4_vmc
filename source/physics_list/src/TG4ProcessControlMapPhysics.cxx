@@ -242,6 +242,7 @@ void TG4ProcessControlMapPhysics::FillMap(G4bool isBiasing)
   controlMap->Add("OpBoundary", kLABS);
   controlMap->Add("OpMieHG", kNoG3Controls);
   controlMap->Add("OpWLS", kNoG3Controls);
+  controlMap->Add("OpWLS2", kNoG3Controls);
   controlMap->Add("GammaXTRadiator", kNoG3Controls);
   controlMap->Add("StrawXTRadiator", kNoG3Controls);
   controlMap->Add("RegularXTRadiator", kNoG3Controls);
@@ -294,6 +295,7 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
           processName != "electronNuclear" && processName != "photoNuclear" &&
           processName != "photonNuclear" && processName != "Scintillation" &&
           processName != "OpMieHG" && processName != "OpWLS" &&
+          processName != "OpWLS2" &&
           processName != "MinEkineCuts" && processName != "G4MinEkineCuts" &&
           processName != "MaxTimeCuts" && processName != "stackPopper" &&
           processName != "StepLimiter" && processName != "GammaXTRadiator" &&

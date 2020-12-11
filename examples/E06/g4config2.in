@@ -30,5 +30,6 @@
 /process/optical/mie/verbose 0
 /process/optical/boundary/verbose 0
 /process/optical/wls/verbose 0
+/process/optical/wls2/verbose 0
 /process/optical/scintillation/verbose 0
 /process/optical/cerenkov/verbose 0
