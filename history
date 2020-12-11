@@ -9,6 +9,19 @@
 
 Tags (history):
 ===============
+  11/12/2020
+  v5-3:
+    All packages:
+    - Migration to Geant4 10.7
+      - Added G4Threading.hh includes where G4MULTITHREADED is used
+      - Updated process maps
+      - Update commands for setting optical parameters in E06/g4config.in
+        and take into account new value of the PDG encoding for opticalphoton
+        (-22, was 0 in 10.6.px)
+
+    Tested with VMC 1.0.p3, Geant4 10.7 (with embedded CLHEP 2.4.4.0.)
+      Root 6.22/06, VGM 4.8, Garfield master at 17a26cca556f50f16
+
   24/07/2020
   v5-2:
     Geant4 VMC:
