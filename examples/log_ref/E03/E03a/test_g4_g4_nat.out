@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.22/00                        https://root.cern |
+  | Welcome to ROOT 6.22/06                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
-  | From tags/v6-22-00@v6-22-00                                      |
+  | Built for macosx64 on Dec 10 2020, 11:40:00                      |
+  | From tags/v6-22-06@v6-22-06                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -27,13 +27,13 @@ Processing test_E03_1.C("g4Config1.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.2 ( 24 July 2020 )
+ Version 5.3 ( 11 December 2020 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-10-06-patch-02    (29-May-2020)
+ Geant4 version Name: geant4-10-07    (4-December-2020)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -74,7 +74,7 @@ Geant4 has been created.
           ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
 
 
- Material: Galactic    density:  0.000 kg/m3   RadL: 204310101.835 pc   Nucl.Int.Length: 113427275.267 pc 
+ Material: Galactic    density:  0.000 mg/cm3  RadL: 204310098.490 pc   Nucl.Int.Length: 113427284.261 pc 
                        Imean:  19.200 eV   temperature:   2.73 K  pressure:   0.00 atm
 
    --->  Element: H (H)   Z =  1.0   N =     1   A =  1.008 g/mole
@@ -107,7 +107,7 @@ Checking overlaps for volume GAPX (G4Box) ... OK!
 ---> The calorimeter is 10 layers of: [ 10mm of G4_Pb + 5mm of liquidArgon ] 
 ------------------------------------------------------------
 
- FTFP_BERT : new threshold between BERT and FTFP is over the interval 
+ hInelastic FTFP_BERT : threshold between BERT and FTFP is over the interval 
  for pions :   3 to 6 GeV
  for kaons :   3 to 6 GeV
  for proton :  3 to 6 GeV
@@ -160,10 +160,11 @@ Rayl:  for gamma SubType=11 BuildTable=1
    LivermoreRayleigh : Emin=    0 eV  Emax=  100 TeV  CullenGenerator
 
 msc:  for e-  SubType= 10
-      RangeFactor= 0.04, stepLimType: 1, latDisp: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 MeV Nbins=42 100 eV  - 100 MeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
         WentzelVIUni : Emin=  100 MeV Emax=  100 TeV Nbins=42 100 MeV - 100 TeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
 
 eIoni:  for e-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -187,10 +188,11 @@ CoulombScat:  for e-, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=  100 MeV Emax=  100 TeV
 
 msc:  for e+  SubType= 10
-      RangeFactor= 0.04, stepLimType: 1, latDisp: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 MeV Nbins=42 100 eV  - 100 MeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
         WentzelVIUni : Emin=  100 MeV Emax=  100 TeV Nbins=42 100 MeV - 100 TeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
 
 eIoni:  for e+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -218,9 +220,9 @@ CoulombScat:  for e+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=  100 MeV Emax=  100 TeV
 
 msc:  for proton  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for proton  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -234,14 +236,14 @@ hBrems:  for proton  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for proton  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for proton, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -250,9 +252,9 @@ CoulombScat:  for proton, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for GenericIon  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 ionIoni:  for GenericIon  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -264,9 +266,9 @@ ionIoni:  for GenericIon  SubType=2
           BetheBloch : Emin=    2 MeV Emax=  100 TeV
 
 msc:  for alpha  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 ionIoni:  for alpha  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -277,9 +279,9 @@ ionIoni:  for alpha  SubType=2
           BetheBloch : Emin=7.9452 MeV Emax=  100 TeV
 
 msc:  for anti_proton  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for anti_proton  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -293,14 +295,14 @@ hBrems:  for anti_proton  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for anti_proton  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for anti_proton, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -309,9 +311,9 @@ CoulombScat:  for anti_proton, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for kaon+  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for kaon+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -325,14 +327,14 @@ hBrems:  for kaon+  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon+  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for kaon+, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -341,9 +343,9 @@ CoulombScat:  for kaon+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for kaon-  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for kaon-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -357,14 +359,14 @@ hBrems:  for kaon-  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon-  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for kaon-, integral:1  SubType=1 BuildTable=1
       Used Lambda table of kaon+
@@ -373,9 +375,9 @@ CoulombScat:  for kaon-, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for mu+  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0, polarAngLim(deg)= 180
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 muIoni:  for mu+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -390,14 +392,14 @@ muBrems:  for mu+  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-              MuBrem : Emin=    0 eV  Emax=  100 TeV
+              MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu+  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 1 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-          muPairProd : Emin=    0 eV  Emax=  100 TeV
+          muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for mu+, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -406,9 +408,9 @@ CoulombScat:  for mu+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for mu-  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0, polarAngLim(deg)= 180
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 muIoni:  for mu-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -423,14 +425,14 @@ muBrems:  for mu-  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-              MuBrem : Emin=    0 eV  Emax=  100 TeV
+              MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu-  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 1 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-          muPairProd : Emin=    0 eV  Emax=  100 TeV
+          muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for mu-, integral:1  SubType=1 BuildTable=1
       Used Lambda table of mu+
@@ -439,9 +441,9 @@ CoulombScat:  for mu-, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for pi+  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for pi+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -455,14 +457,14 @@ hBrems:  for pi+  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi+  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for pi+, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -471,9 +473,9 @@ CoulombScat:  for pi+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for pi-  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for pi-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -487,14 +489,14 @@ hBrems:  for pi-  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi-  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
       Used Lambda table of pi+
@@ -524,36 +526,58 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: nKiller
 
 ---------------------------------------------------
+                           Hadronic Processes for B-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: B-Inelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for D-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: D-Inelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
                            Hadronic Processes for GenericIon
 
   Process: ionInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for He3
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: He3Inelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for alpha
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: alphaInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for anti_He3
@@ -561,11 +585,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_He3Inelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -575,11 +599,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_alphaInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -589,11 +613,24 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_deuteronInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_lambda
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: anti_lambdaInelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
   Process: hFritiofCaptureAtRest
 
@@ -603,11 +640,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
         Model:              AntiAElastic: 100 MeV ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_neutronInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -617,11 +654,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
         Model:              AntiAElastic: 100 MeV ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_protonInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -631,11 +668,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_tritonInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -644,12 +681,12 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: dInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for e+
@@ -669,7 +706,8 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
                            Hadronic Processes for gamma
 
   Process: photonNuclear
-        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+        Model:               GammaNPreco: 0 eV  ---> 200 MeV
+        Model:            BertiniCascade: 199 MeV ---> 6 GeV
         Model:           TheoFSGenerator: 3 GeV ---> 100 TeV
      Cr_sctns:            PhotoNuclearXS: 0 eV  ---> 100 TeV
 
@@ -707,8 +745,8 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
   Process: lambdaInelastic
-        Model:            BertiniCascade: 0 eV  ---> 6 GeV
         Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -766,16 +804,30 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
+                           Hadronic Processes for sigma-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: sigma-Inelastic
+        Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: hBertiniCaptureAtRest
+
+---------------------------------------------------
                            Hadronic Processes for triton
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: tInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ================================================================
 =======================================================================
@@ -795,15 +847,15 @@ Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
 Time limit for long lived isomeres (ns)             1000
+Isomer production flag                              1
 Internal e- conversion flag                         1
 Store e- internal conversion data                   0
 Electron internal conversion ID                     2
 Correlated gamma emission flag                      0
 Max 2J for sampling of angular correlations         10
-Upload data before 1st event for                Z < 9
 =======================================================================
 
-========= Table of registered couples ==============================
+========= Table of registered couples ============================
 
 Index : 0     used in the geometry : Yes
  Material : Galactic
@@ -826,36 +878,36 @@ Index : 2     used in the geometry : Yes
  Region(s) which use this couple : 
     DefaultRegionForTheWorld
 
-====================================================================
+==================================================================
 
 ### Run 0 start.
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 646.902       total track length (cm):  46.0182
-   Gap:      total energy (MeV): 186.328       total track length (cm):   96.598
+   Absorber: total energy (MeV): 649.819       total track length (cm):  46.3218
+   Gap:      total energy (MeV): 228.402       total track length (cm):  116.442
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV): 702.279       total track length (cm):  49.7231
-   Gap:      total energy (MeV): 196.808       total track length (cm):  98.6134
+   Absorber: total energy (MeV):  679.54       total track length (cm):  48.3578
+   Gap:      total energy (MeV): 233.993       total track length (cm):  118.251
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 761.791       total track length (cm):   54.152
-   Gap:      total energy (MeV): 166.994       total track length (cm):    84.89
+   Absorber: total energy (MeV): 721.661       total track length (cm):  51.6555
+   Gap:      total energy (MeV): 184.339       total track length (cm):  92.9452
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 533.409       total track length (cm):  37.7152
-   Gap:      total energy (MeV): 195.522       total track length (cm):  102.103
+   Absorber: total energy (MeV):  693.39       total track length (cm):  49.6497
+   Gap:      total energy (MeV): 179.607       total track length (cm):  90.0465
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 751.203       total track length (cm):  53.6139
-   Gap:      total energy (MeV): 144.952       total track length (cm):  71.6556
-Time of this run:   User=0.070000s Real=0.071109s Sys=0.000000s
+   Absorber: total energy (MeV): 716.788       total track length (cm):  50.7043
+   Gap:      total energy (MeV): 198.072       total track length (cm):  99.6985
+Time of this run:   User=0.070000s Real=0.068371s Sys=0.000000s
 Number of events processed: 5
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.22/00                        https://root.cern |
+  | Welcome to ROOT 6.22/06                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
-  | From tags/v6-22-00@v6-22-00                                      |
+  | Built for macosx64 on Dec 10 2020, 11:40:00                      |
+  | From tags/v6-22-06@v6-22-06                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -881,13 +933,13 @@ Processing test_E03_2.C("g4Config1.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.2 ( 24 July 2020 )
+ Version 5.3 ( 11 December 2020 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-10-06-patch-02    (29-May-2020)
+ Geant4 version Name: geant4-10-07    (4-December-2020)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -929,7 +981,7 @@ Geant4 has been created.
           ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
 
 
- Material: Galactic    density:  0.000 kg/m3   RadL: 204310101.835 pc   Nucl.Int.Length: 113427275.267 pc 
+ Material: Galactic    density:  0.000 mg/cm3  RadL: 204310098.490 pc   Nucl.Int.Length: 113427284.261 pc 
                        Imean:  19.200 eV   temperature:   2.73 K  pressure:   0.00 atm
 
    --->  Element: H (H)   Z =  1.0   N =     1   A =  1.008 g/mole
@@ -963,7 +1015,7 @@ Checking overlaps for volume GAPX (G4Box) ... OK!
 ---> The calorimeter is 10 layers of: [ 10mm of G4_Pb + 5mm of liquidArgon ] 
 ------------------------------------------------------------
 
- FTFP_BERT : new threshold between BERT and FTFP is over the interval 
+ hInelastic FTFP_BERT : threshold between BERT and FTFP is over the interval 
  for pions :   3 to 6 GeV
  for kaons :   3 to 6 GeV
  for proton :  3 to 6 GeV
@@ -1018,10 +1070,11 @@ Rayl:  for gamma SubType=11 BuildTable=1
    LivermoreRayleigh : Emin=    0 eV  Emax=  100 TeV  CullenGenerator
 
 msc:  for e-  SubType= 10
-      RangeFactor= 0.04, stepLimType: 1, latDisp: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 MeV Nbins=42 100 eV  - 100 MeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
         WentzelVIUni : Emin=  100 MeV Emax=  100 TeV Nbins=42 100 MeV - 100 TeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
 
 eIoni:  for e-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -1045,10 +1098,11 @@ CoulombScat:  for e-, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=  100 MeV Emax=  100 TeV
 
 msc:  for e+  SubType= 10
-      RangeFactor= 0.04, stepLimType: 1, latDisp: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 MeV Nbins=42 100 eV  - 100 MeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
         WentzelVIUni : Emin=  100 MeV Emax=  100 TeV Nbins=42 100 MeV - 100 TeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
 
 eIoni:  for e+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -1076,9 +1130,9 @@ CoulombScat:  for e+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=  100 MeV Emax=  100 TeV
 
 msc:  for proton  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for proton  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -1092,14 +1146,14 @@ hBrems:  for proton  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for proton  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for proton, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -1108,9 +1162,9 @@ CoulombScat:  for proton, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for GenericIon  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 ionIoni:  for GenericIon  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -1122,9 +1176,9 @@ ionIoni:  for GenericIon  SubType=2
           BetheBloch : Emin=    2 MeV Emax=  100 TeV
 
 msc:  for alpha  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 ionIoni:  for alpha  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -1135,9 +1189,9 @@ ionIoni:  for alpha  SubType=2
           BetheBloch : Emin=7.9452 MeV Emax=  100 TeV
 
 msc:  for anti_proton  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for anti_proton  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -1151,14 +1205,14 @@ hBrems:  for anti_proton  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for anti_proton  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for anti_proton, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -1167,9 +1221,9 @@ CoulombScat:  for anti_proton, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for kaon+  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for kaon+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -1183,14 +1237,14 @@ hBrems:  for kaon+  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon+  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for kaon+, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -1199,9 +1253,9 @@ CoulombScat:  for kaon+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for kaon-  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for kaon-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -1215,14 +1269,14 @@ hBrems:  for kaon-  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon-  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for kaon-, integral:1  SubType=1 BuildTable=1
       Used Lambda table of kaon+
@@ -1231,9 +1285,9 @@ CoulombScat:  for kaon-, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for mu+  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0, polarAngLim(deg)= 180
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 muIoni:  for mu+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -1248,14 +1302,14 @@ muBrems:  for mu+  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-              MuBrem : Emin=    0 eV  Emax=  100 TeV
+              MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu+  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 1 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-          muPairProd : Emin=    0 eV  Emax=  100 TeV
+          muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for mu+, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -1264,9 +1318,9 @@ CoulombScat:  for mu+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for mu-  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0, polarAngLim(deg)= 180
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 muIoni:  for mu-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -1281,14 +1335,14 @@ muBrems:  for mu-  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-              MuBrem : Emin=    0 eV  Emax=  100 TeV
+              MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu-  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 1 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-          muPairProd : Emin=    0 eV  Emax=  100 TeV
+          muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for mu-, integral:1  SubType=1 BuildTable=1
       Used Lambda table of mu+
@@ -1297,9 +1351,9 @@ CoulombScat:  for mu-, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for pi+  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for pi+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -1313,14 +1367,14 @@ hBrems:  for pi+  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi+  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for pi+, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -1329,9 +1383,9 @@ CoulombScat:  for pi+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for pi-  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for pi-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -1345,14 +1399,14 @@ hBrems:  for pi-  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi-  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
       Used Lambda table of pi+
@@ -1382,36 +1436,58 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: nKiller
 
 ---------------------------------------------------
+                           Hadronic Processes for B-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: B-Inelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for D-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: D-Inelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
                            Hadronic Processes for GenericIon
 
   Process: ionInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for He3
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: He3Inelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for alpha
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: alphaInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for anti_He3
@@ -1419,11 +1495,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_He3Inelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -1433,11 +1509,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_alphaInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -1447,11 +1523,24 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_deuteronInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_lambda
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: anti_lambdaInelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
   Process: hFritiofCaptureAtRest
 
@@ -1461,11 +1550,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
         Model:              AntiAElastic: 100 MeV ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_neutronInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -1475,11 +1564,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
         Model:              AntiAElastic: 100 MeV ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_protonInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -1489,11 +1578,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_tritonInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -1502,12 +1591,12 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: dInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for e+
@@ -1527,7 +1616,8 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
                            Hadronic Processes for gamma
 
   Process: photonNuclear
-        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+        Model:               GammaNPreco: 0 eV  ---> 200 MeV
+        Model:            BertiniCascade: 199 MeV ---> 6 GeV
         Model:           TheoFSGenerator: 3 GeV ---> 100 TeV
      Cr_sctns:            PhotoNuclearXS: 0 eV  ---> 100 TeV
 
@@ -1565,8 +1655,8 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
   Process: lambdaInelastic
-        Model:            BertiniCascade: 0 eV  ---> 6 GeV
         Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -1624,16 +1714,30 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
+                           Hadronic Processes for sigma-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: sigma-Inelastic
+        Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: hBertiniCaptureAtRest
+
+---------------------------------------------------
                            Hadronic Processes for triton
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: tInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ================================================================
 =======================================================================
@@ -1653,15 +1757,15 @@ Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
 Time limit for long lived isomeres (ns)             1000
+Isomer production flag                              1
 Internal e- conversion flag                         1
 Store e- internal conversion data                   0
 Electron internal conversion ID                     2
 Correlated gamma emission flag                      0
 Max 2J for sampling of angular correlations         10
-Upload data before 1st event for                Z < 9
 =======================================================================
 
-========= Table of registered couples ==============================
+========= Table of registered couples ============================
 
 Index : 0     used in the geometry : Yes
  Material : Galactic
@@ -1684,7 +1788,7 @@ Index : 2     used in the geometry : Yes
  Region(s) which use this couple : 
     DefaultRegionForTheWorld
 
-====================================================================
+==================================================================
 
 ### Run 0 start.
 --- Begin event 
@@ -1700,514 +1804,555 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   0    -9.000    0.000    0.000    50.0000    0.0000    0.000    0.000     WRLD  No active process
 #   1    -5.000    0.000    0.000    50.0000    0.0000    4.000    4.000     WRLD  Transportation
 #   2    -5.000    0.000    0.000    50.0000    0.0000    0.000    4.000     ABSO  No active process
-#   3    -4.648    0.000    0.000    45.4784    4.1799    0.362    4.362     ABSO  Bremstrahlung
-#   4    -4.591    0.024    0.007    44.3674    0.7228    0.062    4.425     ABSO  Bremstrahlung
-#   5    -4.474    0.052    0.023    40.1227    1.7150    0.123    4.547     ABSO  Bremstrahlung
-#   6    -4.470    0.053    0.023    35.8692    0.0299    0.004    4.551     ABSO  Bremstrahlung
-#   7    -4.449    0.060    0.026    35.4194    0.2272    0.022    4.573     ABSO  Bremstrahlung
-#   8    -4.244    0.116    0.019    30.9390    3.6688    0.217    4.790     ABSO  Bremstrahlung
-#   9    -4.128    0.162    0.012    27.8658    1.4053    0.126    4.916     ABSO  Bremstrahlung
-#  10    -4.102    0.172    0.015    26.5490    0.3120    0.028    4.944     ABSO  Bremstrahlung
-#  11    -4.024    0.200    0.004    25.1012    1.2684    0.084    5.028     ABSO  Bremstrahlung
-#  12    -3.976    0.209   -0.000    24.4690    0.6322    0.050    5.078     ABSO  Transportation
-#  13    -3.976    0.209   -0.000    24.4690    0.0000    0.000    5.078     GAPX  No active process
-#  14    -1.401    0.760   -0.019    19.3910    4.9908    2.726    7.804     GAPX  Bremstrahlung
-#  15    -1.315    0.764    0.000    19.1759    0.2151    0.089    7.893     GAPX  Transportation
-#  16    -1.315    0.764    0.000    19.1759    0.0000    0.000    7.893     ABSO  No active process
-#  17    -1.264    0.760    0.017     8.6234    0.7784    0.054    7.947     ABSO  Bremstrahlung
-#  18    -1.148    0.701    0.062     6.5847    2.0387    0.183    8.130     ABSO  Multiple scattering
-#  19    -1.145    0.613    0.038     4.6354    1.0077    0.107    8.236     ABSO  Bremstrahlung
-#  20    -1.182    0.599    0.002     3.3672    1.1428    0.105    8.342     ABSO  Bremstrahlung
-#  21    -1.181    0.599   -0.000     3.3420    0.0252    0.003    8.345     ABSO  Transportation
-#  22    -1.181    0.599   -0.000     3.3420    0.0000    0.000    8.345     GAPX  No active process
-#  23    -1.181    0.599   -0.000     3.3420    0.0000    0.000    8.345     GAPX  Transportation
-#  24    -1.181    0.599   -0.000     3.3420    0.0000    0.000    8.345     ABSO  No active process
-#  25    -1.172    0.596    0.000     3.2308    0.1112    0.011    8.356     ABSO  Multiple scattering
-#  26    -1.163    0.597    0.002     3.1141    0.1167    0.011    8.366     ABSO  Multiple scattering
-#  27    -1.153    0.599    0.001     3.0072    0.1069    0.011    8.377     ABSO  Multiple scattering
-#  28    -1.147    0.602    0.000     2.7385    0.2686    0.007    8.384     ABSO  Transportation
-#  29    -1.147    0.602    0.000     2.7385    0.0000    0.000    8.384     GAPX  No active process
-#  30    -1.147    0.602    0.000     2.7385    0.0000    0.000    8.384     GAPX  Transportation
-#  31    -1.147    0.602    0.000     2.7385    0.0000    0.000    8.384     ABSO  No active process
-#  32    -1.139    0.603    0.002     2.6417    0.0969    0.009    8.393     ABSO  Multiple scattering
-#  33    -1.132    0.607    0.004     2.5350    0.1066    0.010    8.403     ABSO  Multiple scattering
-#  34    -1.124    0.607    0.002     2.4409    0.0941    0.009    8.411     ABSO  Multiple scattering
-#  35    -1.118    0.606    0.001     2.3631    0.0778    0.007    8.419     ABSO  Multiple scattering
-#  36    -1.113    0.603   -0.000     2.2886    0.0746    0.007    8.425     ABSO  Transportation
-#  37    -1.113    0.603   -0.000     2.2886    0.0000    0.000    8.425     GAPX  No active process
-#  38    -1.113    0.603   -0.000     2.2886    0.0000    0.000    8.425     GAPX  Transportation
-#  39    -1.113    0.603   -0.000     2.2886    0.0000    0.000    8.425     ABSO  No active process
-#  40    -1.110    0.597    0.004     2.2279    0.0607    0.008    8.433     ABSO  Multiple scattering
-#  41    -1.107    0.594    0.007     2.1807    0.0472    0.006    8.439     ABSO  Multiple scattering
-#  42    -1.105    0.591    0.013     2.1188    0.0619    0.008    8.447     ABSO  Multiple scattering
-#  43    -1.100    0.588    0.016     2.0525    0.0663    0.007    8.453     ABSO  Multiple scattering
-#  44    -1.096    0.583    0.018     1.9969    0.0556    0.007    8.460     ABSO  Multiple scattering
-#  45    -1.087    0.578    0.022     1.8914    0.1055    0.013    8.473     ABSO  Multiple scattering
-#  46    -1.078    0.578    0.029     1.7528    0.1386    0.014    8.487     ABSO  Multiple scattering
-#  47    -1.066    0.569    0.031     1.5597    0.1932    0.018    8.505     ABSO  Multiple scattering
-#  48    -1.069    0.559    0.036     1.4349    0.1247    0.015    8.520     ABSO  Multiple scattering
-#  49    -1.073    0.544    0.044     1.2211    0.2139    0.022    8.542     ABSO  Multiple scattering
-#  50    -1.089    0.552    0.044     0.9325    0.2886    0.023    8.565     ABSO  Multiple scattering
-#  51    -1.094    0.551    0.045     0.0000    0.9325    0.067    8.632     ABSO  Energy loss
+#   3    -4.609    0.000    0.000    43.8043    5.7260    0.404    4.404     ABSO  Bremstrahlung
+#   4    -4.609    0.000    0.000    43.8043    0.0000    0.000    4.404     ABSO  Transportation
+#   5    -4.609    0.000    0.000    43.8043    0.0000    0.000    4.404     GAPX  No active process
+#   6    -3.550    0.053   -0.109    41.4894    2.2158    1.069    5.473     GAPX  Bremstrahlung
+#   7    -3.180    0.079   -0.141    39.2277    0.8028    0.372    5.845     GAPX  Bremstrahlung
+#   8    -1.068   -0.008   -0.347    20.6747    3.9484    2.144    7.989     GAPX  Bremstrahlung
+#   9     0.719   -0.099   -0.500    17.0039    3.6708    1.853    9.843     GAPX  Transportation
+#  10     0.719   -0.099   -0.500    17.0039    0.0000    0.000    9.843     ABSO  No active process
+#  11     0.719   -0.099   -0.500    17.0039    0.0000    0.000    9.843     ABSO  Transportation
+#  12     0.719   -0.099   -0.500    17.0039    0.0000    0.000    9.843     GAPX  No active process
+#  13     2.361   -0.593   -0.318    12.9714    3.3309    1.796   11.638     GAPX  Bremstrahlung
+#  14     2.904   -1.054   -0.013    10.0902    1.7497    0.798   12.436     GAPX  Energy loss
+#  15     2.921   -1.076    0.000    10.0461    0.0440    0.030   12.467     GAPX  Transportation
+#  16     2.921   -1.076    0.000    10.0461    0.0000    0.000   12.467     ABSO  No active process
+#  17     2.926   -1.087    0.003     9.6457    0.1486    0.013   12.479     ABSO  Bremstrahlung
+#  18     2.923   -1.090   -0.000     9.5910    0.0547    0.006   12.485     ABSO  Transportation
+#  19     2.923   -1.090   -0.000     9.5910    0.0000    0.000   12.485     GAPX  No active process
+#  20     2.354   -1.842   -0.500     7.6184    1.9726    1.149   13.635     GAPX  Transportation
+#  21     2.354   -1.842   -0.500     7.6184    0.0000    0.000   13.635     ABSO  No active process
+#  22     2.354   -1.842   -0.500     7.6184    0.0000    0.000   13.635     ABSO  Transportation
+#  23     2.354   -1.842   -0.500     7.6184    0.0000    0.000   13.635     GAPX  No active process
+#  24     2.281   -1.912   -0.498     7.1056    0.1571    0.102   13.737     GAPX  Bremstrahlung
+#  25     2.260   -1.933   -0.496     6.6407    0.0310    0.030   13.767     GAPX  Energy loss
+#  26     2.244   -1.945   -0.494     6.3310    0.0301    0.020   13.787     GAPX  Bremstrahlung
+#  27     2.086   -2.068   -0.496     5.9140    0.3228    0.204   13.991     GAPX  Bremstrahlung
+#  28     2.066   -2.085   -0.500     5.8809    0.0331    0.027   14.018     GAPX  Transportation
+#  29     2.066   -2.085   -0.500     5.8809    0.0000    0.000   14.018     ABSO  No active process
+#  30     2.054   -2.093   -0.504     5.0321    0.1634    0.016   14.033     ABSO  Bremstrahlung
+#  31     2.036   -2.092   -0.507     4.8063    0.2258    0.019   14.052     ABSO  Multiple scattering
+#  32     2.020   -2.088   -0.510     4.6068    0.1995    0.018   14.070     ABSO  Multiple scattering
+#  33     2.012   -2.080   -0.509     4.3733    0.1024    0.012   14.082     ABSO  Bremstrahlung
+#  34     2.010   -2.063   -0.518     4.1553    0.2180    0.021   14.103     ABSO  Multiple scattering
+#  35     2.015   -2.047   -0.524     3.9878    0.1675    0.019   14.121     ABSO  Multiple scattering
+#  36     2.013   -2.027   -0.522     3.7394    0.2484    0.022   14.143     ABSO  Multiple scattering
+#  37     2.013   -2.021   -0.518     3.2956    0.0745    0.008   14.151     ABSO  Bremstrahlung
+#  38     2.015   -2.004   -0.513     3.0108    0.2847    0.020   14.171     ABSO  Multiple scattering
+#  39     2.034   -1.995   -0.517     2.7841    0.2268    0.025   14.196     ABSO  Multiple scattering
+#  40     2.043   -1.983   -0.510     2.6085    0.1756    0.018   14.215     ABSO  Multiple scattering
+#  41     2.047   -1.970   -0.501     2.3923    0.2162    0.018   14.233     ABSO  Multiple scattering
+#  42     2.048   -1.968   -0.500     2.3705    0.0218    0.003   14.236     ABSO  Transportation
+#  43     2.048   -1.968   -0.500     2.3705    0.0000    0.000   14.236     GAPX  No active process
+#  44     2.073   -1.862   -0.409     2.1325    0.2380    0.148   14.383     GAPX  Multiple scattering
+#  45     2.051   -1.791   -0.307     1.8932    0.2394    0.132   14.516     GAPX  Multiple scattering
+#  46     2.066   -1.713   -0.206     1.6908    0.2023    0.136   14.651     GAPX  Multiple scattering
+#  47     2.096   -1.640   -0.144     1.5439    0.1469    0.105   14.757     GAPX  Multiple scattering
+#  48     2.157   -1.579   -0.075     1.3471    0.1967    0.118   14.875     GAPX  Multiple scattering
+#  49     2.237   -1.539   -0.015     1.0023    0.3449    0.123   14.998     GAPX  Multiple scattering
+#  50     2.241   -1.530   -0.000     0.9673    0.0350    0.019   15.017     GAPX  Transportation
+#  51     2.241   -1.530   -0.000     0.9673    0.0000    0.000   15.017     ABSO  No active process
+#  52     2.240   -1.527    0.001     0.9072    0.0601    0.003   15.020     ABSO  Multiple scattering
+#  53     2.239   -1.526    0.002     0.8829    0.0243    0.003   15.023     ABSO  Multiple scattering
+#  54     2.237   -1.527    0.004     0.8656    0.0173    0.003   15.026     ABSO  Multiple scattering
+#  55     2.236   -1.530    0.004     0.8335    0.0321    0.003   15.029     ABSO  Multiple scattering
+#  56     2.236   -1.531    0.006     0.8059    0.0276    0.003   15.032     ABSO  Multiple scattering
+#  57     2.237   -1.532    0.008     0.7782    0.0277    0.003   15.035     ABSO  Multiple scattering
+#  58     2.238   -1.530    0.012     0.7541    0.0241    0.005   15.040     ABSO  Multiple scattering
+#  59     2.238   -1.527    0.010     0.7166    0.0375    0.005   15.045     ABSO  Multiple scattering
+#  60     2.239   -1.523    0.012     0.6351    0.0815    0.006   15.050     ABSO  Multiple scattering
+#  61     2.240   -1.527    0.015     0.5673    0.0678    0.007   15.057     ABSO  Multiple scattering
+#  62     2.235   -1.532    0.016     0.4601    0.1072    0.010   15.067     ABSO  Multiple scattering
+#  63     2.234   -1.533    0.017     0.0000    0.4601    0.027   15.094     ABSO  Energy loss
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 1     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -1.182    0.599    0.002     0.1254    0.0000    0.000    0.000     ABSO  No active process
-#   1    -1.181    0.599   -0.000     0.1254    0.0000    0.003    0.003     ABSO  Transportation
-#   2    -1.181    0.599   -0.000     0.1254    0.0000    0.000    0.003     GAPX  No active process
-#   3    -0.937    0.667   -0.500     0.1254    0.0000    0.560    0.563     GAPX  Transportation
-#   4    -0.937    0.667   -0.500     0.1254    0.0000    0.000    0.563     ABSO  No active process
-#   5    -0.924    0.671   -0.528     0.0000    0.0158    0.032    0.595     ABSO  Photoelectric effect
+#   0     2.013   -2.021   -0.518     0.3693    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.022   -1.998   -0.500     0.3693    0.0000    0.030    0.030     ABSO  Transportation
+#   2     2.022   -1.998   -0.500     0.3693    0.0000    0.000    0.030     GAPX  No active process
+#   3     2.274   -1.350    0.000     0.3693    0.0000    0.856    0.886     GAPX  Transportation
+#   4     2.274   -1.350    0.000     0.3693    0.0000    0.000    0.886     ABSO  No active process
+#   5     2.293   -1.302    0.037     0.3420    0.0000    0.064    0.950     ABSO  Compton scattering
+#   6     2.278   -1.234    0.109     0.3420    0.0000    0.100    1.050     ABSO  Rayleigh effect
+#   7     2.273   -1.231    0.110     0.3297    0.0000    0.006    1.056     ABSO  Compton scattering
+#   8     2.068   -1.182    0.163     0.0000    0.0883    0.218    1.273     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 2     Parent ID = 1
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.924    0.671   -0.528     0.1095    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.923    0.671   -0.528     0.0000    0.1095    0.003    0.003     ABSO  Energy loss
+#   0     2.068   -1.182    0.163     0.2414    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.067   -1.182    0.163     0.0000    0.2414    0.011    0.011     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 3     Parent ID = 0
+  Particle = e-     Track ID = 3     Parent ID = 1
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -1.145    0.613    0.038     0.9416    0.0000    0.000    0.000     ABSO  No active process
-#   1    -1.165    0.600    0.029     0.5172    0.0000    0.025    0.025     ABSO  Compton scattering
-#   2    -1.199    0.535    0.072     0.0000    0.0883    0.085    0.110     ABSO  Photoelectric effect
+#   0     2.273   -1.231    0.110     0.0123    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.273   -1.231    0.110     0.0000    0.0123    0.000    0.000     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 4     Parent ID = 3
+  Particle = e-     Track ID = 4     Parent ID = 1
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -1.199    0.535    0.072     0.4289    0.0000    0.000    0.000     ABSO  No active process
-#   1    -1.200    0.534    0.072     0.0000    0.4289    0.025    0.025     ABSO  Energy loss
+#   0     2.293   -1.302    0.037     0.0273    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.293   -1.302    0.037     0.0000    0.0273    0.000    0.000     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 5     Parent ID = 3
+  Particle = gamma     Track ID = 5     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -1.165    0.600    0.029     0.4244    0.0000    0.000    0.000     ABSO  No active process
-#   1    -1.166    0.599    0.028     0.0000    0.4244    0.024    0.024     ABSO  Energy loss
+#   0     2.012   -2.080   -0.509     0.1311    0.0000    0.000    0.000     ABSO  No active process
+#   1     1.978   -2.031   -0.517     0.0000    0.0883    0.061    0.061     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 6     Parent ID = 0
+  Particle = e-     Track ID = 6     Parent ID = 5
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -1.264    0.760    0.017     9.7740    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.851    0.815    0.298     1.6082    0.0000    0.503    0.503     ABSO  Compton scattering
-#   2    -0.157    1.284    0.286     1.5537    0.0000    0.837    1.340     ABSO  Compton scattering
-#   3    -0.020    1.384    0.258     0.0000    0.0883    0.172    1.512     ABSO  Photoelectric effect
+#   0     1.978   -2.031   -0.517     0.0428    0.0000    0.000    0.000     ABSO  No active process
+#   1     1.978   -2.031   -0.517     0.0000    0.0428    0.001    0.001     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 7     Parent ID = 6
+  Particle = gamma     Track ID = 7     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.020    1.384    0.258     1.4654    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.012    1.391    0.257     0.0000    1.4654    0.112    0.112     ABSO  Energy loss
+#   0     2.054   -2.093   -0.504     0.6853    0.0000    0.000    0.000     ABSO  No active process
+#   1     1.689   -2.183   -0.601     0.0000    0.0883    0.388    0.388     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 8     Parent ID = 6
+  Particle = e-     Track ID = 8     Parent ID = 7
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.157    1.284    0.286     0.0545    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.157    1.284    0.286     0.0000    0.0545    0.001    0.001     ABSO  Energy loss
+#   0     1.689   -2.183   -0.601     0.5971    0.0000    0.000    0.000     ABSO  No active process
+#   1     1.687   -2.184   -0.601     0.0000    0.5971    0.038    0.038     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 9     Parent ID = 6
+  Particle = gamma     Track ID = 9     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.851    0.815    0.298     8.1658    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.785    0.808    0.313     6.7719    0.7391    0.073    0.073     ABSO  Bremstrahlung
-#   2    -0.747    0.818    0.330     5.7750    0.5819    0.053    0.126     ABSO  Bremstrahlung
-#   3    -0.727    0.863    0.297     2.8574    1.0499    0.095    0.221     ABSO  Bremstrahlung
-#   4    -0.719    0.871    0.283     2.3148    0.3754    0.029    0.250     ABSO  Bremstrahlung
-#   5    -0.723    0.888    0.274     0.6518    1.6630    0.154    0.404     ABSO  Energy loss
-#   6    -0.725    0.887    0.272     0.0000    0.6518    0.043    0.447     ABSO  Energy loss
+#   0     2.086   -2.068   -0.496     0.0942    0.0000    0.000    0.000     GAPX  No active process
+#   1     2.085   -2.069   -0.496     0.0942    0.0000    0.001    0.001     GAPX  Rayleigh effect
+#   2     0.907   -2.332   -0.359     0.0721    0.0000    1.214    1.216     GAPX  Compton scattering
+#   3     1.312   -2.630   -0.500     0.0721    0.0000    0.522    1.738     GAPX  Transportation
+#   4     1.312   -2.630   -0.500     0.0721    0.0000    0.000    1.738     ABSO  No active process
+#   5     1.351   -2.659   -0.513     0.0000    0.0038    0.050    1.788     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 10     Parent ID = 9
+  Particle = e-     Track ID = 10     Parent ID = 9
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.719    0.871    0.283     0.1672    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.728    0.898    0.257     0.0000    0.0883    0.039    0.039     ABSO  Photoelectric effect
+#   0     1.351   -2.659   -0.513     0.0683    0.0000    0.000    0.000     ABSO  No active process
+#   1     1.351   -2.659   -0.514     0.0000    0.0683    0.001    0.001     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 11     Parent ID = 10
+  Particle = e-     Track ID = 11     Parent ID = 9
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.728    0.898    0.257     0.0789    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.729    0.898    0.257     0.0000    0.0789    0.002    0.002     ABSO  Energy loss
+#   0     0.907   -2.332   -0.359     0.0220    0.0000    0.000    0.000     GAPX  No active process
+#   1     0.907   -2.332   -0.359     0.0000    0.0220    0.001    0.001     GAPX  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 12     Parent ID = 9
+  Particle = gamma     Track ID = 12     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.727    0.863    0.297     1.8678    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.581    1.020    0.000     1.8678    0.0000    0.366    0.366     ABSO  Transportation
-#   2    -0.581    1.020    0.000     1.8678    0.0000    0.000    0.366     GAPX  No active process
-#   3    -0.335    1.285   -0.500     1.8678    0.0000    0.617    0.984     GAPX  Transportation
-#   4    -0.335    1.285   -0.500     1.8678    0.0000    0.000    0.984     ABSO  No active process
-#   5    -0.274    1.351   -0.624     0.0000    0.0000    0.153    1.136     ABSO  Lepton pair production
+#   0     2.244   -1.945   -0.494     0.2797    0.0000    0.000    0.000     GAPX  No active process
+#   1    -0.621   -4.282    0.000     0.2797    0.0000    3.730    3.730     GAPX  Transportation
+#   2    -0.621   -4.282    0.000     0.2797    0.0000    0.000    3.730     ABSO  No active process
+#   3    -0.717   -4.361    0.017     0.0000    0.0883    0.126    3.856     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e+     Track ID = 13     Parent ID = 12
+  Particle = e-     Track ID = 13     Parent ID = 12
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.274    1.351   -0.624     0.4869    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.275    1.352   -0.626     0.0000    0.4869    0.029    0.029     ABSO  Energy loss
-#   2    -0.275    1.352   -0.626     0.0000    0.0000    0.000    0.029     ABSO  Positron annihilation
+#   0    -0.717   -4.361    0.017     0.1914    0.0000    0.000    0.000     ABSO  No active process
+#   1    -0.717   -4.361    0.016     0.0000    0.1914    0.008    0.008     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 14     Parent ID = 13
+  Particle = e-     Track ID = 14     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.275    1.352   -0.626     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1     0.609    0.916   -0.864     0.3127    0.0000    1.014    1.014     ABSO  Compton scattering
-#   2     0.635    0.928   -0.981     0.2857    0.0000    0.120    1.135     ABSO  Compton scattering
-#   3     0.651    0.915   -1.011     0.0000    0.0158    0.037    1.172     ABSO  Photoelectric effect
+#   0     2.260   -1.933   -0.496     0.4339    0.0000    0.000    0.000     GAPX  No active process
+#   1     2.262   -1.938   -0.494     0.4269    0.0071    0.006    0.006     GAPX  Multiple scattering
+#   2     2.262   -1.944   -0.492     0.4188    0.0081    0.006    0.012     GAPX  Multiple scattering
+#   3     2.263   -1.950   -0.493     0.4123    0.0065    0.007    0.019     GAPX  Multiple scattering
+#   4     2.264   -1.956   -0.494     0.4011    0.0112    0.006    0.025     GAPX  Multiple scattering
+#   5     2.265   -1.961   -0.494     0.3923    0.0088    0.005    0.030     GAPX  Multiple scattering
+#   6     2.266   -1.965   -0.494     0.3686    0.0236    0.004    0.035     GAPX  Multiple scattering
+#   7     2.270   -1.969   -0.493     0.3492    0.0194    0.006    0.041     GAPX  Multiple scattering
+#   8     2.275   -1.972   -0.492     0.3360    0.0132    0.006    0.047     GAPX  Multiple scattering
+#   9     2.281   -1.974   -0.491     0.3208    0.0152    0.006    0.053     GAPX  Multiple scattering
+#  10     2.286   -1.977   -0.489     0.3106    0.0101    0.007    0.060     GAPX  Multiple scattering
+#  11     2.292   -1.978   -0.484     0.1997    0.1109    0.008    0.068     GAPX  Multiple scattering
+#  12     2.297   -1.981   -0.479     0.1795    0.0203    0.008    0.076     GAPX  Multiple scattering
+#  13     2.298   -1.983   -0.470     0.1485    0.0310    0.011    0.087     GAPX  Multiple scattering
+#  14     2.302   -1.986   -0.464     0.0000    0.1485    0.028    0.115     GAPX  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 15     Parent ID = 14
+  Particle = gamma     Track ID = 15     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0     0.651    0.915   -1.011     0.2699    0.0000    0.000    0.000     ABSO  No active process
-#   1     0.652    0.914   -1.011     0.0000    0.2699    0.013    0.013     ABSO  Energy loss
+#   0     2.281   -1.912   -0.498     0.3557    0.0000    0.000    0.000     GAPX  No active process
+#   1    -0.578   -4.879    0.000     0.3557    0.0000    4.150    4.150     GAPX  Transportation
+#   2    -0.578   -4.879    0.000     0.3557    0.0000    0.000    4.150     ABSO  No active process
+#   3    -0.694   -5.000    0.020     0.3557    0.0000    0.169    4.319     ABSO  Transportation
+#   4    -0.694   -5.000    0.020     0.3557    0.0000    0.000    4.319     WRLD  No active process
+#   5    -1.658   -6.000    0.188     0.3557    0.0000    1.399    5.718     WRLD  Transportation
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 16     Parent ID = 14
+  Particle = gamma     Track ID = 16     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0     0.635    0.928   -0.981     0.0269    0.0000    0.000    0.000     ABSO  No active process
-#   1     0.635    0.928   -0.981     0.0000    0.0269    0.000    0.000     ABSO  Energy loss
+#   0     2.926   -1.087    0.003     0.2518    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.924   -1.090   -0.000     0.2518    0.0000    0.005    0.005     ABSO  Transportation
+#   2     2.924   -1.090   -0.000     0.2518    0.0000    0.000    0.005     GAPX  No active process
+#   3     2.503   -1.546   -0.500     0.2518    0.0000    0.797    0.803     GAPX  Transportation
+#   4     2.503   -1.546   -0.500     0.2518    0.0000    0.000    0.803     ABSO  No active process
+#   5     2.502   -1.548   -0.502     0.0000    0.0883    0.002    0.805     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 17     Parent ID = 14
+  Particle = e-     Track ID = 17     Parent ID = 16
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0     0.609    0.916   -0.864     0.1983    0.0000    0.000    0.000     ABSO  No active process
-#   1     0.610    0.916   -0.863     0.0000    0.1983    0.008    0.008     ABSO  Energy loss
+#   0     2.502   -1.548   -0.502     0.1635    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.501   -1.548   -0.502     0.1474    0.0161    0.001    0.001     ABSO  Multiple scattering
+#   2     2.501   -1.548   -0.502     0.1326    0.0148    0.001    0.002     ABSO  Multiple scattering
+#   3     2.500   -1.548   -0.501     0.0968    0.0358    0.001    0.003     ABSO  Multiple scattering
+#   4     2.501   -1.548   -0.501     0.0852    0.0116    0.001    0.004     ABSO  Multiple scattering
+#   5     2.501   -1.549   -0.501     0.0642    0.0210    0.001    0.004     ABSO  Multiple scattering
+#   6     2.501   -1.549   -0.501     0.0000    0.0642    0.001    0.005     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 18     Parent ID = 13
+  Particle = e-     Track ID = 18     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.275    1.352   -0.626     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.332    1.381   -0.611     0.0000    0.0883    0.066    0.066     ABSO  Photoelectric effect
+#   0     2.904   -1.054   -0.013     1.1316    0.0000    0.000    0.000     GAPX  No active process
+#   1     2.927   -1.057   -0.018     1.0933    0.0382    0.024    0.024     GAPX  Multiple scattering
+#   2     2.955   -1.045   -0.024     1.0283    0.0650    0.032    0.056     GAPX  Multiple scattering
+#   3     2.972   -1.039   -0.048     0.9712    0.0571    0.030    0.087     GAPX  Multiple scattering
+#   4     2.979   -1.042   -0.074     0.9280    0.0432    0.028    0.115     GAPX  Multiple scattering
+#   5     2.992   -1.063   -0.110     0.8200    0.1079    0.046    0.161     GAPX  Multiple scattering
+#   6     3.004   -1.095   -0.157     0.6914    0.1286    0.063    0.224     GAPX  Multiple scattering
+#   7     2.962   -1.135   -0.215     0.5181    0.1733    0.096    0.319     GAPX  Multiple scattering
+#   8     2.974   -1.115   -0.265     0.1780    0.3401    0.154    0.474     GAPX  Energy loss
+#   9     2.974   -1.124   -0.259     0.0000    0.1780    0.038    0.511     GAPX  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 19     Parent ID = 18
+  Particle = gamma     Track ID = 19     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.332    1.381   -0.611     0.4227    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.333    1.381   -0.612     0.0000    0.4227    0.024    0.024     ABSO  Energy loss
+#   0     2.361   -0.593   -0.318     0.7017    0.0000    0.000    0.000     GAPX  No active process
+#   1     2.983   -1.097    0.000     0.7017    0.0000    0.861    0.861     GAPX  Transportation
+#   2     2.983   -1.097    0.000     0.7017    0.0000    0.000    0.861     ABSO  No active process
+#   3     3.483   -1.502    0.256     0.0000    0.0883    0.693    1.554     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 20     Parent ID = 12
+  Particle = e-     Track ID = 20     Parent ID = 19
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.274    1.351   -0.624     0.3589    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.273    1.351   -0.625     0.0000    0.3589    0.019    0.019     ABSO  Energy loss
+#   0     3.483   -1.502    0.256     0.6134    0.0000    0.000    0.000     ABSO  No active process
+#   1     3.485   -1.504    0.257     0.0000    0.6134    0.040    0.040     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 21     Parent ID = 9
+  Particle = gamma     Track ID = 21     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.747    0.818    0.330     0.4150    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.570    1.174    0.000     0.4150    0.0000    0.517    0.517     ABSO  Transportation
-#   2    -0.570    1.174    0.000     0.4150    0.0000    0.000    0.517     GAPX  No active process
-#   3    -0.301    1.715   -0.500     0.4150    0.0000    0.784    1.301     GAPX  Transportation
-#   4    -0.301    1.715   -0.500     0.4150    0.0000    0.000    1.301     ABSO  No active process
-#   5    -0.179    1.961   -0.727     0.0000    0.0883    0.356    1.657     ABSO  Photoelectric effect
+#   0    -1.068   -0.008   -0.347    14.6046    0.0000    0.000    0.000     GAPX  No active process
+#   1     0.772   -0.079   -0.500    14.6046    0.0000    1.848    1.848     GAPX  Transportation
+#   2     0.772   -0.079   -0.500    14.6046    0.0000    0.000    1.848     ABSO  No active process
+#   3     2.245   -0.136   -0.623     0.0000    0.0000    1.479    3.327     ABSO  Lepton pair production
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 22     Parent ID = 21
+  Particle = e+     Track ID = 22     Parent ID = 21
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.179    1.961   -0.727     0.3267    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.178    1.961   -0.728     0.0000    0.3267    0.017    0.017     ABSO  Energy loss
+#   0     2.245   -0.136   -0.623     6.4540    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.297   -0.110   -0.629     5.8445    0.6094    0.063    0.063     ABSO  Multiple scattering
+#   2     2.307   -0.110   -0.634     5.0451    0.1006    0.011    0.074     ABSO  Bremstrahlung
+#   3     2.334   -0.110   -0.694     4.1825    0.8626    0.076    0.150     ABSO  Multiple scattering
+#   4     2.386   -0.084   -0.719     1.6208    2.5617    0.154    0.304     ABSO  Bremstrahlung
+#   5     2.390   -0.086   -0.705     1.2071    0.2786    0.030    0.334     ABSO  Bremstrahlung
+#   6     2.397   -0.084   -0.712     0.5675    0.4479    0.047    0.381     ABSO  Bremstrahlung
+#   7     2.400   -0.084   -0.710     0.0000    0.5675    0.036    0.417     ABSO  Energy loss
+#   8     2.400   -0.084   -0.710     0.0000    0.0000    0.000    0.417     ABSO  Positron annihilation
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 23     Parent ID = 9
+  Particle = gamma     Track ID = 23     Parent ID = 22
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.785    0.808    0.313     0.6548    0.0000    0.000    0.000     ABSO  No active process
-#   1     0.535    1.094    0.918     0.3352    0.0000    1.480    1.480     ABSO  Compton scattering
-#   2     0.546    1.159    0.905     0.0000    0.0158    0.067    1.548     ABSO  Photoelectric effect
+#   0     2.400   -0.084   -0.710     0.5110    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.300    0.115   -0.817     0.0000    0.0883    0.247    0.247     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 24     Parent ID = 23
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0     0.546    1.159    0.905     0.3193    0.0000    0.000    0.000     ABSO  No active process
-#   1     0.546    1.160    0.905     0.0000    0.3193    0.016    0.016     ABSO  Energy loss
+#   0     2.300    0.115   -0.817     0.4227    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.299    0.117   -0.816     0.0000    0.4227    0.024    0.024     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 25     Parent ID = 23
+  Particle = gamma     Track ID = 25     Parent ID = 22
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0     0.535    1.094    0.918     0.3197    0.0000    0.000    0.000     ABSO  No active process
-#   1     0.536    1.094    0.918     0.0000    0.3197    0.016    0.016     ABSO  Energy loss
+#   0     2.400   -0.084   -0.710     0.5110    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.490   -0.261   -0.615     0.0000    0.0158    0.220    0.220     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 26     Parent ID = 0
+  Particle = e-     Track ID = 26     Parent ID = 25
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -1.401    0.760   -0.019     0.0873    0.0000    0.000    0.000     GAPX  No active process
-#   1    -1.319    0.761    0.000     0.0873    0.0000    0.084    0.084     GAPX  Transportation
-#   2    -1.319    0.761    0.000     0.0873    0.0000    0.000    0.084     ABSO  No active process
-#   3    -1.244    0.763    0.017     0.0000    0.0038    0.077    0.161     ABSO  Photoelectric effect
+#   0     2.490   -0.261   -0.615     0.4952    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.491   -0.263   -0.615     0.0000    0.4952    0.030    0.030     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 27     Parent ID = 26
+  Particle = gamma     Track ID = 27     Parent ID = 22
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -1.244    0.763    0.017     0.0834    0.0000    0.000    0.000     ABSO  No active process
-#   1    -1.244    0.763    0.018     0.0000    0.0834    0.002    0.002     ABSO  Energy loss
+#   0     2.397   -0.084   -0.712     0.1916    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.436   -0.087   -0.686     0.1150    0.0000    0.047    0.047     ABSO  Compton scattering
+#   2     2.432   -0.083   -0.699     0.0000    0.0130    0.014    0.061     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 28     Parent ID = 0
+  Particle = e-     Track ID = 28     Parent ID = 27
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.024    0.200    0.004     0.1794    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.016    0.202    0.003     0.0000    0.0883    0.009    0.009     ABSO  Photoelectric effect
+#   0     2.432   -0.083   -0.699     0.1019    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.432   -0.083   -0.699     0.0000    0.1019    0.003    0.003     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 29     Parent ID = 28
+  Particle = e-     Track ID = 29     Parent ID = 27
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.016    0.202    0.003     0.0911    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.016    0.202    0.003     0.0000    0.0911    0.002    0.002     ABSO  Energy loss
+#   0     2.436   -0.087   -0.686     0.0767    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.436   -0.087   -0.686     0.0000    0.0767    0.002    0.002     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 30     Parent ID = 0
+  Particle = gamma     Track ID = 30     Parent ID = 22
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.102    0.172    0.015     1.0048    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.415    0.827    0.057     1.0048    0.0000    1.810    1.810     ABSO  Rayleigh effect
-#   2    -2.305    0.874    0.059     0.0000    0.0883    0.119    1.930     ABSO  Photoelectric effect
+#   0     2.390   -0.086   -0.705     0.1351    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.397   -0.083   -0.712     0.0000    0.0883    0.011    0.011     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = e-     Track ID = 31     Parent ID = 30
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.305    0.874    0.059     0.9165    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.301    0.875    0.058     0.0000    0.9165    0.066    0.066     ABSO  Energy loss
+#   0     2.397   -0.083   -0.712     0.0468    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.397   -0.083   -0.712     0.0000    0.0468    0.001    0.001     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 32     Parent ID = 0
+  Particle = gamma     Track ID = 32     Parent ID = 22
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.128    0.162    0.012     1.6679    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.409    0.676    0.072     0.5066    0.0000    1.795    1.795     ABSO  Compton scattering
-#   2    -2.401    0.708    0.126     0.3200    0.0000    0.063    1.858     ABSO  Compton scattering
-#   3    -2.426    1.034    0.094     0.0000    0.0883    0.329    2.187     ABSO  Photoelectric effect
+#   0     2.307   -0.110   -0.634     0.6988    0.0000    0.000    0.000     ABSO  No active process
+#   1     3.360   -0.207   -1.356     0.6957    0.0000    1.281    1.281     ABSO  Compton scattering
+#   2     3.612   -0.231   -1.500     0.6957    0.0000    0.291    1.572     ABSO  Transportation
+#   3     3.612   -0.231   -1.500     0.6957    0.0000    0.000    1.572     GAPX  No active process
+#   4     4.485   -0.314   -2.000     0.6957    0.0000    1.010    2.582     GAPX  Transportation
+#   5     4.485   -0.314   -2.000     0.6957    0.0000    0.000    2.582     ABSO  No active process
+#   6     5.000   -0.363   -2.294     0.6957    0.0000    0.595    3.177     ABSO  Transportation
+#   7     5.000   -0.363   -2.294     0.6957    0.0000    0.000    3.177     WRLD  No active process
+#   8     6.000   -0.458   -2.867     0.6957    0.0000    1.156    4.333     WRLD  Transportation
 
 ****************************************************************************************************
   Particle = e-     Track ID = 33     Parent ID = 32
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.426    1.034    0.094     0.2317    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.426    1.035    0.093     0.0000    0.2317    0.010    0.010     ABSO  Energy loss
+#   0     3.360   -0.207   -1.356     0.0032    0.0000    0.000    0.000     ABSO  No active process
+#   1     3.360   -0.207   -1.356     0.0000    0.0032    0.000    0.000     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 34     Parent ID = 32
+  Particle = e-     Track ID = 34     Parent ID = 21
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.401    0.708    0.126     0.1866    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.401    0.708    0.126     0.0000    0.1866    0.007    0.007     ABSO  Energy loss
+#   0     2.245   -0.136   -0.623     7.1286    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.306   -0.109   -0.610     6.1603    0.9683    0.075    0.075     ABSO  Multiple scattering
+#   2     2.311   -0.100   -0.608     5.4960    0.1181    0.011    0.086     ABSO  Bremstrahlung
+#   3     2.342   -0.080   -0.595     3.8772    0.6223    0.042    0.129     ABSO  Bremstrahlung
+#   4     2.374   -0.094   -0.619     3.3600    0.5171    0.051    0.180     ABSO  Multiple scattering
+#   5     2.405   -0.140   -0.609     2.3012    1.0589    0.071    0.251     ABSO  Multiple scattering
+#   6     2.405   -0.143   -0.607     2.0730    0.0445    0.004    0.255     ABSO  Bremstrahlung
+#   7     2.400   -0.157   -0.600     0.5587    1.5143    0.143    0.397     ABSO  Bremstrahlung
+#   8     2.399   -0.157   -0.602     0.0000    0.5587    0.035    0.433     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 35     Parent ID = 32
+  Particle = gamma     Track ID = 35     Parent ID = 34
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.409    0.676    0.072     1.1612    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.403    0.677    0.070     0.5667    0.4546    0.037    0.037     ABSO  Bremstrahlung
-#   2    -2.402    0.674    0.069     0.0000    0.5667    0.036    0.073     ABSO  Energy loss
+#   0     2.405   -0.143   -0.607     0.1837    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.392   -0.179   -0.584     0.1837    0.0000    0.045    0.045     ABSO  Rayleigh effect
+#   2     2.302   -0.250   -0.500     0.1837    0.0000    0.142    0.187     ABSO  Transportation
+#   3     2.302   -0.250   -0.500     0.1837    0.0000    0.000    0.187     GAPX  No active process
+#   4     1.766   -0.677    0.000     0.1837    0.0000    0.849    1.036     GAPX  Transportation
+#   5     1.766   -0.677    0.000     0.1837    0.0000    0.000    1.036     ABSO  No active process
+#   6     1.636   -0.781    0.121     0.0000    0.0883    0.206    1.241     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 36     Parent ID = 35
+  Particle = e-     Track ID = 36     Parent ID = 35
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.403    0.677    0.070     0.1400    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.398    0.641    0.060     0.0000    0.0883    0.038    0.038     ABSO  Photoelectric effect
+#   0     1.636   -0.781    0.121     0.0954    0.0000    0.000    0.000     ABSO  No active process
+#   1     1.635   -0.781    0.121     0.0000    0.0954    0.003    0.003     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 37     Parent ID = 36
+  Particle = gamma     Track ID = 37     Parent ID = 34
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.398    0.641    0.060     0.0517    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.398    0.641    0.060     0.0000    0.0517    0.001    0.001     ABSO  Energy loss
+#   0     2.342   -0.080   -0.595     0.9965    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.819   -0.213   -0.500     0.9965    0.0000    0.504    0.504     ABSO  Transportation
+#   2     2.819   -0.213   -0.500     0.9965    0.0000    0.000    0.504     GAPX  No active process
+#   3     4.845   -0.777   -0.096     0.7121    0.0000    2.142    2.646     GAPX  Compton scattering
+#   4     5.000   -0.918   -0.155     0.7121    0.0000    0.217    2.863     GAPX  Transportation
+#   5     5.000   -0.918   -0.155     0.7121    0.0000    0.000    2.863     WRLD  No active process
+#   6     6.000   -1.820   -0.533     0.7121    0.0000    1.399    4.262     WRLD  Transportation
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 38     Parent ID = 0
+  Particle = e-     Track ID = 38     Parent ID = 37
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.244    0.116    0.019     0.8116    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.140    0.157    0.027     0.8116    0.0000    0.112    0.112     ABSO  Rayleigh effect
-#   2    -4.141    0.182   -0.000     0.8116    0.0000    0.037    0.149     ABSO  Transportation
-#   3    -4.141    0.182   -0.000     0.8116    0.0000    0.000    0.149     GAPX  No active process
-#   4    -4.150    0.637   -0.500     0.8116    0.0000    0.677    0.825     GAPX  Transportation
-#   5    -4.150    0.637   -0.500     0.8116    0.0000    0.000    0.825     ABSO  No active process
-#   6    -4.153    0.770   -0.645     0.8116    0.0000    0.197    1.022     ABSO  Rayleigh effect
-#   7    -4.177    1.234   -1.148     0.6184    0.0000    0.685    1.707     ABSO  Compton scattering
-#   8    -4.186    1.272   -1.500     0.6184    0.0000    0.354    2.061     ABSO  Transportation
-#   9    -4.186    1.272   -1.500     0.6184    0.0000    0.000    2.061     GAPX  No active process
-#  10    -4.199    1.326   -2.000     0.6184    0.0000    0.503    2.564     GAPX  Transportation
-#  11    -4.199    1.326   -2.000     0.6184    0.0000    0.000    2.564     ABSO  No active process
-#  12    -4.199    1.329   -2.020     0.6074    0.0000    0.021    2.585     ABSO  Compton scattering
-#  13    -4.240    1.610   -3.000     0.6074    0.0000    1.020    3.605     ABSO  Transportation
-#  14    -4.240    1.610   -3.000     0.6074    0.0000    0.000    3.605     GAPX  No active process
-#  15    -4.261    1.754   -3.500     0.6074    0.0000    0.521    4.125     GAPX  Transportation
-#  16    -4.261    1.754   -3.500     0.6074    0.0000    0.000    4.125     ABSO  No active process
-#  17    -4.272    1.831   -3.768     0.4621    0.0000    0.279    4.405     ABSO  Compton scattering
-#  18    -4.114    1.876   -3.949     0.0000    0.0883    0.244    4.649     ABSO  Photoelectric effect
+#   0     4.845   -0.777   -0.096     0.2844    0.0000    0.000    0.000     GAPX  No active process
+#   1     4.861   -0.770   -0.082     0.0000    0.2844    0.078    0.078     GAPX  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 39     Parent ID = 38
+  Particle = gamma     Track ID = 39     Parent ID = 34
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.114    1.876   -3.949     0.3738    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.113    1.876   -3.950     0.0000    0.3738    0.020    0.020     ABSO  Energy loss
+#   0     2.311   -0.100   -0.608     0.5462    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.328   -0.070   -0.606     0.2986    0.0000    0.035    0.035     ABSO  Compton scattering
+#   2     2.335   -0.067   -0.571     0.2986    0.0000    0.036    0.070     ABSO  Rayleigh effect
+#   3     2.337   -0.059   -0.501     0.0000    0.0883    0.071    0.141     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 40     Parent ID = 38
+  Particle = e-     Track ID = 40     Parent ID = 39
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.272    1.831   -3.768     0.1453    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.272    1.831   -3.768     0.0000    0.1453    0.005    0.005     ABSO  Energy loss
+#   0     2.337   -0.059   -0.501     0.2103    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.337   -0.059   -0.501     0.1951    0.0152    0.001    0.001     ABSO  Multiple scattering
+#   2     2.336   -0.058   -0.500     0.1785    0.0166    0.000    0.001     ABSO  Multiple scattering
+#   3     2.337   -0.058   -0.500     0.1713    0.0072    0.000    0.001     ABSO  Multiple scattering
+#   4     2.337   -0.058   -0.500     0.1672    0.0041    0.000    0.002     ABSO  Multiple scattering
+#   5     2.337   -0.058   -0.500     0.1599    0.0073    0.000    0.002     ABSO  Multiple scattering
+#   6     2.337   -0.058   -0.501     0.1555    0.0044    0.000    0.002     ABSO  Multiple scattering
+#   7     2.338   -0.058   -0.501     0.1497    0.0058    0.000    0.003     ABSO  Multiple scattering
+#   8     2.338   -0.058   -0.501     0.1443    0.0053    0.000    0.003     ABSO  Multiple scattering
+#   9     2.338   -0.058   -0.501     0.1410    0.0033    0.000    0.003     ABSO  Multiple scattering
+#  10     2.338   -0.058   -0.501     0.1270    0.0140    0.001    0.004     ABSO  Multiple scattering
+#  11     2.339   -0.058   -0.501     0.1178    0.0092    0.001    0.005     ABSO  Multiple scattering
+#  12     2.339   -0.058   -0.501     0.1083    0.0095    0.001    0.005     ABSO  Multiple scattering
+#  13     2.339   -0.058   -0.500     0.0982    0.0101    0.001    0.006     ABSO  Multiple scattering
+#  14     2.339   -0.058   -0.500     0.0845    0.0137    0.000    0.006     ABSO  Multiple scattering
+#  15     2.338   -0.058   -0.501     0.0753    0.0092    0.000    0.006     ABSO  Multiple scattering
+#  16     2.338   -0.058   -0.501     0.0665    0.0088    0.000    0.007     ABSO  Multiple scattering
+#  17     2.338   -0.058   -0.500     0.0517    0.0147    0.000    0.007     ABSO  Multiple scattering
+#  18     2.338   -0.058   -0.501     0.0401    0.0117    0.000    0.007     ABSO  Multiple scattering
+#  19     2.338   -0.058   -0.501     0.0000    0.0401    0.001    0.008     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 41     Parent ID = 38
+  Particle = e-     Track ID = 41     Parent ID = 39
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.199    1.329   -2.020     0.0110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.199    1.329   -2.020     0.0000    0.0110    0.000    0.000     ABSO  Energy loss
+#   0     2.328   -0.070   -0.606     0.2477    0.0000    0.000    0.000     ABSO  No active process
+#   1     2.328   -0.070   -0.606     0.0000    0.2477    0.011    0.011     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 42     Parent ID = 38
+  Particle = gamma     Track ID = 42     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.177    1.234   -1.148     0.1933    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.177    1.235   -1.148     0.0000    0.1933    0.008    0.008     ABSO  Energy loss
+#   0    -3.180    0.079   -0.141     1.4589    0.0000    0.000    0.000     GAPX  No active process
+#   1    -0.245   -0.090   -0.500     1.4589    0.0000    2.962    2.962     GAPX  Transportation
+#   2    -0.245   -0.090   -0.500     1.4589    0.0000    0.000    2.962     ABSO  No active process
+#   3     0.485   -0.132   -0.589     0.4747    0.0000    0.736    3.698     ABSO  Compton scattering
+#   4     0.506   -0.150   -0.539     0.3376    0.0000    0.057    3.755     ABSO  Compton scattering
+#   5     0.496   -0.213   -0.513     0.0000    0.0883    0.069    3.824     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 43     Parent ID = 0
+  Particle = e-     Track ID = 43     Parent ID = 42
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.449    0.060    0.026     0.2225    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.400    0.080    0.033     0.0000    0.0883    0.054    0.054     ABSO  Photoelectric effect
+#   0     0.496   -0.213   -0.513     0.2493    0.0000    0.000    0.000     ABSO  No active process
+#   1     0.496   -0.213   -0.513     0.0000    0.2493    0.011    0.011     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 44     Parent ID = 43
+  Particle = e-     Track ID = 44     Parent ID = 42
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.400    0.080    0.033     0.1343    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.400    0.080    0.033     0.0000    0.1343    0.004    0.004     ABSO  Energy loss
+#   0     0.506   -0.150   -0.539     0.1371    0.0000    0.000    0.000     ABSO  No active process
+#   1     0.506   -0.150   -0.539     0.0000    0.1371    0.005    0.005     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 45     Parent ID = 0
+  Particle = e-     Track ID = 45     Parent ID = 42
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.470    0.053    0.023     4.2236    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.726    1.093    0.214     0.5950    0.0000    3.890    3.890     ABSO  Compton scattering
-#   2     0.177   -0.425    0.203     0.0000    0.0883    1.766    5.656     ABSO  Photoelectric effect
+#   0     0.485   -0.132   -0.589     0.9842    0.0000    0.000    0.000     ABSO  No active process
+#   1     0.490   -0.132   -0.592     0.0000    0.9842    0.072    0.072     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 46     Parent ID = 45
+  Particle = gamma     Track ID = 46     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0     0.177   -0.425    0.203     0.5067    0.0000    0.000    0.000     ABSO  No active process
-#   1     0.179   -0.426    0.203     0.0000    0.5067    0.031    0.031     ABSO  Energy loss
+#   0    -3.550    0.053   -0.109     0.0991    0.0000    0.000    0.000     GAPX  No active process
+#   1    -1.174    0.264   -0.336     0.0961    0.0000    2.396    2.396     GAPX  Compton scattering
+#   2    -0.964    0.258   -0.500     0.0961    0.0000    0.266    2.662     GAPX  Transportation
+#   3    -0.964    0.258   -0.500     0.0961    0.0000    0.000    2.662     ABSO  No active process
+#   4    -0.955    0.258   -0.507     0.0000    0.0883    0.012    2.674     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 47     Parent ID = 45
+  Particle = e-     Track ID = 47     Parent ID = 46
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.726    1.093    0.214     3.6286    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.692    1.108    0.216     1.2717    1.1833    0.122    0.122     ABSO  Bremstrahlung
-#   2    -0.690    1.115    0.218     0.0000    1.2717    0.096    0.218     ABSO  Energy loss
+#   0    -0.955    0.258   -0.507     0.0078    0.0000    0.000    0.000     ABSO  No active process
+#   1    -0.955    0.258   -0.507     0.0000    0.0078    0.000    0.000     ABSO  Energy loss
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 48     Parent ID = 47
+  Particle = e-     Track ID = 48     Parent ID = 46
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.692    1.108    0.216     1.1736    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.957    2.007    0.532     0.9754    0.0000    0.989    0.989     ABSO  Compton scattering
-#   2    -0.815    2.941    1.000     0.9754    0.0000    1.054    2.043     ABSO  Transportation
-#   3    -0.815    2.941    1.000     0.9754    0.0000    0.000    2.043     GAPX  No active process
-#   4    -0.665    3.940    1.500     0.9754    0.0000    1.127    3.171     GAPX  Transportation
-#   5    -0.665    3.940    1.500     0.9754    0.0000    0.000    3.171     ABSO  No active process
-#   6    -0.505    5.000    2.030     0.9754    0.0000    1.196    4.367     ABSO  Transportation
-#   7    -0.505    5.000    2.030     0.9754    0.0000    0.000    4.367     WRLD  No active process
-#   8    -0.354    6.000    2.531     0.9754    0.0000    1.128    5.495     WRLD  Transportation
+#   0    -1.174    0.264   -0.336     0.0030    0.0000    0.000    0.000     GAPX  No active process
+#   1    -1.174    0.264   -0.336     0.0000    0.0030    0.000    0.000     GAPX  Energy loss
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 49     Parent ID = 48
+  Particle = gamma     Track ID = 49     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.957    2.007    0.532     0.1982    0.0000    0.000    0.000     ABSO  No active process
-#   1    -0.957    2.007    0.532     0.0000    0.1982    0.008    0.008     ABSO  Energy loss
+#   0    -4.609    0.000    0.000     0.4697    0.0000    0.000    0.000     LAYE  No active process
+#   1    -4.609    0.000   -0.000     0.4697    0.0000    0.000    0.000     LAYE  Transportation
+#   2    -4.609    0.000   -0.000     0.4697    0.0000    0.000    0.000     GAPX  No active process
+#   3     4.196    0.272   -0.500     0.4697    0.0000    8.824    8.824     GAPX  Transportation
+#   4     4.196    0.272   -0.500     0.4697    0.0000    0.000    8.824     ABSO  No active process
+#   5     4.223    0.273   -0.502     0.0000    0.0883    0.027    8.851     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 50     Parent ID = 0
+  Particle = e-     Track ID = 50     Parent ID = 49
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.474    0.052    0.023     2.5297    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.896    0.458    0.153     2.4242    0.0000    1.634    1.634     ABSO  Compton scattering
-#   2     1.746    2.157    1.000     2.4242    0.0000    5.015    6.649     ABSO  Transportation
-#   3     1.746    2.157    1.000     2.4242    0.0000    0.000    6.649     GAPX  No active process
-#   4     4.487    3.159    1.500     2.4242    0.0000    2.961    9.610     GAPX  Transportation
-#   5     4.487    3.159    1.500     2.4242    0.0000    0.000    9.610     ABSO  No active process
-#   6     5.000    3.347    1.594     2.4242    0.0000    0.554   10.165     ABSO  Transportation
-#   7     5.000    3.347    1.594     2.4242    0.0000    0.000   10.165     WRLD  No active process
-#   8     6.000    3.713    1.776     2.4242    0.0000    1.080   11.245     WRLD  Transportation
-
-****************************************************************************************************
-  Particle = e-     Track ID = 51     Parent ID = 50
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.896    0.458    0.153     0.1055    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.896    0.458    0.153     0.0000    0.1055    0.003    0.003     ABSO  Energy loss
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 52     Parent ID = 0
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.591    0.024    0.007     0.3881    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.490    0.062    0.023     0.0000    0.0883    0.109    0.109     ABSO  Photoelectric effect
-
-****************************************************************************************************
-  Particle = e-     Track ID = 53     Parent ID = 52
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.490    0.062    0.023     0.2998    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.489    0.063    0.023     0.0000    0.2998    0.015    0.015     ABSO  Energy loss
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 54     Parent ID = 0
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.648    0.000    0.000     0.3418    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.539    0.040    0.019     0.0000    0.0883    0.118    0.118     ABSO  Photoelectric effect
-
-****************************************************************************************************
-  Particle = e-     Track ID = 55     Parent ID = 54
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.539    0.040    0.019     0.2535    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.539    0.041    0.019     0.0000    0.2535    0.012    0.012     ABSO  Energy loss
+#   0     4.223    0.273   -0.502     0.3814    0.0000    0.000    0.000     ABSO  No active process
+#   1     4.224    0.273   -0.502     0.3725    0.0090    0.001    0.001     ABSO  Multiple scattering
+#   2     4.224    0.274   -0.502     0.2435    0.1290    0.001    0.002     ABSO  Multiple scattering
+#   3     4.224    0.274   -0.501     0.2338    0.0097    0.001    0.003     ABSO  Multiple scattering
+#   4     4.224    0.273   -0.502     0.2209    0.0129    0.001    0.004     ABSO  Multiple scattering
+#   5     4.224    0.274   -0.503     0.2052    0.0157    0.001    0.005     ABSO  Multiple scattering
+#   6     4.225    0.274   -0.502     0.1790    0.0261    0.002    0.007     ABSO  Multiple scattering
+#   7     4.225    0.275   -0.501     0.1671    0.0119    0.001    0.008     ABSO  Multiple scattering
+#   8     4.225    0.275   -0.501     0.1479    0.0192    0.001    0.009     ABSO  Multiple scattering
+#   9     4.224    0.275   -0.501     0.1376    0.0104    0.001    0.010     ABSO  Multiple scattering
+#  10     4.224    0.276   -0.500     0.1239    0.0136    0.001    0.011     ABSO  Multiple scattering
+#  11     4.224    0.276   -0.501     0.0975    0.0264    0.001    0.012     ABSO  Multiple scattering
+#  12     4.225    0.276   -0.500     0.0786    0.0189    0.001    0.012     ABSO  Multiple scattering
+#  13     4.225    0.276   -0.500     0.0476    0.0309    0.001    0.013     ABSO  Multiple scattering
+#  14     4.225    0.276   -0.500     0.0000    0.0476    0.001    0.014     ABSO  Energy loss
 --- Finish event 
-   Absorber: total energy (MeV):  41.394       total track length (cm):    3.060
-   Gap:      total energy (MeV):   5.206       total track length (cm):    2.815
-Time of this run:   User=0.010000s Real=0.005824s Sys=0.000000s
+   Absorber: total energy (MeV):  26.650       total track length (cm):    1.855
+   Gap:      total energy (MeV):  21.587       total track length (cm):   11.082
+Time of this run:   User=0.000000s Real=0.007395s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.22/00                        https://root.cern |
+  | Welcome to ROOT 6.22/06                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
-  | From tags/v6-22-00@v6-22-00                                      |
+  | Built for macosx64 on Dec 10 2020, 11:40:00                      |
+  | From tags/v6-22-06@v6-22-06                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -2233,13 +2378,13 @@ Processing test_E03_3.C("g4Config1.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.2 ( 24 July 2020 )
+ Version 5.3 ( 11 December 2020 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-10-06-patch-02    (29-May-2020)
+ Geant4 version Name: geant4-10-07    (4-December-2020)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -2281,7 +2426,7 @@ Geant4 has been created.
           ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
 
 
- Material: Galactic    density:  0.000 kg/m3   RadL: 204310101.835 pc   Nucl.Int.Length: 113427275.267 pc 
+ Material: Galactic    density:  0.000 mg/cm3  RadL: 204310098.490 pc   Nucl.Int.Length: 113427284.261 pc 
                        Imean:  19.200 eV   temperature:   2.73 K  pressure:   0.00 atm
 
    --->  Element: H (H)   Z =  1.0   N =     1   A =  1.008 g/mole
@@ -2315,7 +2460,7 @@ Checking overlaps for volume GAPX (G4Box) ... OK!
 ---> The calorimeter is 10 layers of: [ 10mm of G4_Pb + 5mm of liquidArgon ] 
 ------------------------------------------------------------
 
- FTFP_BERT : new threshold between BERT and FTFP is over the interval 
+ hInelastic FTFP_BERT : threshold between BERT and FTFP is over the interval 
  for pions :   3 to 6 GeV
  for kaons :   3 to 6 GeV
  for proton :  3 to 6 GeV
@@ -2370,10 +2515,11 @@ Rayl:  for gamma SubType=11 BuildTable=1
    LivermoreRayleigh : Emin=    0 eV  Emax=  100 TeV  CullenGenerator
 
 msc:  for e-  SubType= 10
-      RangeFactor= 0.04, stepLimType: 1, latDisp: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 MeV Nbins=42 100 eV  - 100 MeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
         WentzelVIUni : Emin=  100 MeV Emax=  100 TeV Nbins=42 100 MeV - 100 TeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
 
 eIoni:  for e-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -2397,10 +2543,11 @@ CoulombScat:  for e-, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=  100 MeV Emax=  100 TeV
 
 msc:  for e+  SubType= 10
-      RangeFactor= 0.04, stepLimType: 1, latDisp: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 MeV Nbins=42 100 eV  - 100 MeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
         WentzelVIUni : Emin=  100 MeV Emax=  100 TeV Nbins=42 100 MeV - 100 TeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
 
 eIoni:  for e+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -2428,9 +2575,9 @@ CoulombScat:  for e+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=  100 MeV Emax=  100 TeV
 
 msc:  for proton  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for proton  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -2444,14 +2591,14 @@ hBrems:  for proton  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for proton  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for proton, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -2460,9 +2607,9 @@ CoulombScat:  for proton, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for GenericIon  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 ionIoni:  for GenericIon  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -2474,9 +2621,9 @@ ionIoni:  for GenericIon  SubType=2
           BetheBloch : Emin=    2 MeV Emax=  100 TeV
 
 msc:  for alpha  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 ionIoni:  for alpha  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -2487,9 +2634,9 @@ ionIoni:  for alpha  SubType=2
           BetheBloch : Emin=7.9452 MeV Emax=  100 TeV
 
 msc:  for anti_proton  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for anti_proton  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -2503,14 +2650,14 @@ hBrems:  for anti_proton  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for anti_proton  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for anti_proton, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -2519,9 +2666,9 @@ CoulombScat:  for anti_proton, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for kaon+  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for kaon+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -2535,14 +2682,14 @@ hBrems:  for kaon+  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon+  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for kaon+, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -2551,9 +2698,9 @@ CoulombScat:  for kaon+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for kaon-  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for kaon-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -2567,14 +2714,14 @@ hBrems:  for kaon-  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon-  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for kaon-, integral:1  SubType=1 BuildTable=1
       Used Lambda table of kaon+
@@ -2583,9 +2730,9 @@ CoulombScat:  for kaon-, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for mu+  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0, polarAngLim(deg)= 180
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 muIoni:  for mu+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -2600,14 +2747,14 @@ muBrems:  for mu+  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-              MuBrem : Emin=    0 eV  Emax=  100 TeV
+              MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu+  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 1 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-          muPairProd : Emin=    0 eV  Emax=  100 TeV
+          muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for mu+, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -2616,9 +2763,9 @@ CoulombScat:  for mu+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for mu-  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0, polarAngLim(deg)= 180
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 muIoni:  for mu-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -2633,14 +2780,14 @@ muBrems:  for mu-  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-              MuBrem : Emin=    0 eV  Emax=  100 TeV
+              MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu-  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 1 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-          muPairProd : Emin=    0 eV  Emax=  100 TeV
+          muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for mu-, integral:1  SubType=1 BuildTable=1
       Used Lambda table of mu+
@@ -2649,9 +2796,9 @@ CoulombScat:  for mu-, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for pi+  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for pi+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -2665,14 +2812,14 @@ hBrems:  for pi+  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi+  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for pi+, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -2681,9 +2828,9 @@ CoulombScat:  for pi+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for pi-  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for pi-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -2697,14 +2844,14 @@ hBrems:  for pi-  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi-  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
       Used Lambda table of pi+
@@ -2734,36 +2881,58 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: nKiller
 
 ---------------------------------------------------
+                           Hadronic Processes for B-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: B-Inelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for D-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: D-Inelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
                            Hadronic Processes for GenericIon
 
   Process: ionInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for He3
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: He3Inelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for alpha
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: alphaInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for anti_He3
@@ -2771,11 +2940,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_He3Inelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -2785,11 +2954,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_alphaInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -2799,11 +2968,24 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_deuteronInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_lambda
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: anti_lambdaInelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
   Process: hFritiofCaptureAtRest
 
@@ -2813,11 +2995,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
         Model:              AntiAElastic: 100 MeV ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_neutronInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -2827,11 +3009,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
         Model:              AntiAElastic: 100 MeV ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_protonInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -2841,11 +3023,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_tritonInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -2854,12 +3036,12 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: dInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for e+
@@ -2879,7 +3061,8 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
                            Hadronic Processes for gamma
 
   Process: photonNuclear
-        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+        Model:               GammaNPreco: 0 eV  ---> 200 MeV
+        Model:            BertiniCascade: 199 MeV ---> 6 GeV
         Model:           TheoFSGenerator: 3 GeV ---> 100 TeV
      Cr_sctns:            PhotoNuclearXS: 0 eV  ---> 100 TeV
 
@@ -2917,8 +3100,8 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
   Process: lambdaInelastic
-        Model:            BertiniCascade: 0 eV  ---> 6 GeV
         Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -2976,16 +3159,30 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
+                           Hadronic Processes for sigma-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: sigma-Inelastic
+        Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: hBertiniCaptureAtRest
+
+---------------------------------------------------
                            Hadronic Processes for triton
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: tInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ================================================================
 =======================================================================
@@ -3005,15 +3202,15 @@ Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
 Time limit for long lived isomeres (ns)             1000
+Isomer production flag                              1
 Internal e- conversion flag                         1
 Store e- internal conversion data                   0
 Electron internal conversion ID                     2
 Correlated gamma emission flag                      0
 Max 2J for sampling of angular correlations         10
-Upload data before 1st event for                Z < 9
 =======================================================================
 
-========= Table of registered couples ==============================
+========= Table of registered couples ============================
 
 Index : 0     used in the geometry : Yes
  Material : Galactic
@@ -3036,7 +3233,7 @@ Index : 2     used in the geometry : Yes
  Region(s) which use this couple : 
     DefaultRegionForTheWorld
 
-====================================================================
+==================================================================
 
 ### Run 0 start.
 --- Begin event 
@@ -3062,46 +3259,45 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   0    -9.000    0.000    0.000    50.0000    0.0000    0.000    0.000     WRLD  No active process
 #   1    -5.000    0.000    0.000    50.0000    0.0000    4.000    4.000     WRLD  Transportation
 #   2    -5.000    0.000    0.000    50.0000    0.0000    0.000    4.000     ABSO  No active process
-#   3    -4.979    0.000    0.000    29.0278   20.9722    0.021    4.021     ABSO  Energy loss
-#   4    -4.965    0.000    0.000     6.3277   22.7001    0.014    4.036     ABSO  Energy loss
-#   5    -4.963    0.001    0.000     0.0000    6.3277    0.002    4.037     ABSO  Energy loss
-#   6    -4.963    0.001    0.000     0.0000    0.0000    0.000    4.037     ABSO  Decay
+#   3    -4.979    0.000    0.000    29.2294   20.7706    0.021    4.021     ABSO  Energy loss
+#   4    -4.979    0.000    0.000    29.2294    0.0000    0.000    4.021     ABSO  Transportation
+#   5    -4.979    0.000    0.000    29.2294    0.0000    0.000    4.021     GAPX  No active process
+#   6    -4.951    0.000   -0.001    20.8526    8.3768    0.028    4.049     GAPX  Energy loss
+#   7    -4.930    0.000   -0.002    12.1539    8.6987    0.021    4.070     GAPX  Energy loss
+#   8    -4.916    0.000   -0.002     2.6492    9.5047    0.014    4.084     GAPX  Energy loss
+#   9    -4.915    0.000   -0.002     0.0000    2.6492    0.002    4.085     GAPX  Energy loss
+#  10    -4.915    0.000   -0.002     0.0000    0.0000    0.000    4.085     GAPX  Decay
 
 ****************************************************************************************************
   Particle = neutron     Track ID = 2     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.963    0.001    0.000   285.3693    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.963    0.001    0.000   285.3693    0.0000    0.000    0.000     ABSO  Hadronic interaction
+#   0    -4.915    0.000   -0.002   285.3693    0.0000    0.000    0.000     GAPX  No active process
+#   1    -4.915    0.000   -0.002   285.3693    0.0000    0.000    0.000     GAPX  Hadronic interaction
 
 ****************************************************************************************************
   Particle = Alpha     Track ID = 3     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -4.963    0.001    0.000    81.9564    0.0000    0.000    0.000     ABSO  No active process
-#   1    -4.961    0.002    0.000    80.9631    0.9933    0.002    0.002     ABSO  Transportation
-#   2    -4.961    0.002    0.000    80.9631    0.0000    0.000    0.002     GAPX  No active process
-#   3    -4.888    0.083   -0.011    69.7811   11.1820    0.110    0.112     GAPX  Energy loss
-#   4    -4.830    0.150   -0.021    59.5818   10.1992    0.089    0.201     GAPX  Energy loss
-#   5    -4.784    0.203   -0.030    50.3863    9.1955    0.071    0.272     GAPX  Energy loss
-#   6    -4.748    0.246   -0.039    41.6737    8.7126    0.057    0.329     GAPX  Energy loss
-#   7    -4.718    0.280   -0.045    33.7207    7.9531    0.045    0.374     GAPX  Energy loss
-#   8    -4.695    0.306   -0.050    26.1713    7.5494    0.036    0.410     GAPX  Energy loss
-#   9    -4.676    0.327   -0.053    18.9081    7.2631    0.028    0.438     GAPX  Energy loss
-#  10    -4.663    0.344   -0.056    11.2356    7.6725    0.022    0.460     GAPX  Energy loss
-#  11    -4.654    0.355   -0.059     2.8739    8.3617    0.014    0.474     GAPX  Energy loss
-#  12    -4.653    0.356   -0.059     0.0000    2.8739    0.002    0.476     GAPX  Energy loss
+#   0    -4.915    0.000   -0.002    81.9564    0.0000    0.000    0.000     GAPX  No active process
+#   1    -4.915   -0.003   -0.000    81.5853    0.3711    0.004    0.004     GAPX  Transportation
+#   2    -4.915   -0.003   -0.000    81.5853    0.0000    0.000    0.004     ABSO  No active process
+#   3    -4.914   -0.033    0.019    62.6638   18.9216    0.035    0.039     ABSO  Energy loss
+#   4    -4.915   -0.055    0.036    44.0472   18.6166    0.028    0.067     ABSO  Energy loss
+#   5    -4.914   -0.071    0.050    25.5807   18.4665    0.021    0.088     ABSO  Energy loss
+#   6    -4.915   -0.081    0.059     7.5621   18.0186    0.014    0.102     ABSO  Energy loss
+#   7    -4.915   -0.083    0.060     0.0000    7.5621    0.002    0.104     ABSO  Energy loss
 --- Finish event 
-   Absorber: total energy (MeV): 1100.993       total track length (cm):    0.044
-   Gap:      total energy (MeV):  80.963       total track length (cm):    0.474
-Time of this run:   User=0.000000s Real=0.001539s Sys=0.000000s
+   Absorber: total energy (MeV): 1152.356       total track length (cm):    0.127
+   Gap:      total energy (MeV):  29.600       total track length (cm):    0.068
+Time of this run:   User=0.000000s Real=0.001437s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.22/00                        https://root.cern |
+  | Welcome to ROOT 6.22/06                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
-  | From tags/v6-22-00@v6-22-00                                      |
+  | Built for macosx64 on Dec 10 2020, 11:40:00                      |
+  | From tags/v6-22-06@v6-22-06                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -3126,13 +3322,13 @@ Processing test_E03_4.C("g4Config1.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.2 ( 24 July 2020 )
+ Version 5.3 ( 11 December 2020 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-10-06-patch-02    (29-May-2020)
+ Geant4 version Name: geant4-10-07    (4-December-2020)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -3173,7 +3369,7 @@ Geant4 has been created.
           ElmMassFraction: 100.00 %  ElmAbundance 100.00 % 
 
 
- Material: Galactic    density:  0.000 kg/m3   RadL: 204310101.835 pc   Nucl.Int.Length: 113427275.267 pc 
+ Material: Galactic    density:  0.000 mg/cm3  RadL: 204310098.490 pc   Nucl.Int.Length: 113427284.261 pc 
                        Imean:  19.200 eV   temperature:   2.73 K  pressure:   0.00 atm
 
    --->  Element: H (H)   Z =  1.0   N =     1   A =  1.008 g/mole
@@ -3206,7 +3402,7 @@ Checking overlaps for volume GAPX (G4Box) ... OK!
 ---> The calorimeter is 10 layers of: [ 10mm of G4_Pb + 5mm of liquidArgon ] 
 ------------------------------------------------------------
 
- FTFP_BERT : new threshold between BERT and FTFP is over the interval 
+ hInelastic FTFP_BERT : threshold between BERT and FTFP is over the interval 
  for pions :   3 to 6 GeV
  for kaons :   3 to 6 GeV
  for proton :  3 to 6 GeV
@@ -3259,10 +3455,11 @@ Rayl:  for gamma SubType=11 BuildTable=1
    LivermoreRayleigh : Emin=    0 eV  Emax=  100 TeV  CullenGenerator
 
 msc:  for e-  SubType= 10
-      RangeFactor= 0.04, stepLimType: 1, latDisp: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 MeV Nbins=42 100 eV  - 100 MeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
         WentzelVIUni : Emin=  100 MeV Emax=  100 TeV Nbins=42 100 MeV - 100 TeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
 
 eIoni:  for e-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -3286,10 +3483,11 @@ CoulombScat:  for e-, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=  100 MeV Emax=  100 TeV
 
 msc:  for e+  SubType= 10
-      RangeFactor= 0.04, stepLimType: 1, latDisp: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 MeV Nbins=42 100 eV  - 100 MeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
         WentzelVIUni : Emin=  100 MeV Emax=  100 TeV Nbins=42 100 MeV - 100 TeV
+              StepLim=UseSafety Rfact=0.04 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llimit=1
 
 eIoni:  for e+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -3317,9 +3515,9 @@ CoulombScat:  for e+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=  100 MeV Emax=  100 TeV
 
 msc:  for proton  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for proton  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -3333,14 +3531,14 @@ hBrems:  for proton  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for proton  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for proton, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -3349,9 +3547,9 @@ CoulombScat:  for proton, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for GenericIon  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 ionIoni:  for GenericIon  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -3363,9 +3561,9 @@ ionIoni:  for GenericIon  SubType=2
           BetheBloch : Emin=    2 MeV Emax=  100 TeV
 
 msc:  for alpha  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 ionIoni:  for alpha  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -3376,9 +3574,9 @@ ionIoni:  for alpha  SubType=2
           BetheBloch : Emin=7.9452 MeV Emax=  100 TeV
 
 msc:  for anti_proton  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for anti_proton  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -3392,14 +3590,14 @@ hBrems:  for anti_proton  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for anti_proton  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for anti_proton, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -3408,9 +3606,9 @@ CoulombScat:  for anti_proton, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for kaon+  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for kaon+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -3424,14 +3622,14 @@ hBrems:  for kaon+  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon+  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for kaon+, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -3440,9 +3638,9 @@ CoulombScat:  for kaon+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for kaon-  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for kaon-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -3456,14 +3654,14 @@ hBrems:  for kaon-  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon-  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for kaon-, integral:1  SubType=1 BuildTable=1
       Used Lambda table of kaon+
@@ -3472,9 +3670,9 @@ CoulombScat:  for kaon-, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for mu+  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0, polarAngLim(deg)= 180
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 muIoni:  for mu+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -3489,14 +3687,14 @@ muBrems:  for mu+  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-              MuBrem : Emin=    0 eV  Emax=  100 TeV
+              MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu+  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 1 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-          muPairProd : Emin=    0 eV  Emax=  100 TeV
+          muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for mu+, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -3505,9 +3703,9 @@ CoulombScat:  for mu+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for mu-  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0, polarAngLim(deg)= 180
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 muIoni:  for mu-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -3522,14 +3720,14 @@ muBrems:  for mu-  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-              MuBrem : Emin=    0 eV  Emax=  100 TeV
+              MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu-  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 1 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-          muPairProd : Emin=    0 eV  Emax=  100 TeV
+          muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for mu-, integral:1  SubType=1 BuildTable=1
       Used Lambda table of mu+
@@ -3538,9 +3736,9 @@ CoulombScat:  for mu-, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for pi+  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for pi+  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -3554,14 +3752,14 @@ hBrems:  for pi+  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi+  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for pi+, integral:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 1
@@ -3570,9 +3768,9 @@ CoulombScat:  for pi+, integral:1  SubType=1 BuildTable=1
   eCoulombScattering : Emin=    0 eV  Emax=  100 TeV
 
 msc:  for pi-  SubType= 10
-      RangeFactor= 0.2, stepLimType: 0, latDisp: 0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
+              StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llimit=1
 
 hIoni:  for pi-  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -3586,14 +3784,14 @@ hBrems:  for pi-  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-               hBrem : Emin=    0 eV  Emax=  100 TeV
+               hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi-  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-           hPairProd : Emin=    0 eV  Emax=  100 TeV
+           hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
       Used Lambda table of pi+
@@ -3623,36 +3821,58 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: nKiller
 
 ---------------------------------------------------
+                           Hadronic Processes for B-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: B-Inelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for D-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: D-Inelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
                            Hadronic Processes for GenericIon
 
   Process: ionInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for He3
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: He3Inelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for alpha
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: alphaInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for anti_He3
@@ -3660,11 +3880,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_He3Inelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -3674,11 +3894,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_alphaInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -3688,11 +3908,24 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_deuteronInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_lambda
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: anti_lambdaInelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
   Process: hFritiofCaptureAtRest
 
@@ -3702,11 +3935,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
         Model:              AntiAElastic: 100 MeV ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_neutronInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -3716,11 +3949,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
         Model:              AntiAElastic: 100 MeV ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_protonInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -3730,11 +3963,11 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: anti_tritonInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:              AntiAGlauber: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
   Process: hFritiofCaptureAtRest
 
@@ -3743,12 +3976,12 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: dInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ---------------------------------------------------
                            Hadronic Processes for e+
@@ -3768,7 +4001,8 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
                            Hadronic Processes for gamma
 
   Process: photonNuclear
-        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+        Model:               GammaNPreco: 0 eV  ---> 200 MeV
+        Model:            BertiniCascade: 199 MeV ---> 6 GeV
         Model:           TheoFSGenerator: 3 GeV ---> 100 TeV
      Cr_sctns:            PhotoNuclearXS: 0 eV  ---> 100 TeV
 
@@ -3806,8 +4040,8 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
   Process: lambdaInelastic
-        Model:            BertiniCascade: 0 eV  ---> 6 GeV
         Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
@@ -3865,16 +4099,30 @@ CoulombScat:  for pi-, integral:1  SubType=1 BuildTable=1
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
 ---------------------------------------------------
+                           Hadronic Processes for sigma-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: sigma-Inelastic
+        Model:                      FTFP: 3 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
+  Process: hBertiniCaptureAtRest
+
+---------------------------------------------------
                            Hadronic Processes for triton
 
   Process: hadElastic
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
   Process: tInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
-     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 100 TeV
+     Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
 ================================================================
 =======================================================================
@@ -3894,15 +4142,15 @@ Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
 Time limit for long lived isomeres (ns)             1000
+Isomer production flag                              1
 Internal e- conversion flag                         1
 Store e- internal conversion data                   0
 Electron internal conversion ID                     2
 Correlated gamma emission flag                      0
 Max 2J for sampling of angular correlations         10
-Upload data before 1st event for                Z < 9
 =======================================================================
 
-========= Table of registered couples ==============================
+========= Table of registered couples ============================
 
 Index : 0     used in the geometry : Yes
  Material : Galactic
@@ -3925,7 +4173,7 @@ Index : 2     used in the geometry : Yes
  Region(s) which use this couple : 
     DefaultRegionForTheWorld
 
-====================================================================
+==================================================================
 
 ### Run 0 start.
 
@@ -3950,7 +4198,7 @@ Index : 2     used in the geometry : Yes
       Current track pi0  is a decay product of Parent ID = 0
       Current track pi0  is a decay product of Parent ID = 0
 
-   Absorber: total energy (MeV): 924.143       total track length (cm):  66.3501
-   Gap:      total energy (MeV): 33.0746       total track length (cm):  16.0573
-Time of this run:   User=0.010000s Real=0.014679s Sys=0.000000s
+   Absorber: total energy (MeV): 1270.64       total track length (cm):  91.3642
+   Gap:      total energy (MeV):  60.021       total track length (cm):  30.3764
+Time of this run:   User=0.020000s Real=0.019408s Sys=0.000000s
 Number of events processed: 1

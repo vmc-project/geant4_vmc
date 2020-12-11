@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.22/00                        https://root.cern |
+  | Welcome to ROOT 6.22/06                        https://root.cern |
   | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Jul 02 2020, 15:30:00                      |
-  | From tags/v6-22-00@v6-22-00                                      |
+  | Built for macosx64 on Dec 10 2020, 11:40:00                      |
+  | From tags/v6-22-06@v6-22-06                                      |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -19,7 +19,7 @@ Processing test_Gflash.C("g3tgeoConfig.C")...
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.6 ( 24 July 2020 )
+ Version 3.7 ( 9 September 2020 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -52,7 +52,7 @@ Real time 0:00:00, CP time 0.190
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.180
+Real time 0:00:00, CP time 0.170
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 2  -----
@@ -63,7 +63,7 @@ Real time 0:00:00, CP time 0.180
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.170
+Real time 0:00:00, CP time 0.160
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 3  -----
@@ -74,7 +74,7 @@ Real time 0:00:00, CP time 0.170
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.170
+Real time 0:00:00, CP time 0.180
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 4  -----
@@ -85,7 +85,7 @@ Real time 0:00:00, CP time 0.170
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.160
+Real time 0:00:00, CP time 0.170
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 5  -----
@@ -96,7 +96,7 @@ Real time 0:00:00, CP time 0.160
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.170
+Real time 0:00:00, CP time 0.180
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 6  -----
@@ -107,7 +107,7 @@ Real time 0:00:00, CP time 0.170
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.170
+Real time 0:00:00, CP time 0.160
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 7  -----
@@ -118,7 +118,7 @@ Real time 0:00:00, CP time 0.170
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.160
+Real time 0:00:00, CP time 0.180
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 8  -----
@@ -129,7 +129,7 @@ Real time 0:00:00, CP time 0.160
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.160
+Real time 0:00:00, CP time 0.180
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 9  -----
@@ -148,13 +148,13 @@ Real time 0:00:00, CP time 0.160
    e1  12.9978   e3x3  47.947   e5x5  48.6028 GeV
  Total energy deposited in the calorimeter: 49.7586 (GeV)
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   132792871     7EA4227 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   132791639     7EA3D57 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   127382797   132792871
-                                        HEX     797B50D     7EA4227
-                                        HEX    FFAD712A           0
-                              relative adrs    -5410518           0
+          with Store/Table at absolute adrs   127387941   132791639
+                                        HEX     797C925     7EA3D57
+                                        HEX    FFAD8A12           0
+                              relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
