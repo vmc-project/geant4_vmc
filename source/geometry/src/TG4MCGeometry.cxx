@@ -887,7 +887,7 @@ Bool_t TG4MCGeometry::GetShape(
     npar = 6;
     par.Set(npar);
     G4Sphere* sphe = (G4Sphere*)solid;
-    par.AddAt(sphe->GetInsideRadius() / cm, 0);
+    par.AddAt(sphe->GetInnerRadius() / cm, 0);
     par.AddAt(sphe->GetOuterRadius() / cm, 1);
     if (!isReflected)
       par.AddAt(sphe->GetStartThetaAngle() / deg, 2);
