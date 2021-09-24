@@ -9,6 +9,7 @@
 
 # Configuration file for CMake build for Geant4 VMC packages.
 # It defines the following variables
+#  Geant4VMC_PREFIX            - installation prefix
 #  Geant4VMC_INCLUDE_DIRS      - include directories for Geant4VMC
 #  Geant4VMC_LIBRARIES         - libraries to link against
 #  Geant4VMC_USE_G4Root        - build option: with internal G4Root
@@ -28,6 +29,7 @@ get_filename_component(_dir "${CMAKE_CURRENT_LIST_FILE}" PATH)
 get_filename_component(_prefix "${_dir}/../.." ABSOLUTE)
 
 # Import options
+set(Geant4VMC_PREFIX "${_prefix}")
 set(Geant4VMC_USE_G4Root @Geant4VMC_USE_G4Root@)
 set(Geant4VMC_USE_EXTERN_G4Root @Geant4VMC_USE_EXTERN_G4Root@)
 set(Geant4VMC_USE_VGM    @Geant4VMC_USE_VGM@)
