@@ -21,16 +21,23 @@ set(ROOT_DEPS ROOT::Core ROOT::RIO ROOT::Tree ROOT::Rint ROOT::Physics
 include(${ROOT_USE_FILE})
 
 #-- VMC (required) ------------------------------------------------------------
-if(ROOT_vmc_FOUND)
-  message(STATUS "Using VMC built with ROOT")
-  set(VMC_LIBRARIES ROOT::VMC)
-  message(STATUS "Adding -DUSE_ROOT_VMC")
-  add_definitions(-DUSE_ROOT_VMC)
-else()
-  find_package(VMC CONFIG REQUIRED)
-#  set(VMC_DEPS VMCLibrary)
+find_package(VMC CONFIG)
+# first try VMC standalone (default)
+if(VMC_FOUND)
   if(NOT VMC_FIND_QUIETLY)
     message(STATUS "Found VMC ${VMC_VERSION} in ${VMC_DIR}")
+  endif()
+else()
+  # otherwise fallback to ROOT's internal if possible (deprecated)
+  if(ROOT_vmc_FOUND)
+    message(WARNING "Using VMC built with ROOT - Deprecated")
+    set(VMC_LIBRARIES ROOT::VMC)
+    add_definitions(-DUSE_ROOT_VMC)
+  else()
+    message(FATAL_ERROR
+            "Could not find VMC package. "
+            "VMC package is not provided with ROOT since v6.26/00. "
+            "Please, install it from https://github.com/vmc-project/vmc. ")
   endif()
 endif()
 
@@ -51,4 +58,3 @@ find_package(Geant4 CONFIG REQUIRED ${_components})
 if (Geant4VMC_USE_VGM)
   find_package(VGM CONFIG REQUIRED)
 endif()
-
