@@ -13,7 +13,8 @@
 #---Adding examples subdirectories explicitly
 #   and a custom target to for building all VMC examples -------------
 
-cmake_minimum_required(VERSION 2.6.4 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+
 
 if(VMC_WITH_Multi)
 add_subdirectory(E03c)
