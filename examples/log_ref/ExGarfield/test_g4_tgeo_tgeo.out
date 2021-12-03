@@ -1,8 +1,9 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.22/06                        https://root.cern |
-  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 10 2020, 11:40:00                      |
-  | From tags/v6-22-06@v6-22-06                                      |
+  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Dec 03 2021, 19:13:00                      |
+  | From tags/v6-24-06@v6-24-06                                      |
+  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -21,12 +22,12 @@ Processing test_ExGarfield.C("g4tgeoConfig.C")...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0.p3 ( 21 July 2020 )
+ Version 1.1 ( 3 December 2021 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.3 ( 11 December 2020 )
+ Version 5.4 ( 3 December 2021 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -49,7 +50,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-10-07    (4-December-2020)
+ Geant4 version Name: geant4-10-07-patch-03    (19-November-2021)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -77,7 +78,7 @@ Adding SpecialPhysicsList stepLimiter
 Going to create FastSimulation
 FastSimulation::FastSimulation
 RandomEngineRoot::Seed:
-    Seed: 1
+    Seed: 624
 Visualization Manager instantiating with verbosity "warnings (3)"...
 Geant4 has been created.
 G4VUserPhysicsList::SetVerboseLevel  : Verbose level is set to 2
@@ -1594,7 +1595,7 @@ Limit excitation energy for Fermi BreakUp (MeV)     20
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
-Time limit for long lived isomeres (ns)             1000
+Time limit for long lived isomeres (ns)             1
 Isomer production flag                              1
 Internal e- conversion flag                         1
 Store e- internal conversion data                   0
@@ -1647,7 +1648,7 @@ Index : 4     used in the geometry : Yes
 Sensor::SetArea:
     -1.451 < x [cm] < 1.451
     -1.451 < y [cm] < 1.451
-    -10 < z [cm] < 10
+    -9.9975 < z [cm] < 10.0025
 TrackHeed::UpdateBoundingBox:
     Bounding box dimensions:
       x: 2.902 cm
@@ -1657,8 +1658,8 @@ TrackHeed::UpdateBoundingBox:
     Center of bounding box:
       x: 0 cm
       y: 0 cm
-      z: 0 cm
-TrackHeed::Setup:
+      z: 0.0025 cm
+TrackHeed::Initialise:
     Cluster density:             28.1058 cm-1
     Stopping power (restricted): 2.29331 keV/cm
     Stopping power (incl. tail): 2.6907 keV/cm
@@ -1674,9 +1675,9 @@ TrackHeed::UpdateBoundingBox:
     Center of bounding box:
       x: 0 cm
       y: 0 cm
-      z: 0 cm
-   Absorber: total energy: 12.0992 MeV       total track length: 1.00001 cm
-        Gas: total energy: 13.9277 keV           avalanche size:     223       gain: 4.37255
+      z: 0.0025 cm
+   Absorber: total energy: 16.9527 MeV       total track length: 1.24644 cm
+        Gas: total energy:    4.15 keV           avalanche size:      59       gain: 3.47059
  Start generating event Nr 2
 TrackHeed::UpdateBoundingBox:
     Bounding box dimensions:
@@ -1687,19 +1688,9 @@ TrackHeed::UpdateBoundingBox:
     Center of bounding box:
       x: 0 cm
       y: 0 cm
-      z: 0 cm
-TrackHeed::UpdateBoundingBox:
-    Bounding box dimensions:
-      x: 2.902 cm
-      y: 2.902 cm
-      z: 20 cm
-TrackHeed::UpdateBoundingBox:
-    Center of bounding box:
-      x: 0 cm
-      y: 0 cm
-      z: 0 cm
-   Absorber: total energy: 13.1293 MeV       total track length: 1.00002 cm
-        Gas: total energy: 7.61954 keV           avalanche size:     203       gain: 4.51111
+      z: 0.0025 cm
+   Absorber: total energy: 13.3102 MeV       total track length: 1.00001 cm
+        Gas: total energy:  4.5051 keV           avalanche size:     125       gain: 5.95238
  Start generating event Nr 3
 TrackHeed::UpdateBoundingBox:
     Bounding box dimensions:
@@ -1710,34 +1701,94 @@ TrackHeed::UpdateBoundingBox:
     Center of bounding box:
       x: 0 cm
       y: 0 cm
-      z: 0 cm
-   Absorber: total energy: 15.7432 MeV       total track length: 1.19778 cm
-        Gas: total energy: 6.31124 keV           avalanche size:      89       gain:  4.2381
+      z: 0.0025 cm
+   Absorber: total energy: 13.4054 MeV       total track length: 1.06821 cm
+        Gas: total energy: 10.6809 keV           avalanche size:     156       gain: 5.57143
  Start generating event Nr 4
-   Absorber: total energy: 12.3837 MeV       total track length: 1.00001 cm
-        Gas: total energy: 4.64126 keV           avalanche size:       0       gain:       0
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0.0025 cm
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0.0025 cm
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0.0025 cm
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0.0025 cm
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0.0025 cm
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0.0025 cm
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0.0025 cm
+TrackHeed::UpdateBoundingBox:
+    Bounding box dimensions:
+      x: 2.902 cm
+      y: 2.902 cm
+      z: 20 cm
+TrackHeed::UpdateBoundingBox:
+    Center of bounding box:
+      x: 0 cm
+      y: 0 cm
+      z: 0.0025 cm
+   Absorber: total energy: 19.0857 MeV       total track length: 1.35464 cm
+        Gas: total energy: 25.4949 keV           avalanche size:     958       gain: 4.62802
  Start generating event Nr 5
-TrackHeed::UpdateBoundingBox:
-    Bounding box dimensions:
-      x: 2.902 cm
-      y: 2.902 cm
-      z: 20 cm
-TrackHeed::UpdateBoundingBox:
-    Center of bounding box:
-      x: 0 cm
-      y: 0 cm
-      z: 0 cm
-TrackHeed::UpdateBoundingBox:
-    Bounding box dimensions:
-      x: 2.902 cm
-      y: 2.902 cm
-      z: 20 cm
-TrackHeed::UpdateBoundingBox:
-    Center of bounding box:
-      x: 0 cm
-      y: 0 cm
-      z: 0 cm
-   Absorber: total energy: 22.7191 MeV       total track length: 1.65751 cm
-        Gas: total energy: 11.0037 keV           avalanche size:      61       gain: 3.58824
-Time of this run:   User=9.150000s Real=9.183427s Sys=0.020000s
+   Absorber: total energy: 21.2681 MeV       total track length:  1.6527 cm
+        Gas: total energy: 4.60774 keV           avalanche size:       0       gain:       0
+Time of this run:   User=13.120000s Real=13.552344s Sys=0.150000s
 Number of events processed: 5

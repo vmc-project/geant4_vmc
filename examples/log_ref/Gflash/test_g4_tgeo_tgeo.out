@@ -1,8 +1,9 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.22/06                        https://root.cern |
-  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 10 2020, 11:40:00                      |
-  | From tags/v6-22-06@v6-22-06                                      |
+  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Dec 03 2021, 19:13:00                      |
+  | From tags/v6-24-06@v6-24-06                                      |
+  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -19,12 +20,12 @@ Processing test_Gflash.C("g4tgeoConfig.C")...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0.p3 ( 21 July 2020 )
+ Version 1.1 ( 3 December 2021 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.3 ( 11 December 2020 )
+ Version 5.4 ( 3 December 2021 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -48,7 +49,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-10-07    (4-December-2020)
+ Geant4 version Name: geant4-10-07-patch-03    (19-November-2021)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -828,7 +829,7 @@ Limit excitation energy for Fermi BreakUp (MeV)     20
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
-Time limit for long lived isomeres (ns)             1000
+Time limit for long lived isomeres (ns)             1
 Isomer production flag                              1
 Internal e- conversion flag                         1
 Store e- internal conversion data                   0
@@ -867,35 +868,35 @@ Index : 2     used in the geometry : Yes
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.050
+Real time 0:00:00, CP time 0.060
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 1  -----
-  11959 hits are stored in HitsCollection 
-   e1  11.974   e3x3  48.3931   e5x5  48.9417 GeV
- Total energy deposited in the calorimeter: 49.7769 (GeV)
+  11923 hits are stored in HitsCollection 
+   e1  12.0522   e3x3  48.1818   e5x5  48.6184 GeV
+ Total energy deposited in the calorimeter: 49.7261 (GeV)
  Start generating event Nr 2
+
+******************************************
+Elapsed Time: 
+Real time 0:00:00, CP time 0.050
+
+******************************************
+ ------ ExGflashEventAction::End of event nr. 2  -----
+  11971 hits are stored in HitsCollection 
+   e1  12.1619   e3x3  48.3446   e5x5  48.802 GeV
+ Total energy deposited in the calorimeter: 49.8912 (GeV)
+ Start generating event Nr 3
 
 ******************************************
 Elapsed Time: 
 Real time 0:00:00, CP time 0.060
 
 ******************************************
- ------ ExGflashEventAction::End of event nr. 2  -----
-  11932 hits are stored in HitsCollection 
-   e1  12.0002   e3x3  48.4136   e5x5  48.8759 GeV
- Total energy deposited in the calorimeter: 49.7134 (GeV)
- Start generating event Nr 3
-
-******************************************
-Elapsed Time: 
-Real time 0:00:00, CP time 0.050
-
-******************************************
  ------ ExGflashEventAction::End of event nr. 3  -----
-  11971 hits are stored in HitsCollection 
-   e1  12.0556   e3x3  48.5879   e5x5  49.076 GeV
- Total energy deposited in the calorimeter: 49.9101 (GeV)
+  11970 hits are stored in HitsCollection 
+   e1  12.1686   e3x3  48.4245   e5x5  48.875 GeV
+ Total energy deposited in the calorimeter: 49.8593 (GeV)
  Start generating event Nr 4
 
 ******************************************
@@ -904,9 +905,9 @@ Real time 0:00:00, CP time 0.050
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 4  -----
-  11941 hits are stored in HitsCollection 
-   e1  12.0332   e3x3  48.2618   e5x5  48.6995 GeV
- Total energy deposited in the calorimeter: 49.7554 (GeV)
+  11975 hits are stored in HitsCollection 
+   e1  12.4034   e3x3  48.5491   e5x5  49.0194 GeV
+ Total energy deposited in the calorimeter: 49.8363 (GeV)
  Start generating event Nr 5
 
 ******************************************
@@ -915,20 +916,20 @@ Real time 0:00:00, CP time 0.050
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 5  -----
-  11977 hits are stored in HitsCollection 
-   e1  12.097   e3x3  48.5408   e5x5  48.9806 GeV
- Total energy deposited in the calorimeter: 49.9017 (GeV)
+  11937 hits are stored in HitsCollection 
+   e1  11.9899   e3x3  48.1185   e5x5  48.6589 GeV
+ Total energy deposited in the calorimeter: 49.726 (GeV)
  Start generating event Nr 6
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.050
+Real time 0:00:00, CP time 0.060
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 6  -----
-  11946 hits are stored in HitsCollection 
-   e1  12.0339   e3x3  48.3364   e5x5  48.7963 GeV
- Total energy deposited in the calorimeter: 49.7695 (GeV)
+  11985 hits are stored in HitsCollection 
+   e1  12.2223   e3x3  48.6149   e5x5  49.0215 GeV
+ Total energy deposited in the calorimeter: 49.8839 (GeV)
  Start generating event Nr 7
 
 ******************************************
@@ -937,9 +938,9 @@ Real time 0:00:00, CP time 0.050
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 7  -----
-  11979 hits are stored in HitsCollection 
-   e1  12.213   e3x3  48.472   e5x5  48.9121 GeV
- Total energy deposited in the calorimeter: 49.8895 (GeV)
+  11940 hits are stored in HitsCollection 
+   e1  12.1562   e3x3  48.166   e5x5  48.6024 GeV
+ Total energy deposited in the calorimeter: 49.7425 (GeV)
  Start generating event Nr 8
 
 ******************************************
@@ -948,9 +949,9 @@ Real time 0:00:00, CP time 0.050
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 8  -----
-  11950 hits are stored in HitsCollection 
-   e1  12.0744   e3x3  48.4493   e5x5  48.8459 GeV
- Total energy deposited in the calorimeter: 49.7598 (GeV)
+  11926 hits are stored in HitsCollection 
+   e1  12.0753   e3x3  48.3365   e5x5  48.8476 GeV
+ Total energy deposited in the calorimeter: 49.7203 (GeV)
  Start generating event Nr 9
 
 ******************************************
@@ -959,19 +960,19 @@ Real time 0:00:00, CP time 0.050
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 9  -----
-  11962 hits are stored in HitsCollection 
-   e1  12.1375   e3x3  48.4284   e5x5  48.9044 GeV
- Total energy deposited in the calorimeter: 49.8716 (GeV)
+  12249 hits are stored in HitsCollection 
+   e1  12.2371   e3x3  48.514   e5x5  48.9605 GeV
+ Total energy deposited in the calorimeter: 49.9307 (GeV)
  Start generating event Nr 10
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.050
+Real time 0:00:00, CP time 0.060
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 10  -----
-  11882 hits are stored in HitsCollection 
-   e1  11.9877   e3x3  47.9701   e5x5  48.4557 GeV
- Total energy deposited in the calorimeter: 49.3296 (GeV)
-Time of this run:   User=0.530000s Real=0.536146s Sys=0.000000s
+  11972 hits are stored in HitsCollection 
+   e1  12.241   e3x3  48.6307   e5x5  48.9902 GeV
+ Total energy deposited in the calorimeter: 49.829 (GeV)
+Time of this run:   User=0.550000s Real=0.550008s Sys=0.010000s
 Number of events processed: 10

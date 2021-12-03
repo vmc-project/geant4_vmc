@@ -1,8 +1,9 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.22/06                        https://root.cern |
-  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 10 2020, 11:40:00                      |
-  | From tags/v6-22-06@v6-22-06                                      |
+  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Dec 03 2021, 19:13:00                      |
+  | From tags/v6-24-06@v6-24-06                                      |
+  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -17,12 +18,12 @@ Processing test_E03_1.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0.p3 ( 21 July 2020 )
+ Version 1.1 ( 3 December 2021 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.7 ( 9 September 2020 )
+ Version 3.9 ( 3 December 2021 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -45,30 +46,30 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 
 ---> Begin of event: 1
 Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
-   Absorber: total energy (MeV): 922.087       total track length (cm):  41.9802
-   Gap:      total energy (MeV): 29.2039       total track length (cm):   13.304
+   Absorber: total energy (MeV): 921.396       total track length (cm):  41.9752
+   Gap:      total energy (MeV):  20.918       total track length (cm):   9.5108
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV): 912.606       total track length (cm):  42.3859
-   Gap:      total energy (MeV): 38.8527       total track length (cm):  17.8691
+   Absorber: total energy (MeV): 943.462       total track length (cm):  42.5326
+   Gap:      total energy (MeV): 20.2958       total track length (cm):  8.83393
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 910.238       total track length (cm):  40.8186
-   Gap:      total energy (MeV): 25.8941       total track length (cm):  11.9521
+   Absorber: total energy (MeV): 941.848       total track length (cm):  44.3126
+   Gap:      total energy (MeV): 21.8924       total track length (cm):  9.81739
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 921.611       total track length (cm):  39.8737
-   Gap:      total energy (MeV):  25.275       total track length (cm):  12.7714
+   Absorber: total energy (MeV):  941.89       total track length (cm):  42.5501
+   Gap:      total energy (MeV): 17.9917       total track length (cm):  7.74231
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 875.573       total track length (cm):  39.9255
-   Gap:      total energy (MeV): 20.9186       total track length (cm):  8.56264
+   Absorber: total energy (MeV): 900.475       total track length (cm):  40.9165
+   Gap:      total energy (MeV): 27.1689       total track length (cm):  12.0858
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    87791959     53B9957 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   116290903     6EE7557 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    82388261    87791959
-                                        HEX     4E92525     53B9957
+          with Store/Table at absolute adrs   110887205   116290903
+                                        HEX     69C0125     6EE7557
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -105,10 +106,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.22/06                        https://root.cern |
-  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 10 2020, 11:40:00                      |
-  | From tags/v6-22-06@v6-22-06                                      |
+  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Dec 03 2021, 19:13:00                      |
+  | From tags/v6-24-06@v6-24-06                                      |
+  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -124,12 +126,12 @@ Processing test_E03_2.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0.p3 ( 21 July 2020 )
+ Version 1.1 ( 3 December 2021 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.7 ( 9 September 2020 )
+ Version 3.9 ( 3 December 2021 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -168,279 +170,277 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   1    -7.500    0.000    0.000    50.0000    0.0000    1.500    1.500     WRLD  Transportation
 #   2    -7.500    0.000    0.000    50.0000    0.0000    0.000    1.500     ABSO  No active process
 #   3    -7.500    0.000    0.000    48.0158    0.0003    0.000    1.500     ABSO  Bremstrahlung
-#   4    -7.233   -0.000   -0.000    41.4127    3.3948    0.273    1.773     ABSO  Bremstrahlung
-#   5    -7.019    0.109    0.030    37.4261    3.4690    0.248    2.021     ABSO  Bremstrahlung
-#   6    -6.949    0.128    0.056    36.3591    0.8863    0.078    2.099     ABSO  Bremstrahlung
-#   7    -6.933    0.134    0.061    26.8880    0.5426    0.018    2.116     ABSO  Bremstrahlung
-#   8    -6.766    0.191    0.101    23.0907    2.4679    0.188    2.304     ABSO  Bremstrahlung
-#   9    -6.583    0.064    0.344     9.5669    4.1011    0.365    2.669     ABSO  Bremstrahlung
-#  10    -6.549    0.083    0.335     8.1965    0.6241    0.043    2.712     ABSO  Bremstrahlung
-#  11    -6.518    0.111    0.305     5.1268    0.6750    0.058    2.770     ABSO  Bremstrahlung
-#  12    -6.500    0.118    0.302     3.6123    1.5145    0.022    2.792     ABSO  Multiple scattering
-#  13    -6.500    0.118    0.302     3.6123    0.0000    0.000    2.792     GAPX  No active process
-#  14    -6.292   -0.091    0.567     2.6406    0.9717    0.464    3.256     GAPX  Multiple scattering
-#  15    -6.212   -0.341    0.664     2.0431    0.5976    0.339    3.595     GAPX  Multiple scattering
-#  16    -6.074   -0.469    0.634     1.6797    0.3634    0.234    3.829     GAPX  Multiple scattering
-#  17    -6.070   -0.593    0.581     1.4088    0.2709    0.166    3.995     GAPX  Multiple scattering
-#  18    -6.029   -0.571    0.492     1.1889    0.2199    0.123    4.117     GAPX  Multiple scattering
-#  19    -6.062   -0.591    0.428     1.0369    0.1521    0.093    4.210     GAPX  Multiple scattering
-#  20    -6.003   -0.601    0.424     0.8555    0.1814    0.073    4.284     GAPX  Multiple scattering
-#  21    -6.000   -0.602    0.423     0.8360    0.0195    0.004    4.288     GAPX  Multiple scattering
-#  22    -6.000   -0.602    0.423     0.8360    0.0000    0.000    4.288     ABSO  No active process
-#  23    -6.000   -0.602    0.423     0.0000    0.8360    0.000    4.288     ABSO  Energy threshold
+#   4    -7.233   -0.000   -0.000    40.8352    3.9969    0.321    1.821     ABSO  Bremstrahlung
+#   5    -7.042    0.099    0.027    37.1382    3.6970    0.265    2.086     ABSO  Multiple scattering
+#   6    -7.042    0.099    0.027    36.6237    0.0000    0.000    2.086     ABSO  Bremstrahlung
+#   7    -6.972    0.118    0.053    35.4714    0.9720    0.085    2.171     ABSO  Bremstrahlung
+#   8    -6.956    0.125    0.057    26.1585    0.5566    0.018    2.189     ABSO  Bremstrahlung
+#   9    -6.826    0.172    0.088    23.8280    2.3305    0.178    2.367     ABSO  Multiple scattering
+#  10    -6.823    0.171    0.090    23.5549    0.0426    0.004    2.371     ABSO  Bremstrahlung
+#  11    -6.754    0.135    0.165    21.6471    1.4544    0.136    2.506     ABSO  Bremstrahlung
+#  12    -6.735    0.110    0.199    13.3031    0.8444    0.054    2.560     ABSO  Bremstrahlung
+#  13    -6.728    0.095    0.221    12.0956    0.3307    0.034    2.594     ABSO  Bremstrahlung
+#  14    -6.710    0.079    0.269     9.5333    1.9901    0.067    2.661     ABSO  Bremstrahlung
+#  15    -6.709    0.062    0.291     4.9860    0.9031    0.035    2.696     ABSO  Bremstrahlung
+#  16    -6.699    0.007    0.372     2.9952    1.3812    0.123    2.819     ABSO  Bremstrahlung
+#  17    -6.673   -0.102    0.304     0.0000    2.9952    0.133    2.983     ABSO  Energy threshold
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 12     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.699    0.007    0.372     0.6095    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.710   -0.331    0.050     0.0000    0.6095    0.467    0.467     ABSO  Photoelectric effect
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 11     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.709    0.062    0.291     3.6441    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.663   -0.410    0.942     1.6708    0.0000    0.805    0.805     ABSO  Compton scattering
+#   2    -7.500   -0.856    3.350     1.6708    0.0000    2.588    3.394     ABSO  Transportation
+#   3    -7.500   -0.856    3.350     1.6708    0.0000    0.000    3.394     WRLD  No active process
+#   4    -8.421   -1.347    6.000     1.6708    0.0000    2.848    6.242     WRLD  Transportation
+
+****************************************************************************************************
+  Particle = e-     Track ID = 13     Parent ID = 11
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.663   -0.410    0.942     1.9733    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.649   -0.444    0.967     0.0000    1.9733    0.050    0.056     ABSO  Energy threshold
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 10     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.710    0.079    0.269     0.5722    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500   -2.291    2.933     0.5722    0.0000    3.573    3.573     ABSO  Transportation
+#   2    -6.500   -2.291    2.933     0.5722    0.0000    0.000    3.573     GAPX  No active process
+#   3    -6.494   -2.359    3.010     0.4809    0.0913    0.103    3.675     GAPX  Compton scattering
+#   4    -6.500   -2.365    3.020     0.4809    0.0000    0.013    3.688     GAPX  Transportation
+#   5    -6.500   -2.365    3.020     0.4809    0.0000    0.000    3.688     ABSO  No active process
+#   6    -6.628   -2.481    3.226     0.0000    0.4809    0.268    3.956     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 9     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.518    0.111    0.305     2.3948    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    0.119    0.302     2.3948    0.0000    0.020    0.020     ABSO  Transportation
-#   2    -6.500    0.119    0.302     2.3948    0.0000    0.000    0.020     GAPX  No active process
-#   3    -6.000    0.314    0.213     2.3948    0.0000    0.544    0.564     GAPX  Transportation
-#   4    -6.000    0.314    0.213     2.3948    0.0000    0.000    0.564     ABSO  No active process
-#   5    -5.602    0.469    0.142     2.3948    1.3728    0.433    0.997     ABSO  Lepton pair production
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 11     Parent ID = 9
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.602    0.469    0.142     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.000    0.548    0.368     0.5110    0.0000    0.465    0.465     ABSO  Transportation
-#   2    -6.000    0.548    0.368     0.5110    0.0000    0.000    0.465     GAPX  No active process
-#   3    -6.500    0.647    0.652     0.5110    0.0000    0.584    1.049     GAPX  Transportation
-#   4    -6.500    0.647    0.652     0.5110    0.0000    0.000    1.049     ABSO  No active process
-#   5    -7.197    0.784    1.048     0.0000    0.5110    0.813    1.862     ABSO  Photoelectric effect
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 10     Parent ID = 9
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.602    0.469    0.142     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.025    0.355   -0.186     0.0000    0.5110    0.673    0.673     ABSO  Photoelectric effect
+#   0    -6.728    0.095    0.221     0.8768    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500   -0.130    0.881     0.8768    0.0000    0.734    0.734     ABSO  Transportation
+#   2    -6.500   -0.130    0.881     0.8768    0.0000    0.000    0.734     GAPX  No active process
+#   3    -6.000   -0.623    2.326     0.8768    0.0000    1.607    2.340     GAPX  Transportation
+#   4    -6.000   -0.623    2.326     0.8768    0.0000    0.000    2.340     ABSO  No active process
+#   5    -5.707   -0.911    3.172     0.0000    0.8768    0.940    3.280     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 8     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.549    0.083    0.335     0.7462    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    0.130    0.283     0.7462    0.0000    0.085    0.085     ABSO  Transportation
-#   2    -6.500    0.130    0.283     0.7462    0.0000    0.000    0.085     GAPX  No active process
-#   3    -6.000    0.609   -0.242     0.7462    0.0000    0.869    0.955     GAPX  Transportation
-#   4    -6.000    0.609   -0.242     0.7462    0.0000    0.000    0.955     ABSO  No active process
-#   5    -5.568    1.023   -0.696     0.4796    0.2667    0.751    1.706     ABSO  Compton scattering
-#   6    -5.571    1.037   -0.703     0.3181    0.1614    0.016    1.722     ABSO  Compton scattering
-#   7    -5.674    1.039   -0.782     0.0000    0.3181    0.130    1.851     ABSO  Photoelectric effect
+#   0    -6.735    0.110    0.199     7.4996    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.672   -0.022    0.399     7.4996    0.0000    0.248    0.248     ABSO  Lepton pair production
+
+****************************************************************************************************
+  Particle = e+     Track ID = 15     Parent ID = 8
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.672   -0.022    0.399     4.3207    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.643   -0.071    0.466     2.5310    1.6151    0.110    0.110     ABSO  Bremstrahlung
+#   2    -6.679   -0.051    0.476     1.9319    0.4888    0.053    0.164     ABSO  Bremstrahlung
+#   3    -6.668   -0.024    0.439     0.0000    1.9319    0.050    0.222     ABSO  Positron annihilation
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 19     Parent ID = 15
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.668   -0.024    0.439     0.5110    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.591   -0.225    0.607     0.0000    0.5110    0.272    0.272     ABSO  Photoelectric effect
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 18     Parent ID = 15
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.668   -0.024    0.439     0.5110    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.753    0.199    0.253     0.0000    0.5110    0.303    0.303     ABSO  Photoelectric effect
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 17     Parent ID = 15
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.679   -0.051    0.476     0.1103    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.679   -0.045    0.466     0.0000    0.1103    0.011    0.011     ABSO  Compton scattering
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 16     Parent ID = 15
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.643   -0.071    0.466     0.1745    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.811   -0.018    0.500     0.0000    0.1745    0.179    0.179     ABSO  Photoelectric effect
+
+****************************************************************************************************
+  Particle = e-     Track ID = 14     Parent ID = 8
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.672   -0.022    0.399     2.1570    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.665   -0.054    0.455     0.0000    2.1570    0.065    0.081     ABSO  Energy threshold
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 7     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.583    0.064    0.344     9.4227    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    0.113    0.321     9.4227    0.0000    0.099    0.099     ABSO  Transportation
-#   2    -6.500    0.113    0.321     9.4227    0.0000    0.000    0.099     GAPX  No active process
-#   3    -6.000    0.413    0.185     9.4227    0.0000    0.599    0.698     GAPX  Transportation
-#   4    -6.000    0.413    0.185     9.4227    0.0000    0.000    0.698     ABSO  No active process
-#   5    -5.853    0.501    0.144     9.4227    0.0000    0.176    0.874     ABSO  Lepton pair production
-
-****************************************************************************************************
-  Particle = e+     Track ID = 13     Parent ID = 7
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.853    0.501    0.144     4.4664    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.825    0.517    0.113     3.4924    0.9740    0.056    0.056     ABSO  Multiple scattering
-#   2    -5.825    0.515    0.094     3.1372    0.1979    0.024    0.080     ABSO  Bremstrahlung
-#   3    -5.829    0.513    0.049     2.5708    0.5664    0.056    0.136     ABSO  Multiple scattering
-#   4    -5.846    0.521    0.075     1.7492    0.4076    0.040    0.176     ABSO  Bremstrahlung
-#   5    -5.853    0.497    0.095     0.0000    1.7492    0.034    0.216     ABSO  Positron annihilation
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 17     Parent ID = 13
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.853    0.497    0.095     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.222    0.351   -0.556     0.4331    0.0779    0.918    0.918     ABSO  Compton scattering
-#   2    -5.178    0.330   -0.566     0.4117    0.0215    0.049    0.967     ABSO  Compton scattering
-#   3    -5.021    0.218   -0.546     0.1591    0.2526    0.194    1.161     ABSO  Compton scattering
-#   4    -5.030    0.222   -0.546     0.0000    0.1591    0.010    1.171     ABSO  Photoelectric effect
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 16     Parent ID = 13
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.853    0.497    0.095     0.5110    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.896    0.507    0.139     0.0000    0.5110    0.062    0.062     ABSO  Photoelectric effect
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 15     Parent ID = 13
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.846    0.521    0.075     0.4140    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.903    0.388    0.164     0.2068    0.2072    0.171    0.171     ABSO  Compton scattering
-#   2    -5.902    0.381    0.145     0.0000    0.2068    0.021    0.192     ABSO  Photoelectric effect
-
-****************************************************************************************************
-  Particle = gamma     Track ID = 14     Parent ID = 13
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.825    0.515    0.094     0.1572    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.842    0.516    0.058     0.0000    0.1572    0.040    0.040     ABSO  Photoelectric effect
-
-****************************************************************************************************
-  Particle = e-     Track ID = 12     Parent ID = 7
-****************************************************************************************************
-Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -5.853    0.501    0.144     3.9343    0.0000    0.000    0.000     ABSO  No active process
-#   1    -5.818    0.524    0.162     2.4712    1.4630    0.056    0.056     ABSO  Multiple scattering
-#   2    -5.782    0.497    0.152     1.9001    0.5712    0.056    0.113     ABSO  Multiple scattering
-#   3    -5.751    0.484    0.141     0.0000    1.9001    0.044    0.157     ABSO  Energy threshold
+#   0    -6.754    0.135    0.165     0.4533    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.720    0.090    0.224     0.3622    0.0911    0.081    0.081     ABSO  Compton scattering
+#   2    -6.744    0.043    0.272     0.3289    0.0334    0.071    0.152     ABSO  Compton scattering
+#   3    -7.033   -0.291    0.378     0.0000    0.3289    0.454    0.606     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 6     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.766    0.191    0.101     1.3294    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.592    0.069    0.329     0.2226    1.1068    0.312    0.312     ABSO  Compton scattering
-#   2    -6.653    0.137    0.074     0.0000    0.2226    0.271    0.582     ABSO  Photoelectric effect
+#   0    -6.823    0.171    0.090     0.2305    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.765    0.142    0.149     0.0000    0.2305    0.088    0.088     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 5     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.933    0.134    0.061     8.9285    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    0.283    0.164     8.9285    0.0000    0.469    0.469     ABSO  Transportation
-#   2    -6.500    0.283    0.164     8.9285    0.0000    0.000    0.469     GAPX  No active process
-#   3    -6.000    0.455    0.284     8.9285    0.0000    0.542    1.011     GAPX  Transportation
-#   4    -6.000    0.455    0.284     8.9285    0.0000    0.000    1.011     ABSO  No active process
-#   5    -5.000    0.799    0.523     8.9285    0.0000    1.084    2.096     ABSO  Transportation
-#   6    -5.000    0.799    0.523     8.9285    0.0000    0.000    2.096     GAPX  No active process
-#   7    -4.500    0.971    0.642     8.9285    0.0000    0.542    2.638     GAPX  Transportation
-#   8    -4.500    0.971    0.642     8.9285    0.0000    0.000    2.638     ABSO  No active process
-#   9    -3.500    1.315    0.881     8.9285    0.0000    1.084    3.722     ABSO  Transportation
-#  10    -3.500    1.315    0.881     8.9285    0.0000    0.000    3.722     GAPX  No active process
-#  11    -3.000    1.487    1.001     8.9285    0.0000    0.542    4.264     GAPX  Transportation
-#  12    -3.000    1.487    1.001     8.9285    0.0000    0.000    4.264     ABSO  No active process
-#  13    -2.395    1.695    1.146     1.0355    0.0000    0.656    4.920     ABSO  Compton scattering
-#  14    -2.000    1.443    1.071     1.0355    0.0000    0.474    5.395     ABSO  Transportation
-#  15    -2.000    1.443    1.071     1.0355    0.0000    0.000    5.395     GAPX  No active process
-#  16    -1.500    1.123    0.977     1.0355    0.0000    0.601    5.996     GAPX  Transportation
-#  17    -1.500    1.123    0.977     1.0355    0.0000    0.000    5.996     ABSO  No active process
-#  18    -0.967    0.782    0.877     0.4567    0.5788    0.641    6.636     ABSO  Compton scattering
-#  19    -0.774    0.812    1.097     0.0000    0.4567    0.295    6.931     ABSO  Photoelectric effect
+#   0    -6.956    0.125    0.057     8.7563    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500    0.291    0.161     8.7563    0.0000    0.497    0.497     ABSO  Transportation
+#   2    -6.500    0.291    0.161     8.7563    0.0000    0.000    0.497     GAPX  No active process
+#   3    -6.000    0.473    0.275     8.7563    0.0000    0.544    1.041     GAPX  Transportation
+#   4    -6.000    0.473    0.275     8.7563    0.0000    0.000    1.041     ABSO  No active process
+#   5    -5.000    0.836    0.503     8.7563    0.0000    1.088    2.129     ABSO  Transportation
+#   6    -5.000    0.836    0.503     8.7563    0.0000    0.000    2.129     GAPX  No active process
+#   7    -4.500    1.018    0.617     8.7563    0.0000    0.544    2.673     GAPX  Transportation
+#   8    -4.500    1.018    0.617     8.7563    0.0000    0.000    2.673     ABSO  No active process
+#   9    -3.500    1.382    0.845     8.7563    0.0000    1.088    3.761     ABSO  Transportation
+#  10    -3.500    1.382    0.845     8.7563    0.0000    0.000    3.761     GAPX  No active process
+#  11    -3.000    1.563    0.959     8.7563    0.0000    0.544    4.305     GAPX  Transportation
+#  12    -3.000    1.563    0.959     8.7563    0.0000    0.000    4.305     ABSO  No active process
+#  13    -2.045    1.911    1.177     0.4345    0.0000    1.039    5.345     ABSO  Compton scattering
+#  14    -2.112    2.136    0.912     0.2583    0.1763    0.354    5.699     ABSO  Compton scattering
+#  15    -2.000    2.108    0.821     0.2583    0.0000    0.147    5.846     ABSO  Transportation
+#  16    -2.000    2.108    0.821     0.2583    0.0000    0.000    5.846     GAPX  No active process
+#  17    -1.500    1.982    0.415     0.2583    0.0000    0.657    6.502     GAPX  Transportation
+#  18    -1.500    1.982    0.415     0.2583    0.0000    0.000    6.502     ABSO  No active process
+#  19    -1.472    1.975    0.392     0.0000    0.2583    0.037    6.539     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 18     Parent ID = 5
+  Particle = e-     Track ID = 20     Parent ID = 5
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.395    1.695    1.146     7.8929    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.316    1.731    1.168     6.5899    1.3030    0.109    0.109     ABSO  Multiple scattering
-#   2    -2.312    1.737    1.197     4.8532    0.3015    0.033    0.142     ABSO  Bremstrahlung
-#   3    -2.310    1.734    1.198     3.5250    0.0364    0.004    0.146     ABSO  Bremstrahlung
-#   4    -2.286    1.698    1.211     2.7597    0.7653    0.056    0.202     ABSO  Multiple scattering
-#   5    -2.286    1.698    1.211     2.5290    0.0000    0.000    0.202     ABSO  Bremstrahlung
-#   6    -2.284    1.654    1.222     1.8934    0.6356    0.056    0.258     ABSO  Multiple scattering
-#   7    -2.284    1.654    1.222     0.7350    0.0000    0.000    0.258     ABSO  Bremstrahlung
-#   8    -2.284    1.654    1.222     0.0000    0.7350    0.000    0.258     ABSO  Energy threshold
+#   0    -2.045    1.911    1.177     8.3218    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.009    1.922    1.187     7.6894    0.4585    0.048    0.048     ABSO  Bremstrahlung
+#   2    -2.000    1.928    1.190     7.5465    0.1429    0.014    0.063     ABSO  Multiple scattering
+#   3    -2.000    1.928    1.190     7.5465    0.0000    0.000    0.063     GAPX  No active process
+#   4    -1.837    2.054    1.213     7.0883    0.4583    0.256    0.318     GAPX  Multiple scattering
+#   5    -1.682    2.153    1.243     6.5982    0.4901    0.229    0.547     GAPX  Multiple scattering
+#   6    -1.550    2.245    1.261     6.2330    0.3652    0.200    0.746     GAPX  Multiple scattering
+#   7    -1.500    2.276    1.263     6.1517    0.0813    0.065    0.811     GAPX  Multiple scattering
+#   8    -1.500    2.276    1.263     6.1517    0.0000    0.000    0.811     ABSO  No active process
+#   9    -1.410    2.346    1.255     4.0359    1.6867    0.143    0.954     ABSO  Bremstrahlung
+#  10    -1.429    2.356    1.275     3.5239    0.3530    0.036    0.990     ABSO  Bremstrahlung
+#  11    -1.462    2.441    1.262     1.7037    1.3883    0.115    1.105     ABSO  Bremstrahlung
+#  12    -1.481    2.448    1.239     0.0000    1.7037    0.028    1.143     ABSO  Energy threshold
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 22     Parent ID = 18
+  Particle = gamma     Track ID = 24     Parent ID = 20
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.284    1.654    1.222     1.1584    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.000    1.733    1.248     1.1584    0.0000    0.296    0.296     ABSO  Transportation
-#   2    -2.000    1.733    1.248     1.1584    0.0000    0.000    0.296     GAPX  No active process
-#   3    -1.500    1.872    1.294     1.1584    0.0000    0.521    0.817     GAPX  Transportation
-#   4    -1.500    1.872    1.294     1.1584    0.0000    0.000    0.817     ABSO  No active process
-#   5    -0.647    2.110    1.372     0.2538    0.9046    0.889    1.706     ABSO  Compton scattering
-#   6    -0.660    2.076    1.380     0.1345    0.1193    0.038    1.744     ABSO  Compton scattering
-#   7    -0.650    2.087    1.363     0.0000    0.1345    0.023    1.767     ABSO  Photoelectric effect
+#   0    -1.462    2.441    1.262     0.4319    0.0000    0.000    0.000     ABSO  No active process
+#   1    -1.500    2.453    1.231     0.4319    0.0000    0.050    0.050     ABSO  Transportation
+#   2    -1.500    2.453    1.231     0.4319    0.0000    0.000    0.050     GAPX  No active process
+#   3    -2.000    2.616    0.829     0.4319    0.0000    0.662    0.713     GAPX  Transportation
+#   4    -2.000    2.616    0.829     0.4319    0.0000    0.000    0.713     ABSO  No active process
+#   5    -2.239    2.693    0.637     0.3553    0.0766    0.316    1.028     ABSO  Compton scattering
+#   6    -2.482    2.972    0.595     0.0000    0.3553    0.372    1.401     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 21     Parent ID = 18
+  Particle = gamma     Track ID = 23     Parent ID = 20
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.286    1.698    1.211     0.2307    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.275    1.632    1.214     0.0000    0.2307    0.067    0.067     ABSO  Photoelectric effect
+#   0    -1.429    2.356    1.275     0.1590    0.0000    0.000    0.000     ABSO  No active process
+#   1    -1.439    2.386    1.269     0.0000    0.1590    0.032    0.032     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 20     Parent ID = 18
+  Particle = gamma     Track ID = 22     Parent ID = 20
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.310    1.734    1.198     1.2918    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.155    1.370    1.436     0.2289    1.0629    0.461    0.461     ABSO  Compton scattering
-#   2    -2.236    1.443    1.250     0.0000    0.2289    0.215    0.676     ABSO  Photoelectric effect
+#   0    -1.410    2.346    1.255     0.4291    0.0000    0.000    0.000     ABSO  No active process
+#   1    -1.439    2.360    1.287     0.4275    0.0016    0.045    0.045     ABSO  Compton scattering
+#   2    -1.461    2.375    1.312     0.2972    0.1303    0.036    0.082     ABSO  Compton scattering
+#   3    -1.500    2.354    1.321     0.2972    0.0000    0.045    0.127     ABSO  Transportation
+#   4    -1.500    2.354    1.321     0.2972    0.0000    0.000    0.127     GAPX  No active process
+#   5    -2.000    2.094    1.427     0.2972    0.0000    0.573    0.700     GAPX  Transportation
+#   6    -2.000    2.094    1.427     0.2972    0.0000    0.000    0.700     ABSO  No active process
+#   7    -2.105    2.039    1.449     0.0000    0.2972    0.120    0.820     ABSO  Photoelectric effect
 
 ****************************************************************************************************
-  Particle = gamma     Track ID = 19     Parent ID = 18
+  Particle = gamma     Track ID = 21     Parent ID = 20
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -2.312    1.737    1.197     1.4352    0.0000    0.000    0.000     ABSO  No active process
-#   1    -2.202    1.550    1.262     0.4673    0.9679    0.226    0.226     ABSO  Compton scattering
-#   2    -2.000    1.553    1.142     0.4673    0.0000    0.235    0.461     ABSO  Transportation
-#   3    -2.000    1.553    1.142     0.4673    0.0000    0.000    0.461     GAPX  No active process
-#   4    -1.500    1.558    0.846     0.4673    0.0000    0.581    1.042     GAPX  Transportation
-#   5    -1.500    1.558    0.846     0.4673    0.0000    0.000    1.042     ABSO  No active process
-#   6    -1.363    1.559    0.765     0.2776    0.1897    0.159    1.201     ABSO  Compton scattering
-#   7    -1.420    1.435    0.535     0.0000    0.2776    0.267    1.468     ABSO  Photoelectric effect
+#   0    -2.009    1.922    1.187     0.1740    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.000    1.927    1.190     0.1740    0.0000    0.011    0.011     ABSO  Transportation
+#   2    -2.000    1.927    1.190     0.1740    0.0000    0.000    0.011     GAPX  No active process
+#   3    -1.500    2.193    1.387     0.1740    0.0000    0.599    0.611     GAPX  Transportation
+#   4    -1.500    2.193    1.387     0.1740    0.0000    0.000    0.611     ABSO  No active process
+#   5    -1.455    2.217    1.405     0.0000    0.1740    0.054    0.665     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 4     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.949    0.128    0.056     0.1807    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.865    0.161    0.080     0.0000    0.1807    0.093    0.093     ABSO  Photoelectric effect
+#   0    -6.972    0.118    0.053     0.1803    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.951    0.127    0.059     0.0000    0.1803    0.024    0.024     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 3     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.019    0.109    0.030     0.5175    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    0.288    0.230     0.5175    0.0000    0.584    0.584     ABSO  Transportation
-#   2    -6.500    0.288    0.230     0.5175    0.0000    0.000    0.584     GAPX  No active process
-#   3    -6.000    0.459    0.424     0.5175    0.0000    0.563    1.147     GAPX  Transportation
-#   4    -6.000    0.459    0.424     0.5175    0.0000    0.000    1.147     ABSO  No active process
-#   5    -5.224    0.726    0.724     0.1893    0.3282    0.874    2.021     ABSO  Compton scattering
-#   6    -5.391    0.374    0.646     0.0000    0.1893    0.398    2.419     ABSO  Photoelectric effect
+#   0    -7.042    0.099    0.027     0.5145    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.546    0.279    0.215     0.4668    0.0477    0.561    0.561     ABSO  Compton scattering
+#   2    -6.500    0.290    0.211     0.4668    0.0000    0.047    0.608     ABSO  Transportation
+#   3    -6.500    0.290    0.211     0.4668    0.0000    0.000    0.608     GAPX  No active process
+#   4    -6.000    0.411    0.160     0.4668    0.0000    0.517    1.125     GAPX  Transportation
+#   5    -6.000    0.411    0.160     0.4668    0.0000    0.000    1.125     ABSO  No active process
+#   6    -5.242    0.594    0.083     0.1907    0.2761    0.784    1.909     ABSO  Compton scattering
+#   7    -5.286    0.504    0.054     0.0000    0.1907    0.104    2.013     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 2     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.233   -0.000   -0.000     3.2084    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    0.379    0.112     3.2084    0.0000    0.832    0.832     ABSO  Transportation
-#   2    -6.500    0.379    0.112     3.2084    0.0000    0.000    0.832     GAPX  No active process
-#   3    -6.000    0.637    0.188     3.2084    0.0000    0.568    1.400     GAPX  Transportation
-#   4    -6.000    0.637    0.188     3.2084    0.0000    0.000    1.400     ABSO  No active process
-#   5    -5.000    1.154    0.341     3.2084    0.0000    1.136    2.536     ABSO  Transportation
-#   6    -5.000    1.154    0.341     3.2084    0.0000    0.000    2.536     GAPX  No active process
-#   7    -4.500    1.413    0.417     3.2084    0.0000    0.568    3.104     GAPX  Transportation
-#   8    -4.500    1.413    0.417     3.2084    0.0000    0.000    3.104     ABSO  No active process
-#   9    -3.500    1.929    0.570     3.2084    0.0000    1.136    4.240     ABSO  Transportation
-#  10    -3.500    1.929    0.570     3.2084    0.0000    0.000    4.240     GAPX  No active process
-#  11    -3.000    2.188    0.646     3.2084    0.0000    0.568    4.808     GAPX  Transportation
-#  12    -3.000    2.188    0.646     3.2084    0.0000    0.000    4.808     ABSO  No active process
-#  13    -2.147    2.629    0.776     2.5047    0.7036    0.969    5.777     ABSO  Compton scattering
-#  14    -2.000    2.772    0.789     2.5047    0.0000    0.206    5.983     ABSO  Transportation
-#  15    -2.000    2.772    0.789     2.5047    0.0000    0.000    5.983     GAPX  No active process
-#  16    -1.500    3.257    0.834     2.5047    0.0000    0.698    6.681     GAPX  Transportation
-#  17    -1.500    3.257    0.834     2.5047    0.0000    0.000    6.681     ABSO  No active process
-#  18    -0.500    4.227    0.922     2.5047    0.0000    1.396    8.077     ABSO  Transportation
-#  19    -0.500    4.227    0.922     2.5047    0.0000    0.000    8.077     GAPX  No active process
-#  20    -0.253    4.467    0.944     0.2335    0.0000    0.345    8.422     GAPX  Compton scattering
-#  21    -0.500    4.140    0.955     0.2335    0.0000    0.410    8.832     GAPX  Transportation
-#  22    -0.500    4.140    0.955     0.2335    0.0000    0.000    8.832     ABSO  No active process
-#  23    -0.567    4.052    0.958     0.0000    0.2335    0.111    8.942     ABSO  Photoelectric effect
+#   0    -7.233   -0.000   -0.000     3.1837    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500    0.385    0.114     3.1837    0.0000    0.835    0.835     ABSO  Transportation
+#   2    -6.500    0.385    0.114     3.1837    0.0000    0.000    0.835     GAPX  No active process
+#   3    -6.000    0.647    0.191     3.1837    0.0000    0.570    1.406     GAPX  Transportation
+#   4    -6.000    0.647    0.191     3.1837    0.0000    0.000    1.406     ABSO  No active process
+#   5    -5.000    1.173    0.346     3.1837    0.0000    1.140    2.546     ABSO  Transportation
+#   6    -5.000    1.173    0.346     3.1837    0.0000    0.000    2.546     GAPX  No active process
+#   7    -4.500    1.435    0.424     3.1837    0.0000    0.570    3.116     GAPX  Transportation
+#   8    -4.500    1.435    0.424     3.1837    0.0000    0.000    3.116     ABSO  No active process
+#   9    -3.500    1.960    0.579     3.1837    0.0000    1.140    4.256     ABSO  Transportation
+#  10    -3.500    1.960    0.579     3.1837    0.0000    0.000    4.256     GAPX  No active process
+#  11    -3.000    2.223    0.657     3.1837    0.0000    0.570    4.826     GAPX  Transportation
+#  12    -3.000    2.223    0.657     3.1837    0.0000    0.000    4.826     ABSO  No active process
+#  13    -2.888    2.282    0.674     3.1837    2.1617    0.128    4.953     ABSO  Lepton pair production
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 23     Parent ID = 2
+  Particle = gamma     Track ID = 26     Parent ID = 2
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -0.253    4.467    0.944     2.2713    0.0000    0.000    0.000     GAPX  No active process
-#   1    -0.092    4.627    0.957     1.8214    0.4499    0.278    0.278     GAPX  Multiple scattering
-#   2    -0.022    4.765    0.954     1.5464    0.2750    0.190    0.468     GAPX  Multiple scattering
-#   3    -0.003    4.880    0.976     1.3234    0.2230    0.145    0.613     GAPX  Multiple scattering
-#   4     0.000    4.907    0.979     1.2854    0.0379    0.029    0.642     GAPX  Multiple scattering
-#   5     0.000    4.907    0.979     1.2854    0.0000    0.000    0.642     ABSO  No active process
-#   6     0.000    4.907    0.979     0.0000    1.2854    0.000    0.642     ABSO  Energy threshold
+#   0    -2.888    2.282    0.674     0.5110    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.919    2.256    0.685     0.0000    0.5110    0.042    0.042     ABSO  Photoelectric effect
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 25     Parent ID = 2
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -2.888    2.282    0.674     0.5110    0.0000    0.000    0.000     ABSO  No active process
+#   1    -2.000    3.040    0.354     0.5110    0.0000    1.211    1.211     ABSO  Transportation
+#   2    -2.000    3.040    0.354     0.5110    0.0000    0.000    1.211     GAPX  No active process
+#   3    -1.500    3.467    0.174     0.5110    0.0000    0.682    1.893     GAPX  Transportation
+#   4    -1.500    3.467    0.174     0.5110    0.0000    0.000    1.893     ABSO  No active process
+#   5    -0.926    3.958   -0.032     0.0000    0.5110    0.783    2.675     ABSO  Photoelectric effect
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 1     Parent ID = 0
@@ -451,54 +451,39 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   2    -6.500    0.013   -0.003     1.9839    0.0000    0.000    1.000     GAPX  No active process
 #   3    -6.000    0.019   -0.005     1.9839    0.0000    0.500    1.500     GAPX  Transportation
 #   4    -6.000    0.019   -0.005     1.9839    0.0000    0.000    1.500     ABSO  No active process
-#   5    -5.823    0.021   -0.005     1.9295    0.0543    0.177    1.677     ABSO  Compton scattering
-#   6    -5.346    0.085   -0.009     1.9220    0.0075    0.481    2.158     ABSO  Compton scattering
-#   7    -5.000    0.118   -0.003     1.9220    0.0000    0.348    2.506     ABSO  Transportation
-#   8    -5.000    0.118   -0.003     1.9220    0.0000    0.000    2.506     GAPX  No active process
-#   9    -4.500    0.165    0.004     1.9220    0.0000    0.502    3.008     GAPX  Transportation
-#  10    -4.500    0.165    0.004     1.9220    0.0000    0.000    3.008     ABSO  No active process
-#  11    -3.500    0.260    0.020     1.9220    0.0000    1.005    4.013     ABSO  Transportation
-#  12    -3.500    0.260    0.020     1.9220    0.0000    0.000    4.013     GAPX  No active process
-#  13    -3.061    0.301    0.027     1.2466    0.0000    0.441    4.454     GAPX  Compton scattering
-#  14    -3.000    0.275    0.013     1.2466    0.0000    0.068    4.522     GAPX  Transportation
-#  15    -3.000    0.275    0.013     1.2466    0.0000    0.000    4.522     ABSO  No active process
-#  16    -2.000   -0.153   -0.218     1.2466    0.0000    1.112    5.634     ABSO  Transportation
-#  17    -2.000   -0.153   -0.218     1.2466    0.0000    0.000    5.634     GAPX  No active process
-#  18    -1.500   -0.367   -0.333     1.2466    0.0000    0.556    6.189     GAPX  Transportation
-#  19    -1.500   -0.367   -0.333     1.2466    0.0000    0.000    6.189     ABSO  No active process
-#  20    -0.856   -0.642   -0.482     0.8010    0.4455    0.716    6.905     ABSO  Compton scattering
-#  21    -0.500   -0.593   -0.401     0.8010    0.0000    0.369    7.274     ABSO  Transportation
-#  22    -0.500   -0.593   -0.401     0.8010    0.0000    0.000    7.274     GAPX  No active process
-#  23     0.000   -0.523   -0.288     0.8010    0.0000    0.517    7.791     GAPX  Transportation
-#  24     0.000   -0.523   -0.288     0.8010    0.0000    0.000    7.791     ABSO  No active process
-#  25     0.422   -0.464   -0.192     0.7287    0.0723    0.437    8.228     ABSO  Compton scattering
-#  26     1.000   -0.371    0.190     0.7287    0.0000    0.699    8.927     ABSO  Transportation
-#  27     1.000   -0.371    0.190     0.7287    0.0000    0.000    8.927     GAPX  No active process
-#  28     1.500   -0.291    0.520     0.7287    0.0000    0.605    9.532     GAPX  Transportation
-#  29     1.500   -0.291    0.520     0.7287    0.0000    0.000    9.532     ABSO  No active process
-#  30     2.276   -0.166    1.033     0.2539    0.4748    0.939   10.470     ABSO  Compton scattering
-#  31     2.165   -0.097    1.101     0.0000    0.2539    0.147   10.617     ABSO  Photoelectric effect
+#   5    -5.765    0.022   -0.005     1.9839    0.9619    0.235    1.735     ABSO  Lepton pair production
 
 ****************************************************************************************************
-  Particle = e-     Track ID = 24     Parent ID = 1
+  Particle = gamma     Track ID = 28     Parent ID = 1
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -3.061    0.301    0.027     0.6754    0.0000    0.000    0.000     GAPX  No active process
-#   1    -3.023    0.333    0.041     0.5408    0.1346    0.064    0.064     GAPX  Multiple scattering
-#   2    -3.000    0.314    0.049     0.4699    0.0709    0.038    0.103     GAPX  Multiple scattering
-#   3    -3.000    0.314    0.049     0.4699    0.0000    0.000    0.103     ABSO  No active process
-#   4    -3.000    0.314    0.049     0.0000    0.4699    0.000    0.103     ABSO  Energy threshold
+#   0    -5.765    0.022   -0.005     0.5110    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.000    0.122    0.041     0.5110    0.0000    0.259    0.259     ABSO  Transportation
+#   2    -6.000    0.122    0.041     0.5110    0.0000    0.000    0.259     GAPX  No active process
+#   3    -6.500    0.335    0.140     0.5110    0.0000    0.552    0.812     GAPX  Transportation
+#   4    -6.500    0.335    0.140     0.5110    0.0000    0.000    0.812     ABSO  No active process
+#   5    -6.973    0.536    0.234     0.5058    0.0052    0.522    1.334     ABSO  Compton scattering
+#   6    -7.500    0.816    0.272     0.5058    0.0000    0.599    1.932     ABSO  Transportation
+#   7    -7.500    0.816    0.272     0.5058    0.0000    0.000    1.932     WRLD  No active process
+#   8    -9.000    1.614    0.382     0.5058    0.0000    1.703    3.635     WRLD  Transportation
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 27     Parent ID = 1
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -5.765    0.022   -0.005     0.5110    0.0000    0.000    0.000     ABSO  No active process
+#   1    -5.553   -0.068   -0.047     0.0000    0.5110    0.235    0.235     ABSO  Photoelectric effect
 --- Finish event 
 Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
-   Absorber: total energy (MeV):  46.032       total track length (cm):    1.916
-   Gap:      total energy (MeV):   3.968       total track length (cm):    2.241
+   Absorber: total energy (MeV):  46.337       total track length (cm):    2.164
+   Gap:      total energy (MeV):   1.486       total track length (cm):    0.748
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   107766103     66C6157 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   114129239     6CD7957 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   102362405   107766103
-                                        HEX     619ED25     66C6157
+          with Store/Table at absolute adrs   108725541   114129239
+                                        HEX     67B0525     6CD7957
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -521,10 +506,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.22/06                        https://root.cern |
-  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 10 2020, 11:40:00                      |
-  | From tags/v6-22-06@v6-22-06                                      |
+  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Dec 03 2021, 19:13:00                      |
+  | From tags/v6-24-06@v6-24-06                                      |
+  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -540,12 +526,12 @@ Processing test_E03_3.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0.p3 ( 21 July 2020 )
+ Version 1.1 ( 3 December 2021 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.7 ( 9 September 2020 )
+ Version 3.9 ( 3 December 2021 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -593,16 +579,16 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   0    -9.000    0.000    0.000    50.0002    0.0000    0.000    0.000     WRLD  No active process
 #   1    -7.500    0.000    0.000    50.0002    0.0000    1.500    1.500     WRLD  Transportation
 #   2    -7.500    0.000    0.000    50.0002    0.0000    0.000    1.500     ABSO  No active process
-#   3    -7.466    0.000    0.000     0.0000   50.0000    0.034    1.534     ABSO  Decay
+#   3    -7.466    0.000    0.000     0.0000   50.0000    0.034    1.535     ABSO  Decay
 
 ****************************************************************************************************
   Particle = Alpha     Track ID = 3     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
 #   0    -7.466    0.000    0.000    81.9464    0.0000    0.000    0.000     ABSO  No active process
-#   1    -7.500    0.015   -0.001    61.1637   20.7827    0.037    0.037     ABSO  Multiple scattering
-#   2    -7.500    0.015   -0.001    61.1637    0.0000    0.000    0.037     WRLD  No active process
-#   3    -9.000    0.592   -0.097    61.1637    0.0000    1.610    1.647     WRLD  Transportation
+#   1    -7.500    0.015   -0.001    60.9741   20.9722    0.037    0.037     ABSO  Multiple scattering
+#   2    -7.500    0.015   -0.001    60.9741    0.0000    0.000    0.037     WRLD  No active process
+#   3    -9.000    0.592   -0.097    60.9741    0.0000    1.610    1.647     WRLD  Transportation
 
 ****************************************************************************************************
   Particle = neutron     Track ID = 2     Parent ID = 0
@@ -642,15 +628,15 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  31     6.146   -6.000    0.215   285.3407    0.0000    2.480   14.877     WRLD  Transportation
 --- Finish event 
 Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
-   Absorber: total energy (MeV): 1120.783       total track length (cm):    0.101
+   Absorber: total energy (MeV): 1120.972       total track length (cm):    0.101
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   132375895     7E3E557 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   137432407     8310D57 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   126972197   132375895
-                                        HEX     7917125     7E3E557
+          with Store/Table at absolute adrs   132028709   137432407
+                                        HEX     7DE9925     8310D57
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -673,10 +659,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.22/06                        https://root.cern |
-  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 10 2020, 11:40:00                      |
-  | From tags/v6-22-06@v6-22-06                                      |
+  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Dec 03 2021, 19:13:00                      |
+  | From tags/v6-24-06@v6-24-06                                      |
+  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -691,12 +678,12 @@ Processing test_E03_4.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0.p3 ( 21 July 2020 )
+ Version 1.1 ( 3 December 2021 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.7 ( 9 September 2020 )
+ Version 3.9 ( 3 December 2021 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -739,14 +726,14 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
       Current track pi0  is a decay product of Parent ID = 0
 
 Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
-   Absorber: total energy (MeV): 1330.27       total track length (cm):  65.3392
-   Gap:      total energy (MeV): 58.2202       total track length (cm):  29.0487
+   Absorber: total energy (MeV): 1597.07       total track length (cm):  77.9503
+   Gap:      total energy (MeV): 56.1597       total track length (cm):  26.8768
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   130295127     7C42557 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   152189271     9123957 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   124891429   130295127
-                                        HEX     771B125     7C42557
+          with Store/Table at absolute adrs   146785573   152189271
+                                        HEX     8BFC525     9123957
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -769,10 +756,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.22/06                        https://root.cern |
-  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 10 2020, 11:40:00                      |
-  | From tags/v6-22-06@v6-22-06                                      |
+  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Dec 03 2021, 19:13:00                      |
+  | From tags/v6-24-06@v6-24-06                                      |
+  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -788,12 +776,12 @@ Processing test_E03_5.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0.p3 ( 21 July 2020 )
+ Version 1.1 ( 3 December 2021 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.7 ( 9 September 2020 )
+ Version 3.9 ( 3 December 2021 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -832,288 +820,280 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #   1    -7.500    0.000    0.000    50.0000    0.0000    1.500    1.500     WRLD  Transportation
 #   2    -7.500    0.000    0.000    50.0000    0.0000    0.000    1.500     ABSO  No active process
 #   3    -7.500    0.000    0.000    48.0158    0.0003    0.000    1.500     ABSO  Bremstrahlung
-#   4    -7.233   -0.000   -0.000    41.4127    3.3948    0.273    1.773     ABSO  Bremstrahlung
-#   5    -7.019    0.109    0.030    37.4261    3.4690    0.248    2.021     ABSO  Bremstrahlung
-#   6    -6.949    0.128    0.056    36.3591    0.8863    0.078    2.099     ABSO  Bremstrahlung
-#   7    -6.933    0.134    0.061    26.8880    0.5426    0.018    2.116     ABSO  Bremstrahlung
-#   8    -6.766    0.191    0.101    23.0907    2.4679    0.188    2.304     ABSO  Bremstrahlung
-#   9    -6.583    0.064    0.344     9.5669    4.1011    0.365    2.669     ABSO  Bremstrahlung
-#  10    -6.549    0.083    0.335     8.1965    0.6241    0.043    2.712     ABSO  Bremstrahlung
-#  11    -6.518    0.111    0.305     5.1268    0.6750    0.058    2.770     ABSO  Bremstrahlung
-#  12    -6.500    0.118    0.302     3.6123    1.5145    0.022    2.792     ABSO  Multiple scattering
-#  13    -6.500    0.118    0.302     3.6123    0.0000    0.000    2.792     GAPX  No active process
-#  14    -6.292   -0.091    0.567     2.6406    0.9717    0.464    3.256     GAPX  Multiple scattering
-#  15    -6.212   -0.341    0.664     2.0431    0.5976    0.339    3.595     GAPX  Multiple scattering
-#  16    -6.074   -0.469    0.634     1.6797    0.3634    0.234    3.829     GAPX  Multiple scattering
-#  17    -6.070   -0.593    0.581     1.4088    0.2709    0.166    3.995     GAPX  Multiple scattering
-#  18    -6.029   -0.571    0.492     1.1889    0.2199    0.123    4.117     GAPX  Multiple scattering
-#  19    -6.062   -0.591    0.428     1.0369    0.1521    0.093    4.210     GAPX  Multiple scattering
-#  20    -6.003   -0.601    0.424     0.8555    0.1814    0.073    4.284     GAPX  Multiple scattering
-#  21    -6.000   -0.602    0.423     0.8360    0.0195    0.004    4.288     GAPX  Multiple scattering
-#  22    -6.000   -0.602    0.423     0.8360    0.0000    0.000    4.288     ABSO  No active process
-#  23    -6.000   -0.602    0.423     0.0000    0.8360    0.000    4.288     ABSO  Energy threshold
+#   4    -7.233   -0.000   -0.000    40.8352    3.9969    0.321    1.821     ABSO  Bremstrahlung
+#   5    -7.042    0.099    0.027    37.1382    3.6970    0.265    2.086     ABSO  Multiple scattering
+#   6    -7.042    0.099    0.027    36.6237    0.0000    0.000    2.086     ABSO  Bremstrahlung
+#   7    -6.972    0.118    0.053    35.4714    0.9720    0.085    2.171     ABSO  Bremstrahlung
+#   8    -6.956    0.125    0.057    26.1585    0.5566    0.018    2.189     ABSO  Bremstrahlung
+#   9    -6.826    0.172    0.088    23.8280    2.3305    0.178    2.367     ABSO  Multiple scattering
+#  10    -6.823    0.171    0.090    23.5549    0.0426    0.004    2.371     ABSO  Bremstrahlung
+#  11    -6.754    0.135    0.165    21.6471    1.4544    0.136    2.506     ABSO  Bremstrahlung
+#  12    -6.735    0.110    0.199    13.3031    0.8444    0.054    2.560     ABSO  Bremstrahlung
+#  13    -6.728    0.095    0.221    12.0956    0.3307    0.034    2.594     ABSO  Bremstrahlung
+#  14    -6.710    0.079    0.269     9.5333    1.9901    0.067    2.661     ABSO  Bremstrahlung
+#  15    -6.709    0.062    0.291     4.9860    0.9031    0.035    2.696     ABSO  Bremstrahlung
+#  16    -6.699    0.007    0.372     2.9952    1.3812    0.123    2.819     ABSO  Bremstrahlung
+#  17    -6.673   -0.102    0.304     0.0000    2.9952    0.133    2.983     ABSO  Energy threshold
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 12     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.699    0.007    0.372     0.6095    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.870   -5.000   -4.390     0.6095    0.0000    6.912    6.912     ABSO  Transportation
+#   2    -6.870   -5.000   -4.390     0.6095    0.0000    0.000    6.912     WRLD  No active process
+#   3    -6.905   -6.000   -5.341     0.6095    0.0000    1.380    8.292     WRLD  Transportation
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 11     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.709    0.062    0.291     3.6441    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500   -2.082    3.247     3.6441    0.0000    3.658    3.658     ABSO  Transportation
+#   2    -6.500   -2.082    3.247     3.6441    0.0000    0.000    3.658     GAPX  No active process
+#   3    -6.376   -3.355    5.000     3.6441    0.0000    2.170    5.828     GAPX  Transportation
+#   4    -6.376   -3.355    5.000     3.6441    0.0000    0.000    5.828     WRLD  No active process
+#   5    -6.305   -4.080    6.000     3.6441    0.0000    1.238    7.065     WRLD  Transportation
+
+****************************************************************************************************
+  Particle = gamma     Track ID = 10     Parent ID = 0
+****************************************************************************************************
+Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
+#   0    -6.710    0.079    0.269     0.5722    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500   -2.291    2.933     0.5722    0.0000    3.573    3.573     ABSO  Transportation
+#   2    -6.500   -2.291    2.933     0.5722    0.0000    0.000    3.573     GAPX  No active process
+#   3    -6.337   -4.129    5.000     0.5722    0.0000    2.771    6.343     GAPX  Transportation
+#   4    -6.337   -4.129    5.000     0.5722    0.0000    0.000    6.343     WRLD  No active process
+#   5    -6.258   -5.019    6.000     0.5722    0.0000    1.341    7.684     WRLD  Transportation
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 9     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.518    0.111    0.305     2.3948    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    0.119    0.302     2.3948    0.0000    0.020    0.020     ABSO  Transportation
-#   2    -6.500    0.119    0.302     2.3948    0.0000    0.000    0.020     GAPX  No active process
-#   3    -6.000    0.314    0.213     2.3948    0.0000    0.544    0.564     GAPX  Transportation
-#   4    -6.000    0.314    0.213     2.3948    0.0000    0.000    0.564     ABSO  No active process
-#   5    -5.000    0.704    0.034     2.3948    0.0000    1.088    1.652     ABSO  Transportation
-#   6    -5.000    0.704    0.034     2.3948    0.0000    0.000    1.652     GAPX  No active process
-#   7    -4.500    0.899   -0.055     2.3948    0.0000    0.544    2.196     GAPX  Transportation
-#   8    -4.500    0.899   -0.055     2.3948    0.0000    0.000    2.196     ABSO  No active process
-#   9    -3.500    1.290   -0.233     2.3948    0.0000    1.088    3.284     ABSO  Transportation
-#  10    -3.500    1.290   -0.233     2.3948    0.0000    0.000    3.284     GAPX  No active process
-#  11    -3.000    1.485   -0.322     2.3948    0.0000    0.544    3.828     GAPX  Transportation
-#  12    -3.000    1.485   -0.322     2.3948    0.0000    0.000    3.828     ABSO  No active process
-#  13    -2.000    1.875   -0.500     2.3948    0.0000    1.088    4.917     ABSO  Transportation
-#  14    -2.000    1.875   -0.500     2.3948    0.0000    0.000    4.917     GAPX  No active process
-#  15    -1.500    2.071   -0.590     2.3948    0.0000    0.544    5.461     GAPX  Transportation
-#  16    -1.500    2.071   -0.590     2.3948    0.0000    0.000    5.461     ABSO  No active process
-#  17    -0.500    2.461   -0.768     2.3948    0.0000    1.088    6.549     ABSO  Transportation
-#  18    -0.500    2.461   -0.768     2.3948    0.0000    0.000    6.549     GAPX  No active process
-#  19     0.000    2.656   -0.857     2.3948    0.0000    0.544    7.093     GAPX  Transportation
-#  20     0.000    2.656   -0.857     2.3948    0.0000    0.000    7.093     ABSO  No active process
-#  21     1.000    3.047   -1.035     2.3948    0.0000    1.088    8.181     ABSO  Transportation
-#  22     1.000    3.047   -1.035     2.3948    0.0000    0.000    8.181     GAPX  No active process
-#  23     1.500    3.242   -1.125     2.3948    0.0000    0.544    8.725     GAPX  Transportation
-#  24     1.500    3.242   -1.125     2.3948    0.0000    0.000    8.725     ABSO  No active process
-#  25     2.500    3.632   -1.303     2.3948    0.0000    1.088    9.814     ABSO  Transportation
-#  26     2.500    3.632   -1.303     2.3948    0.0000    0.000    9.814     GAPX  No active process
-#  27     3.000    3.828   -1.392     2.3948    0.0000    0.544   10.358     GAPX  Transportation
-#  28     3.000    3.828   -1.392     2.3948    0.0000    0.000   10.358     ABSO  No active process
-#  29     4.000    4.218   -1.570     2.3948    0.0000    1.088   11.446     ABSO  Transportation
-#  30     4.000    4.218   -1.570     2.3948    0.0000    0.000   11.446     GAPX  No active process
-#  31     4.500    4.413   -1.659     2.3948    0.0000    0.544   11.990     GAPX  Transportation
-#  32     4.500    4.413   -1.659     2.3948    0.0000    0.000   11.990     ABSO  No active process
-#  33     5.500    4.804   -1.838     2.3948    0.0000    1.088   13.078     ABSO  Transportation
-#  34     5.500    4.804   -1.838     2.3948    0.0000    0.000   13.078     GAPX  No active process
-#  35     6.000    4.999   -1.927     2.3948    0.0000    0.544   13.622     GAPX  Transportation
-#  36     6.000    4.999   -1.927     2.3948    0.0000    0.000   13.622     ABSO  No active process
-#  37     6.003    5.000   -1.927     2.3948    0.0000    0.003   13.626     ABSO  Transportation
-#  38     6.003    5.000   -1.927     2.3948    0.0000    0.000   13.626     WRLD  No active process
-#  39     8.565    6.000   -2.384     2.3948    0.0000    2.787   16.413     WRLD  Transportation
+#   0    -6.728    0.095    0.221     0.8768    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500   -0.130    0.881     0.8768    0.0000    0.734    0.734     ABSO  Transportation
+#   2    -6.500   -0.130    0.881     0.8768    0.0000    0.000    0.734     GAPX  No active process
+#   3    -6.000   -0.623    2.326     0.8768    0.0000    1.607    2.340     GAPX  Transportation
+#   4    -6.000   -0.623    2.326     0.8768    0.0000    0.000    2.340     ABSO  No active process
+#   5    -5.075   -1.534    5.000     0.8768    0.0000    2.973    5.313     ABSO  Transportation
+#   6    -5.075   -1.534    5.000     0.8768    0.0000    0.000    5.313     WRLD  No active process
+#   7    -4.729   -1.875    6.000     0.8768    0.0000    1.112    6.425     WRLD  Transportation
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 8     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.549    0.083    0.335     0.7462    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    0.130    0.283     0.7462    0.0000    0.085    0.085     ABSO  Transportation
-#   2    -6.500    0.130    0.283     0.7462    0.0000    0.000    0.085     GAPX  No active process
-#   3    -6.000    0.609   -0.242     0.7462    0.0000    0.869    0.955     GAPX  Transportation
-#   4    -6.000    0.609   -0.242     0.7462    0.0000    0.000    0.955     ABSO  No active process
-#   5    -5.000    1.568   -1.293     0.7462    0.0000    1.739    2.693     ABSO  Transportation
-#   6    -5.000    1.568   -1.293     0.7462    0.0000    0.000    2.693     GAPX  No active process
-#   7    -4.500    2.047   -1.819     0.7462    0.0000    0.869    3.563     GAPX  Transportation
-#   8    -4.500    2.047   -1.819     0.7462    0.0000    0.000    3.563     ABSO  No active process
-#   9    -3.500    3.005   -2.870     0.7462    0.0000    1.739    5.301     ABSO  Transportation
-#  10    -3.500    3.005   -2.870     0.7462    0.0000    0.000    5.301     GAPX  No active process
-#  11    -3.000    3.484   -3.395     0.7462    0.0000    0.869    6.171     GAPX  Transportation
-#  12    -3.000    3.484   -3.395     0.7462    0.0000    0.000    6.171     ABSO  No active process
-#  13    -2.000    4.443   -4.446     0.7462    0.0000    1.739    7.909     ABSO  Transportation
-#  14    -2.000    4.443   -4.446     0.7462    0.0000    0.000    7.909     GAPX  No active process
-#  15    -1.500    4.922   -4.972     0.7462    0.0000    0.869    8.779     GAPX  Transportation
-#  16    -1.500    4.922   -4.972     0.7462    0.0000    0.000    8.779     ABSO  No active process
-#  17    -1.473    4.948   -5.000     0.7462    0.0000    0.047    8.826     ABSO  Transportation
-#  18    -1.473    4.948   -5.000     0.7462    0.0000    0.000    8.826     WRLD  No active process
-#  19    -0.521    5.859   -6.000     0.7462    0.0000    1.654   10.480     WRLD  Transportation
+#   0    -6.735    0.110    0.199     7.4996    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500   -0.383    0.943     7.4996    0.0000    0.923    0.923     ABSO  Transportation
+#   2    -6.500   -0.383    0.943     7.4996    0.0000    0.000    0.923     GAPX  No active process
+#   3    -6.000   -1.430    2.526     7.4996    0.0000    1.962    2.885     GAPX  Transportation
+#   4    -6.000   -1.430    2.526     7.4996    0.0000    0.000    2.885     ABSO  No active process
+#   5    -5.218   -3.067    5.000     7.4996    0.0000    3.068    5.953     ABSO  Transportation
+#   6    -5.218   -3.067    5.000     7.4996    0.0000    0.000    5.953     WRLD  No active process
+#   7    -4.902   -3.729    6.000     7.4996    0.0000    1.240    7.193     WRLD  Transportation
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 7     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.583    0.064    0.344     9.4227    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    0.113    0.321     9.4227    0.0000    0.099    0.099     ABSO  Transportation
-#   2    -6.500    0.113    0.321     9.4227    0.0000    0.000    0.099     GAPX  No active process
-#   3    -6.000    0.413    0.185     9.4227    0.0000    0.599    0.698     GAPX  Transportation
-#   4    -6.000    0.413    0.185     9.4227    0.0000    0.000    0.698     ABSO  No active process
-#   5    -5.000    1.012   -0.089     9.4227    0.0000    1.197    1.896     ABSO  Transportation
-#   6    -5.000    1.012   -0.089     9.4227    0.0000    0.000    1.896     GAPX  No active process
-#   7    -4.500    1.312   -0.225     9.4227    0.0000    0.599    2.494     GAPX  Transportation
-#   8    -4.500    1.312   -0.225     9.4227    0.0000    0.000    2.494     ABSO  No active process
-#   9    -3.500    1.911   -0.499     9.4227    0.0000    1.197    3.692     ABSO  Transportation
-#  10    -3.500    1.911   -0.499     9.4227    0.0000    0.000    3.692     GAPX  No active process
-#  11    -3.000    2.211   -0.635     9.4227    0.0000    0.599    4.291     GAPX  Transportation
-#  12    -3.000    2.211   -0.635     9.4227    0.0000    0.000    4.291     ABSO  No active process
-#  13    -2.000    2.811   -0.908     9.4227    0.0000    1.197    5.488     ABSO  Transportation
-#  14    -2.000    2.811   -0.908     9.4227    0.0000    0.000    5.488     GAPX  No active process
-#  15    -1.500    3.110   -1.045     9.4227    0.0000    0.599    6.087     GAPX  Transportation
-#  16    -1.500    3.110   -1.045     9.4227    0.0000    0.000    6.087     ABSO  No active process
-#  17    -0.500    3.710   -1.318     9.4227    0.0000    1.197    7.284     ABSO  Transportation
-#  18    -0.500    3.710   -1.318     9.4227    0.0000    0.000    7.284     GAPX  No active process
-#  19     0.000    4.009   -1.455     9.4227    0.0000    0.599    7.883     GAPX  Transportation
-#  20     0.000    4.009   -1.455     9.4227    0.0000    0.000    7.883     ABSO  No active process
-#  21     1.000    4.609   -1.728     9.4227    0.0000    1.197    9.080     ABSO  Transportation
-#  22     1.000    4.609   -1.728     9.4227    0.0000    0.000    9.080     GAPX  No active process
-#  23     1.500    4.908   -1.865     9.4227    0.0000    0.599    9.679     GAPX  Transportation
-#  24     1.500    4.908   -1.865     9.4227    0.0000    0.000    9.679     ABSO  No active process
-#  25     1.653    5.000   -1.907     9.4227    0.0000    0.183    9.862     ABSO  Transportation
-#  26     1.653    5.000   -1.907     9.4227    0.0000    0.000    9.862     WRLD  No active process
-#  27     3.321    6.000   -2.363     9.4227    0.0000    1.998   11.860     WRLD  Transportation
+#   0    -6.754    0.135    0.165     0.4533    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500   -0.202    0.613     0.4533    0.0000    0.615    0.615     ABSO  Transportation
+#   2    -6.500   -0.202    0.613     0.4533    0.0000    0.000    0.615     GAPX  No active process
+#   3    -6.000   -0.865    1.494     0.4533    0.0000    1.210    1.825     GAPX  Transportation
+#   4    -6.000   -0.865    1.494     0.4533    0.0000    0.000    1.825     ABSO  No active process
+#   5    -5.000   -2.190    3.255     0.4533    0.0000    2.420    4.245     ABSO  Transportation
+#   6    -5.000   -2.190    3.255     0.4533    0.0000    0.000    4.245     GAPX  No active process
+#   7    -4.927   -2.286    3.383     0.3832    0.0702    0.177    4.422     GAPX  Compton scattering
+#   8    -5.000   -2.856    3.725     0.3832    0.0000    0.668    5.090     GAPX  Transportation
+#   9    -5.000   -2.856    3.725     0.3832    0.0000    0.000    5.090     ABSO  No active process
+#  10    -5.272   -4.981    5.000     0.3832    0.0000    2.493    7.584     ABSO  Transportation
+#  11    -5.272   -4.981    5.000     0.3832    0.0000    0.000    7.584     WRLD  No active process
+#  12    -5.403   -6.000    5.611     0.3832    0.0000    1.195    8.779     WRLD  Transportation
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 6     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.766    0.191    0.101     1.3294    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    0.004    0.448     1.3294    0.0000    0.475    0.475     ABSO  Transportation
-#   2    -6.500    0.004    0.448     1.3294    0.0000    0.000    0.475     GAPX  No active process
-#   3    -6.000   -0.345    1.098     1.3294    0.0000    0.892    1.367     GAPX  Transportation
-#   4    -6.000   -0.345    1.098     1.3294    0.0000    0.000    1.367     ABSO  No active process
-#   5    -5.000   -1.044    2.399     1.3294    0.0000    1.784    3.151     ABSO  Transportation
-#   6    -5.000   -1.044    2.399     1.3294    0.0000    0.000    3.151     GAPX  No active process
-#   7    -4.500   -1.394    3.050     1.3294    0.0000    0.892    4.043     GAPX  Transportation
-#   8    -4.500   -1.394    3.050     1.3294    0.0000    0.000    4.043     ABSO  No active process
-#   9    -3.500   -2.093    4.351     1.3294    0.0000    1.784    5.826     ABSO  Transportation
-#  10    -3.500   -2.093    4.351     1.3294    0.0000    0.000    5.826     GAPX  No active process
-#  11    -3.001   -2.442    5.000     1.3294    0.0000    0.890    6.716     GAPX  Transportation
-#  12    -3.001   -2.442    5.000     1.3294    0.0000    0.000    6.716     WRLD  No active process
-#  13    -2.232   -2.979    6.000     1.3294    0.0000    1.371    8.087     WRLD  Transportation
+#   0    -6.823    0.171    0.090     0.2305    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500    0.008    0.421     0.2305    0.0000    0.490    0.490     ABSO  Transportation
+#   2    -6.500    0.008    0.421     0.2305    0.0000    0.000    0.490     GAPX  No active process
+#   3    -6.000   -0.244    0.932     0.2305    0.0000    0.758    1.248     GAPX  Transportation
+#   4    -6.000   -0.244    0.932     0.2305    0.0000    0.000    1.248     ABSO  No active process
+#   5    -5.000   -0.747    1.953     0.2305    0.0000    1.516    2.764     ABSO  Transportation
+#   6    -5.000   -0.747    1.953     0.2305    0.0000    0.000    2.764     GAPX  No active process
+#   7    -4.500   -0.999    2.464     0.2305    0.0000    0.758    3.522     GAPX  Transportation
+#   8    -4.500   -0.999    2.464     0.2305    0.0000    0.000    3.522     ABSO  No active process
+#   9    -3.500   -1.503    3.486     0.2305    0.0000    1.516    5.038     ABSO  Transportation
+#  10    -3.500   -1.503    3.486     0.2305    0.0000    0.000    5.038     GAPX  No active process
+#  11    -3.000   -1.755    3.997     0.2305    0.0000    0.758    5.796     GAPX  Transportation
+#  12    -3.000   -1.755    3.997     0.2305    0.0000    0.000    5.796     ABSO  No active process
+#  13    -2.018   -2.249    5.000     0.2305    0.0000    1.489    7.284     ABSO  Transportation
+#  14    -2.018   -2.249    5.000     0.2305    0.0000    0.000    7.284     WRLD  No active process
+#  15    -1.039   -2.742    6.000     0.2305    0.0000    1.484    8.768     WRLD  Transportation
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 5     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.933    0.134    0.061     8.9285    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    0.283    0.164     8.9285    0.0000    0.469    0.469     ABSO  Transportation
-#   2    -6.500    0.283    0.164     8.9285    0.0000    0.000    0.469     GAPX  No active process
-#   3    -6.000    0.455    0.284     8.9285    0.0000    0.542    1.011     GAPX  Transportation
-#   4    -6.000    0.455    0.284     8.9285    0.0000    0.000    1.011     ABSO  No active process
-#   5    -5.000    0.799    0.523     8.9285    0.0000    1.084    2.096     ABSO  Transportation
-#   6    -5.000    0.799    0.523     8.9285    0.0000    0.000    2.096     GAPX  No active process
-#   7    -4.500    0.971    0.642     8.9285    0.0000    0.542    2.638     GAPX  Transportation
-#   8    -4.500    0.971    0.642     8.9285    0.0000    0.000    2.638     ABSO  No active process
-#   9    -3.500    1.315    0.881     8.9285    0.0000    1.084    3.722     ABSO  Transportation
-#  10    -3.500    1.315    0.881     8.9285    0.0000    0.000    3.722     GAPX  No active process
-#  11    -3.000    1.487    1.001     8.9285    0.0000    0.542    4.264     GAPX  Transportation
-#  12    -3.000    1.487    1.001     8.9285    0.0000    0.000    4.264     ABSO  No active process
-#  13    -2.000    1.831    1.240     8.9285    0.0000    1.084    5.348     ABSO  Transportation
-#  14    -2.000    1.831    1.240     8.9285    0.0000    0.000    5.348     GAPX  No active process
-#  15    -1.500    2.003    1.360     8.9285    0.0000    0.542    5.890     GAPX  Transportation
-#  16    -1.500    2.003    1.360     8.9285    0.0000    0.000    5.890     ABSO  No active process
-#  17    -0.500    2.347    1.599     8.9285    0.0000    1.084    6.975     ABSO  Transportation
-#  18    -0.500    2.347    1.599     8.9285    0.0000    0.000    6.975     GAPX  No active process
-#  19     0.000    2.519    1.718     8.9285    0.0000    0.542    7.517     GAPX  Transportation
-#  20     0.000    2.519    1.718     8.9285    0.0000    0.000    7.517     ABSO  No active process
-#  21     1.000    2.863    1.957     8.9285    0.0000    1.084    8.601     ABSO  Transportation
-#  22     1.000    2.863    1.957     8.9285    0.0000    0.000    8.601     GAPX  No active process
-#  23     1.500    3.035    2.077     8.9285    0.0000    0.542    9.143     GAPX  Transportation
-#  24     1.500    3.035    2.077     8.9285    0.0000    0.000    9.143     ABSO  No active process
-#  25     2.500    3.380    2.316     8.9285    0.0000    1.084   10.227     ABSO  Transportation
-#  26     2.500    3.380    2.316     8.9285    0.0000    0.000   10.227     GAPX  No active process
-#  27     3.000    3.552    2.435     8.9285    0.0000    0.542   10.769     GAPX  Transportation
-#  28     3.000    3.552    2.435     8.9285    0.0000    0.000   10.769     ABSO  No active process
-#  29     4.000    3.896    2.674     8.9285    0.0000    1.084   11.854     ABSO  Transportation
-#  30     4.000    3.896    2.674     8.9285    0.0000    0.000   11.854     GAPX  No active process
-#  31     4.500    4.068    2.794     8.9285    0.0000    0.542   12.396     GAPX  Transportation
-#  32     4.500    4.068    2.794     8.9285    0.0000    0.000   12.396     ABSO  No active process
-#  33     5.500    4.412    3.033     8.9285    0.0000    1.084   13.480     ABSO  Transportation
-#  34     5.500    4.412    3.033     8.9285    0.0000    0.000   13.480     GAPX  No active process
-#  35     6.000    4.584    3.152     8.9285    0.0000    0.542   14.022     GAPX  Transportation
-#  36     6.000    4.584    3.152     8.9285    0.0000    0.000   14.022     ABSO  No active process
-#  37     7.000    4.928    3.391     8.9285    0.0000    1.084   15.106     ABSO  Transportation
-#  38     7.000    4.928    3.391     8.9285    0.0000    0.000   15.106     GAPX  No active process
-#  39     7.210    5.000    3.441     8.9285    0.0000    0.227   15.334     GAPX  Transportation
-#  40     7.210    5.000    3.441     8.9285    0.0000    0.000   15.334     WRLD  No active process
-#  41     9.000    5.616    3.869     8.9285    0.0000    1.941   17.275     WRLD  Transportation
+#   0    -6.956    0.125    0.057     8.7563    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500    0.291    0.161     8.7563    0.0000    0.497    0.497     ABSO  Transportation
+#   2    -6.500    0.291    0.161     8.7563    0.0000    0.000    0.497     GAPX  No active process
+#   3    -6.000    0.473    0.275     8.7563    0.0000    0.544    1.041     GAPX  Transportation
+#   4    -6.000    0.473    0.275     8.7563    0.0000    0.000    1.041     ABSO  No active process
+#   5    -5.000    0.836    0.503     8.7563    0.0000    1.088    2.129     ABSO  Transportation
+#   6    -5.000    0.836    0.503     8.7563    0.0000    0.000    2.129     GAPX  No active process
+#   7    -4.500    1.018    0.617     8.7563    0.0000    0.544    2.673     GAPX  Transportation
+#   8    -4.500    1.018    0.617     8.7563    0.0000    0.000    2.673     ABSO  No active process
+#   9    -3.500    1.382    0.845     8.7563    0.0000    1.088    3.761     ABSO  Transportation
+#  10    -3.500    1.382    0.845     8.7563    0.0000    0.000    3.761     GAPX  No active process
+#  11    -3.000    1.563    0.959     8.7563    0.0000    0.544    4.305     GAPX  Transportation
+#  12    -3.000    1.563    0.959     8.7563    0.0000    0.000    4.305     ABSO  No active process
+#  13    -2.000    1.927    1.187     8.7563    0.0000    1.088    5.394     ABSO  Transportation
+#  14    -2.000    1.927    1.187     8.7563    0.0000    0.000    5.394     GAPX  No active process
+#  15    -1.500    2.109    1.301     8.7563    0.0000    0.544    5.938     GAPX  Transportation
+#  16    -1.500    2.109    1.301     8.7563    0.0000    0.000    5.938     ABSO  No active process
+#  17    -0.500    2.472    1.529     8.7563    0.0000    1.088    7.026     ABSO  Transportation
+#  18    -0.500    2.472    1.529     8.7563    0.0000    0.000    7.026     GAPX  No active process
+#  19     0.000    2.654    1.643     8.7563    0.0000    0.544    7.570     GAPX  Transportation
+#  20     0.000    2.654    1.643     8.7563    0.0000    0.000    7.570     ABSO  No active process
+#  21     1.000    3.018    1.871     8.7563    0.0000    1.088    8.658     ABSO  Transportation
+#  22     1.000    3.018    1.871     8.7563    0.0000    0.000    8.658     GAPX  No active process
+#  23     1.500    3.199    1.985     8.7563    0.0000    0.544    9.202     GAPX  Transportation
+#  24     1.500    3.199    1.985     8.7563    0.0000    0.000    9.202     ABSO  No active process
+#  25     2.500    3.563    2.213     8.7563    0.0000    1.088   10.291     ABSO  Transportation
+#  26     2.500    3.563    2.213     8.7563    0.0000    0.000   10.291     GAPX  No active process
+#  27     3.000    3.745    2.327     8.7563    0.0000    0.544   10.835     GAPX  Transportation
+#  28     3.000    3.745    2.327     8.7563    0.0000    0.000   10.835     ABSO  No active process
+#  29     4.000    4.108    2.555     8.7563    0.0000    1.088   11.923     ABSO  Transportation
+#  30     4.000    4.108    2.555     8.7563    0.0000    0.000   11.923     GAPX  No active process
+#  31     4.500    4.290    2.669     8.7563    0.0000    0.544   12.467     GAPX  Transportation
+#  32     4.500    4.290    2.669     8.7563    0.0000    0.000   12.467     ABSO  No active process
+#  33     5.500    4.654    2.897     8.7563    0.0000    1.088   13.555     ABSO  Transportation
+#  34     5.500    4.654    2.897     8.7563    0.0000    0.000   13.555     GAPX  No active process
+#  35     6.000    4.835    3.011     8.7563    0.0000    0.544   14.099     GAPX  Transportation
+#  36     6.000    4.835    3.011     8.7563    0.0000    0.000   14.099     ABSO  No active process
+#  37     6.453    5.000    3.115     8.7563    0.0000    0.493   14.592     ABSO  Transportation
+#  38     6.453    5.000    3.115     8.7563    0.0000    0.000   14.592     WRLD  No active process
+#  39     9.000    5.926    3.695     8.7563    0.0000    2.772   17.364     WRLD  Transportation
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 4     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -6.949    0.128    0.056     0.1807    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    0.304    0.181     0.1807    0.0000    0.498    0.498     ABSO  Transportation
-#   2    -6.500    0.304    0.181     0.1807    0.0000    0.000    0.498     GAPX  No active process
-#   3    -6.000    0.500    0.319     0.1807    0.0000    0.555    1.052     GAPX  Transportation
-#   4    -6.000    0.500    0.319     0.1807    0.0000    0.000    1.052     ABSO  No active process
-#   5    -5.000    0.892    0.596     0.1807    0.0000    1.109    2.162     ABSO  Transportation
-#   6    -5.000    0.892    0.596     0.1807    0.0000    0.000    2.162     GAPX  No active process
-#   7    -4.500    1.088    0.735     0.1807    0.0000    0.555    2.716     GAPX  Transportation
-#   8    -4.500    1.088    0.735     0.1807    0.0000    0.000    2.716     ABSO  No active process
-#   9    -3.500    1.481    1.011     0.1807    0.0000    1.109    3.826     ABSO  Transportation
-#  10    -3.500    1.481    1.011     0.1807    0.0000    0.000    3.826     GAPX  No active process
-#  11    -3.423    1.511    1.033     0.0000    0.1807    0.085    3.911     GAPX  Photoelectric effect
+#   0    -6.972    0.118    0.053     0.1803    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500    0.314    0.179     0.1803    0.0000    0.526    0.526     ABSO  Transportation
+#   2    -6.500    0.314    0.179     0.1803    0.0000    0.000    0.526     GAPX  No active process
+#   3    -6.000    0.521    0.313     0.1803    0.0000    0.557    1.084     GAPX  Transportation
+#   4    -6.000    0.521    0.313     0.1803    0.0000    0.000    1.084     ABSO  No active process
+#   5    -5.000    0.934    0.580     0.1803    0.0000    1.115    2.198     ABSO  Transportation
+#   6    -5.000    0.934    0.580     0.1803    0.0000    0.000    2.198     GAPX  No active process
+#   7    -4.500    1.141    0.713     0.1803    0.0000    0.557    2.756     GAPX  Transportation
+#   8    -4.500    1.141    0.713     0.1803    0.0000    0.000    2.756     ABSO  No active process
+#   9    -3.500    1.555    0.980     0.1803    0.0000    1.115    3.870     ABSO  Transportation
+#  10    -3.500    1.555    0.980     0.1803    0.0000    0.000    3.870     GAPX  No active process
+#  11    -3.000    1.762    1.114     0.1803    0.0000    0.557    4.428     GAPX  Transportation
+#  12    -3.000    1.762    1.114     0.1803    0.0000    0.000    4.428     ABSO  No active process
+#  13    -2.000    2.175    1.381     0.1803    0.0000    1.115    5.542     ABSO  Transportation
+#  14    -2.000    2.175    1.381     0.1803    0.0000    0.000    5.542     GAPX  No active process
+#  15    -1.500    2.382    1.514     0.1803    0.0000    0.557    6.100     GAPX  Transportation
+#  16    -1.500    2.382    1.514     0.1803    0.0000    0.000    6.100     ABSO  No active process
+#  17    -0.500    2.796    1.781     0.1803    0.0000    1.115    7.214     ABSO  Transportation
+#  18    -0.500    2.796    1.781     0.1803    0.0000    0.000    7.214     GAPX  No active process
+#  19     0.000    3.003    1.915     0.1803    0.0000    0.557    7.772     GAPX  Transportation
+#  20     0.000    3.003    1.915     0.1803    0.0000    0.000    7.772     ABSO  No active process
+#  21     1.000    3.416    2.182     0.1803    0.0000    1.115    8.886     ABSO  Transportation
+#  22     1.000    3.416    2.182     0.1803    0.0000    0.000    8.886     GAPX  No active process
+#  23     1.500    3.623    2.315     0.1803    0.0000    0.557    9.443     GAPX  Transportation
+#  24     1.500    3.623    2.315     0.1803    0.0000    0.000    9.443     ABSO  No active process
+#  25     2.500    4.037    2.582     0.1803    0.0000    1.115   10.558     ABSO  Transportation
+#  26     2.500    4.037    2.582     0.1803    0.0000    0.000   10.558     GAPX  No active process
+#  27     3.000    4.243    2.716     0.1803    0.0000    0.557   11.115     GAPX  Transportation
+#  28     3.000    4.243    2.716     0.1803    0.0000    0.000   11.115     ABSO  No active process
+#  29     4.000    4.657    2.983     0.1803    0.0000    1.115   12.230     ABSO  Transportation
+#  30     4.000    4.657    2.983     0.1803    0.0000    0.000   12.230     GAPX  No active process
+#  31     4.500    4.864    3.116     0.1803    0.0000    0.557   12.787     GAPX  Transportation
+#  32     4.500    4.864    3.116     0.1803    0.0000    0.000   12.787     ABSO  No active process
+#  33     4.829    5.000    3.204     0.1803    0.0000    0.367   13.154     ABSO  Transportation
+#  34     4.829    5.000    3.204     0.1803    0.0000    0.000   13.154     WRLD  No active process
+#  35     7.247    6.000    3.849     0.1803    0.0000    2.695   15.849     WRLD  Transportation
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 3     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.019    0.109    0.030     0.5175    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    0.288    0.230     0.5175    0.0000    0.584    0.584     ABSO  Transportation
-#   2    -6.500    0.288    0.230     0.5175    0.0000    0.000    0.584     GAPX  No active process
-#   3    -6.000    0.459    0.424     0.5175    0.0000    0.563    1.147     GAPX  Transportation
-#   4    -6.000    0.459    0.424     0.5175    0.0000    0.000    1.147     ABSO  No active process
-#   5    -5.000    0.803    0.811     0.5175    0.0000    1.126    2.273     ABSO  Transportation
-#   6    -5.000    0.803    0.811     0.5175    0.0000    0.000    2.273     GAPX  No active process
-#   7    -4.500    0.975    1.004     0.5175    0.0000    0.563    2.836     GAPX  Transportation
-#   8    -4.500    0.975    1.004     0.5175    0.0000    0.000    2.836     ABSO  No active process
-#   9    -3.500    1.319    1.391     0.5175    0.0000    1.126    3.962     ABSO  Transportation
-#  10    -3.500    1.319    1.391     0.5175    0.0000    0.000    3.962     GAPX  No active process
-#  11    -3.000    1.491    1.584     0.5175    0.0000    0.563    4.525     GAPX  Transportation
-#  12    -3.000    1.491    1.584     0.5175    0.0000    0.000    4.525     ABSO  No active process
-#  13    -2.000    1.834    1.971     0.5175    0.0000    1.126    5.651     ABSO  Transportation
-#  14    -2.000    1.834    1.971     0.5175    0.0000    0.000    5.651     GAPX  No active process
-#  15    -1.500    2.006    2.165     0.5175    0.0000    0.563    6.214     GAPX  Transportation
-#  16    -1.500    2.006    2.165     0.5175    0.0000    0.000    6.214     ABSO  No active process
-#  17    -0.500    2.350    2.551     0.5175    0.0000    1.126    7.340     ABSO  Transportation
-#  18    -0.500    2.350    2.551     0.5175    0.0000    0.000    7.340     GAPX  No active process
-#  19     0.000    2.522    2.745     0.5175    0.0000    0.563    7.903     GAPX  Transportation
-#  20     0.000    2.522    2.745     0.5175    0.0000    0.000    7.903     ABSO  No active process
-#  21     1.000    2.865    3.132     0.5175    0.0000    1.126    9.029     ABSO  Transportation
-#  22     1.000    2.865    3.132     0.5175    0.0000    0.000    9.029     GAPX  No active process
-#  23     1.500    3.037    3.325     0.5175    0.0000    0.563    9.592     GAPX  Transportation
-#  24     1.500    3.037    3.325     0.5175    0.0000    0.000    9.592     ABSO  No active process
-#  25     2.500    3.381    3.712     0.5175    0.0000    1.126   10.718     ABSO  Transportation
-#  26     2.500    3.381    3.712     0.5175    0.0000    0.000   10.718     GAPX  No active process
-#  27     3.000    3.553    3.905     0.5175    0.0000    0.563   11.281     GAPX  Transportation
-#  28     3.000    3.553    3.905     0.5175    0.0000    0.000   11.281     ABSO  No active process
-#  29     4.000    3.897    4.292     0.5175    0.0000    1.126   12.407     ABSO  Transportation
-#  30     4.000    3.897    4.292     0.5175    0.0000    0.000   12.407     GAPX  No active process
-#  31     4.500    4.068    4.486     0.5175    0.0000    0.563   12.969     GAPX  Transportation
-#  32     4.500    4.068    4.486     0.5175    0.0000    0.000   12.969     ABSO  No active process
-#  33     5.500    4.412    4.872     0.5175    0.0000    1.126   14.095     ABSO  Transportation
-#  34     5.500    4.412    4.872     0.5175    0.0000    0.000   14.095     GAPX  No active process
-#  35     5.830    4.525    5.000     0.5175    0.0000    0.371   14.467     GAPX  Transportation
-#  36     5.830    4.525    5.000     0.5175    0.0000    0.000   14.467     WRLD  No active process
-#  37     8.415    5.414    6.000     0.5175    0.0000    2.911   17.377     WRLD  Transportation
+#   0    -7.042    0.099    0.027     0.5145    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500    0.296    0.233     0.5145    0.0000    0.613    0.613     ABSO  Transportation
+#   2    -6.500    0.296    0.233     0.5145    0.0000    0.000    0.613     GAPX  No active process
+#   3    -6.000    0.477    0.423     0.5145    0.0000    0.565    1.178     GAPX  Transportation
+#   4    -6.000    0.477    0.423     0.5145    0.0000    0.000    1.178     ABSO  No active process
+#   5    -5.000    0.840    0.803     0.5145    0.0000    1.130    2.307     ABSO  Transportation
+#   6    -5.000    0.840    0.803     0.5145    0.0000    0.000    2.307     GAPX  No active process
+#   7    -4.500    1.021    0.993     0.5145    0.0000    0.565    2.872     GAPX  Transportation
+#   8    -4.500    1.021    0.993     0.5145    0.0000    0.000    2.872     ABSO  No active process
+#   9    -3.500    1.384    1.372     0.5145    0.0000    1.130    4.001     ABSO  Transportation
+#  10    -3.500    1.384    1.372     0.5145    0.0000    0.000    4.001     GAPX  No active process
+#  11    -3.000    1.565    1.562     0.5145    0.0000    0.565    4.566     GAPX  Transportation
+#  12    -3.000    1.565    1.562     0.5145    0.0000    0.000    4.566     ABSO  No active process
+#  13    -2.000    1.928    1.942     0.5145    0.0000    1.130    5.696     ABSO  Transportation
+#  14    -2.000    1.928    1.942     0.5145    0.0000    0.000    5.696     GAPX  No active process
+#  15    -1.500    2.110    2.132     0.5145    0.0000    0.565    6.261     GAPX  Transportation
+#  16    -1.500    2.110    2.132     0.5145    0.0000    0.000    6.261     ABSO  No active process
+#  17    -0.500    2.472    2.512     0.5145    0.0000    1.130    7.390     ABSO  Transportation
+#  18    -0.500    2.472    2.512     0.5145    0.0000    0.000    7.390     GAPX  No active process
+#  19     0.000    2.654    2.702     0.5145    0.0000    0.565    7.955     GAPX  Transportation
+#  20     0.000    2.654    2.702     0.5145    0.0000    0.000    7.955     ABSO  No active process
+#  21     1.000    3.016    3.082     0.5145    0.0000    1.130    9.084     ABSO  Transportation
+#  22     1.000    3.016    3.082     0.5145    0.0000    0.000    9.084     GAPX  No active process
+#  23     1.500    3.198    3.272     0.5145    0.0000    0.565    9.649     GAPX  Transportation
+#  24     1.500    3.198    3.272     0.5145    0.0000    0.000    9.649     ABSO  No active process
+#  25     2.500    3.561    3.652     0.5145    0.0000    1.130   10.779     ABSO  Transportation
+#  26     2.500    3.561    3.652     0.5145    0.0000    0.000   10.779     GAPX  No active process
+#  27     3.000    3.742    3.842     0.5145    0.0000    0.565   11.344     GAPX  Transportation
+#  28     3.000    3.742    3.842     0.5145    0.0000    0.000   11.344     ABSO  No active process
+#  29     4.000    4.105    4.222     0.5145    0.0000    1.130   12.473     ABSO  Transportation
+#  30     4.000    4.105    4.222     0.5145    0.0000    0.000   12.473     GAPX  No active process
+#  31     4.500    4.286    4.411     0.5145    0.0000    0.565   13.038     GAPX  Transportation
+#  32     4.500    4.286    4.411     0.5145    0.0000    0.000   13.038     ABSO  No active process
+#  33     5.500    4.649    4.791     0.5145    0.0000    1.130   14.168     ABSO  Transportation
+#  34     5.500    4.649    4.791     0.5145    0.0000    0.000   14.168     GAPX  No active process
+#  35     6.000    4.830    4.981     0.5145    0.0000    0.565   14.732     GAPX  Transportation
+#  36     6.000    4.830    4.981     0.5145    0.0000    0.000   14.732     ABSO  No active process
+#  37     6.049    4.848    5.000     0.5145    0.0000    0.056   14.788     ABSO  Transportation
+#  38     6.049    4.848    5.000     0.5145    0.0000    0.000   14.788     WRLD  No active process
+#  39     8.682    5.803    6.000     0.5145    0.0000    2.974   17.762     WRLD  Transportation
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 2     Parent ID = 0
 ****************************************************************************************************
 Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volume  Process 
-#   0    -7.233   -0.000   -0.000     3.2084    0.0000    0.000    0.000     ABSO  No active process
-#   1    -6.500    0.379    0.112     3.2084    0.0000    0.832    0.832     ABSO  Transportation
-#   2    -6.500    0.379    0.112     3.2084    0.0000    0.000    0.832     GAPX  No active process
-#   3    -6.000    0.637    0.188     3.2084    0.0000    0.568    1.400     GAPX  Transportation
-#   4    -6.000    0.637    0.188     3.2084    0.0000    0.000    1.400     ABSO  No active process
-#   5    -5.000    1.154    0.341     3.2084    0.0000    1.136    2.536     ABSO  Transportation
-#   6    -5.000    1.154    0.341     3.2084    0.0000    0.000    2.536     GAPX  No active process
-#   7    -4.500    1.413    0.417     3.2084    0.0000    0.568    3.104     GAPX  Transportation
-#   8    -4.500    1.413    0.417     3.2084    0.0000    0.000    3.104     ABSO  No active process
-#   9    -3.500    1.929    0.570     3.2084    0.0000    1.136    4.240     ABSO  Transportation
-#  10    -3.500    1.929    0.570     3.2084    0.0000    0.000    4.240     GAPX  No active process
-#  11    -3.000    2.188    0.646     3.2084    0.0000    0.568    4.808     GAPX  Transportation
-#  12    -3.000    2.188    0.646     3.2084    0.0000    0.000    4.808     ABSO  No active process
-#  13    -2.000    2.705    0.799     3.2084    0.0000    1.136    5.944     ABSO  Transportation
-#  14    -2.000    2.705    0.799     3.2084    0.0000    0.000    5.944     GAPX  No active process
-#  15    -1.500    2.963    0.875     3.2084    0.0000    0.568    6.512     GAPX  Transportation
-#  16    -1.500    2.963    0.875     3.2084    0.0000    0.000    6.512     ABSO  No active process
-#  17    -0.500    3.480    1.028     3.2084    0.0000    1.136    7.648     ABSO  Transportation
-#  18    -0.500    3.480    1.028     3.2084    0.0000    0.000    7.648     GAPX  No active process
-#  19     0.000    3.738    1.104     3.2084    0.0000    0.568    8.216     GAPX  Transportation
-#  20     0.000    3.738    1.104     3.2084    0.0000    0.000    8.216     ABSO  No active process
-#  21     1.000    4.255    1.257     3.2084    0.0000    1.136    9.352     ABSO  Transportation
-#  22     1.000    4.255    1.257     3.2084    0.0000    0.000    9.352     GAPX  No active process
-#  23     1.500    4.514    1.333     3.2084    0.0000    0.568    9.920     GAPX  Transportation
-#  24     1.500    4.514    1.333     3.2084    0.0000    0.000    9.920     ABSO  No active process
-#  25     2.441    5.000    1.477     3.2084    0.0000    1.069   10.989     ABSO  Transportation
-#  26     2.441    5.000    1.477     3.2084    0.0000    0.000   10.989     WRLD  No active process
-#  27     4.375    6.000    1.772     3.2084    0.0000    2.198   13.187     WRLD  Transportation
+#   0    -7.233   -0.000   -0.000     3.1837    0.0000    0.000    0.000     ABSO  No active process
+#   1    -6.500    0.385    0.114     3.1837    0.0000    0.835    0.835     ABSO  Transportation
+#   2    -6.500    0.385    0.114     3.1837    0.0000    0.000    0.835     GAPX  No active process
+#   3    -6.000    0.647    0.191     3.1837    0.0000    0.570    1.406     GAPX  Transportation
+#   4    -6.000    0.647    0.191     3.1837    0.0000    0.000    1.406     ABSO  No active process
+#   5    -5.000    1.173    0.346     3.1837    0.0000    1.140    2.546     ABSO  Transportation
+#   6    -5.000    1.173    0.346     3.1837    0.0000    0.000    2.546     GAPX  No active process
+#   7    -4.500    1.435    0.424     3.1837    0.0000    0.570    3.116     GAPX  Transportation
+#   8    -4.500    1.435    0.424     3.1837    0.0000    0.000    3.116     ABSO  No active process
+#   9    -3.500    1.960    0.579     3.1837    0.0000    1.140    4.256     ABSO  Transportation
+#  10    -3.500    1.960    0.579     3.1837    0.0000    0.000    4.256     GAPX  No active process
+#  11    -3.000    2.223    0.657     3.1837    0.0000    0.570    4.826     GAPX  Transportation
+#  12    -3.000    2.223    0.657     3.1837    0.0000    0.000    4.826     ABSO  No active process
+#  13    -2.000    2.748    0.812     3.1837    0.0000    1.140    5.966     ABSO  Transportation
+#  14    -2.000    2.748    0.812     3.1837    0.0000    0.000    5.966     GAPX  No active process
+#  15    -1.500    3.011    0.889     3.1837    0.0000    0.570    6.536     GAPX  Transportation
+#  16    -1.500    3.011    0.889     3.1837    0.0000    0.000    6.536     ABSO  No active process
+#  17    -0.500    3.536    1.045     3.1837    0.0000    1.140    7.676     ABSO  Transportation
+#  18    -0.500    3.536    1.045     3.1837    0.0000    0.000    7.676     GAPX  No active process
+#  19     0.000    3.798    1.122     3.1837    0.0000    0.570    8.246     GAPX  Transportation
+#  20     0.000    3.798    1.122     3.1837    0.0000    0.000    8.246     ABSO  No active process
+#  21     1.000    4.324    1.277     3.1837    0.0000    1.140    9.386     ABSO  Transportation
+#  22     1.000    4.324    1.277     3.1837    0.0000    0.000    9.386     GAPX  No active process
+#  23     1.500    4.586    1.355     3.1837    0.0000    0.570    9.956     GAPX  Transportation
+#  24     1.500    4.586    1.355     3.1837    0.0000    0.000    9.956     ABSO  No active process
+#  25     2.288    5.000    1.477     3.1837    0.0000    0.898   10.855     ABSO  Transportation
+#  26     2.288    5.000    1.477     3.1837    0.0000    0.000   10.855     WRLD  No active process
+#  27     4.192    6.000    1.773     3.1837    0.0000    2.171   13.026     WRLD  Transportation
 
 ****************************************************************************************************
   Particle = gamma     Track ID = 1     Parent ID = 0
@@ -1163,15 +1143,15 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  41     9.000    0.210   -0.050     1.9839    0.0000    1.500   16.501     WRLD  Transportation
 --- Finish event 
 Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
-   Absorber: total energy (MeV):  18.512       total track length (cm):    1.292
-   Gap:      total energy (MeV):   2.957       total track length (cm):    1.496
+   Absorber: total energy (MeV):  21.495       total track length (cm):    1.451
+   Gap:      total energy (MeV):   0.070       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    95871319     5B6E157 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   146926935     8C1ED57 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    90467621    95871319
-                                        HEX     5646D25     5B6E157
+          with Store/Table at absolute adrs   141523237   146926935
+                                        HEX     86F7925     8C1ED57
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

@@ -1,8 +1,9 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.22/06                        https://root.cern |
-  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 10 2020, 11:40:00                      |
-  | From tags/v6-22-06@v6-22-06                                      |
+  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Dec 03 2021, 19:13:00                      |
+  | From tags/v6-24-06@v6-24-06                                      |
+  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -19,18 +20,18 @@ Processing test_E06.C("g4Config.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0.p3 ( 21 July 2020 )
+ Version 1.1 ( 3 December 2021 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.3 ( 11 December 2020 )
+ Version 5.4 ( 3 December 2021 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-10-07    (4-December-2020)
+ Geant4 version Name: geant4-10-07-patch-03    (19-November-2021)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -521,33 +522,34 @@ Index : 1     used in the geometry : Yes
 
 ### Run 0 start.
 >>> Event 0
-Number of optical photons produced in this event : 1840
+Number of optical photons produced in this event : 1574
 >>> Event 1
-Number of optical photons produced in this event : 1686
+Number of optical photons produced in this event : 1696
 >>> Event 2
-Number of optical photons produced in this event : 1731
+Number of optical photons produced in this event : 1702
 >>> Event 3
-Number of optical photons produced in this event : 1665
+Number of optical photons produced in this event : 1700
 >>> Event 4
-Number of optical photons produced in this event : 1721
+Number of optical photons produced in this event : 1660
 >>> Event 5
-Number of optical photons produced in this event : 1649
+Number of optical photons produced in this event : 1724
 >>> Event 6
-Number of optical photons produced in this event : 1692
+Number of optical photons produced in this event : 1634
 >>> Event 7
-Number of optical photons produced in this event : 1657
+Number of optical photons produced in this event : 1720
 >>> Event 8
-Number of optical photons produced in this event : 1753
+Number of optical photons produced in this event : 1770
 >>> Event 9
-Number of optical photons produced in this event : 1708
-Time of this run:   User=0.810000s Real=0.813419s Sys=0.000000s
+Number of optical photons produced in this event : 1705
+Time of this run:   User=0.800000s Real=0.801459s Sys=0.000000s
 Number of events processed: 10
-Number of optical photons produced in this run : 17102
+Number of optical photons produced in this run : 16885
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.22/06                        https://root.cern |
-  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 10 2020, 11:40:00                      |
-  | From tags/v6-22-06@v6-22-06                                      |
+  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Dec 03 2021, 19:13:00                      |
+  | From tags/v6-24-06@v6-24-06                                      |
+  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -564,18 +566,18 @@ Processing test_E06_2.C("g4Config1.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.0.p3 ( 21 July 2020 )
+ Version 1.1 ( 3 December 2021 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 5.3 ( 11 December 2020 )
+ Version 5.4 ( 3 December 2021 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-10-07    (4-December-2020)
+ Geant4 version Name: geant4-10-07-patch-03    (19-November-2021)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -1395,7 +1397,7 @@ Limit excitation energy for Fermi BreakUp (MeV)     20
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
 Use discrete excitation energy of the residual      0
-Time limit for long lived isomeres (ns)             1000
+Time limit for long lived isomeres (ns)             1
 Isomer production flag                              1
 Internal e- conversion flag                         1
 Store e- internal conversion data                   0
@@ -1424,36 +1426,36 @@ Index : 1     used in the geometry : Yes
 
 ### Run 0 start.
 >>> Event 0
-Number of optical photons produced in this event : 1656
-Number of feedback photons produced in this event : 5068
+Number of optical photons produced in this event : 1547
+Number of feedback photons produced in this event : 4744
 >>> Event 1
-Number of optical photons produced in this event : 1564
-Number of feedback photons produced in this event : 4793
+Number of optical photons produced in this event : 1684
+Number of feedback photons produced in this event : 5153
 >>> Event 2
-Number of optical photons produced in this event : 1551
-Number of feedback photons produced in this event : 4753
+Number of optical photons produced in this event : 1612
+Number of feedback photons produced in this event : 4939
 >>> Event 3
-Number of optical photons produced in this event : 1648
-Number of feedback photons produced in this event : 5047
+Number of optical photons produced in this event : 1596
+Number of feedback photons produced in this event : 4889
 >>> Event 4
-Number of optical photons produced in this event : 1661
-Number of feedback photons produced in this event : 5086
+Number of optical photons produced in this event : 1597
+Number of feedback photons produced in this event : 4892
 >>> Event 5
-Number of optical photons produced in this event : 1469
-Number of feedback photons produced in this event : 4508
+Number of optical photons produced in this event : 1464
+Number of feedback photons produced in this event : 4494
 >>> Event 6
-Number of optical photons produced in this event : 1623
-Number of feedback photons produced in this event : 4972
+Number of optical photons produced in this event : 1600
+Number of feedback photons produced in this event : 4901
 >>> Event 7
-Number of optical photons produced in this event : 1674
-Number of feedback photons produced in this event : 5123
+Number of optical photons produced in this event : 1614
+Number of feedback photons produced in this event : 4942
 >>> Event 8
-Number of optical photons produced in this event : 1613
-Number of feedback photons produced in this event : 4941
+Number of optical photons produced in this event : 1633
+Number of feedback photons produced in this event : 5001
 >>> Event 9
-Number of optical photons produced in this event : 1572
-Number of feedback photons produced in this event : 4817
-Time of this run:   User=1.180000s Real=1.183751s Sys=0.000000s
+Number of optical photons produced in this event : 1548
+Number of feedback photons produced in this event : 4744
+Time of this run:   User=1.140000s Real=1.141910s Sys=0.000000s
 Number of events processed: 10
-Number of optical photons produced in this run : 16031
-Number of feedback photons produced in this run : 49108
+Number of optical photons produced in this run : 15895
+Number of feedback photons produced in this run : 48699
