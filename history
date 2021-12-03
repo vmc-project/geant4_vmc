@@ -9,6 +9,27 @@
 
 Tags (history):
 ===============
+  03/12/2021
+  v5-4:
+    Geant4 VMC:
+    - Updates in cmake:
+      - Export install prefix
+        (Thanks to  Ch. Tacke, GSI)
+      - Build aganst VMC standalone library by default,
+        keep compiling with VMC in ROOT with a deprecation warning
+
+    Examples, G4Root/test:
+    - Updated CMake minimum version to 2.8.12
+    - Updated ExGarfield for changes in Garfield 4.0 API
+
+    Fixes:
+    Geant4 VMC:
+    - Fixed compilation error when using Geant4 with VecGeom solids
+      (Thanks to Andrea Capra, TRIUMF)
+
+    Tested with VMC 1.1.0, Geant4 10.7.p3 (with embedded CLHEP 2.4.4.0.)
+      Root 6.24/06, VGM 4.8, Garfield 4.0
+
   11/12/2020
   v5-3:
     All packages:
