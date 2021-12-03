@@ -204,7 +204,7 @@ void GarfieldPhysics::CreateGeometry()
 
   fGeometrySimple = new Garfield::GeometrySimple();
   // Make a tube (centered at the origin, inner radius: 0, outer radius: rTube).
-  fTube = new Garfield::SolidTube(0., 0., 0, rWire, rTube, lTube);
+  fTube = new Garfield::SolidTube(0., 0., rWire, rTube, lTube);
   // Add the solid to the geometry, together with the medium inside.
   fGeometrySimple->AddSolid(fTube, fMediumMagboltz);
   fComponentAnalyticField->SetGeometry(fGeometrySimple);
