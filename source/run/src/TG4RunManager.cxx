@@ -193,6 +193,10 @@ void TG4RunManager::ConfigureRunManager()
   TG4RootNavMgr* rootNavMgr = 0;
   if (userGeometry == "VMCtoRoot" || userGeometry == "Root") {
     if (!TMCManager::Instance()) {
+      // Set Root default units to TGeo
+      TGeoManager::LockDefaultUnits(false);
+      TGeoManager::SetDefaultUnits(TGeoManager::kRootUnits);
+
       // Construct geometry via VMC application
       if (TG4GeometryManager::Instance()->VerboseLevel() > 0)
         G4cout << "Running TVirtualMCApplication::ConstructGeometry"
