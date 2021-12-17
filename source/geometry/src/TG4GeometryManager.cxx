@@ -296,9 +296,12 @@ void TG4GeometryManager::ConstructG4Geometry()
     if (VerboseLevel() > 1)
       G4cout << "Running TVirtualMCApplication::ConstructGeometry" << G4endl;
 
+#if ROOT_VERSION_CODE >= ROOT_VERSION(6, 22, 8)
     // Set Root default units to TGeo
     TGeoManager::LockDefaultUnits(false);
     TGeoManager::SetDefaultUnits(TGeoManager::kRootUnits);
+    TGeoManager::LockDefaultUnits(true);
+#endif
 
     TG4StateManager::Instance()->SetNewState(kConstructGeometry);
     TVirtualMCApplication::Instance()->ConstructGeometry();
