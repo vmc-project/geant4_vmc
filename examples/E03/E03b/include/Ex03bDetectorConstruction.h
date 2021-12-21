@@ -1,5 +1,5 @@
-#ifndef EX03_DETECTOR_CONSTRUCTION_H
-#define EX03_DETECTOR_CONSTRUCTION_H
+#ifndef EX03B_DETECTOR_CONSTRUCTION_H
+#define EX03B_DETECTOR_CONSTRUCTION_H
 
 //------------------------------------------------
 // The Virtual Monte Carlo examples
@@ -10,8 +10,8 @@
 // Contact: root-vmc@cern.ch
 //-------------------------------------------------
 
-/// \file  Ex03DetectorConstruction.h
-/// \brief Definition of the Ex03DetectorConstruction class
+/// \file  Ex03bDetectorConstruction.h
+/// \brief Definition of the Ex03bDetectorConstruction class
 ///
 /// Geant4 ExampleN03 adapted to Virtual Monte Carlo: \n
 /// Id: ExN03DetectorConstruction.hh,v 1.5 2002/01/09 17:24:11 ranjard Exp
@@ -31,11 +31,11 @@
 /// \date 06/03/2003
 /// \author I. Hrivnacova; IPN, Orsay
 
-class Ex03DetectorConstruction : public TObject
+class Ex03bDetectorConstruction : public TObject
 {
  public:
-  Ex03DetectorConstruction();
-  virtual ~Ex03DetectorConstruction();
+  Ex03bDetectorConstruction();
+  virtual ~Ex03bDetectorConstruction();
 
  public:
   void ConstructMaterials();
@@ -110,7 +110,7 @@ class Ex03DetectorConstruction : public TObject
   TString fAbsorberMaterial; ///< The absorber material name
   TString fGapMaterial;      ///< The gap material name
 
-  ClassDef(Ex03DetectorConstruction, 1) // Ex03DetectorConstruction
+  ClassDef(Ex03bDetectorConstruction, 1) // Ex03bDetectorConstruction
 };
 
-#endif // EX03_DETECTOR_CONSTRUCTION_H
+#endif // EX03B_DETECTOR_CONSTRUCTION_H

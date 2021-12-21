@@ -70,7 +70,7 @@ ClassImp(Ex03bMCApplication)
   fStack = new Ex03MCStack(1000);
 
   // Create detector construction
-  fDetConstruction = new Ex03DetectorConstruction();
+  fDetConstruction = new Ex03bDetectorConstruction();
 
   // Create a calorimeter SD
   // fCalorimeterSD = new Ex03bCalorimeterSD("Calorimeter", fDetConstruction);
@@ -310,13 +310,16 @@ void Ex03bMCApplication::ConstructSensitiveDetectors()
     std::cout << "--- Construct sensitive detectors" << std::endl;
   }
 
-  Ex03bCalorimeterSD* calorimeterSD =
-    new Ex03bCalorimeterSD("Calorimeter", fDetConstruction);
-  calorimeterSD->SetPrintModulo(fPrintModulo);
+  Ex03bCalorimeterSD* absoCalorimeterSD =
+    new Ex03bCalorimeterSD("Absorber", fDetConstruction);
+  Ex03bCalorimeterSD* gapCalorimeterSD =
+    new Ex03bCalorimeterSD("Gap", fDetConstruction);
+  absoCalorimeterSD->SetPrintModulo(fPrintModulo);
+  gapCalorimeterSD->SetPrintModulo(fPrintModulo);
 
   // Set SD to ABSO, GAPX
-  gMC->SetSensitiveDetector("ABSO", calorimeterSD);
-  gMC->SetSensitiveDetector("GAPX", calorimeterSD);
+  gMC->SetSensitiveDetector("ABSO", absoCalorimeterSD);
+  gMC->SetSensitiveDetector("GAPX", gapCalorimeterSD);
 }
 
 //_____________________________________________________________________________
@@ -487,8 +490,6 @@ void Ex03bMCApplication::Stepping()
   }
 
   fVerbose.Stepping();
-
-  // fCalorimeterSD->ProcessHits();
 }
 
 //_____________________________________________________________________________

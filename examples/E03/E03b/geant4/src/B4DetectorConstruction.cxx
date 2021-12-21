@@ -63,8 +63,6 @@ G4ThreadLocal G4GlobalMagFieldMessenger*
 
 B4DetectorConstruction::B4DetectorConstruction()
   : G4VUserDetectorConstruction(),
-    fAbsorberPV(0),
-    fGapPV(0),
     fCheckOverlaps(true)
 {}
 
@@ -192,40 +190,82 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
   //
   // Absorber
   //
-  G4VSolid* absorberS = new G4Box("Abso",                 // its name
-    calorSizeXY / 2, calorSizeXY / 2, absoThickness / 2); // its size
+  auto absoHz = absoThickness / 2;
+  // Make the absorber layer composed of two volumes to test setting
+  // a sensitive detector to multiple volumes of the same name
+  absoHz /= 2.;
+  G4VSolid* absorberS = new G4Box("Abso",       // its name
+    calorSizeXY / 2, calorSizeXY / 2, absoHz);  // its size
 
-  G4LogicalVolume* absorberLV = new G4LogicalVolume(absorberS, // its solid
-    absorberMaterial,                                          // its material
-    "ABSO");                                                   // its name
+  G4LogicalVolume* absorberLV1 = new G4LogicalVolume(absorberS, // its solid
+    absorberMaterial,                                           // its material
+    "ABSO");                                                    // its name
+  G4LogicalVolume* absorberLV2 = new G4LogicalVolume(absorberS, // its solid
+    absorberMaterial,                                           // its material
+    "ABSO");                                                    // its name
 
-  fAbsorberPV = new G4PVPlacement(0,          // no rotation
-    G4ThreeVector(0., 0., -gapThickness / 2), // its position
-    absorberLV,                               // its logical volume
-    "ABSO",                                   // its name
-    layerLV,                                  // its mother  volume
-    false,                                    // no boolean operation
-    0,                                        // copy number
-    fCheckOverlaps);                          // checking overlaps
+
+  auto posz = -gapThickness / 2 - absoHz;
+  G4cout << "abso hz " << absoHz << " posz1 " << posz << G4endl;
+  new G4PVPlacement(0,             // no rotation
+    G4ThreeVector(0., 0., posz),   // its position
+    absorberLV1,                   // its logical volume
+    "ABSO",                        // its name
+    layerLV,                       // its mother  volume
+    false,                         // no boolean operation
+    0,                             // copy number
+    fCheckOverlaps);               // checking overlaps
+
+  posz += 2. * absoHz;
+  G4cout << " posz2 " << posz << G4endl;
+  new G4PVPlacement(0,             // no rotation
+    G4ThreeVector(0., 0., posz),   // its position
+    absorberLV2,                   // its logical volume
+    "ABSO",                        // its name
+    layerLV,                       // its mother  volume
+    false,                         // no boolean operation
+    1,                             // copy number
+    fCheckOverlaps);               // checking overlaps
+
 
   //
   // Gap
   //
-  G4VSolid* gapS = new G4Box("Gap",                      // its name
-    calorSizeXY / 2, calorSizeXY / 2, gapThickness / 2); // its size
+  auto gapHz = gapThickness / 2;
+  // Make the gap layer composed of two volumes to test setting
+  // a sensitive detector to multiple volumes of the same name
+  gapHz /= 2.;
+  G4VSolid* gapS = new G4Box("Gap",            // its name
+    calorSizeXY / 2, calorSizeXY / 2, gapHz);  // its size
 
-  G4LogicalVolume* gapLV = new G4LogicalVolume(gapS, // its solid
-    gapMaterial,                                     // its material
-    "GAPX");                                         // its name
+  G4LogicalVolume* gapLV1 = new G4LogicalVolume(gapS, // its solid
+    gapMaterial,                                      // its material
+    "GAPX");                                          // its name
+  G4LogicalVolume* gapLV2 = new G4LogicalVolume(gapS, // its solid
+    gapMaterial,                                      // its material
+    "GAPX");                                          // its name
 
-  fGapPV = new G4PVPlacement(0,               // no rotation
-    G4ThreeVector(0., 0., absoThickness / 2), // its position
-    gapLV,                                    // its logical volume
-    "GAPX",                                   // its name
-    layerLV,                                  // its mother  volume
-    false,                                    // no boolean operation
-    0,                                        // copy number
-    fCheckOverlaps);                          // checking overlaps
+  posz = absoThickness / 2 - gapHz;
+  G4cout << "gap hz " << gapHz << " posz1 " << posz << G4endl;
+  new G4PVPlacement(0,            // no rotation
+    G4ThreeVector(0., 0., posz),  // its position
+    gapLV1,                       // its logical volume
+    "GAPX",                       // its name
+    layerLV,                      // its mother  volume
+    false,                        // no boolean operation
+    0,                            // copy number
+    fCheckOverlaps);              // checking overlaps
+
+  posz += 2. * gapHz;
+  G4cout << " posz2 " << posz << G4endl;
+  new G4PVPlacement(0,            // no rotation
+    G4ThreeVector(0., 0., posz),  // its position
+    gapLV2,                       // its logical volume
+    "GAPX",                       // its name
+    layerLV,                      // its mother  volume
+    false,                        // no boolean operation
+    1,                            // copy number
+    fCheckOverlaps);              // checking overlaps
 
   //
   // print parameters

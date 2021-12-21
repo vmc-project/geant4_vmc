@@ -19,7 +19,7 @@
 
 #include <TVirtualMCApplication.h>
 
-#include "Ex03DetectorConstruction.h"
+#include "Ex03bDetectorConstruction.h"
 #include "Ex03bCalorimeterSD.h"
 
 #include <TGeoUniformMagField.h>
@@ -78,7 +78,7 @@ class Ex03bMCApplication : public TVirtualMCApplication
   void SetField(Double_t bz);
 
   // get methods
-  Ex03DetectorConstruction* GetDetectorConstruction() const;
+  Ex03bDetectorConstruction* GetDetectorConstruction() const;
   Ex03bCalorimeterSD* GetCalorimeterSD() const;
   Ex03PrimaryGenerator* GetPrimaryGenerator() const;
 
@@ -96,10 +96,10 @@ class Ex03bMCApplication : public TVirtualMCApplication
   Int_t fEventNo;      ///< Event counter
   TMCVerbose fVerbose; ///< VMC verbose helper
   Ex03MCStack* fStack; ///< VMC stack
-  Ex03DetectorConstruction* fDetConstruction; ///< Dector construction
-  Ex03bCalorimeterSD* fCalorimeterSD;         ///< Calorimeter SD
-  Ex03PrimaryGenerator* fPrimaryGenerator;    ///< Primary generator
-  TGeoUniformMagField* fMagField;             ///< Magnetic field
+  Ex03bDetectorConstruction* fDetConstruction; ///< Dector construction
+  Ex03bCalorimeterSD* fCalorimeterSD;          ///< Calorimeter SD
+  Ex03PrimaryGenerator* fPrimaryGenerator;     ///< Primary generator
+  TGeoUniformMagField* fMagField;              ///< Magnetic field
   Bool_t fOldGeometry; ///< Option for geometry definition
   Bool_t fIsControls;  ///< Option to activate special controls
   Bool_t fIsMaster;    ///< If is on master thread
@@ -134,7 +134,7 @@ inline void Ex03bMCApplication::SetField(Double_t bz)
 }
 
 /// \return The detector construction
-inline Ex03DetectorConstruction*
+inline Ex03bDetectorConstruction*
 Ex03bMCApplication::GetDetectorConstruction() const
 {
   return fDetConstruction;

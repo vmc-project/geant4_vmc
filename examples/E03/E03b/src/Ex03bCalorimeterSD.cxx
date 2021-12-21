@@ -18,8 +18,8 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "Ex03bCalorimeterSD.h"
-#include "Ex03CalorHit.h"
-#include "Ex03DetectorConstruction.h"
+#include "Ex03bCalorHit.h"
+#include "Ex03bDetectorConstruction.h"
 
 #include <Riostream.h>
 #include <TLorentzVector.h>
@@ -35,13 +35,11 @@ ClassImp(Ex03bCalorimeterSD)
 
 //_____________________________________________________________________________
 Ex03bCalorimeterSD::Ex03bCalorimeterSD(
-  const char* name, Ex03DetectorConstruction* detector)
+  const char* name, Ex03bDetectorConstruction* detector)
   : TVirtualMCSensitiveDetector(name, ""),
     fMC(0),
     fDetector(detector),
     fCalCollection(0),
-    fAbsorberVolId(0),
-    fGapVolId(0),
     fVerboseLevel(1),
     fPrintModulo(1)
 {
@@ -52,20 +50,18 @@ Ex03bCalorimeterSD::Ex03bCalorimeterSD(
   /// \param name      The calorimeter hits collection name
   /// \param detector  The detector construction
 
-  fCalCollection = new TClonesArray("Ex03CalorHit", 500);
+  fCalCollection = new TClonesArray("Ex03bCalorHit", 500);
   for (Int_t i = 0; i < fDetector->GetNbOfLayers() + 1; i++)
-    new ((*fCalCollection)[i]) Ex03CalorHit();
+    new ((*fCalCollection)[i]) Ex03bCalorHit();
 }
 
 //_____________________________________________________________________________
 Ex03bCalorimeterSD::Ex03bCalorimeterSD(
-  const Ex03bCalorimeterSD& origin, Ex03DetectorConstruction* detector)
+  const Ex03bCalorimeterSD& origin, Ex03bDetectorConstruction* detector)
   : TVirtualMCSensitiveDetector(origin),
     fMC(0),
     fDetector(detector),
     fCalCollection(0),
-    fAbsorberVolId(origin.fAbsorberVolId),
-    fGapVolId(origin.fGapVolId),
     fVerboseLevel(origin.fVerboseLevel),
     fPrintModulo(origin.fPrintModulo)
 {
@@ -76,9 +72,9 @@ Ex03bCalorimeterSD::Ex03bCalorimeterSD(
   /// \param origin    The source object (on master).
   /// \param detector  The detector construction
 
-  fCalCollection = new TClonesArray("Ex03CalorHit", 500);
+  fCalCollection = new TClonesArray("Ex03bCalorHit", 500);
   for (Int_t i = 0; i < fDetector->GetNbOfLayers() + 1; i++)
-    new ((*fCalCollection)[i]) Ex03CalorHit();
+    new ((*fCalCollection)[i]) Ex03bCalorHit();
 }
 
 //_____________________________________________________________________________
@@ -86,8 +82,6 @@ Ex03bCalorimeterSD::Ex03bCalorimeterSD()
   : TVirtualMCSensitiveDetector(),
     fDetector(0),
     fCalCollection(0),
-    fAbsorberVolId(0),
-    fGapVolId(0),
     fVerboseLevel(1)
 {
   /// Default constructor
@@ -107,12 +101,12 @@ Ex03bCalorimeterSD::~Ex03bCalorimeterSD()
 //
 
 //_____________________________________________________________________________
-Ex03CalorHit* Ex03bCalorimeterSD::GetHit(Int_t i) const
+Ex03bCalorHit* Ex03bCalorimeterSD::GetHit(Int_t i) const
 {
   /// \return   The hit for the specified layer.
   /// \param i  The layer number
 
-  return (Ex03CalorHit*)fCalCollection->At(i);
+  return (Ex03bCalorHit*)fCalCollection->At(i);
 }
 
 //_____________________________________________________________________________
@@ -140,9 +134,6 @@ void Ex03bCalorimeterSD::Initialize()
   // to avoid a possible performance penalty due to a frequent retrieval
   // from the thread-local storage
   fMC = gMC;
-
-  fAbsorberVolId = fMC->VolId("ABSO");
-  fGapVolId = fMC->VolId("GAPX");
 }
 
 //_____________________________________________________________________________
@@ -151,10 +142,6 @@ void Ex03bCalorimeterSD::ProcessHits()
   /// Account energy deposit and track lengths for each layer in its hit.
 
   Int_t copyNo;
-  Int_t id = fMC->CurrentVolID(copyNo);
-
-  if (id != fAbsorberVolId && id != fGapVolId) return;
-
   fMC->CurrentVolOffID(2, copyNo);
 
   Double_t edep = fMC->Edep();
@@ -162,17 +149,9 @@ void Ex03bCalorimeterSD::ProcessHits()
   Double_t step = 0.;
   if (fMC->TrackCharge() != 0.) step = fMC->TrackStep();
 
-  if (!GetHit(copyNo)) {
-    return;
-  }
+  if (!GetHit(copyNo)) return;
 
-  if (id == fAbsorberVolId) {
-    GetHit(copyNo)->AddAbs(edep, step);
-  }
-
-  if (id == fGapVolId) {
-    GetHit(copyNo)->AddGap(edep, step);
-  }
+  GetHit(copyNo)->Add(edep, step);
 }
 
 //_____________________________________________________________________________
@@ -215,21 +194,16 @@ void Ex03bCalorimeterSD::PrintTotal() const
 {
   /// Print the total values for all layers.
 
-  Double_t totEAbs = 0.;
-  Double_t totLAbs = 0.;
-  Double_t totEGap = 0.;
-  Double_t totLGap = 0.;
+  Double_t totEdep = 0.;
+  Double_t totTrackLength = 0.;
 
   Int_t nofHits = fCalCollection->GetEntriesFast();
   for (Int_t i = 0; i < nofHits; i++) {
-    totEAbs += GetHit(i)->GetEdepAbs();
-    totLAbs += GetHit(i)->GetTrakAbs();
-    totEGap += GetHit(i)->GetEdepGap();
-    totLGap += GetHit(i)->GetTrakGap();
+    totEdep += GetHit(i)->GetEdep();
+    totTrackLength += GetHit(i)->GetTrackLength();
   }
 
-  cout << "   Absorber: total energy (MeV): " << setw(7) << totEAbs * 1.0e03
-       << "       total track length (cm):  " << setw(7) << totLAbs << endl
-       << "   Gap:      total energy (MeV): " << setw(7) << totEGap * 1.0e03
-       << "       total track length (cm):  " << setw(7) << totLGap << endl;
+  cout << "   " << setw(10) << left << string(GetName()) + ": "
+       << "total energy (MeV): "  << setw(7) << totEdep * 1.0e03
+       << "     total track length (cm):  " << setw(7) << totTrackLength << endl;
 }

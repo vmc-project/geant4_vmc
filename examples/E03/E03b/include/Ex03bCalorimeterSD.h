@@ -22,8 +22,8 @@
 #include <TClonesArray.h>
 #include <TVirtualMCSensitiveDetector.h>
 
-class Ex03DetectorConstruction;
-class Ex03CalorHit;
+class Ex03bDetectorConstruction;
+class Ex03bCalorHit;
 class TVirtualMC;
 
 /// \ingroup E03
@@ -38,9 +38,9 @@ class TVirtualMC;
 class Ex03bCalorimeterSD : public TVirtualMCSensitiveDetector
 {
  public:
-  Ex03bCalorimeterSD(const char* name, Ex03DetectorConstruction* detector);
+  Ex03bCalorimeterSD(const char* name, Ex03bDetectorConstruction* detector);
   Ex03bCalorimeterSD(
-    const Ex03bCalorimeterSD& origin, Ex03DetectorConstruction* detector);
+    const Ex03bCalorimeterSD& origin, Ex03bDetectorConstruction* detector);
   Ex03bCalorimeterSD();
   virtual ~Ex03bCalorimeterSD();
 
@@ -57,19 +57,19 @@ class Ex03bCalorimeterSD : public TVirtualMCSensitiveDetector
   void SetPrintModulo(Int_t value);
 
   // get methods
-  Ex03CalorHit* GetHit(Int_t i) const;
+  Ex03bCalorHit* GetHit(Int_t i) const;
 
  private:
   // methods
   void ResetHits();
 
   // data members
-  TVirtualMC* fMC;                     ///< The VMC implementation
-  Ex03DetectorConstruction* fDetector; ///< Detector construction
-  TClonesArray* fCalCollection;        ///< Hits collection
-  Int_t fAbsorberVolId;                ///< The absorber volume Id
-  Int_t fGapVolId;                     ///< The gap volume Id
-  Int_t fVerboseLevel;                 ///< Verbosity level
+  TVirtualMC* fMC;                      ///< The VMC implementation
+  Ex03bDetectorConstruction* fDetector; ///< Detector construction
+  TClonesArray* fCalCollection;         ///< Hits collection
+  Int_t fAbsorberVolId;                 ///< The absorber volume Id
+  Int_t fGapVolId;                      ///< The gap volume Id
+  Int_t fVerboseLevel;                  ///< Verbosity level
   Int_t fPrintModulo; ///< The event modulus number to be printed
 
   ClassDef(Ex03bCalorimeterSD, 1) // Ex03bCalorimeterSD

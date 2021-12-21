@@ -56,9 +56,9 @@ ROOT_GENERATE_DICTIONARY(
   ${library_name}_dict
   Ex03bMCApplication.h
   Ex03MCStack.h
-  Ex03DetectorConstruction.h
+  Ex03bDetectorConstruction.h
   Ex03DetectorConstructionOld.h
-  Ex03CalorHit.h
+  Ex03bCalorHit.h
   Ex03bCalorimeterSD.h
   Ex03PrimaryGenerator.h
   MODULE ${library_name}
