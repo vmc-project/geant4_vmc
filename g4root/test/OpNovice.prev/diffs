@@ -1,0 +1,104 @@
+40c40
+< //
+---
+> //     
+43,49d42
+< /// \file OpNoviceGeom.cc
+< /// \brief Geant4 OpNovice example adapted to G4Root test
+< ///
+< /// \author A. Gheata; CERN
+< 
+< #include "G4Types.hh"
+< #include "G4Threading.hh"
+60,61d52
+< // Added for G4Root
+< #include "OpNovicePostDetConstruction.hh"
+65,70c56
+< // Added for G4Root - start
+< #include "TGeoManager.h"
+< #include "TG4RootDetectorConstruction.h"
+< #include "TG4RootNavMgr.h"
+< // Added for G4Root - end
+< 
+---
+> #ifdef G4VIS_USE
+71a58,60
+> #endif
+> 
+> #ifdef G4UI_USE
+72a62
+> #endif
+79,80d68
+<            // Added for G4Root
+<            << " [-g useG4Root]"
+99a88
+> #ifdef G4MULTITHREADED
+101,106c90
+< 
+<   // Added for G4Root - start
+<   G4bool useG4Root = false;
+<   TGeoManager *geom = 0;
+<   TG4RootNavMgr *mgr = 0;
+<   // Added for G4Root - end
+---
+> #endif
+112,113d95
+<      // Added for G4Root
+<      else if ( G4String(argv[i]) == "-g" ) useG4Root = true;
+132,142d113
+< 
+<   // Added for G4Root - start
+<   if ( useG4Root ) {
+<      G4cout << "Using TGeo interface ..." << G4endl;
+<      geom = TGeoManager::Import("OpNoviceGeom.root");
+<      mgr = TG4RootNavMgr::GetInstance(geom);
+<   } else {
+<      G4cout << "Using G4 native ..." << G4endl;
+<   }
+<   // Added for G4Root - end
+< 
+150,156d120
+<   // Added for G4Root - start
+<   if ( useG4Root ) {
+<      mgr->Initialize(OpNovicePostDetConstruction::GetInstance(), nThreads);
+<      mgr->ConnectToG4();
+<   }
+<   // Added for G4Root - end
+< 
+163,168c127
+<   // Added for G4Root - start
+<   if ( ! useG4Root ) {
+<     runManager->SetUserInitialization(new OpNoviceDetectorConstruction());
+<   }
+<   // Added for G4Root - end
+< 
+---
+>   runManager-> SetUserInitialization(new OpNoviceDetectorConstruction());
+172c131
+<   runManager->SetUserInitialization(new OpNoviceActionInitialization(useG4Root));
+---
+>   runManager->SetUserInitialization(new OpNoviceActionInitialization());
+177a137
+> #ifdef G4VIS_USE
+183a144
+> #endif
+187,188c148,149
+<   G4UImanager* UImanager = G4UImanager::GetUIpointer();
+< 
+---
+>   G4UImanager* UImanager = G4UImanager::GetUIpointer(); 
+>    
+195a157
+> #ifdef G4UI_USE
+196a159
+> #ifdef G4VIS_USE
+197a161,163
+> #else
+>      UImanager->ApplyCommand("/control/execute OpNovice.in");
+> #endif
+201a168
+> #endif
+208a176
+> #ifdef G4VIS_USE
+209a178
+> #endif

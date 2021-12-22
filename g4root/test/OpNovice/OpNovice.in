@@ -4,8 +4,8 @@
 /run/verbose 1
 /control/cout/ignoreThreadsExcept 0
 #
-/OpNovice/DetectorConstruction/enableVerbose true
-/OpNovice/DetectorConstruction/dumpGdml false
+#/OpNovice/DetectorConstruction/enableVerbose true
+#/OpNovice/DetectorConstruction/dumpGdml false
 /run/initialize
 #
 /gun/particle e+
