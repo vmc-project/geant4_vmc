@@ -239,7 +239,8 @@ void OpNovicePostDetConstruction::Initialize(TG4RootDetectorConstruction *dc)
   opWaterSurface->SetModel(DAVIS);
 
  // Logical border surface between expHall and waterTank
-  G4VPhysicalVolume *expHall_phys = dc->GetTopPV();
+  auto top_phys = dc->GetTopPV();
+  G4VPhysicalVolume *expHall_phys = top_phys->GetLogicalVolume()->GetDaughter(0);
   G4VPhysicalVolume *waterTank_phys = expHall_phys->GetLogicalVolume()->GetDaughter(0);
   G4LogicalBorderSurface* waterSurface = new G4LogicalBorderSurface(
     "WaterSurface", waterTank_phys, expHall_phys, opWaterSurface);
