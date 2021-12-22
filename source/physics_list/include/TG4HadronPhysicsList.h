@@ -20,8 +20,6 @@
 #include <G4VUserPhysicsList.hh>
 #include <globals.hh>
 
-class TG4OpticalPhysics;
-
 /// \ingroup physics_list
 /// \brief The hadron physics list helper class
 ///

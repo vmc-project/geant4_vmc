@@ -69,7 +69,7 @@ G4bool TG4SpecialPhysicsList::IsAvailableSelection(const G4String& selection)
   TString token = TG4Globals::GetToken(itoken, selection);
 
   while (token != "") {
-    if (!AvailableSelections().contains(token.Data())) return false;
+    if (!G4StrUtil::contains(AvailableSelections(), token.Data())) return false;
     token = TG4Globals::GetToken(++itoken, selection);
   }
 

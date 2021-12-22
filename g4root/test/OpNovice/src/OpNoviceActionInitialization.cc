@@ -23,46 +23,44 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-// $Id: OpNoviceActionInitialization.cc 68058 2013-03-13 14:47:43Z gcosmo $
 //
 /// \file OpNoviceActionInitialization.cc
 /// \brief Implementation of the OpNoviceActionInitialization class
 
 #include "OpNoviceActionInitialization.hh"
+#include "OpNoviceEventAction.hh"
 #include "OpNovicePrimaryGeneratorAction.hh"
 #include "OpNoviceRunAction.hh"
-#include "OpNoviceSteppingAction.hh"
 #include "OpNoviceStackingAction.hh"
-#include "OpNoviceSteppingVerbose.hh"
+#include "OpNoviceSteppingAction.hh"
   // Added for G4Root
 #include "TG4RootNavMgr.h"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 OpNoviceActionInitialization::OpNoviceActionInitialization(G4bool useG4Root)
- : G4VUserActionInitialization(),
-   fUseG4Root(useG4Root)
+  : G4VUserActionInitialization(),
+    fUseG4Root(useG4Root)
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-OpNoviceActionInitialization::~OpNoviceActionInitialization()
-{}
+OpNoviceActionInitialization::~OpNoviceActionInitialization() {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 void OpNoviceActionInitialization::BuildForMaster() const
 {
   SetUserAction(new OpNoviceRunAction());
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 void OpNoviceActionInitialization::Build() const
 {
-  SetUserAction(new OpNovicePrimaryGeneratorAction());
-  SetUserAction(new OpNoviceRunAction());
-  SetUserAction(new OpNoviceSteppingAction());
+  OpNovicePrimaryGeneratorAction* primary =
+    new OpNovicePrimaryGeneratorAction();
+  SetUserAction(primary);
+  SetUserAction(new OpNoviceRunAction(primary));
+  OpNoviceEventAction* event = new OpNoviceEventAction();
+  SetUserAction(event);
+  SetUserAction(new OpNoviceSteppingAction(event));
   SetUserAction(new OpNoviceStackingAction());
 
   // Added for G4Root - start
@@ -79,13 +77,3 @@ void OpNoviceActionInitialization::Build() const
   }
   // Added for G4Root - end
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-G4VSteppingVerbose*
-               OpNoviceActionInitialization::InitializeSteppingVerbose() const
-{
-  return new OpNoviceSteppingVerbose();
-}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

@@ -95,7 +95,7 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
 
   G4String g4SpecialProcess(specialProcess.Data());
 
-  if (g4SpecialProcess.contains("specialControls")) {
+  if ( G4StrUtil::contains(g4SpecialProcess, "specialControls")) {
     fSpecialControls = true;
     // remove "specialControls" from the string passsed to special physics list
     g4SpecialProcess.erase(g4SpecialProcess.find("specialControls"), 15);
@@ -104,7 +104,7 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
   }
   fSpecialProcessSelection = g4SpecialProcess;
 
-  if (g4SpecialProcess.contains("specialCuts")) {
+  if (G4StrUtil::contains(g4SpecialProcess, "specialCuts")) {
     fSpecialCuts = true;
   }
 
@@ -209,7 +209,7 @@ G4VUserPhysicsList* TG4RunConfiguration::CreatePhysicsList()
     G4cout << "Adding ExtraPhysicsList " << extraSelection << G4endl;
     builder->AddPhysicsList(
       new TG4ExtraPhysicsList(extraSelection, fParameters));
-    if (extraSelection.contains("biasing")) {
+    if (G4StrUtil::contains(extraSelection, "biasing")) {
       isBiasing = true;
     }
   }

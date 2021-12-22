@@ -573,26 +573,28 @@ void TGeant4::Gsbool(const char* onlyVolName, const char* manyVolName)
 
 //_____________________________________________________________________________
 void TGeant4::SetCerenkov(Int_t itmed, Int_t npckov, Float_t* ppckov,
-  Float_t* absco, Float_t* effic, Float_t* rindex)
+  Float_t* absco, Float_t* effic, Float_t* rindex, Bool_t aspline,
+  Bool_t rspline)
 {
   /// Set the tables for UV photon tracking in medium itmed
 
   if (!CheckApplicationState("SetCerenkov", kConstructOpGeometry)) return;
 
   fGeometryManager->GetOpManager()->SetCerenkov(
-    itmed, npckov, ppckov, absco, effic, rindex);
+    itmed, npckov, ppckov, absco, effic, rindex, aspline, rspline);
 }
 
 //_____________________________________________________________________________
 void TGeant4::SetCerenkov(Int_t itmed, Int_t npckov, Double_t* ppckov,
-  Double_t* absco, Double_t* effic, Double_t* rindex)
+  Double_t* absco, Double_t* effic, Double_t* rindex, Bool_t aspline,
+  Bool_t rspline)
 {
   /// Set the tables for UV photon tracking in medium itmed
 
   if (!CheckApplicationState("SetCerenkov", kConstructOpGeometry)) return;
 
   fGeometryManager->GetOpManager()->SetCerenkov(
-    itmed, npckov, ppckov, absco, effic, rindex);
+    itmed, npckov, ppckov, absco, effic, rindex, aspline, rspline);
 }
 
 //_____________________________________________________________________________
@@ -635,7 +637,7 @@ void TGeant4::SetSkinSurface(
 
 //_____________________________________________________________________________
 void TGeant4::SetMaterialProperty(Int_t itmed, const char* propertyName,
-  Int_t np, Double_t* pp, Double_t* values)
+  Int_t np, Double_t* pp, Double_t* values, Bool_t createNewKey, Bool_t spline)
 {
   /// Set the material property specified by propertyName to the tracking medium
 
@@ -643,7 +645,7 @@ void TGeant4::SetMaterialProperty(Int_t itmed, const char* propertyName,
     return;
 
   fGeometryManager->GetOpManager()->SetMaterialProperty(
-    itmed, propertyName, np, pp, values);
+    itmed, propertyName, np, pp, values, createNewKey, spline);
 }
 
 //_____________________________________________________________________________
@@ -661,7 +663,8 @@ void TGeant4::SetMaterialProperty(
 
 //_____________________________________________________________________________
 void TGeant4::SetMaterialProperty(const char* surfaceName,
-  const char* propertyName, Int_t np, Double_t* pp, Double_t* values)
+  const char* propertyName, Int_t np, Double_t* pp, Double_t* values,
+   Bool_t createNewKey, Bool_t spline)
 {
   /// Set the material property specified by propertyName to the optical surface
 
@@ -669,7 +672,7 @@ void TGeant4::SetMaterialProperty(const char* surfaceName,
     return;
 
   fGeometryManager->GetOpManager()->SetMaterialProperty(
-    surfaceName, propertyName, np, pp, values);
+    surfaceName, propertyName, np, pp, values, createNewKey, spline);
 }
 
 //_____________________________________________________________________________

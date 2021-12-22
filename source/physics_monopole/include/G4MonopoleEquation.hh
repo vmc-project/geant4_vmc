@@ -61,14 +61,14 @@ public:  // with description
   ~G4MonopoleEquation();
 
   virtual void  SetChargeMomentumMass( G4ChargeState particleChargeState,
-                                       G4double      momentum, 
+                                       G4double      momentum,
                                        G4double      mass);
   // magnetic charge in e+ units
-                                 
+
   virtual void EvaluateRhsGivenB(const G4double y[],
                          const G4double Field[],
                          G4double dydx[] ) const;
-  // Given the value of the electromagnetic field, this function 
+  // Given the value of the electromagnetic field, this function
   // calculates the value of the derivative dydx.
 
 private:

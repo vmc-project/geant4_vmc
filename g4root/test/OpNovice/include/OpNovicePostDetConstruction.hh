@@ -22,6 +22,8 @@ class OpNovicePostDetConstruction : public TVirtualUserPostDetConstruction
 private:
    TObjArray            *fTracks;  // Array of tracks
    TPolyLine3D          *fCurrent; // Current track
+   G4bool                fVerbose;
+   G4bool                fDumpGdml;
    
    OpNovicePostDetConstruction();
    static OpNovicePostDetConstruction *fgInstance; // Self pointer
@@ -35,6 +37,12 @@ public:
    void                  WriteTracks(const char *filename);
    
    virtual void          Initialize(TG4RootDetectorConstruction *dc);
+
+   void                  SetDumpGdml(G4bool);
+   G4bool                IsDumpGdml() const;
+   void                  SetVerbose(G4bool verbose);
+   G4bool                IsVerbose() const;
+   void                  PrintError(G4String);
 };
 #endif
   

@@ -27,6 +27,7 @@
 #include <G4LogicalVolumeStore.hh>
 #include <G4Material.hh>
 #include <G4MaterialPropertiesTable.hh>
+#include <G4MaterialPropertyVector.hh>
 #include <G4PhysicalVolumeStore.hh>
 #include <G4UserLimits.hh>
 #include <G4VPhysicalVolume.hh>
@@ -94,7 +95,7 @@ G4bool TG4GeometryServices::IsG3Volume(const G4String& lvName) const
   /// was not created by Gsposp method with a generic name
   /// (name_copyNo).
 
-  if (lvName.contains(gSeparator))
+  if (G4StrUtil::contains(lvName, gSeparator))
     return false;
   else
     return true;
@@ -197,46 +198,6 @@ G4double* TG4GeometryServices::ConvertAtomWeight(
   return weight;
 }
 
-#if G4VERSION_NUMBER >= 930
-//_____________________________________________________________________________
-void TG4GeometryServices::DumpG4MaterialPropertiesTable(
-  G4MaterialPropertiesTable* table) const
-{
-  /// Redefined method from Geant4.
-  /// In difference from G4 implementation the info about Null vector
-  /// is printed to G4cout and not as G4Exception.
-
-  typedef std::map<G4String, G4MaterialPropertyVector*, std::less<G4String> >
-    MPTMap;
-  typedef std::map<G4String, G4double, std::less<G4String> > MPTCMap;
-  typedef MPTMap::const_iterator MPTiterator;
-  typedef MPTCMap::const_iterator MPTCiterator;
-
-  const MPTMap* MPT = table->GetPropertiesMap();
-  MPTiterator i;
-  for (i = MPT->begin(); i != MPT->end(); ++i) {
-    G4cout << (*i).first << G4endl;
-    if ((*i).second != 0) {
-      (*i).second->DumpValues();
-    }
-    else {
-      G4cout << "  NULL Material Property Vector Pointer." << G4endl;
-    }
-  }
-
-  const MPTCMap* MPTC = table->GetPropertiesCMap();
-  MPTCiterator j;
-  for (j = MPTC->begin(); j != MPTC->end(); ++j) {
-    G4cout << j->first << G4endl;
-    if (j->second != 0) {
-      G4cout << j->second << G4endl;
-    }
-    else {
-      G4cout << "  No Material Constant Property." << G4endl;
-    }
-  }
-}
-#endif
 //
 // public methods
 //
@@ -284,7 +245,7 @@ G4String TG4GeometryServices::CutName(const char* name) const
 
   G4String cutName = name;
   G4int i = cutName.length();
-  while (cutName(--i) == ' ') cutName = cutName(0, i);
+  while (cutName[--i] == ' ') cutName = cutName.substr(0, i);
 
   return cutName;
 }
@@ -313,12 +274,12 @@ G4String TG4GeometryServices::CutVolumePath(
   G4int npos3 = path.find('/', 2);
   if (npos3 < 0) npos3 = path.length();
 
-  volName = path(npos1 + 1, npos2 - npos1 - 1);
-  G4String copyNoStr = path(npos2 + 1, npos3 - npos2);
+  volName = path.substr(npos1 + 1, npos2 - npos1 - 1);
+  G4String copyNoStr = path.substr(npos2 + 1, npos3 - npos2);
   std::istringstream in(copyNoStr);
   in >> copyNo;
 
-  return path(npos3, path.length() - npos3);
+  return path.substr(npos3, path.length() - npos3);
 }
 
 //_____________________________________________________________________________
@@ -328,8 +289,8 @@ const G4String& TG4GeometryServices::UserVolumeName(const G4String& name) const
   /// the logical volume was created by Gsposp method.
 
 #ifdef USE_G3TOG4
-  if (fIsG3toG4 && name.contains(gSeparator)) {
-    fgBuffer = name.substr(0, name.first(gSeparator));
+  if (fIsG3toG4 && G4StrUtil::contains(name, gSeparator)) {
+    fgBuffer = name.substr(0, name.find(gSeparator));
     return fgBuffer;
   }
   else {
@@ -346,11 +307,14 @@ G4OpticalSurfaceModel TG4GeometryServices::SurfaceModel(
 {
   /// Convert VMC enum to G4 enum
 
+  // clang-format off
   switch (model) {
-    case kGlisur:
-      return glisur;
-    case kUnified:
-      return unified;
+    case kGlisur:     return glisur;
+    case kUnified:    return unified;
+    case kLUT:        return LUT;
+    case kDAVIS:      return DAVIS;
+    case kdichroic:   return dichroic;
+  // clang-format on
     default:
       TG4Globals::Warning("TG4GeometryServices", "SurfaceModel",
         "Unknown optical surface model, return Glisur.");
@@ -363,15 +327,16 @@ G4SurfaceType TG4GeometryServices::SurfaceType(EMCOpSurfaceType surfType) const
 {
   /// Convert VMC enum to G4 enum
 
+  // clang-format off
   switch (surfType) {
-    case kDielectric_metal:
-      return dielectric_metal;
-    case kDielectric_dielectric:
-      return dielectric_dielectric;
-    case kFirsov:
-      return firsov;
-    case kXray:
-      return x_ray;
+    case kDielectric_metal:       return dielectric_metal;
+    case kDielectric_dielectric:  return dielectric_dielectric;
+    case kDielectric_LUT:         return dielectric_LUT;
+    case kDielectric_LUTDAVIS:    return dielectric_LUTDAVIS;
+    case kDielectric_dichroic:    return dielectric_dichroic;
+    case kFirsov:                 return firsov;
+    case kXray:                   return x_ray;
+  // clang-format on
     default:
       TG4Globals::Warning("TG4GeometryServices", "SurfaceType",
         "Unknown optical surface type, return dielectric_metal.");
@@ -385,19 +350,55 @@ G4OpticalSurfaceFinish TG4GeometryServices::SurfaceFinish(
 {
   /// Convert VMC enum to G4 enum
 
+  // clang-format off
   switch (finish) {
-    case kPolished:
-      return polished;
-    case kPolishedfrontpainted:
-      return polishedfrontpainted;
-    case kPolishedbackpainted:
-      return polishedbackpainted;
-    case kGround:
-      return ground;
-    case kGroundfrontpainted:
-      return groundfrontpainted;
-    case kGroundbackpainted:
-      return groundbackpainted;
+    case kPolished:               return polished;
+    case kPolishedfrontpainted:   return polishedfrontpainted;
+    case kPolishedbackpainted:    return polishedbackpainted;
+    //
+    case kGround:                 return ground;
+    case kGroundfrontpainted:     return groundfrontpainted;
+    case kGroundbackpainted:      return groundbackpainted;
+    //
+    case kPolishedlumirrorair:    return polishedlumirrorair;
+    case kPolishedlumirrorglue:   return polishedlumirrorglue;
+    //
+    case kPolishedair:            return polishedair;
+    case kPolishedteflonair:      return polishedteflonair;
+    case kPolishedtioair:         return polishedtioair;
+    case kPolishedtyvekair:       return polishedtyvekair;
+    case kPolishedvm2000air:      return polishedvm2000air;
+    case kPolishedvm2000glue:     return polishedvm2000glue;
+    //
+    case kEtchedlumirrorair:      return etchedlumirrorair;
+    case kEtchedlumirrorglue:     return etchedlumirrorglue;
+    case kEtchedair:              return etchedair;
+    case kEtchedteflonair:        return etchedteflonair;
+    case kEtchedtioair:           return etchedtioair;
+    case kEtchedtyvekair:         return etchedtyvekair;
+    case kEtchedvm2000air:        return etchedvm2000air;
+    case kEtchedvm2000glue:       return etchedvm2000glue;
+    case kGroundlumirrorair:      return groundlumirrorair;
+    case kGroundlumirrorglue:     return groundlumirrorglue;
+    case kGroundair:              return groundair;
+    case kGroundteflonair:        return groundteflonair;
+    case kGroundtioair:           return groundtioair;
+    case kGroundtyvekair:         return groundtyvekair;
+    case kGroundvm2000air:        return groundvm2000air;
+    case kGroundvm2000glue:       return groundvm2000glue;
+    //
+    case kRough_LUT:              return Rough_LUT;
+    case kRoughTeflon_LUT:        return RoughTeflon_LUT;
+    case kRoughESR_LUT:           return RoughESR_LUT;
+    case kRoughESRGrease_LUT:     return RoughESRGrease_LUT;
+    //
+    case kPolished_LUT:           return Polished_LUT;
+    case kPolishedTeflon_LUT:     return PolishedTeflon_LUT;
+    case kPolishedESR_LUT:        return PolishedESR_LUT;
+    case kPolishedESRGrease_LUT:  return PolishedESRGrease_LUT;
+    //
+    case kDetector_LUT:           return Detector_LUT;
+  // clang-format on
     default:
       TG4Globals::Warning("TG4GeometryServices", "SurfaceFinish",
         "Unknown optical surface finish, return polished.");
@@ -597,12 +598,7 @@ void TG4GeometryServices::PrintMaterialsProperties() const
 
       G4cout << (*matTable)[i]->GetName()
              << " material properties table: " << G4endl;
-#if G4VERSION_NUMBER >= 930
-      DumpG4MaterialPropertiesTable(
-        (*matTable)[i]->GetMaterialPropertiesTable());
-#else
       (*matTable)[i]->GetMaterialPropertiesTable()->DumpTable();
-#endif
     }
   }
 
@@ -614,11 +610,7 @@ void TG4GeometryServices::PrintMaterialsProperties() const
 
       G4cout << it->first
              << " optical surface material properties table: " << G4endl;
-#if G4VERSION_NUMBER >= 930
-      DumpG4MaterialPropertiesTable(it->second->GetMaterialPropertiesTable());
-#else
       it->second->GetMaterialPropertiesTable()->DumpTable();
-#endif
     }
   }
 }

@@ -1,20 +1,18 @@
 #----------------------------------------------------------------------------
 # Setup the project
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
-
+cmake_minimum_required(VERSION 3.16...3.21)
 project(OpNovice)
 
 #----------------------------------------------------------------------------
 # Define unique names of libraries and executables based on project name
-#
 set(program_name g4root_${PROJECT_NAME})
 
-#----------------------------------------------------------------------------
-# Add path to Find modules in Geant4 VMC installation
-set(CMAKE_MODULE_PATH
-    ${Geant4VMC_DIR}/Modules
-    ${CMAKE_MODULE_PATH})
-
+#add_definitions(-DGEANT4_USE_GDML)
+add_compile_definitions(GEANT4_USE_GDML)
+#make using gdml the default
+OPTION( GEANT4_USE_GDML "Use gdml Option" ON)
+# printout the value of GEANT4_USE_GDML
+MESSAGE("?GEANT4_USE_GDML " ${GEANT4_USE_GDML})
 #----------------------------------------------------------------------------
 # Find Geant4 package, activating all available UI and Vis drivers by default
 # You can set WITH_GEANT4_UIVIS to OFF via the command line or ccmake/cmake-gui
@@ -45,42 +43,44 @@ endif()
 #----------------------------------------------------------------------------
 # Setup Geant4 include directories and compile definitions
 #
-# Workaround for upstream bug: http://bugzilla-geant4.kek.jp/show_bug.cgi?id=1663
-#include(${Geant4_USE_FILE})
-
 include(${Geant4_USE_FILE})
 
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
 #
-include_directories(${PROJECT_SOURCE_DIR}/include
+include_directories(${PROJECT_SOURCE_DIR}/include 
                     ${Geant4_INCLUDE_DIR}
                     ${ROOT_INCLUDE_DIRS}
-                    ${G4Root_INCLUDE_DIRS})
+                    ${G4Root_INCLUDE_DIRS})                    
 file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cc)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
-
+if (GEANT4_USE_GDML)
+file(GLOB detectors ${PROJECT_SOURCE_DIR}/gdml/*.gdml)
+endif()
+file(GLOB macros ${PROJECT_SOURCE_DIR}/*.mac)
+file(GLOB inputs ${PROJECT_SOURCE_DIR}/*.in)
+if (NOT GEANT4_USE_GDML)
+list(REMOVE_ITEM sources ${PROJECT_SOURCE_DIR}/src/OpNoviceGDMLDetectorConstructionMessenger.cc)
+list(REMOVE_ITEM sources ${PROJECT_SOURCE_DIR}/src/OpNoviceGDMLDetectorConstruction.cc)
+list(REMOVE_ITEM headers ${PROJECT_SOURCE_DIR}/include/OpNoviceGDMLDetectorConstructionMessenger.hh)
+list(REMOVE_ITEM headers ${PROJECT_SOURCE_DIR}/include/OpNoviceGDMLDetectorConstruction.hh)
+endif()
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(${program_name} OpNovice.cc ${sources} ${headers})
-target_link_libraries(${program_name} ${Geant4_LIBRARIES} ${G4Root_LIBRARIES} ${ROOT_LIBRARIES} )
+add_executable(OpNovice OpNovice.cc ${sources} ${headers})
+target_link_libraries(OpNovice ${Geant4_LIBRARIES} ${G4Root_LIBRARIES} ${ROOT_LIBRARIES})
 
 #----------------------------------------------------------------------------
-# Copy all scripts and data files to the build directory, i.e. the directory in which we
+# Copy all scripts to the build directory, i.e. the directory in which we
 # build OpNovice. This is so that we can run the executable directly because it
 # relies on these scripts being in the current working directory.
 #
 set(OpNovice_SCRIPTS
-    OpNoviceGeom.root
-    OpNoviceGeom.C
-    drawTracks.C
     OpNovice.out
     OpNovice.in
     optPhoton.mac
     gui.mac
-    icons.mac
-    run.png
     vis.mac
   )
 
@@ -95,5 +95,9 @@ endforeach()
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS ${program_name} DESTINATION bin)
-
+install(TARGETS OpNovice DESTINATION bin)
+if (GEANT4_USE_GDML)
+install(FILES ${detectors} ${macros} ${inputs} DESTINATION bin)
+else()
+install(FILES ${macros} ${inputs} DESTINATION bin)
+endif()

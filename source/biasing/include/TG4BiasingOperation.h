@@ -17,10 +17,7 @@
 
 #include "G4VBiasingOperation.hh"
 
-class G4ProtonInelasticProcess;
-class G4NeutronInelasticProcess;
-class G4PionPlusInelasticProcess;
-class G4PionMinusInelasticProcess;
+class G4HadronInelasticProcess;
 
 class TG4BiasingOperation : public G4VBiasingOperation
 {
@@ -51,10 +48,10 @@ class TG4BiasingOperation : public G4VBiasingOperation
   }
 
  private:
-  G4ProtonInelasticProcess* fProtonInelasticProcess;
-  G4NeutronInelasticProcess* fNeutronInelasticProcess;
-  G4PionPlusInelasticProcess* fPionPlusInelasticProcess;
-  G4PionMinusInelasticProcess* fPionMinusInelasticProcess;
+  G4HadronInelasticProcess* fProtonInelasticProcess;
+  G4HadronInelasticProcess* fNeutronInelasticProcess;
+  G4HadronInelasticProcess* fPionPlusInelasticProcess;
+  G4HadronInelasticProcess* fPionMinusInelasticProcess;
 };
 
 #endif

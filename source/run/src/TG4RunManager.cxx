@@ -405,6 +405,9 @@ void TG4RunManager::Initialize()
   // create G4RunManager
   // ConfigureRunManager();
 
+  // Temporary work-around for bug in Cerenkov in Geant4 11.0
+  TG4PhysicsManager::Instance()->StoreCerenkovMaxBetaChangeValue();
+
   // initialize Geant4
   fRunManager->Initialize();
 

@@ -23,44 +23,48 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-/// \file OpNovice/include/OpNovicePrimaryGeneratorAction.hh
-/// \brief Definition of the OpNovicePrimaryGeneratorAction class
-//
+/// \file optical/OpNovice/src/OpNoviceEventAction.cc
+/// \brief Implementation of the OpNoviceEventAction class
 //
 //
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#ifndef OpNovicePrimaryGeneratorAction_h
-#define OpNovicePrimaryGeneratorAction_h 1
-
-#include "globals.hh"
-#include "G4ParticleGun.hh"
-#include "G4VUserPrimaryGeneratorAction.hh"
-
-class G4Event;
-class OpNovicePrimaryGeneratorMessenger;
+#include "OpNoviceEventAction.hh"
+#include "OpNoviceRun.hh"
+#include "G4Event.hh"
+#include "G4RunManager.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-class OpNovicePrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
+OpNoviceEventAction::OpNoviceEventAction()
+  : G4UserEventAction()
 {
- public:
-  OpNovicePrimaryGeneratorAction();
-  ~OpNovicePrimaryGeneratorAction();
-
-  void GeneratePrimaries(G4Event*) override;
-
-  void SetOptPhotonPolar();
-  void SetOptPhotonPolar(G4double);
-
-  G4ParticleGun* GetParticleGun() { return fParticleGun; }
-
- private:
-  G4ParticleGun* fParticleGun;
-  OpNovicePrimaryGeneratorMessenger* fGunMessenger;
-};
+  fRayleigh   = 0;
+  fAbsorption = 0;
+  fMie        = 0;
+  fBoundary   = 0;
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+OpNoviceEventAction::~OpNoviceEventAction() {}
 
-#endif /*OpNovicePrimaryGeneratorAction_h*/
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+void OpNoviceEventAction::BeginOfEventAction(const G4Event*)
+{
+  fRayleigh   = 0;
+  fAbsorption = 0;
+  fMie        = 0;
+  fBoundary   = 0;
+}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+void OpNoviceEventAction::EndOfEventAction(const G4Event*)
+{
+  OpNoviceRun* run = static_cast<OpNoviceRun*>(
+    G4RunManager::GetRunManager()->GetNonConstCurrentRun());
+  run->AddRayleigh(fRayleigh);
+  run->AddAbsorption(fAbsorption);
+  run->AddMie(fMie);
+  run->AddBoundary(fBoundary);
+}
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

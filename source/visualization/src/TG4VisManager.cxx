@@ -143,18 +143,11 @@ G4bool TG4VisManager::CaseInsensitiveEqual(
 {
   /// Case insensitive comparison of 2 strings
 
-  G4int i;
-  if (string1 == string2) return true;
-  //  if (string1.length() != string2.length()) return false;
-  for (i = 0; i < G4int(string1.length()); i++) {
-    G4int diff = abs((G4int)string1(i) - (G4int)string2(i));
-    if (diff && (diff != 32)) return false;
-  }
-  if (string2.length() > string1.length()) {
-    if (string2(i) == '_') return true;
-    return false;
-  }
-  return true;
+  G4String str1Cpy(string1);
+  G4String str2Cpy(string2);
+  std::transform(str1Cpy.begin(), str1Cpy.end(), str1Cpy.begin(), ::tolower );
+  std::transform(str2Cpy.begin(), str2Cpy.end(), str2Cpy.begin(), ::tolower );
+  return (str1Cpy == str2Cpy);
 }
 
 //_____________________________________________________________________________

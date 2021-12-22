@@ -141,9 +141,7 @@ class TG4GeometryServices : public TG4Verbose
   G4bool CompareMaterial(
     G4int nofElements, G4double density, const G4Material* material) const;
   G4double* ConvertAtomWeight(G4int nmat, G4double* a, G4double* wmat) const;
-#if G4VERSION_NUMBER >= 930
-  void DumpG4MaterialPropertiesTable(G4MaterialPropertiesTable* table) const;
-#endif
+
   // static data members
   static TG4GeometryServices* fgInstance;    ///< this instance
   static G4String fgBuffer;                  ///< string buffer

@@ -180,9 +180,9 @@ install(DIRECTORY
   ${PROJECT_SOURCE_DIR}/run/include/
   ${PROJECT_SOURCE_DIR}/visualization/include/
   DESTINATION include/${library_name})
-install(TARGETS ${library_name} EXPORT Geant4VMCTargets 
+install(TARGETS ${library_name} EXPORT Geant4VMCTargets
   DESTINATION ${CMAKE_INSTALL_LIBDIR})
-install(FILES ${root_dict_libs} 
+install(FILES ${root_dict_libs}
   DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 #--- Build project configuration -----------------------------------------------

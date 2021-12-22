@@ -51,14 +51,14 @@ public:
 
   G4MonopolePhysicsMessenger(G4MonopolePhysics*);
   ~G4MonopolePhysicsMessenger();
-    
+
   virtual void SetNewValue(G4UIcommand*, G4String);
-    
+
 private:
 
   G4MonopolePhysics*         fPhys;
-    
-  G4UIdirectory*             fPhysicsDir;    
+
+  G4UIdirectory*             fPhysicsDir;
   G4UIcommand*               fPhysicsCmd;
   G4UIcmdWithADouble*        fMCmd;
   G4UIcmdWithADouble*        fZCmd;

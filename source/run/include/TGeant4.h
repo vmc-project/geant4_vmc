@@ -89,9 +89,11 @@ class TGeant4 : public TVirtualMC
   virtual void Matrix(Int_t& krot, Double_t thetaX, Double_t phiX,
     Double_t thetaY, Double_t phiY, Double_t thetaZ, Double_t phiZ);
   virtual void SetCerenkov(Int_t itmed, Int_t npckov, Float_t* ppckov,
-    Float_t* absco, Float_t* effic, Float_t* rindex);
+    Float_t* absco, Float_t* effic, Float_t* rindex, Bool_t aspline = false,
+    Bool_t rspline = false);
   virtual void SetCerenkov(Int_t itmed, Int_t npckov, Double_t* ppckov,
-    Double_t* absco, Double_t* effic, Double_t* rindex);
+    Double_t* absco, Double_t* effic, Double_t* rindex, Bool_t aspline = false,
+    Bool_t rspline = false);
 
   // new (more general functions) for definition of surfaces
   // and material properties for optical physics
@@ -104,11 +106,13 @@ class TGeant4 : public TVirtualMC
   virtual void SetSkinSurface(
     const char* name, const char* volName, const char* opSurfaceName);
   virtual void SetMaterialProperty(Int_t itmed, const char* propertyName,
-    Int_t np, Double_t* pp, Double_t* values);
+    Int_t np, Double_t* pp, Double_t* values, Bool_t createNewKey = false,
+    Bool_t spline = false);
   virtual void SetMaterialProperty(
     Int_t itmed, const char* propertyName, Double_t value);
   virtual void SetMaterialProperty(const char* surfaceName,
-    const char* propertyName, Int_t np, Double_t* pp, Double_t* values);
+    const char* propertyName, Int_t np, Double_t* pp, Double_t* values,
+    Bool_t createNewKey = false, Bool_t spline = false);
 
   // functions for access to geometry
   virtual Bool_t GetTransformation(

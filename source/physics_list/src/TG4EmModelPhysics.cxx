@@ -79,7 +79,7 @@ G4String TG4EmModelPhysics::GetEmModelName(G4int modelType)
     default:
       TG4Globals::Exception("TG4EmModelPhysics", "GetEmModelName",
         TString("Unknown model type ") + TString(modelType));
-      return kNoEmModel;
+      return "";
   }
 }
 
@@ -149,13 +149,13 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
     }
 
     // PAI applied to ionisation
-    if (currentProcessName.contains("Ioni") &&
+    if (G4StrUtil::contains(currentProcessName, "Ioni") &&
         (emModel == kPAIModel || emModel == kPAIPhotonModel)) {
       processName = currentProcessName;
     }
 
     // UrbanMsc applied to msc
-    if (currentProcessName.contains("msc") &&
+    if (G4StrUtil::contains(currentProcessName, "msc") &&
         (emModel == kSpecialUrbanMscModel)) {
       processName = currentProcessName;
     }

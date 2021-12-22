@@ -45,9 +45,11 @@ class TG4OpGeometryManager : public TG4Verbose
   // functions for definition of surfaces
   // and material properties for optical physics
   virtual void SetCerenkov(Int_t itmed, Int_t npckov, Float_t* ppckov,
-    Float_t* absco, Float_t* effic, Float_t* rindex);
+    Float_t* absco, Float_t* effic, Float_t* rindex, Bool_t aspline,
+    Bool_t rspline);
   virtual void SetCerenkov(Int_t itmed, Int_t npckov, Double_t* ppckov,
-    Double_t* absco, Double_t* effic, Double_t* rindex);
+    Double_t* absco, Double_t* effic, Double_t* rindex, Bool_t aspline,
+    Bool_t rspline);
 
   virtual void DefineOpSurface(const char* name, EMCOpSurfaceModel model,
     EMCOpSurfaceType surfaceType, EMCOpSurfaceFinish surfaceFinish,
@@ -58,11 +60,13 @@ class TG4OpGeometryManager : public TG4Verbose
   virtual void SetSkinSurface(
     const char* name, const char* volName, const char* opSurfaceName);
   virtual void SetMaterialProperty(Int_t itmed, const char* propertyName,
-    Int_t np, Double_t* pp, Double_t* values);
+    Int_t np, Double_t* pp, Double_t* values, Bool_t createNewKey,
+    Bool_t spline);
   virtual void SetMaterialProperty(
     Int_t itmed, const char* propertyName, Double_t value);
   virtual void SetMaterialProperty(const char* surfaceName,
-    const char* propertyName, Int_t np, Double_t* pp, Double_t* values);
+    const char* propertyName, Int_t np, Double_t* pp, Double_t* values,
+    Bool_t createNewKey, Bool_t spline);
 
   // functions for access to geometry
 

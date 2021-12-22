@@ -23,45 +23,44 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-/// \file OpNovice/include/OpNovicePhysicsListMessenger.hh
-/// \brief Definition of the OpNovicePhysicsListMessenger class
-//
-//
-//
-// 
+#ifndef OpNoviceGDMLDetectorConstruction_h
+#define OpNoviceGDMLDetectorConstruction_h 1
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+#include "G4VUserDetectorConstruction.hh"
 
-#ifndef OpNovicePhysicsListMessenger_h
-#define OpNovicePhysicsListMessenger_h 1
-
-#include "globals.hh"
-#include "G4UImessenger.hh"
-
-class OpNovicePhysicsList;
-class G4UIdirectory;
-class G4UIcmdWithAnInteger;
+class G4GDMLParser;
+class OpNoviceDetectorMessenger;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class OpNovicePhysicsListMessenger: public G4UImessenger
+class OpNoviceGDMLDetectorConstruction : public G4VUserDetectorConstruction
 {
-  public:
-    OpNovicePhysicsListMessenger(OpNovicePhysicsList* );
-    virtual ~OpNovicePhysicsListMessenger();
- 
-    virtual void SetNewValue(G4UIcommand*, G4String);
- 
-  private:
-    OpNovicePhysicsList*  fPhysicsList;
- 
-    G4UIdirectory*        fOpNoviceDir;
-    G4UIdirectory*        fPhysDir;
-    G4UIcmdWithAnInteger* fVerboseCmd;
-    G4UIcmdWithAnInteger* fCerenkovCmd;
+ public:
+  OpNoviceGDMLDetectorConstruction(G4String fname);
+  virtual ~OpNoviceGDMLDetectorConstruction();
+
+  void ReadGDML();
+  virtual G4VPhysicalVolume* Construct();
+  virtual void ConstructSDandField();
+  void UpdateGeometry();
+  void SetDumpGdml(G4bool);
+  G4bool IsDumpGdml() const;
+  void SetVerbose(G4bool fverbose);
+  G4bool IsVerbose() const;
+  void SetDumpGdmlFile(G4String fDumpGdmlFile);
+  G4String GetDumpGdmlFileName() const;
+
+ private:
+  OpNoviceGDMLDetectorConstruction& operator=(
+    const OpNoviceGDMLDetectorConstruction& right);
+  OpNoviceGDMLDetectorConstruction(const OpNoviceGDMLDetectorConstruction&);
+  OpNoviceDetectorMessenger* fDetectorMessenger;
+  G4GDMLParser* fParser;
+
+  G4String fGdmlFile;
+  G4String fDumpGdmlFileName;
+  G4bool fVerbose;
+  G4bool fDumpGdml;
 };
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo.....
 #endif

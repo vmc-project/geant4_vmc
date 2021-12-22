@@ -92,7 +92,7 @@ G4bool TG4ExtraPhysicsList::IsAvailableSelection(const G4String& selection)
   G4String checkSelection = selection;
   checkSelection += " ";
 
-  return available.contains(checkSelection);
+  return G4StrUtil::contains(available, checkSelection);
 }
 
 //
@@ -131,7 +131,7 @@ void TG4ExtraPhysicsList::Configure(
   /// and registeres them in the modular physics list.
 
   // Generic biasing physics
-  if (selection.contains("biasing")) {
+  if (G4StrUtil::contains(selection, "biasing")) {
     G4GenericBiasingPhysics* biasingPhysics = new G4GenericBiasingPhysics;
     // we may need to make this configurable later
     biasingPhysics->Bias("proton");
@@ -142,7 +142,7 @@ void TG4ExtraPhysicsList::Configure(
   }
 
   // Extra electromagnetic physics
-  if (selection.contains("extra")) {
+  if (G4StrUtil::contains(selection, "extra")) {
     G4EmExtraPhysics* extraPhysics = new G4EmExtraPhysics();
 #if G4VERSION_NUMBER >= 1012
     extraPhysics->Synch(false);
@@ -158,20 +158,20 @@ void TG4ExtraPhysicsList::Configure(
   }
 
   // Monopole physics
-  if (selection.contains("monopole")) {
+  if (G4StrUtil::contains(selection, "monopole")) {
     G4MonopolePhysics* monopolePhysics = new G4MonopolePhysics();
     SetParameters(monopolePhysics, parameters);
     RegisterPhysics(monopolePhysics);
   }
 
   // Optical physics
-  if (selection.contains("optical")) {
+  if (G4StrUtil::contains(selection, "optical")) {
     G4OpticalPhysics* g4OpticalPhysics = new G4OpticalPhysics();
     RegisterPhysics(g4OpticalPhysics);
   }
 
   // Radioactive decay physics
-  if (selection.contains("radDecay")) {
+  if (G4StrUtil::contains(selection, "radDecay")) {
     RegisterPhysics(new G4RadioactiveDecayPhysics());
   }
 }

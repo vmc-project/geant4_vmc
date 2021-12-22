@@ -109,6 +109,9 @@ class TG4PhysicsManager : public TG4Verbose
   G4double GetCutForProton() const;
   G4bool IsOpBoundaryProcess() const;
 
+  void StoreCerenkovMaxBetaChangeValue();
+  void ApplyCerenkovMaxBetaChangeValue();
+
  private:
   /// Not implemented
   TG4PhysicsManager(const TG4PhysicsManager& right);
@@ -165,6 +168,9 @@ class TG4PhysicsManager : public TG4Verbose
 
   /// optical boundary process
   G4OpBoundaryProcess* fOpBoundaryProcess;
+
+  /// temporary work-around for bug in Cerenkov
+  G4double fCerenkovMaxBetaChange = 0.;
 };
 
 // inline methods

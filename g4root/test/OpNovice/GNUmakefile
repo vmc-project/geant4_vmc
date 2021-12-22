@@ -1,4 +1,3 @@
-# $Id: GNUmakefile 68752 2013-04-05 10:23:47Z gcosmo $
 # --------------------------------------------------------------
 # GNUmakefile for examples module.  Gabriele Cosmo, 06/04/98.
 # --------------------------------------------------------------
@@ -13,6 +12,9 @@ endif
 
 .PHONY: all
 all: lib bin
+ifndef XERCESCROOT      
+        @echo XERCESCROOT not defined!
+endif
 
 include $(G4INSTALL)/config/binmake.gmk
 
