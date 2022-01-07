@@ -31,6 +31,7 @@ ClassImp(Ex06DetectorConstruction)
   //_____________________________________________________________________________
   Ex06DetectorConstruction::Ex06DetectorConstruction()
   : TObject(),
+    fWorldSize(1500),   // 15*m
     fExpHallSize(1000), // 10*m
     fTankSize(500),     // 5*m
     fBubbleSize(50),    // 0.5*m
@@ -103,17 +104,30 @@ void Ex06DetectorConstruction::ConstructGeometry()
 {
   /// Contruct volumes using TGeo modeller
 
-  // The experimental Hall
+  // The world
   //
   Double_t* ubuf = 0;
 
+  Double_t world[3];
+  world[0] = fWorldSize;
+  world[1] = fWorldSize;
+  world[2] = fWorldSize;
+  TGeoVolume* worldV =
+    gGeoManager->Volume("WRLD", "BOX", fImedAir, world, 3);
+  gGeoManager->SetTopVolume(worldV);
+
+  // The experimental Hall
+  //
   Double_t expHall[3];
   expHall[0] = fExpHallSize;
   expHall[1] = fExpHallSize;
   expHall[2] = fExpHallSize;
-  TGeoVolume* expHallV =
-    gGeoManager->Volume("WRLD", "BOX", fImedAir, expHall, 3);
-  gGeoManager->SetTopVolume(expHallV);
+  gGeoManager->Volume("EXPH", "BOX", fImedAir, expHall, 3);
+
+  Double_t posX = 0.;
+  Double_t posY = 0.;
+  Double_t posZ = 0.;
+  gGeoManager->Node("EXPH", 1, "WRLD", posX, posY, posZ, 0, kTRUE, ubuf);
 
   // The Water Tank
   //
@@ -122,11 +136,7 @@ void Ex06DetectorConstruction::ConstructGeometry()
   waterTank[1] = fTankSize;
   waterTank[2] = fTankSize;
   gGeoManager->Volume("TANK", "BOX", fImedWater, waterTank, 3);
-
-  Double_t posX = 0.;
-  Double_t posY = 0.;
-  Double_t posZ = 0.;
-  gGeoManager->Node("TANK", 1, "WRLD", posX, posY, posZ, 0, kTRUE, ubuf);
+  gGeoManager->Node("TANK", 1, "EXPH", posX, posY, posZ, 0, kTRUE, ubuf);
 
   // The Air Bubble
   //
@@ -283,7 +293,7 @@ void Ex06DetectorConstruction::ConstructOpGeometry()
     "WaterSurface", kDAVIS, kDielectric_LUTDAVIS, kRough_LUT, 1.0);
   // gMC->DefineOpSurface(
   //   "WaterSurface", kUnified, kDielectric_dielectric, kGround, 1.0);
-  gMC->SetBorderSurface("WaterSurface", "TANK", 1, "WRLD", 1, "WaterSurface");
+  gMC->SetBorderSurface("WaterSurface", "TANK", 1, "EXPH", 1, "WaterSurface");
   // the world copyNo is in VMC always 1
 
   // Air Bubble

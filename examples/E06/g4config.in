@@ -17,6 +17,7 @@
 /mcVerbose/trackingAction 0
 /mcVerbose/geometryManager 1
 /mcVerbose/extraPhysicsList 2
+/control/verbose 2
 
 /control/cout/ignoreThreadsExcept 0
 
@@ -33,7 +34,7 @@
 # Set parameters for Cerenkov
 #
 /process/optical/cerenkov/setMaxPhotons 20
-/process/optical/cerenkov/setMaxBetaChange 0.1
+/process/optical/cerenkov/setMaxBetaChange 10.
 /process/optical/cerenkov/setTrackSecondariesFirst false
 
 #/tracking/verbose 1

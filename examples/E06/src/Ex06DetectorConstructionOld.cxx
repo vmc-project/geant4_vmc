@@ -30,6 +30,7 @@ ClassImp(Ex06DetectorConstructionOld)
   //_____________________________________________________________________________
   Ex06DetectorConstructionOld::Ex06DetectorConstructionOld()
   : TObject(),
+    fWorldSize(1500),   // 15*m
     fExpHallSize(1000), // 10*m
     fTankSize(500),     // 5*m
     fBubbleSize(50),    // 0.5*m
@@ -37,10 +38,6 @@ ClassImp(Ex06DetectorConstructionOld)
     fImedWater(-1)
 {
   /// Default constuctor
-
-  fExpHallSize = 1000; // 10*m
-  fTankSize = 500;     // 5*m
-  fBubbleSize = 50;    // 0.5*m
 }
 
 //_____________________________________________________________________________
@@ -95,13 +92,26 @@ void Ex06DetectorConstructionOld::ConstructGeometry()
 {
   /// Contruct volumes using VMC functions
 
+  // The world
+  //
+  Double_t world[3];
+  world[0] = fWorldSize;
+  world[1] = fWorldSize;
+  world[2] = fWorldSize;
+  gMC->Gsvolu("WRLD", "BOX", fImedAir, world, 3);
+
   // The experimental Hall
   //
   Double_t expHall[3];
   expHall[0] = fExpHallSize;
   expHall[1] = fExpHallSize;
   expHall[2] = fExpHallSize;
-  gMC->Gsvolu("WRLD", "BOX", fImedAir, expHall, 3);
+  gMC->Gsvolu("EXPH", "BOX", fImedAir, expHall, 3);
+
+  Double_t posX = 0.;
+  Double_t posY = 0.;
+  Double_t posZ = 0.;
+  gMC->Gspos("EXPH", 1, "WRLD", posX, posY, posZ, 0, "ONLY");
 
   // The Water Tank
   //
@@ -111,10 +121,7 @@ void Ex06DetectorConstructionOld::ConstructGeometry()
   waterTank[2] = fTankSize;
   gMC->Gsvolu("TANK", "BOX", fImedWater, waterTank, 3);
 
-  Double_t posX = 0.;
-  Double_t posY = 0.;
-  Double_t posZ = 0.;
-  gMC->Gspos("TANK", 1, "WRLD", posX, posY, posZ, 0, "ONLY");
+  gMC->Gspos("TANK", 1, "EXPH", posX, posY, posZ, 0, "ONLY");
 
   // The Air Bubble
   //

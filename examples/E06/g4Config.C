@@ -21,7 +21,7 @@ void Config()
 
   // Default Geant4 VMC run configuration
   TG4RunConfiguration* runConfiguration
-    = new TG4RunConfiguration("geomRootToGeant4", "emStandard+optical");
+    = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT_EMZ+optical");
 
   // TGeant4
   TGeant4* geant4
