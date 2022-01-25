@@ -20,8 +20,10 @@
 #include "TG4TrackManager.h"
 #include "TG4TrackingAction.h"
 
+#if G4VERSION_NUMBER == 1100
 // Temporary work-around for bug in Cerenkov
 #include "TG4PhysicsManager.h"
+#endif
 
 #include <G4Event.hh>
 #include <G4Trajectory.hh>
@@ -82,12 +84,14 @@ void TG4EventAction::BeginOfEventAction(const G4Event* event)
 {
   /// Called by G4 kernel at the beginning of event.
 
+#if G4VERSION_NUMBER == 1100
   // Temporary work-around for bug in Cerenkov
   static G4ThreadLocal auto applyCerenkovFix = true;
   if ( applyCerenkovFix ) {
     TG4PhysicsManager::Instance()->ApplyCerenkovMaxBetaChangeValue();
     applyCerenkovFix = false;
   }
+#endif
 
   // reset the tracks counters
   fTrackingAction->PrepareNewEvent();

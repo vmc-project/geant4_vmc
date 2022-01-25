@@ -383,7 +383,8 @@ TG4G3ParticleWSP TG4G3PhysicsManager::GetG3ParticleWSP(
   else if (name == "e+") {
     return kEplus;
   }
-  else if ((pType == "baryon" || pType == "meson" || pType == "nucleus")) {
+  else if ((pType == "baryon" || pType == "meson" || pType == "nucleus" ||
+            pType == "Ion")) {
     if (particle->GetPDGCharge() == 0) {
       return kNeutralHadron;
     }

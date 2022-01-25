@@ -179,7 +179,7 @@ G4double TG4SpecialCutsForNeutron::GetMinEkine(
 G4VParticleChange* TG4SpecialCutsForNeutron::PostStepDoIt(
   const G4Track& track, const G4Step& /*step*/)
 {
-  /// Override method from G4VSpecialCuts and set trcack status
+  /// Override method from G4VSpecialCuts and set track status
   /// fStopAndKill to neutrons
 
   aParticleChange.Initialize(track);

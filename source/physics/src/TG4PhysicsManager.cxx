@@ -35,10 +35,12 @@
 #include <G4VUserPhysicsList.hh>
 #include <G4Version.hh>
 
+#if G4VERSION_NUMBER == 1100
 // Temporary work-around for bug in Cerenkov
 #include <G4OpticalParameters.hh>
 #include <G4Electron.hh>
 #include <G4Cerenkov.hh>
+#endif
 
 #include <TDatabasePDG.h>
 #include <TVirtualMCApplication.h>
@@ -218,20 +220,19 @@ G4ParticleDefinition* TG4PhysicsManager::GetParticleDefinition(
 }
 
 //_____________________________________________________________________________
-G4VProcess* TG4PhysicsManager::FindProcess(G4String processName) const
+G4VProcess* TG4PhysicsManager::GetProcess(G4ProcessManager* processManager,
+  G4String subName) const
 {
-  /// Find G4VProcess with specified name.
+  /// Find the process in the particle process manager which name contains
+  /// subName
 
-  G4ProcessTable* processTable = G4ProcessTable::GetProcessTable();
-
-  G4ProcessVector* processVector = processTable->FindProcesses(processName);
-  G4VProcess* firstFoundProcess = 0;
-  if (processVector->entries() > 0) firstFoundProcess = (*processVector)[0];
-
-  processVector->clear();
-  delete processVector;
-
-  return firstFoundProcess;
+  auto processVector = processManager->GetProcessList();
+  for (size_t i = 0; i < processVector->length(); ++i) {
+    if (G4StrUtil::contains((*processVector)[i]->GetProcessName(), subName)) {
+      return (*processVector)[i];
+    }
+  }
+  return nullptr;
 }
 
 //_____________________________________________________________________________
@@ -327,8 +328,6 @@ void TG4PhysicsManager::SetSpecialCutsActivation()
     if (!particle) continue;
 
     TG4G3ParticleWSP particleWSP = g3PhysicsManager->GetG3ParticleWSP(particle);
-    G4String name = g3PhysicsManager->GetG3ParticleWSPName(particleWSP);
-
     if ((particleWSP != kNofParticlesWSP) && (particleWSP != kEplus) &&
         (particleWSP != kAny)) {
       // special process is activated in case
@@ -338,18 +337,15 @@ void TG4PhysicsManager::SetSpecialCutsActivation()
       G4ProcessManager* processManager = particle->GetProcessManager();
 
       // get the special cut process (if it was instantiated)
-      G4String processName = "specialCutFor" + name;
-      G4VProcess* process = FindProcess(processName);
-      if (!process) {
-        TG4Globals::Exception("TG4PhysicsManager", "SetSpecialCutsActivation",
-          "The special cut process for " + TString(name) + " is not defined");
+      G4VProcess* process = GetProcess(processManager, "specialCut");
+      if (process) {
+        processManager->SetProcessActivation(process, (*isCutVector)[particleWSP]);
       }
-
-      // special process is activated in case
-      // cutVector (vector of kinetic energy cuts) is set
-      // or the special cut is set by TG4Limits
-      G4int index = processManager->GetProcessIndex(process);
-      SetProcessActivation(processManager, index, (*isCutVector)[particleWSP]);
+      else {
+        TG4Globals::Warning("TG4PhysicsManager", "SetSpecialCutsActivation",
+          "The special cut process for " + TString(particle->GetParticleName()) +
+          " is not defined");
+      }
     }
   }
 }
@@ -794,6 +790,7 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus()
   return kPNoProcess;
 }
 
+#if G4VERSION_NUMBER == 1100
 //_____________________________________________________________________________
 void TG4PhysicsManager::StoreCerenkovMaxBetaChangeValue()
 {
@@ -820,3 +817,4 @@ void TG4PhysicsManager::ApplyCerenkovMaxBetaChangeValue()
            << static_cast<G4Cerenkov*>(cerenkov)->GetMaxBetaChangePerStep() << G4endl;
   }
 }
+#endif

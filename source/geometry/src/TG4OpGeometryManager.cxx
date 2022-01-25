@@ -287,7 +287,7 @@ void TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
   // not adopted in Geant4, where 0 values cause unpredicatable behavior in
   // G4OpBoundary process
   if (isRindex) {
-    table->AddProperty("RINDEX", ppckov2, rindex, npckov, false, aspline);
+    table->AddProperty("RINDEX", ppckov2, rindex, npckov, false, rspline);
     // used in G4Cerenkov, G4OpRayleigh, G4OpBoundary
   }
 
