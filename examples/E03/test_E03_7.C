@@ -21,7 +21,7 @@ void test_E03_7(const TString& configMacro = "g4Config6.C", Bool_t oldGeometry =
 /// \param oldGeometry  if true - geometry is defined via VMC, otherwise
 ///                     via TGeo
 ///
-/// Test special biasing operation which activates the INCXX phyiscis in selected
+/// Test special biasing operation which activates the INCXX physics in selected
 /// media.
 
   // Create application if it does not yet exist
