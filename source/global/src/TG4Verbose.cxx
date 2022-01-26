@@ -42,6 +42,8 @@ TG4Verbose::TG4Verbose(const G4String& cmdName, G4int verboseLevel)
   CreateMessenger();
 
   fCommand = fgMessenger->AddCommand(this, cmdName);
+
+  fgCounter++;
 }
 
 //_____________________________________________________________________________
