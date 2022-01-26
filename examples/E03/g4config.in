@@ -11,6 +11,8 @@
 # Geant4 configuration macro for Example03
 # (called from Root macro g4Config.C)
 
+/control/verbose 2
+
 /mcVerbose/all 0
 /mcVerbose/runAction 1
 /mcVerbose/composedPhysicsList 1
