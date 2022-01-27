@@ -21,6 +21,15 @@
 #include <G4LogicalVolumeStore.hh>
 #include <G4Material.hh>
 
+#ifdef G4MULTITHREADED
+namespace
+{
+// Mutex to lock creating regions
+G4Mutex createBiasingOperatorMutex = G4MUTEX_INITIALIZER;
+} // namespace
+#endif
+
+
 //_____________________________________________________________________________
 TG4BiasingManager::TG4BiasingManager(
   const G4String& name, const G4String& availableModels)
@@ -63,6 +72,10 @@ void TG4BiasingManager::CreateBiasingOperator()
 
   // Generate new regions names based on material names
   SetRegionsNames();
+
+#ifdef G4MULTITHREADED
+  G4AutoLock lm(&createBiasingOperatorMutex);
+#endif
 
   // Get biasing "model" configuration
   // (only one "model" is currently supported)
@@ -110,4 +123,7 @@ void TG4BiasingManager::CreateBiasingOperator()
       G4cout << "Biasing operator attached to lv " << lv->GetName() << G4endl;
     }
   }
+#ifdef G4MULTITHREADED
+  lm.unlock();
+#endif
 }
