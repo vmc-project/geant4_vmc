@@ -321,7 +321,7 @@ TVirtualMCApplication* MCApplication::CloneForWorker() const
 }
 
 //_____________________________________________________________________________
-void MCApplication::InitForWorker() const
+void MCApplication::InitOnWorker()
 {
   // Create Root manager
   fRootManager
@@ -335,7 +335,7 @@ void MCApplication::InitForWorker() const
 }
 
 //_____________________________________________________________________________
-void MCApplication::FinishWorkerRun() const
+void MCApplication::FinishRunOnWorker()
 {
   //cout << "Ex03MCApplication::FinishWorkerRun: " << endl;
   if ( fRootManager ) {

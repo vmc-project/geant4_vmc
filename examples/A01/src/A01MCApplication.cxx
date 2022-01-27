@@ -278,7 +278,7 @@ TVirtualMCApplication* A01MCApplication::CloneForWorker() const
 }
 
 //_____________________________________________________________________________
-void A01MCApplication::InitForWorker() const
+void A01MCApplication::InitOnWorker()
 {
   // cout << "A01MCApplication::InitForWorker " << this << endl;
 
@@ -294,7 +294,7 @@ void A01MCApplication::InitForWorker() const
 }
 
 //_____________________________________________________________________________
-void A01MCApplication::FinishWorkerRun() const
+void A01MCApplication::FinishRunOnWorker()
 {
   // cout << "A01MCApplication::FinishWorkerRun: " << endl;
   if (fRootManager) {

@@ -44,7 +44,7 @@ class Ex01MCApplication : public TVirtualMCApplication
   void FinishRun();
 
   virtual TVirtualMCApplication* CloneForWorker() const;
-  virtual void InitForWorker() const;
+  virtual void InitOnWorker();
   virtual void ConstructGeometry();
   virtual void InitGeometry();
   virtual void GeneratePrimaries();

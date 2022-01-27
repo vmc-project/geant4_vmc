@@ -263,7 +263,7 @@ TVirtualMCApplication* Ex01MCApplication::CloneForWorker() const
 }
 
 //_____________________________________________________________________________
-void Ex01MCApplication::InitForWorker() const
+void Ex01MCApplication::InitOnWorker()
 {
   gMC->SetStack(fStack);
   gMC->SetMagField(fMagField);

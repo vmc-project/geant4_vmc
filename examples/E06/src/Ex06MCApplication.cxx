@@ -183,7 +183,7 @@ TVirtualMCApplication* Ex06MCApplication::CloneForWorker() const
 }
 
 //_____________________________________________________________________________
-void Ex06MCApplication::InitForWorker() const
+void Ex06MCApplication::InitOnWorker()
 {
   // cout << "Ex06MCApplication::InitForWorker " << this << endl;
 
