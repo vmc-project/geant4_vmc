@@ -253,7 +253,7 @@ G4bool TG4ParticlesChecker::CheckName(
   if (pos == std::string::npos) {
     // particles wo _bar extension
     G4String candidate = rtValue;
-    candidate.replace(0, 1, G4String(firstChar));
+    candidate.replace(0, 1, std::string(1, firstChar));
     candidates.insert(candidate);
   }
   else {
@@ -267,7 +267,7 @@ G4bool TG4ParticlesChecker::CheckName(
     candidates.insert(candidate); // Xx_bar -> anti_Xx
 
     candidate = rtValue;
-    candidate.replace(0, 1, G4String(firstChar));
+    candidate.replace(0, 1, std::string(1, firstChar));
     candidate.erase(pos, 4);
     candidate.insert(0, "anti");
     candidates.insert(candidate); // Xx_bar -> antixx

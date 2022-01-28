@@ -11,6 +11,8 @@
 # Geant4 configuration macro for Example06
 # (called from Root macro g4Config.C)
 
+/control/verbose 2
+
 # Verbose levels
 #
 /mcVerbose/all 1
@@ -33,7 +35,7 @@
 # Set parameters for Cerenkov
 #
 /process/optical/cerenkov/setMaxPhotons 20
-/process/optical/cerenkov/setMaxBetaChange 0.1
+/process/optical/cerenkov/setMaxBetaChange 10.
 /process/optical/cerenkov/setTrackSecondariesFirst false
 
 #/tracking/verbose 1

@@ -23,6 +23,14 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
+/// \file OpNovice/OpNovice.cc
+/// \brief Main program of the OpNovice example
+///
+/// Geant4 OpNovice example adapted to G4Root test
+///
+/// \author A. Gheata; CERN
+
+//
 //
 //
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -36,31 +44,16 @@
 // Version:     5.0
 // Created:     1996-04-30
 // Author:      Juliet Armstrong
-// mail:        gum@triumf.ca
 //
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-/// \file OpNoviceGeom.cc
-/// \brief Geant4 OpNovice example adapted to G4Root test
-///
-/// \author A. Gheata; CERN
-
-#include "G4Types.hh"
-#include "G4Threading.hh"
-#ifdef G4MULTITHREADED
-#include "G4MTRunManager.hh"
-#else
-#include "G4RunManager.hh"
-#endif
-
-#include "G4UImanager.hh"
-
-#include "OpNovicePhysicsList.hh"
 #include "OpNoviceDetectorConstruction.hh"
+#ifdef GEANT4_USE_GDML
+#  include "OpNoviceGDMLDetectorConstruction.hh"
+#endif
+#include "OpNoviceActionInitialization.hh"
 // Added for G4Root
 #include "OpNovicePostDetConstruction.hh"
-
-#include "OpNoviceActionInitialization.hh"
 
 // Added for G4Root - start
 #include "TGeoManager.h"
@@ -68,67 +61,94 @@
 #include "TG4RootNavMgr.h"
 // Added for G4Root - end
 
-#include "G4VisExecutive.hh"
+#include "FTFP_BERT.hh"
+#include "G4EmStandardPhysics_option4.hh"
+#include "G4OpticalPhysics.hh"
+#include "G4RunManagerFactory.hh"
+#include "G4Types.hh"
 #include "G4UIExecutive.hh"
+#include "G4UImanager.hh"
+#include "G4VisExecutive.hh"
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-namespace {
-  void PrintUsage() {
+namespace
+{
+  void PrintUsage()
+  {
     G4cerr << " Usage: " << G4endl;
-    G4cerr << " OpNovice [-m macro ] [-u UIsession] [-t nThreads] [-r seed] "
+#ifdef GEANT4_USE_GDML
+    G4cerr << " OpNovice [-g gdmlfile] [-m macro ] [-u UIsession] [-t "
+              "nThreads] [-r seed] "
            // Added for G4Root
-           << " [-g useG4Root]"
+           << " [-gr useG4Root]"
            << G4endl;
+#else
+    G4cerr << " OpNovice  [-m macro ] [-u UIsession] [-t nThreads] [-r seed] "
+           // Added for G4Root
+           << " [-gr useG4Root]"
+           << G4endl;
+#endif
     G4cerr << "   note: -t option is available only for multi-threaded mode."
            << G4endl;
   }
-}
+}  // namespace
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-int main(int argc,char** argv)
+int main(int argc, char** argv)
 {
   // Evaluate arguments
   //
-  if ( argc > 9 ) {
+  if(argc > 9)
+  {
     PrintUsage();
     return 1;
   }
-
+  G4String gdmlfile = "";
   G4String macro;
   G4String session;
   G4int nThreads = 0;
-
   // Added for G4Root - start
   G4bool useG4Root = false;
   TGeoManager *geom = 0;
   TG4RootNavMgr *mgr = 0;
   // Added for G4Root - end
 
+
   G4long myseed = 345354;
-  for ( G4int i=1; i<argc; i=i+2 ) {
-     if      ( G4String(argv[i]) == "-m" ) macro   = argv[i+1];
-     else if ( G4String(argv[i]) == "-u" ) session = argv[i+1];
-     // Added for G4Root
-     else if ( G4String(argv[i]) == "-g" ) useG4Root = true;
-     else if ( G4String(argv[i]) == "-r" ) myseed  = atoi(argv[i+1]);
+  for(G4int i = 1; i < argc; i = i + 2)
+  {
+    if(G4String(argv[i]) == "-g")
+      gdmlfile = argv[i + 1];
+    else if(G4String(argv[i]) == "-m")
+      macro = argv[i + 1];
+    else if(G4String(argv[i]) == "-u")
+      session = argv[i + 1];
+    else if(G4String(argv[i]) == "-r")
+      myseed = atoi(argv[i + 1]);
+    // Added for G4Root
+    else if ( G4String(argv[i]) == "-gr" ) 
+      useG4Root = true;
 #ifdef G4MULTITHREADED
-     else if ( G4String(argv[i]) == "-t" ) {
-                    nThreads = G4UIcommand::ConvertToInt(argv[i+1]);
+    else if(G4String(argv[i]) == "-t")
+    {
+      nThreads = G4UIcommand::ConvertToInt(argv[i + 1]);
     }
 #endif
-    else {
+    else
+    {
       PrintUsage();
       return 1;
     }
   }
 
-  // Choose the Random engine
-  //
-  G4Random::setTheEngine(new CLHEP::RanecuEngine);
-
-  // Construct the default run manager
-  //
+  // Instantiate G4UIExecutive if interactive mode
+  G4UIExecutive* ui = nullptr;
+  if(macro.size() == 0)
+  {
+    ui = new G4UIExecutive(argc, argv);
+  }
 
   // Added for G4Root - start
   if ( useG4Root ) {
@@ -140,11 +160,11 @@ int main(int argc,char** argv)
   }
   // Added for G4Root - end
 
+  // Construct the default run manager
+  auto runManager = G4RunManagerFactory::CreateRunManager();
 #ifdef G4MULTITHREADED
-  G4MTRunManager * runManager = new G4MTRunManager;
-  if ( nThreads > 0 ) runManager->SetNumberOfThreads(nThreads);
-#else
-  G4RunManager * runManager = new G4RunManager;
+  if(nThreads > 0)
+    runManager->SetNumberOfThreads(nThreads);
 #endif
 
   // Added for G4Root - start
@@ -160,51 +180,52 @@ int main(int argc,char** argv)
   // Set mandatory initialization classes
   //
   // Detector construction
-  // Added for G4Root - start
-  if ( ! useG4Root ) {
-    runManager->SetUserInitialization(new OpNoviceDetectorConstruction());
+  if(gdmlfile != "")
+  {
+#ifdef GEANT4_USE_GDML
+    runManager->SetUserInitialization(
+      new OpNoviceGDMLDetectorConstruction(gdmlfile));
+#else
+    G4cout << "Error! Input gdml file specified, but Geant4 wasn't" << G4endl
+           << "built with gdml support." << G4endl;
+    return 1;
+#endif
   }
-  // Added for G4Root - end
-
+  else
+  {
+    // Added for G4Root - start
+    if ( ! useG4Root ) {
+      runManager->SetUserInitialization(new OpNoviceDetectorConstruction());
+    }
+    // Added for G4Root - end
+  }
   // Physics list
-  runManager-> SetUserInitialization(new OpNovicePhysicsList());
-  // User action initialization
+  G4VModularPhysicsList* physicsList = new FTFP_BERT;
+  physicsList->ReplacePhysics(new G4EmStandardPhysics_option4());
+  G4OpticalPhysics* opticalPhysics = new G4OpticalPhysics();
+  physicsList->RegisterPhysics(opticalPhysics);
+  runManager->SetUserInitialization(physicsList);
+
   runManager->SetUserInitialization(new OpNoviceActionInitialization(useG4Root));
 
-  // Initialize G4 kernel
-  //
-  runManager->Initialize();
-
-  // Initialize visualization
-  //
-  G4VisManager* visManager = new G4VisExecutive;
-  // G4VisExecutive can take a verbosity argument - see /vis/verbose guidance.
-  // G4VisManager* visManager = new G4VisExecutive("Quiet");
+  G4VisManager* visManager = new G4VisExecutive("Quiet");
   visManager->Initialize();
 
-  // Get the pointer to the User Interface manager
-  //
   G4UImanager* UImanager = G4UImanager::GetUIpointer();
 
-  if ( macro.size() ) {
-     // Batch mode
-     G4String command = "/control/execute ";
-     UImanager->ApplyCommand(command+macro);
-  }
-  else // Define UI session for interactive mode
+  if(macro.size())
   {
-     G4UIExecutive * ui = new G4UIExecutive(argc,argv,session);
-     UImanager->ApplyCommand("/control/execute vis.mac");
-     if (ui->IsGUI())
-        UImanager->ApplyCommand("/control/execute gui.mac");
-     ui->SessionStart();
-     delete ui;
+    G4String command = "/control/execute ";
+    UImanager->ApplyCommand(command + macro);
   }
-
-  // Job termination
-  // Free the store: user actions, physics_list and detector_description are
-  //                 owned and deleted by the run manager, so they should not
-  //                 be deleted in the main() program !
+  else  // Define UI session for interactive mode
+  {
+    UImanager->ApplyCommand("/control/execute vis.mac");
+    if(ui->IsGUI())
+      UImanager->ApplyCommand("/control/execute gui.mac");
+    ui->SessionStart();
+    delete ui;
+  }
 
   delete visManager;
   delete runManager;

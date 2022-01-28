@@ -1,4 +1,3 @@
-$Id: History 100934 2016-11-03 11:04:36Z gcosmo $
 -------------------------------------------------------------------
 
      =========================================================
@@ -14,6 +13,70 @@ track of all tags.
      ----------------------------------------------------------
      * Reverse chronological order (last date on top), please *
      ----------------------------------------------------------
+
+October 15, 2021 D. Sawkey (OpNovice-V10-07-06)
+- remove OpNoviceGDMLDetectorMessenger: use OpNoviceDetectorMessenger instead
+- rename class variables to start with f
+- test user-defined material properties with exceptions instead of assert
+
+October 7, 2021 D. Sawkey (OpNovice-V10-07-05)
+- OpNoviceDetectorConstruction - add tests of user-defined material
+    properties; add one material property using C-style arrays (as a test)
+
+July 19, 2021 V. Ivanchenko (OpNovice-V10-07-04)
+- OpNoviceDetectorConstruction - use modified interface to
+    G4MaterialPropertiesTable with spline flag
+
+June 9, 2021 H. Wenzel (OpNovice-V10-07-03)
+- add option to define detector via a gdml file
+- add outer world volume to avoid surfaces including world volume.
+
+May 21, 2021 D. Sawkey (OpNovice-V10-07-02)
+- fix incorrect material property name
+
+March 30, 2021 D. Sawkey (OpNovice-V10-07-01)
+- Excercise creating material property table element by element
+  (testing fix of bug 2313).
+
+February 24, 2021 D. Sawkey (OpNovice-V10-07-00)
+- Replace deprecated optical commands and parameters with new ones.
+
+November 1, 2020 D. Sawkey (OpNovice-V10-06-01)
+- Print out process statistics at end of run. Added EventAction and Run
+  classes for this.
+- Update macros, especially to run more particles. Update gui.mac
+- Migrate to new G4RunManagerFactory
+- Remove G4Timer
+- Use default random number generator
+- Apply clang-format style
+
+August 4, 2020 D. Sawkey (OpNovice-V10-06-00)
+- Add material properties using new interface with std::vectors
+
+October 29, 2019 D. Sawkey (OpNovice-V10-05-00)
+- Use G4OpticalPhysics and G4SteppingVerbose
+- remove unused surface parameters
+
+July 31, 2018 I. Hrivnacova (OpNovice-V10-04-02)
+- Macro review: 
+  - Added test for /OpNovice/phys/cerenkovMaxPhotons command at the end 
+    of OpNovice.in macro
+  - Updated README files
+
+May 17, 2018 J. Allison (OpNovice-V10-04-01)
+- Remove G4UI_USE and G4VIS_USE.
+- Move instantiation of G4UIExecutive to start of main.
+
+May 08, 2018 B. Morgan (OpNovice-V10-04-00)
+- Include G4Types before use of G4MULTITHREADED. For forward
+  compatibility with move to #defines over -D for G4 preprocessor
+  symbols.
+
+August 18, 2017 J.Allison (OpNovice-V10-03-02)
+- Fix gui.mac, which executed vis.mac (it should not!).
+
+Mar 22, 2017 P.Gumplinger (OpNovice-V10-03-00/OpNovice-V10-03-01)
+- exercise the new DAVIS LUT surface model
 
 Nov 02, 2016 L.Garnier (OpNovice-V10-02-01)
 - Remove icons.mac. Automatically include since interfaces-V10-02-07
@@ -95,10 +158,10 @@ October 25, 2013 P. Gumplinger (OpNovice-V09-06-07)
 - make MultiThread (MT) capable
 
 27 May 2013, I.Hrivnacova (OpNovice-V09-06-04)
-- Updated .README file
+- Updated .README file 
 
 27 May 2013, I.Hrivnacova (OpNovice-V09-06-03)
-- Apply Examples Coding Guidelines
+- Apply Examples Coding Guidelines 
   (data members/base class initialization)
 
 13 May 2013 P. Gumplinger (OpNovice-V09-06-02)
@@ -110,7 +173,7 @@ October 25, 2013 P. Gumplinger (OpNovice-V09-06-07)
 18 Dec 2012 I. Hrivnacova (OpNovice-V09-06-00)
 - Fixed CMake build: removed add_custom_target(..)
 
-17 Dec 2012 P. Gumplinger
+17 Dec 2012 P. Gumplinger 
 - move the example to /extended/optical/novice (from /novice/N06) and
   rename N06 to OpNovice
 
@@ -154,7 +217,7 @@ October 25, 2013 P. Gumplinger (OpNovice-V09-06-07)
 
 07th May 2008 J.Allison (exampleN06-V09-01-00)
 - Protected "/control/execute vis.mac" with G4VIS_USE flag.
-
+     
 30 Sept 2007 Peter Gumplinger (exampleN06-V09-00-00)
 - adjust to the G4Cerenkov process now being a G4VDiscreteProcess
 
@@ -182,9 +245,9 @@ October 18th 2006 J.Allison  (exampleN06-V08-01-00)
 
 16 May 2005 Peter Gumplinger (exampleN06-V07-00-01)
 - use SetProcessOrdering for theDecayProces
-
+     
 11 May 2005 Michel Maire (exampleN06-V07-00-00)
-- UI command cerenkovMaxPhotons available in Idle state only
+- UI command cerenkovMaxPhotons available in Idle state only 
 
 3rd May 2005 John Allison  (examples-V07-00-03)
 - Replaced vis manager with G4VisExecutive.
@@ -208,17 +271,17 @@ November 13, 2003 John Allison
 
 October 24, 2003 Michel Maire (exampleN06-V05-02-01)
 - PhysicsList: AddProcess(Bremsstrahlung,-1,3,3) ..etc..
-
+     
 October 06, 2003 Michel Maire (exampleN06-V05-02-00)
 - Cosmetic cleanup of material definition
 
 April 17, 2003 Peter Gumplinger (exampleN06-V05-00-03)
 - Changed OpWaterSurface to dielectric_dielectric in class
   ExN06DetectorConstruction
-
+     
 March 26, 2003 Michel Maire (exampleN06-V05-00-02)
 - G4PVPlacement in logical mother
-
+     
 Febuary 11, 2003 Michel Maire (exampleN06-V05-00-01)
 - Added a blank in steppingVerbose !
 
@@ -229,7 +292,7 @@ January 23, 2003 Michel Maire (exampleN06-V05-00-00)
 
 November 21, 2002 Peter Gumplinger (exampleN06-V04-01-02)
 - exampleN06.out output changed because of small change in G4Scintillation
-
+ 
 November 14, 2002 Peter Gumplinger (exampleN06-V04-01-01)
 - Reduced the scintillation photon yield to reduce the output size
 
@@ -253,7 +316,7 @@ June 17, 2000 John Allison  (exampleN06-V01-01-00)
 - Updated exampleN06.out for geant4-01-01-ref-06.
 
 16th April 1999 Hisaya Kurashige
-- Modified ExN06RunAction
+- Modified ExN06RunAction 
 - Modified ExN06PhysicsList::SetCuts
 
 21st August 1998 John Allison

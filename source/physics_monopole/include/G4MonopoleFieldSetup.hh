@@ -37,10 +37,10 @@
 // ------------------------------------------------------------
 //
 // G4MonopoleFieldSetup is responsible for setting up a magnetic field
-// and the ability to use it with two different equation of motions, 
-// one for monopoles and another for the rest of the particles. 
-// 
-// 
+// and the ability to use it with two different equation of motions,
+// one for monopoles and another for the rest of the particles.
+//
+//
 
 // =======================================================================
 // Created:  13 May 2010, B. Bozsogi
@@ -66,7 +66,7 @@ class G4EquationOfMotion;
 
 class G4MonopoleFieldSetup
 {
-public:  
+public:
   G4MonopoleFieldSetup();
   ~G4MonopoleFieldSetup();
 
@@ -90,10 +90,10 @@ private:
   static G4ThreadLocal G4MonopoleFieldSetup*  fgInstance; ///< this instance
 
   G4FieldManager*         fFieldManager;
-  G4MagneticField*        fMagneticField ; 
+  G4MagneticField*        fMagneticField ;
   G4ChordFinder*          fChordFinder;
   G4ChordFinder*          fUsualChordFinder ;
-  G4EquationOfMotion*     fDefaultEquation ; 
+  G4EquationOfMotion*     fDefaultEquation ;
   G4MagIntegratorStepper* fDefaultStepper ;
   G4ChordFinder*          fMonopoleChordFinder ;
   G4MonopoleEquation*     fMonopoleEquation ;

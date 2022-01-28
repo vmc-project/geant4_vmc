@@ -60,10 +60,7 @@ void TG4WorkerInitialization::WorkerRunStart() const
 
   TG4RunManager::Instance()->LateInitialize();
 #ifdef G4MULTITHREADED
-  TVirtualMCApplication::Instance()->BeginWorkerRun(); // deprecated
-#if (ROOT_VERSION_CODE >= ROOT_VERSION(6, 10, 0))
-  TVirtualMCApplication::Instance()->BeginRunOnWorker(); // new
-#endif
+  TVirtualMCApplication::Instance()->BeginRunOnWorker();
   // G4cout << "TG4WorkerInitialization::WorkerRunStart() end " << G4endl;
 #endif
 }
@@ -78,10 +75,7 @@ void TG4WorkerInitialization::WorkerRunEnd() const
 
 #ifdef G4MULTITHREADED
   G4AutoLock lm(&finishRunMutex);
-  TVirtualMCApplication::Instance()->FinishWorkerRun(); // deprecated
-#if (ROOT_VERSION_CODE >= ROOT_VERSION(6, 10, 0))
-  TVirtualMCApplication::Instance()->FinishRunOnWorker(); // new
-#endif
+  TVirtualMCApplication::Instance()->FinishRunOnWorker();
   lm.unlock();
 #endif
 
@@ -99,8 +93,6 @@ void TG4WorkerInitialization::WorkerStop() const
 
 #ifdef G4MULTITHREADED
   G4AutoLock lm(&stopWorkerMutex);
-  // TVirtualMCApplication::Instance()->FinishWorkerRun();  // deprecated
-  // TVirtualMCApplication::Instance()->FinishRunOnWorker(); // new
   delete TVirtualMCApplication::Instance();
   lm.unlock();
 #endif

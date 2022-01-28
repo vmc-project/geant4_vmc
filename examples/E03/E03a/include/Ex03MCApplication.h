@@ -50,8 +50,8 @@ class Ex03MCApplication : public TVirtualMCApplication
   void ReadEvent(Int_t i);
 
   virtual TVirtualMCApplication* CloneForWorker() const;
-  virtual void InitForWorker() const;
-  virtual void FinishWorkerRun() const;
+  virtual void InitOnWorker();
+  virtual void FinishRunOnWorker();
 
   virtual void ConstructGeometry();
   virtual void InitGeometry();

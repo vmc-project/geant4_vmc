@@ -32,6 +32,7 @@
 #include <G4SystemOfUnits.hh>
 #include <G4UnitsTable.hh>
 #include <G4VUserPhysicsList.hh>
+#include <G4Version.hh>
 
 #include <map>
 #include <set>
@@ -485,8 +486,16 @@ void TG4RegionsManager::DefineRegions()
   }
 
   // Create G4 range to energy converters
+#if G4VERSION_NUMBER == 1100
+  // Temporary work-around for a bug in G4VRangeToEnergyConverter
+  auto g4ConverterElePtr = new G4RToEConvForElectron();
+  auto g4ConverterGamPtr = new G4RToEConvForGamma();
+  auto& g4ConverterEle = *g4ConverterElePtr;
+  auto& g4ConverterGam = *g4ConverterGamPtr;
+#else
   G4RToEConvForElectron g4ConverterEle;
   G4RToEConvForGamma g4ConverterGam;
+#endif  
 
   // Get default range cut values from physics manager
   G4double defaultRangeCutEle =

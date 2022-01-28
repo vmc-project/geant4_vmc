@@ -242,7 +242,7 @@ TVirtualMCApplication* Ex03bMCApplication::CloneForWorker() const
 }
 
 //_____________________________________________________________________________
-void Ex03bMCApplication::InitForWorker() const
+void Ex03bMCApplication::InitOnWorker()
 {
   // cout << "Ex03bMCApplication::InitForWorker " << this << endl;
 
@@ -258,7 +258,7 @@ void Ex03bMCApplication::InitForWorker() const
 }
 
 //_____________________________________________________________________________
-void Ex03bMCApplication::FinishWorkerRun() const
+void Ex03bMCApplication::FinishRunOnWorker()
 {
   // cout << "Ex03bMCApplication::FinishWorkerRun: " << endl;
   if (fRootManager) {

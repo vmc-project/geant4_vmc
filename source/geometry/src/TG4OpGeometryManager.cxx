@@ -79,53 +79,99 @@ Double_t TG4OpGeometryManager::AddUnit(
   const G4String& propertyName, Double_t value) const
 {
   /// Add unit to a given property value and print a warning
-  /// if the property is not known to the VMC interface
+  /// if the property is not known to the VMC interface.
+  /// The properties are ordered as they appear in
+  /// Geant4 Book For Applcation Developers (Geant4 v11.0)
 
-  if (propertyName == "ABSLENGTH" || propertyName == "MIEHG" ||
-      propertyName == "RAYLEIGH" || propertyName == "WLSABSLENGTH") {
+  // clang-format off
+  if (propertyName == "ABSLENGTH" ||
+      propertyName == "RAYLEIGH" ||
+      propertyName == "WLSABSLENGTH" ||
+      propertyName == "WLSABSLENGTH2" ||
+      propertyName == "MIEHG") {
     return value * TG4G3Units::Length();
   }
 
   if (propertyName == "BIRKS_CONSTANT") {
+
     return value * TG4G3Units::Length() / TG4G3Units::Energy();
   }
 
-  if (propertyName == "SCINTILLATIONYIELD") {
+  if (propertyName == "ALPHASCINTILLATIONYIELD" ||
+      propertyName == "DEUTERONSCINTILLATIONYIELD" ||
+      propertyName == "ELECTRONSCINTILLATIONYIELD" ||
+      propertyName == "IONSCINTILLATIONYIELD" ||
+      propertyName == "PROTONSCINTILLATIONYIELD" ||
+      propertyName == "SCINTILLATIONYIELD" ||
+      propertyName == "TRITONSCINTILLATIONYIELD") {
+
     return value / TG4G3Units::Energy();
   }
 
-  if (propertyName == "FASTTIMECONSTANT" ||
-      propertyName == "FASTSCINTILLATIONRISETIME" ||
-      propertyName == "SLOWTIMECONSTANT" ||
-      propertyName == "SLOWSCINTILLATIONRISETIME" ||
-      propertyName == "WLSTIMECONSTANT") {
+  if (propertyName == "SCINTILLATIONRISETIME1" ||
+      propertyName == "SCINTILLATIONRISETIME2" ||
+      propertyName == "SCINTILLATIONRISETIME3" ||
+      propertyName == "SCINTILLATIONTIMECONSTANT1" ||
+      propertyName == "SCINTILLATIONTIMECONSTANT2" ||
+      propertyName == "SCINTILLATIONTIMECONSTANT3" ||
+      propertyName == "WLSTIMECONSTANT" ||
+      propertyName == "WLSTIMECONSTANT2")  {
+
     return value * TG4G3Units::Time();
   }
 
-  if (propertyName == "GROUPVEL") {
-    // use the same convention as in Root for velocity of light
-    return value * m / s;
+  if (propertyName == "ISOTHERMAL_COMPRESSIBILITY" ) {
+    return value * std::pow(TG4G3Units::Length(), 3) / TG4G3Units::Energy();
   }
 
-  if (propertyName == "BACKSCATTERCONSTANT" || propertyName == "EFFICIENCY" ||
-      propertyName == "FASTCOMPONENT" || propertyName == "IMAGINARYRINDEX" ||
-      propertyName == "MIEHG_BACKWARD" || propertyName == "MIEHG_FORWARD" ||
-      propertyName == "MIEHG_FORWARD_RATIO" || propertyName == "REALRINDEX" ||
-      propertyName == "REFLECTIVITY" || propertyName == "RESOLUTIONSCALE" ||
-      propertyName == "RINDEX" || propertyName == "SLOWCOMPONENT" ||
+  if (propertyName == "ALPHASCINTILLATIONYIELD1" ||
+      propertyName == "ALPHASCINTILLATIONYIELD2" ||
+      propertyName == "ALPHASCINTILLATIONYIELD3" ||
+      propertyName == "DEUTERONCINTILLATIONYIELD1" ||
+      propertyName == "DEUTERONCINTILLATIONYIELD2" ||
+      propertyName == "DEUTERONCINTILLATIONYIELD3" ||
+      propertyName == "ELECTRONINTILLATIONYIELD1" ||
+      propertyName == "ELECTRONINTILLATIONYIELD2" ||
+      propertyName == "ELECTRONINTILLATIONYIELD3" ||
+      propertyName == "IONSCINTILLATIONYIELD1" ||
+      propertyName == "IONSCINTILLATIONYIELD2" ||
+      propertyName == "IONSCINTILLATIONYIELD3" ||
+      propertyName == "PROTONSCINTILLATIONYIELD1" ||
+      propertyName == "PROTONSCINTILLATIONYIELD2" ||
+      propertyName == "PROTONSCINTILLATIONYIELD3" ||
+      propertyName == "RESOLUTIONSCALE" ||
+      propertyName == "SCINTILLATIONCOMPONENT1" ||
+      propertyName == "SCINTILLATIONCOMPONENT2" ||
+      propertyName == "SCINTILLATIONCOMPONENT3" ||
+      propertyName == "SCINTILLATIONYIELD1" ||
+      propertyName == "SCINTILLATIONYIELD2" ||
+      propertyName == "SCINTILLATIONYIELD3" ||
+      propertyName == "TRITONSCINTILLATIONYIELD1" ||
+      propertyName == "TRITONSCINTILLATIONYIELD2" ||
+      propertyName == "TRITONSCINTILLATIONYIELD3" ||
+      propertyName == "RS_SCALE_FACTOR" ||
+      propertyName == "WLSCOMPONENT" ||
+      propertyName == "WLSCOMPONENT2" ||
+      propertyName == "WLSMEANNUMBERPHOTONS" ||
+      propertyName == "WLSMEANNUMBERPHOTONS2" ||
+      propertyName == "MIEHG_BACKWARD" ||
+      propertyName == "MIEHG_FORWARD" ||
+      propertyName == "MIEHG_FORWARD_RATIO" ||
+      propertyName == "BACKSCATTERCONSTANT" ||
+      propertyName == "EFFICIENCY" ||
+      propertyName == "GROUPVEL" ||  // Check
+      propertyName == "IMAGINARYRINDEX" ||
+      propertyName == "REFLECTIVITY" ||
+      propertyName == "REALRINDEX" ||
+      propertyName == "RINDEX" ||
       propertyName == "SPECULARLOBECONSTANT" ||
       propertyName == "SPECULARSPIKECONSTANT" ||
-      propertyName == "TRANSMITTANCE" || propertyName == "WLSCOMPONENT" ||
-      propertyName == "WLSMEANNUMBERPHOTONS" || propertyName == "YIELDRATIO" ||
-      propertyName == "PROTONSCINTILLATIONYIELD" ||
-      propertyName == "DEUTERONSCINTILLATIONYIELD" ||
-      propertyName == "TRITONSCINTILLATIONYIELD" ||
-      propertyName == "ALPHASCINTILLATIONYIELD" ||
-      propertyName == "IONSCINTILLATIONYIELD" ||
-      propertyName == "ELECTRONSCINTILLATIONYIELD") {
+      propertyName == "SURFACEROUGHNESS" ||
+      propertyName == "TRANSMITTANCE") {
 
     return value;
   }
+  // clang-format on
 
   TString text = "Unknown material property ";
   text += propertyName.data();
@@ -141,7 +187,8 @@ Double_t TG4OpGeometryManager::AddUnit(
 
 //_____________________________________________________________________________
 void TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
-  Float_t* ppckov, Float_t* absco, Float_t* effic, Float_t* rindex)
+  Float_t* ppckov, Float_t* absco, Float_t* effic, Float_t* rindex,
+  Bool_t aspline, Bool_t rspline)
 {
   ///
   ///  Geant3 desription:
@@ -166,7 +213,7 @@ void TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
   G4double* efficDbl = fGeometryServices->CreateG4doubleArray(effic, npckov);
   G4double* rindexDbl = fGeometryServices->CreateG4doubleArray(rindex, npckov);
 
-  SetCerenkov(itmed, npckov, ppckovDbl, abscoDbl, efficDbl, rindexDbl);
+  SetCerenkov(itmed, npckov, ppckovDbl, abscoDbl, efficDbl, rindexDbl, aspline, rspline);
 
   delete[] ppckovDbl;
   delete[] abscoDbl;
@@ -176,7 +223,8 @@ void TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
 
 //_____________________________________________________________________________
 void TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
-  Double_t* ppckov, Double_t* absco, Double_t* effic, Double_t* rindex)
+  Double_t* ppckov, Double_t* absco, Double_t* /*effic*/, Double_t* rindex,
+  Bool_t aspline, Bool_t rspline)
 {
   ///
   ///  Geant3 desription:
@@ -228,17 +276,18 @@ void TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
   }
 
   // add material properties into the table
-  table->AddProperty("ABSLENGTH", ppckov2, absco2, npckov);
+  table->AddProperty("ABSLENGTH", ppckov2, absco2, npckov, false, aspline);
   // used in G4OpAbsorption process
-  table->AddProperty("EFFICIENCY", ppckov2, effic, npckov);
-  // used in G4OpBoundary process
+
+  //table->AddProperty("EFFICIENCY", ppckov2, effic, npckov);
+  // EFFICIENCY must be set to optical surfaces
 
   // Set RINDEX only if defined with non zero values.
   // The zero value is a Geant3 convention to define material as metal which was
   // not adopted in Geant4, where 0 values cause unpredicatable behavior in
   // G4OpBoundary process
   if (isRindex) {
-    table->AddProperty("RINDEX", ppckov2, rindex, npckov);
+    table->AddProperty("RINDEX", ppckov2, rindex, npckov, false, rspline);
     // used in G4Cerenkov, G4OpRayleigh, G4OpBoundary
   }
 
@@ -259,11 +308,10 @@ void TG4OpGeometryManager::DefineOpSurface(const char* name,
 {
   /// Define the optical surface
 
-  G4OpticalSurface* surface = new G4OpticalSurface(name);
-  surface->SetModel(fGeometryServices->SurfaceModel(model));
-  surface->SetType(fGeometryServices->SurfaceType(surfaceType));
-  surface->SetFinish(fGeometryServices->SurfaceFinish(surfaceFinish));
-  surface->SetSigmaAlpha(sigmaAlpha);
+  auto g4Model = fGeometryServices->SurfaceModel(model);
+  auto g4Type = fGeometryServices->SurfaceType(surfaceType);
+  auto g4Finish = fGeometryServices->SurfaceFinish(surfaceFinish);
+  auto surface = new G4OpticalSurface(name, g4Model, g4Finish, g4Type, sigmaAlpha);
 
   // Store the surface in the map
   (*fOpSurfaceMap)[name] = surface;
@@ -336,7 +384,8 @@ void TG4OpGeometryManager::SetSkinSurface(
 
 //_____________________________________________________________________________
 void TG4OpGeometryManager::SetMaterialProperty(Int_t itmed,
-  const char* propertyName, Int_t np, Double_t* pp, Double_t* values)
+  const char* propertyName, Int_t np, Double_t* pp, Double_t* values,
+  Bool_t createNewKey, Bool_t spline)
 {
   /// Set the material property specified by propertyName to the tracking medium
 
@@ -367,7 +416,7 @@ void TG4OpGeometryManager::SetMaterialProperty(Int_t itmed,
     pp2[i] = pp2[i] * TG4G3Units::Energy();
     val2[i] = AddUnit(propertyName, values[i]);
   }
-  table->AddProperty(propertyName, pp2, val2, np);
+  table->AddProperty(propertyName, pp2, val2, np, createNewKey, spline);
 
   delete[] pp2;
   delete[] val2;
@@ -425,7 +474,8 @@ void TG4OpGeometryManager::SetMaterialProperty(
 
 //_____________________________________________________________________________
 void TG4OpGeometryManager::SetMaterialProperty(const char* surfaceName,
-  const char* propertyName, Int_t np, Double_t* pp, Double_t* values)
+  const char* propertyName, Int_t np, Double_t* pp, Double_t* values,
+  Bool_t createNewKey, Bool_t spline)
 {
   /// Set the material property specified by propertyName to the optical surface
 
@@ -455,7 +505,7 @@ void TG4OpGeometryManager::SetMaterialProperty(const char* surfaceName,
     pp2[i] = pp2[i] * TG4G3Units::Energy();
     val2[i] = AddUnit(propertyName, values[i]);
   }
-  table->AddProperty(propertyName, pp2, val2, np);
+  table->AddProperty(propertyName, pp2, val2, np, createNewKey, spline);
   delete[] pp2;
   delete[] val2;
 

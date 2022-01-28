@@ -728,8 +728,8 @@ Bool_t TG4MCGeometry::GetShape(
   G4String path = volumePath.Data();
   G4int last1 = path.rfind('/');
   G4int last2 = path.rfind('_');
-  G4String volName = path(last1 + 1, last2 - last1 - 1);
-  G4String copyNoStr = path(last2 + 1, path.length() - last2);
+  G4String volName = path.substr(last1 + 1, last2 - last1 - 1);
+  G4String copyNoStr = path.substr(last2 + 1, path.length() - last2);
   std::istringstream in(copyNoStr);
   G4int copyNo;
   in >> copyNo;

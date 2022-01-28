@@ -354,7 +354,7 @@ void TG4DetConstructionMessenger::SetNewValue(
       fIsZeroFieldCmd->GetNewBoolValue(newValues));
   }
   else if (command == fSeparatorCmd) {
-    char separator = newValues(0);
+    char separator = newValues[0];
     TG4GeometryServices::Instance()->SetG3toG4Separator(separator);
   }
   else if (command == fPrintMaterialsCmd) {

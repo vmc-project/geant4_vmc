@@ -28,6 +28,7 @@
 #include <TMCProcess.h>
 #include <TString.h>
 
+#include <G4Version.hh>
 #include <globals.hh>
 
 #include <set>
@@ -109,6 +110,11 @@ class TG4PhysicsManager : public TG4Verbose
   G4double GetCutForProton() const;
   G4bool IsOpBoundaryProcess() const;
 
+#if G4VERSION_NUMBER == 1100
+  void StoreCerenkovMaxBetaChangeValue();
+  void ApplyCerenkovMaxBetaChangeValue();
+#endif
+
  private:
   /// Not implemented
   TG4PhysicsManager(const TG4PhysicsManager& right);
@@ -121,7 +127,8 @@ class TG4PhysicsManager : public TG4Verbose
     G4int itmed, TG4G3Control control, TG4G3ControlValue parval);
   G4ParticleDefinition* GetParticleDefinition(G4int pdgEncoding) const;
 
-  G4VProcess* FindProcess(G4String processName) const;
+  G4VProcess* GetProcess(G4ProcessManager* processManager,
+    G4String subName) const;
 
   void SetProcessActivation(
     G4ProcessManager* processManager, G4int processId, G4bool activation);
@@ -165,6 +172,11 @@ class TG4PhysicsManager : public TG4Verbose
 
   /// optical boundary process
   G4OpBoundaryProcess* fOpBoundaryProcess;
+
+#if G4VERSION_NUMBER == 1100
+  /// temporary work-around for bug in Cerenkov
+  G4double fCerenkovMaxBetaChange = 0.;
+#endif
 };
 
 // inline methods

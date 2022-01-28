@@ -38,7 +38,7 @@
 //
 // ClassName:   G4Monopole
 //
-// Authors:   21.03.05  V.Ivanchenko 
+// Authors:   21.03.05  V.Ivanchenko
 //
 // Modified:
 //
@@ -66,21 +66,21 @@ private:
 
   G4Monopole(
        const G4String&     aName,        G4double            mass,
-       G4double            width,        G4double            charge,   
-       G4int               iSpin,        G4int               iParity,    
-       G4int               iConjugation, G4int               iIsospin,   
+       G4double            width,        G4double            charge,
+       G4int               iSpin,        G4int               iParity,
+       G4int               iConjugation, G4int               iIsospin,
        G4int               iIsospin3,    G4int               gParity,
-       const G4String&     pType,        G4int               lepton,      
+       const G4String&     pType,        G4int               lepton,
        G4int               baryon,       G4int               encoding,
        G4bool              stable,       G4double            lifetime,
        G4DecayTable        *decaytable );
 
   virtual ~G4Monopole();
 
-public: 
-  
-  static G4Monopole* MonopoleDefinition(G4double mass = 100.*CLHEP::GeV, 
-                                        G4double magCharge = 1.0, 
+public:
+
+  static G4Monopole* MonopoleDefinition(G4double mass = 100.*CLHEP::GeV,
+                                        G4double magCharge = 1.0,
                                         G4double elCharge  = 0.0);
 
   static G4Monopole* Monopole();

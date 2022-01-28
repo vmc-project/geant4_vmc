@@ -43,6 +43,7 @@ class Ex06DetectorConstructionOld : public TObject
 
  private:
   // data members
+  Double_t fWorldSize;   ///< The world size
   Double_t fExpHallSize; ///< The experimental hall size
   Double_t fTankSize;    ///< The tank size
   Double_t fBubbleSize;  ///< The bubble size

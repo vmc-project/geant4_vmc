@@ -183,7 +183,7 @@ TVirtualMCApplication* Ex06MCApplication::CloneForWorker() const
 }
 
 //_____________________________________________________________________________
-void Ex06MCApplication::InitForWorker() const
+void Ex06MCApplication::InitOnWorker()
 {
   // cout << "Ex06MCApplication::InitForWorker " << this << endl;
 
@@ -333,7 +333,9 @@ void Ex06MCApplication::Stepping()
   if ((gMC->TrackCharge() != 0.) && (gMC->IsTrackEntering())) {
     // 1 keV
     Double_t energy = 1e-06;
-    TLorentzVector momentum(energy, 0., 0., energy);
+    // TLorentzVector momentum(energy, 0., 0., energy);
+    // workaround for a problem in Geant4 11 in G4OpBoundaryProcess 
+    TLorentzVector momentum(energy, 0.1*energy, 0.1*energy, 0.98994949*energy);
     GenerateFeedback(1, momentum);
   }
 

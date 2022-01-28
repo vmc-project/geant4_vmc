@@ -49,7 +49,7 @@ class Ex06MCApplication : public TVirtualMCApplication
   void RunMC(Int_t nofEvents);
 
   virtual TVirtualMCApplication* CloneForWorker() const;
-  virtual void InitForWorker() const;
+  virtual void InitOnWorker();
   virtual void Merge(TVirtualMCApplication* localMCApplication);
 
   virtual void ConstructGeometry();

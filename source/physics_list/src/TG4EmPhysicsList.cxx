@@ -55,7 +55,7 @@ G4bool TG4EmPhysicsList::IsAvailableSelection(const G4String& selection)
   G4String checkSelection = selection;
   checkSelection += " ";
 
-  return available.contains(checkSelection);
+  return G4StrUtil::contains(available, checkSelection);
 }
 
 //

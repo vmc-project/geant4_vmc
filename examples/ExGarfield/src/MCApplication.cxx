@@ -219,7 +219,7 @@ ClassImp(VMC::ExGarfield::MCApplication)
   }
 
   //_____________________________________________________________________________
-  void MCApplication::InitForWorker() const
+  void MCApplication::InitOnWorker()
   {
     // cout << "MCApplication::InitForWorker " << this << endl;
 
@@ -234,7 +234,7 @@ ClassImp(VMC::ExGarfield::MCApplication)
   }
 
   //_____________________________________________________________________________
-  void MCApplication::FinishWorkerRun() const
+  void MCApplication::FinishRunOnWorker()
   {
     // cout << "MCApplication::FinishWorkerRun: " << endl;
     if (fRootManager) {

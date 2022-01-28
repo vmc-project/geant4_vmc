@@ -23,7 +23,6 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-// $Id: OpNoviceActionInitialization.hh 68058 2013-03-13 14:47:43Z gcosmo $
 //
 /// \file OpNoviceActionInitialization.hh
 /// \brief Definition of the OpNoviceActionInitialization class
@@ -34,19 +33,15 @@
 #include "G4VUserActionInitialization.hh"
 #include "globals.hh"
 
-/// Action initialization class.
-///
-
 class OpNoviceActionInitialization : public G4VUserActionInitialization
 {
-  public:
-    OpNoviceActionInitialization(G4bool useG4Root);
-    virtual ~OpNoviceActionInitialization();
+ public:
+  OpNoviceActionInitialization(G4bool useG4Root);
+  ~OpNoviceActionInitialization();
 
-    virtual void BuildForMaster() const;
-    virtual void Build() const;
+  void BuildForMaster() const override;
+  void Build() const override;
 
-    virtual G4VSteppingVerbose* InitializeSteppingVerbose() const;
 
   private:
     // Added for G4Root

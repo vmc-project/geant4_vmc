@@ -240,7 +240,7 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
   //
   // Visualization attributes
   //
-  worldLV->SetVisAttributes(G4VisAttributes::Invisible);
+  worldLV->SetVisAttributes(G4VisAttributes::GetInvisible());
 
   G4VisAttributes* simpleBoxVisAtt =
     new G4VisAttributes(G4Colour(1.0, 1.0, 1.0));
