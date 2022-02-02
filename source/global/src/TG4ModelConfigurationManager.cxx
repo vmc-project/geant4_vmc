@@ -34,6 +34,7 @@
 namespace
 {
 // Mutex to lock creating regions
+G4Mutex setRegionsNamesMutex = G4MUTEX_INITIALIZER;
 G4Mutex createRegionsMutex = G4MUTEX_INITIALIZER;
 } // namespace
 #endif
@@ -83,6 +84,9 @@ void TG4ModelConfigurationManager::SetRegionsNames()
   /// configurations. This conversion is needed to be consistent with regions
   /// defined with special cuts, which are defined per materiials.
 
+#ifdef G4MULTITHREADED
+  G4AutoLock lm(&setRegionsNamesMutex);
+#endif
   TG4MediumMap* mediumMap = TG4GeometryServices::Instance()->GetMediumMap();
 
   ModelConfigurationVector::iterator it;
@@ -135,6 +139,9 @@ void TG4ModelConfigurationManager::SetRegionsNames()
       G4cout << G4endl;
     }
   }
+#ifdef G4MULTITHREADED
+  lm.unlock();
+#endif
 }
 
 //
@@ -156,13 +163,13 @@ void TG4ModelConfigurationManager::CreateRegions()
   // Return if regions were already created
   if (fCreateRegionsDone) return;
 
+  // Generate new regions names based on material names
+  SetRegionsNames();
+
 #ifdef G4MULTITHREADED
   G4AutoLock lm(&createRegionsMutex);
   if (! fCreateRegionsDone) {
 #endif
-    // Generate new regions names based on material names
-    SetRegionsNames();
-
     // Loop over logical volumes
     G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
     for (G4int i = 0; i < G4int(lvStore->size()); i++) {
