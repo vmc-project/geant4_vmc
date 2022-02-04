@@ -19,6 +19,5 @@ void load_g3a()
   g3libs();
 
   // Load this example library
-  gSystem->Load("libmtroot");
   gSystem->Load("libvmc_E03a");
 }

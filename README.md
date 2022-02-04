@@ -5,7 +5,7 @@ Geant4 VMC
 Geant4 VMC implements the Virtual Monte Carlo (VMC) for Geant4, see more: <br/>
 [https://root.cern.ch/vmc](https://root.cern.ch/vmc)
 
-It also includes G4Root and MTRoot packages, which are independent from Geant4 VMC and can be build and used stand-alone.
+It also includes the G4Root package, which is independent from Geant4 VMC and can be build and used stand-alone.
 
 [![License: GPL v2](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
@@ -16,7 +16,6 @@ It also includes G4Root and MTRoot packages, which are independent from Geant4 V
       history    - the tags history
       source     - Geant4 VMC source code
       g4root     - G4Root package
-      mtroot     - MTRoot package
       examples   - examples demonstrating use of VMC
 
 ## Installation
@@ -75,19 +74,18 @@ $ make -jN VERBOSE=1
 $ make install
 ```
 
-   This will build geant4_vmc, g4root and mtroot packages. For VMC examples see VMC
+   This will build geant4_vmc and g4root packages. For VMC examples see VMC
    examples installation page.
 
 ## Build Options
 
-Geant4 VMC includes G4Root and MTRoot packages, which are independent from Geant4 VMC
+Geant4 VMC includes the G4Root package, which is independent from Geant4 VMC
 and can be build and used stand-alone. Use of G4Root, VGM, Geant4 G3toG4, UI and VIS
 packages in Geant4 VMC library is optional and can be switched on/off during CMake build.
 
 Overview of available options and their default values:
 
       Geant4VMC_BUILD_G4Root       Build G4Root        ON
-      Geant4VMC_BUILD_MTRoot       Build MTRoot        ON
       Geant4VMC_BUILD_Geant4VMC    Build Geant4VMC     ON
       Geant4VMC_BUILD_EXAMPLES     Build VMC examples  ON
 

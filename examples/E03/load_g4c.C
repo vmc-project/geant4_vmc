@@ -19,7 +19,6 @@ void load_g4c()
   g4libs();
 
   // Load this example library
-  gSystem->Load("libmtroot");
   gSystem->Load("libvmc_E03c");
 
   // Load library with a user run configuration

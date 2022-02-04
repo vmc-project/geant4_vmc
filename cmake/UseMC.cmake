@@ -99,19 +99,6 @@ if(VMC_WITH_Multi)
   set(MC_PREFIX "multi")
 endif(VMC_WITH_Multi)
 
-# MTRoot (optional)
-if (VMC_WITH_MTRoot)
-  # MTRoot
-  if (MTRoot_FOUND)
-     # build outside Geant4VMC
-    set(MCPackages_LIBRARIES ${MTRoot_LIBRARIES} ${MCPackages_LIBRARIES})
-  else()
-     # build inside Geant4VMC
-     # includes are already defined
-     set(MCPackages_LIBRARIES ${MCPackages_LIBRARIES} mtroot)
-  endif(MTRoot_FOUND)
-endif(VMC_WITH_MTRoot)
-
 # Finally add Root libraries
 set(MCPackages_LIBRARIES ${MCPackages_LIBRARIES} ${ROOT_LIBRARIES})
 
