@@ -14,7 +14,6 @@
 # I. Hrivnacova, 26/02/2014
 
 #---Options---------------------------------------------------------------------
-option(VMC_WITH_MTRoot      "Build with MTRoot" ON)
 option(VMC_INSTALL_EXAMPLES "Install examples libraries and programs" ON)
 option(BUILD_SHARED_LIBS    "Build the dynamic libraries" ON)
 
@@ -22,6 +21,11 @@ option(BUILD_SHARED_LIBS    "Build the dynamic libraries" ON)
 
 # ROOT (required)
 find_package(ROOT CONFIG REQUIRED)
+# Cannot mix VMC standalone and vmc in ROOT (deprecated)
+if(ROOT_vmc_FOUND)
+  message(FATAL_ERROR
+          "Cannot use VMC standalone with ROOT built with vmc.")
+endif()
 include(${ROOT_USE_FILE})
 set (ROOT_LIBRARIES ${ROOT_LIBRARIES} -lEG -lGeom)
 
