@@ -155,10 +155,6 @@ void g4libs()
   cout << "Loading geant4vmc library ..." << endl;
   gSystem->Load("libgeant4vmc");
 
-  // mtroot library (make optional)
-  cout << "Loading mtroot library ..." << endl;
-  gSystem->Load("libmtroot");
-
   // initialize Root threading
   if ( isMT() ) {
     TThread::Initialize();

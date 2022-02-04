@@ -23,7 +23,7 @@ if [ ! -d g4root ]; then
   exit 1;
 fi
 
-for DIR in examples g4root mtroot source
+for DIR in examples g4root source
 do
   echo "... processing directory $DIR"
   for FILE in `find $DIR -iname "*.h" -o -iname "*.icc" -o -iname "*.cxx"`
