@@ -20,6 +20,7 @@
 #include "TG4TrackManager.h"
 #include "TG4TrackingAction.h"
 
+#include <G4Version.hh>
 #if G4VERSION_NUMBER == 1100
 // Temporary work-around for bug in Cerenkov
 #include "TG4PhysicsManager.h"
