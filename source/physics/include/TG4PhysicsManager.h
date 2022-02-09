@@ -127,8 +127,8 @@ class TG4PhysicsManager : public TG4Verbose
     G4int itmed, TG4G3Control control, TG4G3ControlValue parval);
   G4ParticleDefinition* GetParticleDefinition(G4int pdgEncoding) const;
 
-  G4VProcess* GetProcess(G4ProcessManager* processManager,
-    G4String subName) const;
+  G4VProcess* GetProcess(
+    G4ProcessManager* processManager, G4String subName) const;
 
   void SetProcessActivation(
     G4ProcessManager* processManager, G4int processId, G4bool activation);

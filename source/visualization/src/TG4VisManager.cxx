@@ -145,8 +145,8 @@ G4bool TG4VisManager::CaseInsensitiveEqual(
 
   G4String str1Cpy(string1);
   G4String str2Cpy(string2);
-  std::transform(str1Cpy.begin(), str1Cpy.end(), str1Cpy.begin(), ::tolower );
-  std::transform(str2Cpy.begin(), str2Cpy.end(), str2Cpy.begin(), ::tolower );
+  std::transform(str1Cpy.begin(), str1Cpy.end(), str1Cpy.begin(), ::tolower);
+  std::transform(str2Cpy.begin(), str2Cpy.end(), str2Cpy.begin(), ::tolower);
   return (str1Cpy == str2Cpy);
 }
 

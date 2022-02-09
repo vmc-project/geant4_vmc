@@ -213,7 +213,8 @@ void TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
   G4double* efficDbl = fGeometryServices->CreateG4doubleArray(effic, npckov);
   G4double* rindexDbl = fGeometryServices->CreateG4doubleArray(rindex, npckov);
 
-  SetCerenkov(itmed, npckov, ppckovDbl, abscoDbl, efficDbl, rindexDbl, aspline, rspline);
+  SetCerenkov(
+    itmed, npckov, ppckovDbl, abscoDbl, efficDbl, rindexDbl, aspline, rspline);
 
   delete[] ppckovDbl;
   delete[] abscoDbl;
@@ -279,7 +280,7 @@ void TG4OpGeometryManager::SetCerenkov(Int_t itmed, Int_t npckov,
   table->AddProperty("ABSLENGTH", ppckov2, absco2, npckov, false, aspline);
   // used in G4OpAbsorption process
 
-  //table->AddProperty("EFFICIENCY", ppckov2, effic, npckov);
+  // table->AddProperty("EFFICIENCY", ppckov2, effic, npckov);
   // EFFICIENCY must be set to optical surfaces
 
   // Set RINDEX only if defined with non zero values.
@@ -311,7 +312,8 @@ void TG4OpGeometryManager::DefineOpSurface(const char* name,
   auto g4Model = fGeometryServices->SurfaceModel(model);
   auto g4Type = fGeometryServices->SurfaceType(surfaceType);
   auto g4Finish = fGeometryServices->SurfaceFinish(surfaceFinish);
-  auto surface = new G4OpticalSurface(name, g4Model, g4Finish, g4Type, sigmaAlpha);
+  auto surface =
+    new G4OpticalSurface(name, g4Model, g4Finish, g4Type, sigmaAlpha);
 
   // Store the surface in the map
   (*fOpSurfaceMap)[name] = surface;

@@ -495,7 +495,7 @@ void TG4RegionsManager::DefineRegions()
 #else
   G4RToEConvForElectron g4ConverterEle;
   G4RToEConvForGamma g4ConverterGam;
-#endif  
+#endif
 
   // Get default range cut values from physics manager
   G4double defaultRangeCutEle =

@@ -88,7 +88,7 @@ void TG4EventAction::BeginOfEventAction(const G4Event* event)
 #if G4VERSION_NUMBER == 1100
   // Temporary work-around for bug in Cerenkov
   static G4ThreadLocal auto applyCerenkovFix = true;
-  if ( applyCerenkovFix ) {
+  if (applyCerenkovFix) {
     TG4PhysicsManager::Instance()->ApplyCerenkovMaxBetaChangeValue();
     applyCerenkovFix = false;
   }

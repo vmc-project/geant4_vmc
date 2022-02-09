@@ -29,7 +29,6 @@ G4Mutex createBiasingOperatorMutex = G4MUTEX_INITIALIZER;
 } // namespace
 #endif
 
-
 //_____________________________________________________________________________
 TG4BiasingManager::TG4BiasingManager(
   const G4String& name, const G4String& availableModels)

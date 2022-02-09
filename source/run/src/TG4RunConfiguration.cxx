@@ -95,7 +95,7 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
 
   G4String g4SpecialProcess(specialProcess.Data());
 
-  if ( G4StrUtil::contains(g4SpecialProcess, "specialControls")) {
+  if (G4StrUtil::contains(g4SpecialProcess, "specialControls")) {
     fSpecialControls = true;
     // remove "specialControls" from the string passsed to special physics list
     g4SpecialProcess.erase(g4SpecialProcess.find("specialControls"), 15);

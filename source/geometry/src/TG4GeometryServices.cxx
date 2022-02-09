@@ -314,7 +314,7 @@ G4OpticalSurfaceModel TG4GeometryServices::SurfaceModel(
     case kLUT:        return LUT;
     case kDAVIS:      return DAVIS;
     case kdichroic:   return dichroic;
-  // clang-format on
+      // clang-format on
     default:
       TG4Globals::Warning("TG4GeometryServices", "SurfaceModel",
         "Unknown optical surface model, return Glisur.");
@@ -336,7 +336,7 @@ G4SurfaceType TG4GeometryServices::SurfaceType(EMCOpSurfaceType surfType) const
     case kDielectric_dichroic:    return dielectric_dichroic;
     case kFirsov:                 return firsov;
     case kXray:                   return x_ray;
-  // clang-format on
+      // clang-format on
     default:
       TG4Globals::Warning("TG4GeometryServices", "SurfaceType",
         "Unknown optical surface type, return dielectric_metal.");
@@ -398,7 +398,7 @@ G4OpticalSurfaceFinish TG4GeometryServices::SurfaceFinish(
     case kPolishedESRGrease_LUT:  return PolishedESRGrease_LUT;
     //
     case kDetector_LUT:           return Detector_LUT;
-  // clang-format on
+      // clang-format on
     default:
       TG4Globals::Warning("TG4GeometryServices", "SurfaceFinish",
         "Unknown optical surface finish, return polished.");

@@ -168,7 +168,7 @@ void TG4ModelConfigurationManager::CreateRegions()
 
 #ifdef G4MULTITHREADED
   G4AutoLock lm(&createRegionsMutex);
-  if (! fCreateRegionsDone) {
+  if (!fCreateRegionsDone) {
 #endif
     // Loop over logical volumes
     G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
@@ -203,7 +203,7 @@ void TG4ModelConfigurationManager::CreateRegions()
 
       if (!region) {
         region = new G4Region(materialName);
-  
+
         if (VerboseLevel() > 1) {
           G4cout << "Created region " << region->GetName() << region << G4endl;
         }

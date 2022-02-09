@@ -664,7 +664,7 @@ void TGeant4::SetMaterialProperty(
 //_____________________________________________________________________________
 void TGeant4::SetMaterialProperty(const char* surfaceName,
   const char* propertyName, Int_t np, Double_t* pp, Double_t* values,
-   Bool_t createNewKey, Bool_t spline)
+  Bool_t createNewKey, Bool_t spline)
 {
   /// Set the material property specified by propertyName to the optical surface
 

@@ -37,9 +37,9 @@
 
 #if G4VERSION_NUMBER == 1100
 // Temporary work-around for bug in Cerenkov
-#include <G4OpticalParameters.hh>
-#include <G4Electron.hh>
 #include <G4Cerenkov.hh>
+#include <G4Electron.hh>
+#include <G4OpticalParameters.hh>
 #endif
 
 #include <TDatabasePDG.h>
@@ -220,8 +220,8 @@ G4ParticleDefinition* TG4PhysicsManager::GetParticleDefinition(
 }
 
 //_____________________________________________________________________________
-G4VProcess* TG4PhysicsManager::GetProcess(G4ProcessManager* processManager,
-  G4String subName) const
+G4VProcess* TG4PhysicsManager::GetProcess(
+  G4ProcessManager* processManager, G4String subName) const
 {
   /// Find the process in the particle process manager which name contains
   /// subName
@@ -339,12 +339,13 @@ void TG4PhysicsManager::SetSpecialCutsActivation()
       // get the special cut process (if it was instantiated)
       G4VProcess* process = GetProcess(processManager, "specialCut");
       if (process) {
-        processManager->SetProcessActivation(process, (*isCutVector)[particleWSP]);
+        processManager->SetProcessActivation(
+          process, (*isCutVector)[particleWSP]);
       }
       else {
         TG4Globals::Warning("TG4PhysicsManager", "SetSpecialCutsActivation",
-          "The special cut process for " + TString(particle->GetParticleName()) +
-          " is not defined");
+          "The special cut process for " +
+            TString(particle->GetParticleName()) + " is not defined");
       }
     }
   }
@@ -794,27 +795,33 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus()
 //_____________________________________________________________________________
 void TG4PhysicsManager::StoreCerenkovMaxBetaChangeValue()
 {
-// Temporary work-around for bug in Cerenkov in Geant4 11.0
-  fCerenkovMaxBetaChange = G4OpticalParameters::Instance()->GetCerenkovMaxBetaChange();
+  // Temporary work-around for bug in Cerenkov in Geant4 11.0
+  fCerenkovMaxBetaChange =
+    G4OpticalParameters::Instance()->GetCerenkovMaxBetaChange();
   G4cout << "Saved fCerenkovMaxBetaChange " << fCerenkovMaxBetaChange << G4endl;
 }
 
 //_____________________________________________________________________________
 void TG4PhysicsManager::ApplyCerenkovMaxBetaChangeValue()
 {
-// Temporary work-around for bug in Cerenkov in Geant4 11.0
-// Apply the initial (not corrupted) value to Cerenkov process, if defined
+  // Temporary work-around for bug in Cerenkov in Geant4 11.0
+  // Apply the initial (not corrupted) value to Cerenkov process, if defined
 
-  if ( fCerenkovMaxBetaChange == 0. ) return;
+  if (fCerenkovMaxBetaChange == 0.) return;
 
-  auto cerenkov = G4Electron::Definition()->GetProcessManager()->GetProcess("Cerenkov");
+  auto cerenkov =
+    G4Electron::Definition()->GetProcessManager()->GetProcess("Cerenkov");
   if (cerenkov != nullptr) {
-    auto maxBetaChangeAfter = G4OpticalParameters::Instance()->GetCerenkovMaxBetaChange();
+    auto maxBetaChangeAfter =
+      G4OpticalParameters::Instance()->GetCerenkovMaxBetaChange();
     G4cout << "Applying correction to CerenkovMaxBetaChange "
-      << "from " << maxBetaChangeAfter << " to " << fCerenkovMaxBetaChange << G4endl;
-    static_cast<G4Cerenkov*>(cerenkov)->SetMaxBetaChangePerStep(fCerenkovMaxBetaChange);
+           << "from " << maxBetaChangeAfter << " to " << fCerenkovMaxBetaChange
+           << G4endl;
+    static_cast<G4Cerenkov*>(cerenkov)->SetMaxBetaChangePerStep(
+      fCerenkovMaxBetaChange);
     G4cout << "New value: "
-           << static_cast<G4Cerenkov*>(cerenkov)->GetMaxBetaChangePerStep() << G4endl;
+           << static_cast<G4Cerenkov*>(cerenkov)->GetMaxBetaChangePerStep()
+           << G4endl;
   }
 }
 #endif
