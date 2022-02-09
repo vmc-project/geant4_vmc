@@ -46,7 +46,6 @@ class TG4G3CutVector
   // set methods
   void SetCut(TG4G3Cut cut, G4double cutValue);
   void SetG3Defaults();
-  G4bool Update(const TG4G3CutVector& vector);
   void SetDeltaRaysOn(G4bool value);
 
   // methods
@@ -89,6 +88,18 @@ class TG4G3CutVector
 
   /// delta rays process control
   G4bool fDeltaRaysOn;
+
+  /// flag to prevent overwiting BCUTE cut if set by user
+  G4bool fIsBCUTE;
+
+  /// flag to prevent overwiting BCUTM cut if set by user
+  G4bool fIsBCUTM;
+
+  /// flag to prevent overwiting DCUTE cut if set by user
+  G4bool fIsDCUTE;
+
+  /// flag to prevent overwiting DCUTM cut if set by user
+  G4bool fIsDCUTM;
 };
 
 // inline methods
