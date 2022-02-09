@@ -114,7 +114,13 @@ const G4String& TG4G3CutVector::GetCutName(TG4G3Cut cut)
 //
 
 //_____________________________________________________________________________
-TG4G3CutVector::TG4G3CutVector() : fCutVector(), fDeltaRaysOn(true)
+TG4G3CutVector::TG4G3CutVector()
+  : fCutVector(),
+    fDeltaRaysOn(true),
+    fIsBCUTE(false),
+    fIsBCUTM(false),
+    fIsDCUTE(false),
+    fIsDCUTM(false)
 {
   /// Default constructor
 
@@ -158,6 +164,10 @@ TG4G3CutVector& TG4G3CutVector::operator=(const TG4G3CutVector& right)
   for (G4int i = 0; i < kNoG3Cuts; i++) fCutVector[i] = right.fCutVector[i];
 
   fDeltaRaysOn = right.fDeltaRaysOn;
+  fIsBCUTE = right.fIsBCUTE;
+  fIsBCUTM = right.fIsBCUTM;
+  fIsDCUTE = right.fIsDCUTE;
+  fIsDCUTM = right.fIsDCUTM;
 
   return *this;
 }
@@ -213,6 +223,40 @@ void TG4G3CutVector::SetCut(TG4G3Cut cut, G4double cutValue)
   }
 
   fCutVector[cut] = cutValue;
+
+  // Update the selected flags
+  if (cut == kBCUTE) {
+    fIsBCUTE = true;
+  }
+  else if (cut == kBCUTM) {
+    fIsBCUTM = true;
+  }
+  else if (cut == kDCUTE) {
+    fIsDCUTE = true;
+  }
+  else if (cut == kDCUTM) {
+    fIsDCUTM = true;
+  }
+
+  // Set the CUTELE value also to DCUTE, DCUTM unless they were already set
+  if (cut == kCUTELE) {
+    if (! fIsBCUTE) {
+      fCutVector[kDCUTE] = cutValue;
+    }
+    if (! fIsBCUTM) {
+      fCutVector[kDCUTM] = cutValue;
+    }
+  }
+
+  // set the CUTGAM value also to BCUTE, BCUTM unless they were already set
+  if (cut == kCUTGAM) {
+    if (! fIsBCUTE) {
+      fCutVector[kBCUTE] = cutValue;
+    }
+    if (! fIsBCUTM) {
+      fCutVector[kBCUTM] = cutValue;
+    }
+  }
 }
 
 //_____________________________________________________________________________
@@ -222,24 +266,6 @@ void TG4G3CutVector::SetG3Defaults()
 
   for (G4int i = 0; i < kNoG3Cuts; i++)
     fCutVector[i] = TG4G3Defaults::Instance()->CutValue(i);
-}
-
-//_____________________________________________________________________________
-G4bool TG4G3CutVector::Update(const TG4G3CutVector& vector)
-{
-  /// Update only those values that have not yet been set ( =0.)
-  /// with given vector.
-  /// Return true if some value was modified.
-
-  G4bool result = false;
-
-  for (G4int i = 0; i < kNoG3Cuts; i++)
-    if (fCutVector[i] < fgkTolerance) {
-      fCutVector[i] = vector[i];
-      result = true;
-    }
-
-  return result;
 }
 
 //_____________________________________________________________________________
