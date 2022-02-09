@@ -112,8 +112,7 @@ void Ex06DetectorConstruction::ConstructGeometry()
   world[0] = fWorldSize;
   world[1] = fWorldSize;
   world[2] = fWorldSize;
-  TGeoVolume* worldV =
-    gGeoManager->Volume("WRLD", "BOX", fImedAir, world, 3);
+  TGeoVolume* worldV = gGeoManager->Volume("WRLD", "BOX", fImedAir, world, 3);
   gGeoManager->SetTopVolume(worldV);
 
   // The experimental Hall
@@ -171,6 +170,7 @@ void Ex06DetectorConstruction::ConstructOpGeometry()
 
   const Int_t nEntries = 32;
   Bool_t spline = true;
+  Bool_t noSpline = false;
 
   // clang-format off
 
@@ -204,7 +204,7 @@ void Ex06DetectorConstruction::ConstructOpGeometry()
     0.00 };
 
   gMC->SetCerenkov(fImedWater, nEntries, photonEnergy, absorption1, efficiency1,
-    refractiveIndex1, spline, spline);
+    refractiveIndex1, spline, noSpline);
 
   Double_t scintilFast[2] = { 1.00, 1.00,};
   Double_t energyArray[2] = { 2.034e-09, 4.136e-09 };
