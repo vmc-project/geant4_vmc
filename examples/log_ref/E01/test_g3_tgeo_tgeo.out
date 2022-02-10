@@ -1,7 +1,7 @@
    ------------------------------------------------------------------
   | Welcome to ROOT 6.24/06                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 03 2021, 19:13:00                      |
+  | Built for macosx64 on Dec 15 2021, 13:02:00                      |
   | From tags/v6-24-06@v6-24-06                                      |
   | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
@@ -15,16 +15,17 @@ Processing test_E01.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.1 ( 3 December 2021 )
+ Version 2.0 ( 9 February 2022 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.9 ( 3 December 2021 )
+ Version 4.0 ( 9 February 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
 Geant3 has been created.
+Warning in <TGeoManager>: Changing system of units to ROOT units (cm, s, GeV).
 Geometry will be defined via TGeo
 Info in <TGeoManager::TGeoManager>: Geometry E01_geometry, E01 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is EXPH. Master volume is EXPH
@@ -320,13 +321,13 @@ Shape for /EXPH_1/CALB_1/LAYB_9:
 BOX  parameters: 1,  40,  40,  
 
 Material with ID 2: 
-Aluminium  Aeff = 26.98  Zeff = 13  density = 2.7  radl = 0.887509  inter = 45.6209
+Aluminium  Aeff = 26.98  Zeff = 13  density = 2.7  radl = 8.87509  inter = 45.6209
 
 Material for LAYB volume: 
-Aluminium  2  Aeff = 26.98  Zeff = 13  density = 2.7  radl = 0.887509  inter = 45.6209
+Aluminium  2  Aeff = 26.98  Zeff = 13  density = 2.7  radl = 8.87509  inter = 45.6209
 
 Medium for LAYB volume: 
-Aluminium  2  nmat = 2  isvol = 0  ifield = 2  fieldm = 10  tmaxfd = 20  stemax = 1e+10  deemax = 0.25  epsil = 0.001  stmin = 0.105792
+Aluminium  2  nmat = 2  isvol = 0  ifield = 2  fieldm = 10  tmaxfd = 20  stemax = 1e+10  deemax = 0.182866  epsil = 0.001  stmin = 0.0334544
 
 Error in <TGeoNavigator::cd>: Path /EXPH_1/CALB_1/LAYB_100 not valid
 GetTransformation: Volume path /EXPH_1/CALB_1/LAYB_100 not found
@@ -335,11 +336,11 @@ GetShape: Volume path /EXPH_1/CALB_1/LAYB_100 not found
 GetMaterial: Volume name XYZ not found
 GetMedium: Volume name XYZ not found
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   109665623     6895D57 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   137532767     832955F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   104261925   109665623
-                                        HEX     636E925     6895D57
+          with Store/Table at absolute adrs   132129069   137532767
+                                        HEX     7E0212D     832955F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

@@ -1,7 +1,7 @@
    ------------------------------------------------------------------
   | Welcome to ROOT 6.24/06                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 03 2021, 19:13:00                      |
+  | Built for macosx64 on Dec 15 2021, 13:02:00                      |
   | From tags/v6-24-06@v6-24-06                                      |
   | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
@@ -17,16 +17,17 @@ Processing test_ExGarfield.C("g3tgeoConfig.C")...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.1 ( 3 December 2021 )
+ Version 2.0 ( 9 February 2022 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.9 ( 3 December 2021 )
+ Version 4.0 ( 9 February 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
 Geant3 has been created.
+Warning in <TGeoManager>: Changing system of units to ROOT units (cm, s, GeV).
 Info in <TGeoManager::TGeoManager>: Geometry Garfield_geometry, ExGarfield VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is World. Master volume is World
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -40,26 +41,26 @@ Info in <TGeoManager::CloseGeometry>: 5 nodes/ 5 volume UID's in ExGarfield VMC 
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 Info in <TGeoManager::Export>: Exporting Garfield_geometry ExGarfield VMC example geometry as root file. Optimizations streamed.
  Start generating event Nr 1
-   Absorber: total energy: 14.2673 MeV       total track length: 1.00016 cm
-        Gas: total energy: 7.62512 keV           avalanche size:       0       gain:       0
+   Absorber: total energy: 13.8293 MeV       total track length: 1.00011 cm
+        Gas: total energy: 5.37171 keV           avalanche size:       0       gain:       0
  Start generating event Nr 2
-   Absorber: total energy: 13.1828 MeV       total track length: 1.00016 cm
-        Gas: total energy: 8.36076 keV           avalanche size:       0       gain:       0
+   Absorber: total energy: 12.5232 MeV       total track length: 1.00011 cm
+        Gas: total energy:  5.5684 keV           avalanche size:       0       gain:       0
  Start generating event Nr 3
-   Absorber: total energy: 12.0253 MeV       total track length: 1.00018 cm
-        Gas: total energy:  6.2114 keV           avalanche size:       0       gain:       0
+   Absorber: total energy: 15.6013 MeV       total track length: 1.00011 cm
+        Gas: total energy: 9.72058 keV           avalanche size:       0       gain:       0
  Start generating event Nr 4
-   Absorber: total energy: 11.5785 MeV       total track length: 1.00016 cm
-        Gas: total energy: 8.65241 keV           avalanche size:       0       gain:       0
+   Absorber: total energy: 13.7638 MeV       total track length: 1.00011 cm
+        Gas: total energy:  5.9836 keV           avalanche size:       0       gain:       0
  Start generating event Nr 5
-   Absorber: total energy: 40.4579 MeV       total track length: 1.00016 cm
-        Gas: total energy:  11.243 keV           avalanche size:       0       gain:       0
+   Absorber: total energy: 13.3199 MeV       total track length: 1.00011 cm
+        Gas: total energy: 5.72095 keV           avalanche size:       0       gain:       0
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   118932823     716C557 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   171281759     A358D5F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   113529125   118932823
-                                        HEX     6C45125     716C557
+          with Store/Table at absolute adrs   165878061   171281759
+                                        HEX     9E3192D     A358D5F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

@@ -1,7 +1,7 @@
    ------------------------------------------------------------------
   | Welcome to ROOT 6.24/06                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 03 2021, 19:13:00                      |
+  | Built for macosx64 on Dec 15 2021, 13:02:00                      |
   | From tags/v6-24-06@v6-24-06                                      |
   | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
@@ -15,16 +15,17 @@ Processing test_E01.C("g3tgeoConfig.C",kTRUE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 1.1 ( 3 December 2021 )
+ Version 2.0 ( 9 February 2022 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 3.9 ( 3 December 2021 )
+ Version 4.0 ( 9 February 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
 Geant3 has been created.
+Warning in <TGeoManager>: Changing system of units to ROOT units (cm, s, GeV).
 Geometry will be defined via VMC
 Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
 imatPoly wpoly: 0.33, 0.67
@@ -337,11 +338,11 @@ GetShape: Volume path /EXPH_1/CALB_1/LAYB_100 not found
 GetMaterial: Volume name XYZ not found
 GetMedium: Volume name XYZ not found
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   114195799     6CE7D57 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   166729055     9F0155F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   108792101   114195799
-                                        HEX     67C0925     6CE7D57
+          with Store/Table at absolute adrs   161325357   166729055
+                                        HEX     99DA12D     9F0155F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
