@@ -15,14 +15,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    # Build the geant4_vmc HTML documentation
+    # Build the Geant4 VMC HTML documentation
     - name: Doxygen Geant4 VMC Action
       uses: mattnotmitt/doxygen-action@v1.1.0
       with:
         doxyfile-path: ./source/Doxyfile
         working-directory: .
 
-    # Deploy the eant4_vmcHTML documentation to GitHub Pages
+    # Deploy the Geant4 VMC HTML documentation to GitHub Pages
     - name: GH Pages Deployment for Geant4 VMC
       uses: peaceiris/actions-gh-pages@v3
       with:
@@ -31,14 +31,30 @@ jobs:
         force_orphan: true
         publish_branch: gh-pages
 
-    # Build the HTML documentation
+    # Build the G4Root HTML documentation
     - name: Doxygen G4Root Action
       uses: mattnotmitt/doxygen-action@v1.1.0
       with:
         doxyfile-path: ./g4root/Doxyfile
         working-directory: .
 
-    # Deploy the HTML documentation to GitHub Pages
+    # Deploy the G4Root HTML documentation to GitHub Pages
+    - name: GH Pages Deployment for G4Root
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./doc
+        force_orphan: true
+        publish_branch: gh-pages
+
+    # Build the Examples HTML documentation
+    - name: Doxygen Example Action
+      uses: mattnotmitt/doxygen-action@v1.1.0
+      with:
+        doxyfile-path: ./examples/Doxyfile
+        working-directory: .
+
+    # Deploy the Examples HTML documentation to GitHub Pages
     - name: GH Pages Deployment for G4Root
       uses: peaceiris/actions-gh-pages@v3
       with:
