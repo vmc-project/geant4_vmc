@@ -15,12 +15,12 @@ Processing test_Gflash.C("g3tgeoConfig.C")...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.0 ( 9 February 2022 )
+ Version 4.0 ( 10 February 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -43,7 +43,7 @@ The have width of 3 cm and a lenght of 24 cm. The Material is PbWO4
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.180
+Real time 0:00:00, CP time 0.200
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 1  -----
@@ -54,7 +54,7 @@ Real time 0:00:00, CP time 0.180
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.160
+Real time 0:00:00, CP time 0.180
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 2  -----
@@ -65,7 +65,7 @@ Real time 0:00:00, CP time 0.160
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.160
+Real time 0:00:00, CP time 0.170
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 3  -----
@@ -76,7 +76,7 @@ Real time 0:00:00, CP time 0.160
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.170
+Real time 0:00:00, CP time 0.190
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 4  -----
@@ -87,7 +87,7 @@ Real time 0:00:00, CP time 0.170
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.160
+Real time 0:00:00, CP time 0.170
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 5  -----
@@ -120,7 +120,7 @@ Real time 0:00:00, CP time 0.170
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.160
+Real time 0:00:00, CP time 0.180
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 8  -----
@@ -131,7 +131,7 @@ Real time 0:00:00, CP time 0.160
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.150
+Real time 0:00:00, CP time 0.170
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 9  -----
@@ -150,11 +150,11 @@ Real time 0:00:00, CP time 0.170
    e1  12.9978   e3x3  47.947   e5x5  48.6028 GeV
  Total energy deposited in the calorimeter: 49.7586 (GeV)
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   145191263     8A7715F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   110699871     699255F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   139787565   145191263
-                                        HEX     854FD2D     8A7715F
+          with Store/Table at absolute adrs   105296173   110699871
+                                        HEX     646B12D     699255F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

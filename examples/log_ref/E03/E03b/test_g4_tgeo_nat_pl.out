@@ -22,12 +22,12 @@ Processing test_E03_1.C("g4Config2.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -916,7 +916,7 @@ Max 2J for sampling of angular correlations         10
 ---> Begin of event: 5
    Absorber: total energy (MeV): 935.533       total track length (cm):  66.9711
    Gap:      total energy (MeV): 25.7111       total track length (cm):  12.0429
-Time of this run:   User=0.080000s Real=0.076495s Sys=0.000000s
+Time of this run:   User=0.080000s Real=0.078031s Sys=0.000000s
 Number of events processed: 5
    ------------------------------------------------------------------
   | Welcome to ROOT 6.24/06                        https://root.cern |
@@ -943,12 +943,12 @@ Processing test_E03_2.C("g4Config2.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -2241,7 +2241,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Absorber: total energy (MeV):  42.697       total track length (cm):    3.158
    Gap:      total energy (MeV):   0.265       total track length (cm):    0.070
 --- Finish event 
-Time of this run:   User=0.010000s Real=0.005412s Sys=0.000000s
+Time of this run:   User=0.010000s Real=0.005467s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
@@ -2269,12 +2269,12 @@ Processing test_E03_3.C("g4Config2.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -3198,7 +3198,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.141
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish event 
-Time of this run:   User=0.000000s Real=0.001506s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.001708s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
@@ -3225,12 +3225,12 @@ Processing test_E03_4.C("g4Config2.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -4123,5 +4123,5 @@ Max 2J for sampling of angular correlations         10
 
    Absorber: total energy (MeV): 1567.78       total track length (cm):  111.622
    Gap:      total energy (MeV): 82.6884       total track length (cm):  41.1434
-Time of this run:   User=0.030000s Real=0.030319s Sys=0.000000s
+Time of this run:   User=0.040000s Real=0.033121s Sys=0.000000s
 Number of events processed: 1

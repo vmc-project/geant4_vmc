@@ -19,12 +19,12 @@ Processing test_A01_1.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -995,9 +995,9 @@ Chamber1 has 531 hits.
 Chamber2 has 518 hits.
 EmCalorimeter has 55 hits. Total Edep is 29020.5 (MeV)
 HadCalorimeter has 17 hits. Total Edep is 66.5697 (MeV)
-Time of this run:   User=6.220000s Real=6.300238s Sys=0.060000s
+Time of this run:   User=6.210000s Real=6.312850s Sys=0.060000s
 Number of events processed: 5
-Real time 0:00:08, CP time 8.660
+Real time 0:00:08, CP time 8.640
    ------------------------------------------------------------------
   | Welcome to ROOT 6.24/06                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
@@ -1019,12 +1019,12 @@ Processing test_A01_2.C("g4tgeoConfig2.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -1977,6 +1977,6 @@ Chamber1 has 527 hits.
 Chamber2 has 517 hits.
 EmCalorimeter has 46 hits. Total Edep is 29715.7 (MeV)
 HadCalorimeter has 13 hits. Total Edep is 50.188 (MeV)
-Time of this run:   User=5.540000s Real=5.647496s Sys=0.070000s
+Time of this run:   User=6.200000s Real=6.375838s Sys=0.110000s
 Number of events processed: 5
-Real time 0:00:08, CP time 8.010
+Real time 0:00:08, CP time 8.720

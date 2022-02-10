@@ -25,7 +25,7 @@ Info in <TMCManager::Register>: Register user application and construct geometry
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 Info in <TGeoManager::TGeoManager>: Geometry E03_geometry, E03 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
@@ -45,7 +45,7 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -98,12 +98,12 @@ Geant4 has been created.
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.0 ( 9 February 2022 )
+ Version 4.0 ( 10 February 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -980,11 +980,11 @@ Info in <TMCManager::Run>: Start event 4
 
 ---> Begin of event: 4
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   165952863     9E43D5F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   115901791     6E8855F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   160549165   165952863
-                                        HEX     991C92D     9E43D5F
+          with Store/Table at absolute adrs   110498093   115901791
+                                        HEX     696112D     6E8855F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -1053,7 +1053,7 @@ Info in <TMCManager::Run>: Start event 5
 ---> Begin of event: 5
    Absorber: total energy (MeV): 930.273       total track length (cm):  42.3846
    Gap:      total energy (MeV): 22.2435       total track length (cm):  10.5216
-Real time 0:00:02, CP time 2.430
+Real time 0:00:01, CP time 1.900
  **** GTRIGI: IEVENT=      4 IDEVT=      4 Random Seeds =       4357           0
  **** GTRIGI: IEVENT=      4 IDEVT=      4 Random Seeds =       4357           0
  **** GTRIGI: IEVENT=      4 IDEVT=      4 Random Seeds =       4357           0

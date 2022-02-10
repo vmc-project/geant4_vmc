@@ -18,12 +18,12 @@ Processing test_E03_1.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.0 ( 9 February 2022 )
+ Version 4.0 ( 10 February 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -66,11 +66,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 875.573       total track length (cm):  39.9255
    Gap:      total energy (MeV): 20.9186       total track length (cm):  8.56264
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   110224735     691E55F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   158861663     978095F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   104821037   110224735
-                                        HEX     63F712D     691E55F
+          with Store/Table at absolute adrs   153457965   158861663
+                                        HEX     925952D     978095F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -127,12 +127,12 @@ Processing test_E03_2.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.0 ( 9 February 2022 )
+ Version 4.0 ( 10 February 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -498,11 +498,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   3.968       total track length (cm):    2.241
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   145718623     8AF7D5F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   138341727     83EED5F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   140314925   145718623
-                                        HEX     85D092D     8AF7D5F
+          with Store/Table at absolute adrs   132938029   138341727
+                                        HEX     7EC792D     83EED5F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -545,12 +545,12 @@ Processing test_E03_3.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.0 ( 9 February 2022 )
+ Version 4.0 ( 10 February 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -652,11 +652,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   145695071     8AF215F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   159907167     987FD5F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   140291373   145695071
-                                        HEX     85CAD2D     8AF215F
+          with Store/Table at absolute adrs   154503469   159907167
+                                        HEX     935892D     987FD5F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -698,12 +698,12 @@ Processing test_E03_4.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.0 ( 9 February 2022 )
+ Version 4.0 ( 10 February 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -750,11 +750,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 1330.27       total track length (cm):  65.3392
    Gap:      total energy (MeV): 58.2202       total track length (cm):  29.0487
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   167667039     9FE655F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   121941343     744AD5F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   162263341   167667039
-                                        HEX     9ABF12D     9FE655F
+          with Store/Table at absolute adrs   116537645   121941343
+                                        HEX     6F2392D     744AD5F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -797,12 +797,12 @@ Processing test_E03_5.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.0 ( 9 February 2022 )
+ Version 4.0 ( 10 February 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -1177,11 +1177,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   2.957       total track length (cm):    1.496
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   140362079     85DC15F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   129271135     7B4855F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   134958381   140362079
-                                        HEX     80B4D2D     85DC15F
+          with Store/Table at absolute adrs   123867437   129271135
+                                        HEX     762112D     7B4855F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

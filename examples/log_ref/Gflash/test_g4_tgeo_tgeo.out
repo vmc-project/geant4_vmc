@@ -19,12 +19,12 @@ Processing test_Gflash.C("g4tgeoConfig.C")...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -955,7 +955,7 @@ Index : 2     used in the geometry : Yes
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.070
+Real time 0:00:00, CP time 0.050
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 1  -----
@@ -1021,7 +1021,7 @@ Real time 0:00:00, CP time 0.050
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.050
+Real time 0:00:00, CP time 0.060
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 7  -----
@@ -1032,7 +1032,7 @@ Real time 0:00:00, CP time 0.050
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.060
+Real time 0:00:00, CP time 0.050
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 8  -----
@@ -1061,5 +1061,5 @@ Real time 0:00:00, CP time 0.050
   11884 hits are stored in HitsCollection 
    e1  12.1091   e3x3  48.1537   e5x5  48.5903 GeV
  Total energy deposited in the calorimeter: 49.469 (GeV)
-Time of this run:   User=0.520000s Real=0.518262s Sys=0.010000s
+Time of this run:   User=0.520000s Real=0.531629s Sys=0.010000s
 Number of events processed: 10

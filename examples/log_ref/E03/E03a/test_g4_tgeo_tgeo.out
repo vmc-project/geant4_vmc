@@ -22,12 +22,12 @@ Processing test_E03_1.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -960,7 +960,7 @@ Index : 2     used in the geometry : Yes
 ---> Begin of event: 5
    Absorber: total energy (MeV): 888.474       total track length (cm):  64.0828
    Gap:      total energy (MeV): 41.8714       total track length (cm):   20.279
-Time of this run:   User=0.120000s Real=0.121700s Sys=0.000000s
+Time of this run:   User=0.100000s Real=0.103374s Sys=0.000000s
 Number of events processed: 5
    ------------------------------------------------------------------
   | Welcome to ROOT 6.24/06                        https://root.cern |
@@ -987,12 +987,12 @@ Processing test_E03_2.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -2327,7 +2327,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  42.697       total track length (cm):    3.159
    Gap:      total energy (MeV):   0.265       total track length (cm):    0.070
-Time of this run:   User=0.010000s Real=0.006502s Sys=0.010000s
+Time of this run:   User=0.010000s Real=0.005597s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
@@ -2355,12 +2355,12 @@ Processing test_E03_3.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -3326,7 +3326,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.141
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.000000s Real=0.001631s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.001574s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
@@ -3353,12 +3353,12 @@ Processing test_E03_4.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -4295,7 +4295,7 @@ Index : 2     used in the geometry : Yes
 
    Absorber: total energy (MeV): 1572.87       total track length (cm):  111.365
    Gap:      total energy (MeV):  110.84       total track length (cm):  54.7961
-Time of this run:   User=0.050000s Real=0.053362s Sys=0.000000s
+Time of this run:   User=0.040000s Real=0.046975s Sys=0.000000s
 Number of events processed: 1
    ------------------------------------------------------------------
   | Welcome to ROOT 6.24/06                        https://root.cern |
@@ -4322,12 +4322,12 @@ Processing test_E03_5.C("g4tgeoConfig4.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -5412,7 +5412,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  11.829       total track length (cm):    0.950
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.000000s Real=0.004361s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.004558s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
@@ -5439,12 +5439,12 @@ Processing test_E03_6.C("g4tgeoConfig5.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -6362,7 +6362,7 @@ Index : 2     used in the geometry : Yes
 ---> Begin of event: 1
    Absorber: total energy (MeV): 582.843       total track length (cm):  32.7353
    Gap:      total energy (MeV): 44.5438       total track length (cm):  18.1886
-Time of this run:   User=0.010000s Real=0.006200s Sys=0.000000s
+Time of this run:   User=0.010000s Real=0.005101s Sys=0.000000s
 Number of events processed: 1
    ------------------------------------------------------------------
   | Welcome to ROOT 6.24/06                        https://root.cern |
@@ -6388,12 +6388,12 @@ Processing test_E03_7.C("g4tgeoConfig6.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -7866,5 +7866,5 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
     2    -65.8   0.0175   0.0192         0    0.117   0.0351      1.21        ABSO eIoni
    Absorber: total energy (MeV): 96.2714       total track length (cm):  4.95121
    Gap:      total energy (MeV): 13.1905       total track length (cm):   1.9965
-Time of this run:   User=0.030000s Real=0.028704s Sys=0.010000s
+Time of this run:   User=0.010000s Real=0.021323s Sys=0.010000s
 Number of events processed: 1

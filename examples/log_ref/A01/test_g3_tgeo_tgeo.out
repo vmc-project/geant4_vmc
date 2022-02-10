@@ -15,12 +15,12 @@ Processing test_A01_1.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.0 ( 9 February 2022 )
+ Version 4.0 ( 10 February 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -68,11 +68,11 @@ Chamber2 has 154 hits.
 EmCalorimeter has 33 hits. Total Edep is 5437.59 (MeV)
 HadCalorimeter has 10 hits. Total Edep is 189.851 (MeV)
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   116634975     6F3B55F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   106084703     652B95F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   111231277   116634975
-                                        HEX     6A1412D     6F3B55F
+          with Store/Table at absolute adrs   100681005   106084703
+                                        HEX     600452D     652B95F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -153,7 +153,7 @@ Chamber1 has 535 hits.
 Chamber2 has 494 hits.
 EmCalorimeter has 27 hits. Total Edep is 24749.3 (MeV)
 HadCalorimeter has 4 hits. Total Edep is 17.5224 (MeV)
-Real time 0:00:01, CP time 1.680
+Real time 0:00:01, CP time 1.770
  GTREVE_ROOT : Transporting primary track No         30
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10

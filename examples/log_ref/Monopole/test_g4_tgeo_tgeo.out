@@ -19,12 +19,12 @@ Processing test_Monopole.C("g4tgeoConfig.C")...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 9 February 2022 )
+ Version 6.0 ( 10 February 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -980,7 +980,7 @@ Index : 1     used in the geometry : Yes
 --> Event 70 starts.
 --> Event 80 starts.
 --> Event 90 starts.
-Time of this run:   User=14.750000s Real=16.285763s Sys=0.120000s
+Time of this run:   User=12.800000s Real=12.928077s Sys=0.060000s
 Number of events processed: 100
 
  The run consists of 100 monopole  of 100 GeV  through 10 cm of Si

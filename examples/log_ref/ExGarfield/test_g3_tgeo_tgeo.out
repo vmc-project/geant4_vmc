@@ -17,12 +17,12 @@ Processing test_ExGarfield.C("g3tgeoConfig.C")...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.0 ( 9 February 2022 )
+ Version 4.0 ( 10 February 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -56,11 +56,11 @@ Info in <TGeoManager::Export>: Exporting Garfield_geometry ExGarfield VMC exampl
    Absorber: total energy: 13.3199 MeV       total track length: 1.00011 cm
         Gas: total energy: 5.72095 keV           avalanche size:       0       gain:       0
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   171281759     A358D5F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   122646879     74F715F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   165878061   171281759
-                                        HEX     9E3192D     A358D5F
+          with Store/Table at absolute adrs   117243181   122646879
+                                        HEX     6FCFD2D     74F715F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

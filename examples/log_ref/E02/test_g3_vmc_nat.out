@@ -15,12 +15,12 @@ Processing test_E02.C("g3Config.C",kTRUE)...
 
 =============================================================
  Virtual Monte Carlo Library
- Version 2.0 ( 9 February 2022 )
+ Version 2.0 ( 10 February 2022 )
 =============================================================
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.0 ( 9 February 2022 )
+ Version 4.0 ( 10 February 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -126,11 +126,11 @@ Primary
 Number of daughters: 0
 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   114966879     6DA415F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   111707487     6A8855F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   109563181   114966879
-                                        HEX     687CD2D     6DA415F
+          with Store/Table at absolute adrs   106303789   111707487
+                                        HEX     656112D     6A8855F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
