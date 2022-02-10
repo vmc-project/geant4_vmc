@@ -27,6 +27,6 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./doc
+        publish_dir: ./doc/g4vmc_html
         force_orphan: true
         publish_branch: gh-pages
