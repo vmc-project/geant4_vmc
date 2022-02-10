@@ -9,6 +9,46 @@
 
 Tags (history):
 ===============
+  10/02/2022
+  v6-0:
+    Geant4 VMC:
+    - Migration to Geant4 11.0:
+    - Extended methods in vmc for setting optical material properties
+      and implemented new parameters setting in geant4_vmc
+    - Removed obsolete TG4OpticalPhysics.h
+    - Updated E06 example for changes in the OpNovice code from v 11.0
+    - Removed usage of deprecated TVirtualMCApplication functions:
+      - virtual void InitForWorker() const;
+      - virtual void BeginWorkerRun() const;
+      - virtual void FinishWorkerRun() const;
+    - Removed fallback to ROOT's internal VMC and added fatal error
+      if VMC is found in ROOT (PR #36)
+
+    G4Root:
+    - Updated test geometry to be identical to Geant4 OpNovice example
+    - Added OpNoviceGeom.C macro (generated from the old geometry file
+      and updated) and OpNoviceGeom.root
+
+    MTRoot:
+    - Removed
+    - TMCRootManager was moved in the VMC core library package
+
+    Examples:
+    - Updated all MCApplication classes for removal of deprecated
+      TVirtualMCApplication functions for MT
+    - Added 'control/verbose 2' to g4config.in in all examples
+
+    Fixes:
+    - Fixed applying special cuts:
+      - Pass the CUTELE/CUTGAM values set to tracking medium to
+        DCUT*/BCUT* values instead of using the default global values
+      - Fixed process activation in TG4PhysicsManager
+    - Fixed incrementing static counter in the TG4Verbose constructor
+    - Fixed data race in MT in TG4ModelConfigurationManager and TG4BiasingManager
+
+    Tested with VMC 2.0, Geant4 11.0 (with embedded CLHEP 2.4.5.1)
+      Root 6.24/06, VGM 5.0, Garfield 4.0
+
   03/12/2021
   v5-4:
     Geant4 VMC:
