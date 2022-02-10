@@ -10,5 +10,5 @@ It also includes the [G4Root](https://vmc-project.github.io/user-guide/g4root) p
 
 Documentation: https://vmc-project.github.io
 
-Reference (source code documentation: [Geant4 VMC](https://vmc-project.github.io/geant4_vmc/g4vmc_html), [G4Root](https://vmc-project.github.io/geant4_vmc/g4root_html), [VMC Examples]https://vmc-project.github.io/geant4_vmc/examples_html)
+Reference: [Geant4 VMC](https://vmc-project.github.io/geant4_vmc/g4vmc_html), [G4Root](https://vmc-project.github.io/geant4_vmc/g4root_html), [VMC Examples](https://vmc-project.github.io/geant4_vmc/examples_html)
 
