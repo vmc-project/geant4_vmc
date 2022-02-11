@@ -60,8 +60,8 @@ include(VMCInstallLibDir)
 #--- Add the packages sources --------------------------------------------------
 #
 if(Geant4VMC_BUILD_G4Root)
+  set(G4Root_BUILD_TEST ${Geant4VMC_BUILD_G4Root_TEST} CACHE BOOL "Build G4Root test")
   add_subdirectory(g4root)
-  set(G4Root_BUILD_TEST ${Geant4VMC_BUILD_G4Root_TEST})
 endif(Geant4VMC_BUILD_G4Root)
 
 if(Geant4VMC_BUILD_Geant4VMC)
