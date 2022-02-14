@@ -9,6 +9,21 @@
 
 Tags (history):
 ===============
+  14/02/2022
+  v5-4-p1:
+    Patch release, including following fixes:
+    Geant4 VMC:
+    - Fixed applying special cuts:
+      - Pass the CUTELE/CUTGAM values set to tracking medium to
+        DCUT*/BCUT* values instead of using the default global values
+      - Fixed process activation in TG4PhysicsManager
+    - Fixed incrementing static counter in the TG4Verbose constructor
+    - Fixed data race in MT in TG4ModelConfigurationManager and TG4BiasingManager
+    - Make sure that TGeo is using the old Root units (#21)
+
+    Tested with VMC 1.1.p1, Geant4 10.7.p3 (with embedded CLHEP 2.4.4.0.)
+      Root 6.24/06, VGM 4.9, Garfield 4.0
+
   03/12/2021
   v5-4:
     Geant4 VMC:
