@@ -30,6 +30,14 @@
 #include <G4RegionStore.hh>
 #include <G4TransportationManager.hh>
 
+#ifdef G4MULTITHREADED
+namespace
+{
+// Mutex to lock creating regions
+G4Mutex createRegionsMutex = G4MUTEX_INITIALIZER;
+} // namespace
+#endif
+
 //_____________________________________________________________________________
 TG4ModelConfigurationManager::TG4ModelConfigurationManager(
   const G4String& name, const G4String& availableModels)
@@ -148,57 +156,64 @@ void TG4ModelConfigurationManager::CreateRegions()
   // Return if regions were already created
   if (fCreateRegionsDone) return;
 
-  // Generate new regions names based on material names
-  SetRegionsNames();
+#ifdef G4MULTITHREADED
+  G4AutoLock lm(&createRegionsMutex);
+  if (! fCreateRegionsDone) {
+#endif
+    // Generate new regions names based on material names
+    SetRegionsNames();
 
-  // Loop over logical volumes
-  G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-  for (G4int i = 0; i < G4int(lvStore->size()); i++) {
-    G4LogicalVolume* lv = (*lvStore)[i];
-    G4String materialName = lv->GetMaterial()->GetName();
+    // Loop over logical volumes
+    G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
+    for (G4int i = 0; i < G4int(lvStore->size()); i++) {
+      G4LogicalVolume* lv = (*lvStore)[i];
+      G4String materialName = lv->GetMaterial()->GetName();
 
-    if (VerboseLevel() > 2) {
-      G4cout << "Processing volume " << lv->GetName() << ", material "
-             << materialName << G4endl;
-    }
-
-    // Skip volumes with materials which are not in the regions list
-    G4bool isModelRegion = false;
-    ModelConfigurationVector::const_iterator it;
-    for (it = fVector.begin(); it != fVector.end(); it++) {
-      if ((*it)->HasRegion(materialName)) isModelRegion = true;
-    }
-
-    if (!isModelRegion) {
       if (VerboseLevel() > 2) {
-        G4cout << "Material " << materialName << " is not in selection"
-               << G4endl;
+        G4cout << "Processing volume " << lv->GetName() << ", material "
+               << materialName << G4endl;
       }
-      continue;
-    }
 
-    // If region already exists, only add the logical volume
-    // and continue the loop
-    G4Region* region =
-      G4RegionStore::GetInstance()->GetRegion(materialName, false);
+      // Skip volumes with materials which are not in the regions list
+      G4bool isModelRegion = false;
+      ModelConfigurationVector::const_iterator it;
+      for (it = fVector.begin(); it != fVector.end(); it++) {
+        if ((*it)->HasRegion(materialName)) isModelRegion = true;
+      }
 
-    if (!region) {
-      region = new G4Region(materialName);
+      if (!isModelRegion) {
+        if (VerboseLevel() > 2) {
+          G4cout << "Material " << materialName << " is not in selection"
+                 << G4endl;
+        }
+        continue;
+      }
+
+      // If region already exists, only add the logical volume
+      // and continue the loop
+      G4Region* region =
+        G4RegionStore::GetInstance()->GetRegion(materialName, false);
+
+      if (!region) {
+        region = new G4Region(materialName);
+
+        if (VerboseLevel() > 1) {
+          G4cout << "Created region " << region->GetName() << region << G4endl;
+        }
+      }
 
       if (VerboseLevel() > 1) {
-        G4cout << "Created region " << region->GetName() << region << G4endl;
+        G4cout << "Adding region " << region->GetName() << " to lv "
+               << lv->GetName() << G4endl;
       }
+      region->AddRootLogicalVolume(lv);
+      lv->SetRegion(region);
     }
-
-    if (VerboseLevel() > 1) {
-      G4cout << "Adding region " << region->GetName() << " to lv "
-             << lv->GetName() << G4endl;
-    }
-    region->AddRootLogicalVolume(lv);
-    lv->SetRegion(region);
+    fCreateRegionsDone = true;
+#ifdef G4MULTITHREADED
+    lm.unlock();
   }
-
-  fCreateRegionsDone = true;
+#endif
 }
 
 //_____________________________________________________________________________
