@@ -222,17 +222,17 @@ void TG4ProcessControlMapPhysics::FillMap(G4bool isBiasing)
   controlMap->Add("hInelastic", kHADR);
   controlMap->Add("CHIPS_Inelastic", kHADR);
 
-  controlMap->Add("nKiller", kHADR);
+  controlMap->Add("nKiller", kNoG3Controls);
 
   controlMap->Add("muNucl", kMUNU);
   controlMap->Add("muonNuclear", kMUNU);
-  controlMap->Add("muMinusCaptureAtRest", kMUNU);
-  controlMap->Add("PositronNuclear", kNoG3Controls);
-  controlMap->Add("positronNuclear", kNoG3Controls);
-  controlMap->Add("ElectroNuclear", kNoG3Controls);
-  controlMap->Add("electronNuclear", kNoG3Controls);
-  controlMap->Add("photoNuclear", kNoG3Controls);
-  controlMap->Add("photonNuclear", kNoG3Controls);
+  controlMap->Add("muMinusCaptureAtRest", kHADR);
+  controlMap->Add("PositronNuclear", kHADR);
+  controlMap->Add("positronNuclear", kHADR);
+  controlMap->Add("ElectroNuclear", kHADR);
+  controlMap->Add("electronNuclear", kHADR);
+  controlMap->Add("photoNuclear", kHADR);
+  controlMap->Add("photonNuclear", kHADR);
 
   controlMap->Add("Cerenkov", kCKOV);
   controlMap->Add("Scintillation", kNoG3Controls);
@@ -302,7 +302,8 @@ void TG4ProcessControlMapPhysics::ConstructProcess()
           processName != "StrawXTRadiator" &&
           processName != "RegularXTRadiator" &&
           processName != "G4MaxTimeCuts" && processName != "biasWrapper(0)" &&
-          processName != "GammaGeneralProc" && processName != "biasLimiter") {
+          processName != "GammaGeneralProc" && processName != "biasLimiter" &&
+          processName != "nKiller") {
 
         G4String text = "Unknown process control for ";
         text += processName;

@@ -102,15 +102,16 @@ void TG4ProcessMCMapPhysics::FillMap(G4bool isBiasing)
   mcMap->Add("nFission", kPNuclearFission);
   mcMap->Add("HadronFission", kPNuclearFission);
 
-  mcMap->Add("PiMinusAbsorptionAtRest", kPNuclearAbsorption);
-  mcMap->Add("PiMinusAbsorptionBertini", kPNuclearAbsorption);
-  mcMap->Add("PionMinusAbsorptionAtRest", kPNuclearAbsorption);
-  mcMap->Add("KaonMinusAbsorption", kPNuclearAbsorption);
-  mcMap->Add("KaonMinusAbsorptionAtRest", kPNuclearAbsorption);
-  mcMap->Add("CHIPSNuclearCaptureAtRest", kPNuclearAbsorption);
-  mcMap->Add("FTFNuclearCaptureAtRest", kPNuclearAbsorption);
-  mcMap->Add("hFritiofCaptureAtRest", kPNuclearAbsorption);
-  mcMap->Add("hBertiniCaptureAtRest", kPNuclearAbsorption);
+  mcMap->Add("PiMinusAbsorptionAtRest", kPHadronic);
+  mcMap->Add("PiMinusAbsorptionBertini", kPHadronic);
+  mcMap->Add("PionMinusAbsorptionAtRest", kPHadronic);
+  mcMap->Add("KaonMinusAbsorption", kPHadronic);
+  mcMap->Add("KaonMinusAbsorptionAtRest", kPHadronic);
+  mcMap->Add("CHIPSNuclearCaptureAtRest", kPHadronic);
+  mcMap->Add("FTFNuclearCaptureAtRest", kPHadronic);
+  mcMap->Add("hFritiofCaptureAtRest", kPHadronic);
+  mcMap->Add("hBertiniCaptureAtRest", kPHadronic);
+  mcMap->Add("muMinusCaptureAtRest", kPHadronic);
 
   mcMap->Add("AntiProtonAnnihilationAtRest", kPPbarAnnihilation);
   mcMap->Add("AntiNeutronAnnihilationAtRest", kPNbarAnnihilation);
@@ -224,11 +225,10 @@ void TG4ProcessMCMapPhysics::FillMap(G4bool isBiasing)
   mcMap->Add("CHIPS_Inelastic", kPHInhelastic);
   mcMap->Add("PhotonInelastic", kPPhotonInhelastic);
 
-  mcMap->Add("nKiller", kPHadronic);
+  mcMap->Add("nKiller", kPStop);
 
   mcMap->Add("muNucl", kPMuonNuclear);
   mcMap->Add("muonNuclear", kPMuonNuclear);
-  mcMap->Add("muMinusCaptureAtRest", kPMuonNuclear);
   mcMap->Add("PositronNuclear", kPPositronNuclear);
   mcMap->Add("positronNuclear", kPPositronNuclear);
   mcMap->Add("ElectroNuclear", kPElectronNuclear);
@@ -243,8 +243,8 @@ void TG4ProcessMCMapPhysics::FillMap(G4bool isBiasing)
   mcMap->Add("Rayl", kPRayleigh);
   mcMap->Add("OpBoundary", kPLightScattering);
   mcMap->Add("OpMieHG", kPLightScattering);
-  mcMap->Add("OpWLS", kPNull);
-  mcMap->Add("OpWLS2", kPNull);
+  mcMap->Add("OpWLS", kPLightWLShifting);
+  mcMap->Add("OpWLS2", kPLightWLShifting);
 // Available since 6.07/03 and 5.34/35
 #if ((ROOT_VERSION_CODE >= ROOT_VERSION(6, 7, 3)) ||  \
      ((ROOT_VERSION_CODE <= ROOT_VERSION(6, 0, 0)) && \
@@ -277,7 +277,7 @@ void TG4ProcessMCMapPhysics::FillMap(G4bool isBiasing)
   mcMap->Add("G4MaxTimeCuts", kPStop);
   mcMap->Add("stackPopper", kPUserDefined);
 
-  mcMap->Add("biasLimiter", kPNull);
+  mcMap->Add("biasLimiter", kStepMax);
   mcMap->Add("biasWrapper(0)", kPNull);
   mcMap->Add("GammaGeneralProc", kPNull);
 }

@@ -1,5 +1,5 @@
-#ifndef TG4_PROCESS_MAP_PHYSICS_H
-#define TG4_PROCESS_MAP_PHYSICS_H
+#ifndef TG4_PROCESS_CONTROL_MAP_PHYSICS_H
+#define TG4_PROCESS_CONTROL_MAP_PHYSICS_H
 
 //------------------------------------------------
 // The Geant4 Virtual Monte Carlo package
@@ -50,4 +50,4 @@ class TG4ProcessControlMapPhysics : public TG4VPhysicsConstructor
   void FillMap(G4bool isBiasing);
 };
 
-#endif // TG4_PROCESS_MAP_PHYSICS_H
+#endif // TG4_PROCESS_CONTROL_MAP_PHYSICS_H
