@@ -23,6 +23,7 @@
 #include "TG4ProcessControlMap.h"
 #include "TG4ProcessControlMapPhysics.h"
 #include "TG4ProcessMCMapPhysics.h"
+#include "TG4ProcessMapPhysics.h"
 #include "TG4SpecialCutsPhysics.h"
 #include "TG4StackPopperPhysics.h"
 #include "TG4StepLimiterPhysics.h"
@@ -190,6 +191,7 @@ void TG4SpecialPhysicsList::Configure(
     fFastSimulationPhysics->SetUserFastSimulation(
       new TG4GflashFastSimulation());
   }
+  RegisterPhysics(new TG4ProcessMapPhysics(tg4VerboseLevel));
 }
 
 //

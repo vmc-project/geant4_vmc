@@ -140,27 +140,33 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
   G4ProcessVector* processVector =
     particle->GetProcessManager()->GetProcessList();
   for (size_t i = 0; i < processVector->length(); i++) {
-    G4String processName;
-    G4String currentProcessName = (*processVector)[i]->GetProcessName();
+    // G4String processName;
+    // G4String currentProcessName = (*processVector)[i]->GetProcessName();
+
+    G4int subType = 0;
+    G4int currentSubType = (*processVector)[i]->GetProcessSubType();
 
     if (VerboseLevel() > 2) {
-      G4cout << "TG4EmModelPhysics::AddModel, processing " << currentProcessName
-             << G4endl;
+      G4cout << "TG4EmModelPhysics::AddModel, processing "
+             << (*processVector)[i]->GetProcessName() << G4endl;
     }
 
     // PAI applied to ionisation
-    if (G4StrUtil::contains(currentProcessName, "Ioni") &&
+    if (currentSubType == fIonisation &&
         (emModel == kPAIModel || emModel == kPAIPhotonModel)) {
-      processName = currentProcessName;
+      subType = currentSubType;
     }
 
     // UrbanMsc applied to msc
-    if (G4StrUtil::contains(currentProcessName, "msc") &&
+    if (currentSubType == fMultipleScattering &&
         (emModel == kSpecialUrbanMscModel)) {
-      processName = currentProcessName;
+      subType = currentSubType;
     }
 
-    if (!processName.size()) continue;
+    if (subType == 0) continue;
+
+    // Get process name
+    G4String processName = (*processVector)[i]->GetProcessName();
 
     // Get the physics process if it is wrapped with biasing
     G4BiasingProcessInterface* biasingProcess =

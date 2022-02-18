@@ -14,7 +14,6 @@
 
 #include "TG4SpecialCutsPhysics.h"
 #include "TG4G3PhysicsManager.h"
-#include "TG4ProcessMCMap.h"
 #include "TG4SpecialCuts.h"
 
 #include <G4Neutron.hh>

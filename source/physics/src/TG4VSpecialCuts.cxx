@@ -22,6 +22,7 @@
 #include <G4EnergyLossTables.hh>
 #include <G4LossTableManager.hh>
 #include <G4PhysicalConstants.hh>
+#include <G4TransportationProcessType.hh>
 #include <G4UserLimits.hh>
 
 //_____________________________________________________________________________
@@ -31,6 +32,8 @@ TG4VSpecialCuts::TG4VSpecialCuts(const G4String& processName)
     fTrackManager(TG4TrackManager::Instance())
 {
   /// Standard constructor
+
+  SetProcessSubType(USER_SPECIAL_CUTS);
 }
 
 //_____________________________________________________________________________

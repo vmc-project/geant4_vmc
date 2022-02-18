@@ -81,4 +81,4 @@ class TG4EmModelPhysics : public TG4VPhysicsConstructor
   void AddModels(const std::vector<TG4ModelConfiguration*>& models);
 };
 
-#endif // TG4_PROCESS_MAP_PHYSICS_H
+#endif // TG4_EM_MODEL_PHYSICS_H

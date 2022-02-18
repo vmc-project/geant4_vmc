@@ -22,15 +22,20 @@
 #include "TG4Medium.h"
 #include "TG4MediumMap.h"
 #include "TG4ParticlesManager.h"
+#include "TG4ProcessControlMap.h"
+#include "TG4ProcessMCMap.h"
+#include "TG4ProcessMap.h"
 #include "TG4SpecialPhysicsList.h"
 #include "TG4StateManager.h"
 
 #include <G4OpBoundaryProcess.hh>
+#include <G4OpProcessSubType.hh>
 #include <G4OpticalPhoton.hh>
 #include <G4ParticleDefinition.hh>
 #include <G4ParticleTable.hh>
 #include <G4ProcessManager.hh>
 #include <G4ProcessTable.hh>
+#include <G4TransportationProcessType.hh>
 #include <G4VProcess.hh>
 #include <G4VUserPhysicsList.hh>
 #include <G4Version.hh>
@@ -53,6 +58,7 @@ TG4PhysicsManager* TG4PhysicsManager::fgInstance = 0;
 const G4double TG4PhysicsManager::fgkDefautCut = 1 * mm;
 TG4ProcessMCMap* TG4PhysicsManager::fgProcessMCMap = 0;
 TG4ProcessControlMap* TG4PhysicsManager::fgProcessControlMap = 0;
+TG4ProcessMap* TG4PhysicsManager::fgProcessMap = 0;
 
 //_____________________________________________________________________________
 TG4PhysicsManager::TG4PhysicsManager()
@@ -79,6 +85,7 @@ TG4PhysicsManager::TG4PhysicsManager()
   if (isMaster) {
     fgProcessMCMap = new TG4ProcessMCMap();
     fgProcessControlMap = new TG4ProcessControlMap();
+    fgProcessMap = new TG4ProcessMap();
   }
 
   // create particles manager
@@ -101,8 +108,10 @@ TG4PhysicsManager::~TG4PhysicsManager()
   if (isMaster) {
     delete fgProcessMCMap;
     delete fgProcessControlMap;
+    delete fgProcessMap;
     fgProcessMCMap = 0;
     fgProcessControlMap = 0;
+    fgProcessMap = 0;
   }
   delete fParticlesManager;
   delete fG3PhysicsManager;
@@ -221,14 +230,14 @@ G4ParticleDefinition* TG4PhysicsManager::GetParticleDefinition(
 
 //_____________________________________________________________________________
 G4VProcess* TG4PhysicsManager::GetProcess(
-  G4ProcessManager* processManager, G4String subName) const
+  G4ProcessManager* processManager, G4int subType) const
 {
   /// Find the process in the particle process manager which name contains
   /// subName
 
   auto processVector = processManager->GetProcessList();
   for (size_t i = 0; i < processVector->length(); ++i) {
-    if (G4StrUtil::contains((*processVector)[i]->GetProcessName(), subName)) {
+    if ((*processVector)[i]->GetProcessSubType() == subType) {
       return (*processVector)[i];
     }
   }
@@ -337,7 +346,8 @@ void TG4PhysicsManager::SetSpecialCutsActivation()
       G4ProcessManager* processManager = particle->GetProcessManager();
 
       // get the special cut process (if it was instantiated)
-      G4VProcess* process = GetProcess(processManager, "specialCut");
+      // G4VProcess* process = GetProcess(processManager, "specialCut");
+      G4VProcess* process = GetProcess(processManager, USER_SPECIAL_CUTS);
       if (process) {
         processManager->SetProcessActivation(
           process, (*isCutVector)[particleWSP]);
@@ -688,7 +698,7 @@ void TG4PhysicsManager::RetrieveOpBoundaryProcess()
   G4int nofProcesses = processManager->GetProcessListLength();
   G4ProcessVector* processList = processManager->GetProcessList();
   for (G4int i = 0; i < nofProcesses; i++) {
-    if ((*processList)[i]->GetProcessName() == "OpBoundary") {
+    if ((*processList)[i]->GetProcessSubType() == fOpBoundary) {
       fOpBoundaryProcess =
         dynamic_cast<G4OpBoundaryProcess*>((*processList)[i]);
       break;
@@ -703,7 +713,7 @@ TMCProcess TG4PhysicsManager::GetMCProcess(const G4VProcess* process)
 
   if (!process) return kPNoProcess;
 
-  return fgProcessMCMap->GetMCProcess(process);
+  return fgProcessMap->GetMCProcess(process);
 }
 
 //_____________________________________________________________________________

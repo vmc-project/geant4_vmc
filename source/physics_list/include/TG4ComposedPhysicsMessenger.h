@@ -114,6 +114,9 @@ class TG4ComposedPhysicsMessenger : public G4UImessenger
   /// printProcessControlsMap command
   G4UIcmdWithoutParameter* fPrintProcessControlMapCmd;
 
+  /// printProcessMap command
+  G4UIcmdWithoutParameter* fPrintProcessMapCmd;
+
   /// printVolumeLimits command
   G4UIcmdWithAString* fPrintVolumeLimitsCmd;
 
