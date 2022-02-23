@@ -88,7 +88,7 @@ void TG4ProcessMapPhysics::FillMap()
     // CHECK ??
   pMap->Add(fElectronGeneralProcess, kPNull, kNoG3Controls);      // G4 value:  9
 
-  pMap->Add(fMultipleScattering, kPMultipleScattering, kMULS);    // G4 value: 10  
+  pMap->Add(fMultipleScattering, kPMultipleScattering, kMULS);    // G4 value: 10
 
   pMap->Add(fRayleigh, kPRayleigh, kRAYL);                        // G4 value: 11
   pMap->Add(fPhotoElectricEffect, kPPhotoelectric, kPHOT);        // G4 value: 12
@@ -107,7 +107,7 @@ void TG4ProcessMapPhysics::FillMap()
   pMap->Add(fTransitionRadiation, kPTransitionRadiation, kNoG3Controls); // G4 value: 24
 
   pMap->Add(fSurfaceReflection, kPNull, kNoG3Controls);            // G4 value: 25
-     // low energy G4MicroElecSurface process 
+     // low energy G4MicroElecSurface process
 
   // G4OpProcessSubType: 31 - 36
   pMap->Add(fOpAbsorption, kPLightAbsorption, kLABS);              // G4 value: 31
@@ -133,7 +133,7 @@ void TG4ProcessMapPhysics::FillMap()
   pMap->Add(fLeptonAtRest, kPHadronic, kHADR);                     // G4 value: 152
     // No process defined with this code
   pMap->Add(fChargeExchange, kPHadronic, kHADR);                   // G4 value: 161
-    // Not present in G4 physics lists (?) 
+    // Not present in G4 physics lists (?)
   pMap->Add(fRadioactiveDecay, kPDecay, kDCAY);                    // G4 value: 210
   pMap->Add(fEMDissociation, kPHadronic, kHADR);                   // G4 value: 310
     // No process defined with this code
@@ -145,10 +145,10 @@ void TG4ProcessMapPhysics::FillMap()
   pMap->Add(fPhotoNuclear, kPPhotoNuclear, kHADR);                 // G4 value: 174
 
   // G4DecayProcessType: 201 - 231
-  pMap->Add(DECAY, kPDecay, kDCAY);                                // G4 value: 201 
+  pMap->Add(DECAY, kPDecay, kDCAY);                                // G4 value: 201
   pMap->Add(DECAY_WithSpin, kPDecay, kDCAY);                       // G4 value: 202
   pMap->Add(DECAY_PionMakeSpin, kPDecay, kDCAY);                   // G4 value: 203
-  // DECAY_Radioactive ( G4 value: 210) - already added with G4HadronicProcessType 
+  // DECAY_Radioactive ( G4 value: 210) - already added with G4HadronicProcessType
   pMap->Add(DECAY_Unknown, kPDecay, kDCAY);                        // G4 value: 211
   pMap->Add(DECAY_MuAtom, kPDecay, kDCAY);                         // G4 value: 221
   pMap->Add(DECAY_External, kPDecay, kDCAY);                       // G4 value: 231
@@ -157,7 +157,7 @@ void TG4ProcessMapPhysics::FillMap()
   pMap->Add(TRANSPORTATION, kPTransportation, kNoG3Controls);         // G4 value: 91
   pMap->Add(COUPLED_TRANSPORTATION, kPTransportation, kNoG3Controls); // G4 value: 92
   // following processes belong to 'General' type
-  pMap->Add(STEP_LIMITER, kStepMax, kNoG3Controls);                // G4 value: 401 
+  pMap->Add(STEP_LIMITER, kStepMax, kNoG3Controls);                // G4 value: 401
   pMap->Add(USER_SPECIAL_CUTS, kPStop, kNoG3Controls);             // G4 value: 402
   pMap->Add(NEUTRON_KILLER, kPStop, kNoG3Controls);                // G4 value: 403
     // was kPHadronic, kHADR
@@ -170,20 +170,20 @@ void TG4ProcessMapPhysics::FillMap()
 //_____________________________________________________________________________
 void TG4ProcessMapPhysics::UpdateHadronicProcessSubType(G4VProcess* process)
 {
-  /// Update process sub type codes for hadronic processes 
+  /// Update process sub type codes for hadronic processes
   /// which are not set in Geant4 itself
-  
+
 
   auto processName = process->GetProcessName();
 
   if (! G4StrUtil::contains(processName, "Nuclear")) return;
 
   std::set<std::pair<G4String, G4int>> newCodes =
-    {{ "electron", fElectronNuclear }, 
+    {{ "electron", fElectronNuclear },
      { "positron", fPositronNuclear },
      { "muon", fMuonNuclear },
      { "mu-", fMuonNuclear },
-     { "photon", fPhotoNuclear }}; 
+     { "photon", fPhotoNuclear }};
 
   for ( auto newCode : newCodes) {
     if ( G4StrUtil::contains(processName, newCode.first)) {
@@ -251,7 +251,7 @@ void TG4ProcessMapPhysics::ConstructProcess()
       aParticleIterator->value()->GetProcessManager()->GetProcessList();
 
     for (size_t i = 0; i < processVector->length(); i++) {
-      
+
       if (UpdateOrSkipBiasingProcess((*processVector)[i])) continue;
 
       if ((*processVector)[i]->GetProcessSubType() == fHadronInelastic) {

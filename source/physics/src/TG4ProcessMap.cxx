@@ -104,7 +104,7 @@ void TG4ProcessMap::Clear()
 }
 
 //_____________________________________________________________________________
-std::pair<TMCProcess, TG4G3Control> 
+std::pair<TMCProcess, TG4G3Control>
 TG4ProcessMap::GetCodes(const G4VProcess* process) const
 {
   /// Return the pair of TMCProcess  and G3 control codes for the process
