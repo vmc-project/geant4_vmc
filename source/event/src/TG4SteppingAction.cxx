@@ -149,11 +149,14 @@ void TG4SteppingAction::ProcessTrackIfOutOfRegion(const G4Step* step)
 //_____________________________________________________________________________
 void TG4SteppingAction::ProcessTrackIfBelowCut(const G4Step* step)
 {
-  /// Flag e+e- secondary pair for stop if its energy is below user cut
+  /// Flag e+e- secondary pair produced by muons for stop if its energy 
+  /// is below user cut (PPCUTM)
 
-  if (step->GetSecondary()->size() == 2 &&
-      ((*step->GetSecondary())[0]->GetCreatorProcess()->GetProcessName() ==
+  if (step->GetSecondaryInCurrentStep()->size() == 2 &&
+      ((*step->GetSecondaryInCurrentStep())[0]->GetCreatorProcess()->GetProcessName() ==
         "muPairProd")) {
+             // Process sub type fPairProdByCharged does distinguish the creator
+             // particle type
 
     G4double minEtotPair =
       fStepManager->GetCurrentLimits()->GetCutVector()->GetMinEtotPair();

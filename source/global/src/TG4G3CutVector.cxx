@@ -240,10 +240,10 @@ void TG4G3CutVector::SetCut(TG4G3Cut cut, G4double cutValue)
 
   // Set the CUTELE value also to DCUTE, DCUTM unless they were already set
   if (cut == kCUTELE) {
-    if (! fIsBCUTE) {
+    if (!fIsDCUTE) {
       fCutVector[kDCUTE] = cutValue;
     }
-    if (! fIsBCUTM) {
+    if (!fIsDCUTM) {
       fCutVector[kDCUTM] = cutValue;
     }
   }
