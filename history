@@ -9,13 +9,26 @@
 
 Tags (history):
 ===============
+  25/02/2022
+  v5-4-p2:
+    Patch release, including following fixes:
+    Geant4 VMC:
+    - Fixes in applying cuts and processes maps: (#29)
+      - Fixed mapping of some hadronic processes
+      - Fixed applying PPCUTM:
+        Using G4Step::GetSecondaryInCurrentStep() instead of GetSecondary(),
+        as the second one provides accumulated secondaries since the first step
+      - Fix in development in PR #26
+    - CMake: Fix G4Root_BUILD_TEST option in main CMakeLists. (#28)
+    - Fixed locking in TG4ModelConfigurationManager (#23)
+
   14/02/2022
   v5-4-p1:
     Patch release, including following fixes:
     Geant4 VMC:
     - Fixed applying special cuts:
       - Pass the CUTELE/CUTGAM values set to tracking medium to
-        DCUT*/BCUT* values instead of using the default global values
+        DCUT*/BCUT* values instead of using the default global values (PR #26)
       - Fixed process activation in TG4PhysicsManager
     - Fixed incrementing static counter in the TG4Verbose constructor
     - Fixed data race in MT in TG4ModelConfigurationManager and TG4BiasingManager
