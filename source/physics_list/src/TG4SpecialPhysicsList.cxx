@@ -79,8 +79,7 @@ G4bool TG4SpecialPhysicsList::IsAvailableSelection(const G4String& selection)
 //
 
 //_____________________________________________________________________________
-TG4SpecialPhysicsList::TG4SpecialPhysicsList(
-  const G4String& selection, G4bool isBiasing)
+TG4SpecialPhysicsList::TG4SpecialPhysicsList(const G4String& selection)
   : G4VModularPhysicsList(),
     TG4Verbose("specialPhysicsList"),
     fStackPopperPhysics(0),
@@ -98,7 +97,7 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList(
   }
   fgInstance = this;
 
-  Configure(selection, isBiasing);
+  Configure(selection);
 
   SetVerboseLevel(TG4Verbose::VerboseLevel());
 }
@@ -116,7 +115,7 @@ TG4SpecialPhysicsList::TG4SpecialPhysicsList()
 
   G4cout << "TG4SpecialPhysicsList::TG4SpecialPhysicsList" << G4endl;
 
-  Configure("", false);
+  Configure("");
 
   SetVerboseLevel(TG4Verbose::VerboseLevel());
 }
@@ -137,8 +136,7 @@ TG4SpecialPhysicsList::~TG4SpecialPhysicsList()
 //
 
 //_____________________________________________________________________________
-void TG4SpecialPhysicsList::Configure(
-  const G4String& selection, G4bool isBiasing)
+void TG4SpecialPhysicsList::Configure(const G4String& selection)
 {
   /// Create the selected physics constructors
   /// and registeres them in the modular physics list.
