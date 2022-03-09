@@ -14,9 +14,6 @@
 
 #include "TG4ProcessMapPhysics.h"
 #include "TG4Globals.h"
-#include "TG4ProcessMCMap.h"
-#include "TG4ProcessControlMap.h"
-  // for checking backward compatibility
 #include "TG4ProcessMap.h"
 
 #include <TVirtualMC.h>
@@ -237,8 +234,6 @@ void TG4ProcessMapPhysics::ConstructProcess()
   }
 
   auto pMap = TG4ProcessMap::Instance();
-  auto mcProcessMap = TG4ProcessMCMap::Instance();
-  auto controlMap = TG4ProcessControlMap::Instance();
   G4bool success = true;
 
   auto aParticleIterator = GetParticleIterator();
@@ -268,21 +263,6 @@ void TG4ProcessMapPhysics::ConstructProcess()
         text += std::to_string((*processVector)[i]->GetProcessSubType());
         TG4Globals::Warning("TG4ProcessMapPhysics", "ConstructProcess", text);
         success = false;
-      }
-
-      // Check consistency with old maps
-      // To be removed
-      auto oldCode = mcProcessMap->GetMCProcess((*processVector)[i]);
-      auto oldControl = controlMap->GetControl((*processVector)[i]);
-      if (newCodes.first != oldCode || newCodes.second != oldControl) {
-        G4cerr << "!!!! Old and new process codes differ: "
-               << aParticleIterator->value()->GetParticleName() << " "
-               << (*processVector)[i]->GetProcessName() << " "
-               << (*processVector)[i]->GetProcessSubType() << G4endl;
-        G4cerr << "MC process value - old: " << oldCode << " new: "
-               << newCodes.first << G4endl;
-        G4cerr << "G3 control value - old: " << oldControl << " new: "
-               << newCodes.second << G4endl;
       }
     }
   }

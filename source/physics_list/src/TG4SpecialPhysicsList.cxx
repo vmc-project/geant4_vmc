@@ -20,9 +20,6 @@
 #include "TG4G3PhysicsManager.h"
 #include "TG4GeometryServices.h"
 #include "TG4GflashFastSimulation.h"
-#include "TG4ProcessControlMap.h"
-#include "TG4ProcessControlMapPhysics.h"
-#include "TG4ProcessMCMapPhysics.h"
 #include "TG4ProcessMapPhysics.h"
 #include "TG4SpecialCutsPhysics.h"
 #include "TG4StackPopperPhysics.h"
@@ -149,7 +146,6 @@ void TG4SpecialPhysicsList::Configure(
   Int_t tg4VerboseLevel = TG4Verbose::VerboseLevel();
 
   RegisterPhysics(new TG4TransitionRadiationPhysics(tg4VerboseLevel));
-  RegisterPhysics(new TG4ProcessControlMapPhysics(isBiasing, tg4VerboseLevel));
 
   G4int itoken = 0;
   TString token = TG4Globals::GetToken(itoken, selection);
@@ -181,7 +177,6 @@ void TG4SpecialPhysicsList::Configure(
   }
   RegisterPhysics(new TG4UserParticlesPhysics(tg4VerboseLevel));
   RegisterPhysics(new TG4ExtDecayerPhysics(tg4VerboseLevel));
-  RegisterPhysics(new TG4ProcessMCMapPhysics(isBiasing, tg4VerboseLevel));
 
   fEmModelPhysics = new TG4EmModelPhysics(tg4VerboseLevel);
   RegisterPhysics(fEmModelPhysics);

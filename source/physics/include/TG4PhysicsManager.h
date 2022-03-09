@@ -32,8 +32,6 @@
 #include <set>
 
 class TG4ParticlesManager;
-class TG4ProcessControlMap;
-class TG4ProcessMCMap;
 class TG4ProcessMap;
 class TG4G3PhysicsManager;
 class TG4G3ProcessMap;
@@ -140,12 +138,6 @@ class TG4PhysicsManager : public TG4Verbose
   static TG4PhysicsManager* fgInstance; ///< this instance
 
   static const G4double fgkDefautCut; ///< the default range cut value
-
-  /// the mapping between G4 process names and TMCProcess codes
-  static TG4ProcessMCMap* fgProcessMCMap;
-
-  /// the mapping between G4 processes and G3 process controls
-  static TG4ProcessControlMap* fgProcessControlMap;
 
   /// the mapping between G4 processes and G3 process controls
   static TG4ProcessMap* fgProcessMap;

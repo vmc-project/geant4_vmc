@@ -16,7 +16,7 @@
 #include "TG4G3CutVector.h"
 #include "TG4G3Defaults.h"
 #include "TG4Globals.h"
-#include "TG4ProcessControlMap.h"
+#include "TG4ProcessMap.h"
 
 #include <G4VProcess.hh>
 
@@ -328,7 +328,7 @@ TG4G3ControlValue TG4G3ControlVector::GetControlValue(G4VProcess* process) const
   /// Return the control value for the particle associated with
   /// the specified process.
 
-  TG4G3Control control = TG4ProcessControlMap::Instance()->GetControl(process);
+  TG4G3Control control = TG4ProcessMap::Instance()->GetControl(process);
 
   return fControlVector[control];
 }

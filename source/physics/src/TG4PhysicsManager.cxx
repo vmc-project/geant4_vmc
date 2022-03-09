@@ -22,8 +22,6 @@
 #include "TG4Medium.h"
 #include "TG4MediumMap.h"
 #include "TG4ParticlesManager.h"
-#include "TG4ProcessControlMap.h"
-#include "TG4ProcessMCMap.h"
 #include "TG4ProcessMap.h"
 #include "TG4SpecialPhysicsList.h"
 #include "TG4StateManager.h"
@@ -56,8 +54,6 @@
 
 TG4PhysicsManager* TG4PhysicsManager::fgInstance = 0;
 const G4double TG4PhysicsManager::fgkDefautCut = 1 * mm;
-TG4ProcessMCMap* TG4PhysicsManager::fgProcessMCMap = 0;
-TG4ProcessControlMap* TG4PhysicsManager::fgProcessControlMap = 0;
 TG4ProcessMap* TG4PhysicsManager::fgProcessMap = 0;
 
 //_____________________________________________________________________________
@@ -83,8 +79,6 @@ TG4PhysicsManager::TG4PhysicsManager()
 
   G4bool isMaster = !G4Threading::IsWorkerThread();
   if (isMaster) {
-    fgProcessMCMap = new TG4ProcessMCMap();
-    fgProcessControlMap = new TG4ProcessControlMap();
     fgProcessMap = new TG4ProcessMap();
   }
 
@@ -106,11 +100,7 @@ TG4PhysicsManager::~TG4PhysicsManager()
   fgInstance = 0;
   G4bool isMaster = !G4Threading::IsWorkerThread();
   if (isMaster) {
-    delete fgProcessMCMap;
-    delete fgProcessControlMap;
     delete fgProcessMap;
-    fgProcessMCMap = 0;
-    fgProcessControlMap = 0;
     fgProcessMap = 0;
   }
   delete fParticlesManager;

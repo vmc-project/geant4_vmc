@@ -21,7 +21,7 @@
 /// The G4 physics processes and particles, which the process
 /// control is applied to, are indicated in the comments.
 /// The process control is mapped to the physics processes
-/// (using TG4ProcessControlMap) at the moment of process creating
+/// (using TG4ProcessMap) at the moment of process creating
 /// by the physics constructor; the physics contructor type
 /// is indicated by the "Physics:" comment.
 
