@@ -47,6 +47,7 @@
 #include <G4UIExecutive.hh>
 #include <G4UImanager.hh>
 #include <G4UIsession.hh>
+#include <G4Version.hh>
 #include <Randomize.hh>
 
 #ifdef USE_G4ROOT
@@ -405,8 +406,10 @@ void TG4RunManager::Initialize()
   // create G4RunManager
   // ConfigureRunManager();
 
+#if G4VERSION_NUMBER == 1100
   // Temporary work-around for bug in Cerenkov in Geant4 11.0
   TG4PhysicsManager::Instance()->StoreCerenkovMaxBetaChangeValue();
+#endif
 
   // initialize Geant4
   fRunManager->Initialize();
