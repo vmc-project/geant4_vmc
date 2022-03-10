@@ -18,6 +18,8 @@
 #include "TG4G3Cut.h"
 #include "TG4Globals.h"
 
+#include <array>
+
 class G4Track;
 
 /// \ingroup global
@@ -87,19 +89,26 @@ class TG4G3CutVector
   TG4doubleVector fCutVector;
 
   /// delta rays process control
-  G4bool fDeltaRaysOn;
+  G4bool fDeltaRaysOn = true;
 
-  /// flag to prevent overwiting BCUTE cut if set by user
-  G4bool fIsBCUTE;
+  /// flag if any value is set
+  G4bool fIsCut = false;
 
-  /// flag to prevent overwiting BCUTM cut if set by user
-  G4bool fIsBCUTM;
+  /// local enumeration for the indices in the flags arrays
+  enum IsBDCutIndex {
+    kBE, kBM, kDE, kDM
+  };
 
-  /// flag to prevent overwiting DCUTE cut if set by user
-  G4bool fIsDCUTE;
+  /// flag to prevent overwiting [B/D]CUT[E/M] cut if set by user
+  std::array<G4bool, 4> fIsBDCut = { false, false, false, false};
 
-  /// flag to prevent overwiting DCUTM cut if set by user
-  G4bool fIsDCUTM;
+  /// local enumeration for the indices in the flags arrays
+  enum ApplyBDCutIndex {
+    kB, kBEM, kD, kDEM
+  };
+
+  /// flag set if [B/D]CUT[E/M] cut is different from CUT[ELE/GAM]
+  std::array<G4bool, 4> fApplyBDCut = { false, false, false, false};
 };
 
 // inline methods
@@ -114,6 +123,12 @@ inline void TG4G3CutVector::SetDeltaRaysOn(G4bool value)
 {
   /// Return delta rays process control
   fDeltaRaysOn = value;
+}
+
+inline G4bool TG4G3CutVector::IsCut() const
+{
+  /// Return true if any of cuts is set.
+  return fIsCut;
 }
 
 #endif // TG4_CUT_VECTOR_H

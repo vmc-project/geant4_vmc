@@ -18,6 +18,7 @@
 
 #include "CLHEP/Units/PhysicalConstants.h"
 
+#include <G4EmProcessSubType.hh>
 #include <G4ParticleDefinition.hh>
 #include <G4SystemOfUnits.hh>
 #include <G4Track.hh>
@@ -115,12 +116,6 @@ const G4String& TG4G3CutVector::GetCutName(TG4G3Cut cut)
 
 //_____________________________________________________________________________
 TG4G3CutVector::TG4G3CutVector()
-  : fCutVector(),
-    fDeltaRaysOn(true),
-    fIsBCUTE(false),
-    fIsBCUTM(false),
-    fIsDCUTE(false),
-    fIsDCUTM(false)
 {
   /// Default constructor
 
@@ -128,7 +123,9 @@ TG4G3CutVector::TG4G3CutVector()
   if (fgCutNameVector.size() == 0) FillCutNameVector();
 
   // initialize fCutVector
-  for (G4int i = 0; i < kTOFMAX; i++) fCutVector.push_back(0.);
+  for (G4int i = 0; i < kTOFMAX; i++) {
+    fCutVector.push_back(0.);
+  }
   fCutVector.push_back(DBL_MAX);
 }
 
@@ -161,13 +158,19 @@ TG4G3CutVector& TG4G3CutVector::operator=(const TG4G3CutVector& right)
   if (this == &right) return *this;
 
   // copy fCutVector
-  for (G4int i = 0; i < kNoG3Cuts; i++) fCutVector[i] = right.fCutVector[i];
+  for (G4int i = 0; i < kNoG3Cuts; i++) {
+    fCutVector[i] = right.fCutVector[i];
+  }
 
   fDeltaRaysOn = right.fDeltaRaysOn;
-  fIsBCUTE = right.fIsBCUTE;
-  fIsBCUTM = right.fIsBCUTM;
-  fIsDCUTE = right.fIsDCUTE;
-  fIsDCUTM = right.fIsDCUTM;
+  fIsCut = right.fIsCut;
+
+  // copy flag arrays
+  for (G4int i = 0; i <= kDM; ++i) {
+    fIsBDCut[i] = right.fIsBDCut[i];
+    fApplyBDCut[i] = right.fApplyBDCut[i];
+  }
+;
 
   return *this;
 }
@@ -223,38 +226,58 @@ void TG4G3CutVector::SetCut(TG4G3Cut cut, G4double cutValue)
   }
 
   fCutVector[cut] = cutValue;
+  if (cutValue > 0.) {
+    fIsCut = true;
+  }
 
   // Update the selected flags
   if (cut == kBCUTE) {
-    fIsBCUTE = true;
+    fIsBDCut[kBE] = true;
   }
   else if (cut == kBCUTM) {
-    fIsBCUTM = true;
+    fIsBDCut[kBM] = true;
   }
   else if (cut == kDCUTE) {
-    fIsDCUTE = true;
+    fIsBDCut[kDE] = true;
   }
   else if (cut == kDCUTM) {
-    fIsDCUTM = true;
-  }
-
-  // Set the CUTELE value also to DCUTE, DCUTM unless they were already set
-  if (cut == kCUTELE) {
-    if (!fIsDCUTE) {
-      fCutVector[kDCUTE] = cutValue;
-    }
-    if (!fIsDCUTM) {
-      fCutVector[kDCUTM] = cutValue;
-    }
+    fIsBDCut[kDM] = true;
   }
 
   // set the CUTGAM value also to BCUTE, BCUTM unless they were already set
   if (cut == kCUTGAM) {
-    if (!fIsBCUTE) {
+    if (!fIsBDCut[kBE]) {
       fCutVector[kBCUTE] = cutValue;
     }
-    if (!fIsBCUTM) {
+    if (!fIsBDCut[kBM]) {
       fCutVector[kBCUTM] = cutValue;
+    }
+  }
+
+  // Set the CUTELE value also to DCUTE, DCUTM unless they were already set
+  if (cut == kCUTELE) {
+    if (!fIsBDCut[kDE]) {
+      fCutVector[kDCUTE] = cutValue;
+    }
+    if (!fIsBDCut[kDM]) {
+      fCutVector[kDCUTM] = cutValue;
+    }
+  }
+
+  // Notify whther the [B/D]CUT should be taken into account
+  if ( fCutVector[kBCUTE] != fCutVector[kCUTGAM] ||
+       fCutVector[kBCUTM] != fCutVector[kCUTGAM] ) {
+    fApplyBDCut[kB] = true;
+    if (fCutVector[kBCUTE] != fCutVector[kBCUTM]) {
+      fApplyBDCut[kBEM] = true;
+    }
+  }
+
+  if ( fCutVector[kDCUTE] != fCutVector[kCUTELE] ||
+       fCutVector[kDCUTM] != fCutVector[kCUTELE]) {
+    fApplyBDCut[kD] = true;
+    if (fCutVector[kDCUTE] != fCutVector[kDCUTM]) {
+      fApplyBDCut[kDEM] = true;
     }
   }
 }
@@ -264,8 +287,11 @@ void TG4G3CutVector::SetG3Defaults()
 {
   /// Set G3 default values for all cuts.
 
-  for (G4int i = 0; i < kNoG3Cuts; i++)
+  for (G4int i = 0; i < kNoG3Cuts; i++) {
     fCutVector[i] = TG4G3Defaults::Instance()->CutValue(i);
+  }
+
+  fIsCut = true;
 }
 
 //_____________________________________________________________________________
@@ -324,14 +350,21 @@ G4double TG4G3CutVector::GetMinEkineForGamma(const G4Track& track) const
   /// Cut is not applied for "opticalphoton" which is treated in G4 as a
   /// particle different from "gamma".
 
-  // Special treatment of bremstrahlung threshold:
-  // apply the BCUT*  in the first step only
-  if (track.GetCurrentStepNumber() == 1) {
+  // Cut for Bremstrahlung not set
+  // or creator process is not Bremstrahlung
+  if (! fApplyBDCut[kB] ||
+      track.GetCreatorProcess() == nullptr ||
+      track.GetCreatorProcess()->GetProcessSubType() != fBremsstrahlung) {
+    return fCutVector[kCUTGAM];
+  }
 
-    const G4VProcess* kpCreatorProcess = track.GetCreatorProcess();
-    G4String processName = "";
-    if (kpCreatorProcess) processName = kpCreatorProcess->GetProcessName();
-
+  if (! fApplyBDCut[kBEM]) {
+    // Bremstrahlung - BCUTE, BCUTM need not to be applied separately
+    return fCutVector[kBCUTE];
+  }
+  else {
+    // Bremstrahlung - BCUTE, BCUTM are different
+    auto processName = track.GetCreatorProcess()->GetProcessName();
     if (processName == "eBrem") {
       return fCutVector[kBCUTE];
     }
@@ -341,9 +374,6 @@ G4double TG4G3CutVector::GetMinEkineForGamma(const G4Track& track) const
     else {
       return fCutVector[kCUTGAM];
     }
-  }
-  else {
-    return fCutVector[kCUTGAM];
   }
 }
 
@@ -361,41 +391,40 @@ G4double TG4G3CutVector::GetMinEkineForElectron(const G4Track& track) const
   /// - CUTELE - in all other cases.
   /// The delta ray cuts are applied only in the track first step.
 
-  // Special treatment of delta rays threashold:
-  // apply the DCUT* in the first step only
-  if (track.GetCurrentStepNumber() == 1) {
+  // Cut for Delta e- is not set and Delta e- are not switched off or
+  // creator process is not Ionisation
+  if ((! fApplyBDCut[kD] && fDeltaRaysOn) ||
+      track.GetCreatorProcess() != nullptr ||
+      track.GetCreatorProcess()->GetProcessSubType() == fIonisation ) {
+    return fCutVector[kCUTELE];
+  }
 
-    const G4VProcess* kpCreatorProcess = track.GetCreatorProcess();
-    G4String processName = "";
-    if (kpCreatorProcess) processName = kpCreatorProcess->GetProcessName();
+  // Delta e- are switched off
+  if (! fDeltaRaysOn) {
+     return fgkDCUTEOff;
+  }
 
+  // Cut for Delta e- is not set
+  if (! fApplyBDCut[kD]) {
+    return fCutVector[kCUTELE];
+  }
+
+  if (! fApplyBDCut[kDEM]) {
+    // Delta e- - DCUTE, DCUTM need not to be applied separately
+    return fCutVector[kDCUTE];
+  }
+  else {
+    // Delta e- - DCUTE, DCUTM are different
+    auto processName = track.GetCreatorProcess()->GetProcessName();
     if (processName == "eIoni") {
-      // delta rays by e-, e+
-      if (fDeltaRaysOn)
-        return fCutVector[kDCUTE];
-      else
-        return fgkDCUTEOff;
+      return fCutVector[kDCUTE];
     }
     else if (processName == "muIoni") {
-      // delta rays by mu
-      if (fDeltaRaysOn)
-        return fCutVector[kDCUTM];
-      else
-        return fgkDCUTMOff;
-    }
-    else if (processName == "hIoni" || processName == "ionIoni") {
-      // delta rays by other particles
-      if (fDeltaRaysOn)
-        return fCutVector[kCUTELE];
-      else
-        return fgkDCUTMOff;
+      return fCutVector[kDCUTM];
     }
     else {
       return fCutVector[kCUTELE];
     }
-  }
-  else {
-    return fCutVector[kCUTELE];
   }
 }
 
@@ -431,15 +460,4 @@ G4double TG4G3CutVector::GetMinEtotPair() const
   /// Return the cut value for the pair production by muons (PPCUTM).
 
   return fCutVector[kPPCUTM];
-}
-
-//_____________________________________________________________________________
-G4bool TG4G3CutVector::IsCut() const
-{
-  /// Return true if any of cuts is set.
-
-  for (G4int i = 0; i < kNoG3Cuts; i++)
-    if (fCutVector[i] > fgkTolerance) return true;
-
-  return false;
 }

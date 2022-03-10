@@ -22,6 +22,16 @@ class TVirtualMCStack;
 class G4Track;
 
 /// \ingroup physics
+/// \brief Definition of Stack popper process type
+///
+/// \author I. Hrivnacova; IJCLab, Orsay
+
+enum TG4StackPopperProcessType
+{
+  fStackPopper = 601
+};
+
+/// \ingroup physics
 /// \brief The process which pops particles defined by user from
 ///        the VMC stack and passes them to tracking
 ///

@@ -39,8 +39,6 @@ class G4UIcmdWithAnInteger;
 /// - /mcPhysics/rangeCuts            value [unit]
 /// - /mcPhysics/productionCutsTableEnergyRange  minValue maxValue [unit]
 /// - /mcPhysics/setGammaToMuonsCrossSectionFactor  value
-/// - /mcPhysics/printProcessMCMap
-/// - /mcPhysics/printProcessControlMap
 /// - /mcPhysics/printVolumeLimits [volName]
 /// - /mcPhysics/printGlobalCuts
 /// - /mcPhysics/printGlobalControls
@@ -108,11 +106,8 @@ class TG4ComposedPhysicsMessenger : public G4UImessenger
   /// dumpAllProcess command
   G4UIcmdWithoutParameter* fDumpAllProcessesCmd;
 
-  /// printProcessMCMap command
-  G4UIcmdWithoutParameter* fPrintProcessMCMapCmd;
-
-  /// printProcessControlsMap command
-  G4UIcmdWithoutParameter* fPrintProcessControlMapCmd;
+  /// printProcessMap command
+  G4UIcmdWithoutParameter* fPrintProcessMapCmd;
 
   /// printVolumeLimits command
   G4UIcmdWithAString* fPrintVolumeLimitsCmd;

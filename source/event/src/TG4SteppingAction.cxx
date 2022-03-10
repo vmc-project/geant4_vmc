@@ -149,7 +149,7 @@ void TG4SteppingAction::ProcessTrackIfOutOfRegion(const G4Step* step)
 //_____________________________________________________________________________
 void TG4SteppingAction::ProcessTrackIfBelowCut(const G4Step* step)
 {
-  /// Flag e+e- secondary pair produced by muons for stop if its energy 
+  /// Flag e+e- secondary pair produced by muons for stop if its energy
   /// is below user cut (PPCUTM)
 
   if (step->GetSecondaryInCurrentStep()->size() == 2 &&

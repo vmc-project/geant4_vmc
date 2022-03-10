@@ -13,10 +13,6 @@
 /// \author I. Hrivnacova; IPN, Orsay
 
 #include "TG4StepLimiterPhysics.h"
-#include "TG4ProcessControlMap.h"
-#include "TG4ProcessMCMap.h"
-
-#include <TMCProcess.h>
 
 #include <G4ParticleDefinition.hh>
 #include <G4ProcessManager.hh>

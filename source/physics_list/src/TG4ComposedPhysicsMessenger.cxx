@@ -17,8 +17,7 @@
 #include "TG4G3PhysicsManager.h"
 #include "TG4GeometryServices.h"
 #include "TG4PhysicsManager.h"
-#include "TG4ProcessControlMap.h"
-#include "TG4ProcessMCMap.h"
+#include "TG4ProcessMap.h"
 
 #include <G4AnalysisUtilities.hh>
 #include <G4HadronicProcessStore.hh>
@@ -42,8 +41,7 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
     fRangeProtonCutCmd(0),
     fRangeAllCutCmd(0),
     fSetGammaToMuonsCrossSectionFactorCmd(0),
-    fPrintProcessMCMapCmd(0),
-    fPrintProcessControlMapCmd(0),
+    fPrintProcessMapCmd(0),
     fPrintVolumeLimitsCmd(0),
     fPrintGlobalCutsCmd(0),
     fPrintGlobalControlsCmd(0),
@@ -115,17 +113,11 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
   fDumpAllProcessesCmd->SetGuidance("Dump all instantiated processes.");
   fDumpAllProcessesCmd->AvailableForStates(G4State_Idle);
 
-  fPrintProcessMCMapCmd =
-    new G4UIcmdWithoutParameter("/mcPhysics/printProcessMCMap", this);
-  fPrintProcessMCMapCmd->SetGuidance(
-    "Print mapping of G4 processes to VMC process codes.");
-  fPrintProcessMCMapCmd->AvailableForStates(G4State_Idle);
-
-  fPrintProcessControlMapCmd =
-    new G4UIcmdWithoutParameter("/mcPhysics/printProcessControlMap", this);
-  fPrintProcessControlMapCmd->SetGuidance(
-    "Print mapping of G4 processes to VMC (G3-like) controls.");
-  fPrintProcessControlMapCmd->AvailableForStates(G4State_Idle);
+  fPrintProcessMapCmd =
+    new G4UIcmdWithoutParameter("/mcPhysics/printProcessMap", this);
+  fPrintProcessMapCmd->SetGuidance(
+    "Print mapping of G4 processes to VMC process codes and (G3-like) controls.");
+  fPrintProcessMapCmd->AvailableForStates(G4State_Idle);
 
   fPrintVolumeLimitsCmd =
     new G4UIcmdWithAString("/mcPhysics/printVolumeLimits", this);
@@ -188,8 +180,7 @@ TG4ComposedPhysicsMessenger::~TG4ComposedPhysicsMessenger()
   delete fSetGammaToMuonsCrossSectionFactorCmd;
   delete fPrintAllProcessesCmd;
   delete fDumpAllProcessesCmd;
-  delete fPrintProcessMCMapCmd;
-  delete fPrintProcessControlMapCmd;
+  delete fPrintProcessMapCmd;
   delete fPrintVolumeLimitsCmd;
   delete fPrintGlobalCutsCmd;
   delete fPrintGlobalControlsCmd;
@@ -295,11 +286,8 @@ void TG4ComposedPhysicsMessenger::SetNewValue(
   else if (command == fDumpAllProcessesCmd) {
     fPhysicsList->DumpAllProcesses();
   }
-  else if (command == fPrintProcessMCMapCmd) {
-    TG4ProcessMCMap::Instance()->PrintAll();
-  }
-  else if (command == fPrintProcessControlMapCmd) {
-    TG4ProcessControlMap::Instance()->PrintAll();
+  else if (command == fPrintProcessMapCmd) {
+    TG4ProcessMap::Instance()->PrintAll();
   }
   else if (command == fPrintVolumeLimitsCmd) {
     TG4GeometryServices::Instance()->PrintVolumeLimits(newValue);

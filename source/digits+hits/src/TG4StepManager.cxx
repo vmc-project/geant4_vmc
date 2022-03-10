@@ -31,6 +31,7 @@
 #include <G4ProcessVector.hh>
 #include <G4SteppingManager.hh>
 #include <G4TransportationManager.hh>
+#include <G4TransportationProcessType.hh>
 #include <G4UImanager.hh>
 #include <G4UserLimits.hh>
 #include <G4VProcess.hh>
@@ -1393,13 +1394,13 @@ Int_t TG4StepManager::StepProcesses(TArrayI& processes) const
   for (G4int i = 0; i < nofAlongStep; i++) {
     G4VProcess* g4Process = (*processVector)[i];
     // do not fill transportation along step process
-    if (g4Process && g4Process->GetProcessName() != "Transportation")
+    if (g4Process && g4Process->GetProcessSubType() != TRANSPORTATION)
       processes[counter++] = physicsManager->GetMCProcess(g4Process);
   }
 
   // fill array with optical photon information
   if (fStep->GetTrack()->GetDefinition() == G4OpticalPhoton::Definition() &&
-      kpLastProcess->GetProcessName() == "Transportation" &&
+      kpLastProcess->GetProcessSubType() == TRANSPORTATION &&
       physicsManager->IsOpBoundaryProcess()) {
 
     // add light scattering anbd reflection/absorption as additional processes

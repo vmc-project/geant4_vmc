@@ -42,6 +42,9 @@ TG4StackPopper::TG4StackPopper(const G4String& processName)
 
   fgInstance = this;
 
+  // Set process sub type
+  SetProcessSubType(fStackPopper);
+
   // Cache thread-local pointers
   fMCStack = gMC->GetStack();
 }

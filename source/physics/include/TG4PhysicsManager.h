@@ -19,8 +19,6 @@
 #include "TG4G3Cut.h"
 #include "TG4Globals.h"
 #include "TG4NameMap.h"
-#include "TG4ProcessControlMap.h"
-#include "TG4ProcessMCMap.h"
 #include "TG4Verbose.h"
 
 #include <Rtypes.h>
@@ -34,6 +32,7 @@
 #include <set>
 
 class TG4ParticlesManager;
+class TG4ProcessMap;
 class TG4G3PhysicsManager;
 class TG4G3ProcessMap;
 
@@ -128,7 +127,7 @@ class TG4PhysicsManager : public TG4Verbose
   G4ParticleDefinition* GetParticleDefinition(G4int pdgEncoding) const;
 
   G4VProcess* GetProcess(
-    G4ProcessManager* processManager, G4String subName) const;
+    G4ProcessManager* processManager, G4int subType) const;
 
   void SetProcessActivation(
     G4ProcessManager* processManager, G4int processId, G4bool activation);
@@ -140,11 +139,8 @@ class TG4PhysicsManager : public TG4Verbose
 
   static const G4double fgkDefautCut; ///< the default range cut value
 
-  /// the mapping between G4 process names and TMCProcess codes
-  static TG4ProcessMCMap* fgProcessMCMap;
-
   /// the mapping between G4 processes and G3 process controls
-  static TG4ProcessControlMap* fgProcessControlMap;
+  static TG4ProcessMap* fgProcessMap;
 
   //
   // data members
