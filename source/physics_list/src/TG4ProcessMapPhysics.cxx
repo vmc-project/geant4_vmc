@@ -27,6 +27,7 @@
 // G4 process code headers
 #include <G4DecayProcessType.hh>
 #include <G4EmProcessSubType.hh>
+#include <G4FastSimulationProcessType.hh>
 #include <G4HadronicProcessType.hh>
 #include <G4OpProcessSubType.hh>
 #include <G4ProcessType.hh>
@@ -151,9 +152,14 @@ void TG4ProcessMapPhysics::FillMap()
   pMap->Add(DECAY_MuAtom, kPDecay, kDCAY);                         // G4 value: 221
   pMap->Add(DECAY_External, kPDecay, kDCAY);                       // G4 value: 231
 
-  // G4TransportationProcessType: 91, 92; 401 - 491
+  // G4TransportationProcessType: 91, 92
   pMap->Add(TRANSPORTATION, kPTransportation, kNoG3Controls);         // G4 value: 91
   pMap->Add(COUPLED_TRANSPORTATION, kPTransportation, kNoG3Controls); // G4 value: 92
+
+  // G4FastSimulationProcessType: 301
+  pMap->Add(FASTSIM_ManagerProcess, kPNull, kNoG3Controls);        // G4 value: 301
+
+  // G4TransportationProcessType: 401 - 491
   // following processes belong to 'General' type
   pMap->Add(STEP_LIMITER, kStepMax, kNoG3Controls);                // G4 value: 401
   pMap->Add(USER_SPECIAL_CUTS, kPStop, kNoG3Controls);             // G4 value: 402
