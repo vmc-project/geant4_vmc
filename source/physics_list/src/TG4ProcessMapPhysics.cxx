@@ -15,6 +15,7 @@
 #include "TG4ProcessMapPhysics.h"
 #include "TG4Globals.h"
 #include "TG4ProcessMap.h"
+#include "TG4StackPopper.h"
 
 #include <TVirtualMC.h>
 #include <TVirtualMCDecayer.h>
@@ -136,10 +137,10 @@ void TG4ProcessMapPhysics::FillMap()
     // No process defined with this code
 
   // TG4HadronicProcessType: 171 - 174
-  pMap->Add(fElectronNuclear, kPElectronNuclear, kHADR);           // G4 value: 171
-  pMap->Add(fPositronNuclear, kPPositronNuclear, kHADR);           // G4 value: 172
-  pMap->Add(fMuonNuclear, kPMuonNuclear, kMUNU);                   // G4 value: 173
-  pMap->Add(fPhotoNuclear, kPPhotoNuclear, kHADR);                 // G4 value: 174
+  pMap->Add(fElectronNuclear, kPElectronNuclear, kHADR);           // TG4 value: 171
+  pMap->Add(fPositronNuclear, kPPositronNuclear, kHADR);           // TG4 value: 172
+  pMap->Add(fMuonNuclear, kPMuonNuclear, kMUNU);                   // TG4 value: 173
+  pMap->Add(fPhotoNuclear, kPPhotoNuclear, kHADR);                 // TG4 value: 174
 
   // G4DecayProcessType: 201 - 231
   pMap->Add(DECAY, kPDecay, kDCAY);                                // G4 value: 201
@@ -161,7 +162,10 @@ void TG4ProcessMapPhysics::FillMap()
   pMap->Add(PARALLEL_WORLD_PROCESS, kPNull, kNoG3Controls);        // G4 value: 491
 
   // TG4BiasingProcessType: 501
-  pMap->Add(fBiasing, kPNull, kNoG3Controls);                      // G4 value: 501
+  pMap->Add(fBiasing, kPNull, kNoG3Controls);                      // TG4 value: 501
+
+  // TG4StackPopperProcessType: 601
+  pMap->Add(fStackPopper, kPNull, kNoG3Controls);                  // TG4 value: 601
 }
 
 //_____________________________________________________________________________

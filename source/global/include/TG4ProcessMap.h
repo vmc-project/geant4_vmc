@@ -25,7 +25,7 @@
 
 class G4VProcess;
 
-/// \ingroup physics
+/// \ingroup global
 /// \brief Maps G4 process sub types to TMCProcess and TG4G3Control codes
 ///
 /// Singleton map container for associated pairs
