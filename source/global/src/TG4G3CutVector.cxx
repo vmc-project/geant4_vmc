@@ -394,7 +394,7 @@ G4double TG4G3CutVector::GetMinEkineForElectron(const G4Track& track) const
   // Cut for Delta e- is not set and Delta e- are not switched off or
   // creator process is not Ionisation
   if ((! fApplyBDCut[kD] && fDeltaRaysOn) ||
-      track.GetCreatorProcess() != nullptr ||
+      track.GetCreatorProcess() == nullptr ||
       track.GetCreatorProcess()->GetProcessSubType() == fIonisation ) {
     return fCutVector[kCUTELE];
   }
