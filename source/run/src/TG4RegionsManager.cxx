@@ -486,7 +486,7 @@ void TG4RegionsManager::DefineRegions()
   }
 
   // Create G4 range to energy converters
-#if G4VERSION_NUMBER == 1100
+#if (G4VERSION_NUMBER == 1100 || G4VERSION_NUMBER == 1101 )
   // Temporary work-around for a bug in G4VRangeToEnergyConverter
   auto g4ConverterElePtr = new G4RToEConvForElectron();
   auto g4ConverterGamPtr = new G4RToEConvForGamma();
