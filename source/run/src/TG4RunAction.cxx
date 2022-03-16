@@ -217,11 +217,13 @@ void TG4RunAction::EndOfRunAction(const G4Run* run)
   /// Called by G4 kernel at the end of run.
 
 #ifdef G4MULTITHREADED
-  // Merge user application data
-  G4AutoLock lm(&mergeMutex);
-  TGeant4::MasterApplicationInstance()->Merge(
-    TVirtualMCApplication::Instance());
-  lm.unlock();
+  if (! IsMaster()) {
+    // Merge user application data collected on workers to master
+    G4AutoLock lm(&mergeMutex);
+    TGeant4::MasterApplicationInstance()->Merge(
+      TVirtualMCApplication::Instance());
+    lm.unlock();
+  }
 #endif
 
   if (fCrossSectionManager.IsMakeHistograms()) {
