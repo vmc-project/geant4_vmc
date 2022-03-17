@@ -9,6 +9,39 @@
 
 Tags (history):
 ===============
+  17/03/2022
+  v6-1:
+    Geant4 VMC:
+    - Replaced usage of G4 process names with process sub type codes (#31):
+      - Added new TMCProcessMap and TMCProcessMapPhysics classes and removed
+        TG4ProcessControlMap, TG4ProcessMCMap and corresponding physics constructor
+        classes
+      - Improved TG4G3CutVector - added data to save information
+        if the extra BCUT*/DCUT* are different from CUTGAM/ELE
+        and if the *CUTM and *CUTE differ; this allows to skip
+        additional evaluation of creator process/particle type
+        when not needed
+
+    All packages:
+    - Added GitHub action for Doxygen deployment
+
+    Fixes:
+    Geant4 VMC:
+    - Fix merging user data in MT:
+      Do not call MCApplication::Merge() on master
+    - Fix compilation with Geant4 11.0.p1 (#30)
+    - Fixes in applying cuts and processes maps: (#29)
+      - Fixed mapping of some hadronic processes
+      - Fixed applying PPCUTM:
+        Using G4Step::GetSecondaryInCurrentStep() instead of GetSecondary(),
+        as the second one provides accumulated secondaries since the first step
+    - CMake: Fix G4Root_BUILD_TEST option in main CMakeLists. (#28)
+      (thanks to Oliver Freyermuth (Physics Institute of the University of Bonn))
+    - Fixed locking in TG4ModelConfigurationManager (#23)
+
+    Tested with VMC 2.0, Geant4 11.0 (with embedded CLHEP 2.4.5.1)
+      Root 6.24/06 and 6.26/00, VGM 5.0, Garfield 4.0
+
   10/02/2022
   v6-0:
     Geant4 VMC:
