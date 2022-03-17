@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | Welcome to ROOT 6.26/00                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 15 2021, 13:02:00                      |
-  | From tags/v6-24-06@v6-24-06                                      |
+  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
+  | From tags/v6-26-00@v6-26-00                                      |
   | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
@@ -10,7 +10,7 @@
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-35
+37
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -24,7 +24,7 @@ Processing test_A01_1.C("g4Config.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 10 February 2022 )
+ Version 6.1 ( 17 March 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -36,7 +36,7 @@ Processing test_A01_1.C("g4Config.C",kFALSE)...
 
 
 **************************************************************
- Geant4 version Name: geant4-11-00-ref-00    (10-December-2021)
+ Geant4 version Name: geant4-11-00-patch-01    (8-March-2022)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -71,8 +71,6 @@ Geant4 has been created.
 #/mcDet/addSDSelection cellLogical
 #/mcDet/addSDSelection HadCalScintiLogical
 Processing Config() done.
-Saved fCerenkovMaxBetaChange 10
-Warning in <TGeoManager>: Changing system of units to ROOT units (cm, s, GeV).
 Info in <TGeoManager::Import>: Reading geometry from file: A01geometry.root
 Info in <TGeoManager::CloseGeometry>: Geometry loaded from file...
 Info in <TGeoManager::SetTopVolume>: Top volume is worldLogical. Master volume is worldLogical
@@ -101,10 +99,9 @@ Global field created with stepper DormandPrince745
 
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 ### Hadron physics constructed. 
-### Processes mapped to VMC controls ok.
 ### Step limiter physics constructed.
 ### User particles physics constructed. 
-### Processes mapped to VMC codes ok.
+### Processes mapped to VMC codes ok
 TG4ComposedPhysicsList::ConstructProcess done
 Available UI session types: [ tcsh, csh ]
 
@@ -229,7 +226,7 @@ eBrem:  for e-  XStype:4  SubType=3
              eBremSB : Emin=    0 eV  Emax=    1 GeV  ModifiedTsai
             eBremLPM : Emin=    1 GeV Emax=  100 TeV  ModifiedTsai
 
-CoulombScat:  for e- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for e- XStype:1 SubType=1 BuildTable=1
       Lambda table from 100 MeV to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -261,7 +258,7 @@ annihil:  for e+ XStype:2 SubType=5 BuildTable=0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             eplus2gg : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for e+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for e+ XStype:1 SubType=1 BuildTable=1
       Lambda table from 100 MeV to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -293,7 +290,7 @@ hPairProd:  for proton  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for proton XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for proton XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -352,7 +349,7 @@ hPairProd:  for anti_proton  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for anti_proton XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for anti_proton XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -384,7 +381,7 @@ hPairProd:  for kaon+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for kaon+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for kaon+ XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -416,7 +413,7 @@ hPairProd:  for kaon-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for kaon- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for kaon- XStype:1 SubType=1 BuildTable=1
       Used Lambda table of kaon+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -449,7 +446,7 @@ muPairProd:  for mu+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for mu+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for mu+ XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -482,7 +479,7 @@ muPairProd:  for mu-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for mu- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for mu- XStype:1 SubType=1 BuildTable=1
       Used Lambda table of mu+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -514,7 +511,7 @@ hPairProd:  for pi+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for pi+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for pi+ XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -546,7 +543,7 @@ hPairProd:  for pi-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for pi- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
       Used Lambda table of pi+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -951,52 +948,52 @@ Index : 5     used in the geometry : Yes
 ### Run 0 start.
 
 >>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 9 hits.
-Chamber1 has 539 hits.
-Chamber2 has 488 hits.
-EmCalorimeter has 44 hits. Total Edep is 84472.8 (MeV)
-HadCalorimeter has 5 hits. Total Edep is 3.23888 (MeV)
+Hodoscope1 has 2 hits.
+Hodoscope2 has 13 hits.
+Chamber1 has 548 hits.
+Chamber2 has 502 hits.
+EmCalorimeter has 43 hits. Total Edep is 86807.6 (MeV)
+HadCalorimeter has 5 hits. Total Edep is 10.3719 (MeV)
 
 >>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
+Hodoscope1 has 2 hits.
 Hodoscope2 has 2 hits.
-Chamber1 has 534 hits.
-Chamber2 has 515 hits.
-EmCalorimeter has 30 hits. Total Edep is 18673.9 (MeV)
-HadCalorimeter has 16 hits. Total Edep is 2618.37 (MeV)
+Chamber1 has 517 hits.
+Chamber2 has 523 hits.
+EmCalorimeter has 26 hits. Total Edep is 18700.5 (MeV)
+HadCalorimeter has 15 hits. Total Edep is 2684.78 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 3 hits.
-Hodoscope2 has 13 hits.
-Chamber1 has 532 hits.
-Chamber2 has 497 hits.
-EmCalorimeter has 67 hits. Total Edep is 29627.2 (MeV)
-HadCalorimeter has 15 hits. Total Edep is 1738.5 (MeV)
+Hodoscope2 has 10 hits.
+Chamber1 has 538 hits.
+Chamber2 has 480 hits.
+EmCalorimeter has 71 hits. Total Edep is 30593.8 (MeV)
+HadCalorimeter has 16 hits. Total Edep is 1605.43 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 7 hits.
-Hodoscope2 has 6 hits.
-Chamber1 has 459 hits.
-Chamber2 has 150 hits.
-EmCalorimeter has 52 hits. Total Edep is 6940.89 (MeV)
-HadCalorimeter has 14 hits. Total Edep is 221.433 (MeV)
+Hodoscope1 has 9 hits.
+Hodoscope2 has 11 hits.
+Chamber1 has 432 hits.
+Chamber2 has 197 hits.
+EmCalorimeter has 65 hits. Total Edep is 11241 (MeV)
+HadCalorimeter has 17 hits. Total Edep is 189.869 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 7 hits.
-Chamber1 has 533 hits.
-Chamber2 has 503 hits.
-EmCalorimeter has 56 hits. Total Edep is 28826.6 (MeV)
-HadCalorimeter has 18 hits. Total Edep is 162.899 (MeV)
-Time of this run:   User=5.050000s Real=5.144599s Sys=0.070000s
+Hodoscope1 has 2 hits.
+Hodoscope2 has 8 hits.
+Chamber1 has 551 hits.
+Chamber2 has 514 hits.
+EmCalorimeter has 52 hits. Total Edep is 27776.9 (MeV)
+HadCalorimeter has 13 hits. Total Edep is 66.9197 (MeV)
+Time of this run:   User=4.300000s Real=4.456447s Sys=0.080000s
 Number of events processed: 5
-Real time 0:00:07, CP time 7.540
+Real time 0:00:07, CP time 6.980
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | Welcome to ROOT 6.26/00                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 15 2021, 13:02:00                      |
-  | From tags/v6-24-06@v6-24-06                                      |
+  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
+  | From tags/v6-26-00@v6-26-00                                      |
   | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
@@ -1004,7 +1001,7 @@ Real time 0:00:07, CP time 7.540
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-35
+37
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -1018,7 +1015,7 @@ Processing test_A01_2.C("g4Config2.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 10 February 2022 )
+ Version 6.1 ( 17 March 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -1030,7 +1027,7 @@ Processing test_A01_2.C("g4Config2.C",kFALSE)...
 
 
 **************************************************************
- Geant4 version Name: geant4-11-00-ref-00    (10-December-2021)
+ Geant4 version Name: geant4-11-00-patch-01    (8-March-2022)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -1047,8 +1044,6 @@ Adding SpecialPhysicsList stepLimiter
 Visualization Manager instantiating with verbosity "warnings (3)"...
 Geant4 has been created.
 Processing Config() done.
-Saved fCerenkovMaxBetaChange 10
-Warning in <TGeoManager>: Changing system of units to ROOT units (cm, s, GeV).
 Info in <TGeoManager::Import>: Reading geometry from file: A01geometry.root
 Info in <TGeoManager::CloseGeometry>: Geometry loaded from file...
 Info in <TGeoManager::SetTopVolume>: Top volume is worldLogical. Master volume is worldLogical
@@ -1077,10 +1072,9 @@ Local (in magneticLogical) field created with stepper DormandPrince745
 
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 ### Hadron physics constructed. 
-### Processes mapped to VMC controls ok.
 ### Step limiter physics constructed.
 ### User particles physics constructed. 
-### Processes mapped to VMC codes ok.
+### Processes mapped to VMC codes ok
 TG4ComposedPhysicsList::ConstructProcess done
 Available UI session types: [ tcsh, csh ]
 
@@ -1205,7 +1199,7 @@ eBrem:  for e-  XStype:4  SubType=3
              eBremSB : Emin=    0 eV  Emax=    1 GeV  ModifiedTsai
             eBremLPM : Emin=    1 GeV Emax=  100 TeV  ModifiedTsai
 
-CoulombScat:  for e- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for e- XStype:1 SubType=1 BuildTable=1
       Lambda table from 100 MeV to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1237,7 +1231,7 @@ annihil:  for e+ XStype:2 SubType=5 BuildTable=0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             eplus2gg : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for e+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for e+ XStype:1 SubType=1 BuildTable=1
       Lambda table from 100 MeV to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1269,7 +1263,7 @@ hPairProd:  for proton  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for proton XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for proton XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1328,7 +1322,7 @@ hPairProd:  for anti_proton  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for anti_proton XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for anti_proton XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1360,7 +1354,7 @@ hPairProd:  for kaon+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for kaon+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for kaon+ XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1392,7 +1386,7 @@ hPairProd:  for kaon-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for kaon- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for kaon- XStype:1 SubType=1 BuildTable=1
       Used Lambda table of kaon+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1425,7 +1419,7 @@ muPairProd:  for mu+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for mu+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for mu+ XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1458,7 +1452,7 @@ muPairProd:  for mu-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for mu- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for mu- XStype:1 SubType=1 BuildTable=1
       Used Lambda table of mu+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1490,7 +1484,7 @@ hPairProd:  for pi+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for pi+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for pi+ XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1522,7 +1516,7 @@ hPairProd:  for pi-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for pi- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
       Used Lambda table of pi+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1928,43 +1922,43 @@ Index : 5     used in the geometry : Yes
 
 >>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 3 hits.
-Hodoscope2 has 10 hits.
-Chamber1 has 519 hits.
-Chamber2 has 498 hits.
-EmCalorimeter has 42 hits. Total Edep is 87121.2 (MeV)
-HadCalorimeter has 6 hits. Total Edep is 3.38947 (MeV)
+Hodoscope2 has 11 hits.
+Chamber1 has 534 hits.
+Chamber2 has 488 hits.
+EmCalorimeter has 53 hits. Total Edep is 87758.8 (MeV)
+HadCalorimeter has 7 hits. Total Edep is 5.40031 (MeV)
 
 >>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 2 hits.
-Hodoscope2 has 3 hits.
-Chamber1 has 525 hits.
-Chamber2 has 521 hits.
-EmCalorimeter has 27 hits. Total Edep is 18677.3 (MeV)
-HadCalorimeter has 14 hits. Total Edep is 2667.94 (MeV)
+Hodoscope1 has 4 hits.
+Hodoscope2 has 2 hits.
+Chamber1 has 518 hits.
+Chamber2 has 514 hits.
+EmCalorimeter has 23 hits. Total Edep is 18440.9 (MeV)
+HadCalorimeter has 16 hits. Total Edep is 2604.62 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 4 hits.
-Hodoscope2 has 14 hits.
-Chamber1 has 521 hits.
-Chamber2 has 491 hits.
-EmCalorimeter has 71 hits. Total Edep is 28529.5 (MeV)
-HadCalorimeter has 18 hits. Total Edep is 1898.72 (MeV)
+Hodoscope1 has 6 hits.
+Hodoscope2 has 11 hits.
+Chamber1 has 510 hits.
+Chamber2 has 496 hits.
+EmCalorimeter has 64 hits. Total Edep is 28039.5 (MeV)
+HadCalorimeter has 18 hits. Total Edep is 2001.3 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 5 hits.
-Hodoscope2 has 7 hits.
-Chamber1 has 435 hits.
-Chamber2 has 185 hits.
-EmCalorimeter has 57 hits. Total Edep is 8685.07 (MeV)
-HadCalorimeter has 14 hits. Total Edep is 398.137 (MeV)
+Hodoscope2 has 10 hits.
+Chamber1 has 477 hits.
+Chamber2 has 156 hits.
+EmCalorimeter has 46 hits. Total Edep is 6267.09 (MeV)
+HadCalorimeter has 14 hits. Total Edep is 186.772 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 4 hits.
-Hodoscope2 has 7 hits.
-Chamber1 has 525 hits.
-Chamber2 has 536 hits.
-EmCalorimeter has 58 hits. Total Edep is 28119.9 (MeV)
-HadCalorimeter has 13 hits. Total Edep is 111.943 (MeV)
-Time of this run:   User=4.390000s Real=4.507891s Sys=0.060000s
+Hodoscope1 has 3 hits.
+Hodoscope2 has 8 hits.
+Chamber1 has 517 hits.
+Chamber2 has 525 hits.
+EmCalorimeter has 54 hits. Total Edep is 29100.9 (MeV)
+HadCalorimeter has 15 hits. Total Edep is 99.0522 (MeV)
+Time of this run:   User=3.960000s Real=4.136967s Sys=0.080000s
 Number of events processed: 5
-Real time 0:00:06, CP time 6.870
+Real time 0:00:06, CP time 6.370

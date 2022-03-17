@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | Welcome to ROOT 6.26/00                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 15 2021, 13:02:00                      |
-  | From tags/v6-24-06@v6-24-06                                      |
+  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
+  | From tags/v6-26-00@v6-26-00                                      |
   | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
@@ -10,7 +10,7 @@
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-35
+37
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -24,7 +24,7 @@ Processing test_Gflash.C("g4Config.C")...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 10 February 2022 )
+ Version 6.1 ( 17 March 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -36,7 +36,7 @@ Processing test_Gflash.C("g4Config.C")...
 
 
 **************************************************************
- Geant4 version Name: geant4-11-00-ref-00    (10-December-2021)
+ Geant4 version Name: geant4-11-00-patch-01    (8-March-2022)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -68,8 +68,6 @@ Geant4 has been created.
 /mcPhysics/setGflashMaterial PbWO4
 #/tracking/verbose 1
 Processing Config() done.
-Saved fCerenkovMaxBetaChange 10
-Warning in <TGeoManager>: Changing system of units to ROOT units (cm, s, GeV).
 Info in <TGeoManager::TGeoManager>: Geometry Gflash_geometry, Gflash VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is ExpHall_log. Master volume is ExpHall_log
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -99,9 +97,7 @@ The have width of 3 cm and a lenght of 24 cm. The Material is PbWO4
 
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 ### Hadron physics constructed. 
-### Processes mapped to VMC controls ok.
 ### User particles physics constructed. 
-### Processes mapped to VMC codes ok.
 Configuring shower parameterization model
 /********************************************/ 
   - GVFlashShowerParameterisation::Material -  
@@ -118,6 +114,7 @@ Configuring shower parameterization model
 end configuring shower parameterization.
 ... created fastSimulationProcess
 ### Fast simulation models added to physics processes
+### Processes mapped to VMC codes ok
 TG4ComposedPhysicsList::ConstructProcess done
 Available UI session types: [ tcsh, csh ]
 
@@ -242,7 +239,7 @@ eBrem:  for e-  XStype:4  SubType=3
              eBremSB : Emin=    0 eV  Emax=    1 GeV  ModifiedTsai
             eBremLPM : Emin=    1 GeV Emax=  100 TeV  ModifiedTsai
 
-CoulombScat:  for e- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for e- XStype:1 SubType=1 BuildTable=1
       Lambda table from 100 MeV to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -274,7 +271,7 @@ annihil:  for e+ XStype:2 SubType=5 BuildTable=0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             eplus2gg : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for e+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for e+ XStype:1 SubType=1 BuildTable=1
       Lambda table from 100 MeV to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -306,7 +303,7 @@ hPairProd:  for proton  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for proton XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for proton XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -365,7 +362,7 @@ hPairProd:  for anti_proton  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for anti_proton XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for anti_proton XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -397,7 +394,7 @@ hPairProd:  for kaon+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for kaon+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for kaon+ XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -429,7 +426,7 @@ hPairProd:  for kaon-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for kaon- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for kaon- XStype:1 SubType=1 BuildTable=1
       Used Lambda table of kaon+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -462,7 +459,7 @@ muPairProd:  for mu+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for mu+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for mu+ XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -495,7 +492,7 @@ muPairProd:  for mu-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for mu- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for mu- XStype:1 SubType=1 BuildTable=1
       Used Lambda table of mu+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -527,7 +524,7 @@ hPairProd:  for pi+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for pi+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for pi+ XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -559,7 +556,7 @@ hPairProd:  for pi-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for pi- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
       Used Lambda table of pi+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -945,13 +942,13 @@ Index : 2     used in the geometry : Yes
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.020
+Real time 0:00:00, CP time 0.030
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 1  -----
-  11965 hits are stored in HitsCollection 
-   e1  12.2458   e3x3  48.2969   e5x5  48.7744 GeV
- Total energy deposited in the calorimeter: 49.8592 (GeV)
+  11923 hits are stored in HitsCollection 
+   e1  11.9889   e3x3  48.1817   e5x5  48.846 GeV
+ Total energy deposited in the calorimeter: 49.7261 (GeV)
  Start generating event Nr 2
 
 ******************************************
@@ -960,9 +957,9 @@ Real time 0:00:00, CP time 0.020
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 2  -----
-  11959 hits are stored in HitsCollection 
-   e1  12.0353   e3x3  48.3345   e5x5  48.8783 GeV
- Total energy deposited in the calorimeter: 49.8358 (GeV)
+  11976 hits are stored in HitsCollection 
+   e1  12.0962   e3x3  48.4425   e5x5  48.8901 GeV
+ Total energy deposited in the calorimeter: 49.9336 (GeV)
  Start generating event Nr 3
 
 ******************************************
@@ -972,8 +969,8 @@ Real time 0:00:00, CP time 0.020
 ******************************************
  ------ ExGflashEventAction::End of event nr. 3  -----
   11901 hits are stored in HitsCollection 
-   e1  11.958   e3x3  48.1393   e5x5  48.6023 GeV
- Total energy deposited in the calorimeter: 49.4934 (GeV)
+   e1  11.9939   e3x3  48.1393   e5x5  48.6023 GeV
+ Total energy deposited in the calorimeter: 49.4933 (GeV)
  Start generating event Nr 4
 
 ******************************************
@@ -982,9 +979,9 @@ Real time 0:00:00, CP time 0.020
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 4  -----
-  11951 hits are stored in HitsCollection 
-   e1  12.0338   e3x3  48.3258   e5x5  48.8233 GeV
- Total energy deposited in the calorimeter: 49.7797 (GeV)
+  11954 hits are stored in HitsCollection 
+   e1  12.2691   e3x3  48.4313   e5x5  48.8721 GeV
+ Total energy deposited in the calorimeter: 49.7591 (GeV)
  Start generating event Nr 5
 
 ******************************************
@@ -993,9 +990,9 @@ Real time 0:00:00, CP time 0.020
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 5  -----
-  11881 hits are stored in HitsCollection 
-   e1  12.0772   e3x3  48.056   e5x5  48.6384 GeV
- Total energy deposited in the calorimeter: 49.5566 (GeV)
+  11985 hits are stored in HitsCollection 
+   e1  11.9963   e3x3  48.4556   e5x5  48.8833 GeV
+ Total energy deposited in the calorimeter: 49.9283 (GeV)
  Start generating event Nr 6
 
 ******************************************
@@ -1004,9 +1001,9 @@ Real time 0:00:00, CP time 0.020
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 6  -----
-  11956 hits are stored in HitsCollection 
-   e1  12.1541   e3x3  48.3927   e5x5  48.9142 GeV
- Total energy deposited in the calorimeter: 49.8385 (GeV)
+  11954 hits are stored in HitsCollection 
+   e1  12.1039   e3x3  48.2783   e5x5  48.7166 GeV
+ Total energy deposited in the calorimeter: 49.755 (GeV)
  Start generating event Nr 7
 
 ******************************************
@@ -1015,9 +1012,9 @@ Real time 0:00:00, CP time 0.020
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 7  -----
-  11985 hits are stored in HitsCollection 
-   e1  12.2001   e3x3  48.4219   e5x5  48.9964 GeV
- Total energy deposited in the calorimeter: 49.927 (GeV)
+  11904 hits are stored in HitsCollection 
+   e1  12.0507   e3x3  48.135   e5x5  48.5498 GeV
+ Total energy deposited in the calorimeter: 49.525 (GeV)
  Start generating event Nr 8
 
 ******************************************
@@ -1026,9 +1023,9 @@ Real time 0:00:00, CP time 0.020
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 8  -----
-  11933 hits are stored in HitsCollection 
-   e1  12.1101   e3x3  48.4235   e5x5  48.8169 GeV
- Total energy deposited in the calorimeter: 49.7113 (GeV)
+  11958 hits are stored in HitsCollection 
+   e1  12.1657   e3x3  48.5296   e5x5  48.985 GeV
+ Total energy deposited in the calorimeter: 49.8602 (GeV)
  Start generating event Nr 9
 
 ******************************************
@@ -1037,9 +1034,9 @@ Real time 0:00:00, CP time 0.020
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 9  -----
-  11906 hits are stored in HitsCollection 
-   e1  12.0961   e3x3  48.0404   e5x5  48.5463 GeV
- Total energy deposited in the calorimeter: 49.6228 (GeV)
+  11969 hits are stored in HitsCollection 
+   e1  12.1227   e3x3  48.3452   e5x5  48.8475 GeV
+ Total energy deposited in the calorimeter: 49.8787 (GeV)
  Start generating event Nr 10
 
 ******************************************
@@ -1048,8 +1045,8 @@ Real time 0:00:00, CP time 0.020
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 10  -----
-  11884 hits are stored in HitsCollection 
-   e1  12.1091   e3x3  48.1537   e5x5  48.5903 GeV
- Total energy deposited in the calorimeter: 49.469 (GeV)
-Time of this run:   User=0.230000s Real=0.231040s Sys=0.000000s
+  11975 hits are stored in HitsCollection 
+   e1  12.1931   e3x3  48.4985   e5x5  48.9591 GeV
+ Total energy deposited in the calorimeter: 49.9038 (GeV)
+Time of this run:   User=0.210000s Real=0.218038s Sys=0.000000s
 Number of events processed: 10

@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | Welcome to ROOT 6.26/00                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 15 2021, 13:02:00                      |
-  | From tags/v6-24-06@v6-24-06                                      |
+  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
+  | From tags/v6-26-00@v6-26-00                                      |
   | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
@@ -10,7 +10,7 @@
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-35
+37
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -24,12 +24,11 @@ Processing test_E06.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 10 February 2022 )
+ Version 6.1 ( 17 March 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
-Warning in <TGeoManager>: Changing system of units to ROOT units (cm, s, GeV).
 Running TVirtualMCApplication::ConstructGeometry
 Geometry will be defined via TGeo
 Warning in <TGeoManager::Init>: Deleting previous geometry: TGeo/Root geometry manager
@@ -54,7 +53,7 @@ isMaster=1
 
 
 **************************************************************
- Geant4 version Name: geant4-11-00-ref-00    (10-December-2021)
+ Geant4 version Name: geant4-11-00-patch-01    (8-March-2022)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -72,6 +71,9 @@ TG4PostDetConstruction::Initialize
 G4 Stat: instantiated 4 logical volumes 
                       3 physical volumes
 The tables for UV photon tracking set for Water
+### G4PhysicsVector: spline cannot be used for 2 points - spline disabled
+2.034e-06   1
+4.136e-06   1
 The material properties SCINTILLATIONCOMPONENT1 set for Water
 The material properties SCINTILLATIONCOMPONENT2 set for Water
 The material property SCINTILLATIONYIELD set for Water
@@ -129,7 +131,6 @@ Cerenkov max photons: 20
 /process/optical/cerenkov/setTrackSecondariesFirst false
 /run/physicsModified
 #/tracking/verbose 1
-Saved fCerenkovMaxBetaChange 10
 TG4RootDetectorConstruction::ConstructSDandField
 TG4PostDetConstruction::InitializeSDandField
 Global field created with stepper DormandPrince745
@@ -157,7 +158,7 @@ OpWLS2 is created
 =======================================================================
  Cerenkov process active:               1
  Cerenkov maximum photons per step:     20
- Cerenkov maximum beta change per step: 0.1 %
+ Cerenkov maximum beta change per step: 10 %
  Cerenkov stack photons:                1
  Cerenkov track secondaries first:      0
  Scintillation process active:          0
@@ -178,10 +179,9 @@ OpWLS2 is created
 =======================================================================
 ### Optical physics constructed.
 ### Extra physics constructed: Optical 
-### Processes mapped to VMC controls ok.
 ### Step limiter physics constructed.
 ### User particles physics constructed. 
-### Processes mapped to VMC codes ok.
+### Processes mapped to VMC codes ok
 TG4ComposedPhysicsList::ConstructProcess done
 Available UI session types: [ tcsh, csh ]
 
@@ -370,7 +370,7 @@ ePairProd:  for e-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            ePairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for e- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for e- XStype:1 SubType=1 BuildTable=1
       Lambda table from 100 MeV to 100 TeV, 20 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -410,7 +410,7 @@ annihil:  for e+ XStype:2 SubType=5 BuildTable=0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             eplus2gg : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for e+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for e+ XStype:1 SubType=1 BuildTable=1
       Lambda table from 100 MeV to 100 TeV, 20 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -442,7 +442,7 @@ hPairProd:  for proton  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for proton XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for proton XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 20 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -511,7 +511,7 @@ hPairProd:  for anti_proton  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for anti_proton XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for anti_proton XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 20 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -543,7 +543,7 @@ hPairProd:  for kaon+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for kaon+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for kaon+ XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 20 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -575,7 +575,7 @@ hPairProd:  for kaon-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for kaon- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for kaon- XStype:1 SubType=1 BuildTable=1
       Used Lambda table of kaon+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -608,7 +608,7 @@ muPairProd:  for mu+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for mu+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for mu+ XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 20 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -641,7 +641,7 @@ muPairProd:  for mu-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for mu- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for mu- XStype:1 SubType=1 BuildTable=1
       Used Lambda table of mu+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -673,7 +673,7 @@ hPairProd:  for pi+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for pi+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for pi+ XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 20 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -705,7 +705,7 @@ hPairProd:  for pi-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for pi- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
       Used Lambda table of pi+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1080,36 +1080,34 @@ Index : 1     used in the geometry : Yes
 ==================================================================
 
 ### Run 0 start.
-Applying correction to CerenkovMaxBetaChange from 1e-107 to 10
-New value: 0.1
 >>> Event 0
-Number of optical photons produced in this event : 1736
+Number of optical photons produced in this event : 1682
 >>> Event 1
-Number of optical photons produced in this event : 1637
+Number of optical photons produced in this event : 1760
 >>> Event 2
-Number of optical photons produced in this event : 1637
+Number of optical photons produced in this event : 1606
 >>> Event 3
-Number of optical photons produced in this event : 1617
+Number of optical photons produced in this event : 1676
 >>> Event 4
-Number of optical photons produced in this event : 1728
+Number of optical photons produced in this event : 1637
 >>> Event 5
-Number of optical photons produced in this event : 1683
+Number of optical photons produced in this event : 1775
 >>> Event 6
-Number of optical photons produced in this event : 1658
+Number of optical photons produced in this event : 1670
 >>> Event 7
-Number of optical photons produced in this event : 1691
+Number of optical photons produced in this event : 1632
 >>> Event 8
-Number of optical photons produced in this event : 1672
+Number of optical photons produced in this event : 1592
 >>> Event 9
-Number of optical photons produced in this event : 1768
-Time of this run:   User=1.040000s Real=1.058119s Sys=0.010000s
+Number of optical photons produced in this event : 1789
+Time of this run:   User=0.860000s Real=0.862723s Sys=0.000000s
 Number of events processed: 10
-Number of optical photons produced in this run : 16827
+Number of optical photons produced in this run : 16819
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | Welcome to ROOT 6.26/00                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 15 2021, 13:02:00                      |
-  | From tags/v6-24-06@v6-24-06                                      |
+  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
+  | From tags/v6-26-00@v6-26-00                                      |
   | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
@@ -1117,7 +1115,7 @@ Number of optical photons produced in this run : 16827
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-35
+37
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -1131,12 +1129,11 @@ Processing test_E06_2.C("g4tgeoConfig1.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 10 February 2022 )
+ Version 6.1 ( 17 March 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
-Warning in <TGeoManager>: Changing system of units to ROOT units (cm, s, GeV).
 Running TVirtualMCApplication::ConstructGeometry
 Geometry will be defined via TGeo
 Warning in <TGeoManager::Init>: Deleting previous geometry: TGeo/Root geometry manager
@@ -1161,7 +1158,7 @@ isMaster=1
 
 
 **************************************************************
- Geant4 version Name: geant4-11-00-ref-00    (10-December-2021)
+ Geant4 version Name: geant4-11-00-patch-01    (8-March-2022)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -1179,6 +1176,9 @@ TG4PostDetConstruction::Initialize
 G4 Stat: instantiated 4 logical volumes 
                       3 physical volumes
 The tables for UV photon tracking set for Water
+### G4PhysicsVector: spline cannot be used for 2 points - spline disabled
+2.034e-06   1
+4.136e-06   1
 The material properties SCINTILLATIONCOMPONENT1 set for Water
 The material properties SCINTILLATIONCOMPONENT2 set for Water
 The material property SCINTILLATIONYIELD set for Water
@@ -1236,7 +1236,6 @@ Cerenkov max photons: 20
 /process/optical/cerenkov/setTrackSecondariesFirst false
 /run/physicsModified
 #/tracking/verbose 1
-Saved fCerenkovMaxBetaChange 10
 TG4RootDetectorConstruction::ConstructSDandField
 TG4PostDetConstruction::InitializeSDandField
 Global field created with stepper DormandPrince745
@@ -1264,7 +1263,7 @@ OpWLS2 is created
 =======================================================================
  Cerenkov process active:               1
  Cerenkov maximum photons per step:     20
- Cerenkov maximum beta change per step: 0.1 %
+ Cerenkov maximum beta change per step: 10 %
  Cerenkov stack photons:                1
  Cerenkov track secondaries first:      0
  Scintillation process active:          0
@@ -1285,10 +1284,9 @@ OpWLS2 is created
 =======================================================================
 ### Optical physics constructed.
 ### Extra physics constructed: Optical 
-### Processes mapped to VMC controls ok.
 ### Stack popper physics constructed.
 ### User particles physics constructed. 
-### Processes mapped to VMC codes ok.
+### Processes mapped to VMC codes ok
 TG4ComposedPhysicsList::ConstructProcess done
 Available UI session types: [ tcsh, csh ]
 
@@ -1447,7 +1445,7 @@ eBrem:  for e-  XStype:4  SubType=3
              eBremSB : Emin=    0 eV  Emax=    1 GeV  ModifiedTsai
             eBremLPM : Emin=    1 GeV Emax=  100 TeV  ModifiedTsai
 
-CoulombScat:  for e- XStype:3 applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for e- XStype:1 applyCuts:1  SubType=1 BuildTable=1
       Lambda table from 100 MeV to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1479,7 +1477,7 @@ annihil:  for e+ XStype:2 applyCuts:1  SubType=5 BuildTable=0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             eplus2gg : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for e+ XStype:3 applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for e+ XStype:1 applyCuts:1  SubType=1 BuildTable=1
       Lambda table from 100 MeV to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1511,7 +1509,7 @@ hPairProd:  for proton  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for proton XStype:3 applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for proton XStype:1 applyCuts:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1570,7 +1568,7 @@ hPairProd:  for anti_proton  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for anti_proton XStype:3 applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for anti_proton XStype:1 applyCuts:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1602,7 +1600,7 @@ hPairProd:  for kaon+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for kaon+ XStype:3 applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for kaon+ XStype:1 applyCuts:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1634,7 +1632,7 @@ hPairProd:  for kaon-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for kaon- XStype:3 applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for kaon- XStype:1 applyCuts:1  SubType=1 BuildTable=1
       Used Lambda table of kaon+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1667,7 +1665,7 @@ muPairProd:  for mu+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for mu+ XStype:3 applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for mu+ XStype:1 applyCuts:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1700,7 +1698,7 @@ muPairProd:  for mu-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for mu- XStype:3 applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for mu- XStype:1 applyCuts:1  SubType=1 BuildTable=1
       Used Lambda table of mu+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1732,7 +1730,7 @@ hPairProd:  for pi+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for pi+ XStype:3 applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for pi+ XStype:1 applyCuts:1  SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1764,7 +1762,7 @@ hPairProd:  for pi-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for pi- XStype:3 applyCuts:1  SubType=1 BuildTable=1
+CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
       Used Lambda table of pi+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -2139,39 +2137,37 @@ Index : 1     used in the geometry : Yes
 ==================================================================
 
 ### Run 0 start.
-Applying correction to CerenkovMaxBetaChange from 1e-107 to 10
-New value: 0.1
 >>> Event 0
-Number of optical photons produced in this event : 1408
-Number of feedback photons produced in this event : 1801
+Number of optical photons produced in this event : 1482
+Number of feedback photons produced in this event : 1899
 >>> Event 1
-Number of optical photons produced in this event : 1348
-Number of feedback photons produced in this event : 1880
+Number of optical photons produced in this event : 1530
+Number of feedback photons produced in this event : 2082
 >>> Event 2
-Number of optical photons produced in this event : 1464
-Number of feedback photons produced in this event : 1856
+Number of optical photons produced in this event : 1498
+Number of feedback photons produced in this event : 1845
 >>> Event 3
-Number of optical photons produced in this event : 1541
-Number of feedback photons produced in this event : 2143
+Number of optical photons produced in this event : 1454
+Number of feedback photons produced in this event : 1931
 >>> Event 4
-Number of optical photons produced in this event : 1459
-Number of feedback photons produced in this event : 1988
+Number of optical photons produced in this event : 1395
+Number of feedback photons produced in this event : 1892
 >>> Event 5
-Number of optical photons produced in this event : 1533
-Number of feedback photons produced in this event : 2115
+Number of optical photons produced in this event : 1344
+Number of feedback photons produced in this event : 1778
 >>> Event 6
-Number of optical photons produced in this event : 1460
-Number of feedback photons produced in this event : 1852
+Number of optical photons produced in this event : 1465
+Number of feedback photons produced in this event : 1956
 >>> Event 7
-Number of optical photons produced in this event : 1416
-Number of feedback photons produced in this event : 1916
+Number of optical photons produced in this event : 1382
+Number of feedback photons produced in this event : 1880
 >>> Event 8
-Number of optical photons produced in this event : 1363
-Number of feedback photons produced in this event : 1884
+Number of optical photons produced in this event : 1454
+Number of feedback photons produced in this event : 1915
 >>> Event 9
-Number of optical photons produced in this event : 1418
-Number of feedback photons produced in this event : 1961
-Time of this run:   User=1.080000s Real=1.087171s Sys=0.010000s
+Number of optical photons produced in this event : 1421
+Number of feedback photons produced in this event : 1978
+Time of this run:   User=0.950000s Real=0.952224s Sys=0.000000s
 Number of events processed: 10
-Number of optical photons produced in this run : 14410
-Number of feedback photons produced in this run : 19396
+Number of optical photons produced in this run : 14425
+Number of feedback photons produced in this run : 19156

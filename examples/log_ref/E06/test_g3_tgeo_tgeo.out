@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | Welcome to ROOT 6.26/00                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 15 2021, 13:02:00                      |
-  | From tags/v6-24-06@v6-24-06                                      |
+  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
+  | From tags/v6-26-00@v6-26-00                                      |
   | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
@@ -20,12 +20,11 @@ Processing test_E06.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.0 ( 10 February 2022 )
+ Version 4.1 ( 17 March 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
 Geant3TGeo has been created.
-Warning in <TGeoManager>: Changing system of units to ROOT units (cm, s, GeV).
 Geometry will be defined via TGeo
 Info in <TGeoManager::TGeoManager>: Geometry E06_geometry, E06 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
@@ -71,11 +70,11 @@ Number of optical photons produced in this event : 2301
 Number of optical photons produced in this event : 2210
 Number of optical photons produced in this run : 21239
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   152814943     91BC55F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   122453343     74C7D5F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   147411245   152814943
-                                        HEX     8C9512D     91BC55F
+          with Store/Table at absolute adrs   117049645   122453343
+                                        HEX     6FA092D     74C7D5F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -107,10 +106,10 @@ Number of optical photons produced in this run : 21239
  **** GTRIGI: IEVENT=      9 IDEVT=      9 Random Seeds =       4357           0
  **** GTRIGI: IEVENT=     10 IDEVT=     10 Random Seeds =       4357           0
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | Welcome to ROOT 6.26/00                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 15 2021, 13:02:00                      |
-  | From tags/v6-24-06@v6-24-06                                      |
+  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
+  | From tags/v6-26-00@v6-26-00                                      |
   | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
@@ -128,12 +127,11 @@ Processing test_E06_2.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.0 ( 10 February 2022 )
+ Version 4.1 ( 17 March 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
 Geant3TGeo has been created.
-Warning in <TGeoManager>: Changing system of units to ROOT units (cm, s, GeV).
 Geometry will be defined via TGeo
 Info in <TGeoManager::TGeoManager>: Geometry E06_geometry, E06 VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is WRLD. Master volume is WRLD
@@ -190,11 +188,11 @@ Number of feedback photons produced in this event : 1580
 Number of optical photons produced in this run : 20724
 Number of feedback photons produced in this run : 15658
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   138664287     843D95F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   129869151     7BDA55F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   133260589   138664287
-                                        HEX     7F1652D     843D95F
+          with Store/Table at absolute adrs   124465453   129869151
+                                        HEX     76B312D     7BDA55F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | Welcome to ROOT 6.26/00                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 15 2021, 13:02:00                      |
-  | From tags/v6-24-06@v6-24-06                                      |
+  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
+  | From tags/v6-26-00@v6-26-00                                      |
   | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
@@ -10,7 +10,7 @@
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-35
+37
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -24,7 +24,7 @@ Processing test_Monopole.C("g4Config.C")...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 10 February 2022 )
+ Version 6.1 ( 17 March 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -36,7 +36,7 @@ Processing test_Monopole.C("g4Config.C")...
 
 
 **************************************************************
- Geant4 version Name: geant4-11-00-ref-00    (10-December-2021)
+ Geant4 version Name: geant4-11-00-patch-01    (8-March-2022)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -78,8 +78,6 @@ Magnetic field parameters:
   epsMin = 5e-05
   epsMax=  0.001
 /mcPhysics/rangeCuts 700 um
-Saved fCerenkovMaxBetaChange 10
-Warning in <TGeoManager>: Changing system of units to ROOT units (cm, s, GeV).
 Info in <TGeoManager::TGeoManager>: Geometry Monopole_geometry, Monopole VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is World. Master volume is World
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -116,10 +114,9 @@ G4MonopoleEquation::G4MonopoleEquation
 ### Hadron physics constructed. 
 G4MonopolePhysics::ConstructProcess
 ### Extra physics constructed: Monopole Physics 
-### Processes mapped to VMC controls ok.
 ### Step limiter physics constructed.
 ### User particles physics constructed. 
-### Processes mapped to VMC codes ok.
+### Processes mapped to VMC codes ok
 TG4ComposedPhysicsList::ConstructProcess done
 Available UI session types: [ tcsh, csh ]
 Adding monnopole in TDatabase with mass 100
@@ -266,7 +263,7 @@ eBrem:  for e-  XStype:4  SubType=3
              eBremSB : Emin=    0 eV  Emax=    1 GeV  ModifiedTsai
             eBremLPM : Emin=    1 GeV Emax=  100 TeV  ModifiedTsai
 
-CoulombScat:  for e- XStype:3 SubType=1 BuildTable=true
+CoulombScat:  for e- XStype:1 SubType=1 BuildTable=true
       Lambda table from 100 MeV to 100 TeV, 7 bins/decade, spline: false
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -298,7 +295,7 @@ annihil:  for e+ XStype:2 SubType=5 BuildTable=false
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             eplus2gg : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for e+ XStype:3 SubType=1 BuildTable=true
+CoulombScat:  for e+ XStype:1 SubType=1 BuildTable=true
       Lambda table from 100 MeV to 100 TeV, 7 bins/decade, spline: false
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -330,7 +327,7 @@ hPairProd:  for proton  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for proton XStype:3 SubType=1 BuildTable=true
+CoulombScat:  for proton XStype:1 SubType=1 BuildTable=true
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: false
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -389,7 +386,7 @@ hPairProd:  for anti_proton  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for anti_proton XStype:3 SubType=1 BuildTable=true
+CoulombScat:  for anti_proton XStype:1 SubType=1 BuildTable=true
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: false
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -421,7 +418,7 @@ hPairProd:  for kaon+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for kaon+ XStype:3 SubType=1 BuildTable=true
+CoulombScat:  for kaon+ XStype:1 SubType=1 BuildTable=true
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: false
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -453,7 +450,7 @@ hPairProd:  for kaon-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for kaon- XStype:3 SubType=1 BuildTable=true
+CoulombScat:  for kaon- XStype:1 SubType=1 BuildTable=true
       Used Lambda table of kaon+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -486,7 +483,7 @@ muPairProd:  for mu+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for mu+ XStype:3 SubType=1 BuildTable=true
+CoulombScat:  for mu+ XStype:1 SubType=1 BuildTable=true
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: false
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -519,7 +516,7 @@ muPairProd:  for mu-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for mu- XStype:3 SubType=1 BuildTable=true
+CoulombScat:  for mu- XStype:1 SubType=1 BuildTable=true
       Used Lambda table of mu+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -551,7 +548,7 @@ hPairProd:  for pi+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for pi+ XStype:3 SubType=1 BuildTable=true
+CoulombScat:  for pi+ XStype:1 SubType=1 BuildTable=true
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: false
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -583,7 +580,7 @@ hPairProd:  for pi-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for pi- XStype:3 SubType=1 BuildTable=true
+CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=true
       Used Lambda table of pi+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -969,9 +966,9 @@ Index : 1     used in the geometry : Yes
 --> Event 70 starts.
 --> Event 80 starts.
 --> Event 90 starts.
-Time of this run:   User=11.240000s Real=11.442048s Sys=0.050000s
+Time of this run:   User=9.070000s Real=9.081165s Sys=0.010000s
 Number of events processed: 100
 
  The run consists of 100 monopole  of 100 GeV  through 10 cm of Si
 
- projected Range= 7.7954 cm    rms= 0.020727 cm 
+ projected Range= 7.7987 cm    rms= 0.019943 cm 

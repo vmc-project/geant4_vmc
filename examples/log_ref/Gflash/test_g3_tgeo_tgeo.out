@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | Welcome to ROOT 6.26/00                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 15 2021, 13:02:00                      |
-  | From tags/v6-24-06@v6-24-06                                      |
+  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
+  | From tags/v6-26-00@v6-26-00                                      |
   | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
@@ -20,12 +20,11 @@ Processing test_Gflash.C("g3tgeoConfig.C")...
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.0 ( 10 February 2022 )
+ Version 4.1 ( 17 March 2022 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
 Geant3 has been created.
-Warning in <TGeoManager>: Changing system of units to ROOT units (cm, s, GeV).
 Info in <TGeoManager::TGeoManager>: Geometry Gflash_geometry, Gflash VMC example geometry created
 Info in <TGeoManager::SetTopVolume>: Top volume is ExpHall_log. Master volume is ExpHall_log
 Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
@@ -43,7 +42,7 @@ The have width of 3 cm and a lenght of 24 cm. The Material is PbWO4
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.200
+Real time 0:00:00, CP time 0.180
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 1  -----
@@ -65,7 +64,7 @@ Real time 0:00:00, CP time 0.180
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.170
+Real time 0:00:00, CP time 0.150
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 3  -----
@@ -76,7 +75,7 @@ Real time 0:00:00, CP time 0.170
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.190
+Real time 0:00:00, CP time 0.160
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 4  -----
@@ -98,7 +97,7 @@ Real time 0:00:00, CP time 0.170
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.170
+Real time 0:00:00, CP time 0.160
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 6  -----
@@ -109,7 +108,7 @@ Real time 0:00:00, CP time 0.170
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.170
+Real time 0:00:00, CP time 0.150
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 7  -----
@@ -120,7 +119,7 @@ Real time 0:00:00, CP time 0.170
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.180
+Real time 0:00:00, CP time 0.170
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 8  -----
@@ -131,7 +130,7 @@ Real time 0:00:00, CP time 0.180
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.170
+Real time 0:00:00, CP time 0.160
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 9  -----
@@ -150,11 +149,11 @@ Real time 0:00:00, CP time 0.170
    e1  12.9978   e3x3  47.947   e5x5  48.6028 GeV
  Total energy deposited in the calorimeter: 49.7586 (GeV)
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   110699871     699255F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   133544287     7F5B95F HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   105296173   110699871
-                                        HEX     646B12D     699255F
+          with Store/Table at absolute adrs   128140589   133544287
+                                        HEX     7A3452D     7F5B95F
                                         HEX    FFAD8A12           0
                               relative adrs    -5404142           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

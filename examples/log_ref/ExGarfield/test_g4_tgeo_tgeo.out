@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.24/06                        https://root.cern |
+  | Welcome to ROOT 6.26/00                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Dec 15 2021, 13:02:00                      |
-  | From tags/v6-24-06@v6-24-06                                      |
+  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
+  | From tags/v6-26-00@v6-26-00                                      |
   | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
@@ -10,7 +10,7 @@
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-35
+37
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -26,12 +26,11 @@ Processing test_ExGarfield.C("g4tgeoConfig.C")...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.0 ( 10 February 2022 )
+ Version 6.1 ( 17 March 2022 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 Info in <TGeoManager::TGeoManager>: Geometry TGeo, Root geometry manager created
-Warning in <TGeoManager>: Changing system of units to ROOT units (cm, s, GeV).
 Running TVirtualMCApplication::ConstructGeometry
 Warning in <TGeoManager::Init>: Deleting previous geometry: TGeo/Root geometry manager
 Info in <TGeoManager::TGeoManager>: Geometry Garfield_geometry, ExGarfield VMC example geometry created
@@ -56,7 +55,7 @@ isMaster=1
 
 
 **************************************************************
- Geant4 version Name: geant4-11-00-ref-00    (10-December-2021)
+ Geant4 version Name: geant4-11-00-patch-01    (8-March-2022)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -154,7 +153,6 @@ Garfield model is applicable for G4Particle e- between 1e-06 keV and 0.001 keV
 # /exampleGarfield/physics/setGarfieldParticleTypeAndEnergy anti_proton 9e+1 1e+8 MeV
 # /exampleGarfield/physics/setGarfieldParticleTypeAndEnergy deuteron 2e+2 1e+8 MeV
 # /exampleGarfield/physics/setGarfieldParticleTypeAndEnergy alpha 4e+2 1e+8 MeV
-Saved fCerenkovMaxBetaChange 10
 TG4RootDetectorConstruction::ConstructSDandField
 TG4PostDetConstruction::InitializeSDandField
 ### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
@@ -833,11 +831,8 @@ G4PhysicsListHelper::RegisterProcess :anti_xi_b-Inelastic for anti_xi_b- with  t
 G4PhysicsListHelper::RegisterProcess :anti_omega_b-Inelastic for anti_omega_b- with  type/subtype =4/121 is successfully registered with ordering parameters -1:-1:1000
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 ### Hadron physics constructed. 
-### Processes mapped to VMC controls ok.
 ### Step limiter physics constructed.
 ### User particles physics constructed. 
-TG4ProcessMCMapPhysics::ConstructProcess: 
-### Processes mapped to VMC codes ok.
 TG4EmModelPhysics::AddModels
 Model configuration: PAI
 particles: all
@@ -909,6 +904,8 @@ creating G4FastSimulationManager for the region
 TG4FastSimulationPhysics::AddFastSimulationProcess
 ... created fastSimulationProcess
 ### Fast simulation models added to physics processes
+TG4ProcessMapPhysics::ConstructProcess: 
+### Processes mapped to VMC codes ok
 TG4ComposedPhysicsList::ConstructProcess done
 TG4ComposedPhysicsList::SetCuts
 G4VUserPhysicsList::SetDefaultCutValue:default cut value is changed to   :1[mm]
@@ -1037,7 +1034,7 @@ eBrem:  for e-  XStype:4  SubType=3
              eBremSB : Emin=    0 eV  Emax=    1 GeV  ModifiedTsai
             eBremLPM : Emin=    1 GeV Emax=  100 TeV  ModifiedTsai
 
-CoulombScat:  for e- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for e- XStype:1 SubType=1 BuildTable=1
       Lambda table from 100 MeV to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1071,7 +1068,7 @@ annihil:  for e+ XStype:2 SubType=5 BuildTable=0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             eplus2gg : Emin=    0 eV  Emax=  100 TeV
 
-CoulombScat:  for e+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for e+ XStype:1 SubType=1 BuildTable=1
       Lambda table from 100 MeV to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1105,7 +1102,7 @@ hPairProd:  for proton  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for proton XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for proton XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1170,7 +1167,7 @@ hPairProd:  for anti_proton  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for anti_proton XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for anti_proton XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1204,7 +1201,7 @@ hPairProd:  for kaon+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for kaon+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for kaon+ XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1238,7 +1235,7 @@ hPairProd:  for kaon-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for kaon- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for kaon- XStype:1 SubType=1 BuildTable=1
       Used Lambda table of kaon+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1273,7 +1270,7 @@ muPairProd:  for mu+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for mu+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for mu+ XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1308,7 +1305,7 @@ muPairProd:  for mu-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for mu- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for mu- XStype:1 SubType=1 BuildTable=1
       Used Lambda table of mu+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1342,7 +1339,7 @@ hPairProd:  for pi+  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for pi+ XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for pi+ XStype:1 SubType=1 BuildTable=1
       Lambda table from threshold  to 100 TeV, 7 bins/decade, spline: 0
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1376,7 +1373,7 @@ hPairProd:  for pi-  XStype:1  SubType=4
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
-CoulombScat:  for pi- XStype:3 SubType=1 BuildTable=1
+CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
       Used Lambda table of pi+
       ThetaMin(p) < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -1773,19 +1770,19 @@ Index : 4     used in the geometry : Yes
 
 ### Run 0 start.
  Start generating event Nr 1
-   Absorber: total energy: 17.9491 MeV       total track length: 1.33559 cm
-        Gas: total energy: 5.88539 keV           avalanche size:       0       gain:       0
+   Absorber: total energy: 17.9528 MeV       total track length: 1.41361 cm
+        Gas: total energy: 5.84165 keV           avalanche size:       0       gain:       0
  Start generating event Nr 2
-   Absorber: total energy:  12.845 MeV       total track length: 1.00001 cm
-        Gas: total energy: 6.31438 keV           avalanche size:       0       gain:       0
+   Absorber: total energy: 13.1398 MeV       total track length: 1.00001 cm
+        Gas: total energy: 9.14982 keV           avalanche size:       0       gain:       0
  Start generating event Nr 3
-   Absorber: total energy: 12.3131 MeV       total track length: 1.00001 cm
-        Gas: total energy: 6.81876 keV           avalanche size:       0       gain:       0
+   Absorber: total energy: 14.9596 MeV       total track length: 1.00001 cm
+        Gas: total energy: 5.96866 keV           avalanche size:       0       gain:       0
  Start generating event Nr 4
-   Absorber: total energy: 18.1207 MeV       total track length: 1.36057 cm
-        Gas: total energy: 4.90048 keV           avalanche size:       0       gain:       0
+   Absorber: total energy: 19.0492 MeV       total track length: 1.54555 cm
+        Gas: total energy: 4.41882 keV           avalanche size:       0       gain:       0
  Start generating event Nr 5
-   Absorber: total energy: 11.5618 MeV       total track length: 1.00001 cm
-        Gas: total energy: 6.68011 keV           avalanche size:       0       gain:       0
-Time of this run:   User=0.000000s Real=0.002473s Sys=0.000000s
+   Absorber: total energy: 11.2566 MeV       total track length: 1.00001 cm
+        Gas: total energy: 5.67187 keV           avalanche size:       0       gain:       0
+Time of this run:   User=0.000000s Real=0.002078s Sys=0.000000s
 Number of events processed: 5
