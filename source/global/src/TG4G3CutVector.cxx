@@ -264,22 +264,20 @@ void TG4G3CutVector::SetCut(TG4G3Cut cut, G4double cutValue)
     }
   }
 
-  // Notify whther the [B/D]CUT should be taken into account
-  if ( fCutVector[kBCUTE] != fCutVector[kCUTGAM] ||
-       fCutVector[kBCUTM] != fCutVector[kCUTGAM] ) {
-    fApplyBDCut[kB] = true;
-    if (fCutVector[kBCUTE] != fCutVector[kBCUTM]) {
-      fApplyBDCut[kBEM] = true;
-    }
-  }
+  // Save whther the [B/D]CUT should be taken into account
+  fApplyBDCut[kB] = (fCutVector[kBCUTE] != fCutVector[kCUTGAM] ||
+                     fCutVector[kBCUTM] != fCutVector[kCUTGAM] );
+  fApplyBDCut[kBEM] = (fCutVector[kBCUTE] != fCutVector[kBCUTM]);
 
-  if ( fCutVector[kDCUTE] != fCutVector[kCUTELE] ||
-       fCutVector[kDCUTM] != fCutVector[kCUTELE]) {
-    fApplyBDCut[kD] = true;
-    if (fCutVector[kDCUTE] != fCutVector[kDCUTM]) {
-      fApplyBDCut[kDEM] = true;
-    }
-  }
+  fApplyBDCut[kD] = (fCutVector[kDCUTE] != fCutVector[kCUTELE] ||
+                     fCutVector[kDCUTM] != fCutVector[kCUTELE]);
+  fApplyBDCut[kDEM] = (fCutVector[kDCUTE] != fCutVector[kDCUTM]);
+
+  // G4cout << "Flags after SetCut " << cut << " value: " << cutValue << ": " << G4endl
+  //   << "kB:" << fApplyBDCut[kB] << ", "
+  //   << "kBEM:" << fApplyBDCut[kBEM] << ", "
+  //   << "kD:" << fApplyBDCut[kD] << ", "
+  //   << "kDEM:" << fApplyBDCut[kDEM] << G4endl;
 }
 
 //_____________________________________________________________________________
@@ -350,30 +348,37 @@ G4double TG4G3CutVector::GetMinEkineForGamma(const G4Track& track) const
   /// Cut is not applied for "opticalphoton" which is treated in G4 as a
   /// particle different from "gamma".
 
-  // Cut for Bremstrahlung not set
-  // or creator process is not Bremstrahlung
-  if (! fApplyBDCut[kB] ||
-      track.GetCreatorProcess() == nullptr ||
-      track.GetCreatorProcess()->GetProcessSubType() != fBremsstrahlung) {
-    return fCutVector[kCUTGAM];
-  }
+  // Special treatment of bremstrahlung threshold:
+  // apply the BCUT*  in the first step only
+  if (track.GetCurrentStepNumber() == 1 &&
+      track.GetCreatorProcess() != nullptr &&
+      track.GetCreatorProcess()->GetProcessSubType() == fBremsstrahlung) {
 
-  if (! fApplyBDCut[kBEM]) {
-    // Bremstrahlung - BCUTE, BCUTM need not to be applied separately
-    return fCutVector[kBCUTE];
-  }
-  else {
-    // Bremstrahlung - BCUTE, BCUTM are different
-    auto processName = track.GetCreatorProcess()->GetProcessName();
-    if (processName == "eBrem") {
-      return fCutVector[kBCUTE];
-    }
-    else if (processName == "muBrems" || processName == "hBrems") {
-      return fCutVector[kBCUTM];
-    }
-    else {
+    // Cut for Bremstrahlung not set
+    if (! fApplyBDCut[kB]) {
       return fCutVector[kCUTGAM];
     }
+
+    if (! fApplyBDCut[kBEM]) {
+      // Bremstrahlung - BCUTE, BCUTM need not to be applied separately
+      return fCutVector[kBCUTE];
+    }
+    else {
+      // Bremstrahlung - BCUTE, BCUTM are different
+      auto processName = track.GetCreatorProcess()->GetProcessName();
+      if (processName == "eBrem") {
+        return fCutVector[kBCUTE];
+      }
+      else if (processName == "muBrems" || processName == "hBrems") {
+        return fCutVector[kBCUTM];
+      }
+      else {
+        return fCutVector[kCUTGAM];
+      }
+    }
+  }
+  else {
+    return fCutVector[kCUTGAM];
   }
 }
 
@@ -391,40 +396,43 @@ G4double TG4G3CutVector::GetMinEkineForElectron(const G4Track& track) const
   /// - CUTELE - in all other cases.
   /// The delta ray cuts are applied only in the track first step.
 
-  // Cut for Delta e- is not set and Delta e- are not switched off or
-  // creator process is not Ionisation
-  if ((! fApplyBDCut[kD] && fDeltaRaysOn) ||
-      track.GetCreatorProcess() == nullptr ||
+  // Special treatment of delta rays threashold:
+  // apply the DCUT* in the first step only
+  if (track.GetCurrentStepNumber() == 1 &&
+      track.GetCreatorProcess() != nullptr &&
       track.GetCreatorProcess()->GetProcessSubType() == fIonisation ) {
-    return fCutVector[kCUTELE];
-  }
 
-  // Delta e- are switched off
-  if (! fDeltaRaysOn) {
-     return fgkDCUTEOff;
-  }
-
-  // Cut for Delta e- is not set
-  if (! fApplyBDCut[kD]) {
-    return fCutVector[kCUTELE];
-  }
-
-  if (! fApplyBDCut[kDEM]) {
-    // Delta e- - DCUTE, DCUTM need not to be applied separately
-    return fCutVector[kDCUTE];
-  }
-  else {
-    // Delta e- - DCUTE, DCUTM are different
-    auto processName = track.GetCreatorProcess()->GetProcessName();
-    if (processName == "eIoni") {
-      return fCutVector[kDCUTE];
+    // Delta e- are switched off
+    if (! fDeltaRaysOn) {
+      return fgkDCUTEOff;
     }
-    else if (processName == "muIoni") {
-      return fCutVector[kDCUTM];
-    }
-    else {
+
+    // Cut for Delta e- is not set
+    if (! fApplyBDCut[kD]) {
       return fCutVector[kCUTELE];
     }
+
+    if (! fApplyBDCut[kDEM]) {
+      // Delta e- - DCUTE, DCUTM need not to be applied separately
+      return fCutVector[kDCUTE];
+    }
+    else {
+      // Delta e- - DCUTE, DCUTM are different
+      auto processName = track.GetCreatorProcess()->GetProcessName();
+      if (processName == "eIoni") {
+        return fCutVector[kDCUTE];
+      }
+      else if (processName == "muIoni") {
+        return fCutVector[kDCUTM];
+      }
+      else {
+        return fCutVector[kCUTELE];
+      }
+    }
+  }
+  else {
+    // return CUTELE in other cases
+    return fCutVector[kCUTELE];
   }
 }
 
