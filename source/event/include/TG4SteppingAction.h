@@ -59,6 +59,7 @@ class TG4SteppingAction : public G4UserSteppingAction
   static TG4SteppingAction* Instance();
 
   // methods
+  void ProcessTrackIfGammaGeneral(const G4Step* step);
   void LateInitialize();
   virtual void SteppingAction(const G4Step* step);
   // the following method should not
