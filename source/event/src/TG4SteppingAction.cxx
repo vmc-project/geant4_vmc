@@ -25,6 +25,8 @@
 #include "TG4TrackManager.h"
 #include "TG4TrackingAction.h"
 
+#include <G4EmParameters.hh>
+#include <G4Gamma.hh>
 #include <G4SteppingManager.hh>
 #include <G4Track.hh>
 
@@ -277,6 +279,37 @@ void TG4SteppingAction::PrintTrackInfo(const G4Track* track) const
 //
 
 //_____________________________________________________________________________
+void TG4SteppingAction::ProcessTrackIfGammaGeneral(const G4Step* step)
+{
+  /// Make sure that the creator process (of the secondary tracks of the
+  /// current step) is the same as the one that limited the step.
+  /// These can be different in case of using `wrapper` processes e.g.
+  /// G4GammaGeneralProcess or G4HepEm, etc.
+
+  if (G4EmParameters::Instance()->GeneralProcessActive()) {
+    auto particle = step->GetTrack()->GetParticleDefinition();
+    auto nofSecondaries = step->GetNumberOfSecondariesInCurrentStep();
+    if (particle==G4Gamma::GammaDefinition() && nofSecondaries>0) {
+      // Get the pointer to the process that limited the step: i.e. the one that
+      // created the secondaries of the current step
+      const G4VProcess* limiterProcess =
+        step->GetPostStepPoint()->GetProcessDefinedStep();
+      // note: this is a vector of secondaries containing all secondaries created
+      // along the tracking of the current `primary` track (i.e. not only
+      // secondaries created in this step)
+      auto secondaries  = step->GetSecondary();
+      auto nofAllSecondaries = secondaries ->size();
+      for (auto it = nofAllSecondaries - nofSecondaries; it < nofAllSecondaries; ++it) {
+        auto secTrack = (*secondaries )[it];
+        if (secTrack->GetCreatorProcess() != limiterProcess) {
+          secTrack->SetCreatorProcess(limiterProcess);
+        }
+      }
+    }
+  }
+} 
+
+//_____________________________________________________________________________
 void TG4SteppingAction::LateInitialize()
 {
   fMCApplication = TVirtualMCApplication::Instance();
@@ -295,6 +328,9 @@ void TG4SteppingAction::UserSteppingAction(const G4Step* step)
   /// This method should not be overridden in a Geant4 VMC user class;
   /// there is defined SteppingAction(const G4Step* step) method
   /// for this purpose.
+
+  // Fix creator process for secondaries if using G4GammaGeneralProcess
+  ProcessTrackIfGammaGeneral(step);
 
   // stop track if maximum number of steps has been reached
   ProcessTrackIfLooping(step);

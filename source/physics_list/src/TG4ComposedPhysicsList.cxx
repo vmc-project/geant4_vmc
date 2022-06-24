@@ -176,10 +176,6 @@ void TG4ComposedPhysicsList::ConstructProcess()
   if (VerboseLevel() > 1)
     G4cout << "TG4ComposedPhysicsList::ConstructProcess" << G4endl;
 
-  // Inactivate G4GammaGeneralProcess as it does not propagate the
-  // concrete gamma process in the G4Track creator process
-  G4EmParameters::Instance()->SetGeneralProcessActive(false);
-
   // lock physics manager
   TG4G3PhysicsManager* g3PhysicsManager = TG4G3PhysicsManager::Instance();
   g3PhysicsManager->Lock();
