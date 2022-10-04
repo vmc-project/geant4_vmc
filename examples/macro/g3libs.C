@@ -37,9 +37,9 @@ void g3libs()
 /// Macro function for loading Geant3 libraries
 
   // Load libraries required by Geant3
+  gSystem->Load("libPythia6");
   gSystem->Load("libEG");
   gSystem->Load("libEGPythia6");
-  gSystem->Load("libPythia6");
 
   // VMC library (optional)
   if ( g3libUtilities::isLibrary("libVMCLibrary") ) {
