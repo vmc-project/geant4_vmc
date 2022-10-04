@@ -38,7 +38,7 @@ TESTGARFIELD="1"
 RUN_ENV=""
 if [[ ${ROOT_LD_LIBRARY_PATH} ]]
 then
-  RUN_ENV="env LD_LIBRARY_PATH=${ROOT_LD_LIBRARY_PATH} "
+  RUN_ENV="env DYLD_LIBRARY_PATH=${ROOT_LD_LIBRARY_PATH} "
 fi
 
 # The default list of examples (all)
