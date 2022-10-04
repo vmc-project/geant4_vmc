@@ -22,6 +22,7 @@
 #include <G4AnalysisUtilities.hh>
 #include <G4HadronicProcessStore.hh>
 #include <G4NeutronHPManager.hh>
+#include <G4UIcmdWithABool.hh>
 #include <G4UIcmdWithADouble.hh>
 #include <G4UIcmdWithADoubleAndUnit.hh>
 #include <G4UIcmdWithAString.hh>
@@ -102,6 +103,12 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
     "GammaToMuonsCrossSectionFactor", false);
   fSetGammaToMuonsCrossSectionFactorCmd->AvailableForStates(G4State_PreInit);
 
+  fSetEnableHyperNucleiCmd = new G4UIcmdWithABool(
+    "/mcPhysics/setEnableHyperNuclei", this);
+  fSetEnableHyperNucleiCmd->SetGuidance("Enable hyper-nuclei physics processes");
+  fSetEnableHyperNucleiCmd->SetParameterName("EnableHyperNuclei", false);
+  fSetEnableHyperNucleiCmd->AvailableForStates(G4State_PreInit);
+
   fPrintAllProcessesCmd =
     new G4UIcmdWithoutParameter("/mcPhysics/printAllProcess", this);
   fPrintAllProcessesCmd->SetGuidance(
@@ -178,6 +185,7 @@ TG4ComposedPhysicsMessenger::~TG4ComposedPhysicsMessenger()
   delete fRangeAllCutCmd;
   delete fProductionCutsTableEnergyRangeCmd;
   delete fSetGammaToMuonsCrossSectionFactorCmd;
+  delete fSetEnableHyperNucleiCmd;
   delete fPrintAllProcessesCmd;
   delete fDumpAllProcessesCmd;
   delete fPrintProcessMapCmd;
@@ -279,6 +287,9 @@ void TG4ComposedPhysicsMessenger::SetNewValue(
   else if (command == fSetGammaToMuonsCrossSectionFactorCmd) {
     G4double value = G4UIcommand::ConvertToDouble(newValue);
     fPhysicsList->SetGammaToMuonsCrossSectionFactor(value);
+  }
+  else if (command == fSetEnableHyperNucleiCmd) {
+    fPhysicsList->SetEnableHyperNuclei(G4UIcommand::ConvertToBool(newValue));
   }
   else if (command == fPrintAllProcessesCmd) {
     fPhysicsList->PrintAllProcesses();

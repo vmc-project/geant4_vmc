@@ -20,6 +20,7 @@
 #include <G4EmParameters.hh>
 #include <G4Gamma.hh>
 #include <G4GammaConversionToMuons.hh>
+#include <G4HadronicParameters.hh>
 #include <G4PhysicsListHelper.hh>
 #include <G4Positron.hh>
 #include <G4ProcessManager.hh>
@@ -55,6 +56,7 @@ TG4ComposedPhysicsList::TG4ComposedPhysicsList()
     fProductionCutsTableEnergyMin(0.),
     fProductionCutsTableEnergyMax(0.),
     fGammaToMuonsCrossSectionFactor(-1.),
+    fEnableHyperNuclei(false),
     fLooperThresholdsLevel(fgkDefautLooperThresholdsLevel)
 {
   /// Default constructor
@@ -157,6 +159,11 @@ void TG4ComposedPhysicsList::AddPhysicsList(G4VUserPhysicsList* physicsList)
 void TG4ComposedPhysicsList::ConstructParticle()
 {
   /// Construct all particles.
+
+  if (fEnableHyperNuclei) {
+    // activate hyper-nuclei processes
+    G4HadronicParameters::Instance()->SetEnableHyperNuclei(true);
+  }
 
   if (VerboseLevel() > 1)
     G4cout << "TG4ComposedPhysicsList::ConstructParticle" << G4endl;

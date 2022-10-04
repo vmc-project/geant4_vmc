@@ -21,6 +21,7 @@
 class TG4ComposedPhysicsList;
 
 class G4UIdirectory;
+class G4UIcmdWithABool;
 class G4UIcmdWithADouble;
 class G4UIcmdWithADoubleAndUnit;
 class G4UIcmdWithoutParameter;
@@ -39,6 +40,7 @@ class G4UIcmdWithAnInteger;
 /// - /mcPhysics/rangeCuts            value [unit]
 /// - /mcPhysics/productionCutsTableEnergyRange  minValue maxValue [unit]
 /// - /mcPhysics/setGammaToMuonsCrossSectionFactor  value
+/// - /mcPhysics/setEnableHyperNuclei true|false
 /// - /mcPhysics/printVolumeLimits [volName]
 /// - /mcPhysics/printGlobalCuts
 /// - /mcPhysics/printGlobalControls
@@ -99,6 +101,9 @@ class TG4ComposedPhysicsMessenger : public G4UImessenger
 
   /// setGammaToMuonsCrossSectionFactor
   G4UIcmdWithADouble* fSetGammaToMuonsCrossSectionFactorCmd;
+
+  /// setEnableHyperNuclei
+  G4UIcmdWithABool* fSetEnableHyperNucleiCmd;
 
   /// printAllProcess command
   G4UIcmdWithoutParameter* fPrintAllProcessesCmd;
