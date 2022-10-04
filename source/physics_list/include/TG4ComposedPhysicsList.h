@@ -50,7 +50,6 @@ class TG4ComposedPhysicsList : public G4VUserPhysicsList, public TG4Verbose
   void SetCutForProton(G4double cut);
 
   void SetProductionCutsTableEnergyRange(G4double min, G4double max);
-  void SetEnableHyperNuclei(G4bool value);
   void SetGammaToMuonsCrossSectionFactor(G4double value);
   void SetLooperThresholdsLevel(G4int level);
 
@@ -90,20 +89,11 @@ class TG4ComposedPhysicsList : public G4VUserPhysicsList, public TG4Verbose
   /// Gamma to muons cross section factor
   G4double fGammaToMuonsCrossSectionFactor;
 
-  /// Option to enable hyper-nuclei physics processes
-  G4bool fEnableHyperNuclei;
-
   /// Looper threshold level (can have valuee 0,1,2)
   G4int fLooperThresholdsLevel;
 };
 
 // inline methods
-
-inline void TG4ComposedPhysicsList::SetEnableHyperNuclei(G4bool value)
-{
-  /// Set option to enable hyper-nuclei physics processes
-  fEnableHyperNuclei = value;
-}
 
 inline void TG4ComposedPhysicsList::SetGammaToMuonsCrossSectionFactor(
   G4double value)
