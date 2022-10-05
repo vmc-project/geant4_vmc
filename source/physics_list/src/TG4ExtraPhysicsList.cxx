@@ -18,6 +18,7 @@
 
 #include <G4EmExtraPhysics.hh>
 #include <G4GenericBiasingPhysics.hh>
+#include <G4HadronicParameters.hh>
 #include <G4MonopolePhysics.hh>
 #include <G4OpticalPhysics.hh>
 #include <G4RadioactiveDecayPhysics.hh>
@@ -78,7 +79,7 @@ G4String TG4ExtraPhysicsList::AvailableSelections()
   /// Return list of all available selections
 
   G4String selections;
-  selections += "biasing extra monopole optical radDecay ";
+  selections += "biasing extra monopole optical radDecay hyperNuclei ";
 
   return selections;
 }
@@ -173,6 +174,12 @@ void TG4ExtraPhysicsList::Configure(
   // Radioactive decay physics
   if (G4StrUtil::contains(selection, "radDecay")) {
     RegisterPhysics(new G4RadioactiveDecayPhysics());
+  }
+
+  // Hyper-nuclei physics
+  if (G4StrUtil::contains(selection, "hyperNuclei")) {
+    // activate hyper-nuclei processes
+    G4HadronicParameters::Instance()->SetEnableHyperNuclei(true);
   }
 }
 
