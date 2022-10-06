@@ -9,6 +9,20 @@
 
 Tags (history):
 ===============
+  06/10/2022
+  v6-1-p2:
+    Fixes:
+    Geant4 VMC:
+    -  Added "hyperNuclei" option to the extra physics constructor (#37)
+       (This allows to activate hyper-nuclei processes at the physics list
+       constructor.)
+
+    Examples:
+    - Fixes in example test_suite needed for macOS Monteray
+
+    Tested with VMC 2.0, Geant4 11.0.p03 (with embedded CLHEP 2.4.5.1)
+      Root 6.26/04, VGM 5.0, Garfield -master 882c3023cfa8
+
   24/06/2022
   v6-1-p1:
     Fixes:

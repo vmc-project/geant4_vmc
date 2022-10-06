@@ -13,6 +13,6 @@
 
 set(Geant4VMCPackages_VERSION_MAJOR "6")
 set(Geant4VMCPackages_VERSION_MINOR "1")
-set(Geant4VMCPackages_VERSION_PATCH "1")
+set(Geant4VMCPackages_VERSION_PATCH "2")
 set(Geant4VMCPackages_VERSION
     ${Geant4VMCPackages_VERSION_MAJOR}.${Geant4VMCPackages_VERSION_MINOR}.${Geant4VMCPackages_VERSION_PATCH})
