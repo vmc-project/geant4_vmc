@@ -1312,7 +1312,7 @@ TMCProcess TG4StepManager::ProdProcess(Int_t isec) const
   CheckStep("ProdProcess");
 #endif
 
-  TG4SteppingAction::Instance()->ProcessTrackIfGammaGeneral(fStep);
+  TG4SteppingAction::Instance()->ProcessTrackIfGeneralProcess(fStep);
     // If this funcion is called from SD, it is earlier than TG4SteppingAction
     // fixes the creator processes
 
@@ -1374,7 +1374,7 @@ Int_t TG4StepManager::StepProcesses(TArrayI& processes) const
   CheckStep("StepProcesses");
 #endif
 
-  TG4SteppingAction::Instance()->ProcessTrackIfGammaGeneral(fStep);
+  TG4SteppingAction::Instance()->ProcessTrackIfGeneralProcess(fStep);
     // If this funcion is called from SD, it is earlier than TG4SteppingAction
     // fixes the creator processes
 

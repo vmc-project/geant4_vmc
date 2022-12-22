@@ -750,6 +750,9 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus()
     case GroundTyvekAirReflection:
     case GroundVM2000AirReflection:
     case GroundVM2000GlueReflection:
+#if G4VERSION_NUMBER >= 1110
+    case CoatedDielectricReflection:
+#endif
       return kPLightReflection;
       ;
       ;
@@ -761,6 +764,12 @@ TMCProcess TG4PhysicsManager::GetOpBoundaryStatus()
 #endif
 #if G4VERSION_NUMBER >= 1010
     case Transmission:
+#endif
+#if G4VERSION_NUMBER >= 1110
+    case CoatedDielectricRefraction:
+#endif
+#if G4VERSION_NUMBER >= 1110
+    case CoatedDielectricFrustratedTransmission:
 #endif
       return kPLightRefraction;
       ;
