@@ -40,6 +40,7 @@ if(Geant4VMC_USE_GEANT4_G3TOG4)
   list(APPEND _components g3tog4)
 endif()
 find_package(Geant4 CONFIG REQUIRED ${_components})
+set(CMAKE_CXX_STANDARD ${Geant4_CXX_STANDARD})
 
 #-- VGM (optional) -------------------------------------------------------------
 if (Geant4VMC_USE_VGM)
