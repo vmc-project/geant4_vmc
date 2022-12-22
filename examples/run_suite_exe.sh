@@ -26,12 +26,12 @@ TESTG3="1"
 TESTG4="1"
 TESTMULTI="1"
 
-# When running on Mac with SIP enabled, the LD_LIBRARY_PATH must be defined
+# When running on Mac with SIP enabled, the DYLD_LIBRARY_PATH must be defined
 # via another env variable
 RUN_ENV=""
 if [[ ${ROOT_LD_LIBRARY_PATH} ]]
 then
-  RUN_ENV="env LD_LIBRARY_PATH=${ROOT_LD_LIBRARY_PATH} "
+  RUN_ENV="env DYLD_LIBRARY_PATH=${ROOT_LD_LIBRARY_PATH} "
 fi
 
 # Run Garfield optionally

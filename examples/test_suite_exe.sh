@@ -33,7 +33,7 @@ BUILDDIR=""
 # Run Garfield only with Root 5
 TESTGARFIELD="1"
 
-# When running on Mac with SIP enabled, the LD_LIBRARY_PATH must be defined
+# When running on Mac with SIP enabled, the DYLD_LIBRARY_PATH must be defined
 # via another env variable
 RUN_ENV=""
 if [[ ${ROOT_LD_LIBRARY_PATH} ]]

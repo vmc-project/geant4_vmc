@@ -26,12 +26,12 @@ TESTG4="1"
 TESTMULTI="1"
 TESTGARFIELD="1"
 
-# When running on Mac with SIP enabled, the LD_LIBRARY_PATH must be defined
+# When running on Mac with SIP enabled, the DYLD_LIBRARY_PATH must be defined
 # via another env variable
 RUN_ENV=""
 if [[ ${ROOT_LD_LIBRARY_PATH} ]]
 then
-  RUN_ENV="env LD_LIBRARY_PATH=${ROOT_LD_LIBRARY_PATH} "
+  RUN_ENV="env DYLD_LIBRARY_PATH=${ROOT_LD_LIBRARY_PATH} "
 fi
 
 # The default list of examples (all)
@@ -51,7 +51,7 @@ function run_mc()
 function run_multi()
 {
   echo "    - with multiple engines"
-  $RUN_env root.exe -q -b load_multi.C run_multi.C >& $OUT/run_multi.out
+  $RUN_ENV root.exe -q -b load_multi.C run_multi.C >& $OUT/run_multi.out
 }
 
 # Process script arguments
