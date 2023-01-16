@@ -24,7 +24,7 @@
 #include "TGeoManager.h"
 #include "TGeoNode.h"
 
-#include <map>
+#include <unordered_map>
 
 class TObjArray;
 class TGeoManager;
@@ -58,7 +58,7 @@ class TG4RootDetectorConstruction : public G4VUserDetectorConstruction
 
  private:
   /// the map from TGeoMaterial to G4Material
-  typedef std::map<const TGeoMaterial*, G4Material*> G4MaterialMap_t;
+  typedef std::unordered_map<const TGeoMaterial*, G4Material*> G4MaterialMap_t;
   /// the constant iterator for the map from TGeoMaterial to G4Material
   typedef G4MaterialMap_t::const_iterator G4MaterialIt_t;
   /// the value type for the map from TGeoMaterial to G4Material
@@ -66,7 +66,7 @@ class TG4RootDetectorConstruction : public G4VUserDetectorConstruction
   G4MaterialMap_t fG4MaterialMap; //!< map of G4 materials
 
   /// the map from TGeoVolume to G4LogicalVolume
-  typedef std::map<const TGeoVolume*, G4LogicalVolume*> G4VolumeMap_t;
+  typedef std::unordered_map<const TGeoVolume*, G4LogicalVolume*> G4VolumeMap_t;
   /// the constant iterator for the map from TGeoVolume to G4LogicalVolume
   typedef G4VolumeMap_t::const_iterator G4VolumeIt_t;
   /// the value type for the map from TGeoVolume to G4LogicalVolume
@@ -74,7 +74,7 @@ class TG4RootDetectorConstruction : public G4VUserDetectorConstruction
   G4VolumeMap_t fG4VolumeMap; //!< map of G4 volumes
 
   /// the map from G4LogicalVolume to TGeoVolume
-  typedef std::map<const G4LogicalVolume*, TGeoVolume*> VolumeMap_t;
+  typedef std::unordered_map<const G4LogicalVolume*, TGeoVolume*> VolumeMap_t;
   /// the constant iterator for the map from G4LogicalVolume to TGeoVolume
   typedef VolumeMap_t::const_iterator VolumeIt_t;
   /// the value type for the map from  G4LogicalVolume to TGeoVolume
@@ -82,7 +82,7 @@ class TG4RootDetectorConstruction : public G4VUserDetectorConstruction
   VolumeMap_t fVolumeMap; //!< map of TGeo volumes
 
   /// the map from TGeoNode to G4VPhysicalVolume
-  typedef std::map<const TGeoNode*, G4VPhysicalVolume*> G4PVolumeMap_t;
+  typedef std::unordered_map<const TGeoNode*, G4VPhysicalVolume*> G4PVolumeMap_t;
   /// the constant iterator for the map from TGeoNode to G4VPhysicalVolume
   typedef G4PVolumeMap_t::const_iterator G4PVolumeIt_t;
   /// the value type for the map from TGeoNode to G4VPhysicalVolume
@@ -90,7 +90,7 @@ class TG4RootDetectorConstruction : public G4VUserDetectorConstruction
   G4PVolumeMap_t fG4PVolumeMap; //!< map of G4 physical volumes
 
   /// the map from G4VPhysicalVolume to TGeoNode
-  typedef std::map<const G4VPhysicalVolume*, TGeoNode*> PVolumeMap_t;
+  typedef std::unordered_map<const G4VPhysicalVolume*, TGeoNode*> PVolumeMap_t;
   /// the constant iterator for the map from G4VPhysicalVolume to TGeoNode
   typedef PVolumeMap_t::const_iterator PVolumeIt_t;
   /// the value type for the map from G4VPhysicalVolume to TGeoNode
