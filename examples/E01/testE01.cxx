@@ -47,9 +47,7 @@
 #include "TGeant3TGeo.h"
 #endif
 
-#include "TInterpreter.h"
 #include "TROOT.h"
-#include "TThread.h"
 
 #include <iostream>
 #include <string>
@@ -136,8 +134,7 @@ int main(int argc, char** argv)
   // (Multi-threading is triggered automatically if Geant4 was built
   //  in MT mode.)
 #ifdef G4MULTITHREADED
-  TThread::Initialize();
-  gInterpreter->SetProcessLineLock(false);
+  ROOT::EnableThreadSafety();
 #endif
 
   // Process arguments
