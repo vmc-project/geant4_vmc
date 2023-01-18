@@ -1,9 +1,9 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -122,7 +122,7 @@ Number of daughters: 0
   trackID: 0  chamberNb: 0  energy deposit (keV): 0.375163  position (cm): (1.53191, 15.7368, -140)
   trackID: 0  chamberNb: 1  energy deposit (keV): 81.3612  position (cm): (2.79488, 38.9532, -60.1131)
   trackID: 0  chamberNb: 1  energy deposit (keV): 0.735222  position (cm): (2.79667, 38.9946, -59.9998)
-  trackID: 0  chamberNb: 2  energy deposit (keV): 99.0028  position (cm): (4.09809, 74.5612, 19.8235)
+  trackID: 0  chamberNb: 2  energy deposit (keV): 99.0028  position (cm): (4.0981, 74.5612, 19.8235)
   trackID: 0  chamberNb: 2  energy deposit (keV): 0.40622  position (cm): (4.1011, 74.6551, 20.0003)
   trackID: 0  chamberNb: 3  energy deposit (keV): 310.747  position (cm): (5.51601, 125.089, 99.7305)
   trackID: 0  chamberNb: 3  energy deposit (keV): 1.0527  position (cm): (5.52102, 125.289, 100)
@@ -137,13 +137,13 @@ Primary
 Number of daughters: 0
 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   164579679     9CF495F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   115601795     6E3F183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   159175981   164579679
-                                        HEX     97CD52D     9CF495F
-                                        HEX    FFAD8A12           0
-                              relative adrs    -5404142           0
+          with Store/Table at absolute adrs   110198381   115601795
+                                        HEX     6917E6D     6E3F183
+                                        HEX    FFAD8B32           0
+                              relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 

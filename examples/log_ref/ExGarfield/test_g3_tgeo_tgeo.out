@@ -1,9 +1,9 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -12,7 +12,7 @@ Processing load_g3.C...
 Loading VMC library ...
 Loading Geant3 libraries ... finished
 Heed:
-    Database path: /Users/ivana/work/projects/vmc/new_vmc/garfieldpp/Heed/heed++/database
+    Database path: /Users/ivana/work/projects/vmc/dev/garfieldpp/Heed/heed++/database
 Processing test_ExGarfield.C("g3tgeoConfig.C")...
 
 =============================================================
@@ -55,13 +55,13 @@ Info in <TGeoManager::Export>: Exporting Garfield_geometry ExGarfield VMC exampl
    Absorber: total energy: 13.3199 MeV       total track length: 1.00011 cm
         Gas: total energy: 5.72095 keV           avalanche size:       0       gain:       0
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   176515423     A85695F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   173793667     A5BE183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   171111725   176515423
-                                        HEX     A32F52D     A85695F
-                                        HEX    FFAD8A12           0
-                              relative adrs    -5404142           0
+          with Store/Table at absolute adrs   168390253   173793667
+                                        HEX     A096E6D     A5BE183
+                                        HEX    FFAD8B32           0
+                              relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 

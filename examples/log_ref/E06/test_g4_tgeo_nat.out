@@ -1,16 +1,16 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-37
+34
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -24,19 +24,13 @@ Processing test_E06.C("g4Config.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.1 ( 17 March 2022 )
+ Version 6.2 ( 18 January 2023 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
-
-          ################################
-          !!! G4Backtrace is activated !!!
-          ################################
-
-
 **************************************************************
- Geant4 version Name: geant4-11-00-patch-01    (8-March-2022)
+ Geant4 version Name: geant4-11-01    (9-December-2022)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -126,6 +120,8 @@ G4OpticalSurface: data file /Users/ivana/work/packages/geant4/data/RealSurface2.
 LUT DAVIS - reflectivity data file: Rough_LUTR.z read in! 
 The material properties REFLECTIVITY set for optical surface AirSurface
 The material properties EFFICIENCY set for optical surface AirSurface
+G4FieldManager/SetEpsMin :  eps_min =      5e-05
+G4FieldManager/SetEpsMax :  eps_max =      0.001 ( Note: unchanged eps_min=     5e-05 )
 Global field created with stepper DormandPrince745
 
  hInelastic FTFP_BERT : threshold between BERT and FTFP is over the interval 
@@ -232,8 +228,10 @@ Available UI session types: [ tcsh, csh ]
 LPM effect enabled                                 1
 Enable creation and use of sampling tables         0
 Apply cuts on all EM processes                     0
-Use general process                                0
+Use combined TransportationWithMsc                 Disabled
+Use general process                                1
 Enable linear polarisation for gamma               0
+Enable photoeffect sampling below K-shell          1
 Enable sampling of quantum entanglement            0
 X-section factor for integral approach             0.8
 Min kinetic energy for tables                      100 eV 
@@ -249,7 +247,7 @@ Lowest triplet kinetic energy                      1 MeV
 Enable sampling of gamma linear polarisation       0
 5D gamma conversion model type                     0
 5D gamma conversion model on isolated ion          0
-Livermore data directory                           livermore
+Livermore data directory                           epics_2017
 =======================================================================
 ======                 Ionisation Parameters                   ========
 =======================================================================
@@ -259,8 +257,9 @@ Step function for light ions                       (0.1, 0.02 mm)
 Step function for general ions                     (0.1, 0.001 mm)
 Lowest e+e- kinetic energy                         100 eV 
 Lowest muon/hadron kinetic energy                  1 keV
-Fluctuations of dE/dx are enabled                  1
 Use ICRU90 data                                    1
+Fluctuations of dE/dx are enabled                  1
+Type of fluctuation model for leptons and hadrons  Urban
 Use built-in Birks satuaration                     1
 Build CSDA range enabled                           0
 Use cut as a final range enabled                   0
@@ -296,8 +295,7 @@ Screening factor                                   1
 ======                 Atomic Deexcitation Parameters          ========
 =======================================================================
 Fluorescence enabled                               1
-Fluorescence Bearden data files enabled            0
-Fluorescence ANSTO data files enabled              0
+Directory in G4LEDATA for fluorescence data files  fluor
 Auger electron cascade enabled                     0
 PIXE atomic de-excitation enabled                  0
 De-excitation module ignores cuts                  0
@@ -327,8 +325,8 @@ conv:  for gamma SubType=14 BuildTable=1
       BetheHeitler5D : Emin=    0 eV  Emax=  100 TeV  ModifiedTsai
 
 Rayl:  for gamma SubType=11 BuildTable=1
-      Lambda table from 100 eV  to 100 keV, 20 bins/decade, spline: 0
-      LambdaPrime table from 100 keV to 100 TeV in 180 bins 
+      Lambda table from 100 eV  to 150 keV, 20 bins/decade, spline: 0
+      LambdaPrime table from 150 keV to 100 TeV in 176 bins 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
    LivermoreRayleigh : Emin=    0 eV  Emax=  100 TeV  CullenGenerator
 
@@ -339,12 +337,12 @@ msc:  for e-  SubType= 10
         WentzelVIUni : Emin=  100 MeV Emax=  100 TeV Nbins=120 100 MeV - 100 TeV
           StepLim=SafetyPlus Rfact=0.08 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=3 Llim=1 mm
 
-eIoni:  for e-  XStype:1  SubType=2
+eIoni:  for e-  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      StepFunction=(0.2, 0.01 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.2, 0.01 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-       LowEnergyIoni : Emin=    0 eV  Emax=  100 keV  deltaVI
+             PenIoni : Emin=    0 eV  Emax=  100 keV
         MollerBhabha : Emin=  100 keV Emax=  100 TeV  deltaVI
 
 eBrem:  for e-  XStype:4  SubType=3
@@ -375,10 +373,10 @@ msc:  for e+  SubType= 10
         WentzelVIUni : Emin=  100 MeV Emax=  100 TeV Nbins=120 100 MeV - 100 TeV
           StepLim=SafetyPlus Rfact=0.08 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=3 Llim=1 mm
 
-eIoni:  for e+  XStype:1  SubType=2
+eIoni:  for e+  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      StepFunction=(0.2, 0.01 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.2, 0.01 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
              PenIoni : Emin=    0 eV  Emax=  100 keV
         MollerBhabha : Emin=  100 keV Emax=  100 TeV  deltaVI
@@ -413,10 +411,10 @@ msc:  for proton  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=240 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=3 Llim=1 mm
 
-hIoni:  for proton  XStype:1  SubType=2
+hIoni:  for proton  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      StepFunction=(0.1, 0.05 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.1, 0.05 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                Bragg : Emin=    0 eV  Emax=    2 MeV  deltaVI
           BetheBloch : Emin=    2 MeV Emax=  100 TeV  deltaVI
@@ -449,12 +447,12 @@ msc:  for GenericIon  SubType= 10
             UrbanMsc : Emin=    0 eV  Emax=  100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=3 Llim=1 mm
 
-ionIoni:  for GenericIon  XStype:1  SubType=2
+ionIoni:  for GenericIon  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      StepFunction=(0.1, 0.02 mm), integ: 1, fluct: 1, linLossLim= 0.02
+      StepFunction=(0.1, 0.001 mm), integ: 3, fluct: 1, linLossLim= 0.02
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
-         ParamICRU73 : Emin=    0 eV  Emax=  100 TeV  deltaVI
+    LindhardSorensen : Emin=    0 eV  Emax=  100 TeV  deltaVI
 
 nuclearStopping:  for GenericIon SubType=8 BuildTable=0
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
@@ -465,10 +463,10 @@ msc:  for alpha  SubType= 10
             UrbanMsc : Emin=    0 eV  Emax=  100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=3 Llim=1 mm
 
-ionIoni:  for alpha  XStype:1  SubType=2
+ionIoni:  for alpha  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      StepFunction=(0.1, 0.02 mm), integ: 1, fluct: 1, linLossLim= 0.02
+      StepFunction=(0.1, 0.02 mm), integ: 3, fluct: 1, linLossLim= 0.02
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             BraggIon : Emin=    0 eV  Emax=7.9452 MeV  deltaVI
           BetheBloch : Emin=7.9452 MeV Emax=  100 TeV  deltaVI
@@ -482,10 +480,10 @@ msc:  for anti_proton  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=240 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=3 Llim=1 mm
 
-hIoni:  for anti_proton  XStype:1  SubType=2
+hIoni:  for anti_proton  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      StepFunction=(0.1, 0.05 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.1, 0.05 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             ICRU73QO : Emin=    0 eV  Emax=    2 MeV  deltaVI
           BetheBloch : Emin=    2 MeV Emax=  100 TeV  deltaVI
@@ -514,10 +512,10 @@ msc:  for kaon+  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=240 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=3 Llim=1 mm
 
-hIoni:  for kaon+  XStype:1  SubType=2
+hIoni:  for kaon+  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      StepFunction=(0.1, 0.05 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.1, 0.05 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                Bragg : Emin=    0 eV  Emax=1.05231 MeV  deltaVI
           BetheBloch : Emin=1.05231 MeV Emax=  100 TeV  deltaVI
@@ -546,10 +544,10 @@ msc:  for kaon-  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=240 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=3 Llim=1 mm
 
-hIoni:  for kaon-  XStype:1  SubType=2
+hIoni:  for kaon-  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      StepFunction=(0.1, 0.05 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.1, 0.05 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             ICRU73QO : Emin=    0 eV  Emax=1.05231 MeV  deltaVI
           BetheBloch : Emin=1.05231 MeV Emax=  100 TeV  deltaVI
@@ -578,14 +576,13 @@ msc:  for mu+  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=240 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=3 Llim=1 mm
 
-muIoni:  for mu+  XStype:1  SubType=2
+muIoni:  for mu+  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      StepFunction=(0.1, 0.05 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.1, 0.05 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                Bragg : Emin=    0 eV  Emax=  200 keV  deltaVI
-          BetheBloch : Emin=  200 keV Emax=    1 GeV  deltaVI
-        MuBetheBloch : Emin=    1 GeV Emax=  100 TeV
+        MuBetheBloch : Emin=  200 keV Emax=  100 TeV
 
 muBrems:  for mu+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
@@ -596,7 +593,7 @@ muBrems:  for mu+  XStype:1  SubType=3
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 0
-      Sampling table 21x1001; from 1 GeV to 100 TeV 
+      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -611,14 +608,13 @@ msc:  for mu-  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=240 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=3 Llim=1 mm
 
-muIoni:  for mu-  XStype:1  SubType=2
+muIoni:  for mu-  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      StepFunction=(0.1, 0.05 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.1, 0.05 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             ICRU73QO : Emin=    0 eV  Emax=  200 keV  deltaVI
-          BetheBloch : Emin=  200 keV Emax=    1 GeV  deltaVI
-        MuBetheBloch : Emin=    1 GeV Emax=  100 TeV
+        MuBetheBloch : Emin=  200 keV Emax=  100 TeV
 
 muBrems:  for mu-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
@@ -629,7 +625,7 @@ muBrems:  for mu-  XStype:1  SubType=3
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 0
-      Sampling table 21x1001; from 1 GeV to 100 TeV 
+      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -644,10 +640,10 @@ msc:  for pi+  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=240 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=3 Llim=1 mm
 
-hIoni:  for pi+  XStype:1  SubType=2
+hIoni:  for pi+  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      StepFunction=(0.1, 0.05 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.1, 0.05 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                Bragg : Emin=    0 eV  Emax=297.505 keV  deltaVI
           BetheBloch : Emin=297.505 keV Emax=  100 TeV  deltaVI
@@ -676,10 +672,10 @@ msc:  for pi-  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=240 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=3 Llim=1 mm
 
-hIoni:  for pi-  XStype:1  SubType=2
+hIoni:  for pi-  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 240 bins
       Lambda tables from threshold to 100 TeV, 20 bins/decade, spline: 1
-      StepFunction=(0.1, 0.05 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.1, 0.05 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             ICRU73QO : Emin=    0 eV  Emax=297.505 keV  deltaVI
           BetheBloch : Emin=297.505 keV Emax=  100 TeV  deltaVI
@@ -713,14 +709,17 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
      Cr_sctns:        G4NeutronElasticXS: 0 eV  ---> 100 TeV
 
+
   Process: neutronInelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
 
+
   Process: nCapture
         Model:               nRadCapture: 0 eV  ---> 100 TeV
      Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
+
 
   Process: nKiller
 
@@ -731,9 +730,11 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
+
   Process: B-Inelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for D-
@@ -742,9 +743,11 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
+
   Process: D-Inelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for GenericIon
@@ -754,6 +757,7 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
+
 ---------------------------------------------------
                            Hadronic Processes for He3
 
@@ -761,10 +765,12 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
+
   Process: He3Inelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for alpha
@@ -773,10 +779,12 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
+
   Process: alphaInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for anti_He3
@@ -786,9 +794,11 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
+
   Process: anti_He3Inelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
 
   Process: hFritiofCaptureAtRest
 
@@ -800,9 +810,11 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
+
   Process: anti_alphaInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
 
   Process: hFritiofCaptureAtRest
 
@@ -814,9 +826,16 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
+
   Process: anti_deuteronInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_hypertriton
 
   Process: hFritiofCaptureAtRest
 
@@ -827,9 +846,11 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
+
   Process: anti_lambdaInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
 
   Process: hFritiofCaptureAtRest
 
@@ -841,9 +862,11 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              AntiAElastic: 100 MeV ---> 100 TeV
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
+
   Process: anti_neutronInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
 
   Process: hFritiofCaptureAtRest
 
@@ -855,9 +878,11 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              AntiAElastic: 100 MeV ---> 100 TeV
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
+
   Process: anti_protonInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
 
   Process: hFritiofCaptureAtRest
 
@@ -869,9 +894,11 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
+
   Process: anti_tritonInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
 
   Process: hFritiofCaptureAtRest
 
@@ -882,10 +909,12 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
+
   Process: dInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for e+
@@ -894,12 +923,14 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:   G4ElectroVDNuclearModel: 0 eV  ---> 1 PeV
      Cr_sctns:          ElectroNuclearXS: 0 eV  ---> 100 TeV
 
+
 ---------------------------------------------------
                            Hadronic Processes for e-
 
   Process: electronNuclear
         Model:   G4ElectroVDNuclearModel: 0 eV  ---> 1 PeV
      Cr_sctns:          ElectroNuclearXS: 0 eV  ---> 100 TeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for gamma
@@ -910,6 +941,7 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:           TheoFSGenerator: 3 GeV ---> 100 TeV
      Cr_sctns:            GammaNuclearXS: 0 eV  ---> 100 TeV
 
+
 ---------------------------------------------------
                            Hadronic Processes for kaon+
 
@@ -917,10 +949,12 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
+
   Process: kaon+Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for kaon-
@@ -929,10 +963,12 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
+
   Process: kaon-Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
 
   Process: hBertiniCaptureAtRest
 
@@ -943,10 +979,12 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
+
   Process: lambdaInelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for mu+
@@ -955,12 +993,14 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:      G4MuonVDNuclearModel: 0 eV  ---> 1 PeV
      Cr_sctns:     KokoulinMuonNuclearXS: 0 eV  ---> 100 TeV
 
+
 ---------------------------------------------------
                            Hadronic Processes for mu-
 
   Process: muonNuclear
         Model:      G4MuonVDNuclearModel: 0 eV  ---> 1 PeV
      Cr_sctns:     KokoulinMuonNuclearXS: 0 eV  ---> 100 TeV
+
 
   Process: muMinusCaptureAtRest
 
@@ -971,10 +1011,12 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:           hElasticGlauber: 0 eV  ---> 100 TeV
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
+
   Process: pi+Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for pi-
@@ -983,10 +1025,12 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:           hElasticGlauber: 0 eV  ---> 100 TeV
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
+
   Process: pi-Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
+
 
   Process: hBertiniCaptureAtRest
 
@@ -997,10 +1041,12 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
+
   Process: protonInelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for sigma-
@@ -1009,10 +1055,12 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
+
   Process: sigma-Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
 
   Process: hBertiniCaptureAtRest
 
@@ -1023,10 +1071,12 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
+
   Process: tInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
 
 ================================================================
 =======================================================================
@@ -1034,18 +1084,18 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
 =======================================================================
 Type of pre-compound inverse x-section              3
 Pre-compound model active                           1
-Pre-compound excitation low energy (MeV)            0.1
-Pre-compound excitation high energy (MeV)           30
+Pre-compound excitation low energy                  100 keV
+Pre-compound excitation high energy                 30 MeV
 Type of de-excitation inverse x-section             3
 Type of de-excitation factory                       Evaporation+GEM
 Number of de-excitation channels                    68
-Min excitation energy (keV)                         0.01
-Min energy per nucleon for multifragmentation (MeV) 2e+05
-Limit excitation energy for Fermi BreakUp (MeV)     20
+Min excitation energy                               10 eV 
+Min energy per nucleon for multifragmentation       200 GeV
+Limit excitation energy for Fermi BreakUp           20 MeV
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
-Use discrete excitation energy of the residual      0
-Time limit for long lived isomeres (ns)             1
+Use discrete excitation energy of the residual      1
+Time limit for long lived isomeres                  1 ns 
 Isomer production flag                              1
 Internal e- conversion flag                         1
 Store e- internal conversion data                   0
@@ -1058,14 +1108,14 @@ Max 2J for sampling of angular correlations         10
 Index : 0     used in the geometry : Yes
  Material : Air
  Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  1 keV    e-  1 keV    e+  1 keV proton 100 keV
+ Energy thresholds :  gamma  990 eV     e-  990 eV     e+  990 eV  proton 100 keV
  Region(s) which use this couple : 
     DefaultRegionForTheWorld
 
 Index : 1     used in the geometry : Yes
  Material : Water
  Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  2.93516 keV    e-  351.296 keV    e+  341.588 keV proton 100 keV
+ Energy thresholds :  gamma  2.93515 keV    e-  351.291 keV    e+  341.598 keV proton 100 keV
  Region(s) which use this couple : 
     DefaultRegionForTheWorld
 
@@ -1073,41 +1123,41 @@ Index : 1     used in the geometry : Yes
 
 ### Run 0 start.
 >>> Event 0
-Number of optical photons produced in this event : 1682
+Number of optical photons produced in this event : 1702
 >>> Event 1
-Number of optical photons produced in this event : 1760
+Number of optical photons produced in this event : 1699
 >>> Event 2
-Number of optical photons produced in this event : 1606
+Number of optical photons produced in this event : 1666
 >>> Event 3
-Number of optical photons produced in this event : 1676
+Number of optical photons produced in this event : 1788
 >>> Event 4
-Number of optical photons produced in this event : 1637
+Number of optical photons produced in this event : 1678
 >>> Event 5
-Number of optical photons produced in this event : 1775
+Number of optical photons produced in this event : 1708
 >>> Event 6
-Number of optical photons produced in this event : 1670
+Number of optical photons produced in this event : 1694
 >>> Event 7
-Number of optical photons produced in this event : 1632
+Number of optical photons produced in this event : 1684
 >>> Event 8
-Number of optical photons produced in this event : 1592
+Number of optical photons produced in this event : 1547
 >>> Event 9
-Number of optical photons produced in this event : 1789
-Time of this run:   User=0.690000s Real=0.689283s Sys=0.000000s
+Number of optical photons produced in this event : 1585
+Time of this run:   User=0.720000s Real=0.722477s Sys=0.000000s
 Number of events processed: 10
-Number of optical photons produced in this run : 16819
+Number of optical photons produced in this run : 16751
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-37
+34
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -1121,19 +1171,13 @@ Processing test_E06_2.C("g4Config1.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.1 ( 17 March 2022 )
+ Version 6.2 ( 18 January 2023 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
-
-          ################################
-          !!! G4Backtrace is activated !!!
-          ################################
-
-
 **************************************************************
- Geant4 version Name: geant4-11-00-patch-01    (8-March-2022)
+ Geant4 version Name: geant4-11-01    (9-December-2022)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -1223,6 +1267,8 @@ G4OpticalSurface: data file /Users/ivana/work/packages/geant4/data/RealSurface2.
 LUT DAVIS - reflectivity data file: Rough_LUTR.z read in! 
 The material properties REFLECTIVITY set for optical surface AirSurface
 The material properties EFFICIENCY set for optical surface AirSurface
+G4FieldManager/SetEpsMin :  eps_min =      5e-05
+G4FieldManager/SetEpsMax :  eps_max =      0.001 ( Note: unchanged eps_min=     5e-05 )
 Global field created with stepper DormandPrince745
 
  hInelastic FTFP_BERT : threshold between BERT and FTFP is over the interval 
@@ -1329,8 +1375,10 @@ Available UI session types: [ tcsh, csh ]
 LPM effect enabled                                 1
 Enable creation and use of sampling tables         0
 Apply cuts on all EM processes                     1
+Use combined TransportationWithMsc                 Enabled
 Use general process                                1
 Enable linear polarisation for gamma               0
+Enable photoeffect sampling below K-shell          1
 Enable sampling of quantum entanglement            0
 X-section factor for integral approach             0.8
 Min kinetic energy for tables                      100 eV 
@@ -1346,7 +1394,7 @@ Lowest triplet kinetic energy                      1 MeV
 Enable sampling of gamma linear polarisation       0
 5D gamma conversion model type                     0
 5D gamma conversion model on isolated ion          0
-Livermore data directory                           livermore
+Livermore data directory                           epics_2017
 =======================================================================
 ======                 Ionisation Parameters                   ========
 =======================================================================
@@ -1356,8 +1404,9 @@ Step function for light ions                       (0.2, 0.1 mm)
 Step function for general ions                     (0.2, 0.1 mm)
 Lowest e+e- kinetic energy                         1 keV
 Lowest muon/hadron kinetic energy                  1 keV
-Fluctuations of dE/dx are enabled                  1
 Use ICRU90 data                                    0
+Fluctuations of dE/dx are enabled                  1
+Type of fluctuation model for leptons and hadrons  Universal
 Use built-in Birks satuaration                     1
 Build CSDA range enabled                           0
 Use cut as a final range enabled                   0
@@ -1407,17 +1456,17 @@ conv:  for gamma applyCuts:1  SubType=14 BuildTable=1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
      BetheHeitlerLPM : Emin=    0 eV  Emax=  100 TeV  ModifiedTsai
 
-msc:  for e-  SubType= 10
+TransportationWithMsc: for e-
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 MeV Nbins=42 100 eV  - 100 MeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llim=1 mm
         WentzelVIUni : Emin=  100 MeV Emax=  100 TeV Nbins=42 100 MeV - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llim=1 mm
 
-eIoni:  for e-  XStype:1  SubType=2
+eIoni:  for e-  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      StepFunction=(0.8, 1 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.8, 1 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         MollerBhabha : Emin=    0 eV  Emax=  100 TeV
 
@@ -1435,17 +1484,17 @@ CoulombScat:  for e- XStype:1 applyCuts:1  SubType=1 BuildTable=1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
   eCoulombScattering : Emin=  100 MeV Emax=  100 TeV
 
-msc:  for e+  SubType= 10
+TransportationWithMsc: for e+
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             UrbanMsc : Emin=    0 eV  Emax=  100 MeV Nbins=42 100 eV  - 100 MeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llim=1 mm
         WentzelVIUni : Emin=  100 MeV Emax=  100 TeV Nbins=42 100 MeV - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:1 Skin=1 Llim=1 mm
 
-eIoni:  for e+  XStype:1  SubType=2
+eIoni:  for e+  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      StepFunction=(0.8, 1 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.8, 1 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
         MollerBhabha : Emin=    0 eV  Emax=  100 TeV
 
@@ -1472,10 +1521,10 @@ msc:  for proton  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llim=1 mm
 
-hIoni:  for proton  XStype:1  SubType=2
+hIoni:  for proton  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      StepFunction=(0.2, 0.1 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.2, 0.1 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                Bragg : Emin=    0 eV  Emax=    2 MeV
           BetheBloch : Emin=    2 MeV Emax=  100 TeV
@@ -1504,10 +1553,10 @@ msc:  for GenericIon  SubType= 10
             UrbanMsc : Emin=    0 eV  Emax=  100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llim=1 mm
 
-ionIoni:  for GenericIon  XStype:1  SubType=2
+ionIoni:  for GenericIon  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      StepFunction=(0.2, 0.1 mm), integ: 1, fluct: 1, linLossLim= 0.02
+      StepFunction=(0.2, 0.1 mm), integ: 3, fluct: 1, linLossLim= 0.02
       Stopping Power data for 17 ion/material pairs
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             BraggIon : Emin=    0 eV  Emax=    2 MeV
@@ -1518,10 +1567,10 @@ msc:  for alpha  SubType= 10
             UrbanMsc : Emin=    0 eV  Emax=  100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llim=1 mm
 
-ionIoni:  for alpha  XStype:1  SubType=2
+ionIoni:  for alpha  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      StepFunction=(0.2, 0.1 mm), integ: 1, fluct: 1, linLossLim= 0.02
+      StepFunction=(0.2, 0.1 mm), integ: 3, fluct: 1, linLossLim= 0.02
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             BraggIon : Emin=    0 eV  Emax=7.9452 MeV
           BetheBloch : Emin=7.9452 MeV Emax=  100 TeV
@@ -1531,10 +1580,10 @@ msc:  for anti_proton  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llim=1 mm
 
-hIoni:  for anti_proton  XStype:1  SubType=2
+hIoni:  for anti_proton  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      StepFunction=(0.2, 0.1 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.2, 0.1 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             ICRU73QO : Emin=    0 eV  Emax=    2 MeV
           BetheBloch : Emin=    2 MeV Emax=  100 TeV
@@ -1563,10 +1612,10 @@ msc:  for kaon+  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llim=1 mm
 
-hIoni:  for kaon+  XStype:1  SubType=2
+hIoni:  for kaon+  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      StepFunction=(0.2, 0.1 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.2, 0.1 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                Bragg : Emin=    0 eV  Emax=1.05231 MeV
           BetheBloch : Emin=1.05231 MeV Emax=  100 TeV
@@ -1595,10 +1644,10 @@ msc:  for kaon-  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llim=1 mm
 
-hIoni:  for kaon-  XStype:1  SubType=2
+hIoni:  for kaon-  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      StepFunction=(0.2, 0.1 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.2, 0.1 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             ICRU73QO : Emin=    0 eV  Emax=1.05231 MeV
           BetheBloch : Emin=1.05231 MeV Emax=  100 TeV
@@ -1627,14 +1676,13 @@ msc:  for mu+  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llim=1 mm
 
-muIoni:  for mu+  XStype:1  SubType=2
+muIoni:  for mu+  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      StepFunction=(0.2, 0.1 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.2, 0.1 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                Bragg : Emin=    0 eV  Emax=  200 keV
-          BetheBloch : Emin=  200 keV Emax=    1 GeV
-        MuBetheBloch : Emin=    1 GeV Emax=  100 TeV
+        MuBetheBloch : Emin=  200 keV Emax=  100 TeV
 
 muBrems:  for mu+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -1645,7 +1693,7 @@ muBrems:  for mu+  XStype:1  SubType=3
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
-      Sampling table 21x1001; from 1 GeV to 100 TeV 
+      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1660,14 +1708,13 @@ msc:  for mu-  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llim=1 mm
 
-muIoni:  for mu-  XStype:1  SubType=2
+muIoni:  for mu-  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      StepFunction=(0.2, 0.1 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.2, 0.1 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             ICRU73QO : Emin=    0 eV  Emax=  200 keV
-          BetheBloch : Emin=  200 keV Emax=    1 GeV
-        MuBetheBloch : Emin=    1 GeV Emax=  100 TeV
+        MuBetheBloch : Emin=  200 keV Emax=  100 TeV
 
 muBrems:  for mu-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
@@ -1678,7 +1725,7 @@ muBrems:  for mu-  XStype:1  SubType=3
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
-      Sampling table 21x1001; from 1 GeV to 100 TeV 
+      Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
@@ -1693,10 +1740,10 @@ msc:  for pi+  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llim=1 mm
 
-hIoni:  for pi+  XStype:1  SubType=2
+hIoni:  for pi+  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      StepFunction=(0.2, 0.1 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.2, 0.1 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                Bragg : Emin=    0 eV  Emax=297.505 keV
           BetheBloch : Emin=297.505 keV Emax=  100 TeV
@@ -1725,10 +1772,10 @@ msc:  for pi-  SubType= 10
         WentzelVIUni : Emin=    0 eV  Emax=  100 TeV Nbins=84 100 eV  - 100 TeV
           StepLim=Minimal Rfact=0.2 Gfact=2.5 Sfact=0.6 DispFlag:0 Skin=1 Llim=1 mm
 
-hIoni:  for pi-  XStype:1  SubType=2
+hIoni:  for pi-  XStype:3  SubType=2
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
       Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
-      StepFunction=(0.2, 0.1 mm), integ: 1, fluct: 1, linLossLim= 0.01
+      StepFunction=(0.2, 0.1 mm), integ: 3, fluct: 1, linLossLim= 0.01
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
             ICRU73QO : Emin=    0 eV  Emax=297.505 keV
           BetheBloch : Emin=297.505 keV Emax=  100 TeV
@@ -1762,14 +1809,17 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
      Cr_sctns:        G4NeutronElasticXS: 0 eV  ---> 100 TeV
 
+
   Process: neutronInelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:      G4NeutronInelasticXS: 0 eV  ---> 100 TeV
 
+
   Process: nCapture
         Model:               nRadCapture: 0 eV  ---> 100 TeV
      Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
+
 
   Process: nKiller
 
@@ -1780,9 +1830,11 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
+
   Process: B-Inelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for D-
@@ -1791,9 +1843,11 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
+
   Process: D-Inelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for GenericIon
@@ -1803,6 +1857,7 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
+
 ---------------------------------------------------
                            Hadronic Processes for He3
 
@@ -1810,10 +1865,12 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
+
   Process: He3Inelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for alpha
@@ -1822,10 +1879,12 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
+
   Process: alphaInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for anti_He3
@@ -1835,9 +1894,11 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
+
   Process: anti_He3Inelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
 
   Process: hFritiofCaptureAtRest
 
@@ -1849,9 +1910,11 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
+
   Process: anti_alphaInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
 
   Process: hFritiofCaptureAtRest
 
@@ -1863,9 +1926,16 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
+
   Process: anti_deuteronInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_hypertriton
 
   Process: hFritiofCaptureAtRest
 
@@ -1876,9 +1946,11 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
+
   Process: anti_lambdaInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
 
   Process: hFritiofCaptureAtRest
 
@@ -1890,9 +1962,11 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              AntiAElastic: 100 MeV ---> 100 TeV
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
+
   Process: anti_neutronInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
 
   Process: hFritiofCaptureAtRest
 
@@ -1904,9 +1978,11 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              AntiAElastic: 100 MeV ---> 100 TeV
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
+
   Process: anti_protonInelastic
         Model:                      FTFP: 0 eV  ---> 100 TeV
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
 
   Process: hFritiofCaptureAtRest
 
@@ -1918,9 +1994,11 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
 
+
   Process: anti_tritonInelastic
         Model:                      FTFP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:              AntiAGlauber: 0 eV  ---> 25.6 PeV
+
 
   Process: hFritiofCaptureAtRest
 
@@ -1931,10 +2009,12 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
+
   Process: dInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for e+
@@ -1943,12 +2023,14 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:   G4ElectroVDNuclearModel: 0 eV  ---> 1 PeV
      Cr_sctns:          ElectroNuclearXS: 0 eV  ---> 100 TeV
 
+
 ---------------------------------------------------
                            Hadronic Processes for e-
 
   Process: electronNuclear
         Model:   G4ElectroVDNuclearModel: 0 eV  ---> 1 PeV
      Cr_sctns:          ElectroNuclearXS: 0 eV  ---> 100 TeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for gamma
@@ -1959,6 +2041,7 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:           TheoFSGenerator: 3 GeV ---> 100 TeV
      Cr_sctns:            GammaNuclearXS: 0 eV  ---> 100 TeV
 
+
 ---------------------------------------------------
                            Hadronic Processes for kaon+
 
@@ -1966,10 +2049,12 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
+
   Process: kaon+Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for kaon-
@@ -1978,10 +2063,12 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
+
   Process: kaon-Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
 
   Process: hBertiniCaptureAtRest
 
@@ -1992,10 +2079,12 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
+
   Process: lambdaInelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for mu+
@@ -2004,12 +2093,14 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:      G4MuonVDNuclearModel: 0 eV  ---> 1 PeV
      Cr_sctns:     KokoulinMuonNuclearXS: 0 eV  ---> 100 TeV
 
+
 ---------------------------------------------------
                            Hadronic Processes for mu-
 
   Process: muonNuclear
         Model:      G4MuonVDNuclearModel: 0 eV  ---> 1 PeV
      Cr_sctns:     KokoulinMuonNuclearXS: 0 eV  ---> 100 TeV
+
 
   Process: muMinusCaptureAtRest
 
@@ -2020,10 +2111,12 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:           hElasticGlauber: 0 eV  ---> 100 TeV
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
+
   Process: pi+Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for pi-
@@ -2032,10 +2125,12 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:           hElasticGlauber: 0 eV  ---> 100 TeV
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
+
   Process: pi-Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
+
 
   Process: hBertiniCaptureAtRest
 
@@ -2046,10 +2141,12 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
 
+
   Process: protonInelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:  BarashenkovGlauberGribov: 0 eV  ---> 100 TeV
+
 
 ---------------------------------------------------
                            Hadronic Processes for sigma-
@@ -2058,10 +2155,12 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV  ---> 100 TeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
 
+
   Process: sigma-Inelastic
         Model:                      FTFP: 3 GeV ---> 100 TeV
         Model:            BertiniCascade: 0 eV  ---> 6 GeV
      Cr_sctns:            Glauber-Gribov: 0 eV  ---> 100 TeV
+
 
   Process: hBertiniCaptureAtRest
 
@@ -2072,10 +2171,12 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
         Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
 
+
   Process: tInelastic
         Model:  Binary Light Ion Cascade: 0 eV /n ---> 6 GeV/n
         Model:                      FTFP: 3 GeV/n ---> 100 TeV/n
      Cr_sctns:  Glauber-Gribov Nucl-nucl: 0 eV  ---> 25.6 PeV
+
 
 ================================================================
 =======================================================================
@@ -2083,18 +2184,18 @@ CoulombScat:  for pi- XStype:1 applyCuts:1  SubType=1 BuildTable=1
 =======================================================================
 Type of pre-compound inverse x-section              3
 Pre-compound model active                           1
-Pre-compound excitation low energy (MeV)            0.1
-Pre-compound excitation high energy (MeV)           30
+Pre-compound excitation low energy                  100 keV
+Pre-compound excitation high energy                 30 MeV
 Type of de-excitation inverse x-section             3
 Type of de-excitation factory                       Evaporation+GEM
 Number of de-excitation channels                    68
-Min excitation energy (keV)                         0.01
-Min energy per nucleon for multifragmentation (MeV) 2e+05
-Limit excitation energy for Fermi BreakUp (MeV)     20
+Min excitation energy                               10 eV 
+Min energy per nucleon for multifragmentation       200 GeV
+Limit excitation energy for Fermi BreakUp           20 MeV
 Level density (1/MeV)                               0.075
 Use simple level density model                      1
-Use discrete excitation energy of the residual      0
-Time limit for long lived isomeres (ns)             1
+Use discrete excitation energy of the residual      1
+Time limit for long lived isomeres                  1 ns 
 Isomer production flag                              1
 Internal e- conversion flag                         1
 Store e- internal conversion data                   0
@@ -2107,14 +2208,14 @@ Max 2J for sampling of angular correlations         10
 Index : 0     used in the geometry : Yes
  Material : Air
  Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  1 keV    e-  1 keV    e+  1 keV proton 100 keV
+ Energy thresholds :  gamma  990 eV     e-  990 eV     e+  990 eV  proton 100 keV
  Region(s) which use this couple : 
     DefaultRegionForTheWorld
 
 Index : 1     used in the geometry : Yes
  Material : Water
  Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
- Energy thresholds :  gamma  2.93516 keV    e-  351.296 keV    e+  341.588 keV proton 100 keV
+ Energy thresholds :  gamma  2.93515 keV    e-  351.291 keV    e+  341.598 keV proton 100 keV
  Region(s) which use this couple : 
     DefaultRegionForTheWorld
 
@@ -2122,36 +2223,468 @@ Index : 1     used in the geometry : Yes
 
 ### Run 0 start.
 >>> Event 0
-Number of optical photons produced in this event : 1570
-Number of feedback photons produced in this event : 2053
+ G4VParticleChange::CheckSecondary : 
+ The global time of secondary goes back compared to the parent !!
+ ParentTime(ns)=29.878 SecondaryTime(ns)= 29.878 Difference(ns)=3.55271e-15
+ Ekin(MeV)=3.33685e-06opticalphoton created by Undefined
+      -----------------------------------------------
+        G4VParticleChange Information 
+        TrackID             : 396
+        ParentID            : 92
+        Particle            : opticalphoton
+        Kinetic energy (MeV): 3.3368491e-06
+        Position (mm)       : (4765.2647,2616.3708,539.70865)
+        Direction           : (-0.1996525,0.92787736,-0.3149325)
+        PhysicsVolume       : TANK
+        Material            : Water
+      -----------------------------------------------
+        # of secondaries    :                    0
+      -----------------------------------------------
+        Energy Deposit (MeV):                    0
+   NIEL Energy Deposit (MeV):                    0
+        Track Status        :                Alive
+        TruePathLength (mm) :       1.7976931e+308
+        Stepping Control    :                    0
+       First step in volume
+        Mass (GeV)          :                    0
+        Charge (eplus)      :                    0
+        MagneticMoment      :                    0
+                         =  :                    0*[e hbar]/[2 m]
+        Position - x (mm)   :            4765.2647
+        Position - y (mm)   :            2616.3708
+        Position - z (mm)   :            539.70865
+        Time (ns)           :            29.876051
+        Proper Time (ns)    :                    0
+        Momentum Direct - x :           -0.1996525
+        Momentum Direct - y :           0.92787736
+        Momentum Direct - z :           -0.3149325
+        Kinetic Energy (MeV):        3.3368491e-06
+        Velocity  (/c)      :           0.72365537
+        Polarization - x    :          -0.33477576
+        Polarization - y    :           0.80924864
+        Polarization - z    :           0.48274406
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : TRACK001
+      issued by : G4VParticleChange::CheckSecondary()
+Secondary with illegal time and/or energy and/or momentum
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+ G4VParticleChange::CheckSecondary : 
+ The global time of secondary goes back compared to the parent !!
+ ParentTime(ns)=29.878 SecondaryTime(ns)= 29.878 Difference(ns)=3.55271e-15
+ Ekin(MeV)=3.33685e-06opticalphoton created by Undefined
+      -----------------------------------------------
+        G4VParticleChange Information 
+        TrackID             : 396
+        ParentID            : 92
+        Particle            : opticalphoton
+        Kinetic energy (MeV): 3.3368491e-06
+        Position (mm)       : (4765.2647,2616.3708,539.70865)
+        Direction           : (-0.1996525,0.92787736,-0.3149325)
+        PhysicsVolume       : TANK
+        Material            : Water
+      -----------------------------------------------
+        # of secondaries    :                    1
+      -----------------------------------------------
+        Energy Deposit (MeV):                    0
+   NIEL Energy Deposit (MeV):                    0
+        Track Status        :                Alive
+        TruePathLength (mm) :       1.7976931e+308
+        Stepping Control    :                    0
+       First step in volume
+        Mass (GeV)          :                    0
+        Charge (eplus)      :                    0
+        MagneticMoment      :                    0
+                         =  :                    0*[e hbar]/[2 m]
+        Position - x (mm)   :            4765.2647
+        Position - y (mm)   :            2616.3708
+        Position - z (mm)   :            539.70865
+        Time (ns)           :            29.876051
+        Proper Time (ns)    :                    0
+        Momentum Direct - x :           -0.1996525
+        Momentum Direct - y :           0.92787736
+        Momentum Direct - z :           -0.3149325
+        Kinetic Energy (MeV):        3.3368491e-06
+        Velocity  (/c)      :           0.72365537
+        Polarization - x    :          -0.33477576
+        Polarization - y    :           0.80924864
+        Polarization - z    :           0.48274406
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : TRACK001
+      issued by : G4VParticleChange::CheckSecondary()
+Secondary with illegal time and/or energy and/or momentum
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+ G4VParticleChange::CheckSecondary : 
+ The global time of secondary goes back compared to the parent !!
+ ParentTime(ns)=29.878 SecondaryTime(ns)= 29.878 Difference(ns)=3.55271e-15
+ Ekin(MeV)=3.33685e-06opticalphoton created by Undefined
+      -----------------------------------------------
+        G4VParticleChange Information 
+        TrackID             : 396
+        ParentID            : 92
+        Particle            : opticalphoton
+        Kinetic energy (MeV): 3.3368491e-06
+        Position (mm)       : (4765.2647,2616.3708,539.70865)
+        Direction           : (-0.1996525,0.92787736,-0.3149325)
+        PhysicsVolume       : TANK
+        Material            : Water
+      -----------------------------------------------
+        # of secondaries    :                    2
+      -----------------------------------------------
+        Energy Deposit (MeV):                    0
+   NIEL Energy Deposit (MeV):                    0
+        Track Status        :                Alive
+        TruePathLength (mm) :       1.7976931e+308
+        Stepping Control    :                    0
+       First step in volume
+        Mass (GeV)          :                    0
+        Charge (eplus)      :                    0
+        MagneticMoment      :                    0
+                         =  :                    0*[e hbar]/[2 m]
+        Position - x (mm)   :            4765.2647
+        Position - y (mm)   :            2616.3708
+        Position - z (mm)   :            539.70865
+        Time (ns)           :            29.876051
+        Proper Time (ns)    :                    0
+        Momentum Direct - x :           -0.1996525
+        Momentum Direct - y :           0.92787736
+        Momentum Direct - z :           -0.3149325
+        Kinetic Energy (MeV):        3.3368491e-06
+        Velocity  (/c)      :           0.72365537
+        Polarization - x    :          -0.33477576
+        Polarization - y    :           0.80924864
+        Polarization - z    :           0.48274406
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : TRACK001
+      issued by : G4VParticleChange::CheckSecondary()
+Secondary with illegal time and/or energy and/or momentum
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+ G4VParticleChange::CheckSecondary : 
+ The global time of secondary goes back compared to the parent !!
+ ParentTime(ns)=1.8988 SecondaryTime(ns)= 1.8988 Difference(ns)=2.22045e-16
+ Ekin(MeV)=2.04186e-06opticalphoton created by Undefined
+      -----------------------------------------------
+        G4VParticleChange Information 
+        TrackID             : 1041
+        ParentID            : 73
+        Particle            : opticalphoton
+        Kinetic energy (MeV): 2.0418569e-06
+        Position (mm)       : (372.78363,-45.073102,174.92212)
+        Direction           : (0.89966321,-0.10893859,0.42277476)
+        PhysicsVolume       : TANK
+        Material            : Water
+      -----------------------------------------------
+        # of secondaries    :                    0
+      -----------------------------------------------
+        Energy Deposit (MeV):                    0
+   NIEL Energy Deposit (MeV):                    0
+        Track Status        :                Alive
+        TruePathLength (mm) :       1.7976931e+308
+        Stepping Control    :                    0
+       First step in volume
+        Mass (GeV)          :                    0
+        Charge (eplus)      :                    0
+        MagneticMoment      :                    0
+                         =  :                    0*[e hbar]/[2 m]
+        Position - x (mm)   :            372.78363
+        Position - y (mm)   :           -45.073102
+        Position - z (mm)   :            174.92212
+        Time (ns)           :            1.8959684
+        Proper Time (ns)    :                    0
+        Momentum Direct - x :           0.89966321
+        Momentum Direct - y :          -0.10893859
+        Momentum Direct - z :           0.42277476
+        Kinetic Energy (MeV):        2.0418569e-06
+        Velocity  (/c)      :           0.72792039
+        Polarization - x    :           -0.4365846
+        Polarization - y    :          -0.22448809
+        Polarization - z    :           0.87120548
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : TRACK001
+      issued by : G4VParticleChange::CheckSecondary()
+Secondary with illegal time and/or energy and/or momentum
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+ G4VParticleChange::CheckSecondary : 
+ The global time of secondary goes back compared to the parent !!
+ ParentTime(ns)=1.8988 SecondaryTime(ns)= 1.8988 Difference(ns)=2.22045e-16
+ Ekin(MeV)=2.04186e-06opticalphoton created by Undefined
+      -----------------------------------------------
+        G4VParticleChange Information 
+        TrackID             : 1041
+        ParentID            : 73
+        Particle            : opticalphoton
+        Kinetic energy (MeV): 2.0418569e-06
+        Position (mm)       : (372.78363,-45.073102,174.92212)
+        Direction           : (0.89966321,-0.10893859,0.42277476)
+        PhysicsVolume       : TANK
+        Material            : Water
+      -----------------------------------------------
+        # of secondaries    :                    1
+      -----------------------------------------------
+        Energy Deposit (MeV):                    0
+   NIEL Energy Deposit (MeV):                    0
+        Track Status        :                Alive
+        TruePathLength (mm) :       1.7976931e+308
+        Stepping Control    :                    0
+       First step in volume
+        Mass (GeV)          :                    0
+        Charge (eplus)      :                    0
+        MagneticMoment      :                    0
+                         =  :                    0*[e hbar]/[2 m]
+        Position - x (mm)   :            372.78363
+        Position - y (mm)   :           -45.073102
+        Position - z (mm)   :            174.92212
+        Time (ns)           :            1.8959684
+        Proper Time (ns)    :                    0
+        Momentum Direct - x :           0.89966321
+        Momentum Direct - y :          -0.10893859
+        Momentum Direct - z :           0.42277476
+        Kinetic Energy (MeV):        2.0418569e-06
+        Velocity  (/c)      :           0.72792039
+        Polarization - x    :           -0.4365846
+        Polarization - y    :          -0.22448809
+        Polarization - z    :           0.87120548
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : TRACK001
+      issued by : G4VParticleChange::CheckSecondary()
+Secondary with illegal time and/or energy and/or momentum
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+ G4VParticleChange::CheckSecondary : 
+ The global time of secondary goes back compared to the parent !!
+ ParentTime(ns)=1.8988 SecondaryTime(ns)= 1.8988 Difference(ns)=2.22045e-16
+ Ekin(MeV)=2.04186e-06opticalphoton created by Undefined
+      -----------------------------------------------
+        G4VParticleChange Information 
+        TrackID             : 1041
+        ParentID            : 73
+        Particle            : opticalphoton
+        Kinetic energy (MeV): 2.0418569e-06
+        Position (mm)       : (372.78363,-45.073102,174.92212)
+        Direction           : (0.89966321,-0.10893859,0.42277476)
+        PhysicsVolume       : TANK
+        Material            : Water
+      -----------------------------------------------
+        # of secondaries    :                    2
+      -----------------------------------------------
+        Energy Deposit (MeV):                    0
+   NIEL Energy Deposit (MeV):                    0
+        Track Status        :                Alive
+        TruePathLength (mm) :       1.7976931e+308
+        Stepping Control    :                    0
+       First step in volume
+        Mass (GeV)          :                    0
+        Charge (eplus)      :                    0
+        MagneticMoment      :                    0
+                         =  :                    0*[e hbar]/[2 m]
+        Position - x (mm)   :            372.78363
+        Position - y (mm)   :           -45.073102
+        Position - z (mm)   :            174.92212
+        Time (ns)           :            1.8959684
+        Proper Time (ns)    :                    0
+        Momentum Direct - x :           0.89966321
+        Momentum Direct - y :          -0.10893859
+        Momentum Direct - z :           0.42277476
+        Kinetic Energy (MeV):        2.0418569e-06
+        Velocity  (/c)      :           0.72792039
+        Polarization - x    :           -0.4365846
+        Polarization - y    :          -0.22448809
+        Polarization - z    :           0.87120548
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : TRACK001
+      issued by : G4VParticleChange::CheckSecondary()
+Secondary with illegal time and/or energy and/or momentum
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+ G4VParticleChange::CheckSecondary : 
+ The global time of secondary goes back compared to the parent !!
+ ParentTime(ns)=119.799 SecondaryTime(ns)= 119.799 Difference(ns)=1.42109e-14
+ Ekin(MeV)=4.08952e-06opticalphoton created by Undefined
+      -----------------------------------------------
+        G4VParticleChange Information 
+        TrackID             : 1667
+        ParentID            : 55
+        Particle            : opticalphoton
+        Kinetic energy (MeV): 4.0895234e-06
+        Position (mm)       : (178.77204,1328.0411,1194.6783)
+        Direction           : (0.47303494,-0.20271074,-0.85740673)
+        PhysicsVolume       : TANK
+        Material            : Water
+      -----------------------------------------------
+        # of secondaries    :                    0
+      -----------------------------------------------
+        Energy Deposit (MeV):                    0
+   NIEL Energy Deposit (MeV):                    0
+        Track Status        :                Alive
+        TruePathLength (mm) :       1.7976931e+308
+        Stepping Control    :                    0
+       First step in volume
+        Mass (GeV)          :                    0
+        Charge (eplus)      :                    0
+        MagneticMoment      :                    0
+                         =  :                    0*[e hbar]/[2 m]
+        Position - x (mm)   :            178.77204
+        Position - y (mm)   :            1328.0411
+        Position - z (mm)   :            1194.6783
+        Time (ns)           :            119.79556
+        Proper Time (ns)    :                    0
+        Momentum Direct - x :           0.47303494
+        Momentum Direct - y :          -0.20271074
+        Momentum Direct - z :          -0.85740673
+        Kinetic Energy (MeV):        4.0895234e-06
+        Velocity  (/c)      :           0.72316434
+        Polarization - x    :          -0.20299672
+        Polarization - y    :          -0.88014412
+        Polarization - z    :           -0.4291138
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : TRACK001
+      issued by : G4VParticleChange::CheckSecondary()
+Secondary with illegal time and/or energy and/or momentum
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+ G4VParticleChange::CheckSecondary : 
+ The global time of secondary goes back compared to the parent !!
+ ParentTime(ns)=119.799 SecondaryTime(ns)= 119.799 Difference(ns)=1.42109e-14
+ Ekin(MeV)=4.08952e-06opticalphoton created by Undefined
+      -----------------------------------------------
+        G4VParticleChange Information 
+        TrackID             : 1667
+        ParentID            : 55
+        Particle            : opticalphoton
+        Kinetic energy (MeV): 4.0895234e-06
+        Position (mm)       : (178.77204,1328.0411,1194.6783)
+        Direction           : (0.47303494,-0.20271074,-0.85740673)
+        PhysicsVolume       : TANK
+        Material            : Water
+      -----------------------------------------------
+        # of secondaries    :                    1
+      -----------------------------------------------
+        Energy Deposit (MeV):                    0
+   NIEL Energy Deposit (MeV):                    0
+        Track Status        :                Alive
+        TruePathLength (mm) :       1.7976931e+308
+        Stepping Control    :                    0
+       First step in volume
+        Mass (GeV)          :                    0
+        Charge (eplus)      :                    0
+        MagneticMoment      :                    0
+                         =  :                    0*[e hbar]/[2 m]
+        Position - x (mm)   :            178.77204
+        Position - y (mm)   :            1328.0411
+        Position - z (mm)   :            1194.6783
+        Time (ns)           :            119.79556
+        Proper Time (ns)    :                    0
+        Momentum Direct - x :           0.47303494
+        Momentum Direct - y :          -0.20271074
+        Momentum Direct - z :          -0.85740673
+        Kinetic Energy (MeV):        4.0895234e-06
+        Velocity  (/c)      :           0.72316434
+        Polarization - x    :          -0.20299672
+        Polarization - y    :          -0.88014412
+        Polarization - z    :           -0.4291138
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : TRACK001
+      issued by : G4VParticleChange::CheckSecondary()
+Secondary with illegal time and/or energy and/or momentum
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+ G4VParticleChange::CheckSecondary : 
+ The global time of secondary goes back compared to the parent !!
+ ParentTime(ns)=119.799 SecondaryTime(ns)= 119.799 Difference(ns)=1.42109e-14
+ Ekin(MeV)=4.08952e-06opticalphoton created by Undefined
+      -----------------------------------------------
+        G4VParticleChange Information 
+        TrackID             : 1667
+        ParentID            : 55
+        Particle            : opticalphoton
+        Kinetic energy (MeV): 4.0895234e-06
+        Position (mm)       : (178.77204,1328.0411,1194.6783)
+        Direction           : (0.47303494,-0.20271074,-0.85740673)
+        PhysicsVolume       : TANK
+        Material            : Water
+      -----------------------------------------------
+        # of secondaries    :                    2
+      -----------------------------------------------
+        Energy Deposit (MeV):                    0
+   NIEL Energy Deposit (MeV):                    0
+        Track Status        :                Alive
+        TruePathLength (mm) :       1.7976931e+308
+        Stepping Control    :                    0
+       First step in volume
+        Mass (GeV)          :                    0
+        Charge (eplus)      :                    0
+        MagneticMoment      :                    0
+                         =  :                    0*[e hbar]/[2 m]
+        Position - x (mm)   :            178.77204
+        Position - y (mm)   :            1328.0411
+        Position - z (mm)   :            1194.6783
+        Time (ns)           :            119.79556
+        Proper Time (ns)    :                    0
+        Momentum Direct - x :           0.47303494
+        Momentum Direct - y :          -0.20271074
+        Momentum Direct - z :          -0.85740673
+        Kinetic Energy (MeV):        4.0895234e-06
+        Velocity  (/c)      :           0.72316434
+        Polarization - x    :          -0.20299672
+        Polarization - y    :          -0.88014412
+        Polarization - z    :           -0.4291138
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : TRACK001
+      issued by : G4VParticleChange::CheckSecondary()
+Secondary with illegal time and/or energy and/or momentum
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+Number of optical photons produced in this event : 1535
+Number of feedback photons produced in this event : 1824
 >>> Event 1
-Number of optical photons produced in this event : 1487
-Number of feedback photons produced in this event : 1943
+Number of optical photons produced in this event : 1407
+Number of feedback photons produced in this event : 1686
 >>> Event 2
-Number of optical photons produced in this event : 1487
-Number of feedback photons produced in this event : 2066
+Number of optical photons produced in this event : 1473
+Number of feedback photons produced in this event : 1726
 >>> Event 3
-Number of optical photons produced in this event : 1376
-Number of feedback photons produced in this event : 1851
+Number of optical photons produced in this event : 1427
+Number of feedback photons produced in this event : 1593
 >>> Event 4
-Number of optical photons produced in this event : 1459
-Number of feedback photons produced in this event : 1898
+Number of optical photons produced in this event : 1490
+Number of feedback photons produced in this event : 1707
 >>> Event 5
-Number of optical photons produced in this event : 1424
-Number of feedback photons produced in this event : 1905
+Number of optical photons produced in this event : 1376
+Number of feedback photons produced in this event : 1567
 >>> Event 6
-Number of optical photons produced in this event : 1475
-Number of feedback photons produced in this event : 1948
+Number of optical photons produced in this event : 1328
+Number of feedback photons produced in this event : 1542
 >>> Event 7
-Number of optical photons produced in this event : 1524
-Number of feedback photons produced in this event : 1994
+Number of optical photons produced in this event : 1460
+Number of feedback photons produced in this event : 1693
 >>> Event 8
-Number of optical photons produced in this event : 1503
-Number of feedback photons produced in this event : 2020
+Number of optical photons produced in this event : 1467
+Number of feedback photons produced in this event : 1662
 >>> Event 9
-Number of optical photons produced in this event : 1525
-Number of feedback photons produced in this event : 1991
-Time of this run:   User=0.670000s Real=0.673866s Sys=0.000000s
+Number of optical photons produced in this event : 1480
+Number of feedback photons produced in this event : 1717
+Time of this run:   User=0.610000s Real=0.602570s Sys=0.000000s
 Number of events processed: 10
-Number of optical photons produced in this run : 14830
-Number of feedback photons produced in this run : 19669
+Number of optical photons produced in this run : 14443
+Number of feedback photons produced in this run : 16717

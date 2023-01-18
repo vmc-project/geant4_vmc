@@ -1,9 +1,9 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -37,43 +37,43 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
 
 >>> Event 1 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 2 hits.
-Hodoscope2 has 9 hits.
-Chamber1 has 529 hits.
-Chamber2 has 489 hits.
-EmCalorimeter has 36 hits. Total Edep is 87574 (MeV)
-HadCalorimeter has 6 hits. Total Edep is 12.4521 (MeV)
+Hodoscope2 has 11 hits.
+Chamber1 has 551 hits.
+Chamber2 has 475 hits.
+EmCalorimeter has 37 hits. Total Edep is 85798.2 (MeV)
+HadCalorimeter has 5 hits. Total Edep is 9.95415 (MeV)
 
 >>> Event 2 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 4 hits.
-Hodoscope2 has 2 hits.
-Chamber1 has 541 hits.
-Chamber2 has 519 hits.
-EmCalorimeter has 15 hits. Total Edep is 19225.8 (MeV)
-HadCalorimeter has 5 hits. Total Edep is 2562.79 (MeV)
+Hodoscope1 has 2 hits.
+Hodoscope2 has 3 hits.
+Chamber1 has 525 hits.
+Chamber2 has 508 hits.
+EmCalorimeter has 10 hits. Total Edep is 19097.8 (MeV)
+HadCalorimeter has 6 hits. Total Edep is 2454.34 (MeV)
 
 >>> Event 3 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
+Hodoscope1 has 2 hits.
 Hodoscope2 has 7 hits.
-Chamber1 has 532 hits.
-Chamber2 has 482 hits.
-EmCalorimeter has 43 hits. Total Edep is 22898.1 (MeV)
-HadCalorimeter has 10 hits. Total Edep is 965.519 (MeV)
+Chamber1 has 518 hits.
+Chamber2 has 484 hits.
+EmCalorimeter has 43 hits. Total Edep is 27297.1 (MeV)
+HadCalorimeter has 9 hits. Total Edep is 946.154 (MeV)
 
 >>> Event 4 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 5 hits.
-Hodoscope2 has 7 hits.
+Hodoscope1 has 6 hits.
+Hodoscope2 has 4 hits.
 Chamber1 has 439 hits.
-Chamber2 has 154 hits.
-EmCalorimeter has 33 hits. Total Edep is 5437.59 (MeV)
-HadCalorimeter has 10 hits. Total Edep is 189.851 (MeV)
+Chamber2 has 139 hits.
+EmCalorimeter has 24 hits. Total Edep is 4947.09 (MeV)
+HadCalorimeter has 8 hits. Total Edep is 268.293 (MeV)
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   125324639     7784D5F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   106942851     65FD183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   119920941   125324639
-                                        HEX     725D92D     7784D5F
-                                        HEX    FFAD8A12           0
-                              relative adrs    -5404142           0
+          with Store/Table at absolute adrs   101539437   106942851
+                                        HEX     60D5E6D     65FD183
+                                        HEX    FFAD8B32           0
+                              relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -147,12 +147,12 @@ HadCalorimeter has 10 hits. Total Edep is 189.851 (MeV)
 
 >>> Event 5 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 2 hits.
-Hodoscope2 has 4 hits.
-Chamber1 has 535 hits.
-Chamber2 has 494 hits.
-EmCalorimeter has 27 hits. Total Edep is 24749.3 (MeV)
-HadCalorimeter has 4 hits. Total Edep is 17.5224 (MeV)
-Real time 0:00:01, CP time 1.700
+Hodoscope2 has 3 hits.
+Chamber1 has 534 hits.
+Chamber2 has 510 hits.
+EmCalorimeter has 26 hits. Total Edep is 27509.2 (MeV)
+HadCalorimeter has 3 hits. Total Edep is 10.3028 (MeV)
+Real time 0:00:00, CP time 0.800
  GTREVE_ROOT : Transporting primary track No         30
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10

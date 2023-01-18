@@ -1,9 +1,9 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -34,32 +34,32 @@ Geant3 has been created.
 ------------------------------------------------------------
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 926.898       total track length (cm):  41.4657
-   Gap:      total energy (MeV): 29.2679       total track length (cm):  13.2931
+   Absorber: total energy (MeV): 922.088       total track length (cm):  41.9802
+   Gap:      total energy (MeV): 29.2023       total track length (cm):  13.3037
 
 ---> Begin of event: 2
-   Absorber: total energy (MeV): 922.158       total track length (cm):  41.6598
-   Gap:      total energy (MeV): 22.0369       total track length (cm):  9.25102
+   Absorber: total energy (MeV): 912.607       total track length (cm):   42.386
+   Gap:      total energy (MeV): 38.8514       total track length (cm):  17.8678
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 949.015       total track length (cm):  42.9079
-   Gap:      total energy (MeV):  26.191       total track length (cm):  12.1379
+   Absorber: total energy (MeV): 910.237       total track length (cm):  40.8186
+   Gap:      total energy (MeV): 25.8944       total track length (cm):  11.9524
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 926.432       total track length (cm):  41.5391
-   Gap:      total energy (MeV): 25.4686       total track length (cm):   11.481
+   Absorber: total energy (MeV): 922.414       total track length (cm):  40.2707
+   Gap:      total energy (MeV): 26.1909       total track length (cm):  13.2119
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 928.902       total track length (cm):  42.4529
-   Gap:      total energy (MeV): 24.8971       total track length (cm):  10.8086
+   Absorber: total energy (MeV): 947.152       total track length (cm):  41.5174
+   Gap:      total energy (MeV): 21.7693       total track length (cm):  9.00412
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   128289119     7A5895F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   120373635     72CC183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   122885421   128289119
-                                        HEX     753152D     7A5895F
-                                        HEX    FFAD8A12           0
-                              relative adrs    -5404142           0
+          with Store/Table at absolute adrs   114970221   120373635
+                                        HEX     6DA4E6D     72CC183
+                                        HEX    FFAD8B32           0
+                              relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -99,11 +99,11 @@ Geant3 has been created.
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -166,7 +166,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  15    -6.212   -0.341    0.664     2.0431    0.5976    0.339    3.595     GAPX  Multiple scattering
 #  16    -6.074   -0.469    0.634     1.6797    0.3634    0.234    3.829     GAPX  Multiple scattering
 #  17    -6.070   -0.593    0.581     1.4088    0.2709    0.166    3.995     GAPX  Multiple scattering
-#  18    -6.029   -0.571    0.492     1.1889    0.2199    0.123    4.117     GAPX  Multiple scattering
+#  18    -6.029   -0.571    0.492     1.1890    0.2199    0.123    4.117     GAPX  Multiple scattering
 #  19    -6.062   -0.591    0.428     1.0369    0.1521    0.093    4.210     GAPX  Multiple scattering
 #  20    -6.003   -0.601    0.424     0.8555    0.1814    0.073    4.284     GAPX  Multiple scattering
 #  21    -6.000   -0.602    0.423     0.8360    0.0195    0.004    4.288     GAPX  Multiple scattering
@@ -477,13 +477,13 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Gap:      total energy (MeV):   3.968       total track length (cm):    2.241
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   145869151     8B1C95F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    97030531     5C89183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   140465453   145869151
-                                        HEX     85F552D     8B1C95F
-                                        HEX    FFAD8A12           0
-                              relative adrs    -5404142           0
+          with Store/Table at absolute adrs    91627117    97030531
+                                        HEX     5761E6D     5C89183
+                                        HEX    FFAD8B32           0
+                              relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -509,11 +509,11 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -623,13 +623,13 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   175709535     A791D5F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   158765443     9769183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   170305837   175709535
-                                        HEX     A26A92D     A791D5F
-                                        HEX    FFAD8A12           0
-                              relative adrs    -5404142           0
+          with Store/Table at absolute adrs   153362029   158765443
+                                        HEX     9241E6D     9769183
+                                        HEX    FFAD8B32           0
+                              relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -655,11 +655,11 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -710,16 +710,16 @@ Geant3 has been created.
       Current track pi0  is a decay product of Parent ID = 0
       Current track pi0  is a decay product of Parent ID = 0
 
-   Absorber: total energy (MeV): 1534.65       total track length (cm):     73.1
-   Gap:      total energy (MeV): 59.6649       total track length (cm):  29.8284
+   Absorber: total energy (MeV): 1534.63       total track length (cm):  73.0999
+   Gap:      total energy (MeV):  59.683       total track length (cm):  29.8342
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   163107167     9B8D15F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   103551363     62C1183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   157703469   163107167
-                                        HEX     9665D2D     9B8D15F
-                                        HEX    FFAD8A12           0
-                              relative adrs    -5404142           0
+          with Store/Table at absolute adrs    98147949   103551363
+                                        HEX     5D99E6D     62C1183
+                                        HEX    FFAD8B32           0
+                              relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -745,11 +745,11 @@ Geant3 has been created.
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -812,7 +812,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  15    -6.212   -0.341    0.664     2.0431    0.5976    0.339    3.595     GAPX  Multiple scattering
 #  16    -6.074   -0.469    0.634     1.6797    0.3634    0.234    3.829     GAPX  Multiple scattering
 #  17    -6.070   -0.593    0.581     1.4088    0.2709    0.166    3.995     GAPX  Multiple scattering
-#  18    -6.029   -0.571    0.492     1.1889    0.2199    0.123    4.117     GAPX  Multiple scattering
+#  18    -6.029   -0.571    0.492     1.1890    0.2199    0.123    4.117     GAPX  Multiple scattering
 #  19    -6.062   -0.591    0.428     1.0369    0.1521    0.093    4.210     GAPX  Multiple scattering
 #  20    -6.003   -0.601    0.424     0.8555    0.1814    0.073    4.284     GAPX  Multiple scattering
 #  21    -6.000   -0.602    0.423     0.8360    0.0195    0.004    4.288     GAPX  Multiple scattering
@@ -1132,13 +1132,13 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Gap:      total energy (MeV):   2.957       total track length (cm):    1.496
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   128775519     7ACF55F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    97313155     5CCE183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   123371821   128775519
-                                        HEX     75A812D     7ACF55F
-                                        HEX    FFAD8A12           0
-                              relative adrs    -5404142           0
+          with Store/Table at absolute adrs    91909741    97313155
+                                        HEX     57A6E6D     5CCE183
+                                        HEX    FFAD8B32           0
+                              relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 

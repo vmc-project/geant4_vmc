@@ -1,9 +1,9 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -42,120 +42,120 @@ The have width of 3 cm and a lenght of 24 cm. The Material is PbWO4
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.180
+Real time 0:00:00, CP time 0.100
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 1  -----
-  80086 hits are stored in HitsCollection 
-   e1  12.4037   e3x3  47.6359   e5x5  48.3318 GeV
- Total energy deposited in the calorimeter: 49.5389 (GeV)
+  79787 hits are stored in HitsCollection 
+   e1  12.4282   e3x3  47.9325   e5x5  48.5933 GeV
+ Total energy deposited in the calorimeter: 49.7573 (GeV)
  Start generating event Nr 2
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.180
+Real time 0:00:00, CP time 0.100
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 2  -----
-  80983 hits are stored in HitsCollection 
-   e1  13.944   e3x3  47.814   e5x5  48.4946 GeV
- Total energy deposited in the calorimeter: 49.7013 (GeV)
+  74948 hits are stored in HitsCollection 
+   e1  12.5532   e3x3  44.8161   e5x5  45.3997 GeV
+ Total energy deposited in the calorimeter: 46.3606 (GeV)
  Start generating event Nr 3
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.150
+Real time 0:00:00, CP time 0.100
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 3  -----
-  80253 hits are stored in HitsCollection 
-   e1  13.8381   e3x3  47.9166   e5x5  48.5232 GeV
- Total energy deposited in the calorimeter: 49.8093 (GeV)
+  79731 hits are stored in HitsCollection 
+   e1  12.3145   e3x3  47.8095   e5x5  48.4926 GeV
+ Total energy deposited in the calorimeter: 49.7975 (GeV)
  Start generating event Nr 4
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.160
+Real time 0:00:00, CP time 0.090
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 4  -----
-  80433 hits are stored in HitsCollection 
-   e1  13.2042   e3x3  47.7887   e5x5  48.4201 GeV
- Total energy deposited in the calorimeter: 49.7865 (GeV)
+  79922 hits are stored in HitsCollection 
+   e1  12.93   e3x3  47.8803   e5x5  48.4331 GeV
+ Total energy deposited in the calorimeter: 49.686 (GeV)
  Start generating event Nr 5
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.170
+Real time 0:00:00, CP time 0.090
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 5  -----
-  81037 hits are stored in HitsCollection 
-   e1  13.8906   e3x3  47.7121   e5x5  48.3979 GeV
- Total energy deposited in the calorimeter: 49.6868 (GeV)
+  82079 hits are stored in HitsCollection 
+   e1  12.2314   e3x3  47.9296   e5x5  48.5569 GeV
+ Total energy deposited in the calorimeter: 49.7444 (GeV)
  Start generating event Nr 6
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.160
+Real time 0:00:00, CP time 0.090
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 6  -----
-  80836 hits are stored in HitsCollection 
-   e1  13.3725   e3x3  47.7295   e5x5  48.3598 GeV
- Total energy deposited in the calorimeter: 49.642 (GeV)
+  80020 hits are stored in HitsCollection 
+   e1  12.2899   e3x3  47.7499   e5x5  48.3838 GeV
+ Total energy deposited in the calorimeter: 49.5999 (GeV)
  Start generating event Nr 7
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.150
+Real time 0:00:00, CP time 0.090
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 7  -----
-  79842 hits are stored in HitsCollection 
-   e1  13.9484   e3x3  47.9077   e5x5  48.5429 GeV
- Total energy deposited in the calorimeter: 49.7544 (GeV)
+  81183 hits are stored in HitsCollection 
+   e1  13.4174   e3x3  47.9136   e5x5  48.4752 GeV
+ Total energy deposited in the calorimeter: 49.7495 (GeV)
  Start generating event Nr 8
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.170
+Real time 0:00:00, CP time 0.090
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 8  -----
-  80191 hits are stored in HitsCollection 
-   e1  13.8906   e3x3  47.8225   e5x5  48.4679 GeV
- Total energy deposited in the calorimeter: 49.7411 (GeV)
+  81221 hits are stored in HitsCollection 
+   e1  12.0792   e3x3  47.8967   e5x5  48.4879 GeV
+ Total energy deposited in the calorimeter: 49.7423 (GeV)
  Start generating event Nr 9
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.160
+Real time 0:00:00, CP time 0.090
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 9  -----
-  80933 hits are stored in HitsCollection 
-   e1  12.9733   e3x3  47.9517   e5x5  48.5051 GeV
- Total energy deposited in the calorimeter: 49.8289 (GeV)
+  80958 hits are stored in HitsCollection 
+   e1  12.687   e3x3  47.9339   e5x5  48.5119 GeV
+ Total energy deposited in the calorimeter: 49.7834 (GeV)
  Start generating event Nr 10
 
 ******************************************
 Elapsed Time: 
-Real time 0:00:00, CP time 0.170
+Real time 0:00:00, CP time 0.090
 
 ******************************************
  ------ ExGflashEventAction::End of event nr. 10  -----
-  80509 hits are stored in HitsCollection 
-   e1  12.9978   e3x3  47.947   e5x5  48.6028 GeV
- Total energy deposited in the calorimeter: 49.7586 (GeV)
+  81668 hits are stored in HitsCollection 
+   e1  12.2447   e3x3  47.9616   e5x5  48.5999 GeV
+ Total energy deposited in the calorimeter: 49.7337 (GeV)
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   133544287     7F5B95F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   164557187     9CEF183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   128140589   133544287
-                                        HEX     7A3452D     7F5B95F
-                                        HEX    FFAD8A12           0
-                              relative adrs    -5404142           0
+          with Store/Table at absolute adrs   159153773   164557187
+                                        HEX     97C7E6D     9CEF183
+                                        HEX    FFAD8B32           0
+                              relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 

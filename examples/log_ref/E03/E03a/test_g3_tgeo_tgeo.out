@@ -1,9 +1,9 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
+Info in <TGeoManager::CountLevels>: max level = 4, max placements = 10
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
@@ -47,31 +47,31 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
 ---> Begin of event: 1
 Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Absorber: total energy (MeV): 922.087       total track length (cm):  41.9802
-   Gap:      total energy (MeV): 29.2039       total track length (cm):   13.304
+   Gap:      total energy (MeV): 29.2039       total track length (cm):  13.3038
 
 ---> Begin of event: 2
    Absorber: total energy (MeV): 912.606       total track length (cm):  42.3859
    Gap:      total energy (MeV): 38.8527       total track length (cm):  17.8691
 
 ---> Begin of event: 3
-   Absorber: total energy (MeV): 910.238       total track length (cm):  40.8186
-   Gap:      total energy (MeV): 25.8941       total track length (cm):  11.9521
+   Absorber: total energy (MeV): 910.237       total track length (cm):  40.8186
+   Gap:      total energy (MeV): 25.8944       total track length (cm):  11.9523
 
 ---> Begin of event: 4
-   Absorber: total energy (MeV): 921.611       total track length (cm):  39.8737
-   Gap:      total energy (MeV):  25.275       total track length (cm):  12.7714
+   Absorber: total energy (MeV): 926.192       total track length (cm):  39.8097
+   Gap:      total energy (MeV): 26.1975       total track length (cm):  13.2525
 
 ---> Begin of event: 5
-   Absorber: total energy (MeV): 875.573       total track length (cm):  39.9255
-   Gap:      total energy (MeV): 20.9186       total track length (cm):  8.56264
+   Absorber: total energy (MeV): 923.652       total track length (cm):  41.9796
+   Gap:      total energy (MeV):  21.313       total track length (cm):  9.89229
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   146477407     8BB115F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    99078531     5E7D183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   141073709   146477407
-                                        HEX     8689D2D     8BB115F
-                                        HEX    FFAD8A12           0
-                              relative adrs    -5404142           0
+          with Store/Table at absolute adrs    93675117    99078531
+                                        HEX     5955E6D     5E7D183
+                                        HEX    FFAD8B32           0
+                              relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -106,11 +106,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -147,7 +147,7 @@ Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
+Info in <TGeoManager::CountLevels>: max level = 4, max placements = 10
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
@@ -184,7 +184,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  15    -6.212   -0.341    0.664     2.0431    0.5976    0.339    3.595     GAPX  Multiple scattering
 #  16    -6.074   -0.469    0.634     1.6797    0.3634    0.234    3.829     GAPX  Multiple scattering
 #  17    -6.070   -0.593    0.581     1.4088    0.2709    0.166    3.995     GAPX  Multiple scattering
-#  18    -6.029   -0.571    0.492     1.1889    0.2199    0.123    4.117     GAPX  Multiple scattering
+#  18    -6.029   -0.571    0.492     1.1890    0.2199    0.123    4.117     GAPX  Multiple scattering
 #  19    -6.062   -0.591    0.428     1.0369    0.1521    0.093    4.210     GAPX  Multiple scattering
 #  20    -6.003   -0.601    0.424     0.8555    0.1814    0.073    4.284     GAPX  Multiple scattering
 #  21    -6.000   -0.602    0.423     0.8360    0.0195    0.004    4.288     GAPX  Multiple scattering
@@ -496,13 +496,13 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   3.968       total track length (cm):    2.241
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   149930335     8EFC15F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   194699651     B9AE183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   144526637   149930335
-                                        HEX     89D4D2D     8EFC15F
-                                        HEX    FFAD8A12           0
-                              relative adrs    -5404142           0
+          with Store/Table at absolute adrs   189296237   194699651
+                                        HEX     B486E6D     B9AE183
+                                        HEX    FFAD8B32           0
+                              relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -523,11 +523,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -564,7 +564,7 @@ Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
+Info in <TGeoManager::CountLevels>: max level = 4, max placements = 10
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
@@ -649,13 +649,13 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   119242079     71B7D5F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   240902531     E5BE183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   113838381   119242079
-                                        HEX     6C9092D     71B7D5F
-                                        HEX    FFAD8A12           0
-                              relative adrs    -5404142           0
+          with Store/Table at absolute adrs   235499117   240902531
+                                        HEX     E096E6D     E5BE183
+                                        HEX    FFAD8B32           0
+                              relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -676,11 +676,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -713,7 +713,7 @@ Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
+Info in <TGeoManager::CountLevels>: max level = 4, max placements = 10
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
@@ -743,16 +743,16 @@ Info in <TGeoManager::CloseGeometry>: ----------------modeler ready-------------
       Current track pi0  is a decay product of Parent ID = 0
 
 Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
-   Absorber: total energy (MeV): 1330.27       total track length (cm):  65.3392
-   Gap:      total energy (MeV): 58.2202       total track length (cm):  29.0487
+   Absorber: total energy (MeV): 1622.86       total track length (cm):  73.8867
+   Gap:      total energy (MeV): 74.9232       total track length (cm):  37.1906
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   149244255     8E5495F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   114614659     6D4E183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   143840557   149244255
-                                        HEX     892D52D     8E5495F
-                                        HEX    FFAD8A12           0
-                              relative adrs    -5404142           0
+          with Store/Table at absolute adrs   109211245   114614659
+                                        HEX     6826E6D     6D4E183
+                                        HEX    FFAD8B32           0
+                              relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
@@ -773,11 +773,11 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
  Cross section calculation concluded successfully
  **** GTRIGI: IEVENT=      1 IDEVT=      1 Random Seeds =       4357           0
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/00                        https://root.cern |
+  | Welcome to ROOT 6.26/10                        https://root.cern |
   | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosx64 on Mar 15 2022, 15:46:00                      |
-  | From tags/v6-26-00@v6-26-00                                      |
-  | With Apple clang version 12.0.5 (clang-1205.0.22.11)             |
+  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
+  | From tags/v6-26-10@v6-26-10                                      |
+  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
    ------------------------------------------------------------------
 
@@ -814,7 +814,7 @@ Info in <TGeoManager::CheckGeometry>: ...Nothing to fix
 Info in <TGeoManager::CloseGeometry>: Counting nodes...
 Info in <TGeoManager::Voxelize>: Voxelizing...
 Info in <TGeoManager::CloseGeometry>: Building cache...
-Info in <TGeoManager::CountLevels>: max level = 4, max placements = 2
+Info in <TGeoManager::CountLevels>: max level = 4, max placements = 10
 Info in <TGeoManager::CloseGeometry>: 42 nodes/ 6 volume UID's in E03 VMC example geometry
 Info in <TGeoManager::CloseGeometry>: ----------------modeler ready----------------
 
@@ -851,7 +851,7 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 #  15    -6.212   -0.341    0.664     2.0431    0.5976    0.339    3.595     GAPX  Multiple scattering
 #  16    -6.074   -0.469    0.634     1.6797    0.3634    0.234    3.829     GAPX  Multiple scattering
 #  17    -6.070   -0.593    0.581     1.4088    0.2709    0.166    3.995     GAPX  Multiple scattering
-#  18    -6.029   -0.571    0.492     1.1889    0.2199    0.123    4.117     GAPX  Multiple scattering
+#  18    -6.029   -0.571    0.492     1.1890    0.2199    0.123    4.117     GAPX  Multiple scattering
 #  19    -6.062   -0.591    0.428     1.0369    0.1521    0.093    4.210     GAPX  Multiple scattering
 #  20    -6.003   -0.601    0.424     0.8555    0.1814    0.073    4.284     GAPX  Multiple scattering
 #  21    -6.000   -0.602    0.423     0.8360    0.0195    0.004    4.288     GAPX  Multiple scattering
@@ -1172,13 +1172,13 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
    Gap:      total energy (MeV):   2.957       total track length (cm):    1.496
 --- Finish Run MC 
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   162138463     9AA095F HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   112546179     6B55183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   156734765   162138463
-                                        HEX     957952D     9AA095F
-                                        HEX    FFAD8A12           0
-                              relative adrs    -5404142           0
+          with Store/Table at absolute adrs   107142765   112546179
+                                        HEX     662DE6D     6B55183
+                                        HEX    FFAD8B32           0
+                              relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
           This store has a fence of   16 words.
 
