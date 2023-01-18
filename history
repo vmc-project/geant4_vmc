@@ -9,6 +9,26 @@
 
 Tags (history):
 ===============
+  18/01/2023
+  v6-1-p3:
+    Fixes:
+    G4Root:
+    - Faster TGeo<->G4 geometry lookups (#40)
+      (Thanks to S. Wenzel, CERN)
+      - Change of type map --> unordered_map for the G4 <-> TGeo
+        translation.
+        This is advantageous since the structures are read-only (random key access)
+        and so we go from O(log(N)) to O(1) scaling on average.
+        In tests for the ALICE detector, pp events, this commit results
+        in a noticable speed increase (~5%) in the overall G4 runtime.
+
+    Examples:
+    - Use ROOT::EnableThreadSafety() in examples and test programs (#41)
+      instead of the usage of TThread (now obsolete)
+
+    Tested with VMC 2.0, Geant4 11.0.p03 (with embedded CLHEP 2.4.5.1)
+      Root 6.26/10, VGM 5.0
+
   06/10/2022
   v6-1-p2:
     Fixes:
