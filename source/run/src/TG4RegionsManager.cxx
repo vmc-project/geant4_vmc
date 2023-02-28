@@ -36,6 +36,7 @@
 
 #include <map>
 #include <set>
+#include <fstream>
 
 TG4RegionsManager* TG4RegionsManager::fgInstance = 0;
 
@@ -47,6 +48,7 @@ const G4int TG4RegionsManager::fgkMinRangeOrder = -3;
 const G4int TG4RegionsManager::fgkMaxRangeOrder = 6;
 const G4String TG4RegionsManager::fgkDefaultRegionName =
   "RegionWithDefaultCuts";
+const G4String TG4RegionsManager::fgkDefaultFileName = "regions.dat";
 
 //_____________________________________________________________________________
 TG4RegionsManager::TG4RegionsManager()
@@ -57,8 +59,11 @@ TG4RegionsManager::TG4RegionsManager()
     fApplyForElectron(true),
     fApplyForPositron(true),
     fApplyForProton(true),
+    fFileName(),
     fIsCheck(false),
-    fIsPrint(false)
+    fIsPrint(false),
+    fIsSave(false),
+    fIsLoad(false)
 {
   /// Default constructor
 
@@ -280,6 +285,27 @@ G4double TG4RegionsManager::GetRangeCut(G4double energyCut,
            << ": energy cut = " << energyCut << " MeV" << G4endl;
   }
 
+  if (fIsLoad) {
+    auto it = fLoadedRanges.find(material->GetName());
+    if (it != fLoadedRanges.end()) {
+      G4double rangeCut = (converter.GetParticleType()->GetParticleName() == "gamma"  ) ?
+        it->second[0] : it->second[1];
+
+      if (VerboseLevel() > 1) {
+        G4cout << "  " << converter.GetParticleType()->GetParticleName()
+               << " loaded range value: " << rangeCut << G4endl;
+      }
+      return rangeCut;
+    }
+    else {
+      if (VerboseLevel() > 1) {
+        G4cout << "  " << converter.GetParticleType()->GetParticleName()
+               << " rangeCut not found, keeping default range" << G4endl;
+      }
+      return defaultRangeCut;
+    }
+  }
+
   G4double rangeCut =
     ConvertEnergyToRange(energyCut, material, converter, defaultRangeCut);
 
@@ -477,12 +503,18 @@ void TG4RegionsManager::DefineRegions()
 {
   /// Apply cuts defined in tracking media
 
-  if (VerboseLevel() > 0) G4cout << "Converting VMC cuts in regions" << G4endl;
-
   // Do nothing if no option is activated
   if (!(fApplyForGamma || fApplyForElectron || fApplyForPositron ||
         fApplyForProton)) {
     return;
+  }
+
+  if (VerboseLevel() > 0) {
+    G4cout << "Converting VMC cuts in regions" << G4endl;
+  }
+
+  if (fIsLoad) {
+    LoadRegions();
   }
 
   // Create G4 range to energy converters
@@ -689,7 +721,7 @@ void TG4RegionsManager::CheckRegions() const
 }
 
 //_____________________________________________________________________________
-void TG4RegionsManager::PrintRegions() const
+void TG4RegionsManager::PrintRegions(std::ostream& output) const
 {
   /// Loop over production cuts table and print all regions
   /// ranges and energy cuts
@@ -697,8 +729,8 @@ void TG4RegionsManager::PrintRegions() const
   G4ProductionCutsTable* productionCutsTable =
     G4ProductionCutsTable::GetProductionCutsTable();
 
-  G4cout << "couple #"
-         << "           material name"
+  output << "couple #"
+         << "        material name"
          << "  rangeGam[mm]"
          << "  rangeEle[mm]"
          << "   cutGam[GeV]"
@@ -752,13 +784,89 @@ void TG4RegionsManager::PrintRegions() const
     }
 
     // Print all data
-    G4cout << std::setw(4) << i << "  " << std::setw(30) << matName << "  "
+    output << std::setw(4) << i << std::setw(25) << matName << "  "
            << std::scientific << rangeGam << "  " << std::scientific << rangeEle
            << "  " << std::scientific << cutGam / TG4G3Units::Energy() << "  "
            << std::scientific << cutEle / TG4G3Units::Energy() << "  "
            << std::scientific << cutGamLimits / TG4G3Units::Energy() << "  "
            << std::scientific << cutEleLimits / TG4G3Units::Energy() << G4endl;
   }
+}
+
+//_____________________________________________________________________________
+void TG4RegionsManager::SaveRegions()
+{
+  /// Dump all regions data in a file
+
+  auto fileName = fFileName.empty() ? fgkDefaultFileName : fFileName;
+
+  std::ofstream fileOutput;
+  fileOutput.open(fileName, std::ios::out);
+
+  if (! fileOutput.is_open()) {
+    TG4Globals::Warning("TG4RegionsManager", "SaveRegions",
+      "Saving regions in file " + TString(fileName.data()) + " has failed.");
+    return;
+  }
+
+  if (VerboseLevel() > 0) {
+    G4cout << "Saving regions in file: " << fileName << G4endl;
+  }
+
+  PrintRegions(fileOutput);
+}
+
+//_____________________________________________________________________________
+void TG4RegionsManager::LoadRegions()
+{
+  /// Load all regions ranges from the input file (saved via PrintRegions)
+
+  auto fileName = fFileName.empty() ? fgkDefaultFileName : fFileName;
+
+  std::ifstream input;
+  input.open(fileName, std::ios::in);
+
+  if (! input.is_open()) {
+    TG4Globals::Warning("TG4RegionsManager", "LoadRegions",
+      "Open input file  " + TString(fileName.data()) + " has failed.");
+    return;
+  }
+
+  if (VerboseLevel() > 0) {
+    G4cout << "Loading regions from file: " << fileName << G4endl;
+  }
+
+  G4String skipLine;
+  G4String regionName;
+  G4int counter;
+  std::array<G4double, fgkNofValues> regionValues;
+
+  // skip comments
+  std::getline(input, skipLine);
+
+  // read data
+  while (! input.eof()) {
+    input >> counter >> regionName;
+    for (auto& value : regionValues) {
+      input >> value;
+    }
+    if (input.good()) {
+      fLoadedRanges[regionName] = regionValues;
+    }
+  }
+
+  // control printing
+  // G4cout << skipLine << G4endl;
+  // counter = 0;
+  // for (auto& [name, values] : fLoadedRanges ) {
+  //   // Print all data
+  //   G4cout << std::setw(4) << counter++ << "  " << std::setw(30) << name << "  "
+  //          << std::scientific << values[0] << "  " << std::scientific << values[1]
+  //          << "  " << std::scientific << values[2] / TG4G3Units::Energy() << "  "
+  //          << std::scientific << values[3] / TG4G3Units::Energy() << "  "
+  //          << std::scientific << values[4] / TG4G3Units::Energy() << "  "
+  //          << std::scientific << values[5] / TG4G3Units::Energy() << G4endl;
+  // }
 }
 
 //_____________________________________________________________________________
@@ -837,4 +945,38 @@ void TG4RegionsManager::DumpRegion(const G4String& volName) const
     }
     G4cout << G4endl;
   }
+}
+
+//_____________________________________________________________________________
+void TG4RegionsManager::SetSave(G4bool isSave)
+{
+/// Set the option to save all regions in a file.
+//  The options fIsSave and fIsLoad cannot be activated both
+//  in the same run.
+
+  if (fIsLoad) {
+    TG4Globals::Warning("TG4RegionsManager", "SetSave",
+      "Cannot activate \"Save\" option when \"Load\" option is active.\n"
+      "Setting is ignored");
+    return;
+  }
+
+  fIsSave = isSave;
+}
+
+//_____________________________________________________________________________
+void TG4RegionsManager::SetLoad(G4bool isLoad)
+{
+/// Set the option to load regions ranges from a file.
+//  The options fIsSave and fIsLoad cannot be activated both
+//  in the same run.
+
+  if (fIsSave) {
+    TG4Globals::Warning("TG4RegionsManager", "SetLoad",
+      "Cannot activate \"Load\" option when \"Save\" option is active.\n"
+      "Setting is ignored");
+    return;
+  }
+
+  fIsLoad = isLoad;
 }

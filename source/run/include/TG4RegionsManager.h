@@ -82,7 +82,9 @@ class TG4RegionsManager : public TG4Verbose
   // methods
   void DefineRegions();
   void CheckRegions() const;
-  void PrintRegions() const;
+  void PrintRegions(std::ostream& output) const;
+  void SaveRegions();
+  void LoadRegions();
   void DumpRegion(const G4String& volName) const;
 
   // set methods
@@ -91,8 +93,11 @@ class TG4RegionsManager : public TG4Verbose
   void SetApplyForElectron(G4bool applyForElectron);
   void SetApplyForPositron(G4bool applyForPositron);
   void SetApplyForProton(G4bool applyForProton);
+  void SetFileName(const G4String& fileName);
   void SetCheck(G4bool isCheck);
   void SetPrint(G4bool isPrint);
+  void SetSave(G4bool isSave);
+  void SetLoad(G4bool isLoad);
 
   // get methods
   G4int GetRangePrecision() const;
@@ -100,8 +105,11 @@ class TG4RegionsManager : public TG4Verbose
   G4bool GetApplyForElectron() const;
   G4bool GetApplyForPositron() const;
   G4bool GetApplyForProton() const;
+  G4String GetFileName() const;
   G4bool IsCheck() const;
   G4bool IsPrint() const;
+  G4bool IsSave() const;
+  G4bool IsLoad() const;
 
  private:
   /// Not implemented
@@ -155,6 +163,10 @@ class TG4RegionsManager : public TG4Verbose
   static const G4int fgkMaxRangeOrder;
   /// the name of the region with default cuts
   static const G4String fgkDefaultRegionName;
+  /// the name of the region with default cuts
+  static const G4String fgkDefaultFileName;
+  /// number of values read per region
+  static const size_t fgkNofValues = 6;
 
   //
   // data members
@@ -171,10 +183,18 @@ class TG4RegionsManager : public TG4Verbose
   G4bool fApplyForPositron;
   /// option to apply range cuts for proton (default is true)
   G4bool fApplyForProton;
+  /// file name for regions output
+  G4String fFileName;
   /// option to perform consistency check (by default false)
   G4bool fIsCheck;
   /// option to print all regions
   G4bool fIsPrint;
+  /// option to save all regions in a file
+  G4bool fIsSave;
+  /// option to load regions ranges from a file
+  G4bool fIsLoad;
+  /// map for lodaded ranges
+  std::map<G4String, std::array<G4double, fgkNofValues>> fLoadedRanges;
 };
 
 /// Return the singleton instance
@@ -209,6 +229,12 @@ inline void TG4RegionsManager::SetApplyForPositron(G4bool applyForPositron)
 inline void TG4RegionsManager::SetApplyForProton(G4bool applyForProton)
 {
   fApplyForProton = applyForProton;
+}
+
+/// Set the file name for regions output
+inline void TG4RegionsManager::SetFileName(const G4String& fileName)
+{
+  fFileName = fileName;
 }
 
 /// Set the option to perform consistency check
@@ -247,10 +273,22 @@ inline G4bool TG4RegionsManager::GetApplyForProton() const
   return fApplyForProton;
 }
 
+/// Return the file name for regions output
+inline G4String TG4RegionsManager::GetFileName() const
+{
+  return fFileName;
+}
+
 /// Return the option to perform consistency check
 inline G4bool TG4RegionsManager::IsCheck() const { return fIsCheck; }
 
 /// Return the option to print all regions
 inline G4bool TG4RegionsManager::IsPrint() const { return fIsPrint; }
+
+/// Return option to save all regions in a file
+inline G4bool TG4RegionsManager::IsSave() const { return fIsSave; }
+
+/// Return the option to load regions ranges from a file
+inline G4bool TG4RegionsManager::IsLoad() const { return fIsLoad; }
 
 #endif // TG4_REGIONS_MANAGER_H

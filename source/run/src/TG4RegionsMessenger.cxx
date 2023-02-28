@@ -79,6 +79,22 @@ TG4RegionsMessenger::TG4RegionsMessenger(TG4RegionsManager* runManager)
   fSetPrintCmd->SetGuidance("Switch on|off printing of all regions properties");
   fSetPrintCmd->SetParameterName("IsPrint", false);
   fSetPrintCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
+  fSetSaveCmd = new G4UIcmdWithABool("/mcRegions/save", this);
+  fSetSaveCmd->SetGuidance("Switch on|off saving of all regions properties in a file");
+  fSetSaveCmd->SetParameterName("IsSave", false);
+  fSetSaveCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
+  fSetLoadCmd = new G4UIcmdWithABool("/mcRegions/load", this);
+  fSetLoadCmd->SetGuidance("Switch on|off loading of all regions cuts & ranges from a file");
+  fSetLoadCmd->SetParameterName("IsLoad", false);
+  fSetLoadCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
+  fSetFileNameCmd = new G4UIcmdWithAString("/mcRegions/setFileName", this);
+  fSetFileNameCmd->SetGuidance("Set file name for the regions output");
+  fSetFileNameCmd->SetParameterName("FileName", false);
+  fSetFileNameCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
 }
 
 //_____________________________________________________________________________
@@ -95,6 +111,9 @@ TG4RegionsMessenger::~TG4RegionsMessenger()
   delete fApplyForProtonCmd;
   delete fSetCheckCmd;
   delete fSetPrintCmd;
+  delete fSetSaveCmd;
+  delete fSetLoadCmd;
+  delete fSetFileNameCmd;
 }
 
 //
@@ -134,5 +153,14 @@ void TG4RegionsMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
   }
   else if (command == fSetPrintCmd) {
     fRegionsManager->SetPrint(fSetPrintCmd->GetNewBoolValue(newValue));
+  }
+  else if (command == fSetSaveCmd) {
+    fRegionsManager->SetSave(fSetSaveCmd->GetNewBoolValue(newValue));
+  }
+  else if (command == fSetLoadCmd) {
+    fRegionsManager->SetLoad(fSetPrintCmd->GetNewBoolValue(newValue));
+  }
+  else if (command == fSetFileNameCmd) {
+    fRegionsManager->SetFileName(newValue);
   }
 }

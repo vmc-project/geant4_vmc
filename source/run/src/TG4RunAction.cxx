@@ -172,7 +172,10 @@ void TG4RunAction::BeginOfRunAction(const G4Run* run)
       TG4RegionsManager::Instance()->CheckRegions();
     }
     if (TG4RegionsManager::Instance()->IsPrint()) {
-      TG4RegionsManager::Instance()->PrintRegions();
+      TG4RegionsManager::Instance()->PrintRegions(G4cout);
+    }
+    if (TG4RegionsManager::Instance()->IsSave()) {
+      TG4RegionsManager::Instance()->SaveRegions();
     }
   }
 

@@ -37,6 +37,9 @@ class G4UIcmdWithABool;
 /// - /mcRegions/applyForProton true|false
 /// - /mcRegions/check [true|false]
 /// - /mcRegions/print [true|false]
+/// - /mcRegions/save [true|false]
+/// - /mcRegions/load [true|false]
+/// - /mcRegions/setFileName fileName
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
@@ -77,6 +80,12 @@ class TG4RegionsMessenger : public G4UImessenger
   G4UIcmdWithABool* fSetCheckCmd;
   /// command: /mcRegions/print [true|false]
   G4UIcmdWithABool* fSetPrintCmd;
+  /// command: /mcRegions/save [true|false]
+  G4UIcmdWithABool* fSetSaveCmd;
+  /// command: /mcRegions/load [true|false]
+  G4UIcmdWithABool* fSetLoadCmd;
+  /// command: /mcRegions/setFileName fileName
+  G4UIcmdWithAString* fSetFileNameCmd;
 };
 
 #endif // TG4_RUN_MESSENGER_H
