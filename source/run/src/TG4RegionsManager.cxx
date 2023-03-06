@@ -133,7 +133,7 @@ G4bool TG4RegionsManager::Iterate(G4double energyCut, G4double& lowerCut,
   G4double step = (higherCut - lowerCut) / nbin;
   energyToRangeMap.clear();
   G4String indent("     ");
-  for (G4int i = 0; i < nbin; i++) {
+  for (G4int i = 0; i <= nbin; i++) {
     G4double rangeCut = lowerCut + i * step;
     if (rangeCut < defaultRangeCut) continue;
     G4double energy = converter.Convert(rangeCut, material);
