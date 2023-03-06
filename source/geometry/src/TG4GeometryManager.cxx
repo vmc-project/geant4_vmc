@@ -507,7 +507,22 @@ void TG4GeometryManager::FillMediumMapFromRoot()
   for (G4int i = 0; i < G4int(lvStore->size()); i++) {
     G4LogicalVolume* lv = (*lvStore)[i];
 
-    TGeoVolume* geoVolume = fRootDetectorConstruction->GetVolume(lv);
+    TGeoVolume* geoVolume = nullptr;
+
+    if (fRootDetectorConstruction == nullptr) {
+      G4String volName = lv->GetName();
+
+      // Filter out the reflected volumes name extension
+      // added by reflection factory
+      G4String ext = G4ReflectionFactory::Instance()->GetVolumesNameExtension();
+      if (volName.find(ext)) volName = volName.substr(0, volName.find(ext));
+
+      geoVolume = gGeoManager->GetVolume(volName.data());
+    }
+    else {
+      geoVolume = fRootDetectorConstruction->GetVolume(lv);
+    }
+
     if (!geoVolume) {
       TG4Globals::Exception("TG4GeometryManager", "FillMediumMapFromRoot",
         "Root volume " + TString(lv->GetName()) + " not found");
