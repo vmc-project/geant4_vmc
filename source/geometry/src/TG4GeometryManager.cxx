@@ -28,6 +28,7 @@
 #include "TG4ModelConfigurationManager.h"
 #include "TG4OpGeometryManager.h"
 #include "TG4RadiatorDescription.h"
+#include "TG4RootDetectorConstruction.h"
 #include "TG4SDManager.h"
 #include "TG4StateManager.h"
 #include "TG4VUserPostDetConstruction.h"
@@ -81,6 +82,7 @@ TG4GeometryManager::TG4GeometryManager(const TString& userGeometry)
     fMessenger(this),
     fGeometryServices(new TG4GeometryServices()),
     fMCGeometry(0),
+    fRootDetectorConstruction(0),
     fOpManager(0),
     fFastModelsManager(0),
     fEmModelsManager(0),
@@ -504,18 +506,11 @@ void TG4GeometryManager::FillMediumMapFromRoot()
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
   for (G4int i = 0; i < G4int(lvStore->size()); i++) {
     G4LogicalVolume* lv = (*lvStore)[i];
-    G4String volName = lv->GetName();
 
-    // Filter out the reflected volumes name extension
-    // added by reflection factory
-    G4String ext = G4ReflectionFactory::Instance()->GetVolumesNameExtension();
-    if (volName.find(ext)) volName = volName.substr(0, volName.find(ext));
-
-    TGeoVolume* geoVolume = gGeoManager->GetVolume(volName.data());
-
+    TGeoVolume* geoVolume = fRootDetectorConstruction->GetVolume(lv);
     if (!geoVolume) {
       TG4Globals::Exception("TG4GeometryManager", "FillMediumMapFromRoot",
-        "Root volume " + TString(volName) + " not found");
+        "Root volume " + TString(lv->GetName()) + " not found");
     }
 
     // skip assemblies
@@ -523,13 +518,13 @@ void TG4GeometryManager::FillMediumMapFromRoot()
 
     if (geoVolume && !geoVolume->GetMedium()) {
       TG4Globals::Exception("TG4GeometryManager", "FillMediumMapFromRoot",
-        "Root volume " + TString(volName) + " has not medium defined.");
+        "Root volume " + TString(lv->GetName()) + " has not medium defined.");
     }
 
     G4int mediumID = geoVolume->GetMedium()->GetId();
 
     if (VerboseLevel() > 2) {
-      G4cout << "Mapping medium Id=" << mediumID << " to LV=" << volName
+      G4cout << "Mapping medium Id=" << mediumID << " to LV=" << lv->GetName()
              << G4endl;
     }
     mediumMap->MapMedium(lv, mediumID);

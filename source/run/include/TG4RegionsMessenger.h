@@ -21,6 +21,7 @@
 class TG4RegionsManager;
 
 class G4UIdirectory;
+class G4UIcmdWithADouble;
 class G4UIcmdWithAString;
 class G4UIcmdWithAnInteger;
 class G4UIcmdWithABool;
@@ -31,6 +32,7 @@ class G4UIcmdWithABool;
 /// Implements commands:
 /// - /mcRegions/dump [lvName]
 /// - /mcRegions/setRangePrecision value
+/// - /mcRegions/setEnergyTolerance value
 /// - /mcRegions/applyForGamma true|false
 /// - /mcRegions/applyForElectron true|false
 /// - /mcRegions/applyForPositron true|false
@@ -39,6 +41,7 @@ class G4UIcmdWithABool;
 /// - /mcRegions/print [true|false]
 /// - /mcRegions/save [true|false]
 /// - /mcRegions/load [true|false]
+/// - /mcRegions/fromG4Table [true|false]
 /// - /mcRegions/setFileName fileName
 ///
 /// \author I. Hrivnacova; IPN, Orsay
@@ -66,8 +69,10 @@ class TG4RegionsMessenger : public G4UImessenger
 
   /// command: /mcRegions/dump [lvName]
   G4UIcmdWithAString* fDumpRegionCmd;
-  /// command: /mcRegions/applyForGamma true|false
+  /// command: /mcRegions/setRangePrecision value
   G4UIcmdWithAnInteger* fSetRangePrecisionCmd;
+  /// command: /mcRegions/setEnergyTolerance value
+  G4UIcmdWithADouble* fSetEnergyToleranceCmd;
   /// command: /mcRegions/applyForGamma true|false
   G4UIcmdWithABool* fApplyForGammaCmd;
   /// command: /mcRegions/applyForElectron true|false
@@ -84,8 +89,12 @@ class TG4RegionsMessenger : public G4UImessenger
   G4UIcmdWithABool* fSetSaveCmd;
   /// command: /mcRegions/load [true|false]
   G4UIcmdWithABool* fSetLoadCmd;
+  /// command: /mcRegions/fromG4Table [true|false]
+  G4UIcmdWithABool* fSetFromG4TableCmd;
   /// command: /mcRegions/setFileName fileName
   G4UIcmdWithAString* fSetFileNameCmd;
+  /// option to activate print/save from production cuts table
+  G4bool fIsFromG4Table;
 };
 
 #endif // TG4_RUN_MESSENGER_H

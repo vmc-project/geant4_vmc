@@ -16,6 +16,7 @@
 #include "TG4RegionsManager.h"
 
 #include <G4UIcmdWithABool.hh>
+#include <G4UIcmdWithADouble.hh>
 #include <G4UIcmdWithAString.hh>
 #include <G4UIcmdWithAnInteger.hh>
 #include <G4UIdirectory.hh>
@@ -25,7 +26,7 @@ TG4RegionsMessenger::TG4RegionsMessenger(TG4RegionsManager* runManager)
   : G4UImessenger(),
     fRegionsManager(runManager),
     fDirectory(0),
-    fDumpRegionCmd(0)
+    fIsFromG4Table(false)
 {
   /// Standard constructor
 
@@ -45,7 +46,14 @@ TG4RegionsMessenger::TG4RegionsMessenger(TG4RegionsManager* runManager)
   fSetRangePrecisionCmd->SetParameterName("RangePrecision", false);
   fSetRangePrecisionCmd->AvailableForStates(G4State_PreInit, G4State_Init);
 
-  fApplyForGammaCmd = new G4UIcmdWithABool("/mcRegions/applyForgamma", this);
+  fSetEnergyToleranceCmd =
+    new G4UIcmdWithADouble("/mcRegions/setEnergyTolerance", this);
+  fSetEnergyToleranceCmd->SetGuidance(
+    "Set the tolerance (relative) for comparing energy cut values");
+  fSetEnergyToleranceCmd->SetParameterName("EnergyTolerance", false);
+  fSetEnergyToleranceCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
+  fApplyForGammaCmd = new G4UIcmdWithABool("/mcRegions/applyForGamma", this);
   fApplyForGammaCmd->SetGuidance("Switch on|off applying range cuts for gamma");
   fApplyForGammaCmd->SetParameterName("ApplyForGamma", false);
   fApplyForGammaCmd->AvailableForStates(G4State_PreInit, G4State_Init);
@@ -90,6 +98,13 @@ TG4RegionsMessenger::TG4RegionsMessenger(TG4RegionsManager* runManager)
   fSetLoadCmd->SetParameterName("IsLoad", false);
   fSetLoadCmd->AvailableForStates(G4State_PreInit, G4State_Init);
 
+  fSetFromG4TableCmd = new G4UIcmdWithABool("/mcRegions/fromG4Table", this);
+  fSetFromG4TableCmd->SetGuidance("Switch on|off printing or saving regions properties\n"
+    "from production cuts table.\n"
+    "Must be called before \"print\" or \"save\" command.");
+  fSetFromG4TableCmd->SetParameterName("IsFromG4Table", false);
+  fSetFromG4TableCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
   fSetFileNameCmd = new G4UIcmdWithAString("/mcRegions/setFileName", this);
   fSetFileNameCmd->SetGuidance("Set file name for the regions output");
   fSetFileNameCmd->SetParameterName("FileName", false);
@@ -105,6 +120,7 @@ TG4RegionsMessenger::~TG4RegionsMessenger()
   delete fDirectory;
   delete fDumpRegionCmd;
   delete fSetRangePrecisionCmd;
+  delete fSetEnergyToleranceCmd;
   delete fApplyForGammaCmd;
   delete fApplyForElectronCmd;
   delete fApplyForPositronCmd;
@@ -113,6 +129,7 @@ TG4RegionsMessenger::~TG4RegionsMessenger()
   delete fSetPrintCmd;
   delete fSetSaveCmd;
   delete fSetLoadCmd;
+  delete fSetFromG4TableCmd;
   delete fSetFileNameCmd;
 }
 
@@ -131,6 +148,10 @@ void TG4RegionsMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
   else if (command == fSetRangePrecisionCmd) {
     fRegionsManager->SetRangePrecision(
       fSetRangePrecisionCmd->GetNewIntValue(newValue));
+  }
+  else if (command == fSetEnergyToleranceCmd) {
+    fRegionsManager->SetEnergyTolerance(
+      fSetEnergyToleranceCmd->GetNewDoubleValue(newValue));
   }
   else if (command == fApplyForGammaCmd) {
     fRegionsManager->SetApplyForGamma(
@@ -152,13 +173,16 @@ void TG4RegionsMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     fRegionsManager->SetCheck(fSetCheckCmd->GetNewBoolValue(newValue));
   }
   else if (command == fSetPrintCmd) {
-    fRegionsManager->SetPrint(fSetPrintCmd->GetNewBoolValue(newValue));
+    fRegionsManager->SetPrint(fSetPrintCmd->GetNewBoolValue(newValue), fIsFromG4Table);
   }
   else if (command == fSetSaveCmd) {
-    fRegionsManager->SetSave(fSetSaveCmd->GetNewBoolValue(newValue));
+    fRegionsManager->SetSave(fSetSaveCmd->GetNewBoolValue(newValue), fIsFromG4Table);
   }
   else if (command == fSetLoadCmd) {
-    fRegionsManager->SetLoad(fSetPrintCmd->GetNewBoolValue(newValue));
+    fRegionsManager->SetLoad(fSetLoadCmd->GetNewBoolValue(newValue));
+  }
+  else if (command == fSetFromG4TableCmd) {
+    fIsFromG4Table = fSetFromG4TableCmd->GetNewBoolValue(newValue);
   }
   else if (command == fSetFileNameCmd) {
     fRegionsManager->SetFileName(newValue);
