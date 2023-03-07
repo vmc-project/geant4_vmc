@@ -380,7 +380,7 @@ void TG4RegionsManager::CheckRegionsRanges() const
       if (fabs(values[idx] - values[vmcIdx]) >
           (values[vmcIdx] * fEnergyTolerance * factor)) {
 
-        G4cout << std::setw(25) << regionName << "  " << cutType
+        G4cout << std::setw(25) << std::left << regionName << "  " << cutType
                << " cut from range = " << std::scientific << values[idx] / MeV
                << " from limits = " << std::scientific<< values[vmcIdx] / MeV
                << " MeV" << " delta: "
