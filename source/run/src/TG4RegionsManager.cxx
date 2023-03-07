@@ -302,7 +302,8 @@ TG4RegionsManager::GetRangeCut(G4double energyCut,
 
       if (VerboseLevel() > 1) {
         G4cout << "  " << converter.GetParticleType()->GetParticleName()
-               << " loaded range value: " << rangeCut << G4endl;
+               << " loaded range, cut values: "
+               << rangeCut << ", " << energyCut << G4endl;
       }
       return {energyCut, rangeCut};
     }
@@ -751,8 +752,10 @@ void TG4RegionsManager::DefineRegions()
       }
 
       // save computed ranges in a map
-      fRegionData[regionName] =
-        {rangeGam, rangeEle, calcCutGam, calcCutEle, cutGam, cutEle};
+      if (! fIsLoad) {
+        fRegionData[regionName] =
+          {rangeGam, rangeEle, calcCutGam, calcCutEle, cutGam, cutEle};
+      }
 
       if (isWorld) {
         // set new production cuts to the world
@@ -844,6 +847,7 @@ void TG4RegionsManager::LoadRegions()
   if (! input.is_open()) {
     TG4Globals::Warning("TG4RegionsManager", "LoadRegions",
       "Open input file  " + TString(fileName.data()) + " has failed.");
+    fIsLoad = false;
     return;
   }
 
@@ -875,6 +879,11 @@ void TG4RegionsManager::LoadRegions()
       regionName = regionName.substr(startPos, length);
       if (VerboseLevel() > 0) {
         G4cout << "Loading " << regionName << G4endl;
+      }
+
+      // update units
+      for (auto idx = fgkCutGamIdx; idx <= fgkVmcCutEleIdx; ++ idx) {
+        regionValues[idx] *= TG4G3Units::Energy();
       }
 
       auto it = fRegionData.find(regionName);
@@ -1054,9 +1063,8 @@ void TG4RegionsManager::SetSave(G4bool isSave, G4bool isG4Table)
 
   if (fIsLoad) {
     TG4Globals::Warning("TG4RegionsManager", "SetSave",
-      "Cannot activate \"Save\" option when \"Load\" option is active.\n"
-      "Setting is ignored");
-    return;
+      "\"Load\" option is active. The input file " + fFileName +
+      " will be overwritten.");
   }
 
   fIsSave = isSave;
@@ -1072,9 +1080,8 @@ void TG4RegionsManager::SetLoad(G4bool isLoad)
 
   if (fIsSave) {
     TG4Globals::Warning("TG4RegionsManager", "SetLoad",
-      "Cannot activate \"Load\" option when \"Save\" option is active.\n"
-      "Setting is ignored");
-    return;
+      "\"Save\" option is active. The input file " + fFileName +
+      " will be overwritten.");
   }
 
   fIsLoad = isLoad;
