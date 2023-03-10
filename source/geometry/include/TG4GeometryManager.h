@@ -32,6 +32,7 @@ class TG4G3ControlVector;
 class TG4VUserRegionConstruction;
 class TG4VUserPostDetConstruction;
 class TG4RadiatorDescription;
+class TG4RootDetectorConstruction;
 
 class G4LogicalVolume;
 class G4EquationOfMotion;
@@ -74,6 +75,9 @@ class TG4GeometryManager : public TG4Verbose
   void SetIsUserMaxStep(G4bool isUserMaxStep);
   void SetIsMaxStepInLowDensityMaterials(G4bool isMaxStep);
 
+  // set Root detector construction
+  void SetRootDetectorConstruction(
+    TG4RootDetectorConstruction* rootDetectorConstruction);
   // set user region construction
   void SetUserRegionConstruction(
     TG4VUserRegionConstruction* userRegionConstruction);
@@ -128,6 +132,7 @@ class TG4GeometryManager : public TG4Verbose
   TG4DetConstructionMessenger fMessenger; ///< messenger
   TG4GeometryServices* fGeometryServices; ///< geometry services
   TVirtualMCGeometry* fMCGeometry;        ///< VirtualMC geometry
+  TG4RootDetectorConstruction* fRootDetectorConstruction; ///< Root detector construction
   TG4OpGeometryManager* fOpManager;       ///< optical geometry manager
 
   /// Fast simulation models manager
@@ -205,6 +210,13 @@ TG4GeometryManager::GetEmModelsManager() const
 {
   /// Return fast simulation models manager
   return fEmModelsManager;
+}
+
+inline void TG4GeometryManager::SetRootDetectorConstruction(
+  TG4RootDetectorConstruction* rootDetectorConstruction)
+{
+  /// Set Root detector construction
+  fRootDetectorConstruction = rootDetectorConstruction;
 }
 
 inline void TG4GeometryManager::SetLimitDensity(G4double density)

@@ -126,7 +126,7 @@ G4bool TG4RegionsManager::Iterate(G4double energyCut, G4double& lowerCut,
   G4double step = (higherCut - lowerCut) / nbin;
   energyToRangeMap.clear();
   G4String indent("     ");
-  for (G4int i = 0; i < nbin; i++) {
+  for (G4int i = 0; i <= nbin; i++) {
     G4double rangeCut = lowerCut + i * step;
     if (rangeCut < defaultRangeCut) continue;
     G4double energy = converter.Convert(rangeCut, material);
@@ -562,6 +562,14 @@ void TG4RegionsManager::DefineRegions()
                << "adding volume in region = " << regionName << G4endl;
       }
       if (lv->GetRegion() != region) region->AddRootLogicalVolume(lv);
+      // skip evaluation of cuts
+      if (region->GetProductionCuts() != nullptr) {
+        if (VerboseLevel() > 1) {
+          G4cout << "   "
+                 << "skipping cuts evaluation in region = " << regionName << G4endl;
+        }
+        continue;
+      }
     }
 
     // If this material was already processed and did not result
@@ -645,28 +653,18 @@ void TG4RegionsManager::DefineRegions()
           G4cout << "   "
                  << "setting new production cuts to the world region" << G4endl;
         }
+        continue;
       }
-      else if (region) {
-        // set new production cuts to the existing region
-        region->SetProductionCuts(cuts);
-        region->RegionModified(true);
-        if (VerboseLevel() > 1) {
-          G4cout << "   "
-                 << "setting new production cuts to the existing region "
-                 << regionName << G4endl;
-        }
+
+      // create new region with new production cuts
+      region = new G4Region(regionName);
+      ++counter;
+      if (VerboseLevel() > 1) {
+        G4cout << "   "
+               << "adding volume in a new region " << regionName << G4endl;
       }
-      else {
-        // create new region with new production cuts
-        region = new G4Region(regionName);
-        ++counter;
-        if (VerboseLevel() > 1) {
-          G4cout << "   "
-                 << "adding volume in a new region " << regionName << G4endl;
-        }
-        region->AddRootLogicalVolume(lv);
-        region->SetProductionCuts(cuts);
-      }
+      region->SetProductionCuts(cuts);
+      region->AddRootLogicalVolume(lv);
     }
   }
 
