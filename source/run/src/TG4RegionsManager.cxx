@@ -22,6 +22,7 @@
 #include "TG4PhysicsManager.h"
 #include "TG4RegionsMessenger.h"
 
+#include <G4Gamma.hh>
 #include <G4LogicalVolumeStore.hh>
 #include <G4ProductionCuts.hh>
 #include <G4RToEConvForElectron.hh>
@@ -36,29 +37,35 @@
 
 #include <map>
 #include <set>
+#include <fstream>
 
 TG4RegionsManager* TG4RegionsManager::fgInstance = 0;
 
 const G4int TG4RegionsManager::fgkDefaultRangePrecision = 2;
-const G4double TG4RegionsManager::fgkRangeTolerance = 1e-3 * mm;
-const G4double TG4RegionsManager::fgkEnergyTolerance = 1e-06;
+const G4double TG4RegionsManager::fgkDefaultEnergyTolerance = 0.01;
 const G4int TG4RegionsManager::fgkNofBins = 10;
 const G4int TG4RegionsManager::fgkMinRangeOrder = -3;
 const G4int TG4RegionsManager::fgkMaxRangeOrder = 6;
 const G4String TG4RegionsManager::fgkDefaultRegionName =
   "RegionWithDefaultCuts";
+const G4String TG4RegionsManager::fgkDefaultFileName = "regions.dat";
 
 //_____________________________________________________________________________
 TG4RegionsManager::TG4RegionsManager()
   : TG4Verbose("regionsManager"),
     fMessenger(this),
     fRangePrecision(fgkDefaultRangePrecision),
+    fEnergyTolerance(fgkDefaultEnergyTolerance),
     fApplyForGamma(true),
     fApplyForElectron(true),
     fApplyForPositron(true),
     fApplyForProton(true),
+    fFileName(),
     fIsCheck(false),
-    fIsPrint(false)
+    fIsPrint(false),
+    fIsG4Table(false),
+    fIsSave(false),
+    fIsLoad(false)
 {
   /// Default constructor
 
@@ -126,7 +133,7 @@ G4bool TG4RegionsManager::Iterate(G4double energyCut, G4double& lowerCut,
   G4double step = (higherCut - lowerCut) / nbin;
   energyToRangeMap.clear();
   G4String indent("     ");
-  for (G4int i = 0; i < nbin; i++) {
+  for (G4int i = 0; i <= nbin; i++) {
     G4double rangeCut = lowerCut + i * step;
     if (rangeCut < defaultRangeCut) continue;
     G4double energy = converter.Convert(rangeCut, material);
@@ -161,7 +168,8 @@ G4bool TG4RegionsManager::Iterate(G4double energyCut, G4double& lowerCut,
 }
 
 //_____________________________________________________________________________
-G4double TG4RegionsManager::ConvertEnergyToRange(G4double energyCut,
+std::pair<G4double,G4double>
+TG4RegionsManager::ConvertEnergyToRange(G4double energyCut,
   G4Material* material, G4VRangeToEnergyConverter& converter,
   G4double defaultRangeCut) const
 {
@@ -204,7 +212,7 @@ G4double TG4RegionsManager::ConvertEnergyToRange(G4double energyCut,
     if (VerboseLevel() > 2) {
       G4cout << indent << "Outside range, return the highest value " << G4endl;
     }
-    return energyToRangeMap.rbegin()->second;
+    return *(energyToRangeMap.rbegin());
   }
 
   // Now find the closest value of energy which is
@@ -216,7 +224,7 @@ G4double TG4RegionsManager::ConvertEnergyToRange(G4double energyCut,
     if (VerboseLevel() > 2) {
       G4cout << indent << "Range not found " << G4endl;
     }
-    return -1.0;
+    return {-1.0, -1.0};
   }
 
   if (VerboseLevel() > 2) {
@@ -229,12 +237,14 @@ G4double TG4RegionsManager::ConvertEnergyToRange(G4double energyCut,
     G4int nbin = fgkNofBins;
     if (iteration == 0) --nbin;
 
-    G4double higherCut = it->second;
+    auto higherCutIt = it;
+    auto higherCut = it->second;
     // G4cout << "higherCut = " << higherCut << G4endl;
-    if (it == energyToRangeMap.begin()) return higherCut;
+    if (it == energyToRangeMap.begin()) return *higherCutIt;
 
     --it;
-    G4double lowerCut = it->second;
+    auto lowerCutIt = it;
+    auto lowerCut = it->second;
     // G4cout << "lowerCut = " << lowerCut << G4endl;
     G4bool found =
       Iterate(energyCut, lowerCut, higherCut, defaultRangeCut, lowEdgeEnergy,
@@ -243,9 +253,9 @@ G4double TG4RegionsManager::ConvertEnergyToRange(G4double energyCut,
     if (!found) {
       // Now we have to go one step back to get below the user cut value
       // unless we are at the beginning of the map
-      if (it == energyToRangeMap.begin()) return higherCut;
+      if (it == energyToRangeMap.begin()) return *higherCutIt;
       --it;
-      return it->second;
+      return *it;
       ;
     }
     ++iteration;
@@ -253,14 +263,16 @@ G4double TG4RegionsManager::ConvertEnergyToRange(G4double energyCut,
 
   // Now we have to go one step back to get below the user cut value
   // unless we are at the beginning of the map
-  if (it == energyToRangeMap.begin()) return it->second;
+  // if (it == energyToRangeMap.begin()) return it->second;
+  if (it == energyToRangeMap.begin()) return *it;
   --it;
-  return it->second;
+  return *it;
   ;
 }
 
 //_____________________________________________________________________________
-G4double TG4RegionsManager::GetRangeCut(G4double energyCut,
+std::pair<G4double,G4double>
+TG4RegionsManager::GetRangeCut(G4double energyCut,
   G4Material* material, G4VRangeToEnergyConverter& converter,
   G4double defaultRangeCut) const
 {
@@ -272,7 +284,7 @@ G4double TG4RegionsManager::GetRangeCut(G4double energyCut,
       G4cout << "   " << converter.GetParticleType()->GetParticleName()
              << " energy cut not defined, keeping default range" << G4endl;
     }
-    return defaultRangeCut;
+    return {converter.GetLowEdgeEnergy(), defaultRangeCut};
   }
 
   if (VerboseLevel() > 1) {
@@ -280,7 +292,31 @@ G4double TG4RegionsManager::GetRangeCut(G4double energyCut,
            << ": energy cut = " << energyCut << " MeV" << G4endl;
   }
 
-  G4double rangeCut =
+  if (fIsLoad) {
+    auto it = fRegionData.find(material->GetName());
+    if (it != fRegionData.end()) {
+      auto [rangeCut, energyCut] =
+        (converter.GetParticleType() == G4Gamma::Definition()) ?
+          std::pair(it->second[fgkRangeGamIdx], it->second[fgkCutGamIdx]) :
+          std::pair(it->second[fgkRangeEleIdx], it->second[fgkCutEleIdx]);
+
+      if (VerboseLevel() > 1) {
+        G4cout << "  " << converter.GetParticleType()->GetParticleName()
+               << " loaded range, cut values: "
+               << rangeCut << ", " << energyCut << G4endl;
+      }
+      return {energyCut, rangeCut};
+    }
+    else {
+      if (VerboseLevel() > 1) {
+        G4cout << "  " << converter.GetParticleType()->GetParticleName()
+               << " rangeCut not found, keeping default range" << G4endl;
+      }
+      return {converter.GetLowEdgeEnergy(), defaultRangeCut};
+    }
+  }
+
+  auto [calcEnergyCut, rangeCut]  =
     ConvertEnergyToRange(energyCut, material, converter, defaultRangeCut);
 
   if (rangeCut < 0.) {
@@ -288,7 +324,7 @@ G4double TG4RegionsManager::GetRangeCut(G4double energyCut,
       G4cout << "  " << converter.GetParticleType()->GetParticleName()
              << " rangeCut not found, keeping default range" << G4endl;
     }
-    return defaultRangeCut;
+    return {converter.GetLowEdgeEnergy(), defaultRangeCut};
   }
 
   if (rangeCut < defaultRangeCut) {
@@ -297,10 +333,10 @@ G4double TG4RegionsManager::GetRangeCut(G4double energyCut,
              << " rangeCut found " << rangeCut << " mm "
              << " is below default value, it will be ignored" << G4endl;
     }
-    return defaultRangeCut;
+    return {converter.GetLowEdgeEnergy(), defaultRangeCut};
   }
 
-  return rangeCut;
+  return {calcEnergyCut, rangeCut};
 }
 
 //_____________________________________________________________________________
@@ -324,106 +360,44 @@ G4bool TG4RegionsManager::IsCoupleUsedInTheRegion(
 }
 
 //_____________________________________________________________________________
-G4bool TG4RegionsManager::CheckCut(TG4Limits* limits, TG4G3Cut cut,
-  const G4String& particleName, G4double range, G4double energy) const
-{
-  /// Check if energy from region properties is consistent with energy cuts
-  /// defined in limits.
-
-  G4double energyLimits = GetEnergyCut(limits, cut, DBL_MAX);
-  if (energyLimits == DBL_MAX) return true;
-
-  if (VerboseLevel() > 1) {
-    G4cout << "  " << particleName << " cut:" << G4endl << "  range = " << range
-           << " mm" << G4endl << "  energy from range = " << energy / MeV
-           << " MeV"
-           << "  energy from limits = " << energyLimits << " MeV" << G4endl;
-  }
-
-  // Get default range cut value from physics list
-  G4double defaultRangeCut = 0.;
-  if (particleName == "e-") {
-    defaultRangeCut = TG4PhysicsManager::Instance()->GetCutForElectron();
-  }
-  else if (particleName == "gamma") {
-    defaultRangeCut = TG4PhysicsManager::Instance()->GetCutForGamma();
-  }
-
-  if (energy > energyLimits * (1.0 + fgkEnergyTolerance) &&
-      fabs(range - defaultRangeCut) > fgkRangeTolerance) {
-    G4cout << "  !! " << particleName << " cut from range > cut from limits !!"
-           << G4endl;
-    if (VerboseLevel() <= 1) {
-      G4cout << "  energy from range = " << energy / MeV << " MeV"
-             << "  energy from limits = " << energyLimits << " MeV" << G4endl;
-    }
-    return false;
-  }
-
-  return true;
-}
-
-//_____________________________________________________________________________
 void TG4RegionsManager::CheckRegionsRanges() const
 {
-  /// Loop over production cuts table and check if region properties
-  /// are consistent with energy cuts defined in limits
+  /// Loop over region data map and check if the calculated cuts
+  /// are consistent with the energy cuts defined in limits
 
-  // Check consistence of range and energy cuts
-  G4ProductionCutsTable* productionCutsTable =
-    G4ProductionCutsTable::GetProductionCutsTable();
-
-  Bool_t good = true;
-  for (G4int i = 0; i < G4int(productionCutsTable->GetTableSize()); i++) {
-    const G4MaterialCutsCouple* couple =
-      productionCutsTable->GetMaterialCutsCouple(i);
-
-    const G4Material* material = couple->GetMaterial();
-    G4ProductionCuts* cuts = couple->GetProductionCuts();
-
-    G4double rangeGam = cuts->GetProductionCut(0);
-    G4double rangeEle = cuts->GetProductionCut(1);
-    // if ( couple->IsRecalcNeeded() ) {
-    //  TG4Globals::Warning("TG4RegionsManager", "CheckRegions",
-    //     "Recalculation is needed - cannot perform check");
-    //  return;
-    //}
-
-    const std::vector<G4double>* energyCutsGam =
-      productionCutsTable->GetEnergyCutsVector(0);
-    const std::vector<G4double>* energyCutsEle =
-      productionCutsTable->GetEnergyCutsVector(1);
-
-    G4double cutGam = (*energyCutsGam)[couple->GetIndex()];
-    G4double cutEle = (*energyCutsEle)[couple->GetIndex()];
-
-    // Get limits via material
-    TG4Limits* limits =
-      TG4GeometryServices::Instance()->FindLimits(material, true);
-    if (!limits) {
-      TG4Globals::Warning("TG4RegionsManager", "CheckRegions",
-        "Limits for material " + TString(material->GetName()) + " not found. " +
-          TG4Globals::Endl() + " Cannot perform check.");
-      continue;
-    }
-
-    if (VerboseLevel() > 1) {
-      G4cout << "In material: " << material->GetName() << G4endl;
-    }
-
-    G4bool checkGam = CheckCut(limits, kCUTGAM, "gamma", rangeGam, cutGam);
-    G4bool checkEle = CheckCut(limits, kCUTELE, "e-", rangeEle, cutEle);
-
-    if (!checkGam || !checkEle) good = false;
+  if (VerboseLevel() > 0) {
+    G4cout << ".. Checking energyCuts approximation, tolerance: "
+          << fEnergyTolerance << G4endl;
   }
 
-  if (good) {
-    G4cout << ".. Ranges in regions are consistent with energy cuts." << G4endl;
+  auto counter = 0;
+  for (auto& [regionName, values] : fRegionData) {
+    // check values for gamma and electron
+    for (size_t idx = fgkCutGamIdx; idx < fgkVmcCutGamIdx; ++idx ) {
+      auto vmcIdx = idx + 2;
+      auto factor = (idx == fgkCutGamIdx) ? 10. : 1.;
+      auto cutType = (idx == fgkCutGamIdx) ? "gam" : "ele";
+      if (fabs(values[idx] - values[vmcIdx]) >
+          (values[vmcIdx] * fEnergyTolerance * factor)) {
+
+        G4cout << std::setw(25) << std::left << regionName << "  " << cutType
+               << " cut from range = " << std::scientific << values[idx] / MeV
+               << " from limits = " << std::scientific<< values[vmcIdx] / MeV
+               << " MeV" << " delta: "
+               << fabs(values[idx] - values[vmcIdx]) / values[vmcIdx] * 100.
+               << " %" << G4endl;
+        ++counter;
+      }
+    }
+  }
+
+  if (counter == 0) {
+    G4cout << ".. Cuts from ranges in regions are consistent with energy cuts."
+           << G4endl << "   (precision fgkEnergyTolerance)" << G4endl;
   }
   else {
-    G4cout
-      << ".. Found inconsistencies between ranges in regions and energy cuts."
-      << G4endl;
+    G4cout << ".. Found " << counter
+      << " inconsistencies between cut from ranges energy cuts." << G4endl;
   }
 }
 
@@ -432,6 +406,10 @@ void TG4RegionsManager::CheckRegionsInGeometry() const
 {
   /// Loop over all logical volumes and check if the region to which
   /// the volume belongs correspond to its material
+
+  if (VerboseLevel() > 0) {
+    G4cout << ".. Checking regions materials " << G4endl;
+  }
 
   Bool_t good = true;
   G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
@@ -468,6 +446,125 @@ void TG4RegionsManager::CheckRegionsInGeometry() const
   }
 }
 
+//_____________________________________________________________________________
+void TG4RegionsManager::PrintLegend(std::ostream& output) const
+{
+  /// Print the range data legend
+
+  //clang-format off
+  output << std::setw(30) << std::left << "# material name"
+         << "  rangeGam[mm]"
+         << "  rangeEle[mm]"
+         << "   cutGam[GeV]"
+         << "   cutEle[GeV]"
+         << " vmcCutGam[GeV]"
+         << " vmcCutEle[GeV]" << G4endl;
+  //clang-format on
+}
+
+//_____________________________________________________________________________
+void TG4RegionsManager::PrintRegionData(std::ostream& output,
+  const G4String& matName, const TG4RegionData& values) const
+{
+  /// Print one region data.
+  /// The regions names are printed within '' and separated from the following date
+  /// with ';' to facilitate reading data back. The procedure then works only with
+  /// material names that do not contain these two special characters.
+
+  auto name = "\'" + matName + "\';";
+
+  // Print all data
+  //clang-format off
+  output << std::setw(30) << std::left << name << "  "
+         << std::scientific << values[fgkRangeGamIdx] << "  "
+         << std::scientific << values[fgkRangeEleIdx] << "  "
+         << std::scientific << values[fgkCutGamIdx] / TG4G3Units::Energy() << "  "
+         << std::scientific << values[fgkCutEleIdx] / TG4G3Units::Energy() << "  "
+         << std::scientific << values[fgkVmcCutGamIdx] / TG4G3Units::Energy() << "  "
+         << std::scientific << values[fgkVmcCutEleIdx] / TG4G3Units::Energy() << G4endl;
+  //clang-format on
+}
+
+//_____________________________________________________________________________
+void TG4RegionsManager::PrintFromMap(std::ostream& output) const
+{
+  /// Loop over regions data map and print all regions ranges,
+  /// calculated energy cuts and the VMC energy cuts.
+
+  if (fRegionData.empty()) {
+    G4cout << "No regions data in the map." << G4endl;
+  }
+
+  PrintLegend(output);
+
+  for (auto [regionName, values] : fRegionData) {
+    PrintRegionData(output, regionName, values);
+  }
+}
+
+//_____________________________________________________________________________
+void TG4RegionsManager::PrintFromG4Table(std::ostream& output) const
+{
+  /// Loop over the production cuts table and print the production ranges
+  /// and cuts from the table and the VMC cuts from the TG4Limits
+  /// associated with the production cuts material.
+
+  G4ProductionCutsTable* productionCutsTable =
+    G4ProductionCutsTable::GetProductionCutsTable();
+
+  if (productionCutsTable->GetTableSize() == 0) {
+    G4cout << "No production cuts defined." << G4endl;
+    return;
+  }
+
+  PrintLegend(output);
+
+  for (G4int i = 0; i < G4int(productionCutsTable->GetTableSize()); i++) {
+    const G4MaterialCutsCouple* couple =
+      productionCutsTable->GetMaterialCutsCouple(i);
+
+    const G4Material* material = couple->GetMaterial();
+    G4ProductionCuts* cuts = couple->GetProductionCuts();
+
+    G4double rangeGam = cuts->GetProductionCut(0);
+    G4double rangeEle = cuts->GetProductionCut(1);
+    // if ( couple->IsRecalcNeeded() ) {
+    //  TG4Globals::Warning("TG4RegionsManager", "PrintProductionCuts",
+    //     "Recalculation is needed - the energy cuts may be wrong");
+    // }
+
+    const std::vector<G4double>* energyCutsGam =
+      productionCutsTable->GetEnergyCutsVector(0);
+    const std::vector<G4double>* energyCutsEle =
+      productionCutsTable->GetEnergyCutsVector(1);
+
+    G4double cutGam = (*energyCutsGam)[couple->GetIndex()];
+    G4double cutEle = (*energyCutsEle)[couple->GetIndex()];
+
+    // Get limits via material
+    TG4Limits* limits =
+      TG4GeometryServices::Instance()->FindLimits(material, true);
+
+    G4double cutGamLimits = DBL_MAX;
+    G4double cutEleLimits = DBL_MAX;
+    if (!limits) {
+      TG4Globals::Warning("TG4RegionsManager", "CheckRegions",
+        "Limits for material " + TString(material->GetName()) + " not found. " +
+          TG4Globals::Endl());
+    }
+    else {
+      cutGamLimits = GetEnergyCut(limits, kCUTGAM, DBL_MAX);
+      cutEleLimits = GetEnergyCut(limits, kCUTELE, DBL_MAX);
+    }
+
+    G4String matName = material->GetName();
+    TG4RegionData values =
+      {rangeGam, rangeEle, cutGam, cutEle, cutGamLimits, cutEleLimits};
+
+    PrintRegionData(output, matName, values);
+  }
+}
+
 //
 // public methods
 //
@@ -477,12 +574,18 @@ void TG4RegionsManager::DefineRegions()
 {
   /// Apply cuts defined in tracking media
 
-  if (VerboseLevel() > 0) G4cout << "Converting VMC cuts in regions" << G4endl;
-
   // Do nothing if no option is activated
   if (!(fApplyForGamma || fApplyForElectron || fApplyForPositron ||
         fApplyForProton)) {
     return;
+  }
+
+  if (VerboseLevel() > 0) {
+    G4cout << "Converting VMC cuts in regions" << G4endl;
+  }
+
+  if (fIsLoad) {
+    LoadRegions();
   }
 
   // Create G4 range to energy converters
@@ -562,7 +665,18 @@ void TG4RegionsManager::DefineRegions()
                << "adding volume in region = " << regionName << G4endl;
       }
       if (lv->GetRegion() != region) region->AddRootLogicalVolume(lv);
+      // skip evaluation of cuts
+      if (region->GetProductionCuts() != nullptr) {
+        if (VerboseLevel() > 1) {
+          G4cout << "   "
+                 << "skipping cuts evaluation in region = " << regionName << G4endl;
+        }
+        continue;
+      }
     }
+
+    // After this line, region either does not exist, or we deal with the
+    // world reagion
 
     // If this material was already processed and did not result
     // in a new region: add the logical volume to the default region
@@ -582,9 +696,9 @@ void TG4RegionsManager::DefineRegions()
     G4double cutGam = GetEnergyCut(limits, kCUTGAM, cutGamGlobal);
 
     // Convert energy cuts defined in limits in range cuts
-    G4double rangeEle =
+    auto [calcCutEle, rangeEle] =
       GetRangeCut(cutEle, material, g4ConverterEle, defaultRangeCutEle);
-    G4double rangeGam =
+    auto [calcCutGam, rangeGam] =
       GetRangeCut(cutGam, material, g4ConverterGam, defaultRangeCutGam);
     if (VerboseLevel() > 1) {
       G4cout << ".. converted in e- rangeCut = " << rangeEle << " mm  "
@@ -637,6 +751,12 @@ void TG4RegionsManager::DefineRegions()
         cuts->SetProductionCut(defaultRangeCutProton, 2);
       }
 
+      // save computed ranges in a map
+      if (! fIsLoad) {
+        fRegionData[regionName] =
+          {rangeGam, rangeEle, calcCutGam, calcCutEle, cutGam, cutEle};
+      }
+
       if (isWorld) {
         // set new production cuts to the world
         worldRegion->SetProductionCuts(cuts);
@@ -645,28 +765,18 @@ void TG4RegionsManager::DefineRegions()
           G4cout << "   "
                  << "setting new production cuts to the world region" << G4endl;
         }
+        continue;
       }
-      else if (region) {
-        // set new production cuts to the existing region
-        region->SetProductionCuts(cuts);
-        region->RegionModified(true);
-        if (VerboseLevel() > 1) {
-          G4cout << "   "
-                 << "setting new production cuts to the existing region "
-                 << regionName << G4endl;
-        }
+
+      // create new region with new production cuts
+      region = new G4Region(regionName);
+      ++counter;
+      if (VerboseLevel() > 1) {
+        G4cout << "   "
+               << "adding volume in a new region " << regionName << G4endl;
       }
-      else {
-        // create new region with new production cuts
-        region = new G4Region(regionName);
-        ++counter;
-        if (VerboseLevel() > 1) {
-          G4cout << "   "
-                 << "adding volume in a new region " << regionName << G4endl;
-        }
-        region->AddRootLogicalVolume(lv);
-        region->SetProductionCuts(cuts);
-      }
+      region->SetProductionCuts(cuts);
+      region->AddRootLogicalVolume(lv);
     }
   }
 
@@ -676,88 +786,139 @@ void TG4RegionsManager::DefineRegions()
 }
 
 //_____________________________________________________________________________
+void TG4RegionsManager::PrintRegions(std::ostream& output) const
+{
+  /// Print regions from data map or the production cuts table.
+
+  if (fIsG4Table) {
+    G4cout << "going to print/write from G4 Table" << G4endl;
+    PrintFromG4Table(output);
+  } else {
+    G4cout << "going to print/write from map" << G4endl;
+    PrintFromMap(output);
+  }
+}
+
+//_____________________________________________________________________________
 void TG4RegionsManager::CheckRegions() const
 {
   /// Perform two checks:
-  /// -  if region properties are consistent with energy cuts defined in limits
+  /// -  if calculated energy cuts are consistent with energy cuts defined in limits
   /// -  if the region to which the volume belongs correspond to its material
-
-  G4cout << "Checking regions:" << G4endl;
 
   CheckRegionsRanges();
   CheckRegionsInGeometry();
 }
 
 //_____________________________________________________________________________
-void TG4RegionsManager::PrintRegions() const
+void TG4RegionsManager::SaveRegions()
 {
-  /// Loop over production cuts table and print all regions
-  /// ranges and energy cuts
+  /// Dump all regions data in a file
 
-  G4ProductionCutsTable* productionCutsTable =
-    G4ProductionCutsTable::GetProductionCutsTable();
+  // Open file
+  auto fileName = fFileName.empty() ? fgkDefaultFileName : fFileName;
+  std::ofstream fileOutput;
+  fileOutput.open(fileName, std::ios::out);
+  if (! fileOutput.is_open()) {
+    TG4Globals::Warning("TG4RegionsManager", "SaveRegions",
+      "Saving regions in file " + TString(fileName.data()) + " has failed.");
+    return;
+  }
 
-  G4cout << "couple #"
-         << "           material name"
-         << "  rangeGam[mm]"
-         << "  rangeEle[mm]"
-         << "   cutGam[GeV]"
-         << "   cutEle[GeV]"
-         << " vmcCutGam[GeV]"
-         << " vmcCutEle[GeV]" << G4endl;
+  if (VerboseLevel() > 0) {
+    auto which = (fIsG4Table) ?  " from production cuts table" : "";
+    G4cout << "Saving regions" << which << " in file: " << fileName << G4endl;
+  }
 
-  for (G4int i = 0; i < G4int(productionCutsTable->GetTableSize()); i++) {
-    const G4MaterialCutsCouple* couple =
-      productionCutsTable->GetMaterialCutsCouple(i);
+  PrintRegions(fileOutput);
+  fileOutput.close();
+}
 
-    const G4Material* material = couple->GetMaterial();
-    G4ProductionCuts* cuts = couple->GetProductionCuts();
+//_____________________________________________________________________________
+void TG4RegionsManager::LoadRegions()
+{
+  /// Load all regions ranges from the input file.
 
-    G4double rangeGam = cuts->GetProductionCut(0);
-    G4double rangeEle = cuts->GetProductionCut(1);
-    // if ( couple->IsRecalcNeeded() ) {
-    //  TG4Globals::Warning("TG4RegionsManager", "CheckRegions",
-    //     "Recalculation is needed - cannot perform check");
-    //  return;
-    //}
+  auto fileName = fFileName.empty() ? fgkDefaultFileName : fFileName;
 
-    const std::vector<G4double>* energyCutsGam =
-      productionCutsTable->GetEnergyCutsVector(0);
-    const std::vector<G4double>* energyCutsEle =
-      productionCutsTable->GetEnergyCutsVector(1);
+  std::ifstream input;
+  input.open(fileName, std::ios::in);
 
-    G4double cutGam = (*energyCutsGam)[couple->GetIndex()];
-    G4double cutEle = (*energyCutsEle)[couple->GetIndex()];
+  if (! input.is_open()) {
+    TG4Globals::Warning("TG4RegionsManager", "LoadRegions",
+      "Open input file  " + TString(fileName.data()) + " has failed.");
+    fIsLoad = false;
+    return;
+  }
 
-    // Get limits via material
-    TG4Limits* limits =
-      TG4GeometryServices::Instance()->FindLimits(material, true);
+  if (VerboseLevel() > 0) {
+    G4cout << "Loading regions from file: " << fileName << G4endl;
+  }
 
-    G4double cutGamLimits = DBL_MAX;
-    G4double cutEleLimits = DBL_MAX;
-    if (!limits) {
-      TG4Globals::Warning("TG4RegionsManager", "CheckRegions",
-        "Limits for material " + TString(material->GetName()) + " not found. " +
-          TG4Globals::Endl());
+  auto worldMaterialName = TG4GeometryServices::Instance()->GetWorld()->
+    GetLogicalVolume()->GetMaterial()->GetName();
+
+  G4String skipLine;
+  G4String regionName;
+  G4int counter;
+  TG4RegionData regionValues;
+
+  // skip comments
+  std::getline(input, skipLine);
+
+  // read data
+  while (! input.eof()) {
+    std::getline(input, regionName, ';');
+    for (auto& value : regionValues) {
+      input >> value;
     }
-    else {
-      cutGamLimits = GetEnergyCut(limits, kCUTGAM, DBL_MAX);
-      cutEleLimits = GetEnergyCut(limits, kCUTELE, DBL_MAX);
-    }
 
-    // Strip ' ' from the material name
-    G4String matName = material->GetName();
-    while (matName.find(' ') != std::string::npos) {
-      matName.erase(matName.find(' '), 1);
-    }
+    if (input.good()) {
+      auto startPos = regionName.find('\'') + 1;
+      auto length = regionName.find_last_of('\'') - startPos;
+      regionName = regionName.substr(startPos, length);
+      if (VerboseLevel() > 0) {
+        G4cout << "Loading " << regionName << G4endl;
+      }
 
-    // Print all data
-    G4cout << std::setw(4) << i << "  " << std::setw(30) << matName << "  "
-           << std::scientific << rangeGam << "  " << std::scientific << rangeEle
-           << "  " << std::scientific << cutGam / TG4G3Units::Energy() << "  "
-           << std::scientific << cutEle / TG4G3Units::Energy() << "  "
-           << std::scientific << cutGamLimits / TG4G3Units::Energy() << "  "
-           << std::scientific << cutEleLimits / TG4G3Units::Energy() << G4endl;
+      // update units
+      for (auto idx = fgkCutGamIdx; idx <= fgkVmcCutEleIdx; ++ idx) {
+        regionValues[idx] *= TG4G3Units::Energy();
+      }
+
+      auto it = fRegionData.find(regionName);
+      if (it == fRegionData.end()) {
+        fRegionData[regionName] = regionValues;
+        ++counter;
+      }
+      else {
+        // skip "fake" material couples originated from assemblies
+        // that are added in the regions in addition to the real material
+        if (regionName == worldMaterialName) {
+          if (VerboseLevel() > 0) {
+            G4cout << "Skipping " << regionName << " already in map." << G4endl;
+          }
+        }
+        else {
+          // print warning
+          TG4Globals::Warning("TG4RegionsManager", "LoadRegions",
+            "Duplicated region data: " + TString(regionName.data()) +
+            "  will be skipped !!!.");
+
+          if (VerboseLevel() > 0) {
+            auto valuesInMap = it->second;
+            G4cout << "   Already in map !!!" << G4endl << "   data in map: ";
+            PrintRegionData(G4cout, regionName, valuesInMap);
+            G4cout << "   loaded data: ";
+            PrintRegionData(G4cout, regionName, regionValues);
+          }
+        }
+      }
+    }
+  }
+
+  if (VerboseLevel() > 0) {
+    G4cout << "Loaded " << counter << " regions from file: " << fileName << G4endl;
   }
 }
 
@@ -837,4 +998,91 @@ void TG4RegionsManager::DumpRegion(const G4String& volName) const
     }
     G4cout << G4endl;
   }
+}
+
+//_____________________________________________________________________________
+void TG4RegionsManager::DumpRegionStore() const
+{
+  /// Dump all region properties:
+  /// production cuts, volumes list and material list
+
+  auto regionStore = G4RegionStore::GetInstance();
+
+  G4cout << "========= Region Store Dump ======================================"
+         << G4endl;
+
+  for (auto region : *regionStore ) {
+    G4cout << region->GetName() << ":" << G4endl;
+
+    auto cuts = region->GetProductionCuts();
+    if (cuts != nullptr) {
+      auto rangeGam = cuts->GetProductionCut(0);
+      auto rangeEle = cuts->GetProductionCut(1);
+      G4cout << "  ProductionCuts: rangeGam=" << rangeGam << "  rangeEle=" << rangeEle << G4endl;
+    }
+
+    size_t lvCounter = 0;
+    auto lvIt = region->GetRootLogicalVolumeIterator();
+    G4cout << "  RootVolumes: ";
+    while (lvCounter < region->GetNumberOfRootVolumes()) {
+      G4cout << " " << (*lvIt++)->GetName() << "; ";
+      ++lvCounter;
+    }
+    G4cout << G4endl;;
+
+    size_t matCounter = 0;
+    auto matIt = region->GetMaterialIterator();
+    G4cout << "  Materials: ";
+    while (matCounter < region->GetNumberOfMaterials()) {
+      G4cout << " " << (*matIt++)->GetName() << "; ";
+      ++matCounter;
+    }
+    G4cout << G4endl;;
+  }
+
+  G4cout << "========= End Region Store Dump =================================="
+         << G4endl;
+}
+
+//_____________________________________________________________________________
+void TG4RegionsManager::SetPrint(G4bool isPrint, G4bool isG4Table)
+{
+/// Set the option to print all regions either from local map
+/// or the production cuts table
+
+  fIsPrint = isPrint;
+  fIsG4Table = isG4Table;
+}
+
+//_____________________________________________________________________________
+void TG4RegionsManager::SetSave(G4bool isSave, G4bool isG4Table)
+{
+/// Set the option to save all regions in a file.
+//  The options fIsSave and fIsLoad cannot be activated both
+//  in the same run.
+
+  if (fIsLoad) {
+    TG4Globals::Warning("TG4RegionsManager", "SetSave",
+      "\"Load\" option is active. The input file " + fFileName +
+      " will be overwritten.");
+  }
+
+  fIsSave = isSave;
+  fIsG4Table = isG4Table;
+}
+
+//_____________________________________________________________________________
+void TG4RegionsManager::SetLoad(G4bool isLoad)
+{
+/// Set the option to load regions ranges from a file.
+//  The options fIsSave and fIsLoad cannot be activated both
+//  in the same run.
+
+  if (fIsSave) {
+    TG4Globals::Warning("TG4RegionsManager", "SetLoad",
+      "\"Save\" option is active. The input file " + fFileName +
+      " will be overwritten.");
+  }
+
+  fIsLoad = isLoad;
 }

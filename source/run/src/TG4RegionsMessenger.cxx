@@ -16,6 +16,7 @@
 #include "TG4RegionsManager.h"
 
 #include <G4UIcmdWithABool.hh>
+#include <G4UIcmdWithADouble.hh>
 #include <G4UIcmdWithAString.hh>
 #include <G4UIcmdWithAnInteger.hh>
 #include <G4UIdirectory.hh>
@@ -25,7 +26,7 @@ TG4RegionsMessenger::TG4RegionsMessenger(TG4RegionsManager* runManager)
   : G4UImessenger(),
     fRegionsManager(runManager),
     fDirectory(0),
-    fDumpRegionCmd(0)
+    fIsFromG4Table(false)
 {
   /// Standard constructor
 
@@ -45,7 +46,14 @@ TG4RegionsMessenger::TG4RegionsMessenger(TG4RegionsManager* runManager)
   fSetRangePrecisionCmd->SetParameterName("RangePrecision", false);
   fSetRangePrecisionCmd->AvailableForStates(G4State_PreInit, G4State_Init);
 
-  fApplyForGammaCmd = new G4UIcmdWithABool("/mcRegions/applyForgamma", this);
+  fSetEnergyToleranceCmd =
+    new G4UIcmdWithADouble("/mcRegions/setEnergyTolerance", this);
+  fSetEnergyToleranceCmd->SetGuidance(
+    "Set the tolerance (relative) for comparing energy cut values");
+  fSetEnergyToleranceCmd->SetParameterName("EnergyTolerance", false);
+  fSetEnergyToleranceCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
+  fApplyForGammaCmd = new G4UIcmdWithABool("/mcRegions/applyForGamma", this);
   fApplyForGammaCmd->SetGuidance("Switch on|off applying range cuts for gamma");
   fApplyForGammaCmd->SetParameterName("ApplyForGamma", false);
   fApplyForGammaCmd->AvailableForStates(G4State_PreInit, G4State_Init);
@@ -79,6 +87,29 @@ TG4RegionsMessenger::TG4RegionsMessenger(TG4RegionsManager* runManager)
   fSetPrintCmd->SetGuidance("Switch on|off printing of all regions properties");
   fSetPrintCmd->SetParameterName("IsPrint", false);
   fSetPrintCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
+  fSetSaveCmd = new G4UIcmdWithABool("/mcRegions/save", this);
+  fSetSaveCmd->SetGuidance("Switch on|off saving of all regions properties in a file");
+  fSetSaveCmd->SetParameterName("IsSave", false);
+  fSetSaveCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
+  fSetLoadCmd = new G4UIcmdWithABool("/mcRegions/load", this);
+  fSetLoadCmd->SetGuidance("Switch on|off loading of all regions cuts & ranges from a file");
+  fSetLoadCmd->SetParameterName("IsLoad", false);
+  fSetLoadCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
+  fSetFromG4TableCmd = new G4UIcmdWithABool("/mcRegions/fromG4Table", this);
+  fSetFromG4TableCmd->SetGuidance("Switch on|off printing or saving regions properties\n"
+    "from production cuts table.\n"
+    "Must be called before \"print\" or \"save\" command.");
+  fSetFromG4TableCmd->SetParameterName("IsFromG4Table", false);
+  fSetFromG4TableCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
+  fSetFileNameCmd = new G4UIcmdWithAString("/mcRegions/setFileName", this);
+  fSetFileNameCmd->SetGuidance("Set file name for the regions output");
+  fSetFileNameCmd->SetParameterName("FileName", false);
+  fSetFileNameCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
 }
 
 //_____________________________________________________________________________
@@ -89,12 +120,17 @@ TG4RegionsMessenger::~TG4RegionsMessenger()
   delete fDirectory;
   delete fDumpRegionCmd;
   delete fSetRangePrecisionCmd;
+  delete fSetEnergyToleranceCmd;
   delete fApplyForGammaCmd;
   delete fApplyForElectronCmd;
   delete fApplyForPositronCmd;
   delete fApplyForProtonCmd;
   delete fSetCheckCmd;
   delete fSetPrintCmd;
+  delete fSetSaveCmd;
+  delete fSetLoadCmd;
+  delete fSetFromG4TableCmd;
+  delete fSetFileNameCmd;
 }
 
 //
@@ -112,6 +148,10 @@ void TG4RegionsMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
   else if (command == fSetRangePrecisionCmd) {
     fRegionsManager->SetRangePrecision(
       fSetRangePrecisionCmd->GetNewIntValue(newValue));
+  }
+  else if (command == fSetEnergyToleranceCmd) {
+    fRegionsManager->SetEnergyTolerance(
+      fSetEnergyToleranceCmd->GetNewDoubleValue(newValue));
   }
   else if (command == fApplyForGammaCmd) {
     fRegionsManager->SetApplyForGamma(
@@ -133,6 +173,18 @@ void TG4RegionsMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     fRegionsManager->SetCheck(fSetCheckCmd->GetNewBoolValue(newValue));
   }
   else if (command == fSetPrintCmd) {
-    fRegionsManager->SetPrint(fSetPrintCmd->GetNewBoolValue(newValue));
+    fRegionsManager->SetPrint(fSetPrintCmd->GetNewBoolValue(newValue), fIsFromG4Table);
+  }
+  else if (command == fSetSaveCmd) {
+    fRegionsManager->SetSave(fSetSaveCmd->GetNewBoolValue(newValue), fIsFromG4Table);
+  }
+  else if (command == fSetLoadCmd) {
+    fRegionsManager->SetLoad(fSetLoadCmd->GetNewBoolValue(newValue));
+  }
+  else if (command == fSetFromG4TableCmd) {
+    fIsFromG4Table = fSetFromG4TableCmd->GetNewBoolValue(newValue);
+  }
+  else if (command == fSetFileNameCmd) {
+    fRegionsManager->SetFileName(newValue);
   }
 }
