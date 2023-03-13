@@ -9,6 +9,22 @@
 
 Tags (history):
 ===============
+  13/03/2023
+  v6-1-p4:
+    Fixes:
+    Geant4 VMC:
+    - Fixes in VMC cuts to ranges conversion:
+      - In DefineRegions: skip evaluation of cuts when the production cuts
+        are already defined (this significantly speeds up the procedure)
+      - Fixed iteration limits in TG4RegionsManager::Iterate() - do not skip
+        the last bin
+      - Create media according to the G4Root volume map instead of getting
+        TGeoVolume by name
+        (this supports geometries with not unique volume names).
+
+    Tested with VMC 2.0, Geant4 11.0.p03 (with embedded CLHEP 2.4.5.1)
+      Root 6.28/00, VGM 5.0
+
   18/01/2023
   v6-1-p3:
     Fixes:
