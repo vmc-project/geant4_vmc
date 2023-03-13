@@ -41,7 +41,7 @@
 
 TG4RegionsManager* TG4RegionsManager::fgInstance = 0;
 
-const G4int TG4RegionsManager::fgkDefaultRangePrecision = 2;
+const G4int TG4RegionsManager::fgkDefaultRangePrecision = 5;
 const G4double TG4RegionsManager::fgkDefaultEnergyTolerance = 0.01;
 const G4int TG4RegionsManager::fgkNofBins = 10;
 const G4int TG4RegionsManager::fgkMinRangeOrder = -3;
