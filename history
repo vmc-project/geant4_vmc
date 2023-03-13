@@ -9,6 +9,33 @@
 
 Tags (history):
 ===============
+  13/03/2023
+  v6-3:
+    Geant4 VMC:
+      Improvements and fixes in VMC cuts to ranges conversion (#43)
+      - Added new functions in TG4RegionsManager for saving/loading region data
+      - Added DumpRegionStore() function to dump all region properties: production cuts,
+        volumes list and material list
+      - Increased the default number of iterations in TG4RegionsManager::DefineRegions
+        to 5 (was 2)
+      - Improved CheckRegions() and changed the default value of the energy tolerance
+        for checking regions to 0.01, aded a function/UI command to set this value
+      - New UI commands:
+        /mcRegions/save [true|false]
+        /mcRegions/load [true|false]
+        /mcRegions/setFileName fileName
+        /mcRegions/setEnergyTolerance value
+        /mcRegions/fromG4Table [true|false]
+
+    Fixes:
+    Geant4 VMC:
+    - In TG4RegionsManager::DefineRegions: skip evaluation of cuts when the production cuts
+      are already defined (this significantly speeds up the procedure)
+    - Fixed iteration limits in TG4RegionsManager::Iterate() - do not skip the last bin
+
+    Tested with VMC 2.0, Geant4 11.1.p1 (with embedded CLHEP 2.4.6.2)
+      Root 6.28/00, VGM 5.1, Garfield 4.0
+
   18/01/2023
   v6-2:
     Geant4 VMC:
