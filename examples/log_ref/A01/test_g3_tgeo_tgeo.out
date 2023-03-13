@@ -1,10 +1,10 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/10                        https://root.cern |
-  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
-  | From tags/v6-26-10@v6-26-10                                      |
+  | Welcome to ROOT 6.28/00                        https://root.cern |
+  | (c) 1995-2022, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Mar 10 2023, 16:29:00                   |
+  | From tags/v6-28-00@v6-28-00                                      |
   | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
-  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+  | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
@@ -20,7 +20,7 @@ Processing test_A01_1.C("g3tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.1 ( 17 March 2022 )
+ Version 4.2 ( 9 February 2023 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -67,11 +67,11 @@ Chamber2 has 139 hits.
 EmCalorimeter has 24 hits. Total Edep is 4947.09 (MeV)
 HadCalorimeter has 8 hits. Total Edep is 268.293 (MeV)
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   106942851     65FD183 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   116855171     6F71183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   101539437   106942851
-                                        HEX     60D5E6D     65FD183
+          with Store/Table at absolute adrs   111451757   116855171
+                                        HEX     6A49E6D     6F71183
                                         HEX    FFAD8B32           0
                               relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
@@ -152,7 +152,7 @@ Chamber1 has 534 hits.
 Chamber2 has 510 hits.
 EmCalorimeter has 26 hits. Total Edep is 27509.2 (MeV)
 HadCalorimeter has 3 hits. Total Edep is 10.3028 (MeV)
-Real time 0:00:00, CP time 0.800
+Real time 0:00:00, CP time 0.790
  GTREVE_ROOT : Transporting primary track No         30
  GTREVE_ROOT : Transporting primary track No         20
  GTREVE_ROOT : Transporting primary track No         10

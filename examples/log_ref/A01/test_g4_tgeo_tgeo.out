@@ -1,16 +1,16 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/10                        https://root.cern |
-  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
-  | From tags/v6-26-10@v6-26-10                                      |
+  | Welcome to ROOT 6.28/00                        https://root.cern |
+  | (c) 1995-2022, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Mar 10 2023, 16:29:00                   |
+  | From tags/v6-28-00@v6-28-00                                      |
   | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
-  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+  | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-34
+35
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -24,7 +24,7 @@ Processing test_A01_1.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.2 ( 18 January 2023 )
+ Version 6.3 ( 13 March 2023 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -42,7 +42,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-11-01    (9-December-2022)
+ Geant4 version Name: geant4-11-01-patch-01    (10-February-2023)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -88,8 +88,6 @@ Geant4 has been created.
 #/mcDet/addSDSelection HadCalScintiLogical
 TG4RootDetectorConstruction::ConstructSDandField
 TG4PostDetConstruction::InitializeSDandField
-G4FieldManager/SetEpsMin :  eps_min =      5e-05
-G4FieldManager/SetEpsMax :  eps_max =      0.001 ( Note: unchanged eps_min=     5e-05 )
 Global field created with stepper DormandPrince745
 ### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 
@@ -1021,44 +1019,44 @@ EmCalorimeter has 16 hits. Total Edep is 18486.7 (MeV)
 HadCalorimeter has 5 hits. Total Edep is 2625.03 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 1 hits.
-Hodoscope2 has 11 hits.
-Chamber1 has 542 hits.
-Chamber2 has 500 hits.
-EmCalorimeter has 69 hits. Total Edep is 28711.6 (MeV)
-HadCalorimeter has 18 hits. Total Edep is 2188.12 (MeV)
+Hodoscope1 has 3 hits.
+Hodoscope2 has 12 hits.
+Chamber1 has 525 hits.
+Chamber2 has 476 hits.
+EmCalorimeter has 61 hits. Total Edep is 29126.1 (MeV)
+HadCalorimeter has 16 hits. Total Edep is 1560.32 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 6 hits.
+Hodoscope1 has 5 hits.
 Hodoscope2 has 6 hits.
-Chamber1 has 484 hits.
-Chamber2 has 230 hits.
-EmCalorimeter has 47 hits. Total Edep is 6729.7 (MeV)
-HadCalorimeter has 11 hits. Total Edep is 500.244 (MeV)
+Chamber1 has 439 hits.
+Chamber2 has 189 hits.
+EmCalorimeter has 46 hits. Total Edep is 6815.36 (MeV)
+HadCalorimeter has 14 hits. Total Edep is 406.045 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 1 hits.
-Hodoscope2 has 9 hits.
-Chamber1 has 532 hits.
-Chamber2 has 508 hits.
-EmCalorimeter has 53 hits. Total Edep is 27162.7 (MeV)
-HadCalorimeter has 17 hits. Total Edep is 148.09 (MeV)
-Time of this run:   User=5.250000s Real=5.326302s Sys=0.060000s
+Hodoscope2 has 7 hits.
+Chamber1 has 528 hits.
+Chamber2 has 542 hits.
+EmCalorimeter has 56 hits. Total Edep is 28886.2 (MeV)
+HadCalorimeter has 14 hits. Total Edep is 81.5345 (MeV)
+Time of this run:   User=5.150000s Real=5.192947s Sys=0.040000s
 Number of events processed: 5
-Real time 0:00:06, CP time 6.810
+Real time 0:00:06, CP time 6.690
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/10                        https://root.cern |
-  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
-  | From tags/v6-26-10@v6-26-10                                      |
+  | Welcome to ROOT 6.28/00                        https://root.cern |
+  | (c) 1995-2022, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Mar 10 2023, 16:29:00                   |
+  | From tags/v6-28-00@v6-28-00                                      |
   | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
-  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+  | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-34
+35
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -1072,7 +1070,7 @@ Processing test_A01_2.C("g4tgeoConfig2.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.2 ( 18 January 2023 )
+ Version 6.3 ( 13 March 2023 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -1090,7 +1088,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-11-01    (9-December-2022)
+ Geant4 version Name: geant4-11-01-patch-01    (10-February-2023)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -1118,8 +1116,6 @@ Visualization Manager instantiating with verbosity "warnings (3)"...
 Geant4 has been created.
 TG4RootDetectorConstruction::ConstructSDandField
 TG4PostDetConstruction::InitializeSDandField
-G4FieldManager/SetEpsMin :  eps_min =      5e-05
-G4FieldManager/SetEpsMax :  eps_max =      0.001 ( Note: unchanged eps_min=     5e-05 )
 Local (in magneticLogical) field created with stepper DormandPrince745
 ### INFO: TG4RootDetectorConstruction::ConstructSDandField finished
 
@@ -2052,27 +2048,27 @@ HadCalorimeter has 5 hits. Total Edep is 2612.18 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 2 hits.
-Hodoscope2 has 9 hits.
-Chamber1 has 529 hits.
-Chamber2 has 495 hits.
-EmCalorimeter has 64 hits. Total Edep is 28947.5 (MeV)
-HadCalorimeter has 14 hits. Total Edep is 1564.97 (MeV)
+Hodoscope2 has 13 hits.
+Chamber1 has 534 hits.
+Chamber2 has 500 hits.
+EmCalorimeter has 66 hits. Total Edep is 29485.6 (MeV)
+HadCalorimeter has 15 hits. Total Edep is 1795.91 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 7 hits.
-Hodoscope2 has 5 hits.
-Chamber1 has 461 hits.
-Chamber2 has 164 hits.
-EmCalorimeter has 41 hits. Total Edep is 5697.7 (MeV)
-HadCalorimeter has 13 hits. Total Edep is 483.368 (MeV)
+Hodoscope1 has 6 hits.
+Hodoscope2 has 8 hits.
+Chamber1 has 462 hits.
+Chamber2 has 187 hits.
+EmCalorimeter has 66 hits. Total Edep is 7623.91 (MeV)
+HadCalorimeter has 15 hits. Total Edep is 490.362 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
+Hodoscope1 has 2 hits.
 Hodoscope2 has 8 hits.
-Chamber1 has 530 hits.
-Chamber2 has 528 hits.
-EmCalorimeter has 47 hits. Total Edep is 29253.5 (MeV)
-HadCalorimeter has 12 hits. Total Edep is 64.5291 (MeV)
-Time of this run:   User=4.380000s Real=4.434412s Sys=0.050000s
+Chamber1 has 539 hits.
+Chamber2 has 513 hits.
+EmCalorimeter has 49 hits. Total Edep is 27836.7 (MeV)
+HadCalorimeter has 16 hits. Total Edep is 137.779 (MeV)
+Time of this run:   User=4.530000s Real=4.563913s Sys=0.030000s
 Number of events processed: 5
-Real time 0:00:05, CP time 5.920
+Real time 0:00:06, CP time 6.050

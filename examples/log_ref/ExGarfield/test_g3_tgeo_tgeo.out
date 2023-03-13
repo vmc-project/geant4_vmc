@@ -1,10 +1,10 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/10                        https://root.cern |
-  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
-  | From tags/v6-26-10@v6-26-10                                      |
+  | Welcome to ROOT 6.28/00                        https://root.cern |
+  | (c) 1995-2022, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Mar 10 2023, 16:29:00                   |
+  | From tags/v6-28-00@v6-28-00                                      |
   | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
-  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+  | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
@@ -22,7 +22,7 @@ Processing test_ExGarfield.C("g3tgeoConfig.C")...
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.1 ( 17 March 2022 )
+ Version 4.2 ( 9 February 2023 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -55,11 +55,11 @@ Info in <TGeoManager::Export>: Exporting Garfield_geometry ExGarfield VMC exampl
    Absorber: total energy: 13.3199 MeV       total track length: 1.00011 cm
         Gas: total energy: 5.72095 keV           avalanche size:       0       gain:       0
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   173793667     A5BE183 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   142311811     87B8183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   168390253   173793667
-                                        HEX     A096E6D     A5BE183
+          with Store/Table at absolute adrs   136908397   142311811
+                                        HEX     8290E6D     87B8183
                                         HEX    FFAD8B32           0
                               relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

@@ -1,16 +1,16 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/10                        https://root.cern |
-  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
-  | From tags/v6-26-10@v6-26-10                                      |
+  | Welcome to ROOT 6.28/00                        https://root.cern |
+  | (c) 1995-2022, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Mar 10 2023, 16:29:00                   |
+  | From tags/v6-28-00@v6-28-00                                      |
   | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
-  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+  | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
 Processing load_g4.C...
 Loading Geant4 libraries (using geant4-config) ...
-34
+35
 Loading VGM libraries ... 
 Loading VMC library ...
 Loading g4root library ...
@@ -24,13 +24,13 @@ Processing test_E06.C("g4ConfigOld.C",kTRUE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.2 ( 18 January 2023 )
+ Version 6.3 ( 13 March 2023 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
 
 **************************************************************
- Geant4 version Name: geant4-11-01    (9-December-2022)
+ Geant4 version Name: geant4-11-01-patch-01    (10-February-2023)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -99,8 +99,6 @@ G4OpticalSurface: data file /Users/ivana/work/packages/geant4/data/RealSurface2.
 LUT DAVIS - reflectivity data file: Rough_LUTR.z read in! 
 The material properties REFLECTIVITY set for optical surface AirSurface
 The material properties EFFICIENCY set for optical surface AirSurface
-G4FieldManager/SetEpsMin :  eps_min =      5e-05
-G4FieldManager/SetEpsMax :  eps_max =      0.001 ( Note: unchanged eps_min=     5e-05 )
 Global field created with stepper DormandPrince745
 ### EM physics constructed. 
 G4OpticalPhysics:: Add Optical Physics Processes
@@ -668,6 +666,6 @@ Number of optical photons produced in this event : 1494
 Number of optical photons produced in this event : 1478
 >>> Event 9
 Number of optical photons produced in this event : 1456
-Time of this run:   User=0.390000s Real=0.399587s Sys=0.000000s
+Time of this run:   User=0.400000s Real=0.404117s Sys=0.000000s
 Number of events processed: 10
 Number of optical photons produced in this run : 15272

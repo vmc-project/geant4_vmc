@@ -1,10 +1,10 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.26/10                        https://root.cern |
-  | (c) 1995-2021, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 20 2022, 11:40:00                   |
-  | From tags/v6-26-10@v6-26-10                                      |
+  | Welcome to ROOT 6.28/00                        https://root.cern |
+  | (c) 1995-2022, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Mar 10 2023, 16:29:00                   |
+  | From tags/v6-28-00@v6-28-00                                      |
   | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
-  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+  | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
 
@@ -20,7 +20,7 @@ Processing test_E06.C("g3Config.C",kTRUE)...
 
 =============================================================
  Geant3 Virtual Monte Carlo 
- Version 4.1 ( 17 March 2022 )
+ Version 4.2 ( 9 February 2023 )
  WWW : https://vmc-project.github.io/
 =============================================================
 
@@ -58,11 +58,11 @@ Number of optical photons produced in this event : 2301
 Number of optical photons produced in this event : 2210
 Number of optical photons produced in this run : 21239
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr    96174467     5BB8183 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   116691331     6F49183 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs    90771053    96174467
-                                        HEX     5690E6D     5BB8183
+          with Store/Table at absolute adrs   111287917   116691331
+                                        HEX     6A21E6D     6F49183
                                         HEX    FFAD8B32           0
                               relative adrs    -5403854           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
