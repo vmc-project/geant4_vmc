@@ -531,6 +531,7 @@ void TG4RegionsManager::DefineRegions()
 
   G4int counter = 0;
   std::set<G4Material*> processedMaterials;
+  std::set<G4Material*> processedMaterials2;
 
   // Define region for each logical volume
   //
@@ -562,8 +563,8 @@ void TG4RegionsManager::DefineRegions()
                << "adding volume in region = " << regionName << G4endl;
       }
       if (lv->GetRegion() != region) region->AddRootLogicalVolume(lv);
-      // skip evaluation of cuts
-      if (region->GetProductionCuts() != nullptr) {
+      // skip evaluation of cuts if this material was already processed
+      if (processedMaterials2.find(material) != processedMaterials2.end()) {
         if (VerboseLevel() > 1) {
           G4cout << "   "
                  << "skipping cuts evaluation in region = " << regionName << G4endl;
@@ -611,6 +612,8 @@ void TG4RegionsManager::DefineRegions()
         }
         defaultRegion->AddRootLogicalVolume(lv);
       }
+      // Save the material in the processed materials not resulting
+      // in new region
       processedMaterials.insert(material);
     }
     else {
@@ -656,17 +659,28 @@ void TG4RegionsManager::DefineRegions()
         continue;
       }
 
-      // create new region with new production cuts
-      region = new G4Region(regionName);
-      ++counter;
+      G4String which;
+      // Create new region if it does not yet exist
+      if (region == nullptr) {
+        region = new G4Region(regionName);
+        ++counter;
+        which = "new ";
+      }
       if (VerboseLevel() > 1) {
         G4cout << "   "
-               << "adding volume in a new region " << regionName << G4endl;
+               << "adding volume in " << which << "region " << regionName << G4endl;
       }
+      // Set computed production cuts
       region->SetProductionCuts(cuts);
       region->AddRootLogicalVolume(lv);
+
+      // Save the material in the processed materials
+      processedMaterials2.insert(material);
     }
   }
+
+  processedMaterials.clear();
+  processedMaterials.clear();
 
   if (VerboseLevel() > 0) {
     G4cout << "Number of added regions: " << counter << G4endl;
