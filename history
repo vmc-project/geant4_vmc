@@ -9,6 +9,19 @@
 
 Tags (history):
 ===============
+  30/03/2023
+  v6-1-p5:
+    Fixes:
+    Geant4 VMC:
+    - Fixes in VMC cuts to ranges conversion: (#44)
+      - Do not skip materials which regions have been defined before processing VMC cuts
+        (what happens in the ALICE simulation where special EM models are defined for
+        selected tracking media)
+      - Clear temporary data sets
+
+    Tested with VMC 2.0, Geant4 11.0.p03 (with embedded CLHEP 2.4.5.1),
+      Root 6.28/00, VGM 5.0
+
   13/03/2023
   v6-1-p4:
     Fixes:
