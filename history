@@ -9,6 +9,16 @@
 
 Tags (history):
 ===============
+  30/06/2023
+  v6-1-p6:
+    Geant4 VMC:
+    -  Allow to invoke random seed propagations to Geant4
+       also after initialization (#45)
+      (Thanks to S. Wenzel, CERN)
+
+    Tested with VMC 2.0, Geant4 11.0.p04 (with embedded CLHEP 2.4.5.1),
+      Root 6.28/04, VGM 5.0
+
   30/03/2023
   v6-1-p5:
     Fixes:
