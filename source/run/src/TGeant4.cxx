@@ -1329,3 +1329,7 @@ void TGeant4::InitLego()
 
   TG4Globals::Warning("TGeant4", "InitLego", "Not implemented.");
 }
+//_____________________________________________________________________________
+void TGeant4::SetRandomSeed() {
+  fRunManager->SetRandomSeed();
+}

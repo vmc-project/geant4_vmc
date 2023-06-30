@@ -77,6 +77,8 @@ class TG4RunManager : public TG4Verbose
   void UseG3Defaults();
   void UseRootRandom(G4bool useRootRandom);
 
+  /// picks up random seed from ROOT gRandom and propagates to Geant4
+  void SetRandomSeed();
  private:
   /// Not implemented
   TG4RunManager();
@@ -90,7 +92,6 @@ class TG4RunManager : public TG4Verbose
   void CloneRootNavigatorForWorker();
   void FilterARGV(const G4String& option);
   void CreateRootUI();
-  void SetRandomSeed();
 
   // static data members
 

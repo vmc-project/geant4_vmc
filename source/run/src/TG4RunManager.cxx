@@ -383,7 +383,7 @@ void TG4RunManager::FilterARGV(const G4String& arg)
 //_____________________________________________________________________________
 void TG4RunManager::SetRandomSeed()
 {
-  /// Pass the random number seed from fRandom to Geant4 random number
+  /// Pass the random number seed from gRandom to Geant4 random number
   /// generator
 
   long seeds[10];
