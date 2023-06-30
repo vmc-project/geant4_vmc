@@ -341,6 +341,7 @@ class TGeant4 : public TVirtualMC
   virtual void SetCollectTracks(Bool_t collectTracks);
   virtual Bool_t IsCollectTracks() const;
   virtual Bool_t IsMT() const;
+  void SetRandomSeed(); // set's random seed of engine based on status of ROOT gRandom
 
   // UI control methods
   void StartGeantUI();
