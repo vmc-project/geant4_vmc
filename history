@@ -9,6 +9,17 @@
 
 Tags (history):
 ===============
+  24/07/2023
+  v5-0-p6:
+    Patch release with a fix in implementation of Gmtod, Gdtom:
+    - Do not copy array values when converting in a double array
+      for the arrays passed for output
+    - This should prevent from break if users pass unitialized arrays
+    (PR #46)
+
+    Tested with VMC in ROOT, Geant4 10.5.p01 (with embedded CLHEP  2.4.1.0)
+      Root 6.20/02-alice, VGM 4.7
+
   08/07/2020
   v5-0-p5:
     Patch release, with back-ported developments from master
