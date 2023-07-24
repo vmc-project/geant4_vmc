@@ -204,7 +204,7 @@ G4double* TG4GeometryServices::ConvertAtomWeight(
 
 //_____________________________________________________________________________
 G4double* TG4GeometryServices::CreateG4doubleArray(
-  Float_t* array, G4int size) const
+  Float_t* array, G4int size, G4bool copyValues) const
 {
   /// Convert Float_t* array to G4double*.                                    \n
   /// !! The new array has to be deleted by user.
@@ -212,7 +212,9 @@ G4double* TG4GeometryServices::CreateG4doubleArray(
   G4double* doubleArray;
   if (size > 0) {
     doubleArray = new G4double[size];
-    for (G4int i = 0; i < size; i++) doubleArray[i] = array[i];
+    if (copyValues) {
+      for (G4int i = 0; i < size; i++) doubleArray[i] = array[i];
+    }
   }
   else {
     doubleArray = 0;
@@ -222,7 +224,7 @@ G4double* TG4GeometryServices::CreateG4doubleArray(
 
 //_____________________________________________________________________________
 G4double* TG4GeometryServices::CreateG4doubleArray(
-  Double_t* array, G4int size) const
+  Double_t* array, G4int size, G4bool copyValues) const
 {
   /// Copy Double_t* array to G4double*.                                    \n
   /// !! The new array has to be deleted by user.
@@ -230,7 +232,9 @@ G4double* TG4GeometryServices::CreateG4doubleArray(
   G4double* doubleArray;
   if (size > 0) {
     doubleArray = new G4double[size];
-    for (G4int i = 0; i < size; i++) doubleArray[i] = array[i];
+    if (copyValues) {
+      for (G4int i = 0; i < size; i++) doubleArray[i] = array[i];
+    }
   }
   else {
     doubleArray = 0;

@@ -590,12 +590,12 @@ void TG4StepManager::Gmtod(Float_t* xm, Float_t* xd, Int_t iflag)
   ///
 
   G4double* dxm = TG4GeometryServices::Instance()->CreateG4doubleArray(xm, 3);
-  G4double* dxd = TG4GeometryServices::Instance()->CreateG4doubleArray(xd, 3);
+  G4double* dxd = TG4GeometryServices::Instance()->CreateG4doubleArray(xd, 3, false);
 
   Gmtod(dxm, dxd, iflag);
 
+  // Fill computed xd coordinates
   for (G4int i = 0; i < 3; i++) {
-    xm[i] = dxm[i];
     xd[i] = dxd[i];
   }
 
@@ -655,12 +655,12 @@ void TG4StepManager::Gdtom(Float_t* xd, Float_t* xm, Int_t iflag)
   ///              - IFLAG=2  convert direction cosinus
 
   G4double* dxd = TG4GeometryServices::Instance()->CreateG4doubleArray(xd, 3);
-  G4double* dxm = TG4GeometryServices::Instance()->CreateG4doubleArray(xm, 3);
+  G4double* dxm = TG4GeometryServices::Instance()->CreateG4doubleArray(xm, 3, false);
 
   Gdtom(dxd, dxm, iflag);
 
+  // Fill computed xm coordinates
   for (G4int i = 0; i < 3; i++) {
-    xd[i] = dxd[i];
     xm[i] = dxm[i];
   }
 
