@@ -64,8 +64,8 @@ class TG4GeometryServices : public TG4Verbose
 
   // methods
   // utilities
-  G4double* CreateG4doubleArray(Float_t* array, G4int size) const;
-  G4double* CreateG4doubleArray(Double_t* array, G4int size) const;
+  G4double* CreateG4doubleArray(Float_t* array, G4int size, G4bool copyValues = true) const;
+  G4double* CreateG4doubleArray(Double_t* array, G4int size, G4bool copyValues = true) const;
   G4String CutName(const char* name) const;
   G4String CutMaterialName(const char* name) const;
   G4String CutVolumePath(
