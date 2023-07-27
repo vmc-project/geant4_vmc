@@ -29,6 +29,7 @@
 #include "G4TheoFSGenerator.hh"
 #include "G4VParticleChange.hh"
 #include "G4VPreCompoundModel.hh"
+#include "G4CrossSectionDataStore.hh"
 
 TG4BiasingOperation::TG4BiasingOperation(G4String name)
   : G4VBiasingOperation(name)
@@ -125,15 +126,31 @@ G4VParticleChange* TG4BiasingOperation::ApplyFinalStateBiasing(
   G4bool&)
 {
   if (track->GetParticleDefinition() == G4Proton::Definition()) {
+     auto particle = track->GetDynamicParticle();
+     auto material = track->GetMaterial();
+     fProtonInelasticProcess->GetCrossSectionDataStore( )
+       ->ComputeCrossSection(particle, material);
     return fProtonInelasticProcess->PostStepDoIt(*track, *step);
   }
   else if (track->GetParticleDefinition() == G4Neutron::Definition()) {
+     auto particle = track->GetDynamicParticle();
+     auto material = track->GetMaterial();
+     fNeutronInelasticProcess->GetCrossSectionDataStore( )
+       ->ComputeCrossSection(particle, material);
     return fNeutronInelasticProcess->PostStepDoIt(*track, *step);
   }
   else if (track->GetParticleDefinition() == G4PionPlus::Definition()) {
+     auto particle = track->GetDynamicParticle();
+     auto material = track->GetMaterial();
+     fPionPlusInelasticProcess->GetCrossSectionDataStore( )
+       ->ComputeCrossSection(particle, material);
     return fPionPlusInelasticProcess->PostStepDoIt(*track, *step);
   }
   else if (track->GetParticleDefinition() == G4PionMinus::Definition()) {
+     auto particle = track->GetDynamicParticle();
+     auto material = track->GetMaterial();
+     fPionMinusInelasticProcess->GetCrossSectionDataStore( )
+       ->ComputeCrossSection(particle, material);
     return fPionMinusInelasticProcess->PostStepDoIt(*track, *step);
   }
   else {
