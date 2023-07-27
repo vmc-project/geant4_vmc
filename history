@@ -9,6 +9,19 @@
 
 Tags (history):
 ===============
+  27/07/2023
+  v6-1-p8:
+    Geant4 VMC:
+    - Fix in biasing:
+      - Added calls to biased processes CrossSectionDataStore::ComputeCrossSection
+      in BiasingOperation::ApplyFinalStateBiasing()
+      - This fixes a break observed in the ALICE simulation, that can be reproduced
+      in Geant4 Hadr08 example by changing "G4_Si" with "G4_SILICON_DIOXIDE".
+    (PR #47)
+
+    Tested with VMC 2.0, Geant4 11.0.p04 (with embedded CLHEP 2.4.5.1),
+      Root 6.28/04, VGM 5.0
+
   24/07/2023
   v6-1-p7:
     Geant4 VMC:
