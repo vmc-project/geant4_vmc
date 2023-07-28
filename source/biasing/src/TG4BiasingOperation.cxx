@@ -12,23 +12,33 @@
 ///
 /// \author Alberto Ribon, CERN
 
+// Model ranges:
+// New (Geant4 11.1.px)
+// Bertini: Low:  0 MeV High: 41 MeV
+// INCLXX:  Low: 40 MeV High: 12 GeV
+// FTF:     Low:  3 GeV High: via Hadr. param
+//
+// Previous version (Geant4 11.0.px)
+// Preco:   Low:  0     High:  2 MeV
+// INCLXX:  Low:  1 MeV High: 12 GeV
+// FTF:     Low:  3 GeV High: via Hadr. param
+
 #include "TG4BiasingOperation.h"
 
 #include "G4BGGNucleonInelasticXS.hh"
 #include "G4BGGPionInelasticXS.hh"
 #include "G4BiasingProcessInterface.hh"
+#include "G4CascadeInterface.hh"
 #include "G4ExcitedStringDecay.hh"
 #include "G4FTFModel.hh"
 #include "G4GeneratorPrecompoundInterface.hh"
 #include "G4HadronInelasticProcess.hh"
-#include "G4HadronicInteractionRegistry.hh"
 #include "G4HadronicParameters.hh"
 #include "G4INCLXXInterface.hh"
 #include "G4LundStringFragmentation.hh"
 #include "G4NeutronInelasticXS.hh"
 #include "G4TheoFSGenerator.hh"
 #include "G4VParticleChange.hh"
-#include "G4VPreCompoundModel.hh"
 #include "G4CrossSectionDataStore.hh"
 
 TG4BiasingOperation::TG4BiasingOperation(G4String name)
@@ -46,10 +56,9 @@ TG4BiasingOperation::TG4BiasingOperation(G4String name)
     new G4HadronInelasticProcess("pi-Inelastic", G4PionMinus::Definition());
 
   // Set the energy ranges
-  const G4double minPreco = 0.0;
-  const G4double maxPreco = 2.0 * CLHEP::MeV;
-  const G4double maxBERT = 12.0 * CLHEP::GeV;
-  const G4double minINCLXX = 1.0 * CLHEP::MeV;
+  const G4double maxBERT = 41.0 * CLHEP::MeV;
+  const G4double minINCLXX = 40.0 * CLHEP::MeV;
+  const G4double maxINCLXX = 12.0 * CLHEP::GeV;
   const G4double minFTFP = 3.0 * CLHEP::GeV;
   const G4double maxFTFP = G4HadronicParameters::Instance()->GetMaxEnergy();
 
@@ -70,33 +79,28 @@ TG4BiasingOperation::TG4BiasingOperation(G4String name)
   theHighEnergyModel->SetTransport(thePrecoInterface);
   theHighEnergyModel->SetMinEnergy(minFTFP);
   theHighEnergyModel->SetMaxEnergy(maxFTFP);
-  // Preco : create a new model to be used only for INCLXX for nucleons
-  G4VPreCompoundModel* thePreCompoundModel = new G4PreCompoundModel;
-  thePreCompoundModel->SetMinEnergy(minPreco);
-  thePreCompoundModel->SetMaxEnergy(maxPreco);
-  // --- Preco ---
+  // Bertini : create a new model to be used below INCLXX limit
+  G4CascadeInterface* theBertiniModel = new G4CascadeInterface();
+  theBertiniModel->SetMinEnergy(0.0);
+  theBertiniModel->SetMaxEnergy(maxBERT);
   // --- INCLXX model ---
-  // The instance for nucleons:
-  G4INCLXXInterface* theInclxxModel =
-    new G4INCLXXInterface(thePreCompoundModel);
+  G4INCLXXInterface* theInclxxModel = new G4INCLXXInterface();
   theInclxxModel->SetMinEnergy(minINCLXX);
-  theInclxxModel->SetMaxEnergy(maxBERT); // Use the same as for Bertini
-  // The instance for pions:
-  G4INCLXXInterface* theInclxxModel_forPions = new G4INCLXXInterface;
-  theInclxxModel_forPions->SetMinEnergy(minPreco);
-  theInclxxModel_forPions->SetMaxEnergy(maxBERT); // Use the same as for Bertini
+  theInclxxModel->SetMaxEnergy(maxINCLXX);
 
   // Register the models
   fProtonInelasticProcess->RegisterMe(theHighEnergyModel);
   fProtonInelasticProcess->RegisterMe(theInclxxModel);
-  fProtonInelasticProcess->RegisterMe(thePreCompoundModel);
+  fProtonInelasticProcess->RegisterMe(theBertiniModel);
   fNeutronInelasticProcess->RegisterMe(theHighEnergyModel);
   fNeutronInelasticProcess->RegisterMe(theInclxxModel);
-  fNeutronInelasticProcess->RegisterMe(thePreCompoundModel);
+  fNeutronInelasticProcess->RegisterMe(theBertiniModel);
   fPionPlusInelasticProcess->RegisterMe(theHighEnergyModel);
-  fPionPlusInelasticProcess->RegisterMe(theInclxxModel_forPions);
+  fPionPlusInelasticProcess->RegisterMe(theInclxxModel);
+  fPionPlusInelasticProcess->RegisterMe(theBertiniModel);
   fPionMinusInelasticProcess->RegisterMe(theHighEnergyModel);
-  fPionMinusInelasticProcess->RegisterMe(theInclxxModel_forPions);
+  fPionMinusInelasticProcess->RegisterMe(theInclxxModel);
+  fPionMinusInelasticProcess->RegisterMe(theBertiniModel);
 
   // Register the cross sections: this is mandatory starting from G4 10.6
   // because the default Gheisha inelastic cross sections have been removed.
