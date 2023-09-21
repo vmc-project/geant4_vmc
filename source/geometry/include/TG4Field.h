@@ -53,8 +53,6 @@ class TG4Field
 
   virtual void Update(const TG4FieldParameters& parameters);
 
-  virtual void PrintStatistics() const {}
-
   // access to field setting
   G4Field* GetG4Field() const;
   G4EquationOfMotion* GetEquation() const;

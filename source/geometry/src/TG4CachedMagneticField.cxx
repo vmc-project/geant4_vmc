@@ -62,8 +62,8 @@ void TG4CachedMagneticField::GetFieldValue(
 
   // New evaluation
   // Set units
-  const G4double g3point[3] = { point[0] / TG4G3Units::Length(),
-    point[1] / TG4G3Units::Length(), point[2] / TG4G3Units::Length() };
+  const G4double g3point[3] = { point[0] * TG4G3Units::InverseLength(),
+    point[1] * TG4G3Units::InverseLength(), point[2] * TG4G3Units::InverseLength() };
 
   // Call user field
   fVirtualMagField->Field(g3point, bfield);
@@ -94,9 +94,8 @@ void TG4CachedMagneticField::GetFieldValue(
 void TG4CachedMagneticField::PrintStatistics() const
 {
   /// Print the caching statistics
-
   if (fConstDistanceSquare) {
-    G4cout << " Cached field: " << G4endl
+    G4cout << "TG4CachedMagneticField: " << G4endl
            << "   Number of calls:        " << fCallsCounter << G4endl
            << "   Number of evaluations : " << fEvaluationsCounter << G4endl;
   }
@@ -106,7 +105,6 @@ void TG4CachedMagneticField::PrintStatistics() const
 void TG4CachedMagneticField::SetConstDistance(G4double value)
 {
   /// Set new const distance value
-
   fConstDistanceSquare = value * value;
 }
 
@@ -114,7 +112,6 @@ void TG4CachedMagneticField::SetConstDistance(G4double value)
 void TG4CachedMagneticField::ClearCounter()
 {
   /// Clear counters
-
   fCallsCounter = 0;
   fEvaluationsCounter = 0;
 }
