@@ -41,8 +41,8 @@ void TG4MagneticField::GetFieldValue(
   /// Return the bfield values in the given point.
 
   // Set units
-  const G4double g3point[3] = { point[0] / TG4G3Units::Length(),
-    point[1] / TG4G3Units::Length(), point[2] / TG4G3Units::Length() };
+  const G4double g3point[3] = { point[0] * TG4G3Units::InverseLength(),
+    point[1] * TG4G3Units::InverseLength(), point[2] * TG4G3Units::InverseLength() };
 
   // Call user field
   fVirtualMagField->Field(g3point, bfield);

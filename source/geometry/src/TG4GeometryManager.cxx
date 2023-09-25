@@ -15,6 +15,7 @@
 #include "TG4GeometryManager.h"
 #include "TG4BiasingManager.h"
 #include "TG4Field.h"
+#include "TG4MagneticField.h"
 #include "TG4FieldParameters.h"
 #include "TG4G3ControlVector.h"
 #include "TG4G3CutVector.h"
@@ -1084,11 +1085,15 @@ void TG4GeometryManager::SetUserStepper(
 void TG4GeometryManager::PrintFieldStatistics() const
 {
   /// Print field statistics.
-  /// Currently only cached field print the cahching statistics.
-
+  /// Currently only the cached field prints the caching statistics.
   if (VerboseLevel() > 0 && fgFields) {
     for (G4int i = 0; i < G4int(fgFields->size()); ++i) {
-      fgFields->at(i)->PrintStatistics();
+      auto f = fgFields->at(i); // this is a TG4Field
+      // we need to get the containing TG4MagneticField in order to print statistics
+      auto mgfield = dynamic_cast<TG4MagneticField*>(f->GetG4Field());
+      if (mgfield) {
+        mgfield->PrintStatistics();
+      }
     }
   }
 }
