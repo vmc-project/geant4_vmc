@@ -27,6 +27,7 @@ const G4double TG4G3Units::fgkMass = GeV;
 const G4double TG4G3Units::fgkMassDensity = g / cm3;
 const G4double TG4G3Units::fgkAtomicWeight = g / mole;
 const G4double TG4G3Units::fgkField = kilogauss;
+const G4double TG4G3Units::fgkInverseLength = 1. / cm;
 
 //_____________________________________________________________________________
 TG4G3Units::~TG4G3Units()
