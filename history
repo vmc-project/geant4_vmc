@@ -9,6 +9,27 @@
 
 Tags (history):
 ===============
+  26/09/2023
+  v6-1-p9:
+    Geant4 VMC:
+    Improvements for (cached) magnetic fields + cleanup (#49)
+    a) Avoid divisions in functions that are called often
+       from the G4 engine (when this is possible).
+       This is in particular true for TG4CachedMagnetic field
+       evaluation which is on top of the perf profile (so it makes sense to
+       incrementally improve this function).
+       Replacing divisions by multiplications avoids pipeline stalls. The concrete
+       effect depends on the ratio of cache acceptance to field evaluations but
+       no harm is in any case done.
+    b) Fix the dispatch to PrintStatistics from TG4GeometryManager.
+       The dispatch was to TG4Field and not to TG4MagneticField, and
+       in result the statistics from TG4CachedMagneticField was never shown.
+    c) other smaller cleanups (remove virtual keyword when not necessary,...)
+    (Thanks to S. Wenzel, CERN)
+
+    Tested with VMC 2.0, Geant4 11.0.p04 (with embedded CLHEP 2.4.5.1),
+      Root 6.28/04, VGM 5.0
+
   27/07/2023
   v6-1-p8:
     Geant4 VMC:
