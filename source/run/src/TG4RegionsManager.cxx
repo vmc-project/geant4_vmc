@@ -478,10 +478,10 @@ void TG4RegionsManager::PrintRegionData(std::ostream& output,
   output << std::setw(30) << std::left << name << "  "
          << std::scientific << values[fgkRangeGamIdx] << "  "
          << std::scientific << values[fgkRangeEleIdx] << "  "
-         << std::scientific << values[fgkCutGamIdx] / TG4G3Units::Energy() << "  "
-         << std::scientific << values[fgkCutEleIdx] / TG4G3Units::Energy() << "  "
-         << std::scientific << values[fgkVmcCutGamIdx] / TG4G3Units::Energy() << "  "
-         << std::scientific << values[fgkVmcCutEleIdx] / TG4G3Units::Energy() << G4endl;
+         << std::scientific << values[fgkCutGamIdx] * TG4G3Units::InverseEnergy() << "  "
+         << std::scientific << values[fgkCutEleIdx] * TG4G3Units::InverseEnergy() << "  "
+         << std::scientific << values[fgkVmcCutGamIdx] * TG4G3Units::InverseEnergy() << "  "
+         << std::scientific << values[fgkVmcCutEleIdx] * TG4G3Units::InverseEnergy() << G4endl;
   //clang-format on
 }
 

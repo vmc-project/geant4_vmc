@@ -598,7 +598,7 @@ Double_t TG4PhysicsManager::ParticleMass(Int_t pdg) const
   G4ParticleDefinition* particle = GetParticleDefinition(pdg);
 
   if (particle)
-    return particle->GetPDGMass() / TG4G3Units::Energy();
+    return particle->GetPDGMass() * TG4G3Units::InverseEnergy();
   else
     return 0.;
 }
@@ -611,7 +611,7 @@ Double_t TG4PhysicsManager::ParticleCharge(Int_t pdg) const
   G4ParticleDefinition* particle = GetParticleDefinition(pdg);
 
   if (particle)
-    return particle->GetPDGCharge() / TG4G3Units::Charge();
+    return particle->GetPDGCharge() * TG4G3Units::InverseCharge();
   else
     return 0.;
 }

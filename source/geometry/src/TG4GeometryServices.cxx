@@ -108,7 +108,7 @@ G4bool TG4GeometryServices::CompareElement(
   /// Compare given parameters with those of a given element,
   /// return true if they are equal, false otherwise.
 
-  G4double ae = element->GetA() / TG4G3Units::AtomicWeight();
+  G4double ae = element->GetA() * TG4G3Units::InverseAtomicWeight();
   G4double ze = element->GetZ();
 
   // g3tog4 can redefine A
@@ -118,7 +118,7 @@ G4bool TG4GeometryServices::CompareElement(
     ax = 1.01 * g / mole;
   }
   else
-    ax = G3Ele.GetEle(z)->GetA() / TG4G3Units::AtomicWeight();
+    ax = G3Ele.GetEle(z)->GetA() * TG4G3Units::InverseAtomicWeight();
 
   if (std::abs(ax - ae) < fgkAZTolerance && std::abs(z - ze) < fgkAZTolerance)
     return true;
@@ -154,7 +154,7 @@ G4bool TG4GeometryServices::CompareMaterial(
   /// Compare given density with those of a given material,
   /// return true if they are equal, false otherwise.
 
-  G4double dm = material->GetDensity() / TG4G3Units::MassDensity();
+  G4double dm = material->GetDensity() * TG4G3Units::InverseMassDensity();
   G4int ne = material->GetNumberOfElements();
 
   // density percentual difference
