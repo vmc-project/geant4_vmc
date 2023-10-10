@@ -27,10 +27,11 @@
 class TG4G3Units
 {
  public:
-  virtual ~TG4G3Units();
+  ~TG4G3Units();
 
   // static get methods
   static G4double Length();
+  static G4double InverseLength();
   static G4double Angle();
   static G4double Time();
   static G4double Charge();
@@ -45,6 +46,7 @@ class TG4G3Units
 
   // static data members
   static const G4double fgkLength;       ///< G3 length unit
+  static const G4double fgkInverseLength;///< 1 over G3 length unit
   static const G4double fgkAngle;        ///< G3 angle unit
   static const G4double fgkTime;         ///< G3 time unit
   static const G4double fgkCharge;       ///< G3 charge unit
@@ -61,6 +63,10 @@ inline G4double TG4G3Units::Length()
 {
   /// Return G3 length unit
   return fgkLength;
+}
+
+inline G4double TG4G3Units::InverseLength() {
+  return fgkInverseLength;
 }
 
 inline G4double TG4G3Units::Angle()
