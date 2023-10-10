@@ -94,7 +94,7 @@ Double_t TG4OpGeometryManager::AddUnit(
 
   if (propertyName == "BIRKS_CONSTANT") {
 
-    return value * TG4G3Units::Length() / TG4G3Units::Energy();
+    return value * TG4G3Units::Length() * TG4G3Units::InverseEnergy();
   }
 
   if (propertyName == "ALPHASCINTILLATIONYIELD" ||
@@ -105,7 +105,7 @@ Double_t TG4OpGeometryManager::AddUnit(
       propertyName == "SCINTILLATIONYIELD" ||
       propertyName == "TRITONSCINTILLATIONYIELD") {
 
-    return value / TG4G3Units::Energy();
+    return value * TG4G3Units::InverseEnergy();
   }
 
   if (propertyName == "SCINTILLATIONRISETIME1" ||
@@ -121,7 +121,7 @@ Double_t TG4OpGeometryManager::AddUnit(
   }
 
   if (propertyName == "ISOTHERMAL_COMPRESSIBILITY" ) {
-    return value * std::pow(TG4G3Units::Length(), 3) / TG4G3Units::Energy();
+    return value * std::pow(TG4G3Units::Length(), 3) * TG4G3Units::InverseEnergy();
   }
 
   if (propertyName == "ALPHASCINTILLATIONYIELD1" ||

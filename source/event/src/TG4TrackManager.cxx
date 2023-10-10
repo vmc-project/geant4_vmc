@@ -303,14 +303,14 @@ void TG4TrackManager::TrackToStack(const G4Track* track, G4bool /*overWrite*/)
   G4double px = momentum.x();
   G4double py = momentum.y();
   G4double pz = momentum.z();
-  G4double e = track->GetTotalEnergy() / TG4G3Units::Energy();
+  G4double e = track->GetTotalEnergy() * TG4G3Units::InverseEnergy();
 
   G4ThreeVector position = track->GetPosition();
   position *= 1. / (TG4G3Units::Length());
   G4double vx = position.x();
   G4double vy = position.y();
   G4double vz = position.z();
-  G4double t = track->GetGlobalTime() / TG4G3Units::Time();
+  G4double t = track->GetGlobalTime() * TG4G3Units::InverseTime();
 
   G4ThreeVector polarization = track->GetPolarization();
   G4double polX = polarization.x();
@@ -383,7 +383,7 @@ void TG4TrackManager::PrimaryToStack(
   G4double vx = position.x();
   G4double vy = position.y();
   G4double vz = position.z();
-  G4double t = vertex->GetT0() / TG4G3Units::Time();
+  G4double t = vertex->GetT0() * TG4G3Units::InverseTime();
   ;
 
   G4ThreeVector polarization = particle->GetPolarization();

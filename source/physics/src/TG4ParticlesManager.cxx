@@ -127,9 +127,9 @@ void TG4ParticlesManager::AddParticleToPdgDatabase(
   G4AutoLock lm(&addParticleMutex);
 #endif
   TDatabasePDG::Instance()->AddParticle(name, g4Name,
-    particleDefinition->GetPDGMass() / TG4G3Units::Energy(),
+    particleDefinition->GetPDGMass() * TG4G3Units::InverseEnergy(),
     particleDefinition->GetPDGStable(),
-    particleDefinition->GetPDGWidth() / TG4G3Units::Energy(), pdgQ * 3,
+    particleDefinition->GetPDGWidth() * TG4G3Units::InverseEnergy(), pdgQ * 3,
     rootType, pdgEncoding);
 #ifdef G4MULTITHREADED
   lm.unlock();

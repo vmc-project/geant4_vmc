@@ -638,9 +638,9 @@ void TG4StepManager::Gmtod(Double_t* xm, Double_t* xd, Int_t iflag)
     theLocalPoint = affineTransform.TransformAxis(theGlobalPoint);
   }
 
-  xd[0] = theLocalPoint.x() / TG4G3Units::Length();
-  xd[1] = theLocalPoint.y() / TG4G3Units::Length();
-  xd[2] = theLocalPoint.z() / TG4G3Units::Length();
+  xd[0] = theLocalPoint.x() * TG4G3Units::InverseLength();
+  xd[1] = theLocalPoint.y() * TG4G3Units::InverseLength();
+  xd[2] = theLocalPoint.z() * TG4G3Units::InverseLength();
 }
 
 //_____________________________________________________________________________
@@ -702,9 +702,9 @@ void TG4StepManager::Gdtom(Double_t* xd, Double_t* xm, Int_t iflag)
     theGlobalPoint = affineTransform.TransformAxis(theLocalPoint);
   }
 
-  xm[0] = theGlobalPoint.x() / TG4G3Units::Length();
-  xm[1] = theGlobalPoint.y() / TG4G3Units::Length();
-  xm[2] = theGlobalPoint.z() / TG4G3Units::Length();
+  xm[0] = theGlobalPoint.x() * TG4G3Units::InverseLength();
+  xm[1] = theGlobalPoint.y() * TG4G3Units::InverseLength();
+  xm[2] = theGlobalPoint.z() * TG4G3Units::InverseLength();
 }
 
 //_____________________________________________________________________________
@@ -878,7 +878,7 @@ Double_t TG4StepManager::TrackStep() const
 #ifdef MCDEBUG
     CheckStep("TrackStep");
 #endif
-    return fStep->GetStepLength() / TG4G3Units::Length();
+    return fStep->GetStepLength() * TG4G3Units::InverseLength();
   }
   else
     return 0;
@@ -894,9 +894,9 @@ Double_t TG4StepManager::TrackLength() const
   CheckTrack();
 #endif
   if (!fInitialVMCTrackStatus) {
-    return fTrack->GetTrackLength() / TG4G3Units::Length();
+    return fTrack->GetTrackLength() * TG4G3Units::InverseLength();
   }
-  return fTrack->GetTrackLength() / TG4G3Units::Length() +
+  return fTrack->GetTrackLength() * TG4G3Units::InverseLength() +
          fInitialVMCTrackStatus->fTrackLength;
 }
 
@@ -913,7 +913,7 @@ Double_t TG4StepManager::TrackTime() const
   CheckTrack();
 #endif
 
-  return fTrack->GetGlobalTime() / TG4G3Units::Time();
+  return fTrack->GetGlobalTime() * TG4G3Units::InverseTime();
 }
 
 //_____________________________________________________________________________
@@ -927,7 +927,7 @@ Double_t TG4StepManager::Edep() const
     CheckStep("Edep");
 #endif
 
-    return fStep->GetTotalEnergyDeposit() / TG4G3Units::Energy();
+    return fStep->GetTotalEnergyDeposit() * TG4G3Units::InverseEnergy();
   }
 
   if (fStepStatus == kBoundary && fTrack->GetTrackStatus() == fStopAndKill) {
@@ -935,7 +935,7 @@ Double_t TG4StepManager::Edep() const
     TG4PhysicsManager* physicsManager = TG4PhysicsManager::Instance();
     if (proc && physicsManager->GetMCProcess(proc) == kPLightScattering &&
         physicsManager->GetOpBoundaryStatus() == kPLightDetection) {
-      return fTrack->GetTotalEnergy() / TG4G3Units::Energy();
+      return fTrack->GetTotalEnergy() * TG4G3Units::InverseEnergy();
     }
   }
 
@@ -945,7 +945,7 @@ Double_t TG4StepManager::Edep() const
     CheckGflashSpot("Edep");
 #endif
 
-    return fGflashSpot->GetEnergySpot()->GetEnergy() / TG4G3Units::Energy();
+    return fGflashSpot->GetEnergySpot()->GetEnergy() * TG4G3Units::InverseEnergy();
   }
 
   return 0;
@@ -962,7 +962,7 @@ Double_t TG4StepManager::NIELEdep() const
     CheckStep("NIELEdep");
 #endif
 
-    return fStep->GetNonIonizingEnergyDeposit() / TG4G3Units::Energy();
+    return fStep->GetNonIonizingEnergyDeposit() * TG4G3Units::InverseEnergy();
   }
 
   // return 0. in other cases (including kBoundary, kGflashSpot)
@@ -1075,7 +1075,7 @@ Double_t TG4StepManager::Etot() const
   CheckTrack();
 #endif
 
-  return fTrack->GetDynamicParticle()->GetTotalEnergy() / TG4G3Units::Energy();
+  return fTrack->GetDynamicParticle()->GetTotalEnergy() * TG4G3Units::InverseEnergy();
 }
 
 // TO DO: revise these with added kGflashSpot status
