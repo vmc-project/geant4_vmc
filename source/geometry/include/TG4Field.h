@@ -49,9 +49,9 @@ class TG4Field
  public:
   TG4Field(const TG4FieldParameters& parameters, TVirtualMagField* magField,
     G4LogicalVolume* lv = 0);
-  virtual ~TG4Field();
+  ~TG4Field();
 
-  virtual void Update(const TG4FieldParameters& parameters);
+  void Update(const TG4FieldParameters& parameters);
 
   // access to field setting
   G4Field* GetG4Field() const;

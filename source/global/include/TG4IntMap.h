@@ -37,7 +37,7 @@ class TG4IntMap
 
  public:
   TG4IntMap();
-  virtual ~TG4IntMap();
+  ~TG4IntMap();
 
   // methods
   G4bool Add(const G4String& first, G4int second);

@@ -41,7 +41,7 @@ class TG4NameMap
 
  public:
   TG4NameMap();
-  virtual ~TG4NameMap();
+  ~TG4NameMap();
 
   // methods
   G4bool Add(const G4String& first, const G4String& second);

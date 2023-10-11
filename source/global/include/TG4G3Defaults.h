@@ -34,7 +34,7 @@ class TG4G3Defaults
 {
  public:
   TG4G3Defaults();
-  virtual ~TG4G3Defaults();
+  ~TG4G3Defaults();
 
   // static access methods
   static TG4G3Defaults* Instance();

@@ -34,7 +34,7 @@ class TG4SDManager
 {
  public:
   TG4SDManager();
-  virtual ~TG4SDManager();
+  ~TG4SDManager();
 
   // static methods
   static TG4SDManager* Instance();

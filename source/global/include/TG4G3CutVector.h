@@ -33,7 +33,7 @@ class TG4G3CutVector
  public:
   TG4G3CutVector();
   TG4G3CutVector(const TG4G3CutVector& right);
-  virtual ~TG4G3CutVector();
+  ~TG4G3CutVector();
 
   // operators
   TG4G3CutVector& operator=(const TG4G3CutVector& right);

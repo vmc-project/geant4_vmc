@@ -38,7 +38,7 @@ class TG4G3ControlVector
  public:
   TG4G3ControlVector();
   TG4G3ControlVector(const TG4G3ControlVector& right);
-  virtual ~TG4G3ControlVector();
+  ~TG4G3ControlVector();
 
   // operators
   TG4G3ControlVector& operator=(const TG4G3ControlVector& right);

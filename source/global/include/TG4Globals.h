@@ -68,7 +68,7 @@ typedef std::set<G4String, std::less<G4String> > TG4StringSet;
 class TG4Globals
 {
  public:
-  virtual ~TG4Globals();
+  ~TG4Globals();
 
   // static methods
   static void Exception(

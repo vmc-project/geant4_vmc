@@ -56,7 +56,7 @@ class TG4StepManager
 {
  public:
   TG4StepManager(const TString& userGeometry);
-  virtual ~TG4StepManager();
+  ~TG4StepManager();
 
   // static access method
   static TG4StepManager* Instance();
