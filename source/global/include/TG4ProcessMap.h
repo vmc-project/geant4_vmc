@@ -39,7 +39,7 @@ class TG4ProcessMap
   TG4ProcessMap();
   TG4ProcessMap(const TG4ProcessMap& right) = delete;
   TG4ProcessMap& operator=(const TG4ProcessMap& right) = delete;
-  virtual ~TG4ProcessMap();
+  ~TG4ProcessMap();
 
   // static access method
   static TG4ProcessMap* Instance();

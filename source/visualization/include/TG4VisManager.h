@@ -44,7 +44,7 @@ class TG4VisManager
   TG4VisManager(G4int verboseLevel = 0);
   // Controls initial verbose level of VisManager and VisMessenger.
   // Can be changed by /vis/set/verbose.
-  virtual ~TG4VisManager();
+  ~TG4VisManager();
 
   //----------------------
   // functions for drawing

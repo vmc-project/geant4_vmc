@@ -34,7 +34,7 @@ class TG4MediumMap
 {
  public:
   TG4MediumMap();
-  virtual ~TG4MediumMap();
+  ~TG4MediumMap();
 
   // methods
   TG4Medium* AddMedium(G4int mediumID, G4bool warn = true);

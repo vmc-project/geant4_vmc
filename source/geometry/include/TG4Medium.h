@@ -29,7 +29,7 @@ class TG4Medium
 {
  public:
   TG4Medium(G4int id);
-  virtual ~TG4Medium();
+  ~TG4Medium();
 
   // methods
   void Print() const;

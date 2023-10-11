@@ -42,7 +42,7 @@ class TG4SDServices
 {
  public:
   TG4SDServices();
-  virtual ~TG4SDServices();
+  ~TG4SDServices();
 
   // static methods
   static TG4SDServices* Instance();

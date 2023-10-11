@@ -107,7 +107,7 @@ class TG4FieldParameters
 {
  public:
   TG4FieldParameters(const G4String& volumeName = "");
-  virtual ~TG4FieldParameters();
+  ~TG4FieldParameters();
 
   // methods
   void PrintParameters() const;

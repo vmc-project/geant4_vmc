@@ -47,7 +47,7 @@ class TG4G3PhysicsManager
 {
  public:
   TG4G3PhysicsManager();
-  virtual ~TG4G3PhysicsManager();
+  ~TG4G3PhysicsManager();
 
   // static access method
   static TG4G3PhysicsManager* Instance();

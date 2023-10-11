@@ -35,7 +35,7 @@ class TG4RadiatorDescription
 
  public:
   TG4RadiatorDescription(const G4String& volumeName = "");
-  virtual ~TG4RadiatorDescription();
+  ~TG4RadiatorDescription();
 
   // methods
   void PrintParameters() const;
