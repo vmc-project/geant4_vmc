@@ -41,6 +41,7 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
     fRangeProtonCutCmd(0),
     fRangeAllCutCmd(0),
     fSetGammaToMuonsCrossSectionFactorCmd(0),
+    fSetCrossSectionFactorCmd(0),
     fPrintProcessMapCmd(0),
     fPrintVolumeLimitsCmd(0),
     fPrintGlobalCutsCmd(0),
@@ -101,6 +102,8 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
   fSetGammaToMuonsCrossSectionFactorCmd->SetParameterName(
     "GammaToMuonsCrossSectionFactor", false);
   fSetGammaToMuonsCrossSectionFactorCmd->AvailableForStates(G4State_PreInit);
+
+  CreateSetCrossSectionFactorCmd();
 
   fPrintAllProcessesCmd =
     new G4UIcmdWithoutParameter("/mcPhysics/printAllProcess", this);
@@ -178,6 +181,7 @@ TG4ComposedPhysicsMessenger::~TG4ComposedPhysicsMessenger()
   delete fRangeAllCutCmd;
   delete fProductionCutsTableEnergyRangeCmd;
   delete fSetGammaToMuonsCrossSectionFactorCmd;
+  delete fSetCrossSectionFactorCmd;
   delete fPrintAllProcessesCmd;
   delete fDumpAllProcessesCmd;
   delete fPrintProcessMapCmd;
@@ -220,6 +224,37 @@ void TG4ComposedPhysicsMessenger::CreateProductionCutsTableEnergyRangeCmd()
   fProductionCutsTableEnergyRangeCmd->SetParameter(maxEnergy);
   fProductionCutsTableEnergyRangeCmd->SetParameter(maxEnergyUnit);
   fProductionCutsTableEnergyRangeCmd->AvailableForStates(G4State_PreInit);
+}
+
+//______________________________________________________________________________
+void TG4ComposedPhysicsMessenger::CreateSetCrossSectionFactorCmd()
+{
+  auto particleName = new G4UIparameter("particleName", 's', false);
+  particleName->SetGuidance("Particle name.");
+
+  auto processDef = new G4UIparameter("processDef", 's', false);
+  processDef->SetGuidance(
+    "Process name (default) or process type name "
+    "(if the last ommitable parameter is set to true");
+
+  auto factor = new G4UIparameter("factor", 'd', false);
+  factor->SetGuidance("Cross section scale factor.");
+
+  auto isProcessName = new G4UIparameter("isProcessName", 'b', true);
+  isProcessName->SetDefaultValue(true);
+  isProcessName->SetGuidance(
+    "Set false if process is defined by its type name and not by its name.");
+
+  fSetCrossSectionFactorCmd =
+    new G4UIcommand("/mcPhysics/setCrossSectionFactor", this);
+  fSetCrossSectionFactorCmd->SetGuidance(
+    "Set the cross section scale factor for a selected particle "
+    "and hadronic process");
+  fSetCrossSectionFactorCmd->SetParameter(particleName);
+  fSetCrossSectionFactorCmd->SetParameter(processDef);
+  fSetCrossSectionFactorCmd->SetParameter(factor);
+  fSetCrossSectionFactorCmd->SetParameter(isProcessName);
+  fSetCrossSectionFactorCmd->AvailableForStates(G4State_PreInit);
 }
 
 //
@@ -279,6 +314,19 @@ void TG4ComposedPhysicsMessenger::SetNewValue(
   else if (command == fSetGammaToMuonsCrossSectionFactorCmd) {
     G4double value = G4UIcommand::ConvertToDouble(newValue);
     fPhysicsList->SetGammaToMuonsCrossSectionFactor(value);
+  }
+  else if (command == fSetCrossSectionFactorCmd) {
+    // tokenize parameters in a vector
+    std::vector<G4String> parameters;
+    G4Analysis::Tokenize(newValue, parameters);
+
+    G4int counter = 0;
+    auto particleName = parameters[counter++];;
+    auto processDef = parameters[counter++];
+    auto factor = G4UIcommand::ConvertToDouble(parameters[counter++]);
+    auto isProcessName = G4UIcommand::ConvertToBool(parameters[counter++]);
+    fPhysicsList->SetCrossSectionFactor(
+                    particleName, processDef, factor, isProcessName);
   }
   else if (command == fPrintAllProcessesCmd) {
     fPhysicsList->PrintAllProcesses();
