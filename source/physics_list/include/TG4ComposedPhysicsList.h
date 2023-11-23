@@ -19,9 +19,11 @@
 #include "TG4Verbose.h"
 
 #include <G4VUserPhysicsList.hh>
+#include <G4HadronicProcessType.hh>
 #include <globals.hh>
 
 #include <vector>
+#include <tuple>
 
 /// \ingroup physics_list
 /// \brief The Geant4 VMC physics list builder
@@ -51,6 +53,10 @@ class TG4ComposedPhysicsList : public G4VUserPhysicsList, public TG4Verbose
 
   void SetProductionCutsTableEnergyRange(G4double min, G4double max);
   void SetGammaToMuonsCrossSectionFactor(G4double value);
+  void SetCrossSectionFactor(
+         const G4String& particleName, const G4String& processDef,
+         G4double value, G4bool isProcessName);
+
   void SetLooperThresholdsLevel(G4int level);
 
   void PrintAllProcesses() const;
@@ -67,6 +73,11 @@ class TG4ComposedPhysicsList : public G4VUserPhysicsList, public TG4Verbose
 
   // methods
   void ApplyGammaToMuonsCrossSectionFactor();
+  void ApplyCrossSectionFactor(
+         const G4String& particleName, const G4String& processDef,
+         G4double value, G4bool isProcessName);
+  void ApplyCrossSectionFactors();
+
   void SetLooperThresholds();
 
   // static data members
@@ -88,6 +99,9 @@ class TG4ComposedPhysicsList : public G4VUserPhysicsList, public TG4Verbose
 
   /// Gamma to muons cross section factor
   G4double fGammaToMuonsCrossSectionFactor;
+
+  /// Cross section factors by process type or name
+  std::vector<std::tuple<G4String, G4String, G4double, G4bool>> fCrossSectionFactors;
 
   /// Looper threshold level (can have valuee 0,1,2)
   G4int fLooperThresholdsLevel;

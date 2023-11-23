@@ -15,10 +15,12 @@
 #include "TG4ComposedPhysicsList.h"
 #include "TG4G3PhysicsManager.h"
 #include "TG4PhysicsManager.h"
+#include "TG4ProcessMapPhysics.h"
 
 #include <G4Electron.hh>
 #include <G4Gamma.hh>
 #include <G4GammaConversionToMuons.hh>
+#include <G4HadronicProcess.hh>
 #include <G4PhysicsListHelper.hh>
 #include <G4Positron.hh>
 #include <G4ProcessManager.hh>
@@ -38,6 +40,109 @@ G4Transportation* FindTransportation(
   const auto* processManager = particleDefinition->GetProcessManager();
   return dynamic_cast<G4Transportation*>(
     processManager->GetProcess("Transportation"));
+}
+
+G4String GetProcessTypeName(G4int hadronicProcessSubType)
+{
+  switch(hadronicProcessSubType) {
+    // G4HadronicProcessType
+    case fHadronElastic:   return "HadronElastic"; break;
+    // Not yet in 10.0.px
+    // case fNeutronGeneral:  return "NeutronGeneral"; break;
+    case fHadronInelastic: return "HadronInelastic"; break;
+    case fCapture:         return "Capture"; break;
+    case fMuAtomicCapture: return "MuAtomicCapture"; break;
+    case fFission:         return "Fission"; break;
+    case fHadronAtRest:    return "HadronAtRest"; break;
+    case fLeptonAtRest:    return "LeptonAtRest"; break;
+    case fChargeExchange:  return "ChargeExchange"; break;
+    // case fNuOscillation:   return "NuOscillation"; break;
+    // case fNuElectron:      return "NuElectron"; break;
+    // case fNuNucleus:       return "NuNucleus"; break;
+    case fRadioactiveDecay:return "RadioactiveDecay"; break;
+    case fEMDissociation:  return "EMDissociation"; break;
+    //  TG4HadronicProcessType
+    case fElectronNuclear: return "ElectronNuclear"; break;
+    case fPositronNuclear: return "PositronNuclear"; break;
+    case fMuonNuclear:     return "MuonNuclear"; break;
+    case fPhotoNuclear:    return "PhotoNuclear"; break;
+  }
+
+  TString text;
+  text += hadronicProcessSubType;
+  TG4Globals::Warning(
+    "TG4ComposedPhysicsList", "GetProcessTypeName:",
+    "Unknown hadronic process type: " + text);
+  G4cout << hadronicProcessSubType << G4endl;
+  return "";
+}
+
+G4int GetProcessSubType(
+  const G4String& processTypeName, G4int& errorCode)
+{
+  errorCode = 0;
+
+  // G4HadronicProcessType
+  if (processTypeName == "HadronElastic")    return fHadronElastic;
+  // Not yet in 10.0.px
+  // if (processTypeName == "NeutronGeneral")   return fNeutronGeneral;
+  if (processTypeName == "HadronInelastic")  return fHadronInelastic;
+  if (processTypeName == "Capture")          return fCapture;
+  if (processTypeName == "MuAtomicCapture")  return fMuAtomicCapture;
+  if (processTypeName == "Fission")          return fFission;
+  if (processTypeName == "HadronAtRest")     return fHadronAtRest;
+  if (processTypeName == "LeptonAtRest")     return fLeptonAtRest;
+  if (processTypeName == "ChargeExchange")   return fChargeExchange;
+  // if (processTypeName == "NuOscillation")    return fNuOscillation;
+  // if (processTypeName == "NuElectron")       return fNuElectron;
+  // if (processTypeName == "NuNucleus")        return fNuNucleus;
+  if (processTypeName == "RadioactiveDecay") return fRadioactiveDecay;
+  if (processTypeName == "EMDissociation")   return fEMDissociation;
+
+  // TG4HadronicProcessType
+  if (processTypeName == "ElectronNuclear")  return fElectronNuclear;
+  if (processTypeName == "PositronNuclear")  return fPositronNuclear;
+  if (processTypeName == "MuonNuclear")      return fMuonNuclear;
+  if (processTypeName == "PhotoNuclear")     return fPhotoNuclear;
+
+  TG4Globals::Warning(
+    "TG4ComposedPhysicsList", "GetProcessSubType:",
+    "Unknown process type name: " + TString(processTypeName.data()));
+  errorCode = 1;
+  return fHadronInelastic;
+}
+
+G4VProcess* GetProcess(G4ParticleDefinition* particle, G4int processSubType)
+{
+  // Find a process of given sub type;
+  // print a warning if no process or more than one process exist
+
+  auto processList = particle->GetProcessManager()->GetProcessList();
+  std::vector<G4VProcess*> foundProcesses;
+  for (std::size_t i = 0; i < processList->size(); ++i) {
+    if ((*processList)[i]->GetProcessSubType() == processSubType) {
+      foundProcesses.push_back((*processList)[i]);
+    }
+  }
+
+  if (foundProcesses.empty()) {
+    TString text;
+    text += processSubType;
+    TG4Globals::Warning(
+      "TG4ComposedPhysicsList", "GetProcess:",
+      "Unknown process sub type: " + text);
+    return nullptr;
+  }
+
+  if (foundProcesses.size()>1) {
+    TString text;
+    text += processSubType;
+    TG4Globals::Warning(
+      "TG4ComposedPhysicsList", "GetProcess:",
+      "More than one process of sub type: " + text + " exists.");
+  }
+
+  return foundProcesses[0];
 }
 
 } // namespace
@@ -108,6 +213,81 @@ void TG4ComposedPhysicsList::ApplyGammaToMuonsCrossSectionFactor()
         "Cannot set gamma to muons cross section factor, GammaToMuons must be "
         "activated first.");
     }
+  }
+}
+
+//_____________________________________________________________________________
+void TG4ComposedPhysicsList::ApplyCrossSectionFactor(
+  const G4String& particleName, const G4String& processDef, G4double factor,
+  G4bool isProcessName)
+{
+  /// Apply the scale factor to a hadronic process cross section
+
+  // get particle definition from G4ParticleTable
+  auto particleDefinition =
+    G4ParticleTable::GetParticleTable()->FindParticle(particleName);
+  if (particleDefinition == nullptr) {
+    TG4Globals::Warning("TG4ComposedPhysicsList", "ApplyCrossSectionFactor",
+      "G4ParticleTable::FindParticle() for particle " +
+      TString(particleName.data()) + " failed.");
+    return;
+  }
+
+  G4VProcess* process = nullptr;
+  if (isProcessName) {
+    // get process by name
+    process = particleDefinition->GetProcessManager()->GetProcess(processDef);
+  }
+  else {
+    // get process by type
+    G4int errorCode = 0;
+    auto processSubType = GetProcessSubType(processDef, errorCode);
+    if (errorCode > 0) {
+      TG4Globals::Warning("TG4ComposedPhysicsList", "ApplyCrossSectionFactor",
+        "GetProcessSubType for processTypeName " +
+        TString(processDef.data()) + " failed.");
+      return;
+    }
+    process = GetProcess(particleDefinition, processSubType);
+       // Cannot use G4HadronicProcessStore::FindProcess
+       // as we redefine some processes  sub-types with our codes
+  }
+
+  if (process == nullptr) {
+    TString by  = (isProcessName) ? " by name" : " by type";
+      TG4Globals::Warning("TG4ComposedPhysicsList", "ApplyCrossSectionFactor",
+        "Get process " + TString(processDef.data()) + by + " failed.");
+      return;
+  }
+
+  // check process type
+  if (process->GetProcessType() != fHadronic) {
+    TG4Globals::Warning("TG4ComposedPhysicsList", "ApplyCrossSectionFactor",
+      "Process " + TString(processDef.data()) + " is not hadronic.");
+    return;
+  }
+
+  // apply factor
+  (static_cast<G4HadronicProcess*>(process))->MultiplyCrossSectionBy(factor);
+
+  if (VerboseLevel() > 0) {
+    G4cout
+      << "### Applied cross section factor " << factor
+      << " for " <<  particleDefinition->GetParticleName()
+      << " process " << process->GetProcessName()
+      << " process type: " << GetProcessTypeName(process->GetProcessSubType())
+      << G4endl;
+  }
+}
+
+//_____________________________________________________________________________
+void TG4ComposedPhysicsList::ApplyCrossSectionFactors()
+{
+  /// Apply the cross section factors registered in fCrossSectionFactors
+
+  for (const auto& [particleName, processType, factor, isProcessName] :
+      fCrossSectionFactors) {
+    ApplyCrossSectionFactor(particleName, processType, factor, isProcessName);
   }
 }
 
@@ -188,6 +368,10 @@ void TG4ComposedPhysicsList::ConstructProcess()
 
   if (fGammaToMuonsCrossSectionFactor > 0.) {
     ApplyGammaToMuonsCrossSectionFactor();
+  }
+
+  if (!fCrossSectionFactors.empty()) {
+    ApplyCrossSectionFactors();
   }
 
   if (VerboseLevel() > 1)
@@ -292,6 +476,19 @@ void TG4ComposedPhysicsList::SetProductionCutsTableEnergyRange(
   fProductionCutsTableEnergyMin = min;
   fProductionCutsTableEnergyMax = max;
   fIsProductionCutsTableEnergyRange = true;
+}
+
+//_____________________________________________________________________________
+void TG4ComposedPhysicsList::SetCrossSectionFactor(
+  const G4String& particleName, const G4String& processTypeOrName,
+  G4double factor, G4bool isProcessName)
+{
+  /// Define a scale factor for a hadronic process defined
+  /// by its name or its type name (depending on the 'isProcessName' setting)
+  /// for the particle with the given name.
+
+  fCrossSectionFactors.push_back(
+    std::make_tuple(particleName, processTypeOrName, factor, isProcessName));
 }
 
 //_____________________________________________________________________________

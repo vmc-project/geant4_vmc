@@ -69,6 +69,7 @@ class TG4ComposedPhysicsMessenger : public G4UImessenger
 
   // methods
   void CreateProductionCutsTableEnergyRangeCmd();
+  void CreateSetCrossSectionFactorCmd();
 
   //
   // data members
@@ -99,6 +100,9 @@ class TG4ComposedPhysicsMessenger : public G4UImessenger
 
   /// setGammaToMuonsCrossSectionFactor
   G4UIcmdWithADouble* fSetGammaToMuonsCrossSectionFactorCmd;
+
+  /// setCrossSectionFactor
+  G4UIcommand* fSetCrossSectionFactorCmd;
 
   /// printAllProcess command
   G4UIcmdWithoutParameter* fPrintAllProcessesCmd;
