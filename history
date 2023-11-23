@@ -10,6 +10,18 @@
 Tags (history):
 ===============
   26/09/2023
+  v6-1-update1-p9:
+    Geant4 VMC:
+    Implemented functions and UI command for setting a cross section
+    scaling factor for hadronic processes:
+      /mcPhysics/setCrossSectionFactor particleName processDef factor [isProcessName]
+    Process can be defined by its Geant4 name (default) or its Geant4 sub type
+    name.
+
+    Tested with VMC 2.0, Geant4 11.0.p04 (with embedded CLHEP 2.4.5.1),
+      Root 6.28/04, VGM 5.0
+
+  26/09/2023
   v6-1-p9:
     Geant4 VMC:
     Improvements for (cached) magnetic fields + cleanup (#49)
