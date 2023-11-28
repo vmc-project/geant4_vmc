@@ -48,8 +48,7 @@ G4String GetProcessTypeName(G4int hadronicProcessSubType)
   switch(hadronicProcessSubType) {
     // G4HadronicProcessType
     case fHadronElastic:   return "HadronElastic"; break;
-    // Not yet in 10.0.px
-    // case fNeutronGeneral:  return "NeutronGeneral"; break;
+    case fNeutronGeneral:  return "NeutronGeneral"; break;
     case fHadronInelastic: return "HadronInelastic"; break;
     case fCapture:         return "Capture"; break;
     case fMuAtomicCapture: return "MuAtomicCapture"; break;
@@ -57,6 +56,7 @@ G4String GetProcessTypeName(G4int hadronicProcessSubType)
     case fHadronAtRest:    return "HadronAtRest"; break;
     case fLeptonAtRest:    return "LeptonAtRest"; break;
     case fChargeExchange:  return "ChargeExchange"; break;
+    // Not yet in 11.1.px
     // case fNuOscillation:   return "NuOscillation"; break;
     // case fNuElectron:      return "NuElectron"; break;
     // case fNuNucleus:       return "NuNucleus"; break;
@@ -85,8 +85,7 @@ G4int GetProcessSubType(
 
   // G4HadronicProcessType
   if (processTypeName == "HadronElastic")    return fHadronElastic;
-  // Not yet in 10.0.px
-  // if (processTypeName == "NeutronGeneral")   return fNeutronGeneral;
+  if (processTypeName == "NeutronGeneral")   return fNeutronGeneral;
   if (processTypeName == "HadronInelastic")  return fHadronInelastic;
   if (processTypeName == "Capture")          return fCapture;
   if (processTypeName == "MuAtomicCapture")  return fMuAtomicCapture;
@@ -94,6 +93,7 @@ G4int GetProcessSubType(
   if (processTypeName == "HadronAtRest")     return fHadronAtRest;
   if (processTypeName == "LeptonAtRest")     return fLeptonAtRest;
   if (processTypeName == "ChargeExchange")   return fChargeExchange;
+  // Not yet in 11.1.px
   // if (processTypeName == "NuOscillation")    return fNuOscillation;
   // if (processTypeName == "NuElectron")       return fNuElectron;
   // if (processTypeName == "NuNucleus")        return fNuNucleus;
