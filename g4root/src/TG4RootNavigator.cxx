@@ -512,7 +512,7 @@ G4double TG4RootNavigator::ComputeSafety(
 }
 
 //______________________________________________________________________________
-G4TouchableHistoryHandle TG4RootNavigator::CreateTouchableHistoryHandle() const
+G4TouchableHandle TG4RootNavigator::CreateTouchableHistoryHandle() const
 {
   /// Returns a reference counted handle to a touchable history.
   return G4Navigator::CreateTouchableHistoryHandle();

@@ -56,10 +56,9 @@ G4String GetProcessTypeName(G4int hadronicProcessSubType)
     case fHadronAtRest:    return "HadronAtRest"; break;
     case fLeptonAtRest:    return "LeptonAtRest"; break;
     case fChargeExchange:  return "ChargeExchange"; break;
-    // Not yet in 11.1.px
-    // case fNuOscillation:   return "NuOscillation"; break;
-    // case fNuElectron:      return "NuElectron"; break;
-    // case fNuNucleus:       return "NuNucleus"; break;
+    case fNuOscillation:   return "NuOscillation"; break;
+    case fNuElectron:      return "NuElectron"; break;
+    case fNuNucleus:       return "NuNucleus"; break;
     case fRadioactiveDecay:return "RadioactiveDecay"; break;
     case fEMDissociation:  return "EMDissociation"; break;
     //  TG4HadronicProcessType
@@ -93,10 +92,9 @@ G4int GetProcessSubType(
   if (processTypeName == "HadronAtRest")     return fHadronAtRest;
   if (processTypeName == "LeptonAtRest")     return fLeptonAtRest;
   if (processTypeName == "ChargeExchange")   return fChargeExchange;
-  // Not yet in 11.1.px
-  // if (processTypeName == "NuOscillation")    return fNuOscillation;
-  // if (processTypeName == "NuElectron")       return fNuElectron;
-  // if (processTypeName == "NuNucleus")        return fNuNucleus;
+  if (processTypeName == "NuOscillation")    return fNuOscillation;
+  if (processTypeName == "NuElectron")       return fNuElectron;
+  if (processTypeName == "NuNucleus")        return fNuNucleus;
   if (processTypeName == "RadioactiveDecay") return fRadioactiveDecay;
   if (processTypeName == "EMDissociation")   return fEMDissociation;
 
