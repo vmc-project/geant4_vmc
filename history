@@ -9,6 +9,42 @@
 
 Tags (history):
 ===============
+  08/12/2023
+  v6-4:
+    Geant4 VMC:
+    - Allow to invoke random seed propagations to Geant4 (#45)
+      (Thanks to S. Wenzel, CERN)
+    - Updated TG4BiasingOperations for changes in Geant4 11.1 (#48)
+    - Improvements for (cached) magnetic fields and clean-up (#49) (#50)
+      - Replacing divisions by multiplications in functions that are called often
+        from the G4 engine, particular true for TG4CachedMagneticField
+        - Added InverseLength in TG4G3Units
+      - Fix the dispatch to PrintStatistics from TG4GeometryManager
+      - Remove virtual keyword when not necessary
+      (Thanks to S. Wenzel, CERN)
+    - Added inverse units in TG4G3Units (#51)
+      and apply inverse units systematically for all units defined
+      in TG4G3Units
+    - Removed virtual declarations of destructors where not needed (#52)
+    - Implemented setting a cross section scale factor for hadronic processes
+      (#53)(#54)
+      - New UI command:
+        /mcPhysics/setCrossSectionFactor particleName processDef factor [isProcessName]
+        - Process can be defined by its Geant4 name (default) or its Geant4 sub type
+          name.
+
+    Fixes:
+    Geant4 VMC:
+    - Fixes in VMC cuts to ranges conversion: (#44)
+      - Do not skip materials which regions have been defined before processing VMC cuts
+        (what happens in the ALICE simulation where special EM models are defined for
+        selected tracking media)
+      - Clear temporary data sets
+
+    Tested with VMC 2.0, Geant4 11.1.p3 (with embedded CLHEP 2.4.6.2)
+      Root 6.30/02, VGM 5.2, Garfield 4.0
+
+
   13/03/2023
   v6-3:
     Geant4 VMC:
