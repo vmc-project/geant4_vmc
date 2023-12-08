@@ -1,8 +1,8 @@
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.28/00                        https://root.cern |
-  | (c) 1995-2022, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Mar 10 2023, 16:29:00                   |
-  | From tags/v6-28-00@v6-28-00                                      |
+  | Welcome to ROOT 6.30/00                        https://root.cern |
+  | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | From tags/v6-30-00@                                              |
   | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
@@ -27,7 +27,7 @@ Processing test_E03_1.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.3 ( 13 March 2023 )
+ Version 6.4 ( 8 December 2023 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -53,7 +53,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-11-01-patch-01    (10-February-2023)
+ Geant4 version Name: geant4-11-01-patch-03    (10-November-2023)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -288,13 +288,13 @@ hIoni:  for proton  XStype:3  SubType=2
 
 hBrems:  for proton  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -347,13 +347,13 @@ hIoni:  for anti_proton  XStype:3  SubType=2
 
 hBrems:  for anti_proton  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -379,13 +379,13 @@ hIoni:  for kaon+  XStype:3  SubType=2
 
 hBrems:  for kaon+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -411,13 +411,13 @@ hIoni:  for kaon-  XStype:3  SubType=2
 
 hBrems:  for kaon-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -443,13 +443,13 @@ muIoni:  for mu+  XStype:3  SubType=2
 
 muBrems:  for mu+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
               MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -475,13 +475,13 @@ muIoni:  for mu-  XStype:3  SubType=2
 
 muBrems:  for mu-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
               MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -507,13 +507,13 @@ hIoni:  for pi+  XStype:3  SubType=2
 
 hBrems:  for pi+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -539,13 +539,13 @@ hIoni:  for pi-  XStype:3  SubType=2
 
 hBrems:  for pi-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -1006,13 +1006,13 @@ Index : 2     used in the geometry : Yes
 ---> Begin of event: 5
    Absorber: total energy (MeV):  949.33       total track length (cm):  67.8385
    Gap:      total energy (MeV): 19.7957       total track length (cm):  9.30246
-Time of this run:   User=0.080000s Real=0.075566s Sys=0.000000s
+Time of this run:   User=0.080000s Real=0.078022s Sys=0.000000s
 Number of events processed: 5
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.28/00                        https://root.cern |
-  | (c) 1995-2022, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Mar 10 2023, 16:29:00                   |
-  | From tags/v6-28-00@v6-28-00                                      |
+  | Welcome to ROOT 6.30/00                        https://root.cern |
+  | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | From tags/v6-30-00@                                              |
   | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
@@ -1038,7 +1038,7 @@ Processing test_E03_2.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.3 ( 13 March 2023 )
+ Version 6.4 ( 8 December 2023 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -1065,7 +1065,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-11-01-patch-01    (10-February-2023)
+ Geant4 version Name: geant4-11-01-patch-03    (10-November-2023)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -1305,13 +1305,13 @@ hIoni:  for proton  XStype:3  SubType=2
 
 hBrems:  for proton  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -1364,13 +1364,13 @@ hIoni:  for anti_proton  XStype:3  SubType=2
 
 hBrems:  for anti_proton  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -1396,13 +1396,13 @@ hIoni:  for kaon+  XStype:3  SubType=2
 
 hBrems:  for kaon+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -1428,13 +1428,13 @@ hIoni:  for kaon-  XStype:3  SubType=2
 
 hBrems:  for kaon-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -1460,13 +1460,13 @@ muIoni:  for mu+  XStype:3  SubType=2
 
 muBrems:  for mu+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
               MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -1492,13 +1492,13 @@ muIoni:  for mu-  XStype:3  SubType=2
 
 muBrems:  for mu-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
               MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -1524,13 +1524,13 @@ hIoni:  for pi+  XStype:3  SubType=2
 
 hBrems:  for pi+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -1556,13 +1556,13 @@ hIoni:  for pi-  XStype:3  SubType=2
 
 hBrems:  for pi-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -2587,14 +2587,14 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Absorber: total energy (MeV):  49.589       total track length (cm):    3.364
    Gap:      total energy (MeV):   0.411       total track length (cm):    0.097
 --- Finish event 
-Time of this run:   User=0.010000s Real=0.003743s Sys=0.010000s
+Time of this run:   User=0.010000s Real=0.003778s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.28/00                        https://root.cern |
-  | (c) 1995-2022, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Mar 10 2023, 16:29:00                   |
-  | From tags/v6-28-00@v6-28-00                                      |
+  | Welcome to ROOT 6.30/00                        https://root.cern |
+  | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | From tags/v6-30-00@                                              |
   | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
@@ -2620,7 +2620,7 @@ Processing test_E03_3.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.3 ( 13 March 2023 )
+ Version 6.4 ( 8 December 2023 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -2647,7 +2647,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-11-01-patch-01    (10-February-2023)
+ Geant4 version Name: geant4-11-01-patch-03    (10-November-2023)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -2887,13 +2887,13 @@ hIoni:  for proton  XStype:3  SubType=2
 
 hBrems:  for proton  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -2946,13 +2946,13 @@ hIoni:  for anti_proton  XStype:3  SubType=2
 
 hBrems:  for anti_proton  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -2978,13 +2978,13 @@ hIoni:  for kaon+  XStype:3  SubType=2
 
 hBrems:  for kaon+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -3010,13 +3010,13 @@ hIoni:  for kaon-  XStype:3  SubType=2
 
 hBrems:  for kaon-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -3042,13 +3042,13 @@ muIoni:  for mu+  XStype:3  SubType=2
 
 muBrems:  for mu+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
               MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -3074,13 +3074,13 @@ muIoni:  for mu-  XStype:3  SubType=2
 
 muBrems:  for mu-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
               MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -3106,13 +3106,13 @@ hIoni:  for pi+  XStype:3  SubType=2
 
 hBrems:  for pi+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -3138,13 +3138,13 @@ hIoni:  for pi-  XStype:3  SubType=2
 
 hBrems:  for pi-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -3634,14 +3634,14 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.144
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish event 
-Time of this run:   User=0.000000s Real=0.000794s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.001465s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.28/00                        https://root.cern |
-  | (c) 1995-2022, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Mar 10 2023, 16:29:00                   |
-  | From tags/v6-28-00@v6-28-00                                      |
+  | Welcome to ROOT 6.30/00                        https://root.cern |
+  | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | From tags/v6-30-00@                                              |
   | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
@@ -3666,7 +3666,7 @@ Processing test_E03_4.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.3 ( 13 March 2023 )
+ Version 6.4 ( 8 December 2023 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -3692,7 +3692,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-11-01-patch-01    (10-February-2023)
+ Geant4 version Name: geant4-11-01-patch-03    (10-November-2023)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -3927,13 +3927,13 @@ hIoni:  for proton  XStype:3  SubType=2
 
 hBrems:  for proton  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -3986,13 +3986,13 @@ hIoni:  for anti_proton  XStype:3  SubType=2
 
 hBrems:  for anti_proton  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -4018,13 +4018,13 @@ hIoni:  for kaon+  XStype:3  SubType=2
 
 hBrems:  for kaon+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -4050,13 +4050,13 @@ hIoni:  for kaon-  XStype:3  SubType=2
 
 hBrems:  for kaon-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -4082,13 +4082,13 @@ muIoni:  for mu+  XStype:3  SubType=2
 
 muBrems:  for mu+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
               MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -4114,13 +4114,13 @@ muIoni:  for mu-  XStype:3  SubType=2
 
 muBrems:  for mu-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
               MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -4146,13 +4146,13 @@ hIoni:  for pi+  XStype:3  SubType=2
 
 hBrems:  for pi+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -4178,13 +4178,13 @@ hIoni:  for pi-  XStype:3  SubType=2
 
 hBrems:  for pi-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -4649,13 +4649,13 @@ Index : 2     used in the geometry : Yes
 
    Absorber: total energy (MeV): 1834.57       total track length (cm):  132.206
    Gap:      total energy (MeV): 115.361       total track length (cm):  59.3602
-Time of this run:   User=0.040000s Real=0.034560s Sys=0.000000s
+Time of this run:   User=0.030000s Real=0.034024s Sys=0.000000s
 Number of events processed: 1
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.28/00                        https://root.cern |
-  | (c) 1995-2022, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Mar 10 2023, 16:29:00                   |
-  | From tags/v6-28-00@v6-28-00                                      |
+  | Welcome to ROOT 6.30/00                        https://root.cern |
+  | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | From tags/v6-30-00@                                              |
   | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
@@ -4681,7 +4681,7 @@ Processing test_E03_5.C("g4tgeoConfig4.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.3 ( 13 March 2023 )
+ Version 6.4 ( 8 December 2023 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -4708,7 +4708,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-11-01-patch-01    (10-February-2023)
+ Geant4 version Name: geant4-11-01-patch-03    (10-November-2023)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -4949,13 +4949,13 @@ hIoni:  for proton  XStype:3  SubType=2
 
 hBrems:  for proton  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -5008,13 +5008,13 @@ hIoni:  for anti_proton  XStype:3  SubType=2
 
 hBrems:  for anti_proton  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -5040,13 +5040,13 @@ hIoni:  for kaon+  XStype:3  SubType=2
 
 hBrems:  for kaon+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -5072,13 +5072,13 @@ hIoni:  for kaon-  XStype:3  SubType=2
 
 hBrems:  for kaon-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -5104,13 +5104,13 @@ muIoni:  for mu+  XStype:3  SubType=2
 
 muBrems:  for mu+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
               MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -5136,13 +5136,13 @@ muIoni:  for mu-  XStype:3  SubType=2
 
 muBrems:  for mu-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
               MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -5168,13 +5168,13 @@ hIoni:  for pi+  XStype:3  SubType=2
 
 hBrems:  for pi+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -5200,13 +5200,13 @@ hIoni:  for pi-  XStype:3  SubType=2
 
 hBrems:  for pi-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -6330,14 +6330,14 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Absorber: total energy (MeV):  49.084       total track length (cm):    2.581
    Gap:      total energy (MeV):   0.652       total track length (cm):    0.176
 --- Finish event 
-Time of this run:   User=0.010000s Real=0.004305s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.004364s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.28/00                        https://root.cern |
-  | (c) 1995-2022, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Mar 10 2023, 16:29:00                   |
-  | From tags/v6-28-00@v6-28-00                                      |
+  | Welcome to ROOT 6.30/00                        https://root.cern |
+  | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | From tags/v6-30-00@                                              |
   | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
@@ -6362,7 +6362,7 @@ Processing test_E03_6.C("g4tgeoConfig5.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.3 ( 13 March 2023 )
+ Version 6.4 ( 8 December 2023 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -6388,7 +6388,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-11-01-patch-01    (10-February-2023)
+ Geant4 version Name: geant4-11-01-patch-03    (10-November-2023)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -6624,13 +6624,13 @@ hIoni:  for proton  XStype:3  SubType=2
 
 hBrems:  for proton  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -6683,13 +6683,13 @@ hIoni:  for anti_proton  XStype:3  SubType=2
 
 hBrems:  for anti_proton  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -6715,13 +6715,13 @@ hIoni:  for kaon+  XStype:3  SubType=2
 
 hBrems:  for kaon+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -6747,13 +6747,13 @@ hIoni:  for kaon-  XStype:3  SubType=2
 
 hBrems:  for kaon-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -6779,13 +6779,13 @@ muIoni:  for mu+  XStype:3  SubType=2
 
 muBrems:  for mu+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
               MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -6811,13 +6811,13 @@ muIoni:  for mu-  XStype:3  SubType=2
 
 muBrems:  for mu-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
               MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -6843,13 +6843,13 @@ hIoni:  for pi+  XStype:3  SubType=2
 
 hBrems:  for pi+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -6875,13 +6875,13 @@ hIoni:  for pi-  XStype:3  SubType=2
 
 hBrems:  for pi-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -7324,15 +7324,15 @@ Index : 2     used in the geometry : Yes
 ### Run 0 start.
 
 ---> Begin of event: 1
-   Absorber: total energy (MeV): 663.262       total track length (cm):  38.5847
-   Gap:      total energy (MeV):  57.118       total track length (cm):  22.1688
-Time of this run:   User=0.000000s Real=0.005449s Sys=0.000000s
+   Absorber: total energy (MeV): 617.482       total track length (cm):  35.1312
+   Gap:      total energy (MeV):  48.508       total track length (cm):   18.354
+Time of this run:   User=0.000000s Real=0.004580s Sys=0.000000s
 Number of events processed: 1
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.28/00                        https://root.cern |
-  | (c) 1995-2022, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Mar 10 2023, 16:29:00                   |
-  | From tags/v6-28-00@v6-28-00                                      |
+  | Welcome to ROOT 6.30/00                        https://root.cern |
+  | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | From tags/v6-30-00@                                              |
   | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
@@ -7357,7 +7357,7 @@ Processing test_E03_7.C("g4tgeoConfig6.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.3 ( 13 March 2023 )
+ Version 6.4 ( 8 December 2023 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -7383,7 +7383,7 @@ Info in <TObject::SetNavigator>: TG4RootNavigator created and registered to G4Tr
 isMaster=1
 
 **************************************************************
- Geant4 version Name: geant4-11-01-patch-01    (10-February-2023)
+ Geant4 version Name: geant4-11-01-patch-03    (10-November-2023)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -7429,12 +7429,6 @@ TG4RootDetectorConstruction::ConstructSDandField
 TG4PostDetConstruction::InitializeSDandField
 TG4BiasingManager::CreateBiasingOperator
 TG4ModelConfigurationManager::SetRegionsNames: 'Lead' 
-
-================================================================================
-                                 INCL++ WARNING                                 
-INCL++/G4ExcitationHandler could not use its own level-density parameter for fission
-================================================================================
-
 
 ================================================================================
                                  INCL++ WARNING                                 
@@ -7652,13 +7646,13 @@ hIoni:  for proton  XStype:3  SubType=2
 
 hBrems:  for proton  XStype:3  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for proton  XStype:3  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -7711,13 +7705,13 @@ hIoni:  for anti_proton  XStype:3  SubType=2
 
 hBrems:  for anti_proton  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for anti_proton  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 17x1001; from 7.50618 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -7743,13 +7737,13 @@ hIoni:  for kaon+  XStype:3  SubType=2
 
 hBrems:  for kaon+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -7775,13 +7769,13 @@ hIoni:  for kaon-  XStype:3  SubType=2
 
 hBrems:  for kaon-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for kaon-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 18x1001; from 3.94942 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -7807,13 +7801,13 @@ muIoni:  for mu+  XStype:3  SubType=2
 
 muBrems:  for mu+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
               MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -7839,13 +7833,13 @@ muIoni:  for mu-  XStype:3  SubType=2
 
 muBrems:  for mu-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
               MuBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 muPairProd:  for mu-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 21x1001; from 0.85 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
           muPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -7871,13 +7865,13 @@ hIoni:  for pi+  XStype:3  SubType=2
 
 hBrems:  for pi+  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi+  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -7903,13 +7897,13 @@ hIoni:  for pi-  XStype:3  SubType=2
 
 hBrems:  for pi-  XStype:1  SubType=3
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
                hBrem : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
 
 hPairProd:  for pi-  XStype:1  SubType=4
       dE/dx and range tables from 100 eV  to 100 TeV in 84 bins
-      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 0
+      Lambda tables from threshold to 100 TeV, 7 bins/decade, spline: 1
       Sampling table 20x1001; from 1.11656 GeV to 100 TeV 
       ===== EM models for the G4Region  DefaultRegionForTheWorld ======
            hPairProd : Emin=    0 eV  Emax=  100 TeV  ModifiedMephi
@@ -8300,29 +8294,6 @@ CoulombScat:  for pi- XStype:1 SubType=1 BuildTable=1
 
 
 ================================================================
-=======================================================================
-======       Pre-compound/De-excitation Physics Parameters     ========
-=======================================================================
-Type of pre-compound inverse x-section              3
-Pre-compound model active                           1
-Pre-compound excitation low energy                  100 keV
-Pre-compound excitation high energy                 30 MeV
-Type of de-excitation inverse x-section             3
-Type of de-excitation factory                       Evaporation+GEM
-Number of de-excitation channels                    68
-Min excitation energy                               10 eV 
-Min energy per nucleon for multifragmentation       200 GeV
-Limit excitation energy for Fermi BreakUp           20 MeV
-Level density (1/MeV)                               0.075
-Use simple level density model                      1
-Use discrete excitation energy of the residual      1
-Time limit for long lived isomeres                  1 ns 
-Isomer production flag                              1
-Internal e- conversion flag                         1
-Store e- internal conversion data                   0
-Correlated gamma emission flag                      0
-Max 2J for sampling of angular correlations         10
-=======================================================================
 =======================================================================
 ======       Pre-compound/De-excitation Physics Parameters     ========
 =======================================================================
@@ -8608,52 +8579,140 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
     3    -25.1      -21    -32.1         0        0     14.9      38.3        ABSO biasWrapper(neutronInelastic)
 
 *********************************************************************************************************
+* G4Track Information:   Particle = Pb206,   Track ID = 42,   Parent ID = 19
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -25.1      -21    -32.1    0.0141        0        0         0        ABSO initStep
+    1    -25.1      -21    -32.1         0   0.0141 6.12e-05  6.12e-05        ABSO ionIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = gamma,   Track ID = 41,   Parent ID = 19
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -25.1      -21    -32.1     0.149        0        0         0        ABSO initStep
+    1    -25.5    -20.8    -32.2         0    0.088     0.51      0.51        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 43,   Parent ID = 41
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -25.5    -20.8    -32.2    0.0607        0        0         0        ABSO initStep
+    1    -25.5    -20.8    -32.2         0   0.0607   0.0122    0.0122        ABSO eIoni
+
+*********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 40,   Parent ID = 19
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -25.1      -21    -32.1     0.801        0        0         0        ABSO initStep
-    1      -30    -24.2    -27.8     0.801        0     7.25      7.25        GAPX Transportation
-    2      -35    -27.4    -23.4     0.801        0     7.38      14.6        ABSO Transportation
-    3      -45    -33.9    -14.7     0.801        0     14.8      29.4        GAPX Transportation
-    4      -50    -37.1    -10.3     0.801        0     7.38      36.8        ABSO Transportation
-    5    -52.3    -38.6    -8.32     0.247        0     3.34      40.1        ABSO compt
-    6    -51.6    -38.5    -8.07         0    0.088    0.701      40.8        ABSO phot
+    0    -25.1      -21    -32.1     0.346        0        0         0        ABSO initStep
+    1    -26.6    -22.5    -33.9     0.297        0     2.75      2.75        ABSO compt
+    2    -27.7    -22.2    -35.9     0.218        0     2.29      5.05        ABSO compt
+    3    -27.8    -21.8    -35.9         0  0.00386    0.414      5.46        ABSO phot
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 42,   Parent ID = 40
+* G4Track Information:   Particle = e-,   Track ID = 46,   Parent ID = 40
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -51.6    -38.5    -8.07     0.159        0        0         0        ABSO initStep
-    1    -51.6    -38.5    -8.07         0    0.159   0.0571    0.0571        ABSO eIoni
+    0    -27.8    -21.8    -35.9     0.214        0        0         0        ABSO initStep
+    1    -27.8    -21.8    -35.9    0.0981  0.00576  0.00547   0.00547        ABSO eBrem
+    2    -27.8    -21.8    -35.9         0   0.0981   0.0266    0.0321        ABSO eIoni
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 41,   Parent ID = 40
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -52.3    -38.6    -8.32     0.554        0        0         0        ABSO initStep
-    1    -52.3    -38.6    -8.31         0    0.554    0.349     0.349        ABSO eIoni
-
-*********************************************************************************************************
-* G4Track Information:   Particle = Pb206,   Track ID = 39,   Parent ID = 19
+* G4Track Information:   Particle = gamma,   Track ID = 47,   Parent ID = 46
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -25.1      -21    -32.1   0.00501        0        0         0        ABSO initStep
-    1    -25.1      -21    -32.1         0  0.00501 3.65e-05  3.65e-05        ABSO ionIoni
+    0    -27.8    -21.8    -35.9     0.111        0        0         0        ABSO initStep
+    1    -27.8    -21.7    -35.9         0    0.088   0.0511    0.0511        ABSO phot
 
 *********************************************************************************************************
-* G4Track Information:   Particle = neutron,   Track ID = 38,   Parent ID = 19
+* G4Track Information:   Particle = e-,   Track ID = 48,   Parent ID = 47
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -25.1      -21    -32.1      1.21        0        0         0        ABSO initStep
-    1      -30    -17.7    -38.5      1.21        0     8.75      8.75        GAPX Transportation
-    2      -35    -14.2      -45      1.21        0     8.92      17.7        ABSO Transportation
-    3    -38.8    -11.6      -50      1.21        0     6.77      24.4        WRLD Transportation
-    4    -46.5    -6.33      -60      1.21        0     13.7      38.1  OutOfWorld Transportation
+    0    -27.8    -21.7    -35.9    0.0225        0        0         0        ABSO initStep
+    1    -27.8    -21.7    -35.9         0   0.0225  0.00245   0.00245        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 45,   Parent ID = 40
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -27.7    -22.2    -35.9    0.0784        0        0         0        ABSO initStep
+    1    -27.7    -22.2    -35.9         0   0.0784   0.0185    0.0185        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 44,   Parent ID = 40
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -26.6    -22.5    -33.9    0.0498        0        0         0        ABSO initStep
+    1    -26.6    -22.5    -33.9         0   0.0498  0.00885   0.00885        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = neutron,   Track ID = 39,   Parent ID = 19
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -25.1      -21    -32.1     0.384        0        0         0        ABSO initStep
+    1      -20    -25.6    -29.9     0.384        0     7.18      7.18        GAPX Transportation
+    2      -15    -30.1    -27.8     0.384        0     7.05      14.2        ABSO Transportation
+    3    -6.77    -37.5    -24.3     0.376  0.00739     11.6      25.8        ABSO biasWrapper(hadElastic)
+    4      -15    -28.7    -27.6     0.376        0     12.5      38.4        GAPX Transportation
+    5      -20    -23.3    -29.6     0.376        0     7.63        46        ABSO Transportation
+    6      -30    -12.5    -33.7     0.376        0     15.3      61.3        GAPX Transportation
+    7      -35    -7.09    -35.7     0.376        0     7.63      68.9        ABSO Transportation
+    8      -45      3.7    -39.7     0.376        0     15.3      84.1        GAPX Transportation
+    9      -50      9.1    -41.7     0.376        0     7.63      91.8        ABSO Transportation
+   10      -60     19.9    -45.7     0.376        0     15.3       107        GAPX Transportation
+   11      -65     25.3    -47.7     0.376        0     7.63       115        ABSO Transportation
+   12    -69.4       30    -49.5      0.37  0.00624     6.74       121        ABSO biasWrapper(hadElastic)
+   13      -65     29.8    -46.5      0.37        0     5.33       127        GAPX Transportation
+   14      -60     29.5    -43.2      0.37        0     6.04       133        ABSO Transportation
+   15    -58.5     29.4    -42.2     0.367  0.00265     1.76       135        ABSO biasWrapper(hadElastic)
+   16    -56.5     19.5    -41.2     0.363  0.00433     10.2       145        ABSO biasWrapper(hadElastic)
+   17      -60     19.7    -39.8     0.363        0     3.78       149        GAPX Transportation
+   18      -65       20    -37.9     0.363        0     5.37       154        ABSO Transportation
+   19    -73.2     20.6    -34.7     0.357   0.0059      8.8       163        ABSO biasWrapper(hadElastic)
+   20      -65       23    -31.2     0.357        0     9.23       172        GAPX Transportation
+   21      -60     24.5      -29     0.357        0     5.64       178        ABSO Transportation
+   22      -50     27.5    -24.8     0.357        0     11.3       189        GAPX Transportation
+   23      -45       29    -22.6     0.357        0     5.64       194        ABSO Transportation
+   24      -35     31.9    -18.3     0.357        0     11.3       206        GAPX Transportation
+   25      -30     33.4    -16.2     0.357        0     5.64       211        ABSO Transportation
+   26      -21     36.1    -12.3     0.352  0.00564     10.1       222        ABSO biasWrapper(hadElastic)
+   27    -24.7     29.9    -27.1     0.348  0.00332     16.4       238        ABSO biasWrapper(hadElastic)
+   28      -30     25.4    -24.1     0.348        0     7.52       245        GAPX Transportation
+   29      -35     21.3    -21.3     0.348        0     7.09       253        ABSO Transportation
+   30      -45     12.9    -15.7     0.348        0     14.2       267        GAPX Transportation
+   31      -50     8.71    -12.9     0.348        0     7.09       274        ABSO Transportation
+   32      -60    0.346    -7.37     0.348        0     14.2       288        GAPX Transportation
+   33    -61.1    -0.61    -6.73     0.319   0.0292     1.62       290        GAPX biasWrapper(hadElastic)
+   34      -60 -0.00875    -6.31     0.319        0     1.36       291        ABSO Transportation
+   35    -53.3     3.52    -3.89     0.316  0.00348     7.96       299        ABSO biasWrapper(hadElastic)
+   36    -52.8     4.47    -8.43      0.31    0.006     4.67       304        ABSO biasWrapper(hadElastic)
+   37    -53.3    -25.2       50      0.31        0     65.5       369        WRLD Transportation
+   38    -53.4    -30.3       60      0.31        0     11.2       380  OutOfWorld Transportation
+
+*********************************************************************************************************
+* G4Track Information:   Particle = gamma,   Track ID = 38,   Parent ID = 19
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -25.1      -21    -32.1      1.09        0        0         0        ABSO initStep
+    1    -24.3     5.41    -41.1         0    0.088     27.9      27.9        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 49,   Parent ID = 38
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -24.3     5.41    -41.1         1        0        0         0        ABSO initStep
+    1    -24.3     5.46    -41.1         0        1    0.731     0.731        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 18,   Parent ID = 1
@@ -8661,25 +8720,16 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54      2.22        0        0         0        ABSO initStep
-    1    -14.1    -6.74     3.33     0.245        0     3.14      3.14        ABSO compt
-    2    -13.5    -8.64     1.24         0    0.088     2.88      6.02        ABSO phot
-
-*********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 44,   Parent ID = 18
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -13.5    -8.64     1.24     0.157        0        0         0        ABSO initStep
-    1    -13.5    -8.64     1.24         0    0.157   0.0562    0.0562        ABSO eIoni
-
-*********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 43,   Parent ID = 18
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -14.1    -6.74     3.33      1.97        0        0         0        ABSO initStep
-    1    -14.2    -6.66     3.42      0.65     1.32      1.4       1.4        ABSO eIoni
-    2    -14.2    -6.65      3.4         0     0.65    0.429      1.83        ABSO eIoni
+    1      -15     -6.1     4.11      2.22        0      4.5       4.5        GAPX Transportation
+    2      -20    -2.66     8.32      2.22        0     7.39      11.9        ABSO Transportation
+    3      -30     4.23     16.7      2.22        0     14.8      26.7        GAPX Transportation
+    4      -35     7.67       21      2.22        0     7.39      34.1        ABSO Transportation
+    5      -45     14.6     29.4      2.22        0     14.8      48.8        GAPX Transportation
+    6      -50       18     33.6      2.22        0     7.39      56.2        ABSO Transportation
+    7      -60     24.9       42      2.22        0     14.8        71        GAPX Transportation
+    8      -65     28.3     46.3      2.22        0     7.39      78.4        ABSO Transportation
+    9    -69.4     31.4       50      2.22        0     6.57        85        WRLD Transportation
+   10    -81.3     39.6       60      2.22        0     17.5       103  OutOfWorld Transportation
 
 *********************************************************************************************************
 * G4Track Information:   Particle = neutron,   Track ID = 17,   Parent ID = 1
@@ -8687,16 +8737,120 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54      3.43        0        0         0        ABSO initStep
-    1      -15    -9.86   -0.869      3.43        0     4.22      4.22        GAPX Transportation
-    2      -20    -12.6    -4.82      3.43        0     6.93      11.1        ABSO Transportation
-    3      -30      -18    -12.7      3.43        0     13.9        25        GAPX Transportation
-    4    -33.7      -20    -15.6      3.36   0.0695     5.07      30.1        GAPX biasWrapper(hadElastic)
-    5      -35    -21.4      -15      3.36        0        2      32.1        ABSO Transportation
-    6      -45    -31.6    -10.9      3.36        0     14.9        47        GAPX Transportation
-    7      -50    -36.7     -8.8      3.36        0     7.44      54.4        ABSO Transportation
-    8      -60    -46.9    -4.64      3.36        0     14.9      69.3        GAPX Transportation
-    9      -63      -50    -3.39      3.36        0      4.5      73.8        WRLD Transportation
-   10    -72.8      -60    0.687      3.36        0     14.6      88.4  OutOfWorld Transportation
+    1    -13.3    -8.95    0.449      3.38   0.0445     1.91      1.91        ABSO biasWrapper(hadElastic)
+    2      -15    -9.53     6.99      3.38        0     6.77      8.68        GAPX Transportation
+    3      -17    -10.2     14.9      3.22        0     8.24      16.9        GAPX biasWrapper(hadElastic)
+    4      -15     12.5     18.6      3.22        0     23.1      40.1        ABSO Transportation
+    5    -12.9     35.7     22.3         0        0     23.5      63.6        ABSO biasWrapper(neutronInelastic)
+
+*********************************************************************************************************
+* G4Track Information:   Particle = Pb206,   Track ID = 56,   Parent ID = 17
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -12.9     35.7     22.3    0.0168        0        0         0        ABSO initStep
+    1    -12.9     35.7     22.3         0   0.0168  6.7e-05   6.7e-05        ABSO ionIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = gamma,   Track ID = 55,   Parent ID = 17
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -12.9     35.7     22.3      0.15        0        0         0        ABSO initStep
+    1    -13.1     35.7     22.4         0    0.088    0.142     0.142        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 57,   Parent ID = 55
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -13.1     35.7     22.4    0.0623        0        0         0        ABSO initStep
+    1    -13.1     35.7     22.4         0   0.0623   0.0128    0.0128        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = gamma,   Track ID = 54,   Parent ID = 17
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -12.9     35.7     22.3      0.22        0        0         0        ABSO initStep
+    1    -13.7     35.5       23         0    0.088     1.07      1.07        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 58,   Parent ID = 54
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -13.7     35.5       23     0.132        0        0         0        ABSO initStep
+    1    -13.7     35.5       23         0    0.132   0.0425    0.0425        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = neutron,   Track ID = 53,   Parent ID = 17
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -12.9     35.7     22.3     0.239        0        0         0        ABSO initStep
+    1      -15     35.5     23.9     0.239        0     2.61      2.61        GAPX Transportation
+    2      -20       35     27.7     0.239        0     6.32      8.93        ABSO Transportation
+    3      -30     34.1     35.4     0.239        0     12.6      21.6        GAPX Transportation
+    4      -35     33.6     39.3     0.239        0     6.32      27.9        ABSO Transportation
+    5    -44.8     32.7     46.8     0.235  0.00411     12.4      40.3        ABSO biasWrapper(hadElastic)
+    6      -35     45.7     34.9     0.235        0     20.2      60.6        GAPX Transportation
+    7    -31.8       50       31     0.235        0     6.59      67.2        WRLD Transportation
+    8    -24.3       60     21.9     0.235        0     15.5      82.6  OutOfWorld Transportation
+
+*********************************************************************************************************
+* G4Track Information:   Particle = gamma,   Track ID = 52,   Parent ID = 17
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -12.9     35.7     22.3      1.05        0        0         0        ABSO initStep
+    1      -15     40.4     18.9      1.05        0     6.16      6.16        GAPX Transportation
+    2    -19.2       50     12.1      1.05        0     12.5      18.7        WRLD Transportation
+    3    -23.6       60     4.92      1.05        0       13      31.7  OutOfWorld Transportation
+
+*********************************************************************************************************
+* G4Track Information:   Particle = gamma,   Track ID = 51,   Parent ID = 17
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -12.9     35.7     22.3      1.54        0        0         0        ABSO initStep
+    1       -5     37.6     18.1      1.54        0     9.21      9.21        GAPX Transportation
+    2        0     38.8     15.4      1.54        0     5.81        15        ABSO Transportation
+    3     3.12     39.6     13.7     0.561        0     3.63      18.6        ABSO compt
+    4     3.69     39.8     14.2     0.436        0    0.775      19.4        ABSO compt
+    5     3.79     40.2     15.1         0    0.088     1.01      20.4        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 61,   Parent ID = 51
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0     3.79     40.2     15.1     0.348        0        0         0        ABSO initStep
+    1     3.79     40.2     15.1         0    0.348    0.184     0.184        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 60,   Parent ID = 51
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0     3.69     39.8     14.2     0.125        0        0         0        ABSO initStep
+    1      3.7     39.8     14.2         0    0.125   0.0391    0.0391        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 59,   Parent ID = 51
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0     3.12     39.6     13.7     0.977        0        0         0        ABSO initStep
+    1     3.16     39.6     13.6         0    0.977     0.71      0.71        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = Ar40,   Track ID = 50,   Parent ID = 17
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0      -17    -10.2     14.9     0.159        0        0         0        GAPX initStep
+    1      -17    -10.2     14.9         0    0.159 0.000869  0.000869        GAPX ionIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = neutron,   Track ID = 16,   Parent ID = 1
@@ -8704,15 +8858,94 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54      3.62        0        0         0        ABSO initStep
-    1    -13.4    -6.44      3.8      3.59   0.0252     3.19      3.19        ABSO biasWrapper(hadElastic)
-    2      -10    -6.02     7.58      3.58  0.00813     5.07      8.26        ABSO biasWrapper(hadElastic)
-    3       -5    -10.6       12      3.58        0     8.12      16.4        GAPX Transportation
-    4        0    -15.2     16.4      3.58        0     8.11      24.5        ABSO Transportation
-    5       10    -24.5     25.3      3.58        0     16.2      40.7        GAPX Transportation
-    6       15    -29.1     29.7      3.58        0     8.11      48.8        ABSO Transportation
-    7     22.5      -36     36.4      3.56   0.0227     12.2      61.1        ABSO biasWrapper(hadElastic)
-    8     17.1      -38       50      3.56        0     14.8      75.9        WRLD Transportation
-    9     13.1    -39.5       60      3.56        0     10.9      86.7  OutOfWorld Transportation
+    1      -15    -4.37     6.43      3.62        0     6.92      6.92        GAPX Transportation
+    2    -19.2     0.93     13.2      3.52   0.0941     9.58      16.5        GAPX biasWrapper(hadElastic)
+    3      -20    0.188     14.4      3.52        0     1.59      18.1        ABSO Transportation
+    4    -29.7    -9.03       29      3.51   0.0088     19.8      37.9        ABSO biasWrapper(hadElastic)
+    5    -29.1    -9.87     35.7      3.51  0.00718     6.86      44.7        ABSO biasWrapper(hadElastic)
+    6    -24.9    -13.4       41      3.44   0.0637      7.6      52.3        ABSO biasWrapper(hadElastic)
+    7      -30    -13.7     34.4      3.44        0     8.36      60.7        GAPX Transportation
+    8      -35    -14.1     27.8      3.44        0     8.23      68.9        ABSO Transportation
+    9      -45    -14.8     14.8      3.44        0     16.5      85.4        GAPX Transportation
+   10      -50    -15.1     8.25      3.44        0     8.23      93.6        ABSO Transportation
+   11    -58.8    -15.7    -3.26         0        0     14.5       108        ABSO biasWrapper(neutronInelastic)
+
+*********************************************************************************************************
+* G4Track Information:   Particle = Pb206,   Track ID = 66,   Parent ID = 16
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -58.8    -15.7    -3.26    0.0119        0        0         0        ABSO initStep
+    1    -58.8    -15.7    -3.26         0   0.0119 5.62e-05  5.62e-05        ABSO ionIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = gamma,   Track ID = 65,   Parent ID = 16
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -58.8    -15.7    -3.26     0.121        0        0         0        ABSO initStep
+    1      -59    -15.8     -3.2         0   0.0152    0.204     0.204        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 67,   Parent ID = 65
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0      -59    -15.8     -3.2     0.106        0        0         0        ABSO initStep
+    1      -59    -15.8     -3.2         0    0.106     0.03      0.03        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = gamma,   Track ID = 64,   Parent ID = 16
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -58.8    -15.7    -3.26     0.211        0        0         0        ABSO initStep
+    1    -59.1    -15.4    -3.22         0    0.088    0.436     0.436        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 68,   Parent ID = 64
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -59.1    -15.4    -3.22     0.122        0        0         0        ABSO initStep
+    1    -59.1    -15.4    -3.22         0    0.122   0.0379    0.0379        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = gamma,   Track ID = 63,   Parent ID = 16
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -58.8    -15.7    -3.26      1.54        0        0         0        ABSO initStep
+    1    -58.5      -16    -3.28     0.536        0    0.374     0.374        ABSO compt
+    2    -57.7    -16.1    -1.89         0   0.0159     1.64      2.01        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 70,   Parent ID = 63
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -57.7    -16.1    -1.89      0.52        0        0         0        ABSO initStep
+    1    -57.7    -16.1    -1.87         0     0.52    0.321     0.321        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 69,   Parent ID = 63
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -58.5      -16    -3.28         1        0        0         0        ABSO initStep
+    1    -58.5      -16     -3.3         0        1    0.732     0.732        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = neutron,   Track ID = 62,   Parent ID = 16
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -58.8    -15.7    -3.26      1.55        0        0         0        ABSO initStep
+    1    -58.4      -16     -4.7      1.52   0.0294     1.55      1.55        ABSO biasWrapper(hadElastic)
+    2      -60    -14.6    -1.61      1.52        0     3.78      5.33        GAPX Transportation
+    3      -65    -10.2     7.81      1.52        0     11.5      16.9        ABSO Transportation
+    4      -75    -1.53     26.7      1.52        0     23.1      39.9        WRLD Transportation
+    5      -90     11.5     54.9      1.52        0     34.6      74.5  OutOfWorld Transportation
 
 *********************************************************************************************************
 * G4Track Information:   Particle = neutron,   Track ID = 15,   Parent ID = 1
@@ -8722,65 +8955,12 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
     0      -12     -8.2     1.54      11.4        0        0         0        ABSO initStep
     1       -5    -3.57    -2.63      11.4        0     9.34      9.34        GAPX Transportation
     2        0   -0.234    -5.63      11.4        0     6.72      16.1        ABSO Transportation
-    3       10     6.43    -11.6      11.4        0     13.4      29.5        GAPX Transportation
-    4       15     9.77    -14.6      11.4        0     6.72      36.2        ABSO Transportation
-    5       25     16.4    -20.6      11.4        0     13.4      49.6        GAPX Transportation
-    6       30     19.8    -23.6      11.4        0     6.72      56.4        ABSO Transportation
-    7     30.4     20.1    -23.9         0        0    0.579      56.9        ABSO biasWrapper(neutronInelastic)
-
-*********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 48,   Parent ID = 15
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0     30.4     20.1    -23.9      1.33        0        0         0        ABSO initStep
-    1       30     19.7    -23.1      1.33        0    0.946     0.946        GAPX Transportation
-    2       25     15.4    -14.3      1.33        0       11      11.9        ABSO Transportation
-    3     19.5     10.8    -4.61         0    0.088     12.1        24        ABSO phot
-
-*********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 49,   Parent ID = 48
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0     19.5     10.8    -4.61      1.24        0        0         0        ABSO initStep
-    1     19.5     10.7    -4.57         0     1.24    0.935     0.935        ABSO eIoni
-
-*********************************************************************************************************
-* G4Track Information:   Particle = neutron,   Track ID = 47,   Parent ID = 15
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0     30.4     20.1    -23.9      0.58        0        0         0        ABSO initStep
-    1       40     14.6    -18.6      0.58        0     12.2      12.2        GAPX Transportation
-    2       45     11.8    -15.9      0.58        0     6.38      18.6        ABSO Transportation
-    3       55     6.07    -10.4      0.58        0     12.8      31.3        GAPX Transportation
-    4       60     3.22    -7.62      0.58        0     6.38      37.7        ABSO Transportation
-    5       70    -2.47    -2.12      0.58        0     12.8      50.5        GAPX Transportation
-    6       75    -5.32    0.626      0.58        0     6.38      56.8        WRLD Transportation
-    7       90    -13.9     8.88      0.58        0     19.1        76  OutOfWorld Transportation
-
-*********************************************************************************************************
-* G4Track Information:   Particle = neutron,   Track ID = 46,   Parent ID = 15
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0     30.4     20.1    -23.9     0.406        0        0         0        ABSO initStep
-    1       40     11.6    -16.7     0.406        0     14.6      14.6        GAPX Transportation
-    2       45     7.24      -13     0.406        0     7.63      22.2        ABSO Transportation
-    3       55    -1.55    -5.53     0.406        0     15.3      37.5        GAPX Transportation
-    4       60    -5.95    -1.79     0.406        0     7.63      45.2        ABSO Transportation
-    5       70    -14.7     5.68     0.406        0     15.3      60.4        GAPX Transportation
-    6       75    -19.1     9.42     0.406        0     7.63      68.1        WRLD Transportation
-    7       90    -32.3     20.6     0.406        0     22.9        91  OutOfWorld Transportation
-
-*********************************************************************************************************
-* G4Track Information:   Particle = Pb207[1633.356],   Track ID = 45,   Parent ID = 15
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0     30.4     20.1    -23.9    0.0623        0        0         0        ABSO initStep
-    1     30.4     20.1    -23.9         0   0.0623 0.000129  0.000129        ABSO ionIoni
+    3     2.34     1.33    -7.04      11.4   0.0123     3.14      19.2        ABSO biasWrapper(hadElastic)
+    4       10     8.05    -20.6      11.4        0       17      36.2        GAPX Transportation
+    5       15     12.4    -29.5      11.4        0     11.1      47.3        ABSO Transportation
+    6       25     21.2    -47.2      11.4        0     22.2      69.4        GAPX Transportation
+    7     26.6     22.6      -50      11.4        0     3.49      72.9        WRLD Transportation
+    8     32.2     27.5      -60      11.4        0     12.5      85.4  OutOfWorld Transportation
 
 *********************************************************************************************************
 * G4Track Information:   Particle = proton,   Track ID = 14,   Parent ID = 1
@@ -8788,14 +8968,13 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54        35        0        0         0        ABSO initStep
-    1      -12    -8.33     2.17      29.2     5.79    0.649     0.649        ABSO biasWrapper(hIoni)
-    2      -12    -8.43     2.68        24     5.27    0.519      1.17        ABSO biasWrapper(hIoni)
-    3      -12    -8.47     3.09        19     4.96    0.415      1.58        ABSO biasWrapper(hIoni)
-    4    -12.1    -8.51      3.4      14.2     4.83    0.329      1.91        ABSO biasWrapper(hIoni)
-    5    -12.2    -8.55     3.65       9.5     4.69    0.255      2.17        ABSO biasWrapper(hIoni)
-    6    -12.3    -8.56     3.82      4.82     4.68     0.19      2.36        ABSO biasWrapper(hIoni)
-    7    -12.3    -8.56      3.9     0.989     3.83   0.0901      2.45        ABSO biasWrapper(CoulombScat)
-    8    -12.3    -8.56     3.91         0    0.989   0.0102      2.46        ABSO biasWrapper(hIoni)
+    1      -12    -8.33     2.17      28.9     6.09    0.649     0.649        ABSO biasWrapper(hIoni)
+    2      -12    -8.44     2.67      23.8     5.11    0.512      1.16        ABSO biasWrapper(hIoni)
+    3    -12.1    -8.57     3.05      18.6     5.23    0.412      1.57        ABSO biasWrapper(hIoni)
+    4    -12.2    -8.69     3.35      14.1     4.48    0.322      1.89        ABSO biasWrapper(hIoni)
+    5    -12.2     -8.8     3.57      9.66     4.46    0.254      2.15        ABSO biasWrapper(hIoni)
+    6    -12.2    -8.89     3.73      4.96      4.7    0.192      2.34        ABSO biasWrapper(hIoni)
+    7    -12.2    -8.95     3.82         0     4.96    0.104      2.45        ABSO biasWrapper(hIoni)
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 13,   Parent ID = 1
@@ -8803,97 +8982,35 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54      5.67        0        0         0        ABSO initStep
-    1    -12.7    -8.18    0.953     0.671        0    0.934     0.934        ABSO compt
-    2      -15   -0.306   -0.188     0.671        0     8.29      9.22        GAPX Transportation
-    3      -20     16.7    -2.65     0.671        0     17.9      27.1        ABSO Transportation
-    4    -28.2     44.4    -6.66     0.671        0     29.2      56.3        ABSO Rayl
-    5      -30     47.6    -5.43     0.671        0     3.88      60.1        GAPX Transportation
-    6    -31.4       50    -4.49     0.671        0     2.95      63.1        WRLD Transportation
-    7    -37.2       60   -0.633     0.671        0     12.2      75.3  OutOfWorld Transportation
+    1      -15     -8.1   -0.912      5.67        0     3.91      3.91        GAPX Transportation
+    2      -20    -7.94    -4.93      5.67        0     6.42      10.3        ABSO Transportation
+    3      -30     -7.6      -13      5.67        0     12.8      23.2        GAPX Transportation
+    4      -35    -7.44      -17      5.67        0     6.42      29.6        ABSO Transportation
+    5    -37.4    -7.36    -18.9      2.25        0     3.06      32.6        ABSO compt
+    6      -45      -10      -21      2.25        0     8.34        41        GAPX Transportation
+    7      -50    -11.8    -22.4      2.25        0     5.48      46.5        ABSO Transportation
+    8      -60    -15.3    -25.2      2.25        0       11      57.4        GAPX Transportation
+    9      -65      -17    -26.6      2.25        0     5.48      62.9        ABSO Transportation
+   10    -73.4    -19.9    -28.9      1.73        0     9.16      72.1        ABSO compt
+   11      -75    -20.9    -28.8      1.73        0     1.89      73.9        WRLD Transportation
+   12      -90    -29.5    -27.8      1.73        0     17.4      91.3  OutOfWorld Transportation
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 50,   Parent ID = 13
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -12.7    -8.18    0.953         5        0        0         0        ABSO initStep
-    1    -13.1    -8.23    0.569      2.83     1.78     1.58      1.58        ABSO eBrem
-    2    -13.2    -8.22    0.589      1.03   0.0386   0.0396      1.62        ABSO eBrem
-    3    -13.2    -8.18    0.623     0.818    0.101    0.122      1.74        ABSO eBrem
-    4    -13.2    -8.14    0.598         0    0.818    0.572      2.32        ABSO eIoni
-
-*********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 53,   Parent ID = 50
+* G4Track Information:   Particle = e-,   Track ID = 72,   Parent ID = 13
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -13.2    -8.18    0.623     0.112        0        0         0        ABSO initStep
-    1    -13.4    -7.98    0.716         0    0.088    0.307     0.307        ABSO phot
+    0    -73.4    -19.9    -28.9     0.512        0        0         0        ABSO initStep
+    1    -73.4    -19.9      -29         0    0.512    0.314     0.314        ABSO eIoni
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 54,   Parent ID = 53
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -13.4    -7.98    0.716     0.024        0        0         0        ABSO initStep
-    1    -13.4    -7.98    0.716         0    0.024  0.00271   0.00271        ABSO eIoni
-
-*********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 52,   Parent ID = 50
+* G4Track Information:   Particle = e-,   Track ID = 71,   Parent ID = 13
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -13.2    -8.22    0.589      1.76        0        0         0        ABSO initStep
-    1      -13    -4.68     5.37      1.48        0     5.95      5.95        ABSO compt
-    2      -15     15.3     19.7      1.48        0     24.7      30.7        GAPX Transportation
-    3      -16     24.9     26.6      1.18        0     11.8      42.4        GAPX compt
-    4      -20     30.5       32      1.18        0     8.82      51.3        ABSO Transportation
-    5    -28.8     42.7       44       1.1        0     19.2      70.5        ABSO compt
-    6      -30     46.7       47       1.1        0     5.19      75.6        GAPX Transportation
-    7      -31       50     49.5       1.1        0     4.21      79.9        WRLD Transportation
-    8    -34.1       60       57       1.1        0     12.9      92.7  OutOfWorld Transportation
-
-*********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 57,   Parent ID = 52
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -28.8     42.7       44     0.088        0        0         0        ABSO initStep
-    1    -28.8     42.7       44         0    0.088   0.0223    0.0223        ABSO eIoni
-
-*********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 56,   Parent ID = 52
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0      -16     24.9     26.6     0.294        0        0         0        GAPX initStep
-    1    -15.8       25     26.6         0    0.294    0.825     0.825        GAPX eIoni
-
-*********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 55,   Parent ID = 52
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0      -13    -4.68     5.37      0.28        0        0         0        ABSO initStep
-    1      -13    -4.68     5.38         0     0.28    0.134     0.134        ABSO eIoni
-
-*********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 51,   Parent ID = 50
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -13.1    -8.23    0.569     0.397        0        0         0        ABSO initStep
-    1      -15    -7.41     1.65     0.397        0     2.29      2.29        GAPX Transportation
-    2      -20    -5.19     4.55     0.397        0      6.2      8.49        ABSO Transportation
-    3    -21.8    -4.37     5.62         0    0.088     2.27      10.8        ABSO phot
-
-*********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 58,   Parent ID = 51
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -21.8    -4.37     5.62     0.309        0        0         0        ABSO initStep
-    1    -21.8    -4.36     5.62         0    0.309    0.156     0.156        ABSO eIoni
+    0    -37.4    -7.36    -18.9      3.43        0        0         0        ABSO initStep
+    1    -37.6    -7.28    -19.2     0.907     2.52     1.86      1.86        ABSO eIoni
+    2    -37.6     -7.3    -19.1         0    0.907     0.65      2.51        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 12,   Parent ID = 1
@@ -8901,73 +9018,115 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54      2.62        0        0         0        ABSO initStep
-    1    -11.9    -3.08     -2.7         0        0     6.65      6.65        ABSO conv
+    1    -11.9    -3.53    -2.34     0.501        0     6.07      6.07        ABSO compt
+    2    -10.4    -2.23    -1.36     0.193        0     2.22      8.29        ABSO compt
+    3    -10.5    -2.28     -1.3         0    0.088    0.147      8.44        ABSO phot
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e+,   Track ID = 60,   Parent ID = 12
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -11.9    -3.08     -2.7     0.953        0        0         0        ABSO initStep
-    1    -11.9    -3.03    -2.75     0.261    0.524    0.194     0.194        ABSO eBrem
-    2    -11.9    -3.02    -2.76         0    0.261    0.118     0.311        ABSO eIoni
-    3    -11.9    -3.02    -2.76         0        0        0     0.311        ABSO annihil
-
-*********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 63,   Parent ID = 60
+* G4Track Information:   Particle = e-,   Track ID = 75,   Parent ID = 12
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -11.9    -3.02    -2.76     0.511        0        0         0        ABSO initStep
-    1    -14.1    -1.19   -0.791         0    0.088     3.47      3.47        ABSO phot
+    0    -10.5    -2.28     -1.3     0.105        0        0         0        ABSO initStep
+    1    -10.5    -2.28     -1.3         0    0.105   0.0297    0.0297        ABSO eIoni
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 64,   Parent ID = 63
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -14.1    -1.19   -0.791     0.423        0        0         0        ABSO initStep
-    1    -14.1    -1.18   -0.784         0    0.423    0.242     0.242        ABSO eIoni
-
-*********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 62,   Parent ID = 60
+* G4Track Information:   Particle = e-,   Track ID = 74,   Parent ID = 12
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -11.9    -3.02    -2.76     0.511        0        0         0        ABSO initStep
-    1    -9.85    -4.74     -4.6         0 0.000899     3.26      3.26        ABSO phot
+    0    -10.4    -2.23    -1.36     0.308        0        0         0        ABSO initStep
+    1    -10.4    -2.22    -1.35         0    0.308    0.155     0.155        ABSO eIoni
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 65,   Parent ID = 62
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -9.85    -4.74     -4.6      0.51        0        0         0        ABSO initStep
-    1    -9.85    -4.73    -4.62         0     0.51    0.312     0.312        ABSO eIoni
-
-*********************************************************************************************************
-* G4Track Information:   Particle = gamma,   Track ID = 61,   Parent ID = 60
+* G4Track Information:   Particle = e-,   Track ID = 73,   Parent ID = 12
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -11.9    -3.03    -2.75     0.168        0        0         0        ABSO initStep
-    1      -12    -2.86    -2.82         0    0.088      0.2       0.2        ABSO phot
+    0    -11.9    -3.53    -2.34      2.12        0        0         0        ABSO initStep
+    1    -11.9    -3.44    -2.43      1.18    0.265    0.245     0.245        ABSO eBrem
+    2    -11.9    -3.43    -2.44     0.371  0.00799   0.0168     0.262        ABSO eBrem
+    3    -11.9    -3.42    -2.44         0    0.371    0.202     0.464        ABSO eIoni
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 66,   Parent ID = 61
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0      -12    -2.86    -2.82    0.0795        0        0         0        ABSO initStep
-    1      -12    -2.86    -2.82         0   0.0795    0.019     0.019        ABSO eIoni
-
-*********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 59,   Parent ID = 12
+* G4Track Information:   Particle = gamma,   Track ID = 77,   Parent ID = 73
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -11.9    -3.08     -2.7      0.65        0        0         0        ABSO initStep
-    1    -11.9    -3.06    -2.72         0     0.65    0.429     0.429        ABSO eIoni
+    0    -11.9    -3.43    -2.44     0.799        0        0         0        ABSO initStep
+    1    -14.2    -1.27   -0.553     0.285        0     3.64      3.64        ABSO compt
+    2    -12.1    -0.45    0.236         0    0.088     2.34      5.99        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 79,   Parent ID = 77
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -12.1    -0.45    0.236     0.197        0        0         0        ABSO initStep
+    1    -12.1   -0.448    0.236         0    0.197   0.0793    0.0793        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 78,   Parent ID = 77
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -14.2    -1.27   -0.553     0.515        0        0         0        ABSO initStep
+    1    -14.2    -1.26   -0.546         0    0.515    0.316     0.316        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = gamma,   Track ID = 76,   Parent ID = 73
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -11.9    -3.44    -2.43     0.681        0        0         0        ABSO initStep
+    1    -13.5    -2.67    -3.82      0.67        0      2.2       2.2        ABSO compt
+    2    -13.7    -2.51    -4.01     0.654        0    0.377      2.58        ABSO compt
+    3      -15       -2    -4.55     0.654        0     1.46      4.04        GAPX Transportation
+    4      -20   0.0386    -6.72     0.654        0     5.82      9.86        ABSO Transportation
+    5    -23.2     1.33     -8.1     0.501        0     3.69      13.5        ABSO compt
+    6    -23.6     1.39    -8.95     0.501        0    0.983      14.5        ABSO Rayl
+    7    -23.9     1.43    -9.51     0.282        0    0.613      15.1        ABSO compt
+    8    -23.6    -1.14    -10.5         0   0.0159     2.77      17.9        ABSO phot
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 84,   Parent ID = 76
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -23.6    -1.14    -10.5     0.266        0        0         0        ABSO initStep
+    1    -23.6    -1.14    -10.5         0    0.266    0.125     0.125        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 83,   Parent ID = 76
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -23.9     1.43    -9.51     0.219        0        0         0        ABSO initStep
+    1    -23.9     1.43    -9.51         0    0.219   0.0935    0.0935        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 82,   Parent ID = 76
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -23.2     1.33     -8.1     0.153        0        0         0        ABSO initStep
+    1    -23.2     1.33    -8.09         0    0.153   0.0536    0.0536        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 81,   Parent ID = 76
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -13.7    -2.51    -4.01    0.0159        0        0         0        ABSO initStep
+    1    -13.7    -2.51    -4.01         0   0.0159  0.00143   0.00143        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 80,   Parent ID = 76
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -13.5    -2.67    -3.82    0.0109        0        0         0        ABSO initStep
+    1    -13.5    -2.67    -3.82         0   0.0109 0.000796  0.000796        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 11,   Parent ID = 1
@@ -8975,35 +9134,35 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54     0.919        0        0         0        ABSO initStep
-    1    -14.1    -7.91   0.0126     0.552        0     2.62      2.62        ABSO compt
-    2      -15    -9.25    -1.07     0.552        0     1.96      4.58        GAPX Transportation
-    3      -20    -16.3    -6.79     0.552        0     10.4        15        ABSO Transportation
-    4    -20.8    -17.5    -7.77     0.201        0     1.77      16.7        ABSO compt
-    5      -21    -17.2    -7.69         0    0.088    0.363      17.1        ABSO phot
+    1    -12.4    -8.15     1.24     0.371        0    0.504     0.504        ABSO compt
+    2    -14.2     -7.3     3.13     0.318        0     2.79       3.3        ABSO compt
+    3      -15    -7.01     3.18     0.318        0    0.821      4.12        GAPX Transportation
+    4      -20     -5.1     3.46     0.318        0     5.36      9.48        ABSO Transportation
+    5    -23.9    -3.62     3.69         0   0.0159     4.15      13.6        ABSO phot
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 69,   Parent ID = 11
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0      -21    -17.2    -7.69     0.113        0        0         0        ABSO initStep
-    1      -21    -17.2    -7.69         0    0.113   0.0335    0.0335        ABSO eIoni
-
-*********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 68,   Parent ID = 11
+* G4Track Information:   Particle = e-,   Track ID = 87,   Parent ID = 11
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -20.8    -17.5    -7.77      0.35        0        0         0        ABSO initStep
-    1    -20.9    -17.6    -7.77         0     0.35    0.186     0.186        ABSO eIoni
+    0    -23.9    -3.62     3.69     0.302        0        0         0        ABSO initStep
+    1    -23.9    -3.62     3.69         0    0.302    0.151     0.151        ABSO eIoni
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 67,   Parent ID = 11
+* G4Track Information:   Particle = e-,   Track ID = 86,   Parent ID = 11
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -14.1    -7.91   0.0126     0.367        0        0         0        ABSO initStep
-    1    -14.1     -7.9  0.00837         0    0.367    0.199     0.199        ABSO eIoni
+    0    -14.2     -7.3     3.13    0.0531        0        0         0        ABSO initStep
+    1    -14.2     -7.3     3.13         0   0.0531  0.00984   0.00984        ABSO eIoni
+
+*********************************************************************************************************
+* G4Track Information:   Particle = e-,   Track ID = 85,   Parent ID = 11
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0    -12.4    -8.15     1.24     0.547        0        0         0        ABSO initStep
+    1    -12.4    -8.15     1.22         0    0.547    0.343     0.343        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 10,   Parent ID = 1
@@ -9011,24 +9170,15 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54     0.425        0        0         0        ABSO initStep
-    1    -11.3    -8.28     1.06     0.408        0    0.831     0.831        ABSO compt
-    2    -10.9    -8.47    0.533         0    0.088    0.704      1.53        ABSO phot
+    1    -10.3    -8.39    0.388         0    0.088        2         2        ABSO phot
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 71,   Parent ID = 10
-*********************************************************************************************************
-
-Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -10.9    -8.47    0.533      0.32        0        0         0        ABSO initStep
-    1    -10.8    -8.47    0.524         0     0.32    0.163     0.163        ABSO eIoni
-
-*********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 70,   Parent ID = 10
+* G4Track Information:   Particle = e-,   Track ID = 88,   Parent ID = 10
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -11.3    -8.28     1.06    0.0174        0        0         0        ABSO initStep
-    1    -11.3    -8.28     1.06         0   0.0174  0.00163   0.00163        ABSO eIoni
+    0    -10.3    -8.39    0.388     0.337        0        0         0        ABSO initStep
+    1    -10.3    -8.39    0.386         0    0.337    0.176     0.176        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 9,   Parent ID = 1
@@ -9036,15 +9186,15 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54     0.231        0        0         0        ABSO initStep
-    1      -12    -8.44     1.65         0    0.088    0.264     0.264        ABSO phot
+    1    -12.4    -9.85     2.31         0    0.088     1.87      1.87        ABSO phot
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 72,   Parent ID = 9
+* G4Track Information:   Particle = e-,   Track ID = 89,   Parent ID = 9
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0      -12    -8.44     1.65     0.143        0        0         0        ABSO initStep
-    1      -12    -8.44     1.65         0    0.143   0.0483    0.0483        ABSO eIoni
+    0    -12.4    -9.85     2.31     0.143        0        0         0        ABSO initStep
+    1    -12.4    -9.85     2.31         0    0.143   0.0483    0.0483        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 8,   Parent ID = 1
@@ -9052,15 +9202,15 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54     0.139        0        0         0        ABSO initStep
-    1    -11.9    -8.16     1.57         0    0.088   0.0906    0.0906        ABSO phot
+    1    -11.5    -7.92     1.77         0    0.088    0.607     0.607        ABSO phot
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 73,   Parent ID = 8
+* G4Track Information:   Particle = e-,   Track ID = 90,   Parent ID = 8
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -11.9    -8.16     1.57    0.0513        0        0         0        ABSO initStep
-    1    -11.9    -8.16     1.57         0   0.0513  0.00929   0.00929        ABSO eIoni
+    0    -11.5    -7.92     1.77    0.0513        0        0         0        ABSO initStep
+    1    -11.5    -7.92     1.77         0   0.0513  0.00929   0.00929        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 7,   Parent ID = 1
@@ -9068,15 +9218,15 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54    0.0904        0        0         0        ABSO initStep
-    1    -12.1    -8.15     1.58         0    0.088    0.119     0.119        ABSO phot
+    1      -12    -8.18     1.56         0   0.0159   0.0605    0.0605        ABSO phot
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 74,   Parent ID = 7
+* G4Track Information:   Particle = e-,   Track ID = 91,   Parent ID = 7
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -12.1    -8.15     1.58   0.00238        0        0         0        ABSO initStep
-    1    -12.1    -8.15     1.58         0  0.00238 9.61e-05  9.61e-05        ABSO eIoni
+    0      -12    -8.18     1.56    0.0745        0        0         0        ABSO initStep
+    1      -12    -8.18     1.56         0   0.0745   0.0171    0.0171        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 6,   Parent ID = 1
@@ -9084,15 +9234,15 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54     0.062        0        0         0        ABSO initStep
-    1    -11.9    -8.22     1.56         0 0.000899   0.0626    0.0626        ABSO phot
+    1    -11.8    -8.24     1.59         0   0.0159    0.132     0.132        ABSO phot
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 75,   Parent ID = 6
+* G4Track Information:   Particle = e-,   Track ID = 92,   Parent ID = 6
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -11.9    -8.22     1.56    0.0611        0        0         0        ABSO initStep
-    1    -11.9    -8.22     1.56         0   0.0611   0.0124    0.0124        ABSO eIoni
+    0    -11.8    -8.24     1.59    0.0461        0        0         0        ABSO initStep
+    1    -11.8    -8.24     1.59         0   0.0461  0.00782   0.00782        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 5,   Parent ID = 1
@@ -9100,15 +9250,15 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54    0.0443        0        0         0        ABSO initStep
-    1      -12     -8.2     1.53         0   0.0159  0.00742   0.00742        ABSO phot
+    1      -12    -8.19     1.45         0  0.00249   0.0965    0.0965        ABSO phot
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 76,   Parent ID = 5
+* G4Track Information:   Particle = e-,   Track ID = 93,   Parent ID = 5
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0      -12     -8.2     1.53    0.0285        0        0         0        ABSO initStep
-    1      -12     -8.2     1.53         0   0.0285  0.00358   0.00358        ABSO eIoni
+    0      -12    -8.19     1.45    0.0418        0        0         0        ABSO initStep
+    1      -12    -8.19     1.45         0   0.0418  0.00667   0.00667        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 4,   Parent ID = 1
@@ -9116,15 +9266,15 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54    0.0772        0        0         0        ABSO initStep
-    1    -11.8    -8.23     1.56         0   0.0159    0.156     0.156        ABSO phot
+    1    -11.7    -8.25     1.57         0    0.013    0.258     0.258        ABSO phot
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 77,   Parent ID = 4
+* G4Track Information:   Particle = e-,   Track ID = 94,   Parent ID = 4
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
-    0    -11.8    -8.23     1.56    0.0613        0        0         0        ABSO initStep
-    1    -11.8    -8.23     1.56         0   0.0613   0.0124    0.0124        ABSO eIoni
+    0    -11.7    -8.25     1.57    0.0641        0        0         0        ABSO initStep
+    1    -11.7    -8.25     1.57         0   0.0641   0.0134    0.0134        ABSO eIoni
 
 *********************************************************************************************************
 * G4Track Information:   Particle = gamma,   Track ID = 3,   Parent ID = 1
@@ -9132,10 +9282,10 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54    0.0154        0        0         0        ABSO initStep
-    1    -11.9    -8.21     1.53         0    0.013  0.00667   0.00667        ABSO phot
+    1    -11.9    -8.21     1.53         0    0.013  0.00681   0.00681        ABSO phot
 
 *********************************************************************************************************
-* G4Track Information:   Particle = e-,   Track ID = 78,   Parent ID = 3
+* G4Track Information:   Particle = e-,   Track ID = 95,   Parent ID = 3
 *********************************************************************************************************
 
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
@@ -9149,7 +9299,7 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -12     -8.2     1.54    0.0964        0        0         0        ABSO initStep
     1      -12    -8.21     1.54         0   0.0964   0.0259    0.0259        ABSO eIoni
-   Absorber: total energy (MeV): 143.535       total track length (cm):  5.65015
-   Gap:      total energy (MeV): 7.63912       total track length (cm):  2.15842
-Time of this run:   User=0.050000s Real=0.052531s Sys=0.010000s
+   Absorber: total energy (MeV):  145.02       total track length (cm):  5.64911
+   Gap:      total energy (MeV): 7.55789       total track length (cm):  2.07601
+Time of this run:   User=0.000000s Real=0.008131s Sys=0.000000s
 Number of events processed: 1
