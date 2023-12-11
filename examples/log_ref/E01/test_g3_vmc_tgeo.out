@@ -337,11 +337,11 @@ GetShape: Volume path /EXPH_1/CALB_1/LAYB_100 not found
 GetMaterial: Volume name XYZ not found
 GetMedium: Volume name XYZ not found
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   321998711    13314F77 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   110616439     697DF77 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   316673601   321998711
-                                        HEX    12E00E41    13314F77
+          with Store/Table at absolute adrs   105291329   110616439
+                                        HEX     6469E41     697DF77
                                         HEX    FFAEBD12           0
                               relative adrs    -5325550           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.

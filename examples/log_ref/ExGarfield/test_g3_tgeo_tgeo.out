@@ -55,11 +55,11 @@ Info in <TGeoManager::Export>: Exporting Garfield_geometry ExGarfield VMC exampl
    Absorber: total energy: 13.3199 MeV       total track length: 1.00011 cm
         Gas: total energy: 5.72095 keV           avalanche size:       0       gain:       0
 
- MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   207269751     C5AAF77 HEX
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   165388151     9DB9F77 HEX
 
  MZSTOR.  Initialize Store  0  in /GCBANK/
-          with Store/Table at absolute adrs   201944641   207269751
-                                        HEX     C096E41     C5AAF77
+          with Store/Table at absolute adrs   160063041   165388151
+                                        HEX     98A5E41     9DB9F77
                                         HEX    FFAEBD12           0
                               relative adrs    -5325550           0
           with     1 Str. in     2 Links in   5300 Low words in 4999970 words.
