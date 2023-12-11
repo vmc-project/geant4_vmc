@@ -19,6 +19,7 @@
 #include <globals.hh>
 
 class TG4RegionsManager;
+class TG4RegionsManager2;
 
 class G4UIdirectory;
 class G4UIcmdWithADouble;
@@ -27,74 +28,79 @@ class G4UIcmdWithAnInteger;
 class G4UIcmdWithABool;
 
 /// \ingroup run
-/// \brief Messenger class that defines commands for TG4RegionsManager
+/// \brief Messenger class that defines commands for TG4RegionsManager[2]
+///      
 ///
 /// Implements commands:
-/// - /mcRegions/dump [lvName]
+/// - /mcRegions/check [true|false]
+/// - /mcRegions/print [true|false]
+/// - /mcRegions/save [true|false]
+/// - /mcRegions/setFileName fileName
+///
+/// Commands working only with old region manager:
+/// - /mcRegions/dump lvName
 /// - /mcRegions/setRangePrecision value
 /// - /mcRegions/setEnergyTolerance value
 /// - /mcRegions/applyForGamma true|false
 /// - /mcRegions/applyForElectron true|false
 /// - /mcRegions/applyForPositron true|false
 /// - /mcRegions/applyForProton true|false
-/// - /mcRegions/check [true|false]
-/// - /mcRegions/print [true|false]
-/// - /mcRegions/save [true|false]
 /// - /mcRegions/load [true|false]
 /// - /mcRegions/fromG4Table [true|false]
-/// - /mcRegions/setFileName fileName
 ///
 /// \author I. Hrivnacova; IPN, Orsay
 
 class TG4RegionsMessenger : public G4UImessenger
 {
  public:
-  TG4RegionsMessenger(TG4RegionsManager* runManager);
+  TG4RegionsMessenger(TG4RegionsManager* regionsManager);
+  TG4RegionsMessenger(TG4RegionsManager2* regionsManager);
   virtual ~TG4RegionsMessenger();
 
   // methods
   virtual void SetNewValue(G4UIcommand* command, G4String string);
 
  private:
-  /// Not implemented
-  TG4RegionsMessenger();
-  /// Not implemented
-  TG4RegionsMessenger(const TG4RegionsMessenger& right);
-  /// Not implemented
-  TG4RegionsMessenger& operator=(const TG4RegionsMessenger& right);
+  TG4RegionsMessenger() = delete;
+  TG4RegionsMessenger(const TG4RegionsMessenger& right) = delete;
+  TG4RegionsMessenger& operator=(const TG4RegionsMessenger& right) = delete;
+
+  // methods
+  void CreateCommands();
 
   // data members
-  TG4RegionsManager* fRegionsManager; ///< associated class
-  G4UIdirectory* fDirectory;          ///< command directory
+  TG4RegionsManager* fRegionsManager = nullptr;  ///< associated class
+  TG4RegionsManager2* fRegionsManager2 = nullptr; ///< associated class
+  G4UIdirectory* fDirectory = nullptr;          ///< command directory
 
-  /// command: /mcRegions/dump [lvName]
-  G4UIcmdWithAString* fDumpRegionCmd;
-  /// command: /mcRegions/setRangePrecision value
-  G4UIcmdWithAnInteger* fSetRangePrecisionCmd;
-  /// command: /mcRegions/setEnergyTolerance value
-  G4UIcmdWithADouble* fSetEnergyToleranceCmd;
-  /// command: /mcRegions/applyForGamma true|false
-  G4UIcmdWithABool* fApplyForGammaCmd;
-  /// command: /mcRegions/applyForElectron true|false
-  G4UIcmdWithABool* fApplyForElectronCmd;
-  /// command: /mcRegions/applyForPositron true|false
-  G4UIcmdWithABool* fApplyForPositronCmd;
-  /// command: /mcRegions/applyForProton true|false
-  G4UIcmdWithABool* fApplyForProtonCmd;
   /// command: /mcRegions/check [true|false]
-  G4UIcmdWithABool* fSetCheckCmd;
+  G4UIcmdWithABool* fSetCheckCmd = nullptr;
   /// command: /mcRegions/print [true|false]
-  G4UIcmdWithABool* fSetPrintCmd;
+  G4UIcmdWithABool* fSetPrintCmd = nullptr;
   /// command: /mcRegions/save [true|false]
-  G4UIcmdWithABool* fSetSaveCmd;
-  /// command: /mcRegions/load [true|false]
-  G4UIcmdWithABool* fSetLoadCmd;
-  /// command: /mcRegions/fromG4Table [true|false]
-  G4UIcmdWithABool* fSetFromG4TableCmd;
+  G4UIcmdWithABool* fSetSaveCmd = nullptr;
   /// command: /mcRegions/setFileName fileName
-  G4UIcmdWithAString* fSetFileNameCmd;
-  /// option to activate print/save from production cuts table
-  G4bool fIsFromG4Table;
+  G4UIcmdWithAString* fSetFileNameCmd = nullptr;
+
+  // commands working only with old regions messenger
+  /// command: /mcRegions/dump [lvName]
+  G4UIcmdWithAString* fDumpRegionCmd = nullptr;
+  /// command: /mcRegions/setRangePrecision value
+  G4UIcmdWithAnInteger* fSetRangePrecisionCmd = nullptr;
+  /// command: /mcRegions/setEnergyTolerance value
+  G4UIcmdWithADouble* fSetEnergyToleranceCmd = nullptr;
+  /// command: /mcRegions/applyForGamma true|false
+  G4UIcmdWithABool* fApplyForGammaCmd = nullptr;
+  /// command: /mcRegions/applyForElectron true|false
+  G4UIcmdWithABool* fApplyForElectronCmd = nullptr;
+  /// command: /mcRegions/applyForPositron true|false
+  G4UIcmdWithABool* fApplyForPositronCmd = nullptr;
+  /// command: /mcRegions/applyForProton true|false
+  G4UIcmdWithABool* fApplyForProtonCmd = nullptr;
+  /// command: /mcRegions/load [true|false]
+  G4UIcmdWithABool* fSetLoadCmd = nullptr;
+  /// command: /mcRegions/fromG4Table [true|false]
+  G4UIcmdWithABool* fSetFromG4TableCmd = nullptr;
 };
 
 #endif // TG4_RUN_MESSENGER_H

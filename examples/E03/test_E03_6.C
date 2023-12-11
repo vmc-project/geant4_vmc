@@ -16,7 +16,7 @@
 // Activate this code to check curving of trajectories in field
 //#include "set_vis.C"
 
-void test_E03_6(const TString& configMacro, Bool_t oldGeometry)
+void test_E03_6(const TString& configMacro = "g4Config5.C", Bool_t oldGeometry = kFALSE)
 {
 /// Macro function for testing example E03
 /// \param configMacro  configuration macro loaded in initialization

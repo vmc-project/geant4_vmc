@@ -17,7 +17,7 @@
 // times system function this include must be the first
 
 #include "TG4Globals.h"
-#include "TG4RegionsManager.h"
+#include "TG4VRegionsManager.h"
 #include "TG4RunAction.h"
 #include "TGeant4.h"
 
@@ -167,15 +167,16 @@ void TG4RunAction::BeginOfRunAction(const G4Run* run)
     G4cout << "### Run " << run->GetRunID() << " start." << G4endl;
   }
 
-  if (TG4RegionsManager::Instance()) {
-    if (TG4RegionsManager::Instance()->IsCheck()) {
-      TG4RegionsManager::Instance()->CheckRegions();
+  auto regionsManager = TG4VRegionsManager::Instance();
+  if (regionsManager != nullptr) {
+    if (regionsManager->IsCheck()) {
+      regionsManager->CheckRegions();
     }
-    if (TG4RegionsManager::Instance()->IsPrint()) {
-      TG4RegionsManager::Instance()->PrintRegions(G4cout);
+    if (regionsManager->IsPrint()) {
+      regionsManager->PrintRegions(G4cout);
     }
-    if (TG4RegionsManager::Instance()->IsSave()) {
-      TG4RegionsManager::Instance()->SaveRegions();
+    if (regionsManager->IsSave()) {
+      regionsManager->SaveRegions();
     }
   }
 

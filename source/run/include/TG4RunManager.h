@@ -24,7 +24,7 @@
 
 class TG4RunConfiguration;
 class TG4SpecialControlsV2;
-class TG4RegionsManager;
+class TG4VRegionsManager;
 
 class G4RunManager;
 class G4UIExecutive;
@@ -105,7 +105,7 @@ class TG4RunManager : public TG4Verbose
   G4RunManager* fRunManager;              ///< G4RunManager
   TG4RunMessenger fMessenger;             ///< messenger
   TG4RunConfiguration* fRunConfiguration; ///< TG4RunConfiguration
-  TG4RegionsManager* fRegionsManager;     ///< regions manager
+  TG4VRegionsManager* fRegionsManager;    ///< regions manager
   G4UIExecutive* fGeantUISession;         ///< G4 UI
   TApplication* fRootUISession;           ///< Root UI
   G4bool fRootUIOwner;                    ///< ownership of Root UI

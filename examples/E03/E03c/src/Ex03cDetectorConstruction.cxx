@@ -410,10 +410,18 @@ void Ex03cDetectorConstruction::SetCuts()
     // set VMC cutes for the medium
     Int_t mediumId = fMC->MediumId(materialCuts.fName);
     if (mediumId) {
-      fMC->Gstpar(mediumId, "CUTGAM", materialCuts.fCUTGAM);
-      fMC->Gstpar(mediumId, "BCUTE", materialCuts.fBCUTE);
-      fMC->Gstpar(mediumId, "CUTELE", materialCuts.fCUTELE);
-      fMC->Gstpar(mediumId, "DCUTE", materialCuts.fDCUTE);
+      // Set cuts as defined in the vector
+      // gMC->Gstpar(mediumId, "CUTGAM", materialCuts.fCUTGAM);
+      // gMC->Gstpar(mediumId, "BCUTE", materialCuts.fBCUTE);
+      // gMC->Gstpar(mediumId, "CUTELE", materialCuts.fCUTELE);
+      // gMC->Gstpar(mediumId, "DCUTE", materialCuts.fDCUTE);
+      //
+      // Set 100 keV cut everywhere
+      Double_t cut = 100.e-06;
+      gMC->Gstpar(mediumId, "CUTGAM", cut);
+      gMC->Gstpar(mediumId, "BCUTE", cut);
+      gMC->Gstpar(mediumId, "CUTELE", cut);
+      gMC->Gstpar(mediumId, "DCUTE", cut);
     }
   }
 }

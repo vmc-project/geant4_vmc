@@ -672,7 +672,7 @@ void TG4GeometryManager::ConstructZeroFields()
 
     // Skip volumes with ifield != 0
     if (medium->GetIfield() != 0) {
-      if (VerboseLevel() > 1) {
+      if (VerboseLevel() > 2) {
         G4cout << "Global field in logical volume: " << lv->GetName() << G4endl;
       }
       continue;

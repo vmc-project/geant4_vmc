@@ -101,6 +101,7 @@ class TG4RunConfiguration
   // set methods
   void SetMTApplication(Bool_t mtApplication);
   void SetParameter(const TString& name, Double_t value);
+  void SetSpecialCutsOld();
 
   // get methods
   TString GetUserGeometry() const;
@@ -108,6 +109,7 @@ class TG4RunConfiguration
   Bool_t IsSpecialStacking() const;
   Bool_t IsSpecialControls() const;
   Bool_t IsSpecialCuts() const;
+  Bool_t IsSpecialCutsOld() const;
   Bool_t IsMTApplication() const;
 
  protected:
@@ -119,6 +121,7 @@ class TG4RunConfiguration
   Bool_t fMTApplication;            ///< option for MT mode if available
   Bool_t fSpecialControls;          ///< option for special controls
   Bool_t fSpecialCuts;              ///< option for special cuts
+  Bool_t fSpecialCutsOld;           ///< option for special cuts old
   G4UImessenger* fAGDDMessenger;    //!< XML messenger
   G4UImessenger* fGDMLMessenger;    //!< XML messenger
 
@@ -138,9 +141,9 @@ class TG4RunConfiguration
 
 // inline functions
 
+/// Return physics list selection
 inline TString TG4RunConfiguration::GetPhysicsListSelection() const
-{
-  /// Return physics list selection
+{ 
   return fPhysicsListSelection;
 }
 
