@@ -21,7 +21,7 @@
 
 #include <G4AnalysisUtilities.hh>
 #include <G4HadronicProcessStore.hh>
-#include <G4NeutronHPManager.hh>
+#include <G4ParticleHPManager.hh>
 #include <G4UIcmdWithADouble.hh>
 #include <G4UIcmdWithADoubleAndUnit.hh>
 #include <G4UIcmdWithAString.hh>
@@ -46,7 +46,7 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
     fPrintVolumeLimitsCmd(0),
     fPrintGlobalCutsCmd(0),
     fPrintGlobalControlsCmd(0),
-    fG4NeutronHPVerboseCmd(0),
+    fG4ParticleHPVerboseCmd(0),
     fG4HadronicProcessStoreVerboseCmd(0)
 {
   /// Standard constructor
@@ -140,11 +140,11 @@ TG4ComposedPhysicsMessenger::TG4ComposedPhysicsMessenger(
     "Print global VMC (G3-like) process controls.");
   fPrintGlobalControlsCmd->AvailableForStates(G4State_Idle);
 
-  fG4NeutronHPVerboseCmd =
-    new G4UIcmdWithAnInteger("/mcPhysics/g4NeutronHPVerbose", this);
-  fG4NeutronHPVerboseCmd->SetGuidance("Set G4NeutronHPManager verbose level");
-  fG4NeutronHPVerboseCmd->SetParameterName("NeutronHPVerbose", false);
-  fG4NeutronHPVerboseCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
+  fG4ParticleHPVerboseCmd =
+    new G4UIcmdWithAnInteger("/mcPhysics/g4ParticleHPVerbose", this);
+  fG4ParticleHPVerboseCmd->SetGuidance("Set G4ParticleHPManager verbose level");
+  fG4ParticleHPVerboseCmd->SetParameterName("ParticleHPVerbose", false);
+  fG4ParticleHPVerboseCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 
   fG4HadronicProcessStoreVerboseCmd =
     new G4UIcmdWithAnInteger("/mcPhysics/g4HadronicProcessStoreVerbose", this);
@@ -188,7 +188,7 @@ TG4ComposedPhysicsMessenger::~TG4ComposedPhysicsMessenger()
   delete fPrintVolumeLimitsCmd;
   delete fPrintGlobalCutsCmd;
   delete fPrintGlobalControlsCmd;
-  delete fG4NeutronHPVerboseCmd;
+  delete fG4ParticleHPVerboseCmd;
   delete fG4HadronicProcessStoreVerboseCmd;
   delete fUseLowLooperThresholdsCmd;
   delete fUseHighLooperThresholdsCmd;
@@ -346,9 +346,9 @@ void TG4ComposedPhysicsMessenger::SetNewValue(
   else if (command == fPrintGlobalControlsCmd) {
     TG4G3PhysicsManager::Instance()->GetControlVector()->Print();
   }
-  else if (command == fG4NeutronHPVerboseCmd) {
-    G4NeutronHPManager::GetInstance()->SetVerboseLevel(
-      fG4NeutronHPVerboseCmd->GetNewIntValue(newValue));
+  else if (command == fG4ParticleHPVerboseCmd) {
+    G4ParticleHPManager::GetInstance()->SetVerboseLevel(
+      fG4ParticleHPVerboseCmd->GetNewIntValue(newValue));
   }
   else if (command == fG4HadronicProcessStoreVerboseCmd) {
     G4HadronicProcessStore::Instance()->SetVerbose(

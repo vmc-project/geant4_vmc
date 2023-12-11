@@ -42,7 +42,7 @@ class G4UIcmdWithAnInteger;
 /// - /mcPhysics/printVolumeLimits [volName]
 /// - /mcPhysics/printGlobalCuts
 /// - /mcPhysics/printGlobalControls
-/// - /mcPhysics/g4NeutronHPVerbose
+/// - /mcPhysics/g4ParticleHPVerbose
 /// - /mcPhysics/g4HadronicProcessStoreVerbose
 /// - /mcPhysics/useLowLooperThresholds
 /// - /mcPhysics/useHighLooperThresholds
@@ -122,8 +122,8 @@ class TG4ComposedPhysicsMessenger : public G4UImessenger
   /// printGeneralControls command
   G4UIcmdWithoutParameter* fPrintGlobalControlsCmd;
 
-  /// g4NeutronHPVerbose command
-  G4UIcmdWithAnInteger* fG4NeutronHPVerboseCmd;
+  /// g4ParticleHPVerbose command
+  G4UIcmdWithAnInteger* fG4ParticleHPVerboseCmd;
 
   /// g4HadronicProcessStoreVerbose command
   G4UIcmdWithAnInteger* fG4HadronicProcessStoreVerboseCmd;

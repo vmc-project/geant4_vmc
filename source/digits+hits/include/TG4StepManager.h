@@ -24,6 +24,7 @@
 #include <G4SteppingManager.hh>
 #include <G4ThreeVector.hh>
 #include <G4TransportationManager.hh>
+#include <G4VTouchable.hh>
 #include <globals.hh>
 
 #include <TArrayI.h>
@@ -37,7 +38,6 @@ class TG4SteppingAction;
 class G4Track;
 class G4SteppingManager;
 class G4VPhysicalVolume;
-class G4VTouchable;
 
 class TLorentzVector;
 class TVector3;

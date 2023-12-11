@@ -73,7 +73,7 @@ void TG4ProcessMapPhysics::FillMap()
   TG4ProcessMap* pMap = TG4ProcessMap::Instance();
 
   // clang-format off
-  // G4EmProcessSubType: 1 - 25
+  // G4EmProcessSubType: 1 - 26; 40; 49
   pMap->Add(fCoulombScattering, kPCoulombScattering, kMULS);      // G4 value:  1
   pMap->Add(fIonisation, kPEnergyLoss, kG3LOSS);                  // G4 value:  2
   pMap->Add(fBremsstrahlung, kPBrem, kBREM );                     // G4 value:  3
@@ -107,6 +107,7 @@ void TG4ProcessMapPhysics::FillMap()
 
   pMap->Add(fSurfaceReflection, kPNull, kNoG3Controls);            // G4 value: 25
      // low energy G4MicroElecSurface process
+  pMap->Add(fGammaReflection, kPNull, kNoG3Controls);              // G4 value: 26
 
   // G4OpProcessSubType: 31 - 36
   pMap->Add(fOpAbsorption, kPLightAbsorption, kLABS);              // G4 value: 31
@@ -117,6 +118,10 @@ void TG4ProcessMapPhysics::FillMap()
     // Add code
   pMap->Add(fOpWLS2, kPLightWLShifting, kNoG3Controls);            // G4 value: 36
     // Add code
+
+  // G4EmProcessSubType: 40; 49
+  pMap->Add(fDarkBremsstrahlung, kPNull, kNoG3Controls);           // G4 value: 40
+  pMap->Add(fMuonPairProdByCharged, kPNull, kNoG3Controls);        // G4 value: 49
 
   // G4HadronicProcessType: 111 - 161; 210; 310
   pMap->Add(fHadronElastic, kPHElastic, kHADR);                    // G4 value: 111
@@ -133,7 +138,9 @@ void TG4ProcessMapPhysics::FillMap()
   pMap->Add(fLeptonAtRest, kPHadronic, kHADR);                     // G4 value: 152
     // No process defined with this code
   pMap->Add(fChargeExchange, kPHadronic, kHADR);                   // G4 value: 161
-    // Not present in G4 physics lists (?)
+  pMap->Add(fNuOscillation, kPHadronic, kHADR);                    // G4 value: 165
+  pMap->Add(fNuElectron, kPHadronic, kHADR);                       // G4 value: 166
+  pMap->Add(fNuNucleus, kPHadronic, kHADR);                        // G4 value: 167
   pMap->Add(fRadioactiveDecay, kPDecay, kDCAY);                    // G4 value: 210
   pMap->Add(fEMDissociation, kPHadronic, kHADR);                   // G4 value: 310
     // No process defined with this code

@@ -88,7 +88,7 @@ class TG4RootNavigator : public G4Navigator
     const G4ThreeVector& globalpoint, const G4double pProposedMaxLength);
   virtual G4double ComputeSafety(const G4ThreeVector& globalpoint,
     const G4double pProposedMaxLength, const G4bool keepState);
-  virtual G4TouchableHistoryHandle CreateTouchableHistoryHandle() const;
+  virtual G4TouchableHandle CreateTouchableHistoryHandle() const;
   virtual G4ThreeVector GetLocalExitNormal(G4bool* valid);
   virtual G4ThreeVector GetGlobalExitNormal(
     const G4ThreeVector& point, G4bool* valid);
