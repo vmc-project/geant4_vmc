@@ -15,9 +15,7 @@
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-#include "TG4G3Cut.h"
-#include "TG4RegionsMessenger.h"
-#include "TG4Verbose.h"
+#include "TG4VRegionsManager.h"
 
 #include <globals.hh>
 
@@ -60,6 +58,11 @@ class G4MaterialCutsCouple;
 ///   energy cuts, the specialCuts process applies the energy cuts
 ///   as tracking cuts when a particle with energy cut below threshold
 ///   is generated.
+/// 
+/// By default, the computed range cut for e- is applied also to e+ and proton.
+/// This feature can be switched off by the UI commands:
+/// - /mcRegions/applyForPositron false
+/// - /mcRegions/applyForProton false
 ///
 /// User can select several levels of verbosity; the following information
 /// is then printed:
@@ -71,22 +74,20 @@ class G4MaterialCutsCouple;
 ///
 /// \author I. Hrivnacova; IPN Orsay
 
-class TG4RegionsManager : public TG4Verbose
+class TG4RegionsManager : public TG4VRegionsManager
 {
  public:
   TG4RegionsManager();
-  virtual ~TG4RegionsManager();
-
-  static TG4RegionsManager* Instance();
+  ~TG4RegionsManager() override = default;
 
   // methods
-  void DefineRegions();
-  void CheckRegions() const;
-  void PrintRegions(std::ostream& output) const;
-  void SaveRegions();
+  void DefineRegions() override;;
+  void UpdateProductionCutsTable() override {}
+
+  void CheckRegions() const override;
+  void PrintRegions(std::ostream& output) const override;
   void LoadRegions();
   void DumpRegion(const G4String& volName) const;
-  void DumpRegionStore() const;
 
   // set methods
   void SetRangePrecision(G4int precision);
@@ -95,11 +96,8 @@ class TG4RegionsManager : public TG4Verbose
   void SetApplyForElectron(G4bool applyForElectron);
   void SetApplyForPositron(G4bool applyForPositron);
   void SetApplyForProton(G4bool applyForProton);
-  void SetFileName(const G4String& fileName);
-  void SetCheck(G4bool isCheck);
-  void SetPrint(G4bool isPrint, G4bool fromG4Table = false);
-  void SetSave(G4bool isSave, G4bool fromG4Table = false);
   void SetLoad(G4bool isLoad);
+  void SetFromG4Table(G4bool isG4Table);
 
   // get methods
   G4int GetRangePrecision() const;
@@ -109,35 +107,16 @@ class TG4RegionsManager : public TG4Verbose
   G4bool GetApplyForPositron() const;
   G4bool GetApplyForProton() const;
   G4String GetFileName() const;
-  G4bool IsCheck() const;
-  G4bool IsPrint() const;
-  G4bool IsSave() const;
   G4bool IsG4Table() const;
   G4bool IsLoad() const;
 
  private:
-  // constants
-  static constexpr size_t fgkRangeGamIdx = 0;
-  static constexpr size_t fgkRangeEleIdx = 1;
-  static constexpr size_t fgkCutGamIdx = 2;
-  static constexpr size_t fgkCutEleIdx = 3;
-  static constexpr size_t fgkVmcCutGamIdx = 4;
-  static constexpr size_t fgkVmcCutEleIdx = 5;
-  static constexpr size_t fgkValuesSize = 6;
-
   using TG4RegionData = std::array<G4double, fgkValuesSize>;
 
-  /// Not implemented
-  TG4RegionsManager(const TG4RegionsManager& right);
-  /// Not implemented
-  TG4RegionsManager& operator=(const TG4RegionsManager& right);
+  TG4RegionsManager(const TG4RegionsManager& right) = delete;
+  TG4RegionsManager& operator=(const TG4RegionsManager& right) = delete;
 
   // methods
-  G4double GetGlobalEnergyCut(TG4G3Cut cutType) const;
-
-  G4double GetEnergyCut(
-    TG4Limits* limits, TG4G3Cut cutType, G4double globalCutValue) const;
-
   G4bool Iterate(G4double energyCut, G4double& lowerCut, G4double& higherCut,
     G4double defaultRangeCut, G4double lowEdgeEnergy, G4double highEdgeEnergy,
     G4int nbin, std::map<G4double, G4double>& map,
@@ -152,36 +131,22 @@ class TG4RegionsManager : public TG4Verbose
     GetRangeCut(G4double energyCut, G4Material* material,
     G4VRangeToEnergyConverter& converter, G4double defaultRangeValue) const;
 
-  G4bool IsCoupleUsedInTheRegion(
-    const G4MaterialCutsCouple* couple, const G4Region* region) const;
-
   void CheckRegionsRanges() const;
-  void CheckRegionsInGeometry() const;
-  void PrintLegend(std::ostream& output) const;
-  void PrintRegionData(std::ostream& output, const G4String& matName,
-    const TG4RegionData& values) const;
   void PrintFromMap(std::ostream& output) const;
-  void PrintFromG4Table(std::ostream& output) const;
 
   //
   // static data members
 
-  /// the singleton instance
-  static TG4RegionsManager* fgInstance;
   /// the default precision for calculating ranges
-  static const G4int fgkDefaultRangePrecision;
+  static constexpr G4int fgkDefaultRangePrecision = 5;
   /// the default tolerance (relative) for comparing energy cut values
-  static const G4double fgkDefaultEnergyTolerance;
+  static constexpr G4double fgkDefaultEnergyTolerance = 0.01;
   /// the number of bins for search range iteration
-  static const G4int fgkNofBins;
+  static constexpr G4int fgkNofBins = 10;
   /// the minimum range order
-  static const G4int fgkMinRangeOrder;
+  static constexpr G4int fgkMinRangeOrder = -3;
   /// the maximum range order
-  static const G4int fgkMaxRangeOrder;
-  /// the name of the region with default cuts
-  static const G4String fgkDefaultRegionName;
-  /// the name of the region with default cuts
-  static const G4String fgkDefaultFileName;
+  static constexpr G4int fgkMaxRangeOrder = 6;
 
   //
   // data members
@@ -189,35 +154,24 @@ class TG4RegionsManager : public TG4Verbose
   /// messenger
   TG4RegionsMessenger fMessenger;
   /// the precision for calculating ranges
-  G4int fRangePrecision;
+  G4int fRangePrecision = fgkDefaultRangePrecision;
   /// the tolerance (relative) for comparing energy cut values
-  G4double fEnergyTolerance;
+  G4double fEnergyTolerance = fgkDefaultEnergyTolerance;
   /// option to apply range cuts for gamma (default is true)
-  G4bool fApplyForGamma;
+  G4bool fApplyForGamma = true;
   /// option to apply range cuts for e- (default is true)
-  G4bool fApplyForElectron;
+  G4bool fApplyForElectron = true;
   /// option to apply range cuts for e+ (default is true)
-  G4bool fApplyForPositron;
+  G4bool fApplyForPositron = true;
   /// option to apply range cuts for proton (default is true)
-  G4bool fApplyForProton;
-  /// file name for regions output
-  G4String fFileName;
-  /// option to perform consistency check (by default false)
-  G4bool fIsCheck;
-  /// option to print all regions
-  G4bool fIsPrint;
-  /// option to save all regions in a file
-  G4bool fIsSave;
+  G4bool fApplyForProton = true;
   /// option to print or save regions from G4 production cuts table
-  G4bool fIsG4Table;
+  G4bool fIsG4Table = false;
   /// option to load regions ranges from a file
-  G4bool fIsLoad;
+  G4bool fIsLoad = false;
   /// map for computed or loaded regions data
   std::map<G4String, TG4RegionData> fRegionData;
 };
-
-/// Return the singleton instance
-inline TG4RegionsManager* TG4RegionsManager::Instance() { return fgInstance; }
 
 /// Set the precision for calculating ranges
 inline void TG4RegionsManager::SetRangePrecision(G4int precision)
@@ -257,14 +211,11 @@ inline void TG4RegionsManager::SetApplyForProton(G4bool applyForProton)
   fApplyForProton = applyForProton;
 }
 
-/// Set the file name for regions output
-inline void TG4RegionsManager::SetFileName(const G4String& fileName)
+/// Set the option to print/save cuts from G4 table
+inline void TG4RegionsManager::SetFromG4Table(G4bool isG4Table)
 {
-  fFileName = fileName;
+  fIsG4Table = isG4Table;
 }
-
-/// Set the option to perform consistency check
-inline void TG4RegionsManager::SetCheck(G4bool isCheck) { fIsCheck = isCheck; }
 
 /// Return the precision for calculating ranges
 inline G4int TG4RegionsManager::GetRangePrecision() const
@@ -302,24 +253,9 @@ inline G4bool TG4RegionsManager::GetApplyForProton() const
   return fApplyForProton;
 }
 
-/// Return the file name for regions output
-inline G4String TG4RegionsManager::GetFileName() const
-{
-  return fFileName;
-}
-
-/// Return the option to perform consistency check
-inline G4bool TG4RegionsManager::IsCheck() const { return fIsCheck; }
-
-/// Return the option to print all regions
-inline G4bool TG4RegionsManager::IsPrint() const { return fIsPrint; }
-
 /// Return the option to print or save regions from production cuts table
 inline G4bool TG4RegionsManager::IsG4Table() const
 { return fIsG4Table; }
-
-/// Return option to save all regions in a file
-inline G4bool TG4RegionsManager::IsSave() const { return fIsSave; }
 
 /// Return the option to load regions ranges from a file
 inline G4bool TG4RegionsManager::IsLoad() const { return fIsLoad; }

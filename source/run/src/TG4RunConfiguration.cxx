@@ -48,6 +48,7 @@ TG4RunConfiguration::TG4RunConfiguration(const TString& userGeometry,
     fMTApplication(mtApplication),
     fSpecialControls(false),
     fSpecialCuts(false),
+    fSpecialCutsOld(false),
     fAGDDMessenger(0),
     fGDMLMessenger(0),
     fParameters()
@@ -320,6 +321,19 @@ void TG4RunConfiguration::SetParameter(const TString& name, Double_t value)
 }
 
 //_____________________________________________________________________________
+void TG4RunConfiguration::SetSpecialCutsOld()
+{
+  /// Activate usage of old regions manager
+  /// that sets production thresholds by ranges
+
+  G4cout
+    << "### Special cuts old activated: production cuts will be set by ranges."
+    << G4endl;
+
+  fSpecialCutsOld = true;
+}
+
+//_____________________________________________________________________________
 TString TG4RunConfiguration::GetUserGeometry() const
 {
   /// Return the way user geometry is built
@@ -350,9 +364,17 @@ Bool_t TG4RunConfiguration::IsSpecialControls() const
 //_____________________________________________________________________________
 Bool_t TG4RunConfiguration::IsSpecialCuts() const
 {
-  /// Return true if special controls are activated
+  /// Return true if special cuts are activated
 
   return fSpecialCuts;
+}
+
+//_____________________________________________________________________________
+Bool_t TG4RunConfiguration::IsSpecialCutsOld() const
+{
+  /// Return true if special cuts old are activated
+
+  return fSpecialCutsOld;
 }
 
 //_____________________________________________________________________________

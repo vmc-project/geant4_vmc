@@ -23,6 +23,7 @@
 #include "TG4PhysicsManager.h"
 #include "TG4PostDetConstruction.h"
 #include "TG4RegionsManager.h"
+#include "TG4RegionsManager2.h"
 #include "TG4RunConfiguration.h"
 #include "TG4SDConstruction.h"
 #include "TG4SDManager.h"
@@ -293,7 +294,14 @@ void TG4RunManager::ConfigureRunManager()
 
   // Regions manager
   //
-  fRegionsManager = new TG4RegionsManager();
+  if (fRunConfiguration->IsSpecialCuts()) {
+    if (fRunConfiguration->IsSpecialCutsOld()) {
+      fRegionsManager = new TG4RegionsManager();
+    }
+    else {
+      fRegionsManager = new TG4RegionsManager2();
+    }
+  }
 
   if (VerboseLevel() > 1)
     G4cout << "TG4RunManager::ConfigureRunManager done " << this << G4endl;
@@ -450,7 +458,10 @@ void TG4RunManager::LateInitialize()
     //  ->SetIsPairCut((*TG4G3PhysicsManager::Instance()->GetIsCutVector())[kEplus]);
 
     // convert tracking cuts in range cuts per regions
-    if (fRunConfiguration->IsSpecialCuts()) fRegionsManager->DefineRegions();
+    if (fRunConfiguration->IsSpecialCuts()) {
+      fRegionsManager->DefineRegions();
+      fRegionsManager->UpdateProductionCutsTable();
+    }
   }
 
   // activate/inactivate physics processes

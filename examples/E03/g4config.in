@@ -18,6 +18,7 @@
 /mcVerbose/composedPhysicsList 1
 #/mcVerbose/trackManager 2
 #/mcVerbose/geometryManager 2
+#/mcVerbose/regionsManager 2
 
 /control/cout/ignoreThreadsExcept 0
 
@@ -25,3 +26,10 @@
 #/mcPrimaryGenerator/skipUnknownParticles true
 
 #/tracking/verbose 1
+
+/mcPhysics/rangeCuts 0.01 mm
+
+#/mcRegions/check true
+#/mcRegions/print true
+#/mcRegions/save true
+#/mcRegions/setFileName regions2.dat

@@ -24,6 +24,10 @@ void Config()
      = new TG4RunConfiguration("geomRootToGeant4", "FTFP_BERT",
                                "specialCuts+specialControls");
 
+  // Activate usage of old regions manager
+  // that sets production thresholds by ranges
+  // runConfiguration->SetSpecialCutsOld(true);
+
   // TGeant4
   TGeant4* geant4
     = new TGeant4("TGeant4", "The Geant4 Monte Carlo", runConfiguration);

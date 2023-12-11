@@ -13,7 +13,7 @@
 ///
 /// Running Example03
 
-void test_E03_5(const TString& configMacro, Bool_t oldGeometry)
+void test_E03_5(const TString& configMacro = "g4Config4.C", Bool_t oldGeometry = kFALSE)
 {
 /// Macro function for testing example E03
 /// \param configMacro  configuration macro loaded in initialization
@@ -42,6 +42,7 @@ void test_E03_5(const TString& configMacro, Bool_t oldGeometry)
   appl->SetOldGeometry(oldGeometry);
 
   appl->InitMC(configMacro);
+
   appl->RunMC(1);
 
   if ( needDelete ) delete appl;
