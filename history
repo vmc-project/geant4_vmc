@@ -9,6 +9,34 @@
 
 Tags (history):
 ===============
+  11/12/2023
+  v6-5:
+    Geant4 VMC:
+    - Migration to Geant4 11.2: (#55)
+      - Update TG4RootNavigator, TG4StepManager for changes in G4VTouchable
+        and G4Touchable*Handle
+      - Replaced /mcPhysics/g4NeutronHPVerbose with
+        /mcPhysics/g4ParticleHPVerbose as G4NeutronHPManager was removed
+      - Setting a cross section scale factor for hadronic processes update:
+        Take into account hadronic process sub-types fNu* (new in Geant4 11.2)
+      - Updated physics lists in test_physics_lists.sh
+      - Updated process map for new process sub-types
+    - Implemented setting productions cuts per energy (#56):
+      - Introduced TG4VRegionsManager base class with common implementation
+        and new TG4RegionManager2 using new G4ProductionCutsTable::SetEnergyCutVector function
+      - Added an option 'IsSpecialCutsOld' in TG4RunConfiguration that allows
+        to switch to old way of computation of production cuts
+
+    Examples:
+    - In E03: updates in cuts setting (#56):
+      - SetCuts: Set 100 keV cut everywhere to make easier to test that the cuts
+        are applied
+      - In E03/g4[TGeo]Config4[seq].C - added a commented line that can be used
+      to activate the old regions manager that sets production thresholds by ranges
+
+    Tested with VMC 2.0, Geant4 11.2 (with embedded CLHEP 2.4.7.1)
+      Root 6.30/02, VGM 5.2, Garfield 4.0
+
   08/12/2023
   v6-4:
     Geant4 VMC:
