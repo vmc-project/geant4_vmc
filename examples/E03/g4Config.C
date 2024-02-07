@@ -37,5 +37,8 @@ void Config()
   // (verbose level, global range cut, ..)
   geant4->ProcessGeantMacro("g4config.in");
 
+  // Switch off photo nuclear process
+  // geant4->SetProcess("PFIS", 0);
+
   cout << "Processing Config() done." << endl;
 }
