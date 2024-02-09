@@ -9,6 +9,23 @@
 
 Tags (history):
 ===============
+  09/02/2024
+  v6-6:
+    Geant4 VMC:
+    - Make the 'PFIS' process control switch on/off "photonNuclear" process(es)
+      - Added special treatment of gamma processes if G4GeneralGammaProcess is in use:
+        the 'PFIS' control can be still applied, for the other gamma related controls
+        a warning is issued inviting users to switch G4GeneralGammaProcess off
+       (#58)
+
+    Examples:
+    - Removed pythia6 dependent libraries from g3libs.C (#57)
+    - Added comments that demonstrate switching off the 'PFIS' control and
+      Gamma General Process in E03 config files
+
+    Tested with VMC 2.0, Geant4 11.2 (with embedded CLHEP 2.4.7.1)
+      Root 6.30/02, VGM 5.2, Garfield 4.0
+
   11/12/2023
   v6-5:
     Geant4 VMC:
