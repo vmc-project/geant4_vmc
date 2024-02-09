@@ -1,9 +1,9 @@
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -27,7 +27,7 @@ Processing test_E03_1.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -88,12 +88,15 @@ Geant4 has been created.
 /control/cout/ignoreThreadsExcept 0
 #/mcTracking/saveSecondariesInStep true
 #/mcPrimaryGenerator/skipUnknownParticles true
+# switch off use of Gamma General Process
+#/process/em/UseGeneralProcess false
 #/tracking/verbose 1
 /mcPhysics/rangeCuts 0.01 mm
 #/mcRegions/check true
 #/mcRegions/print true
 #/mcRegions/save true
 #/mcRegions/setFileName regions2.dat
+Processing Config() done.
 TG4RootDetectorConstruction::ConstructSDandField
 TG4PostDetConstruction::InitializeSDandField
  G4ChordFinder: stepperDriverId: 2
@@ -880,14 +883,14 @@ Index : 2     used in the geometry : Yes
 ---> Begin of event: 5
    Absorber: total energy (MeV):  891.76       total track length (cm):  69.2535
    Gap:      total energy (MeV): 50.3776       total track length (cm):  26.1564
-Time of this run:   User=0.180000s Real=0.181404s Sys=0.000000s
+Time of this run:   User=0.100000s Real=0.104440s Sys=0.000000s
 Number of events processed: 5
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -912,7 +915,7 @@ Processing test_E03_2.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -975,12 +978,15 @@ Geant4 has been created.
 /control/cout/ignoreThreadsExcept 0
 #/mcTracking/saveSecondariesInStep true
 #/mcPrimaryGenerator/skipUnknownParticles true
+# switch off use of Gamma General Process
+#/process/em/UseGeneralProcess false
 #/tracking/verbose 1
 /mcPhysics/rangeCuts 0.01 mm
 #/mcRegions/check true
 #/mcRegions/print true
 #/mcRegions/save true
 #/mcRegions/setFileName regions2.dat
+Processing Config() done.
 TG4RootDetectorConstruction::ConstructSDandField
 TG4PostDetConstruction::InitializeSDandField
 --- Construct sensitive detectors
@@ -3013,15 +3019,15 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Absorber: total energy (MeV):  48.017       total track length (cm):    3.772
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish event 
-Time of this run:   User=0.000000s Real=0.006437s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.005483s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -3046,7 +3052,7 @@ Processing test_E03_3.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -3109,12 +3115,15 @@ Geant4 has been created.
 /control/cout/ignoreThreadsExcept 0
 #/mcTracking/saveSecondariesInStep true
 #/mcPrimaryGenerator/skipUnknownParticles true
+# switch off use of Gamma General Process
+#/process/em/UseGeneralProcess false
 #/tracking/verbose 1
 /mcPhysics/rangeCuts 0.01 mm
 #/mcRegions/check true
 #/mcRegions/print true
 #/mcRegions/save true
 #/mcRegions/setFileName regions2.dat
+Processing Config() done.
 TG4RootDetectorConstruction::ConstructSDandField
 TG4PostDetConstruction::InitializeSDandField
 --- Construct sensitive detectors
@@ -3934,15 +3943,15 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.136
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish event 
-Time of this run:   User=0.000000s Real=0.000812s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.001048s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -3966,7 +3975,7 @@ Processing test_E03_4.C("g4tgeoConfig.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -4027,12 +4036,15 @@ Geant4 has been created.
 /control/cout/ignoreThreadsExcept 0
 #/mcTracking/saveSecondariesInStep true
 #/mcPrimaryGenerator/skipUnknownParticles true
+# switch off use of Gamma General Process
+#/process/em/UseGeneralProcess false
 #/tracking/verbose 1
 /mcPhysics/rangeCuts 0.01 mm
 #/mcRegions/check true
 #/mcRegions/print true
 #/mcRegions/save true
 #/mcRegions/setFileName regions2.dat
+Processing Config() done.
 TG4RootDetectorConstruction::ConstructSDandField
 TG4PostDetConstruction::InitializeSDandField
  G4ChordFinder: stepperDriverId: 2
@@ -4823,14 +4835,14 @@ Index : 2     used in the geometry : Yes
 
    Absorber: total energy (MeV): 1634.66       total track length (cm):  126.532
    Gap:      total energy (MeV): 85.6831       total track length (cm):  44.5078
-Time of this run:   User=0.070000s Real=0.067257s Sys=0.000000s
+Time of this run:   User=0.040000s Real=0.040746s Sys=0.000000s
 Number of events processed: 1
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -4855,7 +4867,7 @@ Processing test_E03_5.C("g4tgeoConfig4.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -4919,6 +4931,8 @@ Geant4 has been created.
 /control/cout/ignoreThreadsExcept 0
 #/mcTracking/saveSecondariesInStep true
 #/mcPrimaryGenerator/skipUnknownParticles true
+# switch off use of Gamma General Process
+#/process/em/UseGeneralProcess false
 #/tracking/verbose 1
 /mcPhysics/rangeCuts 0.01 mm
 #/mcRegions/check true
@@ -6403,15 +6417,15 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
    Absorber: total energy (MeV):  49.600       total track length (cm):    3.836
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
 --- Finish event 
-Time of this run:   User=0.010000s Real=0.004127s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.003814s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -6435,7 +6449,7 @@ Processing test_E03_6.C("g4tgeoConfig5.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -6495,6 +6509,8 @@ Visualization Manager instantiating with verbosity "warnings (3)"...
 /control/cout/ignoreThreadsExcept 0
 #/mcTracking/saveSecondariesInStep true
 #/mcPrimaryGenerator/skipUnknownParticles true
+# switch off use of Gamma General Process
+#/process/em/UseGeneralProcess false
 #/tracking/verbose 1
 /mcPhysics/rangeCuts 0.01 mm
 #/mcRegions/check true
@@ -7273,14 +7289,14 @@ Index : 2     used in the geometry : Yes
 ---> Begin of event: 1
    Absorber: total energy (MeV): 658.406       total track length (cm):  42.3741
    Gap:      total energy (MeV): 48.9311       total track length (cm):  21.6692
-Time of this run:   User=0.010000s Real=0.015274s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.008588s Sys=0.000000s
 Number of events processed: 1
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -7304,7 +7320,7 @@ Processing test_E03_7.C("g4tgeoConfig6.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -7366,6 +7382,8 @@ Geant4 has been created.
 /control/cout/ignoreThreadsExcept 0
 #/mcTracking/saveSecondariesInStep true
 #/mcPrimaryGenerator/skipUnknownParticles true
+# switch off use of Gamma General Process
+#/process/em/UseGeneralProcess false
 #/tracking/verbose 1
 /mcPhysics/rangeCuts 0.01 mm
 #/mcRegions/check true
@@ -8981,7 +8999,7 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
     1      -20    0.714     3.26      1.28        0     12.4      12.4        GAPX Transportation
     2      -15    -6.54     3.16      1.28        0     8.81      21.2        ABSO Transportation
     3       -5      -21     2.96      1.28        0     17.6      38.8        GAPX Transportation
-    4        0    -28.3     2.86      1.28        0     8.81      47.6        ABSO Transportation
+    4 8.88e-16    -28.3     2.86      1.28        0     8.81      47.6        ABSO Transportation
     5       10    -42.8     2.66      1.28        0     17.6      65.2        GAPX Transportation
     6       15      -50     2.57      1.28        0     8.75        74        WRLD Transportation
     7     21.9      -60     2.43      1.28        0     12.1      86.1  OutOfWorld Transportation
@@ -9117,7 +9135,7 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
     0     17.1    -8.42    -4.54     0.357        0        0         0        ABSO initStep
     1       15    -11.8    -6.13     0.357        0     4.26      4.26        GAPX Transportation
     2       10    -19.7    -9.91     0.357        0     10.1      14.4        ABSO Transportation
-    3 -1.78e-15    -35.5    -17.5     0.357        0     20.2      34.5        GAPX Transportation
+    3        0    -35.5    -17.5     0.357        0     20.2      34.5        GAPX Transportation
     4       -5    -43.4    -21.2     0.357        0     10.1      44.6        ABSO Transportation
     5    -9.16      -50    -24.4     0.357        0      8.4        53        WRLD Transportation
     6    -15.5      -60    -29.2     0.357        0     12.8      65.8  OutOfWorld Transportation
@@ -9191,7 +9209,7 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
     0     17.1    -8.42    -4.54      1.48        0        0         0        ABSO initStep
     1       15    -9.29    -5.08      1.48        0     2.34      2.34        GAPX Transportation
     2       10    -11.3    -6.36      1.48        0     5.56       7.9        ABSO Transportation
-    3 -1.78e-15    -15.5    -8.91      1.48        0     11.1        19        GAPX Transportation
+    3        0    -15.5    -8.91      1.48        0     11.1        19        GAPX Transportation
     4       -5    -17.5    -10.2      1.48        0     5.56      24.6        ABSO Transportation
     5      -15    -21.7    -12.7      1.48        0     11.1      35.7        GAPX Transportation
     6    -18.8    -23.2    -13.7     0.372        0     4.27        40        GAPX compt
@@ -9694,7 +9712,7 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
 Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
     0      -13     9.21     10.1       3.6        0        0         0        ABSO initStep
     1       -5     6.96     13.7       3.6        0     9.05      9.05        GAPX Transportation
-    2        0     5.55       16       3.6        0     5.67      14.7        ABSO Transportation
+    2 8.88e-16     5.55       16       3.6        0     5.67      14.7        ABSO Transportation
     3       10     2.73     20.5       3.6        0     11.3      26.1        GAPX Transportation
     4       15     1.32     22.8       3.6        0     5.67      31.7        ABSO Transportation
     5       25    -1.51     27.3       3.6        0     11.3      43.1        GAPX Transportation
@@ -11454,5 +11472,5 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
     1    -73.8  0.00144  0.00039         0    0.091   0.0238    0.0238        ABSO eIoni
    Absorber: total energy (MeV): 125.717       total track length (cm):  7.07812
    Gap:      total energy (MeV): 7.77793       total track length (cm):  2.54497
-Time of this run:   User=0.020000s Real=0.018140s Sys=0.000000s
+Time of this run:   User=0.010000s Real=0.012676s Sys=0.010000s
 Number of events processed: 1

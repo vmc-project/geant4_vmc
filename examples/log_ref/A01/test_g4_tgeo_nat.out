@@ -1,9 +1,9 @@
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ Processing test_A01_1.C("g4Config.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -865,53 +865,53 @@ Index : 5     used in the geometry : Yes
 ### Run 0 start.
 
 >>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 1 hits.
+Hodoscope1 has 3 hits.
 Hodoscope2 has 10 hits.
-Chamber1 has 527 hits.
-Chamber2 has 514 hits.
-EmCalorimeter has 45 hits. Total Edep is 88268.6 (MeV)
-HadCalorimeter has 7 hits. Total Edep is 11.9584 (MeV)
+Chamber1 has 529 hits.
+Chamber2 has 500 hits.
+EmCalorimeter has 46 hits. Total Edep is 85840.1 (MeV)
+HadCalorimeter has 5 hits. Total Edep is 11.9446 (MeV)
 
 >>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
+Hodoscope1 has 2 hits.
 Hodoscope2 has 3 hits.
-Chamber1 has 526 hits.
-Chamber2 has 521 hits.
-EmCalorimeter has 22 hits. Total Edep is 18851.1 (MeV)
-HadCalorimeter has 15 hits. Total Edep is 2581.08 (MeV)
+Chamber1 has 545 hits.
+Chamber2 has 510 hits.
+EmCalorimeter has 36 hits. Total Edep is 18476.6 (MeV)
+HadCalorimeter has 14 hits. Total Edep is 2639.98 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 11 hits.
-Chamber1 has 530 hits.
-Chamber2 has 491 hits.
-EmCalorimeter has 65 hits. Total Edep is 30518 (MeV)
-HadCalorimeter has 18 hits. Total Edep is 1800.46 (MeV)
+Hodoscope1 has 2 hits.
+Hodoscope2 has 12 hits.
+Chamber1 has 515 hits.
+Chamber2 has 519 hits.
+EmCalorimeter has 64 hits. Total Edep is 29815.7 (MeV)
+HadCalorimeter has 15 hits. Total Edep is 1743.26 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 7 hits.
+Hodoscope1 has 6 hits.
 Hodoscope2 has 7 hits.
-Chamber1 has 429 hits.
-Chamber2 has 180 hits.
-EmCalorimeter has 50 hits. Total Edep is 10577.3 (MeV)
-HadCalorimeter has 14 hits. Total Edep is 230.907 (MeV)
+Chamber1 has 420 hits.
+Chamber2 has 178 hits.
+EmCalorimeter has 42 hits. Total Edep is 7100.45 (MeV)
+HadCalorimeter has 14 hits. Total Edep is 477.617 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 4 hits.
-Hodoscope2 has 5 hits.
-Chamber1 has 535 hits.
-Chamber2 has 512 hits.
-EmCalorimeter has 46 hits. Total Edep is 28978.5 (MeV)
-HadCalorimeter has 16 hits. Total Edep is 121.223 (MeV)
-Time of this run:   User=4.820000s Real=4.844234s Sys=0.030000s
+Hodoscope1 has 2 hits.
+Hodoscope2 has 7 hits.
+Chamber1 has 523 hits.
+Chamber2 has 544 hits.
+EmCalorimeter has 49 hits. Total Edep is 29543.2 (MeV)
+HadCalorimeter has 15 hits. Total Edep is 232.289 (MeV)
+Time of this run:   User=2.120000s Real=2.140284s Sys=0.020000s
 Number of events processed: 5
-Real time 0:00:06, CP time 6.330
+Real time 0:00:03, CP time 2.990
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -932,7 +932,7 @@ Processing test_A01_2.C("g4Config2.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -1757,61 +1757,42 @@ Index : 5     used in the geometry : Yes
 >>> Event 0 >>> Simulation truth : e+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 2 hits.
 Hodoscope2 has 9 hits.
-Chamber1 has 553 hits.
-Chamber2 has 503 hits.
-EmCalorimeter has 42 hits. Total Edep is 87095 (MeV)
-HadCalorimeter has 5 hits. Total Edep is 8.80764 (MeV)
+Chamber1 has 557 hits.
+Chamber2 has 498 hits.
+EmCalorimeter has 43 hits. Total Edep is 87015.6 (MeV)
+HadCalorimeter has 5 hits. Total Edep is 8.96342 (MeV)
 
 >>> Event 1 >>> Simulation truth : mu+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
-Hodoscope2 has 2 hits.
-Chamber1 has 543 hits.
-Chamber2 has 530 hits.
-EmCalorimeter has 31 hits. Total Edep is 18821.1 (MeV)
-HadCalorimeter has 17 hits. Total Edep is 2753.46 (MeV)
+Hodoscope1 has 2 hits.
+Hodoscope2 has 6 hits.
+Chamber1 has 539 hits.
+Chamber2 has 529 hits.
+EmCalorimeter has 32 hits. Total Edep is 18546.7 (MeV)
+HadCalorimeter has 16 hits. Total Edep is 2628.42 (MeV)
 
 >>> Event 2 >>> Simulation truth : pi+ (-6.91145, 0, 989.976) MeV
 Hodoscope1 has 3 hits.
-Hodoscope2 has 10 hits.
-Chamber1 has 506 hits.
-Chamber2 has 494 hits.
-EmCalorimeter has 61 hits. Total Edep is 31005.3 (MeV)
-HadCalorimeter has 15 hits. Total Edep is 1704.65 (MeV)
+Hodoscope2 has 15 hits.
+Chamber1 has 528 hits.
+Chamber2 has 475 hits.
+EmCalorimeter has 63 hits. Total Edep is 26597.4 (MeV)
+HadCalorimeter has 18 hits. Total Edep is 1633.46 (MeV)
 
 >>> Event 3 >>> Simulation truth : K+ (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 7 hits.
+Hodoscope1 has 8 hits.
 Hodoscope2 has 6 hits.
-Chamber1 has 490 hits.
-Chamber2 has 155 hits.
-EmCalorimeter has 55 hits. Total Edep is 8840.08 (MeV)
-HadCalorimeter has 15 hits. Total Edep is 265.342 (MeV)
-
--------- WWWW ------- G4Exception-START -------- WWWW -------
-*** G4Exception : GeomNav1002
-      issued by : G4Navigator::ComputeStep()
-Stuck Track: potential geometry or navigation problem.
-  Track stuck, not moving for 10 steps.
-  Current  phys volume: 'worldLogical'
-   - at position : (-40.83345306224147,-223.3307197705953,-999.1659667497756)
-     in direction: (0.9413689888192693,-0.3368148592805732,-0.01949813983932261)
-    (local position: (-40.83345306224147,-223.3307197705953,-999.1659667497756))
-    (local direction: (0.9413689888192693,-0.3368148592805732,-0.01949813983932261)).
-  Previous phys volume: 'magneticLogical'
-
-  Likely geometry overlap - else navigation problem !
-   *** Trying to get *unstuck* using a push - expanding step to 1e-07 (mm) ...       Potential overlap in geometry !
-
-*** This is just a warning message. ***
--------- WWWW -------- G4Exception-END --------- WWWW -------
-
+Chamber1 has 395 hits.
+Chamber2 has 139 hits.
+EmCalorimeter has 36 hits. Total Edep is 3982.21 (MeV)
+HadCalorimeter has 16 hits. Total Edep is 303.388 (MeV)
 
 >>> Event 4 >>> Simulation truth : proton (-6.91145, 0, 989.976) MeV
-Hodoscope1 has 3 hits.
+Hodoscope1 has 1 hits.
 Hodoscope2 has 6 hits.
-Chamber1 has 520 hits.
-Chamber2 has 522 hits.
-EmCalorimeter has 48 hits. Total Edep is 27796 (MeV)
-HadCalorimeter has 15 hits. Total Edep is 207.764 (MeV)
-Time of this run:   User=4.350000s Real=4.385300s Sys=0.030000s
+Chamber1 has 538 hits.
+Chamber2 has 499 hits.
+EmCalorimeter has 48 hits. Total Edep is 27072.2 (MeV)
+HadCalorimeter has 12 hits. Total Edep is 73.0454 (MeV)
+Time of this run:   User=1.840000s Real=1.860029s Sys=0.020000s
 Number of events processed: 5
-Real time 0:00:05, CP time 5.860
+Real time 0:00:02, CP time 2.750

@@ -1,9 +1,9 @@
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -27,7 +27,7 @@ Processing test_E03_1.C("g4Config.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -58,6 +58,8 @@ Geant4 has been created.
 /control/cout/ignoreThreadsExcept 0
 #/mcTracking/saveSecondariesInStep true
 #/mcPrimaryGenerator/skipUnknownParticles true
+# switch off use of Gamma General Process
+#/process/em/UseGeneralProcess false
 #/tracking/verbose 1
 /mcPhysics/rangeCuts 0.01 mm
 #/mcRegions/check true
@@ -870,14 +872,14 @@ Index : 2     used in the geometry : Yes
 ---> Begin of event: 5
    Absorber: total energy (MeV): 920.294       total track length (cm):  70.8407
    Gap:      total energy (MeV): 20.3556       total track length (cm):  10.5996
-Time of this run:   User=0.170000s Real=0.166914s Sys=0.010000s
+Time of this run:   User=0.090000s Real=0.081288s Sys=0.000000s
 Number of events processed: 5
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -902,7 +904,7 @@ Processing test_E03_2.C("g4Config.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -934,6 +936,8 @@ Geant4 has been created.
 /control/cout/ignoreThreadsExcept 0
 #/mcTracking/saveSecondariesInStep true
 #/mcPrimaryGenerator/skipUnknownParticles true
+# switch off use of Gamma General Process
+#/process/em/UseGeneralProcess false
 #/tracking/verbose 1
 /mcPhysics/rangeCuts 0.01 mm
 #/mcRegions/check true
@@ -3224,15 +3228,15 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  44.740       total track length (cm):    3.266
    Gap:      total energy (MeV):   2.267       total track length (cm):    1.100
-Time of this run:   User=0.010000s Real=0.007609s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.006136s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -3257,7 +3261,7 @@ Processing test_E03_3.C("g4Config.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -3289,6 +3293,8 @@ Geant4 has been created.
 /control/cout/ignoreThreadsExcept 0
 #/mcTracking/saveSecondariesInStep true
 #/mcPrimaryGenerator/skipUnknownParticles true
+# switch off use of Gamma General Process
+#/process/em/UseGeneralProcess false
 #/tracking/verbose 1
 /mcPhysics/rangeCuts 0.01 mm
 #/mcRegions/check true
@@ -4133,15 +4139,15 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV): 1181.956       total track length (cm):    0.136
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.000000s Real=0.000742s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.000761s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -4165,7 +4171,7 @@ Processing test_E03_4.C("g4Config.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -4196,6 +4202,8 @@ Geant4 has been created.
 /control/cout/ignoreThreadsExcept 0
 #/mcTracking/saveSecondariesInStep true
 #/mcPrimaryGenerator/skipUnknownParticles true
+# switch off use of Gamma General Process
+#/process/em/UseGeneralProcess false
 #/tracking/verbose 1
 /mcPhysics/rangeCuts 0.01 mm
 #/mcRegions/check true
@@ -5012,14 +5020,14 @@ Index : 2     used in the geometry : Yes
 
    Absorber: total energy (MeV): 1447.44       total track length (cm):  112.104
    Gap:      total energy (MeV): 69.2389       total track length (cm):  35.0975
-Time of this run:   User=0.060000s Real=0.058205s Sys=0.000000s
+Time of this run:   User=0.020000s Real=0.028817s Sys=0.000000s
 Number of events processed: 1
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -5044,7 +5052,7 @@ Processing test_E03_5.C("g4Config4.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -5077,6 +5085,8 @@ Geant4 has been created.
 /control/cout/ignoreThreadsExcept 0
 #/mcTracking/saveSecondariesInStep true
 #/mcPrimaryGenerator/skipUnknownParticles true
+# switch off use of Gamma General Process
+#/process/em/UseGeneralProcess false
 #/tracking/verbose 1
 /mcPhysics/rangeCuts 0.01 mm
 #/mcRegions/check true
@@ -6579,15 +6589,15 @@ Step#     X(cm)    Y(cm)    Z(cm)  KinE(MeV)   dE(MeV) Step(cm) TrackL(cm) Volum
 --- Finish event 
    Absorber: total energy (MeV):  49.600       total track length (cm):    3.836
    Gap:      total energy (MeV):   0.000       total track length (cm):    0.000
-Time of this run:   User=0.010000s Real=0.004609s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.003315s Sys=0.000000s
 Number of events processed: 1
 --- Finish Run MC 
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -6611,7 +6621,7 @@ Processing test_E03_6.C("g4Config5.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -6641,6 +6651,8 @@ Visualization Manager instantiating with verbosity "warnings (3)"...
 /control/cout/ignoreThreadsExcept 0
 #/mcTracking/saveSecondariesInStep true
 #/mcPrimaryGenerator/skipUnknownParticles true
+# switch off use of Gamma General Process
+#/process/em/UseGeneralProcess false
 #/tracking/verbose 1
 /mcPhysics/rangeCuts 0.01 mm
 #/mcRegions/check true
@@ -7438,14 +7450,14 @@ Index : 2     used in the geometry : Yes
 ---> Begin of event: 1
    Absorber: total energy (MeV): 658.732       total track length (cm):    42.86
    Gap:      total energy (MeV):  40.808       total track length (cm):  14.6573
-Time of this run:   User=0.010000s Real=0.014842s Sys=0.000000s
+Time of this run:   User=0.000000s Real=0.007493s Sys=0.000000s
 Number of events processed: 1
    ------------------------------------------------------------------
   | Welcome to ROOT 6.30/00                        https://root.cern |
   | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Dec 08 2023, 10:25:56                   |
+  | Built for macosxarm64 on Jan 12 2024, 15:32:30                   |
   | From tags/v6-30-00@                                              |
-  | With Apple clang version 14.0.0 (clang-1400.0.29.102)            |
+  | With Apple clang version 15.0.0 (clang-1500.1.0.2.5)             |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
@@ -7469,7 +7481,7 @@ Processing test_E03_7.C("g4Config6.C",kFALSE)...
 
 =============================================================
  Geant4 Virtual Monte Carlo 
- Version 6.5 ( 11 December 2023 )
+ Version 6.6 ( 9 February 2024 )
  WWW : http://root.cern.ch/drupal/content/geant4-vmc
 =============================================================
 
@@ -7502,6 +7514,8 @@ Geant4 has been created.
 /control/cout/ignoreThreadsExcept 0
 #/mcTracking/saveSecondariesInStep true
 #/mcPrimaryGenerator/skipUnknownParticles true
+# switch off use of Gamma General Process
+#/process/em/UseGeneralProcess false
 #/tracking/verbose 1
 /mcPhysics/rangeCuts 0.01 mm
 #/mcRegions/check true
@@ -11299,5 +11313,5 @@ Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolu
     1    -73.8  0.00185 -0.00232         0    0.144   0.0501    0.0501        ABSO eIoni
    Absorber: total energy (MeV): 112.426       total track length (cm):  6.08365
    Gap:      total energy (MeV): 15.0342       total track length (cm):  6.33315
-Time of this run:   User=0.030000s Real=0.038379s Sys=0.000000s
+Time of this run:   User=0.020000s Real=0.017293s Sys=0.010000s
 Number of events processed: 1
