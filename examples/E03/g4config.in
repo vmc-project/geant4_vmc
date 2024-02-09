@@ -25,6 +25,9 @@
 #/mcTracking/saveSecondariesInStep true
 #/mcPrimaryGenerator/skipUnknownParticles true
 
+# switch off use of Gamma General Process
+#/process/em/UseGeneralProcess false
+
 #/tracking/verbose 1
 
 /mcPhysics/rangeCuts 0.01 mm

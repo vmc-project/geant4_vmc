@@ -26,6 +26,8 @@
 #include "TG4SpecialPhysicsList.h"
 #include "TG4StateManager.h"
 
+#include <G4EmProcessSubType.hh>
+#include <G4GammaGeneralProcess.hh>
 #include <G4OpBoundaryProcess.hh>
 #include <G4OpProcessSubType.hh>
 #include <G4OpticalPhoton.hh>
@@ -283,6 +285,37 @@ void TG4PhysicsManager::SetSpecialControlsActivation()
     // global setting in the control vector in G3 physics manager
     //
     for (size_t j = 0; j < processVector->length(); j++) {
+
+      // Special treatment of gamma processes if G4GeneralGammaProcess is in use
+      if ((*processVector)[j]->GetProcessSubType() == fGammaGeneralProcess) {
+
+        // PFIS can be inactivated via G4GeneralGammaProcess
+        auto gammaGeneralProcess = static_cast<G4GammaGeneralProcess*>((*processVector)[j]);
+        auto gammaNuclear = gammaGeneralProcess->GetGammaNuclear();
+        auto pfisControl = (*controlVector)[kPFIS];
+        if (pfisControl == kInActivate && gammaNuclear != nullptr ) {
+          // GammaNuclear process was already created, overwrite it with nullptr
+          // G4UImanager::GetUIpointer()->ApplyCommand("/physics_lists/em/GammaNuclear false");
+          //         // the command has no effect at this stage
+          gammaGeneralProcess->AddHadProcess(nullptr);
+        }
+        if (pfisControl == kActivate && gammaNuclear == nullptr ) {
+          TG4Globals::Warning("TG4PhysicsManager", "SetSpecialControlsActivation",
+            "Cannot activate PFIS control, the process is not built.");
+        }
+
+        // check other controls that cannot be applied via G4GeneralGammaProcess
+        if ((*controlVector)[kPAIR] == kInActivate || (*controlVector)[kCOMP] == kInActivate ||
+            (*controlVector)[kPHOT] == kInActivate ) {
+          // Issue a warning
+          TG4Globals::Warning("TG4PhysicsManager", "SetSpecialControlsActivation",
+            "Cannot apply PAIR, COMP, PHOT controls when using G4GammaGeneralProcess.\n"
+            "Usage of G4GammaGeneralProcess can be inactivated with: \n"
+            "/process/em/UseGeneralProcess false");
+        }
+
+        continue;
+      }
 
       TG4G3ControlValue control =
         controlVector->GetControlValue((*processVector)[j]);
