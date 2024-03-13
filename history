@@ -9,6 +9,18 @@
 
 Tags (history):
 ===============
+  13/03/2024
+  v6-6-p1:
+    Geant4 VMC:
+    Fix & improvements in new setting productions cuts per energy (#59)
+     - Moved fApplyFor* data members from TG4RegionsManager in TG4VRegionsManager to make them and  their related UI commands available also for new way of setting production cuts
+     - Set EnergyCutVector also for positrons (CUTELE) and protons (HADR)
+     - Use Geant3 default cut value (from TG4G3Defaults) if it is not set by user
+       via SetCut()
+
+    Tested with VMC 2.0, Geant4 11.2 (with embedded CLHEP 2.4.7.1)
+      Root 6.30/02, VGM 5.2, Garfield 4.0
+
   09/02/2024
   v6-6:
     Geant4 VMC:
