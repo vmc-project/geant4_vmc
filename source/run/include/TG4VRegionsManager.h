@@ -54,12 +54,20 @@ class TG4VRegionsManager : public TG4Verbose
 
   // set methods
   void SetFileName(const G4String& fileName);
+  void SetApplyForGamma(G4bool applyForGamma);
+  void SetApplyForElectron(G4bool applyForElectron);
+  void SetApplyForPositron(G4bool applyForPositron);
+  void SetApplyForProton(G4bool applyForProton);
   void SetCheck(G4bool isCheck);
   void SetPrint(G4bool isPrint);
   void SetSave(G4bool isSave);
 
   // get methods
   G4String GetFileName() const;
+  G4bool GetApplyForGamma() const;
+  G4bool GetApplyForElectron() const;
+  G4bool GetApplyForPositron() const;
+  G4bool GetApplyForProton() const;
   G4bool IsCheck() const;
   G4bool IsPrint() const;
   G4bool IsSave() const;
@@ -109,12 +117,20 @@ class TG4VRegionsManager : public TG4Verbose
 
   /// file name for regions output
   G4String fFileName;
+  /// option to apply cuts for gamma (default is true)
+  G4bool fApplyForGamma = true;
+  /// option to apply cuts for e- (default is true)
+  G4bool fApplyForElectron = true;
+  /// option to apply cuts for e+ (default is true)
+  G4bool fApplyForPositron = true;
+  /// option to apply cuts for proton (default is true)
+  G4bool fApplyForProton = true;
   /// option to perform consistency check (by default false)
   G4bool fIsCheck = false;
   /// option to print all regions
-  G4bool fIsPrint = false;;
+  G4bool fIsPrint = false;
   /// option to save all regions in a file
-  G4bool fIsSave = false;;
+  G4bool fIsSave = false;
 };
 
 /// Return the singleton instance
@@ -124,18 +140,69 @@ inline TG4VRegionsManager* TG4VRegionsManager::Instance() { return fgInstance; }
 inline void TG4VRegionsManager::SetFileName(const G4String& fileName)
 { fFileName = fileName; }
 
+/// Set the option to apply range cuts for gamma (default is true)
+inline void TG4VRegionsManager::SetApplyForGamma(G4bool applyForGamma)
+{
+  fApplyForGamma = applyForGamma;
+}
+
+/// Set the option to apply range cuts for e- (default is true)
+inline void TG4VRegionsManager::SetApplyForElectron(G4bool applyForElectron)
+{
+  fApplyForElectron = applyForElectron;
+}
+
+/// Set the option to apply range cuts for e+ (default is true)
+inline void TG4VRegionsManager::SetApplyForPositron(G4bool applyForPositron)
+{
+  fApplyForPositron = applyForPositron;
+}
+
+/// Set the option to apply range cuts for proton (default is true)
+inline void TG4VRegionsManager::SetApplyForProton(G4bool applyForProton)
+{
+  fApplyForProton = applyForProton;
+}
+
+/// Set the option to perform consistency check (by default false)
 inline void TG4VRegionsManager::SetCheck(G4bool isCheck)
 { fIsCheck = isCheck; }
 
+/// Set the option to print all regions
 inline void TG4VRegionsManager::SetPrint(G4bool isPrint)
 { fIsPrint = isPrint; }
 
+/// Set the option to save all regions in a file
 inline void TG4VRegionsManager::SetSave(G4bool isSave)
 { fIsSave = isSave; }
 
 /// Return the file name for regions output
 inline G4String TG4VRegionsManager::GetFileName() const
 { return fFileName; }
+
+/// Return the option to apply range cuts for gamma
+inline G4bool TG4VRegionsManager::GetApplyForGamma() const
+{
+  return fApplyForGamma;
+}
+
+/// Return the option to apply range cuts for e+
+inline G4bool TG4VRegionsManager::GetApplyForElectron() const
+{
+  return fApplyForElectron;
+}
+
+/// Return the option to apply range cuts for positron
+inline G4bool TG4VRegionsManager::GetApplyForPositron() const
+{
+  return fApplyForPositron;
+}
+
+/// Return the option to apply range cuts for proton
+inline G4bool TG4VRegionsManager::GetApplyForProton() const
+{
+  return fApplyForProton;
+}
 
 /// Return the option to perform consistency check
 inline G4bool TG4VRegionsManager::IsCheck() const { return fIsCheck; }

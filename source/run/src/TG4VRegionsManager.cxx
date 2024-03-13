@@ -73,9 +73,18 @@ G4double TG4VRegionsManager::GetGlobalEnergyCut(TG4G3Cut cutType) const
     TG4G3PhysicsManager::Instance()->GetIsCutVector();
   TG4G3CutVector* cutVector = TG4G3PhysicsManager::Instance()->GetCutVector();
 
-  G4double cutValue = DBL_MAX;
-  if ((*isCutVector)[cutType] && (*cutVector)[cutType] > DBL_MIN) {
+  G4double cutValue = 0.;
+  if ((*isCutVector)[cutType] && (*cutVector)[cutType] > 0.) {
     cutValue = (*cutVector)[cutType];
+  }
+  else {
+    // get g3default and issue a warning
+    TG4Globals::Warning("TG4VRegionsManager", "GetGlobalEnergyCut",
+       "The default cut " + TString(TG4G3CutVector::GetCutName(cutType)) +
+       " is not defined."  + TG4Globals::Endl() + "The default Geant3 value will be used"
+       " for tracking media that do not define this cut." + TG4Globals::Endl());
+
+    cutValue = TG4G3Defaults::Instance()->CutValue(cutType);
   }
 
   return cutValue;
@@ -88,8 +97,8 @@ G4double TG4VRegionsManager::GetEnergyCut(
   /// Return cut in energy defined in limits of given cutType.
   /// Return DBL_MAX if cut value is not defined.
 
-  G4double cut = DBL_MAX;
-  if (limits->GetCutVector() && (*limits->GetCutVector())[cutType] > DBL_MIN) {
+  G4double cut = 0.;
+  if (limits->GetCutVector() && (*limits->GetCutVector())[cutType] > 0.) {
     cut = (*limits->GetCutVector())[cutType];
   }
   else {
