@@ -54,15 +54,6 @@ void TG4RegionsManager2::DefineRegions()
   auto worldLV = TG4GeometryServices::Instance()->GetWorld()->GetLogicalVolume();
   auto worldMaterial = worldLV->GetMaterial();
 
-  // Get default range cut values from physics manager
-  auto defaultRangeCutEle =
-    TG4PhysicsManager::Instance()->GetCutForElectron();
-  auto defaultRangeCutGam = TG4PhysicsManager::Instance()->GetCutForGamma();
-  auto defaultRangeCutPositron =
-    TG4PhysicsManager::Instance()->GetCutForPositron();
-  auto defaultRangeCutProton =
-    TG4PhysicsManager::Instance()->GetCutForProton();
-
   // Define region for each logical volume
   G4int counter = 0;
   auto lvStore = G4LogicalVolumeStore::GetInstance();
@@ -137,7 +128,7 @@ void TG4RegionsManager2::UpdateProductionCutsTable()
   /// Update production cuts table according to stored region information
 
   if (VerboseLevel() > 1) {
-    G4cout << "Update production cuts table" << G4endl;
+    G4cout << "Update G4 production cuts table" << G4endl;
   }
 
   auto mediumMap = TG4GeometryServices::Instance()->GetMediumMap();
@@ -146,10 +137,12 @@ void TG4RegionsManager2::UpdateProductionCutsTable()
   // Global energy cuts
   auto cutEleGlobal = GetGlobalEnergyCut(kCUTELE);
   auto cutGamGlobal = GetGlobalEnergyCut(kCUTGAM);
+  auto cutHadGlobal = GetGlobalEnergyCut(kCUTHAD);
 
   // cut vectors for gamma, e-, e+, proton
-  std::vector<G4double> gamCuts; 
-  std::vector<G4double> eleCuts; 
+  std::vector<G4double> gamCuts;
+  std::vector<G4double> eleCuts;
+  std::vector<G4double> hadCuts;
 
   // G4cout << "g4RegionStore size: " << G4RegionStore::GetInstance()->size() << G4endl;
   // G4cout << "g4ProductionCutsTable size: " << g4ProductionCutsTable->GetTableSize() << G4endl;
@@ -166,11 +159,38 @@ void TG4RegionsManager2::UpdateProductionCutsTable()
     auto limits = (TG4Limits*)medium->GetLimits();
     auto cutEle = GetEnergyCut(limits, kCUTELE, cutEleGlobal);
     auto cutGam = GetEnergyCut(limits, kCUTGAM, cutGamGlobal);
+    auto cutHad = GetEnergyCut(limits, kCUTHAD, cutHadGlobal);
 
     gamCuts.push_back(cutGam);
     eleCuts.push_back(cutEle);
+    hadCuts.push_back(cutHad);
   }
 
-  g4ProductionCutsTable->SetEnergyCutVector(gamCuts, 0);
-  g4ProductionCutsTable->SetEnergyCutVector(eleCuts, 1);
+  if (fApplyForGamma) {
+    g4ProductionCutsTable->SetEnergyCutVector(gamCuts, 0);
+    if (VerboseLevel() > 1) {
+      G4cout << "... table updated for Gamma with CUTGAM values" << G4endl;
+    }
+  }
+
+  if (fApplyForElectron) {
+    g4ProductionCutsTable->SetEnergyCutVector(eleCuts, 1);
+    if (VerboseLevel() > 1) {
+      G4cout << "... table updated for Electron with CUTELE values" << G4endl;
+    }
+  }
+
+  if (fApplyForPositron) {
+    g4ProductionCutsTable->SetEnergyCutVector(eleCuts, 2);
+    if (VerboseLevel() > 1) {
+      G4cout << "... table updated for Positron with CUTELE values" << G4endl;
+    }
+  }
+
+  if (fApplyForProton) {
+    g4ProductionCutsTable->SetEnergyCutVector(hadCuts, 3);
+    if (VerboseLevel() > 1) {
+      G4cout << "... table updated for proton with HADR values" << G4endl;
+    }
+  }
 }

@@ -103,6 +103,29 @@ void TG4RegionsMessenger::CreateCommands()
   fSetRangePrecisionCmd->SetParameterName("RangePrecision", false);
   fSetRangePrecisionCmd->AvailableForStates(G4State_PreInit, G4State_Init);
 
+  fApplyForGammaCmd = new G4UIcmdWithABool("/mcRegions/applyForGamma", this);
+  fApplyForGammaCmd->SetGuidance("Switch on|off applying range cuts for gamma");
+  fApplyForGammaCmd->SetParameterName("ApplyForGamma", false);
+  fApplyForGammaCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
+  fApplyForElectronCmd =
+    new G4UIcmdWithABool("/mcRegions/applyForElectron", this);
+  fApplyForElectronCmd->SetGuidance("Switch on|off applying range cuts for e-");
+  fApplyForElectronCmd->SetParameterName("ApplyForElectron", false);
+  fApplyForElectronCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
+  fApplyForPositronCmd =
+    new G4UIcmdWithABool("/mcRegions/applyForPositron", this);
+  fApplyForPositronCmd->SetGuidance("Switch on|off applying range cuts for e+");
+  fApplyForPositronCmd->SetParameterName("ApplyForPositron", false);
+  fApplyForPositronCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
+  fApplyForProtonCmd = new G4UIcmdWithABool("/mcRegions/applyForProton", this);
+  fApplyForProtonCmd->SetGuidance(
+    "Switch on|off applying range cuts for protons");
+  fApplyForProtonCmd->SetParameterName("ApplyForProton", false);
+  fApplyForProtonCmd->AvailableForStates(G4State_PreInit, G4State_Init);
+
   if (fRegionsManager != nullptr) {
     // commands working only with old regions manager
     fDumpRegionCmd = new G4UIcmdWithAString("/mcRegions/dumpRegion", this);
@@ -117,29 +140,6 @@ void TG4RegionsMessenger::CreateCommands()
       "Set the tolerance (relative) for comparing energy cut values");
     fSetEnergyToleranceCmd->SetParameterName("EnergyTolerance", false);
     fSetEnergyToleranceCmd->AvailableForStates(G4State_PreInit, G4State_Init);
-  
-    fApplyForGammaCmd = new G4UIcmdWithABool("/mcRegions/applyForGamma", this);
-    fApplyForGammaCmd->SetGuidance("Switch on|off applying range cuts for gamma");
-    fApplyForGammaCmd->SetParameterName("ApplyForGamma", false);
-    fApplyForGammaCmd->AvailableForStates(G4State_PreInit, G4State_Init);
-  
-    fApplyForElectronCmd =
-      new G4UIcmdWithABool("/mcRegions/applyForElectron", this);
-    fApplyForElectronCmd->SetGuidance("Switch on|off applying range cuts for e-");
-    fApplyForElectronCmd->SetParameterName("ApplyForElectron", false);
-    fApplyForElectronCmd->AvailableForStates(G4State_PreInit, G4State_Init);
-  
-    fApplyForPositronCmd =
-      new G4UIcmdWithABool("/mcRegions/applyForPositron", this);
-    fApplyForPositronCmd->SetGuidance("Switch on|off applying range cuts for e+");
-    fApplyForPositronCmd->SetParameterName("ApplyForPositron", false);
-    fApplyForPositronCmd->AvailableForStates(G4State_PreInit, G4State_Init);
-  
-    fApplyForProtonCmd = new G4UIcmdWithABool("/mcRegions/applyForProton", this);
-    fApplyForProtonCmd->SetGuidance(
-      "Switch on|off applying range cuts for protons");
-    fApplyForProtonCmd->SetParameterName("ApplyForProton", false);
-    fApplyForProtonCmd->AvailableForStates(G4State_PreInit, G4State_Init);
   
     fSetLoadCmd = new G4UIcmdWithABool("/mcRegions/load", this);
     fSetLoadCmd->SetGuidance("Switch on|off loading of all regions cuts & ranges from a file");
@@ -165,6 +165,26 @@ void TG4RegionsMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
   /// Apply command to the associated object.
 
   if (fRegionsManager2 != nullptr) {
+    if (command == fApplyForGammaCmd) {
+      fRegionsManager2->SetApplyForGamma(
+        fApplyForGammaCmd->GetNewBoolValue(newValue));
+      return;
+    }
+    if (command == fApplyForElectronCmd) {
+      fRegionsManager2->SetApplyForGamma(
+        fApplyForElectronCmd->GetNewBoolValue(newValue));
+      return;
+    }
+    if (command == fApplyForPositronCmd) {
+      fRegionsManager2->SetApplyForPositron(
+        fApplyForPositronCmd->GetNewBoolValue(newValue));
+      return;
+    }
+    if (command == fApplyForProtonCmd) {
+      fRegionsManager2->SetApplyForProton(
+        fApplyForProtonCmd->GetNewBoolValue(newValue));
+      return;
+    }
     if (command == fSetCheckCmd) {
       fRegionsManager2->SetCheck(fSetCheckCmd->GetNewBoolValue(newValue));
       return;
@@ -226,7 +246,7 @@ void TG4RegionsMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
       return;
     }
     if (command == fApplyForElectronCmd) {
-      fRegionsManager->SetApplyForGamma(
+      fRegionsManager->SetApplyForElectron(
         fApplyForElectronCmd->GetNewBoolValue(newValue));
       return;
     }
