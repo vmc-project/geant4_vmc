@@ -227,7 +227,7 @@ inline G4double TG4PhysicsManager::GetCutForPositron() const
 
 inline G4double TG4PhysicsManager::GetCutForProton() const
 {
-  /// Return range cut for positron
+  /// Return range cut for proton
   return fCutForProton;
 }
 

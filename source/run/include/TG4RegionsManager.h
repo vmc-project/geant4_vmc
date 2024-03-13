@@ -92,20 +92,12 @@ class TG4RegionsManager : public TG4VRegionsManager
   // set methods
   void SetRangePrecision(G4int precision);
   void SetEnergyTolerance(G4double tolerance);
-  void SetApplyForGamma(G4bool applyForGamma);
-  void SetApplyForElectron(G4bool applyForElectron);
-  void SetApplyForPositron(G4bool applyForPositron);
-  void SetApplyForProton(G4bool applyForProton);
   void SetLoad(G4bool isLoad);
   void SetFromG4Table(G4bool isG4Table);
 
   // get methods
   G4int GetRangePrecision() const;
   G4double GetEnergyTolerance() const;
-  G4bool GetApplyForGamma() const;
-  G4bool GetApplyForElectron() const;
-  G4bool GetApplyForPositron() const;
-  G4bool GetApplyForProton() const;
   G4String GetFileName() const;
   G4bool IsG4Table() const;
   G4bool IsLoad() const;
@@ -157,14 +149,6 @@ class TG4RegionsManager : public TG4VRegionsManager
   G4int fRangePrecision = fgkDefaultRangePrecision;
   /// the tolerance (relative) for comparing energy cut values
   G4double fEnergyTolerance = fgkDefaultEnergyTolerance;
-  /// option to apply range cuts for gamma (default is true)
-  G4bool fApplyForGamma = true;
-  /// option to apply range cuts for e- (default is true)
-  G4bool fApplyForElectron = true;
-  /// option to apply range cuts for e+ (default is true)
-  G4bool fApplyForPositron = true;
-  /// option to apply range cuts for proton (default is true)
-  G4bool fApplyForProton = true;
   /// option to print or save regions from G4 production cuts table
   G4bool fIsG4Table = false;
   /// option to load regions ranges from a file
@@ -187,30 +171,6 @@ inline void TG4RegionsManager::SetEnergyTolerance(G4double tolerance)
   fEnergyTolerance = tolerance;
 }
 
-/// Set the option to apply range cuts for gamma (default is true)
-inline void TG4RegionsManager::SetApplyForGamma(G4bool applyForGamma)
-{
-  fApplyForGamma = applyForGamma;
-}
-
-/// Set the option to apply range cuts for e- (default is true)
-inline void TG4RegionsManager::SetApplyForElectron(G4bool applyForElectron)
-{
-  fApplyForElectron = applyForElectron;
-}
-
-/// Set the option to apply range cuts for e+ (default is true)
-inline void TG4RegionsManager::SetApplyForPositron(G4bool applyForPositron)
-{
-  fApplyForPositron = applyForPositron;
-}
-
-/// Set the option to apply range cuts for proton (default is true)
-inline void TG4RegionsManager::SetApplyForProton(G4bool applyForProton)
-{
-  fApplyForProton = applyForProton;
-}
-
 /// Set the option to print/save cuts from G4 table
 inline void TG4RegionsManager::SetFromG4Table(G4bool isG4Table)
 {
@@ -227,30 +187,6 @@ inline G4int TG4RegionsManager::GetRangePrecision() const
 inline G4double TG4RegionsManager::GetEnergyTolerance() const
 {
   return fEnergyTolerance;
-}
-
-/// Return the option to apply range cuts for gamma
-inline G4bool TG4RegionsManager::GetApplyForGamma() const
-{
-  return fApplyForGamma;
-}
-
-/// Return the option to apply range cuts for e+
-inline G4bool TG4RegionsManager::GetApplyForElectron() const
-{
-  return fApplyForElectron;
-}
-
-/// Return the option to apply range cuts for positron
-inline G4bool TG4RegionsManager::GetApplyForPositron() const
-{
-  return fApplyForPositron;
-}
-
-/// Return the option to apply range cuts for proton
-inline G4bool TG4RegionsManager::GetApplyForProton() const
-{
-  return fApplyForProton;
 }
 
 /// Return the option to print or save regions from production cuts table
