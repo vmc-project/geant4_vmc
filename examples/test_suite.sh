@@ -195,6 +195,10 @@ fi
 if [ "x${BUILDDIR}" != "x" ]; then
   LIBS_FROM_BUILDDIR=$(find ${BUILDDIR} -iname "*.so" -exec dirname {} \; | tr '\r\n' ':')
   export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${LIBS_FROM_BUILDDIR}
+  # In that case, also use headers from matching source dirs.
+  SOURCEDIR=$(readlink -f ../source/)
+  HEADERS_FROM_SOURCEDIR=$(find ${SOURCEDIR} -iname "*.h" -exec dirname {} \; | tr '\r\n' ':')
+  export ROOT_INCLUDE_PATH=${ROOT_INCLUDE_PATH}:${HEADERS_FROM_SOURCEDIR}
 fi
 
 # Create tmp dir from scratch
