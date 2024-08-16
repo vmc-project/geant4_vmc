@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classTVirtualMCStack.html" title=" " alt="" coords="5,80,126,106"/>
+<area shape="rect" id="Node000001" href="$classEx01MCStack.html" title="Implementation of the TVirtualMCStack interface." alt="" coords="177,5,280,31"/>
+<area shape="poly" id="edge70_Node000000_Node000001" title=" " alt="" coords="107,71,173,40,196,29,198,34,175,45,109,75"/>
+<area shape="rect" id="Node000002" href="$classEx02MCStack.html" title="Implementation of the TVirtualMCStack interface." alt="" coords="177,55,280,80"/>
+<area shape="poly" id="edge71_Node000000_Node000002" title=" " alt="" coords="141,78,176,73,177,78,142,84"/>
+<area shape="rect" id="Node000003" href="$classEx03MCStack.html" title="Implementation of the TVirtualMCStack interface." alt="" coords="177,104,280,130"/>
+<area shape="poly" id="edge72_Node000000_Node000003" title=" " alt="" coords="142,101,177,107,176,112,141,107"/>
+<area shape="rect" id="Node000004" href="$classEx03cMCStack.html" title="Implementation of the TVirtualMCStack interface." alt="" coords="174,153,284,179"/>
+<area shape="poly" id="edge73_Node000000_Node000004" title=" " alt="" coords="110,110,175,140,198,150,196,155,173,145,108,115"/>
+</map>
