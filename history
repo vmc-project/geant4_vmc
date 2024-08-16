@@ -9,6 +9,21 @@
 
 Tags (history):
 ===============
+  16/08/2024
+  v6-6-p2:
+    Geant4 VMC:
+    - Fixed treatment of SpecialUrbanMscModel when G4TransportationWithMsc is in use (#64):
+
+      Since Geant4 11.1.x, the EMV option activates new transportation process
+      combined with msc, which setting of user models is not handled by G4EmConfigurator,
+      causing ignoring the setting of the SpecialUrbanMscModel via VMC.
+      This setting is now performed explicitly in this PR.
+      When G4EmConfigurator will handle this use case, the original code can be restored
+      with only adding the new TransportationWithMsc process sub-type.
+
+    Tested with VMC 2.0, Geant4 11.2.p2 (with embedded CLHEP 2.4.7.1)
+      Root 6.32/02, VGM 5.3
+
   13/03/2024
   v6-6-p1:
     Geant4 VMC:
