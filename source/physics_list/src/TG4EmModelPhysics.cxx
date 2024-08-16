@@ -33,6 +33,8 @@
 #include <G4ProcessManager.hh>
 #include <G4RegionStore.hh>
 #include <G4TransportationManager.hh>
+#include <G4TransportationProcessType.hh>
+#include <G4TransportationWithMsc.hh>
 
 //
 // static methods
@@ -130,7 +132,7 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
   if (!particle->GetProcessManager()) {
     TString message;
     message = "Cannot add EM model to ";
-    message = particle->GetParticleName();
+    message += particle->GetParticleName().c_str();
     message += " : particle has not defined process manager";
     TG4Globals::Warning("TG4EmModelPhysics", "AddMOdel", message);
     return;
@@ -157,10 +159,14 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
       subType = currentSubType;
     }
 
-    // UrbanMsc applied to msc
-    if (currentSubType == fMultipleScattering &&
-        (emModel == kSpecialUrbanMscModel)) {
+    // UrbanMsc applied to msc or transportation with msc
+    G4bool applyToTransportationProcess = false;
+    if (emModel == kSpecialUrbanMscModel &&
+        ((currentSubType == fMultipleScattering) ||
+         (currentSubType == TRANSPORTATION &&
+          (*processVector)[i]->GetProcessName() == "TransportationWithMsc"))) {
       subType = currentSubType;
+      applyToTransportationProcess = (currentSubType == TRANSPORTATION);
     }
 
     if (subType == 0) continue;
@@ -221,9 +227,32 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
                << " region(=material): " << regionName << G4endl;
       }
 
-      G4LossTableManager::Instance()->EmConfigurator()->SetExtraEmModel(
-        particle->GetParticleName(), processName, g4EmModel, regionName, 0.0,
-        DBL_MAX, g4FluctModel);
+      if (applyToTransportationProcess) {
+        // the transportation process is not handled with EmConfigurator
+        // the model must be set directly to the process
+        G4TransportationWithMsc* transportWithMsc =
+          static_cast<G4TransportationWithMsc*>((*processVector)[i]);
+        auto region = G4RegionStore::GetInstance()->GetRegion(regionName);
+        if (region != nullptr) {
+          if (VerboseLevel() > 2) {
+            G4cout << "[special UrbanMsc model added to G4TransportationWithMsc]"
+                   << G4endl;
+          }
+          transportWithMsc->
+            AddMscModel(static_cast<G4VMscModel*>(g4EmModel), -1, region);
+        }
+        else {
+          TString message;
+          message = "Failed to get region by name ";
+          message += regionName.c_str();
+          TG4Globals::Warning("TG4EmModelPhysics", "AddModel", message);
+        }
+      }
+      else {
+        G4LossTableManager::Instance()->EmConfigurator()->SetExtraEmModel(
+          particle->GetParticleName(), processName, g4EmModel, regionName, 0.0,
+          DBL_MAX, g4FluctModel);
+      }
     }
 
     if (!regions.size()) {
