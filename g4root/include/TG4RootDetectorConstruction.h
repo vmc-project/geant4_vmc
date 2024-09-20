@@ -38,6 +38,7 @@ class G4VSolid;
 class G4LogicalVolume;
 class G4VPhysicalVolume;
 class G4Material;
+class G4Element;
 class TVirtualUserPostDetConstruction;
 
 /// \brief Builder creating a pseudo G4 geometry starting from a TGeo geometry.
@@ -82,7 +83,8 @@ class TG4RootDetectorConstruction : public G4VUserDetectorConstruction
   VolumeMap_t fVolumeMap; //!< map of TGeo volumes
 
   /// the map from TGeoNode to G4VPhysicalVolume
-  typedef std::unordered_map<const TGeoNode*, G4VPhysicalVolume*> G4PVolumeMap_t;
+  typedef std::unordered_map<const TGeoNode*, G4VPhysicalVolume*>
+    G4PVolumeMap_t;
   /// the constant iterator for the map from TGeoNode to G4VPhysicalVolume
   typedef G4PVolumeMap_t::const_iterator G4PVolumeIt_t;
   /// the value type for the map from TGeoNode to G4VPhysicalVolume
@@ -113,6 +115,7 @@ class TG4RootDetectorConstruction : public G4VUserDetectorConstruction
   G4VPhysicalVolume* CreateG4PhysicalVolume(TGeoNode* node);
   G4Material* CreateG4Material(const TGeoMaterial* mat);
   G4RotationMatrix* CreateG4Rotation(const TGeoMatrix* matrix);
+  G4Element* CreateG4Element(TGeoElement* elem);
 
  public:
   TG4RootDetectorConstruction();
