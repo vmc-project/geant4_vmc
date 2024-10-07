@@ -256,8 +256,7 @@ G4LogicalVolume* TG4RootDetectorConstruction::CreateG4LogicalVolume(
   G4VSolid* pSolid = CreateG4Solid(vol->GetShape());
   if (!pSolid) {
     G4ExceptionDescription description;
-    description << "      "
-                << "Cannot make solid from shape: "
+    description << "      " << "Cannot make solid from shape: "
                 << vol->GetShape()->GetName();
     G4Exception("TG4RootDetectorConstruction::CreateG4LogicalVolume",
       "G4Root_F002", FatalException, description);
@@ -302,9 +301,8 @@ G4VPhysicalVolume* TG4RootDetectorConstruction::CreateG4PhysicalVolume(
   G4LogicalVolume* pCurrentLogical = CreateG4LogicalVolume(node->GetVolume());
   if (!pCurrentLogical) {
     G4ExceptionDescription description;
-    description << "      "
-                << "No G4 volume created for TGeo node " << node->GetName()
-                << G4endl;
+    description << "      " << "No G4 volume created for TGeo node "
+                << node->GetName() << G4endl;
     G4Exception("TG4RootDetectorConstruction::CreateG4PhysicalVolume",
       "G4Root_F004", FatalException, description);
   }
@@ -312,8 +310,7 @@ G4VPhysicalVolume* TG4RootDetectorConstruction::CreateG4PhysicalVolume(
     CreateG4LogicalVolume(node->GetMotherVolume());
   if (!pMotherLogical && node != fGeometry->GetTopNode()) {
     G4ExceptionDescription description;
-    description << "      "
-                << "No G4 mother volume crated for TGeo node "
+    description << "      " << "No G4 mother volume crated for TGeo node "
                 << node->GetName();
     G4Exception("TG4RootDetectorConstruction::CreateG4PhysicalVolume",
       "G4Root_F005", FatalException, description);
@@ -374,35 +371,77 @@ G4Material* TG4RootDetectorConstruction::CreateG4Material(
     pMaterial =
       new G4Material(name, density, nComponents, state, temp, pressure);
     for (Int_t i = 0; i < nComponents; i++) {
-      //         TGeoElement *elem = mixt->GetElement(i);
-      //         name = elem->GetTitle();
-      //         G4Element *pElement = G4Element::GetElement(name);
-      TGeoElement* elem = table->GetElement(Int_t(mixt->GetZmixt()[i]));
-      if (!elem) {
-        G4ExceptionDescription description;
-        description << "      "
-                    << "Woops: no element corresponding to Z="
-                    << Int_t(mixt->GetZmixt()[i]);
-        G4Exception("TG4RootDetectorConstruction::CreateG4Material",
-          "G4Root_F006", FatalException, description);
-      }
-      elname = elem->GetTitle();
-      symbol = elem->GetName();
-      G4Element* pElement =
-        new G4Element(elname, symbol, G4double(mixt->GetZmixt()[i]),
-          G4double(mixt->GetAmixt()[i]) * (g / mole));
+      TGeoElement* elem = mixt->GetElement(i);
+      G4Element* pElement = CreateG4Element(elem);
       pMaterial->AddElement(pElement, mixt->GetWmixt()[i]);
     }
   }
   else {
     // Materials with 1 element.
     //      G4cout << "Creating G4 material "<< name << G4endl;
-    pMaterial = new G4Material(name, G4double(mat->GetZ()),
-      mat->GetA() * g / mole, density, state, temp, pressure);
+    if (mat->GetElement()->GetNisotopes() >
+        0) { // user-defined material with isotopes
+      G4Element* pElement = CreateG4Element(mat->GetElement());
+      pMaterial = new G4Material(name, density, 1, state, temp, pressure);
+      pMaterial->AddElement(pElement, 1.);
+    }
+    else { // standard NIST element
+      pMaterial = new G4Material(name, G4double(mat->GetZ()),
+        mat->GetA() * g / mole, density, state, temp, pressure);
+    }
   }
+
   fG4MaterialMap.insert(G4MaterialVal_t(mat, pMaterial));
   //   G4cout << pMaterial << G4endl;
   return pMaterial;
+}
+
+//______________________________________________________________________________
+G4Element* TG4RootDetectorConstruction::CreateG4Element(TGeoElement* elem)
+{
+  G4Element* pElement;
+
+  // if such element is already created:
+  if (pElement =
+        G4Element::GetElement(elem->GetTitle(), /* G4bool warning = */ false)) {
+    return pElement;
+  }
+
+  // otherwise create a new one
+  if (elem->GetNisotopes() > 0) { // user-defined element with isotopes
+    G4int nIsotopes = elem->GetNisotopes();
+    for (G4int i = 0; i < nIsotopes; i++) {
+      TGeoIsotope* rIso = elem->GetIsotope(i);
+      if (i == 0) {
+        G4String elname = elem->GetTitle();
+        G4String symbol =
+          fGeometry->GetElementTable()->GetElement(rIso->GetZ())->GetName();
+        pElement = new G4Element(elname, symbol, nIsotopes);
+      }
+      G4Isotope* pIso = new G4Isotope(
+        rIso->GetName(), rIso->GetZ(), rIso->GetN(), rIso->GetA() * (g / mole));
+      pElement->AddIsotope(pIso, elem->GetRelativeAbundance(i));
+    }
+    G4cout << "Created element " << pElement->GetName()
+           << " with user-defined isotope composition" << G4endl;
+    G4cout << pElement << G4endl;
+  }
+  else { // standard NIST element
+    TGeoElementTable* table = fGeometry->GetElementTable();
+    TGeoElement* elemDb = table->GetElement(elem->Z());
+    if (!elemDb) {
+      G4ExceptionDescription description;
+      description << "      "
+                  << "Woops: no element corresponding to Z=" << elemDb->Z();
+      G4Exception("TG4RootDetectorConstruction::CreateG4Material",
+        "G4Root_F006", FatalException, description);
+    }
+    G4String elname = elemDb->GetTitle();
+    G4String symbol = elemDb->GetName();
+    pElement = new G4Element(
+      elname, symbol, G4double(elem->Z()), G4double(elem->A()) * (g / mole));
+  }
+  return pElement;
 }
 
 //______________________________________________________________________________
