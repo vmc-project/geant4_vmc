@@ -138,133 +138,72 @@ void TG4EmModelPhysics::AddModel(TG4EmModel emModel,
     return;
   }
 
-  // Get process name
-  G4ProcessVector* processVector =
-    particle->GetProcessManager()->GetProcessList();
-  for (size_t i = 0; i < processVector->length(); i++) {
-    // G4String processName;
-    // G4String currentProcessName = (*processVector)[i]->GetProcessName();
-
-    G4int subType = 0;
-    G4int currentSubType = (*processVector)[i]->GetProcessSubType();
-
-    if (VerboseLevel() > 2) {
-      G4cout << "TG4EmModelPhysics::AddModel, processing "
-             << (*processVector)[i]->GetProcessName() << G4endl;
-    }
-
-    // PAI applied to ionisation
-    if (currentSubType == fIonisation &&
-        (emModel == kPAIModel || emModel == kPAIPhotonModel)) {
-      subType = currentSubType;
-    }
-
-    // UrbanMsc applied to msc or transportation with msc
-    G4bool applyToTransportationProcess = false;
-    if (emModel == kSpecialUrbanMscModel &&
-        ((currentSubType == fMultipleScattering) ||
-         (currentSubType == TRANSPORTATION &&
-          (*processVector)[i]->GetProcessName() == "TransportationWithMsc"))) {
-      subType = currentSubType;
-      applyToTransportationProcess = (currentSubType == TRANSPORTATION);
-    }
-
-    if (subType == 0) continue;
-
-    // Get process name
-    G4String processName = (*processVector)[i]->GetProcessName();
-
-    // Get the physics process if it is wrapped with biasing
-    G4BiasingProcessInterface* biasingProcess =
-      dynamic_cast<G4BiasingProcessInterface*>((*processVector)[i]);
-    if (biasingProcess) {
-      processName = biasingProcess->GetWrappedProcess()->GetProcessName();
-      if (VerboseLevel() > 2) {
-        G4cout << "Unwrapping biasing process: " << processName << G4endl;
-      }
-    }
+  G4String particleName = particle->GetParticleName();
+  if (particleName != "e-" && particleName != "e+") {
+    return;
+  }
 
     // CreateEM model
     //
-    G4VEmModel* g4EmModel = 0;
-    G4VEmFluctuationModel* g4FluctModel = 0;
+  G4String processName;
+  G4VEmModel* g4EmModel = 0;
+  G4VEmFluctuationModel* g4FluctModel = 0;
 
-    if (emModel == kPAIModel) {
-      // PAI
-      G4PAIModel* pai = new G4PAIModel(particle, "PAIModel");
-      if (verboseLevel > 2) {
-        G4cout << "New G4PAIModel" << G4endl;
-      }
-      g4EmModel = pai;
-      g4FluctModel = pai;
+  if (emModel == kPAIModel) {
+    // PAI
+    processName = "eIoni";
+    G4PAIModel* pai = new G4PAIModel(particle, "PAIModel");
+    if (verboseLevel > 2) {
+      G4cout << "New G4PAIModel" << G4endl;
     }
-    else if (emModel == kPAIPhotonModel) {
-      // PAIPhoton
-      if (verboseLevel > 2) {
-        G4cout << "New G4PAIPhotModel" << G4endl;
-      }
-      G4PAIPhotModel* paiPhot = new G4PAIPhotModel(particle, "PAIPhotModel");
-      g4EmModel = paiPhot;
-      g4FluctModel = paiPhot;
+    g4EmModel = pai;
+    g4FluctModel = pai;
+  }
+  else if (emModel == kPAIPhotonModel) {
+    // PAIPhoton
+    processName = "eIoni";
+    if (verboseLevel > 2) {
+      G4cout << "New G4PAIPhotModel" << G4endl;
     }
-    else if (emModel == kSpecialUrbanMscModel) {
-      // SpecialUrbanMsc
-      if (verboseLevel > 2) {
-        G4cout << "New TG4SpecialUrbanMscModel" << G4endl;
-      }
-      g4EmModel = new TG4SpecialUrbanMscModel();
-      g4FluctModel = 0;
+    G4PAIPhotModel* paiPhot = new G4PAIPhotModel(particle, "PAIPhotModel");
+    g4EmModel = paiPhot;
+    g4FluctModel = paiPhot;
+  }
+  else if (emModel == kSpecialUrbanMscModel) {
+    // SpecialUrbanMsc
+    processName = "msc";
+    if (verboseLevel > 2) {
+      G4cout << "New TG4SpecialUrbanMscModel" << G4endl;
     }
+    g4EmModel = new TG4SpecialUrbanMscModel();
+    g4FluctModel = 0;
+  }
 
-    for (G4int j = 0; j < G4int(regions.size()); ++j) {
+  for (G4int j = 0; j < G4int(regions.size()); ++j) {
 
-      G4String regionName = regions[j];
+    G4String regionName = regions[j];
 
-      if (VerboseLevel() > 2) {
-        G4cout << "Adding EM model: " << GetEmModelName(emModel)
-               << " to particle: " << particle->GetParticleName()
-               << " process: " << processName
-               << " region(=material): " << regionName << G4endl;
-      }
-
-      if (applyToTransportationProcess) {
-        // the transportation process is not handled with EmConfigurator
-        // the model must be set directly to the process
-        G4TransportationWithMsc* transportWithMsc =
-          static_cast<G4TransportationWithMsc*>((*processVector)[i]);
-        auto region = G4RegionStore::GetInstance()->GetRegion(regionName);
-        if (region != nullptr) {
-          if (VerboseLevel() > 2) {
-            G4cout << "[special UrbanMsc model added to G4TransportationWithMsc]"
-                   << G4endl;
-          }
-          transportWithMsc->
-            AddMscModel(static_cast<G4VMscModel*>(g4EmModel), -1, region);
-        }
-        else {
-          TString message;
-          message = "Failed to get region by name ";
-          message += regionName.c_str();
-          TG4Globals::Warning("TG4EmModelPhysics", "AddModel", message);
-        }
-      }
-      else {
-        G4LossTableManager::Instance()->EmConfigurator()->SetExtraEmModel(
-          particle->GetParticleName(), processName, g4EmModel, regionName, 0.0,
-          DBL_MAX, g4FluctModel);
-      }
+    if (VerboseLevel() > 2) {
+      G4cout << "Adding EM model: " << GetEmModelName(emModel)
+             << " to particle: " << particle->GetParticleName()
+             << " process: " << processName
+             << " region(=material): " << regionName << G4endl;
     }
 
-    if (!regions.size()) {
-      // If no regions were defined, set the model to the default region.
-      G4LogicalVolume* worldLV =
-        TG4GeometryServices::Instance()->GetWorld()->GetLogicalVolume();
-      G4String regionName = worldLV->GetRegion()->GetName();
+    G4LossTableManager::Instance()->EmConfigurator()->SetExtraEmModel(
+      particle->GetParticleName(), processName, g4EmModel, regionName, 0.0,
+      DBL_MAX, g4FluctModel);
+  }
 
-      G4LossTableManager::Instance()->EmConfigurator()->SetExtraEmModel(
-        particle->GetParticleName(), processName, g4EmModel, regionName, 0.0,
-        DBL_MAX, g4FluctModel);
-    }
+  if (!regions.size()) {
+    // If no regions were defined, set the model to the default region.
+    G4LogicalVolume* worldLV =
+      TG4GeometryServices::Instance()->GetWorld()->GetLogicalVolume();
+    G4String regionName = worldLV->GetRegion()->GetName();
+
+    G4LossTableManager::Instance()->EmConfigurator()->SetExtraEmModel(
+      particle->GetParticleName(), processName, g4EmModel, regionName, 0.0,
+      DBL_MAX, g4FluctModel);
   }
 }
 
