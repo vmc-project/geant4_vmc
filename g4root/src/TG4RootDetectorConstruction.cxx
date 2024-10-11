@@ -399,11 +399,11 @@ G4Material* TG4RootDetectorConstruction::CreateG4Material(
 //______________________________________________________________________________
 G4Element* TG4RootDetectorConstruction::CreateG4Element(TGeoElement* elem)
 {
-  G4Element* pElement;
+  G4Element* pElement =
+    G4Element::GetElement(elem->GetTitle(), /* G4bool warning = */ false);
 
   // if such element is already created:
-  if (pElement =
-        G4Element::GetElement(elem->GetTitle(), /* G4bool warning = */ false)) {
+  if (pElement != nullptr) {
     return pElement;
   }
 
