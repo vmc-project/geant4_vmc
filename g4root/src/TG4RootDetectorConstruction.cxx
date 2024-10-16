@@ -372,15 +372,32 @@ G4Material* TG4RootDetectorConstruction::CreateG4Material(
       new G4Material(name, density, nComponents, state, temp, pressure);
     for (Int_t i = 0; i < nComponents; i++) {
       TGeoElement* elem = mixt->GetElement(i);
-      G4Element* pElement = CreateG4Element(elem);
+      G4Element* pElement = nullptr;
+      if (elem->GetNisotopes() > 0) {
+        pElement = CreateG4Element(elem);
+      }
+      else {
+        TGeoElement* elemDb = table->GetElement(Int_t(mixt->GetZmixt()[i]));
+        if (!elemDb) {
+          G4ExceptionDescription description;
+          description << "      "
+                      << "Woops: no element corresponding to Z=" << elemDb->Z();
+          G4Exception("TG4RootDetectorConstruction::CreateG4Material",
+            "G4Root_F006", FatalException, description);
+        }
+        elname = elemDb->GetTitle();
+        symbol = elemDb->GetName();
+        pElement = new G4Element(elname, symbol, G4double(mixt->GetZmixt()[i]),
+          G4double(mixt->GetAmixt()[i]) * (g / mole));
+      }
       pMaterial->AddElement(pElement, mixt->GetWmixt()[i]);
     }
   }
   else {
     // Materials with 1 element.
     //      G4cout << "Creating G4 material "<< name << G4endl;
-    if (mat->GetElement()->GetNisotopes() >
-        0) { // user-defined material with isotopes
+    if (mat->GetElement()
+          ->HasIsotopes()) { // user-defined material with isotopes
       G4Element* pElement = CreateG4Element(mat->GetElement());
       pMaterial = new G4Material(name, density, 1, state, temp, pressure);
       pMaterial->AddElement(pElement, 1.);
@@ -408,7 +425,7 @@ G4Element* TG4RootDetectorConstruction::CreateG4Element(TGeoElement* elem)
   }
 
   // otherwise create a new one
-  if (elem->GetNisotopes() > 0) { // user-defined element with isotopes
+  if (elem->HasIsotopes() > 0) { // user-defined element with isotopes
     G4int nIsotopes = elem->GetNisotopes();
     for (G4int i = 0; i < nIsotopes; i++) {
       TGeoIsotope* rIso = elem->GetIsotope(i);
