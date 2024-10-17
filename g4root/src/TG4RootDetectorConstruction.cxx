@@ -372,32 +372,16 @@ G4Material* TG4RootDetectorConstruction::CreateG4Material(
       new G4Material(name, density, nComponents, state, temp, pressure);
     for (Int_t i = 0; i < nComponents; i++) {
       TGeoElement* elem = mixt->GetElement(i);
-      G4Element* pElement = nullptr;
-      if (elem->GetNisotopes() > 0) {
-        pElement = CreateG4Element(elem);
-      }
-      else {
-        TGeoElement* elemDb = table->GetElement(Int_t(mixt->GetZmixt()[i]));
-        if (!elemDb) {
-          G4ExceptionDescription description;
-          description << "      "
-                      << "Woops: no element corresponding to Z=" << elemDb->Z();
-          G4Exception("TG4RootDetectorConstruction::CreateG4Material",
-            "G4Root_F006", FatalException, description);
-        }
-        elname = elemDb->GetTitle();
-        symbol = elemDb->GetName();
-        pElement = new G4Element(elname, symbol, G4double(mixt->GetZmixt()[i]),
+      ///
+      G4Element* pElement = CreateG4Element(elem, G4double(mixt->GetZmixt()[i]),
           G4double(mixt->GetAmixt()[i]) * (g / mole));
-      }
       pMaterial->AddElement(pElement, mixt->GetWmixt()[i]);
     }
   }
   else {
     // Materials with 1 element.
     //      G4cout << "Creating G4 material "<< name << G4endl;
-    if (mat->GetElement()
-          ->HasIsotopes()) { // user-defined material with isotopes
+    if (mat->GetElement()->HasIsotopes()) { // user-defined material with isotopes
       G4Element* pElement = CreateG4Element(mat->GetElement());
       pMaterial = new G4Material(name, density, 1, state, temp, pressure);
       pMaterial->AddElement(pElement, 1.);
@@ -414,27 +398,43 @@ G4Material* TG4RootDetectorConstruction::CreateG4Material(
 }
 
 //______________________________________________________________________________
-G4Element* TG4RootDetectorConstruction::CreateG4Element(TGeoElement* elem)
+G4Element* TG4RootDetectorConstruction::CreateG4Element(TGeoElement* elem,
+  Double_t zmixt, Double_t amixt)
 {
+  /// Create a GEANT4 element based on a TGeo one or material mixture parameters.
+  /// Take into account the element isotope composition if present.
+  /// If already created return just a pointer to the existing one.
+
   G4Element* pElement =
     G4Element::GetElement(elem->GetTitle(), /* G4bool warning = */ false);
 
-  // if such element is already created:
+  // if such element is already created
   if (pElement != nullptr) {
     return pElement;
   }
 
-  // otherwise create a new one
-  if (elem->HasIsotopes() > 0) { // user-defined element with isotopes
+  // The element symbol is retrieved from the element table via Z
+  Int_t elz = elem->HasIsotopes() ?
+    elem->GetIsotope(0)->GetZ() : elem->Z();
+  TGeoElement* elemDb = fGeometry->GetElementTable()->GetElement(elz);
+  if (!elemDb) {
+    G4ExceptionDescription description;
+    description << "      "
+                << "Woops: no element corresponding to Z=" << elemDb->Z();
+    G4Exception("TG4RootDetectorConstruction::CreateG4Material",
+      "G4Root_F006", FatalException, description);
+  }
+  G4String symbol = elemDb->GetName();
+
+  // Create a new one
+  if (elem->HasIsotopes()) { // user-defined element with isotopes
     G4int nIsotopes = elem->GetNisotopes();
     for (G4int i = 0; i < nIsotopes; i++) {
-      TGeoIsotope* rIso = elem->GetIsotope(i);
       if (i == 0) {
         G4String elname = elem->GetTitle();
-        G4String symbol =
-          fGeometry->GetElementTable()->GetElement(rIso->GetZ())->GetName();
         pElement = new G4Element(elname, symbol, nIsotopes);
       }
+      TGeoIsotope* rIso = elem->GetIsotope(i);
       G4Isotope* pIso = new G4Isotope(
         rIso->GetName(), rIso->GetZ(), rIso->GetN(), rIso->GetA() * (g / mole));
       pElement->AddIsotope(pIso, elem->GetRelativeAbundance(i));
@@ -444,19 +444,8 @@ G4Element* TG4RootDetectorConstruction::CreateG4Element(TGeoElement* elem)
     G4cout << pElement << G4endl;
   }
   else { // standard NIST element
-    TGeoElementTable* table = fGeometry->GetElementTable();
-    TGeoElement* elemDb = table->GetElement(elem->Z());
-    if (!elemDb) {
-      G4ExceptionDescription description;
-      description << "      "
-                  << "Woops: no element corresponding to Z=" << elemDb->Z();
-      G4Exception("TG4RootDetectorConstruction::CreateG4Material",
-        "G4Root_F006", FatalException, description);
-    }
     G4String elname = elemDb->GetTitle();
-    G4String symbol = elemDb->GetName();
-    pElement = new G4Element(
-      elname, symbol, G4double(elem->Z()), G4double(elem->A()) * (g / mole));
+    pElement = new G4Element(elname, symbol, zmixt, amixt);
   }
   return pElement;
 }
